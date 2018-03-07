@@ -1,0 +1,116 @@
+/**
+ * Setup Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+//Import Global Partials
+@import './partials/_colors';
+@import './partials/_fonts';
+@import './partials/_placeholders';
+@import './partials/_mixins';
+
+$headerHeight: 53px;
+$footerHeight: 73px;
+
+.valign-middle {
+	display: table;
+}
+
+.valign-middle .column {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.valign-middle .column,
+.valign-middle [class*="column"] + [class*="column"]:last-child {
+	float: none;
+}
+
+html, body {
+}
+
+#root {
+}
+
+#licenses-page {
+	font-family: 'Open Sans', sans-serif;
+	height: 100%;
+	width: 100%;
+	#header {
+		position: absolute;
+		left: 0;
+		right: 0;
+		height: $headerHeight;
+		width: 100%;
+		color: $white;
+		background-color: #00AEF0;
+		font-size: 14px;
+		overflow: hidden;
+		.logo {
+			height: 30px;
+			width: auto;
+			margin-left: 15px;
+		}
+	}
+
+	#content {
+		position: absolute;
+		top: $headerHeight;
+		bottom: $footerHeight;
+		left: 0;
+		right: 0;
+		overflow-y: auto;
+		margin: 20px 10px 20px 10px;
+	}
+
+	#footer {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		overflow: hidden;
+		color: $white;
+		height: $footerHeight;
+		background-color: $bright-gray;
+		z-index: 1;
+		.copyright {
+			padding: auto;
+			padding-top: 10px;
+			a {
+				color: inherit;
+				text-decoration: underline;
+			}
+		}
+	}
+}
+.license {
+	padding: 10px 20px 10px 40px;
+	margin-right: 10px;
+	border-top: 1px solid $light-gray;
+}
+.license-text {
+	color: $dark-gray;
+	font-weight: 300;
+	max-height: 500px;
+	overflow-y: auto;
+	padding: 10px;
+	border: 1px solid $light-gray;
+}
+.selectable {
+	border: 2px solid transparent;
+	border-radius: 5px;
+	&:hover {
+		border-color: $purple;
+	}
+	&.selected {
+		border-color: #920094;
+	}
+}

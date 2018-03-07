@@ -1,0 +1,133 @@
+/**
+ * Drawer Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+.drawer-drawer {
+	position: absolute;
+	bottom: 0px;
+	height: 123px;
+	width: 100%;
+	background-color: #f9f9f9;
+	z-index: 3;
+	.drawer-header {
+		height: 40px;
+		width: 100%;
+		background-color: #e0e0e0;
+		span {
+			line-height: 40px;
+			height: 40px;
+			color: #4A4A4A;
+			font-weight: $global-weight-bold;
+			margin-left: 11px;
+		}
+		.close-drawer {
+			line-height: 0px;
+			position: absolute;
+			top: 0px;
+			right: 0px;
+			padding: 10px;
+			cursor: pointer;
+		}
+	}
+	.drawer-body {
+		height: 83px;
+		.cliqz-controls {
+			display: inline-block;
+			button {
+				cursor: default;
+				margin-bottom: 0;
+				height: 40px;
+				width: 40px;
+				background-color: transparent;
+			}
+		}
+		.tracker-count {
+			display: inline-block;
+			font-size: 20px;
+			line-height: 27px;
+			margin-left: 10px;
+			font-weight: 700;
+			color: #4a4a4a;
+			text-align: center;
+		}
+		.drawer-details {
+			.drawer-title {
+				font-size: 13px;
+				font-weight: bold;
+			}
+			.g-tooltip img {
+				position: relative;
+				margin-left: 6px;
+				top: -3px;
+			}
+			.drawer-description {}
+		}
+		.drawer-status {
+			display: inline-block;
+			span {
+				font-weight: bold;
+				padding-left: 5px;
+				text-transform: uppercase;
+			}
+		}
+		.switch {
+			cursor: pointer;
+			float: right;
+			margin-left: 15px;
+			margin-right: 30px;
+			position: relative;
+			top: 2px;
+			width: 37px;
+			input {
+				display: none;
+			}
+			.slider {
+				border-radius: 34px;
+				height: 14px;
+				width: 37px;
+				position: relative;
+				display: block;
+				cursor: pointer;
+				background-color: #C1C0C0;
+				-webkit-transition: .4s;
+				transition: .4s;
+			}
+			.slider-circle {
+				content: "";
+				border-radius: 50%;
+				position: absolute;
+				height: 20px;
+				width: 20px;
+				left: 0px;
+				top: -3px;
+				background-color: #F1F1F1;
+				border: 0.5px solid #979797;
+				box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .5);
+				transition: .1s;
+			}
+			input:checked + .slider {
+				opacity: .5;
+				background-color: #930194;
+			}
+			input:focus + .slider {
+				box-shadow: 0 0 1px #2196F3;
+			}
+			input:checked + .slider + .slider-circle {
+				background-color: #930194;
+				border-color: #930194;
+				-webkit-transform: translateX(17px);
+				-ms-transform: translateX(17px);
+				transform: translateX(17px);
+			}
+		}
+	}
+}

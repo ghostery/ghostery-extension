@@ -1,0 +1,35 @@
+/**
+ * Settings Menu Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+.content-settings-menu {
+	position: absolute;
+	margin-top: 25px;
+	.s-tabs-title {
+		padding: 0;
+		line-height: 1;
+		a {
+			padding: 11px 1.5rem;
+			display: block;
+			text-decoration: none;
+			span {
+				font-weight: bolder;
+				font-size: 12px;
+				color: #4A4A4A;
+			}
+		}
+		&.s-active span {
+			border-bottom: 2px solid #5F7C86;
+			padding-top: 14px 1.5rem;
+		}
+	}
+}

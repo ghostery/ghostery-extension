@@ -1,0 +1,12 @@
+{
+	"compatibility": [
+		{
+			"aid": 7,
+			"urls": [
+				"example.com",
+				"test.com"
+			]
+		}
+	],
+	"compatibilityVersion": 0
+}

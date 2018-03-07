@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>icon- add site</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Settings" transform="translate(-741.000000, -1877.000000)" fill="#9B9B9B">
+            <g id="Group-2" transform="translate(201.000000, 1726.000000)">
+                <g id="Group" transform="translate(246.000000, 144.000000)">
+                    <g id="icon--add-site" transform="translate(294.000000, 7.000000)">
+                        <path d="M7.5,13.9655172 C3.93103448,13.9655172 1.03448276,11.0689655 1.03448276,7.5 C1.03448276,3.93103448 3.93103448,1.03448276 7.5,1.03448276 C11.0689655,1.03448276 13.9655172,3.93103448 13.9655172,7.5 C13.9655172,11.0689655 11.0689655,13.9655172 7.5,13.9655172 M7.5,0 C3.36206897,0 0,3.36206897 0,7.5 C0,11.637931 3.36206897,15 7.5,15 C11.637931,15 15,11.637931 15,7.5 C15,3.36206897 11.637931,0 7.5,0" id="Fill-1"></path>
+                        <polygon id="Fill-3" points="8 4 7 4 7 7 4 7 4 8 7 8 7 11 8 11 8 8 11 8 11 7 8 7"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

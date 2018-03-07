@@ -1,0 +1,287 @@
+/**
+ * Purplebox Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+@import './partials/_placeholders';
+@import './partials/_mixins';
+
+#ghostery-purple-box {
+	@extend %reset;
+	@extend %noselect;
+	font-family: "Open Sans", "Roboto", Arial, Helvetica, sans-serif !important;
+	position: fixed;
+	z-index: 2147483647 !important;
+	*+* {margin-top: 0px;} //To cancel out styling from https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/
+
+	div, span, h1, h2, h3, h4, h5, h6, p, a, em, img, strong, ol, ul, li {
+		@extend %reset;
+	}
+
+	// ::-webkit-scrollbar {
+	//     width: 1.25em;
+	// }
+
+	&.ghostery-top {
+		top: 32px;
+	}
+	&.ghostery-bottom {
+		bottom: 32px;
+	}
+	&.ghostery-left {
+		left: 10px;
+	}
+	&.ghostery-right {
+		right: 10px;
+	}
+	&.ghostery-expanding {
+		#ghostery-box {
+			border-radius: 2px;
+			height: 35px;
+			width: 160px;
+		}
+		#ghostery-pb-background {
+			border-bottom-left-radius: 2px;
+			border-bottom-right-radius: 2px;
+			width: 160px;
+		}
+	}
+	&.ghostery-expanded {
+		#ghostery-box {
+			border-radius: 2px;
+			border-bottom-left-radius: 0px;
+			border-bottom-right-radius: 0px;
+			cursor: default;
+			opacity: 1;
+			width: 160px;
+			#ghostery-close {
+				visibility: visible;
+			}
+			#ghostery-minimize {
+				visibility: visible;
+			}
+		}
+		#ghostery-pb-background {
+			width: 160px;
+			border-bottom-left-radius: 2px;
+			border-bottom-right-radius: 2px;
+		}
+	}
+	&.ghostery-collapsing {
+		#ghostery-box {
+			border-radius: 2px;
+			height: 35px;
+			width: 149px;
+		}
+		#ghostery-pb-background {
+			overflow-y: hidden !important;
+			width: 149px;
+		}
+	}
+	&.ghostery-collapsed {
+		#ghostery-box {
+			border-radius: 25px;
+			height: 35px;
+			width: 35px;
+			box-shadow: 0px 1px 10px 0px rgba(0,0,0,0.20);
+			&.ghostery-icons-found {
+				box-shadow: 0 0 0 3px #F5A623;
+			}
+			#ghostery-title {
+				display: none;
+			}
+		}
+		#ghostery-pb-background {
+			overflow-y: hidden !important;
+		}
+	}
+	&.ghostery-none  #ghostery-count {
+		background-position: center center !important;
+		background-repeat: no-repeat !important;
+		background-size: 13px 15px !important;
+	}
+	&.ghostery-expanded.ghostery-none #ghostery-count,
+	&.ghostery-expanding.ghostery-none #ghostery-count,
+	&.ghostery-collapsing.ghostery-none #ghostery-count {
+		margin-left: -50px;
+	}
+	&.ghostery-expanded.ghostery-none #ghostery-count,
+	&.ghostery-expanding.ghostery-none #ghostery-count,
+	&.ghostery-collapsing.ghostery-none #ghostery-count {
+		margin-left: -3px;
+	}
+	&.ghostery-none #ghostery-pb-icons-container {
+		visibility: hidden !important;
+	}
+	&:hover {
+		&.ghostery-collapsed:not(.ghostery-none){
+			#ghostery-box {
+				border-style: none;
+				cursor: pointer;
+				width: 160px;
+				#ghostery-pb-icons-container {
+					visibility: visible;
+				}
+				#ghostery-close {
+					visibility: visible;
+				}
+				&.ghostery-icons-found {
+					box-shadow: none;
+					transition: width .5s, border-radius .5s;
+				}
+			}
+		}
+		&.ghostery-expanded #ghostery-box {
+			border-top-radius: 2px;
+			border-bottom-radius: 0px;
+		 }
+	}
+
+	/******* Purple Box *******/
+	#ghostery-box {
+		background-color: #5B005C;
+		border-bottom: 1.25px solid #5B005C;
+		border-radius: 17.5px;
+		height: 35px;
+		opacity: 0.92;
+		overflow: hidden;
+		transition: width .5s, border-radius .5s, box-shadow .1s ease .5s;
+		width: 35px;
+		#ghostery-count {
+			color: #FFFFFF;
+			display: inline-block;
+			float: left;
+			font-family: "Open Sans", "Roboto", Arial, Helvetica, sans-serif !important;
+			font-size: 16px;
+			font-weight: 500;
+			height: 35px;
+			line-height: 35px;
+			text-align: center;
+			width: 35px;
+		}
+		#ghostery-pb-icons-container {
+			display: inline-block;
+			height: 18px;
+			margin-left: 13px;
+			margin-top: 8px;
+			vertical-align: middle;
+			visibility: hidden;
+			.ghostery-pb-tracker {
+				height: 18px;
+				margin: 0px 2px;
+				width: 18px;
+			}
+			#ghostery-slow-tracker, #ghostery-breaking-tracker, #ghostery-non-secure-tracker {
+				background-repeat: no-repeat !important;
+				background-position: center center !important;
+				background-size: 18px 18px !important;
+				display: inline-block !important;
+			}
+		}
+		#ghostery-title {
+			color: white;
+			display: inline-block;
+			font-family: "Open Sans", "Roboto", Arial, Helvetica, sans-serif !important;
+			font-weight: 400;
+			font-size: 14px;
+			height: 35px;
+			left: 25px;
+			line-height: 35px;
+			position: absolute;
+		}
+		#ghostery-minimize {
+			cursor: pointer;
+			margin-right: 20px;
+			padding: 5px 0 5px 0;
+			position: absolute;
+			right: 0px;
+			top: 12px;
+			width: 22px;
+			visibility: hidden;
+			#ghostery-minimize-icon {
+				background-color: white;
+				height: 1px;
+				position: absolute;
+				top: 5px;
+				width: 10px;
+			}
+		}
+		#ghostery-close {
+			background-position: center center !important;
+			background-repeat: no-repeat !important;
+			background-size: 15px 15px !important;
+			cursor: pointer;
+			height: 15px;
+			position: absolute;
+			right: 10px;
+			top: 10px;
+			width: 15px;
+			visibility: hidden;
+		}
+	}
+	#ghostery-pb-background {
+		background-image: linear-gradient(40deg, #711B72 0%, #460E47 90%);
+		border-radius: 0px;
+		height: 0px;
+		opacity: .9;
+		overflow: hidden;
+		transition: height .5s, width .5s, border-bottom-left-radius .5s, border-bottom-right-radius .5s;
+		width: 35px;
+		#ghostery-trackerList {
+			color: white;
+			margin: 0;
+			padding: 10px 0 10px 5px;
+			text-align: left;
+			.ghostery-trackerContainer {
+				height: 18px; //this needs to match the item height set in JS
+				line-height: 18px;
+				margin: 0;
+				padding: 0;
+				vertical-align: middle;
+				.ghostery-tracker {
+					display: inline-block;
+					font-weight: 400 !important;
+					font-size: 12px !important;
+					font-family: "Open Sans", "Roboto", Arial, Helvetica, sans-serif !important;
+					height: 16px;
+					line-height: 16px !important;
+					margin: 0;
+					overflow: hidden;
+					padding: 0;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+					width: 110px;
+					vertical-align: middle;
+				}
+				&.ghostery-tracker-disabled .ghostery-tracker {
+					color: #BE8DBE;
+					font-style: italic;
+					text-decoration: line-through;
+				}
+				.ghostery-pb-tracker-list {
+					display: inline-block;
+					height: 16px;
+					line-height: 16px;
+					margin: 0 4px 0 0;
+					padding: 0;
+					vertical-align: middle;
+					width: 16px;
+					&#ghostery-slow-tracker, &#ghostery-breaking-tracker, &#ghostery-non-secure-tracker {
+						background-size: 16px 16px !important;
+						background-position: center center !important;
+						background-repeat: no-repeat !important;
+					}
+					&#ghostery-no-tracker {}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,160 @@
+/**
+ * Blocking Header Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+#content-settings {
+	.blocking-header {}
+	.blocking-title {display: none;}
+	.expand-all-text {
+		height: 25px;
+		line-height: 25px;
+	}
+	.gear-icon {display: none;}
+}
+
+#content-blocking {
+	.settings-title {display: none;}
+	.expand-all-text {
+		display: inline-block;
+	}
+}
+
+.blocking-header {
+	height: 61px;
+	font-size: 14px;
+	line-height: 18px;
+	font-weight: 400;
+	background-color:$whisper;
+	> .row:first-of-type {
+		height: 41px;
+		border-bottom: 2px solid #fff;
+	}
+	> .row:last-of-type {
+		height: 18px;
+	}
+	.gear-icon {
+		background: url('../../app/images/panel/gear-icon.svg') 0 0 no-repeat;
+		display: inline-block;
+		height: 16px;
+		width: 20px;
+	}
+	.title {
+		text-transform: uppercase;
+		color: $hoki;
+		font-size: 18px;
+		font-weight: 300;
+		line-height: 22px;
+	}
+	.block-text {
+		@extend %pointer;
+		color: $tundora;
+		font-size: 14px;
+		line-height: 19px;
+		&.disabled {
+			color: #acacac;
+		}
+	}
+}
+
+// search box for global blocking
+.s-search-box-container {
+	padding-top: 15px;
+}
+.s-search-box {
+	position: relative;
+	width: auto;
+	padding: 0;
+	background-color: $whisper;
+	.s-search-icon {
+		display: inline-block;
+		position: absolute;
+		width: 14.5px;
+		height: 14.5px;
+		top: 7px;
+		left: 7px;
+		&::before {
+			content: url('../../app/images/panel/search.svg');
+		}
+	}
+	input {
+		margin: 0;
+		padding: 0;
+		font-family: $body-font-family;
+		font-style: normal;
+		font-weight: normal;
+		color: #333333;
+		font-size: 11px;
+		line-height: 15px;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		padding-left: 28px;
+		height: 29px;
+		border: 1px solid #E7ECEE;
+		border-radius: 3px;
+	}
+}
+
+.footer {
+	.expand-all-text {
+		@extend %pointer;
+		background-color: $whisper;
+		color: $medium-gray;
+		font-size: 11px;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+}
+
+.filter-text {
+	@extend .expand-all-text;
+	box-sizing: border-box;
+	text-align: center;
+	padding: 0 18px;
+}
+.filter-text-show-menu {
+	@extend .filter-text;
+	position: relative;
+	background-color: $alabaster;
+	border-top: 1px solid $silver-chalice;
+	border-left: 1px solid $silver-chalice;
+	border-bottom: 1px solid $alabaster;
+	z-index: 10;
+}
+.filter-menu {
+	z-index: 9;
+	position: absolute;
+	top: 24px;
+	right: 0px;
+	width: 143px;
+	height: auto;
+	border-top: 1px solid $silver-chalice;
+	border-left: 1px solid $silver-chalice;
+	border-bottom: 1px solid $silver-chalice;
+	.filter-menu-item {
+		@extend .filter-text;
+		background-color: $alabaster;
+		width: 100%;
+		text-align: left !important;
+		line-height: 30px;
+		height: 30px;
+		padding: 0 12px 0 12px;
+		display: inline-block;
+		&:hover {
+			background-color: $light-gray;
+			color: $white;
+		}
+	}
+	.filter-menu-item-new {
+		@extend .filter-menu-item;
+		color: $ghosty-blue;
+	}
+}

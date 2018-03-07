@@ -1,0 +1,55 @@
+/**
+ * Ghostery Sass Importer
+ *
+ * Select the SASS partials to be compiled for this project. SASS files
+ * are compiled and included in the order they are listed.
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+//Import Global Partials
+@import "settings"; //includes _colors.scss
+@import './partials/_fonts';
+@import './partials/_placeholders';
+@import './partials/_mixins';
+
+html body {
+	margin: 0px;
+	font-size: 75%;
+}
+*:focus {outline: none;}
+
+// Foundation Helpers
+.collapse-left {padding-left: 0;}
+.collapse-right {padding-right: 0;}
+.relative {position: relative;}
+
+// Ghostery Panel
+#ghostery-app {
+	background-color: white;
+	height: 516px;
+	width: 580px;
+	margin: 0px;
+	padding: 0px;
+}
+
+// Partial View SASS files
+@import './partials/_header';
+@import './partials/_callout';
+@import './partials/_summary';
+@import './partials/_detail';
+@import './partials/_blocking';
+@import './partials/_settings';
+@import './partials/_help';
+@import './partials/_account';
+@import './partials/_drawer';
+@import './partials/_select_button';
+@import './partials/_tooltip';
+@import './partials/_not_scanned';

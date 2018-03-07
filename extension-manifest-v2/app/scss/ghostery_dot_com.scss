@@ -1,0 +1,165 @@
+/**
+ * Ghostery.com CSS
+ *
+ * Injected CSS for Ghostery website download page
+ * located at https://www.ghostery.com/products/
+ * and Apps pages located at https://apps.ghostery.com/ and
+ * https://gcache.ghostery.com/
+ *
+ * Compiled to /dist/css/ghostery_dot_com.css
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+h1.want-to-block {
+	width: 200px;
+	display: inline-block;
+	vertical-align: middle;
+}
+#global-blocking-control {
+	display: inline-block;
+	vertical-align: middle;
+	width: 45px;
+	height: 30px;
+	background: url('chrome-extension://__MSG_@@extension_id__/app/images/apps_pages/tracker.png') no-repeat;
+	background-position: -20px -20px;
+	&.blocked:hover {
+		background-position: -20px -160px;
+	}
+	&.unblocked:hover {
+		background-position: -20px -90px;
+	}
+}
+#app-global-blocking {
+	float: left;
+	width: 44px;
+	cursor: pointer;
+	background: url('chrome-extension://__MSG_@@extension_id__/app/images/apps_pages/tracker.png') no-repeat;
+	&.blocked {
+		height: 24px;
+		background-position: 3px -635px;
+	}
+	&.blocked:hover {
+		background-position: 3px -699px;
+	}
+	&.unblocked {
+		height: 24px;
+		background-position: -17px -891px;
+	}
+	&.unblocked:hover {
+		background-position: -17px -955px;
+	}
+	&.whitelisted {
+		background-position-y: -763px;
+	}
+	&.whitelisted:hover {
+		background-position-y: -827px;
+	}
+	&.paused {
+		background-position-y: -507px;
+	}
+	&.paused:hover {
+		background-position-y: -571px;
+	}
+}
+
+/**
+ * Bootstrap Tooltip CSS
+ *
+ * Used on Ghostery Apps pages located at
+ * https://apps.ghostery.com/
+ */
+.bs-tooltip {
+	position: absolute;
+	z-index: 1030;
+	display: block;
+	visibility: visible;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	line-height: 1.4;
+	opacity: 0;
+	filter: alpha(opacity=0);
+	&.in {
+		opacity: 0.8;
+		filter: alpha(opacity=80);
+	}
+	&.top {
+		margin-top: -10px;
+		padding: 5px 0;
+		.bs-tooltip-arrow {
+			bottom: 0;
+			left: 50%;
+			margin-left: -5px;
+			border-width: 5px 5px 0;
+			border-top-color: #000000;
+		}
+	}
+	&.right {
+		margin-left: 10px;
+		padding: 0 5px;
+		.bs-tooltip-arrow {
+			top: 50%;
+			left: 0;
+			margin-top: -5px;
+			border-width: 5px 5px 5px 0;
+			border-right-color: #000000;
+		}
+	}
+	&.bottom {
+		margin-top: 0px;
+		padding: 5px 0;
+		.bs-tooltip-arrow {
+			top: 0;
+			left: 50%;
+			margin-left: -5px;
+			border-width: 0 5px 5px;
+			border-bottom-color: #000000;
+		}
+	}
+	&.left {
+		margin-left: -10px;
+		padding: 0 5px;
+		.bs-tooltip-arrow {
+			top: 50%;
+			right: 0;
+			margin-top: -5px;
+			border-width: 5px 0 5px 5px;
+			border-left-color: #000000;
+		}
+	}
+	.bs-tooltip-inner {
+		max-width: 200px;
+		padding: 5px 10px;
+		color: #ffffff;
+		text-align: center;
+		text-decoration: none;
+		background-color: #000000;
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+		border-radius: 4px;
+	}
+	.bs-tooltip-arrow {
+		position: absolute;
+		width: 0;
+		height: 0;
+		border-color: transparent;
+		border-style: solid;
+	}
+	.fade {
+		opacity: 0;
+		-webkit-transition: opacity 0.20s linear;
+		-moz-transition: opacity 0.20s linear;
+		-o-transition: opacity 0.20s linear;
+		transition: opacity 0.20s linear;
+	}
+	.fade.in {
+		opacity: .6;
+	}
+}

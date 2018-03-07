@@ -1,0 +1,35 @@
+## Build Files
+dist/
+build/
+web-ext-artifacts/
+*precompiled/
+licenses.json
+
+## Node
+node_modules/
+npm-debug.log
+
+## Development Files
+*.swp
+*.pem
+/Makefile_
+/test/output.html
+
+## Translation Files
+.ltk
+tools/i18n_results
+tools/leet/*.json
+
+# Cliqz
+cliqz/
+
+## JSDoc
+docs/
+jsdocs/
+out/
+
+#OSX
+.DS_Store
+
+#Other Files
+bug-list.md

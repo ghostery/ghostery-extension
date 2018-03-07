@@ -1,0 +1,79 @@
+{
+	"apps": {
+		"1": {
+			"name": "DoubleClick",
+			"cat": "advertising"
+		},
+		"2": {
+			"name": "Google Analytics",
+			"cat": "site_analytics"
+		},
+		"3": {
+			"name": "Google Safeframe",
+			"cat": "advertising"
+		},
+		"4": {
+			"name": "Google IMA",
+			"cat": "advertising"
+		},
+		"5": {
+			"name": "Google Publisher Tags",
+			"cat": "advertising"
+		}
+	},
+	"bugs": {
+		"11": {
+			"aid": 1
+		},
+		"12": {
+			"aid": 2
+		},
+		"13": {
+			"aid": 3
+		},
+		"14": {
+			"aid": 4
+		},
+		"15": {
+			"aid": 5
+		}
+	},
+	"firstPartyExceptions": {
+		"12": [
+			"google.com"
+		]
+	},
+	"patterns": {
+		"host": {
+			"net": {
+				"doubleclick": {
+					"g": {
+						"securepubads": {
+							"$": 11
+						}
+					}
+				}
+			}
+		},
+		"host_path": {
+			"com": {
+				"google-analytics": {
+					"$": [
+						{
+							"path": "analytics.js",
+							"id": 12
+						}
+					]
+				}
+			}
+		},
+		"path": {
+			"safeframe": 13,
+			"js/sdkloader/ima3.js": 14
+		},
+		"regex": {
+			"15": "(googletagservices\\.com\\/.*\\.js)"
+		}
+	},
+	"version": 0
+}

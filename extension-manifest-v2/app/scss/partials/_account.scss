@@ -1,0 +1,175 @@
+/**
+ * Acount Panel Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+/* REUSABLE CLASSES */
+[type='text'], [type='password'], [type='date'], [type='datetime'],
+[type='datetime-local'], [type='month'], [type='week'], [type='email'],
+[type='number'], [type='search'], [type='tel'], [type='time'],
+[type='url'], [type='color'], textarea {
+	border-color: #727575;
+	margin-top: 6px;
+}
+label {
+	font-weight: 600;
+}
+.button {
+	background-color: $ghosty-blue;
+	font-size: 14px;
+	font-weight: 600;
+	&.cancel {
+		@extend %pointer;
+		border: none;
+		font-weight: 600;
+		font-size: 14px;
+		color: #2092BF;
+	}
+}
+span.asterisk {
+	display: none;
+	font-size: 14px;
+	margin: 0;
+}
+p.warning {
+	margin: 0;
+	font-size: 12px;
+	line-height: 12px;
+	font-weight: 400;
+	font-style: italic;
+	color: #CC5F5A;
+	opacity: 0;
+	@include transition(opacity 0.2s, color 0.2s);
+}
+.panel-error {
+	span.asterisk {display: inline;}
+	p.warning {
+		opacity: 1;
+	}
+	input {
+		border-color: #E0B4B4;
+		background-color: #FFF6F6;
+	}
+	label {
+		color: #CC5F5A;
+	}
+}
+
+/* SIGNIN PANEL */
+#signin-panel {
+	margin-top: 50px;
+	#login-password{
+		margin-top: 15px;
+	}
+	.account-signin-buttons-container {
+		margin-bottom: 20px;
+		margin-top: 20px;
+		#signin-button {
+			width: 126px;
+		}
+	}
+	.account-panel-action {
+		font-size: 14px;
+		font-weight: 500;
+		a {color:#333333;}
+	}
+}
+
+/* FORGOT PASSWORD PANEL */
+#forgot-password-panel{
+	margin-top: 75px;
+	h4#forgot-password-message {
+		font-size:14px;
+		font-weight: normal;
+		color: #333333;
+		margin-bottom: 50px;
+	}
+	#forgot-email {
+		&.not-found-error {
+			p.warning.invalid-email {
+				opacity: 0;
+			}
+		}
+		&.invalid-email {
+			p.warning.not-found-error {
+				opacity: 0;
+			}
+		}
+	}
+	.buttons-container {
+		margin-top: 60px;
+		#send-button {
+			width:126px;
+		}
+	}
+}
+
+/* CREATE ACCOUNT PANEL */
+#create-account-panel{
+	margin-top: 10px;
+	input {margin-bottom: 5px;}
+	p.warning {margin-bottom: 5px;}
+	#create-account-first-name, #create-account-last-name {
+		margin-bottom: 20px; //compensation for no .warning elements
+	}
+	#create-account-password {
+		p.warning {
+			#password-length-requirement,
+			#password-characters-requirement {
+				display: none;
+				&.show {
+					display: inline-block;
+				}
+			}
+		}
+	}
+	#create-account-privacy-container {
+		label {
+			font-size: 13px;
+			line-height: 16px;
+			font-weight: 400;
+		}
+		input {
+			float: left;
+			margin-right: 12px;
+			position: relative;
+			top: 3px;
+			margin-bottom: 30px;
+		}
+	}
+	#account-creation-buttons .button {margin-bottom: 0;}
+	#accept-privacy-requirement {
+		margin-left: 22px;
+		margin-top: 3px;
+	}
+}
+
+/* SIGNIN SUCCESS PANEL */
+#signin-success-panel {
+	margin-top: 75px;
+	h3 {
+		color: #394045;
+		font-size: 18px;
+		font-weight: 400;
+	}
+	.big-ghosty {
+		background: url('../../app/images/panel/ghosty_signin.png') no-repeat center center;
+		background-size: auto 73px;
+		height: 115px;
+	}
+	p {
+		color: #9B9B9B;
+		font-size: 13px;
+		font-weight: 300;
+		line-height: 21px;
+	}
+	#view-trackers-button {margin-top: 30px;}
+}

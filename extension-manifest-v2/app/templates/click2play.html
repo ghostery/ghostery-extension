@@ -1,0 +1,61 @@
+<!doctype html>
+<!--
+ * Ghostery Click2Play
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+-->
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+		p {
+			margin: 3px;
+			font-family: Helvetica, Arial, sans-serif;
+			font-size: 13px;
+		}
+		table {
+			border-spacing: 0;
+			width: 100%;
+			height: 100%;
+			text-align: center;
+			vertical-align: middle;
+		}
+		td {
+			padding: 0;
+		}
+	</style>
+</head>
+<body>
+	<table>
+		<tr>
+			<td>
+				<% if (data.button) { %>
+					<a id="action-once" href="#" onclick="return false">
+						<img id="ghostery-button" src="<%= data.allow_once_src %>" title="<%= data.allow_once_title %>">
+					</a>
+				<% } else { %>
+					<% if (typeof data.click2play_text !== "undefined" && data.click2play_text) { %>
+						<p id="text"><%= data.click2play_text %></p>
+					<% } %>
+					<img id="ghostery-blocked" src="<%= data.ghostery_blocked_src %>" title="<%= data.ghostery_blocked_title %>">
+					<a id="action-once" href="#" onclick="return false"><img src="<%= data.allow_once_src %>" title="<%= data.allow_once_title %>"></a>
+					<% if (data.blacklisted === false) { %>
+						<a id="action-always" href="#" onclick="return false"><img src="<%= data.allow_always_src %>" title="<%= data.allow_always_title %>"></a>
+					<% } %>
+				<% } %>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

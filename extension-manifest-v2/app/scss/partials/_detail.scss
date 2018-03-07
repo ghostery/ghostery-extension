@@ -1,0 +1,105 @@
+/**
+ * Detail Panel Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+#detail-menu {
+	background-color: $white;
+	border-top: 1px solid #C4CED2;
+	bottom: 0;
+	padding: 8px 0;
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	z-index: 1;
+	height: 61px;
+	.menu-item {
+		padding-left: 0;
+		padding-right: 0;
+		svg {
+			height: 25px;
+			width: auto;
+			&.list-view-icon {height: 21px;}
+		}
+		.fill {fill: rgb(200,199,194);}
+		.no-fill {fill: none;}
+		.stroke {stroke: rgb(200,199,194);}
+		span {
+			color: #C8C7C2;
+			display: block;
+			font-size: 9px;
+			font-weight: 600;
+			line-height: 13px;
+			visibility: hidden;
+		}
+		a:hover, a.active {
+			span {
+				color: #4A4A4A;
+				visibility: visible;
+			}
+			.fill {fill: rgb(74,74,74);}
+			.no-fill {fill: none;}
+			.stroke {stroke: rgb(74,74,74);}
+		}
+	}
+}
+
+@mixin expanding-panel($margin-left...) {
+	position: relative;
+	margin-left: 232px;
+	height: 479px;
+	border-left: 1px solid #cbd4d7;
+	&.expanded {
+		margin-left: $margin-left;
+	}
+}
+
+#content-detail {
+	@include expanding-panel(70px);
+}
+
+#settings-global-blocking {
+	@include expanding-panel(2px);
+}
+
+.coming-soon {
+	background-color: #fff;
+	.detail-header {
+		background-color: $whisper;
+		color: #9B9B9B;
+		font-size: 14px;
+		margin-bottom: 50px;
+		padding: 10px 0;
+		text-align: center;
+		text-transform: uppercase;
+	}
+	.detail-icon svg {
+		height: 40px;
+		margin-bottom: 40px;
+		width: auto;
+		.fill {fill: #9B9B9B;}
+		.no-fill {fill: none;}
+		.stroke {stroke: #9B9B9B;}
+	}
+	.detail-text {
+		color: $tundora;
+		font-size: 14px;
+		line-height: 24px;
+	}
+	hr {
+		margin: 25px 0 35px;
+	}
+	.button {
+		color: $tundora;
+		border-color: #ccc;
+		font-weight: 400;
+	}
+}

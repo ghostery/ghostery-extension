@@ -1,0 +1,12 @@
+{
+	"click2play": [
+		{
+			"selector": "g\\:plusone, .g-plusone, g\\:plus, .g-plus",
+			"button": "ghostery_plus.png",
+			"reinject": "true",
+			"bug": "Google+",
+			"aid": 6
+		}
+	],
+	"click2playVersion": 0
+}

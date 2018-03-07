@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - "9"
+sudo: false
+
+install:
+  - npm install --silent
+
+script:
+  - node ./tools/licenses/fetchLicenses.js
+  - npm run lint
+  - npm run test.unit

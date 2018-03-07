@@ -1,0 +1,119 @@
+/**
+ * Tooltip Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+.g-tooltip {
+	position: relative;
+	display: inline-block;
+	.tooltip-content {
+		color: #4a4a4a;
+		font-size: 11px;
+		padding: 11px 10px;
+		width: 150px;
+		background-color: $mystic;
+		text-align: center;
+		position: absolute;
+		z-index: 2;
+		box-shadow: 0px 2px 2px 0 rgba(0, 0, 0, 0.2);
+		box-sizing: border-box;
+		&:after {
+			box-sizing: border-box;
+			border-style: solid;
+			content: '';
+			position: absolute;
+			border-width: 7px;
+			border-color: transparent transparent $mystic $mystic;
+			box-shadow: -2px 2px 2px 0 rgba(0, 0, 0, 0.2);
+			transform-origin: 0 0;
+		}
+		&.top {
+			width: 150px;
+			bottom: 140%;
+			left: 50%;
+			margin-left: -75px;
+			&:after {
+				top: 100%; /* At the bottom of the tooltip */
+				left: 50%;
+				margin-left: -10px;
+				transform: rotate(-45deg);
+			}
+		}
+		&.right {
+			top: -5px;
+			left: 115%;
+			&:after {
+				box-shadow: 1px 5px 2px -3px rgba(0, 0, 0, 0.2);
+				transform: rotate(45deg);
+				top: calc(50% - 10px);
+				margin-left: -75px;
+			}
+		}
+		&.left {
+			top: -5px;
+			right: 150%;
+			&:after {
+				transform: rotate(225deg);
+				top: calc(50% + 10px);
+				box-shadow: -5px -1px 2px -3px rgba(0, 0, 0, 0.2);
+				margin-left: 75px;
+			}
+		}
+		&.bottom {
+			width: 150px;
+			top: 125%;
+			left: 50%;
+			margin-left: -60px;
+			&:after {
+				bottom: calc(100% - 10px);  /* At the top of the tooltip */
+				left: 50%;
+				margin-left: -8px;
+				border-width: 5px;
+				transform: rotate(135deg);
+			}
+		}
+		.tooltip-header {
+			display: block;
+			font-weight: 600;
+		}
+		.tooltip-body {
+			padding: 5px 2px;
+			font-weight: 400;
+			line-height: 1.5;
+		}
+	}
+}
+
+#cliqz-controls .tooltip-content.right {
+	margin-left: 28px;
+}
+.toggleExpert.g-tooltip .tooltip-content.right {
+	top: -10px;
+	margin-left: 10px;
+}
+.expanded .toggleExpert.g-tooltip .tooltip-content.right {
+	top: 15px;
+	margin-left: 0px;
+}
+.expert .g-tooltip .tooltip-content.top {
+	&.top-right {
+		margin-left: -40px;
+		&:after {
+			left: 40px;
+		}
+	}
+	&.top-left {
+		margin-left: -110px;
+		&:after {
+			left: 110px;
+		}
+	}
+}

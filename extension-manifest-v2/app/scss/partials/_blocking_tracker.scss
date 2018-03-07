@@ -1,0 +1,134 @@
+/**
+ * Blocking Tracker Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+.blocking-trk {
+	border-top: 1px solid #e8e8e8;
+	margin-right: 26px;
+	margin-left: 16px;
+	&:first-child {
+		border-top: none;
+	}
+	.trk-header {
+		padding-top: 5px;
+		padding-bottom: 5px;
+		height: 39px;
+		.trk-name {
+			@extend %pointer;
+			font-size: 14px;
+			line-height: 19px;
+			font-weight: 400;
+			color: #4a4a4a;
+			@extend %nowrap;
+		}
+		.svg-container {
+			height: 20px;
+		}
+		.warning-image {
+			display: block;
+			width: 18px;
+			height: 18px;
+			margin-right: 5px;
+			background-size: auto 18px;
+			background-repeat: no-repeat;
+		}
+	}
+	.trk-moreinfo {
+		.trk-description {
+			font-size: 11px;
+			line-height: 15px;
+			font-weight: 400;
+			color: #333333;
+			margin-right: 10px;
+			padding-bottom: 10px;
+			a {
+				color: #4a90e2;
+			}
+		}
+		.trk-srcs-title {
+			font-size: 11px;
+			line-height: 15px;
+			font-weight: 600;
+			color: #333333;
+			padding-bottom: 2px;
+		}
+		.trk-srcs {
+			padding-bottom: 10px;
+		}
+		.trk-src-link {
+			display: block;
+			font-size: 10px;
+			line-height: 13px;
+			font-weight: 400;
+			color: #4a90e2;
+			margin-right: 10px;
+			overflow-y: hidden;
+			@extend %nowrap;
+		}
+	}
+	svg.blocking-icons {
+		display: inline-block;
+		margin-left: 2px;
+	}
+	svg.trust, svg.restrict {
+		display: none;
+		.border {stroke: #d8d8d8;}
+		.background {fill: #f7f7f7;}
+		.trust-circle {
+			stroke: #9B9B9B;
+			display: block;
+		}
+		.restrict-circle {
+			stroke: #9B9B9B;
+			display: block;
+		}
+	}
+}
+
+// SVG icons shared with _blocking_category
+svg.blocking-icons {
+	@extend %pointer;
+	.border {
+		fill: none;
+		stroke: #d8d8d8;
+		stroke-linecap: square;
+		stroke-width: 1px;
+	}
+	.background {
+		fill: $white;
+		stroke: $white;
+		stroke-linecap: square;
+		stroke-width: 1px;
+	}
+	.dash {
+		display: none;
+		stroke: #9b9b9b;
+		stroke-linecap: square;
+		stroke-width: 2px;
+	}
+	.check {
+		display: none;
+		fill: $white;
+	}
+	.trust-circle {
+		display: none;
+		fill: none;
+		stroke-width: 1.5px;
+		stroke-linecap: square;
+	}
+	.restrict-circle {
+		display: none;
+		fill: none;
+		stroke-width: 1.5px;
+		stroke-linecap: square;
+	}
+}

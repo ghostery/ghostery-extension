@@ -1,0 +1,211 @@
+/**
+ * Placeholders
+ *
+ * Whenever mixin is used without arguments it is better be placeholder. It results in more DRY css.
+ * Compiled into all of the /dist/css/*.css files
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+%reset {
+	color: #FFFFFF;
+	border: 0;
+	bottom: initial;
+	box-sizing: initial;
+	font: inherit;
+	font-size: 100%;
+	left: initial;
+	line-height: initial;
+	margin: 0;
+	padding: 0;
+	top: initial;
+	right: initial;
+	vertical-align: baseline;
+}
+
+%noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari*/
+     -khtml-user-select: none; /* Konqueror */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+%pointer {
+	cursor: pointer;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	&.disabled {
+		cursor: not-allowed;
+	}
+}
+
+%nowrap {
+	white-space: nowrap;
+	overflow-x: hidden;
+	text-overflow: ellipsis;
+}
+
+%font-smoothing-important {
+	-moz-osx-font-smoothing: auto !important;
+	 -webkit-font-smoothing: antialiased !important;
+	            font-smooth: always !important;
+}
+
+//Tooltips
+$max-width: 150px;
+
+@keyframes g-tooltip-animation {
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
+
+%g-tooltip-animation {
+	animation-name: g-tooltip-animation;
+	animation-duration: 0.2s;
+}
+
+%g-tooltip-body {
+	@extend %g-tooltip-animation;
+	pointer-events:none;
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+	font-size: 12px;
+	font-weight: 400;
+	-webkit-font-smoothing: antialiased;
+	text-align: center;
+	white-space: nowrap;
+    background: #333;
+    background: rgba(0,0,0,.8);
+    border-radius: 1px;
+    color: #fff;
+    padding: 3px 5px;
+    position: absolute;
+    z-index: 10;
+    font-size: 12px;
+	-webkit-box-shadow: 0px 2px 2px -1px rgba(#020202, 0.75);
+	-moz-box-shadow: 0px 2px 2px -1px rgba(#020202, 0.75);
+	box-shadow: 0px 2px 2px -1px rgba(#020202, 0.75);
+}
+%g-tip-body {
+	@extend %g-tooltip-animation;
+    border-style: solid;
+    border-color: #333 transparent;
+    content: "";
+    position: absolute;
+    z-index: 11;
+}
+
+%g-tooltip {
+    display: inline;
+    position: relative;
+
+	&:hover:before {
+		@extend %g-tooltip-body;
+		content: attr(data-g-tooltip);
+	}
+	&:hover:after {
+		@extend %g-tip-body;
+	}
+}
+
+%g-tooltip-up {
+	@extend %g-tooltip;
+	&:hover:before {
+		@extend %g-tooltip:hover:before;
+	    bottom: 19px;
+	    left: 50%;
+	    transform: translateX(-50%);
+	}
+	&:hover:after {
+		border-width: 6px 6px 0 6px;
+	    left: -1px;
+	    bottom: 13px;
+	}
+}
+
+%g-tooltip-down {
+	@extend %g-tooltip;
+	&:hover:before {
+		@extend %g-tooltip:hover:before;
+		top: 21px;
+		left: 50%;
+	    transform: translateX(-50%);
+	}
+	&:hover:after {
+		@extend %g-tooltip:hover:after;
+		border-width: 0 6px 6px 6px;
+	    bottom: -3px;
+	    right: -1px;
+	}
+}
+
+%g-tooltip-up-left{
+	@extend %g-tooltip;
+	&:hover:before {
+	    right: -15px;
+	    bottom: 26px;
+	}
+	&:hover:after {
+		border-width: 6px 6px 0 6px;
+	    left: 20%;
+	    bottom: 20px;
+	}
+}
+
+%g-tooltip-up-right {
+	@extend %g-tooltip;
+	&:hover:before {
+		@extend %g-tooltip:hover:before;
+	    left: -15px;
+	    bottom: 26px;
+	}
+	&:hover:after {
+		@extend %g-tooltip:hover:after;
+		border-width: 6px 6px 0 6px;
+	    left: 20%;
+	    bottom: 20px;
+	}
+}
+
+%g-tooltip-down-left {
+	@extend %g-tooltip;
+	&:hover:before {
+		@extend %g-tooltip:hover:before;
+	    right: -100%;
+	    top: 20px;
+	}
+	&:hover:after {
+		@extend %g-tooltip:hover:after;
+		border-width: 0 6px 6px 6px;
+	    left: 20%;
+	    top: 14px;
+	}
+}
+
+%g-tooltip-down-right {
+	@extend %g-tooltip;
+	&:hover:before {
+		@extend %g-tooltip:hover:before;
+	    left: -15px;
+	    bottom: 26px;
+	}
+	&:hover:after {
+		@extend %g-tooltip:hover:after;
+		border-width: 0 6px 6px 6px;
+	    left: 20%;
+	    top: 20px;
+	}
+}
