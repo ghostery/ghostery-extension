@@ -1,7 +1,7 @@
 [![Ghostery](https://www.ghostery.com/wp-content/themes/ghostery/images/ghostery_logo_black.svg)](https://www.ghostery.com)
 ---
 
-![Travis](https://img.shields.io/travis/ghostery/ghostery-extension.svg?style=flat-square) &nbsp; ![GitHub manifest version](https://img.shields.io/github/manifest-json/v/ghostery/ghostery-extension.svg?style=flat-square) &nbsp; ![Chat on Gitter](https://img.shields.io/gitter/room/ghostery/ghostery-expenstion.svg?style=flat-square) &nbsp; [![Twitter Follow](https://img.shields.io/twitter/follow/ghostery.svg?style=social&maxAge=3600)](https://twitter.com/ghostery)
+[![Build Status](https://travis-ci.org/ghostery/ghostery-extension.svg?branch=master)](https://travis-ci.org/ghostery/ghostery-extension) &nbsp; ![GitHub manifest version](https://img.shields.io/github/manifest-json/v/ghostery/ghostery-extension.svg?style=flat-square) &nbsp; [![Chat on Gitter](https://img.shields.io/gitter/room/ghostery/ghostery-expenstion.svg?style=flat-square)](https://gitter.im/ghostery/ghostery-extension) &nbsp; [![Twitter Follow](https://img.shields.io/twitter/follow/ghostery.svg?style=social&maxAge=3600)](https://twitter.com/ghostery)
 
 Ghostery helps you browse smarter by giving you control over ads and tracking technologies to speed up page loads, eliminate clutter, and protect your data. This is the unified code repository for the Ghostery browser extensions in Chrome, Firefox, Opera and Edge.
 

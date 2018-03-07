@@ -47,7 +47,7 @@ class About extends React.Component {
 							<a href="https://github.com/ghostery/ghostery-extension/releases" target="_blank" rel="noopener noreferrer">
 								{ t('panel_about_release_notes') }
 							</a>
-							<a href="https://www.ghostery.com/about-ghostery/browser-extension-end-user-license-agreement/" target="_blank" rel="noopener noreferrer">
+							<a href="https://www.mozilla.org/en-US/MPL/2.0/" target="_blank" rel="noopener noreferrer">
 								{ t('panel_about_license') }
 							</a>
 							<a href="https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/" target="_blank" rel="noopener noreferrer">
