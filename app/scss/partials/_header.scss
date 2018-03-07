@@ -1,0 +1,131 @@
+/**
+ * Header Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+#ghostery-header {
+	.top-bar {
+		background-color: $ghosty-blue;
+		color: $white;
+		padding: 7px 0 7px 20px;
+		height: 36px;
+	}
+	.header-logo {
+		display: block;
+		background-image: url('../../app/images/panel/ghostery-icon.svg');
+		background-size: auto 100%;
+		background-repeat: no-repeat;
+		height: 21px;
+		width: 72px;
+		background-position: right;
+		.back-arrow {
+			display: none;
+			height: 11px;
+		}
+		&.show-back-arrow {
+			width: 90px;
+			.back-arrow {
+				display: inline-block;
+			}
+		}
+	}
+	.header-kebab {
+		@extend %pointer;
+		background-image: url('../../app/images/panel/kebab-menu.svg');
+		background-size: 4px 16px;
+		background-position: center;
+		background-repeat: no-repeat;
+		height: 16px;
+		width: 34px;
+	}
+	.header-helper-text {
+		@extend %pointer;
+		font-size: 12px;
+	}
+	.dropdown-pane {
+		display: block;
+		width: 217px;
+		height: 364px;
+		border: none;
+		background-color: #4a4a4a;
+		top: 0px !important;
+		left: 363px !important;
+		visibility: visible;
+		ul.menu {background: none;}
+		.menu-option {
+			position: relative;
+			@extend %pointer;
+			padding: 10px 0;
+			.menu-icon-container {
+				position: absolute;
+				left: 0;
+				top: 50%;
+				transform: translateY(-50%);
+			}
+			.menu-icon {fill: #e7ecee;}
+			.about-icon {
+				fill: none;
+				path {
+					stroke: #e7ecee;
+					stroke-width: 2;
+				}
+				text {
+					font-size: 11px;
+					font-weight:400;
+					fill: #e7ecee;
+				}
+			}
+			&:hover {
+				span {color: $ghosty-blue;}
+				.menu-icon {fill: $ghosty-blue;}
+				.about-icon {
+					path, text {stroke: $ghosty-blue;}
+				}
+			}
+			span {
+				font-size: 14px;
+				font-weight: 300;
+				color: #ffffff;
+				padding-left: 10px;
+				line-height: 18px;
+				vertical-align: top;
+				display: inline-block;
+				margin-left: 20px;
+			}
+			a {
+				display: block;
+				padding: 0;
+			}
+		}
+		.account-info {
+			position: absolute;
+			bottom: 0px;
+			left: 0;
+			padding: 16px;
+			width: 100%;
+			.signed-in-as {
+				padding-bottom: 0;
+				span {
+					@extend %nowrap;
+					margin-left: 0;
+					max-width: 165px;
+				}
+			}
+			.menu-signin, .menu-signout {
+				text-align: center;
+				span {
+					margin-left: 0;
+					padding-left: 0;
+				}
+			}
+		}
+	}
+}

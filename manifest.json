@@ -1,0 +1,96 @@
+{
+	"manifest_version": 2,
+	"applications": {
+		"gecko": {
+			"id": "firefox@ghostery.com"
+		}
+	},
+	"author": "Ghostery",
+	"name": "__MSG_name__",
+	"short_name": "Ghostery",
+	"version": "8.1.0.0",
+	"version_name": "8.1.0.0",
+	"default_locale": "en",
+	"description": "__MSG_short_description__",
+	"debug": true,
+	"log": true,
+	"icons": {
+		"16": "app/images/icon16.png",
+		"48": "app/images/icon48.png",
+		"128": "app/images/icon128.png"
+	},
+	"browser_action": {
+		"default_icon": {
+			"19": "app/images/icon19_off.png",
+			"38": "app/images/icon38_off.png"
+		},
+		"default_title": "Ghostery"
+	},
+	"content_scripts": [
+		{
+			"all_frames": false,
+			"js": [
+				"dist/ghostery_dot_com.js"
+			],
+			"css": [
+				"dist/css/ghostery_dot_com_css.css"
+			],
+			"matches": [
+				"https://www.ghostery.com/*",
+				"https://apps.ghostery.com/*",
+				"https://staging-apps.ghostery.com/*",
+				"https://gcache.ghostery.com/*",
+				"https://staging-gcache.ghostery.com/*"
+			],
+			"run_at": "document_idle"
+		},
+		{
+			"all_frames": false,
+			"js": [
+				"dist/platform_pages.js"
+			],
+			"matches": [
+				"https://signon.ghostery.com/*",
+				"https://signon.ghosterystage.com/*",
+				"https://account.ghostery.com/*",
+				"https://account.ghosterystage.com/*"
+			],
+			"run_at": "document_end"
+		},
+		{
+			"all_frames": true,
+			"js": [
+				"dist/content_script_bundle.js"
+			],
+			"matches": [
+				"http://*/*",
+				"https://*/*"
+			],
+			"run_at": "document_start"
+		}
+	],
+	"content_security_policy": "script-src 'self'; object-src 'self'",
+	"permissions": [
+		"webNavigation",
+		"webRequest",
+		"webRequestBlocking",
+		"cookies",
+		"tabs",
+		"http://*/*",
+		"https://*/*",
+		"storage"
+	],
+	"background": {
+		"scripts": [
+			"dist/vendor.js",
+			"dist/browser-core.js",
+			"dist/background.js"
+		],
+		"persistent": true
+	},
+	"minimum_edge_version": "33.14281.1000.0",
+	"minimum_chrome_version": "49",
+	"web_accessible_resources": [
+		"app/images/*"
+	]
+}

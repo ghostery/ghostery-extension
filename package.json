@@ -1,0 +1,103 @@
+{
+  "name": "ghostery-extension",
+  "version": "0.0.0",
+  "title": "Ghostery",
+  "author": {
+    "name": "Ghostery, Inc",
+    "email": "info@ghostery.com",
+    "url": "https://www.ghostery.com"
+  },
+  "license": "MPL-2.0",
+  "main": "webpack.config.js",
+  "scripts": {
+    "build.dev": "webpack --display-error-details --progress --verbose --env.dev",
+    "build.prod": "cross-env NODE_ENV=production webpack --display-error-details --progress --env.prod",
+    "build.watch": "webpack --watch --display-error-details --progress --env.dev  --env.watch",
+    "prebuild.dev": "node ./tools/licenses/fetchLicenses.js",
+    "prebuild.prod": "node ./tools/licenses/fetchLicenses.js",
+    "prebuild.watch": "node ./tools/licenses/fetchLicenses.js",
+    "test.unit": "BABEL_ENV=test jest",
+    "lint": "eslint --ext .js,.jsx ./app ./src",
+    "lint.fix": "eslint --ext .js,.jsx ./app ./src --fix",
+    "lint.raw": "eslint --ext .js,.jsx",
+    "docs": "jsdoc -c jsdoc.json -d docs -r",
+    "leet": "node ./tools/leet/leet-en.js",
+    "leet.reset": "node ./tools/leet/leet-reset.js",
+    "postinstall": "vendor-copy"
+  },
+  "vendorCopy": [
+    {
+      "from": "node_modules/browser-core/build/assets",
+      "to": "cliqz"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ghostery/ghostery-extension.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ghostery/ghostery-extension/issues",
+    "email": "ghostery-dev@ghostery.com"
+  },
+  "homepage": "https://github.com/ghostery/ghostery-extension#readme",
+  "dependencies": {
+    "base64-js": "^1.2.1",
+    "browser-core": "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.24/7.24.2.tgz",
+    "classnames": "^2.2.5",
+    "d3": "^4.13.0",
+    "d3-scale": "^1.0.6",
+    "foundation-sites": "^6.4.4-rc1",
+    "history": "^4.7.2",
+    "moment": "^2.19.1",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-redux": "^5.0.6",
+    "react-remarkable": "^1.1.3",
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
+    "ua-parser-js": "^0.7.17",
+    "underscore": "^1.8.3",
+    "url-search-params": "^0.10.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "clean-webpack-plugin": "^0.1.16",
+    "cross-env": "^5.1.3",
+    "css-loader": "^0.28.7",
+    "eslint": "^4.17.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.6.1",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "fs-extra": "^4.0.3",
+    "glob": "^7.1.2",
+    "html-loader": "^0.5.1",
+    "jest": "^22.1.4",
+    "jsdoc": "^3.5.5",
+    "jsonfile": "^4.0.0",
+    "license-checker": "^15.0.0",
+    "markdown-extract": "^1.0.2",
+    "node-sass": "^4.5.3",
+    "oboe": "^2.1.3",
+    "path": "^0.12.7",
+    "read-file": "^0.2.0",
+    "sass-loader": "^6.0.6",
+    "sinon": "^4.2.2",
+    "sinon-chrome": "^2.2.1",
+    "style-loader": "^0.19.0",
+    "svg-url-loader": "^2.2.1",
+    "url-loader": "^0.6.2",
+    "vendor-copy": "^1.3.1",
+    "webpack": "^3.8.1",
+    "webpack-shell-plugin": "^0.5.0",
+    "whatwg-fetch": "^2.0.3"
+  }
+}

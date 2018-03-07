@@ -1,0 +1,68 @@
+/**
+ * Foundation Callouts
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+.callout-container {
+	height: 0px;
+	margin: 0;
+	text-align: center;
+	.callout {
+		border-radius: 3px;
+		box-shadow: 0px 2px 4px 0px rgba(#000000, 0.5);
+		display: inline-block;
+		padding: 6px 40px 7px 16px;
+		position: relative;
+		top: 20px;
+		z-index: 5;
+		&.toast {
+			top: -16px;
+			padding-right: 16px
+		}
+		&.warning {
+			background-color: #f9edbe;
+			.callout-text {color: #333333;}
+			.close-button path {stroke: #333333;}
+		}
+		&.alert, &.success {
+			background-color: #be4948;
+			.callout-text {color: #ffffff;}
+			.close-button path {stroke: #ffffff;}
+		}
+		&.hideous {
+			background-color: #ff9d00;
+			.callout-text {color: #ffffff;}
+			.close-button path {stroke: #ffffff;}
+		}
+		&.success {background-color: #1fce6d;}
+		svg.close-button {
+			position: absolute;
+			top: 7px;
+			right: 9px;
+			@extend %pointer;
+			path {fill: #4a4a4a;}
+		}
+		span.callout-text {
+			font-size: 12px;
+			line-height: 15px;
+			font-weight: 600;
+			color: #4a4a4a;
+			.needs-reload-link,
+			.filter-link,
+			.sign-in-link,
+			.verify-account-link {
+				@extend %pointer;
+				margin-left: 5px;
+				text-decoration: underline;
+			}
+		}
+	}
+}

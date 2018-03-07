@@ -1,0 +1,104 @@
+/**
+ * Summary Expert Panel Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+#content-summary.expert {
+	width: 232px;
+	.tracker-category-wheel {
+		path {
+			cursor: pointer;
+		}
+		margin-top: 20px;
+		#categories-donut {
+			height: 94px;
+			width: 94px;
+			.donut-text {
+				font-size: 11px;
+				.categories-donut-count {
+					font-size: 24px;
+				}
+			}
+		}
+	}
+	#tracker-host {
+		margin-top: 9px;
+	}
+	.info {
+		display: table;
+		width: 100%;
+		font-size: 12px;
+		margin: 9px auto 9px;
+		> .columns {
+			flex: none;
+			max-width: none;
+			width: 100%;
+			text-align: center;
+		}
+		.alert-info {
+			display: table-header-group;
+		}
+		.alert-info,
+		.block-info {
+			@extend %pointer;
+		}
+		.block-info,
+		.load-info,
+		.alert-info {
+			padding-top: 10px;
+		}
+		.tracker-count-alerts {
+			width: 100%;
+			text-align: center;
+		}
+	}
+	#controls {
+		padding-bottom: 8px;
+		.blocking-controls {
+			margin: 7px;
+		}
+		#cliqz-controls {
+			width: 173px;
+			margin-top: 0;
+		}
+		#ghostery-controls {
+			padding-top: 22px;
+			margin-top: 0;
+			.button {
+				.title, .select-title, .undo {
+					text-align: left;
+					margin-left: 40px;
+				}
+			}
+			.columns {
+				width: 100%;
+				max-width: none;
+				flex: none;
+			}
+			button {
+				margin: 0 0 14px 0;
+			}
+		}
+		.map-trackers {
+			@extend %pointer;
+			color:#9B9B9B;
+			font-size: 10px;
+			text-align: center;
+		}
+	}
+	.toggleExpert {
+		background-image: url('../images/panel/icon-simple-mode.svg');
+		height: 14px;
+		left: 11px;
+		top: 11px;
+		width: 22px;
+	}
+}

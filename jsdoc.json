@@ -1,0 +1,15 @@
+{
+	"recurseDepth": 10,
+	"source": {
+		"include": [
+			"src",
+			"app/content-scripts",
+			"app/licenses",
+			"app/panel",
+			"app/setup"
+		],
+		"includePattern": ".+\\.js(doc|x)?$",
+		"excludePattern": "(^|\\/|\\\\)_"
+	},
+	"plugins": ["plugins/markdown"]
+}

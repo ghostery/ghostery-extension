@@ -1,0 +1,95 @@
+/**
+ * Mixins
+ *
+ * This file creates mixins for cross-browser css properties used for the alert-bubble.
+ * Compiled into all of the /dist/css/*.css files
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+@mixin user-select($select...) {
+	-webkit-touch-callout: $select;
+	  -webkit-user-select: $select;
+	   -khtml-user-select: $select;
+	     -moz-user-select: $select;
+	      -ms-user-select: $select;
+	          user-select: $select;
+}
+
+@mixin transition($transitions...) {
+	-webkit-transition: $transitions;
+	   -moz-transition: $transitions;
+	     -o-transition: $transitions;
+	        transition: $transitions;
+}
+
+@mixin transition-timing($transition-timings...) {
+	-webkit-transition-timing-function: $transition-timings;
+	        transition-timing-function: $transition-timings;
+}
+
+@mixin animation($animation...) {
+	-webkit-animation: $animation;
+	   -moz-animation: $animation;
+	     -o-animation: $animation;
+	        animation: $animation;
+}
+@mixin keyframes-100-background-color($background-color...) {
+	@-webkit-keyframes UNIQUE_ID-pulse-keyframe {
+		100% {background-color: $background-color;}
+	}
+	@-moz-keyframes UNIQUE_ID-pulse-keyframe {
+		100% {background-color: $background-color;}
+	}
+	@-o-keyframes UNIQUE_ID-pulse-keyframe {
+		100% {background-color: $background-color;}
+	}
+	@keyframes UNIQUE_ID-pulse-keyframe {
+		100% {background-color: $background-color;}
+	}
+}
+
+@mixin keyframes-make-visible() {
+	@-webkit-keyframes make-visible {
+		0%   {opacity: 0;}
+		50%  {opacity: 0;}
+		100% {opacity: 1;}
+	}
+	@-moz-keyframes make-visible {
+		0%   {opacity: 0;}
+		50%  {opacity: 0;}
+		100% {opacity: 1;}
+	}
+	@-o-keyframes make-visible {
+		0%   {opacity: 0;}
+		50%  {opacity: 0;}
+		100% {opacity: 1;}
+	}
+	@keyframes make-visible {
+		0%   {opacity: 0;}
+		50%  {opacity: 0;}
+		100% {opacity: 1;}
+	}
+}
+
+@mixin radial-gradient-important($gradient...) {
+	background: -webkit-radial-gradient($gradient) !important;
+	background:    -moz-radial-gradient($gradient) !important;
+	background:      -o-radial-gradient($gradient) !important;
+	background:         radial-gradient($gradient) !important;
+}
+@mixin linear-gradient-left-top-important($gradient...) {
+	background: -webkit-linear-gradient(left top,        $gradient) !important;
+	background:    -moz-linear-gradient(bottom right,    $gradient) !important;
+	background:      -o-linear-gradient(bottom right,    $gradient) !important;
+	background:         linear-gradient(to bottom right, $gradient) !important;
+}
+
+

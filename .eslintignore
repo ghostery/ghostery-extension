@@ -1,0 +1,14 @@
+# ESLint Ignore
+
+## Unit Test Files
+*.test.js
+*.test.jsx
+
+## Data Images
+app/data-images/
+
+## Vendor Files
+app/content-scripts/vendor/
+
+## Precompiled
+app/templates/

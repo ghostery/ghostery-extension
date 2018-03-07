@@ -1,0 +1,351 @@
+/**
+ * Blocking Panel Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+.t-tooltip-up-left {
+	@extend %g-tooltip-up-left;
+}
+.t-tooltip-down-left {
+	@extend %g-tooltip-down-left;
+}
+.t-tooltip-up-right {
+	@extend %g-tooltip-up-right;
+}
+
+#content-blocking {
+	.blocking-trackers {
+		height: 357px;
+	}
+}
+
+// blocking-trackers wraps all categories and trackers
+.blocking-trackers {
+	background-color: #F0F0F0;
+	background-position: right -80px;
+	background-repeat: no-repeat;
+	background-image: url('../../app/images/panel/tracker-list-background.svg');
+	position: relative;
+	overflow: hidden;
+	.scroll-content {
+		height: inherit;
+		overflow-y: scroll;
+		overflow-x: hidden;
+		.blocking-category {
+			&:last-of-type {
+				border-bottom: 1px solid #e8e8e8;
+			}
+		}
+	}
+	.blocking-trk.warning {
+		&.compatibility .warning-image {
+			background-image: url('../../app/images/panel/warning-compatibility.svg');
+		}
+	}
+	&.show-warnings .blocking-trk.warning:not(.blocked),
+	&.show-warnings.paused .blocking-trk.warning {
+		&.compatibility .warning-image {
+			background-image: url('../../app/images/panel/warning-compatibility-faded.svg');
+		}
+	}
+	&.show-warnings {
+		.blocking-trk.warning {
+			&.insecure .warning-image {
+				background-image: url('../../app/images/panel/warning-insecure.svg');
+			}
+			&.slow .warning-image {
+				background-image: url('../../app/images/panel/warning-slow.svg');
+			}
+			&.insecure.slow .warning-image {
+				position: relative;
+				left: -1px;
+				width: 22px;
+				height: 22px;
+				margin-right: 10px;
+				background-size: 22px 22px;
+				background-image: url('../../app/images/panel/warning-insecure-slow.svg');
+			}
+			&.smart-blocked .warning-image,
+			&.smart-unblocked .warning-image {
+				background-image: buildSmartBlockIcon($button-purple);
+			}
+		}
+	}
+	&.show-warnings .blocking-trk.warning.blocked,
+	&.show-warnings.paused .blocking-trk.warning:not(.blocked) {
+		&.insecure .warning-image {
+			background-image: url('../../app/images/panel/warning-insecure-faded.svg');
+		}
+		&.slow .warning-image {
+			background-image: url('../../app/images/panel/warning-slow-faded.svg');
+		}
+		&.insecure.slow .warning-image {
+			background-image: url('../../app/images/panel/warning-insecure-slow-faded.svg');
+		}
+	}
+	&.trusted {
+		.blocked-count {display: none;}
+		svg.status {cursor: not-allowed;}
+		.blocking-category, .blocking-trk {
+			svg.status {
+				.border {stroke: #96c761;}
+				.background {fill: #96c761;}
+				.trust-circle {
+					display: block;
+					stroke: $white;
+				}
+			}
+		}
+		&.paused {
+			.blocking-category, .blocking-trk {
+				svg.status {
+					.border {stroke: #e7f3d0;}
+					.background {fill: #e7f3d0;}
+				}
+			}
+		}
+	}
+	&.restricted {
+		svg.status {cursor: not-allowed;}
+		.blocking-category, .blocking-trk {
+			svg.status {
+				.border {stroke: $red;}
+				.background {fill: $red;}
+				.restrict-circle {
+					display: block;
+					stroke: $white;
+				}
+			}
+		}
+		.blocking-trk {
+			.trk-name {
+				color: #9b9b9b;
+				font-style: italic;
+				text-decoration: line-through;
+			}
+			.trk-src-link {
+				font-style: italic;
+				text-decoration: line-through;
+			}
+		}
+		&.paused {
+			.blocking-category, .blocking-trk {
+				svg.status {
+					.border {stroke: #f9d0d5;}
+					.background {fill: #f9d0d5;}
+				}
+			}
+		}
+	}
+	&.paused {
+		.cat-image {
+			-webkit-filter: grayscale(100%);
+			filter: grayscale(100%);
+		}
+		.counts .blocked-count {color: #f9d0d5;}
+	}
+	&:not(.trusted):not(.restricted) {
+		.blocking-category {
+			.all-blocked {
+				.border {stroke: $red;}
+				.background {fill: $red;}
+				.check {display: block;}
+			}
+			.some-blocked {
+				.dash {display: block;}
+			}
+		}
+		.blocking-trk.blocked:not(.smart-unblocked),
+		.blocking-trk.smart-blocked {
+			.trk-name {
+				color: #9b9b9b;
+				font-style: italic;
+				text-decoration: line-through;
+			}
+			.trk-src-link {
+				font-style: italic;
+				text-decoration: line-through;
+			}
+		}
+		.blocking-trk.blocked {
+			svg.status {
+				.border {stroke: $red;}
+				.background {fill: $red;}
+				.check {display: block;}
+			}
+		}
+		&.paused {
+			svg.status {cursor: not-allowed;}
+			.blocking-category .all-blocked, .blocking-trk.blocked {
+				svg.status {
+					.border {stroke: #f9d0d5;}
+					.background {fill: #f9d0d5;}
+				}
+			}
+			.blocking-category .some-blocked {
+				svg.status {
+					.dash {stroke: #d8d8d8;}
+				}
+			}
+		}
+	}
+	&.show-individual:not(.trusted):not(.restricted):not(.paused) {
+		.blocking-trk {
+			.svg-container {
+				width: 22px;
+			}
+		}
+		.blocking-trk:hover {
+			svg.trust {display: inline-block;}
+			svg.restrict {display: inline-block;}
+			.trk-name {max-width: 190px;}
+			.svg-container {width: 66px;}
+			&:not(.blocked) svg.status .check {
+				display: block;
+				fill: #9B9B9B;
+			}
+		}
+		.blocking-trk.individual-trust {
+			.trk-name {
+				color: #4a4a4a;
+				font-style: normal;
+				text-decoration: initial;
+			}
+			.trk-src-link {
+				font-style: normal;
+				text-decoration: initial;
+			}
+			&:not(:hover) {
+				svg.status {display: none;}
+			}
+			svg.trust {
+				display: inline-block;
+				.border {stroke: #96c761;}
+				.background {fill: #96c761;}
+				.trust-circle {stroke: $white;}
+			}
+			&.blocked {
+				svg.status {
+					cursor: not-allowed;
+					.border {stroke: #f9d0d5;}
+					.background {fill: #f9d0d5;}
+				}
+			}
+		}
+		.blocking-trk.individual-restrict {
+			.trk-name {
+				color: #9b9b9b;
+				font-style: italic;
+				text-decoration: line-through;
+			}
+			.trk-src-link {
+				font-style: italic;
+				text-decoration: line-through;
+			}
+			&:not(:hover) {
+				svg.status {display: none;}
+			}
+			svg.restrict {
+				display: inline-block;
+				.border {stroke: $red;}
+				.background {fill: $red;}
+				.restrict-circle {stroke: $white;}
+			}
+			&.blocked {
+				svg.status {
+					cursor: not-allowed;
+					.border {stroke: #f9d0d5;}
+					.background {fill: #f9d0d5;}
+				}
+			}
+		}
+	}
+	&.show-individual:not(.trusted):not(.restricted).paused {
+		.blocking-trk.individual-trust {
+			svg.status {
+				.border {stroke: #e7f3d0;}
+				.background {fill: #e7f3d0;}
+				.check {display: none;}
+				.trust-circle {
+					display: block;
+					stroke: $white;
+				}
+			}
+		}
+		.blocking-trk.individual-restrict {
+			svg.status {
+				.border {stroke: #f9d0d5;}
+				.background {fill: #f9d0d5;}
+				.check {display: none;}
+				.restrict-circle {
+					display: block;
+					stroke: $white;
+				}
+			}
+		}
+	}
+}
+
+.expertTab {
+	@extend %pointer;
+	position: absolute;
+	top: 200px;
+	left: -26px;
+	width: 25px;
+	height: 50px;
+	.dash {
+		height: 20px;
+		width: 3px;
+		border-radius: 2px;
+		background-color: #D1D9DC;
+		margin-right: 7px;
+	}
+	.reverse-dash {
+		@extend .dash;
+		margin-right: -12px !important;
+	}
+	.moon {
+		display: none;
+		position: inherit;
+	}
+	.reverse-moon {
+		@extend .moon;
+		right: -26px !important;
+	}
+	&:hover {
+		.dash .reverse-dash {
+			display: none;
+		}
+		.moon {
+			display: block;
+			&:after {
+				content: url('../../app/images/panel/left-left-moon.svg');
+			}
+		}
+		.reverse-moon {
+			display: block;
+			&:after {
+				content: url('../../app/images/panel/right-right-moon.svg') !important;
+			}
+		}
+	}
+	&.expanded {
+		&:hover {
+			.moon:after {
+				content: url('../../app/images/panel/left-right-moon.svg');
+			}
+		}
+	}
+}
+
+@import './partials/_blocking_category';
+@import './partials/_blocking_tracker';
+@import './partials/_blocking_header';

@@ -1,0 +1,132 @@
+/**
+ * Blocking Category Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+.cat-tooltip-up {
+	@extend %g-tooltip-up;
+	&:hover:before {
+		width: 145px;
+		white-space: normal !important;
+		font-size: 11px;
+		line-height: 15px;
+	}
+	> img {
+		height: 10px;
+	}
+
+	display: inline-block;
+	position: relative;
+	top: -8px;
+}
+
+.cat-tooltip-down {
+	@extend %g-tooltip-down;
+	&:hover:before {
+		width: 145px;
+		white-space: normal !important;
+		font-size: 11px;
+		line-height: 15px;
+	}
+	> img {
+		height: 10px;
+	}
+	display: inline-block;
+	position: relative;
+	top: -8px;
+}
+
+.blocking-category {
+	background-color: #ffffff;
+	.sticky-category {
+		background-color: white;
+		border-top: 1px solid #e8e8e8;
+		border-bottom: 1px solid #e8e8e8;
+		padding-top: 9px;
+		padding-right: 26px;
+		position: sticky;
+		top: 0;
+		z-index: 1;
+		height: 62px;
+		.caret-down {
+			@extend %pointer;
+			display: inline-block;
+			width: 40px;
+			height: 20px;
+			background: url("../../app/images/panel/caret-down.svg") no-repeat center;
+		}
+		.caret-up {
+			@extend %pointer;
+			display: inline-block;
+			width: 40px;
+			height: 20px;
+			background: url("../../app/images/panel/caret-up.svg") no-repeat center;
+		}
+		.checkbox-container {
+			display: inline-block;
+		}
+		.no-sticky {
+			position: inherit !important;
+		}
+	}
+	.no-sticky {
+		position: inherit !important;
+	}
+	.cat-image {
+		height: 24px;
+		width: 24px;
+	}
+	.cat-name {
+		cursor: pointer;
+		display: inline-block;
+		font-size: 18px;
+		line-height: 24px;
+		font-weight: 400;
+		color: #333333;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		max-width: 100%;
+		&.has-tooltip {
+			max-width: 93%;
+			margin-right: 3px;
+		}
+	}
+	.counts {
+		font-size: 11px;
+		line-height: 14px;
+		font-weight: 600;
+		margin: 2px 0 0;
+		text-transform: uppercase;
+		.total-count {
+			color: #333333;
+			display: inline-block;
+			overflow-y: hidden;
+			@extend %nowrap;
+		}
+		.blocked-count {
+			color: $red;
+			display: inline-block;
+			margin-left: 15px;
+			max-width: 125px;
+			overflow-y: hidden;
+			@extend %nowrap;
+		}
+	}
+	.checkbox-container {
+		@extend %pointer;
+		height: 20px;
+		width: 20px;
+		.background {
+			fill: $alabaster;
+		}
+	}
+}
