@@ -1,0 +1,25 @@
+# Ghostery CODEOWNERS
+# Each line is a file pattern followed by one or more owners,
+# the last matching pattern has the most precendence.
+
+# Core Ghostery team
+*       @ghostery/ghostery
+
+# CMP / Metrics / WebRequest
+/src/classes/ABTest.js @jsignanini
+/src/classes/CMP.js @jsignanini
+/src/classes/EventHandlers.js @jsignanini
+/src/classes/Metrics.js @jsignanini
+
+# Background
+/src/background.js @zarembsky
+
+# Setup App
+/app/setup/ @IAmThePan
+
+# Build Tools
+webpack.config.js @trickpattyFH20
+.eslintrc.json @trickpattyFH20
+
+# Unit Tests
+/test/ @IAmThePan
