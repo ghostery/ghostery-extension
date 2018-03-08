@@ -1226,6 +1226,8 @@ function initializeGhosteryModules() {
 		conf.version_history = version_history;
 
 		metrics.ping('upgrade');
+		//We don't want install_complete pings for upgrade
+		conf.metrics.install_complete_all = Number(new Date().getTime());
 	} else if (globals.JUST_INSTALLED) {
 		log('JUST INSTALLED');
 		const date = new Date();
