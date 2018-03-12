@@ -146,11 +146,19 @@
 				color: $red;
 			}
 		}
-		.load-info,
 		.alert-info {
 			.value {
 				color: #f5a623;
 			}
+		}
+		.load-info {
+			.value {
+				color: #f5a623;
+			}
+			padding-right: 0;
+			white-space: nowrap;
+			overflow: hidden;
+   			text-overflow: ellipsis;
 		}
 		.load-info.fast .value {
 			color: $atlantis;

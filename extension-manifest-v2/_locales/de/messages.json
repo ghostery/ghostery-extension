@@ -456,10 +456,10 @@
 		"message": "Navigieren Sie zu einer anderen Seite und ich verspreche, dass ich liefern werde."
 	},
 	"summary_trust_site": {
-		"message": "Website vertrauen"
+		"message": "Tracker entsperren"
 	},
 	"summary_restrict_site": {
-		"message": "Website nicht vertrauen"
+		"message": "Tracker blockieren"
 	},
 	"summary_undo": {
 		"message": "Rückgängig machen"
@@ -856,7 +856,7 @@
 		"message": "Nie"
 	},
 	"settings_seconds": {
-		"message": "Sekunden"
+		"message": "Sek."
 	},
 	"settings_hide_alert_trusted": {
 		"message": "Lila Box auf vertrauenswürdigen Websites verbergen"
