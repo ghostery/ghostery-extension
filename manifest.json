@@ -30,6 +30,9 @@
 			"js": [
 				"dist/ghostery_dot_com.js"
 			],
+			"css": [
+				"dist/css/ghostery_dot_com_css.css"
+			],
 			"matches": [
 				"https://www.ghostery.com/*",
 				"https://apps.ghostery.com/*",
