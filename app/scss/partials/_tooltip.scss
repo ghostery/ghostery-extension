@@ -117,3 +117,14 @@
 		}
 	}
 }
+
+.gx-tooltip {
+	@extend .g-tooltip;
+	.tooltip-content.top {
+		bottom: 100%;
+	}
+	.tooltip-content.right {
+		margin-left: 0 !important;
+	}
+}
+

@@ -392,54 +392,55 @@ class Summary extends React.Component {
 					<div className="columns">
 						<div id="cliqz-controls">
 							<div className="row text-center">
-								<div className="columns medium-4">
-									<button value="antiTrackBtn" onClick={this.openDrawer} className={`${(this.state.disableBlocking || this.props.paused_blocking || this.props.sitePolicy !== false || IS_CLIQZ ? 'disabled' : '')} ${(this.props.enable_anti_tracking ? 'active' : '')} button controls-trust cliqz-control-btn anti-track-btn g-tooltip`} >
-										<Tooltip
-											header={t('tooltip_anti_track')}
-											body={showBody && t('tooltip_anti_track_body')}
-											position={`${showBody ? 'top' : 'right'} top-right`}
-										/>
+								<div className="columns medium-4 gx-tooltip">
+									<Tooltip 
+										header={t('tooltip_anti_track')}
+										body={showBody && t('tooltip_anti_track_body')}
+										position={`${showBody ? 'top' : 'right'} top-right`}
+									/>
+									<button value="antiTrackBtn" onClick={this.openDrawer} className={`${(this.state.disableBlocking || this.props.paused_blocking || this.props.sitePolicy !== false || IS_CLIQZ ? 'disabled' : '')} ${(this.props.enable_anti_tracking ? 'active' : '')} button controls-trust cliqz-control-btn anti-track-btn`} >
 									</button>
 								</div>
-								<div className="columns medium-4">
-									<button value="adBlockBtn" onClick={this.openDrawer} className={`${(this.state.disableBlocking || this.props.paused_blocking || this.props.sitePolicy !== false || IS_CLIQZ ? 'disabled' : '')} ${(this.props.enable_ad_block ? 'active' : '')} button controls-restrict cliqz-control-btn ad-block-btn g-tooltip`}>
-										<Tooltip
-											header={t('tooltip_ad_block')}
-											body={showBody && t('tooltip_ad_block_body')}
-											position={showBody ? 'top' : 'right'}
-										/>
+								<div className="columns medium-4 gx-tooltip">
+									<Tooltip
+										header={t('tooltip_ad_block')}
+										body={showBody && t('tooltip_ad_block_body')}
+										position={showBody ? 'top' : 'right'}
+									/>
+									<button value="adBlockBtn" onClick={this.openDrawer} className={`${(this.state.disableBlocking || this.props.paused_blocking || this.props.sitePolicy !== false || IS_CLIQZ ? 'disabled' : '')} ${(this.props.enable_ad_block ? 'active' : '')} button controls-restrict cliqz-control-btn ad-block-btn`}>
 									</button>
 								</div>
-								<div className="columns medium-4">
-									<button value="smartBlockBtn" onClick={this.openDrawer} className={`${(this.state.disableBlocking || this.props.paused_blocking || this.props.sitePolicy !== false ? 'disabled' : '')} ${(this.props.enable_smart_block ? 'active' : '')} button controls-pause cliqz-control-btn smart-block-btn g-tooltip`}>
-										<Tooltip
-											header={t('tooltip_smart_block')}
-											body={showBody && t('tooltip_smart_block_body')}
-											position={`${showBody ? 'top' : 'right'} top-left`}
-										/>
+								<div className="columns medium-4 gx-tooltip">
+									<Tooltip
+										header={t('tooltip_smart_block')}
+										body={showBody && t('tooltip_smart_block_body')}
+										position={`${showBody ? 'top' : 'right'} top-left`}
+									/>
+									<button value="smartBlockBtn" onClick={this.openDrawer} className={`${(this.state.disableBlocking || this.props.paused_blocking || this.props.sitePolicy !== false ? 'disabled' : '')} ${(this.props.enable_smart_block ? 'active' : '')} button controls-pause cliqz-control-btn smart-block-btn`}>
 									</button>
 								</div>
 							</div>
 						</div>
 						<div id="ghostery-controls">
 							<div className="row align-center text-center">
-								<div className="columns shrink">
-									<button onClick={this.clickSitePolicy} className={`${(this.state.disableBlocking || this.props.paused_blocking ? 'disabled' : '')} ${(this.props.sitePolicy === 2 ? 'active' : '')} button hollow blocking-controls controls-trust g-tooltip`}>
+								<div className="columns shrink g-tooltip">
+									<Tooltip header={t('tooltip_trust')} position={showBody ? 'top' : 'right'} />
+									<button onClick={this.clickSitePolicy} className={`${(this.state.disableBlocking || this.props.paused_blocking ? 'disabled' : '')} ${(this.props.sitePolicy === 2 ? 'active' : '')} button hollow blocking-controls controls-trust`}>
 										<div className="icon" />
 										<span className="title">{ t('summary_trust_site') }</span>
 										<span className="undo">{ t('summary_undo') }</span>
-										<Tooltip header={t('tooltip_trust')} position={showBody ? 'top' : 'right'} />
-									</button>
-								</div>
-								<div className="columns shrink">
-									<button onClick={this.clickSitePolicy} className={`${(this.state.disableBlocking || this.props.paused_blocking ? 'disabled' : '')} ${(this.props.sitePolicy === 1 ? 'active' : '')} button hollow blocking-controls controls-restrict g-tooltip`}>
-										<div className="icon" />
-										<span className="title">{ t('summary_restrict_site') }</span>
-										<span className="undo">{ t('summary_undo') }</span>
-										<Tooltip header={t('tooltip_restrict')} position={showBody ? 'top' : 'right'} />
 									</button>
 								</div>
 								<div className="columns shrink g-tooltip">
+									<Tooltip header={t('tooltip_restrict')} position={showBody ? 'top' : 'right'} />
+									<button onClick={this.clickSitePolicy} className={`${(this.state.disableBlocking || this.props.paused_blocking ? 'disabled' : '')} ${(this.props.sitePolicy === 1 ? 'active' : '')} button hollow blocking-controls controls-restrict`}>
+										<div className="icon" />
+										<span className="title">{ t('summary_restrict_site') }</span>
+										<span className="undo">{ t('summary_undo') }</span>
+									</button>
+								</div>
+								<div className="columns shrink g-tooltip">
+									<Tooltip header={this.props.paused_blocking ? t('tooltip_resume') : t('tooltip_pause')} position={showBody ? 'top' : 'right'} />
 									<SelectButton
 										active={this.props.paused_blocking}
 										iconClass="icon"
@@ -449,7 +450,6 @@ class Summary extends React.Component {
 										menuItems={this.pauseOptions}
 										selectedItemValue={this.props.paused_blocking_timeout / 60000}
 									>
-										<Tooltip header={this.props.paused_blocking ? t('tooltip_resume') : t('tooltip_pause')} position={showBody ? 'top' : 'right'} />
 									</SelectButton>
 								</div>
 							</div>
