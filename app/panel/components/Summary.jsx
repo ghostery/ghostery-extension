@@ -302,7 +302,8 @@ class Summary extends React.Component {
 	 */
 	render() {
 		const showBody = (!this.props.is_expanded || !this.props.is_expert);
-
+		const buttonDisabled = (this.state.disableBlocking || this.props.paused_blocking || this.props.sitePolicy !== false);
+		const alertText = this.props.paused_blocking ? t('enable_when_paused') : (this.props.sitePolicy === 1) ? t('enable_when_blacklisted') : (this.props.sitePolicy === 2) ? t('enable_when_whitelisted') : this.props.siteNotScanned ? t('enable_when_not_scanned') : '';
 		const getTooltipClass = () => ((!this.props.is_expert && 'top')
 				|| ((this.props.is_expert && this.props.is_expanded) && 'right'));
 
@@ -397,6 +398,9 @@ class Summary extends React.Component {
 										header={t('tooltip_anti_track')}
 										body={showBody && t('tooltip_anti_track_body')}
 										position={`${showBody ? 'top' : 'right'} top-right`}
+										showNotification={this.props.actions.showNotification}
+										disabled={IS_CLIQZ || buttonDisabled}
+										alertText={alertText}
 									/>
 									<button value="antiTrackBtn" onClick={this.openDrawer} className={`${(this.state.disableBlocking || this.props.paused_blocking || this.props.sitePolicy !== false || IS_CLIQZ ? 'disabled' : '')} ${(this.props.enable_anti_tracking ? 'active' : '')} button controls-trust cliqz-control-btn anti-track-btn`} />
 								</div>
@@ -405,6 +409,9 @@ class Summary extends React.Component {
 										header={t('tooltip_ad_block')}
 										body={showBody && t('tooltip_ad_block_body')}
 										position={showBody ? 'top' : 'right'}
+										showNotification={this.props.actions.showNotification}
+										disabled={IS_CLIQZ || buttonDisabled}
+										alertText={alertText}
 									/>
 									<button value="adBlockBtn" onClick={this.openDrawer} className={`${(this.state.disableBlocking || this.props.paused_blocking || this.props.sitePolicy !== false || IS_CLIQZ ? 'disabled' : '')} ${(this.props.enable_ad_block ? 'active' : '')} button controls-restrict cliqz-control-btn ad-block-btn`} />
 								</div>
@@ -413,6 +420,9 @@ class Summary extends React.Component {
 										header={t('tooltip_smart_block')}
 										body={showBody && t('tooltip_smart_block_body')}
 										position={`${showBody ? 'top' : 'right'} top-left`}
+										showNotification={this.props.actions.showNotification}
+										disabled={buttonDisabled}
+										alertText={alertText}
 									/>
 									<button value="smartBlockBtn" onClick={this.openDrawer} className={`${(this.state.disableBlocking || this.props.paused_blocking || this.props.sitePolicy !== false ? 'disabled' : '')} ${(this.props.enable_smart_block ? 'active' : '')} button controls-pause cliqz-control-btn smart-block-btn`} />
 								</div>

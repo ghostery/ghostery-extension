@@ -201,8 +201,10 @@ const _showNotification = (state, action) => {
 		}
 
 		updated_notificationClasses = msg.classes;
+		if (msg.filter === 'tooltip') {
+			updated_needsReload.changes = {};
+		}
 	}
-
 	return {
 		needsReload: updated_needsReload,
 		notificationClasses: updated_notificationClasses,
