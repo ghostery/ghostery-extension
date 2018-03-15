@@ -55,6 +55,9 @@ class Tooltip extends React.Component {
 	 */
 	enter = () => {
 		this.setState({ show: true });
+		if (this.props.disabled && this.props.showNotification) {
+			this.props.showNotification({ text: this.props.alertText, classes: 'warning', filter: 'tooltip' });
+		}
 	}
 	/**
 	 * Implement handler for mouseleave event and hide the tooltip.
