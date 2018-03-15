@@ -1485,5 +1485,17 @@
 	},
 	"setup_upgrade_button_go": {
 		"message": "Set Me Up"
+	},
+	"enable_when_paused": {
+		"message": "To execute this function, please resume Ghostery."
+	},
+	"enable_when_whitelisted": {
+		"message": "To execute this function, please undo Trust site."
+	},
+	"enable_when_blacklisted": {
+		"message": "To execute this function, please undo Restrict site."
+	},
+	"enable_when_not_scanned": {
+		"message": "To execute this function, please navigate to a site which can be scanned."
 	}
 }
