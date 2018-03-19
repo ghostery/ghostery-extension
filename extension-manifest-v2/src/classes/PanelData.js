@@ -250,7 +250,7 @@ class PanelData {
 			enable_human_web: this._confData.get('enable_human_web'),
 			enable_offers: this._confData.get('enable_offers'),
 			enable_metrics: this._confData.get('enable_metrics'),
-			enable_metrics_abtest: abtest.hasTest('offers'),
+			enable_offers_abtest: abtest.hasTest('offers'),
 			first_name: this._confData.get('first_name'),
 			last_name: this._confData.get('last_name'),
 			hide_alert_trusted: this._confData.get('hide_alert_trusted'),
