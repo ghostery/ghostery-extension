@@ -1281,25 +1281,9 @@ function initializeGhosteryModules() {
 			if (globals.JUST_UPGRADED_FROM_7) {
 				conf.enable_ad_block = false;
 				conf.enable_anti_tracking = false;
-				setCliqzModuleEnabled(antitracking, conf.enable_anti_tracking)
-					.catch((err) => {
-						if (err !== true) {
-							log('ANTITRACKING ERROR:', err, conf.enable_anti_tracking);
-						}
-					});
-				setCliqzModuleEnabled(adblocker, conf.enable_ad_block)
-					.catch((err) => {
-						if (err !== true) {
-							log('ADBLOKER ERROR:', err, conf.enable_anti_tracking);
-						}
-					});
-
-				setCliqzModuleEnabled(humanweb, IS_EDGE ? false : conf.enable_human_web)
-					.catch((err) => {
-						if (err !== true) {
-							log('HUMANWEB ERROR:', err, conf.enable_anti_tracking);
-						}
-					});
+				setCliqzModuleEnabled(antitracking, conf.enable_anti_tracking);
+				setCliqzModuleEnabled(adblocker, conf.enable_ad_block);
+				setCliqzModuleEnabled(humanweb, IS_EDGE ? false : conf.enable_human_web);
 			} else {
 				conf.enable_ad_block = !adblocker.isDisabled;
 				conf.enable_anti_tracking = !antitracking.isDisabled;
