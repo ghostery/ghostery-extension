@@ -87,7 +87,8 @@ function setCliqzModuleEnabled(module, enabled) {
 		return cliqz.enableModule(module.name);
 	} else if (!enabled && module.isEnabled) {
 		log('SET CLIQZ MODULE DISABLED', module);
-		return module.isReady().then(() => cliqz.disableModule(module.name));
+		cliqz.disableModule(module.name);
+		return Promise.resolve();
 	}
 	log('MODULE IS ALREADY IN CORRECT STATE', module, enabled);
 	return Promise.resolve(CORRECT_STATE);
