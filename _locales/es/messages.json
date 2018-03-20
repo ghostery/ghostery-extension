@@ -1422,7 +1422,7 @@
 		"message": "¿Qué novedades hay?"
 	},
 	"panel_help_setup": {
-		"message": "Set Up Ghostery"
+		"message": "Configurar Ghostery"
 	},
 	"global_settings_saved": {
 		"message": "Ajustes globales guardados"
@@ -1481,5 +1481,8 @@
 				"content": "</a>"
 			}
 		}
-	}		
+	},
+	"panel_about_release_notes": {
+		"message": "Consulte las notas de lantamiento para todas las actualizaciones"
+	}
 }

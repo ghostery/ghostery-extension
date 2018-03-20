@@ -1422,7 +1422,7 @@
 		"message": "有什么新变化？"
 	},
 	"panel_help_setup": {
-		"message": "Set Up Ghostery"
+		"message": "设置 Ghostery"
 	},
 	"global_settings_saved": {
 		"message": "全局设置已保存"
@@ -1481,5 +1481,8 @@
 				"content": "</a>"
 			}
 		}
-	}		
+	},
+	"panel_about_release_notes": {
+		"message": "查看所有更新的版本说明"
+	}
 }

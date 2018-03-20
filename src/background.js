@@ -1299,23 +1299,8 @@ function initializeGhosteryModules() {
 	if (IS_EDGE) {
 		setCliqzModuleEnabled(hpn, false);
 	}
-	cliqzStartup.then(() => {
-		if (!IS_EDGE) {
-			abtest.fetch().then(() => {
-				setupABTests();
-			}).catch((err) => {
-				log('cliqzStartup abtest fetch error', err);
-			});
-		}
-	});
 
-	// record active ping
-	metrics.ping('active');
-
-	// init the CMP
-	cmp.fetchCMPData();
-
-	// Set these tasks to run every 30min
+	// Set these tasks to run every hour
 	function scheduledTasks() {
 		// auto-fetch from CMP
 		cmp.fetchCMPData();
@@ -1328,12 +1313,27 @@ function initializeGhosteryModules() {
 				log('Unable to reach abtest server');
 			});
 		}
-
-		// auto-update bugs dbs
-		autoUpdateBugDb();
 	}
-	scheduledTasks();
-	setInterval(scheduledTasks, 1800000);
+
+	cliqzStartup.then(() => {
+		if (!IS_EDGE) {
+			abtest.fetch().then(() => {
+				setupABTests();
+			}).catch((err) => {
+				log('cliqzStartup abtest fetch error', err);
+			});
+		}
+	});
+
+	// Check CMP right away.
+	cmp.fetchCMPData();
+	// Check CMP and ABTest every hour.
+	setInterval(scheduledTasks, 3600000);
+
+	// Update db right away.
+	autoUpdateBugDb();
+	// Schedule it to run every 30 min.
+	setInterval(autoUpdateBugDb, 1800000);
 
 	// listen for changes to specific conf properties
 	initializeDispatcher();
@@ -1347,6 +1347,8 @@ function initializeGhosteryModules() {
 		button.update(tabId);
 	});
 
+	// record active ping
+	metrics.ping('active');
 	// initialize all tracker and surrogate DBs in parallel with Promise.all
 	return Promise.all([
 		bugDb.init(globals.JUST_UPGRADED),
