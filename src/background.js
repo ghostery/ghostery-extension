@@ -71,9 +71,8 @@ const { adblocker, antitracking, hpn } = cliqz.modules;
 const messageCenter = cliqz.modules['message-center'];
 const offers = cliqz.modules['offers-v2'];
 
-log('MODULES', cliqz.modules);
-
 const CORRECT_STATE = 'CorrectState';
+
 /**
  * Enable or disable specified module.
  * @memberOf Background
