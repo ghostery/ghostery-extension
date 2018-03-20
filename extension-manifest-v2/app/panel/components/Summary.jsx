@@ -396,22 +396,22 @@ class Summary extends React.Component {
 								<div className="columns medium-4 gx-tooltip">
 									<Tooltip
 										header={t('tooltip_anti_track')}
-										body={showBody && t('tooltip_anti_track_body')}
+										body={showBody && (IS_CLIQZ ? t('tooltip_body_in_cliqz') : t('tooltip_anti_track_body'))}
 										position={`${showBody ? 'top' : 'right'} top-right`}
 										showNotification={this.props.actions.showNotification}
 										disabled={IS_CLIQZ || buttonDisabled}
-										alertText={alertText}
+										alertText={IS_CLIQZ ? '' : alertText}
 									/>
 									<button value="antiTrackBtn" onClick={this.openDrawer} className={`${(this.state.disableBlocking || this.props.paused_blocking || this.props.sitePolicy !== false || IS_CLIQZ ? 'disabled' : '')} ${(this.props.enable_anti_tracking ? 'active' : '')} button controls-trust cliqz-control-btn anti-track-btn`} />
 								</div>
 								<div className="columns medium-4 gx-tooltip">
 									<Tooltip
 										header={t('tooltip_ad_block')}
-										body={showBody && t('tooltip_ad_block_body')}
+										body={showBody && (IS_CLIQZ ? t('tooltip_body_in_cliqz') : t('tooltip_ad_block_body'))}
 										position={showBody ? 'top' : 'right'}
 										showNotification={this.props.actions.showNotification}
 										disabled={IS_CLIQZ || buttonDisabled}
-										alertText={alertText}
+										alertText={IS_CLIQZ ? '' : alertText}
 									/>
 									<button value="adBlockBtn" onClick={this.openDrawer} className={`${(this.state.disableBlocking || this.props.paused_blocking || this.props.sitePolicy !== false || IS_CLIQZ ? 'disabled' : '')} ${(this.props.enable_ad_block ? 'active' : '')} button controls-restrict cliqz-control-btn ad-block-btn`} />
 								</div>
