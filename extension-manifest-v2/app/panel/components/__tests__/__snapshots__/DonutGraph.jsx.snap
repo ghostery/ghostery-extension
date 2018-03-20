@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the initial state correctly 1`] = `
+<div
+  className="sub-component donut-graph big"
+>
+  <div
+    className="tooltip-container"
+  >
+    <span
+      className="tooltip top"
+      id="advertising_tooltip"
+    >
+      Advertising
+    </span>
+    <span
+      className="tooltip top"
+      id="customer_interaction_tooltip"
+    >
+      Customer Interaction
+    </span>
+    <span
+      className="tooltip top"
+      id="site_analytics_tooltip"
+    >
+      Site Analytics
+    </span>
+  </div>
+  <div
+    className="graph-ref"
+  />
+  <div
+    className="graph-text clickable"
+    onClick={[Function]}
+  >
+    <div
+      className="graph-text-count"
+    >
+      3
+    </div>
+    <div
+      className="graph-text-trackers"
+    >
+      Trackers
+      <div
+        className="show-on-big"
+      >
+        Found
+      </div>
+    </div>
+  </div>
+</div>
+`;

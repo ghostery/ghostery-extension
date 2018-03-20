@@ -5,7 +5,7 @@
  * https://www.ghostery.com/
  *
  * Copyright 2018 Ghostery, Inc. All rights reserved.
- * 
+ *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
@@ -17,6 +17,7 @@
 	.tooltip-content {
 		color: #4a4a4a;
 		font-size: 11px;
+		line-height: 1.5;
 		padding: 11px 10px;
 		width: 150px;
 		background-color: $mystic;

@@ -1,5 +1,5 @@
 /**
- * Drawer Component
+ * Panel Component
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -14,7 +14,6 @@
 import React, { Component } from 'react';
 import URLSearchParams from 'url-search-params';
 import Header from '../containers/HeaderContainer';
-import Drawer from '../containers/DrawerContainer';
 import { sendMessage } from '../utils/msg';
 /**
  * @class Implement base view with functionality common to all views.
@@ -149,14 +148,6 @@ class Panel extends React.Component {
 				</div>
 				<Header />
 				{ this.props.children }
-				{ this.props.drawerIsOpen &&
-					<Drawer
-						smartBlock={this.props.smartBlock}
-						enable_anti_tracking={this.props.enable_anti_tracking}
-						enable_ad_block={this.props.enable_ad_block}
-						enable_smart_block={this.props.enable_smart_block}
-					/>
-				}
 			</div>
 		);
 	}

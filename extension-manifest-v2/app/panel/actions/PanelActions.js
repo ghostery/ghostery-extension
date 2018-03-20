@@ -13,6 +13,7 @@
 
 import { GET_PANEL_DATA, GET_SUMMARY_DATA, GET_BLOCKING_DATA,
 	SHOW_NOTIFICATION,
+	TOGGLE_CLIQZ_FEATURE,
 	CLOSE_NOTIFICATION,
 	LOGIN_SUCCESS, LOGIN_FAILED,
 	LOGOUT,
@@ -24,6 +25,22 @@ import globals from '../../../src/classes/Globals';
 import { decodeJwt, log } from '../../../src/utils/common';
 
 const API_ROOT_URL = `https://consumerapi.${globals.GHOSTERY_DOMAIN}.com`;
+
+/**
+ * Update Cliqz Features.
+ * @return {Object}
+ */
+export function toggleCliqzFeature(featureName, isEnabled) {
+	const data = {
+		featureName,
+		isEnabled,
+	};
+	return {
+		type: TOGGLE_CLIQZ_FEATURE,
+		data,
+	};
+}
+
 
 /**
  * Fetch panel data from background, only on the initial load. Returns combined

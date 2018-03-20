@@ -21,7 +21,7 @@ import { GET_PANEL_DATA,
 	CREATE_ACCOUNT_SUCCESS,
 	TOGGLE_EXPANDED,
 	TOGGLE_EXPERT,
-	TOGGLE_DRAWER_SETTING,
+	TOGGLE_CLIQZ_FEATURE,
 	UPDATE_NOTIFICATION_STATUS } from '../constants/constants';
 import { sendMessage } from '../utils/msg';
 
@@ -93,9 +93,9 @@ export default (state = initialState, action) => {
 				decoded_user_token: action.data.decoded_user_token,
 			});
 		}
-		case TOGGLE_DRAWER_SETTING: {
+		case TOGGLE_CLIQZ_FEATURE: {
 			let pingName = '';
-			switch (action.data.settingName) {
+			switch (action.data.featureName) {
 				case 'enable_anti_tracking':
 					pingName = action.data.isEnabled ? 'antitrack_off' : 'antitrack_on';
 					break;
@@ -111,8 +111,8 @@ export default (state = initialState, action) => {
 			if (pingName) {
 				sendMessage('ping', pingName);
 			}
-			sendMessage('setPanelData', { [action.data.settingName]: !action.data.isEnabled });
-			return Object.assign({}, state, { [action.data.settingName]: !action.data.isEnabled });
+			sendMessage('setPanelData', { [action.data.featureName]: !action.data.isEnabled });
+			return Object.assign({}, state, { [action.data.featureName]: !action.data.isEnabled });
 		}
 		case TOGGLE_EXPANDED: {
 			sendMessage('setPanelData', { is_expanded: !state.is_expanded });

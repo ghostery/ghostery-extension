@@ -1,0 +1,108 @@
+/**
+ * Cliqz Features Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+@function buildIconAntiTracking($stroke-color) {
+	@return url('data:image/svg+xml;charset=US-ASCII,<svg width="50px" height="50px" viewBox="0 0 50 50" xmlns="http%3A//www.w3.org/2000/svg"><g><circle stroke="#{$stroke-color}" stroke-width="2" fill="none" cx="25" cy="25" r="23"/><path stroke="#{$stroke-color}" stroke-width="2" fill="none" d="M25.2126964,15.0320852 C25.0849696,14.9893049 24.9150304,14.9893049 24.7873036,15.0320852 L15.6383616,17.4588294 C15.2554536,17.5438445 15,17.8844498 15,18.2675625 C15.0427571,24.7818425 18.5319589,30.8274493 24.53185,34.8722049 C24.6595767,34.95722 24.8297884,35 25,35 C25.1702116,35 25.3404233,34.95722 25.46815,34.8722049 C31.4680411,30.8274493 34.9572429,24.7818425 35,18.2675625 C35,17.8844498 34.7445464,17.5438445 34.3616384,17.4588294 L25.2126964,15.0320852 Z"/></g></svg>');
+}
+
+@function buildIconAdBlocking($stroke-color) {
+	@return url('data:image/svg+xml;charset=US-ASCII,<svg width="50px" height="50px" viewBox="0 0 50 50" xmlns="http%3A//www.w3.org/2000/svg"><g><circle stroke="#{$stroke-color}" stroke-width="2" fill="none" cx="25" cy="25" r="23"/><path stroke="#{$stroke-color}" stroke-width="2" fill="none" fill-rule="nonzero" transform="translate(14,14)" d="M14.873 1.312l-7.973.07-5.588 5.686.07 7.973 5.686 5.589 7.973-.07 5.589-5.687-.07-7.973-5.687-5.588z"/><path stroke="#{$stroke-color}" stroke-width="2" d="M31.5,18.5 L18.5,31.5"/></g></svg>');
+}
+
+@function buildIconSmartBlocking($stroke-color) {
+	@return url('data:image/svg+xml;charset=US-ASCII,<svg width="50px" height="50px" viewBox="0 0 50 50" xmlns="http%3A//www.w3.org/2000/svg"><g><circle stroke="#{$stroke-color}" stroke-width="2" fill="none" cx="25" cy="25" r="23"/><path fill="#{$stroke-color}" d="M31.9766215,20.2390509 C31.8801207,21.9165559 31.2802076,23.3962344 30.3232416,24.7536786 C29.8922048,25.3648501 29.456343,25.9711966 29.038173,26.5936266 C28.4414766,27.4814337 27.9637978,28.4255329 27.7804463,29.4918664 C27.7498877,29.6671761 27.6389118,29.6543094 27.5166775,29.6543094 C26.6755125,29.652701 25.8343474,29.652701 24.991574,29.652701 C24.1600591,29.652701 23.3285441,29.647876 22.4954208,29.6559177 C22.3136776,29.6575261 22.2493438,29.606059 22.2123518,29.4178825 C22.0145253,28.3869326 21.5545383,27.4637419 20.9707086,26.60006 C20.4737296,25.8666541 19.9558422,25.146115 19.4572548,24.4127092 C18.5501476,23.0826069 18.0756855,21.6109701 18.0113516,20.0010156 C17.8987674,17.1815848 19.4974635,14.7224235 22.1962684,13.5804977 C25.6542127,12.118511 29.7426286,13.5853227 31.3622332,16.8743907 C31.8833374,17.9358991 32.044172,19.0633498 31.9766215,20.2390509 Z M22.352278,32.3000388 L22.352278,31.6695671 L27.6566037,31.6695671 L27.6566037,32.3000388 L22.352278,32.3000388 Z M27.1113743,34.9811519 L22.895899,34.9811519 C22.3876616,34.9811519 22.2943775,34.8733927 22.3603197,34.3281634 L27.6405202,34.3281634 C27.7145041,34.865351 27.6180033,34.9811519 27.1113743,34.9811519 Z M33.3501491,16.4047536 C31.9010292,13.2363116 29.3839675,11.4767809 25.9646235,11.0698693 C23.0519085,10.7224665 20.5187633,11.6794325 18.4536468,13.7429406 C16.1488868,16.0493091 15.5956157,18.8671316 16.2646877,21.9841065 C16.6153071,23.6133611 17.4130468,25.0303141 18.3684045,26.3732832 C18.8058746,26.9908881 19.2369114,27.6165348 19.638998,28.2566565 C20.0105259,28.8501363 20.2742947,29.4982998 20.3000282,30.2027554 C20.3305868,31.0165786 20.30807,31.8304018 20.30807,32.6442249 L20.3402369,32.6442249 C20.3402369,33.3197303 20.3386285,33.9952357 20.3418452,34.6707411 C20.3482786,35.8753924 21.2939862,36.8918672 22.4922041,36.9706761 C22.649822,36.9819346 22.7028974,37.0269683 22.7414977,37.1845862 C22.9972248,38.242878 23.9268489,38.9746755 24.991574,38.9762838 C26.0772077,38.9778922 27.0003984,38.2541364 27.2657755,37.1781528 C27.2995508,37.0382267 27.3381511,36.9835429 27.490944,36.9722845 C28.7325872,36.8790004 29.6622113,35.8753924 29.665428,34.6353575 C29.665428,33.3776308 29.6750781,32.1199041 29.6622113,30.860569 C29.6509529,29.9196865 29.869688,29.0447462 30.3682753,28.2502232 C30.7703619,27.6101014 31.1997903,26.9828464 31.6420855,26.3700665 C32.9046372,24.6137525 33.7972694,22.7175123 33.9645374,20.5269448 C34.0739049,19.1035585 33.9468456,17.7107307 33.3501491,16.4047536 Z"/><path stroke="#{$stroke-color}" stroke-width="1.5" fill="none" d="M25.0957134,18.2144383 C25.0382363,18.1951872 24.9617637,18.1951872 24.9042866,18.2144383 L20.7872627,19.3064732 C20.6149541,19.34473 20.5,19.4980024 20.5,19.6704031 C20.5192407,22.6018291 22.0893815,25.3223522 24.7893325,27.1424922 C24.8468095,27.180749 24.9234048,27.2 25,27.2 C25.0765952,27.2 25.1531905,27.180749 25.2106675,27.1424922 C27.9106185,25.3223522 29.4807593,22.6018291 29.5,19.6704031 C29.5,19.4980024 29.3850459,19.34473 29.2127373,19.3064732 L25.0957134,18.2144383 Z"/></g></svg>');
+}
+
+@function buildIconDash($stroke-color) {
+	@return url('data:image/svg+xml;charset=US-ASCII,<svg width="15px" height="10px" viewBox="0 0 10 10" xmlns="http%3A//www.w3.org/2000/svg"><g><path stroke="#{$stroke-color}" stroke-width="4" d="M0,5 L10,5"/></g></svg>');
+}
+
+.sub-component.cliqz-features {
+	.cliqz-feature {
+		display: inline-block;
+		width: 150px;
+		margin: 0 10px;
+	}
+	&.condensed .cliqz-feature {
+		width: 55px;
+		margin: 0 10px;
+	}
+
+	.count {
+		color: rgba(#c8c7c2, 0);
+		text-align: center;
+		font-size: 14px;
+		line-height: 28px;
+		font-weight: 600;
+		transition: color 0.25s ease-out;
+
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: 15px 10px;
+		transition: background-image 0.25s ease-out;
+		background-image: buildIconDash(#c8c7c2);
+	}
+	.active .count {
+		color: #1dafed;
+		background: none;
+	}
+	&.inactive .count {
+		color: rgba(#dedede, 0);
+		background-image: buildIconDash(#dedede);
+	}
+	&.inactive .active .count {
+		color: #a4d4f2;
+		background: none;
+	}
+
+	.icon {
+		margin: 0 auto;
+		height: 50px;
+		width: 50px;
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: 50px 50px;
+		transition: background-image 0.25s ease-out;
+	}
+	.anti-tracking .icon { background-image: buildIconAntiTracking(#c8c7c2); }
+	.active.anti-tracking .icon { background-image: buildIconAntiTracking(#1dafed); }
+	&.inactive .anti-tracking .icon { background-image: buildIconAntiTracking(#dedede); }
+	&.inactive .active.anti-tracking .icon { background-image: buildIconAntiTracking(#a4d4f2); }
+
+	.ad-blocking .icon { background-image: buildIconAdBlocking(#c8c7c2); }
+	.active.ad-blocking .icon { background-image: buildIconAdBlocking(#1dafed); }
+	&.inactive .ad-blocking .icon { background-image: buildIconAdBlocking(#dedede); }
+	&.inactive .active.ad-blocking .icon { background-image: buildIconAdBlocking(#a4d4f2); }
+
+	.smart-blocking .icon { background-image: buildIconSmartBlocking(#c8c7c2); }
+	.active.smart-blocking .icon { background-image: buildIconSmartBlocking(#1dafed); }
+	&.inactive .smart-blocking .icon { background-image: buildIconSmartBlocking(#dedede); }
+	&.inactive .active.smart-blocking .icon { background-image: buildIconSmartBlocking(#a4d4f2); }
+
+	.feature-name {
+		color: #c8c7c2;
+		text-align: center;
+		font-size: 11px;
+		line-height: 26px;
+		font-weight: 600;
+		transition: color 0.25s ease-out;
+
+		white-space: nowrap;
+		overflow-x: hidden;
+		text-overflow: ellipsis;
+	}
+	.active .feature-name { color: #1dafed; }
+	&.inactive .feature-name { color: #dedede; }
+	&.inactive .active .feature-name { color: #a4d4f2; }
+	&.condensed .feature-name { display: none; }
+}

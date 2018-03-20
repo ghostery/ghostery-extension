@@ -1,0 +1,124 @@
+/**
+ * Ghostery Features Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+@function buildIconTrust($stroke-color) {
+	@return url('data:image/svg+xml;charset=US-ASCII,<svg width="14" height="14" viewBox="0 0 14 14" xmlns="http%3A//www.w3.org/2000/svg"><g stroke="#{$stroke-color}" fill="none"><circle cx="7" cy="7" r="6" stroke-width="2"/></g></svg>');
+}
+
+@function buildIconRestrict($stroke-color) {
+	@return url('data:image/svg+xml;charset=US-ASCII,<svg width="14" height="14" viewBox="0 0 14 14" xmlns="http%3A//www.w3.org/2000/svg"><g stroke="#{$stroke-color}" fill="none"><circle cx="7" cy="7" r="6" stroke-width="2"/><path d="M3,3 L11,11" stroke-width="2"/></g></svg>');
+}
+
+.sub-component.ghostery-features {
+	.button {
+		width: 150px;
+		height: 45px;
+		font-size: 11px;
+		line-height: 1.5;
+		color: #4a4a4a;
+		border-color: #cccccc;
+		background-color: #ffffff;
+		margin-bottom: 0;
+
+		transition: background-image 0.25s ease-out,
+			background-color 0.25s ease-out,
+			border-color 0.25s ease-out,
+			color 0.25s ease-out;
+	}
+	.button.active {
+		color: #ffffff;
+		border-color: #1dafed;
+		background-color: #1dafed;
+	}
+
+	.full-height { height: 100%; }
+	.button-trust .button-text,
+	.button-restrict .button-text {
+		padding: 0 10px 0 30px;
+		background-repeat: no-repeat;
+		background-position: 0 center;
+		background-size: 14px 14px;
+	}
+	.button-trust .button-text {
+		background-image: buildIconTrust(#4a4a4a);
+	}
+	.button-trust.active .button-text {
+		background-image: buildIconTrust(#ffffff);
+	}
+	.button-restrict .button-text {
+		background-image: buildIconRestrict(#4a4a4a);
+	}
+	.button-restrict.active .button-text {
+		background-image: buildIconRestrict(#ffffff);
+	}
+
+	.button-group.inactive {
+		.button {
+			color: #a4a4a4;
+			border-color: #e5e5e5;
+			background-color: #ffffff;
+		}
+		.button.active {
+			color: #ffffff;
+			border-color: #a4d4f2;
+			background-color: #a4d4f2;
+		}
+		.button-trust .button-text {
+			background-image: buildIconTrust(#a4a4a4);
+		}
+		.button-trust.active .button-text {
+			background-image: buildIconTrust(#ffffff);
+		}
+		.button-restrict .button-text {
+			background-image: buildIconRestrict(#a4a4a4);
+		}
+		.button-restrict.active .button-text {
+			background-image: buildIconRestrict(#ffffff);
+		}
+	}
+
+	.button-group.stacked .button {
+		height: 35px;
+		margin-bottom: 0;
+	}
+	.button-group.stacked {
+		margin-bottom: 16px;
+	}
+
+	.button-top {
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+		border-bottom: 0;
+	}
+	.button-left {
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+		border-right: 0;
+	}
+	.button-center {
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+	.button-bottom {
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+		border-top: 0;
+	}
+	.button-right {
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+		border-left: 0;
+	}
+}
