@@ -200,6 +200,7 @@ function getSiteData() {
 
 			if (!tab) {
 				reject(new Error('Tab not found. Cannot gather page data'));
+				return;
 			}
 
 			resolve({
