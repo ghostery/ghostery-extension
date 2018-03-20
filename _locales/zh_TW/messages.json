@@ -1422,7 +1422,7 @@
 		"message": "最新動態。"
 	},
 	"panel_help_setup": {
-		"message": "Set Up Ghostery"
+		"message": "安裝 Ghostery"
 	},
 	"global_settings_saved": {
 		"message": "全球設定已儲存"
@@ -1481,5 +1481,8 @@
 				"content": "</a>"
 			}
 		}
-	}		
+	},
+	"panel_about_release_notes": {
+		"message": "閱讀發佈說明以了解所有更新"
+	}
 }

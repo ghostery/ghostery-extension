@@ -69,6 +69,10 @@ body {
 }
 
 #setup-page {
+	//Don't show blue border on click
+	*:focus {
+	    outline: none;
+	}	
 	#header {
 		height: 53px;
 		color: $white;
