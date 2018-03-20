@@ -1146,6 +1146,9 @@
 	"tooltip_anti_track_body": {
 		"message": "Anonymize unblocked and unknown trackers for greater browsing protection."
 	},
+	"tooltip_body_in_cliqz": {
+		"message": "Feature already active in Cliqz by default."
+	},
 	"tooltip_ad_block": {
 		"message": "Enhanced Ad Blocking"
 	},
@@ -1487,15 +1490,15 @@
 		"message": "Set Me Up"
 	},
 	"enable_when_paused": {
-		"message": "To execute this function, please resume Ghostery."
+		"message": "To use this function, Resume Ghostery."
 	},
 	"enable_when_whitelisted": {
-		"message": "To execute this function, please undo Trust site."
+		"message": "To use this function, undo Trust Site"
 	},
 	"enable_when_blacklisted": {
-		"message": "To execute this function, please undo Restrict site."
+		"message": "To use this function, undo Restrict Site."
 	},
 	"enable_when_not_scanned": {
-		"message": "To execute this function, please navigate to a site which can be scanned."
+		"message": "To use this function, navigate to another page."
 	}
 }

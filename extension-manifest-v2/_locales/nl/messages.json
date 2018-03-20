@@ -1422,7 +1422,7 @@
 		"message": "Actueel"
 	},
 	"panel_help_setup": {
-		"message": "Set Up Ghostery"
+		"message": "Ghostery Instellen"
 	},
 	"global_settings_saved": {
 		"message": "Algemene Instellingen Opgeslagen"
@@ -1481,5 +1481,8 @@
 				"content": "</a>"
 			}
 		}
-	}		
+	},
+	"panel_about_release_notes": {
+		"message": "Bekijk release notes voor alle updates"
+	}
 }

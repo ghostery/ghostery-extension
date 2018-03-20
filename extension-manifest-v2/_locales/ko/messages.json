@@ -1422,7 +1422,7 @@
 		"message": "새로운 소식 "
 	},
 	"panel_help_setup": {
-		"message": "Set Up Ghostery"
+		"message": "Ghostery 설정 "
 	},
 	"global_settings_saved": {
 		"message": "전역 설정 저장됨"
@@ -1481,5 +1481,8 @@
 				"content": "</a>"
 			}
 		}
-	}		
+	},
+	"panel_about_release_notes": {
+		"message": "모든 업데이트 내용은 릴리스 노트를 참조하십시오 "
+	}
 }

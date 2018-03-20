@@ -1110,6 +1110,9 @@
 	"tooltip_anti_track_body": {
 		"message": "Anonymisieren Sie entsperrte und unbekannte Tracker für besseren Browsing-Schutz."
 	},
+	"tooltip_body_in_cliqz": {
+		"message": "Bereits als Standard in Cliqz aktiviert."
+	},
 	"tooltip_ad_block": {
 		"message": "Besserer Werbeblocker"
 	},
@@ -1422,7 +1425,7 @@
 		"message": "Was ist neu?"
 	},
 	"panel_help_setup": {
-		"message": "Set Up Ghostery"
+		"message": "Ghostery installieren"
 	},
 	"global_settings_saved": {
 		"message": "Globale Einstellungen gespeichert"
@@ -1461,7 +1464,7 @@
 		"message": "Meine Analysedaten teilen, um Ghostery noch leistungsstärker zu machen."
 	},
 	"setup_feature_active_in_cliqz": {
-		"message": "Diese Funktion ist in Cliqz bereits standardmäßig aktiviert. $LINK_START$Weitere Informationen$LINK_END$",
+		"message": "Bereits als Standard in Cliqz aktiviert. $LINK_START$Mehr erfahren.$LINK_END$",
 		"placeholders": {
 			"link_start": {
 				"content": "<a href=\"https://www.ghostery.com/faqs/what-are-the-new-ghostery-8-features/\" target=\"_blank\">"
@@ -1481,5 +1484,8 @@
 				"content": "</a>"
 			}
 		}
-	}		
+	},
+	"panel_about_release_notes": {
+		"message": "Release-Hinweise für alle Updates ansehen"
+	}
 }
