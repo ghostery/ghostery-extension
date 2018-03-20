@@ -13,8 +13,9 @@
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+
 /**
- * @class Implements tooltip component used throughout the views.
+ * @class Implements a Tooltip component that is used in many panel views.
  * @memberof PanelClasses
  */
 class Tooltip extends React.Component {
@@ -23,7 +24,13 @@ class Tooltip extends React.Component {
 		this.state = {
 			show: false,
 		};
+
+		// Event Bindings
+		this.delayHover = this.delayHover.bind(this);
+		this.enter = this.enter.bind(this);
+		this.leave = this.leave.bind(this);
 	}
+
 	/**
 	 * Lifecycle event. Set listeners.
 	 */
@@ -34,6 +41,7 @@ class Tooltip extends React.Component {
 		this.parentNode.addEventListener('mouseleave', this.leave);
 		this.parentNode.addEventListener('click', this.leave);
 	}
+
 	/**
 	 * Lifecycle event. Remove listeners.
 	 */
@@ -42,30 +50,34 @@ class Tooltip extends React.Component {
 		this.parentNode.removeEventListener('mouseleave', this.leave);
 		this.parentNode.removeEventListener('click', this.leave);
 	}
+
 	/**
-	 * Set 1 sec delay for showing the tooltip.
+	 * Implements mouseenter. Sets a 1 second delay for showing the tooltip.
 	 */
-	delayHover = (e) => {
+	delayHover() {
 		this.delay = setTimeout(() => {
 			this.enter();
 		}, 1000);
 	}
+
 	/**
-	 * Set tooltip show state.
+	 * Sets the state for Show.
 	 */
-	enter = () => {
+	enter() {
 		this.setState({ show: true });
 	}
+
 	/**
-	 * Implement handler for mouseleave event and hide the tooltip.
+	 * Implements mouseleave.
 	 */
-	leave = (e) => {
+	leave() {
 		clearTimeout(this.delay);
 		this.setState({ show: false });
 	}
+
 	/**
-	 * Render Tooltip component.
-	 * @return {ReactComponent} 	ReactComponent instance
+	 * React's required render function. Returns JSX
+	 * @return {JSX} JSX for rendering the Tooltip component
 	 */
 	render() {
 		return (

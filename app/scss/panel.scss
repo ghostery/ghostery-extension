@@ -8,7 +8,7 @@
  * https://www.ghostery.com/
  *
  * Copyright 2018 Ghostery, Inc. All rights reserved.
- * 
+ *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
@@ -50,6 +50,9 @@ html body {
 @import './partials/_help';
 @import './partials/_account';
 @import './partials/_drawer';
-@import './partials/_select_button';
+@import './partials/_pause_button';
+@import './partials/_donut_graph';
+@import './partials/_ghostery_features';
+@import './partials/_cliqz_features';
 @import './partials/_tooltip';
 @import './partials/_not_scanned';

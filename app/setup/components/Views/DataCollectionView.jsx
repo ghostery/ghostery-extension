@@ -61,7 +61,7 @@ class DataCollectionView extends Component {
 
 	/**
 	 * React's required render function. Returns JSX
-	 * @return {JSX} JSX for rendering the data collection view
+	 * @return {JSX} JSX for rendering the #data-collection step of the setup flow
 	 */
 	render() {
 		return (

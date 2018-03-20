@@ -1,0 +1,138 @@
+/**
+ * Pause Button Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+@function buildIconPause($stroke-color) {
+	@return url('data:image/svg+xml;charset=US-ASCII,<svg width="14" height="16" viewBox="0 0 14 16" xmlns="http%3A//www.w3.org/2000/svg"><g fill="#{$stroke-color}"><path d="M1,15 L4,15 L4,1 L1,1 L1,15 L1,15 Z M9,1 L9,15 L12,15 L12,1 L9,1 L9,1 Z"/></g></svg>');
+}
+
+@function buildIconPlay($stroke-color) {
+	@return url('data:image/svg+xml;charset=US-ASCII,<svg width="14" height="16" viewBox="0 0 14 16" xmlns="http%3A//www.w3.org/2000/svg"><g fill="#{$stroke-color}"><path d="M12.739453,7.542901 C13.012591,7.683981 13.153986,8.172646 12.739453,8.458306 L1.78263,14.919992 C1.460969,15.141574 1,14.87503 1,14.46229 L1,1.538918 C1,1.16064 1.440099,0.845632 1.78263,1.081215 L12.739453,7.542901 Z M2.043507,13.546884 L11.435069,8.000604 L2.043507,2.454323 L2.043507,13.546884 Z"/></g></svg>');
+}
+
+@function buildIconCaretDown($stroke-color) {
+	@return url('data:image/svg+xml;charset=US-ASCII,<svg width="9" height="5" viewBox="0 0 9 5" xmlns="http%3A//www.w3.org/2000/svg"><g fill="#{$stroke-color}"><path d="M0 0 L9 0 L 4.5 5 L 0 0"/></g></svg>');
+}
+
+@function buildIconCircle($stroke-color) {
+	@return url('data:image/svg+xml;charset=US-ASCII,<svg width="4" height="4" viewBox="0 0 4 4" xmlns="http%3A//www.w3.org/2000/svg"><g fill="#{$stroke-color}"><circle cx="2" cy="2" r="2"/></g></svg>');
+}
+
+.sub-component.pause-button {
+	.button {
+		color: #4a4a4a;
+		border-color: #cccccc;
+		background-color: #ffffff;
+		margin-bottom: 0;
+
+		transition: background-image 0.25s ease-out,
+			background-color 0.25s ease-out,
+			border-color 0.25s ease-out,
+			color 0.25s ease-out;
+	}
+	.button.active {
+		color: #ffffff;
+		border-color: #1dafed;
+		background-color: #1dafed;
+		& + .button.active {
+			border-left-color: #efefea;
+		}
+	}
+
+	.button-pause {
+		min-width: 125px;
+		max-width: 150px;
+		font-size: 11px;
+		line-height: 17px;
+		overflow-x: hidden;
+		text-overflow: clip;
+		span {
+			padding: 0 10px 0 30px;
+			background-repeat: no-repeat;
+			background-position: 0 center;
+			background-size: 14px 16px;
+			background-image: buildIconPause(#4a4a4a);
+		}
+		&.active span {
+			background-image: buildIconPlay(#ffffff);
+		}
+	}
+	.button-caret {
+		width: 25px;
+		padding-top: 21px;
+		padding-right: 0;
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: 9px 5px;
+		background-image: buildIconCaretDown(#4a4a4a);
+		&.active {
+			background-image: buildIconCaretDown(#ffffff);
+		}
+	}
+
+	.button-left {
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+		border-right: 0;
+		&.dropdown-open {
+			border-bottom-left-radius: 0;
+		}
+	}
+	.button-right {
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+		&.dropdown-open {
+			border-bottom-right-radius: 0;
+		}
+	}
+
+	.dropdown-container {
+		position: relative;
+		width: 0;
+		height: 0;
+		top: 0;
+		left: 0;
+		&.centered { left: 43px; }
+
+		.dropdown {
+			text-align: center;
+			background-color: #ffffff;
+			border: 1px solid #cccccc;
+			border-top: 0;
+			width: 150px;
+			margin: 0 auto;
+			border-bottom-left-radius: 3px;
+			border-bottom-right-radius: 3px;
+		}
+		.dropdown-item {
+			padding: 7px 0;
+			background-color: #ffffff;
+
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow-x: hidden;
+		}
+		.dropdown-item:hover {
+			background-color: #ebebeb;
+			span {
+				padding: 0 10px;
+				background-repeat: no-repeat;
+				background-position: 0 center;
+				background-size: 4px 4px;
+				background-image: buildIconCircle(#4a4a4a);
+			}
+		}
+		.dropdown-item.selected {
+			background-color: #ebebeb;
+		}
+	}
+}

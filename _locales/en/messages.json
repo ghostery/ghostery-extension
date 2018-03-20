@@ -455,11 +455,20 @@
 	"summary_description_not_scanned_2": {
 		"message": "Navigate to another page and I promise I'll deliver the goods."
 	},
+	"summary_custom_settings": {
+		"message": "Custom Settings"
+	},
 	"summary_trust_site": {
 		"message": "Trust Site"
 	},
+	"summary_trust_site_active": {
+		"message": "Site Trusted"
+	},
 	"summary_restrict_site": {
 		"message": "Restrict Site"
+	},
+	"summary_restrict_site_active": {
+		"message": "Site Restricted"
 	},
 	"summary_undo": {
 		"message": "Undo"
@@ -478,6 +487,9 @@
 	},
 	"summary_resume_ghostery": {
 		"message": "Resume"
+	},
+	"summary_show_menu": {
+		"message": "show menu"
 	},
 	"summary_map_these_trackers": {
 		"message": "Map These Trackers"
@@ -644,6 +656,9 @@
 	},
 	"tracker_plural": {
 		"message": "trackers"
+	},
+	"tracker_found": {
+		"message": "found"
 	},
 	"panel_signin_success": {
 		"message": "You are now signed in as "
@@ -1030,7 +1045,10 @@
 		"message": "Search by tracker"
 	},
 	"page_load": {
-		"message": "Page Load"
+		"message": "Page Load:"
+	},
+	"trackers_blocked": {
+		"message": "Trackers Blocked:"
 	},
 	"settings_trusted_restricted_sites": {
 		"message": "Trust & Restrict"
@@ -1163,6 +1181,9 @@
 	},
 	"tooltip_restrict": {
 		"message": "Always block trackers on this site."
+	},
+	"tooltip_custom_settings": {
+		"message": "Use my selected tracker settings."
 	},
 	"tooltip_pause": {
 		"message": "Pause Ghostery"

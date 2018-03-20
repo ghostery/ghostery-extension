@@ -1,5 +1,5 @@
 /**
- * Jest Config
+ * Building Blocks Sub Components
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -11,9 +11,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-module.exports = {
-	verbose: true,
-	setupFiles: [
-		'./test/setup.js'
-	]
+import CliqzFeatures from './CliqzFeatures';
+import DonutGraph from './DonutGraph';
+import GhosteryFeatures from './GhosteryFeatures';
+import PauseButton from './PauseButton';
+
+export {
+	CliqzFeatures,
+	DonutGraph,
+	GhosteryFeatures,
+	PauseButton
 };

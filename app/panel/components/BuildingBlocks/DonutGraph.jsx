@@ -12,18 +12,22 @@
  */
 
 import React, { Component } from 'react';
+import ClassNames from 'classnames';
 import * as d3 from 'd3';
 import { scaleLinear } from 'd3-scale';
+
 /**
- * @class Generate donut graph with tracker data in the Summary view.
+ * @class Generate donut graph. Used to display tracker data in the Summary View.
  * @memberOf PanelClasses
  */
 class DonutGraph extends React.Component {
 	constructor(props) {
 		super(props);
 
-		// event bindings
-		this.clickTrackersAll = this.clickTrackersAll.bind(this);
+		// Event Bindings
+		this.clickGraphText = this.clickGraphText.bind(this);
+
+		// Variables
 		this.colors = {
 			regular: (id) => {
 				switch (id) {
@@ -47,56 +51,73 @@ class DonutGraph extends React.Component {
 						return '#e8e8e8';
 				}
 			},
-			restricted: scaleLinear().range(['#f75065', '#ffb0Ba']),
-			paused: scaleLinear().range(['#848484', '#c9c9c9']),
+			redscale: scaleLinear().range(['#f75065', '#ffb0Ba']),
+			greyscale: scaleLinear().range(['#848484', '#c9c9c9']),
 		};
 	}
+
 	/**
 	 * Lifecycle event
 	 */
 	componentDidMount() {
 		const {
-			categories, sitePolicy, pausedBlocking, trackerCounts, isExpert
+			categories,
+			renderRedscale,
+			renderGreyscale,
+			totalCount,
+			isSmall,
 		} = this.props;
+
 		this.generateGraph(categories, {
-			sitePolicy,
-			pausedBlocking,
-			trackerCounts,
-			isExpert,
+			renderRedscale,
+			renderGreyscale,
+			totalCount,
+			isSmall,
 		});
 	}
+
 	/**
 	 * Lifecycle event
 	 */
 	componentWillReceiveProps(nextProps) {
 		const {
-			categories, sitePolicy, pausedBlocking, trackerCounts, isExpert
+			categories,
+			renderRedscale,
+			renderGreyscale,
+			totalCount,
+			isSmall,
 		} = this.props;
+
 		if (categories.length !== nextProps.categories.length ||
-			sitePolicy !== nextProps.sitePolicy ||
-			pausedBlocking !== nextProps.pausedBlocking ||
-			isExpert !== nextProps.isExpert) {
+			renderRedscale !== nextProps.renderRedscale ||
+			renderGreyscale !== nextProps.renderGreyscale ||
+			totalCount !== nextProps.totalCount ||
+			isSmall !== nextProps.isSmall) {
 			this.generateGraph(nextProps.categories, {
-				sitePolicy: nextProps.sitePolicy,
-				pausedBlocking: nextProps.pausedBlocking,
-				trackerCounts: nextProps.trackerCounts,
-				isExpert: nextProps.isExpert,
+				renderRedscale: nextProps.renderRedscale,
+				renderGreyscale: nextProps.renderGreyscale,
+				totalCount: nextProps.totalCount,
+				isSmall: nextProps.isSmall,
 			});
 		}
 	}
+
 	/**
-	 * Generate donut-shaped graph with the scanning results. Add mouse event listeners
-	 * to the parts of the created donut which would navigate to the corresponding
-	 * tracker category in the blocking view.
-	 * @param  {Object} categories 		list of categories detected on the site
-	 * @param  {Object} options	        site policy, paused state, stats of the scanning
+	 * Generate donut-shaped graph with the scanning results.
+	 * Add mouse event listeners to the arcs of the donut graph that filter the
+	 * detailed view to the corresponding tracker category.
+	 * @param  {[type]} categories list of categories detected on the site
+	 * @param  {[type]} options    options for the graph
 	 */
 	generateGraph(categories, options) {
-		const { sitePolicy, pausedBlocking } = options;
+		const {
+			renderRedscale,
+			renderGreyscale,
+			totalCount,
+			isSmall
+		} = options;
 		const graphData = [];
-		const trackerCounts = options.trackerCounts || {};
-		const trackerCount = trackerCounts.allowed + trackerCounts.blocked || 0;
-		const size = options.isExpert ? 94 : 121;
+		const size = isSmall ? 94 : 120;
 		const width = +size;
 		const height = +size;
 		const radius = Math.min(width, height) / 2;
@@ -124,6 +145,14 @@ class DonutGraph extends React.Component {
 		// Clear graph
 		d3.select(this.node).selectAll('*').remove();
 
+		// Clear tooltips
+		categories.forEach((cat) => {
+			const tooltip = document.getElementById(`${cat.id}_tooltip`);
+			if (tooltip) {
+				tooltip.classList.remove('show');
+			}
+		});
+
 		// Draw graph
 		const chart = d3.select(this.node)
 			.append('svg')
@@ -149,16 +178,21 @@ class DonutGraph extends React.Component {
 
 		g.append('path')
 			.style('fill', (d, i) => {
-				if (pausedBlocking) {
-					const pausedExp = graphData.length > 1 ? 100 / (graphData.length - 1) * i * 0.01 : 0;
-					return this.colors.paused(pausedExp);
-				} else if (sitePolicy === 1) {
-					const restrictedExp = graphData.length > 1 ? 100 / (graphData.length - 1) * i * 0.01 : 0;
-					return this.colors.restricted(restrictedExp);
+				if (renderGreyscale) {
+					const greyTone = graphData.length > 1 ? 100 / (graphData.length - 1) * i * 0.01 : 0;
+					return this.colors.greyscale(greyTone);
+				} else if (renderRedscale) {
+					const redTone = graphData.length > 1 ? 100 / (graphData.length - 1) * i * 0.01 : 0;
+					return this.colors.redscale(redTone);
 				}
 				return this.colors.regular(d.data.id);
 			})
-			.attr('class', (d, i) => ((d.data.name) ? 'clickable' : 'disabled'))
+			.attr('class', (d, i) => {
+				if (d.data.name) {
+					return (isSmall) ? 'clickable' : 'not-clickable';
+				}
+				return 'disabled';
+			})
 			.on('mouseover', (d, i) => {
 				const pX = arc.centroid(d)[0] + (width / 2);
 				const pY = arc.centroid(d)[1] + (height / 2);
@@ -176,8 +210,8 @@ class DonutGraph extends React.Component {
 				}
 			})
 			.on('click', (d, i) => {
-				if (d.data.name) {
-					this.props.actions.filterTrackers({ type: 'category', name: d.data.id });
+				if (d.data.name && isSmall) {
+					this.props.clickDonut({ type: 'category', name: d.data.id });
 				}
 			})
 			.transition()
@@ -205,34 +239,43 @@ class DonutGraph extends React.Component {
 			})
 			.ease(d3.easeLinear);
 	}
+
 	/**
-	 * Trigger action which results in navigating to full blocking view.
-	 * @param  {Object} event 		mouseclick on the total number of trackers
-	 *                          	displayed in the 'hole' of the donut
+	 * Handle click event for graph text. Filters to show all categories.
 	 */
-	clickTrackersAll(event) {
-		this.props.actions.filterTrackers({ type: 'trackers', name: 'all' });
+	clickGraphText() {
+		this.props.clickDonut({ type: 'trackers', name: 'all' });
 	}
+
 	/**
-	 * Render Donut Chart.
-	 * @return {ReactComponent}   ReactComponent instance
+	 * React's required render function. Returns JSX
+	 * @return {JSX} JSX for rendering the donut-graph portion of the Summary View
 	 */
 	render() {
+		const { isSmall, totalCount } = this.props;
+		const componentClasses = ClassNames('sub-component', 'donut-graph', {
+			small: isSmall,
+			big: !isSmall,
+		});
+
 		return (
-			<div className="tracker-category-wheel">
-				<div id="categories-donut">
-					<div className="donut-text" onClick={this.props.toExpert}>
-						<div onClick={this.clickTrackersAll} className="categories-donut-count">
-							{this.props.trackerCounts.allowed + this.props.trackerCounts.blocked || 0}
-						</div>
-						<div>Trackers</div>
-					</div>
-					<div id="categories-donut-container" ref={(node) => { this.node = node; }} />
+			<div className={componentClasses}>
+				<div className="tooltip-container">
 					{this.props.categories.map(cat => (
 						<span key={cat.id} id={`${cat.id}_tooltip`} className="tooltip top">
 							{cat.name}
 						</span>
 					))}
+				</div>
+				<div className="graph-ref" ref={(node) => { this.node = node; }} />
+				<div className="graph-text clickable" onClick={this.clickGraphText}>
+					<div className="graph-text-count">{totalCount}</div>
+					<div className="graph-text-trackers">
+						{(totalCount === 1) ? t('tracker_signular') : t('tracker_plural')}
+						<div className="show-on-big">
+							{t('tracker_found')}
+						</div>
+					</div>
 				</div>
 			</div>
 		);

@@ -45,7 +45,7 @@ class DoneView extends Component {
 
 	/**
 	 * React's required render function. Returns JSX
-	 * @return {JSX} JSX for rendering the done view
+	 * @return {JSX} JSX for rendering the #done step of the setup flow
 	 */
 	render() {
 		return (
