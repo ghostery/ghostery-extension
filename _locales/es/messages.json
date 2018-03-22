@@ -856,7 +856,7 @@
 		"message": "Nunca"
 	},
 	"settings_seconds": {
-		"message": "segundos"
+		"message": "s"
 	},
 	"settings_hide_alert_trusted": {
 		"message": "Ocultar el cuadro púrpura en sitios web de confianza"
