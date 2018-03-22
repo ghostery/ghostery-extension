@@ -378,15 +378,21 @@ class EventHandlers {
 		let tab_host;
 		let fromRedirect;
 		let block;
+		let ss_unblock;
 		if (bug_id) {
 			app_id = bugDb.db.bugs[bug_id].aid;
 			cat_id = bugDb.db.apps[app_id].cat;
 			incognito = tabInfo.getTabInfo(tab_id, 'incognito');
 			tab_host = tabInfo.getTabInfo(tab_id, 'host');
 			fromRedirect = globals.REDIRECT_MAP.has(request_id);
-			block = this._checkBlocking(app_id, cat_id, tab_id, tab_host, page_url, request_id);
+			const retVal = this._checkBlocking(app_id, cat_id, tab_id, tab_host, page_url, request_id);
+			block = retVal.block;
+			/* eslint prefer-destructuring: 0 */
+			if (retVal.ss_unblock) {
+				// The way to pass this flag to Cliqz handlers
+				details.ghosteryWhitelisted = true;
+			}
 		}
-
 		// Latency initialization needs to be synchronous to avoid race condition with onCompleted, etc.
 		// TODO can URLs repeat within a redirect chain? what are the cases of repeating URLs (trackers only, ...)?
 		if (block === false) {
@@ -400,6 +406,8 @@ class EventHandlers {
 				page_url,
 				incognito
 			};
+
+			// Find out if block false because of site_specific_unblock
 		}
 
 		// process the tracker asynchronously
@@ -767,10 +775,10 @@ class EventHandlers {
 	 * @param  {number} 	app_id			tracker id
 	 * @param  {number} 	cat_id			tracker category id
 	 * @param  {number} 	tab_id			tab id
-	 * @param  {string} tab_host		tab url host
-	 * @param  {string} page_url		full tab url
+	 * @param  {string} 	tab_host		tab url host
+	 * @param  {string} 	page_url		full tab url
 	 * @param  {number} 	request_id		request id
-	 * @return {boolean}
+	 * @return {Object}		{block, ss_unblock}
 	 */
 	_checkBlocking(app_id, cat_id, tab_id, tab_host, page_url, request_id) {
 		const fromRedirect = globals.REDIRECT_MAP.has(request_id);
@@ -779,7 +787,7 @@ class EventHandlers {
 		// If we let page-level c2p trackers through, we don't want to block it
 		// along with all subsequent top-level redirects.
 		if (fromRedirect && globals.LET_REDIRECTS_THROUGH) {
-			block = false;
+			block = { block: false };
 		} else {
 			block = this.policy.shouldBlock(app_id, cat_id, tab_id, tab_host, page_url);
 		}
