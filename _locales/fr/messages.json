@@ -856,7 +856,7 @@
 		"message": "Jamais"
 	},
 	"settings_seconds": {
-		"message": "secondes"
+		"message": "s"
 	},
 	"settings_hide_alert_trusted": {
 		"message": "Masquer la case violette sur les sites de confiance"

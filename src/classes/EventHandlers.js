@@ -406,8 +406,6 @@ class EventHandlers {
 				page_url,
 				incognito
 			};
-
-			// Find out if block false because of site_specific_unblock
 		}
 
 		// process the tracker asynchronously
