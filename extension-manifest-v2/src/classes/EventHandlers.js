@@ -378,17 +378,15 @@ class EventHandlers {
 		let tab_host;
 		let fromRedirect;
 		let block;
-		let ss_unblock;
 		if (bug_id) {
 			app_id = bugDb.db.bugs[bug_id].aid;
 			cat_id = bugDb.db.apps[app_id].cat;
 			incognito = tabInfo.getTabInfo(tab_id, 'incognito');
 			tab_host = tabInfo.getTabInfo(tab_id, 'host');
 			fromRedirect = globals.REDIRECT_MAP.has(request_id);
-			const retVal = this._checkBlocking(app_id, cat_id, tab_id, tab_host, page_url, request_id);
-			block = retVal.block;
-			/* eslint prefer-destructuring: 0 */
-			if (retVal.ss_unblock) {
+			const { block1, ss_unblock } = this._checkBlocking(app_id, cat_id, tab_id, tab_host, page_url, request_id);
+			block = block1;
+			if (ss_unblock) {
 				// The way to pass this flag to Cliqz handlers
 				details.ghosteryWhitelisted = true;
 			}
