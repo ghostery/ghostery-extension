@@ -23,7 +23,7 @@ import conf from './Conf';
 import foundBugs from './FoundBugs';
 import globals from './Globals';
 import latency from './Latency';
-import Policy, { BLOCK_REASON_SS_UNBLOCK } from './Policy';
+import Policy, { BLOCK_REASON_SS_UNBLOCKED } from './Policy';
 import PolicySmartBlock from './PolicySmartBlock';
 import PurpleBox from './PurpleBox';
 import surrogatedb from './SurrogateDb';
@@ -378,7 +378,7 @@ class EventHandlers {
 		const tab_host = tabInfo.getTabInfo(tab_id, 'host');
 		const fromRedirect = globals.REDIRECT_MAP.has(request_id);
 		const { block, reason } = this._checkBlocking(app_id, cat_id, tab_id, tab_host, page_url, request_id);
-		if (!block && reason === BLOCK_REASON_SS_UNBLOCK) {
+		if (!block && reason === BLOCK_REASON_SS_UNBLOCKED) {
 			// The way to pass this flag to Cliqz handlers
 			details.ghosteryWhitelisted = true;
 		}
