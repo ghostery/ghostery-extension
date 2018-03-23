@@ -23,7 +23,7 @@ import conf from './Conf';
 import foundBugs from './FoundBugs';
 import globals from './Globals';
 import latency from './Latency';
-import Policy from './Policy';
+import Policy, { BLOCK_REASON_SS_UNBLOCK } from './Policy';
 import PolicySmartBlock from './PolicySmartBlock';
 import PurpleBox from './PurpleBox';
 import surrogatedb from './SurrogateDb';
@@ -372,24 +372,15 @@ class EventHandlers {
 			return { cancel: false };
 		}
 
-		let app_id;
-		let cat_id;
-		let incognito;
-		let tab_host;
-		let fromRedirect;
-		let block;
-		if (bug_id) {
-			app_id = bugDb.db.bugs[bug_id].aid;
-			cat_id = bugDb.db.apps[app_id].cat;
-			incognito = tabInfo.getTabInfo(tab_id, 'incognito');
-			tab_host = tabInfo.getTabInfo(tab_id, 'host');
-			fromRedirect = globals.REDIRECT_MAP.has(request_id);
-			const { block1, ss_unblock } = this._checkBlocking(app_id, cat_id, tab_id, tab_host, page_url, request_id);
-			block = block1;
-			if (ss_unblock) {
-				// The way to pass this flag to Cliqz handlers
-				details.ghosteryWhitelisted = true;
-			}
+		const app_id = bugDb.db.bugs[bug_id].aid;
+		const cat_id = bugDb.db.apps[app_id].cat;
+		const incognito = tabInfo.getTabInfo(tab_id, 'incognito');
+		const tab_host = tabInfo.getTabInfo(tab_id, 'host');
+		const fromRedirect = globals.REDIRECT_MAP.has(request_id);
+		const { block, reason } = this._checkBlocking(app_id, cat_id, tab_id, tab_host, page_url, request_id);
+		if (!block && reason === BLOCK_REASON_SS_UNBLOCK) {
+			// The way to pass this flag to Cliqz handlers
+			details.ghosteryWhitelisted = true;
 		}
 		// Latency initialization needs to be synchronous to avoid race condition with onCompleted, etc.
 		// TODO can URLs repeat within a redirect chain? what are the cases of repeating URLs (trackers only, ...)?
