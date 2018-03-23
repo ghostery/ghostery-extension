@@ -72,9 +72,7 @@ class Metrics {
 							prefsSet({
 								utm_source: this.utm_source,
 								utm_campaign: this.utm_campaign
-							})
-								.then(prefs => resolve(prefs))
-								.catch(err => reject(err));
+							});
 						});
 						resolve();
 					});
@@ -95,9 +93,7 @@ class Metrics {
 							prefsSet({
 								utm_source: this.utm_source,
 								utm_campaign: this.utm_campaign
-							})
-								.then(reject)
-								.catch(reject);
+							});
 						}
 					});
 					resolve();

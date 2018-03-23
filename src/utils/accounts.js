@@ -534,11 +534,13 @@ function _refreshToken() {
 	return new Promise((resolve, reject) => {
 		if (!conf.login_info.logged_in) {
 			resolve('User not logged in');
+			return;
 		}
 
 		const decoded_user_token = conf.login_info.decoded_user_token;
 		if (!decoded_user_token || !decoded_user_token.exp) {
 			reject('User token is corrupted or null');
+			return;
 		}
 
 		const currentTime = (new Date()).getTime();

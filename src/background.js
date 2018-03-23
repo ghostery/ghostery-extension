@@ -200,6 +200,7 @@ function getSiteData() {
 
 			if (!tab) {
 				reject(new Error('Tab not found. Cannot gather page data'));
+				return;
 			}
 
 			resolve({
@@ -1007,7 +1008,7 @@ messageCenter.on('enabled', () => {
 			 *  }
 			 * }
 			*/
-			log('GOT OFFER!!!!!!!!!!!!!!!!!!!!!!');
+			log('GOT OFFER', msg);
 			// first check that the message is from core and is the one we expect
 			if (msg.origin === 'offers-core' &&
 				msg.type === 'push-offer' &&
