@@ -20,9 +20,18 @@ import conf from './Conf';
 import { processUrl } from '../utils/utils';
 import globals from './Globals';
 
-const POLICY_BLOCK_NOTHING = 'POLICY_BLOCK_NOTHING';
-const POLICY_BLOCK_EVERYTHING = 'POLICY_BLOCK_EVERYTHING';
-const POLICY_BLOCK_ADS = 'POLICY_BLOCK_ADS';
+/**
+ * Enum for reasons returned by shouldBlock
+ * @type {string}
+ * TBD: See if we can do with integer values for performance.
+ */
+export const BLOCK_REASON_PAUSED = 'BLOCK_REASON_PAUSED';
+export const BLOCK_REASON_ALLOW_ONCE = 'BLOCK_REASON_ALLOW_ONCE';
+export const BLOCK_REASON_BLACKLISTED = 'BLOCK_REASON_BLACKLISTED';
+export const BLOCK_REASON_SS_UNBLOCK = 'BLOCK_REASON_SS_UNBLOCK';
+export const BLOCK_REASON_WHITELISTED = 'BLOCK_REASON_WHITELISTED';
+export const BLOCK_REASON_GLOBAL_BLOCKING = 'BLOCK_REASON_GLOBAL_BLOCKING';
+export const BLOCK_REASON_SS_BLOCKED = 'BLOCK_REASON_SS_BLOCKED';
 /**
  * Class for handling site policy.
  * @memberOf  BackgroundClasses
@@ -104,39 +113,35 @@ class Policy {
 	 */
 	shouldBlock(app_id, cat_id, tab_id, tab_host, tab_url) {
 		if (globals.SESSION.paused_blocking) {
-			return { block: false, ss_unblock: false };
+			return { block: false, reason: BLOCK_REASON_PAUSED };
 		}
 
-		const ss_unblock = conf.toggle_individual_trackers && conf.site_specific_unblocks.hasOwnProperty(tab_host) && conf.site_specific_unblocks[tab_host].includes(+app_id);
-
-		if (ss_unblock && !this.blacklisted(tab_url) && !this.whitelisted(tab_url)) {
-			return { block: false, ss_unblock: true };
-		}
-
+		const allowedOnce = c2pDb.allowedOnce(tab_id, app_id);
 		if (conf.selected_app_ids.hasOwnProperty(app_id)) {
-			if (ss_unblock) {
+			if (conf.toggle_individual_trackers && conf.site_specific_unblocks.hasOwnProperty(tab_host) && conf.site_specific_unblocks[tab_host].includes(+app_id)) {
 				if (this.blacklisted(tab_url)) {
-					return { block: !c2pDb.allowedOnce(tab_id, app_id), ss_unblock: false };
+					return { block: !allowedOnce, reason: allowedOnce ? BLOCK_REASON_ALLOW_ONCE : BLOCK_REASON_BLACKLISTED };
 				}
-				return { block: false, ss_unblock: false };
+				return { block: false, reason: BLOCK_REASON_SS_UNBLOCK };
 			}
 			if (this.whitelisted(tab_url)) {
-				return { block: false, ss_unblock: false };
+				return { block: false, reason: BLOCK_REASON_WHITELISTED };
 			}
-			return { block: !c2pDb.allowedOnce(tab_id, app_id), ss_unblock: false };
+			return { block: !allowedOnce, reason: allowedOnce ? BLOCK_REASON_ALLOW_ONCE : BLOCK_REASON_GLOBAL_BLOCKING };
 		}
 		// We get here when app_id is not selected for blocking
 		if (conf.toggle_individual_trackers && conf.site_specific_blocks.hasOwnProperty(tab_host) && conf.site_specific_blocks[tab_host].includes(+app_id)) {
 			if (this.whitelisted(tab_url)) {
-				return { block: false, ss_unblock: false };
+				return { block: false, reason: BLOCK_REASON_WHITELISTED };
 			}
-			return { block: !c2pDb.allowedOnce(tab_id, app_id), ss_unblock: false };
+			return { block: !allowedOnce, reason: allowedOnce ? BLOCK_REASON_ALLOW_ONCE : BLOCK_REASON_SS_BLOCKED };
 		}
 		if (this.blacklisted(tab_url)) {
-			return { block: !c2pDb.allowedOnce(tab_id, app_id), ss_unblock: false };
+			return { block: !allowedOnce, reason: allowedOnce ? BLOCK_REASON_ALLOW_ONCE : BLOCK_REASON_BLACKLISTED };
 		}
-		return { block: false, ss_unblock: false };
+		return { block: false, reason: BLOCK_REASON_GLOBAL_BLOCKING };
 	}
 }
 
 export default Policy;
+
