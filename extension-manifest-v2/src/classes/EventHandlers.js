@@ -23,7 +23,7 @@ import conf from './Conf';
 import foundBugs from './FoundBugs';
 import globals from './Globals';
 import latency from './Latency';
-import Policy, { BLOCK_REASON_SS_UNBLOCKED } from './Policy';
+import Policy, { BLOCK_REASON_SS_UNBLOCKED, BLOCK_REASON_C2P_ALLOWED_THROUGH } from './Policy';
 import PolicySmartBlock from './PolicySmartBlock';
 import PurpleBox from './PurpleBox';
 import surrogatedb from './SurrogateDb';
@@ -755,6 +755,12 @@ class EventHandlers {
 	}
 
 	/**
+	 * @typedef {Object} BlockWithReason
+	 * @property {boolean}	block	indicates if the tracker should be blocked.
+	 * @property {string}	reason	indicates the reason for the block result.
+	 */
+
+	/**
 	 * Determine whether this request should be blocked
 	 *
 	 * @private
@@ -765,7 +771,7 @@ class EventHandlers {
 	 * @param  {string} 	tab_host		tab url host
 	 * @param  {string} 	page_url		full tab url
 	 * @param  {number} 	request_id		request id
-	 * @return {Object}		{block, ss_unblock}
+	 * @return {BlockWithReason}			block result with reason
 	 */
 	_checkBlocking(app_id, cat_id, tab_id, tab_host, page_url, request_id) {
 		const fromRedirect = globals.REDIRECT_MAP.has(request_id);
@@ -774,7 +780,7 @@ class EventHandlers {
 		// If we let page-level c2p trackers through, we don't want to block it
 		// along with all subsequent top-level redirects.
 		if (fromRedirect && globals.LET_REDIRECTS_THROUGH) {
-			block = { block: false };
+			block = { block: false, reason: BLOCK_REASON_C2P_ALLOWED_THROUGH };
 		} else {
 			block = this.policy.shouldBlock(app_id, cat_id, tab_id, tab_host, page_url);
 		}
