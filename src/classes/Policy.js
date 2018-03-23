@@ -104,7 +104,7 @@ class Policy {
 	 */
 	shouldBlock(app_id, cat_id, tab_id, tab_host, tab_url) {
 		if (globals.SESSION.paused_blocking) {
-			return { block: false };
+			return { block: false, ss_unblock: false };
 		}
 
 		const ss_unblock = conf.toggle_individual_trackers && conf.site_specific_unblocks.hasOwnProperty(tab_host) && conf.site_specific_unblocks[tab_host].includes(+app_id);
@@ -116,26 +116,26 @@ class Policy {
 		if (conf.selected_app_ids.hasOwnProperty(app_id)) {
 			if (ss_unblock) {
 				if (this.blacklisted(tab_url)) {
-					return { block: !c2pDb.allowedOnce(tab_id, app_id) };
+					return { block: !c2pDb.allowedOnce(tab_id, app_id), ss_unblock: false };
 				}
-				return { block: false };
+				return { block: false, ss_unblock: false };
 			}
 			if (this.whitelisted(tab_url)) {
-				return { block: false };
+				return { block: false, ss_unblock: false };
 			}
-			return { block: !c2pDb.allowedOnce(tab_id, app_id) };
+			return { block: !c2pDb.allowedOnce(tab_id, app_id), ss_unblock: false };
 		}
 		// We get here when app_id is not selected for blocking
 		if (conf.toggle_individual_trackers && conf.site_specific_blocks.hasOwnProperty(tab_host) && conf.site_specific_blocks[tab_host].includes(+app_id)) {
 			if (this.whitelisted(tab_url)) {
-				return { block: false };
+				return { block: false, ss_unblock: false };
 			}
-			return { block: !c2pDb.allowedOnce(tab_id, app_id) };
+			return { block: !c2pDb.allowedOnce(tab_id, app_id), ss_unblock: false };
 		}
 		if (this.blacklisted(tab_url)) {
-			return { block: !c2pDb.allowedOnce(tab_id, app_id) };
+			return { block: !c2pDb.allowedOnce(tab_id, app_id), ss_unblock: false };
 		}
-		return { block: false };
+		return { block: false, ss_unblock: false };
 	}
 }
 
