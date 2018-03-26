@@ -733,6 +733,9 @@ const NotificationsContentScript = (function (win, doc) {
 			];
 			const { name } = request;
 			const reqMsg = request.message;
+			if(!reqMsg) {
+				return false;
+			}
 
 			log('notifications.js received message', name);
 

@@ -164,6 +164,10 @@ const Click2PlayContentScript = (function (win, doc) {
 			const	{ name } = request;
 			const reqMsg = request.msg;
 
+			if(!reqMsg) {
+				return false;
+			}
+
 			log('click_to_play.js received message', name);
 
 			if (name === 'c2p') {
