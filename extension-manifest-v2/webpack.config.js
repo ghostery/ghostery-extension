@@ -56,7 +56,7 @@ const t = function (messageName, substitutions) {
 
 const lintOnChange = function() {
 	// @TODO: Why it fails on Windows?
-	if (process.argv.includes('--env.nolint') ||
+	if ((process.argv.includes('--env.nolint') || process.env.NO_LINT) ||
 		process.platform === 'win32') {
 		return;
 	}
@@ -71,7 +71,7 @@ const lintOnChange = function() {
 };
 
 lintOnChange.prototype.apply = function(compiler) {
-	if (process.argv.includes('--env.prod') || process.argv.includes('--env.nolint')) {
+	if (process.argv.includes('--env.prod') || (process.argv.includes('--env.nolint') || process.env.NO_LINT)) {
 		return;
 	}
 	compiler.plugin('emit', function(compilation, callback) {
