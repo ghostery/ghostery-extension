@@ -61,6 +61,13 @@ $ npm run lint
 $ npm run lint.raw -- src/utils/matcher.js
 ```
 
+```sh
+# Disable lint
+$ NO_LINT=true npm run build.dev
+# or
+$ npm run build.dev -- --env.nolint
+```
+
 ## Build Docs
 ```sh
 # Build JSDoc files to ./docs
