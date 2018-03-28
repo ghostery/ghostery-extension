@@ -39,7 +39,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state.panel, stat
  * @return {function}          	  to be used as an argument in redux connect call
  */
 const mapDispatchToProps = (dispatch, ownProps) => ({
-	actions: bindActionCreators(Object.assign(panelActions, { filterTrackers }), dispatch),
+	actions: bindActionCreators(Object.assign({}, panelActions, { filterTrackers }), dispatch),
 });
 /**
  * Connects Panel component to the Redux store. Pass updated match, location, and history props to the wrapped component.
