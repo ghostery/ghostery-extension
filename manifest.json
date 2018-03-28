@@ -80,8 +80,6 @@
 	],
 	"background": {
 		"scripts": [
-			"dist/vendor.js",
-			"dist/browser-core.js",
 			"dist/background.js"
 		],
 		"persistent": true
