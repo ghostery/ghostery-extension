@@ -348,7 +348,7 @@ class PanelData {
 			.set('pageHost', pageHost)
 			.set('performanceData', tab && tabInfo.getTabInfo(tab_id, 'pageTiming'))
 			.set('sitePolicy', tab && policy.getSitePolicy(tab_url) || false)
-			.set('siteNotScanned', tab && !foundBugs.getApps(tab_id) || false)
+			.set('siteNotScanned', tab && !trackerList.length || false)
 			.set('tab_id', tab_id)
 			.set('trackerCounts', tab && foundBugs.getAppsCountByBlocked(tab_id) || {})
 			.set('smartBlock', tabInfo.getTabInfo(tab_id, 'smartBlock'));

@@ -164,7 +164,7 @@ const Click2PlayContentScript = (function (win, doc) {
 			const	{ name } = request;
 			const reqMsg = request.msg;
 
-			if(!reqMsg) {
+			if (!reqMsg) {
 				return false;
 			}
 
