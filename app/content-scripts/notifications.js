@@ -733,7 +733,7 @@ const NotificationsContentScript = (function (win, doc) {
 			];
 			const { name } = request;
 			const reqMsg = request.message;
-			if(!reqMsg) {
+			if (!reqMsg) {
 				return false;
 			}
 
