@@ -76,7 +76,7 @@ class PauseButton extends React.Component {
 	 * @return {JSX} JSX for the dropdown list
 	 */
 	renderDropdown() {
-		const { isPausedTimeout } = this.props;
+		const { isCondensed, isPausedTimeout } = this.props;
 
 		function dropdownItemClassName(value) {
 			return ClassNames('dropdown-item', 'clickable', 'dropdown-clickable', {
@@ -84,11 +84,17 @@ class PauseButton extends React.Component {
 			});
 		}
 
+		const dropdownStyles = {
+			width: `${this.pauseWidth + 26}px`,
+		};
+
 		return (
-			<div className="dropdown">
+			<div className="dropdown" style={dropdownStyles}>
 				{this.props.dropdownItems.map(item => (
 					<div className={dropdownItemClassName(item.val)} key={item.name} onClick={() => { this.clickDropdownPause(item.val); }}>
-						<span className="dropdown-clickable">{item.name}</span>
+						<span className="dropdown-clickable">
+							{!isCondensed ? item.name : item.name_condensed}
+						</span>
 					</div>
 				))}
 			</div>
@@ -102,23 +108,41 @@ class PauseButton extends React.Component {
 	render() {
 		const pauseButtonClassNames = ClassNames('button', 'button-left', 'button-pause', {
 			active: this.props.isPaused,
+			smaller: !this.props.isCentered,
+			smallest: this.props.isCentered && this.props.isCondensed,
+			'no-border-radius': this.props.isCentered && this.props.isCondensed,
 			'dropdown-open': this.state.showDropdown,
 		});
 		const dropdownButtonClassNames = ClassNames('button', 'button-right', 'button-caret', {
 			active: this.state.showDropdown,
+			'no-border-radius': this.props.isCentered && this.props.isCondensed,
 			'dropdown-open': this.state.showDropdown,
 		});
 		const dropdownContainerClassNames = ClassNames('button-group', 'dropdown-container', {
 			centered: this.props.isCentered,
 		});
+		const dropdownContainerStyles = {
+			left: `${this.props.isCentered ? this.pauseLeft : 0}px`,
+		};
 
 		return (
 			<div className="sub-component pause-button">
 				<div className="button-group">
-					<div className={pauseButtonClassNames} onClick={this.props.clickPause}>
+					<div
+						className={pauseButtonClassNames}
+						onClick={this.props.clickPause}
+						ref={(node) => {
+							this.pauseWidth = node && node.clientWidth;
+							this.pauseLeft = node && node.offsetLeft;
+						}}
+					>
+					{this.props.isCondensed ? (
+						<span></span>
+					) : (
 						<span>
 							{this.props.isPaused ? t('summary_resume_ghostery') : t('summary_pause_ghostery')}
 						</span>
+					)}
 					</div>
 					<div className={dropdownButtonClassNames} onClick={this.clickDropdownCaret}>
 						<span className="show-for-sr">
@@ -126,7 +150,7 @@ class PauseButton extends React.Component {
 						</span>
 					</div>
 				</div>
-				<div className={dropdownContainerClassNames}>
+				<div className={dropdownContainerClassNames} style={dropdownContainerStyles}>
 					{this.state.showDropdown && this.renderDropdown()}
 				</div>
 			</div>

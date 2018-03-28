@@ -27,6 +27,8 @@ class GhosteryFeatures extends React.Component {
 		this.clickTrustButton = this.clickTrustButton.bind(this);
 		this.clickCustomButton = this.clickCustomButton.bind(this);
 		this.clickRestrictButton = this.clickRestrictButton.bind(this);
+		this.getTrustText = this.getTrustText.bind(this);
+		this.getRestrictText = this.getRestrictText.bind(this);
 	}
 
 	/**
@@ -60,11 +62,39 @@ class GhosteryFeatures extends React.Component {
 	}
 
 	/**
+	 * Gets the text for the Trust Button under different conditions
+	 * @return {String} The text for the Trust Button as a string
+	 */
+	getTrustText() {
+		if (this.props.isCondensed) {
+			return '';
+		} else if (this.props.sitePolicy === 2) {
+			return t('summary_trust_site_active');
+		} else {
+			return t('summary_trust_site');
+		}
+	}
+
+	/**
+	 * Gets the text for the Restrict Button under different conditions
+	 * @return {String} The text for the Restrict Button as a string
+	 */
+	getRestrictText() {
+		if (this.props.isCondensed) {
+			return '';
+		} else if (this.props.sitePolicy === 1) {
+			return t('summary_restrict_site_active');
+		} else {
+			return t('summary_restrict_site');
+		}
+	}
+
+	/**
 	 * React's required render function. Returns JSX
 	 * @return {JSX} JSX for rendering the Ghostery Features portion of the Summary View
 	 */
 	render() {
-		const { isInactive, isStacked, sitePolicy } = this.props;
+		const { isInactive, isStacked, isCondensed, sitePolicy } = this.props;
 
 		const buttonGroupClassNames = ClassNames('button-group', {
 			inactive: isInactive,
@@ -73,12 +103,14 @@ class GhosteryFeatures extends React.Component {
 		const trustClassNames = ClassNames('button', 'button-trust', 'g-tooltip', {
 			'button-left': !isStacked,
 			'button-top': isStacked,
+			condensed: isCondensed,
 			active: sitePolicy === 2,
 			clickable: !isInactive,
 			'not-clickable': isInactive,
 		});
 		const customClassNames = ClassNames('button', 'button-custom', 'g-tooltip', {
 			'button-center': true,
+			condensed: isCondensed,
 			active: !sitePolicy,
 			clickable: !isInactive,
 			'not-clickable': isInactive,
@@ -86,6 +118,7 @@ class GhosteryFeatures extends React.Component {
 		const restrictClassNames = ClassNames('button', 'button-restrict', 'g-tooltip', {
 			'button-right': !isStacked,
 			'button-bottom': isStacked,
+			condensed: isCondensed,
 			active: sitePolicy === 1,
 			clickable: !isInactive,
 			'not-clickable': isInactive,
@@ -97,7 +130,7 @@ class GhosteryFeatures extends React.Component {
 					<div className={trustClassNames} onClick={this.clickTrustButton}>
 						<span className="flex-container align-center-middle full-height">
 							<span className="button-text">
-								{(sitePolicy === 2) ? t('summary_trust_site_active') : t('summary_trust_site')}
+								{this.getTrustText()}
 							</span>
 						</span>
 						<Tooltip header={(sitePolicy === 2) ? t('summary_undo') : t('tooltip_trust')} position={(isStacked) ? 'right' : 'top'} />
@@ -113,7 +146,7 @@ class GhosteryFeatures extends React.Component {
 					<div className={restrictClassNames} onClick={this.clickRestrictButton}>
 						<span className="flex-container align-center-middle full-height">
 							<span className="button-text">
-								{(sitePolicy === 1) ? t('summary_restrict_site_active') : t('summary_restrict_site')}
+								{this.getRestrictText()}
 							</span>
 						</span>
 						<Tooltip header={(sitePolicy === 1) ? t('summary_undo') : t('tooltip_restrict')} position={(isStacked) ? 'right' : 'top'} />

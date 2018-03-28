@@ -479,11 +479,20 @@
 	"pause_30_min": {
 		"message": "for 30 min"
 	},
+	"pause_30_min_condensed": {
+		"message": "30 mins"
+	},
 	"pause_1_hour": {
 		"message": "for 1 hour"
 	},
+	"pause_1_hour_condensed": {
+		"message": "1 hr"
+	},
 	"pause_24_hours": {
 		"message": "for 24 hours"
+	},
+	"pause_24_hours_condensed": {
+		"message": "24 hrs"
 	},
 	"summary_resume_ghostery": {
 		"message": "Resume"
@@ -770,6 +779,12 @@
 	},
 	"panel_header_verify_account": {
 		"message": "Verify Account"
+	},
+	"panel_header_simple_view": {
+		"message": "Simple View"
+	},
+	"panel_header_detailed_view": {
+		"message": "Detailed View"
 	},
 	"password_characters_requirements": {
 		"message": "Only these special characters are allowed: !@#$%^&*=+()<>{}[];:,./?"

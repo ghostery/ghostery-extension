@@ -19,7 +19,7 @@
 		text-transform: capitalize;
 		text-align: center;
 		font-size: 12px;
-		line-height: 14px;
+		line-height: 16px;
 		font-weight: 500;
 		color: #4a4a4a;
 	}
@@ -30,13 +30,17 @@
 	}
 	&.small .graph-text {
 		margin-top: -99px;
-		padding-top: 10px;
+		padding-top: 18px;
 		height: 94px;
 	}
 	.graph-text-count {
 		font-size: 30px;
-		line-height: 45px;
+		line-height: 41px;
 		font-weight: 700;
+	}
+	&.small .graph-text-count {
+		font-size: 28px;
+		line-height: 35px;
 	}
 
 	.tooltip-container {

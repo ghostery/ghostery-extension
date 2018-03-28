@@ -50,7 +50,7 @@
 
 	.button-pause {
 		min-width: 125px;
-		max-width: 150px;
+		max-width: 125px;
 		font-size: 11px;
 		line-height: 17px;
 		overflow-x: hidden;
@@ -61,9 +61,21 @@
 			background-position: 0 center;
 			background-size: 14px 16px;
 			background-image: buildIconPause(#4a4a4a);
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow-x: hidden;
 		}
 		&.active span {
 			background-image: buildIconPlay(#ffffff);
+		}
+		&.smaller {
+			min-width: 100px;
+			max-width: 150px;
+		}
+		&.smallest {
+			min-width: 41px;
+			max-width: 41px;
+			padding-left: 17px;
 		}
 	}
 	.button-caret {
@@ -100,21 +112,18 @@
 		width: 0;
 		height: 0;
 		top: 0;
-		left: 0;
-		&.centered { left: 43px; }
 
 		.dropdown {
 			text-align: center;
 			background-color: #ffffff;
 			border: 1px solid #cccccc;
 			border-top: 0;
-			width: 150px;
 			margin: 0 auto;
 			border-bottom-left-radius: 3px;
 			border-bottom-right-radius: 3px;
 		}
 		.dropdown-item {
-			padding: 7px 0;
+			padding: 12px 0;
 			background-color: #ffffff;
 
 			white-space: nowrap;
@@ -122,6 +131,9 @@
 			overflow-x: hidden;
 		}
 		.dropdown-item:hover {
+			background-color: #ebebeb;
+		}
+		.dropdown-item.selected {
 			background-color: #ebebeb;
 			span {
 				padding: 0 10px;
@@ -131,8 +143,12 @@
 				background-image: buildIconCircle(#4a4a4a);
 			}
 		}
-		.dropdown-item.selected {
-			background-color: #ebebeb;
-		}
+	}
+
+	.no-border-radius {
+		border-bottom-right-radius: 0;
+		border-bottom-left-radius: 0;
+		border-top-right-radius: 0;
+		border-top-left-radius: 0;
 	}
 }

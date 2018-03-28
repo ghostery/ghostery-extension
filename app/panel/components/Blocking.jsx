@@ -14,7 +14,7 @@
 import React, { Component } from 'react';
 import Categories from './Blocking/Categories';
 import BlockingHeader from './Blocking/BlockingHeader';
-import NotScanned from './NotScanned';
+import NotScanned from './BuildingBlocks/NotScanned';
 import { updateSummaryBlockingCount } from '../utils/blocking';
 /**
  * @class Implement Blocking View in the right
@@ -254,7 +254,7 @@ class Blocking extends React.Component {
 					paused_blocking={this.props.paused_blocking}
 					selected_app_ids={this.props.selected_app_ids}
 				/>
-				{this.state.disableBlocking ?
+				{(this.state.disableBlocking && this.props.is_expanded) ?
 					<NotScanned />
 					:
 					<div className={`${this.state.blockingClasses} blocking-trackers show-warnings`}>

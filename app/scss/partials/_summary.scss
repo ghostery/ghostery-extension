@@ -16,10 +16,10 @@
 	height: 479px;
 	width: 100%;
 	&.expert { width: 235px; }
-
-	.show-on-expert { display: none; }
-	&.expert .show-on-expert { display: block; }
-	&.expert .hide-on-expert { display: none; }
+	&.expert.condensed {
+		width: 66px;
+		background-color: #f9f6f6;
+	}
 
 	.clickable {
 		cursor: pointer;
@@ -35,6 +35,10 @@
 	&.expert .pause-button-container {
 		padding: 10px 0 0 0;
 		text-align: center;
+	}
+	&.expert.condensed .pause-button-container {
+		padding: 0;
+		text-align: left;
 	}
 
 	.page-host {
@@ -59,11 +63,20 @@
 		height: 94px;
 		width: 94px;
 	}
+	&.expert.condensed .total-tracker-count {
+		text-align: center;
+		margin: 13px 0;
+		padding: 0;
+		color: #4a4a4a;
+		font-size: 24px;
+		font-weight: 600;
+	}
 
 	.page-stats {
 		color: #4a4a4a;
 		text-align: center;
 		font-size: 14px;
+		line-height: 21px;
 		font-weight: 600;
 		margin-bottom: 30px;
 		.blocked-trackers .value { color: #e74055; }
@@ -87,6 +100,19 @@
 			overflow-x: hidden;
 		}
 	}
+	&.expert.condensed .page-stats {
+		margin-bottom: 0;
+		div {
+			text-align: center;
+			padding: 0;
+			margin: 13px 0;
+		}
+		.text { display: none; }
+	}
+
+	.not-scanned-expert-condensed-space-taker {
+		height: 130px;
+	}
 
 	.ghostery-features-container {
 		text-align: center;
@@ -94,6 +120,9 @@
 	}
 	&.expert .ghostery-features-container {
 			margin-bottom: 16px;
+	}
+	&.expert.condensed .ghostery-features-container {
+		margin-bottom: -8px;
 	}
 
 	.cliqz-features-container {

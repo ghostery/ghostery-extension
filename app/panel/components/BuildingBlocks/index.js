@@ -14,11 +14,13 @@
 import CliqzFeatures from './CliqzFeatures';
 import DonutGraph from './DonutGraph';
 import GhosteryFeatures from './GhosteryFeatures';
+import NotScanned from './NotScanned';
 import PauseButton from './PauseButton';
 
 export {
 	CliqzFeatures,
 	DonutGraph,
 	GhosteryFeatures,
+	NotScanned,
 	PauseButton
 };

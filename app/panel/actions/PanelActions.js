@@ -15,6 +15,7 @@ import { GET_PANEL_DATA, GET_SUMMARY_DATA, GET_BLOCKING_DATA,
 	SHOW_NOTIFICATION,
 	TOGGLE_CLIQZ_FEATURE,
 	CLOSE_NOTIFICATION,
+	TOGGLE_EXPERT,
 	LOGIN_SUCCESS, LOGIN_FAILED,
 	LOGOUT,
 	CREATE_ACCOUNT_SUCCESS, CREATE_ACCOUNT_FAILED,
@@ -98,6 +99,16 @@ export function closeNotification(data) {
 	return {
 		type: CLOSE_NOTIFICATION,
 		data,
+	};
+}
+
+/**
+ * Called from Header.toggleExpert() and picked up by panel reducer
+ * @return {Object}
+ */
+export function toggleExpert() {
+	return {
+		type: TOGGLE_EXPERT,
 	};
 }
 
