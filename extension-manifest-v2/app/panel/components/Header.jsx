@@ -10,14 +10,16 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ClassNames from 'classnames';
 import HeaderMenu from './HeaderMenu';
 import { sendMessage } from '../utils/msg';
 import { log } from '../../../src/utils/common';
+
 /**
- * @class Implement header component which is common to all panel views
+ * @class Implements header component which is common to all panel views
  * @memberof PanelClasses
  */
 class Header extends React.Component {
@@ -27,26 +29,53 @@ class Header extends React.Component {
 			dropdownOpen: false,
 		};
 
-		// event bindings
+		// Event Bindings
+		this.clickSimpleTab = this.clickSimpleTab.bind(this);
+		this.clickDetailedTab = this.clickDetailedTab.bind(this);
+		this.toggleExpert = this.toggleExpert.bind(this);
 		this.toggleDropdown = this.toggleDropdown.bind(this);
-		this.getKebab = this.getKebab.bind(this);
 		this.clickSignInVerify = this.clickSignInVerify.bind(this);
 	}
+
 	/**
-	 * Initialize kebab menu icon with refrence to DOM elementiption]
-	 * @param  {Object} ref React reference attribute of the menu icon
+	 * Handles clicking on the Simple View tab
 	 */
-	getKebab(ref) {
-		this.kebab = ref;
+	clickSimpleTab() {
+		if (this.props.is_expert) {
+			this.toggleExpert();
+		}
 	}
+
 	/**
-	 * Toggle drop-down pane with menu items
+	 * Handles clicking on the Detailed View tab
+	 */
+	clickDetailedTab() {
+		if (!this.props.is_expert) {
+			this.toggleExpert();
+		}
+	}
+
+	/**
+	 * Toggle between Simple and Detailed Views.
+	 */
+	toggleExpert() {
+		this.props.actions.toggleExpert();
+		if (this.props.is_expert) {
+			this.props.history.push('/');
+		} else {
+			this.props.history.push('/detail');
+		}
+	}
+
+	/**
+	 * Handles toggling the drop-down pane open/closed
 	 */
 	toggleDropdown() {
 		this.setState({ dropdownOpen: !this.state.dropdownOpen });
 	}
+
 	/**
-	 * Click the sign in / verify link in the header
+	 * Handles clicking the sign-in / verify link
 	 */
 	clickSignInVerify() {
 		if (!this.props.logged_in) {
@@ -63,17 +92,37 @@ class Header extends React.Component {
 			});
 		}
 	}
+
 	/**
-	 * Render header.
-	 * @return {ReactComponent}   ReactComponent instance
-	 */
+	* React's required render function. Returns JSX
+	* @return {JSX} JSX for rendering the Header Component of the panel
+	*/
 	render() {
 		const { pathname } = this.props.location;
 		const headerLogoClasses = ClassNames('header-logo', {
 			'show-back-arrow': (pathname !== '/' && !pathname.startsWith('/detail')),
 		});
+		const tabSimpleClassNames = ClassNames('header-tab', {
+			active: !this.props.is_expert,
+		});
+		const tabDetailedClassNames = ClassNames('header-tab', {
+			active: this.props.is_expert,
+		});
+
 		return (
 			<header id="ghostery-header">
+				<div className="header-tab-group flex-container align-bottom">
+					<div className={tabSimpleClassNames} onClick={this.clickSimpleTab}>
+						<span className="header-tab-text">
+							{t('panel_header_simple_view')}
+						</span>
+					</div>
+					<div className={tabDetailedClassNames} onClick={this.clickDetailedTab}>
+						<span className="header-tab-text">
+							{t('panel_header_detailed_view')}
+						</span>
+					</div>
+				</div>
 				<div className="top-bar">
 					<div className="top-bar-left">
 						<Link to={(this.props.is_expert ? '/detail/blocking' : '/')} className={headerLogoClasses} >
@@ -87,7 +136,11 @@ class Header extends React.Component {
 									{ !this.props.logged_in ? t('panel_header_sign_in') : (!this.props.is_validated ? t('panel_header_verify_account') : '') }
 								</div>
 							</div>
-							<div className="header-kebab shrink columns" ref={this.getKebab} onClick={this.toggleDropdown} />
+							<div
+								className="header-kebab shrink columns"
+								onClick={this.toggleDropdown}
+								ref={(node) => { this.kebab = node; }}
+							/>
 						</div>
 						{ this.state.dropdownOpen &&
 							<HeaderMenu

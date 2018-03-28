@@ -85,6 +85,7 @@ class DonutGraph extends React.Component {
 			renderRedscale,
 			renderGreyscale,
 			totalCount,
+			ghosteryFeatureSelect,
 			isSmall,
 		} = this.props;
 
@@ -92,6 +93,7 @@ class DonutGraph extends React.Component {
 			renderRedscale !== nextProps.renderRedscale ||
 			renderGreyscale !== nextProps.renderGreyscale ||
 			totalCount !== nextProps.totalCount ||
+			ghosteryFeatureSelect !== nextProps.ghosteryFeatureSelect ||
 			isSmall !== nextProps.isSmall) {
 			this.generateGraph(nextProps.categories, {
 				renderRedscale: nextProps.renderRedscale,

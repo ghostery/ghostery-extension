@@ -114,9 +114,10 @@ class CliqzFeatures extends React.Component {
 	 */
 	render() {
 		const showBody = true; // ToDo: use this later
-		const { isCondensed, isInactive } = this.props;
+		const { isSmaller, isCondensed, isInactive } = this.props;
 
 		const cliqzFeaturesClassNames = ClassNames('sub-component', 'cliqz-features', {
+			smaller: isSmaller,
 			condensed: isCondensed,
 			inactive: isInactive,
 		});
@@ -144,7 +145,7 @@ class CliqzFeatures extends React.Component {
 						<Tooltip
 							header={t('tooltip_anti_track')}
 							body={showBody && t('tooltip_anti_track_body')}
-							position={isCondensed ? 'top top-right' : 'top'}
+							position={isCondensed ? 'right' : isSmaller ? 'top top-right' : 'top'}
 						/>
 					</div>
 					<div className="feature-name">
@@ -157,7 +158,7 @@ class CliqzFeatures extends React.Component {
 						<Tooltip
 							header={t('tooltip_ad_block')}
 							body={showBody && t('tooltip_ad_block_body')}
-							position="top"
+							position={isCondensed ? 'right' : 'top'}
 						/>
 					</div>
 					<div className="feature-name">
@@ -170,7 +171,7 @@ class CliqzFeatures extends React.Component {
 						<Tooltip
 							header={t('tooltip_smart_block')}
 							body={showBody && t('tooltip_smart_block_body')}
-							position={isCondensed ? 'top top-left' : 'top'}
+							position={isCondensed ? 'right right-bottom' : isSmaller ? 'top top-left' : 'top'}
 						/>
 					</div>
 					<div className="feature-name">

@@ -18,6 +18,7 @@ import {
 	CliqzFeatures,
 	DonutGraph,
 	GhosteryFeatures,
+	NotScanned,
 	PauseButton
 } from './BuildingBlocks';
 
@@ -33,21 +34,23 @@ class Summary extends React.Component {
 		super(props);
 		this.state = {
 			trackerLatencyTotal: '',
+			disableBlocking: false,
 		};
 
 		// Event Bindings
 		this.toggleExpert = this.toggleExpert.bind(this);
 		this.clickPauseButton = this.clickPauseButton.bind(this);
 		this.clickDonut = this.clickDonut.bind(this);
+		this.clickTrackersCount = this.clickTrackersCount.bind(this);
 		this.clickTrackersBlocked = this.clickTrackersBlocked.bind(this);
 		this.clickSitePolicy = this.clickSitePolicy.bind(this);
 		this.clickCliqzFeature = this.clickCliqzFeature.bind(this);
 		this.clickMapTheseTrackers = this.clickMapTheseTrackers.bind(this);
 
 		this.pauseOptions = [
-			{ name: t('pause_30_min'), val: 30 },
-			{ name: t('pause_1_hour'), val: 60 },
-			{ name: t('pause_24_hours'), val: 1440 },
+			{ name: t('pause_30_min'), name_condensed: t('pause_30_min_condensed'), val: 30 },
+			{ name: t('pause_1_hour'), name_condensed: t('pause_1_hour_condensed'), val: 60 },
+			{ name: t('pause_24_hours'), name_condensed: t('pause_24_hours_condensed'), val: 1440 },
 		];
 	}
 
@@ -56,6 +59,7 @@ class Summary extends React.Component {
 	 */
 	componentWillMount() {
 		this.setTrackerLatency(this.props);
+		this.updateSiteNotScanned(this.props);
 	}
 
 	/**
@@ -63,6 +67,7 @@ class Summary extends React.Component {
 	 */
 	componentWillReceiveProps(nextProps) {
 		this.setTrackerLatency(nextProps);
+		this.updateSiteNotScanned(nextProps);
 
 		// Set page title for Firefox for Android
 		window.document.title = `Ghostery's findings for ${this.props.pageUrl}`;
@@ -90,6 +95,21 @@ class Summary extends React.Component {
 				pageLatency = (Number(timing.loadEventEnd - timing.navigationStart) / 1000).toFixed(2);
 			}
 			this.setState({ trackerLatencyTotal: `${pageLatency}` });
+		}
+	}
+
+	/**
+	 * Disable controls when Ghostery cannot or has not yet scanne a page.
+	 * @param {Object} props Summary's props, either this.props or nextProps.
+	 */
+	updateSiteNotScanned(props) {
+		const { siteNotScanned, categories } = props;
+		const pageUrl = props.pageUrl || '';
+
+		if (siteNotScanned || !categories || pageUrl.search('http') === -1) {
+			this.setState({ disableBlocking: true });
+		} else {
+			this.setState({ disableBlocking: false });
 		}
 	}
 
@@ -125,6 +145,13 @@ class Summary extends React.Component {
 			this.toggleExpert();
 		}
 		this.props.actions.filterTrackers(data);
+	}
+
+	/**
+	 * Handles clicking on the total trackers count on the condensed view
+	 */
+	clickTrackersCount() {
+		this.props.actions.filterTrackers({ type: 'trackers', name: 'all' });
 	}
 
 	/**
@@ -205,6 +232,7 @@ class Summary extends React.Component {
 	 * Handles clicking on Map These Trackers, which opens Evidon page.
 	 */
 	clickMapTheseTrackers() {
+		if (this.state.disableBlocking) { return; }
 		sendMessage('ping', 'live_scan');
 		sendMessage('openNewTab', {
 			url: `https:\/\/www.evidon.com/solutions/trackermap/?url=${this.props.pageUrl}&utm_source=Ghostery&utm_medium=referral&utm_term=&utm_content=&utm_campaign=GhosteryMapTrackers`,
@@ -216,85 +244,105 @@ class Summary extends React.Component {
 
 	/**
 	* React's required render function. Returns JSX
-	* @return {JSX} JSX for rendering the #additional-features step of the setup flow
+	* @return {JSX} JSX for rendering the Summary View of the panel
 	*/
 	render() {
+		const { is_expert, is_expanded } = this.props;
+		const showCondensed = is_expert && is_expanded;
+
 		const summaryClassNames = ClassNames('', {
-			expert: this.props.is_expert,
+			expert: is_expert,
+			condensed: showCondensed,
 		});
 
 		const blockedTrackersClassNames = ClassNames('blocked-trackers', {
-			clickable: this.props.is_expert,
+			clickable: is_expert,
 		});
 		const pageLoadClassNames = ClassNames('page-load', {
 			fast: +this.state.trackerLatencyTotal < 5,
 			slow: +this.state.trackerLatencyTotal > 10,
 		});
-
-		const toggleStyles = {
-			position: 'absolute',
-			bottom: 0,
-			left: 0,
-			height: '10px',
-			width: '10px',
-			backgroundColor: '#4a4a4a',
-			cursor: 'pointer',
-		};
+		const mapTheseTrackersClassNames = ClassNames('map-these-trackers', {
+			clickable: !this.state.disableBlocking,
+			'not-clickable': this.state.disableBlocking
+		});
 
 		return (
 			<div id="content-summary" className={summaryClassNames}>
-				<div onClick={this.toggleExpert} style={toggleStyles} />
-
 				<div className="pause-button-container">
 					<PauseButton
 						isPaused={this.props.paused_blocking}
 						isPausedTimeout={this.props.paused_blocking_timeout}
 						clickPause={this.clickPauseButton}
 						dropdownItems={this.pauseOptions}
-						isCentered={this.props.is_expert}
+						isCentered={is_expert}
+						isCondensed={showCondensed}
 					/>
 				</div>
 
-				<div className="page-host show-on-expert">
-					{this.props.pageHost}
-				</div>
+				{this.state.disableBlocking && !showCondensed && (
+					<NotScanned isSmall={is_expert} />
+				)}
 
-				<div className="donut-graph-container">
-					<DonutGraph
-						categories={this.props.categories}
-						renderRedscale={this.props.sitePolicy === 1}
-						renderGreyscale={this.props.paused_blocking}
-						totalCount={this.props.trackerCounts.allowed + this.props.trackerCounts.blocked || 0}
-						isSmall={this.props.is_expert}
-						clickDonut={this.clickDonut}
-					/>
-				</div>
-
-				<div className="page-host hide-on-expert">
-					{this.props.pageHost}
-				</div>
-
-				<div className="page-stats">
-					<div className={blockedTrackersClassNames} onClick={this.clickTrackersBlocked}>
-						<span className="text">{t('trackers_blocked')} </span>
-						<span className="value">
-							{this.props.trackerCounts.blocked || 0}
-						</span>
+				{!this.state.disableBlocking && is_expert && !showCondensed && (
+					<div className="page-host">
+						{this.props.pageHost || 'bloink fallon'}
 					</div>
-					<div className={pageLoadClassNames}>
-						<span className="text">{t('page_load')} </span>
-						<span className="value">
-							{this.state.trackerLatencyTotal ? `${this.state.trackerLatencyTotal} ${t('settings_seconds')}` : '-'}
-						</span>
+				)}
+
+				{!this.state.disableBlocking && !showCondensed && (
+					<div className="donut-graph-container">
+						<DonutGraph
+							categories={this.props.categories}
+							renderRedscale={this.props.sitePolicy === 1}
+							renderGreyscale={this.props.paused_blocking}
+							totalCount={this.props.trackerCounts.allowed + this.props.trackerCounts.blocked || 0}
+							ghosteryFeatureSelect={this.props.sitePolicy}
+							isSmall={is_expert}
+							clickDonut={this.clickDonut}
+						/>
 					</div>
-				</div>
+				)}
+				{!this.state.disableBlocking && showCondensed && (
+					<div className="total-tracker-count clickable" onClick={this.clickTrackersCount}>
+						{this.props.trackerCounts.allowed + this.props.trackerCounts.blocked || 0}
+					</div>
+				)}
+
+				{!this.state.disableBlocking && !is_expert && !showCondensed && (
+					<div className="page-host">
+						{this.props.pageHost}
+					</div>
+				)}
+
+				{!this.state.disableBlocking && (
+					<div className="page-stats">
+						<div className={blockedTrackersClassNames} onClick={this.clickTrackersBlocked}>
+							<span className="text">{t('trackers_blocked')} </span>
+							<span className="value">
+								{this.props.trackerCounts.blocked || 0}
+							</span>
+						</div>
+						<div className={pageLoadClassNames}>
+							<span className="text">{t('page_load')} </span>
+							<span className="value">
+								{this.state.trackerLatencyTotal ? `${this.state.trackerLatencyTotal} ${t('settings_seconds')}` : '-'}
+							</span>
+						</div>
+					</div>
+				)}
+
+				{this.state.disableBlocking && is_expert && showCondensed && (
+					<div className="not-scanned-expert-condensed-space-taker" />
+				)}
 
 				<div className="ghostery-features-container">
 					<GhosteryFeatures
 						clickButton={this.clickSitePolicy}
 						sitePolicy={this.props.sitePolicy}
-						isStacked={this.props.is_expert}
-						isInactive={this.props.paused_blocking}
+						isStacked={is_expert}
+						isInactive={this.props.paused_blocking || this.state.disableBlocking}
+						isCondensed={showCondensed}
 					/>
 				</div>
 
@@ -307,14 +355,17 @@ class Summary extends React.Component {
 						adBlocking={this.props.adBlock}
 						smartBlockingActive={this.props.enable_smart_block}
 						smartBlocking={this.props.smartBlock}
-						isCondensed={this.props.is_expert}
-						isInactive={this.props.paused_blocking || this.props.sitePolicy}
+						isInactive={this.props.paused_blocking || this.props.sitePolicy || this.state.disableBlocking}
+						isSmaller={is_expert}
+						isCondensed={showCondensed}
 					/>
 				</div>
 
-				<div className="map-these-trackers show-on-expert clickable" onClick={this.clickMapTheseTrackers}>
-					{ t('summary_map_these_trackers') }
-				</div>
+				{is_expert && !showCondensed && (
+					<div className={mapTheseTrackersClassNames} onClick={this.clickMapTheseTrackers}>
+						{ t('summary_map_these_trackers') }
+					</div>
+				)}
 
 			</div>
 		);

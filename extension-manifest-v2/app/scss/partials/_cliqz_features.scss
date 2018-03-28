@@ -24,7 +24,7 @@
 }
 
 @function buildIconDash($stroke-color) {
-	@return url('data:image/svg+xml;charset=US-ASCII,<svg width="15px" height="10px" viewBox="0 0 10 10" xmlns="http%3A//www.w3.org/2000/svg"><g><path stroke="#{$stroke-color}" stroke-width="4" d="M0,5 L10,5"/></g></svg>');
+	@return url('data:image/svg+xml;charset=US-ASCII,<svg width="15px" height="10px" viewBox="0 0 10 10" xmlns="http%3A//www.w3.org/2000/svg"><g><path stroke="#{$stroke-color}" stroke-width="3" d="M1,5 L9,5"/></g></svg>');
 }
 
 .sub-component.cliqz-features {
@@ -33,9 +33,21 @@
 		width: 150px;
 		margin: 0 10px;
 	}
-	&.condensed .cliqz-feature {
+	&.smaller .cliqz-feature {
 		width: 55px;
 		margin: 0 10px;
+	}
+	&.smaller.condensed .cliqz-feature {
+		width: 40px;
+		margin: 0 0 5px;
+		.count {
+			line-height: 14px;
+		}
+		.icon {
+			width: 40px;
+			height: 40px;
+			background-size: 30px 30px;
+		}
 	}
 
 	.count {
@@ -104,5 +116,5 @@
 	.active .feature-name { color: #1dafed; }
 	&.inactive .feature-name { color: #dedede; }
 	&.inactive .active .feature-name { color: #a4d4f2; }
-	&.condensed .feature-name { display: none; }
+	&.smaller .feature-name { display: none; }
 }
