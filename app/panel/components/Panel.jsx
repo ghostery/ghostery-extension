@@ -114,10 +114,12 @@ class Panel extends React.Component {
 			return null;
 		}
 		const needsReload = !!Object.keys(this.props.needsReload.changes).length;
-		const calloutText = needsReload ? (
+		const calloutText = (needsReload || this.props.notificationText) ? (
 			<span>
-				<span key="0">{ t('panel_needs_reload') }</span>
-				<span key="1" className="needs-reload-link" onClick={this.clickReloadBanner}>{ t('panel_click_to_reload') }</span>
+				<span key="0">{ this.props.notificationText || t('panel_needs_reload') }</span>
+				{needsReload ? (
+					<span key="1" className="needs-reload-link" onClick={this.clickReloadBanner}>{ t('panel_click_to_reload') }</span>
+				) : ''}
 			</span>
 		) : (this.props.notificationFilter === 'slow') ?
 			<span>
