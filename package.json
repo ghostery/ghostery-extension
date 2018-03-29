@@ -12,7 +12,7 @@
   "scripts": {
     "build.dev": "webpack --mode development --display-error-details --progress --env.dev",
     "build.prod": "webpack --mode production --display-error-details --progress --env.prod",
-    "build.watch": "webpack --mode development --watch --display-error-details --progress --env.dev  --env.watch",
+    "build.watch": "webpack --mode development --display-error-details --progress --verbose --watch --env.dev  --env.watch",
     "prebuild.dev": "node ./tools/licenses/fetchLicenses.js",
     "prebuild.prod": "node ./tools/licenses/fetchLicenses.js",
     "prebuild.watch": "node ./tools/licenses/fetchLicenses.js",
