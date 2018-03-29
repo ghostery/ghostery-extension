@@ -1,7 +1,7 @@
 /**
- * Site Policy Class
+ * Smart Blocking Policy Class
  *
- * Handles whitelist and blacklist functionality
+ * Handles policy for Smart Blocking
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -41,7 +41,7 @@ class PolicySmartBlock {
 	 * Determine if the tracker should be unblocked on a particular site to prevent site breaking.
 	 * @param  {string} appId       tracker id
 	 * @param  {string} catId       category id
-	 * @param  {number} 	tabId       tab id
+	 * @param  {number} tabId       tab id
 	 * @param  {string} pageURL     tab url
 	 * @param  {string} requestType type of the request
 	 * @return {boolean} 			true if one of the conditions is met, false they are not
@@ -70,7 +70,7 @@ class PolicySmartBlock {
 			return true;
 		}
 
-		// TODO tabInfo.setTabSmartBlockAppInfo() should happen here
+		// @TODO tabInfo.setTabSmartBlockAppInfo() should happen here
 
 		return false;
 	}
@@ -78,7 +78,7 @@ class PolicySmartBlock {
 	 * Determine if the tracker should be blocked on a particular site to prevent site breaking.
 	 * @param  {string} appId       tracker id
 	 * @param  {string} catId       category id
-	 * @param  {number} 	tabId       tab id
+	 * @param  {number} tabId       tab id
 	 * @param  {string} pageURL     tab url
 	 * @param  {string} requestType type of the request
 	 * @return {boolean}         	true if one of the conditions is met, false they are not
