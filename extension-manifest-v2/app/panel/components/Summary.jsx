@@ -187,7 +187,8 @@ class Summary extends React.Component {
 	 */
 	clickSitePolicy(button) {
 		const { paused_blocking, sitePolicy } = this.props;
-		let type, text;
+		let type;
+		let text;
 
 		if (this.state.disableBlocking || paused_blocking) {
 			return;

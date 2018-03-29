@@ -136,13 +136,13 @@ class PauseButton extends React.Component {
 							this.pauseLeft = node && node.offsetLeft;
 						}}
 					>
-					{this.props.isCondensed ? (
-						<span></span>
-					) : (
-						<span>
-							{this.props.isPaused ? t('summary_resume_ghostery') : t('summary_pause_ghostery')}
-						</span>
-					)}
+						{this.props.isCondensed ? (
+							<span />
+						) : (
+							<span>
+								{this.props.isPaused ? t('summary_resume_ghostery') : t('summary_pause_ghostery')}
+							</span>
+						)}
 					</div>
 					<div className={dropdownButtonClassNames} onClick={this.clickDropdownCaret}>
 						<span className="show-for-sr">
