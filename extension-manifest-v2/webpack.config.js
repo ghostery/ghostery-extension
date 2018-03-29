@@ -138,6 +138,7 @@ const config = {
 		licenses: [SASS_DIR + '/licenses.scss'],
 	},
 	devtool: 'none',
+	performance: { hints: false },
 	output: {
 		filename: '[name].js',
 		path: BUILD_DIR
