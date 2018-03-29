@@ -64,7 +64,7 @@ const lintOnChange = function() {
 	if (process.argv.includes('--env.fix')) {
 		args.push('--', '--fix')
 	}
-	lint = spawnSync('npm', args, { stdio: 'inherit'});
+	let lint = spawnSync('npm', args, { stdio: 'inherit'});
 	if (lint.status !== 0) {
 		process.exit(lint.status);
 	}
@@ -74,28 +74,19 @@ lintOnChange.prototype.apply = function(compiler) {
 	if (process.argv.includes('--env.prod') || (process.argv.includes('--env.nolint') || process.env.NO_LINT)) {
 		return;
 	}
-	compiler.plugin('emit', function(compilation, callback) {
-		let changedFiles = Object.keys(compilation.fileTimestamps).filter(function(watchfile) {
-			return (this.prevTimestamps[watchfile] || this.startTime) < (compilation.fileTimestamps[watchfile] || Infinity);
-		}.bind(this));
-
-		changedFiles = changedFiles.filter((file) => {
-			return file.indexOf('.js') !== -1;
-		});
-
-		if(changedFiles.length > 0) {
+	compiler.plugin("watch-run", (watching, done) => {
+		const changedTimes = compiler.watchFileSystem.watcher.mtimes;
+		const changedFiles = Object.keys(changedTimes);
+		if (changedFiles.length) {
 			const args = ['run', 'lint.raw', '--', ...changedFiles];
 			if (process.argv.includes('--env.fix')) {
 				args.push('--fix')
 			}
-			lint = spawnSync('npm', args, { stdio: 'inherit'});
+			let lint = spawnSync('npm', args, { stdio: 'inherit'});
 		}
+		done();
+	});
 
-		this.startTime = Date.now();
-		this.prevTimestamps = {};
-
-		callback();
-	}.bind(this));
 };
 
 const buildPlugins = [
