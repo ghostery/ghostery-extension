@@ -117,6 +117,7 @@ const config = {
 		notifications: [CONTENT_SCRIPTS_DIR + '/notifications.js'],
 		page_performance: [CONTENT_SCRIPTS_DIR + '/page_performance.js'],
 		platform_pages: [CONTENT_SCRIPTS_DIR + '/platform_pages.js'],
+		hotdog: [CONTENT_SCRIPTS_DIR + '/hotdog.js'],
 		purplebox: [CONTENT_SCRIPTS_DIR + '/purplebox.js'],
 		content_script_bundle: [CLIQZ_DIR + '/core/content-script.bundle.js'],
 		panel_react: [PANEL_DIR + '/index.jsx'],
