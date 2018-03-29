@@ -5,6 +5,8 @@
 			"id": "firefox@ghostery.com"
 		}
 	},
+	"debug": true,
+	"log": false,
 	"author": "Ghostery",
 	"name": "__MSG_name__",
 	"short_name": "Ghostery",
