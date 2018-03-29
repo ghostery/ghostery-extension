@@ -27,14 +27,9 @@ const { sendMessage } = msg;
 const { onMessage } = chrome.runtime;
 
 class HotDog {
-	constructor(win, doc) {
+	constructor() {
 		console.log('hot dog constructor');
-		this.win = win;
-		this.doc = doc;
-
-		console.log(win, window);
-		console.log(doc, document);
 	}
 }
 
-hotDog = new HotDog(window, document);
+const hotDog = new HotDog(window, document);
