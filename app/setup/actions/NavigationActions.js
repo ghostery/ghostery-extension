@@ -74,6 +74,9 @@ export function triggerSignIn() {
  */
 export function close() {
 	msg.sendMessage('closeSetup');
+	return {
+		type: 'DO_NOTHING',
+	};
 }
 
 /**
