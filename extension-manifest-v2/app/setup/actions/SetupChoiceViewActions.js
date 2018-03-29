@@ -11,9 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import {
-	DISABLE_SHOW_ALERT
-} from '../constants/constants';
 import { msg } from '../utils';
 
 /**
@@ -23,4 +20,7 @@ import { msg } from '../utils';
  */
 export function disableShowAlert() {
 	msg.sendMessage('disableShowAlert');
+	return {
+		type: 'DO_NOTHING',
+	};
 }
