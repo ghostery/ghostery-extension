@@ -27,6 +27,7 @@ const SRC_DIR = path.resolve(__dirname, 'src');
 const PANEL_DIR = path.resolve(__dirname, 'app/panel');
 const SETUP_DIR = path.resolve(__dirname, 'app/setup');
 const LICENSES_DIR = path.resolve(__dirname, 'app/licenses');
+const REWARDS_DIR = path.resolve(__dirname, 'app/rewards');
 const SASS_DIR = path.resolve(__dirname, 'app/scss');
 const CONTENT_SCRIPTS_DIR = path.resolve(__dirname, 'app/content-scripts');
 const RM = (process.platform === 'win32') ? 'powershell remove-item' : 'rm';
@@ -117,7 +118,7 @@ const config = {
 		notifications: [CONTENT_SCRIPTS_DIR + '/notifications.js'],
 		page_performance: [CONTENT_SCRIPTS_DIR + '/page_performance.js'],
 		platform_pages: [CONTENT_SCRIPTS_DIR + '/platform_pages.js'],
-		hotdog: [CONTENT_SCRIPTS_DIR + '/hotdog.js'],
+		rewards: [CONTENT_SCRIPTS_DIR + '/rewards'],
 		purplebox: [CONTENT_SCRIPTS_DIR + '/purplebox.js'],
 		content_script_bundle: [CLIQZ_DIR + '/core/content-script.bundle.js'],
 		panel_react: [PANEL_DIR + '/index.jsx'],
@@ -150,13 +151,16 @@ const config = {
 					loader: 'html-loader'
 				}
 			},{
-				test : /\.jsx?/,
-				include : [PANEL_DIR, SETUP_DIR, LICENSES_DIR],
+				test : /\.(jsx|js)?/,
+				include : [PANEL_DIR, SETUP_DIR, LICENSES_DIR, CONTENT_SCRIPTS_DIR, REWARDS_DIR],
 				use: {
 					loader: 'babel-loader'
 				}
 			},{
 				test: /\.scss?/,
+				exclude: [
+					path.resolve(__dirname, 'app/scss/rewards')
+				],
 				use: [
 					MiniCssExtractPlugin.loader,
 					{
@@ -164,12 +168,28 @@ const config = {
 					}, {
 						loader: "sass-loader",
 						options: {
-							sourceMap: false,
-							precision: 8,
 							includePaths: [
 								path.resolve(__dirname, 'node_modules/foundation-sites/scss'),
 							]
-						},
+						}
+					}]
+			},{
+				test: /\.scss?/,
+				include: [
+					path.resolve(__dirname, 'app/scss/rewards')
+				],
+				use: [
+					{
+						loader: "style-loader"
+					}, {
+						loader: "css-loader"
+					}, {
+						loader: "sass-loader",
+						options: {
+							includePaths: [
+								path.resolve(__dirname, 'node_modules/foundation-sites/scss'),
+							]
+						}
 					}]
 			},{
 				test: /\.svg$/,
