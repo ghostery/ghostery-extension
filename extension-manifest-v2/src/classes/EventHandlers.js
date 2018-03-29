@@ -48,7 +48,7 @@ class EventHandlers {
 		this.policy = new Policy();
 		this.policySmartBlock = new PolicySmartBlock();
 		this.purplebox = new PurpleBox();
-		this.hotdog = new hotdog();
+		this.hotdog = new HotDog();
 	}
 
 	/**
@@ -114,7 +114,7 @@ class EventHandlers {
 					tabInfo.setTabInfo(tabId, 'incognito', tab.incognito);
 					// purplebox.createBox() will first check to make sure this is a valid tab
 					this._createBox(tabId);
-					this.hotdog.showCircle();
+					this.hotdog.showCircle(tabId);
 				}
 			}, () => {
 				// prefetched tabs will return an error from utils.getTab

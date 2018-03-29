@@ -41,10 +41,10 @@ class HotDog {
 	showCircle(tab_id) {
 		console.log('showCircle HOT DOG');
 		const tab = tabInfo.getTabInfo(tab_id);
+		console.log(tab)
 		// If the tab is prefetched, we can't add purplebox to it.
-		if (!conf.show_alert ||
-			!conf.enable_offers ||
-			!tab || tab.hotdog) {
+		if (!conf.enable_offers ||
+			!tab || tab.hotDog) {
 			return Promise.resolve(false);
 		}
 
