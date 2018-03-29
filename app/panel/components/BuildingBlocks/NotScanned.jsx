@@ -19,30 +19,24 @@ import ClassNames from 'classnames';
  * when a site is not scannable or has not yet been scanned.
  * @memberof PanelClasses
  */
-class NotScanned extends React.Component {
-	/**
-	 * React's required render function. Returns JSX
-	 * @return {JSX} JSX for rendering the Not Scanned text on the Summary View
-	 */
-	render() {
-		const notScannedClassNames = ClassNames('sub-component', 'not-scanned', {
-			small: this.props.isSmall,
-		});
+const NotScanned = (props) => {
+	const notScannedClassNames = ClassNames('sub-component', 'not-scanned', {
+		small: props.isSmall,
+	});
 
-		return (
-			<div className={notScannedClassNames}>
-				<div className="not-scanned-header">
-					{t('summary_page_not_scanned') }
-				</div>
-				<div className="not-scanned-text">
-					{ t('summary_description_not_scanned_1') }
-				</div>
-				<div className="not-scanned-text">
-					{ t('summary_description_not_scanned_2') }
-				</div>
+	return ( // eslint-disable-line arrow-parens
+		<div className={notScannedClassNames}>
+			<div className="not-scanned-header">
+				{t('summary_page_not_scanned') }
 			</div>
-		);
-	}
-}
+			<div className="not-scanned-text">
+				{ t('summary_description_not_scanned_1') }
+			</div>
+			<div className="not-scanned-text">
+				{ t('summary_description_not_scanned_2') }
+			</div>
+		</div>
+	);
+};
 
 export default NotScanned;

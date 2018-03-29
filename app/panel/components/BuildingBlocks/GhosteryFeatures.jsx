@@ -32,6 +32,32 @@ class GhosteryFeatures extends React.Component {
 	}
 
 	/**
+	* Gets the text for the Trust Button under different conditions
+	* @return {String} The text for the Trust Button as a string
+	*/
+	getTrustText() {
+		if (this.props.isCondensed) {
+			return '';
+		} else if (this.props.sitePolicy === 2) {
+			return t('summary_trust_site_active');
+		}
+		return t('summary_trust_site');
+	}
+
+	/**
+	* Gets the text for the Restrict Button under different conditions
+	* @return {String} The text for the Restrict Button as a string
+	*/
+	getRestrictText() {
+		if (this.props.isCondensed) {
+			return '';
+		} else if (this.props.sitePolicy === 1) {
+			return t('summary_restrict_site_active');
+		}
+		return t('summary_restrict_site');
+	}
+
+	/**
 	 * Handles the click event for the Trust Site button
 	 */
 	clickTrustButton() {
@@ -62,39 +88,16 @@ class GhosteryFeatures extends React.Component {
 	}
 
 	/**
-	 * Gets the text for the Trust Button under different conditions
-	 * @return {String} The text for the Trust Button as a string
-	 */
-	getTrustText() {
-		if (this.props.isCondensed) {
-			return '';
-		} else if (this.props.sitePolicy === 2) {
-			return t('summary_trust_site_active');
-		} else {
-			return t('summary_trust_site');
-		}
-	}
-
-	/**
-	 * Gets the text for the Restrict Button under different conditions
-	 * @return {String} The text for the Restrict Button as a string
-	 */
-	getRestrictText() {
-		if (this.props.isCondensed) {
-			return '';
-		} else if (this.props.sitePolicy === 1) {
-			return t('summary_restrict_site_active');
-		} else {
-			return t('summary_restrict_site');
-		}
-	}
-
-	/**
 	 * React's required render function. Returns JSX
 	 * @return {JSX} JSX for rendering the Ghostery Features portion of the Summary View
 	 */
 	render() {
-		const { isInactive, isStacked, isCondensed, sitePolicy } = this.props;
+		const {
+			isInactive,
+			isStacked,
+			isCondensed,
+			sitePolicy
+		} = this.props;
 
 		const buttonGroupClassNames = ClassNames('button-group', {
 			inactive: isInactive,
