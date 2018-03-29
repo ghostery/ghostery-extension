@@ -94,11 +94,10 @@
 }
 
 .expert .sub-component.cliqz-features .g-tooltip .tooltip-content.right {
-	top: -40px;
 	margin-left: 16px;
 }
-.expert .sub-component.cliqz-features .ad-blocking .g-tooltip .tooltip-content.right {
-	top: -22px;
+.expert .sub-component.ghostery-features .g-tooltip .tooltip-content.right {
+	top: -50%;
 }
 
 .expert .g-tooltip .tooltip-content.top {
@@ -112,14 +111,6 @@
 		margin-left: -110px;
 		&:after {
 			left: 110px;
-		}
-	}
-}
-.expert .g-tooltip .tooltip-content.right {
-	&.right-bottom {
-		margin-top: -30px;
-		&:after {
-			top: 80px;
 		}
 	}
 }

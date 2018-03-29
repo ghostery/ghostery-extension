@@ -85,7 +85,11 @@ class CliqzFeatures extends React.Component {
 		if (this.props.isInactive) {
 			return;
 		}
-		this.props.clickButton('enable_ad_block', this.props.adBlockingActive);
+		this.props.clickButton({
+			feature: 'enable_ad_block',
+			status: this.props.adBlockingActive,
+			text: !this.props.adBlockingActive ? t('alert_ad_block_on') : t('alert_ad_block_off'),
+		});
 	}
 
 	/**
@@ -95,7 +99,11 @@ class CliqzFeatures extends React.Component {
 		if (this.props.isInactive) {
 			return;
 		}
-		this.props.clickButton('enable_smart_block', this.props.smartBlockingActive);
+		this.props.clickButton({
+			feature: 'enable_smart_block',
+			status: this.props.smartBlockingActive,
+			text: !this.props.smartBlockingActive ? t('alert_smart_block_on') : t('alert_smart_block_off'),
+		});
 	}
 
 	/**
@@ -105,7 +113,11 @@ class CliqzFeatures extends React.Component {
 		if (this.props.isInactive) {
 			return;
 		}
-		this.props.clickButton('enable_anti_tracking', this.props.antiTrackingActive);
+		this.props.clickButton({
+			feature: 'enable_anti_tracking',
+			status: this.props.antiTrackingActive,
+			text: !this.props.antiTrackingActive ? t('alert_anti_track_on') : t('alert_anti_track_off'),
+		});
 	}
 
 	/**
@@ -113,8 +125,14 @@ class CliqzFeatures extends React.Component {
 	 * @return {JSX} JSX for rendering the Cliqz Features portion of the Summary View
 	 */
 	render() {
-		const showBody = true; // ToDo: use this later
-		const { isSmaller, isCondensed, isInactive } = this.props;
+		const {
+			isSmaller,
+			isCondensed,
+			isInactive,
+			antiTrackingActive,
+			adBlockingActive,
+			smartBlockingActive,
+		} = this.props;
 
 		const cliqzFeaturesClassNames = ClassNames('sub-component', 'cliqz-features', {
 			smaller: isSmaller,
@@ -122,17 +140,17 @@ class CliqzFeatures extends React.Component {
 			inactive: isInactive,
 		});
 		const antiTrackingClassNames = ClassNames('anti-tracking', 'cliqz-feature', {
-			active: this.props.antiTrackingActive,
+			active: antiTrackingActive,
 			clickable: !isInactive,
 			'not-clickable': isInactive,
 		});
 		const adBlockingClassNames = ClassNames('ad-blocking', 'cliqz-feature', {
-			active: this.props.adBlockingActive,
+			active: adBlockingActive,
 			clickable: !isInactive,
 			'not-clickable': isInactive,
 		});
 		const smartBlockingClassNames = ClassNames('smart-blocking', 'cliqz-feature', {
-			active: this.props.smartBlockingActive,
+			active: smartBlockingActive,
 			clickable: !isInactive,
 			'not-clickable': isInactive,
 		});
@@ -144,7 +162,7 @@ class CliqzFeatures extends React.Component {
 					<div className="icon g-tooltip">
 						<Tooltip
 							header={t('tooltip_anti_track')}
-							body={showBody && t('tooltip_anti_track_body')}
+							body={!(isSmaller && isCondensed) && (antiTrackingActive ? t('tooltip_anti_track_body_on') : t('tooltip_anti_track_body'))}
 							position={isCondensed ? 'right' : isSmaller ? 'top top-right' : 'top'}
 						/>
 					</div>
@@ -157,7 +175,7 @@ class CliqzFeatures extends React.Component {
 					<div className="icon g-tooltip">
 						<Tooltip
 							header={t('tooltip_ad_block')}
-							body={showBody && t('tooltip_ad_block_body')}
+							body={!(isSmaller && isCondensed) && (adBlockingActive ? t('tooltip_ad_block_body_on') : t('tooltip_ad_block_body'))}
 							position={isCondensed ? 'right' : 'top'}
 						/>
 					</div>
@@ -170,8 +188,8 @@ class CliqzFeatures extends React.Component {
 					<div className="icon g-tooltip">
 						<Tooltip
 							header={t('tooltip_smart_block')}
-							body={showBody && t('tooltip_smart_block_body')}
-							position={isCondensed ? 'right right-bottom' : isSmaller ? 'top top-left' : 'top'}
+							body={!(isSmaller && isCondensed) && (smartBlockingActive ? t('tooltip_smart_block_body_on') : t('tooltip_smart_block_body'))}
+							position={isCondensed ? 'right' : isSmaller ? 'top top-left' : 'top'}
 						/>
 					</div>
 					<div className="feature-name">

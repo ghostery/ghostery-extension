@@ -185,7 +185,7 @@ const _showNotification = (state, action) => {
 		sendMessage('setPanelData', { needsReload: updated_needsReload });
 
 		// if we have changes and the user wants to see banners, then show
-		if (Object.keys(updated_needsReload.changes).length > 0 && reloadBannerStatus.show && nowTime > reloadBannerStatus.show_time) {
+		if ((msg.text || Object.keys(updated_needsReload.changes).length > 0) && reloadBannerStatus.show && nowTime > reloadBannerStatus.show_time) {
 			updated_notificationShown = true;
 		} else {
 			updated_notificationShown = false;

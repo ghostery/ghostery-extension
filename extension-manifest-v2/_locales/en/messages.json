@@ -1173,17 +1173,53 @@
 	"settings_filter_new": {
 		"message": "New Since Last Update"
 	},
+	"alert_anti_track_on": {
+		"message": "Enhanced Anti-Trackng ON. Private data points have been removed."
+	},
+	"alert_anti_track_off": {
+		"message": "Enhanced Anti-Tracking OFF."
+	},
+	"alert_ad_block_on": {
+		"message": "Enhanced Ad-Blocking ON. Advertisements have been blocked."
+	},
+	"alert_ad_block_off": {
+		"message": "Enhanced Ad-Blocking OFF."
+	},
+	"alert_smart_block_on": {
+		"message": "Smart Blocking ON. Tracker blocking adjusted to optimize page performance."
+	},
+	"alert_smart_block_off": {
+		"message": "Smart Blocking OFF."
+	},
+	"alert_site_trusted": {
+		"message": "Site whitelisted. Trackers are allowed and private data points unprotected."
+	},
+	"alert_site_trusted_off": {
+		"message": "Site removed from the whitelist."
+	},
+	"alert_site_restricted": {
+		"message": "Site blacklisted. Trackers are blocked and Anti-Tracking on for this site."
+	},
+	"alert_site_restricted_off": {
+		"message": "Site removed from the blacklist."
+	},
 	"tooltip_anti_track": {
 		"message": "Enhanced Anti-Tracking"
 	},
 	"tooltip_anti_track_body": {
-		"message": "Anonymize unblocked and unknown trackers for greater browsing protection."
+		"message": "Remove private data points for greater anonymity."
+	},
+	"tooltip_anti_track_body_on": {
+		"message": "Private data points have been removed."
 	},
 	"tooltip_ad_block": {
 		"message": "Enhanced Ad Blocking"
 	},
 	"tooltip_ad_block_body": {
-		"message": "Block advertisements on websites you visit."
+		"message": "Block advertisements."
+	},
+	"tooltip_ad_block_body_on": {
+		"message": "Advertisements have been blocked."
 	},
 	"tooltip_smart_block": {
 		"message": "Smart Blocking"
@@ -1191,11 +1227,20 @@
 	"tooltip_smart_block_body": {
 		"message": "Automatically block and unblock trackers to optimize page performance."
 	},
+	"tooltip_smart_block_body_on": {
+		"message": "Tracking blocking adjusted to optimize page performance."
+	},
 	"tooltip_trust": {
-		"message": "Always allow trackers on this site."
+		"message": "Always allow trackers & turn off Anti-Tracking on tis site."
+	},
+	"tooltip_trust_on": {
+		"message": "Trackers allowed and unprotected on site. Click to Undo."
 	},
 	"tooltip_restrict": {
-		"message": "Always block trackers on this site."
+		"message": "Always block trackers & protect my data on this site."
+	},
+	"tooltip_restrict_on": {
+		"message": "Trackers blocked and protected on site. Click to Undo."
 	},
 	"tooltip_custom_settings": {
 		"message": "Use my selected tracker settings."

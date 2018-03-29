@@ -187,7 +187,7 @@ class Summary extends React.Component {
 	 */
 	clickSitePolicy(button) {
 		const { paused_blocking, sitePolicy } = this.props;
-		let type;
+		let type, text;
 
 		if (this.state.disableBlocking || paused_blocking) {
 			return;
@@ -196,9 +196,11 @@ class Summary extends React.Component {
 		if (button === 'trust' || (button === 'custom' && sitePolicy === 2)) {
 			sendMessage('ping', 'trust_site');
 			type = 'whitelist';
+			text = (sitePolicy === 2) ? t('alert_site_trusted_off') : t('alert_site_trusted');
 		} else if (button === 'restrict' || (button === 'custom' && sitePolicy === 1)) {
 			sendMessage('ping', 'restrict_site');
 			type = 'blacklist';
+			text = (sitePolicy === 1) ? t('alert_site_restricted_off') : t('alert_site_restricted');
 		} else {
 			return;
 		}
@@ -212,18 +214,23 @@ class Summary extends React.Component {
 		this.props.actions.showNotification({
 			updated: type,
 			reload: true,
+			text,
 		});
 	}
 
 	/**
 	 * Handles clicking on Cliqz Features: AntiTracking, AdBlocking, SmartBlocking
-	 * @param {String} feature the Cliqz feature name: enable_anti_tracking, enable_ad_block, enable_smart_block
-	 * @param {Boolean} status whether the feature should be turned on or off
+	 * @param {Object} options options including:
+	 * 													feature: enable_anti_tracking, enable_ad_block, enable_smart_block
+	 * 													status: whether the feature should be turned on or off
+	 * 													text: the text for the notification.
 	 */
-	clickCliqzFeature(feature, status) {
+	clickCliqzFeature(options) {
+		const { feature, status, text } = options;
 		this.props.actions.showNotification({
 			updated: feature,
 			reload: true,
+			text,
 		});
 		this.props.actions.toggleCliqzFeature(feature, status);
 	}

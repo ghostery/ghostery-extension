@@ -12,6 +12,7 @@
  */
 
 import React, { Component } from 'react';
+import ClassNames from 'classnames';
 import Categories from '../Blocking/Categories';
 import BlockingHeader from '../Blocking/BlockingHeader';
 /**
@@ -40,12 +41,12 @@ class GlobalBlocking extends React.Component {
 		const categories = this.props.settingsData ? this.props.settingsData.categories : [];
 		const filterText = this.props.settingsData ? this.props.settingsData.filterText : t('settings_filter_all_label');
 		const expandAll = this.props.settingsData ? this.props.settingsData.expand_all_trackers : false;
+		const condensedToggleClassNames = ClassNames('condensed-toggle', {
+			condensed: settingsData.is_expanded,
+		});
 		return (
 			<div id="settings-global-blocking" className={(settingsData.is_expanded ? 'expanded' : '')}>
-				<div className={`expertTab row align-middle align-right ${settingsData.is_expanded ? 'expanded' : ''}`} onClick={this.toggleExpanded} >
-					<div className={settingsData.is_expanded ? 'reverse-dash' : 'dash'} />
-					<div className={settingsData.is_expanded ? 'reverse-moon' : 'moon'} />
-				</div>
+				<div className={condensedToggleClassNames} onClick={this.toggleExpanded} />
 				<BlockingHeader
 					categories={categories}
 					filterText={filterText}
