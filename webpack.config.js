@@ -15,7 +15,7 @@
 const glob = require('glob');
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WebpackShellPlugin = require('webpack-shell-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const spawnSync = require('child_process').spawnSync;
@@ -32,9 +32,9 @@ const CONTENT_SCRIPTS_DIR = path.resolve(__dirname, 'app/content-scripts');
 const RM = (process.platform === 'win32') ? 'powershell remove-item' : 'rm';
 
 // webpack plugins
-const extractSass = new ExtractTextPlugin({
-	filename: 'css/[name].css',
-	disable: false
+
+const extractSass = new MiniCssExtractPlugin({
+	filename: "css/[name].css"
 });
 
 // @TODO: Refactor so this isn't necessary
@@ -107,44 +107,10 @@ const buildPlugins = [
 	new webpack.DefinePlugin({
 		't': t,
 	}),
-	new webpack.DefinePlugin({
-		'process.env': {
-			'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-		}
-	}),
 	new webpack.BannerPlugin({
 		banner: "if(typeof browser!=='undefined'){chrome=browser;}",
 		raw: true,
 		include: /\.js$/
-	}),
-	new webpack.optimize.CommonsChunkPlugin({
-		name: "browser-core",
-		filename: "browser-core.js",
-		chunks: ['background'],
-		minChunks: function (module) {
-			return module.context
-			&& module.context.includes('browser-core');
-		}
-	}),
-	new webpack.optimize.CommonsChunkPlugin({
-		name: "vendor",
-		chunks: ['background', 'browser-core'],
-		minChunks: function (module) {
-			return module.context
-				&& module.context.includes('node_modules')
-				&& !module.context.includes('browser-core');
-		}
-	}),
-	new webpack.optimize.CommonsChunkPlugin({
-		name: "vendor-panel",
-		chunks: ['panel_react'],
-		minChunks: function (module) {
-			return module.context && module.context.includes("node_modules");
-		}
-	}),
-	new webpack.SourceMapDevToolPlugin({
-		filename: "sourcemaps/[file].map",
-		include: ["panel_react.js", "browser-core.js", "background.js"]
 	})
 ];
 
@@ -171,6 +137,7 @@ const config = {
 		setup: [SASS_DIR + '/setup.scss'],
 		licenses: [SASS_DIR + '/licenses.scss'],
 	},
+	devtool: 'none',
 	output: {
 		filename: '[name].js',
 		path: BUILD_DIR
@@ -195,18 +162,20 @@ const config = {
 				}
 			},{
 				test: /\.scss?/,
-				use: extractSass.extract({
-						use: [{
-							loader: 'css-loader'
-						}, {
-							loader: 'sass-loader',
-							options: {
-								includePaths: [path.resolve(__dirname, 'node_modules/foundation-sites/scss')]
-							}
-						}],
-						// use style-loader in development
-						fallback: 'style-loader'
-				})
+				use: [
+					MiniCssExtractPlugin.loader,
+					{
+						loader: "css-loader"
+					}, {
+						loader: "sass-loader",
+						options: {
+							sourceMap: false,
+							precision: 8,
+							includePaths: [
+								path.resolve(__dirname, 'node_modules/foundation-sites/scss'),
+							]
+						},
+					}]
 			},{
 				test: /\.svg$/,
 				loader: 'svg-url-loader'
