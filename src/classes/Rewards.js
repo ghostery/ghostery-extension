@@ -28,10 +28,6 @@ const t = chrome.i18n.getMessage;
  * @todo  make it a Singelton
  */
 class Rewards {
-	constructor() {
-
-	}
-
 	/**
 	 * Build the rewards container.  Called from webNavigation.onCommitted handler
 	 *
@@ -39,9 +35,9 @@ class Rewards {
 	 * @return {Promise}		resolves to true or false (success/failure)
 	 */
 	showCircle(tab_id) {
-		console.log('showCircle HOT DOG');
+		// console.log('showCircle HOT DOG');
 		const tab = tabInfo.getTabInfo(tab_id);
-		console.log(tab)
+		// console.log(tab);
 		// If the tab is prefetched, we can't add purplebox to it.
 		if (!conf.enable_offers ||
 			!tab || tab.rewards) {
@@ -54,15 +50,14 @@ class Rewards {
 		// So update hotdog status for this tab
 		tabInfo.setTabInfo(tab_id, 'rewards', true);
 
-		console.log('INJECT REWARDS');
+		// console.log('INJECT REWARDS');
 		return injectScript(tab_id, 'dist/rewards.js', 'dist/css/purplebox_styles.css', 'document_start').then(() => {
-			console.log('REWARDS INJECTED');
+			// console.log('REWARDS INJECTED');
 		}).catch((err) => {
 			log('rewards injectScript error', err);
 			return false;
 		});
 	}
-
 }
 
 export default Rewards;
