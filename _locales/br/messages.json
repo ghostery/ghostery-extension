@@ -1,0 +1,1485 @@
+{
+	"account_creation_privacy_statement": {
+		"message": "Asantiñ a ran da dretadur ar roadennoù graet gant Ghostery evel ma 'z eo deskrivet e-barzh $LINK_PS_START$an Diskleriadur prevezded$LINK_PS_END$ hag e-barzh an amplegadoù hollek an $LINK_UA_START$Emglev Lisañs$LINK_UA_END$.",
+		"placeholders": {
+			"link_ps_end": {
+				"content": "</a>"
+			},
+			"link_ps_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-us/privacy-statements/ghostery-browser-extension/ghostery-browser-extension-privacy-statement/\">"
+			},
+			"link_ua_end": {
+				"content": "</a>"
+			},
+			"link_ua_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-us/privacy-statements/ghostery-browser-extension/ghostery-browser-extension-end-user-license-agreem/\">"
+			}
+		}
+	},
+	"all": {
+		"description": "Default setting in the 'filter by type' dropdown for the tag browser. Doesn't filter anything out. Should read as 'Show all'.",
+		"message": "pep-tra"
+	},
+	"banner_check_your_email_title": {
+		"message": "Ur postel evit adderaouekaat ho ker-tremen a zo bet kaset deoc'h. Klaskit en-dro a-benn ur mareig."
+	},
+	"banner_no_such_account_message": {
+		"message": "Poan hon eus da anavezout an implijer hag ar ger-tremen. Klaskit en-dro mar plij. "
+	},
+	"blacklist_error_duplicate_url": {
+		"message": "Ar moned war al lec'hienn-mañ a zo bevennet dija."
+	},
+	"blacklist_error_whitelist_url": {
+		"message": "Tennet eo bet al lec'hienn-mañ diwar hol listennad lec'hiennoù fizius, hag ouzhpennet d'hol listenn lec'hiennoù gant ur moned bevennet."
+	},
+	"blocked": {
+		"description": "Select this to show only blocked (checked) tags in the tag browser. Should read as 'Show blocked'.",
+		"message": "forbannet"
+	},
+	"blocked_redirect_action_always_title": {
+		"description": "Title for the 'Allow always and reload' button on the blocked redirect page.",
+		"message": "Aotren dalc'hmat ha kargañ en-dro."
+	},
+	"blocked_redirect_action_through_once_title": {
+		"description": "Title for the 'Allow always and reload' button on the blocked redirect page.",
+		"message": "Aotren ar balizennoù ur wech hepken, betek tizhout al lec'h kas diwezhañ."
+	},
+	"blocked_redirect_page_title": {
+		"description": "Page title for blocked_redirect.html which appears when a redirect is blocked.",
+		"message": "Un adhenchañ a zo bet forbannet gant Gostherry."
+	},
+	"blocked_redirect_prevent": {
+		"description": "Page title for blocked_redirect.html which appears when a redirect is blocked. Should appear inside \"redirect-prevent\" div.",
+		"message": "Ghostery en deus forbannet un adhenchadur gant $BREAK$ $SP_O_START$$ORIGIN$$SP_END$ davet $SP_D_START$$DESTINATION$$SP_END$, $BREAK$hag a zo e-barzh $A_START$$APP$$A_END$. $BREAK$",
+		"placeholders": {
+			"a_end": {
+				"content": "</a>"
+			},
+			"a_start": {
+				"content": "<a id=\"name\" href=\"$4\" target=\"_blank\">"
+			},
+			"app": {
+				"content": "$3",
+				"example": "Klikdoubl"
+			},
+			"break": {
+				"content": "<br>"
+			},
+			"destination": {
+				"content": "$2"
+			},
+			"origin": {
+				"content": "$1"
+			},
+			"sp_d_start": {
+				"content": "<span id=\"destination\">"
+			},
+			"sp_end": {
+				"content": "</span>"
+			},
+			"sp_o_start": {
+				"content": "<span id=\"origin\">"
+			}
+		}
+	},
+	"blocked_redirect_url_content": {
+		"description": "Text appearing on block_redirect.html when a redirect is blocked and a final 'destination' URL is successfully found.",
+		"message": "Ar balizenn-mañ a ziskouez adhenchañ betek $BREAK$ $A_START$$REDIRECT_URL$$A_END$. Ma kav deoc'h ez eo ul liamm reizh hag e fell deoc'h kenderc'hel ganti, klikit war an arlun amañ dindan evit aotren $APP$ hag adkargañ ar bajenn.",
+		"placeholders": {
+			"a_end": {
+				"content": "</a>"
+			},
+			"a_start": {
+				"content": "<a href=\"$1\" class=\"ellipsis\" title=\"$1\">"
+			},
+			"app": {
+				"content": "$2",
+				"example": "Klikdoubl"
+			},
+			"break": {
+				"content": "<br>"
+			},
+			"redirect_url": {
+				"content": "$1"
+			}
+		}
+	},
+	"box_dismiss_0s": {
+		"message": "$SPAN_START$Chom hep $SPAN_END$dilezel ar reked morse",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
+	},
+	"box_dismiss_15s": {
+		"message": "Dilezel ar reked $SPAN_START$war-lerc'h 15/pemzek eilenn$SPAN_END$",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
+	},
+	"box_dismiss_30s": {
+		"message": "Dilezel ar reked $SPAN_START$war-lerc'h 30/tregont eilenn$SPAN_END$",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
+	},
+	"box_dismiss_5s": {
+		"message": "Dilezel ar reked $SPAN_START$war-lerc'h 5/pemp eilenn$SPAN_END$",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
+	},
+	"box_display_bl": {
+		"message": "Diskouez $SPAN_START$er c'horn traoñ kleiz$SPAN_END$",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
+	},
+	"box_display_br": {
+		"message": "Diskouez $SPAN_START$e-barzh ar c'horn traoñ dehou$SPAN_END$",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
+	},
+	"box_display_tl": {
+		"message": "Diskouez $SPAN_START$e-barzh ar c'horn laez kleiz$SPAN_END$",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
+	},
+	"box_display_tr": {
+		"message": "Diskouez $SPAN_START$er c'horn laez dehou$SPAN_END$",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
+	},
+	"box_hide": {
+		"message": "Kuzhat al log"
+	},
+	"box_hide_expanded": {
+		"message": "Kuzhat al log limestra"
+	},
+	"box_looking": {
+		"message": "Merdeiñ"
+	},
+	"box_options_expanded": {
+		"message": "Dibarzhioù"
+	},
+	"box_settings": {
+		"message": "Arventennoù"
+	},
+	"box_settings_expanded": {
+		"message": "Ma arventennoù Ghostery din"
+	},
+	"box_tracker": {
+		"message": "Heulier"
+	},
+	"box_trackers": {
+		"message": "toupinoù"
+	},
+	"box_warning_slow": {
+		"message": "Diskouez an toupinoù"
+	},
+	"box_warning_nonsecure": {
+		"message": "toupinoù nann-suraet"
+	},
+	"box_warning_compatibility": {
+		"message": "toupinoù pajenn dorret"
+	},
+	"browser_button_tooltip": {
+		"description": "Ghostery's browser button tooltip.",
+		"message": "Diskouez an disoc'hoù kavet gant Ghostery"
+	},
+	"button_cancel": {
+		"description": "Part of a confirmation dialog. Clicking this cancels the action.",
+		"message": "Nullañ"
+	},
+	"category_advertising": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "Bruderezh"
+	},
+	"category_advertising_desc": {
+		"description": "User-facing description for the Advertising tag category.",
+		"message": "A ebarzh servijoù bruderezh evel an dastum roadennoù, an analizadur emzalc'h pe an advukañ."
+	},
+	"category_audio_video_player": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "Lenner aodio/video "
+	},
+	"category_audio_video_player_desc": {
+		"description": "User-facing description for the Audio/Video Player tag category.",
+		"message": "Aotren a ra al lec'hiennoù da embann, rannañ ha gwellekaat endalc'hadoù aodio ha video."
+	},
+	"category_comments": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "Evezhiadennoù"
+	},
+	"category_comments_desc": {
+		"description": "User-facing description for the Comments tag category.",
+		"message": "Pourveziñ a ra prenestroù evit evezhiadennoù dindan an traoù pe priziadennoù ar produioù."
+	},
+	"category_customer_interaction": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "Etreoberiantiz gant ar pratikoù"
+	},
+	"category_customer_interaction_desc": {
+		"description": "User-facing description for the Customer Interaction tag category.",
+		"message": "Pourveziñ a ra ostilhoù flapañ, flaperezh dre bostel, skoazellerezh evit ar pratikoù, hag ostilhoù etreoberiant all."
+	},
+	"category_essential": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "Pouezus"
+	},
+	"category_essential_desc": {
+		"description": "User-facing description for the Essential tag category.",
+		"message": "Enklozañ a ra toupinoù pouezus evit mont en-dro al lec'hienn (d.sk. merourioù ar balizoù ar c'hemennoù prevezded)."
+	},
+	"category_pornvertising": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "Bruderezhioù evit al lec'hiennoù gouestlet d'an dud c'hour hepken"
+	},
+	"category_pornvertising_desc": {
+		"description": "User-facing description for the Adult Advertising tag category.",
+		"message": "Pourveziñ a ra teknologiezhioù hag ostilhoù bruderezh evit lec'hiennoù a embann endalc'hadoù evit an dud c'hour."
+	},
+	"category_site_analytics": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "Ostilhoù analizañ lec'hiennoù web"
+	},
+	"category_site_analytics_desc": {
+		"description": "User-facing description for the Site Analytics tag category.",
+		"message": "Enklozañ a ra ostilhoù analizañ lec'hiennoù internet, roadennoù implij hag heuliañ an askoradoù."
+	},
+	"category_social_media": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "Mediaoù sokial"
+	},
+	"category_social_media_desc": {
+		"description": "User-facing description for the Social Media tag category.",
+		"message": "Enklozañ a ra dibarzhioù liammet d'ar pladfurmioù rouedadoù sokial."
+	},
+	"category_uncategorized": {
+		"message": "Nann-rummet"
+	},
+	"category_uncategorized_desc": {
+		"message": "N'eo ket bet rummet an toupinoù-mañ evit ar mare."
+	},
+	"click2play_allow_always_tooltip": {
+		"description": "Tooltip that appears over the 'allow always' click2play button.",
+		"message": "Aotren ha kargañ en-dro."
+	},
+	"click2play_allow_once_button_tooltip": {
+		"description": "Tooltip that appears over the click2play replacement for 'social' buttons.",
+		"message": "Ghostery en deus stanket $APP_NAME$. Klikit amañ evit adlorc'hañ ar reked ur wech hepken.",
+		"placeholders": {
+			"app_name": {
+				"content": "$1",
+				"example": "Bouton Twitter"
+			}
+		}
+	},
+	"click2play_allow_once_tooltip": {
+		"description": "Tooltip that appears over the 'allow once' click2play button.",
+		"message": "Aotren ur wech ha kargañ ur wech c'hoazh."
+	},
+	"click2play_blocked": {
+		"message": "Stanket en deus Ghostery $APP_NAME$.",
+		"placeholders": {
+			"app_name": {
+				"content": "$1",
+				"example": "SoundCloud"
+			}
+		}
+	},
+	"click2play_comment_form": {
+		"message": "Evezhiadennoù $NAME$ a zo bet stanket gant Ghostery.",
+		"placeholders": {
+			"name": {
+				"content": "$1",
+				"example": "Disqus"
+			}
+		}
+	},
+	"click2play_review_form": {
+		"message": "Ghostery en deus stanket ar priziadennoù graet gant $NAME$.",
+		"placeholders": {
+			"name": {
+				"content": "$1",
+				"example": "Disqus"
+			}
+		}
+	},
+	"click2play_survey_form": {
+		"message": "Ar sondadeg kaset gant $NAME$ a zo bet stanket gant Ghostery.",
+		"placeholders": {
+			"name": {
+				"content": "$1",
+				"example": "Disqus"
+			}
+		}
+	},
+	"click2play_video_form": {
+		"message": "Ghostery a zo bet stanket gantañ al lenner video $NAME$.",
+		"placeholders": {
+			"name": {
+				"content": "$1",
+				"example": "Disqus"
+			}
+		}
+	},
+	"consent_privacy": {
+		"message": "Aotre rekiset."
+	},
+	"copyright": {
+		"description": "Copyright message, shown in page footers.",
+		"message": "$C$ $YEAR$ $GHOSTERY$, filiale de $COMPANY_ADDRESS$",
+		"placeholders": {
+			"c": {
+				"content": "&copy;"
+			},
+			"company_address": {
+				"content": "$1",
+				"example": "GHOSTERY, Inc., Such-and-such Street, Such-and-such Floor, New York, NY, Zip Code"
+			},
+			"ghostery": {
+				"content": "<a href='https://www.ghostery.com' target='_blank'>Ghostery</a>"
+			},
+			"year": {
+				"content": "2015"
+			}
+		}
+	},
+	"email_confirm_field_label": {
+		"message": "Kadarnait ho ker-tremen"
+	},
+	"email_field_label": {
+		"message": "Postel:"
+	},
+	"error_email_forgot": {
+		"message": "Digarezit... N'on ket evit kavout ar chomlec'h-mañ. Klask gant ur chomlec'h postel all?"
+	},
+	"first_name_field_label": {
+		"message": "Anv-bihan (diret):"
+	},
+	"forgot_password_message": {
+		"message": "Ankoueet ho peus ho ker-tremen? Kement-se a c'hoarvez d'an holl dud. Emaomp o vont da gas deoc'h ur postel evit adderaouekaat ho ker-tremen."
+	},
+	"invalid_email_confirmation": {
+		"message": "Ne anavezer ket ho posteloù."
+	},
+	"invalid_email_create": {
+		"message": "Skrivit ur chomlec'h postel reizh mar plij."
+	},
+	"invalid_email_forgot": {
+		"message": "Digarezit, rankout a rit skrivañ ur chomlec'h postel reizh mar plij."
+	},
+	"invalid_email_login": {
+		"message": "Digarezit, rankout a rit skrivañ ur chomlec'h postel reizh mar plij, avat."
+	},
+	"last_name_field_label": {
+		"message": "Anv familh (diret):"
+	},
+	"password_field_label_required": {
+		"message": "Ger-tremen rekiset."
+	},
+	"name": {
+		"description": "The title of this extension (Ghostery).",
+		"message": "$EXTENSION_NAME$ – Bloqueur de publicité protégeant la vie privée",
+		"placeholders": {
+			"extension_name": {
+				"content": "Ghostery"
+			}
+		}
+	},
+	"none": {
+		"description": "Used to say that this item does not belong to any of the groups, as in \"Groups: None\" (as opposed to \"Groups: Group A, Group B, Group C\").",
+		"message": "Hini ebet"
+	},
+	"summary_blocked": {
+		"description": "as in '5 (mouchards) BLOCKED'",
+		"message": "Stanket"
+	},
+	"summary_alert": {
+		"description": "as in '1 ALERT'",
+		"message": "Kemenn"
+	},
+	"summary_alerts": {
+		"description": "as in '5 ALERTS'",
+		"message": "Kemennoù"
+	},
+	"summary_page_not_scanned": {
+		"message": "Pajenn nann-skanet"
+	},
+	"summary_description_not_scanned_1": {
+		"message": "Ar pajennoù 'http' hag 'https' a vez skanet gant Gostherry hepmuiken."
+	},
+	"summary_description_not_scanned_2": {
+		"message": "Kendalc'hit war ur bajenn all hag e prometomp deoc'h da bourveziñ deoc'h ho produioù."
+	},
+	"summary_trust_site": {
+		"message": "Kaout fiziañs e-barzh al lec'hienn-mañ"
+	},
+	"summary_restrict_site": {
+		"message": "Bevenniñ al lec'hienn-mañ"
+	},
+	"summary_undo": {
+		"message": "Nullañ"
+	},
+	"summary_pause_ghostery": {
+		"message": "Ehaniñ"
+	},
+	"pause_30_min": {
+		"message": "evit 30/tregont mun"
+	},
+	"pause_1_hour": {
+		"message": "evit 1/un eurvezh"
+	},
+	"pause_24_hours": {
+		"message": "evit 24/peder eurvezh warn-ugent"
+	},
+	"summary_resume_ghostery": {
+		"message": "Adstagañ e-barzh"
+	},
+	"summary_map_these_trackers": {
+		"message": "Mapiñ an toupinoù-mañ"
+	},
+	"blocking_trackers": {
+		"message": "toupinoù"
+	},
+	"blocking_block_all": {
+		"message": "Stankañ pep-tra"
+	},
+	"blocking_block_shown": {
+		"message": "Stankañ an holl zisoc'hoù diskouezet"
+	},
+	"blocking_category_tracker": {
+		"message": "Heulier"
+	},
+	"blocking_category_trackers": {
+		"message": "toupinoù"
+	},
+	"blocking_category_blocked": {
+		"description": "as in '5 (mouchards) BLOCKED'",
+		"message": "Stanket"
+	},
+	"panel_create_account": {
+		"message": "Krouiñ ur gont"
+	},
+	"panel_email_verification_sent": {
+		"message": "$BOLD_HTML_STARTS$ Kont krouet gant berzh! $BOLD_HTML_END$ Ur postel gwiriañ a zo bet kaset d'ar chomlec'h: $EMAIL$",
+		"placeholders": {
+			"bold_html_end": {
+				"content": "</strong>"
+			},
+			"bold_html_starts": {
+				"content": "</strong>"
+			},
+			"email": {
+				"content": "$1",
+				"example": "info@ghostery.com"
+			}
+		}
+	},
+	"panel_forgot_password": {
+		"message": "Aet eo ho ker-tremen diwar ho soñj?"
+	},
+	"panel_help_panel_header": {
+		"message": "Skoazell evit an astenn merdeer Ghostery"
+	},
+	"panel_help_contact_header": {
+		"message": "Penaos mont e darempred ganeomp"
+	},
+	"panel_help_faq": {
+		"message": "FAQ"
+	},
+	"panel_help_feedback": {
+		"message": "Respont d'hor c'houlennaoueg"
+	},
+	"panel_help_questions_header": {
+		"message": "Goulennoù hag evezhiadennoù"
+	},
+	"panel_help_support": {
+		"message": "Skoazellerezh"
+	},
+	"panel_about_panel_header": {
+		"message": "Diwar-benn an astenn merdeer Ghostery"
+	},
+	"panel_about_version_header": {
+		"message": "Ghostery evit ar merdeerioù $BROWSER$, stumm $VERSION$",
+		"placeholders": {
+			"browser": {
+				"content": "$1",
+				"example": "Firefox"
+			},
+			"version": {
+				"content": "$2",
+				"example": "6.4"
+			}
+		}
+	},
+	"panel_about_license": {
+		"message": "Emglev lisañs"
+	},
+	"panel_about_privacy_statement": {
+		"message": "Emglev prevezded"
+	},
+	"panel_about_licenses": {
+		"message": "Lisañs implij ar meziantoù"
+	},
+	"panel_menu_settings": {
+		"message": "Arventennoù"
+	},
+	"panel_menu_report_broken_site": {
+		"message": "Danevelliñ ul liamm torret"
+	},
+	"panel_menu_submit_tracker": {
+		"message": "Kinnig un heulier nevez"
+	},
+	"panel_menu_help": {
+		"message": "Skoazell"
+	},
+	"panel_menu_about": {
+		"message": "Diwar-benn Ghostery"
+	},
+	"panel_menu_signin": {
+		"message": "Kevreañ"
+	},
+	"panel_menu_signout": {
+		"message": "Digevreañ"
+	},
+	"panel_needs_reload": {
+		"message": "Ghostery a zo o c'hortoz hizivaat."
+	},
+	"panel_click_to_reload": {
+		"message": "Klikit amañ evit freskaat ar bajenn ha diskouez ar cheñchadurioù."
+	},
+	"panel_tracker_breaking_page": {
+		"message": "$COUNT$ a bloqué $TRACKERS$",
+		"placeholders": {
+			"count": {
+				"content": "$1",
+				"example": "4"
+			},
+			"trackers": {
+				"content": "$2",
+				"example": "toupinoù"
+			}
+		}
+	},
+	"panel_tracker_breaking_page_end": {
+		"message": " a stank kargadur ar bajenn."
+	},
+	"panel_tracker_slow_non_secure": {
+		"message": "$COUNT$ re c'horrek ha/pe $TRACKERS$ nann-suraet",
+		"placeholders": {
+			"count": {
+				"content": "$1",
+				"example": "4"
+			},
+			"trackers": {
+				"content": "$2",
+				"example": "toupinoù"
+			}
+		}
+	},
+	"panel_tracker_slow_non_secure_end": {
+		"message": " war ar bajenn-mañ."
+	},
+	"tracker_signular": {
+		"message": "heulier"
+	},
+	"tracker_plural": {
+		"message": "toupinoù"
+	},
+	"panel_signin_success": {
+		"message": "Kevreet emaoc'h bremañ dindan an anaouader "
+	},
+	"panel_view_trackers": {
+		"message": "Diskouez an toupinoù"
+	},
+	"panel_signin_success_title": {
+		"message": "Gourc'hemennoù! Ho kont Ghostery a zo bet krouet gant berzh."
+	},
+	"panel_title_create_account": {
+		"message": "Krouiñ ur gont"
+	},
+	"panel_tracker_found_sources_title": {
+		"message": "URL an toupinoù diguzhet:"
+	},
+	"panel_tracker_warning_compatibility_tooltip": {
+		"message": "An heulier stanket a vir ouzh an diskwel"
+	},
+	"panel_tracker_warning_slow_nonsecure_tooltip": {
+		"message": "Gorrek eo an heulier pe n'eo ket sur"
+	},
+	"panel_tracker_warning_nonsecure_tooltip": {
+		"message": "N'eo ket sur an heulier"
+	},
+	"panel_tracker_warning_slow_tooltip": {
+		"message": "Gorrek eo an heulier"
+	},
+	"panel_tracker_block_tooltip": {
+		"message": "Stankañ war an holl lec'hiennoù"
+	},
+	"panel_tracker_restrict_tooltip": {
+		"message": "Strishaat war al lec'hienn-mañ"
+	},
+	"panel_tracker_trust_tooltip": {
+		"message": "Ober fiziañs e-barzh toupinoù al lec'hienn-mañ"
+	},
+	"panel_detail_menu_list_title": {
+		"message": "Diskwel al listenn"
+	},
+	"panel_detail_menu_history_title": {
+		"message": "Roll-istor"
+	},
+	"panel_detail_menu_performance_title": {
+		"message": "Efedusted"
+	},
+	"panel_detail_menu_rewards_title": {
+		"message": "Lore"
+	},
+	"panel_detail_menu_premium_title": {
+		"message": "Premium"
+	},
+	"panel_detail_learn_more": {
+		"message": "Gouzout hiroc'h"
+	},
+	"panel_detail_history_title": {
+		"message": "Roll-istor"
+	},
+	"panel_detail_history_text": {
+		"message": "Dibarzh hegerz a-benn nebeut."
+	},
+	"panel_detail_performance_title": {
+		"message": "Askoradoù al lec'hienn"
+	},
+	"panel_detail_performance_text": {
+		"message": "Dibarzh hegerz a-benn nebeut."
+	},
+	"panel_detail_rewards_title": {
+		"message": "Loreoù Ghostery"
+	},
+	"panel_detail_rewards_text": {
+		"message": "Dibarzh hegerz a-benn nebeut."
+	},
+	"panel_detail_premium_title": {
+		"message": "Ghostery Premium"
+	},
+	"panel_detail_premium_text": {
+		"message": "Dibarzh hegerz a-benn nebeut."
+	},
+	"notification_upgrade": {
+		"message": "Hon skipailh emroüs ha desachus en deus labouret evel chas evit reiñ lañs ur stumm nevez eus Ghostery."
+	},
+	"notification_upgrade_link": {
+		"message": "Dizoloit an arc'hweladurioù simpa nevez-mañ ha reizhadurioù sioù ar stumm-mañ."
+	},
+	"notification_library_update": {
+		"message": "Diguzhet ez eus bet toupinoù nevez ganeomp hag ouzhpennet int bet da diaz-roadennoù Ghostery."
+	},
+	"notification_library_update_link": {
+		"message": "Dizoloit an arc'hweladurioù nevez hegerz"
+	},
+	"panel_header_sign_in": {
+		"message": "Kevreañ"
+	},
+	"panel_header_verify_account": {
+		"message": "Gwiriit ho kont"
+	},
+	"password_characters_requirements": {
+		"message": "An arouezioù ispisial-mañ a zo aotreet hepken: !@#$%^&*=+()<>{}[];:,./?"
+	},
+	"password_field_label": {
+		"message": "Ger-tremen"
+	},
+	"create_password_field_label": {
+		"message": "Ger-tremen:"
+	},
+	"password_requirements": {
+		"message": "Skrivit etre 8/eizh hag 50/hanter-kant arouezenn."
+	},
+	"send_button_label": {
+		"message": "Kas"
+	},
+	"server_error_message": {
+		"message": "Dalc'het omp gant ur gudenn deknikel. Klaskit diwezhatoc'h mar plij."
+	},
+	"email_address_in_use": {
+		"message": "Ar chomlec'h-mañ a zo renablet war Ghostery dija. Skrivit ur chomlec'h postel all mar plij. "
+	},
+	"short_description": {
+		"description": "Court descriptif de cette extension (Ghostery).",
+		"message": "Ghostery a zo un astenn galloudus evit gwarantiñ ar vuhez brevez. Stankit ar bruderezhioù, grit lamm d'an ostilhoù roudenniñ ha fonnusait al lec'hiennoù internet."
+	},
+	"tracker_description_getting": {
+		"message": "Kaout un deskrivadur eus an heulier..."
+	},
+	"tracker_description_learn_more": {
+		"message": "Tizhit profil klok an heulier"
+	},
+	"tracker_description_none_found": {
+		"message": "N'eus bet kavet deskrivadur ebet eus an heulier."
+	},
+	"unblocked": {
+		"description": "Select this to show only unblocked (unchecked) tags in the tag browser. Should read as 'Show unblocked'.",
+		"message": "nann-stanket"
+	},
+	"white_black_list_error_invalid_url": {
+		"message": "Skrivit un URL reizh mar plij."
+	},
+	"whitelist_error_blacklist_url": {
+		"message": "Al lec'hienn-mañ a zo bet tennet eus hol listenn lec'hiennoù bevennet, hag ouzhpennet eo bet d'al listenn lec'hiennoù fizius."
+	},
+	"whitelist_error_duplicate_url": {
+		"description": "Options page site whitelisting error message shown when whitelisting a URL that is already in the whitelist.",
+		"message": "Al lec'hienn-mañ a zo war hol listenn-wenn dija."
+	},
+	"settings_purple_box": {
+		"message": "Log limestra"
+	},
+	"settings_notifications": {
+		"message": "Kemennoù"
+	},
+	"settings_support_ghostery": {
+		"message": "Skoazell teknikel Ghostery"
+	},
+	"settings_account": {
+		"message": "Kont"
+	},
+	"settings_trackers": {
+		"message": "toupinoù"
+	},
+	"settings_auto_update": {
+		"message": "Aotren hizivadurioù em-gaset gant al levraoueg toupinoù Ghostery."
+	},
+	"settings_last_update": {
+		"message": "Sinkronelaadur diwezhañ graet d'an"
+	},
+	"settings_update_now": {
+		"message": "Hizivaat bremañ"
+	},
+	"settings_update_success": {
+		"message": "Hizivadur graet gant berzh!"
+	},
+	"settings_update_up_to_date": {
+		"message": "Stumm a hiziv"
+	},
+	"settings_update_failed": {
+		"message": "C'hwitet ez eus bet war an hizivadur. Klaskit en-dro diwezhatoc'h mar plij."
+	},
+	"settings_show_patterns": {
+		"message": "Diskouez URLoù an toupinoù"
+	},
+	"settings_highlight_trackers": {
+		"message": "Diskouez an toupinoù etreoberiant"
+	},
+	"settings_required_trackers": {
+		"message": "Roit din da c'houzout ma rankan aotren pe get un heulier d'ober gant unan eus arc'hweladurioù ul lec'hienn."
+	},
+	"settings_replace_social": {
+		"message": "Erlerc'hiañ boutonioù rannañ gant un arlun Ghostery."
+	},
+	"settings_blocking": {
+		"message": "Stankadur"
+	},
+	"settings_individual_trackers": {
+		"message": "Kaout fiziañs e-barzh an toupinoù personel ha bevenniñ anezho"
+	},
+	"settings_allow_trackers": {
+		"message": "Aotren an toupinoù sevennet gant ar saverien lec'hiennoù."
+	},
+	"settings_block_trackers": {
+		"message": "Stankañ an toupinoù nevez ouzhpennet e-barzh Ghostery dre ziouer"
+	},
+	"settings_show_purple_box": {
+		"message": "Diskouez al log limestra e-barzh korn ar merdeer"
+	},
+	"settings_dismiss_after": {
+		"message": "Nullañ diwezhatoc'h"
+	},
+	"settings_display_in": {
+		"message": "Diskouez e-barzh"
+	},
+	"settings_bottom_right_corner": {
+		"message": "ar c'horn traoñ dehou"
+	},
+	"settings_bottom_left_corner": {
+		"message": "ar c'horn traoñ kleiz"
+	},
+	"settings_top_right_corner": {
+		"message": "ar c'horn laez dehou"
+	},
+	"settings_top_left_corner": {
+		"message": "ar c'horn laez kleiz"
+	},
+	"settings_never": {
+		"message": "Morse"
+	},
+	"settings_seconds": {
+		"message": "eilennoù"
+	},
+	"settings_hide_alert_trusted": {
+		"message": "Diskouez al log limestra war al lec'hiennoù fizius"
+	},
+	"settings_notify_me": {
+		"message": "Lavarit din pa c'hoarvez gant Ghostery:"
+	},
+	"settings_announcements": {
+		"message": "Embann kemennoù"
+	},
+	"settings_new_features": {
+		"message": "Ro lañs da arc'hweladurioù nevez"
+	},
+	"settings_new_trackers": {
+		"message": "Ouzhpennañ toupinoù nevez d'e levraoueg toupinoù"
+	},
+	"settings_show_reload_banner": {
+		"message": "Diskouez kemennoù freskaat e-barzh pannel laez astenn ar merdeer"
+	},
+	"settings_show_trackers_banner": {
+		"message": "Diskouez pannelioù kemenniñ pa ziguzh un heulier e laez astenn ar merdeer"
+	},
+	"settings_show_tracker_count_badge": {
+		"message": "Diskouez ur badj kontañ an niver a doupinoù e-barzh arlun Ghostery war barrenn ostilhoù ar merdeer"
+	},
+	"settings_support_ghostery_by": {
+		"message": "Roit an dorn da Ghostery en ur"
+	},
+	"settings_share_usage": {
+		"message": "Rannañ statistikoù implij an astenn verdeer"
+	},
+	"settings_share_human_web": {
+		"message": "Rannañ roadennoù denel ar Web"
+	},
+	"settings_allow_offers": {
+		"message": "Gemer perzh e-barzh programmoù loreoù Ghostery"
+	},
+	"settings_signin_create_header": {
+		"message": "Kevreañ / Krouiñ ur gont"
+	},
+	"settings_sign_create_text": {
+		"message": "Hoc'h arventennoù kont a vo sinkronezet d'an aparailh diguzhet. Krouiñ ur gont evit sinkronelaat en un doare aes hoc'h arventennoù Ghostery war holl hoc'h aparailhoù hag an holl bladfurmioù."
+	},
+	"settings_account_name": {
+		"message": "Anv"
+	},
+	"settings_account_email": {
+		"message": "Postel"
+	},
+	"settings_edit_account": {
+		"message": "Kemmañ ar gont"
+	},
+	"settings_export_header": {
+		"message": "Ezporzhiañ an arventennoù"
+	},
+	"settings_export_text": {
+		"message": "Enrollañ un eilenn eus arventennoù Ghostery hag he dreuskas betek un urzhiataer all."
+	},
+	"settings_export_success": {
+		"message": "Hoc'h arventennoù a zo bet ezporzhiet gant berzh betek an teuliad pellgargadennoù lec'hiet war"
+	},
+	"settings_export_error": {
+		"message": "C'hwitadenn war ezporzhiadur hoc'h arventennoù. Klaskit diwezhatoc'h mar plij."
+	},
+	"settings_import_header": {
+		"message": "Emporzhiañ an arventennoù"
+	},
+	"settings_import_text": {
+		"message": "Diuziñ ur restr enrollañ .ghost."
+	},
+	"settings_import_warning": {
+		"message": "KEMENN: an arventennoù-mañ a zo o vont da erlerc'hiañ hoc'h arventennoù Ghostery red."
+	},
+	"settings_import_success": {
+		"message": "Hoc'h arventennoù a zo bet kaset gant berzh betek"
+	},
+	"settings_import_file_error": {
+		"message": "An doare restr-mañ a zo direizh. Diuzit ur restr .ghost ha klask en-dro diwezhatoc'h mar plij."
+	},
+	"browse_button_label": {
+		"message": "Furchal..."
+	},
+	"select_file_for_import": {
+		"message": "Diuziñ ur restr .ghost da emporzhiañ"
+	},
+	"file_was_not_selected": {
+		"message": "Restr diuzet ebet"
+	},
+	"refresh_and_try_again": {
+		"message": "Freskait ar bajenn ha klaskit en-dro"
+	},
+	"not_http_page": {
+		"message": "Bezit sur e tiskouez en un doare mat an ivinell digoret ur bajenn http pe https"
+	},
+	"settings_show_patterns_tooltip": {
+		"message": "Klikit war anv an heulier tracker da welet hec'h URL, diskouezet dindan an deskrivadur"
+	},
+	"settings_highlight_trackers_tooltip": {
+		"message": "Gellout a ra c'hoarvezout e vefe arc'hweladurioù 'zo, an ostilhoù rannañ etre-holl, evezhiadenn pe al lennerioù-video, n'ez afent ket en-dro pa vez stanket un heulier. Ma fell deoc'h enaouiñ unan eus arc'hweladurioù-mañ, klikit war an arlun-mañ war ar bajenn:"
+	},
+	"settings_individual_trackers_tooltip": {
+		"message": "Evit ur c'hontrol personelaet, diuzit an toupinoù spisaet ho peus c'hoant stankañ pe aotren war ul lec'hienn roet"
+	},
+	"settings_allow_trackers_tooltip": {
+		"message": "Da skouer, stankit un heulier Facebook war Facebook.com a c'hall mirout ouzh ur mont en-dro dereat war hoc'h aparailh."
+	},
+	"settings_show_purple_box_tooltip": {
+		"message": "Al log limestra a zo ul listennad toupinoù en amzer wirion hag a zo ziskouezet e-barzh korn ho merdeer. An arc'hweladur-mañ a ro an tu deoc'h da welet an toupinoù en em verniañ en amzer wirion war ur bajenn web."
+	},
+	"settings_notify_me_tooltip": {
+		"message": "Aotren Ghostery da ziskouez e-barzh ma merdeer ar c'hemennadennoù liammet gant arc'hweladurioù produ nevez, hizivadurioù ha priziadennoù ar pratikoù."
+	},
+	"settings_share_usage_tooltip": {
+		"message": "Dastum a reomp statistikoù implij evit kompren muioc'h peseurt re eo arc'hweladurioù karretañ an implijerien. Da skouer, ma klikit war paouez, resevout a reomp ur 'ping' hag a ro an tu deomp da c'houzout ho peus graet gant an dibarzh-mañ."
+	},
+	"settings_human_web_tooltip": {
+		"message": "Ghostery a seven dre ziouer an 'Human Web', un deknologiezh dispac'hel anezhi a vez diazezet war skiant-vat kumuniezh an implijerien evit sevel ur Genrouedad doujusoc'h e-keñver ar roadennoù prevez"
+	},
+	"settings_offers_tooltip": {
+		"message": "Ar program loreoù Ghostery a zo un arc'hweladur hag a ro an tu deoc'h da dennañ gounit eus distaolioù ha kinnigoù ispisial eus perzh hor c'hevelerien."
+	},
+	"settings_opt_in": {
+		"message": "Kemer-perzh"
+	},
+	"settings_global_blocking": {
+		"message": "Stankadur hollek"
+	},
+	"settings_trust_and_restrict": {
+		"message": "Kaout fiziañs pe vevenniñ"
+	},
+	"settings_general_settings": {
+		"message": "Arventennoù hollek"
+	},
+	"settings_searh_by_tracker": {
+		"message": "Klask dre heulier"
+	},
+	"page_load": {
+		"message": "O kargañ ar bajenn"
+	},
+	"settings_trusted_restricted_sites": {
+		"message": "Kaout fiziañs pe vevenniñ"
+	},
+	"settings_trusted_sites": {
+		"message": "Lec'hiennoù fiziañs"
+	},
+	"settings_sites_placeholder": {
+		"message": "skouer.com"
+	},
+	"settings_restricted_sites": {
+		"message": "Lec'hiennoù strishaet"
+	},
+	"settings_trusted_sites_description": {
+		"message": "Lec'hiennoù al listenn-mañ a zo lakaet da sur ha distanket e vo o zoupinoù."
+	},
+	"settings_restricted_sites_description": {
+		"message": "Lec'hiennoù al listenn-mañ a zo strishaet hag stanket e vo zoupinoù."
+	},
+	"expand_all": {
+		"message": "Diskouez pep-tra"
+	},
+	"collapse_all": {
+		"message": "Bihanaat"
+	},
+	"blocking_category_tracker_found": {
+		"message": "Kavet"
+	},
+	"drawer_title_enable_anti_tracking": {
+		"message": "Ostilh-gwellaet enep-heuliañ"
+	},
+	"drawer_tooltip_enable_anti_tracking": {
+		"message": "An toupinoù enframmet a enroll oberiantiz an implijidi war darn vuiañ al lec'hiennoù: an ostilh enep-heuliañ a zilam kement roadenn hag a c'hall bezañ implijet evit anaveout ac'hanoc'h a-raok bezañ dastumet gant an toupinoù-mañ. Ar gwel-mañ a ziskouez an niver a boentoù roadennoù hag a zo bet dilamet diouzh al lec'hienn-mañ."
+	},
+	"drawer_label_enable_anti_tracking": {
+		"message": "toupin dizanv"
+	},
+	"drawer_desc_enable_anti_tracking": {
+		"message": "Poentoù roadennoù prevez a zo bet dilamet."
+	},
+	"drawer_status_enable_anti_tracking": {
+		"message": "An ostilh enep-heuliañ a zo"
+	},
+	"drawer_title_enable_ad_block": {
+		"message": "Stankadur gwellaet a-enep ar bruderezhioù"
+	},
+	"drawer_tooltip_enable_ad_block": {
+		"message": "Diskouezadur pe stankadur hollad ar bruderezhioù war al lec'hiennoù."
+	},
+	"drawer_label_enable_ad_block": {
+		"message": "Bruderezhioù stanket"
+	},
+	"drawer_desc_enable_ad_block": {
+		"message": "Bommoù bruderezh a zo bet stanket."
+	},
+	"drawer_status_enable_ad_block": {
+		"message": "Ar stankañ bruderezhioù (Adblock) a ro an tu da:"
+	},
+	"drawer_title_enable_smart_block": {
+		"message": "Stakañ poellek"
+	},
+	"drawer_tooltip_enable_smart_block": {
+		"message": "Em-Stankañ pe em-distankañ an toupinoù evit gwellaat askoradoù ar pajennoù."
+	},
+	"drawer_label_enable_smart_block": {
+		"message": "Toupin keidet"
+	},
+	"drawer_desc_enable_smart_block": {
+		"message": "Toupinoù 'zo a zo bet stanket pe distanket evit ur mare."
+	},
+	"drawer_status_enable_smart_block": {
+		"message": "Ar stankañ poellek a zo"
+	},
+	"drawer_on": {
+		"message": "bevaet"
+	},
+	"drawer_off": {
+		"message": "lazhet"
+	},
+	"blocking_unblock_all": {
+		"message": "Distankañ pep-tra"
+	},
+	"blocking_unblock_shown": {
+		"message": "Distankañ an holl zisoc'hoù diskouezet"
+	},
+	"settings_filter_all_label": {
+		"message": "Pep-tra"
+	},
+	"settings_filter_blocked_label": {
+		"message": "Stanket"
+	},
+	"settings_filter_unblocked_label": {
+		"message": "Distanket"
+	},
+	"settings_filter_new_label": {
+		"message": "Nevez"
+	},
+	"settings_filter_all": {
+		"message": "An holl doupinoù"
+	},
+	"settings_filter_blocked": {
+		"message": "toupinoù stanket"
+	},
+	"settings_filter_unblocked": {
+		"message": "Heulierien stoket"
+	},
+	"settings_filter_new": {
+		"message": "Nevezentioù abaoe an hizivadur diwezhañ"
+	},
+	"tooltip_anti_track": {
+		"message": "Ostilh gwellaet enep-heuliañ"
+	},
+	"tooltip_anti_track_body": {
+		"message": "Dizanvaat an an toupinoù distanket ha dizanav evit ur surentez kreñvaet e-kerzh ho merdeiñ."
+	},
+	"tooltip_ad_block": {
+		"message": "Stankadur gwellaet ar bruderezhioù"
+	},
+	"tooltip_ad_block_body": {
+		"message": "Stankañ ar bruderezhioù war al lec'hiennoù gweladennet."
+	},
+	"tooltip_smart_block": {
+		"message": "Stankadur speredek"
+	},
+	"tooltip_smart_block_body": {
+		"message": "Em-Stankit hag em-zistankit an toupinoù evit gwellaat askoradoù ar pajennoù."
+	},
+	"tooltip_trust": {
+		"message": "Stankañ dalc'hmat an toupinoù war al lec'hienn-mañ."
+	},
+	"tooltip_restrict": {
+		"message": "Stankañ dalc'hmat an toupinoù war al lec'hienn-mañ."
+	},
+	"tooltip_pause": {
+		"message": "Diweredekaat Ghostery"
+	},
+	"tooltip_resume": {
+		"message": "Adderaouekaat Ghostery"
+	},
+	"tooltip_expert": {
+		"message": "Diskouez dre ar munud"
+	},
+	"tooltip_simple": {
+		"message": "Diskouez eeun"
+	},
+	"license_module": {
+		"message": "Modulenn"
+	},
+	"license_repository": {
+		"message": "Fiz"
+	},
+	"license_information_missing": {
+		"message": "Titouroù a vank e-barzh lisañs ar fiz"
+	},
+	"license_type": {
+		"message": "Doare(où) lisañs"
+	},
+	"license_publisher": {
+		"message": "Embanner"
+	},
+	"license_url": {
+		"message": "Url"
+	},
+	"license_email": {
+		"message": "Postel"
+	},
+	"license_text": {
+		"message": "Endalc'had al lisañs"
+	},
+	"license_unknown": {
+		"message": "dianv"
+	},
+	"license_generic": {
+		"message": "Endalc'had al lisañs standard"
+	},
+	"license_licenses": {
+		"message": "Lisañsoù"
+	},
+	"setup_title": {
+		"message": "Staliadur Ghostery"
+	},
+	"setup_header_sign_in": {
+		"message": "Kevreañ"
+	},
+	"setup_header_email": {
+		"message": "Postel"
+	},
+	"setup_header_password": {
+		"message": "Ger-tremen"
+	},
+	"setup_choice_view_title": {
+		"message": "Merdeit evel ul louarn fin gant Ghostery! $BR$Penaos ho peus c'hoant stagañ gant ar staliadur?",
+		"placeholders": {
+			"br": {
+				"content": "<br />"
+			}
+		}
+	},
+	"setup_choice_view_one_click": {
+		"message": "Staliañ dindan ur c'hlik"
+	},
+	"setup_choice_view_share_data": {
+		"message": "Rannañ ma stadegoù ha roadennoù "Human Web" evit gwellaat askoradoù Ghostery."
+	},
+	"setup_choice_view_learn_more": {
+		"message": "Gouzout hiroc'h."
+	},
+	"setup_choice_view_custom_setup": {
+		"message": "Staliadur personelaet"
+	},
+	"setup_choice_view_answer_questions": {
+		"message": "Termeniñ ma arventennoù din-me en ur respont d'un dornadig goulennoù."
+	},
+	"setup_blocking_view_title": {
+		"message": "Ghostery a c'hall stankañ toupinoù 'zo evit reiñ deoc'h ur merdeiñ puraet, gant muioc'h a dizh gantañ ha suroc'h ivez. Petra ho peus c'hoant stankañ?"
+	},
+	"setup_blocking_view_block_nothing": {
+		"message": "Netra"
+	},
+	"setup_blocking_view_block_ads": {
+		"message": "Toupinoù ar bruderezhioù hepken"
+	},
+	"setup_blocking_view_block_everything": {
+		"message": "Pep-tra"
+	},
+	"setup_blocking_view_block_custom": {
+		"message": "Diuzadenn personelaet"
+	},
+	"setup_additional_view_title": {
+		"message": "Ha c'hoant ho peus da glask hon arc'hweladur-mañ aliet evit merdeiñ evel ul louarn fin?"
+	},
+	"setup_additional_view_enabled": {
+		"message": "Gweredekaet"
+	},
+	"setup_additional_view_antitrack_title": {
+		"message": "Ostilh enep-heuliañ gwellaet"
+	},
+	"setup_additional_view_antitrack_desc": {
+		"message": "Lakaat dianv an toupinoù stanket ha dianav evit kaout ur surentez kreñvaet p'emaoc'h o verdeiñ."
+	},
+	"setup_additional_view_adblock_title": {
+		"message": "Stankadur gwellaet ar bruderezhioù"
+	},
+	"setup_additional_view_adblock_desc": {
+		"message": "Stankañ an holl vruderezhioù war al lec'hiennoù gweladennet."
+	},
+	"setup_additional_view_smartblock_title": {
+		"message": "Stankadur speredek"
+	},
+	"setup_additional_view_smartblock_desc": {
+		"message": "Em-Stankit hag em-zistankit an toupinoù evit gwellaat askoradoù ar pajennoù."
+	},
+	"setup_display_view_title": {
+		"message": "Peseurt diskwel a blij deoc'h ar muiañ?"
+	},
+	"setup_display_view_simple": {
+		"message": "Eeun"
+	},
+	"setup_display_view_simple_desc": {
+		"message": "Diskouez a ra an titouroù diazez liammet d'ar stankadur."
+	},
+	"setup_display_view_detailed": {
+		"message": "Munudet"
+	},
+	"setup_display_view_detailed_desc": {
+		"message": "Pourveziñ a ra listenn klok an toupinoù hag e ro an tu da gaout ur stankadur personelaet en ur reiñ klokaeoù evit an titouroù."
+	},
+	"setup_login_view_title": {
+		"message": "Ha c'hoant ho peus da grouiñ ur gont Ghostery evit sinkronelaat an arventennoù war hollad ho merdeerioù hag hoc'h aparailhoù?"
+	},
+	"setup_login_view_email": {
+		"message": "Postel:"
+	},
+	"setup_login_view_email_error": {
+		"message": "Digarezit, dav eo deoc'h skrivañ ur chomlec'h postel reizh mar plij."
+	},
+	"setup_login_view_confirm_email": {
+		"message": "Kadarnait ho chomlec'h postel mar plij"
+	},
+	"setup_login_view_confirm_email_error": {
+		"message": "Digarezit, ne vez ket anavezet ar posteloù."
+	},
+	"setup_login_view_first_name": {
+		"message": "Anv-bihan (diret):"
+	},
+	"setup_login_view_last_name": {
+		"message": "Anv familh (diret):"
+	},
+	"setup_login_view_password": {
+		"message": "Ger-tremen:"
+	},
+	"setup_login_view_password_error": {
+		"message": "Skrivit etre 8 hag 50 arouezenn."
+	},
+	"setup_login_view_terms_error": {
+		"message": "Dav eo deoc'h asantiñ d'an dra-se a-raok kenderc'hel."
+	},
+	"setup_login_view_terms": {
+		"message": "Asantiñ a ran da $LINK_PP_START$Bolitikerezh buhez brevez$LINK_PP_END$ ha $LINK_TERMS_START$Divizoù arver$LINK_TERMS_END$ Ghostery",
+		"placeholders": {
+			"link_pp_start": {
+				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" target=\"_blank\">"
+			},
+			"link_pp_end": {
+				"content": "</a>"
+			},
+			"link_terms_start": {
+				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-end-user-license-agreement/\" target=\"_blank\">"
+			},
+			"link_terms_end": {
+				"content": "</a>"
+			}
+		}
+	},
+	"setup_login_view_create_account": {
+		"message": "N'ho peus tamm kont ebet endeo? Krouit unan 'ta."
+	},
+	"setup_login_view_log_in": {
+		"message": "Ur gont ho peus endeo? Kevreit."
+	},
+	"setup_login_view_signed_in_as": {
+		"message": "Kevreet emaoc'h dindan an anaouader"
+	},
+	"setup_data_view_title": {
+		"message": "Ha prest e vefec'h da gemer-perzh evit gwellaat Ghostery?"
+	},
+	"setup_data_view_desc": {
+		"message": "Implijout a reomp analizadurioù statistikel ha roadennoù "Human Web" dizanv evit gwellaat askoradoù Ghostery, hep dastum roadenn personel ebet. $LINK_START$Gouzout hiroc'h$LINK_END$.",
+		"placeholders": {
+			"link_start": {
+				"content": "<a href=\"https://www.ghostery.com/faqs/\" target=\"_blank\">"
+			},
+			"link_end": {
+				"content": "</a>"
+			}
+		}
+	},
+	"setup_data_view_checkbox": {
+		"message": "Roit an dorn da Ghostery en ur rannañ an titouroù-mañ."
+	},
+	"setup_done_view_title": {
+		"message": "Prest oc'h da stagañ e-barzh!"
+	},
+	"setup_done_view_desc": {
+		"message": "Ghostery a gemero ur plas a netra e-barzh ho parrenn-verdeiñ."
+	},
+	"setup_button_previous": {
+		"message": "Kent"
+	},
+	"setup_button_next": {
+		"message": "Da-heul"
+	},
+	"setup_button_skip": {
+		"message": "ober fae war ar bazenn-mañ"
+	},
+	"setup_button_create_account": {
+		"message": "Krouiñ ur gont"
+	},
+	"setup_button_sign_in": {
+		"message": "Kevreañ"
+	},
+	"setup_button_exit": {
+		"message": "Kuitaat"
+	},
+	"setup_button_done": {
+		"message": "Echuet"
+	},
+	"setup_footer_license": {
+		"message": "Ghostery$COPY$; a zo krouet gant Cliqz. Evit gouzout hiroc'h war $LINK_START$Cliqz$LINK_END$. $COPY$Cliqz International GmbH a zo un izembregerezh perc'hennet gant Cliqz GmbH hepken. Pep gwir miret strizh.",
+		"placeholders": {
+			"link_start": {
+				"content": "<a href=\"https://cliqz.com\" target=\"_blank\">"
+			},
+			"link_end": {
+				"content": "</a>"
+			},
+			"copy": {
+				"content": "&copy;"
+			}
+		}
+	},
+	"setup_upgrade_desc_1": {
+		"message": "Ar $BOLD_START$stankadur speredek$BOLD_END$ a em-wella askoradoù ar merdeiñ.",
+		"placeholders": {
+			"bold_start": {
+				"content": "</strong>"
+			},
+			"bold_end": {
+				"content": "</strong>"
+			}
+		}
+	},
+	"setup_upgrade_desc_2": {
+		"message": "$BOLD_START$Etrefas dinamek an implijer$BOLD_END$ a ginnig deoc'h meur a zibarzh diskouez.",
+		"placeholders": {
+			"bold_start": {
+				"content": "</strong>"
+			},
+			"bold_end": {
+				"content": "</strong>"
+			}
+		}
+	},
+	"setup_upgrade_desc_3": {
+		"message": "$BOLD_START$An ostilh enep-heuliañ gwellaet$BOLD_END$ a greñva gwareziñ ho roadennoù personel.",
+		"placeholders": {
+			"bold_start": {
+				"content": "</strong>"
+			},
+			"bold_end": {
+				"content": "</strong>"
+			}
+		}
+	},
+	"setup_upgrade_title": {
+		"message": "Degemer mat e-barzh Ghostery 8 !"
+	},
+	"setup_upgrade_subtitle": {
+		"message": "Hon nevezentioù nevez-flamm..."
+	},
+	"setup_upgrade_button_later": {
+		"message": "Diwezhatoc'h marteze"
+	},
+	"setup_upgrade_button_go": {
+		"message": "Kas da benn ar staliadur"
+	},
+	"panel_help_setup": {
+		"message": "Arventennit Ghostery"
+	},
+	"global_settings_saved": {
+		"message": "Arventennoù hollek enrollet"
+	},
+	"global_settings_saved_tracker": {
+		"message": "Arventenn heuliañ hollek enrollet"
+	},
+	"global_settings_saved_category": {
+		"message": "Arventenn rummañ hollek enrollet"
+	},
+	"panel_tracker_warning_smartblock_tooltip": {
+		"message": "Ostilh heuliañ stanket gant Smart Blocking"
+	},
+	"panel_tracker_warning_smartunblock_tooltip": {
+		"message": "Ostilh heuliañ distanket gant Smart Blocking"
+	},
+	"notification_upgrade_title_v8": {
+		"message": "Dizoloit Ghostery 8 !"
+	},
+	"notification_upgrade_v8": {
+		"message": "Stalit an arc'hweladurioù tun ha dizoloit hon zaol-lañs uhelekañ betek bremañ."
+	},
+	"notification_upgrade_link_v8": {
+		"message": "Diskouezit din-me ar stumm nevez!"
+	},
+	"settings_export_reserved_page_error": {
+		"message": "Ne c'hall ket Ghostery ezporzhiañ an arventennoù pa vez unan eus ar pajennoù red unan eus ar pajennoù merdeiñ lakaet a-gostez. Klaskit cheñch pajenn ha klaskit en-dro diwezhatoc'h mar plij."
+	},
+	"settings_import_dialog_error": {
+		"message": "Ne c'hall ket Ghostery diskouez an diviz Ergerzhout pa vez unan eus ar pajennoù red unan eus ar pajennoù merdeiñ lakaat a-gostez. Klaskit cheñch pajenn ha klaskit en-dro diwezhatoc'h mar plij."
+	},
+	"setup_header_sign_in_hide": {
+		"message": "Kuzhat ar gevreadenn"
+	},
+	"setup_choice_view_share_data_no_human_web": {
+		"message": "Rannañ ma statistikoù evit gwellaat askoradoù Ghostery."
+	},
+	"setup_feature_active_in_cliqz": {
+		"message": "An arc'hweladur-mañ a zo oberiant e-barzh Cliqz dija. $LINK_START$Gouzout hiroc'h.$LINK_END$",
+		"placeholders": {
+			"link_start": {
+				"content": "<a href=\"https://www.ghostery.com/faqs/what-are-the-new-ghostery-8-features/\" target=\"_blank\">"
+			},
+			"link_end": {
+				"content": "</a>"
+			}
+		}
+	},
+	"setup_data_view_desc_no_human_web": {
+		"message": "Evit gwellaat askoradoù Ghostery, implijout a reomp statistikoù dizanv hep dastum roadenn personnel ebet. $LINK_START$Gouzout hiroc'h.$LINK_END$.",
+		"placeholders": {
+			"link_start": {
+				"content": "<a href=\"https://www.ghostery.com/faqs/\" target=\"_blank\">"
+			},
+			"link_end": {
+				"content": "</a>"
+			}
+		}
+	}		
+}
