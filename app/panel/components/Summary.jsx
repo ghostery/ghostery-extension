@@ -14,6 +14,7 @@
 import React, { Component } from 'react';
 import ClassNames from 'classnames';
 import { sendMessage } from '../utils/msg';
+import globals from '../../../src/classes/Globals';
 import {
 	CliqzFeatures,
 	DonutGraph,
@@ -21,6 +22,8 @@ import {
 	NotScanned,
 	PauseButton
 } from './BuildingBlocks';
+
+const { IS_CLIQZ } = globals;
 
 /**
  * @class Implements the Summary View, which is displayed as the entire panel
@@ -140,8 +143,7 @@ class Summary extends React.Component {
 	 * @param  {Object} data Properties of the click and resulting filter
 	 */
 	clickDonut(data) {
-		const { is_expert } = this.props;
-		if (!is_expert) {
+		if (!this.props.is_expert) {
 			this.toggleExpert();
 		}
 		this.props.actions.filterTrackers(data);
@@ -363,7 +365,7 @@ class Summary extends React.Component {
 						adBlocking={this.props.adBlock}
 						smartBlockingActive={this.props.enable_smart_block}
 						smartBlocking={this.props.smartBlock}
-						isInactive={this.props.paused_blocking || this.props.sitePolicy || this.state.disableBlocking}
+						isInactive={this.props.paused_blocking || this.props.sitePolicy || this.state.disableBlocking || IS_CLIQZ}
 						isSmaller={is_expert}
 						isCondensed={showCondensed}
 					/>
