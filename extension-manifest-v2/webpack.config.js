@@ -74,7 +74,7 @@ lintOnChange.prototype.apply = function(compiler) {
 	if (process.argv.includes('--env.prod') || (process.argv.includes('--env.nolint') || process.env.NO_LINT)) {
 		return;
 	}
-	compiler.plugin("done", (watching, done) => {
+	compiler.plugin("done", () => {
 		const changedTimes = compiler.watchFileSystem.watcher.mtimes;
 		const changedFiles = Object.keys(changedTimes);
 		if (changedFiles.length) {
@@ -86,7 +86,6 @@ lintOnChange.prototype.apply = function(compiler) {
 				spawnSync('npm', args, { stdio: 'inherit'});
 			});
 		}
-		done();
 	});
 };
 
