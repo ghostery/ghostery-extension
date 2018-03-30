@@ -1,6 +1,53 @@
+//Import Global Partials
+@import "settings"; //includes _colors.scss
+
 .ghostery-rewards-container {
-	div {
+
+	.ghostery-box {
+		opacity: 1;
+		background-color: $dark-magenta;
 		white-space:nowrap;
-		padding: 0px 10px;
+		background-image: url('../images/ghosty_star.svg');
+		background-repeat: no-repeat;
+		background-position: left 14px center;
+		border-bottom: 0px;
 	}
+
+	&.ghostery-collapsed {
+
+		.ghostery-box {
+			width: 50px;
+			height: 50px;
+		}
+
+	}
+
+	&.ghostery-right {
+		right: 30px;
+	}
+
+	.ghostery-reward-text {
+		visibility: hidden;
+		margin-top: 15px;
+		margin-left: 50px;
+		transition: visibility 1s;
+	}
+
+	&:hover {
+
+		.ghostery-reward-text {
+			transition: visibility 0s;
+
+			&.show {
+				visibility: visible;
+			}
+
+			&.hide {
+				visibility: hidden;
+			}
+
+		}
+
+	}
+
 }
