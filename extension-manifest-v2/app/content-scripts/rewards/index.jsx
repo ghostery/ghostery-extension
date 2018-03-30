@@ -27,7 +27,7 @@ const viewport = document.getElementById('viewport');
 const rewardsContainer = document.createElement('div');
 rewardsContainer.id = 'rewards-dog';
 
-document.addEventListener("DOMContentLoaded", function(event) {
+document.addEventListener('DOMContentLoaded', (event) => {
 	document.body.appendChild(rewardsContainer);
 	ReactDOM.render(<HotDog />, document.getElementById('rewards-dog'));
 });

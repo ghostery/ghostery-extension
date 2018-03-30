@@ -1599,5 +1599,11 @@
 	},
 	"enable_when_not_scanned": {
 		"message": "To use this function, navigate to another page."
+	},
+	"rewards_text_single": {
+		"message": "new Reward was discovered"
+	},
+	"rewards_text_plural": {
+		"message": "new Rewards were discovered"
 	}
 }
