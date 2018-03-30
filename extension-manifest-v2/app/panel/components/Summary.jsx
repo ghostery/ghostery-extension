@@ -303,7 +303,7 @@ class Summary extends React.Component {
 	render() {
 		const showBody = (!this.props.is_expanded || !this.props.is_expert);
 		const buttonDisabled = (this.state.disableBlocking || this.props.paused_blocking || this.props.sitePolicy !== false);
-		const alertText = this.props.paused_blocking ? t('enable_when_paused') : (this.props.sitePolicy === 1) ? t('enable_when_blacklisted') : (this.props.sitePolicy === 2) ? t('enable_when_whitelisted') : this.props.siteNotScanned ? t('enable_when_not_scanned') : '';
+		const alertText = this.props.paused_blocking ? t('enable_when_paused') : (this.props.sitePolicy === 1) ? t('enable_when_blacklisted') : (this.props.sitePolicy === 2) ? t('enable_when_whitelisted') : this.state.disableBlocking ? t('enable_when_not_scanned') : '';
 		const getTooltipClass = () => ((!this.props.is_expert && 'top')
 				|| ((this.props.is_expert && this.props.is_expanded) && 'right'));
 

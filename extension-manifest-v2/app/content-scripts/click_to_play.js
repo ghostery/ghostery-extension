@@ -162,20 +162,17 @@ const Click2PlayContentScript = (function (win, doc) {
 			}
 
 			const	{ name } = request;
-			const reqMsg = request.msg;
-
-			if (!reqMsg) {
-				return false;
-			}
-
 			log('click_to_play.js received message', name);
 
 			if (name === 'c2p') {
-				// queue Click-to-Play data so that we process multiple Twitter buttons at once, for example
-				C2P_DATA[reqMsg.app_id] = [reqMsg.app_id, reqMsg.data, reqMsg.html];
+				const reqMsg = request.message;
+				if (reqMsg) {
+					// queue Click-to-Play data so that we process multiple Twitter buttons at once, for example
+					C2P_DATA[reqMsg.app_id] = [reqMsg.app_id, reqMsg.data, reqMsg.html];
 
-				if (doc.readyState === 'complete') {
-					applyC2P(reqMsg.app_id, reqMsg.data, reqMsg.html);
+					if (doc.readyState === 'complete') {
+						applyC2P(reqMsg.app_id, reqMsg.data, reqMsg.html);
+					}
 				}
 			}
 
