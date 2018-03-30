@@ -13,6 +13,30 @@
 		border-bottom: 0px;
 	}
 
+	.ghostery-reward-text {
+		font-size: 14px;
+		visibility: hidden;
+		margin-top: 15px;
+		margin-left: 50px;
+		margin-right: 10px;
+		transition: visibility 1s;
+	}
+
+	.ghostery-reward-close {
+		width: 21px;
+		height: 21px;
+		border: 1px solid $dark-magenta;
+		background-color: #fff;
+		position: absolute;
+		border-radius: 50%;
+		right: 6px;
+		top: -9px;
+		visibility: hidden;
+		background-image: url('../images/drawer/x.svg');
+		background-position: center center;
+		background-repeat: no-repeat;
+	}
+
 	&.ghostery-collapsed {
 
 		.ghostery-box {
@@ -26,15 +50,11 @@
 		right: 30px;
 	}
 
-	.ghostery-reward-text {
-		visibility: hidden;
-		margin-top: 15px;
-		margin-left: 50px;
-		transition: visibility 1s;
-	}
-
 	&:hover {
-
+		.ghostery-reward-close {
+			transition: visibility 1000ms;
+			visibility: visible;
+		}
 		.ghostery-reward-text {
 			transition: visibility 0s;
 
