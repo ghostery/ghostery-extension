@@ -19,15 +19,28 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router, Route } from 'react-router-dom';
+import history from '../../panel/utils/history';
 import HotDog from './HotDog';
+import OfferCard from './OfferCard';
 
 // import closeIconImage from '../data-images/purple_box/closeIconImage';
 
 const viewport = document.getElementById('viewport');
 const rewardsContainer = document.createElement('div');
-rewardsContainer.id = 'rewards-dog';
+rewardsContainer.id = 'rewards-container';
+
+const MainView = () => (
+	<Router history={history}>
+		<div>
+			<Route exact path="/" component={HotDog} />
+			<Route path="/hotdog" component={HotDog} />
+			<Route path="/offercard" component={OfferCard} />
+		</div>
+	</Router>
+);
 
 document.addEventListener('DOMContentLoaded', (event) => {
 	document.body.appendChild(rewardsContainer);
-	ReactDOM.render(<HotDog />, document.getElementById('rewards-dog'));
+	ReactDOM.render(<MainView />, document.getElementById('rewards-container'));
 });
