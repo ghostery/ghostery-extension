@@ -1195,16 +1195,16 @@
 		"message": "Reload to see changes."
 	},
 	"alert_site_trusted": {
-		"message": "Site whitelisted. Trackers are allowed and private data points unprotected."
+		"message": "Site whitelisted. Trackers will be allowed and Anti-Tracking disabled on this site."
 	},
 	"alert_site_trusted_off": {
-		"message": "Site removed from the whitelist."
+		"message": "Site no longer whitelisted."
 	},
 	"alert_site_restricted": {
-		"message": "Site blacklisted. Trackers are blocked and Anti-Tracking on for this site."
+		"message": "Site blacklisted. Trackers will be blocked and Anti-Tracking enabled on this site."
 	},
 	"alert_site_restricted_off": {
-		"message": "Site removed from the blacklist."
+		"message": "Site no longer blacklisted."
 	},
 	"tooltip_anti_track": {
 		"message": "Enhanced Anti-Tracking"
@@ -1234,16 +1234,16 @@
 		"message": "Tracking blocking adjusted to optimize page performance."
 	},
 	"tooltip_trust": {
-		"message": "Always allow trackers & turn off Anti-Tracking on tis site."
+		"message": "Always allow trackers & disable Anti-Tracking on this site."
 	},
 	"tooltip_trust_on": {
-		"message": "Trackers allowed and unprotected on site. Click to Undo."
+		"message": "Trackers allowed and Anti-Tracking disabled on site. Click to Undo."
 	},
 	"tooltip_restrict": {
-		"message": "Always block trackers & protect my data on this site."
+		"message": "Always block trackers & protect my personal data on this site."
 	},
 	"tooltip_restrict_on": {
-		"message": "Trackers blocked and protected on site. Click to Undo."
+		"message": "Trackers blocked and Anti-Tracking enabled on site. Click to Undo."
 	},
 	"tooltip_custom_settings": {
 		"message": "Use my selected tracker settings."

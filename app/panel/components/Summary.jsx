@@ -191,6 +191,7 @@ class Summary extends React.Component {
 		const { paused_blocking, sitePolicy } = this.props;
 		let type;
 		let text;
+		let classes;
 
 		if (this.state.disableBlocking || paused_blocking) {
 			return;
@@ -200,10 +201,12 @@ class Summary extends React.Component {
 			sendMessage('ping', 'trust_site');
 			type = 'whitelist';
 			text = (sitePolicy === 2) ? t('alert_site_trusted_off') : t('alert_site_trusted');
+			classes = (sitePolicy === 2) ? 'warning' : 'success';
 		} else if (button === 'restrict' || (button === 'custom' && sitePolicy === 1)) {
 			sendMessage('ping', 'restrict_site');
 			type = 'blacklist';
 			text = (sitePolicy === 1) ? t('alert_site_restricted_off') : t('alert_site_restricted');
+			classes = (sitePolicy === 1) ? 'warning' : 'alert';
 		} else {
 			return;
 		}
@@ -217,6 +220,7 @@ class Summary extends React.Component {
 		this.props.actions.showNotification({
 			updated: type,
 			reload: true,
+			classes,
 			text,
 		});
 	}
