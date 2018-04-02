@@ -104,20 +104,16 @@ class Panel extends React.Component {
 
 		this.closeNotification();
 	}
+
 	/**
-	 * Render all child views from router.
-	 * @return {ReactComponent}   ReactComponent instance
+	 * Helper render function for the notification callout
+	 * @return {JSX} JSX for the notification callout
 	 */
-	render() {
-		// this prevents double rendering when waiting for getPanelData() to finish
-		if (!this.props.initialized) {
-			return null;
-		}
+	renderNotification() {
 		const needsReload = !!Object.keys(this.props.needsReload.changes).length;
-		let calloutText;
 
 		if (this.props.notificationText) {
-			calloutText = (
+			return (
 				<span>
 					<span key="0" dangerouslySetInnerHTML={{ __html: this.props.notificationText || t('panel_needs_reload') }} />
 					{needsReload && (
@@ -126,30 +122,41 @@ class Panel extends React.Component {
 				</span>
 			);
 		} else if (needsReload) {
-			calloutText = (
+			return (
 				<span>
 					<span key="0">{t('panel_needs_reload')}</span>
 					<span key="1" className="needs-reload-link" onClick={this.clickReloadBanner}>{ t('alert_reload') }</span>
 				</span>
 			);
 		} else if (this.props.notificationFilter === 'slow') {
-			calloutText = (
+			return (
 				<span>
 					<span key="0" className="filter-link slow-insecure" onClick={this.filterTrackers} dangerouslySetInnerHTML={{ __html: this.props.notificationText }} />
 					<span key="1">{ t('panel_tracker_slow_non_secure_end') }</span>
 				</span>
 			);
 		} else if (this.props.notificationFilter === 'compatibility') {
-			calloutText = (
+			return (
 				<span>
 					<span key="0" className="filter-link compatibility" onClick={this.filterTrackers} dangerouslySetInnerHTML={{ __html: this.props.notificationText }} />
 					<span key="1">{ t('panel_tracker_breaking_page_end') }</span>
 				</span>
 			);
-		} else {
-			calloutText = (
-				<span dangerouslySetInnerHTML={{ __html: this.props.notificationText }} />
-			);
+		}
+
+		return (
+			<span dangerouslySetInnerHTML={{ __html: this.props.notificationText }} />
+		);
+	}
+
+	/**
+	 * React's required render function. Returns JSX
+	 * @return {JSX} JSX for rendering the Panel
+	 */
+	render() {
+		// this prevents double rendering when waiting for getPanelData() to finish
+		if (!this.props.initialized) {
+			return null;
 		}
 
 		return (
@@ -162,7 +169,7 @@ class Panel extends React.Component {
 							</g>
 						</svg>
 						<span className="callout-text" >
-							{calloutText}
+							{this.renderNotification()}
 						</span>
 					</div>
 				</div>

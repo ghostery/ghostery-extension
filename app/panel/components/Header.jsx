@@ -99,6 +99,7 @@ class Header extends React.Component {
 	*/
 	render() {
 		const { pathname } = this.props.location;
+		const showTabs = pathname === '/' || pathname.startsWith('/detail');
 		const headerLogoClasses = ClassNames('header-logo', {
 			'show-back-arrow': (pathname !== '/' && !pathname.startsWith('/detail')),
 		});
@@ -111,18 +112,20 @@ class Header extends React.Component {
 
 		return (
 			<header id="ghostery-header">
-				<div className="header-tab-group flex-container align-bottom">
-					<div className={tabSimpleClassNames} onClick={this.clickSimpleTab}>
-						<span className="header-tab-text">
-							{t('panel_header_simple_view')}
-						</span>
+				{ showTabs && (
+					<div className="header-tab-group flex-container align-bottom">
+						<div className={tabSimpleClassNames} onClick={this.clickSimpleTab}>
+							<span className="header-tab-text">
+								{t('panel_header_simple_view')}
+							</span>
+						</div>
+						<div className={tabDetailedClassNames} onClick={this.clickDetailedTab}>
+							<span className="header-tab-text">
+								{t('panel_header_detailed_view')}
+							</span>
+						</div>
 					</div>
-					<div className={tabDetailedClassNames} onClick={this.clickDetailedTab}>
-						<span className="header-tab-text">
-							{t('panel_header_detailed_view')}
-						</span>
-					</div>
-				</div>
+				)}
 				<div className="top-bar">
 					<div className="top-bar-left">
 						<Link to={(this.props.is_expert ? '/detail/blocking' : '/')} className={headerLogoClasses} >
