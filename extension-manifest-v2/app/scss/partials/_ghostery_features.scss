@@ -43,6 +43,12 @@
 		background-color: #1dafed;
 		box-shadow: inset 0px 1px 7px 2px #2092bf;
 	}
+	.button:hover {
+		background-color: #efefef;
+	}
+	.button.active:hover {
+		background-color: #0093bd;
+	}
 
 	.full-height { height: 100%; }
 	.button-trust .button-text,

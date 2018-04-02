@@ -191,7 +191,7 @@ const _showNotification = (state, action) => {
 			updated_notificationShown = false;
 		}
 
-		updated_notificationClasses = 'warning';
+		updated_notificationClasses = msg.classes || 'warning';
 	} else {
 		// Notification banners (success/warnings)
 		if (trackersBannerStatus.show && nowTime > trackersBannerStatus.show_time) {

@@ -47,6 +47,11 @@
 			border-left-color: #efefea;
 		}
 	}
+	.button:hover { background-color: #efefef; }
+	.button.active:hover {
+		border-color: #0093bd;
+		background-color: #0093bd;
+	}
 
 	.button-pause {
 		min-width: 125px;

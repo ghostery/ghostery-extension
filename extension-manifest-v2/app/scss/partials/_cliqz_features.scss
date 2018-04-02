@@ -117,4 +117,22 @@
 	&.inactive .feature-name { color: #dedede; }
 	&.inactive .active .feature-name { color: #a4d4f2; }
 	&.smaller .feature-name { display: none; }
+
+	.cliqz-feature.clickable:hover {
+		.count { background-image: buildIconDash(#a4a4a4); }
+		&.anti-tracking .icon { background-image: buildIconAntiTracking(#a4a4a4); }
+		&.ad-blocking .icon { background-image: buildIconAdBlocking(#a4a4a4); }
+		&.smart-blocking .icon { background-image: buildIconSmartBlocking(#a4a4a4); }
+		.feature-name { color: #a4a4a4; }
+	}
+	.cliqz-feature.active.clickable:hover {
+		.count {
+			color: #0093bd;
+			background: none;
+		}
+		&.anti-tracking .icon { background-image: buildIconAntiTracking(#0093bd); }
+		&.ad-blocking .icon { background-image: buildIconAdBlocking(#0093bd); }
+		&.smart-blocking .icon { background-image: buildIconSmartBlocking(#0093bd); }
+		.feature-name { color: #0093bd; }
+	}
 }
