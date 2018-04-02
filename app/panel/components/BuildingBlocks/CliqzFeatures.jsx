@@ -161,8 +161,8 @@ class CliqzFeatures extends React.Component {
 					<div className="count">{this.getAntiTrackingTotal()}</div>
 					<div className="icon g-tooltip">
 						<Tooltip
-							header={t('tooltip_anti_track')}
-							body={!(isSmaller && isCondensed) && (antiTrackingActive ? t('tooltip_anti_track_body_on') : t('tooltip_anti_track_body'))}
+							header={isSmaller && t('tooltip_anti_track')}
+							body={!isCondensed && (antiTrackingActive ? t('tooltip_anti_track_body_on') : t('tooltip_anti_track_body'))}
 							position={isCondensed ? 'right' : isSmaller ? 'top top-right' : 'top'}
 						/>
 					</div>
@@ -174,8 +174,8 @@ class CliqzFeatures extends React.Component {
 					<div className="count">{this.getAdBlockingTotal()}</div>
 					<div className="icon g-tooltip">
 						<Tooltip
-							header={t('tooltip_ad_block')}
-							body={!(isSmaller && isCondensed) && (adBlockingActive ? t('tooltip_ad_block_body_on') : t('tooltip_ad_block_body'))}
+							header={isSmaller && t('tooltip_ad_block')}
+							body={!isCondensed && (adBlockingActive ? t('tooltip_ad_block_body_on') : t('tooltip_ad_block_body'))}
 							position={isCondensed ? 'right' : 'top'}
 						/>
 					</div>
@@ -187,8 +187,8 @@ class CliqzFeatures extends React.Component {
 					<div className="count">{this.getSmartBlockingTotal()}</div>
 					<div className="icon g-tooltip">
 						<Tooltip
-							header={t('tooltip_smart_block')}
-							body={!(isSmaller && isCondensed) && (smartBlockingActive ? t('tooltip_smart_block_body_on') : t('tooltip_smart_block_body'))}
+							header={isSmaller && t('tooltip_smart_block')}
+							body={!isCondensed && (smartBlockingActive ? t('tooltip_smart_block_body_on') : t('tooltip_smart_block_body'))}
 							position={isCondensed ? 'right' : isSmaller ? 'top top-left' : 'top'}
 						/>
 					</div>

@@ -114,26 +114,44 @@ class Panel extends React.Component {
 			return null;
 		}
 		const needsReload = !!Object.keys(this.props.needsReload.changes).length;
-		const calloutText = (needsReload || this.props.notificationText) ? (
-			<span>
-				<span key="0">{ this.props.notificationText || t('panel_needs_reload') }</span>
-				{needsReload ? (
-					<span key="1" className="needs-reload-link" onClick={this.clickReloadBanner}>{ t('panel_click_to_reload') }</span>
-				) : ''}
-			</span>
-		) : (this.props.notificationFilter === 'slow') ?
-			<span>
-				<span key="0" className="filter-link slow-insecure" onClick={this.filterTrackers} dangerouslySetInnerHTML={{ __html: this.props.notificationText }} />
-				<span key="1">{ t('panel_tracker_slow_non_secure_end') }</span>
-			</span>
-			: (this.props.notificationFilter === 'compatibility') ?
+		let calloutText;
+
+		if (this.props.notificationText) {
+			calloutText = (
+				<span>
+					<span key="0" dangerouslySetInnerHTML={{ __html: this.props.notificationText || t('panel_needs_reload') }} />
+					{needsReload && (
+						<div key="1" className="needs-reload-link" onClick={this.clickReloadBanner}>{ t('alert_reload') }</div>
+					)}
+				</span>
+			);
+		} else if (needsReload) {
+			calloutText = (
+				<span>
+					<span key="0">{t('panel_needs_reload')}</span>
+					<span key="1" className="needs-reload-link" onClick={this.clickReloadBanner}>{ t('alert_reload') }</span>
+				</span>
+			);
+		} else if (this.props.notificationFilter === 'slow') {
+			calloutText = (
+				<span>
+					<span key="0" className="filter-link slow-insecure" onClick={this.filterTrackers} dangerouslySetInnerHTML={{ __html: this.props.notificationText }} />
+					<span key="1">{ t('panel_tracker_slow_non_secure_end') }</span>
+				</span>
+			);
+		} else if (this.props.notificationFilter === 'compatibility') {
+			calloutText = (
 				<span>
 					<span key="0" className="filter-link compatibility" onClick={this.filterTrackers} dangerouslySetInnerHTML={{ __html: this.props.notificationText }} />
 					<span key="1">{ t('panel_tracker_breaking_page_end') }</span>
 				</span>
-				: (
-					<span dangerouslySetInnerHTML={{ __html: this.props.notificationText }} />
-				);
+			);
+		} else {
+			calloutText = (
+				<span dangerouslySetInnerHTML={{ __html: this.props.notificationText }} />
+			);
+		}
+
 		return (
 			<div id="panel">
 				<div className="callout-container">
