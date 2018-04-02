@@ -2,10 +2,13 @@
 @import "settings"; //includes _colors.scss
 
 .ghostery-rewards-container {
+	a {
+		text-decoration: none;
+	}
 
 	.ghostery-box {
 		opacity: 1;
-		background-color: $dark-magenta;
+		background-color: $dark-purple;
 		white-space:nowrap;
 		background-image: url('../images/ghosty_star.svg');
 		background-repeat: no-repeat;
@@ -25,7 +28,7 @@
 	.ghostery-reward-close {
 		width: 21px;
 		height: 21px;
-		border: 1px solid $dark-magenta;
+		border: 1px solid $dark-purple;
 		background-color: #fff;
 		position: absolute;
 		border-radius: 50%;
@@ -35,6 +38,7 @@
 		background-image: url('../images/drawer/x.svg');
 		background-position: center center;
 		background-repeat: no-repeat;
+		cursor: pointer;
 	}
 
 	&.ghostery-collapsed {
@@ -67,7 +71,48 @@
 			}
 
 		}
-
 	}
 
+	.ghostery-reward-card {
+		div {
+			color: $black;
+		}
+		background-color: #f2f2f2;
+		width: 265px;
+		height: 520px;
+		border: 1px solid #9b9b9b;
+		border-radius: 4px;
+
+		.reward-card-header {
+			height: 36px;
+			width: 100%;
+		}
+
+		.reward-card-content {
+			position: relative;
+			margin-left: auto;
+			margin-right: auto;
+			width: 247px;
+			height: 450px;
+			border: 1px solid $dark-purple;
+			border-radius: 4px;
+		}
+
+		.reward-content-detail {
+			user-select: text;
+		}
+
+		.reward-redeem {
+			color: $white;
+			background-color: $dark-purple;
+			width: 100%;
+			height: 41px;
+			font-size: 14px;
+			border: 0px;
+			position: absolute;
+			bottom: 0px;
+			cursor: pointer;
+		}
+
+	}
 }
