@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 import msgModule from '../utils/msg';
 import { log } from '../../../src/utils/common';
 import '../../scss/rewards.scss';
@@ -14,6 +15,7 @@ class HotDog extends Component {
 			closed: false,
 			rewardsCount: 1
 		};
+		this.close = this.close.bind(this);
 	}
 
 	close() {
@@ -30,8 +32,9 @@ class HotDog extends Component {
 						<div className="ghostery-box">
 							<div className={`ghostery-reward-text ${this.state.rewardsCount > 0 ? 'show' : 'hide'}`}>
 								{`${this.state.rewardsCount} ${this.state.rewardsCount > 1 ? t('rewards_text_plural') : t('rewards_text_single')}`}
+								<Link to="/offercard">Offer Card Link</Link>
 							</div>
-							<div className="ghostery-reward-close" onClick={this.close.bind(this)} />
+							<div className="ghostery-reward-close" onClick={this.close} />
 						</div>
 					</div>}
 			</div>
