@@ -1611,5 +1611,8 @@
 	},
 	"rewards_redeem_now": {
 		"message": "REDEEM NOW"
+	},
+	"rewards_copy_code": {
+		"message": "COPY CODE"
 	}
 }
