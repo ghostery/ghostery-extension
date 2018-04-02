@@ -1174,22 +1174,25 @@
 		"message": "New Since Last Update"
 	},
 	"alert_anti_track_on": {
-		"message": "Enhanced Anti-Trackng ON. Private data points have been removed."
+		"message": "Enhanced Anti-Trackng ON. Private data will be anonymized."
 	},
 	"alert_anti_track_off": {
-		"message": "Enhanced Anti-Tracking OFF."
+		"message": "Enhanced Anti-Tracking OFF. Personal data will not be anonymized."
 	},
 	"alert_ad_block_on": {
-		"message": "Enhanced Ad-Blocking ON. Advertisements have been blocked."
+		"message": "Enhanced Ad-Blocking ON. Advertisements will be blocked."
 	},
 	"alert_ad_block_off": {
-		"message": "Enhanced Ad-Blocking OFF."
+		"message": "Enhanced Ad-Blocking OFF. Advertisements will not be blocked."
 	},
 	"alert_smart_block_on": {
-		"message": "Smart Blocking ON. Tracker blocking adjusted to optimize page performance."
+		"message": "Smart Blocking ON. Tracker blocking will be adjusted to optimize page performance."
 	},
 	"alert_smart_block_off": {
-		"message": "Smart Blocking OFF."
+		"message": "Smart Blocking OFF. Tracker blocking will not be automatically adjusted."
+	},
+	"alert_reload": {
+		"message": "Reload to see changes."
 	},
 	"alert_site_trusted": {
 		"message": "Site whitelisted. Trackers are allowed and private data points unprotected."
@@ -1207,10 +1210,10 @@
 		"message": "Enhanced Anti-Tracking"
 	},
 	"tooltip_anti_track_body": {
-		"message": "Remove private data points for greater anonymity."
+		"message": "Anonymize personal data for greater protection."
 	},
 	"tooltip_anti_track_body_on": {
-		"message": "Private data points have been removed."
+		"message": "Personal data points anonymized."
 	},
 	"tooltip_ad_block": {
 		"message": "Enhanced Ad Blocking"
