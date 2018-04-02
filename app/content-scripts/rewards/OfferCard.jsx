@@ -25,8 +25,24 @@ class OfferCard extends Component {
 
 	render() {
 		return (
-			<div className="ghostery-offer-card">
-				offer card
+			<div className="ghostery-reward-card">
+				<div className="reward-card-header">
+					Ghostery Rewards Beta Logo
+				</div>
+				<div className="reward-card-content">
+					<div className="reward-content-header">
+						content header
+					</div>
+					<div className="reward-content-img">
+						reward image
+					</div>
+					<div className="reward-content-detail">
+						reward details
+					</div>
+					<button className="reward-redeem">
+						{t('rewards_redeem_now')}
+					</button>
+				</div>
 			</div>
 		);
 	}

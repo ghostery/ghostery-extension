@@ -32,7 +32,7 @@ rewardsContainer.id = 'rewards-container';
 
 const MainView = () => (
 	<Router history={history}>
-		<div>
+		<div className="ghostery-rewards-container ghostery-top ghostery-right ghostery-collapsed">
 			<Route exact path="/" component={HotDog} />
 			<Route path="/hotdog" component={HotDog} />
 			<Route path="/offercard" component={OfferCard} />

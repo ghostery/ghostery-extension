@@ -28,14 +28,15 @@ class HotDog extends Component {
 		return (
 			<div>
 				{ this.state.closed !== true &&
-					<div className="ghostery-rewards-container ghostery-top ghostery-right ghostery-collapsed">
-						<div className="ghostery-box">
-							<div className={`ghostery-reward-text ${this.state.rewardsCount > 0 ? 'show' : 'hide'}`}>
-								{`${this.state.rewardsCount} ${this.state.rewardsCount > 1 ? t('rewards_text_plural') : t('rewards_text_single')}`}
-								<Link to="/offercard">Offer Card Link</Link>
+					<div className="hot-dog-container">
+						<Link to="/offercard">
+							<div className="ghostery-box">
+								<div className={`ghostery-reward-text ${this.state.rewardsCount > 0 ? 'show' : 'hide'}`}>
+									{`${this.state.rewardsCount} ${this.state.rewardsCount > 1 ? t('rewards_text_plural') : t('rewards_text_single')}!`}
+								</div>
 							</div>
-							<div className="ghostery-reward-close" onClick={this.close} />
-						</div>
+						</Link>
+						<div className="ghostery-reward-close" onClick={this.close} />
 					</div>}
 			</div>
 		);
