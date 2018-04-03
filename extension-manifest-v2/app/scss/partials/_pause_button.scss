@@ -43,6 +43,7 @@
 		color: #ffffff;
 		border-color: #1dafed;
 		background-color: #1dafed;
+		box-shadow: inset 0px 1px 7px 2px rgba(#1dafed, 0);
 		& + .button.active {
 			border-left-color: #efefea;
 		}
@@ -58,9 +59,11 @@
 		max-width: 125px;
 		font-size: 11px;
 		line-height: 17px;
-		overflow-x: hidden;
-		text-overflow: clip;
-		span {
+		.pause-button-text {
+			overflow-x: hidden;
+			text-overflow: clip;
+		}
+		.pause-button-icon {
 			padding: 0 10px 0 30px;
 			background-repeat: no-repeat;
 			background-position: 0 center;
@@ -70,7 +73,7 @@
 			text-overflow: ellipsis;
 			overflow-x: hidden;
 		}
-		&.active span {
+		&.active .pause-button-icon {
 			background-image: buildIconPlay(#ffffff);
 		}
 		&.smaller {
@@ -140,7 +143,7 @@
 		}
 		.dropdown-item.selected {
 			background-color: #ebebeb;
-			span {
+			.pause-button-icon {
 				padding: 0 0 0 10px;
 				background-repeat: no-repeat;
 				background-position: 0 center;
@@ -155,5 +158,60 @@
 		border-bottom-left-radius: 0;
 		border-top-right-radius: 0;
 		border-top-left-radius: 0;
+	}
+}
+
+.ghostery-features-container .sub-component.pause-button {
+	.button-pause {
+		height: 35px;
+		line-height: 21px;
+		top: 0;
+	}
+	.button-caret {
+		height: 35px;
+	}
+	.button-pause.smaller {
+		top: 1px;
+		height: 45px;
+		min-width: 125px;
+		max-width: 125px;
+		line-height: 31px;
+	}
+	.button-caret.smaller {
+		height: 45px;
+	}
+	.button.active {
+		border-color: #0093bd;
+		background-color: #1dafed;
+		box-shadow: inset 0px 1px 7px 2px #0093bd;
+		&:hover {
+			background-color: #0093bd;
+		}
+	}
+	.button-pause.smallest {
+		top: 0;
+		padding-left: 15px;
+		height: 41px;
+		line-height: 27px;
+		border-top: none;
+		border-bottom-left-radius: 3px;
+		&.dropdown-open {
+			border-bottom-left-radius: 0;
+		}
+	}
+	.button-caret.smallest {
+		height: 41px;
+		border-top: none;
+		border-bottom-right-radius: 3px;
+		&.dropdown-open {
+			border-bottom-right-radius: 0;
+		}
+	}
+	.dropdown {
+		position: absolute;
+		z-index: 1;
+	}
+	.dropdown-container.centered .dropdown-item {
+		padding: 9px 0;
 	}
 }

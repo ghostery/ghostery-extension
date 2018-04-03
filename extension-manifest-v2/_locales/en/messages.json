@@ -474,6 +474,12 @@
 		"message": "Undo"
 	},
 	"summary_pause_ghostery": {
+		"message": "Pause Ghostery"
+	},
+	"summary_pause_ghostery_tooltip": {
+		"message": "Pause Ghostery extension."
+	},
+	"summary_pause_ghostery_ab_pause": {
 		"message": "Pause"
 	},
 	"pause_30_min": {
@@ -495,6 +501,12 @@
 		"message": "24 hrs"
 	},
 	"summary_resume_ghostery": {
+		"message": "Resume Ghostery"
+	},
+	"summary_resume_ghostery_tooltip": {
+		"message": "Ghostery extension paused. Click to resume."
+	},
+	"summary_resume_ghostery_ab_pause": {
 		"message": "Resume"
 	},
 	"summary_show_menu": {
@@ -1173,8 +1185,14 @@
 	"settings_filter_new": {
 		"message": "New Since Last Update"
 	},
+	"alert_ghostery_paused": {
+		"message": "Ghostery extension has been paused."
+	},
+	"alert_ghostery_resumed": {
+		"message": "Ghostery extension has been resumed."
+	},
 	"alert_anti_track_on": {
-		"message": "Enhanced Anti-Trackng ON. Private data will be anonymized."
+		"message": "Enhanced Anti-Trackng ON. Personal data will be anonymized."
 	},
 	"alert_anti_track_off": {
 		"message": "Enhanced Anti-Tracking OFF. Personal data will not be anonymized."
@@ -1231,7 +1249,7 @@
 		"message": "Automatically block and unblock trackers to optimize page performance."
 	},
 	"tooltip_smart_block_body_on": {
-		"message": "Tracking blocking adjusted to optimize page performance."
+		"message": "Tracker blocking adjusted to optimize page performance."
 	},
 	"tooltip_trust": {
 		"message": "Always allow trackers & disable Anti-Tracking on this site."

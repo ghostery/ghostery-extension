@@ -16,14 +16,19 @@ import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 import PauseButton from '../BuildingBlocks/PauseButton';
 
+
 // Fake the translation function to only return the translation key
 global.t = function (str) {
 	return str;
 };
 
+// Fake the Tooltip implementation
+jest.mock('../Tooltip');
+
 // Snapshot Tests
 it('renders unpaused state in simple view', () => {
 	const initialState = {
+		isAbPause: false,
 		isPaused: false,
 		isPausedTimeout: null,
 		clickPause: () => {},
@@ -41,6 +46,7 @@ it('renders unpaused state in simple view', () => {
 
 it('renders paused state in detailed view', () => {
 	const initialState = {
+		isAbPause: false,
 		isPaused: true,
 		isPausedTimeout: null,
 		clickPause: () => {},
@@ -58,6 +64,7 @@ it('renders paused state in detailed view', () => {
 
 it('renders paused state in detailed condensed view', () => {
 	const initialState = {
+		isAbPause: true,
 		isPaused: true,
 		isPausedTimeout: null,
 		clickPause: () => {},

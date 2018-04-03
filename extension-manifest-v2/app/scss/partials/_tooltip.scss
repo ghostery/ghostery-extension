@@ -99,6 +99,13 @@
 .expert .sub-component.ghostery-features .g-tooltip .tooltip-content.right {
 	top: -50%;
 }
+.expert .sub-component.pause-button .g-tooltip .tooltip-content.right {
+	margin-left: 28px;
+	top: -33%;
+}
+.sub-component.pause-button .g-tooltip .tooltip-content.top {
+	left: 75px;
+}
 
 .expert .g-tooltip .tooltip-content.top {
 	&.top-right {
