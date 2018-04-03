@@ -3,8 +3,11 @@ node_js:
   - "9"
 sudo: false
 
+before_install:
+  - npm i -g npm
+
 install:
-  - npm install --silent
+  - npm ci --silent
 
 script:
   - node ./tools/licenses/fetchLicenses.js
