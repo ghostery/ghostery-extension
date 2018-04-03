@@ -1614,5 +1614,14 @@
 	},
 	"rewards_copy_code": {
 		"message": "COPY CODE"
+	},
+	"rewards_code_copied": {
+		"message": "COPIED"
+	},
+	"rewards_expire": {
+		"message": "Expires in"
+	},
+	"rewards_terms_conditions": {
+		"message": "Terms & Conditions"
 	}
 }

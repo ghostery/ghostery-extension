@@ -79,7 +79,7 @@
 
 	.ghostery-reward-card {
 		div {
-			color: $black;
+			color: $tundora;
 		}
 		background-color: #f2f2f2;
 		width: 265px;
@@ -115,7 +115,6 @@
 			display: flex;
 			flex-wrap: wrap;
 			flex-direction: column;
-			justify-content: flex-end;
 			background-color: $white;
 			margin-left: auto;
 			margin-right: auto;
@@ -125,13 +124,14 @@
 			border-radius: 4px;
 
 			.reward-content-detail {
-				// flex: 1;
 				display: flex;
 				flex-wrap: wrap;
+				flex-direction: column;
+				align-items: center;
 				user-select: text;
 
 				div, span, p {
-					color: $black;
+					color: $tundora;
 				}
 
 				.reward-code {
@@ -141,11 +141,8 @@
 					border: 1px solid #dadada;
 					border-radius: 5px;
 					background-color: #f2f2f2;
-					margin-left: auto;
-					margin-right: auto;
 
 					a {
-						flex: 1;
 						text-align: right;
 						align-self: center;
 						margin-right: 8px;
@@ -170,20 +167,29 @@
 				}
 
 				.reward-footer {
+					display: flex;
+					width: 225px;
 					height: 46px;
+					font-size: 11px;
+					span {
+						margin-top: 15px;
+						flex: 1;
+					}
+					a {
+						cursor: pointer;
+						margin-top: 15px;
+						color: $tundora;
+					}
 				}
 			}
 
 			.reward-redeem {
-				// flex: 1;
 				color: $white;
 				background-color: $dark-purple;
 				width: 100%;
 				height: 41px;
 				font-size: 14px;
 				border: 0px;
-				// position: absolute;
-				// bottom: 0px;
 				cursor: pointer;
 			}
 		}
