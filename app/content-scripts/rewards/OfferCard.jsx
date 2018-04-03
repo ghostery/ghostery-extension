@@ -13,16 +13,27 @@ class OfferCard extends Component {
 		super(props);
 		this.state = {
 			closed: false,
-			rewardCode: 'SDF75DSUI90'
+			rewardCode: 'SDF75DSUI90',
+			copyText: t('rewards_copy_code'),
+			expireTime: '14 days',
+			termsLink: 'https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/'
 		};
 		this.close = this.close.bind(this);
 		this.copyCode = this.copyCode.bind(this);
 	}
 
 	copyCode() {
-		console.log('copy code func')
 		document.querySelector('.reward-code-input').select();
 		document.execCommand('copy');
+		this.setState({
+			copyText: `${t('rewards_code_copied')}!`
+		});
+		clearTimeout(this.timeout);
+		this.timeout = setTimeout(() => {
+			this.setState({
+				copyText: t('rewards_copy_code')
+			});
+		}, 3000);
 	}
 
 	close() {
@@ -57,10 +68,11 @@ class OfferCard extends Component {
 							</p>
 							<div className="reward-code">
 								<input readOnly className="reward-code-input" value={this.state.rewardCode} type="text" />
-								<a onClick={this.copyCode}>{t('rewards_copy_code')}</a>
+								<a onClick={this.copyCode}>{this.state.copyText}</a>
 							</div>
 							<div className="reward-footer">
-								reward detail footer
+								<span> {t('rewards_expire')} { this.state.expireTime } </span>
+								<a target="_blank" href={ this.state.termsLink }> { t('rewards_terms_conditions') } </a>
 							</div>
 						</div>
 						<button className="reward-redeem">
