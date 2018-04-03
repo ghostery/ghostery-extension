@@ -731,11 +731,7 @@ const NotificationsContentScript = (function (win, doc) {
 				'showCMPMessage',
 				'showBrowseWindow'
 			];
-			const { name } = request;
-			const reqMsg = request.message;
-			if (!reqMsg) {
-				return false;
-			}
+			const { name, message } = request;
 
 			log('notifications.js received message', name);
 
@@ -747,29 +743,29 @@ const NotificationsContentScript = (function (win, doc) {
 			}
 
 			if (name === 'showCMPMessage') {
-				CMP_DATA = reqMsg.data;
+				CMP_DATA = message.data;
 				showAlert('showCMPMessage', {
 					campaign: CMP_DATA
 				});
 				ALERT_SHOWN = true;
 			} else if (name === 'showUpgradeAlert') {
-				NOTIFICATION_TRANSLATIONS = reqMsg.translations;
-				LANGUAGE = reqMsg.language || 'en';
-				showAlert('showUpgradeAlert', reqMsg.major_upgrade);
+				NOTIFICATION_TRANSLATIONS = message.translations;
+				LANGUAGE = message.language || 'en';
+				showAlert('showUpgradeAlert', message.major_upgrade);
 				ALERT_SHOWN = true;
 			} else if (name === 'showLibraryUpdateAlert') {
-				NOTIFICATION_TRANSLATIONS = reqMsg.translations;
-				LANGUAGE = reqMsg.language || 'en';
+				NOTIFICATION_TRANSLATIONS = message.translations;
+				LANGUAGE = message.language || 'en';
 				showAlert('showLibraryUpdateAlert');
 				ALERT_SHOWN = true;
 			// Import/Export related messages
 			} else if (name === 'showBrowseWindow') {
-				showBrowseWindow(reqMsg.translations);
+				showBrowseWindow(message.translations);
 				ALERT_SHOWN = true;
 			} else if (name === 'onFileImported') {
-				updateBrowseWindow(reqMsg);
+				updateBrowseWindow(message);
 			} else if (name === 'exportFile') {
-				exportFile(reqMsg);
+				exportFile(message);
 			}
 
 			// trigger a response callback to src/background so that we can handler errors properly
