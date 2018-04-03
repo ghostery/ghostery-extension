@@ -102,11 +102,39 @@ class PauseButton extends React.Component {
 	}
 
 	/**
+	 * Helper render function for Pause Button text
+	 * @return {JSX} JSX for the Pause Button's text
+	 */
+	renderPauseButtonText() {
+		const {
+			isPaused,
+			isCondensed,
+			isAbPause,
+		} = this.props;
+
+		if (isCondensed) {
+			return (<span className="pause-button-icon pause-button-text" />);
+		} else if (isAbPause) {
+			return (
+				<span className="pause-button-icon pause-button-text">
+					{isPaused ? t('summary_resume_ghostery_ab_pause') : t('summary_pause_ghostery_ab_pause')}
+				</span>
+			);
+		}
+		return (
+			<span className="pause-button-text">
+				{isPaused ? t('summary_resume_ghostery') : t('summary_pause_ghostery')}
+			</span>
+		);
+	}
+
+	/**
 	 * React's required render function. Returns JSX
 	 * @return {JSX} JSX for rendering the Pause Button on the Summary View
 	 */
 	render() {
 		const pauseButtonClassNames = ClassNames('button', 'button-left', 'button-pause', {
+			'g-tooltip': !this.props.isAbPause,
 			active: this.props.isPaused,
 			smaller: !this.props.isCentered,
 			smallest: this.props.isCentered && this.props.isCondensed,
@@ -115,6 +143,8 @@ class PauseButton extends React.Component {
 		});
 		const dropdownButtonClassNames = ClassNames('button', 'button-right', 'button-caret', {
 			active: this.state.showDropdown,
+			smaller: !this.props.isCentered,
+			smallest: this.props.isCentered && this.props.isCondensed,
 			'no-border-radius': this.props.isCentered && this.props.isCondensed,
 			'dropdown-open': this.state.showDropdown,
 		});
@@ -122,7 +152,7 @@ class PauseButton extends React.Component {
 			centered: this.props.isCentered,
 		});
 		const dropdownContainerStyles = {
-			left: `${this.props.isCentered ? this.pauseLeft : 0}px`,
+			left: `${(this.props.isCentered && this.props.isAbPause) ? this.pauseLeft : 0}px`,
 		};
 
 		return (
@@ -136,12 +166,12 @@ class PauseButton extends React.Component {
 							this.pauseLeft = node && node.offsetLeft;
 						}}
 					>
-						{this.props.isCondensed ? (
-							<span />
-						) : (
-							<span>
-								{this.props.isPaused ? t('summary_resume_ghostery') : t('summary_pause_ghostery')}
-							</span>
+						{this.renderPauseButtonText()}
+						{!this.props.isAbPause && (
+							<Tooltip
+								header={this.props.isPaused ? t('summary_resume_ghostery_tooltip') : t('summary_pause_ghostery_tooltip')}
+								position={(this.props.isCentered) ? 'right' : 'top'}
+							/>
 						)}
 					</div>
 					<div className={dropdownButtonClassNames} onClick={this.clickDropdownCaret}>

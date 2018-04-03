@@ -11,10 +11,12 @@ exports[`renders paused state in detailed condensed view 1`] = `
       className="button button-left button-pause active smaller"
       onClick={[Function]}
     >
-      <span />
+      <span
+        className="pause-button-icon pause-button-text"
+      />
     </div>
     <div
-      className="button button-right button-caret"
+      className="button button-right button-caret smaller"
       onClick={[Function]}
     >
       <span
@@ -43,15 +45,17 @@ exports[`renders paused state in detailed view 1`] = `
     className="button-group"
   >
     <div
-      className="button button-left button-pause active smaller"
+      className="button button-left button-pause g-tooltip active smaller"
       onClick={[Function]}
     >
-      <span>
+      <span
+        className="pause-button-text"
+      >
         summary_resume_ghostery
       </span>
     </div>
     <div
-      className="button button-right button-caret"
+      className="button button-right button-caret smaller"
       onClick={[Function]}
     >
       <span
@@ -80,10 +84,12 @@ exports[`renders unpaused state in simple view 1`] = `
     className="button-group"
   >
     <div
-      className="button button-left button-pause"
+      className="button button-left button-pause g-tooltip"
       onClick={[Function]}
     >
-      <span>
+      <span
+        className="pause-button-text"
+      >
         summary_pause_ghostery
       </span>
     </div>
@@ -102,7 +108,7 @@ exports[`renders unpaused state in simple view 1`] = `
     className="button-group dropdown-container centered"
     style={
       Object {
-        "left": "undefinedpx",
+        "left": "0px",
       }
     }
   />

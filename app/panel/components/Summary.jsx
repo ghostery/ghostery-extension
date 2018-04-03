@@ -24,6 +24,7 @@ import {
 } from './BuildingBlocks';
 
 const { IS_CLIQZ } = globals;
+const AB_PAUSE_BUTTON = true;
 
 /**
  * @class Implements the Summary View, which is displayed as the entire panel
@@ -38,6 +39,7 @@ class Summary extends React.Component {
 		this.state = {
 			trackerLatencyTotal: '',
 			disableBlocking: false,
+			abPause: AB_PAUSE_BUTTON,
 		};
 
 		// Event Bindings
@@ -122,6 +124,7 @@ class Summary extends React.Component {
 	 */
 	clickPauseButton(time) {
 		const ghosteryPaused = this.props.paused_blocking;
+		const text = ghosteryPaused ? t('alert_ghostery_resumed') : t('alert_ghostery_paused');
 		sendMessage('ping', ghosteryPaused ? 'resume' : 'pause');
 		if (typeof time === 'number') {
 			sendMessage('ping', 'pause_snooze');
@@ -135,6 +138,7 @@ class Summary extends React.Component {
 		this.props.actions.showNotification({
 			updated: 'ghosteryPaused',
 			reload: true,
+			text,
 		});
 	}
 
@@ -261,12 +265,14 @@ class Summary extends React.Component {
 	* @return {JSX} JSX for rendering the Summary View of the panel
 	*/
 	render() {
+		const { abPause } = this.state;
 		const { is_expert, is_expanded } = this.props;
 		const showCondensed = is_expert && is_expanded;
 
 		const summaryClassNames = ClassNames('', {
 			expert: is_expert,
 			condensed: showCondensed,
+			'ab-pause': abPause,
 		});
 
 		const blockedTrackersClassNames = ClassNames('blocked-trackers', {
@@ -283,24 +289,27 @@ class Summary extends React.Component {
 
 		return (
 			<div id="content-summary" className={summaryClassNames}>
-				<div className="pause-button-container">
-					<PauseButton
-						isPaused={this.props.paused_blocking}
-						isPausedTimeout={this.props.paused_blocking_timeout}
-						clickPause={this.clickPauseButton}
-						dropdownItems={this.pauseOptions}
-						isCentered={is_expert}
-						isCondensed={showCondensed}
-					/>
-				</div>
+				{abPause && (
+					<div className="pause-button-container">
+						<PauseButton
+							isPaused={this.props.paused_blocking}
+							isPausedTimeout={this.props.paused_blocking_timeout}
+							clickPause={this.clickPauseButton}
+							dropdownItems={this.pauseOptions}
+							isAbPause={abPause}
+							isCentered={is_expert}
+							isCondensed={showCondensed}
+						/>
+					</div>
+				)}
 
 				{this.state.disableBlocking && !showCondensed && (
 					<NotScanned isSmall={is_expert} />
 				)}
 
-				{!this.state.disableBlocking && is_expert && !showCondensed && (
+				{abPause && !this.state.disableBlocking && is_expert && !showCondensed && (
 					<div className="page-host">
-						{this.props.pageHost || 'bloink fallon'}
+						{this.props.pageHost}
 					</div>
 				)}
 
@@ -323,7 +332,7 @@ class Summary extends React.Component {
 					</div>
 				)}
 
-				{!this.state.disableBlocking && !is_expert && !showCondensed && (
+				{!this.state.disableBlocking && (!abPause || !is_expert) && !showCondensed && (
 					<div className="page-host">
 						{this.props.pageHost}
 					</div>
@@ -354,10 +363,23 @@ class Summary extends React.Component {
 					<GhosteryFeatures
 						clickButton={this.clickSitePolicy}
 						sitePolicy={this.props.sitePolicy}
+						isAbPause={abPause}
 						isStacked={is_expert}
 						isInactive={this.props.paused_blocking || this.state.disableBlocking}
 						isCondensed={showCondensed}
 					/>
+
+					{!abPause && (
+						<PauseButton
+							isPaused={this.props.paused_blocking}
+							isPausedTimeout={this.props.paused_blocking_timeout}
+							clickPause={this.clickPauseButton}
+							dropdownItems={this.pauseOptions}
+							isAbPause={abPause}
+							isCentered={is_expert}
+							isCondensed={showCondensed}
+						/>
+					)}
 				</div>
 
 				<div className="cliqz-features-container">
