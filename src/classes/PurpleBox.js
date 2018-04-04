@@ -49,7 +49,7 @@ class PurpleBox {
 		if (!conf.show_alert ||
 			globals.SESSION.paused_blocking ||
 			(conf.hide_alert_trusted && !!this.policy.whitelisted(tab.url)) ||
-			!tab || tab.purplebox || globals.EXCLUDES.includes(tab.host)) {
+			!tab || tab.purplebox || tab.path.includes('_/chrome/newtab') || globals.EXCLUDES.includes(tab.host)) {
 			return Promise.resolve(false);
 		}
 
