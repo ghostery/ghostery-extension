@@ -76,7 +76,9 @@ lintOnChange.prototype.apply = function(compiler) {
 	}
 	compiler.plugin("done", () => {
 		const changedTimes = compiler.watchFileSystem.watcher.mtimes;
-		const changedFiles = Object.keys(changedTimes);
+		const changedFiles = Object.keys(changedTimes).filter((file) => {
+			return file.indexOf('.js') !== -1;
+		});
 		if (changedFiles.length) {
 			const args = ['run', 'lint.raw', '--', ...changedFiles];
 			if (process.argv.includes('--env.fix')) {
