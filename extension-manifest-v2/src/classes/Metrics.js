@@ -15,6 +15,7 @@ import globals from './Globals';
 import conf from './Conf';
 import { log, prefsSet, prefsGet } from '../utils/common';
 import { processUrlQuery } from '../utils/utils';
+import abtest from './ABTest';
 
 // CONSTANTS
 const FREQUENCIES = { // in milliseconds
@@ -71,9 +72,7 @@ class Metrics {
 							prefsSet({
 								utm_source: this.utm_source,
 								utm_campaign: this.utm_campaign
-							})
-								.then(prefs => resolve(prefs))
-								.catch(err => reject(err));
+							});
 						});
 						resolve();
 					});
@@ -94,9 +93,7 @@ class Metrics {
 							prefsSet({
 								utm_source: this.utm_source,
 								utm_campaign: this.utm_campaign
-							})
-								.then(reject)
-								.catch(reject);
+							});
 						}
 					});
 					resolve();
@@ -280,7 +277,7 @@ class Metrics {
 			`&l=${encodeURIComponent(conf.language)}` +
 			// Old parameters, new names
 			// Offers (former offers)
-			`&of=${encodeURIComponent(IS_EDGE ? '0' : (conf.enable_offers ? '1' : '0'))}` +
+			`&of=${encodeURIComponent(IS_EDGE ? '0' : ((conf.enable_offers && abtest.hasTest('offers')) ? '1' : '0'))}` +
 			// Random number, assigned at install (former install_rand)
 			`&ir=${encodeURIComponent(conf.install_random_number)}` +
 			// Login state (former signed_in)

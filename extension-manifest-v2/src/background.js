@@ -67,23 +67,31 @@ const onHeadersReceived = events.onHeadersReceived.bind(events);
 
 // Cliqz Modules
 const humanweb = cliqz.modules['human-web'];
-const { adblocker, antitracking } = cliqz.modules;
+const { adblocker, antitracking, hpn } = cliqz.modules;
 const messageCenter = cliqz.modules['message-center'];
 const offers = cliqz.modules['offers-v2'];
 
-function setCliqzModuleEnabled(module, enabled) {
-	if (enabled) {
-		return cliqz.enableModule(module.name);
-	}
-	return module.isReady().then(() => cliqz.disableModule(module.name));
-}
+const CORRECT_STATE = 'CorrectState';
 
-// local varialbes
-let	HUMAN_WEB_PROCESSING = false;
-let OFFERS_PROCESSING = false;
-let ANTI_TRACKING_PROCESSING = false;
-let AD_BLOCK_PROCESSING = false;
-let BACKGROUND_LOADING = true;
+/**
+ * Enable or disable specified module.
+ * @memberOf Background
+ * @param {Object} module  Cliqz module
+ * @param {boolean} enabled true - enable, false - disable
+ * @return {Promise}
+ */
+function setCliqzModuleEnabled(module, enabled) {
+	if (enabled && !module.isEnabled) {
+		log('SET CLIQZ MODULE ENABLED', module);
+		return cliqz.enableModule(module.name);
+	} else if (!enabled && module.isEnabled) {
+		log('SET CLIQZ MODULE DISABLED', module);
+		cliqz.disableModule(module.name);
+		return Promise.resolve();
+	}
+	log('MODULE IS ALREADY IN CORRECT STATE', module, enabled);
+	return Promise.resolve(CORRECT_STATE);
+}
 
 /**
  * Check and fetch (if needed) a new tracker library every 12 hours
@@ -192,6 +200,7 @@ function getSiteData() {
 
 			if (!tab) {
 				reject(new Error('Tab not found. Cannot gather page data'));
+				return;
 			}
 
 			resolve({
@@ -775,45 +784,27 @@ function initializeDispatcher() {
 	});
 	dispatcher.on('conf.save.enable_human_web', (enableHumanWeb) => {
 		if (!IS_EDGE && !IS_CLIQZ) {
-			if (!HUMAN_WEB_PROCESSING && !BACKGROUND_LOADING) {
-				HUMAN_WEB_PROCESSING = true;
-				setCliqzModuleEnabled(humanweb, enableHumanWeb).then(() => {
-					HUMAN_WEB_PROCESSING = false;
-					// humanweb enable/disable may change telemetry abtest behaviour
-					setupABTests();
-				});
-			}
+			setCliqzModuleEnabled(humanweb, enableHumanWeb).then((data) => {
+				if (data !== CORRECT_STATE) {
+					// We don't want to affect Offers here
+					setupABTestAntitracking();
+				}
+			});
 		}
 	});
 	dispatcher.on('conf.save.enable_offers', (enableOffers) => {
 		if (!IS_EDGE && !IS_CLIQZ) {
-			if (!OFFERS_PROCESSING && !BACKGROUND_LOADING) {
-				OFFERS_PROCESSING = true;
-				setCliqzModuleEnabled(messageCenter, enableOffers)
-					.then(() => setCliqzModuleEnabled(offers, enableOffers));
-				OFFERS_PROCESSING = false;
-			}
+			setCliqzModuleEnabled(offers, enableOffers);
 		}
 	});
 	dispatcher.on('conf.save.enable_anti_tracking', (enableAntitracking) => {
 		if (!IS_CLIQZ) {
-			if (!ANTI_TRACKING_PROCESSING && !BACKGROUND_LOADING) {
-				ANTI_TRACKING_PROCESSING = true;
-				setCliqzModuleEnabled(antitracking, enableAntitracking)
-					.then(() => {
-						ANTI_TRACKING_PROCESSING = false;
-					});
-			}
+			setCliqzModuleEnabled(antitracking, enableAntitracking);
 		}
 	});
 	dispatcher.on('conf.save.enable_ad_block', (enableAdBlock) => {
 		if (!IS_CLIQZ) {
-			if (!AD_BLOCK_PROCESSING && !BACKGROUND_LOADING) {
-				setCliqzModuleEnabled(adblocker, enableAdBlock)
-					.then(() => {
-						AD_BLOCK_PROCESSING = false;
-					});
-			}
+			setCliqzModuleEnabled(adblocker, enableAdBlock);
 		}
 	});
 
@@ -855,11 +846,10 @@ function getAntitrackingTestConfig() {
 }
 
 /**
- * Setup Antitracking and Offers based on the results
- * returned from the abtest endpoint.
- * @memberOf Background
+ * Adjust antitracking parameters based on the current state
+ * of ABTest and availability of Human Web.
  */
-function setupABTests() {
+function setupABTestAntitracking() {
 	const antitrackingConfig = getAntitrackingTestConfig();
 	if (antitrackingConfig && conf.enable_anti_tracking) {
 		if (!conf.enable_human_web) {
@@ -872,8 +862,22 @@ function setupABTests() {
 			antitracking.action('setConfigOption', opt, val);
 		});
 	}
+}
+/**
+ * Adjust offers based on the current state of ABTest.
+ */
+function setupABTestOffers() {
 	// enable offers ONLY if ABTest is true and user has left it enabled.
 	conf.enable_offers = (abtest.hasTest('offers') && conf.enable_offers);
+}
+/**
+ * Setup Antitracking and Offers based on the results
+ * returned from the abtest endpoint.
+ * @memberOf Background
+ */
+function setupABTests() {
+	setupABTestAntitracking();
+	setupABTestOffers();
 }
 
 /**
@@ -965,59 +969,68 @@ adblocker.on('enabled', () => {
 	});
 });
 
-
-// Set listener for 'enabled' event for Offers module.
-// It registers message handler for messages with the offers.
-// This handler adds incoming message data to the array of
-// notimication messages (CMP_DATA) to be eventually displayed.
 offers.on('enabled', () => {
-	const messageCenter = cliqz.modules['message-center'];
-	return messageCenter.action('registerMessageHandler', OFFERS_HANDLER_ID, (msg) => {
-		// ffers enabled at the moment when message received
-		messageCenter.action('hideMessage', OFFERS_HANDLER_ID, msg);
-		msg.Dismiss = 1; // to be immediately dismissed once shown
-
-		/**
-		 * We changed the message structure here so we need to map
-		 * to the new way on ghostery 8 after nav-ext 1.18
-		 *
-		 * {
-		 * 	id: offerInfoCpy.display_id,
-		 *  Message: offerInfoCpy.ui_info.template_data.title,
-		 *  Link: offerInfoCpy.ui_info.template_data.call_to_action.url,
-		 *  LinkText: offerInfoCpy.ui_info.template_data.call_to_action.text,
-		 *  type: 'offers',
-		 *  origin: 'cliqz',
-		 *  data: {
-		 *   offer_info: {
-		 *    offer_id: data.offer_data.offer_id,
-		 *    offer_urls: urlsToShow
-		 *   }
-		 *  }
-		 * }
-		*/
-
-		// first check that the message is from core and is the one we expect
-		if (msg.origin === 'offers-core' &&
-			msg.type === 'push-offer' &&
-			msg.data.offer_data) {
-			const { data } = msg;
-			const cmpMsg = {
-				id: data.offer_data.display_id,
-				Message: data.offer_data.ui_info.template_data.title,
-				Link: data.offer_data.ui_info.template_data.call_to_action.url,
-				LinkText: data.offer_data.ui_info.template_data.call_to_action.text,
-				type: 'offers',
-				origin: 'cliqz',
-				data: {
-					offer_info: {
-						offer_id: data.offer_data.offer_id,
-						offer_urls: data.offer_data.rule_info.url
+	offers.isReady().then(() => {
+		log('IN OFFERS ON ENABLED', offers, messageCenter);
+		setCliqzModuleEnabled(messageCenter, true);
+	});
+});
+/**
+ * Set listener for 'enabled' event for Offers module.
+ * It registers message handler for messages with the offers.
+ * This handler adds incoming message data to the array of
+ * notimication messages (CMP_DATA) to be eventually displayed.
+ */
+messageCenter.on('enabled', () => {
+	messageCenter.isReady().then(() => {
+		log('IN MESSAGE CENTER ON ENABLED', offers, messageCenter);
+		// const messageCenter = cliqz.modules['message-center'];
+		return messageCenter.action('registerMessageHandler', OFFERS_HANDLER_ID, (msg) => {
+			// ffers enabled at the moment when message received
+			messageCenter.action('hideMessage', OFFERS_HANDLER_ID, msg);
+			msg.Dismiss = 1; // to be immediately dismissed once shown
+			/**
+			 * We changed the message structure here so we need to map
+			 * to the new way on ghostery 8 after nav-ext 1.18
+			 *
+			 * {
+			 * 	id: offerInfoCpy.display_id,
+			 *  Message: offerInfoCpy.ui_info.template_data.title,
+			 *  Link: offerInfoCpy.ui_info.template_data.call_to_action.url,
+			 *  LinkText: offerInfoCpy.ui_info.template_data.call_to_action.text,
+			 *  type: 'offers',
+			 *  origin: 'cliqz',
+			 *  data: {
+			 *   offer_info: {
+			 *    offer_id: data.offer_data.offer_id,
+			 *    offer_urls: urlsToShow
+			 *   }
+			 *  }
+			 * }
+			*/
+			log('GOT OFFER', msg);
+			// first check that the message is from core and is the one we expect
+			if (msg.origin === 'offers-core' &&
+				msg.type === 'push-offer' &&
+				msg.data.offer_data) {
+				const { data } = msg;
+				const cmpMsg = {
+					id: data.offer_data.display_id,
+					Message: data.offer_data.ui_info.template_data.title,
+					Link: data.offer_data.ui_info.template_data.call_to_action.url,
+					LinkText: data.offer_data.ui_info.template_data.call_to_action.text,
+					type: 'offers',
+					origin: 'cliqz',
+					data: {
+						offer_info: {
+							offer_id: data.offer_data.offer_id,
+							offer_urls: data.offer_data.rule_info.url
+						}
 					}
-				}
-			};
-			cmp.CMP_DATA.push(cmpMsg);
-		}
+				};
+				cmp.CMP_DATA.push(cmpMsg);
+			}
+		});
 	});
 });
 
@@ -1284,27 +1297,10 @@ function initializeGhosteryModules() {
 	});
 
 	if (IS_EDGE) {
-		cliqz.disableModule('hpn');
-		cliqz.disableModule('offers-v2');
-		cliqz.disableModule('human-web');
+		setCliqzModuleEnabled(hpn, false);
 	}
-	cliqzStartup.then(() => {
-		if (!IS_EDGE) {
-			abtest.fetch().then(() => {
-				setupABTests();
-			}).catch((err) => {
-				log('cliqzStartup abtest fetch error', err);
-			});
-		}
-	});
 
-	// record active ping
-	metrics.ping('active');
-
-	// init the CMP
-	cmp.fetchCMPData();
-
-	// Set these tasks to run every 30min
+	// Set these tasks to run every hour
 	function scheduledTasks() {
 		// auto-fetch from CMP
 		cmp.fetchCMPData();
@@ -1317,12 +1313,27 @@ function initializeGhosteryModules() {
 				log('Unable to reach abtest server');
 			});
 		}
-
-		// auto-update bugs dbs
-		autoUpdateBugDb();
 	}
-	scheduledTasks();
-	setInterval(scheduledTasks, 1800000);
+
+	cliqzStartup.then(() => {
+		if (!IS_EDGE) {
+			abtest.fetch().then(() => {
+				setupABTests();
+			}).catch((err) => {
+				log('cliqzStartup abtest fetch error', err);
+			});
+		}
+	});
+
+	// Check CMP right away.
+	cmp.fetchCMPData();
+	// Check CMP and ABTest every hour.
+	setInterval(scheduledTasks, 3600000);
+
+	// Update db right away.
+	autoUpdateBugDb();
+	// Schedule it to run every 30 min.
+	setInterval(autoUpdateBugDb, 1800000);
 
 	// listen for changes to specific conf properties
 	initializeDispatcher();
@@ -1336,6 +1347,8 @@ function initializeGhosteryModules() {
 		button.update(tabId);
 	});
 
+	// record active ping
+	metrics.ping('active');
 	// initialize all tracker and surrogate DBs in parallel with Promise.all
 	return Promise.all([
 		bugDb.init(globals.JUST_UPGRADED),
@@ -1360,16 +1373,13 @@ function init() {
 		initializePopup();
 		initializeEventListeners();
 		initializeVersioning();
-		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => {
-			BACKGROUND_LOADING = false;
-			return accounts.pullUserSettings().catch((err) => {
-				log('init() cannot pull user settings:', err);
-			}).then(() => {
-				// persist Conf properties to storage only after init has completed
-				common.prefsSet(globals.initProps);
-				globals.INIT_COMPLETE = true;
-			});
-		}));
+		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => accounts.pullUserSettings().catch((err) => {
+			log('init() cannot pull user settings:', err);
+		}).then(() => {
+			// persist Conf properties to storage only after init has completed
+			common.prefsSet(globals.initProps);
+			globals.INIT_COMPLETE = true;
+		})));
 	}).catch((err) => {
 		log('Error in init()', err);
 		return Promise.reject(err);

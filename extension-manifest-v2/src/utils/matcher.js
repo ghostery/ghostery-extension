@@ -31,9 +31,8 @@ import { log } from './common';
  */
 export function isBug(src, tab_url) {
 	const { db } = bugDb;
-	const processedSrc = processUrl(src);
+	const processedSrc = processUrl(src.toLowerCase());
 	let	found = false;
-
 
 	found =
 		// pattern classification 2: check host+path hash
@@ -57,6 +56,7 @@ export function isBug(src, tab_url) {
 
 	return found;
 }
+
 /**
  * Determine if a url matches an entry in an array urls.
  * The matching is permissive.
@@ -68,7 +68,7 @@ export function isBug(src, tab_url) {
  * @return {boolean} 			true if match is found, false otherwise
  */
 export function fuzzyUrlMatcher(url, urls) {
-	const	parsed = processUrl(url);
+	const parsed = processUrl(url.toLowerCase());
 	let tab_host = parsed.host;
 
 	const tab_path = parsed.path;
@@ -99,6 +99,7 @@ export function fuzzyUrlMatcher(url, urls) {
 	}
 	return false;
 }
+
 /**
  * Determine if a path part of an url matches to a path property
  * of a node in an array of json nodes with paths.
@@ -129,6 +130,7 @@ function _matchesHostPath(roots, src_path) {
 
 	return false;
 }
+
 /**
  * Use host and path parts of a url to traverse database trie node
  * looking for matching parts. Reaching the leaf would yeild bug id.
@@ -201,6 +203,7 @@ function _matchesRegex(src) {
 
 	return false;
 }
+
 /**
  * Match a path part of a url agains the path property of database patterns section.
  * @private
@@ -208,7 +211,8 @@ function _matchesRegex(src) {
  * @param {string} 	src_path	path part of an url
  *
  * @return {int|boolean} 		bug id or false if the match was not found
- */ function _matchesPath(src_path) {
+ */
+function _matchesPath(src_path) {
 	const paths = bugDb.db.patterns.path;
 
 	// NOTE: we re-add the "/" in order to match patterns that include "/"

@@ -8,10 +8,12 @@
 	"author": "Ghostery",
 	"name": "__MSG_name__",
 	"short_name": "Ghostery",
-	"version": "8.1.0",
-	"version_name": "8.1.0",
+	"version": "8.1.1",
+	"version_name": "8.1.1",
 	"default_locale": "en",
 	"description": "__MSG_short_description__",
+	"log": true,
+	"debug": true,
 	"icons": {
 		"16": "app/images/icon16.png",
 		"48": "app/images/icon48.png",
@@ -80,8 +82,6 @@
 	],
 	"background": {
 		"scripts": [
-			"dist/vendor.js",
-			"dist/browser-core.js",
 			"dist/background.js"
 		],
 		"persistent": true

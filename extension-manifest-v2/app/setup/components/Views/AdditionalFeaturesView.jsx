@@ -78,7 +78,7 @@ class AdditionalFeaturesView extends Component {
 	 * @return {Object}
 	 */
 	createAntiTrackDescriptionMarkup() {
-		return { __html: IS_CLIQZ ? t('setup_feature_active_in_cliqz') : t('setup_additional_view_adblock_desc') };
+		return { __html: IS_CLIQZ ? t('setup_feature_active_in_cliqz') : t('setup_additional_view_antitrack_desc') };
 	}
 
 	/**
@@ -86,7 +86,7 @@ class AdditionalFeaturesView extends Component {
 	 * @return {Object}
 	 */
 	createAdBlockDescriptionMarkup() {
-		return { __html: IS_CLIQZ ? t('setup_feature_active_in_cliqz') : t('setup_additional_view_antitrack_desc') };
+		return { __html: IS_CLIQZ ? t('setup_feature_active_in_cliqz') : t('setup_additional_view_adblock_desc') };
 	}
 
 	/**
