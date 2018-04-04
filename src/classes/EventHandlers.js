@@ -674,7 +674,8 @@ class EventHandlers {
 	}
 
 	/**
-	 * Checks to see if the URL is valid
+	 * Checks to see if the URL is valid. Also checks to make sure we
+	 * are not on the Chrome new tab page (_/chrome/newtab)
 	 *
 	 * @private
 	 *
