@@ -103,13 +103,3 @@ export function filterTrackers(data) {
 		data,
 	};
 }
-
-/**
- * Called from Summary.toggleExpert() and picked up by panel reducer
- * @return {Object}
- */
-export function toggleExpert() {
-	return {
-		type: TOGGLE_EXPERT,
-	};
-}

@@ -105,7 +105,7 @@ export function closeNotification(data) {
 }
 
 /**
- * Called from Header.toggleExpert() and picked up by panel reducer
+ * Called from Header and Summary's toggleExpert() and picked up by panel reducer
  * @return {Object}
  */
 export function toggleExpert() {
