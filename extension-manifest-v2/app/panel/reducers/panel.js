@@ -13,7 +13,8 @@
 
 /* eslint no-use-before-define: 0 */
 
-import { GET_PANEL_DATA,
+import {
+	GET_PANEL_DATA,
 	SHOW_NOTIFICATION,
 	CLOSE_NOTIFICATION,
 	LOGIN_SUCCESS,
@@ -22,7 +23,8 @@ import { GET_PANEL_DATA,
 	TOGGLE_EXPANDED,
 	TOGGLE_EXPERT,
 	TOGGLE_CLIQZ_FEATURE,
-	UPDATE_NOTIFICATION_STATUS } from '../constants/constants';
+	UPDATE_NOTIFICATION_STATUS
+} from '../constants/constants';
 import { sendMessage } from '../utils/msg';
 
 const initialState = {

@@ -11,9 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import {
-	UPDATE_DISPLAY_MODE
-} from '../constants/constants';
+import { UPDATE_DISPLAY_MODE } from '../constants/constants';
 import { msg } from '../utils';
 
 const initialState = {
