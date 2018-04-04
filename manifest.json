@@ -66,6 +66,7 @@
 				"http://*/*",
 				"https://*/*"
 			],
+			"exclude_matches": ["*://*/_/chrome/newtab*"],
 			"run_at": "document_start"
 		}
 	],
