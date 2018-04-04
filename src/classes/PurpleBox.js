@@ -45,7 +45,7 @@ class PurpleBox {
 	 */
 	createBox(tab_id) {
 		const tab = tabInfo.getTabInfo(tab_id);
-		// If the tab is prefetched, we can't add purplebox to it.
+		// Skip in the event of pause, trust, prefetching or newtab page
 		if (!conf.show_alert ||
 			globals.SESSION.paused_blocking ||
 			(conf.hide_alert_trusted && !!this.policy.whitelisted(tab.url)) ||
