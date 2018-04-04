@@ -26,6 +26,10 @@ class OfferCard extends Component {
 
 		this.close = this.close.bind(this);
 		this.copyCode = this.copyCode.bind(this);
+
+		onMessage.addListener((request, sender, sendResponse) => {
+			console.log(request);
+		});
 	}
 
 	copyCode() {

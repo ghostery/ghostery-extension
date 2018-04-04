@@ -28,27 +28,52 @@ const t = chrome.i18n.getMessage;
  * @todo  make it a Singelton
  */
 class Rewards {
-	/**
-	 * Build the rewards container.  Called from webNavigation.onCommitted handler
-	 *
-	 * @param  {number} tab_id		tab id
-	 * @return {Promise}		resolves to true or false (success/failure)
-	 */
+	constructor() {
+		this.rewardsData = {
+			rewardName: 'test-reward'
+		};
+		this.ports = new Map();
+	}
+
 	showCircle(tab_id) {
-		// console.log('showCircle HOT DOG');
+		/* @TODO get any initial data from cmp event and add to this.rewardsData */
+
 		const tab = tabInfo.getTabInfo(tab_id);
-		// console.log(tab);
+
 		// If the tab is prefetched, we can't add purplebox to it.
 		if (!conf.enable_offers ||
 			!tab || tab.rewards) {
 			return Promise.resolve(false);
 		}
 
-		/* @TODO continue rewrite of purplebox after here: */
-
 		// Inject script cannot handle errors properly, but we call createBox after verifying that the tab is OK
 		// So update hotdog status for this tab
 		tabInfo.setTabInfo(tab_id, 'rewards', true);
+
+		chrome.runtime.onConnect.addListener((port) => {
+			if (port && port.name === 'rewardsPort' && port.sender && port.sender.tab && port.sender.tab.id) {
+				const tabId = port.sender.tab.id;
+				if (!this.ports.has(tabId)) {
+					this.ports.set(tabId, port);
+					this.ports.get(tabId).onMessage.addListener((message) => {
+						if (message.name === 'rewardsLoaded') {
+							this.ports.get(tabId).postMessage({ name: 'showCircle', message: this.rewardsData });
+						}
+						// else if (message.name === 'onCreateBox') {
+						// 	this.updateBox(tabId);
+						// } else if (message.name === 'onDestroyBox') {
+						// 	this.destroyBox(tabId);
+						// } else if (message.name === 'updateAlertConf') {
+						// 	conf.alert_expanded = message.message.alert_expanded;
+						// 	conf.alert_bubble_pos = message.message.alert_bubble_pos;
+						// 	conf.alert_bubble_timeout = message.message.alert_bubble_timeout;
+						// 	// push new settings to API
+						// 	accounts.pushUserSettings({ conf: accounts.buildUserSettings() });
+						// }
+					});
+				}
+			}
+		});
 
 		// console.log('INJECT REWARDS');
 		return injectScript(tab_id, 'dist/rewards.js', 'dist/css/purplebox_styles.css', 'document_start').then(() => {
