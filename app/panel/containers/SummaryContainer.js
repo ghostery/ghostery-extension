@@ -16,7 +16,6 @@ import { bindActionCreators } from 'redux';
 import Summary from '../components/Summary';
 import * as summaryActions from '../actions/SummaryActions';
 import * as panelActions from '../actions/PanelActions';
-import * as drawerActions from '../actions/DrawerActions';
 /**
  * Map redux store state properties to Summary view component own properties.
  * @memberOf PanelContainers
@@ -26,7 +25,7 @@ import * as drawerActions from '../actions/DrawerActions';
  * @todo  We are not using ownProps, so we better not specify it explicitly,
  * in this case it won't be passed by React (see https://github.com/reactjs/react-redux/blob/master/docs/api.md).
  */
-const mapStateToProps = (state, ownProps) => Object.assign({}, state.summary, state.panel, state.drawer, {
+const mapStateToProps = (state, ownProps) => Object.assign({}, state.summary, state.panel, {
 	is_expanded: state.panel.is_expanded,
 	is_expert: state.panel.is_expert,
 	tab_id: state.panel.tab_id,
@@ -39,7 +38,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state.summary, st
  * @return {function}          	  to be used as an argument in redux connect call
  */
 const mapDispatchToProps = (dispatch, ownProps) => ({
-	actions: bindActionCreators(Object.assign(summaryActions, panelActions, drawerActions), dispatch),
+	actions: bindActionCreators(Object.assign(summaryActions, panelActions), dispatch),
 });
 /**
  * Connects Summary view component to the Redux store. Pass updated match, location, and history props to the wrapped component.

@@ -13,6 +13,7 @@
 
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+import ClassNames from 'classnames';
 import DetailMenu from './DetailMenu';
 import Summary from '../containers/SummaryContainer';
 import Blocking from '../containers/BlockingContainer';
@@ -59,13 +60,14 @@ class Detail extends React.Component {
 	 * @return {ReactComponent}   ReactComponent instance
 	 */
 	render() {
+		const condensedToggleClassNames = ClassNames('condensed-toggle', {
+			condensed: this.props.is_expanded,
+		});
+
 		return (
 			<div className="detail-wrap">
 				<div id="content-detail" className={(this.props.is_expanded ? 'expanded' : '')}>
-					<div className={`expertTab row align-middle align-right ${this.props.is_expanded ? 'expanded' : ''}`} onClick={this.toggleExpanded}>
-						<div className="dash" />
-						<div className="moon" />
-					</div>
+					<div className={condensedToggleClassNames} onClick={this.toggleExpanded} />
 					<Route path="/detail/blocking" render={this.BlockingComponent} />
 					<Route path="/detail/history" render={this.HistoryComponent} />
 					<Route path="/detail/performance" render={this.PerformanceComponent} />

@@ -455,29 +455,62 @@
 	"summary_description_not_scanned_2": {
 		"message": "Navigate to another page and I promise I'll deliver the goods."
 	},
+	"summary_custom_settings": {
+		"message": "Custom Settings"
+	},
 	"summary_trust_site": {
 		"message": "Trust Site"
 	},
+	"summary_trust_site_active": {
+		"message": "Site Trusted"
+	},
 	"summary_restrict_site": {
 		"message": "Restrict Site"
+	},
+	"summary_restrict_site_active": {
+		"message": "Site Restricted"
 	},
 	"summary_undo": {
 		"message": "Undo"
 	},
 	"summary_pause_ghostery": {
+		"message": "Pause Ghostery"
+	},
+	"summary_pause_ghostery_tooltip": {
+		"message": "Pause Ghostery extension."
+	},
+	"summary_pause_ghostery_ab_pause": {
 		"message": "Pause"
 	},
 	"pause_30_min": {
 		"message": "for 30 min"
 	},
+	"pause_30_min_condensed": {
+		"message": "30 mins"
+	},
 	"pause_1_hour": {
 		"message": "for 1 hour"
+	},
+	"pause_1_hour_condensed": {
+		"message": "1 hr"
 	},
 	"pause_24_hours": {
 		"message": "for 24 hours"
 	},
+	"pause_24_hours_condensed": {
+		"message": "24 hrs"
+	},
 	"summary_resume_ghostery": {
+		"message": "Resume Ghostery"
+	},
+	"summary_resume_ghostery_tooltip": {
+		"message": "Ghostery extension paused. Click to resume."
+	},
+	"summary_resume_ghostery_ab_pause": {
 		"message": "Resume"
+	},
+	"summary_show_menu": {
+		"message": "show menu"
 	},
 	"summary_map_these_trackers": {
 		"message": "Map These Trackers"
@@ -645,6 +678,9 @@
 	"tracker_plural": {
 		"message": "trackers"
 	},
+	"tracker_found": {
+		"message": "found"
+	},
 	"panel_signin_success": {
 		"message": "You are now signed in as "
 	},
@@ -755,6 +791,12 @@
 	},
 	"panel_header_verify_account": {
 		"message": "Verify Account"
+	},
+	"panel_header_simple_view": {
+		"message": "Simple View"
+	},
+	"panel_header_detailed_view": {
+		"message": "Detailed View"
 	},
 	"password_characters_requirements": {
 		"message": "Only these special characters are allowed: !@#$%^&*=+()<>{}[];:,./?"
@@ -1030,7 +1072,10 @@
 		"message": "Search by tracker"
 	},
 	"page_load": {
-		"message": "Page Load"
+		"message": "Page Load:"
+	},
+	"trackers_blocked": {
+		"message": "Trackers Blocked:"
 	},
 	"settings_trusted_restricted_sites": {
 		"message": "Trust & Restrict"
@@ -1140,11 +1185,53 @@
 	"settings_filter_new": {
 		"message": "New Since Last Update"
 	},
+	"alert_ghostery_paused": {
+		"message": "Ghostery extension has been paused."
+	},
+	"alert_ghostery_resumed": {
+		"message": "Ghostery extension has been resumed."
+	},
+	"alert_anti_track_on": {
+		"message": "Enhanced Anti-Trackng ON. Personal data will be anonymized."
+	},
+	"alert_anti_track_off": {
+		"message": "Enhanced Anti-Tracking OFF. Personal data will not be anonymized."
+	},
+	"alert_ad_block_on": {
+		"message": "Enhanced Ad-Blocking ON. Advertisements will be blocked."
+	},
+	"alert_ad_block_off": {
+		"message": "Enhanced Ad-Blocking OFF. Advertisements will not be blocked."
+	},
+	"alert_smart_block_on": {
+		"message": "Smart Blocking ON. Tracker blocking will be adjusted to optimize page performance."
+	},
+	"alert_smart_block_off": {
+		"message": "Smart Blocking OFF. Tracker blocking will not be automatically adjusted."
+	},
+	"alert_reload": {
+		"message": "Reload to see changes."
+	},
+	"alert_site_trusted": {
+		"message": "Site whitelisted. Trackers will be allowed and Anti-Tracking disabled on this site."
+	},
+	"alert_site_trusted_off": {
+		"message": "Site no longer whitelisted."
+	},
+	"alert_site_restricted": {
+		"message": "Site blacklisted. Trackers will be blocked and Anti-Tracking enabled on this site."
+	},
+	"alert_site_restricted_off": {
+		"message": "Site no longer blacklisted."
+	},
 	"tooltip_anti_track": {
 		"message": "Enhanced Anti-Tracking"
 	},
 	"tooltip_anti_track_body": {
-		"message": "Anonymize unblocked and unknown trackers for greater browsing protection."
+		"message": "Anonymize personal data for greater protection."
+	},
+	"tooltip_anti_track_body_on": {
+		"message": "Personal data points anonymized."
 	},
 	"tooltip_body_in_cliqz": {
 		"message": "Feature already active in Cliqz by default."
@@ -1153,7 +1240,10 @@
 		"message": "Enhanced Ad Blocking"
 	},
 	"tooltip_ad_block_body": {
-		"message": "Block advertisements on websites you visit."
+		"message": "Block advertisements."
+	},
+	"tooltip_ad_block_body_on": {
+		"message": "Advertisements have been blocked."
 	},
 	"tooltip_smart_block": {
 		"message": "Smart Blocking"
@@ -1161,11 +1251,23 @@
 	"tooltip_smart_block_body": {
 		"message": "Automatically block and unblock trackers to optimize page performance."
 	},
+	"tooltip_smart_block_body_on": {
+		"message": "Tracker blocking adjusted to optimize page performance."
+	},
 	"tooltip_trust": {
-		"message": "Always allow trackers on this site."
+		"message": "Always allow trackers & disable Anti-Tracking on this site."
+	},
+	"tooltip_trust_on": {
+		"message": "Trackers allowed and Anti-Tracking disabled on site. Click to Undo."
 	},
 	"tooltip_restrict": {
-		"message": "Always block trackers on this site."
+		"message": "Always block trackers & protect my personal data on this site."
+	},
+	"tooltip_restrict_on": {
+		"message": "Trackers blocked and Anti-Tracking enabled on site. Click to Undo."
+	},
+	"tooltip_custom_settings": {
+		"message": "Use my selected tracker settings."
 	},
 	"tooltip_pause": {
 		"message": "Pause Ghostery"
