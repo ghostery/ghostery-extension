@@ -682,7 +682,7 @@ class EventHandlers {
 	 * @return {Boolean}
 	 */
 	_isValidUrl(parsedURL) {
-		if (parsedURL.protocol.startsWith('http') && parsedURL.host.includes('.') && /[A-Za-z]/.test(parsedURL.host)) {
+		if (parsedURL.protocol.startsWith('http') && parsedURL.host.includes('.') && /[A-Za-z]/.test(parsedURL.host) && !parsedURL.path.includes('_/chrome/newtab')) {
 			return true;
 		}
 
