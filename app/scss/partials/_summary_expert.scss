@@ -51,9 +51,14 @@
 			@extend %pointer;
 		}
 		.block-info,
-		.load-info,
 		.alert-info {
 			padding-top: 10px;
+		}
+		.load-info {
+			padding-top: 10px;
+			white-space: nowrap;
+			overflow: hidden;
+   			text-overflow: ellipsis;
 		}
 		.tracker-count-alerts {
 			width: 100%;

@@ -541,10 +541,16 @@ export function injectScript(tabId, scriptfile, cssfile, runAt) {
 			if (chrome.runtime.lastError) {
 				log('injectScript error', chrome.runtime.lastError);
 				reject(new Error(chrome.runtime.lastError));
+				return;
 			}
 
 			if (cssfile) {
 				chrome.tabs.insertCSS(tabId, { file: cssfile, runAt }, () => {
+					if (chrome.runtime.lastError) {
+						log('insertCSS error', chrome.runtime.lastError);
+						reject(new Error(chrome.runtime.lastError));
+						return;
+					}
 					resolve();
 				});
 			} else {

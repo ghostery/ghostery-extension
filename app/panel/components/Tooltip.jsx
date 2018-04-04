@@ -65,6 +65,9 @@ class Tooltip extends React.Component {
 	 */
 	enter() {
 		this.setState({ show: true });
+		if (this.props.disabled && this.props.showNotification && this.props.alertText) {
+			this.props.showNotification({ text: this.props.alertText, classes: 'warning', filter: 'tooltip' });
+		}
 	}
 
 	/**

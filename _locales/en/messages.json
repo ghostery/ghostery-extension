@@ -1233,6 +1233,9 @@
 	"tooltip_anti_track_body_on": {
 		"message": "Personal data points anonymized."
 	},
+	"tooltip_body_in_cliqz": {
+		"message": "Feature already active in Cliqz by default."
+	},
 	"tooltip_ad_block": {
 		"message": "Enhanced Ad Blocking"
 	},
@@ -1587,5 +1590,17 @@
 	},
 	"setup_upgrade_button_go": {
 		"message": "Set Me Up"
+	},
+	"enable_when_paused": {
+		"message": "To use this function, Resume Ghostery."
+	},
+	"enable_when_whitelisted": {
+		"message": "To use this function, undo Trust Site"
+	},
+	"enable_when_blacklisted": {
+		"message": "To use this function, undo Restrict Site."
+	},
+	"enable_when_not_scanned": {
+		"message": "To use this function, navigate to another page."
 	}
 }
