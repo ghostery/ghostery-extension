@@ -34,7 +34,7 @@ class CliqzFeatures extends React.Component {
 
 	/**
 	 * Calculates the text for above the Ad Blocking feature icon
-	 * @return {String or Int} The text for above the Ad Blocking icon
+	 * @return {String | Int} The text for above the Ad Blocking icon
 	 */
 	getAdBlockingTotal() {
 		if (!this.props.adBlockingActive) {
@@ -45,7 +45,7 @@ class CliqzFeatures extends React.Component {
 
 	/**
 	 * Calculates the text for above the Smart Blocking feature icon
-	 * @return {String or Int} The text for above the Smart Blocking icon
+	 * @return {String | Int} The text for above the Smart Blocking icon
 	 */
 	getSmartBlockingTotal() {
 		if (!this.props.smartBlockingActive) {
@@ -59,7 +59,7 @@ class CliqzFeatures extends React.Component {
 
 	/**
 	 * Calculates the text for above the Anti Tracking feature icon
-	 * @return {String or Int} The text for above the Anit Tracking icon
+	 * @return {String | Int} The text for above the Anit Tracking icon
 	 */
 	getAntiTrackingTotal() {
 		if (!this.props.antiTrackingActive) {

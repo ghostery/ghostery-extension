@@ -22,8 +22,8 @@ import globals from './Globals';
 
 /**
  * Enum for reasons returned by shouldBlock
- * @type {string}
  * TBD: See if we can do with integer values for performance.
+ * @type {string}
  */
 export const BLOCK_REASON_BLOCK_PAUSED = 'BLOCK_REASON_BLOCK_PAUSED';
 export const BLOCK_REASON_GLOBAL_BLOCKED = 'BLOCK_REASON_GLOBAL_BLOCKED';
@@ -36,7 +36,7 @@ export const BLOCK_REASON_C2P_ALLOWED_THROUGH = 'BLOCK_REASON_C2P_ALLOWED_THROUG
 
 /**
  * Class for handling site policy.
- * @memberOf  BackgroundClasses
+ * @memberof  BackgroundClasses
  * @todo  make it a Singelton ???
  */
 class Policy {
@@ -155,4 +155,3 @@ class Policy {
 }
 
 export default Policy;
-

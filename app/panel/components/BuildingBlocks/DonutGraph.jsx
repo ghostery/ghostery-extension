@@ -108,8 +108,8 @@ class DonutGraph extends React.Component {
 	 * Generate donut-shaped graph with the scanning results.
 	 * Add mouse event listeners to the arcs of the donut graph that filter the
 	 * detailed view to the corresponding tracker category.
-	 * @param  {[type]} categories list of categories detected on the site
-	 * @param  {[type]} options    options for the graph
+	 * @param  {Array} categories list of categories detected on the site
+	 * @param  {Object} options    options for the graph
 	 */
 	generateGraph(categories, options) {
 		const {
