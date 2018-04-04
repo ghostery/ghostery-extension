@@ -1,73 +1,42 @@
 /**
- * Panel Not Scanned Sass
+ * Not Scanned Sass
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
  * Copyright 2018 Ghostery, Inc. All rights reserved.
- * 
+ *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-#panel {
-	.not-scanned-wrapper {
-		.title {
-			font-size: 18px;
-			color: #4a90e2;
-		}
-		.text {
-			font-size: 12px;
-			color: #4a4a4a;
-			max-width: 270px;
-			margin: 0 auto;
-		}
+.sub-component.not-scanned {
+	text-align: center;
+	margin: 0 auto;
+	overflow: hidden;
+
+	height: 247px;
+	max-width: 300px;
+	padding-top: 57px;
+	&.small {
+		height: 200px;
+		max-width: 160px;
+		padding-top: 30px;
 	}
-	#content-summary {
-		.not-scanned-wrapper {
-			.title {
-				padding-top: 90px;
-				padding-bottom: 45px;
-			}
-			.text {
-				margin: 0 auto;
-			}
-		}
-		&.expert {
-			.not-scanned-wrapper {
-				.title {
-					padding-top: 36px;
-					padding-bottom: 37px;
-				}
-				.text {
-					padding: 0 40px;
-				}
-			}
-		}
-		&.expanded.expert {
-			.not-scanned-wrapper {
-				display: none;
-			}
-		}
+
+	.not-scanned-header {
+		font-size: 18px;
+		color: #1dafed;
+		margin-bottom: 10px;
 	}
-	#content-detail {
-		#content-blocking {
-			.not-scanned-wrapper {
-				.title {
-					padding-top: 92px;
-				}
-				.text {
-					padding-top: 44px;
-				}
-			}
-		}
-		&:not(.expanded) {
-			#content-blocking {
-				.not-scanned-wrapper {
-					display: none;
-				}
-			}
-		}
+	.not-scanned-text {
+		color: #4a4a4a;
+		font-size: 14px;
+		margin-bottom: 10px;
+	}
+	&.small .not-scanned-text {
+		font-size: 12px;
+		margin-bottom: 20px;
 	}
 }

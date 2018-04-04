@@ -11,12 +11,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { GET_SUMMARY_DATA,
+import {
+	GET_SUMMARY_DATA,
 	UPDATE_TRACKER_COUNTS,
 	UPDATE_GHOSTERY_PAUSED,
 	UPDATE_SITE_POLICY,
 	FILTER_TRACKERS,
-	TOGGLE_EXPERT } from '../constants/constants';
+	TOGGLE_EXPERT
+} from '../constants/constants';
 import { sendMessageInPromise } from '../utils/msg';
 
 /**
@@ -99,15 +101,5 @@ export function filterTrackers(data) {
 	return {
 		type: FILTER_TRACKERS,
 		data,
-	};
-}
-
-/**
- * Called from Summary.toggleExpert() and picked up by panel reducer
- * @return {Object}
- */
-export function toggleExpert() {
-	return {
-		type: TOGGLE_EXPERT,
 	};
 }

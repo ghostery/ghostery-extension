@@ -5,13 +5,37 @@
  * https://www.ghostery.com/
  *
  * Copyright 2018 Ghostery, Inc. All rights reserved.
- * 
+ *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
 #ghostery-header {
+	.header-tab-group {
+		position: absolute;
+		height: 36px;
+		width: 280px;
+		left: calc(50% - 140px);
+	}
+	.header-tab {
+		cursor: pointer;
+		height: 20px;
+		width: 140px;
+		text-align: center;
+		color: $white;
+		background-color: #2092bf;
+	}
+	.header-tab.active {
+		color: #4a4a4a;
+		background-color: $white;
+	}
+	.header-tab-text {
+		text-align: center;
+		width: 100%;
+		font-size: 10px;
+	}
+
 	.top-bar {
 		background-color: $ghosty-blue;
 		color: $white;
