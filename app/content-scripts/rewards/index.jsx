@@ -30,6 +30,25 @@ const viewport = document.getElementById('viewport');
 const rewardsContainer = document.createElement('div');
 rewardsContainer.id = 'rewards-container';
 
+const channelsSupported = (typeof chrome.runtime.connect === 'function');
+
+function handleMessages(request, sender, response) {
+	console.log('request', request);
+	console.log('sender', sender);
+	console.log('response', response);
+}
+
+let port;
+if (channelsSupported) {
+	port = chrome.runtime.connect({ name: 'rewardsPort' });
+	if (port) {
+		port.onMessage.addListener(handleMessages);
+		port.postMessage({ name: 'rewardsLoaded' });
+	}
+} else {
+	onMessage.addListener(handleMessages);
+}
+
 const MainView = () => (
 	<Router history={history}>
 		<div className="ghostery-rewards-container ghostery-top ghostery-right ghostery-collapsed">
