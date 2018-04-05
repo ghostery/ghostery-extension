@@ -11,9 +11,9 @@ const { onMessage } = chrome.runtime;
 class HotDog extends Component {
 	constructor(props) {
 		super(props);
+		console.log('constructor props:', props)
 		this.state = {
-			closed: false,
-			rewardsCount: 1
+			closed: false
 		};
 		this.close = this.close.bind(this);
 	}
@@ -28,16 +28,16 @@ class HotDog extends Component {
 		return (
 			<div>
 				{ this.state.closed !== true &&
-					<div className="hot-dog-container">
+					<div className={`hot-dog-container`}>
 						<Link to="/offercard">
 							<div className="ghostery-box">
-								<div className={`ghostery-reward-text ${this.state.rewardsCount > 0 ? 'show' : 'hide'}`}>
-									{`${this.state.rewardsCount} ${this.state.rewardsCount > 1 ? t('rewards_text_plural') : t('rewards_text_single')}!`}
+								<div className={`ghostery-reward-text`}>
+									1 {t('rewards_new_text')}!
 								</div>
 							</div>
 						</Link>
 						<div className="ghostery-reward-close" onClick={this.close} />
-					</div>}
+					</div> }
 			</div>
 		);
 	}
