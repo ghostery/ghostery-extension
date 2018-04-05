@@ -11,25 +11,14 @@ const { onMessage } = chrome.runtime;
 class OfferCard extends Component {
 	constructor(props) {
 		super(props);
-
+		console.log('constructor props:', props)
 		this.state = {
 			closed: false,
-			rewardCode: 'SDF75DSUI90',
-			copyText: t('rewards_copy_code'),
-			expireTime: '14 days',
-			termsLink: 'https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/',
-			redeemLink: 'https://www.ghostery.com/',
-			benefit: '2 Free',
-			headline: 'Audio Books',
-			description: 'Description of the offer. There is a lot of exciting stuff going on.'
+			copyText: t('rewards_copy_code')
 		};
 
 		this.close = this.close.bind(this);
 		this.copyCode = this.copyCode.bind(this);
-
-		onMessage.addListener((request, sender, sendResponse) => {
-			console.log(request);
-		});
 	}
 
 	copyCode() {
@@ -59,6 +48,7 @@ class OfferCard extends Component {
 	}
 
 	render() {
+		console.log('render props:', this.props);
 		return (
 			<div>
 				{ this.state.closed !== true &&
@@ -86,14 +76,14 @@ class OfferCard extends Component {
 							</p>
 						</div>
 						<div className="reward-code">
-							<input readOnly className="reward-code-input" value={this.state.rewardCode} type="text" />
+							<input readOnly className="reward-code-input" value={this.props.reward.rewardCode} type="text" />
 							<a onClick={this.copyCode}>{this.state.copyText}</a>
 						</div>
 						<div className="reward-footer">
-							<span> {t('rewards_expire')} { this.state.expireTime } </span>
-							<a target="_blank" href={ this.state.termsLink }> { t('rewards_terms_conditions') } </a>
+							<span> {t('rewards_expire')} { this.props.reward.expireTime } </span>
+							<a target="_blank" href={ this.props.reward.termsLink }> { t('rewards_terms_conditions') } </a>
 						</div>
-						<a target="_blank" href={this.state.redeemLink} className="reward-redeem">
+						<a target="_blank" href={this.props.reward.redeemLink} className="reward-redeem">
 							{t('rewards_redeem_now')}
 						</a>
 					</div>
