@@ -24,21 +24,32 @@ import history from '../../panel/utils/history';
 import HotDog from './HotDog';
 import OfferCard from './OfferCard';
 
-// import closeIconImage from '../data-images/purple_box/closeIconImage';
-
 const viewport = document.getElementById('viewport');
 const rewardsContainer = document.createElement('div');
-rewardsContainer.id = 'rewards-container';
-
 const channelsSupported = (typeof chrome.runtime.connect === 'function');
 
-function handleMessages(request, sender, response) {
-	console.log('request', request);
-	console.log('sender', sender);
-	console.log('response', response);
+let port;
+/* TODO remove test reward data */
+let reward = {
+	rewardCode: 'SDF75DSUI90',
+	expireTime: '14 days',
+	termsLink: 'https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/',
+	redeemLink: 'https://www.ghostery.com/',
+	benefit: '2 Free',
+	headline: 'Audio Books',
+	description: 'Description of the offer. There is a lot of exciting stuff going on.'
 }
 
-let port;
+rewardsContainer.id = 'rewards-container';
+
+function handleMessages(request, sender, response) {
+	/* TODO get new reward from request, and set it as new reward */
+	if (document.readyState === "complete") {
+		console.log('re render root react')
+		ReactDOM.render(<MainView reward={reward} />, document.getElementById('rewards-container'));
+	}
+}
+
 if (channelsSupported) {
 	port = chrome.runtime.connect({ name: 'rewardsPort' });
 	if (port) {
@@ -49,17 +60,20 @@ if (channelsSupported) {
 	onMessage.addListener(handleMessages);
 }
 
-const MainView = () => (
-	<Router history={history}>
-		<div className="ghostery-rewards-container ghostery-top ghostery-right ghostery-collapsed">
-			<Route exact path="/" component={HotDog} />
-			<Route path="/hotdog" component={HotDog} />
-			<Route path="/offercard" component={OfferCard} />
-		</div>
-	</Router>
-);
+const MainView = (props) => {
+	console.log('MainView props:', props);
+	return (
+		<Router history={history}>
+			<div className="ghostery-rewards-container ghostery-top ghostery-right ghostery-collapsed">
+				<Route exact path="/" render={ ()=> <HotDog reward={props.reward} /> } />
+				<Route path="/hotdog" render={ ()=> <HotDog reward={props.reward} /> } />
+				<Route path="/offercard" render={ ()=> <OfferCard reward={props.reward} /> } />
+			</div>
+		</Router>
+	)
+};
 
 document.addEventListener('DOMContentLoaded', (event) => {
 	document.body.appendChild(rewardsContainer);
-	ReactDOM.render(<MainView />, document.getElementById('rewards-container'));
+	ReactDOM.render(<MainView reward={reward}/>, document.getElementById('rewards-container'));
 });

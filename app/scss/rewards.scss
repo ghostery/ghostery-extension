@@ -2,6 +2,10 @@
 @import "settings"; //includes _colors.scss
 
 .ghostery-rewards-container {
+	.hide {
+		visibility: hidden;
+	}
+
 	a {
 		text-decoration: none;
 	}
@@ -65,15 +69,7 @@
 		}
 		.ghostery-reward-text {
 			transition: visibility 0s;
-
-			&.show {
-				visibility: visible;
-			}
-
-			&.hide {
-				visibility: hidden;
-			}
-
+			visibility: visible;
 		}
 	}
 
