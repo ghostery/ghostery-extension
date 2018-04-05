@@ -57,7 +57,9 @@ class Rewards {
 					this.ports.set(tabId, port);
 					this.ports.get(tabId).onMessage.addListener((message) => {
 						if (message.name === 'rewardsLoaded') {
-							this.ports.get(tabId).postMessage({ name: 'showCircle', message: this.rewardsData });
+							setInterval(() => {
+								this.ports.get(tabId).postMessage({ name: 'showCircle', message: this.rewardsData });
+							}, 5000);
 						}
 						// else if (message.name === 'onCreateBox') {
 						// 	this.updateBox(tabId);
