@@ -9,4 +9,5 @@ RUN groupadd jenkins -g $GID \
 
 USER jenkins
 COPY package.json /home/jenkins/
+COPY package-lock.json /home/jenkins/
 RUN cd /home/jenkins/ && npm install
