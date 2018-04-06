@@ -4,6 +4,7 @@ node('docker') {
     }
 
     def img
+    def artifact
 
     stage('Build Docker Image') {
         img = docker.build('ghostery/build', '--build-arg UID=`id -u` --build-arg GID=`id -g` .')
@@ -12,10 +13,10 @@ node('docker') {
     stage('Build Extension') {
       img.inside() {
         withCache {
-          // rerun postinstall for vendor-copy
-          sh 'npm run postinstall'
-          sh 'npm run build.prod'
-          sh 'web-ext build --overwrite-dest'
+          sh 'rm -r build/'
+          sh 'moab makezip'
+          // get the name of the firefox build
+          artifact = sh(returnStdout: true, script: 'ls build/ | grep firefox').trim()
         }
       }
     }
@@ -27,7 +28,9 @@ node('docker') {
           passwordVariable: 'AWS_SECRET_ACCESS_KEY',
           usernameVariable: 'AWS_ACCESS_KEY_ID']]) {
         echo "${env.BRANCH_NAME}/${env.BUILD_NUMBER}"
-        sh "aws s3 sync web-ext-artifacts/ s3://cdncliqz/update/ghostery/nightly_test/${env.BRANCH_NAME}/${env.BUILD_NUMBER}/ --acl public-read"
+        def uploadLocation = "s3://cdncliqz/update/ghostery/nightly_test/${env.BRANCH_NAME}/${env.BUILD_NUMBER}/${artifact}"
+        currentBuild.description = uploadLocation
+        sh "aws s3 cp build/${artifact} ${uploadLocation}  --acl public-read"
       }
     }
 }
