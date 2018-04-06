@@ -12,19 +12,19 @@
  */
 
 @function buildIconPause($stroke-color) {
-	@return url('data:image/svg+xml;charset=US-ASCII,<svg width="14" height="16" xmlns="http%3A//www.w3.org/2000/svg"><path d="M1 15h3V1H1v14zM9 1v14h3V1H9z" fill="#{url-friendly-colour($stroke-color)}"/></svg>');
+	@return url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width=%2214%22%20height=%2216%22%20xmlns=%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d=%22M1%2015h3V1H1v14zM9%201v14h3V1H9z%22%20fill=%22#{url-friendly-colour($stroke-color)}%22/%3E%3C/svg%3E');
 }
 
 @function buildIconPlay($stroke-color) {
-	@return url('data:image/svg+xml;charset=US-ASCII,<svg width="14" height="16" xmlns="http%3A//www.w3.org/2000/svg"><path d="M12.74 7.543a.532.532 0 0 1 0 .915L1.782 14.92c-.322.222-.783-.045-.783-.458V1.54c0-.378.44-.693.783-.458l10.956 6.462zM2.043 13.547L11.435 8 2.044 2.454v11.093z" fill="#{url-friendly-colour($stroke-color)}"/></svg>');
+	@return url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width=%2214%22%20height=%2216%22%20xmlns=%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d=%22M12.74%207.543a.532.532%200%200%201%200%20.915L1.782%2014.92c-.322.222-.783-.045-.783-.458V1.54c0-.378.44-.693.783-.458l10.956%206.462zM2.043%2013.547L11.435%208%202.044%202.454v11.093z%22%20fill=%22#{url-friendly-colour($stroke-color)}%22/%3E%3C/svg%3E');
 }
 
 @function buildIconCaretDown($stroke-color) {
-	@return url('data:image/svg+xml;charset=US-ASCII,<svg width="9" height="5" xmlns="http%3A//www.w3.org/2000/svg"><path d="M0 0h9L4.5 5 0 0" fill="#{url-friendly-colour($stroke-color)}"/></svg>');
+	@return url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width=%229%22%20height=%225%22%20xmlns=%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d=%22M0%200h9L4.5%205%200%200%22%20fill=%22#{url-friendly-colour($stroke-color)}%22/%3E%3C/svg%3E');
 }
 
 @function buildIconCircle($stroke-color) {
-	@return url('data:image/svg+xml;charset=US-ASCII,<svg width="4" height="4" xmlns="http%3A//www.w3.org/2000/svg"><circle cx="2" cy="2" r="2" fill="#{url-friendly-colour($stroke-color)}"/></svg>');
+	@return url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width=%224%22%20height=%224%22%20xmlns=%22http%3A//www.w3.org/2000/svg%22%3E%3Ccircle%20cx=%222%22%20cy=%222%22%20r=%222%22%20fill=%22#{url-friendly-colour($stroke-color)}%22/%3E%3C/svg%3E');
 }
 
 .sub-component.pause-button {
