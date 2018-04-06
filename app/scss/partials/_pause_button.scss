@@ -84,6 +84,9 @@
 			min-width: 41px;
 			max-width: 41px;
 			padding-left: 17px;
+			.pause-button-icon {
+				padding: 0 0 0 15px;
+			}
 		}
 	}
 	.button-caret {
@@ -165,13 +168,11 @@
 	.button-pause {
 		height: 35px;
 		line-height: 21px;
-		top: 0;
 	}
 	.button-caret {
 		height: 35px;
 	}
 	.button-pause.smaller {
-		top: 1px;
 		height: 45px;
 		min-width: 125px;
 		max-width: 125px;
@@ -189,7 +190,6 @@
 		}
 	}
 	.button-pause.smallest {
-		top: 0;
 		padding-left: 15px;
 		height: 41px;
 		line-height: 27px;
