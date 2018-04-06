@@ -12,6 +12,7 @@ node('docker') {
 
     def img
     def artifact
+    def uploadPath = "cdncliqz/update/ghostery/nightly_test/${env.BRANCH_NAME}/${env.BUILD_NUMBER}"
 
     stage('Build Docker Image') {
         img = docker.build('ghostery/build', '--build-arg UID=`id -u` --build-arg GID=`id -g` .')
@@ -38,10 +39,15 @@ node('docker') {
                 passwordVariable: 'AWS_SECRET_ACCESS_KEY',
                 usernameVariable: 'AWS_ACCESS_KEY_ID']]) {
             echo "${env.BRANCH_NAME}/${env.BUILD_NUMBER}"
-            def uploadLocation = "s3://cdncliqz/update/ghostery/nightly_test/${env.BRANCH_NAME}/${env.BUILD_NUMBER}/${artifact}"
+            def uploadLocation = "s3://${uploadPath}/${artifact}"
             currentBuild.description = uploadLocation
             sh "aws s3 cp build/${artifact} ${uploadLocation}  --acl public-read"
         }
+    }
+
+    stage('Sign and Publish') {
+        def artifactUrl = "https://s3.amazonaws.com/${uploadPath}/${artifact}"
+        build job: 'addon-repack', parameters: [string(name: 'XPI_URL', value: artifactUrl), string(name: 'XPI_SIGN_CREDENTIALS', value: '41572f9c-06aa-46f0-9c3b-b7f4f78e9caa'), string(name: 'XPI_SIGN_REPO_URL', value: 'git@github.com:cliqz/xpi-sign.git')]
     }
 }
 
