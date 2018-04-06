@@ -1,5 +1,5 @@
 /**
- * NotScanned Component
+ * Not Scanned Component
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -12,24 +12,31 @@
  */
 
 import React, { Component } from 'react';
+import ClassNames from 'classnames';
+
 /**
- * @class Implement Not Scanned component to be displayed in main panel
- * when a site is not scannable or has not been scanned.
+ * @class Implements the Not Scanned component displayed in the Summary view
+ * when a site is not scannable or has not yet been scanned.
  * @memberof PanelClasses
  */
-const NotScanned = (props) => ( // eslint-disable-line arrow-parens
-	<div className="row not-scanned-wrapper">
-		<div className="columns text-center">
-			<div className="title">
+const NotScanned = (props) => {
+	const notScannedClassNames = ClassNames('sub-component', 'not-scanned', {
+		small: props.isSmall,
+	});
+
+	return ( // eslint-disable-line arrow-parens
+		<div className={notScannedClassNames}>
+			<div className="not-scanned-header">
 				{t('summary_page_not_scanned') }
 			</div>
-			<div className="text">
+			<div className="not-scanned-text">
 				{ t('summary_description_not_scanned_1') }
-				<br /><br />
+			</div>
+			<div className="not-scanned-text">
 				{ t('summary_description_not_scanned_2') }
 			</div>
 		</div>
-	</div>
-);
+	);
+};
 
 export default NotScanned;

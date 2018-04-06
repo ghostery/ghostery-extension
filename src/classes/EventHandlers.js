@@ -674,7 +674,8 @@ class EventHandlers {
 	}
 
 	/**
-	 * Checks to see if the URL is valid
+	 * Checks to see if the URL is valid. Also checks to make sure we
+	 * are not on the Chrome new tab page (_/chrome/newtab)
 	 *
 	 * @private
 	 *
@@ -682,7 +683,7 @@ class EventHandlers {
 	 * @return {Boolean}
 	 */
 	_isValidUrl(parsedURL) {
-		if (parsedURL.protocol.startsWith('http') && parsedURL.host.includes('.') && /[A-Za-z]/.test(parsedURL.host)) {
+		if (parsedURL.protocol.startsWith('http') && parsedURL.host.includes('.') && /[A-Za-z]/.test(parsedURL.host) && !parsedURL.path.includes('_/chrome/newtab')) {
 			return true;
 		}
 

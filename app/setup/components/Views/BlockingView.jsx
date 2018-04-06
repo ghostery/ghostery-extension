@@ -112,7 +112,7 @@ class BlockingView extends Component {
 
 	/**
 	 * React's required render function. Returns JSX
-	 * @return {JSX} JSX for rendering the #additional-features step of the setup flow
+	 * @return {JSX} JSX for rendering the #blocking step of the setup flow
 	 */
 	render() {
 		return (

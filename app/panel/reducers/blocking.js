@@ -12,7 +12,8 @@
  */
 
 /* eslint no-use-before-define: 0 */
-import { GET_BLOCKING_DATA,
+import {
+	GET_BLOCKING_DATA,
 	FILTER_TRACKERS,
 	UPDATE_BLOCK_ALL_TRACKERS,
 	UPDATE_CATEGORIES,
@@ -20,7 +21,8 @@ import { GET_BLOCKING_DATA,
 	UPDATE_TRACKER_BLOCKED,
 	UPDATE_TRACKER_TRUST_RESTRICT,
 	TOGGLE_EXPAND_ALL,
-	TOGGLE_EXPAND_CATEGORY } from '../constants/constants';
+	TOGGLE_EXPAND_CATEGORY
+} from '../constants/constants';
 import { updateTrackerBlocked, updateCategoryBlocked, updateBlockAllTrackers, toggleExpandAll, toggleExpandCategory } from '../utils/blocking';
 import { removeFromObject, updateObject } from '../utils/utils';
 import { sendMessage } from '../utils/msg';

@@ -66,7 +66,7 @@ class DisplayView extends Component {
 
 	/**
 	 * React's required render function. Returns JSX
-	 * @return {JSX} JSX for rendering the display view
+	 * @return {JSX} JSX for rendering the #display step of the setup flow
 	 */
 	render() {
 		return (
