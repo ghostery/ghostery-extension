@@ -26,7 +26,8 @@ node('docker') {
           credentialsId: '06ec4a34-9d01-46df-9ff8-64c79eda8b14',
           passwordVariable: 'AWS_SECRET_ACCESS_KEY',
           usernameVariable: 'AWS_ACCESS_KEY_ID']]) {
-        sh 'aws s3 sync web-ext-artifacts/ s3://cdncliqz/update/ghostery/nightly_test/ --acl public-read'
+        echo "${env.BRANCH_NAME}/${env.BUILD_NUMBER}"
+        sh "aws s3 sync web-ext-artifacts/ s3://cdncliqz/update/ghostery/nightly_test/${env.BRANCH_NAME}/${env.BUILD_NUMBER}/ --acl public-read"
       }
     }
 }
