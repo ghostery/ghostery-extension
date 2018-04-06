@@ -180,6 +180,12 @@
 	&.expert.condensed.ab-pause .cliqz-features-container {
 		margin-top: 14px;
 	}
+	&.expert.condensed .cliqz-features-container {
+		margin-bottom: 0;
+		.cliqz-feature:last-of-type {
+			margin-bottom: 0;
+		}
+	}
 
 	.map-these-trackers {
 		text-align: center;
