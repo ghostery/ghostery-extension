@@ -1,6 +1,5 @@
 FROM node:8
 
-#RUN npm install -g web-ext
 RUN curl https://s3.amazonaws.com/cdncliqz/update/ghostery/moab/moab_2 > /bin/moab && \
     chmod +x /bin/moab
 

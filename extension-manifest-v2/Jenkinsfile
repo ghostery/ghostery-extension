@@ -20,15 +20,17 @@ node('docker') {
 
     stage('Build Extension') {
         img.inside() {
-                withCache {
-                    sh 'rm -r build'
-                    if (params.WITH_CLIQZ_MASTER) {
-                        sh 'npm install --save https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/master/latest.tgz'
-                    }
-                    sh 'moab makezip'
-                    // get the name of the firefox build
-                    artifact = sh(returnStdout: true, script: 'ls build/ | grep firefox').trim()
+            withCache {
+                sh 'rm -rf build'
+                if (params.WITH_CLIQZ_MASTER) {
+                    sh 'npm install --save https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/master/latest.tgz'
                 }
+                // make browser-core noisy
+                sh 'sed -i \'s/global.__DEV__/true/1\' node_modules/browser-core/build/core/console.js'
+                sh 'moab makezip'
+                // get the name of the firefox build
+                artifact = sh(returnStdout: true, script: 'ls build/ | grep firefox').trim()
+            }
         }
     }
 
@@ -47,7 +49,11 @@ node('docker') {
 
     stage('Sign and Publish') {
         def artifactUrl = "https://s3.amazonaws.com/${uploadPath}/${artifact}"
-        build job: 'addon-repack', parameters: [string(name: 'XPI_URL', value: artifactUrl), string(name: 'XPI_SIGN_CREDENTIALS', value: '41572f9c-06aa-46f0-9c3b-b7f4f78e9caa'), string(name: 'XPI_SIGN_REPO_URL', value: 'git@github.com:cliqz/xpi-sign.git')]
+        build job: 'addon-repack', parameters: [
+            string(name: 'XPI_URL', value: artifactUrl),
+            string(name: 'XPI_SIGN_CREDENTIALS', value: '41572f9c-06aa-46f0-9c3b-b7f4f78e9caa'),
+            string(name: 'XPI_SIGN_REPO_URL', value: 'git@github.com:cliqz/xpi-sign.git')
+        ]
     }
 }
 
