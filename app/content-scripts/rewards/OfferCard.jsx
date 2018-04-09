@@ -57,9 +57,12 @@ class OfferCard extends Component {
 						<img className="rewards-logo-beta" />
 						<div className="reward-card-close" onClick={this.close} />
 					</div>
-					<div className="reward-card-content">
+					<div className="reward-content">
 						<div className="reward-content-header">
-
+							<div className="reward-company-logo">
+								<img src={this.props.reward.companyLogo} />
+							</div>
+							<div className="reward-settings-kebab" />
 						</div>
 						<div className="reward-content-img">
 							<img src={this.imgSrc} />
@@ -79,13 +82,21 @@ class OfferCard extends Component {
 							<input readOnly className="reward-code-input" value={this.props.reward.rewardCode} type="text" />
 							<a onClick={this.copyCode}>{this.state.copyText}</a>
 						</div>
-						<div className="reward-footer">
+						<div className="reward-content-footer">
 							<span> {t('rewards_expire')} { this.props.reward.expireTime } </span>
 							<a target="_blank" href={ this.props.reward.termsLink }> { t('rewards_terms_conditions') } </a>
 						</div>
 						<a target="_blank" href={this.props.reward.redeemLink} className="reward-redeem">
 							{t('rewards_redeem_now')}
 						</a>
+					</div>
+					<div className="reward-footer">
+						<div className="reward-feedback">
+							<div className="reward-smile"></div>
+							<a>{t('rewards_disable')}</a>
+							<div className="reward-arrow"></div>
+						</div>
+						<div className="reward-ghosty" />
 					</div>
 				</div>}
 			</div>
