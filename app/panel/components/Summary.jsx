@@ -24,7 +24,7 @@ import {
 } from './BuildingBlocks';
 
 const { IS_CLIQZ } = globals;
-const AB_PAUSE_BUTTON = false;
+const AB_PAUSE_BUTTON = true;
 
 /**
  * @class Implements the Summary View, which is displayed as the entire panel
