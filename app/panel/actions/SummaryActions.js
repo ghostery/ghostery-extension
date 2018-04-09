@@ -61,7 +61,7 @@ export function updateGhosteryPaused(data) {
 	const pauseValue = (data.time || data.ghosteryPaused);
 
 	return function (dispatch) {
-		sendMessageInPromise('setPanelData', { paused_blocking: pauseValue }).then(() => {
+		return sendMessageInPromise('setPanelData', { paused_blocking: pauseValue }).then(() => {
 			dispatch({
 				type: UPDATE_GHOSTERY_PAUSED,
 				data

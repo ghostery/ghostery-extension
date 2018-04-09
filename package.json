@@ -92,6 +92,7 @@
     "path": "^0.12.7",
     "react-test-renderer": "^16.2.0",
     "read-file": "^0.2.0",
+    "redux-mock-store": "^1.5.1",
     "sass-loader": "^6.0.6",
     "sinon": "^4.2.2",
     "sinon-chrome": "^2.2.1",
