@@ -40,13 +40,16 @@ let reward = {
 	description: 'Description of the offer. There is a lot of exciting stuff going on.'
 }
 
-rewardsContainer.id = 'rewards-container';
+rewardsContainer.id = 'ghostery-rewards-container';
+rewardsContainer.className = 'show ghostery-rewards-container';
+// rewardsContainer.attachShadow({mode: 'open'});
 
 function handleMessages(request, sender, response) {
+	console.log(request);
 	/* TODO get new reward from request, and set it as new reward */
 	if (document.readyState === "complete") {
 		console.log('re render root react')
-		ReactDOM.render(<MainView reward={reward} />, document.getElementById('rewards-container'));
+		ReactDOM.render(<MainView reward={reward} />, document.getElementById('ghostery-rewards-container'));
 	}
 }
 
@@ -62,9 +65,11 @@ if (channelsSupported) {
 
 const MainView = (props) => {
 	console.log('MainView props:', props);
+	console.log('history', history)
+	history.goBack()
 	return (
 		<Router history={history}>
-			<div className="ghostery-rewards-container ghostery-top ghostery-right ghostery-collapsed">
+			<div>
 				<Route exact path="/" render={ ()=> <HotDog reward={props.reward} /> } />
 				<Route path="/hotdog" render={ ()=> <HotDog reward={props.reward} /> } />
 				<Route path="/offercard" render={ ()=> <OfferCard reward={props.reward} /> } />
@@ -75,5 +80,5 @@ const MainView = (props) => {
 
 document.addEventListener('DOMContentLoaded', (event) => {
 	document.body.appendChild(rewardsContainer);
-	ReactDOM.render(<MainView reward={reward}/>, document.getElementById('rewards-container'));
+	ReactDOM.render(<MainView reward={reward}/>, document.getElementById('ghostery-rewards-container'));
 });

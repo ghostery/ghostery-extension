@@ -1613,12 +1613,15 @@
 		"message": "COPY CODE"
 	},
 	"rewards_code_copied": {
-		"message": "COPIED"
+		"message": "CODE COPIED"
 	},
 	"rewards_expire": {
 		"message": "Expires in"
 	},
 	"rewards_terms_conditions": {
 		"message": "Terms & Conditions"
+	},
+	"rewards_disable": {
+		"message": "Turn off Ghostery rewards"
 	}
 }

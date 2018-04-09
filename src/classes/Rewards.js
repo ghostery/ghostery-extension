@@ -49,7 +49,6 @@ class Rewards {
 		// Inject script cannot handle errors properly, but we call createBox after verifying that the tab is OK
 		// So update hotdog status for this tab
 		tabInfo.setTabInfo(tab_id, 'rewards', true);
-
 		chrome.runtime.onConnect.addListener((port) => {
 			if (port && port.name === 'rewardsPort' && port.sender && port.sender.tab && port.sender.tab.id) {
 				const tabId = port.sender.tab.id;
@@ -57,9 +56,7 @@ class Rewards {
 					this.ports.set(tabId, port);
 					this.ports.get(tabId).onMessage.addListener((message) => {
 						if (message.name === 'rewardsLoaded') {
-							setInterval(() => {
-								this.ports.get(tabId).postMessage({ name: 'showCircle', message: this.rewardsData });
-							}, 5000);
+							this.ports.get(tabId).postMessage({ name: 'showCircle', message: this.rewardsData });
 						}
 						// else if (message.name === 'onCreateBox') {
 						// 	this.updateBox(tabId);
@@ -78,7 +75,7 @@ class Rewards {
 		});
 
 		// console.log('INJECT REWARDS');
-		return injectScript(tab_id, 'dist/rewards.js', 'dist/css/purplebox_styles.css', 'document_start').then(() => {
+		return injectScript(tab_id, 'dist/rewards.js', null, 'document_start').then(() => {
 			// console.log('REWARDS INJECTED');
 		}).catch((err) => {
 			log('rewards injectScript error', err);
