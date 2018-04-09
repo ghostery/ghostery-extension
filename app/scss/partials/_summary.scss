@@ -15,6 +15,7 @@
 	position: absolute;
 	height: 479px;
 	width: 100%;
+	overflow-y: hidden;
 	&.expert { width: 235px; }
 	&.expert.condensed {
 		width: 66px;
@@ -49,7 +50,7 @@
 	}
 	&.expert .page-host {
 		margin-top: 20px;
-		margin-bottom: 24px;
+		margin-bottom: 20px;
 	}
 	&.expert.ab-pause .page-host {
 		margin-top: 8px;
@@ -82,7 +83,7 @@
 		color: #4a4a4a;
 		font-size: 24px;
 		font-weight: 600;
-		margin: 21px 0;
+		margin: 18px 0;
 	}
 	&.expert.condensed.ab-pause .total-tracker-count {
 		margin: 13px 0;
@@ -94,7 +95,7 @@
 		font-size: 14px;
 		line-height: 21px;
 		font-weight: 600;
-		margin-bottom: 44px;
+		margin-bottom: 40px;
 		.blocked-trackers .value { color: #e74055; }
 		.page-load .value { color: #ffc063; }
 		.page-load.fast .value { color: #9ecc42; }
