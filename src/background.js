@@ -21,6 +21,8 @@
 import _ from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
 import CLIQZ from 'browser-core';
+// This line is temporary. Cliqz Events should be exposed from CLIQZ object
+import CliqzEvents from 'browser-core/build/core/events';
 // object classes
 import Button from './classes/BrowserButton';
 import Events from './classes/EventHandlers';
@@ -45,6 +47,7 @@ import { allowAllwaysC2P } from './utils/click2play';
 import * as common from './utils/common';
 import * as utils from './utils/utils';
 
+
 // class instantiation
 const button = new Button();
 const events = new Events();
@@ -61,6 +64,7 @@ const {
 } = globals;
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const VERSION_CHECK_URL = `https://${CDN_SUB_DOMAIN}.ghostery.com/update/version`;
+const REAL_ESTATE_ID = 'ghostery';
 const OFFERS_HANDLER_ID = 'ghostery';
 const onBeforeRequest = events.onBeforeRequest.bind(events);
 const onHeadersReceived = events.onHeadersReceived.bind(events);
@@ -93,6 +97,32 @@ function setCliqzModuleEnabled(module, enabled) {
 	return Promise.resolve(CORRECT_STATE);
 }
 
+/**
+ * Register/unregister real estate with Offers core module.
+ * @memberOf Background
+ * @param  {Object} offersModule offers module
+ * @param  {Boolean} register    true - register, false - unregister
+ */
+function registerWithOffers(offersModule, register) {
+	if (!offersModule.isEnabled) {
+		return;
+	}
+	return offersModule.action(register ? 'registerRealEstate' : 'unregisterRealEstate', { realEstateID: REAL_ESTATE_ID })
+		.catch((e) => {
+			log(`FAILED TO ${register ? 'REGISTER' : 'UNREGISTER'} REAL ESTATE WITH OFFERS CORE`);
+		});
+}
+/**
+ * Handler for 'offers-re-registration' message coming from Offers module.
+ * @memberOf Background
+ * @param  {Object} offersModule offers module
+ * @param  {Object} event        event broadcasted by Offers
+ */
+function reRegisterWithOffers(offersModule, event) {
+	if (event && event.type === 'broadcast') {
+		registerWithOffers(offers, true);
+	}
+}
 /**
  * Check and fetch (if needed) a new tracker library every 12 hours
  * @memberOf Background
@@ -794,6 +824,10 @@ function initializeDispatcher() {
 	});
 	dispatcher.on('conf.save.enable_offers', (enableOffers) => {
 		if (!IS_EDGE && !IS_CLIQZ) {
+			if (!enableOffers) {
+				CliqzEvents.un_sub('offers-re-registration', reRegisterWithOffers);
+				registerWithOffers(offers, false);
+			}
 			setCliqzModuleEnabled(offers, enableOffers);
 		}
 	});
@@ -1012,9 +1046,14 @@ adblocker.on('enabled', () => {
 offers.on('enabled', () => {
 	offers.isReady().then(() => {
 		log('IN OFFERS ON ENABLED', offers, messageCenter);
-		setCliqzModuleEnabled(messageCenter, true);
+		registerWithOffers(offers, true)
+			.then(() => {
+				CliqzEvents.sub('offers-re-registration', reRegisterWithOffers);
+				setCliqzModuleEnabled(messageCenter, true);
+			});
 	});
 });
+
 /**
  * Set listener for 'enabled' event for Offers module.
  * It registers message handler for messages with the offers.
