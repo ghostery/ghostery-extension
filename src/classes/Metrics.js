@@ -54,6 +54,7 @@ class Metrics {
 					// This query fails on Edge
 					chrome.tabs.query({
 						url: [
+							'https://www.ghostery.com/',
 							'https://www.ghostery.com/lp*',
 							'https://www.ghostery.com/*/lp*',
 							'https://www.ghostery.com/products*',
