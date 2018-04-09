@@ -12,11 +12,11 @@
  */
 
 @function buildIconTrust($stroke-color) {
-	@return url('data:image/svg+xml;charset=US-ASCII,<svg width="14" height="14" viewBox="0 0 14 14" xmlns="http%3A//www.w3.org/2000/svg"><g stroke="#{$stroke-color}" fill="none"><circle cx="7" cy="7" r="6" stroke-width="2"/></g></svg>');
+	@return url('data:image/svg+xml;charset%3DUS-ASCII,%3Csvg%20width%3D%2214%22%20height%3D%2214%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22>%3Ccircle%20cx%3D%227%22%20cy%3D%227%22%20r%3D%226%22%20stroke-width%3D%222%22%20stroke%3D%22#{url-friendly-colour($stroke-color)}%22%20fill%3D%22none%22/%3E%3C/svg%3E');
 }
 
 @function buildIconRestrict($stroke-color) {
-	@return url('data:image/svg+xml;charset=US-ASCII,<svg width="14" height="14" viewBox="0 0 14 14" xmlns="http%3A//www.w3.org/2000/svg"><g stroke="#{$stroke-color}" fill="none"><circle cx="7" cy="7" r="6" stroke-width="2"/><path d="M3,3 L11,11" stroke-width="2"/></g></svg>');
+	@return url('data:image/svg+xml;charset%3DUS-ASCII,%3Csvg%20width%3D%2214%22%20height%3D%2214%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20stroke%3D%22#{url-friendly-colour($stroke-color)}%22%20fill%3D%22none%22%20stroke-width%3D%222%22%3E%3Ccircle%20cx%3D%227%22%20cy%3D%227%22%20r%3D%226%22/%3E%3Cpath%20d%3D%22M3%203l8%208%22/%3E%3C/g%3E%3C/svg%3E');
 }
 
 .sub-component.ghostery-features {

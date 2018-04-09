@@ -12,19 +12,19 @@
  */
 
 @function buildIconPause($stroke-color) {
-	@return url('data:image/svg+xml;charset=US-ASCII,<svg width="14" height="16" viewBox="0 0 14 16" xmlns="http%3A//www.w3.org/2000/svg"><g fill="#{$stroke-color}"><path d="M1,15 L4,15 L4,1 L1,1 L1,15 L1,15 Z M9,1 L9,15 L12,15 L12,1 L9,1 L9,1 Z"/></g></svg>');
+	@return url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width=%2214%22%20height=%2216%22%20xmlns=%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d=%22M1%2015h3V1H1v14zM9%201v14h3V1H9z%22%20fill=%22#{url-friendly-colour($stroke-color)}%22/%3E%3C/svg%3E');
 }
 
 @function buildIconPlay($stroke-color) {
-	@return url('data:image/svg+xml;charset=US-ASCII,<svg width="14" height="16" viewBox="0 0 14 16" xmlns="http%3A//www.w3.org/2000/svg"><g fill="#{$stroke-color}"><path d="M12.739453,7.542901 C13.012591,7.683981 13.153986,8.172646 12.739453,8.458306 L1.78263,14.919992 C1.460969,15.141574 1,14.87503 1,14.46229 L1,1.538918 C1,1.16064 1.440099,0.845632 1.78263,1.081215 L12.739453,7.542901 Z M2.043507,13.546884 L11.435069,8.000604 L2.043507,2.454323 L2.043507,13.546884 Z"/></g></svg>');
+	@return url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width=%2214%22%20height=%2216%22%20xmlns=%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d=%22M12.74%207.543a.532.532%200%200%201%200%20.915L1.782%2014.92c-.322.222-.783-.045-.783-.458V1.54c0-.378.44-.693.783-.458l10.956%206.462zM2.043%2013.547L11.435%208%202.044%202.454v11.093z%22%20fill=%22#{url-friendly-colour($stroke-color)}%22/%3E%3C/svg%3E');
 }
 
 @function buildIconCaretDown($stroke-color) {
-	@return url('data:image/svg+xml;charset=US-ASCII,<svg width="9" height="5" viewBox="0 0 9 5" xmlns="http%3A//www.w3.org/2000/svg"><g fill="#{$stroke-color}"><path d="M0 0 L9 0 L 4.5 5 L 0 0"/></g></svg>');
+	@return url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width=%229%22%20height=%225%22%20xmlns=%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d=%22M0%200h9L4.5%205%200%200%22%20fill=%22#{url-friendly-colour($stroke-color)}%22/%3E%3C/svg%3E');
 }
 
 @function buildIconCircle($stroke-color) {
-	@return url('data:image/svg+xml;charset=US-ASCII,<svg width="4" height="4" viewBox="0 0 4 4" xmlns="http%3A//www.w3.org/2000/svg"><g fill="#{$stroke-color}"><circle cx="2" cy="2" r="2"/></g></svg>');
+	@return url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width=%224%22%20height=%224%22%20xmlns=%22http%3A//www.w3.org/2000/svg%22%3E%3Ccircle%20cx=%222%22%20cy=%222%22%20r=%222%22%20fill=%22#{url-friendly-colour($stroke-color)}%22/%3E%3C/svg%3E');
 }
 
 .sub-component.pause-button {
@@ -84,6 +84,9 @@
 			min-width: 41px;
 			max-width: 41px;
 			padding-left: 17px;
+			.pause-button-icon {
+				padding: 0 0 0 15px;
+			}
 		}
 	}
 	.button-caret {
@@ -143,7 +146,7 @@
 		}
 		.dropdown-item.selected {
 			background-color: #ebebeb;
-			.pause-button-icon {
+			.dropdown-clickable {
 				padding: 0 0 0 10px;
 				background-repeat: no-repeat;
 				background-position: 0 center;
@@ -165,13 +168,11 @@
 	.button-pause {
 		height: 35px;
 		line-height: 21px;
-		top: 0;
 	}
 	.button-caret {
 		height: 35px;
 	}
 	.button-pause.smaller {
-		top: 1px;
 		height: 45px;
 		min-width: 125px;
 		max-width: 125px;
@@ -189,7 +190,6 @@
 		}
 	}
 	.button-pause.smallest {
-		top: 0;
 		padding-left: 15px;
 		height: 41px;
 		line-height: 27px;
