@@ -11,7 +11,7 @@ node('docker') {
     }
 
     def img
-    def artifact
+    def artifacts = []
     def uploadPath = "cdncliqz/update/ghostery/${env.BRANCH_NAME}"
 
     stage('Build Docker Image') {
@@ -31,21 +31,40 @@ node('docker') {
                     sh 'moab makezip'
                 }
                 // get the name of the firefox build
-                artifact = sh(returnStdout: true, script: 'ls build/ | grep firefox').trim()
+                artifacts.add(sh(returnStdout: true, script: 'ls build/ | grep firefox').trim())
             }
         }
     }
 
-    stage('Publish') {
+    stage('Package Chrome') {
+        withGithubCredentials {
+            def chromeArtifact = sh(returnStdout: true, script: 'ls build/ | grep chrome').trim().replace('.zip', '')
+            echo "${chromeArtifact}"
+            sh """#!/bin/bash -l
+                set -x
+                set -e
+                rm -rf ${chromeArtifact}/
+                mkdir -p ${chromeArtifact}
+                unzip build/${chromeArtifact}.zip -d ${chromeArtifact}
+                tools/crxmake.sh ${chromeArtifact}/ ~/.ssh/id_rsa
+                mv ${chromeArtifact}.crx build/
+                """
+            artifacts.add("${chromeArtifact}.crx")
+        }
+    }
+
+    stage('Publish Builds') {
         withCredentials([[
                 $class: 'UsernamePasswordMultiBinding',
                 credentialsId: '06ec4a34-9d01-46df-9ff8-64c79eda8b14',
                 passwordVariable: 'AWS_SECRET_ACCESS_KEY',
                 usernameVariable: 'AWS_ACCESS_KEY_ID']]) {
             echo "${env.BRANCH_NAME}/${env.BUILD_NUMBER}"
-            def uploadLocation = "s3://${uploadPath}/${artifact}"
+            def uploadLocation = "s3://${uploadPath}/"
             currentBuild.description = uploadLocation
-            sh "aws s3 cp build/${artifact} ${uploadLocation}  --acl public-read"
+            artifacts.each {
+                sh "aws s3 cp build/${it} ${uploadLocation}  --acl public-read"
+            }
         }
     }
 
