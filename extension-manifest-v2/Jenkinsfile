@@ -12,7 +12,7 @@ node('docker') {
 
     def img
     def artifact
-    def uploadPath = "cdncliqz/update/ghostery/nightly_test/${env.BRANCH_NAME}/${env.BUILD_NUMBER}"
+    def uploadPath = "cdncliqz/update/ghostery/${env.BRANCH_NAME}"
 
     stage('Build Docker Image') {
         img = docker.build('ghostery/build', '--build-arg UID=`id -u` --build-arg GID=`id -g` .')
@@ -49,13 +49,15 @@ node('docker') {
         }
     }
 
-    stage('Sign and Publish') {
-        def artifactUrl = "https://s3.amazonaws.com/${uploadPath}/${artifact}"
-        build job: 'addon-repack', parameters: [
-            string(name: 'XPI_URL', value: artifactUrl),
-            string(name: 'XPI_SIGN_CREDENTIALS', value: '41572f9c-06aa-46f0-9c3b-b7f4f78e9caa'),
-            string(name: 'XPI_SIGN_REPO_URL', value: 'git@github.com:cliqz/xpi-sign.git')
-        ]
+    if (env.BRANCH_NAME == 'develop') {
+        stage('Sign and Publish') {
+            def artifactUrl = "https://s3.amazonaws.com/${uploadPath}/${artifact}"
+            build job: 'addon-repack', parameters: [
+                string(name: 'XPI_URL', value: artifactUrl),
+                string(name: 'XPI_SIGN_CREDENTIALS', value: '41572f9c-06aa-46f0-9c3b-b7f4f78e9caa'),
+                string(name: 'XPI_SIGN_REPO_URL', value: 'git@github.com:cliqz/xpi-sign.git')
+            ]
+        }
     }
 }
 
@@ -80,7 +82,7 @@ def withGithubCredentials(Closure body) {
             credentialsId: '6739a36f-0b19-4f4d-b6e4-b01d0bc2e175',
             keyFileVariable: 'GHOSTERY_CI_SSH_KEY')
             ]) {
-        // initialise git+ssh access using cliqz-ci credentials
+        // initialise git+ssh access using ghostery-ci credentials
         try {
             sh '''#!/bin/bash -l
                 set -x
