@@ -943,8 +943,9 @@ function initialiseWebRequestPipeline() {
  *
  * @return {boolean}
  */
-function isWhitelisted(url) {
-	return globals.SESSION.paused_blocking || events.policy.getSitePolicy(url) === 2;
+function isWhitelisted(state) {
+	const url = state.sourceUrl;
+	return globals.SESSION.paused_blocking || events.policy.getSitePolicy(url) === 2 || state.ghosteryWhitelisted;
 }
 
 // Set listener for 'enabled' event for Antitracking module which replaces
@@ -954,8 +955,40 @@ function isWhitelisted(url) {
 // @memberOf Background
 antitracking.on('enabled', () => {
 	antitracking.isReady().then(() => {
-		// TODO: this should be exposed as an action from the antitracking module
-		antitracking.background.attrack.urlWhitelist.isWhitelisted = hostname => isWhitelisted(`http://${hostname}/`);
+		// remove Cliqz-side whitelisting steps and replace with ghostery ones.
+		const replacedSteps = ['onBeforeSendHeaders', 'onHeadersReceived'].map(stage =>
+			Promise.all([
+				antitracking.action('removePipelineStep', stage, 'checkIsCookieWhitelisted'),
+				antitracking.action('addPipelineStep', stage, {
+					name: 'checkGhosteryWhitelisted',
+					spec: 'break',
+					fn: (state) => {
+						if (isWhitelisted(state)) {
+							const step = stage === 'onHeadersReceived' ? 'set_cookie' : 'cookie';
+							state.incrementStat(`${step}_allow_whitelisted`);
+							return false;
+						}
+						return true;
+					},
+					before: ['cookieContext.checkCookieTrust'],
+				})
+			])
+		).concat([
+			antitracking.action('removePipelineStep', 'onBeforeRequest', 'checkSourceWhitelisted'),
+			antitracking.action('addPipelineStep', 'onBeforeRequest', {
+				name: 'checkGhosteryWhitelisted',
+				spec: 'break',
+				fn: (state) => {
+					if (isWhitelisted(state)) {
+						state.incrementStat('ghostery_whitelisted');
+						return false;
+					}
+					return true;
+				},
+				before: ['checkShouldBlock'],
+			}),
+		]);
+		return Promise.all(replacedSteps);
 	});
 });
 
@@ -963,10 +996,17 @@ antitracking.on('enabled', () => {
 // Set listener for 'enabled' event for Adblock module
 // which replaces Adblock isWhitelisted method with Ghostery's isWhitelisted method
 adblocker.on('enabled', () => {
-	adblocker.isReady().then(() => {
-		// TODO: this should be exposed as an action from the adblocker module
-		adblocker.background.adb.urlWhitelist.isWhitelisted = isWhitelisted;
-	});
+	adblocker.isReady().then(() =>
+		Promise.all([
+			adblocker.action('removePipelineStep', 'checkWhitelist'),
+			adblocker.action('addPipelineStep', {
+				name: 'checkGhosteryWhitelist',
+				spec: 'break',
+				fn: state => !isWhitelisted(state),
+				before: ['checkBlocklist']
+			})
+		])
+	);
 });
 
 offers.on('enabled', () => {
