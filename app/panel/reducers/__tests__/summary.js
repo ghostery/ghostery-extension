@@ -11,6 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import Immutable from 'seamless-immutable';
 import summaryReducer from '../summary';
 import {
 	GET_SUMMARY_DATA,
@@ -20,7 +21,7 @@ import {
 } from '../../constants/constants';
 
 // Copied from app/panel/reducers/summary.js
-const initialState = {
+const initialState = Immutable({
 	alertCounts: {
 		total: 0,
 	},
@@ -33,7 +34,7 @@ const initialState = {
 		blocked: 0,
 	},
 	tab_id: 0,
-};
+});
 
 describe('app/panel/reducers/summary.js', () => {
 	test('initial state is correct', () => {
@@ -43,17 +44,19 @@ describe('app/panel/reducers/summary.js', () => {
 	test('reducer correctly handles GET_SUMMARY_DATA', () => {
 		const data = { test: true };
 		const action = { data, type: GET_SUMMARY_DATA };
+		const initState = Immutable({});
 
-		expect(summaryReducer({}, action)).toEqual(data);
+		expect(summaryReducer(initState, action)).toEqual(data);
 	});
 
 	test('reducer correctly handles UPDATE_GHOSTERY_PAUSED', () => {
 		const data = { time: null, ghosteryPaused: true };
 		const action = { data, type: UPDATE_GHOSTERY_PAUSED };
 
-		const updatedState = initialState;
-		updatedState.paused_blocking = data.ghosteryPaused;
-		updatedState.paused_blocking_timeout = data.time;
+		const updatedState = Immutable.merge(initialState, {
+			paused_blocking: data.ghosteryPaused,
+			paused_blocking_timeout: data.time
+		});
 
 		expect(summaryReducer(undefined, action)).toEqual(updatedState);
 	});
@@ -62,12 +65,12 @@ describe('app/panel/reducers/summary.js', () => {
 		const data = { type: 'blacklist' };
 		const action = { data, type: UPDATE_SITE_POLICY };
 
-		const initState = {
+		const initState = Immutable({
 			pageHost: 'www.cnn.com',
 			sitePolicy: 2,
 			site_blacklist: [],
 			site_whitelist: ['cnn.com']
-		};
+		});
 
 		expect(summaryReducer(initState, action)).toEqual({
 			pageHost: 'www.cnn.com',
@@ -85,8 +88,9 @@ describe('app/panel/reducers/summary.js', () => {
 			num_ss_allowed: 2
 		};
 		const action = { data, type: UPDATE_TRACKER_COUNTS };
+		const initState = Immutable({});
 
-		expect(summaryReducer({}, action)).toEqual({
+		expect(summaryReducer(initState, action)).toEqual({
 			trackerCounts: {
 				blocked: 3,
 				allowed: 5,
