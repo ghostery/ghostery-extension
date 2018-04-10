@@ -27,7 +27,9 @@ node('docker') {
                 }
                 // make browser-core noisy
                 sh 'sed -i \'s/global.__DEV__/true/1\' node_modules/browser-core/build/core/console.js'
-                sh 'moab makezip'
+                withGithubCredentials {
+                    sh 'moab makezip'
+                }
                 // get the name of the firefox build
                 artifact = sh(returnStdout: true, script: 'ls build/ | grep firefox').trim()
             }
@@ -70,5 +72,28 @@ def withCache(Closure body=null) {
         body()
     } finally {
         cleanCache()
+    }
+}
+
+def withGithubCredentials(Closure body) {
+    withCredentials([sshUserPrivateKey(
+            credentialsId: '6739a36f-0b19-4f4d-b6e4-b01d0bc2e175',
+            keyFileVariable: 'GHOSTERY_CI_SSH_KEY')
+            ]) {
+        // initialise git+ssh access using cliqz-ci credentials
+        try {
+            sh '''#!/bin/bash -l
+                set -x
+                set -e
+                mkdir -p ~/.ssh
+                cp $GHOSTERY_CI_SSH_KEY ~/.ssh/id_rsa
+                chmod 600 ~/.ssh/id_rsa
+                ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+            '''
+            body()
+        } finally {
+            sh 'rm -f ~/.ssh/id_rsa'
+            sh 'rm -f ~/.ssh/known_hosts'
+        }
     }
 }
