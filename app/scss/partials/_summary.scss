@@ -49,7 +49,7 @@
 	}
 	&.expert .page-host {
 		margin-top: 20px;
-		margin-bottom: 24px;
+		margin-bottom: 20px;
 	}
 	&.expert.ab-pause .page-host {
 		margin-top: 8px;
@@ -82,7 +82,7 @@
 		color: #4a4a4a;
 		font-size: 24px;
 		font-weight: 600;
-		margin: 21px 0;
+		margin: 18px 0;
 	}
 	&.expert.condensed.ab-pause .total-tracker-count {
 		margin: 13px 0;
@@ -94,7 +94,7 @@
 		font-size: 14px;
 		line-height: 21px;
 		font-weight: 600;
-		margin-bottom: 44px;
+		margin-bottom: 40px;
 		.blocked-trackers .value { color: #e74055; }
 		.page-load .value { color: #ffc063; }
 		.page-load.fast .value { color: #9ecc42; }
@@ -179,6 +179,12 @@
 	}
 	&.expert.condensed.ab-pause .cliqz-features-container {
 		margin-top: 14px;
+	}
+	&.expert.condensed .cliqz-features-container {
+		margin-bottom: 0;
+		.cliqz-feature:last-of-type {
+			margin-bottom: 0;
+		}
 	}
 
 	.map-these-trackers {

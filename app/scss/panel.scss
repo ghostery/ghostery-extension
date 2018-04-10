@@ -26,6 +26,11 @@ html body {
 }
 *:focus {outline: none;}
 
+// Function helper with color variables
+@function url-friendly-colour($colour) {
+	@return '%23' + str-slice('#{$colour}', 2, -1)
+}
+
 // Foundation Helpers
 .collapse-left {padding-left: 0;}
 .collapse-right {padding-right: 0;}
