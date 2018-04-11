@@ -16,11 +16,13 @@ import DonutGraph from './DonutGraph';
 import GhosteryFeatures from './GhosteryFeatures';
 import NotScanned from './NotScanned';
 import PauseButton from './PauseButton';
+import ToggleSlider from './ToggleSlider';
 
 export {
 	CliqzFeatures,
 	DonutGraph,
 	GhosteryFeatures,
 	NotScanned,
-	PauseButton
+	PauseButton,
+	ToggleSlider
 };
