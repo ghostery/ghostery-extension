@@ -75,15 +75,23 @@ const offers = cliqz.modules['offers-v2'];
 const CORRECT_STATE = 'CorrectState';
 
 /**
- * Handler for 'offers-re-registration' message coming from Offers module.
+ * Enable or disable specified module.
  * @memberOf Background
- * @param  {Object} offersModule offers module
- * @param  {Object} event        event broadcasted by Offers
+ * @param {Object} module  Cliqz module
+ * @param {boolean} enabled true - enable, false - disable
+ * @return {Promise}
  */
-function reRegisterWithOffers(offersModule, event) {
-	if (event && event.type === 'broadcast') {
-		registerWithOffers(offers, true);
+function setCliqzModuleEnabled(module, enabled) {
+	if (enabled && !module.isEnabled) {
+		log('SET CLIQZ MODULE ENABLED', module);
+		return cliqz.enableModule(module.name);
+	} else if (!enabled && module.isEnabled) {
+		log('SET CLIQZ MODULE DISABLED', module);
+		cliqz.disableModule(module.name);
+		return Promise.resolve();
 	}
+	log('MODULE IS ALREADY IN CORRECT STATE', module, enabled);
+	return Promise.resolve(CORRECT_STATE);
 }
 /**
  * Check and fetch (if needed) a new tracker library every 12 hours
