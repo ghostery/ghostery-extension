@@ -21,8 +21,6 @@
 import _ from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
 import CLIQZ from 'browser-core';
-// This line is temporary. Cliqz Events should be exposed from CLIQZ object
-import CliqzEvents from 'browser-core/build/core/events';
 // object classes
 import Button from './classes/BrowserButton';
 import Events from './classes/EventHandlers';
@@ -64,7 +62,6 @@ const {
 } = globals;
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const VERSION_CHECK_URL = `https://${CDN_SUB_DOMAIN}.ghostery.com/update/version`;
-const REAL_ESTATE_ID = 'ghostery';
 const OFFERS_HANDLER_ID = 'ghostery';
 const onBeforeRequest = events.onBeforeRequest.bind(events);
 const onHeadersReceived = events.onHeadersReceived.bind(events);
@@ -77,41 +74,6 @@ const offers = cliqz.modules['offers-v2'];
 
 const CORRECT_STATE = 'CorrectState';
 
-/**
- * Enable or disable specified module.
- * @memberOf Background
- * @param {Object} module  Cliqz module
- * @param {boolean} enabled true - enable, false - disable
- * @return {Promise}
- */
-function setCliqzModuleEnabled(module, enabled) {
-	if (enabled && !module.isEnabled) {
-		log('SET CLIQZ MODULE ENABLED', module);
-		return cliqz.enableModule(module.name);
-	} else if (!enabled && module.isEnabled) {
-		log('SET CLIQZ MODULE DISABLED', module);
-		cliqz.disableModule(module.name);
-		return Promise.resolve();
-	}
-	log('MODULE IS ALREADY IN CORRECT STATE', module, enabled);
-	return Promise.resolve(CORRECT_STATE);
-}
-
-/**
- * Register/unregister real estate with Offers core module.
- * @memberOf Background
- * @param  {Object} offersModule offers module
- * @param  {Boolean} register    true - register, false - unregister
- */
-function registerWithOffers(offersModule, register) {
-	if (!offersModule.isEnabled) {
-		return;
-	}
-	return offersModule.action(register ? 'registerRealEstate' : 'unregisterRealEstate', { realEstateID: REAL_ESTATE_ID })
-		.catch((e) => {
-			log(`FAILED TO ${register ? 'REGISTER' : 'UNREGISTER'} REAL ESTATE WITH OFFERS CORE`);
-		});
-}
 /**
  * Handler for 'offers-re-registration' message coming from Offers module.
  * @memberOf Background
@@ -824,10 +786,6 @@ function initializeDispatcher() {
 	});
 	dispatcher.on('conf.save.enable_offers', (enableOffers) => {
 		if (!IS_EDGE && !IS_CLIQZ) {
-			if (!enableOffers) {
-				CliqzEvents.un_sub('offers-re-registration', reRegisterWithOffers);
-				registerWithOffers(offers, false);
-			}
 			setCliqzModuleEnabled(offers, enableOffers);
 		}
 	});
@@ -1046,11 +1004,7 @@ adblocker.on('enabled', () => {
 offers.on('enabled', () => {
 	offers.isReady().then(() => {
 		log('IN OFFERS ON ENABLED', offers, messageCenter);
-		registerWithOffers(offers, true)
-			.then(() => {
-				CliqzEvents.sub('offers-re-registration', reRegisterWithOffers);
-				setCliqzModuleEnabled(messageCenter, true);
-			});
+		setCliqzModuleEnabled(messageCenter, true);
 	});
 });
 
