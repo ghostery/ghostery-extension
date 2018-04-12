@@ -45,7 +45,7 @@ class AdditionalFeaturesView extends Component {
 	 * @param  {Object} event The event created by the onChange property
 	 */
 	_handleAntiTrack = (event) => {
-		if(!IS_CLIQZ) {
+		if (!IS_CLIQZ) {
 			this.props.actions.updateAntiTrack(event.target.checked);
 		}
 	}
@@ -63,7 +63,7 @@ class AdditionalFeaturesView extends Component {
 	 * @param  {Object} event The event created by the onChange property
 	 */
 	_handleAdBlock = (event) => {
-		if(!IS_CLIQZ) {
+		if (!IS_CLIQZ) {
 			this.props.actions.updateAdBlock(event.target.checked);
 		}
 	}
