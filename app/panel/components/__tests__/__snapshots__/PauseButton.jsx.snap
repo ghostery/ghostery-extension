@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders paused state in detailed condensed view 1`] = `
+exports[`app/panel/components/BuildingBlocks/PauseButton.jsx Snapshot tests with react-test-renderer paused state in detailed condensed view 1`] = `
 <div
   className="sub-component pause-button"
 >
@@ -37,7 +37,7 @@ exports[`renders paused state in detailed condensed view 1`] = `
 </div>
 `;
 
-exports[`renders paused state in detailed view 1`] = `
+exports[`app/panel/components/BuildingBlocks/PauseButton.jsx Snapshot tests with react-test-renderer paused state in detailed view 1`] = `
 <div
   className="sub-component pause-button"
 >
@@ -76,7 +76,7 @@ exports[`renders paused state in detailed view 1`] = `
 </div>
 `;
 
-exports[`renders unpaused state in simple view 1`] = `
+exports[`app/panel/components/BuildingBlocks/PauseButton.jsx Snapshot tests with react-test-renderer unpaused state in simple view 1`] = `
 <div
   className="sub-component pause-button"
 >
