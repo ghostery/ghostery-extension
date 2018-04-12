@@ -71,8 +71,6 @@ const { adblocker, antitracking, hpn } = cliqz.modules;
 const messageCenter = cliqz.modules['message-center'];
 const offers = cliqz.modules['offers-v2'];
 
-const CORRECT_STATE = 'CorrectState';
-
 /**
  * Enable or disable specified module.
  * @memberOf Background
@@ -81,16 +79,14 @@ const CORRECT_STATE = 'CorrectState';
  * @return {Promise}
  */
 function setCliqzModuleEnabled(module, enabled) {
-	if (enabled && !module.isEnabled) {
+	if (enabled) {
 		log('SET CLIQZ MODULE ENABLED', module);
 		return cliqz.enableModule(module.name);
-	} else if (!enabled && module.isEnabled) {
+	} else {
 		log('SET CLIQZ MODULE DISABLED', module);
 		cliqz.disableModule(module.name);
 		return Promise.resolve();
 	}
-	log('MODULE IS ALREADY IN CORRECT STATE', module, enabled);
-	return Promise.resolve(CORRECT_STATE);
 }
 
 /**
@@ -785,26 +781,32 @@ function initializeDispatcher() {
 	dispatcher.on('conf.save.enable_human_web', (enableHumanWeb) => {
 		if (!IS_EDGE && !IS_CLIQZ) {
 			setCliqzModuleEnabled(humanweb, enableHumanWeb).then((data) => {
-				if (data !== CORRECT_STATE) {
-					// We don't want to affect Offers here
-					setupABTestAntitracking();
-				}
+				// We don't want to affect Offers here
+				setupABTestAntitracking();
 			});
+		} else {
+			setCliqzModuleEnabled(humanweb, false);
 		}
 	});
 	dispatcher.on('conf.save.enable_offers', (enableOffers) => {
 		if (!IS_EDGE && !IS_CLIQZ) {
 			setCliqzModuleEnabled(offers, enableOffers);
+		} else {
+			setCliqzModuleEnabled(offers, false);
 		}
 	});
 	dispatcher.on('conf.save.enable_anti_tracking', (enableAntitracking) => {
 		if (!IS_CLIQZ) {
 			setCliqzModuleEnabled(antitracking, enableAntitracking);
+		} else {
+			setCliqzModuleEnabled(antitracking, false);
 		}
 	});
 	dispatcher.on('conf.save.enable_ad_block', (enableAdBlock) => {
 		if (!IS_CLIQZ) {
 			setCliqzModuleEnabled(adblocker, enableAdBlock);
+		} else {
+			setCliqzModuleEnabled(adblocker, false);
 		}
 	});
 
@@ -1322,16 +1324,14 @@ function initializeGhosteryModules() {
 			if (globals.JUST_UPGRADED_FROM_7) {
 				conf.enable_ad_block = false;
 				conf.enable_anti_tracking = false;
-				setCliqzModuleEnabled(antitracking, conf.enable_anti_tracking);
-				setCliqzModuleEnabled(adblocker, conf.enable_ad_block);
-				setCliqzModuleEnabled(humanweb, IS_EDGE ? false : conf.enable_human_web);
+				conf.enable_human_web = (IS_EDGE || IS_CLIQZ) ? false : conf.enable_human_web;
 			} else {
-				conf.enable_ad_block = !adblocker.isDisabled;
-				conf.enable_anti_tracking = !antitracking.isDisabled;
-				conf.enable_human_web = IS_EDGE ? false : !humanweb.isDisabled;
+				conf.enable_ad_block = IS_CLIQZ ? false : !adblocker.isDisabled;
+				conf.enable_anti_tracking = IS_CLIQZ ? false : !antitracking.isDisabled;
+				conf.enable_human_web = (IS_EDGE || IS_CLIQZ) ? false : !humanweb.isDisabled;
 			}
 			// sync conf from module status
-			conf.enable_offers = IS_EDGE ? false : !offers.isDisabled;
+			conf.enable_offers = (IS_EDGE || IS_CLIQZ) ? false : !offers.isDisabled;
 		})).catch((e) => {
 		log('cliqzStartup error', e);
 	});
@@ -1345,7 +1345,7 @@ function initializeGhosteryModules() {
 		// auto-fetch from CMP
 		cmp.fetchCMPData();
 
-		if (!IS_EDGE) {
+		if (!IS_EDGE && !IS_CLIQZ) {
 			// auto-fetch human web offer
 			abtest.fetch().then(() => {
 				setupABTests();
@@ -1356,7 +1356,7 @@ function initializeGhosteryModules() {
 	}
 
 	cliqzStartup.then(() => {
-		if (!IS_EDGE) {
+		if (!IS_EDGE && !IS_CLIQZ) {
 			abtest.fetch().then(() => {
 				setupABTests();
 			}).catch((err) => {
