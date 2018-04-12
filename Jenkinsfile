@@ -16,6 +16,8 @@ node('docker') {
 
     stage('Build Docker Image') {
         img = docker.build('ghostery/build', '--build-arg UID=`id -u` --build-arg GID=`id -g` .')
+        // clean workdir
+        sh 'rm -rf build ghostery-*'
     }
 
     stage('Build Extension') {
@@ -53,12 +55,8 @@ node('docker') {
         }
     }
 
-    stage('Publish Builds') {
-        withCredentials([[
-                $class: 'UsernamePasswordMultiBinding',
-                credentialsId: '06ec4a34-9d01-46df-9ff8-64c79eda8b14',
-                passwordVariable: 'AWS_SECRET_ACCESS_KEY',
-                usernameVariable: 'AWS_ACCESS_KEY_ID']]) {
+    stage('Upload Builds') {
+        withS3Credentials {
             echo "${env.BRANCH_NAME}/${env.BUILD_NUMBER}"
             def uploadLocation = "s3://${uploadPath}/"
             currentBuild.description = uploadLocation
@@ -69,13 +67,26 @@ node('docker') {
     }
 
     if (env.BRANCH_NAME == 'develop') {
-        stage('Sign and Publish') {
-            def artifactUrl = "https://s3.amazonaws.com/${uploadPath}/${artifact}"
-            build job: 'addon-repack', parameters: [
-                string(name: 'XPI_URL', value: artifactUrl),
-                string(name: 'XPI_SIGN_CREDENTIALS', value: '41572f9c-06aa-46f0-9c3b-b7f4f78e9caa'),
-                string(name: 'XPI_SIGN_REPO_URL', value: 'git@github.com:cliqz/xpi-sign.git')
-            ]
+        stage('Publish Beta') {
+            artifacts.each {
+                if (it.contains('firefox')) {
+                    // firefox artifact (zip) - sign for cliqz_beta
+                    def artifactUrl = "https://s3.amazonaws.com/${uploadPath}/${it}"
+                    build job: 'addon-repack', parameters: [
+                        string(name: 'XPI_URL', value: artifactUrl),
+                        string(name: 'XPI_SIGN_CREDENTIALS', value: '41572f9c-06aa-46f0-9c3b-b7f4f78e9caa'),
+                        string(name: 'XPI_SIGN_REPO_URL', value: 'git@github.com:cliqz/xpi-sign.git'),
+                        string(name: 'CHANNEL', value: 'browser_beta')
+                    ]
+                } else if (it.contains('chrome')) {
+                    withS3Credentials {
+                        // publish chrome builds, also with 'latest' tag
+                        def publishUrl = 's3://cdncliqz/update/ghostery_beta/chrome';
+                        sh "aws s3 cp build/${it} ${publishUrl}/${it} --acl public-read"
+                        sh "aws s3 cp build/${it} ${publishUrl}/latest.crx --acl public-read"
+                    }
+                }
+            }
         }
     }
 }
@@ -116,5 +127,15 @@ def withGithubCredentials(Closure body) {
             sh 'rm -f ~/.ssh/id_rsa'
             sh 'rm -f ~/.ssh/known_hosts'
         }
+    }
+}
+
+def withS3Credentials(Closure body) {
+    withCredentials([[
+            $class: 'UsernamePasswordMultiBinding',
+            credentialsId: '06ec4a34-9d01-46df-9ff8-64c79eda8b14',
+            passwordVariable: 'AWS_SECRET_ACCESS_KEY',
+            usernameVariable: 'AWS_ACCESS_KEY_ID']]) {
+        body()
     }
 }
