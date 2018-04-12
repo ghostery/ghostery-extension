@@ -1324,14 +1324,14 @@ function initializeGhosteryModules() {
 				conf.enable_anti_tracking = false;
 				setCliqzModuleEnabled(antitracking, conf.enable_anti_tracking);
 				setCliqzModuleEnabled(adblocker, conf.enable_ad_block);
-				setCliqzModuleEnabled(humanweb, IS_EDGE ? false : conf.enable_human_web);
+				setCliqzModuleEnabled(humanweb, (IS_EDGE || IS_CLIQZ) ? false : conf.enable_human_web);
 			} else {
 				conf.enable_ad_block = !adblocker.isDisabled;
 				conf.enable_anti_tracking = !antitracking.isDisabled;
-				conf.enable_human_web = IS_EDGE ? false : !humanweb.isDisabled;
+				conf.enable_human_web = (IS_EDGE || IS_CLIQZ) ? false : !humanweb.isDisabled;
 			}
 			// sync conf from module status
-			conf.enable_offers = IS_EDGE ? false : !offers.isDisabled;
+			conf.enable_offers = (IS_EDGE || IS_CLIQZ) ? false : !offers.isDisabled;
 		})).catch((e) => {
 		log('cliqzStartup error', e);
 	});
