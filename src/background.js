@@ -45,6 +45,7 @@ import { allowAllwaysC2P } from './utils/click2play';
 import * as common from './utils/common';
 import * as utils from './utils/utils';
 
+
 // class instantiation
 const button = new Button();
 const events = new Events();
@@ -92,7 +93,6 @@ function setCliqzModuleEnabled(module, enabled) {
 	log('MODULE IS ALREADY IN CORRECT STATE', module, enabled);
 	return Promise.resolve(CORRECT_STATE);
 }
-
 /**
  * Check and fetch (if needed) a new tracker library every 12 hours
  * @memberOf Background
@@ -1015,6 +1015,7 @@ offers.on('enabled', () => {
 		setCliqzModuleEnabled(messageCenter, true);
 	});
 });
+
 /**
  * Set listener for 'enabled' event for Offers module.
  * It registers message handler for messages with the offers.
