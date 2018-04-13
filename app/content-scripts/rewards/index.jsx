@@ -66,10 +66,9 @@ if (channelsSupported) {
 	onMessage.addListener(handleMessages);
 }
 
-const MainView = (props) => {
-	console.log('MainView props:', props);
-	if (BROWSER_INFO.name === 'chrome') {
-		// use shadow dom
+let MainView;
+if (BROWSER_INFO.name === 'chrome') {
+	MainView = (props) => {
 		return (
 			<Router history={history}>
 				<ShadowDOM include={[chrome.extension.getURL('dist/css/rewards_styles.css')]}>
@@ -81,8 +80,9 @@ const MainView = (props) => {
 				</ShadowDOM>
 			</Router>
 		);
-	} else {
-		// no shadow dom
+	}
+} else {
+	MainView = (props) => {
 		return (
 			<Router history={history}>
 				<div>
@@ -93,7 +93,7 @@ const MainView = (props) => {
 			</Router>
 		);
 	}
-};
+}
 
 document.addEventListener('DOMContentLoaded', (event) => {
 	document.body.appendChild(rewardsContainer);
