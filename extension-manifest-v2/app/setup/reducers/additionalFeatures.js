@@ -40,6 +40,9 @@ const initialState = {
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case UPDATE_ANTITRACK: {
+			if (IS_CLIQZ) {
+				return state;
+			}
 			msg.sendMessage('updateAntiTrack', action.data);
 			return Object.assign({}, state, {
 				antiTrack: action.data,
@@ -52,6 +55,9 @@ export default (state = initialState, action) => {
 			});
 		}
 		case UPDATE_ADBLOCK: {
+			if (IS_CLIQZ) {
+				return state;
+			}
 			msg.sendMessage('updateAdBlock', action.data);
 			return Object.assign({}, state, {
 				adBlock: action.data,
