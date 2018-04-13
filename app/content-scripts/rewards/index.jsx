@@ -23,7 +23,10 @@ import { Router, Route } from 'react-router-dom';
 import history from '../../panel/utils/history';
 import HotDog from './HotDog';
 import OfferCard from './OfferCard';
+import globals from '../../../src/classes/Globals';
+import ShadowDOM from 'react-shadow';
 
+const { BROWSER_INFO } = globals;
 const viewport = document.getElementById('viewport');
 const rewardsContainer = document.createElement('div');
 const channelsSupported = (typeof chrome.runtime.connect === 'function');
@@ -65,17 +68,31 @@ if (channelsSupported) {
 
 const MainView = (props) => {
 	console.log('MainView props:', props);
-	console.log('history', history)
-	history.goBack()
-	return (
-		<Router history={history}>
-			<div>
-				<Route exact path="/" render={ ()=> <HotDog reward={props.reward} /> } />
-				<Route path="/hotdog" render={ ()=> <HotDog reward={props.reward} /> } />
-				<Route path="/offercard" render={ ()=> <OfferCard reward={props.reward} /> } />
-			</div>
-		</Router>
-	)
+	if (BROWSER_INFO.name === 'chrome') {
+		// use shadow dom
+		return (
+			<Router history={history}>
+				<ShadowDOM include={[chrome.extension.getURL('dist/css/rewards_styles.css')]}>
+					<div>
+						<Route exact path="/" render={ ()=> <HotDog reward={props.reward} /> } />
+						<Route path="/hotdog" render={ ()=> <HotDog reward={props.reward} /> } />
+						<Route path="/offercard" render={ ()=> <OfferCard reward={props.reward} /> } />
+					</div>
+				</ShadowDOM>
+			</Router>
+		);
+	} else {
+		// no shadow dom
+		return (
+			<Router history={history}>
+				<div>
+					<Route exact path="/" render={ ()=> <HotDog reward={props.reward} /> } />
+					<Route path="/hotdog" render={ ()=> <HotDog reward={props.reward} /> } />
+					<Route path="/offercard" render={ ()=> <OfferCard reward={props.reward} /> } />
+				</div>
+			</Router>
+		);
+	}
 };
 
 document.addEventListener('DOMContentLoaded', (event) => {

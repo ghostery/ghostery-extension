@@ -131,6 +131,7 @@ const config = {
 		purplebox_styles: [SASS_DIR + '/purplebox.scss'],
 		setup: [SASS_DIR + '/setup.scss'],
 		licenses: [SASS_DIR + '/licenses.scss'],
+		rewards_styles: [SASS_DIR + '/rewards.scss'],
 	},
 	devtool: 'none',
 	performance: { hints: false },
@@ -158,30 +159,9 @@ const config = {
 				}
 			},{
 				test: /\.scss?/,
-				exclude: [
-					path.resolve(__dirname, 'app/scss/rewards')
-				],
 				use: [
 					MiniCssExtractPlugin.loader,
 					{
-						loader: "css-loader"
-					}, {
-						loader: "sass-loader",
-						options: {
-							includePaths: [
-								path.resolve(__dirname, 'node_modules/foundation-sites/scss'),
-							]
-						}
-					}]
-			},{
-				test: /\.scss?/,
-				include: [
-					path.resolve(__dirname, 'app/scss/rewards')
-				],
-				use: [
-					{
-						loader: "style-loader"
-					}, {
 						loader: "css-loader"
 					}, {
 						loader: "sass-loader",
