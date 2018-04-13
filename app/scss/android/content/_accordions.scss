@@ -1,0 +1,277 @@
+.accordions {
+	.accordion {
+		position: relative;
+
+		.accordionSelect {
+			position: absolute;
+			top: 18px;
+			right: 10px;
+			border: 1px solid #ccc;
+			width: 20px;
+			height: 20px;
+			background-color: #eee;
+			background-repeat: no-repeat;
+			background-position: center;
+
+			&.blocked, &.trusted, &.restricted {
+				border: none;
+
+				&:before {
+					content: " ";
+					position: absolute;
+					top: 1px;
+					right: 1px;
+					width: 18px;
+					height: 18px;
+					border: 1px solid $white;
+				}
+			}
+
+			&.trusted {
+				background-color: $button-trust;
+				background-image: buildIconTrust($button-white);
+			}
+
+			&.restricted {
+				background-color: $button-restrict;
+				background-image: buildIconRestrict($button-white);
+			}
+
+			&.blocked {
+				background-color: $button-block;
+				background-image: buildIconBlock($button-white);
+			}
+
+			&.mixed {
+
+				&:before {
+					content: " ";
+					position: absolute;
+					top: 8px;
+					right: 1px;
+					height: 0;
+					width: 16px;
+					border: 1px solid #ccc;
+				}
+			}
+		}
+
+		.accordionTitle {
+			position: relative;
+			display: block;
+			cursor: pointer;
+			background-repeat: no-repeat;
+			background-size: 24px;
+			background-position: 5px 15px;
+			padding: 15px 0 15px 32px;
+
+			& > h2 {
+				font-size: 18px;
+			}
+
+			& > p {
+				& > span {
+					&.total-trackers {
+						color: #aaa;
+					}
+
+					&.blocked-trackers {
+						margin-left: 5px;
+						color: $button-block;
+					}
+				}
+			}
+
+			&:after {
+				content: " ";
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				width: 40px;
+				height: 40px;
+				background-image: url(../../app/images/panel-android/down.svg);
+				background-repeat: no-repeat;
+				background-position: center;
+				@include prefix('transition', 'background-image 300ms ease-in');
+			}
+
+			&.active {
+				&:after {
+					background-image: url(../../app/images/panel-android/up.svg);
+				}
+			}
+		}
+
+		.accordionContent {
+			overflow: hidden;
+			@include prefix('transition', 'height 300ms ease-in');
+			height: var(--trackers-length, 0px);
+
+			& > p {
+				margin: 0 10px;
+				padding: 10px 5px;
+				border-bottom: 1px solid #ccc;
+
+				& > span {
+					&:last-child {
+						float: right;
+					}
+				}
+			}
+
+			.trackers-list {
+				list-style: none;
+
+				.tracker {
+					position: relative;
+					margin-left: 30px;
+					@include prefix('transition', 'margin 300ms ease-in');
+					height: $tracker-height;
+
+					.info {
+						display: inline-block;
+						width: 40px;
+						height: 100%;
+						float: left;
+						background-image: url(../../app/images/panel-android/icon-information-tooltip.svg);
+						background-repeat: no-repeat;
+						background-position: center;
+					}
+
+					.trackerName {
+						font-style: italic;
+
+						& > span:first-child {
+							line-height: $tracker-height;
+						}
+					}
+
+					.trackerSelect {
+						position: absolute;
+						top: 15px;
+						right: 10px;
+						border: 1px solid #ccc;
+						width: 20px;
+						height: 20px;
+						background-repeat: no-repeat;
+						background-position: center;
+
+						&:before {
+							content: " ";
+							position: absolute;
+							top: 1px;
+							right: 1px;
+							width: 18px;
+							height: 18px;
+						}
+					}
+
+					.menu {
+						position: absolute;
+						top: 0;
+						right: calc(-3 * #{$tracker-menu-item-width});
+						width: calc(3 * #{$tracker-menu-item-width});
+						@include prefix('transition', 'right 300ms ease-in');
+						height: 100%;
+						z-index: 1;
+						overflow: hidden;
+
+						.trackerOption {
+							padding-top: 20px;
+							height: 100%;
+							width: $tracker-menu-item-width;
+							color: $white;
+							background-repeat: no-repeat;
+							background-position: center 10px;
+							font-size: 11px;
+
+							&.trust {
+								background-color: $button-trust;
+								background-image: buildIconTrust($button-white);
+							}
+
+							&.restrict {
+								background-color: $button-restrict;
+								background-image: buildIconRestrict($button-white);
+							}
+
+							&.block {
+								background-color: $button-block;
+								background-image: buildIconBlock($button-white);
+							}
+						}
+
+						&.global-trackers {
+							right: -$tracker-menu-item-width;
+							width: $tracker-menu-item-width;
+
+							.trackerOption {
+
+								&.trust {
+									display: none;
+								}
+
+								&.restrict {
+									display: none;
+								}
+							}
+						}
+					}
+
+					&.show-menu {
+						margin-left: 10px;
+
+						.menu {
+							right: 0;
+						}
+					}
+
+					&.blocked, &.trusted, &.restricted {
+						.trackerSelect:before {
+							border: 1px solid $white;
+						}
+					}
+
+					&.blocked {
+
+						.trackerName {
+							text-decoration: line-through;
+						}
+
+						.trackerSelect {
+							border: none;
+							background-image: buildIconBlock($button-white);
+							background-color: $button-block;
+						}
+					}
+
+					&.trusted {
+
+						.trackerSelect {
+							border: none;
+							background-image: buildIconTrust($button-white);
+							background-color: $button-trust;
+						}
+					}
+
+					&.restricted {
+
+						.trackerSelect {
+							border: none;
+							background-image: buildIconRestrict($button-white);
+							background-color: $button-restrict;
+						}
+					}
+				}
+
+				& > li:not(:last-child) .tracker {
+					border-bottom: 1px solid #eee;
+				}
+			}
+		}
+
+		&:not(:last-child) {
+			border-bottom: 1px solid #ccc;
+		}
+	}
+}

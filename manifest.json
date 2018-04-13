@@ -26,7 +26,6 @@
 	},
 	"content_scripts": [
 		{
-			"all_frames": false,
 			"js": [
 				"dist/ghostery_dot_com.js"
 			],
@@ -43,7 +42,6 @@
 			"run_at": "document_idle"
 		},
 		{
-			"all_frames": false,
 			"js": [
 				"dist/platform_pages.js"
 			],

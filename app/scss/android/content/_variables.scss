@@ -1,0 +1,63 @@
+$cliqz-blue: #00AEF0;
+$tracker-menu-item-width: 60px;
+$tracker-height: 50px;
+$fixed-menu-item-height: 50px;
+$fixed-menu-header-height: 50px;
+$tab-header-height: 50px;
+
+
+/*  GREYS	*/
+$black:						#000000; //form_content
+$dark-gray:					#111111; //bnkd_top_header
+$medium-gray:				#333333; //form_label
+$bright-gray:				#394045; //bknd_secondary_nav, $header-color
+$pale-sky:					#6E7B86; //secondary_nav_active_tab
+$silver-chalice:			#A3A3A3; //form_field_border
+$tundora:					#4A4A4A; //body-font-color
+$light-gray:				#A6A6A6; //top_nav, button_disabled
+$slate-gray:				#5F7B85; //$subheader-color
+$silver: 					#BABABA; //button_alt_font_color
+$mercury: 					#E5E5E5; //footer_border, $hr-border, $input-background-disabled
+$manatee:					#99999D;
+$porcelain:					#F0F3F4;
+$whisper:					#F7F8FB; //body-background
+$alabaster: 				#F7F7F7; //accordions
+$white:						#FFFFFF;
+
+/*  BLUES	*/
+$ghosty-blue:				#00AEF0;
+$active-blue:				#48ACD3; //top_nav_active_tab
+$link-blue:					#2092BF; //primary-color
+$button-primary:			#3AA2CF;
+
+/*  MARKETING COLORS */
+$red:						#E74055;
+$purple: 					#720174;
+$dark-magenta:				#910194;
+$sinopia:					#D3451E;
+$apple:						#67A73A; //button_special
+$caper:						#CEECAF; //success-color
+$dell: 						#477219; //callout-success-font-color
+$atlantis:					#9ECC42;
+$hoki:						#5F7C86;
+$mystic:					#E7ECEE; //bknd_third_nav
+$zumthor:					#CBD4D7;
+$orange:					#FF9000; //secondary-color
+
+$transparent-green: 		rgba($apple, 0.08);
+$transparent-red: 			rgba($red, 0.08);
+
+/* ADD PROJECT COLORS HERE */
+
+$button-grey: 979797;
+$button-dark-grey: 4A4A4A;
+$button-purple: 930194;
+$button-white: ffffff;
+$button-purple-f: unquote("##{$button-purple}");
+$button-blue: 1DAFED;
+
+/* Control buttons */
+
+$button-trust: #9FCA4C;
+$button-restrict: #BC4A4B;
+$button-block: #E44258;

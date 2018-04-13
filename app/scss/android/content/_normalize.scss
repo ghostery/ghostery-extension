@@ -1,0 +1,17 @@
+h2, p {
+	margin-bottom: 0;
+}
+
+ul {
+	margin-left: 0;
+	margin-bottom: 0;
+}
+
+button {
+	outline: 0;
+}
+
+html, body {
+	@include prefix('user-select', 'none');
+	font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}

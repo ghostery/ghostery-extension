@@ -1,0 +1,93 @@
+.chart-wrapper {
+	.trackers-chart {
+		display: inline-block;
+		margin-top: 5%;
+		margin-bottom: 20px;
+		width: 190px;
+		max-width: 100%;
+		position: relative;
+
+		#circle {
+			& > g {
+				fill: none;
+				stroke-width: 25;
+				 @include prefix('transform', 'translate(100px, 100px)');
+
+				 .path {
+						stroke-dashoffset: 0;
+						stroke-dasharray: var(--stroke-length, 0);
+						 @include prefix('animation', 'dash calc(var(--stroke-length, 0) / 2 * 1ms) linear alternate 1');
+
+						&[data-category='advertising'] {
+							stroke: #cb55cd;
+						}
+
+						&[data-category='audio_video_player'] {
+							stroke: #ef671e;
+						}
+
+						&[data-category='comments'] {
+							stroke: #43b7c5;
+						}
+
+						&[data-category='customer_interaction'] {
+							stroke: #fdc257;
+						}
+
+						&[data-category='essential'] {
+							stroke: #fc9734;
+						}
+
+						&[data-category='pornvertising'] {
+							stroke: #ecafc2;
+						}
+
+						&[data-category='site_analytics'] {
+							stroke: #87d7ef;
+						}
+
+						&[data-category='social_media'] {
+							stroke: #388ee8;
+						}
+
+						&[data-category='default'] {
+							stroke: #e8e8e8;
+						}
+					}
+			}
+		}
+
+		.trackers-num {
+			position: absolute;
+			top: 48%;
+			left: 50%;
+			@include prefix('transform', 'translate(-50%, -50%)');
+			text-align: center;
+
+			& > span {
+				&:first-child {
+					font-size: 40px;
+					font-weight: 400;
+					line-height: 51px;
+				}
+
+				&:last-child {
+					font-size: 17px;
+					line-height: 17px;
+					display: inline-block;
+				}
+			}
+		}
+	}
+
+	.trackers-blocked-num {
+		font-size: 20px;
+		.number {
+			color: #e74055;
+		}
+	}
+
+	&.paused {
+		@include prefix('filter', 'grayscale(100%)');
+	}
+}
