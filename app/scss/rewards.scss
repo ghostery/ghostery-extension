@@ -1,7 +1,7 @@
 //Import Global Partials
 @import "settings"; //includes _colors.scss
 
-.ghostery-rewards-container {
+.ghostery-rewards-container, :host {
 	z-index: 2147483647 !important;
 	font-family: $body-font-family!important;
 	position: fixed;

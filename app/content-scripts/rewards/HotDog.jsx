@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import msgModule from '../utils/msg';
 import { log } from '../../../src/utils/common';
-import '../../scss/rewards.scss';
 
 const msg = msgModule('hotdog');
 const { sendMessage } = msg;
