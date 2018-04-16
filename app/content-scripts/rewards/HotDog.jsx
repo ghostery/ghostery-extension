@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from "react-router-dom";
+import { withRouter } from 'react-router-dom';
 import msgModule from '../utils/msg';
 import { log } from '../../../src/utils/common';
 
@@ -10,7 +10,7 @@ const { onMessage } = chrome.runtime;
 class HotDog extends Component {
 	constructor(props) {
 		super(props);
-		console.log('constructor props:', props)
+		console.log('constructor props:', props);
 		this.state = {
 			closed: false
 		};
@@ -33,8 +33,8 @@ class HotDog extends Component {
 			<div>
 				{ this.state.closed !== true &&
 					<div>
-						<div onClick={this.navigate} className={`hot-dog-container`}>
-							<div className={`ghostery-reward-text`}>
+						<div onClick={this.navigate} className="hot-dog-container">
+							<div className="ghostery-reward-text">
 								1 {t('rewards_new_text')}!
 							</div>
 						</div>

@@ -33,7 +33,7 @@ const channelsSupported = (typeof chrome.runtime.connect === 'function');
 
 let port;
 /* TODO remove test reward data */
-let reward = {
+const reward = {
 	rewardCode: 'SDF75DSUI90',
 	expireTime: '14 days',
 	termsLink: 'https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/',
@@ -41,7 +41,7 @@ let reward = {
 	benefit: '2 Free',
 	headline: 'Audio Books',
 	description: 'Description of the offer. There is a lot of exciting stuff going on.'
-}
+};
 
 rewardsContainer.id = 'ghostery-rewards-container';
 rewardsContainer.className = 'show ghostery-rewards-container';
@@ -50,8 +50,8 @@ rewardsContainer.className = 'show ghostery-rewards-container';
 function handleMessages(request, sender, response) {
 	console.log(request);
 	/* TODO get new reward from request, and set it as new reward */
-	if (document.readyState === "complete") {
-		console.log('re render root react')
+	if (document.readyState === 'complete') {
+		console.log('re render root react');
 		ReactDOM.render(<MainView reward={reward} />, document.getElementById('ghostery-rewards-container'));
 	}
 }
@@ -97,5 +97,5 @@ if (BROWSER_INFO.name === 'chrome') {
 
 document.addEventListener('DOMContentLoaded', (event) => {
 	document.body.appendChild(rewardsContainer);
-	ReactDOM.render(<MainView reward={reward}/>, document.getElementById('ghostery-rewards-container'));
+	ReactDOM.render(<MainView reward={reward} />, document.getElementById('ghostery-rewards-container'));
 });
