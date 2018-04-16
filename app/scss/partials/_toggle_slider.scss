@@ -11,52 +11,45 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-.sub-component.toggle-slider {
-	.switch {
-		@extend %pointer;
-		margin-right: 52px;
-		align-self: flex-end;
-		position: relative;
-		width: 37px;
-		input {
-			display:none;
-		}
-		.slider {
-			border-radius: 34px;
-			height: 14px;
-			width: 37px;
-			position: relative;
-			display: block;
-			background-color: #C1C0C0;
-			-webkit-transition: .4s;
-			transition: .4s;
-		}
-		.slider-circle {
-			content: "";
-			border-radius: 50%;
-			position: absolute;
-			height: 20px;
-			width: 20px;
-			left: 0px;
-			top: -3px;
-			background-color: #F1F1F1;
-			border: 0.5px solid #979797;
-			-webkit-transition: .1s;
-			transition: .1s;
-		}
-		input:checked + .slider {
-			opacity: .5;
-			background-color: #930194;
-		}
-		input:focus + .slider {
-			box-shadow: 0 0 1px #2196F3;
-		}
-		input:checked + .slider + .slider-circle {
-			background-color: #930194;
-			border-color: #930194;
-			-webkit-transform: translateX(17px);
-			-ms-transform: translateX(17px);
-			transform: translateX(17px);
-		}
-	}
+.ToggleSlider__switch {}
+.ToggleSlider__switch {
+	@extend %pointer;
+	position: relative;
+	input { display:none; }
+}
+.ToggleSlider__slider {
+	position: relative;
+	display: block;
+	height: 14px;
+	width: 37px;
+	border-radius: 34px;
+	background-color: #c1c0c0;
+	-webkit-transition: .4s;
+	transition: .4s;
+}
+.ToggleSlider__slider_circle {
+	content: "";
+	position: absolute;
+	left: 0px;
+	top: -3px;
+	height: 20px;
+	width: 20px;
+	border-radius: 50%;
+	background-color: #f1f1f1;
+	border: 0.5px solid #979797;
+	-webkit-transition: .1s;
+	transition: .1s;
+}
+.ToggleSlider input:checked + .ToggleSlider__slider {
+	background-color: #c67cc6;
+}
+.ToggleSlider input:focus + .ToggleSlider__slider {
+	box-shadow: 0 0 1px #2196f3;
+}
+.ToggleSlider input:checked + .ToggleSlider__slider + .ToggleSlider__slider_circle {
+	background-color: #930194;
+	border-color: #930194;
+	-webkit-transform: translateX(17px);
+	-ms-transform: translateX(17px);
+	transform: translateX(17px);
 }

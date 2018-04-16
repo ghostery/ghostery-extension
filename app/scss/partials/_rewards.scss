@@ -1,0 +1,82 @@
+/**
+ * Rewards Panel Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+.full-height {
+	height: 100%;
+}
+
+.clickable {
+	@extend %pointer;
+}
+
+.RewardsPanel {
+	background-color: #ffffff;
+}
+
+.RewardsPanel__header {
+	padding: 10px 0;
+	background-color: $whisper;
+}
+.RewardsPanel--send-right {
+	position: absolute;
+	right: 0;
+}
+.RewardsPanel--inline-block {
+	display: inline-block;
+}
+.RewardsPanel--add-padding {
+	padding-left: 5px;
+	padding-right: 10px;
+}
+
+.RewardsPanel__title {
+	text-transform: uppercase;
+	font-size: 14px;
+	color: #9b9b9b;
+}
+.RewardsPanel__icon svg {
+	height: 40px;
+	width: auto;
+	margin-bottom: 40px;
+	.fill { fill: #9b9b9b; }
+	.no-fill { fill: none; }
+	.stroke { stroke: #9b9b9b; }
+}
+
+.RewardListItem {
+	height: 75px;
+	border: 1px solid #cecece;
+	border-radius: 0;
+}
+.RewardListItem.RewardListItem--unread + .RewardListItem.RewardListItem--unread,
+.RewardListItem:not(.RewardListItem--unread) + .RewardListItem:not(.RewardListItem--unread) {
+	border-top: 0;
+}
+.RewardListItem--unread {
+	border-color: #940090;
+	border-radius: 3px;
+	.RewardListItem__image_container {
+		border-color: #940090;
+	}
+}
+
+.RewardListItem__image_container {
+	height: 50px;
+	border-right: 1px solid #cecece;
+	padding-right: 10px;
+	margin-right: 15px;
+	svg { background-color: #efefef; }
+}
+.RewardListItem--add-padding {
+	padding: 5px 10px;
+}
