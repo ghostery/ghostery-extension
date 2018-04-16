@@ -202,7 +202,7 @@ const _showNotification = (state, action) => {
 			updated_notificationShown = false;
 		}
 
-		updated_notificationClasses = msg.classes;
+		updated_notificationClasses = msg.classes || '';
 		if (msg.filter === 'tooltip') {
 			updated_needsReload.changes = {};
 		}

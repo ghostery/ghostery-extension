@@ -64,6 +64,53 @@ export function removeFromArray(array, position) {
 }
 
 /**
+ * Calculates the time difference between two dates and returns the
+ * value in a computer interpretable way.
+ * @param  {datetime} start the beginning date-time
+ * @param  {datetime} end   the ending date-time
+ * @return {Object}         An object with:
+ *                            type: days, hours, minutes, seconds
+ *                            count: the number of days, hours, minutes, seconds
+ */
+export function computeTimeDelta(start, end) {
+	const time_delta = Math.abs(end.getTime() - start.getTime());
+
+	const day_ms = 1000 * 60 * 60 * 24;
+	const num_days = Math.round(time_delta / day_ms);
+	if (num_days >= 2) {
+		return {
+			count: num_days,
+			type: 'days',
+		};
+	}
+
+	const hour_ms = 1000 * 60 * 60;
+	const num_hours = Math.round(time_delta / hour_ms);
+	if (num_hours >= 2) {
+		return {
+			count: num_hours,
+			type: 'hours'
+		};
+	}
+
+	const min_ms = 1000 * 60;
+	const num_mins = Math.round(time_delta / min_ms);
+	if (num_mins >= 2) {
+		return {
+			count: num_mins,
+			type: 'mins'
+		};
+	}
+
+	const sec_ms = 1000;
+	const num_secs = Math.round(time_delta / sec_ms);
+	return {
+		count: num_secs,
+		type: 'secs'
+	};
+}
+
+/**
  * Check for valid email
  * @memberOf PanelUtils
  * @param  {string} email 		email to validate

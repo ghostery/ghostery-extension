@@ -110,6 +110,7 @@ class AdditionalFeaturesView extends Component {
 						</div>
 						<div className="columns shrink">
 							<ToggleSlider
+								className="AdditionalFeatures--add-padding"
 								isDisabled={IS_CLIQZ}
 								isChecked={this.props.antiTrack}
 								onChange={this._handleAntiTrack}
@@ -129,6 +130,7 @@ class AdditionalFeaturesView extends Component {
 						</div>
 						<div className="columns shrink">
 							<ToggleSlider
+								className="AdditionalFeatures--add-padding"
 								isDisabled={IS_CLIQZ}
 								isChecked={this.props.adBlock}
 								onChange={this._handleAdBlock}
@@ -148,6 +150,7 @@ class AdditionalFeaturesView extends Component {
 						</div>
 						<div className="columns shrink">
 							<ToggleSlider
+								className="AdditionalFeatures--add-padding"
 								isDisabled={IS_CLIQZ}
 								isChecked={this.props.smartBlock}
 								onChange={this._handleSmartBlock}
