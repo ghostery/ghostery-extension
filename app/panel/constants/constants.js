@@ -37,6 +37,11 @@ export const TOGGLE_EXPERT = 'TOGGLE_EXPERT';
 // detail
 export const TOGGLE_EXPANDED = 'TOGGLE_EXPANDED';
 
+// rewards
+export const GET_REWARDS_ACTIVE = 'GET_REWARDS_ACTIVE';
+export const REMOVE_REWARD_ID = 'REMOVE_REWARD_ID';
+export const TOGGLE_REWARDS_ACTIVE = 'TOGGLE_REWARDS_ACTIVE';
+
 // blocking
 export const GET_BLOCKING_DATA = 'GET_BLOCKING_DATA';
 export const UPDATE_CATEGORIES = 'UPDATE_CATEGORIES';

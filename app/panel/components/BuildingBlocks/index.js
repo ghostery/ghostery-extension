@@ -17,6 +17,7 @@ import GhosteryFeatures from './GhosteryFeatures';
 import NotScanned from './NotScanned';
 import PauseButton from './PauseButton';
 import ToggleSlider from './ToggleSlider';
+import RewardListItem from './RewardListItem';
 
 export {
 	CliqzFeatures,
@@ -24,5 +25,6 @@ export {
 	GhosteryFeatures,
 	NotScanned,
 	PauseButton,
-	ToggleSlider
+	ToggleSlider,
+	RewardListItem
 };

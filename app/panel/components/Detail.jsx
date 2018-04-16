@@ -19,7 +19,7 @@ import Summary from '../containers/SummaryContainer';
 import Blocking from '../containers/BlockingContainer';
 import History from './History';
 import Performance from './Performance';
-import Rewards from './Rewards';
+import Rewards from '../containers/RewardsContainer';
 import Premium from './Premium';
 /**
  * @class Implement wrapper of the detailed (expert) mode view.
