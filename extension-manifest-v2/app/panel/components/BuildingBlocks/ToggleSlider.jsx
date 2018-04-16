@@ -24,7 +24,7 @@ class ToggleSlider extends React.Component {
 		super(props);
 		this.state = {
 			checked: this.props.isChecked,
-		}
+		};
 
 		// Event Bindings
 		this._handleChange = this._handleChange.bind(this);
@@ -45,7 +45,7 @@ class ToggleSlider extends React.Component {
 	 * property in the parent.  Or it can just set the state directly.
 	 */
 	_handleChange(event) {
-		if (typeof this.props.onChange === "function") {
+		if (typeof this.props.onChange === 'function') {
 			this.props.onChange(event);
 		} else {
 			this.setState({
@@ -59,19 +59,21 @@ class ToggleSlider extends React.Component {
 	 * @return {JSX} JSX for rendering the Toggle Slider used throghout the extension
 	 */
 	render() {
-		const labelClassNames = ClassNames('switch', {
+		const compClassNames = ClassNames('ToggleSlider', this.props.className);
+		const labelClassNames = ClassNames('ToggleSlider__switch', {
 			disabled: this.props.isDisabled,
 		});
 
 		return (
-			<div className="sub-component toggle-slider">
+			<div className={compClassNames}>
 				<label className={labelClassNames}>
-					<input type="checkbox"
+					<input
+						type="checkbox"
 						onChange={this._handleChange}
 						checked={this.state.checked}
 					/>
-					<span className="slider" />
-					<span className="slider-circle" />
+					<span className="ToggleSlider__slider" />
+					<span className="ToggleSlider__slider_circle" />
 				</label>
 			</div>
 		);
