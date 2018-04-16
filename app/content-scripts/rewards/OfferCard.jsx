@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import msgModule from '../utils/msg';
 import { log } from '../../../src/utils/common';
 
@@ -10,7 +10,7 @@ const { onMessage } = chrome.runtime;
 class OfferCard extends Component {
 	constructor(props) {
 		super(props);
-		console.log('constructor props:', props)
+		console.log('constructor props:', props);
 		this.state = {
 			closed: false,
 			copyText: t('rewards_copy_code')
@@ -37,7 +37,6 @@ class OfferCard extends Component {
 				copyText: t('rewards_copy_code')
 			});
 		}, 3000);
-
 	}
 
 	close() {
@@ -83,7 +82,7 @@ class OfferCard extends Component {
 						</div>
 						<div className="reward-content-footer">
 							<span> {t('rewards_expire')} { this.props.reward.expireTime } </span>
-							<a target="_blank" href={ this.props.reward.termsLink }> { t('rewards_terms_conditions') } </a>
+							<a target="_blank" href={this.props.reward.termsLink}> { t('rewards_terms_conditions') } </a>
 						</div>
 						<a target="_blank" href={this.props.reward.redeemLink} className="reward-redeem">
 							{t('rewards_redeem_now')}
@@ -91,9 +90,9 @@ class OfferCard extends Component {
 					</div>
 					<div className="reward-footer">
 						<div className="reward-feedback">
-							<div className="reward-smile"></div>
+							<div className="reward-smile" />
 							<a>{t('rewards_disable')}</a>
-							<div className="reward-arrow"></div>
+							<div className="reward-arrow" />
 						</div>
 						<div className="reward-ghosty" />
 					</div>
