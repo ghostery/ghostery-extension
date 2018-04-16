@@ -22,7 +22,7 @@ class OfferCard extends Component {
 
 	copyCode() {
 		// copy code to clipboard
-		document.querySelector('.reward-code-input').select();
+		document.getElementsByClassName('shadowroot')[0].shadowRoot.querySelector('.reward-code-input').select();
 		document.execCommand('copy');
 
 		// 'copied' feedback for user
@@ -76,7 +76,7 @@ class OfferCard extends Component {
 								{/* { this.state.description } */}
 							</p>
 						</div>
-						<div className="reward-code">
+						<div onClick={this.copyCode} className="reward-code">
 							<input readOnly className="reward-code-input" value={this.props.reward.rewardCode} type="text" />
 							<a onClick={this.copyCode}>{this.state.copyText}</a>
 						</div>
