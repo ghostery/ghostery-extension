@@ -26,7 +26,7 @@ import OfferCard from './OfferCard';
 import globals from '../../../src/classes/Globals';
 import ShadowDOM from 'react-shadow';
 
-const { BROWSER_INFO } = globals;
+const { BROWSER_INFO, onMessage } = globals;
 const viewport = document.getElementById('viewport');
 const rewardsContainer = document.createElement('div');
 const channelsSupported = (typeof chrome.runtime.connect === 'function');
