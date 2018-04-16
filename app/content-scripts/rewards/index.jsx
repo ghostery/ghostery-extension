@@ -72,7 +72,7 @@ if (BROWSER_INFO.name === 'chrome') {
 		return (
 			<Router history={history}>
 				<ShadowDOM include={[chrome.extension.getURL('dist/css/rewards_styles.css')]}>
-					<div>
+					<div className="shadowroot">
 						<Route exact path="/" render={ ()=> <HotDog reward={props.reward} /> } />
 						<Route path="/hotdog" render={ ()=> <HotDog reward={props.reward} /> } />
 						<Route path="/offercard" render={ ()=> <OfferCard reward={props.reward} /> } />
