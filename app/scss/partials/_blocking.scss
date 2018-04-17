@@ -75,7 +75,7 @@
 			}
 			&.smart-blocked .warning-image,
 			&.smart-unblocked .warning-image {
-				background-image: buildSmartBlockIcon($button-purple);
+				background-image: buildIconSmartBlockingNoCircle(#1dafed);
 			}
 		}
 	}
