@@ -16,13 +16,23 @@ class OfferCard extends Component {
 			copyText: t('rewards_copy_code')
 		};
 
+		this.iframeEl = parent.document.getElementById('ghostery-iframe-container');
+		if (this.iframeEl) {
+			this.iframeEl.classList = '';
+			this.iframeEl.classList.add('offer-card');
+		}
+
 		this.close = this.close.bind(this);
 		this.copyCode = this.copyCode.bind(this);
 	}
 
 	copyCode() {
 		// copy code to clipboard
-		document.getElementsByClassName('shadowroot')[0].shadowRoot.querySelector('.reward-code-input').select();
+		if (document.getElementById('ghostery-shadow-root')) {
+			document.getElementById('ghostery-shadow-root').shadowRoot.querySelector('.reward-code-input').select();
+		} else {
+			document.getElementById('ghostery-iframe-container').contentWindow.document.querySelector('.reward-code-input').select();
+		}
 		document.execCommand('copy');
 
 		// 'copied' feedback for user
@@ -40,6 +50,9 @@ class OfferCard extends Component {
 	}
 
 	close() {
+		if (this.iframeEl) {
+			this.iframeEl.classList = '';
+		}
 		this.setState({
 			closed: true
 		});
@@ -48,7 +61,7 @@ class OfferCard extends Component {
 	render() {
 		console.log('render props:', this.props);
 		return (
-			<div>
+			<div className="ghostery-rewards-component">
 				{ this.state.closed !== true &&
 				<div className="ghostery-reward-card">
 					<div className="reward-card-header">
@@ -76,7 +89,7 @@ class OfferCard extends Component {
 								{/* { this.state.description } */}
 							</p>
 						</div>
-						<div onClick={this.copyCode} className="reward-code">
+						<div className="reward-code">
 							<input readOnly className="reward-code-input" value={this.props.reward.rewardCode} type="text" />
 							<a onClick={this.copyCode}>{this.state.copyText}</a>
 						</div>

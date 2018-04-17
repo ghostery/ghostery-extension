@@ -30,12 +30,12 @@ const t = chrome.i18n.getMessage;
 class Rewards {
 	constructor() {
 		this.rewardsData = {
-			rewardName: 'test-reward'
+
 		};
 		this.ports = new Map();
 	}
 
-	showCircle(tab_id) {
+	showHotDog(tab_id) {
 		/* @TODO get any initial data from cmp event and add to this.rewardsData */
 
 		const tab = tabInfo.getTabInfo(tab_id);
@@ -56,26 +56,15 @@ class Rewards {
 					this.ports.set(tabId, port);
 					this.ports.get(tabId).onMessage.addListener((message) => {
 						if (message.name === 'rewardsLoaded') {
-							this.ports.get(tabId).postMessage({ name: 'showCircle', message: this.rewardsData });
+							this.ports.get(tabId).postMessage({ name: 'showHotDog', message: this.rewardsData });
 						}
-						// else if (message.name === 'onCreateBox') {
-						// 	this.updateBox(tabId);
-						// } else if (message.name === 'onDestroyBox') {
-						// 	this.destroyBox(tabId);
-						// } else if (message.name === 'updateAlertConf') {
-						// 	conf.alert_expanded = message.message.alert_expanded;
-						// 	conf.alert_bubble_pos = message.message.alert_bubble_pos;
-						// 	conf.alert_bubble_timeout = message.message.alert_bubble_timeout;
-						// 	// push new settings to API
-						// 	accounts.pushUserSettings({ conf: accounts.buildUserSettings() });
-						// }
 					});
 				}
 			}
 		});
 
 		// console.log('INJECT REWARDS');
-		return injectScript(tab_id, 'dist/rewards.js', null, 'document_start').then(() => {
+		return injectScript(tab_id, 'dist/rewards.js', 'dist/css/rewards_styles.css', 'document_start').then(() => {
 			// console.log('REWARDS INJECTED');
 		}).catch((err) => {
 			log('rewards injectScript error', err);
