@@ -65,7 +65,7 @@ class OfferCard extends Component {
 				{ this.state.closed !== true &&
 				<div className="ghostery-reward-card">
 					<div className="reward-card-header">
-						<img className="rewards-logo-beta" />
+						<div className="rewards-logo-beta" />
 						<div className="reward-card-close" onClick={this.close} />
 					</div>
 					<div className="reward-content">
@@ -90,7 +90,10 @@ class OfferCard extends Component {
 							</p>
 						</div>
 						<div className="reward-code">
-							<input readOnly className="reward-code-input" value={this.props.reward.rewardCode} type="text" />
+							<div>
+								{this.props.reward.rewardCode}
+								<input readOnly className="reward-code-input" value={this.props.reward.rewardCode} type="text" />
+							</div>
 							<a onClick={this.copyCode}>{this.state.copyText}</a>
 						</div>
 						<div className="reward-content-footer">
