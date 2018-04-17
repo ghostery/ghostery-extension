@@ -14,15 +14,28 @@ class HotDog extends Component {
 		this.state = {
 			closed: false
 		};
+
+		this.iframeEl = parent.document.getElementById('ghostery-iframe-container');
+		if (this.iframeEl) {
+			this.iframeEl.classList = '';
+			this.iframeEl.classList.add('hot-dog');
+		}
+
 		this.close = this.close.bind(this);
 		this.navigate = this.navigate.bind(this);
 	}
 
 	navigate() {
+		if (this.iframeEl) {
+			this.iframeEl.classList.add('offer-card');
+		}
 		this.props.history.push('/offercard');
 	}
 
 	close() {
+		if (this.iframeEl) {
+			this.iframeEl.classList = '';
+		}
 		this.setState({
 			closed: true
 		});
@@ -30,7 +43,7 @@ class HotDog extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className="ghostery-rewards-component">
 				{ this.state.closed !== true &&
 					<div>
 						<div onClick={this.navigate} className="hot-dog-container">

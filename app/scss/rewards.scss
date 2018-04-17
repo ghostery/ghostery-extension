@@ -1,12 +1,29 @@
 //Import Global Partials
 @import "settings"; //includes _colors.scss
 
-.ghostery-rewards-container, :host {
+
+#ghostery-rewards-app, #ghostery-iframe-container {
 	z-index: 2147483647 !important;
 	font-family: $body-font-family!important;
 	position: fixed;
 	top: 30px;
 	right: 30px;
+}
+
+#ghostery-iframe-container {
+	border: none;
+	&.hot-dog {
+		height: 59px;
+		width: 266px;
+	}
+
+	&.offer-card {
+		width: 268px;
+		height: 531px;
+	}
+}
+
+.ghostery-rewards-component {
 
 	.hide {
 		visibility: hidden;
@@ -263,4 +280,9 @@
 		}
 	}
 
+}
+
+#ghostery-rewards-app.iframe-child {
+	top: 9px;
+	right: 1px;
 }
