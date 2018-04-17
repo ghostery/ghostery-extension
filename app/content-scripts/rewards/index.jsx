@@ -28,11 +28,15 @@ import ShadowDOM from 'react-shadow';
 
 const { BROWSER_INFO, onMessage } = globals;
 const viewport = document.getElementById('viewport');
-const rewardsContainer = document.createElement('div');
 const channelsSupported = (typeof chrome.runtime.connect === 'function');
-
+let rewardsContainer = document.createElement('div');
+let rewardsApp = document.createElement('div');
+let rewardsIframe;
+let iframeStyle;
 let port;
-/* TODO remove test reward data */
+let MainView;
+
+/* TODO massage offerz object into front end and remove mock data */
 const reward = {
 	rewardCode: 'SDF75DSUI90',
 	expireTime: '14 days',
@@ -43,16 +47,67 @@ const reward = {
 	description: 'Description of the offer. There is a lot of exciting stuff going on.'
 };
 
-rewardsContainer.id = 'ghostery-rewards-container';
-rewardsContainer.className = 'show ghostery-rewards-container';
-// rewardsContainer.attachShadow({mode: 'open'});
+rewardsApp.id = 'ghostery-rewards-app';
+rewardsApp.className = 'show';
+
+document.addEventListener('DOMContentLoaded', (event) => {
+	if (BROWSER_INFO.name === 'chrome') {
+		// use shadowDOM to encapsulate CSS - fully supported in Chrome
+		rewardsContainer.appendChild(rewardsApp);
+		document.body.appendChild(rewardsContainer);
+		MainView = (props) => {
+			return (
+				<Router history={history}>
+					<ShadowDOM include={[chrome.extension.getURL('dist/css/rewards_styles.css')]}>
+						<div id="ghostery-shadow-root">
+							<Route exact path="/" render={ ()=> <HotDog reward={props.reward} /> } />
+							<Route path="/hotdog" render={ ()=> <HotDog reward={props.reward} /> } />
+							<Route path="/offercard" render={ ()=> <OfferCard reward={props.reward} /> } />
+						</div>
+					</ShadowDOM>
+				</Router>
+			);
+		}
+		ReactDOM.render(<MainView reward={reward} />, rewardsApp);
+	} else {
+		// use iframe to encapsulate CSS - fallback for everything else besides chrome
+		rewardsIframe = document.createElement('iframe');
+		rewardsIframe.id = 'ghostery-iframe-container';
+		rewardsIframe.classList.add('hot-dog')
+		document.body.appendChild(rewardsIframe);
+		rewardsIframe.onload = () => {
+			iframeStyle = document.createElement('link');
+			iframeStyle.rel = 'stylesheet';
+			iframeStyle.type = 'text/css';
+			iframeStyle.href = chrome.extension.getURL('dist/css/rewards_styles.css');
+
+			rewardsIframe.contentWindow.document.head.appendChild(iframeStyle);
+			rewardsContainer = rewardsIframe.contentWindow.document.body;
+
+			rewardsApp.classList.add('iframe-child');
+			rewardsContainer.appendChild(rewardsApp);
+			MainView = (props) => {
+				return (
+					<Router history={history}>
+						<div>
+							<Route exact path="/" render={ ()=> <HotDog reward={props.reward} /> } />
+							<Route path="/hotdog" render={ ()=> <HotDog reward={props.reward} /> } />
+							<Route path="/offercard" render={ ()=> <OfferCard reward={props.reward} /> } />
+						</div>
+					</Router>
+				);
+			}
+			ReactDOM.render(<MainView reward={reward} />, rewardsApp);
+		}
+	};
+});
 
 function handleMessages(request, sender, response) {
 	console.log(request);
 	/* TODO get new reward from request, and set it as new reward */
 	if (document.readyState === 'complete') {
 		console.log('re render root react');
-		ReactDOM.render(<MainView reward={reward} />, document.getElementById('ghostery-rewards-container'));
+		ReactDOM.render(<MainView reward={reward} />, rewardsApp);
 	}
 }
 
@@ -65,37 +120,3 @@ if (channelsSupported) {
 } else {
 	onMessage.addListener(handleMessages);
 }
-
-let MainView;
-if (BROWSER_INFO.name === 'chrome') {
-	MainView = (props) => {
-		return (
-			<Router history={history}>
-				<ShadowDOM include={[chrome.extension.getURL('dist/css/rewards_styles.css')]}>
-					<div className="shadowroot">
-						<Route exact path="/" render={ ()=> <HotDog reward={props.reward} /> } />
-						<Route path="/hotdog" render={ ()=> <HotDog reward={props.reward} /> } />
-						<Route path="/offercard" render={ ()=> <OfferCard reward={props.reward} /> } />
-					</div>
-				</ShadowDOM>
-			</Router>
-		);
-	}
-} else {
-	MainView = (props) => {
-		return (
-			<Router history={history}>
-				<div>
-					<Route exact path="/" render={ ()=> <HotDog reward={props.reward} /> } />
-					<Route path="/hotdog" render={ ()=> <HotDog reward={props.reward} /> } />
-					<Route path="/offercard" render={ ()=> <OfferCard reward={props.reward} /> } />
-				</div>
-			</Router>
-		);
-	}
-}
-
-document.addEventListener('DOMContentLoaded', (event) => {
-	document.body.appendChild(rewardsContainer);
-	ReactDOM.render(<MainView reward={reward} />, document.getElementById('ghostery-rewards-container'));
-});

@@ -114,7 +114,7 @@ class EventHandlers {
 					tabInfo.setTabInfo(tabId, 'incognito', tab.incognito);
 					// purplebox.createBox() will first check to make sure this is a valid tab
 					this._createBox(tabId);
-					this.rewards.showCircle(tabId);
+					this.rewards.showHotDog(tabId);
 				}
 			}, () => {
 				// prefetched tabs will return an error from utils.getTab
