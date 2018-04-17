@@ -46,6 +46,7 @@ html body {
 }
 
 // Partial View SASS files
+@import './partials/_svgs';
 @import './partials/_header';
 @import './partials/_callout';
 @import './partials/_summary';
