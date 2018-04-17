@@ -1192,7 +1192,7 @@
 		"message": "Ghostery extension has been resumed."
 	},
 	"alert_anti_track_on": {
-		"message": "Enhanced Anti-Trackng ON. Personal data will be anonymized."
+		"message": "Enhanced Anti-Tracking ON. Personal data will be anonymized."
 	},
 	"alert_anti_track_off": {
 		"message": "Enhanced Anti-Tracking OFF. Personal data will not be anonymized."
