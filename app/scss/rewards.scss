@@ -120,10 +120,13 @@
 			}
 
 			.rewards-logo-beta {
+				flex: 1;
 				height: 13px;
 				margin-left: 8px;
 				align-self: center;
-				content: url('../images/rewards/ghostery-rewards-beta.png');
+				background-image: url('../images/rewards/ghostery-rewards-beta.png');
+				background-repeat: no-repeat;
+				background-size: auto 13px;
 			}
 		}
 
@@ -190,6 +193,23 @@
 				border-radius: 5px;
 				background-color: #f2f2f2;
 
+				div {
+					flex: 1;
+					user-select: text;
+					margin-left: 8px;
+					color: #494949;
+					align-self: center;
+					font-size: 13px;
+					font-weight: 500;
+					border: 0px;
+					background-color: transparent;
+					.reward-code-input {
+						opacity: 0;
+						position: absolute;
+						z-index: -1;
+					}
+				}
+
 				a {
 					text-align: right;
 					align-self: center;
@@ -201,18 +221,6 @@
 					cursor: pointer;
 				}
 
-				.reward-code-input {
-					user-select: text;
-					width: 100%;
-					flex: 1;
-					margin-left: 8px;
-					color: #494949;
-					align-self: center;
-					font-size: 13px;
-					font-weight: 500;
-					border: 0px;
-					background-color: transparent;
-				}
 			}
 
 			.reward-content-footer {
