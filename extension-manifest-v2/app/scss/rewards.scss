@@ -24,6 +24,10 @@
 }
 
 .ghostery-rewards-component {
+	* {
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
 
 	.hide {
 		visibility: hidden;
@@ -92,9 +96,7 @@
 	}
 
 	.ghostery-reward-card {
-		div {
-			color: $tundora;
-		}
+		color: $tundora;
 		background-color: #f2f2f2;
 		width: 265px;
 		height: 520px;
@@ -151,10 +153,6 @@
 			height: 450px;
 			border: 1px solid $dark-purple;
 			border-radius: 4px;
-
-			div, span, p {
-				color: $tundora;
-			}
 
 			.reward-content-header {
 				display: flex;
@@ -225,7 +223,6 @@
 					flex: 1;
 					user-select: text;
 					margin-left: 8px;
-					color: #494949;
 					align-self: center;
 					font-size: 13px;
 					font-weight: 500;
@@ -311,6 +308,45 @@
 				height: 100%;
 				align-self: flex-end;
 				margin-right: 8px;
+			}
+		}
+	}
+
+	.rewards-notification-container {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		text-align: center;
+		color: $white;
+
+		.rewards-notification {
+			margin-top: 17px;
+			margin-left: auto;
+			margin-right: auto;
+			height: 161px;
+			width: 210px;
+			background-color: $dark-purple;
+			display: flex;
+			flex-direction: column;
+			font-size: 13px;
+			line-height: 2;
+
+			.notification-text {
+				margin: 0px 22px 0px 22px;
+			}
+
+			a {
+				text-decoration: underline;
+				cursor: pointer;
+			}
+
+			.close {
+				cursor: pointer;
+				background-repeat: no-repeat;
+				height: 10px;
+				width: 10px;
+				align-self: flex-end;
+				margin: 10px 10px 0px 0px;
 			}
 		}
 	}
