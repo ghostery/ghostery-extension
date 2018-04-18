@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
 import msgModule from '../utils/msg';
 import { log } from '../../../src/utils/common';
@@ -22,17 +23,17 @@ class OfferCard extends Component {
 			this.iframeEl.classList.add('offer-card');
 		}
 
+		this.betaLogo = `url(${chrome.extension.getURL('app/images/rewards/ghostery-rewards-beta.png')})`;
+		this.closeIcon = `url(${chrome.extension.getURL('app/images/drawer/x.svg')})`;
+		this.ghostyGrey = `url(${chrome.extension.getURL('app/images/rewards/ghosty-grey.svg')})`;
+		this.kebabIcon = `url(${chrome.extension.getURL('app/images/rewards/settings-kebab.svg')})`;
+
 		this.close = this.close.bind(this);
 		this.copyCode = this.copyCode.bind(this);
 	}
 
 	copyCode() {
-		// copy code to clipboard
-		if (document.getElementById('ghostery-shadow-root')) {
-			document.getElementById('ghostery-shadow-root').shadowRoot.querySelector('.reward-code-input').select();
-		} else {
-			document.getElementById('ghostery-iframe-container').contentWindow.document.querySelector('.reward-code-input').select();
-		}
+		ReactDOM.findDOMNode(this).querySelector('.reward-code-input').select();
 		document.execCommand('copy');
 
 		// 'copied' feedback for user
@@ -65,29 +66,32 @@ class OfferCard extends Component {
 				{ this.state.closed !== true &&
 				<div className="ghostery-reward-card">
 					<div className="reward-card-header">
-						<div className="rewards-logo-beta" />
-						<div className="reward-card-close" onClick={this.close} />
+						<div className="rewards-logo-beta" style={{backgroundImage: this.betaLogo}} />
+						<div className="reward-card-close" onClick={this.close} style={{backgroundImage: this.closeIcon}} />
 					</div>
 					<div className="reward-content">
 						<div className="reward-content-header">
+							<div className="flex-grow" />
 							<div className="reward-company-logo">
 								<img src={this.props.reward.companyLogo} />
 							</div>
-							<div className="reward-settings-kebab" />
+							<div className="reward-settings-kebab" style={{backgroundImage: this.kebabIcon}} />
 						</div>
 						<div className="reward-content-img">
-							<img src={this.imgSrc} />
+							<div className="flex-grow" />
+							<img src={this.props.reward.contentImg} />
+							<div className="flex-grow" />
 						</div>
 						<div className="reward-content-detail">
 							<span className="reward-benefit">
-								{/* { this.state.benefit } */}
+								{ this.props.reward.benefit }
 							</span>
 							<span className="reward-headline">
-								{/* {this.state.headline} */}
+								{this.props.reward.headline}
 							</span>
-							<p className="reward-description">
-								{/* { this.state.description } */}
-							</p>
+							<span className="reward-description">
+								{ this.props.reward.description }
+							</span>
 						</div>
 						<div className="reward-code">
 							<div>
@@ -110,7 +114,7 @@ class OfferCard extends Component {
 							<a>{t('rewards_disable')}</a>
 							<div className="reward-arrow" />
 						</div>
-						<div className="reward-ghosty" />
+						<div className="reward-ghosty" style={{backgroundImage: this.ghostyGrey}} />
 					</div>
 				</div>}
 			</div>

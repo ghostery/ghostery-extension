@@ -21,6 +21,9 @@ class HotDog extends Component {
 			this.iframeEl.classList.add('hot-dog');
 		}
 
+		this.ghostyStar = `url(${chrome.extension.getURL('app/images/rewards/ghosty-star.svg')})`;
+		this.closeIcon = `url(${chrome.extension.getURL('app/images/rewards/light-x.svg')})`;
+
 		this.close = this.close.bind(this);
 		this.navigate = this.navigate.bind(this);
 	}
@@ -42,16 +45,17 @@ class HotDog extends Component {
 	}
 
 	render() {
+		console.log('render props', this.props);
 		return (
 			<div className="ghostery-rewards-component">
 				{ this.state.closed !== true &&
 					<div>
-						<div onClick={this.navigate} className="hot-dog-container">
+						<div onClick={this.navigate} className="hot-dog-container" style={{backgroundImage: this.ghostyStar}} >
 							<div className="ghostery-reward-text">
 								1 {t('rewards_new_text')}!
 							</div>
 						</div>
-						<div className="ghostery-reward-close" onClick={this.close} />
+						<div className="hot-dog-close" onClick={this.close} style={{backgroundImage: this.closeIcon}} />
 					</div>
 				}
 			</div>
