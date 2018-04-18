@@ -29,94 +29,129 @@ import ShadowDOM from 'react-shadow';
 const { BROWSER_INFO, onMessage } = globals;
 const viewport = document.getElementById('viewport');
 const channelsSupported = (typeof chrome.runtime.connect === 'function');
-let rewardsContainer = document.createElement('div');
-let rewardsApp = document.createElement('div');
-let rewardsIframe;
-let iframeStyle;
-let port;
-let MainView;
 
-/* TODO massage offerz object into front end and remove mock data */
-const reward = {
-	rewardCode: 'SDF75DSUI90',
-	expireTime: '14 days',
-	termsLink: 'https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/',
-	redeemLink: 'https://www.ghostery.com/',
-	benefit: '2 Free',
-	headline: 'Audio Books',
-	description: 'Description of the offer. There is a lot of exciting stuff going on.'
-};
+class RewardsApp {
+	constructor() {
+		this.reward = {
+			rewardCode: 'SDF75DSUI90',
+			expireTime: '14 days',
+			termsLink: 'https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/',
+			redeemLink: 'https://www.ghostery.com/',
+			benefit: '2 Free',
+			headline: 'Audio Books',
+			description: 'Description of the offer. There is a lot of exciting stuff going on.',
+			companyLogo: 'https://cdn.cliqz.com/extension/offers/test/resources/flaconi20-week/flaconi20-week-logo-long-1523970905.png',
+			contentImg: 'https://cdn.cliqz.com/extension/offers/test/resources/flaconi20-week/flaconi20-week-logo-long-1523970905.png'
+		};
 
-rewardsApp.id = 'ghostery-rewards-app';
-rewardsApp.className = 'show';
+		this.rewardsContainer = document.createElement('div');
+		this.rewardsApp = document.createElement('div');
+		this.rewardsIframe = null;;
+		this.iframeStyle = null;;
+		this.port = null;
+		this.mainView = null;
+		this.imgBlob = null;
+		this.rewardsApp.id = 'ghostery-rewards-app';
+		this.rewardsApp.className = 'show';
+		this.handleMessages = this.handleMessages.bind(this);
 
-document.addEventListener('DOMContentLoaded', (event) => {
-	if (BROWSER_INFO.name === 'chrome') {
+		this.init();
+	}
+
+	init() {
+		document.addEventListener('DOMContentLoaded', (event) => {
+			console.log('DOMContentLoaded');
+			if (BROWSER_INFO.name === 'chrome') {
+				this.renderShadow();
+			} else {
+				// use iframe to encapsulate CSS - fallback for everything else besides chrome
+				this.renderIframe();
+			};
+		});
+	}
+
+	renderShadow() {
 		// use shadowDOM to encapsulate CSS - fully supported in Chrome
-		rewardsContainer.appendChild(rewardsApp);
-		document.body.appendChild(rewardsContainer);
-		MainView = (props) => {
+		this.rewardsContainer.appendChild(this.rewardsApp);
+		document.body.appendChild(this.rewardsContainer);
+		this.mainView = (props) => {
 			return (
 				<Router history={history}>
 					<ShadowDOM include={[chrome.extension.getURL('dist/css/rewards_styles.css')]}>
 						<div id="ghostery-shadow-root">
 							<Route exact path="/" render={ ()=> <HotDog reward={props.reward} /> } />
 							<Route path="/hotdog" render={ ()=> <HotDog reward={props.reward} /> } />
-							<Route path="/offercard" render={ ()=> <OfferCard reward={props.reward} /> } />
+							<Route path="/offercard" render={ ()=> <OfferCard reward={props.reward} imgBlob={props.imgBlob} /> } />
 						</div>
 					</ShadowDOM>
 				</Router>
 			);
 		}
-		ReactDOM.render(<MainView reward={reward} />, rewardsApp);
-	} else {
-		// use iframe to encapsulate CSS - fallback for everything else besides chrome
-		rewardsIframe = document.createElement('iframe');
-		rewardsIframe.id = 'ghostery-iframe-container';
-		rewardsIframe.classList.add('hot-dog')
-		document.body.appendChild(rewardsIframe);
-		rewardsIframe.onload = () => {
-			iframeStyle = document.createElement('link');
-			iframeStyle.rel = 'stylesheet';
-			iframeStyle.type = 'text/css';
-			iframeStyle.href = chrome.extension.getURL('dist/css/rewards_styles.css');
+		this.renderReact();
+		this.initListener();
+	}
 
-			rewardsIframe.contentWindow.document.head.appendChild(iframeStyle);
-			rewardsContainer = rewardsIframe.contentWindow.document.body;
+	renderIframe() {
+		this.rewardsIframe = document.createElement('iframe');
+		this.rewardsIframe.id = 'ghostery-iframe-container';
+		this.rewardsIframe.classList.add('hot-dog')
+		document.body.appendChild(this.rewardsIframe);
+		this.rewardsIframe.onload = () => {
+			this.iframeStyle = document.createElement('link');
+			this.iframeStyle.rel = 'stylesheet';
+			this.iframeStyle.type = 'text/css';
+			this.iframeStyle.href = chrome.extension.getURL('dist/css/rewards_styles.css');
 
-			rewardsApp.classList.add('iframe-child');
-			rewardsContainer.appendChild(rewardsApp);
-			MainView = (props) => {
+			this.rewardsIframe.contentWindow.document.head.appendChild(this.iframeStyle);
+			this.rewardsContainer = this.rewardsIframe.contentWindow.document.body;
+
+			this.rewardsApp.classList.add('iframe-child');
+			this.rewardsContainer.appendChild(this.rewardsApp);
+			this.mainView = (props) => {
 				return (
 					<Router history={history}>
 						<div>
 							<Route exact path="/" render={ ()=> <HotDog reward={props.reward} /> } />
 							<Route path="/hotdog" render={ ()=> <HotDog reward={props.reward} /> } />
-							<Route path="/offercard" render={ ()=> <OfferCard reward={props.reward} /> } />
+							<Route path="/offercard" render={ ()=> <OfferCard reward={props.reward} imgBlob={props.imgBlob} /> } />
 						</div>
 					</Router>
 				);
 			}
-			ReactDOM.render(<MainView reward={reward} />, rewardsApp);
+			this.renderReact();
+			this.initListener();
 		}
-	};
-});
-
-function handleMessages(request, sender, response) {
-	console.log(request);
-	/* TODO get new reward from request, and set it as new reward */
-	if (document.readyState === 'complete') {
-		console.log('re render root react');
-		ReactDOM.render(<MainView reward={reward} />, rewardsApp);
 	}
+
+	initListener() {
+		if (channelsSupported) {
+			this.port = chrome.runtime.connect({ name: 'rewardsPort' });
+			if (this.port) {
+				this.port.onMessage.addListener(this.handleMessages);
+				this.port.postMessage({ name: 'rewardsLoaded' });
+			}
+		} else {
+			onMessage.addListener(this.handleMessages);
+		}
+	}
+
+	handleMessages(request, sender, response) {
+		console.log('postMessage request', request);
+		if (request.name === 'showHotDog') {
+			console.log('showHotDog postMessage');
+		}
+		console.log(document.readyState);
+		if (document.readyState === 'complete' || document.readyState === 'interactive') {
+			console.log('re render root react');
+			this.renderReact();
+		}
+	}
+
+	renderReact() {
+		let MainView = this.mainView;
+		ReactDOM.render(<MainView reward={this.reward} imgBlob={this.imgBlob} />, this.rewardsApp);
+	}
+
 }
 
-if (channelsSupported) {
-	port = chrome.runtime.connect({ name: 'rewardsPort' });
-	if (port) {
-		port.onMessage.addListener(handleMessages);
-		port.postMessage({ name: 'rewardsLoaded' });
-	}
-} else {
-	onMessage.addListener(handleMessages);
-}
+new RewardsApp();

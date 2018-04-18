@@ -46,7 +46,6 @@
 		width: 265px;
 		opacity: 1;
 		white-space: nowrap;
-		background-image: url('../images/rewards/ghosty-star.svg');
 		background-repeat: no-repeat;
 		background-position: left 22px center;
 		border-bottom: 0px;
@@ -62,7 +61,7 @@
 		transition: visibility 1s;
 	}
 
-	.ghostery-reward-close {
+	.hot-dog-close {
 		width: 21px;
 		height: 21px;
 		border: 1px solid $dark-purple;
@@ -71,7 +70,6 @@
 		border-radius: 50%;
 		right: 6px;
 		top: -9px;
-		background-image: url('data:image/svg+xml;charset=US-ASCII,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0A%3Csvg%20width%3D%2210px%22%20height%3D%2210px%22%20viewBox%3D%220%200%2010%2010%22%20version%3D%221.1%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20xmlns%3Axlink%3D%22http%3A//www.w3.org/1999/xlink%22%3E%0A%20%20%20%20%3C%21--%20Generator%3A%20Sketch%2048.2%20%2847327%29%20-%20http%3A//www.bohemiancoding.com/sketch%20--%3E%0A%20%20%20%20%3Ctitle%3EFill%202%3C/title%3E%0A%20%20%20%20%3Cdesc%3ECreated%20with%20Sketch.%3C/desc%3E%0A%20%20%20%20%3Cdefs%3E%3C/defs%3E%0A%20%20%20%20%3Cg%20id%3D%22strong-rewards-notification-Main-Copy-2%22%20stroke%3D%22none%22%20stroke-width%3D%221%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%20transform%3D%22translate%28-2782.000000%2C%20-2929.000000%29%22%3E%0A%20%20%20%20%20%20%20%20%3Cg%20id%3D%22Group-25%22%20transform%3D%22translate%282176.000000%2C%202563.000000%29%22%20fill%3D%22%239B9B9B%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cpath%20d%3D%22M612.718565%2C371%20L615.642492%2C368.075748%20C616.11744%2C367.601125%20616.11744%2C366.831159%20615.642492%2C366.356211%20C615.167545%2C365.881263%20614.397578%2C365.881263%20613.924252%2C366.356211%20L611%2C369.281435%20L608.075748%2C366.356211%20C607.601125%2C365.881263%20606.831159%2C365.881263%20606.356211%2C366.356211%20C605.881263%2C366.831159%20605.881263%2C367.601125%20606.356211%2C368.075748%20L609.280138%2C371%20L606.356211%2C373.924252%20C605.881263%2C374.398875%20605.881263%2C375.168841%20606.356211%2C375.643789%20C606.831159%2C376.118737%20607.601125%2C376.118737%20608.074776%2C375.643789%20L611%2C372.718565%20L613.924252%2C375.642492%20C614.398875%2C376.11744%20615.168841%2C376.11744%20615.643789%2C375.642492%20C616.118737%2C375.167545%20616.118737%2C374.397578%20615.643789%2C373.922955%20L612.718565%2C371%20Z%22%20id%3D%22Fill-2%22%3E%3C/path%3E%0A%20%20%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%3C/g%3E%0A%3C/svg%3E');
 		background-repeat: no-repeat;
 		background-position: center center;
 		background-size: 9px;
@@ -115,7 +113,6 @@
 				margin-left: auto;
 				height: 10px;
 				width: 10px;
-				background-image: url('../images/drawer/x.svg');
 				background-repeat: no-repeat;
 			}
 
@@ -124,7 +121,6 @@
 				height: 13px;
 				margin-left: 8px;
 				align-self: center;
-				background-image: url('../images/rewards/ghostery-rewards-beta.png');
 				background-repeat: no-repeat;
 				background-size: auto 13px;
 			}
@@ -133,7 +129,14 @@
 		.reward-content-img {
 			height: 150px;
 			width: 247px;
-			background-color: $silver;
+			background-color: $mercury;
+			display: flex;
+			align-items: center;
+
+			img {
+				width: auto;
+				height: auto;
+			}
 		}
 
 		.reward-content {
@@ -159,28 +162,53 @@
 				height: 48px;
 				width: 100%;
 				justify-content: flex-end;
+				align-items: center;
 
 				.reward-company-logo {
+					width: 94px;
+					height: 37px;
+					display: flex;
+					align-items: center;
 
+					img {
+						width: 100%;
+						height: auto;
+					}
 				}
 
 				.reward-settings-kebab {
-					background-image: url('data:image/svg+xml;charset=US-ASCII,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0A%3Csvg%20width%3D%224px%22%20height%3D%2215px%22%20viewBox%3D%220%200%204%2015%22%20version%3D%221.1%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20xmlns%3Axlink%3D%22http%3A//www.w3.org/1999/xlink%22%3E%0A%20%20%20%20%3C%21--%20Generator%3A%20Sketch%2048.2%20%2847327%29%20-%20http%3A//www.bohemiancoding.com/sketch%20--%3E%0A%20%20%20%20%3Ctitle%3Enoun_880268%3C/title%3E%0A%20%20%20%20%3Cdesc%3ECreated%20with%20Sketch.%3C/desc%3E%0A%20%20%20%20%3Cdefs%3E%3C/defs%3E%0A%20%20%20%20%3Cg%20id%3D%22strong-rewards-notification-Main-Copy-2%22%20stroke%3D%22none%22%20stroke-width%3D%221%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%20transform%3D%22translate%28-2993.000000%2C%20-2985.000000%29%22%3E%0A%20%20%20%20%20%20%20%20%3Cg%20id%3D%22Group-25%22%20transform%3D%22translate%282176.000000%2C%202563.000000%29%22%20fill%3D%22%239B9B9B%22%20fill-rule%3D%22nonzero%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cg%20id%3D%22noun_880268%22%20transform%3D%22translate%28817.000000%2C%20422.000000%29%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Crect%20id%3D%22Rectangle-path%22%20x%3D%220.0857142857%22%20y%3D%220.166666667%22%20width%3D%223.85714286%22%20height%3D%223.75%22%3E%3C/rect%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Crect%20id%3D%22Rectangle-path%22%20x%3D%220.0857142857%22%20y%3D%225.63888889%22%20width%3D%223.85714286%22%20height%3D%223.75%22%3E%3C/rect%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Crect%20id%3D%22Rectangle-path%22%20x%3D%220.0857142857%22%20y%3D%2211.0833333%22%20width%3D%223.85714286%22%20height%3D%223.75%22%3E%3C/rect%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%3C/g%3E%0A%3C/svg%3E');
+					cursor: pointer;
+					width: 20px;
+					height: 37px;
 					background-repeat: no-repeat;
+					background-position: 6px;
 				}
 
 			}
 
 			.reward-content-detail {
 				display: flex;
-				flex-wrap: wrap;
 				flex-direction: column;
 				width: 195px;
 				height: 131px;
+				color: $tundora;
 
 				.reward-benefit {
 					margin-top: 18px;
 					margin-bottom: 12px;
+					font-size: 34px;
+					line-height: 26px;
+				}
+
+				.reward-headline {
+					font-size: 16px;
+					line-height: 16px;
+				}
+
+				.reward-description {
+					margin-top: 14px;
+					font-size: 13px;
+					line-height:  15px;
 				}
 
 			}
@@ -278,7 +306,6 @@
 
 			.reward-ghosty {
 				flex: 1;
-				background-image: url('data:image/svg+xml;charset=US-ASCII,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0A%3Csvg%20width%3D%2215px%22%20height%3D%2216px%22%20viewBox%3D%220%200%2015%2016%22%20version%3D%221.1%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20xmlns%3Axlink%3D%22http%3A//www.w3.org/1999/xlink%22%3E%0A%20%20%20%20%3C%21--%20Generator%3A%20Sketch%2048.2%20%2847327%29%20-%20http%3A//www.bohemiancoding.com/sketch%20--%3E%0A%20%20%20%20%3Ctitle%3EFill%203%3C/title%3E%0A%20%20%20%20%3Cdesc%3ECreated%20with%20Sketch.%3C/desc%3E%0A%20%20%20%20%3Cdefs%3E%3C/defs%3E%0A%20%20%20%20%3Cg%20id%3D%22strong-rewards-notification-Main-Copy-2%22%20stroke%3D%22none%22%20stroke-width%3D%221%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%20transform%3D%22translate%28-2775.000000%2C%20-3410.000000%29%22%3E%0A%20%20%20%20%20%20%20%20%3Cg%20id%3D%22Group-25%22%20transform%3D%22translate%282176.000000%2C%202563.000000%29%22%20fill%3D%22%23C8C7C2%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cpath%20d%3D%22M613.575874%2C860.286737%20C612.864956%2C858.760949%20612.742619%2C857.468198%20612.723444%2C856.960238%20L612.723444%2C852.780808%20C612.723444%2C849.588045%20609.936532%2C847%20606.498912%2C847%20C603.060908%2C847%20600.2739%2C849.588045%20600.2739%2C852.780808%20L600.2739%2C857.020655%20C600.247247%2C857.567046%20600.107556%2C858.820367%20599.42425%2C860.286737%20C598.505474%2C862.257162%20599.265672%2C862.022397%20599.946772%2C861.860224%20C600.627681%2C861.698778%20602.148364%2C861.065985%20602.623524%2C861.845597%20C603.0983%2C862.624754%20603.494458%2C863.30161%20604.603067%2C862.860246%20C605.711773%2C862.419335%20606.234199%2C862.272244%20606.39249%2C862.272244%20L606.60773%2C862.272244%20C606.765925%2C862.272244%20607.288543%2C862.419335%20608.397057%2C862.860246%20C609.505763%2C863.30161%20609.901825%2C862.624754%20610.376888%2C861.845597%20C610.85176%2C861.065985%20612.372347%2C861.698778%20613.053448%2C861.860224%20C613.734452%2C862.022397%20614.494362%2C862.257162%20613.575874%2C860.286737%20M604.577564%2C850.152152%20C605.248023%2C850.152152%20605.791637%2C850.950843%20605.791637%2C851.936328%20C605.791637%2C852.921903%20605.248023%2C853.720776%20604.577564%2C853.720776%20C603.907106%2C853.720776%20603.363396%2C852.921903%20603.363396%2C851.936328%20C603.363396%2C850.950843%20603.907106%2C850.152152%20604.577564%2C850.152152%20M606.498912%2C857.283948%20C605.021469%2C857.283948%20603.77777%2C855.933597%20603.402992%2C854.430975%20C604.126757%2C855.355225%20605.244092%2C855.949042%20606.498912%2C855.949042%20C607.75354%2C855.949042%20608.870874%2C855.355225%20609.594735%2C854.430975%20C609.219957%2C855.933597%20607.976067%2C857.283948%20606.498912%2C857.283948%20M608.420355%2C853.720776%20C607.749321%2C853.720776%20607.205994%2C852.921903%20607.205994%2C851.936328%20C607.205994%2C850.950843%20607.749321%2C850.152152%20608.420355%2C850.152152%20C609.091101%2C850.152152%20609.634236%2C850.950843%20609.634236%2C851.936328%20C609.634236%2C852.921903%20609.091101%2C853.720776%20608.420355%2C853.720776%22%20id%3D%22Fill-3%22%3E%3C/path%3E%0A%20%20%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%3C/g%3E%0A%3C/svg%3E');
 				background-repeat: no-repeat;
 				background-position: center right;
 				height: 100%;
