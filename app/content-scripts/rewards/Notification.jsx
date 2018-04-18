@@ -23,7 +23,7 @@ class Notification extends Component {
 	render() {
 		return(
 			<div>
-				{!this.state.closed && <div className="rewards-notification-container">
+				{!this.state.closed && <div className="rewards-notification-container rewards-popup-container">
 					<div className="rewards-notification">
 						<div className="close" onClick={this.close} style={{backgroundImage: this.closeIcon}} />
 						<div className="notification-text">{t('rewards_disable_notification')}</div>
