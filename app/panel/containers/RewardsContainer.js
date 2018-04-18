@@ -12,6 +12,7 @@
  */
 
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import Rewards from '../components/Rewards';
 import * as actions from '../actions/RewardsActions';
@@ -37,11 +38,11 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state.rewards, {}
 const mapDispatchToProps = (dispatch, ownProps) => ({ actions: bindActionCreators(actions, dispatch) });
 
 /**
- * Connects Rewards view component to the Redux store.
+ * Connects Rewards view component to the Redux store. Pass updated match, location, and history props to the wrapped component.
  * @memberof PanelContainers
  * @param {function} mapStateToProps 		maps redux store state properties to Detailed view own properties
  * @param {function} mapDispatchToProps 	binds Detailed view component action creators
  * @return {Object}  						A higher-order React component class that passes state and action
  *                           				creators into Detailed view component. Used by React framework.
  */
-export default connect(mapStateToProps, mapDispatchToProps)(Rewards);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Rewards));
