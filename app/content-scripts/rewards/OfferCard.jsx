@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
 import msgModule from '../utils/msg';
 import { log } from '../../../src/utils/common';
+import Notification from './Notification';
 
 const msg = msgModule('rewards');
 const { sendMessage } = msg;
@@ -14,7 +15,8 @@ class OfferCard extends Component {
 		console.log('constructor props:', props);
 		this.state = {
 			closed: false,
-			copyText: t('rewards_copy_code')
+			copyText: t('rewards_copy_code'),
+			showNotification: false
 		};
 
 		this.iframeEl = parent.document.getElementById('ghostery-iframe-container');
@@ -30,6 +32,7 @@ class OfferCard extends Component {
 
 		this.close = this.close.bind(this);
 		this.copyCode = this.copyCode.bind(this);
+		this.disableRewards = this.disableRewards.bind(this);
 	}
 
 	copyCode() {
@@ -50,6 +53,12 @@ class OfferCard extends Component {
 		}, 3000);
 	}
 
+	disableRewards() {
+		this.setState({
+			showNotification: true
+		});
+	}
+
 	close() {
 		if (this.iframeEl) {
 			this.iframeEl.classList = '';
@@ -61,10 +70,14 @@ class OfferCard extends Component {
 
 	render() {
 		console.log('render props:', this.props);
+		console.log('render state:', this.state);
 		return (
 			<div className="ghostery-rewards-component">
 				{ this.state.closed !== true &&
 				<div className="ghostery-reward-card">
+					{ this.state.showNotification &&
+						<Notification closeCallback={this.close} />
+					}
 					<div className="reward-card-header">
 						<div className="rewards-logo-beta" style={{backgroundImage: this.betaLogo}} />
 						<div className="reward-card-close" onClick={this.close} style={{backgroundImage: this.closeIcon}} />
@@ -111,7 +124,7 @@ class OfferCard extends Component {
 					<div className="reward-footer">
 						<div className="reward-feedback">
 							<div className="reward-smile" />
-							<a>{t('rewards_disable')}</a>
+							<a onClick={this.disableRewards}>{t('rewards_disable')}</a>
 							<div className="reward-arrow" />
 						</div>
 						<div className="reward-ghosty" style={{backgroundImage: this.ghostyGrey}} />
