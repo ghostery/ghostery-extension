@@ -28,6 +28,11 @@
 		padding: 10px 0 0 10px;
 		text-align: left;
 	}
+	&.ab-pause .sub-component.pause-button {
+		.button-pause {
+			font-size: 11px;
+		}
+	}
 	&.expert.ab-pause .pause-button-container {
 		padding: 10px 0 0 0;
 		text-align: center;
