@@ -29,10 +29,9 @@ const t = chrome.i18n.getMessage;
  */
 class Rewards {
 	constructor() {
-		this.rewardsData = {
-
-		};
+		this.rewardsData = {};
 		this.ports = new Map();
+		this.channelsSupported = (typeof chrome.runtime.onConnect === 'object');
 	}
 
 	showHotDog(tab_id) {
@@ -49,19 +48,29 @@ class Rewards {
 		// Inject script cannot handle errors properly, but we call createBox after verifying that the tab is OK
 		// So update hotdog status for this tab
 		tabInfo.setTabInfo(tab_id, 'rewards', true);
-		chrome.runtime.onConnect.addListener((port) => {
-			if (port && port.name === 'rewardsPort' && port.sender && port.sender.tab && port.sender.tab.id) {
-				const tabId = port.sender.tab.id;
-				if (!this.ports.has(tabId)) {
-					this.ports.set(tabId, port);
-					this.ports.get(tabId).onMessage.addListener((message) => {
-						if (message.name === 'rewardsLoaded') {
-							this.ports.get(tabId).postMessage({ name: 'showHotDog', message: this.rewardsData });
-						}
-					});
-				}
+
+		if (this.channelsSupported) {
+			if (this.ports.has(tab_id)) {
+				this.ports.get(tab_id).disconnect();
+				this.ports.delete(tab_id);
 			}
-		});
+			if (!this.connectListenerAdded) {
+				this.connectListenerAdded = true;
+				chrome.runtime.onConnect.addListener((port) => {
+					if (port && port.name === 'rewardsPort' && port.sender && port.sender.tab && port.sender.tab.id) {
+						const tabId = port.sender.tab.id;
+						if (!this.ports.has(tabId)) {
+							this.ports.set(tabId, port);
+							this.ports.get(tabId).onMessage.addListener((message) => {
+								if (message.name === 'rewardsLoaded') {
+									this.ports.get(tabId).postMessage({ name: 'showHotDog', rewardsData: this.rewardsData });
+								}
+							});
+						}
+					}
+				});
+			}
+		}
 
 		// console.log('INJECT REWARDS');
 		return injectScript(tab_id, 'dist/rewards.js', 'dist/css/rewards_styles.css', 'document_start').then(() => {
