@@ -15,7 +15,8 @@ import {
 	GET_REWARDS_ACTIVE,
 	REMOVE_REWARD_ID,
 	SHOW_NOTIFICATION,
-	TOGGLE_REWARDS_ACTIVE
+	TOGGLE_REWARDS_ACTIVE,
+	UPDATE_REWARD
 } from '../constants/constants';
 
 /**
@@ -34,19 +35,25 @@ export function getActiveRewards() {
 						{
 							id: 0,
 							unread: true,
+							code: 'MTWAFFEWEREXDF1E',
 							text: '2 Free Audio Books',
+							description: 'Description of the offer. There is a lot of exciting stuff going on.',
 							expires: (new Date()).setDate(dateNow.getDate() + 14),
 						},
 						{
 							id: 1,
 							unread: true,
+							code: 'MTWAFFEWEREXDF2E',
 							text: 'Save $150',
+							description: 'Description of the offer. There is a lot of exciting stuff going on.',
 							expires: (new Date()).setDate(dateNow.getDate() + 30),
 						},
 						{
 							id: 2,
 							unread: true,
+							code: 'MTWAFFEWEREXDF3E',
 							text: 'Save $75',
+							description: 'Description of the offer. There is a lot of exciting stuff going on.',
 							expires: (new Date()).setDate(dateNow.getDate() + 60),
 						},
 					],
@@ -75,6 +82,18 @@ export function removeReward(id) {
 export function toggleRewardsActive() {
 	return {
 		type: TOGGLE_REWARDS_ACTIVE
+	};
+}
+
+/**
+ * Updates an existing reward
+ * @param {Object} data
+ * @return {Object}
+ */
+export function updateReward(data) {
+	return {
+		type: UPDATE_REWARD,
+		data,
 	};
 }
 

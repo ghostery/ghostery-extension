@@ -12,11 +12,12 @@
  */
 
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import ClassNames from 'classnames';
 import { computeTimeDelta } from '../../utils/utils';
 
 /**
- * @class Implements a single reward for the Rewards Panel
+ * @class Implements a single reward in a list for the Rewards Panel
  * @memberof PanelClasses
  */
 class RewardListItem extends React.Component {
@@ -30,8 +31,12 @@ class RewardListItem extends React.Component {
 
 	/**
 	 * Handle clicking on the close button
+	 * @param  {Object} event the click event
 	 */
-	clickCloseButton() {
+	clickCloseButton(event) {
+		// Prevent the event from propagating and linking to the Reward Detail
+		event.preventDefault();
+
 		const { id } = this.props;
 		this.props.clickCloseButton(id);
 	}
@@ -52,20 +57,26 @@ class RewardListItem extends React.Component {
 	 * @return {JSX} JSX for rendering a Reward within the Rewards List
 	 */
 	render() {
-		const { unread, text } = this.props;
+		const { unread, text, id } = this.props;
 		const itemClassName = ClassNames('RewardListItem', 'row', {
 			'RewardListItem--unread': unread,
 			clickable: true,
 		});
+		const buttonContainerClassNames = ClassNames('flex-container flex-dir-column align-justify full-height', {
+			'RewardsPanel--more-right': true,
+		});
 		const closeButtonClassNames = ClassNames({
-			'RewardsPanel--send-right': true,
+			RewardListItem__close_button: true,
 			'RewardListItem--add-padding': true,
-			'align-self-top': true,
 			clickable: true,
+		});
+		const detailsButtonClassNames = ClassNames({
+			RewardListItem__details_link: true,
+			'RewardListItem--add-padding': true,
 		});
 
 		return (
-			<div className={itemClassName}>
+			<Link to={`/detail/rewards/detail/${id}`} className={itemClassName}>
 				<div className="small-12 columns">
 					<div className="flex-container align-middle full-height">
 						<div className="RewardListItem__image_container flex-container align-center">
@@ -73,18 +84,25 @@ class RewardListItem extends React.Component {
 								<path d="M0,0L95,50M95,0L0,50" />
 							</svg>
 						</div>
-						<div>
+						<div className="flex-child-grow">
 							<div>{ text }</div>
 							<div>{ this.renderExpiresText() }</div>
 						</div>
-						<div className={closeButtonClassNames} onClick={this.clickCloseButton}>
-							<svg height="12" width="12" fill="none" stroke="#9b9b9b" strokeWidth="2" strokeLinecap="round">
-								<path d="M2,2L10,10M2,10L10,2" />
-							</svg>
+						<div className={buttonContainerClassNames}>
+							<div className={closeButtonClassNames} onClick={this.clickCloseButton}>
+								<svg height="12" width="12">
+									<path d="M2,2L10,10M2,10L10,2" />
+								</svg>
+							</div>
+							<div className={detailsButtonClassNames}>
+								<svg height="18" width="12">
+									<path d="M2,2L10,9L2,16" />
+								</svg>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</Link>
 		);
 	}
 }

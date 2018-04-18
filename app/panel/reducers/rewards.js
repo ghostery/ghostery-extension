@@ -14,7 +14,8 @@
 import {
 	GET_REWARDS_ACTIVE,
 	REMOVE_REWARD_ID,
-	TOGGLE_REWARDS_ACTIVE
+	TOGGLE_REWARDS_ACTIVE,
+	UPDATE_REWARD
 } from '../constants/constants';
 
 const initialState = {
@@ -40,7 +41,7 @@ export default (state = initialState, action) => {
 		}
 		case REMOVE_REWARD_ID: {
 			const { rewards } = state;
-			const filtered = rewards.filter(el => el.id !== action.data.id);
+			const filtered = rewards.filter(item => item.id !== action.data.id);
 			return Object.assign({}, state, {
 				rewards: filtered,
 			});
@@ -52,6 +53,19 @@ export default (state = initialState, action) => {
 			return Object.assign({}, state, {
 				rewards: updatedRewards,
 				rewardsActive: updatedRewardsActive,
+			});
+		}
+		case UPDATE_REWARD: {
+			const { rewards } = state;
+			const updated = rewards.map((item) => {
+				if (item.id === action.data.id) {
+					return { ...item, ...action.data };
+				}
+				return item;
+			});
+
+			return Object.assign({}, state, {
+				rewards: updated,
 			});
 		}
 		default: return state;
