@@ -319,13 +319,28 @@
 		}
 	}
 
-	.rewards-notification-container {
+	.rewards-popup-container {
 		width: 100%;
 		height: 100%;
 		position: absolute;
 		text-align: center;
 		color: $white;
+	}
 
+	.rewards-settings-container {
+		.rewards-settings {
+			position: absolute;
+			margin-left: -195px;
+			margin-top: -10px;
+			height: 94px;
+			width: 175px;
+			background-color: $white;
+			border: 1px solid #9b9b9b;
+			border-radius: 4px;
+		}
+	}
+
+	.rewards-notification-container {
 		.rewards-notification {
 			margin-top: 17px;
 			margin-left: auto;

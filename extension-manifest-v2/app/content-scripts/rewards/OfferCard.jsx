@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import msgModule from '../utils/msg';
 import { log } from '../../../src/utils/common';
 import Notification from './Notification';
+import Settings from './Settings';
+import ClickOutside from '../../panel/components/helpers/ClickOutside';
 
 const msg = msgModule('rewards');
 const { sendMessage } = msg;
@@ -16,7 +18,8 @@ class OfferCard extends Component {
 		this.state = {
 			closed: false,
 			copyText: t('rewards_copy_code'),
-			showNotification: false
+			showNotification: false,
+			showSettings: false
 		};
 
 		this.iframeEl = parent.document.getElementById('ghostery-iframe-container');
@@ -33,6 +36,7 @@ class OfferCard extends Component {
 		this.close = this.close.bind(this);
 		this.copyCode = this.copyCode.bind(this);
 		this.disableRewards = this.disableRewards.bind(this);
+		this.toggleSettings = this.toggleSettings.bind(this);
 	}
 
 	copyCode() {
@@ -53,6 +57,13 @@ class OfferCard extends Component {
 		}, 3000);
 	}
 
+	toggleSettings(e) {
+		console.log('toggle settings')
+		this.setState({
+			showSettings: !this.state.showSettings
+		});
+	}
+
 	disableRewards() {
 		this.setState({
 			showNotification: true
@@ -70,7 +81,6 @@ class OfferCard extends Component {
 
 	render() {
 		console.log('render props:', this.props);
-		console.log('render state:', this.state);
 		return (
 			<div className="ghostery-rewards-component">
 				{ this.state.closed !== true &&
@@ -88,7 +98,14 @@ class OfferCard extends Component {
 							<div className="reward-company-logo">
 								<img src={this.props.reward.companyLogo} />
 							</div>
-							<div className="reward-settings-kebab" style={{backgroundImage: this.kebabIcon}} />
+								<div onClick={this.toggleSettings} className="reward-settings-kebab" style={{backgroundImage: this.kebabIcon}} />
+								{ this.state.showSettings &&
+									<div className="rewards-settings-container">
+										<ClickOutside onClickOutside={this.toggleSettings}>
+											<Settings />
+										</ClickOutside>
+									</div>
+								}
 						</div>
 						<div className="reward-content-img">
 							<div className="flex-grow" />
