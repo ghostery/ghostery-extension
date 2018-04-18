@@ -329,7 +329,7 @@ class Summary extends React.Component {
 
 		return (
 			<div id="content-summary" className={summaryClassNames}>
-				{abPause && (
+				{false && abPause && (
 					<div className="pause-button-container">
 						<PauseButton
 							isPaused={this.props.paused_blocking}

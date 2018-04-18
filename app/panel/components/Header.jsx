@@ -139,7 +139,7 @@ class Header extends React.Component {
 		const { loggedIn, user } = this.props;
 		const rightLink = this.generateLink();
 
-		return (
+		return (false &&
 			<header id="ghostery-header">
 				{ showTabs && (
 					<div className="header-tab-group flex-container align-bottom">
