@@ -70,6 +70,11 @@ class RewardsApp {
 		});
 	}
 
+	renderReact() {
+		let MainView = this.mainView;
+		ReactDOM.render(<MainView reward={this.reward} imgBlob={this.imgBlob} />, this.rewardsApp);
+	}
+
 	renderShadow() {
 		// use shadowDOM to encapsulate CSS - fully supported in Chrome
 		this.rewardsContainer.appendChild(this.rewardsApp);
@@ -145,11 +150,6 @@ class RewardsApp {
 			console.log('re render root react');
 			this.renderReact();
 		}
-	}
-
-	renderReact() {
-		let MainView = this.mainView;
-		ReactDOM.render(<MainView reward={this.reward} imgBlob={this.imgBlob} />, this.rewardsApp);
 	}
 
 }
