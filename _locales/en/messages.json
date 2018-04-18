@@ -1620,5 +1620,11 @@
 	},
 	"rewards_disable": {
 		"message": "Turn off Ghostery rewards"
+	},
+	"rewards_disable_notification": {
+		"message": "Ghostery Rewards is now off. You can always turn it on in Ghostery settings or in the Ghostery Dashboard."
+	},
+	"rewards_disable_confirm": {
+		"message": "OK, got it."
 	}
 }
