@@ -318,12 +318,14 @@ class Summary extends React.Component {
 		});
 		return (
 			<div id="content-summary" className={summaryClassNames.join(' ')}>
+				{ false &&
 				<button className="button hollow toggleExpert g-tooltip" onClick={this.toggleExpert}>
 					<Tooltip
 						header={this.props.is_expert ? t('tooltip_simple') : t('tooltip_expert')}
 						position={this.props.is_expert ? 'right' : 'left'}
 					/>
 				</button>
+				}
 				{(!this.props.is_expanded || !this.props.is_expert) &&
 					<div className="row align-center">
 						<div className="columns">

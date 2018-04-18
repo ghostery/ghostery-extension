@@ -1303,11 +1303,13 @@ function initializeGhosteryModules() {
 			metrics.ping('install_complete');
 		}, 300000);
 
+		/* XXX DISABLE
 		// open the setup page on install
 		chrome.tabs.create({
 			url: chrome.runtime.getURL('./app/templates/setup.html'),
 			active: true
 		});
+		 XXX DISABLE */
 	} else {
 		// Record install if the user previously closed the browser before the install ping fired
 		metrics.ping('install');

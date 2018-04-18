@@ -72,7 +72,7 @@ class Header extends React.Component {
 		const headerLogoClasses = ClassNames('header-logo', {
 			'show-back-arrow': (pathname !== '/' && !pathname.startsWith('/detail')),
 		});
-		return (
+		return (false &&
 			<header id="ghostery-header">
 				<div className="top-bar">
 					<div className="top-bar-left">
