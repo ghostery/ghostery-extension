@@ -41,11 +41,11 @@
 	.button-pause {
 		min-width: 125px;
 		max-width: 125px;
-		font-size: 11px;
 		line-height: 17px;
 		.pause-button-text {
 			overflow-x: hidden;
 			text-overflow: clip;
+			font-size: 11px;
 		}
 		.pause-button-icon {
 			padding: 0 10px 0 30px;
@@ -151,7 +151,7 @@
 .ghostery-features-container .sub-component.pause-button {
 	.button-pause {
 		height: 35px;
-		line-height: 21px;
+		line-height: 16px;
 	}
 	.button-caret {
 		height: 35px;
@@ -160,7 +160,7 @@
 		height: 45px;
 		min-width: 125px;
 		max-width: 125px;
-		line-height: 31px;
+		line-height: 26px;
 	}
 	.button-caret.smaller {
 		height: 45px;
