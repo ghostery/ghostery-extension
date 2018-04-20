@@ -26,7 +26,9 @@ class Settings extends Component {
 				{!this.state.closed && <div className="rewards-settings-container rewards-popup-container">
 					<div className="rewards-settings">
 						<div className="close" onClick={this.close} style={{backgroundImage: this.closeIcon}} />
-						<div className="settings-text"></div>
+						<div className="about">{t('rewards_about')}</div>
+						<div className="settings">{t('rewards_settings')}</div>
+						<div className="delete">{t('rewards_delete')}</div>
 					</div>
 				</div>}
 			</div>

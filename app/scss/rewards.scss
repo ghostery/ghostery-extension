@@ -329,6 +329,7 @@
 
 	.rewards-settings-container {
 		.rewards-settings {
+			color: $tundora;
 			position: absolute;
 			margin-left: -195px;
 			margin-top: -10px;
@@ -337,6 +338,30 @@
 			background-color: $white;
 			border: 1px solid #9b9b9b;
 			border-radius: 4px;
+			box-shadow: 0px 4px 10px grey;
+			display: flex;
+			flex-direction: column;
+			text-align: left;
+
+			.about, .settings, .delete {
+				font-size: 12px;
+				flex: 1;
+				display: flex;
+				align-items: center;
+				margin-left: 10px;
+				margin-right: 10px;
+				font-weight: 500;
+				cursor: pointer;
+				user-select: none;
+			}
+
+			.about {
+				align-items: flex-end;
+			}
+
+			.delete {
+				align-items: flex-start;
+			}
 		}
 	}
 
