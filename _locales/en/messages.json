@@ -1629,5 +1629,14 @@
 	},
 	"rewards_disable_confirm": {
 		"message": "OK, got it."
+	},
+	"rewards_about": {
+		"message": "About Ghostery Rewards"
+	},
+	"rewards_settings": {
+		"message": "Ghostery Rewards Settings"
+	},
+	"rewards_delete": {
+		"message": "Delete this reward"
 	}
 }
