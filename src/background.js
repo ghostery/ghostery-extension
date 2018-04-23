@@ -21,6 +21,8 @@
 import _ from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
 import CLIQZ from 'browser-core';
+//TODO REMOVE WHEN PACKAGE ISEADY
+import * as CliqzPrefs from 'browser-core/build/platform/prefs';
 // object classes
 import Button from './classes/BrowserButton';
 import Events from './classes/EventHandlers';
@@ -57,11 +59,12 @@ const { sendMessage } = utils;
 const { onMessage } = chrome.runtime;
 // simple consts
 const {
-	GHOSTERY_DOMAIN, CDN_SUB_DOMAIN, BROWSER_INFO, IS_CLIQZ
+	GHOSTERY_DOMAIN, CDN_SUB_DOMAIN, BROWSER_INFO, IS_CLIQZ, DEBUG
 } = globals;
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const VERSION_CHECK_URL = `https://${CDN_SUB_DOMAIN}.ghostery.com/update/version`;
 const OFFERS_HANDLER_ID = 'ghostery';
+const REAL_ESTATE_ID = 'ghostery';
 const onBeforeRequest = events.onBeforeRequest.bind(events);
 const onHeadersReceived = events.onHeadersReceived.bind(events);
 
@@ -87,7 +90,22 @@ function setCliqzModuleEnabled(module, enabled) {
 	cliqz.disableModule(module.name);
 	return Promise.resolve();
 }
+/**
+ * Register/unregister real estate with Offers core module.
+ * @memberOf Background
+ * @param  {Object} offersModule offers module
+ * @param  {Boolean} register    true - register, false - unregister
+ */
 
+function registerWithOffers(offersModule, register) {
+	if (!offersModule.isEnabled) {
+		return Promise.resolve();
+	}
+	return offersModule.action(register ? 'registerRealEstate' : 'unregisterRealEstate', { realEstateID: REAL_ESTATE_ID })
+		.catch((e) => {
+			log(`FAILED TO ${register ? 'REGISTER' : 'UNREGISTER'} REAL ESTATE WITH OFFERS CORE`);
+		});
+}
 /**
  * Check and fetch (if needed) a new tracker library every 12 hours
  * @memberOf Background
@@ -789,9 +807,12 @@ function initializeDispatcher() {
 	});
 	dispatcher.on('conf.save.enable_offers', (enableOffers) => {
 		if (!IS_EDGE && !IS_CLIQZ) {
-			setCliqzModuleEnabled(offers, enableOffers);
+			if (enableOffers) {
+				setCliqzModuleEnabled(offers, enableOffers);
+			}
 		} else {
 			setCliqzModuleEnabled(offers, false);
+			registerWithOffers(offers, false);
 		}
 	});
 	dispatcher.on('conf.save.enable_anti_tracking', (enableAntitracking) => {
@@ -1013,10 +1034,30 @@ adblocker.on('enabled', () => {
 offers.on('enabled', () => {
 	offers.isReady().then(() => {
 		log('IN OFFERS ON ENABLED', offers, messageCenter);
-		setCliqzModuleEnabled(messageCenter, true);
+		// TODO REPLCE WITH COMMENTED SECTION WHEN PACKAGE IS READY
+		CliqzPrefs.setPref('config_location', 'de');
+		CliqzPrefs.setPref('triggers-root', 'ghostery-root');
+		CliqzPrefs.setPref('triggersBE', 'http://offers-api-stage.clyqz.com:81');
+		CliqzPrefs.setPref('showConsoleLogs', true);
+		// CliqzPrefs.setPref('offers2FeatureEnabled', true);
+		CliqzPrefs.setPref('offersLogsEnabled', true);
+		CliqzPrefs.setPref('offersDevFlag', true);
+		CliqzPrefs.setPref('offersTelemetryFreq', "10");
+		
+		// offers.action('setConfiguration', {
+		// 	config_location: 'de',
+		// 	triggersBE: DEBUG ? 'http://offers-api-stage.clyqz.com:81' : 'https://offers-api.cliqz.com',
+		// 	showConsoleLogs: (DEBUG === true),
+		// 	offersLogsEnabled: (DEBUG === true),
+		// 	offersDevFlag: (DEBUG === true),
+		// 	offersTelemetryFreq: DEBUG ? '10' : ''
+		// })
+		registerWithOffers(offers, true)
+		.then(() => {
+			setCliqzModuleEnabled(messageCenter, true);
+		});
 	});
-});
-/**
+});/**
  * Set listener for 'enabled' event for Offers module.
  * It registers message handler for messages with the offers.
  * This handler adds incoming message data to the array of
