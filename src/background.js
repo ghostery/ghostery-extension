@@ -21,8 +21,6 @@
 import _ from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
 import CLIQZ from 'browser-core';
-//TODO REMOVE WHEN PACKAGE ISEADY
-import * as CliqzPrefs from 'browser-core/build/platform/prefs';
 // object classes
 import Button from './classes/BrowserButton';
 import Events from './classes/EventHandlers';
@@ -1034,24 +1032,16 @@ adblocker.on('enabled', () => {
 offers.on('enabled', () => {
 	offers.isReady().then(() => {
 		log('IN OFFERS ON ENABLED', offers, messageCenter);
-		// TODO REPLCE WITH COMMENTED SECTION WHEN PACKAGE IS READY
-		CliqzPrefs.setPref('config_location', 'de');
-		CliqzPrefs.setPref('triggers-root', 'ghostery-root');
-		CliqzPrefs.setPref('triggersBE', 'http://offers-api-stage.clyqz.com:81');
-		CliqzPrefs.setPref('showConsoleLogs', true);
-		// CliqzPrefs.setPref('offers2FeatureEnabled', true);
-		CliqzPrefs.setPref('offersLogsEnabled', true);
-		CliqzPrefs.setPref('offersDevFlag', true);
-		CliqzPrefs.setPref('offersTelemetryFreq', "10");
-		
-		// offers.action('setConfiguration', {
-		// 	config_location: 'de',
-		// 	triggersBE: DEBUG ? 'http://offers-api-stage.clyqz.com:81' : 'https://offers-api.cliqz.com',
-		// 	showConsoleLogs: (DEBUG === true),
-		// 	offersLogsEnabled: (DEBUG === true),
-		// 	offersDevFlag: (DEBUG === true),
-		// 	offersTelemetryFreq: DEBUG ? '10' : ''
-		// })
+
+		offers.action('setConfiguration', {
+			config_location: 'de',
+			triggersBE: DEBUG ? 'http://offers-api-stage.clyqz.com:81' : 'https://offers-api.cliqz.com',
+			showConsoleLogs: (DEBUG === true),
+			offersLogsEnabled: (DEBUG === true),
+			offersDevFlag: (DEBUG === true),
+			offersTelemetryFreq: DEBUG ? '10' : ''
+		});
+
 		registerWithOffers(offers, true)
 		.then(() => {
 			setCliqzModuleEnabled(messageCenter, true);
