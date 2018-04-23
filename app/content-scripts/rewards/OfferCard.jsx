@@ -98,11 +98,16 @@ class OfferCard extends Component {
 							<div className="reward-company-logo">
 								<img src={this.props.reward.companyLogo} />
 							</div>
-								<div onClick={this.toggleSettings} className="reward-settings-kebab" style={{backgroundImage: this.kebabIcon}} />
+								<div
+									onClick={this.toggleSettings}
+									className="reward-settings-kebab"
+									style={{backgroundImage: this.kebabIcon}}
+									ref={(node) => { this.kebab = node; }}
+								/>
 								{ this.state.showSettings &&
 									<div className="rewards-settings-container">
-										<ClickOutside onClickOutside={this.toggleSettings}>
-											<Settings />
+										<ClickOutside excludeEl={this.kebab} onClickOutside={this.toggleSettings}>
+											<Settings disable={this.disableRewards} />
 										</ClickOutside>
 									</div>
 								}

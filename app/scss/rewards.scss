@@ -343,7 +343,11 @@
 			flex-direction: column;
 			text-align: left;
 
-			.about, .settings, .delete {
+			a {
+				color: $tundora;
+			}
+
+			.about, .settings, .delete, .disable {
 				font-size: 12px;
 				flex: 1;
 				display: flex;
