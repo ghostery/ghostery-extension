@@ -23,6 +23,7 @@ import globals from './Globals';
 import Policy from './Policy';
 import tabInfo from './TabInfo';
 import abtest from './ABTest';
+import rewards from './Rewards';
 import { pushUserSettings, buildUserSettings } from '../utils/accounts';
 import { getActiveTab, flushChromeMemoryCache } from '../utils/utils';
 import { objectEntries, log } from '../utils/common';
@@ -183,9 +184,10 @@ class PanelData {
 				needsReload: this._trackerData.get('needsReload'),
 				smartBlock: this._trackerData.get('smartBlock'),
 				tab_id: this._trackerData.get('tab_id'),
+				rewards: rewards.offers
 			},
 			summary: this.summaryView,
-			blocking: this._confData.get('is_expert') ? this.blockingView : false
+			blocking: this._confData.get('is_expert') ? this.blockingView : false,
 		};
 		return this._panelView;
 	}

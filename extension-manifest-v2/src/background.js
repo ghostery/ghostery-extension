@@ -39,6 +39,7 @@ import globals from './classes/Globals';
 import surrogatedb from './classes/SurrogateDb';
 import tabInfo from './classes/TabInfo';
 import metrics from './classes/Metrics';
+import rewards from './classes/Rewards';
 // utilities
 import * as accounts from './utils/accounts';
 import { allowAllwaysC2P } from './utils/click2play';
@@ -1080,27 +1081,38 @@ messageCenter.on('enabled', () => {
 			 *  }
 			 * }
 			*/
-			log('GOT OFFER', msg);
 			// first check that the message is from core and is the one we expect
 			if (msg.origin === 'offers-core' &&
 				msg.type === 'push-offer' &&
 				msg.data.offer_data) {
-				const { data } = msg;
-				const cmpMsg = {
-					id: data.offer_data.display_id,
-					Message: data.offer_data.ui_info.template_data.title,
-					Link: data.offer_data.ui_info.template_data.call_to_action.url,
-					LinkText: data.offer_data.ui_info.template_data.call_to_action.text,
-					type: 'offers',
-					origin: 'cliqz',
-					data: {
-						offer_info: {
-							offer_id: data.offer_data.offer_id,
-							offer_urls: data.offer_data.rule_info.url
-						}
+					if (!rewards.storedOffers.hasOwnProperty(msg.data.offer_id)) {
+						rewards.storedOffers[msg.data.offer_id] = msg.data;
+						rewards.currentOffer = msg.data;
 					}
-				};
-				cmp.CMP_DATA.push(cmpMsg);
+
+					log('RECEIVED OFFER', msg);
+					utils.getActiveTab((tab) => {
+						let tabId = 0;
+						if (tab) tabId = tab.id;
+						rewards.showHotDog(tabId);
+					});
+
+					// const { data } = msg;
+					// const cmpMsg = {
+					// 	id: data.offer_data.display_id,
+					// 	Message: data.offer_data.ui_info.template_data.title,
+					// 	Link: data.offer_data.ui_info.template_data.call_to_action.url,
+					// 	LinkText: data.offer_data.ui_info.template_data.call_to_action.text,
+					// 	type: 'offers',
+					// 	origin: 'cliqz',
+					// 	data: {
+					// 		offer_info: {
+					// 			offer_id: data.offer_data.offer_id,
+					// 			offer_urls: data.offer_data.rule_info.url
+					// 		}
+					// 	}
+					// };
+					// cmp.CMP_DATA.push(cmpMsg);
 			}
 		});
 	});

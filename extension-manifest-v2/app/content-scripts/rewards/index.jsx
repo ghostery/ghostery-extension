@@ -59,15 +59,25 @@ class RewardsApp {
 	}
 
 	init() {
-		document.addEventListener('DOMContentLoaded', (event) => {
-			console.log('DOMContentLoaded');
-			if (BROWSER_INFO.name === 'chrome') {
-				this.renderShadow();
-			} else {
-				// use iframe to encapsulate CSS - fallback for everything else besides chrome
-				this.renderIframe();
-			};
-		});
+		if (document.readyState === "complete"
+		|| document.readyState === "loaded"
+		|| document.readyState === "interactive"
+		) {
+			this.start()
+		} else {
+			document.addEventListener('DOMContentLoaded', (event) => {
+				this.start();
+			})
+		}
+	}
+
+	start() {
+		if (BROWSER_INFO.name === 'chrome') {
+			this.renderShadow();
+		} else {
+			// use iframe to encapsulate CSS - fallback for everything else besides chrome
+			this.renderIframe();
+		};
 	}
 
 	renderReact() {
@@ -144,6 +154,7 @@ class RewardsApp {
 		console.log('postMessage request', request);
 		if (request.name === 'showHotDog') {
 			console.log('showHotDog postMessage');
+			this.reward = request;
 		}
 		console.log(document.readyState);
 		if (document.readyState === 'complete' || document.readyState === 'interactive') {
