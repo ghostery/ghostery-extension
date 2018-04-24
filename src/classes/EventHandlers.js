@@ -357,7 +357,7 @@ class EventHandlers {
 
 		/* ** SMART BLOCKING - Privacy ** */
 		// block HTTP request on HTTPS page
-		if (this.policySmartBlock.isInsecureRequest(tab_id, page_protocol, processed.protocol)) {
+		if (this.policySmartBlock.isInsecureRequest(tab_id, page_protocol, processed.protocol, processed.host)) {
 			return this._blockHelper(details, tab_id, null, null, request_id, from_redirect, true);
 		}
 

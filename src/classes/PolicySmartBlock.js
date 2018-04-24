@@ -136,10 +136,10 @@ class PolicySmartBlock {
 		);
 	}
 
-	// TODO: this check will still fail when pageHost is "foo.bar.domain.com"
-	// and requestHost is "some.other.subdomain.domain.com"
 	/**
 	 * Check if request host matches page host
+	 * @TODO: this check will still fail when pageHost is "foo.bar.domain.com"
+	 * and requestHost is "some.other.subdomain.domain.com"
 	 * @param  {number} tabId			tab id
 	 * @param  {string} pageHost		host of the page url
 	 * @param  {string} requestHost		host of the request url
@@ -189,10 +189,16 @@ class PolicySmartBlock {
 	 * @param 	{number} tabId 				tab id
 	 * @param  	{string} pageProtocol		protocol of the tab url
 	 * @param  	{string} requestProtocol	protocol of the request url
+	 * @param 	{string} requestHost 		host of the request url
 	 * @return 	{boolean}
 	 */
-	isInsecureRequest(tabId, pageProtocol, requestProtocol) {
+	isInsecureRequest(tabId, pageProtocol, requestProtocol, requestHost) {
 		if (!this.shouldCheck(tabId)) { return false; }
+
+		// don't block mixed content from localhost
+		if (requestHost === 'localhost' || requestHost === '127.0.0.1') {
+			return false;
+		}
 
 		return (
 			pageProtocol === 'https' &&
