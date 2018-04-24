@@ -88,6 +88,18 @@ Ghostery implements the following open-source products from [Cliqz](https://cliq
 [**Ad Blocker**](https://cliqz.com/en/whycliqz/adblocking)
 + [GitHub](https://github.com/cliqz-oss/adblocker)
 
+[**MyOffrz**](https://cliqz.com/en/cliqz-angebote)
++ [GitHub](https://github.com/cliqz-oss/browser-core/blob/master/modules/offers-v2)
+
+### Building Cliqz Modules for Ghostery
+Cliqz modules are pre-built and included under the `browser-core` NPM dependency in [package.json](package.json). To reproduce this build process, grab the appropriate Ghostery release (v7.x.x) from the [browser-core](https://github.com/cliqz-oss/browser-core/releases) project.
+
+```sh
+$ npm install
+$ ./fern.js build configs/ghostery.js --no-maps --environment=production
+$ ./fern.js pack configs/ghostery.js
+```
+
 ## Compatibility
 
 + Firefox: 52+
