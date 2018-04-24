@@ -225,8 +225,8 @@ function _injectClickToPlay(tab_id) {
 	}
 
 	const tab = tabInfo.getTabInfo(tab_id);
-	if (!tab || tab.prefetched || tab.path.includes('_/chrome/newtab') || globals.EXCLUDES.includes(tab.host)) {
-		// If the tab is prefetched or a chrome newtab, we can't add C2P to it.
+	if (!tab || tab.prefetched || tab.path.includes('_/chrome/newtab') || tab.protocol === 'about' || globals.EXCLUDES.includes(tab.host)) {
+		// If the tab is prefetched, a chrome newtab or Firefox about:page, we can't add C2P to it.
 		return Promise.resolve(true);
 	}
 
