@@ -22,11 +22,11 @@ import cmp from './CMP';
 import conf from './Conf';
 import foundBugs from './FoundBugs';
 import globals from './Globals';
-import Rewards from './Rewards';
 import latency from './Latency';
 import Policy, { BLOCK_REASON_SS_UNBLOCKED, BLOCK_REASON_C2P_ALLOWED_THROUGH } from './Policy';
 import PolicySmartBlock from './PolicySmartBlock';
 import PurpleBox from './PurpleBox';
+import rewards from './Rewards';
 import surrogatedb from './SurrogateDb';
 import compDb from './CompatibilityDb';
 import tabInfo from './TabInfo';
@@ -48,7 +48,6 @@ class EventHandlers {
 		this.policy = new Policy();
 		this.policySmartBlock = new PolicySmartBlock();
 		this.purplebox = new PurpleBox();
-		this.rewards = new Rewards();
 	}
 
 	/**
@@ -114,7 +113,6 @@ class EventHandlers {
 					tabInfo.setTabInfo(tabId, 'incognito', tab.incognito);
 					// purplebox.createBox() will first check to make sure this is a valid tab
 					this._createBox(tabId);
-					this.rewards.showHotDog(tabId);
 				}
 			}, () => {
 				// prefetched tabs will return an error from utils.getTab
@@ -162,7 +160,7 @@ class EventHandlers {
 			// we look for a cliqz offer which does not have urls specified (meaning good for any site)
 			// All Cliqz offers have Dismiss === 1, so the found one is injected and removed.
 			// Lastly we look for non-cliqz offers (classic CMPs)
-			if (cmp.CMP_DATA.length !== 0) {
+			if (!rewards.currentOffer && cmp.CMP_DATA.length !== 0) {
 				const CMPS = cmp.CMP_DATA;
 				const numOffers = CMPS.length;
 				let cliqzOffer;
