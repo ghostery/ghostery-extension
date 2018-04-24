@@ -29,14 +29,13 @@ const t = chrome.i18n.getMessage;
  */
 class Rewards {
 	constructor() {
-		this.rewardsData = {};
+		this.storedOffers = {};
+		this.currentOffer = null;
 		this.ports = new Map();
 		this.channelsSupported = (typeof chrome.runtime.onConnect === 'object');
 	}
 
 	showHotDog(tab_id) {
-		/* @TODO get any initial data from cmp event and add to this.rewardsData */
-
 		const tab = tabInfo.getTabInfo(tab_id);
 
 		// If the tab is prefetched, we can't add purplebox to it.
@@ -48,7 +47,6 @@ class Rewards {
 		// Inject script cannot handle errors properly, but we call createBox after verifying that the tab is OK
 		// So update hotdog status for this tab
 		tabInfo.setTabInfo(tab_id, 'rewards', true);
-
 		if (this.channelsSupported) {
 			if (this.ports.has(tab_id)) {
 				this.ports.get(tab_id).disconnect();
@@ -62,8 +60,10 @@ class Rewards {
 						if (!this.ports.has(tabId)) {
 							this.ports.set(tabId, port);
 							this.ports.get(tabId).onMessage.addListener((message) => {
+								// const reward =
 								if (message.name === 'rewardsLoaded') {
-									this.ports.get(tabId).postMessage({ name: 'showHotDog', rewardsData: this.rewardsData });
+									this.ports.get(tabId).postMessage({ name: 'showHotDog', reward: this.currentOffer });
+									this.currentOffer = null;
 								}
 							});
 						}
@@ -82,4 +82,4 @@ class Rewards {
 	}
 }
 
-export default Rewards;
+export default new Rewards();
