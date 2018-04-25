@@ -25,6 +25,7 @@ const FREQUENCIES = { // in milliseconds
 	monthly: 2419200000
 };
 const CRITICAL_METRICS = ['install', 'install_complete', 'upgrade', 'active', 'engaged', 'uninstall'];
+const CAMPAIGN_METRICS = ['install', 'active'];
 const { METRICS_SUB_DOMAIN, EXTENSION_VERSION, BROWSER_INFO } = globals;
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const MAX_DELAYED_PINGS = 100;
@@ -112,9 +113,6 @@ class Metrics {
 
 	/**
 	* Prepare data and send telemetry pings.
-	* All existing pings are listed here:
-	* https://docs.ghostery.com/confluence/display/CT/GBE+Usage+Analytics+Pings
-	*
 	* @param {string} type    type of the telemetry ping
 	*/
 	ping(type) {
@@ -264,7 +262,7 @@ class Metrics {
 	_buildMetricsUrl(type, frequency) {
 		const frequencyString = (type !== 'uninstall') ? `/${frequency}` : '';
 
-		return `https://${METRICS_SUB_DOMAIN}.ghostery.com/${type}${frequencyString}?gr=-1` +
+		let metrics_url = `https://${METRICS_SUB_DOMAIN}.ghostery.com/${type}${frequencyString}?gr=-1` +
 			// Old parameters, old names
 			// Human web
 			`&hw=${encodeURIComponent(IS_EDGE ? '0' : (conf.enable_human_web ? '1' : '0'))}` +
@@ -294,10 +292,6 @@ class Metrics {
 			`&pb=${encodeURIComponent(conf.show_alert ? (conf.alert_expanded ? '1' : '2') : '0')}` +
 			// Showing campaign messages (former show_cmp)
 			`&sc=${encodeURIComponent(conf.show_cmp ? '1' : '0')}` +
-			// Marketing source (Former utm_source)
-			`&us=${encodeURIComponent(this.utm_source)}` +
-			// Marketing campaign (Former utm_campaign)
-			`&uc=${encodeURIComponent(this.utm_campaign)}` +
 
 			// New parameters, new names
 			// Extension_view - which view of the extension is the user in
@@ -316,6 +310,17 @@ class Metrics {
 			`&sb=${encodeURIComponent(conf.setup_block.toString())}` +
 			// Recency, days since last active daily ping
 			`&rc=${encodeURIComponent(this._getRecency().toString())}`;
+
+		if (CAMPAIGN_METRICS.includes(type)) {
+			// only send campaign attribution when necessary
+			metrics_url +=
+				// Marketing source (Former utm_source)
+				`&us=${encodeURIComponent(this.utm_source)}` +
+				// Marketing campaign (Former utm_campaign)
+				`&uc=${encodeURIComponent(this.utm_campaign)}`;
+		}
+
+		return metrics_url;
 	}
 
 	/**
