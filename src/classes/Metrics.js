@@ -276,6 +276,9 @@ class Metrics {
 			`&os=${encodeURIComponent(BROWSER_INFO.os)}` +
 			// Browser language
 			`&l=${encodeURIComponent(conf.language)}` +
+			// Browser version
+			`&bv=${encodeURIComponent(BROWSER_INFO.version)}` +
+
 			// Old parameters, new names
 			// Offers (former offers)
 			`&of=${encodeURIComponent(IS_EDGE ? '0' : ((conf.enable_offers && abtest.hasTest('offers')) ? '1' : '0'))}` +
