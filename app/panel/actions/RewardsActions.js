@@ -12,100 +12,64 @@
  */
 
 import {
-	GET_REWARDS_ACTIVE,
-	REMOVE_REWARD_ID,
-	SHOW_NOTIFICATION,
-	TOGGLE_REWARDS_ACTIVE,
-	UPDATE_REWARD
+	GET_REWARDS_DATA,
+	TOGGLE_OFFERS_ENABLED,
+	REMOVE_OFFER,
+	SET_OFFER_READ
 } from '../constants/constants';
+import { sendMessageInPromise } from '../utils/msg';
 
 /**
- * Fetch active rewards. Will eventually fetch from background during the initial
- * load, but currently fakes an async call by using setTimeout and default datal.
- * @return {Object} dispatch
+ * Fetch rewards data from background
+ * @param  {Object} tabId null
+ * @return {Object}       dispatch
  */
-export function getActiveRewards() {
+export function getRewardsData(tabId) {
 	return function (dispatch) {
-		return new Promise((resolve, reject) => {
-			const dateNow = new Date();
-			return setTimeout(() => {
-				dispatch({
-					type: GET_REWARDS_ACTIVE,
-					data: [
-						{
-							id: 0,
-							unread: true,
-							code: 'MTWAFFEWEREXDF1E',
-							text: '2 Free Audio Books',
-							description: 'Description of the offer. There is a lot of exciting stuff going on.',
-							expires: (new Date()).setDate(dateNow.getDate() + 14),
-						},
-						{
-							id: 1,
-							unread: true,
-							code: 'MTWAFFEWEREXDF2E',
-							text: 'Save $150',
-							description: 'Description of the offer. There is a lot of exciting stuff going on.',
-							expires: (new Date()).setDate(dateNow.getDate() + 30),
-						},
-						{
-							id: 2,
-							unread: true,
-							code: 'MTWAFFEWEREXDF3E',
-							text: 'Save $75',
-							description: 'Description of the offer. There is a lot of exciting stuff going on.',
-							expires: (new Date()).setDate(dateNow.getDate() + 60),
-						},
-					],
-				});
-			}, 125);
+		return sendMessageInPromise('getPanelData', {
+			tabId,
+			view: 'rewards',
+		}).then((data) => {
+			dispatch({
+				type: GET_REWARDS_DATA,
+				data,
+			});
 		});
 	};
 }
 
 /**
+* Toggles Rewards on/off
+* @param  {Boolean} enabled Whether offers should be enabled or not.
+* @return {Object}
+*/
+export function toggleOffersEnabled(enabled) {
+	return {
+		type: TOGGLE_OFFERS_ENABLED,
+		data: { enabled },
+	};
+}
+
+/**
  * Removes a reward from the rewards list
- * @param  {Int} id The ID of the reward we want to remove.
+ * @param  {String} id The ID of the reward we want to remove.
  * @return {Object}
  */
-export function removeReward(id) {
+export function removeOffer(id) {
 	return {
-		type: REMOVE_REWARD_ID,
+		type: REMOVE_OFFER,
 		data: { id }
 	};
 }
 
 /**
- * Toggles Rewards on/off
+ * Sets the unread status of an offer to false
+ * @param  {String} id the ID of the reward we want to update.
  * @return {Object}
  */
-export function toggleRewardsActive() {
+export function setOfferRead(id) {
 	return {
-		type: TOGGLE_REWARDS_ACTIVE
-	};
-}
-
-/**
- * Updates an existing reward
- * @param {Object} data
- * @return {Object}
- */
-export function updateReward(data) {
-	return {
-		type: UPDATE_REWARD,
-		data,
-	};
-}
-
-/**
- * Display notification messages on Panel (status, needsReload). Also used to persist
- * the needsReload messages if the panel is closed before the page is refreshed.
- * @param  {Object} data
- * @return {Object}
- */
-export function showNotification(data) {
-	return {
-		type: SHOW_NOTIFICATION,
-		data,
+		type: SET_OFFER_READ,
+		data: { id }
 	};
 }

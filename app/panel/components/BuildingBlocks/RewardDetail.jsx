@@ -35,10 +35,7 @@ class RewardDetail extends React.Component {
 	 * Lifecycle event
 	 */
 	componentWillMount() {
-		this.props.actions.updateReward({
-			id: this.props.id,
-			unread: false,
-		});
+		this.props.actions.setOfferRead(this.props.id);
 	}
 
 	handleCopyClick() {

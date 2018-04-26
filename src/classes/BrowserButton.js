@@ -20,6 +20,8 @@ import { getTab } from '../utils/utils';
 import { log } from '../utils/common';
 import globals from './Globals';
 
+const HAS_NEW_REWARD = true;
+
 /**
  * @class for handling Ghostery button.
  * @memberof BackgroundClasses
@@ -77,10 +79,13 @@ class BrowserButton {
 		if (globals.BROWSER_INFO.os === 'android') { return; }
 		if (tabId <= 0) { return; }
 
+		const iconAlt = (!active) ? '_off' :
+			HAS_NEW_REWARD ? '_star' : '';
+
 		chrome.browserAction.setIcon({
 			path: {
-				19: `app/images/icon19${active ? '' : '_off'}.png`,
-				38: `app/images/icon38${active ? '' : '_off'}.png`
+				19: `app/images/icon19${iconAlt}.png`,
+				38: `app/images/icon38${iconAlt}.png`
 			},
 			tabId
 		}, () => {
@@ -101,11 +106,10 @@ class BrowserButton {
 
 					// Only show the badge if the conf setting allows it
 					if (conf.show_badge) {
-						// Add tracker count to the badgeText
-						chrome.browserAction.setBadgeText({
-							text: trackerCount,
-							tabId
-						});
+						// Don't show badgeText when there is a new reward and Ghostery is active
+						// Otherwise set the tracker count to the badgeText
+						const text = (HAS_NEW_REWARD && active) ? '' : trackerCount;
+						chrome.browserAction.setBadgeText({ text, tabId });
 
 						// Set badge background color
 						chrome.browserAction.setBadgeBackgroundColor({

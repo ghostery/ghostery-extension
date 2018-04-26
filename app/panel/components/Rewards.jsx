@@ -24,10 +24,13 @@ import { ToggleSlider, RewardListItem, RewardDetail } from './BuildingBlocks';
 class Rewards extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			rewardsArray: null,
+		};
 
 		// event bindings
-		this.toggleRewards = this.toggleRewards.bind(this);
-		this.removeReward = this.removeReward.bind(this);
+		this.toggleOffers = this.toggleOffers.bind(this);
+		this.removeOffer = this.removeOffer.bind(this);
 
 		this.renderRewardListComponent = this.renderRewardListComponent.bind(this);
 		this.renderRewardDetailComponent = this.renderRewardDetailComponent.bind(this);
@@ -37,29 +40,46 @@ class Rewards extends React.Component {
 	 * Lifecycle event
 	 */
 	componentDidMount() {
-		if (this.props.rewardsActive && !this.props.rewards) {
-			this.props.actions.getActiveRewards();
+		this.props.actions.getRewardsData();
+	}
+
+	componentWillReceiveProps(nextProps) {
+		const dateNow = new Date();
+		let rewardsArray = null;
+		if (nextProps.rewards) {
+			rewardsArray = Object.keys(nextProps.rewards).map(key => {
+				const reward = nextProps.rewards[key].offer_data;
+				return {
+					id: reward.offer_id,
+					unread: false,
+					code: reward.ui_info.template_data.code || 'C0D3_DNE',
+					text: reward.ui_info.template_data.title || 'reward title',
+					description: reward.ui_info.template_data.desc || 'reward description',
+					expires: Math.round((new Date()).setDate(dateNow.getDate() + reward.expirationMs / 60/ 60 / 24)),
+				};
+			});
 		}
+		this.setState({ rewardsArray });
 	}
 
 	/**
 	 * Handles toggling rewards on/off
 	 */
-	toggleRewards() {
-		const { rewardsActive } = this.props;
+	toggleOffers() {
+		const { enable_offers } = this.props;
 		this.props.actions.showNotification({
-			text: `Ghostery Rewards is ${rewardsActive ? 'OFF' : 'ON'}`,
+			text: `Ghostery Rewards is ${enable_offers ? 'OFF' : 'ON'}`,
 			classes: 'purple',
 		});
-		this.props.actions.toggleRewardsActive();
+		this.props.actions.toggleOffersEnabled(!enable_offers);
 	}
 
 	/**
 	 * Handles removing a reward from the Rewards array
 	 * @param  {Int} id the ID of the reward
 	 */
-	removeReward(id) {
-		this.props.actions.removeReward(id);
+	removeOffer(id) {
+		this.props.actions.removeOffer(id);
 	}
 
 	/**
@@ -67,7 +87,7 @@ class Rewards extends React.Component {
 	 * @return {JSX} JSX for the Rewards Header
 	 */
 	renderRewardsHeader() {
-		const { rewardsActive, location } = this.props;
+		const { enable_offers, location } = this.props;
 		const showBack = location.pathname.indexOf('/detail/rewards/detail') !== -1;
 		const showToggle = location.pathname === '/detail/rewards/list';
 
@@ -83,11 +103,11 @@ class Rewards extends React.Component {
 				<span className="RewardsPanel__title">{ t('panel_detail_rewards_title') }</span>
 				{showToggle && (
 					<span className="RewardsPanel--send-right flex-container align-middle">
-						<span>{rewardsActive ? 'ON ' : 'OFF '}</span>
+						<span>{enable_offers ? 'ON ' : 'OFF '}</span>
 						<ToggleSlider
 							className="RewardsPanel--add-padding display-inline-block"
-							isChecked={rewardsActive}
-							onChange={this.toggleRewards}
+							isChecked={enable_offers}
+							onChange={this.toggleOffers}
 						/>
 					</span>
 				)}
@@ -100,24 +120,27 @@ class Rewards extends React.Component {
 	 * @return {JSX} JSX for the Rewards Items List
 	 */
 	renderRewardListComponent() {
-		const { rewards, rewardsActive } = this.props;
-		if (!rewardsActive) {
-			return <span>Rewards Not Active</span>;
-		} else if (!rewards) {
+		const { enable_offers } = this.props;
+		const { rewardsArray } = this.state;
+
+		if (enable_offers && !rewardsArray) {
 			return <span>Loading Rewards ...</span>;
-		} else if (rewards.length === 0) {
+		} else if (enable_offers && rewardsArray.length === 0) {
 			return <span>No Rewards Were Found</span>;
+		} else if (!enable_offers && (!rewardsArray || rewardsArray.length === 0)) {
+			return <span>Turn on Rewards to see great deals</span>;
 		}
 
-		const rewardsList = rewards.map((reward, index) => (
+		const rewardsList = rewardsArray.map((reward, index) => (
 			<RewardListItem
+				disabled={!enable_offers}
 				index={index}
 				id={reward.id}
 				key={reward.id}
 				unread={reward.unread}
 				text={reward.text}
 				expires={reward.expires}
-				clickCloseButton={this.removeReward}
+				clickCloseButton={this.removeOffer}
 			/>
 		));
 		return <div className="RewardsPanel__scroll_content">{ rewardsList }</div>;
@@ -129,7 +152,7 @@ class Rewards extends React.Component {
 	 */
 	renderRewardDetailComponent(routeProps) {
 		const { id } = routeProps.match.params;
-		const reward = this.props.rewards.find(el => el.id === +id);
+		const reward = this.state.rewardsArray.find(el => el.id === id);
 
 		return (
 			<RewardDetail
