@@ -26,7 +26,19 @@ class RewardListItem extends React.Component {
 		this.state = {};
 
 		// Event Bindings
+		this.handleClick = this.handleClick.bind(this);
 		this.clickCloseButton = this.clickCloseButton.bind(this);
+	}
+
+	/**
+	 * Handle the click event: everything normal unless it is disabled
+	 * @param  {Object} event the click event
+	 */
+	handleClick(event) {
+		const { disabled } = this.props;
+		if (disabled) {
+			event.preventDefault();
+		}
 	}
 
 	/**
@@ -57,10 +69,12 @@ class RewardListItem extends React.Component {
 	 * @return {JSX} JSX for rendering a Reward within the Rewards List
 	 */
 	render() {
-		const { unread, text, id } = this.props;
+		const { disabled, unread, text, id } = this.props;
 		const itemClassName = ClassNames('RewardListItem', 'row', {
+			'RewardListItem--greyscale': disabled,
 			'RewardListItem--unread': unread,
-			clickable: true,
+			'not-clickable': disabled,
+			clickable: !disabled,
 		});
 		const buttonContainerClassNames = ClassNames('flex-container flex-dir-column align-justify full-height', {
 			'RewardsPanel--more-right': true,
@@ -76,7 +90,7 @@ class RewardListItem extends React.Component {
 		});
 
 		return (
-			<Link to={`/detail/rewards/detail/${id}`} className={itemClassName}>
+			<Link to={`/detail/rewards/detail/${id}`} className={itemClassName} onClick={this.handleClick}>
 				<div className="small-12 columns">
 					<div className="flex-container align-middle full-height">
 						<div className="RewardListItem__image_container flex-container align-center">

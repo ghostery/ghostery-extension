@@ -13,8 +13,8 @@
 
 import {
 	GET_PANEL_DATA, GET_SUMMARY_DATA, GET_BLOCKING_DATA,
-	SHOW_NOTIFICATION,
 	TOGGLE_CLIQZ_FEATURE,
+	SHOW_NOTIFICATION,
 	CLOSE_NOTIFICATION,
 	TOGGLE_EXPERT,
 	LOGIN_SUCCESS, LOGIN_FAILED,
@@ -43,7 +43,6 @@ export function toggleCliqzFeature(featureName, isEnabled) {
 		data,
 	};
 }
-
 
 /**
  * Fetch panel data from background, only on the initial load. Returns combined
