@@ -35,7 +35,13 @@ class Rewards {
 		this.channelsSupported = (typeof chrome.runtime.onConnect === 'object');
 	}
 
-	showHotDog(tab_id) {
+	handleSignal(rewardId) {
+
+	}
+
+	showHotDog(tab_id, offer) {
+		console.log('CHECK NEW OFFER ID', offer.offer_id)
+		this.currentOffer = offer;
 		const tab = tabInfo.getTabInfo(tab_id);
 
 		// If the tab is prefetched, we can't add purplebox to it.
@@ -46,7 +52,7 @@ class Rewards {
 
 		// Inject script cannot handle errors properly, but we call createBox after verifying that the tab is OK
 		// So update hotdog status for this tab
-		tabInfo.setTabInfo(tab_id, 'rewards', true);
+		// tabInfo.setTabInfo(tab_id, 'rewards', true);
 		if (this.channelsSupported) {
 			if (this.ports.has(tab_id)) {
 				this.ports.get(tab_id).disconnect();
@@ -60,10 +66,10 @@ class Rewards {
 						if (!this.ports.has(tabId)) {
 							this.ports.set(tabId, port);
 							this.ports.get(tabId).onMessage.addListener((message) => {
-								// const reward =
 								if (message.name === 'rewardsLoaded') {
 									this.ports.get(tabId).postMessage({ name: 'showHotDog', reward: this.currentOffer });
-									this.currentOffer = null;
+								} else if (message.name === 'rewardSignal') {
+									this.handleSignal(message.rewardId);
 								}
 							});
 						}

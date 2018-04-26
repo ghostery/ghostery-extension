@@ -14,13 +14,27 @@ const { onMessage } = chrome.runtime;
 class OfferCard extends Component {
 	constructor(props) {
 		super(props);
+
 		console.log('constructor props:', props);
 		this.state = {
 			closed: false,
 			copyText: t('rewards_copy_code'),
 			showNotification: false,
-			showSettings: false
+			showSettings: false,
+			rewardUI: props.reward && props.reward.offer_data && props.reward.offer_data.ui_info.template_data || {},
+			// rewardUI: mockData,
+			imageLoads: {
+				logo: false,
+				content: false,
+			}
 		};
+
+		// @TODO sendMessage to add "seen" flag to reward object
+		if (this.props.port) {
+			this.props.port.postMessage({ name: 'rewardSeen', message: {data: 'test'} });
+		} else {
+			sendMessage('rewardSeen', {data: 'test'});
+		}
 
 		this.iframeEl = parent.document.getElementById('ghostery-iframe-container');
 		if (this.iframeEl) {
@@ -37,6 +51,25 @@ class OfferCard extends Component {
 		this.copyCode = this.copyCode.bind(this);
 		this.disableRewards = this.disableRewards.bind(this);
 		this.toggleSettings = this.toggleSettings.bind(this);
+		this.handleImageLoaded = this.handleImageLoaded.bind(this);
+
+		// Cliqz metrics
+		this.sendSignal('offer_shown');
+	}
+
+	sendSignal(type) {
+		// @param type = ['offer_shown', 'offer_ca_action', 'offer_closed']
+		if (this.props.port) {
+			this.props.port.postMessage({ name: 'rewardsSignal', message: {
+				id: this.props.reward.offer_id,
+				type
+			}});
+		} else {
+			sendMessage('rewardsSignal', {
+				id: this.props.reward.offer_id,
+				type
+			});
+		}
 	}
 
 	copyCode() {
@@ -79,9 +112,15 @@ class OfferCard extends Component {
 		});
 	}
 
+	handleImageLoaded(e) {
+		e.target.classList.remove('hide');
+	}
+
 	render() {
 		console.log('render props:', this.props);
+		console.log('render title:', this.state);
 		return (
+			// @TODO condition for hide class
 			<div className="ghostery-rewards-component">
 				{ this.state.closed !== true &&
 				<div className="ghostery-reward-card">
@@ -96,7 +135,7 @@ class OfferCard extends Component {
 						<div className="reward-content-header">
 							<div className="flex-grow" />
 							<div className="reward-company-logo">
-								<img src={this.props.reward.companyLogo} />
+								<img src={this.state.rewardUI.logo_url} className="hide" onLoad={this.handleImageLoaded} />
 							</div>
 								<div
 									onClick={this.toggleSettings}
@@ -114,33 +153,33 @@ class OfferCard extends Component {
 						</div>
 						<div className="reward-content-img">
 							<div className="flex-grow" />
-							<img src={this.props.reward.contentImg} />
+							<img src={this.state.rewardUI.picture_url} className="hide" onLoad={this.handleImageLoaded} />
 							<div className="flex-grow" />
 						</div>
 						<div className="reward-content-detail">
 							<span className="reward-benefit">
-								{ this.props.reward.benefit }
+								{ this.state.rewardUI.benefit }
 							</span>
 							<span className="reward-headline">
-								{this.props.reward.headline}
+								{ this.state.rewardUI.headline }
 							</span>
 							<span className="reward-description">
-								{ this.props.reward.description }
+								{ this.state.rewardUI.desc }
 							</span>
 						</div>
 						<div className="reward-code">
 							<div>
-								{this.props.reward.rewardCode}
-								<input readOnly className="reward-code-input" value={this.props.reward.rewardCode} type="text" />
+								{this.state.rewardUI.code}
+								<input readOnly className="reward-code-input" value={this.state.rewardUI.code} type="text" />
 							</div>
 							<a onClick={this.copyCode}>{this.state.copyText}</a>
 						</div>
 						<div className="reward-content-footer">
-							<span> {t('rewards_expire')} { this.props.reward.expireTime } </span>
-							<a target="_blank" href={this.props.reward.termsLink}> { t('rewards_terms_conditions') } </a>
+							{/* <span> {t('rewards_expire')} { this.props.reward.expireTime } </span> */}
+							{/* <a target="_blank" href={this.props.reward.termsLink}> { t('rewards_terms_conditions') } </a> */}
 						</div>
-						<a target="_blank" href={this.props.reward.redeemLink} className="reward-redeem">
-							{t('rewards_redeem_now')}
+						<a target="_blank" href={this.state.rewardUI.call_to_action && this.state.rewardUI.call_to_action.url} className="reward-redeem">
+							{this.state.rewardUI.call_to_action.text}
 						</a>
 					</div>
 					<div className="reward-footer">

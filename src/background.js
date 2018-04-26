@@ -413,6 +413,14 @@ function handleBlockedRedirect(name, message, tab_id, callback) {
 	return false;
 }
 
+function handleRewards(name, message, tab_id, callback) {
+	if (name === 'rewardsSignal') {
+		// @TODO send signal
+		// {"origin":"offers-cc","type":"action-signal","data":{"action_id":"hub_open"}}
+		// cliqz.modules['offers-v2'].background.actions.processRealEstateMessage(message);
+	}
+}
+
 /**
  * Handle messages sent from dist/settings_redirect.js script.
  * of the settings_redirect.html local page. Used on @EDGE and Chrome.
@@ -507,6 +515,7 @@ function onMessageHandler(request, sender, callback) {
 	const {
 		name, message, messageId, origin
 	} = request;
+	console.log('REQUESTORIGIN', origin);
 	const { tab } = sender;
 	const tab_id = tab && tab.id;
 	// Edge does not have url on tab object, as of Build 14342_rc1
@@ -549,6 +558,8 @@ function onMessageHandler(request, sender, callback) {
 		return handleClick2Play(name, message, tab_id, callback);
 	} else if (origin === 'blocked_redirect') {
 		return handleBlockedRedirect(name, message, tab_id, callback);
+	} else if (origin === 'rewards') {
+		return handleRewards(name, message, tab_id, callback);
 	}
 
 	// HANDLE UNIVERSAL EVENTS HERE (NO ORIGIN LISTED ABOVE)
@@ -1087,14 +1098,13 @@ messageCenter.on('enabled', () => {
 				msg.data.offer_data) {
 					if (!rewards.storedOffers.hasOwnProperty(msg.data.offer_id)) {
 						rewards.storedOffers[msg.data.offer_id] = msg.data;
-						rewards.currentOffer = msg.data;
 					}
 
 					log('RECEIVED OFFER', msg);
 					utils.getActiveTab((tab) => {
 						let tabId = 0;
 						if (tab) tabId = tab.id;
-						rewards.showHotDog(tabId);
+						rewards.showHotDog(tabId, msg.data);
 					});
 
 					// const { data } = msg;
