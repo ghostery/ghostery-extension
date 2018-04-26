@@ -32,25 +32,12 @@ const channelsSupported = (typeof chrome.runtime.connect === 'function');
 
 class RewardsApp {
 	constructor() {
-		this.reward = {
-			rewardCode: 'SDF75DSUI90',
-			expireTime: '14 days',
-			termsLink: 'https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/',
-			redeemLink: 'https://www.ghostery.com/',
-			benefit: '2 Free',
-			headline: 'Audio Books',
-			description: 'Description of the offer. There is a lot of exciting stuff going on.',
-			companyLogo: 'https://cdn.cliqz.com/extension/offers/test/resources/flaconi20-week/flaconi20-week-logo-long-1523970905.png',
-			contentImg: 'https://cdn.cliqz.com/extension/offers/test/resources/flaconi20-week/flaconi20-week-logo-long-1523970905.png'
-		};
-
 		this.rewardsContainer = document.createElement('div');
 		this.rewardsApp = document.createElement('div');
 		this.rewardsIframe = null;;
 		this.iframeStyle = null;;
 		this.port = null;
 		this.mainView = null;
-		this.imgBlob = null;
 		this.rewardsApp.id = 'ghostery-rewards-app';
 		this.rewardsApp.className = 'show';
 		this.handleMessages = this.handleMessages.bind(this);
@@ -82,7 +69,7 @@ class RewardsApp {
 
 	renderReact() {
 		let MainView = this.mainView;
-		ReactDOM.render(<MainView reward={this.reward} imgBlob={this.imgBlob} />, this.rewardsApp);
+		ReactDOM.render(<MainView reward={this.reward} />, this.rewardsApp);
 	}
 
 	renderShadow() {
@@ -96,7 +83,7 @@ class RewardsApp {
 						<div id="ghostery-shadow-root">
 							<Route exact path="/" render={ ()=> <HotDog reward={props.reward} /> } />
 							<Route path="/hotdog" render={ ()=> <HotDog reward={props.reward} /> } />
-							<Route path="/offercard" render={ ()=> <OfferCard reward={props.reward} imgBlob={props.imgBlob} /> } />
+							<Route path="/offercard" render={ ()=> <OfferCard reward={props.reward} port={this.port} /> } />
 						</div>
 					</ShadowDOM>
 				</Router>
@@ -128,7 +115,7 @@ class RewardsApp {
 						<div>
 							<Route exact path="/" render={ ()=> <HotDog reward={props.reward} /> } />
 							<Route path="/hotdog" render={ ()=> <HotDog reward={props.reward} /> } />
-							<Route path="/offercard" render={ ()=> <OfferCard reward={props.reward} imgBlob={props.imgBlob} /> } />
+							<Route path="/offercard" render={ ()=> <OfferCard reward={props.reward} port={this.port} /> } />
 						</div>
 					</Router>
 				);
@@ -146,6 +133,8 @@ class RewardsApp {
 				this.port.postMessage({ name: 'rewardsLoaded' });
 			}
 		} else {
+			// TODO listen for this in background.js
+			sendMesage('rewardsLoaded');
 			onMessage.addListener(this.handleMessages);
 		}
 	}
@@ -153,8 +142,8 @@ class RewardsApp {
 	handleMessages(request, sender, response) {
 		console.log('postMessage request', request);
 		if (request.name === 'showHotDog') {
-			console.log('showHotDog postMessage');
-			this.reward = request;
+			console.log('showHotDog event reward id ', request.reward.offer_id);
+			this.reward = request.reward;
 		}
 		console.log(document.readyState);
 		if (document.readyState === 'complete' || document.readyState === 'interactive') {
