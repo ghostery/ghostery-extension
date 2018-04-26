@@ -136,86 +136,36 @@ class Metrics {
 
 			// Extension Usage
 			case 'pause':
-				this._sendReq('pause', ['all', 'daily', 'weekly']);
-				break;
 			case 'resume':
-				this._sendReq('resume', ['all', 'daily', 'weekly']);
-				break;
 			case 'trust_site':
-				this._sendReq('trust_site', ['all', 'daily', 'weekly']);
-				break;
 			case 'restrict_site':
-				this._sendReq('restrict_site', ['all', 'daily', 'weekly']);
-				break;
 			case 'live_scan':
-				this._sendReq('live_scan', ['all', 'daily', 'weekly']);
-				break;
 			case 'sign_in':
-				this._sendReq('sign_in', ['all', 'daily', 'weekly']);
+				this._sendReq(type, ['all', 'daily', 'weekly']);
 				break;
 			// New
 			case 'list_dash':
-				this._sendReq('list_dash', ['all', 'daily', 'weekly', 'monthly']); // ??? Why daily, etc?
-				break;
 			case 'history_dash':
-				this._sendReq('history_dash', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'history_learn':
-				this._sendReq('history_learn', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'performance_dash':
-				this._sendReq('performance_dash', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'performance_learn':
-				this._sendReq('performance_learn', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'rewards_dash':
-				this._sendReq('rewards_dash', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'rewards_learn':
-				this._sendReq('rewards_learn', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'premium_dash':
-				this._sendReq('premium_dash', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'premium_learn':
-				this._sendReq('premium_learn', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'antitrack_on':
-				this._sendReq('antitrack_on', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'antitrack_off':
-				this._sendReq('antitrack_off', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'adblock_on':
-				this._sendReq('adblock_on', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'adblock_off':
-				this._sendReq('adblock_off', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'smartblock_on':
-				this._sendReq('smartblock_on', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'smartblock_off':
-				this._sendReq('smartblock_off', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'pause_snooze':
-				this._sendReq('pause_snooze', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'viewchange_from_simple':
-				this._sendReq('viewchange_from_simple', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'viewchange_from_detailed':
-				this._sendReq('viewchange_from_detailed', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'viewchange_from_expanded':
-				this._sendReq('viewchange_from_expanded', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'create_account_extension':
-				this._sendReq('create_account_extension', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'create_account_setup':
-				this._sendReq('create_account_setup', ['all', 'daily', 'weekly', 'monthly']);
+				this._sendReq(type, ['all', 'daily', 'weekly', 'monthly']);
 				break;
 			// uncaught ping type
 			default:

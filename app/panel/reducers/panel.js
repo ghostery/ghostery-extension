@@ -73,7 +73,6 @@ export default (state = initialState, action) => {
 			return Object.assign({}, state, updated);
 		}
 		case CREATE_ACCOUNT_SUCCESS:
-			sendMessage('ping', 'create_account_extension');
 			return Object.assign({}, state, {
 				logged_in: true,
 				email: action.data.ClaimEmailAddress,
@@ -110,10 +109,10 @@ export default (state = initialState, action) => {
 				default:
 					break;
 			}
+			sendMessage('setPanelData', { [action.data.featureName]: !action.data.isEnabled });
 			if (pingName) {
 				sendMessage('ping', pingName);
 			}
-			sendMessage('setPanelData', { [action.data.featureName]: !action.data.isEnabled });
 			return Object.assign({}, state, { [action.data.featureName]: !action.data.isEnabled });
 		}
 		case TOGGLE_EXPANDED: {
