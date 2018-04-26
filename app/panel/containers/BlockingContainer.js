@@ -27,6 +27,7 @@ import { showNotification } from '../actions/PanelActions';
  * in this case it won't be passed by React (see https://github.com/reactjs/react-redux/blob/master/docs/api.md).
  */
 const mapStateToProps = (state, ownProps) => Object.assign({}, state.blocking, {
+	is_expanded: state.panel.is_expanded,
 	language: state.panel.language,
 	pageHost: state.summary.pageHost,
 	paused_blocking: state.summary.paused_blocking,

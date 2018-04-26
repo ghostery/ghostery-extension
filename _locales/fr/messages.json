@@ -856,7 +856,7 @@
 		"message": "Jamais"
 	},
 	"settings_seconds": {
-		"message": "secondes"
+		"message": "s"
 	},
 	"settings_hide_alert_trusted": {
 		"message": "Masquer la case violette sur les sites de confiance"
@@ -1422,7 +1422,7 @@
 		"message": "Procédez à l'installation"
 	},
 	"panel_help_setup": {
-		"message": "Set Up Ghostery"
+		"message": "Installer Ghostery"
 	},
 	"global_settings_saved": {
 		"message": "Paramètres globaux sauvegardés"
@@ -1481,5 +1481,8 @@
 				"content": "</a>"
 			}
 		}
-	}		
+	},
+	"panel_about_release_notes": {
+		"message": "Voir les notes de mise à jour pour connaître toutes les nouveautés"
+	}
 }

@@ -5,7 +5,7 @@
  * https://www.ghostery.com/
  *
  * Copyright 2018 Ghostery, Inc. All rights reserved.
- * 
+ *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
@@ -75,7 +75,7 @@
 			}
 			&.smart-blocked .warning-image,
 			&.smart-unblocked .warning-image {
-				background-image: buildSmartBlockIcon($button-purple);
+				background-image: buildIconSmartBlockingNoCircle(#1dafed);
 			}
 		}
 	}
@@ -289,58 +289,6 @@
 					display: block;
 					stroke: $white;
 				}
-			}
-		}
-	}
-}
-
-.expertTab {
-	@extend %pointer;
-	position: absolute;
-	top: 200px;
-	left: -26px;
-	width: 25px;
-	height: 50px;
-	.dash {
-		height: 20px;
-		width: 3px;
-		border-radius: 2px;
-		background-color: #D1D9DC;
-		margin-right: 7px;
-	}
-	.reverse-dash {
-		@extend .dash;
-		margin-right: -12px !important;
-	}
-	.moon {
-		display: none;
-		position: inherit;
-	}
-	.reverse-moon {
-		@extend .moon;
-		right: -26px !important;
-	}
-	&:hover {
-		.dash .reverse-dash {
-			display: none;
-		}
-		.moon {
-			display: block;
-			&:after {
-				content: url('../../app/images/panel/left-left-moon.svg');
-			}
-		}
-		.reverse-moon {
-			display: block;
-			&:after {
-				content: url('../../app/images/panel/right-right-moon.svg') !important;
-			}
-		}
-	}
-	&.expanded {
-		&:hover {
-			.moon:after {
-				content: url('../../app/images/panel/left-right-moon.svg');
 			}
 		}
 	}

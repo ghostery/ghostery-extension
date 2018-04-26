@@ -1,0 +1,160 @@
+/**
+ * Ghostery Features Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+.sub-component.ghostery-features {
+	.button {
+		width: 150px;
+		height: 45px;
+		font-size: 11px;
+		line-height: 1.5;
+		color: #4a4a4a;
+		border-color: #cccccc;
+		background-color: #ffffff;
+		margin-bottom: 0;
+		box-shadow: inset 0 0 0 0 rgba($white, 0);
+
+		transition: background-image 0.25s ease-out,
+			background-color 0.25s ease-out,
+			border-color 0.25s ease-out,
+			box-shadow 0.25 ease-out,
+			color 0.25s ease-out;
+		&:hover {
+			background-color: #efefef;
+		}
+	}
+	.button.active.button-trust {
+		color: #ffffff;
+		border-color: #85b329;
+		background-color: #9ecc42;
+		box-shadow: inset 0px 1px 7px 2px #85b329;
+		&:hover {
+			background-color: #85b329;
+		}
+	}
+	.button.active.button-restrict {
+		color: #ffffff;
+		border-color: #ce273c;
+		background-color: #e74055;
+		box-shadow: inset 0px 1px 7px 2px #ce273c;
+		&:hover {
+			background-color: #ce273c;
+		}
+	}
+	.button.active.ab-pause {
+		color: #ffffff;
+		border-color: #2092bf;
+		background-color: #1dafed;
+		box-shadow: inset 0px 1px 7px 2px #2092bf;
+		&:hover {
+			background-color: #0093bd;
+		}
+	}
+
+	.full-height { height: 100%; }
+	.button-trust .button-text,
+	.button-restrict .button-text {
+		padding: 0 10px 0 30px;
+		background-repeat: no-repeat;
+		background-position: 0 center;
+		background-size: 14px 14px;
+	}
+	.button-trust .button-text {
+		background-image: buildIconTrust(#4a4a4a);
+	}
+	.button-trust.active .button-text {
+		background-image: buildIconTrust(#ffffff);
+	}
+	.button-restrict .button-text {
+		background-image: buildIconRestrict(#4a4a4a);
+	}
+	.button-restrict.active .button-text {
+		background-image: buildIconRestrict(#ffffff);
+	}
+
+	.button-group.inactive {
+		.button {
+			color: #a4a4a4;
+			border-color: #e5e5e5;
+			background-color: #ffffff;
+			box-shadow: inset 0 0 0 0 rgba($white, 0);
+		}
+		.button.active.button-trust {
+			color: #ffffff;
+			border-color: #b8e65c;
+			background-color: #b8e65c;
+		}
+		.button.active.button-restrict {
+			color: #ffffff;
+			border-color: #ff8da2;
+			background-color: #ff8da2;
+		}
+		.button.active.ab-pause {
+			color: #ffffff;
+			border-color: #a4d4f2;
+			background-color: #a4d4f2;
+		}
+		.button-trust .button-text {
+			background-image: buildIconTrust(#a4a4a4);
+		}
+		.button-trust.active .button-text {
+			background-image: buildIconTrust(#ffffff);
+		}
+		.button-restrict .button-text {
+			background-image: buildIconRestrict(#a4a4a4);
+		}
+		.button-restrict.active .button-text {
+			background-image: buildIconRestrict(#ffffff);
+		}
+	}
+
+	.button-group.stacked .button {
+		height: 35px;
+		margin-bottom: 0;
+	}
+	.button-group.stacked .button.condensed {
+		width: 66px;
+		height: 41px;
+		.button-text {
+			padding: 10px;
+			font-size: 9px;
+			background-position: center center;
+		}
+	}
+
+	.button-top {
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+		border-bottom: 0;
+	}
+	.button-left {
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+		border-right: 0;
+	}
+	.button-center {
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+	.button-bottom {
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+		border-top: 0;
+	}
+	.button-right {
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+		border-left: 0;
+	}
+}

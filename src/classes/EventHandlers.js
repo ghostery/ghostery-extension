@@ -23,7 +23,7 @@ import conf from './Conf';
 import foundBugs from './FoundBugs';
 import globals from './Globals';
 import latency from './Latency';
-import Policy from './Policy';
+import Policy, { BLOCK_REASON_SS_UNBLOCKED, BLOCK_REASON_C2P_ALLOWED_THROUGH } from './Policy';
 import PolicySmartBlock from './PolicySmartBlock';
 import PurpleBox from './PurpleBox';
 import surrogatedb from './SurrogateDb';
@@ -357,7 +357,7 @@ class EventHandlers {
 
 		/* ** SMART BLOCKING - Privacy ** */
 		// block HTTP request on HTTPS page
-		if (this.policySmartBlock.isInsecureRequest(tab_id, page_protocol, processed.protocol)) {
+		if (this.policySmartBlock.isInsecureRequest(tab_id, page_protocol, processed.protocol, processed.host)) {
 			return this._blockHelper(details, tab_id, null, null, request_id, from_redirect, true);
 		}
 
@@ -372,21 +372,16 @@ class EventHandlers {
 			return { cancel: false };
 		}
 
-		let app_id;
-		let cat_id;
-		let incognito;
-		let tab_host;
-		let fromRedirect;
-		let block;
-		if (bug_id) {
-			app_id = bugDb.db.bugs[bug_id].aid;
-			cat_id = bugDb.db.apps[app_id].cat;
-			incognito = tabInfo.getTabInfo(tab_id, 'incognito');
-			tab_host = tabInfo.getTabInfo(tab_id, 'host');
-			fromRedirect = globals.REDIRECT_MAP.has(request_id);
-			block = this._checkBlocking(app_id, cat_id, tab_id, tab_host, page_url, request_id);
+		const app_id = bugDb.db.bugs[bug_id].aid;
+		const cat_id = bugDb.db.apps[app_id].cat;
+		const incognito = tabInfo.getTabInfo(tab_id, 'incognito');
+		const tab_host = tabInfo.getTabInfo(tab_id, 'host');
+		const fromRedirect = globals.REDIRECT_MAP.has(request_id);
+		const { block, reason } = this._checkBlocking(app_id, cat_id, tab_id, tab_host, page_url, request_id);
+		if (!block && reason === BLOCK_REASON_SS_UNBLOCKED) {
+			// The way to pass this flag to Cliqz handlers
+			details.ghosteryWhitelisted = true;
 		}
-
 		// Latency initialization needs to be synchronous to avoid race condition with onCompleted, etc.
 		// TODO can URLs repeat within a redirect chain? what are the cases of repeating URLs (trackers only, ...)?
 		if (block === false) {
@@ -679,7 +674,8 @@ class EventHandlers {
 	}
 
 	/**
-	 * Checks to see if the URL is valid
+	 * Checks to see if the URL is valid. Also checks to make sure we
+	 * are not on the Chrome new tab page (_/chrome/newtab) or Firefox about:pages
 	 *
 	 * @private
 	 *
@@ -687,7 +683,7 @@ class EventHandlers {
 	 * @return {Boolean}
 	 */
 	_isValidUrl(parsedURL) {
-		if (parsedURL.protocol.startsWith('http') && parsedURL.host.includes('.') && /[A-Za-z]/.test(parsedURL.host)) {
+		if (parsedURL.protocol.startsWith('http') && parsedURL.host.includes('.') && /[A-Za-z]/.test(parsedURL.host) && !parsedURL.path.includes('_/chrome/newtab')) {
 			return true;
 		}
 
@@ -760,6 +756,12 @@ class EventHandlers {
 	}
 
 	/**
+	 * @typedef {Object} BlockWithReason
+	 * @property {boolean}	block	indicates if the tracker should be blocked.
+	 * @property {string}	reason	indicates the reason for the block result.
+	 */
+
+	/**
 	 * Determine whether this request should be blocked
 	 *
 	 * @private
@@ -767,10 +769,10 @@ class EventHandlers {
 	 * @param  {number} 	app_id			tracker id
 	 * @param  {number} 	cat_id			tracker category id
 	 * @param  {number} 	tab_id			tab id
-	 * @param  {string} tab_host		tab url host
-	 * @param  {string} page_url		full tab url
+	 * @param  {string} 	tab_host		tab url host
+	 * @param  {string} 	page_url		full tab url
 	 * @param  {number} 	request_id		request id
-	 * @return {boolean}
+	 * @return {BlockWithReason}			block result with reason
 	 */
 	_checkBlocking(app_id, cat_id, tab_id, tab_host, page_url, request_id) {
 		const fromRedirect = globals.REDIRECT_MAP.has(request_id);
@@ -779,7 +781,7 @@ class EventHandlers {
 		// If we let page-level c2p trackers through, we don't want to block it
 		// along with all subsequent top-level redirects.
 		if (fromRedirect && globals.LET_REDIRECTS_THROUGH) {
-			block = false;
+			block = { block: false, reason: BLOCK_REASON_C2P_ALLOWED_THROUGH };
 		} else {
 			block = this.policy.shouldBlock(app_id, cat_id, tab_id, tab_host, page_url);
 		}

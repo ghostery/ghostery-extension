@@ -45,7 +45,9 @@ class AdditionalFeaturesView extends Component {
 	 * @param  {Object} event The event created by the onChange property
 	 */
 	_handleAntiTrack = (event) => {
-		this.props.actions.updateAntiTrack(event.target.checked);
+		if (!IS_CLIQZ) {
+			this.props.actions.updateAntiTrack(event.target.checked);
+		}
 	}
 
 	/**
@@ -61,7 +63,9 @@ class AdditionalFeaturesView extends Component {
 	 * @param  {Object} event The event created by the onChange property
 	 */
 	_handleAdBlock = (event) => {
-		this.props.actions.updateAdBlock(event.target.checked);
+		if (!IS_CLIQZ) {
+			this.props.actions.updateAdBlock(event.target.checked);
+		}
 	}
 
 	/**
@@ -78,7 +82,7 @@ class AdditionalFeaturesView extends Component {
 	 * @return {Object}
 	 */
 	createAntiTrackDescriptionMarkup() {
-		return { __html: IS_CLIQZ ? t('setup_feature_active_in_cliqz') : t('setup_additional_view_adblock_desc') };
+		return { __html: IS_CLIQZ ? t('setup_feature_active_in_cliqz') : t('setup_additional_view_antitrack_desc') };
 	}
 
 	/**
@@ -86,7 +90,7 @@ class AdditionalFeaturesView extends Component {
 	 * @return {Object}
 	 */
 	createAdBlockDescriptionMarkup() {
-		return { __html: IS_CLIQZ ? t('setup_feature_active_in_cliqz') : t('setup_additional_view_antitrack_desc') };
+		return { __html: IS_CLIQZ ? t('setup_feature_active_in_cliqz') : t('setup_additional_view_adblock_desc') };
 	}
 
 	/**

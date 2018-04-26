@@ -13,7 +13,8 @@
 
 /* eslint no-use-before-define: 0 */
 
-import { GET_PANEL_DATA,
+import {
+	GET_PANEL_DATA,
 	SHOW_NOTIFICATION,
 	CLOSE_NOTIFICATION,
 	LOGIN_SUCCESS,
@@ -21,8 +22,9 @@ import { GET_PANEL_DATA,
 	CREATE_ACCOUNT_SUCCESS,
 	TOGGLE_EXPANDED,
 	TOGGLE_EXPERT,
-	TOGGLE_DRAWER_SETTING,
-	UPDATE_NOTIFICATION_STATUS } from '../constants/constants';
+	TOGGLE_CLIQZ_FEATURE,
+	UPDATE_NOTIFICATION_STATUS
+} from '../constants/constants';
 import { sendMessage } from '../utils/msg';
 
 const initialState = {
@@ -71,7 +73,6 @@ export default (state = initialState, action) => {
 			return Object.assign({}, state, updated);
 		}
 		case CREATE_ACCOUNT_SUCCESS:
-			sendMessage('ping', 'create_account_extension');
 			return Object.assign({}, state, {
 				logged_in: true,
 				email: action.data.ClaimEmailAddress,
@@ -93,9 +94,9 @@ export default (state = initialState, action) => {
 				decoded_user_token: action.data.decoded_user_token,
 			});
 		}
-		case TOGGLE_DRAWER_SETTING: {
+		case TOGGLE_CLIQZ_FEATURE: {
 			let pingName = '';
-			switch (action.data.settingName) {
+			switch (action.data.featureName) {
 				case 'enable_anti_tracking':
 					pingName = action.data.isEnabled ? 'antitrack_off' : 'antitrack_on';
 					break;
@@ -108,11 +109,11 @@ export default (state = initialState, action) => {
 				default:
 					break;
 			}
+			sendMessage('setPanelData', { [action.data.featureName]: !action.data.isEnabled });
 			if (pingName) {
 				sendMessage('ping', pingName);
 			}
-			sendMessage('setPanelData', { [action.data.settingName]: !action.data.isEnabled });
-			return Object.assign({}, state, { [action.data.settingName]: !action.data.isEnabled });
+			return Object.assign({}, state, { [action.data.featureName]: !action.data.isEnabled });
 		}
 		case TOGGLE_EXPANDED: {
 			sendMessage('setPanelData', { is_expanded: !state.is_expanded });
@@ -185,13 +186,13 @@ const _showNotification = (state, action) => {
 		sendMessage('setPanelData', { needsReload: updated_needsReload });
 
 		// if we have changes and the user wants to see banners, then show
-		if (Object.keys(updated_needsReload.changes).length > 0 && reloadBannerStatus.show && nowTime > reloadBannerStatus.show_time) {
+		if ((msg.text || Object.keys(updated_needsReload.changes).length > 0) && reloadBannerStatus.show && nowTime > reloadBannerStatus.show_time) {
 			updated_notificationShown = true;
 		} else {
 			updated_notificationShown = false;
 		}
 
-		updated_notificationClasses = 'warning';
+		updated_notificationClasses = msg.classes || 'warning';
 	} else {
 		// Notification banners (success/warnings)
 		if (trackersBannerStatus.show && nowTime > trackersBannerStatus.show_time) {
@@ -201,8 +202,10 @@ const _showNotification = (state, action) => {
 		}
 
 		updated_notificationClasses = msg.classes;
+		if (msg.filter === 'tooltip') {
+			updated_needsReload.changes = {};
+		}
 	}
-
 	return {
 		needsReload: updated_needsReload,
 		notificationClasses: updated_notificationClasses,

@@ -55,7 +55,7 @@ const OptIn = (props) => {
 							</div>
 						</div>
 					}
-					{settingsData.enable_metrics_abtest &&
+					{settingsData.enable_offers_abtest &&
 						<div className="s-option-group" id="offers-section">
 							<div className="s-square-checkbox">
 								<input type="checkbox" id="settings-allow-offers" name="enable_offers" defaultChecked={settingsData.enable_offers} onClick={props.toggleCheckbox} />

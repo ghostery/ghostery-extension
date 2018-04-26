@@ -8,10 +8,12 @@
 	"author": "Ghostery",
 	"name": "__MSG_name__",
 	"short_name": "Ghostery",
-	"version": "8.1.0",
-	"version_name": "8.1.0",
+	"version": "8.2.0",
+	"version_name": "8.2.0",
 	"default_locale": "en",
 	"description": "__MSG_short_description__",
+	"log": true,
+	"debug": true,
 	"icons": {
 		"16": "app/images/icon16.png",
 		"48": "app/images/icon48.png",
@@ -29,6 +31,9 @@
 			"all_frames": false,
 			"js": [
 				"dist/ghostery_dot_com.js"
+			],
+			"css": [
+				"dist/css/ghostery_dot_com_css.css"
 			],
 			"matches": [
 				"https://www.ghostery.com/*",
@@ -61,6 +66,7 @@
 				"http://*/*",
 				"https://*/*"
 			],
+			"exclude_matches": ["*://*/_/chrome/newtab*"],
 			"run_at": "document_start"
 		}
 	],
@@ -77,14 +83,13 @@
 	],
 	"background": {
 		"scripts": [
-			"dist/vendor.js",
-			"dist/browser-core.js",
 			"dist/background.js"
 		],
 		"persistent": true
 	},
 	"minimum_edge_version": "33.14281.1000.0",
 	"minimum_chrome_version": "49",
+	"minimum_opera_version": "36",
 	"web_accessible_resources": [
 		"app/images/*"
 	]

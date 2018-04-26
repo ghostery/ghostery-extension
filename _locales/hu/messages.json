@@ -1422,7 +1422,7 @@
 		"message": "Mik az újdonságok?"
 	},
 	"panel_help_setup": {
-		"message": "Set Up Ghostery"
+		"message": "A Ghostery beállítása"
 	},
 	"global_settings_saved": {
 		"message": "Globális beállítások mentve"
@@ -1481,5 +1481,8 @@
 				"content": "</a>"
 			}
 		}
-	}		
+	},
+	"panel_about_release_notes": {
+		"message": "Az összes"
+	}
 }

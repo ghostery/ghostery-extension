@@ -527,6 +527,10 @@ export function fetchLocalJSONResource(url) {
 
 /**
  * Inject content scripts and CSS into a given tabID.
+ * Note: Chrome 61 blocks content scripts on the new tab page (_/chrome/newtab). Be
+ * sure to check the current URL before calling this function, otherwise Chrome will throw
+ * a permission error
+ *
  * @memberOf BackgroundUtils
  *
  * @param  {number} tabId 		tab id
@@ -541,10 +545,16 @@ export function injectScript(tabId, scriptfile, cssfile, runAt) {
 			if (chrome.runtime.lastError) {
 				log('injectScript error', chrome.runtime.lastError);
 				reject(new Error(chrome.runtime.lastError));
+				return;
 			}
 
 			if (cssfile) {
 				chrome.tabs.insertCSS(tabId, { file: cssfile, runAt }, () => {
+					if (chrome.runtime.lastError) {
+						log('insertCSS error', chrome.runtime.lastError);
+						reject(new Error(chrome.runtime.lastError));
+						return;
+					}
 					resolve();
 				});
 			} else {
@@ -568,8 +578,8 @@ export function injectNotifications(tab_id, importExport = false) {
 		return Promise.resolve(true);
 	}
 	const tab = tabInfo.getTabInfo(tab_id);
-	// check for prefetching and chrome new tab page
-	if (tab && tab.prefetched === true || (tab.path && tab.path.includes('_/chrome/newtab')) || (!importExport && globals.EXCLUDES.includes(tab.host))) {
+	// check for prefetching, chrome new tab page and Firefox about:pages
+	if (tab && tab.prefetched === true || tab.path.includes('_/chrome/newtab') || tab.protocol === 'about' || (!importExport && globals.EXCLUDES.includes(tab.host))) {
 		// return false to prevent sendMessage calls
 		return Promise.resolve(false);
 	}
