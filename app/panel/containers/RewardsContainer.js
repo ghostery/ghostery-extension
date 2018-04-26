@@ -16,6 +16,7 @@ import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import Rewards from '../components/Rewards';
 import * as actions from '../actions/RewardsActions';
+import { showNotification } from '../actions/PanelActions';
 
 /**
  * Map redux store state properties to Rewards view own properties.
@@ -26,7 +27,7 @@ import * as actions from '../actions/RewardsActions';
  * @todo  We are not using ownProps, so we better not specify it explicitly,
  * in this case it won't be passed by React (see https://github.com/reactjs/react-redux/blob/master/docs/api.md).
  */
-const mapStateToProps = (state, ownProps) => Object.assign({}, state.rewards, {});
+const mapStateToProps = (state, ownProps) => state.rewards;
 
 /**
  * Bind Rewards view action creators using Redux's bindActionCreators
@@ -35,7 +36,9 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state.rewards, {}
  * @param  {Object} 	ownProps  Detailed view component own props
  * @return {function}          	  to be used as an argument in redux connect call
  */
-const mapDispatchToProps = (dispatch, ownProps) => ({ actions: bindActionCreators(actions, dispatch) });
+const mapDispatchToProps = (dispatch, ownProps) => ({
+	actions: bindActionCreators(Object.assign(actions, { showNotification }), dispatch)
+});
 
 /**
  * Connects Rewards view component to the Redux store. Pass updated match, location, and history props to the wrapped component.

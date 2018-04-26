@@ -16,8 +16,7 @@ import {
 	UPDATE_TRACKER_COUNTS,
 	UPDATE_GHOSTERY_PAUSED,
 	UPDATE_SITE_POLICY,
-	FILTER_TRACKERS,
-	TOGGLE_EXPERT
+	FILTER_TRACKERS
 } from '../constants/constants';
 import { sendMessageInPromise } from '../utils/msg';
 
