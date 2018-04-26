@@ -49,6 +49,7 @@ class PanelData {
 		this._panelView = {};
 		this._summaryView = {};
 		this._blockingView = {};
+		this._rewardsView = {};
 		this._settingsView = {};
 	}
 
@@ -81,6 +82,8 @@ class PanelData {
 				return this.summaryView;
 			case 'blocking':
 				return this.blockingView;
+			case 'rewards':
+				return this.rewardsView;
 			default:
 				return false;
 		}
@@ -184,7 +187,6 @@ class PanelData {
 				needsReload: this._trackerData.get('needsReload'),
 				smartBlock: this._trackerData.get('smartBlock'),
 				tab_id: this._trackerData.get('tab_id'),
-				rewards: rewards.storedOffers
 			},
 			summary: this.summaryView,
 			blocking: this._confData.get('is_expert') ? this.blockingView : false,
@@ -232,6 +234,18 @@ class PanelData {
 			categories: this._trackerData.get('categories'),
 		};
 		return this._blockingView;
+	}
+
+	/**
+	 * Get rewards data for the Rewards View
+	 * @return {Object} Rewards view data
+	 */
+	get rewardsView() {
+		this._rewardsView = {
+			enable_offers: this._confData.get('enable_offers'),
+			rewards: rewards.storedOffers,
+		};
+		return this._rewardsView;
 	}
 
 	/**

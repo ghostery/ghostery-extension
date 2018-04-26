@@ -12,15 +12,16 @@
  */
 
 import {
-	GET_REWARDS_ACTIVE,
-	REMOVE_REWARD_ID,
-	TOGGLE_REWARDS_ACTIVE,
-	UPDATE_REWARD
+	GET_REWARDS_DATA,
+	TOGGLE_OFFERS_ENABLED,
+	REMOVE_OFFER,
+	SET_OFFER_READ
 } from '../constants/constants';
+import { sendMessage } from '../utils/msg';
 
 const initialState = {
 	rewards: null,
-	rewardsActive: true,
+	enable_offers: false,
 };
 
 /**
@@ -33,40 +34,23 @@ const initialState = {
  */
 export default (state = initialState, action) => {
 	switch (action.type) {
-		case GET_REWARDS_ACTIVE: {
-			const { rewardsActive } = state;
-			return (!rewardsActive) ? state : Object.assign({}, state, {
-				rewards: action.data
-			});
+		case GET_REWARDS_DATA: {
+			return Object.assign({}, state, action.data);
 		}
-		case REMOVE_REWARD_ID: {
-			const { rewards } = state;
-			const filtered = rewards.filter(item => item.id !== action.data.id);
-			return Object.assign({}, state, {
-				rewards: filtered,
-			});
+		case TOGGLE_OFFERS_ENABLED: {
+			const enable_offers = action.data.enabled;
+			sendMessage('setPanelData', { enable_offers });
+			return Object.assign({}, state, { enable_offers });
 		}
-		case TOGGLE_REWARDS_ACTIVE: {
-			const { rewards, rewardsActive } = state;
-			const updatedRewardsActive = !rewardsActive;
-			const updatedRewards = updatedRewardsActive ? rewards : [];
-			return Object.assign({}, state, {
-				rewards: updatedRewards,
-				rewardsActive: updatedRewardsActive,
-			});
-		}
-		case UPDATE_REWARD: {
-			const { rewards } = state;
-			const updated = rewards.map((item) => {
-				if (item.id === action.data.id) {
-					return { ...item, ...action.data };
-				}
-				return item;
-			});
 
-			return Object.assign({}, state, {
-				rewards: updated,
-			});
+		case REMOVE_OFFER: {
+			console.log('removing an offer does not work right now');
+			return state;
+		}
+
+		case SET_OFFER_READ: {
+			console.log('setting an offer to read does not work right now');
+			return state;
 		}
 		default: return state;
 	}
