@@ -20,7 +20,7 @@
  */
 import _ from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
-import CLIQZ from 'browser-core';
+import cliqz from './classes/cliqz';
 // object classes
 import Button from './classes/BrowserButton';
 import Events from './classes/EventHandlers';
@@ -51,8 +51,6 @@ const button = new Button();
 const events = new Events();
 
 const panelData = new PanelData();
-const cliqz = new (CLIQZ.App)();
-
 console.log("BACKGROUND CLIQZ", cliqz);
 
 // function shortcuts
@@ -1036,7 +1034,7 @@ adblocker.on('enabled', () => {
 offers.on('enabled', () => {
 	offers.isReady().then(() => {
 		log('IN OFFERS ON ENABLED', offers, messageCenter);
-		
+
 		if(DEBUG) {
 			offers.action('setConfiguration', {
 				config_location: 'de',
