@@ -20,7 +20,7 @@
  */
 import _ from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
-import CLIQZ from 'browser-core';
+import cliqz from './classes/cliqz';
 // object classes
 import Button from './classes/BrowserButton';
 import Events from './classes/EventHandlers';
@@ -51,7 +51,8 @@ const button = new Button();
 const events = new Events();
 
 const panelData = new PanelData();
-const cliqz = new (CLIQZ.App)();
+console.log("BACKGROUND CLIQZ", cliqz);
+
 // function shortcuts
 const { log } = common;
 const { sendMessage } = utils;
@@ -1045,14 +1046,16 @@ offers.on('enabled', () => {
 	offers.isReady().then(() => {
 		log('IN OFFERS ON ENABLED', offers, messageCenter);
 
-		offers.action('setConfiguration', {
-			config_location: 'de',
-			triggersBE: DEBUG ? 'http://offers-api-stage.clyqz.com:81' : 'https://offers-api.cliqz.com',
-			showConsoleLogs: (DEBUG === true),
-			offersLogsEnabled: (DEBUG === true),
-			offersDevFlag: (DEBUG === true),
-			offersTelemetryFreq: DEBUG ? '10' : ''
-		});
+		if(DEBUG) {
+			offers.action('setConfiguration', {
+				config_location: 'de',
+				triggersBE: 'http://offers-api-stage.clyqz.com:81',
+				showConsoleLogs: true,
+				offersLogsEnabled: true,
+				offersDevFlag: true,
+				offersTelemetryFreq: '10'
+			});
+		}
 
 		registerWithOffers(offers, true)
 		.then(() => {
