@@ -50,12 +50,12 @@ class HotDog extends Component {
 			<div className="ghostery-rewards-component">
 				{ this.state.closed !== true &&
 					<div>
-						<div onClick={this.navigate} className="hot-dog-container" style={{backgroundImage: this.ghostyStar}} >
+						<div onClick={this.navigate} className="hot-dog-container" style={{ backgroundImage: this.ghostyStar }} >
 							<div className="ghostery-reward-text">
 								1 {t('rewards_new_text')}!
 							</div>
 						</div>
-						<div className="hot-dog-close" onClick={this.close} style={{backgroundImage: this.closeIcon}} />
+						<div className="hot-dog-close" onClick={this.close} style={{ backgroundImage: this.closeIcon }} />
 					</div>
 				}
 			</div>
