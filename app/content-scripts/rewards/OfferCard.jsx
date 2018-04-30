@@ -53,10 +53,13 @@ class OfferCard extends Component {
 	sendSignal(type) {
 		// @param type = ['offer_shown', 'offer_ca_action', 'offer_closed']
 		if (this.props.port) {
-			this.props.port.postMessage({ name: 'rewardSignal', message: {
-				rewardId: this.props.reward.offer_id,
-				type
-			}});
+			this.props.port.postMessage({
+				name: 'rewardSignal',
+				message: {
+					rewardId: this.props.reward.offer_id,
+					type
+				}
+			});
 		} else {
 			sendMessage('rewardSignal', {
 				rewardId: this.props.reward.offer_id,
@@ -84,7 +87,7 @@ class OfferCard extends Component {
 	}
 
 	toggleSettings(e) {
-		console.log('toggle settings')
+		console.log('toggle settings');
 		this.setState({
 			showSettings: !this.state.showSettings
 		});
@@ -121,8 +124,8 @@ class OfferCard extends Component {
 						<Notification closeCallback={this.close} />
 					}
 					<div className="reward-card-header">
-						<div className="rewards-logo-beta" style={{backgroundImage: this.betaLogo}} />
-						<div className="reward-card-close" onClick={this.close} style={{backgroundImage: this.closeIcon}} />
+						<div className="rewards-logo-beta" style={{ backgroundImage: this.betaLogo }} />
+						<div className="reward-card-close" onClick={this.close} style={{ backgroundImage: this.closeIcon }} />
 					</div>
 					<div className="reward-content">
 						<div className="reward-content-header">
@@ -130,19 +133,19 @@ class OfferCard extends Component {
 							<div className="reward-company-logo">
 								<img src={this.state.rewardUI.logo_url} className="hide" onLoad={this.handleImageLoaded} />
 							</div>
-								<div
-									onClick={this.toggleSettings}
-									className="reward-settings-kebab"
-									style={{backgroundImage: this.kebabIcon}}
-									ref={(node) => { this.kebab = node; }}
-								/>
-								{ this.state.showSettings &&
-									<div className="rewards-settings-container">
-										<ClickOutside excludeEl={this.kebab} onClickOutside={this.toggleSettings}>
-											<Settings disable={this.disableRewards} />
-										</ClickOutside>
-									</div>
-								}
+							<div
+								onClick={this.toggleSettings}
+								className="reward-settings-kebab"
+								style={{ backgroundImage: this.kebabIcon }}
+								ref={(node) => { this.kebab = node; }}
+							/>
+							{ this.state.showSettings &&
+							<div className="rewards-settings-container">
+								<ClickOutside excludeEl={this.kebab} onClickOutside={this.toggleSettings}>
+									<Settings disable={this.disableRewards} />
+								</ClickOutside>
+							</div>
+							}
 						</div>
 						<div className="reward-content-img">
 							<div className="flex-grow" />
@@ -181,7 +184,7 @@ class OfferCard extends Component {
 							<a onClick={this.disableRewards}>{t('rewards_disable')}</a>
 							<div className="reward-arrow" />
 						</div>
-						<div className="reward-ghosty" style={{backgroundImage: this.ghostyGrey}} />
+						<div className="reward-ghosty" style={{ backgroundImage: this.ghostyGrey }} />
 					</div>
 				</div>}
 			</div>

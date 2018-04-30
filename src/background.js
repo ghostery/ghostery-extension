@@ -418,6 +418,14 @@ function handleRewards(name, message, tab_id, callback) {
 		console.log('sendMessage rewardSignal');
 		rewards.handleSignal(message);
 	}
+
+	if (name === 'rewardSeen') {
+		rewards.markRewardRead(message.offerId);
+	}
+
+	if (name === 'deleteReward') {
+		rewards.deleteReward(message.offerId);
+	}
 }
 
 /**
@@ -1044,7 +1052,7 @@ offers.on('enabled', () => {
 	offers.isReady().then(() => {
 		log('IN OFFERS ON ENABLED', offers, messageCenter);
 
-		if(DEBUG) {
+		if (DEBUG) {
 			offers.action('setConfiguration', {
 				config_location: 'de',
 				triggersBE: 'http://offers-api-stage.clyqz.com:81',
@@ -1056,9 +1064,9 @@ offers.on('enabled', () => {
 		}
 
 		registerWithOffers(offers, true)
-		.then(() => {
-			setCliqzModuleEnabled(messageCenter, true);
-		});
+			.then(() => {
+				setCliqzModuleEnabled(messageCenter, true);
+			});
 	});
 });/**
  * Set listener for 'enabled' event for Offers module.
@@ -1097,34 +1105,34 @@ messageCenter.on('enabled', () => {
 			if (msg.origin === 'offers-core' &&
 				msg.type === 'push-offer' &&
 				msg.data.offer_data) {
-					if (!rewards.storedOffers.hasOwnProperty(msg.data.offer_id)) {
-						rewards.storedOffers[msg.data.offer_id] = msg.data;
-						rewards.unreadOfferIds.push(msg.data.offer_id);
-					}
+				if (!rewards.storedOffers.hasOwnProperty(msg.data.offer_id)) {
+					rewards.storedOffers[msg.data.offer_id] = msg.data;
+					rewards.unreadOfferIds.push(msg.data.offer_id);
+				}
 
-					log('RECEIVED OFFER', msg);
-					utils.getActiveTab((tab) => {
-						let tabId = 0;
-						if (tab) tabId = tab.id;
-						rewards.showHotDog(tabId, msg.data);
-					});
+				log('RECEIVED OFFER', msg);
+				utils.getActiveTab((tab) => {
+					let tabId = 0;
+					if (tab) tabId = tab.id;
+					rewards.showHotDog(tabId, msg.data);
+				});
 
-					// const { data } = msg;
-					// const cmpMsg = {
-					// 	id: data.offer_data.display_id,
-					// 	Message: data.offer_data.ui_info.template_data.title,
-					// 	Link: data.offer_data.ui_info.template_data.call_to_action.url,
-					// 	LinkText: data.offer_data.ui_info.template_data.call_to_action.text,
-					// 	type: 'offers',
-					// 	origin: 'cliqz',
-					// 	data: {
-					// 		offer_info: {
-					// 			offer_id: data.offer_data.offer_id,
-					// 			offer_urls: data.offer_data.rule_info.url
-					// 		}
-					// 	}
-					// };
-					// cmp.CMP_DATA.push(cmpMsg);
+				// const { data } = msg;
+				// const cmpMsg = {
+				// 	id: data.offer_data.display_id,
+				// 	Message: data.offer_data.ui_info.template_data.title,
+				// 	Link: data.offer_data.ui_info.template_data.call_to_action.url,
+				// 	LinkText: data.offer_data.ui_info.template_data.call_to_action.text,
+				// 	type: 'offers',
+				// 	origin: 'cliqz',
+				// 	data: {
+				// 		offer_info: {
+				// 			offer_id: data.offer_data.offer_id,
+				// 			offer_urls: data.offer_data.rule_info.url
+				// 		}
+				// 	}
+				// };
+				// cmp.CMP_DATA.push(cmpMsg);
 			}
 		});
 	});

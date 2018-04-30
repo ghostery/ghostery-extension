@@ -37,17 +37,30 @@ class Rewards {
 		this.channelsSupported = (typeof chrome.runtime.onConnect === 'object');
 	}
 
-	handleSignal(rewardId, actionId) {
+	deleteReward(offerId) {
+		this.storedOffers.delete(offerId);
+		this.markRewardRead(offerId);
+		// @TODO send signal?
+	}
+
+	markRewardRead(offerId) {
+		const rewardIdx = this.unreadOfferIds.indexOf(offerId);
+		this.unreadOfferIds.splice(rewardIdx, 1);
+	}
+
+	handleSignal(offerId, actionId) {
 		console.log('handleSignal from Rewards.js');
-		// @TODO send signal
-		// {"origin":"offers-cc","type":"action-signal","data":{"action_id":"hub_open"}}
+
+		if (actionId === 'offer_shown') {
+			this.markRewardRead(offerId);
+		}
 
 		const signal = {
 			origin: 'ghostery',
 			type: 'action-signal',
 			data: {
 				action_id: 'offer_shown',
-				offer_id: rewardId
+				offer_id: offerId
 			}
 		};
 		console.log(signal);
@@ -55,7 +68,7 @@ class Rewards {
 	}
 
 	showHotDog(tab_id, offer) {
-		console.log('CHECK NEW OFFER ID', offer.offer_id)
+		console.log('CHECK NEW OFFER ID', offer.offer_id);
 		this.currentOffer = offer;
 		const tab = tabInfo.getTabInfo(tab_id);
 

@@ -21,13 +21,13 @@ class Settings extends Component {
 	}
 
 	render() {
-		return(
+		return (
 			<div>
 				{!this.state.closed && <div className="rewards-settings-container rewards-popup-container">
 					<div className="rewards-settings">
-						<div className="close" onClick={this.close} style={{backgroundImage: this.closeIcon}} />
+						<div className="close" onClick={this.close} style={{ backgroundImage: this.closeIcon }} />
 						<a href="https://www.ghostery.com/faqs" target="_blank" className="about">{t('rewards_about')}</a>
-						<div className="disable" onClick={() => {this.close(); this.props.disable();}}>{t('rewards_disable')}</div>
+						<div className="disable" onClick={() => { this.close(); this.props.disable(); }}>{t('rewards_disable')}</div>
 						<div className="flex-grow" />
 						{/* <div className="settings">{t('rewards_settings')}</div>
 						<div className="delete">{t('rewards_delete')}</div> */}

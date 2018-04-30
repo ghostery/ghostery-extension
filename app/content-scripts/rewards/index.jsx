@@ -34,8 +34,8 @@ class RewardsApp {
 	constructor() {
 		this.rewardsContainer = document.createElement('div');
 		this.rewardsApp = document.createElement('div');
-		this.rewardsIframe = null;;
-		this.iframeStyle = null;;
+		this.rewardsIframe = null;
+		this.iframeStyle = null;
 		this.port = null;
 		this.mainView = null;
 		this.rewardsApp.id = 'ghostery-rewards-app';
@@ -46,15 +46,15 @@ class RewardsApp {
 	}
 
 	init() {
-		if (document.readyState === "complete"
-		|| document.readyState === "loaded"
-		|| document.readyState === "interactive"
+		if (document.readyState === 'complete'
+		|| document.readyState === 'loaded'
+		|| document.readyState === 'interactive'
 		) {
-			this.start()
+			this.start();
 		} else {
 			document.addEventListener('DOMContentLoaded', (event) => {
 				this.start();
-			})
+			});
 		}
 	}
 
@@ -64,11 +64,11 @@ class RewardsApp {
 		} else {
 			// use iframe to encapsulate CSS - fallback for everything else besides chrome
 			this.renderIframe();
-		};
+		}
 	}
 
 	renderReact() {
-		let MainView = this.mainView;
+		const MainView = this.mainView;
 		ReactDOM.render(<MainView reward={this.reward} />, this.rewardsApp);
 	}
 
@@ -76,19 +76,17 @@ class RewardsApp {
 		// use shadowDOM to encapsulate CSS - fully supported in Chrome
 		this.rewardsContainer.appendChild(this.rewardsApp);
 		document.body.appendChild(this.rewardsContainer);
-		this.mainView = (props) => {
-			return (
-				<Router history={history}>
-					<ShadowDOM include={[chrome.extension.getURL('dist/css/rewards_styles.css')]}>
-						<div id="ghostery-shadow-root">
-							<Route exact path="/" render={ ()=> <HotDog reward={props.reward} /> } />
-							<Route path="/hotdog" render={ ()=> <HotDog reward={props.reward} /> } />
-							<Route path="/offercard" render={ ()=> <OfferCard reward={props.reward} port={this.port} /> } />
-						</div>
-					</ShadowDOM>
-				</Router>
-			);
-		}
+		this.mainView = props => (
+			<Router history={history}>
+				<ShadowDOM include={[chrome.extension.getURL('dist/css/rewards_styles.css')]}>
+					<div id="ghostery-shadow-root">
+						<Route exact path="/" render={() => <HotDog reward={props.reward} />} />
+						<Route path="/hotdog" render={() => <HotDog reward={props.reward} />} />
+						<Route path="/offercard" render={() => <OfferCard reward={props.reward} port={this.port} />} />
+					</div>
+				</ShadowDOM>
+			</Router>
+		);
 		this.renderReact();
 		this.initListener();
 	}
@@ -96,7 +94,7 @@ class RewardsApp {
 	renderIframe() {
 		this.rewardsIframe = document.createElement('iframe');
 		this.rewardsIframe.id = 'ghostery-iframe-container';
-		this.rewardsIframe.classList.add('hot-dog')
+		this.rewardsIframe.classList.add('hot-dog');
 		document.body.appendChild(this.rewardsIframe);
 		this.rewardsIframe.onload = () => {
 			this.iframeStyle = document.createElement('link');
@@ -109,20 +107,18 @@ class RewardsApp {
 
 			this.rewardsApp.classList.add('iframe-child');
 			this.rewardsContainer.appendChild(this.rewardsApp);
-			this.mainView = (props) => {
-				return (
-					<Router history={history}>
-						<div>
-							<Route exact path="/" render={ ()=> <HotDog reward={props.reward} /> } />
-							<Route path="/hotdog" render={ ()=> <HotDog reward={props.reward} /> } />
-							<Route path="/offercard" render={ ()=> <OfferCard reward={props.reward} port={this.port} /> } />
-						</div>
-					</Router>
-				);
-			}
+			this.mainView = props => (
+				<Router history={history}>
+					<div>
+						<Route exact path="/" render={() => <HotDog reward={props.reward} />} />
+						<Route path="/hotdog" render={() => <HotDog reward={props.reward} />} />
+						<Route path="/offercard" render={() => <OfferCard reward={props.reward} port={this.port} />} />
+					</div>
+				</Router>
+			);
 			this.renderReact();
 			this.initListener();
-		}
+		};
 	}
 
 	initListener() {
@@ -151,7 +147,6 @@ class RewardsApp {
 			this.renderReact();
 		}
 	}
-
 }
 
 new RewardsApp();
