@@ -21,11 +21,11 @@ class Notification extends Component {
 	}
 
 	render() {
-		return(
+		return (
 			<div>
 				{!this.state.closed && <div className="rewards-notification-container rewards-popup-container">
 					<div className="rewards-notification">
-						<div className="close" onClick={this.close} style={{backgroundImage: this.closeIcon}} />
+						<div className="close" onClick={this.close} style={{ backgroundImage: this.closeIcon }} />
 						<div className="notification-text">{t('rewards_disable_notification')}</div>
 						<a className="notification-text" onClick={this.close}>{t('rewards_disable_confirm')}</a>
 					</div>
