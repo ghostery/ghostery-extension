@@ -12,7 +12,6 @@
  */
 
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import ClassNames from 'classnames';
 import { computeTimeDelta } from '../../utils/utils';
 
@@ -40,7 +39,7 @@ class RewardDetail extends React.Component {
 
 	handleCopyClick() {
 		// Copy the reward code
-		ReactDOM.findDOMNode(this).querySelector('.RewardDetail__code input').select();
+		this.copyNode.querySelector('input').select();
 		document.execCommand('copy');
 
 		// Show a toast notification
@@ -92,7 +91,7 @@ class RewardDetail extends React.Component {
 					{ description }
 				</div>
 				<div className={codeContainerClassNames}>
-					<span className="RewardDetail__code">
+					<span className="RewardDetail__code" ref={(node) => { this.copyNode = node; }}>
 						<span>{ code }</span>
 						<input readOnly type="text" value={code} />
 					</span>

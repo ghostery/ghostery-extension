@@ -80,7 +80,7 @@ class BrowserButton {
 		if (tabId <= 0) { return; }
 
 		const iconAlt = (!active) ? '_off' :
-			HAS_NEW_REWARD ? '_star' : '';
+			(conf.enable_offers && HAS_NEW_REWARD) ? '_star' : '';
 
 		chrome.browserAction.setIcon({
 			path: {
@@ -108,7 +108,7 @@ class BrowserButton {
 					if (conf.show_badge) {
 						// Don't show badgeText when there is a new reward and Ghostery is active
 						// Otherwise set the tracker count to the badgeText
-						const text = (HAS_NEW_REWARD && active) ? '' : trackerCount;
+						const text = (conf.enable_offers && HAS_NEW_REWARD && active) ? '' : trackerCount;
 						chrome.browserAction.setBadgeText({ text, tabId });
 
 						// Set badge background color
