@@ -51,7 +51,7 @@ class Rewards extends React.Component {
 				const reward = nextProps.rewards[key].offer_data;
 				return {
 					id: reward.offer_id,
-					unread: false,
+					unread: nextProps.unread_offer_ids.indexOf(reward.offer_id) !== -1,
 					code: reward.ui_info.template_data.code || 'C0D3_DNE',
 					text: reward.ui_info.template_data.title || 'reward title',
 					description: reward.ui_info.template_data.desc || 'reward description',

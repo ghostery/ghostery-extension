@@ -15,12 +15,11 @@
 
 import conf from './Conf';
 import foundBugs from './FoundBugs';
+import rewards from './Rewards';
 import Policy from './Policy';
 import { getTab } from '../utils/utils';
 import { log } from '../utils/common';
 import globals from './Globals';
-
-const HAS_NEW_REWARD = true;
 
 /**
  * @class for handling Ghostery button.
@@ -80,7 +79,7 @@ class BrowserButton {
 		if (tabId <= 0) { return; }
 
 		const iconAlt = (!active) ? '_off' :
-			(conf.enable_offers && HAS_NEW_REWARD) ? '_star' : '';
+			(conf.enable_offers && rewards.unreadOfferIds.length > 0) ? '_star' : '';
 
 		chrome.browserAction.setIcon({
 			path: {
@@ -108,7 +107,7 @@ class BrowserButton {
 					if (conf.show_badge) {
 						// Don't show badgeText when there is a new reward and Ghostery is active
 						// Otherwise set the tracker count to the badgeText
-						const text = (conf.enable_offers && HAS_NEW_REWARD && active) ? '' : trackerCount;
+						const text = (conf.enable_offers && rewards.unreadOfferIds.length && active) ? '' : trackerCount;
 						chrome.browserAction.setBadgeText({ text, tabId });
 
 						// Set badge background color
