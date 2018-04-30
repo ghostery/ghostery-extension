@@ -25,7 +25,7 @@ import {
 	TOGGLE_CLIQZ_FEATURE,
 	UPDATE_NOTIFICATION_STATUS
 } from '../constants/constants';
-import { sendMessage } from '../utils/msg';
+import { sendMessage, sendMessageInPromise } from '../utils/msg';
 
 const initialState = {
 	enable_ad_block: true,
@@ -109,10 +109,11 @@ export default (state = initialState, action) => {
 				default:
 					break;
 			}
-			sendMessage('setPanelData', { [action.data.featureName]: !action.data.isEnabled });
-			if (pingName) {
-				sendMessage('ping', pingName);
-			}
+			sendMessageInPromise('setPanelData', { [action.data.featureName]: !action.data.isEnabled }).then(() => {
+				if (pingName) {
+					sendMessage('ping', pingName);
+				}
+			});
 			return Object.assign({}, state, { [action.data.featureName]: !action.data.isEnabled });
 		}
 		case TOGGLE_EXPANDED: {
