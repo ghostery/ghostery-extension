@@ -13,7 +13,7 @@
 
 /* eslint consistent-return: 0 */
 
-import cliqz from './cliqz';
+import cliqz from './Cliqz';
 import conf from './Conf';
 import tabInfo from './TabInfo';
 import Policy from './Policy';
@@ -38,8 +38,8 @@ class Rewards {
 	}
 
 	deleteReward(offerId) {
-		this.storedOffers.delete(offerId);
 		this.markRewardRead(offerId);
+		delete this.storedOffers[offerId];
 		// @TODO send signal?
 	}
 

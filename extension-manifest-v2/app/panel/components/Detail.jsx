@@ -63,6 +63,7 @@ class Detail extends React.Component {
 		const condensedToggleClassNames = ClassNames('condensed-toggle', {
 			condensed: this.props.is_expanded,
 		});
+		const { enable_offers, unread_offer_ids } = this.props;
 
 		return (
 			<div className="detail-wrap">
@@ -73,7 +74,7 @@ class Detail extends React.Component {
 					<Route path="/detail/performance" render={this.PerformanceComponent} />
 					<Route path="/detail/rewards" render={this.RewardsComponent} />
 					<Route path="/detail/premium" render={this.PremiumComponent} />
-					<DetailMenu />
+					<DetailMenu hasReward={enable_offers && unread_offer_ids.length > 0} />
 				</div>
 			</div>
 		);

@@ -17,11 +17,12 @@ import {
 	REMOVE_OFFER,
 	SET_OFFER_READ
 } from '../constants/constants';
-import { sendMessage } from '../utils/msg';
+import { sendMessage, sendRewardMessage } from '../utils/msg';
 
 const initialState = {
 	rewards: null,
 	enable_offers: false,
+	unread_offer_ids: [],
 };
 
 /**
@@ -44,12 +45,29 @@ export default (state = initialState, action) => {
 		}
 
 		case REMOVE_OFFER: {
-			console.log('removing an offer does not work right now');
-			return state;
+			// Remove offer from unread array
+			const unread_offer_ids = state.unread_offer_ids.slice();
+			const idx = unread_offer_ids.indexOf(action.data.id);
+			if (idx !== -1) {
+				unread_offer_ids.splice(idx, 1);
+			}
+
+			// Remove offer from offers list
+			const rewards = Object.assign({}, state.rewards);
+			delete rewards[action.data.id];
+
+			sendRewardMessage('deleteReward', { offerId: action.data.id });
+			return Object.assign({}, state, { unread_offer_ids, rewards });
 		}
 
 		case SET_OFFER_READ: {
-			console.log('setting an offer to read does not work right now');
+			const unread_offer_ids = state.unread_offer_ids.slice();
+			const idx = unread_offer_ids.indexOf(action.data.id);
+			if (idx !== -1) {
+				unread_offer_ids.splice(idx, 1);
+				sendRewardMessage('rewardSeen', { offerId: action.data.id });
+				return Object.assign({}, state, { unread_offer_ids });
+			}
 			return state;
 		}
 		default: return state;
