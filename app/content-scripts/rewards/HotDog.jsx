@@ -5,7 +5,6 @@ import { log } from '../../../src/utils/common';
 
 const msg = msgModule('hotdog');
 const { sendMessage } = msg;
-const { onMessage } = chrome.runtime;
 
 class HotDog extends Component {
 	constructor(props) {
@@ -15,7 +14,7 @@ class HotDog extends Component {
 			closed: false
 		};
 
-		this.iframeEl = parent.document.getElementById('ghostery-iframe-container');
+		this.iframeEl = window.parent.document.getElementById('ghostery-iframe-container');
 		if (this.iframeEl) {
 			this.iframeEl.classList = '';
 			this.iframeEl.classList.add('hot-dog');
@@ -26,9 +25,29 @@ class HotDog extends Component {
 
 		this.close = this.close.bind(this);
 		this.navigate = this.navigate.bind(this);
+
+		this.sendSignal('offer_notification_hotdog');
+	}
+
+	sendSignal(actionId) {
+		// Cliqz metrics
+		const offerId = this.props.reward.offer_id;
+		const message = {
+			offerId,
+			actionId
+		};
+		if (this.props.port) {
+			this.props.port.postMessage({
+				name: 'rewardSignal',
+				message
+			});
+		} else {
+			sendMessage('rewardSignal', message);
+		}
 	}
 
 	navigate() {
+		this.sendSignal('offer_click_hotdog');
 		if (this.iframeEl) {
 			this.iframeEl.classList.add('offer-card');
 		}
@@ -36,6 +55,7 @@ class HotDog extends Component {
 	}
 
 	close() {
+		this.sendSignal('offer_closed_hotdog');
 		if (this.iframeEl) {
 			this.iframeEl.classList = '';
 		}

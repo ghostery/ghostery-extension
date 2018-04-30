@@ -48,7 +48,9 @@ class Rewards {
 		this.unreadOfferIds.splice(rewardIdx, 1);
 	}
 
-	handleSignal(offerId, actionId) {
+	handleSignal(message) {
+		const { offerId, actionId } = message;
+		console.log('actionId', actionId)
 		console.log('handleSignal from Rewards.js');
 
 		if (actionId === 'offer_shown') {
@@ -59,7 +61,7 @@ class Rewards {
 			origin: 'ghostery',
 			type: 'action-signal',
 			data: {
-				action_id: 'offer_shown',
+				action_id: actionId,
 				offer_id: offerId
 			}
 		};
@@ -68,7 +70,7 @@ class Rewards {
 	}
 
 	showHotDog(tab_id, offer) {
-		console.log('CHECK NEW OFFER ID', offer.offer_id);
+		console.log('CHECK NEW OFFER ID', offer.offer_id)
 		this.currentOffer = offer;
 		const tab = tabInfo.getTabInfo(tab_id);
 
@@ -97,7 +99,7 @@ class Rewards {
 								if (message.name === 'rewardsLoaded') {
 									this.ports.get(tabId).postMessage({ name: 'showHotDog', reward: this.currentOffer });
 								} else if (message.name === 'rewardSignal') {
-									this.handleSignal(message.rewardId);
+									this.handleSignal(message.message);
 								}
 							});
 						}
