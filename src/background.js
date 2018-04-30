@@ -51,7 +51,6 @@ const button = new Button();
 const events = new Events();
 
 const panelData = new PanelData();
-console.log("BACKGROUND CLIQZ", cliqz);
 
 // function shortcuts
 const { log } = common;
@@ -415,10 +414,9 @@ function handleBlockedRedirect(name, message, tab_id, callback) {
 }
 
 function handleRewards(name, message, tab_id, callback) {
-	if (name === 'rewardsSignal') {
-		// @TODO send signal
-		// {"origin":"offers-cc","type":"action-signal","data":{"action_id":"hub_open"}}
-		// cliqz.modules['offers-v2'].background.actions.processRealEstateMessage(message);
+	if (name === 'rewardSignal') {
+		console.log('sendMessage rewardSignal');
+		rewards.handleSignal(message);
 	}
 }
 
@@ -1101,6 +1099,7 @@ messageCenter.on('enabled', () => {
 				msg.data.offer_data) {
 					if (!rewards.storedOffers.hasOwnProperty(msg.data.offer_id)) {
 						rewards.storedOffers[msg.data.offer_id] = msg.data;
+						rewards.unreadOfferIds.push(msg.data.offer_id);
 					}
 
 					log('RECEIVED OFFER', msg);
