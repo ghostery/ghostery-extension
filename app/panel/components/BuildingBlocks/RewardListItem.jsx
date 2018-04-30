@@ -69,7 +69,12 @@ class RewardListItem extends React.Component {
 	 * @return {JSX} JSX for rendering a Reward within the Rewards List
 	 */
 	render() {
-		const { disabled, unread, text, id } = this.props;
+		const {
+			id,
+			text,
+			unread,
+			disabled
+		} = this.props;
 		const itemClassName = ClassNames('RewardListItem', 'row', {
 			'RewardListItem--greyscale': disabled,
 			'RewardListItem--unread': unread,
