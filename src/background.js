@@ -20,7 +20,7 @@
  */
 import _ from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
-import cliqz from './classes/cliqz';
+import cliqz from './classes/Cliqz';
 // object classes
 import Button from './classes/BrowserButton';
 import Events from './classes/EventHandlers';
@@ -415,16 +415,15 @@ function handleBlockedRedirect(name, message, tab_id, callback) {
 
 function handleRewards(name, message, tab_id, callback) {
 	if (name === 'rewardSignal') {
-		console.log('sendMessage rewardSignal');
 		rewards.sendSignal(message);
 	}
-
 	if (name === 'rewardSeen') {
 		rewards.markRewardRead(message.offerId);
+		button.update();
 	}
-
 	if (name === 'deleteReward') {
 		rewards.deleteReward(message.offerId);
+		button.update();
 	}
 }
 
@@ -522,7 +521,6 @@ function onMessageHandler(request, sender, callback) {
 	const {
 		name, message, messageId, origin
 	} = request;
-	console.log('REQUESTORIGIN', origin);
 	const { tab } = sender;
 	const tab_id = tab && tab.id;
 	// Edge does not have url on tab object, as of Build 14342_rc1
@@ -565,7 +563,7 @@ function onMessageHandler(request, sender, callback) {
 		return handleClick2Play(name, message, tab_id, callback);
 	} else if (origin === 'blocked_redirect') {
 		return handleBlockedRedirect(name, message, tab_id, callback);
-	} else if (origin === 'rewards') {
+	} else if (origin === 'rewards' || origin === 'rewardsPanel') {
 		return handleRewards(name, message, tab_id, callback);
 	}
 
@@ -1112,6 +1110,7 @@ messageCenter.on('enabled', () => {
 				}
 
 				log('RECEIVED OFFER', msg);
+				button.update();
 				utils.getActiveTab((tab) => {
 					let tabId = 0;
 					if (tab) tabId = tab.id;
