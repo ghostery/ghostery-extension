@@ -29,13 +29,6 @@ class OfferCard extends Component {
 			}
 		};
 
-		// @TODO sendMessage to add "seen" flag to reward object
-		if (this.props.port) {
-			this.props.port.postMessage({ name: 'rewardSeen', message: {data: 'test'} });
-		} else {
-			sendMessage('rewardSeen', {data: 'test'});
-		}
-
 		this.iframeEl = parent.document.getElementById('ghostery-iframe-container');
 		if (this.iframeEl) {
 			this.iframeEl.classList = '';
@@ -60,13 +53,13 @@ class OfferCard extends Component {
 	sendSignal(type) {
 		// @param type = ['offer_shown', 'offer_ca_action', 'offer_closed']
 		if (this.props.port) {
-			this.props.port.postMessage({ name: 'rewardsSignal', message: {
-				id: this.props.reward.offer_id,
+			this.props.port.postMessage({ name: 'rewardSignal', message: {
+				rewardId: this.props.reward.offer_id,
 				type
 			}});
 		} else {
-			sendMessage('rewardsSignal', {
-				id: this.props.reward.offer_id,
+			sendMessage('rewardSignal', {
+				rewardId: this.props.reward.offer_id,
 				type
 			});
 		}
