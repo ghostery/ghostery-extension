@@ -175,6 +175,7 @@ class PanelData {
 				enable_ad_block: this._confData.get('enable_ad_block'),
 				enable_anti_tracking: this._confData.get('enable_anti_tracking'),
 				enable_smart_block: this._confData.get('enable_smart_block'),
+				enable_offers: this._confData.get('enable_offers'),
 				is_expanded: this._confData.get('is_expanded'),
 				is_expert: this._confData.get('is_expert'),
 				is_android: globals.BROWSER_INFO.os === 'android',
@@ -187,6 +188,7 @@ class PanelData {
 				needsReload: this._trackerData.get('needsReload'),
 				smartBlock: this._trackerData.get('smartBlock'),
 				tab_id: this._trackerData.get('tab_id'),
+				unread_offer_ids: rewards.unreadOfferIds,
 			},
 			summary: this.summaryView,
 			blocking: this._confData.get('is_expert') ? this.blockingView : false,
@@ -244,6 +246,7 @@ class PanelData {
 		this._rewardsView = {
 			enable_offers: this._confData.get('enable_offers'),
 			rewards: rewards.storedOffers,
+			unread_offer_ids: rewards.unreadOfferIds,
 		};
 		return this._rewardsView;
 	}

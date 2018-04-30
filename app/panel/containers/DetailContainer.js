@@ -26,6 +26,8 @@ import * as actions from '../actions/DetailActions';
  */
 const mapStateToProps = (state, ownProps) => Object.assign({}, state.detail, {
 	is_expanded: state.panel.is_expanded,
+	enable_offers: state.panel.enable_offers,
+	unread_offer_ids: state.panel.unread_offer_ids,
 });
 /**
  * Bind Detailed view action creators using Redux's bindActionCreators

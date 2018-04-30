@@ -85,3 +85,27 @@ export function sendMessage(name, message, callback = function () {}) {
 		message,
 	}, callback);
 }
+
+/**
+ * Send a message to the handlers in src/background relating to rewards.
+ * This should be used for messages that don't require a callback.
+ * @memberOf PanelUtils
+ *
+ * @param  {string} 	name 		message name
+ * @param  {Object} 	message 	message data
+ * @param  {function} 	callback 	callback message
+ * @return {Object}		response
+ * @todo  runtime.sendMessage does not return any value.
+ */
+export function sendRewardMessage(name, message, callback = function () {}) {
+	log('Panel sendMessage: sending to background', name);
+	// @EDGE chrome.runtime.sendMessage(message) works, but
+	// const callback; chrome.runtime.sendMessage(message, callback) fails to execute and chrome.runtime.lastError is undefined.
+	// const fallback = function () {}; // Workaround for Edge. callback cannot be undefined.
+	// callback = callback || fallback;
+	return chrome.runtime.sendMessage({
+		name,
+		message,
+		origin: 'rewardsPanel',
+	}, callback);
+}

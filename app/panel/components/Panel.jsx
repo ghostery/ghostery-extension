@@ -36,7 +36,6 @@ class Panel extends React.Component {
 		// try to get tabId from query string if available (FF for Android only)
 		const tabId = new URLSearchParams(window.location.search).get('tabId');
 		this.props.actions.getPanelData(tabId).then((data) => {
-			console.log('panelData', data);
 			if (data.is_expert) {
 				// load Detail component
 				this.props.history.push('/detail');

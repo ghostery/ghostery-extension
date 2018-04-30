@@ -22,7 +22,6 @@ import cmp from './CMP';
 import conf from './Conf';
 import foundBugs from './FoundBugs';
 import globals from './Globals';
-import HotDog from './HotDog';
 import latency from './Latency';
 import Policy, { BLOCK_REASON_SS_UNBLOCKED, BLOCK_REASON_C2P_ALLOWED_THROUGH } from './Policy';
 import PolicySmartBlock from './PolicySmartBlock';
@@ -49,7 +48,6 @@ class EventHandlers {
 		this.policy = new Policy();
 		this.policySmartBlock = new PolicySmartBlock();
 		this.purplebox = new PurpleBox();
-		this.hotdog = new hotdog();
 	}
 
 	/**
@@ -115,7 +113,6 @@ class EventHandlers {
 					tabInfo.setTabInfo(tabId, 'incognito', tab.incognito);
 					// purplebox.createBox() will first check to make sure this is a valid tab
 					this._createBox(tabId);
-					this.hotdog.showCircle();
 				}
 			}, () => {
 				// prefetched tabs will return an error from utils.getTab
