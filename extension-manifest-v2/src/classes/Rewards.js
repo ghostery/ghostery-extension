@@ -13,6 +13,7 @@
 
 /* eslint consistent-return: 0 */
 
+import cliqz from './cliqz';
 import conf from './Conf';
 import tabInfo from './TabInfo';
 import Policy from './Policy';
@@ -30,13 +31,27 @@ const t = chrome.i18n.getMessage;
 class Rewards {
 	constructor() {
 		this.storedOffers = {};
+		this.unreadOfferIds = [];
 		this.currentOffer = null;
 		this.ports = new Map();
 		this.channelsSupported = (typeof chrome.runtime.onConnect === 'object');
 	}
 
-	handleSignal(rewardId) {
+	handleSignal(rewardId, actionId) {
+		console.log('handleSignal from Rewards.js');
+		// @TODO send signal
+		// {"origin":"offers-cc","type":"action-signal","data":{"action_id":"hub_open"}}
 
+		const signal = {
+			origin: 'ghostery',
+			type: 'action-signal',
+			data: {
+				action_id: 'offer_shown',
+				offer_id: rewardId
+			}
+		};
+		console.log(signal);
+		cliqz.modules['offers-v2'].background.actions.processRealEstateMessage(signal);
 	}
 
 	showHotDog(tab_id, offer) {

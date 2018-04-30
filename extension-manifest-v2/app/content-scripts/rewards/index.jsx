@@ -140,7 +140,7 @@ class RewardsApp {
 	}
 
 	handleMessages(request, sender, response) {
-		console.log('postMessage request', request);
+		console.log('handleMessages postMessage request', request);
 		if (request.name === 'showHotDog') {
 			console.log('showHotDog event reward id ', request.reward.offer_id);
 			this.reward = request.reward;
