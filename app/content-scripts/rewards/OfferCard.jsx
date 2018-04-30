@@ -9,7 +9,6 @@ import ClickOutside from '../../panel/components/helpers/ClickOutside';
 
 const msg = msgModule('rewards');
 const { sendMessage } = msg;
-const { onMessage } = chrome.runtime;
 
 class OfferCard extends Component {
 	constructor(props) {
@@ -46,29 +45,29 @@ class OfferCard extends Component {
 		this.toggleSettings = this.toggleSettings.bind(this);
 		this.handleImageLoaded = this.handleImageLoaded.bind(this);
 
-		// Cliqz metrics
 		this.sendSignal('offer_shown');
+		this.sendSignal('offer_dsp_session');
 	}
 
-	sendSignal(type) {
-		// @param type = ['offer_shown', 'offer_ca_action', 'offer_closed']
+	sendSignal(actionId) {
+		// Cliqz metrics
+		const offerId = this.props.reward.offer_id;
+		const message = {
+			offerId,
+			actionId
+		};
 		if (this.props.port) {
 			this.props.port.postMessage({
 				name: 'rewardSignal',
-				message: {
-					rewardId: this.props.reward.offer_id,
-					type
-				}
+				message
 			});
 		} else {
-			sendMessage('rewardSignal', {
-				rewardId: this.props.reward.offer_id,
-				type
-			});
+			sendMessage('rewardSignal', message);
 		}
 	}
 
 	copyCode() {
+		this.sendSignal('code_copied');
 		ReactDOM.findDOMNode(this).querySelector('.reward-code-input').select();
 		document.execCommand('copy');
 
@@ -87,6 +86,9 @@ class OfferCard extends Component {
 	}
 
 	toggleSettings(e) {
+		if (!this.state.showSettings) {
+			this.sendSignal('offer_settings')
+		}
 		console.log('toggle settings');
 		this.setState({
 			showSettings: !this.state.showSettings
@@ -94,18 +96,24 @@ class OfferCard extends Component {
 	}
 
 	disableRewards() {
+		this.sendSignal('rewards_off');
 		this.setState({
 			showNotification: true
 		});
 	}
 
 	close() {
+		this.sendSignal('offer_closed_card');
 		if (this.iframeEl) {
 			this.iframeEl.classList = '';
 		}
 		this.setState({
 			closed: true
 		});
+	}
+
+	redeem() {
+		this.sendSignal('offer_ca_action');
 	}
 
 	handleImageLoaded(e) {
@@ -174,7 +182,7 @@ class OfferCard extends Component {
 							{/* <span> {t('rewards_expire')} { this.props.reward.expireTime } </span> */}
 							{/* <a target="_blank" href={this.props.reward.termsLink}> { t('rewards_terms_conditions') } </a> */}
 						</div>
-						<a target="_blank" href={this.state.rewardUI.call_to_action && this.state.rewardUI.call_to_action.url} className="reward-redeem">
+						<a target="_blank" onClick={this.redeem} href={this.state.rewardUI.call_to_action && this.state.rewardUI.call_to_action.url} className="reward-redeem">
 							{this.state.rewardUI.call_to_action.text}
 						</a>
 					</div>
