@@ -25,7 +25,7 @@ const FREQUENCIES = { // in milliseconds
 	monthly: 2419200000
 };
 const CRITICAL_METRICS = ['install', 'install_complete', 'upgrade', 'active', 'engaged', 'uninstall'];
-const CAMPAIGN_METRICS = ['install', 'active'];
+const CAMPAIGN_METRICS = ['install', 'active', 'uninstall'];
 const { METRICS_SUB_DOMAIN, EXTENSION_VERSION, BROWSER_INFO } = globals;
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const MAX_DELAYED_PINGS = 100;
