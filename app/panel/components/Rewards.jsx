@@ -47,7 +47,7 @@ class Rewards extends React.Component {
 		const dateNow = new Date();
 		let rewardsArray = null;
 		if (nextProps.rewards) {
-			rewardsArray = Object.keys(nextProps.rewards).map(key => {
+			rewardsArray = Object.keys(nextProps.rewards).map((key) => {
 				const reward = nextProps.rewards[key].offer_data;
 				return {
 					id: reward.offer_id,
@@ -55,7 +55,7 @@ class Rewards extends React.Component {
 					code: reward.ui_info.template_data.code || 'C0D3_DNE',
 					text: reward.ui_info.template_data.title || 'reward title',
 					description: reward.ui_info.template_data.desc || 'reward description',
-					expires: Math.round((new Date()).setDate(dateNow.getDate() + reward.expirationMs / 60/ 60 / 24)),
+					expires: Math.round((new Date()).setDate(dateNow.getDate() + reward.expirationMs / 60 / 60 / 24)),
 				};
 			});
 		}

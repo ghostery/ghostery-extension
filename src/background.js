@@ -823,6 +823,7 @@ function initializeDispatcher() {
 		}
 	});
 	dispatcher.on('conf.save.enable_offers', (enableOffers) => {
+		button.update();
 		if (!IS_EDGE && !IS_CLIQZ) {
 			if (enableOffers) {
 				setCliqzModuleEnabled(offers, enableOffers);
