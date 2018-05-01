@@ -28,6 +28,7 @@ class RewardDetail extends React.Component {
 
 		// Event Bindings
 		this.handleCopyClick = this.handleCopyClick.bind(this);
+		this.handleRedeemClick = this.handleRedeemClick.bind(this);
 	}
 
 	/**
@@ -53,6 +54,12 @@ class RewardDetail extends React.Component {
 		setTimeout(() => {
 			this.setState({ copyText: 'copy code' });
 		}, 3000);
+		this.props.actions.sendSignal('code_copied', this.props.id);
+	}
+
+	handleRedeemClick() {
+		// @TODO add href tag for redeem link
+		this.props.actions.sendSignal('offer_ca_action', this.props.id);
 	}
 
 	/**
@@ -99,7 +106,7 @@ class RewardDetail extends React.Component {
 						{this.state.copyText}
 					</span>
 				</div>
-				<div className="RewardDetail__redeem_button">
+				<div className="RewardDetail__redeem_button" onClick={this.handleRedeemClick}>
 					Redeem Now
 				</div>
 			</div>

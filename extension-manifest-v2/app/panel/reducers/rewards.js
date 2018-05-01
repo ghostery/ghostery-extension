@@ -15,7 +15,8 @@ import {
 	GET_REWARDS_DATA,
 	TOGGLE_OFFERS_ENABLED,
 	REMOVE_OFFER,
-	SET_OFFER_READ
+	SET_OFFER_READ,
+	SEND_SIGNAL
 } from '../constants/constants';
 import { sendMessage, sendRewardMessage } from '../utils/msg';
 
@@ -70,6 +71,12 @@ export default (state = initialState, action) => {
 			}
 			return state;
 		}
+
+		case SEND_SIGNAL: {
+			sendRewardMessage('rewardSignal', action.data);
+			return state;
+		}
+
 		default: return state;
 	}
 };

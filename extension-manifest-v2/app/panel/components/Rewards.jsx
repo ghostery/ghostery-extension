@@ -34,6 +34,7 @@ class Rewards extends React.Component {
 
 		this.renderRewardListComponent = this.renderRewardListComponent.bind(this);
 		this.renderRewardDetailComponent = this.renderRewardDetailComponent.bind(this);
+		this.handleBackClick = this.handleBackClick.bind(this);
 	}
 
 	/**
@@ -41,6 +42,7 @@ class Rewards extends React.Component {
 	 */
 	componentDidMount() {
 		this.props.actions.getRewardsData();
+		this.props.actions.sendSignal('hub_opened');
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -62,6 +64,15 @@ class Rewards extends React.Component {
 		this.setState({ rewardsArray });
 	}
 
+	componentWillUnmount() {
+		this.props.actions.sendSignal('hub_closed');
+	}
+
+	handleBackClick() {
+		const offerId = this.props.location.pathname.split('/detail/rewards/detail/')[1];
+		this.props.actions.sendSignal('offer_return_hub', offerId);
+	}
+
 	/**
 	 * Handles toggling rewards on/off
 	 */
@@ -72,6 +83,7 @@ class Rewards extends React.Component {
 			classes: 'purple',
 		});
 		this.props.actions.toggleOffersEnabled(!enable_offers);
+		this.props.actions.sendSignal(enable_offers ? 'rewards_off' : 'rewards_on');
 	}
 
 	/**
@@ -94,7 +106,7 @@ class Rewards extends React.Component {
 		return (
 			<div className="RewardsPanel__header flex-container align-center-middle">
 				{showBack && (
-					<Link to="/detail/rewards/list" className="RewardsPanel--send-left RewardsPanel--add-padding flex-container clickable">
+					<Link to="/detail/rewards/list" className="RewardsPanel--send-left RewardsPanel--add-padding flex-container clickable" onClick={this.handleBackClick}>
 						<svg height="18" width="12" fill="none" stroke="#4a4a4a" strokeWidth="3" strokeLinecap="round">
 							<path d="M10,2L2,9L10,16" />
 						</svg>
@@ -141,6 +153,7 @@ class Rewards extends React.Component {
 				text={reward.text}
 				expires={reward.expires}
 				clickCloseButton={this.removeOffer}
+				actions={this.props.actions}
 			/>
 		));
 		return <div className="RewardsPanel__scroll_content">{ rewardsList }</div>;

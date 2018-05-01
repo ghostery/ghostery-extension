@@ -92,7 +92,7 @@ class OfferCard extends Component {
 
 	toggleSettings(e) {
 		if (!this.state.showSettings) {
-			this.sendSignal('offer_settings')
+			this.sendSignal('offer_settings');
 		}
 		console.log('toggle settings');
 		this.setState({
