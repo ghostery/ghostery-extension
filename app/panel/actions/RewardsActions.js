@@ -15,7 +15,8 @@ import {
 	GET_REWARDS_DATA,
 	TOGGLE_OFFERS_ENABLED,
 	REMOVE_OFFER,
-	SET_OFFER_READ
+	SET_OFFER_READ,
+	SEND_SIGNAL
 } from '../constants/constants';
 import { sendMessageInPromise } from '../utils/msg';
 
@@ -71,5 +72,15 @@ export function setOfferRead(id) {
 	return {
 		type: SET_OFFER_READ,
 		data: { id }
+	};
+}
+
+export function sendSignal(actionId, offerId) {
+	return {
+		type: SEND_SIGNAL,
+		data: {
+			actionId,
+			offerId
+		}
 	};
 }
