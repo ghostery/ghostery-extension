@@ -25,19 +25,25 @@ class HotDog extends Component {
 
 		this.close = this.close.bind(this);
 		this.navigate = this.navigate.bind(this);
-
-		this.sendSignal('offer_notification_hotdog');
 	}
 
-	sendSignal(actionId) {
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.reward) {
+			this.sendSignal('offer_notification_hotdog', nextProps);
+		}
+	}
+
+	sendSignal(actionId, props) {
+		props = props || this.props;
+
 		// Cliqz metrics
-		const offerId = this.props.reward.offer_id;
+		const offerId = props.reward.offer_id;
 		const message = {
 			offerId,
 			actionId
 		};
-		if (this.props.port) {
-			this.props.port.postMessage({
+		if (props.port) {
+			props.port.postMessage({
 				name: 'rewardSignal',
 				message
 			});

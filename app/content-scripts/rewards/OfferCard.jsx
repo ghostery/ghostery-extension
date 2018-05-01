@@ -43,20 +43,26 @@ class OfferCard extends Component {
 		this.disableRewards = this.disableRewards.bind(this);
 		this.toggleSettings = this.toggleSettings.bind(this);
 		this.handleImageLoaded = this.handleImageLoaded.bind(this);
-
-		this.sendSignal('offer_shown');
-		this.sendSignal('offer_dsp_session');
 	}
 
-	sendSignal(actionId) {
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.reward) {
+			this.sendSignal('offer_shown', nextProps);
+			this.sendSignal('offer_dsp_session', nextProps);
+		}
+	}
+
+	sendSignal(actionId, props) {
+		props = props || this.props;
+
 		// Cliqz metrics
-		const offerId = this.props.reward.offer_id;
+		const offerId = props.reward.offer_id;
 		const message = {
 			offerId,
 			actionId
 		};
-		if (this.props.port) {
-			this.props.port.postMessage({
+		if (props.port) {
+			props.port.postMessage({
 				name: 'rewardSignal',
 				message
 			});
