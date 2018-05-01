@@ -40,6 +40,7 @@ export const GET_REWARDS_DATA = 'GET_REWARDS_DATA';
 export const TOGGLE_OFFERS_ENABLED = 'TOGGLE_OFFERS_ENABLED';
 export const REMOVE_OFFER = 'REMOVE_OFFER';
 export const SET_OFFER_READ = 'SET_OFFER_READ';
+export const SEND_SIGNAL = 'SEND_SIGNAL';
 
 // blocking
 export const GET_BLOCKING_DATA = 'GET_BLOCKING_DATA';

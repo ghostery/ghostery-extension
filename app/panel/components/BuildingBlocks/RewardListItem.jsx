@@ -35,9 +35,14 @@ class RewardListItem extends React.Component {
 	 * @param  {Object} event the click event
 	 */
 	handleClick(event) {
-		const { disabled } = this.props;
+		const { disabled, unread, id } = this.props;
 		if (disabled) {
 			event.preventDefault();
+		} else {
+			if (unread) {
+				this.props.actions.sendSignal('offer_click_specific_new', id);
+			}
+			this.props.actions.sendSignal('offer_click_specific', id);
 		}
 	}
 
@@ -51,6 +56,7 @@ class RewardListItem extends React.Component {
 
 		const { id } = this.props;
 		this.props.clickCloseButton(id);
+		this.props.actions.sendSignal('remove_offer_link', id);
 	}
 
 	/**
