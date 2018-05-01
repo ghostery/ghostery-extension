@@ -48,10 +48,10 @@ class Rewards {
 		this.unreadOfferIds.splice(rewardIdx, 1);
 	}
 
-	handleSignal(message) {
+	sendSignal(message) {
 		const { offerId, actionId } = message;
 		console.log('actionId', actionId)
-		console.log('handleSignal from Rewards.js');
+		console.log('sendSignal from Rewards.js');
 
 		if (actionId === 'offer_shown') {
 			this.markRewardRead(offerId);
@@ -99,7 +99,7 @@ class Rewards {
 								if (message.name === 'rewardsLoaded') {
 									this.ports.get(tabId).postMessage({ name: 'showHotDog', reward: this.currentOffer });
 								} else if (message.name === 'rewardSignal') {
-									this.handleSignal(message.message);
+									this.sendSignal(message.message);
 								}
 							});
 						}
