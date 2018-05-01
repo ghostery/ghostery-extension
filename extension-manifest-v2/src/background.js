@@ -416,7 +416,7 @@ function handleBlockedRedirect(name, message, tab_id, callback) {
 function handleRewards(name, message, tab_id, callback) {
 	if (name === 'rewardSignal') {
 		console.log('sendMessage rewardSignal');
-		rewards.handleSignal(message);
+		rewards.sendSignal(message);
 	}
 
 	if (name === 'rewardSeen') {
