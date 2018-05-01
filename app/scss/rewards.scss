@@ -377,12 +377,20 @@
 			margin-left: auto;
 			margin-right: auto;
 			height: 161px;
-			width: 210px;
+			width: 208px;
 			background-color: $dark-purple;
+			border: 2px solid transparent;
+			border-radius: 4px;
 			display: flex;
 			flex-direction: column;
 			font-size: 13px;
 			line-height: 2;
+
+			&.first-prompt {
+				background-color: $white;
+				border: 2px solid $dark-purple;
+				color: black;
+			}
 
 			.notification-text {
 				margin: 0px 22px 0px 22px;
