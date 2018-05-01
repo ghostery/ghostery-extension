@@ -96,10 +96,23 @@ class Rewards {
 						if (!this.ports.has(tabId)) {
 							this.ports.set(tabId, port);
 							this.ports.get(tabId).onMessage.addListener((message) => {
-								if (message.name === 'rewardsLoaded') {
-									this.ports.get(tabId).postMessage({ name: 'showHotDog', reward: this.currentOffer });
-								} else if (message.name === 'rewardSignal') {
-									this.sendSignal(message.message);
+								switch (message.name) {
+									case 'rewardsLoaded':
+										this.ports.get(tabId).postMessage({ name: 'showHotDog', reward: this.currentOffer });
+										break;
+									case 'rewardSignal':
+										this.sendSignal(message.message);
+										break;
+									case 'rewardsDisabled':
+										// @TODO set conf disabled
+										console.log('@TODO Rewards Class - set conf disabled');
+										break;
+									case 'rewardsPromptAccepted':
+										// @TODO set conf disabled
+										console.log('@TODO Rewards Class - set conf rewards prompt accepted');
+										break;
+									default:
+										break;
 								}
 							});
 						}
