@@ -21,7 +21,6 @@ class OfferCard extends Component {
 			showNotification: false,
 			showSettings: false,
 			rewardUI: props.reward && props.reward.offer_data && props.reward.offer_data.ui_info.template_data || {},
-			// rewardUI: mockData,
 			imageLoads: {
 				logo: false,
 				content: false,
