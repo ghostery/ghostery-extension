@@ -414,16 +414,26 @@ function handleBlockedRedirect(name, message, tab_id, callback) {
 }
 
 function handleRewards(name, message, tab_id, callback) {
-	if (name === 'rewardSignal') {
-		rewards.sendSignal(message);
-	}
-	if (name === 'rewardSeen') {
-		rewards.markRewardRead(message.offerId);
-		button.update();
-	}
-	if (name === 'deleteReward') {
-		rewards.deleteReward(message.offerId);
-		button.update();
+	switch(name) {
+		case 'rewardSignal':
+			rewards.sendSignal(message);
+			break;
+		case 'rewardSeen':
+			rewards.markRewardRead(message.offerId);
+			button.update();
+			break;
+		case 'deleteReward':
+			rewards.deleteReward(message.offerId);
+			button.update();
+			break;
+		case 'rewardsDisabled':
+			console.log('@TODO background - set conf rewards disabled');
+			break;
+		case 'rewardsPromptAccepted':
+			console.log('@TODO background - set conf rewards prompt accepted');
+			break;
+		default:
+			break;
 	}
 }
 

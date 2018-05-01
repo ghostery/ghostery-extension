@@ -14,11 +14,11 @@ class OfferCard extends Component {
 	constructor(props) {
 		super(props);
 
-		console.log('constructor props:', props);
 		this.state = {
 			closed: false,
 			copyText: t('rewards_copy_code'),
 			showNotification: false,
+			showPrompt: 1,
 			showSettings: false,
 			rewardUI: props.reward && props.reward.offer_data && props.reward.offer_data.ui_info.template_data || {},
 			imageLoads: {
@@ -38,17 +38,59 @@ class OfferCard extends Component {
 		this.ghostyGrey = `url(${chrome.extension.getURL('app/images/rewards/ghosty-grey.svg')})`;
 		this.kebabIcon = `url(${chrome.extension.getURL('app/images/rewards/settings-kebab.svg')})`;
 
-		this.close = this.close.bind(this);
+		this.closeOfferCard = this.closeOfferCard.bind(this);
 		this.copyCode = this.copyCode.bind(this);
 		this.disableRewards = this.disableRewards.bind(this);
 		this.toggleSettings = this.toggleSettings.bind(this);
 		this.handleImageLoaded = this.handleImageLoaded.bind(this);
+		this.handlePrompt = this.handlePrompt.bind(this);
+
+		this.notifications = [
+			{
+				type: 'first-prompt',
+				buttons: true,
+				message: t('rewards_first_prompt'),
+				textLink: {
+					href: 'https://www.ghostery.com/faqs',
+					text: 'Learn More'
+				},
+				closeCallback: (option) => {this.handlePrompt(1, option)},
+			},
+			{
+				type: 'second-prompt',
+				buttons: true,
+				message: t('rewards_second_prompt'),
+				textLink: {},
+				closeCallback: (option) => {this.handlePrompt(2, option)},
+			},
+			{
+				type: 'disabled-message',
+				buttons: false,
+				message: t('rewards_disable_notification'),
+				textLink: {
+					text: t('rewards_disable_confirm')
+				},
+				closeCallback: this.closeOfferCard,
+			}
+		];
+
 	}
 
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.reward) {
 			this.sendSignal('offer_shown', nextProps);
 			this.sendSignal('offer_dsp_session', nextProps);
+		}
+	}
+
+	messageBackground(name, message) {
+		if (this.props.port) {
+			this.props.port.postMessage({
+				name,
+				message
+			});
+		} else {
+			sendMessage(name, message);
 		}
 	}
 
@@ -61,14 +103,7 @@ class OfferCard extends Component {
 			offerId,
 			actionId
 		};
-		if (props.port) {
-			props.port.postMessage({
-				name: 'rewardSignal',
-				message
-			});
-		} else {
-			sendMessage('rewardSignal', message);
-		}
+		this.messageBackground('rewardSignal', message);
 	}
 
 	copyCode() {
@@ -94,7 +129,6 @@ class OfferCard extends Component {
 		if (!this.state.showSettings) {
 			this.sendSignal('offer_settings');
 		}
-		console.log('toggle settings');
 		this.setState({
 			showSettings: !this.state.showSettings
 		});
@@ -105,10 +139,33 @@ class OfferCard extends Component {
 		this.setState({
 			showNotification: true
 		});
+		this.messageBackground('rewardsDisabled');
 	}
 
-	close() {
-		this.sendSignal('offer_closed_card');
+	handlePrompt(promptNumber, option) {
+		// @TODO update user settings
+		if (promptNumber === 1) {
+			if (!option) {
+				this.setState({
+					showPrompt: 2
+				});
+				return;
+			}
+		} else if(promptNumber === 2) {
+			if (option) {
+				this.disableRewards();
+				this.closeOfferCard();
+				return;
+			}
+		}
+		this.setState({
+			showPrompt: false
+		});
+		this.messageBackground('rewardsPromptAccepted');
+		return;
+	}
+
+	closeOfferCard() {
 		if (this.iframeEl) {
 			this.iframeEl.classList = '';
 		}
@@ -125,20 +182,34 @@ class OfferCard extends Component {
 		e.target.classList.remove('hide');
 	}
 
+	renderNotification(type) {
+		const notificationProps = this.notifications[type];
+		return (
+			<Notification data={notificationProps} />
+		);
+	}
+
 	render() {
-		console.log('render props:', this.props);
-		console.log('render title:', this.state);
 		return (
 			// @TODO condition for hide class
 			<div className="ghostery-rewards-component">
 				{ this.state.closed !== true &&
 				<div className="ghostery-reward-card">
-					{ this.state.showNotification &&
-						<Notification closeCallback={this.close} />
+					{ this.state.showPrompt === 1 &&
+						this.renderNotification(0)
+					}
+					{ this.state.showPrompt === 2 &&
+						this.renderNotification(1)
+					}
+					{ this.state.showPrompt === 3 &&
+						this.renderNotification(2)
 					}
 					<div className="reward-card-header">
 						<div className="rewards-logo-beta" style={{ backgroundImage: this.betaLogo }} />
-						<div className="reward-card-close" onClick={this.close} style={{ backgroundImage: this.closeIcon }} />
+						<div className="reward-card-close"
+							onClick={(e) => {this.sendSignal('offer_closed_card'); this.closeOfferCard();}}
+							style={{ backgroundImage: this.closeIcon }}
+						/>
 					</div>
 					<div className="reward-content">
 						<div className="reward-content-header">

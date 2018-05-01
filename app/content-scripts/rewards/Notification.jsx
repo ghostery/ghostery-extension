@@ -8,26 +8,38 @@ class Notification extends Component {
 			closed: false
 		};
 
-		this.close = this.close.bind(this);
+		this.closeNotification = this.closeNotification.bind(this);
 	}
 
-	close() {
+	closeNotification(confirm = null) {
 		this.setState({
 			closed: true
 		});
-		if (typeof this.props.closeCallback === 'function') {
-			this.props.closeCallback();
+		if (typeof this.props.data.closeCallback === 'function' && confirm !== null) {
+			this.props.data.closeCallback(confirm);
 		}
 	}
 
 	render() {
 		return (
 			<div>
-				{!this.state.closed && <div className="rewards-notification-container rewards-popup-container">
-					<div className="rewards-notification">
-						<div className="close" onClick={this.close} style={{ backgroundImage: this.closeIcon }} />
-						<div className="notification-text">{t('rewards_disable_notification')}</div>
-						<a className="notification-text" onClick={this.close}>{t('rewards_disable_confirm')}</a>
+				{!this.state.closed && <div className={`rewards-notification-container rewards-popup-container`}>
+					<div className={`rewards-notification ${this.props.data.type}`}>
+						<div className="close" onClick={() => {this.closeNotification();}} style={{ backgroundImage: this.closeIcon }} />
+						<div className="notification-text">{this.props.data.message}</div>
+						{this.props.data.buttons &&
+							<div className="notification-buttons">
+								<div onClick={(e) => {
+									this.closeNotification(true);
+								}}>Yes</div>
+								<div onClick={(e) => {
+									this.closeNotification(false);
+								}}>No</div>
+							</div>
+						}
+						{this.props.data.textLink
+							&& <a className="notification-text" href={this.props.data.textLink.href} target="_blank" onClick={this.props.data.closeCallback}>{this.props.data.textLink.text}</a>
+						}
 					</div>
 				</div>}
 			</div>
