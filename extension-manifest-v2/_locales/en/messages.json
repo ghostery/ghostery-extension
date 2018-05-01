@@ -1635,5 +1635,11 @@
 	},
 	"rewards_delete": {
 		"message": "Delete this reward"
+	},
+	"rewards_first_prompt": {
+		"message": "Would you like to continue to Ghostery Rewards?"
+	},
+	"rewards_second_prompt": {
+		"message": "Are you sure you would like to opt-out of Ghostery Rewards?"
 	}
 }
