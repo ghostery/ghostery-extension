@@ -50,7 +50,7 @@ class Rewards {
 
 	sendSignal(message) {
 		const { offerId, actionId } = message;
-		console.log('actionId', actionId)
+		console.log('actionId', actionId);
 		console.log('sendSignal from Rewards.js');
 
 		if (actionId === 'offer_shown') {
@@ -70,7 +70,7 @@ class Rewards {
 	}
 
 	showHotDog(tab_id, offer) {
-		console.log('CHECK NEW OFFER ID', offer.offer_id)
+		console.log('CHECK NEW OFFER ID', offer.offer_id);
 		this.currentOffer = offer;
 		const tab = tabInfo.getTabInfo(tab_id);
 
