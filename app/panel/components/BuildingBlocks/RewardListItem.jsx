@@ -55,7 +55,7 @@ class RewardListItem extends React.Component {
 		event.preventDefault();
 
 		const { id } = this.props;
-		this.props.clickCloseButton(id);
+		this.props.actions.removeOffer(id);
 		this.props.actions.sendSignal('remove_offer_link', id);
 	}
 
@@ -77,53 +77,41 @@ class RewardListItem extends React.Component {
 	render() {
 		const {
 			id,
+			isLong,
 			text,
 			unread,
-			disabled
+			disabled,
+			logoUrl,
+			pictureUrl
 		} = this.props;
 		const itemClassName = ClassNames('RewardListItem', 'row', {
 			'RewardListItem--greyscale': disabled,
 			'RewardListItem--unread': unread,
+			'RewardListItem--elongated': isLong,
 			'not-clickable': disabled,
 			clickable: !disabled,
-		});
-		const buttonContainerClassNames = ClassNames('flex-container flex-dir-column align-justify full-height', {
-			'RewardsPanel--more-right': true,
-		});
-		const closeButtonClassNames = ClassNames({
-			RewardListItem__close_button: true,
-			'RewardListItem--add-padding': true,
-			clickable: true,
-		});
-		const detailsButtonClassNames = ClassNames({
-			RewardListItem__details_link: true,
-			'RewardListItem--add-padding': true,
 		});
 
 		return (
 			<Link to={`/detail/rewards/detail/${id}`} className={itemClassName} onClick={this.handleClick}>
-				<div className="small-12 columns">
-					<div className="flex-container align-middle full-height">
-						<div className="RewardListItem__image_container flex-container align-center">
-							<svg height="50" width="95" fill="none" stroke="#4a4a4a" strokeWidth="2">
-								<path d="M0,0L95,50M95,0L0,50" />
+				<div className="flex-container align-middle full-height full-width">
+					<div className="RewardListItem__image_container">
+						<img className="RewardListItem__image" src={logoUrl} />
+					</div>
+					<div className="flex-child-grow">
+						<div className="RewardListItem__text">{ text }</div>
+						<div className="RewardListItem__expires">{ this.renderExpiresText() }</div>
+					</div>
+					<div className="flex-container align-justify flex-dir-column full-height">
+						<div className="RewardListItem__close_button clickable" onClick={this.clickCloseButton}>
+							<svg height="10" width="10" fillRule="evenodd">
+								<path d="M6.719 5l2.923-2.924A1.216 1.216 0 0 0 7.924.356L5 3.281 2.076.356a1.216 1.216 0 1 0-1.72 1.72L3.28 5 .356 7.924a1.216 1.216 0 0 0 1.719 1.72L5 6.719l2.924 2.923a1.216 1.216 0 1 0 1.72-1.719L6.719 5z" />
 							</svg>
 						</div>
-						<div className="flex-child-grow">
-							<div>{ text }</div>
-							<div>{ this.renderExpiresText() }</div>
-						</div>
-						<div className={buttonContainerClassNames}>
-							<div className={closeButtonClassNames} onClick={this.clickCloseButton}>
-								<svg height="12" width="12">
-									<path d="M2,2L10,10M2,10L10,2" />
-								</svg>
-							</div>
-							<div className={detailsButtonClassNames}>
-								<svg height="18" width="12">
-									<path d="M2,2L10,9L2,16" />
-								</svg>
-							</div>
+						<div className="RewardListItem__details_link">
+							<svg height="16" width="10" fillRule="evenodd">
+								<path d="M0 13.881l1.892 1.833L10 7.857 1.892 0 0 1.833l6.216 6.024z" />
+							</svg>
 						</div>
 					</div>
 				</div>
