@@ -50,8 +50,6 @@ class Rewards {
 
 	sendSignal(message) {
 		const { offerId, actionId } = message;
-		console.log('actionId', actionId);
-		console.log('sendSignal from Rewards.js');
 
 		if (actionId === 'offer_shown') {
 			this.markRewardRead(offerId);
@@ -65,12 +63,10 @@ class Rewards {
 				offer_id: offerId
 			}
 		};
-		console.log(signal);
 		cliqz.modules['offers-v2'].background.actions.processRealEstateMessage(signal);
 	}
 
 	showHotDog(tab_id, offer) {
-		console.log('CHECK NEW OFFER ID', offer.offer_id);
 		this.currentOffer = offer;
 		const tab = tabInfo.getTabInfo(tab_id);
 
@@ -121,10 +117,7 @@ class Rewards {
 			}
 		}
 
-		// console.log('INJECT REWARDS');
-		return injectScript(tab_id, 'dist/rewards.js', 'dist/css/rewards_styles.css', 'document_start').then(() => {
-			// console.log('REWARDS INJECTED');
-		}).catch((err) => {
+		return injectScript(tab_id, 'dist/rewards.js', 'dist/css/rewards_styles.css', 'document_start').catch((err) => {
 			log('rewards injectScript error', err);
 			return false;
 		});
