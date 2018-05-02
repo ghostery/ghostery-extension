@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<Package   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+		xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+		xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
+		IgnorableNamespaces="uap3">
+		<Identity
+			Name="Ghostery.Ghostery"
+			Publisher="CN=2988219E-3FB6-4D1B-A7CB-D580DEE2D7AB"
+			Version="X.X.X.X" />
+		<Properties>
+			<DisplayName>ms-resource:DisplayName</DisplayName>
+			<PublisherDisplayName>Ghostery</PublisherDisplayName>
+			<Logo>Assets/icon50.png</Logo>
+		</Properties>
+  		<Dependencies>
+  			<TargetDeviceFamily Name="Windows.Desktop"  MinVersion="10.0.14393.0"  MaxVersionTested="10.0.14800.0" />
+  		</Dependencies>
+  		<Resources>
+  			<Resource Language="en" />
+  			<Resource Language="en-gb"/>
+    		<Resource Language="cs" />
+  			<Resource Language="da" />
+  			<Resource Language="de" />
+  			<Resource Language="el" />
+ 			  <Resource Language="es" />
+  			<Resource Language="fr" />
+  			<Resource Language="hu" />
+  			<Resource Language="it" />
+  			<Resource Language="ja" />
+  			<Resource Language="ko" />
+  			<Resource Language="nl" />
+  			<Resource Language="nn-no" />
+  			<Resource Language="pl" />
+  			<Resource Language="pt-br" />
+  			<Resource Language="ru" />
+  			<Resource Language="sv" />
+  			<Resource Language="tr" />
+  			<Resource Language="zh-cn" />
+  			<Resource Language="zh-tw" />
+   		</Resources>
+  		<Applications>
+  			<Application Id="App">
+ 				<uap:VisualElements
+  					AppListEntry="none"
+  					DisplayName="ms-resource:DisplayName"
+  					Square150x150Logo="Assets/icon150.png"
+  					Square44x44Logo="Assets/icon50.png"
+  					Description="ms-resources:Description"
+  					BackgroundColor="transparent">
+  				</uap:VisualElements>
+	   			<Extensions>
+	   				<uap3:Extension Category="windows.appExtension">
+		    			<uap3:AppExtension Name="com.microsoft.edge.extension"
+		   					Id="EdgeExtension"
+		   					PublicFolder="Extension"
+		   					DisplayName="ms-resource:DisplayName">
+							<uap3:Properties>
+								<Capabilities>
+									<Capability Name="websiteContent"/>
+									<Capability Name="websiteCookies"/>
+									<Capability Name="browserStorage"/>
+									<Capability Name="websiteInfo"/>
+									<Capability Name="browserWebRequest"/>
+								</Capabilities>
+							</uap3:Properties>
+		    			</uap3:AppExtension>
+	   				</uap3:Extension>
+	   			</Extensions>
+   			</Application>
+   		</Applications>
+   </Package>
