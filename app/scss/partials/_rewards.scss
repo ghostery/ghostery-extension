@@ -15,11 +15,27 @@
 .full-height {
 	height: 100%;
 }
+.full-width {
+	width: 100%;
+}
 .display-inline-block {
 	display: inline-block;
 }
+.send-left-with-padding {
+	position: absolute;
+	left: 0;
+	padding: 5px 13px;
+}
+.send-right-with-padding {
+	position: absolute;
+	right: 0;
+	padding: 5px 13px;
+}
 .clickable {
 	@extend %pointer;
+}
+.not-clickable {
+	cursor: not-allowed;
 }
 
 // Rewards Panel Component Classes
@@ -30,107 +46,154 @@
 	padding: 10px 0;
 	background-color: $whisper;
 }
+.RewardPanel__back svg {
+	@include transition(fill 0.2s);
+	fill: #9b9b9b;
+}
+.RewardPanel__back:hover svg { fill: #4a4a4a; }
+
 .RewardsPanel__title {
 	text-transform: uppercase;
 	font-size: 14px;
 	color: #9b9b9b;
 }
+.RewardsPanel__slider_text {
+	padding-right: 7px;
+}
 .RewardsPanel__scroll_content {
 	height: 377px;
 	overflow-y: scroll;
 }
-.RewardsPanel--send-left {
-	position: absolute;
-	left: 0;
-}
-.RewardsPanel--send-right {
-	position: absolute;
-	right: 0;
-}
-.RewardsPanel--more-right {
-	margin-right: -15px;
-}
-.RewardsPanel--add-padding {
-	padding-left: 5px;
-	padding-right: 10px;
-}
 
 // Reward List Item Component Classes
 .RewardListItem {
-	height: 75px;
+	height: 72px;
 	border: 1px solid #cecece;
 	border-left-width: 0;
 	border-radius: 0;
+	padding: 10px 0 10px 10px;
 }
 .RewardListItem.RewardListItem--unread + .RewardListItem.RewardListItem--unread,
 .RewardListItem:not(.RewardListItem--unread) + .RewardListItem:not(.RewardListItem--unread) {
+	height: 71px;
 	border-top: 0;
 }
 .RewardListItem__image_container {
-	height: 50px;
+	height: 52px;
+	width: 100px;
+	text-align: center;
+	padding-right: 8px;
 	border-right: 1px solid #cecece;
-	padding-right: 10px;
-	margin-right: 15px;
-	svg { background-color: #efefef; }
+	margin-right: 18px;
+}
+.RewardListItem__image {
+	height: 52px;
+	width: auto;
+	background-color: #e0e0e0;
+}
+.RewardListItem--greyscale .RewardListItem__image {
+	-webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+	filter: grayscale(100%);
+}
+.RewardListItem__text {
+	color: #4a4a4a;
+	font-size: 13.5px;
+	font-weight: 600;
+	max-width: 188px;
+	margin-bottom: 7px;
+}
+.RewardListItem--greyscale .RewardListItem__text {
+	color: #9b9b9b;
+}
+.RewardListItem__expires {
+	color: #9b9b9b;
+	font-size: 11px;
+	max-width: 188px;
+}
+.RewardListItem--elongated .RewardListItem__text,
+.RewardListItem--elongated .RewardListItem__expires {
+	max-width: 354px;
+}
+
+.RewardListItem--greyscale .RewardListItem__close_button,
+.RewardListItem--greyscale .RewardListItem__details_link {
+	display: none;
+}
+.RewardListItem__close_button {
+	line-height: 0;
+	padding: 5px 10px;
+	margin-top: -5px;
+}
+.RewardListItem__details_link {
+	line-height: 0;
+	padding: 5px 10px;
+	margin-bottom: -5px;
 }
 .RewardListItem__close_button svg,
 .RewardListItem__details_link svg {
-	fill: none;
-	stroke-width: 2;
-	stroke-linecap: round;
-	@include transition(stroke 0.2s);
+	@include transition(fill 0.2s);
 }
-.RewardListItem__close_button svg { stroke: #9b9b9b; }
-.RewardListItem__close_button:hover svg { stroke: #4a4a4a; }
+.RewardListItem__close_button svg { fill: #9b9b9b; }
+.RewardListItem__close_button:hover svg { fill: #4a4a4a; }
 
-.RewardListItem__details_link svg { stroke: rgba(#4a4a4a, 0); }
-.RewardListItem:hover .RewardListItem__details_link svg { stroke: rgba(#4a4a4a, 1); }
-.RewardListItem__close_button:hover + .RewardListItem__details_link svg { stroke: rgba(#4a4a4a, 0); }
+.RewardListItem__details_link svg { fill: rgba(#4a4a4a, 0); }
+.RewardListItem:hover .RewardListItem__details_link svg { fill: rgba(#4a4a4a, 1); }
+.RewardListItem__close_button:hover + .RewardListItem__details_link svg { fill: rgba(#4a4a4a, 0); }
 
 .RewardListItem--unread {
-	border-color: #930194;
-	border-left-width: 1px;
-	border-radius: 3px;
+	border-color: #5b0059;
+	border-left-width: 7px;
 }
 .RewardListItem--unread .RewardListItem__image_container {
-	border-color: #930194;
+	border-color: #5b0059;
+	margin-left: -7px;
 }
-.RewardListItem--add-padding {
-	padding: 5px 10px;
+.RewardListItem--greyscale.RewardListItem--unread,
+.RewardListItem--greyscale.RewardListItem--unread .RewardListItem__image_container {
+	border-color: #cecece;
 }
 
 // Reward Detail Component Classes
 .RewardDetail {
 	height: 377px;
 }
-.RewardDetail__image {
-	height: 217px;
+.RewardDetail__image_container {
+	height: 167px;
+	width: 100%;
+}
+.RewardDetail__picture {
+	height: 100%;
 	width: 100%;
 	background-color: #efefef;
 }
-.RewardDetail__expires {
-	height: 0;
-	position: relative;
-	top: -35px;
-	right: 15px;
-	align-self: flex-end;
+.RewardDetail__logo {
+	position: absolute;
+	height: 52px;
+	width: auto;
+	margin: 16px 17px;
+	background-color: #4a4a4a;
+}
+.RewardDetail__title {
+	margin: 0 17px;
+	font-size: 24px;
+	color: #4a4a4a;
 }
 .RewardDetail__description {
-	margin: 10px;
-	font-size: 16px;
+	margin: 0 17px;
+	font-size: 13px;
 	color: #4a4a4a;
 }
 .RewardDetail__code_container {
-	margin: 10px;
+	margin: 0 17px;
 	padding: 10px;
 	background-color: #efefef;
 	border: 1px solid #cccccc;
 	border-radius: 3px;
 }
 .RewardDetail__code {
-	font-size: 12px;
-	color: #4a4a4a;
-	text-transform: uppercase;
+	font-size: 13px;
+	color: #494949;
+	font-weight: 600;
 }
 .RewardDetail__code input {
 	height: 10px;
@@ -139,19 +202,33 @@
 	margin: 0;
 	display: inline-block;
 	opacity: 0;
+	cursor: default;
 }
 .RewardDetail__copy {
-	font-size: 12px;
-	color: #930194;
+	font-size: 10px;
+	color: #5b005c;
+	font-weight: 600;
 	text-transform: uppercase;
 }
+.RewardDetail__details_container {
+	margin: 0 17px;
+}
+.RewardDetail__expires {
+	font-size: 12px;
+	font-weight: 600;
+	color: #4a4a4a;
+}
+.RewardDetail__terms {
+	font-size: 11px;
+	color: #9b9b9b;
+}
 .RewardDetail__redeem_button {
-	background-color: #930194;
+	background-color: #5b0059;
 	color: #ffffff;
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: 600;
 	text-align: center;
-	margin: 10px;
+	margin: 0 17px 14px;
 	padding: 10px;
 	text-transform: uppercase;
 }
