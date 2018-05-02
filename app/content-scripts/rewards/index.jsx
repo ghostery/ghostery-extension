@@ -20,12 +20,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route } from 'react-router-dom';
-import history from '../../panel/utils/history';
+import ShadowDOM from 'react-shadow';
 import HotDog from './HotDog';
 import OfferCard from './OfferCard';
+import msgModule from '../utils/msg';
+import history from '../../panel/utils/history';
 import globals from '../../../src/classes/Globals';
-import ShadowDOM from 'react-shadow';
 
+const msg = msgModule('rewards');
+const { sendMessage } = msg;
 const { BROWSER_INFO, onMessage } = globals;
 const viewport = document.getElementById('viewport');
 const channelsSupported = (typeof chrome.runtime.connect === 'function');
@@ -130,23 +133,19 @@ class RewardsApp {
 			}
 		} else {
 			// TODO listen for this in background.js
-			sendMesage('rewardsLoaded');
+			sendMessage('rewardsLoaded');
 			onMessage.addListener(this.handleMessages);
 		}
 	}
 
 	handleMessages(request, sender, response) {
-		console.log('handleMessages postMessage request', request);
 		if (request.name === 'showHotDog') {
-			console.log('showHotDog event reward id ', request.reward.offer_id);
 			this.reward = request.reward;
 		}
-		console.log(document.readyState);
 		if (document.readyState === 'complete' || document.readyState === 'interactive') {
-			console.log('re render root react');
 			this.renderReact();
 		}
 	}
 }
 
-new RewardsApp();
+const rewardsApp = new RewardsApp();
