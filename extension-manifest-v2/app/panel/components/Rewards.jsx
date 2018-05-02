@@ -30,8 +30,8 @@ class Rewards extends React.Component {
 
 		// event bindings
 		this.toggleOffers = this.toggleOffers.bind(this);
-		this.removeOffer = this.removeOffer.bind(this);
 
+		// helper render functions
 		this.renderRewardListComponent = this.renderRewardListComponent.bind(this);
 		this.renderRewardDetailComponent = this.renderRewardDetailComponent.bind(this);
 		this.handleBackClick = this.handleBackClick.bind(this);
@@ -45,6 +45,9 @@ class Rewards extends React.Component {
 		this.props.actions.sendSignal('hub_opened');
 	}
 
+	/**
+	 * Lifecycle event
+	 */
 	componentWillReceiveProps(nextProps) {
 		const dateNow = new Date();
 		let rewardsArray = null;
@@ -57,6 +60,10 @@ class Rewards extends React.Component {
 					code: reward.ui_info.template_data.code || 'C0D3_DNE',
 					text: reward.ui_info.template_data.title || 'reward title',
 					description: reward.ui_info.template_data.desc || 'reward description',
+					conditions: reward.ui_info.template_data.conditions || '',
+					logo_url: reward.ui_info.template_data.logo_url,
+					picture_url: reward.ui_info.template_data.picture_url,
+					redeem_url: reward.ui_info.template_data.call_to_action.url,
 					expires: Math.round((new Date()).setDate(dateNow.getDate() + reward.expirationMs / 60 / 60 / 24)),
 				};
 			});
@@ -64,10 +71,16 @@ class Rewards extends React.Component {
 		this.setState({ rewardsArray });
 	}
 
+	/**
+	 * Lifecycle event
+	 */
 	componentWillUnmount() {
 		this.props.actions.sendSignal('hub_closed');
 	}
 
+	/**
+	 * Handles clicking the back button
+	 */
 	handleBackClick() {
 		const offerId = this.props.location.pathname.split('/detail/rewards/detail/')[1];
 		this.props.actions.sendSignal('offer_return_hub', offerId);
@@ -87,14 +100,6 @@ class Rewards extends React.Component {
 	}
 
 	/**
-	 * Handles removing a reward from the Rewards array
-	 * @param  {Int} id the ID of the reward
-	 */
-	removeOffer(id) {
-		this.props.actions.removeOffer(id);
-	}
-
-	/**
 	 * Helper render function for the Rewards Header
 	 * @return {JSX} JSX for the Rewards Header
 	 */
@@ -106,18 +111,18 @@ class Rewards extends React.Component {
 		return (
 			<div className="RewardsPanel__header flex-container align-center-middle">
 				{showBack && (
-					<Link to="/detail/rewards/list" className="RewardsPanel--send-left RewardsPanel--add-padding flex-container clickable" onClick={this.handleBackClick}>
-						<svg height="18" width="12" fill="none" stroke="#4a4a4a" strokeWidth="3" strokeLinecap="round">
-							<path d="M10,2L2,9L10,16" />
+					<Link to="/detail/rewards/list" className="RewardPanel__back send-left-with-padding flex-container clickable" onClick={this.handleBackClick}>
+						<svg height="16" width="10" fillRule="evenodd">
+							<path d="M10 1.833L8.108 0 0 7.857l8.108 7.857L10 13.881 3.784 7.857z" />
 						</svg>
 					</Link>
 				)}
 				<span className="RewardsPanel__title">{ t('panel_detail_rewards_title') }</span>
 				{showToggle && (
-					<span className="RewardsPanel--send-right flex-container align-middle">
-						<span>{enable_offers ? 'ON ' : 'OFF '}</span>
+					<span className="send-right-with-padding flex-container align-middle">
+						<span className="RewardsPanel__slider_text">{enable_offers ? 'ON' : 'OFF'}</span>
 						<ToggleSlider
-							className="RewardsPanel--add-padding display-inline-block"
+							className="display-inline-block"
 							isChecked={enable_offers}
 							onChange={this.toggleOffers}
 						/>
@@ -132,7 +137,7 @@ class Rewards extends React.Component {
 	 * @return {JSX} JSX for the Rewards Items List
 	 */
 	renderRewardListComponent() {
-		const { enable_offers } = this.props;
+		const { enable_offers, is_expanded } = this.props;
 		const { rewardsArray } = this.state;
 
 		if (enable_offers && !rewardsArray) {
@@ -149,10 +154,11 @@ class Rewards extends React.Component {
 				index={index}
 				id={reward.id}
 				key={reward.id}
+				isLong={is_expanded}
 				unread={reward.unread}
 				text={reward.text}
+				logoUrl={reward.logo_url}
 				expires={reward.expires}
-				clickCloseButton={this.removeOffer}
 				actions={this.props.actions}
 			/>
 		));
@@ -171,7 +177,12 @@ class Rewards extends React.Component {
 			<RewardDetail
 				id={reward.id}
 				code={reward.code}
+				text={reward.text}
 				description={reward.description}
+				conditions={reward.conditions}
+				logoUrl={reward.logo_url}
+				pictureUrl={reward.picture_url}
+				redeemUrl={reward.redeem_url}
 				expires={reward.expires}
 				actions={this.props.actions}
 			/>
