@@ -17,17 +17,12 @@ class OfferCard extends Component {
 		this.state = {
 			closed: false,
 			copyText: t('rewards_copy_code'),
-			showNotification: false,
 			showPrompt: 1,
 			showSettings: false,
 			rewardUI: props.reward && props.reward.offer_data && props.reward.offer_data.ui_info.template_data || {},
-			imageLoads: {
-				logo: false,
-				content: false,
-			}
 		};
 
-		this.iframeEl = parent.document.getElementById('ghostery-iframe-container');
+		this.iframeEl = window.parent.document.getElementById('ghostery-iframe-container');
 		if (this.iframeEl) {
 			this.iframeEl.classList = '';
 			this.iframeEl.classList.add('offer-card');
@@ -54,14 +49,14 @@ class OfferCard extends Component {
 					href: 'https://www.ghostery.com/faqs',
 					text: 'Learn More'
 				},
-				closeCallback: (option) => {this.handlePrompt(1, option)},
+				closeCallback: (option) => { this.handlePrompt(1, option); },
 			},
 			{
 				type: 'second-prompt',
 				buttons: true,
 				message: t('rewards_second_prompt'),
 				textLink: {},
-				closeCallback: (option) => {this.handlePrompt(2, option)},
+				closeCallback: (option) => { this.handlePrompt(2, option); },
 			},
 			{
 				type: 'disabled-message',
@@ -73,7 +68,6 @@ class OfferCard extends Component {
 				closeCallback: this.closeOfferCard,
 			}
 		];
-
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -94,9 +88,7 @@ class OfferCard extends Component {
 		}
 	}
 
-	sendSignal(actionId, props) {
-		props = props || this.props;
-
+	sendSignal(actionId, props = this.props) {
 		// Cliqz metrics
 		const offerId = props.reward.offer_id;
 		const message = {
@@ -108,7 +100,7 @@ class OfferCard extends Component {
 
 	copyCode() {
 		this.sendSignal('code_copied');
-		ReactDOM.findDOMNode(this).querySelector('.reward-code-input').select();
+		this.offerCardRef.querySelector('.reward-code-input').select();
 		document.execCommand('copy');
 
 		// 'copied' feedback for user
@@ -136,9 +128,6 @@ class OfferCard extends Component {
 
 	disableRewards() {
 		this.sendSignal('rewards_off');
-		this.setState({
-			showNotification: true
-		});
 		this.messageBackground('rewardsDisabled');
 	}
 
@@ -151,7 +140,7 @@ class OfferCard extends Component {
 				});
 				return;
 			}
-		} else if(promptNumber === 2) {
+		} else if (promptNumber === 2) {
 			if (option) {
 				this.disableRewards();
 				this.closeOfferCard();
@@ -162,7 +151,6 @@ class OfferCard extends Component {
 			showPrompt: false
 		});
 		this.messageBackground('rewardsPromptAccepted');
-		return;
 	}
 
 	closeOfferCard() {
@@ -192,7 +180,7 @@ class OfferCard extends Component {
 	render() {
 		return (
 			// @TODO condition for hide class
-			<div className="ghostery-rewards-component">
+			<div ref={(ref) => { this.offerCardRef = ref; }} className="ghostery-rewards-component">
 				{ this.state.closed !== true &&
 				<div className="ghostery-reward-card">
 					{ this.state.showPrompt === 1 &&
@@ -206,8 +194,9 @@ class OfferCard extends Component {
 					}
 					<div className="reward-card-header">
 						<div className="rewards-logo-beta" style={{ backgroundImage: this.betaLogo }} />
-						<div className="reward-card-close"
-							onClick={(e) => {this.sendSignal('offer_closed_card'); this.closeOfferCard();}}
+						<div
+							className="reward-card-close"
+							onClick={(e) => { this.sendSignal('offer_closed_card'); this.closeOfferCard(); }}
 							style={{ backgroundImage: this.closeIcon }}
 						/>
 					</div>
@@ -221,11 +210,11 @@ class OfferCard extends Component {
 								onClick={this.toggleSettings}
 								className="reward-settings-kebab"
 								style={{ backgroundImage: this.kebabIcon }}
-								ref={(node) => { this.kebab = node; }}
+								ref={(node) => { this.kebabRef = node; }}
 							/>
 							{ this.state.showSettings &&
 							<div className="rewards-settings-container">
-								<ClickOutside excludeEl={this.kebab} onClickOutside={this.toggleSettings}>
+								<ClickOutside excludeEl={this.kebabRef} onClickOutside={this.toggleSettings}>
 									<Settings disable={this.disableRewards} />
 								</ClickOutside>
 							</div>
