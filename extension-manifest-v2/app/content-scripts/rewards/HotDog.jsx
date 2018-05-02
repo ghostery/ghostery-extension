@@ -9,7 +9,6 @@ const { sendMessage } = msg;
 class HotDog extends Component {
 	constructor(props) {
 		super(props);
-		console.log('constructor props:', props);
 		this.state = {
 			closed: false
 		};
@@ -33,9 +32,7 @@ class HotDog extends Component {
 		}
 	}
 
-	sendSignal(actionId, props) {
-		props = props || this.props;
-
+	sendSignal(actionId, props = this.props) {
 		// Cliqz metrics
 		const offerId = props.reward.offer_id;
 		const message = {
@@ -71,7 +68,6 @@ class HotDog extends Component {
 	}
 
 	render() {
-		console.log('render props', this.props);
 		return (
 			<div className="ghostery-rewards-component">
 				{ this.state.closed !== true &&

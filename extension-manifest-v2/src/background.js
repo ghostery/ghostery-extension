@@ -414,7 +414,7 @@ function handleBlockedRedirect(name, message, tab_id, callback) {
 }
 
 function handleRewards(name, message, tab_id, callback) {
-	switch(name) {
+	switch (name) {
 		case 'rewardSignal':
 			rewards.sendSignal(message);
 			break;
