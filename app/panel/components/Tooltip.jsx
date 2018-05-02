@@ -13,6 +13,7 @@
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import ClassNames from 'classnames';
 
 /**
  * @class Implements a Tooltip component that is used in many panel views.
@@ -52,12 +53,14 @@ class Tooltip extends React.Component {
 	}
 
 	/**
-	 * Implements mouseenter. Sets a 1 second delay for showing the tooltip.
+	 * Implements mouseenter. Sets adelay for showing the tooltip with a default of 1 second.
 	 */
 	delayHover() {
+		const delayType = typeof this.props.delay;
+		const delay = (delayType === 'number' || delayType === 'string') ? +this.props.delay : 1000;
 		this.delay = setTimeout(() => {
 			this.enter();
-		}, 1000);
+		}, delay);
 	}
 
 	/**
@@ -83,8 +86,12 @@ class Tooltip extends React.Component {
 	 * @return {JSX} JSX for rendering the Tooltip component
 	 */
 	render() {
+		const compClassNames = ClassNames({
+			'dark-theme': this.props.theme === 'dark',
+		});
+
 		return (
-			<span>
+			<span className={compClassNames}>
 				{this.state.show &&
 					<span className={`tooltip-content ${this.props.position}`}>
 						{this.props.header &&

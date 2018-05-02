@@ -14,6 +14,8 @@
 import React, { Component } from 'react';
 import ClassNames from 'classnames';
 import { computeTimeDelta } from '../../utils/utils';
+import { sendMessage } from '../../utils/msg';
+import Tooltip from '../Tooltip';
 
 /**
  * @class Implements the details for a single reward for for the Rewards Panel
@@ -38,6 +40,9 @@ class RewardDetail extends React.Component {
 		this.props.actions.setOfferRead(this.props.id);
 	}
 
+	/**
+	 * Handles clicking the copy button
+	 */
 	handleCopyClick() {
 		// Copy the reward code
 		this.copyNode.querySelector('input').select();
@@ -54,12 +59,23 @@ class RewardDetail extends React.Component {
 		setTimeout(() => {
 			this.setState({ copyText: 'copy code' });
 		}, 3000);
+
+		// Send a signal to the offers black box
 		this.props.actions.sendSignal('code_copied', this.props.id);
 	}
 
-	handleRedeemClick() {
-		// @TODO add href tag for redeem link
+	/**
+	 * Handles clicking the redeem button
+	 * @param  {Object} event the event object
+	 */
+	handleRedeemClick(event) {
+		event.preventDefault();
 		this.props.actions.sendSignal('offer_ca_action', this.props.id);
+		sendMessage('openNewTab', {
+			url: this.props.redeemUrl,
+			become_active: true,
+		});
+		window.close();
 	}
 
 	/**
@@ -78,26 +94,28 @@ class RewardDetail extends React.Component {
 	 * @return {JSX} JSX for rendering the details for a Reward
 	 */
 	render() {
-		const { description, code } = this.props;
-		const codeContainerClassNames = ClassNames({
-			RewardDetail__code_container: true,
-			'flex-container': true,
-			'align-middle': true,
-			'align-justify': true,
-		});
+		const {
+			code,
+			text,
+			description,
+			conditions,
+			logoUrl,
+			pictureUrl
+		} = this.props;
 
 		return (
-			<div className="RewardDetail flex-container flex-dir-column">
-				<div className="RewardDetail__image">
-					Image
+			<div className="RewardDetail flex-container flex-dir-column align-justify">
+				<div className="RewardDetail__image_container">
+					<img className="RewardDetail__logo" src={logoUrl} />
+					<img className="RewardDetail__picture" src={pictureUrl} />
 				</div>
-				<div className="RewardDetail__expires">
-					{ this.renderExpiresText() }
+				<div className="RewardDetail__title">
+					{ text }
 				</div>
-				<div className="RewardDetail__description flex-child-grow">
+				<div className="RewardDetail__description">
 					{ description }
 				</div>
-				<div className={codeContainerClassNames}>
+				<div className="RewardDetail__code_container flex-container align-middle align-justify">
 					<span className="RewardDetail__code" ref={(node) => { this.copyNode = node; }}>
 						<span>{ code }</span>
 						<input readOnly type="text" value={code} />
@@ -106,7 +124,18 @@ class RewardDetail extends React.Component {
 						{this.state.copyText}
 					</span>
 				</div>
-				<div className="RewardDetail__redeem_button" onClick={this.handleRedeemClick}>
+				<div className="RewardDetail__details_container flex-container align-justify align-middle">
+					<div className="RewardDetail__expires">
+						{ this.renderExpiresText() }
+					</div>
+					{conditions && (
+						<div className="RewardDetail__terms g-tooltip clickable">
+							Terms and Conditions
+							<Tooltip header={conditions} position="top" delay="0" theme="dark" />
+						</div>
+					)}
+				</div>
+				<div className="RewardDetail__redeem_button clickable" onClick={this.handleRedeemClick}>
 					Redeem Now
 				</div>
 			</div>

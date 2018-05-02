@@ -41,14 +41,14 @@
 	transition: .1s;
 }
 .ToggleSlider input:checked + .ToggleSlider__slider {
-	background-color: #c67cc6;
+	background-color: #ad80ac;
 }
 .ToggleSlider input:focus + .ToggleSlider__slider {
 	box-shadow: 0 0 1px #2196f3;
 }
 .ToggleSlider input:checked + .ToggleSlider__slider + .ToggleSlider__slider_circle {
-	background-color: #930194;
-	border-color: #930194;
+	background-color: #5b0059;
+	border-color: #5b0059;
 	-webkit-transform: translateX(17px);
 	-ms-transform: translateX(17px);
 	transform: translateX(17px);
