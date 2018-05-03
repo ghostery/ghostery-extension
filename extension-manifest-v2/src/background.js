@@ -100,6 +100,8 @@ function registerWithOffers(offersModule, register) {
 	if (!offersModule.isEnabled) {
 		return Promise.resolve();
 	}
+
+	log('REGISTER WITH OFFERS CALLED', register);
 	return offersModule.action(register ? 'registerRealEstate' : 'unregisterRealEstate', { realEstateID: REAL_ESTATE_ID })
 		.catch((e) => {
 			log(`FAILED TO ${register ? 'REGISTER' : 'UNREGISTER'} REAL ESTATE WITH OFFERS CORE`);
@@ -833,9 +835,10 @@ function initializeDispatcher() {
 	dispatcher.on('conf.save.enable_offers', (enableOffers) => {
 		button.update();
 		if (!IS_EDGE && !IS_CLIQZ) {
-			if (enableOffers) {
-				setCliqzModuleEnabled(offers, enableOffers);
+			if (!enableOffers) {
+				registerWithOffers(offers, enableOffers);
 			}
+			setCliqzModuleEnabled(offers, enableOffers);
 		} else {
 			setCliqzModuleEnabled(offers, false);
 			registerWithOffers(offers, false);
@@ -1071,7 +1074,6 @@ offers.on('enabled', () => {
 				offersTelemetryFreq: '10'
 			});
 		}
-
 		registerWithOffers(offers, true)
 			.then(() => {
 				setCliqzModuleEnabled(messageCenter, true);
