@@ -1388,7 +1388,8 @@ function initializeGhosteryModules() {
 				conf.enable_human_web = (IS_EDGE || IS_CLIQZ) ? false : !humanweb.isDisabled;
 			}
 			// sync conf from module status
-			conf.enable_offers = (IS_EDGE || IS_CLIQZ) ? false : !offers.isDisabled;
+			// @TODO enable offers by default in browser-core
+			// conf.enable_offers = (IS_EDGE || IS_CLIQZ) ? false : !offers.isDisabled;
 		})).catch((e) => {
 		log('cliqzStartup error', e);
 	});
