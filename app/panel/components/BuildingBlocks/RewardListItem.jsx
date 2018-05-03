@@ -66,8 +66,7 @@ class RewardListItem extends React.Component {
 	renderExpiresText() {
 		const { expires } = this.props;
 		const delta = computeTimeDelta(new Date(expires), new Date());
-
-		return `Expires in ${delta.count} ${delta.type}`;
+		return t('rewards_expires_in', [delta.count, t(`rewards_expires_in_${delta.type}`)]);
 	}
 
 	/**
