@@ -408,6 +408,20 @@
 				align-self: flex-end;
 				margin: 10px 10px 0px 0px;
 			}
+
+			.notification-buttons {
+				display: flex;
+				justify-content: center;
+				flex-direction: row;
+				div {
+					&:nth-child(1) {
+						margin-right:10px;
+					}
+					&:nth-child(2) {
+						margin-left:10px;
+					}
+				}
+			}
 		}
 	}
 
