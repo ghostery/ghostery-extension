@@ -140,7 +140,7 @@ class Rewards extends React.Component {
 	 * @return {JSX} JSX for the Rewards Items List
 	 */
 	renderRewardListComponent() {
-		const { enable_offers, is_expanded } = this.props;
+		const { actions, enable_offers, is_expanded } = this.props;
 		const { rewardsArray } = this.state;
 
 		if (enable_offers && !rewardsArray) {
@@ -162,7 +162,7 @@ class Rewards extends React.Component {
 				text={reward.text}
 				logoUrl={reward.logo_url}
 				expires={reward.expires}
-				actions={this.props.actions}
+				actions={actions}
 			/>
 		));
 		return <div className="RewardsPanel__scroll_content">{ rewardsList }</div>;
