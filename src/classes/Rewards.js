@@ -94,18 +94,23 @@ class Rewards {
 							this.ports.get(tabId).onMessage.addListener((message) => {
 								switch (message.name) {
 									case 'rewardsLoaded':
-										this.ports.get(tabId).postMessage({ name: 'showHotDog', reward: this.currentOffer });
+										this.ports.get(tabId).postMessage({
+											name: 'showHotDog',
+											reward: this.currentOffer,
+											conf: {
+												rewardsPromptAccepted: conf.rewards_accepted
+											}
+										});
 										break;
 									case 'rewardSignal':
 										this.sendSignal(message.message);
 										break;
 									case 'rewardsDisabled':
-										// @TODO set conf disabled
-										console.log('@TODO Rewards Class - set conf disabled');
+										conf.enable_offers = false;
 										break;
 									case 'rewardsPromptAccepted':
 										// @TODO set conf disabled
-										console.log('@TODO Rewards Class - set conf rewards prompt accepted');
+										conf.rewards_accepted = true;
 										break;
 									default:
 										break;
