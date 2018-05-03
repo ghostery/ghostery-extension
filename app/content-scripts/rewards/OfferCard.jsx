@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
 import msgModule from '../utils/msg';
+import { computeTimeDelta } from '../../panel/utils/utils';
 import { log } from '../../../src/utils/common';
 import Notification from './Notification';
 import Settings from './Settings';
 import ClickOutside from '../../panel/components/helpers/ClickOutside';
+import Tooltip from '../../panel/components/Tooltip';
 
 const msg = msgModule('rewards');
 const { sendMessage } = msg;
@@ -36,6 +38,7 @@ class OfferCard extends Component {
 		this.closeOfferCard = this.closeOfferCard.bind(this);
 		this.copyCode = this.copyCode.bind(this);
 		this.disableRewards = this.disableRewards.bind(this);
+		this.disableRewardsNotification = this.disableRewardsNotification.bind(this);
 		this.toggleSettings = this.toggleSettings.bind(this);
 		this.handleImageLoaded = this.handleImageLoaded.bind(this);
 		this.handlePrompt = this.handlePrompt.bind(this);
@@ -131,6 +134,13 @@ class OfferCard extends Component {
 		this.messageBackground('rewardsDisabled');
 	}
 
+	disableRewardsNotification() {
+		this.disableRewards();
+		this.setState({
+			showPrompt: 3
+		});
+	}
+
 	handlePrompt(promptNumber, option) {
 		// @TODO update user settings
 		if (promptNumber === 1) {
@@ -177,6 +187,13 @@ class OfferCard extends Component {
 		);
 	}
 
+	renderExpiresText() {
+		const { expirationMs } = this.props.reward.offer_data;
+		const expireDays = Math.round((new Date()).setDate(new Date().getDate() + expirationMs / 60 / 60 / 24));
+		const delta = computeTimeDelta(new Date(expireDays), new Date());
+		return t('rewards_expires_in', [delta.count, t(`rewards_expires_in_${delta.type}`)]);
+	}
+
 	render() {
 		return (
 			// @TODO condition for hide class
@@ -215,7 +232,7 @@ class OfferCard extends Component {
 							{ this.state.showSettings &&
 							<div className="rewards-settings-container">
 								<ClickOutside excludeEl={this.kebabRef} onClickOutside={this.toggleSettings}>
-									<Settings disable={this.disableRewards} />
+									<Settings disable={this.disableRewardsNotification} />
 								</ClickOutside>
 							</div>
 							}
@@ -225,6 +242,7 @@ class OfferCard extends Component {
 							<img src={this.state.rewardUI.picture_url} className="hide" onLoad={this.handleImageLoaded} />
 							<div className="flex-grow" />
 						</div>
+						<div className="flex-grow" />
 						<div className="reward-content-detail">
 							<span className="reward-benefit">
 								{ this.state.rewardUI.benefit }
@@ -236,6 +254,7 @@ class OfferCard extends Component {
 								{ this.state.rewardUI.desc }
 							</span>
 						</div>
+						<div className="flex-grow" />
 						<div className="reward-code">
 							<div>
 								{this.state.rewardUI.code}
@@ -244,8 +263,13 @@ class OfferCard extends Component {
 							<a onClick={this.copyCode}>{this.state.copyText}</a>
 						</div>
 						<div className="reward-content-footer">
-							{/* <span> {t('rewards_expire')} { this.props.reward.expireTime } </span> */}
-							{/* <a target="_blank" href={this.props.reward.termsLink}> { t('rewards_terms_conditions') } </a> */}
+							<span>
+								{ this.renderExpiresText() }
+							</span>
+							<div className="reward-terms g-tooltip">
+								{ t('rewards_terms_conditions') }
+								<Tooltip header={this.state.rewardUI.conditions} position="top" delay="0" theme="dark" />
+							</div>
 						</div>
 						<a target="_blank" onClick={this.redeem} href={this.state.rewardUI.call_to_action && this.state.rewardUI.call_to_action.url} className="reward-redeem">
 							{this.state.rewardUI.call_to_action.text}
@@ -254,7 +278,7 @@ class OfferCard extends Component {
 					<div className="reward-footer">
 						<div className="reward-feedback">
 							<div className="reward-smile" />
-							<a onClick={this.disableRewards}>{t('rewards_disable')}</a>
+							<a onClick={this.disableRewardsNotification}>{t('rewards_disable')}</a>
 							<div className="reward-arrow" />
 						</div>
 						<div className="reward-ghosty" style={{ backgroundImage: this.ghostyGrey }} />

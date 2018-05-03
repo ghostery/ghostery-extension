@@ -1128,23 +1128,6 @@ messageCenter.on('enabled', () => {
 					if (tab) tabId = tab.id;
 					rewards.showHotDog(tabId, msg.data);
 				});
-
-				// const { data } = msg;
-				// const cmpMsg = {
-				// 	id: data.offer_data.display_id,
-				// 	Message: data.offer_data.ui_info.template_data.title,
-				// 	Link: data.offer_data.ui_info.template_data.call_to_action.url,
-				// 	LinkText: data.offer_data.ui_info.template_data.call_to_action.text,
-				// 	type: 'offers',
-				// 	origin: 'cliqz',
-				// 	data: {
-				// 		offer_info: {
-				// 			offer_id: data.offer_data.offer_id,
-				// 			offer_urls: data.offer_data.rule_info.url
-				// 		}
-				// 	}
-				// };
-				// cmp.CMP_DATA.push(cmpMsg);
 			}
 		});
 	});
