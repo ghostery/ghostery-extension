@@ -17,7 +17,7 @@ class OfferCard extends Component {
 		this.state = {
 			closed: false,
 			copyText: t('rewards_copy_code'),
-			showPrompt: 1,
+			showPrompt: this.props.conf.rewardsPromptAccepted ? false : 1,
 			showSettings: false,
 			rewardUI: props.reward && props.reward.offer_data && props.reward.offer_data.ui_info.template_data || {},
 		};

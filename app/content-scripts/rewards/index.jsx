@@ -35,6 +35,8 @@ const channelsSupported = (typeof chrome.runtime.connect === 'function');
 
 class RewardsApp {
 	constructor() {
+		this.reward = null;
+		this.conf = null;
 		this.rewardsContainer = document.createElement('div');
 		this.rewardsApp = document.createElement('div');
 		this.rewardsIframe = null;
@@ -72,7 +74,7 @@ class RewardsApp {
 
 	renderReact() {
 		const MainView = this.mainView;
-		ReactDOM.render(<MainView reward={this.reward} />, this.rewardsApp);
+		ReactDOM.render(<MainView reward={this.reward} conf={this.conf} />, this.rewardsApp);
 	}
 
 	renderShadow() {
@@ -85,7 +87,7 @@ class RewardsApp {
 					<div id="ghostery-shadow-root">
 						<Route exact path="/" render={() => <HotDog reward={props.reward} />} />
 						<Route path="/hotdog" render={() => <HotDog reward={props.reward} />} />
-						<Route path="/offercard" render={() => <OfferCard reward={props.reward} port={this.port} />} />
+						<Route path="/offercard" render={() => <OfferCard reward={props.reward} conf={props.conf} port={this.port} />} />
 					</div>
 				</ShadowDOM>
 			</Router>
@@ -115,7 +117,7 @@ class RewardsApp {
 					<div>
 						<Route exact path="/" render={() => <HotDog reward={props.reward} />} />
 						<Route path="/hotdog" render={() => <HotDog reward={props.reward} />} />
-						<Route path="/offercard" render={() => <OfferCard reward={props.reward} port={this.port} />} />
+						<Route path="/offercard" render={() => <OfferCard reward={props.reward} conf={props.conf} port={this.port} />} />
 					</div>
 				</Router>
 			);
@@ -141,6 +143,7 @@ class RewardsApp {
 	handleMessages(request, sender, response) {
 		if (request.name === 'showHotDog') {
 			this.reward = request.reward;
+			this.conf = request.conf;
 		}
 		if (document.readyState === 'complete' || document.readyState === 'interactive') {
 			this.renderReact();

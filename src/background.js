@@ -427,10 +427,10 @@ function handleRewards(name, message, tab_id, callback) {
 			button.update();
 			break;
 		case 'rewardsDisabled':
-			console.log('@TODO background - set conf rewards disabled');
+			conf.enable_offers = false;
 			break;
 		case 'rewardsPromptAccepted':
-			console.log('@TODO background - set conf rewards prompt accepted');
+			conf.rewards_accepted = true;
 			break;
 		default:
 			break;
