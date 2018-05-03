@@ -58,8 +58,8 @@ describe('app/panel/reducers/rewards.js', () => {
 
 		const initState = Immutable({
 			rewards: {
-				'test_reward_id': { reward: 'test' },
-				'test_reward_id_alt': { reward: 'test_alt' },
+				test_reward_id: { reward: 'test' },
+				test_reward_id_alt: { reward: 'test_alt' },
 			},
 			enable_offers: true,
 			unread_offer_ids: ['test_reward_id', 'test_reward_id_alt'],
@@ -67,7 +67,7 @@ describe('app/panel/reducers/rewards.js', () => {
 
 		expect(rewardsReducer(initState, action)).toEqual({
 			rewards: {
-				'test_reward_id_alt': { reward: 'test_alt' },
+				test_reward_id_alt: { reward: 'test_alt' },
 			},
 			enable_offers: true,
 			unread_offer_ids: ['test_reward_id_alt'],
@@ -80,8 +80,8 @@ describe('app/panel/reducers/rewards.js', () => {
 
 		const initState = Immutable({
 			rewards: {
-				'test_reward_id': { reward: 'test' },
-				'test_reward_id_alt': { reward: 'test_alt' },
+				test_reward_id: { reward: 'test' },
+				test_reward_id_alt: { reward: 'test_alt' },
 			},
 			enable_offers: true,
 			unread_offer_ids: ['test_reward_id', 'test_reward_id_alt'],
@@ -89,8 +89,8 @@ describe('app/panel/reducers/rewards.js', () => {
 
 		expect(rewardsReducer(initState, action)).toEqual({
 			rewards: {
-				'test_reward_id': { reward: 'test' },
-				'test_reward_id_alt': { reward: 'test_alt' },
+				test_reward_id: { reward: 'test' },
+				test_reward_id_alt: { reward: 'test_alt' },
 			},
 			enable_offers: true,
 			unread_offer_ids: ['test_reward_id_alt'],
@@ -103,8 +103,8 @@ describe('app/panel/reducers/rewards.js', () => {
 
 		const initState = Immutable({
 			rewards: {
-				'test_reward_id': { reward: 'test' },
-				'test_reward_id_alt': { reward: 'test_alt' },
+				test_reward_id: { reward: 'test' },
+				test_reward_id_alt: { reward: 'test_alt' },
 			},
 			enable_offers: true,
 			unread_offer_ids: ['test_reward_id_alt'],
@@ -112,8 +112,8 @@ describe('app/panel/reducers/rewards.js', () => {
 
 		expect(rewardsReducer(initState, action)).toEqual({
 			rewards: {
-				'test_reward_id': { reward: 'test' },
-				'test_reward_id_alt': { reward: 'test_alt' },
+				test_reward_id: { reward: 'test' },
+				test_reward_id_alt: { reward: 'test_alt' },
 			},
 			enable_offers: true,
 			unread_offer_ids: ['test_reward_id_alt'],

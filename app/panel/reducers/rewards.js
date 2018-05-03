@@ -47,7 +47,7 @@ export default (state = initialState, action) => {
 
 		case REMOVE_OFFER: {
 			// Remove offer from unread array
-			const unread_offer_ids = [ ...state.unread_offer_ids ];
+			const unread_offer_ids = [...state.unread_offer_ids];
 			const idx = unread_offer_ids.indexOf(action.data.id);
 			if (idx !== -1) {
 				unread_offer_ids.splice(idx, 1);
@@ -62,7 +62,7 @@ export default (state = initialState, action) => {
 		}
 
 		case SET_OFFER_READ: {
-			const unread_offer_ids = [ ...state.unread_offer_ids ];
+			const unread_offer_ids = [...state.unread_offer_ids];
 			const idx = unread_offer_ids.indexOf(action.data.id);
 			if (idx !== -1) {
 				unread_offer_ids.splice(idx, 1);

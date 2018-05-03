@@ -36,7 +36,7 @@ describe('app/panel/components/Rewards.jsx', () => {
 				is_expanded: false
 			};
 			const component = renderer.create(
-				<MemoryRouter initialEntries={[ '/detail/rewards/list' ]}>
+				<MemoryRouter initialEntries={['/detail/rewards/list']}>
 					<Rewards {...initialState} />
 				</MemoryRouter>
 			).toJSON();
@@ -56,7 +56,7 @@ describe('app/panel/components/Rewards.jsx', () => {
 				is_expanded: false
 			};
 			const component = renderer.create(
-				<MemoryRouter initialEntries={[ '/detail/rewards/list' ]}>
+				<MemoryRouter initialEntries={['/detail/rewards/list']}>
 					<Rewards {...initialState} />
 				</MemoryRouter>
 			).toJSON();
