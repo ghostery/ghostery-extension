@@ -25,7 +25,7 @@ class RewardDetail extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			copyText: 'copy code',
+			copyText: t('rewards_copy_code'),
 		};
 
 		// Event Bindings
@@ -50,14 +50,14 @@ class RewardDetail extends React.Component {
 
 		// Show a toast notification
 		this.props.actions.showNotification({
-			text: 'Rewards code copied!',
+			text: t('rewards_code_copied_toast_notification'),
 			classes: 'purple',
 		});
 
 		// Update and reset Copy Code text
-		this.setState({ copyText: 'code copied' });
+		this.setState({ copyText: t('rewards_code_copied') });
 		setTimeout(() => {
-			this.setState({ copyText: 'copy code' });
+			this.setState({ copyText: t('rewards_copy_code') });
 		}, 3000);
 
 		// Send a signal to the offers black box
@@ -85,8 +85,7 @@ class RewardDetail extends React.Component {
 	renderExpiresText() {
 		const { expires } = this.props;
 		const delta = computeTimeDelta(new Date(expires), new Date());
-
-		return `Expires in ${delta.count} ${delta.type}`;
+		return t('rewards_expires_in', [delta.count, t(`rewards_expires_in_${delta.type}`)]);
 	}
 
 	/**
@@ -109,34 +108,40 @@ class RewardDetail extends React.Component {
 					<img className="RewardDetail__logo" src={logoUrl} />
 					<img className="RewardDetail__picture" src={pictureUrl} />
 				</div>
-				<div className="RewardDetail__title">
-					{ text }
-				</div>
-				<div className="RewardDetail__description">
-					{ description }
-				</div>
-				<div className="RewardDetail__code_container flex-container align-middle align-justify">
-					<span className="RewardDetail__code" ref={(node) => { this.copyNode = node; }}>
-						<span>{ code }</span>
-						<input readOnly type="text" value={code} />
-					</span>
-					<span className="RewardDetail__copy clickable" onClick={this.handleCopyClick}>
-						{this.state.copyText}
-					</span>
-				</div>
+				{text && (
+					<div className="RewardDetail__title">
+						{ text }
+					</div>
+				)}
+				{description && (
+					<div className="RewardDetail__description">
+						{ description }
+					</div>
+				)}
+				{code && (
+					<div className="RewardDetail__code_container flex-container align-middle align-justify">
+						<span className="RewardDetail__code" ref={(node) => { this.copyNode = node; }}>
+							<span>{ code }</span>
+							<input readOnly type="text" value={code} />
+						</span>
+						<span className="RewardDetail__copy clickable" onClick={this.handleCopyClick}>
+							{this.state.copyText}
+						</span>
+					</div>
+				)}
 				<div className="RewardDetail__details_container flex-container align-justify align-middle">
 					<div className="RewardDetail__expires">
 						{ this.renderExpiresText() }
 					</div>
 					{conditions && (
 						<div className="RewardDetail__terms g-tooltip clickable">
-							Terms and Conditions
+							{ t('rewards_terms_conditions') }
 							<Tooltip header={conditions} position="top" delay="0" theme="dark" />
 						</div>
 					)}
 				</div>
 				<div className="RewardDetail__redeem_button clickable" onClick={this.handleRedeemClick}>
-					Redeem Now
+					{ t('rewards_redeem_now')}
 				</div>
 			</div>
 		);

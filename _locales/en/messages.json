@@ -1607,16 +1607,37 @@
 		"message": "new Reward was discovered"
 	},
 	"rewards_redeem_now": {
-		"message": "REDEEM NOW"
+		"message": "redeem now"
 	},
 	"rewards_copy_code": {
-		"message": "COPY CODE"
+		"message": "copy code"
 	},
 	"rewards_code_copied": {
-		"message": "CODE COPIED"
+		"message": "code copied"
 	},
-	"rewards_expire": {
-		"message": "Expires in"
+	"rewards_expires_in": {
+		"description": "example: Expires in 8 minutes. TYPE will be rewards_expires_in_TYPE listed below.",
+		"message": "Expires in $COUNT$ $TYPE$",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			},
+			"type": {
+				"content": "$2"
+			}
+		}
+	},
+	"rewards_expires_in_days": {
+		"message": "days"
+	},
+	"rewards_expires_in_hours": {
+		"message": "hours"
+	},
+	"rewards_expires_in_mins": {
+		"message": "minutes"
+	},
+	"rewards_expires_in_secs": {
+		"message": "seconds"
 	},
 	"rewards_terms_conditions": {
 		"message": "Terms & Conditions"
@@ -1644,5 +1665,20 @@
 	},
 	"rewards_second_prompt": {
 		"message": "Are you sure you would like to opt-out of Ghostery Rewards?"
+	},
+	"rewards_on": {
+		"message": "on"
+	},
+	"rewards_off": {
+		"message": "off"
+	},
+	"rewards_on_toast_notification": {
+		"message": "Ghostery Rewards is ON"
+	},
+	"rewards_off_toast_notification": {
+		"message": "Ghostery Rewards is OFF"
+	},
+	"rewards_code_copied_toast_notification": {
+		"message": "Rewards code copied!"
 	}
 }
