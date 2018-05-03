@@ -57,10 +57,10 @@ class Rewards extends React.Component {
 				return {
 					id: reward.offer_id,
 					unread: nextProps.unread_offer_ids.indexOf(reward.offer_id) !== -1,
-					code: reward.ui_info.template_data.code || 'C0D3_DNE',
-					text: reward.ui_info.template_data.title || 'reward title',
-					description: reward.ui_info.template_data.desc || 'reward description',
-					conditions: reward.ui_info.template_data.conditions || '',
+					code: reward.ui_info.template_data.code,
+					text: reward.ui_info.template_data.title,
+					description: reward.ui_info.template_data.desc,
+					conditions: reward.ui_info.template_data.conditions,
 					logo_url: reward.ui_info.template_data.logo_url,
 					picture_url: reward.ui_info.template_data.picture_url,
 					redeem_url: reward.ui_info.template_data.call_to_action.url,
@@ -92,7 +92,7 @@ class Rewards extends React.Component {
 	toggleOffers() {
 		const { enable_offers } = this.props;
 		this.props.actions.showNotification({
-			text: `Ghostery Rewards is ${enable_offers ? 'OFF' : 'ON'}`,
+			text: !enable_offers ? t('rewards_on_toast_notification') : t('rewards_off_toast_notification'),
 			classes: 'purple',
 		});
 		this.props.actions.toggleOffersEnabled(!enable_offers);
@@ -120,7 +120,9 @@ class Rewards extends React.Component {
 				<span className="RewardsPanel__title">{ t('panel_detail_rewards_title') }</span>
 				{showToggle && (
 					<span className="send-right-with-padding flex-container align-middle">
-						<span className="RewardsPanel__slider_text">{enable_offers ? 'ON' : 'OFF'}</span>
+						<span className="RewardsPanel__slider_text">
+							{enable_offers ? t('rewards_on') : t('rewards_off')}
+						</span>
 						<ToggleSlider
 							className="display-inline-block"
 							isChecked={enable_offers}
