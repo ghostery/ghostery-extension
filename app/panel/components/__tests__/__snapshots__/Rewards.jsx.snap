@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/panel/components/Rewards.jsx Snapshot tests with react-test-renderer rewards is rendered correctly when rewards is off and rewards is null 1`] = `
+<div
+  className="RewardsPanel"
+>
+  <div
+    className="RewardsPanel__header flex-container align-center-middle"
+  >
+    <span
+      className="RewardsPanel__title"
+    >
+      panel_detail_rewards_title
+    </span>
+    <span
+      className="send-right-with-padding flex-container align-middle"
+    >
+      <span
+        className="RewardsPanel__slider_text"
+      >
+        rewards_off
+      </span>
+      <div
+        className="ToggleSlider display-inline-block"
+      >
+        <label
+          className="ToggleSlider__switch"
+        >
+          <input
+            checked={false}
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="ToggleSlider__slider"
+          />
+          <span
+            className="ToggleSlider__slider_circle"
+          />
+        </label>
+      </div>
+    </span>
+  </div>
+  <span>
+    Turn on Rewards to see great deals
+  </span>
+</div>
+`;
+
+exports[`app/panel/components/Rewards.jsx Snapshot tests with react-test-renderer rewards is rendered correctly when rewards is on and rewards is null 1`] = `
+<div
+  className="RewardsPanel"
+>
+  <div
+    className="RewardsPanel__header flex-container align-center-middle"
+  >
+    <span
+      className="RewardsPanel__title"
+    >
+      panel_detail_rewards_title
+    </span>
+    <span
+      className="send-right-with-padding flex-container align-middle"
+    >
+      <span
+        className="RewardsPanel__slider_text"
+      >
+        rewards_on
+      </span>
+      <div
+        className="ToggleSlider display-inline-block"
+      >
+        <label
+          className="ToggleSlider__switch"
+        >
+          <input
+            checked={true}
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="ToggleSlider__slider"
+          />
+          <span
+            className="ToggleSlider__slider_circle"
+          />
+        </label>
+      </div>
+    </span>
+  </div>
+  <span>
+    Loading Rewards ...
+  </span>
+</div>
+`;
