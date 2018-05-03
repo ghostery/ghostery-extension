@@ -99,7 +99,8 @@ class RewardDetail extends React.Component {
 			description,
 			conditions,
 			logoUrl,
-			pictureUrl
+			pictureUrl,
+			redeemText
 		} = this.props;
 
 		return (
@@ -141,7 +142,7 @@ class RewardDetail extends React.Component {
 					)}
 				</div>
 				<div className="RewardDetail__redeem_button clickable" onClick={this.handleRedeemClick}>
-					{ t('rewards_redeem_now')}
+					{ redeemText }
 				</div>
 			</div>
 		);

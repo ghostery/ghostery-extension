@@ -64,6 +64,7 @@ class Rewards extends React.Component {
 					logo_url: reward.ui_info.template_data.logo_url,
 					picture_url: reward.ui_info.template_data.picture_url,
 					redeem_url: reward.ui_info.template_data.call_to_action.url,
+					redeem_text: reward.ui_info.template_data.call_to_action.text,
 					expires: Math.round((new Date()).setDate(dateNow.getDate() + reward.expirationMs / 60 / 60 / 24)),
 				};
 			});
@@ -186,6 +187,7 @@ class Rewards extends React.Component {
 				pictureUrl={reward.picture_url}
 				redeemUrl={reward.redeem_url}
 				expires={reward.expires}
+				redeemText={reward.redeem_text}
 				actions={this.props.actions}
 			/>
 		);

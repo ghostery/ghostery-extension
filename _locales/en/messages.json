@@ -1603,9 +1603,6 @@
 	"rewards_new_text": {
 		"message": "new Reward was discovered"
 	},
-	"rewards_redeem_now": {
-		"message": "redeem now"
-	},
 	"rewards_copy_code": {
 		"message": "copy code"
 	},
