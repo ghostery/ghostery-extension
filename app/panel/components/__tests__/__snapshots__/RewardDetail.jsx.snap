@@ -66,7 +66,7 @@ exports[`app/panel/components/BuildingBlocks/RewardDetail.jsx Snapshot tests wit
     className="RewardDetail__redeem_button clickable"
     onClick={[Function]}
   >
-    rewards_redeem_now
+    redeem now
   </div>
 </div>
 `;
@@ -116,7 +116,7 @@ exports[`app/panel/components/BuildingBlocks/RewardDetail.jsx Snapshot tests wit
     className="RewardDetail__redeem_button clickable"
     onClick={[Function]}
   >
-    rewards_redeem_now
+    redeem now
   </div>
 </div>
 `;
@@ -183,7 +183,7 @@ exports[`app/panel/components/BuildingBlocks/RewardDetail.jsx Snapshot tests wit
     className="RewardDetail__redeem_button clickable"
     onClick={[Function]}
   >
-    rewards_redeem_now
+    redeem now
   </div>
 </div>
 `;
@@ -250,7 +250,7 @@ exports[`app/panel/components/BuildingBlocks/RewardDetail.jsx Snapshot tests wit
     className="RewardDetail__redeem_button clickable"
     onClick={[Function]}
   >
-    rewards_redeem_now
+    redeem now
   </div>
 </div>
 `;
@@ -317,7 +317,7 @@ exports[`app/panel/components/BuildingBlocks/RewardDetail.jsx Snapshot tests wit
     className="RewardDetail__redeem_button clickable"
     onClick={[Function]}
   >
-    rewards_redeem_now
+    redeem now
   </div>
 </div>
 `;
