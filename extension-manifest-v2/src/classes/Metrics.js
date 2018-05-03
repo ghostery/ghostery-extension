@@ -55,11 +55,7 @@ class Metrics {
 					// This query fails on Edge
 					chrome.tabs.query({
 						url: [
-							'https://www.ghostery.com/',
-							'https://www.ghostery.com/lp*',
-							'https://www.ghostery.com/*/lp*',
-							'https://www.ghostery.com/products*',
-							'https://www.ghostery.com/*/products*'
+							'https://www.ghostery.com/*'
 						]
 					}, (tabs) => {
 						tabs.forEach((tab) => {
@@ -85,8 +81,7 @@ class Metrics {
 					let foundUTM = false;
 					tabs.forEach((tab) => {
 						if (foundUTM) { return; }
-						if (tab.url && tab.url.includes('https://www.ghostery.com/') &&
-									(tab.url.includes('products') || tab.url.includes('lp'))) {
+						if (tab.url && tab.url.includes('https://www.ghostery.com/')) {
 							const query = processUrlQuery(tab.url);
 							if (!query.utm_source || !query.utm_campaign) { return; }
 							this.utm_source = query.utm_source;
