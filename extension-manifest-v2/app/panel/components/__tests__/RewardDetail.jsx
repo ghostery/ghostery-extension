@@ -43,6 +43,7 @@ describe('app/panel/components/BuildingBlocks/RewardDetail.jsx', () => {
 				logoUrl: 'https://www.ghostery.com/wp-content/themes/ghostery/images/ghostery_logo.svg',
 				pictureUrl: 'https://www.ghostery.com/wp-content/uploads/2017/12/simple-detailed-1024x833.png',
 				redeemUrl: 'https://www.offer-redeem-test.com',
+				redeemText: 'redeem now',
 				text: 'test reward title'
 			};
 			const component = renderer.create(<RewardDetail {...initialState} />).toJSON();
@@ -66,6 +67,7 @@ describe('app/panel/components/BuildingBlocks/RewardDetail.jsx', () => {
 				logoUrl: 'https://www.ghostery.com/wp-content/themes/ghostery/images/ghostery_logo.svg',
 				pictureUrl: 'https://www.ghostery.com/wp-content/uploads/2017/12/simple-detailed-1024x833.png',
 				redeemUrl: 'https://www.offer-redeem-test.com',
+				redeemText: 'redeem now',
 				text: ''
 			};
 			const component = renderer.create(<RewardDetail {...initialState} />).toJSON();
@@ -89,6 +91,7 @@ describe('app/panel/components/BuildingBlocks/RewardDetail.jsx', () => {
 				logoUrl: 'https://www.ghostery.com/wp-content/themes/ghostery/images/ghostery_logo.svg',
 				pictureUrl: 'https://www.ghostery.com/wp-content/uploads/2017/12/simple-detailed-1024x833.png',
 				redeemUrl: 'https://www.offer-redeem-test.com',
+				redeemText: 'redeem now',
 				text: 'test reward title'
 			};
 			const component = renderer.create(<RewardDetail {...initialState} />).toJSON();
@@ -112,6 +115,7 @@ describe('app/panel/components/BuildingBlocks/RewardDetail.jsx', () => {
 				logoUrl: 'https://www.ghostery.com/wp-content/themes/ghostery/images/ghostery_logo.svg',
 				pictureUrl: 'https://www.ghostery.com/wp-content/uploads/2017/12/simple-detailed-1024x833.png',
 				redeemUrl: 'https://www.offer-redeem-test.com',
+				redeemText: 'redeem now',
 				text: 'test reward title'
 			};
 			const component = renderer.create(<RewardDetail {...initialState} />).toJSON();
@@ -135,6 +139,7 @@ describe('app/panel/components/BuildingBlocks/RewardDetail.jsx', () => {
 				logoUrl: 'https://www.ghostery.com/wp-content/themes/ghostery/images/ghostery_logo.svg',
 				pictureUrl: 'https://www.ghostery.com/wp-content/uploads/2017/12/simple-detailed-1024x833.png',
 				redeemUrl: 'https://www.offer-redeem-test.com',
+				redeemText: 'redeem now',
 				text: 'test reward title'
 			};
 			const component = renderer.create(<RewardDetail {...initialState} />).toJSON();
@@ -160,6 +165,7 @@ describe('app/panel/components/BuildingBlocks/RewardDetail.jsx', () => {
 				logoUrl: 'https://www.ghostery.com/wp-content/themes/ghostery/images/ghostery_logo.svg',
 				pictureUrl: 'https://www.ghostery.com/wp-content/uploads/2017/12/simple-detailed-1024x833.png',
 				redeemUrl: 'https://www.offer-redeem-test.com',
+				redeemText: 'redeem now',
 				text: 'test reward title'
 			};
 			const component = shallow(<RewardDetail {...initialState} />);
