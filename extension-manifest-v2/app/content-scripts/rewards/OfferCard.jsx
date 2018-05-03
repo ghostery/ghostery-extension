@@ -266,10 +266,12 @@ class OfferCard extends Component {
 							<span>
 								{ this.renderExpiresText() }
 							</span>
-							<div className="reward-terms g-tooltip">
-								{ t('rewards_terms_conditions') }
-								<Tooltip header={this.state.rewardUI.conditions} position="top" delay="0" theme="dark" />
-							</div>
+							{this.state.rewardUI.conditions &&
+								<div className="reward-terms g-tooltip">
+									{ t('rewards_terms_conditions') }
+									<Tooltip header={this.state.rewardUI.conditions} position="top" delay="0" theme="dark" />
+								</div>
+							}
 						</div>
 						<a target="_blank" onClick={this.redeem} href={this.state.rewardUI.call_to_action && this.state.rewardUI.call_to_action.url} className="reward-redeem">
 							{this.state.rewardUI.call_to_action.text}
