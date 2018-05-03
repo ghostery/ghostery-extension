@@ -55,7 +55,7 @@ describe('app/panel/actions/RewardsActions.js', () => {
 		const initialState = {};
 		const store = mockStore(initialState);
 
-		const enabled = true ;
+		const enabled = true;
 		const expectedPayload = { data: { enabled }, type: TOGGLE_OFFERS_ENABLED };
 		store.dispatch(rewardsActions.toggleOffersEnabled(enabled));
 
@@ -67,7 +67,7 @@ describe('app/panel/actions/RewardsActions.js', () => {
 		const initialState = {};
 		const store = mockStore(initialState);
 
-		const id = 'test_reward_id' ;
+		const id = 'test_reward_id';
 		const expectedPayload = { data: { id }, type: REMOVE_OFFER };
 		store.dispatch(rewardsActions.removeOffer(id));
 
@@ -79,7 +79,7 @@ describe('app/panel/actions/RewardsActions.js', () => {
 		const initialState = {};
 		const store = mockStore(initialState);
 
-		const id = 'test_reward_id' ;
+		const id = 'test_reward_id';
 		const expectedPayload = { data: { id }, type: SET_OFFER_READ };
 		store.dispatch(rewardsActions.setOfferRead(id));
 
@@ -91,8 +91,8 @@ describe('app/panel/actions/RewardsActions.js', () => {
 		const initialState = {};
 		const store = mockStore(initialState);
 
-		const actionId = 'action_id' ;
-		const offerId = 'offer_id' ;
+		const actionId = 'action_id';
+		const offerId = 'offer_id';
 		const expectedPayload = { data: { actionId, offerId }, type: SEND_SIGNAL };
 		store.dispatch(rewardsActions.sendSignal(actionId, offerId));
 
