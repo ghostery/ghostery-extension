@@ -50,7 +50,7 @@ class OfferCard extends Component {
 				message: t('rewards_first_prompt'),
 				textLink: {
 					href: 'https://www.ghostery.com/faqs',
-					text: t('rewards_learn_more')
+					text: t('rewards_learn_more'),
 					callback: this.sendSignal('offer_first_learn')
 				},
 				closeCallback: (option) => { this.handlePrompt(1, option); },
@@ -151,18 +151,16 @@ class OfferCard extends Component {
 					showPrompt: 2
 				});
 				return;
-			} else {
-				this.sendSignal('offer_first_optin');
 			}
+			this.sendSignal('offer_first_optin');
 		} else if (promptNumber === 2) {
 			if (option) {
 				this.sendSignal('offer_first_optout');
 				this.disableRewards();
 				this.closeOfferCard();
 				return;
-			} else {
-				this.sendSignal('offer_first_optlater');
 			}
+			this.sendSignal('offer_first_optlater');
 		}
 		this.setState({
 			showPrompt: false
