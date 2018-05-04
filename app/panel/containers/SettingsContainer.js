@@ -16,6 +16,7 @@ import Settings from '../components/Settings';
 import * as settingsActions from '../actions/SettingsActions';
 import { toggleExpanded } from '../actions/DetailActions';
 import { updateSitePolicy } from '../actions/SummaryActions';
+import { sendSignal } from '../actions/RewardsActions';
 /**
  * Map redux store state properties to Settings view component own properties.
  * @memberOf PanelContainers
@@ -50,6 +51,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 	actions: bindActionCreators(Object.assign(settingsActions, {
 		toggleExpanded,
 		updateSitePolicy,
+		sendSignal,
 	}), dispatch),
 });
 /**
