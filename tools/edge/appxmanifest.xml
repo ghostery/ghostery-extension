@@ -4,9 +4,7 @@
 		xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
 		IgnorableNamespaces="uap3">
 		<Identity
-			Name="Ghostery.Ghostery"
-			Publisher="CN=2988219E-3FB6-4D1B-A7CB-D580DEE2D7AB"
-			Version="X.X.X.X" />
+			Name="Ghostery.Ghostery" />
 		<Properties>
 			<DisplayName>ms-resource:DisplayName</DisplayName>
 			<PublisherDisplayName>Ghostery</PublisherDisplayName>
