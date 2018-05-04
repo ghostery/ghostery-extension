@@ -42,7 +42,7 @@ class Rewards extends React.Component {
 	 */
 	componentDidMount() {
 		this.props.actions.getRewardsData();
-		this.props.actions.sendSignal('hub_opened');
+		this.props.actions.sendSignal('hub_open');
 	}
 
 	/**
