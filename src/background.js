@@ -79,12 +79,14 @@ const offers = cliqz.modules['offers-v2'];
  * @return {Promise}
  */
 function setCliqzModuleEnabled(module, enabled) {
+/* TEMP Ghostery Browser
 	if (enabled) {
 		log('SET CLIQZ MODULE ENABLED', module);
 		return cliqz.enableModule(module.name);
 	}
 	log('SET CLIQZ MODULE DISABLED', module);
 	cliqz.disableModule(module.name);
+*/
 	return Promise.resolve();
 }
 
@@ -1316,6 +1318,7 @@ function initializeGhosteryModules() {
 		metrics.ping('install_complete');
 	}
 	// start cliqz app
+	/* TEMP Ghostery Browser
 	const cliqzStartup = cliqz.start().then(() =>
 		// run wrapper tasks which set up base integrations between ghostery and these modules
 		Promise.all([
@@ -1340,6 +1343,7 @@ function initializeGhosteryModules() {
 	if (IS_EDGE) {
 		setCliqzModuleEnabled(hpn, false);
 	}
+	*/
 
 	// Set these tasks to run every hour
 	function scheduledTasks() {
@@ -1355,7 +1359,7 @@ function initializeGhosteryModules() {
 			});
 		}
 	}
-
+	/* TEMP Ghostery Browser
 	cliqzStartup.then(() => {
 		if (!IS_EDGE && !IS_CLIQZ) {
 			abtest.fetch().then(() => {
@@ -1365,7 +1369,7 @@ function initializeGhosteryModules() {
 			});
 		}
 	});
-
+	*/
 	// Check CMP right away.
 	cmp.fetchCMPData();
 	// Check CMP and ABTest every hour.
@@ -1396,7 +1400,7 @@ function initializeGhosteryModules() {
 		c2pDb.init(globals.JUST_UPGRADED),
 		compDb.init(globals.JUST_UPGRADED),
 		surrogatedb.init(globals.JUST_UPGRADED),
-		cliqzStartup,
+		// cliqzStartup, // TEMP Ghostery Browser
 	]).then(() => {
 		// initialize panel data
 		panelData.init();

@@ -8,8 +8,8 @@
 	"author": "Ghostery",
 	"name": "__MSG_name__",
 	"short_name": "Ghostery",
-	"version": "8.1.1",
-	"version_name": "8.1.1",
+	"version": "8.99.1",
+	"version_name": "8.99.1",
 	"default_locale": "en",
 	"description": "__MSG_short_description__",
 	"icons": {
@@ -54,18 +54,6 @@
 				"https://account.ghosterystage.com/*"
 			],
 			"run_at": "document_end"
-		},
-		{
-			"all_frames": true,
-			"js": [
-				"dist/content_script_bundle.js"
-			],
-			"matches": [
-				"http://*/*",
-				"https://*/*"
-			],
-			"exclude_matches": ["*://*/_/chrome/newtab*"],
-			"run_at": "document_start"
 		}
 	],
 	"content_security_policy": "script-src 'self'; object-src 'self'",
