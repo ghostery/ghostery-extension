@@ -50,7 +50,8 @@ class OfferCard extends Component {
 				message: t('rewards_first_prompt'),
 				textLink: {
 					href: 'https://www.ghostery.com/faqs',
-					text: 'Learn More'
+					text: t('rewards_learn_more')
+					callback: this.sendSignal('offer_first_learn')
 				},
 				closeCallback: (option) => { this.handlePrompt(1, option); },
 			},
@@ -77,6 +78,7 @@ class OfferCard extends Component {
 		if (nextProps.reward) {
 			this.sendSignal('offer_shown', nextProps);
 			this.sendSignal('offer_dsp_session', nextProps);
+			this.sendSignal('offer_shown_card', nextProps);
 		}
 	}
 
@@ -149,12 +151,17 @@ class OfferCard extends Component {
 					showPrompt: 2
 				});
 				return;
+			} else {
+				this.sendSignal('offer_first_optin');
 			}
 		} else if (promptNumber === 2) {
 			if (option) {
+				this.sendSignal('offer_first_optout');
 				this.disableRewards();
 				this.closeOfferCard();
 				return;
+			} else {
+				this.sendSignal('offer_first_optlater');
 			}
 		}
 		this.setState({
@@ -232,7 +239,7 @@ class OfferCard extends Component {
 							{ this.state.showSettings &&
 							<div className="rewards-settings-container">
 								<ClickOutside excludeEl={this.kebabRef} onClickOutside={this.toggleSettings}>
-									<Settings disable={this.disableRewardsNotification} />
+									<Settings signal={this.sendSignal('about_ghostery_rewards')} disable={this.disableRewardsNotification} />
 								</ClickOutside>
 							</div>
 							}
