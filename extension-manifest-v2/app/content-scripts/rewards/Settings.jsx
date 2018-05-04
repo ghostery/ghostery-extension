@@ -27,7 +27,7 @@ class Settings extends Component {
 					<div className="rewards-settings-container rewards-popup-container">
 						<div className="rewards-settings">
 							<div className="close" onClick={this.close} style={{ backgroundImage: this.closeIcon }} />
-							<a href="https://www.ghostery.com/faqs" target="_blank" rel="noopener noreferrer" className="about">{t('rewards_about')}</a>
+							<a onClick={this.props.signal} href="https://www.ghostery.com/faqs" target="_blank" rel="noopener noreferrer" className="about">{t('rewards_about')}</a>
 							<div className="disable" onClick={() => { this.close(); this.props.disable(); }}>
 								{t('rewards_disable')}
 							</div>

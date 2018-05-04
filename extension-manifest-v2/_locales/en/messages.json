@@ -1674,5 +1674,8 @@
 	},
 	"rewards_code_copied_toast_notification": {
 		"message": "Rewards code copied!"
+	},
+	"rewards_learn_more": {
+		"message": "Learn More"
 	}
 }

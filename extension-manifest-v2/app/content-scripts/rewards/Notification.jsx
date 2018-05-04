@@ -41,7 +41,7 @@ class Notification extends Component {
 								</div>
 							}
 							{this.props.data.textLink
-								&& <a className="notification-text" href={this.props.data.textLink.href} target="_blank" onClick={this.props.data.closeCallback}>{this.props.data.textLink.text}</a>
+								&& <a className="notification-text" href={this.props.data.textLink.href} target="_blank" onClick={this.props.data.textLink.callback || this.props.data.closeCallback}>{this.props.data.textLink.text}</a>
 							}
 						</div>
 					</div>
