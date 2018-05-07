@@ -247,11 +247,11 @@ class OfferCard extends Component {
 							<img src={this.state.rewardUI.picture_url} className="hide" onLoad={this.handleImageLoaded} />
 							<div className="flex-grow" />
 						</div>
-						<div className="flex-grow" />
 						<div className="reward-content-detail">
-							<span className="reward-benefit">
+							{/* <div className="flex-grow" /> */}
+							<div className="reward-benefit">
 								{ this.state.rewardUI.benefit }
-							</span>
+							</div>
 							<span className="reward-headline">
 								{ this.state.rewardUI.headline }
 							</span>
