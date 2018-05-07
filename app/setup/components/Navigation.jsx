@@ -89,6 +89,14 @@ class Navigation extends Component {
 	}
 
 	/**
+	 * Wrapper function for dangerouslySetInnerHTML. Provides extra security
+	 * @return {Object}
+	 */
+	createLegalMarkup() {
+		return { __html: t('setup_choice_view_legal') };
+	}
+
+	/**
 	 * React's required render function. Returns JSX
 	 * @return {JSX} JSX for rendering the Navigation
 	 */
@@ -97,38 +105,43 @@ class Navigation extends Component {
 		const { nextButtons } = this.props;
 		return (
 			<div id="navigation">
-				<div className={`${(pathname === '/' || pathname === '/upgrade') ? 'hide' : ''} row align-center align-middle`}>
-					<div className="columns shrink">
-						<button className="button hollow ghostery-button" onClick={this._prev}>
-							{ t('setup_button_previous') }
-						</button>
-					</div>
-					<div className="columns text-center navigation-dots">
-						<div className="circles">
-							<NavLink to="/" exact />
-							<NavLink to="/blocking" exact />
-							<NavLink to="/additional-features" exact />
-							<NavLink to="/display" exact />
-							<NavLink to="/log-in" exact />
-							<NavLink to="/data-collection" exact />
-							<NavLink to="/done" exact />
+				{pathname === '/' && (
+					<div className="legal-notice" dangerouslySetInnerHTML={this.createLegalMarkup()} />
+				)}
+				{pathname !== '/' && pathname !== '/upgrade' && (
+					<div className="row align-center align-middle">
+						<div className="columns shrink">
+							<button className="button hollow ghostery-button" onClick={this._prev}>
+								{ t('setup_button_previous') }
+							</button>
 						</div>
-					</div>
-					{nextButtons.map((button, i) => {
-						const buttonClasses = ClassNames('button ghostery-button', {
-							hollow: nextButtons.length > 1 && i === 0,
-							loading: this.props.loading && i === 1,
-						});
-						return (
-							<div key={button.title} className="columns shrink" >
-								<button onClick={this[`_${button.action}`]} className={buttonClasses}>
-									<span className="title">{button.title}</span>
-									<span className="loader" />
-								</button>
+						<div className="columns text-center navigation-dots">
+							<div className="circles">
+								<NavLink to="/" exact />
+								<NavLink to="/blocking" exact />
+								<NavLink to="/additional-features" exact />
+								<NavLink to="/display" exact />
+								<NavLink to="/log-in" exact />
+								<NavLink to="/data-collection" exact />
+								<NavLink to="/done" exact />
 							</div>
-						);
-					})}
-				</div>
+						</div>
+						{nextButtons.map((button, i) => {
+							const buttonClasses = ClassNames('button ghostery-button', {
+								hollow: nextButtons.length > 1 && i === 0,
+								loading: this.props.loading && i === 1,
+							});
+							return (
+								<div key={button.title} className="columns shrink" >
+									<button onClick={this[`_${button.action}`]} className={buttonClasses}>
+										<span className="title">{button.title}</span>
+										<span className="loader" />
+									</button>
+								</div>
+							);
+						})}
+					</div>
+				)}
 			</div>
 		);
 	}

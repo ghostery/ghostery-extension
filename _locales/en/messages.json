@@ -1341,7 +1341,7 @@
 		"message": "One-Click Setup"
 	},
 	"setup_choice_view_share_data": {
-		"message": "Share my analytics and Human Web data to improve Ghostery’s performance."
+		"message": "Participate in Ghostery Rewards and share Human Web & analytics data."
 	},
 	"setup_choice_view_share_data_no_human_web": {
 		"message": "Share my analytics data to improve Ghostery’s performance."
@@ -1354,6 +1354,23 @@
 	},
 	"setup_choice_view_answer_questions": {
 		"message": "Choose my own settings by answering a few short questions."
+	},
+	"setup_choice_view_legal": {
+		"message": "By installing Ghostery, you agree to Ghostery's $LINK_PP_START$Privacy Policy$LINK_PP_END$ and $LINK_TERMS_START$Terms of Use$LINK_TERMS_END$.",
+		"placeholders": {
+			"link_pp_start": {
+				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" target=\"_blank\">"
+			},
+			"link_pp_end": {
+				"content": "</a>"
+			},
+			"link_terms_start": {
+				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-end-user-license-agreement/\" target=\"_blank\">"
+			},
+			"link_terms_end": {
+				"content": "</a>"
+			}
+		}
 	},
 	"setup_blocking_view_title": {
 		"message": "Ghostery can block trackers to make your browsing cleaner, faster, and safer. What would you like to block?"
@@ -1447,26 +1464,6 @@
 	"setup_login_view_password_error": {
 		"message": "Use between 8 and 50 characters."
 	},
-	"setup_login_view_terms_error": {
-		"message": "You must accept this."
-	},
-	"setup_login_view_terms": {
-		"message": "I agree to Ghostery's $LINK_PP_START$Privacy Policy$LINK_PP_END$ and $LINK_TERMS_START$Terms of Use$LINK_TERMS_END$",
-		"placeholders": {
-			"link_pp_start": {
-				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" target=\"_blank\">"
-			},
-			"link_pp_end": {
-				"content": "</a>"
-			},
-			"link_terms_start": {
-				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-end-user-license-agreement/\" target=\"_blank\">"
-			},
-			"link_terms_end": {
-				"content": "</a>"
-			}
-		}
-	},
 	"setup_login_view_create_account": {
 		"message": "Don't have an account? Create one."
 	},
@@ -1477,10 +1474,10 @@
 		"message": "Signed in as"
 	},
 	"setup_data_view_title": {
-		"message": "Would you like to help improve Ghostery?"
+		"message": "Would you like to support Ghostery?"
 	},
 	"setup_data_view_desc": {
-		"message": "We use anonymous analytics and Human Web data to improve Ghostery’s performance, without collecting any personal data. $LINK_START$Learn more$LINK_END$.",
+		"message": "We use anonymous analytics and Human Web data to improve Ghostery’s performance, and provide Rewards without collecting any personal data. $LINK_START$Learn more$LINK_END$.",
 		"placeholders": {
 			"link_start": {
 				"content": "<a href=\"https://www.ghostery.com/faqs/\" target=\"_blank\">"
