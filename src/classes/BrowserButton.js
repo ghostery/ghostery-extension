@@ -74,7 +74,7 @@ class BrowserButton {
 	 * @param 	{boolean}	alert			is it a special case which requires button to change its background color?
 	 */
 	_setIcon(active, tabId, trackerCount, alert) {
-		chrome.runtime.sendMessage('firefox@ghostery.com', {
+		chrome.runtime.sendMessage({
 			target: 'ANDROID_BROWSER',
 			action: 'setIcon',
 			payload: {
