@@ -31,7 +31,6 @@ class LogInView extends Component {
 			password: '',
 			firstName: '',
 			lastName: '',
-			policy: true,
 		};
 	}
 
@@ -245,8 +244,6 @@ class LogInView extends Component {
 		this.confirmEmailInput.blur();
 		this.passwordInput.focus();
 		this.passwordInput.blur();
-		this.policyInput.focus();
-		this.policyInput.blur();
 		return (
 			this._isValid({
 				target: {
@@ -264,12 +261,6 @@ class LogInView extends Component {
 				target: {
 					name: 'password',
 					value: this.state.password,
-				},
-			}) &&
-			this._isValid({
-				target: {
-					name: 'policy',
-					value: this.state.policy,
 				},
 			}) || false);
 	}
@@ -289,8 +280,6 @@ class LogInView extends Component {
 			case 'password':
 				return this.state.password.length >= 8 &&
 					this.state.password.length <= 50 || false;
-			case 'policy':
-				return this.state.policy === true;
 			default:
 				return true;
 		}
@@ -327,11 +316,6 @@ class LogInView extends Component {
 					password: event.target.value,
 				});
 				break;
-			case 'policy':
-				this.setState({
-					policy: event.target.checked,
-				});
-				break;
 			default: break;
 		}
 	}
@@ -346,14 +330,6 @@ class LogInView extends Component {
 		} else {
 			event.target.classList.add('invalid');
 		}
-	}
-
-	/**
-	 * Wrapper function for dangerouslySetInnerHTML. Provides extra security
-	 * @return {Object}
-	 */
-	createTermsMarkup() {
-		return { __html: t('setup_login_view_terms') };
 	}
 
 	/**
@@ -433,24 +409,7 @@ class LogInView extends Component {
 											<span className="form-error">{ t('setup_login_view_password_error') }</span>
 										</span>
 									</div>
-									<div className="columns">
-										<input
-											name="policy"
-											type="checkbox"
-											id="log-in-view-policy-input"
-											checked={this.state.policy}
-											onChange={this._onChange}
-											onBlur={this._onBlur}
-											required
-											ref={(ref) => { this.policyInput = ref; }}
-										/>
-										<label htmlFor="log-in-view-policy-input">
-											<span dangerouslySetInnerHTML={this.createTermsMarkup()} />
-										</label>
-										<span className="form-error-container">
-											<span className="form-error">{ t('setup_login_view_terms_error') }</span>
-										</span>
-									</div>
+									<div className="columns" />
 									<div className="columns">
 										<a onClick={this._toggleSignIn}>{ t('setup_login_view_log_in') }</a>
 									</div>
