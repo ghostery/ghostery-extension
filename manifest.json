@@ -92,5 +92,10 @@
 	"minimum_opera_version": "36",
 	"web_accessible_resources": [
 		"app/images/*"
-	]
+	],
+	"browser_specific_settings": {
+		"edge": {
+			"browser_action_next_to_addressbar": true
+		}
+	}
 }
