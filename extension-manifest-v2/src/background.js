@@ -825,8 +825,7 @@ function initializeDispatcher() {
 	dispatcher.on('conf.save.enable_human_web', (enableHumanWeb) => {
 		if (!IS_EDGE && !IS_CLIQZ) {
 			setCliqzModuleEnabled(humanweb, enableHumanWeb).then((data) => {
-				// We don't want to affect Offers here
-				setupABTestAntitracking();
+				setupABTest();
 			});
 		} else {
 			setCliqzModuleEnabled(humanweb, false);
@@ -900,7 +899,7 @@ function getAntitrackingTestConfig() {
  * Adjust antitracking parameters based on the current state
  * of ABTest and availability of Human Web.
  */
-function setupABTestAntitracking() {
+function setupABTest() {
 	const antitrackingConfig = getAntitrackingTestConfig();
 	if (antitrackingConfig && conf.enable_anti_tracking) {
 		if (!conf.enable_human_web) {
@@ -913,22 +912,6 @@ function setupABTestAntitracking() {
 			antitracking.action('setConfigOption', opt, val);
 		});
 	}
-}
-/**
- * Adjust offers based on the current state of ABTest.
- */
-function setupABTestOffers() {
-	// enable offers ONLY if ABTest is true and user has left it enabled.
-	conf.enable_offers = (abtest.hasTest('offers') && conf.enable_offers);
-}
-/**
- * Setup Antitracking and Offers based on the results
- * returned from the abtest endpoint.
- * @memberOf Background
- */
-function setupABTests() {
-	setupABTestAntitracking();
-	setupABTestOffers();
 }
 
 /**
@@ -1381,15 +1364,14 @@ function initializeGhosteryModules() {
 			if (globals.JUST_UPGRADED_FROM_7) {
 				conf.enable_ad_block = false;
 				conf.enable_anti_tracking = false;
+				conf.enable_offers = false;
 				conf.enable_human_web = (IS_EDGE || IS_CLIQZ) ? false : conf.enable_human_web;
 			} else {
 				conf.enable_ad_block = IS_CLIQZ ? false : !adblocker.isDisabled;
 				conf.enable_anti_tracking = IS_CLIQZ ? false : !antitracking.isDisabled;
 				conf.enable_human_web = (IS_EDGE || IS_CLIQZ) ? false : !humanweb.isDisabled;
+				conf.enable_offers = (IS_EDGE || IS_CLIQZ) ? false : !offers.isDisabled;
 			}
-			// sync conf from module status
-			// @TODO enable offers by default in browser-core
-			// conf.enable_offers = (IS_EDGE || IS_CLIQZ) ? false : !offers.isDisabled;
 		})).catch((e) => {
 		log('cliqzStartup error', e);
 	});
@@ -1406,7 +1388,7 @@ function initializeGhosteryModules() {
 		if (!IS_EDGE && !IS_CLIQZ) {
 			// auto-fetch human web offer
 			abtest.fetch().then(() => {
-				setupABTests();
+				setupABTest();
 			}).catch((err) => {
 				log('Unable to reach abtest server');
 			});
@@ -1416,7 +1398,7 @@ function initializeGhosteryModules() {
 	cliqzStartup.then(() => {
 		if (!IS_EDGE && !IS_CLIQZ) {
 			abtest.fetch().then(() => {
-				setupABTests();
+				setupABTest();
 			}).catch((err) => {
 				log('cliqzStartup abtest fetch error', err);
 			});
