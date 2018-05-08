@@ -74,6 +74,25 @@ $ npm run build.dev -- --env.nolint
 $ npm run docs
 ```
 
+## Transifex Client
+Run transifex client (tx) in your local synchronized 'develop' branch
+Transifex client behavior is determined by .tx/config file in the repo.
+```sh
+# Install Transifex Client (tx)
+$ pip install transifex-client
+# Check if install was successful
+$ tx --version
+# Push changes made to _locales/en/messages.json to Transifex
+$ tx push -s
+# Pull translated files from Transifex to _locales/<lang>/messages.json
+$ tx --minimum-perc=100 pull -a 
+```
+For more information see:
++ [Transifect Client](https://docs.transifex.com/client/introduction)
++ [Transifect Client Workflow](https://docs.transifex.com/integrations/github)
++ [Ghostery Transifex Project](https://www.transifex.com/ghostery-inc/ghostery-8/dashboard/)
+
+## 
 ## Cliqz Source Code
 Ghostery implements the following open-source products from [Cliqz](https://cliqz.com/en/)
 
