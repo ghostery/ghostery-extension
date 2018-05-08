@@ -88,8 +88,8 @@ $ tx push -s
 $ tx --minimum-perc=100 pull -a 
 ```
 For more information see:
-+ [Transifect Client](https://docs.transifex.com/client/introduction)
-+ [Transifect Client Workflow](https://docs.transifex.com/integrations/github)
++ [Transifex Client](https://docs.transifex.com/client/introduction)
++ [Transifex Client Workflow](https://docs.transifex.com/integrations/github)
 + [Ghostery Transifex Project](https://www.transifex.com/ghostery-inc/ghostery-8/dashboard/)
 
 ## 
