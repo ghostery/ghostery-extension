@@ -27,7 +27,7 @@ class HotDog extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.reward) {
+		if (nextProps.reward && nextProps.reward !== null) {
 			this.sendSignal('offer_notification_hotdog', nextProps);
 		}
 	}
