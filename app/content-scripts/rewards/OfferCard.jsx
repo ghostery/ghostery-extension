@@ -75,7 +75,7 @@ class OfferCard extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.reward) {
+		if (nextProps.reward && nextProps.reward !== null) {
 			this.sendSignal('offer_shown', nextProps);
 			this.sendSignal('offer_dsp_session', nextProps);
 			this.sendSignal('offer_shown_card', nextProps);
