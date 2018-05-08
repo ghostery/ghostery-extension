@@ -100,7 +100,6 @@ class RewardsApp {
 		this.rewardsIframe = document.createElement('iframe');
 		this.rewardsIframe.id = 'ghostery-iframe-container';
 		this.rewardsIframe.classList.add('hot-dog');
-		document.body.appendChild(this.rewardsIframe);
 		this.rewardsIframe.onload = () => {
 			this.iframeStyle = document.createElement('link');
 			this.iframeStyle.rel = 'stylesheet';
@@ -124,6 +123,7 @@ class RewardsApp {
 			this.renderReact();
 			this.initListener();
 		};
+		document.body.appendChild(this.rewardsIframe);
 	}
 
 	initListener() {
