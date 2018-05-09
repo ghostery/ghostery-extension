@@ -22,7 +22,7 @@ import _ from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
 import cliqz from './classes/Cliqz';
 // object classes
-import Button from './classes/BrowserButton';
+import button from './classes/BrowserButton';
 import Events from './classes/EventHandlers';
 import PanelData from './classes/PanelData';
 // static classes
@@ -47,7 +47,6 @@ import * as common from './utils/common';
 import * as utils from './utils/utils';
 
 // class instantiation
-const button = new Button();
 const events = new Events();
 
 const panelData = new PanelData();

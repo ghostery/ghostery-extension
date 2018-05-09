@@ -13,6 +13,7 @@
 
 /* eslint consistent-return: 0 */
 
+import button from './BrowserButton';
 import cliqz from './Cliqz';
 import conf from './Conf';
 import tabInfo from './TabInfo';
@@ -50,11 +51,6 @@ class Rewards {
 
 	sendSignal(message) {
 		const { offerId, actionId } = message;
-
-		if (actionId === 'offer_shown') {
-			this.markRewardRead(offerId);
-		}
-
 		const signal = {
 			origin: 'ghostery',
 			type: 'action-signal',
@@ -112,12 +108,16 @@ class Rewards {
 										// @TODO set conf disabled
 										conf.rewards_accepted = true;
 										break;
+									case 'rewardSeen':
+										this.markRewardRead(message.offerId);
+										button.update();
+										break;
 									default:
 										break;
 								}
 							});
 						}
-					}
+					}c
 				});
 			}
 		}

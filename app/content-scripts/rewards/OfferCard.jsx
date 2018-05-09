@@ -72,14 +72,14 @@ class OfferCard extends Component {
 				closeCallback: this.closeOfferCard,
 			}
 		];
-	}
 
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.reward && nextProps.reward !== null) {
-			this.sendSignal('offer_shown', nextProps);
-			this.sendSignal('offer_dsp_session', nextProps);
-			this.sendSignal('offer_shown_card', nextProps);
-		}
+		const { reward } = props;
+		this.messageBackground('rewardSeen', {
+			offerId: reward.offer_id
+		});
+		this.sendSignal('offer_shown', { reward });
+		this.sendSignal('offer_dsp_session', { reward });
+		this.sendSignal('offer_shown_card', { reward });
 	}
 
 	messageBackground(name, message) {
