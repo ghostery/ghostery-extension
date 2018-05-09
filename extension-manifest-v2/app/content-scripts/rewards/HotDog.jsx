@@ -32,6 +32,17 @@ class HotDog extends Component {
 		}
 	}
 
+	messageBackground(name, message) {
+		if (this.props.port) {
+			this.props.port.postMessage({
+				name,
+				message
+			});
+		} else {
+			sendMessage(name, message);
+		}
+	}
+
 	sendSignal(actionId, props = this.props) {
 		// Cliqz metrics
 		const offerId = props.reward.offer_id;
@@ -39,14 +50,7 @@ class HotDog extends Component {
 			offerId,
 			actionId
 		};
-		if (props.port) {
-			props.port.postMessage({
-				name: 'rewardSignal',
-				message
-			});
-		} else {
-			sendMessage('rewardSignal', message);
-		}
+		this.messageBackground('rewardSignal', message);
 	}
 
 	navigate() {

@@ -16,7 +16,7 @@
 
 import _ from 'underscore';
 import bugDb from './BugDb';
-import Button from './BrowserButton';
+import button from './BrowserButton';
 import c2pDb from './Click2PlayDb';
 import cmp from './CMP';
 import conf from './Conf';
@@ -35,7 +35,6 @@ import { log } from '../utils/common';
 import { isBug } from '../utils/matcher';
 import * as utils from '../utils/utils';
 
-const button = new Button();
 const RequestsMap = new Map();
 /**
  * This class is a collection of handlers for
@@ -44,7 +43,6 @@ const RequestsMap = new Map();
  */
 class EventHandlers {
 	constructor() {
-		this.button = new Button();
 		this.policy = new Policy();
 		this.policySmartBlock = new PolicySmartBlock();
 		this.purplebox = new PurpleBox();
