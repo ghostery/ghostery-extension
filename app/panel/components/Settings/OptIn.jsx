@@ -55,19 +55,17 @@ const OptIn = (props) => {
 							</div>
 						</div>
 					}
-					{settingsData.enable_offers_abtest &&
-						<div className="s-option-group" id="offers-section">
-							<div className="s-square-checkbox">
-								<input type="checkbox" id="settings-allow-offers" name="enable_offers" defaultChecked={settingsData.enable_offers} onClick={props.toggleCheckbox} />
-								<label htmlFor="settings-allow-offers">
-									<span>{ t('settings_allow_offers') }</span>
-								</label>
-								<div className="s-tooltip-up" data-g-tooltip={t('settings_offers_tooltip')}>
-									<img src="../../app/images/panel/icon-information-tooltip.svg" className="s-question" />
-								</div>
+					<div className="s-option-group" id="offers-section">
+						<div className="s-square-checkbox">
+							<input type="checkbox" id="settings-allow-offers" name="enable_offers" defaultChecked={settingsData.enable_offers} onClick={props.toggleCheckbox} />
+							<label htmlFor="settings-allow-offers">
+								<span>{ t('settings_allow_offers') }</span>
+							</label>
+							<div className="s-tooltip-up" data-g-tooltip={t('settings_offers_tooltip')}>
+								<img src="../../app/images/panel/icon-information-tooltip.svg" className="s-question" />
 							</div>
 						</div>
-					}
+					</div>
 				</div>
 			</div>
 		</div>
