@@ -15,7 +15,7 @@
  */
 
 import _ from 'underscore';
-import Button from './BrowserButton';
+import button from './BrowserButton';
 import conf from './Conf';
 import foundBugs from './FoundBugs';
 import bugDb from './BugDb';
@@ -28,7 +28,6 @@ import { pushUserSettings, buildUserSettings } from '../utils/accounts';
 import { getActiveTab, flushChromeMemoryCache } from '../utils/utils';
 import { objectEntries, log } from '../utils/common';
 
-const button = new Button();
 const SYNC_SET = new Set(globals.SYNC_ARRAY);
 const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 const { IS_CLIQZ } = globals;

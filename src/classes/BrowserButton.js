@@ -156,4 +156,4 @@ class BrowserButton {
 	}
 }
 
-export default BrowserButton;
+export default new BrowserButton();
