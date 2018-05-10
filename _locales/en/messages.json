@@ -1672,6 +1672,12 @@
 	"rewards_second_prompt": {
 		"message": "Are you sure you would like to opt-out of Ghostery Rewards?"
 	},
+	"rewards_yes": {
+		"message": "yes"
+	},
+	"rewards_no": {
+		"message": "no"
+	},
 	"rewards_on": {
 		"message": "on"
 	},
