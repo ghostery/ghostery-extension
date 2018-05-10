@@ -75,6 +75,12 @@ export function setOfferRead(id) {
 	};
 }
 
+/**
+ * Sends a Signal to the Cliqz Offers
+ * @param  {String} actionId the action id of the signal
+ * @param  {String} offerId  the offer id to be sent alongside the signal, sometimes
+ * @return {Object}
+ */
 export function sendSignal(actionId, offerId) {
 	return {
 		type: SEND_SIGNAL,
