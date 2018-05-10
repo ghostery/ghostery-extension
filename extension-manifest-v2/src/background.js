@@ -1104,10 +1104,12 @@ messageCenter.on('enabled', () => {
 			if (msg.origin === 'offers-core' &&
 				msg.type === 'push-offer' &&
 				msg.data.offer_data) {
-				if (!rewards.storedOffers.hasOwnProperty(msg.data.offer_id)) {
-					rewards.storedOffers[msg.data.offer_id] = msg.data;
-					rewards.unreadOfferIds.push(msg.data.offer_id);
+				const unreadIdx = rewards.unreadOfferIds.indexOf(msg.data.offer_id);
+				if (unreadIdx !== -1) {
+					rewards.unreadOfferIds.splice(unreadIdx, 1);
 				}
+				rewards.storedOffers[msg.data.offer_id] = msg.data;
+				rewards.unreadOfferIds.push(msg.data.offer_id);
 
 				log('RECEIVED OFFER', msg);
 				button.update();

@@ -68,7 +68,7 @@ class OfferCard extends Component {
 				textLink: {
 					href: 'https://www.ghostery.com/faqs',
 					text: t('rewards_learn_more'),
-					callback: this.sendSignal('offer_first_learn')
+					callback: () => this.sendSignal('offer_first_learn')
 				},
 				closeCallback: (option) => { this.handlePrompt(1, option); },
 			},
@@ -111,6 +111,7 @@ class OfferCard extends Component {
 	}
 
 	sendSignal(actionId, props = this.props) {
+		console.log('send signal ', actionId);
 		// Cliqz metrics
 		const offerId = props.reward.offer_id;
 		const message = {
@@ -221,93 +222,96 @@ class OfferCard extends Component {
 			// @TODO condition for hide class
 			<div ref={(ref) => { this.offerCardRef = ref; }} className="ghostery-rewards-component">
 				{ this.state.closed !== true &&
-				<div className="ghostery-reward-card">
-					{ this.state.showPrompt === 1 &&
-						this.renderNotification(0)
-					}
-					{ this.state.showPrompt === 2 &&
-						this.renderNotification(1)
-					}
-					{ this.state.showPrompt === 3 &&
-						this.renderNotification(2)
-					}
-					<div className="reward-card-header">
-						<div className="rewards-logo-beta" style={{ backgroundImage: this.betaLogo }} />
-						<div
-							className="reward-card-close"
-							onClick={(e) => { this.sendSignal('offer_closed_card'); this.closeOfferCard(); }}
-							style={{ backgroundImage: this.closeIcon }}
-						/>
-					</div>
-					<div className="reward-content">
-						<div className="reward-content-header">
-							<div className="flex-grow" />
-							<div className="reward-company-logo">
-								<img src={this.state.rewardUI.logo_url} className="hide" onLoad={this.handleImageLoaded} />
+					<div>
+						<div className="ghostery-reward-card">
+							<div className="reward-card-header">
+								<div className="rewards-logo-beta" style={{ backgroundImage: this.betaLogo }} />
+								<div
+									className="reward-card-close"
+									onClick={(e) => { this.sendSignal('offer_closed_card'); this.closeOfferCard(); }}
+									style={{ backgroundImage: this.closeIcon }}
+								/>
 							</div>
-							<div
-								onClick={this.toggleSettings}
-								className="reward-settings-kebab"
-								style={{ backgroundImage: this.kebabIcon }}
-								ref={(node) => { this.kebabRef = node; }}
-							/>
-							{ this.state.showSettings &&
-							<div className="rewards-settings-container">
-								<ClickOutside excludeEl={this.kebabRef} onClickOutside={this.toggleSettings}>
-									<Settings signal={this.sendSignal('about_ghostery_rewards')} disable={this.disableRewardsNotification} />
-								</ClickOutside>
-							</div>
-							}
-						</div>
-						<div className="reward-content-img">
-							<div className="flex-grow" />
-							<img src={this.state.rewardUI.picture_url} className="hide" onLoad={this.handleImageLoaded} />
-							<div className="flex-grow" />
-						</div>
-						<div className="reward-content-detail">
-							{/* <div className="flex-grow" /> */}
-							<div className="reward-benefit">
-								{ this.state.rewardUI.benefit }
-							</div>
-							<span className="reward-headline">
-								{ this.state.rewardUI.headline }
-							</span>
-							<span className="reward-description">
-								{ this.state.rewardUI.desc }
-							</span>
-						</div>
-						<div className="flex-grow" />
-						<div className="reward-code">
-							<div>
-								{this.state.rewardUI.code}
-								<input readOnly className="reward-code-input" value={this.state.rewardUI.code} type="text" />
-							</div>
-							<a onClick={this.copyCode}>{this.state.copyText}</a>
-						</div>
-						<div className="reward-content-footer">
-							<span>
-								{ this.renderExpiresText() }
-							</span>
-							{this.state.rewardUI.conditions &&
-								<div className="reward-terms g-tooltip">
-									{ t('rewards_terms_conditions') }
-									<Tooltip header={this.state.rewardUI.conditions} position="top" delay="0" theme="dark" />
+							<div className="reward-content">
+								<div className="reward-content-header">
+									<div className="flex-grow" />
+									<div className="reward-company-logo">
+										<img src={this.state.rewardUI.logo_url} className="hide" onLoad={this.handleImageLoaded} />
+									</div>
+									<div
+										onClick={this.toggleSettings}
+										className="reward-settings-kebab"
+										style={{ backgroundImage: this.kebabIcon }}
+										ref={(node) => { this.kebabRef = node; }}
+									/>
+									{ this.state.showSettings &&
+										<div className="rewards-settings-container">
+											<ClickOutside excludeEl={this.kebabRef} onClickOutside={this.toggleSettings}>
+												<Settings signal={this.sendSignal('about_ghostery_rewards')} disable={this.disableRewardsNotification} />
+											</ClickOutside>
+										</div>
+									}
 								</div>
-							}
+								<div className="reward-content-img">
+									<div className="flex-grow" />
+									<img src={this.state.rewardUI.picture_url} className="hide" onLoad={this.handleImageLoaded} />
+									<div className="flex-grow" />
+								</div>
+								<div className="reward-content-detail">
+									{/* <div className="flex-grow" /> */}
+									<div className="reward-benefit">
+										{ this.state.rewardUI.benefit }
+									</div>
+									<span className="reward-headline">
+										{ this.state.rewardUI.headline }
+									</span>
+									<span className="reward-description">
+										{ this.state.rewardUI.desc }
+									</span>
+								</div>
+								<div className="flex-grow" />
+								<div className="reward-code">
+									<div>
+										{this.state.rewardUI.code}
+										<input readOnly className="reward-code-input" value={this.state.rewardUI.code} type="text" />
+									</div>
+									<a onClick={this.copyCode}>{this.state.copyText}</a>
+								</div>
+								<div className="reward-content-footer">
+									<span>
+										{ this.renderExpiresText() }
+									</span>
+									{this.state.rewardUI.conditions &&
+										<div className="reward-terms g-tooltip">
+											{ t('rewards_terms_conditions') }
+											<Tooltip header={this.state.rewardUI.conditions} position="top" delay="0" theme="dark" />
+										</div>
+									}
+								</div>
+								<a target="_blank" onClick={this.redeem} href={this.state.rewardUI.call_to_action && this.state.rewardUI.call_to_action.url} className="reward-redeem">
+									{this.state.rewardUI.call_to_action.text}
+								</a>
+							</div>
+							<div className="reward-footer">
+								<div className="reward-feedback">
+									<div className="reward-smile" />
+									<a onClick={this.disableRewardsNotification}>{t('rewards_disable')}</a>
+									<div className="reward-arrow" />
+								</div>
+								<div className="reward-ghosty" style={{ backgroundImage: this.ghostyGrey }} />
+							</div>
 						</div>
-						<a target="_blank" onClick={this.redeem} href={this.state.rewardUI.call_to_action && this.state.rewardUI.call_to_action.url} className="reward-redeem">
-							{this.state.rewardUI.call_to_action.text}
-						</a>
+						{ this.state.showPrompt === 1 &&
+							this.renderNotification(0)
+						}
+						{ this.state.showPrompt === 2 &&
+							this.renderNotification(1)
+						}
+						{ this.state.showPrompt === 3 &&
+							this.renderNotification(2)
+						}
 					</div>
-					<div className="reward-footer">
-						<div className="reward-feedback">
-							<div className="reward-smile" />
-							<a onClick={this.disableRewardsNotification}>{t('rewards_disable')}</a>
-							<div className="reward-arrow" />
-						</div>
-						<div className="reward-ghosty" style={{ backgroundImage: this.ghostyGrey }} />
-					</div>
-				</div>}
+				}
 			</div>
 		);
 	}
