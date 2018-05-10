@@ -135,8 +135,10 @@ class RewardDetail extends React.Component {
 						{ this.renderExpiresText() }
 					</div>
 					{conditions && (
-						<div className="RewardDetail__terms g-tooltip clickable">
-							{ t('rewards_terms_conditions') }
+						<div className="g-tooltip clickable">
+							<span className="RewardDetail__terms">
+								{ t('rewards_terms_conditions') }
+							</span>
 							<Tooltip header={conditions} position="top" delay="0" theme="dark" />
 						</div>
 					)}
