@@ -10,14 +10,12 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-/**
- * @namespace  PanelComponentHelpers
- */
+
 import React, { Component } from 'react';
 /**
  * @class Implement Click Outside component which handles
  * clicks outside of designated component
- * @memberOf PanelComponentHelpers
+ * @memberOf PanelBuildingBlocks
  */
 class ClickOutside extends React.Component {
 	constructor(props) {

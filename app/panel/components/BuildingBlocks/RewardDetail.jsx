@@ -19,7 +19,7 @@ import Tooltip from '../Tooltip';
 
 /**
  * @class Implements the details for a single reward for for the Rewards Panel
- * @memberof PanelClasses
+ * @memberof PanelBuildingBlocks
  */
 class RewardDetail extends React.Component {
 	constructor(props) {

@@ -22,11 +22,11 @@ import _ from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
 import cliqz from './classes/Cliqz';
 // object classes
-import button from './classes/BrowserButton';
 import Events from './classes/EventHandlers';
 import PanelData from './classes/PanelData';
 // static classes
 import bugDb from './classes/BugDb';
+import button from './classes/BrowserButton';
 import c2pDb from './classes/Click2PlayDb';
 import cmp from './classes/CMP';
 import abtest from './classes/ABTest';
@@ -48,9 +48,7 @@ import * as utils from './utils/utils';
 
 // class instantiation
 const events = new Events();
-
 const panelData = new PanelData();
-
 // function shortcuts
 const { log } = common;
 const { sendMessage } = utils;
@@ -94,7 +92,6 @@ function setCliqzModuleEnabled(module, enabled) {
  * @param  {Object} offersModule offers module
  * @param  {Boolean} register    true - register, false - unregister
  */
-
 function registerWithOffers(offersModule, register) {
 	if (!offersModule.isEnabled) {
 		return Promise.resolve();
@@ -392,7 +389,7 @@ function handleClick2Play(name, message, tab_id, callback) {
  *
  * @param  {string} 	name 		message name
  * @param  {Object} 	message 	message data
- * @param  {number} 		tab_id 		tab id
+ * @param  {number} 	tab_id 		tab id
  * @param  {function} 	callback 	function to call (at most once) when you have a response
  */
 function handleBlockedRedirect(name, message, tab_id, callback) {
@@ -414,6 +411,15 @@ function handleBlockedRedirect(name, message, tab_id, callback) {
 	return false;
 }
 
+/**
+ * Handle messages sent from dist/rewards.js content script.
+ * @memberOf Background
+ *
+ * @param  {string} 	name 		message name
+ * @param  {Object} 	message 	message data
+ * @param  {number} 	tab_id 		tab id
+ * @param  {function} 	callback 	function to call (at most once) when you have a response
+ */
 function handleRewards(name, message, tab_id, callback) {
 	switch (name) {
 		case 'rewardSignal':
@@ -439,7 +445,7 @@ function handleRewards(name, message, tab_id, callback) {
 }
 
 /**
- * Handle messages sent from dist/settings_redirect.js script.
+ * Handle messages sent from dist/settings_redirect.js script
  * of the settings_redirect.html local page. Used on @EDGE and Chrome.
  * @memberOf Background
  *

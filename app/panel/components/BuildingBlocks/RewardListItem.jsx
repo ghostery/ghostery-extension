@@ -18,7 +18,7 @@ import { computeTimeDelta } from '../../utils/utils';
 
 /**
  * @class Implements a single reward in a list for the Rewards Panel
- * @memberof PanelClasses
+ * @memberof PanelBuildingBlocks
  */
 class RewardListItem extends React.Component {
 	constructor(props) {

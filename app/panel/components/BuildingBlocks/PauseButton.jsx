@@ -17,7 +17,7 @@ import Tooltip from '../Tooltip';
 
 /**
  * @class Implements the Pause button on the Summary view.
- * @memberof PanelClasses
+ * @memberof PanelBuildingBlocks
  */
 class PauseButton extends React.Component {
 	constructor(props) {

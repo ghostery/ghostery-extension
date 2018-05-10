@@ -1,15 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="24px" height="52px" viewBox="0 0 24 52" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
-    <title>symbol-hover right half ricle caret right</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Expert-View-Panel---expanded-catagories--hover" transform="translate(-253.000000, -440.000000)">
-            <g id="symbol-hover-right-half-ricle-caret-right" transform="translate(253.000000, 440.000000)">
-                <path d="M24,51.8484415 C10.5751046,50.8271917 0,39.6106802 0,25.9242207 C0,12.2377612 10.5751046,1.02124974 24,2.14481211e-13 L24,51.8484415 Z" id="Combined-Shape" fill="#EBEBEB"></path>
-                <polygon id="Shape" fill="#4A4A4A" transform="translate(13.500000, 25.500000) scale(-1, 1) rotate(180.000000) translate(-13.500000, -25.500000) " points="10 21.2833333 11.3243243 20 17 25.5 11.3243243 31 10 29.7166667 14.3513514 25.5"></polygon>
-            </g>
-        </g>
-    </g>
+<svg width="24" height="52" viewBox="0 0 24 52" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" fill-rule="evenodd">
+    <path d="M24 51.848C10.575 50.828 0 39.611 0 25.924 0 12.238 10.575 1.021 24 0v51.848z" fill="#EBEBEB"/>
+    <path fill="#4A4A4A" d="M10 29.717L11.324 31 17 25.5 11.324 20 10 21.283l4.351 4.217z"/>
+  </g>
 </svg>

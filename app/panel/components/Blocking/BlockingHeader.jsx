@@ -16,7 +16,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { updateSummaryBlockingCount } from '../../utils/blocking';
-import ClickOutside from '../helpers/ClickOutside';
+import ClickOutside from '../BuildingBlocks/ClickOutside';
+
 /**
  * @class Implement Blocking Header component. This component is shared
  * by Blocking view and Global Blocking subview in Settings.
