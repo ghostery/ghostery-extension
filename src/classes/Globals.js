@@ -122,7 +122,7 @@ class Globals {
 	buildBrowserInfo() {
 		const ua = parser(navigator.userAgent);
 		const browser = ua.browser.name.toLowerCase();
-		const { version } = ua.browser;
+		const version = parseInt(ua.browser.version.toString(), 10); // convert to string for Chrome
 		const platform = ua.os.name.toLowerCase();
 
 		// Set name and token properties. CMP uses `name` value.  Metrics uses `token`

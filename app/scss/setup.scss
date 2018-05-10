@@ -72,7 +72,7 @@ body {
 	//Don't show blue border on click
 	*:focus {
 	    outline: none;
-	}	
+	}
 	#header {
 		height: 53px;
 		color: $white;
@@ -166,6 +166,10 @@ body {
 	#navigation {
 		background-color: $whisper;
 		padding: 0 0 35px;
+		.legal-notice {
+			text-align: center;
+			font-style: italic;
+		}
 		.navigation-dots {
 			width: 250px;
 			max-width: 250px;
