@@ -75,13 +75,35 @@ $ npm run docs
 ```
 
 ## Transifex Client
-Run transifex client (tx) in your local synchronized 'develop' branch
+Run Transifex client (tx) in your local synchronized 'develop' branch
 Transifex client behavior is determined by .tx/config file in the repo.
 ```sh
 # Install Transifex Client (tx)
 $ pip install transifex-client
 # Check if install was successful
 $ tx --version
+```
+# Generate your Transifex API token [here] (https://www.transifex.com/user/settings/api/)
+# You will use it for initialization of the Transifex client.
+
+# Run initialization command at the root of your repo. 
+# It will an interactive session. Example below:
+```sh
+$ tx init
+
+Welcome to the Transifex Client! Please follow the instructions to
+initialize your project.
+
+Creating .tx folder...
+Creating config file...
+No credentials file was found at /Users/<your user name>/transifexrc. 
+Created /Users/<your user name>/.transifexrc
+Enter your API token: <your_Tranisfex_API_token>
+Verifying token...
+Updating /Users/<your user name>/.transifexrc file...
+```
+# Use Transifex client as follows:
+```sh
 # Push changes made to _locales/en/messages.json to Transifex
 $ tx push -s
 # Pull translated files from Transifex to _locales/<lang>/messages.json
