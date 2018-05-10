@@ -756,8 +756,20 @@
 	"panel_detail_rewards_title": {
 		"message": "Ghostery Rewards"
 	},
-	"panel_detail_rewards_text": {
+	"panel_detail_rewards_coming_soon": {
 		"message": "Feature coming soon."
+	},
+	"panel_detail_rewards_cliqz_text": {
+		"message": "Feature already active in the Cliqz MyOffrz control panel."
+	},
+	"panel_detail_rewards_loading": {
+		"message": "Loading Rewards..."
+	},
+	"panel_detail_rewards_none_found": {
+		"message": "No Rewards found"
+	},
+	"panel_detail_rewards_off": {
+		"message": "Ghostery Rewards is off"
 	},
 	"panel_detail_premium_title": {
 		"message": "Ghostery Premium"
