@@ -73,6 +73,7 @@ $ npm run build.dev -- --env.nolint
 # Build JSDoc files to ./docs
 $ npm run docs
 ```
+
 ## Cliqz Source Code
 Ghostery implements the following open-source products from [Cliqz](https://cliqz.com/en/)
 
