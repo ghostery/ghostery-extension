@@ -75,8 +75,7 @@ $ npm run docs
 ```
 
 ## Transifex Client
-Run Transifex client (tx) in your local synchronized 'develop' branch
-Transifex client behavior is determined by .tx/config file in the repo.
+Install Transifex client tool:
 ```sh
 # Install Transifex Client (tx)
 $ pip install transifex-client
@@ -102,6 +101,8 @@ Enter your API token: <your_Tranisfex_API_token>
 Verifying token...
 Updating /Users/<your user name>/.transifexrc file...
 ```
+Run Transifex client (tx) at the root of your local synchronized 'develop' branch.
+.tx/config file at the root of the repo tells Transifex client the location of the language files.
 Use Transifex client as follows:
 ```sh
 # Push changes made to _locales/en/messages.json to Transifex
