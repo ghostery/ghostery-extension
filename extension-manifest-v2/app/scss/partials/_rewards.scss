@@ -114,6 +114,11 @@
 	font-weight: 600;
 	max-width: 188px;
 	margin-bottom: 7px;
+	line-height: 20px;
+	max-height: 40px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	word-wrap: break-word;
 }
 .RewardListItem--greyscale .RewardListItem__text {
 	color: #9b9b9b;
@@ -188,12 +193,18 @@
 }
 .RewardDetail__title {
 	margin: 0 17px;
-	font-size: 24px;
+	font-size: 18px;
+	line-height: 24px;
+	max-height: 48px;
 	color: #4a4a4a;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 .RewardDetail__description {
 	margin: 0 17px;
 	font-size: 13px;
+	line-height: 18px;
+	max-height: 36px;
 	color: #4a4a4a;
 }
 .RewardDetail__code_container {
@@ -230,10 +241,16 @@
 	font-size: 12px;
 	font-weight: 600;
 	color: #4a4a4a;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 .RewardDetail__terms {
 	font-size: 11px;
 	color: #9b9b9b;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 .RewardDetail__redeem_button {
 	background-color: #5b0059;
@@ -241,7 +258,10 @@
 	font-size: 14px;
 	font-weight: 600;
 	text-align: center;
-	margin: 0 17px 14px;
+	margin: 0 17px 8px;
 	padding: 10px;
 	text-transform: uppercase;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
