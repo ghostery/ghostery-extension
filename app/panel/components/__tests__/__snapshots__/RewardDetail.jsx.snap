@@ -57,9 +57,13 @@ exports[`app/panel/components/BuildingBlocks/RewardDetail.jsx Snapshot tests wit
       rewards_expires_in
     </div>
     <div
-      className="RewardDetail__terms g-tooltip clickable"
+      className="g-tooltip clickable"
     >
-      rewards_terms_conditions
+      <span
+        className="RewardDetail__terms"
+      >
+        rewards_terms_conditions
+      </span>
     </div>
   </div>
   <div
@@ -107,9 +111,13 @@ exports[`app/panel/components/BuildingBlocks/RewardDetail.jsx Snapshot tests wit
       rewards_expires_in
     </div>
     <div
-      className="RewardDetail__terms g-tooltip clickable"
+      className="g-tooltip clickable"
     >
-      rewards_terms_conditions
+      <span
+        className="RewardDetail__terms"
+      >
+        rewards_terms_conditions
+      </span>
     </div>
   </div>
   <div
@@ -241,9 +249,13 @@ exports[`app/panel/components/BuildingBlocks/RewardDetail.jsx Snapshot tests wit
       rewards_expires_in
     </div>
     <div
-      className="RewardDetail__terms g-tooltip clickable"
+      className="g-tooltip clickable"
     >
-      rewards_terms_conditions
+      <span
+        className="RewardDetail__terms"
+      >
+        rewards_terms_conditions
+      </span>
     </div>
   </div>
   <div
@@ -308,9 +320,13 @@ exports[`app/panel/components/BuildingBlocks/RewardDetail.jsx Snapshot tests wit
       rewards_expires_in
     </div>
     <div
-      className="RewardDetail__terms g-tooltip clickable"
+      className="g-tooltip clickable"
     >
-      rewards_terms_conditions
+      <span
+        className="RewardDetail__terms"
+      >
+        rewards_terms_conditions
+      </span>
     </div>
   </div>
   <div
