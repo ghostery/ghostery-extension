@@ -73,49 +73,6 @@ $ npm run build.dev -- --env.nolint
 # Build JSDoc files to ./docs
 $ npm run docs
 ```
-
-## Transifex Client
-Install Transifex client tool:
-```sh
-# Install Transifex Client (tx)
-$ pip install transifex-client
-# Check if install was successful
-$ tx --version
-```
-Generate your Transifex API token [here](https://www.transifex.com/user/settings/api/)
-You will use it for initialization of the Transifex client.
-
-Run initialization command at the root of your repo. 
-It will be an interactive session. Example below:
-```sh
-$ tx init
-
-Welcome to the Transifex Client! Please follow the instructions to
-initialize your project.
-
-Creating .tx folder...
-Creating config file...
-No credentials file was found at /Users/<your user name>/transifexrc. 
-Created /Users/<your user name>/.transifexrc
-Enter your API token: <your_Tranisfex_API_token>
-Verifying token...
-Updating /Users/<your user name>/.transifexrc file...
-```
-Run Transifex client (tx) at the root of your local synchronized 'develop' branch.
-.tx/config file at the root of the repo tells Transifex client the location of the language files.
-Use Transifex client as follows:
-```sh
-# Push changes made to _locales/en/messages.json to Transifex
-$ tx push -s
-# Pull translated files from Transifex to _locales/<lang>/messages.json
-$ tx --minimum-perc=100 pull -a 
-```
-For more information see:
-+ [Transifex Client](https://docs.transifex.com/client/introduction)
-+ [Transifex Client Workflow](https://docs.transifex.com/integrations/github)
-+ [Ghostery Transifex Project](https://www.transifex.com/ghostery-inc/ghostery-8/dashboard/)
-
-## 
 ## Cliqz Source Code
 Ghostery implements the following open-source products from [Cliqz](https://cliqz.com/en/)
 
