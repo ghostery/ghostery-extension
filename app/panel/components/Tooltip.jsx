@@ -53,7 +53,7 @@ class Tooltip extends React.Component {
 	}
 
 	/**
-	 * Implements mouseenter. Sets adelay for showing the tooltip with a default of 1 second.
+	 * Implements mouseenter. Sets a delay for showing the tooltip with a default of 1 second.
 	 */
 	delayHover() {
 		const delayType = typeof this.props.delay;

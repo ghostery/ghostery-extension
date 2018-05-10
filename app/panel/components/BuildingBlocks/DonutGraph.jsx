@@ -18,7 +18,7 @@ import { scaleLinear } from 'd3-scale';
 
 /**
  * @class Generate donut graph. Used to display tracker data in the Summary View.
- * @memberOf PanelClasses
+ * @memberOf PanelBuildingBlocks
  */
 class DonutGraph extends React.Component {
 	constructor(props) {

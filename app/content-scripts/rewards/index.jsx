@@ -1,8 +1,6 @@
 /**
  * Ghostery Rewards
  *
- * This file injects Ghostery Rewards
- *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
@@ -12,11 +10,12 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+
 /**
  * @namespace RewardsContentScript
  */
-/* eslint no-use-before-define: 0 */
 
+/* eslint no-use-before-define: 0 */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route } from 'react-router-dom';
@@ -33,6 +32,10 @@ const { BROWSER_INFO, onMessage } = globals;
 const viewport = document.getElementById('viewport');
 const channelsSupported = (typeof chrome.runtime.connect === 'function');
 
+/**
+ * @class Injects Ghostery Rewards components
+ * @memberOf RewardsContentScript
+ */
 class RewardsApp {
 	constructor() {
 		this.reward = null;

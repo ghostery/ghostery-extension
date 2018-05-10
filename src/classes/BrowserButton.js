@@ -24,7 +24,6 @@ import globals from './Globals';
 /**
  * @class for handling Ghostery button.
  * @memberof BackgroundClasses
- * @todo  make it a Singelton
  */
 class BrowserButton {
 	constructor() {

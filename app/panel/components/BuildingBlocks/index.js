@@ -11,6 +11,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+/**
+ * @namespace  PanelBuildingBlocks
+ */
+import ClickOutside from './ClickOutside';
 import CliqzFeatures from './CliqzFeatures';
 import DonutGraph from './DonutGraph';
 import GhosteryFeatures from './GhosteryFeatures';
@@ -21,6 +25,7 @@ import RewardDetail from './RewardDetail';
 import RewardListItem from './RewardListItem';
 
 export {
+	ClickOutside,
 	CliqzFeatures,
 	DonutGraph,
 	GhosteryFeatures,

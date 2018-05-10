@@ -1,3 +1,16 @@
+/**
+ * Offer Card Component
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
@@ -6,12 +19,16 @@ import { computeTimeDelta } from '../../panel/utils/utils';
 import { log } from '../../../src/utils/common';
 import Notification from './Notification';
 import Settings from './Settings';
-import ClickOutside from '../../panel/components/helpers/ClickOutside';
+import ClickOutside from '../../panel/components/BuildingBlocks/ClickOutside';
 import Tooltip from '../../panel/components/Tooltip';
 
 const msg = msgModule('rewards');
 const { sendMessage } = msg;
 
+/**
+ * @class Generate Rewards offer card
+ * @memberOf RewardsContentScript
+ */
 class OfferCard extends Component {
 	constructor(props) {
 		super(props);
