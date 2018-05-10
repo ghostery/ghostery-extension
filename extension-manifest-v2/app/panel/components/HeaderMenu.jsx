@@ -16,7 +16,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
-import ClickOutside from './helpers/ClickOutside';
+import ClickOutside from './BuildingBlocks/ClickOutside';
 import { sendMessage, sendMessageInPromise } from '../utils/msg';
 import globals from '../../../src/classes/Globals';
 import { log } from '../../../src/utils/common';

@@ -47,7 +47,8 @@ const cleanTmpStyleFiles = new WebpackShellPlugin({
 		`${RM} ./dist/panel_android.js`,
 		`${RM} ./dist/purplebox_styles.js`,
 		`${RM} ./dist/setup.js`,
-		`${RM} ./dist/ghostery_dot_com_css.js`
+		`${RM} ./dist/ghostery_dot_com_css.js`,
+		`${RM} ./dist/rewards_styles.js`
 	]
 });
 

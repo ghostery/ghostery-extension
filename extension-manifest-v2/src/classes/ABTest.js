@@ -30,7 +30,7 @@ class ABTest {
 		this.tests = {};
 	}
 	/**
-	 * @class to determine if a test with specified name is present.
+	 * Determine if a test with specified name is present.
 	 * @param {string} name 	test name
 	 */
 	hasTest(name) {

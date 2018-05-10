@@ -17,7 +17,7 @@ import ClassNames from 'classnames';
 /**
  * @class Implements the Not Scanned component displayed in the Summary view
  * when a site is not scannable or has not yet been scanned.
- * @memberof PanelClasses
+ * @memberof PanelBuildingBlocks
  */
 const NotScanned = (props) => {
 	const notScannedClassNames = ClassNames('sub-component', 'not-scanned', {

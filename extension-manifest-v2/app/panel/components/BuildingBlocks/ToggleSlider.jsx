@@ -17,7 +17,7 @@ import ClassNames from 'classnames';
 /**
  * @class Implements an on/off button as a slider component.
  * Is used throughout the extension: Rewards Panel, (todo: more)
- * @memberof PanelClasses
+ * @memberof PanelBuildingBlocks
  */
 class ToggleSlider extends React.Component {
 	constructor(props) {
