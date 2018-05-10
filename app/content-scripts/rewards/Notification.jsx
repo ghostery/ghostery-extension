@@ -41,25 +41,43 @@ class Notification extends Component {
 		return (
 			<div>
 				{!this.state.closed &&
-					<div className="rewards-notification-container rewards-popup-container">
-						<div className={`rewards-notification ${this.props.data.type}`}>
-							<div className="close" onClick={() => { this.closeNotification(); }} style={{ backgroundImage: this.closeIcon }} />
-							<div className="notification-text">
-								{this.props.data.message}
-							</div>
-							{this.props.data.buttons &&
-								<div className="notification-buttons">
-									<div onClick={(e) => { this.closeNotification(true); }}>
-										Yes
-									</div>
-									<div onClick={(e) => { this.closeNotification(false); }}>
-										No
-									</div>
+					<div className="rewards-notification-container">
+						<div className="rewards-notification-overlay" />
+						<div className="rewards-popup-container">
+							<div className={`rewards-notification ${this.props.data.type}`}>
+								<div className="close" onClick={() => { this.closeNotification(); }} style={{ backgroundImage: this.closeIcon }} />
+								<div className="notification-text">
+									{this.props.data.message}
 								</div>
-							}
-							{this.props.data.textLink
-								&& <a className="notification-text" href={this.props.data.textLink.href} target="_blank" onClick={this.props.data.textLink.callback || this.props.data.closeCallback}>{this.props.data.textLink.text}</a>
-							}
+								{this.props.data.buttons &&
+									<div className="notification-buttons">
+										<button onClick={(e) => { this.closeNotification(true); }}>
+											{t('rewards_yes')}
+										</button>
+										<button onClick={(e) => { this.closeNotification(false); }}>
+											{t('rewards_no')}
+										</button>
+									</div>
+								}
+								{this.props.data.textLink
+									&& (
+										<a
+											className="notification-text"
+											href={this.props.data.textLink.href}
+											target="_blank"
+											onClick={() => {
+												if (this.props.data.textLink.callback) {
+													// this.props.data.textLink.callback();
+												} else {
+													// this.props.data.closeCallback();
+												}
+											}}
+										>
+											{this.props.data.textLink.text}
+										</a>
+									)
+								}
+							</div>
 						</div>
 					</div>
 				}
