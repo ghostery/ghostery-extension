@@ -83,11 +83,11 @@ $ pip install transifex-client
 # Check if install was successful
 $ tx --version
 ```
-# Generate your Transifex API token [here] (https://www.transifex.com/user/settings/api/)
-# You will use it for initialization of the Transifex client.
+Generate your Transifex API token [here](https://www.transifex.com/user/settings/api/)
+You will use it for initialization of the Transifex client.
 
-# Run initialization command at the root of your repo. 
-# It will an interactive session. Example below:
+Run initialization command at the root of your repo. 
+It will be an interactive session. Example below:
 ```sh
 $ tx init
 
@@ -102,7 +102,7 @@ Enter your API token: <your_Tranisfex_API_token>
 Verifying token...
 Updating /Users/<your user name>/.transifexrc file...
 ```
-# Use Transifex client as follows:
+Use Transifex client as follows:
 ```sh
 # Push changes made to _locales/en/messages.json to Transifex
 $ tx push -s
