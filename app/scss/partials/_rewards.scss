@@ -65,6 +65,18 @@
 	height: 377px;
 	overflow-y: scroll;
 }
+.RewardsPanel__info {
+	margin: 0 40px;
+	text-align: center;
+	font-size: 14px;
+}
+.RewardsPanel__reward_icon {
+	margin: 70px 0 20px;
+	fill: #9b9b9b;
+}
+.RewardsPanel__learn_more {
+	margin-top: 10px;
+}
 
 // Reward List Item Component Classes
 .RewardListItem {
