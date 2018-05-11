@@ -699,9 +699,6 @@
 	"panel_detail_rewards_title": {
 		"message": "Ghostery 리워드  "
 	},
-	"panel_detail_rewards_text": {
-		"message": "기능이 곧 제공됩니다."
-	},
 	"panel_detail_premium_title": {
 		"message": "Ghostery 프리미엄 "
 	},
@@ -1288,26 +1285,6 @@
 	},
 	"setup_login_view_password_error": {
 		"message": "8자에서 50자까지 사용할 수 있습니다."
-	},
-	"setup_login_view_terms_error": {
-		"message": "이 항목을 수락해야 합니다. "
-	},
-	"setup_login_view_terms": {
-		"message": "Ghostery의 $LINK_PP_START$개인정보 보호정책$LINK_PP_END$ 및 $LINK_TERMS_START$사용 약관$LINK_TERMS_END$에 동의합니다 ",
-		"placeholders": {
-			"link_pp_start": {
-				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" target=\"_blank\">"
-			},
-			"link_pp_end": {
-				"content": "</a>"
-			},
-			"link_terms_start": {
-				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-end-user-license-agreement/\" target=\"_blank\">"
-			},
-			"link_terms_end": {
-				"content": "</a>"
-			}
-		}
 	},
 	"setup_login_view_create_account": {
 		"message": "계정이 있으십니까? 계정 만들기."
