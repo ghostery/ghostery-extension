@@ -15,7 +15,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ClassNames from 'classnames';
 import HeaderMenu from './HeaderMenu';
-import { sendMessage } from '../utils/msg';
+import { sendMessage, sendMessageInPromise } from '../utils/msg';
 import { log } from '../../../src/utils/common';
 
 /**
@@ -82,7 +82,7 @@ class Header extends React.Component {
 			sendMessage('ping', 'sign_in');
 			this.props.history.push('/login');
 		} else if (!this.props.is_validated) {
-			sendMessage('sendVerificationEmail').then((data) => {
+			sendMessageInPromise('sendVerificationEmail').then((data) => {
 				this.props.actions.showNotification({
 					classes: 'success',
 					text: t('panel_email_verification_sent', data.email),
