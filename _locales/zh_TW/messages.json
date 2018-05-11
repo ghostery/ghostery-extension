@@ -699,9 +699,6 @@
 	"panel_detail_rewards_title": {
 		"message": "Ghostery 獎賞"
 	},
-	"panel_detail_rewards_text": {
-		"message": "即將添加的功能"
-	},
 	"panel_detail_premium_title": {
 		"message": "Ghostery 高級版"
 	},
@@ -1288,26 +1285,6 @@
 	},
 	"setup_login_view_password_error": {
 		"message": "使用 8 至 50 個字符。"
-	},
-	"setup_login_view_terms_error": {
-		"message": "您必須接受此項。"
-	},
-	"setup_login_view_terms": {
-		"message": "我同意 Ghostery 的$LINK_PP_START$隱私政策$LINK_PP_END$ 及 $LINK_TERMS_START$使用條款$LINK_TERMS_END$",
-		"placeholders": {
-			"link_pp_start": {
-				"content": "a href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" target=\"_blank\">"
-			},
-			"link_pp_end": {
-				"content": "</a>"
-			},
-			"link_terms_start": {
-				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-end-user-license-agreement/\" target=\"_blank\">"
-			},
-			"link_terms_end": {
-				"content": "</a>"
-			}
-		}
 	},
 	"setup_login_view_create_account": {
 		"message": "沒有帳戶？創建一個。"

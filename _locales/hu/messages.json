@@ -699,9 +699,6 @@
 	"panel_detail_rewards_title": {
 		"message": "Ghostery jutalmak"
 	},
-	"panel_detail_rewards_text": {
-		"message": "Funkció hamarosan érkezik."
-	},
 	"panel_detail_premium_title": {
 		"message": "Ghostery Prémium"
 	},
@@ -1288,26 +1285,6 @@
 	},
 	"setup_login_view_password_error": {
 		"message": "8–50 karaktert használjon."
-	},
-	"setup_login_view_terms_error": {
-		"message": "Önnek ezt el kell fogadnia."
-	},
-	"setup_login_view_terms": {
-		"message": "Egyetértek a Ghostery $LINK_PP_START$Adatvédelmi Szabályzatával$LINK_PP_END$ és $LINK_TERMS_START$Felhasználási Feltételeivel$LINK_TERMS_END$",
-		"placeholders": {
-			"link_pp_start": {
-				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" target=\"_blank\">"
-			},
-			"link_pp_end": {
-				"content": "</a>"
-			},
-			"link_terms_start": {
-				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-end-user-license-agreement/\" target=\"_blank\">"
-			},
-			"link_terms_end": {
-				"content": "</a>"
-			}
-		}
 	},
 	"setup_login_view_create_account": {
 		"message": "Nem rendelkezik fiókkal? Hozzon létre egyet."
