@@ -699,9 +699,6 @@
 	"panel_detail_rewards_title": {
 		"message": "Recompensas de Ghostery"
 	},
-	"panel_detail_rewards_text": {
-		"message": "Pronto tendrás esta función."
-	},
 	"panel_detail_premium_title": {
 		"message": "Ghostery Premium"
 	},
@@ -1288,26 +1285,6 @@
 	},
 	"setup_login_view_password_error": {
 		"message": "Usa entre 8 y 50 caracteres."
-	},
-	"setup_login_view_terms_error": {
-		"message": "Debes aceptar esto."
-	},
-	"setup_login_view_terms": {
-		"message": "Acepto la $LINK_PP_START$ política de privacidad $LINK_PP_END$ y las $LINK_TERMS_START$ condiciones de uso $LINK_TERMS_END$ de Ghostery",
-		"placeholders": {
-			"link_pp_start": {
-				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" target=\"_blank\">"
-			},
-			"link_pp_end": {
-				"content": "</a>"
-			},
-			"link_terms_start": {
-				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-end-user-license-agreement/\" target=\"_blank\">"
-			},
-			"link_terms_end": {
-				"content": "</a>"
-			}
-		}
 	},
 	"setup_login_view_create_account": {
 		"message": "¿No tienes una cuenta? Crea una."
