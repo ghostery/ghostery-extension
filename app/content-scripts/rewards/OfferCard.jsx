@@ -16,7 +16,6 @@ import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
 import msgModule from '../utils/msg';
 import { computeTimeDelta } from '../../panel/utils/utils';
-import { log } from '../../../src/utils/common';
 import Notification from './Notification';
 import Settings from './Settings';
 import ClickOutside from '../../panel/components/BuildingBlocks/ClickOutside';
@@ -111,7 +110,6 @@ class OfferCard extends Component {
 	}
 
 	sendSignal(actionId, props = this.props) {
-		console.log('send signal ', actionId);
 		// Cliqz metrics
 		const offerId = props.reward.offer_id;
 		const message = {
