@@ -699,9 +699,6 @@
 	"panel_detail_rewards_title": {
 		"message": "Ghostery Rewards"
 	},
-	"panel_detail_rewards_text": {
-		"message": "Functie binnenkort mogelijk."
-	},
 	"panel_detail_premium_title": {
 		"message": "Ghostery Premium"
 	},
@@ -1289,26 +1286,6 @@
 	"setup_login_view_password_error": {
 		"message": "Gebruik tussen 8 en 50 karakters."
 	},
-	"setup_login_view_terms_error": {
-		"message": "Je moet dit aanvaarden."
-	},
-	"setup_login_view_terms": {
-		"message": "Ik aanvaard Ghostery's $LINK_PP_START$Privacybeleid$LINK_PP_END$ en de $LINK_TERMS_START$Gebruikersvoorwaarden$LINK_TERMS_END$",
-		"placeholders": {
-			"link_pp_start": {
-				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" target=\"_blank\">"
-			},
-			"link_pp_end": {
-				"content": "</a>"
-			},
-			"link_terms_start": {
-				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-end-user-license-agreement/\" target=\"_blank\">"
-			},
-			"link_terms_end": {
-				"content": "</a>"
-			}
-		}
-	},
 	"setup_login_view_create_account": {
 		"message": "Heb je geen account? Maak er een aan."
 	},
@@ -1422,7 +1399,7 @@
 		"message": "Actueel"
 	},
 	"panel_help_setup": {
-		"message": "Set Up Ghostery"
+		"message": "Ghostery Instellen"
 	},
 	"global_settings_saved": {
 		"message": "Algemene Instellingen Opgeslagen"
@@ -1481,5 +1458,8 @@
 				"content": "</a>"
 			}
 		}
-	}		
+	},
+	"panel_about_release_notes": {
+		"message": "Bekijk release notes voor alle updates"
+	}
 }

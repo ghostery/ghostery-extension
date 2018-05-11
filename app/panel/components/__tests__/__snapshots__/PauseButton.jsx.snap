@@ -1,0 +1,116 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/panel/components/BuildingBlocks/PauseButton.jsx Snapshot tests with react-test-renderer paused state in detailed condensed view 1`] = `
+<div
+  className="sub-component pause-button"
+>
+  <div
+    className="button-group"
+  >
+    <div
+      className="button button-left button-pause active smaller"
+      onClick={[Function]}
+    >
+      <span
+        className="pause-button-icon pause-button-text"
+      />
+    </div>
+    <div
+      className="button button-right button-caret smaller"
+      onClick={[Function]}
+    >
+      <span
+        className="show-for-sr"
+      >
+        summary_show_menu
+      </span>
+    </div>
+  </div>
+  <div
+    className="button-group dropdown-container"
+    style={
+      Object {
+        "left": "0px",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`app/panel/components/BuildingBlocks/PauseButton.jsx Snapshot tests with react-test-renderer paused state in detailed view 1`] = `
+<div
+  className="sub-component pause-button"
+>
+  <div
+    className="button-group"
+  >
+    <div
+      className="button button-left button-pause g-tooltip active smaller"
+      onClick={[Function]}
+    >
+      <span
+        className="pause-button-text"
+      >
+        summary_resume_ghostery
+      </span>
+    </div>
+    <div
+      className="button button-right button-caret smaller"
+      onClick={[Function]}
+    >
+      <span
+        className="show-for-sr"
+      >
+        summary_show_menu
+      </span>
+    </div>
+  </div>
+  <div
+    className="button-group dropdown-container"
+    style={
+      Object {
+        "left": "0px",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`app/panel/components/BuildingBlocks/PauseButton.jsx Snapshot tests with react-test-renderer unpaused state in simple view 1`] = `
+<div
+  className="sub-component pause-button"
+>
+  <div
+    className="button-group"
+  >
+    <div
+      className="button button-left button-pause g-tooltip"
+      onClick={[Function]}
+    >
+      <span
+        className="pause-button-text"
+      >
+        summary_pause_ghostery
+      </span>
+    </div>
+    <div
+      className="button button-right button-caret"
+      onClick={[Function]}
+    >
+      <span
+        className="show-for-sr"
+      >
+        summary_show_menu
+      </span>
+    </div>
+  </div>
+  <div
+    className="button-group dropdown-container centered"
+    style={
+      Object {
+        "left": "0px",
+      }
+    }
+  />
+</div>
+`;

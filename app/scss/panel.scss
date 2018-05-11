@@ -8,7 +8,7 @@
  * https://www.ghostery.com/
  *
  * Copyright 2018 Ghostery, Inc. All rights reserved.
- * 
+ *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
@@ -26,6 +26,11 @@ html body {
 }
 *:focus {outline: none;}
 
+// Function helper with color variables
+@function url-friendly-colour($colour) {
+	@return '%23' + str-slice('#{$colour}', 2, -1)
+}
+
 // Foundation Helpers
 .collapse-left {padding-left: 0;}
 .collapse-right {padding-right: 0;}
@@ -36,20 +41,27 @@ html body {
 	background-color: white;
 	height: 516px;
 	width: 580px;
+	overflow: hidden;
 	margin: 0px;
 	padding: 0px;
 }
 
 // Partial View SASS files
+@import './partials/_svgs';
 @import './partials/_header';
 @import './partials/_callout';
 @import './partials/_summary';
 @import './partials/_detail';
 @import './partials/_blocking';
+@import './partials/_rewards';
 @import './partials/_settings';
 @import './partials/_help';
 @import './partials/_account';
 @import './partials/_drawer';
-@import './partials/_select_button';
+@import './partials/_toggle_slider';
+@import './partials/_pause_button';
+@import './partials/_donut_graph';
+@import './partials/_ghostery_features';
+@import './partials/_cliqz_features';
 @import './partials/_tooltip';
 @import './partials/_not_scanned';

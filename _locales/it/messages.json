@@ -699,9 +699,6 @@
 	"panel_detail_rewards_title": {
 		"message": "Ricompense Ghostery"
 	},
-	"panel_detail_rewards_text": {
-		"message": "Funzionalità presto disponibile."
-	},
 	"panel_detail_premium_title": {
 		"message": "Ghostery Premium"
 	},
@@ -1289,26 +1286,6 @@
 	"setup_login_view_password_error": {
 		"message": "Utilizza tra 8 e 50 caratteri."
 	},
-	"setup_login_view_terms_error": {
-		"message": "Devi accettarli."
-	},
-	"setup_login_view_terms": {
-		"message": "Accetto l'$LINK_PP_START$Informativa sulla Privacy$LINK_PP_END$ e i $LINK_TERMS_START$Termini di Utilizzo$LINK_TERMS_END$ di Ghostery.",
-		"placeholders": {
-			"link_pp_start": {
-				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" target=\"_blank\">"
-			},
-			"link_pp_end": {
-				"content": "</a>"
-			},
-			"link_terms_start": {
-				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-end-user-license-agreement/\" target=\"_blank\">"
-			},
-			"link_terms_end": {
-				"content": "</a>"
-			}
-		}
-	},
 	"setup_login_view_create_account": {
 		"message": "Non hai un account? Creane uno."
 	},
@@ -1422,7 +1399,7 @@
 		"message": "Le novità"
 	},
 	"panel_help_setup": {
-		"message": "Set Up Ghostery"
+		"message": "Configura Ghostery"
 	},
 	"global_settings_saved": {
 		"message": "Impostazioni Globali Salvate"
@@ -1481,5 +1458,8 @@
 				"content": "</a>"
 			}
 		}
-	}		
+	},
+	"panel_about_release_notes": {
+		"message": "Vedi le note di rilascio per tutti gli aggiornamenti"
+	}
 }

@@ -11,7 +11,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { GET_BLOCKING_DATA,
+import {
+	GET_BLOCKING_DATA,
 	UPDATE_BLOCK_ALL_TRACKERS,
 	UPDATE_CATEGORIES,
 	UPDATE_CATEGORY_BLOCKED,
@@ -19,7 +20,8 @@ import { GET_BLOCKING_DATA,
 	UPDATE_TRACKER_TRUST_RESTRICT,
 	TOGGLE_EXPANDED,
 	TOGGLE_EXPAND_ALL,
-	TOGGLE_EXPAND_CATEGORY } from '../constants/constants';
+	TOGGLE_EXPAND_CATEGORY
+} from '../constants/constants';
 import { sendMessageInPromise } from '../utils/msg';
 
 /**

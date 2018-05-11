@@ -699,9 +699,6 @@
 	"panel_detail_rewards_title": {
 		"message": "Вознаграждения Ghostery"
 	},
-	"panel_detail_rewards_text": {
-		"message": "Функция скоро появится."
-	},
 	"panel_detail_premium_title": {
 		"message": "Премиум Ghostery"
 	},
@@ -1289,26 +1286,6 @@
 	"setup_login_view_password_error": {
 		"message": "Используйте от 8 до 50 символов."
 	},
-	"setup_login_view_terms_error": {
-		"message": "Вы должны принять это."
-	},
-	"setup_login_view_terms": {
-		"message": "Я согласен с $LINK_PP_START$Политикой конфиденциальности$LINK_PP_END$ и $LINK_TERMS_START$Условиями использования$LINK_TERMS_END$ Ghostery",
-		"placeholders": {
-			"link_pp_start": {
-				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" target=\"_blank\">"
-			},
-			"link_pp_end": {
-				"content": "</a>"
-			},
-			"link_terms_start": {
-				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-end-user-license-agreement/\" target=\"_blank\">"
-			},
-			"link_terms_end": {
-				"content": "</a>"
-			}
-		}
-	},
 	"setup_login_view_create_account": {
 		"message": "Нет учетной записи? Создать."
 	},
@@ -1422,7 +1399,7 @@
 		"message": "Что нового?"
 	},
 	"panel_help_setup": {
-		"message": "Set Up Ghostery"
+		"message": "Настроить Ghostery"
 	},
 	"global_settings_saved": {
 		"message": "Глобальные настройки сохранены"
@@ -1481,5 +1458,8 @@
 				"content": "</a>"
 			}
 		}
-	}		
+	},
+	"panel_about_release_notes": {
+		"message": "См. примечания к выпуску для получения информации обо всех обновлениях"
+	}
 }

@@ -13,6 +13,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import globals from '../../../../src/classes/Globals';
+import { ToggleSlider } from '../../../panel/components/BuildingBlocks';
 
 const { IS_CLIQZ } = globals;
 
@@ -45,7 +46,9 @@ class AdditionalFeaturesView extends Component {
 	 * @param  {Object} event The event created by the onChange property
 	 */
 	_handleAntiTrack = (event) => {
-		this.props.actions.updateAntiTrack(event.target.checked);
+		if (!IS_CLIQZ) {
+			this.props.actions.updateAntiTrack(event.target.checked);
+		}
 	}
 
 	/**
@@ -61,7 +64,9 @@ class AdditionalFeaturesView extends Component {
 	 * @param  {Object} event The event created by the onChange property
 	 */
 	_handleAdBlock = (event) => {
-		this.props.actions.updateAdBlock(event.target.checked);
+		if (!IS_CLIQZ) {
+			this.props.actions.updateAdBlock(event.target.checked);
+		}
 	}
 
 	/**
@@ -78,7 +83,7 @@ class AdditionalFeaturesView extends Component {
 	 * @return {Object}
 	 */
 	createAntiTrackDescriptionMarkup() {
-		return { __html: IS_CLIQZ ? t('setup_feature_active_in_cliqz') : t('setup_additional_view_adblock_desc') };
+		return { __html: IS_CLIQZ ? t('setup_feature_active_in_cliqz') : t('setup_additional_view_antitrack_desc') };
 	}
 
 	/**
@@ -86,7 +91,7 @@ class AdditionalFeaturesView extends Component {
 	 * @return {Object}
 	 */
 	createAdBlockDescriptionMarkup() {
-		return { __html: IS_CLIQZ ? t('setup_feature_active_in_cliqz') : t('setup_additional_view_antitrack_desc') };
+		return { __html: IS_CLIQZ ? t('setup_feature_active_in_cliqz') : t('setup_additional_view_adblock_desc') };
 	}
 
 	/**
@@ -104,11 +109,12 @@ class AdditionalFeaturesView extends Component {
 							</div>
 						</div>
 						<div className="columns shrink">
-							<label className={`switch ${IS_CLIQZ ? ' disabled' : ''}`}>
-								<input type="checkbox" onChange={this._handleAntiTrack} checked={this.props.antiTrack} />
-								<span className="slider" />
-								<span className="slider-circle" />
-							</label>
+							<ToggleSlider
+								className="AdditionalFeatures--add-padding"
+								isDisabled={IS_CLIQZ}
+								isChecked={this.props.antiTrack}
+								onChange={this._handleAntiTrack}
+							/>
 						</div>
 						<div className="columns small-12 medium-8">
 							<h4 style={IS_CLIQZ ? { color: '#979797' } : {}}>{ t('setup_additional_view_antitrack_title') }</h4>
@@ -123,11 +129,12 @@ class AdditionalFeaturesView extends Component {
 							</div>
 						</div>
 						<div className="columns shrink">
-							<label className={`switch ${IS_CLIQZ ? ' disabled' : ''}`}>
-								<input type="checkbox" onChange={this._handleAdBlock} checked={this.props.adBlock} />
-								<span className="slider" />
-								<span className="slider-circle" />
-							</label>
+							<ToggleSlider
+								className="AdditionalFeatures--add-padding"
+								isDisabled={IS_CLIQZ}
+								isChecked={this.props.adBlock}
+								onChange={this._handleAdBlock}
+							/>
 						</div>
 						<div className="columns small-12 medium-8">
 							<h4 style={IS_CLIQZ ? { color: '#979797' } : {}}>{ t('setup_additional_view_adblock_title') }</h4>
@@ -142,11 +149,12 @@ class AdditionalFeaturesView extends Component {
 							</div>
 						</div>
 						<div className="columns shrink">
-							<label className="switch">
-								<input type="checkbox" onChange={this._handleSmartBlock} checked={this.props.smartBlock} />
-								<span className="slider" />
-								<span className="slider-circle" />
-							</label>
+							<ToggleSlider
+								className="AdditionalFeatures--add-padding"
+								isDisabled={IS_CLIQZ}
+								isChecked={this.props.smartBlock}
+								onChange={this._handleSmartBlock}
+							/>
 						</div>
 						<div className="columns small-12 medium-8">
 							<h4>{ t('setup_additional_view_smartblock_title') }</h4>

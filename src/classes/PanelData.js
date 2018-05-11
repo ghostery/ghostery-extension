@@ -15,7 +15,7 @@
  */
 
 import _ from 'underscore';
-import Button from './BrowserButton';
+import button from './BrowserButton';
 import conf from './Conf';
 import foundBugs from './FoundBugs';
 import bugDb from './BugDb';
@@ -23,11 +23,11 @@ import globals from './Globals';
 import Policy from './Policy';
 import tabInfo from './TabInfo';
 import abtest from './ABTest';
+import rewards from './Rewards';
 import { pushUserSettings, buildUserSettings } from '../utils/accounts';
 import { getActiveTab, flushChromeMemoryCache } from '../utils/utils';
 import { objectEntries, log } from '../utils/common';
 
-const button = new Button();
 const SYNC_SET = new Set(globals.SYNC_ARRAY);
 const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 const { IS_CLIQZ } = globals;
@@ -48,6 +48,7 @@ class PanelData {
 		this._panelView = {};
 		this._summaryView = {};
 		this._blockingView = {};
+		this._rewardsView = {};
 		this._settingsView = {};
 	}
 
@@ -80,6 +81,8 @@ class PanelData {
 				return this.summaryView;
 			case 'blocking':
 				return this.blockingView;
+			case 'rewards':
+				return this.rewardsView;
 			default:
 				return false;
 		}
@@ -171,6 +174,7 @@ class PanelData {
 				enable_ad_block: this._confData.get('enable_ad_block'),
 				enable_anti_tracking: this._confData.get('enable_anti_tracking'),
 				enable_smart_block: this._confData.get('enable_smart_block'),
+				enable_offers: this._confData.get('enable_offers'),
 				is_expanded: this._confData.get('is_expanded'),
 				is_expert: this._confData.get('is_expert'),
 				is_android: globals.BROWSER_INFO.os === 'android',
@@ -183,9 +187,10 @@ class PanelData {
 				needsReload: this._trackerData.get('needsReload'),
 				smartBlock: this._trackerData.get('smartBlock'),
 				tab_id: this._trackerData.get('tab_id'),
+				unread_offer_ids: rewards.unreadOfferIds,
 			},
 			summary: this.summaryView,
-			blocking: this._confData.get('is_expert') ? this.blockingView : false
+			blocking: this._confData.get('is_expert') ? this.blockingView : false,
 		};
 		return this._panelView;
 	}
@@ -233,6 +238,19 @@ class PanelData {
 	}
 
 	/**
+	 * Get rewards data for the Rewards View
+	 * @return {Object} Rewards view data
+	 */
+	get rewardsView() {
+		this._rewardsView = {
+			enable_offers: this._confData.get('enable_offers'),
+			rewards: rewards.storedOffers,
+			unread_offer_ids: rewards.unreadOfferIds,
+		};
+		return this._rewardsView;
+	}
+
+	/**
 	 * Get conf and tracker data for Settings View. Note we have overlapping properties
 	 * from blockView incase the user is in Simple Mode.
 	 * @return {Object}		Settings View data
@@ -250,7 +268,6 @@ class PanelData {
 			enable_human_web: this._confData.get('enable_human_web'),
 			enable_offers: this._confData.get('enable_offers'),
 			enable_metrics: this._confData.get('enable_metrics'),
-			enable_metrics_abtest: abtest.hasTest('offers'),
 			first_name: this._confData.get('first_name'),
 			last_name: this._confData.get('last_name'),
 			hide_alert_trusted: this._confData.get('hide_alert_trusted'),

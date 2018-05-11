@@ -11,19 +11,38 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { GET_PANEL_DATA, GET_SUMMARY_DATA, GET_BLOCKING_DATA,
+import {
+	GET_PANEL_DATA, GET_SUMMARY_DATA, GET_BLOCKING_DATA,
+	TOGGLE_CLIQZ_FEATURE,
 	SHOW_NOTIFICATION,
 	CLOSE_NOTIFICATION,
+	TOGGLE_EXPERT,
 	LOGIN_SUCCESS, LOGIN_FAILED,
 	LOGOUT,
 	CREATE_ACCOUNT_SUCCESS, CREATE_ACCOUNT_FAILED,
-	FORGOT_PASSWORD_SUCCESS, FORGOT_PASSWORD_FAILED } from '../constants/constants';
+	FORGOT_PASSWORD_SUCCESS, FORGOT_PASSWORD_FAILED
+} from '../constants/constants';
 import { sendMessageInPromise } from '../utils/msg';
 import { doXHR } from '../utils/utils';
 import globals from '../../../src/classes/Globals';
 import { decodeJwt, log } from '../../../src/utils/common';
 
 const API_ROOT_URL = `https://consumerapi.${globals.GHOSTERY_DOMAIN}.com`;
+
+/**
+ * Update Cliqz Features.
+ * @return {Object}
+ */
+export function toggleCliqzFeature(featureName, isEnabled) {
+	const data = {
+		featureName,
+		isEnabled,
+	};
+	return {
+		type: TOGGLE_CLIQZ_FEATURE,
+		data,
+	};
+}
 
 /**
  * Fetch panel data from background, only on the initial load. Returns combined
@@ -81,6 +100,16 @@ export function closeNotification(data) {
 	return {
 		type: CLOSE_NOTIFICATION,
 		data,
+	};
+}
+
+/**
+ * Called from Header and Summary's toggleExpert() and picked up by panel reducer
+ * @return {Object}
+ */
+export function toggleExpert() {
+	return {
+		type: TOGGLE_EXPERT,
 	};
 }
 

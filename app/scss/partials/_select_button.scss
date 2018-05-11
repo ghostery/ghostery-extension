@@ -13,6 +13,57 @@
 
 $grey: #ccc;
 $dark-grey: #4a4a4a;
+$menu-height: 102px;
+
+$menuItemDot: url('data:image/svg+xml;charset=US-ASCII,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0A%3Csvg%20width%3D%224px%22%20height%3D%224px%22%20viewBox%3D%220%200%204%204%22%20version%3D%221.1%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20xmlns%3Axlink%3D%22http%3A//www.w3.org/1999/xlink%22%3E%0A%20%20%20%20%3C%21--%20Generator%3A%20Sketch%2047.1%20%2845422%29%20-%20http%3A//www.bohemiancoding.com/sketch%20--%3E%0A%20%20%20%20%3Ctitle%3EOval%209%3C/title%3E%0A%20%20%20%20%3Cdesc%3ECreated%20with%20Sketch.%3C/desc%3E%0A%20%20%20%20%3Cdefs%3E%3C/defs%3E%0A%20%20%20%20%3Cg%20id%3D%22Page-1%22%20stroke%3D%22none%22%20stroke-width%3D%221%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%0A%20%20%20%20%20%20%20%20%3Cg%20id%3D%22Simple-View-Panel---Trust/Restric/Pause%22%20transform%3D%22translate%28-813.000000%2C%20-2171.000000%29%22%20fill%3D%22%234A4A4A%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ccircle%20id%3D%22Oval-9%22%20cx%3D%22815%22%20cy%3D%222173%22%20r%3D%222%22%3E%3C/circle%3E%0A%20%20%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%3C/g%3E%0A%3C/svg%3E');
+
+%select-menu-base {
+	overflow-y: auto;
+	height: $menu-height;
+	position: absolute;
+	top: -$menu-height;
+	left: 0;
+	right: 0;
+	border: 1px solid $grey;
+	width: 100%;
+	border-bottom: 0px;
+	box-shadow: inset 2px 2px 2px -2px $grey, inset 2px 2px 2px -2px $grey, inset -2px 2px 2px -1px $grey;
+	background-color: #fff;
+	ul {
+		list-style-type: none;
+		margin: 0px;
+		text-align: center;
+		li {
+			cursor: pointer;
+			&.selected {
+			  background-color: #A6A6A6;
+				.bullet {
+					background-image: $menuItemDot;
+				}
+			}
+			.item-wrapper {
+				line-height: 33px;
+				position: relative;
+				height: 33px;
+				display: inline-block;
+			}
+			.bullet {
+				position: absolute;
+				top: 14px;
+				left: -12px;
+				height: 4px;
+				width: 4px;
+				background-repeat: no-repeat;
+			}
+			&:not(.selected):hover {
+				background-color: #ebebeb;
+				.bullet {
+					background-image: $menuItemDot;
+				}
+			}
+		}
+	}
+}
 
 #panel {
 	#content-summary {
@@ -45,54 +96,8 @@ $dark-grey: #4a4a4a;
 					}
 				}
 
-				$menuItemDot: url('data:image/svg+xml;charset=US-ASCII,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0A%3Csvg%20width%3D%224px%22%20height%3D%224px%22%20viewBox%3D%220%200%204%204%22%20version%3D%221.1%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20xmlns%3Axlink%3D%22http%3A//www.w3.org/1999/xlink%22%3E%0A%20%20%20%20%3C%21--%20Generator%3A%20Sketch%2047.1%20%2845422%29%20-%20http%3A//www.bohemiancoding.com/sketch%20--%3E%0A%20%20%20%20%3Ctitle%3EOval%209%3C/title%3E%0A%20%20%20%20%3Cdesc%3ECreated%20with%20Sketch.%3C/desc%3E%0A%20%20%20%20%3Cdefs%3E%3C/defs%3E%0A%20%20%20%20%3Cg%20id%3D%22Page-1%22%20stroke%3D%22none%22%20stroke-width%3D%221%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%0A%20%20%20%20%20%20%20%20%3Cg%20id%3D%22Simple-View-Panel---Trust/Restric/Pause%22%20transform%3D%22translate%28-813.000000%2C%20-2171.000000%29%22%20fill%3D%22%234A4A4A%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ccircle%20id%3D%22Oval-9%22%20cx%3D%22815%22%20cy%3D%222173%22%20r%3D%222%22%3E%3C/circle%3E%0A%20%20%20%20%20%20%20%20%3C/g%3E%0A%20%20%20%20%3C/g%3E%0A%3C/svg%3E');
-
 				.select-menu {
-					overflow-y: auto;
-					height: 100px;
-					position: absolute;
-					top: -100px;
-					left: 0;
-					right: 0;
-					border: 1px solid $grey;
-					width: 100%;
-					border-bottom: 0px;
-					box-shadow: inset 2px 2px 2px -2px $grey, inset 2px 2px 2px -2px $grey, inset -2px 2px 2px -1px $grey;
-					background-color: #fff;
-					ul {
-						list-style-type: none;
-						margin: 0px;
-						text-align: center;
-						li {
-							cursor: pointer;
-							&.selected {
-							  background-color: #A6A6A6;
-								.bullet {
-									background-image: $menuItemDot;
-								}
-							}
-							.item-wrapper {
-								line-height: 33px;
-								position: relative;
-								height: 33px;
-								display: inline-block;
-							}
-							.bullet {
-								position: absolute;
-								top: 14px;
-								left: -12px;
-								height: 4px;
-								width: 4px;
-								background-repeat: no-repeat;
-							}
-							&:not(.selected):hover {
-								background-color: #ebebeb;
-								.bullet {
-									background-image: $menuItemDot;
-								}
-							}
-						}
-					}
+					@extend %select-menu-base;
 				}
 			}
 		}
@@ -113,6 +118,13 @@ $dark-grey: #4a4a4a;
 							top: 0;
 							width: 20px;
 						}
+					}
+					.select-menu {
+						@extend %select-menu-base;
+						top: -$menu-height + 1px;
+						width: 170%;
+						border-bottom: 1px solid $grey;
+						z-index: 2;
 					}
 				}
 			}

@@ -1,5 +1,5 @@
 /**
- * Drawer Component
+ * Panel Component
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -14,7 +14,6 @@
 import React, { Component } from 'react';
 import URLSearchParams from 'url-search-params';
 import Header from '../containers/HeaderContainer';
-import Drawer from '../containers/DrawerContainer';
 import { sendMessage } from '../utils/msg';
 /**
  * @class Implement base view with functionality common to all views.
@@ -105,34 +104,61 @@ class Panel extends React.Component {
 
 		this.closeNotification();
 	}
+
 	/**
-	 * Render all child views from router.
-	 * @return {ReactComponent}   ReactComponent instance
+	 * Helper render function for the notification callout
+	 * @return {JSX} JSX for the notification callout
+	 */
+	renderNotification() {
+		const needsReload = !!Object.keys(this.props.needsReload.changes).length;
+
+		if (this.props.notificationText) {
+			return (
+				<span>
+					<span key="0" dangerouslySetInnerHTML={{ __html: this.props.notificationText || t('panel_needs_reload') }} />
+					{needsReload && (
+						<div key="1" className="needs-reload-link" onClick={this.clickReloadBanner}>{ t('alert_reload') }</div>
+					)}
+				</span>
+			);
+		} else if (needsReload) {
+			return (
+				<span>
+					<span key="0">{t('panel_needs_reload')}</span>
+					<span key="1" className="needs-reload-link" onClick={this.clickReloadBanner}>{ t('alert_reload') }</span>
+				</span>
+			);
+		} else if (this.props.notificationFilter === 'slow') {
+			return (
+				<span>
+					<span key="0" className="filter-link slow-insecure" onClick={this.filterTrackers} dangerouslySetInnerHTML={{ __html: this.props.notificationText }} />
+					<span key="1">{ t('panel_tracker_slow_non_secure_end') }</span>
+				</span>
+			);
+		} else if (this.props.notificationFilter === 'compatibility') {
+			return (
+				<span>
+					<span key="0" className="filter-link compatibility" onClick={this.filterTrackers} dangerouslySetInnerHTML={{ __html: this.props.notificationText }} />
+					<span key="1">{ t('panel_tracker_breaking_page_end') }</span>
+				</span>
+			);
+		}
+
+		return (
+			<span dangerouslySetInnerHTML={{ __html: this.props.notificationText }} />
+		);
+	}
+
+	/**
+	 * React's required render function. Returns JSX
+	 * @return {JSX} JSX for rendering the Panel
 	 */
 	render() {
 		// this prevents double rendering when waiting for getPanelData() to finish
 		if (!this.props.initialized) {
 			return null;
 		}
-		const needsReload = !!Object.keys(this.props.needsReload.changes).length;
-		const calloutText = needsReload ? (
-			<span>
-				<span key="0">{ t('panel_needs_reload') }</span>
-				<span key="1" className="needs-reload-link" onClick={this.clickReloadBanner}>{ t('panel_click_to_reload') }</span>
-			</span>
-		) : (this.props.notificationFilter === 'slow') ?
-			<span>
-				<span key="0" className="filter-link slow-insecure" onClick={this.filterTrackers} dangerouslySetInnerHTML={{ __html: this.props.notificationText }} />
-				<span key="1">{ t('panel_tracker_slow_non_secure_end') }</span>
-			</span>
-			: (this.props.notificationFilter === 'compatibility') ?
-				<span>
-					<span key="0" className="filter-link compatibility" onClick={this.filterTrackers} dangerouslySetInnerHTML={{ __html: this.props.notificationText }} />
-					<span key="1">{ t('panel_tracker_breaking_page_end') }</span>
-				</span>
-				: (
-					<span dangerouslySetInnerHTML={{ __html: this.props.notificationText }} />
-				);
+
 		return (
 			<div id="panel">
 				<div className="callout-container">
@@ -143,20 +169,12 @@ class Panel extends React.Component {
 							</g>
 						</svg>
 						<span className="callout-text" >
-							{calloutText}
+							{this.renderNotification()}
 						</span>
 					</div>
 				</div>
 				<Header />
 				{ this.props.children }
-				{ this.props.drawerIsOpen &&
-					<Drawer
-						smartBlock={this.props.smartBlock}
-						enable_anti_tracking={this.props.enable_anti_tracking}
-						enable_ad_block={this.props.enable_ad_block}
-						enable_smart_block={this.props.enable_smart_block}
-					/>
-				}
 			</div>
 		);
 	}

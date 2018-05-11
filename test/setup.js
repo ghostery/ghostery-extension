@@ -11,8 +11,13 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-//Set stubs for all chrome.* methods and properties
+// Set stubs for all chrome.* methods and properties
 import chrome from 'sinon-chrome';
+
+// Set up Enzyme for React Snapshot testing
+import Enzyme from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+Enzyme.configure({ adapter: new Adapter() });
 
 // Create global stubs
 global.chrome = chrome;

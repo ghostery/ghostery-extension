@@ -1,0 +1,66 @@
+/**
+ * Donut Graph Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+.sub-component.donut-graph {
+	.show-on-big { display: none; }
+	&.big .show-on-big { display: block; }
+
+	.graph-text {
+		text-transform: capitalize;
+		text-align: center;
+		font-size: 12px;
+		line-height: 16px;
+		font-weight: 500;
+		color: #4a4a4a;
+	}
+	&.big .graph-text {
+		margin-top: -125px;
+		padding-top: 22px;
+		height: 120px;
+	}
+	&.small .graph-text {
+		margin-top: -99px;
+		padding-top: 18px;
+		height: 94px;
+	}
+	.graph-text-count {
+		font-size: 30px;
+		line-height: 41px;
+		font-weight: 700;
+	}
+	&.small .graph-text-count {
+		font-size: 28px;
+		line-height: 35px;
+	}
+
+	.tooltip-container {
+		position: relative;
+		height: 0;
+		width: 0;
+		.tooltip {
+			white-space: nowrap;
+			pointer-events: none;
+			opacity: 0;
+			visibility: hidden;
+			transition: opacity .2s ease-in;
+		}
+		.tooltip.show {
+			visibility: visible;
+			opacity: 1;
+		}
+		.tooltip::before {
+			left: 50%;
+			margin-left: -8px;
+		}
+	}
+}

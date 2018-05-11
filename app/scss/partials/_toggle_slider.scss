@@ -1,0 +1,55 @@
+/**
+ * Toggle Slider Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+.ToggleSlider__switch {}
+.ToggleSlider__switch {
+	@extend %pointer;
+	position: relative;
+	input { display:none; }
+}
+.ToggleSlider__slider {
+	position: relative;
+	display: block;
+	height: 14px;
+	width: 37px;
+	border-radius: 34px;
+	background-color: #c1c0c0;
+	-webkit-transition: .4s;
+	transition: .4s;
+}
+.ToggleSlider__slider_circle {
+	content: "";
+	position: absolute;
+	left: 0px;
+	top: -3px;
+	height: 20px;
+	width: 20px;
+	border-radius: 50%;
+	background-color: #f1f1f1;
+	border: 0.5px solid #979797;
+	-webkit-transition: .1s;
+	transition: .1s;
+}
+.ToggleSlider input:checked + .ToggleSlider__slider {
+	background-color: #ad80ac;
+}
+.ToggleSlider input:focus + .ToggleSlider__slider {
+	box-shadow: 0 0 1px #2196f3;
+}
+.ToggleSlider input:checked + .ToggleSlider__slider + .ToggleSlider__slider_circle {
+	background-color: #5b0059;
+	border-color: #5b0059;
+	-webkit-transform: translateX(17px);
+	-ms-transform: translateX(17px);
+	transform: translateX(17px);
+}

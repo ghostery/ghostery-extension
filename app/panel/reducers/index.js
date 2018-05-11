@@ -17,12 +17,12 @@ import { combineReducers } from 'redux';
 import panel from './panel';
 import summary from './summary';
 import detail from './detail';
+import rewards from './rewards';
 import blocking from './blocking';
 import login from './login';
 import createAccount from './createAccount';
 import settings from './settings';
 import forgotPassword from './forgotPassword';
-import drawer from './drawer';
 /**
  * Export combined reducers object which provides
  * the full list of reducers. To be imported by React.
@@ -35,12 +35,12 @@ const Reducers = combineReducers({
 	panel,
 	summary,
 	detail,
+	rewards,
 	blocking,
 	login,
 	createAccount,
 	settings,
 	forgotPassword,
-	drawer,
 });
 
 export default Reducers;

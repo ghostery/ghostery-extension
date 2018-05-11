@@ -15,6 +15,7 @@ import globals from './Globals';
 import conf from './Conf';
 import { log, prefsSet, prefsGet } from '../utils/common';
 import { processUrlQuery } from '../utils/utils';
+import abtest from './ABTest';
 
 // CONSTANTS
 const FREQUENCIES = { // in milliseconds
@@ -24,6 +25,7 @@ const FREQUENCIES = { // in milliseconds
 	monthly: 2419200000
 };
 const CRITICAL_METRICS = ['install', 'install_complete', 'upgrade', 'active', 'engaged', 'uninstall'];
+const CAMPAIGN_METRICS = ['install', 'active', 'uninstall'];
 const { METRICS_SUB_DOMAIN, EXTENSION_VERSION, BROWSER_INFO } = globals;
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const MAX_DELAYED_PINGS = 100;
@@ -53,10 +55,7 @@ class Metrics {
 					// This query fails on Edge
 					chrome.tabs.query({
 						url: [
-							'https://www.ghostery.com/lp*',
-							'https://www.ghostery.com/*/lp*',
-							'https://www.ghostery.com/products*',
-							'https://www.ghostery.com/*/products*'
+							'https://www.ghostery.com/*'
 						]
 					}, (tabs) => {
 						tabs.forEach((tab) => {
@@ -71,9 +70,7 @@ class Metrics {
 							prefsSet({
 								utm_source: this.utm_source,
 								utm_campaign: this.utm_campaign
-							})
-								.then(prefs => resolve(prefs))
-								.catch(err => reject(err));
+							});
 						});
 						resolve();
 					});
@@ -84,8 +81,7 @@ class Metrics {
 					let foundUTM = false;
 					tabs.forEach((tab) => {
 						if (foundUTM) { return; }
-						if (tab.url && tab.url.includes('https://www.ghostery.com/') &&
-									(tab.url.includes('products') || tab.url.includes('lp'))) {
+						if (tab.url && tab.url.includes('https://www.ghostery.com/')) {
 							const query = processUrlQuery(tab.url);
 							if (!query.utm_source || !query.utm_campaign) { return; }
 							this.utm_source = query.utm_source;
@@ -94,9 +90,7 @@ class Metrics {
 							prefsSet({
 								utm_source: this.utm_source,
 								utm_campaign: this.utm_campaign
-							})
-								.then(reject)
-								.catch(reject);
+							});
 						}
 					});
 					resolve();
@@ -114,9 +108,6 @@ class Metrics {
 
 	/**
 	* Prepare data and send telemetry pings.
-	* All existing pings are listed here:
-	* https://docs.ghostery.com/confluence/display/CT/GBE+Usage+Analytics+Pings
-	*
 	* @param {string} type    type of the telemetry ping
 	*/
 	ping(type) {
@@ -140,86 +131,36 @@ class Metrics {
 
 			// Extension Usage
 			case 'pause':
-				this._sendReq('pause', ['all', 'daily', 'weekly']);
-				break;
 			case 'resume':
-				this._sendReq('resume', ['all', 'daily', 'weekly']);
-				break;
 			case 'trust_site':
-				this._sendReq('trust_site', ['all', 'daily', 'weekly']);
-				break;
 			case 'restrict_site':
-				this._sendReq('restrict_site', ['all', 'daily', 'weekly']);
-				break;
 			case 'live_scan':
-				this._sendReq('live_scan', ['all', 'daily', 'weekly']);
-				break;
 			case 'sign_in':
-				this._sendReq('sign_in', ['all', 'daily', 'weekly']);
+				this._sendReq(type, ['all', 'daily', 'weekly']);
 				break;
 			// New
 			case 'list_dash':
-				this._sendReq('list_dash', ['all', 'daily', 'weekly', 'monthly']); // ??? Why daily, etc?
-				break;
 			case 'history_dash':
-				this._sendReq('history_dash', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'history_learn':
-				this._sendReq('history_learn', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'performance_dash':
-				this._sendReq('performance_dash', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'performance_learn':
-				this._sendReq('performance_learn', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'rewards_dash':
-				this._sendReq('rewards_dash', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'rewards_learn':
-				this._sendReq('rewards_learn', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'premium_dash':
-				this._sendReq('premium_dash', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'premium_learn':
-				this._sendReq('premium_learn', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'antitrack_on':
-				this._sendReq('antitrack_on', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'antitrack_off':
-				this._sendReq('antitrack_off', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'adblock_on':
-				this._sendReq('adblock_on', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'adblock_off':
-				this._sendReq('adblock_off', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'smartblock_on':
-				this._sendReq('smartblock_on', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'smartblock_off':
-				this._sendReq('smartblock_off', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'pause_snooze':
-				this._sendReq('pause_snooze', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'viewchange_from_simple':
-				this._sendReq('viewchange_from_simple', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'viewchange_from_detailed':
-				this._sendReq('viewchange_from_detailed', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'viewchange_from_expanded':
-				this._sendReq('viewchange_from_expanded', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'create_account_extension':
-				this._sendReq('create_account_extension', ['all', 'daily', 'weekly', 'monthly']);
-				break;
 			case 'create_account_setup':
-				this._sendReq('create_account_setup', ['all', 'daily', 'weekly', 'monthly']);
+				this._sendReq(type, ['all', 'daily', 'weekly', 'monthly']);
 				break;
 			// uncaught ping type
 			default:
@@ -266,7 +207,7 @@ class Metrics {
 	_buildMetricsUrl(type, frequency) {
 		const frequencyString = (type !== 'uninstall') ? `/${frequency}` : '';
 
-		return `https://${METRICS_SUB_DOMAIN}.ghostery.com/${type}${frequencyString}?gr=-1` +
+		let metrics_url = `https://${METRICS_SUB_DOMAIN}.ghostery.com/${type}${frequencyString}?gr=-1` +
 			// Old parameters, old names
 			// Human web
 			`&hw=${encodeURIComponent(IS_EDGE ? '0' : (conf.enable_human_web ? '1' : '0'))}` +
@@ -278,9 +219,12 @@ class Metrics {
 			`&os=${encodeURIComponent(BROWSER_INFO.os)}` +
 			// Browser language
 			`&l=${encodeURIComponent(conf.language)}` +
+			// Browser version
+			`&bv=${encodeURIComponent(BROWSER_INFO.version)}` +
+
 			// Old parameters, new names
 			// Offers (former offers)
-			`&of=${encodeURIComponent(IS_EDGE ? '0' : (conf.enable_offers ? '1' : '0'))}` +
+			`&of=${encodeURIComponent(IS_EDGE ? '0' : ((conf.enable_offers && abtest.hasTest('offers')) ? '1' : '0'))}` +
 			// Random number, assigned at install (former install_rand)
 			`&ir=${encodeURIComponent(conf.install_random_number)}` +
 			// Login state (former signed_in)
@@ -293,10 +237,6 @@ class Metrics {
 			`&pb=${encodeURIComponent(conf.show_alert ? (conf.alert_expanded ? '1' : '2') : '0')}` +
 			// Showing campaign messages (former show_cmp)
 			`&sc=${encodeURIComponent(conf.show_cmp ? '1' : '0')}` +
-			// Marketing source (Former utm_source)
-			`&us=${encodeURIComponent(this.utm_source)}` +
-			// Marketing campaign (Former utm_campaign)
-			`&uc=${encodeURIComponent(this.utm_campaign)}` +
 
 			// New parameters, new names
 			// Extension_view - which view of the extension is the user in
@@ -315,6 +255,17 @@ class Metrics {
 			`&sb=${encodeURIComponent(conf.setup_block.toString())}` +
 			// Recency, days since last active daily ping
 			`&rc=${encodeURIComponent(this._getRecency().toString())}`;
+
+		if (CAMPAIGN_METRICS.includes(type)) {
+			// only send campaign attribution when necessary
+			metrics_url +=
+				// Marketing source (Former utm_source)
+				`&us=${encodeURIComponent(this.utm_source)}` +
+				// Marketing campaign (Former utm_campaign)
+				`&uc=${encodeURIComponent(this.utm_campaign)}`;
+		}
+
+		return metrics_url;
 	}
 
 	/**

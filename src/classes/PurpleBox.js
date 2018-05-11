@@ -45,11 +45,11 @@ class PurpleBox {
 	 */
 	createBox(tab_id) {
 		const tab = tabInfo.getTabInfo(tab_id);
-		// If the tab is prefetched, we can't add purplebox to it.
+		// Skip in the event of pause, trust, prefetching, newtab page, or Firefox about:pages
 		if (!conf.show_alert ||
 			globals.SESSION.paused_blocking ||
 			(conf.hide_alert_trusted && !!this.policy.whitelisted(tab.url)) ||
-			!tab || tab.purplebox || globals.EXCLUDES.includes(tab.host)) {
+			!tab || tab.purplebox || tab.path.includes('_/chrome/newtab') || tab.protocol === 'about' || globals.EXCLUDES.includes(tab.host)) {
 			return Promise.resolve(false);
 		}
 

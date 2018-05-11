@@ -699,9 +699,6 @@
 	"panel_detail_rewards_title": {
 		"message": "Ghostery報酬"
 	},
-	"panel_detail_rewards_text": {
-		"message": "近日開始する機能です。"
-	},
 	"panel_detail_premium_title": {
 		"message": "Ghosteryプレミアム"
 	},
@@ -1289,26 +1286,6 @@
 	"setup_login_view_password_error": {
 		"message": "8～50文字を使用してください。"
 	},
-	"setup_login_view_terms_error": {
-		"message": "これを承認する必要があります。"
-	},
-	"setup_login_view_terms": {
-		"message": "Ghosteryの$LINK_PP_START$プライバシーポリシーPrivacy Policy$LINK_PP_END$と$LINK_TERMS_START$利用規約$LINK_TERMS_END$に同意します",
-		"placeholders": {
-			"link_pp_start": {
-				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" target=\"_blank\">"
-			},
-			"link_pp_end": {
-				"content": "</a>"
-			},
-			"link_terms_start": {
-				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-end-user-license-agreement/\" target=\"_blank\">"
-			},
-			"link_terms_end": {
-				"content": "</a>"
-			}
-		}
-	},
 	"setup_login_view_create_account": {
 		"message": "アカウントをお持ちでないですか？アカウントを作成してください。"
 	},
@@ -1422,7 +1399,7 @@
 		"message": "最新情報"
 	},
 	"panel_help_setup": {
-		"message": "Set Up Ghostery"
+		"message": "Ghosteryをセットアップ"
 	},
 	"global_settings_saved": {
 		"message": "グローバル設定が保存されました"
@@ -1481,5 +1458,8 @@
 				"content": "</a>"
 			}
 		}
-	}		
+	},
+	"panel_about_release_notes": {
+		"message": "すべての更新情報についてはリリースノートをご覧ください"
+	}
 }

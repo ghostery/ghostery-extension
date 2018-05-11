@@ -43,27 +43,27 @@ const OptIn = (props) => {
 						</div>
 					</div>
 					{!IS_EDGE && !IS_CLIQZ &&
-						<div className="s-option-group" id="human-web-section">
-							<div className="s-square-checkbox">
-								<input type="checkbox" id="settings-share-human-web" name="enable_human_web" defaultChecked={settingsData.enable_human_web} onClick={props.toggleCheckbox} />
-								<label htmlFor="settings-share-human-web">
-									<span>{ t('settings_share_human_web') }</span>
-								</label>
-								<div className="s-tooltip-up" data-g-tooltip={t('settings_human_web_tooltip')}>
-									<img src="../../app/images/panel/icon-information-tooltip.svg" className="s-question" />
+						<div>
+							<div className="s-option-group" id="human-web-section">
+								<div className="s-square-checkbox">
+									<input type="checkbox" id="settings-share-human-web" name="enable_human_web" defaultChecked={settingsData.enable_human_web} onClick={props.toggleCheckbox} />
+									<label htmlFor="settings-share-human-web">
+										<span>{ t('settings_share_human_web') }</span>
+									</label>
+									<div className="s-tooltip-up" data-g-tooltip={t('settings_human_web_tooltip')}>
+										<img src="../../app/images/panel/icon-information-tooltip.svg" className="s-question" />
+									</div>
 								</div>
 							</div>
-						</div>
-					}
-					{settingsData.enable_metrics_abtest &&
-						<div className="s-option-group" id="offers-section">
-							<div className="s-square-checkbox">
-								<input type="checkbox" id="settings-allow-offers" name="enable_offers" defaultChecked={settingsData.enable_offers} onClick={props.toggleCheckbox} />
-								<label htmlFor="settings-allow-offers">
-									<span>{ t('settings_allow_offers') }</span>
-								</label>
-								<div className="s-tooltip-up" data-g-tooltip={t('settings_offers_tooltip')}>
-									<img src="../../app/images/panel/icon-information-tooltip.svg" className="s-question" />
+							<div className="s-option-group" id="offers-section">
+								<div className="s-square-checkbox">
+									<input type="checkbox" id="settings-allow-offers" name="enable_offers" defaultChecked={settingsData.enable_offers} onClick={props.toggleCheckbox} />
+									<label htmlFor="settings-allow-offers">
+										<span>{ t('settings_allow_offers') }</span>
+									</label>
+									<div className="s-tooltip-up" data-g-tooltip={t('settings_offers_tooltip')}>
+										<img src="../../app/images/panel/icon-information-tooltip.svg" className="s-question" />
+									</div>
 								</div>
 							</div>
 						</div>

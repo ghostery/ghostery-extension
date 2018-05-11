@@ -455,29 +455,62 @@
 	"summary_description_not_scanned_2": {
 		"message": "Navigate to another page and I promise I'll deliver the goods."
 	},
+	"summary_custom_settings": {
+		"message": "Custom Settings"
+	},
 	"summary_trust_site": {
 		"message": "Trust Site"
 	},
+	"summary_trust_site_active": {
+		"message": "Site Trusted"
+	},
 	"summary_restrict_site": {
 		"message": "Restrict Site"
+	},
+	"summary_restrict_site_active": {
+		"message": "Site Restricted"
 	},
 	"summary_undo": {
 		"message": "Undo"
 	},
 	"summary_pause_ghostery": {
+		"message": "Pause Ghostery"
+	},
+	"summary_pause_ghostery_tooltip": {
+		"message": "Pause Ghostery extension."
+	},
+	"summary_pause_ghostery_ab_pause": {
 		"message": "Pause"
 	},
 	"pause_30_min": {
 		"message": "for 30 min"
 	},
+	"pause_30_min_condensed": {
+		"message": "30 mins"
+	},
 	"pause_1_hour": {
 		"message": "for 1 hour"
+	},
+	"pause_1_hour_condensed": {
+		"message": "1 hr"
 	},
 	"pause_24_hours": {
 		"message": "for 24 hours"
 	},
+	"pause_24_hours_condensed": {
+		"message": "24 hrs"
+	},
 	"summary_resume_ghostery": {
+		"message": "Resume Ghostery"
+	},
+	"summary_resume_ghostery_tooltip": {
+		"message": "Ghostery extension paused. Click to resume."
+	},
+	"summary_resume_ghostery_ab_pause": {
 		"message": "Resume"
+	},
+	"summary_show_menu": {
+		"message": "show menu"
 	},
 	"summary_map_these_trackers": {
 		"message": "Map These Trackers"
@@ -645,6 +678,9 @@
 	"tracker_plural": {
 		"message": "trackers"
 	},
+	"tracker_found": {
+		"message": "found"
+	},
 	"panel_signin_success": {
 		"message": "You are now signed in as "
 	},
@@ -720,8 +756,20 @@
 	"panel_detail_rewards_title": {
 		"message": "Ghostery Rewards"
 	},
-	"panel_detail_rewards_text": {
+	"panel_detail_rewards_coming_soon": {
 		"message": "Feature coming soon."
+	},
+	"panel_detail_rewards_cliqz_text": {
+		"message": "Feature already active in the Cliqz MyOffrz control panel."
+	},
+	"panel_detail_rewards_loading": {
+		"message": "Loading Rewards..."
+	},
+	"panel_detail_rewards_none_found": {
+		"message": "No Rewards found"
+	},
+	"panel_detail_rewards_off": {
+		"message": "Ghostery Rewards is OFF"
 	},
 	"panel_detail_premium_title": {
 		"message": "Ghostery Premium"
@@ -755,6 +803,12 @@
 	},
 	"panel_header_verify_account": {
 		"message": "Verify Account"
+	},
+	"panel_header_simple_view": {
+		"message": "Simple View"
+	},
+	"panel_header_detailed_view": {
+		"message": "Detailed View"
 	},
 	"password_characters_requirements": {
 		"message": "Only these special characters are allowed: !@#$%^&*=+()<>{}[];:,./?"
@@ -1030,7 +1084,10 @@
 		"message": "Search by tracker"
 	},
 	"page_load": {
-		"message": "Page Load"
+		"message": "Page Load:"
+	},
+	"trackers_blocked": {
+		"message": "Trackers Blocked:"
 	},
 	"settings_trusted_restricted_sites": {
 		"message": "Trust & Restrict"
@@ -1140,17 +1197,65 @@
 	"settings_filter_new": {
 		"message": "New Since Last Update"
 	},
+	"alert_ghostery_paused": {
+		"message": "Ghostery extension has been paused."
+	},
+	"alert_ghostery_resumed": {
+		"message": "Ghostery extension has been resumed."
+	},
+	"alert_anti_track_on": {
+		"message": "Enhanced Anti-Tracking ON. Personal data will be anonymized."
+	},
+	"alert_anti_track_off": {
+		"message": "Enhanced Anti-Tracking OFF. Personal data will not be anonymized."
+	},
+	"alert_ad_block_on": {
+		"message": "Enhanced Ad-Blocking ON. Advertisements will be blocked."
+	},
+	"alert_ad_block_off": {
+		"message": "Enhanced Ad-Blocking OFF. Advertisements will not be blocked."
+	},
+	"alert_smart_block_on": {
+		"message": "Smart Blocking ON. Tracker blocking will be adjusted to optimize page performance."
+	},
+	"alert_smart_block_off": {
+		"message": "Smart Blocking OFF. Tracker blocking will not be automatically adjusted."
+	},
+	"alert_reload": {
+		"message": "Reload to see changes."
+	},
+	"alert_site_trusted": {
+		"message": "Site whitelisted. Trackers will be allowed and Anti-Tracking disabled on this site."
+	},
+	"alert_site_trusted_off": {
+		"message": "Site no longer whitelisted."
+	},
+	"alert_site_restricted": {
+		"message": "Site blacklisted. Trackers will be blocked and Anti-Tracking enabled on this site."
+	},
+	"alert_site_restricted_off": {
+		"message": "Site no longer blacklisted."
+	},
 	"tooltip_anti_track": {
 		"message": "Enhanced Anti-Tracking"
 	},
 	"tooltip_anti_track_body": {
-		"message": "Anonymize unblocked and unknown trackers for greater browsing protection."
+		"message": "Anonymize personal data for greater protection."
+	},
+	"tooltip_anti_track_body_on": {
+		"message": "Personal data points anonymized."
+	},
+	"tooltip_body_in_cliqz": {
+		"message": "Feature already active in Cliqz by default."
 	},
 	"tooltip_ad_block": {
 		"message": "Enhanced Ad Blocking"
 	},
 	"tooltip_ad_block_body": {
-		"message": "Block advertisements on websites you visit."
+		"message": "Block advertisements."
+	},
+	"tooltip_ad_block_body_on": {
+		"message": "Advertisements have been blocked."
 	},
 	"tooltip_smart_block": {
 		"message": "Smart Blocking"
@@ -1158,11 +1263,23 @@
 	"tooltip_smart_block_body": {
 		"message": "Automatically block and unblock trackers to optimize page performance."
 	},
+	"tooltip_smart_block_body_on": {
+		"message": "Tracker blocking adjusted to optimize page performance."
+	},
 	"tooltip_trust": {
-		"message": "Always allow trackers on this site."
+		"message": "Always allow trackers & disable Anti-Tracking on this site."
+	},
+	"tooltip_trust_on": {
+		"message": "Trackers allowed and Anti-Tracking disabled on site. Click to Undo."
 	},
 	"tooltip_restrict": {
-		"message": "Always block trackers on this site."
+		"message": "Always block trackers & protect my personal data on this site."
+	},
+	"tooltip_restrict_on": {
+		"message": "Trackers blocked and Anti-Tracking enabled on site. Click to Undo."
+	},
+	"tooltip_custom_settings": {
+		"message": "Use my selected tracker settings."
 	},
 	"tooltip_pause": {
 		"message": "Pause Ghostery"
@@ -1236,7 +1353,7 @@
 		"message": "One-Click Setup"
 	},
 	"setup_choice_view_share_data": {
-		"message": "Share my analytics and Human Web data to improve Ghostery’s performance."
+		"message": "Participate in Ghostery Rewards and share Human Web & analytics data."
 	},
 	"setup_choice_view_share_data_no_human_web": {
 		"message": "Share my analytics data to improve Ghostery’s performance."
@@ -1249,6 +1366,23 @@
 	},
 	"setup_choice_view_answer_questions": {
 		"message": "Choose my own settings by answering a few short questions."
+	},
+	"setup_choice_view_legal": {
+		"message": "By installing Ghostery, you agree to Ghostery's $LINK_PP_START$Privacy Policy$LINK_PP_END$ and $LINK_TERMS_START$Terms of Use$LINK_TERMS_END$.",
+		"placeholders": {
+			"link_pp_start": {
+				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" target=\"_blank\">"
+			},
+			"link_pp_end": {
+				"content": "</a>"
+			},
+			"link_terms_start": {
+				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-end-user-license-agreement/\" target=\"_blank\">"
+			},
+			"link_terms_end": {
+				"content": "</a>"
+			}
+		}
 	},
 	"setup_blocking_view_title": {
 		"message": "Ghostery can block trackers to make your browsing cleaner, faster, and safer. What would you like to block?"
@@ -1342,26 +1476,6 @@
 	"setup_login_view_password_error": {
 		"message": "Use between 8 and 50 characters."
 	},
-	"setup_login_view_terms_error": {
-		"message": "You must accept this."
-	},
-	"setup_login_view_terms": {
-		"message": "I agree to Ghostery's $LINK_PP_START$Privacy Policy$LINK_PP_END$ and $LINK_TERMS_START$Terms of Use$LINK_TERMS_END$",
-		"placeholders": {
-			"link_pp_start": {
-				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" target=\"_blank\">"
-			},
-			"link_pp_end": {
-				"content": "</a>"
-			},
-			"link_terms_start": {
-				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-end-user-license-agreement/\" target=\"_blank\">"
-			},
-			"link_terms_end": {
-				"content": "</a>"
-			}
-		}
-	},
 	"setup_login_view_create_account": {
 		"message": "Don't have an account? Create one."
 	},
@@ -1372,10 +1486,10 @@
 		"message": "Signed in as"
 	},
 	"setup_data_view_title": {
-		"message": "Would you like to help improve Ghostery?"
+		"message": "Would you like to support Ghostery?"
 	},
 	"setup_data_view_desc": {
-		"message": "We use anonymous analytics and Human Web data to improve Ghostery’s performance, without collecting any personal data. $LINK_START$Learn more$LINK_END$.",
+		"message": "We use anonymous analytics and Human Web data to improve Ghostery’s performance, and provide Rewards without collecting any personal data. $LINK_START$Learn more$LINK_END$.",
 		"placeholders": {
 			"link_start": {
 				"content": "<a href=\"https://www.ghostery.com/faqs/\" target=\"_blank\">"
@@ -1485,5 +1599,101 @@
 	},
 	"setup_upgrade_button_go": {
 		"message": "Set Me Up"
+	},
+	"enable_when_paused": {
+		"message": "To use this function, Resume Ghostery."
+	},
+	"enable_when_whitelisted": {
+		"message": "To use this function, undo Trust Site"
+	},
+	"enable_when_blacklisted": {
+		"message": "To use this function, undo Restrict Site."
+	},
+	"enable_when_not_scanned": {
+		"message": "To use this function, navigate to another page."
+	},
+	"rewards_new_text": {
+		"message": "new Reward was discovered"
+	},
+	"rewards_copy_code": {
+		"message": "copy code"
+	},
+	"rewards_code_copied": {
+		"message": "code copied"
+	},
+	"rewards_expires_in": {
+		"description": "example: Expires in 8 minutes. TYPE will be rewards_expires_in_TYPE listed below.",
+		"message": "Expires in $COUNT$ $TYPE$",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			},
+			"type": {
+				"content": "$2"
+			}
+		}
+	},
+	"rewards_expires_in_days": {
+		"message": "days"
+	},
+	"rewards_expires_in_hours": {
+		"message": "hours"
+	},
+	"rewards_expires_in_mins": {
+		"message": "minutes"
+	},
+	"rewards_expires_in_secs": {
+		"message": "seconds"
+	},
+	"rewards_terms_conditions": {
+		"message": "Terms & Conditions"
+	},
+	"rewards_disable": {
+		"message": "Turn off Ghostery rewards"
+	},
+	"rewards_disable_notification": {
+		"message": "Ghostery Rewards is now off. You can always turn it on in Ghostery Settings or in the Ghostery Dashboard."
+	},
+	"rewards_disable_confirm": {
+		"message": "OK, got it."
+	},
+	"rewards_about": {
+		"message": "About Ghostery Rewards"
+	},
+	"rewards_settings": {
+		"message": "Ghostery Rewards Settings"
+	},
+	"rewards_delete": {
+		"message": "Delete this reward"
+	},
+	"rewards_first_prompt": {
+		"message": "Would you like to continue to Ghostery Rewards?"
+	},
+	"rewards_second_prompt": {
+		"message": "Are you sure you would like to opt-out of Ghostery Rewards?"
+	},
+	"rewards_yes": {
+		"message": "yes"
+	},
+	"rewards_no": {
+		"message": "no"
+	},
+	"rewards_on": {
+		"message": "on"
+	},
+	"rewards_off": {
+		"message": "off"
+	},
+	"rewards_on_toast_notification": {
+		"message": "Ghostery Rewards is ON"
+	},
+	"rewards_off_toast_notification": {
+		"message": "Ghostery Rewards is OFF"
+	},
+	"rewards_code_copied_toast_notification": {
+		"message": "Rewards code copied!"
+	},
+	"rewards_learn_more": {
+		"message": "Learn More"
 	}
 }
