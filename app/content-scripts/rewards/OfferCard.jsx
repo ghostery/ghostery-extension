@@ -110,7 +110,6 @@ class OfferCard extends Component {
 	}
 
 	sendSignal(actionId, props = this.props) {
-		console.log('send signal ', actionId);
 		// Cliqz metrics
 		const offerId = props.reward.offer_id;
 		const message = {

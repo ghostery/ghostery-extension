@@ -435,12 +435,48 @@
 				display: flex;
 				justify-content: center;
 				flex-direction: row;
-				div {
+				.btn {
+					width: 60px;
+					height: 30px;
+					border-radius: 3px;
+					text-transform: uppercase;
+				}
+				button {
+					cursor: pointer;
+					font-weight: bold;
+					transition: background-color 0.25s ease-out, color 0.25s ease-out;
+					margin-top: 10px;
+					margin-bottom: 10px;
 					&:nth-child(1) {
-						margin-right:10px;
+						margin-right:5px;
+						color:$dark-purple;
+						border: 2px solid $dark-purple;
 					}
 					&:nth-child(2) {
-						margin-left:10px;
+						margin-left:5px;
+						border: 2px solid transparent;
+						&:hover {
+							border: 2px solid $dark-purple;
+						}
+					}
+					&:hover{
+						background-color: $dark-purple;
+						color: $white;
+					}
+				}
+			}
+		}
+		.rewards-notification.second-prompt{
+			.notification-buttons {
+				button{
+					&:nth-child(1) {
+						background-color: $dark-purple;
+						color: $white;
+					}
+					&:hover {
+						background-color: #D8D8D8;
+						border-color: #D8D8D8;
+						color: $black;
 					}
 				}
 			}
