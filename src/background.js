@@ -1104,20 +1104,23 @@ messageCenter.on('enabled', () => {
 			if (msg.origin === 'offers-core' &&
 				msg.type === 'push-offer' &&
 				msg.data.offer_data) {
+				log('RECEIVED OFFER', msg);
+
 				const unreadIdx = rewards.unreadOfferIds.indexOf(msg.data.offer_id);
 				if (unreadIdx !== -1) {
 					rewards.unreadOfferIds.splice(unreadIdx, 1);
 				}
 				rewards.storedOffers[msg.data.offer_id] = msg.data;
 				rewards.unreadOfferIds.push(msg.data.offer_id);
-
-				log('RECEIVED OFFER', msg);
 				button.update();
-				utils.getActiveTab((tab) => {
-					let tabId = 0;
-					if (tab) tabId = tab.id;
-					rewards.showHotDog(tabId, msg.data);
-				});
+
+				if (msgs.data.offer_data.ui_info.notif_type !== 'star') {
+					utils.getActiveTab((tab) => {
+						let tabId = 0;
+						if (tab) tabId = tab.id;
+						rewards.showHotDog(tabId, msg.data);
+					});
+				}
 			}
 		});
 	});
