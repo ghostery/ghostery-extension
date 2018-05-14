@@ -53,7 +53,7 @@ class Rewards {
 		const { offerId, actionId } = message;
 		const signal = {
 			origin: 'ghostery',
-			type: 'action-signal',
+			type: 'offer-action-signal',
 			data: {
 				action_id: actionId,
 				offer_id: offerId
