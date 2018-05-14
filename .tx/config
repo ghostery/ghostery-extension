@@ -2,7 +2,7 @@
 host = https://www.transifex.com
 
 [ghostery-8.messages-json]
-file_filter = _locales<lang>messages.json
+file_filter = _locales/<lang>/messages.json
 minimum_perc = 0
 source_file = _locales/en/messages.json
 source_lang = en_US
