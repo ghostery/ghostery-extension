@@ -26,6 +26,7 @@ const FREQUENCIES = { // in milliseconds
 };
 const CRITICAL_METRICS = ['install', 'install_complete', 'upgrade', 'active', 'engaged', 'uninstall'];
 const CAMPAIGN_METRICS = ['install', 'active', 'uninstall'];
+const FIRST_REWARD_METRICS = ['rewards_first_accept', 'rewards_first_reject', 'rewards_first_reject_optout', 'rewards_first_reject_optin'];
 const { METRICS_SUB_DOMAIN, EXTENSION_VERSION, BROWSER_INFO } = globals;
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const MAX_DELAYED_PINGS = 100;
@@ -130,38 +131,47 @@ class Metrics {
 				break;
 
 			// Extension Usage
-			case 'pause':
-			case 'resume':
-			case 'trust_site':
-			case 'restrict_site':
 			case 'live_scan':
+			case 'pause':
+			case 'restrict_site':
+			case 'resume':
 			case 'sign_in':
+			case 'trust_site':
 				this._sendReq(type, ['all', 'daily', 'weekly']);
 				break;
+
 			// New
-			case 'list_dash':
-			case 'history_dash':
-			case 'history_learn':
-			case 'performance_dash':
-			case 'performance_learn':
-			case 'rewards_dash':
-			case 'rewards_learn':
-			case 'premium_dash':
-			case 'premium_learn':
-			case 'antitrack_on':
-			case 'antitrack_off':
-			case 'adblock_on':
 			case 'adblock_off':
-			case 'smartblock_on':
-			case 'smartblock_off':
-			case 'pause_snooze':
-			case 'viewchange_from_simple':
-			case 'viewchange_from_detailed':
-			case 'viewchange_from_expanded':
+			case 'adblock_on':
+			case 'antitrack_off':
+			case 'antitrack_on':
 			case 'create_account_extension':
 			case 'create_account_setup':
+			case 'engaged_offer':
+			case 'history_dash':
+			case 'history_learn':
+			case 'list_dash':
+			case 'pause_snooze':
+			case 'performance_dash':
+			case 'performance_learn':
+			case 'premium_dash':
+			case 'premium_learn':
+			case 'rewards_dash':
+			case 'rewards_first_accept':
+			case 'rewards_first_reject':
+			case 'rewards_first_reject_optin':
+			case 'rewards_first_reject_optout':
+			case 'rewards_learn':
+			case 'rewards_off':
+			case 'rewards_on':
+			case 'smartblock_off':
+			case 'smartblock_on':
+			case 'viewchange_from_detailed':
+			case 'viewchange_from_expanded':
+			case 'viewchange_from_simple':
 				this._sendReq(type, ['all', 'daily', 'weekly', 'monthly']);
 				break;
+
 			// uncaught ping type
 			default:
 				log(`metrics ping() error: ping name ${type} not found`);
@@ -263,6 +273,13 @@ class Metrics {
 				`&us=${encodeURIComponent(this.utm_source)}` +
 				// Marketing campaign (Former utm_campaign)
 				`&uc=${encodeURIComponent(this.utm_campaign)}`;
+		} else if (FIRST_REWARD_METRICS.includes(type)) {
+			// metrics specific to the first reward instance
+			metrics_url +=
+				// Reward ID
+				`&rid=${encodeURIComponent()}` +
+				// Current number of rewards received
+				`&rr=${encodeURIComponent()}`;
 		}
 
 		return metrics_url;
