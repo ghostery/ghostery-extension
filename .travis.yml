@@ -1,7 +1,7 @@
-language: node_js
+language: python
 node_js:
   - "9"
-sudo: false
+sudo: required
 
 before_install:
   - npm i -g npm
@@ -13,3 +13,12 @@ script:
   - node ./tools/licenses/fetchLicenses.js
   - npm run lint
   - npm run test.unit
+
+after_success:
+  - pip install virtualenv
+  - virtualenv ~/env
+  - source ~/env/bin/activate
+  - pip install transifex-client
+#  - sudo echo $'[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = '"$TRANSIFEX_USER"$'\npassword = '"$TRANSIFEX_PASSWORD"$'\ntoken = '"$TRANSIFEX_API_TOKEN"$'\n' > ~/.transifexrc
+#  - tx push -s
+
