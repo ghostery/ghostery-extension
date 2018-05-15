@@ -254,7 +254,7 @@ class Metrics {
 			// Type of blocking selected during setup
 			`&sb=${encodeURIComponent(conf.setup_block.toString())}` +
 			// Recency, days since last active daily ping
-			`&rc=${encodeURIComponent(this._getRecency().toString())}`;
+			`&rc=${encodeURIComponent(this._getRecency(type, frequency).toString())}`;
 
 		if (CAMPAIGN_METRICS.includes(type)) {
 			// only send campaign attribution when necessary
@@ -326,8 +326,8 @@ class Metrics {
 	 *
 	 * @return {number} 	in days since the last daily active ping
 	 */
-	_getRecency() {
-		if (conf.metrics.active_daily) {
+	_getRecency(type, frequency) {
+		if (conf.metrics.active_daily && type === 'active' && frequency === 'daily') {
 			return Math.floor((Number(new Date().getTime()) - conf.metrics.active_daily) / 86400000);
 		}
 		return -1;
