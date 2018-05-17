@@ -1,15 +1,18 @@
 language: node_js
 node_js:
-  - "9"
+  - "lts/*"
 sudo: false
-
 before_install:
-  - npm i -g npm
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.6.0
+  - export PATH=$HOME/.yarn/bin:$PATH
+
+cache:
+  yarn: true
 
 install:
-  - npm ci --silent
+  - yarn install --frozen-lockfile
 
 script:
   - node ./tools/licenses/fetchLicenses.js
-  - npm run lint
-  - npm run test.unit
+  - yarn run lint
+  - yarn run test.unit
