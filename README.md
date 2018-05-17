@@ -17,25 +17,29 @@ Ghostery helps you browse smarter by giving you control over ads and tracking te
 **Edge** &ndash; [Download](https://www.microsoft.com/en-us/store/p/ghostery/9nblggh52ngz)
 
 ## Installation
+
+#### Install yarn
+**https://yarnpkg.com/en/docs/install**
+
+#### Install local npm packages
 ```sh
-# Install local npm packages
-$ npm install
+$ yarn install --frozen-lockfile
 ```
 
 ## Building
 ```sh
 # Build all sources
-$ npm run build.dev
+$ yarn run build.dev
 ```
 
 ```sh
 # Build for production
-$ npm run build.prod
+$ yarn run build.prod
 ```
 
 ```sh
 # Build and watch for changes
-$ npm run build.watch
+$ yarn run build.watch
 ```
 
 ## Enable Debugging / Logging
@@ -48,30 +52,28 @@ $ npm run build.watch
 ## Testing and Linting
 ```sh
 # Run unit tests
-$ npm run test.unit
+$ yarn run test.unit
 ```
 
 ```sh
 # Run linter over the ./app and ./src folders
-$ npm run lint
+$ yarn run lint
 ```
 
 ```sh
 # Lint a specific file
-$ npm run lint.raw -- src/utils/matcher.js
+$ yarn run lint.raw -- src/utils/matcher.js
 ```
 
 ```sh
 # Disable lint
-$ NO_LINT=true npm run build.dev
-# or
-$ npm run build.dev -- --env.nolint
+$ NO_LINT=true yarn run build.dev
 ```
 
 ## Build Docs
 ```sh
 # Build JSDoc files to ./docs
-$ npm run docs
+$ yarn run docs
 ```
 
 ## Cliqz Source Code
