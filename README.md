@@ -19,7 +19,7 @@ Ghostery helps you browse smarter by giving you control over ads and tracking te
 ## Installation
 
 #### Install yarn
-**https://yarnpkg.com/lang/en/docs/install**
+**https://yarnpkg.com/en/docs/install**
 
 #### Install local npm packages
 ```sh
