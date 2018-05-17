@@ -91,6 +91,13 @@
 			line-height: 1.5;
 		}
 	}
+	.dark-theme .tooltip-content {
+		background-color: #333333;
+		color: #ffffff;
+		&:after {
+			border-color: transparent transparent #333333 #333333;
+		}
+	}
 }
 
 .expert .sub-component.cliqz-features .g-tooltip .tooltip-content.right {
@@ -131,4 +138,3 @@
 		margin-left: 0 !important;
 	}
 }
-

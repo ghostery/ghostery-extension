@@ -19,7 +19,7 @@ import Summary from '../containers/SummaryContainer';
 import Blocking from '../containers/BlockingContainer';
 import History from './History';
 import Performance from './Performance';
-import Rewards from './Rewards';
+import Rewards from '../containers/RewardsContainer';
 import Premium from './Premium';
 /**
  * @class Implement wrapper of the detailed (expert) mode view.
@@ -63,6 +63,7 @@ class Detail extends React.Component {
 		const condensedToggleClassNames = ClassNames('condensed-toggle', {
 			condensed: this.props.is_expanded,
 		});
+		const { enable_offers, unread_offer_ids } = this.props;
 
 		return (
 			<div className="detail-wrap">
@@ -73,7 +74,7 @@ class Detail extends React.Component {
 					<Route path="/detail/performance" render={this.PerformanceComponent} />
 					<Route path="/detail/rewards" render={this.RewardsComponent} />
 					<Route path="/detail/premium" render={this.PremiumComponent} />
-					<DetailMenu />
+					<DetailMenu hasReward={enable_offers && unread_offer_ids.length > 0} />
 				</div>
 			</div>
 		);

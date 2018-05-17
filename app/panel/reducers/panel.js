@@ -23,7 +23,11 @@ import {
 	TOGGLE_EXPANDED,
 	TOGGLE_EXPERT,
 	TOGGLE_CLIQZ_FEATURE,
-	UPDATE_NOTIFICATION_STATUS
+	UPDATE_NOTIFICATION_STATUS,
+	TOGGLE_CHECKBOX,
+	TOGGLE_OFFERS_ENABLED,
+	REMOVE_OFFER,
+	SET_OFFER_READ
 } from '../constants/constants';
 import { sendMessage, sendMessageInPromise } from '../utils/msg';
 
@@ -141,6 +145,27 @@ export default (state = initialState, action) => {
 			const updated = _updateNotificationStatus(state, action);
 			return Object.assign({}, state, updated);
 		}
+		case TOGGLE_CHECKBOX: {
+			if (action.data.event === 'enable_offers') {
+				const enable_offers = action.data.checked;
+				return Object.assign({}, state, { enable_offers });
+			}
+			return state;
+		}
+		case TOGGLE_OFFERS_ENABLED: {
+			const enable_offers = action.data.enabled;
+			return Object.assign({}, state, { enable_offers });
+		}
+		case REMOVE_OFFER:
+		case SET_OFFER_READ: {
+			const unread_offer_ids = state.unread_offer_ids.slice();
+			const idx = unread_offer_ids.indexOf(action.data.id);
+			if (idx !== -1) {
+				unread_offer_ids.splice(idx, 1);
+				return Object.assign({}, state, { unread_offer_ids });
+			}
+			return state;
+		}
 		default: return state;
 	}
 };
@@ -202,7 +227,7 @@ const _showNotification = (state, action) => {
 			updated_notificationShown = false;
 		}
 
-		updated_notificationClasses = msg.classes;
+		updated_notificationClasses = msg.classes || '';
 		if (msg.filter === 'tooltip') {
 			updated_needsReload.changes = {};
 		}

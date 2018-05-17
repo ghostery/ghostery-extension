@@ -756,8 +756,20 @@
 	"panel_detail_rewards_title": {
 		"message": "Ghostery Rewards"
 	},
-	"panel_detail_rewards_text": {
+	"panel_detail_rewards_coming_soon": {
 		"message": "Feature coming soon."
+	},
+	"panel_detail_rewards_cliqz_text": {
+		"message": "Feature already active in the Cliqz MyOffrz control panel."
+	},
+	"panel_detail_rewards_loading": {
+		"message": "Loading Rewards..."
+	},
+	"panel_detail_rewards_none_found": {
+		"message": "No Rewards found"
+	},
+	"panel_detail_rewards_off": {
+		"message": "Ghostery Rewards is OFF"
 	},
 	"panel_detail_premium_title": {
 		"message": "Ghostery Premium"
@@ -1599,5 +1611,89 @@
 	},
 	"enable_when_not_scanned": {
 		"message": "To use this function, navigate to another page."
+	},
+	"rewards_new_text": {
+		"message": "new Reward was discovered"
+	},
+	"rewards_copy_code": {
+		"message": "copy code"
+	},
+	"rewards_code_copied": {
+		"message": "code copied"
+	},
+	"rewards_expires_in": {
+		"description": "example: Expires in 8 minutes. TYPE will be rewards_expires_in_TYPE listed below.",
+		"message": "Expires in $COUNT$ $TYPE$",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			},
+			"type": {
+				"content": "$2"
+			}
+		}
+	},
+	"rewards_expires_in_days": {
+		"message": "days"
+	},
+	"rewards_expires_in_hours": {
+		"message": "hours"
+	},
+	"rewards_expires_in_mins": {
+		"message": "minutes"
+	},
+	"rewards_expires_in_secs": {
+		"message": "seconds"
+	},
+	"rewards_terms_conditions": {
+		"message": "Terms & Conditions"
+	},
+	"rewards_disable": {
+		"message": "Turn off Ghostery rewards"
+	},
+	"rewards_disable_notification": {
+		"message": "Ghostery Rewards is now off. You can always turn it on in Ghostery Settings or in the Ghostery Dashboard."
+	},
+	"rewards_disable_confirm": {
+		"message": "OK, got it."
+	},
+	"rewards_about": {
+		"message": "About Ghostery Rewards"
+	},
+	"rewards_settings": {
+		"message": "Ghostery Rewards Settings"
+	},
+	"rewards_delete": {
+		"message": "Delete this reward"
+	},
+	"rewards_first_prompt": {
+		"message": "Would you like to continue to Ghostery Rewards?"
+	},
+	"rewards_second_prompt": {
+		"message": "Are you sure you would like to opt-out of Ghostery Rewards?"
+	},
+	"rewards_yes": {
+		"message": "yes"
+	},
+	"rewards_no": {
+		"message": "no"
+	},
+	"rewards_on": {
+		"message": "on"
+	},
+	"rewards_off": {
+		"message": "off"
+	},
+	"rewards_on_toast_notification": {
+		"message": "Ghostery Rewards is ON"
+	},
+	"rewards_off_toast_notification": {
+		"message": "Ghostery Rewards is OFF"
+	},
+	"rewards_code_copied_toast_notification": {
+		"message": "Rewards code copied!"
+	},
+	"rewards_learn_more": {
+		"message": "Learn More"
 	}
 }

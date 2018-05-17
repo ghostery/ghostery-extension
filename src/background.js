@@ -20,13 +20,13 @@
  */
 import _ from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
-import CLIQZ from 'browser-core';
+import cliqz from './classes/Cliqz';
 // object classes
-import Button from './classes/BrowserButton';
 import Events from './classes/EventHandlers';
 import PanelData from './classes/PanelData';
 // static classes
 import bugDb from './classes/BugDb';
+import button from './classes/BrowserButton';
 import c2pDb from './classes/Click2PlayDb';
 import cmp from './classes/CMP';
 import abtest from './classes/ABTest';
@@ -39,6 +39,7 @@ import globals from './classes/Globals';
 import surrogatedb from './classes/SurrogateDb';
 import tabInfo from './classes/TabInfo';
 import metrics from './classes/Metrics';
+import rewards from './classes/Rewards';
 // utilities
 import * as accounts from './utils/accounts';
 import { allowAllwaysC2P } from './utils/click2play';
@@ -46,22 +47,20 @@ import * as common from './utils/common';
 import * as utils from './utils/utils';
 
 // class instantiation
-const button = new Button();
 const events = new Events();
-
 const panelData = new PanelData();
-const cliqz = new (CLIQZ.App)();
 // function shortcuts
 const { log } = common;
 const { sendMessage } = utils;
 const { onMessage } = chrome.runtime;
 // simple consts
 const {
-	GHOSTERY_DOMAIN, CDN_SUB_DOMAIN, BROWSER_INFO, IS_CLIQZ
+	GHOSTERY_DOMAIN, CDN_SUB_DOMAIN, BROWSER_INFO, IS_CLIQZ, DEBUG
 } = globals;
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const VERSION_CHECK_URL = `https://${CDN_SUB_DOMAIN}.ghostery.com/update/version`;
 const OFFERS_HANDLER_ID = 'ghostery';
+const REAL_ESTATE_ID = 'ghostery';
 const onBeforeRequest = events.onBeforeRequest.bind(events);
 const onHeadersReceived = events.onHeadersReceived.bind(events);
 
@@ -87,7 +86,23 @@ function setCliqzModuleEnabled(module, enabled) {
 	cliqz.disableModule(module.name);
 	return Promise.resolve();
 }
+/**
+ * Register/unregister real estate with Offers core module.
+ * @memberOf Background
+ * @param  {Object} offersModule offers module
+ * @param  {Boolean} register    true - register, false - unregister
+ */
+function registerWithOffers(offersModule, register) {
+	if (!offersModule.isEnabled) {
+		return Promise.resolve();
+	}
 
+	log('REGISTER WITH OFFERS CALLED', register);
+	return offersModule.action(register ? 'registerRealEstate' : 'unregisterRealEstate', { realEstateID: REAL_ESTATE_ID })
+		.catch((e) => {
+			log(`FAILED TO ${register ? 'REGISTER' : 'UNREGISTER'} REAL ESTATE WITH OFFERS CORE`);
+		});
+}
 /**
  * Check and fetch (if needed) a new tracker library every 12 hours
  * @memberOf Background
@@ -374,7 +389,7 @@ function handleClick2Play(name, message, tab_id, callback) {
  *
  * @param  {string} 	name 		message name
  * @param  {Object} 	message 	message data
- * @param  {number} 		tab_id 		tab id
+ * @param  {number} 	tab_id 		tab id
  * @param  {function} 	callback 	function to call (at most once) when you have a response
  */
 function handleBlockedRedirect(name, message, tab_id, callback) {
@@ -397,7 +412,40 @@ function handleBlockedRedirect(name, message, tab_id, callback) {
 }
 
 /**
- * Handle messages sent from dist/settings_redirect.js script.
+ * Handle messages sent from dist/rewards.js content script.
+ * @memberOf Background
+ *
+ * @param  {string} 	name 		message name
+ * @param  {Object} 	message 	message data
+ * @param  {number} 	tab_id 		tab id
+ * @param  {function} 	callback 	function to call (at most once) when you have a response
+ */
+function handleRewards(name, message, tab_id, callback) {
+	switch (name) {
+		case 'rewardSignal':
+			rewards.sendSignal(message);
+			break;
+		case 'rewardSeen':
+			rewards.markRewardRead(message.offerId);
+			button.update();
+			break;
+		case 'deleteReward':
+			rewards.deleteReward(message.offerId);
+			button.update();
+			break;
+		case 'rewardsDisabled':
+			conf.enable_offers = false;
+			break;
+		case 'rewardsPromptAccepted':
+			conf.rewards_accepted = true;
+			break;
+		default:
+			break;
+	}
+}
+
+/**
+ * Handle messages sent from dist/settings_redirect.js script
  * of the settings_redirect.html local page. Used on @EDGE and Chrome.
  * @memberOf Background
  *
@@ -532,6 +580,8 @@ function onMessageHandler(request, sender, callback) {
 		return handleClick2Play(name, message, tab_id, callback);
 	} else if (origin === 'blocked_redirect') {
 		return handleBlockedRedirect(name, message, tab_id, callback);
+	} else if (origin === 'rewards' || origin === 'rewardsPanel') {
+		return handleRewards(name, message, tab_id, callback);
 	}
 
 	// HANDLE UNIVERSAL EVENTS HERE (NO ORIGIN LISTED ABOVE)
@@ -780,18 +830,22 @@ function initializeDispatcher() {
 	dispatcher.on('conf.save.enable_human_web', (enableHumanWeb) => {
 		if (!IS_EDGE && !IS_CLIQZ) {
 			setCliqzModuleEnabled(humanweb, enableHumanWeb).then((data) => {
-				// We don't want to affect Offers here
-				setupABTestAntitracking();
+				setupABTest();
 			});
 		} else {
 			setCliqzModuleEnabled(humanweb, false);
 		}
 	});
 	dispatcher.on('conf.save.enable_offers', (enableOffers) => {
+		button.update();
 		if (!IS_EDGE && !IS_CLIQZ) {
+			if (!enableOffers) {
+				registerWithOffers(offers, enableOffers);
+			}
 			setCliqzModuleEnabled(offers, enableOffers);
 		} else {
 			setCliqzModuleEnabled(offers, false);
+			registerWithOffers(offers, false);
 		}
 	});
 	dispatcher.on('conf.save.enable_anti_tracking', (enableAntitracking) => {
@@ -850,7 +904,7 @@ function getAntitrackingTestConfig() {
  * Adjust antitracking parameters based on the current state
  * of ABTest and availability of Human Web.
  */
-function setupABTestAntitracking() {
+function setupABTest() {
 	const antitrackingConfig = getAntitrackingTestConfig();
 	if (antitrackingConfig && conf.enable_anti_tracking) {
 		if (!conf.enable_human_web) {
@@ -863,22 +917,6 @@ function setupABTestAntitracking() {
 			antitracking.action('setConfigOption', opt, val);
 		});
 	}
-}
-/**
- * Adjust offers based on the current state of ABTest.
- */
-function setupABTestOffers() {
-	// enable offers ONLY if ABTest is true and user has left it enabled.
-	conf.enable_offers = (abtest.hasTest('offers') && conf.enable_offers);
-}
-/**
- * Setup Antitracking and Offers based on the results
- * returned from the abtest endpoint.
- * @memberOf Background
- */
-function setupABTests() {
-	setupABTestAntitracking();
-	setupABTestOffers();
 }
 
 /**
@@ -1013,10 +1051,23 @@ adblocker.on('enabled', () => {
 offers.on('enabled', () => {
 	offers.isReady().then(() => {
 		log('IN OFFERS ON ENABLED', offers, messageCenter);
-		setCliqzModuleEnabled(messageCenter, true);
+
+		if (DEBUG) {
+			offers.action('setConfiguration', {
+				config_location: 'de',
+				triggersBE: 'http://offers-api-stage.clyqz.com:81',
+				showConsoleLogs: true,
+				offersLogsEnabled: true,
+				offersDevFlag: true,
+				offersTelemetryFreq: '10'
+			});
+		}
+		registerWithOffers(offers, true)
+			.then(() => {
+				setCliqzModuleEnabled(messageCenter, true);
+			});
 	});
-});
-/**
+});/**
  * Set listener for 'enabled' event for Offers module.
  * It registers message handler for messages with the offers.
  * This handler adds incoming message data to the array of
@@ -1049,27 +1100,27 @@ messageCenter.on('enabled', () => {
 			 *  }
 			 * }
 			*/
-			log('GOT OFFER', msg);
 			// first check that the message is from core and is the one we expect
 			if (msg.origin === 'offers-core' &&
 				msg.type === 'push-offer' &&
 				msg.data.offer_data) {
-				const { data } = msg;
-				const cmpMsg = {
-					id: data.offer_data.display_id,
-					Message: data.offer_data.ui_info.template_data.title,
-					Link: data.offer_data.ui_info.template_data.call_to_action.url,
-					LinkText: data.offer_data.ui_info.template_data.call_to_action.text,
-					type: 'offers',
-					origin: 'cliqz',
-					data: {
-						offer_info: {
-							offer_id: data.offer_data.offer_id,
-							offer_urls: data.offer_data.rule_info.url
-						}
-					}
-				};
-				cmp.CMP_DATA.push(cmpMsg);
+				log('RECEIVED OFFER', msg);
+
+				const unreadIdx = rewards.unreadOfferIds.indexOf(msg.data.offer_id);
+				if (unreadIdx !== -1) {
+					rewards.unreadOfferIds.splice(unreadIdx, 1);
+				}
+				rewards.storedOffers[msg.data.offer_id] = msg.data;
+				rewards.unreadOfferIds.push(msg.data.offer_id);
+				button.update();
+
+				if (msg.data.offer_data.ui_info.notif_type !== 'star') {
+					utils.getActiveTab((tab) => {
+						let tabId = 0;
+						if (tab) tabId = tab.id;
+						rewards.showHotDog(tabId, msg.data);
+					});
+				}
 			}
 		});
 	});
@@ -1323,14 +1374,14 @@ function initializeGhosteryModules() {
 			if (globals.JUST_UPGRADED_FROM_7) {
 				conf.enable_ad_block = false;
 				conf.enable_anti_tracking = false;
+				conf.enable_offers = false;
 				conf.enable_human_web = (IS_EDGE || IS_CLIQZ) ? false : conf.enable_human_web;
 			} else {
 				conf.enable_ad_block = IS_CLIQZ ? false : !adblocker.isDisabled;
 				conf.enable_anti_tracking = IS_CLIQZ ? false : !antitracking.isDisabled;
 				conf.enable_human_web = (IS_EDGE || IS_CLIQZ) ? false : !humanweb.isDisabled;
+				conf.enable_offers = (IS_EDGE || IS_CLIQZ) ? false : !offers.isDisabled;
 			}
-			// sync conf from module status
-			conf.enable_offers = (IS_EDGE || IS_CLIQZ) ? false : !offers.isDisabled;
 		})).catch((e) => {
 		log('cliqzStartup error', e);
 	});
@@ -1347,7 +1398,7 @@ function initializeGhosteryModules() {
 		if (!IS_EDGE && !IS_CLIQZ) {
 			// auto-fetch human web offer
 			abtest.fetch().then(() => {
-				setupABTests();
+				setupABTest();
 			}).catch((err) => {
 				log('Unable to reach abtest server');
 			});
@@ -1357,7 +1408,7 @@ function initializeGhosteryModules() {
 	cliqzStartup.then(() => {
 		if (!IS_EDGE && !IS_CLIQZ) {
 			abtest.fetch().then(() => {
-				setupABTests();
+				setupABTest();
 			}).catch((err) => {
 				log('cliqzStartup abtest fetch error', err);
 			});

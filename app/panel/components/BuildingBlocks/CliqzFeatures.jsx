@@ -17,7 +17,7 @@ import Tooltip from '../Tooltip';
 
 /**
  * @class Implements buttons to render and toggle for Cliqz's features on/off.
- * @memberof PanelClasses
+ * @memberof PanelBuildingBlocks
  */
 class CliqzFeatures extends React.Component {
 	constructor(props) {

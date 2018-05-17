@@ -17,6 +17,7 @@ import { combineReducers } from 'redux';
 import panel from './panel';
 import summary from './summary';
 import detail from './detail';
+import rewards from './rewards';
 import blocking from './blocking';
 import login from './login';
 import createAccount from './createAccount';
@@ -34,6 +35,7 @@ const Reducers = combineReducers({
 	panel,
 	summary,
 	detail,
+	rewards,
 	blocking,
 	login,
 	createAccount,

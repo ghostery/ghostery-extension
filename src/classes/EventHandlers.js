@@ -16,7 +16,7 @@
 
 import _ from 'underscore';
 import bugDb from './BugDb';
-import Button from './BrowserButton';
+import button from './BrowserButton';
 import c2pDb from './Click2PlayDb';
 import cmp from './CMP';
 import conf from './Conf';
@@ -26,6 +26,7 @@ import latency from './Latency';
 import Policy, { BLOCK_REASON_SS_UNBLOCKED, BLOCK_REASON_C2P_ALLOWED_THROUGH } from './Policy';
 import PolicySmartBlock from './PolicySmartBlock';
 import PurpleBox from './PurpleBox';
+import rewards from './Rewards';
 import surrogatedb from './SurrogateDb';
 import compDb from './CompatibilityDb';
 import tabInfo from './TabInfo';
@@ -34,7 +35,6 @@ import { log } from '../utils/common';
 import { isBug } from '../utils/matcher';
 import * as utils from '../utils/utils';
 
-const button = new Button();
 const RequestsMap = new Map();
 /**
  * This class is a collection of handlers for
@@ -43,7 +43,6 @@ const RequestsMap = new Map();
  */
 class EventHandlers {
 	constructor() {
-		this.button = new Button();
 		this.policy = new Policy();
 		this.policySmartBlock = new PolicySmartBlock();
 		this.purplebox = new PurpleBox();
@@ -159,7 +158,7 @@ class EventHandlers {
 			// we look for a cliqz offer which does not have urls specified (meaning good for any site)
 			// All Cliqz offers have Dismiss === 1, so the found one is injected and removed.
 			// Lastly we look for non-cliqz offers (classic CMPs)
-			if (cmp.CMP_DATA.length !== 0) {
+			if (!rewards.currentOffer && cmp.CMP_DATA.length !== 0) {
 				const CMPS = cmp.CMP_DATA;
 				const numOffers = CMPS.length;
 				let cliqzOffer;

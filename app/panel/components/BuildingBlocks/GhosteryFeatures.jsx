@@ -17,7 +17,7 @@ import Tooltip from '../Tooltip';
 
 /**
  * @class Implements buttons to render and toggle for Ghostery's features on/off.
- * @memberof PanelClasses
+ * @memberof PanelBuildingBlocks
  */
 class GhosteryFeatures extends React.Component {
 	constructor(props) {
