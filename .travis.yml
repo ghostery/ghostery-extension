@@ -1,15 +1,15 @@
 language: node_js
 node_js:
-  - "9"
+  - "lts/carbon"
 sudo: false
 
-before_install:
-  - npm i -g npm
+cache:
+  yarn: true
 
 install:
-  - npm ci --silent
+  - yarn install --frozen-lockfile
 
 script:
   - node ./tools/licenses/fetchLicenses.js
-  - npm run lint
-  - npm run test.unit
+  - yarn run lint
+  - yarn run test.unit
