@@ -1693,9 +1693,9 @@ brorand@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
 
-"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.26/1.26.2.tgz?version=1":
-  version "1.26.2"
-  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.26/1.26.2.tgz?version=1#9b44a9a56337ff227d200ab31df3a95997eb2313"
+"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.26/1.26.3.tgz?v=1":
+  version "1.26.3"
+  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.26/1.26.3.tgz?v=1#f76a9faab599fd1bacd811c17e74f13ce2c7520c"
   dependencies:
     "@cliqz-oss/dexie" "2.0.3"
     "@cliqz-oss/pouchdb" "6.3.4-security-error-fix-2"
@@ -8003,6 +8003,10 @@ react-router@^4.2.0:
     path-to-regexp "^1.7.0"
     prop-types "^15.5.4"
     warning "^3.0.0"
+
+react-shadow@^16.2.0:
+  version "16.2.0"
+  resolved "https://registry.yarnpkg.com/react-shadow/-/react-shadow-16.2.0.tgz#5655121ee7443e60b407ef3b1eb23a67233c787e"
 
 react-test-renderer@^16.0.0-0, react-test-renderer@^16.2.0:
   version "16.3.2"
