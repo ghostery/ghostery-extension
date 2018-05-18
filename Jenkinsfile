@@ -25,7 +25,7 @@ node('docker') {
             withCache {
                 sh 'rm -rf build'
                 if (params.WITH_CLIQZ_MASTER) {
-                    sh 'npm install --save https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/master/latest.tgz'
+                    sh 'yarn add https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/master/latest.tgz'
                 }
                 // make browser-core noisy
                 sh 'sed -i \'s/global.__DEV__/true/1\' node_modules/browser-core/build/core/console.js'
