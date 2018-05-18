@@ -246,6 +246,7 @@ class PanelData {
 			enable_offers: this._confData.get('enable_offers'),
 			rewards: rewards.storedOffers,
 			unread_offer_ids: rewards.unreadOfferIds,
+			total_offers_seen: rewards.totalOffersSeen,
 		};
 		return this._rewardsView;
 	}
