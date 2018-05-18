@@ -430,6 +430,7 @@ function handleRewards(name, message, tab_id, callback) {
 			button.update();
 			break;
 		case 'deleteReward':
+			rewards.markRewardRead(message.offerId);
 			rewards.deleteReward(message.offerId);
 			button.update();
 			break;
