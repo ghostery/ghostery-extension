@@ -440,6 +440,9 @@ function handleRewards(name, message, tab_id, callback) {
 		case 'rewardsPromptAccepted':
 			conf.rewards_accepted = true;
 			break;
+		case 'ping':
+			metrics.ping(message);
+			break;
 		default:
 			break;
 	}
