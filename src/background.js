@@ -430,6 +430,7 @@ function handleRewards(name, message, tab_id, callback) {
 			button.update();
 			break;
 		case 'deleteReward':
+			rewards.markRewardRead(message.offerId);
 			rewards.deleteReward(message.offerId);
 			button.update();
 			break;
@@ -438,6 +439,9 @@ function handleRewards(name, message, tab_id, callback) {
 			break;
 		case 'rewardsPromptAccepted':
 			conf.rewards_accepted = true;
+			break;
+		case 'ping':
+			metrics.ping(message);
 			break;
 		default:
 			break;

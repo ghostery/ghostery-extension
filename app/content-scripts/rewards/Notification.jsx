@@ -28,11 +28,11 @@ class Notification extends Component {
 		this.closeNotification = this.closeNotification.bind(this);
 	}
 
-	closeNotification(confirm = null) {
+	closeNotification(confirm) {
 		this.setState({
 			closed: true
 		});
-		if (typeof this.props.data.closeCallback === 'function' && confirm !== null) {
+		if (typeof this.props.data.closeCallback === 'function') {
 			this.props.data.closeCallback(confirm);
 		}
 	}
@@ -67,9 +67,7 @@ class Notification extends Component {
 											target="_blank"
 											onClick={() => {
 												if (this.props.data.textLink.callback) {
-													// this.props.data.textLink.callback();
-												} else {
-													// this.props.data.closeCallback();
+													this.props.data.textLink.callback();
 												}
 											}}
 										>

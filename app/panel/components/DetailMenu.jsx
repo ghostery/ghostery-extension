@@ -24,14 +24,8 @@ class DetailMenu extends React.Component {
 		switch (itemName) {
 			case 'showBlocking':
 				return 'list_dash';
-			case 'showHistory':
-				return 'history_dash';
-			case 'showPerformance':
-				return 'performance_dash';
 			case 'showRewards':
 				return 'rewards_dash';
-			case 'showPremium':
-				return 'premium_dash';
 			default:
 				return '';
 		}
@@ -43,10 +37,7 @@ class DetailMenu extends React.Component {
 		this.state = {
 			menu: {
 				showBlocking: true,
-				showHistory: false,
-				showPerformance: false,
 				showRewards: false,
-				showPremium: false,
 			},
 		};
 

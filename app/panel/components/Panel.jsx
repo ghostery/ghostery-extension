@@ -49,6 +49,10 @@ class Panel extends React.Component {
 					reload: true,
 				});
 			}
+
+			if (data.enable_offers && data.unread_offer_ids.length > 0) {
+				sendMessage('ping', 'engaged_offer');
+			}
 		});
 	}
 

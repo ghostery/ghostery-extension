@@ -19,7 +19,7 @@ import conf from './Conf';
 import tabInfo from './TabInfo';
 import Policy from './Policy';
 import globals from './Globals';
-import { log } from '../utils/common';
+import { log, prefsGet, prefsSet } from '../utils/common';
 import { sendMessage, injectScript } from '../utils/utils';
 import * as accounts from '../utils/accounts';
 
@@ -31,22 +31,22 @@ const t = chrome.i18n.getMessage;
  */
 class Rewards {
 	constructor() {
-		this.storedOffers = {};
-		this.unreadOfferIds = [];
+		this.getStoredOffers();
 		this.currentOffer = null;
 		this.ports = new Map();
 		this.channelsSupported = (typeof chrome.runtime.onConnect === 'object');
 	}
 
 	deleteReward(offerId) {
-		this.markRewardRead(offerId);
 		delete this.storedOffers[offerId];
 		// @TODO send signal?
+		this.updateStoredOffers();
 	}
 
 	markRewardRead(offerId) {
 		const rewardIdx = this.unreadOfferIds.indexOf(offerId);
 		this.unreadOfferIds.splice(rewardIdx, 1);
+		this.updateStoredOffers();
 	}
 
 	sendSignal(message) {
@@ -62,7 +62,24 @@ class Rewards {
 		cliqz.modules['offers-v2'].background.actions.processRealEstateMessage(signal);
 	}
 
+	getStoredOffers() {
+		return prefsGet('storedOffers', 'unreadOfferIds', 'totalOffersSeen')
+			.then((response) => {
+				this.storedOffers = response.storedOffers || {};
+				this.unreadOfferIds = response.unreadOfferIds || [];
+				this.totalOffersSeen = response.totalOffersSeen || 0;
+			});
+	}
+
+	updateStoredOffers() {
+		prefsSet({ storedOffers: this.storedOffers });
+		prefsSet({ unreadOfferIds: this.unreadOfferIds }).then(() => { button.update(); });
+	}
+
 	showHotDog(tab_id, offer) {
+		this.updateStoredOffers();
+		this.totalOffersSeen++;
+		prefsSet({ totalOffersSeen: this.totalOffersSeen });
 		this.currentOffer = offer;
 		const tab = tabInfo.getTabInfo(tab_id);
 

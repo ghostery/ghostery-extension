@@ -67,7 +67,10 @@ class OfferCard extends Component {
 				textLink: {
 					href: 'https://www.ghostery.com/faqs',
 					text: t('rewards_learn_more'),
-					callback: () => this.sendSignal('offer_first_learn')
+					callback: () => {
+						this.sendSignal('offer_first_learn');
+						sendMessage('ping', 'rewards_learn');
+					},
 				},
 				closeCallback: (option) => { this.handlePrompt(1, option); },
 			},
@@ -83,10 +86,11 @@ class OfferCard extends Component {
 				buttons: false,
 				message: t('rewards_disable_notification'),
 				textLink: {
-					text: t('rewards_disable_confirm')
+					text: t('rewards_disable_confirm'),
+					callback: this.closeOfferCard,
 				},
 				closeCallback: this.closeOfferCard,
-			}
+			},
 		];
 
 		const { reward } = props;
@@ -149,6 +153,7 @@ class OfferCard extends Component {
 
 	disableRewards() {
 		this.sendSignal('rewards_off');
+		sendMessage('ping', 'rewards_off');
 		this.messageBackground('rewardsDisabled');
 	}
 
@@ -163,20 +168,24 @@ class OfferCard extends Component {
 		// @TODO update user settings
 		if (promptNumber === 1) {
 			if (!option) {
+				sendMessage('ping', 'rewards_first_reject');
 				this.setState({
 					showPrompt: 2
 				});
 				return;
 			}
 			this.sendSignal('offer_first_optin');
+			sendMessage('ping', 'rewards_first_accept');
 		} else if (promptNumber === 2) {
 			if (option) {
 				this.sendSignal('offer_first_optout');
+				sendMessage('ping', 'rewards_first_reject_optout');
 				this.disableRewards();
 				this.closeOfferCard();
 				return;
 			}
 			this.sendSignal('offer_first_optlater');
+			sendMessage('ping', 'rewards_first_reject_optin');
 		}
 		this.setState({
 			showPrompt: false
