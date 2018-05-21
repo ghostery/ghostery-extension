@@ -14,6 +14,7 @@
 import React, { Component } from 'react';
 import { debounce } from 'underscore';
 import { Route } from 'react-router-dom';
+import { sendMessage } from '../utils/msg';
 import SettingsMenu from './Settings/SettingsMenu';
 import GlobalBlocking from './Settings/GlobalBlocking';
 import TrustAndRestrict from './Settings/TrustAndRestrict';
@@ -67,6 +68,7 @@ class Settings extends React.Component {
 	toggleCheckbox(event) {
 		if (event.currentTarget.name === 'enable_offers') {
 			this.props.actions.sendSignal(event.currentTarget.checked ? 'rewards_off' : 'rewards_on');
+			sendMessage('ping', !event.currentTarget.checked ? 'rewards_off' : 'rewards_on');
 		}
 		this.props.actions.toggleCheckbox({
 			event: event.currentTarget.name,

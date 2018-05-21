@@ -115,6 +115,7 @@ class Rewards extends React.Component {
 		});
 		this.props.actions.toggleOffersEnabled(!enable_offers);
 		this.props.actions.sendSignal(enable_offers ? 'rewards_off' : 'rewards_on');
+		sendMessage('ping', enable_offers ? 'rewards_off' : 'rewards_on');
 	}
 
 	/**

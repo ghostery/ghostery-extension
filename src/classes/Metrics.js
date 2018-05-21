@@ -16,6 +16,7 @@ import conf from './Conf';
 import { log, prefsSet, prefsGet } from '../utils/common';
 import { processUrlQuery } from '../utils/utils';
 import abtest from './ABTest';
+import rewards from './Rewards';
 
 // CONSTANTS
 const FREQUENCIES = { // in milliseconds
@@ -26,7 +27,7 @@ const FREQUENCIES = { // in milliseconds
 };
 const CRITICAL_METRICS = ['install', 'install_complete', 'upgrade', 'active', 'engaged', 'uninstall'];
 const CAMPAIGN_METRICS = ['install', 'active', 'uninstall'];
-const FIRST_REWARD_METRICS = ['rewards_first_accept', 'rewards_first_reject', 'rewards_first_reject_optout', 'rewards_first_reject_optin'];
+const FIRST_REWARD_METRICS = ['rewards_first_accept', 'rewards_first_reject', 'rewards_first_reject_optin', 'rewards_first_reject_optout', 'rewards_learn'];
 const { METRICS_SUB_DOMAIN, EXTENSION_VERSION, BROWSER_INFO } = globals;
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const MAX_DELAYED_PINGS = 100;
@@ -264,7 +265,9 @@ class Metrics {
 			// Type of blocking selected during setup
 			`&sb=${encodeURIComponent(conf.setup_block.toString())}` +
 			// Recency, days since last active daily ping
-			`&rc=${encodeURIComponent(this._getRecency(type, frequency).toString())}`;
+			`&rc=${encodeURIComponent(this._getRecency(type, frequency).toString())}` +
+			// Current number of rewards received
+			`&rr=${encodeURIComponent(this._getRewardsCount().toString())}`;
 
 		if (CAMPAIGN_METRICS.includes(type)) {
 			// only send campaign attribution when necessary
@@ -277,9 +280,7 @@ class Metrics {
 			// metrics specific to the first reward instance
 			metrics_url +=
 				// Reward ID
-				`&rid=${encodeURIComponent()}` +
-				// Current number of rewards received
-				`&rr=${encodeURIComponent()}`;
+				`&rid=${encodeURIComponent(this._getRewardId().toString())}`;
 		}
 
 		return metrics_url;
@@ -348,6 +349,35 @@ class Metrics {
 			return Math.floor((Number(new Date().getTime()) - conf.metrics.active_daily) / 86400000);
 		}
 		return -1;
+	}
+	/**
+	 * Get the number of Rewards shown to the user.
+	 *
+	 * @private
+	 *
+	 * @return {string} 	number of rewards, grouped into ranges.
+	 */
+	_getRewardsCount() {
+		const numShown = rewards.totalOffersSeen;
+		if (numShown >= 6) {
+			return '6+';
+		} else if (numShown >= 2) {
+			return '2-5';
+		} else if (numShown === 1) {
+			return '1';
+		}
+		return '0';
+	}
+	/**
+	 * Get the current Reward Id.
+	 *
+	 * @private
+	 *
+	 * @return {string} 	the current Reward Id
+	 */
+	_getRewardId() {
+		const currentOffer = rewards.currentOffer || { offer_id: 'no_id' };
+		return currentOffer.offer_id;
 	}
 	/**
 	 * Calculate remaining scheduled time for a ping
