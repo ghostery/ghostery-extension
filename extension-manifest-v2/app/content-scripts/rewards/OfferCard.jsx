@@ -65,7 +65,7 @@ class OfferCard extends Component {
 				buttons: true,
 				message: t('rewards_first_prompt'),
 				textLink: {
-					href: 'https://www.ghostery.com/faqs',
+					href: 'https://www.ghostery.com/faqs/what-is-ghostery-rewards/',
 					text: t('rewards_learn_more'),
 					callback: () => {
 						this.sendSignal('offer_first_learn');
