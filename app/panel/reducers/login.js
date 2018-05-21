@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { LOGIN_SUCCESS, LOGIN_FAILED } from '../constants/constants';
+import { LOGIN_SUCCESS, LOGIN_FAILED, LOGOUT } from '../constants/constants';
 
 const initialState = {
 	loginSuccess: false,
@@ -32,6 +32,9 @@ export default (state = initialState, action) => {
 		}
 		case LOGIN_FAILED: {
 			return Object.assign({}, state, { loginFailed: true });
+		}
+		case LOGOUT: {
+			return Object.assign({}, state, initialState);
 		}
 		default: return state;
 	}
