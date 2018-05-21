@@ -26,6 +26,13 @@ Ghostery helps you browse smarter by giving you control over ads and tracking te
 $ yarn install --frozen-lockfile
 ```
 
+#### Upgrade packages
+```sh
+# Upgrade packages according to package.json version range
+# https://yarnpkg.com/en/docs/cli/upgrade/
+yarn upgrade
+```
+
 ## Building
 ```sh
 # Build all sources
