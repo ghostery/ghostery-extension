@@ -26,6 +26,11 @@ chrome.runtime.getManifest.returns({
 	debug: true
 });
 
+// Create Mock for the Cliqz dependencies
+jest.mock('browser-core', () => {
+	return { App: class App {} }
+});
+
 // Initialization for Globals.js
 Object.defineProperty(navigator, 'userAgent', {
 	value: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36",
