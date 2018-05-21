@@ -207,14 +207,14 @@
 			.reward-content-detail {
 				display: flex;
 				flex-direction: column;
-				width: 195px;
+				width: 200px;
 				height: 131px;
 				color: $tundora;
 
 				.reward-benefit {
 					margin-top: 10px;
 					margin-bottom: 12px;
-					font-size: 34px;
+					font-size: 25px;
 					line-height: 26px;
 					white-space: nowrap;
 					// text-overflow: ellipsis;
@@ -224,8 +224,10 @@
 				}
 
 				.reward-headline {
-					font-size: 16px;
-					line-height: 16px;
+					font-size: 13px;
+					font-weight: 500;
+					line-height: 13px;
+					line-height:  15px;
 				}
 
 				.reward-description {
