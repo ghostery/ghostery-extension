@@ -45,14 +45,8 @@ const initialState = {
 	notificationFilter: '', // compatibility/slow tracker/success message
 	notificationText: '',
 	notificationShown: false,
-	reload_banner_status: {
-		dismissals: [],
-		show: true,
-	},
-	trackers_banner_status: {
-		dismissals: [],
-		show: true,
-	},
+	reload_banner_status: true,
+	trackers_banner_status: true,
 };
 /**
  * Default export for panel view reducer. Handles actions
@@ -181,9 +175,6 @@ export default (state = initialState, action) => {
 const _showNotification = (state, action) => {
 	const msg = action.data;
 	const { reload } = msg;
-	const trackersBannerStatus = Object.assign({ ...state.trackers_banner_status, dismissals: [...state.trackers_banner_status.dismissals] });
-	const reloadBannerStatus = Object.assign({ ...state.reload_banner_status, dismissals: [...state.reload_banner_status.dismissals] });
-	const nowTime = Number(new Date().getTime());
 
 	let updated_notificationClasses = state.notificationClasses;
 	let updated_notificationShown = state.notificationShown;
@@ -212,7 +203,7 @@ const _showNotification = (state, action) => {
 		sendMessage('setPanelData', { needsReload: updated_needsReload });
 
 		// if we have changes and the user wants to see banners, then show
-		if ((msg.text || Object.keys(updated_needsReload.changes).length > 0) && reloadBannerStatus.show && nowTime > reloadBannerStatus.show_time) {
+		if ((msg.text || Object.keys(updated_needsReload.changes).length > 0) && state.reload_banner_status) {
 			updated_notificationShown = true;
 		} else {
 			updated_notificationShown = false;
@@ -221,7 +212,7 @@ const _showNotification = (state, action) => {
 		updated_notificationClasses = msg.classes || 'warning';
 	} else {
 		// Notification banners (success/warnings)
-		if (trackersBannerStatus.show && nowTime > trackersBannerStatus.show_time) {
+		if (state.trackers_banner_status) {
 			updated_notificationShown = true;
 		} else {
 			updated_notificationShown = false;
@@ -242,9 +233,7 @@ const _showNotification = (state, action) => {
 };
 
 /**
- * Dismiss notification banners. Update the 'reload_banner_status' and
- * 'trackers_banner_status' properties. If banners are dismissed BANNERS_ALLOWED times,
- * within BANNER_INTERVAL, they will not be shown again for BANNERS_BANNED_TIME. Persist the change.
+ * Dismiss notification banners. Update notificationShown 
  * @memberOf  PanelReactReducers
  * @private
  * @param  {Object} state 		current state
@@ -252,63 +241,13 @@ const _showNotification = (state, action) => {
  * @return {Object}        		notification parameters
  */
 const _closeNotification = (state, action) => {
-	const { banner_status_name } = action.data;
-	const BANNER_INTERVAL = 3600000; // one hour
-	const BANNERS_ALLOWED = 3;
-	const BANNERS_BANNED_TIME = 604800000; // one week
-
-	if (banner_status_name === 'temp_banner_status') {
-		return {
-			notificationShown: false,
-		};
-	}
-
-	// deep clone nested dismissals[]
-	let banner_status = { ...state[banner_status_name], dismissals: [...state[banner_status_name].dismissals] };
-
-	// show_time becomes 0 if it was set explicitly through Settinns or Setting page,
-	// or came through Sync which delivered choice different from default value
-	if (!banner_status.show_time) {
-		return false;
-	}
-
-	const { dismissals } = banner_status;
-	const lastDismissal = Number(new Date().getTime());
-
-	dismissals.push(lastDismissal);
-	let firstDismissal = dismissals[0];
-
-	while (lastDismissal > firstDismissal + BANNER_INTERVAL) {
-		dismissals.shift();
-		// eslint-disable-next-line prefer-destructuring
-		firstDismissal = dismissals[0];
-	}
-
-	if (dismissals.length >= BANNERS_ALLOWED) {
-		banner_status = {
-			show_time: lastDismissal + BANNERS_BANNED_TIME,
-			dismissals: [],
-			show: false,
-		};
-	} else {
-		banner_status = {
-			show_time: lastDismissal,
-			dismissals,
-			show: true,
-		};
-	}
-
-	// persist to background
-	sendMessage('setPanelData', { [banner_status_name]: banner_status });
-
 	return {
-		[banner_status_name]: banner_status,
-		notificationShown: false,
+		notificationShown: (action.data.banner_status_name === 'temp_banner_status') ? false : true
 	};
 };
 
 /**
- * Set the 'show' property on reload_banner_status and trackers_banner_status. Update from
+ * Update reload_banner_status and trackers_banner_status from
  * Settings > Notifications. Persist the change.
  * @memberOf  PanelReactReducers
  * @private
@@ -318,11 +257,8 @@ const _closeNotification = (state, action) => {
  * @return {Object}        		notification parameter
  */
 const _updateNotificationStatus = (state, action) => {
-	const msg = action.data;
-	const banner_status_name = msg.event;
-	// deep clone nested dismissals[] and update 'show'
-	const banner_status = { ...state[banner_status_name], dismissals: [...state[banner_status_name].dismissals], show: msg.checked };
-
+	const banner_status = action.data.checked;
+	const banner_status_name = action.data.event;
 	// persist to background
 	sendMessage('setPanelData', { [banner_status_name]: banner_status });
 

@@ -116,6 +116,8 @@ class ConfData {
 			_initProperty('setup_step', 0);
 			_initProperty('setup_path', 0);
 			_initProperty('setup_block', 1);
+			_initProperty('reload_banner_status', true);
+			_initProperty('trackers_banner_status', true);
 
 			// Complex props
 			_initProperty('bugs', {});
@@ -137,16 +139,6 @@ class ConfData {
 				user_token: '',
 				decoded_user_token: {},
 				is_validated: false
-			});
-			_initProperty('reload_banner_status', {
-				dismissals: [],
-				show_time: nowTime,
-				show: true
-			});
-			_initProperty('trackers_banner_status', {
-				dismissals: [],
-				show_time: nowTime,
-				show: true
 			});
 		});
 	}
