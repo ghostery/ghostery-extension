@@ -242,7 +242,7 @@ const _showNotification = (state, action) => {
  */
 const _closeNotification = (state, action) => {
 	return {
-		notificationShown: (action.data.banner_status_name === 'temp_banner_status') ? false : true
+		notificationShown: false
 	};
 };
 
