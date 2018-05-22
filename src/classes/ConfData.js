@@ -78,15 +78,15 @@ class ConfData {
 			}
 
 			// Transfer legacy banner statuses which used to be objects
-			const { reload_banner_status, trackers_banner_status} = data;
-			if(reload_banner_status && typeof reload_banner_status === 'object') {
+			const { reload_banner_status, trackers_banner_status } = data;
+			if (reload_banner_status && typeof reload_banner_status === 'object') {
 				this.reload_banner_status = !!reload_banner_status.show;
 				_setProp('reload_banner_status', this.reload_banner_status);
 			} else {
 				_initProperty('reload_banner_status', true);
 			}
 
-			if(trackers_banner_status && typeof trackers_banner_status === 'object') {
+			if (trackers_banner_status && typeof trackers_banner_status === 'object') {
 				this.trackers_banner_status = !!trackers_banner_status.show;
 				_setProp('trackers_banner_status', this.trackers_banner_status);
 			} else {

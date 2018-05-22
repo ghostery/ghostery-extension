@@ -233,18 +233,16 @@ const _showNotification = (state, action) => {
 };
 
 /**
- * Dismiss notification banners. Update notificationShown 
+ * Dismiss notification banners. Update notificationShown
  * @memberOf  PanelReactReducers
  * @private
  * @param  {Object} state 		current state
  * @param  {Object} action 		action which contains data
  * @return {Object}        		notification parameters
  */
-const _closeNotification = (state, action) => {
-	return {
-		notificationShown: false
-	};
-};
+const _closeNotification = (state, action) => ({
+	notificationShown: false
+});
 
 /**
  * Update reload_banner_status and trackers_banner_status from
