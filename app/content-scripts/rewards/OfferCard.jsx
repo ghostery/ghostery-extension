@@ -58,6 +58,7 @@ class OfferCard extends Component {
 		this.toggleSettings = this.toggleSettings.bind(this);
 		this.handleImageLoaded = this.handleImageLoaded.bind(this);
 		this.handlePrompt = this.handlePrompt.bind(this);
+		this.redeem = this.redeem.bind(this);
 
 		this.notifications = [
 			{
