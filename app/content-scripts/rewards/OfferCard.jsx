@@ -255,7 +255,7 @@ class OfferCard extends Component {
 									{ this.state.showSettings &&
 										<div className="rewards-settings-container">
 											<ClickOutside excludeEl={this.kebabRef} onClickOutside={this.toggleSettings}>
-												<Settings signal={() => { this.sendSignal('about_ghostery_rewards') }} disable={this.disableRewardsNotification} />
+												<Settings signal={() => { this.sendSignal('about_ghostery_rewards'); }} disable={this.disableRewardsNotification} />
 											</ClickOutside>
 										</div>
 									}
