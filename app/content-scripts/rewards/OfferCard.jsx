@@ -58,6 +58,7 @@ class OfferCard extends Component {
 		this.toggleSettings = this.toggleSettings.bind(this);
 		this.handleImageLoaded = this.handleImageLoaded.bind(this);
 		this.handlePrompt = this.handlePrompt.bind(this);
+		this.redeem = this.redeem.bind(this);
 
 		this.notifications = [
 			{
@@ -254,7 +255,7 @@ class OfferCard extends Component {
 									{ this.state.showSettings &&
 										<div className="rewards-settings-container">
 											<ClickOutside excludeEl={this.kebabRef} onClickOutside={this.toggleSettings}>
-												<Settings signal={this.sendSignal('about_ghostery_rewards')} disable={this.disableRewardsNotification} />
+												<Settings signal={() => { this.sendSignal('about_ghostery_rewards'); }} disable={this.disableRewardsNotification} />
 											</ClickOutside>
 										</div>
 									}
