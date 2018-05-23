@@ -93,7 +93,8 @@ describe('app/panel/actions/RewardsActions.js', () => {
 
 		const actionId = 'action_id';
 		const offerId = 'offer_id';
-		const expectedPayload = { data: { actionId, offerId }, type: SEND_SIGNAL };
+		const origin = 'rewards-panel';
+		const expectedPayload = { data: { actionId, offerId, origin }, type: SEND_SIGNAL };
 		store.dispatch(rewardsActions.sendSignal(actionId, offerId));
 
 		const actions = store.getActions();

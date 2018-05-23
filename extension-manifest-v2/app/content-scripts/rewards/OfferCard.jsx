@@ -119,7 +119,8 @@ class OfferCard extends Component {
 		const offerId = props.reward.offer_id;
 		const message = {
 			offerId,
-			actionId
+			actionId,
+			origin: 'rewards-card',
 		};
 		this.messageBackground('rewardSignal', message);
 	}

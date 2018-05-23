@@ -86,7 +86,8 @@ export function sendSignal(actionId, offerId) {
 		type: SEND_SIGNAL,
 		data: {
 			actionId,
-			offerId
+			offerId,
+			origin: 'rewards-panel'
 		}
 	};
 }
