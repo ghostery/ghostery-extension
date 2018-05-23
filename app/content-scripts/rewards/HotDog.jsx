@@ -16,7 +16,7 @@ import { withRouter } from 'react-router-dom';
 import msgModule from '../utils/msg';
 import { log } from '../../../src/utils/common';
 
-const msg = msgModule('hotdog');
+const msg = msgModule('rewards');
 const { sendMessage } = msg;
 
 /**
@@ -29,8 +29,9 @@ class HotDog extends Component {
 		this.state = {
 			closed: false
 		};
-
+		this.shownSignal = false;
 		this.iframeEl = window.parent.document.getElementById('ghostery-iframe-container');
+
 		if (this.iframeEl) {
 			this.iframeEl.classList = '';
 			this.iframeEl.classList.add('hot-dog');
@@ -38,14 +39,14 @@ class HotDog extends Component {
 
 		this.ghostyStar = `url(${chrome.extension.getURL('app/images/rewards/ghosty-star.svg')})`;
 		this.closeIcon = `url(${chrome.extension.getURL('app/images/rewards/light-x.svg')})`;
-
 		this.close = this.close.bind(this);
 		this.navigate = this.navigate.bind(this);
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.reward && nextProps.reward !== null) {
+		if (nextProps.reward && nextProps.reward !== null && !this.shownSignal) {
 			this.sendSignal('offer_notification_hotdog', nextProps);
+			this.shownSignal = true;
 		}
 	}
 

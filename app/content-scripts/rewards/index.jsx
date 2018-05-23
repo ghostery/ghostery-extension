@@ -88,8 +88,8 @@ class RewardsApp {
 			<Router history={history}>
 				<ShadowDOM include={[chrome.extension.getURL('dist/css/rewards_styles.css')]}>
 					<div id="ghostery-shadow-root">
-						<Route exact path="/" render={() => <HotDog reward={props.reward} />} />
-						<Route path="/hotdog" render={() => <HotDog reward={props.reward} />} />
+						<Route exact path="/" render={() => <HotDog reward={props.reward} port={this.port} />} />
+						<Route path="/hotdog" render={() => <HotDog reward={props.reward} port={this.port} />} />
 						<Route path="/offercard" render={() => <OfferCard reward={props.reward} conf={props.conf} port={this.port} />} />
 					</div>
 				</ShadowDOM>
@@ -117,8 +117,8 @@ class RewardsApp {
 			this.mainView = props => (
 				<Router history={history}>
 					<div>
-						<Route exact path="/" render={() => <HotDog reward={props.reward} />} />
-						<Route path="/hotdog" render={() => <HotDog reward={props.reward} />} />
+						<Route exact path="/" render={() => <HotDog reward={props.reward} port={this.port} />} />
+						<Route path="/hotdog" render={() => <HotDog reward={props.reward} port={this.port} />} />
 						<Route path="/offercard" render={() => <OfferCard reward={props.reward} conf={props.conf} port={this.port} />} />
 					</div>
 				</Router>
