@@ -1693,9 +1693,10 @@ brorand@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
 
-"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.26/1.26.3.tgz?v=1":
-  version "1.26.3"
-  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.26/1.26.3.tgz?v=1#f76a9faab599fd1bacd811c17e74f13ce2c7520c"
+"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.27/7.27.2.tgz":
+  version "7.27.2"
+  uid "399783ddce8f9cc79d5d28014c4869e948d1e647"
+  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.27/7.27.2.tgz#399783ddce8f9cc79d5d28014c4869e948d1e647"
   dependencies:
     "@cliqz-oss/dexie" "2.0.3"
     "@cliqz-oss/pouchdb" "6.3.4-security-error-fix-2"
@@ -1712,7 +1713,6 @@ brorand@^1.0.1:
     es6-micro-loader cliqz-oss/es6-micro-loader#babel6
     fast-url-parser "=1.1.2"
     fs-extra "3.0.1"
-    glob "7.1.2"
     global "4.3.2"
     hammerjs "2.0.8"
     handlebars "4.0.11"
@@ -1735,7 +1735,60 @@ brorand@^1.0.1:
     rxjs "5.5.6"
     sanitize-filename "1.6.1"
     simple-statistics "5.2.1"
-    spanan "1.3.0"
+    spanan "2.0.0"
+    tablesorter "2.29.2"
+    text-encoding "0.6.4"
+    tldjs "2.3.1"
+    ua-parser-js "0.7.12"
+    untildify "3.0.2"
+    url-pattern "1.0.3"
+    useragent.js "0.5.6"
+    xhr2 "0.1.4"
+    ytdl-core "0.20.2"
+    yuidoc-bootstrap-theme "1.0.6"
+
+"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.27/7.27.2.tgz?v=1":
+  version "7.27.2"
+  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.27/7.27.2.tgz?v=1#399783ddce8f9cc79d5d28014c4869e948d1e647"
+  dependencies:
+    "@cliqz-oss/dexie" "2.0.3"
+    "@cliqz-oss/pouchdb" "6.3.4-security-error-fix-2"
+    "@cliqz-oss/systemjs-builder" "0.16.13"
+    "@cliqz/adblocker" "0.1.7"
+    BigInt "5.5.3"
+    ajv "5.5.2"
+    babel-polyfill "6.26.0"
+    cliqz-history "https://github.com/cliqz-oss/cliqz-history/releases/download/1.0.6/cliqz-history-1.0.6.tgz"
+    cron "1.2.1"
+    cron-parser "2.4.0"
+    deep-equal "1.0.1"
+    ember-inflector "2.0.1"
+    es6-micro-loader cliqz-oss/es6-micro-loader#babel6
+    fast-url-parser "=1.1.2"
+    fs-extra "3.0.1"
+    global "4.3.2"
+    hammerjs "2.0.8"
+    handlebars "4.0.11"
+    jquery "3.0.0"
+    js-md5 "0.7.3"
+    jsep "0.3.0"
+    mathjs "3.17.0"
+    node-fetch "1.7.1"
+    node-forge "git+https://git@github.com/digitalbazaar/forge.git#af3f590af9d3c809e1cb44b2bb5398a3a6b944c2"
+    node-persist "2.0.11"
+    pako "1.0.6"
+    prop-types "15.5.10"
+    qrcodejs "1.0.0"
+    react "16.0.0"
+    react-dom "16.0.0"
+    react-native-web "0.1.11"
+    react-toggle-display "2.2.0"
+    react-tooltip "3.3.0"
+    readline "1.3.0"
+    rxjs "5.5.6"
+    sanitize-filename "1.6.1"
+    simple-statistics "5.2.1"
+    spanan "2.0.0"
     tablesorter "2.29.2"
     text-encoding "0.6.4"
     tldjs "2.3.1"
@@ -4200,7 +4253,7 @@ glob-to-regexp@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/glob-to-regexp/-/glob-to-regexp-0.3.0.tgz#8c5a1494d2066c570cc3bfe4496175acc4d502ab"
 
-"glob@3 || 4 || 5 || 6 || 7", glob@7.1.2, glob@^7.0.0, glob@^7.0.3, glob@^7.0.5, glob@^7.1.1, glob@^7.1.2, glob@~7.1.1:
+"glob@3 || 4 || 5 || 6 || 7", glob@^7.0.0, glob@^7.0.3, glob@^7.0.5, glob@^7.1.1, glob@^7.1.2, glob@~7.1.1:
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.2.tgz#c19c9df9a028702d678612384a6552404c636d15"
   dependencies:
@@ -9002,9 +9055,9 @@ source-map@^0.6.0, source-map@^0.6.1, source-map@~0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
 
-spanan@1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/spanan/-/spanan-1.3.0.tgz#2cc892061ae6582e23003d4c4e46224c31e85a6d"
+spanan@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/spanan/-/spanan-2.0.0.tgz#61e82c3ba0a1b6ab3c3014c3a0f4592ae003adbe"
 
 spark-md5@3.0.0:
   version "3.0.0"
