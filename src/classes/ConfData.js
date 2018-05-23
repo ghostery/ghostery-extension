@@ -77,6 +77,22 @@ class ConfData {
 				_setProp('previous_version', this.previous_version);
 			}
 
+			// Transfer legacy banner statuses which used to be objects
+			const { reload_banner_status, trackers_banner_status } = data;
+			if (reload_banner_status && typeof reload_banner_status === 'object') {
+				this.reload_banner_status = !!reload_banner_status.show;
+				_setProp('reload_banner_status', this.reload_banner_status);
+			} else {
+				_initProperty('reload_banner_status', true);
+			}
+
+			if (trackers_banner_status && typeof trackers_banner_status === 'object') {
+				this.trackers_banner_status = !!trackers_banner_status.show;
+				_setProp('trackers_banner_status', this.trackers_banner_status);
+			} else {
+				_initProperty('trackers_banner_status', true);
+			}
+
 			// simple props
 			_initProperty('alert_bubble_pos', 'br');
 			_initProperty('alert_bubble_timeout', 15);
@@ -137,16 +153,6 @@ class ConfData {
 				user_token: '',
 				decoded_user_token: {},
 				is_validated: false
-			});
-			_initProperty('reload_banner_status', {
-				dismissals: [],
-				show_time: nowTime,
-				show: true
-			});
-			_initProperty('trackers_banner_status', {
-				dismissals: [],
-				show_time: nowTime,
-				show: true
 			});
 		});
 	}
