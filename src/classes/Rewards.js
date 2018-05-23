@@ -50,15 +50,16 @@ class Rewards {
 	}
 
 	sendSignal(message) {
-		const { offerId, actionId } = message;
+		const { offerId, actionId, origin } = message;
 		const signal = {
-			origin: 'ghostery',
+			origin: origin ? `ghostery-${origin}` : 'ghostery',
 			type: 'offer-action-signal',
 			data: {
 				action_id: actionId,
 				offer_id: offerId
 			}
 		};
+		log('sendSignal: ', signal);
 		cliqz.modules['offers-v2'].background.actions.processRealEstateMessage(signal);
 	}
 
