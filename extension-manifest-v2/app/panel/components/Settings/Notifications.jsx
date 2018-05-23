@@ -49,13 +49,13 @@ const Notifications = (props) => {
 					</div>
 					<div className="s-option-group">
 						<div className="s-square-checkbox">
-							<input type="checkbox" id="settings-show-reload-banner" name="reload_banner_status" defaultChecked={settingsData.reload_banner_status.show} onClick={props.toggleCheckbox} />
+							<input type="checkbox" id="settings-show-reload-banner" name="reload_banner_status" defaultChecked={settingsData.reload_banner_status} onClick={props.toggleCheckbox} />
 							<label id="settings-show-reload-banner-label" htmlFor="settings-show-reload-banner">{ t('settings_show_reload_banner') }</label>
 						</div>
 					</div>
 					<div className="s-option-group">
 						<div className="s-square-checkbox">
-							<input type="checkbox" id="settings-show-trackers-banner" name="trackers_banner_status" defaultChecked={settingsData.trackers_banner_status.show} onClick={props.toggleCheckbox} />
+							<input type="checkbox" id="settings-show-trackers-banner" name="trackers_banner_status" defaultChecked={settingsData.trackers_banner_status} onClick={props.toggleCheckbox} />
 							<label id="settings-show-trackers-banner-label" htmlFor="settings-show-trackers-banner">{ t('settings_show_trackers_banner') }</label>
 						</div>
 					</div>

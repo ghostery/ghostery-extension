@@ -75,6 +75,15 @@ const handler = {
 			}
 		}
 
+		// Adjust banner statuses, as they used to be objects
+		// while now they are booleans. This filter covers syncing.
+		if (key === 'reload_banner_status' ||
+			key === 'trackers_banner_status') {
+			if (value && (typeof value === 'object')) {
+				value = !!value.show;
+			}
+		}
+
 		target[key] = value;
 
 		// Don't save to storage while background::init() called.
