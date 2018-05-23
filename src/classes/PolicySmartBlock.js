@@ -145,8 +145,19 @@ class PolicySmartBlock {
 	 * @param  {string} requestHost		host of the request url
 	 * @return {boolean}
 	 */
-	isFirstPartyRequest(tabId, pageHost = '', requestHost = '') {
+	isFirstPartyRequest(tabId, inputPageHost = '', inputRequestHost = '') {
+		let pageHost = inputPageHost;
+		let requestHost = inputRequestHost;
+
 		if (!this.shouldCheck(tabId)) { return false; }
+
+		// Strip out www. to fix the most common sub-domain issue.  See ToDo in function comment.
+		if (pageHost.startsWith('www.')) {
+			pageHost = pageHost.slice(4);
+		}
+		if (requestHost.startsWith('www.')) {
+			requestHost = requestHost.slice(4);
+		}
 
 		const min = Math.min(requestHost.length, pageHost.length);
 		let matches = true;
