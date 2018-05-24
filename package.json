@@ -42,7 +42,7 @@
   "homepage": "https://github.com/ghostery/ghostery-extension#readme",
   "dependencies": {
     "base64-js": "^1.2.1",
-    "browser-core": "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.27/7.27.2.tgz",
+    "browser-core": "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.27/7.27.2.tgz?v=1",
     "classnames": "^2.2.5",
     "d3": "^4.13.0",
     "d3-scale": "^1.0.6",
