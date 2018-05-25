@@ -87,15 +87,31 @@ describe('app/panel/actions/RewardsActions.js', () => {
 		expect(actions).toEqual([expectedPayload]);
 	});
 
-	test('sendSignal action should return correctly', () => {
+	test('sendSignal offer-action-signal should return correctly', () => {
 		const initialState = {};
 		const store = mockStore(initialState);
 
 		const actionId = 'action_id';
 		const offerId = 'offer_id';
-		const origin = 'rewards-panel';
-		const expectedPayload = { data: { actionId, offerId, origin }, type: SEND_SIGNAL };
+		const origin = 'rewards-hub';
+		const type = 'offer-action-signal';
+		const expectedPayload = { data: { actionId, offerId, origin, type }, type: SEND_SIGNAL };
 		store.dispatch(rewardsActions.sendSignal(actionId, offerId));
+
+		const actions = store.getActions();
+		expect(actions).toEqual([expectedPayload]);
+	});
+
+	test('sendSignal action-signal should return correctly', () => {
+		const initialState = {};
+		const store = mockStore(initialState);
+
+		const actionId = 'action_id';
+		const offerId = undefined;
+		const origin = 'rewards-hub';
+		const type = 'action-signal';
+		const expectedPayload = { data: { actionId, offerId, origin, type }, type: SEND_SIGNAL };
+		store.dispatch(rewardsActions.sendSignal(actionId));
 
 		const actions = store.getActions();
 		expect(actions).toEqual([expectedPayload]);
