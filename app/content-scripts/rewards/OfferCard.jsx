@@ -121,6 +121,7 @@ class OfferCard extends Component {
 			offerId,
 			actionId,
 			origin: 'rewards-hotdog-card',
+			type: (actionId === 'rewards_off') ? 'action-signal' : 'offer-action-signal',
 		};
 		this.messageBackground('rewardSignal', message);
 	}

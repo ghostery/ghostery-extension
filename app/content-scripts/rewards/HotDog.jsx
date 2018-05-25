@@ -68,6 +68,7 @@ class HotDog extends Component {
 			offerId,
 			actionId,
 			origin: 'rewards-hotdog-card',
+			type: 'offer-action-signal'
 		};
 		this.messageBackground('rewardSignal', message);
 	}
