@@ -95,7 +95,12 @@ describe('app/panel/actions/RewardsActions.js', () => {
 		const offerId = 'offer_id';
 		const origin = 'rewards-hub';
 		const type = 'offer-action-signal';
-		const expectedPayload = { data: { actionId, offerId, origin, type }, type: SEND_SIGNAL };
+		const expectedPayload = {
+			data: {
+				actionId, offerId, origin, type
+			},
+			type: SEND_SIGNAL
+		};
 		store.dispatch(rewardsActions.sendSignal(actionId, offerId));
 
 		const actions = store.getActions();
@@ -110,7 +115,12 @@ describe('app/panel/actions/RewardsActions.js', () => {
 		const offerId = undefined;
 		const origin = 'rewards-hub';
 		const type = 'action-signal';
-		const expectedPayload = { data: { actionId, offerId, origin, type }, type: SEND_SIGNAL };
+		const expectedPayload = {
+			data: {
+				actionId, offerId, origin, type
+			},
+			type: SEND_SIGNAL
+		};
 		store.dispatch(rewardsActions.sendSignal(actionId));
 
 		const actions = store.getActions();
