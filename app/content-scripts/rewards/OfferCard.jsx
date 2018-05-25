@@ -120,7 +120,7 @@ class OfferCard extends Component {
 		const message = {
 			offerId,
 			actionId,
-			origin: 'rewards-card',
+			origin: 'rewards-hotdog-card',
 		};
 		this.messageBackground('rewardSignal', message);
 	}

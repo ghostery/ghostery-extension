@@ -67,7 +67,7 @@ class HotDog extends Component {
 		const message = {
 			offerId,
 			actionId,
-			origin: 'rewards-hotdog',
+			origin: 'rewards-hotdog-card',
 		};
 		this.messageBackground('rewardSignal', message);
 	}
