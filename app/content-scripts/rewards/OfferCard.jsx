@@ -188,6 +188,7 @@ class OfferCard extends Component {
 			}
 			this.sendSignal('offer_first_optlater');
 			sendMessage('ping', 'rewards_first_reject_optin');
+			this.closeOfferCard();
 		}
 		this.setState({
 			showPrompt: false
