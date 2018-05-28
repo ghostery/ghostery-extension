@@ -12,7 +12,7 @@ node('docker') {
 
     def img
     def artifacts = []
-    def uploadPath = "cdncliqz/update/ghostery/${env.BRANCH_NAME}"
+    def uploadPath = "cdncliqz/update/ghostery/android"
 
     stage('Build Docker Image') {
         img = docker.build('ghostery/build', '--build-arg UID=`id -u` --build-arg GID=`id -g` .')
@@ -23,36 +23,19 @@ node('docker') {
     stage('Build Extension') {
         img.inside() {
             withCache {
-                sh 'rm -rf build'
-                if (params.WITH_CLIQZ_MASTER) {
-                    sh 'npm install --save https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/master/latest.tgz'
+                withEnv(["NO_LINT=true"]) {
+                    sh 'rm -rf build'
+                    if (params.WITH_CLIQZ_MASTER) {
+                        sh 'yarn add https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/master/latest.tgz'
+                    }
+                    // make browser-core noisy
+                    sh 'sed -i \'s/global.__DEV__/true/1\' node_modules/browser-core/build/core/console.js'
+                    withGithubCredentials {
+                        sh 'moab makezip'
+                    }
+                    // get the name of the firefox build
+                    artifacts.add(sh(returnStdout: true, script: 'ls build/ | grep firefox').trim())
                 }
-                // make browser-core noisy
-                sh 'sed -i \'s/global.__DEV__/true/1\' node_modules/browser-core/build/core/console.js'
-                withGithubCredentials {
-                    sh 'moab makezip'
-                }
-                // get the name of the firefox build
-                artifacts.add(sh(returnStdout: true, script: 'ls build/ | grep firefox').trim())
-            }
-        }
-    }
-
-    if (env.BRANCH_NAME != 'android_browser') {
-        stage('Package Chrome') {
-            withGithubCredentials {
-                def chromeArtifact = sh(returnStdout: true, script: 'ls build/ | grep chrome').trim().replace('.zip', '')
-                echo "${chromeArtifact}"
-                sh """#!/bin/bash -l
-                    set -x
-                    set -e
-                    rm -rf ${chromeArtifact}/
-                    mkdir -p ${chromeArtifact}
-                    unzip build/${chromeArtifact}.zip -d ${chromeArtifact}
-                    tools/crxmake.sh ${chromeArtifact}/ ~/.ssh/id_rsa
-                    mv ${chromeArtifact}.crx build/
-                    """
-                artifacts.add("${chromeArtifact}.crx")
             }
         }
     }
@@ -60,34 +43,11 @@ node('docker') {
     stage('Upload Builds') {
         withS3Credentials {
             echo "${env.BRANCH_NAME}/${env.BUILD_NUMBER}"
-            def uploadLocation = "s3://${uploadPath}/"
+            def uploadLocation = "s3://${uploadPath}"
             currentBuild.description = uploadLocation
             artifacts.each {
-                sh "aws s3 cp build/${it} ${uploadLocation}  --acl public-read"
-            }
-        }
-    }
-
-    if (env.BRANCH_NAME == 'develop') {
-        stage('Publish Beta') {
-            artifacts.each {
-                if (it.contains('firefox')) {
-                    // firefox artifact (zip) - sign for cliqz_beta
-                    def artifactUrl = "https://s3.amazonaws.com/${uploadPath}/${it}"
-                    build job: 'addon-repack', parameters: [
-                        string(name: 'XPI_URL', value: artifactUrl),
-                        string(name: 'XPI_SIGN_CREDENTIALS', value: '41572f9c-06aa-46f0-9c3b-b7f4f78e9caa'),
-                        string(name: 'XPI_SIGN_REPO_URL', value: 'git@github.com:cliqz/xpi-sign.git'),
-                        string(name: 'CHANNEL', value: 'browser_beta')
-                    ]
-                } else if (it.contains('chrome')) {
-                    withS3Credentials {
-                        // publish chrome builds, also with 'latest' tag
-                        def publishUrl = 's3://cdncliqz/update/ghostery_beta/chrome';
-                        sh "aws s3 cp build/${it} ${publishUrl}/${it} --acl public-read"
-                        sh "aws s3 cp build/${it} ${publishUrl}/latest.crx --acl public-read"
-                    }
-                }
+                sh "aws s3 cp build/${it} ${uploadLocation}/${env.BRANCH_NAME}/  --acl public-read"
+                sh "aws s3 cp build/${it} ${uploadLocation}/latest.zip  --acl public-read"
             }
         }
     }
