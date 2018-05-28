@@ -96,25 +96,30 @@ function validateJson(paths) {
 }
 
 /**
- * Checks for missing placeholders in all the locale files. Add them from English file
+ * Checks for missing placeholders in all the locale files. Copy them over from English file
  * @params array   paths                      An array of strings denoting the paths to all the locale files
  * @const  string  DEFAULT_LOCALE_PATH        The location of the default locale JSON file
- * @return Promise                            Resolves if no extra tokens were found,
+ * @return Promise                            Always call resolve (no error handling)
  */
 function fixMissingPlaceholders(paths) {
 	return new Promise((resolve, reject) => {
 		let defaultLocaleJson = require(DEFAULT_LOCALE_PATH);
 		paths.forEach(path => {
 			if(path !== DEFAULT_LOCALE_PATH) {
+				let dirty = false;
 				let localeJson = require('.' + path);
 				Object.keys(defaultLocaleJson).forEach(key => {
 					if (defaultLocaleJson[key].hasOwnProperty('placeholders')) {
 						if (localeJson[key] && !localeJson[key].hasOwnProperty('placeholders')) {
+							dirty = true;
 							localeJson[key].placeholders = defaultLocaleJson[key].placeholders;
 						}
 					}
 				});
-				fs.writeFileSync(path, JSON.stringify(localeJson, null, '\t'));
+				if(dirty) {
+					console.log(`Placeholders were added to ${path}`);
+					fs.writeFileSync(path, JSON.stringify(localeJson, null, '\t'));
+				}
 			}
 		});
 		resolve();
