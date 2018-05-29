@@ -50,10 +50,12 @@ class Rewards {
 	}
 
 	sendSignal(message) {
-		const { offerId, actionId, origin } = message;
+		const {
+			offerId, actionId, origin, type
+		} = message;
 		const signal = {
+			type,
 			origin: origin ? `ghostery-${origin}` : 'ghostery',
-			type: 'offer-action-signal',
 			data: {
 				action_id: actionId,
 				offer_id: offerId

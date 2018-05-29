@@ -67,7 +67,7 @@ class RewardsApp {
 	}
 
 	start() {
-		if (BROWSER_INFO.name === 'chrome') {
+		if (document.head.createShadowRoot || document.head.attachShadow) {
 			this.renderShadow();
 		} else {
 			// use iframe to encapsulate CSS - fallback for everything else besides chrome

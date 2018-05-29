@@ -82,12 +82,14 @@ export function setOfferRead(id) {
  * @return {Object}
  */
 export function sendSignal(actionId, offerId) {
-	return {
+	const signal = {
 		type: SEND_SIGNAL,
 		data: {
 			actionId,
 			offerId,
-			origin: 'rewards-panel'
+			origin: 'rewards-hub',
+			type: offerId ? 'offer-action-signal' : 'action-signal'
 		}
 	};
+	return signal;
 }
