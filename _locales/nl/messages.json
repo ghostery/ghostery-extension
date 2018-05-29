@@ -1,6 +1,824 @@
 {
+	"settings_import_header": {
+		"message": "Importeer Instellingen",
+		"description": ""
+	},
+	"panel_header_detailed_view": {
+		"message": "Gedetailleerd Overzicht",
+		"description": ""
+	},
+	"settings_share_usage": {
+		"message": "Extensiegebruik analytics te delen",
+		"description": ""
+	},
+	"settings_allow_trackers_tooltip": {
+		"message": "Een Facebook tracker op facebook.com blokkeren kan bijvoorbeeld de website breken.",
+		"description": ""
+	},
+	"blocking_trackers": {
+		"message": "Trackers",
+		"description": ""
+	},
+	"panel_detail_history_text": {
+		"message": "Functie binnenkort mogelijk.",
+		"description": ""
+	},
+	"settings_individual_trackers": {
+		"message": "Vertrouw en beperk individuele trackers",
+		"description": ""
+	},
+	"setup_data_view_checkbox": {
+		"message": "Steun Ghostery door deze informatie te delen.",
+		"description": ""
+	},
+	"rewards_off_toast_notification": {
+		"message": "Ghostery Rewards staat UIT",
+		"description": ""
+	},
+	"settings_offers_tooltip": {
+		"message": "Ghostery Rewards is een feature waarmee je kortingen en speciale aanbiedingen kunt verdienen bij onze partners.",
+		"description": ""
+	},
+	"rewards_yes": {
+		"message": "ja",
+		"description": ""
+	},
+	"settings_sign_create_text": {
+		"message": "Instellingen van je account worden gesynchroniseerd met dit apparaat. Maak een account aan om je Ghostery instellingen eenvoudig te synchroniseren op alle apparaten en platformen.",
+		"description": ""
+	},
+	"email_confirm_field_label": {
+		"message": "Bevestig E-mail:",
+		"description": ""
+	},
+	"setup_login_view_title": {
+		"message": "Wil je een Ghostery account aanmaken om instellingen op verschillende browsers en apparaten te synchroniseren?",
+		"description": ""
+	},
+	"summary_description_not_scanned_1": {
+		"message": "Ghostery scant alleen \"http\" en \"https\" pagina's.",
+		"description": ""
+	},
+	"drawer_off": {
+		"message": "Uit",
+		"description": ""
+	},
+	"setup_choice_view_share_data": {
+		"message": "Deel mijn analytics en Human Web data om de prestaties van Ghostery te verbeteren.",
+		"description": ""
+	},
+	"settings_searh_by_tracker": {
+		"message": "Zoek per tracker",
+		"description": ""
+	},
+	"settings_update_failed": {
+		"message": "Update mislukt. Probeer het later nogmaals",
+		"description": ""
+	},
+	"whitelist_error_blacklist_url": {
+		"message": "Deze website is verwijderd uit je lijst met Beperkte Websites en toegevoegd aan je lijst met Vertrouwde Websites",
+		"description": ""
+	},
+	"settings_filter_all": {
+		"message": "Alle Trackers",
+		"description": ""
+	},
+	"global_settings_saved_tracker": {
+		"message": "Algemene Tracker Instelling Opgeslagen",
+		"description": ""
+	},
+	"license_email": {
+		"message": "E-mail",
+		"description": ""
+	},
+	"panel_signin_success_title": {
+		"message": "Gefeliciteerd! Je Ghostery account is klaar voor gebruik.",
+		"description": ""
+	},
+	"blocking_unblock_all": {
+		"message": "Deblokkeer Alles",
+		"description": ""
+	},
+	"settings_filter_unblocked": {
+		"message": "Gedeblokkeerde Trackers",
+		"description": ""
+	},
+	"box_trackers": {
+		"message": "Trackers",
+		"description": ""
+	},
+	"drawer_on": {
+		"message": "Aan",
+		"description": ""
+	},
+	"setup_blocking_view_block_everything": {
+		"message": "Alles",
+		"description": ""
+	},
+	"settings_bottom_right_corner": {
+		"message": "Rechterhoek Onder",
+		"description": ""
+	},
+	"settings_hide_alert_trusted": {
+		"message": "Verberg het paarse vlak op vertrouwde websites",
+		"description": ""
+	},
+	"setup_login_view_signed_in_as": {
+		"message": "Ingelogd als",
+		"description": ""
+	},
+	"blocking_category_blocked": {
+		"message": "Geblokkeerd",
+		"description": "as in '5 (trackers) BLOCKED'"
+	},
+	"setup_header_sign_in": {
+		"message": "Inloggen ",
+		"description": ""
+	},
+	"notification_upgrade": {
+		"message": "Ons toegewijd en ongelooflijk aantrekkelijk team heeft keihard gewerkt aan een nieuwe versie van Ghostery.",
+		"description": ""
+	},
+	"setup_blocking_view_title": {
+		"message": "Ghostery kan trackers blokkeren om je schoner, sneller en veiliger te laten browsen. Wat wil je blokkeren?",
+		"description": ""
+	},
+	"summary_resume_ghostery": {
+		"message": "Hervat",
+		"description": ""
+	},
+	"pause_1_hour_condensed": {
+		"message": "1 uur",
+		"description": ""
+	},
+	"whitelist_error_duplicate_url": {
+		"message": "Deze site is al toegestaan.",
+		"description": "Options page site whitelisting error message shown when whitelisting a URL that is already in the whitelist."
+	},
+	"drawer_status_enable_anti_tracking": {
+		"message": "Anti-Tracking is",
+		"description": ""
+	},
+	"panel_click_to_reload": {
+		"message": "Klik om te herladen en de wijzigingen te bekijken.",
+		"description": ""
+	},
+	"global_settings_saved": {
+		"message": "Algemene Instellingen Opgeslagen",
+		"description": ""
+	},
+	"settings_support_ghostery_by": {
+		"message": "Ondersteun Ghostery door",
+		"description": ""
+	},
+	"rewards_learn_more": {
+		"message": "Meer Weten",
+		"description": ""
+	},
+	"category_social_media_desc": {
+		"message": "Inclusief functies met betrekking tot sociale media platformen.",
+		"description": "User-facing description for the Social Media tag category."
+	},
+	"settings_update_success": {
+		"message": "Succes!",
+		"description": ""
+	},
+	"settings_never": {
+		"message": "Nooit",
+		"description": ""
+	},
+	"panel_title_create_account": {
+		"message": "Account Aanmaken",
+		"description": ""
+	},
+	"box_dismiss_15s": {
+		"message": "Verwerp $SPAN_START$na 10 seconden$SPAN_END$",
+		"description": "",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
+	},
+	"setup_display_view_simple_desc": {
+		"message": "Toon basic blokkeringsinformatie.",
+		"description": ""
+	},
+	"first_name_field_label": {
+		"message": "Voornaam (Optioneel):",
+		"description": ""
+	},
+	"alert_ad_block_off": {
+		"message": "Versterkte Ad Blokkering UIT. Advertenties zullen niet worden geblokkeerd.",
+		"description": ""
+	},
+	"drawer_tooltip_enable_anti_tracking": {
+		"message": "Geïntegreerde trackers slaan gebruikersactiviteiten op en op de meeste websites verwijdert Anti-tracking alle data die zou kunnen worden gebruikt om je te identificeren alvorens het door deze trackers verzameld kan worden. De afbeelding laat zien hoeveel datapunten verwijderd zijn op de website.",
+		"description": ""
+	},
+	"panel_email_verification_sent": {
+		"message": "$BOLD_HTML_STARTS$ Succes! $BOLD_HTML_END$ Een account verificatie e-mail is verstuurd naar $EMAIL$",
+		"description": "",
+		"placeholders": {
+			"bold_html_end": {
+				"content": "</strong>"
+			},
+			"bold_html_starts": {
+				"content": "<strong>"
+			},
+			"email": {
+				"content": "$1",
+				"example": "info@ghostery.com"
+			}
+		}
+	},
+	"panel_detail_rewards_off": {
+		"message": "Ghostery Rewards staat UIT",
+		"description": ""
+	},
+	"panel_detail_rewards_loading": {
+		"message": "Rewards Laden...",
+		"description": ""
+	},
+	"category_audio_video_player": {
+		"message": "Audio-/Videospeler",
+		"description": "Ghostery organizes tags by category. This is one of several tag categories."
+	},
+	"setup_additional_view_antitrack_title": {
+		"message": "Versterkte Anti-Tracking",
+		"description": ""
+	},
+	"tooltip_body_in_cliqz": {
+		"message": "Optie is al standaard actief in Cliqz.",
+		"description": ""
+	},
+	"setup_additional_view_title": {
+		"message": "Wil je slimmer browsen met onze aanbevolen features?",
+		"description": ""
+	},
+	"setup_button_create_account": {
+		"message": "Account Aanmaken",
+		"description": ""
+	},
+	"settings_block_trackers": {
+		"message": "Blokkeer standaard nieuwe aan Ghostery toegevoegde trackers",
+		"description": ""
+	},
+	"email_address_in_use": {
+		"message": "Dat e-mailadres is al in gebruik.  Gelieve een andere te kiezen. ",
+		"description": ""
+	},
+	"box_dismiss_0s": {
+		"message": "Verwerp $SPAN_START$nooit$SPAN_END$",
+		"description": "",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
+	},
+	"button_cancel": {
+		"message": "Annuleren",
+		"description": "Part of a confirmation dialog. Clicking this cancels the action."
+	},
+	"settings_dismiss_after": {
+		"message": "Verwerp Na",
+		"description": ""
+	},
+	"settings_purple_box": {
+		"message": "Paars Vak",
+		"description": ""
+	},
+	"settings_export_text": {
+		"message": "Bewaar een kopie van de Ghostery voorkeuren en stuur door naar een andere computer.",
+		"description": ""
+	},
+	"settings_filter_blocked": {
+		"message": "Geblokkeerde Trackers",
+		"description": ""
+	},
+	"settings_import_text": {
+		"message": "Kies een backup .ghost file.",
+		"description": ""
+	},
+	"blocking_unblock_shown": {
+		"message": "Deblokkeer Alle Getoonde",
+		"description": ""
+	},
+	"box_warning_compatibility": {
+		"message": "Verbroken Pagina Trackers",
+		"description": ""
+	},
+	"settings_export_error": {
+		"message": "Je instellingen zijn niet met succes geëxporteerd. Probeer het nogmaals",
+		"description": ""
+	},
+	"tooltip_smart_block": {
+		"message": "Slim Blokkeren",
+		"description": ""
+	},
+	"notification_library_update_link": {
+		"message": "Kijk snel wat er nieuw is",
+		"description": ""
+	},
+	"settings_top_right_corner": {
+		"message": "Rechterhoek Boven",
+		"description": ""
+	},
+	"box_display_br": {
+		"message": "Toon $SPAN_START$Onder Rechts$SPAN_END$",
+		"description": "",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
+	},
+	"box_hide": {
+		"message": "Verberg Vak",
+		"description": ""
+	},
+	"summary_trust_site": {
+		"message": "Vertrouw Website",
+		"description": ""
+	},
+	"setup_feature_active_in_cliqz": {
+		"message": "Deze optie is al standaard actief in Cliqz. $LINK_START$Meer weten.$LINK_END$",
+		"description": "",
+		"placeholders": {
+			"link_start": {
+				"content": "<a href=\"https://www.ghostery.com/faqs/what-are-the-new-ghostery-8-features/\" target=\"_blank\">"
+			},
+			"link_end": {
+				"content": "</a>"
+			}
+		}
+	},
+	"settings_highlight_trackers": {
+		"message": "Highlight Interactieve Trackers",
+		"description": ""
+	},
+	"collapse_all": {
+		"message": "Alles Dichtvouwen",
+		"description": ""
+	},
+	"summary_restrict_site_active": {
+		"message": "Website Beperkt",
+		"description": ""
+	},
+	"panel_detail_rewards_title": {
+		"message": "Ghostery Rewards",
+		"description": ""
+	},
+	"panel_about_licenses": {
+		"message": "Softwarelicenties",
+		"description": ""
+	},
+	"select_file_for_import": {
+		"message": "Selecteer .ghost file om te importeren",
+		"description": ""
+	},
+	"settings_top_left_corner": {
+		"message": "Linkerhoek Boven",
+		"description": ""
+	},
+	"setup_data_view_desc_no_human_web": {
+		"message": "We gebruiken anonieme analytics data om Ghostery’s prestaties te verbeteren, zonder persoonlijke data te verzamelen. $LINK_START$Meer weten.$LINK_END$.",
+		"description": "",
+		"placeholders": {
+			"link_start": {
+				"content": "<a href=\"https://www.ghostery.com/faqs/\" target=\"_blank\">"
+			},
+			"link_end": {
+				"content": "</a>"
+			}
+		}
+	},
+	"click2play_comment_form": {
+		"message": "Ghostery heeft door $NAME$ bekrachtigde opmerkingen geblokkeerd.",
+		"description": "",
+		"placeholders": {
+			"name": {
+				"content": "$1",
+				"example": "Disqus"
+			}
+		}
+	},
+	"tooltip_restrict": {
+		"message": "Blokkeer trackers op deze website altijd.",
+		"description": ""
+	},
+	"settings_restricted_sites_description": {
+		"message": "De hier vermelde websites worden beperkt en alle trackers geblokkeerd.",
+		"description": ""
+	},
+	"box_dismiss_5s": {
+		"message": "Verwerp $SPAN_START$na 5 seconden$SPAN_END$",
+		"description": "",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
+	},
+	"setup_login_view_confirm_email_error": {
+		"message": "Sorry, de e-mailadressen komen niet overeen.",
+		"description": ""
+	},
+	"settings_notify_me": {
+		"message": "Waarschuw me wanneer Ghostery:",
+		"description": ""
+	},
+	"settings_notifications": {
+		"message": "Mededelingen",
+		"description": ""
+	},
+	"click2play_allow_once_tooltip": {
+		"message": "Eenmaal toestaan en herladen.",
+		"description": "Tooltip that appears over the 'allow once' click2play button."
+	},
+	"settings_global_blocking": {
+		"message": "Algemeen Blokkeren",
+		"description": ""
+	},
+	"copyright": {
+		"message": "$C$ $YEAR$ $GHOSTERY$, onderdeel van $COMPANY_ADDRESS$",
+		"description": "Copyright message, shown in page footers.",
+		"placeholders": {
+			"c": {
+				"content": "&copy;"
+			},
+			"company_address": {
+				"content": "$1",
+				"example": "GHOSTERY, Inc., Such-and-such Street, Such-and-such Floor, New York, NY, Zip Code"
+			},
+			"ghostery": {
+				"content": "<a href='https://www.ghostery.com' target='_blank'>Ghostery</a>"
+			},
+			"year": {
+				"content": "2015"
+			}
+		}
+	},
+	"settings_opt_in": {
+		"message": "Meedoen",
+		"description": ""
+	},
+	"settings_signin_create_header": {
+		"message": "Inloggen / Account Aanmaken",
+		"description": ""
+	},
+	"panel_tracker_warning_nonsecure_tooltip": {
+		"message": "Tracker is niet-veilig",
+		"description": ""
+	},
+	"tracker_plural": {
+		"message": "trackers",
+		"description": ""
+	},
+	"rewards_disable": {
+		"message": "Zet Ghostery Rewards uit",
+		"description": ""
+	},
+	"settings_allow_offers": {
+		"message": "Deel te nemen in Ghostery Rewards",
+		"description": ""
+	},
+	"click2play_survey_form": {
+		"message": "Ghostery heeft een door $NAME$ bekrachtigd overzicht geblokkeerd.",
+		"description": "",
+		"placeholders": {
+			"name": {
+				"content": "$1",
+				"example": "Disqus"
+			}
+		}
+	},
+	"tooltip_trust": {
+		"message": "Sta trackers op deze website altijd toe.",
+		"description": ""
+	},
+	"tooltip_smart_block_body_on": {
+		"message": "Tracker blokkering aangepast om prestaties van de pagina te optimaliseren.",
+		"description": ""
+	},
+	"settings_new_features": {
+		"message": "Nieuwe features uitbrengt",
+		"description": ""
+	},
+	"settings_announcements": {
+		"message": "Een mededeling doet",
+		"description": ""
+	},
+	"setup_button_done": {
+		"message": "Klaar",
+		"description": ""
+	},
+	"blocking_category_tracker": {
+		"message": "Tracker",
+		"description": ""
+	},
+	"page_load": {
+		"message": "Pagina Laden",
+		"description": ""
+	},
+	"banner_check_your_email_title": {
+		"message": "Bekijk zometeen je email voor een link om je wachtwoord te resetten.",
+		"description": ""
+	},
+	"settings_filter_new_label": {
+		"message": "Nieuw",
+		"description": ""
+	},
+	"pause_1_hour": {
+		"message": "voor 1 uur",
+		"description": ""
+	},
+	"enable_when_blacklisted": {
+		"message": "Maak Beperk Website ongedaan om deze functie te gebruiken.",
+		"description": ""
+	},
+	"tooltip_restrict_on": {
+		"message": "Trackers geblokkeerd en Anti-Tracking aangezet op deze website. Klik om Ongedaan te maken.",
+		"description": ""
+	},
+	"panel_detail_premium_text": {
+		"message": "Functie binnenkort mogelijk.",
+		"description": ""
+	},
+	"setup_upgrade_subtitle": {
+		"message": "Actueel",
+		"description": ""
+	},
+	"box_display_bl": {
+		"message": "Toon $SPAN_START$Onder Links$SPAN_END$",
+		"description": "",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
+	},
+	"settings_required_trackers": {
+		"message": "Toon me wanneer ik een tracker toestemming moet geven om de mogelijkheden van een website te gebruiken.",
+		"description": ""
+	},
+	"alert_site_trusted": {
+		"message": "Website whitelisted. Trackers zullen worden toegestaan en Anti-Tracking uitgezet op deze website.",
+		"description": ""
+	},
+	"license_module": {
+		"message": "Module",
+		"description": ""
+	},
+	"blacklist_error_whitelist_url": {
+		"message": "Deze website is verwijderd uit je lijst met Vertrouwde Websites en toegevoegd aan je lijst met Beperkte Websites",
+		"description": ""
+	},
+	"panel_help_faq": {
+		"message": "Veelgestelde Vragen",
+		"description": ""
+	},
+	"settings_filter_new": {
+		"message": "Nieuw Sinds Laatste Update",
+		"description": ""
+	},
+	"blocking_category_trackers": {
+		"message": "Trackers",
+		"description": ""
+	},
+	"blocking_block_shown": {
+		"message": "Blokkeer Alle Getoonde",
+		"description": ""
+	},
+	"panel_menu_signin": {
+		"message": "Inloggen ",
+		"description": ""
+	},
+	"error_email_forgot": {
+		"message": "Hmm, ik kan die e-mail niet vinden. Misschien een andere proberen?",
+		"description": ""
+	},
+	"setup_display_view_detailed": {
+		"message": "Gedetailleerd",
+		"description": ""
+	},
+	"tooltip_ad_block": {
+		"message": "Versterkte Ad Blokkering",
+		"description": ""
+	},
+	"panel_detail_menu_rewards_title": {
+		"message": "Rewards",
+		"description": ""
+	},
+	"panel_tracker_trust_tooltip": {
+		"message": "Vertrouw op deze website",
+		"description": ""
+	},
+	"settings_bottom_left_corner": {
+		"message": "Linkerhoek Onder",
+		"description": ""
+	},
+	"settings_import_dialog_error": {
+		"message": "Ghostery kan geen browsedialoog weergeven wanneer de huidige pagina één van de gereserveerde browserpagina's is. Ga naar een andere pagina en probeer het nogmaals.",
+		"description": ""
+	},
+	"rewards_disable_notification": {
+		"message": "Ghostery Rewards staat nu uit. Je kunt het altijd aanzetten in Ghostery Settings of in het Ghostery Dashboard.",
+		"description": ""
+	},
+	"expand_all": {
+		"message": "Alles Ontvouwen",
+		"description": ""
+	},
+	"panel_menu_signout": {
+		"message": "Uitloggen",
+		"description": ""
+	},
+	"drawer_status_enable_smart_block": {
+		"message": "Slim Blokkeren is",
+		"description": ""
+	},
+	"settings_support_ghostery": {
+		"message": "Ondersteun Ghostery",
+		"description": ""
+	},
+	"panel_about_release_notes": {
+		"message": "Bekijk release notes voor alle updates",
+		"description": ""
+	},
+	"notification_upgrade_link": {
+		"message": "Check zelf de te gekke nieuwe functies en fixes in deze release.",
+		"description": ""
+	},
+	"notification_upgrade_title_v8": {
+		"message": "Hier is Ghostery 8!",
+		"description": ""
+	},
+	"summary_resume_ghostery_ab_pause": {
+		"message": "Hervat",
+		"description": ""
+	},
+	"box_tracker": {
+		"message": "Tracker",
+		"description": ""
+	},
+	"settings_new_trackers": {
+		"message": "Nieuwe trackers aan de tracker bibliotheek toevoegt.",
+		"description": ""
+	},
+	"blocked_redirect_page_title": {
+		"message": "Ghostery heeft een Doorlink Verhinderd.",
+		"description": "Page title for blocked_redirect.html which appears when a redirect is blocked."
+	},
+	"click2play_video_form": {
+		"message": "Ghostery heeft $NAME$ video player geblokkeerd.",
+		"description": "",
+		"placeholders": {
+			"name": {
+				"content": "$1",
+				"example": "Disqus"
+			}
+		}
+	},
+	"box_dismiss_30s": {
+		"message": "Verwerp $SPAN_START$na 30 seconden$SPAN_END$",
+		"description": "",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
+	},
+	"license_licenses": {
+		"message": "Licenties",
+		"description": ""
+	},
+	"setup_choice_view_custom_setup": {
+		"message": "Aangepaste Instelling",
+		"description": ""
+	},
+	"browse_button_label": {
+		"message": "Blader...",
+		"description": ""
+	},
+	"alert_ghostery_paused": {
+		"message": "Ghostery extensie is gepauzeerd.",
+		"description": ""
+	},
+	"panel_detail_learn_more": {
+		"message": "Meer Weten",
+		"description": ""
+	},
+	"panel_about_license": {
+		"message": "Licentieovereenkomst",
+		"description": ""
+	},
+	"summary_alert": {
+		"message": "Waarschuwing",
+		"description": "as in '1 ALERT'"
+	},
+	"setup_data_view_desc": {
+		"message": "We gebruiken anonieme analytics en Human Web data om Ghostery’s prestaties te verbeteren, zonder persoonlijke data te verzamelen. $LINK_START$Meer weten$LINK_END$.",
+		"description": "",
+		"placeholders": {
+			"link_start": {
+				"content": "<a href=\"https://www.ghostery.com/faqs/\" target=\"_blank\">"
+			},
+			"link_end": {
+				"content": "</a>"
+			}
+		}
+	},
+	"category_uncategorized_desc": {
+		"message": "Deze trackers zijn nog niet gecategoriseerd.",
+		"description": ""
+	},
+	"setup_blocking_view_block_ads": {
+		"message": "Alleen trackers toevoegen",
+		"description": ""
+	},
+	"tooltip_smart_block_body": {
+		"message": "Blokkeer en deblokkeer trackers automatisch om pagina-performance te optimaliseren.",
+		"description": ""
+	},
+	"rewards_code_copied_toast_notification": {
+		"message": "Rewards code gekopieerd!",
+		"description": ""
+	},
+	"panel_detail_menu_performance_title": {
+		"message": "Performance",
+		"description": ""
+	},
+	"settings_show_patterns_tooltip": {
+		"message": "Tracker URLs kun je vinden onder de tracker-omschrijving nadat je op een tracker geklikt hebt.",
+		"description": ""
+	},
+	"setup_button_sign_in": {
+		"message": "Inloggen ",
+		"description": ""
+	},
+	"settings_blocking": {
+		"message": "Blokkeren",
+		"description": ""
+	},
+	"drawer_title_enable_smart_block": {
+		"message": "Slim Blokkeren",
+		"description": ""
+	},
+	"refresh_and_try_again": {
+		"message": "Ververs pagina en probeer nogmaals",
+		"description": ""
+	},
+	"panel_help_questions_header": {
+		"message": "Vragen en Opmerkingen",
+		"description": ""
+	},
+	"panel_needs_reload": {
+		"message": "Ghostery heeft updates in de wacht staan.",
+		"description": ""
+	},
+	"settings_show_trackers_banner": {
+		"message": "Toon tracker waarschuwinsbanner-mededelingen bovenaan de extensie",
+		"description": ""
+	},
+	"file_was_not_selected": {
+		"message": "File niet geselecteerd",
+		"description": ""
+	},
+	"category_audio_video_player_desc": {
+		"message": "Stelt websites in staat audio en video content te publiceren, te verspreiden en te optimaliseren.",
+		"description": "User-facing description for the Audio/Video Player tag category."
+	},
+	"consent_privacy": {
+		"message": "Toestemming vereist.",
+		"description": ""
+	},
+	"password_requirements": {
+		"message": "Gebruik tussen 8 en 50 karakters.",
+		"description": ""
+	},
 	"account_creation_privacy_statement": {
 		"message": "Ik stem in met Ghostery's gebruik van data zoals vermeld in het $LINK_PS_START$Privacybeleid$LINK_PS_END$ en de voorwaarden in de $LINK_UA_START$Licentieovereenkomst$LINK_UA_END$.",
+		"description": "",
 		"placeholders": {
 			"link_ps_end": {
 				"content": "</a>"
@@ -16,41 +834,891 @@
 			}
 		}
 	},
-	"all": {
-		"description": "Default setting in the 'filter by type' dropdown for the tag browser. Doesn't filter anything out. Should read as 'Show all'.",
-		"message": "alles"
+	"tooltip_custom_settings": {
+		"message": "Gebruik mijn geselecteerde tracker instellingen.",
+		"description": ""
 	},
-	"banner_check_your_email_title": {
-		"message": "Bekijk zometeen je email voor een link om je wachtwoord te resetten."
+	"setup_footer_license": {
+		"message": "Ghostery$COPY$; is een Cliqz company. Kom meer te weten over $LINK_START$Cliqz$LINK_END$. $COPY$Cliqz International GmbH, een dochtermaatschappij van Cliqz GmbH. Alle rechten voorbehouden.",
+		"description": "",
+		"placeholders": {
+			"link_start": {
+				"content": "<a href=\"https://cliqz.com\" target=\"_blank\">"
+			},
+			"link_end": {
+				"content": "</a>"
+			},
+			"copy": {
+				"content": "&copy;"
+			}
+		}
 	},
-	"banner_no_such_account_message": {
-		"message": "Het lijkt erop dat we deze email en wachtwoord combi niet kunnen vinden. Probeer het nog een keer."
+	"panel_detail_premium_title": {
+		"message": "Ghostery Premium",
+		"description": ""
 	},
-	"blacklist_error_duplicate_url": {
-		"message": "Deze website is all beperkt."
+	"panel_detail_history_title": {
+		"message": "Geschiedenis",
+		"description": ""
 	},
-	"blacklist_error_whitelist_url": {
-		"message": "Deze website is verwijderd uit je lijst met Vertrouwde Websites en toegevoegd aan je lijst met Beperkte Websites"
+	"box_warning_nonsecure": {
+		"message": "Niet-veilige Trackers",
+		"description": ""
+	},
+	"settings_account": {
+		"message": "Account",
+		"description": ""
+	},
+	"drawer_status_enable_ad_block": {
+		"message": "Ad Blokkering is",
+		"description": ""
+	},
+	"none": {
+		"message": "Geen",
+		"description": "Used to say that this item does not belong to any of the groups, as in \"Groups: None\" (as opposed to \"Groups: Group A, Group B, Group C\")."
+	},
+	"rewards_copy_code": {
+		"message": "kopieer code",
+		"description": ""
+	},
+	"notification_library_update": {
+		"message": "We hebben een paar nieuwe trackers opgediept en aan de Ghostery Database toegevoegd.",
+		"description": ""
+	},
+	"settings_replace_social": {
+		"message": "Vervang geblokkeerde sociale media knoppen met een Ghostery icon.",
+		"description": ""
+	},
+	"setup_button_exit": {
+		"message": "Exit",
+		"description": ""
+	},
+	"alert_smart_block_on": {
+		"message": "Slim Blokkeren AAN. Tracker blokkering wordt aangepast om prestaties van de pagina te optimaliseren.",
+		"description": ""
+	},
+	"setup_upgrade_desc_1": {
+		"message": "$BOLD_START$Smart Blocking$BOLD_END$ past de prestatie automatisch aan terwijl je browset.",
+		"description": "",
+		"placeholders": {
+			"bold_start": {
+				"content": "<strong>"
+			},
+			"bold_end": {
+				"content": "</strong>"
+			}
+		}
+	},
+	"summary_pause_ghostery_ab_pause": {
+		"message": "Pauzeer",
+		"description": ""
+	},
+	"enable_when_not_scanned": {
+		"message": "Ga naar een andere pagina om deze functie te gebruiken.",
+		"description": ""
+	},
+	"settings_share_human_web": {
+		"message": "Human Web data te delen",
+		"description": ""
+	},
+	"panel_detail_rewards_cliqz_text": {
+		"message": "Functie al actief in het Cliqz MyOffrz controle paneel.",
+		"description": ""
+	},
+	"rewards_code_copied": {
+		"message": "code gekopieerd",
+		"description": ""
+	},
+	"panel_tracker_slow_non_secure_end": {
+		"message": " op deze pagina.",
+		"description": ""
+	},
+	"setup_login_view_last_name": {
+		"message": "Achternaam (Optioneel):",
+		"description": ""
+	},
+	"setup_login_view_password_error": {
+		"message": "Gebruik tussen 8 en 50 karakters.",
+		"description": ""
+	},
+	"license_unknown": {
+		"message": "onbekend",
+		"description": ""
+	},
+	"license_generic": {
+		"message": "Standaard licentietekst",
+		"description": ""
+	},
+	"panel_about_panel_header": {
+		"message": "Over Ghostery Browser Extension",
+		"description": ""
+	},
+	"setup_login_view_email": {
+		"message": "E-mail:",
+		"description": ""
 	},
 	"blocked": {
-		"description": "Select this to show only blocked (checked) tags in the tag browser. Should read as 'Show blocked'.",
-		"message": "geblokkeerd"
+		"message": "geblokkeerd",
+		"description": "Select this to show only blocked (checked) tags in the tag browser. Should read as 'Show blocked'."
 	},
-	"blocked_redirect_action_always_title": {
-		"description": "Title for the 'Allow always and reload' button on the blocked redirect page.",
-		"message": "Altijd toestaan en herladen."
+	"setup_additional_view_adblock_desc": {
+		"message": "Blokkeer alle advertenties op de websites die je bezoekt.",
+		"description": ""
 	},
-	"blocked_redirect_action_through_once_title": {
-		"description": "Title for the 'Allow once' button on the blocked redirect page.",
-		"message": "Sta tags eenmaal toe tot de eindbestemming is bereikt."
+	"tooltip_ad_block_body": {
+		"message": "Blokkeer advertenties op de websites die je bezoekt.",
+		"description": ""
 	},
-	"blocked_redirect_page_title": {
-		"description": "Page title for blocked_redirect.html which appears when a redirect is blocked.",
-		"message": "Ghostery heeft een Doorlink Verhinderd."
+	"panel_tracker_breaking_page": {
+		"message": "$COUNT$ geblokkeerde $TRACKERS$",
+		"description": "",
+		"placeholders": {
+			"count": {
+				"content": "$1",
+				"example": "4"
+			},
+			"trackers": {
+				"content": "$2",
+				"example": "trackers"
+			}
+		}
+	},
+	"category_customer_interaction": {
+		"message": "Klanten Interactie",
+		"description": "Ghostery organizes tags by category. This is one of several tag categories."
+	},
+	"settings_export_header": {
+		"message": "Exporteer Instellingen",
+		"description": ""
+	},
+	"panel_about_privacy_statement": {
+		"message": "Privacyverklaring",
+		"description": ""
+	},
+	"license_url": {
+		"message": "Url",
+		"description": ""
+	},
+	"settings_allow_trackers": {
+		"message": "Sta door website-eigenaren gemaakte trackers toe",
+		"description": ""
+	},
+	"settings_restricted_sites": {
+		"message": "Beperkte Websites",
+		"description": ""
+	},
+	"drawer_title_enable_anti_tracking": {
+		"message": "Versterkte Anti-Tracking",
+		"description": ""
+	},
+	"setup_blocking_view_block_nothing": {
+		"message": "Niets",
+		"description": ""
+	},
+	"email_field_label": {
+		"message": "E-mail:",
+		"description": ""
+	},
+	"setup_button_previous": {
+		"message": "Vorige",
+		"description": ""
+	},
+	"setup_login_view_confirm_email": {
+		"message": "Bevestig E-mail:",
+		"description": ""
+	},
+	"password_characters_requirements": {
+		"message": "Alleen deze speciale karakters zijn toegestaan: !@#$%^&*=+()<>{}[];:,./?",
+		"description": ""
+	},
+	"setup_choice_view_title": {
+		"message": "Browse slimmer met Ghostery! $BR$Hoe wil je beginnen?",
+		"description": "",
+		"placeholders": {
+			"br": {
+				"content": "<br />"
+			}
+		}
+	},
+	"click2play_review_form": {
+		"message": "Ghostery heeft door $NAME$ bekrachtigde reviews geblokkeerd.",
+		"description": "",
+		"placeholders": {
+			"name": {
+				"content": "$1",
+				"example": "Disqus"
+			}
+		}
+	},
+	"drawer_label_enable_ad_block": {
+		"message": "Ads Geblokkeerd",
+		"description": ""
+	},
+	"panel_detail_menu_history_title": {
+		"message": "Geschiedenis",
+		"description": ""
+	},
+	"notification_upgrade_link_v8": {
+		"message": "Bekijk nu!",
+		"description": ""
+	},
+	"white_black_list_error_invalid_url": {
+		"message": "Voer een geldige URL in.",
+		"description": ""
+	},
+	"license_repository": {
+		"message": "Opslag",
+		"description": ""
+	},
+	"rewards_second_prompt": {
+		"message": "Weet je zeker dat je je wilt afmelden bij Ghostery Rewards?",
+		"description": ""
+	},
+	"alert_site_restricted_off": {
+		"message": "Website niet langer blacklisted.",
+		"description": ""
+	},
+	"alert_anti_track_off": {
+		"message": "Versterkte Anti-Tracking UIT. Persoonlijke gegevens zullen niet worden geanonimiseerd.",
+		"description": ""
+	},
+	"blocked_redirect_url_content": {
+		"message": "Deze tag lijkt door te linken naar $BREAK$ $A_START$$REDIRECT_URL$$A_END$ Indien deze link lijkt te kloppen en je door wilt gaan, klik dan op het icon hieronder om $APP$ toe te staan en herlaad.",
+		"description": "Text appearing on block_redirect.html when a redirect is blocked and a final 'destination' URL is successfully found.",
+		"placeholders": {
+			"a_end": {
+				"content": "</a>"
+			},
+			"a_start": {
+				"content": "<a href=\"$1\" class=\"ellipsis\" title=\"$1\">"
+			},
+			"app": {
+				"content": "$2",
+				"example": "DoubleClick"
+			},
+			"break": {
+				"content": "<br>"
+			},
+			"redirect_url": {
+				"content": "$1"
+			}
+		}
+	},
+	"banner_no_such_account_message": {
+		"message": "Het lijkt erop dat we deze email en wachtwoord combi niet kunnen vinden. Probeer het nog een keer.",
+		"description": ""
+	},
+	"panel_view_trackers": {
+		"message": "Trackers bekijken",
+		"description": ""
+	},
+	"panel_menu_submit_tracker": {
+		"message": "Geef een nieuwe tracker door",
+		"description": ""
+	},
+	"setup_choice_view_learn_more": {
+		"message": "Meer weten.",
+		"description": ""
+	},
+	"box_display_tr": {
+		"message": "Toon $SPAN_START$Boven Rechts$SPAN_END$",
+		"description": "",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
+	},
+	"setup_title": {
+		"message": "Ghostery Instelling",
+		"description": ""
+	},
+	"invalid_email_confirmation": {
+		"message": "Je e-mailadressen komen niet overeen.",
+		"description": ""
+	},
+	"category_comments_desc": {
+		"message": "Maakt secties voor artikel- en productreviews mogelijk.",
+		"description": "User-facing description for the Comments tag category."
+	},
+	"rewards_new_text": {
+		"message": "nieuwe Reward ontdekt",
+		"description": ""
+	},
+	"create_password_field_label": {
+		"message": "Wachtwoord:",
+		"description": ""
+	},
+	"panel_detail_performance_title": {
+		"message": "Website Performance",
+		"description": ""
+	},
+	"category_advertising": {
+		"message": "Advertising",
+		"description": "Ghostery organizes tags by category. This is one of several tag categories."
+	},
+	"settings_import_success": {
+		"message": "Je instellingen zijn met succes geïmporteerd op",
+		"description": ""
+	},
+	"category_site_analytics": {
+		"message": "Website Analytics",
+		"description": "Ghostery organizes tags by category. This is one of several tag categories."
+	},
+	"panel_help_panel_header": {
+		"message": "Hulp voor Ghostery Browser Extension",
+		"description": ""
+	},
+	"settings_trust_and_restrict": {
+		"message": "Vertrouw en Beperk",
+		"description": ""
+	},
+	"tooltip_anti_track_body_on": {
+		"message": "Persoonlijke gegevenspunten geanonimiseerd.",
+		"description": ""
+	},
+	"settings_auto_update": {
+		"message": "Activeer automatische updates uit de Ghostery tracker bibliotheek",
+		"description": ""
+	},
+	"panel_menu_about": {
+		"message": "Over",
+		"description": ""
+	},
+	"box_display_tl": {
+		"message": "Toon $SPAN_START$Boven Links$SPAN_END$",
+		"description": "",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
+	},
+	"alert_ad_block_on": {
+		"message": "Versterkte Ad Blokkering AAN. Advertenties zullen worden geblokkeerd.",
+		"description": ""
+	},
+	"setup_display_view_detailed_desc": {
+		"message": "Geeft trackers aan en staat aangepaste blokkering toe met toegevoegde inzichten.",
+		"description": ""
+	},
+	"panel_detail_rewards_none_found": {
+		"message": "Geen Rewards gevonden",
+		"description": ""
+	},
+	"rewards_settings": {
+		"message": "Ghostery Rewards Instellingen",
+		"description": ""
+	},
+	"settings_last_update": {
+		"message": "Laatst gesynchroniseerd op",
+		"description": ""
+	},
+	"settings_general_settings": {
+		"message": "Algemene Instellingen",
+		"description": ""
+	},
+	"settings_display_in": {
+		"message": "Toon In",
+		"description": ""
+	},
+	"setup_display_view_simple": {
+		"message": "Eenvoudig",
+		"description": ""
+	},
+	"settings_edit_account": {
+		"message": "Bewerk Account",
+		"description": ""
+	},
+	"category_essential_desc": {
+		"message": "Inclusief tags die cruciaal zijn voor het functioneren van een website zoals tag beheer en privacy kennisgevingen.",
+		"description": "User-facing description for the Essential tag category."
+	},
+	"last_name_field_label": {
+		"message": "Achternaam (Optioneel):",
+		"description": ""
+	},
+	"settings_update_now": {
+		"message": "Nu updaten",
+		"description": ""
+	},
+	"alert_site_restricted": {
+		"message": "Website blacklisted. Trackers zullen worden geblokkeerd en Anti-Tracking aangezet op deze website.",
+		"description": ""
+	},
+	"rewards_expires_in_secs": {
+		"message": "seconden",
+		"description": ""
+	},
+	"setup_header_password": {
+		"message": "Wachtwoord",
+		"description": ""
+	},
+	"tracker_found": {
+		"message": "gevonden",
+		"description": ""
+	},
+	"panel_detail_menu_premium_title": {
+		"message": "Premium",
+		"description": ""
+	},
+	"global_settings_saved_category": {
+		"message": "Algemene Categorie Instellingen Opgeslagen",
+		"description": ""
+	},
+	"settings_filter_blocked_label": {
+		"message": "Geblokkeerd",
+		"description": ""
+	},
+	"drawer_desc_enable_smart_block": {
+		"message": "Trackers tijdelijk geblokkeerd of gedeblokkeerd.",
+		"description": ""
+	},
+	"settings_trusted_sites": {
+		"message": "Vertrouwde Websites",
+		"description": ""
+	},
+	"settings_seconds": {
+		"message": "sec",
+		"description": ""
+	},
+	"setup_done_view_desc": {
+		"message": "Ghostery zit rustig hier in je browser bar.",
+		"description": ""
+	},
+	"summary_alerts": {
+		"message": "Waarschuwingen",
+		"description": "as in '5 ALERTS'"
+	},
+	"panel_menu_settings": {
+		"message": "Instellingen",
+		"description": ""
+	},
+	"setup_login_view_create_account": {
+		"message": "Heb je geen account? Maak er een aan.",
+		"description": ""
+	},
+	"settings_show_purple_box_tooltip": {
+		"message": "Het paarse vlak is een realtime lijst met trackers die wordt getoond in de hoek van je browser. Deze feature helpt je trackers te zien wanneer ze aan een webpagina worden toegevoegd.",
+		"description": ""
+	},
+	"settings_show_purple_box": {
+		"message": "Toon het paarse vlak in de hoek van mijn browser",
+		"description": ""
+	},
+	"category_advertising_desc": {
+		"message": "Inclusief advertisingdiensten zoals dataverzameling, gedragsanalyse of retargeting.",
+		"description": "User-facing description for the Advertising tag category."
+	},
+	"settings_export_success": {
+		"message": "Je instellingen zijn met succes geëxporteerd naar je download folder op",
+		"description": ""
+	},
+	"tracker_signular": {
+		"message": "tracker",
+		"description": ""
+	},
+	"rewards_expires_in_hours": {
+		"message": "uur",
+		"description": ""
+	},
+	"settings_trusted_restricted_sites": {
+		"message": "Vertrouw en Beperk",
+		"description": ""
+	},
+	"box_looking": {
+		"message": "Kijken",
+		"description": ""
+	},
+	"panel_signin_success": {
+		"message": "Je bent nu ingelogd als ",
+		"description": ""
+	},
+	"setup_display_view_title": {
+		"message": "Wat voor beeld wil je hebben?",
+		"description": ""
+	},
+	"summary_map_these_trackers": {
+		"message": "Breng deze trackers in kaart",
+		"description": ""
+	},
+	"tracker_description_learn_more": {
+		"message": "Ga door naar volledig tracker profiel",
+		"description": ""
+	},
+	"not_http_page": {
+		"message": "Controleer of je huidige tab een http of https pagina open heeft",
+		"description": ""
+	},
+	"panel_header_verify_account": {
+		"message": "Verifieer Account",
+		"description": ""
+	},
+	"setup_additional_view_adblock_title": {
+		"message": "Versterkte Ad Blokkering",
+		"description": ""
+	},
+	"settings_filter_all_label": {
+		"message": "Alles",
+		"description": ""
+	},
+	"settings_highlight_trackers_tooltip": {
+		"message": "Soms kan het zijn dat features als het delen van sociale media, opmerkingen, of videoplayers het niet doen wanneer een bepaalde is geblokkeerd. Indien je deze geblokkeerde features wilt toestaan, klik dan op deze icon op de pagina:",
+		"description": ""
+	},
+	"panel_detail_performance_text": {
+		"message": "Functie binnenkort mogelijk.",
+		"description": ""
+	},
+	"category_essential": {
+		"message": "Essentieel",
+		"description": "Ghostery organizes tags by category. This is one of several tag categories."
+	},
+	"summary_description_not_scanned_2": {
+		"message": "Ga naar een andere pagina en ik beloof je dat ik mezelf zal bewijzen.",
+		"description": ""
+	},
+	"settings_import_warning": {
+		"message": "WAARSCHUWING: Hiermee worden je huidige Ghostery instellingen overschreven.",
+		"description": ""
+	},
+	"panel_menu_help": {
+		"message": "Help",
+		"description": ""
+	},
+	"tooltip_pause": {
+		"message": "Pauzeer Ghostery",
+		"description": ""
+	},
+	"settings_trackers": {
+		"message": "Trackers",
+		"description": ""
+	},
+	"rewards_terms_conditions": {
+		"message": "Algemene Voorwaarden",
+		"description": ""
+	},
+	"notification_upgrade_v8": {
+		"message": "Installeer onze coole nieuwe features en kom meer te weten over onze grootste release tot nu toe.",
+		"description": ""
+	},
+	"panel_tracker_breaking_page_end": {
+		"message": " de pagina breken.",
+		"description": ""
+	},
+	"settings_filter_unblocked_label": {
+		"message": "Gedeblokkeerd",
+		"description": ""
+	},
+	"rewards_no": {
+		"message": "nee",
+		"description": ""
+	},
+	"settings_human_web_tooltip": {
+		"message": "Ghostery implementeert nu standaard het Human Web, een revolutionaire technologie dat de wijsheid van de menigte gebruikt om internet meer privé te maken",
+		"description": ""
+	},
+	"category_pornvertising": {
+		"message": "Adult Advertising",
+		"description": "Ghostery organizes tags by category. This is one of several tag categories."
+	},
+	"settings_update_up_to_date": {
+		"message": "Nog steeds up-to-date",
+		"description": ""
+	},
+	"panel_tracker_warning_smartunblock_tooltip": {
+		"message": "Tracker gedeblokkeerd door Smart Blocking",
+		"description": ""
+	},
+	"alert_site_trusted_off": {
+		"message": "Site niet langer whitelisted.",
+		"description": ""
+	},
+	"summary_show_menu": {
+		"message": "toon menu",
+		"description": ""
+	},
+	"rewards_about": {
+		"message": "Over Ghostery Rewards",
+		"description": ""
+	},
+	"category_social_media": {
+		"message": "Sociale Media",
+		"description": "Ghostery organizes tags by category. This is one of several tag categories."
+	},
+	"blocking_category_tracker_found": {
+		"message": "Gevonden",
+		"description": ""
+	},
+	"tooltip_ad_block_body_on": {
+		"message": "Advertenties zijn geblokkeerd.",
+		"description": ""
+	},
+	"settings_sites_placeholder": {
+		"message": "voorbeeld.com",
+		"description": ""
+	},
+	"setup_login_view_log_in": {
+		"message": "Heb je al een account? Log in.",
+		"description": ""
+	},
+	"category_customer_interaction_desc": {
+		"message": "Bevat chat, berichten per e-mail, klantenservice en andere interactie-tools.",
+		"description": "User-facing description for the Customer Interaction tag category."
+	},
+	"panel_forgot_password": {
+		"message": "Wachtwoord Vergeten?",
+		"description": ""
+	},
+	"click2play_blocked": {
+		"message": "Ghostery heeft $APP_NAME$ geblokkeerd.",
+		"description": "",
+		"placeholders": {
+			"app_name": {
+				"content": "$1",
+				"example": "SoundCloud"
+			}
+		}
+	},
+	"panel_help_setup": {
+		"message": "Ghostery Instellen",
+		"description": ""
+	},
+	"setup_blocking_view_block_custom": {
+		"message": "Aangepast",
+		"description": ""
+	},
+	"settings_individual_trackers_tooltip": {
+		"message": "Kies welke specifieke trackers je wilt blokkeren of toestaan op een website voor controle op maat",
+		"description": ""
+	},
+	"rewards_delete": {
+		"message": "Verwijder deze Reward",
+		"description": ""
+	},
+	"click2play_allow_always_tooltip": {
+		"message": "Toestaan en herladen.",
+		"description": "Tooltip that appears over the 'allow always' click2play button."
+	},
+	"rewards_expires_in_days": {
+		"message": "dagen",
+		"description": ""
+	},
+	"panel_tracker_block_tooltip": {
+		"message": "Blokkeer op alle websites",
+		"description": ""
+	},
+	"setup_button_next": {
+		"message": "Volgende",
+		"description": ""
+	},
+	"setup_header_email": {
+		"message": "E-mail",
+		"description": ""
+	},
+	"license_information_missing": {
+		"message": "Licentie opslaginformatie ontbreekt",
+		"description": ""
+	},
+	"box_settings_expanded": {
+		"message": "Mijn Ghostery Instellingen",
+		"description": ""
+	},
+	"rewards_first_prompt": {
+		"message": "Wil je verdergaan naar Ghostery Rewards?",
+		"description": ""
+	},
+	"drawer_tooltip_enable_ad_block": {
+		"message": "Toon of blokkeer alle advertenties op websites.",
+		"description": ""
+	},
+	"panel_detail_menu_list_title": {
+		"message": "Bekijk Lijst",
+		"description": ""
+	},
+	"forgot_password_message": {
+		"message": "Wachtwoord Vergeten? Ach, dat kan iedereen overkomen. We e-mailen je instructies om je wachtwoord te resetten.",
+		"description": ""
+	},
+	"box_options_expanded": {
+		"message": "Opties",
+		"description": ""
+	},
+	"drawer_tooltip_enable_smart_block": {
+		"message": "Blokkeer en deblokkeer trackers automatisch om pagina-performance te optimaliseren.",
+		"description": ""
+	},
+	"setup_upgrade_desc_3": {
+		"message": "$BOLD_START$Versterkte Anti-Tracking$BOLD_END$ beschermt je persoonlijke data nog beter.",
+		"description": "",
+		"placeholders": {
+			"bold_start": {
+				"content": "<strong>"
+			},
+			"bold_end": {
+				"content": "</strong>"
+			}
+		}
+	},
+	"tooltip_trust_on": {
+		"message": "Trackers toegestaan en Anti-Tracking uitgezet op deze website. Klik om Ongedaan te maken.",
+		"description": ""
+	},
+	"settings_show_tracker_count_badge": {
+		"message": "Toon tracker-teller op het Ghostery icon in de browser toolbar",
+		"description": ""
+	},
+	"category_comments": {
+		"message": "Opmerkingen",
+		"description": "Ghostery organizes tags by category. This is one of several tag categories."
+	},
+	"pause_24_hours": {
+		"message": "voor 24 uur",
+		"description": ""
+	},
+	"server_error_message": {
+		"message": "We lijken een technisch probleempje te hebben. Probeer het later nogmaals.",
+		"description": ""
+	},
+	"panel_detail_rewards_coming_soon": {
+		"message": "Functie binnenkort mogelijk.",
+		"description": ""
+	},
+	"summary_pause_ghostery": {
+		"message": "Pauze",
+		"description": ""
+	},
+	"unblocked": {
+		"message": "Gedeblokkeerd",
+		"description": "Select this to show only unblocked (unchecked) tags in the tag browser. Should read as 'Show unblocked'."
+	},
+	"tracker_description_none_found": {
+		"message": "Geen tracker omschrijving gevonden.",
+		"description": ""
+	},
+	"setup_login_view_password": {
+		"message": "Wachtwoord:",
+		"description": ""
+	},
+	"panel_tracker_warning_slow_tooltip": {
+		"message": "Tracker is langzaam",
+		"description": ""
+	},
+	"setup_choice_view_answer_questions": {
+		"message": "Kies mijn eigen instellingen na een paar korte vragen.",
+		"description": ""
+	},
+	"setup_header_sign_in_hide": {
+		"message": "Verberg Aanmelden",
+		"description": ""
+	},
+	"setup_login_view_email_error": {
+		"message": "Sorry, je moet een echt e-mailadres invoeren.",
+		"description": ""
+	},
+	"category_pornvertising_desc": {
+		"message": "Inclusief advertisingtechnologieën die zijn ontworpen voor websites met adult content.",
+		"description": "User-facing description for the Adult Advertising tag category."
+	},
+	"setup_upgrade_button_go": {
+		"message": "Set Me Up",
+		"description": ""
+	},
+	"setup_button_skip": {
+		"message": "overslaan",
+		"description": ""
+	},
+	"pause_30_min": {
+		"message": "voor 30 min",
+		"description": ""
+	},
+	"summary_blocked": {
+		"message": "Geblokkeerd",
+		"description": "as in '5 (trackers) BLOCKED'"
+	},
+	"panel_help_feedback": {
+		"message": "Beantwoord Onze Survey",
+		"description": ""
+	},
+	"license_publisher": {
+		"message": "Uitgever",
+		"description": ""
+	},
+	"summary_page_not_scanned": {
+		"message": "Pagina Niet Gescand",
+		"description": ""
+	},
+	"summary_resume_ghostery_tooltip": {
+		"message": "Ghostery extensie gepauzeerd. Klik om te hervatten.",
+		"description": ""
+	},
+	"box_settings": {
+		"message": "Instellingen",
+		"description": ""
+	},
+	"panel_menu_report_broken_site": {
+		"message": "Meld een verbroken pagina",
+		"description": ""
+	},
+	"rewards_off": {
+		"message": "uit",
+		"description": ""
+	},
+	"license_type": {
+		"message": "Licentie soort(en)",
+		"description": ""
+	},
+	"panel_help_support": {
+		"message": "Helpdesk",
+		"description": ""
+	},
+	"panel_tracker_slow_non_secure": {
+		"message": "$COUNT$ langzame en/of niet-veilige $TRACKERS$",
+		"description": "",
+		"placeholders": {
+			"count": {
+				"content": "$1",
+				"example": "4"
+			},
+			"trackers": {
+				"content": "$2",
+				"example": "trackers"
+			}
+		}
+	},
+	"panel_header_sign_in": {
+		"message": "Inloggen ",
+		"description": ""
+	},
+	"tooltip_anti_track": {
+		"message": "Versterkte Anti-Tracking",
+		"description": ""
+	},
+	"category_site_analytics_desc": {
+		"message": "Inclusief data analytics, website gebruik en performance trackers.",
+		"description": "User-facing description for the Site Analytics tag category."
+	},
+	"tooltip_resume": {
+		"message": "Hervat Ghostery",
+		"description": ""
+	},
+	"license_text": {
+		"message": "Licentietekst",
+		"description": ""
+	},
+	"settings_import_file_error": {
+		"message": "Dat is niet het juiste soort file. Kies een .ghost file en probeer het nogmaals.",
+		"description": ""
 	},
 	"blocked_redirect_prevent": {
-		"description": "Text appearing on block_redirect.html when a redirect is blocked. Should appear inside \"redirect-prevent\" div.",
 		"message": "Ghostery heeft een doorlink voorkomen van $BREAK$ $SP_O_START$$ORIGIN$$SP_END$ naar $SP_D_START$$DESTINATION$$SP_END$, $BREAK$die deel uitmaakt van $A_START$$APP$$A_END$. $BREAK$",
+		"description": "Text appearing on block_redirect.html when a redirect is blocked. Should appear inside \"redirect-prevent\" div.",
 		"placeholders": {
 			"a_end": {
 				"content": "</a>"
@@ -60,7 +1728,7 @@
 			},
 			"app": {
 				"content": "$3",
-				"example": "DubbelKlikken"
+				"example": "DoubleClick"
 			},
 			"break": {
 				"content": "<br>"
@@ -82,469 +1750,164 @@
 			}
 		}
 	},
-	"blocked_redirect_url_content": {
-		"description": "Text appearing on block_redirect.html when a redirect is blocked and a final 'destination' URL is successfully found.",
-		"message": "Deze tag lijkt door te linken naar $BREAK$ $A_START$$REDIRECT_URL$$A_END$ Indien deze link lijkt te kloppen en je door wilt gaan, klik dan op het icon hieronder om $APP$ toe te staan en herlaad.",
+	"blocking_block_all": {
+		"message": "Blokkeer Alles",
+		"description": ""
+	},
+	"setup_additional_view_antitrack_desc": {
+		"message": "Anonimiseer gedeblokkeerde en onbekende trackers voor meer bescherming tijdens het browsen.",
+		"description": ""
+	},
+	"setup_choice_view_legal": {
+		"message": "Door Ghostery te installeren, aanvaard je Ghostery's $LINK_PP_START$Privacybeleid$LINK_PP_END$ en de $LINK_TERMS_START$Gebruikersvoorwaarden$LINK_TERMS_END$",
+		"description": "",
 		"placeholders": {
-			"a_end": {
+			"link_pp_start": {
+				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" target=\"_blank\">"
+			},
+			"link_pp_end": {
 				"content": "</a>"
 			},
-			"a_start": {
-				"content": "<a href=\"$1\" class=\"ellipsis\" title=\"$1\">"
+			"link_terms_start": {
+				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-end-user-license-agreement/\" target=\"_blank\">"
 			},
-			"app": {
-				"content": "$2",
-				"example": "DubbelKlikken"
-			},
-			"break": {
-				"content": "<br>"
-			},
-			"redirect_url": {
-				"content": "$1"
+			"link_terms_end": {
+				"content": "</a>"
 			}
 		}
 	},
-	"box_dismiss_0s": {
-		"message": "Verwerp $SPAN_START$nooit$SPAN_END$",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
+	"all": {
+		"message": "alles",
+		"description": "Default setting in the 'filter by type' dropdown for the tag browser. Doesn't filter anything out. Should read as 'Show all'."
 	},
-	"box_dismiss_15s": {
-		"message": "Verwerp $SPAN_START$na 10 seconden$SPAN_END$",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
+	"settings_share_usage_tooltip": {
+		"message": "We verzamelen gebruiks-analytics om beter te begrijpen welke features gebruikers fijn vinden. Als je bijvoorbeeld op pauze klikt, ontvangen we een ping waardoor we weten dat je die feature hebt gebruikt.",
+		"description": ""
 	},
-	"box_dismiss_30s": {
-		"message": "Verwerp $SPAN_START$na 30 seconden$SPAN_END$",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
+	"summary_trust_site_active": {
+		"message": "Website Vertrouwd",
+		"description": ""
 	},
-	"box_dismiss_5s": {
-		"message": "Verwerp $SPAN_START$na 5 seconden$SPAN_END$",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
+	"panel_help_contact_header": {
+		"message": "Hoe Contact Opnemen",
+		"description": ""
 	},
-	"box_display_bl": {
-		"message": "Toon $SPAN_START$Onder Links$SPAN_END$",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
+	"drawer_label_enable_smart_block": {
+		"message": "Trackers Aangepast",
+		"description": ""
 	},
-	"box_display_br": {
-		"message": "Toon $SPAN_START$Onder Rechts$SPAN_END$",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
+	"settings_show_patterns": {
+		"message": "Laat tracker URLs zien",
+		"description": ""
 	},
-	"box_display_tl": {
-		"message": "Toon $SPAN_START$Boven Links$SPAN_END$",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
+	"blocked_redirect_action_always_title": {
+		"message": "Altijd toestaan en herladen.",
+		"description": "Title for the 'Allow always and reload' button on the blocked redirect page."
 	},
-	"box_display_tr": {
-		"message": "Toon $SPAN_START$Boven Rechts$SPAN_END$",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
+	"drawer_title_enable_ad_block": {
+		"message": "Versterkte Ad Blokkering",
+		"description": ""
 	},
-	"box_hide": {
-		"message": "Verberg Vak"
+	"settings_export_reserved_page_error": {
+		"message": "Ghostery kan geen instellingen exporteren wanneer de huidige pagina één van de gereserveerde browserpagina's is. Ga naar een andere pagina en probeer het nogmaals.",
+		"description": ""
+	},
+	"password_field_label": {
+		"message": "Wachtwoord",
+		"description": ""
+	},
+	"rewards_expires_in_mins": {
+		"message": "minuten",
+		"description": ""
+	},
+	"alert_ghostery_resumed": {
+		"message": "Ghostery extensie is hervat.",
+		"description": ""
+	},
+	"pause_30_min_condensed": {
+		"message": "30 min",
+		"description": ""
+	},
+	"setup_additional_view_smartblock_desc": {
+		"message": "Blokkeer en deblokkeer trackers automatisch om pagina-performance te optimaliseren.",
+		"description": ""
+	},
+	"send_button_label": {
+		"message": "Verzenden",
+		"description": ""
+	},
+	"alert_reload": {
+		"message": "Herladen om de wijzigingen te bekijken.",
+		"description": ""
 	},
 	"box_hide_expanded": {
-		"message": "Verberg Paarse Vak"
+		"message": "Verberg Paarse Vak",
+		"description": ""
 	},
-	"box_looking": {
-		"message": "Kijken"
+	"tracker_description_getting": {
+		"message": "Tracker omschrijving ophalen...",
+		"description": ""
 	},
-	"box_options_expanded": {
-		"message": "Opties"
-	},
-	"box_settings": {
-		"message": "Instellingen"
-	},
-	"box_settings_expanded": {
-		"message": "Mijn Ghostery Instellingen"
-	},
-	"box_tracker": {
-		"message": "Tracker"
-	},
-	"box_trackers": {
-		"message": "Trackers"
-	},
-	"box_warning_slow": {
-		"message": "Langzame Trackers"
-	},
-	"box_warning_nonsecure": {
-		"message": "Niet-veilige Trackers"
-	},
-	"box_warning_compatibility": {
-		"message": "Verbroken Pagina Trackers"
-	},
-	"browser_button_tooltip": {
-		"description": "Ghostery's browser button tooltip.",
-		"message": "Bekijk Ghostery's bevindingen"
-	},
-	"button_cancel": {
-		"description": "Part of a confirmation dialog. Hierop klikken annuleert de handeling.",
-		"message": "Annuleren"
-	},
-	"category_advertising": {
-		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
-		"message": "Advertising"
-	},
-	"category_advertising_desc": {
-		"description": "User-facing description for the Advertising tag category.",
-		"message": "Inclusief advertisingdiensten zoals dataverzameling, gedragsanalyse of retargeting."
-	},
-	"category_audio_video_player": {
-		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
-		"message": "Audio-/Videospeler"
-	},
-	"category_audio_video_player_desc": {
-		"description": "User-facing description for the Audio/Video Player tag category.",
-		"message": "Stelt websites in staat audio en video content te publiceren, te verspreiden en te optimaliseren."
-	},
-	"category_comments": {
-		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
-		"message": "Opmerkingen"
-	},
-	"category_comments_desc": {
-		"description": "User-facing description for the Comments tag category.",
-		"message": "Maakt secties voor artikel- en productreviews mogelijk."
-	},
-	"category_customer_interaction": {
-		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
-		"message": "Klanten Interactie"
-	},
-	"category_customer_interaction_desc": {
-		"description": "User-facing description for the Customer Interaction tag category.",
-		"message": "Bevat chat, berichten per e-mail, klantenservice en andere interactie-tools."
-	},
-	"category_essential": {
-		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
-		"message": "Essentieel"
-	},
-	"category_essential_desc": {
-		"description": "User-facing description for the Essential tag category.",
-		"message": "Inclusief tags die cruciaal zijn voor het functioneren van een website zoals tag beheer en privacy kennisgevingen."
-	},
-	"category_pornvertising": {
-		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
-		"message": "Adult Advertising"
-	},
-	"category_pornvertising_desc": {
-		"description": "User-facing description for the Adult Advertising tag category.",
-		"message": "Inclusief advertisingtechnologieën die zijn ontworpen voor websites met adult content."
-	},
-	"category_site_analytics": {
-		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
-		"message": "Website Analytics"
-	},
-	"category_site_analytics_desc": {
-		"description": "User-facing description for the Site Analytics tag category.",
-		"message": "Inclusief data analytics, website gebruik en performance trackers."
-	},
-	"category_social_media": {
-		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
-		"message": "Sociale Media"
-	},
-	"category_social_media_desc": {
-		"description": "User-facing description for the Social Media tag category.",
-		"message": "Inclusief functies met betrekking tot sociale media platformen."
-	},
-	"category_uncategorized": {
-		"message": "Ongecategoriseerd"
-	},
-	"category_uncategorized_desc": {
-		"message": "Deze trackers zijn nog niet gecategoriseerd."
-	},
-	"click2play_allow_always_tooltip": {
-		"description": "Tooltip that appears over the 'allow always' click2play button.",
-		"message": "Toestaan en herladen."
-	},
-	"click2play_allow_once_button_tooltip": {
-		"description": "Tooltip that appears over the click2play replacement for 'social' buttons.",
-		"message": "Ghostery heeft $APP_NAME$ geblokkeerd. Klik hier om eenmalig laden toe te staan.",
-		"placeholders": {
-			"app_name": {
-				"content": "$1",
-				"example": "Twitter Button"
-			}
-		}
-	},
-	"click2play_allow_once_tooltip": {
-		"description": "Tooltip that appears over the 'allow once' click2play button.",
-		"message": "Eenmaal toestaan en herladen."
-	},
-	"click2play_blocked": {
-		"message": "Ghostery heeft $APP_NAME$ geblokkeerd.",
-		"placeholders": {
-			"app_name": {
-				"content": "$1",
-				"example": "SoundCloud"
-			}
-		}
-	},
-	"click2play_comment_form": {
-		"message": "Ghostery heeft door $NAME$ bekrachtigde opmerkingen geblokkeerd.",
-		"placeholders": {
-			"name": {
-				"content": "$1",
-				"example": "Disqus"
-			}
-		}
-	},
-	"click2play_review_form": {
-		"message": "Ghostery heeft door $NAME$ bekrachtigde reviews geblokkeerd.",
-		"placeholders": {
-			"name": {
-				"content": "$1",
-				"example": "Disqus"
-			}
-		}
-	},
-	"click2play_survey_form": {
-		"message": "Ghostery heeft een door $NAME$ bekrachtigd overzicht geblokkeerd.",
-		"placeholders": {
-			"name": {
-				"content": "$1",
-				"example": "Disqus"
-			}
-		}
-	},
-	"click2play_video_form": {
-		"message": "Ghostery heeft $NAME$ video player geblokkeerd.",
-		"placeholders": {
-			"name": {
-				"content": "$1",
-				"example": "Disqus"
-			}
-		}
-	},
-	"consent_privacy": {
-		"message": "Toestemming vereist."
-	},
-	"copyright": {
-		"description": "Copyright message, shown in page footers.",
-		"message": "$C$ $YEAR$ $GHOSTERY$, onderdeel van $COMPANY_ADDRESS$",
-		"placeholders": {
-			"c": {
-				"content": "&copy;"
-			},
-			"company_address": {
-				"content": "$1",
-				"example": "GHOSTERY, Inc., Such-and-such Street, Such-and-such Floor, New York, NY, Zip Code"
-			},
-			"ghostery": {
-				"content": "<a href='https://www.ghostery.com' target='_blank'>Ghostery</a>"
-			},
-			"year": {
-				"content": "2015"
-			}
-		}
-	},
-	"email_confirm_field_label": {
-		"message": "Bevestig E-mail:"
-	},
-	"email_field_label": {
-		"message": "E-mail:"
-	},
-	"error_email_forgot": {
-		"message": "Hmm, ik kan die e-mail niet vinden. Misschien een andere proberen?"
-	},
-	"first_name_field_label": {
-		"message": "Voornaam (Optioneel):"
-	},
-	"forgot_password_message": {
-		"message": "Wachtwoord Vergeten? Ach, dat kan iedereen overkomen. We e-mailen je instructies om je wachtwoord te resetten."
-	},
-	"invalid_email_confirmation": {
-		"message": "Je e-mailadressen komen niet overeen."
-	},
-	"invalid_email_create": {
-		"message": "Voer een geldig e-mailadres in."
-	},
-	"invalid_email_forgot": {
-		"message": "Sorry, je moet een echt e-mailadres invoeren."
-	},
-	"invalid_email_login": {
-		"message": "Sorry, je moet een echt e-mailadres invoeren."
-	},
-	"last_name_field_label": {
-		"message": "Achternaam (Optioneel):"
-	},
-	"password_field_label_required": {
-		"message": "Wachtwoord vereist."
+	"drawer_label_enable_anti_tracking": {
+		"message": "Trackers Geanonimiseerd",
+		"description": ""
 	},
 	"name": {
-		"description": "The title of this extension (Ghostery).",
 		"message": "$EXTENSION_NAME$ – Privacy Ad Blocker",
+		"description": "The title of this extension (Ghostery).",
 		"placeholders": {
 			"extension_name": {
 				"content": "Ghostery"
 			}
 		}
 	},
-	"none": {
-		"description": "Used to say that this item does not belong to any of the groups, as in \"Groups: None\" (as opposed to \"Groups: Group A, Group B, Group C\").",
-		"message": "Geen"
-	},
-	"summary_blocked": {
-		"description": "as in '5 (trackers) BLOCKED'",
-		"message": "Geblokkeerd"
-	},
-	"summary_alert": {
-		"description": "as in '1 ALERT'",
-		"message": "Waarschuwing"
-	},
-	"summary_alerts": {
-		"description": "as in '5 ALERTS'",
-		"message": "Waarschuwingen"
-	},
-	"summary_page_not_scanned": {
-		"message": "Pagina Niet Gescand"
-	},
-	"summary_description_not_scanned_1": {
-		"message": "Ghostery scant alleen \"http\" en \"https\" pagina's."
-	},
-	"summary_description_not_scanned_2": {
-		"message": "Ga naar een andere pagina en ik beloof je dat ik mezelf zal bewijzen."
-	},
-	"summary_trust_site": {
-		"message": "Vertrouw Website"
-	},
 	"summary_restrict_site": {
-		"message": "Beperk Website"
+		"message": "Beperk Website",
+		"description": ""
 	},
-	"summary_undo": {
-		"message": "Ongedaan Maken"
+	"setup_data_view_title": {
+		"message": "Zou je willen helpen Ghostery te verbeteren?",
+		"description": ""
 	},
-	"summary_pause_ghostery": {
-		"message": "Pauze"
+	"blacklist_error_duplicate_url": {
+		"message": "Deze website is all beperkt.",
+		"description": ""
 	},
-	"pause_30_min": {
-		"message": "voor 30 min"
+	"rewards_on": {
+		"message": "aan",
+		"description": ""
 	},
-	"pause_1_hour": {
-		"message": "voor 1 uur"
+	"category_uncategorized": {
+		"message": "Ongecategoriseerd",
+		"description": ""
 	},
-	"pause_24_hours": {
-		"message": "voor 24 uur"
+	"drawer_desc_enable_ad_block": {
+		"message": "Ad spots zijn geblokkeerd.",
+		"description": ""
 	},
-	"summary_resume_ghostery": {
-		"message": "Hervat"
+	"settings_notify_me_tooltip": {
+		"message": "Geef Ghostery toestemming berichten te tonen in mijn browser met betrekking tot nieuwe features, updates en klanten feedback.",
+		"description": ""
 	},
-	"summary_map_these_trackers": {
-		"message": "Breng deze trackers in kaart"
+	"tooltip_simple": {
+		"message": "Eenvoudig Overzicht",
+		"description": ""
 	},
-	"blocking_trackers": {
-		"message": "Trackers"
+	"settings_account_email": {
+		"message": "E-mail",
+		"description": ""
 	},
-	"blocking_block_all": {
-		"message": "Blokkeer Alles"
+	"setup_additional_view_smartblock_title": {
+		"message": "Slim Blokkeren",
+		"description": ""
 	},
-	"blocking_block_shown": {
-		"message": "Blokkeer Alle Getoonde"
-	},
-	"blocking_category_tracker": {
-		"message": "Tracker"
-	},
-	"blocking_category_trackers": {
-		"message": "Trackers"
-	},
-	"blocking_category_blocked": {
-		"description": "as in '5 (trackers) BLOCKED'",
-		"message": "Geblokkeerd"
-	},
-	"panel_create_account": {
-		"message": "Account Aanmaken"
-	},
-	"panel_email_verification_sent": {
-		"message": "$BOLD_HTML_STARTS$ Succes! $BOLD_HTML_END$ Een account verificatie e-mail is verstuurd naar $EMAIL$",
-		"placeholders": {
-			"bold_html_end": {
-				"content": "</strong>"
-			},
-			"bold_html_starts": {
-				"content": "<strong>"
-			},
-			"email": {
-				"content": "$1",
-				"example": "info@ghostery.com"
-			}
-		}
-	},
-	"panel_forgot_password": {
-		"message": "Wachtwoord Vergeten?"
-	},
-	"panel_help_panel_header": {
-		"message": "Hulp voor Ghostery Browser Extension"
-	},
-	"panel_help_contact_header": {
-		"message": "Hoe Contact Opnemen"
-	},
-	"panel_help_faq": {
-		"message": "Veelgestelde Vragen"
-	},
-	"panel_help_feedback": {
-		"message": "Beantwoord Onze Survey"
-	},
-	"panel_help_questions_header": {
-		"message": "Vragen en Opmerkingen"
-	},
-	"panel_help_support": {
-		"message": "Helpdesk"
-	},
-	"panel_about_panel_header": {
-		"message": "Over Ghostery Browser Extension"
+	"rewards_on_toast_notification": {
+		"message": "Ghostery Rewards staat AAN",
+		"description": ""
 	},
 	"panel_about_version_header": {
 		"message": "Ghostery voor $BROWSER$ versie $VERSION$",
+		"description": "",
 		"placeholders": {
 			"browser": {
 				"content": "$1",
@@ -556,816 +1919,109 @@
 			}
 		}
 	},
-	"panel_about_license": {
-		"message": "Licentieovereenkomst"
-	},
-	"panel_about_privacy_statement": {
-		"message": "Privacyverklaring"
-	},
-	"panel_about_licenses": {
-		"message": "Softwarelicenties"
-	},
-	"panel_menu_settings": {
-		"message": "Instellingen"
-	},
-	"panel_menu_report_broken_site": {
-		"message": "Meld een verbroken pagina"
-	},
-	"panel_menu_submit_tracker": {
-		"message": "Geef een nieuwe tracker door"
-	},
-	"panel_menu_help": {
-		"message": "Help"
-	},
-	"panel_menu_about": {
-		"message": "Over"
-	},
-	"panel_menu_signin": {
-		"message": "Inloggen "
-	},
-	"panel_menu_signout": {
-		"message": "Uitloggen"
-	},
-	"panel_needs_reload": {
-		"message": "Ghostery heeft updates in de wacht staan."
-	},
-	"panel_click_to_reload": {
-		"message": "Klik om te herladen en de wijzigingen te bekijken."
-	},
-	"panel_tracker_breaking_page": {
-		"message": "$COUNT$ geblokkeerde $TRACKERS$",
-		"placeholders": {
-			"count": {
-				"content": "$1",
-				"example": "4"
-			},
-			"trackers": {
-				"content": "$2",
-				"example": "trackers"
-			}
-		}
-	},
-	"panel_tracker_breaking_page_end": {
-		"message": " de pagina breken."
-	},
-	"panel_tracker_slow_non_secure": {
-		"message": "$COUNT$ langzame en/of niet-veilige $TRACKERS$",
-		"placeholders": {
-			"count": {
-				"content": "$1",
-				"example": "4"
-			},
-			"trackers": {
-				"content": "$2",
-				"example": "trackers"
-			}
-		}
-	},
-	"panel_tracker_slow_non_secure_end": {
-		"message": " op deze pagina."
-	},
-	"tracker_signular": {
-		"message": "tracker"
-	},
-	"tracker_plural": {
-		"message": "trackers"
-	},
-	"panel_signin_success": {
-		"message": "Je bent nu ingelogd als "
-	},
-	"panel_view_trackers": {
-		"message": "Trackers bekijken"
-	},
-	"panel_signin_success_title": {
-		"message": "Gefeliciteerd! Je Ghostery account is klaar voor gebruik."
-	},
-	"panel_title_create_account": {
-		"message": "Account Aanmaken"
-	},
-	"panel_tracker_found_sources_title": {
-		"message": "Ontdekte tracker URLs:"
-	},
-	"panel_tracker_warning_compatibility_tooltip": {
-		"message": "Geblokkeerde tracker breekt pagina"
-	},
-	"panel_tracker_warning_slow_nonsecure_tooltip": {
-		"message": "Tracker is langzaam en niet-veilig"
-	},
-	"panel_tracker_warning_nonsecure_tooltip": {
-		"message": "Tracker is niet-veilig"
-	},
-	"panel_tracker_warning_slow_tooltip": {
-		"message": "Tracker is langzaam"
-	},
-	"panel_tracker_block_tooltip": {
-		"message": "Blokkeer op alle websites"
-	},
-	"panel_tracker_restrict_tooltip": {
-		"message": "Beperk op deze website"
-	},
-	"panel_tracker_trust_tooltip": {
-		"message": "Vertrouw op deze website"
-	},
-	"panel_detail_menu_list_title": {
-		"message": "Bekijk Lijst"
-	},
-	"panel_detail_menu_history_title": {
-		"message": "Geschiedenis"
-	},
-	"panel_detail_menu_performance_title": {
-		"message": "Performance"
-	},
-	"panel_detail_menu_rewards_title": {
-		"message": "Rewards"
-	},
-	"panel_detail_menu_premium_title": {
-		"message": "Premium"
-	},
-	"panel_detail_learn_more": {
-		"message": "Meer Weten"
-	},
-	"panel_detail_history_title": {
-		"message": "Geschiedenis"
-	},
-	"panel_detail_history_text": {
-		"message": "Functie binnenkort mogelijk."
-	},
-	"panel_detail_performance_title": {
-		"message": "Website Performance"
-	},
-	"panel_detail_performance_text": {
-		"message": "Functie binnenkort mogelijk."
-	},
-	"panel_detail_rewards_title": {
-		"message": "Ghostery Rewards"
-	},
-	"panel_detail_premium_title": {
-		"message": "Ghostery Premium"
-	},
-	"panel_detail_premium_text": {
-		"message": "Functie binnenkort mogelijk."
-	},
-	"notification_upgrade": {
-		"message": "Ons toegewijd en ongelooflijk aantrekkelijk team heeft keihard gewerkt aan een nieuwe versie van Ghostery."
-	},
-	"notification_upgrade_link": {
-		"message": "Check zelf de te gekke nieuwe functies en fixes in deze release."
-	},
-	"notification_library_update": {
-		"message": "We hebben een paar nieuwe trackers opgediept en aan de Ghostery Database toegevoegd."
-	},
-	"notification_library_update_link": {
-		"message": "Kijk snel wat er nieuw is"
-	},
-	"panel_header_sign_in": {
-		"message": "Inloggen "
-	},
-	"panel_header_verify_account": {
-		"message": "Verifieer Account"
-	},
-	"password_characters_requirements": {
-		"message": "Alleen deze speciale karakters zijn toegestaan: !@#$%^&*=+()<>{}[];:,./?"
-	},
-	"password_field_label": {
-		"message": "Wachtwoord"
-	},
-	"create_password_field_label": {
-		"message": "Wachtwoord:"
-	},
-	"password_requirements": {
-		"message": "Gebruik tussen 8 en 50 karakters."
-	},
-	"send_button_label": {
-		"message": "Verzenden"
-	},
-	"server_error_message": {
-		"message": "We lijken een technisch probleempje te hebben. Probeer het later nogmaals."
-	},
-	"email_address_in_use": {
-		"message": "Dat e-mailadres is al in gebruik.  Gelieve een andere te kiezen. "
-	},
-	"short_description": {
-		"description": "A short description of this extension (Ghostery).",
-		"message": "Ghostery is een krachtige privacy extensie. Blokkeer ads, stop trackers en maak websites sneller,"
-	},
-	"tracker_description_getting": {
-		"message": "Tracker omschrijving ophalen..."
-	},
-	"tracker_description_learn_more": {
-		"message": "Ga door naar volledig tracker profiel"
-	},
-	"tracker_description_none_found": {
-		"message": "Geen tracker omschrijving gevonden."
-	},
-	"unblocked": {
-		"description": "Select this to show only unblocked (unchecked) tags in the tag browser. Should read as 'Show unblocked'.",
-		"message": "Gedeblokkeerd"
-	},
-	"white_black_list_error_invalid_url": {
-		"message": "Voer een geldige URL in."
-	},
-	"whitelist_error_blacklist_url": {
-		"message": "Deze website is verwijderd uit je lijst met Beperkte Websites en toegevoegd aan je lijst met Vertrouwde Websites"
-	},
-	"whitelist_error_duplicate_url": {
-		"description": "Options page site whitelisting error message shown when whitelisting a URL that is already in the whitelist.",
-		"message": "Deze site is al toegestaan."
-	},
-	"settings_purple_box": {
-		"message": "Paars Vak"
-	},
-	"settings_notifications": {
-		"message": "Mededelingen"
-	},
-	"settings_support_ghostery": {
-		"message": "Ondersteun Ghostery"
-	},
-	"settings_account": {
-		"message": "Account"
-	},
-	"settings_trackers": {
-		"message": "Trackers"
-	},
-	"settings_auto_update": {
-		"message": "Activeer automatische updates uit de Ghostery tracker bibliotheek"
-	},
-	"settings_last_update": {
-		"message": "Laatst gesynchroniseerd op"
-	},
-	"settings_update_now": {
-		"message": "Nu updaten"
-	},
-	"settings_update_success": {
-		"message": "Succes!"
-	},
-	"settings_update_up_to_date": {
-		"message": "Nog steeds up-to-date"
-	},
-	"settings_update_failed": {
-		"message": "Update mislukt. Probeer het later nogmaals"
-	},
-	"settings_show_patterns": {
-		"message": "Laat tracker URLs zien"
-	},
-	"settings_highlight_trackers": {
-		"message": "Highlight Interactieve Trackers"
-	},
-	"settings_required_trackers": {
-		"message": "Toon me wanneer ik een tracker toestemming moet geven om de mogelijkheden van een website te gebruiken."
-	},
-	"settings_replace_social": {
-		"message": "Vervang geblokkeerde sociale media knoppen met een Ghostery icon."
-	},
-	"settings_blocking": {
-		"message": "Blokkeren"
-	},
-	"settings_individual_trackers": {
-		"message": "Vertrouw en beperk individuele trackers"
-	},
-	"settings_allow_trackers": {
-		"message": "Sta door website-eigenaren gemaakte trackers toe"
-	},
-	"settings_block_trackers": {
-		"message": "Blokkeer standaard nieuwe aan Ghostery toegevoegde trackers"
-	},
-	"settings_show_purple_box": {
-		"message": "Toon het paarse vlak in de hoek van mijn browser"
-	},
-	"settings_dismiss_after": {
-		"message": "Verwerp Na"
-	},
-	"settings_display_in": {
-		"message": "Toon In"
-	},
-	"settings_bottom_right_corner": {
-		"message": "Rechterhoek Onder"
-	},
-	"settings_bottom_left_corner": {
-		"message": "Linkerhoek Onder"
-	},
-	"settings_top_right_corner": {
-		"message": "Rechterhoek Boven"
-	},
-	"settings_top_left_corner": {
-		"message": "Linkerhoek Boven"
-	},
-	"settings_never": {
-		"message": "Nooit"
-	},
-	"settings_seconds": {
-		"message": "sec"
-	},
-	"settings_hide_alert_trusted": {
-		"message": "Verberg het paarse vlak op vertrouwde websites"
-	},
-	"settings_notify_me": {
-		"message": "Waarschuw me wanneer Ghostery:"
-	},
-	"settings_announcements": {
-		"message": "Een mededeling doet"
-	},
-	"settings_new_features": {
-		"message": "Nieuwe features uitbrengt"
-	},
-	"settings_new_trackers": {
-		"message": "Nieuwe trackers aan de tracker bibliotheek toevoegt."
-	},
-	"settings_show_reload_banner": {
-		"message": "Toon pagina herlaad banner-mededelingen bovenaan de extensie"
-	},
-	"settings_show_trackers_banner": {
-		"message": "Toon tracker waarschuwinsbanner-mededelingen bovenaan de extensie"
-	},
-	"settings_show_tracker_count_badge": {
-		"message": "Toon tracker-teller op het Ghostery icon in de browser toolbar"
-	},
-	"settings_support_ghostery_by": {
-		"message": "Ondersteun Ghostery door"
-	},
-	"settings_share_usage": {
-		"message": "Extensiegebruik analytics te delen"
-	},
-	"settings_share_human_web": {
-		"message": "Human Web data te delen"
-	},
-	"settings_allow_offers": {
-		"message": "Deel te nemen in Ghostery Rewards"
-	},
-	"settings_signin_create_header": {
-		"message": "Inloggen / Account Aanmaken"
-	},
-	"settings_sign_create_text": {
-		"message": "Instellingen van je account worden gesynchroniseerd met dit apparaat. Maak een account aan om je Ghostery instellingen eenvoudig te synchroniseren op alle apparaten en platformen."
-	},
-	"settings_account_name": {
-		"message": "Naam"
-	},
-	"settings_account_email": {
-		"message": "E-mail"
-	},
-	"settings_edit_account": {
-		"message": "Bewerk Account"
-	},
-	"settings_export_header": {
-		"message": "Exporteer Instellingen"
-	},
-	"settings_export_text": {
-		"message": "Bewaar een kopie van de Ghostery voorkeuren en stuur door naar een andere computer."
-	},
-	"settings_export_success": {
-		"message": "Je instellingen zijn met succes geëxporteerd naar je download folder op"
-	},
-	"settings_export_error": {
-		"message": "Je instellingen zijn niet met succes geëxporteerd. Probeer het nogmaals"
-	},
-	"settings_import_header": {
-		"message": "Importeer Instellingen"
-	},
-	"settings_import_text": {
-		"message": "Kies een backup .ghost file."
-	},
-	"settings_import_warning": {
-		"message": "WAARSCHUWING: Hiermee worden je huidige Ghostery instellingen overschreven."
-	},
-	"settings_import_success": {
-		"message": "Je instellingen zijn met succes geïmporteerd op"
-	},
-	"settings_import_file_error": {
-		"message": "Dat is niet het juiste soort file. Kies een .ghost file en probeer het nogmaals."
-	},
-	"browse_button_label": {
-		"message": "Blader..."
-	},
-	"select_file_for_import": {
-		"message": "Selecteer .ghost file om te importeren"
-	},
-	"file_was_not_selected": {
-		"message": "File niet geselecteerd"
-	},
-	"refresh_and_try_again": {
-		"message": "Ververs pagina en probeer nogmaals"
-	},
-	"not_http_page": {
-		"message": "Controleer of je huidige tab een http of https pagina open heeft"
-	},
-	"settings_show_patterns_tooltip": {
-		"message": "Tracker URLs kun je vinden onder de tracker-omschrijving nadat je op een tracker geklikt hebt."
-	},
-	"settings_highlight_trackers_tooltip": {
-		"message": "Soms kan het zijn dat features als het delen van sociale media, opmerkingen, of videoplayers het niet doen wanneer een bepaalde is geblokkeerd. Indien je deze geblokkeerde features wilt toestaan, klik dan op deze icon op de pagina:"
-	},
-	"settings_individual_trackers_tooltip": {
-		"message": "Kies welke specifieke trackers je wilt blokkeren of toestaan op een website voor controle op maat"
-	},
-	"settings_allow_trackers_tooltip": {
-		"message": "Een Facebook tracker op facebook.com blokkeren kan bijvoorbeeld de website breken."
-	},
-	"settings_show_purple_box_tooltip": {
-		"message": "Het paarse vlak is een realtime lijst met trackers die wordt getoond in de hoek van je browser. Deze feature helpt je trackers te zien wanneer ze aan een webpagina worden toegevoegd."
-	},
-	"settings_notify_me_tooltip": {
-		"message": "Geef Ghostery toestemming berichten te tonen in mijn browser met betrekking tot nieuwe features, updates en klanten feedback."
-	},
-	"settings_share_usage_tooltip": {
-		"message": "We verzamelen gebruiks-analytics om beter te begrijpen welke features gebruikers fijn vinden. Als je bijvoorbeeld op pauze klikt, ontvangen we een ping waardoor we weten dat je die feature hebt gebruikt."
-	},
-	"settings_human_web_tooltip": {
-		"message": "Ghostery implementeert nu standaard het Human Web, een revolutionaire technologie dat de wijsheid van de menigte gebruikt om internet meer privé te maken"
-	},
-	"settings_offers_tooltip": {
-		"message": "Ghostery Rewards is een feature waarmee je kortingen en speciale aanbiedingen kunt verdienen bij onze partners."
-	},
-	"settings_opt_in": {
-		"message": "Meedoen"
-	},
-	"settings_global_blocking": {
-		"message": "Algemeen Blokkeren"
-	},
-	"settings_trust_and_restrict": {
-		"message": "Vertrouw en Beperk"
-	},
-	"settings_general_settings": {
-		"message": "Algemene Instellingen"
-	},
-	"settings_searh_by_tracker": {
-		"message": "Zoek per tracker"
-	},
-	"page_load": {
-		"message": "Pagina Laden"
-	},
-	"settings_trusted_restricted_sites": {
-		"message": "Vertrouw en Beperk"
-	},
-	"settings_trusted_sites": {
-		"message": "Vertrouwde Websites"
-	},
-	"settings_sites_placeholder": {
-		"message": "voorbeeld.com"
-	},
-	"settings_restricted_sites": {
-		"message": "Beperkte Websites"
-	},
-	"settings_trusted_sites_description": {
-		"message": "De hier vermelde websites worden vertrouwd en alle trackers gedeblokkeerd."
-	},
-	"settings_restricted_sites_description": {
-		"message": "De hier vermelde websites worden beperkt en alle trackers geblokkeerd."
-	},
-	"expand_all": {
-		"message": "Alles Ontvouwen"
-	},
-	"collapse_all": {
-		"message": "Alles Dichtvouwen"
-	},
-	"blocking_category_tracker_found": {
-		"message": "Gevonden"
-	},
-	"drawer_title_enable_anti_tracking": {
-		"message": "Versterkte Anti-Tracking"
-	},
-	"drawer_tooltip_enable_anti_tracking": {
-		"message": "Geïntegreerde trackers slaan gebruikersactiviteiten op en op de meeste websites verwijdert Anti-tracking alle data die zou kunnen worden gebruikt om je te identificeren alvorens het door deze trackers verzameld kan worden. De afbeelding laat zien hoeveel datapunten verwijderd zijn op de website."
-	},
-	"drawer_label_enable_anti_tracking": {
-		"message": "Trackers Geanonimiseerd"
-	},
-	"drawer_desc_enable_anti_tracking": {
-		"message": "Privé-datapunten zijn verwijderd."
-	},
-	"drawer_status_enable_anti_tracking": {
-		"message": "Anti-Tracking is"
-	},
-	"drawer_title_enable_ad_block": {
-		"message": "Versterkte Ad Blokkering"
-	},
-	"drawer_tooltip_enable_ad_block": {
-		"message": "Toon of blokkeer alle advertenties op websites."
-	},
-	"drawer_label_enable_ad_block": {
-		"message": "Ads Geblokkeerd"
-	},
-	"drawer_desc_enable_ad_block": {
-		"message": "Ad spots zijn geblokkeerd."
-	},
-	"drawer_status_enable_ad_block": {
-		"message": "Ad Blokkering is"
-	},
-	"drawer_title_enable_smart_block": {
-		"message": "Slim Blokkeren"
-	},
-	"drawer_tooltip_enable_smart_block": {
-		"message": "Blokkeer en deblokkeer trackers automatisch om pagina-performance te optimaliseren."
-	},
-	"drawer_label_enable_smart_block": {
-		"message": "Trackers Aangepast"
-	},
-	"drawer_desc_enable_smart_block": {
-		"message": "Trackers tijdelijk geblokkeerd of gedeblokkeerd."
-	},
-	"drawer_status_enable_smart_block": {
-		"message": "Slim Blokkeren is"
-	},
-	"drawer_on": {
-		"message": "Aan"
-	},
-	"drawer_off": {
-		"message": "Uit"
-	},
-	"blocking_unblock_all": {
-		"message": "Deblokkeer Alles"
-	},
-	"blocking_unblock_shown": {
-		"message": "Deblokkeer Alle Getoonde"
-	},
-	"settings_filter_all_label": {
-		"message": "Alles"
-	},
-	"settings_filter_blocked_label": {
-		"message": "Geblokkeerd"
-	},
-	"settings_filter_unblocked_label": {
-		"message": "Gedeblokkeerd"
-	},
-	"settings_filter_new_label": {
-		"message": "Nieuw"
-	},
-	"settings_filter_all": {
-		"message": "Alle Trackers"
-	},
-	"settings_filter_blocked": {
-		"message": "Geblokkeerde Trackers"
-	},
-	"settings_filter_unblocked": {
-		"message": "Gedeblokkeerde Trackers"
-	},
-	"settings_filter_new": {
-		"message": "Nieuw Sinds Laatste Update"
-	},
-	"tooltip_anti_track": {
-		"message": "Versterkte Anti-Tracking"
-	},
-	"tooltip_anti_track_body": {
-		"message": "Anonimiseer gedeblokkeerde en onbekende trackers voor meer bescherming tijdens het browsen."
-	},
-	"tooltip_ad_block": {
-		"message": "Versterkte Ad Blokkering"
-	},
-	"tooltip_ad_block_body": {
-		"message": "Blokkeer advertenties op de websites die je bezoekt."
-	},
-	"tooltip_smart_block": {
-		"message": "Slim Blokkeren"
-	},
-	"tooltip_smart_block_body": {
-		"message": "Blokkeer en deblokkeer trackers automatisch om pagina-performance te optimaliseren."
-	},
-	"tooltip_trust": {
-		"message": "Sta trackers op deze website altijd toe."
-	},
-	"tooltip_restrict": {
-		"message": "Blokkeer trackers op deze website altijd."
-	},
-	"tooltip_pause": {
-		"message": "Pauzeer Ghostery"
-	},
-	"tooltip_resume": {
-		"message": "Hervat Ghostery"
-	},
-	"tooltip_expert": {
-		"message": "Gedetailleerd Overzicht"
-	},
-	"tooltip_simple": {
-		"message": "Eenvoudig Overzicht"
-	},
-	"license_module": {
-		"message": "Module"
-	},
-	"license_repository": {
-		"message": "Opslag"
-	},
-	"license_information_missing": {
-		"message": "Licentie opslaginformatie ontbreekt"
-	},
-	"license_type": {
-		"message": "Licentie soort(en)"
-	},
-	"license_publisher": {
-		"message": "Uitgever"
-	},
-	"license_url": {
-		"message": "Url"
-	},
-	"license_email": {
-		"message": "E-mail"
-	},
-	"license_text": {
-		"message": "Licentietekst"
-	},
-	"license_unknown": {
-		"message": "onbekend"
-	},
-	"license_generic": {
-		"message": "Standaard licentietekst"
-	},
-	"license_licenses": {
-		"message": "Licenties"
-	},
-	"setup_title": {
-		"message": "Ghostery Instelling"
-	},
-	"setup_header_sign_in": {
-		"message": "Inloggen "
-	},
-	"setup_header_email": {
-		"message": "E-mail"
-	},
-	"setup_header_password": {
-		"message": "Wachtwoord"
-	},
-	"setup_choice_view_title": {
-		"message": "Browse slimmer met Ghostery! $BR$Hoe wil je beginnen?",
-		"placeholders": {
-			"br": {
-				"content": "<br />"
-			}
-		}
-	},
-	"setup_choice_view_one_click": {
-		"message": "One-Click Installatie"
-	},
-	"setup_choice_view_share_data": {
-		"message": "Deel mijn analytics en Human Web data om de prestaties van Ghostery te verbeteren."
-	},
-	"setup_choice_view_learn_more": {
-		"message": "Meer weten."
-	},
-	"setup_choice_view_custom_setup": {
-		"message": "Aangepaste Instelling"
-	},
-	"setup_choice_view_answer_questions": {
-		"message": "Kies mijn eigen instellingen na een paar korte vragen."
-	},
-	"setup_blocking_view_title": {
-		"message": "Ghostery kan trackers blokkeren om je schoner, sneller en veiliger te laten browsen. Wat wil je blokkeren?"
-	},
-	"setup_blocking_view_block_nothing": {
-		"message": "Niets"
-	},
-	"setup_blocking_view_block_ads": {
-		"message": "Alleen trackers toevoegen"
-	},
-	"setup_blocking_view_block_everything": {
-		"message": "Alles"
-	},
-	"setup_blocking_view_block_custom": {
-		"message": "Aangepast"
-	},
-	"setup_additional_view_title": {
-		"message": "Wil je slimmer browsen met onze aanbevolen features?"
-	},
-	"setup_additional_view_enabled": {
-		"message": "Geactiveerd"
-	},
-	"setup_additional_view_antitrack_title": {
-		"message": "Versterkte Anti-Tracking"
-	},
-	"setup_additional_view_antitrack_desc": {
-		"message": "Anonimiseer gedeblokkeerde en onbekende trackers voor meer bescherming tijdens het browsen."
-	},
-	"setup_additional_view_adblock_title": {
-		"message": "Versterkte Ad Blokkering"
-	},
-	"setup_additional_view_adblock_desc": {
-		"message": "Blokkeer alle advertenties op de websites die je bezoekt."
-	},
-	"setup_additional_view_smartblock_title": {
-		"message": "Slim Blokkeren"
-	},
-	"setup_additional_view_smartblock_desc": {
-		"message": "Blokkeer en deblokkeer trackers automatisch om pagina-performance te optimaliseren."
-	},
-	"setup_display_view_title": {
-		"message": "Wat voor beeld wil je hebben?"
-	},
-	"setup_display_view_simple": {
-		"message": "Eenvoudig"
-	},
-	"setup_display_view_simple_desc": {
-		"message": "Toon basic blokkeringsinformatie."
-	},
-	"setup_display_view_detailed": {
-		"message": "Gedetailleerd"
-	},
-	"setup_display_view_detailed_desc": {
-		"message": "Geeft trackers aan en staat aangepaste blokkering toe met toegevoegde inzichten."
-	},
-	"setup_login_view_title": {
-		"message": "Wil je een Ghostery account aanmaken om instellingen op verschillende browsers en apparaten te synchroniseren?"
-	},
-	"setup_login_view_email": {
-		"message": "E-mail:"
-	},
-	"setup_login_view_email_error": {
-		"message": "Sorry, je moet een echt e-mailadres invoeren."
-	},
-	"setup_login_view_confirm_email": {
-		"message": "Bevestig E-mail:"
-	},
-	"setup_login_view_confirm_email_error": {
-		"message": "Sorry, de e-mailadressen komen niet overeen."
-	},
-	"setup_login_view_first_name": {
-		"message": "Voornaam (Optioneel):"
-	},
-	"setup_login_view_last_name": {
-		"message": "Achternaam (Optioneel):"
-	},
-	"setup_login_view_password": {
-		"message": "Wachtwoord:"
-	},
-	"setup_login_view_password_error": {
-		"message": "Gebruik tussen 8 en 50 karakters."
-	},
-	"setup_login_view_create_account": {
-		"message": "Heb je geen account? Maak er een aan."
-	},
-	"setup_login_view_log_in": {
-		"message": "Heb je al een account? Log in."
-	},
-	"setup_login_view_signed_in_as": {
-		"message": "Ingelogd als"
-	},
-	"setup_data_view_title": {
-		"message": "Zou je willen helpen Ghostery te verbeteren?"
-	},
-	"setup_data_view_desc": {
-		"message": "We gebruiken anonieme analytics en Human Web data om Ghostery’s prestaties te verbeteren, zonder persoonlijke data te verzamelen. $LINK_START$Meer weten$LINK_END$.",
-		"placeholders": {
-			"link_start": {
-				"content": "<a href=\"https://www.ghostery.com/faqs/\" target=\"_blank\">"
-			},
-			"link_end": {
-				"content": "</a>"
-			}
-		}
-	},
-	"setup_data_view_checkbox": {
-		"message": "Steun Ghostery door deze informatie te delen."
+	"invalid_email_forgot": {
+		"message": "Sorry, je moet een echt e-mailadres invoeren.",
+		"description": ""
 	},
 	"setup_done_view_title": {
-		"message": "Je bent er klaar voor!"
+		"message": "Je bent er klaar voor!",
+		"description": ""
 	},
-	"setup_done_view_desc": {
-		"message": "Ghostery zit rustig hier in je browser bar."
+	"tooltip_expert": {
+		"message": "Gedetailleerd Overzicht",
+		"description": ""
 	},
-	"setup_button_previous": {
-		"message": "Vorige"
+	"tooltip_anti_track_body": {
+		"message": "Anonimiseer gedeblokkeerde en onbekende trackers voor meer bescherming tijdens het browsen.",
+		"description": ""
 	},
-	"setup_button_next": {
-		"message": "Volgende"
+	"enable_when_paused": {
+		"message": "Hervat Ghostery om deze functie te gebruiken.",
+		"description": ""
 	},
-	"setup_button_skip": {
-		"message": "overslaan"
+	"blocked_redirect_action_through_once_title": {
+		"message": "Sta tags eenmaal toe tot de eindbestemming is bereikt.",
+		"description": "Title for the 'Allow once' button on the blocked redirect page."
 	},
-	"setup_button_create_account": {
-		"message": "Account Aanmaken"
+	"panel_tracker_warning_smartblock_tooltip": {
+		"message": "Tracker geblokkeerd door Smart Blocking",
+		"description": ""
 	},
-	"setup_button_sign_in": {
-		"message": "Inloggen "
+	"enable_when_whitelisted": {
+		"message": "Maak Vertrouw Website ongedaan om deze functie te gebruiken.",
+		"description": ""
 	},
-	"setup_button_exit": {
-		"message": "Exit"
+	"summary_undo": {
+		"message": "Ongedaan Maken",
+		"description": ""
 	},
-	"setup_button_done": {
-		"message": "Klaar"
+	"setup_upgrade_button_later": {
+		"message": "Misschien Later",
+		"description": ""
 	},
-	"setup_footer_license": {
-		"message": "Ghostery$COPY$; is een Cliqz company. Kom meer te weten over $LINK_START$Cliqz$LINK_END$. $COPY$Cliqz International GmbH, een dochtermaatschappij van Cliqz GmbH. Alle rechten voorbehouden.",
+	"setup_upgrade_title": {
+		"message": "Welcome bij Ghostery 8!",
+		"description": ""
+	},
+	"settings_show_reload_banner": {
+		"message": "Toon pagina herlaad banner-mededelingen bovenaan de extensie",
+		"description": ""
+	},
+	"settings_account_name": {
+		"message": "Naam",
+		"description": ""
+	},
+	"alert_smart_block_off": {
+		"message": "Slim Blokkeren UIT. Tracker blokkering zal niet automatisch worden aangepast.",
+		"description": ""
+	},
+	"panel_header_simple_view": {
+		"message": "Eenvoudig Overzicht",
+		"description": ""
+	},
+	"setup_choice_view_one_click": {
+		"message": "One-Click Installatie",
+		"description": ""
+	},
+	"invalid_email_login": {
+		"message": "Sorry, je moet een echt e-mailadres invoeren.",
+		"description": ""
+	},
+	"panel_tracker_warning_compatibility_tooltip": {
+		"message": "Geblokkeerde tracker breekt pagina",
+		"description": ""
+	},
+	"trackers_blocked": {
+		"message": "Geblokkeerde Trackers:",
+		"description": ""
+	},
+	"rewards_expires_in": {
+		"message": "Verloopt in $COUNT$ $TYPE$",
+		"description": "example: Expires in 8 minutes. TYPE will be rewards_expires_in_TYPE listed below.",
 		"placeholders": {
-			"link_start": {
-				"content": "<a href=\"https://cliqz.com\" target=\"_blank\">"
+			"count": {
+				"content": "$1"
 			},
-			"link_end": {
-				"content": "</a>"
-			},
-			"copy": {
-				"content": "&copy;"
+			"type": {
+				"content": "$2"
 			}
 		}
 	},
-	"setup_upgrade_desc_1": {
-		"message": "$BOLD_START$Smart Blocking$BOLD_END$ past de prestatie automatisch aan terwijl je browset.",
-		"placeholders": {
-			"bold_start": {
-				"content": "<strong>"
-			},
-			"bold_end": {
-				"content": "</strong>"
-			}
-		}
+	"panel_tracker_warning_slow_nonsecure_tooltip": {
+		"message": "Tracker is langzaam en niet-veilig",
+		"description": ""
+	},
+	"password_field_label_required": {
+		"message": "Wachtwoord vereist.",
+		"description": ""
+	},
+	"panel_tracker_found_sources_title": {
+		"message": "Ontdekte tracker URLs:",
+		"description": ""
 	},
 	"setup_upgrade_desc_2": {
 		"message": "$BOLD_START$Dynamic UI geeft je$BOLD_END$ meerdere weergave opties.",
+		"description": "",
 		"placeholders": {
 			"bold_start": {
 				"content": "<strong>"
@@ -1375,91 +2031,78 @@
 			}
 		}
 	},
-	"setup_upgrade_desc_3": {
-		"message": "$BOLD_START$Versterkte Anti-Tracking$BOLD_END$ beschermt je persoonlijke data nog beter.",
-		"placeholders": {
-			"bold_start": {
-				"content": "<strong>"
-			},
-			"bold_end": {
-				"content": "</strong>"
-			}
-		}
+	"setup_login_view_first_name": {
+		"message": "Voornaam (Optioneel):",
+		"description": ""
 	},
-	"setup_upgrade_button_later": {
-		"message": "Misschien Later"
+	"box_warning_slow": {
+		"message": "Langzame Trackers",
+		"description": ""
 	},
-	"setup_upgrade_button_go": {
-		"message": "Set Me Up"
+	"settings_trusted_sites_description": {
+		"message": "De hier vermelde websites worden vertrouwd en alle trackers gedeblokkeerd.",
+		"description": ""
 	},
-	"setup_upgrade_title": {
-		"message": "Welcome bij Ghostery 8!"
+	"invalid_email_create": {
+		"message": "Voer een geldig e-mailadres in.",
+		"description": ""
 	},
-	"setup_upgrade_subtitle": {
-		"message": "Actueel"
-	},
-	"panel_help_setup": {
-		"message": "Ghostery Instellen"
-	},
-	"global_settings_saved": {
-		"message": "Algemene Instellingen Opgeslagen"
-	},
-	"global_settings_saved_tracker": {
-		"message": "Algemene Tracker Instelling Opgeslagen"
-	},
-	"global_settings_saved_category": {
-		"message": "Algemene Categorie Instellingen Opgeslagen"
-	},
-	"panel_tracker_warning_smartblock_tooltip": {
-		"message": "Tracker geblokkeerd door Smart Blocking"
-	},
-	"panel_tracker_warning_smartunblock_tooltip": {
-		"message": "Tracker gedeblokkeerd door Smart Blocking"
-	},
-	"notification_upgrade_title_v8": {
-		"message": "Hier is Ghostery 8!"
-	},
-	"notification_upgrade_v8": {
-		"message": "Installeer onze coole nieuwe features en kom meer te weten over onze grootste release tot nu toe."
-	},
-	"notification_upgrade_link_v8": {
-		"message": "Bekijk nu!"
-	},
-	"settings_export_reserved_page_error": {
-		"message": "Ghostery kan geen instellingen exporteren wanneer de huidige pagina één van de gereserveerde browserpagina's is. Ga naar een andere pagina en probeer het nogmaals."
-	},
-	"settings_import_dialog_error": {
-		"message": "Ghostery kan geen browsedialoog weergeven wanneer de huidige pagina één van de gereserveerde browserpagina's is. Ga naar een andere pagina en probeer het nogmaals."
-	},
-	"setup_header_sign_in_hide": {
-		"message": "Verberg Aanmelden"
+	"panel_create_account": {
+		"message": "Account Aanmaken",
+		"description": ""
 	},
 	"setup_choice_view_share_data_no_human_web": {
-		"message": "Deel mijn analytics data om de prestaties van Ghostery te verbeteren."
+		"message": "Deel mijn analytics data om de prestaties van Ghostery te verbeteren.",
+		"description": ""
 	},
-	"setup_feature_active_in_cliqz": {
-		"message": "Deze optie is al standaard actief in Cliqz. $LINK_START$Meer weten.$LINK_END$",
+	"summary_pause_ghostery_tooltip": {
+		"message": "Pauzeer Ghostery extensie.",
+		"description": ""
+	},
+	"short_description": {
+		"message": "Ghostery is een krachtige privacy extensie. Blokkeer ads, stop trackers en maak websites sneller,",
+		"description": "A short description of this extension (Ghostery)."
+	},
+	"drawer_desc_enable_anti_tracking": {
+		"message": "Privé-datapunten zijn verwijderd.",
+		"description": ""
+	},
+	"summary_custom_settings": {
+		"message": "Aangepaste Instellingen",
+		"description": ""
+	},
+	"click2play_allow_once_button_tooltip": {
+		"message": "Ghostery heeft $APP_NAME$ geblokkeerd. Klik hier om eenmalig laden toe te staan.",
+		"description": "Tooltip that appears over the click2play replacement for 'social' buttons.",
 		"placeholders": {
-			"link_start": {
-				"content": "<a href=\"https://www.ghostery.com/faqs/what-are-the-new-ghostery-8-features/\" target=\"_blank\">"
-			},
-			"link_end": {
-				"content": "</a>"
+			"app_name": {
+				"content": "$1",
+				"example": "Twitter Button"
 			}
 		}
 	},
-	"setup_data_view_desc_no_human_web": {
-		"message": "We gebruiken anonieme analytics data om Ghostery’s prestaties te verbeteren, zonder persoonlijke data te verzamelen. $LINK_START$Meer weten.$LINK_END$.",
-		"placeholders": {
-			"link_start": {
-				"content": "<a href=\"https://www.ghostery.com/faqs/\" target=\"_blank\">"
-			},
-			"link_end": {
-				"content": "</a>"
-			}
-		}
+	"panel_tracker_restrict_tooltip": {
+		"message": "Beperk op deze website",
+		"description": ""
 	},
-	"panel_about_release_notes": {
-		"message": "Bekijk release notes voor alle updates"
+	"rewards_disable_confirm": {
+		"message": "OK, begrepen.",
+		"description": ""
+	},
+	"alert_anti_track_on": {
+		"message": "Versterkte Anti-Tracking AAN. Persoonlijke gegevens zullen worden geanonimiseerd.",
+		"description": ""
+	},
+	"setup_additional_view_enabled": {
+		"message": "Geactiveerd",
+		"description": ""
+	},
+	"browser_button_tooltip": {
+		"message": "Bekijk Ghostery's bevindingen",
+		"description": "Ghostery's browser button tooltip."
+	},
+	"pause_24_hours_condensed": {
+		"message": "24 uur",
+		"description": ""
 	}
 }
