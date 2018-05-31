@@ -118,8 +118,21 @@ export function getLoginInfo() {
  */
 export function buildUserSettings() {
 	const settings = {};
+	const nowTime = Number(new Date().getTime());
 	SYNC_SET.forEach((key) => {
-		settings[key] = conf[key];
+		// Whenever we prepare data to be sent out
+		// we have to convert these two parameters to objects
+		// so that they may be imported by pre-8.2 version
+		if (key === 'reload_banner_status' ||
+			key === 'trackers_banner_status') {
+			settings[key] = {
+				dismissals: [],
+				show_time: nowTime,
+				show: conf[key]
+			};
+		} else {
+			settings[key] = conf[key];
+		}
 	});
 	return settings;
 }
