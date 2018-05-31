@@ -98,7 +98,7 @@ class HotDog extends Component {
 					<div>
 						<div onClick={this.navigate} className="hot-dog-container" style={{ backgroundImage: this.ghostyStar }} >
 							<div className="ghostery-reward-text">
-								1 {t('rewards_new_text')}!
+								{t('rewards_new_text')}
 							</div>
 						</div>
 						<div className="hot-dog-close" onClick={this.close} style={{ backgroundImage: this.closeIcon }} />

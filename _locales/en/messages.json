@@ -1612,7 +1612,7 @@
 		"message": "To use this function, navigate to another page."
 	},
 	"rewards_new_text": {
-		"message": "new Reward was discovered"
+		"message": "New Reward discovered!"
 	},
 	"rewards_copy_code": {
 		"message": "copy code"
@@ -1648,16 +1648,16 @@
 		"message": "Terms & Conditions"
 	},
 	"rewards_disable": {
-		"message": "Turn off Ghostery rewards"
+		"message": "Turn off Rewards"
 	},
 	"rewards_disable_notification": {
-		"message": "Ghostery Rewards is now off. You can always turn it on in Ghostery Settings or in the Ghostery Dashboard."
+		"message": "Ghostery Rewards is now off. You can always turn it on in your Settings or the Rewards dashboard."
 	},
 	"rewards_disable_confirm": {
 		"message": "OK, got it."
 	},
 	"rewards_about": {
-		"message": "About Ghostery Rewards"
+		"message": "About Rewards"
 	},
 	"rewards_settings": {
 		"message": "Ghostery Rewards Settings"
@@ -1666,10 +1666,10 @@
 		"message": "Delete this reward"
 	},
 	"rewards_first_prompt": {
-		"message": "Would you like to continue to Ghostery Rewards?"
+		"message": "Would you like to continue to your Ghostery Reward?"
 	},
 	"rewards_second_prompt": {
-		"message": "Are you sure you would like to opt-out of Ghostery Rewards?"
+		"message": "Would you like to opt out of future Ghostery Rewards?"
 	},
 	"rewards_yes": {
 		"message": "yes"

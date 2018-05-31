@@ -81,7 +81,8 @@
 		color: $white;
 		font-size: 12px;
 		margin-top: 16px;
-		margin-left: 58px;
+		margin-left: auto;
+		margin-right: auto;
 		transition: visibility 1s;
 	}
 
@@ -351,10 +352,7 @@
 		.rewards-settings {
 			color: $tundora;
 			position: absolute;
-			margin-left: -195px;
 			margin-top: -10px;
-			height: 94px;
-			width: 175px;
 			background-color: $white;
 			border: 1px solid #9b9b9b;
 			border-radius: 4px;
@@ -362,6 +360,9 @@
 			display: flex;
 			flex-direction: column;
 			text-align: left;
+			line-height: 2;
+			padding: 5px;
+			margin-left: -148px;
 
 			a {
 				color: $tundora;
@@ -372,11 +373,13 @@
 				flex: 1;
 				display: flex;
 				align-items: center;
-				margin-left: 10px;
-				margin-right: 10px;
+				padding: 0px 10px;
 				font-weight: 500;
 				cursor: pointer;
 				user-select: none;
+				&:hover {
+					background: $porcelain;
+				}
 			}
 
 			.about {

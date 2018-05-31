@@ -223,7 +223,7 @@ class OfferCard extends Component {
 
 	renderExpiresText() {
 		const { expirationMs } = this.props.reward.offer_data;
-		const expireDays = Math.round((new Date()).setDate(new Date().getDate() + expirationMs / 60 / 60 / 24));
+		const expireDays = Math.round((new Date()).setDate(new Date().getDate() + expirationMs / 1000 / 60 / 60 / 24));
 		const delta = computeTimeDelta(new Date(expireDays), new Date());
 		return t('rewards_expires_in', [delta.count, t(`rewards_expires_in_${delta.type}`)]);
 	}
