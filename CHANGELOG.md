@@ -1,3 +1,7 @@
+### GHOSTERY 8.1.3 (May 31, 2018)
+
++ Fix for 100% CPU on Chrome 67 from synchronous XHR
+
 ### GHOSTERY 8.1.2 (April 19, 2018)
 
 + Remove WebSocket filter scheme support for older versions of Chrome and FF
