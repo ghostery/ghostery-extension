@@ -489,7 +489,7 @@
 		"description": ""
 	},
 	"rewards_disable": {
-		"message": "Ghostery報酬を無効にする",
+		"message": "報酬をオフにする",
 		"description": ""
 	},
 	"settings_allow_offers": {
@@ -639,7 +639,7 @@
 		"description": ""
 	},
 	"rewards_disable_notification": {
-		"message": "Ghostery報酬は現在オフになっています。Ghostery設定やGhosteryダッシュボードでいつでもオンにすることができます。",
+		"message": "Ghostery報酬は現在オフになっています。設定または報酬ダッシュボードでいつでもオンにすることができます。",
 		"description": ""
 	},
 	"expand_all": {
@@ -1071,7 +1071,7 @@
 		"description": ""
 	},
 	"rewards_second_prompt": {
-		"message": "本当にGhostery報酬をオプトアウトしますか？",
+		"message": "今後のGhostery報酬をオプトアウトしますか？",
 		"description": ""
 	},
 	"alert_site_restricted_off": {
@@ -1145,7 +1145,7 @@
 		"description": "User-facing description for the Comments tag category."
 	},
 	"rewards_new_text": {
-		"message": "新しい報酬が発見されました",
+		"message": "新しい報酬が発見されました！",
 		"description": ""
 	},
 	"create_password_field_label": {
@@ -1445,7 +1445,7 @@
 		"description": ""
 	},
 	"rewards_about": {
-		"message": "Ghostery報酬について",
+		"message": "報酬について",
 		"description": ""
 	},
 	"category_social_media": {
