@@ -17,10 +17,7 @@ import ClassNames from 'classnames';
 import DetailMenu from './DetailMenu';
 import Summary from '../containers/SummaryContainer';
 import Blocking from '../containers/BlockingContainer';
-import History from './History';
-import Performance from './Performance';
 import Rewards from '../containers/RewardsContainer';
-import Premium from './Premium';
 /**
  * @class Implement wrapper of the detailed (expert) mode view.
  * @memberOf PanelClasses
@@ -41,10 +38,7 @@ class Detail extends React.Component {
 	}
 
 	BlockingComponent = () => (<Blocking />);
-	HistoryComponent = () => (<History />);
-	PerformanceComponent = () => (<Performance />);
 	RewardsComponent = () => (<Rewards />);
-	PremiumComponent = () => (<Premium />);
 
 	/**
 	 * Click "expertTab" to enable detailed (expert) mode. Trigger action.
@@ -70,10 +64,7 @@ class Detail extends React.Component {
 				<div id="content-detail" className={(this.props.is_expanded ? 'expanded' : '')}>
 					<div className={condensedToggleClassNames} onClick={this.toggleExpanded} />
 					<Route path="/detail/blocking" render={this.BlockingComponent} />
-					<Route path="/detail/history" render={this.HistoryComponent} />
-					<Route path="/detail/performance" render={this.PerformanceComponent} />
 					<Route path="/detail/rewards" render={this.RewardsComponent} />
-					<Route path="/detail/premium" render={this.PremiumComponent} />
 					<DetailMenu hasReward={enable_offers && unread_offer_ids.length > 0} />
 				</div>
 			</div>

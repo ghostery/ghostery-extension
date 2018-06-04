@@ -70,7 +70,7 @@ class OfferCard extends Component {
 					text: t('rewards_learn_more'),
 					callback: () => {
 						this.sendSignal('offer_first_learn');
-						sendMessage('ping', 'rewards_learn');
+						sendMessage('ping', 'rewards_first_learn_more');
 					},
 				},
 				closeCallback: (option) => { this.handlePrompt(1, option); },
