@@ -27,7 +27,7 @@ const FREQUENCIES = { // in milliseconds
 };
 const CRITICAL_METRICS = ['install', 'install_complete', 'upgrade', 'active', 'engaged', 'uninstall'];
 const CAMPAIGN_METRICS = ['install', 'active', 'uninstall'];
-const FIRST_REWARD_METRICS = ['rewards_first_accept', 'rewards_first_reject', 'rewards_first_reject_optin', 'rewards_first_reject_optout', 'rewards_learn'];
+const FIRST_REWARD_METRICS = ['rewards_first_accept', 'rewards_first_reject', 'rewards_first_reject_optin', 'rewards_first_reject_optout', 'rewards_first_learn_more'];
 const { METRICS_SUB_DOMAIN, EXTENSION_VERSION, BROWSER_INFO } = globals;
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const MAX_DELAYED_PINGS = 100;
@@ -141,30 +141,17 @@ class Metrics {
 				this._sendReq(type, ['all', 'daily', 'weekly']);
 				break;
 
-			// New
+			// New to Ghostery 8
 			case 'adblock_off':
 			case 'adblock_on':
 			case 'antitrack_off':
 			case 'antitrack_on':
 			case 'create_account_extension':
 			case 'create_account_setup':
-			case 'engaged_offer':
-			case 'history_dash':
-			case 'history_learn':
 			case 'list_dash':
-			case 'pause_snooze':
-			case 'performance_dash':
-			case 'performance_learn':
-			case 'premium_dash':
-			case 'premium_learn':
 			case 'rewards_dash':
-			case 'rewards_first_accept':
-			case 'rewards_first_reject':
-			case 'rewards_first_reject_optin':
-			case 'rewards_first_reject_optout':
 			case 'rewards_learn':
-			case 'rewards_off':
-			case 'rewards_on':
+			case 'pause_snooze':
 			case 'smartblock_off':
 			case 'smartblock_on':
 			case 'viewchange_from_detailed':
@@ -173,7 +160,23 @@ class Metrics {
 				this._sendReq(type, ['all', 'daily', 'weekly', 'monthly']);
 				break;
 
-			// uncaught ping type
+			// Rewards Pings
+			case 'engaged_offer':
+				this._sendReq('engaged', ['daily', 'weekly', 'monthly']);
+				break;
+			case 'rewards_off':
+			case 'rewards_on':
+				this._sendReq(type, ['all', 'daily']);
+				break;
+			case 'rewards_first_learn_more':
+			case 'rewards_first_accept':
+			case 'rewards_first_reject':
+			case 'rewards_first_reject_optin':
+			case 'rewards_first_reject_optout':
+				this._sendReq(type, ['all']);
+				break;
+
+			// Uncaught Pings
 			default:
 				log(`metrics ping() error: ping name ${type} not found`);
 				break;
