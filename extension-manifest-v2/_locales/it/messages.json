@@ -489,7 +489,7 @@
 		"description": ""
 	},
 	"rewards_disable": {
-		"message": "Disattiva ricompense Ghostery",
+		"message": "Disattiva le Ricompense",
 		"description": ""
 	},
 	"settings_allow_offers": {
@@ -639,7 +639,7 @@
 		"description": ""
 	},
 	"rewards_disable_notification": {
-		"message": "Ricompense Ghostery è ora disattivato. Puoi attivarlo in qualunque momento in Impostazioni Ghostery o nella Dashboard di Ghostery.",
+		"message": "Ricompense Ghostery è ora disattivato. Puoi sempre attivarlo nelle tue Impostazioni o nella dashbord Ricompense.",
 		"description": ""
 	},
 	"expand_all": {
@@ -1071,7 +1071,7 @@
 		"description": ""
 	},
 	"rewards_second_prompt": {
-		"message": "Se sicuro di voler rinunciare a Ricompense Ghostery?",
+		"message": "Vuoi rinunciare alle future Ricompense Ghostery?",
 		"description": ""
 	},
 	"alert_site_restricted_off": {
@@ -1145,7 +1145,7 @@
 		"description": "User-facing description for the Comments tag category."
 	},
 	"rewards_new_text": {
-		"message": "è stata scoperta una nuova Ricompensa",
+		"message": "È stata scoperta una nuova Ricompensa!",
 		"description": ""
 	},
 	"create_password_field_label": {
@@ -1445,7 +1445,7 @@
 		"description": ""
 	},
 	"rewards_about": {
-		"message": "Sulle Ricompense Ghostery",
+		"message": "Sulle Ricompense",
 		"description": ""
 	},
 	"category_social_media": {
@@ -1531,7 +1531,7 @@
 		"description": ""
 	},
 	"rewards_first_prompt": {
-		"message": "Vuoi continuare a Ricompense Ghostery?",
+		"message": "Vuoi continuare alle tue Ricompense Ghostery?",
 		"description": ""
 	},
 	"drawer_tooltip_enable_ad_block": {
@@ -1760,6 +1760,7 @@
 	},
 	"setup_choice_view_legal": {
 		"message": "Installando Ghostery, accetti l'$LINK_PP_START$Informativa sulla Privacy$LINK_PP_END$ e i $LINK_TERMS_START$Termini di Utilizzo$LINK_TERMS_END$ di Ghostery.",
+		"description": "",
 		"placeholders": {
 			"link_pp_start": {
 				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" target=\"_blank\">"

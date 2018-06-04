@@ -489,7 +489,7 @@
 		"description": ""
 	},
 	"rewards_disable": {
-		"message": "关闭 Ghostery 奖励",
+		"message": "关闭奖励",
 		"description": ""
 	},
 	"settings_allow_offers": {
@@ -639,7 +639,7 @@
 		"description": ""
 	},
 	"rewards_disable_notification": {
-		"message": "Ghostery 奖励已关闭。您可以随时在 Ghostery 设置或 Ghostery 控制面板中打开它。",
+		"message": "Ghostery 奖励已关闭。您可以随时在设置或奖励控制面板中打开它。",
 		"description": ""
 	},
 	"expand_all": {
@@ -1071,7 +1071,7 @@
 		"description": ""
 	},
 	"rewards_second_prompt": {
-		"message": "确定要选择不使用 Ghostery 奖励吗?",
+		"message": "是否选择将来不接收 Ghostery 奖励？",
 		"description": ""
 	},
 	"alert_site_restricted_off": {
@@ -1145,7 +1145,7 @@
 		"description": "User-facing description for the Comments tag category."
 	},
 	"rewards_new_text": {
-		"message": "发现新奖励",
+		"message": "发现新奖励！",
 		"description": ""
 	},
 	"create_password_field_label": {
@@ -1445,7 +1445,7 @@
 		"description": ""
 	},
 	"rewards_about": {
-		"message": "关于 Ghostery 奖励",
+		"message": "关于奖励",
 		"description": ""
 	},
 	"category_social_media": {
@@ -1531,7 +1531,7 @@
 		"description": ""
 	},
 	"rewards_first_prompt": {
-		"message": "是否继续转到 Ghostery 奖励？",
+		"message": "是否继续前往您的 Ghostery 奖励？",
 		"description": ""
 	},
 	"drawer_tooltip_enable_ad_block": {
@@ -1760,6 +1760,7 @@
 	},
 	"setup_choice_view_legal": {
 		"message": "安装 Ghostery，即表示您同意我们的$LINK_PP_START$隐私政策$LINK_PP_END$及$LINK_TERMS_START$使用条款$LINK_TERMS_END$。",
+		"description": "",
 		"placeholders": {
 			"link_pp_start": {
 				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" target=\"_blank\">"

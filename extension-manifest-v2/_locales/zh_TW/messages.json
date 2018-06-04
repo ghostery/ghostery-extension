@@ -489,7 +489,7 @@
 		"description": ""
 	},
 	"rewards_disable": {
-		"message": "關閉Ghostery獎賞",
+		"message": "關閉獎賞計劃。",
 		"description": ""
 	},
 	"settings_allow_offers": {
@@ -639,7 +639,7 @@
 		"description": ""
 	},
 	"rewards_disable_notification": {
-		"message": "Ghostery 獎賞計劃現已結束。您隨時可在Ghostery設置或Ghostery控制面板中將其開啟。",
+		"message": "Ghostery 獎賞計劃現已關閉。您隨時可以在您的設置或獎賞計劃控制面板啟動它。",
 		"description": ""
 	},
 	"expand_all": {
@@ -1071,7 +1071,7 @@
 		"description": ""
 	},
 	"rewards_second_prompt": {
-		"message": "您真的想退出Ghostery獎賞計劃嗎？",
+		"message": "您想退出不再參加將來的Ghostery獎賞計劃嗎？",
 		"description": ""
 	},
 	"alert_site_restricted_off": {
@@ -1445,7 +1445,7 @@
 		"description": ""
 	},
 	"rewards_about": {
-		"message": "Ghostery 獎賞簡介",
+		"message": "獎賞計劃簡介",
 		"description": ""
 	},
 	"category_social_media": {
@@ -1531,7 +1531,7 @@
 		"description": ""
 	},
 	"rewards_first_prompt": {
-		"message": "您想前去參加Ghostery獎賞嗎？",
+		"message": "您想繼續進入Ghostery獎賞計劃嗎？",
 		"description": ""
 	},
 	"drawer_tooltip_enable_ad_block": {

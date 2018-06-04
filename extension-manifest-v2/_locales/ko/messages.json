@@ -489,7 +489,7 @@
 		"description": ""
 	},
 	"rewards_disable": {
-		"message": "Ghostery 리워드 끄기 ",
+		"message": "리워드 끄기 ",
 		"description": ""
 	},
 	"settings_allow_offers": {
@@ -639,7 +639,7 @@
 		"description": ""
 	},
 	"rewards_disable_notification": {
-		"message": "Ghostery 리워드가 꺼졌습니다. 언제든 Ghostery 설정 또는 Ghostery 대시보드에서 다시 켤 수 있습니다.",
+		"message": "Ghostery 리워드가 꺼졌습니다. 언제든 설정 또는 리워드 대시보드에서 다시 켤 수 있습니다.",
 		"description": ""
 	},
 	"expand_all": {
@@ -1145,7 +1145,7 @@
 		"description": "User-facing description for the Comments tag category."
 	},
 	"rewards_new_text": {
-		"message": "새로운 리워드 발견됨 ",
+		"message": "새로운 리워드를 찾았습니다!",
 		"description": ""
 	},
 	"create_password_field_label": {
@@ -1445,7 +1445,7 @@
 		"description": ""
 	},
 	"rewards_about": {
-		"message": "Ghostery 리워드 소개 ",
+		"message": "리워드 소개",
 		"description": ""
 	},
 	"category_social_media": {
@@ -1760,6 +1760,7 @@
 	},
 	"setup_choice_view_legal": {
 		"message": "Ghostery를 설치하는 것은 Ghostery의 $LINK_PP_START$개인정보 보호정책$LINK_PP_END$ 및 $LINK_TERMS_START$사용 약관$LINK_TERMS_END$에 동의함을 의미합니다.",
+		"description": "",
 		"placeholders": {
 			"link_pp_start": {
 				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" target=\"_blank\">"
