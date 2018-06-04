@@ -489,7 +489,7 @@
 		"description": ""
 	},
 	"rewards_disable": {
-		"message": "Desactivar Recompensas de Ghostery",
+		"message": "Desactivar recompensas.",
 		"description": ""
 	},
 	"settings_allow_offers": {
@@ -639,7 +639,7 @@
 		"description": ""
 	},
 	"rewards_disable_notification": {
-		"message": "Recompensas de Ghostery está desactivado. Siempre se puede activar en los ajustes de Ghostery o el panel de control de Ghostery.",
+		"message": "Se han anulado las recompensas de Ghostery. Siempre puedes activarlas en tus ajustes, o el panel de control de las recompensas.",
 		"description": ""
 	},
 	"expand_all": {
@@ -1071,7 +1071,7 @@
 		"description": ""
 	},
 	"rewards_second_prompt": {
-		"message": "¿Seguro que quieres anular tu suscripción a Recompensas de Ghostery?",
+		"message": "¿Te gustaría anular tu suscripción a las recompensas de Ghostery?",
 		"description": ""
 	},
 	"alert_site_restricted_off": {
@@ -1145,7 +1145,7 @@
 		"description": "User-facing description for the Comments tag category."
 	},
 	"rewards_new_text": {
-		"message": "nueva recompensa descubierta",
+		"message": "¡Nueva recompensa descubierta!",
 		"description": ""
 	},
 	"create_password_field_label": {
@@ -1445,7 +1445,7 @@
 		"description": ""
 	},
 	"rewards_about": {
-		"message": "Sobre Recompensas de Ghostery",
+		"message": "Acerca de las recompensas.",
 		"description": ""
 	},
 	"category_social_media": {
@@ -1531,7 +1531,7 @@
 		"description": ""
 	},
 	"rewards_first_prompt": {
-		"message": "¿Quieres seguir usando Recompensas de Ghostery?",
+		"message": "¿Te gustaría continuar a tu recompensa de Ghostery?",
 		"description": ""
 	},
 	"drawer_tooltip_enable_ad_block": {
@@ -1760,6 +1760,7 @@
 	},
 	"setup_choice_view_legal": {
 		"message": "Al instalar Ghostery, aceptas la $LINK_PP_START$política de privacidad$LINK_PP_END$ y los $LINK_TERMS_START$términos de uso$LINK_TERMS_END$ de Ghostery.",
+		"description": "",
 		"placeholders": {
 			"link_pp_start": {
 				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" target=\"_blank\">"

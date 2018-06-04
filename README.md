@@ -83,6 +83,33 @@ $ NO_LINT=true yarn run build.dev
 $ yarn run docs
 ```
 
+## Translating Files
+We use Transifex and their CLI to manage our translation files. Follow
+[these instructions](https://docs.transifex.com/client/installing-the-client)
+to get started.
+
+Note: There is no need to run `tx config` as the project has already been
+configured to work with Transifex. See the configuration file in `.tx/config`.
+
+Next, [generate an API Token](https://www.transifex.com/user/settings/api/),
+run `tx init`, and paste the generated API Token when prompted.  This will
+allow the computer to push (Submit) and pull (Download) files to/from Transifex.
+
+```sh
+# Submit translation files to Transifex
+$ tx push -s -b develop
+```
+
+```sh
+# Download translated files from Transifex
+$ tx pull -a
+```
+
+```sh
+# Add the placeholders into the downloaded translation files.
+$ node tools/transifex.js
+```
+
 ## Cliqz Source Code
 Ghostery implements the following open-source products from [Cliqz](https://cliqz.com/en/)
 

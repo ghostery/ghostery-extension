@@ -489,7 +489,7 @@
 		"description": ""
 	},
 	"rewards_disable": {
-		"message": "Désactiver les récompenses",
+		"message": "Désactiver les Récompenses",
 		"description": ""
 	},
 	"settings_allow_offers": {
@@ -639,7 +639,7 @@
 		"description": ""
 	},
 	"rewards_disable_notification": {
-		"message": "Récompenses désormais désactivées. Vous pouvez toujours l'/les activer dans les paramètres et sur le tableau de bord de Ghostery.",
+		"message": "Récompenses à présent désactivées. Vous pouvez les réactiver dans les Réglages ou sur le Tableau des récompenses.",
 		"description": ""
 	},
 	"expand_all": {
@@ -1071,7 +1071,7 @@
 		"description": ""
 	},
 	"rewards_second_prompt": {
-		"message": "Voulez-vous vraiment renoncer aux Récompenses ?",
+		"message": "Souhaitez-vous renoncer aux futures Récompenses ?",
 		"description": ""
 	},
 	"alert_site_restricted_off": {
@@ -1145,7 +1145,7 @@
 		"description": "User-facing description for the Comments tag category."
 	},
 	"rewards_new_text": {
-		"message": "Nouvelle récompense découverte",
+		"message": "Nouvelle Récompense trouvée !",
 		"description": ""
 	},
 	"create_password_field_label": {
@@ -1445,7 +1445,7 @@
 		"description": ""
 	},
 	"rewards_about": {
-		"message": "À propos des récompenses",
+		"message": "À propos des Récompenses",
 		"description": ""
 	},
 	"category_social_media": {
@@ -1531,7 +1531,7 @@
 		"description": ""
 	},
 	"rewards_first_prompt": {
-		"message": "Souhaitez-vous consulter les récompenses ?",
+		"message": "Souhaitez-vous continuer vers vos Récompenses ?",
 		"description": ""
 	},
 	"drawer_tooltip_enable_ad_block": {
