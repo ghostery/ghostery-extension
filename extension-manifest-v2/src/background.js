@@ -695,7 +695,7 @@ function onMessageHandler(request, sender, callback) {
 		return true;
 	} else if (name === 'getTrackerDescription') {
 		utils.getJson(message.url).then((result) => {
-			const description = (result) ? ((result.company_description) ? result.company_description : ((result.company_in_their_own_words) ? result.company_in_their_own_words : '')) : '';
+			const description = (result) ? ((result.company_in_their_own_words) ? result.company_in_their_own_words : ((result.company_description) ? result.company_description : '')) : '';
 			callback(description);
 		});
 		return true;
