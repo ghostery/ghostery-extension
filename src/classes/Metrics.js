@@ -162,7 +162,7 @@ class Metrics {
 
 			// Rewards Pings
 			case 'engaged_offer':
-				this._sendReq('engaged', ['daily', 'weekly', 'monthly']);
+				this._sendReq('engaged_offer', ['daily', 'weekly', 'monthly']);
 				break;
 			case 'rewards_off':
 			case 'rewards_on':
