@@ -5,7 +5,7 @@
 		.accordionSelect {
 			position: absolute;
 			top: 18px;
-			right: 10px;
+			right: 19px;
 			border: 1px solid #ccc;
 			width: 20px;
 			height: 20px;
@@ -61,18 +61,22 @@
 			display: block;
 			cursor: pointer;
 			background-repeat: no-repeat;
-			background-size: 24px;
-			background-position: 5px 15px;
-			padding: 15px 0 15px 32px;
+			background-size: 35px;
+			background-position: 12px 16px;
+			padding: 15px 0 15px 59px;
+			color: #4A4A4A;
+			font-weight: 500;
 
 			& > h2 {
 				font-size: 18px;
 			}
 
 			& > p {
+				text-transform: uppercase;
+
 				& > span {
 					&.total-trackers {
-						color: #aaa;
+						// color: #aaa;
 					}
 
 					&.blocked-trackers {
@@ -85,7 +89,7 @@
 			&:after {
 				content: " ";
 				position: absolute;
-				right: 0;
+				right: 9px;
 				bottom: 0;
 				width: 40px;
 				height: 40px;
@@ -109,12 +113,15 @@
 
 			& > p {
 				margin: 0 10px;
-				padding: 10px 5px;
-				border-bottom: 1px solid #ccc;
+				height: 32px;
+				line-height: 32px;
+				font-weight: 500;
+				border-bottom: 1px solid #E0E0E0;
 
 				& > span {
 					&:last-child {
 						float: right;
+						padding-right: 4px;
 					}
 				}
 			}
@@ -124,7 +131,7 @@
 
 				.tracker {
 					position: relative;
-					margin-left: 30px;
+					margin-left: 4px;
 					@include prefix('transition', 'margin 300ms ease-in');
 					height: $tracker-height;
 
@@ -133,9 +140,10 @@
 						width: 40px;
 						height: 100%;
 						float: left;
-						background-image: url(../../app/images/panel-android/icon-information-tooltip.svg);
+						background-image: url(../../app/images/panel-android/icon-information-blue.svg);
 						background-repeat: no-repeat;
 						background-position: center;
+						background-size: 18px;
 					}
 
 					.trackerName {
@@ -143,13 +151,14 @@
 
 						& > span:first-child {
 							line-height: $tracker-height;
+							font-size: 14px;
 						}
 					}
 
 					.trackerSelect {
 						position: absolute;
 						top: 15px;
-						right: 10px;
+						right: 19px;
 						border: 1px solid #ccc;
 						width: 20px;
 						height: 20px;
@@ -219,7 +228,7 @@
 					}
 
 					&.show-menu {
-						margin-left: 10px;
+						margin-left: -10px;
 
 						.menu {
 							right: 0;
@@ -236,6 +245,7 @@
 
 						.trackerName {
 							text-decoration: line-through;
+							color: #C7C7CD;
 						}
 
 						.trackerSelect {
@@ -271,7 +281,7 @@
 		}
 
 		&:not(:last-child) {
-			border-bottom: 1px solid #ccc;
+			border-bottom: 1px solid #E0E0E0;
 		}
 	}
 }

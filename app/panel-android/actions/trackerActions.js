@@ -199,6 +199,7 @@ export function blockUnBlockAllTrackers({ actionData, state }) {
 		updated_blocking_categories.forEach((category) => {
 			const updated_settings_category = updated_settings_categories.find(item => item.id === category.id);
 			category.num_blocked = 0;
+			// TODO: change the logic here
 			category.trackers.forEach((tracker) => {
 				if (tracker.shouldShow) {
 					tracker.blocked = block;
@@ -220,7 +221,7 @@ export function blockUnBlockAllTrackers({ actionData, state }) {
 						delete updated_app_ids[key];
 					}
 
-					 // NOTE: This may affect performance
+					// NOTE: This may affect performance
 					const updated_settings_tracker = updated_settings_category.trackers.find(item => +item.id === key);
 					const oldState = updated_settings_tracker.blocked;
 					updated_settings_tracker.blocked = block;

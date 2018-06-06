@@ -70,10 +70,10 @@ export default class Overview extends React.Component {
 					<p className="trackers-blocked-num"><span className="number">{this.nTrackersBlocked}</span> Trackers blocked</p>
 				</div>
 
-				<div className="buttons-wrapper row">
+				<div className={`buttons-wrapper row`}>
 					<div className="small-12">
 						<button
-							className={`button trust-site-btn ${this.isTrusted ? 'changed' : ''}`}
+							className={`button trust-site-btn ${this.isTrusted ? 'changed' : ''} ${this.isPaused ? 'paused' : ''}`}
 							onClick={this.handleTrustButtonClick}
 						>
 							<span>Trust Site</span>
@@ -81,7 +81,7 @@ export default class Overview extends React.Component {
 					</div>
 					<div className="small-12">
 						<button
-							className={`button restrict-site-btn ${this.isRestricted ? 'changed' : ''}`}
+							className={`button restrict-site-btn ${this.isRestricted ? 'changed' : ''} ${this.isPaused ? 'paused' : ''}`}
 							onClick={this.handleRestrictButtonClick}
 						>
 							<span>Restrict Site</span>

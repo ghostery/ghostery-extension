@@ -38,11 +38,11 @@
 		position: relative;
 		margin: 0;
 		list-style: none;
-		height: 100%;
+		height: calc(100% - #{$fixed-menu-header-height});
 		background-color: $white;
 
 		.menuItem {
-			height: calc((100% - #{$fixed-menu-header-height}) / 3);
+			height: calc(100% / 3);
 			width: 100%;
 			display: table;
 
@@ -89,7 +89,7 @@
 
 					.title {
 						padding-right: 30px;
-						background-image: url(../../app/images/panel-android/icon-information-tooltip.svg);
+						background-image: url(../../app/images/panel-android/icon-information-grey.svg);
 						background-repeat: no-repeat;
 						background-position: right center;
 						background-size: contain;
@@ -192,6 +192,6 @@
 	}
 
 	&.opened {
-		top: 60%;
+		top: 55%;
 	}
 }

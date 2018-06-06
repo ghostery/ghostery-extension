@@ -15,3 +15,7 @@ html, body {
 	@include prefix('user-select', 'none');
 	font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
+body, .accordion {
+	background-color:rgba(255, 255, 255, 0.7);
+}

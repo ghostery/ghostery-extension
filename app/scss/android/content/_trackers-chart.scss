@@ -16,7 +16,7 @@
 				 .path {
 						stroke-dashoffset: 0;
 						stroke-dasharray: var(--stroke-length, 0);
-						 @include prefix('animation', 'dash calc(var(--stroke-length, 0) / 2 * 1ms) linear alternate 1');
+						@include prefix('animation', 'dash calc(var(--stroke-length, 0) / 2 * 1ms) linear alternate 1');
 
 						&[data-category='advertising'] {
 							stroke: #cb55cd;

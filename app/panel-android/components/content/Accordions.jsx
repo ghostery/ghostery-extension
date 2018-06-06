@@ -6,7 +6,7 @@ import TrackerItem from './TrackerItem';
 class Accordion extends React.Component {
 	itemHeight = 50;
 	nExtraItems = 40;
-	headerheight = 39;
+	headerheight = 32;
 
 	constructor(props) {
 		super(props);

@@ -2,13 +2,14 @@
 	position: relative;
 
 	& > h2 {
-		font-weight: 600;
-		padding: 5px 0 15px 5px;
+		font-weight: 500;
+		padding: 12px 0 25px 10px;
+		font-size: 24px;
 	}
 
 	.dots-menu {
 		position: absolute;
-		top: 15px;
+		top: 20px;
 		right: 5px;
 		z-index: 2;
 		text-align: right;

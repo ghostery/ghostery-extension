@@ -6,6 +6,10 @@
 		ul.tabs-nav li.tab-item a.tab-link.custom-link {
 			font-size: 1.5vw;
 		}
+
+		.buttons-wrapper {
+			padding-top: 10px;
+		}
 	}
 
 	.fixed-menu {
@@ -20,17 +24,26 @@
 
 			.description {
 				display: block;
-				padding: 0 20px;
+				margin-right: -45px;
+				padding-left: 20px;
 				color: #4A4A4A;
 			}
 		}
 
 		&.opened {
 			top: $tab-header-height;
+			overflow-y: auto;
+			overflow-x: hidden;
 		}
 	}
 
 	& > div > .chart-wrapper {
 		display: block;
+		border-right: 1px solid #eee;
+		padding-top: 0;
+
+		.trackers-chart {
+			margin: 5px 0;
+		}
 	}
 }
