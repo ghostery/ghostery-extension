@@ -732,7 +732,7 @@ function onMessageHandler(request, sender, callback) {
 		return true;
 	} else if (name === 'setLoginInfo') {
 		// Note: if you want to trigger a logout, send message as empty {}
-		accounts.setLoginInfo(message, false).then((result) => {
+		accounts.setLoginInfo().then((result) => {
 			callback(result);
 		}).catch((err) => {
 			callback();

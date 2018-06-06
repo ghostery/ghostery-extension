@@ -32,7 +32,8 @@ const { IS_CLIQZ } = globals;
 
 // CONSTANTS
 const { GHOSTERY_DOMAIN } = globals;
-const API_ROOT_URL = `https://consumerapi.${GHOSTERY_DOMAIN}.com`;
+// @TODO const API_ROOT_URL = `https://consumerapi.${GHOSTERY_DOMAIN}.com`;
+const API_ROOT_URL = `https://localhost:8080`;
 const VERIFICATION_URL = `https://signon.${GHOSTERY_DOMAIN}.com/register/verify/`; // can't set culture because site needs to append guid
 const REDIRECT_URL = `https://account.${GHOSTERY_DOMAIN}.com/`;
 const SIGNON_URL = `https://signon.${GHOSTERY_DOMAIN}.com/`; // culture query param not needed, only for cookie
@@ -58,41 +59,28 @@ const SYNC_SET = new Set(globals.SYNC_ARRAY);
  *
  * @return {Promise} 				login info object
  */
-export function setLoginInfo(message, fromCookie) {
-	if (message.user_token && message.decoded_user_token) {
-		const { user_token, decoded_user_token } = message;
-		const is_validated = !!((typeof decoded_user_token.ClaimEmailAddressValidated === 'string' && decoded_user_token.ClaimEmailAddressValidated.toLowerCase() === 'true'));
-		const email = decoded_user_token.ClaimEmailAddress;
-		const from_setup = message.from_setup || false;
+export function setLoginInfo() {
+	/* @TODO
+		- get user info from /api/v2/users/{userid}
+		- email will be in response. store it in conf.login_info
+		- use extension cookie API to get user_id cookie
+	*/
+	return new Promise((resolve, reject) => {
+		chrome.cookies.get({
+			url: 'localhost', // ghostery.com || ghosterystage.com
+			name: 'user_id',
+		}, cookie => {
+			conf.login_info = {
+				logged_in: true,
+				user_id: cookie.value
+				// user_token,
+				// decoded_user_token,
+				// is_validated // (email validation) get from user endpoint
+			};
+			resolve(cookie.value);
+		});
+	});
 
-		conf.login_info = {
-			logged_in: true,
-			email,
-			user_token,
-			decoded_user_token,
-			is_validated
-		};
-
-		// Update our AUTH cookie if this function was called from the extension
-		if (!fromCookie) {
-			_setAuthCookie(SIGNON_URL, user_token, decoded_user_token);
-		}
-
-		if (!from_setup) {
-			_pullUserSettings().catch((err) => {
-				// Failure to retrieve settings. Still OK for the main purpose
-				log('setLoginInfo _pullUserSettings warning:', err);
-			}).then((settings) => {
-				// This is for new accounts
-				pushUserSettings({ conf: buildUserSettings() });
-			});
-		} else {
-			pushUserSettings({ conf: buildUserSettings() });
-		}
-	} else {
-		_logOut();
-	}
-	return Promise.resolve(conf.login_info);
 }
 
 /**
