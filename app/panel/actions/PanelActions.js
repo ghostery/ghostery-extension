@@ -10,7 +10,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-
+import 'whatwg-fetch';
 import {
 	GET_PANEL_DATA, GET_SUMMARY_DATA, GET_BLOCKING_DATA,
 	TOGGLE_CLIQZ_FEATURE,
@@ -27,7 +27,8 @@ import { doXHR } from '../utils/utils';
 import globals from '../../../src/classes/Globals';
 import { decodeJwt, log } from '../../../src/utils/common';
 
-const API_ROOT_URL = `https://consumerapi.${globals.GHOSTERY_DOMAIN}.com`;
+// const API_ROOT_URL = `https://consumerapi.${globals.GHOSTERY_DOMAIN}.com`;
+const API_ROOT_URL = `http://localhost:8080`;
 
 /**
  * Update Cliqz Features.
@@ -113,61 +114,80 @@ export function toggleExpert() {
 	};
 }
 
+export function fetchUser(user_id) {
+	console.log(user_id);
+	return function (dispatch) {
+		console.log(user_id);
+		// TODO make fetch to /api/v2/users/{user_id}
+		// TODO copy jsonapi from account-web to utils
+		// utils.jsonapi.get('users', user_id)
+		// .then(() => {
+		// // TODO sendMessageInPromise to background to set email (new location somewhere in conf)
+		// });
+	}
+}
+
 /**
  * Call consumerAPI and set updated login info to state. Called from Login
  * Component. Picked up by Panel reducer.
  * @param  {Object} query
  * @return {Object} dispatch
  */
-export function userLogin(query) {
+export function userLogin(email, password) {
 	return function (dispatch) {
-		return doXHR('POST', `${API_ROOT_URL}/api/Login`, JSON.stringify(query)).then((response) => {
-			if (response.UserId !== null && response.Token !== null) {
-				const decodedToken = decodeJwt(response.Token);
-
-				if (decodedToken && decodedToken.payload) {
-					sendMessageInPromise('setLoginInfo', {
-						user_token: response.Token,
-						decoded_user_token: decodedToken.payload,
-					}).then((data) => {
-						dispatch({
-							type: LOGIN_SUCCESS,
-							data: decodedToken.payload,
-						});
-						dispatch({
-							type: SHOW_NOTIFICATION,
-							data: {
-								text: `${t('panel_signin_success')} ${query.EmailAddress}`,
-								classes: 'success',
-							},
-						});
-					}).catch((err) => {
-						log('PanelActions userLogin returned with an error', err);
-						dispatch({ type: LOGIN_FAILED });
-						dispatch({
-							type: SHOW_NOTIFICATION,
-							data: {
-								text: `${t('panel_signin_success')} ${query.EmailAddress}`,
-								classes: 'alert',
-							},
-						});
+		const data = `email=${window.encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
+		return fetch(`${API_ROOT_URL}/api/v2/login`, {
+			method: 'POST',
+			body: data,
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				'Content-Length': Buffer.byteLength(data),
+			},
+			credentials: 'include',
+		})
+		.then((res) => {
+			if (res.status >= 400) {
+				return res.json()
+				.then((json) => {
+					log('PanelActions userLogin server error', json);
+					dispatch({ type: LOGIN_FAILED });
+					dispatch({
+						type: SHOW_NOTIFICATION,
+						data: {
+							text: t('server_error_message'),
+							classes: 'alert',
+						},
 					});
-				}
-			} else {
-				// XHR was successful but we did not get a token back
-				log('PanelActions userLogin callback error', response);
+				});
+			}
+			sendMessageInPromise('setLoginInfo').then((user_id) => {
+				dispatch({
+					type: LOGIN_SUCCESS,
+					data: { user_id }
+				});
+				dispatch({
+					type: SHOW_NOTIFICATION,
+					data: {
+						text: `${t('panel_signin_success')} ${email}`,
+						classes: 'success',
+					},
+				});
+			})
+			.catch((error) => {
+				// server error
+				log('PanelActions userLogin server error', error);
 				dispatch({ type: LOGIN_FAILED });
 				dispatch({
 					type: SHOW_NOTIFICATION,
 					data: {
-						text: t('banner_no_such_account_message'),
+						text: t('server_error_message'),
 						classes: 'alert',
 					},
 				});
-			}
-		}).catch((error) => {
-			// server error
-			log('PanelActions userLogin server error', error);
+			});
+			return;
+		}).catch((err) => {
+			log('PanelActions userLogin server error', err);
 			dispatch({ type: LOGIN_FAILED });
 			dispatch({
 				type: SHOW_NOTIFICATION,
@@ -177,6 +197,58 @@ export function userLogin(query) {
 				},
 			});
 		});
+	// 	return doXHR('POST', `${API_ROOT_URL}/api/v2/login`, JSON.stringify(query)).then((response) => {
+	// 		if (response) {
+	// 			sendMessageInPromise('setLoginInfo', {
+	// 				user_token: response.Token,
+	// 				decoded_user_token: decodedToken.payload,
+	// 			}).then((data) => {
+	// 				dispatch({
+	// 					type: LOGIN_SUCCESS,
+	// 					data: decodedToken.payload,
+	// 				});
+	// 				dispatch({
+	// 					type: SHOW_NOTIFICATION,
+	// 					data: {
+	// 						text: `${t('panel_signin_success')} ${query.EmailAddress}`,
+	// 						classes: 'success',
+	// 					},
+	// 				});
+	// 			}).catch((err) => {
+	// 				log('PanelActions userLogin returned with an error', err);
+	// 				dispatch({ type: LOGIN_FAILED });
+	// 				dispatch({
+	// 					type: SHOW_NOTIFICATION,
+	// 					data: {
+	// 						text: `${t('panel_signin_success')} ${query.EmailAddress}`,
+	// 						classes: 'alert',
+	// 					},
+	// 				});
+	// 			});
+	// 		} else {
+	// 			// XHR was successful but we did not get a token back
+	// 			log('PanelActions userLogin callback error', response);
+	// 			dispatch({ type: LOGIN_FAILED });
+	// 			dispatch({
+	// 				type: SHOW_NOTIFICATION,
+	// 				data: {
+	// 					text: t('banner_no_such_account_message'),
+	// 					classes: 'alert',
+	// 				},
+	// 			});
+	// 		}
+	// 	}).catch((error) => {
+	// 		// server error
+	// 		log('PanelActions userLogin server error', error);
+	// 		dispatch({ type: LOGIN_FAILED });
+	// 		dispatch({
+	// 			type: SHOW_NOTIFICATION,
+	// 			data: {
+	// 				text: t('server_error_message'),
+	// 				classes: 'alert',
+	// 			},
+	// 		});
+	// 	});
 	};
 }
 
