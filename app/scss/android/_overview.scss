@@ -18,12 +18,6 @@
 				color: $tundora;
 			}
 
-			// &.changed {
-			// 	& > span {
-			// 		color: $white;
-			// 	}
-			// }
-
 			&.trust-site-btn {
 
 				& > span {
@@ -33,9 +27,9 @@
 				&.changed:not(.paused) {
 					background-color: #9ecc42;
 					border-color: #9ecc42;
-					color: $white;
 
 					& > span {
+						color: $white;
 						background-image: buildIconTrust($button-white);
 					}
 				}
@@ -50,9 +44,9 @@
 				&.changed:not(.paused) {
 					background-color: #e74055;
 					border-color: #e74055;
-					color: $white;
 
 					& > span {
+						color: $white;
 						background-image: buildIconRestrict($button-white);
 					}
 				}
@@ -61,7 +55,6 @@
 			&.pause-resume-btn {
 
 				& > span {
-					// background-image: buildIconPause($button-dark-grey);
 					background-image: url(../../app/images/panel-android/pause.svg);
 
 					&:last-child {
@@ -70,11 +63,10 @@
 				}
 
 				&.changed {
-					background-color: $ghosty-blue;
-					border-color: $ghosty-blue;
+					background-color: $cliqz-blue;
+					border-color: $cliqz-blue;
 
 					& > span {
-						// background-image: buildIconResume($button-dark-grey);
 						background-image: url(../../app/images/panel-android/play.svg);
 
 						&:first-child {

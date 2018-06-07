@@ -8,6 +8,7 @@ import SiteTrackers from './SiteTrackers';
 import GlobalTrackers from './GlobalTrackers';
 import TrackersChart from './content/TrackersChart';
 import { getPanelData, getSummaryData, getSettingsData, getBlockingData } from '../actions/panelActions';
+import { getCliqzModuleData } from '../actions/cliqzActions';
 import handleAllActions from '../actions/handler';
 import { fromTrackersToChartData } from '../utils/chart';
 
@@ -19,6 +20,7 @@ export default class Panel extends React.Component {
 			summary: {},
 			settings: {},
 			blocking: {},
+			cliqzModuleData: {},
 		}
 	}
 
@@ -28,6 +30,7 @@ export default class Panel extends React.Component {
 		this.setSummaryState(tabId);
 		this.setSettingsState();
 		this.setBlockingState(tabId);
+		this.setCliqzDataState(tabId);
 	}
 
 	setPanelState = (tabId) => {
@@ -58,6 +61,14 @@ export default class Panel extends React.Component {
 		getBlockingData(tabId).then((data) => {
 			this.setState({
 				blocking: data,
+			});
+		});
+	}
+
+	setCliqzDataState = (tabId) => {
+		getCliqzModuleData(tabId).then((data) => {
+			this.setState({
+				cliqzModuleData: data,
 			});
 		});
 	}
@@ -134,7 +145,7 @@ export default class Panel extends React.Component {
 				<Tabs>
 					<Tab tabLabel={'Overview'} linkClassName={'custom-link'}>
 						<Overview categories={this.siteCategories} />
-						<FixedMenu panel={this.state.panel} />
+						<FixedMenu panel={this.state.panel} cliqzModuleData={this.state.cliqzModuleData} />
 					</Tab>
 
 					<Tab tabLabel={'Site Trackers'} linkClassName={'custom-link'}>

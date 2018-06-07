@@ -1,7 +1,7 @@
 import { handleTrustButtonClick, handleRestrictButtonClick, handlePauseButtonClick, cliqzFeatureToggle } from './summaryActions';
 import { trustRestrictBlockSiteTracker, blockUnblockGlobalTracker, blockUnBlockAllTrackers, resetSettings } from './trackerActions';
 
-// Handler center
+// Handle all actions in Panel.jsx
 export default function handleAllActions({ actionName, actionData, state }) {
 	let updated = {};
 

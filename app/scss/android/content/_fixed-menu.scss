@@ -6,6 +6,7 @@
 	top: calc(100% - #{$fixed-menu-header-height});
 	@include prefix('transition', 'top 250ms cubic-bezier(0.55, 0.09, 0.68, 0.53)');
 	@include prefix('box-shadow', '0px -3px 4px rgba(0,0,0,0.15)');
+	z-index: 1; //TODO: @mai check this
 
 	.menuHeader {
 		height: $fixed-menu-header-height;
@@ -83,7 +84,7 @@
 					}
 
 					.smart_block {
-						background-position-x: 25px;
+						background-position-x: 27px;
 						background-size: 17px;
 					}
 
@@ -148,13 +149,14 @@
 
 					.anti_tracking, .ad_block, .smart_block {
 						font-size: 40px;
-						padding-left: 50px;
+						padding-left: 37px;
 						background-size: 30px;
+						background-position: 5px center;
 					}
 
 					.smart_block {
-						background-position-x: 17px;
-						background-size: 25px;
+						background-position-x: 12px;
+						background-size: 23px;
 					}
 
 					.headline {

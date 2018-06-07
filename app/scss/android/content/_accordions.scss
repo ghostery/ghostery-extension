@@ -207,6 +207,11 @@
 							&.block {
 								background-color: $button-block;
 								background-image: buildIconBlock($button-white);
+
+								&.disabled {
+									background-color: #C6C6C6;
+									pointer-events: none;
+								}
 							}
 						}
 

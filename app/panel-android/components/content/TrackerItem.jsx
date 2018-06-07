@@ -45,7 +45,7 @@ export default class TrackerItem extends React.Component {
 				cat_id: this.props.categoryId,
 				trust: ss_allowed,
 				restrict: false,
-				block: false,
+				block: this.props.tracker.blocked, // Keep blocking
 			}
 		});
 		this.props.toggleMenu(this.props.index); // Hide menu
@@ -60,7 +60,7 @@ export default class TrackerItem extends React.Component {
 				cat_id: this.props.categoryId,
 				restrict: ss_blocked,
 				trust: false,
-				block: false,
+				block: this.props.tracker.blocked, // Keep blocking
 			}
 		});
 		this.props.toggleMenu(this.props.index);
@@ -104,6 +104,10 @@ export default class TrackerItem extends React.Component {
 		win.focus();
 	}
 
+	get disabledStatus() {
+		return ['trusted', 'restricted'].includes(this.trackerSelectStatus) ? 'disabled' : '';
+	}
+
 	render() {
 		return (
 			<div className={`tracker ${this.showMenu ? 'show-menu' : ''} ${this.trackerSelectStatus}`}>
@@ -120,7 +124,7 @@ export default class TrackerItem extends React.Component {
 					<button className="trackerOption restrict" onClick={this.clickButtonRestrict}>
 						{this.props.tracker.ss_blocked ? 'Unrestrict': 'Restrict'}
 					</button>
-					<button className="trackerOption block" onClick={this.clickButtonBlock}>
+					<button className={`trackerOption block ${this.disabledStatus}`} onClick={this.clickButtonBlock}>
 						{this.props.tracker.blocked ? 'UnBlock': 'Block'}
 					</button>
 				</div>

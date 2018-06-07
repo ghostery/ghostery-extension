@@ -162,7 +162,7 @@ export function blockUnblockGlobalTracker({ actionData, state }) {
 	const updated_blocking_category = updated_blocking_categories.find(item => item.id === cat_id);
 
 	const selectedBlockingTracker = updated_blocking_category.trackers
-																	.find(tracker => tracker.shouldShow && tracker.id === +app_id && !tracker.ss_allowed && !tracker.ss_blocked);
+																	.find(tracker => tracker.shouldShow && tracker.id === +app_id);
 	// Only update if the site tracker is neither trusted nor restricted
 	if (selectedBlockingTracker) {
 		const oldState = selectedBlockingTracker.blocked || selectedBlockingTracker.ss_blocked;
