@@ -5773,6 +5773,12 @@ jsesc@~0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-0.5.0.tgz#e7dee66e35d6fc16f710fe91d5cf69f70f08911d"
 
+json-api-normalizer@^0.4.10:
+  version "0.4.10"
+  resolved "https://registry.yarnpkg.com/json-api-normalizer/-/json-api-normalizer-0.4.10.tgz#5c997a50d45d9ea47ae75cb8c223bffb236ee20a"
+  dependencies:
+    lodash "^4.17.2"
+
 json-buffer@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/json-buffer/-/json-buffer-3.0.0.tgz#5b1f397afc75d677bde8bcfc0e47e1f9a3d9a898"
@@ -8331,6 +8337,10 @@ redux-mock-store@^1.5.1:
   resolved "https://registry.yarnpkg.com/redux-mock-store/-/redux-mock-store-1.5.3.tgz#1f10528949b7ce8056c2532624f7cafa98576c6d"
   dependencies:
     lodash.isplainobject "^4.0.6"
+
+redux-object@^0.5.6:
+  version "0.5.6"
+  resolved "https://registry.yarnpkg.com/redux-object/-/redux-object-0.5.6.tgz#db573a466ea26d59a98646a748333e00c11702e3"
 
 redux-thunk@^2.2.0:
   version "2.3.0"

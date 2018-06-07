@@ -11,6 +11,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 import 'whatwg-fetch';
+import normalize from 'json-api-normalizer';
+import build from 'redux-object';
 import {
 	GET_PANEL_DATA, GET_SUMMARY_DATA, GET_BLOCKING_DATA,
 	TOGGLE_CLIQZ_FEATURE,
@@ -24,11 +26,12 @@ import {
 } from '../constants/constants';
 import { sendMessageInPromise } from '../utils/msg';
 import { doXHR } from '../utils/utils';
+import { get } from '../utils/api';
 import globals from '../../../src/classes/Globals';
 import { decodeJwt, log } from '../../../src/utils/common';
 
 // const API_ROOT_URL = `https://consumerapi.${globals.GHOSTERY_DOMAIN}.com`;
-const API_ROOT_URL = `http://localhost:8080`;
+const API_ROOT_URL = `http://ghostery.io:8080`;
 
 /**
  * Update Cliqz Features.
@@ -114,17 +117,43 @@ export function toggleExpert() {
 	};
 }
 
+/**
+ * Call accountAPI and get user info. Called from Login
+ * Component. Picked up by Panel reducer.
+ * @param  {Object} query
+ * @return {Object} dispatch
+ */
+
 export function fetchUser(user_id) {
+
+	console.log('fetchUser');
 	console.log(user_id);
+
 	return function (dispatch) {
-		console.log(user_id);
-		// TODO make fetch to /api/v2/users/{user_id}
-		// TODO copy jsonapi from account-web to utils
-		// utils.jsonapi.get('users', user_id)
-		// .then(() => {
-		// // TODO sendMessageInPromise to background to set email (new location somewhere in conf)
-		// });
-	}
+		return get('users', user_id)
+		.then((data) => {
+			// normalize user data with jsonapi
+			const user = build(normalize(data), 'users', user_id);
+			// store user info in background conf
+			return sendMessageInPromise('setLoginInfo', user)
+			.then({
+
+			})
+			.catch(e => {
+
+			});
+		})
+		.catch((errors) => {
+			console.log(errors);
+			dispatch({
+				type: SHOW_NOTIFICATION,
+				data: {
+					text: t('server_error_message'),
+					classes: 'alert',
+				},
+			});
+		});
+	};
 }
 
 /**
@@ -160,7 +189,9 @@ export function userLogin(email, password) {
 					});
 				});
 			}
-			sendMessageInPromise('setLoginInfo').then((user_id) => {
+			return sendMessageInPromise('getLoginCookie')
+			.then((user_id) => {
+				console.log('sendMessageInPromise getLoginCookie', user_id);
 				dispatch({
 					type: LOGIN_SUCCESS,
 					data: { user_id }
@@ -172,6 +203,7 @@ export function userLogin(email, password) {
 						classes: 'success',
 					},
 				});
+				return user_id;
 			})
 			.catch((error) => {
 				// server error
@@ -185,8 +217,8 @@ export function userLogin(email, password) {
 					},
 				});
 			});
-			return;
-		}).catch((err) => {
+		})
+		.catch((err) => {
 			log('PanelActions userLogin server error', err);
 			dispatch({ type: LOGIN_FAILED });
 			dispatch({
