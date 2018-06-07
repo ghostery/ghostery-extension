@@ -59,25 +59,31 @@ const SYNC_SET = new Set(globals.SYNC_ARRAY);
  *
  * @return {Promise} 				login info object
  */
-export function setLoginInfo() {
-	/* @TODO
-		- get user info from /api/v2/users/{userid}
-		- email will be in response. store it in conf.login_info
-		- use extension cookie API to get user_id cookie
-	*/
+export function setLoginInfo(user) {
+	console.log('inside background setLoginInfo', user);
+	return new Promise((resolve, reject) => {
+		const { email, emailValidated, id } = user;
+		conf.login_info = {
+			logged_in: true,
+			user_id: id,
+			is_validated: emailValidated,
+			email
+		};
+	});
+}
+
+export function getLoginCookie() {
 	return new Promise((resolve, reject) => {
 		chrome.cookies.get({
-			url: 'localhost', // ghostery.com || ghosterystage.com
+			url: 'http://ghostery.io', // ghostery.com || ghosterystage.com
 			name: 'user_id',
-		}, cookie => {
-			conf.login_info = {
-				logged_in: true,
-				user_id: cookie.value
-				// user_token,
-				// decoded_user_token,
-				// is_validated // (email validation) get from user endpoint
-			};
-			resolve(cookie.value);
+		}, (cookie) => {
+			if (cookie) {
+				resolve(cookie.value);
+				return;
+			}
+			reject('err getting login user_id cookie');
+			return;
 		});
 	});
 
