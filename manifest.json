@@ -54,6 +54,18 @@
 				"https://account.ghosterystage.com/*"
 			],
 			"run_at": "document_end"
+		},
+		{
+			"all_frames": true,
+			"js": [
+				"dist/content_script_bundle.js"
+			],
+			"matches": [
+				"http://*/*",
+				"https://*/*"
+			],
+			"exclude_matches": ["*://*/_/chrome/newtab*"],
+			"run_at": "document_start"
 		}
 	],
 	"content_security_policy": "script-src 'self'; object-src 'self'",
