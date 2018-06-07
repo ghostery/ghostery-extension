@@ -69,6 +69,7 @@ export function setLoginInfo(user) {
 			is_validated: emailValidated,
 			email
 		};
+		resolve(conf.login_info);
 	});
 }
 
