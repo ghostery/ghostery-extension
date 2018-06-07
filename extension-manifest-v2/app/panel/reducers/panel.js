@@ -18,6 +18,7 @@ import {
 	SHOW_NOTIFICATION,
 	CLOSE_NOTIFICATION,
 	LOGIN_SUCCESS,
+	LOGIN_DATA_SUCCESS,
 	LOGOUT,
 	CREATE_ACCOUNT_SUCCESS,
 	TOGGLE_EXPANDED,
@@ -79,12 +80,16 @@ export default (state = initialState, action) => {
 			});
 		case LOGIN_SUCCESS: {
 			return Object.assign({}, state, {
-				logged_in: true,
-				email: action.data.ClaimEmailAddress,
-				is_validated: action.data.ClaimEmailAddressValidated,
-				decoded_user_token: action.data,
+				logged_in: true
 			});
-		} case LOGOUT: {
+		}
+		case LOGIN_DATA_SUCCESS: {
+			return Object.assign({}, state, {
+				email: action.data.email,
+				is_validated: action.data.emailValidated
+			});
+		}
+		case LOGOUT: {
 			return Object.assign({}, state, {
 				logged_in: action.data.logged_in,
 				email: action.data.email,
