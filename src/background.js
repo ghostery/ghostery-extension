@@ -723,15 +723,22 @@ function onMessageHandler(request, sender, callback) {
 			log('GET LOGIN INFO ERROR:', err);
 		});
 		return true;
-	} else if (name === 'setLoginInfo') {
+	} else if (name === 'getLoginCookie') {
 		// Note: if you want to trigger a logout, send message as empty {}
-		accounts.setLoginInfo().then((result) => {
+		accounts.getLoginCookie().then((result) => {
+			callback(result);
+		}).catch((err) => {
+			callback();
+			log('GET LOGIN COOKIE ERROR');
+		});
+		return true;
+	} else if (name === 'setLoginInfo') {
+		accounts.setLoginInfo(message).then((result) => {
 			callback(result);
 		}).catch((err) => {
 			callback();
 			log('SET LOGIN INFO ERROR');
 		});
-		return true;
 	} else if (name === 'update_database') {
 		checkLibraryVersion().then((result) => {
 			callback(result);
@@ -841,6 +848,7 @@ function initializeDispatcher() {
 		utils.flushChromeMemoryCache();
 	});
 	dispatcher.on('conf.save.login_info', (loginInfo) => {
+		console.log('conf.save.login_info', loginInfo);
 		if (loginInfo.logged_in) {
 			accounts.pullUserSettings().catch((err) => {
 				log("dispatcher.on('conf.save.login_info): pullUserSettings error:", err);
