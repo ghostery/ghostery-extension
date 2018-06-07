@@ -19,7 +19,7 @@ import {
 	SHOW_NOTIFICATION,
 	CLOSE_NOTIFICATION,
 	TOGGLE_EXPERT,
-	LOGIN_SUCCESS, LOGIN_FAILED,
+	LOGIN_SUCCESS, LOGIN_DATA_SUCCESS, LOGIN_FAILED,
 	LOGOUT,
 	CREATE_ACCOUNT_SUCCESS, CREATE_ACCOUNT_FAILED,
 	FORGOT_PASSWORD_SUCCESS, FORGOT_PASSWORD_FAILED
@@ -125,10 +125,6 @@ export function toggleExpert() {
  */
 
 export function fetchUser(user_id) {
-
-	console.log('fetchUser');
-	console.log(user_id);
-
 	return function (dispatch) {
 		return get('users', user_id)
 		.then((data) => {
@@ -136,11 +132,14 @@ export function fetchUser(user_id) {
 			const user = build(normalize(data), 'users', user_id);
 			// store user info in background conf
 			return sendMessageInPromise('setLoginInfo', user)
-			.then({
-
+			.then(() => {
+				dispatch({
+					type: LOGIN_DATA_SUCCESS,
+					data: user,
+				});
 			})
 			.catch(e => {
-
+				console.error(e);
 			});
 		})
 		.catch((errors) => {
@@ -191,10 +190,8 @@ export function userLogin(email, password) {
 			}
 			return sendMessageInPromise('getLoginCookie')
 			.then((user_id) => {
-				console.log('sendMessageInPromise getLoginCookie', user_id);
 				dispatch({
-					type: LOGIN_SUCCESS,
-					data: { user_id }
+					type: LOGIN_SUCCESS
 				});
 				dispatch({
 					type: SHOW_NOTIFICATION,
