@@ -62,7 +62,7 @@ const _sendReq = (method, path, body) => {
 			},
 			body: JSON.stringify(body),
 			credentials: 'include',
-		})
+		});
 	});
 }
 
@@ -92,11 +92,13 @@ const _sendAuthenticatedRequest = (method, path, body) => (
 			})
 			.catch((data) => {
 				let shouldRefresh = false;
-				data.errors.forEach((e) => {
-					if (e.code === '10021' || e.code === '10022') { // token is expired or missing
-						shouldRefresh = true;
-					}
-				});
+				if (data.errors) {
+					data.errors.forEach((e) => {
+						if (e.code === '10021' || e.code === '10022') { // token is expired or missing
+							shouldRefresh = true;
+						}
+					});
+				}
 				if (shouldRefresh) {
 					_refreshToken()
 						.then((res) => {
