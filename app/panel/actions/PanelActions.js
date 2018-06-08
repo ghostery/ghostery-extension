@@ -31,7 +31,7 @@ import globals from '../../../src/classes/Globals';
 import { decodeJwt, log } from '../../../src/utils/common';
 
 // const API_ROOT_URL = `https://consumerapi.${globals.GHOSTERY_DOMAIN}.com`;
-const API_ROOT_URL = `http://ghostery.io:8080`;
+const API_ROOT_URL = 'http://ghostery.io:8080';
 
 /**
  * Update Cliqz Features.
@@ -127,32 +127,32 @@ export function toggleExpert() {
 export function fetchUser(user_id) {
 	return function (dispatch) {
 		return get('users', user_id)
-		.then((data) => {
+			.then((data) => {
 			// normalize user data with jsonapi
-			const user = build(normalize(data), 'users', user_id);
-			// store user info in background conf
-			return sendMessageInPromise('setLoginInfo', user)
-			.then(() => {
-				dispatch({
-					type: LOGIN_DATA_SUCCESS,
-					data: user,
-				});
-				return user;
+				const user = build(normalize(data), 'users', user_id);
+				// store user info in background conf
+				return sendMessageInPromise('setLoginInfo', user)
+					.then(() => {
+						dispatch({
+							type: LOGIN_DATA_SUCCESS,
+							data: user,
+						});
+						return user;
+					})
+					.catch((e) => {
+						console.error(e);
+					});
 			})
-			.catch(e => {
-				console.error(e);
+			.catch((errors) => {
+				console.log(errors);
+				dispatch({
+					type: SHOW_NOTIFICATION,
+					data: {
+						text: t('server_error_message'),
+						classes: 'alert',
+					},
+				});
 			});
-		})
-		.catch((errors) => {
-			console.log(errors);
-			dispatch({
-				type: SHOW_NOTIFICATION,
-				data: {
-					text: t('server_error_message'),
-					classes: 'alert',
-				},
-			});
-		});
 	};
 }
 
@@ -174,38 +174,50 @@ export function userLogin(email, password) {
 			},
 			credentials: 'include',
 		})
-		.then((res) => {
-			if (res.status >= 400) {
-				return res.json()
-				.then((json) => {
-					log('PanelActions userLogin server error', json);
-					dispatch({ type: LOGIN_FAILED });
-					dispatch({
-						type: SHOW_NOTIFICATION,
-						data: {
-							text: t('server_error_message'),
-							classes: 'alert',
-						},
+			.then((res) => {
+				if (res.status >= 400) {
+					return res.json()
+						.then((json) => {
+							log('PanelActions userLogin server error', json);
+							dispatch({ type: LOGIN_FAILED });
+							dispatch({
+								type: SHOW_NOTIFICATION,
+								data: {
+									text: t('server_error_message'),
+									classes: 'alert',
+								},
+							});
+						});
+				}
+				return sendMessageInPromise('getLoginCookie')
+					.then((user_id) => {
+						dispatch({
+							type: LOGIN_SUCCESS
+						});
+						dispatch({
+							type: SHOW_NOTIFICATION,
+							data: {
+								text: `${t('panel_signin_success')} ${email}`,
+								classes: 'success',
+							},
+						});
+						return user_id;
+					})
+					.catch((error) => {
+						// server error
+						log('PanelActions userLogin server error', error);
+						dispatch({ type: LOGIN_FAILED });
+						dispatch({
+							type: SHOW_NOTIFICATION,
+							data: {
+								text: t('server_error_message'),
+								classes: 'alert',
+							},
+						});
 					});
-				});
-			}
-			return sendMessageInPromise('getLoginCookie')
-			.then((user_id) => {
-				dispatch({
-					type: LOGIN_SUCCESS
-				});
-				dispatch({
-					type: SHOW_NOTIFICATION,
-					data: {
-						text: `${t('panel_signin_success')} ${email}`,
-						classes: 'success',
-					},
-				});
-				return user_id;
 			})
-			.catch((error) => {
-				// server error
-				log('PanelActions userLogin server error', error);
+			.catch((err) => {
+				log('PanelActions userLogin server error', err);
 				dispatch({ type: LOGIN_FAILED });
 				dispatch({
 					type: SHOW_NOTIFICATION,
@@ -215,18 +227,6 @@ export function userLogin(email, password) {
 					},
 				});
 			});
-		})
-		.catch((err) => {
-			log('PanelActions userLogin server error', err);
-			dispatch({ type: LOGIN_FAILED });
-			dispatch({
-				type: SHOW_NOTIFICATION,
-				data: {
-					text: t('server_error_message'),
-					classes: 'alert',
-				},
-			});
-		});
 	// 	return doXHR('POST', `${API_ROOT_URL}/api/v2/login`, JSON.stringify(query)).then((response) => {
 	// 		if (response) {
 	// 			sendMessageInPromise('setLoginInfo', {

@@ -33,7 +33,7 @@ const { IS_CLIQZ } = globals;
 // CONSTANTS
 const { GHOSTERY_DOMAIN } = globals;
 // @TODO const API_ROOT_URL = `https://consumerapi.${GHOSTERY_DOMAIN}.com`;
-const API_ROOT_URL = `https://localhost:8080`;
+const API_ROOT_URL = 'https://localhost:8080';
 const VERIFICATION_URL = `https://signon.${GHOSTERY_DOMAIN}.com/register/verify/`; // can't set culture because site needs to append guid
 const REDIRECT_URL = `https://account.${GHOSTERY_DOMAIN}.com/`;
 const SIGNON_URL = `https://signon.${GHOSTERY_DOMAIN}.com/`; // culture query param not needed, only for cookie
@@ -62,7 +62,9 @@ const SYNC_SET = new Set(globals.SYNC_ARRAY);
 export function setLoginInfo(user) {
 	console.log('background setLoginInfo', user);
 	return new Promise((resolve, reject) => {
-		const { email, emailValidated, id, firstName, lastName } = user;
+		const {
+			email, emailValidated, id, firstName, lastName
+		} = user;
 		conf.login_info = {
 			logged_in: true,
 			user_id: id,
@@ -86,10 +88,8 @@ export function getLoginCookie() {
 				return;
 			}
 			reject('err getting login user_id cookie');
-			return;
 		});
 	});
-
 }
 
 /**
