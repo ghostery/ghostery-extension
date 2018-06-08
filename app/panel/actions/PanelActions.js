@@ -11,13 +11,15 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { GET_PANEL_DATA, GET_SUMMARY_DATA, GET_BLOCKING_DATA,
+import {
+	GET_PANEL_DATA, GET_SUMMARY_DATA, GET_BLOCKING_DATA,
 	SHOW_NOTIFICATION,
 	CLOSE_NOTIFICATION,
 	LOGIN_SUCCESS, LOGIN_FAILED,
 	LOGOUT,
 	CREATE_ACCOUNT_SUCCESS, CREATE_ACCOUNT_FAILED,
-	FORGOT_PASSWORD_SUCCESS, FORGOT_PASSWORD_FAILED } from '../constants/constants';
+	FORGOT_PASSWORD_SUCCESS, FORGOT_PASSWORD_FAILED
+} from '../constants/constants';
 import { sendMessageInPromise } from '../utils/msg';
 import { doXHR } from '../utils/utils';
 import globals from '../../../src/classes/Globals';

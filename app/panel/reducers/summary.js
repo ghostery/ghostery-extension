@@ -13,10 +13,12 @@
 
 /* eslint no-use-before-define: 0 */
 
-import { GET_SUMMARY_DATA,
+import {
+	GET_SUMMARY_DATA,
 	UPDATE_GHOSTERY_PAUSED,
 	UPDATE_SITE_POLICY,
-	UPDATE_TRACKER_COUNTS } from '../constants/constants';
+	UPDATE_TRACKER_COUNTS
+} from '../constants/constants';
 import { addToArray, removeFromArray } from '../utils/utils';
 import { sendMessage } from '../utils/msg';
 

@@ -14,7 +14,8 @@
 /* eslint no-use-before-define: 0 */
 
 import moment from 'moment/min/moment-with-locales.min';
-import { GET_SETTINGS_DATA,
+import {
+	GET_SETTINGS_DATA,
 	IMPORT_SETTINGS_DIALOG,
 	IMPORT_SETTINGS_NATIVE,
 	IMPORT_SETTINGS_FAILED,
@@ -28,7 +29,8 @@ import { GET_SETTINGS_DATA,
 	SETTINGS_TOGGLE_EXPAND_ALL,
 	SETTINGS_TOGGLE_EXPAND_CATEGORY,
 	SETTINGS_UPDATE_SEARCH_VALUE,
-	SETTINGS_FILTER } from '../constants/constants';
+	SETTINGS_FILTER
+} from '../constants/constants';
 import { updateTrackerBlocked, updateCategoryBlocked, updateBlockAllTrackers, toggleExpandAll, toggleExpandCategory } from '../utils/blocking';
 import { removeFromObject, updateObject } from '../utils/utils';
 import { sendMessage } from '../utils/msg';
