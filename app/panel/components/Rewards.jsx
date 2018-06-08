@@ -12,6 +12,7 @@
  */
 
 import React, { Component } from 'react';
+import ClassNames from 'classnames';
 import { Link, Route } from 'react-router-dom';
 import { ToggleSlider, RewardListItem, RewardDetail } from './BuildingBlocks';
 import { sendMessage } from '../utils/msg';
@@ -126,19 +127,25 @@ class Rewards extends React.Component {
 		const { enable_offers, location } = this.props;
 		const showBack = location.pathname.indexOf('/detail/rewards/detail') !== -1;
 		const showToggle = location.pathname === '/detail/rewards/list';
+		const headerClassNames = ClassNames('RewardsPanel__header', 'flex-container', 'align-middle', {
+			'align-justify': !showBack,
+		});
+		const headerTitleClassNames = ClassNames('RewardsPanel__title', {
+			'RewardsPanel--left-padding': showBack,
+		});
 
 		return (
-			<div className="RewardsPanel__header flex-container align-center-middle">
+			<div className={headerClassNames}>
 				{showBack && (
-					<Link to="/detail/rewards/list" className="RewardPanel__back send-left-with-padding flex-container clickable" onClick={this.handleBackClick}>
+					<Link to="/detail/rewards/list" className="RewardPanel__back flex-container clickable" onClick={this.handleBackClick}>
 						<svg height="16" width="10" fillRule="evenodd">
 							<path d="M10 1.833L8.108 0 0 7.857l8.108 7.857L10 13.881 3.784 7.857z" />
 						</svg>
 					</Link>
 				)}
-				<span className="RewardsPanel__title">{ t('panel_detail_rewards_title') }</span>
+				<span className={headerTitleClassNames}>{ t('panel_detail_rewards_title') }</span>
 				{showToggle && !IS_EDGE && !IS_CLIQZ && (
-					<span className="send-right-with-padding flex-container align-middle">
+					<span className="flex-container align-middle">
 						<span className="RewardsPanel__slider_text">
 							{enable_offers ? t('rewards_on') : t('rewards_off')}
 						</span>
