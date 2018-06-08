@@ -38,7 +38,7 @@ const _sendReq = (method, path, body) => {
 	return new Promise((resolve, reject) => {
 		chrome.cookies.get({
 			url: 'http://ghostery.io', // ghostery.com || ghosterystage.com
-			name: 'user_id',
+			name: 'csrf_token',
 		}, (cookie) => {
 			if (cookie) {
 				fetch(`${Config.account_server.host}${path}`, { // eslint-disable-line no-undef
