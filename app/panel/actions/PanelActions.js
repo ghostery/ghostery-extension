@@ -137,6 +137,7 @@ export function fetchUser(user_id) {
 					type: LOGIN_DATA_SUCCESS,
 					data: user,
 				});
+				return user;
 			})
 			.catch(e => {
 				console.error(e);

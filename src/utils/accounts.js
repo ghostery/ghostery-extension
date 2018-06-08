@@ -60,14 +60,16 @@ const SYNC_SET = new Set(globals.SYNC_ARRAY);
  * @return {Promise} 				login info object
  */
 export function setLoginInfo(user) {
-	console.log('inside background setLoginInfo', user);
+	console.log('background setLoginInfo', user);
 	return new Promise((resolve, reject) => {
-		const { email, emailValidated, id } = user;
+		const { email, emailValidated, id, firstName, lastName } = user;
 		conf.login_info = {
 			logged_in: true,
 			user_id: id,
 			is_validated: emailValidated,
-			email
+			email,
+			first_name: firstName,
+			last_name: lastName,
 		};
 		resolve(conf.login_info);
 	});
