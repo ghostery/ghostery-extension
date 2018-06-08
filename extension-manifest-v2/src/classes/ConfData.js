@@ -150,9 +150,7 @@ class ConfData {
 			_initProperty('login_info', {
 				logged_in: false,
 				email: '',
-				user_token: '',
-				decoded_user_token: {},
-				is_validated: false
+				user_id: '',
 			});
 		});
 	}
