@@ -169,7 +169,6 @@ class PanelData {
 	get panelView() {
 		this._panelView = {
 			panel: {
-				decoded_user_token: this._confData.get('decoded_user_token'),
 				email: this._confData.get('email'),
 				enable_ad_block: this._confData.get('enable_ad_block'),
 				enable_anti_tracking: this._confData.get('enable_anti_tracking'),
@@ -188,6 +187,7 @@ class PanelData {
 				smartBlock: this._trackerData.get('smartBlock'),
 				tab_id: this._trackerData.get('tab_id'),
 				unread_offer_ids: rewards.unreadOfferIds,
+				user_id: this._confData.get('user_id'),
 			},
 			summary: this.summaryView,
 			blocking: this._confData.get('is_expert') ? this.blockingView : false,
@@ -301,7 +301,6 @@ class PanelData {
 			.set('block_by_default', conf.block_by_default)
 			.set('bugs_last_updated', conf.bugs_last_updated)
 			.set('categories', this._buildGlobalCategories())
-			.set('decoded_user_token', login_info.decoded_user_token)
 			.set('email', login_info.email)
 			.set('enable_ad_block', conf.enable_ad_block)
 			.set('enable_anti_tracking', conf.enable_anti_tracking)
@@ -312,14 +311,14 @@ class PanelData {
 			.set('enable_metrics', conf.enable_metrics)
 			.set('enable_offers', conf.enable_offers)
 			.set('enable_smart_block', conf.enable_smart_block)
-			.set('first_name', (login_info.decoded_user_token && login_info.decoded_user_token.ClaimFirstName))
+			.set('first_name', login_info.first_name)
 			.set('hide_alert_trusted', conf.hide_alert_trusted)
 			.set('ignore_first_party', conf.ignore_first_party)
 			.set('is_validated', login_info.is_validated)
 			.set('is_expanded', conf.is_expanded)
 			.set('is_expert', conf.is_expert)
 			.set('language', conf.language)
-			.set('last_name', (login_info.decoded_user_token && login_info.decoded_user_token.ClaimLastName))
+			.set('last_name', login_info.last_name)
 			.set('logged_in', login_info.logged_in)
 			.set('notify_library_updates', conf.notify_library_updates)
 			.set('notify_upgrade_updates', conf.notify_upgrade_updates)
@@ -340,6 +339,7 @@ class PanelData {
 			.set('site_whitelist', conf.site_whitelist)
 			.set('toggle_individual_trackers', conf.toggle_individual_trackers)
 			.set('trackers_banner_status', conf.trackers_banner_status)
+			.set('user_id', login_info.user_id)
 			.set('expand_all_trackers', conf.expand_all_trackers);
 	}
 

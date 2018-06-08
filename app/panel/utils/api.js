@@ -4,6 +4,9 @@ import 'whatwg-fetch';
 let isRefreshing = false;
 const tokenRefreshedEventType = 'tokenRefreshed';
 const Config = {
+	auth_server : {
+		host: 'http://ghostery.io:8080'
+	},
 	account_server : {
 		host: 'http://ghostery.io:8081'
 	},
@@ -31,18 +34,29 @@ const _refreshToken = function () {
 	});
 };
 
-const _sendReq = (method, path, body) => (
-	fetch(`${Config.account_server.host}${path}`, { // eslint-disable-line no-undef
-		method,
-		headers: {
-			'Content-Type': 'application/vnd.api+json',
-			'Content-Length': Buffer.byteLength(JSON.stringify(body)),
-			'X-CSRF-Token': '' // TODO get cookie from conf,
-		},
-		body: JSON.stringify(body),
-		credentials: 'include',
-	})
-);
+const _sendReq = (method, path, body) => {
+	return new Promise((resolve, reject) => {
+		chrome.cookies.get({
+			url: 'http://ghostery.io', // ghostery.com || ghosterystage.com
+			name: 'user_id',
+		}, (cookie) => {
+			if (cookie) {
+				fetch(`${Config.account_server.host}${path}`, { // eslint-disable-line no-undef
+					method,
+					headers: {
+						'Content-Type': 'application/vnd.api+json',
+						'Content-Length': Buffer.byteLength(JSON.stringify(body)),
+						'X-CSRF-Token': cookie.value,
+					},
+					body: JSON.stringify(body),
+					credentials: 'include',
+				});
+			} else {
+				reject();
+			}
+		});
+	});
+}
 
 const _processResponse = res => (
 	new Promise((resolve, reject) => {
