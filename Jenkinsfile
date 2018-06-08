@@ -66,6 +66,21 @@ node('docker') {
             }
         }
     }
+
+    stage('Publish Beta') {
+        artifacts.each {
+            if (it.contains('firefox')) {
+                // firefox artifact (zip) - sign for cliqz_beta
+                def artifactUrl = "https://s3.amazonaws.com/${uploadPath}/${env.BRANCH_NAME}/${it}"
+                build job: 'addon-repack', parameters: [
+                    string(name: 'XPI_URL', value: artifactUrl),
+                    string(name: 'XPI_SIGN_CREDENTIALS', value: '41572f9c-06aa-46f0-9c3b-b7f4f78e9caa'),
+                    string(name: 'XPI_SIGN_REPO_URL', value: 'git@github.com:cliqz/xpi-sign.git'),
+                    string(name: 'CHANNEL', value: 'android_browser_beta')
+                ]
+            }
+        }
+    }
 }
 
 def withCache(Closure body=null) {
