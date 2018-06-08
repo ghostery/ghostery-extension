@@ -1047,7 +1047,9 @@ adblocker.on('enabled', () => {
 				spec: 'break',
 				fn: state => !isWhitelisted(state),
 				before: ['checkBlocklist']
-			})
+			}),
+			adblocker.action('addWhiteListCheck',
+				url => isWhitelisted({ sourceUrl: url }))
 		])
 	);
 });
