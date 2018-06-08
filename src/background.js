@@ -740,6 +740,7 @@ function onMessageHandler(request, sender, callback) {
 		});
 		return true;
 	} else if (name === 'setLoginInfo') {
+		console.log('setLoginInfo message');
 		accounts.setLoginInfo(message).then((result) => {
 			callback(result);
 		}).catch((err) => {

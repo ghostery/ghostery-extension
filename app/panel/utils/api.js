@@ -34,27 +34,35 @@ const _refreshToken = function () {
 	});
 };
 
-const _sendReq = (method, path, body) => {
+const getCsrfCookie = () => {
 	return new Promise((resolve, reject) => {
 		chrome.cookies.get({
 			url: 'http://ghostery.io', // ghostery.com || ghosterystage.com
 			name: 'csrf_token',
 		}, (cookie) => {
 			if (cookie) {
-				fetch(`${Config.account_server.host}${path}`, { // eslint-disable-line no-undef
-					method,
-					headers: {
-						'Content-Type': 'application/vnd.api+json',
-						'Content-Length': Buffer.byteLength(JSON.stringify(body)),
-						'X-CSRF-Token': cookie.value,
-					},
-					body: JSON.stringify(body),
-					credentials: 'include',
-				});
-			} else {
-				reject();
+				resolve(cookie);
+				return;
 			}
+			reject();
+			return;
 		});
+	});
+}
+
+const _sendReq = (method, path, body) => {
+	return getCsrfCookie()
+	.then((cookie) => {
+		return fetch(`${Config.account_server.host}${path}`, { // eslint-disable-line no-undef
+			method,
+			headers: {
+				'Content-Type': 'application/vnd.api+json',
+				'Content-Length': Buffer.byteLength(JSON.stringify(body)),
+				'X-CSRF-Token': cookie.value,
+			},
+			body: JSON.stringify(body),
+			credentials: 'include',
+		})
 	});
 }
 
