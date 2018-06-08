@@ -11,10 +11,12 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { GET_CLIQZ_MODULE_DATA,
+import {
+	GET_CLIQZ_MODULE_DATA,
 	OPEN_DRAWER,
 	CLOSE_DRAWER,
-	TOGGLE_DRAWER_SETTING } from '../constants/constants';
+	TOGGLE_DRAWER_SETTING
+} from '../constants/constants';
 import { sendMessageInPromise } from '../utils/msg';
 
 /**

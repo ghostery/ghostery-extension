@@ -10,7 +10,8 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-import { GET_SETTINGS_DATA,
+import {
+	GET_SETTINGS_DATA,
 	IMPORT_SETTINGS_DIALOG,
 	IMPORT_SETTINGS_NATIVE,
 	IMPORT_SETTINGS_FAILED,
@@ -26,7 +27,8 @@ import { GET_SETTINGS_DATA,
 	SETTINGS_TOGGLE_EXPAND_CATEGORY,
 	SETTINGS_UPDATE_SEARCH_VALUE,
 	SETTINGS_SEARCH_SUBMIT,
-	SETTINGS_FILTER } from '../constants/constants';
+	SETTINGS_FILTER
+} from '../constants/constants';
 import { sendMessageInPromise } from '../utils/msg';
 import { hashCode } from '../../../src/utils/common';
 import globals from '../../../src/classes/Globals';
