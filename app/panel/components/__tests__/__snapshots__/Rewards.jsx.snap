@@ -5,7 +5,7 @@ exports[`app/panel/components/Rewards.jsx Snapshot tests with react-test-rendere
   className="RewardsPanel"
 >
   <div
-    className="RewardsPanel__header flex-container align-center-middle"
+    className="RewardsPanel__header flex-container align-middle align-justify"
   >
     <span
       className="RewardsPanel__title"
@@ -13,7 +13,7 @@ exports[`app/panel/components/Rewards.jsx Snapshot tests with react-test-rendere
       panel_detail_rewards_title
     </span>
     <span
-      className="send-right-with-padding flex-container align-middle"
+      className="flex-container align-middle"
     >
       <span
         className="RewardsPanel__slider_text"
@@ -71,7 +71,7 @@ exports[`app/panel/components/Rewards.jsx Snapshot tests with react-test-rendere
   className="RewardsPanel"
 >
   <div
-    className="RewardsPanel__header flex-container align-center-middle"
+    className="RewardsPanel__header flex-container align-middle align-justify"
   >
     <span
       className="RewardsPanel__title"
@@ -79,7 +79,7 @@ exports[`app/panel/components/Rewards.jsx Snapshot tests with react-test-rendere
       panel_detail_rewards_title
     </span>
     <span
-      className="send-right-with-padding flex-container align-middle"
+      className="flex-container align-middle"
     >
       <span
         className="RewardsPanel__slider_text"
