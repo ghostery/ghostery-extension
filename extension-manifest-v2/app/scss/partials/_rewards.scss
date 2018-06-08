@@ -21,16 +21,6 @@
 .display-inline-block {
 	display: inline-block;
 }
-.send-left-with-padding {
-	position: absolute;
-	left: 0;
-	padding: 5px 13px;
-}
-.send-right-with-padding {
-	position: absolute;
-	right: 0;
-	padding: 5px 13px;
-}
 .clickable {
 	@extend %pointer;
 }
@@ -43,7 +33,7 @@
 	background-color: #ffffff;
 }
 .RewardsPanel__header {
-	padding: 10px 0;
+	padding: 10px 13px;
 	background-color: $whisper;
 }
 .RewardPanel__back svg {
@@ -56,6 +46,9 @@
 	text-transform: uppercase;
 	font-size: 14px;
 	color: #9b9b9b;
+}
+.RewardsPanel--left-padding {
+	padding-left: 13px;
 }
 .RewardsPanel__slider_text {
 	text-transform: uppercase;
