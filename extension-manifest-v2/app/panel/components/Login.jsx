@@ -89,11 +89,11 @@ class Login extends React.Component {
 		}
 
 		this.props.actions.userLogin(email, password)
-		.then((user_id) => {
-			if (user_id) {
-				this.props.actions.fetchUser(user_id)
-			}
-		});
+			.then((user_id) => {
+				if (user_id) {
+					this.props.actions.fetchUser(user_id);
+				}
+			});
 	}
 	/**
 	 * Intercept Return key and call showSigninResult.
