@@ -1,0 +1,91 @@
+.overview {
+	padding-top: 20px;
+	padding-bottom: 50px;
+	text-align: center;
+
+	.buttons-wrapper {
+		padding-top: 65px;
+
+		.button {
+			min-width: 180px;
+			background-color: $white;
+			border: 1px solid #ccc;
+
+			& > span {
+				padding-left: 20px;
+				background-repeat: no-repeat;
+				background-position: left center;
+				color: $tundora;
+			}
+
+			&.trust-site-btn {
+
+				& > span {
+					background-image: buildIconTrust($button-dark-grey);
+				}
+
+				&.changed:not(.paused) {
+					background-color: #9ecc42;
+					border-color: #9ecc42;
+
+					& > span {
+						color: $white;
+						background-image: buildIconTrust($button-white);
+					}
+				}
+			}
+
+			&.restrict-site-btn {
+
+				& > span {
+					background-image: buildIconRestrict($button-dark-grey);
+				}
+
+				&.changed:not(.paused) {
+					background-color: #e74055;
+					border-color: #e74055;
+
+					& > span {
+						color: $white;
+						background-image: buildIconRestrict($button-white);
+					}
+				}
+			}
+
+			&.pause-resume-btn {
+
+				& > span {
+					background-image: url(../../app/images/panel-android/pause.svg);
+
+					&:last-child {
+						display: none;
+					}
+				}
+
+				&.changed {
+					background-color: $cliqz-blue;
+					border-color: $cliqz-blue;
+
+					& > span {
+						background-image: url(../../app/images/panel-android/play.svg);
+
+						&:first-child {
+							display: none;
+						}
+
+						&:last-child {
+							display: inline-block;
+							color: $white;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@media screen and (orientation: landscape) {
+		.chart-wrapper {
+			display: none;
+		}
+	}
+}
