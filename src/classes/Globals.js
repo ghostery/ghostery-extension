@@ -97,10 +97,8 @@ class Globals {
 			'show_badge',
 			'show_cmp',
 			'show_tracker_urls',
-			'site_blacklist',
 			'site_specific_blocks',
 			'site_specific_unblocks',
-			'site_whitelist',
 			'toggle_individual_trackers',
 			'trackers_banner_status',
 		];
