@@ -740,8 +740,8 @@ function onMessageHandler(request, sender, callback) {
 		utils.getActiveTab((tab) => {
 			if (tab && tab.id && tab.url.startsWith('http')) {
 				const settings = accounts.buildUserSettings();
-				//Blacklisted and whitelisted sites are removed from sync array, 
-				//but we want to allow export and import these properties manually
+				// Blacklisted and whitelisted sites are removed from sync array,
+				// but we want to allow export and import these properties manually
 				settings.site_blacklist = conf.site_blacklist;
 				settings.site_whitelist = conf.site_whitelist;
 
