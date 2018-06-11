@@ -114,14 +114,14 @@ class OfferCard extends Component {
 		}
 	}
 
-	sendSignal(actionId, props = this.props) {
+	sendSignal(actionId, props = this.props, offerSignal = true) {
 		// Cliqz metrics
-		const offerId = props.reward.offer_id;
+		const offerId = offerSignal ? props.reward.offer_id : null;
 		const message = {
 			offerId,
 			actionId,
 			origin: 'rewards-hotdog-card',
-			type: (actionId === 'rewards_off') ? 'action-signal' : 'offer-action-signal',
+			type: !offerSignal ? 'action-signal' : 'offer-action-signal',
 		};
 		this.messageBackground('rewardSignal', message);
 	}
@@ -155,7 +155,7 @@ class OfferCard extends Component {
 	}
 
 	disableRewards() {
-		this.sendSignal('rewards_off');
+		this.sendSignal('rewards_off', null, false);
 		sendMessage('ping', 'rewards_off');
 		this.messageBackground('rewardsDisabled');
 	}
@@ -258,7 +258,7 @@ class OfferCard extends Component {
 									{ this.state.showSettings &&
 										<div className="rewards-settings-container">
 											<ClickOutside excludeEl={this.kebabRef} onClickOutside={this.toggleSettings}>
-												<Settings signal={() => { this.sendSignal('about_ghostery_rewards'); }} disable={this.disableRewardsNotification} />
+												<Settings signal={() => { this.sendSignal('about_ghostery_rewards', null, false); }} disable={this.disableRewardsNotification} />
 											</ClickOutside>
 										</div>
 									}
