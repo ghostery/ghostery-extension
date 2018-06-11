@@ -1,3 +1,8 @@
+### GHOSTERY 8.1.2 (April 19, 2018)
+
++ Remove WebSocket filter scheme support for older versions of Chrome and FF
++ Fix Human Web endpoint URLs
+
 ### GHOSTERY 8.1.1 (April 11, 2018)
 
 + New surrogate for 'NetRatings SiteCensus' tracker that locks up Chrome when blocked (Issue #11)

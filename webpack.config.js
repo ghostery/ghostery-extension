@@ -25,6 +25,7 @@ const BUILD_DIR = path.resolve(__dirname, 'dist');
 const CLIQZ_DIR = path.resolve(__dirname, 'cliqz');
 const SRC_DIR = path.resolve(__dirname, 'src');
 const PANEL_DIR = path.resolve(__dirname, 'app/panel');
+const PANEL_ANDROID_DIR = path.resolve(__dirname, 'app/panel-android');
 const SETUP_DIR = path.resolve(__dirname, 'app/setup');
 const LICENSES_DIR = path.resolve(__dirname, 'app/licenses');
 const SASS_DIR = path.resolve(__dirname, 'app/scss');
@@ -120,12 +121,14 @@ const config = {
 		purplebox: [CONTENT_SCRIPTS_DIR + '/purplebox.js'],
 		content_script_bundle: [CLIQZ_DIR + '/core/content-script.bundle.js'],
 		panel_react: [PANEL_DIR + '/index.jsx'],
+		panel_android_js: [PANEL_ANDROID_DIR + '/index.jsx'],
 		setup_react: [SETUP_DIR + '/index.jsx'],
 		licenses_react: [LICENSES_DIR + '/Licenses.jsx', LICENSES_DIR + '/License.jsx'],
 		foundation: [SASS_DIR + '/vendor/foundation.scss'],
 		ghostery_dot_com_css: [SASS_DIR + '/ghostery_dot_com.scss'],
 		panel: [SASS_DIR + '/panel.scss'],
 		panel_android: [SASS_DIR + '/panel_android.scss'],
+		panel_android_ui: [SASS_DIR + '/panel_android_ui.scss'],
 		purplebox_styles: [SASS_DIR + '/purplebox.scss'],
 		setup: [SASS_DIR + '/setup.scss'],
 		licenses: [SASS_DIR + '/licenses.scss'],
@@ -150,7 +153,7 @@ const config = {
 				}
 			},{
 				test : /\.jsx?/,
-				include : [PANEL_DIR, SETUP_DIR, LICENSES_DIR],
+				include : [PANEL_ANDROID_DIR, PANEL_DIR, SETUP_DIR, LICENSES_DIR],
 				use: {
 					loader: 'babel-loader'
 				}

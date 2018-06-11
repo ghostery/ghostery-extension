@@ -175,7 +175,7 @@ function closeAndroidPanelTabs() {
 	if (BROWSER_INFO.os !== 'android') { return; }
 	chrome.tabs.query({
 		active: true,
-		url: chrome.extension.getURL('app/templates/panel_android.html*')
+		url: chrome.extension.getURL('app/templates/panel_android_ui.html*')
 	}, (tabs) => {
 		chrome.tabs.remove(tabs.map(t => t.id));
 	});
@@ -612,8 +612,6 @@ function onMessageHandler(request, sender, callback) {
 		return false;
 	} else if (name === 'getAndroidPanelData') {
 		utils.getActiveTab((tab) => {
-			// we are pushing all the possible data for now
-			// TODO: Looks like only summary and settings is enough. We should remove blocking and panel after confirming with ghosterians
 			chrome.runtime.sendMessage({
 				target: 'ANDROID_BROWSER',
 				action: 'panelData',
@@ -627,25 +625,35 @@ function onMessageHandler(request, sender, callback) {
 		});
 	} else if (name === 'getCliqzModuleData') {
 		const modules = { adblock: {}, antitracking: {} };
-		utils.getActiveTab((tab) => {
+
+		const getCliqzModuleDataForTab = (tabId, callback) => {
 			if (conf.enable_anti_tracking) {
-				cliqz.modules.antitracking.background.actions.aggregatedBlockingStats(tab.id).then((data) => {
+				cliqz.modules.antitracking.background.actions.aggregatedBlockingStats(tabId).then((data) => {
 					modules.antitracking = data;
 					// send adblock and antitracking together
 					if (conf.enable_ad_block) {
-						modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tab.id);
+						modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tabId);
 					}
 					callback(modules);
 				}).catch((err) => {
 					callback(modules);
 				});
 			} else if (conf.enable_ad_block) {
-				modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tab.id);
+				modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tabId);
 				callback(modules);
 			} else {
 				callback(modules);
 			}
-		});
+		};
+
+		if (message && message.tabId) {
+			getCliqzModuleDataForTab(+message.tabId, callback);
+		} else {
+			utils.getActiveTab((tab) => {
+				getCliqzModuleDataForTab(tab.id, callback);
+			});
+		}
+
 		return true;
 	} else if (name === 'pullUserSettings') {
 		accounts.pullUserSettings().then((settings) => {
@@ -1098,7 +1106,7 @@ function initializePopup() {
 	if (BROWSER_INFO.os === 'android') {
 		chrome.browserAction.onClicked.addListener((tab) => {
 			chrome.tabs.create({
-				url: chrome.extension.getURL(`app/templates/panel_android.html?tabId=${tab.id}`),
+				url: chrome.extension.getURL(`app/templates/panel_android_ui.html?tabId=${tab.id}`),
 				active: true,
 			});
 		});
