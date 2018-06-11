@@ -50,6 +50,7 @@
     "history": "^4.7.2",
     "json-api-normalizer": "^0.4.10",
     "moment": "^2.19.1",
+    "prop-types": "^15.6.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
