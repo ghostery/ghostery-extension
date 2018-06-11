@@ -12,7 +12,6 @@ export function sendMessageInPromise(name, message) {
 			message,
 		}, (response) => {
 			if (chrome.runtime.lastError) {
-				// console.error(chrome.runtime.lastError, name, message);
 				resolve(null);
 			}
 			resolve(response);

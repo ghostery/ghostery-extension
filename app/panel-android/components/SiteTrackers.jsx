@@ -6,6 +6,7 @@ import DotsMenu from './content/DotsMenu';
 export default class SiteTrackers extends React.Component {
 	actions = [
 		{
+			id: 'blockAllSite',
 			name: 'Block All',
 			callback: () => {
 				this.context.callGlobalAction({
@@ -18,6 +19,7 @@ export default class SiteTrackers extends React.Component {
 			},
 		},
 		{
+			id: 'unblockAllSite',
 			name: 'Unblock All',
 			callback: () => {
 				this.context.callGlobalAction({
@@ -40,13 +42,17 @@ export default class SiteTrackers extends React.Component {
 				</div>
 				<Accordions type="site-trackers" categories={this.props.categories} />
 			</div>
-		)
+		);
 	}
 }
 
 SiteTrackers.propTypes = {
-	categories: PropTypes.array,
-}
+	categories: PropTypes.arrayOf(PropTypes.object),
+};
+
+SiteTrackers.defaultProps = {
+	categories: [],
+};
 
 SiteTrackers.contextTypes = {
 	callGlobalAction: PropTypes.func,

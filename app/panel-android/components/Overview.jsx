@@ -4,7 +4,6 @@ import TrackersChart from './content/TrackersChart';
 import { fromTrackersToChartData } from '../utils/chart';
 
 export default class Overview extends React.Component {
-
 	get isTrusted() {
 		return this.context.siteProps.isTrusted;
 	}
@@ -70,7 +69,7 @@ export default class Overview extends React.Component {
 					<p className="trackers-blocked-num"><span className="number">{this.nTrackersBlocked}</span> Trackers blocked</p>
 				</div>
 
-				<div className={`buttons-wrapper row`}>
+				<div className="buttons-wrapper row">
 					<div className="small-12">
 						<button
 							className={`button trust-site-btn ${this.isTrusted ? 'changed' : ''} ${this.isPaused ? 'paused' : ''}`}
@@ -98,13 +97,16 @@ export default class Overview extends React.Component {
 					</div>
 				</div>
 			</div>
-		)
+		);
 	}
 }
 
 Overview.propTypes = {
-	handleClick: PropTypes.func,
-	categories: PropTypes.array,
+	categories: PropTypes.arrayOf(PropTypes.object),
+};
+
+Overview.defaultProps = {
+	categories: [],
 };
 
 Overview.contextTypes = {

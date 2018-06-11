@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import URLSearchParams from 'url-search-params';
-import { Tabs, Tab } from './content/Tabs';
+import Tabs from './content/Tabs';
+import Tab from './content/Tab';
 import Overview from './Overview';
 import FixedMenu from './content/FixedMenu';
 import SiteTrackers from './SiteTrackers';
@@ -21,8 +22,13 @@ export default class Panel extends React.Component {
 			settings: {},
 			blocking: {},
 			cliqzModuleData: {},
-		}
+		};
 	}
+
+	getChildContext = () => ({
+		siteProps: this.siteProps,
+		callGlobalAction: this.callGlobalAction,
+	});
 
 	componentDidMount() {
 		const tabId = new URLSearchParams(window.location.search).get('tabId');
@@ -31,6 +37,43 @@ export default class Panel extends React.Component {
 		this.setSettingsState();
 		this.setBlockingState(tabId);
 		this.setCliqzDataState(tabId);
+	}
+
+	get siteCategories() {
+		return this.state.blocking.categories || [];
+	}
+
+	get globalCategories() {
+		return this.state.settings.categories || [];
+	}
+
+	get chartData() {
+		const trackers = this.siteCategories.map(category =>
+			({
+				id: category.id,
+				numTotal: category.num_total,
+			})
+		);
+
+		return fromTrackersToChartData(trackers);
+	}
+
+	get siteProps() {
+		const hostName = this.state.summary.pageHost || '';
+		const pageHost = hostName.toLowerCase().replace(/^(http[s]?:\/\/)?(www\.)?/, '');
+
+		const siteWhitelist = this.state.summary.site_whitelist || [];
+		const siteBlacklist = this.state.summary.site_blacklist || [];
+
+		const isTrusted = siteWhitelist.indexOf(pageHost) !== -1;
+		const isRestricted = siteBlacklist.indexOf(pageHost) !== -1;
+		const isPaused = this.state.summary.paused_blocking;
+
+		const nTrackersBlocked = (this.state.summary.trackerCounts || {}).blocked || 0;
+
+		return {
+			hostName, pageHost, isTrusted, isRestricted, isPaused, nTrackersBlocked
+		};
 	}
 
 	setPanelState = (tabId) => {
@@ -89,48 +132,6 @@ export default class Panel extends React.Component {
 		}
 	}
 
-	get siteCategories() {
-		return this.state.blocking.categories || [];
-	}
-
-	get globalCategories() {
-		return this.state.settings.categories || [];
-	}
-
-	get chartData() {
-		const trackers = this.siteCategories.map(category =>
-			({
-				id: category.id,
-				numTotal: category.num_total,
-			})
-		);
-
-		return fromTrackersToChartData(trackers);
-	}
-
-	get siteProps() {
-		const hostName = this.state.summary.pageHost || '';
-		const pageHost = hostName.toLowerCase().replace(/^(http[s]?:\/\/)?(www\.)?/, '');
-
-		const siteWhitelist = this.state.summary.site_whitelist || [];
-		const siteBlacklist = this.state.summary.site_blacklist || [];
-
-		const isTrusted = siteWhitelist.indexOf(pageHost) !== -1;
-		const isRestricted = siteBlacklist.indexOf(pageHost) !== -1;
-		const isPaused = this.state.summary.paused_blocking;
-
-		const nTrackersBlocked = (this.state.summary.trackerCounts || {}).blocked || 0;
-
-		return { hostName, pageHost, isTrusted, isRestricted, isPaused, nTrackersBlocked };
-	}
-
-	getChildContext = () => {
-		return {
-			siteProps: this.siteProps,
-			callGlobalAction: this.callGlobalAction,
-		};
-	}
-
 	render() {
 		return (
 			<div>
@@ -143,21 +144,21 @@ export default class Panel extends React.Component {
 					<p className="trackers-blocked-num"><span className="number">{this.siteProps.nTrackersBlocked}</span> Trackers blocked</p>
 				</div>
 				<Tabs>
-					<Tab tabLabel={'Overview'} linkClassName={'custom-link'}>
+					<Tab tabLabel="Overview" linkClassName="custom-link">
 						<Overview categories={this.siteCategories} />
 						<FixedMenu panel={this.state.panel} cliqzModuleData={this.state.cliqzModuleData} />
 					</Tab>
 
-					<Tab tabLabel={'Site Trackers'} linkClassName={'custom-link'}>
+					<Tab tabLabel="Site Trackers" linkClassName="custom-link">
 						<SiteTrackers categories={this.siteCategories} />
 					</Tab>
 
-					<Tab tabLabel={'Global Trackers'} linkClassName={'custom-link'}>
+					<Tab tabLabel="Global Trackers" linkClassName="custom-link">
 						<GlobalTrackers categories={this.globalCategories} />
 					</Tab>
 				</Tabs>
 			</div>
-		)
+		);
 	}
 }
 

@@ -37,16 +37,17 @@ export default class DotsMenu extends React.Component {
 	}
 
 	render() {
-
 		return (
 			<div className="dots-menu">
-				<button className="dots-menu-btn" onClick={this.dotsButtonClicked}></button>
+				<button className="dots-menu-btn" onClick={this.dotsButtonClicked} />
 				<div className={`dots-menu-content ${this.state.opening ? 'opening' : ''}`}>
 					<ul>
 						{this.props.actions.map((action, index) =>
-							<li key={index}>
-								<button className="dots-menu-item" onClick={action.callback}>{action.name}</button>
-							</li>
+							(
+								<li key={action.id}>
+									<button className="dots-menu-item" onClick={action.callback}>{action.name}</button>
+								</li>
+							)
 						)}
 					</ul>
 				</div>
@@ -56,5 +57,5 @@ export default class DotsMenu extends React.Component {
 }
 
 DotsMenu.propTypes = {
-	actions: PropTypes.array,
+	actions: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

@@ -5,7 +5,7 @@ import { trustRestrictBlockSiteTracker, blockUnblockGlobalTracker, blockUnBlockA
 export default function handleAllActions({ actionName, actionData, state }) {
 	let updated = {};
 
-	switch(actionName) {
+	switch (actionName) {
 		case 'handleTrustButtonClick':
 			updated = handleTrustButtonClick({ state });
 			break;

@@ -3,11 +3,6 @@ import PropTypes from 'prop-types';
 import getUrlFromTrackerId from '../../utils/tracker-info';
 
 export default class TrackerItem extends React.Component {
-
-	toggleMenu = () => {
-		this.props.toggleMenu(this.props.index);
-	}
-
 	get trackerSelectStatus() {
 		// Only for site trackers
 		if (this.props.type === 'site-trackers') {
@@ -33,6 +28,14 @@ export default class TrackerItem extends React.Component {
 		}
 
 		return '';
+	}
+
+	get showMenu() {
+		return this.props.showMenu;
+	}
+
+	get disabledStatus() {
+		return ['trusted', 'restricted'].includes(this.trackerSelectStatus) ? 'disabled' : '';
 	}
 
 	clickButtonTrust = () => {
@@ -93,53 +96,57 @@ export default class TrackerItem extends React.Component {
 		this.props.toggleMenu(this.props.index);
 	}
 
-	get showMenu() {
-		return this.props.showMenu; /* && !this.context.siteProps.isTrusted && !this.context.siteProps.isRestricted; */
-	}
-
 	openTrackerLink = () => {
 		const url = getUrlFromTrackerId(this.props.tracker.id);
-		console.log('url', url);
 		const win = window.open(url, '_blank');
 		win.focus();
 	}
 
-	get disabledStatus() {
-		return ['trusted', 'restricted'].includes(this.trackerSelectStatus) ? 'disabled' : '';
+	toggleMenu = () => {
+		this.props.toggleMenu(this.props.index);
 	}
 
 	render() {
 		return (
-			<div className={`tracker ${this.showMenu ? 'show-menu' : ''} ${this.trackerSelectStatus}`}>
-				<button className="info" onClick={this.openTrackerLink}></button>
-				<div onClick={this.toggleMenu} className="trackerName">
-					<span>{this.props.tracker.name}</span>
-					<span className="trackerSelect"></span>
-				</div>
+			<li>
+				<div className={`tracker ${this.showMenu ? 'show-menu' : ''} ${this.trackerSelectStatus}`}>
+					<button className="info" onClick={this.openTrackerLink} />
+					<div onClick={this.toggleMenu} className="trackerName">
+						<span>{this.props.tracker.name}</span>
+						<span className="trackerSelect" />
+					</div>
 
-				<div className={`menu ${this.props.type}`}>
-					<button className="trackerOption trust" onClick={this.clickButtonTrust}>
-						{this.props.tracker.ss_allowed ? 'Untrust': 'Trust'}
-					</button>
-					<button className="trackerOption restrict" onClick={this.clickButtonRestrict}>
-						{this.props.tracker.ss_blocked ? 'Unrestrict': 'Restrict'}
-					</button>
-					<button className={`trackerOption block ${this.disabledStatus}`} onClick={this.clickButtonBlock}>
-						{this.props.tracker.blocked ? 'UnBlock': 'Block'}
-					</button>
+					<div className={`menu ${this.props.type}`}>
+						<button className="trackerOption trust" onClick={this.clickButtonTrust}>
+							{this.props.tracker.ss_allowed ? 'Untrust' : 'Trust'}
+						</button>
+						<button className="trackerOption restrict" onClick={this.clickButtonRestrict}>
+							{this.props.tracker.ss_blocked ? 'Unrestrict' : 'Restrict'}
+						</button>
+						<button className={`trackerOption block ${this.disabledStatus}`} onClick={this.clickButtonBlock}>
+							{this.props.tracker.blocked ? 'UnBlock' : 'Block'}
+						</button>
+					</div>
 				</div>
-			</div>
+			</li>
 		);
 	}
 }
 
 TrackerItem.propTypes = {
-	toggleMenu: PropTypes.func,
-	index: PropTypes.number,
+	toggleMenu: PropTypes.func.isRequired,
+	index: PropTypes.number.isRequired,
 	showMenu: PropTypes.bool,
-	tracker: PropTypes.object,
+	tracker: PropTypes.object, // eslint-disable-line react/forbid-prop-types
 	categoryId: PropTypes.string,
 	type: PropTypes.string,
+};
+
+TrackerItem.defaultProps = {
+	showMenu: false,
+	tracker: {},
+	categoryId: '',
+	type: '',
 };
 
 TrackerItem.contextTypes = {

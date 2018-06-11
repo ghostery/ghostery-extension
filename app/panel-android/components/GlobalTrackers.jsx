@@ -4,8 +4,13 @@ import Accordions from './content/Accordions';
 import DotsMenu from './content/DotsMenu';
 
 export default class GlobalTrackers extends React.Component {
+	get categories() {
+		return this.props.categories;
+	}
+
 	actions = [
 		{
+			id: 'blockAllGlobal',
 			name: 'Block All',
 			callback: () => {
 				this.context.callGlobalAction({
@@ -18,6 +23,7 @@ export default class GlobalTrackers extends React.Component {
 			},
 		},
 		{
+			id: 'unblockAllGlobal',
 			name: 'Unblock All',
 			callback: () => {
 				this.context.callGlobalAction({
@@ -30,6 +36,7 @@ export default class GlobalTrackers extends React.Component {
 			},
 		},
 		{
+			id: 'resetSettings',
 			name: 'Reset Settings',
 			callback: () => {
 				this.context.callGlobalAction({
@@ -38,10 +45,6 @@ export default class GlobalTrackers extends React.Component {
 			},
 		}
 	]
-
-	get categories() {
-		return this.props.categories;
-	}
 
 	render() {
 		return (
@@ -52,12 +55,16 @@ export default class GlobalTrackers extends React.Component {
 				</div>
 				<Accordions type="global-trackers" categories={this.categories} />
 			</div>
-		)
+		);
 	}
 }
 
 GlobalTrackers.propTypes = {
-	categories: PropTypes.array,
+	categories: PropTypes.arrayOf(PropTypes.object),
+};
+
+GlobalTrackers.defaultProps = {
+	categories: [],
 };
 
 GlobalTrackers.contextTypes = {

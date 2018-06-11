@@ -1690,9 +1690,9 @@ brorand@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
 
-"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.26/1.26.1.tgz":
-  version "1.26.1"
-  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.26/1.26.1.tgz#820b5e2e21248f4b35c1e46aacd65fe1737058e6"
+"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.26/1.26.2.tgz":
+  version "1.26.2"
+  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.26/1.26.2.tgz#9b44a9a56337ff227d200ab31df3a95997eb2313"
   dependencies:
     "@cliqz-oss/dexie" "2.0.3"
     "@cliqz-oss/pouchdb" "6.3.4-security-error-fix-2"
@@ -7530,7 +7530,7 @@ prop-types@15.5.10:
     fbjs "^0.8.9"
     loose-envify "^1.3.1"
 
-prop-types@^15.5.4, prop-types@^15.5.8, prop-types@^15.6.0:
+prop-types@^15.5.4, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.1.tgz#36644453564255ddda391191fb3a125cbdf654ca"
   dependencies:

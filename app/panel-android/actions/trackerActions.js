@@ -2,7 +2,9 @@ import { sendMessage } from '../utils/msg';
 import { updateObject } from '../utils/utils';
 import { resetTrustRestrictPause } from './summaryActions';
 
-function trustRestrictTracker({ pageHost, blocking, app_ids, trust, restrict }) {
+function trustRestrictTracker({
+	pageHost, blocking, app_ids, trust, restrict
+}) {
 	const siteSpecificUnblocks = blocking.site_specific_unblocks;
 	const siteSpecificBlocks = blocking.site_specific_blocks;
 
@@ -55,9 +57,11 @@ function calculateDelta(oldState, newState) {
 
 export function trustRestrictBlockSiteTracker({ actionData, state }) {
 	const { blocking, summary, settings } = state;
-	const pageHost = summary.pageHost;
+	const { pageHost } = summary;
 
-	const { app_id, cat_id, block, trust, restrict } = actionData;
+	const {
+		app_id, cat_id, block, trust, restrict
+	} = actionData;
 
 	const updated_app_ids = JSON.parse(JSON.stringify(blocking.selected_app_ids)) || {};
 
@@ -66,7 +70,7 @@ export function trustRestrictBlockSiteTracker({ actionData, state }) {
 
 	// update tracker category for site-specific blocking
 	const selectedBlockingTracker = updated_blocking_category.trackers
-																	.find(tracker => tracker.shouldShow && tracker.id === app_id);
+		.find(tracker => tracker.shouldShow && tracker.id === app_id);
 	if (selectedBlockingTracker) {
 		const oldState = selectedBlockingTracker.blocked || selectedBlockingTracker.ss_blocked;
 		selectedBlockingTracker.ss_allowed = trust;
@@ -90,7 +94,7 @@ export function trustRestrictBlockSiteTracker({ actionData, state }) {
 	const updated_settings_category = updated_settings_categories.find(category => category.id === cat_id);
 
 	const selectedSettingsTracker = updated_settings_category.trackers
-																	.find(tracker => tracker.shouldShow && +tracker.id === app_id);
+		.find(tracker => tracker.shouldShow && +tracker.id === app_id);
 	if (selectedSettingsTracker && !trust && !restrict) { // Only update global if this action is blocking
 		const oldState = selectedSettingsTracker.blocked;
 		selectedSettingsTracker.blocked = block;
@@ -100,8 +104,11 @@ export function trustRestrictBlockSiteTracker({ actionData, state }) {
 		updated_settings_category.num_blocked += delta;
 	}
 
-	const { updated_site_specific_unblocks, updated_site_specific_blocks }
-				= trustRestrictTracker({ pageHost, blocking, app_ids: [app_id], trust, restrict });
+	const {
+		updated_site_specific_unblocks, updated_site_specific_blocks
+	} = trustRestrictTracker({
+		pageHost, blocking, app_ids: [app_id], trust, restrict
+	});
 
 	// persist to background - note that categories are not included
 	sendMessage('setPanelData', {
@@ -129,7 +136,9 @@ export function trustRestrictBlockSiteTracker({ actionData, state }) {
 }
 
 export function blockUnblockGlobalTracker({ actionData, state }) {
-	const { block, cat_id, app_id, type } = actionData;
+	const {
+		block, cat_id, app_id, type
+	} = actionData;
 	const { blocking, settings } = state;
 
 	const updated_app_ids = JSON.parse(JSON.stringify(settings.selected_app_ids)) || {};
@@ -138,7 +147,7 @@ export function blockUnblockGlobalTracker({ actionData, state }) {
 	const updated_settings_category = updated_settings_categories.find(category => category.id === cat_id);
 
 	const selectedSettingsTracker = updated_settings_category.trackers
-																	.find(tracker => tracker.shouldShow && tracker.id === app_id);
+		.find(tracker => tracker.shouldShow && tracker.id === app_id);
 
 	if (selectedSettingsTracker) {
 		const oldState = selectedSettingsTracker.blocked;
@@ -162,7 +171,7 @@ export function blockUnblockGlobalTracker({ actionData, state }) {
 	const updated_blocking_category = updated_blocking_categories.find(item => item.id === cat_id);
 
 	const selectedBlockingTracker = updated_blocking_category.trackers
-																	.find(tracker => tracker.shouldShow && tracker.id === +app_id);
+		.find(tracker => tracker.shouldShow && tracker.id === +app_id);
 	// Only update if the site tracker is neither trusted nor restricted
 	if (selectedBlockingTracker) {
 		const oldState = selectedBlockingTracker.blocked || selectedBlockingTracker.ss_blocked;
