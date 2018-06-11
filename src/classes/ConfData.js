@@ -35,9 +35,8 @@ const { IS_CLIQZ } = globals;
  */
 class ConfData {
 	constructor() {
-		// paused_blocking, language and SYNC_SET do not get persisted
+		// language does not get persisted
 		this.language = this._getDefaultLanguage();
-		this.DONT_PERSIST_SET = new Set(globals.DONT_PERSIST_ARRAY);
 		this.SYNC_SET = new Set(globals.SYNC_ARRAY);
 	}
 
