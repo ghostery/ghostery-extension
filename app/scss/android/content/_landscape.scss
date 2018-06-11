@@ -1,0 +1,36 @@
+@media screen and (orientation: landscape) {
+	.tabs-wrapper {
+		width: 50%;
+		float: right;
+
+		ul.tabs-nav li.tab-item a.tab-link.custom-link {
+			font-size: 1.5vw;
+		}
+	}
+
+	.fixed-menu {
+		width: 50%;
+
+		.menuItemOverview {
+			pointer-events: none;
+
+			.title {
+				background: none;
+			}
+
+			.description {
+				display: block;
+				padding: 0 20px;
+				color: #4A4A4A;
+			}
+		}
+
+		&.opened {
+			top: $tab-header-height;
+		}
+	}
+
+	& > div > .chart-wrapper {
+		display: block;
+	}
+}

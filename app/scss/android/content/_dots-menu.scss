@@ -1,0 +1,49 @@
+.header {
+	position: relative;
+
+	& > h2 {
+		font-weight: 600;
+		padding: 5px 0 15px 5px;
+	}
+
+	.dots-menu {
+		position: absolute;
+		top: 15px;
+		right: 5px;
+		z-index: 2;
+		text-align: right;
+
+		.dots-menu-btn {
+			background-image: url(../../app/images/panel-android/kebab-menu-black.svg);
+			background-size: 4px 16px;
+			background-position: center;
+			background-repeat: no-repeat;
+			height: 16px;
+			width: 34px;
+		}
+
+		.dots-menu-content {
+			background-color: $white;
+			border-radius: 2px;
+			display: none;
+			@include prefix('box-shadow', '3px 2px 10px rgba(0,0,0,0.25)');
+
+			& > ul {
+				list-style: none;
+
+				& > li {
+
+					.dots-menu-item {
+						padding: 10px 20px;
+						width: 100%;
+						text-align: left;
+					}
+				}
+			}
+
+			&.opening {
+				display: block;
+			}
+		}
+	}
+}

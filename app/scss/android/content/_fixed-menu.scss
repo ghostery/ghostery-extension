@@ -1,0 +1,197 @@
+.fixed-menu {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	width: 100%;
+	top: calc(100% - #{$fixed-menu-header-height});
+	@include prefix('transition', 'top 250ms cubic-bezier(0.55, 0.09, 0.68, 0.53)');
+	@include prefix('box-shadow', '0px -3px 4px rgba(0,0,0,0.15)');
+
+	.menuHeader {
+		height: $fixed-menu-header-height;
+		background-color: $white;
+		text-align: center;
+		color: $cliqz-blue;
+
+		& > p {
+			position: relative;
+			padding-top: 12px;
+			font-size: 16px;
+			font-weight: 500;
+
+			&:before {
+				content: " ";
+				height: 0;
+				width: 40px;
+				left: 0;
+				right: 0;
+				margin: 0 auto;
+				border: 2px solid $cliqz-blue;
+				border-radius: 5px;
+				position: absolute;
+				top: 5px;
+			}
+		}
+	}
+
+	.menuContent {
+		position: relative;
+		margin: 0;
+		list-style: none;
+		height: 100%;
+		background-color: $white;
+
+		.menuItem {
+			height: calc((100% - #{$fixed-menu-header-height}) / 3);
+			width: 100%;
+			display: table;
+
+			.menuItemWrapper {
+				height: 100%;
+				display: table-cell;
+				vertical-align: middle;
+
+				.anti_tracking, .ad_block, .smart_block {
+					background-repeat: no-repeat;
+					background-position: 20px center;
+					color: $cliqz-blue;
+				}
+
+				.anti_tracking {
+					background-image: buildAntiTrackIcon($button-blue);
+				}
+
+				.ad_block {
+					background-image: buildAdBlockIcon($button-blue);
+				}
+
+				.smart_block {
+					background-image: buildSmartBlockIcon($button-blue);
+				}
+
+				.menuItemOverview {
+					width: calc(100% - 47px);
+					color: $cliqz-blue;
+					float: left;
+
+					.anti_tracking, .ad_block, .smart_block {
+						font-size: 23px;
+						font-weight: 500;
+						padding-left: 60px;
+						padding-right: 10px;
+						background-size: contain;
+					}
+
+					.smart_block {
+						background-position-x: 25px;
+						background-size: 17px;
+					}
+
+					.title {
+						padding-right: 30px;
+						background-image: url(../../app/images/panel-android/icon-information-tooltip.svg);
+						background-repeat: no-repeat;
+						background-position: right center;
+						background-size: contain;
+						font-size: 15px;
+						font-weight: 500;
+					}
+
+					.description {
+						display: none;
+					}
+				}
+
+				.switcher {
+					display: inline-block;
+					margin-top: 14px;
+					width: 32px;
+					height: 16px;
+					border-radius: 8px;
+					background-color: #82D6F5;
+					position: relative;
+					@include prefix('transition', 'background-color 200ms ease-in');
+
+					&:after {
+						content: ' ';
+						position: absolute;
+						top: -2px;
+						left: 50%;
+						width: 20px;
+						height: 20px;
+						border-radius: 50%;
+						background-color: $cliqz-blue;
+						@include prefix('transition', 'left 200ms ease-in');
+					}
+
+					&:not(.active) {
+						background-color: #bbb;
+
+						&:after {
+							background-color: #aaa;
+							left: 0;
+						}
+					}
+				}
+
+				.menuItemContent {
+					position: absolute;
+					top: 0;
+					left: 100%;
+					bottom: 0;
+					width: 100%;
+					@include prefix('transition', 'left 300ms ease-in');
+					z-index: 1;
+					text-align: center;
+					background-color: $white;
+					padding-top: 5px;
+
+					.anti_tracking, .ad_block, .smart_block {
+						font-size: 40px;
+						padding-left: 50px;
+						background-size: 30px;
+					}
+
+					.smart_block {
+						background-position-x: 17px;
+						background-size: 25px;
+					}
+
+					.headline {
+						font-weight: bold;
+						color: $cliqz-blue;
+						font-size: 16px;
+					}
+
+					.description {
+						padding: 10px 20px 0;
+						text-align: left;
+					}
+
+					.close {
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 40px;
+						height: 40px;
+						background-repeat: no-repeat;
+						background-image: url(../../app/images/panel-android/back.svg);
+						background-position: center;
+					}
+
+					&.opening {
+						left: 0;
+					}
+				}
+			}
+
+			&:not(:last-child) {
+				border-bottom: 1px solid #eee;
+			}
+		}
+	}
+
+	&.opened {
+		top: 60%;
+	}
+}

@@ -1,0 +1,27 @@
+@import 'android/content/variables';
+@import 'android/content/mixins';
+@import 'android/content/normalize';
+@import 'android/content/tabs';
+@import 'android/content/accordions';
+@import 'android/content/dots-menu';
+@import 'android/content/trackers-chart';
+@import 'android/content/fixed-menu';
+
+#ghostery-content {
+	@import 'android/overview';
+
+	& > div > .chart-wrapper {
+		display: none;
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		width: 50%;
+		text-align: center;
+		background-color: #eee;
+		padding-top: 5%;
+	}
+
+	/* Landscape mode */
+	@import 'android/content/landscape';
+}
