@@ -57,6 +57,7 @@
     "react-shadow": "^16.2.0",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
+    "spanan": "^2.0.0",
     "ua-parser-js": "^0.7.17",
     "underscore": "^1.8.3",
     "url-search-params": "^0.10.0"
