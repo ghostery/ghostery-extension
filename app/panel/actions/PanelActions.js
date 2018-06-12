@@ -30,8 +30,7 @@ import { get } from '../utils/api';
 import globals from '../../../src/classes/Globals';
 import { decodeJwt, log } from '../../../src/utils/common';
 
-// const API_ROOT_URL = `https://consumerapi.${globals.GHOSTERY_DOMAIN}.com`;
-const API_ROOT_URL = 'http://ghostery.io:8080';
+const API_ROOT_URL = `https://consumerapi.${globals.GHOSTERY_DOMAIN}.com`;
 
 /**
  * Update Cliqz Features.
@@ -118,9 +117,27 @@ export function toggleExpert() {
 }
 
 /**
+ * Call accountAPI for user settings.
+ * Component. Picked up by Panel reducer.
+ * @return {Object} dispatch
+ */
+
+export function pullUserSettings(user_id) {
+	return get('settings', user_id, 'settings').then(data => {
+		const settings = build(normalize(data), 'settings', user_id);
+		return sendMessageInPromise('setConfUserSettings', settings)
+		.then(() => {
+		})
+		.catch(error => {
+			log('PanelActions pullUserSettings error', error);
+		});
+	});
+}
+
+/**
  * Call accountAPI and get user info. Called from Login
  * Component. Picked up by Panel reducer.
- * @param  {Object} query
+
  * @return {Object} dispatch
  */
 
@@ -133,6 +150,8 @@ export function fetchUser(user_id) {
 				// store user info in background conf
 				return sendMessageInPromise('setLoginInfo', user)
 					.then(() => {
+						// TODO pullSettings
+						pullUserSettings(user_id);
 						dispatch({
 							type: LOGIN_DATA_SUCCESS,
 							data: user,
