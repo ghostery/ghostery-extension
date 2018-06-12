@@ -12,7 +12,7 @@
 		"description": ""
 	},
 	"settings_allow_trackers_tooltip": {
-		"message": "Par exemple, bloquez un tracker Facebook sur Facebook.com peut nuire au fonctionnement du site sur votre appareil.",
+		"message": "Par exemple, bloquez un mouchard Facebook sur Facebook.com peut nuire au fonctionnement du site sur votre appareil.",
 		"description": ""
 	},
 	"blocking_trackers": {
@@ -68,7 +68,7 @@
 		"description": ""
 	},
 	"settings_searh_by_tracker": {
-		"message": "Rechercher par tracker",
+		"message": "Rechercher par mouchard",
 		"description": ""
 	},
 	"settings_update_failed": {
@@ -100,7 +100,7 @@
 		"description": ""
 	},
 	"settings_filter_unblocked": {
-		"message": "Trackers débloqués",
+		"message": "Mouchards débloqués",
 		"description": ""
 	},
 	"box_trackers": {
@@ -481,7 +481,7 @@
 		"description": ""
 	},
 	"panel_tracker_warning_nonsecure_tooltip": {
-		"message": "Le tracker est non sécurisé",
+		"message": "Le mouchard est non sécurisé",
 		"description": ""
 	},
 	"tracker_plural": {
@@ -511,7 +511,7 @@
 		"description": ""
 	},
 	"tooltip_smart_block_body_on": {
-		"message": "Blocage des pisteurs ajusté pour améliorer les performances de la page.",
+		"message": "Blocage des mouchards ajusté pour améliorer les performances de la page.",
 		"description": ""
 	},
 	"settings_new_features": {
@@ -527,7 +527,7 @@
 		"description": ""
 	},
 	"blocking_category_tracker": {
-		"message": "Tracker",
+		"message": "Mouchard",
 		"description": ""
 	},
 	"page_load": {
@@ -551,7 +551,7 @@
 		"description": ""
 	},
 	"tooltip_restrict_on": {
-		"message": "Pisteurs bloqués et anti-pistage activé sur ce site. Cliquez pour annuler.",
+		"message": "Mouchards bloqués et anti-pistage activé sur ce site. Cliquez pour annuler.",
 		"description": ""
 	},
 	"panel_detail_premium_text": {
@@ -575,11 +575,11 @@
 		}
 	},
 	"settings_required_trackers": {
-		"message": "Faites-moi savoir si je dois autoriser un tracker à utiliser l'une des fonctionnalités d'un site.",
+		"message": "Faites-moi savoir si je dois autoriser un mouchard à utiliser l'une des fonctionnalités d'un site.",
 		"description": ""
 	},
 	"alert_site_trusted": {
-		"message": "Site mis sur la liste blanche Les pisteurs seront permis et l'anti-pistage désactivé sur ce site.",
+		"message": "Site mis sur la liste blanche Les mouchards seront permis et l'anti-pistage désactivé sur ce site.",
 		"description": ""
 	},
 	"license_module": {
@@ -675,7 +675,7 @@
 		"description": ""
 	},
 	"box_tracker": {
-		"message": "Tracker",
+		"message": "Mouchard",
 		"description": ""
 	},
 	"settings_new_trackers": {
@@ -769,7 +769,7 @@
 		"description": ""
 	},
 	"settings_show_patterns_tooltip": {
-		"message": "Cliquez sur le nom du tracker pour voir son URL, affichée sous le descriptif",
+		"message": "Cliquez sur le nom du mouchard pour voir son URL, affichée sous le descriptif",
 		"description": ""
 	},
 	"setup_button_sign_in": {
@@ -894,7 +894,7 @@
 		"description": ""
 	},
 	"alert_smart_block_on": {
-		"message": "Blocage intelligent ACTIVÉ. Le blocage des pisteurs sera ajusté pour améliorer les performances de la page.",
+		"message": "Blocage intelligent ACTIVÉ. Le blocage des mouchards sera ajusté pour améliorer les performances de la page.",
 		"description": ""
 	},
 	"setup_upgrade_desc_1": {
@@ -1113,7 +1113,7 @@
 		"description": ""
 	},
 	"panel_menu_submit_tracker": {
-		"message": "Soumettre un nouveau tracker",
+		"message": "Soumettre un nouveau mouchard",
 		"description": ""
 	},
 	"setup_choice_view_learn_more": {
@@ -1249,7 +1249,7 @@
 		"description": ""
 	},
 	"alert_site_restricted": {
-		"message": "Site mis sur la liste noire. Les pisteurs seront bloqués et l'anti-pistage activé sur ce site.",
+		"message": "Site mis sur la liste noire. Les mouchards seront bloqués et l'anti-pistage activé sur ce site.",
 		"description": ""
 	},
 	"rewards_expires_in_secs": {
@@ -1261,7 +1261,7 @@
 		"description": ""
 	},
 	"tracker_found": {
-		"message": "trouvé(e)(s)",
+		"message": "trouvé(s)",
 		"description": ""
 	},
 	"panel_detail_menu_premium_title": {
@@ -1321,7 +1321,7 @@
 		"description": ""
 	},
 	"tracker_signular": {
-		"message": "tracker",
+		"message": "mouchard",
 		"description": ""
 	},
 	"rewards_expires_in_hours": {
@@ -1349,7 +1349,7 @@
 		"description": ""
 	},
 	"tracker_description_learn_more": {
-		"message": "Accéder au profil complet du tracker",
+		"message": "Accéder au profil complet du mouchard",
 		"description": ""
 	},
 	"not_http_page": {
@@ -1369,7 +1369,7 @@
 		"description": ""
 	},
 	"settings_highlight_trackers_tooltip": {
-		"message": "Il peut arriver que certaines fonctionnalités, notamment les outils de partage, de commentaires ou les lecteurs vidéo, ne fonctionnent pas lorsqu'un tracker est bloqué. Si vous souhaitez activer l'une de ces fonctionnalités, cliquez sur cette icône sur la page :",
+		"message": "Il peut arriver que certaines fonctionnalités, notamment les outils de partage, de commentaires ou les lecteurs vidéo, ne fonctionnent pas lorsqu'un mouchard est bloqué. Si vous souhaitez activer l'une de ces fonctionnalités, cliquez sur cette icône sur la page :",
 		"description": ""
 	},
 	"panel_detail_performance_text": {
@@ -1567,7 +1567,7 @@
 		}
 	},
 	"tooltip_trust_on": {
-		"message": "Pisteurs permis et anti-pistage désactivé sur ce site. Cliquez pour annuler.",
+		"message": "Mouchards permis et anti-pistage désactivé sur ce site. Cliquez pour annuler.",
 		"description": ""
 	},
 	"settings_show_tracker_count_badge": {
@@ -1599,7 +1599,7 @@
 		"description": "Select this to show only unblocked (unchecked) tags in the tag browser. Should read as 'Show unblocked'."
 	},
 	"tracker_description_none_found": {
-		"message": "Aucune description du tracker n'a été trouvée.",
+		"message": "Aucune description du mouchard n'a été trouvée.",
 		"description": ""
 	},
 	"setup_login_view_password": {
@@ -1607,7 +1607,7 @@
 		"description": ""
 	},
 	"panel_tracker_warning_slow_tooltip": {
-		"message": "Le tracker est lent",
+		"message": "Le mouchard est lent",
 		"description": ""
 	},
 	"setup_choice_view_answer_questions": {
@@ -1845,7 +1845,7 @@
 		"description": ""
 	},
 	"tracker_description_getting": {
-		"message": "Obtenir une description du tracker...",
+		"message": "Obtenir une description du mouchard...",
 		"description": ""
 	},
 	"drawer_label_enable_anti_tracking": {
@@ -1874,7 +1874,7 @@
 		"description": ""
 	},
 	"rewards_on": {
-		"message": "Activé(e)",
+		"message": "Activée(s)",
 		"description": ""
 	},
 	"category_uncategorized": {
@@ -1972,7 +1972,7 @@
 		"description": ""
 	},
 	"alert_smart_block_off": {
-		"message": "Blocage intelligent DÉSACTIVÉ. Le blocage des pisteurs ne sera pas ajusté automatiquement.",
+		"message": "Blocage intelligent DÉSACTIVÉ. Le blocage des mouchards ne sera pas ajusté automatiquement.",
 		"description": ""
 	},
 	"panel_header_simple_view": {
@@ -1988,11 +1988,11 @@
 		"description": ""
 	},
 	"panel_tracker_warning_compatibility_tooltip": {
-		"message": "Le tracker bloqué empêche l'affichage",
+		"message": "Le mouchard bloqué empêche l'affichage",
 		"description": ""
 	},
 	"trackers_blocked": {
-		"message": "Pisteurs bloqués :",
+		"message": "Mouchards bloqués :",
 		"description": ""
 	},
 	"rewards_expires_in": {
@@ -2008,7 +2008,7 @@
 		}
 	},
 	"panel_tracker_warning_slow_nonsecure_tooltip": {
-		"message": "Le tracker est lent ou non sécurisé",
+		"message": "Le mouchard est lent ou non sécurisé",
 		"description": ""
 	},
 	"password_field_label_required": {
