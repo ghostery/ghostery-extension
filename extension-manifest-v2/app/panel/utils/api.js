@@ -1,14 +1,15 @@
 import 'whatwg-fetch';
+import globals from '../../../src/classes/Globals';
 
 // TODO make this not global vars
 let isRefreshing = false;
 const tokenRefreshedEventType = 'tokenRefreshed';
 const Config = {
 	auth_server: {
-		host: 'http://ghostery.io:8080'
+		host: `https://consumerapi.${globals.GHOSTERY_DOMAIN}.com`
 	},
 	account_server: {
-		host: 'http://ghostery.io:8081'
+		host: `https://accountapi.${globals.GHOSTERY_DOMAIN}.com`
 	},
 };
 
@@ -36,7 +37,7 @@ const _refreshToken = function () {
 
 const getCsrfCookie = () => new Promise((resolve, reject) => {
 	chrome.cookies.get({
-		url: 'http://ghostery.io', // ghostery.com || ghosterystage.com
+		url: `https://${globals.GHOSTERY_DOMAIN}.com`, // ghostery.com || ghosterystage.com
 		name: 'csrf_token',
 	}, (cookie) => {
 		if (cookie) {
@@ -85,7 +86,7 @@ const _sendAuthenticatedRequest = (method, path, body) => (
 			})
 			.catch((data) => {
 				let shouldRefresh = false;
-				if (data.errors) {
+				if (data && data.errors) {
 					data.errors.forEach((e) => {
 						if (e.code === '10021' || e.code === '10022') { // token is expired or missing
 							shouldRefresh = true;
