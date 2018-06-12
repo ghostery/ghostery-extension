@@ -80,7 +80,7 @@ export function setLoginInfo(user) {
 export function getLoginCookie() {
 	return new Promise((resolve, reject) => {
 		chrome.cookies.get({
-			url: 'http://ghostery.io', // ghostery.com || ghosterystage.com
+			url: `https://${GHOSTERY_DOMAIN}.com`, // ghostery.com || ghosterystage.com
 			name: 'user_id',
 		}, (cookie) => {
 			if (cookie) {
@@ -99,12 +99,9 @@ export function getLoginCookie() {
  * @return {Promise} 	current login state
  */
 export function getLoginInfo() {
-	return _refreshToken().then(wasRefreshed => conf.login_info)
-		.catch((err) => {
-			_logOut();
-			log('getLoginInfo error:', err);
-			return conf.login_info;
-		});
+	return new Promise((resolve, reject) => {
+		resolve(conf.login_info);
+	});
 }
 
 /**
@@ -141,7 +138,10 @@ export function buildUserSettings() {
  * @return {Promise} 	user settings object
  */
 export function pullUserSettings() {
-	return _refreshToken().then(wasUpdated => _pullUserSettings()).catch(err => Promise.reject(err));
+	return new Promise((resolve, reject) => {
+
+	});
+	// return _refreshToken().then(wasUpdated => _pullUserSettings()).catch(err => Promise.reject(err));
 }
 
 /**
@@ -153,10 +153,13 @@ export function pullUserSettings() {
  * @return {Promise}
  */
 export function pushUserSettings(settings) {
-	return _refreshToken().then(wasUpdated => _pushUserSettings(settings)).catch((err) => {
-		log('Token error:', err);
-		return Promise.resolve(err);
+	return new Promise((resolve, reject) => {
+
 	});
+	// return _refreshToken().then(wasUpdated => _pushUserSettings(settings)).catch((err) => {
+	// 	log('Token error:', err);
+	// 	return Promise.resolve(err);
+	// });
 }
 
 /**
@@ -166,38 +169,38 @@ export function pushUserSettings(settings) {
  * @return {Promise} 		object indicating success or failure
  */
 export function sendVerificationEmail() {
-	const { login_info } = conf;
-	const { decoded_user_token, email } = login_info;
-	const userId = decoded_user_token ? decoded_user_token.UserId : undefined;
-
-	if (userId) {
-		const params = {
-			UserId: userId,
-			RedirectUrlToAddCodeSuffixOn: VERIFICATION_URL,
-			FooterUrl: VERIFICATION_URL,
-			VerificationContinueUrl: REDIRECT_URL
-		};
-		const query = JSON.stringify(params);
-		return postJson(`${API_ROOT_URL}/api/Validation/Send`, query).then((result) => {
-			// We expect false here
-			log('post api/Validation/Send successful', result);
-			return {
-				success: true,
-				email
-			};
-		}).catch((e) => {
-			log('Error: post api/Validation/Send failed', e);
-			return Promise.reject({
-				success: false,
-				email
-			});
-		});
-	}
-	log('post api/Validation/Send do nothing when user is not logged in');
-	return Promise.resolve({
-		success: false,
-		email
-	});
+	// const { login_info } = conf;
+	// const { decoded_user_token, email } = login_info;
+	// const userId = decoded_user_token ? decoded_user_token.UserId : undefined;
+	//
+	// if (userId) {
+	// 	const params = {
+	// 		UserId: userId,
+	// 		RedirectUrlToAddCodeSuffixOn: VERIFICATION_URL,
+	// 		FooterUrl: VERIFICATION_URL,
+	// 		VerificationContinueUrl: REDIRECT_URL
+	// 	};
+	// 	const query = JSON.stringify(params);
+	// 	return postJson(`${API_ROOT_URL}/api/Validation/Send`, query).then((result) => {
+	// 		// We expect false here
+	// 		log('post api/Validation/Send successful', result);
+	// 		return {
+	// 			success: true,
+	// 			email
+	// 		};
+	// 	}).catch((e) => {
+	// 		log('Error: post api/Validation/Send failed', e);
+	// 		return Promise.reject({
+	// 			success: false,
+	// 			email
+	// 		});
+	// 	});
+	// }
+	// log('post api/Validation/Send do nothing when user is not logged in');
+	// return Promise.resolve({
+	// 	success: false,
+	// 	email
+	// });
 }
 
 /**
@@ -214,102 +217,102 @@ export function sendVerificationEmail() {
  * @param {url} 		url 		domain url for AUTH cookie
  * @return {Promise} 				loginInfo from cookie or false if already logged in
  */
-export function setLoginInfoFromAuthCookie(url) {
-	const urlArray = ['https://extension.ghostery.com',
-		'https://extension.ghosterystage.com',
-		'http://extension.ghosterydev.com',
-		'https://signon.ghostery.com',
-		'https://signon.ghosterystage.com',
-		'https://account.ghostery.com',
-		'https://account.ghosterystage.com'
-	]; // Same as in matches: for platform_pages.js in manifest.json
-	const urlArraySize = urlArray.length;
-
-	let	urlArrayIndex = 0;
-
-	function doCookie(cookie) {
-		return new Promise((resolve, reject) => {
-			user_token = cookie.value;
-			if (user_token) {
-				// base64 decode and parse JSON
-				const decoded_user_token = decodeJwt(user_token).payload;
-				const is_validated = !!((typeof decoded_user_token.ClaimEmailAddressValidated === 'string' && decoded_user_token.ClaimEmailAddressValidated.toLowerCase() === 'true'));
-				const email = decoded_user_token.ClaimEmailAddress;
-
-				log('setLoginInfoFromAuthCookie: AUTH cookie found. Decoded user token:', decoded_user_token);
-				conf.login_info = {
-					logged_in: true,
-					email,
-					user_token,
-					decoded_user_token,
-					is_validated
-				};
-
-				// Check validity
-				_refreshToken().then((wasRefreshed) => {
-					if (wasRefreshed) {
-						// Override cookie
-						_setAuthCookie(url, user_token, decoded_user_token);
-					}
-					resolve();
-				});
-			} else {
-				reject();
-			}
-		})
-			.catch((err) => {
-				log('doCookie error:', err);
-				return Promise.reject(err);
-			});
-	}
-
-	function getCookie(url) {
-		return new Promise((resolve, reject) => {
-			// eslint-disable-next-line consistent-return
-			chrome.cookies.get({ url, name: AUTH_COOKIE }, (cookie) => {
-				if (cookie) {
-					return doCookie(cookie).then((result) => {
-						reject(result);
-					}).catch((err) => {
-						resolve();
-					});
-				}
-				resolve();
-			});
-		});
-	}
-
-	// A recursive routine which throws once cookie is found or the end of the cookie list is reached
-	function processCookie() {
-		if (urlArrayIndex < urlArraySize) {
-			return getCookie(urlArray[urlArrayIndex++]).then(() => processCookie());
-		}
-		return Promise.reject(false);
-	}
-
-	const { login_info } = conf;
-	const logged_in = login_info.logged_in || false;
-	const is_validated = login_info.is_validated || false;
-	const decoded_user_token = login_info.decoded_user_token;
-	let user_token = login_info.user_token;
-
-	if (logged_in && is_validated) {
-		return _refreshToken().then((wasRefreshed) => {
-			if (wasRefreshed) {
-				// Override cookie
-				_setAuthCookie(url, user_token, decoded_user_token);
-			}
-		});
-	}
-	return processCookie().catch((result) => {
-		if (result === false) {
-			log('NO COOKIES');
-			return Promise.resolve(false);
-		}
-		log('COOKIE FOUND', result);
-		return Promise.resolve(true);
-	});
-}
+// export function setLoginInfoFromAuthCookie(url) {
+// 	const urlArray = ['https://extension.ghostery.com',
+// 		'https://extension.ghosterystage.com',
+// 		'http://extension.ghosterydev.com',
+// 		'https://signon.ghostery.com',
+// 		'https://signon.ghosterystage.com',
+// 		'https://account.ghostery.com',
+// 		'https://account.ghosterystage.com'
+// 	]; // Same as in matches: for platform_pages.js in manifest.json
+// 	const urlArraySize = urlArray.length;
+//
+// 	let	urlArrayIndex = 0;
+//
+// 	function doCookie(cookie) {
+// 		return new Promise((resolve, reject) => {
+// 			user_token = cookie.value;
+// 			if (user_token) {
+// 				// base64 decode and parse JSON
+// 				const decoded_user_token = decodeJwt(user_token).payload;
+// 				const is_validated = !!((typeof decoded_user_token.ClaimEmailAddressValidated === 'string' && decoded_user_token.ClaimEmailAddressValidated.toLowerCase() === 'true'));
+// 				const email = decoded_user_token.ClaimEmailAddress;
+//
+// 				log('setLoginInfoFromAuthCookie: AUTH cookie found. Decoded user token:', decoded_user_token);
+// 				conf.login_info = {
+// 					logged_in: true,
+// 					email,
+// 					user_token,
+// 					decoded_user_token,
+// 					is_validated
+// 				};
+//
+// 				// Check validity
+// 				_refreshToken().then((wasRefreshed) => {
+// 					if (wasRefreshed) {
+// 						// Override cookie
+// 						_setAuthCookie(url, user_token, decoded_user_token);
+// 					}
+// 					resolve();
+// 				});
+// 			} else {
+// 				reject();
+// 			}
+// 		})
+// 			.catch((err) => {
+// 				log('doCookie error:', err);
+// 				return Promise.reject(err);
+// 			});
+// 	}
+//
+// 	function getCookie(url) {
+// 		return new Promise((resolve, reject) => {
+// 			// eslint-disable-next-line consistent-return
+// 			chrome.cookies.get({ url, name: AUTH_COOKIE }, (cookie) => {
+// 				if (cookie) {
+// 					return doCookie(cookie).then((result) => {
+// 						reject(result);
+// 					}).catch((err) => {
+// 						resolve();
+// 					});
+// 				}
+// 				resolve();
+// 			});
+// 		});
+// 	}
+//
+// 	// A recursive routine which throws once cookie is found or the end of the cookie list is reached
+// 	function processCookie() {
+// 		if (urlArrayIndex < urlArraySize) {
+// 			return getCookie(urlArray[urlArrayIndex++]).then(() => processCookie());
+// 		}
+// 		return Promise.reject(false);
+// 	}
+//
+// 	const { login_info } = conf;
+// 	const logged_in = login_info.logged_in || false;
+// 	const is_validated = login_info.is_validated || false;
+// 	const decoded_user_token = login_info.decoded_user_token;
+// 	let user_token = login_info.user_token;
+//
+// 	if (logged_in && is_validated) {
+// 		return _refreshToken().then((wasRefreshed) => {
+// 			if (wasRefreshed) {
+// 				// Override cookie
+// 				_setAuthCookie(url, user_token, decoded_user_token);
+// 			}
+// 		});
+// 	}
+// 	return processCookie().catch((result) => {
+// 		if (result === false) {
+// 			log('NO COOKIES');
+// 			return Promise.resolve(false);
+// 		}
+// 		log('COOKIE FOUND', result);
+// 		return Promise.resolve(true);
+// 	});
+// }
 
 /**
  * Clears login info in prefs and returns empty login data
@@ -336,16 +339,16 @@ function _logOut() {
  *
  * @return {number} expiration timeout in millisec
  */
-function _getExpirationTimeout() {
-	const decoded_user_token = conf.login_info.decoded_user_token;
-	if (decoded_user_token && decoded_user_token.exp) {
-		const currentTime = (new Date()).getTime();
-		const tokenExpTime = decoded_user_token.exp * 1000;
-		return (tokenExpTime - currentTime);
-	}
-	// force immediate refresh
-	return GROUND_ZERO_TIME;
-}
+// function _getExpirationTimeout() {
+// 	const decoded_user_token = conf.login_info.decoded_user_token;
+// 	if (decoded_user_token && decoded_user_token.exp) {
+// 		const currentTime = (new Date()).getTime();
+// 		const tokenExpTime = decoded_user_token.exp * 1000;
+// 		return (tokenExpTime - currentTime);
+// 	}
+// 	// force immediate refresh
+// 	return GROUND_ZERO_TIME;
+// }
 
 /**
  * Make refresh call to check the state of the account. Notifies extension.
@@ -353,59 +356,59 @@ function _getExpirationTimeout() {
  *
  * @return {Promise} 	no data, or error
  */
-function _refreshLoginInfo() {
-	const login_info = conf.login_info;
-	if (!login_info.logged_in) {
-		sendMessageToPanel('onLoginInfoUpdated', _logOut());
-		return Promise.resolve('User not logged in');
-	}
-
-	let decoded_user_token = login_info.decoded_user_token;
-	if (!decoded_user_token || !decoded_user_token.RefreshToken) {
-		sendMessageToPanel('onLoginInfoUpdated', _logOut());
-		return Promise.reject('decoded_user_token or decoded_user_token.RefreshToken is null.');
-	}
-
-	const params = {
-		RefreshToken: decoded_user_token.RefreshToken,
-		ClientId: '1',
-		ClientSecret: '1'
-	};
-	const query = JSON.stringify(params);
-
-	return postJson(`${API_ROOT_URL}/api/Login/Refresh`, query).then((response) => {
-		log('Refresh call succeeded', response);
-		const user_token = response.Token;
-		if (user_token) {
-			decoded_user_token = decodeJwt(user_token).payload;
-			log('Setting login info in PREFS on Refresh:', decoded_user_token);
-
-			let is_validated = decoded_user_token.ClaimEmailAddressValidated;
-			is_validated = !!((typeof is_validated === 'string' && is_validated.toLowerCase() === 'true'));
-
-			conf.login_info = {
-				logged_in: true,
-				email: decoded_user_token.ClaimEmailAddress,
-				user_token,
-				decoded_user_token,
-				is_validated
-			};
-
-			log('GOT REFRESHED LOGIN INFO', conf.login_info);
-
-			_setAuthCookie(SIGNON_URL, user_token, decoded_user_token);
-			sendMessageToPanel('onLoginInfoUpdated', conf.login_info);
-			return Promise.resolve();
-		}
-		sendMessageToPanel('onLoginInfoUpdated', _logOut());
-		return Promise.reject('Refresh call returned null user_token');
-	}).catch((err) => {
-		log('_refreshLoginInfo', err);
-		_logOut();
-		sendMessageToPanel('onLoginInfoUpdated', _logOut());
-		return Promise.reject(err);
-	});
-}
+// function _refreshLoginInfo() {
+// 	const login_info = conf.login_info;
+// 	if (!login_info.logged_in) {
+// 		sendMessageToPanel('onLoginInfoUpdated', _logOut());
+// 		return Promise.resolve('User not logged in');
+// 	}
+//
+// 	let decoded_user_token = login_info.decoded_user_token;
+// 	if (!decoded_user_token || !decoded_user_token.RefreshToken) {
+// 		sendMessageToPanel('onLoginInfoUpdated', _logOut());
+// 		return Promise.reject('decoded_user_token or decoded_user_token.RefreshToken is null.');
+// 	}
+//
+// 	const params = {
+// 		RefreshToken: decoded_user_token.RefreshToken,
+// 		ClientId: '1',
+// 		ClientSecret: '1'
+// 	};
+// 	const query = JSON.stringify(params);
+//
+// 	return postJson(`${API_ROOT_URL}/api/Login/Refresh`, query).then((response) => {
+// 		log('Refresh call succeeded', response);
+// 		const user_token = response.Token;
+// 		if (user_token) {
+// 			decoded_user_token = decodeJwt(user_token).payload;
+// 			log('Setting login info in PREFS on Refresh:', decoded_user_token);
+//
+// 			let is_validated = decoded_user_token.ClaimEmailAddressValidated;
+// 			is_validated = !!((typeof is_validated === 'string' && is_validated.toLowerCase() === 'true'));
+//
+// 			conf.login_info = {
+// 				logged_in: true,
+// 				email: decoded_user_token.ClaimEmailAddress,
+// 				user_token,
+// 				decoded_user_token,
+// 				is_validated
+// 			};
+//
+// 			log('GOT REFRESHED LOGIN INFO', conf.login_info);
+//
+// 			_setAuthCookie(SIGNON_URL, user_token, decoded_user_token);
+// 			sendMessageToPanel('onLoginInfoUpdated', conf.login_info);
+// 			return Promise.resolve();
+// 		}
+// 		sendMessageToPanel('onLoginInfoUpdated', _logOut());
+// 		return Promise.reject('Refresh call returned null user_token');
+// 	}).catch((err) => {
+// 		log('_refreshLoginInfo', err);
+// 		_logOut();
+// 		sendMessageToPanel('onLoginInfoUpdated', _logOut());
+// 		return Promise.reject(err);
+// 	});
+// }
 
 /**
  * GET user settings from ConsumerAPI
@@ -413,44 +416,33 @@ function _refreshLoginInfo() {
  *
  * @return {Promise} 	user settings json or error
  */
-function _pullUserSettings() {
-	const login_info = conf.login_info;
-	if (login_info.logged_in) {
-		const user_token = login_info.user_token;
-		const decoded_user_token = login_info.decoded_user_token;
-		const userId = decoded_user_token ? decoded_user_token.UserId : undefined;
-		if (user_token && userId) {
-			return getJson(`${API_ROOT_URL}/api/Sync/${userId}`, { Authorization: `Bearer ${user_token}` }).then((settings) => {
-				settings = settings || {};
-				settings = settings.SettingsJson;
-				try {
-					settings = settings ? JSON.parse(settings) : {};
-				} catch (e) {
-					return Promise.reject('Corrupted settings');
-				}
-				log('PULL USER SETTINGS', settings);
-				if (IS_EDGE) {
-					settings.enable_human_web = false;
-					settings.enable_offers = false;
-				}
-				if (IS_CLIQZ) {
-					settings.enable_human_web = false;
-					settings.enable_offers = false;
-					settings.enable_ad_block = false;
-					settings.enable_anti_tracking = false;
-				}
-				SYNC_SET.forEach((key) => {
-					if (settings[key] !== undefined &&
-						!_.isEqual(conf[key], settings[key])) {
-						conf[key] = settings[key];
-					}
-				});
-				return settings;
-			}).catch(err => Promise.reject('_pullUserSettings error', err));
-		}
-		return Promise.reject('_pullUserSettings: corrupted token');
+export function setConfUserSettings(settings) {
+	console.log(settings);
+	// TODO settings are in settings.settingsJson
+	// need to set those to `settings`
+	try {
+		settings = settings ? JSON.parse(settings) : {};
+	} catch (e) {
+		return Promise.reject('Corrupted settings');
 	}
-	return Promise.resolve({});
+	log('SET USER SETTINGS', settings);
+	if (IS_EDGE) {
+		settings.enable_human_web = false;
+		settings.enable_offers = false;
+	}
+	if (IS_CLIQZ) {
+		settings.enable_human_web = false;
+		settings.enable_offers = false;
+		settings.enable_ad_block = false;
+		settings.enable_anti_tracking = false;
+	}
+	SYNC_SET.forEach((key) => {
+		if (settings[key] !== undefined &&
+			!_.isEqual(conf[key], settings[key])) {
+				conf[key] = settings[key];
+		}
+	});
+	return settings;
 }
 /**
  * POST user settings to ConsumerAPI
@@ -486,28 +478,28 @@ function _pushUserSettings(settings) {
  * @param  {string} user_token - encrypted user token string
  * @param  {Object} decoded_user_token -decoded user token as an JSON object
  */
-function _setAuthCookie(url, user_token, decoded_user_token) {
-	_refreshToken().then((wasRefreshed) => {
-		const expiredIn = _getExpirationTimeout();
-		const epochExpirationTime = Math.floor(((new Date()).getTime() + expiredIn) / 1000); // in sec
-
-		chrome.cookies.set({
-			url,
-			name: AUTH_COOKIE,
-			domain: `${GHOSTERY_DOMAIN}.com`,
-			path: '/',
-			value: user_token,
-			expirationDate: epochExpirationTime
-		}, (cookie) => {
-			if (chrome.runtime.lastError) {
-				log('_setAuthCookie error:', chrome.runtime.lastError, url);
-			}
-		});
-	})
-		.catch((err) => {
-			log('_setAuthCookie error:', err);
-		});
-}
+// function _setAuthCookie(url, user_token, decoded_user_token) {
+// 	_refreshToken().then((wasRefreshed) => {
+// 		const expiredIn = _getExpirationTimeout();
+// 		const epochExpirationTime = Math.floor(((new Date()).getTime() + expiredIn) / 1000); // in sec
+//
+// 		chrome.cookies.set({
+// 			url,
+// 			name: AUTH_COOKIE,
+// 			domain: `${GHOSTERY_DOMAIN}.com`,
+// 			path: '/',
+// 			value: user_token,
+// 			expirationDate: epochExpirationTime
+// 		}, (cookie) => {
+// 			if (chrome.runtime.lastError) {
+// 				log('_setAuthCookie error:', chrome.runtime.lastError, url);
+// 			}
+// 		});
+// 	})
+// 		.catch((err) => {
+// 			log('_setAuthCookie error:', err);
+// 		});
+// }
 
 /**
  * Deletes AUTH cookie
@@ -540,37 +532,37 @@ function _deleteAuthCookie() {
  *
  * @return {Promise} 		true if token was updated, false otherwise, or rejects with error
  */
-function _refreshToken() {
-	return new Promise((resolve, reject) => {
-		if (!conf.login_info.logged_in) {
-			resolve('User not logged in');
-			return;
-		}
-
-		const decoded_user_token = conf.login_info.decoded_user_token;
-		if (!decoded_user_token || !decoded_user_token.exp) {
-			reject('User token is corrupted or null');
-			return;
-		}
-
-		const currentTime = (new Date()).getTime();
-		const tokenExpTime = decoded_user_token.exp * 1000;
-		if (currentTime > tokenExpTime && currentTime >= LOGOUT_TIMEOUT + tokenExpTime) {
-			sendMessageToPanel('onLoginInfoUpdated', _logOut());
-			log('_refreshToken: user token is over a week old. Logging out...');
-			reject('_refreshToken: user token is over a week old. Logging out...');
-		} else if (tokenExpTime < (currentTime + REFRESH_OFFSET)) {
-			_refreshLoginInfo().then(() => {
-				sendMessageToPanel('onLoginInfoUpdated', conf.login_info);
-				resolve(true); // was updated
-			})
-				.catch((err) => {
-					sendMessageToPanel('onLoginInfoUpdated', _logOut());
-					log('_refreshToken: refresh token failed', err);
-					reject(err);
-				});
-		} else {
-			resolve(false); // was not updated
-		}
-	});
-}
+// function _refreshToken() {
+// 	return new Promise((resolve, reject) => {
+// 		if (!conf.login_info.logged_in) {
+// 			resolve('User not logged in');
+// 			return;
+// 		}
+//
+// 		const decoded_user_token = conf.login_info.decoded_user_token;
+// 		if (!decoded_user_token || !decoded_user_token.exp) {
+// 			reject('User token is corrupted or null');
+// 			return;
+// 		}
+//
+// 		const currentTime = (new Date()).getTime();
+// 		const tokenExpTime = decoded_user_token.exp * 1000;
+// 		if (currentTime > tokenExpTime && currentTime >= LOGOUT_TIMEOUT + tokenExpTime) {
+// 			sendMessageToPanel('onLoginInfoUpdated', _logOut());
+// 			log('_refreshToken: user token is over a week old. Logging out...');
+// 			reject('_refreshToken: user token is over a week old. Logging out...');
+// 		} else if (tokenExpTime < (currentTime + REFRESH_OFFSET)) {
+// 			_refreshLoginInfo().then(() => {
+// 				sendMessageToPanel('onLoginInfoUpdated', conf.login_info);
+// 				resolve(true); // was updated
+// 			})
+// 				.catch((err) => {
+// 					sendMessageToPanel('onLoginInfoUpdated', _logOut());
+// 					log('_refreshToken: refresh token failed', err);
+// 					reject(err);
+// 				});
+// 		} else {
+// 			resolve(false); // was not updated
+// 		}
+// 	});
+// }

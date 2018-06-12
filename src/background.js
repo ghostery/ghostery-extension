@@ -706,12 +706,8 @@ function onMessageHandler(request, sender, callback) {
 			}
 		});
 		return true;
-	} else if (name === 'pullUserSettings') {
-		accounts.pullUserSettings().then((settings) => {
-			callback(settings);
-		}).catch((err) => {
-			callback();
-		});
+	} else if (name === 'setConfUserSettings') {
+		accounts.setConfUserSettings(message);
 		return true;
 	} else if (name === 'getTrackerDescription') {
 		utils.getJson(message.url).then((result) => {
@@ -858,9 +854,7 @@ function initializeDispatcher() {
 	dispatcher.on('conf.save.login_info', (loginInfo) => {
 		console.log('conf.save.login_info', loginInfo);
 		if (loginInfo.logged_in) {
-			accounts.pullUserSettings().catch((err) => {
-				log("dispatcher.on('conf.save.login_info): pullUserSettings error:", err);
-			});
+			accounts.pullUserSettings();
 		}
 		// update PanelData
 		panelData.init();
