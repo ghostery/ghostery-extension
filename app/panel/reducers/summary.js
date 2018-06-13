@@ -15,6 +15,7 @@
 
 import {
 	GET_SUMMARY_DATA,
+	GET_CLIQZ_MODULE_DATA,
 	UPDATE_GHOSTERY_PAUSED,
 	UPDATE_SITE_POLICY,
 	UPDATE_TRACKER_COUNTS
@@ -48,6 +49,10 @@ export default (state = initialState, action) => {
 	switch (action.type) {
 		case GET_SUMMARY_DATA: {
 			return Object.assign({}, state, action.data);
+		}
+		case GET_CLIQZ_MODULE_DATA: {
+			console.log("GET_CLIQZ_MODULE_DATA CALLED", action.data);
+			return Object.assign({}, state, { adBlock: action.data.adblock, antiTracking: action.data.antitracking });
 		}
 		case UPDATE_GHOSTERY_PAUSED: {
 			return Object.assign({}, state, { paused_blocking: action.data.ghosteryPaused, paused_blocking_timeout: action.data.time });

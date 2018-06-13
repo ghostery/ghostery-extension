@@ -41,14 +41,6 @@ describe('app/panel/reducers/summary.js', () => {
 		expect(summaryReducer(undefined, {})).toEqual(initialState);
 	});
 
-	test('reducer correctly handles GET_SUMMARY_DATA', () => {
-		const data = { test: true };
-		const action = { data, type: GET_SUMMARY_DATA };
-		const initState = Immutable({});
-
-		expect(summaryReducer(initState, action)).toEqual(data);
-	});
-
 	test('reducer correctly handles UPDATE_GHOSTERY_PAUSED', () => {
 		const data = { time: null, ghosteryPaused: true };
 		const action = { data, type: UPDATE_GHOSTERY_PAUSED };

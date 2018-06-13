@@ -38,19 +38,6 @@ msg.sendMessageInPromise = jest.fn(messageType => new Promise((resolve, reject) 
 }));
 
 describe('app/panel/actions/SummaryActions.js', () => {
-	test('getSummaryData action should return correctly', () => {
-		const initialState = {};
-		const store = mockStore(initialState);
-
-		const data = testData;
-		const expectedPayload = { data, type: GET_SUMMARY_DATA };
-
-		return store.dispatch(summaryActions.getSummaryData()).then(() => {
-			const actions = store.getActions();
-			expect(actions).toEqual([expectedPayload]);
-		});
-	});
-
 	test('updateTrackerCounts action should return correctly', () => {
 		const initialState = {};
 		const store = mockStore(initialState);
