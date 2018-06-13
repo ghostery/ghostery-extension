@@ -19,7 +19,7 @@ const fs = require('fs-extra');
 const read = require('read-file');
 const path = require('path');
 
-path.extname('index.html')
+path.extname('index.html');
 
 //Build list of licenses
 const licenseList = {};
@@ -38,8 +38,10 @@ checker.init({
 			if(key !== 'browser-core') {
 				const packagePath = `./node_modules/${key}/package.json`;
 				if(fs.pathExistsSync(packagePath)) {
-					const newKey = jsonfile.readFileSync(packagePath)['_id'];
-					keysArray.push(newKey);
+					const {name, version} = jsonfile.readFileSync(packagePath);
+					if(name && version) {
+						keysArray.push(name + "@" + version);
+					}
 				}
 			}
 		});
