@@ -1145,7 +1145,7 @@
 		"description": "User-facing description for the Comments tag category."
 	},
 	"rewards_new_text": {
-		"message": "Обнаружно новое вознаграждение!",
+		"message": "Найдено новое вознаграждение!",
 		"description": ""
 	},
 	"create_password_field_label": {
@@ -1874,7 +1874,7 @@
 		"description": ""
 	},
 	"rewards_on": {
-		"message": "на",
+		"message": "вкл",
 		"description": ""
 	},
 	"category_uncategorized": {
@@ -2016,7 +2016,7 @@
 		"description": ""
 	},
 	"panel_tracker_found_sources_title": {
-		"message": "Обнаруженные URL-адреса трекера:",
+		"message": "Найденные URL-адреса трекера:",
 		"description": ""
 	},
 	"setup_upgrade_desc_2": {
