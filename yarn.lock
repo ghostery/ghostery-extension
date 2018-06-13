@@ -1710,7 +1710,7 @@ brorand@^1.0.1:
 
 "browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.27/7.27.5.tgz?v=1":
   version "7.27.5"
-  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.27/7.27.5.tgz?v=1#02761a949c1bdaa3596b2422083b98c1bd4aa303"
+  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.27/7.27.5.tgz?v=1#476a8837beb6907fbf2b128faf1ecc2381ee406c"
   dependencies:
     "@cliqz-oss/dexie" "2.0.3"
     "@cliqz-oss/pouchdb" "6.3.4-security-error-fix-2"
