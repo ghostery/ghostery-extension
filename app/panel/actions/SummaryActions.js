@@ -12,7 +12,6 @@
  */
 
 import {
-	GET_SUMMARY_DATA,
 	GET_CLIQZ_MODULE_DATA,
 	UPDATE_TRACKER_COUNTS,
 	UPDATE_GHOSTERY_PAUSED,
@@ -22,12 +21,12 @@ import {
 import { sendMessageInPromise } from '../utils/msg';
 
 /**
- * Fetch cliqz modules data from background
+ * Fetch Cliqz Modules data from background
  * @return {Object} dispatch
  */
-export function getCliqzModuleData(tabId) {
+export function getCliqzModuleData() {
 	return function (dispatch) {
-		sendMessageInPromise('getCliqzModuleData').then((data) => {
+		return sendMessageInPromise('getCliqzModuleData').then((data) => {
 			dispatch({
 				type: GET_CLIQZ_MODULE_DATA,
 				data,

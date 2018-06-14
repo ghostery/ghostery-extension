@@ -66,6 +66,7 @@ class Summary extends React.Component {
 		this.setTrackerLatency(this.props);
 		this.updateSiteNotScanned(this.props);
 	}
+
 	/**
 	 * Lifecycle event
 	 */
