@@ -70,6 +70,13 @@ class Summary extends React.Component {
 	/**
 	 * Lifecycle event
 	 */
+	componentDidMount() {
+		this.props.actions.getCliqzModuleData();
+	}
+
+	/**
+	 * Lifecycle event
+	 */
 	componentWillReceiveProps(nextProps) {
 		this.setTrackerLatency(nextProps);
 		this.updateSiteNotScanned(nextProps);
