@@ -8,6 +8,7 @@ licenses.json
 ## Node
 node_modules/
 npm-debug.log
+yarn-error.log
 
 ## Development Files
 *.swp
