@@ -12,7 +12,7 @@
  */
 
 import {
-	GET_SUMMARY_DATA,
+	GET_CLIQZ_MODULE_DATA,
 	UPDATE_TRACKER_COUNTS,
 	UPDATE_GHOSTERY_PAUSED,
 	UPDATE_SITE_POLICY,
@@ -21,18 +21,14 @@ import {
 import { sendMessageInPromise } from '../utils/msg';
 
 /**
- * Fetch summary data from background
- * @deprecated  in favor or PanelActions.getPanelData()
+ * Fetch Cliqz Modules data from background
  * @return {Object} dispatch
  */
-export function getSummaryData(tabId) {
+export function getCliqzModuleData() {
 	return function (dispatch) {
-		return sendMessageInPromise('getPanelData', {
-			tabId,
-			view: 'summary',
-		}).then((data) => {
+		return sendMessageInPromise('getCliqzModuleData').then((data) => {
 			dispatch({
-				type: GET_SUMMARY_DATA,
+				type: GET_CLIQZ_MODULE_DATA,
 				data,
 			});
 		});
