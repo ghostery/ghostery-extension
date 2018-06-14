@@ -674,16 +674,18 @@ function onMessageHandler(request, sender, callback) {
 	} else if (name === 'getAndroidPanelData') {
 		utils.getActiveTab((tab) => {
 			// we are pushing all the possible data for now
-			// TODO: Looks like only summary and settings is enough. We should remove blocking and panel after confirming with ghosterians
-			chrome.runtime.sendMessage({
-				target: 'ANDROID_BROWSER',
-				action: 'panelData',
-				payload: {
-					panel: panelData.get('panel', tab),
-					summary: panelData.get('summary', tab),
-					blocking: panelData.get('blocking', tab),
-					settings: panelData.get('settings')
-				}
+			onMessageHandler({ name: 'getCliqzModuleData' }, {}, (cliqz) => {
+				chrome.runtime.sendMessage({
+					target: 'ANDROID_BROWSER',
+					action: 'panelData',
+					payload: {
+						panel: panelData.get('panel', tab),
+						summary: panelData.get('summary', tab),
+						blocking: panelData.get('blocking', tab),
+						settings: panelData.get('settings'),
+						cliqz
+					}
+				});
 			});
 		});
 	} else if (name === 'getCliqzModuleData') {
