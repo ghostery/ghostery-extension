@@ -32,11 +32,11 @@
 		"description": ""
 	},
 	"rewards_off_toast_notification": {
-		"message": "Вознаграждения Ghostery отключены",
+		"message": "Призы Ghostery отключены",
 		"description": ""
 	},
 	"settings_offers_tooltip": {
-		"message": "Вознаграждения Ghostery - это функция, которая позволяет вам получать скидки и специальные предложения от наших компаний-партнеров.",
+		"message": "Призы Ghostery - это функция, которая позволяет вам получать скидки и специальные предложения от наших компаний-партнеров.",
 		"description": ""
 	},
 	"rewards_yes": {
@@ -236,11 +236,11 @@
 		}
 	},
 	"panel_detail_rewards_off": {
-		"message": "Вознаграждения Ghostery отключены",
+		"message": "Призы Ghostery отключены",
 		"description": ""
 	},
 	"panel_detail_rewards_loading": {
-		"message": "Загрузка вознаграждений...",
+		"message": "Загрузка призов...",
 		"description": ""
 	},
 	"category_audio_video_player": {
@@ -376,7 +376,7 @@
 		"description": ""
 	},
 	"panel_detail_rewards_title": {
-		"message": "Вознаграждения Ghostery",
+		"message": "Призы Ghostery",
 		"description": ""
 	},
 	"panel_about_licenses": {
@@ -489,11 +489,11 @@
 		"description": ""
 	},
 	"rewards_disable": {
-		"message": "Отключить вознаграждения",
+		"message": "Отключить призы",
 		"description": ""
 	},
 	"settings_allow_offers": {
-		"message": "Принять участие в программе вознаграждений Ghostery",
+		"message": "Принять участие в программе призов Ghostery",
 		"description": ""
 	},
 	"click2play_survey_form": {
@@ -623,7 +623,7 @@
 		"description": ""
 	},
 	"panel_detail_menu_rewards_title": {
-		"message": "Вознаграждения",
+		"message": "Призы",
 		"description": ""
 	},
 	"panel_tracker_trust_tooltip": {
@@ -639,7 +639,7 @@
 		"description": ""
 	},
 	"rewards_disable_notification": {
-		"message": "Вознаграждения Ghostery теперь отключены. Вы всегда можете включить их в настройках или на панели управления.",
+		"message": "Призы Ghostery теперь отключены. Вы всегда можете включить их в настройках или на панели управления.",
 		"description": ""
 	},
 	"expand_all": {
@@ -761,7 +761,7 @@
 		"description": ""
 	},
 	"rewards_code_copied_toast_notification": {
-		"message": "Код вознаграждения скопирован!",
+		"message": "Код приза скопирован!",
 		"description": ""
 	},
 	"panel_detail_menu_performance_title": {
@@ -1071,7 +1071,7 @@
 		"description": ""
 	},
 	"rewards_second_prompt": {
-		"message": "Хотели бы вы отказаться от будущих вознаграждений Ghostery?",
+		"message": "Хотели бы вы отказаться от будущих призов Ghostery?",
 		"description": ""
 	},
 	"alert_site_restricted_off": {
@@ -1145,7 +1145,7 @@
 		"description": "User-facing description for the Comments tag category."
 	},
 	"rewards_new_text": {
-		"message": "Найдено новое вознаграждение!",
+		"message": "Найден новый приз!",
 		"description": ""
 	},
 	"create_password_field_label": {
@@ -1209,11 +1209,11 @@
 		"description": ""
 	},
 	"panel_detail_rewards_none_found": {
-		"message": "Вознаграждения не найдены",
+		"message": "Призы не найдены",
 		"description": ""
 	},
 	"rewards_settings": {
-		"message": "Настройки вознаграждений Ghostery",
+		"message": "Настройки призов Ghostery",
 		"description": ""
 	},
 	"settings_last_update": {
@@ -1445,7 +1445,7 @@
 		"description": ""
 	},
 	"rewards_about": {
-		"message": "О вознаграждениях",
+		"message": "О призах",
 		"description": ""
 	},
 	"category_social_media": {
@@ -1499,7 +1499,7 @@
 		"description": ""
 	},
 	"rewards_delete": {
-		"message": "Удалить это вознаграждение",
+		"message": "Удалить этот приз",
 		"description": ""
 	},
 	"click2play_allow_always_tooltip": {
@@ -1531,7 +1531,7 @@
 		"description": ""
 	},
 	"rewards_first_prompt": {
-		"message": "Желаете перейти к вашим вознаграждениям Ghostery?",
+		"message": "Желаете перейти к вашим призам Ghostery?",
 		"description": ""
 	},
 	"drawer_tooltip_enable_ad_block": {
@@ -1902,7 +1902,7 @@
 		"description": ""
 	},
 	"rewards_on_toast_notification": {
-		"message": "Вознаграждения Ghostery включены",
+		"message": "Призы Ghostery включены",
 		"description": ""
 	},
 	"panel_about_version_header": {
