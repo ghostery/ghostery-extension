@@ -69,7 +69,12 @@ export default class TrackerItem extends React.Component {
 		this.props.toggleMenu(this.props.index);
 	}
 
-	clickButtonBlock = () => {
+	clickButtonBlock = (hideMenu = true) => {
+		// onClick={(e) => { e.stopPropagation(); this.clickButtonBlock(false); }}
+		if (this.disabledStatus) {
+			return;
+		}
+
 		const blocked = !this.props.tracker.blocked;
 
 		if (this.props.type === 'site-trackers') {
@@ -93,7 +98,10 @@ export default class TrackerItem extends React.Component {
 				}
 			});
 		}
-		this.props.toggleMenu(this.props.index);
+
+		if (hideMenu) {
+			this.props.toggleMenu(this.props.index);
+		}
 	}
 
 	openTrackerLink = () => {

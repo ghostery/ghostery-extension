@@ -121,6 +121,30 @@ export default class Accordion extends React.Component {
 		});
 	}
 
+	handleCategoryClicked = () => {
+		if (!this.blockingStatus) {
+			const type = this.props.type === 'site-trackers' ? 'site' : 'global';
+			this.context.callGlobalAction({
+				actionName: 'blockUnBlockAllTrackers',
+				actionData: {
+					block: true,
+					type,
+					categoryId: this.props.id,
+				}
+			});
+		} else if (this.blockingStatus === 'blocked') {
+			const type = this.props.type === 'site-trackers' ? 'site' : 'global';
+			this.context.callGlobalAction({
+				actionName: 'blockUnBlockAllTrackers',
+				actionData: {
+					block: false,
+					type,
+					categoryId: this.props.id,
+				}
+			});
+		}
+	}
+
 	itemHeight = 50;
 	nExtraItems = 40;
 	headerheight = 32;
@@ -131,7 +155,7 @@ export default class Accordion extends React.Component {
 
 		return (
 			<div className={`accordion ${this.props.index}`}>
-				<span className={`accordionSelect ${this.blockingStatus}`} />
+				<span className={`accordionSelect ${this.blockingStatus}`} onClick={this.handleCategoryClicked} />
 				<div className={`accordionTitle ${this.state.isActive ? 'active' : ''}`} style={titleStyle} onClick={this.toggleContent}>
 					<h2>{this.props.name}</h2>
 					<p>
@@ -193,4 +217,5 @@ Accordion.defaultProps = {
 
 Accordion.contextTypes = {
 	siteProps: PropTypes.object,
+	callGlobalAction: PropTypes.func,
 };

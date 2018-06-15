@@ -12,6 +12,7 @@
 			background-color: #eee;
 			background-repeat: no-repeat;
 			background-position: center;
+			z-index: 1;
 
 			&.blocked, &.trusted, &.restricted {
 				border: none;

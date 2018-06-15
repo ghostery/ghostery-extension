@@ -195,7 +195,7 @@ export function blockUnblockGlobalTracker({ actionData, state }) {
 }
 
 export function blockUnBlockAllTrackers({ actionData, state }) {
-	const { type, block } = actionData;
+	const { type, block, categoryId } = actionData; // categoryId is set when clicking on category's check box
 	const isSiteTrackers = type === 'site';
 
 	const updated_app_ids = JSON.parse(JSON.stringify(state.blocking.selected_app_ids)) || {};
@@ -206,6 +206,10 @@ export function blockUnBlockAllTrackers({ actionData, state }) {
 
 	if (isSiteTrackers) {
 		updated_blocking_categories.forEach((category) => {
+			if (categoryId && category.id !== categoryId) {
+				return;
+			}
+
 			const updated_settings_category = updated_settings_categories.find(item => item.id === category.id);
 			category.num_blocked = 0;
 			// TODO: change the logic here
@@ -242,6 +246,10 @@ export function blockUnBlockAllTrackers({ actionData, state }) {
 		});
 	} else {
 		updated_settings_categories.forEach((category) => {
+			if (categoryId && category.id !== categoryId) {
+				return;
+			}
+
 			category.num_blocked = 0;
 			category.trackers.forEach((tracker) => {
 				if (tracker.shouldShow) {
