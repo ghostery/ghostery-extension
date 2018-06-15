@@ -13,5 +13,6 @@
 
 /*  @memberOf  BackgroundClasses */
 import CLIQZ from 'browser-core';
+import globals from './Globals';
 
-export default new (CLIQZ.App)();
+export default new (CLIQZ.App)({ debug: globals.DEBUG });
