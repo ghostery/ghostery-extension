@@ -1708,9 +1708,9 @@ brorand@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
 
-"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.27/7.27.5.tgz?v=1":
-  version "7.27.5"
-  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.27/7.27.5.tgz?v=1#476a8837beb6907fbf2b128faf1ecc2381ee406c"
+"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.27/7.27.7.tgz?v=1":
+  version "7.27.7"
+  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.27/7.27.7.tgz?v=1#65b8ad676d6a240dd1511c04e03b8a5d7b706efb"
   dependencies:
     "@cliqz-oss/dexie" "2.0.3"
     "@cliqz-oss/pouchdb" "6.3.4-security-error-fix-2"
