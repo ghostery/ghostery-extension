@@ -61,7 +61,7 @@ class Rewards {
 			}
 		};
 		if (type === 'offer-action-signal') {
-			signal.offer_id = offerId;
+			signal.data.offer_id = offerId;
 		}
 		log('sendSignal: ', signal);
 		cliqz.modules['offers-v2'].background.actions.processRealEstateMessage(signal);
