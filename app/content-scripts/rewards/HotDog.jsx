@@ -59,6 +59,7 @@ class HotDog extends Component {
 	}
 
 	close() {
+		this.props.actions.removeFocusListener();
 		this.props.actions.sendSignal('offer_closed_hotdog');
 		if (this.iframeEl) {
 			this.iframeEl.classList = '';

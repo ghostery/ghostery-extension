@@ -174,6 +174,7 @@ class OfferCard extends Component {
 	}
 
 	closeOfferCard() {
+		this.props.actions.removeFocusListener();
 		if (this.iframeEl) {
 			this.iframeEl.classList = '';
 		}

@@ -50,6 +50,7 @@ class Rewards extends React.Component {
 	componentDidMount() {
 		this.props.actions.getRewardsData();
 		this.props.actions.sendSignal('hub_open');
+		chrome.runtime.connect({ name: 'rewardsPanelPort' });
 	}
 
 	/**

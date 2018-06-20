@@ -48,13 +48,17 @@ class RewardsApp {
 		this.mainView = null;
 		this.rewardsApp.id = 'ghostery-rewards-app';
 		this.rewardsApp.className = 'show';
+
 		this.handleMessages = this.handleMessages.bind(this);
 		this.sendSignal = this.sendSignal.bind(this);
 		this.messageBackground = this.messageBackground.bind(this);
+		this.removeFocusListener = this.removeFocusListener.bind(this);
+		this.focusListener = this.focusListener.bind(this);
 
 		this.actions = {
 			sendSignal: this.sendSignal,
-			messageBackground: this.messageBackground
+			messageBackground: this.messageBackground,
+			removeFocusListener: this.removeFocusListener
 		};
 
 		this.init();
@@ -193,10 +197,16 @@ class RewardsApp {
 		}
 	}
 
+	focusListener() {
+		this.sendSignal('offer_shown');
+	}
+
 	addRewardSeenListener() {
-		window.addEventListener('focus', () => {
-			this.sendSignal('offer_shown');
-		});
+		window.addEventListener('focus', this.focusListener);
+	}
+
+	removeFocusListener() {
+		window.removeEventListener('focus', this.focusListener);
 	}
 
 	messageBackground(name, message) {
