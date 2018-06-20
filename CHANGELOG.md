@@ -1,3 +1,15 @@
+### GHOSTERY 8.2.0 (June 20, 2018)
+
++ Improved simple-view and detail-view UI
++ Ghostery Rewards integration
++ Fixes for Ad-Blocker cosmetic filters on Chrome
++ Move dependency manager to Yarn
++ Performance improvements and bug fixes
+
+### GHOSTERY 8.1.3 (May 31, 2018)
+
++ Fix for 100% CPU on Chrome 67 from synchronous XHR
+
 ### GHOSTERY 8.1.2 (April 19, 2018)
 
 + Remove WebSocket filter scheme support for older versions of Chrome and FF
