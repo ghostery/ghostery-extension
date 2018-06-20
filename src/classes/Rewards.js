@@ -152,7 +152,7 @@ class Rewards {
 	}
 
 	panelHubClosedListener() {
-		this.panelPort.onDisconnect(() => {
+		this.panelPort.onDisconnect.addListener(() => {
 			this.sendSignal({
 				offerId: null,
 				actionId: 'hub_closed',
