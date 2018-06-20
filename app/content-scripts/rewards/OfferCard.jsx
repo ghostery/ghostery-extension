@@ -69,7 +69,7 @@ class OfferCard extends Component {
 					href: 'https://www.ghostery.com/faqs/what-is-ghostery-rewards/',
 					text: t('rewards_learn_more'),
 					callback: () => {
-						this.sendSignal('offer_first_learn');
+						this.props.actions.sendSignal('offer_first_learn');
 						sendMessage('ping', 'rewards_first_learn_more');
 					},
 				},
@@ -95,39 +95,15 @@ class OfferCard extends Component {
 		];
 
 		const { reward } = props;
-		this.messageBackground('rewardSeen', {
+		this.props.actions.messageBackground('rewardSeen', {
 			offerId: reward.offer_id
 		});
-		this.sendSignal('offer_shown', { reward });
-		this.sendSignal('offer_dsp_session', { reward });
-		this.sendSignal('offer_shown_card', { reward });
-	}
-
-	messageBackground(name, message) {
-		if (this.props.port) {
-			this.props.port.postMessage({
-				name,
-				message
-			});
-		} else {
-			sendMessage(name, message);
-		}
-	}
-
-	sendSignal(actionId, props = this.props, offerSignal = true) {
-		// Cliqz metrics
-		const offerId = offerSignal ? props.reward.offer_id : null;
-		const message = {
-			offerId,
-			actionId,
-			origin: 'rewards-hotdog-card',
-			type: !offerSignal ? 'action-signal' : 'offer-action-signal',
-		};
-		this.messageBackground('rewardSignal', message);
+		this.props.actions.sendSignal('offer_shown');
+		this.props.actions.sendSignal('offer_dsp_session');
 	}
 
 	copyCode() {
-		this.sendSignal('code_copied');
+		this.props.actions.sendSignal('code_copied');
 		this.offerCardRef.querySelector('.reward-code-input').select();
 		document.execCommand('copy');
 
@@ -147,7 +123,7 @@ class OfferCard extends Component {
 
 	toggleSettings(e) {
 		if (!this.state.showSettings) {
-			this.sendSignal('offer_settings');
+			this.props.actions.sendSignal('offer_settings');
 		}
 		this.setState({
 			showSettings: !this.state.showSettings
@@ -155,9 +131,9 @@ class OfferCard extends Component {
 	}
 
 	disableRewards() {
-		this.sendSignal('rewards_off', null, false);
+		this.props.actions.sendSignal('rewards_off', false);
 		sendMessage('ping', 'rewards_off');
-		this.messageBackground('rewardsDisabled');
+		this.props.actions.messageBackground('rewardsDisabled');
 	}
 
 	disableRewardsNotification() {
@@ -177,24 +153,24 @@ class OfferCard extends Component {
 				});
 				return;
 			}
-			this.sendSignal('offer_first_optin');
+			this.props.actions.sendSignal('offer_first_optin');
 			sendMessage('ping', 'rewards_first_accept');
 		} else if (promptNumber === 2) {
 			if (option) {
-				this.sendSignal('offer_first_optout');
+				this.props.actions.sendSignal('offer_first_optout');
 				sendMessage('ping', 'rewards_first_reject_optout');
 				this.disableRewards();
 				this.closeOfferCard();
 				return;
 			}
-			this.sendSignal('offer_first_optlater');
+			this.props.actions.sendSignal('offer_first_optlater');
 			sendMessage('ping', 'rewards_first_reject_optin');
 			this.closeOfferCard();
 		}
 		this.setState({
 			showPrompt: false
 		});
-		this.messageBackground('rewardsPromptAccepted');
+		this.props.actions.messageBackground('rewardsPromptAccepted');
 	}
 
 	closeOfferCard() {
@@ -207,7 +183,7 @@ class OfferCard extends Component {
 	}
 
 	redeem() {
-		this.sendSignal('offer_ca_action');
+		this.props.actions.sendSignal('offer_ca_action');
 	}
 
 	handleImageLoaded(e) {
@@ -239,7 +215,7 @@ class OfferCard extends Component {
 								<div className="rewards-logo-beta" style={{ backgroundImage: this.betaLogo }} />
 								<div
 									className="reward-card-close"
-									onClick={(e) => { this.sendSignal('offer_closed_card'); this.closeOfferCard(); }}
+									onClick={(e) => { this.props.actions.sendSignal('offer_closed_card'); this.closeOfferCard(); }}
 									style={{ backgroundImage: this.closeIcon }}
 								/>
 							</div>
@@ -258,7 +234,7 @@ class OfferCard extends Component {
 									{ this.state.showSettings &&
 										<div className="rewards-settings-container">
 											<ClickOutside excludeEl={this.kebabRef} onClickOutside={this.toggleSettings}>
-												<Settings signal={() => { this.sendSignal('about_ghostery_rewards', null, false); }} disable={this.disableRewardsNotification} />
+												<Settings signal={() => { this.props.actions.sendSignal('about_ghostery_rewards', false); }} disable={this.disableRewardsNotification} />
 											</ClickOutside>
 										</div>
 									}

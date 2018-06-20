@@ -45,36 +45,13 @@ class HotDog extends Component {
 
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.reward && nextProps.reward !== null && !this.shownSignal) {
-			this.sendSignal('offer_notification_hotdog', nextProps);
+			this.props.actions.sendSignal('offer_notification_hotdog');
 			this.shownSignal = true;
 		}
 	}
 
-	messageBackground(name, message) {
-		if (this.props.port) {
-			this.props.port.postMessage({
-				name,
-				message
-			});
-		} else {
-			sendMessage(name, message);
-		}
-	}
-
-	sendSignal(actionId, props = this.props) {
-		// Cliqz metrics
-		const offerId = props.reward.offer_id;
-		const message = {
-			offerId,
-			actionId,
-			origin: 'rewards-hotdog-card',
-			type: 'offer-action-signal'
-		};
-		this.messageBackground('rewardSignal', message);
-	}
-
 	navigate() {
-		this.sendSignal('offer_click_hotdog');
+		this.props.actions.sendSignal('offer_click_hotdog');
 		if (this.iframeEl) {
 			this.iframeEl.classList.add('offer-card');
 		}
@@ -82,7 +59,7 @@ class HotDog extends Component {
 	}
 
 	close() {
-		this.sendSignal('offer_closed_hotdog');
+		this.props.actions.sendSignal('offer_closed_hotdog');
 		if (this.iframeEl) {
 			this.iframeEl.classList = '';
 		}
