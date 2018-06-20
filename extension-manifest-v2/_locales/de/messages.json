@@ -639,7 +639,7 @@
 		"description": ""
 	},
 	"rewards_disable_notification": {
-		"message": "Ghostery Rewards ist jetzt aus. Sie können es jederzeit in Ihren Einstellungen oder im Rewards-Dashboard einschalten.",
+		"message": "Ghostery Rewards deaktiviert. Schalten Sie es jederzeit in den Einstellungen oder im Rewards-Dashboard an.",
 		"description": ""
 	},
 	"expand_all": {
