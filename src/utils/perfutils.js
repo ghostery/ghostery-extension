@@ -1,5 +1,6 @@
 import * as utils from './utils';
 
+//ID of Ghostery-perf extension
 const RECEIVER_ID = "pdlmemohjlhncchohlaeifdmbjbngcld";
 let PORT = chrome.runtime.connect(RECEIVER_ID);
 
