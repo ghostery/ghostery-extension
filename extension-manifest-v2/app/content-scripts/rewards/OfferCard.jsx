@@ -155,9 +155,8 @@ class OfferCard extends Component {
 	}
 
 	disableRewards() {
-		this.sendSignal('rewards_off', null, false);
 		sendMessage('ping', 'rewards_off');
-		this.messageBackground('rewardsDisabled');
+		this.sendSignal('rewards_off', null, false);
 	}
 
 	disableRewardsNotification() {
