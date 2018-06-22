@@ -1,3 +1,7 @@
 Results for 100 popular sites.
 6/20/2018 8.2.0
+
+1. AT: on, AD: on, AB: on, GB: none
 Average: 597 ms
+2. AT: on, AD: on, AB: on, GB: all
+Average: 585 ms
