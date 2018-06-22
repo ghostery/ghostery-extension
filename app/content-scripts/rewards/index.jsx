@@ -54,6 +54,7 @@ class RewardsApp {
 		this.messageBackground = this.messageBackground.bind(this);
 		this.removeFocusListener = this.removeFocusListener.bind(this);
 		this.focusListener = this.focusListener.bind(this);
+		this.addRewardSeenListener = this.addRewardSeenListener.bind(this);
 
 		this.actions = {
 			sendSignal: this.sendSignal,
