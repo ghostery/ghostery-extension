@@ -424,6 +424,13 @@ function handleRewards(name, message, tab_id, callback) {
 	switch (name) {
 		case 'rewardSignal':
 			rewards.sendSignal(message);
+			if (message.actionId === 'rewards_off') {
+				cliqz.modules['offers-v2'].background.actions.flushSignals();
+				conf.enable_offers = false;
+			} else if (message.actionId === 'rewards_on') {
+				cliqz.modules['offers-v2'].background.actions.flushSignals();
+				conf.enable_offers = true;
+			}
 			break;
 		case 'rewardSeen':
 			rewards.markRewardRead(message.offerId);

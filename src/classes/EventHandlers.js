@@ -158,7 +158,7 @@ class EventHandlers {
 			// we look for a cliqz offer which does not have urls specified (meaning good for any site)
 			// All Cliqz offers have Dismiss === 1, so the found one is injected and removed.
 			// Lastly we look for non-cliqz offers (classic CMPs)
-			if (!rewards.currentOffer && cmp.CMP_DATA.length !== 0) {
+			if (cmp.CMP_DATA.length !== 0) {
 				const CMPS = cmp.CMP_DATA;
 				const numOffers = CMPS.length;
 				let cliqzOffer;
