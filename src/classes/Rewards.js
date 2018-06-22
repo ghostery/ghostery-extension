@@ -36,6 +36,7 @@ class Rewards {
 		this.panelPort = null;
 		this.ports = new Map();
 		this.channelsSupported = (typeof chrome.runtime.onConnect === 'object');
+		this.panelHubClosedListener = this.panelHubClosedListener.bind(this);
 	}
 
 	deleteReward(offerId) {
@@ -152,13 +153,11 @@ class Rewards {
 	}
 
 	panelHubClosedListener() {
-		this.panelPort.onDisconnect.addListener(() => {
-			this.sendSignal({
-				offerId: null,
-				actionId: 'hub_closed',
-				origin: 'ghostery-rewards-hub',
-				type: 'action-signal'
-			});
+		this.sendSignal({
+			offerId: null,
+			actionId: 'hub_closed',
+			origin: 'rewards-hub',
+			type: 'action-signal'
 		});
 	}
 }

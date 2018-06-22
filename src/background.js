@@ -443,6 +443,9 @@ function handleRewards(name, message, tab_id, callback) {
 		case 'ping':
 			metrics.ping(message);
 			break;
+		case 'removeDisconnectListener':
+			rewards.panelPort.onDisconnect.removeListener(rewards.panelHubClosedListener);
+			break;
 		default:
 			break;
 	}
@@ -1272,7 +1275,7 @@ function initializeEventListeners() {
 	chrome.runtime.onConnect.addListener((port) => {
 		if (port && port.name === 'rewardsPanelPort') {
 			rewards.panelPort = port;
-			rewards.panelHubClosedListener();
+			rewards.panelPort.onDisconnect.addListener(rewards.panelHubClosedListener);
 		}
 	});
 }
