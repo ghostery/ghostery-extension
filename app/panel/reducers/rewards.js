@@ -41,7 +41,6 @@ export default (state = initialState, action) => {
 		}
 		case TOGGLE_OFFERS_ENABLED: {
 			const enable_offers = action.data.enabled;
-			sendMessage('setPanelData', { enable_offers });
 			return Object.assign({}, state, { enable_offers });
 		}
 
