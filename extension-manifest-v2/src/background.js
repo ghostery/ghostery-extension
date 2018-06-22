@@ -450,6 +450,9 @@ function handleRewards(name, message, tab_id, callback) {
 		case 'ping':
 			metrics.ping(message);
 			break;
+		case 'removeDisconnectListener':
+			rewards.panelPort.onDisconnect.removeListener(rewards.panelHubClosedListener);
+			break;
 		default:
 			break;
 	}
@@ -1274,6 +1277,14 @@ function initializeEventListeners() {
 
 	// Fired when a message is sent from either an extension process (by runtime.sendMessage) or a content script (by tabs.sendMessage).
 	onMessage.addListener(onMessageHandler);
+
+	// Fired when panel is disconnected
+	chrome.runtime.onConnect.addListener((port) => {
+		if (port && port.name === 'rewardsPanelPort') {
+			rewards.panelPort = port;
+			rewards.panelPort.onDisconnect.addListener(rewards.panelHubClosedListener);
+		}
+	});
 }
 
 /**

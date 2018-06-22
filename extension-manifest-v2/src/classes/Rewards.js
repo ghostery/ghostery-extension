@@ -33,8 +33,10 @@ class Rewards {
 	constructor() {
 		this.getStoredOffers();
 		this.currentOffer = null;
+		this.panelPort = null;
 		this.ports = new Map();
 		this.channelsSupported = (typeof chrome.runtime.onConnect === 'object');
+		this.panelHubClosedListener = this.panelHubClosedListener.bind(this);
 	}
 
 	deleteReward(offerId) {
@@ -147,6 +149,15 @@ class Rewards {
 		return injectScript(tab_id, 'dist/rewards.js', 'dist/css/rewards_styles.css', 'document_start').catch((err) => {
 			log('rewards injectScript error', err);
 			return false;
+		});
+	}
+
+	panelHubClosedListener() {
+		this.sendSignal({
+			offerId: null,
+			actionId: 'hub_closed',
+			origin: 'rewards-hub',
+			type: 'action-signal'
 		});
 	}
 }

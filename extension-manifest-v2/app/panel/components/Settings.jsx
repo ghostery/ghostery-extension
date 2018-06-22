@@ -67,7 +67,7 @@ class Settings extends React.Component {
 	 */
 	toggleCheckbox(event) {
 		if (event.currentTarget.name === 'enable_offers') {
-			this.props.actions.sendSignal(event.currentTarget.checked ? 'rewards_off' : 'rewards_on');
+			this.props.actions.sendSignal(!event.currentTarget.checked ? 'rewards_off' : 'rewards_on');
 			sendMessage('ping', !event.currentTarget.checked ? 'rewards_off' : 'rewards_on');
 		}
 		this.props.actions.toggleCheckbox({
