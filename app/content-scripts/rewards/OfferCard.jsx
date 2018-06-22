@@ -102,6 +102,10 @@ class OfferCard extends Component {
 		this.props.actions.sendSignal('offer_dsp_session');
 	}
 
+	componentDidMount() {
+		this.props.actions.addRewardSeenListener();
+	}
+
 	copyCode() {
 		this.props.actions.sendSignal('code_copied');
 		this.offerCardRef.querySelector('.reward-code-input').select();

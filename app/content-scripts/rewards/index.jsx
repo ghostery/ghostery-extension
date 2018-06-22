@@ -58,14 +58,14 @@ class RewardsApp {
 		this.actions = {
 			sendSignal: this.sendSignal,
 			messageBackground: this.messageBackground,
-			removeFocusListener: this.removeFocusListener
+			removeFocusListener: this.removeFocusListener,
+			addRewardSeenListener: this.addRewardSeenListener
 		};
 
 		this.init();
 	}
 
 	init() {
-		this.addRewardSeenListener();
 		if (document.readyState === 'complete'
 		|| document.readyState === 'loaded'
 		|| document.readyState === 'interactive'

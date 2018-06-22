@@ -43,6 +43,8 @@ class RewardListItem extends React.Component {
 				this.props.actions.sendSignal('offer_click_specific_new', id);
 			}
 			this.props.actions.sendSignal('offer_click_specific', id);
+			this.props.actions.sendSignal('offer_shown', id);
+			this.props.actions.sendSignal('offer_dsp_session', id);
 		}
 	}
 
