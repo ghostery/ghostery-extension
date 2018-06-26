@@ -211,7 +211,9 @@ class RewardsApp {
 	}
 
 	messageBackground(name, message) {
-		if (this.port) {
+		if (this.port &&
+			(message.actionId !== 'rewards_off') &&
+			(message.actionId !== 'rewards_on')) {
 			this.port.postMessage({
 				name,
 				message
