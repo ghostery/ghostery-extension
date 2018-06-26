@@ -69,6 +69,7 @@ const humanweb = cliqz.modules['human-web'];
 const { adblocker, antitracking, hpn } = cliqz.modules;
 const messageCenter = cliqz.modules['message-center'];
 const offers = cliqz.modules['offers-v2'];
+let OFFERS_ENABLE_SIGNAL;
 
 /**
  * Enable or disable specified module.
@@ -421,40 +422,49 @@ function handleBlockedRedirect(name, message, tab_id, callback) {
  * @param  {function} 	callback 	function to call (at most once) when you have a response
  */
 function handleRewards(name, message, tab_id, callback) {
-	switch (name) {
-		case 'rewardSignal':
-			rewards.sendSignal(message);
-			if (message.actionId === 'rewards_off') {
-				cliqz.modules['offers-v2'].background.actions.flushSignals();
+	if (!offers.isEnabled) {
+		switch (name) {
+			case 'rewardSignal':
+				if (message.actionId === 'rewards_on') {
+					OFFERS_ENABLE_SIGNAL = message;
+					conf.enable_offers = true;
+				}
+				break;
+			default:
+				break;
+		}
+	} else {
+		switch (name) {
+			case 'rewardSignal':
+				rewards.sendSignal(message);
+				if (message.actionId === 'rewards_off') {
+					conf.enable_offers = false;
+				}
+				break;
+			case 'rewardSeen':
+				rewards.markRewardRead(message.offerId);
+				button.update();
+				break;
+			case 'deleteReward':
+				rewards.markRewardRead(message.offerId);
+				rewards.deleteReward(message.offerId);
+				button.update();
+				break;
+			case 'rewardsDisabled':
 				conf.enable_offers = false;
-			} else if (message.actionId === 'rewards_on') {
-				cliqz.modules['offers-v2'].background.actions.flushSignals();
-				conf.enable_offers = true;
-			}
-			break;
-		case 'rewardSeen':
-			rewards.markRewardRead(message.offerId);
-			button.update();
-			break;
-		case 'deleteReward':
-			rewards.markRewardRead(message.offerId);
-			rewards.deleteReward(message.offerId);
-			button.update();
-			break;
-		case 'rewardsDisabled':
-			conf.enable_offers = false;
-			break;
-		case 'rewardsPromptAccepted':
-			conf.rewards_accepted = true;
-			break;
-		case 'ping':
-			metrics.ping(message);
-			break;
-		case 'removeDisconnectListener':
-			rewards.panelPort.onDisconnect.removeListener(rewards.panelHubClosedListener);
-			break;
-		default:
-			break;
+				break;
+			case 'rewardsPromptAccepted':
+				conf.rewards_accepted = true;
+				break;
+			case 'ping':
+				metrics.ping(message);
+				break;
+			case 'removeDisconnectListener':
+				rewards.panelPort.onDisconnect.removeListener(rewards.panelHubClosedListener);
+				break;
+			default:
+				break;
+		}
 	}
 }
 
@@ -859,6 +869,14 @@ function initializeDispatcher() {
 		button.update();
 		if (!IS_EDGE && !IS_CLIQZ) {
 			if (!enableOffers) {
+				const actions = cliqz &&
+				cliqz.modules['offers-v2'] &&
+				cliqz.modules['offers-v2'].background &&
+				cliqz.modules['offers-v2'].background.actions;
+				if (actions) {
+					actions.flushSignals();
+				}
+				OFFERS_ENABLE_SIGNAL = undefined;
 				registerWithOffers(offers, enableOffers);
 			}
 			setCliqzModuleEnabled(offers, enableOffers);
@@ -1072,7 +1090,19 @@ adblocker.on('enabled', () => {
 offers.on('enabled', () => {
 	offers.isReady().then(() => {
 		log('IN OFFERS ON ENABLED', offers, messageCenter);
+		if (OFFERS_ENABLE_SIGNAL) {
+			rewards.sendSignal(OFFERS_ENABLE_SIGNAL);
 
+			const actions = cliqz &&
+			cliqz.modules['offers-v2'] &&
+			cliqz.modules['offers-v2'].background &&
+			cliqz.modules['offers-v2'].background.actions;
+			if (actions) {
+				actions.flushSignals();
+			}
+
+			OFFERS_ENABLE_SIGNAL = undefined;
+		}
 		if (DEBUG) {
 			offers.action('setConfiguration', {
 				config_location: 'de',

@@ -137,7 +137,6 @@ class OfferCard extends Component {
 	disableRewards() {
 		sendMessage('ping', 'rewards_off');
 		this.props.actions.sendSignal('rewards_off', null, false);
-		this.props.actions.messageBackground('rewardsDisabled');
 	}
 
 	disableRewardsNotification() {
@@ -280,7 +279,7 @@ class OfferCard extends Component {
 										</div>
 									}
 								</div>
-								<a target="_blank" onClick={this.redeem} href={this.state.rewardUI.call_to_action && this.state.rewardUI.call_to_action.url} className="reward-redeem">
+								<a target="_blank" rel="noopener noreferrer" onClick={this.redeem} href={this.state.rewardUI.call_to_action && this.state.rewardUI.call_to_action.url} className="reward-redeem">
 									{this.state.rewardUI.call_to_action.text}
 								</a>
 							</div>
