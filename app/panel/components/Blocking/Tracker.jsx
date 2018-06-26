@@ -210,6 +210,7 @@ class Tracker extends React.Component {
 			sources = tracker.sources.map((source, index) => (
 				<a
 					target="_blank"
+					rel="noopener noreferrer"
 					className="trk-src-link"
 					title={source.src}
 					key={index}
@@ -285,7 +286,7 @@ class Tracker extends React.Component {
 							<div className="trk-description">
 								{ this.state.description }
 								<div className={(!this.state.showTrackerLearnMore ? 'hide' : '')}>
-									<a target="_blank" title={tracker.name} href={`https://${globals.APPS_SUB_DOMAIN}.ghostery.com/${this.props.language}/apps/${encodeURIComponent(tracker.name.replace(/\s+/g, '_').toLowerCase())}`}>
+									<a target="_blank" rel="noopener noreferrer" title={tracker.name} href={`https://${globals.APPS_SUB_DOMAIN}.ghostery.com/${this.props.language}/apps/${encodeURIComponent(tracker.name.replace(/\s+/g, '_').toLowerCase())}`}>
 										{ t('tracker_description_learn_more') }
 									</a>
 								</div>
