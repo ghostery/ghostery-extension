@@ -450,9 +450,6 @@ function handleRewards(name, message, tab_id, callback) {
 				rewards.deleteReward(message.offerId);
 				button.update();
 				break;
-			case 'rewardsDisabled':
-				conf.enable_offers = false;
-				break;
 			case 'rewardsPromptAccepted':
 				conf.rewards_accepted = true;
 				break;
@@ -1436,13 +1433,14 @@ function initializeGhosteryModules() {
 			if (globals.JUST_UPGRADED_FROM_7) {
 				conf.enable_ad_block = false;
 				conf.enable_anti_tracking = false;
-				conf.enable_offers = false;
+				conf.enable_offers = !((IS_EDGE || IS_CLIQZ));
 				conf.enable_human_web = (IS_EDGE || IS_CLIQZ) ? false : conf.enable_human_web;
 			} else {
 				conf.enable_ad_block = IS_CLIQZ ? false : !adblocker.isDisabled;
 				conf.enable_anti_tracking = IS_CLIQZ ? false : !antitracking.isDisabled;
 				conf.enable_human_web = (IS_EDGE || IS_CLIQZ) ? false : !humanweb.isDisabled;
-				conf.enable_offers = (IS_EDGE || IS_CLIQZ) ? false : !offers.isDisabled;
+				// This code forces enable_offers to true on upgrade. Remove in the next version of Ghostery!
+				conf.enable_offers = (IS_EDGE || IS_CLIQZ) ? false : globals.JUST_UPGRADED ? true : !offers.isDisabled;
 			}
 		})).catch((e) => {
 		log('cliqzStartup error', e);

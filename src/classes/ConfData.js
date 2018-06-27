@@ -92,8 +92,8 @@ class ConfData {
 				_initProperty('trackers_banner_status', true);
 			}
 
-			//Disregard original offers value, so that default value is assigned.
-			//REMOVE THIS IS THE NEXT VERSION
+			// Disregard original offers value, so that default value is assigned.
+			// REMOVE THIS IS THE NEXT VERSION
 			delete data.enable_offers;
 
 			// simple props

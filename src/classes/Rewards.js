@@ -125,9 +125,6 @@ class Rewards {
 									case 'rewardSignal':
 										this.sendSignal(message.message);
 										break;
-									case 'rewardsDisabled':
-										conf.enable_offers = false;
-										break;
 									case 'rewardsPromptAccepted':
 										// @TODO set conf disabled
 										conf.rewards_accepted = true;
