@@ -1,4 +1,4 @@
-### GHOSTERY 8.2.0 (June 20, 2018)
+### GHOSTERY 8.2.0 (June 27, 2018)
 
 + Improved simple-view and detail-view UI
 + Ghostery Rewards integration
