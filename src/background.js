@@ -612,7 +612,10 @@ function onMessageHandler(request, sender, callback) {
 	if (name === 'disableShowAlert') {
 		conf.show_alert = false;
 	} else if (name === 'updateDataCollection') {
-		if (!IS_CLIQZ && !IS_EDGE) conf.enable_human_web = message && true;
+		if (!IS_CLIQZ && !IS_EDGE) {
+			conf.enable_human_web = message && true;
+			conf.enable_offers = message && true;
+		}
 		conf.enable_metrics = message && true;
 	} else if (name === 'updateDisplayMode') {
 		conf.is_expert = message;
