@@ -8,6 +8,8 @@ function _report(perfEntry, data) {
 	try {
 		if(!PORT) {
 			PORT = chrome.runtime.connect(RECEIVER_ID);
+			const report = {name: 'perfInfo', ghostery_version: chrome.runtime.getManifest().version};
+			PORT.postMessage(report);
 		} 
 	} catch(e) {
 		console.log("Failed to connect", e);
