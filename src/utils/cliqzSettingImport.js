@@ -10,7 +10,7 @@ function promiseTimeout(timeout) {
 function runCliqzSettingsImport(cliqz, conf) {
 	log('run cliqz settings importer');
 	const inject = new KordInjector();
-  inject.init();
+	inject.init();
 	// inject modules in remote cliqz extension with which we want to communicate
 	const privacyMigration = inject.module('privacy-migration');
 
@@ -43,10 +43,13 @@ function runCliqzSettingsImport(cliqz, conf) {
 				.map(s => s.replace(/^(http[s]?:\/\/)?(www\.)?/, ''))
 				.filter(s => !existingSites.has(s)));
 			log('add whitelisted sites', [...newSites]);
+			const whitelist = conf.site_whitelist;
 			newSites.forEach((s) => {
-				conf.site_whitelist.push(s);
+				whitelist.push(s);
 			});
-			return privacyMigration.cleanModuleData();
+			conf.site_whitelist = whitelist;
+			privacyMigration.cleanModuleData();
+			return Promise.resolve();
 		}).then(() => {
 			inject.unload();
 		});
@@ -54,17 +57,13 @@ function runCliqzSettingsImport(cliqz, conf) {
 
 // import settings from cliqz
 export function importCliqzSettings(cliqz, conf) {
-	const IMPORT_RUN_FLAG = 'cliqzImportState';
-	chrome.storage.local.get([IMPORT_RUN_FLAG], (result) => {
-		log(IMPORT_RUN_FLAG, result);
-		if (!result[IMPORT_RUN_FLAG]) {
-			runCliqzSettingsImport(cliqz, conf).then(() => {
-				log('cliqz settings import successful');
-				chrome.storage.local.set({ [IMPORT_RUN_FLAG]: 1 });
-			}, (e) => {
-				log('cliqz import not available at present');
-				console.error(e);
-			});
-		}
-	});
+	log('checking cliqz import', conf.cliqz_import_state);
+	if (!conf.cliqz_import_state) {
+		runCliqzSettingsImport(cliqz, conf).then(() => {
+			log('cliqz settings import successful');
+			conf.cliqz_import_state = 1;
+		}, (e) => {
+			log('cliqz import not available at present', e);
+		});
+	}
 }

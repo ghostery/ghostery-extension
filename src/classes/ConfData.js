@@ -135,6 +135,7 @@ class ConfData {
 			_initProperty('setup_step', 0);
 			_initProperty('setup_path', 0);
 			_initProperty('setup_block', 1);
+			_initProperty('cliqz_import_state', 0);
 
 			// Complex props
 			_initProperty('bugs', {});
