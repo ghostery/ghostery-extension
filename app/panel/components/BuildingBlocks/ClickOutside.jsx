@@ -51,10 +51,13 @@ class ClickOutside extends React.Component {
 	 */
 	clickHandler(e) {
 		const el = this.container;
-		if (!el.contains(e.target)
-			&& !el.contains(e.path[0])
+		const ePath = e.path || (e.composedPath && e.composedPath());
+		if (
+			!el.contains(e.target)
 			&& e.target !== this.props.excludeEl
-			&& e.path[0] !== this.props.excludeEl) {
+			&& !el.contains(ePath[0])
+			&& ePath[0] !== this.props.excludeEl
+		) {
 			this.props.onClickOutside(e);
 		}
 	}
