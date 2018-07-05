@@ -151,6 +151,7 @@ class Tracker extends React.Component {
 			app_id: this.props.tracker.id,
 			cat_id: this.props.cat_id,
 			blocked,
+			smartBlock: this.props.smartBlock,
 		});
 
 		this.props.actions.showNotification({
