@@ -37,6 +37,7 @@ class Globals {
 		this.JUST_INSTALLED = false;
 		this.JUST_UPGRADED = false;
 		this.JUST_UPGRADED_FROM_7 = false;
+		this.JUST_UPGRADED_FROM_8_1 = false;
 		this.HOTFIX = false;
 		this.LET_REDIRECTS_THROUGH = false;
 		this.C2P_LOADED = false;
