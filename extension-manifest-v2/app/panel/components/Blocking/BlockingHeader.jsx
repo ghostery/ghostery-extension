@@ -55,7 +55,7 @@ class BlockingHeader extends React.Component {
 
 		if (typeof this.props.actions.updateTrackerCounts === 'function') {
 			// if we're on GlobalSettings, we don't need to run this function
-			updateSummaryBlockingCount(this.props.categories, this.props.actions.updateTrackerCounts);
+			updateSummaryBlockingCount(this.props.categories, this.props.smartBlock, this.props.actions.updateTrackerCounts);
 		}
 	}
 	/**
@@ -118,11 +118,12 @@ class BlockingHeader extends React.Component {
 
 				this.props.actions.updateBlockAllTrackers({
 					allBlocked,
+					smartBlock: this.props.smartBlock,
 				});
 
 				if (typeof this.props.actions.updateTrackerCounts === 'function') {
 					// if we're on GlobalSettings, we don't need to run this function
-					updateSummaryBlockingCount(this.props.categories, this.props.actions.updateTrackerCounts);
+					updateSummaryBlockingCount(this.props.categories, this.props.smartBlock, this.props.actions.updateTrackerCounts);
 				}
 
 				this.props.actions.showNotification({
