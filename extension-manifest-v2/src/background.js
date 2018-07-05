@@ -1441,14 +1441,14 @@ function initializeGhosteryModules() {
 				// We introduce these new features initially disabled.
 				conf.enable_ad_block = false;
 				conf.enable_anti_tracking = false;
-				// Offers however will be enabled unconditionally
+				// Enable Offers except on Edge or Cliqz
 				conf.enable_offers = !((IS_EDGE || IS_CLIQZ));
 			} else if (globals.JUST_UPGRADED_FROM_8_1) {
 				// These users already had human web, adblocker and antitracking, so we respect their choice
 				conf.enable_ad_block = IS_CLIQZ ? false : !adblocker.isDisabled;
 				conf.enable_anti_tracking = IS_CLIQZ ? false : !antitracking.isDisabled;
 				conf.enable_human_web = (IS_EDGE || IS_CLIQZ) ? false : !humanweb.isDisabled;
-				// These users did not have Offers, so we unconditionally enable them on upgrade.
+				// These users did not have Offers, so we enable them on upgrade.
 				conf.enable_offers = !(IS_EDGE || IS_CLIQZ);
 			} else {
 				// Otherwise we respect browser-core default settings
