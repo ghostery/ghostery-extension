@@ -273,7 +273,7 @@ class Summary extends React.Component {
 	*/
 	render() {
 		const { abPause } = this.state;
-		const { is_expert, is_expanded } = this.props;
+		const { is_expert, is_expanded, paused_blocking } = this.props;
 		const showCondensed = is_expert && is_expanded;
 
 		const summaryClassNames = ClassNames('', {
@@ -284,6 +284,7 @@ class Summary extends React.Component {
 
 		const blockedTrackersClassNames = ClassNames('blocked-trackers', {
 			clickable: is_expert,
+			paused: paused_blocking,
 		});
 		const pageLoadClassNames = ClassNames('page-load', {
 			fast: +this.state.trackerLatencyTotal < 5,
