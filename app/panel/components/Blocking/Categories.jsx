@@ -43,6 +43,7 @@ class Categories extends React.Component {
 				sitePolicy={this.props.sitePolicy}
 				paused_blocking={this.props.paused_blocking}
 				language={this.props.language}
+				smartBlock={this.props.smartBlock}
 			/>
 		));
 		return <div className="scroll-content">{ categoryList }</div>;
