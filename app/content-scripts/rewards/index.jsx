@@ -48,7 +48,20 @@ class RewardsApp {
 		this.mainView = null;
 		this.rewardsApp.id = 'ghostery-rewards-app';
 		this.rewardsApp.className = 'show';
+
 		this.handleMessages = this.handleMessages.bind(this);
+		this.sendSignal = this.sendSignal.bind(this);
+		this.messageBackground = this.messageBackground.bind(this);
+		this.removeFocusListener = this.removeFocusListener.bind(this);
+		this.focusListener = this.focusListener.bind(this);
+		this.addRewardSeenListener = this.addRewardSeenListener.bind(this);
+
+		this.actions = {
+			sendSignal: this.sendSignal,
+			messageBackground: this.messageBackground,
+			removeFocusListener: this.removeFocusListener,
+			addRewardSeenListener: this.addRewardSeenListener
+		};
 
 		this.init();
 	}
@@ -77,7 +90,7 @@ class RewardsApp {
 
 	renderReact() {
 		const MainView = this.mainView;
-		ReactDOM.render(<MainView reward={this.reward} conf={this.conf} />, this.rewardsApp);
+		ReactDOM.render(<MainView reward={this.reward} conf={this.conf} actions={this.actions} />, this.rewardsApp);
 	}
 
 	renderShadow() {
@@ -88,9 +101,25 @@ class RewardsApp {
 			<Router history={history}>
 				<ShadowDOM include={[chrome.extension.getURL('dist/css/rewards_styles.css')]}>
 					<div id="ghostery-shadow-root">
-						<Route exact path="/" render={() => <HotDog reward={props.reward} port={this.port} />} />
-						<Route path="/hotdog" render={() => <HotDog reward={props.reward} port={this.port} />} />
-						<Route path="/offercard" render={() => <OfferCard reward={props.reward} conf={props.conf} port={this.port} />} />
+						<Route
+							exact
+							path="/"
+							render={
+								() => <HotDog reward={props.reward} port={this.port} actions={props.actions} />
+							}
+						/>
+						<Route
+							path="/hotdog"
+							render={
+								() => <HotDog reward={props.reward} port={this.port} actions={props.actions} />
+							}
+						/>
+						<Route
+							path="/offercard"
+							render={
+								() => <OfferCard reward={props.reward} conf={props.conf} port={this.port} actions={props.actions} />
+							}
+						/>
 					</div>
 				</ShadowDOM>
 			</Router>
@@ -117,9 +146,25 @@ class RewardsApp {
 			this.mainView = props => (
 				<Router history={history}>
 					<div>
-						<Route exact path="/" render={() => <HotDog reward={props.reward} port={this.port} />} />
-						<Route path="/hotdog" render={() => <HotDog reward={props.reward} port={this.port} />} />
-						<Route path="/offercard" render={() => <OfferCard reward={props.reward} conf={props.conf} port={this.port} />} />
+						<Route
+							exact
+							path="/"
+							render={
+								() => <HotDog reward={props.reward} port={this.port} actions={props.actions} />
+							}
+						/>
+						<Route
+							path="/hotdog"
+							render={
+								() => <HotDog reward={props.reward} port={this.port} actions={props.actions} />
+							}
+						/>
+						<Route
+							path="/offercard"
+							render={
+								() => <OfferCard reward={props.reward} conf={props.conf} port={this.port} actions={props.actions} />
+							}
+						/>
 					</div>
 				</Router>
 			);
@@ -151,6 +196,43 @@ class RewardsApp {
 		if (document.readyState === 'complete' || document.readyState === 'interactive') {
 			this.renderReact();
 		}
+	}
+
+	focusListener() {
+		this.sendSignal('offer_shown');
+	}
+
+	addRewardSeenListener() {
+		window.addEventListener('focus', this.focusListener);
+	}
+
+	removeFocusListener() {
+		window.removeEventListener('focus', this.focusListener);
+	}
+
+	messageBackground(name, message) {
+		if (this.port &&
+			(message.actionId !== 'rewards_off') &&
+			(message.actionId !== 'rewards_on')) {
+			this.port.postMessage({
+				name,
+				message
+			});
+		} else {
+			sendMessage(name, message);
+		}
+	}
+
+	sendSignal(actionId, offerSignal = true) {
+		// Cliqz metrics
+		const offerId = offerSignal ? this.reward.offer_id : null;
+		const message = {
+			offerId,
+			actionId,
+			origin: 'rewards-hotdog-card',
+			type: !offerSignal ? 'action-signal' : 'offer-action-signal',
+		};
+		this.messageBackground('rewardSignal', message);
 	}
 }
 

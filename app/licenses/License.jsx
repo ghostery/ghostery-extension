@@ -43,7 +43,7 @@ class License extends React.Component {
 		return (
 			<div className="license">
 				<div>{`${t('license_module')}: ${license.name}`}</div>
-				<a href={license.repository} target="_blank"><span style={{ color: '#4A4A4A' }}>{`${t('license_repository')}:`}</span>{` ${license.repository || t('license_information_missing')}`}</a>
+				<a href={license.repository} target="_blank" rel="noopener noreferrer"><span style={{ color: '#4A4A4A' }}>{`${t('license_repository')}:`}</span>{` ${license.repository || t('license_information_missing')}`}</a>
 				<div>{`${t('license_type')}: ${license.licenses}`}</div>
 				<div>{`${t('license_publisher')}: ${license.publisher || t('license_unknown')}`}</div>
 				<div>{`${t('license_url')}: ${license.url || t('license_unknown')}`}</div>

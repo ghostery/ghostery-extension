@@ -12,6 +12,7 @@
 	"version_name": "8.2.0",
 	"default_locale": "en",
 	"description": "__MSG_short_description__",
+	"debug": true,
 	"icons": {
 		"16": "app/images/icon16.png",
 		"48": "app/images/icon48.png",
@@ -93,10 +94,5 @@
 	"web_accessible_resources": [
 		"app/images/*",
 		"dist/css/rewards_styles.css"
-	],
-	"browser_specific_settings": {
-		"edge": {
-			"browser_action_next_to_addressbar": true
-		}
-	}
+	]
 }

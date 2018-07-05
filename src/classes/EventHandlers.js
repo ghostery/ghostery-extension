@@ -158,7 +158,7 @@ class EventHandlers {
 			// we look for a cliqz offer which does not have urls specified (meaning good for any site)
 			// All Cliqz offers have Dismiss === 1, so the found one is injected and removed.
 			// Lastly we look for non-cliqz offers (classic CMPs)
-			if (!rewards.currentOffer && cmp.CMP_DATA.length !== 0) {
+			if (cmp.CMP_DATA.length !== 0) {
 				const CMPS = cmp.CMP_DATA;
 				const numOffers = CMPS.length;
 				let cliqzOffer;
@@ -458,8 +458,8 @@ class EventHandlers {
 
 	/**
 	 * Handler for webRequest.onBeforeRedirect event.
-	 * Fires when a redirect is about to be executed. Calculate latency,
-	 * send GR if enabled and increase requests count.
+	 * Fires when a redirect is about to be executed. Calculate latency
+	 * and increase requests count.
 	 *
 	 * @param  {Object} details 	event data
 	 */
@@ -477,8 +477,7 @@ class EventHandlers {
 
 	/**
 	 * Handler for webRequest.onCompleted event.
-	 * Called when a request has been processed successfully. Calculate latency
-	 * and send GR if enabled.
+	 * Called when a request has been processed successfully. Calculate latency.
 	 *
 	 * @param  {Object} details 	event data
 	 */
@@ -500,7 +499,7 @@ class EventHandlers {
 	/**
 	 * Handler for webRequest.onErrorOccurred event.
 	 * Called when a request could not be processed successfully.
-	 * Set latency = -1 and send GR if enabled.
+	 * Set latency = -1.
 	 *
 	 * @param  {Object} details 	event data
 	 */

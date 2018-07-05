@@ -52,6 +52,11 @@ class BlockingHeader extends React.Component {
 		if (this.props.categories) {
 			this.updateBlockAll(this.props.categories);
 		}
+
+		if (typeof this.props.actions.updateTrackerCounts === 'function') {
+			// if we're on GlobalSettings, we don't need to run this function
+			updateSummaryBlockingCount(this.props.categories, this.props.actions.updateTrackerCounts);
+		}
 	}
 	/**
 	 * Lifecycle event

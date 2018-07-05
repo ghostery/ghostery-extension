@@ -69,6 +69,7 @@ const humanweb = cliqz.modules['human-web'];
 const { adblocker, antitracking, hpn } = cliqz.modules;
 const messageCenter = cliqz.modules['message-center'];
 const offers = cliqz.modules['offers-v2'];
+let OFFERS_ENABLE_SIGNAL;
 
 /**
  * Enable or disable specified module.
@@ -421,30 +422,46 @@ function handleBlockedRedirect(name, message, tab_id, callback) {
  * @param  {function} 	callback 	function to call (at most once) when you have a response
  */
 function handleRewards(name, message, tab_id, callback) {
-	switch (name) {
-		case 'rewardSignal':
-			rewards.sendSignal(message);
-			break;
-		case 'rewardSeen':
-			rewards.markRewardRead(message.offerId);
-			button.update();
-			break;
-		case 'deleteReward':
-			rewards.markRewardRead(message.offerId);
-			rewards.deleteReward(message.offerId);
-			button.update();
-			break;
-		case 'rewardsDisabled':
-			conf.enable_offers = false;
-			break;
-		case 'rewardsPromptAccepted':
-			conf.rewards_accepted = true;
-			break;
-		case 'ping':
-			metrics.ping(message);
-			break;
-		default:
-			break;
+	if (!offers.isEnabled) {
+		switch (name) {
+			case 'rewardSignal':
+				if (message.actionId === 'rewards_on') {
+					OFFERS_ENABLE_SIGNAL = message;
+					conf.enable_offers = true;
+				}
+				break;
+			default:
+				break;
+		}
+	} else {
+		switch (name) {
+			case 'rewardSignal':
+				rewards.sendSignal(message);
+				if (message.actionId === 'rewards_off') {
+					conf.enable_offers = false;
+				}
+				break;
+			case 'rewardSeen':
+				rewards.markRewardRead(message.offerId);
+				button.update();
+				break;
+			case 'deleteReward':
+				rewards.markRewardRead(message.offerId);
+				rewards.deleteReward(message.offerId);
+				button.update();
+				break;
+			case 'rewardsPromptAccepted':
+				conf.rewards_accepted = true;
+				break;
+			case 'ping':
+				metrics.ping(message);
+				break;
+			case 'removeDisconnectListener':
+				rewards.panelPort.onDisconnect.removeListener(rewards.panelHubClosedListener);
+				break;
+			default:
+				break;
+		}
 	}
 }
 
@@ -592,7 +609,10 @@ function onMessageHandler(request, sender, callback) {
 	if (name === 'disableShowAlert') {
 		conf.show_alert = false;
 	} else if (name === 'updateDataCollection') {
-		if (!IS_CLIQZ && !IS_EDGE) conf.enable_human_web = message && true;
+		if (!IS_CLIQZ && !IS_EDGE) {
+			conf.enable_human_web = message && true;
+			conf.enable_offers = message && true;
+		}
 		conf.enable_metrics = message && true;
 	} else if (name === 'updateDisplayMode') {
 		conf.is_expert = message;
@@ -849,6 +869,14 @@ function initializeDispatcher() {
 		button.update();
 		if (!IS_EDGE && !IS_CLIQZ) {
 			if (!enableOffers) {
+				const actions = cliqz &&
+				cliqz.modules['offers-v2'] &&
+				cliqz.modules['offers-v2'].background &&
+				cliqz.modules['offers-v2'].background.actions;
+				if (actions) {
+					actions.flushSignals();
+				}
+				OFFERS_ENABLE_SIGNAL = undefined;
 				registerWithOffers(offers, enableOffers);
 			}
 			setCliqzModuleEnabled(offers, enableOffers);
@@ -1062,7 +1090,19 @@ adblocker.on('enabled', () => {
 offers.on('enabled', () => {
 	offers.isReady().then(() => {
 		log('IN OFFERS ON ENABLED', offers, messageCenter);
+		if (OFFERS_ENABLE_SIGNAL) {
+			rewards.sendSignal(OFFERS_ENABLE_SIGNAL);
 
+			const actions = cliqz &&
+			cliqz.modules['offers-v2'] &&
+			cliqz.modules['offers-v2'].background &&
+			cliqz.modules['offers-v2'].background.actions;
+			if (actions) {
+				actions.flushSignals();
+			}
+
+			OFFERS_ENABLE_SIGNAL = undefined;
+		}
 		if (DEBUG) {
 			offers.action('setConfiguration', {
 				config_location: 'de',
@@ -1267,6 +1307,14 @@ function initializeEventListeners() {
 
 	// Fired when a message is sent from either an extension process (by runtime.sendMessage) or a content script (by tabs.sendMessage).
 	onMessage.addListener(onMessageHandler);
+
+	// Fired when panel is disconnected
+	chrome.runtime.onConnect.addListener((port) => {
+		if (port && port.name === 'rewardsPanelPort') {
+			rewards.panelPort = port;
+			rewards.panelPort.onDisconnect.addListener(rewards.panelHubClosedListener);
+		}
+	});
 }
 
 /**
@@ -1311,6 +1359,11 @@ function initializeVersioning() {
 				globals.JUST_UPGRADED_FROM_7 = true;
 				conf.is_expert = true;
 				conf.enable_smart_block = false;
+			}
+
+			// Are we upgrading from Ghostery 8 prior to 8.2?
+			if ((+prevVersion[0] === 8) && (prevVersion[1] < 2)) {
+				globals.JUST_UPGRADED_FROM_8_1 = true;
 			}
 
 			// Establish version history
@@ -1381,13 +1434,24 @@ function initializeGhosteryModules() {
 		Promise.all([
 			initialiseWebRequestPipeline(),
 		]).then(() => {
-			// Upgraded users shouldn't get the anti-suite
 			if (globals.JUST_UPGRADED_FROM_7) {
+				// These users had human web already, so we respect their choice
+				conf.enable_human_web = (IS_EDGE || IS_CLIQZ) ? false : !humanweb.isDisabled;
+				// These users did not have adblocking and antitracking.
+				// We introduce these new features initially disabled.
 				conf.enable_ad_block = false;
 				conf.enable_anti_tracking = false;
-				conf.enable_offers = false;
-				conf.enable_human_web = (IS_EDGE || IS_CLIQZ) ? false : conf.enable_human_web;
+				// Enable Offers except on Edge or Cliqz
+				conf.enable_offers = !((IS_EDGE || IS_CLIQZ));
+			} else if (globals.JUST_UPGRADED_FROM_8_1) {
+				// These users already had human web, adblocker and antitracking, so we respect their choice
+				conf.enable_ad_block = IS_CLIQZ ? false : !adblocker.isDisabled;
+				conf.enable_anti_tracking = IS_CLIQZ ? false : !antitracking.isDisabled;
+				conf.enable_human_web = (IS_EDGE || IS_CLIQZ) ? false : !humanweb.isDisabled;
+				// These users did not have Offers, so we enable them on upgrade.
+				conf.enable_offers = !(IS_EDGE || IS_CLIQZ);
 			} else {
+				// Otherwise we respect browser-core default settings
 				conf.enable_ad_block = IS_CLIQZ ? false : !adblocker.isDisabled;
 				conf.enable_anti_tracking = IS_CLIQZ ? false : !antitracking.isDisabled;
 				conf.enable_human_web = (IS_EDGE || IS_CLIQZ) ? false : !humanweb.isDisabled;
