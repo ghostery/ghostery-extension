@@ -35,7 +35,7 @@ import globals from './Globals';
 import tabInfo from './TabInfo';
 
 const { BROWSER_INFO } = globals;
-const LATENCY_ISSUE_THRESHOLD = (BROWSER_INFO.name === 'firefox') ? 2000 : 1000; // Temporary: bump up the latency threshold for Firefox only
+const LATENCY_ISSUE_THRESHOLD = 1000;
 /**
  * Class for handling detected trackers.
  * @memberOf  BackgroundClasses
