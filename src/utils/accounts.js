@@ -60,21 +60,18 @@ const SYNC_SET = new Set(globals.SYNC_ARRAY);
  * @return {Promise} 				login info object
  */
 export function setLoginInfo(user) {
-	console.log('background setLoginInfo', user);
-	return new Promise((resolve, reject) => {
-		const {
-			email, emailValidated, id, firstName, lastName
-		} = user;
-		conf.login_info = {
-			logged_in: true,
-			user_id: id,
-			is_validated: emailValidated,
-			email,
-			first_name: firstName,
-			last_name: lastName,
-		};
-		resolve(conf.login_info);
-	});
+	const {
+		email, emailValidated, id, firstName, lastName, loggedIn
+	} = user;
+	conf.login_info = {
+		logged_in: loggedIn || false,
+		user_id: id,
+		is_validated: emailValidated,
+		email,
+		first_name: firstName,
+		last_name: lastName,
+	};
+	return Promise.resolve(conf.login_info);
 }
 
 export function getLoginCookie() {
@@ -417,7 +414,6 @@ function _logOut() {
  * @return {Promise} 	user settings json or error
  */
 export function setConfUserSettings(settings) {
-	console.log(settings);
 	// TODO settings are in settings.settingsJson
 	// need to set those to `settings`
 	try {
@@ -439,7 +435,7 @@ export function setConfUserSettings(settings) {
 	SYNC_SET.forEach((key) => {
 		if (settings[key] !== undefined &&
 			!_.isEqual(conf[key], settings[key])) {
-				conf[key] = settings[key];
+			conf[key] = settings[key];
 		}
 	});
 	return settings;
