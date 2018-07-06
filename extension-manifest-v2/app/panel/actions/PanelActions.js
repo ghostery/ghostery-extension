@@ -26,7 +26,7 @@ import {
 } from '../constants/constants';
 import { sendMessageInPromise } from '../utils/msg';
 import { doXHR } from '../utils/utils';
-import { get } from '../utils/api';
+import { get, logout } from '../utils/api';
 import globals from '../../../src/classes/Globals';
 import { decodeJwt, log } from '../../../src/utils/common';
 
@@ -123,14 +123,14 @@ export function toggleExpert() {
  */
 
 export function pullUserSettings(user_id) {
-	return get('settings', user_id, 'settings').then(data => {
+	return get('settings', user_id, 'settings').then((data) => {
 		const settings = build(normalize(data), 'settings', user_id);
 		return sendMessageInPromise('setConfUserSettings', settings)
-		.then(() => {
-		})
-		.catch(error => {
-			log('PanelActions pullUserSettings error', error);
-		});
+			.then(() => {
+			})
+			.catch((error) => {
+				log('PanelActions pullUserSettings error', error);
+			});
 	});
 }
 
@@ -147,23 +147,21 @@ export function fetchUser(user_id) {
 			.then((data) => {
 			// normalize user data with jsonapi
 				const user = build(normalize(data), 'users', user_id);
+				user.loggedIn = true;
 				// store user info in background conf
 				return sendMessageInPromise('setLoginInfo', user)
 					.then(() => {
 						// TODO pullSettings
-						pullUserSettings(user_id);
+						// pullUserSettings(user_id);
 						dispatch({
 							type: LOGIN_DATA_SUCCESS,
 							data: user,
 						});
 						return user;
-					})
-					.catch((e) => {
-						console.error(e);
 					});
 			})
 			.catch((errors) => {
-				console.log(errors);
+				log(errors);
 				dispatch({
 					type: SHOW_NOTIFICATION,
 					data: {
@@ -309,14 +307,16 @@ export function userLogin(email, password) {
  */
 export function userLogout() {
 	return function (dispatch) {
-		return sendMessageInPromise('setLoginInfo', {}).then((data) => {
-			dispatch({
-				type: LOGOUT,
-				data,
+		return logout()
+			.then(() => sendMessageInPromise('setLoginInfo', {}).then((data) => {
+				dispatch({
+					type: LOGOUT,
+					data,
+				});
+			}))
+			.catch((err) => {
+				log('PanelActions userLogout returned with an error', err);
 			});
-		}).catch((err) => {
-			log('PanelActions userLogout returned with an error', err);
-		});
 	};
 }
 

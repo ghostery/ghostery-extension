@@ -142,3 +142,14 @@ export const update = function (type, data) {
 export const remove = function (type, id) {
 	return _sendAuthenticatedRequest('DELETE', `/api/v2/${type}/${id}`);
 };
+
+export const logout = function () {
+	return getCsrfCookie()
+		.then(cookie => fetch(`${Config.auth_server.host}/api/v2/logout`, { // eslint-disable-line no-undef
+			method: 'POST',
+			credentials: 'include',
+			headers: {
+				'X-CSRF-Token': cookie.value,
+			},
+		}));
+};

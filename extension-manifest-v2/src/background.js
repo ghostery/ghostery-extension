@@ -729,13 +729,13 @@ function onMessageHandler(request, sender, callback) {
 		});
 		return true;
 	} else if (name === 'setLoginInfo') {
-		console.log('setLoginInfo message');
 		accounts.setLoginInfo(message).then((result) => {
 			callback(result);
 		}).catch((err) => {
 			callback();
 			log('SET LOGIN INFO ERROR');
 		});
+		return true;
 	} else if (name === 'update_database') {
 		checkLibraryVersion().then((result) => {
 			callback(result);
@@ -845,7 +845,6 @@ function initializeDispatcher() {
 		utils.flushChromeMemoryCache();
 	});
 	dispatcher.on('conf.save.login_info', (loginInfo) => {
-		console.log('conf.save.login_info', loginInfo);
 		if (loginInfo.logged_in) {
 			accounts.pullUserSettings();
 		}
