@@ -67,6 +67,8 @@ export default (state = initialState, action) => {
 					allowed: action.data.num_total - action.data.num_blocked,
 					ssBlocked: action.data.num_ss_blocked,
 					ssAllowed: action.data.num_ss_allowed,
+					sbBlocked: action.data.num_sb_blocked,
+					sbAllowed: action.data.num_sb_allowed,
 				},
 			});
 		}
