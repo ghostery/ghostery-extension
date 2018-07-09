@@ -68,7 +68,7 @@ class Blocking extends React.Component {
 		// Update the summary blocking count whenever the blocking component updated.
 		// This will also show pending blocking changes if the panel is re-opened
 		// before a page refresh
-		updateSummaryBlockingCount(this.props.categories, this.props.actions.updateTrackerCounts);
+		updateSummaryBlockingCount(this.props.categories, this.props.smartBlock, this.props.actions.updateTrackerCounts);
 	}
 	/**
 	* Filter trackers by category, or reset filters. Trigger action.
@@ -253,6 +253,7 @@ class Blocking extends React.Component {
 					sitePolicy={this.props.sitePolicy}
 					paused_blocking={this.props.paused_blocking}
 					selected_app_ids={this.props.selected_app_ids}
+					smartBlock={this.props.smartBlock}
 				/>
 				{(this.state.disableBlocking && this.props.is_expanded) ?
 					<NotScanned />
@@ -266,6 +267,7 @@ class Blocking extends React.Component {
 								sitePolicy={this.props.sitePolicy}
 								paused_blocking={this.props.paused_blocking}
 								language={this.props.language}
+								smartBlock={this.props.smartBlock}
 							/>
 						}
 					</div>

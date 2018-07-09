@@ -24,18 +24,19 @@ class ClickOutside extends React.Component {
 		// event bindings
 		this.getContainer = this.getContainer.bind(this);
 		this.clickHandler = this.clickHandler.bind(this);
+		this.listenerEl = this.props.offsetParent || document;
 	}
 	/**
 	 * Lifecycle event. Set 'click' event listener
 	 */
 	componentDidMount() {
-		document.addEventListener('click', this.clickHandler, true);
+		this.listenerEl.addEventListener('click', this.clickHandler, true);
 	}
 	/**
 	 * Lifecycle event. Remove 'click' event listener
 	 */
 	componentWillUnmount() {
-		document.removeEventListener('click', this.clickHandler, true);
+		this.listenerEl.removeEventListener('click', this.clickHandler, true);
 	}
 	/**
 	 * Set designated component which has ref attribute
@@ -51,10 +52,13 @@ class ClickOutside extends React.Component {
 	 */
 	clickHandler(e) {
 		const el = this.container;
-		if (!el.contains(e.target)
-			&& !el.contains(e.path[0])
+		const ePath = e.path || (e.composedPath && e.composedPath());
+		if (
+			!el.contains(e.target)
 			&& e.target !== this.props.excludeEl
-			&& e.path[0] !== this.props.excludeEl) {
+			&& !el.contains(ePath[0])
+			&& ePath[0] !== this.props.excludeEl
+		) {
 			this.props.onClickOutside(e);
 		}
 	}

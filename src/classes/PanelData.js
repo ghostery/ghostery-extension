@@ -416,6 +416,8 @@ class PanelData {
 			const blocked = selectedAppIds.hasOwnProperty(tracker.id);
 			const ss_allowed = pageUnblocks.includes(+tracker.id);
 			const ss_blocked = pageBlocks.includes(+tracker.id);
+			const sb_blocked = smartBlock.blocked.hasOwnProperty(`${tracker.id}`);
+			const sb_allowed = smartBlock.unblocked.hasOwnProperty(`${tracker.id}`);
 
 			if (t(`category_${category}`) === `category_${category}`) {
 				category = 'uncategorized';
@@ -423,7 +425,7 @@ class PanelData {
 
 			if (categories.hasOwnProperty(category)) {
 				categories[category].num_total++;
-				if (blocked || ss_blocked) {
+				if (ss_blocked || sb_blocked || (blocked && !ss_allowed && !sb_allowed)) {
 					categories[category].num_blocked++;
 				}
 			} else {
@@ -434,7 +436,7 @@ class PanelData {
 					img_name: (category === 'advertising') ? 'adv' : // Because AdBlock blocks images with 'advertising' in the name.
 						(category === 'social_media') ? 'smed' : category, // Because AdBlock blocks images with 'social' in the name.
 					num_total: 1,
-					num_blocked: (blocked || ss_blocked) ? 1 : 0,
+					num_blocked: (ss_blocked || sb_blocked || (blocked && !ss_allowed && !sb_allowed)) ? 1 : 0,
 					trackers: [],
 					expanded: this._confData.get('expand_all_trackers')
 				};
