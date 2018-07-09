@@ -119,6 +119,7 @@ class Category extends React.Component {
 		}
 
 		this.props.actions.updateCategoryBlocked({
+			smartBlock: this.props.smartBlock,
 			category: this.props.category.id,
 			blocked,
 		});
@@ -232,6 +233,7 @@ class Category extends React.Component {
 						sitePolicy={this.props.sitePolicy}
 						paused_blocking={this.props.paused_blocking}
 						language={this.props.language}
+						smartBlock={this.props.smartBlock}
 					/>
 				}
 			</div>

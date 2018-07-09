@@ -28,6 +28,9 @@ class RewardListItem extends React.Component {
 		// Event Bindings
 		this.handleClick = this.handleClick.bind(this);
 		this.clickCloseButton = this.clickCloseButton.bind(this);
+
+		// Send Signal
+		this.props.actions.sendSignal('offer_shown', this.props.id);
 	}
 
 	/**
@@ -43,7 +46,6 @@ class RewardListItem extends React.Component {
 				this.props.actions.sendSignal('offer_click_specific_new', id);
 			}
 			this.props.actions.sendSignal('offer_click_specific', id);
-			this.props.actions.sendSignal('offer_shown', id);
 			this.props.actions.sendSignal('offer_dsp_session', id);
 		}
 	}
@@ -55,6 +57,7 @@ class RewardListItem extends React.Component {
 	clickCloseButton(event) {
 		// Prevent the event from propagating and linking to the Reward Detail
 		event.preventDefault();
+		event.stopPropagation();
 
 		const { id } = this.props;
 		this.props.actions.removeOffer(id);

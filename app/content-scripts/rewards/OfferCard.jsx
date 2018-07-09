@@ -42,6 +42,7 @@ class OfferCard extends Component {
 
 		this.iframeEl = window.parent.document.getElementById('ghostery-iframe-container');
 		if (this.iframeEl) {
+			this.iframeContentDocument = this.iframeEl.contentDocument;
 			this.iframeEl.classList = '';
 			this.iframeEl.classList.add('offer-card');
 		}
@@ -237,7 +238,7 @@ class OfferCard extends Component {
 									/>
 									{ this.state.showSettings &&
 										<div className="rewards-settings-container">
-											<ClickOutside excludeEl={this.kebabRef} onClickOutside={this.toggleSettings}>
+											<ClickOutside excludeEl={this.kebabRef} onClickOutside={this.toggleSettings} offsetParent={this.iframeContentDocument}>
 												<Settings signal={() => { this.props.actions.sendSignal('about_ghostery_rewards', false); }} disable={this.disableRewardsNotification} />
 											</ClickOutside>
 										</div>
