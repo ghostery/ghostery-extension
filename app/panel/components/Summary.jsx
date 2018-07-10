@@ -275,6 +275,8 @@ class Summary extends React.Component {
 		const { abPause } = this.state;
 		const { is_expert, is_expanded, paused_blocking } = this.props;
 		const showCondensed = is_expert && is_expanded;
+		const antiTrackUnsafe = this.props.antiTracking && this.props.antiTracking.totalUnsafeCount || 0;
+		const adBlockBlocked = this.props.adBlock && this.props.adBlock.totalCount || 0;
 
 		const summaryClassNames = ClassNames('', {
 			expert: is_expert,
@@ -327,7 +329,7 @@ class Summary extends React.Component {
 							categories={this.props.categories}
 							renderRedscale={this.props.sitePolicy === 1}
 							renderGreyscale={this.props.paused_blocking}
-							totalCount={this.props.trackerCounts.allowed + this.props.trackerCounts.blocked || 0}
+							totalCount={this.props.trackerCounts.allowed + this.props.trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
 							ghosteryFeatureSelect={this.props.sitePolicy}
 							isSmall={is_expert}
 							clickDonut={this.clickDonut}
@@ -351,7 +353,7 @@ class Summary extends React.Component {
 						<div className={blockedTrackersClassNames} onClick={this.clickTrackersBlocked}>
 							<span className="text">{t('trackers_blocked')} </span>
 							<span className="value">
-								{this.props.trackerCounts.blocked || 0}
+								{this.props.trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
 							</span>
 						</div>
 						<div className={pageLoadClassNames}>
