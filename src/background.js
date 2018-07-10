@@ -671,9 +671,6 @@ function onMessageHandler(request, sender, callback) {
 				callback(data);
 			});
 		}
-		accounts.pullUserSettings().catch((err) => {
-			log('Error fetching user setting via getPanelData:', err);
-		});
 		return true;
 	} else if (name === 'setPanelData') {
 		panelData.set(message);
@@ -845,9 +842,6 @@ function initializeDispatcher() {
 		utils.flushChromeMemoryCache();
 	});
 	dispatcher.on('conf.save.login_info', (loginInfo) => {
-		if (loginInfo.logged_in) {
-			accounts.pullUserSettings();
-		}
 		// update PanelData
 		panelData.init();
 	});
