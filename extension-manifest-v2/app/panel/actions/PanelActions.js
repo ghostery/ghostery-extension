@@ -14,7 +14,7 @@ import 'whatwg-fetch';
 import normalize from 'json-api-normalizer';
 import build from 'redux-object';
 import {
-	GET_PANEL_DATA, GET_SUMMARY_DATA, GET_BLOCKING_DATA,
+	GET_SETTINGS_DATA, GET_PANEL_DATA, GET_SUMMARY_DATA, GET_BLOCKING_DATA,
 	TOGGLE_CLIQZ_FEATURE,
 	SHOW_NOTIFICATION,
 	CLOSE_NOTIFICATION,
@@ -127,7 +127,10 @@ export function pullUserSettings(user_id) {
 		const settings = build(normalize(data), 'settings', user_id);
 		return sendMessageInPromise('setConfUserSettings', settings)
 			.then(() => {
-				// TODO update panel with pulled settings
+				dispatch({
+					type: GET_SETTINGS_DATA,
+					data: { settingsData: settings.settingsJson }
+				});
 			})
 			.catch((error) => {
 				log('PanelActions pullUserSettings error', error);
