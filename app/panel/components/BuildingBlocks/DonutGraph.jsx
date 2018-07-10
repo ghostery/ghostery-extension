@@ -15,6 +15,7 @@ import React, { Component } from 'react';
 import ClassNames from 'classnames';
 import * as d3 from 'd3';
 import { scaleLinear } from 'd3-scale';
+import Tooltip from '../Tooltip';
 
 /**
  * @class Generate donut graph. Used to display tracker data in the Summary View.
@@ -271,12 +272,13 @@ class DonutGraph extends React.Component {
 				</div>
 				<div className="graph-ref" ref={(node) => { this.node = node; }} />
 				<div className="graph-text clickable" onClick={this.clickGraphText}>
-					<div className="graph-text-count">{totalCount}</div>
-					<div className="graph-text-trackers">
-						{(totalCount === 1) ? t('tracker_signular') : t('tracker_plural')}
-						<div className="show-on-big">
-							{t('tracker_found')}
-						</div>
+					<div className="graph-text-count g-tooltip">
+						{totalCount}
+						<Tooltip
+							delay="0"
+							body={t('panel_tracker_total_tooltip')}
+							position="right"
+						/>
 					</div>
 				</div>
 			</div>

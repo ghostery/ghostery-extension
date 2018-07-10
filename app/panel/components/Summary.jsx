@@ -13,6 +13,7 @@
 
 import React, { Component } from 'react';
 import ClassNames from 'classnames';
+import Tooltip from './Tooltip';
 import { sendMessage } from '../utils/msg';
 import globals from '../../../src/classes/Globals';
 import {
@@ -338,7 +339,13 @@ class Summary extends React.Component {
 				)}
 				{!this.state.disableBlocking && showCondensed && (
 					<div className="total-tracker-count clickable" onClick={this.clickTrackersCount}>
-						{this.props.trackerCounts.allowed + this.props.trackerCounts.blocked || 0}
+						<span className="summary-total-tracker-count g-tooltip">
+							{this.props.trackerCounts.allowed + this.props.trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
+							<Tooltip
+								header={t('panel_tracker_total_tooltip')}
+								position="right"
+							/>
+						</span>
 					</div>
 				)}
 
