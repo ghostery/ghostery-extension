@@ -1,3 +1,4 @@
+
 /**
  * User Accounts
  *
@@ -129,40 +130,37 @@ export function buildUserSettings() {
 }
 
 /**
- * Post user settings to Consumer API.
- * @memberOf BackgroundUtils
+ * Clears login info in prefs and returns empty login data
+ * @private
  *
- * @param  {Object} settings 	settings object returned by getSettings()
- *
- * @return {Promise}
+ * @return {Object} 			cleared login_info object
  */
-export function pushUserSettings(settings) {
-	// @TODO
+function _logOut() {
+	conf.login_info = {
+		logged_in: false,
+		email: '',
+		user_token: '',
+		decoded_user_token: {},
+		is_validated: false
+	};
+
+	_deleteAuthCookie();
+	return conf.login_info;
 }
 
 /**
- * Trigger email validation email for a given user.
- * @memberOf BackgroundUtils
- *
- * @return {Promise} 		object indicating success or failure
- */
-export function sendVerificationEmail() {
-	// @TODO
-}
-
-/**
- * set user settings from ConsumerAPI
+ * GET user settings from ConsumerAPI
  * @private
  *
  * @return {Promise} 	user settings json or error
  */
 export function setConfUserSettings(settings) {
-	if (typeof settings !== 'object') {
-		try {
-			settings = settings ? JSON.parse(settings) : {};
-		} catch (e) {
-			return Promise.reject('Corrupted settings');
-		}
+	// TODO settings are in settings.settingsJson
+	// need to set those to `settings`
+	try {
+		settings = settings ? JSON.parse(settings) : {};
+	} catch (e) {
+		return Promise.reject('Corrupted settings');
 	}
 	log('SET USER SETTINGS', settings);
 	if (IS_EDGE) {
@@ -183,14 +181,29 @@ export function setConfUserSettings(settings) {
 	});
 	return settings;
 }
+
 /**
- * POST user settings to ConsumerAPI
+ * Deletes AUTH cookie
  * @private
- *
- * @param {Object} user settings
- *
- * @return {Promise} 	no data, or error
  */
-function _pushUserSettings(settings) {
-	// @TODO
+function _deleteAuthCookie() {
+	const urls = [
+		'https://extension.ghostery.com',
+		'https://extension.ghosterystage.com',
+		'https://signon.ghostery.com',
+		'https://signon.ghosterystage.com',
+		'https://account.ghostery.com',
+		'https://account.ghosterystage.com',
+		'http://extension.ghosterydev.com'
+	];
+	urls.forEach((url) => {
+		chrome.cookies.remove({
+			url,
+			name: 'AUTH'
+		}, (details) => {
+			if (!details) {
+				log('Could not find AUTH cookie');
+			}
+		});
+	});
 }
