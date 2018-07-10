@@ -227,10 +227,12 @@ function getSiteData() {
 		});
 	}));
 }
+
 /**
  * @todo  consider never return anything explicitly from message handlers
  * as we never make callback calls asynchronously.
  */
+
 /**
  * Handle messages sent from app/js/platform_pages.js content script.
  * @memberOf Background
@@ -1024,11 +1026,13 @@ function isWhitelisted(state) {
 	return globals.SESSION.paused_blocking || events.policy.getSitePolicy(url) === 2 || state.ghosteryWhitelisted;
 }
 
-// Set listener for 'enabled' event for Antitracking module which replaces
-// Antitracking isWhitelisted method with Ghostery's isWhitelisted method.
-// The reason: if site is whitelisted by Ghostery, it should be whitelisted by
-// any Cliqz module which may block/alter tracker requests.
-// @memberOf Background
+/**
+ * Set listener for 'enabled' event for Antitracking module which replaces
+ * Antitracking isWhitelisted method with Ghostery's isWhitelisted method.
+ * The reason: if site is whitelisted by Ghostery, it should be whitelisted by
+ * any Cliqz module which may block/alter tracker requests.
+ * @memberOf Background
+ */
 antitracking.on('enabled', () => {
 	antitracking.isReady().then(() => {
 		// remove Cliqz-side whitelisting steps and replace with ghostery ones.
@@ -1068,9 +1072,11 @@ antitracking.on('enabled', () => {
 	});
 });
 
-
-// Set listener for 'enabled' event for Adblock module
-// which replaces Adblock isWhitelisted method with Ghostery's isWhitelisted method
+/**
+ * Set listener for 'enabled' event for Adblock module
+ * which replaces Adblock isWhitelisted method with Ghostery's isWhitelisted method
+ * @memberOf Background
+ */
 adblocker.on('enabled', () => {
 	adblocker.isReady().then(() =>
 		Promise.all([
@@ -1087,6 +1093,10 @@ adblocker.on('enabled', () => {
 	);
 });
 
+/**
+ * Set listener for 'enabled' event for Offers module
+ * @memberOf Background
+ */
 offers.on('enabled', () => {
 	offers.isReady().then(() => {
 		log('IN OFFERS ON ENABLED', offers, messageCenter);
@@ -1118,11 +1128,14 @@ offers.on('enabled', () => {
 				setCliqzModuleEnabled(messageCenter, true);
 			});
 	});
-});/**
+});
+
+/**
  * Set listener for 'enabled' event for Offers module.
  * It registers message handler for messages with the offers.
  * This handler adds incoming message data to the array of
  * notimication messages (CMP_DATA) to be eventually displayed.
+ * @memberOf Background
  */
 messageCenter.on('enabled', () => {
 	messageCenter.isReady().then(() => {
