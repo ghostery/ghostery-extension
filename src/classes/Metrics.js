@@ -224,7 +224,7 @@ class Metrics {
 		let metrics_url = `https://${METRICS_SUB_DOMAIN}.ghostery.com/${type}${frequencyString}?gr=-1` +
 			// Old parameters, old names
 			// Human web
-			`&hw=${encodeURIComponent(IS_EDGE ? '0' : (conf.enable_human_web ? '1' : '0'))}` +
+			`&hw=${encodeURIComponent(conf.enable_human_web ? '1' : '0')}` +
 			// Extension version
 			`&v=${encodeURIComponent(EXTENSION_VERSION)}` +
 			// User agent - browser
@@ -238,7 +238,7 @@ class Metrics {
 
 			// Old parameters, new names
 			// Offers (former offers)
-			`&of=${encodeURIComponent(IS_EDGE ? '0' : ((conf.enable_offers && abtest.hasTest('offers')) ? '1' : '0'))}` +
+			`&of=${encodeURIComponent(conf.enable_offers ? '1' : '0')}` +
 			// Random number, assigned at install (former install_rand)
 			`&ir=${encodeURIComponent(conf.install_random_number)}` +
 			// Login state (former signed_in)
