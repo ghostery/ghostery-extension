@@ -127,6 +127,7 @@ export function pullUserSettings(user_id) {
 		const settings = build(normalize(data), 'settings', user_id);
 		return sendMessageInPromise('setConfUserSettings', settings)
 			.then(() => {
+				// TODO update panel with pulled settings
 			})
 			.catch((error) => {
 				log('PanelActions pullUserSettings error', error);
@@ -152,7 +153,7 @@ export function fetchUser(user_id) {
 				return sendMessageInPromise('setLoginInfo', user)
 					.then(() => {
 						// TODO pullSettings
-						// pullUserSettings(user_id);
+						pullUserSettings(user_id);
 						dispatch({
 							type: LOGIN_DATA_SUCCESS,
 							data: user,

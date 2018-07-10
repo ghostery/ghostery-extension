@@ -148,6 +148,7 @@ class ConfData {
 			_initProperty('version_history', []);
 			_initProperty('login_info', {
 				logged_in: false,
+				is_validated: false,
 				email: '',
 				user_id: '',
 			});
