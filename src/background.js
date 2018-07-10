@@ -700,7 +700,7 @@ function onMessageHandler(request, sender, callback) {
 		});
 		return true;
 	} else if (name === 'setConfUserSettings') {
-		accounts.setConfUserSettings(message);
+		accounts.setConfUserSettings(message.settingsJson);
 		return true;
 	} else if (name === 'getTrackerDescription') {
 		utils.getJson(message.url).then((result) => {
@@ -1547,9 +1547,7 @@ function init() {
 		initializePopup();
 		initializeEventListeners();
 		initializeVersioning();
-		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => accounts.pullUserSettings().catch((err) => {
-			log('init() cannot pull user settings:', err);
-		}).then(() => {
+		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => {
 			// persist Conf properties to storage only after init has completed
 			common.prefsSet(globals.initProps);
 			globals.INIT_COMPLETE = true;
