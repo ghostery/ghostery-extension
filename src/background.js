@@ -715,23 +715,23 @@ function onMessageHandler(request, sender, callback) {
 		return true;
 	} else if (name === 'userLogin') {
 		accounts.userLogin(message)
-		.then((response) => {
-			callback(response);
-		})
-		.catch((err) => {
-			callback(err);
-			log('LOGIN ERROR');
-		});
+			.then((response) => {
+				callback(response);
+			})
+			.catch((err) => {
+				callback(err);
+				log('LOGIN ERROR');
+			});
 		return true;
 	} else if (name === 'fetchUser') {
 		accounts.fetchUser(message)
-		.then((user) => {
-			callback(user);
-		})
-		.catch((err) => {
-			callback(err);
-			log('FETCH USER ERROR');
-		});
+			.then((user) => {
+				callback(user);
+			})
+			.catch((err) => {
+				callback(err);
+				log('FETCH USER ERROR');
+			});
 		return true;
 	} else if (name === 'update_database') {
 		checkLibraryVersion().then((result) => {
