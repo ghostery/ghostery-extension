@@ -703,8 +703,9 @@ function onMessageHandler(request, sender, callback) {
 			}
 		});
 		return true;
-	} else if (name === 'setConfUserSettings') {
-		accounts.setConfUserSettings(message.settingsJson);
+	} else if (name === 'pullUserSettings') {
+		console.log('background pullUserSettings: ', message);
+		accounts.pullUserSettings(message);
 		return true;
 	} else if (name === 'getTrackerDescription') {
 		utils.getJson(message.url).then((result) => {
@@ -712,32 +713,24 @@ function onMessageHandler(request, sender, callback) {
 			callback(description);
 		});
 		return true;
-	} else if (name === 'getLoginInfo') {
-		accounts.getLoginInfo().then((result) => {
-			// this sends the loginInfo directly to panelView. TODO: use model change event instead
-			utils.sendMessageToPanel('onLoginInfoUpdated', result);
-			// this sends the loginInfo back to the collection
-			callback(result);
-		}).catch((err) => {
-			callback();
-			log('GET LOGIN INFO ERROR:', err);
+	} else if (name === 'userLogin') {
+		accounts.userLogin(message)
+		.then((response) => {
+			callback(response);
+		})
+		.catch((err) => {
+			callback(err);
+			log('LOGIN ERROR');
 		});
 		return true;
-	} else if (name === 'getLoginCookie') {
-		// Note: if you want to trigger a logout, send message as empty {}
-		accounts.getLoginCookie().then((result) => {
-			callback(result);
-		}).catch((err) => {
-			callback();
-			log('GET LOGIN COOKIE ERROR');
-		});
-		return true;
-	} else if (name === 'setLoginInfo') {
-		accounts.setLoginInfo(message).then((result) => {
-			callback(result);
-		}).catch((err) => {
-			callback();
-			log('SET LOGIN INFO ERROR');
+	} else if (name === 'fetchUser') {
+		accounts.fetchUser(message)
+		.then((user) => {
+			callback(user);
+		})
+		.catch((err) => {
+			callback(err);
+			log('FETCH USER ERROR');
 		});
 		return true;
 	} else if (name === 'update_database') {

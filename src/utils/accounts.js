@@ -23,9 +23,12 @@
 /* eslint no-param-reassign: 0 */
 
 import _ from 'underscore';
+import normalize from 'json-api-normalizer';
+import build from 'redux-object';
 import globals from '../classes/Globals';
 import conf from '../classes/Conf';
 import { log, decodeJwt } from './common';
+import { Config, get, save } from './api';
 import { getJson, postJson, sendMessageToPanel } from './utils';
 
 const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
@@ -38,11 +41,6 @@ const API_ROOT_URL = 'https://localhost:8080';
 const VERIFICATION_URL = `https://signon.${GHOSTERY_DOMAIN}.com/register/verify/`; // can't set culture because site needs to append guid
 const REDIRECT_URL = `https://account.${GHOSTERY_DOMAIN}.com/`;
 const SIGNON_URL = `https://signon.${GHOSTERY_DOMAIN}.com/`; // culture query param not needed, only for cookie
-const AUTH_COOKIE = 'AUTH';
-// milliseconds. Refresh call will be made REFRESH_OFFSET seconds in advance of Account expiration.
-const REFRESH_OFFSET = 60000;
-const LOGOUT_TIMEOUT = 604800000; // one week in millisec
-const GROUND_ZERO_TIME = (new Date(0)).getTime();
 const SYNC_SET = new Set(globals.SYNC_ARRAY);
 
 /**
@@ -73,6 +71,49 @@ export function setLoginInfo(user) {
 		last_name: lastName,
 	};
 	return Promise.resolve(conf.login_info);
+}
+
+export function userLogin(credentials) {
+	return fetch(`${Config.auth_server.host}/api/v2/login`, {
+		method: 'POST',
+		body: credentials,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+			'Content-Length': Buffer.byteLength(credentials),
+		},
+		credentials: 'include',
+	})
+	.then((response) => {
+		console.log('fetch response', response);
+		return Promise.resolve(response);
+	})
+	.catch(e => Promise.reject(e));
+}
+
+export function fetchUser() {
+	let userId;
+	return getLoginCookie()
+	.then(cookie => {
+		userId = cookie;
+		console.log('fetchUser userId', userId);
+		return get('users', userId);
+	})
+	.then(response => {
+		const user = build(normalize(response), 'users', userId);
+		user.loggedIn = true;
+		return setLoginInfo(user)
+	})
+	.then(loginInfo => {
+		console.log('fetchUser loginInfo', loginInfo);
+		return Promise.resolve(loginInfo);
+	})
+	.catch(err => {
+		return Promise.reject(err);
+	});
+}
+
+export function pullUserSettings() {
+
 }
 
 export function getLoginCookie() {
@@ -155,13 +196,6 @@ function _logOut() {
  * @return {Promise} 	user settings json or error
  */
 export function setConfUserSettings(settings) {
-	// TODO settings are in settings.settingsJson
-	// need to set those to `settings`
-	try {
-		settings = settings ? JSON.parse(settings) : {};
-	} catch (e) {
-		return Promise.reject('Corrupted settings');
-	}
 	log('SET USER SETTINGS', settings);
 	if (IS_EDGE) {
 		settings.enable_human_web = false;
