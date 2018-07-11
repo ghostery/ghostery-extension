@@ -1,6 +1,15 @@
 import globals from '../classes/Globals';
 
-// TODO make this not global vars
+// TODO make this global var
+export const Config = {
+	auth_server: {
+		host: `https://consumerapi.${globals.GHOSTERY_DOMAIN}.com`
+	},
+	account_server: {
+		host: `https://accountapi.${globals.GHOSTERY_DOMAIN}.com`
+	},
+};
+
 let isRefreshing = false;
 const tokenRefreshedEventType = 'tokenRefreshed';
 
@@ -132,15 +141,6 @@ export const update = function (type, data) {
 
 export const remove = function (type, id) {
 	return _sendAuthenticatedRequest('DELETE', `/api/v2/${type}/${id}`);
-};
-
-export const Config = {
-	auth_server: {
-		host: `https://consumerapi.${globals.GHOSTERY_DOMAIN}.com`
-	},
-	account_server: {
-		host: `https://accountapi.${globals.GHOSTERY_DOMAIN}.com`
-	},
 };
 
 // @TODO move to accounts.js
