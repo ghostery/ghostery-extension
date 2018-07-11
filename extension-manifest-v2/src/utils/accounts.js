@@ -83,33 +83,31 @@ export function userLogin(credentials) {
 		},
 		credentials: 'include',
 	})
-	.then((response) => {
-		console.log('fetch response', response);
-		return Promise.resolve(response);
-	})
-	.catch(e => Promise.reject(e));
+		.then((response) => {
+			console.log('fetch response', response);
+			return Promise.resolve(response);
+		})
+		.catch(e => Promise.reject(e));
 }
 
 export function fetchUser() {
 	let userId;
 	return getLoginCookie()
-	.then(cookie => {
-		userId = cookie;
-		console.log('fetchUser userId', userId);
-		return get('users', userId);
-	})
-	.then(response => {
-		const user = build(normalize(response), 'users', userId);
-		user.loggedIn = true;
-		return setLoginInfo(user)
-	})
-	.then(loginInfo => {
-		console.log('fetchUser loginInfo', loginInfo);
-		return Promise.resolve(loginInfo);
-	})
-	.catch(err => {
-		return Promise.reject(err);
-	});
+		.then((cookie) => {
+			userId = cookie;
+			console.log('fetchUser userId', userId);
+			return get('users', userId);
+		})
+		.then((response) => {
+			const user = build(normalize(response), 'users', userId);
+			user.loggedIn = true;
+			return setLoginInfo(user);
+		})
+		.then((loginInfo) => {
+			console.log('fetchUser loginInfo', loginInfo);
+			return Promise.resolve(loginInfo);
+		})
+		.catch(err => Promise.reject(err));
 }
 
 export function pullUserSettings() {
