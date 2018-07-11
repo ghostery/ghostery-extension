@@ -14,6 +14,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { validateEmail, validatePassword } from '../utils/utils';
+import { log } from '../../../src/utils/common';
 /**
  * @class Implement Sign In view which opens from 'Sign In' CTA on the Header.
  * We use Login and Sign in interchangeable. They mean the same thing.
@@ -89,7 +90,7 @@ class Login extends React.Component {
 		}
 
 		this.props.actions.userLogin(email, password)
-		.catch(e => log(e));
+			.catch(err => log(err));
 	}
 	/**
 	 * Intercept Return key and call showSigninResult.

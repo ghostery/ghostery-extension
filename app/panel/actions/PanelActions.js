@@ -123,19 +123,21 @@ export function toggleExpert() {
  */
 
 export function pullUserSettings(user_id) {
-	return get('settings', user_id, 'settings').then((data) => {
-		const settings = build(normalize(data), 'settings', user_id);
-		return sendMessageInPromise('setConfUserSettings', settings)
-			.then(() => {
-				dispatch({
-					type: GET_SETTINGS_DATA,
-					data: { settingsData: settings.settingsJson }
+	return function (dispatch) {
+		return get('settings', user_id, 'settings').then((data) => {
+			const settings = build(normalize(data), 'settings', user_id);
+			return sendMessageInPromise('setConfUserSettings', settings)
+				.then(() => {
+					dispatch({
+						type: GET_SETTINGS_DATA,
+						data: { settingsData: settings.settingsJson }
+					});
+				})
+				.catch((error) => {
+					log('PanelActions pullUserSettings error', error);
 				});
-			})
-			.catch((error) => {
-				log('PanelActions pullUserSettings error', error);
-			});
-	});
+		});
+	};
 }
 
 /**
