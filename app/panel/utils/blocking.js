@@ -71,14 +71,14 @@ export function updateSummaryBlockingCount(categories = [], smartBlock, updateTr
  * @memberOf PanelUtils
  * @param  {Object} state 				current state
  * @param  {Object} action 				current action which provides data
- *
  * @return {Object} 					updated categories and selected app ids
  */
 export function updateBlockAllTrackers(state, action) {
 	const blocked = !action.data.allBlocked;
 	const updated_app_ids = JSON.parse(JSON.stringify(state.selected_app_ids)) || {};
 	const updated_categories = JSON.parse(JSON.stringify(state.categories)) || [];
-	const smartBlock = action.data.smartBlock || { blocked: {}, unblocked: {} };
+	const smartBlockActive = action.data.smartBlockActive;
+	const smartBlock = smartBlockActive && action.data.smartBlock || { blocked: {}, unblocked: {} };
 
 	updated_categories.forEach((category) => {
 		category.num_blocked = 0;
@@ -118,8 +118,8 @@ export function updateBlockAllTrackers(state, action) {
  * @return {Object} 		    updated categories and selected app ids
  */
 export function updateCategoryBlocked(state, action) {
-	const { blocked } = action.data;
-	const smartBlock = action.data.smartBlock || { blocked: {}, unblocked: {} };
+	const { blocked, smartBlockActive } = action.data;
+	const smartBlock = smartBlockActive && action.data.smartBlock || { blocked: {}, unblocked: {} };
 	const updated_app_ids = JSON.parse(JSON.stringify(state.selected_app_ids)) || {};
 	const updated_categories = JSON.parse(JSON.stringify(state.categories)); // deep clone
 	const catIndex = updated_categories.findIndex(item => item.id === action.data.category);
@@ -205,8 +205,8 @@ export function updateTrackerBlocked(state, action) {
 		return {};
 	}
 
-	const { blocked } = action.data;
-	const smartBlock = action.data.smartBlock || { blocked: {}, unblocked: {} };
+	const { blocked, smartBlockActive } = action.data;
+	const smartBlock = smartBlockActive && action.data.smartBlock || { blocked: {}, unblocked: {} };
 	const updated_app_ids = JSON.parse(JSON.stringify(state.selected_app_ids)) || {};
 	const updated_categories = JSON.parse(JSON.stringify(state.categories)) || []; // deep clone
 	const catIndex = updated_categories.findIndex(item => item.id === action.data.cat_id);

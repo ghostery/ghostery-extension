@@ -409,6 +409,7 @@ class PanelData {
 		const pageBlocks = this._confData.get('site_specific_blocks')[pageHost] || [];
 		const categories = {};
 		const categoryArray = [];
+		const smartBlockActive = this._confData.get('enable_smart_block');
 		const smartBlock = tabInfo.getTabInfo(tab_id, 'smartBlock');
 
 		trackerList.forEach((tracker) => {
@@ -416,8 +417,8 @@ class PanelData {
 			const blocked = selectedAppIds.hasOwnProperty(tracker.id);
 			const ss_allowed = pageUnblocks.includes(+tracker.id);
 			const ss_blocked = pageBlocks.includes(+tracker.id);
-			const sb_blocked = smartBlock.blocked.hasOwnProperty(`${tracker.id}`);
-			const sb_allowed = smartBlock.unblocked.hasOwnProperty(`${tracker.id}`);
+			const sb_blocked = smartBlockActive && smartBlock.blocked.hasOwnProperty(`${tracker.id}`);
+			const sb_allowed = smartBlockActive && smartBlock.unblocked.hasOwnProperty(`${tracker.id}`);
 
 			if (t(`category_${category}`) === `category_${category}`) {
 				category = 'uncategorized';
