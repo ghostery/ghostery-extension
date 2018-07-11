@@ -210,8 +210,9 @@ export function userLogin(email, password) {
 							});
 						});
 				}
-				return sendMessageInPromise('getLoginCookie')
-					.then((user_id) => {
+				return sendMessageInPromise('fetchUser')
+					.then((user) => {
+						console.log('fetchUser', user);
 						dispatch({
 							type: LOGIN_SUCCESS
 						});
@@ -222,7 +223,7 @@ export function userLogin(email, password) {
 								classes: 'success',
 							},
 						});
-						return user_id;
+						return user;
 					})
 					.catch((error) => {
 						// server error
@@ -248,58 +249,6 @@ export function userLogin(email, password) {
 					},
 				});
 			});
-	// 	return doXHR('POST', `${API_ROOT_URL}/api/v2/login`, JSON.stringify(query)).then((response) => {
-	// 		if (response) {
-	// 			sendMessageInPromise('setLoginInfo', {
-	// 				user_token: response.Token,
-	// 				decoded_user_token: decodedToken.payload,
-	// 			}).then((data) => {
-	// 				dispatch({
-	// 					type: LOGIN_SUCCESS,
-	// 					data: decodedToken.payload,
-	// 				});
-	// 				dispatch({
-	// 					type: SHOW_NOTIFICATION,
-	// 					data: {
-	// 						text: `${t('panel_signin_success')} ${query.EmailAddress}`,
-	// 						classes: 'success',
-	// 					},
-	// 				});
-	// 			}).catch((err) => {
-	// 				log('PanelActions userLogin returned with an error', err);
-	// 				dispatch({ type: LOGIN_FAILED });
-	// 				dispatch({
-	// 					type: SHOW_NOTIFICATION,
-	// 					data: {
-	// 						text: `${t('panel_signin_success')} ${query.EmailAddress}`,
-	// 						classes: 'alert',
-	// 					},
-	// 				});
-	// 			});
-	// 		} else {
-	// 			// XHR was successful but we did not get a token back
-	// 			log('PanelActions userLogin callback error', response);
-	// 			dispatch({ type: LOGIN_FAILED });
-	// 			dispatch({
-	// 				type: SHOW_NOTIFICATION,
-	// 				data: {
-	// 					text: t('banner_no_such_account_message'),
-	// 					classes: 'alert',
-	// 				},
-	// 			});
-	// 		}
-	// 	}).catch((error) => {
-	// 		// server error
-	// 		log('PanelActions userLogin server error', error);
-	// 		dispatch({ type: LOGIN_FAILED });
-	// 		dispatch({
-	// 			type: SHOW_NOTIFICATION,
-	// 			data: {
-	// 				text: t('server_error_message'),
-	// 				classes: 'alert',
-	// 			},
-	// 		});
-	// 	});
 	};
 }
 
