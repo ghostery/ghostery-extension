@@ -373,6 +373,7 @@ class PanelData {
 
 	/**
 	 * Build category array for all trackers in DB. Used in Settings > Global Blocking
+	 * @private
 	 * @return {array} 			array of categories
 	 */
 	_buildGlobalCategories() {
