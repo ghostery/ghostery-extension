@@ -145,19 +145,7 @@ class CreateAccount extends React.Component {
 			return;
 		}
 
-		this.props.actions.createAccount({
-			EmailAddress: email,
-			ConfirmEmailAddress: confirmEmail,
-			Password: password,
-			ModifyingUserId: email,
-			FirstName: firstName,
-			LastName: lastName,
-			UserType: 2,
-			KeepUpdatedOnProductReleases: true,
-			ValidationRedirectUrlToAddCodeSuffixOn: VERIFICATION_URL,
-			FooterUrl: VERIFICATION_URL,
-			VerificationContinueUrl: REDIRECT_URL,
-		});
+		this.props.actions.createAccount(email, confirmEmail, firstName, lastName, password);
 	}
 	/**
 	 * Create account on Return.
