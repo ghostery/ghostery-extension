@@ -112,14 +112,14 @@ class Summary extends React.Component {
 	}
 
 	/**
-	 * Disable controls when Ghostery cannot or has not yet scanne a page.
+	 * Disable controls when Ghostery cannot or has not yet scanned a page.
 	 * @param {Object} props Summary's props, either this.props or nextProps.
 	 */
 	updateSiteNotScanned(props) {
 		const { siteNotScanned, categories } = props;
 		const pageUrl = props.pageUrl || '';
 
-		if (siteNotScanned || !categories || pageUrl.search('http') === -1) {
+		if (siteNotScanned || !categories || pageUrl.search(/http|chrome-extension|moz-extension|ms-browser-extension|newtab/) === -1) {
 			this.setState({ disableBlocking: true });
 		} else {
 			this.setState({ disableBlocking: false });
@@ -290,8 +290,14 @@ class Summary extends React.Component {
 		const showCondensed = is_expert && is_expanded;
 		const antiTrackUnsafe = enable_anti_tracking && antiTracking && antiTracking.totalUnsafeCount || 0;
 		const adBlockBlocked = enable_ad_block && adBlock && adBlock.totalCount || 0;
-		const sbBlocked = (!trackerCounts.hasOwnProperty('sbBlocked') || (trackerCounts.sbBlocked !== Object.keys(smartBlock.blocked).length)) && Object.keys(smartBlock.blocked).length || 0;
-		const sbAllowed = (!trackerCounts.hasOwnProperty('sbAllowed') || (trackerCounts.sbAllowed !== Object.keys(smartBlock.unblocked).length)) && Object.keys(smartBlock.unblocked).length || 0;
+		let sbBlocked = smartBlock && smartBlock.blocked && Object.keys(smartBlock.blocked).length || 0;
+		if (sbBlocked === trackerCounts.sbBlocked) {
+			sbBlocked = 0;
+		}
+		let sbAllowed = smartBlock && smartBlock.unblocked && Object.keys(smartBlock.unblocked).length || 0;
+		if (sbAllowed === trackerCounts.sbAllowed) {
+			sbAllowed = 0;
+		}
 		const sbAdjust = enable_smart_block && (sbBlocked - sbAllowed) || 0;
 
 		const summaryClassNames = ClassNames('', {

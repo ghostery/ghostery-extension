@@ -199,6 +199,9 @@ class BrowserButton {
 					}
 				}
 				resolve(totalUnsafeCount);
+			}).catch((err) => {
+				// if we encounter an error, return 0
+				resolve(0);
 			});
 		});
 	}
