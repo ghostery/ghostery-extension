@@ -83,10 +83,7 @@ export function userLogin(credentials) {
 		},
 		credentials: 'include',
 	})
-		.then((response) => {
-			console.log('fetch response', response);
-			return Promise.resolve(response);
-		})
+		.then(response => Promise.resolve(response))
 		.catch(e => Promise.reject(e));
 }
 
@@ -95,7 +92,6 @@ export function fetchUser() {
 	return getLoginCookie()
 		.then((cookie) => {
 			user_id = cookie;
-			console.log('fetchUser user_id', user_id);
 			return get('users', user_id);
 		})
 		.then((response) => {
@@ -103,10 +99,7 @@ export function fetchUser() {
 			user.loggedIn = true;
 			return setLoginInfo(user);
 		})
-		.then((loginInfo) => {
-			console.log('fetchUser loginInfo', loginInfo);
-			return Promise.resolve(loginInfo);
-		})
+		.then(loginInfo => Promise.resolve(loginInfo))
 		.catch(err => Promise.reject(err));
 }
 
@@ -114,7 +107,6 @@ export function pullUserSettings(user_id) {
 	return get('settings', user_id, 'settings')
 		.then((data) => {
 			const settings = build(normalize(data, { camelizeKeys: false }), 'settings', user_id);
-			console.log('background pullUserSettings', settings);
 			// @TODO setConfUserSettings settings.settingsJson
 			setConfUserSettings(settings.settings_json);
 			return Promise.resolve(settings);
