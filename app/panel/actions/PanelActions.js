@@ -208,13 +208,10 @@ export function userLogin(email, password) {
  */
 export function userLogout() {
 	return function (dispatch) {
-		return logout()
-			.then(() => sendMessageInPromise('setLoginInfo', {}).then((data) => {
-				dispatch({
-					type: LOGOUT,
-					data,
-				});
-			}))
+		sendMessageInPromise('userLogout', {})
+			.then((data) => {
+				dispatch({ type: LOGOUT });
+			})
 			.catch((err) => {
 				log('PanelActions userLogout returned with an error', err);
 			});

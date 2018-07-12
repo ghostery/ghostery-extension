@@ -170,24 +170,44 @@ export function buildUserSettings() {
 	return settings;
 }
 
-/**
- * Clears login info in prefs and returns empty login data
- * @private
- *
- * @return {Object} 			cleared login_info object
- */
-function _logOut() {
-	conf.login_info = {
-		logged_in: false,
-		email: '',
-		user_token: '',
-		decoded_user_token: {},
-		is_validated: false
-	};
+export const userLogout = () => (
+	getCsrfCookie()
+		.then(cookie => fetch(`${globals.AUTH_SERVER}/api/v2/logout`, {
+			method: 'POST',
+			credentials: 'include',
+			headers: {
+				'X-CSRF-Token': cookie.value,
+			},
+		}).catch((err) => {
+			// manually delete cookies if fetch fails
+			_removeCookies();
+		}))
+		.catch((err) => {
+			// manually delete cookies if getCsrfCookie() fails
+			_removeCookies();
+		})
+		.finally(() => {
+			conf.login_info = {
+				logged_in: false,
+				email: '',
+				user_token: '',
+				decoded_user_token: {},
+				is_validated: false
+			};
+		})
+);
 
-	_deleteAuthCookie();
-	return conf.login_info;
-}
+const _removeCookies = () => {
+	const cookies = ['user_id', 'access_token', 'refresh_token', 'csrf_token', 'AUTH'];
+	cookies.forEach((name) => {
+		chrome.cookies.remove({
+			url: `https://${GHOSTERY_DOMAIN}.com`, // ghostery.com || ghosterystage.com
+			name,
+		}, (details) => {
+			log(`Removed cookie with name: ${details.name}`);
+		});
+	});
+};
 
 /**
  * GET user settings from ConsumerAPI
@@ -214,30 +234,4 @@ export function setConfUserSettings(settings) {
 		}
 	});
 	return settings;
-}
-
-/**
- * Deletes AUTH cookie
- * @private
- */
-function _deleteAuthCookie() {
-	const urls = [
-		'https://extension.ghostery.com',
-		'https://extension.ghosterystage.com',
-		'https://signon.ghostery.com',
-		'https://signon.ghosterystage.com',
-		'https://account.ghostery.com',
-		'https://account.ghosterystage.com',
-		'http://extension.ghosterydev.com'
-	];
-	urls.forEach((url) => {
-		chrome.cookies.remove({
-			url,
-			name: 'AUTH'
-		}, (details) => {
-			if (!details) {
-				log('Could not find AUTH cookie');
-			}
-		});
-	});
 }

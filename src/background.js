@@ -726,6 +726,16 @@ function onMessageHandler(request, sender, callback) {
 				log('LOGIN ERROR');
 			});
 		return true;
+	} else if (name === 'userLogout') {
+		accounts.userLogout()
+			.then((response) => {
+				callback(response);
+			})
+			.catch((err) => {
+				callback(err);
+				log('LOGOUT ERROR');
+			});
+		return true;
 	} else if (name === 'fetchUser') {
 		accounts.fetchUser(message)
 			.then((user) => {

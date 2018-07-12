@@ -91,10 +91,9 @@ export default (state = initialState, action) => {
 		}
 		case LOGOUT: {
 			return Object.assign({}, state, {
-				logged_in: action.data.logged_in,
-				email: action.data.email,
-				is_validated: action.data.is_validated,
-				decoded_user_token: action.data.decoded_user_token,
+				logged_in: false,
+				email: '',
+				is_validated: false
 			});
 		}
 		case TOGGLE_CLIQZ_FEATURE: {
