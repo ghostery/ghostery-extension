@@ -1543,7 +1543,6 @@ function initializeGhosteryModules() {
  */
 function init() {
 	return confData.init().then(() => {
-		panelData.init();
 		initializePopup();
 		initializeEventListeners();
 		initializeVersioning();
