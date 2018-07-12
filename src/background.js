@@ -240,9 +240,11 @@ function getSiteData() {
  */
 function handleGhosteryPlatformPages(name, tab_url) {
 	if (name === 'platformPageLoaded') {
-		accounts.fetchUser().catch((err) => {
-			log('handleGhosteryPlatformPages error', err);
-		});
+		accounts.fetchUser()
+			.then(loginInfo => accounts.pullUserSettings(loginInfo.user_id))
+			.catch((err) => {
+				log('handleGhosteryPlatformPages error', err);
+			});
 	}
 	return false;
 }
@@ -703,8 +705,10 @@ function onMessageHandler(request, sender, callback) {
 		});
 		return true;
 	} else if (name === 'pullUserSettings') {
-		console.log('background pullUserSettings: ', message);
-		accounts.pullUserSettings(message);
+		accounts.pullUserSettings(message)
+			.then((settings) => {
+				callback(settings);
+			});
 		return true;
 	} else if (name === 'getTrackerDescription') {
 		utils.getJson(message.url).then((result) => {
@@ -1526,9 +1530,11 @@ function init() {
 		initializePopup();
 		initializeEventListeners();
 		initializeVersioning();
-		accounts.fetchUser().catch((err) => {
-			log('Error in accounts.fetchUser()', err);
-		});
+		accounts.fetchUser()
+			.then(loginInfo => accounts.pullUserSettings(loginInfo.user_id))
+			.catch((err) => {
+				log('Error in accounts.fetchUser()', err);
+			});
 		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => {
 			// persist Conf properties to storage only after init has completed
 			common.prefsSet(globals.initProps);

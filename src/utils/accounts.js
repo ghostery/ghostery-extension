@@ -91,15 +91,15 @@ export function userLogin(credentials) {
 }
 
 export function fetchUser() {
-	let userId;
+	let user_id;
 	return getLoginCookie()
 		.then((cookie) => {
-			userId = cookie;
-			console.log('fetchUser userId', userId);
-			return get('users', userId);
+			user_id = cookie;
+			console.log('fetchUser user_id', user_id);
+			return get('users', user_id);
 		})
 		.then((response) => {
-			const user = build(normalize(response), 'users', userId);
+			const user = build(normalize(response), 'users', user_id);
 			user.loggedIn = true;
 			return setLoginInfo(user);
 		})
@@ -110,8 +110,18 @@ export function fetchUser() {
 		.catch(err => Promise.reject(err));
 }
 
-export function pullUserSettings() {
-
+export function pullUserSettings(user_id) {
+	return get('settings', user_id, 'settings')
+		.then((data) => {
+			const settings = build(normalize(data, { camelizeKeys: false }), 'settings', user_id);
+			console.log('background pullUserSettings', settings);
+			// @TODO setConfUserSettings settings.settingsJson
+			setConfUserSettings(settings.settings_json);
+			return Promise.resolve(settings);
+		})
+		.catch((error) => {
+			log('PanelActions pullUserSettings error', error);
+		});
 }
 
 export function getLoginCookie() {
