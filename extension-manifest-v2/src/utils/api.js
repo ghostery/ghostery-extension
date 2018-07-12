@@ -1,15 +1,5 @@
 import globals from '../classes/Globals';
 
-// TODO make this global var
-export const Config = {
-	auth_server: {
-		host: `https://consumerapi.${globals.GHOSTERY_DOMAIN}.com`
-	},
-	account_server: {
-		host: `https://accountapi.${globals.GHOSTERY_DOMAIN}.com`
-	},
-};
-
 let isRefreshing = false;
 const tokenRefreshedEventType = 'tokenRefreshed';
 
@@ -29,7 +19,7 @@ const _refreshToken = function () {
 	}
 
 	isRefreshing = true;
-	return fetch(`${Config.auth_server.host}/api/v2/refresh_token`, { // eslint-disable-line no-undef
+	return fetch(`${globals.AUTH_SERVER}/api/v2/refresh_token`, {
 		method: 'POST',
 		credentials: 'include',
 	});
@@ -49,7 +39,7 @@ const getCsrfCookie = () => new Promise((resolve, reject) => {
 });
 
 const _sendReq = (method, path, body) => getCsrfCookie()
-	.then(cookie => fetch(`${Config.account_server.host}${path}`, { // eslint-disable-line no-undef
+	.then(cookie => fetch(`${globals.ACCOUNT_SERVER}${path}`, {
 		method,
 		headers: {
 			'Content-Type': 'application/vnd.api+json',
