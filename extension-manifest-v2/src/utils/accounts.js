@@ -235,3 +235,15 @@ export function setConfUserSettings(settings) {
 	});
 	return settings;
 }
+
+export const sendVerificationEmail = () => (
+	new Promise((resolve, reject) => {
+		fetch(`${globals.AUTH_SERVER}/api/v2/send_email/validate_account/${conf.login_info.user_id}`)
+			.then((res) => {
+				resolve(conf.login_info);
+			})
+			.catch((err) => {
+				reject(err);
+			});
+	})
+);
