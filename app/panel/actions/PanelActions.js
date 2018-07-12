@@ -161,12 +161,23 @@ export function userLogin(email, password) {
 						.then((json) => {
 							log('PanelActions userLogin server error', json);
 							dispatch({ type: LOGIN_FAILED });
-							dispatch({
-								type: SHOW_NOTIFICATION,
-								data: {
-									text: t('server_error_message'),
-									classes: 'alert',
-								},
+							json.errors.forEach((err) => {
+								let errorText = '';
+								switch (err.code) {
+									case '10050':
+									case '10110':
+										errorText = t('banner_no_such_account_message');
+										break;
+									default:
+										errorText = t('server_error_message');
+								}
+								dispatch({
+									type: SHOW_NOTIFICATION,
+									data: {
+										text: errorText,
+										classes: 'alert',
+									},
+								});
 							});
 						});
 				}
