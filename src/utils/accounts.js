@@ -28,7 +28,7 @@ import build from 'redux-object';
 import globals from '../classes/Globals';
 import conf from '../classes/Conf';
 import { log, decodeJwt } from './common';
-import { Config, get, save } from './api';
+import { get, save, getCsrfCookie } from './api';
 import { getJson, postJson, sendMessageToPanel } from './utils';
 
 const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
@@ -74,7 +74,7 @@ export function setLoginInfo(user) {
 }
 
 export function userLogin(credentials) {
-	return fetch(`${Config.auth_server.host}/api/v2/login`, {
+	return fetch(`${globals.AUTH_SERVER}/api/v2/login`, {
 		method: 'POST',
 		body: credentials,
 		headers: {
