@@ -122,8 +122,7 @@ export function pushUserSettings(settings) {
 			attributes: {
 				settings_json: settings
 			}
-		})
-		.catch((err) => {
+		}).catch((err) => {
 			log('Error: post api/Sync failed in pushUserSettings', err);
 			return Promise.reject('pushUserSettings error:', err);
 		});
@@ -211,6 +210,18 @@ export const userLogout = () => (
 			};
 		})
 );
+
+const _removeCookies = () => {
+	const cookies = ['user_id', 'access_token', 'refresh_token', 'csrf_token', 'AUTH'];
+	cookies.forEach((name) => {
+		chrome.cookies.remove({
+			url: `https://${GHOSTERY_DOMAIN}.com`, // ghostery.com || ghosterystage.com
+			name,
+		}, (details) => {
+			log(`Removed cookie with name: ${details.name}`);
+		});
+	});
+};
 
 /**
  * GET user settings from ConsumerAPI
