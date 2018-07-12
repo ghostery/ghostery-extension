@@ -126,7 +126,6 @@ export function pullUserSettings(user_id) {
 	return function (dispatch) {
 		return sendMessageInPromise('pullUserSettings', user_id)
 			.then((settings) => {
-				console.log('settings:', settings);
 				dispatch({
 					type: GET_SETTINGS_DATA,
 					data: { settingsData: settings.settingsJson }
@@ -174,7 +173,6 @@ export function userLogin(email, password) {
 				}
 				return sendMessageInPromise('fetchUser')
 					.then((user) => {
-						console.log('fetchUser', user);
 						dispatch({
 							type: LOGIN_SUCCESS
 						});
