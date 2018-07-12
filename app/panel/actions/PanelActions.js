@@ -124,57 +124,17 @@ export function toggleExpert() {
 
 export function pullUserSettings(user_id) {
 	return function (dispatch) {
-		return get('settings', user_id, 'settings').then((data) => {
-			const settings = build(normalize(data), 'settings', user_id);
-			return sendMessageInPromise('setConfUserSettings', settings)
-				.then(() => {
-					dispatch({
-						type: GET_SETTINGS_DATA,
-						data: { settingsData: settings.settingsJson }
-					});
-				})
-				.catch((error) => {
-					log('PanelActions pullUserSettings error', error);
-				});
-		});
-	};
-}
-
-/**
- * Call accountAPI and get user info. Called from Login
- * Component. Picked up by Panel reducer.
-
- * @return {Object} dispatch
- */
-
-export function fetchUser(user_id) {
-	return function (dispatch) {
-		return get('users', user_id)
-			.then((data) => {
-			// normalize user data with jsonapi
-				const user = build(normalize(data), 'users', user_id);
-				user.loggedIn = true;
-				// store user info in background conf
-				return sendMessageInPromise('setLoginInfo', user)
-					.then(() => {
-						// TODO pullSettings
-						pullUserSettings(user_id);
-						dispatch({
-							type: LOGIN_DATA_SUCCESS,
-							data: user,
-						});
-						return user;
-					});
-			})
-			.catch((errors) => {
-				log(errors);
+		return sendMessageInPromise('pullUserSettings', user_id)
+			.then((settings) => {
+				console.log('settings:', settings);
 				dispatch({
-					type: SHOW_NOTIFICATION,
-					data: {
-						text: t('server_error_message'),
-						classes: 'alert',
-					},
+					type: GET_SETTINGS_DATA,
+					data: { settingsData: settings.settingsJson }
 				});
+				return Promise.resolve(settings);
+			})
+			.catch((error) => {
+				log('PanelActions pullUserSettings error', error);
 			});
 	};
 }
@@ -226,18 +186,6 @@ export function userLogin(email, password) {
 							},
 						});
 						return user;
-					})
-					.catch((error) => {
-						// server error
-						log('PanelActions userLogin server error', error);
-						dispatch({ type: LOGIN_FAILED });
-						dispatch({
-							type: SHOW_NOTIFICATION,
-							data: {
-								text: t('server_error_message'),
-								classes: 'alert',
-							},
-						});
 					});
 			})
 			.catch((err) => {
