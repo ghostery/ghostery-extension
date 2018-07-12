@@ -101,8 +101,6 @@
 		font-weight: 600;
 		margin-bottom: 40px;
 		.blocked-trackers .value { color: #e74055; }
-		.blocked-trackers.paused .value { color: #f9d0d5; }
-		.blocked-trackers.paused .text { color: #cccccc; }
 		.page-load .value { color: #ffc063; }
 		.page-load.fast .value { color: #9ecc42; }
 		.page-load.slow .value { color: #e74055; }

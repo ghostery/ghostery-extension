@@ -112,7 +112,7 @@ class Category extends React.Component {
 	 */
 	clickCategoryStatus() {
 		const globalBlocking = !!this.props.globalBlocking;
-		const blocked = !(this.props.category.num_blocked === this.props.category.num_total);
+		const blocked = !this.state.allShownBlocked;
 
 		if ((this.props.paused_blocking || this.props.sitePolicy) && !globalBlocking) {
 			return;

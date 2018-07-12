@@ -274,10 +274,25 @@ class Summary extends React.Component {
 	*/
 	render() {
 		const { abPause } = this.state;
-		const { is_expert, is_expanded, paused_blocking } = this.props;
+		const {
+			is_expert,
+			is_expanded,
+			enable_anti_tracking,
+			enable_ad_block,
+			enable_smart_block,
+			antiTracking,
+			adBlock,
+			smartBlock,
+			paused_blocking,
+			sitePolicy,
+			trackerCounts,
+		} = this.props;
 		const showCondensed = is_expert && is_expanded;
-		const antiTrackUnsafe = this.props.antiTracking && this.props.antiTracking.totalUnsafeCount || 0;
-		const adBlockBlocked = this.props.adBlock && this.props.adBlock.totalCount || 0;
+		const antiTrackUnsafe = enable_anti_tracking && antiTracking && antiTracking.totalUnsafeCount || 0;
+		const adBlockBlocked = enable_ad_block && adBlock && adBlock.totalCount || 0;
+		const sbBlocked = (!trackerCounts.hasOwnProperty('sbBlocked') || (trackerCounts.sbBlocked !== Object.keys(smartBlock.blocked).length)) && Object.keys(smartBlock.blocked).length || 0;
+		const sbAllowed = (!trackerCounts.hasOwnProperty('sbAllowed') || (trackerCounts.sbAllowed !== Object.keys(smartBlock.unblocked).length)) && Object.keys(smartBlock.unblocked).length || 0;
+		const sbAdjust = enable_smart_block && (sbBlocked - sbAllowed) || 0;
 
 		const summaryClassNames = ClassNames('', {
 			expert: is_expert,
@@ -287,7 +302,6 @@ class Summary extends React.Component {
 
 		const blockedTrackersClassNames = ClassNames('blocked-trackers', {
 			clickable: is_expert,
-			paused: paused_blocking,
 		});
 		const pageLoadClassNames = ClassNames('page-load', {
 			fast: +this.state.trackerLatencyTotal < 5,
@@ -297,6 +311,15 @@ class Summary extends React.Component {
 			clickable: !this.state.disableBlocking,
 			'not-clickable': this.state.disableBlocking
 		});
+
+		let trackersBlockedCount;
+		if (paused_blocking || sitePolicy === 2) {
+			trackersBlockedCount = 0;
+		} else if (sitePolicy === 1) {
+			trackersBlockedCount = trackerCounts.blocked + trackerCounts.allowed + antiTrackUnsafe + adBlockBlocked || 0;
+		} else {
+			trackersBlockedCount = trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked + sbAdjust || 0;
+		}
 
 		return (
 			<div id="content-summary" className={summaryClassNames}>
@@ -360,7 +383,7 @@ class Summary extends React.Component {
 						<div className={blockedTrackersClassNames} onClick={this.clickTrackersBlocked}>
 							<span className="text">{t('trackers_blocked')} </span>
 							<span className="value">
-								{this.props.trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
+								{trackersBlockedCount}
 							</span>
 						</div>
 						<div className={pageLoadClassNames}>
