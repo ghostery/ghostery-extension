@@ -722,8 +722,8 @@ function onMessageHandler(request, sender, callback) {
 				callback(response);
 			})
 			.catch((err) => {
-				callback(err);
-				log('LOGIN ERROR');
+				log('LOGIN ERROR', err);
+				callback({ errors: [err] });
 			});
 		return true;
 	} else if (name === 'userLogout') {
@@ -734,6 +734,16 @@ function onMessageHandler(request, sender, callback) {
 			.catch((err) => {
 				callback(err);
 				log('LOGOUT ERROR');
+			});
+		return true;
+	} else if (name === 'resetPassword') {
+		accounts.resetPassword(message)
+			.then((response) => {
+				callback(response);
+			})
+			.catch((err) => {
+				callback(err);
+				log('RESET PASSWORD ERROR');
 			});
 		return true;
 	} else if (name === 'fetchUser') {

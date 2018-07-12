@@ -78,8 +78,13 @@ export function userLogin(credentials) {
 		},
 		credentials: 'include',
 	})
-		.then(response => Promise.resolve(response))
-		.catch(e => Promise.reject(e));
+		.then((response) => {
+			if (response.status >= 400) {
+				return response.json().then(json => Promise.resolve(json));
+			}
+			return Promise.resolve(response);
+		})
+		.catch(err => Promise.reject(err));
 }
 
 export function fetchUser() {
@@ -210,6 +215,24 @@ export const userLogout = () => (
 			};
 		})
 );
+
+export function resetPassword(data) {
+	return fetch(`${globals.AUTH_SERVER}/api/v2/send_email/reset_password`, { // eslint-disable-line no-undef
+		method: 'POST',
+		body: data,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+			'Content-Length': Buffer.byteLength(data),
+		},
+	})
+		.then((response) => {
+			Promise.resolve(response);
+		})
+		.catch((err) => {
+			log('RESET PASSWORD ERR', err);
+			Promise.resolve(err);
+		});
+}
 
 const _removeCookies = () => {
 	const cookies = ['user_id', 'access_token', 'refresh_token', 'csrf_token', 'AUTH'];

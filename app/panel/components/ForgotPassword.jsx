@@ -64,7 +64,6 @@ class ForgotPassword extends React.Component {
 	 */
 	sendEmail() {
 		const email = this.state.email.toLowerCase();
-		const FORGOT_PASSWORD_URL = `https:\/\/signon.${globals.GHOSTERY_DOMAIN}.com/password/reset/`; // can't set culture query parameter because site needs to append guid
 
 		// update cursors
 		this.setState({ panelCursor: 'wait' });
@@ -76,11 +75,7 @@ class ForgotPassword extends React.Component {
 			return;
 		}
 
-		this.props.actions.forgotPassword({
-			EmailAddress: email,
-			RedirectUrlToAddCodeSuffixOn: FORGOT_PASSWORD_URL,
-			FooterUrl: FORGOT_PASSWORD_URL,
-		});
+		this.props.actions.forgotPassword(email);
 	}
 	/**
 	 * Create account on Return.
