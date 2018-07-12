@@ -25,16 +25,15 @@ const _refreshToken = function () {
 	});
 };
 
-const getCsrfCookie = () => new Promise((resolve, reject) => {
+export const getCsrfCookie = () => new Promise((resolve, reject) => {
 	chrome.cookies.get({
 		url: `https://${globals.GHOSTERY_DOMAIN}.com`, // ghostery.com || ghosterystage.com
 		name: 'csrf_token',
 	}, (cookie) => {
-		if (cookie) {
-			resolve(cookie);
-			return;
+		if (!cookie) {
+			reject('CSRF Token cookie not found');
 		}
-		reject();
+		resolve(cookie);
 	});
 });
 
