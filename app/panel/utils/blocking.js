@@ -77,7 +77,7 @@ export function updateBlockAllTrackers(state, action) {
 	const blocked = !action.data.allBlocked;
 	const updated_app_ids = JSON.parse(JSON.stringify(state.selected_app_ids)) || {};
 	const updated_categories = JSON.parse(JSON.stringify(state.categories)) || [];
-	const smartBlockActive = action.data.smartBlockActive;
+	const { smartBlockActive } = action.data;
 	const smartBlock = smartBlockActive && action.data.smartBlock || { blocked: {}, unblocked: {} };
 
 	updated_categories.forEach((category) => {
