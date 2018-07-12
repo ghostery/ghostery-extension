@@ -74,9 +74,8 @@ export default (state = initialState, action) => {
 		case CREATE_ACCOUNT_SUCCESS:
 			return Object.assign({}, state, {
 				logged_in: true,
-				email: action.data.ClaimEmailAddress,
-				is_validated: action.data.ClaimEmailAddressValidated,
-				decoded_user_token: action.data,
+				email: action.data.email,
+				is_validated: action.data.is_validated
 			});
 		case LOGIN_SUCCESS: {
 			return Object.assign({}, state, {

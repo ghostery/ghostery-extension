@@ -226,79 +226,70 @@ export function userLogout() {
  * @param  {Object} query
  * @return {Object} dispatch
  */
-export function createAccount(query) {
-	return function (dispatch) {
-		return doXHR('POST', `${API_ROOT_URL}/api/Account`, JSON.stringify(query)).then((response) => {
-			if (response.UserId !== null && response.Token !== null) {
-				const decodedToken = decodeJwt(response.Token);
-
-				if (decodedToken && decodedToken.payload) {
-					sendMessageInPromise('setLoginInfo', {
-						user_token: response.Token,
-						decoded_user_token: decodedToken.payload,
-					}).then((data) => {
-						dispatch({
-							type: CREATE_ACCOUNT_SUCCESS,
-							data: decodedToken.payload,
-						});
+export const createAccount = (email, confirmEmail, firstName, lastName, password) => (
+	function (dispatch) {
+		const data = `email=${window.encodeURIComponent(email)}&email_confirmation=${window.encodeURIComponent(confirmEmail)}&first_name=${window.encodeURIComponent(firstName)}&last_name=${window.encodeURIComponent(lastName)}&password=${window.encodeURIComponent(password)}`;
+		return fetch(`${API_ROOT_URL}/api/v2/register`, {
+			method: 'POST',
+			body: data,
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				'Content-Length': Buffer.byteLength(data),
+			},
+			credentials: 'include'
+		}).then((res) => {
+			if (res.status >= 400) {
+				res.json().then((json) => {
+					dispatch({ type: CREATE_ACCOUNT_FAILED });
+					json.errors.forEach((err) => {
+						let errorText = '';
+						switch (err.code) {
+							case '10070':
+								errorText = t('email_address_in_use');
+								break;
+							case '10080':
+								errorText = t('invalid_email_confirmation');
+								break;
+							default:
+								errorText = t('server_error_message');
+						}
 						dispatch({
 							type: SHOW_NOTIFICATION,
 							data: {
-								text: t('panel_email_verification_sent', query.EmailAddress),
-								classes: 'success',
-							},
-						});
-					}).catch((err) => {
-						log('PanelActions createAccount returned with an error', err);
-						dispatch({ type: CREATE_ACCOUNT_FAILED });
-						dispatch({
-							type: SHOW_NOTIFICATION,
-							data: {
-								text: t('server_error_message'),
+								text: errorText,
 								classes: 'alert',
 							},
 						});
 					});
-				}
-			} else {
-				// XHR was successful but we did not get a token back
-				log('PanelActions createAccount callback error', response);
-				dispatch({ type: CREATE_ACCOUNT_FAILED });
-
-				// TODO: temporary until we get better error handling on the consumerAPI
-				if (response.Message.startsWith('User with email address')) {
-					// email address already in use
-					dispatch({
-						type: SHOW_NOTIFICATION,
-						data: {
-							text: t('email_address_in_use'),
-							classes: 'alert',
-						},
-					});
-				} else {
-					dispatch({
-						type: SHOW_NOTIFICATION,
-						data: {
-							text: t('server_error_message'),
-							classes: 'alert',
-						},
-					});
-				}
+				});
+				return;
 			}
-		}).catch((error) => {
-			// server error
-			log('PanelActions createAccount server error', error);
-			dispatch({ type: CREATE_ACCOUNT_FAILED });
-			dispatch({
-				type: SHOW_NOTIFICATION,
-				data: {
-					text: t('server_error_message'),
-					classes: 'alert',
-				},
-			});
+
+			sendMessageInPromise('fetchUser')
+				.then((user) => {
+					dispatch({
+						type: CREATE_ACCOUNT_SUCCESS,
+						data: {
+							email: user.email,
+							is_validated: user.is_validated
+						}
+					});
+					dispatch({
+						type: LOGIN_DATA_SUCCESS,
+						data: user,
+					});
+					dispatch({
+						type: SHOW_NOTIFICATION,
+						data: {
+							text: t('panel_email_verification_sent', user.email),
+							classes: 'success',
+						},
+					});
+					return user;
+				});
 		});
-	};
-}
+	}
+);
 
 /**
  * Call consumer API and send password reminder email

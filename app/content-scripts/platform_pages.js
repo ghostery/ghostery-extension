@@ -36,7 +36,7 @@ const PlatformPagesContentScript = (function (window, document) {
 		logoutLink = logoutLink ? logoutLink[0] : null;
 		if (logoutLink) {
 			logoutLink.addEventListener('click', (e) => {
-				sendMessageToBackground('setLoginInfo', {}); // send empty object to log out
+				sendMessageToBackground('userLogout'); // send empty object to log out
 			});
 		}
 		// Add listener to cancelModal
@@ -46,7 +46,7 @@ const PlatformPagesContentScript = (function (window, document) {
 			yesButton = yesButton ? yesButton[0] : null;
 			if (yesButton) {
 				yesButton.addEventListener('click', (e) => {
-					sendMessageToBackground('setLoginInfo', {}); // send empty object to log out
+					sendMessageToBackground('userLogout'); // send empty object to log out
 				});
 			}
 		}
@@ -66,4 +66,6 @@ const PlatformPagesContentScript = (function (window, document) {
 	};
 }(window, document));
 
-PlatformPagesContentScript.init();
+window.addEventListener('load', () => {
+	PlatformPagesContentScript.init();
+});
