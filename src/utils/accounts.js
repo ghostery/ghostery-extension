@@ -28,19 +28,14 @@ import build from 'redux-object';
 import globals from '../classes/Globals';
 import conf from '../classes/Conf';
 import { log, decodeJwt } from './common';
-import { get, save, getCsrfCookie } from './api';
-import { getJson, postJson, sendMessageToPanel } from './utils';
+import { get, update, getCsrfCookie } from './api';
+import { sendMessageToPanel } from './utils';
 
 const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 const { IS_CLIQZ } = globals;
 
 // CONSTANTS
 const { GHOSTERY_DOMAIN } = globals;
-// @TODO const API_ROOT_URL = `https://consumerapi.${GHOSTERY_DOMAIN}.com`;
-const API_ROOT_URL = 'https://localhost:8080';
-const VERIFICATION_URL = `https://signon.${GHOSTERY_DOMAIN}.com/register/verify/`; // can't set culture because site needs to append guid
-const REDIRECT_URL = `https://account.${GHOSTERY_DOMAIN}.com/`;
-const SIGNON_URL = `https://signon.${GHOSTERY_DOMAIN}.com/`; // culture query param not needed, only for cookie
 const SYNC_SET = new Set(globals.SYNC_ARRAY);
 
 /**
@@ -114,6 +109,26 @@ export function pullUserSettings(user_id) {
 		.catch((error) => {
 			log('PanelActions pullUserSettings error', error);
 		});
+}
+
+export function pushUserSettings(settings) {
+	log('PUSH USER SETTINGS');
+	const { login_info } = conf;
+	const { logged_in, user_id } = login_info;
+	if (logged_in && user_id) {
+		return update('settings', {
+			type: 'settings',
+			id: user_id,
+			attributes: {
+				settings_json: settings
+			}
+		})
+		.catch((err) => {
+			log('Error: post api/Sync failed in pushUserSettings', err);
+			return Promise.reject('pushUserSettings error:', err);
+		});
+	}
+	return Promise.resolve();
 }
 
 export function getLoginCookie() {
@@ -196,18 +211,6 @@ export const userLogout = () => (
 			};
 		})
 );
-
-const _removeCookies = () => {
-	const cookies = ['user_id', 'access_token', 'refresh_token', 'csrf_token', 'AUTH'];
-	cookies.forEach((name) => {
-		chrome.cookies.remove({
-			url: `https://${GHOSTERY_DOMAIN}.com`, // ghostery.com || ghosterystage.com
-			name,
-		}, (details) => {
-			log(`Removed cookie with name: ${details.name}`);
-		});
-	});
-};
 
 /**
  * GET user settings from ConsumerAPI
