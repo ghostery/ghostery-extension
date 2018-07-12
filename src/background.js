@@ -652,11 +652,11 @@ function onMessageHandler(request, sender, callback) {
 		}
 	} else if (name === 'skipSetup') {
 		// link to blog post
-		chrome.tabs.update(tab_id, {url: 'https://www.ghostery.com/blog/product-releases/browse-smarter-with-ghostery-8/'});
+		chrome.tabs.update(tab_id, { url: 'https://www.ghostery.com/blog/product-releases/browse-smarter-with-ghostery-8/' });
 		return false;
 	} else if (name === 'closeSetup') {
 		// link to blog post
-		chrome.tabs.update(tab_id, {url: 'https://www.ghostery.com/blog/product-releases/browse-smarter-with-ghostery-8/'});
+		chrome.tabs.update(tab_id, { url: 'https://www.ghostery.com/blog/product-releases/browse-smarter-with-ghostery-8/' });
 		return false;
 	} else if (name === 'getPanelData') {
 		if (!message.tabId) {
@@ -1439,7 +1439,7 @@ function initializeGhosteryModules() {
 		Promise.all([
 			initialiseWebRequestPipeline(),
 		]).then(() => {
-			if(!(IS_EDGE || IS_CLIQZ)) {
+			if (!(IS_EDGE || IS_CLIQZ)) {
 				if (globals.JUST_UPGRADED_FROM_7) {
 					// These users had human web already, so we respect their choice
 					conf.enable_human_web = !humanweb.isDisabled;
@@ -1465,9 +1465,8 @@ function initializeGhosteryModules() {
 				}
 			}
 		});
-	})
-	.catch((e) => {
-			log('cliqzStartup error', e);
+	}).catch((e) => {
+		log('cliqzStartup error', e);
 	});
 
 	if (IS_EDGE) {
@@ -1476,7 +1475,7 @@ function initializeGhosteryModules() {
 		setCliqzModuleEnabled(offers, false);
 	}
 
-	if(IS_CLIQZ) {
+	if (IS_CLIQZ) {
 		setCliqzModuleEnabled(hpn, false);
 		setCliqzModuleEnabled(humanweb, false);
 		setCliqzModuleEnabled(antitracking, false);
