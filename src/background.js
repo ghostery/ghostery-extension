@@ -240,8 +240,7 @@ function getSiteData() {
  */
 function handleGhosteryPlatformPages(name, tab_url) {
 	if (name === 'platformPageLoaded') {
-		// load bearer token from AUTH cookie if present
-		accounts.setLoginInfoFromAuthCookie(tab_url).catch((err) => {
+		accounts.fetchUser().catch((err) => {
 			log('handleGhosteryPlatformPages error', err);
 		});
 	}
@@ -1527,6 +1526,9 @@ function init() {
 		initializePopup();
 		initializeEventListeners();
 		initializeVersioning();
+		accounts.fetchUser().catch((err) => {
+			log('Error in accounts.fetchUser()', err);
+		});
 		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => {
 			// persist Conf properties to storage only after init has completed
 			common.prefsSet(globals.initProps);
