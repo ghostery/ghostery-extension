@@ -26,7 +26,6 @@ import {
 } from '../constants/constants';
 import { sendMessageInPromise } from '../utils/msg';
 import { doXHR } from '../utils/utils';
-import { get, logout } from '../utils/api';
 import globals from '../../../src/classes/Globals';
 import { decodeJwt, log } from '../../../src/utils/common';
 
