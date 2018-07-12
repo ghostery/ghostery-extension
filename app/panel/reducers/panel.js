@@ -86,7 +86,7 @@ export default (state = initialState, action) => {
 		case LOGIN_DATA_SUCCESS: {
 			return Object.assign({}, state, {
 				email: action.data.email,
-				is_validated: action.data.emailValidated
+				is_validated: action.data.is_validated
 			});
 		}
 		case LOGOUT: {

@@ -177,6 +177,10 @@ export function userLogin(email, password) {
 							type: LOGIN_SUCCESS
 						});
 						dispatch({
+							type: LOGIN_DATA_SUCCESS,
+							data: user,
+						});
+						dispatch({
 							type: SHOW_NOTIFICATION,
 							data: {
 								text: `${t('panel_signin_success')} ${email}`,
