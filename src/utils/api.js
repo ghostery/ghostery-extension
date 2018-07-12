@@ -31,7 +31,7 @@ export const getCsrfCookie = () => new Promise((resolve, reject) => {
 		name: 'csrf_token',
 	}, (cookie) => {
 		if (!cookie) {
-			reject('CSRF Token cookie not found');
+			reject(new Error('CSRF Token cookie not found'));
 		}
 		resolve(cookie);
 	});

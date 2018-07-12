@@ -146,40 +146,29 @@ export function pullUserSettings(user_id) {
 export function userLogin(email, password) {
 	return function (dispatch) {
 		const data = `email=${window.encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
-		return fetch(`${API_ROOT_URL}/api/v2/login`, {
-			method: 'POST',
-			body: data,
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded',
-				'Content-Length': Buffer.byteLength(data),
-			},
-			credentials: 'include',
-		})
-			.then((res) => {
-				if (res.status >= 400) {
-					return res.json()
-						.then((json) => {
-							log('PanelActions userLogin server error', json);
-							dispatch({ type: LOGIN_FAILED });
-							json.errors.forEach((err) => {
-								let errorText = '';
-								switch (err.code) {
-									case '10050':
-									case '10110':
-										errorText = t('banner_no_such_account_message');
-										break;
-									default:
-										errorText = t('server_error_message');
-								}
-								dispatch({
-									type: SHOW_NOTIFICATION,
-									data: {
-										text: errorText,
-										classes: 'alert',
-									},
-								});
-							});
+		return sendMessageInPromise('userLogin', data)
+			.then((response) => {
+				if (response.errors) {
+					log('PanelActions userLogin server error', response);
+					dispatch({ type: LOGIN_FAILED });
+					return response.errors.forEach((err) => {
+						let errorText = '';
+						switch (err.code) {
+							case '10050':
+							case '10110':
+								errorText = t('banner_no_such_account_message');
+								break;
+							default:
+								errorText = t('server_error_message');
+						}
+						dispatch({
+							type: SHOW_NOTIFICATION,
+							data: {
+								text: errorText,
+								classes: 'alert',
+							},
 						});
+					});
 				}
 				return sendMessageInPromise('fetchUser')
 					.then((user) => {
@@ -307,55 +296,65 @@ export const createAccount = (email, confirmEmail, firstName, lastName, password
  * @param  {Object} query
  * @return {Object} dispatch
  */
-export function forgotPassword(query) {
+export function forgotPassword(email) {
 	return function (dispatch) {
-		return doXHR('POST', `${API_ROOT_URL}/api/Password/Forgot`, JSON.stringify(query)).then((response) => {
-			if (response.succeeded === true) {
-				dispatch({ type: FORGOT_PASSWORD_SUCCESS });
-				dispatch({
-					type: SHOW_NOTIFICATION,
-					data: {
-						text: t('banner_check_your_email_title'),
-						classes: 'success',
-					},
-				});
-			} else {
-				log('PanelActions forgotPassword success callback error', response);
-				dispatch({
-					type: FORGOT_PASSWORD_FAILED,
-					emailNotFound: false,
-				});
-				dispatch({
-					type: SHOW_NOTIFICATION,
-					data: {
-						text: t('server_error_message'),
-						classes: 'alert',
-					},
-				});
-			}
-		}).catch((error) => {
-			// if the email is not in the DB, system returns a 400
-			if (error.message.includes('Bad Request')) {
-				log('PanelActions forgotPassword email not found', error);
-				dispatch({
-					type: FORGOT_PASSWORD_FAILED,
-					emailNotFound: true,
-				});
-			} else {
-				// server error
-				log('PanelActions forgotPassword server error', error);
-				dispatch({
-					type: FORGOT_PASSWORD_FAILED,
-					emailNotFound: false,
-				});
-				dispatch({
-					type: SHOW_NOTIFICATION,
-					data: {
-						text: t('server_error_message'),
-						classes: 'alert',
-					},
-				});
-			}
-		});
+		const data = `email=${window.encodeURIComponent(email)}`;
+		return sendMessageInPromise('resetPassword', data)
+			.then((response) => {
+				// @TODO
+				// console.log('resetPassword response', response);
+			})
+			.catch((err) => {
+				// @TODO
+				// console.log('resetPassword err', err);
+			});
+		// return doXHR('POST', `${API_ROOT_URL}/api/Password/Forgot`, JSON.stringify(query)).then((response) => {
+		// 	if (response.succeeded === true) {
+		// 		dispatch({ type: FORGOT_PASSWORD_SUCCESS });
+		// 		dispatch({
+		// 			type: SHOW_NOTIFICATION,
+		// 			data: {
+		// 				text: t('banner_check_your_email_title'),
+		// 				classes: 'success',
+		// 			},
+		// 		});
+		// 	} else {
+		// 		log('PanelActions forgotPassword success callback error', response);
+		// 		dispatch({
+		// 			type: FORGOT_PASSWORD_FAILED,
+		// 			emailNotFound: false,
+		// 		});
+		// 		dispatch({
+		// 			type: SHOW_NOTIFICATION,
+		// 			data: {
+		// 				text: t('server_error_message'),
+		// 				classes: 'alert',
+		// 			},
+		// 		});
+		// 	}
+		// }).catch((error) => {
+		// 	// if the email is not in the DB, system returns a 400
+		// 	if (error.message.includes('Bad Request')) {
+		// 		log('PanelActions forgotPassword email not found', error);
+		// 		dispatch({
+		// 			type: FORGOT_PASSWORD_FAILED,
+		// 			emailNotFound: true,
+		// 		});
+		// 	} else {
+		// 		// server error
+		// 		log('PanelActions forgotPassword server error', error);
+		// 		dispatch({
+		// 			type: FORGOT_PASSWORD_FAILED,
+		// 			emailNotFound: false,
+		// 		});
+		// 		dispatch({
+		// 			type: SHOW_NOTIFICATION,
+		// 			data: {
+		// 				text: t('server_error_message'),
+		// 				classes: 'alert',
+		// 			},
+		// 		});
+		// 	}
+		// });
 	};
 }
