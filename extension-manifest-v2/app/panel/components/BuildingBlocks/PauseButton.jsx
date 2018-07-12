@@ -169,7 +169,7 @@ class PauseButton extends React.Component {
 						{this.renderPauseButtonText()}
 						{!this.props.isAbPause && (
 							<Tooltip
-								header={this.props.isPaused ? t('summary_resume_ghostery_tooltip') : t('summary_pause_ghostery_tooltip')}
+								body={this.props.isPaused ? t('summary_resume_ghostery_tooltip') : t('summary_pause_ghostery_tooltip')}
 								position={(this.props.isCentered) ? 'right' : 'top'}
 							/>
 						)}

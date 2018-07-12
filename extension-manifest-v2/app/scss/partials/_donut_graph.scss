@@ -12,35 +12,33 @@
  */
 
 .sub-component.donut-graph {
-	.show-on-big { display: none; }
-	&.big .show-on-big { display: block; }
-
 	.graph-text {
 		text-transform: capitalize;
 		text-align: center;
 		font-size: 12px;
 		line-height: 16px;
 		font-weight: 500;
+		padding: 13px 0;
 		color: #4a4a4a;
 	}
 	&.big .graph-text {
 		margin-top: -125px;
-		padding-top: 22px;
 		height: 120px;
 	}
 	&.small .graph-text {
 		margin-top: -99px;
-		padding-top: 18px;
 		height: 94px;
 	}
 	.graph-text-count {
-		font-size: 30px;
-		line-height: 41px;
+		height: 94px;
+		font-size: 42px;
+		line-height: 90px;
 		font-weight: 700;
 	}
 	&.small .graph-text-count {
+		height: 68px;
 		font-size: 28px;
-		line-height: 35px;
+		line-height: 64px;
 	}
 
 	.tooltip-container {
