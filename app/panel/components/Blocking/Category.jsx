@@ -112,13 +112,14 @@ class Category extends React.Component {
 	 */
 	clickCategoryStatus() {
 		const globalBlocking = !!this.props.globalBlocking;
-		const blocked = !(this.props.category.num_blocked === this.props.category.num_total);
+		const blocked = !this.state.allShownBlocked;
 
 		if ((this.props.paused_blocking || this.props.sitePolicy) && !globalBlocking) {
 			return;
 		}
 
 		this.props.actions.updateCategoryBlocked({
+			smartBlockActive: this.props.smartBlockActive,
 			smartBlock: this.props.smartBlock,
 			category: this.props.category.id,
 			blocked,
@@ -233,6 +234,7 @@ class Category extends React.Component {
 						sitePolicy={this.props.sitePolicy}
 						paused_blocking={this.props.paused_blocking}
 						language={this.props.language}
+						smartBlockActive={this.props.smartBlockActive}
 						smartBlock={this.props.smartBlock}
 					/>
 				}

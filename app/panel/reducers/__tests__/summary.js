@@ -57,7 +57,9 @@ describe('app/panel/reducers/summary.js', () => {
 
 		expect(summaryReducer(initState, action)).toEqual({
 			adBlock: {},
-			antiTracking: {},
+			antiTracking: {
+				totalUnsafeCount: 0
+			},
 		});
 	});
 

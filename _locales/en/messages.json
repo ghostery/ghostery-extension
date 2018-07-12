@@ -672,14 +672,8 @@
 	"panel_tracker_slow_non_secure_end": {
 		"message": " on this page."
 	},
-	"tracker_signular": {
-		"message": "tracker"
-	},
-	"tracker_plural": {
-		"message": "trackers"
-	},
-	"tracker_found": {
-		"message": "found"
+	"panel_tracker_total_tooltip": {
+		"message": "Total count of trackers found, ads blocked and data points anonymized."
 	},
 	"panel_signin_success": {
 		"message": "You are now signed in as "
