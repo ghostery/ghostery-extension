@@ -152,10 +152,20 @@ class Category extends React.Component {
 	* @return {ReactComponent}   ReactComponent instance
 	*/
 	render() {
-		const { category } = this.props;
+		const { category, paused_blocking, sitePolicy } = this.props;
 		const globalBlocking = !!this.props.globalBlocking;
 		const filteredText = { color: 'red' };
 		const checkBoxStyle = `${(this.state.totalShownBlocked && this.state.allShownBlocked) ? 'all-blocked ' : (this.state.totalShownBlocked ? 'some-blocked ' : '')} checkbox-container`;
+
+		let trackersBlockedCount;
+		if (paused_blocking || sitePolicy === 2) {
+			trackersBlockedCount = 0;
+		} else if (sitePolicy === 1) {
+			trackersBlockedCount = category.num_total || 0;
+		} else {
+			trackersBlockedCount = category.num_blocked || 0;
+		}
+
 		return (
 			<div className={`${category.num_shown === 0 ? 'hide' : ''} blocking-category`}>
 				<div className={`sticky-category${this.state.showTooltip ? ' no-sticky' : ''}`}>
@@ -184,9 +194,9 @@ class Category extends React.Component {
 									</span>
 								</div>
 								{
-									!!category.num_blocked &&
+									!!trackersBlockedCount &&
 									<div className="blocked-count">
-										<span className="count">{`${category.num_blocked} `}</span>
+										<span className="count">{`${trackersBlockedCount} `}</span>
 										<span className="text">{ t('blocking_category_blocked') }</span>
 									</div>
 								}
