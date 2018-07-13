@@ -136,7 +136,67 @@ export function userLogin(email, password) {
  * @return {Object} dispatch
  * @memberof SetupActions
  */
-export function createAccount(query) {
+
+export const createAccount = (email, confirmEmail, firstName, lastName, password) => (
+	function (dispatch) {
+		const data = `email=${window.encodeURIComponent(email)}&email_confirmation=${window.encodeURIComponent(confirmEmail)}&first_name=${window.encodeURIComponent(firstName)}&last_name=${window.encodeURIComponent(lastName)}&password=${window.encodeURIComponent(password)}`;
+		return fetch(`${API_ROOT_URL}/api/v2/register`, {
+			method: 'POST',
+			body: data,
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				'Content-Length': Buffer.byteLength(data),
+			},
+			credentials: 'include'
+		})
+			.then((res) => {
+				if (res.status >= 400) {
+					res.json().then((json) => {
+						json.errors.forEach((err) => {
+							let errorText = '';
+							switch (err.code) {
+								case '10070':
+									errorText = t('email_address_in_use');
+									break;
+								case '10080':
+									errorText = t('invalid_email_confirmation');
+									break;
+								default:
+									errorText = t('server_error_message');
+							}
+							dispatch({
+								type: CREATE_ACCOUNT_FAIL,
+								data: {
+									text: errorText,
+									classes: 'alert',
+								},
+							});
+						});
+					});
+					return;
+				}
+				dispatch({
+					type: CREATE_ACCOUNT_SUCCESS,
+					data: {
+						payload: { email },
+						text: `${t('panel_signin_success')} ${email}`
+					},
+				});
+			})
+			.catch((err) => {
+				log('PanelActions createAccount returned with an error', err);
+				dispatch({
+					type: CREATE_ACCOUNT_FAIL,
+					data: {
+						text: t('server_error_message'),
+						classes: 'alert',
+					},
+				});
+			});
+	}
+);
+
+export function createAccountOld(query) {
 	return function (dispatch) {
 		return utils.doXHR('POST', `${API_ROOT_URL}/api/Account`, JSON.stringify(query)).then((response) => {
 			if (response.UserId !== null && response.Token !== null) {
