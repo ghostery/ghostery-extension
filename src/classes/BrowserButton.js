@@ -184,7 +184,7 @@ class BrowserButton {
 	 */
 	_getAntiTrackCount(tabId) {
 		return new Promise((resolve, reject) => {
-			if (!conf.enable_anti_tracking) {
+			if (!conf.enable_anti_tracking || !antitracking.background) {
 				resolve(0);
 			}
 			antitracking.background.actions.aggregatedBlockingStats(tabId).then((antiTracking) => {
@@ -212,7 +212,7 @@ class BrowserButton {
 	 * @return {number}        the number of trackers in an object
 	 */
 	_getAdBlockCount(tabId) {
-		if (!conf.enable_ad_block) {
+		if (!conf.enable_ad_block || !adblocker.background) {
 			return 0;
 		}
 		const adBlocking = adblocker.background.actions.getAdBlockInfoForTab(tabId);
