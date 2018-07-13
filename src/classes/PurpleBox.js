@@ -18,9 +18,9 @@ import foundBugs from './FoundBugs';
 import tabInfo from './TabInfo';
 import Policy from './Policy';
 import globals from './Globals';
+import account from './Account';
 import { log } from '../utils/common';
 import { sendMessage, injectScript } from '../utils/utils';
-import * as accounts from '../utils/accounts';
 
 const t = chrome.i18n.getMessage;
 /**
@@ -111,7 +111,7 @@ class PurpleBox {
 									conf.alert_bubble_pos = message.message.alert_bubble_pos;
 									conf.alert_bubble_timeout = message.message.alert_bubble_timeout;
 									// push new settings to API
-									accounts.pushUserSettings(accounts.buildUserSettings());
+									account.pushUserSettings();
 								}
 							});
 						}

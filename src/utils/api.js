@@ -3,7 +3,7 @@ import globals from '../classes/Globals';
 let isRefreshing = false;
 const tokenRefreshedEventType = 'tokenRefreshed';
 
-const _getJSONAPIErrorsObject = e => ([{ title: 'Something went wrong.', detail: e.toString() }]);
+export const _getJSONAPIErrorsObject = e => ([{ title: 'Something went wrong.', detail: e.toString() }]);
 
 const _refreshToken = function () {
 	if (isRefreshing) {
