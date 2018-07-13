@@ -681,6 +681,7 @@ function onMessageHandler(request, sender, callback) {
 	} else if (name === 'getCliqzModuleData') {
 		const modules = { adblock: {}, antitracking: {} };
 		utils.getActiveTab((tab) => {
+			button.update();
 			if (conf.enable_anti_tracking) {
 				cliqz.modules.antitracking.background.actions.aggregatedBlockingStats(tab.id).then((data) => {
 					modules.antitracking = data;
@@ -1561,4 +1562,3 @@ function init() {
 
 // Initialize the application.
 init();
-
