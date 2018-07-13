@@ -40,11 +40,12 @@ import surrogatedb from './classes/SurrogateDb';
 import tabInfo from './classes/TabInfo';
 import metrics from './classes/Metrics';
 import rewards from './classes/Rewards';
+import account from './classes/Account';
 // utilities
-import * as accounts from './utils/accounts';
 import { allowAllwaysC2P } from './utils/click2play';
 import * as common from './utils/common';
 import * as utils from './utils/utils';
+import { _getJSONAPIErrorsObject } from './utils/api';
 
 // class instantiation
 const events = new Events();
@@ -240,8 +241,8 @@ function getSiteData() {
  */
 function handleGhosteryPlatformPages(name, tab_url) {
 	if (name === 'platformPageLoaded') {
-		accounts.fetchUser()
-			.then(loginInfo => accounts.pullUserSettings(loginInfo.user_id))
+		account.getUser()
+			.then(account.getUserSettings)
 			.catch((err) => {
 				log('handleGhosteryPlatformPages error', err);
 			});
@@ -500,7 +501,7 @@ function handlePurplebox(name, message, tab_id, callback) {
 		conf.alert_bubble_pos = message.alert_bubble_pos;
 		conf.alert_bubble_timeout = message.alert_bubble_timeout;
 		// push new settings to API
-		accounts.pushUserSettings(accounts.buildUserSettings());
+		account.saveUserSettings();
 	}
 	return false;
 }
@@ -704,10 +705,14 @@ function onMessageHandler(request, sender, callback) {
 			}
 		});
 		return true;
-	} else if (name === 'pullUserSettings') {
-		accounts.pullUserSettings(message)
+	} else if (name === 'account.getUserSettings') {
+		account.getUserSettings()
 			.then((settings) => {
 				callback(settings);
+			})
+			.catch((err) => {
+				log('Error getting user settings:', err);
+				callback({ errors: _getJSONAPIErrorsObject(err) });
 			});
 		return true;
 	} else if (name === 'getTrackerDescription') {
@@ -716,28 +721,30 @@ function onMessageHandler(request, sender, callback) {
 			callback(description);
 		});
 		return true;
-	} else if (name === 'userLogin') {
-		accounts.userLogin(message)
+	} else if (name === 'account.login') {
+		const { email, password } = message;
+		account.login(email, password)
 			.then((response) => {
 				callback(response);
 			})
 			.catch((err) => {
 				log('LOGIN ERROR', err);
-				callback({ errors: [err] });
+				callback({ errors: _getJSONAPIErrorsObject(err) });
+				// callback({ errors: [err] });
 			});
 		return true;
-	} else if (name === 'userLogout') {
-		accounts.userLogout()
+	} else if (name === 'account.logout') {
+		account.logout()
 			.then((response) => {
 				callback(response);
 			})
 			.catch((err) => {
-				callback(err);
 				log('LOGOUT ERROR');
+				callback(err);
 			});
 		return true;
 	} else if (name === 'resetPassword') {
-		accounts.resetPassword(message)
+		account.resetPassword(message)
 			.then((response) => {
 				callback(response);
 			})
@@ -747,7 +754,7 @@ function onMessageHandler(request, sender, callback) {
 			});
 		return true;
 	} else if (name === 'fetchUser') {
-		accounts.fetchUser(message)
+		account.getUser(message)
 			.then((user) => {
 				callback(user);
 			})
@@ -757,7 +764,7 @@ function onMessageHandler(request, sender, callback) {
 			});
 		return true;
 	} else if (name === 'createAccount') {
-		accounts.createAccount(message)
+		account.createAccount(message)
 			.then((response) => {
 				callback(response);
 			})
@@ -786,7 +793,7 @@ function onMessageHandler(request, sender, callback) {
 	} else if (name === 'getSettingsForExport') {
 		utils.getActiveTab((tab) => {
 			if (tab && tab.id && tab.url.startsWith('http')) {
-				const settings = accounts.buildUserSettings();
+				const settings = account.buildUserSettings();
 				// Blacklisted and whitelisted sites are removed from sync array,
 				// but we want to allow export and import these properties manually
 				settings.site_blacklist = conf.site_blacklist;
@@ -808,7 +815,7 @@ function onMessageHandler(request, sender, callback) {
 		});
 		return true;
 	} else if (name === 'sendVerificationEmail') {
-		accounts.sendVerificationEmail().then((result) => {
+		account.sendVerificationEmail().then((result) => {
 			callback(result);
 		});
 		return true;
@@ -1560,11 +1567,13 @@ function init() {
 		initializePopup();
 		initializeEventListeners();
 		initializeVersioning();
-		accounts.fetchUser()
-			.then(loginInfo => accounts.pullUserSettings(loginInfo.user_id))
-			.catch((err) => {
-				log('Error in accounts.fetchUser()', err);
-			});
+		if (conf.account) {
+			account.getUser()
+				.then(account.getUserSettings)
+				.catch((err) => {
+					log('Error in account.getUser()', err);
+				});
+		}
 		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => {
 			// persist Conf properties to storage only after init has completed
 			common.prefsSet(globals.initProps);

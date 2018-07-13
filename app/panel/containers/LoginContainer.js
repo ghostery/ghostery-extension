@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Login from '../components/Login';
 import * as actions from '../actions/PanelActions'; // get shared actions from Panel
+import * as accountActions from '../actions/AccountActions';
 /**
  * Map redux store state properties to Login view component own properties.
  * @memberOf PanelContainers
@@ -38,7 +39,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state.login, {
  * @param  {Object} 	ownProps  Login view component own props
  * @return {function}          	  to be used as an argument in redux connect call
  */
-const mapDispatchToProps = (dispatch, ownProps) => ({ actions: bindActionCreators(actions, dispatch) });
+const mapDispatchToProps = (dispatch, ownProps) => ({ actions: bindActionCreators(Object.assign(actions, accountActions), dispatch) });
 /**
  * Connects Login view component to the Redux store.
  * @memberOf PanelContainers

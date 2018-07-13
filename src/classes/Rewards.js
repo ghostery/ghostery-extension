@@ -21,7 +21,6 @@ import Policy from './Policy';
 import globals from './Globals';
 import { log, prefsGet, prefsSet } from '../utils/common';
 import { sendMessage, injectScript } from '../utils/utils';
-import * as accounts from '../utils/accounts';
 
 const t = chrome.i18n.getMessage;
 /**
