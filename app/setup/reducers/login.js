@@ -47,7 +47,7 @@ export default (state = initialState, action) => {
 		case GET_LOGIN_INFO: {
 			return Object.assign({}, state, {
 				success: action.data.logged_in,
-				payload: action.data.logged_in && action.data.decoded_user_token || initialState.payload,
+				payload: action.data,
 			});
 		}
 		case CREATE_ACCOUNT_SUCCESS:
