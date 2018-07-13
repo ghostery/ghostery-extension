@@ -742,8 +742,8 @@ function onMessageHandler(request, sender, callback) {
 				callback(response);
 			})
 			.catch((err) => {
-				log('RESET PASSWORD ERROR');
 				callback({ errors: [err] });
+				log('RESET PASSWORD ERROR');
 			});
 		return true;
 	} else if (name === 'fetchUser') {
@@ -753,6 +753,16 @@ function onMessageHandler(request, sender, callback) {
 			})
 			.catch((err) => {
 				callback(err);
+				log('FETCH USER ERROR');
+			});
+		return true;
+	} else if (name === 'createAccount') {
+		accounts.createAccount(message)
+			.then((response) => {
+				callback(response);
+			})
+			.catch((err) => {
+				callback({ errors: [err] });
 				log('FETCH USER ERROR');
 			});
 		return true;
