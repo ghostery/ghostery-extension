@@ -10,7 +10,9 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-
+import 'whatwg-fetch';
+import normalize from 'json-api-normalizer';
+import build from 'redux-object';
 import {
 	GET_LOGIN_INFO,
 	LOGIN_SUCCESS,
@@ -43,12 +45,13 @@ export function clearMessage() {
  */
 export function getLoginInfo() {
 	return function (dispatch) {
-		return msg.sendMessageInPromise('getLoginInfo').then((data) => {
-			dispatch({
-				type: GET_LOGIN_INFO,
-				data,
+		return msg.sendMessageInPromise('fetchUser')
+			.then((user) => {
+				dispatch({
+					type: GET_LOGIN_INFO,
+					data: user,
+				});
 			});
-		});
 	};
 }
 
@@ -82,49 +85,48 @@ export function loginFail() {
  * @return {Object} dispatch
  * @memberof SetupActions
  */
-export function userLogin(query) {
+export function userLogin(email, password) {
 	return function (dispatch) {
-		return utils.doXHR('POST', `${API_ROOT_URL}/api/Login`, JSON.stringify(query)).then((response) => {
-			if (response.UserId !== null && response.Token !== null) {
-				const decodedToken = decodeJwt(response.Token);
-
-				if (decodedToken && decodedToken.payload) {
-					msg.sendMessageInPromise('setLoginInfo', {
-						user_token: response.Token,
-						decoded_user_token: decodedToken.payload,
-						from_setup: true
-					}).then((data) => {
+		const data = `email=${window.encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
+		return msg.sendMessageInPromise('userLogin', data)
+			.then((response) => {
+				if (response.errors) {
+					log('PanelActions userLogin server error', response);
+					response.errors.forEach((err) => {
+						let errorText = '';
+						switch (err.code) {
+							case '10050':
+							case '10110':
+								errorText = t('banner_no_such_account_message');
+								break;
+							default:
+								errorText = t('server_error_message');
+						}
+						dispatch({
+							type: LOGIN_FAIL,
+							data: errorText
+						});
+					});
+					return false;
+				}
+				return msg.sendMessageInPromise('fetchUser')
+					.then((user) => {
 						dispatch({
 							type: LOGIN_SUCCESS,
 							data: {
-								payload: decodedToken.payload,
-								text: `${t('panel_signin_success')} ${query.EmailAddress}`
-							},
-						});
-					}).catch((err) => {
-						log('PanelActions userLogin returned with an error', err);
-						dispatch({
-							type: LOGIN_FAIL,
-							data: 'Error logging in, please try again.',
+								text: `${t('panel_signin_success')} ${email}`,
+								payload: { email }
+							}
 						});
 					});
-				}
-			} else {
-				// XHR was successful but we did not get a token back
-				log('PanelActions userLogin callback error', response);
+			})
+			.catch((err) => {
+				log('PanelActions userLogin server error', err);
 				dispatch({
 					type: LOGIN_FAIL,
-					data: t('banner_no_such_account_message'),
+					data: t('server_error_message')
 				});
-			}
-		}).catch((error) => {
-			// server error
-			log('PanelActions userLogin server error', error);
-			dispatch({
-				type: LOGIN_FAIL,
-				data: 'Server error.',
 			});
-		});
 	};
 }
 

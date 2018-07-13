@@ -39,7 +39,7 @@ class LogInView extends Component {
 	*/
 	componentWillMount() {
 		this.props.actions.getLoginInfo().then((data) => {
-			if (this.props.payload.ClaimEmailAddress) {
+			if (this.props.payload.email) {
 				this.setState({
 					status: 'loggedin',
 				});
@@ -113,10 +113,7 @@ class LogInView extends Component {
 			return;
 		}
 
-		this.props.actions.userLogin({
-			EmailAddress: this.state.email,
-			Password: this.state.password,
-		});
+		this.props.actions.userLogin(this.state.email, this.state.password);
 		this.props.actions.showLoading();
 	}
 
@@ -468,7 +465,7 @@ class LogInView extends Component {
 					<div className="row">
 						<div className="columns text-center logged-in">
 							<h3>
-								{t('setup_login_view_signed_in_as')} {this.props.payload.ClaimEmailAddress}
+								{t('setup_login_view_signed_in_as')} {this.props.payload.email}
 							</h3>
 						</div>
 					</div>
