@@ -73,10 +73,7 @@ class Header extends React.Component {
 	 */
 	_handleSignIn = (event) => {
 		event.preventDefault();
-		this.props.actions.userLogin({
-			EmailAddress: this.state.email,
-			Password: this.state.password,
-		});
+		this.props.actions.userLogin(this.state.email, this.state.password);
 	}
 
 	/**
