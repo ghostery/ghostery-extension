@@ -682,20 +682,16 @@ function onMessageHandler(request, sender, callback) {
 		const modules = { adblock: {}, antitracking: {} };
 		utils.getActiveTab((tab) => {
 			button.update();
+			if (conf.enable_ad_block) {
+				modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tab.id);
+			}
 			if (conf.enable_anti_tracking) {
 				cliqz.modules.antitracking.background.actions.aggregatedBlockingStats(tab.id).then((data) => {
 					modules.antitracking = data;
-					// send adblock and antitracking together
-					if (conf.enable_ad_block) {
-						modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tab.id);
-					}
 					callback(modules);
 				}).catch((err) => {
 					callback(modules);
 				});
-			} else if (conf.enable_ad_block) {
-				modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tab.id);
-				callback(modules);
 			} else {
 				callback(modules);
 			}
