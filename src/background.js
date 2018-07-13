@@ -500,7 +500,7 @@ function handlePurplebox(name, message, tab_id, callback) {
 		conf.alert_bubble_pos = message.alert_bubble_pos;
 		conf.alert_bubble_timeout = message.alert_bubble_timeout;
 		// push new settings to API
-		accounts.pushUserSettings({ conf: accounts.buildUserSettings() });
+		accounts.pushUserSettings(accounts.buildUserSettings());
 	}
 	return false;
 }

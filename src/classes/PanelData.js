@@ -151,7 +151,7 @@ class PanelData {
 
 		if (syncSetDataChanged) {
 			// Push conf changes to the server
-			pushUserSettings({ conf: buildUserSettings() });
+			pushUserSettings(buildUserSettings());
 		}
 
 		if (otherDataChanged) {
