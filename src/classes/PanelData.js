@@ -24,7 +24,7 @@ import Policy from './Policy';
 import tabInfo from './TabInfo';
 import abtest from './ABTest';
 import rewards from './Rewards';
-import { pushUserSettings, buildUserSettings } from '../utils/accounts';
+import account from './Account';
 import { getActiveTab, flushChromeMemoryCache } from '../utils/utils';
 import { objectEntries, log } from '../utils/common';
 
@@ -151,7 +151,7 @@ class PanelData {
 
 		if (syncSetDataChanged) {
 			// Push conf changes to the server
-			pushUserSettings(buildUserSettings());
+			account.saveUserSettings();
 		}
 
 		if (otherDataChanged) {
