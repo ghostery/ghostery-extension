@@ -135,19 +135,7 @@ class LogInView extends Component {
 		const VERIFICATION_URL = `https:\/\/signon.${globals.GHOSTERY_DOMAIN}.com/register/verify/`; // can't set culture query parameter because site needs to append guid
 		const REDIRECT_URL = `https:\/\/account.${globals.GHOSTERY_DOMAIN}.com/`;
 
-		this.props.actions.createAccount({
-			EmailAddress: email,
-			ConfirmEmailAddress: confirmEmail,
-			Password: password,
-			ModifyingUserId: email,
-			FirstName: firstName,
-			LastName: lastName,
-			UserType: 2,
-			KeepUpdatedOnProductReleases: true,
-			ValidationRedirectUrlToAddCodeSuffixOn: VERIFICATION_URL,
-			FooterUrl: VERIFICATION_URL,
-			VerificationContinueUrl: REDIRECT_URL,
-		});
+		this.props.actions.createAccount(email, confirmEmail, firstName, lastName, password);
 		this.props.actions.showLoading();
 	}
 
