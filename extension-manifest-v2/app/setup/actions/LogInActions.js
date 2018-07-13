@@ -140,37 +140,27 @@ export function userLogin(email, password) {
 export const createAccount = (email, confirmEmail, firstName, lastName, password) => (
 	function (dispatch) {
 		const data = `email=${window.encodeURIComponent(email)}&email_confirmation=${window.encodeURIComponent(confirmEmail)}&first_name=${window.encodeURIComponent(firstName)}&last_name=${window.encodeURIComponent(lastName)}&password=${window.encodeURIComponent(password)}`;
-		return fetch(`${API_ROOT_URL}/api/v2/register`, {
-			method: 'POST',
-			body: data,
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded',
-				'Content-Length': Buffer.byteLength(data),
-			},
-			credentials: 'include'
-		})
-			.then((res) => {
-				if (res.status >= 400) {
-					res.json().then((json) => {
-						json.errors.forEach((err) => {
-							let errorText = '';
-							switch (err.code) {
-								case '10070':
-									errorText = t('email_address_in_use');
-									break;
-								case '10080':
-									errorText = t('invalid_email_confirmation');
-									break;
-								default:
-									errorText = t('server_error_message');
-							}
-							dispatch({
-								type: CREATE_ACCOUNT_FAIL,
-								data: {
-									text: errorText,
-									classes: 'alert',
-								},
-							});
+		return msg.sendMessageInPromise('createAccount', data)
+			.then((response) => {
+				if (response.errors) {
+					response.errors.forEach((err) => {
+						let errorText = '';
+						switch (err.code) {
+							case '10070':
+								errorText = t('email_address_in_use');
+								break;
+							case '10080':
+								errorText = t('invalid_email_confirmation');
+								break;
+							default:
+								errorText = t('server_error_message');
+						}
+						dispatch({
+							type: CREATE_ACCOUNT_FAIL,
+							data: {
+								text: errorText,
+								classes: 'alert',
+							},
 						});
 					});
 					return;
@@ -195,65 +185,3 @@ export const createAccount = (email, confirmEmail, firstName, lastName, password
 			});
 	}
 );
-
-export function createAccountOld(query) {
-	return function (dispatch) {
-		return utils.doXHR('POST', `${API_ROOT_URL}/api/Account`, JSON.stringify(query)).then((response) => {
-			if (response.UserId !== null && response.Token !== null) {
-				const decodedToken = decodeJwt(response.Token);
-
-				if (decodedToken && decodedToken.payload) {
-					msg.sendMessageInPromise('setLoginInfo', {
-						user_token: response.Token,
-						decoded_user_token: decodedToken.payload,
-					}).then((data) => {
-						dispatch({
-							type: CREATE_ACCOUNT_SUCCESS,
-							data: {
-								payload: decodedToken.payload,
-								text: `${t('panel_signin_success')} ${query.EmailAddress}`
-							},
-						});
-					}).catch((err) => {
-						log('PanelActions createAccount returned with an error', err);
-						dispatch({
-							type: CREATE_ACCOUNT_FAIL,
-							data: {
-								text: t('server_error_message'),
-								classes: 'alert',
-							},
-						});
-					});
-				}
-			} else {
-				// XHR was successful but we did not get a token back
-				log('PanelActions createAccount callback error', response);
-				let text;
-
-				// TODO: temporary until we get better error handling on the consumerAPI
-				if (response.Message.startsWith('User with email address')) {
-					text = t('email_address_in_use');
-				} else {
-					text = t('server_error_message');
-				}
-				dispatch({
-					type: CREATE_ACCOUNT_FAIL,
-					data: {
-						text,
-						classes: 'alert',
-					},
-				});
-			}
-		}).catch((error) => {
-			// server error
-			log('PanelActions createAccount server error', error);
-			dispatch({
-				type: CREATE_ACCOUNT_FAIL,
-				data: {
-					text: t('server_error_message'),
-					classes: 'alert',
-				},
-			});
-		});
-	};
-}
