@@ -284,3 +284,20 @@ export const sendVerificationEmail = () => (
 			});
 	})
 );
+
+export const createAccount = data => fetch(`${globals.AUTH_SERVER}/api/v2/register`, {
+	method: 'POST',
+	body: data,
+	headers: {
+		'Content-Type': 'application/x-www-form-urlencoded',
+		'Content-Length': Buffer.byteLength(data),
+	},
+	credentials: 'include',
+})
+	.then((response) => {
+		if (response.status >= 400) {
+			return response.json().then(json => Promise.resolve(json));
+		}
+		return Promise.resolve(response);
+	})
+	.catch(err => Promise.reject(err));
