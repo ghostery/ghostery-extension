@@ -229,19 +229,11 @@ export function userLogout() {
 export const createAccount = (email, confirmEmail, firstName, lastName, password) => (
 	function (dispatch) {
 		const data = `email=${window.encodeURIComponent(email)}&email_confirmation=${window.encodeURIComponent(confirmEmail)}&first_name=${window.encodeURIComponent(firstName)}&last_name=${window.encodeURIComponent(lastName)}&password=${window.encodeURIComponent(password)}`;
-		return fetch(`${API_ROOT_URL}/api/v2/register`, {
-			method: 'POST',
-			body: data,
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded',
-				'Content-Length': Buffer.byteLength(data),
-			},
-			credentials: 'include'
-		}).then((res) => {
-			if (res.status >= 400) {
-				res.json().then((json) => {
+		return sendMessageInPromise('createAccount', data)
+			.then((response) => {
+				if (response.errors) {
 					dispatch({ type: CREATE_ACCOUNT_FAILED });
-					json.errors.forEach((err) => {
+					response.errors.forEach((err) => {
 						let errorText = '';
 						switch (err.code) {
 							case '10070':
@@ -261,33 +253,32 @@ export const createAccount = (email, confirmEmail, firstName, lastName, password
 							},
 						});
 					});
-				});
-				return;
-			}
+					return;
+				}
 
-			sendMessageInPromise('fetchUser')
-				.then((user) => {
-					dispatch({
-						type: CREATE_ACCOUNT_SUCCESS,
-						data: {
-							email: user.email,
-							is_validated: user.is_validated
-						}
+				sendMessageInPromise('fetchUser')
+					.then((user) => {
+						dispatch({
+							type: CREATE_ACCOUNT_SUCCESS,
+							data: {
+								email: user.email,
+								is_validated: user.is_validated
+							}
+						});
+						dispatch({
+							type: LOGIN_DATA_SUCCESS,
+							data: user,
+						});
+						dispatch({
+							type: SHOW_NOTIFICATION,
+							data: {
+								text: t('panel_email_verification_sent', user.email),
+								classes: 'success',
+							},
+						});
+						return user;
 					});
-					dispatch({
-						type: LOGIN_DATA_SUCCESS,
-						data: user,
-					});
-					dispatch({
-						type: SHOW_NOTIFICATION,
-						data: {
-							text: t('panel_email_verification_sent', user.email),
-							classes: 'success',
-						},
-					});
-					return user;
-				});
-		});
+			});
 	}
 );
 
