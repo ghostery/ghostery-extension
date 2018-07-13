@@ -727,7 +727,7 @@ function onMessageHandler(request, sender, callback) {
 			});
 		return true;
 	} else if (name === 'userLogout') {
-		accounts.userLgmogout()
+		accounts.userLogout()
 			.then((response) => {
 				callback(response);
 			})
