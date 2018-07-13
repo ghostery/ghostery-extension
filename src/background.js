@@ -727,7 +727,7 @@ function onMessageHandler(request, sender, callback) {
 			});
 		return true;
 	} else if (name === 'userLogout') {
-		accounts.userLogout()
+		accounts.userLgmogout()
 			.then((response) => {
 				callback(response);
 			})
@@ -742,8 +742,8 @@ function onMessageHandler(request, sender, callback) {
 				callback(response);
 			})
 			.catch((err) => {
-				callback(err);
 				log('RESET PASSWORD ERROR');
+				callback({ errors: [err] });
 			});
 		return true;
 	} else if (name === 'fetchUser') {
