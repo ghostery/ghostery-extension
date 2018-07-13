@@ -226,12 +226,12 @@ export function resetPassword(data) {
 		},
 	})
 		.then((response) => {
-			Promise.resolve(response);
+			if (response.status >= 400) {
+				return response.json().then(json => Promise.resolve(json));
+			}
+			return Promise.resolve(response);
 		})
-		.catch((err) => {
-			log('RESET PASSWORD ERR', err);
-			Promise.resolve(err);
-		});
+		.catch(err => Promise.reject(err));
 }
 
 const _removeCookies = () => {
