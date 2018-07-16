@@ -768,6 +768,16 @@ function onMessageHandler(request, sender, callback) {
 				log('FETCH USER ERROR');
 			});
 		return true;
+	} else if (name === 'account.sendValidateAccountEmail') {
+		account.sendValidateAccountEmail()
+			.then((success) => {
+				callback(success);
+			})
+			.catch((err) => {
+				callback(err);
+				log('sendValidateAccountEmail error', err);
+			});
+		return true;
 	} else if (name === 'update_database') {
 		checkLibraryVersion().then((result) => {
 			callback(result);
@@ -807,11 +817,6 @@ function onMessageHandler(request, sender, callback) {
 			} else {
 				callback(false);
 			}
-		});
-		return true;
-	} else if (name === 'sendVerificationEmail') {
-		account.sendVerificationEmail().then((result) => {
-			callback(result);
 		});
 		return true;
 	} else if (name === 'ping') {

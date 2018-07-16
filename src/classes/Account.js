@@ -153,6 +153,12 @@ class Account {
 		});
 	}
 
+	sendValidateAccountEmail() {
+		const { userID } = conf.account;
+		return fetch(`${globals.AUTH_SERVER}/api/v2/send_email/validate_account/${userID}`)
+			.then(res => res.status < 400);
+	}
+
 	_getUserIDFromCookie() {
 		return new Promise((resolve, reject) => {
 			chrome.cookies.get({
@@ -167,18 +173,6 @@ class Account {
 			});
 		});
 	}
-
-	/**
-	 * Return current login state.
-	 * @memberOf BackgroundUtils
-	 *
-	 * @return {Promise} 	current login state
-	 */
-	// getLoginInfo() {
-	// 	return new Promise((resolve, reject) => {
-	// 		resolve(conf.login_info);
-	// 	});
-	// }
 
 	/**
 	 * Create settings object for syncing.
@@ -262,18 +256,6 @@ class Account {
 			}
 		});
 		return settings;
-	}
-
-	sendVerificationEmail() {
-		return new Promise((resolve, reject) => {
-			fetch(`${globals.AUTH_SERVER}/api/v2/send_email/validate_account/${conf.login_info.user_id}`)
-				.then((res) => {
-					resolve();
-				})
-				.catch((err) => {
-					reject(err);
-				});
-		});
 	}
 }
 
