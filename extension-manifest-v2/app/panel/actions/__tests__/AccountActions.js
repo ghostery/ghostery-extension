@@ -38,19 +38,19 @@ const user = {
 
 // TODO mock user data
 const responseSuccess = [
-	{ 'mockErr': 'error text' }
+	{ mockErr: 'error text' }
 ];
 
 const invalidAccountErr = {
-		errors: [
-			{ code: '10050' }
-		],
+	errors: [
+		{ code: '10050' }
+	],
 };
 
 const serverErr = {
-		errors: [
-			{ mockErr: 'server error' }
-		],
+	errors: [
+		{ mockErr: 'server error' }
+	],
 };
 
 msg.sendMessageInPromise = jest.fn((messageType, data) => new Promise((resolve, reject) => {
@@ -118,7 +118,7 @@ describe('app/panel/actions/AccountActions.js', () => {
 					classes: 'success'
 				}
 			}
-		]
+		];
 		return store.dispatch(accountActions.accountLogin(email, password)).then(() => {
 			const actions = store.getActions();
 			expect(actions).toEqual(expectedPayload);
@@ -164,7 +164,7 @@ describe('app/panel/actions/AccountActions.js', () => {
 					classes: 'alert'
 				}
 			}
-		]
+		];
 		return store.dispatch(accountActions.accountLogin(email, password)).then(() => {
 			const actions = store.getActions();
 			expect(actions).toEqual(expectedPayload);
