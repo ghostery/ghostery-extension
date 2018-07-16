@@ -135,13 +135,14 @@ class HeaderMenu extends React.Component {
 	 */
 	clickSignOut() {
 		this.props.toggleDropdown();
-		this.props.actions.userLogout();
+		this.props.actions.logout();
 	}
 	/**
 	 * Render drop-down menu.
 	 * @return {ReactComponent}   ReactComponent instance
 	 */
 	render() {
+		const { loggedIn, email } = this.props;
 		return (
 			<ClickOutside onClickOutside={this.handleClickOutside} excludeEl={this.props.kebab}>
 				<div className="dropdown-pane" id="header-dropdown">
@@ -209,19 +210,19 @@ class HeaderMenu extends React.Component {
 						</li>
 					</ul>
 					<div className="row account-info">
-						<div onClick={this.clickSignedInAs} className={`${!this.props.logged_in ? 'hide' : ''} menu-option signed-in-as small-12 columns`}>
+						<div onClick={this.clickSignedInAs} className={`${!loggedIn ? 'hide' : ''} menu-option signed-in-as small-12 columns`}>
 							<svg width="17px" height="18px" viewBox="0 0 17 18">
 								<g>
 									<path className="menu-icon" d="M11.7415776,7.69057143 C12.6371552,6.81771429 13.0848707,5.76442857 13.0848707,4.53057143 C13.0848707,3.29685714 12.6371552,2.24357143 11.7415776,1.37057143 C10.8461466,0.497714286 9.76547414,0.0612857143 8.49985345,0.0612857143 C7.23423276,0.0612857143 6.15356034,0.497714286 5.25812931,1.37057143 C4.36255172,2.24357143 3.91483621,3.29685714 3.91483621,4.53057143 C3.91483621,5.76442857 4.36255172,6.81771429 5.25812931,7.69057143 C6.1537069,8.56342857 7.23423276,9 8.49985345,9 C9.76576724,9 10.8462931,8.56342857 11.7415776,7.69057143 Z" />
 									<path className="menu-icon" d="M16.8637069,13.7195714 C16.8357155,13.3277143 16.7800259,12.9048571 16.6964914,12.4508571 C16.6129569,11.9968571 16.5072931,11.576 16.3799397,11.188 C16.2525862,10.8001429 16.0814138,10.4218571 15.8664224,10.0532857 C15.6515776,9.68471429 15.4047845,9.37042857 15.1260431,9.11042857 C14.8473017,8.85042857 14.5071552,8.643 14.1053103,8.48785714 C13.7031724,8.33271429 13.2594138,8.255 12.7738879,8.255 C12.7022241,8.255 12.5350086,8.33842857 12.2723879,8.50528571 C12.0097672,8.67214286 11.7132931,8.85842857 11.3829655,9.064 C11.0526379,9.26942857 10.6226552,9.45585714 10.0934569,9.62242857 C9.56411207,9.78928571 9.03286207,9.87271429 8.49941379,9.87271429 C7.96611207,9.87271429 7.43486207,9.78928571 6.90551724,9.62242857 C6.37631897,9.45585714 5.94633621,9.26942857 5.61600862,9.064 C5.28568103,8.85842857 4.9892069,8.67214286 4.72658621,8.50528571 C4.46381897,8.33842857 4.29675,8.255 4.22508621,8.255 C3.73956034,8.255 3.29580172,8.33271429 2.89381034,8.48785714 C2.49181897,8.643 2.15152586,8.85057143 1.87293103,9.11042857 C1.59433621,9.37042857 1.3475431,9.68471429 1.13269828,10.0532857 C0.917853448,10.4218571 0.746681034,10.8002857 0.619327586,11.188 C0.491974138,11.576 0.386456897,11.9968571 0.302922414,12.4508571 C0.219241379,12.9048571 0.163551724,13.3275714 0.135706897,13.7195714 C0.107862069,14.1115714 0.0939396552,14.513 0.0939396552,14.9242857 C0.0939396552,15.8552857 0.384551724,16.5905714 0.96562931,17.1298571 C1.5467069,17.669 2.31888793,17.9385714 3.28202586,17.9385714 L13.717681,17.9385714 C14.680819,17.9385714 15.4528534,17.669 16.0340776,17.1298571 C16.6153017,16.5905714 16.9057672,15.8554286 16.9057672,14.9242857 C16.9057672,14.513 16.8918448,14.1114286 16.8637069,13.7195714 L16.8637069,13.7195714 Z" />
 								</g>
 							</svg>
-							<span title={this.props.email} >{ this.props.email }</span>
+							<span title={email} >{ email }</span>
 						</div>
-						<div onClick={this.clickSignIn} className={`${this.props.logged_in ? 'hide' : ''} menu-option menu-signin small-12 columns`}>
+						<div onClick={this.clickSignIn} className={`${loggedIn ? 'hide' : ''} menu-option menu-signin small-12 columns`}>
 							<span>{ t('panel_menu_signin') }</span>
 						</div>
-						<div onClick={this.clickSignOut} className={`${!this.props.logged_in ? 'hide' : ''} menu-option menu-signout small-12 columns`}>
+						<div onClick={this.clickSignOut} className={`${!loggedIn ? 'hide' : ''} menu-option menu-signout small-12 columns`}>
 							<span>{ t('panel_menu_signout') }</span>
 						</div>
 					</div>
