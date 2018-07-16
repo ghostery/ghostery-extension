@@ -91,7 +91,6 @@ class Login extends React.Component {
 
 		this.props.actions.accountLogin(email, password)
 			.then((success) => {
-				console.log('HERE', success);
 				if (success) {
 					Promise.all([
 						this.props.actions.accountGetUser(),
