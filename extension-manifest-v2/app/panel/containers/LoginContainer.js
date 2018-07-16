@@ -29,8 +29,6 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state.login, {
 	// get properties from panel redux store
 	email: state.panel.email,
 	is_expert: state.panel.is_expert,
-	is_validated: state.panel.is_validated,
-	logged_in: state.panel.logged_in,
 });
 /**
  * Bind Login view component action creators using Redux's bindActionCreators

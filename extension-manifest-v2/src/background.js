@@ -697,16 +697,6 @@ function onMessageHandler(request, sender, callback) {
 			}
 		});
 		return true;
-	} else if (name === 'account.getUserSettings') {
-		account.getUserSettings()
-			.then((settings) => {
-				callback(settings);
-			})
-			.catch((err) => {
-				log('Error getting user settings:', err);
-				callback({ errors: _getJSONAPIErrorsObject(err) });
-			});
-		return true;
 	} else if (name === 'getTrackerDescription') {
 		utils.getJson(message.url).then((result) => {
 			const description = (result) ? ((result.company_in_their_own_words) ? result.company_in_their_own_words : ((result.company_description) ? result.company_description : '')) : '';
@@ -735,6 +725,16 @@ function onMessageHandler(request, sender, callback) {
 				callback(err);
 			});
 		return true;
+	} else if (name === 'account.getUserSettings') {
+		account.getUserSettings()
+			.then((settings) => {
+				callback(settings);
+			})
+			.catch((err) => {
+				log('Error getting user settings:', err);
+				callback({ errors: _getJSONAPIErrorsObject(err) });
+			});
+		return true;
 	} else if (name === 'resetPassword') {
 		account.resetPassword(message)
 			.then((response) => {
@@ -745,7 +745,7 @@ function onMessageHandler(request, sender, callback) {
 				log('RESET PASSWORD ERROR');
 			});
 		return true;
-	} else if (name === 'fetchUser') {
+	} else if (name === 'account.getUser') {
 		account.getUser(message)
 			.then((user) => {
 				callback(user);
@@ -873,7 +873,7 @@ function initializeDispatcher() {
 		button.update();
 		utils.flushChromeMemoryCache();
 	});
-	dispatcher.on('conf.save.login_info', (loginInfo) => {
+	dispatcher.on('conf.save.account', () => {
 		// update PanelData
 		panelData.init();
 	});

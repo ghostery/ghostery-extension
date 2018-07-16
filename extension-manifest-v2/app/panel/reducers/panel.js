@@ -48,6 +48,9 @@ const initialState = {
 	notificationShown: false,
 	reload_banner_status: true,
 	trackers_banner_status: true,
+	loggedIn: false,
+	email: '',
+	emailValidated: false,
 };
 /**
  * Default export for panel view reducer. Handles actions
@@ -71,28 +74,29 @@ export default (state = initialState, action) => {
 			const updated = _closeNotification(state, action);
 			return Object.assign({}, state, updated);
 		}
-		case CREATE_ACCOUNT_SUCCESS:
+		case CREATE_ACCOUNT_SUCCESS: {
 			return Object.assign({}, state, {
-				logged_in: true,
-				email: action.data.email,
-				is_validated: action.data.is_validated
+				loggedIn: true,
 			});
+		}
 		case LOGIN_SUCCESS: {
 			return Object.assign({}, state, {
-				logged_in: true
+				loggedIn: true,
 			});
 		}
 		case LOGIN_DATA_SUCCESS: {
+			const { email, emailValidated } = action.data;
 			return Object.assign({}, state, {
-				email: action.data.email,
-				is_validated: action.data.is_validated
+				email,
+				emailValidated,
 			});
 		}
 		case LOGOUT: {
+			const { loggedIn, email, emailValidated } = initialState;
 			return Object.assign({}, state, {
-				logged_in: false,
-				email: '',
-				is_validated: false
+				loggedIn,
+				email,
+				emailValidated,
 			});
 		}
 		case TOGGLE_CLIQZ_FEATURE: {

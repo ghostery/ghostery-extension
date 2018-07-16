@@ -51,13 +51,13 @@ class Account extends React.Component {
 	 * Prettify the user's name when signed in.
 	 */
 	updateAccountName(settingsData) {
-		const { logged_in } = settingsData;
+		const { loggedIn } = settingsData;
 
-		if (logged_in) {
-			const { first_name, last_name } = settingsData;
+		if (loggedIn) {
+			const { firstName, lastName } = settingsData;
 
-			if (first_name || last_name) {
-				this.setState({ accountName: (first_name ? (first_name + (` ${last_name}` || '')) : last_name) });
+			if (firstName || lastName) {
+				this.setState({ accountName: (firstName ? (firstName + (` ${lastName}` || '')) : lastName) });
 			}
 		}
 	}
@@ -119,12 +119,12 @@ class Account extends React.Component {
 				<div className="row">
 					<div className="columns">
 						<h3>{ t('settings_account') }</h3>
-						<div className={(settingsData.logged_in ? 's-hide' : '')} >
+						<div className={(settingsData.loggedIn ? 's-hide' : '')} >
 							<p className="s-blue-header" onClick={this.clickSigninCreate} >{ t('settings_signin_create_header') }</p>
 							<p>{ t('settings_sign_create_text') }</p>
 							<div className="s-vgap-46" />
 						</div>
-						<div className={(settingsData.logged_in ? '' : 's-hide')} >
+						<div className={(settingsData.loggedIn ? '' : 's-hide')} >
 							<div className="s-vgap-22" />
 							<h5 className={(this.state.accountName ? '' : 's-hide')} id="settings-account-name">{ t('settings_account_name') }:  <span>{ this.state.accountName }</span></h5>
 							<div className="s-vgap-4" />
