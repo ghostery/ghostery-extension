@@ -30,7 +30,7 @@ export function getUserSettings() {
 	};
 }
 
-export const accountGetUser = () => dispatch => (
+export const getUser = () => dispatch => (
 	sendMessageInPromise('account.getUser')
 		.then((user) => {
 			dispatch({
@@ -47,11 +47,11 @@ export const accountGetUser = () => dispatch => (
  * @param  {Object} query
  * @return {Object} dispatch
  */
-export const accountLogin = (email, password) => dispatch => (
+export const login = (email, password) => dispatch => (
 	sendMessageInPromise('account.login', { email, password })
 		.then((response) => {
 			if (response.errors) {
-				log('PanelActions accountLogin server error', response);
+				log('PanelActions login server error', response);
 				dispatch({ type: LOGIN_FAILED });
 				response.errors.forEach((err) => {
 					let errorText = '';
@@ -102,7 +102,7 @@ export const accountLogin = (email, password) => dispatch => (
  * @param  {Object} query
  * @return {Object} dispatch
  */
-export function accountLogout() {
+export function logout() {
 	return function (dispatch) {
 		sendMessageInPromise('account.logout', {})
 			.then((data) => {
