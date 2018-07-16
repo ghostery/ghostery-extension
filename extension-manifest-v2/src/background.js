@@ -715,6 +715,19 @@ function onMessageHandler(request, sender, callback) {
 				// callback({ errors: [err] });
 			});
 		return true;
+	} else if (name === 'account.register') {
+		const {
+			email, confirmEmail, password, firstName, lastName
+		} = message;
+		account.register(email, confirmEmail, password, firstName, lastName)
+			.then((response) => {
+				callback(response);
+			})
+			.catch((err) => {
+				callback({ errors: [err] });
+				log('REGISTER ERROR');
+			});
+		return true;
 	} else if (name === 'account.logout') {
 		account.logout()
 			.then((response) => {
@@ -752,16 +765,6 @@ function onMessageHandler(request, sender, callback) {
 			})
 			.catch((err) => {
 				callback(err);
-				log('FETCH USER ERROR');
-			});
-		return true;
-	} else if (name === 'createAccount') {
-		account.createAccount(message)
-			.then((response) => {
-				callback(response);
-			})
-			.catch((err) => {
-				callback({ errors: [err] });
 				log('FETCH USER ERROR');
 			});
 		return true;

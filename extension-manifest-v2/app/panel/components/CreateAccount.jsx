@@ -145,7 +145,11 @@ class CreateAccount extends React.Component {
 			return;
 		}
 
-		this.props.actions.createAccount(email, confirmEmail, firstName, lastName, password);
+		this.props.actions.register(email, confirmEmail, firstName, lastName, password).then((success) => {
+			if (success) {
+				this.props.actions.getUser();
+			}
+		});
 	}
 	/**
 	 * Create account on Return.
