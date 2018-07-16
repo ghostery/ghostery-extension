@@ -683,6 +683,7 @@ function onMessageHandler(request, sender, callback) {
 		utils.getActiveTab((tab) => {
 			button.update();
 			if (conf.enable_ad_block) {
+				// update adblock count. callback() handled below based on anti-tracking status
 				modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tab.id);
 			}
 			if (conf.enable_anti_tracking) {
