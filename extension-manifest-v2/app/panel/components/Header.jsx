@@ -78,17 +78,29 @@ class Header extends React.Component {
 	 * Handles clicking the sign-in / verify link
 	 */
 	clickSignInVerify() {
-		if (!this.props.loggedIn) {
+		const { loggedIn, email, emailValidated } = this.props;
+		if (!loggedIn) {
 			sendMessage('ping', 'sign_in');
 			this.props.history.push('/login');
-		} else if (!this.props.emailValidated) {
-			sendMessageInPromise('sendVerificationEmail').then((data) => {
-				this.props.actions.showNotification({
-					classes: 'success',
-					text: t('panel_email_verification_sent', data.email),
-				});
+		} else if (!emailValidated) {
+			sendMessageInPromise('account.sendValidateAccountEmail').then((success) => {
+				if (success) {
+					this.props.actions.showNotification({
+						classes: 'success',
+						text: t('panel_email_verification_sent', email),
+					});
+				} else {
+					this.props.actions.showNotification({
+						classes: 'alert',
+						text: t('server_error_message'),
+					});
+				}
 			}).catch((err) => {
 				log('sendVerificationEmail Error', err);
+				this.props.actions.showNotification({
+					classes: 'alert',
+					text: t('server_error_message'),
+				});
 			});
 		}
 	}
