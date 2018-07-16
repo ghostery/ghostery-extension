@@ -193,7 +193,7 @@ class Metrics {
 			const METRICS_URL_SET = new Set([
 				'enable_human_web',
 				'enable_offers',
-				'login_info',
+				'account',
 				'enable_metrics',
 				'show_alert',
 				'alert_expanded',
@@ -242,7 +242,7 @@ class Metrics {
 			// Random number, assigned at install (former install_rand)
 			`&ir=${encodeURIComponent(conf.install_random_number)}` +
 			// Login state (former signed_in)
-			`&sn=${encodeURIComponent(conf.login_info.logged_in ? '1' : '0')}` +
+			`&sn=${encodeURIComponent(conf.account ? '1' : '0')}` +
 			// Date of install (former install_date)
 			`&id=${encodeURIComponent(conf.install_date)}` +
 			// Noncritical ping (former noncritical)

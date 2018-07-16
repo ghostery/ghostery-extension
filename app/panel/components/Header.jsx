@@ -78,10 +78,10 @@ class Header extends React.Component {
 	 * Handles clicking the sign-in / verify link
 	 */
 	clickSignInVerify() {
-		if (!this.props.logged_in) {
+		if (!this.props.loggedIn) {
 			sendMessage('ping', 'sign_in');
 			this.props.history.push('/login');
-		} else if (!this.props.is_validated) {
+		} else if (!this.props.emailValidated) {
 			sendMessageInPromise('sendVerificationEmail').then((data) => {
 				this.props.actions.showNotification({
 					classes: 'success',
@@ -109,6 +109,7 @@ class Header extends React.Component {
 		const tabDetailedClassNames = ClassNames('header-tab', {
 			active: this.props.is_expert,
 		});
+		const { loggedIn, email, emailValidated } = this.props;
 
 		return (
 			<header id="ghostery-header">
@@ -136,7 +137,7 @@ class Header extends React.Component {
 						<div className="row align-middle collapse">
 							<div className="columns shrink">
 								<div onClick={this.clickSignInVerify} className="header-helper-text">
-									{ !this.props.logged_in ? t('panel_header_sign_in') : (!this.props.is_validated ? t('panel_header_verify_account') : '') }
+									{ !loggedIn ? t('panel_header_sign_in') : (!emailValidated ? t('panel_header_verify_account') : '') }
 								</div>
 							</div>
 							<div
@@ -147,8 +148,8 @@ class Header extends React.Component {
 						</div>
 						{ this.state.dropdownOpen &&
 							<HeaderMenu
-								logged_in={this.props.logged_in}
-								email={this.props.email}
+								loggedIn={loggedIn}
+								email={email}
 								language={this.props.language}
 								tab_id={this.props.tab_id}
 								history={this.props.history}

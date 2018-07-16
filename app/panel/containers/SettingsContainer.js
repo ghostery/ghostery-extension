@@ -30,7 +30,6 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state.settings, {
 	email: state.panel.email,
 	is_expanded: state.panel.is_expanded,
 	language: state.panel.language,
-	logged_in: state.panel.logged_in,
 	pageHost: state.summary.pageHost,
 	pageUrl: state.summary.pageUrl,
 	reload_banner_status: state.panel.reload_banner_status,

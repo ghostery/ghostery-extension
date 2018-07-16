@@ -27,9 +27,8 @@ import normalize from 'json-api-normalizer';
 import build from 'redux-object';
 import globals from '../classes/Globals';
 import conf from '../classes/Conf';
-import { log, decodeJwt } from '../utils/common';
+import { log } from '../utils/common';
 import { get, update, getCsrfCookie } from '../utils/api';
-import { sendMessageToPanel } from '../utils/utils';
 
 const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 const { IS_CLIQZ } = globals;
@@ -39,42 +38,6 @@ const { GHOSTERY_DOMAIN } = globals;
 const SYNC_SET = new Set(globals.SYNC_ARRAY);
 
 class Account {
-	/**
-	 * Set the login state of the current user.
-	 *
-	 * setLoginInfo is called in multiple cases:
-	 * - user creates account or logs in/out - called in response to setLoginInfo message
-	 * - user navigated to a ghostery page with AUTH cookie on it, called by
-	 * setLoginInfoFromAuthCookie() onAttach to page.
-	 * @memberOf BackgroundUtils
-	 *
-	 * @param {Object} message 			Contains user_token and decoded_user_token
-	 * @param {boolean} fromCookie 		indicates that this function is
-	 *                              	called by setLoginInfoFromAuthCookie
-	 *
-	 * @return {Promise} 				login info object
-	 */
-	setLoginInfo(user) {
-		const {
-			email, emailValidated, id, firstName, lastName, loggedIn
-		} = user;
-		conf.login_info = {
-			logged_in: loggedIn || false,
-			user_id: id,
-			is_validated: emailValidated,
-			email,
-			first_name: firstName,
-			last_name: lastName,
-		};
-
-		conf.account = {
-			userID: id,
-			user: null
-		};
-
-		return Promise.resolve(conf.login_info);
-	}
-
 	setAccountInfo(userID) {
 		conf.account = {
 			userID,
@@ -138,10 +101,8 @@ class Account {
 			.then((res) => {
 				const user = build(normalize(res), 'users', userID);
 				this.setAccountUserInfo(user);
-				return Promise.resolve(user);
+				return user;
 			});
-		// .then(loginInfo => Promise.resolve(loginInfo));
-		// .catch(err => Promise.reject(err));
 	}
 
 	getUserSettings() {
@@ -155,9 +116,6 @@ class Account {
 				this.setAccountUserSettings(settings_json);
 				return settings_json;
 			});
-		// .catch((error) => {
-		// 	log('PanelActions getUserSettings error', error);
-		// });
 	}
 
 	saveUserSettings() {
@@ -286,7 +244,7 @@ class Account {
 		return new Promise((resolve, reject) => {
 			fetch(`${globals.AUTH_SERVER}/api/v2/send_email/validate_account/${conf.login_info.user_id}`)
 				.then((res) => {
-					resolve(conf.login_info);
+					resolve();
 				})
 				.catch((err) => {
 					reject(err);
