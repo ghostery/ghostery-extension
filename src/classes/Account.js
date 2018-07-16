@@ -124,15 +124,10 @@ class Account {
 				headers: {
 					'X-CSRF-Token': cookie.value,
 				},
-			}).catch((err) => {
-				// manually delete cookies if fetch fails
-				this._removeCookies();
 			}))
-			.catch((err) => {
-				// manually delete cookies if getCsrfCookie() fails
-				this._removeCookies();
-			})
 			.finally(() => {
+				// remove cookies in case fetch fails
+				this._removeCookies();
 				this.clearAccountInfo();
 			});
 	}
