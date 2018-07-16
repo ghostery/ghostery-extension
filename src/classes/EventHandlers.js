@@ -335,26 +335,26 @@ class EventHandlers {
 			return { cancel: false };
 		}
 
-		if(details.type === 'main_frame') {
-			if(!tabInfo.getTabInfo(tab_id)) {
+		if (details.type === 'main_frame') {
+			if (!tabInfo.getTabInfo(tab_id)) {
 				tabInfo.create(tab_id, details.url);
 			} else {
 				tabInfo.setTabInfo(tab_id, 'url', details.url);
 			}
-		} 
+		}
 
-		if(!tabInfo.getTabInfo(tab_id)) {
+		if (!tabInfo.getTabInfo(tab_id)) {
 			utils.getTab(tab_id, (tab) => {
-					if(!tabInfo.getTabInfo(tab_id)) {
-						tabInfo.create(tab_id, tab.url);
-					} else {
-						tabInfo.setTabInfo(tab_id, 'url', tab.url);
-					}
-					tabInfo.setTabInfo(tab_id, 'incognito', tab.incognito);
-				},
-				error => {
-					log("TAB CANNOT BE QUERIED", error, tabInfo.getTabInfo(tab_id));
+				if (!tabInfo.getTabInfo(tab_id)) {
+					tabInfo.create(tab_id, tab.url);
+				} else {
+					tabInfo.setTabInfo(tab_id, 'url', tab.url);
 				}
+				tabInfo.setTabInfo(tab_id, 'incognito', tab.incognito);
+			},
+			(error) => {
+				log('TAB CANNOT BE QUERIED', error, tabInfo.getTabInfo(tab_id));
+			}
 			);
 		}
 
