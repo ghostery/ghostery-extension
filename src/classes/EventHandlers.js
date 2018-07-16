@@ -335,20 +335,27 @@ class EventHandlers {
 			return { cancel: false };
 		}
 
-		if (!tabInfo.getTabInfo(tab_id)) {
-			log(`tabInfo not found for tab ${tab_id}, initializing...`);
+		if(details.type === 'main_frame') {
+			if(!tabInfo.getTabInfo(tab_id)) {
+				tabInfo.create(tab_id, details.url);
+			} else {
+				tabInfo.setTabInfo(tab_id, 'url', details.url);
+			}
+		} 
 
-			// create new tabInfo entry
-			tabInfo.create(tab_id);
-
-			// get tab data from browser and update the new tabInfo entry
+		if(!tabInfo.getTabInfo(tab_id)) {
 			utils.getTab(tab_id, (tab) => {
-				const ti = tabInfo.getTabInfo(tab_id);
-				if (ti && ti.partialScan) {
-					tabInfo.setTabInfo(tab_id, 'url', tab.url);
+					if(!tabInfo.getTabInfo(tab_id)) {
+						tabInfo.create(tab_id, tab.url);
+					} else {
+						tabInfo.setTabInfo(tab_id, 'url', tab.url);
+					}
 					tabInfo.setTabInfo(tab_id, 'incognito', tab.incognito);
+				},
+				error => {
+					log("TAB CANNOT BE QUERIED", error, tabInfo.getTabInfo(tab_id));
 				}
-			});
+			);
 		}
 
 		if (!this._checkRedirect(details.type, request_id)) {
