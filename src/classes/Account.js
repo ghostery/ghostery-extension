@@ -27,6 +27,7 @@ import normalize from 'json-api-normalizer';
 import build from 'redux-object';
 import globals from '../classes/Globals';
 import conf from '../classes/Conf';
+import dispatcher from '../classes/Dispatcher';
 import { log } from '../utils/common';
 import { get, update, getCsrfCookie } from '../utils/api';
 
@@ -48,10 +49,12 @@ class Account {
 
 	setAccountUserInfo(user) {
 		conf.account.user = user;
+		dispatcher.trigger('conf.save.account');
 	}
 
 	setAccountUserSettings(settings) {
 		conf.account.userSettings = settings;
+		dispatcher.trigger('conf.save.account');
 	}
 
 	clearAccountInfo() {
@@ -68,14 +71,35 @@ class Account {
 				'Content-Length': Buffer.byteLength(data),
 			},
 			credentials: 'include',
-		}).then((response) => {
-			if (response.status >= 400) {
-				return response.json();
+		}).then((res) => {
+			if (res.status >= 400) {
+				return res.json();
 			}
 			this._getUserIDFromCookie().then((userID) => {
 				this.setAccountInfo(userID);
 			});
-			return Promise.resolve({});
+			return {};
+		});
+	}
+
+	register(email, confirmEmail, password, firstName, lastName) {
+		const data = `email=${window.encodeURIComponent(email)}&email_confirmation=${window.encodeURIComponent(confirmEmail)}&first_name=${window.encodeURIComponent(firstName)}&last_name=${window.encodeURIComponent(lastName)}&password=${window.encodeURIComponent(password)}`;
+		return fetch(`${globals.AUTH_SERVER}/api/v2/register`, {
+			method: 'POST',
+			body: data,
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				'Content-Length': Buffer.byteLength(data),
+			},
+			credentials: 'include',
+		}).then((res) => {
+			if (res.status >= 400) {
+				return res.json();
+			}
+			this._getUserIDFromCookie().then((userID) => {
+				this.setAccountInfo(userID);
+			});
+			return {};
 		});
 	}
 
@@ -250,25 +274,6 @@ class Account {
 					reject(err);
 				});
 		});
-	}
-
-	createAccount(data) {
-		return fetch(`${globals.AUTH_SERVER}/api/v2/register`, {
-			method: 'POST',
-			body: data,
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded',
-				'Content-Length': Buffer.byteLength(data),
-			},
-			credentials: 'include',
-		})
-			.then((response) => {
-				if (response.status >= 400) {
-					return response.json().then(json => Promise.resolve(json));
-				}
-				return Promise.resolve(response);
-			})
-			.catch(err => Promise.reject(err));
 	}
 }
 
