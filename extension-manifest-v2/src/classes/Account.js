@@ -14,14 +14,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-// @TODO: Somebody please fix these
-
-/* eslint no-use-before-define: 0 */
-/* eslint prefer-promise-reject-errors: 0 */
-/* eslint prefer-destructuring: 0 */
-/* eslint no-shadow: 0 */
-/* eslint no-param-reassign: 0 */
-
 import _ from 'underscore';
 import normalize from 'json-api-normalizer';
 import build from 'redux-object';
@@ -31,39 +23,16 @@ import dispatcher from '../classes/Dispatcher';
 import { log } from '../utils/common';
 import { get, update, getCsrfCookie } from '../utils/api';
 
-const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
-const { IS_CLIQZ } = globals;
-
-// CONSTANTS
-const { GHOSTERY_DOMAIN } = globals;
-const SYNC_SET = new Set(globals.SYNC_ARRAY);
+const {
+	GHOSTERY_DOMAIN, AUTH_SERVER, SYNC_ARRAY, IS_CLIQZ, BROWSER_INFO
+} = globals;
+const IS_EDGE = (BROWSER_INFO.name === 'edge');
+const SYNC_SET = new Set(SYNC_ARRAY);
 
 class Account {
-	setAccountInfo(userID) {
-		conf.account = {
-			userID,
-			user: null,
-			userSettings: null,
-		};
-	}
-
-	setAccountUserInfo(user) {
-		conf.account.user = user;
-		dispatcher.trigger('conf.save.account');
-	}
-
-	setAccountUserSettings(settings) {
-		conf.account.userSettings = settings;
-		dispatcher.trigger('conf.save.account');
-	}
-
-	clearAccountInfo() {
-		conf.account = null;
-	}
-
 	login(email, password) {
 		const data = `email=${window.encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
-		return fetch(`${globals.AUTH_SERVER}/api/v2/login`, {
+		return fetch(`${AUTH_SERVER}/api/v2/login`, {
 			method: 'POST',
 			body: data,
 			headers: {
@@ -76,7 +45,7 @@ class Account {
 				return res.json();
 			}
 			this._getUserIDFromCookie().then((userID) => {
-				this.setAccountInfo(userID);
+				this._setAccountInfo(userID);
 			});
 			return {};
 		});
@@ -84,7 +53,7 @@ class Account {
 
 	register(email, confirmEmail, password, firstName, lastName) {
 		const data = `email=${window.encodeURIComponent(email)}&email_confirmation=${window.encodeURIComponent(confirmEmail)}&first_name=${window.encodeURIComponent(firstName)}&last_name=${window.encodeURIComponent(lastName)}&password=${window.encodeURIComponent(password)}`;
-		return fetch(`${globals.AUTH_SERVER}/api/v2/register`, {
+		return fetch(`${AUTH_SERVER}/api/v2/register`, {
 			method: 'POST',
 			body: data,
 			headers: {
@@ -97,7 +66,7 @@ class Account {
 				return res.json();
 			}
 			this._getUserIDFromCookie().then((userID) => {
-				this.setAccountInfo(userID);
+				this._setAccountInfo(userID);
 			});
 			return {};
 		});
@@ -105,7 +74,7 @@ class Account {
 
 	logout() {
 		return getCsrfCookie()
-			.then(cookie => fetch(`${globals.AUTH_SERVER}/api/v2/logout`, {
+			.then(cookie => fetch(`${AUTH_SERVER}/api/v2/logout`, {
 				method: 'POST',
 				credentials: 'include',
 				headers: {
@@ -115,7 +84,7 @@ class Account {
 			.finally(() => {
 				// remove cookies in case fetch fails
 				this._removeCookies();
-				this.clearAccountInfo();
+				this._clearAccountInfo();
 			});
 	}
 
@@ -124,7 +93,7 @@ class Account {
 		return get('users', userID)
 			.then((res) => {
 				const user = build(normalize(res), 'users', userID);
-				this.setAccountUserInfo(user);
+				this._setAccountUserInfo(user);
 				return user;
 			});
 	}
@@ -136,8 +105,8 @@ class Account {
 				const settings = build(normalize(res, { camelizeKeys: false }), 'settings', userID);
 				const { settings_json } = settings;
 				// @TODO setConfUserSettings settings.settingsJson
-				this.setConfUserSettings(settings_json);
-				this.setAccountUserSettings(settings_json);
+				this._setConfUserSettings(settings_json);
+				this._setAccountUserSettings(settings_json);
 				return settings_json;
 			});
 	}
@@ -155,13 +124,13 @@ class Account {
 
 	sendValidateAccountEmail() {
 		const { userID } = conf.account;
-		return fetch(`${globals.AUTH_SERVER}/api/v2/send_email/validate_account/${userID}`)
+		return fetch(`${AUTH_SERVER}/api/v2/send_email/validate_account/${userID}`)
 			.then(res => res.status < 400);
 	}
 
 	resetPassword(email) {
 		const data = `email=${window.encodeURIComponent(email)}`;
-		return fetch(`${globals.AUTH_SERVER}/api/v2/send_email/reset_password`, {
+		return fetch(`${AUTH_SERVER}/api/v2/send_email/reset_password`, {
 			method: 'POST',
 			body: data,
 			headers: {
@@ -177,6 +146,28 @@ class Account {
 			});
 	}
 
+	_setAccountInfo(userID) {
+		conf.account = {
+			userID,
+			user: null,
+			userSettings: null,
+		};
+	}
+
+	_setAccountUserInfo(user) {
+		conf.account.user = user;
+		dispatcher.trigger('conf.save.account');
+	}
+
+	_setAccountUserSettings(settings) {
+		conf.account.userSettings = settings;
+		dispatcher.trigger('conf.save.account');
+	}
+
+	_clearAccountInfo() {
+		conf.account = null;
+	}
+
 	_getUserIDFromCookie() {
 		return new Promise((resolve, reject) => {
 			chrome.cookies.get({
@@ -187,7 +178,7 @@ class Account {
 					resolve(cookie.value);
 					return;
 				}
-				reject('err getting login user_id cookie');
+				reject(new Error('err getting login user_id cookie'));
 			});
 		});
 	}
@@ -219,25 +210,13 @@ class Account {
 		return settings;
 	}
 
-	_removeCookies() {
-		const cookies = ['user_id', 'access_token', 'refresh_token', 'csrf_token', 'AUTH'];
-		cookies.forEach((name) => {
-			chrome.cookies.remove({
-				url: `https://${GHOSTERY_DOMAIN}.com`, // ghostery.com || ghosterystage.com
-				name,
-			}, (details) => {
-				log(`Removed cookie with name: ${details.name}`);
-			});
-		});
-	}
-
 	/**
 	 * GET user settings from ConsumerAPI
 	 * @private
 	 *
 	 * @return {Promise} 	user settings json or error
 	 */
-	setConfUserSettings(settings) {
+	_setConfUserSettings(settings) {
 		log('SET USER SETTINGS', settings);
 		if (IS_EDGE) {
 			settings.enable_human_web = false;
@@ -256,6 +235,18 @@ class Account {
 			}
 		});
 		return settings;
+	}
+
+	_removeCookies() {
+		const cookies = ['user_id', 'access_token', 'refresh_token', 'csrf_token', 'AUTH'];
+		cookies.forEach((name) => {
+			chrome.cookies.remove({
+				url: `https://${GHOSTERY_DOMAIN}.com`,
+				name,
+			}, (details) => {
+				log(`Removed cookie with name: ${details.name}`);
+			});
+		});
 	}
 }
 
