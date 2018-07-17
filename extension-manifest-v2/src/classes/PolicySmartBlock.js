@@ -207,7 +207,7 @@ class PolicySmartBlock {
 		if (!this.shouldCheck(tabId)) { return false; }
 
 		// don't block mixed content from localhost
-		if (requestHost === 'localhost' || requestHost === '127.0.0.1') {
+		if (requestHost === 'localhost' || requestHost === '127.0.0.1' || requestHost === '[::1]') {
 			return false;
 		}
 

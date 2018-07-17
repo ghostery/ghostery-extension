@@ -141,7 +141,7 @@ class GhosteryFeatures extends React.Component {
 								{this.getTrustText()}
 							</span>
 						</span>
-						<Tooltip header={(sitePolicy === 2) ? t('tooltip_trust_on') : t('tooltip_trust')} position={(isStacked) ? 'right' : 'top'} />
+						<Tooltip body={(sitePolicy === 2) ? t('tooltip_trust_on') : t('tooltip_trust')} position={(isStacked) ? 'right' : 'top'} />
 					</div>
 					{isAbPause && (
 						<div className={customClassNames} onClick={this.clickCustomButton}>
@@ -150,7 +150,7 @@ class GhosteryFeatures extends React.Component {
 									{t('summary_custom_settings')}
 								</span>
 							</span>
-							<Tooltip header={t('tooltip_custom_settings')} position={(isStacked) ? 'right' : 'top'} />
+							<Tooltip body={t('tooltip_custom_settings')} position={(isStacked) ? 'right' : 'top'} />
 						</div>
 					)}
 					<div className={restrictClassNames} onClick={this.clickRestrictButton}>
@@ -159,7 +159,7 @@ class GhosteryFeatures extends React.Component {
 								{this.getRestrictText()}
 							</span>
 						</span>
-						<Tooltip header={(sitePolicy === 1) ? t('tooltip_restrict_on') : t('tooltip_restrict')} position={(isStacked) ? 'right' : 'top'} />
+						<Tooltip body={(sitePolicy === 1) ? t('tooltip_restrict_on') : t('tooltip_restrict')} position={(isStacked) ? 'right' : 'top'} />
 					</div>
 				</div>
 			</div>

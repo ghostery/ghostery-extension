@@ -51,6 +51,18 @@ export default (state = initialState, action) => {
 			return Object.assign({}, state, action.data);
 		}
 		case GET_CLIQZ_MODULE_DATA: {
+			const antiTracking = action.data.antitracking;
+			let totalUnsafeCount = 0;
+			for (const category in antiTracking) {
+				if (antiTracking.hasOwnProperty(category)) {
+					for (const app in antiTracking[category]) {
+						if (antiTracking[category][app] === 'unsafe') {
+							totalUnsafeCount++;
+						}
+					}
+				}
+			}
+			antiTracking.totalUnsafeCount = totalUnsafeCount;
 			return Object.assign({}, state, { adBlock: action.data.adblock, antiTracking: action.data.antitracking });
 		}
 		case UPDATE_GHOSTERY_PAUSED: {
@@ -67,6 +79,8 @@ export default (state = initialState, action) => {
 					allowed: action.data.num_total - action.data.num_blocked,
 					ssBlocked: action.data.num_ss_blocked,
 					ssAllowed: action.data.num_ss_allowed,
+					sbBlocked: action.data.num_sb_blocked,
+					sbAllowed: action.data.num_sb_allowed,
 				},
 			});
 		}
@@ -84,41 +98,46 @@ export default (state = initialState, action) => {
  * @return {Object}        		updated parameters of white- and blacklists
  */
 const _updateSitePolicy = (state, action) => {
-	const { sitePolicy } = state;
-	const siteBlacklist = state.site_blacklist;
-	const siteWhitelist = state.site_whitelist;
+	const {
+		sitePolicy, site_blacklist, site_whitelist, pageUrl
+	} = state;
 	const msg = action.data;
-	const pageHost = (msg.pageHost ? msg.pageHost : state.pageHost).replace(/^www\./, '');
+	let pageHost = (msg.pageHost ? msg.pageHost : state.pageHost).replace(/^www\./, '');
+
+	// Handle extension pages. Adds the extension ID to the white/black list
+	if (state.pageUrl.search(/chrome-extension|moz-extension|ms-browser-extension/) >= 0) {
+		pageHost = pageUrl.split('/')[2]; // eslint-disable-line prefer-destructuring
+	}
 
 	let updated_site_policy;
-	let updated_blacklist = siteBlacklist.slice(0);
-	let updated_whitelist = siteWhitelist.slice(0);
+	let updated_blacklist = site_blacklist.slice(0);
+	let updated_whitelist = site_whitelist.slice(0);
 
 	if (msg.type === 'whitelist') {
 		updated_site_policy = (sitePolicy === 1 || !sitePolicy) ? 2 : false;
-		if (siteBlacklist.includes(pageHost)) {
+		if (site_blacklist.includes(pageHost)) {
 			// remove from backlist if site is whitelisted
-			updated_blacklist = removeFromArray(siteBlacklist, siteBlacklist.indexOf(pageHost));
+			updated_blacklist = removeFromArray(site_blacklist, site_blacklist.indexOf(pageHost));
 		}
-		if (!siteWhitelist.includes(pageHost)) {
+		if (!site_whitelist.includes(pageHost)) {
 			// add to whitelist
-			updated_whitelist = addToArray(siteWhitelist, pageHost);
+			updated_whitelist = addToArray(site_whitelist, pageHost);
 		} else {
 			// remove from whitelist
-			updated_whitelist = removeFromArray(siteWhitelist, siteWhitelist.indexOf(pageHost));
+			updated_whitelist = removeFromArray(site_whitelist, site_whitelist.indexOf(pageHost));
 		}
 	} else {
 		updated_site_policy = (sitePolicy === 2 || !sitePolicy) ? 1 : false;
-		if (siteWhitelist.includes(pageHost)) {
+		if (site_whitelist.includes(pageHost)) {
 			// remove from whitelisted if site is blacklisted
-			updated_whitelist = removeFromArray(siteWhitelist, siteWhitelist.indexOf(pageHost));
+			updated_whitelist = removeFromArray(site_whitelist, site_whitelist.indexOf(pageHost));
 		}
-		if (!siteBlacklist.includes(pageHost)) {
+		if (!site_blacklist.includes(pageHost)) {
 			// add to blacklist
-			updated_blacklist = addToArray(siteBlacklist, pageHost);
+			updated_blacklist = addToArray(site_blacklist, pageHost);
 		} else {
 			// remove from blacklist
-			updated_blacklist = removeFromArray(siteBlacklist, siteBlacklist.indexOf(pageHost));
+			updated_blacklist = removeFromArray(site_blacklist, site_blacklist.indexOf(pageHost));
 		}
 	}
 

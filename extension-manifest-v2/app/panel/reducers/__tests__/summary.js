@@ -57,7 +57,9 @@ describe('app/panel/reducers/summary.js', () => {
 
 		expect(summaryReducer(initState, action)).toEqual({
 			adBlock: {},
-			antiTracking: {},
+			antiTracking: {
+				totalUnsafeCount: 0
+			},
 		});
 	});
 
@@ -79,6 +81,7 @@ describe('app/panel/reducers/summary.js', () => {
 
 		const initState = Immutable({
 			pageHost: 'www.cnn.com',
+			pageUrl: '',
 			sitePolicy: 2,
 			site_blacklist: [],
 			site_whitelist: ['cnn.com']
@@ -86,6 +89,7 @@ describe('app/panel/reducers/summary.js', () => {
 
 		expect(summaryReducer(initState, action)).toEqual({
 			pageHost: 'www.cnn.com',
+			pageUrl: '',
 			sitePolicy: 1,
 			site_blacklist: ['cnn.com'],
 			site_whitelist: []

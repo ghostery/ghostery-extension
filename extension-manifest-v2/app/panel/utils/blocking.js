@@ -21,18 +21,24 @@ import { sendMessage } from './msg';
  * Dispatch action to SummaryActions to update trackerCounts.
  * @memberOf PanelUtils
  * @param {array}	 categories        		array of categories
+ * @param {object} smartBlock 	blocked and unblocked of Smart Blocking
  * @param {function} updateTrackerCounts 	from SummaryActions
  */
-export function updateSummaryBlockingCount(categories = [], updateTrackerCounts) {
+export function updateSummaryBlockingCount(categories = [], smartBlock, updateTrackerCounts) {
 	let numTotal = 0;
 	let numTotalBlocked = 0;
 	let numTotalSsBlocked = 0;
 	let numTotalSsUnblocked = 0;
+	let numTotalSbBlocked = 0;
+	let numTotalSbUnblocked = 0;
 
 	categories.forEach((category) => {
 		category.trackers.forEach((tracker) => {
 			numTotal++;
-			if ((tracker.blocked && !tracker.ss_allowed) || tracker.ss_blocked) {
+			const sbBlocked = smartBlock.blocked.hasOwnProperty(tracker.id);
+			const sbUnblocked = smartBlock.unblocked.hasOwnProperty(tracker.id);
+
+			if (tracker.ss_blocked || sbBlocked || (tracker.blocked && !tracker.ss_allowed && !sbUnblocked)) {
 				numTotalBlocked++;
 			}
 			if (tracker.ss_blocked) {
@@ -40,6 +46,12 @@ export function updateSummaryBlockingCount(categories = [], updateTrackerCounts)
 			}
 			if (tracker.ss_allowed) {
 				numTotalSsUnblocked++;
+			}
+			if (sbBlocked) {
+				numTotalSbBlocked++;
+			}
+			if (sbUnblocked) {
+				numTotalSbUnblocked++;
 			}
 		});
 	});
@@ -49,6 +61,8 @@ export function updateSummaryBlockingCount(categories = [], updateTrackerCounts)
 		num_blocked: numTotalBlocked,
 		num_ss_blocked: numTotalSsBlocked,
 		num_ss_allowed: numTotalSsUnblocked,
+		num_sb_blocked: numTotalSbBlocked,
+		num_sb_allowed: numTotalSbUnblocked,
 	});
 }
 
@@ -57,22 +71,28 @@ export function updateSummaryBlockingCount(categories = [], updateTrackerCounts)
  * @memberOf PanelUtils
  * @param  {Object} state 				current state
  * @param  {Object} action 				current action which provides data
- *
  * @return {Object} 					updated categories and selected app ids
  */
 export function updateBlockAllTrackers(state, action) {
 	const blocked = !action.data.allBlocked;
 	const updated_app_ids = JSON.parse(JSON.stringify(state.selected_app_ids)) || {};
 	const updated_categories = JSON.parse(JSON.stringify(state.categories)) || [];
+	const { smartBlockActive } = action.data;
+	const smartBlock = smartBlockActive && action.data.smartBlock || { blocked: {}, unblocked: {} };
 
 	updated_categories.forEach((category) => {
 		category.num_blocked = 0;
 		category.trackers.forEach((tracker) => {
+			const sbBlocked = smartBlock.blocked.hasOwnProperty(tracker.id);
+			const sbUnblocked = smartBlock.unblocked.hasOwnProperty(tracker.id);
+
 			if (tracker.shouldShow) {
 				tracker.blocked = blocked;
 				const key = tracker.id;
-				if (blocked) {
+				if (sbBlocked || (blocked && !sbUnblocked)) {
 					category.num_blocked++;
+				}
+				if (blocked) {
 					updated_app_ids[key] = 1;
 				} else {
 					delete updated_app_ids[key];
@@ -98,18 +118,24 @@ export function updateBlockAllTrackers(state, action) {
  * @return {Object} 		    updated categories and selected app ids
  */
 export function updateCategoryBlocked(state, action) {
-	const { blocked } = action.data;
+	const { blocked, smartBlockActive } = action.data;
+	const smartBlock = smartBlockActive && action.data.smartBlock || { blocked: {}, unblocked: {} };
 	const updated_app_ids = JSON.parse(JSON.stringify(state.selected_app_ids)) || {};
 	const updated_categories = JSON.parse(JSON.stringify(state.categories)); // deep clone
 	const catIndex = updated_categories.findIndex(item => item.id === action.data.category);
 	const updated_category = updated_categories[catIndex];
 	updated_category.num_blocked = 0;
 	updated_category.trackers.forEach((tracker) => {
+		const sbBlocked = smartBlock.blocked.hasOwnProperty(tracker.id);
+		const sbUnblocked = smartBlock.unblocked.hasOwnProperty(tracker.id);
+
 		if (tracker.shouldShow) {
 			tracker.blocked = blocked;
 			const key = tracker.id;
-			if (blocked) {
+			if (sbBlocked || (blocked && !sbUnblocked)) {
 				updated_category.num_blocked++;
+			}
+			if (blocked) {
 				updated_app_ids[key] = 1;
 			} else {
 				delete updated_app_ids[key];
@@ -179,7 +205,8 @@ export function updateTrackerBlocked(state, action) {
 		return {};
 	}
 
-	const { blocked } = action.data;
+	const { blocked, smartBlockActive } = action.data;
+	const smartBlock = smartBlockActive && action.data.smartBlock || { blocked: {}, unblocked: {} };
 	const updated_app_ids = JSON.parse(JSON.stringify(state.selected_app_ids)) || {};
 	const updated_categories = JSON.parse(JSON.stringify(state.categories)) || []; // deep clone
 	const catIndex = updated_categories.findIndex(item => item.id === action.data.cat_id);
@@ -187,6 +214,9 @@ export function updateTrackerBlocked(state, action) {
 
 	updated_category.num_blocked = 0;
 	updated_category.trackers.forEach((tracker) => {
+		const sbBlocked = smartBlock.blocked.hasOwnProperty(tracker.id);
+		const sbUnblocked = smartBlock.unblocked.hasOwnProperty(tracker.id);
+
 		if (tracker.shouldShow) {
 			if (tracker.id === action.data.app_id) {
 				tracker.blocked = blocked;
@@ -197,7 +227,7 @@ export function updateTrackerBlocked(state, action) {
 					delete updated_app_ids[key];
 				}
 			}
-			if (tracker.blocked) {
+			if (sbBlocked || (tracker.blocked && !sbUnblocked)) {
 				updated_category.num_blocked++;
 			}
 		}

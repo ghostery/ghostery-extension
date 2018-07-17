@@ -68,7 +68,8 @@ class Blocking extends React.Component {
 		// Update the summary blocking count whenever the blocking component updated.
 		// This will also show pending blocking changes if the panel is re-opened
 		// before a page refresh
-		updateSummaryBlockingCount(this.props.categories, this.props.actions.updateTrackerCounts);
+		const smartBlock = this.props.smartBlockActive && this.props.smartBlock || { blocked: {}, unblocked: {} };
+		updateSummaryBlockingCount(this.props.categories, smartBlock, this.props.actions.updateTrackerCounts);
 	}
 	/**
 	* Filter trackers by category, or reset filters. Trigger action.
@@ -106,7 +107,8 @@ class Blocking extends React.Component {
 		updated_categories.forEach((category) => {
 			let count = 0;
 			category.trackers.forEach((tracker) => {
-				if ((tracker.blocked && !tracker.ss_allowed) || tracker.ss_blocked) {
+				const isSbBlocked = this.props.smartBlockActive && tracker.warningSmartBlock;
+				if ((tracker.blocked && !tracker.ss_allowed) || isSbBlocked || tracker.ss_blocked) {
 					tracker.shouldShow = true;
 					count++;
 				} else {
@@ -253,6 +255,8 @@ class Blocking extends React.Component {
 					sitePolicy={this.props.sitePolicy}
 					paused_blocking={this.props.paused_blocking}
 					selected_app_ids={this.props.selected_app_ids}
+					smartBlockActive={this.props.smartBlockActive}
+					smartBlock={this.props.smartBlock}
 				/>
 				{(this.state.disableBlocking && this.props.is_expanded) ?
 					<NotScanned />
@@ -266,6 +270,8 @@ class Blocking extends React.Component {
 								sitePolicy={this.props.sitePolicy}
 								paused_blocking={this.props.paused_blocking}
 								language={this.props.language}
+								smartBlockActive={this.props.smartBlockActive}
+								smartBlock={this.props.smartBlock}
 							/>
 						}
 					</div>

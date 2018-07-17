@@ -15,11 +15,14 @@
 
 import conf from './Conf';
 import foundBugs from './FoundBugs';
+import cliqz from './Cliqz';
 import rewards from './Rewards';
 import Policy from './Policy';
 import { getTab } from '../utils/utils';
 import { log } from '../utils/common';
 import globals from './Globals';
+
+const { adblocker, antitracking } = cliqz.modules;
 
 /**
  * @class for handling Ghostery button.
@@ -140,18 +143,80 @@ class BrowserButton {
 			// 	+ Ghostery was enabled after the tab started loading
 			// 	+ or, this is a tab onBeforeRequest doesn't run in (non-http/https page)
 			trackerCount = '';
-		} else {
-			const apps = foundBugs.getAppsCountByIssues(tabId, tabUrl);
-			trackerCount = apps.all.toString();
-			alert = (apps.total > 0);
+			this._setIcon(false, tabId, trackerCount, alert);
+			return;
 		}
 
-		// gray-out the icon when blocking has been disabled for whatever reason
-		if (trackerCount === '') {
-			this._setIcon(false, tabId, trackerCount, alert);
-		} else {
-			this._setIcon(!globals.SESSION.paused_blocking && !this.policy.whitelisted(tab.url), tabId, trackerCount, alert);
+		this._getAntiTrackCount(tabId).then((antiTrackingCount) => {
+			const { appsCount, appsAlertCount } = this._getTrackerCount(tabId);
+			const adBlockingCount = this._getAdBlockCount(tabId);
+
+			alert = (appsAlertCount > 0);
+			trackerCount = (appsCount + antiTrackingCount + adBlockingCount).toString();
+
+			// gray-out the icon when blocking has been disabled for whatever reason
+			if (trackerCount === '') {
+				this._setIcon(false, tabId, trackerCount, alert);
+			} else {
+				this._setIcon(!globals.SESSION.paused_blocking && !this.policy.whitelisted(tab.url), tabId, trackerCount, alert);
+			}
+		});
+	}
+
+	/**
+	 * Gets tracker count the traditional way, from BugDb
+	 * @param  {number} tabId  the Tab Id
+	 * @param  {string} tabUrl the Tab URL
+	 * @return {Object}        the number of total trackers and alerted trackers in an Object
+	 */
+	_getTrackerCount(tabId, tabUrl) {
+		const apps = foundBugs.getAppsCountByIssues(tabId, tabUrl);
+		return {
+			appsCount: apps.all,
+			appsAlertCount: apps.total,
+		};
+	}
+
+	/**
+	 * Get tracker count for Anti Tracking in a promise
+	 * @param  {number} tabId  the Tab Id
+	 * @return {Promise}       the number of trackers as a Promise
+	 */
+	_getAntiTrackCount(tabId) {
+		return new Promise((resolve, reject) => {
+			if (!conf.enable_anti_tracking || !antitracking.background) {
+				resolve(0);
+			}
+			antitracking.background.actions.aggregatedBlockingStats(tabId).then((antiTracking) => {
+				let totalUnsafeCount = 0;
+				for (const category in antiTracking) {
+					if (antiTracking.hasOwnProperty(category)) {
+						for (const app in antiTracking[category]) {
+							if (antiTracking[category][app] === 'unsafe') {
+								totalUnsafeCount++;
+							}
+						}
+					}
+				}
+				resolve(totalUnsafeCount);
+			}).catch((err) => {
+				// if we encounter an error, return 0
+				resolve(0);
+			});
+		});
+	}
+
+	/**
+	 * Get tracker count for Ad Blocking
+	 * @param  {number} tabId  the Tab Id
+	 * @return {number}        the number of trackers in an object
+	 */
+	_getAdBlockCount(tabId) {
+		if (!conf.enable_ad_block || !adblocker.background) {
+			return 0;
 		}
+		const adBlocking = adblocker.background.actions.getAdBlockInfoForTab(tabId);
+		return adBlocking && adBlocking.totalCount || 0;
 	}
 }
 
