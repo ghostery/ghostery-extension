@@ -83,13 +83,6 @@ describe('dispatcher tests', () => {
 	let spy = sinon.spy(dispatcher, 'trigger');
 
 	beforeEach(() => {
-		conf.login_info = {
-			logged_in: false,
-			email: '',
-			user_token: '',
-			decoded_user_token: {},
-			is_validated: false
-		};
 		spy.resetHistory();
 	});
 
@@ -112,25 +105,4 @@ describe('dispatcher tests', () => {
 		return expect(spy.calledWith(`conf.save.alert_expanded`, true)).toBeTruthy();
 	});
 
-	test('dispatcher is called only when login_info.logged_in has changed I', () => {
-		conf.login_info = {
-			logged_in: false, // unchanged
-			email: 'test@ghostery.com', // changed
-			user_token: '',
-			decoded_user_token: {},
-			is_validated: false
-		};
-		return expect(spy.notCalled).toBeTruthy();
-	});
-
-	test('dispatcher is called only when login_info.logged_in has changed II', () => {
-		conf.login_info = {
-			logged_in: true, // changed
-			email: 'test@ghostery.com', // changed
-			user_token: '',
-			decoded_user_token: {},
-			is_validated: false
-		};
-		return expect(spy.calledOnce).toBeTruthy();
-	});
 });
