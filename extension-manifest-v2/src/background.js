@@ -748,13 +748,14 @@ function onMessageHandler(request, sender, callback) {
 				callback({ errors: _getJSONAPIErrorsObject(err) });
 			});
 		return true;
-	} else if (name === 'resetPassword') {
-		account.resetPassword(message)
-			.then((response) => {
-				callback(response);
+	} else if (name === 'account.resetPassword') {
+		const { email } = message;
+		account.resetPassword(email)
+			.then((success) => {
+				callback(success);
 			})
 			.catch((err) => {
-				callback({ errors: [err] });
+				callback({ errors: _getJSONAPIErrorsObject(err) });
 				log('RESET PASSWORD ERROR');
 			});
 		return true;
@@ -764,7 +765,7 @@ function onMessageHandler(request, sender, callback) {
 				callback(user);
 			})
 			.catch((err) => {
-				callback(err);
+				callback({ errors: _getJSONAPIErrorsObject(err) });
 				log('FETCH USER ERROR');
 			});
 		return true;
@@ -774,7 +775,7 @@ function onMessageHandler(request, sender, callback) {
 				callback(success);
 			})
 			.catch((err) => {
-				callback(err);
+				callback({ errors: _getJSONAPIErrorsObject(err) });
 				log('sendValidateAccountEmail error', err);
 			});
 		return true;
