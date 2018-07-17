@@ -1381,7 +1381,7 @@
 		"description": "Ghostery organizes tags by category. This is one of several tag categories."
 	},
 	"summary_description_not_scanned_2": {
-		"message": "Navigieren Sie zu einer anderen Seite und ich verspreche, dass ich liefern werde.",
+		"message": "Navigieren Sie zu einer anderen Seite und ich verspreche, dass ich meine Arbeit erledigen werde.",
 		"description": ""
 	},
 	"settings_import_warning": {
@@ -1996,7 +1996,7 @@
 		"description": ""
 	},
 	"rewards_expires_in": {
-		"message": "Läuft ab in $COUNT$ $TYPE$",
+		"message": "Läuft in $COUNT$ $TYPE$ ab",
 		"description": "example: Expires in 8 minutes. TYPE will be rewards_expires_in_TYPE listed below.",
 		"placeholders": {
 			"count": {

@@ -46,6 +46,14 @@ class EventHandlers {
 		this.policy = new Policy();
 		this.policySmartBlock = new PolicySmartBlock();
 		this.purplebox = new PurpleBox();
+
+		// Use leading:false so button.update is called after requests are complete.
+		// Use a 1sec interval to limit calls on pages with a large number of requests.
+		// Don't use tabId with button.update for cases where tab is switched before throttle delay is reached.
+		// ToDo: Remove this function when there is an event for AdBlocker:foundAd.
+		this._throttleButtonUpdate = _.throttle(() => {
+			button.update();
+		}, 1000, { leading: false });
 	}
 
 	/**
@@ -362,6 +370,9 @@ class EventHandlers {
 
 		// allow if not a tracker
 		if (!bug_id) {
+			// Make a throttled call to button.update() for when there are no trackers but an ad was blocked
+			// ToDo: Remove this call when there is an event for AdBlocker:foundAd.
+			this._throttleButtonUpdate();
 			return { cancel: false };
 		}
 
@@ -458,8 +469,8 @@ class EventHandlers {
 
 	/**
 	 * Handler for webRequest.onBeforeRedirect event.
-	 * Fires when a redirect is about to be executed. Calculate latency,
-	 * send GR if enabled and increase requests count.
+	 * Fires when a redirect is about to be executed. Calculate latency
+	 * and increase requests count.
 	 *
 	 * @param  {Object} details 	event data
 	 */
@@ -477,8 +488,7 @@ class EventHandlers {
 
 	/**
 	 * Handler for webRequest.onCompleted event.
-	 * Called when a request has been processed successfully. Calculate latency
-	 * and send GR if enabled.
+	 * Called when a request has been processed successfully. Calculate latency.
 	 *
 	 * @param  {Object} details 	event data
 	 */
@@ -500,7 +510,7 @@ class EventHandlers {
 	/**
 	 * Handler for webRequest.onErrorOccurred event.
 	 * Called when a request could not be processed successfully.
-	 * Set latency = -1 and send GR if enabled.
+	 * Set latency = -1.
 	 *
 	 * @param  {Object} details 	event data
 	 */

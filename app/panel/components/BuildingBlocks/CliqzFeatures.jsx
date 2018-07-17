@@ -65,17 +65,7 @@ class CliqzFeatures extends React.Component {
 		if (!this.props.antiTrackingActive) {
 			return '-';
 		}
-		let antiTrackingTotal = 0;
-		for (const category in this.props.antiTracking) {
-			if (this.props.antiTracking.hasOwnProperty(category)) {
-				for (const app in this.props.antiTracking[category]) {
-					if (this.props.antiTracking[category][app] === 'unsafe') {
-						antiTrackingTotal++;
-					}
-				}
-			}
-		}
-		return antiTrackingTotal;
+		return this.props.antiTracking && this.props.antiTracking.totalUnsafeCount || 0;
 	}
 
 	/**

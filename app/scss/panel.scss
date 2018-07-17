@@ -23,6 +23,7 @@
 html body {
 	margin: 0px;
 	font-size: 75%;
+	overflow: hidden;
 }
 *:focus {outline: none;}
 
@@ -41,7 +42,6 @@ html body {
 	background-color: white;
 	height: 516px;
 	width: 580px;
-	overflow: hidden;
 	margin: 0px;
 	padding: 0px;
 }

@@ -148,6 +148,8 @@ class Tracker extends React.Component {
 		}
 
 		this.props.actions.updateTrackerBlocked({
+			smartBlockActive: this.props.smartBlockActive,
+			smartBlock: this.props.smartBlock,
 			app_id: this.props.tracker.id,
 			cat_id: this.props.cat_id,
 			blocked,

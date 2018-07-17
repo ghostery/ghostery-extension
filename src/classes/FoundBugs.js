@@ -35,7 +35,7 @@ import globals from './Globals';
 import tabInfo from './TabInfo';
 
 const { BROWSER_INFO } = globals;
-const LATENCY_ISSUE_THRESHOLD = (BROWSER_INFO.name === 'firefox') ? 2000 : 1000; // Temporary: bump up the latency threshold for Firefox only
+const LATENCY_ISSUE_THRESHOLD = 1000;
 /**
  * Class for handling detected trackers.
  * @memberOf  BackgroundClasses
@@ -52,11 +52,11 @@ class FoundBugs {
 	 * (from tabs.onReplaced and webNavigation.onNavigation), this method
 	 * is used only to initialize this._foundBugs for the tab_id
 	 *
-	 * @param  {number} 	tab_id      tab id
-	 * @param  {number} 	bug_id      bug id
-	 * @param  {string} src			resource url
+	 * @param  {number} 	tab_id		tab id
+	 * @param  {number} 	bug_id 		bug id
+	 * @param  {string} 	src			resource url
 	 * @param  {boolean} 	blocked 	blocking status of the tracker id from this tab_id
-	 * @param  {string} type 		request resource type
+	 * @param  {string} 	type 		request resource type
 	 */
 	update(tab_id, bug_id, src, blocked, type) {
 		if (!this._foundBugs.hasOwnProperty(tab_id)) {
@@ -106,10 +106,10 @@ class FoundBugs {
 	 * Get the trackers from BugsDb that match bugs found
 	 * on a tab_id.
 	 *
-	 * @param  {number}  		tab_id		tab id
-	 * @param  {boolean}	[sorted]  	do we want the output tracker objects array to be sorted by tracker name?
-	 * @param  {string} 	[tab_url] 	tab url
-	 * @param  {number}		[app_id] 	tracker id
+	 * @param  {number}		tab_id		tab id
+	 * @param  {boolean}	sorted  	do we want the output tracker objects array to be sorted by tracker name?
+	 * @param  {string} 	tab_url 	tab url
+	 * @param  {number}		app_id		tracker id
 	 * @return {array}  				array of tracker objects
 	 */
 	getApps(tab_id, sorted, tab_url, app_id) {
@@ -192,8 +192,8 @@ class FoundBugs {
 	 * on a tab_id.
 	 *
 	 * @param  {number}  	tab_id		tab id
-	 * @param  {boolean}	[sorted]  	do we want the output category objects array to be sorted by category name?
-	 * @return {array}        		array of categories
+	 * @param  {boolean}	sorted  	do we want the output category objects array to be sorted by category name?
+	 * @return {array}					array of categories
 	 */
 	getCategories(tab_id, sorted) {
 		const cats_arr = [];
@@ -272,7 +272,7 @@ class FoundBugs {
 	/**
 	 * Get the total number of trackers on a tab_id.
 	 * @param  {number} tab_id		tab id
-	 * @return {number}			count of trackers
+	 * @return {number}				count of trackers
 	 */
 	getAppsCount(tab_id) {
 		const apps = this.getApps(tab_id);
@@ -287,8 +287,8 @@ class FoundBugs {
 	 * tab_id
 	 *
 	 * @param  {number} 	tab_id		tab id
-	 * @param  {string} tab_url		tab url
-	 * @return {Object}				counts for different types of issues
+	 * @param  {string} 	tab_url		tab url
+	 * @return {Object}					counts for different types of issues
 	 */
 	getAppsCountByIssues(tab_id, tab_url) {
 		const apps = this.getApps(tab_id, false, tab_url);
@@ -358,7 +358,7 @@ class FoundBugs {
 	 *
 	 * @param  {number} tab_id		tab id
 	 * @param  {number} bug_id		bug id
-	 * @param  {number} latency    bug latency
+	 * @param  {number} latency 	bug latency
 	 * @return {number} 			tracker id of a slow bug or 0
 	 */
 	checkLatencyIssue(tab_id, bug_id, latency) {
