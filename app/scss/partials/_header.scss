@@ -107,11 +107,15 @@
 					fill: #e7ecee;
 				}
 			}
+			.supporter-icon {fill: #e7ecee;}
 			&:hover {
 				span {color: $ghosty-blue;}
 				.menu-icon {fill: $ghosty-blue;}
 				.about-icon {
 					path, text {stroke: $ghosty-blue;}
+				}
+				.supporter-icon {
+					path { fill: $ghosty-blue; stroke: $ghosty-blue;}
 				}
 			}
 			span {
