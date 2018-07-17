@@ -723,6 +723,19 @@ function onMessageHandler(request, sender, callback) {
 				// callback({ errors: [err] });
 			});
 		return true;
+	} else if (name === 'account.register') {
+		const {
+			email, confirmEmail, password, firstName, lastName
+		} = message;
+		account.register(email, confirmEmail, password, firstName, lastName)
+			.then((response) => {
+				callback(response);
+			})
+			.catch((err) => {
+				callback({ errors: [err] });
+				log('REGISTER ERROR');
+			});
+		return true;
 	} else if (name === 'account.logout') {
 		account.logout()
 			.then((response) => {
@@ -743,13 +756,14 @@ function onMessageHandler(request, sender, callback) {
 				callback({ errors: _getJSONAPIErrorsObject(err) });
 			});
 		return true;
-	} else if (name === 'resetPassword') {
-		account.resetPassword(message)
-			.then((response) => {
-				callback(response);
+	} else if (name === 'account.resetPassword') {
+		const { email } = message;
+		account.resetPassword(email)
+			.then((success) => {
+				callback(success);
 			})
 			.catch((err) => {
-				callback({ errors: [err] });
+				callback({ errors: _getJSONAPIErrorsObject(err) });
 				log('RESET PASSWORD ERROR');
 			});
 		return true;
@@ -759,18 +773,18 @@ function onMessageHandler(request, sender, callback) {
 				callback(user);
 			})
 			.catch((err) => {
-				callback(err);
+				callback({ errors: _getJSONAPIErrorsObject(err) });
 				log('FETCH USER ERROR');
 			});
 		return true;
-	} else if (name === 'createAccount') {
-		account.createAccount(message)
-			.then((response) => {
-				callback(response);
+	} else if (name === 'account.sendValidateAccountEmail') {
+		account.sendValidateAccountEmail()
+			.then((success) => {
+				callback(success);
 			})
 			.catch((err) => {
-				callback({ errors: [err] });
-				log('FETCH USER ERROR');
+				callback({ errors: _getJSONAPIErrorsObject(err) });
+				log('sendValidateAccountEmail error', err);
 			});
 		return true;
 	} else if (name === 'update_database') {
@@ -812,11 +826,6 @@ function onMessageHandler(request, sender, callback) {
 			} else {
 				callback(false);
 			}
-		});
-		return true;
-	} else if (name === 'sendVerificationEmail') {
-		account.sendVerificationEmail().then((result) => {
-			callback(result);
 		});
 		return true;
 	} else if (name === 'ping') {
