@@ -75,7 +75,7 @@ class ForgotPassword extends React.Component {
 			return;
 		}
 
-		this.props.actions.forgotPassword(email);
+		this.props.actions.resetPassword(email);
 	}
 	/**
 	 * Create account on Return.
