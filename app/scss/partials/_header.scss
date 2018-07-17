@@ -84,9 +84,10 @@
 		left: 363px !important;
 		visibility: visible;
 		ul.menu {background: none;}
-		.menu-option {
+		li.menu-option-base {
+			draggable: false;
 			position: relative;
-			@extend %pointer;
+			cursor: default;
 			padding: 10px 0;
 			.menu-icon-container {
 				position: absolute;
@@ -94,7 +95,27 @@
 				top: 50%;
 				transform: translateY(-50%);
 			}
+			.menu-icon {fill: $light-gray;}
+			.supporter-icon {fill: $light-gray; stroke: $light-gray;}
+			span {
+				@include user-select(none);
+				font-size: 14px;
+				font-weight: 300;
+				color: $light-gray;
+				padding-left: 10px;
+				line-height: 18px;
+				vertical-align: top;
+				display: inline-block;
+				margin-left: 20px;
+				overflow-y: hidden;
+			}
+		}
+
+		li.menu-option {
+			@extend .menu-option-base;
+			@extend %pointer;
 			.menu-icon {fill: #e7ecee;}
+			.supporter-icon {fill: #e7ecee; stroke:  #e7ecee;}
 			.about-icon {
 				fill: none;
 				path {
@@ -107,7 +128,6 @@
 					fill: #e7ecee;
 				}
 			}
-			.supporter-icon {fill: #e7ecee;}
 			&:hover {
 				span {color: $ghosty-blue;}
 				.menu-icon {fill: $ghosty-blue;}
@@ -119,15 +139,7 @@
 				}
 			}
 			span {
-				font-size: 14px;
-				font-weight: 300;
 				color: #ffffff;
-				padding-left: 10px;
-				line-height: 18px;
-				vertical-align: top;
-				display: inline-block;
-				margin-left: 20px;
-				overflow-y: hidden;
 			}
 			a {
 				display: block;
