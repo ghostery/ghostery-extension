@@ -17,7 +17,7 @@ import * as msg from '../../utils/msg';
 import * as accountActions from '../AccountActions';
 import {
 	LOGIN_FAILED, SHOW_NOTIFICATION, LOGIN_SUCCESS,
-	GET_SETTINGS_DATA, LOGIN_DATA_SUCCESS
+	GET_SETTINGS_DATA, LOGIN_DATA_SUCCESS, LOGOUT
 } from '../../constants/constants';
 
 // Fake the translation function to only return the translation key
@@ -83,10 +83,11 @@ describe('app/panel/actions/AccountActions.js', () => {
 		const store = mockStore(initialState);
 		const expectedPayload = { data: { settingsData: settings }, type: GET_SETTINGS_DATA };
 
-		return store.dispatch(accountActions.getUserSettings()).then(() => {
-			const actions = store.getActions();
-			expect(actions).toEqual([expectedPayload]);
-		});
+		return store.dispatch(accountActions.getUserSettings())
+			.then(() => {
+				const actions = store.getActions();
+				expect(actions).toEqual([expectedPayload]);
+			});
 	});
 });
 
@@ -96,10 +97,11 @@ describe('app/panel/actions/AccountActions.js', () => {
 		const store = mockStore(initialState);
 		const expectedPayload = { data: user, type: LOGIN_DATA_SUCCESS };
 
-		return store.dispatch(accountActions.accountGetUser()).then(() => {
-			const actions = store.getActions();
-			expect(actions).toEqual([expectedPayload]);
-		});
+		return store.dispatch(accountActions.getUser())
+			.then(() => {
+				const actions = store.getActions();
+				expect(actions).toEqual([expectedPayload]);
+			});
 	});
 
 	test('accountLogin action valid login should resolve correctly', () => {
@@ -119,7 +121,7 @@ describe('app/panel/actions/AccountActions.js', () => {
 				}
 			}
 		];
-		return store.dispatch(accountActions.accountLogin(email, password)).then(() => {
+		return store.dispatch(accountActions.login(email, password)).then(() => {
 			const actions = store.getActions();
 			expect(actions).toEqual(expectedPayload);
 		});
@@ -142,10 +144,11 @@ describe('app/panel/actions/AccountActions.js', () => {
 				}
 			}
 		];
-		return store.dispatch(accountActions.accountLogin(email, password)).then(() => {
-			const actions = store.getActions();
-			expect(actions).toEqual(expectedPayload);
-		});
+		return store.dispatch(accountActions.login(email, password))
+			.then(() => {
+				const actions = store.getActions();
+				expect(actions).toEqual(expectedPayload);
+			});
 	});
 
 	test('accountLogin action server err should fail correctly', () => {
@@ -165,9 +168,21 @@ describe('app/panel/actions/AccountActions.js', () => {
 				}
 			}
 		];
-		return store.dispatch(accountActions.accountLogin(email, password)).then(() => {
-			const actions = store.getActions();
-			expect(actions).toEqual(expectedPayload);
-		});
+		return store.dispatch(accountActions.login(email, password))
+			.then(() => {
+				const actions = store.getActions();
+				expect(actions).toEqual(expectedPayload);
+			});
 	});
+
+	// test('accountLogout action should resolve', () => {
+	// 	const initialState = {};
+	// 	const store = mockStore(initialState);
+	// 	const expectedPayload = { type: LOGOUT };
+	// 	return store.dispatch(accountActions.accountLogout())
+	// 		.then(() => {
+	// 			const actions = store.getActions();
+	// 			expect(actions).toEqual(expectedPayload);
+	// 		});
+	// });
 });
