@@ -159,6 +159,24 @@ class Account {
 			.then(res => res.status < 400);
 	}
 
+	resetPassword(email) {
+		const data = `email=${window.encodeURIComponent(email)}`;
+		return fetch(`${globals.AUTH_SERVER}/api/v2/send_email/reset_password`, {
+			method: 'POST',
+			body: data,
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				'Content-Length': Buffer.byteLength(data),
+			},
+		})
+			.then((res) => {
+				if (res.status >= 400) {
+					return res.json();
+				}
+				return {};
+			});
+	}
+
 	_getUserIDFromCookie() {
 		return new Promise((resolve, reject) => {
 			chrome.cookies.get({
@@ -199,24 +217,6 @@ class Account {
 			}
 		});
 		return settings;
-	}
-
-	resetPassword(data) {
-		return fetch(`${globals.AUTH_SERVER}/api/v2/send_email/reset_password`, { // eslint-disable-line no-undef
-			method: 'POST',
-			body: data,
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded',
-				'Content-Length': Buffer.byteLength(data),
-			},
-		})
-			.then((response) => {
-				if (response.status >= 400) {
-					return response.json().then(json => Promise.resolve(json));
-				}
-				return Promise.resolve(response);
-			})
-			.catch(err => Promise.reject(err));
 	}
 
 	_removeCookies() {
