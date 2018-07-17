@@ -177,7 +177,7 @@ export function logout() {
  * @param  {Object} query
  * @return {Object} dispatch
  */
-export const resetPassword = (email) => dispatch => (
+export const resetPassword = email => dispatch => (
 	sendMessageInPromise('account.resetPassword', { email })
 		.then((res) => {
 			const { errors } = res;
