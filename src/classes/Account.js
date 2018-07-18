@@ -30,7 +30,7 @@ const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const SYNC_SET = new Set(SYNC_ARRAY);
 
 class Account {
-	login(email, password) {
+	login = (email, password) => {
 		const data = `email=${window.encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
 		return fetch(`${AUTH_SERVER}/api/v2/login`, {
 			method: 'POST',
@@ -51,7 +51,7 @@ class Account {
 		});
 	}
 
-	register(email, confirmEmail, password, firstName, lastName) {
+	register = (email, confirmEmail, password, firstName, lastName) => {
 		const data = `email=${window.encodeURIComponent(email)}&email_confirmation=${window.encodeURIComponent(confirmEmail)}&first_name=${window.encodeURIComponent(firstName)}&last_name=${window.encodeURIComponent(lastName)}&password=${window.encodeURIComponent(password)}`;
 		return fetch(`${AUTH_SERVER}/api/v2/register`, {
 			method: 'POST',
@@ -72,8 +72,8 @@ class Account {
 		});
 	}
 
-	logout() {
-		return getCsrfCookie()
+	logout = () => (
+		getCsrfCookie()
 			.then(cookie => fetch(`${AUTH_SERVER}/api/v2/logout`, {
 				method: 'POST',
 				credentials: 'include',
@@ -85,10 +85,10 @@ class Account {
 				// remove cookies in case fetch fails
 				this._removeCookies();
 				this._clearAccountInfo();
-			});
-	}
+			})
+	)
 
-	getUser() {
+	getUser = () => {
 		const { userID } = conf.account;
 		return get('users', userID)
 			.then((res) => {
@@ -98,7 +98,7 @@ class Account {
 			});
 	}
 
-	getUserSettings() {
+	getUserSettings = () => {
 		const { userID } = conf.account;
 		return get('settings', userID)
 			.then((res) => {
@@ -111,7 +111,7 @@ class Account {
 			});
 	}
 
-	saveUserSettings() {
+	saveUserSettings = () => {
 		const { userID } = conf.account;
 		return update('settings', {
 			type: 'settings',
@@ -122,13 +122,13 @@ class Account {
 		});
 	}
 
-	sendValidateAccountEmail() {
+	sendValidateAccountEmail = () => {
 		const { userID } = conf.account;
 		return fetch(`${AUTH_SERVER}/api/v2/send_email/validate_account/${userID}`)
 			.then(res => res.status < 400);
 	}
 
-	resetPassword(email) {
+	resetPassword = (email) => {
 		const data = `email=${window.encodeURIComponent(email)}`;
 		return fetch(`${AUTH_SERVER}/api/v2/send_email/reset_password`, {
 			method: 'POST',
@@ -146,7 +146,7 @@ class Account {
 			});
 	}
 
-	_setAccountInfo(userID) {
+	_setAccountInfo = (userID) => {
 		conf.account = {
 			userID,
 			user: null,
@@ -154,22 +154,22 @@ class Account {
 		};
 	}
 
-	_setAccountUserInfo(user) {
+	_setAccountUserInfo = (user) => {
 		conf.account.user = user;
 		dispatcher.trigger('conf.save.account');
 	}
 
-	_setAccountUserSettings(settings) {
+	_setAccountUserSettings = (settings) => {
 		conf.account.userSettings = settings;
 		dispatcher.trigger('conf.save.account');
 	}
 
-	_clearAccountInfo() {
+	_clearAccountInfo = () => {
 		conf.account = null;
 	}
 
-	_getUserIDFromCookie() {
-		return new Promise((resolve, reject) => {
+	_getUserIDFromCookie = () => (
+		new Promise((resolve, reject) => {
 			chrome.cookies.get({
 				url: `https://${GHOSTERY_DOMAIN}.com`, // ghostery.com || ghosterystage.com
 				name: 'user_id',
@@ -180,8 +180,8 @@ class Account {
 				}
 				reject(new Error('err getting login user_id cookie'));
 			});
-		});
-	}
+		})
+	)
 
 	/**
 	 * Create settings object for syncing.
@@ -189,7 +189,7 @@ class Account {
 	 *
 	 * @return {Object} 	jsonifyable settings object for syncing
 	 */
-	_buildUserSettings() {
+	_buildUserSettings = () => {
 		const settings = {};
 		const now = Number(new Date().getTime());
 		SYNC_SET.forEach((key) => {
@@ -216,7 +216,7 @@ class Account {
 	 *
 	 * @return {Promise} 	user settings json or error
 	 */
-	_setConfUserSettings(settings) {
+	_setConfUserSettings = (settings) => {
 		log('SET USER SETTINGS', settings);
 		if (IS_EDGE) {
 			settings.enable_human_web = false;
@@ -237,7 +237,7 @@ class Account {
 		return settings;
 	}
 
-	_removeCookies() {
+	_removeCookies = () => {
 		const cookies = ['user_id', 'access_token', 'refresh_token', 'csrf_token', 'AUTH'];
 		cookies.forEach((name) => {
 			chrome.cookies.remove({
