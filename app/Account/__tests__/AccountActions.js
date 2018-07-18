@@ -13,12 +13,12 @@
 
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import * as msg from '../../utils/msg';
+import * as msg from '../../panel/utils/msg';
 import * as accountActions from '../AccountActions';
 import {
 	LOGIN_FAILED, SHOW_NOTIFICATION, LOGIN_SUCCESS,
 	GET_SETTINGS_DATA, LOGIN_DATA_SUCCESS, LOGOUT
-} from '../../constants/constants';
+} from '../AccountConstants';
 
 // Fake the translation function to only return the translation key
 global.t = function (str) {

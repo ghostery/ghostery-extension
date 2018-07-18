@@ -185,9 +185,7 @@ class PanelData {
 				tab_id: this._trackerData.get('tab_id'),
 				unread_offer_ids: rewards.unreadOfferIds,
 
-				loggedIn: this._confData.get('loggedIn'),
-				email: this._confData.get('email'),
-				emailValidated: this._confData.get('emailValidated')
+				account: this._confData.get('account')
 			},
 			summary: this.summaryView,
 			blocking: this._confData.get('is_expert') ? this.blockingView : false,
@@ -336,11 +334,7 @@ class PanelData {
 			.set('toggle_individual_trackers', conf.toggle_individual_trackers)
 			.set('trackers_banner_status', conf.trackers_banner_status)
 			.set('expand_all_trackers', conf.expand_all_trackers)
-			.set('loggedIn', conf.account !== null)
-			.set('email', conf.account && conf.account.user && conf.account.user.email)
-			.set('emailValidated', conf.account && conf.account.user && conf.account.user.emailValidated)
-			.set('firstName', conf.account && conf.account.user && conf.account.user.firstName)
-			.set('lastName', conf.account && conf.account.user && conf.account.user.lastName);
+			.set('account', conf.account);
 	}
 
 	/**
