@@ -20,7 +20,6 @@ import build from 'redux-object';
 import globals from '../classes/Globals';
 import conf from '../classes/Conf';
 import dispatcher from '../classes/Dispatcher';
-import { getCsrfCookie } from '../utils/utils';
 import { log } from '../utils/common';
 import Api from '../utils/api';
 
@@ -35,10 +34,10 @@ class Account {
 	constructor() {
 		const apiConfig = {
 			AUTH_SERVER,
-			ACCOUNT_SERVER
+			ACCOUNT_SERVER,
+			CSRF_DOMAIN: GHOSTERY_DOMAIN
 		};
 		const apiHandlers = {
-			getCsrfCookie,
 			errorHandler: (errors) => {
 				errors.forEach((err) => {
 					if ((err.code === '10190' || err.code === '10200') && this.handlers.logoutHandler) {
@@ -94,7 +93,7 @@ class Account {
 	}
 
 	logout = () => (
-		getCsrfCookie()
+		api.getCsrfCookie()
 			.then(cookie => fetch(`${AUTH_SERVER}/api/v2/logout`, {
 				method: 'POST',
 				credentials: 'include',
