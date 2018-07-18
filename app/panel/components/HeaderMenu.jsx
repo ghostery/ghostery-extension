@@ -234,7 +234,7 @@ class HeaderMenu extends React.Component {
 						</li>
 						{this.props.logged_in ? (
 							<li className="menu-option">
-								<Link to="/supporter" onClick={this.props.toggleDropdown}>
+								<Link to="/subscription" onClick={this.props.toggleDropdown}>
 									<this.SupporterMenuItemBase/>
 								</Link>
 							</li>	

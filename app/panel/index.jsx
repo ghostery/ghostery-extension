@@ -24,7 +24,7 @@ import Detail from './containers/DetailContainer';
 import Settings from './containers/SettingsContainer';
 import Help from './components/Help';
 import About from './components/About';
-import Supporter from './components/Supporter';
+import Subscription from './components/Subscription';
 import Login from './containers/LoginContainer';
 import CreateAccount from './containers/CreateAccountContainer';
 import ForgotPassword from './containers/ForgotPasswordContainer';
@@ -44,7 +44,7 @@ const Ghostery = () => (
 		<Route path="/settings" component={Settings} />
 		<Route path="/help" component={Help} />
 		<Route path="/about" component={About} />
-		<Route path="/supporter" component={Supporter} />
+		<Route path="/subscription" component={Subscription} />
 		<Route path="/login" component={Login} />
 		<Route path="/create-account" component={CreateAccount} />
 		<Route path="/forgot-password" component={ForgotPassword} />

@@ -140,7 +140,7 @@ class Header extends React.Component {
 								</div>
 							</div>
 							<div className="columns shrink">
-								<Link to="/supporter">
+								<Link to="/subscription">
 									<svg width="29px" height="20px" viewBox="0 0 29 20" className="header-badge">
 									    <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
 									        <g transform="translate(-552.000000, -70.000000)" fill="#FFFFFF">
