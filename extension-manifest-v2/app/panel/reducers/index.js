@@ -19,10 +19,9 @@ import summary from './summary';
 import detail from './detail';
 import rewards from './rewards';
 import blocking from './blocking';
-import login from './login';
-import createAccount from './createAccount';
 import settings from './settings';
-import forgotPassword from './forgotPassword';
+import account from '../../Account/AccountReducer';
+
 /**
  * Export combined reducers object which provides
  * the full list of reducers. To be imported by React.
@@ -37,10 +36,8 @@ const Reducers = combineReducers({
 	detail,
 	rewards,
 	blocking,
-	login,
-	createAccount,
 	settings,
-	forgotPassword,
+	account,
 });
 
 export default Reducers;

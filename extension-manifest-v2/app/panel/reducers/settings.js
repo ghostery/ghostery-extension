@@ -15,7 +15,6 @@
 
 import moment from 'moment/min/moment-with-locales.min';
 import {
-	GET_SETTINGS_DATA,
 	IMPORT_SETTINGS_DIALOG,
 	IMPORT_SETTINGS_NATIVE,
 	IMPORT_SETTINGS_FAILED,
@@ -31,6 +30,7 @@ import {
 	SETTINGS_UPDATE_SEARCH_VALUE,
 	SETTINGS_FILTER
 } from '../constants/constants';
+import { GET_SETTINGS_DATA } from '../../Account/AccountConstants';
 import { updateTrackerBlocked, updateCategoryBlocked, updateBlockAllTrackers, toggleExpandAll, toggleExpandCategory } from '../utils/blocking';
 import { removeFromObject, updateObject } from '../utils/utils';
 import { sendMessage } from '../utils/msg';

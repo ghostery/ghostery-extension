@@ -16,7 +16,7 @@ import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import Header from '../components/Header';
 import * as actions from '../actions/PanelActions'; // get shared actions from Panel
-import { logout } from '../actions/AccountActions';
+import { logout } from '../../Account/AccountActions';
 /**
  * Map redux store state properties to Header component own properties.
  * @memberOf PanelContainers
@@ -26,11 +26,8 @@ import { logout } from '../actions/AccountActions';
  * @todo  We are not using ownProps, so we better not specify it explicitly,
  * in this case it won't be passed by React (see https://github.com/reactjs/react-redux/blob/master/docs/api.md).
  */
-const mapStateToProps = (state, ownProps) => Object.assign({}, state.header, {
+const mapStateToProps = (state, ownProps) => Object.assign({}, state.header, state.account, {
 	// get properties from panel redux store
-	loggedIn: state.panel.loggedIn,
-	email: state.panel.email,
-	emailValidated: state.panel.emailValidated,
 	is_expert: state.panel.is_expert,
 	language: state.panel.language,
 	tab_id: state.panel.tab_id,

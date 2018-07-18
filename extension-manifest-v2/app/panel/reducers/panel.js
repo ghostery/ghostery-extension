@@ -17,19 +17,25 @@ import {
 	GET_PANEL_DATA,
 	SHOW_NOTIFICATION,
 	CLOSE_NOTIFICATION,
-	LOGIN_SUCCESS,
-	LOGIN_DATA_SUCCESS,
-	LOGOUT,
-	CREATE_ACCOUNT_SUCCESS,
-	TOGGLE_EXPANDED,
 	TOGGLE_EXPERT,
 	TOGGLE_CLIQZ_FEATURE,
 	UPDATE_NOTIFICATION_STATUS,
 	TOGGLE_CHECKBOX,
 	TOGGLE_OFFERS_ENABLED,
 	REMOVE_OFFER,
-	SET_OFFER_READ
+	SET_OFFER_READ,
+	TOGGLE_EXPANDED
 } from '../constants/constants';
+import {
+	LOGIN_SUCCESS,
+	LOGIN_FAIL,
+	LOGOUT_SUCCESS,
+	REGISTER_SUCCESS,
+	REGISTER_FAIL,
+	LOGIN_DATA_SUCCESS,
+	RESET_PASSWORD_SUCCESS,
+	RESET_PASSWORD_FAIL
+} from '../../Account/AccountConstants';
 import { sendMessage, sendMessageInPromise } from '../utils/msg';
 
 const initialState = {
@@ -74,27 +80,96 @@ export default (state = initialState, action) => {
 			const updated = _closeNotification(state, action);
 			return Object.assign({}, state, updated);
 		}
-		case CREATE_ACCOUNT_SUCCESS: {
-			return Object.assign({}, state, {
+		case LOGIN_SUCCESS: {
+			action.payload.text = `${t('panel_signin_success')} ${action.payload.email}`;
+			action.payload.classes = 'success';
+			const updated = _showNotification(state, action);
+			return Object.assign({}, state, updated, {
 				loggedIn: true,
 			});
 		}
-		case LOGIN_SUCCESS: {
-			return Object.assign({}, state, {
-				loggedIn: true,
+		case LOGIN_FAIL: {
+			const { errors } = action.payload;
+			let errorText = t('server_error_message');
+			errors.forEach((err) => {
+				switch (err.code) {
+					case '10050':
+					case '10110':
+						errorText = t('banner_no_such_account_message');
+						break;
+					default:
+						errorText = t('server_error_message');
+				}
 			});
+			action.payload.text = errorText;
+			action.payload.classes = 'alert';
+			const updated = _showNotification(state, action);
+			return Object.assign({}, state, updated);
+		}
+		case REGISTER_SUCCESS: {
+			action.payload.text = t('panel_email_verification_sent', action.payload.email);
+			action.payload.classes = 'success';
+			const updated = _showNotification(state, action);
+			return Object.assign({}, state, updated);
+		}
+		case REGISTER_FAIL: {
+			const { errors } = action.payload;
+			let errorText = t('server_error_message');
+			errors.forEach((err) => {
+				switch (err.code) {
+					case '10070':
+						errorText = t('email_address_in_use');
+						break;
+					case '10080':
+						errorText = t('invalid_email_confirmation');
+						break;
+					default:
+						errorText = t('server_error_message');
+				}
+			});
+			action.payload.text = errorText;
+			action.payload.classes = 'alert';
+			const updated = _showNotification(state, action);
+			return Object.assign({}, state, updated);
+		}
+		// TODO?
+		// case LOGOUT_SUCCESS: {
+		// 	action.payload = {
+		// 		text: 'Logged out successfully.',
+		// 		classes: 'success',
+		// 	};
+		// 	const updated = _showNotification(state, action);
+		// 	return Object.assign({}, state, updated);
+		// }
+		case RESET_PASSWORD_SUCCESS: {
+			action.payload = {
+				text: t('banner_check_your_email_title'),
+				classes: 'success',
+			};
+			const updated = _showNotification(state, action);
+			return Object.assign({}, state, updated);
+		}
+		case RESET_PASSWORD_FAIL: {
+			const { errors } = action.payload;
+			let errorText = t('server_error_message');
+			errors.forEach((err) => {
+				switch (err.code) {
+					case '10050':
+					case '10110':
+						errorText = t('banner_no_such_account_message');
+						break;
+					default:
+						errorText = t('server_error_message');
+				}
+			});
+			action.payload.text = errorText;
+			action.payload.classes = 'alert';
+			const updated = _showNotification(state, action);
+			return Object.assign({}, state, updated);
 		}
 		case LOGIN_DATA_SUCCESS: {
 			const { email, emailValidated } = action.data;
 			return Object.assign({}, state, {
-				email,
-				emailValidated,
-			});
-		}
-		case LOGOUT: {
-			const { loggedIn, email, emailValidated } = initialState;
-			return Object.assign({}, state, {
-				loggedIn,
 				email,
 				emailValidated,
 			});
@@ -180,7 +255,7 @@ export default (state = initialState, action) => {
  * @return {Object}        		notification parameters
  */
 const _showNotification = (state, action) => {
-	const msg = action.data;
+	const msg = action.data || action.payload;
 	const { reload } = msg;
 
 	let updated_notificationClasses = state.notificationClasses;

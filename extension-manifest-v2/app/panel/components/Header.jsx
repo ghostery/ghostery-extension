@@ -34,7 +34,6 @@ class Header extends React.Component {
 		this.clickDetailedTab = this.clickDetailedTab.bind(this);
 		this.toggleExpert = this.toggleExpert.bind(this);
 		this.toggleDropdown = this.toggleDropdown.bind(this);
-		this.clickSignInVerify = this.clickSignInVerify.bind(this);
 	}
 
 	/**
@@ -74,35 +73,51 @@ class Header extends React.Component {
 		this.setState({ dropdownOpen: !this.state.dropdownOpen });
 	}
 
-	/**
-	 * Handles clicking the sign-in / verify link
-	 */
-	clickSignInVerify() {
-		const { loggedIn, email, emailValidated } = this.props;
-		if (!loggedIn) {
-			sendMessage('ping', 'sign_in');
-			this.props.history.push('/login');
-		} else if (!emailValidated) {
-			sendMessageInPromise('account.sendValidateAccountEmail').then((success) => {
-				if (success) {
-					this.props.actions.showNotification({
-						classes: 'success',
-						text: t('panel_email_verification_sent', email),
-					});
-				} else {
-					this.props.actions.showNotification({
-						classes: 'alert',
-						text: t('server_error_message'),
-					});
-				}
-			}).catch((err) => {
-				log('sendVerificationEmail Error', err);
+	handleSignin = () => {
+		sendMessage('ping', 'sign_in');
+		this.props.history.push('/login');
+	}
+
+	handleSendValidateAccountEmail = () => {
+		const { user } = this.props;
+		sendMessageInPromise('account.sendValidateAccountEmail').then((success) => {
+			if (success) {
+				this.props.actions.showNotification({
+					classes: 'success',
+					text: t('panel_email_verification_sent', user && user.email),
+				});
+			} else {
 				this.props.actions.showNotification({
 					classes: 'alert',
 					text: t('server_error_message'),
 				});
+			}
+		}).catch((err) => {
+			log('sendVerificationEmail Error', err);
+			this.props.actions.showNotification({
+				classes: 'alert',
+				text: t('server_error_message'),
 			});
+		});
+	}
+
+	generateLink = () => {
+		const { loggedIn, user } = this.props;
+		let text = '';
+		let handleOnClick = null;
+		if (!loggedIn) {
+			text = t('panel_header_sign_in');
+			handleOnClick = this.handleSignin;
+		} else if (loggedIn && user && !user.emailValidated) {
+			text = t('panel_header_verify_account');
+			handleOnClick = this.handleSendValidateAccountEmail;
 		}
+
+		return (
+			<div onClick={handleOnClick} className="header-helper-text">
+				{text}
+			</div>
+		);
 	}
 
 	/**
@@ -121,7 +136,8 @@ class Header extends React.Component {
 		const tabDetailedClassNames = ClassNames('header-tab', {
 			active: this.props.is_expert,
 		});
-		const { loggedIn, email, emailValidated } = this.props;
+		const { loggedIn, user } = this.props;
+		const rightLink = this.generateLink();
 
 		return (
 			<header id="ghostery-header">
@@ -148,9 +164,7 @@ class Header extends React.Component {
 					<div className="top-bar-right">
 						<div className="row align-middle collapse">
 							<div className="columns shrink">
-								<div onClick={this.clickSignInVerify} className="header-helper-text">
-									{ !loggedIn ? t('panel_header_sign_in') : (!emailValidated ? t('panel_header_verify_account') : '') }
-								</div>
+								{rightLink}
 							</div>
 							<div
 								className="header-kebab shrink columns"
@@ -161,7 +175,7 @@ class Header extends React.Component {
 						{ this.state.dropdownOpen &&
 							<HeaderMenu
 								loggedIn={loggedIn}
-								email={email}
+								email={user && user.email}
 								language={this.props.language}
 								tab_id={this.props.tab_id}
 								history={this.props.history}
