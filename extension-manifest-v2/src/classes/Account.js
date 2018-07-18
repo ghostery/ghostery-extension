@@ -108,45 +108,47 @@ class Account {
 			})
 	)
 
-	getUser = () => {
-		const { userID } = conf.account;
-		return api.get('users', userID)
+	getUser = () => (
+		this._getUserID()
+			.then(userID => api.get('users', userID))
 			.then((res) => {
-				const user = build(normalize(res), 'users', userID);
+				const user = build(normalize(res), 'users', res.data.id);
 				this._setAccountUserInfo(user);
 				return user;
-			});
-	}
+			})
+	)
 
-	getUserSettings = () => {
-		const { userID } = conf.account;
-		return api.get('settings', userID)
+	getUserSettings = () => (
+		this._getUserID()
+			.then(userID => api.get('settings', userID))
 			.then((res) => {
-				const settings = build(normalize(res, { camelizeKeys: false }), 'settings', userID);
+				const settings = build(normalize(res, { camelizeKeys: false }), 'settings', res.data.id);
 				const { settings_json } = settings;
 				// @TODO setConfUserSettings settings.settingsJson
 				this._setConfUserSettings(settings_json);
 				this._setAccountUserSettings(settings_json);
 				return settings_json;
-			});
-	}
+			})
+	)
 
-	saveUserSettings = () => {
-		const { userID } = conf.account;
-		return api.update('settings', {
-			type: 'settings',
-			id: userID,
-			attributes: {
-				settings_json: this._buildUserSettings()
-			}
-		});
-	}
+	saveUserSettings = () => (
+		this._getUserID()
+			.then(userID => (
+				api.update('settings', {
+					type: 'settings',
+					id: userID,
+					attributes: {
+						settings_json: this._buildUserSettings()
+					}
+				})
+			))
+	)
 
-	sendValidateAccountEmail = () => {
-		const { userID } = conf.account;
-		return fetch(`${AUTH_SERVER}/api/v2/send_email/validate_account/${userID}`)
-			.then(res => res.status < 400);
-	}
+	sendValidateAccountEmail = () => (
+		this._getUserID()
+			.then(userID => fetch(`${AUTH_SERVER}/api/v2/send_email/validate_account/${userID}`))
+			.then(res => res.status < 400)
+	)
 
 	resetPassword = (email) => {
 		const data = `email=${window.encodeURIComponent(email)}`;
@@ -165,6 +167,15 @@ class Account {
 				return {};
 			});
 	}
+
+	_getUserID = () => (
+		new Promise((resolve, reject) => {
+			if (conf.account === null) {
+				return reject(new Error('Not loggedin.'));
+			}
+			return resolve(conf.account.userID);
+		})
+	)
 
 	_setAccountInfo = (userID) => {
 		conf.account = {

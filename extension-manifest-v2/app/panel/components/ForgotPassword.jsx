@@ -46,13 +46,12 @@ class ForgotPassword extends React.Component {
 		e.preventDefault();
 		const email = this.state.email.toLowerCase();
 
-		// update cursors
-		this.setState({ panelCursor: 'wait' });
-		this.setState({ buttonCursor: 'wait' });
-
 		// validate the email and password
 		if (!validateEmail(email)) {
-			this.setState({ emailError: true, panelCursor: 'default', buttonCursor: 'pointer' });
+			this.setState({
+				emailError: true,
+				loading: false,
+			});
 			return;
 		}
 
@@ -78,7 +77,7 @@ class ForgotPassword extends React.Component {
 							<h4 id="forgot-password-message">
 								{ t('forgot_password_message') }
 							</h4>
-							<div id="forgot-email" className={(emailError ? 'panel-error invalid-email' : '' )}>
+							<div id="forgot-email" className={(emailError ? 'panel-error invalid-email' : '')}>
 								<label htmlFor="forgot-input-email">
 									{ t('email_field_label') }<span className="asterisk">*</span>
 									<input onChange={this.handleInputChange} value={email} id="forgot-input-email" type="text" name="email" pattern=".{1,}" autoComplete="off" required />
