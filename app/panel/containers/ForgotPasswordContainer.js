@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ForgotPassword from '../components/ForgotPassword';
 import * as actions from '../actions/PanelActions'; // get shared actions from Panel
+import { resetPassword } from '../../Account/AccountActions';
 /**
  * Map redux store state properties to ForgotPassword component own properties.
  * @memberOf PanelContainers
@@ -24,7 +25,7 @@ import * as actions from '../actions/PanelActions'; // get shared actions from P
  * @todo  We are not using ownProps, so we better not specify it explicitly,
  * in this case it won't be passed by React (see https://github.com/reactjs/react-redux/blob/master/docs/api.md).
  */
-const mapStateToProps = (state, ownProps) => state.forgotPassword;
+const mapStateToProps = (state, ownProps) => Object.assign({});
 /**
  * Bind ForgotPassword component action creators using Redux's bindActionCreators
  * @memberOf PanelContainers
@@ -32,7 +33,7 @@ const mapStateToProps = (state, ownProps) => state.forgotPassword;
  * @param  {Object} 	ownProps  ForgotPassword component own props
  * @return {function}          	  to be used as an argument in redux connect call
  */
-const mapDispatchToProps = (dispatch, ownProps) => ({ actions: bindActionCreators(actions, dispatch) });
+const mapDispatchToProps = (dispatch, ownProps) => ({ actions: bindActionCreators(Object.assign(actions, { resetPassword }), dispatch) });
 /**
  * Connect ForgotPassword component to the Redux store.
  * @memberOf PanelContainers
