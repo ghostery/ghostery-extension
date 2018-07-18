@@ -1,3 +1,5 @@
+export const _getJSONAPIErrorsObject = e => [{ title: 'Something went wrong.', detail: e.toString() }];
+
 class Api {
 	constructor() {
 		this.isRefreshing = false;
@@ -7,10 +9,6 @@ class Api {
 	init(config, handlers) {
 		this.config = config;
 		this.handlers = handlers;
-	}
-
-	_getJSONAPIErrorsObject(e) {
-		return [{ title: 'Something went wrong.', detail: e.toString() }];
 	}
 
 	_refreshToken() {
@@ -34,7 +32,7 @@ class Api {
 	}
 
 	_sendReq(method, path, body) {
-		return this.handlers.getCsrfCookie()
+		return this.getCsrfCookie()
 			.then(cookie => fetch(`${this.config.ACCOUNT_SERVER}${path}`, {
 				method,
 				headers: {
@@ -91,11 +89,11 @@ class Api {
 								if (status >= 400) {
 									res.json().then((data2) => {
 										if (this.handlers.errorHandler) {
-											this.handlers.errorHandler(data2.errors);
+											return this.handlers.errorHandler(data2.errors);
 										}
 										reject(data2.errors);
 									}).catch((err) => {
-										reject(this._getJSONAPIErrorsObject(err));
+										reject(_getJSONAPIErrorsObject(err));
 									});
 									return;
 								}
@@ -105,15 +103,27 @@ class Api {
 										resolve(data3);
 									})
 									.catch((err) => {
-										reject(this._getJSONAPIErrorsObject(err));
+										reject(_getJSONAPIErrorsObject(err));
 									});
 							});
 					} else {
-						reject(this._getJSONAPIErrorsObject(data));
+						reject(_getJSONAPIErrorsObject(data));
 					}
 				});
 		});
 	}
+
+	getCsrfCookie = (csrfDomain = this.config.CSRF_DOMAIN) => new Promise((resolve, reject) => {
+		chrome.cookies.get({
+			url: `https://${csrfDomain}.com`, // ghostery.com || ghosterystage.com
+			name: 'csrf_token',
+		}, (cookie) => {
+			if (!cookie) {
+				reject(new Error('CSRF Token cookie not found'));
+			}
+			resolve(cookie.value);
+		});
+	});
 
 	get = (type, id, include = '') => {
 		if (!id) { return Promise.reject(new Error('id is missing')); }
