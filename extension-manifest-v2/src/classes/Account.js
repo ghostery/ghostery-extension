@@ -20,16 +20,37 @@ import build from 'redux-object';
 import globals from '../classes/Globals';
 import conf from '../classes/Conf';
 import dispatcher from '../classes/Dispatcher';
+import { getCsrfCookie } from '../utils/utils';
 import { log } from '../utils/common';
-import { get, update, getCsrfCookie } from '../utils/api';
+import Api from '../utils/api';
 
+const api = new Api();
 const {
-	GHOSTERY_DOMAIN, AUTH_SERVER, SYNC_ARRAY, IS_CLIQZ, BROWSER_INFO
+	GHOSTERY_DOMAIN, AUTH_SERVER, ACCOUNT_SERVER, SYNC_ARRAY, IS_CLIQZ, BROWSER_INFO
 } = globals;
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const SYNC_SET = new Set(SYNC_ARRAY);
 
 class Account {
+	constructor() {
+		const apiConfig = {
+			AUTH_SERVER,
+			ACCOUNT_SERVER
+		};
+		const apiHandlers = {
+			getCsrfCookie,
+			errorHandler: (errors) => {
+				errors.forEach((err) => {
+					if ((err.code === '10190' || err.code === '10200') && this.handlers.logoutHandler) {
+						return this.logout();
+					}
+					return Promise.reject(errors);
+				});
+			}
+		};
+		api.init(apiConfig, apiHandlers);
+	}
+
 	login = (email, password) => {
 		const data = `email=${window.encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
 		return fetch(`${AUTH_SERVER}/api/v2/login`, {
@@ -90,7 +111,7 @@ class Account {
 
 	getUser = () => {
 		const { userID } = conf.account;
-		return get('users', userID)
+		return api.get('users', userID)
 			.then((res) => {
 				const user = build(normalize(res), 'users', userID);
 				this._setAccountUserInfo(user);
@@ -100,7 +121,7 @@ class Account {
 
 	getUserSettings = () => {
 		const { userID } = conf.account;
-		return get('settings', userID)
+		return api.get('settings', userID)
 			.then((res) => {
 				const settings = build(normalize(res, { camelizeKeys: false }), 'settings', userID);
 				const { settings_json } = settings;
@@ -113,7 +134,7 @@ class Account {
 
 	saveUserSettings = () => {
 		const { userID } = conf.account;
-		return update('settings', {
+		return api.update('settings', {
 			type: 'settings',
 			id: userID,
 			attributes: {
