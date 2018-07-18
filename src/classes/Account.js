@@ -40,7 +40,7 @@ class Account {
 		const apiHandlers = {
 			errorHandler: (errors) => {
 				errors.forEach((err) => {
-					if ((err.code === '10190' || err.code === '10200') && this.handlers.logoutHandler) {
+					if (err.code === '10190' || err.code === '10200') {
 						return this.logout();
 					}
 					return Promise.reject(errors);
