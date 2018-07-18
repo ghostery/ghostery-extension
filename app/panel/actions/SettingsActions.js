@@ -11,7 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 import {
-	GET_SETTINGS_DATA,
 	IMPORT_SETTINGS_DIALOG,
 	IMPORT_SETTINGS_NATIVE,
 	IMPORT_SETTINGS_FAILED,
@@ -29,6 +28,7 @@ import {
 	SETTINGS_SEARCH_SUBMIT,
 	SETTINGS_FILTER
 } from '../constants/constants';
+import { GET_SETTINGS_DATA } from '../../Account/AccountConstants';
 import { sendMessageInPromise } from '../utils/msg';
 import { hashCode } from '../../../src/utils/common';
 import globals from '../../../src/classes/Globals';
