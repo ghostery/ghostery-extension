@@ -91,7 +91,7 @@ class Api {
 										if (this.handlers.errorHandler) {
 											return this.handlers.errorHandler(data2.errors);
 										}
-										reject(data2.errors);
+										return reject(data2.errors);
 									}).catch((err) => {
 										reject(_getJSONAPIErrorsObject(err));
 									});
