@@ -603,3 +603,19 @@ export function injectNotifications(tab_id, importExport = false) {
 export function isCliqzOffer(offer) {
 	return (offer && offer.origin === 'cliqz' && offer.type === 'offers' && offer.data);
 }
+
+/**
+ * gets csrf token from extension cookie api.
+ */
+
+export const getCsrfCookie = () => new Promise((resolve, reject) => {
+	chrome.cookies.get({
+		url: `https://${globals.GHOSTERY_DOMAIN}.com`, // ghostery.com || ghosterystage.com
+		name: 'csrf_token',
+	}, (cookie) => {
+		if (!cookie) {
+			reject(new Error('CSRF Token cookie not found'));
+		}
+		resolve(cookie.value);
+	});
+});
