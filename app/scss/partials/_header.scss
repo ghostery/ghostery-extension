@@ -41,6 +41,13 @@
 		color: $white;
 		padding: 7px 0 7px 20px;
 		height: 36px;
+		.header-badge {
+			display: block;
+			margin-left: 10px;
+			.disabled-header-badge {
+				fill: #75D3F6; 
+			}
+		}
 	}
 	.header-logo {
 		display: block;
@@ -147,6 +154,7 @@
 			}
 		}
 		.account-info {
+			@extend %pointer;
 			position: absolute;
 			bottom: 0px;
 			left: 0;

@@ -151,7 +151,8 @@ class ConfData {
 				email: '',
 				user_token: '',
 				decoded_user_token: {},
-				is_validated: false
+				is_validated: false,
+				support_level: 0 //1, 2, ...
 			});
 		});
 	}
