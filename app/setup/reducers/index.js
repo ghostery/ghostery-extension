@@ -20,6 +20,7 @@ import topContent from './topContent';
 import login from './login';
 import navigation from './navigation';
 import settings from '../../panel/reducers/settings';
+import account from '../../Account/AccountReducer';
 
 const Reducers = combineReducers({
 	blocking,
@@ -30,6 +31,7 @@ const Reducers = combineReducers({
 	login,
 	navigation,
 	settings,
+	account,
 });
 
 export default Reducers;

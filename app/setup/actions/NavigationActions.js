@@ -17,8 +17,8 @@ import {
 	UPDATE_NAVIGATION_NEXT_BUTTON,
 	RESET_NAVIGATION_NEXT_BUTTON,
 	NAVIGATION_NEXT,
-	CREATE_ACCOUNT,
-	SIGN_IN
+	TRIGGER_LOGIN,
+	TRIGGER_REGISTER
 } from '../constants/constants';
 import { msg } from '../utils';
 
@@ -51,22 +51,14 @@ export function resetNavigationNextButton() {
  * @return {Object}
  * @memberof SetupActions
  */
-export function triggerCreateAccount() {
-	return {
-		type: CREATE_ACCOUNT,
-	};
-}
+export const triggerCreateAccount = () => ({ type: TRIGGER_REGISTER });
 
 /**
  * Called from Navigation and LoginView views
  * @return {Object}
  * @memberof SetupActions
  */
-export function triggerSignIn() {
-	return {
-		type: SIGN_IN,
-	};
-}
+export const triggerSignIn = () => ({ type: TRIGGER_LOGIN });
 
 /**
  * Called from Navigation._close()

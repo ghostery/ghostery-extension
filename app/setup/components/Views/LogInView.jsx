@@ -14,6 +14,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import globals from '../../../../src/classes/Globals';
+import { log } from '../../../../src/utils/common';
+import { utils } from '../../utils';
 
 /**
  * @class Implement the #log-in part of the Setup flow.
@@ -38,32 +40,34 @@ class LogInView extends Component {
 	* Lifecycle event
 	*/
 	componentWillMount() {
-		this.props.actions.getLoginInfo().then((data) => {
-			if (this.props.payload.email) {
-				this.setState({
-					status: 'loggedin',
-				});
-				this.props.actions.updateNavigationNextButtons([
-					{
-						title: t('setup_button_next'),
-						action: 'next',
-					},
-				]);
-			} else {
-				this.setState({
-					status: 'new',
-				});
-				this.props.actions.updateNavigationNextButtons([
-					{
-						title: t('setup_button_skip'),
-						action: 'next',
-					}, {
-						title: t('setup_button_create_account'),
-						action: 'createAccount',
-					},
-				]);
-			}
-		});
+		this.props.actions.reset();
+		this.props.actions.getUser()
+			.then((res) => {
+				const { errors, user } = res;
+				if (errors) {
+					this.setState({ status: 'new' });
+					this.props.actions.updateNavigationNextButtons([
+						{
+							title: t('setup_button_skip'),
+							action: 'next',
+						}, {
+							title: t('setup_button_create_account'),
+							action: 'createAccount',
+						},
+					]);
+				} else {
+					this.setState({
+						status: 'loggedin',
+						email: user.email,
+					});
+					this.props.actions.updateNavigationNextButtons([
+						{
+							title: t('setup_button_next'),
+							action: 'next',
+						},
+					]);
+				}
+			});
 		this.props.actions.updateTopContentData({
 			image: '/app/images/setup/circles/cloud.svg',
 			title: t('setup_login_view_title'),
@@ -106,14 +110,24 @@ class LogInView extends Component {
 	 * Handles the onSubmit property on the Sign In form
 	 * @param  {Object} event
 	 */
-	_signIn = (event) => {
-		if (event) { event.preventDefault(); }
+	_signIn = (e) => {
+		if (e) { e.preventDefault(); }
+		const { email, password } = this.state;
 		if (!this._validateSignIn()) {
-			this.props.actions.loginFail();
 			return;
 		}
 
-		this.props.actions.userLogin(this.state.email, this.state.password);
+		this.props.actions.login(email, password)
+			.then((success) => {
+				if (success) {
+					Promise.all([
+						this.props.actions.getUser(),
+						this.props.actions.getUserSettings(),
+					]);
+				}
+			})
+			.catch(err => log(err));
+
 		this.props.actions.showLoading();
 	}
 
@@ -122,20 +136,21 @@ class LogInView extends Component {
 	 * Handles the onSubmit property on the Create Account form
 	 * @param  {Object} event
 	 */
-	_createAccount = (event) => {
-		if (event) { event.preventDefault(); }
+	_createAccount = (e) => {
+		if (e) { e.preventDefault(); }
 		if (!this._validateCreateAccount()) {
-			this.props.actions.createAccountFail();
 			return;
 		}
 
 		const email = this.state.email.toLowerCase();
 		const confirmEmail = this.state.confirmEmail.toLowerCase();
 		const { firstName, lastName, password } = this.state;
-		const VERIFICATION_URL = `https:\/\/signon.${globals.GHOSTERY_DOMAIN}.com/register/verify/`; // can't set culture query parameter because site needs to append guid
-		const REDIRECT_URL = `https:\/\/account.${globals.GHOSTERY_DOMAIN}.com/`;
-
-		this.props.actions.createAccount(email, confirmEmail, firstName, lastName, password);
+		this.props.actions.register(email, confirmEmail, firstName, lastName, password)
+			.then((success) => {
+				if (success) {
+					this.props.actions.getUser();
+				}
+			});
 		this.props.actions.showLoading();
 	}
 
@@ -247,7 +262,7 @@ class LogInView extends Component {
 					name: 'password',
 					value: this.state.password,
 				},
-			}) || false);
+			}));
 	}
 
 	/**
@@ -255,16 +270,16 @@ class LogInView extends Component {
 	 * @param  {Object} event
 	 * @return {boolean} whether the form is valid
 	 */
-	_isValid = (event) => {
-		if (typeof event.preventDefault !== 'undefined') { event.preventDefault(); }
-		switch (event.target.name) {
+	_isValid = (e) => {
+		const { name, value } = e.target;
+		const { email, password } = this.state;
+		switch (name) {
 			case 'email':
-				return /.*@.*/.test(event.target.value);
+				return utils.validateEmail(value);
 			case 'confirmEmail':
-				return this.state.email === event.target.value;
+				return email === value;
 			case 'password':
-				return this.state.password.length >= 8 &&
-					this.state.password.length <= 50 || false;
+				return utils.validatePassword(password);
 			default:
 				return true;
 		}
@@ -274,46 +289,20 @@ class LogInView extends Component {
 	 * handles the onChange property
 	 * @param  {Object} event
 	 */
-	_onChange = (event) => {
-		switch (event.target.name) {
-			case 'email':
-				this.setState({
-					email: event.target.value,
-				});
-				break;
-			case 'confirmEmail':
-				this.setState({
-					confirmEmail: event.target.value,
-				});
-				break;
-			case 'firstName':
-				this.setState({
-					firstName: event.target.value,
-				});
-				break;
-			case 'lastName':
-				this.setState({
-					lastName: event.target.value,
-				});
-				break;
-			case 'password':
-				this.setState({
-					password: event.target.value,
-				});
-				break;
-			default: break;
-		}
+	_onChange = (e) => {
+		const { name, value } = e.target;
+		this.setState({ [name]: value });
 	}
 
 	/**
 	 * handles the onBlur property
 	 * @param  {Object} event
 	 */
-	_onBlur = (event) => {
-		if (this._isValid(event)) {
-			event.target.classList.remove('invalid');
+	_onBlur = (e) => {
+		if (this._isValid(e)) {
+			e.target.classList.remove('invalid');
 		} else {
-			event.target.classList.add('invalid');
+			e.target.classList.add('invalid');
 		}
 	}
 
@@ -453,7 +442,7 @@ class LogInView extends Component {
 					<div className="row">
 						<div className="columns text-center logged-in">
 							<h3>
-								{t('setup_login_view_signed_in_as')} {this.props.payload.email}
+								{t('setup_login_view_signed_in_as')} {this.state.email}
 							</h3>
 						</div>
 					</div>

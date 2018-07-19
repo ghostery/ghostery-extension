@@ -17,6 +17,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Header from '../components/Header';
 import * as logInActions from '../actions/LogInActions';
+import * as accountActions from '../../Account/AccountActions';
 
 /**
  * Map redux store state properties to the component's own properties.
@@ -35,7 +36,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state.login);
  * @memberof SetupContainers
  */
 const mapDispatchToProps = (dispatch, ownProps) => ({
-	actions: bindActionCreators(logInActions, dispatch),
+	actions: bindActionCreators(Object.assign(logInActions, accountActions), dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

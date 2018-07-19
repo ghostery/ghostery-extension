@@ -17,6 +17,7 @@ import LogInView from '../../components/Views/LogInView';
 import * as logInActions from '../../actions/LogInActions';
 import * as topContentActions from '../../actions/TopContentActions';
 import * as navigationActions from '../../actions/NavigationActions';
+import { login, register, getUser } from '../../../Account/AccountActions';
 
 /**
  * Map redux store state properties to the component's own properties.
@@ -25,7 +26,7 @@ import * as navigationActions from '../../actions/NavigationActions';
  * @return {function}        this function returns plain object, which will be merged into the component's props
  * @memberof SetupContainers
  */
-const mapStateToProps = (state, ownProps) => Object.assign({}, state.login);
+const mapStateToProps = (state, ownProps) => Object.assign({}, state.login, state.account);
 
 /**
  * Bind the component's action creators using Redux's bindActionCreators.
@@ -39,6 +40,11 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 		logInActions,
 		navigationActions,
 		topContentActions,
+		{
+			login,
+			register,
+			getUser,
+		},
 	), dispatch),
 });
 
