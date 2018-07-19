@@ -46,6 +46,7 @@ import { allowAllwaysC2P } from './utils/click2play';
 import * as common from './utils/common';
 import * as utils from './utils/utils';
 import { _getJSONAPIErrorsObject } from './utils/api';
+import { importCliqzSettings } from './utils/cliqzSettingImport';
 
 // class instantiation
 const events = new Events();
@@ -1594,7 +1595,7 @@ function init() {
 			if (IS_CLIQZ) {
 				importCliqzSettings(cliqz, conf);
 			}
-		})));
+		}));
 	}).catch((err) => {
 		log('Error in init()', err);
 		return Promise.reject(err);
