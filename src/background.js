@@ -40,11 +40,13 @@ import surrogatedb from './classes/SurrogateDb';
 import tabInfo from './classes/TabInfo';
 import metrics from './classes/Metrics';
 import rewards from './classes/Rewards';
+import account from './classes/Account';
 // utilities
-import * as accounts from './utils/accounts';
 import { allowAllwaysC2P } from './utils/click2play';
 import * as common from './utils/common';
 import * as utils from './utils/utils';
+import { _getJSONAPIErrorsObject } from './utils/api';
+import { importCliqzSettings } from './utils/cliqzSettingImport';
 
 // class instantiation
 const events = new Events();
@@ -242,10 +244,11 @@ function getSiteData() {
  */
 function handleGhosteryPlatformPages(name, tab_url) {
 	if (name === 'platformPageLoaded') {
-		// load bearer token from AUTH cookie if present
-		accounts.setLoginInfoFromAuthCookie(tab_url).catch((err) => {
-			log('handleGhosteryPlatformPages error', err);
-		});
+		account.getUser()
+			.then(account.getUserSettings)
+			.catch((err) => {
+				log('handleGhosteryPlatformPages error', err);
+			});
 	}
 	return false;
 }
@@ -501,7 +504,7 @@ function handlePurplebox(name, message, tab_id, callback) {
 		conf.alert_bubble_pos = message.alert_bubble_pos;
 		conf.alert_bubble_timeout = message.alert_bubble_timeout;
 		// push new settings to API
-		accounts.pushUserSettings({ conf: accounts.buildUserSettings() });
+		account.saveUserSettings();
 	}
 	return false;
 }
@@ -670,9 +673,6 @@ function onMessageHandler(request, sender, callback) {
 				callback(data);
 			});
 		}
-		accounts.pullUserSettings().catch((err) => {
-			log('Error fetching user setting via getPanelData:', err);
-		});
 		return true;
 	} else if (name === 'setPanelData') {
 		panelData.set(message);
@@ -698,38 +698,87 @@ function onMessageHandler(request, sender, callback) {
 			}
 		});
 		return true;
-	} else if (name === 'pullUserSettings') {
-		accounts.pullUserSettings().then((settings) => {
-			callback(settings);
-		}).catch((err) => {
-			callback();
-		});
-		return true;
 	} else if (name === 'getTrackerDescription') {
 		utils.getJson(message.url).then((result) => {
 			const description = (result) ? ((result.company_in_their_own_words) ? result.company_in_their_own_words : ((result.company_description) ? result.company_description : '')) : '';
 			callback(description);
 		});
 		return true;
-	} else if (name === 'getLoginInfo') {
-		accounts.getLoginInfo().then((result) => {
-			// this sends the loginInfo directly to panelView. TODO: use model change event instead
-			utils.sendMessageToPanel('onLoginInfoUpdated', result);
-			// this sends the loginInfo back to the collection
-			callback(result);
-		}).catch((err) => {
-			callback();
-			log('GET LOGIN INFO ERROR:', err);
-		});
+	} else if (name === 'account.login') {
+		const { email, password } = message;
+		account.login(email, password)
+			.then((response) => {
+				callback(response);
+			})
+			.catch((err) => {
+				log('LOGIN ERROR', err);
+				callback({ errors: _getJSONAPIErrorsObject(err) });
+				// callback({ errors: [err] });
+			});
 		return true;
-	} else if (name === 'setLoginInfo') {
-		// Note: if you want to trigger a logout, send message as empty {}
-		accounts.setLoginInfo(message, false).then((result) => {
-			callback(result);
-		}).catch((err) => {
-			callback();
-			log('SET LOGIN INFO ERROR');
-		});
+	} else if (name === 'account.register') {
+		const {
+			email, confirmEmail, password, firstName, lastName
+		} = message;
+		account.register(email, confirmEmail, password, firstName, lastName)
+			.then((response) => {
+				callback(response);
+			})
+			.catch((err) => {
+				callback({ errors: [err] });
+				log('REGISTER ERROR');
+			});
+		return true;
+	} else if (name === 'account.logout') {
+		account.logout()
+			.then((response) => {
+				callback(response);
+			})
+			.catch((err) => {
+				log('LOGOUT ERROR');
+				callback(err);
+			});
+		return true;
+	} else if (name === 'account.getUserSettings') {
+		account.getUserSettings()
+			.then((settings) => {
+				callback(settings);
+			})
+			.catch((err) => {
+				log('Error getting user settings:', err);
+				callback({ errors: _getJSONAPIErrorsObject(err) });
+			});
+		return true;
+	} else if (name === 'account.resetPassword') {
+		const { email } = message;
+		account.resetPassword(email)
+			.then((success) => {
+				callback(success);
+			})
+			.catch((err) => {
+				callback({ errors: _getJSONAPIErrorsObject(err) });
+				log('RESET PASSWORD ERROR');
+			});
+		return true;
+	} else if (name === 'account.getUser') {
+		account.getUser(message)
+			.then((user) => {
+				callback({ user });
+			})
+			.catch((err) => {
+				callback({ errors: _getJSONAPIErrorsObject(err) });
+				log('FETCH USER ERROR');
+			});
+		return true;
+	} else if (name === 'account.sendValidateAccountEmail') {
+		account.sendValidateAccountEmail()
+			.then((success) => {
+				callback(success);
+			})
+			.catch((err) => {
+				callback({ errors: _getJSONAPIErrorsObject(err) });
+				log('sendValidateAccountEmail error', err);
+			});
 		return true;
 	} else if (name === 'update_database') {
 		checkLibraryVersion().then((result) => {
@@ -751,7 +800,7 @@ function onMessageHandler(request, sender, callback) {
 	} else if (name === 'getSettingsForExport') {
 		utils.getActiveTab((tab) => {
 			if (tab && tab.id && tab.url.startsWith('http')) {
-				const settings = accounts.buildUserSettings();
+				const settings = account.buildUserSettings();
 				// Blacklisted and whitelisted sites are removed from sync array,
 				// but we want to allow export and import these properties manually
 				settings.site_blacklist = conf.site_blacklist;
@@ -770,11 +819,6 @@ function onMessageHandler(request, sender, callback) {
 			} else {
 				callback(false);
 			}
-		});
-		return true;
-	} else if (name === 'sendVerificationEmail') {
-		accounts.sendVerificationEmail().then((result) => {
-			callback(result);
 		});
 		return true;
 	} else if (name === 'ping') {
@@ -839,12 +883,7 @@ function initializeDispatcher() {
 		button.update();
 		utils.flushChromeMemoryCache();
 	});
-	dispatcher.on('conf.save.login_info', (loginInfo) => {
-		if (loginInfo.logged_in) {
-			accounts.pullUserSettings().catch((err) => {
-				log("dispatcher.on('conf.save.login_info): pullUserSettings error:", err);
-			});
-		}
+	dispatcher.on('conf.save.account', () => {
 		// update PanelData
 		panelData.init();
 	});
@@ -1544,13 +1583,19 @@ function init() {
 		initializePopup();
 		initializeEventListeners();
 		initializeVersioning();
-		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => accounts.pullUserSettings().catch((err) => {
-			log('init() cannot pull user settings:', err);
-		}).then(() => {
+		account.getUser()
+			.then(account.getUserSettings)
+			.catch((err) => {
+				log('Error in account.getUser()', err);
+			});
+		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => {
 			// persist Conf properties to storage only after init has completed
 			common.prefsSet(globals.initProps);
 			globals.INIT_COMPLETE = true;
-		})));
+			if (IS_CLIQZ) {
+				importCliqzSettings(cliqz, conf);
+			}
+		}));
 	}).catch((err) => {
 		log('Error in init()', err);
 		return Promise.reject(err);

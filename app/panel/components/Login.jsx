@@ -14,6 +14,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { validateEmail, validatePassword } from '../utils/utils';
+import { log } from '../../../src/utils/common';
+
 /**
  * @class Implement Sign In view which opens from 'Sign In' CTA on the Header.
  * We use Login and Sign in interchangeable. They mean the same thing.
@@ -24,119 +26,99 @@ class Login extends React.Component {
 		super(props);
 		this.state = {
 			email: '',
-			emailError: false,
 			password: '',
+			loading: false,
+			emailError: false,
 			passwordError: false,
-			buttonCursor: 'pointer',
-			panelCursor: 'default',
 		};
+	}
 
-		// event bindings
-		this.showSigninResult = this.showSigninResult.bind(this);
-		this.checkForEnter = this.checkForEnter.bind(this);
-		this.updateEmail = this.updateEmail.bind(this);
-		this.updatePassword = this.updatePassword.bind(this);
-	}
 	/**
-	 * Lifecycle event
-	 */
-	componentWillUpdate(nextProps, nextState) {
-		// redirect to summary view on successful login
-		if (nextProps.loginSuccess) {
-			nextProps.history.push(this.props.is_expert ? '/detail/blocking' : '/');
-		} else if (nextProps.loginFailed && (this.state.panelCursor !== 'default' || this.state.buttonCursor !== 'pointer')) {
-			this.setCursorDefaults();
-		}
-	}
-	/**
-	 * Update state with selective defaults for cursors.
-	 */
-	setCursorDefaults() {
-		this.setState({ panelCursor: 'default', buttonCursor: 'pointer' });
-	}
-	/**
-	 * Update state with changed email.
+	 * Update state with changed values.
 	 * @param {Object}  event 	'change' event
 	 */
-	updateEmail(event) {
-		this.setState({ email: event.target.value });
+	handleInputChange = (e) => {
+		const { name, value } = e.target;
+		this.setState({ [name]: value });
 	}
-	/**
-	 * Update state with changed password.
-	 * @param {Object}  event 	'change' event
-	 */
-	updatePassword(event) {
-		this.setState({ password: event.target.value });
-	}
+
 	/**
 	 * Validate entered login data and, if it is good, trigger Login action.
 	 */
-	showSigninResult() {
-		const email = this.state.email.toLowerCase();
-		const { password } = this.state;
+	handleSubmit = (e) => {
+		e.preventDefault();
+		const { email, password } = this.state;
 
-		// update cursors
-		this.setState({ panelCursor: 'wait' });
-		this.setState({ buttonCursor: 'wait' });
-
-		// validate the email and password
-		if (!validateEmail(email)) {
-			this.setState({ emailError: true, panelCursor: 'default', buttonCursor: 'pointer' });
-			return;
-		} else if (!validatePassword(password)) {
-			this.setState({ passwordError: true, panelCursor: 'default', buttonCursor: 'pointer' });
-			return;
-		}
-
-		this.props.actions.userLogin({
-			EmailAddress: email,
-			Password: password,
+		this.setState({ loading: true }, () => {
+			if (!validateEmail(email)) {
+				this.setState({
+					emailError: true,
+					loading: false,
+				});
+				return;
+			}
+			if (!validatePassword(password)) {
+				this.setState({
+					passwordError: true,
+					loading: false,
+				});
+				return;
+			}
+			this.props.actions.login(email.toLowerCase(), password)
+				.then((success) => {
+					if (success) {
+						Promise.all([
+							this.props.actions.getUser(),
+							this.props.actions.getUserSettings(),
+						]).finally(() => {
+							this.props.history.push(this.props.is_expert ? '/detail/blocking' : '/');
+						});
+					}
+				})
+				.catch(err => log(err));
 		});
 	}
-	/**
-	 * Intercept Return key and call showSigninResult.
-	 * @param  {Object} e 	keyboard event
-	 */
-	checkForEnter(e) {
-		if (e.key === 'Enter') {
-			this.showSigninResult();
-		}
-	}
+
 	/**
 	 * Render Sign In view.
 	 * @return {ReactComponent}   ReactComponent instance
 	 */
 	render() {
+		const {
+			email, password, emailError, passwordError, loading
+		} = this.state;
 		return (
-			<div id="signin-panel" style={{ cursor: this.state.panelCursor }}>
+			<div id="signin-panel" className={loading ? 'loading' : ''}>
 				<div className="row align-center">
 					<div className="small-11 medium-8 columns">
-						<div id="login-email" className={(this.state.emailError ? 'panel-error' : '')}>
-							<label htmlFor="login-input-email">
-								{ t('email_field_label') }<span className="asterisk">*</span>
-								<input onChange={this.updateEmail} onKeyPress={this.checkForEnter} value={this.state.email} id="login-input-email" name="email" pattern=".{1,}" autoComplete="off" type="text" />
-							</label>
-							<p className="warning">{ t('invalid_email_login') }</p>
-						</div>
-						<div id="login-password" className={(this.state.passwordError ? 'panel-error' : '')}>
-							<label htmlFor="login-input-password">
-								{ t('password_field_label') }<span className="asterisk">*</span>
-								<input onChange={this.updatePassword} onKeyPress={this.checkForEnter} value={this.state.password} id="login-input-password" name="password" pattern=".{1,}" type="password" />
-							</label>
-							<p className="warning">{ t('password_field_label_required') }</p>
-						</div>
-						<div className="account-signin-buttons-container row">
-							<div className="small-6 columns text-center">
-								<Link to={(this.props.is_expert ? '/detail' : '/')} className="cancel button hollow">
-									{ t('button_cancel') }
-								</Link>
+						<form onSubmit={this.handleSubmit}>
+							<div id="login-email" className={(emailError ? 'panel-error' : '')}>
+								<label htmlFor="login-input-email">
+									{ t('email_field_label') }<span className="asterisk">*</span>
+									<input onChange={this.handleInputChange} value={email} id="login-input-email" name="email" pattern=".{1,}" autoComplete="off" type="text" />
+								</label>
+								<p className="warning">{ t('invalid_email_login') }</p>
 							</div>
-							<div className="small-6 columns text-center">
-								<div onClick={this.showSigninResult} id="signin-button" className="button" style={{ cursor: this.state.buttonCursor }}>
-									{ t('panel_menu_signin') }
+							<div id="login-password" className={(passwordError ? 'panel-error' : '')}>
+								<label htmlFor="login-input-password">
+									{ t('password_field_label') }<span className="asterisk">*</span>
+									<input onChange={this.handleInputChange} value={password} id="login-input-password" name="password" pattern=".{1,}" type="password" />
+								</label>
+								<p className="warning">{ t('password_field_label_required') }</p>
+							</div>
+							<div className="account-signin-buttons-container row">
+								<div className="small-6 columns text-center">
+									<Link to={(this.props.is_expert ? '/detail' : '/')} className="cancel button hollow">
+										{ t('button_cancel') }
+									</Link>
+								</div>
+								<div className="small-6 columns text-center">
+									<button type="submit" id="signin-button" className="button">
+										{ t('panel_menu_signin') }
+									</button>
 								</div>
 							</div>
-						</div>
+						</form>
 					</div>
 				</div>
 				<div className="account-panel-action row align-center">

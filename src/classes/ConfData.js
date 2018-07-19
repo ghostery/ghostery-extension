@@ -131,6 +131,7 @@ class ConfData {
 			_initProperty('setup_step', 0);
 			_initProperty('setup_path', 0);
 			_initProperty('setup_block', 1);
+			_initProperty('cliqz_import_state', 0);
 
 			// Complex props
 			_initProperty('bugs', {});
@@ -146,6 +147,7 @@ class ConfData {
 			_initProperty('site_whitelist', []);
 			_initProperty('surrogates', {});
 			_initProperty('version_history', []);
+<<<<<<< HEAD
 			_initProperty('login_info', {
 				logged_in: false,
 				email: '',
@@ -154,6 +156,9 @@ class ConfData {
 				is_validated: false,
 				support_level: 0 //1, 2, ...
 			});
+=======
+			_initProperty('account', null);
+>>>>>>> develop
 		});
 	}
 

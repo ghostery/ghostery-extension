@@ -94,14 +94,11 @@ const handler = {
 			pref(key, value);
 		}
 
-		// We consider login info changed only when login state changes
-		if ((key !== 'login_info' || oldValue === undefined || oldValue.logged_in !== value.logged_in)) {
-			// notify specific key subscribers
-			dispatcher.trigger(`conf.save.${key}`, value);
-			// notify catch all settings subscribers
-			if (target.SYNC_SET.has(key) || key === 'bugs_last_checked') {
-				dispatcher.trigger('conf.changed.settings', key);
-			}
+		// notify specific key subscribers
+		dispatcher.trigger(`conf.save.${key}`, value);
+		// notify catch all settings subscribers
+		if (target.SYNC_SET.has(key) || key === 'bugs_last_checked') {
+			dispatcher.trigger('conf.changed.settings', key);
 		}
 
 		debounce(metrics.setUninstallUrl.bind(metrics), 200)(key);

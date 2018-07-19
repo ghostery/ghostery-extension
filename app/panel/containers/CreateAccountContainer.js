@@ -15,6 +15,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import CreateAccount from '../components/CreateAccount';
 import * as actions from '../actions/PanelActions'; // get shared actions from Panel
+import { register, getUser } from '../../Account/AccountActions';
+
 /**
  * Map redux store state properties to CreateAccount component own properties.
  * @memberOf PanelContainers
@@ -36,7 +38,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state.createAccou
  * @param  {Object} 	ownProps  CreateAccount component own props
  * @return {function}          	  to be used as an argument in redux connect call
  */
-const mapDispatchToProps = (dispatch, ownProps) => ({ actions: bindActionCreators(actions, dispatch) });
+const mapDispatchToProps = (dispatch, ownProps) => ({ actions: bindActionCreators(Object.assign(actions, { register, getUser }), dispatch) });
 /**
  * Connects CreateAccount component to the Redux store.
  * @memberOf PanelContainers

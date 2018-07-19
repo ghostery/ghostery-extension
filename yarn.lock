@@ -5773,6 +5773,12 @@ jsesc@~0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-0.5.0.tgz#e7dee66e35d6fc16f710fe91d5cf69f70f08911d"
 
+json-api-normalizer@^0.4.10:
+  version "0.4.10"
+  resolved "https://registry.yarnpkg.com/json-api-normalizer/-/json-api-normalizer-0.4.10.tgz#5c997a50d45d9ea47ae75cb8c223bffb236ee20a"
+  dependencies:
+    lodash "^4.17.2"
+
 json-buffer@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/json-buffer/-/json-buffer-3.0.0.tgz#5b1f397afc75d677bde8bcfc0e47e1f9a3d9a898"
@@ -8332,6 +8338,10 @@ redux-mock-store@^1.5.1:
   dependencies:
     lodash.isplainobject "^4.0.6"
 
+redux-object@^0.5.6:
+  version "0.5.6"
+  resolved "https://registry.yarnpkg.com/redux-object/-/redux-object-0.5.6.tgz#db573a466ea26d59a98646a748333e00c11702e3"
+
 redux-thunk@^2.2.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.3.0.tgz#51c2c19a185ed5187aaa9a2d08b666d0d6467622"
@@ -9074,7 +9084,7 @@ source-map@^0.6.0, source-map@^0.6.1, source-map@~0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
 
-spanan@2.0.0:
+spanan@2.0.0, spanan@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/spanan/-/spanan-2.0.0.tgz#61e82c3ba0a1b6ab3c3014c3a0f4592ae003adbe"
 
@@ -10281,7 +10291,7 @@ whatwg-encoding@^1.0.1, whatwg-encoding@^1.0.3:
   dependencies:
     iconv-lite "0.4.19"
 
-whatwg-fetch@>=0.10.0, whatwg-fetch@^2.0.3:
+whatwg-fetch@>=0.10.0, whatwg-fetch@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-2.0.4.tgz#dde6a5df315f9d39991aa17621853d720b85566f"
 

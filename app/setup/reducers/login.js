@@ -12,21 +12,21 @@
  */
 
 import {
+	CLEAR_MESSAGE,
+	SHOW_NOTIFICATION,
+	TRIGGER_LOGIN,
+	TRIGGER_REGISTER
+} from '../constants/constants';
+import {
+	LOGIN_FAIL,
 	GET_LOGIN_INFO,
 	LOGIN_SUCCESS,
-	LOGIN_FAIL,
-	CREATE_ACCOUNT,
-	CREATE_ACCOUNT_SUCCESS,
-	CREATE_ACCOUNT_FAIL,
-	SIGN_IN,
-	SIGN_OUT,
-	CLEAR_MESSAGE
-} from '../constants/constants';
-
+	REGISTER_SUCCESS,
+	REGISTER_FAIL
+} from '../../Account/AccountConstants';
 import { msg } from '../utils';
 
 const initialState = {
-	payload: {},
 	success: false,
 	loading: false,
 	message: '',
@@ -44,64 +44,86 @@ const initialState = {
  */
 export default (state = initialState, action) => {
 	switch (action.type) {
-		case GET_LOGIN_INFO: {
-			return Object.assign({}, state, {
-				success: action.data.logged_in,
-				payload: action.data.logged_in && action.data.decoded_user_token || initialState.payload,
-			});
-		}
-		case CREATE_ACCOUNT_SUCCESS:
-			msg.sendMessage('ping', 'create_account_setup');
-			return Object.assign({}, state, {
-				success: true,
-				loading: false,
-				payload: action.data.payload,
-				message: action.data.text,
-				triggerSignIn: initialState.triggerSignIn,
-				triggerCreateAccount: initialState.triggerCreateAccount,
-			});
 		case LOGIN_SUCCESS: {
 			return Object.assign({}, state, {
 				success: true,
 				loading: false,
-				payload: action.data.payload,
-				message: action.data.text,
-				triggerSignIn: initialState.triggerSignIn,
-				triggerCreateAccount: initialState.triggerCreateAccount,
+				message: initialState.message,
+				triggerSignIn: true,
 			});
 		}
 		case LOGIN_FAIL: {
+			const { errors } = action.payload;
+			let errorText = t('server_error_message');
+			errors.forEach((err) => {
+				switch (err.code) {
+					case '10050':
+					case '10110':
+						errorText = t('banner_no_such_account_message');
+						break;
+					default:
+						errorText = t('server_error_message');
+				}
+			});
 			return Object.assign({}, state, {
+				message: errorText,
 				success: false,
 				loading: false,
-				payload: initialState.payload,
-				message: action.data,
 				triggerSignIn: initialState.triggerSignIn,
 				triggerCreateAccount: initialState.triggerCreateAccount,
 			});
 		}
-		case CREATE_ACCOUNT: {
+		case REGISTER_SUCCESS:
+			msg.sendMessage('ping', 'create_account_setup');
 			return Object.assign({}, state, {
+				success: true,
+				loading: false,
 				triggerCreateAccount: true,
-				loading: true,
 			});
-		}
-		case CREATE_ACCOUNT_FAIL: {
+		case REGISTER_FAIL: {
+			const { errors } = action.payload;
+			let errorText = t('server_error_message');
+			errors.forEach((err) => {
+				switch (err.code) {
+					case '10070':
+						errorText = t('email_address_in_use');
+						break;
+					case '10080':
+						errorText = t('invalid_email_confirmation');
+						break;
+					default:
+						errorText = t('server_error_message');
+				}
+			});
 			return Object.assign({}, state, {
-				triggerCreateAccount: false,
+				message: errorText,
 				success: false,
 				loading: false,
+				triggerSignIn: initialState.triggerSignIn,
+				triggerCreateAccount: initialState.triggerCreateAccount,
+			});
+		}
+		case TRIGGER_LOGIN: {
+			return Object.assign({}, state, {
+				triggerSignIn: true,
+			});
+		}
+		case TRIGGER_REGISTER: {
+			return Object.assign({}, state, {
+				triggerCreateAccount: true,
+			});
+		}
+		case SHOW_NOTIFICATION: {
+			return Object.assign({}, state, {
 				message: action.data.text,
 			});
 		}
-		case SIGN_IN: {
-			return Object.assign({}, state, {
-				triggerSignIn: true,
-				loading: true,
-			});
-		}
 		case CLEAR_MESSAGE: {
-			return Object.assign({}, state, { message: '' });
+			const { message } = initialState;
+			return Object.assign({}, state, { message });
+		}
+		case 'RESET': {
+			return Object.assign({}, initialState);
 		}
 		default: return state;
 	}

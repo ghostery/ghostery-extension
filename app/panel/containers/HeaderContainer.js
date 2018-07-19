@@ -16,6 +16,7 @@ import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import Header from '../components/Header';
 import * as actions from '../actions/PanelActions'; // get shared actions from Panel
+import { logout } from '../../Account/AccountActions';
 /**
  * Map redux store state properties to Header component own properties.
  * @memberOf PanelContainers
@@ -25,13 +26,10 @@ import * as actions from '../actions/PanelActions'; // get shared actions from P
  * @todo  We are not using ownProps, so we better not specify it explicitly,
  * in this case it won't be passed by React (see https://github.com/reactjs/react-redux/blob/master/docs/api.md).
  */
-const mapStateToProps = (state, ownProps) => Object.assign({}, state.header, {
+const mapStateToProps = (state, ownProps) => Object.assign({}, state.header, state.account, {
 	// get properties from panel redux store
-	email: state.panel.email,
 	is_expert: state.panel.is_expert,
-	is_validated: state.panel.is_validated,
 	language: state.panel.language,
-	logged_in: state.panel.logged_in,
 	tab_id: state.panel.tab_id,
 });
 /**
@@ -41,7 +39,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state.header, {
  * @param  {Object} 	ownProps  Header component own props
  * @return {function}          	  to be used as an argument in redux connect call
  */
-const mapDispatchToProps = (dispatch, ownProps) => ({ actions: bindActionCreators(actions, dispatch) });
+const mapDispatchToProps = (dispatch, ownProps) => ({ actions: bindActionCreators(Object.assign(actions, { logout }), dispatch) });
 /**
  * Connects Header component to the Redux store.
  * @memberOf PanelContainers

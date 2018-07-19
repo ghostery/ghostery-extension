@@ -13,7 +13,7 @@
 
 import React, { Component } from 'react';
 import globals from '../../../../src/classes/Globals';
-
+import { ToggleSlider } from '../BuildingBlocks';
 const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 const IS_CLIQZ = (globals.BROWSER_INFO.name === 'cliqz');
 
@@ -29,7 +29,19 @@ const SubscriptionThemes = (props) => {
 		<div className="s-tabs-panel">
 			<div className="row">
 				<div className="columns">
-				<h3>{ t('subscription_themes_title') }</h3>
+					<h3>{ t('subscription_themes_title') }</h3>
+					<div>
+						<span className="flex-container align-middle">
+							<span className="Subscription-slider-label">
+								{t('subscription_midnight_theme')}
+							</span>
+							<ToggleSlider
+								className="display-inline-block"
+								isChecked="true"
+								onChange={props.toggleThemes}
+							/>
+						</span>
+					</div>
 				</div>
 			</div>
 		</div>

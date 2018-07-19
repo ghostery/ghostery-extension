@@ -107,7 +107,7 @@ class RewardDetail extends React.Component {
 			<div className="RewardDetail flex-container flex-dir-column align-justify">
 				<div className="RewardDetail__image_container">
 					<img className="RewardDetail__logo" src={logoUrl} />
-					<img className="RewardDetail__picture" src={pictureUrl} />
+					<div className="RewardDetail__picture" style={{ backgroundImage: `url('${pictureUrl}')` }} />
 				</div>
 				{text && (
 					<div className="RewardDetail__title">
