@@ -22,14 +22,15 @@ import Panel from './containers/PanelContainer';
 import Summary from './containers/SummaryContainer';
 import Detail from './containers/DetailContainer';
 import Settings from './containers/SettingsContainer';
-import Help from './components/Help';
-import About from './components/About';
-import Subscription from './components/Subscription';
+import Subscription from './containers/SubscriptionContainer';
 import Login from './containers/LoginContainer';
 import CreateAccount from './containers/CreateAccountContainer';
 import ForgotPassword from './containers/ForgotPasswordContainer';
 import AccountSuccess from './containers/AccountSuccessContainer';
 import configureStore from './store/configureStore';
+import Help from './components/Help';
+import About from './components/About';
+import Subscribe from './components/Subscribe';
 
 const store = configureStore();
 /**
@@ -45,6 +46,7 @@ const Ghostery = () => (
 		<Route path="/help" component={Help} />
 		<Route path="/about" component={About} />
 		<Route path="/subscription" component={Subscription} />
+		<Route path="/subscribe" component={Subscribe} />
 		<Route path="/login" component={Login} />
 		<Route path="/create-account" component={CreateAccount} />
 		<Route path="/forgot-password" component={ForgotPassword} />

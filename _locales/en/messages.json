@@ -1694,5 +1694,35 @@
 	},
 	"rewards_learn_more": {
 		"message": "Learn More"
+	},
+	"subscription_info": {
+		"message": "Subscription Info"
+	},
+	"subscription_themes": {
+		"message": "Themes"
+	},
+	"subscription_priority_support": {
+		"message": "Priority Support"
+	},
+	"subscription_info_title": {
+		"message": "Subscription Info"
+	},
+	"subscription_themes_title": {
+		"message": "Themes"
+	},
+	"subscription_priority_support_title": {
+		"message": "Priority Support"
+	},
+	"subscribe_pitch": {
+		"message": "We work hard to keep Ghostery's privacy protection free for all our users. If you like what we do, however, you can support us with a small monthly subscription fee."
+	},
+	"subscribe_pitch_learn_more": {
+		"message": "Learn more"
+	},
+	"subscribe_pitch_button_label": {
+		"message": "BECOME A GHOSTERY SUPPORTER"
+	},
+	"subscribe_pitch_sign_here": {
+		"message": "Already a Ghostery Supporter? Sign in here"
 	}
 }
