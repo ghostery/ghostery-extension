@@ -16,8 +16,8 @@ import thunk from 'redux-thunk';
 import * as msg from '../../panel/utils/msg';
 import * as accountActions from '../AccountActions';
 import {
-	LOGIN_FAILED, SHOW_NOTIFICATION, LOGIN_SUCCESS,
-	GET_SETTINGS_DATA, LOGIN_DATA_SUCCESS, LOGOUT
+	LOGIN_FAIL, SHOW_NOTIFICATION, LOGIN_SUCCESS,
+	GET_USER_SETTINGS_SUCCESS, GET_USER_SUCCESS, LOGOUT
 } from '../AccountConstants';
 
 // Fake the translation function to only return the translation key
@@ -81,7 +81,7 @@ describe('app/panel/actions/AccountActions.js', () => {
 	test('getUserSettings action should resolve correctly', () => {
 		const initialState = {};
 		const store = mockStore(initialState);
-		const expectedPayload = { data: { settingsData: settings }, type: GET_SETTINGS_DATA };
+		const expectedPayload = { payload: { settings }, type: GET_USER_SETTINGS_SUCCESS };
 
 		return store.dispatch(accountActions.getUserSettings())
 			.then(() => {
@@ -95,7 +95,7 @@ describe('app/panel/actions/AccountActions.js', () => {
 	test('accountGetUser action should resolve correctly', () => {
 		const initialState = {};
 		const store = mockStore(initialState);
-		const expectedPayload = { data: user, type: LOGIN_DATA_SUCCESS };
+		const expectedPayload = { payload: user, type: GET_USER_SUCCESS };
 
 		return store.dispatch(accountActions.getUser())
 			.then(() => {
@@ -111,13 +111,9 @@ describe('app/panel/actions/AccountActions.js', () => {
 		const password = 'password';
 		const expectedPayload = [
 			{
-				type: LOGIN_SUCCESS
-			},
-			{
-				type: SHOW_NOTIFICATION,
-				data: {
-					text: `panel_signin_success ${email}`,
-					classes: 'success'
+				type: LOGIN_SUCCESS,
+				payload: {
+					email
 				}
 			}
 		];
@@ -134,14 +130,8 @@ describe('app/panel/actions/AccountActions.js', () => {
 		const password = 'password';
 		const expectedPayload = [
 			{
-				type: LOGIN_FAILED
-			},
-			{
-				type: SHOW_NOTIFICATION,
-				data: {
-					text: 'banner_no_such_account_message',
-					classes: 'alert'
-				}
+				type: LOGIN_FAIL,
+				payload: invalidAccountErr
 			}
 		];
 		return store.dispatch(accountActions.login(email, password))
@@ -158,14 +148,8 @@ describe('app/panel/actions/AccountActions.js', () => {
 		const password = 'password';
 		const expectedPayload = [
 			{
-				type: LOGIN_FAILED
-			},
-			{
-				type: SHOW_NOTIFICATION,
-				data: {
-					text: 'server_error_message',
-					classes: 'alert'
-				}
+				type: LOGIN_FAIL,
+				payload: serverErr
 			}
 		];
 		return store.dispatch(accountActions.login(email, password))
