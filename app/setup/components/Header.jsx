@@ -35,15 +35,14 @@ class Header extends React.Component {
 	* Lifecycle event
 	*/
 	componentWillMount() {
-		this.props.actions.getUser().then((user) => {
-			if (user) {
+		this.props.actions.getUser().then((res) => {
+			const { errors, user } = res;
+			if (errors) {
+				this.setState({ loggedIn: false });
+			} else {
 				this.setState({
 					loggedIn: true,
 					email: user.email,
-				});
-			} else {
-				this.setState({
-					loggedIn: false,
 				});
 			}
 		});
@@ -78,11 +77,19 @@ class Header extends React.Component {
 						this.props.actions.getUser(),
 						this.props.actions.getUserSettings()
 					]).then((res) => {
-						this.setState({
-							fetchedLogInInfo: true,
-							loggedIn: true,
-							email: res[0] && res[0].email,
-						});
+						const { errors, user } = res[0];
+						if (errors) {
+							this.setState({
+								fetchedLogInInfo: false,
+								loggedIn: false,
+							});
+						} else {
+							this.setState({
+								fetchedLogInInfo: true,
+								loggedIn: true,
+								email: user.email,
+							});
+						}
 					});
 				}
 			});
