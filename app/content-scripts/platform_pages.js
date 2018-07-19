@@ -31,25 +31,6 @@ const PlatformPagesContentScript = (function (window, document) {
 	 * @package
 	 */
 	const _initialize = function () {
-		// Add listener to logout-link in platform header
-		let logoutLink = document.getElementsByClassName('logout-link');
-		logoutLink = logoutLink ? logoutLink[0] : null;
-		if (logoutLink) {
-			logoutLink.addEventListener('click', (e) => {
-				sendMessageToBackground('account.logout'); // send empty object to log out
-			});
-		}
-		// Add listener to cancelModal
-		const cancelDialog = document.getElementById('cancelModal');
-		if (cancelDialog) {
-			let yesButton = cancelDialog.getElementsByClassName('button blue float-right');
-			yesButton = yesButton ? yesButton[0] : null;
-			if (yesButton) {
-				yesButton.addEventListener('click', (e) => {
-					sendMessageToBackground('account.logout'); // send empty object to log out
-				});
-			}
-		}
 		// alert background that this content script has loaded
 		sendMessage('platformPageLoaded');
 	};
