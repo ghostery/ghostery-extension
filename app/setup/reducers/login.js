@@ -48,6 +48,7 @@ export default (state = initialState, action) => {
 			return Object.assign({}, state, {
 				success: true,
 				loading: false,
+				message: initialState.message,
 				triggerSignIn: true,
 			});
 		}
@@ -118,7 +119,8 @@ export default (state = initialState, action) => {
 			});
 		}
 		case CLEAR_MESSAGE: {
-			return Object.assign({}, state, { message: '' });
+			const { message } = initialState;
+			return Object.assign({}, state, { message });
 		}
 		case 'RESET': {
 			return Object.assign({}, initialState);
