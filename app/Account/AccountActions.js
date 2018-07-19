@@ -11,16 +11,15 @@ import {
 	RESET_PASSWORD_FAIL,
 	GET_USER_SUCCESS,
 	GET_USER_FAIL,
-
-	GET_SETTINGS_DATA
+	GET_USER_SETTINGS_SUCCESS
 } from './AccountConstants';
 
 export const getUserSettings = () => dispatch => (
 	sendMessageInPromise('account.getUserSettings')
 		.then((settings) => {
 			dispatch({
-				type: GET_SETTINGS_DATA,
-				data: { settingsData: settings }
+				type: GET_USER_SETTINGS_SUCCESS,
+				payload: { settings },
 			});
 		})
 		.catch((error) => {
@@ -30,12 +29,20 @@ export const getUserSettings = () => dispatch => (
 
 export const getUser = () => dispatch => (
 	sendMessageInPromise('account.getUser')
-		.then((user) => {
-			dispatch({
-				type: GET_USER_SUCCESS,
-				payload: { user },
-			});
-			return user;
+		.then((res) => {
+			const { errors, user } = res;
+			if (errors) {
+				dispatch({
+					type: GET_USER_FAIL,
+					payload: { errors },
+				});
+			} else {
+				dispatch({
+					type: GET_USER_SUCCESS,
+					payload: { user },
+				});
+			}
+			return res;
 		})
 );
 

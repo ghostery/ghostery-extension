@@ -770,7 +770,7 @@ function onMessageHandler(request, sender, callback) {
 	} else if (name === 'account.getUser') {
 		account.getUser(message)
 			.then((user) => {
-				callback(user);
+				callback({ user });
 			})
 			.catch((err) => {
 				callback({ errors: _getJSONAPIErrorsObject(err) });

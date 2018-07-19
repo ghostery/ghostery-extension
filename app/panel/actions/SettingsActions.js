@@ -26,9 +26,9 @@ import {
 	SETTINGS_TOGGLE_EXPAND_CATEGORY,
 	SETTINGS_UPDATE_SEARCH_VALUE,
 	SETTINGS_SEARCH_SUBMIT,
-	SETTINGS_FILTER
+	SETTINGS_FILTER,
+	GET_SETTINGS_DATA
 } from '../constants/constants';
-import { GET_SETTINGS_DATA } from '../../Account/AccountConstants';
 import { sendMessageInPromise } from '../utils/msg';
 import { hashCode } from '../../../src/utils/common';
 import globals from '../../../src/classes/Globals';
