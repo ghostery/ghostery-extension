@@ -119,10 +119,9 @@ class Api {
 			name: 'csrf_token',
 		}, (cookie) => {
 			if (!cookie) {
-				reject(new Error('CSRF Token cookie not found'));
-				return;
+				return reject(new Error('CSRF Token cookie not found'));
 			}
-			resolve(cookie.value);
+			return resolve(cookie.value);
 		});
 	});
 
