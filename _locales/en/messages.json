@@ -1724,5 +1724,8 @@
 	},
 	"subscribe_pitch_sign_here": {
 		"message": "Already a Ghostery Supporter? Sign in here"
+	},
+	"subscription_midnight_theme": {
+		"message": "Midnight Theme"
 	}
 }
