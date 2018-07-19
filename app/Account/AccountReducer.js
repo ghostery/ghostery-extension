@@ -57,8 +57,8 @@ export default (state = initialState, action) => {
 			return Object.assign({}, state, { user });
 		}
 		case GET_USER_SETTINGS_SUCCESS: {
-			const { userSettings } = action.payload;
-			return Object.assign({}, state, { userSettings });
+			const { settings } = action.payload;
+			return Object.assign({}, state, { userSettings: settings });
 		}
 		default: return state;
 	}

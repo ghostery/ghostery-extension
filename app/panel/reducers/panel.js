@@ -32,7 +32,6 @@ import {
 	LOGOUT_SUCCESS,
 	REGISTER_SUCCESS,
 	REGISTER_FAIL,
-	LOGIN_DATA_SUCCESS,
 	RESET_PASSWORD_SUCCESS,
 	RESET_PASSWORD_FAIL
 } from '../../Account/AccountConstants';
@@ -166,13 +165,6 @@ export default (state = initialState, action) => {
 			action.payload.classes = 'alert';
 			const updated = _showNotification(state, action);
 			return Object.assign({}, state, updated);
-		}
-		case LOGIN_DATA_SUCCESS: {
-			const { email, emailValidated } = action.data;
-			return Object.assign({}, state, {
-				email,
-				emailValidated,
-			});
 		}
 		case TOGGLE_CLIQZ_FEATURE: {
 			let pingName = '';
