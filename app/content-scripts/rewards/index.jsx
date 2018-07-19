@@ -210,10 +210,13 @@ class RewardsApp {
 		window.removeEventListener('focus', this.focusListener);
 	}
 
-	messageBackground(name, message) {
-		if (this.port &&
+	messageBackground(name, message, signal = false) {
+		if (
+			signal &&
+			this.port &&
 			(message.actionId !== 'rewards_off') &&
-			(message.actionId !== 'rewards_on')) {
+			(message.actionId !== 'rewards_on')
+		) {
 			this.port.postMessage({
 				name,
 				message
@@ -232,7 +235,7 @@ class RewardsApp {
 			origin: 'rewards-hotdog-card',
 			type: !offerSignal ? 'action-signal' : 'offer-action-signal',
 		};
-		this.messageBackground('rewardSignal', message);
+		this.messageBackground('rewardSignal', message, true);
 	}
 }
 
