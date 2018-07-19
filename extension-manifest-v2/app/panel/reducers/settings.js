@@ -28,9 +28,9 @@ import {
 	SETTINGS_TOGGLE_EXPAND_ALL,
 	SETTINGS_TOGGLE_EXPAND_CATEGORY,
 	SETTINGS_UPDATE_SEARCH_VALUE,
-	SETTINGS_FILTER
+	SETTINGS_FILTER,
+	GET_SETTINGS_DATA
 } from '../constants/constants';
-import { GET_SETTINGS_DATA } from '../../Account/AccountConstants';
 import { updateTrackerBlocked, updateCategoryBlocked, updateBlockAllTrackers, toggleExpandAll, toggleExpandCategory } from '../utils/blocking';
 import { removeFromObject, updateObject } from '../utils/utils';
 import { sendMessage } from '../utils/msg';

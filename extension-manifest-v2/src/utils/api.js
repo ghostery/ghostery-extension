@@ -120,6 +120,7 @@ class Api {
 		}, (cookie) => {
 			if (!cookie) {
 				reject(new Error('CSRF Token cookie not found'));
+				return;
 			}
 			resolve(cookie.value);
 		});
