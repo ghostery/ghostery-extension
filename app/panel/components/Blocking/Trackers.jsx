@@ -70,6 +70,7 @@ class Trackers extends React.Component {
 					sitePolicy={this.props.sitePolicy}
 					paused_blocking={this.props.paused_blocking}
 					language={this.props.language}
+					smartBlockActive={this.props.smartBlockActive}
 					smartBlock={this.props.smartBlock}
 				/>
 			));

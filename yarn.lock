@@ -142,11 +142,11 @@
     traceur "0.0.105"
     uglify-js "^2.6.1"
 
-"@cliqz/adblocker@0.1.7":
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-0.1.7.tgz#78cf3e03a5663808df0c65f86b56275ee1198e2c"
+"@cliqz/adblocker@0.1.11":
+  version "0.1.11"
+  resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-0.1.11.tgz#e0326f07ce6bf26a65eb1565481f2979e9ff4184"
   dependencies:
-    tldjs "2.2.0"
+    tldjs "2.3.1"
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -382,14 +382,14 @@ ajv-keywords@^3.1.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-3.2.0.tgz#e86b819c602cf8821ad637413698f1dec021847a"
 
-ajv@5.5.2, ajv@^5.0.0, ajv@^5.1.0, ajv@^5.2.3, ajv@^5.3.0:
-  version "5.5.2"
-  resolved "https://registry.yarnpkg.com/ajv/-/ajv-5.5.2.tgz#73b5eeca3fab653e3d3f9422b341ad42205dc965"
+ajv@6.5.0:
+  version "6.5.0"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.5.0.tgz#4c8affdf80887d8f132c9c52ab8a2dc4d0b7b24c"
   dependencies:
-    co "^4.6.0"
-    fast-deep-equal "^1.0.0"
+    fast-deep-equal "^2.0.1"
     fast-json-stable-stringify "^2.0.0"
     json-schema-traverse "^0.3.0"
+    uri-js "^4.2.1"
 
 ajv@^4.9.1:
   version "4.11.8"
@@ -397,6 +397,15 @@ ajv@^4.9.1:
   dependencies:
     co "^4.6.0"
     json-stable-stringify "^1.0.1"
+
+ajv@^5.0.0, ajv@^5.1.0, ajv@^5.2.3, ajv@^5.3.0:
+  version "5.5.2"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-5.5.2.tgz#73b5eeca3fab653e3d3f9422b341ad42205dc965"
+  dependencies:
+    co "^4.6.0"
+    fast-deep-equal "^1.0.0"
+    fast-json-stable-stringify "^2.0.0"
+    json-schema-traverse "^0.3.0"
 
 ajv@^6.1.0:
   version "6.5.1"
@@ -435,6 +444,12 @@ animated@^0.2.0:
   dependencies:
     invariant "^2.2.0"
     normalize-css-color "^1.0.1"
+
+"anonymous-credentials@https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.0/anonymous-credentials-0.1.0.tgz":
+  version "0.1.0"
+  resolved "https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.0/anonymous-credentials-0.1.0.tgz#61358f5e1b8f6b145bf51739156e25be03ab74b2"
+  dependencies:
+    bindings "1.3.0"
 
 ansi-escapes@^1.0.0:
   version "1.4.0"
@@ -1554,6 +1569,10 @@ binary-extensions@^1.0.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/binaryextensions/-/binaryextensions-2.1.1.tgz#3209a51ca4a4ad541a3b8d3d6a6d5b83a2485935"
 
+bindings@1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.3.0.tgz#b346f6ecf6a95f5a815c5839fc7cdb22502f1ed7"
+
 bindings@~1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.2.1.tgz#14ad6113812d2d37d72e67b4cacb4bb726505f11"
@@ -1720,18 +1739,20 @@ brorand@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
 
-"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.27/7.27.10.tgz?v=1":
-  version "7.27.10"
-  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.27/7.27.10.tgz?v=1#901d3f582be9a6aa839106b7d403c7cff34bbb28"
+"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.28/7.28.3.014f72b.tgz":
+  version "7.28.3"
+  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.28/7.28.3.014f72b.tgz#1bada3e7222573a3b5980c37e5bfcfcca7cd9d12"
   dependencies:
     "@cliqz-oss/dexie" "2.0.3"
     "@cliqz-oss/pouchdb" "6.3.4-security-error-fix-2"
     "@cliqz-oss/systemjs-builder" "0.16.13"
-    "@cliqz/adblocker" "0.1.7"
+    "@cliqz/adblocker" "0.1.11"
     BigInt "5.5.3"
-    ajv "5.5.2"
+    ajv "6.5.0"
+    anonymous-credentials "https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.0/anonymous-credentials-0.1.0.tgz"
     babel-polyfill "6.26.0"
-    cliqz-history "https://github.com/cliqz-oss/cliqz-history/releases/download/1.0.6/cliqz-history-1.0.6.tgz"
+    classnames "2.2.5"
+    cliqz-history "https://github.com/cliqz-oss/cliqz-history/releases/download/1.0.7/cliqz-history-1.0.7.tgz"
     cron "1.2.1"
     cron-parser "2.4.0"
     deep-equal "1.0.1"
@@ -1745,18 +1766,21 @@ brorand@^1.0.1:
     jquery "3.0.0"
     js-md5 "0.7.3"
     jsep "0.3.0"
-    mathjs "3.17.0"
+    mathjs "4.0.0"
+    moment "2.19.3"
     node-fetch "1.7.1"
     node-forge "git+https://git@github.com/digitalbazaar/forge.git#af3f590af9d3c809e1cb44b2bb5398a3a6b944c2"
     node-persist "2.0.11"
     pako "1.0.6"
     prop-types "15.5.10"
     qrcodejs "1.0.0"
-    react "16.0.0"
-    react-dom "16.0.0"
+    react "16.3.2"
+    react-dom "16.3.2"
+    react-modal "3.4.4"
     react-native-web "0.1.11"
     react-toggle-display "2.2.0"
     react-tooltip "3.3.0"
+    react-touch-carousel "0.8.2"
     readline "1.3.0"
     rxjs "5.5.6"
     sanitize-filename "1.6.1"
@@ -2160,6 +2184,10 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
+classnames@2.2.5:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
+
 classnames@^2.2.0, classnames@^2.2.5:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
@@ -2209,9 +2237,9 @@ cli-width@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/cli-width/-/cli-width-2.2.0.tgz#ff19ede8a9a5e579324147b0c11f0fbcbabed639"
 
-"cliqz-history@https://github.com/cliqz-oss/cliqz-history/releases/download/1.0.6/cliqz-history-1.0.6.tgz":
-  version "1.0.6"
-  resolved "https://github.com/cliqz-oss/cliqz-history/releases/download/1.0.6/cliqz-history-1.0.6.tgz#a04f6afc61b6d258b2a5735408b1dbd62d697996"
+"cliqz-history@https://github.com/cliqz-oss/cliqz-history/releases/download/1.0.7/cliqz-history-1.0.7.tgz":
+  version "1.0.7"
+  resolved "https://github.com/cliqz-oss/cliqz-history/releases/download/1.0.7/cliqz-history-1.0.7.tgz#587435a44db473ceb76c98b174b81854002a9302"
 
 cliui@^2.1.0:
   version "2.1.0"
@@ -2971,9 +2999,9 @@ decamelize@^1.0.0, decamelize@^1.1.1, decamelize@^1.1.2:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/decamelize/-/decamelize-1.2.0.tgz#f6534d15148269b20352e7bee26f501f9a191290"
 
-decimal.js@7.2.3:
-  version "7.2.3"
-  resolved "https://registry.yarnpkg.com/decimal.js/-/decimal.js-7.2.3.tgz#6434c3b8a8c375780062fc633d0d2bbdb264cc78"
+decimal.js@9.0.1:
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/decimal.js/-/decimal.js-9.0.1.tgz#1cc8b228177da7ab6498c1cc06eb130a290e6e1e"
 
 decode-uri-component@^0.2.0:
   version "0.2.0"
@@ -3457,6 +3485,10 @@ es6-templates@^0.2.3:
     recast "~0.11.12"
     through "~2.3.6"
 
+escape-latex@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/escape-latex/-/escape-latex-1.0.0.tgz#74b9e94d8c178645704c33791e95a4155b59718f"
+
 escape-string-regexp@^1.0.0, escape-string-regexp@^1.0.2, escape-string-regexp@^1.0.5, escape-string-regexp@~1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
@@ -3673,6 +3705,10 @@ execspawn@^1.0.1:
   resolved "https://registry.yarnpkg.com/execspawn/-/execspawn-1.0.1.tgz#8286f9dde7cecde7905fbdc04e24f368f23f8da6"
   dependencies:
     util-extend "^1.0.1"
+
+exenv@^1.2.0:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/exenv/-/exenv-1.2.2.tgz#2ae78e85d9894158670b03d47bec1f03bd91bb9d"
 
 exit-hook@^1.0.0:
   version "1.1.1"
@@ -4003,9 +4039,9 @@ foundation-sites@^6.4.4-rc1:
     jquery ">=3.0.0"
     what-input "^4.1.3"
 
-fraction.js@4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/fraction.js/-/fraction.js-4.0.2.tgz#0eae896626f334b1bde763371347a83b5575d7f0"
+fraction.js@4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/fraction.js/-/fraction.js-4.0.4.tgz#04e567110718adf7b52974a10434ab4c67a5183e"
 
 fragment-cache@^0.2.1:
   version "0.2.1"
@@ -6279,17 +6315,18 @@ math-sign-x@^3.0.0:
     is-nan-x "^1.0.1"
     to-number-x "^2.0.0"
 
-mathjs@3.17.0:
-  version "3.17.0"
-  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-3.17.0.tgz#9569d278874546175c9d0497d7417eb88fb61503"
+mathjs@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-4.0.0.tgz#17c95279a6fcd727be6ff4e478d609ee78c25502"
   dependencies:
     complex.js "2.0.4"
-    decimal.js "7.2.3"
-    fraction.js "4.0.2"
+    decimal.js "9.0.1"
+    escape-latex "1.0.0"
+    fraction.js "4.0.4"
     javascript-natural-sort "0.7.1"
     seed-random "2.2.0"
-    tiny-emitter "2.0.0"
-    typed-function "0.10.6"
+    tiny-emitter "2.0.2"
+    typed-function "1.0.1"
 
 max-safe-integer@^1.0.1:
   version "1.0.1"
@@ -6553,6 +6590,10 @@ moment-timezone@^0.5.0, moment-timezone@^0.5.x:
   resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.5.21.tgz#3cba247d84492174dbf71de2a9848fa13207b845"
   dependencies:
     moment ">= 2.9.0"
+
+moment@2.19.3:
+  version "2.19.3"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.19.3.tgz#bdb99d270d6d7fda78cc0fbace855e27fe7da69f"
 
 "moment@>= 2.9.0", moment@^2.19.1:
   version "2.22.2"
@@ -7750,7 +7791,7 @@ prop-types@15.5.10:
     fbjs "^0.8.9"
     loose-envify "^1.3.1"
 
-prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
+prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
   dependencies:
@@ -7875,7 +7916,7 @@ quick-temp@^0.1.3, quick-temp@^0.1.5:
     rimraf "^2.5.4"
     underscore.string "~3.3.4"
 
-raf@^3.4.0:
+raf@^3.1.0, raf@^3.4.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/raf/-/raf-3.4.0.tgz#a28876881b4bc2ca9117d4138163ddb80f781575"
   dependencies:
@@ -7922,9 +7963,9 @@ rc@^1.0.3, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-dom@16.0.0:
-  version "16.0.0"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.0.0.tgz#9cc3079c3dcd70d4c6e01b84aab2a7e34c303f58"
+react-dom@16.3.2:
+  version "16.3.2"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.3.2.tgz#cb90f107e09536d683d84ed5d4888e9640e0e4df"
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.1.0"
@@ -7943,6 +7984,27 @@ react-dom@^16.0.0:
 react-is@^16.4.1:
   version "16.4.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.4.1.tgz#d624c4650d2c65dbd52c72622bbf389435d9776e"
+
+react-lifecycles-compat@^3.0.0:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
+
+react-modal@3.4.4:
+  version "3.4.4"
+  resolved "https://registry.yarnpkg.com/react-modal/-/react-modal-3.4.4.tgz#e9dde25e9e85a59c76831f2a2b468712a546aded"
+  dependencies:
+    exenv "^1.2.0"
+    prop-types "^15.5.10"
+    react-lifecycles-compat "^3.0.0"
+    warning "^3.0.0"
+
+react-motion@0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/react-motion/-/react-motion-0.5.2.tgz#0dd3a69e411316567927917c6626551ba0607316"
+  dependencies:
+    performance-now "^0.2.0"
+    prop-types "^15.5.8"
+    raf "^3.1.0"
 
 react-native-web@0.1.11:
   version "0.1.11"
@@ -8040,9 +8102,15 @@ react-tooltip@3.3.0:
     classnames "^2.2.0"
     prop-types "^15.5.8"
 
-react@16.0.0:
-  version "16.0.0"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.0.0.tgz#ce7df8f1941b036f02b2cca9dbd0cb1f0e855e2d"
+react-touch-carousel@0.8.2:
+  version "0.8.2"
+  resolved "https://registry.yarnpkg.com/react-touch-carousel/-/react-touch-carousel-0.8.2.tgz#f669c047726be23b6e21a7574e2e133a2467c7a4"
+  dependencies:
+    react-motion "0.5.2"
+
+react@16.3.2:
+  version "16.3.2"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.3.2.tgz#fdc8420398533a1e58872f59091b272ce2f91ea9"
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.1.0"
@@ -9016,7 +9084,7 @@ source-map@^0.6.0, source-map@^0.6.1, source-map@~0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
 
-spanan@2.0.0:
+spanan@2.0.0, spanan@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/spanan/-/spanan-2.0.0.tgz#61e82c3ba0a1b6ab3c3014c3a0f4592ae003adbe"
 
@@ -9477,15 +9545,9 @@ timers-browserify@^2.0.4:
   dependencies:
     setimmediate "^1.0.4"
 
-tiny-emitter@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/tiny-emitter/-/tiny-emitter-2.0.0.tgz#bad327adb1804b42a231afa741532bd884cd09ad"
-
-tldjs@2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/tldjs/-/tldjs-2.2.0.tgz#816de9efa7440eacf3e2a10f8fd3d64198d01ff3"
-  dependencies:
-    punycode "^1.4.1"
+tiny-emitter@2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/tiny-emitter/-/tiny-emitter-2.0.2.tgz#82d27468aca5ade8e5fd1e6d22b57dd43ebdfb7c"
 
 tldjs@2.3.1:
   version "2.3.1"
@@ -9738,9 +9800,9 @@ type-detect@^4.0.5:
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/type-detect/-/type-detect-4.0.8.tgz#7646fb5f18871cfbb7749e69bd39a6388eb7450c"
 
-typed-function@0.10.6:
-  version "0.10.6"
-  resolved "https://registry.yarnpkg.com/typed-function/-/typed-function-0.10.6.tgz#314aa0ea72bd586de5920095559683e20b01688b"
+typed-function@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/typed-function/-/typed-function-1.0.1.tgz#2fc13787268764cb09633fe57be5bd089180668a"
 
 typedarray@^0.0.6:
   version "0.0.6"

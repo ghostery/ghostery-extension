@@ -124,10 +124,6 @@ class Rewards {
 									case 'rewardSignal':
 										this.sendSignal(message.message);
 										break;
-									case 'rewardsPromptAccepted':
-										// @TODO set conf disabled
-										conf.rewards_accepted = true;
-										break;
 									case 'rewardSeen':
 										this.markRewardRead(message.offerId);
 										button.update();

@@ -46,6 +46,7 @@ import { allowAllwaysC2P } from './utils/click2play';
 import * as common from './utils/common';
 import * as utils from './utils/utils';
 import { _getJSONAPIErrorsObject } from './utils/api';
+import { importCliqzSettings } from './utils/cliqzSettingImport';
 
 // class instantiation
 const events = new Events();
@@ -228,10 +229,12 @@ function getSiteData() {
 		});
 	}));
 }
+
 /**
  * @todo  consider never return anything explicitly from message handlers
  * as we never make callback calls asynchronously.
  */
+
 /**
  * Handle messages sent from app/js/platform_pages.js content script.
  * @memberOf Background
@@ -651,20 +654,12 @@ function onMessageHandler(request, sender, callback) {
 				break;
 		}
 	} else if (name === 'skipSetup') {
-		// kill setup window and link to blog post
-		chrome.tabs.remove(tab_id);
-		utils.openNewTab({
-			url: 'https://www.ghostery.com/blog/product-releases/browse-smarter-with-ghostery-8/',
-			become_active: true,
-		});
+		// link to blog post
+		chrome.tabs.update(tab_id, { url: 'https://www.ghostery.com/blog/product-releases/browse-smarter-with-ghostery-8/' });
 		return false;
 	} else if (name === 'closeSetup') {
-		// kill setup window and link to blog post
-		chrome.tabs.remove(tab_id);
-		utils.openNewTab({
-			url: 'https://www.ghostery.com/blog/product-releases/browse-smarter-with-ghostery-8/',
-			become_active: true,
-		});
+		// link to blog post
+		chrome.tabs.update(tab_id, { url: 'https://www.ghostery.com/blog/product-releases/browse-smarter-with-ghostery-8/' });
 		return false;
 	} else if (name === 'getPanelData') {
 		if (!message.tabId) {
@@ -686,20 +681,18 @@ function onMessageHandler(request, sender, callback) {
 	} else if (name === 'getCliqzModuleData') {
 		const modules = { adblock: {}, antitracking: {} };
 		utils.getActiveTab((tab) => {
+			button.update();
+			if (conf.enable_ad_block) {
+				// update adblock count. callback() handled below based on anti-tracking status
+				modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tab.id);
+			}
 			if (conf.enable_anti_tracking) {
 				cliqz.modules.antitracking.background.actions.aggregatedBlockingStats(tab.id).then((data) => {
 					modules.antitracking = data;
-					// send adblock and antitracking together
-					if (conf.enable_ad_block) {
-						modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tab.id);
-					}
 					callback(modules);
 				}).catch((err) => {
 					callback(modules);
 				});
-			} else if (conf.enable_ad_block) {
-				modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tab.id);
-				callback(modules);
 			} else {
 				callback(modules);
 			}
@@ -1062,11 +1055,13 @@ function isWhitelisted(state) {
 	return globals.SESSION.paused_blocking || events.policy.getSitePolicy(url) === 2 || state.ghosteryWhitelisted;
 }
 
-// Set listener for 'enabled' event for Antitracking module which replaces
-// Antitracking isWhitelisted method with Ghostery's isWhitelisted method.
-// The reason: if site is whitelisted by Ghostery, it should be whitelisted by
-// any Cliqz module which may block/alter tracker requests.
-// @memberOf Background
+/**
+ * Set listener for 'enabled' event for Antitracking module which replaces
+ * Antitracking isWhitelisted method with Ghostery's isWhitelisted method.
+ * The reason: if site is whitelisted by Ghostery, it should be whitelisted by
+ * any Cliqz module which may block/alter tracker requests.
+ * @memberOf Background
+ */
 antitracking.on('enabled', () => {
 	antitracking.isReady().then(() => {
 		// remove Cliqz-side whitelisting steps and replace with ghostery ones.
@@ -1106,9 +1101,11 @@ antitracking.on('enabled', () => {
 	});
 });
 
-
-// Set listener for 'enabled' event for Adblock module
-// which replaces Adblock isWhitelisted method with Ghostery's isWhitelisted method
+/**
+ * Set listener for 'enabled' event for Adblock module
+ * which replaces Adblock isWhitelisted method with Ghostery's isWhitelisted method
+ * @memberOf Background
+ */
 adblocker.on('enabled', () => {
 	adblocker.isReady().then(() =>
 		Promise.all([
@@ -1125,6 +1122,10 @@ adblocker.on('enabled', () => {
 	);
 });
 
+/**
+ * Set listener for 'enabled' event for Offers module
+ * @memberOf Background
+ */
 offers.on('enabled', () => {
 	offers.isReady().then(() => {
 		log('IN OFFERS ON ENABLED', offers, messageCenter);
@@ -1156,11 +1157,14 @@ offers.on('enabled', () => {
 				setCliqzModuleEnabled(messageCenter, true);
 			});
 	});
-});/**
+});
+
+/**
  * Set listener for 'enabled' event for Offers module.
  * It registers message handler for messages with the offers.
  * This handler adds incoming message data to the array of
  * notimication messages (CMP_DATA) to be eventually displayed.
+ * @memberOf Background
  */
 messageCenter.on('enabled', () => {
 	messageCenter.isReady().then(() => {
@@ -1467,40 +1471,53 @@ function initializeGhosteryModules() {
 		metrics.ping('install_complete');
 	}
 	// start cliqz app
-	const cliqzStartup = cliqz.start().then(() =>
+	const cliqzStartup = cliqz.start().then(() => {
 		// run wrapper tasks which set up base integrations between ghostery and these modules
 		Promise.all([
 			initialiseWebRequestPipeline(),
 		]).then(() => {
-			if (globals.JUST_UPGRADED_FROM_7) {
-				// These users had human web already, so we respect their choice
-				conf.enable_human_web = (IS_EDGE || IS_CLIQZ) ? false : !humanweb.isDisabled;
-				// These users did not have adblocking and antitracking.
-				// We introduce these new features initially disabled.
-				conf.enable_ad_block = false;
-				conf.enable_anti_tracking = false;
-				// Enable Offers except on Edge or Cliqz
-				conf.enable_offers = !((IS_EDGE || IS_CLIQZ));
-			} else if (globals.JUST_UPGRADED_FROM_8_1) {
-				// These users already had human web, adblocker and antitracking, so we respect their choice
-				conf.enable_ad_block = IS_CLIQZ ? false : !adblocker.isDisabled;
-				conf.enable_anti_tracking = IS_CLIQZ ? false : !antitracking.isDisabled;
-				conf.enable_human_web = (IS_EDGE || IS_CLIQZ) ? false : !humanweb.isDisabled;
-				// These users did not have Offers, so we enable them on upgrade.
-				conf.enable_offers = !(IS_EDGE || IS_CLIQZ);
-			} else {
-				// Otherwise we respect browser-core default settings
-				conf.enable_ad_block = IS_CLIQZ ? false : !adblocker.isDisabled;
-				conf.enable_anti_tracking = IS_CLIQZ ? false : !antitracking.isDisabled;
-				conf.enable_human_web = (IS_EDGE || IS_CLIQZ) ? false : !humanweb.isDisabled;
-				conf.enable_offers = (IS_EDGE || IS_CLIQZ) ? false : !offers.isDisabled;
+			if (!(IS_EDGE || IS_CLIQZ)) {
+				if (globals.JUST_UPGRADED_FROM_7) {
+					// These users had human web already, so we respect their choice
+					conf.enable_human_web = !humanweb.isDisabled;
+					// These users did not have adblocking and antitracking.
+					// We introduce these new features initially disabled.
+					conf.enable_ad_block = false;
+					conf.enable_anti_tracking = false;
+					// Enable Offers except on Edge or Cliqz
+					conf.enable_offers = true;
+				} else if (globals.JUST_UPGRADED_FROM_8_1) {
+					// These users already had human web, adblocker and antitracking, so we respect their choice
+					conf.enable_ad_block = !adblocker.isDisabled;
+					conf.enable_anti_tracking = !antitracking.isDisabled;
+					conf.enable_human_web = !humanweb.isDisabled;
+					// These users did not have Offers, so we enable them on upgrade.
+					conf.enable_offers = true;
+				} else {
+					// Otherwise we respect browser-core default settings
+					conf.enable_ad_block = !adblocker.isDisabled;
+					conf.enable_anti_tracking = !antitracking.isDisabled;
+					conf.enable_human_web = !humanweb.isDisabled;
+					conf.enable_offers = !offers.isDisabled;
+				}
 			}
-		})).catch((e) => {
+		});
+	}).catch((e) => {
 		log('cliqzStartup error', e);
 	});
 
 	if (IS_EDGE) {
 		setCliqzModuleEnabled(hpn, false);
+		setCliqzModuleEnabled(humanweb, false);
+		setCliqzModuleEnabled(offers, false);
+	}
+
+	if (IS_CLIQZ) {
+		setCliqzModuleEnabled(hpn, false);
+		setCliqzModuleEnabled(humanweb, false);
+		setCliqzModuleEnabled(antitracking, false);
+		setCliqzModuleEnabled(adblocker, false);
+		setCliqzModuleEnabled(offers, false);
 	}
 
 	// Set these tasks to run every hour
@@ -1517,16 +1534,6 @@ function initializeGhosteryModules() {
 			});
 		}
 	}
-
-	cliqzStartup.then(() => {
-		if (!IS_EDGE && !IS_CLIQZ) {
-			abtest.fetch().then(() => {
-				setupABTest();
-			}).catch((err) => {
-				log('cliqzStartup abtest fetch error', err);
-			});
-		}
-	});
 
 	// Check CMP right away.
 	cmp.fetchCMPData();
@@ -1585,6 +1592,9 @@ function init() {
 			// persist Conf properties to storage only after init has completed
 			common.prefsSet(globals.initProps);
 			globals.INIT_COMPLETE = true;
+			if (IS_CLIQZ) {
+				importCliqzSettings(cliqz, conf);
+			}
 		}));
 	}).catch((err) => {
 		log('Error in init()', err);
