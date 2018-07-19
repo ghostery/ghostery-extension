@@ -15,8 +15,11 @@
 # Background
 /src/background.js @zarembsky
 
-# Setup App
-/app/setup/ @IAmThePan
+# The Ghostery Hub
+/app/hub/ @IAmThePan
+
+# Shared Components
+/app/shared-components @IAmThePan
 
 # Rewards
 /app/content-scripts/rewards/ @trickpattyFH20
