@@ -45,6 +45,7 @@ import * as accounts from './utils/accounts';
 import { allowAllwaysC2P } from './utils/click2play';
 import * as common from './utils/common';
 import * as utils from './utils/utils';
+import { importCliqzSettings } from './utils/cliqzSettingImport';
 
 // class instantiation
 const events = new Events();
@@ -1550,6 +1551,9 @@ function init() {
 			// persist Conf properties to storage only after init has completed
 			common.prefsSet(globals.initProps);
 			globals.INIT_COMPLETE = true;
+			if (IS_CLIQZ) {
+				importCliqzSettings(cliqz, conf);
+			}
 		})));
 	}).catch((err) => {
 		log('Error in init()', err);
