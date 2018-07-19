@@ -158,6 +158,8 @@ class Panel extends React.Component {
 	 * @return {JSX} JSX for rendering the Panel
 	 */
 	render() {
+		const { loggedIn, email, emailValidated } = this.props;
+
 		// this prevents double rendering when waiting for getPanelData() to finish
 		if (!this.props.initialized) {
 			return null;

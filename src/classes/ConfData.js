@@ -147,13 +147,7 @@ class ConfData {
 			_initProperty('site_whitelist', []);
 			_initProperty('surrogates', {});
 			_initProperty('version_history', []);
-			_initProperty('login_info', {
-				logged_in: false,
-				email: '',
-				user_token: '',
-				decoded_user_token: {},
-				is_validated: false
-			});
+			_initProperty('account', null);
 		});
 	}
 

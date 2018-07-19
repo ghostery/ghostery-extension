@@ -24,7 +24,7 @@ import Policy from './Policy';
 import tabInfo from './TabInfo';
 import abtest from './ABTest';
 import rewards from './Rewards';
-import { pushUserSettings, buildUserSettings } from '../utils/accounts';
+import account from './Account';
 import { getActiveTab, flushChromeMemoryCache } from '../utils/utils';
 import { objectEntries, log } from '../utils/common';
 
@@ -151,7 +151,7 @@ class PanelData {
 
 		if (syncSetDataChanged) {
 			// Push conf changes to the server
-			pushUserSettings({ conf: buildUserSettings() });
+			account.saveUserSettings();
 		}
 
 		if (otherDataChanged) {
@@ -169,8 +169,6 @@ class PanelData {
 	get panelView() {
 		this._panelView = {
 			panel: {
-				decoded_user_token: this._confData.get('decoded_user_token'),
-				email: this._confData.get('email'),
 				enable_ad_block: this._confData.get('enable_ad_block'),
 				enable_anti_tracking: this._confData.get('enable_anti_tracking'),
 				enable_smart_block: this._confData.get('enable_smart_block'),
@@ -178,9 +176,7 @@ class PanelData {
 				is_expanded: this._confData.get('is_expanded'),
 				is_expert: this._confData.get('is_expert'),
 				is_android: globals.BROWSER_INFO.os === 'android',
-				is_validated: this._confData.get('is_validated'),
 				language: this._confData.get('language'),
-				logged_in: this._confData.get('logged_in'),
 				reload_banner_status: this._confData.get('reload_banner_status'),
 				trackers_banner_status: this._confData.get('trackers_banner_status'),
 
@@ -188,6 +184,8 @@ class PanelData {
 				smartBlock: this._trackerData.get('smartBlock'),
 				tab_id: this._trackerData.get('tab_id'),
 				unread_offer_ids: rewards.unreadOfferIds,
+
+				account: this._confData.get('account')
 			},
 			summary: this.summaryView,
 			blocking: this._confData.get('is_expert') ? this.blockingView : false,
@@ -268,8 +266,6 @@ class PanelData {
 			enable_human_web: this._confData.get('enable_human_web'),
 			enable_offers: this._confData.get('enable_offers'),
 			enable_metrics: this._confData.get('enable_metrics'),
-			first_name: this._confData.get('first_name'),
-			last_name: this._confData.get('last_name'),
 			hide_alert_trusted: this._confData.get('hide_alert_trusted'),
 			ignore_first_party: this._confData.get('ignore_first_party'),
 			notify_library_updates: this._confData.get('notify_library_updates'),
@@ -285,7 +281,11 @@ class PanelData {
 			show_tracker_urls: this._confData.get('show_tracker_urls'),
 			toggle_individual_trackers: this._confData.get('toggle_individual_trackers'),
 			language: this._confData.get('language'), // required for the setup page that does not have access to panelView data
+			loggedIn: this._confData.get('loggedIn'),
+			firstName: this._confData.get('firstName'),
+			lastName: this._confData.get('lastName'),
 		};
+
 		return this._settingsView;
 	}
 
@@ -294,15 +294,12 @@ class PanelData {
 	 * @private
 	 */
 	_buildConfData() {
-		const { login_info } = conf;
 		this._confData
 			.set('alert_bubble_pos', conf.alert_bubble_pos)
 			.set('alert_bubble_timeout', conf.alert_bubble_timeout)
 			.set('block_by_default', conf.block_by_default)
 			.set('bugs_last_updated', conf.bugs_last_updated)
 			.set('categories', this._buildGlobalCategories())
-			.set('decoded_user_token', login_info.decoded_user_token)
-			.set('email', login_info.email)
 			.set('enable_ad_block', conf.enable_ad_block)
 			.set('enable_anti_tracking', conf.enable_anti_tracking)
 			.set('enable_autoupdate', conf.enable_autoupdate)
@@ -312,15 +309,11 @@ class PanelData {
 			.set('enable_metrics', conf.enable_metrics)
 			.set('enable_offers', conf.enable_offers)
 			.set('enable_smart_block', conf.enable_smart_block)
-			.set('first_name', (login_info.decoded_user_token && login_info.decoded_user_token.ClaimFirstName))
 			.set('hide_alert_trusted', conf.hide_alert_trusted)
 			.set('ignore_first_party', conf.ignore_first_party)
-			.set('is_validated', login_info.is_validated)
 			.set('is_expanded', conf.is_expanded)
 			.set('is_expert', conf.is_expert)
 			.set('language', conf.language)
-			.set('last_name', (login_info.decoded_user_token && login_info.decoded_user_token.ClaimLastName))
-			.set('logged_in', login_info.logged_in)
 			.set('notify_library_updates', conf.notify_library_updates)
 			.set('notify_upgrade_updates', conf.notify_upgrade_updates)
 			.set('offer_human_web', !IS_EDGE)
@@ -340,7 +333,8 @@ class PanelData {
 			.set('site_whitelist', conf.site_whitelist)
 			.set('toggle_individual_trackers', conf.toggle_individual_trackers)
 			.set('trackers_banner_status', conf.trackers_banner_status)
-			.set('expand_all_trackers', conf.expand_all_trackers);
+			.set('expand_all_trackers', conf.expand_all_trackers)
+			.set('account', conf.account);
 	}
 
 	/**

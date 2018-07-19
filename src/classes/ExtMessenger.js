@@ -1,4 +1,5 @@
 import Spanan from 'spanan';
+import { log } from '../utils/common';
 
 export class ExtMessenger {
 	addListener(fn) {
@@ -51,7 +52,7 @@ export default class KordInjector {
 			return;
 		}
 		if (!this.moduleWrappers.has(message.moduleName)) {
-			console.error('unhandled message', message);
+			log('unhandled message', message);
 		}
 		this.moduleWrappers.get(message.moduleName).handleMessage(message);
 	}

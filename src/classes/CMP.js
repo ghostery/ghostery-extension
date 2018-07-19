@@ -43,7 +43,7 @@ class CMP {
 			&install_date=${encodeURIComponent(conf.install_date)}
 			&ir=${encodeURIComponent(conf.install_random_number)}
 			&gv=${encodeURIComponent(EXTENSION_VERSION)}
-			&si=${encodeURIComponent(conf.login_info.logged_in ? '1' : '0')}
+			&si=${encodeURIComponent(conf.account ? '1' : '0')}
 			&ua=${encodeURIComponent(BROWSER_INFO.name)}
 			&lc=${encodeURIComponent(conf.last_cmp_date)}
 			&v=${encodeURIComponent(conf.cmp_version)}
