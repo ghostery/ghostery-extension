@@ -1,0 +1,57 @@
+/**
+ * Subscribe Panel Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+#content-subscribe {
+	position: absolute;
+	height: 479px;
+	width: 100%;
+	.badge {
+		display: block;
+		margin: 45px auto 35px auto;
+	}
+	.pitch-container {
+		width: 100%;
+		text-align: center;
+		padding-left: 120px;
+		padding-right: 120px;
+		.pitch-text {
+			font-size: 18px;
+			font-weight: bold;
+		}
+		.pitch-learn-more {
+			display: block;
+			font-size: 14px; 
+			font-weight: bold;
+			color: $ghosty-blue;
+			text-decoration: underline;
+		}
+		.pitch-become-supporter {
+			display: block;
+			margin-top: 20px;
+			margin-bottom: 20px;
+			background-color: $ghosty-blue;
+			box-shadow: 0px 1px 10px 0px rgba(0,0,0,0.20);
+			border-radius: 4px;
+			line-height: 40px;
+			font-size: 16px; 
+			font-weight: bold;
+			color: $white;
+		}
+		.pitch-already-supporter {
+			font-size: 14px;
+			font-weight: normal;
+			color: $ghosty-blue;
+			text-decoration: underline;
+		}
+	}
+}
