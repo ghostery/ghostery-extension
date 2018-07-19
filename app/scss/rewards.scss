@@ -151,15 +151,16 @@
 
 		.reward-content-img {
 			height: 120px;
-			// margin-top: 8px;
 			width: 247px;
 			display: flex;
 			align-items: center;
 
-			img {
-				width: 100%;
+			.img {
 				height: 100%;
-				object-fit: contain;
+				width: 100%;
+				background-repeat: no-repeat;
+				background-size: cover;
+				background-position: center;
 			}
 		}
 
