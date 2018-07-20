@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-#content-subscribe {
+.content-subscription {
 	position: absolute;
 	height: 479px;
 	width: 100%;
@@ -53,5 +53,15 @@
 			color: $ghosty-blue;
 			text-decoration: underline;
 		}
+	}
+	.ThemesToggleSlider input:checked + .ToggleSlider__slider {
+		background-color: #8FC8DF !important;
+	}
+	.ThemesToggleSlider input:focus + .ToggleSlider__slider {
+		box-shadow: 0 0 1px #2196f3 !important;
+	}
+	.ThemesToggleSlider input:checked + .ToggleSlider__slider + .ToggleSlider__slider_circle {
+		background-color: #2092BF !important;
+		border-color: #2092BF !important;
 	}
 }

@@ -26,17 +26,17 @@ const IS_CLIQZ = (globals.BROWSER_INFO.name === 'cliqz');
 const SubscriptionThemes = (props) => {
 	const { subscriptionData } = props;
 	return (
-		<div className="s-tabs-panel">
+		<div className="content-subscription s-tabs-panel">
 			<div className="row">
 				<div className="columns">
-					<h3>{ t('subscription_themes_title') }</h3>
+					<h1>{ t('subscription_themes_title') }</h1>
 					<div>
 						<span className="flex-container align-middle">
 							<span className="Subscription-slider-label">
 								{t('subscription_midnight_theme')}
 							</span>
 							<ToggleSlider
-								className="display-inline-block"
+								className="ThemesToggleSlider"
 								isChecked="true"
 								onChange={props.toggleThemes}
 							/>
