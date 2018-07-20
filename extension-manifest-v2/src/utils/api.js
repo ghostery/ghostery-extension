@@ -115,7 +115,7 @@ class Api {
 
 	getCsrfCookie = (csrfDomain = this.config.CSRF_DOMAIN) => new Promise((resolve, reject) => {
 		chrome.cookies.get({
-			url: `https://${csrfDomain}.com`, // ghostery.com || ghosterystage.com
+			url: `https://${csrfDomain}.com`,
 			name: 'csrf_token',
 		}, (cookie) => {
 			if (!cookie) {
