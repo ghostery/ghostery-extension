@@ -1352,6 +1352,7 @@ function initializeEventListeners() {
 
 	// Fired when panel is disconnected
 	chrome.runtime.onConnect.addListener((port) => {
+		console.log('chrome.runtime.onConnect', port);
 		if (port && port.name === 'rewardsPanelPort') {
 			rewards.panelPort = port;
 			rewards.panelPort.onDisconnect.addListener(rewards.panelHubClosedListener);

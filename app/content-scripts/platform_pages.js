@@ -19,7 +19,7 @@
 import msgModule from './utils/msg';
 
 const msg = msgModule('platform_pages');
-const { sendMessage, sendMessageToBackground } = msg;
+const { sendMessage, sendMessageInPromise } = msg;
 /**
  * Use to call init to initialize functionality
  * @var  {Object} initialized to an object with init method as its property
@@ -33,6 +33,13 @@ const PlatformPagesContentScript = (function (window, document) {
 	const _initialize = function () {
 		// alert background that this content script has loaded
 		sendMessage('platformPageLoaded');
+		window.addEventListener("account.logout", () => {
+			sendMessageInPromise('account.logout')
+				.then(() => {
+					const logoutSuccesEvt = new CustomEvent('logoutSuccess');
+					window.dispatchEvent(logoutSuccesEvt);
+				});
+		});
 	};
 
 	return {
@@ -47,6 +54,13 @@ const PlatformPagesContentScript = (function (window, document) {
 	};
 }(window, document));
 
-window.addEventListener('load', () => {
+if (document.readyState === 'complete'
+	|| document.readyState === 'loaded'
+	|| document.readyState === 'interactive'
+) {
 	PlatformPagesContentScript.init();
-});
+} else {
+	window.addEventListener('load', () => {
+		PlatformPagesContentScript.init();
+	});
+}
