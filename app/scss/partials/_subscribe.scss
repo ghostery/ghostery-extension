@@ -54,14 +54,33 @@
 			text-decoration: underline;
 		}
 	}
-	.ThemesToggleSlider input:checked + .ToggleSlider__slider {
-		background-color: #8FC8DF !important;
+	.themes-slider {
+		input:checked + .ToggleSlider__slider {
+				background-color: #8FC8DF !important;
+		}
+		input:focus + .ToggleSlider__slider {
+				box-shadow: 0 0 1px #2196f3 !important;
+		}	
+		input:checked + .ToggleSlider__slider + .ToggleSlider__slider_circle {
+				background-color: #2092BF !important;
+				border-color: #2092BF !important;
+		} 
+	}	
+	.themes-slider-label {
+		font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+		font-size: 12px;
+		font-weight: 700;
+		line-height: 12px;
+		text-align: left;
+		text-size-adjust: 100%;
+		-webkit-font-smoothing: antialiased;
+		padding-right: 20px !important;
 	}
-	.ThemesToggleSlider input:focus + .ToggleSlider__slider {
-		box-shadow: 0 0 1px #2196f3 !important;
+	.themes-slider-container {
+		padding-top: 10px !important;
 	}
-	.ThemesToggleSlider input:checked + .ToggleSlider__slider + .ToggleSlider__slider_circle {
-		background-color: #2092BF !important;
-		border-color: #2092BF !important;
+	.column-subscription {
+		padding-left: 30px !important;
+		padding-right: 30px !important;
 	}
 }

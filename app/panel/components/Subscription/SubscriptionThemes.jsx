@@ -28,15 +28,15 @@ const SubscriptionThemes = (props) => {
 	return (
 		<div className="content-subscription s-tabs-panel">
 			<div className="row">
-				<div className="columns">
+				<div className="columns column-subscription">
 					<h1>{ t('subscription_themes_title') }</h1>
 					<div>
-						<span className="flex-container align-middle">
-							<span className="Subscription-slider-label">
+						<span className="flex-container align-middle themes-slider-container">
+							<span className="themes-slider-label">
 								{t('subscription_midnight_theme')}
 							</span>
 							<ToggleSlider
-								className="ThemesToggleSlider"
+								className="themes-slider"
 								isChecked="true"
 								onChange={props.toggleThemes}
 							/>

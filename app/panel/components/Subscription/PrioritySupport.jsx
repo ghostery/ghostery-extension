@@ -27,10 +27,10 @@ const IS_CLIQZ = (globals.BROWSER_INFO.name === 'cliqz');
 const PrioritySupport = (props) => {
 	const { subscriptionData } = props;
 	return (
-		<div className="s-tabs-panel">
+		<div className="content-subscription s-tabs-panel">
 			<div className="row">
-				<div className="columns">
-				<h3>{ t('subscription_priority_support_title') }</h3>
+				<div className="columns column-subscription">
+				<h1>{ t('subscription_priority_support_title') }</h1>
 				</div>
 			</div>
 		</div>
