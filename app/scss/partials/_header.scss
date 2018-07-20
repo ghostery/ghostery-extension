@@ -91,7 +91,7 @@
 		left: 363px !important;
 		visibility: visible;
 		ul.menu {background: none;}
-		li.menu-option-base {
+		.menu-option-base {
 			draggable: false;
 			position: relative;
 			cursor: default;
@@ -102,8 +102,20 @@
 				top: 50%;
 				transform: translateY(-50%);
 			}
-			.menu-icon {fill: $light-gray;}
-			.supporter-icon {fill: $light-gray; stroke: $light-gray;}
+			.menu-icon {fill: $light-gray; stroke:  $light-gray;}
+			.supporter-icon {fill: #7b7b7b; stroke:  #7b7b7b;}
+			.about-icon {
+				fill: none;
+				path {
+					stroke: $light-gray;
+					stroke-width: 2;
+				}
+				text {
+					font-size: 11px;
+					font-weight:400;
+					fill: $light-gray;
+				}
+			}
 			span {
 				@include user-select(none);
 				font-size: 14px;
@@ -116,41 +128,25 @@
 				margin-left: 20px;
 				overflow-y: hidden;
 			}
+			a {
+				display: block;
+				padding: 0;
+			}
 		}
 
-		li.menu-option {
+		.menu-option {
 			@extend .menu-option-base;
 			@extend %pointer;
-			.menu-icon {fill: #e7ecee;}
-			.supporter-icon {fill: #e7ecee; stroke:  #e7ecee;}
-			.about-icon {
-				fill: none;
-				path {
-					stroke: #e7ecee;
-					stroke-width: 2;
-				}
-				text {
-					font-size: 11px;
-					font-weight:400;
-					fill: #e7ecee;
-				}
-			}
+			.supporter-icon {fill: $light-gray; stroke:  $light-gray;}
 			&:hover {
-				span {color: $ghosty-blue;}
-				.menu-icon {fill: $ghosty-blue;}
+				span {color: $ghosty-blue}
+				.menu-icon,.supporter-icon {fill: $ghosty-blue; stroke: $ghosty-blue;}
 				.about-icon {
 					path, text {stroke: $ghosty-blue;}
-				}
-				.supporter-icon {
-					path { fill: $ghosty-blue; stroke: $ghosty-blue;}
 				}
 			}
 			span {
 				color: #ffffff;
-			}
-			a {
-				display: block;
-				padding: 0;
 			}
 		}
 		.account-info {
