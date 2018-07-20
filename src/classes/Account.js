@@ -168,6 +168,99 @@ class Account {
 			});
 	}
 
+	migrate = () => (
+		new Promise((resolve, reject) => {
+			const legacyLoginInfoKey = 'login_info';
+			chrome.storage.local.get(legacyLoginInfoKey, (items) => {
+				if (chrome.runtime.lastError) {
+					resolve(new Error(chrome.runtime.lastError));
+					return;
+				}
+
+				const { login_info } = items;
+				if (!items || !login_info) {
+					resolve();
+					return;
+				}
+
+				// ensure we have all the necessary info
+				const { decoded_user_token, user_token } = login_info;
+				if (!decoded_user_token || !user_token) {
+					chrome.storage.local.remove(legacyLoginInfoKey, () => resolve());
+					return;
+				}
+				const {
+					UserId, csrf_token, RefreshToken, exp
+				} = decoded_user_token;
+				if (!UserId || !csrf_token || !RefreshToken || !exp) {
+					chrome.storage.local.remove(legacyLoginInfoKey, () => resolve());
+					return;
+				}
+
+				// set cookies
+				Promise.all([
+					this._setLoginCookie({
+						name: 'refresh_token',
+						value: RefreshToken,
+						expirationDate: exp + 604800, // + 7 days
+						httpOnly: true,
+					}),
+					this._setLoginCookie({
+						name: 'access_token',
+						value: user_token,
+						expirationDate: exp,
+						httpOnly: true,
+					}),
+					this._setLoginCookie({
+						name: 'csrf_token',
+						value: csrf_token,
+						expirationDate: exp,
+						httpOnly: false,
+					}),
+					this._setLoginCookie({
+						name: 'user_id',
+						value: UserId,
+						expirationDate: 1893456000, // Tue Jan 1 2030 00:00:00 GMT. @TODO is this the best way of hanlding this?
+						httpOnly: false,
+					})
+				]).then(() => {
+					// login
+					this._setAccountInfo(UserId);
+					chrome.storage.local.remove(legacyLoginInfoKey, () => resolve());
+				}).catch((err) => {
+					resolve(err);
+				});
+			});
+		})
+	)
+
+	_setLoginCookie = details => (
+		new Promise((resolve, reject) => {
+			const {
+				name, value, expirationDate, httpOnly
+			} = details;
+			if (!name || !value) {
+				reject(new Error(`One or more required values missing: ${JSON.stringify({ name, value })}`));
+				return;
+			}
+			chrome.cookies.set({
+				name,
+				value,
+				url: `https://${GHOSTERY_DOMAIN}.com`,
+				domain: `.${GHOSTERY_DOMAIN}.com`,
+				expirationDate,
+				secure: true,
+				httpOnly,
+			}, (cookie) => {
+				if (chrome.runtime.lastError || cookie === null) {
+					reject(new Error(`Error setting cookie ${JSON.stringify(details)}: ${chrome.runtime.lastError}`));
+					return;
+				}
+				resolve(cookie);
+			});
+		})
+	)
+
 	_getUserID = () => (
 		new Promise((resolve, reject) => {
 			if (conf.account === null) {
@@ -202,7 +295,7 @@ class Account {
 	_getUserIDFromCookie = () => (
 		new Promise((resolve, reject) => {
 			chrome.cookies.get({
-				url: `https://${GHOSTERY_DOMAIN}.com`, // ghostery.com || ghosterystage.com
+				url: `https://${GHOSTERY_DOMAIN}.com`,
 				name: 'user_id',
 			}, (cookie) => {
 				if (cookie) {
