@@ -1,5 +1,18 @@
-import { sendMessage } from '../utils/msg';
-import { addToArray, removeFromArray } from '../utils/utils';
+/**
+ * Summary Action creators
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+import { sendMessage } from '../../panel/utils/msg';
+import { addToArray, removeFromArray } from '../../panel/utils/utils';
 
 function getPageHostFromSummary(summary) {
 	return summary.pageHost.toLowerCase().replace(/^(http[s]?:\/\/)?(www\.)?/, '');

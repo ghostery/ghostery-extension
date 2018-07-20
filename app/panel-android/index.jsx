@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 /**
- * @namespace  PanelAndroidUIClasses
+ * @namespace  PanelAndroidClasses
  */
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
