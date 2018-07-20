@@ -375,6 +375,8 @@ class EventHandlers {
 			this._throttleButtonUpdate();
 			return { cancel: false };
 		}
+		// add the bugId to the details object. This can then be read by other handlers on this pipeline.
+		details.ghosteryBug = bug_id;
 
 		/* ** SMART BLOCKING - Breakage ** */
 		// allow first party trackers
