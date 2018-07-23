@@ -1567,6 +1567,13 @@ function initializeGhosteryModules() {
 		surrogatedb.init(globals.JUST_UPGRADED),
 		cliqzStartup,
 	]).then(() => {
+		if (!IS_EDGE && !IS_CLIQZ) {
+			abtest.fetch().then(() => {
+				setupABTest();
+			}).catch((err) => {
+				log('cliqzStartup abtest fetch error', err);
+			});
+		}
 		// initialize panel data
 		panelData.init();
 	});
