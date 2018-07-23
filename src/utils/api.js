@@ -1,4 +1,4 @@
-export const _getJSONAPIErrorsObject = e => [{ title: 'Something went wrong.', detail: e.toString() }];
+export const _getJSONAPIErrorsObject = e => [{ title: e.message || '', detail: e.message || '', code: e.code || e.message || '' }];
 
 class Api {
 	constructor() {
@@ -6,9 +6,12 @@ class Api {
 		this.tokenRefreshedEventType = 'tokenRefreshed';
 	}
 
-	init(config, handlers) {
+	init(config, opts) {
 		this.config = config;
-		this.handlers = handlers;
+		const { errorHandler } = opts;
+		if (typeof errorHandler === 'function') {
+			this._errorHandler = errorHandler;
+		}
 	}
 
 	_refreshToken() {
@@ -32,11 +35,11 @@ class Api {
 	}
 
 	_sendReq(method, path, body) {
-		return this.getCsrfCookie()
+		return this._getCsrfCookie()
 			.then(cookie => fetch(`${this.config.ACCOUNT_SERVER}${path}`, {
 				method,
 				headers: {
-					'Content-Type': 'application/vnd.api+json',
+					'Content-Type': Api.JSONAPI_CONTENT_TYPE,
 					'Content-Length': Buffer.byteLength(JSON.stringify(body)),
 					'X-CSRF-Token': cookie,
 				},
@@ -66,9 +69,7 @@ class Api {
 		return new Promise((resolve, reject) => {
 			this._sendReq(method, path, body)
 				.then(this._processResponse)
-				.then((data) => {
-					resolve(data);
-				})
+				.then(dataFirstTry => resolve(dataFirstTry))
 				.catch((data) => {
 					let shouldRefresh = false;
 					if (data && data.errors) {
@@ -87,44 +88,48 @@ class Api {
 								}));
 								const { status } = res;
 								if (status >= 400) {
-									res.json().then((data2) => {
-										if (this.handlers.errorHandler) {
-											return this.handlers.errorHandler(data2.errors);
-										}
-										return reject(data2.errors);
-									}).catch((err) => {
-										reject(_getJSONAPIErrorsObject(err));
-									});
-									return;
+									res.json().then(data2 => (
+										this._errorHandler(data2.errors)
+											.then(() => resolve(data2))
+											.catch(err => reject(err))
+									)).catch(err => reject(err));
 								}
 								this._sendReq(method, path, body)
 									.then(this._processResponse)
-									.then((data3) => {
-										resolve(data3);
-									})
-									.catch((err) => {
-										reject(_getJSONAPIErrorsObject(err));
+									.then(dataSecondTry => resolve(dataSecondTry))
+									.catch((data3) => {
+										this._errorHandler(data3.errors)
+											.then(() => resolve(data3))
+											.catch(err => reject(err));
 									});
 							});
 					} else {
-						reject(_getJSONAPIErrorsObject(data));
+						this._errorHandler(data.errors)
+							.then(() => resolve(data))
+							.catch(err => reject(err));
 					}
 				});
 		});
 	}
 
-	getCsrfCookie = (csrfDomain = this.config.CSRF_DOMAIN) => new Promise((resolve, reject) => {
-		chrome.cookies.get({
-			url: `https://${csrfDomain}.com`,
-			name: 'csrf_token',
-		}, (cookie) => {
-			if (!cookie) {
-				reject(new Error('CSRF Token cookie not found'));
-				return;
-			}
-			resolve(cookie.value);
-		});
-	});
+	_getCsrfCookie = (csrfDomain = this.config.CSRF_DOMAIN) => (
+		new Promise((resolve, reject) => {
+			chrome.cookies.get({
+				url: `https://${csrfDomain}.com`,
+				name: 'csrf_token',
+			}, (cookie) => {
+				if (cookie === null) {
+					return reject({ errors: _getJSONAPIErrorsObject(new Error(Api.ERROR_CSRF_COOKIE_NOT_FOUND)) }); // eslint-disable-line prefer-promise-reject-errors
+				}
+				return resolve(cookie.value);
+			});
+		})
+	)
+
+	_errorHandler = errors => Promise.resolve(errors)
+
+	static get ERROR_CSRF_COOKIE_NOT_FOUND() { return '1'; }
+	static get JSONAPI_CONTENT_TYPE() { return 'application/vnd.api+json'; }
 
 	get = (type, id, include = '') => {
 		if (!id) { return Promise.reject(new Error('id is missing')); }
