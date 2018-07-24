@@ -55,6 +55,8 @@ class Globals {
 		this.CDN_SUB_DOMAIN = this.DEBUG ? 'staging-cdn' : 'cdn';
 		this.APPS_SUB_DOMAIN = this.DEBUG ? 'staging-apps' : 'apps';
 		this.GCACHE_SUB_DOMAIN = this.DEBUG ? 'staging-gcache' : 'gcache';
+		this.AUTH_SERVER = `https://consumerapi.${this.GHOSTERY_DOMAIN}.com`;
+		this.ACCOUNT_SERVER = `https://accountapi.${this.GHOSTERY_DOMAIN}.com`;
 
 		// data stores
 		this.REDIRECT_MAP = new Map();

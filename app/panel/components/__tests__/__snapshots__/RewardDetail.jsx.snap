@@ -11,9 +11,13 @@ exports[`app/panel/components/BuildingBlocks/RewardDetail.jsx Snapshot tests wit
       className="RewardDetail__logo"
       src="https://www.ghostery.com/wp-content/themes/ghostery/images/ghostery_logo.svg"
     />
-    <img
+    <div
       className="RewardDetail__picture"
-      src="https://www.ghostery.com/wp-content/uploads/2017/12/simple-detailed-1024x833.png"
+      style={
+        Object {
+          "backgroundImage": "url('https://www.ghostery.com/wp-content/uploads/2017/12/simple-detailed-1024x833.png')",
+        }
+      }
     />
   </div>
   <div
@@ -86,9 +90,13 @@ exports[`app/panel/components/BuildingBlocks/RewardDetail.jsx Snapshot tests wit
       className="RewardDetail__logo"
       src="https://www.ghostery.com/wp-content/themes/ghostery/images/ghostery_logo.svg"
     />
-    <img
+    <div
       className="RewardDetail__picture"
-      src="https://www.ghostery.com/wp-content/uploads/2017/12/simple-detailed-1024x833.png"
+      style={
+        Object {
+          "backgroundImage": "url('https://www.ghostery.com/wp-content/uploads/2017/12/simple-detailed-1024x833.png')",
+        }
+      }
     />
   </div>
   <div
@@ -140,9 +148,13 @@ exports[`app/panel/components/BuildingBlocks/RewardDetail.jsx Snapshot tests wit
       className="RewardDetail__logo"
       src="https://www.ghostery.com/wp-content/themes/ghostery/images/ghostery_logo.svg"
     />
-    <img
+    <div
       className="RewardDetail__picture"
-      src="https://www.ghostery.com/wp-content/uploads/2017/12/simple-detailed-1024x833.png"
+      style={
+        Object {
+          "backgroundImage": "url('https://www.ghostery.com/wp-content/uploads/2017/12/simple-detailed-1024x833.png')",
+        }
+      }
     />
   </div>
   <div
@@ -207,9 +219,13 @@ exports[`app/panel/components/BuildingBlocks/RewardDetail.jsx Snapshot tests wit
       className="RewardDetail__logo"
       src="https://www.ghostery.com/wp-content/themes/ghostery/images/ghostery_logo.svg"
     />
-    <img
+    <div
       className="RewardDetail__picture"
-      src="https://www.ghostery.com/wp-content/uploads/2017/12/simple-detailed-1024x833.png"
+      style={
+        Object {
+          "backgroundImage": "url('https://www.ghostery.com/wp-content/uploads/2017/12/simple-detailed-1024x833.png')",
+        }
+      }
     />
   </div>
   <div
@@ -278,9 +294,13 @@ exports[`app/panel/components/BuildingBlocks/RewardDetail.jsx Snapshot tests wit
       className="RewardDetail__logo"
       src="https://www.ghostery.com/wp-content/themes/ghostery/images/ghostery_logo.svg"
     />
-    <img
+    <div
       className="RewardDetail__picture"
-      src="https://www.ghostery.com/wp-content/uploads/2017/12/simple-detailed-1024x833.png"
+      style={
+        Object {
+          "backgroundImage": "url('https://www.ghostery.com/wp-content/uploads/2017/12/simple-detailed-1024x833.png')",
+        }
+      }
     />
   </div>
   

@@ -1996,7 +1996,7 @@
 		"description": ""
 	},
 	"rewards_expires_in": {
-		"message": "Läuft ab in $COUNT$ $TYPE$",
+		"message": "Läuft in $COUNT$ $TYPE$ ab",
 		"description": "example: Expires in 8 minutes. TYPE will be rewards_expires_in_TYPE listed below.",
 		"placeholders": {
 			"count": {

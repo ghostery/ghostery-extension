@@ -153,10 +153,20 @@ const config = {
 					loader: 'html-loader'
 				}
 			},{
-				test : /\.(jsx|js)?/,
+				test: /\.(jsx|js)?/,
 				include : [PANEL_DIR, SETUP_DIR, LICENSES_DIR, CONTENT_SCRIPTS_DIR, REWARDS_DIR],
 				use: {
 					loader: 'babel-loader'
+				}
+			},{
+				test: /\.js/,
+				include: [SRC_DIR],
+				use: {
+					loader: 'babel-loader',
+					options: {
+						babelrc: false,
+						plugins: ['transform-class-properties']
+					}
 				}
 			},{
 				test: /\.scss?/,
