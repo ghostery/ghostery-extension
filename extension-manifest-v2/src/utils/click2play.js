@@ -162,7 +162,7 @@ export function buildRedirectC2P(requestId, redirectUrls, app_id) {
  * @memberOf BackgroundUtils
  *
  * @param  {number} 	app_id 			tracker id
- * @param  {string} tab_host 		host of the tab url
+ * @param  {string} 	tab_host 		host of the tab url
  */
 export function allowAllwaysC2P(app_id, tab_host) {
 	// Remove this tracker from blocked list
