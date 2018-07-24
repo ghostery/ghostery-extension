@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import ClassNames from 'classnames';
 import { computeTimeDelta } from '../../utils/utils';
@@ -86,7 +86,6 @@ class RewardListItem extends React.Component {
 			unread,
 			disabled,
 			logoUrl,
-			pictureUrl
 		} = this.props;
 		const itemClassName = ClassNames('RewardListItem', 'row', {
 			'RewardListItem--greyscale': disabled,

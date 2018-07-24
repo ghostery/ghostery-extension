@@ -24,7 +24,7 @@ import AccountSuccess from '../components/AccountSuccess';
  * @todo  We are not using ownProps, so we better not specify it explicitly,
  * in this case it won't be passed by React (see https://github.com/reactjs/react-redux/blob/master/docs/api.md).
  */
-const mapStateToProps = (state, ownProps) => Object.assign({}, state.accountSuccess, {
+const mapStateToProps = state => Object.assign({}, state.accountSuccess, {
 	// get properties from panel redux store
 	email: state.panel.email,
 	is_expert: state.panel.is_expert,

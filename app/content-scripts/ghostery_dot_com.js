@@ -37,7 +37,7 @@ const { onMessage } = chrome.runtime;
  * Use this variable to call init and initialize functionality of this script.
  * @var {Object}   	initialized with an object with init as its property
  */
-const GhosteryDotComContentScript = (function (window, document) {
+const GhosteryDotComContentScript = (function (window) {
 	/**
 	 * Update https://www.ghostery.com/Products page to signify
 	 * that Ghoster extension is installed.
@@ -94,7 +94,7 @@ const GhosteryDotComContentScript = (function (window, document) {
 			id: app_id
 		});
 
-		onMessage.addListener((request, sender, sendResponse) => {
+		onMessage.addListener((request) => {
 			if (request.source === 'cliqz-content-script') {
 				return false;
 			}
@@ -167,7 +167,7 @@ const GhosteryDotComContentScript = (function (window, document) {
 			_initialize();
 		}
 	};
-}(window, document));
+}(window));
 
 // Run our init on DOMReady
 $(document).ready(() => {

@@ -13,7 +13,7 @@
 
 /* eslint no-useless-concat: 0 */
 
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
 import ClickOutside from './BuildingBlocks/ClickOutside';
@@ -93,7 +93,7 @@ class HeaderMenu extends React.Component {
 				url,
 				become_active: true,
 			});
-		}).catch((err) => {
+		}).catch(() => {
 			log('Error gathering page data');
 		});
 		window.close();

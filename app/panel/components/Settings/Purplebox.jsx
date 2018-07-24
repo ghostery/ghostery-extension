@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 /**
  * @class Implement Purplebox subview as a React component.
  * The view allows to set parameters for Ghostery purplebox.

@@ -133,7 +133,6 @@ class BrowserButton {
 	 */
 	_getIconCount(tab) {
 		const tabId = tab.id;
-		const tabUrl = tab.url;
 		let	trackerCount = '';
 		let alert = false;
 
@@ -183,7 +182,7 @@ class BrowserButton {
 	 * @return {Promise}       the number of trackers as a Promise
 	 */
 	_getAntiTrackCount(tabId) {
-		return new Promise((resolve, reject) => {
+		return new Promise((resolve) => {
 			if (!conf.enable_anti_tracking || !antitracking.background) {
 				resolve(0);
 			}
@@ -199,7 +198,7 @@ class BrowserButton {
 					}
 				}
 				resolve(totalUnsafeCount);
-			}).catch((err) => {
+			}).catch(() => {
 				// if we encounter an error, return 0
 				resolve(0);
 			});

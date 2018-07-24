@@ -14,8 +14,6 @@
  */
 
 import _ from 'underscore';
-import conf from './Conf';
-import { getTab } from '../utils/utils';
 import foundBugs from './FoundBugs';
 /**
  * Class for handling request latency data.
@@ -53,7 +51,7 @@ class Latency {
 		}
 
 		const {
-			start_time, bug_id, page_url, incognito
+			start_time, bug_id
 		} = this.latencies[request_id][details.url];
 
 		delete this.latencies[request_id][details.url];
@@ -61,10 +59,8 @@ class Latency {
 			delete this.latencies[request_id];
 		}
 
-		const response_code = details.statusCode || -1;
 		const blocked = details.error === 'net::ERR_BLOCKED_BY_CLIENT' || (details.redirectUrl && !details.redirectUrl.startsWith('http'));
 		let latency = Math.round(details.timeStamp - start_time);
-		let from_cache = details.fromCache ? 1 : 0;
 
 		// check for slow tracker issue
 		const appWithLatencyId = foundBugs.checkLatencyIssue(tab_id, bug_id, latency);
@@ -73,7 +69,6 @@ class Latency {
 		// if they want, they can look at 'bl' to see if blocked by Ghostery
 		if (blocked) {
 			latency = -1;
-			from_cache = -1;
 		}
 
 		return appWithLatencyId;
