@@ -35,7 +35,7 @@ const PlatformPagesContentScript = (function (window, document) {
 		let logoutLink = document.getElementsByClassName('logout-link');
 		logoutLink = logoutLink ? logoutLink[0] : null;
 		if (logoutLink) {
-			logoutLink.addEventListener('click', (e) => {
+			logoutLink.addEventListener('click', () => {
 				sendMessageToBackground('userLogout'); // send empty object to log out
 			});
 		}
@@ -45,7 +45,7 @@ const PlatformPagesContentScript = (function (window, document) {
 			let yesButton = cancelDialog.getElementsByClassName('button blue float-right');
 			yesButton = yesButton ? yesButton[0] : null;
 			if (yesButton) {
-				yesButton.addEventListener('click', (e) => {
+				yesButton.addEventListener('click', () => {
 					sendMessageToBackground('userLogout'); // send empty object to log out
 				});
 			}

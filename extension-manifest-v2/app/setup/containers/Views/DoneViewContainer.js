@@ -24,7 +24,7 @@ import * as topContentActions from '../../actions/TopContentActions';
  * @return {function}        this function returns plain object, which will be merged into the component's props
  * @memberof SetupContainers
  */
-const mapStateToProps = (state, ownProps) => Object.assign({});
+const mapStateToProps = () => Object.assign({});
 
 /**
  * Bind the component's action creators using Redux's bindActionCreators.
@@ -33,7 +33,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({});
  * @return {function}          	  to be used as an argument in redux connect call
  * @memberof SetupContainers
  */
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
 	actions: bindActionCreators(Object.assign(
 		navigationActions,
 		topContentActions,

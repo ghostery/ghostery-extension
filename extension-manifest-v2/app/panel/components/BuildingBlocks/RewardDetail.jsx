@@ -11,8 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React, { Component } from 'react';
-import ClassNames from 'classnames';
+import React from 'react';
 import { computeTimeDelta } from '../../utils/utils';
 import { sendMessage } from '../../utils/msg';
 import Tooltip from '../Tooltip';

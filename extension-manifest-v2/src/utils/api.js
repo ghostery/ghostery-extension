@@ -21,7 +21,7 @@ class Api {
 				window.removeEventListener(this.tokenRefreshedEventType, bindedResolve, false);
 				resolve(e.detail);
 			};
-			return new Promise((resolve, reject) => {
+			return new Promise((resolve) => {
 				bindedResolve = _processRefreshTokenEvent.bind(null, resolve);
 				window.addEventListener(this.tokenRefreshedEventType, bindedResolve, false);
 			});

@@ -11,10 +11,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { validateEmail } from '../utils/utils';
-import globals from '../../../src/classes/Globals';
 /**
  * @class Implement Forgot Password view which opens from the link on Sign In panel.
  * @memberof PanelClasses

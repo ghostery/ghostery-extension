@@ -13,7 +13,7 @@
 /**
  * @namespace LicenseClasses
  */
-import React, { Component } from 'react';
+import React from 'react';
 import Markdown from 'react-remarkable';
 /**
  * @class Handles license entry on internal licenses.html page

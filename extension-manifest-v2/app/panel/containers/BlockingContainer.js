@@ -26,7 +26,7 @@ import { showNotification } from '../actions/PanelActions';
  * @todo  We are not using ownProps, so we better not specify it explicitly,
  * in this case it won't be passed by React (see https://github.com/reactjs/react-redux/blob/master/docs/api.md).
  */
-const mapStateToProps = (state, ownProps) => Object.assign({}, state.blocking, {
+const mapStateToProps = state => Object.assign({}, state.blocking, {
 	is_expanded: state.panel.is_expanded,
 	language: state.panel.language,
 	pageHost: state.summary.pageHost,
@@ -42,7 +42,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state.blocking, {
  * @param  {Object} 	ownProps  Blocking view component own props
  * @return {function}          	  to be used as an argument in redux connect call
  */
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
 	actions: bindActionCreators(Object.assign(blockingActions, { updateTrackerCounts, showNotification }), dispatch)
 });
 /**

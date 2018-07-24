@@ -18,7 +18,7 @@ import {
 	SET_OFFER_READ,
 	SEND_SIGNAL
 } from '../constants/constants';
-import { sendMessage, sendRewardMessage } from '../utils/msg';
+import { sendRewardMessage } from '../utils/msg';
 
 const initialState = {
 	rewards: null,

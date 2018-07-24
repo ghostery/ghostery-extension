@@ -41,7 +41,7 @@ export default function (origin) {
 		// from background. See onMessageHandler, HANDLE UNIVERSAL EVENTS HERE
 		// in src/background.js.To be removed, once Edge fixed.
 		if (IS_EDGE) {
-			return new Promise((resolve, reject) => {
+			return new Promise((resolve) => {
 				const messageId = (`EDGE_${window.performance.now()}`).replace('.', '_');
 				onMessage.addListener((request, sender, sendResponse) => {
 					if (messageId === request.name) {
@@ -59,7 +59,7 @@ export default function (origin) {
 				}, () => {});
 			});
 		}
-		return new Promise(((resolve, reject) => {
+		return new Promise(((resolve) => {
 			chrome.runtime.sendMessage({
 				name,
 				message,

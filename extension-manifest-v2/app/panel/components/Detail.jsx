@@ -11,11 +11,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 import { Route } from 'react-router-dom';
 import ClassNames from 'classnames';
 import DetailMenu from './DetailMenu';
-import Summary from '../containers/SummaryContainer';
 import Blocking from '../containers/BlockingContainer';
 import Rewards from '../containers/RewardsContainer';
 /**

@@ -12,7 +12,6 @@
  */
 
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import TopContent from '../components/TopContent';
 
 /**
@@ -22,6 +21,6 @@ import TopContent from '../components/TopContent';
  * @return {function}        this function returns plain object, which will be merged into the component's props
  * @memberof SetupContainers
  */
-const mapStateToProps = (state, ownProps) => Object.assign({}, state.topContent);
+const mapStateToProps = state => Object.assign({}, state.topContent);
 
 export default connect(mapStateToProps)(TopContent);

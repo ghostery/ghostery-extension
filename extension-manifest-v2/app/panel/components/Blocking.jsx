@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 import Categories from './Blocking/Categories';
 import BlockingHeader from './Blocking/BlockingHeader';
 import NotScanned from './BuildingBlocks/NotScanned';
@@ -58,7 +58,7 @@ class Blocking extends React.Component {
 	/**
 	 * Lifecycle event
 	 */
-	componentDidUpdate(prevProps, prevState) {
+	componentDidUpdate(prevProps) {
 		// methods here will run after categories is assigned
 		if (prevProps.filter.type !== this.props.filter.type
 			|| prevProps.filter.name !== this.props.filter.name) {
