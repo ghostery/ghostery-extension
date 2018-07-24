@@ -1535,8 +1535,6 @@ function initializeGhosteryModules() {
 		}
 	}
 
-	// Check CMP right away.
-	cmp.fetchCMPData();
 	// Check CMP and ABTest every hour.
 	setInterval(scheduledTasks, 3600000);
 
@@ -1567,6 +1565,8 @@ function initializeGhosteryModules() {
 		surrogatedb.init(globals.JUST_UPGRADED),
 		cliqzStartup,
 	]).then(() => {
+		// run scheduledTasks on init
+		scheduledTasks();
 		// initialize panel data
 		panelData.init();
 	});
