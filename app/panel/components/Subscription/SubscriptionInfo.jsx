@@ -25,12 +25,18 @@ const IS_CLIQZ = (globals.BROWSER_INFO.name === 'cliqz');
  * @memberOf SubscriptionComponents
  */
 const SubscriptionInfo = (props) => {
-	const { subscriptionData } = props;
+	//const { subscriptionData } = props;
+	const subscriptionData = {};
+	subscriptionData.canceled = "August 5, 2018";
 	return (
 		<div className="content-subscription s-tabs-panel">
 			<div className="row">
 				<div className="columns column-subscription">
-				<h1>{ t('subscription_info_title') }</h1>
+					<h1>{ t('subscription_info_title') }</h1>
+					<div>
+						<span>{`${t('subscription_account_status')}: `}</span>
+						<span>{subscriptionData.canceled ? `${t ('subscription_account_canceled')} ${subscriptionData.canceled}` :  t('subscription_account_active') }</span>
+					</div>
 				</div>
 			</div>
 		</div>

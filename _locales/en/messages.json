@@ -1727,5 +1727,14 @@
 	},
 	"subscription_midnight_theme": {
 		"message": "Midnight Theme"
+	},
+	"subscription_account_status": {
+		"message": "Status"
+	},
+	"subscription_account_active": {
+		"message": "Active"
+	},
+	"subscription_account_canceled": {
+		"message": "Canceled on"
 	}
 }
