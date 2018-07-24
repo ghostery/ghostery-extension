@@ -33,11 +33,11 @@ const PlatformPagesContentScript = (function (window, document) {
 	const _initialize = function () {
 		// alert background that this content script has loaded
 		sendMessage('platformPageLoaded');
-		window.addEventListener("account.logout", () => {
-			sendMessageInPromise('account.logout')
-				.then(() => {
-					const logoutSuccesEvt = new CustomEvent('logoutSuccess');
-					window.dispatchEvent(logoutSuccesEvt);
+		window.addEventListener('getExtId', () => {
+			sendMessageInPromise('getExtId')
+				.then((extId) => {
+					const sendExtId = new CustomEvent('sendExtId', { detail: extId });
+					window.dispatchEvent(sendExtId);
 				});
 		});
 	};

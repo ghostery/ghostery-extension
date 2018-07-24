@@ -213,7 +213,7 @@ class Account {
 	_getUserIDFromCookie = () => (
 		new Promise((resolve, reject) => {
 			chrome.cookies.get({
-				url: `https://${GHOSTERY_DOMAIN}.com`, // ghostery.com || ghosterystage.com
+				url: 'http://localhost', // ghostery.com || ghosterystage.com
 				name: 'user_id',
 			}, (cookie) => {
 				if (cookie) {
