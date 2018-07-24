@@ -31,7 +31,7 @@ class Globals {
 		this.BROWSER_INFO = {
 			displayName: '', name: '', token: '', version: '', os: 'other'
 		};
-		this.IS_CLIQZ = !!((manifest.applications && manifest.applications.gecko && manifest.applications.gecko.update_url));
+		this.IS_CLIQZ = false; // TEMP !!((manifest.applications && manifest.applications.gecko && manifest.applications.gecko.update_url));
 
 		// flags
 		this.JUST_INSTALLED = false;
