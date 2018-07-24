@@ -80,9 +80,11 @@ class Account {
 			if (res.status >= 400) {
 				return res.json();
 			}
-			this._getUserIDFromCookie().then((userID) => {
-				this._setAccountInfo(userID);
-			});
+			this._getUserIDFromCookie()
+				.then((userID) => {
+					log('userID', userID);
+					this._setAccountInfo(userID);
+				});
 			return {};
 		});
 	}
@@ -101,9 +103,10 @@ class Account {
 			if (res.status >= 400) {
 				return res.json();
 			}
-			this._getUserIDFromCookie().then((userID) => {
-				this._setAccountInfo(userID);
-			});
+			this._getUserIDFromCookie()
+				.then((userID) => {
+					this._setAccountInfo(userID);
+				});
 			return {};
 		});
 	}
@@ -287,7 +290,15 @@ class Account {
 	_getUserID = () => (
 		new Promise((resolve, reject) => {
 			if (conf.account === null) {
-				return reject(new Error('Not loggedin.'));
+				return this._getUserIDFromCookie()
+					.then((userID) => {
+						this._setAccountInfo(userID);
+						return resolve(userID);
+					})
+					.catch((err) => {
+						log(err);
+						reject(new Error('Not loggedin.'));
+					});
 			}
 			return resolve(conf.account.userID);
 		})

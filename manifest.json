@@ -50,6 +50,8 @@
 				"dist/platform_pages.js"
 			],
 			"matches": [
+				"http://localhost:3000/*",
+				"http://localhost:3001/*",
 				"https://signon.ghostery.com/*",
 				"https://signon.ghosterystage.com/*",
 				"https://account.ghostery.com/*",
@@ -95,5 +97,15 @@
 	"web_accessible_resources": [
 		"app/images/*",
 		"dist/css/rewards_styles.css"
-	]
+	],
+	"externally_connectable": {
+		"matches": [
+			"http://localhost:3000/*",
+			"http://localhost:3001/*",
+			"https://signon.ghostery.com/*",
+			"https://signon.ghosterystage.com/*",
+			"https://account.ghostery.com/*",
+			"https://account.ghosterystage.com/*"
+		]
+	}
 }

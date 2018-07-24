@@ -242,13 +242,15 @@ function getSiteData() {
  * @param  {string} 	name 		message name
  * @param  {string}		tab_url 	tab url
  */
-function handleGhosteryPlatformPages(name, tab_url) {
+function handleGhosteryPlatformPages(name, tab_url, callback) {
 	if (name === 'platformPageLoaded') {
 		account.getUser()
 			.then(account.getUserSettings)
 			.catch((err) => {
 				log('handleGhosteryPlatformPages error', err);
 			});
+	} else if (name === 'getExtId') {
+		callback(chrome.runtime.id);
 	}
 	return false;
 }
@@ -564,6 +566,7 @@ function onMessageHandler(request, sender, callback) {
 	const {
 		name, message, messageId, origin
 	} = request;
+
 	const { tab } = sender;
 	const tab_id = tab && tab.id;
 	// Edge does not have url on tab object, as of Build 14342_rc1
@@ -590,7 +593,7 @@ function onMessageHandler(request, sender, callback) {
 	// HANDLE PAGE EVENTS HERE
 	if (origin === 'platform_pages') {
 		// Platform pages
-		return handleGhosteryPlatformPages(name, tab_url);
+		return handleGhosteryPlatformPages(name, tab_url, callback);
 	} else if (origin === 'purplebox') {
 		// Purplebox script events
 		return handlePurplebox(name, message, tab_id, callback);
@@ -861,6 +864,24 @@ function onMessageHandler(request, sender, callback) {
 				conf.setup_step = message.setup_step;
 			}
 		}
+	}
+}
+
+function onMessageExternalHandler(request, sender, callback) {
+	const {
+		name, message, messageId, origin
+	} = request;
+
+	if (origin === 'account-web' && name === 'account.logout') {
+		account.logout()
+			.then((response) => {
+				callback(response);
+			})
+			.catch((err) => {
+				log('LOGOUT ERROR');
+				callback(err);
+			});
+		return true;
 	}
 }
 
@@ -1357,6 +1378,8 @@ function initializeEventListeners() {
 			rewards.panelPort.onDisconnect.addListener(rewards.panelHubClosedListener);
 		}
 	});
+
+	chrome.runtime.onMessageExternal.addListener(onMessageExternalHandler);
 }
 
 /**
