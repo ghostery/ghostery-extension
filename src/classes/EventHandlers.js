@@ -335,27 +335,25 @@ class EventHandlers {
 			return { cancel: false };
 		}
 
-		if (details.type === 'main_frame') {
-			if (!tabInfo.getTabInfo(tab_id)) {
+		if (!tabInfo.getTabInfo(tab_id)) {
+			log(`tabInfo not found for tab ${tab_id}, initializing...`);
+
+			// create new tabInfo entry
+			if (details.type === 'main_frame') {
 				tabInfo.create(tab_id, details.url);
 			} else {
-				tabInfo.setTabInfo(tab_id, 'url', details.url);
+				tabInfo.create(tab_id);
 			}
-		}
 
-		if (!tabInfo.getTabInfo(tab_id)) {
+			// get tab data from browser and update the new tabInfo entry
 			utils.getTab(tab_id, (tab) => {
-				if (!tabInfo.getTabInfo(tab_id)) {
-					tabInfo.create(tab_id, tab.url);
-				} else {
+				const ti = tabInfo.getTabInfo(tab_id);
+				if (!ti) { return; }
+				if (ti.partialScan) {
 					tabInfo.setTabInfo(tab_id, 'url', tab.url);
 				}
 				tabInfo.setTabInfo(tab_id, 'incognito', tab.incognito);
-			},
-			(error) => {
-				log('TAB CANNOT BE QUERIED', error, tabInfo.getTabInfo(tab_id));
-			}
-			);
+			});
 		}
 
 		if (!this._checkRedirect(details.type, request_id)) {
@@ -382,6 +380,8 @@ class EventHandlers {
 			this._throttleButtonUpdate();
 			return { cancel: false };
 		}
+		// add the bugId to the details object. This can then be read by other handlers on this pipeline.
+		details.ghosteryBug = bug_id;
 
 		/* ** SMART BLOCKING - Breakage ** */
 		// allow first party trackers

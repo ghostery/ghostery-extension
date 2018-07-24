@@ -7,6 +7,7 @@
  *		incognito: 		{boolean} 	enabled/disabled
  *		needsReload: 	{Object}	indicates that changes were made in Ghostery (pause, block, unblock) and the tab should be reloaded
  *		pageTiming		{Object}	window.performance data
+ *		partialScan: 	{boolean} 	true if Ghostery was not there from the very start (main_frame load onwards)
  *		path: 			{string} 	everything after the first "/"
  *		prefetched: 	{boolean}	indicates that the tab was prefetched and not part of the main window
  *		purplebox: 		{boolean}	indicates that the purplebox.js script has been loaded on this tab
@@ -51,6 +52,7 @@ class TabInfo {
 		const numOfReloads = this.getTabInfoPersist(tab_id, 'numOfReloads') || 0;
 		const info = {
 			needsReload: { changes: {} },
+			partialScan: true,
 			prefetched: false,
 			purplebox: false,
 			rewards: false,
@@ -68,12 +70,7 @@ class TabInfo {
 		};
 
 		if (tab_url) {
-			const parsed = processUrl(tab_url);
-			info.url = tab_url;
-			info.protocol = parsed.protocol;
-			info.host = parsed.host;
-			info.path = parsed.path;
-			info.hash = parsed.anchor;
+			this._updateUrl(tab_id, tab_url);
 		}
 
 		this._tabInfo[tab_id] = info;
@@ -180,6 +177,7 @@ class TabInfo {
 		this._tabInfo[tab_id].host = parsed.host;
 		this._tabInfo[tab_id].path = parsed.path;
 		this._tabInfo[tab_id].hash = parsed.anchor;
+		this._tabInfo[tab_id].partialScan = false;
 	}
 }
 
