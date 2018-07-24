@@ -1606,11 +1606,15 @@ function init() {
 		initializePopup();
 		initializeEventListeners();
 		initializeVersioning();
-		account.getUser()
-			.then(account.getUserSettings)
-			.catch((err) => {
-				log('Error in account.getUser()', err);
-			});
+		account.migrate()
+			.then(() => {
+				if (conf.account !== null) {
+					return account.getUser()
+						.then(account.getUserSettings);
+				}
+			})
+			.catch(err => log(err));
+
 		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => {
 			// persist Conf properties to storage only after init has completed
 			common.prefsSet(globals.initProps);
