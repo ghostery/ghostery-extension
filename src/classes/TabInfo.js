@@ -69,11 +69,11 @@ class TabInfo {
 			insecureRedirects: [],
 		};
 
+		this._tabInfo[tab_id] = info;
+		
 		if (tab_url) {
 			this._updateUrl(tab_id, tab_url);
 		}
-
-		this._tabInfo[tab_id] = info;
 	}
 
 	/**
