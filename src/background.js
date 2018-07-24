@@ -244,7 +244,11 @@ function getSiteData() {
  */
 function handleGhosteryPlatformPages(name, tab_url) {
 	if (name === 'platformPageLoaded') {
-		account.getUser()
+		account._getUserIDFromCookie()
+			.then((userID) => {
+				account._setAccountInfo(userID);
+			})
+			.then(account.getUser)
 			.then(account.getUserSettings)
 			.catch((err) => {
 				log('handleGhosteryPlatformPages error', err);
@@ -963,8 +967,8 @@ function getAntitrackingTestConfig() {
 		};
 	}
 	return {
-		qsEnabled: false,
-		telemetryMode: 0,
+		qsEnabled: true,
+		telemetryMode: 1,
 	};
 }
 
@@ -1535,8 +1539,6 @@ function initializeGhosteryModules() {
 		}
 	}
 
-	// Check CMP right away.
-	cmp.fetchCMPData();
 	// Check CMP and ABTest every hour.
 	setInterval(scheduledTasks, 3600000);
 
@@ -1567,6 +1569,8 @@ function initializeGhosteryModules() {
 		surrogatedb.init(globals.JUST_UPGRADED),
 		cliqzStartup,
 	]).then(() => {
+		// run scheduledTasks on init
+		scheduledTasks();
 		// initialize panel data
 		panelData.init();
 	});
@@ -1583,11 +1587,15 @@ function init() {
 		initializePopup();
 		initializeEventListeners();
 		initializeVersioning();
-		account.getUser()
-			.then(account.getUserSettings)
-			.catch((err) => {
-				log('Error in account.getUser()', err);
-			});
+		account.migrate()
+			.then(() => {
+				if (conf.account !== null) {
+					return account.getUser()
+						.then(account.getUserSettings);
+				}
+			})
+			.catch(err => log(err));
+
 		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => {
 			// persist Conf properties to storage only after init has completed
 			common.prefsSet(globals.initProps);

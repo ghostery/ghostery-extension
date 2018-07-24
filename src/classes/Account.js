@@ -37,17 +37,38 @@ class Account {
 			ACCOUNT_SERVER,
 			CSRF_DOMAIN: GHOSTERY_DOMAIN
 		};
-		const apiHandlers = {
-			errorHandler: (errors) => {
-				errors.forEach((err) => {
-					if (err.code === '10190' || err.code === '10200') {
-						return this.logout();
+		const opts = {
+			errorHandler: errors => (
+				new Promise((resolve, reject) => {
+					for (const err of errors) {
+						switch (err.code) {
+							case Api.ERROR_CSRF_COOKIE_NOT_FOUND:
+							case '10020': // token is not valid
+							case '10060': // user id does not match
+							case '10180': // user ID not found
+							case '10181': // user ID is missing
+							case '10190': // refresh token is expired
+							case '10200': // refresh token does not exist
+							case '10201': // refresh token is missing
+							case '10300': // csrf token is missing
+							case '10301': // csrf tokens do not match
+								return this.logout()
+									.catch(e => log(e))
+									.finally(() => resolve());
+							default:
+								return resolve();
+						}
 					}
-					return Promise.reject(errors);
-				});
-			}
+					return resolve();
+				})
+			)
 		};
-		api.init(apiConfig, apiHandlers);
+		api.init(apiConfig, opts);
+		// logout on user_id cookie removed
+		// NOTE: Edge does not support chrome.cookies.onChanged
+		if (!IS_EDGE) {
+			chrome.cookies.onChanged.addListener(this._logoutOnUserIDCookieRemoved);
+		}
 	}
 
 	login = (email, password) => {
@@ -93,19 +114,26 @@ class Account {
 	}
 
 	logout = () => (
-		api.getCsrfCookie()
-			.then(cookie => fetch(`${AUTH_SERVER}/api/v2/logout`, {
-				method: 'POST',
-				credentials: 'include',
-				headers: {
-					'X-CSRF-Token': cookie.value,
-				},
-			}))
-			.finally(() => {
-				// remove cookies in case fetch fails
-				this._removeCookies();
-				this._clearAccountInfo();
-			})
+		new Promise((resolve, reject) => {
+			chrome.cookies.get({
+				url: `https://${GHOSTERY_DOMAIN}.com`,
+				name: 'csrf_token',
+			}, (cookie) => {
+				if (cookie === null) { return reject(); }
+				return fetch(`${AUTH_SERVER}/api/v2/logout`, {
+					method: 'POST',
+					credentials: 'include',
+					headers: { 'X-CSRF-Token': cookie.value },
+				}).then((res) => {
+					if (res.status < 400) { return resolve(); }
+					return res.json().then(json => reject(json));
+				}).catch(err => reject(err));
+			});
+		}).finally(() => {
+			// remove cookies in case fetch fails
+			this._removeCookies();
+			this._clearAccountInfo();
+		})
 	)
 
 	getUser = () => (
@@ -168,6 +196,99 @@ class Account {
 			});
 	}
 
+	migrate = () => (
+		new Promise((resolve, reject) => {
+			const legacyLoginInfoKey = 'login_info';
+			chrome.storage.local.get(legacyLoginInfoKey, (items) => {
+				if (chrome.runtime.lastError) {
+					resolve(new Error(chrome.runtime.lastError));
+					return;
+				}
+
+				const { login_info } = items;
+				if (!items || !login_info) {
+					resolve();
+					return;
+				}
+
+				// ensure we have all the necessary info
+				const { decoded_user_token, user_token } = login_info;
+				if (!decoded_user_token || !user_token) {
+					chrome.storage.local.remove(legacyLoginInfoKey, () => resolve());
+					return;
+				}
+				const {
+					UserId, csrf_token, RefreshToken, exp
+				} = decoded_user_token;
+				if (!UserId || !csrf_token || !RefreshToken || !exp) {
+					chrome.storage.local.remove(legacyLoginInfoKey, () => resolve());
+					return;
+				}
+
+				// set cookies
+				Promise.all([
+					this._setLoginCookie({
+						name: 'refresh_token',
+						value: RefreshToken,
+						expirationDate: exp + 604800, // + 7 days
+						httpOnly: true,
+					}),
+					this._setLoginCookie({
+						name: 'access_token',
+						value: user_token,
+						expirationDate: exp,
+						httpOnly: true,
+					}),
+					this._setLoginCookie({
+						name: 'csrf_token',
+						value: csrf_token,
+						expirationDate: exp,
+						httpOnly: false,
+					}),
+					this._setLoginCookie({
+						name: 'user_id',
+						value: UserId,
+						expirationDate: 1893456000, // Tue Jan 1 2030 00:00:00 GMT. @TODO is this the best way of hanlding this?
+						httpOnly: false,
+					})
+				]).then(() => {
+					// login
+					this._setAccountInfo(UserId);
+					chrome.storage.local.remove(legacyLoginInfoKey, () => resolve());
+				}).catch((err) => {
+					resolve(err);
+				});
+			});
+		})
+	)
+
+	_setLoginCookie = details => (
+		new Promise((resolve, reject) => {
+			const {
+				name, value, expirationDate, httpOnly
+			} = details;
+			if (!name || !value) {
+				reject(new Error(`One or more required values missing: ${JSON.stringify({ name, value })}`));
+				return;
+			}
+			chrome.cookies.set({
+				name,
+				value,
+				url: `https://${GHOSTERY_DOMAIN}.com`,
+				domain: `.${GHOSTERY_DOMAIN}.com`,
+				expirationDate,
+				secure: true,
+				httpOnly,
+			}, (cookie) => {
+				if (chrome.runtime.lastError || cookie === null) {
+					reject(new Error(`Error setting cookie ${JSON.stringify(details)}: ${chrome.runtime.lastError}`));
+					return;
+				}
+				resolve(cookie);
+			});
+		})
+	)
+
 	_getUserID = () => (
 		new Promise((resolve, reject) => {
 			if (conf.account === null) {
@@ -202,7 +323,7 @@ class Account {
 	_getUserIDFromCookie = () => (
 		new Promise((resolve, reject) => {
 			chrome.cookies.get({
-				url: `https://${GHOSTERY_DOMAIN}.com`, // ghostery.com || ghosterystage.com
+				url: `https://${GHOSTERY_DOMAIN}.com`,
 				name: 'user_id',
 			}, (cookie) => {
 				if (cookie) {
@@ -278,6 +399,14 @@ class Account {
 				log(`Removed cookie with name: ${details.name}`);
 			});
 		});
+	}
+
+	_logoutOnUserIDCookieRemoved = (changeInfo) => {
+		const { cause, removed, cookie } = changeInfo;
+		const { name, domain } = cookie;
+		if (name === 'user_id' && domain === `.${GHOSTERY_DOMAIN}.com` && removed && cause === 'expired_overwrite') {
+			this.logout();
+		}
 	}
 }
 
