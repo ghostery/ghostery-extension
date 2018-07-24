@@ -46,7 +46,7 @@ function _reportStaticInfo() {
 function _report(perfEntry, data) {
 	if (PORT) {
 		const report = {
-			name: 'perfData', startTime: perfEntry.startTime, duration: perfEntry.duration, handler: data.handler, page_url: data.page_url, url: data.url
+			name: 'perfData', startTime: perfEntry.startTime, duration: perfEntry.duration, handler: data.handler, page_url: data.page_url, url: data.url, type: data.type
 		};
 		PORT.postMessage(report);
 	}
