@@ -64,6 +64,11 @@ class Account {
 			)
 		};
 		api.init(apiConfig, opts);
+		// logout on user_id cookie removed
+		// NOTE: Edge does not support chrome.cookies.onChanged
+		if (!IS_EDGE) {
+			chrome.cookies.onChanged.addListener(this._logoutOnUserIDCookieRemoved);
+		}
 	}
 
 	login = (email, password) => {
@@ -394,6 +399,14 @@ class Account {
 				log(`Removed cookie with name: ${details.name}`);
 			});
 		});
+	}
+
+	_logoutOnUserIDCookieRemoved = (changeInfo) => {
+		const { cause, removed, cookie } = changeInfo;
+		const { name, domain } = cookie;
+		if (name === 'user_id' && domain === `.${GHOSTERY_DOMAIN}.com` && removed && cause === 'expired_overwrite') {
+			this.logout();
+		}
 	}
 }
 
