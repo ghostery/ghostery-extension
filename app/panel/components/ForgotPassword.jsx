@@ -24,109 +24,84 @@ class ForgotPassword extends React.Component {
 		super(props);
 		this.state = {
 			email: '',
+			loading: false,
 			emailError: false,
-			buttonCursor: 'pointer',
-			panelCursor: 'default',
 		};
+	}
 
-		// event bindings
-		this.sendEmail = this.sendEmail.bind(this);
-		this.updateEmail = this.updateEmail.bind(this);
-		this.checkForEnter = this.checkForEnter.bind(this);
-	}
 	/**
-	 * Lifecycle event
+	 * Update state with changed values.
+	 * @param {Object}  event 	'change' event
 	 */
-	componentWillUpdate(nextProps, nextState) {
-		// redirect to login view on success
-		if (nextProps.forgotPasswordSuccess) {
-			nextProps.history.push('/login');
-		} else if (nextProps.forgotPasswordFailed && (this.state.panelCursor !== 'default' || this.state.buttonCursor !== 'pointer')) {
-			this.setCursorDefaults();
-		}
-	}
-	/**
-	 * Update state with selective defaults for cursors.
-	 */
-	setCursorDefaults() {
-		this.setState({ panelCursor: 'default', buttonCursor: 'pointer' });
-	}
-	/**
-	 * Update state with provided email.
-	 */
-	updateEmail(event) {
-		this.setState({ email: event.target.value });
+	handleInputChange = (e) => {
+		const { name, value } = e.target;
+		this.setState({ [name]: value });
 	}
 
 	/**
 	 * Validate entered data, notify user if validation fails,
 	 * This action is one the PanelActions.
 	 */
-	sendEmail() {
+	handleSubmit = (e) => {
+		e.preventDefault();
 		const email = this.state.email.toLowerCase();
-		const FORGOT_PASSWORD_URL = `https:\/\/signon.${globals.GHOSTERY_DOMAIN}.com/password/reset/`; // can't set culture query parameter because site needs to append guid
-
-		// update cursors
-		this.setState({ panelCursor: 'wait' });
-		this.setState({ buttonCursor: 'wait' });
 
 		// validate the email and password
 		if (!validateEmail(email)) {
-			this.setState({ emailError: true, panelCursor: 'default', buttonCursor: 'pointer' });
+			this.setState({
+				emailError: true,
+				loading: false,
+			});
 			return;
 		}
 
-		this.props.actions.forgotPassword({
-			EmailAddress: email,
-			RedirectUrlToAddCodeSuffixOn: FORGOT_PASSWORD_URL,
-			FooterUrl: FORGOT_PASSWORD_URL,
-		});
+		this.props.actions.resetPassword(email)
+			.then((success) => {
+				if (success) {
+					this.props.history.push('/login');
+				}
+			});
 	}
-	/**
-	 * Create account on Return.
-	 * @param {Object} e keyboard event
-	 */
-	checkForEnter(e) {
-		if (e.key === 'Enter') {
-			this.sendEmail();
-		}
-	}
+
 	/**
 	 * Render Forgot Password panel.
 	 * @return {ReactComponent}   ReactComponent instance
 	 */
 	render() {
+		const { email, loading, emailError } = this.state;
 		return (
-			<div id="forgot-password-panel" style={{ cursor: this.state.panelCursor }}>
+			<div id="forgot-password-panel" className={loading ? 'loading' : ''}>
 				<div className="row align-center">
 					<div className="small-11 medium-8 columns">
-						<h4 id="forgot-password-message">
-							{ t('forgot_password_message') }
-						</h4>
-						<div id="forgot-email" className={(this.state.emailError ? 'panel-error invalid-email' : (this.props.emailNotFound ? 'panel-error not-found-error' : ''))}>
-							<label htmlFor="forgot-input-email">
-								{ t('email_field_label') }<span className="asterisk">*</span>
-								<input onChange={this.updateEmail} onKeyPress={this.checkForEnter} id="forgot-input-email" type="text" name="email" pattern=".{1,}" autoComplete="off" required />
-							</label>
-							<p className="invalid-email warning">
-								{ t('invalid_email_forgot') }
-							</p>
-							<p className="not-found-error warning">
-								{ t('error_email_forgot') }
-							</p>
-						</div>
-						<div className="buttons-container row">
-							<div className="small-6 columns text-center">
-								<Link to="/login" id="forgot-password-cancel" className="cancel button hollow">
-									{ t('button_cancel') }
-								</Link>
+						<form onSubmit={this.handleSubmit}>
+							<h4 id="forgot-password-message">
+								{ t('forgot_password_message') }
+							</h4>
+							<div id="forgot-email" className={(emailError ? 'panel-error invalid-email' : '')}>
+								<label htmlFor="forgot-input-email">
+									{ t('email_field_label') }<span className="asterisk">*</span>
+									<input onChange={this.handleInputChange} value={email} id="forgot-input-email" type="text" name="email" pattern=".{1,}" autoComplete="off" required />
+								</label>
+								<p className="invalid-email warning">
+									{ t('invalid_email_forgot') }
+								</p>
+								<p className="not-found-error warning">
+									{ t('error_email_forgot') }
+								</p>
 							</div>
-							<div className="small-6 columns text-center">
-								<div onClick={this.sendEmail} id="send-button" className="button" style={{ cursor: this.state.buttonCursor }}>
-									{ t('send_button_label') }
+							<div className="buttons-container row">
+								<div className="small-6 columns text-center">
+									<Link to="/login" id="forgot-password-cancel" className="cancel button hollow">
+										{ t('button_cancel') }
+									</Link>
+								</div>
+								<div className="small-6 columns text-center">
+									<button type="submit" id="send-button" className="button">
+										{ t('send_button_label') }
+									</button>
 								</div>
 							</div>
-						</div>
+						</form>
 					</div>
 				</div>
 			</div>

@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Login from '../components/Login';
 import * as actions from '../actions/PanelActions'; // get shared actions from Panel
+import { login, getUser, getUserSettings } from '../../Account/AccountActions';
 /**
  * Map redux store state properties to Login view component own properties.
  * @memberOf PanelContainers
@@ -24,12 +25,9 @@ import * as actions from '../actions/PanelActions'; // get shared actions from P
  * @todo  We are not using ownProps, so we better not specify it explicitly,
  * in this case it won't be passed by React (see https://github.com/reactjs/react-redux/blob/master/docs/api.md).
  */
-const mapStateToProps = (state, ownProps) => Object.assign({}, state.login, {
+const mapStateToProps = (state, ownProps) => Object.assign({}, {
 	// get properties from panel redux store
-	email: state.panel.email,
 	is_expert: state.panel.is_expert,
-	is_validated: state.panel.is_validated,
-	logged_in: state.panel.logged_in,
 });
 /**
  * Bind Login view component action creators using Redux's bindActionCreators
@@ -38,7 +36,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state.login, {
  * @param  {Object} 	ownProps  Login view component own props
  * @return {function}          	  to be used as an argument in redux connect call
  */
-const mapDispatchToProps = (dispatch, ownProps) => ({ actions: bindActionCreators(actions, dispatch) });
+const mapDispatchToProps = (dispatch, ownProps) => ({ actions: bindActionCreators(Object.assign(actions, { login, getUser, getUserSettings }), dispatch) });
 /**
  * Connects Login view component to the Redux store.
  * @memberOf PanelContainers

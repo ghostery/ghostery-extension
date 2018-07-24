@@ -100,15 +100,27 @@
 	}
 }
 
+.summary-total-tracker-count.g-tooltip .tooltip-content.right {
+	margin-top: -20px;
+	margin-left: 24px;
+}
+.sub-component.donut-graph.small .g-tooltip .tooltip-content.right {
+	margin-top: -8px;
+	margin-left: 15px;
+}
+.sub-component.donut-graph.big .g-tooltip .tooltip-content.right {
+	margin-top: 5px;
+	margin-left: 10px;
+}
 .expert .sub-component.cliqz-features .g-tooltip .tooltip-content.right {
 	margin-left: 16px;
 }
 .expert .sub-component.ghostery-features .g-tooltip .tooltip-content.right {
-	top: -50%;
+	margin-top: -18px;
 }
 .expert .sub-component.pause-button .g-tooltip .tooltip-content.right {
+	margin-top: -12px;
 	margin-left: 28px;
-	top: -33%;
 }
 .sub-component.pause-button .g-tooltip .tooltip-content.top {
 	left: 75px;

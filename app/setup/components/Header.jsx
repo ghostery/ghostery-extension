@@ -26,6 +26,8 @@ class Header extends React.Component {
 			password: '',
 			fetchedLogInInfo: false,
 			hideSmallSignIn: true,
+
+			loggedIn: false,
 		};
 	}
 
@@ -33,10 +35,16 @@ class Header extends React.Component {
 	* Lifecycle event
 	*/
 	componentWillMount() {
-		this.props.actions.getLoginInfo().then(() => {
-			this.setState({
-				fetchedLogInInfo: true,
-			});
+		this.props.actions.getUser().then((res) => {
+			const { errors, user } = res;
+			if (errors) {
+				this.setState({ loggedIn: false });
+			} else {
+				this.setState({
+					loggedIn: true,
+					email: user.email,
+				});
+			}
 		});
 	}
 
@@ -51,39 +59,47 @@ class Header extends React.Component {
 	 * Handles the onChange event for the Sign In form
 	 * @param  {Object} event
 	 */
-	_handleChange = (event) => {
-		switch (event.target.name) {
-			case 'email':
-				this.setState({
-					email: event.target.value,
-				});
-				break;
-			case 'password':
-				this.setState({
-					password: event.target.value,
-				});
-				break;
-			default: break;
-		}
+	_handleInputChange = (e) => {
+		const { name, value } = e.target;
+		this.setState({ [name]: value });
 	}
 
 	/**
 	 * Handles the onSubmit event for the Sign In form
 	 * @param  {Object} event
 	 */
-	_handleSignIn = (event) => {
-		event.preventDefault();
-		this.props.actions.userLogin({
-			EmailAddress: this.state.email,
-			Password: this.state.password,
-		});
+	_handleSignIn = (e) => {
+		e.preventDefault();
+		this.props.actions.login(this.state.email, this.state.password)
+			.then((success) => {
+				if (success) {
+					Promise.all([
+						this.props.actions.getUser(),
+						this.props.actions.getUserSettings()
+					]).then((res) => {
+						const { errors, user } = res[0];
+						if (errors) {
+							this.setState({
+								fetchedLogInInfo: false,
+								loggedIn: false,
+							});
+						} else {
+							this.setState({
+								fetchedLogInInfo: true,
+								loggedIn: true,
+								email: user.email,
+							});
+						}
+					});
+				}
+			});
 	}
 
 	/**
 	 * Handles the onClick event for expanding the sign in form on small screens
 	 * @param  {Object} event
 	 */
-	_toggleSmallSignInState = (event) => {
+	_toggleSmallSignInState = (e) => {
 		const hideSmallSignIn = !this.state.hideSmallSignIn;
 		this.setState({ hideSmallSignIn });
 	}
@@ -93,31 +109,30 @@ class Header extends React.Component {
 	 * @return {JSX} The JSX for the right side of the header
 	 */
 	renderRight() {
-		if (!this.state.fetchedLogInInfo) {
-			return (<div />);
-		} else if (this.props.success) {
-			return (
-				<span>
-					{this.props.payload.ClaimEmailAddress}
-				</span>
-			);
-		}
+		const { loggedIn, email } = this.state;
 		return (
 			<div>
-				<div className="show-for-small-only">
-					<div className="signInToggle float-right" onClick={this._toggleSmallSignInState}>
-						{this.state.hideSmallSignIn ? t('setup_header_sign_in') : `${t('setup_header_sign_in_hide')}` }
+				{ loggedIn &&
+					<span>{ email }</span>
+				}
+				{ !loggedIn &&
+					<div>
+						<div className="show-for-small-only">
+							<div className="signInToggle float-right" onClick={this._toggleSmallSignInState}>
+								{this.state.hideSmallSignIn ? t('setup_header_sign_in') : `${t('setup_header_sign_in_hide')}` }
+							</div>
+						</div>
+						<div className="show-for-medium">
+							<form onSubmit={this._handleSignIn} method="POST">
+								<input type="email" name="email" value={this.state.email} placeholder={t('setup_header_email')} onChange={this._handleInputChange} />
+								<input type="password" name="password" value={this.state.password} placeholder={t('setup_header_password')} onChange={this._handleInputChange} />
+								<button type="submit">
+									{ t('setup_header_sign_in') }
+								</button>
+							</form>
+						</div>
 					</div>
-				</div>
-				<div className="show-for-medium">
-					<form onSubmit={this._handleSignIn} method="POST">
-						<input type="email" name="email" value={this.state.email} placeholder={t('setup_header_email')} onChange={this._handleChange} />
-						<input type="password" name="password" value={this.state.password} placeholder={t('setup_header_password')} onChange={this._handleChange} />
-						<button type="submit">
-							{ t('setup_header_sign_in') }
-						</button>
-					</form>
-				</div>
+				}
 			</div>
 		);
 	}
@@ -134,8 +149,8 @@ class Header extends React.Component {
 			<div id="sub-header" className="row show-for-small-only">
 				<div className="columns">
 					<form onSubmit={this._handleSignIn} method="POST">
-						<input type="email" name="email" value={this.state.email} placeholder={t('setup_header_email')} onChange={this._handleChange} />
-						<input type="password" name="password" value={this.state.password} placeholder={t('setup_header_password')} onChange={this._handleChange} />
+						<input type="email" name="email" value={this.state.email} placeholder={t('setup_header_email')} onChange={this._handleInputChange} />
+						<input type="password" name="password" value={this.state.password} placeholder={t('setup_header_password')} onChange={this._handleInputChange} />
 						<button className="float-right" type="submit">
 							{ t('setup_header_sign_in') }
 						</button>

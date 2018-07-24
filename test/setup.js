@@ -26,6 +26,28 @@ chrome.runtime.getManifest.returns({
 	debug: true
 });
 
+// Create Mock for
+jest.mock('../src/classes/Cliqz', () => {
+	return {
+		modules: {
+			adblocker: {
+				background: {
+					actions: {
+						getAdBlockInfoForTab: jest.fn()
+					}
+				}
+			},
+			antitracking: {
+				background: {
+					actions: {
+						aggregatedBlockingStats: jest.fn()
+					}
+				}
+			}
+		}
+	};
+});
+
 // Create Mock for the Cliqz dependencies
 jest.mock('browser-core', () => {
 	return { App: class App {} }

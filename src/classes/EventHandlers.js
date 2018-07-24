@@ -46,6 +46,14 @@ class EventHandlers {
 		this.policy = new Policy();
 		this.policySmartBlock = new PolicySmartBlock();
 		this.purplebox = new PurpleBox();
+
+		// Use leading:false so button.update is called after requests are complete.
+		// Use a 1sec interval to limit calls on pages with a large number of requests.
+		// Don't use tabId with button.update for cases where tab is switched before throttle delay is reached.
+		// ToDo: Remove this function when there is an event for AdBlocker:foundAd.
+		this._throttleButtonUpdate = _.throttle(() => {
+			button.update();
+		}, 1000, { leading: false });
 	}
 
 	/**
@@ -362,8 +370,13 @@ class EventHandlers {
 
 		// allow if not a tracker
 		if (!bug_id) {
+			// Make a throttled call to button.update() for when there are no trackers but an ad was blocked
+			// ToDo: Remove this call when there is an event for AdBlocker:foundAd.
+			this._throttleButtonUpdate();
 			return { cancel: false };
 		}
+		// add the bugId to the details object. This can then be read by other handlers on this pipeline.
+		details.ghosteryBug = bug_id;
 
 		/* ** SMART BLOCKING - Breakage ** */
 		// allow first party trackers

@@ -193,7 +193,7 @@ class Metrics {
 			const METRICS_URL_SET = new Set([
 				'enable_human_web',
 				'enable_offers',
-				'login_info',
+				'account',
 				'enable_metrics',
 				'show_alert',
 				'alert_expanded',
@@ -224,7 +224,7 @@ class Metrics {
 		let metrics_url = `https://${METRICS_SUB_DOMAIN}.ghostery.com/${type}${frequencyString}?gr=-1` +
 			// Old parameters, old names
 			// Human web
-			`&hw=${encodeURIComponent(IS_EDGE ? '0' : (conf.enable_human_web ? '1' : '0'))}` +
+			`&hw=${encodeURIComponent(conf.enable_human_web ? '1' : '0')}` +
 			// Extension version
 			`&v=${encodeURIComponent(EXTENSION_VERSION)}` +
 			// User agent - browser
@@ -238,11 +238,11 @@ class Metrics {
 
 			// Old parameters, new names
 			// Offers (former offers)
-			`&of=${encodeURIComponent(IS_EDGE ? '0' : ((conf.enable_offers && abtest.hasTest('offers')) ? '1' : '0'))}` +
+			`&of=${encodeURIComponent(conf.enable_offers ? '1' : '0')}` +
 			// Random number, assigned at install (former install_rand)
 			`&ir=${encodeURIComponent(conf.install_random_number)}` +
 			// Login state (former signed_in)
-			`&sn=${encodeURIComponent(conf.login_info.logged_in ? '1' : '0')}` +
+			`&sn=${encodeURIComponent(conf.account ? '1' : '0')}` +
 			// Date of install (former install_date)
 			`&id=${encodeURIComponent(conf.install_date)}` +
 			// Noncritical ping (former noncritical)

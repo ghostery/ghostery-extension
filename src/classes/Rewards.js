@@ -21,7 +21,6 @@ import Policy from './Policy';
 import globals from './Globals';
 import { log, prefsGet, prefsSet } from '../utils/common';
 import { sendMessage, injectScript } from '../utils/utils';
-import * as accounts from '../utils/accounts';
 
 const t = chrome.i18n.getMessage;
 /**
@@ -124,10 +123,6 @@ class Rewards {
 										break;
 									case 'rewardSignal':
 										this.sendSignal(message.message);
-										break;
-									case 'rewardsPromptAccepted':
-										// @TODO set conf disabled
-										conf.rewards_accepted = true;
 										break;
 									case 'rewardSeen':
 										this.markRewardRead(message.offerId);

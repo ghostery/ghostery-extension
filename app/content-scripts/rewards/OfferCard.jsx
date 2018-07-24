@@ -46,6 +46,7 @@ class OfferCard extends Component {
 			this.iframeEl.classList = '';
 			this.iframeEl.classList.add('offer-card');
 		}
+		this.rewardPictureEl = null;
 
 		this.betaLogo = `url(${chrome.extension.getURL('app/images/rewards/ghostery-rewards-beta.png')})`;
 		this.closeIcon = `url(${chrome.extension.getURL('app/images/drawer/x.svg')})`;
@@ -105,6 +106,11 @@ class OfferCard extends Component {
 
 	componentDidMount() {
 		this.props.actions.addRewardSeenListener();
+		const bgImg = new Image();
+		bgImg.onload = () => {
+			this.rewardPictureEl.style.backgroundImage = `url(${bgImg.src})`;
+		};
+		bgImg.src = this.state.rewardUI.picture_url;
 	}
 
 	copyCode() {
@@ -246,7 +252,7 @@ class OfferCard extends Component {
 								</div>
 								<div className="reward-content-img">
 									<div className="flex-grow" />
-									<img src={this.state.rewardUI.picture_url} className="hide" onLoad={this.handleImageLoaded} />
+									<div className="img" ref={(node) => { this.rewardPictureEl = node; }} />
 									<div className="flex-grow" />
 								</div>
 								<div className="reward-content-detail">

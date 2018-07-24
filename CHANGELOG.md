@@ -1,3 +1,12 @@
+### GHOSTERY 8.2.1 (July 16, 2018)
+
++ Ghostery tracker counter and badge icon now includes block counts from Anti-Tracking and Ad-Blocker
++ Fixes issue where settings menu does not close
++ Remove redundant opt-in for Rewards
++ Improved translations for German and Russian languages
++ Styling adjustments and improvements for Edge
++ Various bug fixes and improvements for Rewards
+
 ### GHOSTERY 8.2.0 (July 2, 2018)
 
 + Improved simple-view and detail-view UI

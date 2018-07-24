@@ -66,6 +66,9 @@ p.warning {
 /* SIGNIN PANEL */
 #signin-panel {
 	margin-top: 50px;
+	&.loading {
+		cursor: wait;
+	}
 	#login-password{
 		margin-top: 15px;
 	}
@@ -86,6 +89,9 @@ p.warning {
 /* FORGOT PASSWORD PANEL */
 #forgot-password-panel{
 	margin-top: 75px;
+	&.loading {
+		cursor: wait;
+	}
 	h4#forgot-password-message {
 		font-size:14px;
 		font-weight: normal;
@@ -113,7 +119,10 @@ p.warning {
 }
 
 /* CREATE ACCOUNT PANEL */
-#create-account-panel{
+#create-account-panel {
+	&.loading {
+		cursor: wait;
+	}
 	margin-top: 10px;
 	input {margin-bottom: 5px;}
 	p.warning {margin-bottom: 5px;}

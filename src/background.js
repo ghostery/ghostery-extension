@@ -40,11 +40,13 @@ import surrogatedb from './classes/SurrogateDb';
 import tabInfo from './classes/TabInfo';
 import metrics from './classes/Metrics';
 import rewards from './classes/Rewards';
+import account from './classes/Account';
 // utilities
-import * as accounts from './utils/accounts';
 import { allowAllwaysC2P } from './utils/click2play';
 import * as common from './utils/common';
 import * as utils from './utils/utils';
+import { _getJSONAPIErrorsObject } from './utils/api';
+import { importCliqzSettings } from './utils/cliqzSettingImport';
 
 // class instantiation
 const events = new Events();
@@ -227,10 +229,12 @@ function getSiteData() {
 		});
 	}));
 }
+
 /**
  * @todo  consider never return anything explicitly from message handlers
  * as we never make callback calls asynchronously.
  */
+
 /**
  * Handle messages sent from app/js/platform_pages.js content script.
  * @memberOf Background
@@ -240,10 +244,15 @@ function getSiteData() {
  */
 function handleGhosteryPlatformPages(name, tab_url) {
 	if (name === 'platformPageLoaded') {
-		// load bearer token from AUTH cookie if present
-		accounts.setLoginInfoFromAuthCookie(tab_url).catch((err) => {
-			log('handleGhosteryPlatformPages error', err);
-		});
+		account._getUserIDFromCookie()
+			.then((userID) => {
+				account._setAccountInfo(userID);
+			})
+			.then(account.getUser)
+			.then(account.getUserSettings)
+			.catch((err) => {
+				log('handleGhosteryPlatformPages error', err);
+			});
 	}
 	return false;
 }
@@ -499,7 +508,7 @@ function handlePurplebox(name, message, tab_id, callback) {
 		conf.alert_bubble_pos = message.alert_bubble_pos;
 		conf.alert_bubble_timeout = message.alert_bubble_timeout;
 		// push new settings to API
-		accounts.pushUserSettings({ conf: accounts.buildUserSettings() });
+		account.saveUserSettings();
 	}
 	return false;
 }
@@ -649,20 +658,12 @@ function onMessageHandler(request, sender, callback) {
 				break;
 		}
 	} else if (name === 'skipSetup') {
-		// kill setup window and link to blog post
-		chrome.tabs.remove(tab_id);
-		utils.openNewTab({
-			url: 'https://www.ghostery.com/blog/product-releases/browse-smarter-with-ghostery-8/',
-			become_active: true,
-		});
+		// link to blog post
+		chrome.tabs.update(tab_id, { url: 'https://www.ghostery.com/blog/product-releases/browse-smarter-with-ghostery-8/' });
 		return false;
 	} else if (name === 'closeSetup') {
-		// kill setup window and link to blog post
-		chrome.tabs.remove(tab_id);
-		utils.openNewTab({
-			url: 'https://www.ghostery.com/blog/product-releases/browse-smarter-with-ghostery-8/',
-			become_active: true,
-		});
+		// link to blog post
+		chrome.tabs.update(tab_id, { url: 'https://www.ghostery.com/blog/product-releases/browse-smarter-with-ghostery-8/' });
 		return false;
 	} else if (name === 'getPanelData') {
 		if (!message.tabId) {
@@ -676,9 +677,6 @@ function onMessageHandler(request, sender, callback) {
 				callback(data);
 			});
 		}
-		accounts.pullUserSettings().catch((err) => {
-			log('Error fetching user setting via getPanelData:', err);
-		});
 		return true;
 	} else if (name === 'setPanelData') {
 		panelData.set(message);
@@ -687,30 +685,21 @@ function onMessageHandler(request, sender, callback) {
 	} else if (name === 'getCliqzModuleData') {
 		const modules = { adblock: {}, antitracking: {} };
 		utils.getActiveTab((tab) => {
+			button.update();
+			if (conf.enable_ad_block) {
+				// update adblock count. callback() handled below based on anti-tracking status
+				modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tab.id);
+			}
 			if (conf.enable_anti_tracking) {
 				cliqz.modules.antitracking.background.actions.aggregatedBlockingStats(tab.id).then((data) => {
 					modules.antitracking = data;
-					// send adblock and antitracking together
-					if (conf.enable_ad_block) {
-						modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tab.id);
-					}
 					callback(modules);
 				}).catch((err) => {
 					callback(modules);
 				});
-			} else if (conf.enable_ad_block) {
-				modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tab.id);
-				callback(modules);
 			} else {
 				callback(modules);
 			}
-		});
-		return true;
-	} else if (name === 'pullUserSettings') {
-		accounts.pullUserSettings().then((settings) => {
-			callback(settings);
-		}).catch((err) => {
-			callback();
 		});
 		return true;
 	} else if (name === 'getTrackerDescription') {
@@ -719,25 +708,81 @@ function onMessageHandler(request, sender, callback) {
 			callback(description);
 		});
 		return true;
-	} else if (name === 'getLoginInfo') {
-		accounts.getLoginInfo().then((result) => {
-			// this sends the loginInfo directly to panelView. TODO: use model change event instead
-			utils.sendMessageToPanel('onLoginInfoUpdated', result);
-			// this sends the loginInfo back to the collection
-			callback(result);
-		}).catch((err) => {
-			callback();
-			log('GET LOGIN INFO ERROR:', err);
-		});
+	} else if (name === 'account.login') {
+		const { email, password } = message;
+		account.login(email, password)
+			.then((response) => {
+				callback(response);
+			})
+			.catch((err) => {
+				log('LOGIN ERROR', err);
+				callback({ errors: _getJSONAPIErrorsObject(err) });
+				// callback({ errors: [err] });
+			});
 		return true;
-	} else if (name === 'setLoginInfo') {
-		// Note: if you want to trigger a logout, send message as empty {}
-		accounts.setLoginInfo(message, false).then((result) => {
-			callback(result);
-		}).catch((err) => {
-			callback();
-			log('SET LOGIN INFO ERROR');
-		});
+	} else if (name === 'account.register') {
+		const {
+			email, confirmEmail, password, firstName, lastName
+		} = message;
+		account.register(email, confirmEmail, password, firstName, lastName)
+			.then((response) => {
+				callback(response);
+			})
+			.catch((err) => {
+				callback({ errors: [err] });
+				log('REGISTER ERROR');
+			});
+		return true;
+	} else if (name === 'account.logout') {
+		account.logout()
+			.then((response) => {
+				callback(response);
+			})
+			.catch((err) => {
+				log('LOGOUT ERROR');
+				callback(err);
+			});
+		return true;
+	} else if (name === 'account.getUserSettings') {
+		account.getUserSettings()
+			.then((settings) => {
+				callback(settings);
+			})
+			.catch((err) => {
+				log('Error getting user settings:', err);
+				callback({ errors: _getJSONAPIErrorsObject(err) });
+			});
+		return true;
+	} else if (name === 'account.resetPassword') {
+		const { email } = message;
+		account.resetPassword(email)
+			.then((success) => {
+				callback(success);
+			})
+			.catch((err) => {
+				callback({ errors: _getJSONAPIErrorsObject(err) });
+				log('RESET PASSWORD ERROR');
+			});
+		return true;
+	} else if (name === 'account.getUser') {
+		account.getUser(message)
+			.then((user) => {
+				callback({ user });
+			})
+			.catch((err) => {
+				callback({ errors: _getJSONAPIErrorsObject(err) });
+				log('FETCH USER ERROR');
+			});
+		return true;
+	} else if (name === 'account.sendValidateAccountEmail') {
+		account.sendValidateAccountEmail()
+			.then((success) => {
+				callback(success);
+			})
+			.catch((err) => {
+				callback({ errors: _getJSONAPIErrorsObject(err) });
+				log('sendValidateAccountEmail error', err);
+			});
 		return true;
 	} else if (name === 'update_database') {
 		checkLibraryVersion().then((result) => {
@@ -759,7 +804,7 @@ function onMessageHandler(request, sender, callback) {
 	} else if (name === 'getSettingsForExport') {
 		utils.getActiveTab((tab) => {
 			if (tab && tab.id && tab.url.startsWith('http')) {
-				const settings = accounts.buildUserSettings();
+				const settings = account.buildUserSettings();
 				// Blacklisted and whitelisted sites are removed from sync array,
 				// but we want to allow export and import these properties manually
 				settings.site_blacklist = conf.site_blacklist;
@@ -778,11 +823,6 @@ function onMessageHandler(request, sender, callback) {
 			} else {
 				callback(false);
 			}
-		});
-		return true;
-	} else if (name === 'sendVerificationEmail') {
-		accounts.sendVerificationEmail().then((result) => {
-			callback(result);
 		});
 		return true;
 	} else if (name === 'ping') {
@@ -847,12 +887,7 @@ function initializeDispatcher() {
 		button.update();
 		utils.flushChromeMemoryCache();
 	});
-	dispatcher.on('conf.save.login_info', (loginInfo) => {
-		if (loginInfo.logged_in) {
-			accounts.pullUserSettings().catch((err) => {
-				log("dispatcher.on('conf.save.login_info): pullUserSettings error:", err);
-			});
-		}
+	dispatcher.on('conf.save.account', () => {
 		// update PanelData
 		panelData.init();
 	});
@@ -932,8 +967,8 @@ function getAntitrackingTestConfig() {
 		};
 	}
 	return {
-		qsEnabled: false,
-		telemetryMode: 0,
+		qsEnabled: true,
+		telemetryMode: 1,
 	};
 }
 
@@ -1024,11 +1059,13 @@ function isWhitelisted(state) {
 	return globals.SESSION.paused_blocking || events.policy.getSitePolicy(url) === 2 || state.ghosteryWhitelisted;
 }
 
-// Set listener for 'enabled' event for Antitracking module which replaces
-// Antitracking isWhitelisted method with Ghostery's isWhitelisted method.
-// The reason: if site is whitelisted by Ghostery, it should be whitelisted by
-// any Cliqz module which may block/alter tracker requests.
-// @memberOf Background
+/**
+ * Set listener for 'enabled' event for Antitracking module which replaces
+ * Antitracking isWhitelisted method with Ghostery's isWhitelisted method.
+ * The reason: if site is whitelisted by Ghostery, it should be whitelisted by
+ * any Cliqz module which may block/alter tracker requests.
+ * @memberOf Background
+ */
 antitracking.on('enabled', () => {
 	antitracking.isReady().then(() => {
 		// remove Cliqz-side whitelisting steps and replace with ghostery ones.
@@ -1068,9 +1105,11 @@ antitracking.on('enabled', () => {
 	});
 });
 
-
-// Set listener for 'enabled' event for Adblock module
-// which replaces Adblock isWhitelisted method with Ghostery's isWhitelisted method
+/**
+ * Set listener for 'enabled' event for Adblock module
+ * which replaces Adblock isWhitelisted method with Ghostery's isWhitelisted method
+ * @memberOf Background
+ */
 adblocker.on('enabled', () => {
 	adblocker.isReady().then(() =>
 		Promise.all([
@@ -1087,6 +1126,10 @@ adblocker.on('enabled', () => {
 	);
 });
 
+/**
+ * Set listener for 'enabled' event for Offers module
+ * @memberOf Background
+ */
 offers.on('enabled', () => {
 	offers.isReady().then(() => {
 		log('IN OFFERS ON ENABLED', offers, messageCenter);
@@ -1118,11 +1161,14 @@ offers.on('enabled', () => {
 				setCliqzModuleEnabled(messageCenter, true);
 			});
 	});
-});/**
+});
+
+/**
  * Set listener for 'enabled' event for Offers module.
  * It registers message handler for messages with the offers.
  * This handler adds incoming message data to the array of
  * notimication messages (CMP_DATA) to be eventually displayed.
+ * @memberOf Background
  */
 messageCenter.on('enabled', () => {
 	messageCenter.isReady().then(() => {
@@ -1429,40 +1475,53 @@ function initializeGhosteryModules() {
 		metrics.ping('install_complete');
 	}
 	// start cliqz app
-	const cliqzStartup = cliqz.start().then(() =>
+	const cliqzStartup = cliqz.start().then(() => {
 		// run wrapper tasks which set up base integrations between ghostery and these modules
 		Promise.all([
 			initialiseWebRequestPipeline(),
 		]).then(() => {
-			if (globals.JUST_UPGRADED_FROM_7) {
-				// These users had human web already, so we respect their choice
-				conf.enable_human_web = (IS_EDGE || IS_CLIQZ) ? false : !humanweb.isDisabled;
-				// These users did not have adblocking and antitracking.
-				// We introduce these new features initially disabled.
-				conf.enable_ad_block = false;
-				conf.enable_anti_tracking = false;
-				// Enable Offers except on Edge or Cliqz
-				conf.enable_offers = !((IS_EDGE || IS_CLIQZ));
-			} else if (globals.JUST_UPGRADED_FROM_8_1) {
-				// These users already had human web, adblocker and antitracking, so we respect their choice
-				conf.enable_ad_block = IS_CLIQZ ? false : !adblocker.isDisabled;
-				conf.enable_anti_tracking = IS_CLIQZ ? false : !antitracking.isDisabled;
-				conf.enable_human_web = (IS_EDGE || IS_CLIQZ) ? false : !humanweb.isDisabled;
-				// These users did not have Offers, so we enable them on upgrade.
-				conf.enable_offers = !(IS_EDGE || IS_CLIQZ);
-			} else {
-				// Otherwise we respect browser-core default settings
-				conf.enable_ad_block = IS_CLIQZ ? false : !adblocker.isDisabled;
-				conf.enable_anti_tracking = IS_CLIQZ ? false : !antitracking.isDisabled;
-				conf.enable_human_web = (IS_EDGE || IS_CLIQZ) ? false : !humanweb.isDisabled;
-				conf.enable_offers = (IS_EDGE || IS_CLIQZ) ? false : !offers.isDisabled;
+			if (!(IS_EDGE || IS_CLIQZ)) {
+				if (globals.JUST_UPGRADED_FROM_7) {
+					// These users had human web already, so we respect their choice
+					conf.enable_human_web = !humanweb.isDisabled;
+					// These users did not have adblocking and antitracking.
+					// We introduce these new features initially disabled.
+					conf.enable_ad_block = false;
+					conf.enable_anti_tracking = false;
+					// Enable Offers except on Edge or Cliqz
+					conf.enable_offers = true;
+				} else if (globals.JUST_UPGRADED_FROM_8_1) {
+					// These users already had human web, adblocker and antitracking, so we respect their choice
+					conf.enable_ad_block = !adblocker.isDisabled;
+					conf.enable_anti_tracking = !antitracking.isDisabled;
+					conf.enable_human_web = !humanweb.isDisabled;
+					// These users did not have Offers, so we enable them on upgrade.
+					conf.enable_offers = true;
+				} else {
+					// Otherwise we respect browser-core default settings
+					conf.enable_ad_block = !adblocker.isDisabled;
+					conf.enable_anti_tracking = !antitracking.isDisabled;
+					conf.enable_human_web = !humanweb.isDisabled;
+					conf.enable_offers = !offers.isDisabled;
+				}
 			}
-		})).catch((e) => {
+		});
+	}).catch((e) => {
 		log('cliqzStartup error', e);
 	});
 
 	if (IS_EDGE) {
 		setCliqzModuleEnabled(hpn, false);
+		setCliqzModuleEnabled(humanweb, false);
+		setCliqzModuleEnabled(offers, false);
+	}
+
+	if (IS_CLIQZ) {
+		setCliqzModuleEnabled(hpn, false);
+		setCliqzModuleEnabled(humanweb, false);
+		setCliqzModuleEnabled(antitracking, false);
+		setCliqzModuleEnabled(adblocker, false);
+		setCliqzModuleEnabled(offers, false);
 	}
 
 	// Set these tasks to run every hour
@@ -1480,18 +1539,6 @@ function initializeGhosteryModules() {
 		}
 	}
 
-	cliqzStartup.then(() => {
-		if (!IS_EDGE && !IS_CLIQZ) {
-			abtest.fetch().then(() => {
-				setupABTest();
-			}).catch((err) => {
-				log('cliqzStartup abtest fetch error', err);
-			});
-		}
-	});
-
-	// Check CMP right away.
-	cmp.fetchCMPData();
 	// Check CMP and ABTest every hour.
 	setInterval(scheduledTasks, 3600000);
 
@@ -1522,6 +1569,8 @@ function initializeGhosteryModules() {
 		surrogatedb.init(globals.JUST_UPGRADED),
 		cliqzStartup,
 	]).then(() => {
+		// run scheduledTasks on init
+		scheduledTasks();
 		// initialize panel data
 		panelData.init();
 	});
@@ -1538,13 +1587,23 @@ function init() {
 		initializePopup();
 		initializeEventListeners();
 		initializeVersioning();
-		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => accounts.pullUserSettings().catch((err) => {
-			log('init() cannot pull user settings:', err);
-		}).then(() => {
+		account.migrate()
+			.then(() => {
+				if (conf.account !== null) {
+					return account.getUser()
+						.then(account.getUserSettings);
+				}
+			})
+			.catch(err => log(err));
+
+		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => {
 			// persist Conf properties to storage only after init has completed
 			common.prefsSet(globals.initProps);
 			globals.INIT_COMPLETE = true;
-		})));
+			if (IS_CLIQZ) {
+				importCliqzSettings(cliqz, conf);
+			}
+		}));
 	}).catch((err) => {
 		log('Error in init()', err);
 		return Promise.reject(err);
