@@ -244,7 +244,11 @@ function getSiteData() {
  */
 function handleGhosteryPlatformPages(name, tab_url) {
 	if (name === 'platformPageLoaded') {
-		account.getUser()
+		account._getUserIDFromCookie()
+			.then((userID) => {
+				account._setAccountInfo(userID);
+			})
+			.then(account.getUser)
 			.then(account.getUserSettings)
 			.catch((err) => {
 				log('handleGhosteryPlatformPages error', err);
