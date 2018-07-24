@@ -1565,6 +1565,7 @@ function initializeGhosteryModules() {
 		surrogatedb.init(globals.JUST_UPGRADED),
 		cliqzStartup,
 	]).then(() => {
+		// run scheduledTasks on init
 		scheduledTasks();
 		// initialize panel data
 		panelData.init();
