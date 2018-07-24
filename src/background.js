@@ -963,8 +963,8 @@ function getAntitrackingTestConfig() {
 		};
 	}
 	return {
-		qsEnabled: false,
-		telemetryMode: 0,
+		qsEnabled: true,
+		telemetryMode: 1,
 	};
 }
 
