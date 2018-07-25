@@ -49,6 +49,7 @@ class PanelData {
 		this._blockingView = {};
 		this._rewardsView = {};
 		this._settingsView = {};
+		this._subscriptionView = {};
 	}
 
 	/**
@@ -70,6 +71,8 @@ class PanelData {
 		log(`Get data for ${view} view`);
 		if (view === 'settings') {
 			return this.settingsView;
+		} else if (view === 'subscription') {
+			return this.subscriptionView;
 		}
 		// update _trackerData with new tab info
 		this._buildTrackerData(tab);
@@ -246,6 +249,18 @@ class PanelData {
 		};
 		return this._rewardsView;
 	}
+
+	/**
+	 * Get subscription data for the Subscription View
+	 * @return {Object} Subscription view data
+	 */
+	get subscriptionView() {
+		this._subscriptionView = {
+			loggedIn: this._confData.get('loggedIn'),
+		};
+		return this._subscriptionView;
+	}
+
 
 	/**
 	 * Get conf and tracker data for Settings View. Note we have overlapping properties
