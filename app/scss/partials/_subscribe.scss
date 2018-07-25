@@ -22,8 +22,8 @@
 	.pitch-container {
 		width: 100%;
 		text-align: center;
-		padding-left: 120px;
-		padding-right: 120px;
+		padding-left: 100px;
+		padding-right: 100px;
 		.pitch-text {
 			font-size: 18px;
 			font-weight: bold;
@@ -55,6 +55,7 @@
 		}
 	}
 	.themes-slider {
+		margin-right: 14px;
 		input:checked + .ToggleSlider__slider {
 				background-color: #8FC8DF !important;
 		}
@@ -65,15 +66,19 @@
 				background-color: #2092BF !important;
 				border-color: #2092BF !important;
 		} 
-	}	
-	.themes-slider-label {
+	}
+	.field-label {
 		font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-		font-size: 12px;
-		font-weight: 700;
-		line-height: 12px;
-		text-align: left;
+		font-size: 14px;
+		font-weight: normal;
+		line-height: 14px;
 		text-size-adjust: 100%;
 		-webkit-font-smoothing: antialiased;
+		text-align: left;
+	}	
+	.themes-slider-label {
+		@extend .field-label;
+		font-weight: bolder !important;
 		padding-right: 20px !important;
 	}
 	.themes-slider-container {
@@ -82,5 +87,41 @@
 	.column-subscription {
 		padding-left: 30px !important;
 		padding-right: 30px !important;
+	}
+	.status-label {
+		@extend .field-label;
+		font-weight: bolder !important;
+	}
+	.status-value {
+		@extend .field-label;
+		padding-left: 7px !important;
+		padding-right: 7px !important;
+
+		color: $ghosty-blue;
+	}
+	.manage-link {
+		display: inline-block;
+		@extend .field-label;
+		color: $ghosty-blue;
+		text-decoration: underline;
+		padding-left: 7px;
+	}
+
+	.status-row {
+		margin-top: 18px;
+	}
+
+	.list-row {
+		padding: 12px;
+		margin-top: 60px;
+		margin-left: 33px;
+	}
+
+	.list-item {
+		margin-bottom: 12px;
+		padding-left: 12px;
+	}
+	.manage-row {
+		margin-top: 20px;
 	}
 }

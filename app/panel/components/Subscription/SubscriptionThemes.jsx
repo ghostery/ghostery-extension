@@ -40,6 +40,9 @@ const SubscriptionThemes = (props) => {
 								isChecked="true"
 								onChange={props.toggleThemes}
 							/>
+							<div className="s-tooltip-down" data-g-tooltip={t('subscription_themes_tooltip')}>
+								<img src="../../app/images/panel/icon-information-tooltip.svg" className="s-question" />
+							</div>
 						</span>
 					</div>
 				</div>

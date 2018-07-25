@@ -1713,8 +1713,11 @@
 	"subscription_priority_support_title": {
 		"message": "Priority Support"
 	},
+	"subscription_priority_support": {
+		"message": "Priority Support"
+	},
 	"subscribe_pitch": {
-		"message": "We work hard to keep Ghostery's privacy protection free for all our users. If you like what we do, however, you can support us with a small monthly subscription fee."
+		"message": "We work hard to keep Ghostery's privacy protection free for all our users. If you like what we do, however, you can support us with a small monthly subscription fee"
 	},
 	"subscribe_pitch_learn_more": {
 		"message": "Learn more"
@@ -1736,5 +1739,15 @@
 	},
 	"subscription_account_canceled": {
 		"message": "Canceled on"
+	}
+	,
+	"subscription_manage": {
+		"message": "Manage My Subscription"
+	},
+	"subscription_status_tooltip": {
+		"message": "Keep your subscription active forever"
+	},
+	"subscription_themes_tooltip": {
+		"message": "midnight theme is the best theme there is. Worth every subscription penny"
 	}
 }
