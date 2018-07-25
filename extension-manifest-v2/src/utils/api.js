@@ -113,22 +113,16 @@ class Api {
 	}
 
 	_getCsrfCookie = (csrfDomain = this.config.CSRF_DOMAIN) => (
-		new Promise((resolve, reject) => {
+		new Promise((resolve) => {
 			chrome.cookies.get({
-				url: `https://${csrfDomain}.com`,
+				url: 'http://localhost',
 				name: 'csrf_token',
-			}, (cookie) => {
-				if (cookie === null) {
-					return reject({ errors: _getJSONAPIErrorsObject(new Error(Api.ERROR_CSRF_COOKIE_NOT_FOUND)) }); // eslint-disable-line prefer-promise-reject-errors
-				}
-				return resolve(cookie.value);
-			});
+			}, cookie => resolve((cookie !== null) ? cookie.value : ''));
 		})
 	)
 
 	_errorHandler = errors => Promise.resolve(errors)
 
-	static get ERROR_CSRF_COOKIE_NOT_FOUND() { return '1'; }
 	static get JSONAPI_CONTENT_TYPE() { return 'application/vnd.api+json'; }
 
 	get = (type, id, include = '') => {
