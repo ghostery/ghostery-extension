@@ -29,7 +29,7 @@ import * as navigationActions from '../../actions/NavigationActions';
  * @return {function}        this function returns plain object, which will be merged into the component's props
  * @memberof SetupContainers
  */
-const mapStateToProps = (state, ownProps) => Object.assign({}, state.setupChoice, {
+const mapStateToProps = state => Object.assign({}, state.setupChoice, {
 	dataCollection: state.dataCollection,
 });
 
@@ -40,7 +40,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state.setupChoice
  * @return {function}          	  to be used as an argument in redux connect call
  * @memberof SetupContainers
  */
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
 	actions: bindActionCreators(Object.assign(
 		actions,
 		blockingActions,

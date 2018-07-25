@@ -39,7 +39,7 @@ class Account {
 		};
 		const opts = {
 			errorHandler: errors => (
-				new Promise((resolve, reject) => {
+				new Promise((resolve) => {
 					for (const err of errors) {
 						switch (err.code) {
 							case Api.ERROR_CSRF_COOKIE_NOT_FOUND:
@@ -197,7 +197,7 @@ class Account {
 	}
 
 	migrate = () => (
-		new Promise((resolve, reject) => {
+		new Promise((resolve) => {
 			const legacyLoginInfoKey = 'login_info';
 			chrome.storage.local.get(legacyLoginInfoKey, (items) => {
 				if (chrome.runtime.lastError) {

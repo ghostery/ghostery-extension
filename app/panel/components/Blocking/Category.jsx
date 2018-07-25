@@ -11,10 +11,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 import Trackers from './Trackers';
-import Tooltip from '../Tooltip';
-import { objectEntries } from '../../../../src/utils/common';
 /**
  * @class Implement Category component, which represents a
  * container for the list of trackers. This component is shared
@@ -58,7 +56,7 @@ class Category extends React.Component {
 	 * of the tooltip.
 	 * @param  {Object} event mouseover event
 	 */
-	showTooltip(event) {
+	showTooltip() {
 		this.setState({ showTooltip: true });
 	}
 	/**
@@ -66,7 +64,7 @@ class Category extends React.Component {
 	 * of the tooltip.
 	 * @param  {Object} event mouseover event
 	 */
-	hideTooltip(event) {
+	hideTooltip() {
 		this.setState({ showTooltip: false });
 	}
 

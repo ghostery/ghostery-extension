@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 import globals from '../../../../src/classes/Globals';
 import { log } from '../../../../src/utils/common';
 import { sendMessageInPromise } from '../../utils/msg';

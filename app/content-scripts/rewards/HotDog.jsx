@@ -13,11 +13,6 @@
 
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import msgModule from '../utils/msg';
-import { log } from '../../../src/utils/common';
-
-const msg = msgModule('rewards');
-const { sendMessage } = msg;
 
 /**
  * @class Create the Rewards "HotDog", aka UI element

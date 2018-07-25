@@ -12,8 +12,6 @@
  */
 
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import globals from '../../../../src/classes/Globals';
 import { log } from '../../../../src/utils/common';
 import { utils } from '../../utils';
 

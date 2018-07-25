@@ -125,7 +125,7 @@ const Ghostery = (function (win, doc) {
 	 * @memberOf PurpleBoxContentScript
 	 * @package
 	 */
-	const handleSizeChangeClick = function (e) {
+	const handleSizeChangeClick = function () {
 		if (ghostery) {
 			BOX_CONF.alert_expanded = !BOX_CONF.alert_expanded;
 			doSizeChange();

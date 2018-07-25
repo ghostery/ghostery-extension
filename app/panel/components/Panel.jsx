@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 import URLSearchParams from 'url-search-params';
 import Header from '../containers/HeaderContainer';
 import { sendMessage } from '../utils/msg';
@@ -61,7 +61,7 @@ class Panel extends React.Component {
 	 * @param  {Object} event
 	 * @todo  Why do we need explicit argument here?
 	 */
-	closeNotification(event) {
+	closeNotification() {
 		const { notificationClasses } = this.props;
 		let banner_status_name = '';
 
@@ -83,7 +83,7 @@ class Panel extends React.Component {
 	 * @param  {Object} event
 	 * @todo  Why do we need explicit argument here?
 	 */
-	clickReloadBanner(event) {
+	clickReloadBanner() {
 		sendMessage('reloadTab', { tab_id: +this.props.tab_id });
 		window.close();
 	}
@@ -158,8 +158,6 @@ class Panel extends React.Component {
 	 * @return {JSX} JSX for rendering the Panel
 	 */
 	render() {
-		const { loggedIn, email, emailValidated } = this.props;
-
 		// this prevents double rendering when waiting for getPanelData() to finish
 		if (!this.props.initialized) {
 			return null;

@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 /**
  * @class Implement site entry in the lists of whitelisted/blacklisted site. See Sites.jsx.
  * @memberOf SettingsComponents

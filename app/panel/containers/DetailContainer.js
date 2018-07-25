@@ -24,7 +24,7 @@ import * as actions from '../actions/DetailActions';
  * @todo  We are not using ownProps, so we better not specify it explicitly,
  * in this case it won't be passed by React (see https://github.com/reactjs/react-redux/blob/master/docs/api.md).
  */
-const mapStateToProps = (state, ownProps) => Object.assign({}, state.detail, {
+const mapStateToProps = state => Object.assign({}, state.detail, {
 	is_expanded: state.panel.is_expanded,
 	enable_offers: state.panel.enable_offers,
 	unread_offer_ids: state.panel.unread_offer_ids,
@@ -36,7 +36,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state.detail, {
  * @param  {Object} 	ownProps  Detailed view component own props
  * @return {function}          	  to be used as an argument in redux connect call
  */
-const mapDispatchToProps = (dispatch, ownProps) => ({ actions: bindActionCreators(actions, dispatch) });
+const mapDispatchToProps = dispatch => ({ actions: bindActionCreators(actions, dispatch) });
 /**
  * Connects Detailed view component to the Redux store.
  * @memberOf PanelContainers

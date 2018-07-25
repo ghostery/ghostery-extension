@@ -29,7 +29,7 @@ import {
 import {
 	LOGIN_SUCCESS,
 	LOGIN_FAIL,
-	LOGOUT_SUCCESS,
+	// LOGOUT_SUCCESS,
 	REGISTER_SUCCESS,
 	REGISTER_FAIL,
 	RESET_PASSWORD_SUCCESS,
@@ -131,7 +131,7 @@ export default (state = initialState, action) => {
 			const updated = _showNotification(state, action);
 			return Object.assign({}, state, updated);
 		}
-		// TODO?
+		// @TODO?
 		// case LOGOUT_SUCCESS: {
 		// 	action.payload = {
 		// 		text: 'Logged out successfully.',
@@ -314,7 +314,7 @@ const _showNotification = (state, action) => {
  * @param  {Object} action 		action which contains data
  * @return {Object}        		notification parameters
  */
-const _closeNotification = (state, action) => ({
+const _closeNotification = () => ({
 	notificationShown: false
 });
 

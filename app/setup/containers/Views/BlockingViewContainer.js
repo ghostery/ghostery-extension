@@ -26,7 +26,7 @@ import { getSettingsData } from '../../../panel/actions/SettingsActions';
  * @return {function}        this function returns plain object, which will be merged into the component's props
  * @memberof SetupContainers
  */
-const mapStateToProps = (state, ownProps) => Object.assign({}, state.blocking);
+const mapStateToProps = state => Object.assign({}, state.blocking);
 
 /**
  * Bind the component's action creators using Redux's bindActionCreators.
@@ -35,7 +35,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state.blocking);
  * @return {function}          	  to be used as an argument in redux connect call
  * @memberof SetupContainers
  */
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
 	actions: bindActionCreators(Object.assign(
 		actions,
 		topContentActions,

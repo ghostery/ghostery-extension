@@ -19,7 +19,6 @@ import {
 	GET_USER_SETTINGS_SUCCESS
 } from './AccountConstants';
 import { GET_PANEL_DATA } from '../panel/constants/constants';
-import { sendMessage } from '../panel/utils/msg';
 
 const initialState = {
 	loggedIn: false,
