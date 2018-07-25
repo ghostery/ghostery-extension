@@ -262,6 +262,44 @@ class Account {
 		})
 	)
 
+	/**
+	 * Determines if the user has the required scope combination(s) to access a resource.
+	 * It takes a rest parameter of string arrays, each of which must be a possible combination of
+	 * scope strings that would allow a user to access a resource. For example, if the required
+	 * scopes for a resource are "resource:read" AND "resource:write" OR ONLY "resource:god", call
+	 * this function with parameters (['resource:read', 'resource:write'], ['resource:god'])
+	 * IMPORTANT: this function does NOT verify the content of the user scopes, therefore scopes
+	 * could have been tampered with.
+	 *
+	 * @param  {rest of string arrays}	string arrays containing the required scope combination(s)
+	 * @return {boolean}				true if the user scopes match at least one of the required scope combination(s)
+	 */
+	hasScopesUnverified(...required) {
+		if (conf.account === null) { return false; }
+		if (conf.account.user === null) { return false; }
+		const userScopes = conf.account.user.scopes;
+		if (userScopes === null) { return false; }
+		if (required.length === 0) { return false; }
+
+		// check scopes
+		if (userScopes.indexOf('god') >= 0) { return true; }
+		for (const sArr of required) {
+			let matches = true;
+			if (sArr.length > 0) {
+				for (const s of sArr) {
+					if (userScopes.indexOf(s) === -1) {
+						matches = false;
+						break;
+					}
+				}
+				if (matches) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	_setLoginCookie = details => (
 		new Promise((resolve, reject) => {
 			const {

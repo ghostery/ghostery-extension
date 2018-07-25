@@ -651,6 +651,9 @@ const NotificationsContentScript = (function (win, doc) {
 	 * for messages coming from background.js.
 	 * @memberOf NotificationsContentScript
 	 * @package
+	 *
+	 * @param {string} type 	the type of notification to show
+	 * @param {object} options 	message data to pass to the notification
 	 */
 	const showAlert = function (type, options) {
 		if (ALERT_SHOWN) {
@@ -670,6 +673,7 @@ const NotificationsContentScript = (function (win, doc) {
 				}
 			);
 		} else if (type === 'showUpgradeAlert') {
+			// major version upgrade
 			if (options) {
 				alert_contents = createUpgradeNotificationContent(
 					bigLogoImage,
@@ -682,9 +686,10 @@ const NotificationsContentScript = (function (win, doc) {
 					}
 				);
 			} else {
+				// minor version upgrade
 				alert_contents = createNotificationContent(
 					NOTIFICATION_TRANSLATIONS.notification_upgrade,
-					'https://github.com/ghostery/ghostery-extension/releases',
+					'https://www.ghostery.com/release-notes',
 					NOTIFICATION_TRANSLATIONS.notification_upgrade_link,
 					() => {
 						removeAlert();
