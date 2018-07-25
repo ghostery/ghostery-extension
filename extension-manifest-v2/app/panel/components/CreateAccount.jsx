@@ -146,7 +146,7 @@ class CreateAccount extends React.Component {
 									<div id="create-account-first-name">
 										<label className="create-account-label" id="create-first-name-label" htmlFor="create-input-first-name">
 											{ t('first_name_field_label') }
-											<input onChange={this.handleInputChange} value={firstName} className="create-account-input" id="create-input-first-name" name="firstName" pattern=".{1,}" required type="text" />
+											<input onChange={this.handleInputChange} value={firstName} className="create-account-input" id="create-input-first-name" name="firstName" pattern=".{1,}" type="text" />
 										</label>
 									</div>
 								</div>
@@ -154,7 +154,7 @@ class CreateAccount extends React.Component {
 									<div id="create-account-last-name">
 										<label className="create-account-label" id="create-last-name-label" htmlFor="create-input-last-name">
 											{ t('last_name_field_label') }
-											<input onChange={this.handleInputChange} value={lastName} className="create-account-input" id="create-input-last-name" name="lastName" pattern=".{1,}" required type="text" />
+											<input onChange={this.handleInputChange} value={lastName} className="create-account-input" id="create-input-last-name" name="lastName" pattern=".{1,}" type="text" />
 										</label>
 									</div>
 								</div>
