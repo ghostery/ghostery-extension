@@ -658,6 +658,7 @@ function onMessageHandler(request, sender, callback) {
 				callback(data);
 			});
 		}
+		account.getUserSettings().catch(err => log('Error getting user settings from getPanelData:', err));
 		return true;
 	} else if (name === 'setPanelData') {
 		panelData.set(message);
