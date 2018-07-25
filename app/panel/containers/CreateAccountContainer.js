@@ -26,7 +26,7 @@ import { register, getUser } from '../../Account/AccountActions';
  * @todo  We are not using ownProps, so we better not specify it explicitly,
  * in this case it won't be passed by React (see https://github.com/reactjs/react-redux/blob/master/docs/api.md).
  */
-const mapStateToProps = (state, ownProps) => Object.assign({}, state.createAccount, {
+const mapStateToProps = state => Object.assign({}, state.createAccount, {
 	// get properties from panel redux store
 	is_expert: state.panel.is_expert,
 	language: state.panel.language,
@@ -38,7 +38,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state.createAccou
  * @param  {Object} 	ownProps  CreateAccount component own props
  * @return {function}          	  to be used as an argument in redux connect call
  */
-const mapDispatchToProps = (dispatch, ownProps) => ({ actions: bindActionCreators(Object.assign(actions, { register, getUser }), dispatch) });
+const mapDispatchToProps = dispatch => ({ actions: bindActionCreators(Object.assign(actions, { register, getUser }), dispatch) });
 /**
  * Connects CreateAccount component to the Redux store.
  * @memberOf PanelContainers

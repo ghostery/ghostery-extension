@@ -30,7 +30,7 @@
 		"react/jsx-indent-props": [1, "tab"],
 		"function-paren-newline": [0],
 		"func-names": [0],
-		"no-unused-vars": [0],
+		"no-unused-vars": [1],
 		"no-plusplus": [0],
 		"no-control-regex": [0],
 		"no-useless-escape": [0],

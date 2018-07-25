@@ -12,7 +12,6 @@
  */
 
 import { UPDATE_DISPLAY_MODE } from '../constants/constants';
-import { sendMessageInPromise } from '../../panel/utils/msg';
 
 /**
  * Called from DisplayView._save()

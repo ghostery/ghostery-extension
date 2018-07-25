@@ -90,7 +90,7 @@ const Click2PlayContentScript = (function (win, doc) {
 					sendMessage('processC2P', {
 						action: 'once',
 						app_ids: c2pAppDef.allow
-					}, (result) => {
+					}, () => {
 						doc.location.reload();
 					});
 
@@ -104,7 +104,7 @@ const Click2PlayContentScript = (function (win, doc) {
 					sendMessage('processC2P', {
 						action: 'always',
 						app_ids: c2pAppDef.allow
-					}, (result) => {
+					}, () => {
 						doc.location.reload();
 					});
 

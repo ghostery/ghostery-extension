@@ -13,7 +13,6 @@
 
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import * as msg from '../../utils/msg';
 import * as panelActions from '../PanelActions';
 import { TOGGLE_CLIQZ_FEATURE } from '../../constants/constants';
 

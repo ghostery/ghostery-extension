@@ -13,7 +13,7 @@
 
 /* eslint react/no-array-index-key: 0 */
 
-import React, { Component } from 'react';
+import React from 'react';
 import globals from '../../../../src/classes/Globals';
 import { log } from '../../../../src/utils/common';
 import { sendMessageInPromise } from '../../utils/msg';
@@ -57,7 +57,7 @@ class Tracker extends React.Component {
 	 * @param  {Object} nextState   changed state
 	 * @return {boolean}            true means proceed with rendering
 	 */
-	shouldComponentUpdate(nextProps, nextState) {
+	shouldComponentUpdate(nextProps) {
 		const { tracker } = nextProps;
 		if (!tracker || Object.keys(tracker).length === 0) {
 			return false;

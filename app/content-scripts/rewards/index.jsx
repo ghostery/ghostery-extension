@@ -28,8 +28,7 @@ import globals from '../../../src/classes/Globals';
 
 const msg = msgModule('rewards');
 const { sendMessage } = msg;
-const { BROWSER_INFO, onMessage } = globals;
-const viewport = document.getElementById('viewport');
+const { onMessage } = globals;
 const channelsSupported = (typeof chrome.runtime.connect === 'function');
 
 /**
@@ -62,8 +61,6 @@ class RewardsApp {
 			removeFocusListener: this.removeFocusListener,
 			addRewardSeenListener: this.addRewardSeenListener
 		};
-
-		this.init();
 	}
 
 	init() {
@@ -73,7 +70,7 @@ class RewardsApp {
 		) {
 			this.start();
 		} else {
-			document.addEventListener('DOMContentLoaded', (event) => {
+			document.addEventListener('DOMContentLoaded', () => {
 				this.start();
 			});
 		}
@@ -188,7 +185,7 @@ class RewardsApp {
 		}
 	}
 
-	handleMessages(request, sender, response) {
+	handleMessages(request) {
 		if (request.name === 'showHotDog') {
 			this.reward = request.reward;
 			this.conf = request.conf;
@@ -240,3 +237,4 @@ class RewardsApp {
 }
 
 const rewardsApp = new RewardsApp();
+rewardsApp.init();

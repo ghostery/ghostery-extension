@@ -121,7 +121,7 @@ class PurpleBox {
 		}
 		return injectScript(tab_id, 'dist/purplebox.js', 'dist/css/purplebox_styles.css', 'document_start').then(() => {
 			if (!this.channelsSupported) {
-				sendMessage(tab_id, 'createBox', this.createBoxParams, (response) => {
+				sendMessage(tab_id, 'createBox', this.createBoxParams, () => {
 					if (chrome.runtime.lastError) {
 						log('createBox sendMessage error', chrome.runtime.lastError);
 						return false;
@@ -163,7 +163,7 @@ class PurpleBox {
 		}
 		sendMessage(tab_id, 'updateBox', {
 			apps
-		}, (response) => {
+		}, () => {
 			if (chrome.runtime.lastError) {
 				log('updateBox sendMessage failed', chrome.runtime.lastError, tab);
 			}

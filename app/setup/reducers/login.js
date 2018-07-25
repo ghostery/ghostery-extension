@@ -19,7 +19,6 @@ import {
 } from '../constants/constants';
 import {
 	LOGIN_FAIL,
-	GET_LOGIN_INFO,
 	LOGIN_SUCCESS,
 	REGISTER_SUCCESS,
 	REGISTER_FAIL

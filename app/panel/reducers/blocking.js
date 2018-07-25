@@ -24,9 +24,8 @@ import {
 	TOGGLE_EXPAND_CATEGORY
 } from '../constants/constants';
 import { updateTrackerBlocked, updateCategoryBlocked, updateBlockAllTrackers, toggleExpandAll, toggleExpandCategory } from '../utils/blocking';
-import { removeFromObject, updateObject } from '../utils/utils';
+import { updateObject } from '../utils/utils';
 import { sendMessage } from '../utils/msg';
-import { objectEntries } from '../../../src/utils/common';
 
 const initialState = {
 	categories: [],

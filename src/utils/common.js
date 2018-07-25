@@ -18,7 +18,6 @@
 
 // DO NOT IMPORT MODULES TO THIS FILE
 
-const DEBUG = (chrome.runtime.getManifest().debug || false);
 const LOG = chrome.runtime.getManifest().log || false;
 
 /**

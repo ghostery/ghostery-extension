@@ -12,7 +12,6 @@
  */
 
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import globals from '../../../../src/classes/Globals';
 
 const { IS_CLIQZ } = globals;
