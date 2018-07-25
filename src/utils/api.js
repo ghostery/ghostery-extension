@@ -115,7 +115,7 @@ class Api {
 	_getCsrfCookie = (csrfDomain = this.config.CSRF_DOMAIN) => (
 		new Promise((resolve) => {
 			chrome.cookies.get({
-				url: 'http://localhost',
+				url: `https://${csrfDomain}.com`,
 				name: 'csrf_token',
 			}, cookie => resolve((cookie !== null) ? cookie.value : ''));
 		})
