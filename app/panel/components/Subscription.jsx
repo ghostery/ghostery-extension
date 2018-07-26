@@ -47,12 +47,12 @@ class Subscription extends React.Component {
 	 * Lifecycle event. Triggers action which delivers subscription data.
 	 */
 	componentDidMount() {
-	//	console.log("SUBSCRIPTION", this.props);
-	//	this.props.actions.getSubscriptionData();
+		console.log("SUBSCRIPTION", this.props);
+		this.props.actions.getSubscriptionData();
 	}
 
 	componentWillReceiveProps(nextProps) {
-	//	console.log("SUBSCRIPTION WILL RECEIVE PROPS", this.props, nextProps);
+		console.log("SUBSCRIPTION WILL RECEIVE PROPS", this.props, nextProps);
 	}
 
 

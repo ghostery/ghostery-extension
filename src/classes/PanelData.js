@@ -68,7 +68,7 @@ class PanelData {
 	 * @return {Object}      	view data
 	 */
 	get(view, tab) {
-		log(`Get data for ${view} view`);
+		console.log(`Get data for ${view} view`);
 		if (view === 'settings') {
 			return this.settingsView;
 		} else if (view === 'subscription') {
@@ -256,12 +256,12 @@ class PanelData {
 	 */
 	get subscriptionView() {
 		this._subscriptionView = {
-			loggedIn: this._confData.get('loggedIn'),
+			account: this._confData.get('account'),
+			supporter: this._confData.get('supporter')
 		};
+		console.log("SUBSCRIPTION DATA", this._subscriptionView);
 		return this._subscriptionView;
 	}
-
-
 	/**
 	 * Get conf and tracker data for Settings View. Note we have overlapping properties
 	 * from blockView incase the user is in Simple Mode.
@@ -348,7 +348,8 @@ class PanelData {
 			.set('toggle_individual_trackers', conf.toggle_individual_trackers)
 			.set('trackers_banner_status', conf.trackers_banner_status)
 			.set('expand_all_trackers', conf.expand_all_trackers)
-			.set('account', conf.account);
+			.set('account', conf.account)
+			.set('supporter', account.hasScopesUnverified('subscription:supporter'));
 	}
 
 	/**
