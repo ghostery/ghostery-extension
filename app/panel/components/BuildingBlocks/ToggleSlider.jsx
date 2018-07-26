@@ -64,7 +64,6 @@ class ToggleSlider extends React.Component {
 			disabled: this.props.isDisabled,
 		});
 		const enabledSlider = this.props.colorScheme || "";
-		console.log("PRPPS", this.props, enabledSlider);
 		//const enabledSircle = (this.props.colorScheme && this.props.colorScheme.enabledSircle) || "";
 		return (
 			<div className={compClassNames}>

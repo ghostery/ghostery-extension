@@ -165,7 +165,7 @@ class HeaderMenu extends React.Component {
 	 * @return {ReactComponent}   ReactComponent instance
 	 */
 	render() {
-		const { loggedIn, email } = this.props;
+		const { loggedIn, email, supporter } = this.props;
 		return (
 			<ClickOutside onClickOutside={this.handleClickOutside} excludeEl={this.props.kebab}>
 				<div className="dropdown-pane" id="header-dropdown">
@@ -231,7 +231,7 @@ class HeaderMenu extends React.Component {
 								<span>{ t('panel_menu_about') }</span>
 							</Link>
 						</li>
-						{loggedIn ? (
+						{(loggedIn && supporter) ? (
 							<li className="menu-option">
 								<Link to="/subscription" onClick={this.props.toggleDropdown}>
 									<this.SupporterMenuItemBase/>

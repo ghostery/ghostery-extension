@@ -171,3 +171,17 @@ export function doXHR(method, url, query) {
 		xhr.send(query);
 	});
 }
+/**
+ * Determine if user is a supporter
+ * @memberOf PanelUtils
+ * @param  {array} userScopes 	array of scope strings
+ * @return {boolean} 
+ */
+export function isSupporter(userScopes) {
+	return true; //Temporarily
+	if (userScopes === null) { return false; }
+	// check scopes
+	if (userScopes.indexOf('subscription:supporter') >= 0) { return true; }
+	return false;
+}
+
