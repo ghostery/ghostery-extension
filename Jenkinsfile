@@ -31,7 +31,7 @@ node('docker') {
                     // make browser-core noisy
                     sh 'sed -i \'s/global.__DEV__/true/1\' node_modules/browser-core/build/core/console.js'
                     withGithubCredentials {
-                        sh 'moab makezip'
+                        sh 'moab makezip production'
                     }
                     // get the name of the firefox build
                     artifacts.add(sh(returnStdout: true, script: 'ls build/ | grep firefox').trim())
@@ -57,21 +57,6 @@ node('docker') {
             if (it.contains('firefox')) {
                 // firefox artifact (zip) - sign for cliqz_beta
                 def artifactUrl = "https://s3.amazonaws.com/${uploadPath}/${it}"
-                build job: 'addon-repack', parameters: [
-                    string(name: 'XPI_URL', value: artifactUrl),
-                    string(name: 'XPI_SIGN_CREDENTIALS', value: '41572f9c-06aa-46f0-9c3b-b7f4f78e9caa'),
-                    string(name: 'XPI_SIGN_REPO_URL', value: 'git@github.com:cliqz/xpi-sign.git'),
-                    string(name: 'CHANNEL', value: 'android_browser_beta')
-                ]
-            }
-        }
-    }
-
-    stage('Publish Beta') {
-        artifacts.each {
-            if (it.contains('firefox')) {
-                // firefox artifact (zip) - sign for cliqz_beta
-                def artifactUrl = "https://s3.amazonaws.com/${uploadPath}/${env.BRANCH_NAME}/${it}"
                 build job: 'addon-repack', parameters: [
                     string(name: 'XPI_URL', value: artifactUrl),
                     string(name: 'XPI_SIGN_CREDENTIALS', value: '41572f9c-06aa-46f0-9c3b-b7f4f78e9caa'),
