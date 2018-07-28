@@ -33,6 +33,11 @@ label {
 		font-size: 14px;
 		color: #2092BF;
 	}
+	&:not(.hollow) {
+		&:hover, &:focus {
+			background-color: $ghosty-blue !important;
+		}
+	}
 }
 span.asterisk {
 	display: none;
@@ -66,9 +71,6 @@ p.warning {
 /* SIGNIN PANEL */
 #signin-panel {
 	margin-top: 50px;
-	&.loading {
-		cursor: wait;
-	}
 	#login-password{
 		margin-top: 15px;
 	}
@@ -86,12 +88,89 @@ p.warning {
 	}
 }
 
+.button {
+	.loader {
+		display: none;
+	}
+	&.loading {
+		pointer-events: none;
+		.loader {
+			display: inline-block;
+			height: 12px;
+			width: 12px;
+		}
+		.title {
+			display: none;
+		}
+	}
+}
+
+.loader {
+	font-size: 10px;
+	text-indent: -9999em;
+	width: 10rem;
+	height: 10rem;
+	border-radius: 50%;
+	background: #ffffff;
+	background: -moz-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+	background: -webkit-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+	background: -o-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+	background: -ms-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+	background: linear-gradient(to right, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+	position: relative;
+	-webkit-animation: load3 1.4s infinite linear;
+	animation: load3 1.4s infinite linear;
+	-webkit-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	transform: translateZ(0);
+}
+.loader:before {
+	width: 50%;
+	height: 50%;
+	background: #ffffff;
+	border-radius: 100% 0 0 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	content: '';
+}
+.loader:after {
+	background: #00AEF0;
+	width: 75%;
+	height: 75%;
+	border-radius: 50%;
+	content: '';
+	margin: auto;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+@-webkit-keyframes load3 {
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+@keyframes load3 {
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+
 /* FORGOT PASSWORD PANEL */
 #forgot-password-panel{
 	margin-top: 75px;
-	&.loading {
-		cursor: wait;
-	}
 	h4#forgot-password-message {
 		font-size:14px;
 		font-weight: normal;
@@ -120,9 +199,6 @@ p.warning {
 
 /* CREATE ACCOUNT PANEL */
 #create-account-panel {
-	&.loading {
-		cursor: wait;
-	}
 	margin-top: 10px;
 	input {margin-bottom: 5px;}
 	p.warning {margin-bottom: 5px;}
@@ -154,7 +230,10 @@ p.warning {
 			margin-bottom: 30px;
 		}
 	}
-	#account-creation-buttons .button {margin-bottom: 0;}
+	#account-creation-buttons .button {
+		margin-bottom: 0;
+		width: 126px;
+	}
 	#accept-privacy-requirement {
 		margin-left: 22px;
 		margin-top: 3px;
