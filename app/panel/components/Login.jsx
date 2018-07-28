@@ -13,6 +13,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ClassNames from 'classnames';
 import { validateEmail, validatePassword } from '../utils/utils';
 import { log } from '../../../src/utils/common';
 
@@ -66,6 +67,7 @@ class Login extends React.Component {
 			}
 			this.props.actions.login(email.toLowerCase(), password)
 				.then((success) => {
+					this.setState({ loading: false });
 					if (success) {
 						Promise.all([
 							this.props.actions.getUser(),
@@ -87,8 +89,9 @@ class Login extends React.Component {
 		const {
 			email, password, emailError, passwordError, loading
 		} = this.state;
+		const buttonClasses = ClassNames('button ghostery-button', { loading });
 		return (
-			<div id="signin-panel" className={loading ? 'loading' : ''}>
+			<div id="signin-panel">
 				<div className="row align-center">
 					<div className="small-11 medium-8 columns">
 						<form onSubmit={this.handleSubmit}>
@@ -113,8 +116,9 @@ class Login extends React.Component {
 									</Link>
 								</div>
 								<div className="small-6 columns text-center">
-									<button type="submit" id="signin-button" className="button">
-										{ t('panel_menu_signin') }
+									<button type="submit" id="signin-button" className={buttonClasses}>
+										<span className="title">{ t('panel_menu_signin') }</span>
+										<span className="loader" />
 									</button>
 								</div>
 							</div>
