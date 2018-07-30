@@ -12,11 +12,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React, { Component } from 'react';
-import globals from '../../../../src/classes/Globals';
-
-const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
-const IS_CLIQZ = (globals.BROWSER_INFO.name === 'cliqz');
+import React from 'react';
 
 /**
  * @class Implement Subscription Info in subview as a React component.
@@ -25,9 +21,7 @@ const IS_CLIQZ = (globals.BROWSER_INFO.name === 'cliqz');
  * @memberOf SubscriptionComponents
  */
 const SubscriptionInfo = (props) => {
-	//const { subscriptionData } = props;
-	const subscriptionData = {};
-	subscriptionData.canceled = "August 5, 2018";
+	const { subscriptionData } = props;
 	return (
 		<div className="content-subscription s-tabs-panel">
 			<div className="row">

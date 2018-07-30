@@ -12,11 +12,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React, { Component } from 'react';
-import globals from '../../../../src/classes/Globals';
-
-const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
-const IS_CLIQZ = (globals.BROWSER_INFO.name === 'cliqz');
+import React from 'react';
 
 /**
  * @class Implement Priority Support subview as a React component.

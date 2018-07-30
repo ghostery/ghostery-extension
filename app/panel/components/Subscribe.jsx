@@ -10,12 +10,8 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import globals from '../../../src/classes/Globals';
-import { sendMessage } from '../utils/msg';
-
-const { BROWSER_INFO, EXTENSION_VERSION } = globals;
 /**
  * @class Implement About view which opens from the main drop-down menu.
  * @memberof PanelClasses
@@ -26,6 +22,8 @@ class Subscribe extends React.Component {
 	 * @return {ReactComponent}   ReactComponent instance
 	 */
 	render() {
+		//supporter param is specified in Route path to this component
+		const supporter = this.props.match.params.supporter === "true" ? true : false;
 		return (
 			<div className="content-subscription">
 				<svg width="137px" height="97px" viewBox="0 0 137 97" className="badge">
@@ -60,10 +58,14 @@ class Subscribe extends React.Component {
 					<a href="https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/" target="_blank" rel="noopener noreferrer">
 						<span className="pitch-learn-more">{t ('subscribe_pitch_learn_more')}</span>
 					</a>
-					<span className="pitch-become-supporter">{t ('subscribe_pitch_button_label')}</span>
-					<Link to="/login">
-						<span className="pitch-already-supporter">{t ('subscribe_pitch_sign_here')}</span>
-					</Link>
+					<a href="https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/" target="_blank" rel="noopener noreferrer">
+						<span className="pitch-become-supporter">{t ('subscribe_pitch_button_label')}</span>
+					</a>
+					{ supporter && 
+						<Link to="/login">
+							<span className="pitch-already-supporter">{t ('subscribe_pitch_sign_here')}</span>
+						</Link>
+					}
 				</div>
 			</div>
 		);

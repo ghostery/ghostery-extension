@@ -11,11 +11,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React, { Component } from 'react';
-import globals from '../../../../src/classes/Globals';
+import React from 'react';
 import { ToggleSlider } from '../BuildingBlocks';
-const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
-const IS_CLIQZ = (globals.BROWSER_INFO.name === 'cliqz');
 
 /**
  * @class Implement Themes subview as a React component.
@@ -37,7 +34,7 @@ const SubscriptionThemes = (props) => {
 							</span>
 							<ToggleSlider
 								className="themes-slider"
-								isChecked="true"
+								isChecked={props.isChecked}
 								onChange={props.toggleThemes}
 							/>
 							<div className="s-tooltip-down" data-g-tooltip={t('subscription_themes_tooltip')}>
