@@ -440,9 +440,9 @@ class Account {
 	}
 
 	_logoutOnUserIDCookieRemoved = (changeInfo) => {
-		const { cause, removed, cookie } = changeInfo;
+		const { removed, cookie } = changeInfo;
 		const { name, domain } = cookie;
-		if (name === 'user_id' && domain === `.${GHOSTERY_DOMAIN}.com` && removed && cause === 'expired_overwrite') {
+		if (name === 'user_id' && domain === `.${GHOSTERY_DOMAIN}.com` && removed) {
 			this.logout();
 		}
 	}
