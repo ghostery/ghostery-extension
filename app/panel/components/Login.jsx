@@ -67,14 +67,17 @@ class Login extends React.Component {
 			}
 			this.props.actions.login(email.toLowerCase(), password)
 				.then((success) => {
-					this.setState({ loading: false });
 					if (success) {
 						Promise.all([
 							this.props.actions.getUser(),
 							this.props.actions.getUserSettings(),
 						]).finally(() => {
-							this.props.history.push(this.props.is_expert ? '/detail/blocking' : '/');
+							this.setState({ loading: false }, () => {
+								this.props.history.push(this.props.is_expert ? '/detail/blocking' : '/');
+							});
 						});
+					} else {
+						this.setState({ loading: false });
 					}
 				})
 				.catch(err => log(err));
