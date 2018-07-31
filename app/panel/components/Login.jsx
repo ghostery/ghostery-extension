@@ -65,7 +65,7 @@ class Login extends React.Component {
 				});
 				return;
 			}
-			this.props.actions.login(email.toLowerCase(), password)
+			this.props.actions.login(email, password)
 				.then((success) => {
 					if (success) {
 						Promise.all([

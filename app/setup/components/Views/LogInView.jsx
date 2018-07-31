@@ -140,9 +140,9 @@ class LogInView extends Component {
 			return;
 		}
 
-		const email = this.state.email.toLowerCase();
-		const confirmEmail = this.state.confirmEmail.toLowerCase();
-		const { firstName, lastName, password } = this.state;
+		const {
+			email, confirmEmail, firstName, lastName, password
+		} = this.state;
 		this.props.actions.register(email, confirmEmail, firstName, lastName, password)
 			.then((success) => {
 				if (success) {
