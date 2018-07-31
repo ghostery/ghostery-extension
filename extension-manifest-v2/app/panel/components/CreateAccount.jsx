@@ -65,10 +65,9 @@ class CreateAccount extends React.Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 		this.setState({ loading: true }, () => {
-			const email = this.state.email.toLowerCase();
-			const confirmEmail = this.state.confirmEmail.toLowerCase();
-			const { firstName, lastName, password } = this.state;
-
+			const {
+				email, confirmEmail, firstName, lastName, password
+			} = this.state;
 			this.setState({ loading: true }, () => {
 				if (!validateEmail(email)) {
 					this.setState({
