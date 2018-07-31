@@ -127,6 +127,7 @@ const config = {
 		licenses_react: [LICENSES_DIR + '/Licenses.jsx', LICENSES_DIR + '/License.jsx'],
 		foundation: [SASS_DIR + '/vendor/foundation.scss'],
 		ghostery_dot_com_css: [SASS_DIR + '/ghostery_dot_com.scss'],
+		midnight: [SASS_DIR + '/midnight.scss'],
 		panel: [SASS_DIR + '/panel.scss'],
 		panel_android: [SASS_DIR + '/panel_android.scss'],
 		purplebox_styles: [SASS_DIR + '/purplebox.scss'],
