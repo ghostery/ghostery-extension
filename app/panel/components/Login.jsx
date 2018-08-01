@@ -14,6 +14,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ClassNames from 'classnames';
+import RSVP from 'rsvp';
 import { validateEmail, validatePassword } from '../utils/utils';
 import { log } from '../../../src/utils/common';
 
@@ -68,7 +69,7 @@ class Login extends React.Component {
 			this.props.actions.login(email, password)
 				.then((success) => {
 					if (success) {
-						Promise.all([
+						RSVP.all([
 							this.props.actions.getUser(),
 							this.props.actions.getUserSettings(),
 						]).finally(() => {
