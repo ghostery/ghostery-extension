@@ -17,6 +17,7 @@
 import _ from 'underscore';
 import normalize from 'json-api-normalizer';
 import build from 'redux-object';
+import RSVP from 'rsvp';
 import globals from '../classes/Globals';
 import conf from '../classes/Conf';
 import dispatcher from '../classes/Dispatcher';
@@ -53,8 +54,8 @@ class Account {
 							case '10300': // csrf token is missing
 							case '10301': // csrf tokens do not match
 								return this.logout()
-									.catch(e => log(e))
-									.finally(() => resolve());
+									.then(() => resolve())
+									.catch(() => resolve());
 							default:
 								return resolve();
 						}
@@ -114,7 +115,7 @@ class Account {
 	}
 
 	logout = () => (
-		new Promise((resolve, reject) => {
+		new RSVP.Promise((resolve, reject) => {
 			chrome.cookies.get({
 				url: `https://${GHOSTERY_DOMAIN}.com`,
 				name: 'csrf_token',

@@ -14,6 +14,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ClassNames from 'classnames';
+import RSVP from 'rsvp';
 import { validateEmail, validatePassword } from '../utils/utils';
 
 /**
@@ -101,10 +102,13 @@ class CreateAccount extends React.Component {
 				this.props.actions.register(email, confirmEmail, firstName, lastName, password).then((success) => {
 					this.setState({ loading: false });
 					if (success) {
-						this.props.actions.getUser()
-							.finally(() => {
-								this.props.history.push('/account-success');
-							});
+						new RSVP.Promise((resolve) => {
+							this.props.actions.getUser()
+								.then(() => resolve())
+								.catch(() => resolve());
+						}).finally(() => {
+							this.props.history.push('/account-success');
+						});
 					}
 				});
 			});
