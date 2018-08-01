@@ -78,6 +78,10 @@
 	border-left-width: 0;
 	border-radius: 0;
 	padding: 10px 0 10px 10px;
+
+	.flex-grow {
+		flex: 1;
+	}
 }
 .RewardListItem.RewardListItem--unread + .RewardListItem.RewardListItem--unread,
 .RewardListItem:not(.RewardListItem--unread) + .RewardListItem:not(.RewardListItem--unread) {
