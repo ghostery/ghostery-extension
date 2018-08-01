@@ -69,6 +69,7 @@ const initialState = {
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case GET_PANEL_DATA: {
+			console.log("panel", action.data);
 			return Object.assign({}, state, action.data, { initialized: true });
 		}
 		case SHOW_NOTIFICATION: {

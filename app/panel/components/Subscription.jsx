@@ -25,7 +25,7 @@ class Subscription extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isChecked: true
+			isChecked: false
 		};
 
 		// event bindings
@@ -37,15 +37,34 @@ class Subscription extends React.Component {
 	 */
 	componentWillMount() {
 		this.props.history.push('/subscription/info');
+		this.props.actions.getSubscriptionData().then(() => {});
 	}
 
 	toggleThemes(event) {
-		console.log("TOGGLE", event);
-		this.setState({isChecked: !this.state.isChecked});
+		const dataUrl = "../../dist/css/midnight.css";
+		const newChecked = !this.state.isChecked;
+		this.setState({isChecked: newChecked});
+		if(newChecked) {
+			let style = document.getElementById("midnight");
+			if(!style) {
+				style = document.createElement('style');
+				if(style) {
+					style.textContent = "#content-summary {background-color: #124559; }";
+					style.id = "midnight";
+					document.head.appendChild(style);
+				}
+			}
+		} else {
+			const style = document.getElementById("midnight");
+			document.head.removeChild(style);
+		}
+		// const theme = document.getElementsByTagName("link")[ 2 ];
+		// theme.setAttribute("href", newChecked ? dataUrl : null);
+		// console.log("LINK", theme);
 	}
 
 	SubscriptionInfoComponent = () => (<SubscriptionInfo subscriptionData={this.props}/>);
-	SubscriptionThemesComponent = () => (<SubscriptionThemes subscriptionData={this.props} toggleThemes={this.toggleThemes} actions={this.props.actions} />);
+	SubscriptionThemesComponent = () => (<SubscriptionThemes isChecked={this.state.isChecked} subscriptionData={this.props} toggleThemes={this.toggleThemes} actions={this.props.actions} />);
 	PrioritySupportComponent = () => (<PrioritySupport/>);
 	/**
 	 * Render top level component of the Subscription view.

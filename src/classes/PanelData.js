@@ -169,6 +169,11 @@ class PanelData {
 	 * @return {Object}		panel data shared by multiple views
 	 */
 	get panelView() {
+		const currentTheme = this._confData.get('currentTheme');
+		let theme = null;
+		if(currentTheme !== 'default') {
+			theme = (this._confData.get("themes"))[currentTheme] || null;
+		}
 		this._panelView = {
 			panel: {
 				enable_ad_block: this._confData.get('enable_ad_block'),
@@ -181,6 +186,8 @@ class PanelData {
 				language: this._confData.get('language'),
 				reload_banner_status: this._confData.get('reload_banner_status'),
 				trackers_banner_status: this._confData.get('trackers_banner_status'),
+				currentTheme: currentTheme,
+				theme: theme,
 
 				needsReload: this._trackerData.get('needsReload'),
 				smartBlock: this._trackerData.get('smartBlock'),
@@ -336,7 +343,9 @@ class PanelData {
 			.set('toggle_individual_trackers', conf.toggle_individual_trackers)
 			.set('trackers_banner_status', conf.trackers_banner_status)
 			.set('expand_all_trackers', conf.expand_all_trackers)
-			.set('account', conf.account);
+			.set('account', conf.account)
+			.set('currentTheme', conf.currentTheme)
+			.set('themes', conf.themes);
 	}
 
 	/**
