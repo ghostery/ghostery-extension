@@ -664,7 +664,13 @@ function onMessageHandler(request, sender, callback) {
 		panelData.set(message);
 		callback();
 		return false;
-	} else if (name === 'getCliqzModuleData') {
+	} else if (name === 'setThemeData') {
+		panelData.set(message);
+		message.theme = conf.themes[message.currentTheme];
+		callback(message);
+		return true;
+	}
+	else if (name === 'getCliqzModuleData') {
 		const modules = { adblock: {}, antitracking: {} };
 		utils.getActiveTab((tab) => {
 			button.update();
@@ -1708,7 +1714,6 @@ init().then(() => {
     fill: #124559; }
 `;
 	conf.themes = themes;
-	conf.currentTheme = "midnight";
 	panelData.init();
 });
 

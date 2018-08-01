@@ -17,6 +17,7 @@ import SubscriptionMenu from './Subscription/SubscriptionMenu';
 import SubscriptionInfo from './Subscription/SubscriptionInfo';
 import SubscriptionThemes from './Subscription/SubscriptionThemes';
 import PrioritySupport from './Subscription/PrioritySupport';
+import { setTheme } from '../utils/utils';
 /**
  * @class Implement base Subscription view which routes navigation to all subscription subviews
  * @memberof PanelClasses
@@ -37,30 +38,23 @@ class Subscription extends React.Component {
 	 */
 	componentWillMount() {
 		this.props.history.push('/subscription/info');
-		this.props.actions.getSubscriptionData().then(() => {});
+		this.setState({isChecked: (this.props.currentTheme !== 'default')});
+		console.log("SUBSCRIPTION PROPS IN WILL MOUNT", this.props, this.state);
+		// this.props.actions.getSubscriptionData().then(() => {});
 	}
-
+	componentWillReceiveProps(nextProps) {
+		console.log("SUBSCRIPTION PROPS", this.props, nextProps);
+	}
 	toggleThemes(event) {
-		const dataUrl = "../../dist/css/midnight.css";
 		const newChecked = !this.state.isChecked;
 		this.setState({isChecked: newChecked});
 		if(newChecked) {
-			let style = document.getElementById("midnight");
-			if(!style) {
-				style = document.createElement('style');
-				if(style) {
-					style.textContent = "#content-summary {background-color: #124559; }";
-					style.id = "midnight";
-					document.head.appendChild(style);
-				}
-			}
+			this.props.actions.setTheme({currentTheme:'midnight'});
+//			setTheme(document, this.props.currentTheme, this.props.theme);
 		} else {
-			const style = document.getElementById("midnight");
-			document.head.removeChild(style);
+			this.props.actions.setTheme({currentTheme:'default'});
+//			setTheme(document, 'default');
 		}
-		// const theme = document.getElementsByTagName("link")[ 2 ];
-		// theme.setAttribute("href", newChecked ? dataUrl : null);
-		// console.log("LINK", theme);
 	}
 
 	SubscriptionInfoComponent = () => (<SubscriptionInfo subscriptionData={this.props}/>);

@@ -15,7 +15,8 @@ import {
 	TOGGLE_CLIQZ_FEATURE,
 	SHOW_NOTIFICATION,
 	CLOSE_NOTIFICATION,
-	TOGGLE_EXPERT
+	TOGGLE_EXPERT,
+	SET_THEME,
 } from '../constants/constants';
 import { sendMessageInPromise } from '../utils/msg';
 
@@ -101,4 +102,16 @@ export function toggleExpert() {
 	return {
 		type: TOGGLE_EXPERT,
 	};
+}
+
+export function setTheme(data) {
+	return function (dispatch) {
+		return sendMessageInPromise('setThemeData', data)
+		.then ( result => {
+			dispatch({
+				type: SET_THEME,
+				data: result,
+			});
+		});
+	}
 }

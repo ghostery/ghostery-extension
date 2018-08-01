@@ -68,10 +68,11 @@ class PanelData {
 	 * @return {Object}      	view data
 	 */
 	get(view, tab) {
-		log(`Get data for ${view} view`);
+		console.log(`Get data for ${view} view`);
 		if (view === 'settings') {
 			return this.settingsView;
 		} else if (view === 'subscription') {
+			console.log("GETTING SUBSCRIPTION", this.subscriptionView);
 			return this.subscriptionView;
 		}
 		// update _trackerData with new tab info
@@ -296,6 +297,18 @@ class PanelData {
 		};
 
 		return this._settingsView;
+	}
+	get subscriptionView() {
+		const currentTheme = this._confData.get('currentTheme');
+		let theme = null;
+		if(currentTheme !== 'default') {
+			theme = (this._confData.get("themes"))[currentTheme] || null;
+		}
+		this._subscriptionView = {
+			currentTheme: currentTheme,
+			theme: theme,
+		};
+		return this._subscriptionView;
 	}
 
 	/**

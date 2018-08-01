@@ -44,6 +44,9 @@
 		.header-badge {
 			display: block;
 			margin-left: 10px;
+			path {
+				fill: $white;
+			}
 			.disabled-header-badge {
 				path {
 					fill: #75D3F6;
