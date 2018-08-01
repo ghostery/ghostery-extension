@@ -188,13 +188,12 @@ class Account {
 				'Content-Type': 'application/x-www-form-urlencoded',
 				'Content-Length': Buffer.byteLength(data),
 			},
-		})
-			.then((res) => {
-				if (res.status >= 400) {
-					return res.json();
-				}
-				return {};
-			});
+		}).then((res) => {
+			if (res.status >= 400) {
+				return res.json();
+			}
+			return {};
+		});
 	}
 
 	migrate = () => (
@@ -331,7 +330,7 @@ class Account {
 	_getUserID = () => (
 		new Promise((resolve, reject) => {
 			if (conf.account === null) {
-				return reject(new Error('Not loggedin.'));
+				return reject(new Error('_getUserID() Not logged in'));
 			}
 			return resolve(conf.account.userID);
 		})

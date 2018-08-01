@@ -67,7 +67,11 @@ class Api {
 			if (status === 204) {
 				resolve();
 				return;
+			} else if (status === 404) {
+				reject(new Error('_processResponse failed'));
+				return;
 			}
+
 			res.json().then((data) => {
 				if (status >= 400) {
 					reject(data);
