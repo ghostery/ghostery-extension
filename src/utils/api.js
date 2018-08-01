@@ -68,7 +68,16 @@ class Api {
 				resolve();
 				return;
 			} else if (status === 404) {
-				reject(new Error('_processResponse failed'));
+				// TODO resource "not-found" errors should be handled server side
+				reject({ // eslint-disable-line prefer-promise-reject-errors
+					errors: [
+						{
+							title: 'Resource not found',
+							code: 'not-found',
+							status: '404',
+						}
+					]
+				});
 				return;
 			}
 

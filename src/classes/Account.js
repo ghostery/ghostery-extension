@@ -40,7 +40,7 @@ class Account {
 		};
 		const opts = {
 			errorHandler: errors => (
-				new Promise((resolve) => {
+				new Promise((resolve, reject) => {
 					for (const err of errors) {
 						switch (err.code) {
 							case Api.ERROR_CSRF_COOKIE_NOT_FOUND:
@@ -56,6 +56,9 @@ class Account {
 								return this.logout()
 									.then(() => resolve())
 									.catch(() => resolve());
+							case '10030': // email not validated
+							case 'not-found':
+								return reject(err);
 							default:
 								return resolve();
 						}
