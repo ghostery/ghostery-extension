@@ -78,6 +78,10 @@
 	border-left-width: 0;
 	border-radius: 0;
 	padding: 10px 0 10px 10px;
+
+	.flex-grow {
+		flex: 1;
+	}
 }
 .RewardListItem.RewardListItem--unread + .RewardListItem.RewardListItem--unread,
 .RewardListItem:not(.RewardListItem--unread) + .RewardListItem:not(.RewardListItem--unread) {
@@ -87,6 +91,7 @@
 .RewardListItem__image_container {
 	height: 52px;
 	width: 100px;
+	min-width: 100px;
 	text-align: center;
 	padding-right: 8px;
 	border-right: 1px solid #cecece;

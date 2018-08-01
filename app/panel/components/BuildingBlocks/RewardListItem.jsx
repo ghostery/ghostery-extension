@@ -101,7 +101,7 @@ class RewardListItem extends React.Component {
 					<div className="RewardListItem__image_container">
 						<img className="RewardListItem__image" src={logoUrl} />
 					</div>
-					<div className="flex-child-grow">
+					<div className="flex-grow">
 						<div className="RewardListItem__text">{ text }</div>
 						<div className="RewardListItem__expires">{ this.renderExpiresText() }</div>
 					</div>
