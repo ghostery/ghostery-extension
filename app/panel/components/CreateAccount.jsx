@@ -13,6 +13,8 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ClassNames from 'classnames';
+import RSVP from 'rsvp';
 import { validateEmail, validatePassword } from '../utils/utils';
 
 /**
@@ -63,47 +65,52 @@ class CreateAccount extends React.Component {
 	 */
 	handleSubmit = (e) => {
 		e.preventDefault();
-		const email = this.state.email.toLowerCase();
-		const confirmEmail = this.state.confirmEmail.toLowerCase();
-		const { firstName, lastName, password } = this.state;
-
 		this.setState({ loading: true }, () => {
-			if (!validateEmail(email)) {
-				this.setState({
-					emailError: true,
-					loading: false,
-				});
-				return;
-			}
-			if (!validateEmail(confirmEmail)) {
-				this.setState({
-					confirmEmailError: true,
-					loading: false,
-				});
-				return;
-			}
-			if (!validatePassword(password)) {
-				if (password.length >= 8 && password.length <= 50) {
+			const {
+				email, confirmEmail, firstName, lastName, password
+			} = this.state;
+			this.setState({ loading: true }, () => {
+				if (!validateEmail(email)) {
 					this.setState({
-						passwordInvalidError: true,
+						emailError: true,
 						loading: false,
 					});
-				} else {
-					this.setState({
-						passwordLengthError: true,
-						loading: false,
-					});
+					return;
 				}
-				return;
-			}
+				if (!validateEmail(confirmEmail)) {
+					this.setState({
+						confirmEmailError: true,
+						loading: false,
+					});
+					return;
+				}
+				if (!validatePassword(password)) {
+					if (password.length >= 8 && password.length <= 50) {
+						this.setState({
+							passwordInvalidError: true,
+							loading: false,
+						});
+					} else {
+						this.setState({
+							passwordLengthError: true,
+							loading: false,
+						});
+					}
+					return;
+				}
 
-			this.props.actions.register(email, confirmEmail, firstName, lastName, password).then((success) => {
-				if (success) {
-					this.props.actions.getUser()
-						.finally(() => {
+				this.props.actions.register(email, confirmEmail, firstName, lastName, password).then((success) => {
+					this.setState({ loading: false });
+					if (success) {
+						new RSVP.Promise((resolve) => {
+							this.props.actions.getUser()
+								.then(() => resolve())
+								.catch(() => resolve());
+						}).finally(() => {
 							this.props.history.push('/account-success');
 						});
-				}
+					}
+				});
 			});
 		});
 	}
@@ -116,8 +123,12 @@ class CreateAccount extends React.Component {
 		const {
 			email, confirmEmail, firstName, lastName, password, consentChecked, loading, emailError, confirmEmailError, passwordInvalidError, passwordLengthError
 		} = this.state;
+		const buttonClasses = ClassNames('button ghostery-button', {
+			disabled: !consentChecked,
+			loading
+		});
 		return (
-			<div id="create-account-panel" className={loading ? 'loading' : ''}>
+			<div id="create-account-panel">
 				<div className="row align-center">
 					<div className="small-11 medium-8 columns">
 						<form onSubmit={this.handleSubmit}>
@@ -146,7 +157,7 @@ class CreateAccount extends React.Component {
 									<div id="create-account-first-name">
 										<label className="create-account-label" id="create-first-name-label" htmlFor="create-input-first-name">
 											{ t('first_name_field_label') }
-											<input onChange={this.handleInputChange} value={firstName} className="create-account-input" id="create-input-first-name" name="firstName" pattern=".{1,}" required type="text" />
+											<input onChange={this.handleInputChange} value={firstName} className="create-account-input" id="create-input-first-name" name="firstName" pattern=".{1,}" type="text" />
 										</label>
 									</div>
 								</div>
@@ -154,7 +165,7 @@ class CreateAccount extends React.Component {
 									<div id="create-account-last-name">
 										<label className="create-account-label" id="create-last-name-label" htmlFor="create-input-last-name">
 											{ t('last_name_field_label') }
-											<input onChange={this.handleInputChange} value={lastName} className="create-account-input" id="create-input-last-name" name="lastName" pattern=".{1,}" required type="text" />
+											<input onChange={this.handleInputChange} value={lastName} className="create-account-input" id="create-input-last-name" name="lastName" pattern=".{1,}" type="text" />
 										</label>
 									</div>
 								</div>
@@ -199,8 +210,9 @@ class CreateAccount extends React.Component {
 											</Link>
 										</div>
 										<div className="small-6 columns text-center">
-											<button type="submit" id="create-account-button" className={`${!consentChecked ? 'disabled' : ''} button`} disabled={!consentChecked}>
-												{ t('panel_title_create_account') }
+											<button type="submit" id="create-account-button" className={buttonClasses} disabled={!consentChecked}>
+												<span className="title">{ t('panel_title_create_account') }</span>
+												<span className="loader" />
 											</button>
 										</div>
 									</div>

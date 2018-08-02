@@ -489,7 +489,7 @@ function handlePurplebox(name, message) {
 		conf.alert_bubble_pos = message.alert_bubble_pos;
 		conf.alert_bubble_timeout = message.alert_bubble_timeout;
 		// push new settings to API
-		account.saveUserSettings();
+		account.saveUserSettings().catch(err => log('Background handlePurplebox', err));
 	}
 	return false;
 }
@@ -658,6 +658,7 @@ function onMessageHandler(request, sender, callback) {
 				callback(data);
 			});
 		}
+		account.getUserSettings().catch(err => log('Error getting user settings from getPanelData:', err));
 		return true;
 	} else if (name === 'setPanelData') {
 		panelData.set(message);
@@ -711,7 +712,7 @@ function onMessageHandler(request, sender, callback) {
 			})
 			.catch((err) => {
 				callback({ errors: [err] });
-				log('REGISTER ERROR');
+				log('REGISTER ERROR', err);
 			});
 		return true;
 	} else if (name === 'account.logout') {
@@ -720,7 +721,7 @@ function onMessageHandler(request, sender, callback) {
 				callback(response);
 			})
 			.catch((err) => {
-				log('LOGOUT ERROR');
+				log('LOGOUT ERROR', err);
 				callback(err);
 			});
 		return true;
@@ -742,7 +743,7 @@ function onMessageHandler(request, sender, callback) {
 			})
 			.catch((err) => {
 				callback({ errors: _getJSONAPIErrorsObject(err) });
-				log('RESET PASSWORD ERROR');
+				log('RESET PASSWORD ERROR', err);
 			});
 		return true;
 	} else if (name === 'account.getUser') {
@@ -752,7 +753,7 @@ function onMessageHandler(request, sender, callback) {
 			})
 			.catch((err) => {
 				callback({ errors: _getJSONAPIErrorsObject(err) });
-				log('FETCH USER ERROR');
+				log('FETCH USER ERROR', err);
 			});
 		return true;
 	} else if (name === 'account.sendValidateAccountEmail') {

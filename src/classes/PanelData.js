@@ -150,7 +150,7 @@ class PanelData {
 
 		if (syncSetDataChanged) {
 			// Push conf changes to the server
-			account.saveUserSettings();
+			account.saveUserSettings().catch(err => log('PanelData saveUserSettings', err));
 		}
 
 		if (otherDataChanged) {

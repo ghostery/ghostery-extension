@@ -275,7 +275,10 @@ class BlockingHeader extends React.Component {
 								<ClickOutside
 									onClickOutside={this.state.filterMenuOpened ? this.clickFilterText : () => {}}
 								>
-									<div className={this.state.filterMenuOpened ? 'filter-text-show-menu' : 'filter-text'} onClick={this.clickFilterText}><span>{this.props.filterText}</span></div>
+									<div className={this.state.filterMenuOpened ? 'filter-text-show-menu' : 'filter-text'} onClick={this.clickFilterText}>
+										<span>{this.props.filterText}</span>
+										<span className="caret-down" />
+									</div>
 									<div className={this.state.filterMenuOpened ? 'filter-menu' : 'hide'}>
 										<div className="filter-menu-item" onClick={this.filterAll}>{t('settings_filter_all')}</div>
 										<div className="filter-menu-item" onClick={this.filterBlocked}>{t('settings_filter_blocked')}</div>
