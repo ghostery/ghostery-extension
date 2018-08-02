@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 /**
  * @class Implement Click Outside component which handles
  * clicks outside of designated component

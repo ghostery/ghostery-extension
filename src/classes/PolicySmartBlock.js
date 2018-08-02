@@ -177,10 +177,9 @@ class PolicySmartBlock {
 	/**
 	 * Check if tab was reloaded.
 	 * @param  {number} tabId		tab id
-	 * @param  {string} appId 		app id
 	 * @return {boolean}
 	 */
-	_pageWasReloaded(tabId, appId) {
+	_pageWasReloaded(tabId) {
 		return tabInfo.getTabInfo(tabId, 'reloaded') || false;
 	}
 

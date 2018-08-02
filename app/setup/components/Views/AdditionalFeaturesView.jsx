@@ -11,7 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import globals from '../../../../src/classes/Globals';
 import { ToggleSlider } from '../../../panel/components/BuildingBlocks';
 

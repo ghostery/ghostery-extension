@@ -99,7 +99,7 @@ class Header extends React.Component {
 	 * Handles the onClick event for expanding the sign in form on small screens
 	 * @param  {Object} event
 	 */
-	_toggleSmallSignInState = (e) => {
+	_toggleSmallSignInState = () => {
 		const hideSmallSignIn = !this.state.hideSmallSignIn;
 		this.setState({ hideSmallSignIn });
 	}

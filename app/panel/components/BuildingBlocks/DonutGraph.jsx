@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 import ClassNames from 'classnames';
 import * as d3 from 'd3';
 import { scaleLinear } from 'd3-scale';
@@ -116,7 +116,6 @@ class DonutGraph extends React.Component {
 		const {
 			renderRedscale,
 			renderGreyscale,
-			totalCount,
 			isSmall
 		} = options;
 		const graphData = [];
@@ -190,13 +189,13 @@ class DonutGraph extends React.Component {
 				}
 				return this.colors.regular(d.data.id);
 			})
-			.attr('class', (d, i) => {
+			.attr('class', (d) => {
 				if (d.data.name) {
 					return (isSmall) ? 'clickable' : 'not-clickable';
 				}
 				return 'disabled';
 			})
-			.on('mouseover', (d, i) => {
+			.on('mouseover', (d) => {
 				const pX = arc.centroid(d)[0] + (width / 2);
 				const pY = arc.centroid(d)[1] + (height / 2);
 				const tooltip = document.getElementById(`${d.data.id}_tooltip`);
@@ -206,19 +205,19 @@ class DonutGraph extends React.Component {
 					tooltip.classList.add('show');
 				}
 			})
-			.on('mouseout', (d, i) => {
+			.on('mouseout', (d) => {
 				const tooltip = document.getElementById(`${d.data.id}_tooltip`);
 				if (tooltip) {
 					tooltip.classList.remove('show');
 				}
 			})
-			.on('click', (d, i) => {
+			.on('click', (d) => {
 				if (d.data.name && isSmall) {
 					this.props.clickDonut({ type: 'category', name: d.data.id });
 				}
 			})
 			.transition()
-			.duration((d, i) => {
+			.duration((d) => {
 				const delay = d.value / graphData.reduce((sum, j) => sum + j.value, 0) * animationDuration;
 				delays.push(delay);
 				return delay;

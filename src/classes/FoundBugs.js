@@ -31,10 +31,8 @@
 
 import bugDb from './BugDb';
 import compDb from './CompatibilityDb';
-import globals from './Globals';
 import tabInfo from './TabInfo';
 
-const { BROWSER_INFO } = globals;
 const LATENCY_ISSUE_THRESHOLD = 1000;
 /**
  * Class for handling detected trackers.

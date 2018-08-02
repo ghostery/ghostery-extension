@@ -57,7 +57,7 @@ const { sendMessage } = utils;
 const { onMessage } = chrome.runtime;
 // simple consts
 const {
-	GHOSTERY_DOMAIN, CDN_SUB_DOMAIN, BROWSER_INFO, IS_CLIQZ, DEBUG
+	CDN_SUB_DOMAIN, BROWSER_INFO, IS_CLIQZ, DEBUG
 } = globals;
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const VERSION_CHECK_URL = `https://${CDN_SUB_DOMAIN}.ghostery.com/update/version`;
@@ -102,7 +102,7 @@ function registerWithOffers(offersModule, register) {
 
 	log('REGISTER WITH OFFERS CALLED', register);
 	return offersModule.action(register ? 'registerRealEstate' : 'unregisterRealEstate', { realEstateID: REAL_ESTATE_ID })
-		.catch((e) => {
+		.catch(() => {
 			log(`FAILED TO ${register ? 'REGISTER' : 'UNREGISTER'} REAL ESTATE WITH OFFERS CORE`);
 		});
 }
@@ -242,7 +242,7 @@ function getSiteData() {
  * @param  {string} 	name 		message name
  * @param  {string}		tab_url 	tab url
  */
-function handleGhosteryPlatformPages(name, tab_url) {
+function handleGhosteryPlatformPages(name) {
 	if (name === 'platformPageLoaded') {
 		account._getUserIDFromCookie()
 			.then((userID) => {
@@ -430,7 +430,7 @@ function handleBlockedRedirect(name, message, tab_id, callback) {
  * @param  {number} 	tab_id 		tab id
  * @param  {function} 	callback 	function to call (at most once) when you have a response
  */
-function handleRewards(name, message, tab_id, callback) {
+function handleRewards(name, message) {
 	if (!offers.isEnabled) {
 		switch (name) {
 			case 'rewardSignal':
@@ -475,25 +475,6 @@ function handleRewards(name, message, tab_id, callback) {
 }
 
 /**
- * Handle messages sent from dist/settings_redirect.js script
- * of the settings_redirect.html local page. Used on @EDGE and Chrome.
- * @memberOf Background
- *
- * @param  {string} 	name 		message name
- * @param  {Object} 	message 	message data
- * @param  {number} 		tab_id 		tab id
- * @param  {function} 	callback 	function to call (at most once) when you have a response
- * @return {boolean}
- */
-function handleSettingsRedirect(name, message, tab_id, callback) {
-	if (name === 'getSettingsUrl') {
-		sendMessage(tab_id, 'gotSettingsUrl', `https://extension.${GHOSTERY_DOMAIN}.com/${conf.language}/settings#general`);
-	}
-
-	return false;
-}
-
-/**
  * Handle messages sent from dist/purplebox.js content script.
  * @memberOf Background
  *
@@ -502,13 +483,13 @@ function handleSettingsRedirect(name, message, tab_id, callback) {
  * @param  {number} 		tab_id 			tab id
  * @param  {function} 	callback 		function to call (at most once) when you have a response
  */
-function handlePurplebox(name, message, tab_id, callback) {
+function handlePurplebox(name, message) {
 	if (name === 'updateAlertConf') {
 		conf.alert_expanded = message.alert_expanded;
 		conf.alert_bubble_pos = message.alert_bubble_pos;
 		conf.alert_bubble_timeout = message.alert_bubble_timeout;
 		// push new settings to API
-		account.saveUserSettings();
+		account.saveUserSettings().catch(err => log('Background handlePurplebox', err));
 	}
 	return false;
 }
@@ -677,6 +658,7 @@ function onMessageHandler(request, sender, callback) {
 				callback(data);
 			});
 		}
+		account.getUserSettings().catch(err => log('Error getting user settings from getPanelData:', err));
 		return true;
 	} else if (name === 'setPanelData') {
 		panelData.set(message);
@@ -694,7 +676,7 @@ function onMessageHandler(request, sender, callback) {
 				cliqz.modules.antitracking.background.actions.aggregatedBlockingStats(tab.id).then((data) => {
 					modules.antitracking = data;
 					callback(modules);
-				}).catch((err) => {
+				}).catch(() => {
 					callback(modules);
 				});
 			} else {
@@ -730,7 +712,7 @@ function onMessageHandler(request, sender, callback) {
 			})
 			.catch((err) => {
 				callback({ errors: [err] });
-				log('REGISTER ERROR');
+				log('REGISTER ERROR', err);
 			});
 		return true;
 	} else if (name === 'account.logout') {
@@ -739,7 +721,7 @@ function onMessageHandler(request, sender, callback) {
 				callback(response);
 			})
 			.catch((err) => {
-				log('LOGOUT ERROR');
+				log('LOGOUT ERROR', err);
 				callback(err);
 			});
 		return true;
@@ -761,7 +743,7 @@ function onMessageHandler(request, sender, callback) {
 			})
 			.catch((err) => {
 				callback({ errors: _getJSONAPIErrorsObject(err) });
-				log('RESET PASSWORD ERROR');
+				log('RESET PASSWORD ERROR', err);
 			});
 		return true;
 	} else if (name === 'account.getUser') {
@@ -771,7 +753,7 @@ function onMessageHandler(request, sender, callback) {
 			})
 			.catch((err) => {
 				callback({ errors: _getJSONAPIErrorsObject(err) });
-				log('FETCH USER ERROR');
+				log('FETCH USER ERROR', err);
 			});
 		return true;
 	} else if (name === 'account.sendValidateAccountEmail') {
@@ -839,7 +821,7 @@ function onMessageHandler(request, sender, callback) {
 								select_file_for_import: t('select_file_for_import'), // Select .ghost file for import
 								file_was_not_selected: t('file_was_not_selected') // File was not selected
 							}
-						}, (result) => {
+						}, () => {
 							if (chrome.runtime.lastError) {
 								callback(t('refresh_and_try_again'));
 							} else {
@@ -893,7 +875,7 @@ function initializeDispatcher() {
 	});
 	dispatcher.on('conf.save.enable_human_web', (enableHumanWeb) => {
 		if (!IS_EDGE && !IS_CLIQZ) {
-			setCliqzModuleEnabled(humanweb, enableHumanWeb).then((data) => {
+			setCliqzModuleEnabled(humanweb, enableHumanWeb).then(() => {
 				setupABTest();
 			});
 		} else {
@@ -1533,7 +1515,7 @@ function initializeGhosteryModules() {
 			// auto-fetch human web offer
 			abtest.fetch().then(() => {
 				setupABTest();
-			}).catch((err) => {
+			}).catch(() => {
 				log('Unable to reach abtest server');
 			});
 		}

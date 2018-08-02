@@ -12,8 +12,6 @@
  */
 
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { Link } from 'react-router-dom';
 import msgModule from '../utils/msg';
 import { computeTimeDelta } from '../../panel/utils/utils';
 import Notification from './Notification';
@@ -132,7 +130,7 @@ class OfferCard extends Component {
 		}, 3000);
 	}
 
-	toggleSettings(e) {
+	toggleSettings() {
 		if (!this.state.showSettings) {
 			this.props.actions.sendSignal('offer_settings');
 		}
@@ -226,7 +224,7 @@ class OfferCard extends Component {
 								<div className="rewards-logo-beta" style={{ backgroundImage: this.betaLogo }} />
 								<div
 									className="reward-card-close"
-									onClick={(e) => { this.props.actions.sendSignal('offer_closed_card'); this.closeOfferCard(); }}
+									onClick={() => { this.props.actions.sendSignal('offer_closed_card'); this.closeOfferCard(); }}
 									style={{ backgroundImage: this.closeIcon }}
 								/>
 							</div>

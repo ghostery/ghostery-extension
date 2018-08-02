@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 import Tracker from './Tracker';
 import GlobalTracker from './GlobalTracker';
 /**
@@ -26,7 +26,7 @@ class Trackers extends React.Component {
 	 * @param  {Object} nextState   changed state
 	 * @return {boolean}            true means proceed with rendering
 	 */
-	shouldComponentUpdate(nextProps, nextState) {
+	shouldComponentUpdate(nextProps) {
 		const { trackers } = nextProps;
 		if (!trackers || trackers.length === 0) {
 			return false;
@@ -60,7 +60,7 @@ class Trackers extends React.Component {
 				/>
 			));
 		} else {
-			trackerList = trackers.map((tracker, index) => (
+			trackerList = trackers.map(tracker => (
 				<Tracker
 					tracker={tracker}
 					key={tracker.id}

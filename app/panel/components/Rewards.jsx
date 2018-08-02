@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 import ClassNames from 'classnames';
 import { Link, Route } from 'react-router-dom';
 import { ToggleSlider, RewardListItem, RewardDetail } from './BuildingBlocks';

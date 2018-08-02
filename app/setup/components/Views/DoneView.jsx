@@ -12,7 +12,6 @@
  */
 
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 /**
  * @class Implement the #done step of the setup flow.

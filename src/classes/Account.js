@@ -17,6 +17,7 @@
 import _ from 'underscore';
 import normalize from 'json-api-normalizer';
 import build from 'redux-object';
+import RSVP from 'rsvp';
 import globals from '../classes/Globals';
 import conf from '../classes/Conf';
 import dispatcher from '../classes/Dispatcher';
@@ -53,8 +54,11 @@ class Account {
 							case '10300': // csrf token is missing
 							case '10301': // csrf tokens do not match
 								return this.logout()
-									.catch(e => log(e))
-									.finally(() => resolve());
+									.then(() => resolve())
+									.catch(() => resolve());
+							case '10030': // email not validated
+							case 'not-found':
+								return reject(err);
 							default:
 								return resolve();
 						}
@@ -114,7 +118,7 @@ class Account {
 	}
 
 	logout = () => (
-		new Promise((resolve, reject) => {
+		new RSVP.Promise((resolve, reject) => {
 			chrome.cookies.get({
 				url: `https://${GHOSTERY_DOMAIN}.com`,
 				name: 'csrf_token',
@@ -187,17 +191,16 @@ class Account {
 				'Content-Type': 'application/x-www-form-urlencoded',
 				'Content-Length': Buffer.byteLength(data),
 			},
-		})
-			.then((res) => {
-				if (res.status >= 400) {
-					return res.json();
-				}
-				return {};
-			});
+		}).then((res) => {
+			if (res.status >= 400) {
+				return res.json();
+			}
+			return {};
+		});
 	}
 
 	migrate = () => (
-		new Promise((resolve, reject) => {
+		new Promise((resolve) => {
 			const legacyLoginInfoKey = 'login_info';
 			chrome.storage.local.get(legacyLoginInfoKey, (items) => {
 				if (chrome.runtime.lastError) {
@@ -262,6 +265,44 @@ class Account {
 		})
 	)
 
+	/**
+	 * Determines if the user has the required scope combination(s) to access a resource.
+	 * It takes a rest parameter of string arrays, each of which must be a possible combination of
+	 * scope strings that would allow a user to access a resource. For example, if the required
+	 * scopes for a resource are "resource:read" AND "resource:write" OR ONLY "resource:god", call
+	 * this function with parameters (['resource:read', 'resource:write'], ['resource:god'])
+	 * IMPORTANT: this function does NOT verify the content of the user scopes, therefore scopes
+	 * could have been tampered with.
+	 *
+	 * @param  {rest of string arrays}	string arrays containing the required scope combination(s)
+	 * @return {boolean}				true if the user scopes match at least one of the required scope combination(s)
+	 */
+	hasScopesUnverified(...required) {
+		if (conf.account === null) { return false; }
+		if (conf.account.user === null) { return false; }
+		const userScopes = conf.account.user.scopes;
+		if (userScopes === null) { return false; }
+		if (required.length === 0) { return false; }
+
+		// check scopes
+		if (userScopes.indexOf('god') >= 0) { return true; }
+		for (const sArr of required) {
+			let matches = true;
+			if (sArr.length > 0) {
+				for (const s of sArr) {
+					if (userScopes.indexOf(s) === -1) {
+						matches = false;
+						break;
+					}
+				}
+				if (matches) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	_setLoginCookie = details => (
 		new Promise((resolve, reject) => {
 			const {
@@ -292,7 +333,7 @@ class Account {
 	_getUserID = () => (
 		new Promise((resolve, reject) => {
 			if (conf.account === null) {
-				return reject(new Error('Not loggedin.'));
+				return reject(new Error('_getUserID() Not logged in'));
 			}
 			return resolve(conf.account.userID);
 		})
@@ -402,9 +443,9 @@ class Account {
 	}
 
 	_logoutOnUserIDCookieRemoved = (changeInfo) => {
-		const { cause, removed, cookie } = changeInfo;
+		const { removed, cookie } = changeInfo;
 		const { name, domain } = cookie;
-		if (name === 'user_id' && domain === `.${GHOSTERY_DOMAIN}.com` && removed && cause === 'expired_overwrite') {
+		if (name === 'user_id' && domain === `.${GHOSTERY_DOMAIN}.com` && removed) {
 			this.logout();
 		}
 	}

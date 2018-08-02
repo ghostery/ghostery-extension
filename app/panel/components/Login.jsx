@@ -11,8 +11,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import ClassNames from 'classnames';
+import RSVP from 'rsvp';
 import { validateEmail, validatePassword } from '../utils/utils';
 import { log } from '../../../src/utils/common';
 
@@ -64,15 +66,19 @@ class Login extends React.Component {
 				});
 				return;
 			}
-			this.props.actions.login(email.toLowerCase(), password)
+			this.props.actions.login(email, password)
 				.then((success) => {
 					if (success) {
-						Promise.all([
+						RSVP.all([
 							this.props.actions.getUser(),
 							this.props.actions.getUserSettings(),
 						]).finally(() => {
-							this.props.history.push(this.props.is_expert ? '/detail/blocking' : '/');
+							this.setState({ loading: false }, () => {
+								this.props.history.push(this.props.is_expert ? '/detail/blocking' : '/');
+							});
 						});
+					} else {
+						this.setState({ loading: false });
 					}
 				})
 				.catch(err => log(err));
@@ -87,8 +93,9 @@ class Login extends React.Component {
 		const {
 			email, password, emailError, passwordError, loading
 		} = this.state;
+		const buttonClasses = ClassNames('button ghostery-button', { loading });
 		return (
-			<div id="signin-panel" className={loading ? 'loading' : ''}>
+			<div id="signin-panel">
 				<div className="row align-center">
 					<div className="small-11 medium-8 columns">
 						<form onSubmit={this.handleSubmit}>
@@ -113,8 +120,9 @@ class Login extends React.Component {
 									</Link>
 								</div>
 								<div className="small-6 columns text-center">
-									<button type="submit" id="signin-button" className="button">
-										{ t('panel_menu_signin') }
+									<button type="submit" id="signin-button" className={buttonClasses}>
+										<span className="title">{ t('panel_menu_signin') }</span>
+										<span className="loader" />
 									</button>
 								</div>
 							</div>

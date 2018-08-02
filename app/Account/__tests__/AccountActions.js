@@ -16,8 +16,8 @@ import thunk from 'redux-thunk';
 import * as msg from '../../panel/utils/msg';
 import * as accountActions from '../AccountActions';
 import {
-	LOGIN_FAIL, SHOW_NOTIFICATION, LOGIN_SUCCESS,
-	GET_USER_SETTINGS_SUCCESS, GET_USER_SUCCESS, LOGOUT
+	LOGIN_FAIL, LOGIN_SUCCESS,
+	GET_USER_SETTINGS_SUCCESS, GET_USER_SUCCESS
 } from '../AccountConstants';
 
 // Fake the translation function to only return the translation key

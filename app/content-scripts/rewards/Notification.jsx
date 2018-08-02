@@ -51,10 +51,10 @@ class Notification extends Component {
 								</div>
 								{this.props.data.buttons &&
 									<div className="notification-buttons">
-										<button className="btn" onClick={(e) => { this.closeNotification(true); }}>
+										<button className="btn" onClick={() => { this.closeNotification(true); }}>
 											{t('rewards_yes')}
 										</button>
-										<button className="btn" onClick={(e) => { this.closeNotification(false); }}>
+										<button className="btn" onClick={() => { this.closeNotification(false); }}>
 											{t('rewards_no')}
 										</button>
 									</div>

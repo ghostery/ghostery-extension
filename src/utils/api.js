@@ -1,3 +1,16 @@
+/**
+ * JSON API
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
 export const _getJSONAPIErrorsObject = e => [{ title: e.message || '', detail: e.message || '', code: e.code || e.message || '' }];
 
 class Api {
@@ -21,7 +34,7 @@ class Api {
 				window.removeEventListener(this.tokenRefreshedEventType, bindedResolve, false);
 				resolve(e.detail);
 			};
-			return new Promise((resolve, reject) => {
+			return new Promise((resolve) => {
 				bindedResolve = _processRefreshTokenEvent.bind(null, resolve);
 				window.addEventListener(this.tokenRefreshedEventType, bindedResolve, false);
 			});
@@ -54,7 +67,20 @@ class Api {
 			if (status === 204) {
 				resolve();
 				return;
+			} else if (status === 404) {
+				// TODO resource "not-found" errors should be handled server side
+				reject({ // eslint-disable-line prefer-promise-reject-errors
+					errors: [
+						{
+							title: 'Resource not found',
+							code: 'not-found',
+							status: '404',
+						}
+					]
+				});
+				return;
 			}
+
 			res.json().then((data) => {
 				if (status >= 400) {
 					reject(data);
@@ -113,22 +139,16 @@ class Api {
 	}
 
 	_getCsrfCookie = (csrfDomain = this.config.CSRF_DOMAIN) => (
-		new Promise((resolve, reject) => {
+		new Promise((resolve) => {
 			chrome.cookies.get({
 				url: `https://${csrfDomain}.com`,
 				name: 'csrf_token',
-			}, (cookie) => {
-				if (cookie === null) {
-					return reject({ errors: _getJSONAPIErrorsObject(new Error(Api.ERROR_CSRF_COOKIE_NOT_FOUND)) }); // eslint-disable-line prefer-promise-reject-errors
-				}
-				return resolve(cookie.value);
-			});
+			}, cookie => resolve((cookie !== null) ? cookie.value : ''));
 		})
 	)
 
 	_errorHandler = errors => Promise.resolve(errors)
 
-	static get ERROR_CSRF_COOKIE_NOT_FOUND() { return '1'; }
 	static get JSONAPI_CONTENT_TYPE() { return 'application/vnd.api+json'; }
 
 	get = (type, id, include = '') => {

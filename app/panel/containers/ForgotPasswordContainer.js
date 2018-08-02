@@ -25,7 +25,7 @@ import { resetPassword } from '../../Account/AccountActions';
  * @todo  We are not using ownProps, so we better not specify it explicitly,
  * in this case it won't be passed by React (see https://github.com/reactjs/react-redux/blob/master/docs/api.md).
  */
-const mapStateToProps = (state, ownProps) => Object.assign({});
+const mapStateToProps = () => Object.assign({});
 /**
  * Bind ForgotPassword component action creators using Redux's bindActionCreators
  * @memberOf PanelContainers
@@ -33,7 +33,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({});
  * @param  {Object} 	ownProps  ForgotPassword component own props
  * @return {function}          	  to be used as an argument in redux connect call
  */
-const mapDispatchToProps = (dispatch, ownProps) => ({ actions: bindActionCreators(Object.assign(actions, { resetPassword }), dispatch) });
+const mapDispatchToProps = dispatch => ({ actions: bindActionCreators(Object.assign(actions, { resetPassword }), dispatch) });
 /**
  * Connect ForgotPassword component to the Redux store.
  * @memberOf PanelContainers

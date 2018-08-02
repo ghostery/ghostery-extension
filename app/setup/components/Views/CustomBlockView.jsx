@@ -12,7 +12,6 @@
  */
 
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { debounce } from 'underscore';
 import classNames from 'classnames';
 import GlobalBlocking from '../../../panel/components/Settings/GlobalBlocking';

@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 /**
  * @class Implement Notification subview as a React component.
  * The view opens from the left-side menu of the main
