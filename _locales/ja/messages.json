@@ -2108,9 +2108,9 @@
 	"offers_hub_copy_btn": {
 		"message": "Copy code"
 	},
-  "offers_code_copied": {
-    "message": "Copied"
-  },
+	"offers_code_copied": {
+		"message": "Copied"
+	},
 	"popup_cancel_button": {
 		"message": "Cancel"
 	},
