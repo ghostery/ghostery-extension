@@ -1,48 +1,39 @@
-import * as utils from './utils';
-import conf from '../classes/Conf';
-import globals from '../classes/Globals';
+/**
+ * Performance utils
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
 
 // ID of Ghostery-perf extension
 const RECEIVER_ID = 'pdlmemohjlhncchohlaeifdmbjbngcld';
 let PORT;
+
+// perfReady message will come from ghostery-perf
 chrome.runtime.onMessageExternal.addListener(
-  function(request, sender, sendResponse) {
-    if (sender.id === RECEIVER_ID) {
-    	const {name} = request;
-    	if(name === 'perfReady') {
-    		sendResponse(_reportStaticInfo());
-    		PORT = chrome.runtime.connect(RECEIVER_ID);
-    		return true;
-    	}
-    }
-
-    return false;
-});
-
-function _reportStaticInfo() {
-	let gb;
-	let hasOnes = false;
-	let hasZeros = false;
-	Object.keys(conf.selected_app_ids).forEach(key => {
-		if(conf.selected_app_ids[key] === 1) {
-			hasOnes = true;
+	(request, sender) => {
+		if (sender.id === RECEIVER_ID) {
+			const { name } = request;
+			if (name === 'perfReady') {
+				PORT = chrome.runtime.connect(RECEIVER_ID);
+				return true;
+			}
 		}
-		if(conf.selected_app_ids[key] === 0) {
-			hasZeros = true;
-		}
+
+		return false;
 	});
-	gb = (hasOnes && hasZeros) ? 2 : hasOnes ? 1 : 0;
-	return { name: 'perfInfo', 
-		ghostery_version: chrome.runtime.getManifest().version,
-		 
-		at: conf.enable_anti_tracking ? "1" : "0",
-		ab: conf.enable_ad_block ? "1" : "0",
-		sb: conf.enable_smart_block ? "1" : "0",
-		gb: gb,
-		gp: globals.SESSION.paused_blocking 
-	};
-}
 
+/**
+ * Send perf data unit to ghostery-perf
+ * @param  	{object} perfEntry performance data
+ * @param 	{object} data data passed to perfEnd. In our case - request data
+ */
 function _report(perfEntry, data) {
 	if (PORT) {
 		const report = {
@@ -53,18 +44,16 @@ function _report(perfEntry, data) {
 }
 
 /**
- * @namespace BackgroundUtils
- */
-/**
  * Set the start mark
  * @param  {string} name name of the mark, should be unique
  */
 export function perfBegin(name) {
-	console.log('PERF BEGIN CALLED FOR', name);
+	// console.log('PERF BEGIN CALLED FOR', name);
 	window.performance.mark(`BEGIN_${name}`);
 }
+
 /**
- * Set the end mark and measure the duration.
+ * Set the end mark and measure the duration and clear the marks.
  * @param  {string} name name of the mark
  * @return {number}      duration
  */
@@ -72,22 +61,22 @@ export function perfEnd(name, data) {
 	let entry = { name: `BEGIN_${name}`, startTime: 0, duration: 0 };
 	const p = window.performance.getEntriesByName(`BEGIN_${name}`, 'mark') || [];
 	if (p && p.length) {
-		console.log('BEGIN MARK WAS FOUND FOR', name);
+		// console.log('BEGIN MARK WAS FOUND FOR', name);
 		window.performance.mark(`END_${name}`);
 		window.performance.measure(name, `BEGIN_${name}`, `END_${name}`);
 
 		const measures = window.performance.getEntriesByName(name, 'measure') || [];
 		if (measures && measures.length) {
-			entry = measures[0];
+			[entry] = measures;
 			if (entry && data) {
 				data.handler = name;
 				_report(entry, data);
 			}
 		} else {
-			console.log('BAD MEASURE');
+			// console.log('BAD MEASURE');
 		}
 	} else {
-		console.log('BEGIN MARK WAS NOT FOUND FOR', name);
+		// console.log('BEGIN MARK WAS NOT FOUND FOR', name);
 	}
 	window.performance.clearMarks(`BEGIN_${name}`);
 	window.performance.clearMarks(`END_${name}`);

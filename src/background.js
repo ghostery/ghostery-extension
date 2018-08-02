@@ -73,6 +73,9 @@ const messageCenter = cliqz.modules['message-center'];
 const offers = cliqz.modules['offers-v2'];
 let OFFERS_ENABLE_SIGNAL;
 
+// Id of ghostery-perf extension
+const GHOSTERY_PERF_ID = 'pdlmemohjlhncchohlaeifdmbjbngcld';
+
 /**
  * Enable or disable specified module.
  * @memberOf Background
@@ -1223,6 +1226,33 @@ function initializePopup() {
 		});
 	}
 }
+/**
+ * Collect static info about the current state of Ghostery
+ * @return {object} static info
+ * @memberOf Background
+ */
+function reportStaticInfo() {
+	let hasOnes = false;
+	let hasZeros = false;
+	for (const app_id in bugDb.db.apps) {
+		if (conf.selected_app_ids.hasOwnProperty(app_id)) {
+			hasOnes = true;
+		} else {
+			hasZeros = true;
+		}
+	}
+	const gb = (hasOnes && hasZeros) ? 2 : hasOnes ? 1 : 0;
+	return {
+		name: 'perfInfo',
+		ghostery_version: chrome.runtime.getManifest().version,
+
+		at: conf.enable_anti_tracking ? '1' : '0',
+		ab: conf.enable_ad_block ? '1' : '0',
+		sb: conf.enable_smart_block ? '1' : '0',
+		gb,
+		gp: globals.SESSION.paused_blocking
+	};
+}
 
 /**
  * Add listeners to the events which are watched by Ghostery,
@@ -1342,6 +1372,19 @@ function initializeEventListeners() {
 			rewards.panelPort = port;
 			rewards.panelPort.onDisconnect.addListener(rewards.panelHubClosedListener);
 		}
+	});
+
+	// Setup listener for ghostery-perf
+	chrome.runtime.onMessageExternal.addListener((request, sender, sendResponse) => {
+		if (sender.id === GHOSTERY_PERF_ID) {
+			const { name } = request;
+			if (name === 'perfReady') {
+				sendResponse(reportStaticInfo());
+				return true;
+			}
+		}
+
+		return false;
 	});
 }
 
