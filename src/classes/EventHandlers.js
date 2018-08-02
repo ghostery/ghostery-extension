@@ -570,10 +570,8 @@ class EventHandlers {
 	 * @param  {number} tab_id		tab id
 	 */
 	onTabRemoved(tab_id) {
-		setTimeout(() => {
-			this._clearTabData(tab_id);
-			this._resetNotifications();
-		}, 1000);
+		this._clearTabData(tab_id);
+		this._resetNotifications();
 	}
 
 	/**
