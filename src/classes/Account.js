@@ -40,7 +40,7 @@ class Account {
 		};
 		const opts = {
 			errorHandler: errors => (
-				new Promise((resolve) => {
+				new Promise((resolve, reject) => {
 					for (const err of errors) {
 						switch (err.code) {
 							case Api.ERROR_CSRF_COOKIE_NOT_FOUND:
@@ -56,6 +56,9 @@ class Account {
 								return this.logout()
 									.then(() => resolve())
 									.catch(() => resolve());
+							case '10030': // email not validated
+							case 'not-found':
+								return reject(err);
 							default:
 								return resolve();
 						}
@@ -188,13 +191,12 @@ class Account {
 				'Content-Type': 'application/x-www-form-urlencoded',
 				'Content-Length': Buffer.byteLength(data),
 			},
-		})
-			.then((res) => {
-				if (res.status >= 400) {
-					return res.json();
-				}
-				return {};
-			});
+		}).then((res) => {
+			if (res.status >= 400) {
+				return res.json();
+			}
+			return {};
+		});
 	}
 
 	migrate = () => (
@@ -331,7 +333,7 @@ class Account {
 	_getUserID = () => (
 		new Promise((resolve, reject) => {
 			if (conf.account === null) {
-				return reject(new Error('Not loggedin.'));
+				return reject(new Error('_getUserID() Not logged in'));
 			}
 			return resolve(conf.account.userID);
 		})
