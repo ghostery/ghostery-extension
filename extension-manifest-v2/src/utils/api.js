@@ -67,7 +67,20 @@ class Api {
 			if (status === 204) {
 				resolve();
 				return;
+			} else if (status === 404) {
+				// TODO resource "not-found" errors should be handled server side
+				reject({ // eslint-disable-line prefer-promise-reject-errors
+					errors: [
+						{
+							title: 'Resource not found',
+							code: 'not-found',
+							status: '404',
+						}
+					]
+				});
+				return;
 			}
+
 			res.json().then((data) => {
 				if (status >= 400) {
 					reject(data);
