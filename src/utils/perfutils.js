@@ -10,18 +10,16 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+import globals from '../classes/Globals';
 
-// ID of Ghostery-perf extension
-const RECEIVER_ID = 'pdlmemohjlhncchohlaeifdmbjbngcld';
 let PORT;
-
 // perfReady message will come from ghostery-perf
 chrome.runtime.onMessageExternal.addListener(
 	(request, sender) => {
-		if (sender.id === RECEIVER_ID) {
+		if (sender.id === globals.GHOSTERY_PERF_ID) {
 			const { name } = request;
 			if (name === 'perfReady') {
-				PORT = chrome.runtime.connect(RECEIVER_ID);
+				PORT = chrome.runtime.connect(globals.GHOSTERY_PERF_ID);
 				return true;
 			}
 		}

@@ -73,9 +73,6 @@ const messageCenter = cliqz.modules['message-center'];
 const offers = cliqz.modules['offers-v2'];
 let OFFERS_ENABLE_SIGNAL;
 
-// Id of ghostery-perf extension
-const GHOSTERY_PERF_ID = 'pdlmemohjlhncchohlaeifdmbjbngcld';
-
 /**
  * Enable or disable specified module.
  * @memberOf Background
@@ -1376,7 +1373,7 @@ function initializeEventListeners() {
 
 	// Setup listener for ghostery-perf
 	chrome.runtime.onMessageExternal.addListener((request, sender, sendResponse) => {
-		if (sender.id === GHOSTERY_PERF_ID) {
+		if (sender.id === globals.GHOSTERY_PERF_ID) {
 			const { name } = request;
 			if (name === 'perfReady') {
 				sendResponse(reportStaticInfo());
