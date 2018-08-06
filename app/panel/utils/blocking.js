@@ -13,8 +13,6 @@
 /**
  * @namespace  PanelUtils
  */
-import { log, objectEntries } from '../../../src/utils/common';
-import { removeFromObject, updateObject } from './utils';
 import { sendMessage } from './msg';
 
 /**
@@ -183,7 +181,7 @@ export function toggleExpandCategory(state, action) {
 	const updated_categories = JSON.parse(JSON.stringify(state.categories)); // deep clone
 	const catIndex = updated_categories.findIndex(item => item.id === action.data.cat_id);
 	const updated_category = updated_categories[catIndex];
-	updated_category.expanded = action.data.expanded;
+	updated_category.expanded = expanded;
 	return {
 		categories: updated_categories,
 	};

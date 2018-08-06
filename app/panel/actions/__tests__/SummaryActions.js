@@ -27,7 +27,7 @@ const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 const testData = { adblock: {}, antitracking: {} };
-msg.sendMessageInPromise = jest.fn(messageType => new Promise((resolve, reject) => {
+msg.sendMessageInPromise = jest.fn(messageType => new Promise((resolve) => {
 	switch (messageType) {
 		case 'getCliqzModuleData':
 			resolve(testData);

@@ -27,7 +27,6 @@ const msg = msgModule('notifications');
 const { sendMessage } = msg;
 const { onMessage } = chrome.runtime;
 const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
-const GHOSTERY_DOMAIN = globals.DEBUG ? 'ghosterystage' : 'ghostery';
 
 /**
  * Use to call init to initialize functionality
@@ -38,7 +37,6 @@ const NotificationsContentScript = (function (win, doc) {
 	let NOTIFICATION_TRANSLATIONS = {};
 	let CMP_DATA = {};
 	let CSS_INJECTED = false;
-	let LANGUAGE = 'en';
 	let ALERT_SHOWN = false;
 	const createEl = function (type) {
 		return doc.createElement(type);
@@ -309,7 +307,7 @@ const NotificationsContentScript = (function (win, doc) {
 	 * @return {Object}  styled div DOM element
 	 */
 	const createUpgradeNotificationContent = function (
-		imageData, title, message, linkUrl, linkText, linkClickFunc
+		imageData, title, message, linkUrl, linkText
 	) {
 		const content = createEl('div');
 		content.style.cssText = `
@@ -653,6 +651,9 @@ const NotificationsContentScript = (function (win, doc) {
 	 * for messages coming from background.js.
 	 * @memberOf NotificationsContentScript
 	 * @package
+	 *
+	 * @param {string} type 	the type of notification to show
+	 * @param {object} options 	message data to pass to the notification
 	 */
 	const showAlert = function (type, options) {
 		if (ALERT_SHOWN) {
@@ -666,12 +667,13 @@ const NotificationsContentScript = (function (win, doc) {
 				options.campaign.Message,
 				options.campaign.Link,
 				options.campaign.LinkText,
-				(e) => {
+				() => {
 					removeAlert();
 					sendMessage('dismissCMPMessage', { cmp_data: CMP_DATA, reason: 'link' });
 				}
 			);
 		} else if (type === 'showUpgradeAlert') {
+			// major version upgrade
 			if (options) {
 				alert_contents = createUpgradeNotificationContent(
 					bigLogoImage,
@@ -684,9 +686,10 @@ const NotificationsContentScript = (function (win, doc) {
 					}
 				);
 			} else {
+				// minor version upgrade
 				alert_contents = createNotificationContent(
 					NOTIFICATION_TRANSLATIONS.notification_upgrade,
-					'https://github.com/ghostery/ghostery-extension/releases',
+					'https://www.ghostery.com/release-notes',
 					NOTIFICATION_TRANSLATIONS.notification_upgrade_link,
 					() => {
 						removeAlert();
@@ -750,12 +753,10 @@ const NotificationsContentScript = (function (win, doc) {
 				ALERT_SHOWN = true;
 			} else if (name === 'showUpgradeAlert') {
 				NOTIFICATION_TRANSLATIONS = message.translations;
-				LANGUAGE = message.language || 'en';
 				showAlert('showUpgradeAlert', message.major_upgrade);
 				ALERT_SHOWN = true;
 			} else if (name === 'showLibraryUpdateAlert') {
 				NOTIFICATION_TRANSLATIONS = message.translations;
-				LANGUAGE = message.language || 'en';
 				showAlert('showLibraryUpdateAlert');
 				ALERT_SHOWN = true;
 			// Import/Export related messages

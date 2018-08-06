@@ -15,7 +15,6 @@ import globals from './Globals';
 import conf from './Conf';
 import { log, prefsSet, prefsGet } from '../utils/common';
 import { processUrlQuery } from '../utils/utils';
-import abtest from './ABTest';
 import rewards from './Rewards';
 
 // CONSTANTS
@@ -52,7 +51,7 @@ class Metrics {
 	init(JUST_INSTALLED) {
 		if (JUST_INSTALLED) {
 			if (!IS_EDGE) {
-				return new Promise((resolve, reject) => {
+				return new Promise((resolve) => {
 					let foundUTM = false;
 					// This query fails on Edge
 					chrome.tabs.query({
@@ -78,7 +77,7 @@ class Metrics {
 					});
 				});
 			}
-			return new Promise((resolve, reject) => {
+			return new Promise((resolve) => {
 				chrome.tabs.query({}, (tabs) => {
 					let foundUTM = false;
 					tabs.forEach((tab) => {

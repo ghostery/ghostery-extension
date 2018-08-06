@@ -55,7 +55,6 @@ const handler = {
 	 */
 	set(target, key, value) {
 		log('Setting update value for', key);
-		const oldValue = target[key];
 		// Ghostery, while running as an extension in the Cliqz browser
 		// has these functionalities disabled. This is protection from
 		// altering settings by syncing and/or importing.

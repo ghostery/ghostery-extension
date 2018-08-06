@@ -26,7 +26,7 @@ import { filterTrackers } from '../actions/SummaryActions';
  * @todo  We are not using ownProps, so we better not specify it explicitly,
  * in this case it won't be passed by React (see https://github.com/reactjs/react-redux/blob/master/docs/api.md).
  */
-const mapStateToProps = (state, ownProps) => Object.assign({}, state.panel, state.drawer, {
+const mapStateToProps = state => Object.assign({}, state.panel, state.drawer, {
 	paused_blocking: state.summary.paused_blocking,
 	sitePolicy: state.summary.sitePolicy,
 	trackerCounts: state.summary.trackerCounts,
@@ -38,7 +38,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state.panel, stat
  * @param  {Object} 	ownProps  Panel view component own props
  * @return {function}          	  to be used as an argument in redux connect call
  */
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
 	actions: bindActionCreators(Object.assign({}, panelActions, { filterTrackers }), dispatch),
 });
 /**

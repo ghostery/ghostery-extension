@@ -17,12 +17,9 @@ import button from './BrowserButton';
 import cliqz from './Cliqz';
 import conf from './Conf';
 import tabInfo from './TabInfo';
-import Policy from './Policy';
-import globals from './Globals';
 import { log, prefsGet, prefsSet } from '../utils/common';
-import { sendMessage, injectScript } from '../utils/utils';
+import { injectScript } from '../utils/utils';
 
-const t = chrome.i18n.getMessage;
 /**
  * Class for handling Ghostery Rewards Box overlay.
  * @memberOf  BackgroundClasses

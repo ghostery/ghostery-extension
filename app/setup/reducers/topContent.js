@@ -12,7 +12,6 @@
  */
 
 import { UPDATE_TOP_CONTENT_DATA, SETUP_STEPS } from '../constants/constants';
-import globals from '../../../src/classes/Globals';
 import { msg } from '../utils';
 
 const initialState = {

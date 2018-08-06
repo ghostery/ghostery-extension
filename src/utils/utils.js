@@ -159,7 +159,6 @@ export function processUrl(src) {
 		return {};
 	}
 	const res = url.parse(src);
-	const index = res.href ? res.href.indexOf('?') : -1;
 
 	return {
 		protocol: res.protocol ? res.protocol.substr(0, res.protocol.length - 1) : '',
@@ -541,7 +540,7 @@ export function fetchLocalJSONResource(url) {
  */
 export function injectScript(tabId, scriptfile, cssfile, runAt) {
 	return new Promise((resolve, reject) => {
-		chrome.tabs.executeScript(tabId, { file: scriptfile, runAt }, (result) => {
+		chrome.tabs.executeScript(tabId, { file: scriptfile, runAt }, () => {
 			if (chrome.runtime.lastError) {
 				log('injectScript error', chrome.runtime.lastError);
 				reject(new Error(chrome.runtime.lastError));

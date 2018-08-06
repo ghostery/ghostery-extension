@@ -26,9 +26,7 @@ import latency from './Latency';
 import Policy, { BLOCK_REASON_SS_UNBLOCKED, BLOCK_REASON_C2P_ALLOWED_THROUGH } from './Policy';
 import PolicySmartBlock from './PolicySmartBlock';
 import PurpleBox from './PurpleBox';
-import rewards from './Rewards';
 import surrogatedb from './SurrogateDb';
-import compDb from './CompatibilityDb';
 import tabInfo from './TabInfo';
 import { buildC2P, buildRedirectC2P } from '../utils/click2play';
 import { log } from '../utils/common';
@@ -81,9 +79,8 @@ class EventHandlers {
 			// Workaround for foundBugs/tabInfo memory leak when the user triggers
 			// prefetching/prerendering but never loads the page. Wait two minutes
 			// and check whether the tab doesn't exist.
-			let error;
 			setTimeout(() => {
-				utils.getTab(tabId, null, error = () => {
+				utils.getTab(tabId, null, () => {
 					log('Clearing orphan tab data for tab', tabId);
 					this._clearTabData(tabId);
 					this._resetNotifications();
@@ -100,7 +97,7 @@ class EventHandlers {
 	 */
 	onCommitted(details) {
 		const {
-			tabId, frameId, url, transitionType, transitionQualifiers
+			tabId, frameId, transitionType, transitionQualifiers
 		} = details;
 
 		// frameId === 0 indicates the navigation event ocurred in the content window, not a subframe
@@ -339,15 +336,20 @@ class EventHandlers {
 			log(`tabInfo not found for tab ${tab_id}, initializing...`);
 
 			// create new tabInfo entry
-			tabInfo.create(tab_id);
+			if (details.type === 'main_frame') {
+				tabInfo.create(tab_id, details.url);
+			} else {
+				tabInfo.create(tab_id);
+			}
 
 			// get tab data from browser and update the new tabInfo entry
 			utils.getTab(tab_id, (tab) => {
 				const ti = tabInfo.getTabInfo(tab_id);
-				if (ti && ti.partialScan) {
+				if (!ti) { return; }
+				if (ti.partialScan) {
 					tabInfo.setTabInfo(tab_id, 'url', tab.url);
-					tabInfo.setTabInfo(tab_id, 'incognito', tab.incognito);
 				}
+				tabInfo.setTabInfo(tab_id, 'incognito', tab.incognito);
 			});
 		}
 
@@ -375,6 +377,8 @@ class EventHandlers {
 			this._throttleButtonUpdate();
 			return { cancel: false };
 		}
+		// add the bugId to the details object. This can then be read by other handlers on this pipeline.
+		details.ghosteryBug = bug_id;
 
 		/* ** SMART BLOCKING - Breakage ** */
 		// allow first party trackers
@@ -525,7 +529,7 @@ class EventHandlers {
 	 *
 	 * @param  {Object} tab 	 Details of the tab that was created
 	 */
-	onTabCreated(tab) {}
+	onTabCreated() {}
 
 	/**
 	 * Handler for tabs.onActivated event.
@@ -545,7 +549,7 @@ class EventHandlers {
 	 * @param  {number} addedTabId		added tab id
 	 * @param  {number} removedTabId   removed tab id
 	 */
-	onTabReplaced(addedTabId, removedTabId) {
+	onTabReplaced(addedTabId) {
 		const prefetched = tabInfo.getTabInfo(addedTabId, 'prefetched');
 		// If the new tab was previously prefetched, update it's status here
 		if (prefetched) {
@@ -819,7 +823,7 @@ class EventHandlers {
 	 * @param  {number} tab_id		tab id
 	 */
 	_createBox(tab_id) {
-		this.purplebox.createBox(tab_id).then((result) => {
+		this.purplebox.createBox(tab_id).then(() => {
 			foundBugs.update(tab_id);
 			button.update(tab_id);
 		}).catch((err) => {

@@ -26,7 +26,7 @@ import * as accountActions from '../../Account/AccountActions';
  * @return {function}        this function returns plain object, which will be merged into the component's props
  * @memberof SetupContainers
  */
-const mapStateToProps = (state, ownProps) => Object.assign({}, state.login);
+const mapStateToProps = state => Object.assign({}, state.login);
 
 /**
  * Bind the component's action creators using Redux's bindActionCreators.
@@ -35,7 +35,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state.login);
  * @return {function}          	  to be used as an argument in redux connect call
  * @memberof SetupContainers
  */
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
 	actions: bindActionCreators(Object.assign(logInActions, accountActions), dispatch),
 });
 

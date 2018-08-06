@@ -14,7 +14,6 @@
 /**
  * @namespace BackgroundClasses
  */
-import _ from 'underscore';
 import conf from './Conf';
 import globals from './Globals';
 import { getJson } from '../utils/utils';
@@ -69,7 +68,7 @@ class ABTest {
 			// update conf
 			globals.SESSION.abtests = this.tests;
 			log('A/B Tests: tests updated to', JSON.stringify(this.tests));
-		}).catch((err) => {
+		}).catch(() => {
 			log('A/B Tests: error fetching.');
 		});
 	}

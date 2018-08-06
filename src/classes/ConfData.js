@@ -19,7 +19,7 @@
 /* eslint no-use-before-define: 0 */
 
 import globals from './Globals';
-import { prefsGet, log } from '../utils/common';
+import { prefsGet } from '../utils/common';
 
 const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 const { IS_CLIQZ } = globals;

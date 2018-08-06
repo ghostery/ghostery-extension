@@ -22,7 +22,6 @@ import bugDb from './BugDb';
 import globals from './Globals';
 import Policy from './Policy';
 import tabInfo from './TabInfo';
-import abtest from './ABTest';
 import rewards from './Rewards';
 import account from './Account';
 import { getActiveTab, flushChromeMemoryCache } from '../utils/utils';
@@ -151,7 +150,7 @@ class PanelData {
 
 		if (syncSetDataChanged) {
 			// Push conf changes to the server
-			account.saveUserSettings();
+			account.saveUserSettings().catch(err => log('PanelData saveUserSettings', err));
 		}
 
 		if (otherDataChanged) {
@@ -399,7 +398,6 @@ class PanelData {
 	 */
 	_buildCategories(tab_id, tab_url, pageHost, trackerList) {
 		const selectedAppIds = this._confData.get('selected_app_ids');
-		const language = this._confData.get('language');
 		const pageUnblocks = this._confData.get('site_specific_unblocks')[pageHost] || [];
 		const pageBlocks = this._confData.get('site_specific_blocks')[pageHost] || [];
 		const categories = {};

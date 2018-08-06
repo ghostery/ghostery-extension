@@ -1,3 +1,13 @@
+### GHOSTERY 8.2.2 (August 6, 2018)
+
++ Complete rewrite of account logic to support v2 AUTH API
++ Fixes issue where some users did not remain logged in after browser restart
++ Improved error messaging related to user accounts
++ Login state now syncs between extension and account.ghostery.com
++ Rewards UI improvements
++ Fixes Anti-tracking login issue with microsoft.com and salesforce.com
++ Fixes issue where Ghostery was breaking web requests from other extensions
+
 ### GHOSTERY 8.2.1 (July 16, 2018)
 
 + Ghostery tracker counter and badge icon now includes block counts from Anti-Tracking and Ad-Blocker

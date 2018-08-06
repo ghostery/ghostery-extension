@@ -27,7 +27,7 @@ import { showNotification } from '../actions/PanelActions';
  * @todo  We are not using ownProps, so we better not specify it explicitly,
  * in this case it won't be passed by React (see https://github.com/reactjs/react-redux/blob/master/docs/api.md).
  */
-const mapStateToProps = (state, ownProps) => Object.assign({}, state.rewards, {
+const mapStateToProps = state => Object.assign({}, state.rewards, {
 	is_expanded: state.panel.is_expanded,
 });
 
@@ -38,7 +38,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state.rewards, {
  * @param  {Object} 	ownProps  Detailed view component own props
  * @return {function}          	  to be used as an argument in redux connect call
  */
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
 	actions: bindActionCreators(Object.assign(actions, { showNotification }), dispatch)
 });
 

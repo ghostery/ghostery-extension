@@ -13,7 +13,7 @@
 /**
  * @namespace  SettingsComponents
  */
-import React, { Component } from 'react';
+import React from 'react';
 import { sendMessage } from '../../utils/msg';
 import globals from '../../../../src/classes/Globals';
 /**

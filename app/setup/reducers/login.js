@@ -19,7 +19,6 @@ import {
 } from '../constants/constants';
 import {
 	LOGIN_FAIL,
-	GET_LOGIN_INFO,
 	LOGIN_SUCCESS,
 	REGISTER_SUCCESS,
 	REGISTER_FAIL
@@ -49,7 +48,6 @@ export default (state = initialState, action) => {
 				success: true,
 				loading: false,
 				message: initialState.message,
-				triggerSignIn: true,
 			});
 		}
 		case LOGIN_FAIL: {
@@ -78,7 +76,6 @@ export default (state = initialState, action) => {
 			return Object.assign({}, state, {
 				success: true,
 				loading: false,
-				triggerCreateAccount: true,
 			});
 		case REGISTER_FAIL: {
 			const { errors } = action.payload;

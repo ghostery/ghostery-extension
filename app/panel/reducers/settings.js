@@ -32,7 +32,6 @@ import {
 	GET_SETTINGS_DATA
 } from '../constants/constants';
 import { updateTrackerBlocked, updateCategoryBlocked, updateBlockAllTrackers, toggleExpandAll, toggleExpandCategory } from '../utils/blocking';
-import { removeFromObject, updateObject } from '../utils/utils';
 import { sendMessage } from '../utils/msg';
 import globals from '../../../src/classes/Globals';
 import { objectEntries } from '../../../src/utils/common';

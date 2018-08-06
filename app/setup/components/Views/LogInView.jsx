@@ -12,8 +12,6 @@
  */
 
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import globals from '../../../../src/classes/Globals';
 import { log } from '../../../../src/utils/common';
 import { utils } from '../../utils';
 
@@ -142,9 +140,9 @@ class LogInView extends Component {
 			return;
 		}
 
-		const email = this.state.email.toLowerCase();
-		const confirmEmail = this.state.confirmEmail.toLowerCase();
-		const { firstName, lastName, password } = this.state;
+		const {
+			email, confirmEmail, firstName, lastName, password
+		} = this.state;
 		this.props.actions.register(email, confirmEmail, firstName, lastName, password)
 			.then((success) => {
 				if (success) {
