@@ -55,7 +55,7 @@ export default class DotsMenu extends React.Component {
 				<button className="dots-menu-btn" onClick={this.dotsButtonClicked} />
 				<div className={`dots-menu-content ${this.state.opening ? 'opening' : ''}`}>
 					<ul>
-						{this.props.actions.map((action, index) =>
+						{this.props.actions.map(action =>
 							(
 								<li key={action.id}>
 									<button className="dots-menu-item" onClick={action.callback}>{action.name}</button>
