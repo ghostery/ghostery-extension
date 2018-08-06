@@ -195,7 +195,7 @@ function closeAndroidPanelTabs() {
 	if (BROWSER_INFO.os !== 'android') { return; }
 	chrome.tabs.query({
 		active: true,
-		url: chrome.extension.getURL('app/templates/panel_android.html*')
+		url: chrome.extension.getURL('app/templates/panel_android_ui.html*')
 	}, (tabs) => {
 		chrome.tabs.remove(tabs.map(t => t.id));
 	});
@@ -673,14 +673,15 @@ function onMessageHandler(request, sender, callback) {
 		return false;
 	} else if (name === 'getCliqzModuleData') {
 		const modules = { adblock: {}, antitracking: {} };
-		utils.getActiveTab((tab) => {
+
+		const getCliqzModuleDataForTab = (tabId, callback) => {
 			button.update();
 			if (conf.enable_ad_block) {
 				// update adblock count. callback() handled below based on anti-tracking status
-				modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tab.id);
+				modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tabId);
 			}
 			if (conf.enable_anti_tracking) {
-				cliqz.modules.antitracking.background.actions.aggregatedBlockingStats(tab.id).then((data) => {
+				cliqz.modules.antitracking.background.actions.aggregatedBlockingStats(tabId).then((data) => {
 					modules.antitracking = data;
 					callback(modules);
 				}).catch(() => {
@@ -689,7 +690,16 @@ function onMessageHandler(request, sender, callback) {
 			} else {
 				callback(modules);
 			}
-		});
+		};
+
+		if (message && message.tabId) {
+			getCliqzModuleDataForTab(+message.tabId, callback);
+		} else {
+			utils.getActiveTab((tab) => {
+				getCliqzModuleDataForTab(tab.id, callback);
+			});
+		}
+
 		return true;
 	} else if (name === 'getTrackerDescription') {
 		utils.getJson(message.url).then((result) => {
@@ -1220,7 +1230,7 @@ function initializePopup() {
 	if (BROWSER_INFO.os === 'android') {
 		chrome.browserAction.onClicked.addListener((tab) => {
 			chrome.tabs.create({
-				url: chrome.extension.getURL(`app/templates/panel_android.html?tabId=${tab.id}`),
+				url: chrome.extension.getURL(`app/templates/panel_android_ui.html?tabId=${tab.id}`),
 				active: true,
 			});
 		});
