@@ -108,7 +108,7 @@ export default class Accordion extends React.Component {
 		}
 	}
 
-	handleScroll = (event) => {
+	handleScroll = () => {
 		// Don't call the checkAndUpdateData function so many times. Use throttle
 		if (this.isWaiting) {
 			return;

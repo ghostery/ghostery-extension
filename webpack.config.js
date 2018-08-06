@@ -43,13 +43,13 @@ const extractSass = new MiniCssExtractPlugin({
 const cleanTmpStyleFiles = new WebpackShellPlugin({
 	onBuildEnd: [
 		`${RM} ./dist/foundation.js`,
+		`${RM} ./dist/ghostery_dot_com_css.js`,
 		`${RM} ./dist/licenses.js`,
 		`${RM} ./dist/panel.js`,
 		`${RM} ./dist/panel_android.js`,
 		`${RM} ./dist/purplebox_styles.js`,
+		`${RM} ./dist/rewards_styles.js`,
 		`${RM} ./dist/setup.js`,
-		`${RM} ./dist/ghostery_dot_com_css.js`,
-		`${RM} ./dist/rewards_styles.js`
 	]
 });
 
@@ -124,18 +124,18 @@ const config = {
 		purplebox: [CONTENT_SCRIPTS_DIR + '/purplebox.js'],
 		content_script_bundle: [CLIQZ_DIR + '/core/content-script.bundle.js'],
 		panel_react: [PANEL_DIR + '/index.jsx'],
-		panel_android_js: [PANEL_ANDROID_DIR + '/index.jsx'],
+		panel_android_react: [PANEL_ANDROID_DIR + '/index.jsx'],
 		setup_react: [SETUP_DIR + '/index.jsx'],
 		licenses_react: [LICENSES_DIR + '/Licenses.jsx', LICENSES_DIR + '/License.jsx'],
+		// Sass
 		foundation: [SASS_DIR + '/vendor/foundation.scss'],
 		ghostery_dot_com_css: [SASS_DIR + '/ghostery_dot_com.scss'],
+		licenses: [SASS_DIR + '/licenses.scss'],
 		panel: [SASS_DIR + '/panel.scss'],
 		panel_android: [SASS_DIR + '/panel_android.scss'],
-		panel_android_ui: [SASS_DIR + '/panel_android_ui.scss'],
 		purplebox_styles: [SASS_DIR + '/purplebox.scss'],
-		setup: [SASS_DIR + '/setup.scss'],
-		licenses: [SASS_DIR + '/licenses.scss'],
 		rewards_styles: [SASS_DIR + '/rewards.scss'],
+		setup: [SASS_DIR + '/setup.scss'],
 	},
 	devtool: 'none',
 	performance: { hints: false },
