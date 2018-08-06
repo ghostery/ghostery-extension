@@ -1,3 +1,16 @@
+/**
+ * JSON API
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
 export const _getJSONAPIErrorsObject = e => [{ title: e.message || '', detail: e.message || '', code: e.code || e.message || '' }];
 
 class Api {
@@ -54,7 +67,20 @@ class Api {
 			if (status === 204) {
 				resolve();
 				return;
+			} else if (status === 404) {
+				// TODO resource "not-found" errors should be handled server side
+				reject({ // eslint-disable-line prefer-promise-reject-errors
+					errors: [
+						{
+							title: 'Resource not found',
+							code: 'not-found',
+							status: '404',
+						}
+					]
+				});
+				return;
 			}
+
 			res.json().then((data) => {
 				if (status >= 400) {
 					reject(data);

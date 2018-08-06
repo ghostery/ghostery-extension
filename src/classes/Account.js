@@ -17,6 +17,7 @@
 import _ from 'underscore';
 import normalize from 'json-api-normalizer';
 import build from 'redux-object';
+import RSVP from 'rsvp';
 import globals from '../classes/Globals';
 import conf from '../classes/Conf';
 import dispatcher from '../classes/Dispatcher';
@@ -39,7 +40,7 @@ class Account {
 		};
 		const opts = {
 			errorHandler: errors => (
-				new Promise((resolve) => {
+				new Promise((resolve, reject) => {
 					for (const err of errors) {
 						switch (err.code) {
 							case Api.ERROR_CSRF_COOKIE_NOT_FOUND:
@@ -53,8 +54,11 @@ class Account {
 							case '10300': // csrf token is missing
 							case '10301': // csrf tokens do not match
 								return this.logout()
-									.catch(e => log(e))
-									.finally(() => resolve());
+									.then(() => resolve())
+									.catch(() => resolve());
+							case '10030': // email not validated
+							case 'not-found':
+								return reject(err);
 							default:
 								return resolve();
 						}
@@ -114,7 +118,7 @@ class Account {
 	}
 
 	logout = () => (
-		new Promise((resolve, reject) => {
+		new RSVP.Promise((resolve, reject) => {
 			chrome.cookies.get({
 				url: `https://${GHOSTERY_DOMAIN}.com`,
 				name: 'csrf_token',
@@ -187,13 +191,12 @@ class Account {
 				'Content-Type': 'application/x-www-form-urlencoded',
 				'Content-Length': Buffer.byteLength(data),
 			},
-		})
-			.then((res) => {
-				if (res.status >= 400) {
-					return res.json();
-				}
-				return {};
-			});
+		}).then((res) => {
+			if (res.status >= 400) {
+				return res.json();
+			}
+			return {};
+		});
 	}
 
 	migrate = () => (
@@ -330,7 +333,7 @@ class Account {
 	_getUserID = () => (
 		new Promise((resolve, reject) => {
 			if (conf.account === null) {
-				return reject(new Error('Not loggedin.'));
+				return reject(new Error('_getUserID() Not logged in'));
 			}
 			return resolve(conf.account.userID);
 		})
@@ -440,9 +443,9 @@ class Account {
 	}
 
 	_logoutOnUserIDCookieRemoved = (changeInfo) => {
-		const { cause, removed, cookie } = changeInfo;
+		const { removed, cookie } = changeInfo;
 		const { name, domain } = cookie;
-		if (name === 'user_id' && domain === `.${GHOSTERY_DOMAIN}.com` && removed && cause === 'expired_overwrite') {
+		if (name === 'user_id' && domain === `.${GHOSTERY_DOMAIN}.com` && removed) {
 			this.logout();
 		}
 	}
