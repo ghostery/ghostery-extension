@@ -193,7 +193,7 @@ function closeAndroidPanelTabs() {
 	if (BROWSER_INFO.os !== 'android') { return; }
 	chrome.tabs.query({
 		active: true,
-		url: chrome.extension.getURL('app/templates/panel_android_ui.html*')
+		url: chrome.extension.getURL('app/templates/panel_android.html*')
 	}, (tabs) => {
 		chrome.tabs.remove(tabs.map(t => t.id));
 	});
@@ -1223,7 +1223,7 @@ function initializePopup() {
 	if (BROWSER_INFO.os === 'android') {
 		chrome.browserAction.onClicked.addListener((tab) => {
 			chrome.tabs.create({
-				url: chrome.extension.getURL(`app/templates/panel_android_ui.html?tabId=${tab.id}`),
+				url: chrome.extension.getURL(`app/templates/panel_android.html?tabId=${tab.id}`),
 				active: true,
 			});
 		});
