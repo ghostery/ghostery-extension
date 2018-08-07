@@ -1695,6 +1695,18 @@
 	"rewards_learn_more": {
 		"message": "Learn More"
 	},
+	"offers_hub_copy_btn": {
+		"message": "Copy code"
+	},
+	"offers_code_copied": {
+		"message": "Copied"
+	},
+	"popup_cancel_button": {
+		"message": "Cancel"
+	},
+	"popup_apply_code_button": {
+		"message": "Apply code"
+	},  
 	"subscription_info": {
 		"message": "Subscription Info"
 	},
@@ -1739,8 +1751,7 @@
 	},
 	"subscription_account_canceled": {
 		"message": "Canceled on"
-	}
-	,
+	},
 	"subscription_manage": {
 		"message": "Manage My Subscription"
 	},
@@ -1749,5 +1760,5 @@
 	},
 	"subscription_themes_tooltip": {
 		"message": "midnight theme is the best theme there is. Worth every subscription penny"
-	}
+  }
 }

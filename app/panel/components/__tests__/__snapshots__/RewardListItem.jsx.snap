@@ -18,7 +18,7 @@ exports[`app/panel/components/BuildingBlocks/RewardListItem.jsx Snapshot tests w
       />
     </div>
     <div
-      className="flex-child-grow"
+      className="flex-grow"
     >
       <div
         className="RewardListItem__text"
@@ -84,7 +84,7 @@ exports[`app/panel/components/BuildingBlocks/RewardListItem.jsx Snapshot tests w
       />
     </div>
     <div
-      className="flex-child-grow"
+      className="flex-grow"
     >
       <div
         className="RewardListItem__text"
@@ -150,7 +150,7 @@ exports[`app/panel/components/BuildingBlocks/RewardListItem.jsx Snapshot tests w
       />
     </div>
     <div
-      className="flex-child-grow"
+      className="flex-grow"
     >
       <div
         className="RewardListItem__text"
@@ -216,7 +216,7 @@ exports[`app/panel/components/BuildingBlocks/RewardListItem.jsx Snapshot tests w
       />
     </div>
     <div
-      className="flex-child-grow"
+      className="flex-grow"
     >
       <div
         className="RewardListItem__text"
@@ -282,7 +282,7 @@ exports[`app/panel/components/BuildingBlocks/RewardListItem.jsx Snapshot tests w
       />
     </div>
     <div
-      className="flex-child-grow"
+      className="flex-grow"
     >
       <div
         className="RewardListItem__text"

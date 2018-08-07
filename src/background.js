@@ -489,7 +489,7 @@ function handlePurplebox(name, message) {
 		conf.alert_bubble_pos = message.alert_bubble_pos;
 		conf.alert_bubble_timeout = message.alert_bubble_timeout;
 		// push new settings to API
-		account.saveUserSettings();
+		account.saveUserSettings().catch(err => log('Background handlePurplebox', err));
 	}
 	return false;
 }
@@ -671,14 +671,15 @@ function onMessageHandler(request, sender, callback) {
 		return true;
 	} else if (name === 'getCliqzModuleData') {
 		const modules = { adblock: {}, antitracking: {} };
-		utils.getActiveTab((tab) => {
+
+		const getCliqzModuleDataForTab = (tabId, callback) => {
 			button.update();
 			if (conf.enable_ad_block) {
 				// update adblock count. callback() handled below based on anti-tracking status
-				modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tab.id);
+				modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tabId);
 			}
 			if (conf.enable_anti_tracking) {
-				cliqz.modules.antitracking.background.actions.aggregatedBlockingStats(tab.id).then((data) => {
+				cliqz.modules.antitracking.background.actions.aggregatedBlockingStats(tabId).then((data) => {
 					modules.antitracking = data;
 					callback(modules);
 				}).catch(() => {
@@ -687,7 +688,16 @@ function onMessageHandler(request, sender, callback) {
 			} else {
 				callback(modules);
 			}
-		});
+		};
+
+		if (message && message.tabId) {
+			getCliqzModuleDataForTab(+message.tabId, callback);
+		} else {
+			utils.getActiveTab((tab) => {
+				getCliqzModuleDataForTab(tab.id, callback);
+			});
+		}
+
 		return true;
 	} else if (name === 'getTrackerDescription') {
 		utils.getJson(message.url).then((result) => {
@@ -717,7 +727,7 @@ function onMessageHandler(request, sender, callback) {
 			})
 			.catch((err) => {
 				callback({ errors: [err] });
-				log('REGISTER ERROR');
+				log('REGISTER ERROR', err);
 			});
 		return true;
 	} else if (name === 'account.logout') {
@@ -726,7 +736,7 @@ function onMessageHandler(request, sender, callback) {
 				callback(response);
 			})
 			.catch((err) => {
-				log('LOGOUT ERROR');
+				log('LOGOUT ERROR', err);
 				callback(err);
 			});
 		return true;
@@ -748,7 +758,7 @@ function onMessageHandler(request, sender, callback) {
 			})
 			.catch((err) => {
 				callback({ errors: _getJSONAPIErrorsObject(err) });
-				log('RESET PASSWORD ERROR');
+				log('RESET PASSWORD ERROR', err);
 			});
 		return true;
 	} else if (name === 'account.getUser') {
@@ -758,7 +768,7 @@ function onMessageHandler(request, sender, callback) {
 			})
 			.catch((err) => {
 				callback({ errors: _getJSONAPIErrorsObject(err) });
-				log('FETCH USER ERROR');
+				log('FETCH USER ERROR', err);
 			});
 		return true;
 	} else if (name === 'account.sendValidateAccountEmail') {

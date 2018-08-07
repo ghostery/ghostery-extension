@@ -13,6 +13,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ClassNames from 'classnames';
 import { validateEmail } from '../utils/utils';
 /**
  * @class Implement Forgot Password view which opens from the link on Sign In panel.
@@ -43,23 +44,26 @@ class ForgotPassword extends React.Component {
 	 */
 	handleSubmit = (e) => {
 		e.preventDefault();
-		const email = this.state.email.toLowerCase();
+		this.setState({ loading: true }, () => {
+			const { email } = this.state;
 
-		// validate the email and password
-		if (!validateEmail(email)) {
-			this.setState({
-				emailError: true,
-				loading: false,
-			});
-			return;
-		}
+			// validate the email and password
+			if (!validateEmail(email)) {
+				this.setState({
+					emailError: true,
+					loading: false,
+				});
+				return;
+			}
 
-		this.props.actions.resetPassword(email)
-			.then((success) => {
-				if (success) {
-					this.props.history.push('/login');
-				}
-			});
+			this.props.actions.resetPassword(email)
+				.then((success) => {
+					this.setState({ loading: false });
+					if (success) {
+						this.props.history.push('/login');
+					}
+				});
+		});
 	}
 
 	/**
@@ -68,8 +72,9 @@ class ForgotPassword extends React.Component {
 	 */
 	render() {
 		const { email, loading, emailError } = this.state;
+		const buttonClasses = ClassNames('button ghostery-button', { loading });
 		return (
-			<div id="forgot-password-panel" className={loading ? 'loading' : ''}>
+			<div id="forgot-password-panel">
 				<div className="row align-center">
 					<div className="small-11 medium-8 columns">
 						<form onSubmit={this.handleSubmit}>
@@ -95,8 +100,9 @@ class ForgotPassword extends React.Component {
 									</Link>
 								</div>
 								<div className="small-6 columns text-center">
-									<button type="submit" id="send-button" className="button">
-										{ t('send_button_label') }
+									<button type="submit" id="send-button" className={buttonClasses}>
+										<span className="title">{ t('send_button_label') }</span>
+										<span className="loader" />
 									</button>
 								</div>
 							</div>

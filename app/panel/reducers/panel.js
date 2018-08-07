@@ -89,6 +89,7 @@ export default (state = initialState, action) => {
 		case LOGIN_SUCCESS: {
 			action.payload.text = `${t('panel_signin_success')} ${action.payload.email}`;
 			action.payload.classes = 'success';
+			action.payload.overrideNotificationShown = true;
 			const updated = _showNotification(state, action);
 			return Object.assign({}, state, updated, {
 				loggedIn: true,
@@ -109,12 +110,14 @@ export default (state = initialState, action) => {
 			});
 			action.payload.text = errorText;
 			action.payload.classes = 'alert';
+			action.payload.overrideNotificationShown = true;
 			const updated = _showNotification(state, action);
 			return Object.assign({}, state, updated);
 		}
 		case REGISTER_SUCCESS: {
 			action.payload.text = t('panel_email_verification_sent', action.payload.email);
 			action.payload.classes = 'success';
+			action.payload.overrideNotificationShown = true;
 			const updated = _showNotification(state, action);
 			return Object.assign({}, state, updated);
 		}
@@ -135,6 +138,7 @@ export default (state = initialState, action) => {
 			});
 			action.payload.text = errorText;
 			action.payload.classes = 'alert';
+			action.payload.overrideNotificationShown = true;
 			const updated = _showNotification(state, action);
 			return Object.assign({}, state, updated);
 		}
@@ -151,6 +155,7 @@ export default (state = initialState, action) => {
 			action.payload = {
 				text: t('banner_check_your_email_title'),
 				classes: 'success',
+				overrideNotificationShown: true,
 			};
 			const updated = _showNotification(state, action);
 			return Object.assign({}, state, updated);
@@ -170,6 +175,7 @@ export default (state = initialState, action) => {
 			});
 			action.payload.text = errorText;
 			action.payload.classes = 'alert';
+			action.payload.overrideNotificationShown = true;
 			const updated = _showNotification(state, action);
 			return Object.assign({}, state, updated);
 		}
@@ -255,7 +261,8 @@ export default (state = initialState, action) => {
  */
 const _showNotification = (state, action) => {
 	const msg = action.data || action.payload;
-	const { reload } = msg;
+	// overrideNotificationShown ensures certain notifications are shown regardless of user's settings
+	const { reload, overrideNotificationShown } = msg;
 
 	let updated_notificationClasses = state.notificationClasses;
 	let updated_notificationShown = state.notificationShown;
@@ -309,7 +316,7 @@ const _showNotification = (state, action) => {
 		notificationClasses: updated_notificationClasses,
 		notificationFilter: msg.filter || '',
 		notificationText: msg.text || '',
-		notificationShown: updated_notificationShown,
+		notificationShown: overrideNotificationShown || updated_notificationShown,
 	};
 };
 
