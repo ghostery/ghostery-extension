@@ -140,6 +140,7 @@ class Account {
 		})
 	)
 
+	// @TODO a 404 here should trigger a logout
 	getUser = () => (
 		this._getUserID()
 			.then(userID => api.get('users', userID))
@@ -263,6 +264,22 @@ class Account {
 				});
 			});
 		})
+			.then(() => (
+				// Checks if user is already logged in
+				// @TODO move this into an init() function
+				new Promise((resolve) => {
+					if (conf.account !== null) { resolve(); }
+					chrome.cookies.get({
+						url: `https://${GHOSTERY_DOMAIN}.com`,
+						name: 'user_id',
+					}, (cookie) => {
+						if (cookie !== null) {
+							this._setAccountInfo(cookie.value);
+						}
+						resolve();
+					});
+				})
+			))
 	)
 
 	/**
@@ -443,9 +460,10 @@ class Account {
 	}
 
 	_logoutOnUserIDCookieRemoved = (changeInfo) => {
-		const { removed, cookie } = changeInfo;
+		const { removed, cookie, cause } = changeInfo;
 		const { name, domain } = cookie;
-		if (name === 'user_id' && domain === `.${GHOSTERY_DOMAIN}.com` && removed) {
+		// skip if cause === 'overwrite' to avoid logging out on token refresh
+		if (name === 'user_id' && domain === `.${GHOSTERY_DOMAIN}.com` && removed && cause !== 'overwrite') {
 			this.logout();
 		}
 	}
