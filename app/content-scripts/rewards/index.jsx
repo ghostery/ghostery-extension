@@ -64,15 +64,14 @@ class RewardsApp {
 	}
 
 	init() {
-		if (document.readyState === 'complete'
-		|| document.readyState === 'loaded'
-		|| document.readyState === 'interactive'
-		) {
+		if (document.readyState === 'complete') {
 			this.start();
 		} else {
-			document.addEventListener('DOMContentLoaded', () => {
-				this.start();
-			});
+			document.onreadystatechange = () => {
+				if (document.readyState === 'complete') {
+					this.start();
+				}
+			};
 		}
 	}
 
@@ -121,7 +120,6 @@ class RewardsApp {
 				</ShadowDOM>
 			</Router>
 		);
-		this.renderReact();
 		this.initListener();
 	}
 
@@ -165,7 +163,6 @@ class RewardsApp {
 					</div>
 				</Router>
 			);
-			this.renderReact();
 			this.initListener();
 		};
 		document.body.appendChild(this.rewardsIframe);
@@ -190,9 +187,9 @@ class RewardsApp {
 			this.reward = request.reward;
 			this.conf = request.conf;
 		}
-		if (document.readyState === 'complete' || document.readyState === 'interactive') {
+		setTimeout(() => {
 			this.renderReact();
-		}
+		});
 	}
 
 	focusListener() {
