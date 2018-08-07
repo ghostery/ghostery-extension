@@ -48,7 +48,7 @@ const Ghostery = () => (
 		<Route path="/help" component={Help} />
 		<Route path="/about" component={About} />
 		<Route path="/subscription" component={Subscription} />
-		<Route path="/subscribe" component={Subscribe} />
+		<Route path="/subscribe/:supporter" component={Subscribe} />
 		<Route path="/login" component={Login} />
 		<Route path="/create-account" component={CreateAccount} />
 		<Route path="/forgot-password" component={ForgotPassword} />
@@ -60,14 +60,14 @@ const Ghostery = () => (
 // 			view: 'subscription',
 // 		}).then((data) => {
 // 			setTheme(document, data.currentTheme, data.theme);
-			ReactDOM.render(
-				(
-					<Provider store={store}>
-						<Router history={history}>
-							<Ghostery />
-						</Router>
-					</Provider>
-				), document.getElementById('ghostery-content'),
-			);
+ReactDOM.render(
+	(
+		<Provider store={store}>
+			<Router history={history}>
+				<Ghostery />
+			</Router>
+		</Provider>
+	), document.getElementById('ghostery-content'),
+);
 //		});
 

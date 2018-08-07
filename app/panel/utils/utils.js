@@ -175,14 +175,14 @@ export function doXHR(method, url, query) {
  * Determine if user is a supporter
  * @memberOf PanelUtils
  * @param  {array} userScopes 	array of scope strings
- * @return {boolean} 
+ * @return {boolean}
  */
-export function isSupporter(userScopes) {
-	return true; //Temporarily
-	if (userScopes === null) { return false; }
-	// check scopes
-	if (userScopes.indexOf('subscription:supporter') >= 0) { return true; }
-	return false;
+export function isSupporter(/* userScopes */) {
+	return true; // TBD change this code once background is ready.
+	// if (userScopes === null) { return false; }
+	// // check scopes
+	// if (userScopes.indexOf('subscription:supporter') >= 0) { return true; }
+	// return false;
 }
 
 /**
@@ -194,29 +194,29 @@ export function isSupporter(userScopes) {
  */
 
 export function setTheme(doc, themeName, theme) {
-	//First remove all other style elements which may be there
+	// First remove all other style elements which may be there
 	const styleList = doc.head.getElementsByTagName('style');
 	let themeStyle;
 	// Other kinds of loops are not supported equally across browsers
-	for(let i = 0; i < styleList.length; i++) {
-		const style = styleList[ i ];
-		if(style.id !== themeName) {
+	for (let i = 0; i < styleList.length; i++) {
+		const style = styleList[i];
+		if (style.id !== themeName) {
 			doc.head.removeChild(style);
 		} else {
 			themeStyle = style;
 		}
-	};
+	}
 
 	// if themeName is 'default' all we have to do is to remove style element
-	if(themeName !== 'default') {
-		//Create element for the theme being set, if it is not there
-		if(!themeStyle) {
+	if (themeName !== 'default') {
+		// Create element for the theme being set, if it is not there
+		if (!themeStyle) {
 			themeStyle = doc.createElement('style');
 			themeStyle.id = themeName;
 		}
 
-		//Set content of style element to the theme text.
-		if(themeStyle) {
+		// Set content of style element to the theme text.
+		if (themeStyle) {
 			themeStyle.textContent = theme;
 			document.head.appendChild(themeStyle);
 		}

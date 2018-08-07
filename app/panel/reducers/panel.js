@@ -25,7 +25,7 @@ import {
 	REMOVE_OFFER,
 	SET_OFFER_READ,
 	TOGGLE_EXPANDED,
-	SET_THEME,
+	SET_THEME
 } from '../constants/constants';
 import {
 	LOGIN_SUCCESS,

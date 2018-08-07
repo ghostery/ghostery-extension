@@ -10,7 +10,6 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-
 #ghostery-header {
 	.header-tab-group {
 		position: absolute;
@@ -154,6 +153,23 @@
 				color: #ffffff;
 			}
 		}
+
+		.menu-option-gold {
+			@extend .menu-option-base;
+			@extend %pointer;
+			.supporter-icon {fill: $gold; stroke:  $gold;}
+			&:hover {
+				span {color: $bright_gold}
+				.menu-icon,.supporter-icon {fill: $bright_gold; stroke: $bright_gold;}
+				.about-icon {
+					path, text {stroke: $bright_gold;}
+				}
+			}
+			span {
+				color: $gold;
+			}
+		}
+
 		.account-info {
 			@extend %pointer;
 			position: absolute;

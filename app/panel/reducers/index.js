@@ -21,7 +21,6 @@ import rewards from './rewards';
 import blocking from './blocking';
 import settings from './settings';
 import account from '../../Account/AccountReducer';
-import subscription from './subscription';
 
 /**
  * Export combined reducers object which provides
@@ -39,7 +38,6 @@ const Reducers = combineReducers({
 	blocking,
 	settings,
 	account,
-	subscription,
 });
 
 export default Reducers;

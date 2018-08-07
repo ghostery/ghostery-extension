@@ -20,9 +20,9 @@ import { ToggleSlider } from '../BuildingBlocks';
  * It allows to switch between available Ghostery themes.
  * @memberOf SettingsComponents
  */
-const SubscriptionThemes = (props) => {
-	const { subscriptionData } = props;
-	return (
+const SubscriptionThemes = props =>
+	// const { subscriptionData } = props;
+	(
 		<div className="content-subscription s-tabs-panel">
 			<div className="row">
 				<div className="columns column-subscription">
@@ -46,6 +46,4 @@ const SubscriptionThemes = (props) => {
 			</div>
 		</div>
 	);
-};
-
 export default SubscriptionThemes;

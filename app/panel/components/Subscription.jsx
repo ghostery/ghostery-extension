@@ -17,7 +17,6 @@ import SubscriptionMenu from './Subscription/SubscriptionMenu';
 import SubscriptionInfo from './Subscription/SubscriptionInfo';
 import SubscriptionThemes from './Subscription/SubscriptionThemes';
 import PrioritySupport from './Subscription/PrioritySupport';
-import { setTheme } from '../utils/utils';
 /**
  * @class Implement base Subscription view which routes navigation to all subscription subviews
  * @memberof PanelClasses
@@ -37,29 +36,22 @@ class Subscription extends React.Component {
 	 * Lifecycle event. Default sub view is set here.
 	 */
 	componentWillMount() {
-		this.props.history.push('/subscription/info');
-		this.setState({isChecked: (this.props.currentTheme !== 'default')});
-		console.log("SUBSCRIPTION PROPS IN WILL MOUNT", this.props, this.state);
-		// this.props.actions.getSubscriptionData().then(() => {});
+		this.setState({ isChecked: (this.props.currentTheme !== 'default') });
 	}
-	componentWillReceiveProps(nextProps) {
-		console.log("SUBSCRIPTION PROPS", this.props, nextProps);
-	}
-	toggleThemes(event) {
+
+	toggleThemes() {
 		const newChecked = !this.state.isChecked;
-		this.setState({isChecked: newChecked});
-		if(newChecked) {
-			this.props.actions.setTheme({currentTheme:'midnight'});
-//			setTheme(document, this.props.currentTheme, this.props.theme);
+		this.setState({ isChecked: newChecked });
+		if (newChecked) {
+			this.props.actions.setTheme({ currentTheme: 'midnight' });
 		} else {
-			this.props.actions.setTheme({currentTheme:'default'});
-//			setTheme(document, 'default');
+			this.props.actions.setTheme({ currentTheme: 'default' });
 		}
 	}
 
-	SubscriptionInfoComponent = () => (<SubscriptionInfo subscriptionData={this.props}/>);
+	SubscriptionInfoComponent = () => (<SubscriptionInfo subscriptionData={this.props} />);
 	SubscriptionThemesComponent = () => (<SubscriptionThemes isChecked={this.state.isChecked} subscriptionData={this.props} toggleThemes={this.toggleThemes} actions={this.props.actions} />);
-	PrioritySupportComponent = () => (<PrioritySupport/>);
+	PrioritySupportComponent = () => (<PrioritySupport />);
 	/**
 	 * Render top level component of the Subscription view.
 	 * @return {ReactComponent}   ReactComponent instance
@@ -68,7 +60,7 @@ class Subscription extends React.Component {
 		return (
 			<div>
 				<div id="content-settings">
-					<SubscriptionMenu/>
+					<SubscriptionMenu />
 					<Route path="/subscription/info" render={this.SubscriptionInfoComponent} />
 					<Route path="/subscription/themes" render={this.SubscriptionThemesComponent} />
 					<Route path="/subscription/prioritysupport" render={this.PrioritySupportComponent} />

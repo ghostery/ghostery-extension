@@ -13,7 +13,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Subscription from '../components/Subscription';
-import * as subscriptionActions from '../actions/SubscriptionActions';
 import { setTheme } from '../actions/PanelActions';
 
 /**
@@ -25,7 +24,7 @@ import { setTheme } from '../actions/PanelActions';
  * @todo  We are not using ownProps, so we better not specify it explicitly,
  * in this case it won't be passed by React (see https://github.com/reactjs/react-redux/blob/master/docs/api.md).
  */
-const mapStateToProps = (state, ownProps) => Object.assign({}, state.subscription, {
+const mapStateToProps = state => Object.assign({}, state.subscription, {
 	theme: state.panel.theme,
 	currentTheme: state.panel.currentTheme,
 });
@@ -36,8 +35,8 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, state.subscriptio
  * @param  {Object} 	ownProps  Subscription view component own props
  * @return {function}          	  to be used as an argument in redux connect call
  */
-const mapDispatchToProps = (dispatch, ownProps) => ({
-	actions: bindActionCreators(Object.assign(subscriptionActions, {setTheme}), dispatch),
+const mapDispatchToProps = dispatch => ({
+	actions: bindActionCreators(Object.assign({}, { setTheme }), dispatch),
 });
 /**
  * Connects Subscription view component to the Redux store. Pass updated match, location, and history props to the wrapped component.

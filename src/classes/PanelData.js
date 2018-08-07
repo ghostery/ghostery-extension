@@ -49,7 +49,6 @@ class PanelData {
 		this._blockingView = {};
 		this._rewardsView = {};
 		this._settingsView = {};
-		this._subscriptionView = {};
 	}
 
 	/**
@@ -68,12 +67,9 @@ class PanelData {
 	 * @return {Object}      	view data
 	 */
 	get(view, tab) {
-		console.log(`Get data for ${view} view`);
+		log(`Get data for ${view} view`);
 		if (view === 'settings') {
 			return this.settingsView;
-		} else if (view === 'subscription') {
-			console.log("GETTING SUBSCRIPTION", this.subscriptionView);
-			return this.subscriptionView;
 		}
 		// update _trackerData with new tab info
 		this._buildTrackerData(tab);
@@ -171,9 +167,9 @@ class PanelData {
 	 */
 	get panelView() {
 		const currentTheme = this._confData.get('currentTheme');
-		let theme = null;
-		if(currentTheme !== 'default') {
-			theme = (this._confData.get("themes"))[currentTheme] || null;
+		let theme = {};
+		if (currentTheme !== 'default') {
+			theme = (this._confData.get('themes'))[currentTheme] || {};
 		}
 		this._panelView = {
 			panel: {
@@ -187,8 +183,8 @@ class PanelData {
 				language: this._confData.get('language'),
 				reload_banner_status: this._confData.get('reload_banner_status'),
 				trackers_banner_status: this._confData.get('trackers_banner_status'),
-				currentTheme: currentTheme,
-				theme: theme,
+				currentTheme,
+				theme,
 
 				needsReload: this._trackerData.get('needsReload'),
 				smartBlock: this._trackerData.get('smartBlock'),
@@ -297,18 +293,6 @@ class PanelData {
 		};
 
 		return this._settingsView;
-	}
-	get subscriptionView() {
-		const currentTheme = this._confData.get('currentTheme');
-		let theme = null;
-		if(currentTheme !== 'default') {
-			theme = (this._confData.get("themes"))[currentTheme] || null;
-		}
-		this._subscriptionView = {
-			currentTheme: currentTheme,
-			theme: theme,
-		};
-		return this._subscriptionView;
 	}
 
 	/**

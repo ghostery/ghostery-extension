@@ -1,4 +1,4 @@
-//Priority Support
+// Priority Support
 /**
  * Priority Support Subscription Component
  *
@@ -20,17 +20,15 @@ import React from 'react';
  * It allows user to access Priority Support
  * @memberOf SubscriptionComponents
  */
-const PrioritySupport = (props) => {
-	const { subscriptionData } = props;
-	return (
+const PrioritySupport = () =>
+	// const { subscriptionData } = props;
+	(
 		<div className="content-subscription s-tabs-panel">
 			<div className="row">
 				<div className="columns column-subscription">
-				<h1>{ t('subscription_priority_support_title') }</h1>
+					<h1>{ t('subscription_priority_support_title') }</h1>
 				</div>
 			</div>
 		</div>
 	);
-};
-
 export default PrioritySupport;
