@@ -2104,5 +2104,17 @@
 	"pause_24_hours_condensed": {
 		"message": "24 St.",
 		"description": ""
+	},
+	"offers_hub_copy_btn": {
+		"message": "Code kopieren"
+	},
+	"offers_code_copied": {
+		"message": "Code kopieren"
+	},
+	"popup_cancel_button": {
+		"message": "Abbrechen"
+	},
+	"popup_apply_code_button": {
+		"message": "Code anwenden"
 	}
 }
