@@ -89,7 +89,6 @@
 	border-top: 0;
 }
 .RewardListItem__image_container {
-	height: 52px;
 	width: 100px;
 	min-width: 100px;
 	text-align: center;
@@ -98,7 +97,7 @@
 	margin-right: 18px;
 }
 .RewardListItem__image {
-	height: 52px;
+	max-height: 52px;
 	width: auto;
 	background-color: #e0e0e0;
 }
