@@ -150,7 +150,7 @@ export function trustRestrictBlockSiteTracker({ actionData, state }) {
 
 export function blockUnblockGlobalTracker({ actionData, state }) {
 	const {
-		block, cat_id, app_id, type
+		block, cat_id, app_id
 	} = actionData;
 	const { blocking, settings } = state;
 

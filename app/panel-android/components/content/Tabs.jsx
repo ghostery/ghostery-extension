@@ -12,8 +12,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import Tab from './Tab';
 
 export default class Tabs extends React.Component {
 	constructor(props) {
