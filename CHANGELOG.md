@@ -1,4 +1,4 @@
-### GHOSTERY 8.2.3 (August ?, 2018)
+### GHOSTERY 8.2.3 (August 7, 2018)
 
 + Fix Rewards campaign names that include a '%' issue, which caused a blank panel
 + Fix login and register forms on setup page being called twice on submit, which triggered misleading callout messages
