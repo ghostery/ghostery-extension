@@ -53,11 +53,17 @@ export default (state = initialState, action) => {
 		}
 		case GET_USER_SUCCESS: {
 			const { user } = action.payload;
-			return Object.assign({}, state, { user });
+			return Object.assign({}, state, {
+				loggedIn: true,
+				user
+			});
 		}
 		case GET_USER_SETTINGS_SUCCESS: {
 			const { settings } = action.payload;
-			return Object.assign({}, state, { userSettings: settings });
+			return Object.assign({}, state, {
+				loggedIn: true,
+				userSettings: settings
+			});
 		}
 		default: return state;
 	}
