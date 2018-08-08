@@ -43,7 +43,6 @@ class Account {
 				new Promise((resolve, reject) => {
 					for (const err of errors) {
 						switch (err.code) {
-							case Api.ERROR_CSRF_COOKIE_NOT_FOUND:
 							case '10020': // token is not valid
 							case '10060': // user id does not match
 							case '10180': // user ID not found
