@@ -336,15 +336,20 @@ class EventHandlers {
 			log(`tabInfo not found for tab ${tab_id}, initializing...`);
 
 			// create new tabInfo entry
-			tabInfo.create(tab_id);
+			if (details.type === 'main_frame') {
+				tabInfo.create(tab_id, details.url);
+			} else {
+				tabInfo.create(tab_id);
+			}
 
 			// get tab data from browser and update the new tabInfo entry
 			utils.getTab(tab_id, (tab) => {
 				const ti = tabInfo.getTabInfo(tab_id);
-				if (ti && ti.partialScan) {
+				if (!ti) { return; }
+				if (ti.partialScan) {
 					tabInfo.setTabInfo(tab_id, 'url', tab.url);
-					tabInfo.setTabInfo(tab_id, 'incognito', tab.incognito);
 				}
+				tabInfo.setTabInfo(tab_id, 'incognito', tab.incognito);
 			});
 		}
 

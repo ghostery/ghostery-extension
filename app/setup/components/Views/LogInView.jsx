@@ -82,20 +82,23 @@ class LogInView extends Component {
 	/**
 	* Lifecycle event
 	*/
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.triggerSignIn) {
+	componentDidUpdate(prevProps) {
+		const {
+			triggerSignIn, triggerCreateAccount, loading, success
+		} = this.props;
+		if (prevProps.triggerSignIn === false && triggerSignIn) {
 			this._signIn();
-		} else if (nextProps.triggerCreateAccount) {
+		} else if (prevProps.triggerCreateAccount === false && triggerCreateAccount) {
 			this._createAccount();
 		}
 
-		if (!nextProps.loading) {
+		if (!loading) {
 			this.props.actions.hideLoading();
 		} else {
 			this.props.actions.showLoading();
 		}
 
-		if ((this.state.status === 'new' || this.state.status === 'login') && nextProps.success) {
+		if ((this.state.status === 'new' || this.state.status === 'login') && success) {
 			this.props.actions.navigationNext();
 		}
 		// TODO

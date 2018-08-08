@@ -1688,5 +1688,17 @@
 	},
 	"rewards_learn_more": {
 		"message": "Learn More"
+	},
+	"offers_hub_copy_btn": {
+		"message": "Copy code"
+	},
+	"offers_code_copied": {
+		"message": "Copied"
+	},
+	"popup_cancel_button": {
+		"message": "Cancel"
+	},
+	"popup_apply_code_button": {
+		"message": "Apply code"
 	}
 }
