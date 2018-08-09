@@ -1608,6 +1608,22 @@ function initializeGhosteryModules() {
 	});
 }
 
+function InitializeAccount() {
+	return new Promise((resolve) => {
+		account.migrate()
+		.then(() => {
+			if (conf.account !== null) {
+				account.getUser().then(() => {
+					account.getUserSettings()
+					.then(resolve);
+				});
+			} else {
+				resolve();
+			}
+		});
+	});
+}
+
 /**
  * Application Initializer
  * Called whenever the browser starts or the extension is
@@ -1619,23 +1635,20 @@ function init() {
 		initializePopup();
 		initializeEventListeners();
 		initializeVersioning();
-		account.migrate()
+		return InitializeAccount()
+		.then(() => {
+			return metrics.init(globals.JUST_INSTALLED)
 			.then(() => {
-				if (conf.account !== null) {
-					return account.getUser()
-						.then(account.getUserSettings);
-				}
-			})
-			.catch(err => log(err));
-
-		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => {
-			// persist Conf properties to storage only after init has completed
-			common.prefsSet(globals.initProps);
-			globals.INIT_COMPLETE = true;
-			if (IS_CLIQZ) {
-				importCliqzSettings(cliqz, conf);
-			}
-		}));
+				return initializeGhosteryModules()
+				.then(() => {
+					common.prefsSet(globals.initProps);
+					globals.INIT_COMPLETE = true;
+					if (IS_CLIQZ) {
+						importCliqzSettings(cliqz, conf);
+					}
+				});
+			});
+		});
 	}).catch((err) => {
 		log('Error in init()', err);
 		return Promise.reject(err);
@@ -1643,4 +1656,6 @@ function init() {
 }
 
 // Initialize the application.
-init();
+init().then(() => {
+	console.log("THE INIT IS OVER");
+});
