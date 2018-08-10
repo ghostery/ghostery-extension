@@ -260,7 +260,7 @@ class Account {
 					this._setAccountInfo(UserId);
 					chrome.storage.local.remove(legacyLoginInfoKey, resolve);
 				}).catch((err) => {
-					log("ERROR", err);
+					log('ERROR', err);
 					resolve();
 				});
 			});
@@ -269,23 +269,23 @@ class Account {
 
 	migrate = () => (
 		this._migrateLegacyKey()
-		.then(() => new Promise(resolve => {
-				if (conf.account !== null) { 
-					resolve(); 
+			.then(() => new Promise((resolve) => {
+				if (conf.account !== null) {
+					resolve();
 					return;
-				} 
+				}
 				chrome.cookies.get({
 					url: `https://${GHOSTERY_DOMAIN}.com`,
 					name: 'user_id',
-				}, cookie => {
+				}, (cookie) => {
 					if (cookie !== null) {
 						this._setAccountInfo(cookie.value);
-						console.log("HERE WE ARE");
+						log('Account settings are set');
 					}
 					resolve();
 				});
 			})
-		)
+			)
 	)
 
 	/**

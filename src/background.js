@@ -1495,12 +1495,6 @@ function initializeGhosteryModules() {
 		setTimeout(() => {
 			metrics.ping('install_complete');
 		}, 300000);
-
-		// open the setup page on install
-		chrome.tabs.create({
-			url: chrome.runtime.getURL('./app/templates/setup.html'),
-			active: true
-		});
 	} else {
 		// Record install if the user previously closed the browser before the install ping fired
 		metrics.ping('install');
@@ -1607,20 +1601,37 @@ function initializeGhosteryModules() {
 		panelData.init();
 	});
 }
-
-function InitializeAccount() {
+/**
+ * Transfer old account setting (if present) and synchronize
+ * settings if user happens to be logged in.
+ * Called whenever the browser starts or the extension is
+ * installed/updated.
+ * @memberOf Background
+ * @return {Promise}
+ */
+function initializeAccount() {
 	return new Promise((resolve) => {
 		account.migrate()
-		.then(() => {
-			if (conf.account !== null) {
-				account.getUser().then(() => {
-					account.getUserSettings()
-					.then(resolve);
-				});
-			} else {
-				resolve();
-			}
-		});
+			.then(() => {
+				if (conf.account !== null) {
+					account.getUser().then(() => {
+						account.getUserSettings()
+							.then(resolve);
+					});
+				} else {
+					resolve();
+				}
+			});
+	});
+}
+/**
+ * Open setup page. Used on startup, in Help panel and in Notification
+ */
+function openSetupPage() {
+	// open the setup page on install
+	chrome.tabs.create({
+		url: chrome.runtime.getURL('./app/templates/setup.html'),
+		active: true
 	});
 }
 
@@ -1629,26 +1640,23 @@ function InitializeAccount() {
  * Called whenever the browser starts or the extension is
  * installed/updated.
  * @memberOf Background
+ * @return {Promise}
  */
 function init() {
 	return confData.init().then(() => {
 		initializePopup();
 		initializeEventListeners();
 		initializeVersioning();
-		return InitializeAccount()
-		.then(() => {
-			return metrics.init(globals.JUST_INSTALLED)
-			.then(() => {
-				return initializeGhosteryModules()
-				.then(() => {
-					common.prefsSet(globals.initProps);
-					globals.INIT_COMPLETE = true;
-					if (IS_CLIQZ) {
-						importCliqzSettings(cliqz, conf);
-					}
-				});
-			});
-		});
+		return initializeAccount()
+			.then(() => metrics.init(globals.JUST_INSTALLED)
+				.then(() => initializeGhosteryModules()
+					.then(() => {
+						if (IS_CLIQZ) {
+							importCliqzSettings(cliqz, conf);
+						}
+						common.prefsSet(globals.initProps);
+						globals.INIT_COMPLETE = true;
+					})));
 	}).catch((err) => {
 		log('Error in init()', err);
 		return Promise.reject(err);
@@ -1657,5 +1665,8 @@ function init() {
 
 // Initialize the application.
 init().then(() => {
-	console.log("THE INIT IS OVER");
+	if (globals.JUST_INSTALLED) {
+		common.openSetupPage();
+	}
+	log('Init is over');
 });
