@@ -1666,7 +1666,7 @@ function init() {
 // Initialize the application.
 init().then(() => {
 	if (globals.JUST_INSTALLED) {
-		common.openSetupPage();
+		openSetupPage();
 	}
 	log('Init is over');
 });
