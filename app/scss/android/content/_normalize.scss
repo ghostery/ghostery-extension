@@ -1,0 +1,34 @@
+/**
+ * Normalize Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+h2, p {
+	margin-bottom: 0;
+}
+
+ul {
+	margin-left: 0;
+	margin-bottom: 0;
+}
+
+button {
+	outline: 0;
+}
+
+html, body {
+	@include prefix('user-select', 'none');
+	font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body, .accordion {
+	background-color:rgba(255, 255, 255, 0.7);
+}

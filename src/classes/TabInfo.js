@@ -69,17 +69,11 @@ class TabInfo {
 			insecureRedirects: [],
 		};
 
-		if (tab_url) {
-			const parsed = processUrl(tab_url);
-			info.url = tab_url;
-			info.protocol = parsed.protocol;
-			info.host = parsed.host;
-			info.path = parsed.path;
-			info.hash = parsed.anchor;
-			info.partialScan = false;
-		}
-
 		this._tabInfo[tab_id] = info;
+
+		if (tab_url) {
+			this._updateUrl(tab_id, tab_url);
+		}
 	}
 
 	/**
@@ -183,6 +177,7 @@ class TabInfo {
 		this._tabInfo[tab_id].host = parsed.host;
 		this._tabInfo[tab_id].path = parsed.path;
 		this._tabInfo[tab_id].hash = parsed.anchor;
+		this._tabInfo[tab_id].partialScan = false;
 	}
 }
 
