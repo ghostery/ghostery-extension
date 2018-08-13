@@ -187,6 +187,11 @@ class RewardsApp {
 			this.reward = request.reward;
 			this.conf = request.conf;
 		}
+
+		// in FF 61 react sees some elements in frames as non interactive
+		// react overwrites the event handlers for these elements with `function noop() {}`
+		// https://github.com/facebook/react/blob/master/packages/react-dom/src/client/ReactDOMFiberComponent.js#L231
+		// using setTimeout to render react is a temporary workaround
 		setTimeout(() => {
 			this.renderReact();
 		});
