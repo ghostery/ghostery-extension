@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import { log } from '../../../src/utils/common';
 
 /**
  * @class Footer for the Setup flow
@@ -22,12 +23,8 @@ class Header extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			email: '',
+			inputEmail: '',
 			password: '',
-			fetchedLogInInfo: false,
-			hideSmallSignIn: true,
-
-			loggedIn: false,
 		};
 	}
 
@@ -35,17 +32,7 @@ class Header extends React.Component {
 	* Lifecycle event
 	*/
 	componentWillMount() {
-		this.props.actions.getUser().then((res) => {
-			const { errors, user } = res;
-			if (errors) {
-				this.setState({ loggedIn: false });
-			} else {
-				this.setState({
-					loggedIn: true,
-					email: user.email,
-				});
-			}
-		});
+		this.props.actions.getUser();
 	}
 
 	/**
@@ -70,29 +57,17 @@ class Header extends React.Component {
 	 */
 	_handleSignIn = (e) => {
 		e.preventDefault();
-		this.props.actions.login(this.state.email, this.state.password)
+		const { inputEmail, password } = this.state;
+		this.props.actions.login(inputEmail, password)
 			.then((success) => {
 				if (success) {
 					Promise.all([
 						this.props.actions.getUser(),
-						this.props.actions.getUserSettings()
-					]).then((res) => {
-						const { errors, user } = res[0];
-						if (errors) {
-							this.setState({
-								fetchedLogInInfo: false,
-								loggedIn: false,
-							});
-						} else {
-							this.setState({
-								fetchedLogInInfo: true,
-								loggedIn: true,
-								email: user.email,
-							});
-						}
-					});
+						this.props.actions.getUserSettings(),
+					]);
 				}
-			});
+			})
+			.catch(err => log(err));
 	}
 
 	/**
@@ -109,7 +84,9 @@ class Header extends React.Component {
 	 * @return {JSX} The JSX for the right side of the header
 	 */
 	renderRight() {
-		const { loggedIn, email } = this.state;
+		const { inputEmail, password } = this.state;
+		const { loggedIn, user } = this.props;
+		const email = user && user.email || '';
 		return (
 			<div>
 				{ loggedIn &&
@@ -124,8 +101,8 @@ class Header extends React.Component {
 						</div>
 						<div className="show-for-medium">
 							<form onSubmit={this._handleSignIn} method="POST">
-								<input type="email" name="email" value={this.state.email} placeholder={t('setup_header_email')} onChange={this._handleInputChange} />
-								<input type="password" name="password" value={this.state.password} placeholder={t('setup_header_password')} onChange={this._handleInputChange} />
+								<input type="email" name="inputEmail" value={inputEmail} placeholder={t('setup_header_email')} onChange={this._handleInputChange} />
+								<input type="password" name="password" value={password} placeholder={t('setup_header_password')} onChange={this._handleInputChange} />
 								<button type="submit">
 									{ t('setup_header_sign_in') }
 								</button>
@@ -142,7 +119,7 @@ class Header extends React.Component {
 	 * @return {JSX} The JSX for the sign in dropdown portion of the header
 	 */
 	renderSubHeader() {
-		if (!this.state.fetchedLogInInfo || this.props.success || this.state.hideSmallSignIn) {
+		if (this.props.success || this.state.hideSmallSignIn) {
 			return (<div />);
 		}
 		return (
