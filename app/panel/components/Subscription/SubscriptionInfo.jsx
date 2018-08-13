@@ -21,7 +21,8 @@ import React from 'react';
  * @memberOf SubscriptionComponents
  */
 const SubscriptionInfo = (props) => {
-	const { subscriptionData } = props;
+	let { subscriptionData } = props;
+	subscriptionData = subscriptionData || {};
 	return (
 		<div className="content-subscription s-tabs-panel">
 			<div className="row">
@@ -29,8 +30,8 @@ const SubscriptionInfo = (props) => {
 					<h1>{ t('subscription_info_title') }</h1>
 					<div className="status-row">
 						<span className="status-label">{`${t('subscription_account_status')}: `}</span>
-						<span className="status-value">{subscriptionData.canceled ? `${t('subscription_account_canceled')} ${subscriptionData.canceled}` : t('subscription_account_active') }</span>
-						<div className="s-tooltip-down" data-g-tooltip={t('subscription_status_tooltip')}>
+						<span className="status-value">{subscriptionData.account_active ? t('subscription_account_active') : t('subscription_account_inactive') }</span>
+						<div className="s-tooltip-down-right" data-g-tooltip={subscriptionData.account_active ? t('subscription_account_active_tooltip') : t('subscription_account_inactive_tooltip')}>
 							<img src="../../app/images/panel/icon-information-tooltip.svg" className="s-question" />
 						</div>
 					</div>

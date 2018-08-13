@@ -232,17 +232,20 @@ class HeaderMenu extends React.Component {
 								<span>{ t('panel_menu_about') }</span>
 							</Link>
 						</li>
-						{(loggedIn && supporter) ? (
+						{(!loggedIn || !supporter) ? (
 							<li className="menu-option-gold">
+								<Link to="/subscribe">
+									<this.SupporterMenuItemBase />
+								</Link>
+							</li> ) 
+						: 	( 	
+							<li className="menu-option">
 								<Link to="/subscription" onClick={this.props.toggleDropdown}>
 									<this.SupporterMenuItemBase />
 								</Link>
-							</li>
-						) : (
-							<li className="menu-option-base">
-								<this.SupporterMenuItemBase />
-							</li>
-						)}
+							</li> 
+							) 
+						}
 					</ul>
 					<div className="row account-info">
 						<div onClick={this.clickSignedInAs} className={`${!loggedIn ? 'hide' : ''} menu-option signed-in-as small-12 columns`}>

@@ -1749,16 +1749,20 @@
 	"subscription_account_active": {
 		"message": "Active"
 	},
-	"subscription_account_canceled": {
-		"message": "Canceled on"
+	"subscription_account_inactive": {
+		"message": "Inactive"
 	},
+	"subscription_account_active_tooltip": {
+		"message": "Your Ghostery Supporter subscription is now active"
+	},
+	"subscription_account_inactive_tooltip": {
+		"message": "Your Ghostery Supporter subscription is now inactive"
+	},
+
 	"subscription_manage": {
 		"message": "Manage My Subscription"
 	},
-	"subscription_status_tooltip": {
-		"message": "Keep your subscription active forever"
-	},
 	"subscription_themes_tooltip": {
-		"message": "midnight theme is the best theme there is. Worth every subscription penny"
+		"message": "Change the color scheme of Ghostery!"
   }
 }

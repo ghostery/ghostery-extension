@@ -17,8 +17,6 @@ import { Link } from 'react-router-dom';
  * @return {ReactComponent}   ReactComponent instance
  */
 function Subscribe(props) {
-	// supporter param is specified in Route path to this component
-	const supporter = (props.match.params.supporter === 'true');
 	return (
 		<div className="content-subscription">
 			<svg width="137px" height="97px" viewBox="0 0 137 97" className="badge">
@@ -56,11 +54,9 @@ function Subscribe(props) {
 				<a href="https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/" target="_blank" rel="noopener noreferrer">
 					<span className="pitch-become-supporter">{t('subscribe_pitch_button_label')}</span>
 				</a>
-				{ supporter &&
-					<Link to="/login">
-						<span className="pitch-already-supporter">{t('subscribe_pitch_sign_here')}</span>
-					</Link>
-				}
+				<Link to="/login">
+					<span className="pitch-already-supporter">{t('subscribe_pitch_sign_here')}</span>
+				</Link>
 			</div>
 		</div>
 	);

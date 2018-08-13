@@ -37,6 +37,7 @@ class Subscription extends React.Component {
 	 */
 	componentWillMount() {
 		this.setState({ isChecked: (this.props.currentTheme !== 'default') });
+		this.props.history.push('/subscription/info');
 	}
 
 	toggleThemes() {
