@@ -17,6 +17,7 @@
 import _ from 'underscore';
 import normalize from 'json-api-normalizer';
 import build from 'redux-object';
+import RSVP from 'rsvp';
 import globals from '../classes/Globals';
 import conf from '../classes/Conf';
 import dispatcher from '../classes/Dispatcher';
@@ -39,10 +40,9 @@ class Account {
 		};
 		const opts = {
 			errorHandler: errors => (
-				new Promise((resolve) => {
+				new Promise((resolve, reject) => {
 					for (const err of errors) {
 						switch (err.code) {
-							case Api.ERROR_CSRF_COOKIE_NOT_FOUND:
 							case '10020': // token is not valid
 							case '10060': // user id does not match
 							case '10180': // user ID not found
@@ -53,8 +53,11 @@ class Account {
 							case '10300': // csrf token is missing
 							case '10301': // csrf tokens do not match
 								return this.logout()
-									.catch(e => log(e))
-									.finally(() => resolve());
+									.then(() => resolve())
+									.catch(() => resolve());
+							case '10030': // email not validated
+							case 'not-found':
+								return reject(err);
 							default:
 								return resolve();
 						}
@@ -114,7 +117,7 @@ class Account {
 	}
 
 	logout = () => (
-		new Promise((resolve, reject) => {
+		new RSVP.Promise((resolve, reject) => {
 			chrome.cookies.get({
 				url: `https://${GHOSTERY_DOMAIN}.com`,
 				name: 'csrf_token',
@@ -136,6 +139,7 @@ class Account {
 		})
 	)
 
+	// @TODO a 404 here should trigger a logout
 	getUser = () => (
 		this._getUserID()
 			.then(userID => api.get('users', userID))
@@ -166,7 +170,7 @@ class Account {
 					type: 'settings',
 					id: userID,
 					attributes: {
-						settings_json: this._buildUserSettings()
+						settings_json: this.buildUserSettings()
 					}
 				})
 			))
@@ -187,13 +191,12 @@ class Account {
 				'Content-Type': 'application/x-www-form-urlencoded',
 				'Content-Length': Buffer.byteLength(data),
 			},
-		})
-			.then((res) => {
-				if (res.status >= 400) {
-					return res.json();
-				}
-				return {};
-			});
+		}).then((res) => {
+			if (res.status >= 400) {
+				return res.json();
+			}
+			return {};
+		});
 	}
 
 	migrate = () => (
@@ -260,6 +263,22 @@ class Account {
 				});
 			});
 		})
+			.then(() => (
+			// Checks if user is already logged in
+			// @TODO move this into an init() function
+				new Promise((resolve) => {
+					if (conf.account !== null) { resolve(); }
+					chrome.cookies.get({
+						url: `https://${GHOSTERY_DOMAIN}.com`,
+						name: 'user_id',
+					}, (cookie) => {
+						if (cookie !== null) {
+							this._setAccountInfo(cookie.value);
+						}
+						resolve();
+					});
+				})
+			))
 	)
 
 	/**
@@ -274,7 +293,7 @@ class Account {
 	 * @param  {rest of string arrays}	string arrays containing the required scope combination(s)
 	 * @return {boolean}				true if the user scopes match at least one of the required scope combination(s)
 	 */
-	hasScopesUnverified(...required) {
+	hasScopesUnverified = (...required) => {
 		if (conf.account === null) { return false; }
 		if (conf.account.user === null) { return false; }
 		const userScopes = conf.account.user.scopes;
@@ -298,6 +317,32 @@ class Account {
 			}
 		}
 		return false;
+	}
+	/**
+	 * Create settings object for syncing and/or Export.
+	 * @memberOf BackgroundUtils
+	 *
+	 * @return {Object} 	jsonifyable settings object for syncing
+	 */
+	buildUserSettings = () => {
+		const settings = {};
+		const now = Number(new Date().getTime());
+		SYNC_SET.forEach((key) => {
+			// Whenever we prepare data to be sent out
+			// we have to convert these two parameters to objects
+			// so that they may be imported by pre-8.2 version
+			if (key === 'reload_banner_status' ||
+				key === 'trackers_banner_status') {
+				settings[key] = {
+					dismissals: [],
+					show_time: now,
+					show: conf[key]
+				};
+			} else {
+				settings[key] = conf[key];
+			}
+		});
+		return settings;
 	}
 
 	_setLoginCookie = details => (
@@ -330,7 +375,7 @@ class Account {
 	_getUserID = () => (
 		new Promise((resolve, reject) => {
 			if (conf.account === null) {
-				return reject(new Error('Not loggedin.'));
+				return reject(new Error('_getUserID() Not logged in'));
 			}
 			return resolve(conf.account.userID);
 		})
@@ -374,33 +419,6 @@ class Account {
 	)
 
 	/**
-	 * Create settings object for syncing.
-	 * @memberOf BackgroundUtils
-	 *
-	 * @return {Object} 	jsonifyable settings object for syncing
-	 */
-	_buildUserSettings = () => {
-		const settings = {};
-		const now = Number(new Date().getTime());
-		SYNC_SET.forEach((key) => {
-			// Whenever we prepare data to be sent out
-			// we have to convert these two parameters to objects
-			// so that they may be imported by pre-8.2 version
-			if (key === 'reload_banner_status' ||
-				key === 'trackers_banner_status') {
-				settings[key] = {
-					dismissals: [],
-					show_time: now,
-					show: conf[key]
-				};
-			} else {
-				settings[key] = conf[key];
-			}
-		});
-		return settings;
-	}
-
-	/**
 	 * GET user settings from ConsumerAPI
 	 * @private
 	 *
@@ -440,9 +458,10 @@ class Account {
 	}
 
 	_logoutOnUserIDCookieRemoved = (changeInfo) => {
-		const { cause, removed, cookie } = changeInfo;
+		const { removed, cookie, cause } = changeInfo;
 		const { name, domain } = cookie;
-		if (name === 'user_id' && domain === `.${GHOSTERY_DOMAIN}.com` && removed && cause === 'expired_overwrite') {
+		// skip if cause === 'overwrite' to avoid logging out on token refresh
+		if (name === 'user_id' && domain === `.${GHOSTERY_DOMAIN}.com` && removed && cause !== 'overwrite') {
 			this.logout();
 		}
 	}

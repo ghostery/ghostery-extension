@@ -1,107 +1,39 @@
 /**
- * Android Panel Overrides
+ * Android Panel
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
  * Copyright 2018 Ghostery, Inc. All rights reserved.
- * 
+ *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-html,
-body,
-#ghostery-app,
-#ghostery-content,
-#panel {
-	height: 100% !important;
-	width: 100% !important;
-}
+@import 'android/content/variables';
+@import 'android/content/mixins';
+@import 'android/content/normalize';
+@import 'android/content/tabs';
+@import 'android/content/accordions';
+@import 'android/content/dots-menu';
+@import 'android/content/trackers-chart';
+@import 'android/content/fixed-menu';
 
-#ghostery-app {
-	#ghostery-header {
-		.top-bar-left,
-		.top-bar-right {
-			flex: 0 0 auto;
-		}
-		.dropdown-pane {
-			left: 0 !important;
-			right: 0 !important;
-			top: 36px !important;
-			width: auto !important;
-		}
-	}
-	#content-summary {
-		width: 100% !important;
-		.info .small-12 {
-			text-align: center;
-		}
-		#controls .blocking-controls {
-			margin-bottom: 18px;
-		}
-	}
-	.detail-wrap {
-		#content-detail {
-			margin-left: 0 !important;
-			margin-top: 488px;
-			border-left: none;
-			.expertTab {
-				display: none !important;
-			}
-			#content-blocking {
-				.blocking-trackers {
-					height: auto !important;
-				}
-				.scroll-content {
-					max-width: 600px;
-					margin: 0 auto;
-				}
-			}
-			#detail-menu {
-				position: static !important;
-			}
-		}
-	}
-	#content-settings {
-		width: 100% !important;
-		height: auto !important;
-		margin-top: -36px;
-		#settings-global-blocking {
-			margin-left: 0 !important;
-			height: auto !important;
-			border-left: none;
-			.blocking-trackers {
-				height: auto !important;
-			}
-		}
-		.content-settings-menu {
-			margin-top: 0;
-			padding-top: 36px;
-		}
-		.content-settings-menu,
-		.s-trust-restrict-panel,
-		.s-tabs-panel {
-			position: static !important;
-			border-left: none !important;
-			width: auto !important;
-		}
-	}
-	.drawer-drawer {
+#ghostery-content {
+	@import 'android/overview';
+
+	& > div > .chart-wrapper {
+		display: none;
 		position: fixed;
-		.drawer-status {
-			display: none !important;
-		}
-		.drawer-header {
-			position: relative !important;
-			.close-drawer {
-				height: 100% !important;
-				img {
-					height: 100% !important;
-					width: auto !important;
-				}
-			}
-		}
-	 }
+		top: 0;
+		bottom: 0;
+		left: 0;
+		width: 50%;
+		text-align: center;
+		padding-top: 5%;
+	}
+
+	/* Landscape mode */
+	@import 'android/content/landscape';
 }

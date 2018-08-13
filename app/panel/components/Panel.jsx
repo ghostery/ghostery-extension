@@ -12,7 +12,6 @@
  */
 
 import React from 'react';
-import URLSearchParams from 'url-search-params';
 import Header from '../containers/HeaderContainer';
 import { sendMessage } from '../utils/msg';
 /**
@@ -33,9 +32,7 @@ class Panel extends React.Component {
 	 */
 	componentDidMount() {
 		sendMessage('ping', 'engaged');
-		// try to get tabId from query string if available (FF for Android only)
-		const tabId = new URLSearchParams(window.location.search).get('tabId');
-		this.props.actions.getPanelData(tabId).then((data) => {
+		this.props.actions.getPanelData().then((data) => {
 			if (data.is_expert) {
 				// load Detail component
 				this.props.history.push('/detail');
