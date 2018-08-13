@@ -19,7 +19,7 @@
 import msgModule from './utils/msg';
 
 const msg = msgModule('platform_pages');
-const { sendMessage, sendMessageInPromise } = msg;
+const { sendMessage } = msg;
 /**
  * Use to call init to initialize functionality
  * @var  {Object} initialized to an object with init method as its property
@@ -34,11 +34,7 @@ const PlatformPagesContentScript = (function (window) {
 		// alert background that this content script has loaded
 		sendMessage('platformPageLoaded');
 		window.addEventListener('account.logout', () => {
-			sendMessageInPromise('account.logout')
-				.then(() => {
-					const logoutSuccesEvt = new CustomEvent('logoutSuccess');
-					window.dispatchEvent(logoutSuccesEvt);
-				});
+			sendMessage('account.logout');
 		});
 	};
 
