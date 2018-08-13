@@ -176,6 +176,17 @@ class Account {
 			))
 	)
 
+	getTheme = name => (
+		new Promise((resolve, reject) => {
+			api.get('themes', name)
+				.then((res) => {
+					const { css } = build(normalize(res), 'themes', res.data.id);
+					resolve(css);
+				})
+				.catch(err => reject(err));
+		})
+	)
+
 	sendValidateAccountEmail = () => (
 		this._getUserID()
 			.then(userID => fetch(`${AUTH_SERVER}/api/v2/send_email/validate_account/${userID}`))
