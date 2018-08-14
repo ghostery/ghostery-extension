@@ -89,6 +89,7 @@ function setCliqzModuleEnabled(module, enabled) {
 	cliqz.disableModule(module.name);
 	return Promise.resolve();
 }
+
 /**
  * Register/unregister real estate with Offers core module.
  * @memberOf Background
@@ -106,17 +107,18 @@ function registerWithOffers(offersModule, register) {
 			log(`FAILED TO ${register ? 'REGISTER' : 'UNREGISTER'} REAL ESTATE WITH OFFERS CORE`);
 		});
 }
+
 /**
- * Check and fetch (if needed) a new tracker library every 12 hours
+ * Check and fetch a new tracker library every hour as needed
  * @memberOf Background
  */
 function autoUpdateBugDb() {
-	log('AUTOUPDATE CALLED');
 	if (conf.enable_autoupdate) {
 		const result = conf.bugs_last_checked;
 		const nowTime = Number((new Date()).getTime());
+		// offset by 15min so that we don't double fetch
 		if (!result || nowTime > (Number(result) + 900000)) {
-			log('AUTOUPDATE CALLED', new Date());
+			log('autoUpdateBugDb called', new Date());
 			checkLibraryVersion();
 		}
 	}
@@ -1536,8 +1538,8 @@ function initializeGhosteryModules() {
 
 	// Update db right away.
 	autoUpdateBugDb();
-	// Schedule it to run every 30 min.
-	setInterval(autoUpdateBugDb, 1800000);
+	// Schedule it to run every hour.
+	setInterval(autoUpdateBugDb, 3600000);
 
 	// listen for changes to specific conf properties
 	initializeDispatcher();
