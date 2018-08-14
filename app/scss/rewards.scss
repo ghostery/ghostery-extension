@@ -120,7 +120,6 @@
 		color: $tundora;
 		background-color: #f2f2f2;
 		width: 265px;
-		height: 520px;
 		border: 1px solid #9b9b9b;
 		border-radius: 4px;
 
@@ -173,7 +172,6 @@
 			margin-left: auto;
 			margin-right: auto;
 			width: 247px;
-			height: 450px;
 			border: 1px solid $dark-purple;
 			border-radius: 4px;
 
@@ -210,7 +208,7 @@
 				display: flex;
 				flex-direction: column;
 				width: 200px;
-				height: 131px;
+				margin-bottom: 5px;
 				color: $tundora;
 
 				.reward-benefit {
@@ -230,6 +228,8 @@
 					font-weight: 500;
 					line-height: 13px;
 					line-height:  15px;
+					word-wrap: break-word;
+					hyphens: auto;
 				}
 
 				.reward-description {
