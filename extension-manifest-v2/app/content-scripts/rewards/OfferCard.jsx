@@ -104,11 +104,13 @@ class OfferCard extends Component {
 
 	componentDidMount() {
 		this.props.actions.addRewardSeenListener();
-		const bgImg = new Image();
-		bgImg.onload = () => {
-			this.rewardPictureEl.style.backgroundImage = `url(${bgImg.src})`;
-		};
-		bgImg.src = this.state.rewardUI.picture_url;
+		if (this.state.rewardUI.picture_url) {
+			const bgImg = new Image();
+			bgImg.onload = () => {
+				this.rewardPictureEl.style.backgroundImage = `url(${bgImg.src})`;
+			};
+			bgImg.src = this.state.rewardUI.picture_url;
+		}
 	}
 
 	copyCode() {
@@ -248,11 +250,13 @@ class OfferCard extends Component {
 										</div>
 									}
 								</div>
-								<div className="reward-content-img">
-									<div className="flex-grow" />
-									<div className="img" ref={(node) => { this.rewardPictureEl = node; }} />
-									<div className="flex-grow" />
-								</div>
+								{ this.state.rewardUI.picture_url &&
+									<div className="reward-content-img">
+										<div className="flex-grow" />
+										<div className="img" ref={(node) => { this.rewardPictureEl = node; }} />
+										<div className="flex-grow" />
+									</div>
+								}
 								<div className="reward-content-detail">
 									{/* <div className="flex-grow" /> */}
 									<div className="reward-benefit">
