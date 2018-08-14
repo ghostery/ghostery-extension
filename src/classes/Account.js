@@ -43,7 +43,6 @@ class Account {
 				new Promise((resolve, reject) => {
 					for (const err of errors) {
 						switch (err.code) {
-							case Api.ERROR_CSRF_COOKIE_NOT_FOUND:
 							case '10020': // token is not valid
 							case '10060': // user id does not match
 							case '10180': // user ID not found
@@ -68,11 +67,6 @@ class Account {
 			)
 		};
 		api.init(apiConfig, opts);
-		// logout on user_id cookie removed
-		// NOTE: Edge does not support chrome.cookies.onChanged
-		if (!IS_EDGE) {
-			chrome.cookies.onChanged.addListener(this._logoutOnUserIDCookieRemoved);
-		}
 	}
 
 	login = (email, password) => {
@@ -140,6 +134,7 @@ class Account {
 		})
 	)
 
+	// @TODO a 404 here should trigger a logout
 	getUser = () => (
 		this._getUserID()
 			.then(userID => api.get('users', userID))
@@ -170,10 +165,21 @@ class Account {
 					type: 'settings',
 					id: userID,
 					attributes: {
-						settings_json: this._buildUserSettings()
+						settings_json: this.buildUserSettings()
 					}
 				})
 			))
+	)
+
+	getTheme = name => (
+		new Promise((resolve, reject) => {
+			api.get('themes', name)
+				.then((res) => {
+					const { css } = build(normalize(res), 'themes', res.data.id);
+					resolve(css);
+				})
+				.catch(err => reject(err));
+		})
 	)
 
 	sendValidateAccountEmail = () => (
@@ -263,6 +269,22 @@ class Account {
 				});
 			});
 		})
+			.then(() => (
+			// Checks if user is already logged in
+			// @TODO move this into an init() function
+				new Promise((resolve) => {
+					if (conf.account !== null) { resolve(); }
+					chrome.cookies.get({
+						url: `https://${GHOSTERY_DOMAIN}.com`,
+						name: 'user_id',
+					}, (cookie) => {
+						if (cookie !== null) {
+							this._setAccountInfo(cookie.value);
+						}
+						resolve();
+					});
+				})
+			))
 	)
 
 	/**
@@ -277,7 +299,7 @@ class Account {
 	 * @param  {rest of string arrays}	string arrays containing the required scope combination(s)
 	 * @return {boolean}				true if the user scopes match at least one of the required scope combination(s)
 	 */
-	hasScopesUnverified(...required) {
+	hasScopesUnverified = (...required) => {
 		if (conf.account === null) { return false; }
 		if (conf.account.user === null) { return false; }
 		const userScopes = conf.account.user.scopes;
@@ -301,6 +323,32 @@ class Account {
 			}
 		}
 		return false;
+	}
+	/**
+	 * Create settings object for syncing and/or Export.
+	 * @memberOf BackgroundUtils
+	 *
+	 * @return {Object} 	jsonifyable settings object for syncing
+	 */
+	buildUserSettings = () => {
+		const settings = {};
+		const now = Number(new Date().getTime());
+		SYNC_SET.forEach((key) => {
+			// Whenever we prepare data to be sent out
+			// we have to convert these two parameters to objects
+			// so that they may be imported by pre-8.2 version
+			if (key === 'reload_banner_status' ||
+				key === 'trackers_banner_status') {
+				settings[key] = {
+					dismissals: [],
+					show_time: now,
+					show: conf[key]
+				};
+			} else {
+				settings[key] = conf[key];
+			}
+		});
+		return settings;
 	}
 
 	_setLoginCookie = details => (
@@ -377,33 +425,6 @@ class Account {
 	)
 
 	/**
-	 * Create settings object for syncing.
-	 * @memberOf BackgroundUtils
-	 *
-	 * @return {Object} 	jsonifyable settings object for syncing
-	 */
-	_buildUserSettings = () => {
-		const settings = {};
-		const now = Number(new Date().getTime());
-		SYNC_SET.forEach((key) => {
-			// Whenever we prepare data to be sent out
-			// we have to convert these two parameters to objects
-			// so that they may be imported by pre-8.2 version
-			if (key === 'reload_banner_status' ||
-				key === 'trackers_banner_status') {
-				settings[key] = {
-					dismissals: [],
-					show_time: now,
-					show: conf[key]
-				};
-			} else {
-				settings[key] = conf[key];
-			}
-		});
-		return settings;
-	}
-
-	/**
 	 * GET user settings from ConsumerAPI
 	 * @private
 	 *
@@ -436,18 +457,10 @@ class Account {
 			chrome.cookies.remove({
 				url: `https://${GHOSTERY_DOMAIN}.com`,
 				name,
-			}, (details) => {
-				log(`Removed cookie with name: ${details.name}`);
+			}, () => {
+				log(`Removed cookie with name: ${name}`);
 			});
 		});
-	}
-
-	_logoutOnUserIDCookieRemoved = (changeInfo) => {
-		const { removed, cookie } = changeInfo;
-		const { name, domain } = cookie;
-		if (name === 'user_id' && domain === `.${GHOSTERY_DOMAIN}.com` && removed) {
-			this.logout();
-		}
 	}
 }
 

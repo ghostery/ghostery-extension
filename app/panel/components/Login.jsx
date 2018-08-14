@@ -15,7 +15,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ClassNames from 'classnames';
 import RSVP from 'rsvp';
-import { validateEmail, validatePassword } from '../utils/utils';
+import { validateEmail } from '../utils/utils';
 import { log } from '../../../src/utils/common';
 
 /**
@@ -50,22 +50,15 @@ class Login extends React.Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 		const { email, password } = this.state;
+		const emailIsValid = email && validateEmail(email);
+
+		this.setState({
+			emailError: !emailIsValid,
+			passwordError: !password,
+		});
+		if (!emailIsValid || !password) { return; }
 
 		this.setState({ loading: true }, () => {
-			if (!validateEmail(email)) {
-				this.setState({
-					emailError: true,
-					loading: false,
-				});
-				return;
-			}
-			if (!validatePassword(password)) {
-				this.setState({
-					passwordError: true,
-					loading: false,
-				});
-				return;
-			}
 			this.props.actions.login(email, password)
 				.then((success) => {
 					if (success) {

@@ -153,7 +153,7 @@ class Api {
 
 	get = (type, id, include = '') => {
 		if (!id) { return Promise.reject(new Error('id is missing')); }
-		return this._sendAuthenticatedRequest('GET', `/api/v2/${type}/${id}?include=${include}`);
+		return this._sendAuthenticatedRequest('GET', `/api/v2/${type}/${id}?${include ? `include=${include}` : ''}`);
 	}
 
 	save = (type, data) => this._sendAuthenticatedRequest('POST', `/api/v2/${type}/`, data)
