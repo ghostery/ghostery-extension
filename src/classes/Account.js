@@ -457,8 +457,8 @@ class Account {
 			chrome.cookies.remove({
 				url: `https://${GHOSTERY_DOMAIN}.com`,
 				name,
-			}, (details) => {
-				log(`Removed cookie with name: ${details.name}`);
+			}, () => {
+				log(`Removed cookie with name: ${name}`);
 			});
 		});
 	}
