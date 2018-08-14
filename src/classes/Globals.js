@@ -24,6 +24,7 @@ const manifest = chrome.runtime.getManifest();
 class Globals {
 	constructor() {
 		// environment variables
+		this.GHOSTERY_PERF_ID = manifest.ghostery_perf_id || '';
 		this.DEBUG = manifest.debug || false;
 		this.LOG = this.DEBUG && manifest.log;
 		this.EXTENSION_NAME = manifest.name || 'Ghostery';

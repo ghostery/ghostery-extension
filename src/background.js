@@ -1243,6 +1243,33 @@ function initializePopup() {
 		});
 	}
 }
+/**
+ * Collect static info about the current state of Ghostery
+ * @return {object} static info
+ * @memberOf Background
+ */
+function reportStaticInfo() {
+	let hasOnes = false;
+	let hasZeros = false;
+	for (const app_id in bugDb.db.apps) {
+		if (conf.selected_app_ids.hasOwnProperty(app_id)) {
+			hasOnes = true;
+		} else {
+			hasZeros = true;
+		}
+	}
+	const gb = (hasOnes && hasZeros) ? 2 : hasOnes ? 1 : 0;
+	return {
+		name: 'perfInfo',
+		ghostery_version: chrome.runtime.getManifest().version,
+
+		at: conf.enable_anti_tracking ? '1' : '0',
+		ab: conf.enable_ad_block ? '1' : '0',
+		sb: conf.enable_smart_block ? '1' : '0',
+		gb,
+		gp: globals.SESSION.paused_blocking
+	};
+}
 
 /**
  * Add listeners to the events which are watched by Ghostery,
@@ -1363,6 +1390,19 @@ function initializeEventListeners() {
 			rewards.panelPort.onDisconnect.addListener(rewards.panelHubClosedListener);
 		}
 	});
+
+	// Setup listener for ghostery-perf
+	chrome.runtime.onMessageExternal.addListener((request, sender, sendResponse) => {
+		if (sender.id === globals.GHOSTERY_PERF_ID) {
+			const { name } = request;
+			if (name === 'perfReady') {
+				sendResponse(reportStaticInfo());
+				return true;
+			}
+		}
+
+		return false;
+	});
 }
 
 /**
@@ -1465,12 +1505,6 @@ function initializeGhosteryModules() {
 		setTimeout(() => {
 			metrics.ping('install_complete');
 		}, 300000);
-
-		// open the setup page on install
-		chrome.tabs.create({
-			url: chrome.runtime.getURL('./app/templates/setup.html'),
-			active: true
-		});
 	} else {
 		// Record install if the user previously closed the browser before the install ping fired
 		metrics.ping('install');
@@ -1577,35 +1611,62 @@ function initializeGhosteryModules() {
 		panelData.init();
 	});
 }
+/**
+ * Transfer old account setting (if present) and synchronize
+ * settings if user happens to be logged in.
+ * Called whenever the browser starts or the extension is
+ * installed/updated.
+ * @memberOf Background
+ * @return {Promise}
+ */
+function initializeAccount() {
+	return new Promise((resolve) => {
+		account.migrate()
+			.then(() => {
+				if (conf.account !== null) {
+					account.getUser().then(() => {
+						account.getUserSettings()
+							.then(resolve);
+					});
+				} else {
+					resolve();
+				}
+			});
+	});
+}
+/**
+ * Open setup page. Used on startup, in Help panel and in Notification
+ */
+function openSetupPage() {
+	// open the setup page on install
+	chrome.tabs.create({
+		url: chrome.runtime.getURL('./app/templates/setup.html'),
+		active: true
+	});
+}
 
 /**
  * Application Initializer
  * Called whenever the browser starts or the extension is
  * installed/updated.
  * @memberOf Background
+ * @return {Promise}
  */
 function init() {
 	return confData.init().then(() => {
 		initializePopup();
 		initializeEventListeners();
 		initializeVersioning();
-		account.migrate()
-			.then(() => {
-				if (conf.account !== null) {
-					return account.getUser()
-						.then(account.getUserSettings);
-				}
-			})
-			.catch(err => log(err));
-
-		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => {
-			// persist Conf properties to storage only after init has completed
-			common.prefsSet(globals.initProps);
-			globals.INIT_COMPLETE = true;
-			if (IS_CLIQZ) {
-				importCliqzSettings(cliqz, conf);
-			}
-		}));
+		return initializeAccount()
+			.then(() => metrics.init(globals.JUST_INSTALLED)
+				.then(() => initializeGhosteryModules()
+					.then(() => {
+						if (IS_CLIQZ) {
+							importCliqzSettings(cliqz, conf);
+						}
+						common.prefsSet(globals.initProps);
+						globals.INIT_COMPLETE = true;
+					})));
 	}).catch((err) => {
 		log('Error in init()', err);
 		return Promise.reject(err);
@@ -1613,4 +1674,9 @@ function init() {
 }
 
 // Initialize the application.
-init();
+init().then(() => {
+	if (globals.JUST_INSTALLED) {
+		openSetupPage();
+	}
+	log('Init is over');
+});

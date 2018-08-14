@@ -205,7 +205,7 @@ class Account {
 		});
 	}
 
-	migrate = () => (
+	_migrateLegacyKey = () => (
 		new Promise((resolve) => {
 			const legacyLoginInfoKey = 'login_info';
 			chrome.storage.local.get(legacyLoginInfoKey, (items) => {
@@ -223,14 +223,14 @@ class Account {
 				// ensure we have all the necessary info
 				const { decoded_user_token, user_token } = login_info;
 				if (!decoded_user_token || !user_token) {
-					chrome.storage.local.remove(legacyLoginInfoKey, () => resolve());
+					chrome.storage.local.remove(legacyLoginInfoKey, resolve);
 					return;
 				}
 				const {
 					UserId, csrf_token, RefreshToken, exp
 				} = decoded_user_token;
 				if (!UserId || !csrf_token || !RefreshToken || !exp) {
-					chrome.storage.local.remove(legacyLoginInfoKey, () => resolve());
+					chrome.storage.local.remove(legacyLoginInfoKey, resolve);
 					return;
 				}
 
@@ -263,28 +263,34 @@ class Account {
 				]).then(() => {
 					// login
 					this._setAccountInfo(UserId);
-					chrome.storage.local.remove(legacyLoginInfoKey, () => resolve());
+					chrome.storage.local.remove(legacyLoginInfoKey, resolve);
 				}).catch((err) => {
-					resolve(err);
+					log('ERROR', err);
+					resolve();
 				});
 			});
 		})
-			.then(() => (
-			// Checks if user is already logged in
-			// @TODO move this into an init() function
-				new Promise((resolve) => {
-					if (conf.account !== null) { resolve(); }
-					chrome.cookies.get({
-						url: `https://${GHOSTERY_DOMAIN}.com`,
-						name: 'user_id',
-					}, (cookie) => {
-						if (cookie !== null) {
-							this._setAccountInfo(cookie.value);
-						}
-						resolve();
-					});
-				})
-			))
+	)
+
+	migrate = () => (
+		this._migrateLegacyKey()
+			.then(() => new Promise((resolve) => {
+				if (conf.account !== null) {
+					resolve();
+					return;
+				}
+				chrome.cookies.get({
+					url: `https://${GHOSTERY_DOMAIN}.com`,
+					name: 'user_id',
+				}, (cookie) => {
+					if (cookie !== null) {
+						this._setAccountInfo(cookie.value);
+						log('Account settings are set');
+					}
+					resolve();
+				});
+			})
+			)
 	)
 
 	/**
