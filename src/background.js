@@ -242,7 +242,7 @@ function getSiteData() {
  * @param  {string} 	name 		message name
  * @param  {string}		tab_url 	tab url
  */
-function handleGhosteryPlatformPages(name) {
+function handleGhosteryPlatformPages(name, callback) {
 	if (name === 'platformPageLoaded') {
 		account._getUserIDFromCookie()
 			.then((userID) => {
@@ -253,6 +253,16 @@ function handleGhosteryPlatformPages(name) {
 			.catch((err) => {
 				log('handleGhosteryPlatformPages error', err);
 			});
+	} else if (name === 'account.logout') {
+		account.logout()
+			.then((response) => {
+				callback(response);
+			})
+			.catch((err) => {
+				log('LOGOUT ERROR', err);
+				callback(err);
+			});
+		return true;
 	}
 	return false;
 }
@@ -552,7 +562,7 @@ function onMessageHandler(request, sender, callback) {
 	const { tab } = sender;
 	const tab_id = tab && tab.id;
 	// Edge does not have url on tab object, as of Build 14342_rc1
-	const tab_url = tab && (tab.url ? tab.url : (sender.url ? sender.url : ''));
+	// const tab_url = tab && (tab.url ? tab.url : (sender.url ? sender.url : ''));
 
 	// On Edge 39.14965.1001.0 callback is lost when multiple
 	// Edge instances running. So instead we shoot message back
@@ -575,7 +585,7 @@ function onMessageHandler(request, sender, callback) {
 	// HANDLE PAGE EVENTS HERE
 	if (origin === 'platform_pages') {
 		// Platform pages
-		return handleGhosteryPlatformPages(name, tab_url);
+		return handleGhosteryPlatformPages(name, callback);
 	} else if (origin === 'purplebox') {
 		// Purplebox script events
 		return handlePurplebox(name, message, tab_id, callback);
