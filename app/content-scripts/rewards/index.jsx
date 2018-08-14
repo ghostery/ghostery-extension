@@ -64,15 +64,14 @@ class RewardsApp {
 	}
 
 	init() {
-		if (document.readyState === 'complete'
-		|| document.readyState === 'loaded'
-		|| document.readyState === 'interactive'
-		) {
+		if (document.readyState === 'complete') {
 			this.start();
 		} else {
-			document.addEventListener('DOMContentLoaded', () => {
-				this.start();
-			});
+			document.onreadystatechange = () => {
+				if (document.readyState === 'complete') {
+					this.start();
+				}
+			};
 		}
 	}
 
@@ -121,7 +120,6 @@ class RewardsApp {
 				</ShadowDOM>
 			</Router>
 		);
-		this.renderReact();
 		this.initListener();
 	}
 
@@ -165,7 +163,6 @@ class RewardsApp {
 					</div>
 				</Router>
 			);
-			this.renderReact();
 			this.initListener();
 		};
 		document.body.appendChild(this.rewardsIframe);
@@ -190,9 +187,14 @@ class RewardsApp {
 			this.reward = request.reward;
 			this.conf = request.conf;
 		}
-		if (document.readyState === 'complete' || document.readyState === 'interactive') {
+
+		// in FF 61 react sees some elements in iframes as non interactive
+		// react overwrites the event handlers for these elements with `function noop() {}`
+		// https://github.com/facebook/react/blob/16.4.2-dev/packages/react-dom/src/client/ReactDOMFiberComponent.js#L235
+		// using setTimeout to render react is a temporary workaround
+		setTimeout(() => {
 			this.renderReact();
-		}
+		});
 	}
 
 	focusListener() {
