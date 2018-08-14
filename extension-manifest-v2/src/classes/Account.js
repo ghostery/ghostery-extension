@@ -273,7 +273,10 @@ class Account {
 			// Checks if user is already logged in
 			// @TODO move this into an init() function
 				new Promise((resolve) => {
-					if (conf.account !== null) { resolve(); }
+					if (conf.account !== null) {
+						resolve();
+						return;
+					}
 					chrome.cookies.get({
 						url: `https://${GHOSTERY_DOMAIN}.com`,
 						name: 'user_id',
