@@ -19,6 +19,7 @@ import {
 	GET_USER_SETTINGS_SUCCESS
 } from './AccountConstants';
 import { GET_PANEL_DATA } from '../panel/constants/constants';
+import { setTheme } from '../panel/utils/utils';
 
 const initialState = {
 	loggedIn: false,
@@ -49,6 +50,7 @@ export default (state = initialState, action) => {
 			});
 		}
 		case LOGOUT_SUCCESS: {
+			setTheme(document, "default");
 			return Object.assign({}, initialState);
 		}
 		case GET_USER_SUCCESS: {

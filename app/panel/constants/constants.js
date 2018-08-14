@@ -66,5 +66,5 @@ export const SETTINGS_FILTER = 'SETTINGS_FILTER';
 export const GET_SETTINGS_DATA = 'GET_SETTINGS_DATA';
 
 // subscription
-export const SET_THEME = 'SET_THEME';
+export const GET_SET_THEME = 'GET_SET_THEME';
 

@@ -664,11 +664,43 @@ function onMessageHandler(request, sender, callback) {
 		panelData.set(message);
 		callback();
 		return false;
-	} else if (name === 'setThemeData') {
-		panelData.set(message);
-		message.theme = conf.themes[message.currentTheme];
+	} else if (name === 'getSetThemeData') {
+		if (message.currentTheme !== 'default' &&
+			account.hasScopesUnverified(['subscription:supporter'])) {
+			// try to get it locally
+			message.theme = (conf.themes || {})[message.currentTheme];
+			if (message.theme) {
+				// This will trigger panelData.set through dispatch
+				// as currentTheme is in SYNC_ARRAY
+				conf.current_theme = message.currentTheme;
+				callback(message);
+				return false;
+			}
+			account.getTheme(`${message.currentTheme}.css`).then((theme) => {
+				if (theme) {
+					const themes = conf.themes || {};
+					themes[message.currentTheme] = theme;
+					conf.themes = themes;
+					conf.current_theme = message.currentTheme;
+					message.theme = theme;
+				} else {
+					conf.current_theme = 'default';
+					message.currentTheme = 'default';
+				}
+				callback(message);
+			})
+			.catch((err) => {
+				conf.current_theme = 'default';
+				message.currentTheme = 'default';
+				callback(message);
+			});
+			// Signifying asynchronous callback here. Other cases are synchronous.
+			return true;
+		}
+		conf.current_theme = 'default';
+		message.currentTheme = 'default';
 		callback(message);
-		return true;
+		return false;
 	} else if (name === 'getCliqzModuleData') {
 		const modules = { adblock: {}, antitracking: {} };
 
@@ -1581,6 +1613,7 @@ function initializeGhosteryModules() {
  */
 function init() {
 	return confData.init().then(() => {
+		console.log('CONF', conf);
 		initializePopup();
 		initializeEventListeners();
 		initializeVersioning();
@@ -1608,12 +1641,4 @@ function init() {
 }
 
 // Initialize the application.
-init().then(() => {
-	// TBD change this code once background is ready.
-	// Theme will be delivered from the server.
-	const { themes } = conf;
-	themes.midnight = '#content-summary { background-color: #124559; }';
-	conf.themes = themes;
-	panelData.init();
-});
-
+init();

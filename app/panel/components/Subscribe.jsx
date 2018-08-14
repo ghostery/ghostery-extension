@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom';
  * Render Subscribe panel.
  * @return {ReactComponent}   ReactComponent instance
  */
-function Subscribe(props) {
+function Subscribe() {
 	return (
 		<div className="content-subscription">
 			<svg width="137px" height="97px" viewBox="0 0 137 97" className="badge">

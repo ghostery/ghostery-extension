@@ -16,7 +16,7 @@ import {
 	SHOW_NOTIFICATION,
 	CLOSE_NOTIFICATION,
 	TOGGLE_EXPERT,
-	SET_THEME
+	GET_SET_THEME
 } from '../constants/constants';
 import { sendMessageInPromise } from '../utils/msg';
 
@@ -104,12 +104,12 @@ export function toggleExpert() {
 	};
 }
 
-export function setTheme(data) {
+export function getSetTheme(data) {
 	return function (dispatch) {
-		return sendMessageInPromise('setThemeData', data)
+		return sendMessageInPromise('getSetThemeData', data)
 			.then((result) => {
 				dispatch({
-					type: SET_THEME,
+					type: GET_SET_THEME,
 					data: result,
 				});
 			});

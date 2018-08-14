@@ -20,6 +20,7 @@ import ClickOutside from './BuildingBlocks/ClickOutside';
 import { sendMessage, sendMessageInPromise } from '../utils/msg';
 import globals from '../../../src/classes/Globals';
 import { log } from '../../../src/utils/common';
+import { isSupporter } from '../utils/utils';
 /**
  * @class Implement drop-down menu invoked from kebab
  * menu icon on the panel header.
@@ -166,7 +167,8 @@ class HeaderMenu extends React.Component {
 	 * @return {ReactComponent}   ReactComponent instance
 	 */
 	render() {
-		const { loggedIn, email, supporter } = this.props;
+		const { loggedIn, email, user } = this.props;
+		const supporter = isSupporter(user);
 		return (
 			<ClickOutside onClickOutside={this.handleClickOutside} excludeEl={this.props.kebab}>
 				<div className="dropdown-pane" id="header-dropdown">
@@ -237,14 +239,14 @@ class HeaderMenu extends React.Component {
 								<Link to="/subscribe">
 									<this.SupporterMenuItemBase />
 								</Link>
-							</li> ) 
-						: 	( 	
-							<li className="menu-option">
-								<Link to="/subscription" onClick={this.props.toggleDropdown}>
-									<this.SupporterMenuItemBase />
-								</Link>
-							</li> 
-							) 
+							</li>)
+							: 	(
+								<li className="menu-option">
+									<Link to="/subscription" onClick={this.props.toggleDropdown}>
+										<this.SupporterMenuItemBase />
+									</Link>
+								</li>
+							)
 						}
 					</ul>
 					<div className="row account-info">

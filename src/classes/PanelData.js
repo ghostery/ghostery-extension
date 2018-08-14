@@ -26,6 +26,7 @@ import rewards from './Rewards';
 import account from './Account';
 import { getActiveTab, flushChromeMemoryCache } from '../utils/utils';
 import { objectEntries, log } from '../utils/common';
+import { hasScopesUnverified } from './account';
 
 const SYNC_SET = new Set(globals.SYNC_ARRAY);
 const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
@@ -166,10 +167,13 @@ class PanelData {
 	 * @return {Object}		panel data shared by multiple views
 	 */
 	get panelView() {
-		const currentTheme = this._confData.get('currentTheme');
-		let theme = {};
+		let currentTheme = this._confData.get('currentTheme');
+		let theme;
 		if (currentTheme !== 'default') {
-			theme = (this._confData.get('themes'))[currentTheme] || {};
+			theme = (this._confData.get('themes') || {})[currentTheme];
+			if (!theme) {
+				currentTheme = 'default';
+			}
 		}
 		this._panelView = {
 			panel: {
@@ -192,6 +196,7 @@ class PanelData {
 				unread_offer_ids: rewards.unreadOfferIds,
 
 				account: this._confData.get('account'),
+				supporter: account.hasScopesUnverified(['subscription:supporter'])
 			},
 			summary: this.summaryView,
 			blocking: this._confData.get('is_expert') ? this.blockingView : false,
@@ -287,7 +292,6 @@ class PanelData {
 			show_tracker_urls: this._confData.get('show_tracker_urls'),
 			toggle_individual_trackers: this._confData.get('toggle_individual_trackers'),
 			language: this._confData.get('language'), // required for the setup page that does not have access to panelView data
-			loggedIn: this._confData.get('loggedIn'),
 			firstName: this._confData.get('firstName'),
 			lastName: this._confData.get('lastName'),
 		};
@@ -300,6 +304,7 @@ class PanelData {
 	 * @private
 	 */
 	_buildConfData() {
+		console.log('CURRENT THEME', conf.current_theme);
 		this._confData
 			.set('alert_bubble_pos', conf.alert_bubble_pos)
 			.set('alert_bubble_timeout', conf.alert_bubble_timeout)
@@ -341,7 +346,7 @@ class PanelData {
 			.set('trackers_banner_status', conf.trackers_banner_status)
 			.set('expand_all_trackers', conf.expand_all_trackers)
 			.set('account', conf.account)
-			.set('currentTheme', conf.currentTheme)
+			.set('currentTheme', conf.current_theme)
 			.set('themes', conf.themes);
 	}
 

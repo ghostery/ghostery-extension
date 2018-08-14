@@ -40,13 +40,22 @@ class Subscription extends React.Component {
 		this.props.history.push('/subscription/info');
 	}
 
+	/**
+	 * Lifecycle event. 
+	 */
+	componentWillReceiveProps(nextProps) {
+		if(!nextProps.loggedIn) {
+			this.props.history.push('/detail');
+		}
+	}	
+
 	toggleThemes() {
 		const newChecked = !this.state.isChecked;
 		this.setState({ isChecked: newChecked });
 		if (newChecked) {
-			this.props.actions.setTheme({ currentTheme: 'midnight' });
+			this.props.actions.getSetTheme({ currentTheme: 'midnight-theme' });
 		} else {
-			this.props.actions.setTheme({ currentTheme: 'default' });
+			this.props.actions.getSetTheme({ currentTheme: 'default' });
 		}
 	}
 

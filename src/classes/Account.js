@@ -136,6 +136,7 @@ class Account {
 			// remove cookies in case fetch fails
 			this._removeCookies();
 			this._clearAccountInfo();
+			this._clearAccountPerks();
 		})
 	)
 
@@ -412,6 +413,11 @@ class Account {
 
 	_clearAccountInfo = () => {
 		conf.account = null;
+	}
+
+	_clearAccountPerks = () => {
+		conf.current_theme = 'default';
+		conf.themes = null;
 	}
 
 	_getUserIDFromCookie = () => (

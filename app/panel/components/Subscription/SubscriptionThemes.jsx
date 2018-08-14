@@ -17,7 +17,7 @@ import { ToggleSlider } from '../BuildingBlocks';
 /**
  * @class Implement Themes subview as a React component.
  * The view opens from the left-side menu of the main Subscription view.
- * It allows to switch between available Ghostery themes.
+ * It allows to switch between available Ghostery themes. Right now it handles just one theme. Hence - slider.
  * @memberOf SettingsComponents
  */
 const SubscriptionThemes = props =>

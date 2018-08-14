@@ -31,8 +31,6 @@ import configureStore from './store/configureStore';
 import Help from './components/Help';
 import About from './components/About';
 import Subscribe from './components/Subscribe';
-// import { sendMessageInPromise } from './utils/msg';
-// import { setTheme } from './utils/utils';
 
 const store = configureStore();
 /**
@@ -56,10 +54,6 @@ const Ghostery = () => (
 	</Panel>
 );
 
-// sendMessageInPromise('getPanelData', {
-// 			view: 'subscription',
-// 		}).then((data) => {
-// 			setTheme(document, data.currentTheme, data.theme);
 ReactDOM.render(
 	(
 		<Provider store={store}>
@@ -69,5 +63,4 @@ ReactDOM.render(
 		</Provider>
 	), document.getElementById('ghostery-content'),
 );
-//		});
 
