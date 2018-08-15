@@ -70,7 +70,7 @@
 	.field-label {
 		font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 		font-size: 14px;
-		font-weight: normal;
+		font-weight: bolder;
 		line-height: 14px;
 		text-size-adjust: 100%;
 		-webkit-font-smoothing: antialiased;
@@ -78,7 +78,6 @@
 	}	
 	.themes-slider-label {
 		@extend .field-label;
-		font-weight: bolder !important;
 		padding-right: 20px !important;
 	}
 	.themes-slider-container {
@@ -90,18 +89,25 @@
 	}
 	.status-label {
 		@extend .field-label;
-		font-weight: bolder !important;
+		&.light {
+			font-weight: normal !important;
+		}
 	}
 	.status-value {
 		@extend .field-label;
 		padding-left: 7px !important;
 		padding-right: 7px !important;
-
-		color: $ghosty-blue;
+		&.blue {
+			color: $ghosty-blue;
+		}
+		&.light {
+			font-weight: normal !important;
+		}
 	}
 	.manage-link {
 		display: inline-block;
 		@extend .field-label;
+		font-weight: normal !important;
 		color: $ghosty-blue;
 		text-decoration: underline;
 		padding-left: 7px;

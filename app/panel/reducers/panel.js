@@ -30,7 +30,7 @@ import {
 import {
 	LOGIN_SUCCESS,
 	LOGIN_FAIL,
-	// LOGOUT_SUCCESS,
+	LOGOUT_SUCCESS,
 	REGISTER_SUCCESS,
 	REGISTER_FAIL,
 	RESET_PASSWORD_SUCCESS,
@@ -58,6 +58,8 @@ const initialState = {
 	loggedIn: false,
 	email: '',
 	emailValidated: false,
+	currentTheme: 'default',
+	theme: ''
 };
 /**
  * Default export for panel view reducer. Handles actions
@@ -141,6 +143,9 @@ export default (state = initialState, action) => {
 			action.payload.overrideNotificationShown = true;
 			const updated = _showNotification(state, action);
 			return Object.assign({}, state, updated);
+		}
+		case LOGOUT_SUCCESS: {
+			return Object.assign({}, state, { currentTheme: 'default', theme: '' });
 		}
 		// @TODO?
 		// case LOGOUT_SUCCESS: {

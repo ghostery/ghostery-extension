@@ -28,9 +28,6 @@ class Subscription extends React.Component {
 		this.state = {
 			isChecked: false
 		};
-
-		// event bindings
-		this.toggleThemes = this.toggleThemes.bind(this);
 	}
 
 	/**
@@ -44,13 +41,13 @@ class Subscription extends React.Component {
 	/**
 	 * Lifecycle event. 
 	 */
-	componentWillReceiveProps(nextProps) {
+	componentWillReceiveProps = nextProps => {
 		if(!nextProps.loggedIn) {
 			this.props.history.push('/detail');
 		}
 	}	
 
-	toggleThemes() {
+	toggleThemes = () => {
 		const newChecked = !this.state.isChecked;
 		this.setState({ isChecked: newChecked });
 		if (newChecked) {
@@ -61,7 +58,7 @@ class Subscription extends React.Component {
 	}
 
 	SubscriptionInfoComponent = () => (<SubscriptionInfo subscriptionData={this.props} />);
-	SubscriptionThemesComponent = () => (<SubscriptionThemes isChecked={this.state.isChecked} subscriptionData={this.props} toggleThemes={this.toggleThemes} actions={this.props.actions} />);
+	SubscriptionThemesComponent = () => (<SubscriptionThemes isChecked={this.state.isChecked} toggleThemes={this.toggleThemes}/>);
 	PrioritySupportComponent = () => (<PrioritySupport />);
 	TrackerStatsComponent = () => (<TrackerStats />);
 

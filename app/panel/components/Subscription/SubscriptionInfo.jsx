@@ -36,18 +36,18 @@ const SubscriptionInfo = (props) => {
 					<h1>{ t('subscription_info_title') }</h1>
 					<div className="status-row">
 						<span className="status-label">{`${t('subscription_status')}: `}</span>
-						<span className="status-value">{subscriptionData.active ? t('subscription_active') : t('subscription_inactive') }</span>
+						<span className="status-value blue">{subscriptionData.active ? t('subscription_active') : t('subscription_inactive') }</span>
 						<div className="s-tooltip-down-right" data-g-tooltip={subscriptionData.active ? t('subscription_active_tooltip') : t('subscription_inactive_tooltip')}>
 							<img src="../../app/images/panel/icon-information-tooltip.svg" className="s-question" />
 						</div>
 					</div>
 					<div className="status-row">
-						<span className="status-label">{subscriptionData.active ? `${t('subscription_charge_date')}: ` : `${t('subscription_expired')}: `}</span>
-						<span className="status-value">{subscriptionData.active ? subscriptionData.next_charge_date : subscriptionData.expired_date}</span>
+						<span className="status-label light">{subscriptionData.active ? `${t('subscription_charge_date')}: ` : `${t('subscription_expired')}: `}</span>
+						<span className="status-value light">{subscriptionData.active ? subscriptionData.next_charge_date : subscriptionData.expired_date}</span>
 					</div>
 					<div className="status-row">
-						<span className="status-label">{`${t('subscription_auto_renewal')}: `}</span>
-						<span className="status-value">{subscriptionData.auto_renewal ? t('subscription_active') : t('subscription_inactive') }</span>
+						<span className="status-label light">{`${t('subscription_auto_renewal')}: `}</span>
+						<span className="status-value light">{subscriptionData.auto_renewal ? t('subscription_active') : t('subscription_inactive') }</span>
 					</div>
 					<div className="list-row">
 						<ul>
