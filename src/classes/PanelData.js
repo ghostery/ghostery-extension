@@ -26,7 +26,6 @@ import rewards from './Rewards';
 import account from './Account';
 import { getActiveTab, flushChromeMemoryCache } from '../utils/utils';
 import { objectEntries, log } from '../utils/common';
-import { hasScopesUnverified } from './account';
 
 const SYNC_SET = new Set(globals.SYNC_ARRAY);
 const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
@@ -304,7 +303,6 @@ class PanelData {
 	 * @private
 	 */
 	_buildConfData() {
-		console.log('CURRENT THEME', conf.current_theme);
 		this._confData
 			.set('alert_bubble_pos', conf.alert_bubble_pos)
 			.set('alert_bubble_timeout', conf.alert_bubble_timeout)

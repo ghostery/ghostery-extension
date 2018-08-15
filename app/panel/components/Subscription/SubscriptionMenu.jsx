@@ -35,7 +35,7 @@ class SubscriptionMenu extends React.Component {
 	 * Save selected menu item in state.
 	 * @param {Object} event  	mouseclick event on one of the menu items
 	 */
-	setActiveTab = event => {
+	setActiveTab = (event) => {
 		const newMenuState = Object.assign({}, this.state.menu);
 		Object.keys(newMenuState).forEach((key) => {
 			if (key === event.currentTarget.id) {

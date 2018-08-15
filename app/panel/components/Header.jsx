@@ -121,8 +121,8 @@ class Header extends React.Component {
 	}
 
 	disableClickIf = (evt, pathToken) => {
-		const {pathname} = this.props.location;
-		if(pathname.includes(pathToken)) {
+		const { pathname } = this.props.location;
+		if (pathname.includes(pathToken)) {
 			evt.preventDefault();
 		}
 	}
@@ -191,7 +191,7 @@ class Header extends React.Component {
 								{rightLink}
 							</div>
 							<div className="columns shrink">
-								<Link to={(loggedIn && supporter) ? '/subscription/info' : '/subscribe'} onClick={(evt) => this.disableClickIf(evt, 'subscription')}>
+								<Link to={(loggedIn && supporter) ? '/subscription/info' : '/subscribe'} onClick={evt => this.disableClickIf(evt, 'subscription')}>
 									<svg width="29px" height="20px" viewBox="0 0 29 20" className="header-badge">
 										<g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
 											<g transform="translate(-552.000000, -70.000000)">

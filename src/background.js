@@ -689,11 +689,12 @@ function onMessageHandler(request, sender, callback) {
 				}
 				callback(message);
 			})
-			.catch((err) => {
-				conf.current_theme = 'default';
-				message.currentTheme = 'default';
-				callback(message);
-			});
+				.catch((err) => {
+					log('GET SET THEME ERROR', err);
+					conf.current_theme = 'default';
+					message.currentTheme = 'default';
+					callback(message);
+				});
 			// Signifying asynchronous callback here. Other cases are synchronous.
 			return true;
 		}
@@ -1613,7 +1614,6 @@ function initializeGhosteryModules() {
  */
 function init() {
 	return confData.init().then(() => {
-		console.log('CONF', conf);
 		initializePopup();
 		initializeEventListeners();
 		initializeVersioning();

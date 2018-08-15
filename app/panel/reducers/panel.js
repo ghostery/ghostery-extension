@@ -145,6 +145,7 @@ export default (state = initialState, action) => {
 			return Object.assign({}, state, updated);
 		}
 		case LOGOUT_SUCCESS: {
+			setTheme(document, 'default');
 			return Object.assign({}, state, { currentTheme: 'default', theme: '' });
 		}
 		// @TODO?

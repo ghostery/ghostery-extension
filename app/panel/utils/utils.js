@@ -177,8 +177,8 @@ export function doXHR(method, url, query) {
  * @param  {array} userScopes 	array of scope strings
  * @return {boolean}
  */
-export function isSupporter( user ) {
-	if(!user || !user.scopes) { return false; }
+export function isSupporter(user) {
+	if (!user || !user.scopes) { return false; }
 	const userScopes = user.scopes;
 
 	// check scopes

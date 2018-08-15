@@ -20,14 +20,14 @@ import React from 'react';
  * It invites user to examine the status of his subscription
  * @memberOf SubscriptionComponents
  */
-const SubscriptionInfo = (props) => {
-	//let { subscriptionData } = props;
-	//subscriptionData = subscriptionData || {};
-	//Get it from background eventually
+const SubscriptionInfo = () => {
+	// let { subscriptionData } = props;
+	// subscriptionData = subscriptionData || {};
+	// Get it from background eventually
 	const subscriptionData = {};
 	subscriptionData.active = true;
-	subscriptionData.next_charge_date = "April 5, 2019";
-	subscriptionData.expired_date = "April 5, 2018";
+	subscriptionData.next_charge_date = 'April 5, 2019';
+	subscriptionData.expired_date = 'April 5, 2018';
 	subscriptionData.auto_renewal = true;
 	return (
 		<div className="content-subscription s-tabs-panel">
