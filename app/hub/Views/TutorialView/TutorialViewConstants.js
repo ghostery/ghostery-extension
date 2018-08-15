@@ -11,5 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-// Tutorial View
 export const INIT_TUTORIAL_PROPS = 'INIT_TUTORIAL_PROPS';
+
+export const SET_TUTORIAL_NAVIGATION = 'SET_TUTORIAL_NAVIGATION';

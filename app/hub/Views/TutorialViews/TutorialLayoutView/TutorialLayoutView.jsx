@@ -1,5 +1,5 @@
 /**
- * Tutorial Blocking View Component
+ * Tutorial Layout View Component
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -16,10 +16,10 @@
 import React from 'react';
 
 /**
- * @class Implement the Tutorial Blocking View for the Ghostery Hub
+ * @class Implement the Tutorial Layout View for the Ghostery Hub
  * @extends Component
  * @memberof HubComponents
  */
-const TutorialBlockingView = () => <div>Ghostery Hub - Tutorial Blocking View</div>;
+const TutorialLayoutView = () => <div>Ghostery Hub - Tutorial Simple / Detailed Layout View</div>;
 
-export default TutorialBlockingView;
+export default TutorialLayoutView;

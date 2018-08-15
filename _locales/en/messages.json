@@ -1593,6 +1593,9 @@
 	"setup_upgrade_button_go": {
 		"message": "Set Me Up"
 	},
+	"hub_home_page_title": {
+		"message": "Ghostery Hub - Home"
+	},
 	"hub_setup_page_title": {
 		"message": "Ghostery Hub - Setup"
 	},

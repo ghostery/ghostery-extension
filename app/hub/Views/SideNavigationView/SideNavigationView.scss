@@ -1,0 +1,68 @@
+/**
+ * Ghostery Hub - Side Navigation Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+.App__leftNavigation {
+	background-color: $hoki;
+	height: 100%;
+	min-width: 200px;
+	max-width: 200px;
+	color: $white;
+	ul {
+		list-style: none;
+		margin-left: 20px;
+		li {
+			height: 80px;
+		}
+	}
+	a {
+		height: 80px;
+		.flex-child-auto {
+			max-width: 160px;
+		}
+		color: $white;
+		&.active {
+			text-decoration: underline;
+		}
+	}
+}
+// Side Navigation
+.SideNavigation__container {
+	background-color: $hoki;
+	.SideNavigation__top {
+		min-height: 80px;
+		background-color: $mystic;
+	}
+	.SideNavigation__bottom {
+		margin: 0px 0px 20px 20px;
+	}
+	.active .arrow-left {
+		position: relative;
+		height: 80px;
+		width: 20px;
+		background-color: transparent;
+		.arrow-left-bottom {
+			width: 0;
+			height: 0;
+			border-style: solid;
+			border-width: 0 20px 40px 0;
+			border-color: transparent $white transparent transparent;
+		}
+		.arrow-left-top {
+			width: 0;
+			height: 0;
+			border-style: solid;
+			border-width: 0 0 40px 20px;
+			border-color: transparent transparent $white transparent;
+		}
+	}
+}

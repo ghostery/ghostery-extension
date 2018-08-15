@@ -12,7 +12,7 @@
  */
 
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import QueryString from 'query-string';
 import PropTypes from 'prop-types';
 import SetupView from './SetupView';
@@ -34,16 +34,6 @@ import SetupDoneView from '../SetupViews/SetupDoneView';
 class SetupViewContainer extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			sendMountActions: false,
-			showModal: false,
-		};
-	}
-
-	/**
-	 * Lifecycle Event
-	 */
-	componentWillMount() {
 		const title = t('hub_setup_page_title');
 
 		window.document.title = title;
@@ -66,6 +56,13 @@ class SetupViewContainer extends React.Component {
 				this._setDefaultSettings();
 			}
 		});
+
+		this.state = {
+			sendMountActions: false,
+			showModal: false,
+		};
+
+		this.props.history.push('/setup/1');
 	}
 
 	/**
@@ -280,4 +277,4 @@ SetupViewContainer.defaultProps = {
 	},
 };
 
-export default SetupViewContainer;
+export default withRouter(SetupViewContainer);

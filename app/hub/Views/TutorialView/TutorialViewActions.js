@@ -11,11 +11,18 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { INIT_TUTORIAL_PROPS } from './TutorialViewConstants';
+import { INIT_TUTORIAL_PROPS, SET_TUTORIAL_NAVIGATION } from './TutorialViewConstants';
 
 export function initTutorialProps(data) {
 	return {
 		type: INIT_TUTORIAL_PROPS,
+		data,
+	};
+}
+
+export function setTutorialNavigation(data) {
+	return {
+		type: SET_TUTORIAL_NAVIGATION,
 		data,
 	};
 }

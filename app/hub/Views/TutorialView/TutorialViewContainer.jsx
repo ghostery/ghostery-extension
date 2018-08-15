@@ -12,18 +12,16 @@
  */
 
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { withRouter } from 'react-router-dom';
 
 import TutorialView from './TutorialView';
-import * as actions from './TutorialViewActions';
 
 // Component Views
 import TutorialVideoView from '../TutorialViews/TutorialVideoView';
 import TutorialTrackerListView from '../TutorialViews/TutorialTrackerListView';
-import TutorialSimpleDetailedView from '../TutorialViews/TutorialSimpleDetailedView';
+import TutorialLayoutView from '../TutorialViews/TutorialLayoutView';
 import TutorialBlockingView from '../TutorialViews/TutorialBlockingView';
-import TutorialTrustRestrictView from '../TutorialViews/TutorialTrustRestrictView';
+import TutorialTrustView from '../TutorialViews/TutorialTrustView';
 import TutorialAntiSuiteView from '../TutorialViews/TutorialAntiSuiteView';
 
 /**
@@ -35,9 +33,12 @@ class TutorialViewContainer extends React.Component {
 	/**
 	 * Lifecycle Event
 	 */
-	componentWillMount() {
+	constructor(props) {
+		super(props);
 		const title = '';
 		window.document.title = title;
+		this.props.actions.initTutorialProps(this.props.tutorial);
+		this.props.history.push('/tutorial/1');
 	}
 
 	/**
@@ -60,7 +61,7 @@ class TutorialViewContainer extends React.Component {
 			{
 				index: 3,
 				path: '/tutorial/3',
-				bodyComponent: TutorialSimpleDetailedView,
+				bodyComponent: TutorialLayoutView,
 			},
 			{
 				index: 4,
@@ -70,7 +71,7 @@ class TutorialViewContainer extends React.Component {
 			{
 				index: 5,
 				path: '/tutorial/5',
-				bodyComponent: TutorialTrustRestrictView,
+				bodyComponent: TutorialTrustView,
 			},
 			{
 				index: 6,
@@ -84,24 +85,19 @@ class TutorialViewContainer extends React.Component {
 }
 
 // Default props used throughout the Tutorial flow
-TutorialViewContainer.defaultProps = {};
+TutorialViewContainer.defaultProps = {
+	tutorial: {
+		navigation: {
+			activeIndex: 0,
+			hrefPrev: false,
+			hrefNext: false,
+			hrefDone: false,
+			textPrev: false,
+			textNext: false,
+			textDone: false,
+		},
+	},
+};
 
-/**
- * Map redux store state properties to the component's own properties.
- * @param  {Object} state    entire Redux store's state
- * @return {function}        this function returns a plain object, which will be merged into the component's props
- * @memberof HubContainers
- */
-const mapStateToProps = () => Object.assign({});
 
-/**
- * Bind the component's action creators using Redux's bindActionCreators.
- * @param  {function} dispatch redux store method which dispatches actions
- * @return {function}          to be used as an argument in redux connect call
- * @memberof SetupContainers
- */
-const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign(actions), dispatch),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(TutorialViewContainer);
+export default withRouter(TutorialViewContainer);
