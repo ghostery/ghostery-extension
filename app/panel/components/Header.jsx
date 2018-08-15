@@ -120,12 +120,18 @@ class Header extends React.Component {
 		);
 	}
 
+	disableClickIf = (evt, pathToken) => {
+		const {pathname} = this.props.location;
+		if(pathname.includes(pathToken)) {
+			evt.preventDefault();
+		}
+	}
+
 	/**
 	* React's required render function. Returns JSX
 	* @return {JSX} JSX for rendering the Header Component of the panel
 	*/
 	render() {
-		console.log("HEADEER PROPS", this.props);
 		const { pathname } = this.props.location;
 		const showTabs = pathname === '/' || pathname.startsWith('/detail');
 		const headerLogoClasses = ClassNames('header-logo', {
@@ -158,7 +164,7 @@ class Header extends React.Component {
 					</div>
 				)}
 				<div className="top-bar">
-					<div className="top-bar-left">
+					<div>
 						<Link to={(this.props.is_expert ? '/detail/blocking' : '/')} className={headerLogoClasses} >
 							<svg width="8px" height="13px" viewBox="0 0 8 13" className="back-arrow">
 								<g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
@@ -179,13 +185,13 @@ class Header extends React.Component {
 							</svg>
 						</Link>
 					</div>
-					<div className="top-bar-right">
+					<div>
 						<div className="row align-middle collapse">
 							<div className="columns shrink">
 								{rightLink}
 							</div>
 							<div className="columns shrink">
-								<Link to={(loggedIn && supporter) ? '/subscription/info' : '/subscribe'}>
+								<Link to={(loggedIn && supporter) ? '/subscription/info' : '/subscribe'} onClick={(evt) => this.disableClickIf(evt, 'subscription')}>
 									<svg width="29px" height="20px" viewBox="0 0 29 20" className="header-badge">
 										<g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
 											<g transform="translate(-552.000000, -70.000000)">
@@ -216,10 +222,12 @@ class Header extends React.Component {
 								email={user && user.email}
 								language={this.props.language}
 								tab_id={this.props.tab_id}
+								location={this.props.location}
 								history={this.props.history}
 								actions={this.props.actions}
 								toggleDropdown={this.toggleDropdown}
 								kebab={this.kebab}
+								disableClickIf={this.disableClickIf}
 							/>
 						}
 					</div>

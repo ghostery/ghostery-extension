@@ -1743,19 +1743,19 @@
 	"subscription_midnight_theme": {
 		"message": "Midnight Theme"
 	},
-	"subscription_account_status": {
+	"subscription_status": {
 		"message": "Status"
 	},
-	"subscription_account_active": {
+	"subscription_active": {
 		"message": "Active"
 	},
-	"subscription_account_inactive": {
+	"subscription_inactive": {
 		"message": "Inactive"
 	},
-	"subscription_account_active_tooltip": {
+	"subscription_active_tooltip": {
 		"message": "Your Ghostery Supporter subscription is now active"
 	},
-	"subscription_account_inactive_tooltip": {
+	"subscription_inactive_tooltip": {
 		"message": "Your Ghostery Supporter subscription is now inactive"
 	},
 
@@ -1764,5 +1764,20 @@
 	},
 	"subscription_themes_tooltip": {
 		"message": "Change the color scheme of Ghostery!"
-  }
+  	},
+  	"subscription_tracker_stats": {
+  		"message": "Historical Tracker Stats"
+  	},
+	"subscription_tracker_stats_title" : {
+		"message": "Historical Tracker Stats"
+	},
+	"subscription_charge_date" : {
+		"message": "Next Charge Date"
+	},
+	"subscription_expired": {
+		"message": "Account expired"
+	},
+	"subscription_auto_renewal": {
+		"message": "Auto Renewal"
+	}
 }

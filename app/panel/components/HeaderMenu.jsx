@@ -52,9 +52,9 @@ class HeaderMenu extends React.Component {
 	/**
 	 * Trigger action which open Settings panel from drop-down menu Settings item.
 	 */
-	clickSettings() {
+	clickSettings(evt) {
 		this.props.toggleDropdown();
-		this.props.history.push('/settings');
+		this.props.disableClickIf(evt, 'settings');
 	}
 	/**
 	 * Handle click on 'Report a broken page' menu item.
@@ -138,6 +138,7 @@ class HeaderMenu extends React.Component {
 		this.props.toggleDropdown();
 		this.props.actions.logout();
 	}
+
 	/**
 	 * Handle disabling/enabling of the Supporter menu item
 	 */
@@ -167,8 +168,7 @@ class HeaderMenu extends React.Component {
 	 * @return {ReactComponent}   ReactComponent instance
 	 */
 	render() {
-		const { loggedIn, email, user } = this.props;
-		const supporter = isSupporter(user);
+		const { loggedIn, email, supporter } = this.props;
 		return (
 			<ClickOutside onClickOutside={this.handleClickOutside} excludeEl={this.props.kebab}>
 				<div className="dropdown-pane" id="header-dropdown">
@@ -234,20 +234,11 @@ class HeaderMenu extends React.Component {
 								<span>{ t('panel_menu_about') }</span>
 							</Link>
 						</li>
-						{(!loggedIn || !supporter) ? (
-							<li className="menu-option-gold">
-								<Link to="/subscribe">
-									<this.SupporterMenuItemBase />
-								</Link>
-							</li>)
-							: 	(
-								<li className="menu-option">
-									<Link to="/subscription" onClick={this.props.toggleDropdown}>
-										<this.SupporterMenuItemBase />
-									</Link>
-								</li>
-							)
-						}
+						<li className="menu-option" onClick={this.props.toggleDropdown}>
+							<Link to={(!loggedIn || !supporter) ? '/subscribe' : '/subscription/info'} className={(!loggedIn || !supporter) ? 'menu-option-gold' : 'menu-option'} onClick={(evt) => this.props.disableClickIf(evt, 'subscription')}>
+								<this.SupporterMenuItemBase />
+							</Link>
+						</li>
 					</ul>
 					<div className="row account-info">
 						<div onClick={this.clickSignedInAs} className={`${!loggedIn ? 'hide' : ''} menu-option signed-in-as small-12 columns`}>

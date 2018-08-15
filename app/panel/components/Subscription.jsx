@@ -17,6 +17,7 @@ import SubscriptionMenu from './Subscription/SubscriptionMenu';
 import SubscriptionInfo from './Subscription/SubscriptionInfo';
 import SubscriptionThemes from './Subscription/SubscriptionThemes';
 import PrioritySupport from './Subscription/PrioritySupport';
+import TrackerStats from './Subscription/TrackerStats';
 /**
  * @class Implement base Subscription view which routes navigation to all subscription subviews
  * @memberof PanelClasses
@@ -62,6 +63,8 @@ class Subscription extends React.Component {
 	SubscriptionInfoComponent = () => (<SubscriptionInfo subscriptionData={this.props} />);
 	SubscriptionThemesComponent = () => (<SubscriptionThemes isChecked={this.state.isChecked} subscriptionData={this.props} toggleThemes={this.toggleThemes} actions={this.props.actions} />);
 	PrioritySupportComponent = () => (<PrioritySupport />);
+	TrackerStatsComponent = () => (<TrackerStats />);
+
 	/**
 	 * Render top level component of the Subscription view.
 	 * @return {ReactComponent}   ReactComponent instance
@@ -74,6 +77,7 @@ class Subscription extends React.Component {
 					<Route path="/subscription/info" render={this.SubscriptionInfoComponent} />
 					<Route path="/subscription/themes" render={this.SubscriptionThemesComponent} />
 					<Route path="/subscription/prioritysupport" render={this.PrioritySupportComponent} />
+					<Route path="/subscription/trackerstats" render={this.TrackerStatsComponent} />
 				</div>
 			</div>
 		);

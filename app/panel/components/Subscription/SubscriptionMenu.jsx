@@ -26,17 +26,16 @@ class SubscriptionMenu extends React.Component {
 				showSubscriptionInfo: true,
 				showSubscriptionThemes: false,
 				showPrioritySupport: false,
+				showTrackerStats: false,
 			},
 		};
-
-		// event bindings
-		this.setActiveTab = this.setActiveTab.bind(this);
 	}
+
 	/**
 	 * Save selected menu item in state.
 	 * @param {Object} event  	mouseclick event on one of the menu items
 	 */
-	setActiveTab(event) {
+	setActiveTab = event => {
 		const newMenuState = Object.assign({}, this.state.menu);
 		Object.keys(newMenuState).forEach((key) => {
 			if (key === event.currentTarget.id) {
@@ -68,6 +67,11 @@ class SubscriptionMenu extends React.Component {
 				<li className={`${this.state.menu.showPrioritySupport ? 's-active ' : ''}s-tabs-title`} id="showPrioritySupport" onClick={this.setActiveTab}>
 					<Link to="/subscription/prioritysupport">
 						<span>{ t('subscription_priority_support') }</span>
+					</Link>
+				</li>
+				<li className={`${this.state.menu.showTrackerStats ? 's-active ' : ''}s-tabs-title`} id="showTrackerStats" onClick={this.setActiveTab}>
+					<Link to="/subscription/trackerstats">
+						<span>{ t('subscription_tracker_stats') }</span>
 					</Link>
 				</li>
 			</ul>

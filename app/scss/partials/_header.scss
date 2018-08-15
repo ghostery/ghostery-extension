@@ -57,6 +57,9 @@
 				} 
 			}
 		}
+		.disabled-link {
+			pointer-events: none;
+		}
 	}
 	.header-logo {
 		display: inline;
