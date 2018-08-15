@@ -14,7 +14,7 @@
  */
 
 import React, { Component } from 'react';
-import SideNavigation from './SideNavigation';
+import SideNavigation from './Views/SideNavigationView/SideNavigationView';
 
 /**
  * @class Implements the container App for the Ghostery Hub
@@ -33,10 +33,10 @@ class App extends Component {
 						location: 'list', type: 'link', href: '/', icon: 'home', text: 'Home'
 					},
 					{
-						location: 'list', type: 'link', href: '/setup/1', icon: 'home', text: 'Customize Setup'
+						location: 'list', type: 'link', href: '/setup', icon: 'home', text: 'Customize Setup'
 					},
 					{
-						location: 'list', type: 'link', href: '/tutorial/1', icon: 'home', text: 'Visit Tutorial'
+						location: 'list', type: 'link', href: '/tutorial', icon: 'home', text: 'Visit Tutorial'
 					},
 					{
 						location: 'list', type: 'link', href: '/supporter', icon: 'home', text: 'Become a Ghostery Supporter'

@@ -1,5 +1,5 @@
 /**
- * Point of entry index.js file for Tutorial Simple or Detailed View
+ * Home View Action creators
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -10,7 +10,11 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+import { TOGGLE_ANALYTICS } from './HomeViewConstants';
 
-import TutorialSimpleDetailedView from './TutorialSimpleDetailedView';
-
-export default TutorialSimpleDetailedView;
+export function toggleAnalytics(data) {
+	return {
+		type: TOGGLE_ANALYTICS,
+		data,
+	};
+}

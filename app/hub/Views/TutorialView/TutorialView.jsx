@@ -32,14 +32,14 @@ const TutorialView = props => (
 					path={step.path}
 					render={() => (
 						<div>
-							<step.bodyComponent />
+							<step.bodyComponent index={step.index} />
 						</div>
 					)}
 				/>
 			))}
 		</div>
 
-		<TutorialNavigation steps={props.steps} />
+		<TutorialNavigation totalSteps={props.steps.length} />
 	</div>
 );
 

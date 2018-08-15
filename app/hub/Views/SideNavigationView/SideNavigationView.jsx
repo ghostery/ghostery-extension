@@ -21,7 +21,7 @@ import { NavLink } from 'react-router-dom';
  * @extends Component
  * @memberof HubComponents
  */
-class SideNavigation extends Component {
+class SideNavigationView extends Component {
 	constructor(props) {
 		super(props);
 
@@ -54,14 +54,24 @@ class SideNavigation extends Component {
 	 * A helper function for rendering a Side Navigation List Item
 	 * @return {JSX} JSX for the Navigation Item
 	 */
+
+	hasNestedRoutes(route) {
+		const parentRoutes = ['setup', 'tutorial'];
+		return parentRoutes.some(parentRoute => route.href.includes(parentRoute));
+	}
+
 	_renderItem(item = {}, index) {
 		switch (item.type) {
 			case 'separator':
 				return <hr key={index} />;
 			case 'link':
 				return (
-					<NavLink to={item.href} key={index}>
-						<div>{item.text}</div>
+					<NavLink exact={!this.hasNestedRoutes(item)} to={item.href} key={index} className="flex-container align-middle">
+						<div className="flex-child-auto">{item.text}</div>
+						<div className="arrow-left">
+							<div className="arrow-left-top" />
+							<div className="arrow-left-bottom" />
+						</div>
 					</NavLink>
 				);
 			default:
@@ -77,12 +87,18 @@ class SideNavigation extends Component {
 		const { topItems, listItems, bottomItems } = this.state;
 
 		return (
-			<div className="full-height flex-container flex-dir-column">
+			<div className="SideNavigation__container flex-container flex-dir-column">
 				<div className="SideNavigation__top">
 					{topItems.map((item, i) => this._renderItem(item, i))}
 				</div>
 				<div className="SideNavigation__list flex-child-grow">
-					{listItems.map((item, i) => this._renderItem(item, i))}
+					<ul>
+						{listItems.map((item, i) => (
+							<li>
+								{this._renderItem(item, i)}
+							</li>
+						))}
+					</ul>
 				</div>
 				<div className="SideNavigation__bottom">
 					{bottomItems.map((item, i) => this._renderItem(item, i))}
@@ -92,4 +108,4 @@ class SideNavigation extends Component {
 	}
 }
 
-export default SideNavigation;
+export default SideNavigationView;

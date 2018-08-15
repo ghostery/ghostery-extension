@@ -13,38 +13,13 @@
  * ToDo: Update this file.
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 
 /**
  * @class Implement the Tutorial Tracker List View for the Ghostery Hub
  * @extends Component
  * @memberof HubComponents
  */
-class TutorailTrackerListView extends Component {
-	constructor(props) {
-		super(props);
+const TutorialTrackerListView = () => <div>Ghostery Hub - Tutorial Tracker List View</div>;
 
-		this.state = {
-			title: ''
-		};
-	}
-
-	/**
-	 * Lifecycle Event
-	 */
-	componentWillMount() {
-		const { title } = this.state;
-		window.document.title = title;
-	}
-
-	/**
-	 * React's required render function. Returns JSX
-	 * @return {JSX} JSX for rendering the Tutorial Tracker List View of the Hub app
-	 */
-	render() {
-		const { title } = this.state;
-		return <div>{title}</div>;
-	}
-}
-
-export default TutorailTrackerListView;
+export default TutorialTrackerListView;

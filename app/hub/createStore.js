@@ -21,10 +21,14 @@ import {
 } from 'redux';
 import thunk from 'redux-thunk';
 
+import { reducer as home } from './Views/HomeView';
 import { reducer as setup } from './Views/SetupView';
+import { reducer as tutorial } from './Views/TutorialView';
 
 const reducer = combineReducers({
 	setup,
+	tutorial,
+	home,
 });
 
 /**
