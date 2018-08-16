@@ -18,6 +18,9 @@
 	.badge {
 		display: block;
 		margin: 35px auto 35px auto;
+		width: 137px;
+		height: 97px;
+		background-image: url('/app/images/panel/subscribe-badge.svg');
 	}
 	.pitch-container {
 		width: 100%;
@@ -128,5 +131,11 @@
 		padding-left: 12px;
 	}
 	.manage-row {
+		display: inline-flex;
+	}
+	.manage-icon {
+		width: 14px;
+		height: 12px;
+		background-image: url('/app/images/panel/manage-subscription.svg');
 	}
 }
