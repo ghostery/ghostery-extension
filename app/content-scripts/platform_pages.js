@@ -19,39 +19,23 @@
 import msgModule from './utils/msg';
 
 const msg = msgModule('platform_pages');
-const { sendMessage, sendMessageToBackground } = msg;
+const { sendMessage } = msg;
 /**
  * Use to call init to initialize functionality
  * @var  {Object} initialized to an object with init method as its property
  */
-const PlatformPagesContentScript = (function (window, document) {
+const PlatformPagesContentScript = (function (window) {
 	/**
 	 * Initialize functionality of this script.
 	 * @memberOf PlatformPagesContentScript
 	 * @package
 	 */
 	const _initialize = function () {
-		// Add listener to logout-link in platform header
-		let logoutLink = document.getElementsByClassName('logout-link');
-		logoutLink = logoutLink ? logoutLink[0] : null;
-		if (logoutLink) {
-			logoutLink.addEventListener('click', () => {
-				sendMessageToBackground('userLogout'); // send empty object to log out
-			});
-		}
-		// Add listener to cancelModal
-		const cancelDialog = document.getElementById('cancelModal');
-		if (cancelDialog) {
-			let yesButton = cancelDialog.getElementsByClassName('button blue float-right');
-			yesButton = yesButton ? yesButton[0] : null;
-			if (yesButton) {
-				yesButton.addEventListener('click', () => {
-					sendMessageToBackground('userLogout'); // send empty object to log out
-				});
-			}
-		}
 		// alert background that this content script has loaded
 		sendMessage('platformPageLoaded');
+		window.addEventListener('account.logout', () => {
+			sendMessage('account.logout');
+		});
 	};
 
 	return {
@@ -66,6 +50,10 @@ const PlatformPagesContentScript = (function (window, document) {
 	};
 }(window, document));
 
-window.addEventListener('load', () => {
+if (document.readyState === 'complete') {
 	PlatformPagesContentScript.init();
-});
+} else {
+	window.addEventListener('load', () => {
+		PlatformPagesContentScript.init();
+	});
+}

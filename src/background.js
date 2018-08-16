@@ -89,6 +89,7 @@ function setCliqzModuleEnabled(module, enabled) {
 	cliqz.disableModule(module.name);
 	return Promise.resolve();
 }
+
 /**
  * Register/unregister real estate with Offers core module.
  * @memberOf Background
@@ -106,17 +107,18 @@ function registerWithOffers(offersModule, register) {
 			log(`FAILED TO ${register ? 'REGISTER' : 'UNREGISTER'} REAL ESTATE WITH OFFERS CORE`);
 		});
 }
+
 /**
- * Check and fetch (if needed) a new tracker library every 12 hours
+ * Check and fetch a new tracker library every hour as needed
  * @memberOf Background
  */
 function autoUpdateBugDb() {
-	log('AUTOUPDATE CALLED');
 	if (conf.enable_autoupdate) {
 		const result = conf.bugs_last_checked;
 		const nowTime = Number((new Date()).getTime());
+		// offset by 15min so that we don't double fetch
 		if (!result || nowTime > (Number(result) + 900000)) {
-			log('AUTOUPDATE CALLED', new Date());
+			log('autoUpdateBugDb called', new Date());
 			checkLibraryVersion();
 		}
 	}
@@ -242,7 +244,7 @@ function getSiteData() {
  * @param  {string} 	name 		message name
  * @param  {string}		tab_url 	tab url
  */
-function handleGhosteryPlatformPages(name) {
+function handleGhosteryPlatformPages(name, callback) {
 	if (name === 'platformPageLoaded') {
 		account._getUserIDFromCookie()
 			.then((userID) => {
@@ -253,6 +255,16 @@ function handleGhosteryPlatformPages(name) {
 			.catch((err) => {
 				log('handleGhosteryPlatformPages error', err);
 			});
+	} else if (name === 'account.logout') {
+		account.logout()
+			.then((response) => {
+				callback(response);
+			})
+			.catch((err) => {
+				log('LOGOUT ERROR', err);
+				callback(err);
+			});
+		return true;
 	}
 	return false;
 }
@@ -552,7 +564,7 @@ function onMessageHandler(request, sender, callback) {
 	const { tab } = sender;
 	const tab_id = tab && tab.id;
 	// Edge does not have url on tab object, as of Build 14342_rc1
-	const tab_url = tab && (tab.url ? tab.url : (sender.url ? sender.url : ''));
+	// const tab_url = tab && (tab.url ? tab.url : (sender.url ? sender.url : ''));
 
 	// On Edge 39.14965.1001.0 callback is lost when multiple
 	// Edge instances running. So instead we shoot message back
@@ -575,7 +587,7 @@ function onMessageHandler(request, sender, callback) {
 	// HANDLE PAGE EVENTS HERE
 	if (origin === 'platform_pages') {
 		// Platform pages
-		return handleGhosteryPlatformPages(name, tab_url);
+		return handleGhosteryPlatformPages(name, callback);
 	} else if (origin === 'purplebox') {
 		// Purplebox script events
 		return handlePurplebox(name, message, tab_id, callback);
@@ -1179,7 +1191,7 @@ offers.on('enabled', () => {
 		if (DEBUG) {
 			offers.action('setConfiguration', {
 				config_location: 'de',
-				triggersBE: 'http://offers-api-stage.clyqz.com:81',
+				triggersBE: 'http://offers-api-stage.clyqz.com:8181',
 				showConsoleLogs: true,
 				offersLogsEnabled: true,
 				offersDevFlag: true,
@@ -1574,8 +1586,8 @@ function initializeGhosteryModules() {
 
 	// Update db right away.
 	autoUpdateBugDb();
-	// Schedule it to run every 30 min.
-	setInterval(autoUpdateBugDb, 1800000);
+	// Schedule it to run every hour.
+	setInterval(autoUpdateBugDb, 3600000);
 
 	// listen for changes to specific conf properties
 	initializeDispatcher();
