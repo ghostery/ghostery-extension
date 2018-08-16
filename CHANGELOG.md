@@ -1,3 +1,9 @@
+### GHOSTERY 8.2.4 (August 16, 2018)
+
++ Fix Firefox account logout issues
++ Fix several Rewards bugs
++ Delay tracker database update to 1 hour
+
 ### GHOSTERY 8.2.3 (August 7, 2018)
 
 + Fix Rewards campaign names that include a '%' issue, which caused a blank panel
