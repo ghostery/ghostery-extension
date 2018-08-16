@@ -195,7 +195,7 @@ class PanelData {
 				unread_offer_ids: rewards.unreadOfferIds,
 
 				account: this._confData.get('account'),
-				supporter: account.hasScopesUnverified(['subscription:supporter'])
+				subscriber: account.hasScopesUnverified(['subscription:supporter'])
 			},
 			summary: this.summaryView,
 			blocking: this._confData.get('is_expert') ? this.blockingView : false,

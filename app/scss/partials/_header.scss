@@ -40,25 +40,23 @@
 		color: $white;
 		padding: 7px 0 7px 15px;
 		height: 36px;
-		.header-badge {
+		.base-badge {
+			width: 29px;
+			height: 20px;
 			display: block;
 			margin-left: 10px;
+		}
+		.subscriber-badge {
+			@extend .base-badge;
 			path {
 				fill: $white;
 			}
-			.disabled-header-badge {
-				path {
-					fill: #75D3F6;
-				} 
-			}
-			.golden-header-badge {
-				path {
-					fill: #D4AF37; 
-				} 
-			}
 		}
-		.disabled-link {
-			pointer-events: none;
+		.non-subscriber-badge {
+			@extend .base-badge;
+			path {
+				fill: #D4AF37; 
+			} 
 		}
 	}
 	.header-logo {
@@ -104,7 +102,6 @@
 		visibility: visible;
 		ul.menu {background: none;}
 		.menu-option-base {
-			draggable: false;
 			position: relative;
 			cursor: default;
 			padding: 10px 0;
@@ -115,7 +112,6 @@
 				transform: translateY(-50%);
 			}
 			.menu-icon {fill: $light-gray; stroke:  $light-gray;}
-			.supporter-icon {fill: #7b7b7b; stroke:  #7b7b7b;}
 			.about-icon {
 				fill: none;
 				path {
@@ -149,10 +145,21 @@
 		.menu-option {
 			@extend .menu-option-base;
 			@extend %pointer;
-			.supporter-icon {fill: $light-gray; stroke:  $light-gray;}
+			.subscriber {
+				width: 23px;
+				height: 16px;
+				path {
+					stroke: $light-gray;
+				}
+			}
 			&:hover {
 				span {color: $ghosty-blue}
-				.menu-icon,.supporter-icon {fill: $ghosty-blue; stroke: $ghosty-blue;}
+				.menu-icon {fill: $ghosty-blue; stroke: $ghosty-blue;}
+				.subscriber {
+					path {
+						stroke: $ghosty-blue;
+					}
+				}
 				.about-icon {
 					path, text {stroke: $ghosty-blue;}
 				}
@@ -162,20 +169,25 @@
 			}
 		}
 
-		.menu-option-gold {
+		.menu-option-non-subscriber {
 			@extend .menu-option-base;
 			@extend %pointer;
-			.supporter-icon {fill: $gold; stroke:  $gold;}
-			&:hover {
-				span {color: $bright_gold}
-				.menu-icon,.supporter-icon {fill: $bright_gold; stroke: $bright_gold;}
-				.about-icon {
-					path, text {stroke: $bright_gold;}
+			.non-subscriber {
+				width: 23px;
+				height: 16px;
+				path {
+					stroke: $gold;
 				}
 			}
-			span {
-				color: $gold;
+			&:hover {
+				.non-subscriber {
+					path {
+						stroke: $bright-gold;
+					}
+				}
+				span {color: $bright_gold}
 			}
+			span {color: $gold;}
 		}
 
 		.account-info {

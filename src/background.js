@@ -664,7 +664,7 @@ function onMessageHandler(request, sender, callback) {
 		panelData.set(message);
 		callback();
 		return false;
-	} else if (name === 'getSetThemeData') {
+	} else if (name === 'account.getTheme') {
 		if (message.currentTheme !== 'default' &&
 			account.hasScopesUnverified(['subscription:supporter'])) {
 			// try to get it locally

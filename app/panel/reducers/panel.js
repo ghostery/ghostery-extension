@@ -25,7 +25,7 @@ import {
 	REMOVE_OFFER,
 	SET_OFFER_READ,
 	TOGGLE_EXPANDED,
-	GET_SET_THEME
+	SET_THEME
 } from '../constants/constants';
 import {
 	LOGIN_SUCCESS,
@@ -76,7 +76,7 @@ export default (state = initialState, action) => {
 			setTheme(document, action.data.currentTheme, action.data.theme);
 			return Object.assign({}, state, action.data, { initialized: true });
 		}
-		case GET_SET_THEME: {
+		case SET_THEME: {
 			setTheme(document, action.data.currentTheme, action.data.theme);
 			return Object.assign({}, state, { currentTheme: action.data.currentTheme, theme: action.data.theme });
 		}

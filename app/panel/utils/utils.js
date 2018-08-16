@@ -172,12 +172,12 @@ export function doXHR(method, url, query) {
 	});
 }
 /**
- * Determine if user is a supporter
+ * Determine if user is a subscriber
  * @memberOf PanelUtils
  * @param  {array} userScopes 	array of scope strings
  * @return {boolean}
  */
-export function isSupporter(user) {
+export function isSubscriber(user) {
 	if (!user || !user.scopes) { return false; }
 	const userScopes = user.scopes;
 

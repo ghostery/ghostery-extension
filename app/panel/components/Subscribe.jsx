@@ -52,10 +52,10 @@ function Subscribe() {
 					<span className="pitch-learn-more">{t('subscribe_pitch_learn_more')}</span>
 				</a>
 				<a href="https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/" target="_blank" rel="noopener noreferrer">
-					<span className="pitch-become-supporter">{t('subscribe_pitch_button_label')}</span>
+					<span className="pitch-become-subscriber">{t('subscribe_pitch_button_label')}</span>
 				</a>
 				<Link to="/login">
-					<span className="pitch-already-supporter">{t('subscribe_pitch_sign_here')}</span>
+					<span className="pitch-already-subscriber">{t('subscribe_pitch_sign_here')}</span>
 				</Link>
 			</div>
 		</div>

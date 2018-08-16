@@ -579,7 +579,7 @@
 	"panel_about_panel_header": {
 		"message": "About Ghostery Browser Extension"
 	},
-	"panel_supporter_panel_header": {
+	"panel_subscriber_panel_header": {
 		"message": "Ghostery Supporter"
 	},
 	"panel_about_version_header": {
@@ -622,7 +622,7 @@
 	"panel_menu_about": {
 		"message": "About"
 	},
-	"panel_menu_ghostery_supporter": {
+	"panel_menu_ghostery_subscriber": {
 		"message": "Ghostery Supporter"
 	},
 	"panel_menu_signin": {
