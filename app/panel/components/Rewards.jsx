@@ -118,8 +118,14 @@ class Rewards extends React.Component {
 			classes: 'purple',
 		});
 		this.props.actions.toggleOffersEnabled(!enable_offers);
-		this.props.actions.sendSignal(enable_offers ? 'rewards_off' : 'rewards_on');
+		const signal = {
+			actionId: enable_offers ? 'rewards_off' : 'rewards_on',
+			origin: 'rewards-hub',
+			type: 'action-signal',
+		};
+		sendMessage('setPanelData', { enable_offers, signal }, undefined, 'rewardsPanel');
 		sendMessage('ping', enable_offers ? 'rewards_off' : 'rewards_on');
+		// TODO catch
 	}
 
 	/**
