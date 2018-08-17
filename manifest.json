@@ -46,11 +46,9 @@
 		{
 			"all_frames": false,
 			"js": [
-				"dist/platform_pages.js"
+				"dist/account_pages.js"
 			],
 			"matches": [
-				"https://signon.ghostery.com/*",
-				"https://signon.ghosterystage.com/*",
 				"https://account.ghostery.com/*",
 				"https://account.ghosterystage.com/*"
 			],
