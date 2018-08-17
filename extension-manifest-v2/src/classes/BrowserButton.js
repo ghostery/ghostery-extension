@@ -102,6 +102,11 @@ class BrowserButton {
 						chrome.browserAction.setTitle({
 							title: chrome.i18n.getMessage('browser_button_tooltip'),
 							tabId
+						}, () => {
+							// chrome 67+ only
+							if (chrome.runtime.lastError) {
+								log('chrome.browserAction.setTitle', chrome.runtime.lastError);
+							}
 						});
 					}
 
@@ -110,12 +115,22 @@ class BrowserButton {
 						// Don't show badgeText when there is a new reward and Ghostery is active
 						// Otherwise set the tracker count to the badgeText
 						const text = (conf.enable_offers && rewards.unreadOfferIds.length && active) ? '' : trackerCount;
-						chrome.browserAction.setBadgeText({ text, tabId });
+						chrome.browserAction.setBadgeText({ text, tabId }, () => {
+							// chrome 67+ only
+							if (chrome.runtime.lastError) {
+								log('chrome.browserAction.setBadgeText', chrome.runtime.lastError);
+							}
+						});
 
 						// Set badge background color
 						chrome.browserAction.setBadgeBackgroundColor({
 							color: (alert ? this.backgrounds.alert : this.backgrounds.default),
 							tabId
+						}, () => {
+							// chrome 67+ only
+							if (chrome.runtime.lastError) {
+								log('chrome.browserAction.setBadgeBackgroundColor', chrome.runtime.lastError);
+							}
 						});
 					}
 				});
