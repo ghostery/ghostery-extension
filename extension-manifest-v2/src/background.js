@@ -238,23 +238,24 @@ function getSiteData() {
  */
 
 /**
- * Handle messages sent from app/js/platform_pages.js content script.
+ * Handle messages sent from app/js/account_pages.js content script.
  * @memberOf Background
  *
  * @param  {string} 	name 		message name
  * @param  {string}		tab_url 	tab url
  */
-function handleGhosteryPlatformPages(name, callback) {
-	if (name === 'platformPageLoaded') {
-		account._getUserIDFromCookie()
-			.then((userID) => {
+function handleAccountPages(name, callback) {
+	if (name === 'accountPageLoaded') {
+		if (conf.account === null) {
+			account._getUserIDFromCookie().then((userID) => {
 				account._setAccountInfo(userID);
 			})
-			.then(account.getUser)
-			.then(account.getUserSettings)
-			.catch((err) => {
-				log('handleGhosteryPlatformPages error', err);
-			});
+				.then(account.getUser)
+				.then(account.getUserSettings)
+				.catch((err) => {
+					log('handleAccountPages error', err);
+				});
+		}
 	} else if (name === 'account.logout') {
 		account.logout()
 			.then((response) => {
@@ -585,9 +586,9 @@ function onMessageHandler(request, sender, callback) {
 	}
 
 	// HANDLE PAGE EVENTS HERE
-	if (origin === 'platform_pages') {
-		// Platform pages
-		return handleGhosteryPlatformPages(name, callback);
+	if (origin === 'account_pages') {
+		// Account pages
+		return handleAccountPages(name, callback);
 	} else if (origin === 'purplebox') {
 		// Purplebox script events
 		return handlePurplebox(name, message, tab_id, callback);
