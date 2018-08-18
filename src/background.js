@@ -73,6 +73,8 @@ const messageCenter = cliqz.modules['message-center'];
 const offers = cliqz.modules['offers-v2'];
 let OFFERS_ENABLE_SIGNAL;
 
+let LOADING = 0;
+
 /**
  * Enable or disable specified module.
  * @memberOf Background
@@ -80,6 +82,7 @@ let OFFERS_ENABLE_SIGNAL;
  * @param {boolean} enabled true - enable, false - disable
  * @return {Promise}
  */
+
 function setCliqzModuleEnabled(module, enabled) {
 	if (enabled) {
 		log('SET CLIQZ MODULE ENABLED', module);
@@ -896,46 +899,62 @@ function initializeDispatcher() {
 		panelData.init();
 	});
 	dispatcher.on('conf.save.enable_human_web', (enableHumanWeb) => {
-		if (!IS_EDGE && !IS_CLIQZ) {
-			setCliqzModuleEnabled(humanweb, enableHumanWeb).then(() => {
-				setupABTest();
-			});
+		if(!LOADING) {
+			if (!IS_EDGE && !IS_CLIQZ) {
+				setCliqzModuleEnabled(humanweb, enableHumanWeb).then(() => {
+					setupABTest();
+				});
+			} else {
+				setCliqzModuleEnabled(humanweb, false);
+			}
 		} else {
-			setCliqzModuleEnabled(humanweb, false);
+			console.log("ADJUSTING LOADING IN HW", LOADING);
+			if(enableHumanWeb && LOADING > 0) {
+				LOADING--;
+			}
+			if(!LOADING) {
+				afterCliqz();
+			}
 		}
 	});
 	dispatcher.on('conf.save.enable_offers', (enableOffers) => {
-		button.update();
-		if (!IS_EDGE && !IS_CLIQZ) {
-			if (!enableOffers) {
-				const actions = cliqz &&
-				cliqz.modules['offers-v2'] &&
-				cliqz.modules['offers-v2'].background &&
-				cliqz.modules['offers-v2'].background.actions;
-				if (actions) {
-					actions.flushSignals();
+		if(!LOADING) {
+			button.update();
+			if (!IS_EDGE && !IS_CLIQZ) {
+				if (!enableOffers) {
+					const actions = cliqz &&
+					cliqz.modules['offers-v2'] &&
+					cliqz.modules['offers-v2'].background &&
+					cliqz.modules['offers-v2'].background.actions;
+					if (actions) {
+						actions.flushSignals();
+					}
+					OFFERS_ENABLE_SIGNAL = undefined;
+					registerWithOffers(offers, enableOffers);
 				}
-				OFFERS_ENABLE_SIGNAL = undefined;
-				registerWithOffers(offers, enableOffers);
+				setCliqzModuleEnabled(offers, enableOffers);
+			} else {
+				setCliqzModuleEnabled(offers, false);
+				registerWithOffers(offers, false);
 			}
-			setCliqzModuleEnabled(offers, enableOffers);
-		} else {
-			setCliqzModuleEnabled(offers, false);
-			registerWithOffers(offers, false);
-		}
+		} 
 	});
 	dispatcher.on('conf.save.enable_anti_tracking', (enableAntitracking) => {
-		if (!IS_CLIQZ) {
-			setCliqzModuleEnabled(antitracking, enableAntitracking);
-		} else {
-			setCliqzModuleEnabled(antitracking, false);
+		if(!LOADING) {
+			if (!IS_CLIQZ) {
+				setCliqzModuleEnabled(antitracking, enableAntitracking);
+			} else {
+				setCliqzModuleEnabled(antitracking, false);
+			}
 		}
 	});
 	dispatcher.on('conf.save.enable_ad_block', (enableAdBlock) => {
-		if (!IS_CLIQZ) {
-			setCliqzModuleEnabled(adblocker, enableAdBlock);
-		} else {
-			setCliqzModuleEnabled(adblocker, false);
+		if(!LOADING) {
+			if (!IS_CLIQZ) {
+				setCliqzModuleEnabled(adblocker, enableAdBlock);
+			} else {
+				setCliqzModuleEnabled(adblocker, false);
+			}
 		}
 	});
 
@@ -1071,6 +1090,7 @@ function isWhitelisted(state) {
  * @memberOf Background
  */
 antitracking.on('enabled', () => {
+	console.log("ATITRACKING ENABLED CALLED");
 	antitracking.isReady().then(() => {
 		// remove Cliqz-side whitelisting steps and replace with ghostery ones.
 		const replacedSteps = ['onBeforeSendHeaders', 'onHeadersReceived'].map(stage =>
@@ -1105,7 +1125,15 @@ antitracking.on('enabled', () => {
 				before: ['checkShouldBlock'],
 			}),
 		]);
-		return Promise.all(replacedSteps);
+		return Promise.all(replacedSteps).then (() => {
+			console.log("ADJUSTING LOADING IN AT", LOADING);
+			if(LOADING > 0) {
+				LOADING--;
+			}
+			if(!LOADING) {
+				afterCliqz();
+			}
+		});
 	});
 });
 
@@ -1115,7 +1143,8 @@ antitracking.on('enabled', () => {
  * @memberOf Background
  */
 adblocker.on('enabled', () => {
-	adblocker.isReady().then(() =>
+	console.log("ADBLOCKER ENABLED CALLED");
+	adblocker.isReady().then(() => {
 		Promise.all([
 			adblocker.action('removePipelineStep', 'checkWhitelist'),
 			adblocker.action('addPipelineStep', {
@@ -1126,8 +1155,17 @@ adblocker.on('enabled', () => {
 			}),
 			adblocker.action('addWhiteListCheck',
 				url => isWhitelisted({ sourceUrl: url }))
-		])
-	);
+		]) 
+	})
+	.then (() => {
+		console.log("ADJUSTING LOADING IN AD", LOADING);
+		if(LOADING > 0) {
+			LOADING--;
+		}
+		if(!LOADING) {
+			afterCliqz();
+		}
+	});
 });
 
 /**
@@ -1135,8 +1173,8 @@ adblocker.on('enabled', () => {
  * @memberOf Background
  */
 offers.on('enabled', () => {
+	console.log("OFFERS ENABLED CALLED");
 	offers.isReady().then(() => {
-		log('IN OFFERS ON ENABLED', offers, messageCenter);
 		if (OFFERS_ENABLE_SIGNAL) {
 			rewards.sendSignal(OFFERS_ENABLE_SIGNAL);
 
@@ -1164,6 +1202,15 @@ offers.on('enabled', () => {
 			.then(() => {
 				setCliqzModuleEnabled(messageCenter, true);
 			});
+	})
+	.then (() => {
+		console.log("ADJUSTING LOADING IN OF", LOADING);
+		if(LOADING > 0) {
+			LOADING--;
+		}
+		if(!LOADING) {
+			afterCliqz();
+		}
 	});
 });
 
@@ -1175,6 +1222,7 @@ offers.on('enabled', () => {
  * @memberOf Background
  */
 messageCenter.on('enabled', () => {
+	console.log("MESSAGE CENTER ENABLED CALLED");
 	messageCenter.isReady().then(() => {
 		log('IN MESSAGE CENTER ON ENABLED', offers, messageCenter);
 		// const messageCenter = cliqz.modules['message-center'];
@@ -1426,6 +1474,13 @@ function initializeVersioning() {
 	}
 }
 
+function iniitializeModule(module, onEnableHandler) {
+	return new Promise((resolve, reject) => {
+		cliqz.enableModule(module.name);
+		module.on('enable', onEnableHandler)
+
+	});
+}
 /**
  * Ghostery Module Initializer.
  * Init all Ghostery and Cliqz modules.
@@ -1479,11 +1534,24 @@ function initializeGhosteryModules() {
 		metrics.ping('install_complete');
 	}
 	// start cliqz app
-	const cliqzStartup = cliqz.start().then(() => {
+	cliqz.start().then(() => {
+		if(!humanweb.isDisabled) {
+			LOADING++;
+		}
+		if(!adblocker.isDisabled) {
+			LOADING++;
+		}
+		if(!antitracking.isDisabled) {
+			LOADING++;
+		}
+		if(!offers.isDisabled) {
+			LOADING++;
+		}
+
 		// run wrapper tasks which set up base integrations between ghostery and these modules
-		Promise.all([
-			initialiseWebRequestPipeline(),
-		]).then(() => {
+		initialiseWebRequestPipeline()
+		.then(() => {
+			console.log("IN THEN INIT WEB REQUEST PIPELINE", LOADING);
 			if (!(IS_EDGE || IS_CLIQZ)) {
 				if (globals.JUST_UPGRADED_FROM_7) {
 					// These users had human web already, so we respect their choice
@@ -1508,25 +1576,31 @@ function initializeGhosteryModules() {
 					conf.enable_human_web = !humanweb.isDisabled;
 					conf.enable_offers = !offers.isDisabled;
 				}
+
+				if (IS_EDGE) {
+					LOADING = 0;
+					setCliqzModuleEnabled(hpn, false);
+					setCliqzModuleEnabled(humanweb, false);
+					setCliqzModuleEnabled(offers, false);
+				}
+
+				if (IS_CLIQZ) {
+					LOADING = 0;
+					setCliqzModuleEnabled(hpn, false);
+					setCliqzModuleEnabled(humanweb, false);
+					setCliqzModuleEnabled(antitracking, false);
+					setCliqzModuleEnabled(adblocker, false);
+					setCliqzModuleEnabled(offers, false);
+				}
+
+				if(!LOADING) {
+					afterCliqz();
+				}
 			}
 		});
 	}).catch((e) => {
-		log('cliqzStartup error', e);
+		console.log('cliqzStartup error', e);
 	});
-
-	if (IS_EDGE) {
-		setCliqzModuleEnabled(hpn, false);
-		setCliqzModuleEnabled(humanweb, false);
-		setCliqzModuleEnabled(offers, false);
-	}
-
-	if (IS_CLIQZ) {
-		setCliqzModuleEnabled(hpn, false);
-		setCliqzModuleEnabled(humanweb, false);
-		setCliqzModuleEnabled(antitracking, false);
-		setCliqzModuleEnabled(adblocker, false);
-		setCliqzModuleEnabled(offers, false);
-	}
 
 	// Set these tasks to run every hour
 	function scheduledTasks() {
@@ -1571,7 +1645,6 @@ function initializeGhosteryModules() {
 		c2pDb.init(globals.JUST_UPGRADED),
 		compDb.init(globals.JUST_UPGRADED),
 		surrogatedb.init(globals.JUST_UPGRADED),
-		cliqzStartup,
 	]).then(() => {
 		// run scheduledTasks on init
 		scheduledTasks();
@@ -1591,15 +1664,6 @@ function init() {
 		initializePopup();
 		initializeEventListeners();
 		initializeVersioning();
-		account.migrate()
-			.then(() => {
-				if (conf.account !== null) {
-					return account.getUser()
-						.then(account.getUserSettings);
-				}
-			})
-			.catch(err => log(err));
-
 		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => {
 			// persist Conf properties to storage only after init has completed
 			common.prefsSet(globals.initProps);
@@ -1616,3 +1680,15 @@ function init() {
 
 // Initialize the application.
 init();
+
+function afterCliqz() {
+	console.log("AFTER CLIQZ IS CALLED");
+	account.migrate()
+		.then(() => {
+			if (conf.account !== null) {
+				return account.getUser()
+					.then(account.getUserSettings);
+			}
+		})
+		.catch(err => log(err));
+}
