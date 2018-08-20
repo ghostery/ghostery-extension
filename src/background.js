@@ -911,9 +911,9 @@ function initializeDispatcher() {
 			console.log("ADJUSTING LOADING IN HW", LOADING);
 			if(enableHumanWeb && LOADING > 0) {
 				LOADING--;
-			}
-			if(!LOADING) {
-				afterCliqz();
+				if(!LOADING) {
+					afterCliqz();
+				}
 			}
 		}
 	});
@@ -1129,9 +1129,9 @@ antitracking.on('enabled', () => {
 			console.log("ADJUSTING LOADING IN AT", LOADING);
 			if(LOADING > 0) {
 				LOADING--;
-			}
-			if(!LOADING) {
-				afterCliqz();
+				if(!LOADING) {
+					afterCliqz();
+				}
 			}
 		});
 	});
@@ -1161,9 +1161,9 @@ adblocker.on('enabled', () => {
 		console.log("ADJUSTING LOADING IN AD", LOADING);
 		if(LOADING > 0) {
 			LOADING--;
-		}
-		if(!LOADING) {
-			afterCliqz();
+			if(!LOADING) {
+				afterCliqz();
+			}
 		}
 	});
 });
@@ -1207,9 +1207,9 @@ offers.on('enabled', () => {
 		console.log("ADJUSTING LOADING IN OF", LOADING);
 		if(LOADING > 0) {
 			LOADING--;
-		}
-		if(!LOADING) {
-			afterCliqz();
+			if(!LOADING) {
+				afterCliqz();
+			}
 		}
 	});
 });

@@ -96,6 +96,10 @@
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/@cliqz-oss/dexie/-/dexie-2.0.3.tgz#b27ff74a9740ab6b6878aa9df3a0deef81638e16"
 
+"@cliqz-oss/dexie@2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@cliqz-oss/dexie/-/dexie-2.0.4.tgz#0e710504e2b9198baa9b046abd3a82731b94d56e"
+
 "@cliqz-oss/pouchdb@6.3.4-security-error-fix-2":
   version "6.3.4-security-error-fix-2"
   resolved "https://registry.yarnpkg.com/@cliqz-oss/pouchdb/-/pouchdb-6.3.4-security-error-fix-2.tgz#d55c1ff0a4a70f23bcd4522f52f6a3ebd2378dcf"
@@ -448,6 +452,12 @@ animated@^0.2.0:
 "anonymous-credentials@https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.0/anonymous-credentials-0.1.0.tgz":
   version "0.1.0"
   resolved "https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.0/anonymous-credentials-0.1.0.tgz#61358f5e1b8f6b145bf51739156e25be03ab74b2"
+  dependencies:
+    bindings "1.3.0"
+
+"anonymous-credentials@https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.1/anonymous-credentials-0.1.1.tgz":
+  version "0.1.1"
+  resolved "https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.1/anonymous-credentials-0.1.1.tgz#62c7ff176599b08d56e7f93ec2d753cab2cc9737"
   dependencies:
     bindings "1.3.0"
 
@@ -1768,6 +1778,64 @@ brorand@^1.0.1:
     jsep "0.3.0"
     mathjs "4.0.0"
     moment "2.19.3"
+    node-fetch "1.7.1"
+    node-forge "git+https://git@github.com/digitalbazaar/forge.git#af3f590af9d3c809e1cb44b2bb5398a3a6b944c2"
+    node-persist "2.0.11"
+    pako "1.0.6"
+    prop-types "15.5.10"
+    qrcodejs "1.0.0"
+    react "16.3.2"
+    react-dom "16.3.2"
+    react-modal "3.4.4"
+    react-native-web "0.1.11"
+    react-toggle-display "2.2.0"
+    react-tooltip "3.3.0"
+    react-touch-carousel "0.8.2"
+    readline "1.3.0"
+    rxjs "5.5.6"
+    sanitize-filename "1.6.1"
+    simple-statistics "5.2.1"
+    spanan "2.0.0"
+    tablesorter "2.29.2"
+    text-encoding "0.6.4"
+    tldjs "2.3.1"
+    ua-parser-js "0.7.12"
+    untildify "3.0.2"
+    url-pattern "1.0.3"
+    useragent.js "0.5.6"
+    xhr2 "0.1.4"
+    ytdl-core "0.20.2"
+    yuidoc-bootstrap-theme "1.0.6"
+
+"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.29/7.29.1.1b347.b0f4a3b.tgz":
+  version "7.29.1"
+  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.29/7.29.1.1b347.b0f4a3b.tgz#7a181c8d12005ca0e1192a95ef43129035a5ae11"
+  dependencies:
+    "@cliqz-oss/dexie" "2.0.4"
+    "@cliqz-oss/pouchdb" "6.3.4-security-error-fix-2"
+    "@cliqz-oss/systemjs-builder" "0.16.13"
+    "@cliqz/adblocker" "0.1.11"
+    BigInt "5.5.3"
+    ajv "6.5.0"
+    anonymous-credentials "https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.1/anonymous-credentials-0.1.1.tgz"
+    babel-polyfill "6.26.0"
+    classnames "2.2.5"
+    cliqz-history "https://github.com/cliqz-oss/cliqz-history/releases/download/1.0.7/cliqz-history-1.0.7.tgz"
+    cron "1.2.1"
+    cron-parser "2.4.0"
+    deep-equal "1.0.1"
+    ember-inflector "2.0.1"
+    es6-micro-loader cliqz-oss/es6-micro-loader#babel6
+    fast-url-parser "=1.1.2"
+    fs-extra "3.0.1"
+    global "4.3.2"
+    hammerjs "2.0.8"
+    handlebars "4.0.11"
+    jquery "3.0.0"
+    js-md5 "0.7.3"
+    jsep "0.3.0"
+    mathjs "4.0.0"
+    moment "2.22.2"
     node-fetch "1.7.1"
     node-forge "git+https://git@github.com/digitalbazaar/forge.git#af3f590af9d3c809e1cb44b2bb5398a3a6b944c2"
     node-persist "2.0.11"
@@ -6595,7 +6663,7 @@ moment@2.19.3:
   version "2.19.3"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.19.3.tgz#bdb99d270d6d7fda78cc0fbace855e27fe7da69f"
 
-"moment@>= 2.9.0", moment@^2.19.1:
+moment@2.22.2, "moment@>= 2.9.0", moment@^2.19.1:
   version "2.22.2"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
 
