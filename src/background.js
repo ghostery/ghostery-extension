@@ -467,14 +467,13 @@ function handleRewards(name, message, callback) {
 			break;
 		case 'setPanelData':
 			if (message.hasOwnProperty('enable_offers')) {
-				if (message.enable_offers && !offers.isEnabled) {
+				if (!offers.isEnabled && message.enable_offers === true) {
 					OFFERS_ENABLE_SIGNAL = message.signal;
-				}
-				if (!message.enable_offers) {
+				} else if (message.enable_offers === false) {
 					rewards.sendSignal(message.signal);
 				}
+				panelData.set({ enable_offers: message.enable_offers });
 			}
-			panelData.set({ enable_offers: message.enable_offers });
 			return callback();
 		default:
 			break;
