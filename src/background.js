@@ -1654,6 +1654,21 @@ function initializeGhosteryModules() {
 }
 
 /**
+ * Finalize loading after all cliqz modules are fully loaded
+ */
+function afterCliqz() {
+	console.log("AFTER CLIQZ IS CALLED");
+	account.migrate()
+		.then(() => {
+			if (conf.account !== null) {
+				return account.getUser()
+					.then(account.getUserSettings);
+			}
+		})
+		.catch(err => log(err));
+}
+
+/**
  * Application Initializer
  * Called whenever the browser starts or the extension is
  * installed/updated.
@@ -1681,14 +1696,26 @@ function init() {
 // Initialize the application.
 init();
 
-function afterCliqz() {
-	console.log("AFTER CLIQZ IS CALLED");
-	account.migrate()
-		.then(() => {
-			if (conf.account !== null) {
-				return account.getUser()
-					.then(account.getUserSettings);
-			}
-		})
-		.catch(err => log(err));
-}
+
+// function nextTick(fn) {
+// for (var _len2 = arguments.length, args = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+//   args[_key2 - 1] = arguments[_key2];
+// }
+
+// return Promise.resolve().then(() => fn(...args));
+// }
+
+// function foo() {
+// 	return new Promise(resolve => {
+// //		setTimeout(() => {
+// 			nextTick(() => {
+// 				console.log("SECOND");
+// 			});
+// 			resolve();
+// //		}, 0);
+// 	});
+// }
+
+// foo().then(() => {
+// 	console.log("FIRST");
+// });
