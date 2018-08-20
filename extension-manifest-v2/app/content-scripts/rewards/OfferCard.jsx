@@ -142,8 +142,14 @@ class OfferCard extends Component {
 	}
 
 	disableRewards() {
+		const signal = {
+			actionId: 'rewards_off',
+			origin: 'rewards-hotdog-card',
+			type: 'action-signal',
+		};
+		sendMessage('setPanelData', { enable_offers: false, signal });
+		// TODO catch
 		sendMessage('ping', 'rewards_off');
-		this.props.actions.sendSignal('rewards_off', null, false);
 	}
 
 	disableRewardsNotification() {
