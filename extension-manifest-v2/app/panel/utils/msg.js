@@ -74,7 +74,7 @@ export function sendMessageInPromise(name, message) {
  * @return {Object}		response
  * @todo  runtime.sendMessage does not return any value.
  */
-export function sendMessage(name, message, callback = function () {}) {
+export function sendMessage(name, message, callback = function () {}, origin = null) {
 	log('Panel sendMessage: sending to background', name);
 	// @EDGE chrome.runtime.sendMessage(message) works, but
 	// const callback; chrome.runtime.sendMessage(message, callback) fails to execute and chrome.runtime.lastError is undefined.
@@ -83,6 +83,7 @@ export function sendMessage(name, message, callback = function () {}) {
 	return chrome.runtime.sendMessage({
 		name,
 		message,
+		origin,
 	}, callback);
 }
 
