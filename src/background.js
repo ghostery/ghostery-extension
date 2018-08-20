@@ -443,47 +443,41 @@ function handleBlockedRedirect(name, message, tab_id, callback) {
  * @param  {number} 	tab_id 		tab id
  * @param  {function} 	callback 	function to call (at most once) when you have a response
  */
-function handleRewards(name, message) {
-	if (!offers.isEnabled) {
-		switch (name) {
-			case 'rewardSignal':
-				if (message.actionId === 'rewards_on') {
-					OFFERS_ENABLE_SIGNAL = message;
-					conf.enable_offers = true;
+function handleRewards(name, message, callback) {
+	switch (name) {
+		case 'rewardSignal':
+			rewards.sendSignal(message);
+			break;
+		case 'rewardSeen':
+			rewards.markRewardRead(message.offerId);
+			button.update();
+			break;
+		case 'deleteReward':
+			rewards.markRewardRead(message.offerId);
+			rewards.deleteReward(message.offerId);
+			button.update();
+			break;
+		case 'rewardsPromptAccepted':
+			conf.rewards_accepted = true;
+			break;
+		case 'ping':
+			metrics.ping(message);
+			break;
+		case 'removeDisconnectListener':
+			rewards.panelPort.onDisconnect.removeListener(rewards.panelHubClosedListener);
+			break;
+		case 'setPanelData':
+			if (message.hasOwnProperty('enable_offers')) {
+				if (!offers.isEnabled && message.enable_offers === true) {
+					OFFERS_ENABLE_SIGNAL = message.signal;
+				} else if (message.enable_offers === false) {
+					rewards.sendSignal(message.signal);
 				}
-				break;
-			default:
-				break;
-		}
-	} else {
-		switch (name) {
-			case 'rewardSignal':
-				rewards.sendSignal(message);
-				if (message.actionId === 'rewards_off') {
-					conf.enable_offers = false;
-				}
-				break;
-			case 'rewardSeen':
-				rewards.markRewardRead(message.offerId);
-				button.update();
-				break;
-			case 'deleteReward':
-				rewards.markRewardRead(message.offerId);
-				rewards.deleteReward(message.offerId);
-				button.update();
-				break;
-			case 'rewardsPromptAccepted':
-				conf.rewards_accepted = true;
-				break;
-			case 'ping':
-				metrics.ping(message);
-				break;
-			case 'removeDisconnectListener':
-				rewards.panelPort.onDisconnect.removeListener(rewards.panelHubClosedListener);
-				break;
-			default:
-				break;
-		}
+				panelData.set({ enable_offers: message.enable_offers });
+			}
+			return callback();
+		default:
+			break;
 	}
 }
 
@@ -605,7 +599,7 @@ function onMessageHandler(request, sender, callback) {
 	} else if (origin === 'blocked_redirect') {
 		return handleBlockedRedirect(name, message, tab_id, callback);
 	} else if (origin === 'rewards' || origin === 'rewardsPanel') {
-		return handleRewards(name, message, tab_id, callback);
+		return handleRewards(name, message, callback);
 	}
 
 	// HANDLE UNIVERSAL EVENTS HERE (NO ORIGIN LISTED ABOVE)
