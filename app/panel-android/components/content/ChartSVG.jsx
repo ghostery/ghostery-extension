@@ -15,12 +15,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Path from './Path';
 
+const INTERVAL = 500; // Define the maximum waiting time to render the chart
+
 export default class ChartSVG extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			nItem: 1,
 		};
+
+		this.timer = null;
+	}
+
+	componentDidMount() {
+		this.timer = setInterval(() => this.checkAndRenderChart(), INTERVAL);
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.timer);
 	}
 
 	increaseN = () => {
@@ -28,6 +40,17 @@ export default class ChartSVG extends React.Component {
 		if (currentN < this.props.paths.length) {
 			this.setState({
 				nItem: currentN += 1,
+			});
+		}
+	}
+
+	// Force rendering the whole chart if the animationEnd event doesn't get fired somehow
+	checkAndRenderChart = () => {
+		clearInterval(this.timer); // Run this function only once
+
+		if (this.state.nItem < this.props.paths.length) {
+			this.setState({
+				nItem: this.props.paths.length,
 			});
 		}
 	}
