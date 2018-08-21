@@ -1658,14 +1658,20 @@ function initializeGhosteryModules() {
  */
 function afterCliqz() {
 	console.log("AFTER CLIQZ IS CALLED");
-	account.migrate()
+	if (conf.account !== null) {
+		account.getUser()
+		.then(account.getUserSettings)
 		.then(() => {
-			if (conf.account !== null) {
-				return account.getUser()
-					.then(account.getUserSettings);
+			if (IS_CLIQZ) {
+				importCliqzSettings(cliqz, conf);
 			}
 		})
 		.catch(err => log(err));
+	} else {
+		if (IS_CLIQZ) {
+			importCliqzSettings(cliqz, conf);
+		}
+	}
 }
 
 /**
@@ -1679,14 +1685,16 @@ function init() {
 		initializePopup();
 		initializeEventListeners();
 		initializeVersioning();
-		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => {
-			// persist Conf properties to storage only after init has completed
-			common.prefsSet(globals.initProps);
-			globals.INIT_COMPLETE = true;
-			if (IS_CLIQZ) {
-				importCliqzSettings(cliqz, conf);
-			}
-		}));
+		account.migrate().then(() => {
+			metrics.init(globals.JUST_INSTALLED)
+			.then(() => initializeGhosteryModules()
+				.then(() => {
+					// persist Conf properties to storage only after init has completed
+					common.prefsSet(globals.initProps);
+					globals.INIT_COMPLETE = true;
+					delete globals.initProps;
+			}));
+		});
 	}).catch((err) => {
 		log('Error in init()', err);
 		return Promise.reject(err);
