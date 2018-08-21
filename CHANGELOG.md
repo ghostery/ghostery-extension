@@ -1,11 +1,10 @@
-### GHOSTERY 8.2.4 (August 20, 2018)
+### GHOSTERY 8.2.4 (August 22, 2018)
 
 + Fixes Firefox account logout issues
 + Fixes several UI-related Rewards bugs
 + Fixes broken settings export feature from panel
 + Delay tracker database update to 1 hour
 + Improved AUTH error messaging
-+ New UI and experieince for Firefox Android
 
 ### GHOSTERY 8.2.3 (August 7, 2018)
 
