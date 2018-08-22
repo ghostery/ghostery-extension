@@ -70,10 +70,7 @@ class TabInfo {
 		};
 
 		this._tabInfo[tab_id] = info;
-
-		if (tab_url) {
-			this._updateUrl(tab_id, tab_url);
-		}
+		this._updateUrl(tab_id, tab_url);
 	}
 
 	/**
