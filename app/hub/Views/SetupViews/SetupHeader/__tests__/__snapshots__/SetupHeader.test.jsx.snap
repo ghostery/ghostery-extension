@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/hub/Views/SetupViews/SetupHeader component Snapshot tests with react-test-renderer setup header is rendered correctly 1`] = `
+<div
+  className="row align-center"
+>
+  <div
+    className="columns small-12 large-10"
+  >
+    <div
+      className="SetupHeader flex-container align-center-middle"
+    >
+      <img
+        src="test-title-image"
+      />
+      <div
+        className="SetupHeader__title"
+      >
+        <h3
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "Test Title",
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

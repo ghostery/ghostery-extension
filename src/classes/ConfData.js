@@ -129,6 +129,7 @@ class ConfData {
 			_initProperty('show_tracker_urls', true);
 			_initProperty('toggle_individual_trackers', true);
 			_initProperty('setup_step', 0);
+			_initProperty('setup_show_warning_override', true);
 			_initProperty('setup_path', 0);
 			_initProperty('setup_block', 1);
 			_initProperty('cliqz_import_state', 0);
