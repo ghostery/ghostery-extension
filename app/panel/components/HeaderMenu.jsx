@@ -39,6 +39,7 @@ class HeaderMenu extends React.Component {
 		this.clickSignedInAs = this.clickSignedInAs.bind(this);
 		this.clickSignIn = this.clickSignIn.bind(this);
 		this.clickSignOut = this.clickSignOut.bind(this);
+		this.clickSubscriber = this.clickSubscriber.bind(this);
 	}
 	/**
 	 * Handle clicks outside of the drop-down menu and trigger action.
@@ -139,6 +140,12 @@ class HeaderMenu extends React.Component {
 		this.props.toggleDropdown();
 		this.props.actions.logout();
 	}
+	clickSubscriber(evt) {
+		this.props.toggleDropdown();
+		if(!this.props.disableClickIf(evt, 'subscription')) {
+			this.props.history.push((!this.props.loggedIn || !this.props.subscriber) ? '/subscribe' : '/subscription/info');
+		}
+	}
 	/**
 	 * Render drop-down menu.
 	 * @return {ReactComponent}   ReactComponent instance
@@ -211,11 +218,18 @@ class HeaderMenu extends React.Component {
 								<span>{ t('panel_menu_about') }</span>
 							</Link>
 						</li>
-						<li className={subscriberParams.optionClass} onClick={this.props.toggleDropdown}>
+						<li className={subscriberParams.optionClass} onClick={this.clickSubscriber}>
+							<div>
+								<ReactSVG className={subscriberParams.iconClass} path="/app/images/panel/subscriber-menu-item.svg" />
+								<span>{ t('panel_menu_ghostery_subscriber') }</span>
+							</div>
+
+						{/*}
 							<Link to={subscriberParams.href} onClick={evt => this.props.disableClickIf(evt, 'subscription')}>
 								<ReactSVG className={subscriberParams.iconClass} path="/app/images/panel/subscriber-menu-item.svg" />
 								<span>{ t('panel_menu_ghostery_subscriber') }</span>
 							</Link>
+						*/}
 						</li>
 					</ul>
 					<div className="row account-info">

@@ -54,6 +54,10 @@ const Ghostery = () => (
 	</Panel>
 );
 
+// window.addEventListener('contextmenu', function (e) { 
+//     e.preventDefault();
+// }, false);
+
 ReactDOM.render(
 	(
 		<Provider store={store}>

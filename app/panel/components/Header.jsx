@@ -125,7 +125,9 @@ class Header extends React.Component {
 		const { pathname } = this.props.location;
 		if (pathname.includes(pathToken)) {
 			evt.preventDefault();
+			return true;
 		}
+		return false;
 	}
 
 	/**

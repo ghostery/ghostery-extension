@@ -716,11 +716,11 @@ function onMessageHandler(request, sender, callback) {
 			button.update();
 			if (conf.enable_ad_block) {
 				// update adblock count. callback() handled below based on anti-tracking status
-				modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tabId);
+				modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tabId) || {};
 			}
 			if (conf.enable_anti_tracking) {
 				cliqz.modules.antitracking.background.actions.aggregatedBlockingStats(tabId).then((data) => {
-					modules.antitracking = data;
+					modules.antitracking = data || {};
 					callback(modules);
 				}).catch(() => {
 					callback(modules);
