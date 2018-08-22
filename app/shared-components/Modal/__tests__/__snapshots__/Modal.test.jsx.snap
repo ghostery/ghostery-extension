@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/shared-components/Modal component Snapshot tests with react-test-renderer modal is rendered correctly when not shown 1`] = `
+<div
+  className="Modal"
+/>
+`;
+
+exports[`app/shared-components/Modal component Snapshot tests with react-test-renderer modal is rendered correctly when shown 1`] = `
+<div
+  className="Modal"
+>
+  <div>
+    <div
+      className="Modal__background"
+      onClick={[Function]}
+    />
+    <div
+      className="Modal__container flex-container align-center-middle"
+    >
+      <div>
+        Example Child
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/shared-components/Modal component Snapshot tests with react-test-renderer modal toggle is not required 1`] = `
+<div
+  className="Modal"
+/>
+`;

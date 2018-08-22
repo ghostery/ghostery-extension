@@ -1,0 +1,389 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/shared-components/SteppedNavigation More Snapshot tests with react-test-renderer, but for edge cases edge case where activeIndex beyond totalSteps 1`] = `
+<div
+  className="row align-center"
+>
+  <div
+    className="columns small-12"
+  >
+    <div
+      className="SteppedNavigation flex-container"
+    >
+      <div
+        className="flex-child-grow flex-container flex-dir-row-reverse"
+      >
+        <div
+          className="SteppedNavigation__buttonContainer flex-container align-center-middle"
+        >
+          <a
+            aria-current={null}
+            className="button hollow secondary"
+            href="/test/1"
+            onClick={[Function]}
+            style={undefined}
+          >
+            Beginning
+          </a>
+        </div>
+      </div>
+      <div
+        className="SteppedNavigation__circles flex-container align-center-middle"
+      >
+        <a
+          aria-current={null}
+          className={undefined}
+          href="/1"
+          onClick={[Function]}
+          style={undefined}
+        />
+        <a
+          aria-current={null}
+          className={undefined}
+          href="/2"
+          onClick={[Function]}
+          style={undefined}
+        />
+        <a
+          aria-current={null}
+          className={undefined}
+          href="/3"
+          onClick={[Function]}
+          style={undefined}
+        />
+      </div>
+      <div
+        className="flex-child-grow"
+      >
+        <div
+          className="SteppedNavigation__buttonContainer flex-container align-center-middle"
+        >
+          <a
+            aria-current="page"
+            className="button success active"
+            href="/"
+            onClick={[Function]}
+            style={Object {}}
+          >
+            Exit
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/shared-components/SteppedNavigation More Snapshot tests with react-test-renderer, but for edge cases edge case where hrefDone is set but textDone is not 1`] = `
+<div
+  className="row align-center"
+>
+  <div
+    className="columns small-12"
+  >
+    <a
+      aria-current="page"
+      className="SteppedNavigation__exit flex-container align-middle active"
+      href="/"
+      onClick={[Function]}
+      style={Object {}}
+    >
+      <span
+        className="SteppedNavigation__exitIcon"
+      />
+    </a>
+    <div
+      className="SteppedNavigation flex-container"
+    >
+      <div
+        className="flex-child-grow flex-container flex-dir-row-reverse"
+      >
+        <div
+          className="SteppedNavigation__buttonContainer"
+        />
+      </div>
+      <div
+        className="SteppedNavigation__circles flex-container align-center-middle"
+      >
+        <a
+          className="active"
+        />
+        <a
+          aria-current={null}
+          className={undefined}
+          href="/2"
+          onClick={[Function]}
+          style={undefined}
+        />
+        <a
+          aria-current={null}
+          className={undefined}
+          href="/3"
+          onClick={[Function]}
+          style={undefined}
+        />
+      </div>
+      <div
+        className="flex-child-grow"
+      >
+        <div
+          className="SteppedNavigation__buttonContainer flex-container align-center-middle"
+        >
+          <a
+            aria-current={null}
+            className="button success"
+            href="/step/2"
+            onClick={[Function]}
+            style={undefined}
+          >
+            Next
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/shared-components/SteppedNavigation Snapshot tests with react-test-renderer stepped navigation is rendered correctly on first step 1`] = `
+<div
+  className="row align-center"
+>
+  <div
+    className="columns small-12"
+  >
+    <a
+      aria-current="page"
+      className="SteppedNavigation__exit flex-container align-middle active"
+      href="/"
+      onClick={[Function]}
+      style={Object {}}
+    >
+      <span
+        className="SteppedNavigation__exitText"
+      >
+        Exit
+      </span>
+      <span
+        className="SteppedNavigation__exitIcon"
+      />
+    </a>
+    <div
+      className="SteppedNavigation flex-container"
+    >
+      <div
+        className="flex-child-grow flex-container flex-dir-row-reverse"
+      >
+        <div
+          className="SteppedNavigation__buttonContainer"
+        />
+      </div>
+      <div
+        className="SteppedNavigation__circles flex-container align-center-middle"
+      >
+        <a
+          className="active"
+        />
+        <a
+          aria-current={null}
+          className={undefined}
+          href="/2"
+          onClick={[Function]}
+          style={undefined}
+        />
+        <a
+          aria-current={null}
+          className={undefined}
+          href="/3"
+          onClick={[Function]}
+          style={undefined}
+        />
+        <a
+          aria-current={null}
+          className={undefined}
+          href="/4"
+          onClick={[Function]}
+          style={undefined}
+        />
+        <a
+          aria-current={null}
+          className={undefined}
+          href="/5"
+          onClick={[Function]}
+          style={undefined}
+        />
+        <a
+          aria-current={null}
+          className={undefined}
+          href="/6"
+          onClick={[Function]}
+          style={undefined}
+        />
+      </div>
+      <div
+        className="flex-child-grow"
+      >
+        <div
+          className="SteppedNavigation__buttonContainer flex-container align-center-middle"
+        >
+          <a
+            aria-current={null}
+            className="button success"
+            href="/test/2"
+            onClick={[Function]}
+            style={undefined}
+          >
+            Next
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/shared-components/SteppedNavigation Snapshot tests with react-test-renderer stepped navigation is rendered correctly on last step 1`] = `
+<div
+  className="row align-center"
+>
+  <div
+    className="columns small-12"
+  >
+    <div
+      className="SteppedNavigation flex-container"
+    >
+      <div
+        className="flex-child-grow flex-container flex-dir-row-reverse"
+      >
+        <div
+          className="SteppedNavigation__buttonContainer flex-container align-center-middle"
+        >
+          <a
+            aria-current={null}
+            className="button hollow secondary"
+            href="/test/2"
+            onClick={[Function]}
+            style={undefined}
+          >
+            Back
+          </a>
+        </div>
+      </div>
+      <div
+        className="SteppedNavigation__circles flex-container align-center-middle"
+      >
+        <a
+          aria-current={null}
+          className={undefined}
+          href="/1"
+          onClick={[Function]}
+          style={undefined}
+        />
+        <a
+          aria-current={null}
+          className={undefined}
+          href="/2"
+          onClick={[Function]}
+          style={undefined}
+        />
+        <a
+          className="active"
+        />
+      </div>
+      <div
+        className="flex-child-grow"
+      >
+        <div
+          className="SteppedNavigation__buttonContainer"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/shared-components/SteppedNavigation Snapshot tests with react-test-renderer stepped navigation is rendered correctly on second step 1`] = `
+<div
+  className="row align-center"
+>
+  <div
+    className="columns small-12"
+  >
+    <a
+      aria-current={null}
+      className="SteppedNavigation__exit flex-container align-middle"
+      href="/more-examples"
+      onClick={[Function]}
+      style={undefined}
+    >
+      <span
+        className="SteppedNavigation__exitText"
+      >
+        Leave
+      </span>
+      <span
+        className="SteppedNavigation__exitIcon"
+      />
+    </a>
+    <div
+      className="SteppedNavigation flex-container"
+    >
+      <div
+        className="flex-child-grow flex-container flex-dir-row-reverse"
+      >
+        <div
+          className="SteppedNavigation__buttonContainer flex-container align-center-middle"
+        >
+          <a
+            aria-current={null}
+            className="button hollow secondary"
+            href="/test/1"
+            onClick={[Function]}
+            style={undefined}
+          >
+            Previous
+          </a>
+        </div>
+      </div>
+      <div
+        className="SteppedNavigation__circles flex-container align-center-middle"
+      >
+        <a
+          aria-current={null}
+          className={undefined}
+          href="/1"
+          onClick={[Function]}
+          style={undefined}
+        />
+        <a
+          className="active"
+        />
+        <a
+          aria-current={null}
+          className={undefined}
+          href="/3"
+          onClick={[Function]}
+          style={undefined}
+        />
+      </div>
+      <div
+        className="flex-child-grow"
+      >
+        <div
+          className="SteppedNavigation__buttonContainer flex-container align-center-middle"
+        >
+          <a
+            aria-current={null}
+            className="button success"
+            href="/test/3"
+            onClick={[Function]}
+            style={undefined}
+          >
+            Foreward
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

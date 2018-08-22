@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/shared-components/ToggleSwitch component Snapshot tests with react-test-renderer toggle switch is rendered correctly when checked 1`] = `
+<div
+  className="ToggleSwitch ToggleSwitch--active"
+  onClick={[Function]}
+>
+  <div
+    className="ToggleSwitch__bar"
+  />
+  <span
+    className="ToggleSwitch__circle"
+  />
+</div>
+`;
+
+exports[`app/shared-components/ToggleSwitch component Snapshot tests with react-test-renderer toggle switch is rendered correctly when not checked 1`] = `
+<div
+  className="ToggleSwitch"
+  onClick={[Function]}
+>
+  <div
+    className="ToggleSwitch__bar"
+  />
+  <span
+    className="ToggleSwitch__circle"
+  />
+</div>
+`;
