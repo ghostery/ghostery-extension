@@ -54,7 +54,7 @@ const Ghostery = () => (
 	</Panel>
 );
 
-// window.addEventListener('contextmenu', function (e) { 
+// window.addEventListener('contextmenu', function (e) {
 //     e.preventDefault();
 // }, false);
 

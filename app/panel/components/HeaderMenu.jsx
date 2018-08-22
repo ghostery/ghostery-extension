@@ -16,7 +16,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactSVG from 'react-svg';
-import { Link } from 'react-router-dom';
 
 import ClickOutside from './BuildingBlocks/ClickOutside';
 import { sendMessage, sendMessageInPromise } from '../utils/msg';
@@ -28,14 +27,11 @@ import { log } from '../../../src/utils/common';
  * @memberof PanelClasses
  */
 class HeaderMenu extends React.Component {
-	constructor(props) {
-		super(props);
-	}
 	/**
 	 * Handle clicks outside of the drop-down menu and trigger action.
 	 * @param  {Object} evt mouseclick event
 	 */
-	handleClickOutside = evt => {
+	handleClickOutside = (evt) => {
 		// eslint-disable-next-line react/no-find-dom-node
 		if (!ReactDOM.findDOMNode(this).contains(evt.target)) {
 			this.props.toggleDropdown();
@@ -44,9 +40,9 @@ class HeaderMenu extends React.Component {
 	/**
 	 * Trigger action which open Settings panel from drop-down menu Settings item.
 	 */
-	clickSettings = evt => {
+	clickSettings = (evt) => {
 		this.props.toggleDropdown();
-		if(!this.props.disableClickIf(evt, 'settings')) {
+		if (!this.props.disableClickIf(evt, 'settings')) {
 			this.props.history.push('/settings/globalblocking');
 		}
 	}
@@ -153,9 +149,9 @@ class HeaderMenu extends React.Component {
 	/**
 	 * Handle click on 'Sibscriber menu item.
 	 */
-	clickSubscriber = evt => {
+	clickSubscriber = (evt) => {
 		this.props.toggleDropdown();
-		if(!this.props.disableClickIf(evt, 'subscription')) {
+		if (!this.props.disableClickIf(evt, 'subscription')) {
 			this.props.history.push((!this.props.loggedIn || !this.props.subscriber) ? '/subscribe' : '/subscription/info');
 		}
 	}
@@ -237,7 +233,7 @@ class HeaderMenu extends React.Component {
 								<span>{ t('panel_menu_ghostery_subscriber') }</span>
 							</div>
 
-						{/*}
+							{/* }
 							<Link to={subscriberParams.href} onClick={evt => this.props.disableClickIf(evt, 'subscription')}>
 								<ReactSVG className={subscriberParams.iconClass} path="/app/images/panel/subscriber-menu-item.svg" />
 								<span>{ t('panel_menu_ghostery_subscriber') }</span>

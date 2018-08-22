@@ -13,7 +13,6 @@
 
 import React from 'react';
 import ReactSVG from 'react-svg';
-import { Link } from 'react-router-dom';
 import ClassNames from 'classnames';
 import HeaderMenu from './HeaderMenu';
 import { sendMessage, sendMessageInPromise } from '../utils/msg';
@@ -124,12 +123,12 @@ class Header extends React.Component {
 		return false;
 	}
 
-	clickLogo = evt => {
+	clickLogo = () => {
 		this.props.history.push(this.props.is_expert ? '/detail/blocking' : '/');
 	}
 
-	clickBadge = evt => {
-		if(!this.disableClickIf(evt, 'subscription')) {
+	clickBadge = (evt) => {
+		if (!this.disableClickIf(evt, 'subscription')) {
 			this.props.history.push((this.props.loggedIn && isSubscriber(this.props.user)) ? '/subscription/info' : '/subscribe');
 		}
 	}
