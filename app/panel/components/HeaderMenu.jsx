@@ -30,22 +30,12 @@ import { log } from '../../../src/utils/common';
 class HeaderMenu extends React.Component {
 	constructor(props) {
 		super(props);
-
-		// event bindings
-		this.handleClickOutside = this.handleClickOutside.bind(this);
-		this.clickSettings = this.clickSettings.bind(this);
-		this.clickBrokenPage = this.clickBrokenPage.bind(this);
-		this.clickSubmitTracker = this.clickSubmitTracker.bind(this);
-		this.clickSignedInAs = this.clickSignedInAs.bind(this);
-		this.clickSignIn = this.clickSignIn.bind(this);
-		this.clickSignOut = this.clickSignOut.bind(this);
-		this.clickSubscriber = this.clickSubscriber.bind(this);
 	}
 	/**
 	 * Handle clicks outside of the drop-down menu and trigger action.
 	 * @param  {Object} evt mouseclick event
 	 */
-	handleClickOutside(evt) {
+	handleClickOutside = evt => {
 		// eslint-disable-next-line react/no-find-dom-node
 		if (!ReactDOM.findDOMNode(this).contains(evt.target)) {
 			this.props.toggleDropdown();
@@ -54,16 +44,18 @@ class HeaderMenu extends React.Component {
 	/**
 	 * Trigger action which open Settings panel from drop-down menu Settings item.
 	 */
-	clickSettings(evt) {
+	clickSettings = evt => {
 		this.props.toggleDropdown();
-		this.props.disableClickIf(evt, 'settings');
+		if(!this.props.disableClickIf(evt, 'settings')) {
+			this.props.history.push('/settings/globalblocking');
+		}
 	}
 	/**
 	 * Handle click on 'Report a broken page' menu item.
 	 * Currently invokes default 'mailto' handler, and often does not work.
 	 * @todo  Should send broken page data to a 'Report a broken page' site.
 	 */
-	clickBrokenPage() {
+	clickBrokenPage = () => {
 		sendMessageInPromise('getSiteData').then((data) => {
 			let body = `${'PLEASE INCLUDE A DESCRIPTION AND A PICTURE OF THE ISSUE YOU ARE EXPERIENCING:' + '\r\n\r\n\r\n\r\n\r\n\r\n' +
 					'URL: '}${data.url}\r\n` +
@@ -103,9 +95,9 @@ class HeaderMenu extends React.Component {
 	}
 	/**
 	 * Handle click on 'Submit a new tracker' menu item.
-	 * It should naviaget to a site where tracker data can be entered.
+	 * It should naviagate to a site where tracker data can be entered.
 	 */
-	clickSubmitTracker() {
+	clickSubmitTracker = () => {
 		sendMessage('openNewTab', {
 			url: 'https:\/\/www.ghostery.com/support/submit-tracker/',
 			become_active: true,
@@ -114,10 +106,28 @@ class HeaderMenu extends React.Component {
 	}
 
 	/**
+	 * Handle click on 'Help' menu item.
+	 * It should open Help view.
+	 */
+	clickHelp = () => {
+		this.props.toggleDropdown();
+		this.props.history.push('/help');
+	}
+
+	/**
+	 * Handle click on 'About' menu item.
+	 * It should open About view.
+	 */
+	clickAbout = () => {
+		this.props.toggleDropdown();
+		this.props.history.push('/about');
+	}
+
+	/**
 	 * Handle click on the user name, displayed on the menu when a
 	 * user is in logged in state, and navigate to the user's profile page.
 	 */
-	clickSignedInAs() {
+	clickSignedInAs = () => {
 		sendMessage('openNewTab', {
 			url: `https:\/\/account.${globals.GHOSTERY_DOMAIN}.com/`,
 			become_active: true,
@@ -128,7 +138,7 @@ class HeaderMenu extends React.Component {
 	/**
 	 * Handle click on 'Sign in' menu item and navigate to Login panel.
 	 */
-	clickSignIn() {
+	clickSignIn = () => {
 		sendMessage('ping', 'sign_in');
 		this.props.toggleDropdown();
 		this.props.history.push('/login');
@@ -136,11 +146,14 @@ class HeaderMenu extends React.Component {
 	/**
 	 * Handle click on 'Sign out' menu item (if user is in logged in state) and log out the user.
 	 */
-	clickSignOut() {
+	clickSignOut = () => {
 		this.props.toggleDropdown();
 		this.props.actions.logout();
 	}
-	clickSubscriber(evt) {
+	/**
+	 * Handle click on 'Sibscriber menu item.
+	 */
+	clickSubscriber = evt => {
 		this.props.toggleDropdown();
 		if(!this.props.disableClickIf(evt, 'subscription')) {
 			this.props.history.push((!this.props.loggedIn || !this.props.subscriber) ? '/subscribe' : '/subscription/info');
@@ -157,8 +170,8 @@ class HeaderMenu extends React.Component {
 			<ClickOutside onClickOutside={this.handleClickOutside} excludeEl={this.props.kebab}>
 				<div className="dropdown-pane" id="header-dropdown">
 					<ul className="vertical menu no-bullet icons icon-left">
-						<li className="menu-option menu-settings">
-							<Link to="/settings/globalblocking" onClick={this.clickSettings}>
+						<li className="menu-option menu-settings" onClick={this.clickSettings}>
+							<div>
 								<div className="menu-icon-container">
 									<svg width="18px" height="18px" viewBox="0 0 18 18">
 										<g>
@@ -167,7 +180,7 @@ class HeaderMenu extends React.Component {
 									</svg>
 								</div>
 								<span>{ t('panel_menu_settings') }</span>
-							</Link>
+							</div>
 						</li>
 						<li onClick={this.clickBrokenPage} className="menu-option menu-broken-page">
 							<div className="menu-icon-container">
@@ -191,8 +204,8 @@ class HeaderMenu extends React.Component {
 							</div>
 							<span>{ t('panel_menu_submit_tracker') }</span>
 						</li>
-						<li className="menu-option menu-help">
-							<Link to="/help" onClick={this.props.toggleDropdown}>
+						<li className="menu-option menu-help" onClick={this.clickHelp}>
+							<div>
 								<div className="menu-icon-container">
 									<svg width="18px" height="18px" viewBox="0 0 18 18">
 										<g>
@@ -201,10 +214,10 @@ class HeaderMenu extends React.Component {
 									</svg>
 								</div>
 								<span>{ t('panel_menu_help') }</span>
-							</Link>
+							</div>
 						</li>
-						<li className="menu-option menu-about">
-							<Link to="/about" onClick={this.props.toggleDropdown}>
+						<li className="menu-option menu-about" onClick={this.clickAbout}>
+							<div>
 								<div className="menu-icon-container">
 									<svg width="17" height="21" viewBox="0 0 17 21">
 										<g className="about-icon" fill="none" fillRule="evenodd">
@@ -216,7 +229,7 @@ class HeaderMenu extends React.Component {
 									</svg>
 								</div>
 								<span>{ t('panel_menu_about') }</span>
-							</Link>
+							</div>
 						</li>
 						<li className={subscriberParams.optionClass} onClick={this.clickSubscriber}>
 							<div>

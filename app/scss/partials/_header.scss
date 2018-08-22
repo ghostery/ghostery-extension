@@ -41,6 +41,7 @@
 		padding: 7px 0 7px 15px;
 		height: 36px;
 		.base-badge {
+			@extend %pointer;
 			width: 29px;
 			height: 20px;
 			display: block;
@@ -67,6 +68,7 @@
 		width: 75px;
 		background-position: right;
 		.back-arrow {
+			@extend %pointer;
 			display: none;
 			height: 13px;
 			padding: 0 15px 17px 0
@@ -102,8 +104,8 @@
 		visibility: visible;
 		ul.menu {background: none;}
 		.menu-option-base {
+			@extend %pointer;
 			position: relative;
-			cursor: default;
 			padding: 10px 0;
 			.menu-icon-container {
 				position: absolute;
@@ -144,7 +146,6 @@
 
 		.menu-option {
 			@extend .menu-option-base;
-			@extend %pointer;
 			.subscriber {
 				width: 23px;
 				height: 16px;
@@ -171,7 +172,6 @@
 
 		.menu-option-non-subscriber {
 			@extend .menu-option-base;
-			@extend %pointer;
 			.non-subscriber {
 				width: 23px;
 				height: 16px;
