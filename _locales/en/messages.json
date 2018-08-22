@@ -901,7 +901,7 @@
 		"message": "Blocking"
 	},
 	"settings_individual_trackers": {
-		"message": "Trust and restrict individual trackers"
+		"message": "Trust and Restrict individual trackers on a site"
 	},
 	"settings_allow_trackers": {
 		"message": "Allow trackers created by site owners"
@@ -1042,7 +1042,7 @@
 		"message": "Sometimes features like social media sharing, comments, or video players won't work when a certain tracker is blocked. If you want to enable one of these blocked features, click this icon on the page:"
 	},
 	"settings_individual_trackers_tooltip": {
-		"message": "Choose which specific trackers to block or allow on a website for custom control"
+		"message": "Choose which specific trackers to always trust or always restrict on a specific website."
 	},
 	"settings_allow_trackers_tooltip": {
 		"message": "For example, blocking a Facebook tracker on facebook.com might break the site."
@@ -1060,10 +1060,10 @@
 		"message": "Ghostery now implements the Human Web by default, a revolutionary technology that uses the wisdom of the crowd to build a more private internet"
 	},
 	"settings_offers_tooltip": {
-		"message": "Ghostery Rewards is a feature that lets you earn discounts and special offers from our partner companies."
+		"message": "Ghostery Rewards is a private-by-design feature that delivers you discounts and special offers from our partner companies as you browse."
 	},
 	"settings_opt_in": {
-		"message": "Opt in"
+		"message": "Opt In / Out"
 	},
 	"settings_global_blocking": {
 		"message": "Global Blocking"
