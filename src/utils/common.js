@@ -39,6 +39,7 @@ export function log(...args) {
 
 	if (hasErrors) {
 		console.error(...args);
+		console.trace();
 	} else {
 		console.log(...args);
 	}
