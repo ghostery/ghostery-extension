@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/hub/Views/SetupViews/SetupBlockingView component More Snapshot tests with react-test-renderer, but for edge cases edge case where choices is an empty array 1`] = `
+<div
+  className="row align-center"
+>
+  <div
+    className="columns small-12 large-10"
+  >
+    <div
+      className="SetupBlocking"
+    >
+      <div
+        className="row small-up-4"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/hub/Views/SetupViews/SetupBlockingView component Snapshot tests with react-test-renderer setup blocking view is rendered correctly 1`] = `
+<div
+  className="row align-center"
+>
+  <div
+    className="columns small-12 large-10"
+  >
+    <div
+      className="SetupBlocking"
+    >
+      <div
+        className="row small-up-4"
+      >
+        <div
+          className="columns"
+        >
+          <div>
+            <label
+              className="clickable flex-container flex-dir-column SetupBlocking__choiceBox SetupBlocking--selected"
+              htmlFor="input-block-test"
+            >
+              <div
+                className="SetupBlocking__imageContainer flex-container align-center-middle"
+              >
+                <img
+                  src="/app/images/hub/setup/block-selected.svg"
+                />
+              </div>
+              <div
+                className="SetupBlocking__textContainer flex-child-grow flex-container align-center-middle"
+              >
+                This is your TEST choice
+              </div>
+            </label>
+            <div
+              className="SetupBlocking__description"
+            >
+              This is your TEST below text
+            </div>
+          </div>
+          <input
+            checked={true}
+            id="input-block-test"
+            name="test"
+            onChange={[Function]}
+            type="radio"
+            value="test"
+          />
+        </div>
+        <div
+          className="columns"
+        >
+          <div>
+            <label
+              className="clickable flex-container flex-dir-column SetupBlocking__choiceBox"
+              htmlFor="input-block-example"
+            >
+              <div
+                className="SetupBlocking__imageContainer flex-container align-center-middle"
+              >
+                <img
+                  src="choice-example-image"
+                />
+              </div>
+              <div
+                className="SetupBlocking__textContainer flex-child-grow flex-container align-center-middle"
+              >
+                This is your EXAMPLE choice
+              </div>
+            </label>
+            <div
+              className="SetupBlocking__description"
+            >
+              This is your EXAMPLE below text
+            </div>
+          </div>
+          <input
+            checked={false}
+            id="input-block-example"
+            name="example"
+            onChange={[Function]}
+            type="radio"
+            value="example"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
