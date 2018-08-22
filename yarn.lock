@@ -98,9 +98,9 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@cliqz-oss/dexie@2.0.3":
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/@cliqz-oss/dexie/-/dexie-2.0.3.tgz#b27ff74a9740ab6b6878aa9df3a0deef81638e16"
+"@cliqz-oss/dexie@2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@cliqz-oss/dexie/-/dexie-2.0.4.tgz#0e710504e2b9198baa9b046abd3a82731b94d56e"
 
 "@cliqz-oss/pouchdb@6.3.4-security-error-fix-2":
   version "6.3.4-security-error-fix-2"
@@ -455,9 +455,9 @@ animated@^0.2.0:
     invariant "^2.2.0"
     normalize-css-color "^1.0.1"
 
-"anonymous-credentials@https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.0/anonymous-credentials-0.1.0.tgz":
-  version "0.1.0"
-  resolved "https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.0/anonymous-credentials-0.1.0.tgz#61358f5e1b8f6b145bf51739156e25be03ab74b2"
+"anonymous-credentials@https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.1/anonymous-credentials-0.1.1.tgz":
+  version "0.1.1"
+  resolved "https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.1/anonymous-credentials-0.1.1.tgz#62c7ff176599b08d56e7f93ec2d753cab2cc9737"
   dependencies:
     bindings "1.3.0"
 
@@ -1749,17 +1749,17 @@ brorand@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
 
-"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.28/7.28.6.8830376.tgz":
-  version "7.28.6"
-  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.28/7.28.6.8830376.tgz#f48a1cfdd4689a202b37d28c647c19544a5bc5be"
+"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.29/7.29.1.1b349.8afa557.tgz":
+  version "7.29.1"
+  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.29/7.29.1.1b349.8afa557.tgz#b685ac4d463cdae59ca39dc1bc1ffa754b42c3d4"
   dependencies:
-    "@cliqz-oss/dexie" "2.0.3"
+    "@cliqz-oss/dexie" "2.0.4"
     "@cliqz-oss/pouchdb" "6.3.4-security-error-fix-2"
     "@cliqz-oss/systemjs-builder" "0.16.13"
     "@cliqz/adblocker" "0.1.11"
     BigInt "5.5.3"
     ajv "6.5.0"
-    anonymous-credentials "https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.0/anonymous-credentials-0.1.0.tgz"
+    anonymous-credentials "https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.1/anonymous-credentials-0.1.1.tgz"
     babel-polyfill "6.26.0"
     classnames "2.2.5"
     cliqz-history "https://github.com/cliqz-oss/cliqz-history/releases/download/1.0.7/cliqz-history-1.0.7.tgz"
@@ -1777,7 +1777,7 @@ brorand@^1.0.1:
     js-md5 "0.7.3"
     jsep "0.3.0"
     mathjs "4.0.0"
-    moment "2.19.3"
+    moment "2.22.2"
     node-fetch "1.7.1"
     node-forge "git+https://git@github.com/digitalbazaar/forge.git#af3f590af9d3c809e1cb44b2bb5398a3a6b944c2"
     node-persist "2.0.11"
@@ -6608,11 +6608,7 @@ moment-timezone@^0.5.0, moment-timezone@^0.5.x:
   dependencies:
     moment ">= 2.9.0"
 
-moment@2.19.3:
-  version "2.19.3"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.19.3.tgz#bdb99d270d6d7fda78cc0fbace855e27fe7da69f"
-
-"moment@>= 2.9.0", moment@^2.19.1:
+moment@2.22.2, "moment@>= 2.9.0", moment@^2.19.1:
   version "2.22.2"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
 
