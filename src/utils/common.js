@@ -90,7 +90,7 @@ export function prefsGet(...args) {
  * @return {Promise} 		prefs object which has been set, or error
  */
 export function prefsSet(prefs) {
-	log('PREFS SET', prefs);
+	console.log('PREFS SET', prefs);
 	return new Promise(((resolve, reject) => {
 		if (typeof prefs !== 'undefined') {
 			chrome.storage.local.set(prefs, () => {

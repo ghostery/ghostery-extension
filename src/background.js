@@ -15,6 +15,8 @@
 /* eslint no-use-before-define: 0 */
 /* eslint no-shadow: 0 */
 
+/* eslint no-console: 0 */
+
 /**
  * @namespace Background
  */
@@ -1079,7 +1081,7 @@ function isWhitelisted(state) {
 	return globals.SESSION.paused_blocking || events.policy.getSitePolicy(url) === 2 || state.ghosteryWhitelisted;
 }
 /**
- * Decrement global load counter to evetually call function which should 
+ * Decrement global load counter to evetually call function which should
  * be called after all cliqz modules are fully initialized.
  * @memberOf Background
  */
@@ -1162,10 +1164,10 @@ adblocker.on('enabled', () => {
 				url => isWhitelisted({ sourceUrl: url }))
 		]);
 	})
-	.then(() => {
-		console.log('ADJUSTING LOADING IN AD', LOADING);
-		decrementLoadCounter();		
-	});
+		.then(() => {
+			console.log('ADJUSTING LOADING IN AD', LOADING);
+			decrementLoadCounter();
+		});
 });
 
 /**
@@ -1203,10 +1205,10 @@ offers.on('enabled', () => {
 				setCliqzModuleEnabled(messageCenter, true);
 			});
 	})
-	.then(() => {
-		console.log('ADJUSTING LOADING IN OF', LOADING);
-		decrementLoadCounter();
-	});
+		.then(() => {
+			console.log('ADJUSTING LOADING IN OF', LOADING);
+			decrementLoadCounter();
+		});
 });
 
 /**
@@ -1538,7 +1540,6 @@ function initializeGhosteryModules() {
 		// run wrapper tasks which set up base integrations between ghostery and these modules
 		initialiseWebRequestPipeline()
 			.then(() => {
-				console.log('IN THEN INIT WEB REQUEST PIPELINE', LOADING);
 				if (!(IS_EDGE || IS_CLIQZ)) {
 					if (globals.JUST_UPGRADED_FROM_7) {
 					// These users had human web already, so we respect their choice
@@ -1641,7 +1642,19 @@ function initializeGhosteryModules() {
 }
 
 /**
- * Finalize loading after all cliqz modules are fully loaded
+ * Function is called when most of the changes to conf are made
+ */
+function finalTouch() {
+	if (IS_CLIQZ) {
+		importCliqzSettings(cliqz, conf);
+	}
+	common.prefsSet(globals.initProps);
+	globals.INIT_COMPLETE = true;
+	delete globals.initProps;
+}
+/**
+ * Function is called after the last <moduleName>.on('enabled'...) handler is executed
+ * which means that all cliqz modules are fully loaded.
  */
 function afterCliqz() {
 	console.log('AFTER CLIQZ IS CALLED');
@@ -1649,13 +1662,11 @@ function afterCliqz() {
 		account.getUser()
 			.then(account.getUserSettings)
 			.then(() => {
-				if (IS_CLIQZ) {
-					importCliqzSettings(cliqz, conf);
-				}
+				finalTouch();
 			})
 			.catch(err => log(err));
-	} else if (IS_CLIQZ) {
-		importCliqzSettings(cliqz, conf);
+	} else {
+		finalTouch();
 	}
 }
 
@@ -1672,13 +1683,7 @@ function init() {
 		initializeVersioning();
 		account.migrate().then(() => {
 			metrics.init(globals.JUST_INSTALLED)
-				.then(() => initializeGhosteryModules()
-					.then(() => {
-					// persist Conf properties to storage only after init has completed
-						common.prefsSet(globals.initProps);
-						globals.INIT_COMPLETE = true;
-						delete globals.initProps;
-					}));
+				.then(initializeGhosteryModules);
 		});
 	}).catch((err) => {
 		log('Error in init()', err);
@@ -1688,27 +1693,3 @@ function init() {
 
 // Initialize the application.
 init();
-
-
-// function nextTick(fn) {
-// for (var _len2 = arguments.length, args = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
-//   args[_key2 - 1] = arguments[_key2];
-// }
-
-// return Promise.resolve().then(() => fn(...args));
-// }
-
-// function foo() {
-// 	return new Promise(resolve => {
-// //		setTimeout(() => {
-// 			nextTick(() => {
-// 				console.log("SECOND");
-// 			});
-// 			resolve();
-// //		}, 0);
-// 	});
-// }
-
-// foo().then(() => {
-// 	console.log("FIRST");
-// });
