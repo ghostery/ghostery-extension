@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/hub/Views/SetupViews/SetupHumanWebView component Snapshot tests with react-test-renderer setup human web view is rendered correctly 1`] = `
+<div
+  className="row align-center"
+>
+  <div
+    className="columns small-12 large-10"
+  >
+    <div
+      className="SetupHumanWeb"
+    >
+      <div
+        className="SetupHumanWeb__header"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "hub_setup_humanweb_header",
+          }
+        }
+      />
+      <div
+        className="flex-container align-middle"
+      >
+        <div
+          className="ToggleCheckbox ToggleCheckbox--active"
+          onClick={[Function]}
+        >
+          <svg
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+            />
+          </svg>
+        </div>
+        <span
+          className="SetupHumanWeb__label"
+          onClick={[Function]}
+        >
+          hub_setup_humanweb_label
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -28,7 +28,7 @@ class Help extends React.Component {
 	openNewTab(e) {
 		e.preventDefault();
 		sendMessage('openNewTab', {
-			url: chrome.runtime.getURL('./app/templates/setup.html'),
+			url: chrome.runtime.getURL('./app/templates/hub.html'),
 			become_active: true,
 		});
 		window.close();

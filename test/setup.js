@@ -19,6 +19,11 @@ import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 Enzyme.configure({ adapter: new Adapter() });
 
+// Fake the translation function to only return the translation key
+global.t = function (str) {
+	return str;
+};
+
 // Create global stubs
 global.chrome = chrome;
 chrome.runtime.getManifest.returns({
@@ -26,7 +31,7 @@ chrome.runtime.getManifest.returns({
 	debug: true
 });
 
-// Create Mock for
+// Create Mock for for Cliqz modules
 jest.mock('../src/classes/Cliqz', () => {
 	return {
 		modules: {

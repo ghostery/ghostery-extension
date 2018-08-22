@@ -1,0 +1,70 @@
+/**
+ * Setup View Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+// Foundation Overrides
+.SetupModal__buttonContainer .button {
+	min-width: 160px;
+	margin-bottom: 0;
+	background-color: #ffffff;
+}
+
+// Setup Modal
+.SetupModal__content {
+	position: relative;
+	width: 410px;
+	min-height: 410px;
+	padding-top: 45px;
+	color: #4a4a4a;
+	background-color: #f7f7f7;
+	border: 2px solid #930194;
+	z-index: 10;
+}
+.SetupModal__exit {
+	position: absolute;
+	top: -13px;
+	right: -13px;
+	height: 26px;
+	width: 26px;
+	border-radius: 50%;
+	border: 1px solid #930194;
+	background-color: #f7f7f7;
+	background-image: buildIconX(#4a4a4a);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 12px 12px;
+	cursor: pointer;
+}
+.SetupModal__image {
+	height: 64px;
+	width: 58px;
+	background-size: 64px 58px;
+	background-image: url('/app/images/hub/setup/ghosty-icon.svg');
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+.SetupModal__text {
+	font-size: 18px;
+	line-height: 27px;
+	font-weight: 500;
+	text-align: center;
+	padding: 35px 55px 15px;
+}
+.SetupModal__buttonContainer {
+	background-color: #e7ecee;
+	padding: 25px 25px 0;
+}
+.SetupModal__buttonContainer {
+	font-size: 12px;
+	color: #4a4a4a;
+	cursor: pointer;
+}
