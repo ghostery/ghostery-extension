@@ -87,10 +87,10 @@ let LOADING = 0;
 
 function setCliqzModuleEnabled(module, enabled) {
 	if (enabled) {
-		log('SET CLIQZ MODULE ENABLED', module);
+		console.log('SET CLIQZ MODULE ENABLED', module);
 		return cliqz.enableModule(module.name);
 	}
-	log('SET CLIQZ MODULE DISABLED', module);
+	console.log('SET CLIQZ MODULE DISABLED', module);
 	cliqz.disableModule(module.name);
 	return Promise.resolve();
 }
