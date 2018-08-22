@@ -111,7 +111,7 @@ class PurpleBox {
 									conf.alert_bubble_pos = message.message.alert_bubble_pos;
 									conf.alert_bubble_timeout = message.message.alert_bubble_timeout;
 									// push new settings to API
-									account.pushUserSettings();
+									account.saveUserSettings();
 								}
 							});
 						}
