@@ -156,7 +156,13 @@ export function processFpeUrl(src) {
  */
 export function processUrl(src) {
 	if (!src) {
-		return {};
+		return {
+			protocol: '',
+			host: '',
+			path: '',
+			host_with_path: '',
+			anchor: '',
+		};
 	}
 	const res = url.parse(src);
 
@@ -354,7 +360,7 @@ function _fetchJson(method, url, query, extraHeaders, referrer = 'no-referrer', 
 				if (xhr.status === 204) {
 					resolve(false); // send back false to signal no new campaigns
 				} else if (xhr.responseText.includes('{')) {
-					// For pushUserSettings we only get back a string that cannot be parsed
+					// For saveUserSettings we only get back a string that cannot be parsed
 					try {
 						log('_fetchJson resolved', (xhr.responseText) ? JSON.parse(xhr.responseText) : {});
 						// Resolve the promise with the response text
