@@ -10,15 +10,13 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-// import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import * as actions from './TutorialViewActions';
 import TutorialViewContainer from './TutorialViewContainer';
 import TutorialViewReducer from './TutorialViewReducer';
+import * as TutorialViewActions from './TutorialViewActions';
 
 /**
  * Map redux store state properties to the component's own properties.
@@ -35,7 +33,7 @@ const mapStateToProps = state => Object.assign({}, state.tutorial);
  * @memberof SetupContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign(actions), dispatch),
+	actions: bindActionCreators(Object.assign(TutorialViewActions), dispatch),
 });
 
 export const reducer = TutorialViewReducer;

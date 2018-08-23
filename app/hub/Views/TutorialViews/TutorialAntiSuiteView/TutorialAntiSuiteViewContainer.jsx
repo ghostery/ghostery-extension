@@ -36,6 +36,8 @@ class TutorialAntiSuiteViewContainer extends Component {
 			textNext: t('hub_setup_nav_done'),
 			textDone: t('hub_setup_exit_flow'),
 		});
+
+		this.props.actions.setTutorialComplete();
 	}
 
 	render() {

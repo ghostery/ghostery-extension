@@ -12,17 +12,11 @@
  */
 
 html, body, #root {
-	font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	height: 100%;
 	width: 100%;
 	margin: 0;
 }
 
-<<<<<<< HEAD
-// Foundation Overrides
-h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
-	font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-=======
 .App {
 	height: 100%;
 	width: 100%;
@@ -33,7 +27,6 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 .App__mainContent {
 	height: 100%;
 	flex-grow: 1;
->>>>>>> sidebar height - remove tmp scss
 }
 
 // Helper Classes

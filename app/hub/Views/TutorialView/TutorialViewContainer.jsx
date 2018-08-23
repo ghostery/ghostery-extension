@@ -9,11 +9,12 @@
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
+ *
+ * ToDo: Add Proptypes
  */
 
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-
 import TutorialView from './TutorialView';
 
 // Component Views
@@ -30,9 +31,6 @@ import TutorialAntiSuiteView from '../TutorialViews/TutorialAntiSuiteView';
  * @memberof HubContainers
  */
 class TutorialViewContainer extends React.Component {
-	/**
-	 * Lifecycle Event
-	 */
 	constructor(props) {
 		super(props);
 		const title = '';
@@ -46,7 +44,6 @@ class TutorialViewContainer extends React.Component {
 	 * @return {JSX} JSX for rendering the Tutorial View of the Hub app
 	 */
 	render() {
-		const activeIndex = +this.props.location.pathname.split('/').pop();
 		const steps = [
 			{
 				index: 1,
@@ -80,7 +77,7 @@ class TutorialViewContainer extends React.Component {
 			},
 		];
 
-		return <TutorialView activeIndex={activeIndex} steps={steps} />;
+		return <TutorialView steps={steps} />;
 	}
 }
 

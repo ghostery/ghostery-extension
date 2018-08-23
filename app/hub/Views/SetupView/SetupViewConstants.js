@@ -32,3 +32,6 @@ export const SET_GHOSTERY_REWARDS = 'SET_GHOSTERY_REWARDS';
 
 // Setup Human Web
 export const SET_HUMAN_WEB = 'SET_HUMAN_WEB';
+
+// Setup Done
+export const SET_SETUP_COMPLETE = 'SET_SETUP_COMPLETE';

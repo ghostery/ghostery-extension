@@ -26,9 +26,9 @@ import { reducer as setup } from './Views/SetupView';
 import { reducer as tutorial } from './Views/TutorialView';
 
 const reducer = combineReducers({
+	home,
 	setup,
 	tutorial,
-	home,
 });
 
 /**

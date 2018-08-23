@@ -1596,6 +1596,57 @@
 	"hub_home_page_title": {
 		"message": "Ghostery Hub - Home"
 	},
+	"hub_home_header_text": {
+		"message": "Ghostery is ready!"
+	},
+	"hub_home_header_tagline": {
+		"message": "You are now protected with our default settings."
+	},
+	"hub_home_header_tagline_2": {
+		"message": "Start Browsing!"
+	},
+	"hub_home_header_checkbox_label": {
+		"message": "Share analytics and Human Web data to improve Ghostery’s performance. "
+	},
+	"hub_home_header_checkbox_link": {
+		"message": "Learn More."
+	},
+	"hub_home_subheader_optimize": {
+		"message": "Optimize your Ghostery experience"
+	},
+	"hub_home_subheader_create_account": {
+		"message": "Create Account"
+	},
+	"hub_home_feature_tutorial_title": {
+		"message": "Take a Tutorial"
+	},
+	"hub_home_feature_tutorial_text": {
+		"message": "Walk through Ghostery's main features."
+	},
+	"hub_home_feature_tutorial_button": {
+		"message": "Start"
+	},
+	"hub_home_feature_tutorial_button_alt": {
+		"message": "Tutorial Complete"
+	},
+	"hub_home_feature_setup_title": {
+		"message": "Customize Setup"
+	},
+	"hub_home_feature_setup_text": {
+		"message": "Edit your settings and blocking preferences."
+	},
+	"hub_home_feature_setup_button": {
+		"message": "Edit Setup"
+	},
+	"hub_home_feature_setup_button_alt": {
+		"message": "Custom Setup Complete"
+	},
+	"hub_home_feature_supporter_text": {
+		"message": "Become a Ghostery Supporter and unlock special features."
+	},
+	"hub_home_feature_supporter_button": {
+		"message": "Become a Supporter"
+	},
 	"hub_setup_page_title": {
 		"message": "Ghostery Hub - Setup"
 	},
