@@ -1,0 +1,77 @@
+/**
+ * Setup Anti-Suite View Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+// Setup Anti-Suite View
+.SetupAntiSuite__feature {
+	padding: 30px 0 20px;
+	border-bottom: 1px solid #cbd4d7;
+}
+.SetupAntiSuite__feature:last-of-type {
+	border-bottom: none;
+}
+.SetupAntiSuite__feature_title {
+	font-size: 17.3px;
+	font-weight: 500;
+	color: #4a4a4a;
+}
+.SetupAntiSuite__feature_enabled {
+	color: #1dafed;
+	font-size: 12.5px;
+	font-weight: 500;
+	margin-left: 50px;
+}
+.SetupAntiSuite__feature_description {
+	font-size: 10.6px;
+	line-height: 1.75;
+	margin: 15px 0 10px;
+	color: #4a4a4a;
+}
+.SetupAntiSuite__icon {
+	height: 50px;
+	width: 50px;
+	margin: 0 auto;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+// Anti-Tracking Icon
+.SetupAntiSuite__feature .anti-tracking {
+	background-image: buildAntiTrackingIcon(#9f9f9f);
+}
+.SetupAntiSuite__feature .anti-tracking.active {
+	background-image: buildAntiTrackingActiveIcon(#1dafed);
+}
+
+// Ad Block Icon
+.SetupAntiSuite__feature .ad-block {
+	background-image: buildAdBlockIcon(#9f9f9f);
+}
+.SetupAntiSuite__feature .ad-block.active {
+	background-image: buildAdBlockActiveIcon(#1dafed);
+}
+
+// Smart Blocking Icon
+.SetupAntiSuite__feature .smart-blocking {
+	background-image: buildSmartBlockingIcon(#9f9f9f);
+}
+.SetupAntiSuite__feature .smart-blocking.active {
+	background-image: buildSmartBlockingActiveIcon(#1dafed);
+}
+
+// Ghostery Rewards Icon
+.SetupAntiSuite__feature .ghostery-rewards {
+	background-image: buildGhosteryRewardsIcon(#9f9f9f);
+}
+.SetupAntiSuite__feature .ghostery-rewards.active {
+	background-image: buildGhosteryRewardsActiveIcon(#1dafed);
+}

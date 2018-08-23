@@ -26,7 +26,7 @@ const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
  * @param  {Object} 	message 	message data
  * @return {Promise}
  */
-export function sendMessageInPromise(name, message) {
+export function sendMessageInPromise(name, message, origin = '') {
 	// On Edge 39.14965.1001.0 callback is not called when multiple
 	// Edge instances running. So instead we shoot message back
 	// from background. See onMessageHandler, HANDLE UNIVERSAL EVENTS HERE
@@ -46,6 +46,7 @@ export function sendMessageInPromise(name, message) {
 				name,
 				message,
 				messageId,
+				origin,
 			}, () => {});
 		});
 	}
@@ -53,6 +54,7 @@ export function sendMessageInPromise(name, message) {
 		chrome.runtime.sendMessage({
 			name,
 			message,
+			origin,
 		}, (response) => {
 			if (chrome.runtime.lastError) {
 				log(chrome.runtime.lastError, name, message);
@@ -74,7 +76,7 @@ export function sendMessageInPromise(name, message) {
  * @return {Object}		response
  * @todo  runtime.sendMessage does not return any value.
  */
-export function sendMessage(name, message, callback = function () {}) {
+export function sendMessage(name, message, callback = function () {}, origin = null) {
 	log('Panel sendMessage: sending to background', name);
 	// @EDGE chrome.runtime.sendMessage(message) works, but
 	// const callback; chrome.runtime.sendMessage(message, callback) fails to execute and chrome.runtime.lastError is undefined.
@@ -83,6 +85,7 @@ export function sendMessage(name, message, callback = function () {}) {
 	return chrome.runtime.sendMessage({
 		name,
 		message,
+		origin,
 	}, callback);
 }
 

@@ -243,23 +243,24 @@ function getSiteData() {
  */
 
 /**
- * Handle messages sent from app/js/platform_pages.js content script.
+ * Handle messages sent from app/js/account_pages.js content script.
  * @memberOf Background
  *
  * @param  {string} 	name 		message name
  * @param  {string}		tab_url 	tab url
  */
-function handleGhosteryPlatformPages(name, callback) {
-	if (name === 'platformPageLoaded') {
-		account._getUserIDFromCookie()
-			.then((userID) => {
+function handleAccountPages(name, callback) {
+	if (name === 'accountPageLoaded') {
+		if (conf.account === null) {
+			account._getUserIDFromCookie().then((userID) => {
 				account._setAccountInfo(userID);
 			})
-			.then(account.getUser)
-			.then(account.getUserSettings)
-			.catch((err) => {
-				log('handleGhosteryPlatformPages error', err);
-			});
+				.then(account.getUser)
+				.then(account.getUserSettings)
+				.catch((err) => {
+					log('handleAccountPages error', err);
+				});
+		}
 	} else if (name === 'account.logout') {
 		account.logout()
 			.then((response) => {
@@ -447,47 +448,144 @@ function handleBlockedRedirect(name, message, tab_id, callback) {
  * @param  {number} 	tab_id 		tab id
  * @param  {function} 	callback 	function to call (at most once) when you have a response
  */
-function handleRewards(name, message) {
-	if (!offers.isEnabled) {
-		switch (name) {
-			case 'rewardSignal':
-				if (message.actionId === 'rewards_on') {
-					OFFERS_ENABLE_SIGNAL = message;
-					conf.enable_offers = true;
+function handleRewards(name, message, callback) {
+	switch (name) {
+		case 'rewardSignal':
+			rewards.sendSignal(message);
+			break;
+		case 'rewardSeen':
+			rewards.markRewardRead(message.offerId);
+			button.update();
+			break;
+		case 'deleteReward':
+			rewards.markRewardRead(message.offerId);
+			rewards.deleteReward(message.offerId);
+			button.update();
+			break;
+		case 'rewardsPromptAccepted':
+			conf.rewards_accepted = true;
+			break;
+		case 'ping':
+			metrics.ping(message);
+			break;
+		case 'removeDisconnectListener':
+			rewards.panelPort.onDisconnect.removeListener(rewards.panelHubClosedListener);
+			break;
+		case 'setPanelData':
+			if (message.hasOwnProperty('enable_offers')) {
+				if (!offers.isEnabled && message.enable_offers === true) {
+					OFFERS_ENABLE_SIGNAL = message.signal;
+				} else if (message.enable_offers === false) {
+					rewards.sendSignal(message.signal);
 				}
-				break;
-			default:
-				break;
+				panelData.set({ enable_offers: message.enable_offers });
+			}
+			return callback();
+		default:
+			break;
+	}
+}
+
+/**
+ * Handle messages sent from The Ghostery Hub: app/hub.
+ * @param  {string}   name     message name
+ * @param  {object}   message  message data
+ * @param  {function} callback function to call when you have a response
+ */
+function handleGhosteryHub(name, message, callback) {
+	switch (name) {
+		case 'GET_SETUP_SHOW_WARNING_OVERRIDE': {
+			const { setup_show_warning_override } = conf;
+			callback({ setup_show_warning_override });
+			break;
 		}
-	} else {
-		switch (name) {
-			case 'rewardSignal':
-				rewards.sendSignal(message);
-				if (message.actionId === 'rewards_off') {
-					conf.enable_offers = false;
+		case 'SET_SETUP_SHOW_WARNING_OVERRIDE': {
+			const { setup_show_warning_override } = message;
+			conf.setup_show_warning_override = setup_show_warning_override;
+			callback({ setup_show_warning_override });
+			break;
+		}
+		case 'SET_BLOCKING_POLICY': {
+			const { blockingPolicy } = message;
+			switch (blockingPolicy) {
+				case 'BLOCKING_POLICY_RECOMMENDED': {
+					const categoriesBlock = ['advertising', 'pornvertising', 'site_analytics'];
+					conf.selected_app_ids = {};
+					for (const app_id in bugDb.db.apps) {
+						if (bugDb.db.apps.hasOwnProperty(app_id)) {
+							const category = bugDb.db.apps[app_id].cat;
+							if (categoriesBlock.indexOf(category) >= 0 &&
+							!conf.selected_app_ids.hasOwnProperty(app_id)) {
+								conf.selected_app_ids[app_id] = 1;
+							}
+						}
+					}
+					break;
 				}
-				break;
-			case 'rewardSeen':
-				rewards.markRewardRead(message.offerId);
-				button.update();
-				break;
-			case 'deleteReward':
-				rewards.markRewardRead(message.offerId);
-				rewards.deleteReward(message.offerId);
-				button.update();
-				break;
-			case 'rewardsPromptAccepted':
-				conf.rewards_accepted = true;
-				break;
-			case 'ping':
-				metrics.ping(message);
-				break;
-			case 'removeDisconnectListener':
-				rewards.panelPort.onDisconnect.removeListener(rewards.panelHubClosedListener);
-				break;
-			default:
-				break;
+				case 'BLOCKING_POLICY_NOTHING': {
+					conf.selected_app_ids = {};
+					break;
+				}
+				case 'BLOCKING_POLICY_EVERYTHING': {
+					conf.selected_app_ids = {};
+					for (const app_id in bugDb.db.apps) {
+						if (!conf.selected_app_ids.hasOwnProperty(app_id)) {
+							conf.selected_app_ids[app_id] = 1;
+						}
+					}
+					break;
+				}
+				case 'BLOCKING_POLICY_CUSTOM': {
+					// Blocking app_ids will be handled by Global Blocking blocking.js
+					break;
+				}
+				case 'BLOCKING_POLICY_RESET': {
+					const { selected_app_ids } = message;
+					conf.selected_app_ids = {};
+					for (const app_id in selected_app_ids) {
+						if (!conf.selected_app_ids.hasOwnProperty(app_id) &&
+						bugDb.db.apps.hasOwnProperty(app_id)) {
+							conf.selected_app_ids[app_id] = 1;
+						}
+					}
+					break;
+				}
+				default: break;
+			}
+			callback({ blockingPolicy });
+			break;
 		}
+		case 'SET_ANTI_TRACKING': {
+			const { enable_anti_tracking } = message;
+			conf.enable_anti_tracking = enable_anti_tracking;
+			callback({ enable_anti_tracking });
+			break;
+		}
+		case 'SET_AD_BLOCK': {
+			const { enable_ad_block } = message;
+			conf.enable_ad_block = enable_ad_block;
+			callback({ enable_ad_block });
+			break;
+		}
+		case 'SET_SMART_BLOCKING': {
+			const { enable_smart_blocking } = message;
+			conf.enable_smart_block = enable_smart_blocking;
+			callback({ enable_smart_blocking });
+			break;
+		}
+		case 'SET_GHOSTERY_REWARDS': {
+			const { enable_ghostery_rewards } = message;
+			conf.enable_offers = enable_ghostery_rewards;
+			callback({ enable_ghostery_rewards });
+			break;
+		}
+		case 'SET_HUMAN_WEB': {
+			const { enable_human_web } = message;
+			conf.enable_human_web = enable_human_web;
+			callback({ enable_human_web });
+			break;
+		}
+		default: break;
 	}
 }
 
@@ -590,9 +688,9 @@ function onMessageHandler(request, sender, callback) {
 	}
 
 	// HANDLE PAGE EVENTS HERE
-	if (origin === 'platform_pages') {
-		// Platform pages
-		return handleGhosteryPlatformPages(name, callback);
+	if (origin === 'account_pages') {
+		// Account pages
+		return handleAccountPages(name, callback);
 	} else if (origin === 'purplebox') {
 		// Purplebox script events
 		return handlePurplebox(name, message, tab_id, callback);
@@ -609,7 +707,9 @@ function onMessageHandler(request, sender, callback) {
 	} else if (origin === 'blocked_redirect') {
 		return handleBlockedRedirect(name, message, tab_id, callback);
 	} else if (origin === 'rewards' || origin === 'rewardsPanel') {
-		return handleRewards(name, message, tab_id, callback);
+		return handleRewards(name, message, callback);
+	} else if (origin === 'ghostery-hub') {
+		return handleGhosteryHub(name, message, callback);
 	}
 
 	// HANDLE UNIVERSAL EVENTS HERE (NO ORIGIN LISTED ABOVE)
@@ -1512,9 +1612,9 @@ function initializeGhosteryModules() {
 			metrics.ping('install_complete');
 		}, 300000);
 
-		// open the setup page on install
+		// open the Ghostery Hub on install with justInstalled query parameter set to true
 		chrome.tabs.create({
-			url: chrome.runtime.getURL('./app/templates/setup.html'),
+			url: chrome.runtime.getURL('./app/templates/hub.html?justInstalled=true'),
 			active: true
 		});
 	} else {
