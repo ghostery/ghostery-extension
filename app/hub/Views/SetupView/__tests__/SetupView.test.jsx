@@ -29,6 +29,9 @@ import SetupView from '../SetupView';
 const TestComponent = props => (
 	<div>test component</div>
 );
+const ExampleComponent = props => (
+	<div>example component</div>
+);
 
 describe('app/hub/Views/SetupView component', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
@@ -54,9 +57,50 @@ describe('app/hub/Views/SetupView component', () => {
 						}
 					},
 				],
+				extraRoutes: [],
+				sendMountActions: true,
 			};
 			const component = renderer.create(
 				<MemoryRouter initialEntries={['/test/1']} >
+					<SetupView {...initialState} />
+				</MemoryRouter>
+			).toJSON();
+			expect(component).toMatchSnapshot();
+		});
+
+		test('setup view is rendered correctly on first and extra route', () => {
+			const initialState = {
+				steps: [
+					{
+						index: 1,
+						path: '/test/1',
+						bodyComponent: TestComponent,
+						headerProps: {
+							title: 'title test 1',
+							titleImage: 'image for title test 1',
+						}
+					},
+					{
+						index: 2,
+						path: '/test/2',
+						bodyComponent: TestComponent,
+						headerProps: {
+							title: 'title test 2',
+							titleImage: 'image for title test 2',
+						}
+					},
+				],
+				extraRoutes: [
+					{
+						name: '1/example',
+						path: '/test/1/example',
+						component: ExampleComponent,
+					}
+				],
+				sendMountActions: true,
+			};
+			const component = renderer.create(
+				<MemoryRouter initialEntries={['/test/1/example']} >
 					<SetupView {...initialState} />
 				</MemoryRouter>
 			).toJSON();
@@ -94,6 +138,8 @@ describe('app/hub/Views/SetupView component', () => {
 						}
 					},
 				],
+				extraRoutes: [],
+				sendMountActions: true,
 			};
 			const component = renderer.create(
 				<MemoryRouter initialEntries={['/example/3']} >
@@ -108,6 +154,8 @@ describe('app/hub/Views/SetupView component', () => {
 		test('edge case where steps is empty array', () => {
 			const initialState = {
 				steps: [],
+				extraRoutes: [],
+				sendMountActions: true,
 			};
 			const component = renderer.create(
 				<MemoryRouter>
@@ -139,6 +187,8 @@ describe('app/hub/Views/SetupView component', () => {
 						}
 					},
 				],
+				extraRoutes: [],
+				sendMountActions: true,
 			};
 			const component = renderer.create(
 				<MemoryRouter initialEntries={['/test/4']} >

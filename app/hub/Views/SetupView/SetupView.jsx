@@ -24,26 +24,37 @@ import SetupHeader from '../SetupViews/SetupHeader';
  * @return {JSX} JSX for rendering the Setup View of the Hub app
  * @memberof HubComponents
  */
-const SetupView = props => (
-	<div className="full-height flex-container flex-dir-column">
-		<div className="flex-child-grow">
-			{props.steps.map(step => (
-				<Route
-					key={`route-${step.index}`}
-					path={step.path}
-					render={() => (
-						<div>
-							<SetupHeader {...step.headerProps} />
-							<step.bodyComponent index={step.index} sendMountActions={props.sendMountActions} />
-						</div>
-					)}
-				/>
-			))}
-		</div>
+const SetupView = (props) => {
+	const { extraRoutes, sendMountActions, steps } = props;
 
-		<SetupNavigation totalSteps={props.steps.length} />
-	</div>
-);
+	return (
+		<div className="full-height flex-container flex-dir-column">
+			<div className="flex-child-grow">
+				{steps.map(step => (
+					<Route
+						key={`route-${step.index}`}
+						path={step.path}
+						render={() => (
+							<div>
+								<SetupHeader {...step.headerProps} />
+								<step.bodyComponent index={step.index} sendMountActions={sendMountActions} />
+							</div>
+						)}
+					/>
+				))}
+				{extraRoutes.map(route => (
+					<Route
+						key={`extra-route-${route.name}`}
+						path={route.path}
+						render={() => <route.component sendMountActions={sendMountActions} />}
+					/>
+				))}
+			</div>
+
+			<SetupNavigation totalSteps={steps.length} />
+		</div>
+	);
+};
 
 // PropTypes ensure we pass required props of the correct type
 SetupView.propTypes = {
@@ -56,6 +67,12 @@ SetupView.propTypes = {
 			titleImage: PropTypes.string.isRequired,
 		}).isRequired,
 	})).isRequired,
+	extraRoutes: PropTypes.arrayOf(PropTypes.shape({
+		name: PropTypes.string.isRequired,
+		path: PropTypes.string.isRequired,
+		component: PropTypes.func.isRequired,
+	})).isRequired,
+	sendMountActions: PropTypes.bool.isRequired,
 };
 
 export default SetupView;

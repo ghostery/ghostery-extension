@@ -21,9 +21,11 @@ import {
 } from 'redux';
 import thunk from 'redux-thunk';
 
+import settings from '../panel/reducers/settings';
 import { reducer as setup } from './Views/SetupView';
 
 const reducer = combineReducers({
+	settings,
 	setup,
 });
 

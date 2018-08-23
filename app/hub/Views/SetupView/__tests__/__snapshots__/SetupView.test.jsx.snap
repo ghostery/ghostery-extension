@@ -26,6 +26,31 @@ exports[`app/hub/Views/SetupView component More Snapshot tests with react-test-r
 </div>
 `;
 
+exports[`app/hub/Views/SetupView component Snapshot tests with react-test-renderer setup view is rendered correctly on first and extra route 1`] = `
+<div
+  className="full-height flex-container flex-dir-column"
+>
+  <div
+    className="flex-child-grow"
+  >
+    <div>
+      <div>
+        Mock Setup Header
+      </div>
+      <div>
+        test component
+      </div>
+    </div>
+    <div>
+      example component
+    </div>
+  </div>
+  <div>
+    Mock Setup Navigation
+  </div>
+</div>
+`;
+
 exports[`app/hub/Views/SetupView component Snapshot tests with react-test-renderer setup view is rendered correctly on first route 1`] = `
 <div
   className="full-height flex-container flex-dir-column"
