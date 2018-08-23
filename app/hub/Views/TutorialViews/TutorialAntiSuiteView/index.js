@@ -10,10 +10,12 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import TutorialAntiSuiteViewContainer from './TutorialAntiSuiteViewContainer';
+import * as TutorialAntiSuiteViewActions from './TutorialAntiSuiteViewActions';
 import { setTutorialNavigation } from '../../TutorialView/TutorialViewActions';
 
 /**
@@ -31,7 +33,9 @@ const mapStateToProps = state => Object.assign({}, state.tutorial);
  * @memberof TutorialContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign({}, { setTutorialNavigation }), dispatch),
+	actions: bindActionCreators(Object.assign({}, TutorialAntiSuiteViewActions, {
+		setTutorialNavigation,
+	}), dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TutorialAntiSuiteViewContainer);

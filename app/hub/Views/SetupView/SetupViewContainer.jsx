@@ -27,15 +27,21 @@ import SetupHumanWebView from '../SetupViews/SetupHumanWebView';
 import SetupDoneView from '../SetupViews/SetupDoneView';
 
 /**
- * @class Implement the Setup Container View for the Ghostery Hub
+ * @class Implement the Setup View for the Ghostery Hub
  * @extends Component
  * @memberof HubContainers
  */
 class SetupViewContainer extends React.Component {
 	constructor(props) {
 		super(props);
-		const title = t('hub_setup_page_title');
+		this.state = {
+			sendMountActions: false,
+			showModal: false,
+		};
 
+		this.props.history.push('/setup/1');
+
+		const title = t('hub_setup_page_title');
 		window.document.title = title;
 
 		// The user can not enter the Custom Setup Workflow from /setup/1/custom
@@ -56,13 +62,6 @@ class SetupViewContainer extends React.Component {
 				this._setDefaultSettings();
 			}
 		});
-
-		this.state = {
-			sendMountActions: false,
-			showModal: false,
-		};
-
-		this.props.history.push('/setup/1');
 	}
 
 	/**

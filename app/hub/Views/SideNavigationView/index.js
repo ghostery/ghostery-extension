@@ -1,5 +1,5 @@
 /**
- * Custom Home Constants
+ * Point of entry index.js file for Side Navigation View
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -11,6 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-// Home View
-export const GET_HOME_PROPS = 'GET_HOME_PROPS';
-export const SET_HUMAN_WEB = 'SET_HUMAN_WEB';
+import SideNavigationView from './SideNavigationView';
+
+export default SideNavigationView;

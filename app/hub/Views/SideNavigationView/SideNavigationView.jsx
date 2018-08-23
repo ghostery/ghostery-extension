@@ -10,7 +10,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  *
- * ToDo: Update this file.
+ * ToDo: Add Proptypes (items)
  */
 
 import React, { Component } from 'react';
@@ -51,22 +51,26 @@ class SideNavigationView extends Component {
 	}
 
 	/**
-	 * A helper function for rendering a Side Navigation List Item
-	 * @return {JSX} JSX for the Navigation Item
+	 * Function to tell you if a route has nested routes
+	 * @param  {Object}  item  The route item in the Side Navigation
+	 * @return {Boolean}       Whether the route item has a nested route
 	 */
-
-	hasNestedRoutes(route) {
+	_hasNestedRoutes(item) {
 		const parentRoutes = ['setup', 'tutorial'];
-		return parentRoutes.some(parentRoute => route.href.includes(parentRoute));
+		return parentRoutes.some(parentRoute => item.href.includes(parentRoute));
 	}
 
+	/**
+	* Helper render function for rendering a Side Navigation List Item
+	* @return {JSX} JSX for the Navigation Item
+	*/
 	_renderItem(item = {}, index) {
 		switch (item.type) {
 			case 'separator':
 				return <hr key={index} />;
 			case 'link':
 				return (
-					<NavLink exact={!this.hasNestedRoutes(item)} to={item.href} key={index} className="flex-container align-middle">
+					<NavLink exact={!this._hasNestedRoutes(item)} to={item.href} key={index} className="flex-container align-middle">
 						<div className="flex-child-auto">{item.text}</div>
 						<div className="arrow-left">
 							<div className="arrow-left-top" />

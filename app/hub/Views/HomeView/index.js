@@ -10,12 +10,13 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import * as actions from './HomeViewActions';
-import HomeViewReducer from './HomeViewReducer';
 import HomeViewContainer from './HomeViewContainer';
+import HomeViewReducer from './HomeViewReducer';
+import * as HomeViewActions from './HomeViewActions';
 
 /**
  * Map redux store state properties to the component's own properties.
@@ -32,7 +33,7 @@ const mapStateToProps = state => Object.assign({}, state.home);
  * @memberof SetupContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign(actions), dispatch),
+	actions: bindActionCreators(Object.assign(HomeViewActions), dispatch),
 });
 
 export const reducer = HomeViewReducer;

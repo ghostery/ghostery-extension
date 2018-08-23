@@ -9,11 +9,12 @@
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
+ *
+ * ToDo: Add Proptypes
  */
 
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-
 import TutorialView from './TutorialView';
 
 // Component Views
@@ -25,20 +26,25 @@ import TutorialTrustView from '../TutorialViews/TutorialTrustView';
 import TutorialAntiSuiteView from '../TutorialViews/TutorialAntiSuiteView';
 
 /**
- * @class Implement the Tutorial View Container for the Ghostery Hub
+ * @class Implement the Tutorial View for the Ghostery Hub
  * @extends Component
  * @memberof HubContainers
  */
 class TutorialViewContainer extends React.Component {
-	/**
-	 * Lifecycle Event
-	 */
 	constructor(props) {
 		super(props);
+		this.state = {
+			sendMountActions: false,
+		};
+
+		this.props.history.push('/tutorial/1');
+
 		const title = '';
 		window.document.title = title;
-		this.props.actions.initTutorialProps(this.props.tutorial);
-		this.props.history.push('/tutorial/1');
+
+		this.props.actions.initTutorialProps(this.props.tutorial).then(() => {
+			this.setState({ sendMountActions: true });
+		});
 	}
 
 	/**
@@ -46,7 +52,7 @@ class TutorialViewContainer extends React.Component {
 	 * @return {JSX} JSX for rendering the Tutorial View of the Hub app
 	 */
 	render() {
-		const activeIndex = +this.props.location.pathname.split('/').pop();
+		const { sendMountActions } = this.state;
 		const steps = [
 			{
 				index: 1,
@@ -80,7 +86,7 @@ class TutorialViewContainer extends React.Component {
 			},
 		];
 
-		return <TutorialView activeIndex={activeIndex} steps={steps} />;
+		return <TutorialView steps={steps} sendMountActions={sendMountActions} />;
 	}
 }
 
