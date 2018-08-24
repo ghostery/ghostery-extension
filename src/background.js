@@ -1648,54 +1648,6 @@ function initializeGhosteryModules() {
 			LOADING++;
 		}
 
-		if (!(IS_EDGE || IS_CLIQZ)) {
-			if (globals.JUST_UPGRADED_FROM_7) {
-			// These users had human web already, so we respect their choice
-				conf.enable_human_web = !humanweb.isDisabled;
-				// These users did not have adblocking and antitracking.
-				// We introduce these new features initially disabled.
-				conf.enable_ad_block = false;
-				conf.enable_anti_tracking = false;
-				// Enable Offers except on Edge or Cliqz
-				conf.enable_offers = true;
-			} else if (globals.JUST_UPGRADED_FROM_8_1) {
-			// These users already had human web, adblocker and antitracking, so we respect their choice
-				conf.enable_ad_block = !adblocker.isDisabled;
-				conf.enable_anti_tracking = !antitracking.isDisabled;
-				conf.enable_human_web = !humanweb.isDisabled;
-				// These users did not have Offers, so we enable them on upgrade.
-				conf.enable_offers = true;
-			} else {
-			// Otherwise we respect browser-core default settings
-				conf.enable_ad_block = !adblocker.isDisabled;
-				conf.enable_anti_tracking = !antitracking.isDisabled;
-				conf.enable_human_web = !humanweb.isDisabled;
-				conf.enable_offers = !offers.isDisabled;
-			}
-
-			if (IS_EDGE) {
-				LOADING = 0;
-				setCliqzModuleEnabled(hpn, false);
-				setCliqzModuleEnabled(humanweb, false);
-				setCliqzModuleEnabled(offers, false);
-				conf.enable_offers = false;
-				conf.enable_human_web = false;
-			}
-
-			if (IS_CLIQZ) {
-				LOADING = 0;
-				setCliqzModuleEnabled(hpn, false);
-				setCliqzModuleEnabled(humanweb, false);
-				setCliqzModuleEnabled(antitracking, false);
-				setCliqzModuleEnabled(adblocker, false);
-				setCliqzModuleEnabled(offers, false);
-				conf.enable_ad_block = false;
-				conf.enable_anti_tracking = false;
-				conf.enable_human_web = false;
-				conf.enable_offers = false;
-			}
-		}
-
 		console.log('cliqz.start. LOADING:', LOADING);
 		if (!LOADING) {
 			console.log('before adterCliqz');
@@ -1780,6 +1732,59 @@ function afterCliqz() {
 		delete globals.initProps;
 
 		panelData.init();
+	}
+
+	// Execution starts here. At this point all modules scheduled to be enabled
+	// according to Cliqz config are fully enabled.
+	// Note that dispatcher is disabled at this point
+	if (!(IS_EDGE || IS_CLIQZ)) {
+		if (globals.JUST_UPGRADED_FROM_7) {
+		// These users had human web already, so we respect their choice
+			conf.enable_human_web = !humanweb.isDisabled;
+			// These users did not have adblocking and antitracking.
+			// We introduce these new features initially disabled.
+			conf.enable_ad_block = false;
+			conf.enable_anti_tracking = false;
+			setCliqzModuleEnabled(adblocker, false);
+			setCliqzModuleEnabled(antitracking, false);
+			// Enable Offers except on Edge or Cliqz
+			conf.enable_offers = !offers.isDisabled;
+		} else if (globals.JUST_UPGRADED_FROM_8_1) {
+		// These users already had human web, adblocker and antitracking, so we respect their choice
+			conf.enable_ad_block = !adblocker.isDisabled;
+			conf.enable_anti_tracking = !antitracking.isDisabled;
+			conf.enable_human_web = !humanweb.isDisabled;
+			// These users did not have Offers, so we enable them on upgrade.
+			conf.enable_offers = !offers.isDisabled;
+		} else {
+		// Otherwise we respect browser-core default settings
+			conf.enable_ad_block = !adblocker.isDisabled;
+			conf.enable_anti_tracking = !antitracking.isDisabled;
+			conf.enable_human_web = !humanweb.isDisabled;
+			conf.enable_offers = !offers.isDisabled;
+		}
+	}
+
+	if (IS_EDGE) {
+		conf.enable_ad_block = !adblocker.isDisabled;
+		conf.enable_anti_tracking = !antitracking.isDisabled;
+		conf.enable_offers = false;
+		conf.enable_human_web = false;
+		setCliqzModuleEnabled(hpn, false);
+		setCliqzModuleEnabled(humanweb, false);
+		setCliqzModuleEnabled(offers, false);
+	}
+
+	if (IS_CLIQZ) {
+		conf.enable_ad_block = false;
+		conf.enable_anti_tracking = false;
+		conf.enable_human_web = false;
+		conf.enable_offers = false;
+		setCliqzModuleEnabled(hpn, false);
+		setCliqzModuleEnabled(humanweb, false);
+		setCliqzModuleEnabled(antitracking, false);
+		setCliqzModuleEnabled(adblocker, false);
+		setCliqzModuleEnabled(offers, false);
 	}
 
 	return continueGhosteryInitialization()
