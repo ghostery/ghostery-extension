@@ -1586,6 +1586,10 @@ function initializeVersioning() {
  * @return {Promise}
  */
 function initializeGhosteryModules() {
+	// Note that while this function runs
+	// dispatcher is not initialized so
+	// any changes to conf properties
+	// does not trigger additional actions.
 	console.log('STEP 1');
 	if (globals.JUST_UPGRADED) {
 		log('JUST UPGRADED');
@@ -1675,6 +1679,7 @@ function initializeGhosteryModules() {
 				setCliqzModuleEnabled(humanweb, false);
 				setCliqzModuleEnabled(offers, false);
 				conf.enable_offers = false;
+				conf.enable_human_web = false;
 			}
 
 			if (IS_CLIQZ) {
@@ -1701,80 +1706,6 @@ function initializeGhosteryModules() {
 			console.log('initializeGhosteryModules error', err);
 		});
 }
-
-function continueGhosteryInitialization() {
-	console.log('STEP 4');
-	return initialiseWebRequestPipeline()
-		.then(() => {
-			console.log('STEP 6');
-			// Set these tasks to run every hour
-			function scheduledTasks() {
-			// auto-fetch from CMP
-				cmp.fetchCMPData();
-
-				if (!IS_EDGE && !IS_CLIQZ) {
-				// auto-fetch human web offer
-					abtest.fetch().then(() => {
-						setupABTest();
-					}).catch(() => {
-						log('Unable to reach abtest server');
-					});
-				}
-			}
-
-			// Check CMP and ABTest every hour.
-			setInterval(scheduledTasks, 3600000);
-
-			// Update db right away.
-			autoUpdateBugDb();
-			// Schedule it to run every hour.
-			setInterval(autoUpdateBugDb, 3600000);
-
-			// Setup the ghostery button
-			utils.getActiveTab((tab) => {
-				let tabId = 0;
-				if (tab) {
-					tabId = tab.id;
-				}
-				button.update(tabId);
-			});
-
-			// record active ping
-			metrics.ping('active');
-
-			// initialize all tracker and surrogate DBs in parallel with Promise.all
-			return Promise.all([
-				bugDb.init(globals.JUST_UPGRADED),
-				c2pDb.init(globals.JUST_UPGRADED),
-				compDb.init(globals.JUST_UPGRADED),
-				surrogatedb.init(globals.JUST_UPGRADED),
-			]).then(() => {
-			// run scheduledTasks on init
-				scheduledTasks();
-			});
-		})
-		.catch((e) => {
-			console.log('continueGhosteryInitialization error', e);
-		});
-}
-
-/**
- * Function is called when most of the changes to conf are made
- */
-function finalTouch() {
-	console.log('STEP 8');
-	if (IS_CLIQZ) {
-		importCliqzSettings(cliqz, conf);
-	}
-	common.prefsSet(globals.initProps);
-	globals.INIT_COMPLETE = true;
-	delete globals.initProps;
-
-	panelData.init();
-
-	// listen for changes to specific conf properties
-	initializeDispatcher();
-}
 /**
  * Function is called after the last <moduleName>.on('enabled'...) handler is executed
  * which means that all cliqz modules are fully loaded.
@@ -1782,6 +1713,81 @@ function finalTouch() {
 function afterCliqz() {
 	console.log('STEP 3');
 	console.log('AFTER CLIQZ IS CALLED');
+
+	function continueGhosteryInitialization() {
+		console.log('STEP 4');
+		return initialiseWebRequestPipeline()
+			.then(() => {
+				console.log('STEP 6');
+				// Set these tasks to run every hour
+				function scheduledTasks() {
+					// auto-fetch from CMP
+					cmp.fetchCMPData();
+
+					if (!IS_EDGE && !IS_CLIQZ) {
+						// auto-fetch human web offer
+						abtest.fetch().then(() => {
+							setupABTest();
+						}).catch(() => {
+							log('Unable to reach abtest server');
+						});
+					}
+				}
+
+				// Check CMP and ABTest every hour.
+				setInterval(scheduledTasks, 3600000);
+
+				// Update db right away.
+				autoUpdateBugDb();
+				// Schedule it to run every hour.
+				setInterval(autoUpdateBugDb, 3600000);
+
+				// Setup the ghostery button
+				utils.getActiveTab((tab) => {
+					let tabId = 0;
+					if (tab) {
+						tabId = tab.id;
+					}
+					button.update(tabId);
+				});
+
+				// record active ping
+				metrics.ping('active');
+
+				// initialize all tracker and surrogate DBs in parallel with Promise.all
+				return Promise.all([
+					bugDb.init(globals.JUST_UPGRADED),
+					c2pDb.init(globals.JUST_UPGRADED),
+					compDb.init(globals.JUST_UPGRADED),
+					surrogatedb.init(globals.JUST_UPGRADED),
+				]).then(() => {
+					// run scheduledTasks on init
+					scheduledTasks();
+				});
+			})
+			.catch((e) => {
+				console.log('continueGhosteryInitialization error', e);
+			});
+	}
+
+	/**
+	 * Function is called when most of the changes to conf are made
+	 */
+	function finalTouch() {
+		console.log('STEP 8');
+		if (IS_CLIQZ) {
+			importCliqzSettings(cliqz, conf);
+		}
+		common.prefsSet(globals.initProps);
+		globals.INIT_COMPLETE = true;
+		delete globals.initProps;
+
+		panelData.init();
+
+		// listen for changes to specific conf properties
+		initializeDispatcher();
+	}
+
 	return continueGhosteryInitialization()
 		.then(() => {
 			console.log('STEP 7');
