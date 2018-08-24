@@ -1,0 +1,75 @@
+/**
+ * Stepped Navigation Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+// Foundation Overrides
+.SteppedNavigation .button {
+	margin: 0;
+	min-width: 150px;
+	max-width: 250px;
+}
+
+// Exit Navigation Link
+.SteppedNavigation__exit {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 18px 33px;
+	padding: 11px 13px;
+	border-radius: 3px;
+}
+.SteppedNavigation__exitText {
+	font-size: 11px;
+	color: #4a4a4a;
+	margin-right: 15px;
+}
+.SteppedNavigation__exitIcon {
+	height: 15px;
+	width: 15px;
+	margin: 0 auto;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-image: buildIconX(#4a4a4a);
+}
+.SteppedNavigation__exit:hover {
+	background-color: #efefef;
+}
+
+// Bottom Navigation Circles and Buttons
+.SteppedNavigation {
+	margin: 60px 0 45px;
+}
+.SteppedNavigation__buttonContainer {
+	width: 250px;
+	margin: 0 15px;
+}
+.SteppedNavigation__circles a {
+	display: inline-block;
+	position: relative;
+	height: 10px;
+	width: 10px;
+	margin: 0 10px;
+	border-radius: 50%;
+	background-color: #cccccc;
+	border: 1px solid #a4a4a4;
+}
+.SteppedNavigation__circles a.active::after {
+	content: '';
+	display: block;
+	position: absolute;
+	top: -6px;
+	bottom: -6px;
+	left: -6px;
+	right: -6px;
+	border-radius: 50%;
+	border: 2px solid purple;
+}
