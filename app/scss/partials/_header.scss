@@ -56,7 +56,7 @@
 		.non-subscriber-badge {
 			@extend .base-badge;
 			path {
-				fill: #D4AF37; 
+				fill: $gold; 
 			} 
 		}
 	}
