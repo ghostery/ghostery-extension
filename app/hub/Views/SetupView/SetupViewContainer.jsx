@@ -51,9 +51,11 @@ class SetupViewContainer extends React.Component {
 			const { setup_show_warning_override } = data;
 			const { justInstalled } = QueryString.parse(window.location.search);
 
-			if (!justInstalled && setup_show_warning_override) {
+			if (justInstalled !== 'true' && setup_show_warning_override) {
 				this._toggleModal();
 			} else {
+				const { origin, pathname, hash } = window.location;
+				window.history.pushState({}, '', `${origin}${pathname}${hash}`);
 				this._setDefaultSettings();
 			}
 		});
