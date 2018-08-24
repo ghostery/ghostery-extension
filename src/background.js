@@ -1001,7 +1001,6 @@ function initializeDispatcher() {
 		panelData.init();
 	});
 	dispatcher.on('conf.save.enable_human_web', (enableHumanWeb) => {
-		console.log('HERE 2', LOADING);
 		if (!IS_EDGE && !IS_CLIQZ) {
 			setCliqzModuleEnabled(humanweb, enableHumanWeb).then(() => {
 				setupABTest();
@@ -1278,6 +1277,7 @@ offers.on('enabled', () => {
 	console.log('STEP 2+');
 	console.log('OFFERS ENABLED CALLED');
 	offers.isReady().then(() => {
+		button.update();
 		if (OFFERS_ENABLE_SIGNAL) {
 			rewards.sendSignal(OFFERS_ENABLE_SIGNAL);
 
