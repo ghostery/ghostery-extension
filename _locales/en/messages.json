@@ -1729,7 +1729,7 @@
 		"message": "Priority Support"
 	},
 	"subscribe_pitch": {
-		"message": "We work hard to keep Ghostery's privacy protection free for all our users. If you like what we do, however, you can support us with a small monthly subscription fee"
+		"message": "We work hard to keep Ghostery's privacy protection free for all our users. If you like what we do, you can support us with a small subscription of $$2 per month."
 	},
 	"subscribe_pitch_learn_more": {
 		"message": "Learn more"
