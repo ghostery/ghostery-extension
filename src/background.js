@@ -1760,10 +1760,7 @@ function afterCliqz() {
 					c2pDb.init(globals.JUST_UPGRADED),
 					compDb.init(globals.JUST_UPGRADED),
 					surrogatedb.init(globals.JUST_UPGRADED),
-				]).then(() => {
-					// run scheduledTasks on init
-					scheduledTasks();
-				});
+				]).then(() => scheduledTasks());
 			})
 			.catch((e) => {
 				console.log('continueGhosteryInitialization error', e);
@@ -1783,14 +1780,13 @@ function afterCliqz() {
 		delete globals.initProps;
 
 		panelData.init();
-
-		// listen for changes to specific conf properties
-		initializeDispatcher();
 	}
 
 	return continueGhosteryInitialization()
 		.then(() => {
 			console.log('STEP 7');
+			// listen for changes to specific conf properties
+			initializeDispatcher();
 			if (conf.account !== null) {
 				account.getUser()
 					.then(account.getUserSettings)
