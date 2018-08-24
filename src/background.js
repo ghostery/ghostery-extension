@@ -1001,59 +1001,47 @@ function initializeDispatcher() {
 		panelData.init();
 	});
 	dispatcher.on('conf.save.enable_human_web', (enableHumanWeb) => {
-		if (!LOADING) {
-			if (!IS_EDGE && !IS_CLIQZ) {
-				setCliqzModuleEnabled(humanweb, enableHumanWeb).then(() => {
-					setupABTest();
-				});
-			} else {
-				setCliqzModuleEnabled(humanweb, false);
-			}
+		console.log('HERE 2', LOADING);
+		if (!IS_EDGE && !IS_CLIQZ) {
+			setCliqzModuleEnabled(humanweb, enableHumanWeb).then(() => {
+				setupABTest();
+			});
 		} else {
-			console.log('ADJUSTING LOADING IN HW', LOADING);
-			if (enableHumanWeb) {
-				decrementLoadCounter();
-			}
+			setCliqzModuleEnabled(humanweb, false);
 		}
 	});
 	dispatcher.on('conf.save.enable_offers', (enableOffers) => {
-		if (!LOADING) {
-			button.update();
-			if (!IS_EDGE && !IS_CLIQZ) {
-				if (!enableOffers) {
-					const actions = cliqz &&
-					cliqz.modules['offers-v2'] &&
-					cliqz.modules['offers-v2'].background &&
-					cliqz.modules['offers-v2'].background.actions;
-					if (actions) {
-						actions.flushSignals();
-					}
-					OFFERS_ENABLE_SIGNAL = undefined;
-					registerWithOffers(offers, enableOffers);
+		button.update();
+		if (!IS_EDGE && !IS_CLIQZ) {
+			if (!enableOffers) {
+				const actions = cliqz &&
+				cliqz.modules['offers-v2'] &&
+				cliqz.modules['offers-v2'].background &&
+				cliqz.modules['offers-v2'].background.actions;
+				if (actions) {
+					actions.flushSignals();
 				}
-				setCliqzModuleEnabled(offers, enableOffers);
-			} else {
-				setCliqzModuleEnabled(offers, false);
-				registerWithOffers(offers, false);
+				OFFERS_ENABLE_SIGNAL = undefined;
+				registerWithOffers(offers, enableOffers);
 			}
+			setCliqzModuleEnabled(offers, enableOffers);
+		} else {
+			setCliqzModuleEnabled(offers, false);
+			registerWithOffers(offers, false);
 		}
 	});
 	dispatcher.on('conf.save.enable_anti_tracking', (enableAntitracking) => {
-		if (!LOADING) {
-			if (!IS_CLIQZ) {
-				setCliqzModuleEnabled(antitracking, enableAntitracking);
-			} else {
-				setCliqzModuleEnabled(antitracking, false);
-			}
+		if (!IS_CLIQZ) {
+			setCliqzModuleEnabled(antitracking, enableAntitracking);
+		} else {
+			setCliqzModuleEnabled(antitracking, false);
 		}
 	});
 	dispatcher.on('conf.save.enable_ad_block', (enableAdBlock) => {
-		if (!LOADING) {
-			if (!IS_CLIQZ) {
-				setCliqzModuleEnabled(adblocker, enableAdBlock);
-			} else {
-				setCliqzModuleEnabled(adblocker, false);
-			}
+		if (!IS_CLIQZ) {
+			setCliqzModuleEnabled(adblocker, enableAdBlock);
+		} else {
+			setCliqzModuleEnabled(adblocker, false);
 		}
 	});
 
@@ -1125,6 +1113,7 @@ function setupABTest() {
  *                        	or one of the webRequestPipeline actions rejects.
  */
 function initialiseWebRequestPipeline() {
+	console.log('STEP 5');
 	const webRequestPipeline = cliqz.modules['webrequest-pipeline'];
 	if (webRequestPipeline.isDisabled) {
 		// no pipeline... this shouldn't happen
@@ -1202,6 +1191,7 @@ function decrementLoadCounter() {
  * @memberOf Background
  */
 antitracking.on('enabled', () => {
+	console.log('STEP 2+');
 	console.log('ATITRACKING ENABLED CALLED');
 	antitracking.isReady().then(() => {
 		// remove Cliqz-side whitelisting steps and replace with ghostery ones.
@@ -1241,7 +1231,11 @@ antitracking.on('enabled', () => {
 			console.log('ADJUSTING LOADING IN AT', LOADING);
 			decrementLoadCounter();
 		});
-	});
+	})
+		.catch((err) => {
+			console.log('antitracking.onEnabled error', err);
+			decrementLoadCounter();
+		});
 });
 
 /**
@@ -1250,22 +1244,28 @@ antitracking.on('enabled', () => {
  * @memberOf Background
  */
 adblocker.on('enabled', () => {
+	console.log('STEP 2+');
 	console.log('ADBLOCKER ENABLED CALLED');
-	adblocker.isReady().then(() => {
-		Promise.all([
-			adblocker.action('removePipelineStep', 'checkWhitelist'),
-			adblocker.action('addPipelineStep', {
-				name: 'checkGhosteryWhitelist',
-				spec: 'break',
-				fn: state => !isWhitelisted(state),
-				before: ['checkBlocklist']
-			}),
-			adblocker.action('addWhiteListCheck',
-				url => isWhitelisted({ sourceUrl: url }))
-		]);
-	})
+	adblocker.isReady()
+		.then(() => {
+			Promise.all([
+				adblocker.action('removePipelineStep', 'checkWhitelist'),
+				adblocker.action('addPipelineStep', {
+					name: 'checkGhosteryWhitelist',
+					spec: 'break',
+					fn: state => !isWhitelisted(state),
+					before: ['checkBlocklist']
+				}),
+				adblocker.action('addWhiteListCheck',
+					url => isWhitelisted({ sourceUrl: url }))
+			]);
+		})
 		.then(() => {
 			console.log('ADJUSTING LOADING IN AD', LOADING);
+			decrementLoadCounter();
+		})
+		.catch((err) => {
+			console.log('adblocker.onEnabled error', err);
 			decrementLoadCounter();
 		});
 });
@@ -1275,6 +1275,7 @@ adblocker.on('enabled', () => {
  * @memberOf Background
  */
 offers.on('enabled', () => {
+	console.log('STEP 2+');
 	console.log('OFFERS ENABLED CALLED');
 	offers.isReady().then(() => {
 		if (OFFERS_ENABLE_SIGNAL) {
@@ -1302,11 +1303,18 @@ offers.on('enabled', () => {
 		}
 		registerWithOffers(offers, true)
 			.then(() => {
-				setCliqzModuleEnabled(messageCenter, true);
+				setCliqzModuleEnabled(messageCenter, true)
+					.then(() => {
+						messageCenter.isReady()
+							.then(() => {
+								console.log('ADJUSTING LOADING IN OF', LOADING);
+								decrementLoadCounter();
+							});
+					});
 			});
 	})
-		.then(() => {
-			console.log('ADJUSTING LOADING IN OF', LOADING);
+		.catch((err) => {
+			console.log('offers.onEnabled error', err);
 			decrementLoadCounter();
 		});
 });
@@ -1323,7 +1331,7 @@ messageCenter.on('enabled', () => {
 	messageCenter.isReady().then(() => {
 		log('IN MESSAGE CENTER ON ENABLED', offers, messageCenter);
 		// const messageCenter = cliqz.modules['message-center'];
-		return messageCenter.action('registerMessageHandler', OFFERS_HANDLER_ID, (msg) => {
+		messageCenter.action('registerMessageHandler', OFFERS_HANDLER_ID, (msg) => {
 			// ffers enabled at the moment when message received
 			messageCenter.action('hideMessage', OFFERS_HANDLER_ID, msg);
 			msg.Dismiss = 1; // to be immediately dismissed once shown
@@ -1578,6 +1586,7 @@ function initializeVersioning() {
  * @return {Promise}
  */
 function initializeGhosteryModules() {
+	console.log('STEP 1');
 	if (globals.JUST_UPGRADED) {
 		log('JUST UPGRADED');
 
@@ -1624,9 +1633,7 @@ function initializeGhosteryModules() {
 	}
 	// start cliqz app
 	cliqz.start().then(() => {
-		if (!humanweb.isDisabled) {
-			LOADING++;
-		}
+		console.log('STEP 2');
 		if (!adblocker.isDisabled) {
 			LOADING++;
 		}
@@ -1637,137 +1644,161 @@ function initializeGhosteryModules() {
 			LOADING++;
 		}
 
-		// run wrapper tasks which set up base integrations between ghostery and these modules
-		initialiseWebRequestPipeline()
-			.then(() => {
-				if (!(IS_EDGE || IS_CLIQZ)) {
-					if (globals.JUST_UPGRADED_FROM_7) {
-					// These users had human web already, so we respect their choice
-						conf.enable_human_web = !humanweb.isDisabled;
-						// These users did not have adblocking and antitracking.
-						// We introduce these new features initially disabled.
-						conf.enable_ad_block = false;
-						conf.enable_anti_tracking = false;
-						// Enable Offers except on Edge or Cliqz
-						conf.enable_offers = true;
-					} else if (globals.JUST_UPGRADED_FROM_8_1) {
-					// These users already had human web, adblocker and antitracking, so we respect their choice
-						conf.enable_ad_block = !adblocker.isDisabled;
-						conf.enable_anti_tracking = !antitracking.isDisabled;
-						conf.enable_human_web = !humanweb.isDisabled;
-						// These users did not have Offers, so we enable them on upgrade.
-						conf.enable_offers = true;
-					} else {
-					// Otherwise we respect browser-core default settings
-						conf.enable_ad_block = !adblocker.isDisabled;
-						conf.enable_anti_tracking = !antitracking.isDisabled;
-						conf.enable_human_web = !humanweb.isDisabled;
-						conf.enable_offers = !offers.isDisabled;
-					}
+		if (!(IS_EDGE || IS_CLIQZ)) {
+			if (globals.JUST_UPGRADED_FROM_7) {
+			// These users had human web already, so we respect their choice
+				conf.enable_human_web = !humanweb.isDisabled;
+				// These users did not have adblocking and antitracking.
+				// We introduce these new features initially disabled.
+				conf.enable_ad_block = false;
+				conf.enable_anti_tracking = false;
+				// Enable Offers except on Edge or Cliqz
+				conf.enable_offers = true;
+			} else if (globals.JUST_UPGRADED_FROM_8_1) {
+			// These users already had human web, adblocker and antitracking, so we respect their choice
+				conf.enable_ad_block = !adblocker.isDisabled;
+				conf.enable_anti_tracking = !antitracking.isDisabled;
+				conf.enable_human_web = !humanweb.isDisabled;
+				// These users did not have Offers, so we enable them on upgrade.
+				conf.enable_offers = true;
+			} else {
+			// Otherwise we respect browser-core default settings
+				conf.enable_ad_block = !adblocker.isDisabled;
+				conf.enable_anti_tracking = !antitracking.isDisabled;
+				conf.enable_human_web = !humanweb.isDisabled;
+				conf.enable_offers = !offers.isDisabled;
+			}
 
-					if (IS_EDGE) {
-						LOADING = 0;
-						setCliqzModuleEnabled(hpn, false);
-						setCliqzModuleEnabled(humanweb, false);
-						setCliqzModuleEnabled(offers, false);
-					}
+			if (IS_EDGE) {
+				LOADING = 0;
+				setCliqzModuleEnabled(hpn, false);
+				setCliqzModuleEnabled(humanweb, false);
+				setCliqzModuleEnabled(offers, false);
+				conf.enable_offers = false;
+			}
 
-					if (IS_CLIQZ) {
-						LOADING = 0;
-						setCliqzModuleEnabled(hpn, false);
-						setCliqzModuleEnabled(humanweb, false);
-						setCliqzModuleEnabled(antitracking, false);
-						setCliqzModuleEnabled(adblocker, false);
-						setCliqzModuleEnabled(offers, false);
-					}
+			if (IS_CLIQZ) {
+				LOADING = 0;
+				setCliqzModuleEnabled(hpn, false);
+				setCliqzModuleEnabled(humanweb, false);
+				setCliqzModuleEnabled(antitracking, false);
+				setCliqzModuleEnabled(adblocker, false);
+				setCliqzModuleEnabled(offers, false);
+				conf.enable_ad_block = false;
+				conf.enable_anti_tracking = false;
+				conf.enable_human_web = false;
+				conf.enable_offers = false;
+			}
+		}
 
-					if (!LOADING) {
-						afterCliqz();
-					}
+		console.log('cliqz.start. LOADING:', LOADING);
+		if (!LOADING) {
+			console.log('before adterCliqz');
+			afterCliqz();
+		}
+	})
+		.catch((err) => {
+			console.log('initializeGhosteryModules error', err);
+		});
+}
+
+function continueGhosteryInitialization() {
+	console.log('STEP 4');
+	return initialiseWebRequestPipeline()
+		.then(() => {
+			console.log('STEP 6');
+			// Set these tasks to run every hour
+			function scheduledTasks() {
+			// auto-fetch from CMP
+				cmp.fetchCMPData();
+
+				if (!IS_EDGE && !IS_CLIQZ) {
+				// auto-fetch human web offer
+					abtest.fetch().then(() => {
+						setupABTest();
+					}).catch(() => {
+						log('Unable to reach abtest server');
+					});
 				}
+			}
+
+			// Check CMP and ABTest every hour.
+			setInterval(scheduledTasks, 3600000);
+
+			// Update db right away.
+			autoUpdateBugDb();
+			// Schedule it to run every hour.
+			setInterval(autoUpdateBugDb, 3600000);
+
+			// Setup the ghostery button
+			utils.getActiveTab((tab) => {
+				let tabId = 0;
+				if (tab) {
+					tabId = tab.id;
+				}
+				button.update(tabId);
 			});
-	}).catch((e) => {
-		console.log('cliqzStartup error', e);
-	});
 
-	// Set these tasks to run every hour
-	function scheduledTasks() {
-		// auto-fetch from CMP
-		cmp.fetchCMPData();
+			// record active ping
+			metrics.ping('active');
 
-		if (!IS_EDGE && !IS_CLIQZ) {
-			// auto-fetch human web offer
-			abtest.fetch().then(() => {
-				setupABTest();
-			}).catch(() => {
-				log('Unable to reach abtest server');
+			// initialize all tracker and surrogate DBs in parallel with Promise.all
+			return Promise.all([
+				bugDb.init(globals.JUST_UPGRADED),
+				c2pDb.init(globals.JUST_UPGRADED),
+				compDb.init(globals.JUST_UPGRADED),
+				surrogatedb.init(globals.JUST_UPGRADED),
+			]).then(() => {
+			// run scheduledTasks on init
+				scheduledTasks();
 			});
-		}
-	}
-
-	// Check CMP and ABTest every hour.
-	setInterval(scheduledTasks, 3600000);
-
-	// Update db right away.
-	autoUpdateBugDb();
-	// Schedule it to run every hour.
-	setInterval(autoUpdateBugDb, 3600000);
-
-	// listen for changes to specific conf properties
-	initializeDispatcher();
-
-	// Setup the ghostery button
-	utils.getActiveTab((tab) => {
-		let tabId = 0;
-		if (tab) {
-			tabId = tab.id;
-		}
-		button.update(tabId);
-	});
-
-	// record active ping
-	metrics.ping('active');
-	// initialize all tracker and surrogate DBs in parallel with Promise.all
-	return Promise.all([
-		bugDb.init(globals.JUST_UPGRADED),
-		c2pDb.init(globals.JUST_UPGRADED),
-		compDb.init(globals.JUST_UPGRADED),
-		surrogatedb.init(globals.JUST_UPGRADED),
-	]).then(() => {
-		// run scheduledTasks on init
-		scheduledTasks();
-		// initialize panel data
-		panelData.init();
-	});
+		})
+		.catch((e) => {
+			console.log('continueGhosteryInitialization error', e);
+		});
 }
 
 /**
  * Function is called when most of the changes to conf are made
  */
 function finalTouch() {
+	console.log('STEP 8');
 	if (IS_CLIQZ) {
 		importCliqzSettings(cliqz, conf);
 	}
 	common.prefsSet(globals.initProps);
 	globals.INIT_COMPLETE = true;
 	delete globals.initProps;
+
+	panelData.init();
+
+	// listen for changes to specific conf properties
+	initializeDispatcher();
 }
 /**
  * Function is called after the last <moduleName>.on('enabled'...) handler is executed
  * which means that all cliqz modules are fully loaded.
  */
 function afterCliqz() {
+	console.log('STEP 3');
 	console.log('AFTER CLIQZ IS CALLED');
-	if (conf.account !== null) {
-		account.getUser()
-			.then(account.getUserSettings)
-			.then(() => {
+	return continueGhosteryInitialization()
+		.then(() => {
+			console.log('STEP 7');
+			if (conf.account !== null) {
+				account.getUser()
+					.then(account.getUserSettings)
+					.then(() => {
+						finalTouch();
+					})
+					.catch(err => log(err));
+			} else {
 				finalTouch();
-			})
-			.catch(err => log(err));
-	} else {
-		finalTouch();
-	}
+			}
+		})
+		.catch((err) => {
+			log('afterCliqz error', err);
+		});
 }
 
 /**
