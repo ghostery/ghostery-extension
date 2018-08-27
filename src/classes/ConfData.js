@@ -150,7 +150,7 @@ class ConfData {
 			_initProperty('surrogates', {});
 			_initProperty('version_history', []);
 			_initProperty('account', null);
-			_initProperty('themes', null);
+			_initProperty('themes', {});
 		});
 	}
 

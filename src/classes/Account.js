@@ -415,7 +415,7 @@ class Account {
 
 	_clearAccountPerks = () => {
 		conf.current_theme = 'default';
-		conf.themes = null;
+		conf.themes = {};
 	}
 
 	_getUserIDFromCookie = () => (

@@ -780,7 +780,7 @@ function onMessageHandler(request, sender, callback) {
 		if (message.currentTheme !== 'default' &&
 			account.hasScopesUnverified(['subscriptions:supporter'])) {
 			// try to get it locally
-			message.theme = (conf.themes || {})[message.currentTheme];
+			message.theme = conf.themes[message.currentTheme];
 			if (message.theme) {
 				// This will trigger panelData.set through dispatch
 				// as currentTheme is in SYNC_ARRAY
@@ -790,7 +790,7 @@ function onMessageHandler(request, sender, callback) {
 			}
 			account.getTheme(`${message.currentTheme}.css`).then((theme) => {
 				if (theme) {
-					const themes = conf.themes || {};
+					const { themes } = conf;
 					themes[message.currentTheme] = theme;
 					conf.themes = themes;
 					conf.current_theme = message.currentTheme;
