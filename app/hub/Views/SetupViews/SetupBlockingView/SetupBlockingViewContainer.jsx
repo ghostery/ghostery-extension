@@ -14,6 +14,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import SetupBlockingView from './SetupBlockingView';
+import {
+	BLOCKING_POLICY_NOTHING,
+	BLOCKING_POLICY_RECOMMENDED,
+	BLOCKING_POLICY_EVERYTHING,
+	BLOCKING_POLICY_CUSTOM
+} from '../../SetupView/SetupViewConstants';
 
 /**
  * @class Implement the Setup Blocking View for the Ghostery Hub
@@ -62,25 +68,25 @@ class SetupBlockingViewContainer extends Component {
 		const { blockingPolicy } = this.props.setup;
 		const choices = [
 			{
-				name: 'BLOCKING_POLICY_RECOMMENDED',
-				image: '/app/images/hub/setup/block-recommended.svg',
-				text: t('hub_setup_blocking_text_recommended'),
-				description: t('hub_setup_blocking_description_recommended'),
-			},
-			{
-				name: 'BLOCKING_POLICY_NOTHING',
+				name: BLOCKING_POLICY_NOTHING,
 				image: '/app/images/hub/setup/block-none.svg',
 				text: t('hub_setup_blocking_text_nothing'),
 				description: t('hub_setup_blocking_description_nothing'),
 			},
 			{
-				name: 'BLOCKING_POLICY_EVERYTHING',
+				name: BLOCKING_POLICY_RECOMMENDED,
+				image: '/app/images/hub/setup/block-recommended.svg',
+				text: t('hub_setup_blocking_text_recommended'),
+				description: t('hub_setup_blocking_description_recommended'),
+			},
+			{
+				name: BLOCKING_POLICY_EVERYTHING,
 				image: '/app/images/hub/setup/block-all.svg',
 				text: t('hub_setup_blocking_text_everything'),
 				description: t('hub_setup_blocking_description_everything'),
 			},
 			{
-				name: 'BLOCKING_POLICY_CUSTOM',
+				name: BLOCKING_POLICY_CUSTOM,
 				image: '/app/images/hub/setup/block-custom.svg',
 				text: t('hub_setup_blocking_text_custom'),
 				description: t('hub_setup_blocking_description_custom'),

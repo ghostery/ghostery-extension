@@ -19,6 +19,8 @@ import {
 	INIT_SETUP_PROPS,
 	SET_SETUP_NAVIGATION,
 	SET_BLOCKING_POLICY,
+	BLOCKING_POLICY_NOTHING,
+	BLOCKING_POLICY_RECOMMENDED,
 	SET_ANTI_TRACKING,
 	SET_AD_BLOCK,
 	SET_SMART_BLOCKING,
@@ -39,7 +41,7 @@ const initialState = Immutable({
 			textDone: false,
 		},
 		setup_show_warning_override: true,
-		blockingPolicy: 'recommended',
+		blockingPolicy: BLOCKING_POLICY_NOTHING,
 		enable_anti_tracking: true,
 		enable_ad_block: true,
 		enable_smart_blocking: true,
@@ -105,7 +107,7 @@ describe('app/hub/Views/SetupView reducer', () => {
 	});
 
 	test('reducer correctly handles SET_BLOCKING_POLICY', () => {
-		const data = { blockingPolicy: 'nothing' };
+		const data = { blockingPolicy: BLOCKING_POLICY_RECOMMENDED };
 		const action = { data, type: SET_BLOCKING_POLICY };
 
 		const updatedSetupState = Immutable.merge(initialState.setup, data);
