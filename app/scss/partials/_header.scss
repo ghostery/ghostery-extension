@@ -40,6 +40,31 @@
 		color: $white;
 		padding: 7px 0 7px 15px;
 		height: 36px;
+		.header-logo {
+			height: 21px;
+			width: 75px;
+			.back-arrow {
+				display: none;
+			}
+			&.show-back-arrow {
+				@extend %pointer;
+				width: 110px;
+				.back-arrow {
+					display: inline-block;
+					box-sizing: content-box;
+					margin: 0 5px 5px -5px;
+					width: 8px;
+					height: 13px;
+					background-image: url("/app/images/panel/header-back-arrow.svg");
+				}
+			}
+			.logo-icon {
+				width: 75px;
+				height: 22px;
+				background-image: url("/app/images/panel/header-logo-icon.svg");
+				display: inline-block;
+			} 
+		}
 		.base-badge {
 			@extend %pointer;
 			width: 29px;
@@ -59,34 +84,14 @@
 				fill: $gold; 
 			} 
 		}
-	}
-	.header-logo {
-		display: inline;
-		background-size: auto 100%;
-		background-repeat: no-repeat;
-		height: 21px;
-		width: 75px;
-		background-position: right;
-		.back-arrow {
+		.header-kebab {
 			@extend %pointer;
-			display: none;
-			height: 13px;
-			padding: 0 15px 17px 0
-		}
-		&.show-back-arrow {
-			width: 90px;
-			.back-arrow {
-				display: inline-block;
+			height: 16px;
+			width: 34px;
+			svg {
+				display: block;
+				margin: 0 auto;
 			}
-		}
-	}
-	.header-kebab {
-		@extend %pointer;
-		height: 16px;
-		width: 34px;
-		svg {
-			display: block;
-			margin: 0 auto;
 		}
 	}
 	.header-helper-text {

@@ -171,22 +171,6 @@ export function doXHR(method, url, query) {
 		xhr.send(query);
 	});
 }
-/**
- * Determine if user is a subscriber
- * @memberOf PanelUtils
- * @param  {array} userScopes 	array of scope strings
- * @return {boolean}
- */
-export function isSubscriber(user) {
-	if (!user || !user.scopes) { return false; }
-	const userScopes = user.scopes;
-
-	// check scopes
-	if (userScopes.indexOf('god') >= 0) { return true; }
-	if (userScopes.indexOf('subscription:supporter') >= 0) { return true; }
-
-	return false;
-}
 
 /**
  * Sets the theme

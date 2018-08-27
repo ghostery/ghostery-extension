@@ -778,7 +778,7 @@ function onMessageHandler(request, sender, callback) {
 		return false;
 	} else if (name === 'account.getTheme') {
 		if (message.currentTheme !== 'default' &&
-			account.hasScopesUnverified(['subscription:supporter'])) {
+			account.hasScopesUnverified(['subscriptions:supporter'])) {
 			// try to get it locally
 			message.theme = (conf.themes || {})[message.currentTheme];
 			if (message.theme) {
@@ -909,6 +909,9 @@ function onMessageHandler(request, sender, callback) {
 	} else if (name === 'account.getUser') {
 		account.getUser(message)
 			.then((user) => {
+				if (user) {
+					user.subscriptionsSupporter = account.hasScopesUnverified(['subscriptions:supporter']);
+				}
 				callback({ user });
 			})
 			.catch((err) => {

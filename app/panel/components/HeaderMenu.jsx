@@ -16,6 +16,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactSVG from 'react-svg';
+import ClassNames from 'classnames';
 
 import ClickOutside from './BuildingBlocks/ClickOutside';
 import { sendMessage, sendMessageInPromise } from '../utils/msg';
@@ -152,7 +153,7 @@ class HeaderMenu extends React.Component {
 	clickSubscriber = (evt) => {
 		this.props.toggleDropdown();
 		if (!this.props.disableClickIf(evt, 'subscription')) {
-			this.props.history.push((!this.props.loggedIn || !this.props.subscriber) ? '/subscribe' : '/subscription/info');
+			this.props.history.push(this.props.subscriber ? '/subscription/info' : '/subscribe');
 		}
 	}
 	/**
@@ -160,8 +161,9 @@ class HeaderMenu extends React.Component {
 	 * @return {ReactComponent}   ReactComponent instance
 	 */
 	render() {
-		const { loggedIn, email, subscriber } = this.props;
-		const subscriberParams = (!loggedIn || !subscriber) ? { href: '/subscribe', optionClass: 'menu-option-non-subscriber', iconClass: 'menu-icon-container non-subscriber' } : { href: '/subscription/info', optionClass: 'menu-option', iconClass: 'menu-icon-container subscriber' };
+		const { loggedIn, email } = this.props;
+		const OptionClasses = ClassNames({ 'menu-option': this.props.subscriber, 'menu-option-non-subscriber': !this.props.subscriber });
+		const IconClasses = ClassNames('menu-icon-container', { subscriber: this.props.subscriber }, { 'non-subscriber': !this.props.subscriber });
 		return (
 			<ClickOutside onClickOutside={this.handleClickOutside} excludeEl={this.props.kebab}>
 				<div className="dropdown-pane" id="header-dropdown">
@@ -227,18 +229,11 @@ class HeaderMenu extends React.Component {
 								<span>{ t('panel_menu_about') }</span>
 							</div>
 						</li>
-						<li className={subscriberParams.optionClass} onClick={this.clickSubscriber}>
+						<li className={OptionClasses} onClick={this.clickSubscriber}>
 							<div>
-								<ReactSVG className={subscriberParams.iconClass} path="/app/images/panel/subscriber-menu-item.svg" />
+								<ReactSVG className={IconClasses} path="/app/images/panel/subscriber-menu-item.svg" />
 								<span>{ t('panel_menu_ghostery_subscriber') }</span>
 							</div>
-
-							{/* }
-							<Link to={subscriberParams.href} onClick={evt => this.props.disableClickIf(evt, 'subscription')}>
-								<ReactSVG className={subscriberParams.iconClass} path="/app/images/panel/subscriber-menu-item.svg" />
-								<span>{ t('panel_menu_ghostery_subscriber') }</span>
-							</Link>
-						*/}
 						</li>
 					</ul>
 					<div className="row account-info">

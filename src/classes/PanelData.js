@@ -174,6 +174,10 @@ class PanelData {
 				currentTheme = 'default';
 			}
 		}
+		const currentAccount = this._confData.get('account');
+		if (currentAccount && currentAccount.user) {
+			currentAccount.user.subscriptionsSupporter = account.hasScopesUnverified(['subscriptions:supporter']);
+		}
 		this._panelView = {
 			panel: {
 				enable_ad_block: this._confData.get('enable_ad_block'),
@@ -194,8 +198,7 @@ class PanelData {
 				tab_id: this._trackerData.get('tab_id'),
 				unread_offer_ids: rewards.unreadOfferIds,
 
-				account: this._confData.get('account'),
-				subscriber: account.hasScopesUnverified(['subscription:supporter'])
+				account: currentAccount
 			},
 			summary: this.summaryView,
 			blocking: this._confData.get('is_expert') ? this.blockingView : false,
