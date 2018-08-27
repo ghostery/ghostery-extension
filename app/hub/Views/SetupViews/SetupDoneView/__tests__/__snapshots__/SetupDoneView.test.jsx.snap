@@ -1,0 +1,122 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/hub/Views/SetupViews/SetupDoneView component Snapshot tests with react-test-renderer setup human web view is rendered correctly 1`] = `
+<div
+  className="row align-center"
+>
+  <div
+    className="columns small-12 large-10"
+  >
+    <div
+      className="SetupDone"
+    >
+      <div
+        className="SetupDone__title_bar row align-middle"
+      >
+        <div
+          className="SetupDone__bar columns"
+        />
+        <div
+          className="SetupDone__title columns shrink"
+        >
+          hub_setup_ready_heading
+        </div>
+        <div
+          className="SetupDone__bar columns"
+        />
+      </div>
+      <div
+        className="row align-spaced"
+      >
+        <div
+          className="SetupDone__feature columns flex-container flex-dir-column"
+        >
+          <div
+            className="SetupDone__feature_icon feature-feature-1"
+          />
+          <div
+            className="SetupDone__feature_title flex-container align-center-middle"
+          >
+            Feature 1 Title
+          </div>
+          <div
+            className="SetupDone__bar"
+          />
+          <div
+            className="flex-child-grow"
+          >
+            feature 1 description
+          </div>
+          <a
+            aria-current={null}
+            className="SetupDone__feature_button button primary"
+            href="/feature/1"
+            onClick={[Function]}
+            style={undefined}
+          >
+            feature 1 button text
+          </a>
+        </div>
+        <div
+          className="SetupDone__feature columns flex-container flex-dir-column"
+        >
+          <div
+            className="SetupDone__feature_icon feature-feature-2"
+          />
+          <div
+            className="SetupDone__feature_title flex-container align-center-middle"
+          >
+            Feature 2 Title
+          </div>
+          <div
+            className="SetupDone__bar"
+          />
+          <div
+            className="flex-child-grow"
+          >
+            feature 2 description
+          </div>
+          <a
+            aria-current={null}
+            className="SetupDone__feature_button button primary"
+            href="/feature/2"
+            onClick={[Function]}
+            style={undefined}
+          >
+            feature 2 button text
+          </a>
+        </div>
+        <div
+          className="SetupDone__feature columns flex-container flex-dir-column"
+        >
+          <div
+            className="SetupDone__feature_icon feature-feature-3"
+          />
+          <div
+            className="SetupDone__feature_title flex-container align-center-middle"
+          >
+            Feature 3 Title
+          </div>
+          <div
+            className="SetupDone__bar"
+          />
+          <div
+            className="flex-child-grow"
+          >
+            feature 3 description
+          </div>
+          <a
+            aria-current={null}
+            className="SetupDone__feature_button button primary"
+            href="/feature/3"
+            onClick={[Function]}
+            style={undefined}
+          >
+            feature 3 button text
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
