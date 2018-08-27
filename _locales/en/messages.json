@@ -1650,7 +1650,7 @@
 		"message": "Do not ask me again"
 	},
 	"hub_setup_blocking_text_recommended": {
-		"message": "Block Default"
+		"message": "Block Recommended"
 	},
 	"hub_setup_blocking_description_recommended": {
 		"message": "Advertising, Site Analytics, and Adult Advertising trackers blocked"

@@ -17,6 +17,7 @@ import QueryString from 'query-string';
 import PropTypes from 'prop-types';
 import SetupView from './SetupView';
 import { Modal, ToggleCheckbox } from '../../../shared-components';
+import { BLOCKING_POLICY_NOTHING } from './SetupViewConstants';
 
 // Component Views
 import SetupBlockingView from '../SetupViews/SetupBlockingView';
@@ -66,7 +67,7 @@ class SetupViewContainer extends React.Component {
 	 */
 	_setDefaultSettings() {
 		this.setState({ sendMountActions: true });
-		this.props.actions.setBlockingPolicy({ blockingPolicy: 'BLOCKING_POLICY_RECOMMENDED' });
+		this.props.actions.setBlockingPolicy({ blockingPolicy: BLOCKING_POLICY_NOTHING });
 		this.props.actions.setAntiTracking({ enable_anti_tracking: true });
 		this.props.actions.setAdBlock({ enable_ad_block: true });
 		this.props.actions.setSmartBlocking({ enable_smart_blocking: true });
@@ -257,7 +258,7 @@ SetupViewContainer.defaultProps = {
 			textDone: false,
 		},
 		setup_show_warning_override: true,
-		blockingPolicy: 'BLOCKING_POLICY_RECOMMENDED',
+		blockingPolicy: BLOCKING_POLICY_NOTHING,
 		enable_anti_tracking: true,
 		enable_ad_block: true,
 		enable_smart_blocking: true,
