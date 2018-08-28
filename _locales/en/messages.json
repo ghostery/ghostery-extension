@@ -1615,7 +1615,12 @@
 		"message": "Ghostery Hub - Setup Complete"
 	},
 	"hub_setup_header_title_blocking": {
-		"message": "Ghostery can block trackers to make your browsing cleaner, faster, and safer. What would you like to block?"
+		"message": "Ghostery can block trackers to make your browsing cleaner, faster, and safer.$NEW_LINE$What would you like to block?",
+		"placeholders": {
+			"new_line": {
+				"content": "<br />"
+			}
+		}
 	},
 	"hub_setup_header_title_antisuite": {
 		"message": "Would you like to browse smarter with our recommended features?"
@@ -1651,7 +1656,7 @@
 		"message": "Do not ask me again"
 	},
 	"hub_setup_blocking_text_recommended": {
-		"message": "Block Default"
+		"message": "Block Recommended"
 	},
 	"hub_setup_blocking_description_recommended": {
 		"message": "Advertising, Site Analytics, and Adult Advertising trackers blocked"
