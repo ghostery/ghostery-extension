@@ -16,20 +16,20 @@ exports[`app/hub/Views/RewardsView component Snapshot tests with react-test-rend
       />
     </div>
     <div
-      className="RewardsView__headerText columns align-middle"
+      className="RewardsView__headerText columns"
     >
-      <span
-        className="RewardsView__headerTitle row"
+      <div
+        className="RewardsView__headerTitle"
       >
         hub_rewards_header_title
-      </span>
-      <span
-        className="RewardsView__headerDescription row"
+      </div>
+      <div
+        className="RewardsView__headerDescription"
       >
         hub_rewards_header_description
-      </span>
+      </div>
       <div
-        className="row RewardsView__buttonContainer"
+        className="RewardsView__buttonContainer"
       >
         <a
           className="RewardsView__button button success"
@@ -47,76 +47,62 @@ exports[`app/hub/Views/RewardsView component Snapshot tests with react-test-rend
       className="RewardsView__promoFeature columns"
     >
       <div
-        className="row align-center"
-      >
-        <img
-          src="/app/images/hub/rewards/icon-rewards-lightbulb.svg"
-        />
-      </div>
-      <span
-        className="RewardsView__promoTitle row align-center"
+        className="RewardsView__promoIcon RewardsView__lightBulbIcon"
+      />
+      <div
+        className="RewardsView__promoTitle"
       >
         hub_rewards_experience_title
-      </span>
-      <span
-        className="RewardsView__promoDescription row align-center"
+      </div>
+      <div
+        className="RewardsView__promoDescription"
       >
         hub_rewards_experience_description
-      </span>
+      </div>
     </div>
     <div
       className="RewardsView__promoFeature columns"
     >
       <div
-        className="row align-center"
-      >
-        <img
-          alt="smart"
-          src="/app/images/hub/rewards/icon-rewards-privacy.svg"
-        />
-      </div>
-      <span
-        className="RewardsView__promoTitle row align-center"
+        className="RewardsView__promoIcon RewardsView__eyeIcon"
+      />
+      <div
+        className="RewardsView__promoTitle"
       >
         hub_rewards_privacy_title
-      </span>
-      <span
-        className="RewardsView__promoDescription row align-center"
+      </div>
+      <div
+        className="RewardsView__promoDescription"
       >
         hub_rewards_privacy_description
-      </span>
+      </div>
     </div>
     <div
       className="RewardsView__promoFeature columns"
     >
       <div
-        className="row align-center"
-      >
-        <img
-          alt="unique"
-          src="/app/images/hub/rewards/icon-rewards-star.svg"
-        />
-      </div>
-      <span
-        className="RewardsView__promoTitle row align-center"
+        className="RewardsView__promoIcon RewardsView__starIcon"
+      />
+      <div
+        className="RewardsView__promoTitle"
       >
         hub_rewards_relevant_title
-      </span>
-      <span
-        className="RewardsView__promoDescription row align-center"
+      </div>
+      <div
+        className="RewardsView__promoDescription"
       >
         hub_rewards_relevant_description
-      </span>
+      </div>
     </div>
   </div>
   <div
     className="RewardsView--paddingTop row align-center"
   >
-    <span
+    <div
       className="RewardsView__closerText"
     >
       hub_rewards_closer
-    </span>
+    </div>
   </div>
 </div>
 `;

@@ -34,82 +34,57 @@ class RewardsView extends Component {
 	render() {
 		return (
 			<div className="RewardsView RewardsView--paddingTop full-height">
-
 				<div className="RewardsView__header row align-center">
 					<div className="RewardsView__screenshot columns">
 						<img src="/app/images/hub/rewards/ghostery-rewards-laptop.png" alt="Laptop" />
 					</div>
-
-					<div className="RewardsView__headerText columns align-middle">
-
-						<span className="RewardsView__headerTitle row">
+					<div className="RewardsView__headerText columns">
+						<div className="RewardsView__headerTitle">
 							{t('hub_rewards_header_title')}
-						</span>
-
-						<span className="RewardsView__headerDescription row">
+						</div>
+						<div className="RewardsView__headerDescription">
 							{t('hub_rewards_header_description')}
-						</span>
-
-						<div className="row RewardsView__buttonContainer">
+						</div>
+						<div className="RewardsView__buttonContainer">
 							<a className="RewardsView__button button success" href="https://www.ghostery.com/faqs/what-is-ghostery-rewards/">
 								{t('hub_rewards_header_learn_more')}
 							</a>
 						</div>
-
 					</div>
-
 				</div>
-
 				<div className="RewardsView--paddingTop row align-center">
-
-					<div className="RewardsView__promoFeature columns flex-container flex-dir-column align-middle">
-
-						<div className="RewardsView__lightBulbIcon RewardsView--promoIcon" />
-
-						<span className="RewardsView__promoTitle row align-center">
+					<div className="RewardsView__promoFeature columns">
+						<div className="RewardsView__promoIcon RewardsView__lightBulbIcon" />
+						<div className="RewardsView__promoTitle">
 							{t('hub_rewards_experience_title')}
-						</span>
-
-						<span className="RewardsView__promoDescription row align-center">
+						</div>
+						<div className="RewardsView__promoDescription">
 							{t('hub_rewards_experience_description')}
-						</span>
-
+						</div>
 					</div>
-
-					<div className="RewardsView__promoFeature columns flex-container flex-dir-column align-middle">
-
-						<div className="RewardsView__eyeIcon row align-center RewardsView--promoIcon" />
-
-						<span className="RewardsView__promoTitle row align-center">
+					<div className="RewardsView__promoFeature columns">
+						<div className="RewardsView__promoIcon RewardsView__eyeIcon" />
+						<div className="RewardsView__promoTitle">
 							{t('hub_rewards_privacy_title')}
-						</span>
-
-						<span className="RewardsView__promoDescription row align-center">
+						</div>
+						<div className="RewardsView__promoDescription">
 							{t('hub_rewards_privacy_description')}
-						</span>
-
+						</div>
 					</div>
-
-					<div className="RewardsView__promoFeature columns flex-container flex-dir-column align-middle">
-
-						<div className="RewardsView__starIcon row align-center RewardsView--promoIcon" />
-
-						<span className="RewardsView__promoTitle row align-center">
+					<div className="RewardsView__promoFeature columns">
+						<div className="RewardsView__promoIcon RewardsView__starIcon" />
+						<div className="RewardsView__promoTitle">
 							{t('hub_rewards_relevant_title')}
-						</span>
-
-						<span className="RewardsView__promoDescription row align-center">
+						</div>
+						<div className="RewardsView__promoDescription">
 							{t('hub_rewards_relevant_description')}
-						</span>
-
+						</div>
 					</div>
-
 				</div>
-
 				<div className="RewardsView--paddingTop row align-center">
-					<span className="RewardsView__closerText">
+					<div className="RewardsView__closerText">
 						{t('hub_rewards_closer')}
-					</span>
+					</div>
 				</div>
 
 			</div>
