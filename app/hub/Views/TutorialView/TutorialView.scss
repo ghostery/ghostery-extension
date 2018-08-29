@@ -1,0 +1,43 @@
+/**
+ * Tutorial View Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ *
+ * ToDo: Update to BEM [Block Element Modifier](https://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)
+ */
+
+// purple rectangle outline
+.rectangle-1 {
+	width: 120px;
+	height: 43px;
+	border-radius: 7.2px;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+	border: solid 2.7px #930194;
+	transform: scale(0);
+	-webkit-animation: zoom .5s;
+	animation: zoom .5s;
+	-webkit-animation-fill-mode: forwards;
+	animation-fill-mode: forwards;
+	-webkit-animation-delay: 1s;
+	animation-delay: 1s;
+}
+
+
+@-webkit-keyframes zoom {
+	100% {
+		-webkit-transform: scale(1,1);
+	}
+}
+
+@keyframes zoom {
+	100% {
+		transform: scale(1,1);
+	}
+}

@@ -28,7 +28,7 @@ class SetupDoneViewContainer extends Component {
 		const title = t('hub_setup_page_title_done');
 		window.document.title = title;
 
-		const { index } = this.props;
+		const { index, sendMountActions } = this.props;
 		this.props.actions.setSetupNavigation({
 			activeIndex: index,
 			hrefPrev: `/setup/${index - 1}`,
@@ -38,6 +38,10 @@ class SetupDoneViewContainer extends Component {
 			textNext: t('hub_setup_nav_done'),
 			textDone: false,
 		});
+
+		if (sendMountActions) {
+			this.props.actions.setSetupComplete();
+		}
 	}
 
 	/**

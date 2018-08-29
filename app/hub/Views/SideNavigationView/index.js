@@ -1,5 +1,5 @@
 /**
- * Ghostery Hub - Side Navigation Sass
+ * Point of entry index.js file for Side Navigation View
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -11,14 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
- // Side Navigation
- .SideNavigation__top {
- 	min-height: 100px;
- 	margin: 16px;
- }
- .SideNavigation__list {
- 	margin: 16px;
- }
- .SideNavigation__bottom {
- 	margin: 16px;
- }
+import SideNavigationView from './SideNavigationView';
+
+export default SideNavigationView;

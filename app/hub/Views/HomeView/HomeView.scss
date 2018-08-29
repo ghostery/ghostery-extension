@@ -1,0 +1,121 @@
+/**
+ * Home View Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+// Home View
+.HomeView {
+	padding-top: 45px;
+	padding-bottom: 25px;
+	color: #4a4a4a;
+}
+.HomeView--bolded {
+	font-weight: 700;
+}
+.HomeView__header img {
+	max-width: 156px;
+	margin-right: 23px;
+}
+.HomeView__header h1 {
+	color: #4a4a4a;
+	margin-bottom: 19px;
+}
+.HomeView__headerTagline {
+	font-size: 20px;
+	line-height: 38px;
+	color: #4a4a4a;
+}
+.HomeView__supportContainer {
+	margin-top: 12px;
+	margin-left: -12px;
+}
+.HomeView__subHeader {
+	margin-top: 12px;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 32px;
+}
+.HomeView__subHeader a {
+	text-decoration: underline;
+}
+.HomeView__onboarding {
+	margin-top: 7px;
+	padding: 27px 12px 30px;
+	border-radius: 4px;
+	background-color: #f0f3f4;
+}
+.HomeView__onboardingFeature {
+	margin: 0 8px;
+	padding: 0 36px;
+}
+.HomeView__onboardingFeatureDivider {
+	margin: 7px 0 4px;
+	width: 1px;
+	padding: 0;
+	background-color: #979797;
+}
+.HomeView__supporter {
+	margin-top: 22px;
+	padding: 22px 12px;
+	background-color: #f0f3f4;
+	border-radius: 4px;
+}
+.HomeView__supporterFeature {
+	padding: 0 36px;
+}
+.HomeView__featureIcon {
+	height: 50px;
+	width: 50px;
+	margin: 0 24px;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.HomeView__onboardingFeature.feature-tutorial .HomeView__featureIcon {
+	background-image: buildIconWand(#4a4a4a);
+}
+.HomeView__onboardingFeature.feature-tutorial-complete .HomeView__featureIcon {
+	width: 100px;
+	margin: 0 0 0 50px;
+	background-image: buildIconWandCheck(#4a4a4a);
+}
+.HomeView__onboardingFeature.feature-setup .HomeView__featureIcon {
+	background-image: buildIconClipboard(#4a4a4a);
+}
+.HomeView__onboardingFeature.feature-setup-complete .HomeView__featureIcon {
+	width: 100px;
+	margin: 0 0 0 50px;
+	background-image: buildIconClipboardCheck(#4a4a4a);
+}
+.HomeView__featureIcon.feature-supporter {
+	background-image: buildIconFlag(#4a4a4a);
+}
+.HomeView__featureTitle {
+	text-align: center;
+	font-size: 18px;
+	padding: 22px 0 10px;
+}
+.HomeView__featureText {
+	text-align: center;
+	font-size: 14px;
+	line-height: 27px;
+}
+.HomeView__featureButton {
+	margin: 0;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 1.3;
+	text-transform: uppercase;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12);
+}
+.HomeView__onboarding .HomeView__featureButton {
+	margin-top: 26px;
+	min-width: 130px;
+}

@@ -1,5 +1,5 @@
 /**
- * Point of entry index.js file for Tutorial Blocking View
+ * Point of entry index.js file for Tutorial Layout View
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -14,7 +14,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import TutorialBlockingViewContainer from './TutorialBlockingViewContainer';
+import TutorialLayoutViewContainer from './TutorialLayoutViewContainer';
 import { setTutorialNavigation } from '../../TutorialView/TutorialViewActions';
 
 /**
@@ -35,4 +35,4 @@ const mapDispatchToProps = dispatch => ({
 	actions: bindActionCreators(Object.assign({}, { setTutorialNavigation }), dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TutorialBlockingViewContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(TutorialLayoutViewContainer);

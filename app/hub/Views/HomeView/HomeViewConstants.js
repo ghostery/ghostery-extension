@@ -1,5 +1,5 @@
 /**
- * Point of entry index.js file for Tutorial Simple or Detailed View
+ * Custom Home Constants
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -11,6 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import TutorialSimpleDetailedView from './TutorialSimpleDetailedView';
-
-export default TutorialSimpleDetailedView;
+// Home View
+export const GET_HOME_PROPS = 'GET_HOME_PROPS';
+export const SET_HUMAN_WEB = 'SET_HUMAN_WEB';

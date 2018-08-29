@@ -12,7 +12,7 @@
  */
 
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import QueryString from 'query-string';
 import PropTypes from 'prop-types';
 import SetupView from './SetupView';
@@ -26,7 +26,7 @@ import SetupHumanWebView from '../SetupViews/SetupHumanWebView';
 import SetupDoneView from '../SetupViews/SetupDoneView';
 
 /**
- * @class Implement the Setup Container View for the Ghostery Hub
+ * @class Implement the Setup View for the Ghostery Hub
  * @extends Component
  * @memberof HubContainers
  */
@@ -37,14 +37,10 @@ class SetupViewContainer extends React.Component {
 			sendMountActions: false,
 			showModal: false,
 		};
-	}
 
-	/**
-	 * Lifecycle Event
-	 */
-	componentWillMount() {
+		this.props.history.push('/setup/1');
+
 		const title = t('hub_setup_page_title');
-
 		window.document.title = title;
 
 		this.props.actions.initSetupProps(this.props.setup);
@@ -267,4 +263,4 @@ SetupViewContainer.defaultProps = {
 	},
 };
 
-export default SetupViewContainer;
+export default withRouter(SetupViewContainer);
