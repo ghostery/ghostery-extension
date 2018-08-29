@@ -23,25 +23,32 @@ import TutorialNavigation from '../TutorialViews/TutorialNavigation';
  * @return {JSX} JSX for rendering the Setup View of the Hub app
  * @memberof HubComponents
  */
-const TutorialView = props => (
-	<div className="full-height flex-container flex-dir-column">
-		<div className="flex-child-grow">
-			{props.steps.map(step => (
-				<Route
-					key={`route-${step.index}`}
-					path={step.path}
-					render={() => (
-						<div>
-							<step.bodyComponent index={step.index} />
-						</div>
-					)}
-				/>
-			))}
-		</div>
+const TutorialView = (props) => {
+	const {
+		steps,
+		sendMountActions,
+	} = this.props;
 
-		<TutorialNavigation totalSteps={props.steps.length} />
-	</div>
-);
+	return (
+		<div className="full-height flex-container flex-dir-column">
+			<div className="flex-child-grow">
+				{steps.map(step => (
+					<Route
+						key={`route-${step.index}`}
+						path={step.path}
+						render={() => (
+							<div>
+								<step.bodyComponent index={step.index} sendMountActions={sendMountActions} />
+							</div>
+						)}
+					/>
+				))}
+			</div>
+
+			<TutorialNavigation totalSteps={props.steps.length} />
+		</div>
+	);
+};
 
 // PropTypes ensure we pass required props of the correct type
 TutorialView.propTypes = {
@@ -50,6 +57,7 @@ TutorialView.propTypes = {
 		path: PropTypes.string.isRequired,
 		bodyComponent: PropTypes.func.isRequired,
 	})).isRequired,
+	sendMountActions: PropTypes.bool.isRequired,
 };
 
 export default TutorialView;

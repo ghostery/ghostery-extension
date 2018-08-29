@@ -26,7 +26,7 @@ class TutorialAntiSuiteViewContainer extends Component {
 		super(props);
 
 		// TODO call setTutorialNavigation action
-		const { index } = this.props;
+		const { index, sendMountActions } = this.props;
 		this.props.actions.setTutorialNavigation({
 			activeIndex: index,
 			hrefPrev: `/tutorial/${index - 1}`,
@@ -37,7 +37,9 @@ class TutorialAntiSuiteViewContainer extends Component {
 			textDone: t('hub_setup_exit_flow'),
 		});
 
-		this.props.actions.setTutorialComplete();
+		if (sendMountActions) {
+			this.props.actions.setTutorialComplete();
+		}
 	}
 
 	render() {

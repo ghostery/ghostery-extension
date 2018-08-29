@@ -26,17 +26,25 @@ import TutorialTrustView from '../TutorialViews/TutorialTrustView';
 import TutorialAntiSuiteView from '../TutorialViews/TutorialAntiSuiteView';
 
 /**
- * @class Implement the Tutorial View Container for the Ghostery Hub
+ * @class Implement the Tutorial View for the Ghostery Hub
  * @extends Component
  * @memberof HubContainers
  */
 class TutorialViewContainer extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			sendMountActions: false,
+		};
+
+		this.props.history.push('/tutorial/1');
+
 		const title = '';
 		window.document.title = title;
-		this.props.actions.initTutorialProps(this.props.tutorial);
-		this.props.history.push('/tutorial/1');
+
+		this.props.actions.initTutorialProps(this.props.tutorial).then(() => {
+			this.setState({ sendMountActions: true });
+		});
 	}
 
 	/**
@@ -44,6 +52,7 @@ class TutorialViewContainer extends React.Component {
 	 * @return {JSX} JSX for rendering the Tutorial View of the Hub app
 	 */
 	render() {
+		const { sendMountActions } = this.state;
 		const steps = [
 			{
 				index: 1,
@@ -77,7 +86,7 @@ class TutorialViewContainer extends React.Component {
 			},
 		];
 
-		return <TutorialView steps={steps} />;
+		return <TutorialView steps={steps} sendMountActions={sendMountActions} />;
 	}
 }
 
