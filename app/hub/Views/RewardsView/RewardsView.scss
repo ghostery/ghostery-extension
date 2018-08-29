@@ -1,0 +1,65 @@
+.RewardsView {
+  background: buildBackgroundLeft(#ffffff) no-repeat left -170px bottom,
+              buildBackgroundRight(#ffffff) no-repeat right bottom,
+              linear-gradient(#daf4ff, #ffffff 30%) no-repeat;
+}
+.RewardsView--paddingTop {
+  padding-top: 80px;
+}
+.RewardsView--promoIcon {
+  background-position: center center;
+  background-size: contain;
+  height: 85px;
+  width: 73px;
+}
+.RewardsView__screenshot {
+  max-width: 430px;
+  padding-right: 50px;
+}
+.RewardsView__headerText {
+  padding-left: 50px;
+  line-height: 38px;
+  max-width: 350px;
+}
+.RewardsView__headerTitle {
+  font-size: 24px;
+  font-weight: 700;
+}
+.RewardsView__headerDescription {
+  font-size: 14px;
+}
+.RewardsView__buttonContainer {
+  padding-top: 20px;
+}
+.RewardsView__button {
+  font-size: 14px;
+}
+.RewardsView__promoFeature {
+  margin: 0 50px;
+  font-size: 14px;
+  max-width: 250px;
+}
+.RewardsView__promoTitle {
+  line-height: 38px;
+  font-weight: 700;
+  text-align: center;
+}
+.RewardsView__promoDescription {
+  line-height: 30px;
+  text-align: center;
+}
+.RewardsView__lightBulbIcon {
+  background: buildIconLightBulb(#4a4a4a);
+  background-repeat: no-repeat;
+}
+.RewardsView__eyeIcon {
+  background: buildIconEye(#4a4a4a);
+  background-repeat: no-repeat;
+}
+.RewardsView__starIcon {
+  background: buildIconStar(#4a4a4a);
+  background-repeat: no-repeat;
+}
+.RewardsView__closerText {
+  font-size: 14px;
+}
