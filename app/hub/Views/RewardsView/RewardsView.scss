@@ -1,10 +1,16 @@
 .RewardsView {
-  background: url('/app/images/hub/rewards/rewards-background-left.svg') no-repeat left -170px bottom,
-              url('/app/images/hub/rewards/rewards-background-right.svg') no-repeat right bottom,
+  background: buildBackgroundLeft(#ffffff) no-repeat left -170px bottom,
+              buildBackgroundRight(#ffffff) no-repeat right bottom,
               linear-gradient(#daf4ff, #ffffff 30%) no-repeat;
 }
 .RewardsView--paddingTop {
   padding-top: 80px;
+}
+.RewardsView--promoIcon {
+  background-position: center center;
+  background-size: contain;
+  height: 85px;
+  width: 73px;
 }
 .RewardsView__screenshot {
   max-width: 430px;
@@ -41,6 +47,18 @@
 .RewardsView__promoDescription {
   line-height: 30px;
   text-align: center;
+}
+.RewardsView__lightBulbIcon {
+  background: buildIconLightBulb(#4a4a4a);
+  background-repeat: no-repeat;
+}
+.RewardsView__eyeIcon {
+  background: buildIconEye(#4a4a4a);
+  background-repeat: no-repeat;
+}
+.RewardsView__starIcon {
+  background: buildIconStar(#4a4a4a);
+  background-repeat: no-repeat;
 }
 .RewardsView__closerText {
   font-size: 14px;

@@ -62,11 +62,9 @@ class RewardsView extends Component {
 
 				<div className="RewardsView--paddingTop row align-center">
 
-					<div className="RewardsView__promoFeature columns">
+					<div className="RewardsView__promoFeature columns flex-container flex-dir-column align-middle">
 
-						<div className="row align-center">
-							<img src="/app/images/hub/rewards/icon-rewards-lightbulb.svg" />
-						</div>
+						<div className="RewardsView__lightBulbIcon RewardsView--promoIcon" />
 
 						<span className="RewardsView__promoTitle row align-center">
 							{t('hub_rewards_experience_title')}
@@ -78,11 +76,9 @@ class RewardsView extends Component {
 
 					</div>
 
-					<div className="RewardsView__promoFeature columns">
+					<div className="RewardsView__promoFeature columns flex-container flex-dir-column align-middle">
 
-						<div className="row align-center">
-							<img src="/app/images/hub/rewards/icon-rewards-privacy.svg" alt="smart" />
-						</div>
+						<div className="RewardsView__eyeIcon row align-center RewardsView--promoIcon" />
 
 						<span className="RewardsView__promoTitle row align-center">
 							{t('hub_rewards_privacy_title')}
@@ -94,11 +90,9 @@ class RewardsView extends Component {
 
 					</div>
 
-					<div className="RewardsView__promoFeature columns">
+					<div className="RewardsView__promoFeature columns flex-container flex-dir-column align-middle">
 
-						<div className="row align-center">
-							<img src="/app/images/hub/rewards/icon-rewards-star.svg" alt="unique" />
-						</div>
+						<div className="RewardsView__starIcon row align-center RewardsView--promoIcon" />
 
 						<span className="RewardsView__promoTitle row align-center">
 							{t('hub_rewards_relevant_title')}
