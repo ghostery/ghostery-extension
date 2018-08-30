@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { GET_HOME_PROPS, SET_HUMAN_WEB } from './HomeViewConstants';
+import { GET_HOME_PROPS, SET_METRICS } from './HomeViewConstants';
 
 const initialState = {};
 
@@ -21,7 +21,7 @@ function HomeViewReducer(state = initialState, action) {
 			const {
 				setup_complete,
 				tutorial_complete,
-				enable_human_web,
+				enable_metrics,
 				account_text,
 				account_link,
 			} = action.data;
@@ -29,16 +29,16 @@ function HomeViewReducer(state = initialState, action) {
 				home: Object.assign({}, state.home, {
 					setup_complete,
 					tutorial_complete,
-					enable_human_web,
+					enable_metrics,
 					account_text,
 					account_link,
 				}),
 			});
 		}
-		case SET_HUMAN_WEB: {
-			const { enable_human_web } = action.data;
+		case SET_METRICS: {
+			const { enable_metrics } = action.data;
 			return Object.assign({}, state, {
-				home: Object.assign({}, state.home, { enable_human_web }),
+				home: Object.assign({}, state.home, { enable_metrics }),
 			});
 		}
 

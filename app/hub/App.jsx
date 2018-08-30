@@ -13,80 +13,21 @@
  * ToDo: Update this file.
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 import SideNavigation from './Views/SideNavigationView';
 
 /**
- * @class Implements the container App for the Ghostery Hub
- * @extends Component
+ * A Functional React Component for rendering the Ghostery Hub App
+ * @return {JSX} JSX for rendering the Ghostery Hub App
  * @memberof HubComponents
  */
-class App extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			menu: {
-				items: [
-					{ location: 'top', text: 'Ghostery' },
-					{
-						location: 'list', type: 'link', href: '/', icon: 'home', text: 'Home'
-					},
-					{
-						location: 'list', type: 'link', href: '/setup', icon: 'home', text: 'Customize Setup'
-					},
-					{
-						location: 'list', type: 'link', href: '/tutorial', icon: 'home', text: 'Visit Tutorial'
-					},
-					{
-						location: 'list', type: 'link', href: '/supporter', icon: 'home', text: 'Become a Ghostery Supporter'
-					},
-					{
-						location: 'list', type: 'link', href: '/rewards', icon: 'home', text: 'Check out Ghostery Rewards'
-					},
-					{
-						location: 'list', type: 'link', href: '/products', icon: 'home', text: 'Try other Ghostery Products'
-					},
-					{
-						location: 'bottom', type: 'modal', icon: 'share', text: 'Share with Friends'
-					},
-					{ location: 'bottom', type: 'separator' },
-					{
-						location: 'bottom', type: 'link', href: '/create-account', text: 'Create Account'
-					},
-					{
-						location: 'bottom', type: 'link', href: '/log-in', text: 'Log In'
-					},
-				],
-			},
-		};
-	}
-
-	/**
-	 * Lifecycle Event
-	 */
-	componentWillMount() {
-		window.document.title = '';
-	}
-
-	/**
-	 * React's required render function. Returns JSX
-	 * @return {JSX} JSX for rendering the Hub app
-	 */
-	render() {
-		const { menu } = this.state;
-
-		return (
-			<div className="App">
-				<div className="App__leftNavigation">
-					<SideNavigation items={menu.items} />
-				</div>
-				<div className="App__mainContent">
-					{this.props.children}
-				</div>
-			</div>
-		);
-	}
-}
+const App = props => (
+	<div className="App full-height full-width flex-container">
+		<SideNavigation />
+		<div className="App__mainContent full-height flex-child-grow">
+			{props.children}
+		</div>
+	</div>
+);
 
 export default App;

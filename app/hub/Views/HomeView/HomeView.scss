@@ -20,6 +20,9 @@
 .HomeView--bolded {
 	font-weight: 700;
 }
+.HomeView--pad-left {
+	padding-left: 12px;
+}
 .HomeView__header img {
 	max-width: 156px;
 	margin-right: 23px;
@@ -79,23 +82,23 @@
 	background-position: center center;
 }
 .HomeView__onboardingFeature.feature-tutorial .HomeView__featureIcon {
-	background-image: buildIconWand(#4a4a4a);
+	background-image: buildIconWand(#4a4a4a, #daf4ff);
 }
 .HomeView__onboardingFeature.feature-tutorial-complete .HomeView__featureIcon {
 	width: 100px;
 	margin: 0 0 0 50px;
-	background-image: buildIconWandCheck(#4a4a4a);
+	background-image: buildIconWandCheck(#4a4a4a, #daf4ff, #1dafed);
 }
 .HomeView__onboardingFeature.feature-setup .HomeView__featureIcon {
-	background-image: buildIconClipboard(#4a4a4a);
+	background-image: buildIconClipboard(#4a4a4a, #daf4ff);
 }
 .HomeView__onboardingFeature.feature-setup-complete .HomeView__featureIcon {
 	width: 100px;
 	margin: 0 0 0 50px;
-	background-image: buildIconClipboardCheck(#4a4a4a);
+	background-image: buildIconClipboardCheck(#4a4a4a, #daf4ff, #1dafed);
 }
 .HomeView__featureIcon.feature-supporter {
-	background-image: buildIconFlag(#4a4a4a);
+	background-image: buildIconFlag(#4a4a4a, #daf4ff);
 }
 .HomeView__featureTitle {
 	text-align: center;
@@ -109,11 +112,6 @@
 }
 .HomeView__featureButton {
 	margin: 0;
-	font-size: 14px;
-	font-weight: 700;
-	line-height: 1.3;
-	text-transform: uppercase;
-	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12);
 }
 .HomeView__onboarding .HomeView__featureButton {
 	margin-top: 26px;

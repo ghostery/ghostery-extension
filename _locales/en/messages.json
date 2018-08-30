@@ -1606,9 +1606,12 @@
 		"message": "Start Browsing!"
 	},
 	"hub_home_header_checkbox_label": {
-		"message": "Share analytics and Human Web data to improve Ghostery’s performance. "
+		"message": "Share additional anonymous analytics data to improve Ghostery’s performance."
 	},
-	"hub_home_header_checkbox_link": {
+	"hub_home_header_info": {
+		"message": "New users are opted in to participating in Human Web and Ghostery Rewards. You may change these settings in custom setup or in the extension. "
+	},
+	"hub_home_header_info_link": {
 		"message": "Learn More."
 	},
 	"hub_home_subheader_optimize": {
@@ -1758,7 +1761,7 @@
 		"message": "We use anonymous Human Web data to improve Ghostery’s performance. No personal data is ever collected. $LINK_LM_START$Learn More$LINK_LM_END$",
 		"placeholders": {
 			"link_lm_start": {
-				"content": "<a href=\"https://www.ghostery.com/faqs/human-web-data-collected/\" target=\"_blank\">"
+				"content": "<a href=\"https://www.ghostery.com/faqs/human-web-data-collected/\" target=\"_blank\" rel=\"noopener noreferrer\">"
 			},
 			"link_lm_end": {
 				"content": "</a>"

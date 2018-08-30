@@ -27,7 +27,7 @@ class HomeViewContainer extends React.Component {
 
 		const { justInstalled } = QueryString.parse(window.location.search);
 		this.state = {
-			justInstalled,
+			justInstalled: justInstalled === 'true',
 		};
 
 		const title = t('hub_home_page_title');
@@ -37,11 +37,11 @@ class HomeViewContainer extends React.Component {
 	}
 
 	/**
-	* Function to handle toggling Human Web Opt-In
+	* Function to handle toggling Metrics Opt-In
 	*/
-	_handleToggleHumanWeb = () => {
-		const enable_human_web = !this.props.home.enable_human_web;
-		this.props.actions.setHumanWeb({ enable_human_web });
+	_handleToggleMetrics = () => {
+		const enable_metrics = !this.props.home.enable_metrics;
+		this.props.actions.setMetrics({ enable_metrics });
 	}
 
 	/**
@@ -58,14 +58,14 @@ class HomeViewContainer extends React.Component {
 		const {
 			setup_complete,
 			tutorial_complete,
-			enable_human_web,
+			enable_metrics,
 		} = this.props.home;
 		const childProps = {
 			justInstalled,
 			setup_complete,
 			tutorial_complete,
-			enable_human_web,
-			changeHumanWeb: this._handleToggleHumanWeb,
+			enable_metrics,
+			changeMetrics: this._handleToggleMetrics,
 			account_text,
 			account_link,
 		};
@@ -80,7 +80,7 @@ HomeViewContainer.propTypes = {
 	home: PropTypes.shape({
 		setup_complete: PropTypes.bool,
 		tutorial_complete: PropTypes.bool,
-		enable_human_web: PropTypes.bool,
+		enable_metrics: PropTypes.bool,
 		account_text: PropTypes.string,
 		account_link: PropTypes.string,
 	}),
@@ -91,7 +91,7 @@ HomeViewContainer.defaultProps = {
 	home: {
 		setup_complete: false,
 		tutorial_complete: false,
-		enable_human_web: false,
+		enable_metrics: false,
 		account_text: '',
 		account_link: '',
 	},

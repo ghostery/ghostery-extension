@@ -27,7 +27,7 @@ const TutorialView = (props) => {
 	const {
 		steps,
 		sendMountActions,
-	} = this.props;
+	} = props;
 
 	return (
 		<div className="full-height flex-container flex-dir-column">

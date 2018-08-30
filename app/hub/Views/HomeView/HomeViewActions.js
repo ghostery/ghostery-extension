@@ -12,7 +12,7 @@
  */
 
 import { log, sendMessageInPromise } from '../../utils';
-import { GET_HOME_PROPS, SET_HUMAN_WEB } from './HomeViewConstants';
+import { GET_HOME_PROPS, SET_METRICS } from './HomeViewConstants';
 
 export function getHomeProps() {
 	return function (dispatch) {
@@ -27,15 +27,15 @@ export function getHomeProps() {
 	};
 }
 
-export function setHumanWeb(actionData) {
+export function setMetrics(actionData) {
 	return function (dispatch) {
-		return sendMessageInPromise(SET_HUMAN_WEB, actionData).then((data) => {
+		return sendMessageInPromise(SET_METRICS, actionData).then((data) => {
 			dispatch({
-				type: SET_HUMAN_WEB,
+				type: SET_METRICS,
 				data,
 			});
 		}).catch((err) => {
-			log('homeView Action setHumanWeb Error', err);
+			log('homeView Action setMetrics Error', err);
 		});
 	};
 }

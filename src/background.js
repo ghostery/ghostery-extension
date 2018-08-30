@@ -511,13 +511,19 @@ function handleGhosteryHub(name, message, callback) {
 			const {
 				setup_complete,
 				tutorial_complete,
-				enable_human_web,
+				enable_metrics,
 			} = conf;
 			callback({
 				setup_complete,
 				tutorial_complete,
-				enable_human_web,
+				enable_metrics,
 			});
+			break;
+		}
+		case 'SET_METRICS': {
+			const { enable_metrics } = message;
+			conf.enable_metrics = enable_metrics;
+			callback({ enable_metrics });
 			break;
 		}
 		case 'GET_SETUP_SHOW_WARNING_OVERRIDE': {

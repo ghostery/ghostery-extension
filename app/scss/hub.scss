@@ -17,6 +17,14 @@ html, body, #root {
 	margin: 0;
 }
 
+.App {
+	position: fixed;
+}
+.App__mainContent {
+	overflow-y: scroll;
+	margin-left: 200px;
+}
+
 // Foundation Overrides
 .button {
 	font-size: 14px;
@@ -32,7 +40,7 @@ html, body, #root {
 .full-width { width: 100%; }
 .display-inline { display: inline-block; }
 
-@import 'settings_hub';
+@import 'settings_hub'; // Import Foundation
 @import './partials/_hub_mixins';
 @import './partials/_hub_svgs';
 

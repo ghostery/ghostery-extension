@@ -13,4 +13,4 @@
 
 // Home View
 export const GET_HOME_PROPS = 'GET_HOME_PROPS';
-export const SET_HUMAN_WEB = 'SET_HUMAN_WEB';
+export const SET_METRICS = 'SET_METRICS';

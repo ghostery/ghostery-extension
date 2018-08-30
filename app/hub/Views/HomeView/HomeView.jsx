@@ -27,8 +27,8 @@ const HomeView = (props) => {
 		justInstalled,
 		setup_complete,
 		tutorial_complete,
-		enable_human_web,
-		changeHumanWeb,
+		enable_metrics,
+		changeMetrics,
 		account_text,
 		account_link,
 	} = props;
@@ -64,17 +64,22 @@ const HomeView = (props) => {
 						<div className="HomeView__headerTagline HomeView--bolded">
 							{t('hub_home_header_tagline_2')}
 						</div>
+						<div className="HomeView__supportContainer HomeView--pad-left">
+							<span>
+								{t('hub_home_header_info')}
+							</span>
+							<a href="https://www.ghostery.com/faqs/" alt={t('hub_home_header_info_link')} target="_blank" rel="noopener noreferrer">
+								{t('hub_home_header_info_link')}
+							</a>
+						</div>
 						<div className="HomeView__supportContainer flex-container align-middle">
 							<ToggleCheckbox
-								checked={enable_human_web}
-								onChange={changeHumanWeb}
+								checked={enable_metrics}
+								onChange={changeMetrics}
 							/>
-							<div>
-								<span>{t('hub_home_header_checkbox_label')}</span>
-								<NavLink to="/faq">
-									{t('hub_home_header_checkbox_link')}
-								</NavLink>
-							</div>
+							<span className="clickable" onClick={changeMetrics}>
+								{t('hub_home_header_checkbox_label')}
+							</span>
 						</div>
 					</div>
 				</div>
@@ -133,10 +138,11 @@ const HomeView = (props) => {
 
 // PropTypes ensure we pass required props of the correct type
 HomeView.propTypes = {
+	justInstalled: PropTypes.bool.isRequired,
 	setup_complete: PropTypes.bool.isRequired,
 	tutorial_complete: PropTypes.bool.isRequired,
-	enable_human_web: PropTypes.bool.isRequired,
-	changeHumanWeb: PropTypes.func.isRequired,
+	enable_metrics: PropTypes.bool.isRequired,
+	changeMetrics: PropTypes.func.isRequired,
 	account_text: PropTypes.string.isRequired,
 	account_link: PropTypes.string.isRequired,
 };
