@@ -133,6 +133,7 @@ const HomeView = (props) => {
 
 // PropTypes ensure we pass required props of the correct type
 HomeView.propTypes = {
+	justInstalled: PropTypes.bool.isRequired,
 	setup_complete: PropTypes.bool.isRequired,
 	tutorial_complete: PropTypes.bool.isRequired,
 	enable_human_web: PropTypes.bool.isRequired,
