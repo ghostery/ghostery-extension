@@ -182,6 +182,19 @@ class Account {
 		})
 	)
 
+	updateEmailPreferences = () => {
+		this._getUserID()
+			.then(userID => (
+				api.update('email_preferences',	{
+				    type: 'email_preferences',
+				    id: conf.account.userID,
+				    attributes: {
+			        	updates: true,
+			    	}
+				})
+			)) 
+	}
+
 	sendValidateAccountEmail = () => (
 		this._getUserID()
 			.then(userID => fetch(`${AUTH_SERVER}/api/v2/send_email/validate_account/${userID}`))

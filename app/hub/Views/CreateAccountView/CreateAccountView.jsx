@@ -19,10 +19,10 @@ import { NavLink, Route } from 'react-router-dom';
 import ClassNames from 'classnames';
 import RSVP from 'rsvp';
 import { validateEmail, validatePassword } from '../../../panel/utils/utils';
+import {sendMessage} from '../../../panel/utils/msg';
 
 // Components
 import SetupHeader from '../SetupViews/SetupHeader';
-
 /**
  * A Functional React component for rendering the Setup Blocking View
  * @return {JSX} JSX for rendering the Setup Blocking View of the Hub app
@@ -42,7 +42,12 @@ class CreateAccountView extends React.Component {
 			loading: false,
 			passwordInvalidError: false,
 			passwordLengthError: false,
-			consentChecked: true,
+			promotionsChecked: true,
+			accountCreated: false,
+			acceptPromotionsSent: false,
+			createAccountSuccess: false,
+			createAccountError: false,
+			createAccountErrorText: '',
 		};
 	}
 
@@ -59,9 +64,13 @@ class CreateAccountView extends React.Component {
 	 * Update state with changed consent value.
 	 * @param {Object}  event 	'change' event
 	 */
-	handleCheckboxChange = (e) => {
-		const { name, checked } = e.target;
-		this.setState({ [name]: checked });
+	handleCheckboxChange = () => {
+		const promotionsChecked = !this.state.promotionsChecked;
+		this.setState({promotionsChecked});
+		if(promotionsChecked && this.state.accountCreated && !this.state.acceptPromotionsSent) {
+			sendMessage("account.promotions");
+			this.setState({ acceptPromotionsSent: true });
+		}
 	}
 
 	/**
@@ -75,7 +84,17 @@ class CreateAccountView extends React.Component {
 			const {
 				email, confirmEmail, firstName, lastName, password
 			} = this.state;
-			this.setState({ loading: true }, () => {
+			this.setState({ 
+					loading: true, 
+					accountCreated: false,
+					acceptPromotionsSent: false,
+					createAccountSuccess: false,
+					createAccountError: false,
+					createAccountErrorText: '',
+					confirmEmailError: false,
+					passwordInvalidError: false,
+					passwordLengthError: false,
+				 }, () => {
 				if (!validateEmail(email)) {
 					this.setState({
 						emailError: true,
@@ -112,16 +131,31 @@ class CreateAccountView extends React.Component {
 						this.setState({ 
 							loading: false,
 							createAccountSuccess: true,
-							createAccountError: false,
-							createAccountErrorText: ''
 						});
 						new RSVP.Promise((resolve) => {
 							this.props.actions.getUser()
-								.then(() => resolve())
+								.then(result => {
+									const {errors, user} = result;
+									if(errors || !user) {
+										this.setState({ 
+											loading: false,
+											createAccountSuccess: false,
+											createAccountError: true,
+											createAccountErrorText: res[0].detail || "Create Account Error"
+										});
+									} else {
+										this.setState({ accountCreated: true });
+										if(this.state.promotionsChecked) {
+											console.log("USER", user);
+											sendMessage("account.promotions");
+											this.setState({"acceptPromotionsSent": true});
+										}
+									}
+									resolve();
+									console.log("CREATE ACCOUNT AND GET USER SUCCEDED");
+								})
 								.catch(() => resolve());
 						}).finally(() => {
-							console.log("CREATE ACCOUNT SUCCESS IN FINALLY")
-						//	this.props.history.push('/account-success');
 						});
 					} else {
 						this.setState({ 
@@ -152,6 +186,7 @@ class CreateAccountView extends React.Component {
 			'success': createAccountSuccess || false, 
 			'error': createAccountError || false
 		});
+		const CheckboxImagePath = this.state.promotionsChecked ? '/app/images/hub/account/account-checkbox-on.svg' : '/app/images/hub/account/account-checkbox-off.svg';
 		return (
 			<div className="full-height flex-container flex-dir-column">
 				<div className="flex-child-grow">
@@ -264,8 +299,8 @@ class CreateAccountView extends React.Component {
 											</div>
 										</div>
 										<div className="columns" style={{border: 'green solid 1px'}}>
-											<span className="account-checkbox-container">
-												<img src="/app/images/hub/account/account-checkbox-on.svg" className="account-checkbox"/>
+											<span className="account-checkbox-container" onClick={this.handleCheckboxChange}>
+												<img src={CheckboxImagePath} className='account-checkbox' />
 												<span>{ t('create_account_promotions') }</span>
 											</span>
 										</div>		
