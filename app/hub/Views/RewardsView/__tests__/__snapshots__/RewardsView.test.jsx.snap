@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/hub/Views/RewardsView component Snapshot tests with react-test-renderer rewards view is rendered correctly 1`] = `
+<div
+  className="RewardsView RewardsView--paddingTop full-height"
+>
+  <div
+    className="RewardsView__header row align-center"
+  >
+    <div
+      className="RewardsView__screenshot columns"
+    >
+      <img
+        alt="Laptop"
+        src="/app/images/hub/rewards/ghostery-rewards-laptop.png"
+      />
+    </div>
+    <div
+      className="RewardsView__headerText columns"
+    >
+      <div
+        className="RewardsView__headerTitle"
+      >
+        hub_rewards_header_title
+      </div>
+      <div
+        className="RewardsView__headerDescription"
+      >
+        hub_rewards_header_description
+      </div>
+      <div
+        className="RewardsView__buttonContainer"
+      >
+        <a
+          className="RewardsView__button button success"
+          href="https://www.ghostery.com/faqs/what-is-ghostery-rewards/"
+        >
+          hub_rewards_header_learn_more
+        </a>
+      </div>
+    </div>
+  </div>
+  <div
+    className="RewardsView--paddingTop row align-center"
+  >
+    <div
+      className="RewardsView__promoFeature columns"
+    >
+      <div
+        className="RewardsView__promoIcon RewardsView__lightBulbIcon"
+      />
+      <div
+        className="RewardsView__promoTitle"
+      >
+        hub_rewards_experience_title
+      </div>
+      <div
+        className="RewardsView__promoDescription"
+      >
+        hub_rewards_experience_description
+      </div>
+    </div>
+    <div
+      className="RewardsView__promoFeature columns"
+    >
+      <div
+        className="RewardsView__promoIcon RewardsView__eyeIcon"
+      />
+      <div
+        className="RewardsView__promoTitle"
+      >
+        hub_rewards_privacy_title
+      </div>
+      <div
+        className="RewardsView__promoDescription"
+      >
+        hub_rewards_privacy_description
+      </div>
+    </div>
+    <div
+      className="RewardsView__promoFeature columns"
+    >
+      <div
+        className="RewardsView__promoIcon RewardsView__starIcon"
+      />
+      <div
+        className="RewardsView__promoTitle"
+      >
+        hub_rewards_relevant_title
+      </div>
+      <div
+        className="RewardsView__promoDescription"
+      >
+        hub_rewards_relevant_description
+      </div>
+    </div>
+  </div>
+  <div
+    className="RewardsView--paddingTop row align-center"
+  >
+    <div
+      className="RewardsView__closerText"
+    >
+      hub_rewards_closer
+    </div>
+  </div>
+</div>
+`;
