@@ -61,6 +61,13 @@ class SetupBlockingViewContainer extends Component {
 	}
 
 	/**
+	* Function to handle switching to the Custom Blocking route
+	*/
+	_handleCustomClick = () => {
+		this.props.history.push('/setup/1/custom');
+	}
+
+	/**
 	 * React's required render function. Returns JSX
 	 * @return {JSX} JSX for rendering the Setup Blocking View of the Hub app
 	 */
@@ -93,7 +100,7 @@ class SetupBlockingViewContainer extends Component {
 			},
 		];
 
-		return <SetupBlockingView blockingPolicy={blockingPolicy} choices={choices} handleSelection={this._handleChange} />;
+		return <SetupBlockingView blockingPolicy={blockingPolicy} choices={choices} handleSelection={this._handleChange} handleCustomClick={this._handleCustomClick} />;
 	}
 }
 
@@ -104,6 +111,7 @@ SetupBlockingViewContainer.propTypes = {
 		setSetupNavigation: PropTypes.func.isRequired,
 		setBlockingPolicy: PropTypes.func.isRequired,
 	}).isRequired,
+	sendMountActions: PropTypes.bool.isRequired,
 };
 
 export default SetupBlockingViewContainer;
