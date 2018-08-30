@@ -38,6 +38,7 @@ exports[`app/hub/Views/SetupViews/SetupBlockingView component Snapshot tests wit
             <label
               className="clickable flex-container flex-dir-column SetupBlocking__choiceBox SetupBlocking--selected"
               htmlFor="input-block-test"
+              onClick={[Function]}
             >
               <div
                 className="SetupBlocking__imageContainer flex-container align-center-middle"
@@ -74,6 +75,7 @@ exports[`app/hub/Views/SetupViews/SetupBlockingView component Snapshot tests wit
             <label
               className="clickable flex-container flex-dir-column SetupBlocking__choiceBox"
               htmlFor="input-block-example"
+              onClick={[Function]}
             >
               <div
                 className="SetupBlocking__imageContainer flex-container align-center-middle"

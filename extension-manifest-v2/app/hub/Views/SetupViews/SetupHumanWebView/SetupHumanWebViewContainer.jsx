@@ -73,6 +73,7 @@ SetupHumanWebViewContainer.propTypes = {
 		setSetupNavigation: PropTypes.func.isRequired,
 		setHumanWeb: PropTypes.func.isRequired,
 	}).isRequired,
+	sendMountActions: PropTypes.bool.isRequired,
 };
 
 export default SetupHumanWebViewContainer;
