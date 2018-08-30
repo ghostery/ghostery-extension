@@ -1,5 +1,5 @@
 /**
- * Point of entry index.js file for Setup Blocking View
+ * Point of entry index.js file for Setup Blocking Dropdown
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -15,9 +15,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 
-import SetupBlockingViewContainer from './SetupBlockingViewContainer';
-import * as SetupBlockingViewActions from './SetupBlockingViewActions';
-import { setSetupNavigation } from '../../SetupView/SetupViewActions';
+import SetupBlockingDropdownContainer from './SetupBlockingDropdownContainer';
+import * as SettingsActions from '../../../../panel/actions/SettingsActions';
 
 /**
  * Map redux store state properties to the component's own properties.
@@ -25,7 +24,7 @@ import { setSetupNavigation } from '../../SetupView/SetupViewActions';
  * @return {function}        this function returns a plain object, which will be merged into the component's props
  * @memberof HubContainers
  */
-const mapStateToProps = state => Object.assign({}, state.setup);
+const mapStateToProps = state => Object.assign({}, state.settings);
 
 /**
  * Bind the component's action creators using Redux's bindActionCreators.
@@ -34,9 +33,7 @@ const mapStateToProps = state => Object.assign({}, state.setup);
  * @memberof SetupContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign(SetupBlockingViewActions, {
-		setSetupNavigation,
-	}), dispatch),
+	actions: bindActionCreators(SettingsActions, dispatch),
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SetupBlockingViewContainer));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SetupBlockingDropdownContainer));

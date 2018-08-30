@@ -36,7 +36,15 @@ const SetupBlockingView = props => (
 						return (
 							<div key={`block-value-${choice.name}`} className="columns">
 								<div>
-									<label htmlFor={`input-block-${choice.name}`} className={choiceBoxClassNames}>
+									<label
+										htmlFor={`input-block-${choice.name}`}
+										className={choiceBoxClassNames}
+										onClick={() => {
+											if (choice.name === 'BLOCKING_POLICY_CUSTOM') {
+												props.handleCustomClick();
+											}
+										}}
+									>
 										<div className="SetupBlocking__imageContainer flex-container align-center-middle">
 											<img src={choiceSelected ? bigCheckSrc : choice.image} />
 										</div>
