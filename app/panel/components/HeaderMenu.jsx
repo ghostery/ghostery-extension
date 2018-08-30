@@ -30,20 +30,20 @@ import { log } from '../../../src/utils/common';
 class HeaderMenu extends React.Component {
 	/**
 	 * Handle clicks outside of the drop-down menu and trigger action.
-	 * @param  {Object} evt mouseclick event
+	 * @param  {Object} e mouseclick event
 	 */
-	handleClickOutside = (evt) => {
+	handleClickOutside = (e) => {
 		// eslint-disable-next-line react/no-find-dom-node
-		if (!ReactDOM.findDOMNode(this).contains(evt.target)) {
+		if (!ReactDOM.findDOMNode(this).contains(e.target)) {
 			this.props.toggleDropdown();
 		}
 	}
 	/**
 	 * Trigger action which open Settings panel from drop-down menu Settings item.
 	 */
-	clickSettings = (evt) => {
+	clickSettings = (e) => {
 		this.props.toggleDropdown();
-		if (!this.props.disableClickIf(evt, 'settings')) {
+		if (!this.props.disableClickIf(e, 'settings')) {
 			this.props.history.push('/settings/globalblocking');
 		}
 	}
@@ -150,9 +150,9 @@ class HeaderMenu extends React.Component {
 	/**
 	 * Handle click on 'Sibscriber menu item.
 	 */
-	clickSubscriber = (evt) => {
+	clickSubscriber = (e) => {
 		this.props.toggleDropdown();
-		if (!this.props.disableClickIf(evt, 'subscription')) {
+		if (!this.props.disableClickIf(e, 'subscription')) {
 			this.props.history.push(this.props.subscriber ? '/subscription/info' : '/subscribe');
 		}
 	}

@@ -113,10 +113,10 @@ class Header extends React.Component {
 		);
 	}
 
-	disableClickIf = (evt, pathToken) => {
+	disableClickIf = (e, pathToken) => {
 		const { pathname } = this.props.location;
 		if (pathname.includes(pathToken)) {
-			evt.preventDefault();
+			e.preventDefault();
 			return true;
 		}
 		return false;
@@ -126,8 +126,8 @@ class Header extends React.Component {
 		this.props.history.push(this.props.is_expert ? '/detail/blocking' : '/');
 	}
 
-	clickBadge = (evt) => {
-		if (!this.disableClickIf(evt, 'subscription')) {
+	clickBadge = (e) => {
+		if (!this.disableClickIf(e, 'subscription')) {
 			const subscriber = !!(this.props.user && this.props.user.subscriptionsSupporter);
 			this.props.history.push(subscriber ? '/subscription/info' : '/subscribe');
 		}

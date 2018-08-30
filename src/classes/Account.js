@@ -131,7 +131,7 @@ class Account {
 			// remove cookies in case fetch fails
 			this._removeCookies();
 			this._clearAccountInfo();
-			this._clearAccountPerks();
+			this._clearSupporterPerks();
 		})
 	)
 
@@ -413,7 +413,7 @@ class Account {
 		conf.account = null;
 	}
 
-	_clearAccountPerks = () => {
+	_clearSupporterPerks = () => {
 		conf.current_theme = 'default';
 		conf.themes = {};
 	}

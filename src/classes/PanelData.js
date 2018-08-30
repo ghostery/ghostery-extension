@@ -169,7 +169,7 @@ class PanelData {
 		let currentTheme = this._confData.get('currentTheme');
 		let theme;
 		if (currentTheme !== 'default') {
-			theme = (this._confData.get('themes') || {})[currentTheme];
+			theme = this._confData.get('themes')[currentTheme];
 			if (!theme) {
 				currentTheme = 'default';
 			}
