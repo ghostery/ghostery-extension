@@ -21,6 +21,7 @@ import { BLOCKING_POLICY_NOTHING } from './SetupViewConstants';
 
 // Component Views
 import SetupBlockingView from '../SetupViews/SetupBlockingView';
+import SetupBlockingDropdown from '../SetupViews/SetupBlockingDropdown';
 import SetupAntiSuiteView from '../SetupViews/SetupAntiSuiteView';
 import SetupHumanWebView from '../SetupViews/SetupHumanWebView';
 import SetupDoneView from '../SetupViews/SetupDoneView';
@@ -46,6 +47,11 @@ class SetupViewContainer extends React.Component {
 		const title = t('hub_setup_page_title');
 
 		window.document.title = title;
+
+		// The user can not enter the Custom Setup Workflow from /setup/1/custom
+		if (/setup\/1\/custom/gi.test(this.props.location.pathname)) {
+			this.props.history.push('/setup/1');
+		}
 
 		this.props.actions.initSetupProps(this.props.setup);
 		this.props.actions.getSetupShowWarningOverride().then((data) => {
@@ -180,13 +186,20 @@ class SetupViewContainer extends React.Component {
 				},
 			},
 		];
+		const extraRoutes = [
+			{
+				name: '1/custom',
+				path: '/setup/1/custom',
+				component: SetupBlockingDropdown,
+			}
+		];
 
 		return (
 			<div className="full-height">
 				<Modal show={showModal} >
 					{this._renderModalChildren()}
 				</Modal>
-				<SetupView steps={steps} sendMountActions={sendMountActions} />
+				<SetupView steps={steps} extraRoutes={extraRoutes} sendMountActions={sendMountActions} />
 			</div>
 		);
 	}

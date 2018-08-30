@@ -147,6 +147,7 @@ SetupAntiSuiteViewContainer.propTypes = {
 		setSmartBlocking: PropTypes.func.isRequired,
 		setGhosteryRewards: PropTypes.func.isRequired,
 	}).isRequired,
+	sendMountActions: PropTypes.bool.isRequired,
 };
 
 export default SetupAntiSuiteViewContainer;
