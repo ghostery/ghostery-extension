@@ -125,6 +125,24 @@ function autoUpdateBugDb() {
 }
 
 /**
+ * Set Default Blocking: all apps in Advertising, Adult Advertising, and Site Analytics
+ */
+function setGhosteryDefaultBlocking() {
+	log('Blocking all apps in categories:', 'advertising', 'pornvertising', 'site_analytics');
+	const categoriesBlock = ['advertising', 'pornvertising', 'site_analytics'];
+	conf.selected_app_ids = {};
+	for (const app_id in bugDb.db.apps) {
+		if (bugDb.db.apps.hasOwnProperty(app_id)) {
+			const category = bugDb.db.apps[app_id].cat;
+			if (categoriesBlock.indexOf(category) >= 0 &&
+			!conf.selected_app_ids.hasOwnProperty(app_id)) {
+				conf.selected_app_ids[app_id] = 1;
+			}
+		}
+	}
+}
+
+/**
  * Pulls down latest version.json and triggers
  * udpates of all db files.
  * @memberOf Background
@@ -504,17 +522,7 @@ function handleGhosteryHub(name, message, callback) {
 			const { blockingPolicy } = message;
 			switch (blockingPolicy) {
 				case 'BLOCKING_POLICY_RECOMMENDED': {
-					const categoriesBlock = ['advertising', 'pornvertising', 'site_analytics'];
-					conf.selected_app_ids = {};
-					for (const app_id in bugDb.db.apps) {
-						if (bugDb.db.apps.hasOwnProperty(app_id)) {
-							const category = bugDb.db.apps[app_id].cat;
-							if (categoriesBlock.indexOf(category) >= 0 &&
-							!conf.selected_app_ids.hasOwnProperty(app_id)) {
-								conf.selected_app_ids[app_id] = 1;
-							}
-						}
-					}
+					setGhosteryDefaultBlocking();
 					break;
 				}
 				case 'BLOCKING_POLICY_NOTHING': {
@@ -1714,6 +1722,10 @@ function initializeGhosteryModules() {
 		surrogatedb.init(globals.JUST_UPGRADED),
 		cliqzStartup,
 	]).then(() => {
+		// Set the default ghostery blocking settings
+		if (globals.JUST_INSTALLED) {
+			setGhosteryDefaultBlocking();
+		}
 		// run scheduledTasks on init
 		scheduledTasks();
 		// initialize panel data

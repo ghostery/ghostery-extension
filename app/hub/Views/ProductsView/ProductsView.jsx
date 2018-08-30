@@ -21,19 +21,11 @@ import React, { Component } from 'react';
  * @memberof HubComponents
  */
 class ProductsView extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			title: ''
-		};
-	}
-
 	/**
 	 * Lifecycle Event
 	 */
 	componentWillMount() {
-		const { title } = this.state;
+		const title = t('hub_products_title');
 		window.document.title = title;
 	}
 
@@ -42,8 +34,11 @@ class ProductsView extends Component {
 	 * @return {JSX} JSX for rendering the Products View of the Hub app
 	 */
 	render() {
-		const { title } = this.state;
-		return <div>{title}</div>;
+		return (
+			<div>
+				{t('hub_products_title')}
+			</div>
+		);
 	}
 }
 
