@@ -17,6 +17,15 @@ html, body, #root {
 	margin: 0;
 }
 
+// Foundation Overrides
+.button {
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 1.3;
+	text-transform: uppercase;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12);
+}
+
 // Helper Classes
 .clickable { cursor: pointer; }
 .full-height { height: 100%; }
