@@ -42,27 +42,29 @@
 		height: 36px;
 		.header-logo {
 			height: 21px;
-			width: 75px;
+			display: inline-flex;
 			.back-arrow {
 				display: none;
-			}
-			&.show-back-arrow {
-				@extend %pointer;
-				width: 110px;
-				.back-arrow {
-					display: inline-block;
+				&.show-back-arrow {
+					@extend %pointer;
+					display: inline-flex;
 					box-sizing: content-box;
-					margin: 0 5px 5px -5px;
+					margin: auto;
+					padding-right: 5px;
 					width: 8px;
 					height: 13px;
-					background-image: url("/app/images/panel/header-back-arrow.svg");
+					div {
+						display: inline-flex;
+					}
 				}
 			}
 			.logo-icon {
 				width: 75px;
 				height: 22px;
-				background-image: url("/app/images/panel/header-logo-icon.svg");
-				display: inline-block;
+				display: inline-flex;
+				div {
+					display: inline-flex;
+				}
 			} 
 		}
 		.base-badge {

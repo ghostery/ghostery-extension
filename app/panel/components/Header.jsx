@@ -140,7 +140,7 @@ class Header extends React.Component {
 	render() {
 		const { pathname } = this.props.location;
 		const showTabs = pathname === '/' || pathname.startsWith('/detail');
-		const headerLogoClasses = ClassNames('header-logo', {
+		const headerArrowClasses = ClassNames('back-arrow', {
 			'show-back-arrow': (pathname !== '/' && !pathname.startsWith('/detail')),
 		});
 		const tabSimpleClassNames = ClassNames('header-tab', {
@@ -171,10 +171,10 @@ class Header extends React.Component {
 					</div>
 				)}
 				<div className="top-bar">
-					<div onClick={this.clickLogo} className={headerLogoClasses}>
-						<div className="back-arrow" />
-						<div className="logo-icon" />
-					</div>
+					<span onClick={this.clickLogo} className="header-logo">
+						<ReactSVG path="/app/images/panel/header-back-arrow.svg" className={headerArrowClasses} />
+						<ReactSVG path="/app/images/panel/header-logo-icon.svg" className="logo-icon"/>
+					</span>
 					<div>
 						<div className="row align-middle collapse">
 							<div className="columns shrink">
