@@ -13,38 +13,35 @@
  * ToDo: Update this file.
  */
 
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Route } from 'react-router-dom';
+
+// Components
+//import SetupNavigation from '../SetupViews/SetupNavigation';
+import SetupHeader from '../SetupViews/SetupHeader';
 
 /**
- * @class Implement the Log In View for the Ghostery Hub
- * @extends Component
+ * A Functional React component for rendering the Setup Blocking View
+ * @return {JSX} JSX for rendering the Setup Blocking View of the Hub app
  * @memberof HubComponents
  */
-class LogInView extends Component {
-	constructor(props) {
-		super(props);
+const LogInView = props => (
+	<div className="full-height flex-container flex-dir-column">
+		<div className="flex-child-grow">
+			<div>
+				<SetupHeader  
+					title = { t('setup_sign_in') }
+					titleImage = {"/app/images/hub/account/ghosty-account.svg" } 
+				/>
+				{/*<step.bodyComponent index={step.index} sendMountActions={props.sendMountActions} /> */}
+			</div>
+		</div>
+	</div>
+);
 
-		this.state = {
-			title: ''
-		};
-	}
-
-	/**
-	 * Lifecycle Event
-	 */
-	componentWillMount() {
-		const { title } = this.state;
-		window.document.title = title;
-	}
-
-	/**
-	 * React's required render function. Returns JSX
-	 * @return {JSX} JSX for rendering the Log In View of the Hub app
-	 */
-	render() {
-		const { title } = this.state;
-		return <div>{title}</div>;
-	}
-}
+// PropTypes ensure we pass required props of the correct type
+LogInView.propTypes = {
+};
 
 export default LogInView;

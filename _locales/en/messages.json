@@ -1854,5 +1854,17 @@
 	},
 	"popup_apply_code_button": {
 		"message": "Apply code"
+	},
+	"setup_sign_in": {
+		"message": "Sign in to your account."
+	},
+	"setup_create_account": {
+		"message": "Why create an account? Creating an account allows you to sync settings across browsers and devices."
+	},
+	"create_account_promotions": {
+		"message": "Send me Ghostery updates & promotions."
+	},
+	"account_already_present": {
+		"message": "I already have an account. Sign in."
 	}
 }

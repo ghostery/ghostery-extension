@@ -84,7 +84,7 @@ export const register = (email, confirmEmail, firstName, lastName, password) => 
 				type: REGISTER_FAIL,
 				payload: { errors },
 			});
-			return false;
+			return errors;
 		}
 		dispatch({
 			type: REGISTER_SUCCESS,
@@ -92,12 +92,14 @@ export const register = (email, confirmEmail, firstName, lastName, password) => 
 		});
 		return true;
 	}).catch((err) => {
+		const errors = [{ title: err.toString(), detail: err.toString() }];
 		dispatch({
 			type: REGISTER_FAIL,
 			payload: {
-				errors: [{ title: err.toString(), detail: err.toString() }],
+				errors,
 			},
 		});
+		return errors;
 	})
 );
 

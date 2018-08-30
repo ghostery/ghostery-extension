@@ -13,38 +13,288 @@
  * ToDo: Update this file.
  */
 
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { NavLink, Route } from 'react-router-dom';
+import ClassNames from 'classnames';
+import RSVP from 'rsvp';
+import { validateEmail, validatePassword } from '../../../panel/utils/utils';
+
+// Components
+import SetupHeader from '../SetupViews/SetupHeader';
 
 /**
- * @class Implement the Create Account View for the Ghostery Hub
- * @extends Component
+ * A Functional React component for rendering the Setup Blocking View
+ * @return {JSX} JSX for rendering the Setup Blocking View of the Hub app
  * @memberof HubComponents
  */
-class CreateAccountView extends Component {
+class CreateAccountView extends React.Component {
 	constructor(props) {
 		super(props);
-
 		this.state = {
-			title: ''
+			email: '',
+			emailError: false,
+			confirmEmail: '',
+			confirmEmailError: false,
+			firstName: '',
+			lastName: '',
+			password: '',
+			loading: false,
+			passwordInvalidError: false,
+			passwordLengthError: false,
+			consentChecked: true,
 		};
 	}
 
 	/**
-	 * Lifecycle Event
+	 * Update state with changed values.
+	 * @param {Object}  event 	'change' event
 	 */
-	componentWillMount() {
-		const { title } = this.state;
-		window.document.title = title;
+	handleInputChange = (e) => {
+		const { name, value } = e.target;
+		this.setState({ [name]: value });
 	}
 
 	/**
-	 * React's required render function. Returns JSX
-	 * @return {JSX} JSX for rendering the Create Account View of the Hub app
+	 * Update state with changed consent value.
+	 * @param {Object}  event 	'change' event
 	 */
-	render() {
-		const { title } = this.state;
-		return <div>{title}</div>;
+	handleCheckboxChange = (e) => {
+		const { name, checked } = e.target;
+		this.setState({ [name]: checked });
+	}
+
+	/**
+	 * Validate input parameters, notify user if they have to be
+	 * updated. If the data is valid trigger createAccount action
+	 * to be processed by PanelActions.
+	 */
+	handleSubmit = (e) => {
+		e.preventDefault();
+		this.setState({ loading: true }, () => {
+			const {
+				email, confirmEmail, firstName, lastName, password
+			} = this.state;
+			this.setState({ loading: true }, () => {
+				if (!validateEmail(email)) {
+					this.setState({
+						emailError: true,
+						loading: false,
+					});
+					return;
+				}
+				if (!validateEmail(confirmEmail)) {
+					this.setState({
+						confirmEmailError: true,
+						loading: false,
+					});
+					return;
+				}
+				if (!validatePassword(password)) {
+					if (password.length >= 8 && password.length <= 50) {
+						this.setState({
+							passwordInvalidError: true,
+							loading: false,
+						});
+					} else {
+						this.setState({
+							passwordLengthError: true,
+							loading: false,
+						});
+					}
+					return;
+				}
+
+				this.props.actions.register(email, confirmEmail, firstName, lastName, password).then(result => {
+					console.log("RESULT", result);
+					const success = (result === true);
+					if (success) {
+						this.setState({ 
+							loading: false,
+							createAccountSuccess: true,
+							createAccountError: false,
+							createAccountErrorText: ''
+						});
+						new RSVP.Promise((resolve) => {
+							this.props.actions.getUser()
+								.then(() => resolve())
+								.catch(() => resolve());
+						}).finally(() => {
+							console.log("CREATE ACCOUNT SUCCESS IN FINALLY")
+						//	this.props.history.push('/account-success');
+						});
+					} else {
+						this.setState({ 
+							loading: false,
+							createAccountSuccess: true,
+							createAccountError: true,
+							createAccountErrorText: result[0].detail || "Create Account Error"
+						});
+					}
+				});
+			});
+		});
+	}
+
+	/**
+	 * Render Create Account panel.
+	 * @return {ReactComponent}   ReactComponent instance
+	 */
+	 render() {
+		const {
+			email, confirmEmail, firstName, lastName, password, consentChecked, loading, emailError, confirmEmailError, 
+			passwordInvalidError, passwordLengthError, createAccountError, createAccountErrorText, createAccountSuccess
+		} = this.state;
+		console.log("CREATE ACCOUNT SUCCESS", createAccountSuccess);
+		console.log("CREATE ACCOUNT ERROR", createAccountError);
+		const createAccountAlert = ClassNames({
+			'create-account-result': true, 
+			'success': createAccountSuccess || false, 
+			'error': createAccountError || false
+		});
+		return (
+			<div className="full-height flex-container flex-dir-column">
+				<div className="flex-child-grow">
+					<div>
+						<SetupHeader  
+							title = { t('setup_create_account') }
+							titleImage = {"/app/images/hub/account/ghosty-account.svg" } 
+						/>
+						<div className="row align-center account-content">
+							<div className={createAccountAlert}>
+								{createAccountError ? createAccountErrorText : createAccountSuccess ? 'Account Created' : ''}
+							</div>
+							<form onSubmit={this.handleSubmit}>
+								<div className="CreateAccount">
+									<div className="row" style={{border: 'red solid 1px'}}>
+										<div className="columns" style={{border: 'green solid 1px'}}>
+											<div id="create-account-email" className={(emailError ? 'panel-error' : '')}>
+												<label id="create-email-label" htmlFor="create-account-email" className="flex-container flex-dir-column">
+													<div className="flex-child-grow flex-container align-left-middle">{ t('email_field_label') }<span className="asterisk">*</span></div>
+													<input
+														onChange={this.handleInputChange}
+														value={email}
+														id="create-input-email" 
+														name="email" 
+														pattern=".{1,}" 
+														autoComplete="off" 
+														required 
+														type="text" 
+														style={{border: 'green solid 1px'}}
+													/>
+												</label>
+												<p id="email-invalid" className="warning">{ t('invalid_email_create') }</p>												
+											</div>
+										</div>
+										<div className="columns" style={{border: 'green solid 1px'}}>
+											<div id="create-account-email-confirm" className={(confirmEmailError ? 'panel-error' : '')}>
+												<label id="create-email-confirm-label" htmlFor="create-input-email-confirm" className="flex-container flex-dir-column">
+													<div className="flex-child-grow flex-container align-left-middle">{ t('email_confirm_field_label') }<span className="asterisk">*</span></div>
+													<input
+														onChange={this.handleInputChange} 
+														value={confirmEmail} 
+														id="create-input-email-confirm" 
+														name="confirmEmail" 
+														pattern=".{1,}" 
+														autoComplete="off" 
+														required 
+														type="text"
+													/>
+												</label>
+												<p className="warning">{ t('invalid_email_confirmation') }</p>
+											</div>
+										</div>
+									</div>
+									<div className="row" style={{border: 'red solid 1px'}}>
+										<div className="columns" style={{border: 'green solid 1px'}}>
+											<div id="create-account-first-name">
+												<label id="create-first-name-label" htmlFor="ccreate-input-first-name" className="flex-container flex-dir-column">
+													<div className="flex-child-grow flex-container align-left-middle">{ t('first_name_field_label') }</div>
+													<input 
+														onChange={this.handleInputChange} 
+														value={firstName} 
+														id="create-input-first-name" 
+														name="firstName" 
+														pattern=".{1,}" 
+														type="text" 
+													/>
+												</label>
+											</div>
+										</div>
+										<div className="columns style={{border: 'green solid 1px'}}">
+											<div id="create-account-last-name">
+												<label id="create-last-name-label" htmlFor="create-input-last-name" className="flex-container flex-dir-column">
+													<div className="flex-child-grow flex-container align-left-middle">{ t('last_name_field_label') }</div>
+													<input 
+														onChange={this.handleInputChange} 
+														value={lastName} 
+														id="create-input-last-name" 
+														name="lastName" 
+														pattern=".{1,}" 
+														type="text" 
+													/>
+												</label>
+											</div>
+										</div>		
+									</div>
+									<div className="row" style={{border: 'red solid 1px'}}>
+										<div className="columns" style={{border: 'green solid 1px'}}>
+											<div id="create-account-password" className={(passwordInvalidError || passwordLengthError ? 'panel-error' : '')}>
+												<label htmlFor="create-account-password" className="flex-container flex-dir-column">
+													<div className="flex-child-grow flex-container align-left-middle">{ t('create_password_field_label') }<span className="asterisk">*</span></div>
+													<input 
+														onChange={this.handleInputChange} 
+														value={password} 
+														className="create-account-input" 
+														id="create-account-password" 
+														name="password" 
+														pattern=".{1,}" 
+														required 
+														type="password" 
+													/>
+												</label>
+												<p className="warning">
+													<span id="password-length-requirement" className={(passwordLengthError ? 'panel-error show' : '')}>
+														{ t('password_requirements') }
+													</span>
+													<span id="password-characters-requirement" className={(passwordInvalidError ? 'panel-error show' : '')}>
+														{ t('password_characters_requirements') }
+													</span>
+												</p>								
+											</div>
+										</div>
+										<div className="columns" style={{border: 'green solid 1px'}}>
+											<span className="account-checkbox-container">
+												<img src="/app/images/hub/account/account-checkbox-on.svg" className="account-checkbox"/>
+												<span>{ t('create_account_promotions') }</span>
+											</span>
+										</div>		
+									</div>
+									<span className="row account-sign-in" style={{border: 'red solid 1px'}}>
+										<span className="columns" style={{border: 'green solid 1px'}}>
+											<NavLink to='/log-in'>
+												{ t('account_already_present') }
+											</NavLink>
+										</span>
+									</span>
+									<div className="row align-right" style={{border: 'red solid 1px'}}>
+										<button type="submit" id="create-account-button" className="account-create">
+											<span>{ t('panel_title_create_account') }</span>
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		);
 	}
 }
 
+// PropTypes ensure we pass required props of the correct type
+CreateAccountView.propTypes = {
+};
+
 export default CreateAccountView;
+

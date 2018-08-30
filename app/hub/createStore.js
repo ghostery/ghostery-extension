@@ -22,9 +22,11 @@ import {
 import thunk from 'redux-thunk';
 
 import { reducer as setup } from './Views/SetupView';
+import account from '../Account/AccountReducer';
 
 const reducer = combineReducers({
 	setup,
+	account,
 });
 
 /**
