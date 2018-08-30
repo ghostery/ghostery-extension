@@ -15,8 +15,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import SetupBlockingView from './SetupBlockingView';
 import {
-	BLOCKING_POLICY_NOTHING,
 	BLOCKING_POLICY_RECOMMENDED,
+	BLOCKING_POLICY_NOTHING,
 	BLOCKING_POLICY_EVERYTHING,
 	BLOCKING_POLICY_CUSTOM
 } from '../../SetupView/SetupViewConstants';
@@ -75,16 +75,16 @@ class SetupBlockingViewContainer extends Component {
 		const { blockingPolicy } = this.props.setup;
 		const choices = [
 			{
-				name: BLOCKING_POLICY_NOTHING,
-				image: '/app/images/hub/setup/block-none.svg',
-				text: t('hub_setup_blocking_text_nothing'),
-				description: t('hub_setup_blocking_description_nothing'),
-			},
-			{
 				name: BLOCKING_POLICY_RECOMMENDED,
 				image: '/app/images/hub/setup/block-recommended.svg',
 				text: t('hub_setup_blocking_text_recommended'),
 				description: t('hub_setup_blocking_description_recommended'),
+			},
+			{
+				name: BLOCKING_POLICY_NOTHING,
+				image: '/app/images/hub/setup/block-none.svg',
+				text: t('hub_setup_blocking_text_nothing'),
+				description: t('hub_setup_blocking_description_nothing'),
 			},
 			{
 				name: BLOCKING_POLICY_EVERYTHING,
