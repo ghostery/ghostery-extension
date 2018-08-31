@@ -199,13 +199,13 @@ $max-width: 150px;
 	@extend %g-tooltip;
 	&:hover:before {
 		@extend %g-tooltip:hover:before;
-	    left: -15px;
-	    bottom: 26px;
+	    left: -100%;
+	    top: 20px;
 	}
 	&:hover:after {
 		@extend %g-tooltip:hover:after;
 		border-width: 0 6px 6px 6px;
 	    left: 20%;
-	    top: 20px;
+	    top: 14px;
 	}
 }

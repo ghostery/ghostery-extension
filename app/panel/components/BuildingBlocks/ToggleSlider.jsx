@@ -63,7 +63,6 @@ class ToggleSlider extends React.Component {
 		const labelClassNames = ClassNames('ToggleSlider__switch', {
 			disabled: this.props.isDisabled,
 		});
-
 		return (
 			<div className={compClassNames}>
 				<label className={labelClassNames}>
