@@ -579,6 +579,9 @@
 	"panel_about_panel_header": {
 		"message": "About Ghostery Browser Extension"
 	},
+	"panel_subscriber_panel_header": {
+		"message": "Ghostery Supporter"
+	},
 	"panel_about_version_header": {
 		"message": "Ghostery for $BROWSER$ version $VERSION$",
 		"placeholders": {
@@ -618,6 +621,9 @@
 	},
 	"panel_menu_about": {
 		"message": "About"
+	},
+	"panel_menu_ghostery_subscriber": {
+		"message": "Ghostery Supporter"
 	},
 	"panel_menu_signin": {
 		"message": "Sign in"
@@ -1911,5 +1917,78 @@
 	},
 	"popup_apply_code_button": {
 		"message": "Apply code"
+	},  
+	"subscription_info": {
+		"message": "Subscription Info"
+	},
+	"subscription_themes": {
+		"message": "Themes"
+	},
+	"subscription_priority_support": {
+		"message": "Priority Support"
+	},
+	"subscription_info_title": {
+		"message": "Subscription Info"
+	},
+	"subscription_themes_title": {
+		"message": "Themes"
+	},
+	"subscription_priority_support_title": {
+		"message": "Priority Support"
+	},
+	"subscription_priority_support": {
+		"message": "Priority Support"
+	},
+	"subscribe_pitch": {
+		"message": "We work hard to keep Ghostery's privacy protection free for all our users. If you like what we do, you can support us with a small subscription of $$2 per month."
+	},
+	"subscribe_pitch_learn_more": {
+		"message": "Learn more"
+	},
+	"subscribe_pitch_button_label": {
+		"message": "BECOME A GHOSTERY SUPPORTER"
+	},
+	"subscribe_pitch_sign_here": {
+		"message": "Already a Ghostery Supporter? Sign in here"
+	},
+	"subscription_midnight_theme": {
+		"message": "Midnight Theme"
+	},
+	"subscription_status": {
+		"message": "Status"
+	},
+	"subscription_active": {
+		"message": "Active"
+	},
+	"subscription_inactive": {
+		"message": "Inactive"
+	},
+	"subscription_active_tooltip": {
+		"message": "Your Ghostery Supporter subscription is now active"
+	},
+	"subscription_inactive_tooltip": {
+		"message": "Your Ghostery Supporter subscription is now inactive"
+	},
+
+	"subscription_manage": {
+		"message": "Manage My Subscription"
+	},
+	"subscription_themes_tooltip": {
+		"message": "Change the color scheme of Ghostery!"
+  	},
+  	"subscription_tracker_stats": {
+  		"message": "Historical Tracker Stats"
+  	},
+	"subscription_tracker_stats_title" : {
+		"message": "Historical Tracker Stats"
+	},
+	"subscription_charge_date" : {
+		"message": "Next Charge Date"
+	},
+	"subscription_expired": {
+		"message": "Account expired"
+	},
+	"subscription_auto_renewal": {
+		"message": "Auto Renewal"
 	}
 }

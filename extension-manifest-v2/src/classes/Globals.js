@@ -104,6 +104,7 @@ class Globals {
 			'site_specific_unblocks',
 			'toggle_individual_trackers',
 			'trackers_banner_status',
+			'current_theme'
 		];
 
 		this.SESSION = {

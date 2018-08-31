@@ -182,3 +182,35 @@ export function doXHR(method, url, query) {
 		xhr.send(query);
 	});
 }
+
+/**
+ * Sets the theme
+ * @memberOf PanelUtils
+ * @param  {object} doc document object
+ * @param  {string} themeName unique name of the theme
+ * @param {string} theme css of the theme
+ */
+
+export function setTheme(doc, themeName, theme) {
+	const styleTitlePrefix = 'Ghostery Theme';
+	// First remove all other style elements which may be there
+	const styleList = doc.head.getElementsByTagName('style');
+	// Other kinds of loops are not supported equally across browsers
+	for (let i = 0; i < styleList.length; i++) {
+		const style = styleList[i];
+		if (style.title.startsWith(styleTitlePrefix)) {
+			doc.head.removeChild(style);
+		}
+	}
+	// if themeName is 'default' all we have to do is to remove style element
+	if (themeName !== 'default') {
+		// Create element for the theme being set, if it is not there
+		const themeStyle = doc.createElement('style');
+		themeStyle.id = themeName;
+		themeStyle.title = `${styleTitlePrefix} ${themeName}`;
+
+		// Set content of style element to the theme text.
+		themeStyle.textContent = theme;
+		document.head.appendChild(themeStyle);
+	}
+}
