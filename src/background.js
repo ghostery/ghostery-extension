@@ -804,6 +804,44 @@ function onMessageHandler(request, sender, callback) {
 		panelData.set(message);
 		callback();
 		return false;
+	} else if (name === 'account.getTheme') {
+		if (message.currentTheme !== 'default' &&
+			account.hasScopesUnverified(['subscriptions:supporter'])) {
+			// try to get it locally
+			message.theme = conf.themes[message.currentTheme];
+			if (message.theme) {
+				// This will trigger panelData.set through dispatch
+				// as currentTheme is in SYNC_ARRAY
+				conf.current_theme = message.currentTheme;
+				callback(message);
+				return false;
+			}
+			account.getTheme(`${message.currentTheme}.css`).then((theme) => {
+				if (theme) {
+					const { themes } = conf;
+					themes[message.currentTheme] = theme;
+					conf.themes = themes;
+					conf.current_theme = message.currentTheme;
+					message.theme = theme;
+				} else {
+					conf.current_theme = 'default';
+					message.currentTheme = 'default';
+				}
+				callback(message);
+			})
+				.catch((err) => {
+					log('GET SET THEME ERROR', err);
+					conf.current_theme = 'default';
+					message.currentTheme = 'default';
+					callback(message);
+				});
+			// Signifying asynchronous callback here. Other cases are synchronous.
+			return true;
+		}
+		conf.current_theme = 'default';
+		message.currentTheme = 'default';
+		callback(message);
+		return false;
 	} else if (name === 'getCliqzModuleData') {
 		const modules = { adblock: {}, antitracking: {} };
 
@@ -811,11 +849,11 @@ function onMessageHandler(request, sender, callback) {
 			button.update();
 			if (conf.enable_ad_block) {
 				// update adblock count. callback() handled below based on anti-tracking status
-				modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tabId);
+				modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tabId) || {};
 			}
 			if (conf.enable_anti_tracking) {
 				cliqz.modules.antitracking.background.actions.aggregatedBlockingStats(tabId).then((data) => {
-					modules.antitracking = data;
+					modules.antitracking = data || {};
 					callback(modules);
 				}).catch(() => {
 					callback(modules);
@@ -899,6 +937,9 @@ function onMessageHandler(request, sender, callback) {
 	} else if (name === 'account.getUser') {
 		account.getUser(message)
 			.then((user) => {
+				if (user) {
+					user.subscriptionsSupporter = account.hasScopesUnverified(['subscriptions:supporter']);
+				}
 				callback({ user });
 			})
 			.catch((err) => {
