@@ -139,9 +139,12 @@ class Header extends React.Component {
 			active: this.props.is_expert,
 		});
 		const { loggedIn, user } = this.props;
-		const subscriber = !!(this.props.user && this.props.user.subscriptionsSupporter);
+		const subscriber = this.props.user && this.props.user.subscriptionsSupporter;
 		const rightLink = this.generateLink();
-		const badgeClasses = ClassNames('columns', 'shrink', { 'non-subscriber-badge': !subscriber }, { 'subscriber-badge': subscriber });
+		const badgeClasses = ClassNames('columns', 'shrink', {
+			'non-subscriber-badge': !subscriber,
+			'subscriber-badge': subscriber
+		});
 
 		return (
 			<header id="ghostery-header">
