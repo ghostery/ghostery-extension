@@ -38,9 +38,7 @@ class LogInView extends React.Component {
 			emailError: false,
 			passwordError: false,
 			loginSuccess: false,
-			loginError: false,
 			loginErrorText: '',
-		//	rememberMeChecked: true,
 		};
 	}
 
@@ -52,18 +50,15 @@ class LogInView extends React.Component {
 		const { name, value } = e.target;
 		this.setState({ [name]: value });
 	}
+
 	/**
-	 * Update state with changed checkbox value.
+	 * Helper to extract text error from errors object returned by actions.
 	 */
-	// handleCheckboxChange = () => {
-	// 	const rememberMeChecked = !this.state.rememberMeChecked;
-	// 	this.setState({rememberMeChecked});
-	// 	if(rememberMeChecked) {
-	// 		// action 1
-	// 	} else {
-	// 		// action 2
-	// 	}
-	// }
+	_actionErrorsToText = errors=> {
+		console.log("ERRORS", errors);
+		return (errors && errors.length === 1 && errors[0].detail) || t('banner_no_such_account_message');
+	}
+
 	/**
 	 * Validate entered login data and, if it is good, trigger Login action.
 	 */
@@ -76,109 +71,56 @@ class LogInView extends React.Component {
 			emailError: !emailIsValid,
 			passwordError: !password,
 		});
+
 		if (!emailIsValid || !password) { return; }
 
-// 		////////////////////////////////////////////////////
-// 							console.log("RESULT", result);
-// 					const success = (result === true);
-// 					if (success) {
-// 						this.setState({ 
-// 							loading: false,
-// 							createAccountSuccess: true,
-// 						});
-// 						new RSVP.Promise((resolve) => {
-// 							this.props.actions.getUser()
-// 								.then(result => {
-// 									const {errors, user} = result;
-// 									if(errors || !user) {
-// 										this.setState({ 
-// 											loading: false,
-// 											createAccountSuccess: false,
-// 											createAccountErrorText: result[0].detail || "Create Account Error"
-// 										});
-// 									} else {
-// 										this.setState({ accountCreated: true });
-// 										if(this.state.promotionsChecked) {
-// 											console.log("USER", user);
-// 											sendMessage("account.promotions", true);
-// 										}
-// 									}
-// 									resolve();
-// 									console.log("CREATE ACCOUNT AND GET USER SUCCEDED");
-// 								})
-// 								.catch(() => resolve());
-// 						}).finally(() => {
-// 						});
-// 					} else {
-// 						this.setState({ 
-// 							loading: false,
-// 							createAccountSuccess: true,
-// 							createAccountErrorText: result[0].detail || "Create Account Error"
-// 						});
-// 					}
-// 				});
-// ///
-		
-
-		this.setState({ loading: true }, () => {
+		this.setState({ 
+			loading: true,
+			loginErrorText: '',
+			loginSuccess: false, 
+		}, () => {
 			this.props.actions.login(email, password)
-				.then(result => {
-					const success = (result === true);
-					if (success) {
-						new RSVP.Promise((resolve, reject) => {
-							this.props.actions.getUser()
-								.then(result1 => {
-									const {errors1} = result1;
-									if(errors1) {
-										reject(new Error(this._actionErrorsToText(errors1)));
-									} else {
-										this.props.actions.getUserSettings()
-										.then(result2 = {
-											const {errors2} = result2;
-											if(errors2) {
-												reject(new Error(this._actionErrorsToText(errors2)));
-											} else {
-												this.setState({ 
-													loginSuccess: true,
-													loading: false, 
-												});
-												resolve();
-											}
-										});
-									}
-								}
-
-
-
-
-
-										this.setState({ accountCreated: true });
-										if(this.state.promotionsChecked) {
-											console.log("USER", user);
-											sendMessage("account.promotions", true);
+			.then(result => {
+				const success = (result === true);
+				if (success) {
+					new RSVP.Promise((resolve, reject) => {
+						this.props.actions.getUser()
+							.then(result1 => {
+								const {errors1} = result1;
+								if(errors1) {
+									reject(new Error(this._actionErrorsToText(errors1)));
+								} else {
+									this.props.actions.getUserSettings()
+									.then(result2 => {
+										const {errors2} = result2;
+										if(errors2) {
+											reject(new Error(this._actionErrorsToText(errors2)));
+										} else {
+											this.setState({ 
+												loginSuccess: true,
+												loading: false, 
+											});
+											resolve();
 										}
-									}
-									resolve();
-									console.log("CREATE ACCOUNT AND GET USER SUCCEDED");
-								})
-
-
-						RSVP.all([
-							this.props.actions.getUser(),
-							this.props.actions.getUserSettings(),
-						])
-						.catch(err => {
-							this.setState({ 
-								loading: false,
-								loginErrorText: err, 
+									});
+								}
+							})
+							.catch(err => {
+								this.setState({ 
+									loginErrorText: err,
+									loading: false, 
+								});
 							});
 						})
+						.finally(() => {});
 					} else {
-						this.setState({ loading: false });
+						this.setState({ 
+							loginErrorText: this._actionErrorsToText(result),
+							loading: false, 
+						});
 					}
 				})
-				.catch(err => log(err));
-		});
+			});		
 	}
 	/**
 	 * Render Create Account panel.
@@ -186,14 +128,14 @@ class LogInView extends React.Component {
 	 */
 	 render() {
 		const {
-			email, password, emailError, passwordError, loading, loginSuccess, loginError		
+			email, password, emailError, passwordError, loading, loginSuccess, loginErrorText		
 		} = this.state;
 		console.log("CREATE ACCOUNT SUCCESS", loginSuccess);
-		console.log("CREATE ACCOUNT ERROR", loginError);
+		console.log("CREATE ACCOUNT ERROR", loginErrorText);
 		const createLoginAlert = ClassNames({
 			'create-account-result': true, 
 			'success': loginSuccess || false, 
-			'error': loginError || false
+			'error': loginErrorText || false
 		});
 		const CheckboxImagePath = this.state.rememberMeChecked ? '/app/images/hub/account/account-checkbox-on.svg' : '/app/images/hub/account/account-checkbox-off.svg';
 		return (
@@ -206,7 +148,7 @@ class LogInView extends React.Component {
 						/>
 						<div className="row align-center account-content">
 							<div className={createLoginAlert}>
-								{loginError ? loginErrorText : loginSuccess ? 'Successful Login' : ''}
+								{loginErrorText ? loginErrorText : loginSuccess ? 'Successful Login' : ''}
 							</div>
 							<form onSubmit={this.handleSubmit}>
 								<div className="LogIn">

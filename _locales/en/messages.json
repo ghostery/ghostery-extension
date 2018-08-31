@@ -1869,5 +1869,8 @@
 	},
 	"do_not_have_account": {
 		"message": "Don't have an account? Sign Up."
+	},
+	"create_account_error": {
+		"message": "Create Account Error"
 	}
 }

@@ -43,9 +43,7 @@ class CreateAccountView extends React.Component {
 			passwordInvalidError: false,
 			passwordLengthError: false,
 			promotionsChecked: true,
-			accountCreated: false,
 			createAccountSuccess: false,
-			createAccountError: false,
 			createAccountErrorText: '',
 		};
 	}
@@ -65,9 +63,16 @@ class CreateAccountView extends React.Component {
 	handleCheckboxChange = () => {
 		const promotionsChecked = !this.state.promotionsChecked;
 		this.setState({promotionsChecked});
-		if(this.state.accountCreated) {
+		if(this.state.createAccountSuccess) {
 			sendMessage("account.promotions", promotionsChecked);
 		}
+	}
+
+	/**
+	 * Helper to extract text error from errors object returned by actions.
+	 */
+	_actionErrorsToText = errors=> {
+		return (errors && errors.length === 1 && errors[0].detail) || t('create_account_error');
 	}
 
 	/**
@@ -83,9 +88,7 @@ class CreateAccountView extends React.Component {
 			} = this.state;
 			this.setState({ 
 					loading: true, 
-					accountCreated: false,
 					createAccountSuccess: false,
-					createAccountError: false,
 					createAccountErrorText: '',
 					confirmEmailError: false,
 					passwordInvalidError: false,
@@ -119,45 +122,43 @@ class CreateAccountView extends React.Component {
 					}
 					return;
 				}
-
 				this.props.actions.register(email, confirmEmail, firstName, lastName, password).then(result => {
 					console.log("RESULT", result);
 					const success = (result === true);
 					if (success) {
-						this.setState({ 
-							loading: false,
-							createAccountSuccess: true,
-						});
-						new RSVP.Promise((resolve) => {
+						new RSVP.Promise((resolve, reject) => {
 							this.props.actions.getUser()
-								.then(result => {
-									const {errors, user} = result;
-									if(errors || !user) {
-										this.setState({ 
-											loading: false,
-											createAccountSuccess: false,
-											createAccountError: true,
-											createAccountErrorText: res[0].detail || "Create Account Error"
-										});
+								.then(res => {
+									const {errors} = res;
+									if(errors) {
+										reject(new Error(this._actionErrorsToText(errors)));
 									} else {
-										this.setState({ accountCreated: true });
-										if(this.state.promotionsChecked) {
-											console.log("USER", user);
-											sendMessage("account.promotions", true);
-										}
+										this.setState({
+											loading: false,
+											createAccountSuccess: true, 
+										}, () => {
+											if(this.state.promotionsChecked) {
+												sendMessage("account.promotions", true);
+											}
+										});
 									}
 									resolve();
 									console.log("CREATE ACCOUNT AND GET USER SUCCEDED");
 								})
-								.catch(() => resolve());
-						}).finally(() => {
-						});
+								.catch(err => {
+									this.setState({ 
+										loading: false,
+										createAccountErrorText: err || t('create_account_error')
+									});
+
+									resolve();
+								});
+						})
+						.finally(() =>{});
 					} else {
 						this.setState({ 
 							loading: false,
-							createAccountSuccess: true,
-							createAccountError: true,
-							createAccountErrorText: result[0].detail || "Create Account Error"
+							createAccountErrorText: this._actionErrorsToText(result),
 						});
 					}
 				});
@@ -172,14 +173,14 @@ class CreateAccountView extends React.Component {
 	 render() {
 		const {
 			email, confirmEmail, firstName, lastName, password, consentChecked, loading, emailError, confirmEmailError, 
-			passwordInvalidError, passwordLengthError, createAccountError, createAccountErrorText, createAccountSuccess
+			passwordInvalidError, passwordLengthError, createAccountErrorText, createAccountSuccess
 		} = this.state;
 		console.log("CREATE ACCOUNT SUCCESS", createAccountSuccess);
-		console.log("CREATE ACCOUNT ERROR", createAccountError);
+		console.log("CREATE ACCOUNT ERROR", createAccountErrorText);
 		const createAccountAlert = ClassNames({
 			'create-account-result': true, 
 			'success': createAccountSuccess || false, 
-			'error': createAccountError || false
+			'error': !!createAccountErrorText || false
 		});
 		const CheckboxImagePath = this.state.promotionsChecked ? '/app/images/hub/account/account-checkbox-on.svg' : '/app/images/hub/account/account-checkbox-off.svg';
 		return (
@@ -192,7 +193,7 @@ class CreateAccountView extends React.Component {
 						/>
 						<div className="row align-center account-content">
 							<div className={createAccountAlert}>
-								{createAccountError ? createAccountErrorText : createAccountSuccess ? 'Account Created' : ''}
+								{createAccountErrorText ? createAccountErrorText : createAccountSuccess ? 'Account Created' : ''}
 							</div>
 							<form onSubmit={this.handleSubmit}>
 								<div className="CreateAccount">

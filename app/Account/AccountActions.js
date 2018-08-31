@@ -16,14 +16,24 @@ import {
 
 export const getUserSettings = () => dispatch => (
 	sendMessageInPromise('account.getUserSettings')
-		.then((settings) => {
-			dispatch({
-				type: GET_USER_SETTINGS_SUCCESS,
-				payload: { settings },
-			});
+		.then((res) => {
+			const { errors, settings } = res;
+			if(errors) {
+				dispatch({
+					type: GET_USER_SETTINGS_FAIL,
+					payload: { errors },
+				});
+			} else {
+				dispatch({
+					type: GET_USER_SETTINGS_SUCCESS,
+					payload: { settings },
+				});
+			}
+			return res;
 		})
 		.catch((error) => {
 			log('PanelActions getUserSettings error', error);
+			return error;
 		})
 );
 
@@ -55,7 +65,7 @@ export const login = (email, password) => dispatch => (
 					type: LOGIN_FAIL,
 					payload: { errors },
 				});
-				return false;
+				return errors;
 			}
 			dispatch({
 				type: LOGIN_SUCCESS,
@@ -65,12 +75,14 @@ export const login = (email, password) => dispatch => (
 		})
 		.catch((err) => {
 			log('account.login() error:', err);
+			const errors = [{ title: err.toString(), detail: err.toString() }];
 			dispatch({
 				type: LOGIN_FAIL,
 				payload: {
-					errors: [{ title: err.toString(), detail: err.toString() }],
+					errors,
 				},
 			});
+			return errors;
 		})
 );
 
