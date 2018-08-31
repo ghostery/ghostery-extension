@@ -40,7 +40,7 @@ class LogInView extends React.Component {
 			loginSuccess: false,
 			loginError: false,
 			loginErrorText: '',
-			rememberMeChecked: true,
+		//	rememberMeChecked: true,
 		};
 	}
 
@@ -55,15 +55,15 @@ class LogInView extends React.Component {
 	/**
 	 * Update state with changed checkbox value.
 	 */
-	handleCheckboxChange = () => {
-		const rememberMeChecked = !this.state.rememberMeChecked;
-		this.setState({rememberMeChecked});
-		if(rememberMeChecked) {
-			// action 1
-		} else {
-			// action 2
-		}
-	}
+	// handleCheckboxChange = () => {
+	// 	const rememberMeChecked = !this.state.rememberMeChecked;
+	// 	this.setState({rememberMeChecked});
+	// 	if(rememberMeChecked) {
+	// 		// action 1
+	// 	} else {
+	// 		// action 2
+	// 	}
+	// }
 	/**
 	 * Validate entered login data and, if it is good, trigger Login action.
 	 */
@@ -78,18 +78,101 @@ class LogInView extends React.Component {
 		});
 		if (!emailIsValid || !password) { return; }
 
+// 		////////////////////////////////////////////////////
+// 							console.log("RESULT", result);
+// 					const success = (result === true);
+// 					if (success) {
+// 						this.setState({ 
+// 							loading: false,
+// 							createAccountSuccess: true,
+// 						});
+// 						new RSVP.Promise((resolve) => {
+// 							this.props.actions.getUser()
+// 								.then(result => {
+// 									const {errors, user} = result;
+// 									if(errors || !user) {
+// 										this.setState({ 
+// 											loading: false,
+// 											createAccountSuccess: false,
+// 											createAccountErrorText: result[0].detail || "Create Account Error"
+// 										});
+// 									} else {
+// 										this.setState({ accountCreated: true });
+// 										if(this.state.promotionsChecked) {
+// 											console.log("USER", user);
+// 											sendMessage("account.promotions", true);
+// 										}
+// 									}
+// 									resolve();
+// 									console.log("CREATE ACCOUNT AND GET USER SUCCEDED");
+// 								})
+// 								.catch(() => resolve());
+// 						}).finally(() => {
+// 						});
+// 					} else {
+// 						this.setState({ 
+// 							loading: false,
+// 							createAccountSuccess: true,
+// 							createAccountErrorText: result[0].detail || "Create Account Error"
+// 						});
+// 					}
+// 				});
+// ///
+		
+
 		this.setState({ loading: true }, () => {
 			this.props.actions.login(email, password)
-				.then((success) => {
+				.then(result => {
+					const success = (result === true);
 					if (success) {
+						new RSVP.Promise((resolve, reject) => {
+							this.props.actions.getUser()
+								.then(result1 => {
+									const {errors1} = result1;
+									if(errors1) {
+										reject(new Error(this._actionErrorsToText(errors1)));
+									} else {
+										this.props.actions.getUserSettings()
+										.then(result2 = {
+											const {errors2} = result2;
+											if(errors2) {
+												reject(new Error(this._actionErrorsToText(errors2)));
+											} else {
+												this.setState({ 
+													loginSuccess: true,
+													loading: false, 
+												});
+												resolve();
+											}
+										});
+									}
+								}
+
+
+
+
+
+										this.setState({ accountCreated: true });
+										if(this.state.promotionsChecked) {
+											console.log("USER", user);
+											sendMessage("account.promotions", true);
+										}
+									}
+									resolve();
+									console.log("CREATE ACCOUNT AND GET USER SUCCEDED");
+								})
+
+
 						RSVP.all([
 							this.props.actions.getUser(),
 							this.props.actions.getUserSettings(),
-						]).finally(() => {
-							this.setState({ loading: false }, () => {
-								this.props.history.push(this.props.is_expert ? '/detail/blocking' : '/');
+						])
+						.catch(err => {
+							this.setState({ 
+								loading: false,
+								loginErrorText: err, 
 							});
-						});
+						})
 					} else {
 						this.setState({ loading: false });
 					}
@@ -172,6 +255,7 @@ class LogInView extends React.Component {
 											</div>
 										</div>
 									</div>
+									{/*
 									<div className="row" style={{border: 'red solid 1px'}}>
 										<div className="columns padded" style={{border: 'green solid 1px'}}>
 											<span className="account-checkbox-container" onClick={this.handleCheckboxChange}>
@@ -180,6 +264,7 @@ class LogInView extends React.Component {
 											</span>
 										</div>								
 									</div>
+									*/}
 									<span className="row account-sign-in" style={{border: 'red solid 1px'}}>
 										<span className="columns padded" style={{border: 'green solid 1px'}}>
 											<NavLink to='/create-account'>
