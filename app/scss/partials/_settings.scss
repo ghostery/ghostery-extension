@@ -72,6 +72,10 @@
 			@extend %s-tooltip;
 			@extend %g-tooltip-down-left;
 		}
+		.s-tooltip-down-right {
+			@extend %s-tooltip;
+			@extend %g-tooltip-down-right;
+		}
 		 .s-tooltip-down-click-to-play-img {
 			@extend .s-tooltip-down;
 			&:hover:before {
