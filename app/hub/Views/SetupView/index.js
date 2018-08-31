@@ -25,6 +25,7 @@ import {
 	setGhosteryRewards
 } from '../SetupViews/SetupAntiSuiteView/SetupAntiSuiteViewActions';
 import { setHumanWeb } from '../SetupViews/SetupHumanWebView/SetupHumanWebViewActions';
+import { setSetupComplete } from '../SetupViews/SetupDoneView/SetupDoneViewActions';
 
 /**
  * Map redux store state properties to the component's own properties.
@@ -48,6 +49,7 @@ const mapDispatchToProps = dispatch => ({
 		setSmartBlocking,
 		setGhosteryRewards,
 		setHumanWeb,
+		setSetupComplete,
 	}), dispatch),
 });
 

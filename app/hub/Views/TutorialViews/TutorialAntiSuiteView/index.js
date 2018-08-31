@@ -1,5 +1,5 @@
 /**
- * Point of entry index.js file for Tutorial Anti-Suite View
+ * Point of entry index.js file for Tutorial Anti Suite View
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -11,6 +11,31 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import TutorialAntiSuiteView from './TutorialAntiSuiteView';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-export default TutorialAntiSuiteView;
+import TutorialAntiSuiteViewContainer from './TutorialAntiSuiteViewContainer';
+import * as TutorialAntiSuiteViewActions from './TutorialAntiSuiteViewActions';
+import { setTutorialNavigation } from '../../TutorialView/TutorialViewActions';
+
+/**
+ * Map redux store state properties to the component's own properties.
+ * @param  {Object} state    entire Redux store's state
+ * @return {function}        this function returns a plain object, which will be merged into the component's props
+ * @memberof HubContainers
+ */
+const mapStateToProps = state => Object.assign({}, state.tutorial);
+
+/**
+ * Bind the component's action creators using Redux's bindActionCreators.
+ * @param  {function} dispatch redux store method which dispatches actions
+ * @return {function}          to be used as an argument in redux connect call
+ * @memberof TutorialContainers
+ */
+const mapDispatchToProps = dispatch => ({
+	actions: bindActionCreators(Object.assign({}, TutorialAntiSuiteViewActions, {
+		setTutorialNavigation,
+	}), dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TutorialAntiSuiteViewContainer);

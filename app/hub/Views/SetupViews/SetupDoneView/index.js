@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import SetupDoneViewContainer from './SetupDoneViewContainer';
+import * as SetupDoneViewActions from './SetupDoneViewActions';
 import { setSetupNavigation } from '../../SetupView/SetupViewActions';
 
 /**
@@ -32,7 +33,9 @@ const mapStateToProps = state => Object.assign({}, state.setup);
  * @memberof SetupContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign({}, { setSetupNavigation }), dispatch),
+	actions: bindActionCreators(Object.assign({}, SetupDoneViewActions, {
+		setSetupNavigation,
+	}), dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SetupDoneViewContainer);

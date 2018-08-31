@@ -13,38 +13,13 @@
  * ToDo: Update this file.
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 
 /**
  * @class Implement the Tutorial Blocking View for the Ghostery Hub
  * @extends Component
  * @memberof HubComponents
  */
-class TutorialBlockingView extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			title: ''
-		};
-	}
-
-	/**
-	 * Lifecycle Event
-	 */
-	componentWillMount() {
-		const { title } = this.state;
-		window.document.title = title;
-	}
-
-	/**
-	 * React's required render function. Returns JSX
-	 * @return {JSX} JSX for rendering the Tutorial Blocking View of the Hub app
-	 */
-	render() {
-		const { title } = this.state;
-		return <div>{title}</div>;
-	}
-}
+const TutorialBlockingView = () => <div>Ghostery Hub - Tutorial Blocking View</div>;
 
 export default TutorialBlockingView;

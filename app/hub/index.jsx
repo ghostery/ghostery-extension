@@ -20,7 +20,7 @@ import { Provider } from 'react-redux';
 import createStore from './createStore';
 
 // Components
-import App from './components/App';
+import App from './App';
 
 // Containers
 import HomeView from './Views/HomeView';

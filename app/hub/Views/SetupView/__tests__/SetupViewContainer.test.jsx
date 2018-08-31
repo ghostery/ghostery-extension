@@ -46,18 +46,16 @@ const actions = {
 	setSmartBlocking: () => {},
 	setGhosteryRewards: () => {},
 	setHumanWeb: () => {},
+	setSetupComplete: () => {},
 };
 
 describe('app/hub/Views/SetupView container', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('setup view container is rendered correctly on the Blocking step', () => {
-			const paths = ['/setup/1', '/setup/2', '/setup/3', '/setup/4'];
-			const location = {
-				pathname: '/setup/1',
-			};
+			const paths = ['/setup/1', '/setup/1/custom', '/setup/2', '/setup/3', '/setup/4'];
 			const component = renderer.create(
 				<MemoryRouter initialEntries={paths} initialIndex={0} >
-					<SetupViewContainer actions={actions} location={location} />
+					<SetupViewContainer actions={actions} preventRedirect={true} />
 				</MemoryRouter>
 			).toJSON();
 			expect(component).toMatchSnapshot();
@@ -65,52 +63,39 @@ describe('app/hub/Views/SetupView container', () => {
 
 		test('setup view container is rendered correctly on the Custom Blocking step', () => {
 			const paths = ['/setup/1', '/setup/1/custom', '/setup/2', '/setup/3', '/setup/4'];
-			const location = {
-				pathname: '/setup/1/custom',
-			};
-			const history = [];
 			const component = renderer.create(
 				<MemoryRouter initialEntries={paths} initialIndex={1} >
-					<SetupViewContainer actions={actions} location={location} history={history} />
+					<SetupViewContainer actions={actions} preventRedirect={true} />
 				</MemoryRouter>
 			).toJSON();
 			expect(component).toMatchSnapshot();
 		});
 
 		test('setup view container is rendered correctly on the Anti-Suite step', () => {
-			const paths = ['/setup/1', '/setup/2', '/setup/3', '/setup/4'];
-			const location = {
-				pathname: '/setup/2',
-			};
+			const paths = ['/setup/1', '/setup/1/custom', '/setup/2', '/setup/3', '/setup/4'];
 			const component = renderer.create(
-				<MemoryRouter initialEntries={paths} initialIndex={1} >
-					<SetupViewContainer actions={actions} location={location} />
+				<MemoryRouter initialEntries={paths} initialIndex={2} >
+					<SetupViewContainer actions={actions} preventRedirect={true} />
 				</MemoryRouter>
 			).toJSON();
 			expect(component).toMatchSnapshot();
 		});
 
 		test('setup view container is rendered correctly on the Human Web step', () => {
-			const paths = ['/setup/1', '/setup/2', '/setup/3', '/setup/4'];
-			const location = {
-				pathname: '/setup/3',
-			};
+			const paths = ['/setup/1', '/setup/1/custom', '/setup/2', '/setup/3', '/setup/4'];
 			const component = renderer.create(
-				<MemoryRouter initialEntries={paths} initialIndex={2} >
-					<SetupViewContainer actions={actions} location={location} />
+				<MemoryRouter initialEntries={paths} initialIndex={3} >
+					<SetupViewContainer actions={actions} preventRedirect={true} />
 				</MemoryRouter>
 			).toJSON();
 			expect(component).toMatchSnapshot();
 		});
 
 		test('setup view container is rendered correctly on the Done step', () => {
-			const paths = ['/setup/1', '/setup/2', '/setup/3', '/setup/4'];
-			const location = {
-				pathname: '/setup/4',
-			};
+			const paths = ['/setup/1', '/setup/1/custom', '/setup/2', '/setup/3', '/setup/4'];
 			const component = renderer.create(
-				<MemoryRouter initialEntries={paths} initialIndex={3} >
-					<SetupViewContainer actions={actions} location={location} />
+				<MemoryRouter initialEntries={paths} initialIndex={4} >
+					<SetupViewContainer actions={actions} preventRedirect={true} />
 				</MemoryRouter>
 			).toJSON();
 			expect(component).toMatchSnapshot();

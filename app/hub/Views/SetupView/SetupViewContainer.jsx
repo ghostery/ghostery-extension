@@ -12,7 +12,7 @@
  */
 
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import QueryString from 'query-string';
 import PropTypes from 'prop-types';
 import SetupView from './SetupView';
@@ -27,7 +27,7 @@ import SetupHumanWebView from '../SetupViews/SetupHumanWebView';
 import SetupDoneView from '../SetupViews/SetupDoneView';
 
 /**
- * @class Implement the Setup Container View for the Ghostery Hub
+ * @class Implement the Setup View for the Ghostery Hub
  * @extends Component
  * @memberof HubContainers
  */
@@ -38,20 +38,13 @@ class SetupViewContainer extends React.Component {
 			sendMountActions: false,
 			showModal: false,
 		};
-	}
 
-	/**
-	 * Lifecycle Event
-	 */
-	componentWillMount() {
-		const title = t('hub_setup_page_title');
-
-		window.document.title = title;
-
-		// The user can not enter the Custom Setup Workflow from /setup/1/custom
-		if (/setup\/1\/custom/gi.test(this.props.location.pathname)) {
+		if (!props.preventRedirect) {
 			this.props.history.push('/setup/1');
 		}
+
+		const title = t('hub_setup_page_title');
+		window.document.title = title;
 
 		this.props.actions.initSetupProps(this.props.setup);
 		this.props.actions.getSetupShowWarningOverride().then((data) => {
@@ -208,6 +201,7 @@ class SetupViewContainer extends React.Component {
 // PropTypes ensure we pass required props of the correct type
 // Note: isRequired is not needed when a prop has a default value
 SetupViewContainer.propTypes = {
+	preventRedirect: PropTypes.bool,
 	setup: PropTypes.shape({
 		navigation: PropTypes.shape({
 			activeIndex: PropTypes.number,
@@ -255,11 +249,13 @@ SetupViewContainer.propTypes = {
 		setSmartBlocking: PropTypes.func.isRequired,
 		setGhosteryRewards: PropTypes.func.isRequired,
 		setHumanWeb: PropTypes.func.isRequired,
+		setSetupComplete: PropTypes.func.isRequired,
 	}).isRequired,
 };
 
 // Default props used throughout the Setup flow
 SetupViewContainer.defaultProps = {
+	preventRedirect: false,
 	setup: {
 		navigation: {
 			activeIndex: 0,
@@ -280,4 +276,4 @@ SetupViewContainer.defaultProps = {
 	},
 };
 
-export default SetupViewContainer;
+export default withRouter(SetupViewContainer);

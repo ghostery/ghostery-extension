@@ -507,6 +507,25 @@ function handleRewards(name, message, callback) {
  */
 function handleGhosteryHub(name, message, callback) {
 	switch (name) {
+		case 'GET_HOME_PROPS': {
+			const {
+				setup_complete,
+				tutorial_complete,
+				enable_metrics,
+			} = conf;
+			callback({
+				setup_complete,
+				tutorial_complete,
+				enable_metrics,
+			});
+			break;
+		}
+		case 'SET_METRICS': {
+			const { enable_metrics } = message;
+			conf.enable_metrics = enable_metrics;
+			callback({ enable_metrics });
+			break;
+		}
 		case 'GET_SETUP_SHOW_WARNING_OVERRIDE': {
 			const { setup_show_warning_override } = conf;
 			callback({ setup_show_warning_override });
@@ -575,6 +594,18 @@ function handleGhosteryHub(name, message, callback) {
 			const { enable_human_web } = message;
 			conf.enable_human_web = enable_human_web;
 			callback({ enable_human_web });
+			break;
+		}
+		case 'SET_SETUP_COMPLETE': {
+			const setup_complete = true;
+			conf.setup_complete = setup_complete;
+			callback({ setup_complete });
+			break;
+		}
+		case 'SET_TUTORIAL_COMPLETE': {
+			const tutorial_complete = true;
+			conf.tutorial_complete = tutorial_complete;
+			callback({ tutorial_complete });
 			break;
 		}
 		default: break;

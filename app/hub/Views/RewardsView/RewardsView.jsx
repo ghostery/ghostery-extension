@@ -46,7 +46,7 @@ class RewardsView extends Component {
 							{t('hub_rewards_header_description')}
 						</div>
 						<div className="RewardsView__buttonContainer">
-							<a className="RewardsView__button button success" href="https://www.ghostery.com/faqs/what-is-ghostery-rewards/">
+							<a className="RewardsView__button button success" href="https://www.ghostery.com/faqs/what-is-ghostery-rewards/" target="_blank" rel="noopener noreferrer">
 								{t('hub_rewards_header_learn_more')}
 							</a>
 						</div>
