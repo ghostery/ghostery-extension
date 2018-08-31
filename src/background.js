@@ -891,7 +891,7 @@ function onMessageHandler(request, sender, callback) {
 		return true;
 	} else if (name === 'account.promotions') {
 		console.log("ACCOUNT PROMOTIONS");
-		account.updateEmailPreferences(); 
+		account.updateEmailPreferences(message); 
 		return false;
 	} else if (name === 'update_database') {
 		checkLibraryVersion().then((result) => {

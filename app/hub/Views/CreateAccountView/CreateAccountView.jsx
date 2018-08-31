@@ -44,7 +44,6 @@ class CreateAccountView extends React.Component {
 			passwordLengthError: false,
 			promotionsChecked: true,
 			accountCreated: false,
-			acceptPromotionsSent: false,
 			createAccountSuccess: false,
 			createAccountError: false,
 			createAccountErrorText: '',
@@ -61,15 +60,13 @@ class CreateAccountView extends React.Component {
 	}
 
 	/**
-	 * Update state with changed consent value.
-	 * @param {Object}  event 	'change' event
+	 * Update state with changed checkbox value.
 	 */
 	handleCheckboxChange = () => {
 		const promotionsChecked = !this.state.promotionsChecked;
 		this.setState({promotionsChecked});
-		if(promotionsChecked && this.state.accountCreated && !this.state.acceptPromotionsSent) {
-			sendMessage("account.promotions");
-			this.setState({ acceptPromotionsSent: true });
+		if(this.state.accountCreated) {
+			sendMessage("account.promotions", promotionsChecked);
 		}
 	}
 
@@ -87,7 +84,6 @@ class CreateAccountView extends React.Component {
 			this.setState({ 
 					loading: true, 
 					accountCreated: false,
-					acceptPromotionsSent: false,
 					createAccountSuccess: false,
 					createAccountError: false,
 					createAccountErrorText: '',
@@ -147,8 +143,7 @@ class CreateAccountView extends React.Component {
 										this.setState({ accountCreated: true });
 										if(this.state.promotionsChecked) {
 											console.log("USER", user);
-											sendMessage("account.promotions");
-											this.setState({"acceptPromotionsSent": true});
+											sendMessage("account.promotions", true);
 										}
 									}
 									resolve();
@@ -203,8 +198,8 @@ class CreateAccountView extends React.Component {
 								<div className="CreateAccount">
 									<div className="row" style={{border: 'red solid 1px'}}>
 										<div className="columns" style={{border: 'green solid 1px'}}>
-											<div id="create-account-email" className={(emailError ? 'panel-error' : '')}>
-												<label id="create-email-label" htmlFor="create-account-email" className="flex-container flex-dir-column">
+											<div className={(emailError ? 'panel-error' : '')}>
+												<label htmlFor="create-account-email" className="flex-container flex-dir-column">
 													<div className="flex-child-grow flex-container align-left-middle">{ t('email_field_label') }<span className="asterisk">*</span></div>
 													<input
 														onChange={this.handleInputChange}
@@ -218,12 +213,12 @@ class CreateAccountView extends React.Component {
 														style={{border: 'green solid 1px'}}
 													/>
 												</label>
-												<p id="email-invalid" className="warning">{ t('invalid_email_create') }</p>												
+												<p className="warning">{ t('invalid_email_create') }</p>												
 											</div>
 										</div>
 										<div className="columns" style={{border: 'green solid 1px'}}>
-											<div id="create-account-email-confirm" className={(confirmEmailError ? 'panel-error' : '')}>
-												<label id="create-email-confirm-label" htmlFor="create-input-email-confirm" className="flex-container flex-dir-column">
+											<div className={(confirmEmailError ? 'panel-error' : '')}>
+												<label htmlFor="create-input-email-confirm" className="flex-container flex-dir-column">
 													<div className="flex-child-grow flex-container align-left-middle">{ t('email_confirm_field_label') }<span className="asterisk">*</span></div>
 													<input
 														onChange={this.handleInputChange} 
@@ -242,8 +237,8 @@ class CreateAccountView extends React.Component {
 									</div>
 									<div className="row" style={{border: 'red solid 1px'}}>
 										<div className="columns" style={{border: 'green solid 1px'}}>
-											<div id="create-account-first-name">
-												<label id="create-first-name-label" htmlFor="ccreate-input-first-name" className="flex-container flex-dir-column">
+											<div>
+												<label htmlFor="ccreate-input-first-name" className="flex-container flex-dir-column">
 													<div className="flex-child-grow flex-container align-left-middle">{ t('first_name_field_label') }</div>
 													<input 
 														onChange={this.handleInputChange} 
@@ -257,8 +252,8 @@ class CreateAccountView extends React.Component {
 											</div>
 										</div>
 										<div className="columns style={{border: 'green solid 1px'}}">
-											<div id="create-account-last-name">
-												<label id="create-last-name-label" htmlFor="create-input-last-name" className="flex-container flex-dir-column">
+											<div>
+												<label htmlFor="create-input-last-name" className="flex-container flex-dir-column">
 													<div className="flex-child-grow flex-container align-left-middle">{ t('last_name_field_label') }</div>
 													<input 
 														onChange={this.handleInputChange} 
@@ -274,7 +269,7 @@ class CreateAccountView extends React.Component {
 									</div>
 									<div className="row" style={{border: 'red solid 1px'}}>
 										<div className="columns" style={{border: 'green solid 1px'}}>
-											<div id="create-account-password" className={(passwordInvalidError || passwordLengthError ? 'panel-error' : '')}>
+											<div className={(passwordInvalidError || passwordLengthError ? 'panel-error' : '')}>
 												<label htmlFor="create-account-password" className="flex-container flex-dir-column">
 													<div className="flex-child-grow flex-container align-left-middle">{ t('create_password_field_label') }<span className="asterisk">*</span></div>
 													<input 
@@ -289,10 +284,10 @@ class CreateAccountView extends React.Component {
 													/>
 												</label>
 												<p className="warning">
-													<span id="password-length-requirement" className={(passwordLengthError ? 'panel-error show' : '')}>
+													<span className={(passwordLengthError ? 'panel-error show' : '')}>
 														{ t('password_requirements') }
 													</span>
-													<span id="password-characters-requirement" className={(passwordInvalidError ? 'panel-error show' : '')}>
+													<span className={(passwordInvalidError ? 'panel-error show' : '')}>
 														{ t('password_characters_requirements') }
 													</span>
 												</p>								
@@ -313,7 +308,7 @@ class CreateAccountView extends React.Component {
 										</span>
 									</span>
 									<div className="row align-right" style={{border: 'red solid 1px'}}>
-										<button type="submit" id="create-account-button" className="account-create">
+										<button type="submit" className="account-submit">
 											<span>{ t('panel_title_create_account') }</span>
 										</button>
 									</div>

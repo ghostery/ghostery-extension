@@ -1866,5 +1866,8 @@
 	},
 	"account_already_present": {
 		"message": "I already have an account. Sign in."
+	},
+	"do_not_have_account": {
+		"message": "Don't have an account? Sign Up."
 	}
 }

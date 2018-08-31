@@ -1,5 +1,5 @@
 /**
- * Log In View Component
+ * Create Account View Component
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -15,33 +15,198 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route } from 'react-router-dom';
+import { NavLink, Route } from 'react-router-dom';
+import ClassNames from 'classnames';
+import RSVP from 'rsvp';
+import { validateEmail, validatePassword } from '../../../panel/utils/utils';
+import {sendMessage} from '../../../panel/utils/msg';
 
 // Components
-//import SetupNavigation from '../SetupViews/SetupNavigation';
 import SetupHeader from '../SetupViews/SetupHeader';
-
 /**
  * A Functional React component for rendering the Setup Blocking View
  * @return {JSX} JSX for rendering the Setup Blocking View of the Hub app
  * @memberof HubComponents
  */
-const LogInView = props => (
-	<div className="full-height flex-container flex-dir-column">
-		<div className="flex-child-grow">
-			<div>
-				<SetupHeader  
-					title = { t('setup_sign_in') }
-					titleImage = {"/app/images/hub/account/ghosty-account.svg" } 
-				/>
-				{/*<step.bodyComponent index={step.index} sendMountActions={props.sendMountActions} /> */}
+class LogInView extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			email: '',
+			password: '',
+			loading: false,
+			emailError: false,
+			passwordError: false,
+			loginSuccess: false,
+			loginError: false,
+			loginErrorText: '',
+			rememberMeChecked: true,
+		};
+	}
+
+	/**
+	 * Update state with changed values.
+	 * @param {Object}  event 	'change' event
+	 */
+	handleInputChange = (e) => {
+		const { name, value } = e.target;
+		this.setState({ [name]: value });
+	}
+	/**
+	 * Update state with changed checkbox value.
+	 */
+	handleCheckboxChange = () => {
+		const rememberMeChecked = !this.state.rememberMeChecked;
+		this.setState({rememberMeChecked});
+		if(rememberMeChecked) {
+			// action 1
+		} else {
+			// action 2
+		}
+	}
+	/**
+	 * Validate entered login data and, if it is good, trigger Login action.
+	 */
+	handleSubmit = (e) => {
+		e.preventDefault();
+		const { email, password } = this.state;
+		const emailIsValid = email && validateEmail(email);
+
+		this.setState({
+			emailError: !emailIsValid,
+			passwordError: !password,
+		});
+		if (!emailIsValid || !password) { return; }
+
+		this.setState({ loading: true }, () => {
+			this.props.actions.login(email, password)
+				.then((success) => {
+					if (success) {
+						RSVP.all([
+							this.props.actions.getUser(),
+							this.props.actions.getUserSettings(),
+						]).finally(() => {
+							this.setState({ loading: false }, () => {
+								this.props.history.push(this.props.is_expert ? '/detail/blocking' : '/');
+							});
+						});
+					} else {
+						this.setState({ loading: false });
+					}
+				})
+				.catch(err => log(err));
+		});
+	}
+	/**
+	 * Render Create Account panel.
+	 * @return {ReactComponent}   ReactComponent instance
+	 */
+	 render() {
+		const {
+			email, password, emailError, passwordError, loading, loginSuccess, loginError		
+		} = this.state;
+		console.log("CREATE ACCOUNT SUCCESS", loginSuccess);
+		console.log("CREATE ACCOUNT ERROR", loginError);
+		const createLoginAlert = ClassNames({
+			'create-account-result': true, 
+			'success': loginSuccess || false, 
+			'error': loginError || false
+		});
+		const CheckboxImagePath = this.state.rememberMeChecked ? '/app/images/hub/account/account-checkbox-on.svg' : '/app/images/hub/account/account-checkbox-off.svg';
+		return (
+			<div className="full-height flex-container flex-dir-column">
+				<div className="flex-child-grow">
+					<div>
+						<SetupHeader  
+							title = { t('setup_sign_in') }
+							titleImage = {"/app/images/hub/account/ghosty-account.svg" } 
+						/>
+						<div className="row align-center account-content">
+							<div className={createLoginAlert}>
+								{loginError ? loginErrorText : loginSuccess ? 'Successful Login' : ''}
+							</div>
+							<form onSubmit={this.handleSubmit}>
+								<div className="LogIn">
+									<div className="row" style={{border: 'red solid 1px'}}>
+										<div className="columns padded" style={{border: 'green solid 1px'}}>
+											<div className={(emailError ? 'panel-error' : '')}>
+												<label htmlFor="create-account-email" className="flex-container flex-dir-column">
+													<div className="flex-child-grow flex-container align-left-middle">{ t('email_field_label') }<span className="asterisk">*</span></div>
+													<input
+														onChange={this.handleInputChange}
+														value={email}
+														id="create-input-email" 
+														name="email" 
+														pattern=".{1,}" 
+														autoComplete="off" 
+														required 
+														type="text" 
+														style={{border: 'green solid 1px'}}
+													/>
+												</label>
+												<p className="warning">{ t('invalid_email_create') }</p>												
+											</div>
+										</div>
+									</div>
+									<div className="row" style={{border: 'red solid 1px'}}>
+										<div className="columns padded" style={{border: 'green solid 1px'}}>
+											<div className={passwordError ? 'panel-error' : ''}>
+												<label htmlFor="create-account-password" className="flex-container flex-dir-column">
+													<div className="flex-child-grow flex-container align-left-middle">{ t('create_password_field_label') }<span className="asterisk">*</span></div>
+													<input 
+														onChange={this.handleInputChange} 
+														value={password} 
+														className="create-account-input" 
+														id="create-account-password" 
+														name="password" 
+														pattern=".{1,}" 
+														required 
+														type="password" 
+													/>
+												</label>
+												<p className="warning">
+													<span className={(passwordError ? 'panel-error show' : '')}>
+														{ t('password_requirements') }
+													</span>
+												</p>								
+											</div>
+										</div>
+									</div>
+									<div className="row" style={{border: 'red solid 1px'}}>
+										<div className="columns padded" style={{border: 'green solid 1px'}}>
+											<span className="account-checkbox-container" onClick={this.handleCheckboxChange}>
+												<img src={CheckboxImagePath} className='account-checkbox' />
+												<span>Remember Me</span>
+											</span>
+										</div>								
+									</div>
+									<span className="row account-sign-in" style={{border: 'red solid 1px'}}>
+										<span className="columns padded" style={{border: 'green solid 1px'}}>
+											<NavLink to='/create-account'>
+												{ t('do_not_have_account') }
+											</NavLink>
+										</span>
+									</span>
+									<div className="row" style={{border: 'red solid 1px'}}>
+										<div className="columns wide align-right">
+											<button type="submit" className="account-submit">
+												<span>{ t('panel_menu_signin') }</span>
+											</button>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
 			</div>
-		</div>
-	</div>
-);
+		);
+	}
+}
 
 // PropTypes ensure we pass required props of the correct type
 LogInView.propTypes = {
 };
 
 export default LogInView;
+
