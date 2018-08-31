@@ -158,8 +158,8 @@ class HeaderMenu extends React.Component {
 	 */
 	render() {
 		const { loggedIn, email } = this.props;
-		const OptionClasses = ClassNames({ 'menu-option': this.props.subscriber, 'menu-option-non-subscriber': !this.props.subscriber });
-		const IconClasses = ClassNames('menu-icon-container', { subscriber: this.props.subscriber }, { 'non-subscriber': !this.props.subscriber });
+		const optionClasses = ClassNames({ 'menu-option': this.props.subscriber, 'menu-option-non-subscriber': !this.props.subscriber });
+		const iconClasses = ClassNames('menu-icon-container', { subscriber: this.props.subscriber }, { 'non-subscriber': !this.props.subscriber });
 		return (
 			<ClickOutside onClickOutside={this.handleClickOutside} excludeEl={this.props.kebab}>
 				<div className="dropdown-pane" id="header-dropdown">
@@ -225,9 +225,9 @@ class HeaderMenu extends React.Component {
 								<span>{ t('panel_menu_about') }</span>
 							</div>
 						</li>
-						<li className={OptionClasses} onClick={this.clickSubscriber}>
+						<li className={optionClasses} onClick={this.clickSubscriber}>
 							<div>
-								<ReactSVG className={IconClasses} path="/app/images/panel/subscriber-menu-item.svg" />
+								<ReactSVG className={iconClasses} path="/app/images/panel/subscriber-menu-item.svg" />
 								<span>{ t('panel_menu_ghostery_subscriber') }</span>
 							</div>
 						</li>
