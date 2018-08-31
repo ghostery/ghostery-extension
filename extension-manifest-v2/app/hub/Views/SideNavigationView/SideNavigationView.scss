@@ -1,0 +1,113 @@
+/**
+ * Ghostery Hub - Side Navigation Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+// Side Navigation View
+.SideNavigation {
+	position: fixed;
+	height: 100%;
+	overflow-y: scroll;
+	min-width: 230px;
+	max-width: 230px;
+	background-color: #5d7d85;
+}
+.SideNavigation__top {
+	min-height: 80px;
+	background-image: url('/app/images/hub/side-navigation/ghostery-logo.svg');
+	background-color: #e7ecee;
+	background-size: 140px auto;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+.SideNavigation__menu {
+	padding-bottom: 48px;
+}
+.SideNavigation__bottom {
+	padding-bottom: 21px;
+}
+.SideNavigation__item {
+	position: relative;
+	min-height: 80px;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 1.3;
+	letter-spacing: 0.5px;
+	color: #ffffff;
+	pointer-events: none;
+}
+.SideNavigation__item a {
+	color: #ffffff;
+	pointer-events: all;
+}
+.SideNavigation__item a:active,
+.SideNavigation__item a:visited,
+.SideNavigation__item a:hover {
+	color: #ffffff;
+}
+.SideNavigation__item a.active {
+	text-decoration: underline;
+	padding-right: 35px;
+}
+.SideNavigation__item a.active::before {
+	content: '';
+	position: absolute;
+	top:0;
+	right:0;
+	height: 0;
+	width: 0;
+	border-style: solid;
+	border-width: 0 0 40px 30px;
+	border-color: transparent transparent #ffffff transparent;
+}
+.SideNavigation__item a.active::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	height: 0;
+	width: 0;
+	border-style: solid;
+	border-width: 0 30px 40px 0;
+	border-color: transparent #ffffff transparent transparent;
+}
+.SideNavigation__menuIcon {
+	min-width: 55px;
+	height: 35px;
+	background-size: auto 28px;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.SideNavigation__menuIcon.home {
+	background-image: buildIconHome(#ffffff);
+}
+.SideNavigation__menuIcon.setup {
+	background-image: buildIconSetup(#ffffff);
+}
+.SideNavigation__menuIcon.tutorial {
+	background-image: buildIconTutorial(#ffffff);
+}
+.SideNavigation__menuIcon.supporter {
+	background-image: buildIconSupporter(#ffffff);
+}
+.SideNavigation__menuIcon.rewards {
+	background-image: buildIconRewards(#ffffff);
+}
+.SideNavigation__menuIcon.products {
+	background-image: buildIconProducts(#ffffff);
+}
+.SideNavigation__menuText {
+	max-width: 145px;
+}
+.SideNavigation__bottomItem {
+	padding-left: 20px;
+	margin: -24px 0;
+}
