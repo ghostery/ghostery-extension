@@ -4,8 +4,12 @@ exports[`app/hub/Views/SideNavigationView component More Snapshot tests with rea
 <div
   className="SideNavigation flex-container flex-dir-column"
 >
-  <div
-    className="SideNavigation__top"
+  <a
+    aria-current="page"
+    className="SideNavigation__top active"
+    href="/"
+    onClick={[Function]}
+    style={Object {}}
   />
   <div
     className="SideNavigation__menu flex-child-grow flex-container flex-dir-column"
@@ -20,8 +24,12 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
 <div
   className="SideNavigation flex-container flex-dir-column"
 >
-  <div
-    className="SideNavigation__top"
+  <a
+    aria-current="page"
+    className="SideNavigation__top active"
+    href="/"
+    onClick={[Function]}
+    style={Object {}}
   />
   <div
     className="SideNavigation__menu flex-child-grow flex-container flex-dir-column"
