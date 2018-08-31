@@ -24,18 +24,20 @@ import {
 	TOGGLE_OFFERS_ENABLED,
 	REMOVE_OFFER,
 	SET_OFFER_READ,
-	TOGGLE_EXPANDED
+	TOGGLE_EXPANDED,
+	SET_THEME
 } from '../constants/constants';
 import {
 	LOGIN_SUCCESS,
 	LOGIN_FAIL,
-	// LOGOUT_SUCCESS,
+	LOGOUT_SUCCESS,
 	REGISTER_SUCCESS,
 	REGISTER_FAIL,
 	RESET_PASSWORD_SUCCESS,
 	RESET_PASSWORD_FAIL
 } from '../../Account/AccountConstants';
 import { sendMessage, sendMessageInPromise } from '../utils/msg';
+import { setTheme } from '../utils/utils';
 
 const initialState = {
 	enable_ad_block: true,
@@ -56,6 +58,8 @@ const initialState = {
 	loggedIn: false,
 	email: '',
 	emailValidated: false,
+	currentTheme: 'default',
+	theme: ''
 };
 /**
  * Default export for panel view reducer. Handles actions
@@ -69,7 +73,12 @@ const initialState = {
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case GET_PANEL_DATA: {
+			setTheme(document, action.data.currentTheme, action.data.theme);
 			return Object.assign({}, state, action.data, { initialized: true });
+		}
+		case SET_THEME: {
+			setTheme(document, action.data.currentTheme, action.data.theme);
+			return Object.assign({}, state, { currentTheme: action.data.currentTheme, theme: action.data.theme });
 		}
 		case SHOW_NOTIFICATION: {
 			const updated = _showNotification(state, action);
@@ -134,6 +143,10 @@ export default (state = initialState, action) => {
 			action.payload.overrideNotificationShown = true;
 			const updated = _showNotification(state, action);
 			return Object.assign({}, state, updated);
+		}
+		case LOGOUT_SUCCESS: {
+			setTheme(document, 'default');
+			return Object.assign({}, state, { currentTheme: 'default', theme: '' });
 		}
 		// @TODO?
 		// case LOGOUT_SUCCESS: {

@@ -12,12 +12,11 @@
  */
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import ReactSVG from 'react-svg';
 import ClassNames from 'classnames';
 import HeaderMenu from './HeaderMenu';
 import { sendMessage, sendMessageInPromise } from '../utils/msg';
 import { log } from '../../../src/utils/common';
-
 /**
  * @class Implements header component which is common to all panel views
  * @memberof PanelClasses
@@ -28,18 +27,12 @@ class Header extends React.Component {
 		this.state = {
 			dropdownOpen: false,
 		};
-
-		// Event Bindings
-		this.clickSimpleTab = this.clickSimpleTab.bind(this);
-		this.clickDetailedTab = this.clickDetailedTab.bind(this);
-		this.toggleExpert = this.toggleExpert.bind(this);
-		this.toggleDropdown = this.toggleDropdown.bind(this);
 	}
 
 	/**
 	 * Handles clicking on the Simple View tab
 	 */
-	clickSimpleTab() {
+	clickSimpleTab = () => {
 		if (this.props.is_expert) {
 			this.toggleExpert();
 		}
@@ -48,7 +41,7 @@ class Header extends React.Component {
 	/**
 	 * Handles clicking on the Detailed View tab
 	 */
-	clickDetailedTab() {
+	clickDetailedTab = () => {
 		if (!this.props.is_expert) {
 			this.toggleExpert();
 		}
@@ -57,7 +50,7 @@ class Header extends React.Component {
 	/**
 	 * Toggle between Simple and Detailed Views.
 	 */
-	toggleExpert() {
+	toggleExpert = () => {
 		this.props.actions.toggleExpert();
 		if (this.props.is_expert) {
 			this.props.history.push('/');
@@ -69,7 +62,7 @@ class Header extends React.Component {
 	/**
 	 * Handles toggling the drop-down pane open/closed
 	 */
-	toggleDropdown() {
+	toggleDropdown = () => {
 		this.setState({ dropdownOpen: !this.state.dropdownOpen });
 	}
 
@@ -120,6 +113,15 @@ class Header extends React.Component {
 		);
 	}
 
+	clickLogo = () => {
+		this.props.history.push(this.props.is_expert ? '/detail/blocking' : '/');
+	}
+
+	clickBadge = () => {
+		const subscriber = this.props.user && this.props.user.subscriptionsSupporter;
+		this.props.history.push(subscriber ? '/subscription/info' : '/subscribe');
+	}
+
 	/**
 	* React's required render function. Returns JSX
 	* @return {JSX} JSX for rendering the Header Component of the panel
@@ -127,7 +129,7 @@ class Header extends React.Component {
 	render() {
 		const { pathname } = this.props.location;
 		const showTabs = pathname === '/' || pathname.startsWith('/detail');
-		const headerLogoClasses = ClassNames('header-logo', {
+		const headerArrowClasses = ClassNames('back-arrow', {
 			'show-back-arrow': (pathname !== '/' && !pathname.startsWith('/detail')),
 		});
 		const tabSimpleClassNames = ClassNames('header-tab', {
@@ -137,7 +139,12 @@ class Header extends React.Component {
 			active: this.props.is_expert,
 		});
 		const { loggedIn, user } = this.props;
+		const subscriber = this.props.user && this.props.user.subscriptionsSupporter;
 		const rightLink = this.generateLink();
+		const badgeClasses = ClassNames('columns', 'shrink', {
+			'non-subscriber-badge': !subscriber,
+			'subscriber-badge': subscriber
+		});
 
 		return (
 			<header id="ghostery-header">
@@ -156,28 +163,34 @@ class Header extends React.Component {
 					</div>
 				)}
 				<div className="top-bar">
-					<div className="top-bar-left">
-						<Link to={(this.props.is_expert ? '/detail/blocking' : '/')} className={headerLogoClasses} >
-							<img className="back-arrow" src="/app/images/panel/back_arrow_icon.png" />
-						</Link>
-					</div>
-					<div className="top-bar-right">
+					<span onClick={this.clickLogo} className="header-logo">
+						<ReactSVG path="/app/images/panel/header-back-arrow.svg" className={headerArrowClasses} />
+						<ReactSVG path="/app/images/panel/header-logo-icon.svg" className="logo-icon" />
+					</span>
+					<div>
 						<div className="row align-middle collapse">
 							<div className="columns shrink">
 								{rightLink}
 							</div>
-							<div
-								className="header-kebab shrink columns"
-								onClick={this.toggleDropdown}
-								ref={(node) => { this.kebab = node; }}
-							/>
+							<div className={badgeClasses} onClick={this.clickBadge}>
+								<ReactSVG path="/app/images/panel/subscriber-badge.svg" />
+							</div>
+							<div className="header-kebab shrink columns" onClick={this.toggleDropdown} ref={(node) => { this.kebab = node; }}>
+								<svg width="4" height="16" viewBox="0 0 4 16">
+									<g fill="#FFF" fillRule="evenodd">
+										<path d="M0 0h4v4H0zM0 6h4v4H0zM0 12h4v4H0z" />
+									</g>
+								</svg>
+							</div>
 						</div>
 						{ this.state.dropdownOpen &&
 							<HeaderMenu
 								loggedIn={loggedIn}
+								subscriber={subscriber}
 								email={user && user.email}
 								language={this.props.language}
 								tab_id={this.props.tab_id}
+								location={this.props.location}
 								history={this.props.history}
 								actions={this.props.actions}
 								toggleDropdown={this.toggleDropdown}
