@@ -20,7 +20,7 @@ const SideNavigationView = (props) => {
 
 	return (
 		<div className="SideNavigation flex-container flex-dir-column">
-			<div className="SideNavigation__top" />
+			<NavLink to="/" className="SideNavigation__top" />
 			<div className="SideNavigation__menu flex-child-grow flex-container flex-dir-column">
 				{menuItems.map(item => (
 					<div key={`menu-item-${item.href.substring(1)}`} className="SideNavigation__item SideNavigation__menuItem  flex-container align-middle">
@@ -33,9 +33,11 @@ const SideNavigationView = (props) => {
 			</div>
 			<div className="SideNavigation__bottom flex-container flex-dir-column">
 				{bottomItems.map(item => (
-					<NavLink key={`bottom-item-${item.href.substring(1)}`} to={item.href} className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle">
-						{item.text}
-					</NavLink>
+					<div key={`bottom-item-${item.href.substring(1)}`} className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle">
+						<NavLink to={item.href}>
+							{item.text}
+						</NavLink>
+					</div>
 				))}
 			</div>
 		</div>
