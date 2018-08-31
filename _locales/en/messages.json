@@ -1872,5 +1872,11 @@
 	},
 	"create_account_error": {
 		"message": "Create Account Error"
+	},
+	"exit_create_account": {
+		"message": "Exit Create Account"
+	},
+	"exit_sign_in": {
+		"message": "Exit Sign In"
 	}
 }

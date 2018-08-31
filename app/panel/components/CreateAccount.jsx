@@ -99,8 +99,7 @@ class CreateAccount extends React.Component {
 					return;
 				}
 
-				this.props.actions.register(email, confirmEmail, firstName, lastName, password).then((result) => {
-					const success = (result === true);
+				this.props.actions.register(email, confirmEmail, firstName, lastName, password).then((success) => {
 					this.setState({ loading: false });
 					if (success) {
 						new RSVP.Promise((resolve) => {

@@ -11,29 +11,30 @@ import {
 	RESET_PASSWORD_FAIL,
 	GET_USER_SUCCESS,
 	GET_USER_FAIL,
-	GET_USER_SETTINGS_SUCCESS
+	GET_USER_SETTINGS_SUCCESS,
+	GET_USER_SETTINGS_FAIL
 } from './AccountConstants';
 
 export const getUserSettings = () => dispatch => (
 	sendMessageInPromise('account.getUserSettings')
 		.then((res) => {
 			const { errors, settings } = res;
-			if(errors) {
+			if (errors) {
 				dispatch({
 					type: GET_USER_SETTINGS_FAIL,
 					payload: { errors },
 				});
-			} else {
-				dispatch({
-					type: GET_USER_SETTINGS_SUCCESS,
-					payload: { settings },
-				});
+				return false;
 			}
-			return res;
+			dispatch({
+				type: GET_USER_SETTINGS_SUCCESS,
+				payload: { settings },
+			});
+			return true;
 		})
 		.catch((error) => {
 			log('PanelActions getUserSettings error', error);
-			return error;
+			return false;
 		})
 );
 
@@ -46,13 +47,14 @@ export const getUser = () => dispatch => (
 					type: GET_USER_FAIL,
 					payload: { errors },
 				});
-			} else {
-				dispatch({
-					type: GET_USER_SUCCESS,
-					payload: { user },
-				});
+				return false;
 			}
-			return res;
+			dispatch({
+				type: GET_USER_SUCCESS,
+				payload: { user },
+			});
+
+			return true;
 		})
 );
 
@@ -65,7 +67,7 @@ export const login = (email, password) => dispatch => (
 					type: LOGIN_FAIL,
 					payload: { errors },
 				});
-				return errors;
+				return false;
 			}
 			dispatch({
 				type: LOGIN_SUCCESS,
@@ -82,7 +84,7 @@ export const login = (email, password) => dispatch => (
 					errors,
 				},
 			});
-			return errors;
+			return false;
 		})
 );
 
@@ -96,7 +98,7 @@ export const register = (email, confirmEmail, firstName, lastName, password) => 
 				type: REGISTER_FAIL,
 				payload: { errors },
 			});
-			return errors;
+			return false;
 		}
 		dispatch({
 			type: REGISTER_SUCCESS,
@@ -111,7 +113,7 @@ export const register = (email, confirmEmail, firstName, lastName, password) => 
 				errors,
 			},
 		});
-		return errors;
+		return false;
 	})
 );
 

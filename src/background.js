@@ -653,7 +653,6 @@ function reportCliqzOffer(message) {
  * @return {boolean}            denotes async (true) or sync (false)
  */
 function onMessageHandler(request, sender, callback) {
-	console.log("MESSAGE", request, sender, callback);
 	if (request.source === 'cliqz-content-script') {
 		return;
 	}
@@ -890,8 +889,7 @@ function onMessageHandler(request, sender, callback) {
 			});
 		return true;
 	} else if (name === 'account.promotions') {
-		console.log("ACCOUNT PROMOTIONS");
-		account.updateEmailPreferences(message); 
+		account.updateEmailPreferences(message);
 		return false;
 	} else if (name === 'update_database') {
 		checkLibraryVersion().then((result) => {

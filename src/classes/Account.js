@@ -182,17 +182,17 @@ class Account {
 		})
 	)
 
-	updateEmailPreferences = set => {
+	updateEmailPreferences = (set) => {
 		this._getUserID()
 			.then(userID => (
 				api.update('email_preferences',	{
-				    type: 'email_preferences',
-				    id: conf.account.userID,
-				    attributes: {
-			        	updates: set,
-			    	}
+					type: 'email_preferences',
+					id: userID,
+					attributes: {
+						updates: set,
+					}
 				})
-			)) 
+			));
 	}
 
 	sendValidateAccountEmail = () => (

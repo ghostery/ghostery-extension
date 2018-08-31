@@ -14,12 +14,10 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import { NavLink, Route } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import ClassNames from 'classnames';
 import RSVP from 'rsvp';
-import { validateEmail, validatePassword } from '../../../panel/utils/utils';
-import {sendMessage} from '../../../panel/utils/msg';
+import { validateEmail } from '../../../panel/utils/utils';
 
 // Components
 import SetupHeader from '../SetupViews/SetupHeader';
@@ -34,7 +32,6 @@ class LogInView extends React.Component {
 		this.state = {
 			email: '',
 			password: '',
-			loading: false,
 			emailError: false,
 			passwordError: false,
 			loginSuccess: false,
@@ -52,14 +49,6 @@ class LogInView extends React.Component {
 	}
 
 	/**
-	 * Helper to extract text error from errors object returned by actions.
-	 */
-	_actionErrorsToText = errors=> {
-		console.log("ERRORS", errors);
-		return (errors && errors.length === 1 && errors[0].detail) || t('banner_no_such_account_message');
-	}
-
-	/**
 	 * Validate entered login data and, if it is good, trigger Login action.
 	 */
 	handleSubmit = (e) => {
@@ -74,147 +63,140 @@ class LogInView extends React.Component {
 
 		if (!emailIsValid || !password) { return; }
 
-		this.setState({ 
-			loading: true,
+		this.setState({
 			loginErrorText: '',
-			loginSuccess: false, 
+			loginSuccess: false,
 		}, () => {
 			this.props.actions.login(email, password)
-			.then(result => {
-				const success = (result === true);
-				if (success) {
-					new RSVP.Promise((resolve, reject) => {
-						this.props.actions.getUser()
-							.then(result1 => {
-								const {errors1} = result1;
-								if(errors1) {
-									reject(new Error(this._actionErrorsToText(errors1)));
-								} else {
-									this.props.actions.getUserSettings()
-									.then(result2 => {
-										const {errors2} = result2;
-										if(errors2) {
-											reject(new Error(this._actionErrorsToText(errors2)));
-										} else {
-											this.setState({ 
-												loginSuccess: true,
-												loading: false, 
+				.then((success) => {
+					if (success) {
+						new RSVP.Promise((resolve, reject) => {
+							this.props.actions.getUser()
+								.then((getUserSuccess) => {
+									if (getUserSuccess) {
+										this.props.actions.getUserSettings()
+											.then((getUserSettingsSuccess) => {
+												if (getUserSettingsSuccess) {
+													this.setState({
+														loginSuccess: true,
+													});
+													resolve();
+												} else {
+													reject();
+												}
 											});
-											resolve();
-										}
+									} else {
+										reject();
+									}
+								})
+								.catch(() => {
+									this.setState({
+										loginErrorText: t('banner_no_such_account_message'),
 									});
-								}
-							})
-							.catch(err => {
-								this.setState({ 
-									loginErrorText: err,
-									loading: false, 
 								});
-							});
 						})
-						.finally(() => {});
+							.finally(() => {});
 					} else {
-						this.setState({ 
-							loginErrorText: this._actionErrorsToText(result),
-							loading: false, 
+						this.setState({
+							loginErrorText: t('banner_no_such_account_message'),
 						});
 					}
-				})
-			});		
+				});
+		});
 	}
 	/**
 	 * Render Create Account panel.
 	 * @return {ReactComponent}   ReactComponent instance
 	 */
-	 render() {
+	render() {
 		const {
-			email, password, emailError, passwordError, loading, loginSuccess, loginErrorText		
+			email, password, emailError, passwordError, loginSuccess, loginErrorText
 		} = this.state;
-		console.log("CREATE ACCOUNT SUCCESS", loginSuccess);
-		console.log("CREATE ACCOUNT ERROR", loginErrorText);
 		const createLoginAlert = ClassNames({
-			'create-account-result': true, 
-			'success': loginSuccess || false, 
-			'error': loginErrorText || false
+			'create-account-result': true,
+			success: loginSuccess || false,
+			error: loginErrorText || false
 		});
-		const CheckboxImagePath = this.state.rememberMeChecked ? '/app/images/hub/account/account-checkbox-on.svg' : '/app/images/hub/account/account-checkbox-off.svg';
 		return (
 			<div className="full-height flex-container flex-dir-column">
 				<div className="flex-child-grow">
 					<div>
-						<SetupHeader  
-							title = { t('setup_sign_in') }
-							titleImage = {"/app/images/hub/account/ghosty-account.svg" } 
+						<NavLink to="/" className="SteppedNavigation__exit flex-container align-middle">
+							<span className="SteppedNavigation__exitText">{ t('exit_sign_in') }</span>
+							<span className="SteppedNavigation__exitIcon" />
+						</NavLink>
+						<SetupHeader
+							title={t('setup_sign_in')}
+							titleImage="/app/images/hub/account/ghosty-account.svg"
 						/>
 						<div className="row align-center account-content">
 							<div className={createLoginAlert}>
-								{loginErrorText ? loginErrorText : loginSuccess ? 'Successful Login' : ''}
+								{loginErrorText || (loginSuccess ? `${t('panel_signin_success')} ${email}` : '')}
 							</div>
 							<form onSubmit={this.handleSubmit}>
 								<div className="LogIn">
-									<div className="row" style={{border: 'red solid 1px'}}>
-										<div className="columns padded" style={{border: 'green solid 1px'}}>
+									<div className="row">
+										<div className="columns padded">
 											<div className={(emailError ? 'panel-error' : '')}>
 												<label htmlFor="create-account-email" className="flex-container flex-dir-column">
 													<div className="flex-child-grow flex-container align-left-middle">{ t('email_field_label') }<span className="asterisk">*</span></div>
 													<input
 														onChange={this.handleInputChange}
 														value={email}
-														id="create-input-email" 
-														name="email" 
-														pattern=".{1,}" 
-														autoComplete="off" 
-														required 
-														type="text" 
-														style={{border: 'green solid 1px'}}
+														id="create-input-email"
+														name="email"
+														pattern=".{1,}"
+														autoComplete="off"
+														required
+														type="text"
 													/>
 												</label>
-												<p className="warning">{ t('invalid_email_create') }</p>												
+												<p className="warning">{ t('invalid_email_create') }</p>
 											</div>
 										</div>
 									</div>
-									<div className="row" style={{border: 'red solid 1px'}}>
-										<div className="columns padded" style={{border: 'green solid 1px'}}>
+									<div className="row">
+										<div className="columns padded">
 											<div className={passwordError ? 'panel-error' : ''}>
 												<label htmlFor="create-account-password" className="flex-container flex-dir-column">
 													<div className="flex-child-grow flex-container align-left-middle">{ t('create_password_field_label') }<span className="asterisk">*</span></div>
-													<input 
-														onChange={this.handleInputChange} 
-														value={password} 
-														className="create-account-input" 
-														id="create-account-password" 
-														name="password" 
-														pattern=".{1,}" 
-														required 
-														type="password" 
+													<input
+														onChange={this.handleInputChange}
+														value={password}
+														className="create-account-input"
+														id="create-account-password"
+														name="password"
+														pattern=".{1,}"
+														required
+														type="password"
 													/>
 												</label>
 												<p className="warning">
 													<span className={(passwordError ? 'panel-error show' : '')}>
 														{ t('password_requirements') }
 													</span>
-												</p>								
+												</p>
 											</div>
 										</div>
 									</div>
 									{/*
-									<div className="row" style={{border: 'red solid 1px'}}>
-										<div className="columns padded" style={{border: 'green solid 1px'}}>
+									<div className="row">
+										<div className="columns padded">
 											<span className="account-checkbox-container" onClick={this.handleCheckboxChange}>
 												<img src={CheckboxImagePath} className='account-checkbox' />
 												<span>Remember Me</span>
 											</span>
-										</div>								
+										</div>
 									</div>
 									*/}
-									<span className="row account-sign-in" style={{border: 'red solid 1px'}}>
-										<span className="columns padded" style={{border: 'green solid 1px'}}>
-											<NavLink to='/create-account'>
+									<span className="row account-sign-in">
+										<span className="columns padded">
+											<NavLink to="/create-account">
 												{ t('do_not_have_account') }
 											</NavLink>
 										</span>
 									</span>
-									<div className="row" style={{border: 'red solid 1px'}}>
+									<div className="row">
 										<div className="columns wide align-right">
 											<button type="submit" className="account-submit">
 												<span>{ t('panel_menu_signin') }</span>
@@ -230,10 +212,6 @@ class LogInView extends React.Component {
 		);
 	}
 }
-
-// PropTypes ensure we pass required props of the correct type
-LogInView.propTypes = {
-};
 
 export default LogInView;
 
