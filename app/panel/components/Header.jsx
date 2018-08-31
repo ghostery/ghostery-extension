@@ -113,24 +113,13 @@ class Header extends React.Component {
 		);
 	}
 
-	disableClickIf = (e, pathToken) => {
-		const { pathname } = this.props.location;
-		if (pathname.includes(pathToken)) {
-			e.preventDefault();
-			return true;
-		}
-		return false;
-	}
-
 	clickLogo = () => {
 		this.props.history.push(this.props.is_expert ? '/detail/blocking' : '/');
 	}
 
-	clickBadge = (e) => {
-		if (!this.disableClickIf(e, 'subscription')) {
-			const subscriber = !!(this.props.user && this.props.user.subscriptionsSupporter);
-			this.props.history.push(subscriber ? '/subscription/info' : '/subscribe');
-		}
+	clickBadge = () => {
+		const subscriber = this.props.user && this.props.user.subscriptionsSupporter;
+		this.props.history.push(subscriber ? '/subscription/info' : '/subscribe');
 	}
 
 	/**
@@ -173,7 +162,7 @@ class Header extends React.Component {
 				<div className="top-bar">
 					<span onClick={this.clickLogo} className="header-logo">
 						<ReactSVG path="/app/images/panel/header-back-arrow.svg" className={headerArrowClasses} />
-						<ReactSVG path="/app/images/panel/header-logo-icon.svg" className="logo-icon"/>
+						<ReactSVG path="/app/images/panel/header-logo-icon.svg" className="logo-icon" />
 					</span>
 					<div>
 						<div className="row align-middle collapse">
@@ -203,7 +192,6 @@ class Header extends React.Component {
 								actions={this.props.actions}
 								toggleDropdown={this.toggleDropdown}
 								kebab={this.kebab}
-								disableClickIf={this.disableClickIf}
 							/>
 						}
 					</div>

@@ -41,11 +41,9 @@ class HeaderMenu extends React.Component {
 	/**
 	 * Trigger action which open Settings panel from drop-down menu Settings item.
 	 */
-	clickSettings = (e) => {
+	clickSettings = () => {
 		this.props.toggleDropdown();
-		if (!this.props.disableClickIf(e, 'settings')) {
-			this.props.history.push('/settings/globalblocking');
-		}
+		this.props.history.push('/settings/globalblocking');
 	}
 	/**
 	 * Handle click on 'Report a broken page' menu item.
@@ -150,11 +148,9 @@ class HeaderMenu extends React.Component {
 	/**
 	 * Handle click on 'Sibscriber menu item.
 	 */
-	clickSubscriber = (e) => {
+	clickSubscriber = () => {
 		this.props.toggleDropdown();
-		if (!this.props.disableClickIf(e, 'subscription')) {
-			this.props.history.push(this.props.subscriber ? '/subscription/info' : '/subscribe');
-		}
+		this.props.history.push(this.props.subscriber ? '/subscription/info' : '/subscribe');
 	}
 	/**
 	 * Render drop-down menu.
