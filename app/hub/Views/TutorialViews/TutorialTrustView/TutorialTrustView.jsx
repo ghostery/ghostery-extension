@@ -1,5 +1,5 @@
 /**
- * Point of entry index.js file for Tutorial Trust/Restrict View
+ * Tutorial Trust View Component
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -9,8 +9,17 @@
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
+ *
+ * ToDo: Update this file.
  */
 
-import TutorialTrustRestrictView from './TutorialTrustRestrictView';
+import React from 'react';
 
-export default TutorialTrustRestrictView;
+/**
+ * @class Implement the Tutorial Trust View for the Ghostery Hub
+ * @extends Component
+ * @memberof HubComponents
+ */
+const TutorialTrustView = () => <div>Ghostery Hub - Tutorial Trust</div>;
+
+export default TutorialTrustView;

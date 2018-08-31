@@ -1,0 +1,141 @@
+/**
+ * Subscribe Panel Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+.content-subscription {
+	position: absolute;
+	height: 479px;
+	width: 100%;
+	.badge {
+		display: block;
+		margin: 35px auto 35px auto;
+		width: 137px;
+		height: 97px;
+		background-image: url('/app/images/panel/subscribe-badge.svg');
+	}
+	.pitch-container {
+		width: 100%;
+		text-align: center;
+		padding-left: 100px;
+		padding-right: 100px;
+		.pitch-text {
+			font-size: 18px;
+			font-weight: bold;
+		}
+		.pitch-learn-more {
+			display: block;
+			font-size: 14px; 
+			font-weight: bold;
+			color: $ghosty-blue;
+			text-decoration: underline;
+		}
+		.pitch-become-subscriber {
+			display: block;
+			margin-top: 20px;
+			margin-bottom: 20px;
+			background-color: $ghosty-blue;
+			box-shadow: 0px 1px 10px 0px rgba(0,0,0,0.20);
+			border-radius: 4px;
+			line-height: 40px;
+			font-size: 16px; 
+			font-weight: bold;
+			color: $white;
+		}
+		.pitch-already-subscriber {
+			font-size: 14px;
+			font-weight: normal;
+			color: $ghosty-blue;
+			text-decoration: underline;
+		}
+	}
+	.themes-slider {
+		margin-right: 14px;
+		input:checked + .ToggleSlider__slider {
+				background-color: #8FC8DF !important;
+		}
+		input:focus + .ToggleSlider__slider {
+				box-shadow: 0 0 1px #2196f3 !important;
+		}	
+		input:checked + .ToggleSlider__slider + .ToggleSlider__slider_circle {
+				background-color: #2092BF !important;
+				border-color: #2092BF !important;
+		} 
+	}
+	.field-label {
+		font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+		font-size: 14px;
+		font-weight: bolder;
+		line-height: 14px;
+		text-size-adjust: 100%;
+		-webkit-font-smoothing: antialiased;
+		text-align: left;
+	}	
+	.themes-slider-label {
+		@extend .field-label;
+		padding-right: 20px !important;
+	}
+	.themes-slider-container {
+		padding-top: 10px !important;
+	}
+	.column-subscription {
+		padding-left: 30px !important;
+		padding-right: 30px !important;
+	}
+	.status-label {
+		@extend .field-label;
+		&.light {
+			font-weight: normal !important;
+		}
+	}
+	.status-value {
+		@extend .field-label;
+		padding-left: 7px !important;
+		padding-right: 7px !important;
+		&.blue {
+			color: $ghosty-blue;
+		}
+		&.light {
+			font-weight: normal !important;
+		}
+	}
+	.manage-link {
+		display: inline-block;
+		@extend .field-label;
+		font-weight: normal !important;
+		color: $ghosty-blue;
+		text-decoration: underline;
+		padding-left: 7px;
+	}
+
+	.status-row {
+		margin-top: 18px;
+	}
+
+	.list-row {
+		padding: 12px;
+		margin-top: 8px;
+		margin-left: 33px;
+	}
+
+	.list-item {
+		margin-bottom: 12px;
+		padding-left: 12px;
+	}
+	.manage-row {
+		display: inline-flex;
+	}
+	.manage-icon {
+		width: 14px;
+		height: 12px;
+		background-image: url('/app/images/panel/manage-subscription.svg');
+	}
+}

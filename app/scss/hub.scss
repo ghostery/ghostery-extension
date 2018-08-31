@@ -12,15 +12,26 @@
  */
 
 html, body, #root {
-	font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	height: 100%;
 	width: 100%;
 	margin: 0;
 }
 
+.App {
+	position: fixed;
+}
+.App__mainContent {
+	overflow-y: scroll;
+	margin-left: 230px;
+}
+
 // Foundation Overrides
-h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
-	font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+.button {
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 1.3;
+	text-transform: uppercase;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12);
 }
 
 // Helper Classes
@@ -29,18 +40,23 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 .full-width { width: 100%; }
 .display-inline { display: inline-block; }
 
+@import 'settings_hub'; // Import Foundation
 @import './partials/_hub_mixins';
 @import './partials/_hub_svgs';
-@import './partials/_hub_side_navigation';
-@import './partials/_hub_other_partials'; // ToDo: Remove this file
 
-// Imports from ../hub directory for the Custom Setup Workflow
+// Imports from ../hub directory
+@import '../hub/Views/HomeView/HomeView.scss';
+@import '../hub/Views/SideNavigationView/SideNavigationView.scss';
 @import '../hub/Views/SetupView/SetupView.scss';
 @import '../hub/Views/SetupViews/SetupHeader/SetupHeader.scss';
 @import '../hub/Views/SetupViews/SetupBlockingView/SetupBlockingView.scss';
+@import '../hub/Views/SetupViews/SetupBlockingDropdown/SetupBlockingDropdown.scss';
 @import '../hub/Views/SetupViews/SetupAntiSuiteView/SetupAntiSuiteView.scss';
 @import '../hub/Views/SetupViews/SetupHumanWebView/SetupHumanWebView.scss';
 @import '../hub/Views/SetupViews/SetupDoneView/SetupDoneView.scss';
+@import '../hub/Views/TutorialView/TutorialView.scss';
+@import '../hub/Views/RewardsView/RewardsView.scss';
+@import '../hub/Views/ProductsView/ProductsView.scss';
 
 // Imports from ../hub directory for account Workflow
 @import '../hub/Views/CreateAccountView/AccountView.scss';

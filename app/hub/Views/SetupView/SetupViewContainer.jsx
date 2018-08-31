@@ -12,21 +12,22 @@
  */
 
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import QueryString from 'query-string';
 import PropTypes from 'prop-types';
 import SetupView from './SetupView';
 import { Modal, ToggleCheckbox } from '../../../shared-components';
-import { BLOCKING_POLICY_NOTHING } from './SetupViewConstants';
+import { BLOCKING_POLICY_RECOMMENDED } from './SetupViewConstants';
 
 // Component Views
 import SetupBlockingView from '../SetupViews/SetupBlockingView';
+import SetupBlockingDropdown from '../SetupViews/SetupBlockingDropdown';
 import SetupAntiSuiteView from '../SetupViews/SetupAntiSuiteView';
 import SetupHumanWebView from '../SetupViews/SetupHumanWebView';
 import SetupDoneView from '../SetupViews/SetupDoneView';
 
 /**
- * @class Implement the Setup Container View for the Ghostery Hub
+ * @class Implement the Setup View for the Ghostery Hub
  * @extends Component
  * @memberof HubContainers
  */
@@ -37,14 +38,12 @@ class SetupViewContainer extends React.Component {
 			sendMountActions: false,
 			showModal: false,
 		};
-	}
 
-	/**
-	 * Lifecycle Event
-	 */
-	componentWillMount() {
+		if (!props.preventRedirect) {
+			this.props.history.push('/setup/1');
+		}
+
 		const title = t('hub_setup_page_title');
-
 		window.document.title = title;
 
 		this.props.actions.initSetupProps(this.props.setup);
@@ -67,7 +66,7 @@ class SetupViewContainer extends React.Component {
 	 */
 	_setDefaultSettings() {
 		this.setState({ sendMountActions: true });
-		this.props.actions.setBlockingPolicy({ blockingPolicy: BLOCKING_POLICY_NOTHING });
+		this.props.actions.setBlockingPolicy({ blockingPolicy: BLOCKING_POLICY_RECOMMENDED });
 		this.props.actions.setAntiTracking({ enable_anti_tracking: true });
 		this.props.actions.setAdBlock({ enable_ad_block: true });
 		this.props.actions.setSmartBlocking({ enable_smart_blocking: true });
@@ -180,13 +179,20 @@ class SetupViewContainer extends React.Component {
 				},
 			},
 		];
+		const extraRoutes = [
+			{
+				name: '1/custom',
+				path: '/setup/1/custom',
+				component: SetupBlockingDropdown,
+			}
+		];
 
 		return (
 			<div className="full-height">
 				<Modal show={showModal} >
 					{this._renderModalChildren()}
 				</Modal>
-				<SetupView steps={steps} sendMountActions={sendMountActions} />
+				<SetupView steps={steps} extraRoutes={extraRoutes} sendMountActions={sendMountActions} />
 			</div>
 		);
 	}
@@ -195,6 +201,7 @@ class SetupViewContainer extends React.Component {
 // PropTypes ensure we pass required props of the correct type
 // Note: isRequired is not needed when a prop has a default value
 SetupViewContainer.propTypes = {
+	preventRedirect: PropTypes.bool,
 	setup: PropTypes.shape({
 		navigation: PropTypes.shape({
 			activeIndex: PropTypes.number,
@@ -242,11 +249,13 @@ SetupViewContainer.propTypes = {
 		setSmartBlocking: PropTypes.func.isRequired,
 		setGhosteryRewards: PropTypes.func.isRequired,
 		setHumanWeb: PropTypes.func.isRequired,
+		setSetupComplete: PropTypes.func.isRequired,
 	}).isRequired,
 };
 
 // Default props used throughout the Setup flow
 SetupViewContainer.defaultProps = {
+	preventRedirect: false,
 	setup: {
 		navigation: {
 			activeIndex: 0,
@@ -258,7 +267,7 @@ SetupViewContainer.defaultProps = {
 			textDone: false,
 		},
 		setup_show_warning_override: true,
-		blockingPolicy: BLOCKING_POLICY_NOTHING,
+		blockingPolicy: BLOCKING_POLICY_RECOMMENDED,
 		enable_anti_tracking: true,
 		enable_ad_block: true,
 		enable_smart_blocking: true,
@@ -267,4 +276,4 @@ SetupViewContainer.defaultProps = {
 	},
 };
 
-export default SetupViewContainer;
+export default withRouter(SetupViewContainer);

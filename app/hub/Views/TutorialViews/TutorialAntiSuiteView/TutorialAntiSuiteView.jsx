@@ -1,5 +1,5 @@
 /**
- * Tutorial Anti-Suite View Component
+ * Tutorial Anti Suite View Component
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -13,38 +13,13 @@
  * ToDo: Update this file.
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 
 /**
- * @class Implement the Tutorial Anti-Suite View for the Ghostery Hub
+ * @class Implement the Tutorial Anti Suite View for the Ghostery Hub
  * @extends Component
  * @memberof HubComponents
  */
-class TutorialAntiSuiteView extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			title: ''
-		};
-	}
-
-	/**
-	 * Lifecycle Event
-	 */
-	componentWillMount() {
-		const { title } = this.state;
-		window.document.title = title;
-	}
-
-	/**
-	 * React's required render function. Returns JSX
-	 * @return {JSX} JSX for rendering the Tutorial Anti-Suite View of the Hub app
-	 */
-	render() {
-		const { title } = this.state;
-		return <div>{title}</div>;
-	}
-}
+const TutorialAntiSuiteView = () => <div>Ghostery Hub - Tutorial Anti Suite View</div>;
 
 export default TutorialAntiSuiteView;

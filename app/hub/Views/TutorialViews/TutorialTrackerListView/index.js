@@ -11,6 +11,28 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import TutorialTrackerListView from './TutorialTrackerListView';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-export default TutorialTrackerListView;
+import TutorialTrackerListViewContainer from './TutorialTrackerListViewContainer';
+import { setTutorialNavigation } from '../../TutorialView/TutorialViewActions';
+
+/**
+ * Map redux store state properties to the component's own properties.
+ * @param  {Object} state    entire Redux store's state
+ * @return {function}        this function returns a plain object, which will be merged into the component's props
+ * @memberof HubContainers
+ */
+const mapStateToProps = state => Object.assign({}, state.tutorial);
+
+/**
+ * Bind the component's action creators using Redux's bindActionCreators.
+ * @param  {function} dispatch redux store method which dispatches actions
+ * @return {function}          to be used as an argument in redux connect call
+ * @memberof TutorialContainers
+ */
+const mapDispatchToProps = dispatch => ({
+	actions: bindActionCreators(Object.assign({}, { setTutorialNavigation }), dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TutorialTrackerListViewContainer);

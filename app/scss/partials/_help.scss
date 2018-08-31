@@ -1,5 +1,5 @@
 /**
- * Help & About Panel Sass
+ * Help, About and Subscriber Panel Sass
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -11,9 +11,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-#content-help, #content-about {
+#content-help, #content-about, .content-subscription {
 	padding: 20px 15px;
 	h1 {
+		margin-top: 0.5rem;
 		font-size: 18px;
 		line-height: 24px;
 		font-weight: 300;

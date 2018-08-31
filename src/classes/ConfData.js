@@ -132,7 +132,10 @@ class ConfData {
 			_initProperty('setup_show_warning_override', true);
 			_initProperty('setup_path', 0);
 			_initProperty('setup_block', 1);
+			_initProperty('setup_complete', false);
+			_initProperty('tutorial_complete', false);
 			_initProperty('cliqz_import_state', 0);
+			_initProperty('current_theme', 'default');
 
 			// Complex props
 			_initProperty('bugs', {});
@@ -149,6 +152,7 @@ class ConfData {
 			_initProperty('surrogates', {});
 			_initProperty('version_history', []);
 			_initProperty('account', null);
+			_initProperty('themes', {});
 		});
 	}
 

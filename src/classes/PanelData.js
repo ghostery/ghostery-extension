@@ -166,6 +166,18 @@ class PanelData {
 	 * @return {Object}		panel data shared by multiple views
 	 */
 	get panelView() {
+		let currentTheme = this._confData.get('currentTheme');
+		let theme;
+		if (currentTheme !== 'default') {
+			theme = this._confData.get('themes')[currentTheme];
+			if (!theme) {
+				currentTheme = 'default';
+			}
+		}
+		const currentAccount = this._confData.get('account');
+		if (currentAccount && currentAccount.user) {
+			currentAccount.user.subscriptionsSupporter = account.hasScopesUnverified(['subscriptions:supporter']);
+		}
 		this._panelView = {
 			panel: {
 				enable_ad_block: this._confData.get('enable_ad_block'),
@@ -178,13 +190,15 @@ class PanelData {
 				language: this._confData.get('language'),
 				reload_banner_status: this._confData.get('reload_banner_status'),
 				trackers_banner_status: this._confData.get('trackers_banner_status'),
+				currentTheme,
+				theme,
 
 				needsReload: this._trackerData.get('needsReload'),
 				smartBlock: this._trackerData.get('smartBlock'),
 				tab_id: this._trackerData.get('tab_id'),
 				unread_offer_ids: rewards.unreadOfferIds,
 
-				account: this._confData.get('account')
+				account: currentAccount
 			},
 			summary: this.summaryView,
 			blocking: this._confData.get('is_expert') ? this.blockingView : false,
@@ -280,7 +294,6 @@ class PanelData {
 			show_tracker_urls: this._confData.get('show_tracker_urls'),
 			toggle_individual_trackers: this._confData.get('toggle_individual_trackers'),
 			language: this._confData.get('language'), // required for the setup page that does not have access to panelView data
-			loggedIn: this._confData.get('loggedIn'),
 			firstName: this._confData.get('firstName'),
 			lastName: this._confData.get('lastName'),
 		};
@@ -333,7 +346,9 @@ class PanelData {
 			.set('toggle_individual_trackers', conf.toggle_individual_trackers)
 			.set('trackers_banner_status', conf.trackers_banner_status)
 			.set('expand_all_trackers', conf.expand_all_trackers)
-			.set('account', conf.account);
+			.set('account', conf.account)
+			.set('currentTheme', conf.current_theme)
+			.set('themes', conf.themes);
 	}
 
 	/**

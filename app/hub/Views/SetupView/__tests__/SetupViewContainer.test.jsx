@@ -19,6 +19,7 @@ import { MemoryRouter } from 'react-router';
 
 // Mock Necessary Imports
 jest.mock('../../SetupViews/SetupBlockingView', () => props => <div>Mock Setup Blocking View</div>);
+jest.mock('../../SetupViews/SetupBlockingDropdown', () => props => <div>Mock Setup Blocking Dropdown</div>);
 jest.mock('../../SetupViews/SetupAntiSuiteView', () => props => <div>Mock Setup Anti-Suite View</div>);
 jest.mock('../../SetupViews/SetupHumanWebView', () => props => <div>Mock Setup Human Web View</div>);
 jest.mock('../../SetupViews/SetupDoneView', () => props => <div>Mock Setup Done View</div>);
@@ -45,45 +46,56 @@ const actions = {
 	setSmartBlocking: () => {},
 	setGhosteryRewards: () => {},
 	setHumanWeb: () => {},
+	setSetupComplete: () => {},
 };
 
 describe('app/hub/Views/SetupView container', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('setup view container is rendered correctly on the Blocking step', () => {
-			const paths = ['/setup/1', '/setup/2', '/setup/3', '/setup/4'];
+			const paths = ['/setup/1', '/setup/1/custom', '/setup/2', '/setup/3', '/setup/4'];
 			const component = renderer.create(
 				<MemoryRouter initialEntries={paths} initialIndex={0} >
-					<SetupViewContainer actions={actions} />
+					<SetupViewContainer actions={actions} preventRedirect={true} />
+				</MemoryRouter>
+			).toJSON();
+			expect(component).toMatchSnapshot();
+		});
+
+		test('setup view container is rendered correctly on the Custom Blocking step', () => {
+			const paths = ['/setup/1', '/setup/1/custom', '/setup/2', '/setup/3', '/setup/4'];
+			const component = renderer.create(
+				<MemoryRouter initialEntries={paths} initialIndex={1} >
+					<SetupViewContainer actions={actions} preventRedirect={true} />
 				</MemoryRouter>
 			).toJSON();
 			expect(component).toMatchSnapshot();
 		});
 
 		test('setup view container is rendered correctly on the Anti-Suite step', () => {
-			const paths = ['/setup/1', '/setup/2', '/setup/3', '/setup/4'];
+			const paths = ['/setup/1', '/setup/1/custom', '/setup/2', '/setup/3', '/setup/4'];
 			const component = renderer.create(
-				<MemoryRouter initialEntries={paths} initialIndex={1} >
-					<SetupViewContainer actions={actions} />
+				<MemoryRouter initialEntries={paths} initialIndex={2} >
+					<SetupViewContainer actions={actions} preventRedirect={true} />
 				</MemoryRouter>
 			).toJSON();
 			expect(component).toMatchSnapshot();
 		});
 
 		test('setup view container is rendered correctly on the Human Web step', () => {
-			const paths = ['/setup/1', '/setup/2', '/setup/3', '/setup/4'];
+			const paths = ['/setup/1', '/setup/1/custom', '/setup/2', '/setup/3', '/setup/4'];
 			const component = renderer.create(
-				<MemoryRouter initialEntries={paths} initialIndex={2} >
-					<SetupViewContainer actions={actions} />
+				<MemoryRouter initialEntries={paths} initialIndex={3} >
+					<SetupViewContainer actions={actions} preventRedirect={true} />
 				</MemoryRouter>
 			).toJSON();
 			expect(component).toMatchSnapshot();
 		});
 
 		test('setup view container is rendered correctly on the Done step', () => {
-			const paths = ['/setup/1', '/setup/2', '/setup/3', '/setup/4'];
+			const paths = ['/setup/1', '/setup/1/custom', '/setup/2', '/setup/3', '/setup/4'];
 			const component = renderer.create(
-				<MemoryRouter initialEntries={paths} initialIndex={3} >
-					<SetupViewContainer actions={actions} />
+				<MemoryRouter initialEntries={paths} initialIndex={4} >
+					<SetupViewContainer actions={actions} preventRedirect={true} />
 				</MemoryRouter>
 			).toJSON();
 			expect(component).toMatchSnapshot();

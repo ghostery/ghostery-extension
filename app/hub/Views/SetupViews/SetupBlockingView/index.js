@@ -13,14 +13,11 @@
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { withRouter } from 'react-router-dom';
 
 import SetupBlockingViewContainer from './SetupBlockingViewContainer';
 import * as SetupBlockingViewActions from './SetupBlockingViewActions';
 import { setSetupNavigation } from '../../SetupView/SetupViewActions';
-
-// ToDo: Don't import this action.
-//       Create a new action that gets only Categories and Selected App Ids.
-import { getSettingsData } from '../../../../panel/actions/SettingsActions';
 
 /**
  * Map redux store state properties to the component's own properties.
@@ -39,8 +36,7 @@ const mapStateToProps = state => Object.assign({}, state.setup);
 const mapDispatchToProps = dispatch => ({
 	actions: bindActionCreators(Object.assign(SetupBlockingViewActions, {
 		setSetupNavigation,
-		getSettingsData,
 	}), dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SetupBlockingViewContainer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SetupBlockingViewContainer));

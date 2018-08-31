@@ -15,8 +15,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import SetupBlockingView from './SetupBlockingView';
 import {
-	BLOCKING_POLICY_NOTHING,
 	BLOCKING_POLICY_RECOMMENDED,
+	BLOCKING_POLICY_NOTHING,
 	BLOCKING_POLICY_EVERYTHING,
 	BLOCKING_POLICY_CUSTOM
 } from '../../SetupView/SetupViewConstants';
@@ -61,6 +61,13 @@ class SetupBlockingViewContainer extends Component {
 	}
 
 	/**
+	* Function to handle switching to the Custom Blocking route
+	*/
+	_handleCustomClick = () => {
+		this.props.history.push('/setup/1/custom');
+	}
+
+	/**
 	 * React's required render function. Returns JSX
 	 * @return {JSX} JSX for rendering the Setup Blocking View of the Hub app
 	 */
@@ -68,16 +75,16 @@ class SetupBlockingViewContainer extends Component {
 		const { blockingPolicy } = this.props.setup;
 		const choices = [
 			{
-				name: BLOCKING_POLICY_NOTHING,
-				image: '/app/images/hub/setup/block-none.svg',
-				text: t('hub_setup_blocking_text_nothing'),
-				description: t('hub_setup_blocking_description_nothing'),
-			},
-			{
 				name: BLOCKING_POLICY_RECOMMENDED,
 				image: '/app/images/hub/setup/block-recommended.svg',
 				text: t('hub_setup_blocking_text_recommended'),
 				description: t('hub_setup_blocking_description_recommended'),
+			},
+			{
+				name: BLOCKING_POLICY_NOTHING,
+				image: '/app/images/hub/setup/block-none.svg',
+				text: t('hub_setup_blocking_text_nothing'),
+				description: t('hub_setup_blocking_description_nothing'),
 			},
 			{
 				name: BLOCKING_POLICY_EVERYTHING,
@@ -93,7 +100,7 @@ class SetupBlockingViewContainer extends Component {
 			},
 		];
 
-		return <SetupBlockingView blockingPolicy={blockingPolicy} choices={choices} handleSelection={this._handleChange} />;
+		return <SetupBlockingView blockingPolicy={blockingPolicy} choices={choices} handleSelection={this._handleChange} handleCustomClick={this._handleCustomClick} />;
 	}
 }
 
@@ -104,6 +111,7 @@ SetupBlockingViewContainer.propTypes = {
 		setSetupNavigation: PropTypes.func.isRequired,
 		setBlockingPolicy: PropTypes.func.isRequired,
 	}).isRequired,
+	sendMountActions: PropTypes.bool.isRequired,
 };
 
 export default SetupBlockingViewContainer;

@@ -125,6 +125,24 @@ function autoUpdateBugDb() {
 }
 
 /**
+ * Set Default Blocking: all apps in Advertising, Adult Advertising, and Site Analytics
+ */
+function setGhosteryDefaultBlocking() {
+	log('Blocking all apps in categories:', 'advertising', 'pornvertising', 'site_analytics');
+	const categoriesBlock = ['advertising', 'pornvertising', 'site_analytics'];
+	conf.selected_app_ids = {};
+	for (const app_id in bugDb.db.apps) {
+		if (bugDb.db.apps.hasOwnProperty(app_id)) {
+			const category = bugDb.db.apps[app_id].cat;
+			if (categoriesBlock.indexOf(category) >= 0 &&
+			!conf.selected_app_ids.hasOwnProperty(app_id)) {
+				conf.selected_app_ids[app_id] = 1;
+			}
+		}
+	}
+}
+
+/**
  * Pulls down latest version.json and triggers
  * udpates of all db files.
  * @memberOf Background
@@ -489,6 +507,25 @@ function handleRewards(name, message, callback) {
  */
 function handleGhosteryHub(name, message, callback) {
 	switch (name) {
+		case 'GET_HOME_PROPS': {
+			const {
+				setup_complete,
+				tutorial_complete,
+				enable_metrics,
+			} = conf;
+			callback({
+				setup_complete,
+				tutorial_complete,
+				enable_metrics,
+			});
+			break;
+		}
+		case 'SET_METRICS': {
+			const { enable_metrics } = message;
+			conf.enable_metrics = enable_metrics;
+			callback({ enable_metrics });
+			break;
+		}
 		case 'GET_SETUP_SHOW_WARNING_OVERRIDE': {
 			const { setup_show_warning_override } = conf;
 			callback({ setup_show_warning_override });
@@ -504,17 +541,7 @@ function handleGhosteryHub(name, message, callback) {
 			const { blockingPolicy } = message;
 			switch (blockingPolicy) {
 				case 'BLOCKING_POLICY_RECOMMENDED': {
-					const categoriesBlock = ['advertising', 'pornvertising', 'site_analytics'];
-					conf.selected_app_ids = {};
-					for (const app_id in bugDb.db.apps) {
-						if (bugDb.db.apps.hasOwnProperty(app_id)) {
-							const category = bugDb.db.apps[app_id].cat;
-							if (categoriesBlock.indexOf(category) >= 0 &&
-							!conf.selected_app_ids.hasOwnProperty(app_id)) {
-								conf.selected_app_ids[app_id] = 1;
-							}
-						}
-					}
+					setGhosteryDefaultBlocking();
 					break;
 				}
 				case 'BLOCKING_POLICY_NOTHING': {
@@ -532,17 +559,6 @@ function handleGhosteryHub(name, message, callback) {
 				}
 				case 'BLOCKING_POLICY_CUSTOM': {
 					// Blocking app_ids will be handled by Global Blocking blocking.js
-					break;
-				}
-				case 'BLOCKING_POLICY_RESET': {
-					const { selected_app_ids } = message;
-					conf.selected_app_ids = {};
-					for (const app_id in selected_app_ids) {
-						if (!conf.selected_app_ids.hasOwnProperty(app_id) &&
-						bugDb.db.apps.hasOwnProperty(app_id)) {
-							conf.selected_app_ids[app_id] = 1;
-						}
-					}
 					break;
 				}
 				default: break;
@@ -578,6 +594,18 @@ function handleGhosteryHub(name, message, callback) {
 			const { enable_human_web } = message;
 			conf.enable_human_web = enable_human_web;
 			callback({ enable_human_web });
+			break;
+		}
+		case 'SET_SETUP_COMPLETE': {
+			const setup_complete = true;
+			conf.setup_complete = setup_complete;
+			callback({ setup_complete });
+			break;
+		}
+		case 'SET_TUTORIAL_COMPLETE': {
+			const tutorial_complete = true;
+			conf.tutorial_complete = tutorial_complete;
+			callback({ tutorial_complete });
 			break;
 		}
 		default: break;
@@ -776,6 +804,44 @@ function onMessageHandler(request, sender, callback) {
 		panelData.set(message);
 		callback();
 		return false;
+	} else if (name === 'account.getTheme') {
+		if (message.currentTheme !== 'default' &&
+			account.hasScopesUnverified(['subscriptions:supporter'])) {
+			// try to get it locally
+			message.theme = conf.themes[message.currentTheme];
+			if (message.theme) {
+				// This will trigger panelData.set through dispatch
+				// as currentTheme is in SYNC_ARRAY
+				conf.current_theme = message.currentTheme;
+				callback(message);
+				return false;
+			}
+			account.getTheme(`${message.currentTheme}.css`).then((theme) => {
+				if (theme) {
+					const { themes } = conf;
+					themes[message.currentTheme] = theme;
+					conf.themes = themes;
+					conf.current_theme = message.currentTheme;
+					message.theme = theme;
+				} else {
+					conf.current_theme = 'default';
+					message.currentTheme = 'default';
+				}
+				callback(message);
+			})
+				.catch((err) => {
+					log('GET SET THEME ERROR', err);
+					conf.current_theme = 'default';
+					message.currentTheme = 'default';
+					callback(message);
+				});
+			// Signifying asynchronous callback here. Other cases are synchronous.
+			return true;
+		}
+		conf.current_theme = 'default';
+		message.currentTheme = 'default';
+		callback(message);
+		return false;
 	} else if (name === 'getCliqzModuleData') {
 		const modules = { adblock: {}, antitracking: {} };
 
@@ -783,11 +849,11 @@ function onMessageHandler(request, sender, callback) {
 			button.update();
 			if (conf.enable_ad_block) {
 				// update adblock count. callback() handled below based on anti-tracking status
-				modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tabId);
+				modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tabId) || {};
 			}
 			if (conf.enable_anti_tracking) {
 				cliqz.modules.antitracking.background.actions.aggregatedBlockingStats(tabId).then((data) => {
-					modules.antitracking = data;
+					modules.antitracking = data || {};
 					callback(modules);
 				}).catch(() => {
 					callback(modules);
@@ -871,6 +937,9 @@ function onMessageHandler(request, sender, callback) {
 	} else if (name === 'account.getUser') {
 		account.getUser(message)
 			.then((user) => {
+				if (user) {
+					user.subscriptionsSupporter = account.hasScopesUnverified(['subscriptions:supporter']);
+				}
 				callback({ user });
 			})
 			.catch((err) => {
@@ -1676,6 +1745,10 @@ function initializeGhosteryModules() {
 		surrogatedb.init(globals.JUST_UPGRADED),
 		cliqzStartup,
 	]).then(() => {
+		// Set the default ghostery blocking settings
+		if (globals.JUST_INSTALLED) {
+			setGhosteryDefaultBlocking();
+		}
 		// run scheduledTasks on init
 		scheduledTasks();
 		// initialize panel data
