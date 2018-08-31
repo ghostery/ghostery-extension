@@ -15,7 +15,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ClassNames from 'classnames';
 import RSVP from 'rsvp';
-import { validateEmail, validatePassword } from '../utils/utils';
+import { validateEmail, validateConfirmEmail, validatePassword } from '../utils/utils';
 
 /**
  * @class Implement Create Account view which opens
@@ -77,7 +77,7 @@ class CreateAccount extends React.Component {
 					});
 					return;
 				}
-				if (!validateEmail(confirmEmail)) {
+				if (!validateConfirmEmail(email, confirmEmail)) {
 					this.setState({
 						confirmEmailError: true,
 						loading: false,
@@ -99,17 +99,24 @@ class CreateAccount extends React.Component {
 					return;
 				}
 
-				this.props.actions.register(email, confirmEmail, firstName, lastName, password).then((success) => {
-					this.setState({ loading: false });
-					if (success) {
-						new RSVP.Promise((resolve) => {
-							this.props.actions.getUser()
-								.then(() => resolve())
-								.catch(() => resolve());
-						}).finally(() => {
-							this.props.history.push('/account-success');
-						});
-					}
+				this.setState({
+					emailError: false,
+					confirmEmailError: false,
+					passwordInvalidError: false,
+					passwordLengthError: false,
+				}, () => {
+					this.props.actions.register(email, confirmEmail, firstName, lastName, password).then((success) => {
+						this.setState({ loading: false });
+						if (success) {
+							new RSVP.Promise((resolve) => {
+								this.props.actions.getUser()
+									.then(() => resolve())
+									.catch(() => resolve());
+							}).finally(() => {
+								this.props.history.push('/account-success');
+							});
+						}
+					});
 				});
 			});
 		});
