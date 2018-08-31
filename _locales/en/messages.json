@@ -1656,7 +1656,7 @@
 		"message": "Do not ask me again"
 	},
 	"hub_setup_blocking_text_recommended": {
-		"message": "Block Recommended"
+		"message": "Block Default"
 	},
 	"hub_setup_blocking_description_recommended": {
 		"message": "Advertising, Site Analytics, and Adult Advertising trackers blocked"
@@ -1707,11 +1707,8 @@
 		"message": "Enabled"
 	},
 	"hub_setup_humanweb_header": {
-		"message": "We use anonymous analytics and Human Web data to improve Ghostery’s performance and provide Rewards. No personal data is ever collected.$NEW_LINE$$LINK_LM_START$Learn More$LINK_LM_END$",
+		"message": "We use anonymous Human Web data to improve Ghostery’s performance. No personal data is ever collected. $LINK_LM_START$Learn More$LINK_LM_END$",
 		"placeholders": {
-			"new_line": {
-				"content": "<br />"
-			},
 			"link_lm_start": {
 				"content": "<a href=\"https://www.ghostery.com/faqs/human-web-data-collected/\" target=\"_blank\">"
 			},

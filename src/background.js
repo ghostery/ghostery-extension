@@ -542,17 +542,6 @@ function handleGhosteryHub(name, message, callback) {
 					// Blocking app_ids will be handled by Global Blocking blocking.js
 					break;
 				}
-				case 'BLOCKING_POLICY_RESET': {
-					const { selected_app_ids } = message;
-					conf.selected_app_ids = {};
-					for (const app_id in selected_app_ids) {
-						if (!conf.selected_app_ids.hasOwnProperty(app_id) &&
-						bugDb.db.apps.hasOwnProperty(app_id)) {
-							conf.selected_app_ids[app_id] = 1;
-						}
-					}
-					break;
-				}
 				default: break;
 			}
 			callback({ blockingPolicy });
