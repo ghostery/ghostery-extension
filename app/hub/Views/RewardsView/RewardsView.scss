@@ -1,7 +1,7 @@
 .RewardsView {
 	background:
-		buildBackgroundLeft(#ffffff) no-repeat left -170px bottom,
-		buildBackgroundRight(#ffffff) no-repeat right bottom,
+		buildBackgroundLeft(#d4af37) no-repeat left -170px bottom,
+		buildBackgroundRight(#d4af37) no-repeat right bottom,
 		linear-gradient(#daf4ff, #ffffff 30%) no-repeat;
 }
 .RewardsView--paddingTop {
@@ -51,13 +51,13 @@
 	background-position: center center;
 }
 .RewardsView__lightBulbIcon {
-	background-image: buildIconLightBulb(#4a4a4a);
+	background-image: buildIconLightBulb(#4a4a4a, #daf4ff);
 }
 .RewardsView__eyeIcon {
-	background-image: buildIconEye(#4a4a4a);
+	background-image: buildIconEye(#4a4a4a, #daf4ff);
 }
 .RewardsView__starIcon {
-	background-image: buildIconStar(#4a4a4a);
+	background-image: buildIconStar(#4a4a4a, #daf4ff);
 }
 .RewardsView__closerText {
 	font-size: 14px;

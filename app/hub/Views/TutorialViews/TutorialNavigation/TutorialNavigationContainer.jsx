@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { SteppedNavigation } from '../../../../shared-components';
 
 /**
@@ -19,19 +20,49 @@ import { SteppedNavigation } from '../../../../shared-components';
  * @extends Component
  * @memberof HubComponents
  */
-const TutorialNavigationContainer = () => {
-	const childProps = {
-		totalSteps: 6,
-		activeIndex: 1,
-		hrefPrev: false,
-		hrefNext: '/tutorial/2',
-		hrefDone: '/',
-		textPrev: false,
-		textNext: '',
-		textDone: '',
-	};
 
-	return <SteppedNavigation {...childProps} />;
+const TutorialNavigationContainer = (props) => {
+	const { totalSteps, tutorial } = props;
+	const { navigation } = tutorial;
+	const navigationProps = {
+		totalSteps,
+		...navigation,
+	};
+	return <SteppedNavigation {...navigationProps} />;
+};
+
+// PropTypes ensure we pass required props of the correct type
+TutorialNavigationContainer.propTypes = {
+	totalSteps: PropTypes.number.isRequired,
+	tutorial: PropTypes.shape({
+		navigation: PropTypes.shape({
+			activeIndex: PropTypes.number.isRequired,
+			hrefPrev: PropTypes.oneOfType([
+				PropTypes.bool,
+				PropTypes.string,
+			]).isRequired,
+			hrefNext: PropTypes.oneOfType([
+				PropTypes.bool,
+				PropTypes.string,
+			]).isRequired,
+			hrefDone: PropTypes.oneOfType([
+				PropTypes.bool,
+				PropTypes.string,
+			]).isRequired,
+			textPrev: PropTypes.oneOfType([
+				PropTypes.bool,
+				PropTypes.string,
+			]).isRequired,
+			textNext: PropTypes.oneOfType([
+				PropTypes.bool,
+				PropTypes.string,
+			]).isRequired,
+			textDone: PropTypes.oneOfType([
+				PropTypes.bool,
+				PropTypes.string,
+			]).isRequired,
+		}).isRequired,
+	}).isRequired
 };
 
 export default TutorialNavigationContainer;

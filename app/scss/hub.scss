@@ -17,6 +17,14 @@ html, body, #root {
 	margin: 0;
 }
 
+.App {
+	position: fixed;
+}
+.App__mainContent {
+	overflow-y: scroll;
+	margin-left: 230px;
+}
+
 // Foundation Overrides
 .button {
 	font-size: 14px;
@@ -32,12 +40,13 @@ html, body, #root {
 .full-width { width: 100%; }
 .display-inline { display: inline-block; }
 
+@import 'settings_hub'; // Import Foundation
 @import './partials/_hub_mixins';
 @import './partials/_hub_svgs';
-@import './partials/_hub_side_navigation';
-@import './partials/_hub_other_partials'; // ToDo: Remove this file
 
-// Imports from ../hub directory for the Custom Setup Workflow
+// Imports from ../hub directory
+@import '../hub/Views/HomeView/HomeView.scss';
+@import '../hub/Views/SideNavigationView/SideNavigationView.scss';
 @import '../hub/Views/SetupView/SetupView.scss';
 @import '../hub/Views/SetupViews/SetupHeader/SetupHeader.scss';
 @import '../hub/Views/SetupViews/SetupBlockingView/SetupBlockingView.scss';
@@ -45,6 +54,7 @@ html, body, #root {
 @import '../hub/Views/SetupViews/SetupAntiSuiteView/SetupAntiSuiteView.scss';
 @import '../hub/Views/SetupViews/SetupHumanWebView/SetupHumanWebView.scss';
 @import '../hub/Views/SetupViews/SetupDoneView/SetupDoneView.scss';
+@import '../hub/Views/TutorialView/TutorialView.scss';
 @import '../hub/Views/RewardsView/RewardsView.scss';
 @import '../hub/Views/ProductsView/ProductsView.scss';
 
