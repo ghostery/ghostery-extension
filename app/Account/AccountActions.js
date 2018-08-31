@@ -17,8 +17,8 @@ import {
 
 export const getUserSettings = () => dispatch => (
 	sendMessageInPromise('account.getUserSettings')
-		.then((res) => {
-			const { errors, settings } = res;
+		.then((settings) => {
+			const { errors } = settings;
 			if (errors) {
 				dispatch({
 					type: GET_USER_SETTINGS_FAIL,

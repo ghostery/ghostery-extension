@@ -137,17 +137,6 @@ export function validateConfirmEmail(email, confirmEmail) {
 }
 
 /**
- * Check for valid confirm email and equality to email
- * @memberOf PanelUtils
- * @param  {string} email 			email to validate
- * @param  {string} confirmEmail 	confirm email to validate
- * @return {boolean}				true if valid, false otherwise
- */
-export function validateConfirmEmail(email, confirmEmail) {
-	return validateEmail(confirmEmail) && email === confirmEmail || false;
-}
-
-/**
  * Check for valid password
  * @memberOf PanelUtils
  * @param  {string} pwd 	password to validate
