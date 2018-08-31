@@ -47,7 +47,9 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         <div
           className="SideNavigation__menuIcon home"
         />
-        <div>
+        <div
+          className="SideNavigation__menuText"
+        >
           Home
         </div>
       </a>
@@ -65,7 +67,9 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         <div
           className="SideNavigation__menuIcon setup"
         />
-        <div>
+        <div
+          className="SideNavigation__menuText"
+        >
           Customize Setup
         </div>
       </a>
@@ -83,7 +87,9 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         <div
           className="SideNavigation__menuIcon tutorial"
         />
-        <div>
+        <div
+          className="SideNavigation__menuText"
+        >
           Take a Tutorial
         </div>
       </a>
@@ -101,7 +107,9 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         <div
           className="SideNavigation__menuIcon supporter"
         />
-        <div>
+        <div
+          className="SideNavigation__menuText"
+        >
           Become a Supporter
         </div>
       </a>
@@ -119,7 +127,9 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         <div
           className="SideNavigation__menuIcon rewards"
         />
-        <div>
+        <div
+          className="SideNavigation__menuText"
+        >
           Try Ghostery Rewards
         </div>
       </a>
@@ -137,7 +147,9 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         <div
           className="SideNavigation__menuIcon products"
         />
-        <div>
+        <div
+          className="SideNavigation__menuText"
+        >
           See More Ghostery Products
         </div>
       </a>

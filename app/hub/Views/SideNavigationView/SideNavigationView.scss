@@ -16,8 +16,8 @@
 	position: fixed;
 	height: 100%;
 	overflow-y: scroll;
-	min-width: 200px;
-	max-width: 200px;
+	min-width: 230px;
+	max-width: 230px;
 	background-color: #5d7d85;
 }
 .SideNavigation__top {
@@ -45,6 +45,7 @@
 	pointer-events: none;
 }
 .SideNavigation__item a {
+	color: #ffffff;
 	pointer-events: all;
 }
 .SideNavigation__item a:active,
@@ -102,6 +103,9 @@
 }
 .SideNavigation__menuIcon.products {
 	background-image: buildIconProducts(#ffffff);
+}
+.SideNavigation__menuText {
+	max-width: 145px;
 }
 .SideNavigation__bottomItem {
 	padding-left: 20px;

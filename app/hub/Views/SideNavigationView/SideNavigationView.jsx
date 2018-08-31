@@ -26,7 +26,7 @@ const SideNavigationView = (props) => {
 					<div key={`menu-item-${item.href.substring(1)}`} className="SideNavigation__item SideNavigation__menuItem  flex-container align-middle">
 						<NavLink to={item.href} exact={item.href === '/'} className="flex-container align-middle">
 							<div className={`SideNavigation__menuIcon ${item.icon}`} />
-							<div>{item.text}</div>
+							<div className="SideNavigation__menuText">{item.text}</div>
 						</NavLink>
 					</div>
 				))}
