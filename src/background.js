@@ -923,6 +923,17 @@ function onMessageHandler(request, sender, callback) {
 				callback({ errors: _getJSONAPIErrorsObject(err) });
 			});
 		return true;
+	} else if (name === 'account.getUserSubsciptionData') {
+		account.getUserSubscriptionData()
+			.then((customer) => {
+				const subscriptionData = customer.subscriptions;
+				callback({ subscriptionData });
+			})
+			.catch((err) => {
+				log('Error getting user subscription data:', err);
+				callback({ errors: _getJSONAPIErrorsObject(err) });
+			});
+		return true;
 	} else if (name === 'account.resetPassword') {
 		const { email } = message;
 		account.resetPassword(email)

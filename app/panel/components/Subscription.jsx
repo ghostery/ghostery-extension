@@ -13,11 +13,15 @@
 
 import React from 'react';
 import { Route } from 'react-router-dom';
+import moment from 'moment/min/moment-with-locales.min';
+
 import SubscriptionMenu from './Subscription/SubscriptionMenu';
 import SubscriptionInfo from './Subscription/SubscriptionInfo';
 import SubscriptionThemes from './Subscription/SubscriptionThemes';
 import PrioritySupport from './Subscription/PrioritySupport';
-import TrackerStats from './Subscription/TrackerStats';
+
+
+// import TrackerStats from './Subscription/TrackerStats';
 /**
  * @class Implement base Subscription view which routes navigation to all subscription subviews
  * @memberof PanelClasses
@@ -26,16 +30,17 @@ class Subscription extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isChecked: false
+			isChecked: (props.currentTheme !== 'default')
 		};
 	}
 
 	/**
-	 * Lifecycle event. Default sub view is set here.
+	 * Lifecycle event
 	 */
-	componentWillMount() {
-		this.setState({ isChecked: (this.props.currentTheme !== 'default') });
+	componentDidMount() {
 		this.props.history.push('/subscription/info');
+
+		this.props.actions.getUserSubscriptionData();
 	}
 
 	/**
@@ -45,6 +50,21 @@ class Subscription extends React.Component {
 		if (!nextProps.loggedIn) {
 			this.props.history.push('/detail');
 		}
+	}
+	parseSubscriptionData = () => {
+		const sd = this.props.subscriptionData;
+		if (sd) {
+			const { status, cancelAtPeriodEnd, currentPeriodEnd } = sd;
+			moment.locale(this.props.language).toLowerCase().replace('_', '-');
+			const period_end = moment.unix(currentPeriodEnd).format('MMMM Do, YYYY');
+			return {
+				active: (status === 'active'),
+				next_charge_date: cancelAtPeriodEnd ? '' : period_end,
+				expired_date: cancelAtPeriodEnd ? period_end : '',
+				auto_renewal: !cancelAtPeriodEnd,
+			};
+		}
+		return {};
 	}
 
 	toggleThemes = () => {
@@ -57,10 +77,10 @@ class Subscription extends React.Component {
 		}
 	}
 
-	SubscriptionInfoComponent = () => (<SubscriptionInfo subscriptionData={this.props} />);
+	SubscriptionInfoComponent = () => (<SubscriptionInfo subscriptionData={this.parseSubscriptionData()} />);
 	SubscriptionThemesComponent = () => (<SubscriptionThemes isChecked={this.state.isChecked} toggleThemes={this.toggleThemes} />);
 	PrioritySupportComponent = () => (<PrioritySupport />);
-	TrackerStatsComponent = () => (<TrackerStats />);
+	// TrackerStatsComponent = () => (<TrackerStats />);
 
 	/**
 	 * Render top level component of the Subscription view.
@@ -74,7 +94,7 @@ class Subscription extends React.Component {
 					<Route path="/subscription/info" render={this.SubscriptionInfoComponent} />
 					<Route path="/subscription/themes" render={this.SubscriptionThemesComponent} />
 					<Route path="/subscription/prioritysupport" render={this.PrioritySupportComponent} />
-					<Route path="/subscription/trackerstats" render={this.TrackerStatsComponent} />
+					{/* <Route path="/subscription/trackerstats" render={this.TrackerStatsComponent} /> */}
 				</div>
 			</div>
 		);

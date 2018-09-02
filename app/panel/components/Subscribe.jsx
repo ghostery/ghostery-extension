@@ -11,7 +11,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import globals from '../../../src/classes/Globals';
 /**
  * Render Subscribe panel.
  * @return {ReactComponent}   ReactComponent instance
@@ -25,12 +26,12 @@ function Subscribe() {
 				<a href="https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/" target="_blank" rel="noopener noreferrer">
 					<span className="pitch-learn-more">{t('subscribe_pitch_learn_more')}</span>
 				</a>
-				<a href="https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/" target="_blank" rel="noopener noreferrer">
+				<a href={`https:\/\/account.${globals.GHOSTERY_DOMAIN}.com/en/subscription`} target="_blank" rel="noopener noreferrer">
 					<span className="pitch-become-subscriber">{t('subscribe_pitch_button_label')}</span>
 				</a>
-				<Link to="/login">
+				<NavLink to="/login">
 					<span className="pitch-already-subscriber">{t('subscribe_pitch_sign_here')}</span>
-				</Link>
+				</NavLink>
 			</div>
 		</div>
 	);
