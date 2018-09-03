@@ -56,11 +56,9 @@ class Subscription extends React.Component {
 		if (sd) {
 			const { status, cancelAtPeriodEnd, currentPeriodEnd } = sd;
 			moment.locale(this.props.language).toLowerCase().replace('_', '-');
-			const period_end = moment.unix(currentPeriodEnd).format('MMMM Do, YYYY');
 			return {
 				active: (status === 'active'),
-				next_charge_date: cancelAtPeriodEnd ? '' : period_end,
-				expired_date: cancelAtPeriodEnd ? period_end : '',
+				charge_date: moment.unix(currentPeriodEnd).format('MMMM Do, YYYY'),
 				auto_renewal: !cancelAtPeriodEnd,
 			};
 		}
