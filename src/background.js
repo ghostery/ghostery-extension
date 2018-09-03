@@ -1118,6 +1118,11 @@ function initializeDispatcher() {
 		// Update PanelData with new Conf properties
 		panelData.init();
 	}, 200));
+
+	dispatcher.on('globals.save.paused_blocking', () => {
+		// update content script state when blocking is paused/unpaused
+		cliqz.modules.core.action('refreshAppState');
+	});
 }
 
 /**
@@ -1232,14 +1237,8 @@ function initialiseWebRequestPipeline() {
  *
  * @return {boolean}
  */
-let paused = globals.SESSION.paused_blocking;
 function isWhitelisted(state) {
 	const url = state.sourceUrl;
-	// detect pause toggling - without an event we can just see if it changes since the last read
-	if (globals.SESSION.paused_blocking !== paused) {
-		paused = globals.SESSION.paused_blocking;
-		cliqz.app.modules.core.action('refreshAppState');
-	}
 	return globals.SESSION.paused_blocking || events.policy.getSitePolicy(url) === 2 || state.ghosteryWhitelisted;
 }
 
