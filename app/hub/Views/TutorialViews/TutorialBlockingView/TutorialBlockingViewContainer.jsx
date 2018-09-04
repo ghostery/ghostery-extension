@@ -13,7 +13,6 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import TutorialBlockingView from './TutorialBlockingView';
 
 /**
@@ -25,16 +24,18 @@ class TutorialBlockingViewContainer extends Component {
 	constructor(props) {
 		super(props);
 
-		// TODO call setTutorialNavigation action
-		const { index } = this.props;
-		this.props.actions.setTutorialNavigation({
+		const title = t('hub_tutorial_page_title_blocking');
+		window.document.title = title;
+
+		const { index } = props;
+		props.actions.setTutorialNavigation({
 			activeIndex: index,
 			hrefPrev: `/tutorial/${index - 1}`,
 			hrefNext: `/tutorial/${index + 1}`,
 			hrefDone: '/',
-			textPrev: t('hub_setup_nav_previous'),
-			textNext: t('hub_setup_nav_next'),
-			textDone: t('hub_setup_exit_flow'),
+			textPrev: t('hub_tutorial_nav_previous'),
+			textNext: t('hub_tutorial_nav_next'),
+			textDone: t('hub_tutorial_exit_flow'),
 		});
 	}
 

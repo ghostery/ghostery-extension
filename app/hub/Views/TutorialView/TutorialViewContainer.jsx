@@ -15,6 +15,7 @@
 
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import TutorialView from './TutorialView';
 
 // Component Views
@@ -37,9 +38,11 @@ class TutorialViewContainer extends React.Component {
 			sendMountActions: false,
 		};
 
-		this.props.history.push('/tutorial/1');
+		if (!props.preventRedirect) {
+			this.props.history.push('/tutorial/1');
+		}
 
-		const title = '';
+		const title = t('hub_tutorial_page_title');
 		window.document.title = title;
 
 		this.props.actions.initTutorialProps(this.props.tutorial).then(() => {
@@ -90,8 +93,48 @@ class TutorialViewContainer extends React.Component {
 	}
 }
 
+// PropTypes ensure we pass required props of the correct type
+// Note: isRequired is not needed when a prop has a default value
+TutorialViewContainer.propTypes = {
+	preventRedirect: PropTypes.bool,
+	tutorial: PropTypes.shape({
+		navigation: PropTypes.shape({
+			activeIndex: PropTypes.number,
+			hrefPrev: PropTypes.oneOfType([
+				PropTypes.bool,
+				PropTypes.string,
+			]),
+			hrefNext: PropTypes.oneOfType([
+				PropTypes.bool,
+				PropTypes.string,
+			]),
+			hrefDone: PropTypes.oneOfType([
+				PropTypes.bool,
+				PropTypes.string,
+			]),
+			textPrev: PropTypes.oneOfType([
+				PropTypes.bool,
+				PropTypes.string,
+			]),
+			textNext: PropTypes.oneOfType([
+				PropTypes.bool,
+				PropTypes.string,
+			]),
+			textDone: PropTypes.oneOfType([
+				PropTypes.bool,
+				PropTypes.string,
+			]),
+		}),
+	}),
+	actions: PropTypes.shape({
+		initTutorialProps: PropTypes.func.isRequired,
+		setTutorialNavigation: PropTypes.func.isRequired,
+	}).isRequired,
+};
+
 // Default props used throughout the Tutorial flow
 TutorialViewContainer.defaultProps = {
+	preventRedirect: false,
 	tutorial: {
 		navigation: {
 			activeIndex: 0,

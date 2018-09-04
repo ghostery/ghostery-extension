@@ -12,17 +12,7 @@
  */
 
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-
 import SetupNavigationContainer from './SetupNavigationContainer';
-import { setBlockingPolicy } from '../SetupBlockingView/SetupBlockingViewActions';
-import {
-	setAntiTracking,
-	setAdBlock,
-	setSmartBlocking,
-	setGhosteryRewards
-} from '../SetupAntiSuiteView/SetupAntiSuiteViewActions';
-import { setHumanWeb } from '../SetupHumanWebView/SetupHumanWebViewActions';
 
 /**
  * Map redux store state properties to the component's own properties.
@@ -32,21 +22,4 @@ import { setHumanWeb } from '../SetupHumanWebView/SetupHumanWebViewActions';
  */
 const mapStateToProps = state => Object.assign({}, state.setup);
 
-/**
- * Bind the component's action creators using Redux's bindActionCreators.
- * @param  {function} dispatch redux store method which dispatches actions
- * @return {function}          to be used as an argument in redux connect call
- * @memberof SetupContainers
- */
-const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign({}, {
-		setBlockingPolicy,
-		setAntiTracking,
-		setAdBlock,
-		setSmartBlocking,
-		setGhosteryRewards,
-		setHumanWeb,
-	}), dispatch),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(SetupNavigationContainer);
+export default connect(mapStateToProps)(SetupNavigationContainer);

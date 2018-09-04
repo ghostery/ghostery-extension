@@ -13,7 +13,6 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import TutorialVideoView from './TutorialVideoView';
 
 /**
@@ -25,19 +24,25 @@ class TutorialVideoViewContainer extends Component {
 	constructor(props) {
 		super(props);
 
-		// TODO call setTutorialNavigation action
-		const { index } = this.props;
-		this.props.actions.setTutorialNavigation({
+		const title = t('hub_tutorial_page_title_video');
+		window.document.title = title;
+
+		const { index } = props;
+		props.actions.setTutorialNavigation({
 			activeIndex: index,
 			hrefPrev: false,
 			hrefNext: `/tutorial/${index + 1}`,
 			hrefDone: '/',
 			textPrev: false,
-			textNext: t('hub_setup_nav_next'),
-			textDone: t('hub_setup_exit_flow'),
+			textNext: t('hub_tutorial_nav_next'),
+			textDone: t('hub_tutorial_exit_flow'),
 		});
 	}
 
+	/**
+	 * React's required render function. Returns JSX
+	 * @return {JSX} JSX for rendering the Tutorial Video View of the Hub app
+	 */
 	render() {
 		return <TutorialVideoView />;
 	}

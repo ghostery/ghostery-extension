@@ -9,35 +9,86 @@
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
- *
- * ToDo: Update to BEM [Block Element Modifier](https://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)
  */
 
-// purple rectangle outline
-.rectangle-1 {
-	width: 120px;
-	height: 43px;
-	border-radius: 7.2px;
-	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
-	border: solid 2.7px #930194;
-	transform: scale(0);
-	-webkit-animation: zoom .5s;
-	animation: zoom .5s;
-	-webkit-animation-fill-mode: forwards;
-	animation-fill-mode: forwards;
-	-webkit-animation-delay: 1s;
-	animation-delay: 1s;
+// Tutorial View
+.TutorialView--paddingTopLarge {
+	padding-top: 160px;
+}
+.TutorialView--paddingTopSmall {
+	padding-top: 70px;
+}
+.TutorialView__title {
+	color: #4a4a4a;
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 27px;
+	margin-bottom: 15px;
+}
+.TutorialView__tagline {
+	color: #4a4a4a;
+	font-size: 18px;
+	line-height: 27px;
+}
+.TutorialView__imageTitle {
+	color: #9b9b9b;
+	font-size: 11px;
+	font-weight: 600;
+	margin: 25px 0 5px;
+}
+.TutorialView__keyText {
+	color: #4a4a4a;
+	font-size: 16px;
+	font-weight: 500;
 }
 
-
-@-webkit-keyframes zoom {
-	100% {
-		-webkit-transform: scale(1,1);
-	}
+// Tutorial Video View
+.TutorialVideoView__videoContainer {
+	height: 309px;
+	width: 600px;
+	margin: 30px auto 33px;
+	background-color: lightblue;
 }
 
-@keyframes zoom {
-	100% {
-		transform: scale(1,1);
-	}
+// Tutorial Blocking View
+.TutorialBlockingView__key {
+	margin-top: 24px;
+}
+.TutorialBlockingView__key .TutorialView__keyText {
+	padding: 14px 0 14px 54px;
+	max-width: 220px;
+}
+
+// Tutorial Trust View
+.TutorialTrustView__key {
+	margin-top: 30px;
+}
+.TutorialTrustView__key .TutorialView__keyText {
+	padding: 14px 0;
+	max-width: 320px;
+}
+
+// Tutorial Anti Suite View
+.TutorialAntiSuiteView__key {
+	margin-top: 45px;
+}
+.TutorialAntiSuiteView__key .TutorialView__keyItem {
+	padding: 20px 0;
+}
+.TutorialAntiSuiteView__key .TutorialView__keyImage {
+	background-color: #1dafed;
+	height: 50px;
+	min-width: 50px;
+	margin-right: 25px;
+}
+.TutorialAntiSuiteView__key .TutorialView__keyTitle {
+	color: #1dafed;
+	font-size: 16px;
+	font-weight: 700;
+	margin-bottom: 10px;
+}
+.TutorialAntiSuiteView__key .TutorialView__keyText {
+	color: #4a4a4a;
+	font-size: 13px;
+	line-height: 20px;
 }

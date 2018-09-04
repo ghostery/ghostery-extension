@@ -15,11 +15,66 @@
 
 import React from 'react';
 
+
 /**
- * @class Implement the Tutorial Anti Suite View for the Ghostery Hub
- * @extends Component
+ * A Functional React component for rendering the Tutorial Anti Suite View
+ * @return {JSX} JSX for rendering the Tutorial Anti Suite View of the Hub app
  * @memberof HubComponents
  */
-const TutorialAntiSuiteView = () => <div>Ghostery Hub - Tutorial Anti Suite View</div>;
+const TutorialAntiSuiteView = () => (
+	<div className="TutorialView--paddingTopSmall row align-center-middle">
+		<div className="columns small-12 medium-6">
+			<div className="TutorialView__imageTitle">
+				{t('hub_tutorial_simple_view')}
+			</div>
+			<div>image 1</div>
+			<div className="TutorialView__imageTitle">
+				{t('hub_tutorial_detailed_view')}
+			</div>
+			<div>image 2</div>
+		</div>
+		<div className="columns small-12 medium-4 medium-offsert-1">
+			<div className="TutorialView__title">
+				{t('hub_tutorial_antisuite_title')}
+			</div>
+
+			<div className="TutorialAntiSuiteView__key">
+				<div className="TutorialView__keyItem flex-container align-middle">
+					<div className="TutorialView__keyImage">image</div>
+					<div>
+						<div className="TutorialView__keyTitle">
+							{t('hub_tutorial_antisuite_antitracking_title')}
+						</div>
+						<div className="TutorialView__keyText">
+							{t('hub_tutorial_antisuite_antitracking_description')}
+						</div>
+					</div>
+				</div>
+				<div className="TutorialView__keyItem flex-container align-middle">
+					<div className="TutorialView__keyImage">image</div>
+					<div>
+						<div className="TutorialView__keyTitle">
+							{t('hub_tutorial_antisuite_adblocking_title')}
+						</div>
+						<div className="TutorialView__keyText">
+							{t('hub_tutorial_antisuite_adblocking_description')}
+						</div>
+					</div>
+				</div>
+				<div className="TutorialView__keyItem flex-container align-middle">
+					<div className="TutorialView__keyImage">image</div>
+					<div>
+						<div className="TutorialView__keyTitle">
+							{t('hub_tutorial_antisuite_smartblocking_title')}
+						</div>
+						<div className="TutorialView__keyText">
+							{t('hub_tutorial_antisuite_smartblocking_description')}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+);
 
 export default TutorialAntiSuiteView;
