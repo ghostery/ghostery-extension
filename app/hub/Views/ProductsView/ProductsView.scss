@@ -1,0 +1,76 @@
+.ProductsView--paddingTopBig {
+  padding-top: 80px;
+}
+.ProductsView--paddingTopMedium {
+  padding-top: 40px;
+}
+.ProductsView--paddingTopSmall {
+  padding-top: 20px;
+}
+.ProductsView--paddingTopVerySmall {
+  padding-top: 10px;
+}
+
+.ProductsView {
+  background: linear-gradient(#daf4ff, #ffffff 30%) no-repeat;
+  margin-bottom: 80px;
+}
+.ProductsView__mobileScreenshots {
+  margin: 0 50px;
+  max-width: 400px;
+}
+.ProductsView__mainPromoText {
+  line-height: 38px;
+  padding-left: 50px
+}
+.ProductsView__headerTitle {
+  color: #00aef0;
+  font-size: 24px;
+  font-weight: 700;
+}
+.ProductsView__headerDescription {
+  font-size: 18px;
+}
+.ProductsView__mainPromoTitle {
+  line-height: 30px;
+  font-size: 18px;
+  font-weight: 700;
+}
+.ProductsView__mainPromoDescription {
+  font-size: 14px;
+  line-height: 30px;
+}
+.ProductsView__downloadIcon {
+  max-width: 160px;
+  padding: 0 30px 0 0;
+}
+.ProductsView__smallPromo {
+  max-width: 400px;
+  align-items: center;
+  text-align: center;
+  padding: 0 60px;
+  margin: 0 20px;
+}
+.ProductsView__smallPromoTitle {
+  text-align: center;
+  font-size: 14px;
+  line-height: 30px;
+  font-weight: 700;
+}
+.ProductsView__smallPromoDescription {
+  font-size: 14px;
+  line-height: 30px;
+}
+.ProductsView__promoScreenshotNewTab {
+  max-width: 450px;
+  height: auto;
+  padding: 0 50px;
+}
+.ProductsView__promoScreenshotLite {
+  max-width: 510px;
+  height: auto;
+  padding: 0 50px;
+}
+.ProductsView__smallPromoDownload {
+  max-width: 130px;
+}

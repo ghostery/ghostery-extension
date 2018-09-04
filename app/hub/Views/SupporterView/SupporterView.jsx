@@ -42,8 +42,89 @@ class SupporterView extends Component {
 	 * @return {JSX} JSX for rendering the Supporter View of the Hub app
 	 */
 	render() {
-		const { title } = this.state;
-		return <div>{title}</div>;
+
+		return (
+			<div className="SupporterView full-height">
+				<div className="row">
+					<div className="columns SupporterView__header align-center">
+
+						<div className="SupporterView__headerImage row align-center">
+							<img src="/app/images/hub/supporter/GoldenGhost.png"/>
+						</div>
+
+						<div className="SupporterView__title row align-center">
+							{t('hub_supporter_header_title')}
+						</div>
+
+						<div className="SupporterView__description row align-center">
+							{t('hub_supporter_header_description')}
+						</div>
+
+					</div>
+				</div>
+
+				<div className="SupporterView--paddingTop row align-center">
+					<div className="SupporterView__perkFeature columns">
+						<div className="SupporterView__perkIcon" />
+						<div className="SupporterView__perkTitle">
+							{t('hub_supporter_perk_themes_title')}
+						</div>
+					</div>
+					<div className="SupporterView__perkFeature columns">
+						<div className="SupporterView__perkIcon" />
+						<div className="SupporterView__perkTitle">
+							{t('hub_supporter_perk_priority_title')}
+						</div>
+					</div>
+					<div className="SupporterView__perkFeature columns">
+						<div className="SupporterView__perkIcon" />
+						<div className="SupporterView__perkTitle">
+							{t('hub_supporter_perk_more_title')}
+						</div>
+					</div>
+				</div>
+
+				<div className="SupporterView__manifesto row expanded SupporterView--marginTop align-center-middle">
+					<div className="SupporterView__manifestoText columns">
+						{t('hub_supporter_manifesto')}
+					</div>
+				</div>
+
+				<div className="SupporterView__themes row SupporterView--marginTop align-middle">
+					<div className="SupporterView__themesText columns">
+						<div className="SupporterView__title row">
+							{t('hub_supporter_themes_title')}
+						</div>
+
+						<div className="SupporterView__description row">
+							{t('hub_supporter_themes_description')}
+						</div>
+					</div>
+
+					<div className="SupporterView__themesScreenshots columns" />
+				</div>
+
+
+				<div className="SupporterView__priority SupporterView--marginTop row expanded">
+					<div className="SupporterView__priorityIcon columns">
+
+					</div>
+
+					<div className="SupporterView__priorityText columns">
+
+						<div className="SupporterView__title row">
+							{t('hub_supporter_priority_title')}
+						</div>
+
+						<div className="SupporterView__description row">
+							{t('hub_supporter_priority_description')}
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		);
 	}
 }
 
