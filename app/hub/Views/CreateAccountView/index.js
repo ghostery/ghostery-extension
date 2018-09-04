@@ -14,9 +14,8 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import CreateAccountView from './CreateAccountView';
+import CreateAccountViewContainer from './CreateAccountViewContainer';
 import * as AccountActions from '../../../Account/AccountActions';
-// import { setSetupNavigation } from '../../SetupView/SetupViewActions';
 
 /**
  * Map redux store state properties to the component's own properties.
@@ -34,5 +33,4 @@ const mapStateToProps = state => Object.assign({}, state.account);
  */
 const mapDispatchToProps = dispatch => ({ actions: bindActionCreators(Object.assign(AccountActions), dispatch) });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateAccountView);
-
+export default connect(mapStateToProps, mapDispatchToProps)(CreateAccountViewContainer);

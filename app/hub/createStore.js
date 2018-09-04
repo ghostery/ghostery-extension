@@ -23,15 +23,15 @@ import thunk from 'redux-thunk';
 
 import { reducer as home } from './Views/HomeView';
 import { reducer as setup } from './Views/SetupView';
-import account from '../Account/AccountReducer';
 import { reducer as tutorial } from './Views/TutorialView';
+import account from '../Account/AccountReducer';
 import settings from '../panel/reducers/settings';
 
 const reducer = combineReducers({
 	home,
 	setup,
-	account,
 	tutorial,
+	account,
 	settings,
 });
 

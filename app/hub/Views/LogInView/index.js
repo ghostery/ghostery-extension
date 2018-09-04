@@ -1,5 +1,5 @@
 /**
- * Point of entry index.js file for Login View
+ * Point of entry index.js file for Log In View
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -14,9 +14,8 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import LogInView from './LogInView';
+import LogInViewContainer from './LogInViewContainer';
 import * as AccountActions from '../../../Account/AccountActions';
-// import { setSetupNavigation } from '../../SetupView/SetupViewActions';
 
 /**
  * Map redux store state properties to the component's own properties.
@@ -34,5 +33,4 @@ const mapStateToProps = state => Object.assign({}, state.account);
  */
 const mapDispatchToProps = dispatch => ({ actions: bindActionCreators(Object.assign(AccountActions), dispatch) });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LogInView);
-
+export default connect(mapStateToProps, mapDispatchToProps)(LogInViewContainer);

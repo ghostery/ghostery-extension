@@ -1,5 +1,5 @@
 /**
- * Create Account View Component
+ * Log In View Container
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -9,24 +9,24 @@
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
- *
- * ToDo: Update this file.
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import ClassNames from 'classnames';
 import RSVP from 'rsvp';
+import ClassNames from 'classnames';
 import { validateEmail } from '../../../panel/utils/utils';
+import { ExitButton } from '../../../shared-components';
 
 // Components
 import SetupHeader from '../SetupViews/SetupHeader';
+
 /**
- * A Functional React component for rendering the Setup Blocking View
- * @return {JSX} JSX for rendering the Setup Blocking View of the Hub app
- * @memberof HubComponents
+ * @class Implement the Log In View for the Ghostery Hub
+ * @extends Component
+ * @memberof HubContainers
  */
-class LogInView extends React.Component {
+class LogInViewContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -104,9 +104,10 @@ class LogInView extends React.Component {
 				});
 		});
 	}
+
 	/**
-	 * Render Create Account panel.
-	 * @return {ReactComponent}   ReactComponent instance
+	 * React's required render function. Returns JSX
+	 * @return {JSX} JSX for rendering the Log In View of the Hub app
 	 */
 	render() {
 		const {
@@ -121,10 +122,7 @@ class LogInView extends React.Component {
 			<div className="full-height flex-container flex-dir-column">
 				<div className="flex-child-grow">
 					<div>
-						<NavLink to="/" className="SteppedNavigation__exit flex-container align-middle">
-							<span className="SteppedNavigation__exitText">{ t('exit_sign_in') }</span>
-							<span className="SteppedNavigation__exitIcon" />
-						</NavLink>
+						<ExitButton hrefExit="/" textExit={t('exit_sign_in')} />
 						<SetupHeader
 							title={t('setup_sign_in')}
 							titleImage="/app/images/hub/account/ghosty-account.svg"
@@ -213,5 +211,4 @@ class LogInView extends React.Component {
 	}
 }
 
-export default LogInView;
-
+export default LogInViewContainer;

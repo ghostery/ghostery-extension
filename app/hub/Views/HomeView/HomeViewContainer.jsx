@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import QueryString from 'query-string';
 import HomeView from './HomeView';
@@ -21,7 +21,7 @@ import HomeView from './HomeView';
  * @extends Component
  * @memberof HubContainers
  */
-class HomeViewContainer extends React.Component {
+class HomeViewContainer extends Component {
 	constructor(props) {
 		super(props);
 

@@ -1,3 +1,16 @@
+/**
+ * Account Action creators
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
 import { sendMessageInPromise } from '../panel/utils/msg';
 import { log } from '../../src/utils/common';
 import {
@@ -53,7 +66,6 @@ export const getUser = () => dispatch => (
 				type: GET_USER_SUCCESS,
 				payload: { user },
 			});
-
 			return true;
 		})
 );
@@ -123,10 +135,11 @@ export const logout = () => dispatch => (
 			dispatch({ type: LOGOUT_SUCCESS });
 		})
 		.catch((err) => {
+			const errors = [{ title: err.toString(), detail: err.toString() }];
 			dispatch({
 				type: LOGOUT_FAIL,
 				payload: {
-					errors: [{ title: err.toString(), detail: err.toString() }],
+					errors,
 				},
 			});
 		})
@@ -147,10 +160,11 @@ export const resetPassword = email => dispatch => (
 			return true;
 		})
 		.catch((err) => {
+			const errors = [{ title: err.toString(), detail: err.toString() }];
 			dispatch({
 				type: RESET_PASSWORD_FAIL,
 				payload: {
-					errors: [{ title: err.toString(), detail: err.toString() }],
+					errors,
 				},
 			});
 		})

@@ -13,7 +13,7 @@
  * ToDo: Add Proptypes
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import TutorialView from './TutorialView';
 
@@ -30,7 +30,7 @@ import TutorialAntiSuiteView from '../TutorialViews/TutorialAntiSuiteView';
  * @extends Component
  * @memberof HubContainers
  */
-class TutorialViewContainer extends React.Component {
+class TutorialViewContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {

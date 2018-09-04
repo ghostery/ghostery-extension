@@ -47,6 +47,7 @@ html, body, #root {
 // Imports from ../hub directory
 @import '../hub/Views/HomeView/HomeView.scss';
 @import '../hub/Views/SideNavigationView/SideNavigationView.scss';
+@import '../hub/Views/CreateAccountView/AccountView.scss';
 @import '../hub/Views/SetupView/SetupView.scss';
 @import '../hub/Views/SetupViews/SetupHeader/SetupHeader.scss';
 @import '../hub/Views/SetupViews/SetupBlockingView/SetupBlockingView.scss';
@@ -58,12 +59,9 @@ html, body, #root {
 @import '../hub/Views/RewardsView/RewardsView.scss';
 @import '../hub/Views/ProductsView/ProductsView.scss';
 
-// Imports from ../hub directory for account Workflow
-@import '../hub/Views/CreateAccountView/AccountView.scss';
-
 // Imports from ../shared-components directory
+@import '../shared-components/ExitButton/ExitButton.scss';
 @import '../shared-components/Modal/Modal.scss';
 @import '../shared-components/SteppedNavigation/SteppedNavigation.scss';
 @import '../shared-components/ToggleCheckbox/ToggleCheckbox.scss';
 @import '../shared-components/ToggleSwitch/ToggleSwitch.scss';
-
