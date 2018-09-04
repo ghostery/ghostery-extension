@@ -1807,6 +1807,9 @@
 	"hub_setup_feature_products_button": {
 		"message": "Yes, please!"
 	},
+	"hub_products_page_title": {
+		"message": "Ghostery Hub - Try Other Ghostery Products"
+	},
 	"hub_products_header_title" : {
 		"message": "Browse Smarter with Ghostery Products!"
 	},
@@ -1817,7 +1820,7 @@
 		"message": "Mobile Privacy Browser"
 	},
 	"hub_products_main_promo_description": {
-		"message": "Browse ad-and tracker free with our updated mobile browser. Now equipped with a private search engine!"
+		"message": "Browse ad-and tracker free on the go with our updated and enhanced mobile browser. Now equipped with a private search engine!"
 	},
 	"hub_products_second_promo_title": {
 		"message": "Ghostery New Tab"
@@ -1863,6 +1866,9 @@
 	},
 	"hub_rewards_closer": {
 		"message": "You can turn on Ghostery Rewards in the extension through custom setup."
+	},
+	"hub_supporter_page_title": {
+		"message": "Ghostery Hub - Support Ghostery"
 	},
 	"hub_supporter_header_title": {
 		"message": "Become a Ghostery Supporter"

@@ -24,16 +24,7 @@ class SupporterView extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {
-			title: ''
-		};
-	}
-
-	/**
-	 * Lifecycle Event
-	 */
-	componentWillMount() {
-		const { title } = this.state;
+		const title = t('hub_supporter_page_title');
 		window.document.title = title;
 	}
 
@@ -42,14 +33,13 @@ class SupporterView extends Component {
 	 * @return {JSX} JSX for rendering the Supporter View of the Hub app
 	 */
 	render() {
-
 		return (
 			<div className="SupporterView full-height">
 				<div className="row">
 					<div className="columns SupporterView__header align-center">
 
 						<div className="SupporterView__headerImage row align-center">
-							<img src="/app/images/hub/supporter/GoldenGhost.png"/>
+							<img src="/app/images/hub/supporter/GoldenGhost.png" />
 						</div>
 
 						<div className="SupporterView__title row align-center">
@@ -106,10 +96,7 @@ class SupporterView extends Component {
 
 
 				<div className="SupporterView__priority SupporterView--marginTop row expanded">
-					<div className="SupporterView__priorityIcon columns">
-
-					</div>
-
+					<div className="SupporterView__priorityIcon columns" />
 					<div className="SupporterView__priorityText columns">
 
 						<div className="SupporterView__title row">

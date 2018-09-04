@@ -1,76 +1,74 @@
-.ProductsView--paddingTopBig {
-  padding-top: 80px;
-}
-.ProductsView--paddingTopMedium {
-  padding-top: 40px;
-}
-.ProductsView--paddingTopSmall {
-  padding-top: 20px;
-}
-.ProductsView--paddingTopVerySmall {
-  padding-top: 10px;
-}
+/**
+ * Products View Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
 
+// Products View
 .ProductsView {
-  background: linear-gradient(#daf4ff, #ffffff 30%) no-repeat;
-  margin-bottom: 80px;
+	padding-bottom: 80px;
+	background: linear-gradient(#daf4ff, #ffffff 30%) no-repeat;
 }
-.ProductsView__mobileScreenshots {
-  margin: 0 50px;
-  max-width: 400px;
-}
-.ProductsView__mainPromoText {
-  line-height: 38px;
-  padding-left: 50px
+.ProductsView--rowPaddingTop {
+	padding-top: 80px;
 }
 .ProductsView__headerTitle {
-  color: #00aef0;
-  font-size: 24px;
-  font-weight: 700;
+	color: #00aef0;
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 38px;
 }
 .ProductsView__headerDescription {
-  font-size: 18px;
+	font-size: 18px;
+	margin-bottom: 30px;
 }
 .ProductsView__mainPromoTitle {
-  line-height: 30px;
-  font-size: 18px;
-  font-weight: 700;
+	color: #4a4a4a;
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 30px;
 }
 .ProductsView__mainPromoDescription {
-  font-size: 14px;
-  line-height: 30px;
+	color: #4a4a4a;
+	font-size: 14px;
+	line-height: 30px;
 }
-.ProductsView__downloadIcon {
-  max-width: 160px;
-  padding: 0 30px 0 0;
+.ProductsView__mobileScreenshots {
+	max-width: 400px;
 }
-.ProductsView__smallPromo {
-  max-width: 400px;
-  align-items: center;
-  text-align: center;
-  padding: 0 60px;
-  margin: 0 20px;
+.ProductsView__storeImageContainer {
+	margin-top: 20px;
 }
-.ProductsView__smallPromoTitle {
-  text-align: center;
-  font-size: 14px;
-  line-height: 30px;
-  font-weight: 700;
+.ProductsView__imageAppStore {
+	max-width: 130px;
 }
-.ProductsView__smallPromoDescription {
-  font-size: 14px;
-  line-height: 30px;
+.ProductsView__imagePlayStore {
+	max-width: 140px;
+	margin-left: 20px;
 }
-.ProductsView__promoScreenshotNewTab {
-  max-width: 450px;
-  height: auto;
-  padding: 0 50px;
+.ProductsView__secondaryPromo {
+	padding: 0 60px;
+	text-align: center;
 }
-.ProductsView__promoScreenshotLite {
-  max-width: 510px;
-  height: auto;
-  padding: 0 50px;
+.ProductsView__secondaryPromoImage {
+	max-height: 200px;
+	margin-bottom: 15px;
 }
-.ProductsView__smallPromoDownload {
-  max-width: 130px;
+.ProductsView__secondaryPromoTitle {
+	color: #4a4a4a;
+	font-size: 14px;
+	line-height: 30px;
+	font-weight: 700;
+}
+.ProductsView__secondaryPromoDescription {
+	color: #4a4a4a;
+	font-size: 14px;
+	line-height: 30px;
 }

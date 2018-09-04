@@ -19,10 +19,9 @@ import React, { Component } from 'react';
  * @memberof HubComponents
  */
 class RewardsView extends Component {
-	/**
-	 * Lifecycle Event
-	 */
-	componentWillMount() {
+	constructor(props) {
+		super(props);
+
 		const title = t('hub_rewards_page_title');
 		window.document.title = title;
 	}

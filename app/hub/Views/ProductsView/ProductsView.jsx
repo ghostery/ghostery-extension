@@ -9,8 +9,6 @@
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
- *
- * ToDo: Update this file.
  */
 
 import React, { Component } from 'react';
@@ -21,11 +19,10 @@ import React, { Component } from 'react';
  * @memberof HubComponents
  */
 class ProductsView extends Component {
-	/**
-	 * Lifecycle Event
-	 */
-	componentWillMount() {
-		const title = t('hub_products_title');
+	constructor(props) {
+		super(props);
+
+		const title = t('hub_products_page_title');
 		window.document.title = title;
 	}
 
@@ -36,83 +33,55 @@ class ProductsView extends Component {
 	render() {
 		return (
 			<div className="ProductsView">
-				<div className="row align-center-middle ProductsView--paddingTopBig">
-
-					<div className="ProductsView__mobileScreenshots columns">
-						<img src="/app/images/hub/products/bothPhones.png" />
+				<div className="ProductsView--rowPaddingTop row align-center-middle">
+					<div className="columns text-center">
+						<img src="/app/images/hub/products/bothPhones.png" className="ProductsView__mobileScreenshots" />
 					</div>
-
-					<div className="ProductsView__mainPromoText columns">
-						<div className="ProductsView__headerTitle row">
+					<div className="columns">
+						<h1 className="ProductsView__headerTitle">
 							{t('hub_products_header_title')}
-						</div>
-						<div className="ProductsView__headerDescription row">
+						</h1>
+						<div className="ProductsView__headerDescription">
 							{t('hub_products_header_description')}
 						</div>
-
-						<div className="ProductsView__mainPromoTitle row ProductsView--paddingTopSmall" >
+						<div className="ProductsView__mainPromoTitle" >
 							{t('hub_products_main_promo_title')}
 						</div>
-						<div className="ProductsView__mainPromoDescription row " >
+						<div className="ProductsView__mainPromoDescription" >
 							{t('hub_products_main_promo_description')}
 						</div>
-
-						<div className="row ProductsView--paddingTopSmall">
-							<div className="ProductsView__downloadIcon columns">
-								<a href="https://itunes.apple.com/us/app/ghostery-privacy-browser/id472789016?mt=8" target="_blank">
-									<img src="/app/images/hub/products/appstore.png" />
-								</a>
-							</div>
-							<div className="ProductsView__downloadIcon columns">
-								<a href="https://play.google.com/store/apps/details?id=com.ghostery.android.ghostery" target="_blank">
-									<img src="/app/images/hub/products/googleplay.png" />
-								</a>
-							</div>
+						<div className="ProductsView__storeImageContainer">
+							<a href="https://itunes.apple.com/us/app/ghostery-privacy-browser/id472789016?mt=8" target="_blank" rel="noopener noreferrer">
+								<img src="/app/images/hub/products/appstore.png" className="ProductsView__imageAppStore" />
+							</a>
+							<a href="https://play.google.com/store/apps/details?id=com.ghostery.android.ghostery" target="_blank" rel="noopener noreferrer">
+								<img src="/app/images/hub/products/googleplay.png" className="ProductsView__imagePlayStore" />
+							</a>
 						</div>
 					</div>
-
-
 				</div>
-
-				<div className="ProductsView__otherPromos row align-center ProductsView--paddingTopBig">
-
-					<div className="row align-center-middle">
-							<div className="ProductsView__promoScreenshotNewTab columns">
-								<img src="/app/images/hub/products/ghosteryTab.png" />
-							</div>
-
-							<div className="ProductsView__promoScreenshotLite columns">
-								<img src="/app/images/hub/products/ghosteryLite.png" />
-							</div>
-					</div>
-
-
-					<div className="ProductsView__smallPromoText row">
-
-						<div className="ProductsView__smallPromo columns">
-							<div className="ProductsView__smallPromoTitle ProductsView--paddingTopMedium">
-								{t('hub_products_second_promo_title')}
-							</div>
-
-							<div className="ProductsView__smallPromoDescription">
-								{t('hub_products_second_promo_description')}
-							</div>
+				<div className="ProductsView--rowPaddingTop row align-center">
+					<div className="ProductsView__secondaryPromo columns">
+						<img src="/app/images/hub/products/ghosteryTab.png" className="ProductsView__secondaryPromoImage" />
+						<div className="ProductsView__secondaryPromoTitle">
+							{t('hub_products_second_promo_title')}
 						</div>
-
-						<div className="ProductsView__smallPromo columns">
-							<div className="ProductsView__smallPromoTitle ProductsView--paddingTopMedium">
-								{t('hub_products_third_promo_title')}
-							</div>
-
-							<div className="ProductsView__smallPromoDescription">
-								{t('hub_products_third_promo_description')}
-							</div>
-
-							<div className=" ProductsView--paddingTopVerySmall">
-								<a href="https://itunes.apple.com/us/app/ghostery-privacy-browser/id472789016?mt=8" target="_blank">
-									<img src="/app/images/hub/products/appstore.png" className="ProductsView__smallPromoDownload" />
-								</a>
-							</div>
+						<div className="ProductsView__secondaryPromoDescription">
+							{t('hub_products_second_promo_description')}
+						</div>
+					</div>
+					<div className="ProductsView__secondaryPromo columns">
+						<img src="/app/images/hub/products/ghosteryLite.png" className="ProductsView__secondaryPromoImage" />
+						<div className="ProductsView__secondaryPromoTitle">
+							{t('hub_products_third_promo_title')}
+						</div>
+						<div className="ProductsView__secondaryPromoDescription">
+							{t('hub_products_third_promo_description')}
+						</div>
+						<div className="ProductsView__storeImageContainer">
+							<a href="https://itunes.apple.com/us/app/ghostery-privacy-browser/id472789016?mt=8" target="_blank" rel="noopener noreferrer">
+								<img src="/app/images/hub/products/appstore.png" className="ProductsView__imageAppStore" />
+							</a>
 						</div>
 					</div>
 				</div>
