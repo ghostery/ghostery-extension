@@ -41,6 +41,8 @@ import tabInfo from './classes/TabInfo';
 import metrics from './classes/Metrics';
 import rewards from './classes/Rewards';
 import account from './classes/Account';
+import GhosteryModule from './classes/Module';
+
 // utilities
 import { allowAllwaysC2P } from './utils/click2play';
 import * as common from './utils/common';
@@ -71,6 +73,8 @@ const humanweb = cliqz.modules['human-web'];
 const { adblocker, antitracking, hpn } = cliqz.modules;
 const messageCenter = cliqz.modules['message-center'];
 const offers = cliqz.modules['offers-v2'];
+// add ghostery module to expose ghostery state to cliqz
+cliqz.modules.ghostery = new GhosteryModule();
 let OFFERS_ENABLE_SIGNAL;
 
 /**
@@ -1059,6 +1063,7 @@ function initializeDispatcher() {
 		// TODO debounce with below
 		button.update();
 		utils.flushChromeMemoryCache();
+		cliqz.modules.core.action('refreshAppState');
 	});
 	dispatcher.on('conf.save.account', () => {
 		// update PanelData
@@ -1113,6 +1118,11 @@ function initializeDispatcher() {
 		// Update PanelData with new Conf properties
 		panelData.init();
 	}, 200));
+
+	dispatcher.on('globals.save.paused_blocking', () => {
+		// update content script state when blocking is paused/unpaused
+		cliqz.modules.core.action('refreshAppState');
+	});
 }
 
 /**
