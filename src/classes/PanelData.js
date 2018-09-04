@@ -24,6 +24,7 @@ import Policy from './Policy';
 import tabInfo from './TabInfo';
 import rewards from './Rewards';
 import account from './Account';
+import dispatcher from './Dispatcher';
 import { getActiveTab, flushChromeMemoryCache } from '../utils/utils';
 import { objectEntries, log } from '../utils/common';
 
@@ -127,6 +128,7 @@ class PanelData {
 						// update button
 						button.update();
 						flushChromeMemoryCache();
+						dispatcher.trigger('globals.save.paused_blocking');
 					}, value);
 				} else {
 					// toggle blocking
@@ -137,6 +139,7 @@ class PanelData {
 				// update button
 				button.update();
 				flushChromeMemoryCache();
+				dispatcher.trigger('globals.save.paused_blocking');
 			}
 		}
 
