@@ -1,0 +1,126 @@
+/**
+ * Create Account View Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+@import './partials/_placeholders';
+@import './partials/_colors';
+
+// Create Account View
+.account-content {
+	font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: $tundora;
+	.row {
+		height: 85px;
+		margin: 30px;
+	}
+	.columns {
+		width: 343px;
+		height: 100%;
+		padding: 0 15px 0 15px;
+		&.padded {
+			padding: 0 42px 0 42px;
+		}
+		&.wide {
+			width: 427px;
+			padding: 0;
+		}
+	}
+	input {
+		width: 100%;
+		height: 41px;
+		border: solid 1px #c8c7c2;
+	  	color: $tundora;
+	}
+	.account-checkbox-container {
+		line-height: 85px;
+	}
+	.account-checkbox {
+		width: 24px;
+  		height: 24px;
+  		object-fit: contain;
+  		margin-right: 10px;	
+	}
+	.account-sign-in {
+		@extend %pointer;
+		color: $ghosty-blue;
+		text-decoration: underline;
+		height: 30px;
+		font-weght: normal;
+		line-height: 30px;
+	}
+	.account-submit {
+		@extend %pointer;
+		width: 179px;
+		line-height: 38px;
+		padding: 0 30px 0 30px;
+		font-size: 12px;
+		font-weight: 500;
+  		height: 38px;
+  		border-radius: 3px;
+  		background-color: #930194;
+  		color: $white;
+  		text-transform: uppercase;
+  		display: inline-block;
+  		float: right;
+	}
+	span.asterisk {
+		display: none;
+		font-size: 14px;
+		margin: 0;
+	}
+	p.warning {
+		margin: 0;
+		font-size: 12px;
+		line-height: 12px;
+		font-weight: 400;
+		font-style: italic;
+		color: #CC5F5A;
+		opacity: 0;
+		@include transition(opacity 0.2s, color 0.2s);
+	}
+	.panel-error {
+		span.asterisk {display: inline;}
+		p.warning {
+			opacity: 1;
+		}
+		input {
+			border-color: #e74055;
+			background-color: #FFF6F6;
+		}
+		label {
+			color: #e74055;
+		}
+	}
+}
+.create-account-result {
+	height:41px;
+	width: 686px;
+	margin: auto; 
+	position: fixed;
+	top: 80px; 
+	display: none;
+	font-size: 13px;
+	font-weight: bold;
+	line-height: 41px;
+	color: #ffffff;
+	border-radius: 4px;	
+	text-align: center;
+	&.success {
+		display: inline-block;
+		background-color: #1fce6d;
+	}
+	&.error {
+		display: inline-block;
+		background-color: #e74055;
+	}
+}
