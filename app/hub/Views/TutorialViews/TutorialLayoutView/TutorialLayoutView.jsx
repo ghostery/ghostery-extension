@@ -21,8 +21,16 @@ import React from 'react';
 const TutorialLayoutView = () => (
 	<div className="TutorialView--paddingTopSmall row align-center-middle">
 		<div className="columns small-12 medium-6">
-			<div>image 1</div>
-			<div>image 2</div>
+			<img
+				className="TutorialLayoutView__image simple"
+				src="/app/images/hub/tutorial/layout-simple.png"
+				alt={t('hub_tutorial_simple_view')}
+			/>
+			<img
+				className="TutorialLayoutView__image detailed"
+				src="/app/images/hub/tutorial/layout-detailed.png"
+				alt={t('hub_tutorial_detailed_view')}
+			/>
 		</div>
 		<div className="columns small-12 medium-4 medium-offset-1">
 			<div className="TutorialView__title">

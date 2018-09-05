@@ -24,11 +24,19 @@ const TutorialTrustView = () => (
 			<div className="TutorialView__imageTitle">
 				{t('hub_tutorial_simple_view')}
 			</div>
-			<div>image 1</div>
+			<img
+				className="TutorialTrustView__image simple"
+				src="/app/images/hub/tutorial/trustrestrict-simple.png"
+				alt={t('hub_tutorial_simple_view')}
+			/>
 			<div className="TutorialView__imageTitle">
 				{t('hub_tutorial_detailed_view')}
 			</div>
-			<div>image 2</div>
+			<img
+				className="TutorialTrustView__image detailed"
+				src="/app/images/hub/tutorial/trustrestrict-detailed.png"
+				alt={t('hub_tutorial_detailed_view')}
+			/>
 		</div>
 		<div className="columns small-12 medium-4 medium-offset-1">
 			<div className="TutorialView__title">
@@ -38,8 +46,14 @@ const TutorialTrustView = () => (
 				{t('hub_tutorial_trust_tagline')}
 			</div>
 			<div className="TutorialTrustView__key">
+				<div className="TutorialView__keyButton trust button secondary hollow">
+					{t('summary_trust_site')}
+				</div>
 				<div className="TutorialView__keyText">
 					{t('hub_tutorial_trust_trust_site')}
+				</div>
+				<div className="TutorialView__keyButton restrict button secondary hollow">
+					{t('summary_restrict_site')}
 				</div>
 				<div className="TutorialView__keyText">
 					{t('hub_tutorial_trust_restrict_site')}

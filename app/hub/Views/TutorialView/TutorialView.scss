@@ -34,7 +34,7 @@
 	color: #9b9b9b;
 	font-size: 11px;
 	font-weight: 600;
-	margin: 25px 0 5px;
+	margin-top: 25px;
 }
 .TutorialView__keyText {
 	color: #4a4a4a;
@@ -50,25 +50,88 @@
 	background-color: lightblue;
 }
 
+// Tutorial Tracker List View
+.TutorialTrackerListView__image {
+	max-width: 700px;
+}
+
 // Tutorial Blocking View
+.TutorialBlockingView__image.detailed {
+	max-width: 450px;
+}
+.TutorialBlockingView__image.detailed-expanded {
+	max-width: 450px;
+	margin-top: 10px;
+}
 .TutorialBlockingView__key {
 	margin-top: 24px;
 }
 .TutorialBlockingView__key .TutorialView__keyText {
 	padding: 14px 0 14px 54px;
 	max-width: 220px;
+	background-position: center left;
+	background-repeat: no-repeat;
+}
+.TutorialBlockingView__key .TutorialView__keyText.allow {
+	background-image: buildAllowLocalIcon(#9ecc42, #ffffff);
+}
+.TutorialBlockingView__key .TutorialView__keyText.block {
+	background-image: buildBlockLocalIcon(#e74055, #ffffff);
+}
+.TutorialBlockingView__key .TutorialView__keyText.block-global {
+	background-image: buildBlockGlobalIcon(#e74055, #ffffff);
+}
+
+// Tutorial Layout View
+.TutorialLayoutView__image.simple {
+	max-width: 350px;
+	margin-left: -6px;
+	margin-bottom: 30px;
+}
+.TutorialLayoutView__image.detailed {
+	max-width: 360px;
 }
 
 // Tutorial Trust View
+.TutorialTrustView__image.simple {
+	max-width: 350px;
+}
+.TutorialTrustView__image.detailed {
+	max-width: 400px;
+	margin-left: -50px;
+}
 .TutorialTrustView__key {
 	margin-top: 30px;
 }
+.TutorialTrustView__key .TutorialView__keyButton {
+	min-width: 125px;
+	margin: 0;
+	padding-left: 35px;
+	text-transform: none;
+	background-position: left 10px center;
+	background-repeat: no-repeat;
+	box-shadow: none;
+	cursor: text;
+}
+.TutorialTrustView__key .TutorialView__keyButton.trust {
+	background-image: buildTrustCircleIcon(#4a4a4a);
+}
+.TutorialTrustView__key .TutorialView__keyButton.restrict {
+	background-image: buildRestrictCircleIcon(#4a4a4a);
+}
 .TutorialTrustView__key .TutorialView__keyText {
-	padding: 14px 0;
+	margin: 10px 0 40px;
 	max-width: 320px;
 }
 
 // Tutorial Anti Suite View
+.TutorialAntiSuiteView__image.simple {
+	max-width: 400px;
+}
+.TutorialAntiSuiteView__image.detailed {
+	max-width: 400px;
+	margin-left: -54px;
+}
 .TutorialAntiSuiteView__key {
 	margin-top: 45px;
 }
@@ -76,10 +139,25 @@
 	padding: 20px 0;
 }
 .TutorialAntiSuiteView__key .TutorialView__keyImage {
-	background-color: #1dafed;
 	height: 50px;
 	min-width: 50px;
+	max-width: 50px;
 	margin-right: 25px;
+	border-radius: 50%;
+	border: 2px solid #1dafed;
+	background-repeat: no-repeat;
+}
+.TutorialAntiSuiteView__key .TutorialView__keyImage.anti-track {
+	background-image: buildAntiTrackingIcon(#1dafed);
+	background-position: left 11.5px top 6px;
+}
+.TutorialAntiSuiteView__key .TutorialView__keyImage.ad-block {
+	background-image: buildAdBlockIcon(#1dafed);
+	background-position: left 11.5px top 4px;
+}
+.TutorialAntiSuiteView__key .TutorialView__keyImage.smart-block {
+	background-image: buildSmartBlockingIcon(#1dafed);
+	background-position: left 13.5px top 2px;
 }
 .TutorialAntiSuiteView__key .TutorialView__keyTitle {
 	color: #1dafed;

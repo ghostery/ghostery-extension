@@ -25,20 +25,28 @@ const TutorialAntiSuiteView = () => (
 			<div className="TutorialView__imageTitle">
 				{t('hub_tutorial_simple_view')}
 			</div>
-			<div>image 1</div>
+			<img
+				className="TutorialAntiSuiteView__image simple"
+				src="/app/images/hub/tutorial/antisuite-simple.png"
+				alt={t('hub_tutorial_simple_view')}
+			/>
 			<div className="TutorialView__imageTitle">
 				{t('hub_tutorial_detailed_view')}
 			</div>
-			<div>image 2</div>
+			<img
+				className="TutorialAntiSuiteView__image detailed"
+				src="/app/images/hub/tutorial/antisuite-detailed.png"
+				alt={t('hub_tutorial_detailed_view')}
+			/>
 		</div>
-		<div className="columns small-12 medium-4 medium-offsert-1">
+		<div className="columns small-12 medium-4 medium-offset-1">
 			<div className="TutorialView__title">
 				{t('hub_tutorial_antisuite_title')}
 			</div>
 
 			<div className="TutorialAntiSuiteView__key">
 				<div className="TutorialView__keyItem flex-container align-middle">
-					<div className="TutorialView__keyImage">image</div>
+					<div className="TutorialView__keyImage anti-track" />
 					<div>
 						<div className="TutorialView__keyTitle">
 							{t('hub_tutorial_antisuite_antitracking_title')}
@@ -49,7 +57,7 @@ const TutorialAntiSuiteView = () => (
 					</div>
 				</div>
 				<div className="TutorialView__keyItem flex-container align-middle">
-					<div className="TutorialView__keyImage">image</div>
+					<div className="TutorialView__keyImage ad-block" />
 					<div>
 						<div className="TutorialView__keyTitle">
 							{t('hub_tutorial_antisuite_adblocking_title')}
@@ -60,7 +68,7 @@ const TutorialAntiSuiteView = () => (
 					</div>
 				</div>
 				<div className="TutorialView__keyItem flex-container align-middle">
-					<div className="TutorialView__keyImage">image</div>
+					<div className="TutorialView__keyImage smart-block" />
 					<div>
 						<div className="TutorialView__keyTitle">
 							{t('hub_tutorial_antisuite_smartblocking_title')}

@@ -24,11 +24,19 @@ const TutorialBlockingView = () => (
 			<div className="TutorialView__imageTitle">
 				{t('hub_tutorial_detailed_view')}
 			</div>
-			<div>image 1</div>
+			<img
+				className="TutorialBlockingView__image detailed"
+				src="/app/images/hub/tutorial/blocking-detailed.png"
+				alt={t('hub_tutorial_detailed_view')}
+			/>
 			<div className="TutorialView__imageTitle">
 				{t('hub_tutorial_detailed_expanded_view')}
 			</div>
-			<div>image 2</div>
+			<img
+				className="TutorialBlockingView__image detailed-expanded"
+				src="/app/images/hub/tutorial/blocking-detailed-expanded.png"
+				alt={t('hub_tutorial_detailed_expanded_view')}
+			/>
 		</div>
 		<div className="columns small-12 medium-4 medium-offset-1">
 			<div className="TutorialView__title">

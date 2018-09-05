@@ -68,12 +68,12 @@ class TutorialViewContainer extends React.Component {
 			{
 				index: 3,
 				path: '/tutorial/3',
-				bodyComponent: TutorialLayoutView,
+				bodyComponent: TutorialBlockingView,
 			},
 			{
 				index: 4,
 				path: '/tutorial/4',
-				bodyComponent: TutorialBlockingView,
+				bodyComponent: TutorialLayoutView,
 			},
 			{
 				index: 5,
