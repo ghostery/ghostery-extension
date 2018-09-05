@@ -689,6 +689,8 @@ function onMessageHandler(request, sender, callback) {
 		panelData.set(message);
 		callback();
 		return false;
+	} else if (name === 'adblockToggle') {
+		cliqz.modules.adblocker.background.actions.toggleUrl(message.url, message.isDomain);
 	} else if (name === 'getAndroidPanelData') {
 		utils.getActiveTab((tab) => {
 			// we are pushing all the possible data for now
@@ -712,7 +714,10 @@ function onMessageHandler(request, sender, callback) {
 			button.update();
 			if (conf.enable_ad_block) {
 				// update adblock count. callback() handled below based on anti-tracking status
+				const whitelist = cliqz.modules.adblocker.background.adb.urlWhitelist.getState(tab.url);
 				modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tab.id);
+				modules.adblock.disabledForDomain = whitelist.hostname;
+				modules.adblock.disabledForUrl = whitelist.url;
 			}
 			if (conf.enable_anti_tracking) {
 				cliqz.modules.antitracking.background.actions.aggregatedBlockingStats(tab.id).then((data) => {
