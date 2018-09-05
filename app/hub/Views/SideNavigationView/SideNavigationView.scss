@@ -1,5 +1,5 @@
 /**
- * Ghostery Hub - Side Navigation Sass
+ * Side Navigation View Sass
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -15,9 +15,9 @@
 .SideNavigation {
 	position: fixed;
 	height: 100%;
-	overflow-y: scroll;
 	min-width: 230px;
 	max-width: 230px;
+	overflow-y: auto;
 	background-color: #5d7d85;
 }
 .SideNavigation__top {
@@ -32,6 +32,7 @@
 	padding-bottom: 48px;
 }
 .SideNavigation__bottom {
+	min-height: 82px;
 	padding-bottom: 26px;
 }
 .SideNavigation__item {
@@ -47,7 +48,7 @@
 	min-height: 80px;
 }
 .SideNavigation__bottomItem {
-	min-height: 30px;
+	min-height: 28px;
 	padding-left: 20px;
 }
 .SideNavigation__item a {
@@ -66,6 +67,7 @@
 .SideNavigation__item a.active::before {
 	content: '';
 	position: absolute;
+	top: 0;
 	right: 0;
 	height: 0;
 	width: 0;
@@ -76,6 +78,7 @@
 .SideNavigation__item a.active::after {
 	content: '';
 	position: absolute;
+	bottom: 0;
 	right: 0;
 	height: 0;
 	width: 0;
@@ -83,17 +86,11 @@
 	border-width: 0 30px 40px 0;
 	border-color: transparent #ffffff transparent transparent;
 }
-.SideNavigation__menuItem a.active::before {
-	top: 0;
-}
-.SideNavigation__menuItem a.active::after {
-	bottom: 0;
-}
 .SideNavigation__bottomItem a.active::before {
-	top: -25px;
+	top: -26px;
 }
 .SideNavigation__bottomItem a.active::after {
-	bottom: -25px;
+	bottom: -26px;
 }
 .SideNavigation__menuIcon {
 	min-width: 55px;

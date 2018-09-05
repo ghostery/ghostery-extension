@@ -1,5 +1,5 @@
 /**
- * Custom Home Constants
+ * Home Constants
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/

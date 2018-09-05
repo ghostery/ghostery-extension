@@ -13,7 +13,6 @@
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { withRouter } from 'react-router-dom';
 
 import SetupBlockingDropdownContainer from './SetupBlockingDropdownContainer';
 import * as SettingsActions from '../../../../panel/actions/SettingsActions';
@@ -36,4 +35,4 @@ const mapDispatchToProps = dispatch => ({
 	actions: bindActionCreators(SettingsActions, dispatch),
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SetupBlockingDropdownContainer));
+export default connect(mapStateToProps, mapDispatchToProps)(SetupBlockingDropdownContainer);

@@ -13,7 +13,6 @@
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { withRouter } from 'react-router-dom';
 
 import SetupBlockingViewContainer from './SetupBlockingViewContainer';
 import * as SetupBlockingViewActions from './SetupBlockingViewActions';
@@ -39,4 +38,4 @@ const mapDispatchToProps = dispatch => ({
 	}), dispatch),
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SetupBlockingViewContainer));
+export default connect(mapStateToProps, mapDispatchToProps)(SetupBlockingViewContainer);

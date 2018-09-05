@@ -38,10 +38,16 @@ class SideNavigationViewContainer extends Component {
 		};
 	}
 
+	/**
+	 * React's required render function. Returns JSX
+	 * @return {JSX} JSX for rendering the Side Navigation View of the Hub app
+	 */
 	render() {
 		const { menuItems, bottomItems } = this.state;
 		return <SideNavigationView menuItems={menuItems} bottomItems={bottomItems} />;
 	}
 }
+
+// No need for PropTypes. The SideNavigationViewContainer has no props.
 
 export default SideNavigationViewContainer;

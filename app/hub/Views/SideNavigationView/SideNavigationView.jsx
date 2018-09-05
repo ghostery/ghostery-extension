@@ -15,6 +15,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
+/**
+ * A Functional React component for rendering the Side Navigation View
+ * @return {JSX} JSX for rendering the Side Navigation View of the Hub app
+ * @memberof HubComponents
+ */
 const SideNavigationView = (props) => {
 	const { menuItems, bottomItems } = props;
 

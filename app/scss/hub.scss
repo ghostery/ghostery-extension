@@ -21,8 +21,8 @@ html, body, #root {
 	position: fixed;
 }
 .App__mainContent {
-	overflow-y: scroll;
 	margin-left: 230px;
+	overflow-y: auto;
 }
 
 // Foundation Overrides

@@ -52,4 +52,6 @@ const TutorialBlockingView = () => (
 	</div>
 );
 
+// No need for PropTypes. The SideNavigationViewContainer has no props.
+
 export default TutorialBlockingView;

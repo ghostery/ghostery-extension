@@ -34,4 +34,6 @@ const TutorialVideoView = () => (
 	</div>
 );
 
+// No need for PropTypes. The SideNavigationViewContainer has no props.
+
 export default TutorialVideoView;

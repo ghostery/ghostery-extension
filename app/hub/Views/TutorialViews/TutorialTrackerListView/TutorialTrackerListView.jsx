@@ -34,4 +34,6 @@ const TutorialTrackerListView = () => (
 	</div>
 );
 
+// No need for PropTypes. The SideNavigationViewContainer has no props.
+
 export default TutorialTrackerListView;
