@@ -1,40 +1,80 @@
-.SupporterView {
-  // position: absolute;
-  // width: 100%;
+.SupporterView--centeredText {
+  text-align: center;
 }
 .SupporterView--paddingTop {
   padding-top: 80px;
 }
+.SupporterView--paddingTopSmall {
+  padding-top: 40px;
+}
 .SupporterView--marginTop {
   margin-top: 80px;
 }
+.SupporterView {
+  margin-bottom: 80px;
+}
 .SupporterView__headerImage {
   max-width: 100%;
-  height: 300px;
+  height: 195px;
+  margin-right: 30px;
+  background: buildIconGoldenGhost(#000000) no-repeat center center;
 }
 .SupporterView__title {
-  text-align: center;
+  margin-top: 40px;
   line-height: 38px;
 	font-size: 24px;
 	font-weight: 700;
 }
 .SupporterView__description {
-  text-align: center;
-  line-height: 38px;
+  line-height: 30px;
 	font-size: 14px;
+}
+.SupporterView__priceTag {
+  font-size: 64px;
+  font-weight: 500;
+  margin: 0 10px 0 50px;
+}
+sup {
+  position: relative;
+  bottom:0.9em;
+  font-size: 30px;
+}
+.SupporterView__priceTagFrequency {
+  color: #9b9b9b;
+  font-size: 14px;
+}
+.SupporterView__perkIconThemes {
+  width: 100%;
+  height: 100px;
+  background: buildIconThemesPerk(#9ECC42) no-repeat center center;
+}
+.SupporterView__perkIconPriority {
+  width: 100%;
+  height: 100px;
+  background: buildIconPriorityPerk(#9ECC42) no-repeat center center;
+}
+.SupporterView__perkIconMore {
+  width: 100%;
+  height: 100px;
+  background: buildIconMorePerk(#9ECC42) no-repeat center center;
 }
 .SupporterView__perkFeature {
 	margin: 0 50px;
 	font-size: 14px;
 	max-width: 250px;
+  text-align: center;
 }
 .SupporterView__perkTitle {
 	line-height: 38px;
 	font-weight: 700;
-	text-align: center;
+}
+.SupporterView__perkDescription {
+  line-height: 30px;
 }
 .SupporterView__manifesto {
-  background: radial-gradient(#ecd868, #d4af37);
+  background: linear-gradient(246deg, #ecd868, #d4af37);
+  width: 100%;
+  height: auto;
 }
 .SupporterView__manifestoText {
   color: #ffffff;
@@ -45,35 +85,55 @@
   text-align: center;
   max-width: 700px;
 }
-.SupporterView__themes {
-
-}
 .SupporterView__themesText {
-  margin: 0 50px;
-  line-height: 38px;
   max-width: 300px;
-}
-.SupporterView__themesDescription {
-  font-size: 14px;
+  margin:50px;
 }
 .SupporterView__themesScreenshots {
-  margin: 0 50px;
-  background: buildSupporterScreenshots(#4a4a4a) no-repeat;
-  height: 415px;
+  max-width: 85%;
 }
-
-
-
+.button {
+  margin-top: 10px;
+  background: linear-gradient(256deg, #9ecc42, #429321);
+  border: none;
+  width: 170px;
+  height: 34px;
+  text-transform: none;
+}
+.button:hover {
+  background-color: #429321;
+}
 .SupporterView__priority {
   background-color: #f7f7f7;
-
-}
-.SupporterView__priorityIcon {
-  background-image: url('/app/images/hub/supporter/priority.png');
-}
-.SupporterView__priorityText {
   padding: 50px;
 }
-.SupporterView__priorityDescription {
-
+.SupporterView__priorityIcon {
+  background: buildIconPriority(#000000) no-repeat center center;
+  width: 273px;
+  height: 100%;
+  margin: 0 60px;
+}
+.SupporterView__priorityText {
+  max-width: 300px;
+  margin: 0 60px;
+}
+.SupporterView__manyMoreIcon {
+  background: buildIconManyMore(#000000) no-repeat center center;
+  width: 100%;
+  height: 200px;
+}
+.SupporterView__manyMoreText {
+  max-width: 430px;
+}
+.SupporterView__footer {
+  margin-bottom: 80px;
+}
+.SupporterView__buttonContainer {
+  max-width: 200px;
+  margin: 0 50px;
+}
+.SupporterView__footerLine {
+  max-width: 20vw;
+  height: 1px;
+  border: solid 0.5px #9b9b9b;
 }

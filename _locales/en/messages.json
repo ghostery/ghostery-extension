@@ -1871,13 +1871,22 @@
 		"message": "Show your support and unlock special perks!"
 	},
 	"hub_supporter_perk_themes_title": {
-		"message": "New Color Themes"
+		"message": "New Themes"
+	},
+	"hub_supporter_perk_themes_description": {
+		"message": "Customize the Ghostery colors - try our Midnight theme!"
 	},
 	"hub_supporter_perk_priority_title": {
 		"message": "Priority Support"
 	},
+	"hub_supporter_perk_priority_description": {
+		"message": "Resolve issues fast with our Priority help desk service"
+	},
 	"hub_supporter_perk_more_title": {
-		"message": "And Many More..."
+		"message": "...and More!"
+	},
+	"hub_supporter_perk_more_description": {
+		"message": "Stay tuned for cool features to come"
 	},
 	"hub_supporter_manifesto": {
 		"message": "We at Ghostery strive to deliver the best privacy protection services to our users free of cost. While we do not charge for our privacy suite, you may choose to support us through a small monthly subscription. Join us in our mission by becoming a Supporter - and unlock some cool perks along the way!"
@@ -1886,13 +1895,22 @@
 		"message": "New Themes"
 	},
 	"hub_supporter_themes_description": {
-		"message": "Customize the Ghostery colors for a new visual experience! Check out our special Midnight theme, and more to come."
+		"message": "Customize the Ghostery colors for a new visual experience! Introduced through popular request. Check out our special Midnight theme, and more to come."
 	},
 	"hub_supporter_priority_title": {
 		"message": "Priority Support"
 	},
 	"hub_supporter_priority_description": {
-		"message": "Have your questions answered and issues resolved fast with our Priority form, accessible when signed in with a Supporter account."
+		"message": "Need assistance? Find a broken page? Have your questions answered and issues resolved fast with our Priority help desk service, accessible only when signed in with a Supporter account."
+	},
+	"hub_supporter_button_text": {
+		"message": "Become a Supporter"
+	},
+	"hub_supporter_more_title": {
+		"message": "..and More!"
+	},
+	"hub_supporter_more_description": {
+		"message": "Stay tuned for other cool features and insights as we continue to make your Ghostery experience enjoyable."
 	},
 	"enable_when_paused": {
 		"message": "To use this function, Resume Ghostery."
