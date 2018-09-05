@@ -29,6 +29,7 @@ const mapStateToProps = state => Object.assign({}, state.account, {
 	theme: state.panel.theme,
 	currentTheme: state.panel.currentTheme,
 	subscriber: state.panel.subscriber,
+	language: state.panel.language,
 });
 /**
  * Bind Subscription view component action creators using Redux's bindActionCreators

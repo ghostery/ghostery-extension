@@ -934,6 +934,25 @@ function onMessageHandler(request, sender, callback) {
 				callback({ errors: _getJSONAPIErrorsObject(err) });
 			});
 		return true;
+	} else if (name === 'account.openSupporterPage') {
+		let tabUrl;
+		const langToken = conf.language.toLowerCase().replace('_', '-');
+		if (conf.account && conf.account.user) {
+			if (conf.account.user.subscriptionsSupporter) {
+				tabUrl = `https://account.${globals.GHOSTERY_DOMAIN}.com/${langToken}/subscription`;
+			} else {
+				tabUrl = `https://signon.${globals.GHOSTERY_DOMAIN}.com/${langToken}/subscribe`;
+			}
+		} else {
+			tabUrl = `https://signon.${globals.GHOSTERY_DOMAIN}.com/${langToken}/subscribe`;
+		}
+		utils.openNewTab({ url: tabUrl, become_active: true });
+		return true;
+	} else if (name === 'account.openSupportPage') {
+		const langToken = conf.language.toLowerCase().replace('_', '-');
+		const tabUrl = `https://account.${globals.GHOSTERY_DOMAIN}.com/${langToken}/support`;
+		utils.openNewTab({ url: tabUrl, become_active: true });
+		return true;
 	} else if (name === 'account.resetPassword') {
 		const { email } = message;
 		account.resetPassword(email)

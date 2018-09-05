@@ -11,8 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import globals from '../../../src/classes/Globals';
+import { openSupporterPage } from '../utils/msg';
 /**
  * Render Subscribe panel.
  * @return {ReactComponent}   ReactComponent instance
@@ -23,15 +22,15 @@ function Subscribe() {
 			<div className="badge" />
 			<div className="pitch-container">
 				<span className="pitch-text">{t('subscribe_pitch')}</span>
-				<a href="https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/" target="_blank" rel="noopener noreferrer">
+				<a href="https://www.ghostery.com/supporter/" target="_blank" rel="noopener noreferrer">
 					<span className="pitch-learn-more">{t('subscribe_pitch_learn_more')}</span>
 				</a>
-				<a href={`https:\/\/account.${globals.GHOSTERY_DOMAIN}.com/en/subscription`} target="_blank" rel="noopener noreferrer">
-					<span className="pitch-become-subscriber">{t('subscribe_pitch_button_label')}</span>
-				</a>
+				<span className="pitch-become-subscriber" onClick={openSupporterPage}>{t('subscribe_pitch_button_label')}</span>
+				{/*
 				<NavLink to="/login">
 					<span className="pitch-already-subscriber">{t('subscribe_pitch_sign_here')}</span>
 				</NavLink>
+			*/}
 			</div>
 		</div>
 	);

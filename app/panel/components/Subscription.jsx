@@ -30,7 +30,7 @@ class Subscription extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isChecked: (props.currentTheme !== 'default')
+			isChecked: (props.currentTheme !== 'default'),
 		};
 	}
 
@@ -39,7 +39,6 @@ class Subscription extends React.Component {
 	 */
 	componentDidMount() {
 		this.props.history.push('/subscription/info');
-
 		this.props.actions.getUserSubscriptionData();
 	}
 
@@ -54,15 +53,23 @@ class Subscription extends React.Component {
 	parseSubscriptionData = () => {
 		const sd = this.props.subscriptionData;
 		if (sd) {
-			const { status, cancelAtPeriodEnd, currentPeriodEnd } = sd;
-			moment.locale(this.props.language).toLowerCase().replace('_', '-');
+			const languageToken = this.props.language.toLowerCase().replace('_', '-');
+			moment.locale(languageToken);
+			const {
+				planAmount, planCurrency, planInterval, currentPeriodEnd, cancelAtPeriodEnd, status
+			} = sd;
+			const plan_amount = Math.floor(planAmount / 100);
+			const plan_ends = cancelAtPeriodEnd ? moment.duration(moment.unix(currentPeriodEnd).diff(moment(new Date()))).days() : '';
 			return {
+				plan_amount: new Intl.NumberFormat(languageToken, { style: 'currency', currency: planCurrency }).format(plan_amount),
+				plan_interval: planInterval,
 				active: (status === 'active'),
 				charge_date: moment.unix(currentPeriodEnd).format('MMMM Do, YYYY'),
-				auto_renewal: !cancelAtPeriodEnd,
+				plan_ends,
+				loading: false,
 			};
 		}
-		return {};
+		return { loading: true };
 	}
 
 	toggleThemes = () => {
