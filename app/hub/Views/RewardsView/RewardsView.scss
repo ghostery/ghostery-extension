@@ -1,8 +1,19 @@
+/**
+ * Rewards View Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+// Rewards View
 .RewardsView {
-	background:
-		buildBackgroundLeft(#d4af37) no-repeat left -170px bottom,
-		buildBackgroundRight(#d4af37) no-repeat right bottom,
-		linear-gradient(#daf4ff, #ffffff 30%) no-repeat;
+	background: linear-gradient(#daf4ff, #ffffff 30%) no-repeat;
 }
 .RewardsView--paddingTop {
 	padding-top: 80px;
@@ -58,6 +69,12 @@
 }
 .RewardsView__starIcon {
 	background-image: buildIconStar(#4a4a4a, #daf4ff);
+}
+.RewardsView__backgroundStars {
+	padding-bottom: 60px;
+	background:
+		url('/app/images/hub/rewards/background-stars-left.svg') no-repeat left 70px top 20px,
+		url('/app/images/hub/rewards/background-stars-right.svg') no-repeat right 70px top 50px;
 }
 .RewardsView__closerText {
 	font-size: 14px;
