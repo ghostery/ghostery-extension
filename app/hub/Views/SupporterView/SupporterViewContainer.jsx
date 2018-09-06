@@ -48,7 +48,7 @@ SupporterViewContainer.propTypes = {
 	}).isRequired,
 };
 
-// Default props used throughout the Setup flow
+// Default props used in the Supporter View
 SupporterViewContainer.defaultProps = {
 	user: {
 		subscriptionsSupporter: false,
