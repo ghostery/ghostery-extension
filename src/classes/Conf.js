@@ -33,7 +33,7 @@ import metrics from './Metrics';
 import globals from './Globals';
 
 const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
-const { IS_CLIQZ, IS_GHOSTERY_MOBILE } = globals;
+const { IS_CLIQZ, IS_MOBILE_APP } = globals;
 
 /**
  * Proxy Handler
@@ -67,7 +67,7 @@ const handler = {
 			}
 		}
 
-		if (IS_GHOSTERY_MOBILE) {
+		if (IS_MOBILE_APP) {
 			if (key === 'enable_offers') {
 				value = false;
 			}
