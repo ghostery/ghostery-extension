@@ -11,8 +11,9 @@ exports[`app/hub/Views/ProductsView component Snapshot tests with react-test-ren
       className="columns text-center"
     >
       <img
+        alt="hub_products_main_promo_title"
         className="ProductsView__mobileScreenshots"
-        src="/app/images/hub/products/bothPhones.png"
+        src="/app/images/hub/products/product-mobile-browser.png"
       />
     </div>
     <div
@@ -48,7 +49,7 @@ exports[`app/hub/Views/ProductsView component Snapshot tests with react-test-ren
         >
           <img
             className="ProductsView__imageAppStore"
-            src="/app/images/hub/products/appstore.png"
+            src="/app/images/hub/products/appstore-icon.png"
           />
         </a>
         <a
@@ -58,7 +59,7 @@ exports[`app/hub/Views/ProductsView component Snapshot tests with react-test-ren
         >
           <img
             className="ProductsView__imagePlayStore"
-            src="/app/images/hub/products/googleplay.png"
+            src="/app/images/hub/products/googleplay-icon.png"
           />
         </a>
       </div>
@@ -71,8 +72,9 @@ exports[`app/hub/Views/ProductsView component Snapshot tests with react-test-ren
       className="ProductsView__secondaryPromo columns"
     >
       <img
+        alt="hub_products_second_promo_title"
         className="ProductsView__secondaryPromoImage"
-        src="/app/images/hub/products/ghosteryTab.png"
+        src="/app/images/hub/products/product-new-tab.png"
       />
       <div
         className="ProductsView__secondaryPromoTitle"
@@ -89,8 +91,9 @@ exports[`app/hub/Views/ProductsView component Snapshot tests with react-test-ren
       className="ProductsView__secondaryPromo columns"
     >
       <img
+        alt="hub_products_third_promo_title"
         className="ProductsView__secondaryPromoImage"
-        src="/app/images/hub/products/ghosteryLite.png"
+        src="/app/images/hub/products/product-ghostery-lite.png"
       />
       <div
         className="ProductsView__secondaryPromoTitle"
@@ -112,7 +115,7 @@ exports[`app/hub/Views/ProductsView component Snapshot tests with react-test-ren
         >
           <img
             className="ProductsView__imageAppStore"
-            src="/app/images/hub/products/appstore.png"
+            src="/app/images/hub/products/appstore-icon.png"
           />
         </a>
       </div>
