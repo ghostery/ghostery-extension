@@ -31,9 +31,10 @@
 .SupporterView__button {
 	min-width: 180px;
 	margin-bottom: 0;
-	border-top-color: transparent;
+	line-height: 20.2px;
+	border-top: none;
+	border-bottom: none;
 	border-right-color: #9ecc42;
-	border-bottom-color: transparent;
 	border-left-color: #429321;
 	background: linear-gradient(to right, #429321,  #9ecc42);
 }
@@ -41,6 +42,7 @@
 .SupporterView__button.disabled:hover {
 	background: #154700;
 	border: 1px solid #154700;
+	line-height: 18.2px;
 }
 .SupporterView__headeingImage {
 	height: 195px;
