@@ -24,6 +24,7 @@ function HomeViewReducer(state = initialState, action) {
 				enable_metrics,
 				account_text,
 				account_link,
+				email,
 			} = action.data;
 			return Object.assign({}, state, {
 				home: Object.assign({}, state.home, {
@@ -32,6 +33,7 @@ function HomeViewReducer(state = initialState, action) {
 					enable_metrics,
 					account_text,
 					account_link,
+					email,
 				}),
 			});
 		}

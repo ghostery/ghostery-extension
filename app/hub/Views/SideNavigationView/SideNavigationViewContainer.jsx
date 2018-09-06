@@ -13,6 +13,7 @@
 
 import React, { Component } from 'react';
 import SideNavigationView from './SideNavigationView';
+import { sendMessage } from '../../utils';
 
 /**
  * @class Implement the Side Navigation View for the Ghostery Hub
@@ -31,16 +32,44 @@ class SideNavigationViewContainer extends Component {
 				{ href: '/rewards', icon: 'rewards', text: 'Try Ghostery Rewards' },
 				{ href: '/products', icon: 'products', text: 'See More Ghostery Products' },
 			],
-			bottomItems: [
-				{ href: '/create-account', text: 'Create Account' },
-				{ href: '/log-in', text: 'Sign In' },
-			],
 		};
 	}
 
+	openUserProfile = () => {
+		sendMessage('OPEN_USER_PROFILE');
+	}
+
+	logout = () => {
+		this.props.actions.logout();
+	}
+
 	render() {
-		const { menuItems, bottomItems } = this.state;
-		return <SideNavigationView menuItems={menuItems} bottomItems={bottomItems} />;
+		const { user } = this.props;
+
+		const bottomItems = user ?
+			[
+				{
+					id: 'email',
+					text: user.email,
+					clickHandler: this.openUserProfile,
+				},
+				{
+					id: 'logout',
+					text: 'Sign Out',
+					clickHandler: this.logout,
+				}
+			] : [
+				{
+					href: '/create-account',
+					text: 'Create Account',
+				},
+				{
+					href: '/log-in',
+					text: 'Sign In',
+				}
+			];
+		const { menuItems } = this.state;
+		return <SideNavigationView menuItems={menuItems} bottomItems={bottomItems} user={user} />;
 	}
 }
 

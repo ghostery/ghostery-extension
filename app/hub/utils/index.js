@@ -14,10 +14,14 @@
 
 // Imports utilities from elsewhere in the codebase to reduce duplicate code
 import { log } from '../../../src/utils/common';
-import { sendMessageInPromise as importedSMIP } from '../../panel/utils/msg';
+import { sendMessageInPromise as importedSMIP, sendMessage as importedSM } from '../../panel/utils/msg';
 
 const sendMessageInPromise = function (name, message) {
 	return importedSMIP(name, message, 'ghostery-hub');
 };
 
-export { log, sendMessageInPromise };
+const sendMessage = function (name, message) {
+	return importedSM(name, message, null, 'ghostery-hub');
+};
+
+export { log, sendMessageInPromise, sendMessage };

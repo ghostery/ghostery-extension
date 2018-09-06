@@ -1,5 +1,5 @@
 /**
- * Custom Home Constants
+ * App View Constants
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -11,7 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-// Home View
-export const GET_HOME_PROPS = 'GET_HOME_PROPS';
-export const SET_METRICS = 'SET_METRICS';
+// App View
+export const CLEAR_LOGIN_PARAMS = 'CLEAR_LOGIN_PARAMS';
 

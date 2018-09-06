@@ -12,15 +12,10 @@
  */
 
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
 import RSVP from 'rsvp';
-import ClassNames from 'classnames';
 import { validateEmail, validatePassword, validateConfirmEmail } from '../../../panel/utils/utils';
 import { sendMessage } from '../../../panel/utils/msg';
-import { ExitButton } from '../../../shared-components';
-
-// Components
-import SetupHeader from '../SetupViews/SetupHeader';
+import CreateAccountView from './CreateAccountView';
 
 /**
  * @class Implement the Create Account View for the Ghostery Hub
@@ -119,17 +114,18 @@ class CreateAccountViewContainer extends Component {
 										if (promotionsChecked) {
 											sendMessage('account.promotions', true);
 										}
+										this.props.history.push('/');
+										resolve();
 									});
 								} else {
 									reject();
 								}
-								resolve();
+								reject();
 							})
 							.catch(() => {
 								this.setState({
 									createAccountErrorText: t('create_account_error'),
 								});
-
 								resolve();
 							});
 					})
@@ -145,156 +141,15 @@ class CreateAccountViewContainer extends Component {
 
 	/**
 	 * React's required render function. Returns JSX
-	 * @return {JSX} JSX for rendering the Create Account View of the Hub app
+	 * @return {JSX} JSX for rendering the Log In View of the Hub app
 	 */
 	render() {
-		const {
-			email, confirmEmail, firstName, lastName, password, emailError, confirmEmailError,
-			passwordInvalidError, passwordLengthError, createAccountErrorText, createAccountSuccess, promotionsChecked
-		} = this.state;
-		const createAccountAlert = ClassNames({
-			'create-account-result': true,
-			success: createAccountSuccess || false,
-			error: !!createAccountErrorText || false
+		const childProps = Object.assign({}, this.state, {
+			handleInputChange: this.handleInputChange,
+			handleCheckboxChange: this.handleCheckboxChange,
+			handleSubmit: this.handleSubmit
 		});
-		const CheckboxImagePath = promotionsChecked ? '/app/images/hub/account/account-checkbox-on.svg' : '/app/images/hub/account/account-checkbox-off.svg';
-		return (
-			<div className="full-height flex-container flex-dir-column">
-				<div className="flex-child-grow">
-					<div>
-						<ExitButton hrefExit="/" textExit={t('exit_create_account')} />
-						<SetupHeader
-							title={t('setup_create_account')}
-							titleImage="/app/images/hub/account/ghosty-account.svg"
-						/>
-						<div className="row align-center account-content">
-							<div className={createAccountAlert}>
-								{createAccountErrorText || (createAccountSuccess ? 'Account Created' : '')}
-							</div>
-							<form onSubmit={this.handleSubmit}>
-								<div className="CreateAccount">
-									<div className="row">
-										<div className="columns">
-											<div className={(emailError ? 'panel-error' : '')}>
-												<label htmlFor="create-account-email" className="flex-container flex-dir-column">
-													<div className="flex-child-grow flex-container align-left-middle">{ t('email_field_label') }<span className="asterisk">*</span></div>
-													<input
-														onChange={this.handleInputChange}
-														value={email}
-														id="create-input-email"
-														name="email"
-														pattern=".{1,}"
-														autoComplete="off"
-														required
-														type="text"
-													/>
-												</label>
-												<p className="warning">{ t('invalid_email_create') }</p>
-											</div>
-										</div>
-										<div className="columns">
-											<div className={(confirmEmailError ? 'panel-error' : '')}>
-												<label htmlFor="create-input-email-confirm" className="flex-container flex-dir-column">
-													<div className="flex-child-grow flex-container align-left-middle">{ t('email_confirm_field_label') }<span className="asterisk">*</span></div>
-													<input
-														onChange={this.handleInputChange}
-														value={confirmEmail}
-														id="create-input-email-confirm"
-														name="confirmEmail"
-														pattern=".{1,}"
-														autoComplete="off"
-														required
-														type="text"
-													/>
-												</label>
-												<p className="warning">{ t('invalid_email_confirmation') }</p>
-											</div>
-										</div>
-									</div>
-									<div className="row" >
-										<div className="columns">
-											<div>
-												<label htmlFor="ccreate-input-first-name" className="flex-container flex-dir-column">
-													<div className="flex-child-grow flex-container align-left-middle">{ t('first_name_field_label') }</div>
-													<input
-														onChange={this.handleInputChange}
-														value={firstName}
-														id="create-input-first-name"
-														name="firstName"
-														pattern=".{1,}"
-														type="text"
-													/>
-												</label>
-											</div>
-										</div>
-										<div className="columns">
-											<div>
-												<label htmlFor="create-input-last-name" className="flex-container flex-dir-column">
-													<div className="flex-child-grow flex-container align-left-middle">{ t('last_name_field_label') }</div>
-													<input
-														onChange={this.handleInputChange}
-														value={lastName}
-														id="create-input-last-name"
-														name="lastName"
-														pattern=".{1,}"
-														type="text"
-													/>
-												</label>
-											</div>
-										</div>
-									</div>
-									<div className="row">
-										<div className="columns">
-											<div className={(passwordInvalidError || passwordLengthError ? 'panel-error' : '')}>
-												<label htmlFor="create-account-password" className="flex-container flex-dir-column">
-													<div className="flex-child-grow flex-container align-left-middle">{ t('create_password_field_label') }<span className="asterisk">*</span></div>
-													<input
-														onChange={this.handleInputChange}
-														value={password}
-														className="create-account-input"
-														id="create-account-password"
-														name="password"
-														pattern=".{1,}"
-														required
-														type="password"
-													/>
-												</label>
-												<p className="warning">
-													<span className={(passwordLengthError ? 'panel-error show' : '')}>
-														{ t('password_requirements') }
-													</span>
-													<span className={(passwordInvalidError ? 'panel-error show' : '')}>
-														{ t('password_characters_requirements') }
-													</span>
-												</p>
-											</div>
-										</div>
-										<div>
-											<span className="account-checkbox-container" onClick={this.handleCheckboxChange}>
-												<img src={CheckboxImagePath} className="account-checkbox" />
-												<span>{ t('create_account_promotions') }</span>
-											</span>
-										</div>
-									</div>
-									<span className="row account-sign-in">
-										<span className="columns">
-											<NavLink to="/log-in">
-												{ t('account_already_present') }
-											</NavLink>
-										</span>
-									</span>
-									<div className="row align-right">
-										<button type="submit" className="account-submit">
-											<span>{ t('panel_title_create_account') }</span>
-										</button>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		);
+		return <CreateAccountView {...childProps} />;
 	}
 }
 

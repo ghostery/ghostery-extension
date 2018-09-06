@@ -14,22 +14,16 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import HomeViewContainer from './HomeViewContainer';
-import HomeViewReducer from './HomeViewReducer';
-import * as HomeViewActions from './HomeViewActions';
-import { clearLoginParams } from '../AppView/AppViewActions';
-
+import AppViewContainer from './AppViewContainer';
+import { getUser } from '../../../Account/AccountActions';
+import AppViewReducer from './AppViewReducer';
 /**
  * Map redux store state properties to the component's own properties.
  * @param  {Object} state    entire Redux store's state
  * @return {function}        this function returns a plain object, which will be merged into the component's props
  * @memberof HubContainers
  */
-const mapStateToProps = state => Object.assign({}, state.home, {
-	user: state.account.user,
-	fromLoginPage: state.app.fromLoginPage,
-	fromCreateAccountPage: state.app.fromCreateAccountPage,
-});
+const mapStateToProps = state => Object.assign({}, state.account);
 
 /**
  * Bind the component's action creators using Redux's bindActionCreators.
@@ -38,9 +32,9 @@ const mapStateToProps = state => Object.assign({}, state.home, {
  * @memberof SetupContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign(HomeViewActions, { clearLoginParams }), dispatch),
+	actions: bindActionCreators(Object.assign({ getUser }), dispatch),
 });
 
-export const reducer = HomeViewReducer;
+export const reducer = AppViewReducer;
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeViewContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(AppViewContainer);

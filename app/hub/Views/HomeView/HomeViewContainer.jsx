@@ -15,6 +15,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import QueryString from 'query-string';
 import HomeView from './HomeView';
+import { sendMessage } from '../../utils';
 
 /**
  * @class Implement the Home View Container for the Ghostery Hub
@@ -44,6 +45,14 @@ class HomeViewContainer extends Component {
 		this.props.actions.setMetrics({ enable_metrics });
 	}
 
+	_handleEmailClick = () => {
+		sendMessage('OPEN_USER_PROFILE');
+	}
+
+	_closeAlert = () => {
+		this.props.actions.clearLoginParams();
+	}
+
 	/**
 	 * React's required render function. Returns JSX
 	 * @return {JSX} JSX for rendering the Home View of the Hub app
@@ -55,6 +64,12 @@ class HomeViewContainer extends Component {
 		const account_link = '/create-account';
 
 		const { justInstalled } = this.state;
+		const { user, fromLoginPage, fromCreateAccountPage } = this.props;
+		const email = user ? user.email : '';
+
+		const loginAlertText = (fromLoginPage && !fromCreateAccountPage) ?
+			`${t('panel_signin_success')} ${email}` :
+			(!fromLoginPage && fromCreateAccountPage) ? `${t('create_account_success')} ${t('panel_signin_success')} ${email}` : '';
 		const {
 			setup_complete,
 			tutorial_complete,
@@ -68,6 +83,10 @@ class HomeViewContainer extends Component {
 			changeMetrics: this._handleToggleMetrics,
 			account_text,
 			account_link,
+			email,
+			loginAlertText,
+			emailClick: this._handleEmailClick,
+			closeAlert: this._closeAlert,
 		};
 
 		return <HomeView {...childProps} />;
@@ -81,9 +100,11 @@ HomeViewContainer.propTypes = {
 		setup_complete: PropTypes.bool,
 		tutorial_complete: PropTypes.bool,
 		enable_metrics: PropTypes.bool,
-		account_text: PropTypes.string,
-		account_link: PropTypes.string,
 	}),
+	account_text: PropTypes.string,
+	account_link: PropTypes.string,
+	email: PropTypes.string,
+	loginAlertText: PropTypes.string,
 };
 
 // Default props used throughout the Setup flow
@@ -92,9 +113,11 @@ HomeViewContainer.defaultProps = {
 		setup_complete: false,
 		tutorial_complete: false,
 		enable_metrics: false,
-		account_text: '',
-		account_link: '',
 	},
+	account_text: '',
+	account_link: '',
+	email: '',
+	loginAlertText: '',
 };
 
 export default HomeViewContainer;

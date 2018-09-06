@@ -31,6 +31,10 @@ const HomeView = (props) => {
 		changeMetrics,
 		account_text,
 		account_link,
+		email,
+		emailClick,
+		loginAlertText,
+		closeAlert,
 	} = props;
 	const tutorialFeatureClassNames = ClassNames('HomeView__onboardingFeature columns flex-container align-middle flex-dir-column', {
 		'feature-tutorial-complete': tutorial_complete,
@@ -46,7 +50,10 @@ const HomeView = (props) => {
 	const setupButtonClassNames = ClassNames('HomeView__featureButton button primary', {
 		hollow: setup_complete,
 	});
-
+	const loginAlert = ClassNames({
+		'create-account-result': true,
+		success: !!loginAlertText,
+	});
 	return (
 		<div className="HomeView row align-center">
 			<div className="columns small-12 medium-10 large-8">
@@ -87,11 +94,19 @@ const HomeView = (props) => {
 					<div>
 						{t('hub_home_subheader_optimize')}
 					</div>
-					<NavLink to={account_link}>
-						{account_text}
-					</NavLink>
+					{email ? (
+						<div onClick={emailClick} className="HomeView__emailLink">{email}</div>
+					) : (
+						<NavLink to={account_link}>
+							{account_text}
+						</NavLink>
+					)}
 				</div>
 				<div className="HomeView__onboarding row">
+					<div className={loginAlert}>
+						{loginAlertText}
+						<span className="account-close-button" onClick={closeAlert} />
+					</div>
 					<div className={tutorialFeatureClassNames}>
 						<div className="HomeView__featureIcon" />
 						<div className="HomeView__featureTitle">
@@ -145,6 +160,9 @@ HomeView.propTypes = {
 	changeMetrics: PropTypes.func.isRequired,
 	account_text: PropTypes.string.isRequired,
 	account_link: PropTypes.string.isRequired,
+	email: PropTypes.string.isRequired,
+	loginAlertText: PropTypes.string.isRequired,
+	closeAlert: PropTypes.func.isRequired,
 };
 
 export default HomeView;

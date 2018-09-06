@@ -14,14 +14,14 @@
  */
 
 import React from 'react';
-import SideNavigation from './Views/SideNavigationView';
+import SideNavigation from '../SideNavigationView';
 
 /**
  * A Functional React Component for rendering the Ghostery Hub App
  * @return {JSX} JSX for rendering the Ghostery Hub App
  * @memberof HubComponents
  */
-const App = props => (
+const AppView = props => (
 	<div className="App full-height full-width flex-container">
 		<SideNavigation />
 		<div className="App__mainContent full-height flex-child-grow">
@@ -30,4 +30,4 @@ const App = props => (
 	</div>
 );
 
-export default App;
+export default AppView;

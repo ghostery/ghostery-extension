@@ -16,8 +16,7 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
 const SideNavigationView = (props) => {
-	const { menuItems, bottomItems } = props;
-
+	const { menuItems, bottomItems, user } = props;
 	return (
 		<div className="SideNavigation flex-container flex-dir-column">
 			<NavLink to="/" className="SideNavigation__top" />
@@ -31,15 +30,25 @@ const SideNavigationView = (props) => {
 					</div>
 				))}
 			</div>
-			<div className="SideNavigation__bottom flex-container flex-dir-column">
-				{bottomItems.map(item => (
-					<div key={`bottom-item-${item.href.substring(1)}`} className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle">
-						<NavLink to={item.href}>
+			{ user ? (
+				<div className="SideNavigation__bottom flex-container flex-dir-column">
+					{bottomItems.map(item => (
+						<div key={item.id} onClick={item.clickHandler} className="SideNavigation__item SideNavigation__bottomItem logged-in flex-container align-middle">
 							{item.text}
-						</NavLink>
-					</div>
-				))}
-			</div>
+						</div>
+					))}
+				</div>
+			) : (
+				<div className="SideNavigation__bottom flex-container flex-dir-column">
+					{bottomItems.map(item => (
+						<div key={`bottom-item-${item.href.substring(1)}`} className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle">
+							<NavLink to={item.href}>
+								{item.text}
+							</NavLink>
+						</div>
+					))}
+				</div>
+			)}
 		</div>
 	);
 };
@@ -52,7 +61,9 @@ SideNavigationView.propTypes = {
 		text: PropTypes.string.isRequired,
 	})).isRequired,
 	bottomItems: PropTypes.arrayOf(PropTypes.shape({
-		href: PropTypes.string.isRequired,
+		href: PropTypes.string,
+		id: PropTypes.string,
+		clickHandler: PropTypes.func,
 		text: PropTypes.string.isRequired,
 	})).isRequired,
 };

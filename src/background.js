@@ -608,6 +608,11 @@ function handleGhosteryHub(name, message, callback) {
 			callback({ tutorial_complete });
 			break;
 		}
+		case 'OPEN_USER_PROFILE': {
+			const tabUrl = `https://account.${globals.GHOSTERY_DOMAIN}.com/en`;
+			utils.openNewTab({ url: tabUrl, become_active: true });
+			break;
+		}
 		default: break;
 	}
 }

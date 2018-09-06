@@ -110,4 +110,8 @@
 .SideNavigation__bottomItem {
 	padding-left: 20px;
 	margin: -24px 0;
+	&.logged-in {
+		@extend %pointer;
+		pointer-events: all;
+	}
 }
