@@ -1,60 +1,55 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-renderer rewards view is rendered correctly 1`] = `
+exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-renderer supporter view is rendered correctly when the user is a supporter 1`] = `
 <div
-  className="SupporterView full-height"
+  className="SupporterView"
 >
   <div
-    className="SupporterView__header row align-center SupporterView--paddingTopSmall"
+    className="row align-center"
   >
     <div
       className="columns"
     >
       <div
-        className="SupporterView__headerImage"
+        className="SupporterView__headeingImage"
       />
       <div
-        className="SupporterView__title SupporterView--centeredText"
+        className="SupporterView__headingTitle text-center"
       >
         hub_supporter_header_title
       </div>
       <div
-        className="SupporterView__description SupporterView--centeredText"
+        className="SupporterView__headingDescription text-center"
       >
         hub_supporter_header_description
       </div>
       <div
-        className="row align-center-middle"
+        className="flex-container align-center-middle"
       >
         <div
-          className="button"
+          className="SupporterView__button SupporterView--addSideMargin button disabled"
         >
-          hub_supporter_button_text
+          hub_supporter_button_text_alt
         </div>
-        <span
-          className="SupporterView__priceTag"
-        >
-          <sup>
-            $
-          </sup>
-          2
-        </span>
-        <span
-          className="SupporterView__priceTagFrequency"
-        >
-          per month
-        </span>
+        <div
+          className="SupporterView__headingCost SupporterView--addSideMargin flex-container align-middle"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "hub_supporter_price",
+            }
+          }
+        />
       </div>
     </div>
   </div>
   <div
-    className="SupporterView--paddingTopSmall row align-center"
+    className="SupporterView--addPaddingTop row align-center"
   >
     <div
-      className="SupporterView__perkFeature columns"
+      className="SupporterView__perk columns text-center"
     >
       <div
-        className="SupporterView__perkIconThemes"
+        className="SupporterView__perkIcon themes"
       />
       <div
         className="SupporterView__perkTitle"
@@ -68,27 +63,27 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
       </div>
     </div>
     <div
-      className="SupporterView__perkFeature columns"
+      className="SupporterView__perk columns text-center"
     >
       <div
-        className="SupporterView__perkIconPriority"
+        className="SupporterView__perkIcon support"
       />
       <div
         className="SupporterView__perkTitle"
       >
-        hub_supporter_perk_priority_title
+        hub_supporter_perk_support_title
       </div>
       <div
         className="SupporterView__perkDescription"
       >
-        hub_supporter_perk_priority_description
+        hub_supporter_perk_support_description
       </div>
     </div>
     <div
-      className="SupporterView__perkFeature columns"
+      className="SupporterView__perk columns text-center"
     >
       <div
-        className="SupporterView__perkIconMore"
+        className="SupporterView__perkIcon more"
       />
       <div
         className="SupporterView__perkTitle"
@@ -103,69 +98,315 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
     </div>
   </div>
   <div
-    className="SupporterView__manifesto row expanded SupporterView--marginTop align-center-middle"
+    className="SupporterView__manifestoContainer"
   >
     <div
-      className="SupporterView__manifestoText"
+      className="SupporterView__manifestoBackground row align-center"
     >
-      hub_supporter_manifesto
+      <div
+        className="SupporterView__manifestoText columns small-12 medium-10 large-8 text-center"
+      >
+        hub_supporter_manifesto
+      </div>
     </div>
   </div>
   <div
-    className="SupporterView__themes row SupporterView--marginTop align-middle"
+    className="SupporterView--addPaddingTop SupporterView--addPaddingBottom"
   >
     <div
-      className="SupporterView__themesText columns"
+      className="row"
     >
       <div
-        className="SupporterView__title"
+        className="SupporterView__feature columns small-12 medium-4 medium-offset-1"
       >
-        hub_supporter_themes_title
+        <div
+          className="SupporterView__headingTitle SupporterView--addPaddingTop"
+        >
+          hub_supporter_feature_theme_title
+        </div>
+        <div
+          className="SupporterView__headingDescription"
+        >
+          hub_supporter_feature_theme_description
+        </div>
+        <div
+          className="SupporterView__button button disabled"
+        >
+          hub_supporter_button_text_alt
+        </div>
       </div>
       <div
-        className="SupporterView__description"
+        className="SupporterView__feature columns small-12 medium-6"
       >
-        hub_supporter_themes_description
-      </div>
-      <div
-        className="button"
-      >
-        hub_supporter_button_text
+        <img
+          alt="hub_supporter_feature_theme_title"
+          className="SupporterView__featureImage theme"
+          src="/app/images/hub/supporter/feature-theme.png"
+        />
       </div>
     </div>
+  </div>
+  <div
+    className="SupporterView--addPaddingTop SupporterView--addPaddingBottom SupporterView--rowDarken"
+  >
+    <div
+      className="row align-middle"
+    >
+      <div
+        className="SupporterView__feature columns small-12 medium-4 medium-offset-1"
+      >
+        <img
+          alt="hub_supporter_feature_support_title"
+          className="SupporterView__featureImage support"
+          src="/app/images/hub/supporter/feature-support.svg"
+        />
+      </div>
+      <div
+        className="SupporterView__feature columns small-12 medium-5 medium-offset-1"
+      >
+        <div
+          className="SupporterView__headingTitle"
+        >
+          hub_supporter_feature_support_title
+        </div>
+        <div
+          className="SupporterView__headingDescription"
+        >
+          hub_supporter_feature_support_description
+        </div>
+        <div
+          className="SupporterView__button button disabled"
+        >
+          hub_supporter_button_text_alt
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="SupporterView--addPaddingTop"
+  >
+    <div
+      className="row align-middle-center"
+    >
+      <div
+        className="SupporterView__feature columns small-12 medium-6 medium-offset-3 text-center"
+      >
+        <div
+          className="SupporterView__headingTitle"
+        >
+          hub_supporter_feature_more_title
+        </div>
+        <div
+          className="SupporterView__headingDescription"
+        >
+          hub_supporter_feature_more_description
+        </div>
+        <img
+          alt="hub_supporter_feature_more_title"
+          className="SupporterView__featureImage more"
+          src="/app/images/hub/supporter/feature-more.svg"
+        />
+      </div>
+    </div>
+    <div
+      className="SupporterView--addPaddingTop"
+    >
+      <div
+        className="row align-center-middle"
+      >
+        <div
+          className="SupporterView__bar flex-child-grow"
+        />
+        <div
+          className="SupporterView__button SupporterView--addSideMargin button disabled"
+        >
+          hub_supporter_button_text_alt
+        </div>
+        <div
+          className="SupporterView__bar flex-child-grow"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-renderer supporter view is rendered correctly when the user is not a supporter 1`] = `
+<div
+  className="SupporterView"
+>
+  <div
+    className="row align-center"
+  >
     <div
       className="columns"
     >
-      <img
-        className="SupporterView__themesScreenshots"
-        src="/app/images/hub/supporter/screenshot.png"
+      <div
+        className="SupporterView__headeingImage"
       />
+      <div
+        className="SupporterView__headingTitle text-center"
+      >
+        hub_supporter_header_title
+      </div>
+      <div
+        className="SupporterView__headingDescription text-center"
+      >
+        hub_supporter_header_description
+      </div>
+      <div
+        className="flex-container align-center-middle"
+      >
+        <div
+          className="SupporterView__button SupporterView--addSideMargin button"
+        >
+          hub_supporter_button_text
+        </div>
+        <div
+          className="SupporterView__headingCost SupporterView--addSideMargin flex-container align-middle"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "hub_supporter_price",
+            }
+          }
+        />
+      </div>
     </div>
   </div>
   <div
-    className="SupporterView__priority SupporterView--marginTop row expanded"
+    className="SupporterView--addPaddingTop row align-center"
   >
     <div
-      className="row align-center-middle"
+      className="SupporterView__perk columns text-center"
     >
       <div
-        className="SupporterView__priorityIcon columns"
+        className="SupporterView__perkIcon themes"
       />
       <div
-        className="SupporterView__priorityText columns"
+        className="SupporterView__perkTitle"
+      >
+        hub_supporter_perk_themes_title
+      </div>
+      <div
+        className="SupporterView__perkDescription"
+      >
+        hub_supporter_perk_themes_description
+      </div>
+    </div>
+    <div
+      className="SupporterView__perk columns text-center"
+    >
+      <div
+        className="SupporterView__perkIcon support"
+      />
+      <div
+        className="SupporterView__perkTitle"
+      >
+        hub_supporter_perk_support_title
+      </div>
+      <div
+        className="SupporterView__perkDescription"
+      >
+        hub_supporter_perk_support_description
+      </div>
+    </div>
+    <div
+      className="SupporterView__perk columns text-center"
+    >
+      <div
+        className="SupporterView__perkIcon more"
+      />
+      <div
+        className="SupporterView__perkTitle"
+      >
+        hub_supporter_perk_more_title
+      </div>
+      <div
+        className="SupporterView__perkDescription"
+      >
+        hub_supporter_perk_more_description
+      </div>
+    </div>
+  </div>
+  <div
+    className="SupporterView__manifestoContainer"
+  >
+    <div
+      className="SupporterView__manifestoBackground row align-center"
+    >
+      <div
+        className="SupporterView__manifestoText columns small-12 medium-10 large-8 text-center"
+      >
+        hub_supporter_manifesto
+      </div>
+    </div>
+  </div>
+  <div
+    className="SupporterView--addPaddingTop SupporterView--addPaddingBottom"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="SupporterView__feature columns small-12 medium-4 medium-offset-1"
       >
         <div
-          className="SupporterView__title row"
+          className="SupporterView__headingTitle SupporterView--addPaddingTop"
         >
-          hub_supporter_priority_title
+          hub_supporter_feature_theme_title
         </div>
         <div
-          className="SupporterView__description row"
+          className="SupporterView__headingDescription"
         >
-          hub_supporter_priority_description
+          hub_supporter_feature_theme_description
         </div>
         <div
-          className="button row"
+          className="SupporterView__button button"
+        >
+          hub_supporter_button_text
+        </div>
+      </div>
+      <div
+        className="SupporterView__feature columns small-12 medium-6"
+      >
+        <img
+          alt="hub_supporter_feature_theme_title"
+          className="SupporterView__featureImage theme"
+          src="/app/images/hub/supporter/feature-theme.png"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="SupporterView--addPaddingTop SupporterView--addPaddingBottom SupporterView--rowDarken"
+  >
+    <div
+      className="row align-middle"
+    >
+      <div
+        className="SupporterView__feature columns small-12 medium-4 medium-offset-1"
+      >
+        <img
+          alt="hub_supporter_feature_support_title"
+          className="SupporterView__featureImage support"
+          src="/app/images/hub/supporter/feature-support.svg"
+        />
+      </div>
+      <div
+        className="SupporterView__feature columns small-12 medium-5 medium-offset-1"
+      >
+        <div
+          className="SupporterView__headingTitle"
+        >
+          hub_supporter_feature_support_title
+        </div>
+        <div
+          className="SupporterView__headingDescription"
+        >
+          hub_supporter_feature_support_description
+        </div>
+        <div
+          className="SupporterView__button button"
         >
           hub_supporter_button_text
         </div>
@@ -173,44 +414,50 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
     </div>
   </div>
   <div
-    className="SupporterView__manyMore row align-center"
+    className="SupporterView--addPaddingTop"
   >
     <div
-      className="SupporterView__manyMoreText columns"
+      className="row align-middle-center"
     >
       <div
-        className="SupporterView__title SupporterView--centeredText"
+        className="SupporterView__feature columns small-12 medium-6 medium-offset-3 text-center"
       >
-        hub_supporter_more_title
-      </div>
-      <div
-        className="SupporterView__description SupporterView--centeredText"
-      >
-        hub_supporter_more_description
-      </div>
-      <div
-        className="SupporterView__manyMoreIcon"
-      />
-    </div>
-  </div>
-  <div
-    className="SupporterView__footer row align-center-middle SupporterView--paddingTopSmall"
-  >
-    <div
-      className="SupporterView__footerLine columns"
-    />
-    <div
-      className="SupporterView__buttonContainer columns"
-    >
-      <div
-        className="button"
-      >
-        hub_supporter_button_text
+        <div
+          className="SupporterView__headingTitle"
+        >
+          hub_supporter_feature_more_title
+        </div>
+        <div
+          className="SupporterView__headingDescription"
+        >
+          hub_supporter_feature_more_description
+        </div>
+        <img
+          alt="hub_supporter_feature_more_title"
+          className="SupporterView__featureImage more"
+          src="/app/images/hub/supporter/feature-more.svg"
+        />
       </div>
     </div>
     <div
-      className="SupporterView__footerLine columns"
-    />
+      className="SupporterView--addPaddingTop"
+    >
+      <div
+        className="row align-center-middle"
+      >
+        <div
+          className="SupporterView__bar flex-child-grow"
+        />
+        <div
+          className="SupporterView__button SupporterView--addSideMargin button"
+        >
+          hub_supporter_button_text
+        </div>
+        <div
+          className="SupporterView__bar flex-child-grow"
+        />
+      </div>
+    </div>
   </div>
 </div>
 `;

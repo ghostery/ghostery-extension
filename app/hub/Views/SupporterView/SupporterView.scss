@@ -1,154 +1,145 @@
 /**
- * Supporter View Sass
- *
- * Ghostery Browser Extension
- * https://www.ghostery.com/
- *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
- *
- * This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0
- */
+* Supporter View Sass
+*
+* Ghostery Browser Extension
+* https://www.ghostery.com/
+*
+* Copyright 2018 Ghostery, Inc. All rights reserved.
+*
+* This Source Code Form is subject to the terms of the Mozilla Public
+* License, v. 2.0. If a copy of the MPL was not distributed with this
+* file, You can obtain one at http://mozilla.org/MPL/2.0
+*/
 
 // Supporter View
-.SupporterView {}
-.SupporterView--centeredText {
-  text-align: center;
-}
-.SupporterView--paddingTop {
-	padding-top: 80px;
-}
-.SupporterView--paddingTopSmall {
-  padding-top: 40px;
-}
-.SupporterView--marginTop {
-	margin-top: 80px;
-}
 .SupporterView {
-  margin-bottom: 80px;
+	margin: 40px 0 80px;
 }
-.SupporterView__headerImage {
-  max-width: 100%;
-  height: 195px;
-  margin-right: 30px;
-  background: buildIconGoldenGhost(#000000) no-repeat center center;
+.SupporterView--addPaddingTop {
+	padding-top: 60px;
 }
-.SupporterView__title {
-  margin-top: 40px;
-  line-height: 38px;
+.SupporterView--addPaddingBottom {
+	padding-bottom: 60px;
+}
+.SupporterView--addSideMargin {
+	margin-left: 35px;
+	margin-right: 35px;
+}
+.SupporterView--rowDarken {
+	background-color: #f7f7f7;
+}
+.SupporterView__button {
+	min-width: 180px;
+	margin-bottom: 0;
+	border-top-color: transparent;
+	border-right-color: #9ecc42;
+	border-bottom-color: transparent;
+	border-left-color: #429321;
+	background: linear-gradient(to right, #429321,  #9ecc42);
+}
+.SupporterView__button.disabled,
+.SupporterView__button.disabled:hover {
+	background: #154700;
+	border: 1px solid #154700;
+}
+.SupporterView__headeingImage {
+	height: 195px;
+	margin-right: 30px;
+	margin-bottom: 30px;
+	background-image: url('/app/images/hub/supporter/supporter-logo.svg');
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.SupporterView__headingTitle {
 	font-size: 24px;
 	font-weight: 700;
+	line-height: 38px;
+	color: #4a4a4a;
 }
-.SupporterView__description {
-  line-height: 30px;
+.SupporterView__headingDescription {
 	font-size: 14px;
+	line-height: 38px;
+	color: #4a4a4a;
+	margin-bottom: 20px;
 }
-.SupporterView__priceTag {
-  font-size: 64px;
-  font-weight: 500;
-  margin: 0 10px 0 50px;
-}
-sup {
-  position: relative;
-  bottom:0.9em;
-  font-size: 30px;
-}
-.SupporterView__priceTagFrequency {
-  color: #9b9b9b;
-  font-size: 14px;
-}
-.SupporterView__perkIconThemes {
-  width: 100%;
-  height: 100px;
-  background: buildIconThemesPerk(#9ECC42) no-repeat center center;
-}
-.SupporterView__perkIconPriority {
-  width: 100%;
-  height: 100px;
-  background: buildIconPriorityPerk(#9ECC42) no-repeat center center;
-}
-.SupporterView__perkIconMore {
-  width: 100%;
-  height: 100px;
-  background: buildIconMorePerk(#9ECC42) no-repeat center center;
-}
-.SupporterView__perkFeature {
-	margin: 0 50px;
+.SupporterView__headingCost {
 	font-size: 14px;
-	max-width: 250px;
-  text-align: center;
+	color: #9b9b9b;
+}
+.SupporterView__headingCost sup {
+	padding: 0 2px;
+	font-size: 30px;
+	font-weight: 500;
+	color: #4a4a4a;
+}
+.SupporterView__headingCost span {
+	padding-right: 11px;
+	font-size: 64px;
+	font-weight: 500;
+	color: #4a4a4a;
+}
+.SupporterView__perk {
+	padding: 0 60px;
 }
 .SupporterView__perkTitle {
-	line-height: 38px;
+	font-size: 14px;
 	font-weight: 700;
+	line-height: 38px;
+	margin-bottom: 15px;
+	color: #4a4a4a;
 }
 .SupporterView__perkDescription {
-  line-height: 30px;
+	font-size: 14px;
+	line-height: 30px;
+	color: #4a4a4a;
 }
-.SupporterView__manifesto {
-  background: linear-gradient(246deg, #ecd868, #d4af37);
-  width: 100%;
-  height: auto;
+.SupporterView__perkIcon {
+	height: 80px;
+	width: 80px;
+	margin: 0 auto 15px;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+.SupporterView__perkIcon.themes {
+	background-image: buildPerkThemeIcon(#a8ca59, #0a0a0a);
+}
+.SupporterView__perkIcon.support {
+	background-image: buildPerkSupportIcon(#a8ca59, #0a0a0a);
+}
+.SupporterView__perkIcon.more {
+	background-image: buildPerkMoreIcon(#a8ca59, #0a0a0a);
+}
+.SupporterView__feature {
+	padding: 0 40px;
+}
+.SupporterView__featureImage.theme {
+	max-width: 420px;
+	margin-top: -20px;
+}
+.SupporterView__featureImage.support{
+	max-width: 275px;
+}
+.SupporterView__featureImage.more {
+	max-width: 375px;
+}
+.SupporterView__manifestoContainer {
+	margin: 80px 0 0;
+	padding-top: 40px;
+	background: linear-gradient(to bottom left, #ecd868, #d4af37);
+}
+.SupporterView__manifestoBackground {
+	padding-top: 20px;
+	background-image: url('/app/images/hub/supporter/manifesto-background.svg');
+	background-size: 100%;
 }
 .SupporterView__manifestoText {
-	color: #ffffff;
-	font-weight: 700;
 	font-size: 24px;
+	font-weight: 700;
 	line-height: 40px;
-	padding: 50px;
-	text-align: center;
-	max-width: 700px;
+	color: #ffffff;
+	padding: 50px 0;
 }
-.SupporterView__themesText {
-  max-width: 300px;
-  margin:50px;
-}
-.SupporterView__themesScreenshots {
-  max-width: 85%;
-}
-.button {
-  margin-top: 10px;
-  background: linear-gradient(256deg, #9ecc42, #429321);
-  border: none;
-  width: 170px;
-  height: 34px;
-  text-transform: none;
-}
-.button:hover {
-  background-color: #429321;
-}
-.SupporterView__priority {
-  background-color: #f7f7f7;
-  padding: 50px;
-}
-.SupporterView__priorityIcon {
-  background: buildIconPriority(#000000) no-repeat center center;
-  width: 273px;
-  height: 100%;
-  margin: 0 60px;
-}
-.SupporterView__priorityText {
-  max-width: 300px;
-  margin: 0 60px;
-}
-.SupporterView__manyMoreIcon {
-  background: buildIconManyMore(#000000) no-repeat center center;
-  width: 100%;
-  height: 200px;
-}
-.SupporterView__manyMoreText {
-  max-width: 430px;
-}
-.SupporterView__footer {
-  margin-bottom: 80px;
-}
-.SupporterView__buttonContainer {
-  max-width: 200px;
-  margin: 0 50px;
-}
-.SupporterView__footerLine {
-  max-width: 20vw;
-  height: 1px;
-  border: solid 0.5px #9b9b9b;
+.SupporterView__bar {
+	height: 1px;
+	background-color: #9b9b9b;
 }

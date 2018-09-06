@@ -80,12 +80,13 @@ class RewardsView extends Component {
 						</div>
 					</div>
 				</div>
-				<div className="RewardsView--paddingTop row align-center">
-					<div className="RewardsView__closerText">
-						{t('hub_rewards_closer')}
+				<div className="RewardsView__backgroundStars">
+					<div className="RewardsView--paddingTop row align-center">
+						<div className="RewardsView__closerText">
+							{t('hub_rewards_closer')}
+						</div>
 					</div>
 				</div>
-
 			</div>
 		);
 	}

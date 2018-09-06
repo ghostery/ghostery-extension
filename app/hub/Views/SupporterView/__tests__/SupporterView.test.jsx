@@ -18,9 +18,24 @@ import SupporterView from '../SupporterView';
 
 describe('app/hub/Views/SupporterView component', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
-		test('rewards view is rendered correctly', () => {
+		test('supporter view is rendered correctly when the user is not a supporter', () => {
+			const initialState = {
+				isSupporter: false,
+			};
+
 			const component = renderer.create(
-				<SupporterView />
+				<SupporterView {...initialState} />
+			).toJSON();
+			expect(component).toMatchSnapshot();
+		});
+
+		test('supporter view is rendered correctly when the user is a supporter', () => {
+			const initialState = {
+				isSupporter: true,
+			};
+
+			const component = renderer.create(
+				<SupporterView {...initialState} />
 			).toJSON();
 			expect(component).toMatchSnapshot();
 		});
@@ -28,12 +43,30 @@ describe('app/hub/Views/SupporterView component', () => {
 
 	describe('Shallow snapshot tests rendered with Enzyme', () => {
 		test('the happy path of the component', () => {
-			const component = shallow(<SupporterView />);
+			const initialState = {
+				isSupporter: false,
+			};
+
+			const component = shallow(<SupporterView {...initialState} />);
 			expect(component.find('.SupporterView').length).toBe(1);
-			expect(component.find('.button').length).toBe(4);
-			expect(component.find('.SupporterView__perkFeature').length).toBe(3);
-			expect(component.find('.SupporterView__title').length).toBe(4);
-			expect(component.find('.SupporterView__description').length).toBe(4);
+			expect(component.find('.SupporterView__headeingImage').length).toBe(1);
+			expect(component.find('.SupporterView__headingTitle').length).toBe(4);
+			expect(component.find('.SupporterView__headingDescription').length).toBe(4);
+			expect(component.find('.SupporterView__headingCost').length).toBe(1);
+			expect(component.find('.SupporterView__perk').length).toBe(3);
+			expect(component.find('.SupporterView__perkIcon').length).toBe(3);
+			expect(component.find('.SupporterView__perkTitle').length).toBe(3);
+			expect(component.find('.SupporterView__perkDescription').length).toBe(3);
+			expect(component.find('.SupporterView__manifestoContainer').length).toBe(1);
+			expect(component.find('.SupporterView__manifestoBackground').length).toBe(1);
+			expect(component.find('.SupporterView__manifestoText').length).toBe(1);
+			expect(component.find('.SupporterView__featureImage').length).toBe(3);
+
+			expect(component.find('.SupporterView__button').length).toBe(4);
+			expect(component.find('.SupporterView__button.disabled').length).toBe(0);
+			component.setProps({ isSupporter: true });
+			expect(component.find('.SupporterView__button').length).toBe(4);
+			expect(component.find('.SupporterView__button.disabled').length).toBe(4);
 		});
 	});
 });
