@@ -33,7 +33,7 @@ import metrics from './Metrics';
 import globals from './Globals';
 
 const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
-const { IS_CLIQZ } = globals;
+const { IS_CLIQZ, IS_GHOSTERY_MOBILE } = globals;
 
 /**
  * Proxy Handler
@@ -66,6 +66,13 @@ const handler = {
 				value = false;
 			}
 		}
+
+		if (IS_GHOSTERY_MOBILE) {
+			if (key === 'enable_offers') {
+				value = false;
+			}
+		}
+
 		// Edge currently does not support Human Web and Offers
 		if (IS_EDGE) {
 			if (key === 'enable_human_web' ||
