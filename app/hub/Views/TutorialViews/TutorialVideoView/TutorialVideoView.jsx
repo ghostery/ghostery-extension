@@ -25,7 +25,14 @@ const TutorialVideoView = () => (
 				{t('hub_tutorial_video_title')}
 			</div>
 			<div className="TutorialVideoView__videoContainer text-center">
-				video container
+				<video
+					controls preload="metadata" width="640" height="360"
+					poster="https://www.ghostery.com/wp-content/uploads/2018/08/promo_placeholder-1024x575.png"
+				>
+					<source type="video/mp4" src="https://www.ghostery.com/wp-content/uploads/2018/08/ghostery_promo.mp4?_=1" />
+					<source type="video/webm" src="https://www.ghostery.com/wp-content/uploads/2018/08/ghostery_promo.webm?_=1" />
+					<source type="video/ogg" src="https://www.ghostery.com/wp-content/uploads/2018/08/ghostery_promo.ogv?_=1" />
+				</video>
 			</div>
 			<div className="TutorialView__tagline text-center">
 				{t('hub_tutorial_video_tagline')}

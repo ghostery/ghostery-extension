@@ -44,10 +44,9 @@
 
 // Tutorial Video View
 .TutorialVideoView__videoContainer {
-	height: 309px;
-	width: 600px;
+	height: 360px;
+	width: 640px;
 	margin: 30px auto 33px;
-	background-color: lightblue;
 }
 
 // Tutorial Tracker List View
@@ -112,6 +111,11 @@
 	background-repeat: no-repeat;
 	box-shadow: none;
 	cursor: text;
+}
+.TutorialTrustView__key .TutorialView__keyButton.button,
+.TutorialTrustView__key .TutorialView__keyButton.button:hover {
+	border-color: #cccccc;
+	color: #4a4a4a;
 }
 .TutorialTrustView__key .TutorialView__keyButton.trust {
 	background-image: buildTrustCircleIcon(#4a4a4a);
