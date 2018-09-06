@@ -1,0 +1,475 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-renderer supporter view is rendered correctly when the user is a supporter 1`] = `
+<div
+  className="SupporterView"
+>
+  <div
+    className="row align-center"
+  >
+    <div
+      className="columns"
+    >
+      <div
+        className="SupporterView__headeingImage"
+      />
+      <div
+        className="SupporterView__headingTitle text-center"
+      >
+        hub_supporter_header_title
+      </div>
+      <div
+        className="SupporterView__headingDescription text-center"
+      >
+        hub_supporter_header_description
+      </div>
+      <div
+        className="flex-container align-center-middle"
+      >
+        <div
+          className="SupporterView__button button SupporterView--addSideMargin disabled"
+        >
+          hub_supporter_button_text_alt
+        </div>
+        <div
+          className="SupporterView__headingCost SupporterView--addSideMargin flex-container align-middle"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "hub_supporter_price",
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="SupporterView--addPaddingTop row align-center"
+  >
+    <div
+      className="SupporterView__perk columns text-center"
+    >
+      <div
+        className="SupporterView__perkIcon themes"
+      />
+      <div
+        className="SupporterView__perkTitle"
+      >
+        hub_supporter_perk_themes_title
+      </div>
+      <div
+        className="SupporterView__perkDescription"
+      >
+        hub_supporter_perk_themes_description
+      </div>
+    </div>
+    <div
+      className="SupporterView__perk columns text-center"
+    >
+      <div
+        className="SupporterView__perkIcon support"
+      />
+      <div
+        className="SupporterView__perkTitle"
+      >
+        hub_supporter_perk_support_title
+      </div>
+      <div
+        className="SupporterView__perkDescription"
+      >
+        hub_supporter_perk_support_description
+      </div>
+    </div>
+    <div
+      className="SupporterView__perk columns text-center"
+    >
+      <div
+        className="SupporterView__perkIcon more"
+      />
+      <div
+        className="SupporterView__perkTitle"
+      >
+        hub_supporter_perk_more_title
+      </div>
+      <div
+        className="SupporterView__perkDescription"
+      >
+        hub_supporter_perk_more_description
+      </div>
+    </div>
+  </div>
+  <div
+    className="SupporterView__manifestoContainer"
+  >
+    <div
+      className="SupporterView__manifestoBackground row align-center"
+    >
+      <div
+        className="SupporterView__manifestoText columns small-12 medium-10 large-8 text-center"
+      >
+        hub_supporter_manifesto
+      </div>
+    </div>
+  </div>
+  <div
+    className="SupporterView--addPaddingTop SupporterView--addPaddingBottom"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="SupporterView__feature columns small-12 medium-4 medium-offset-1"
+      >
+        <div
+          className="SupporterView__headingTitle SupporterView--addPaddingTop"
+        >
+          hub_supporter_feature_theme_title
+        </div>
+        <div
+          className="SupporterView__headingDescription"
+        >
+          hub_supporter_feature_theme_description
+        </div>
+        <div
+          className="SupporterView__button button disabled"
+        >
+          hub_supporter_button_text_alt
+        </div>
+      </div>
+      <div
+        className="SupporterView__feature columns small-12 medium-6"
+      >
+        <img
+          alt="hub_supporter_feature_theme_title"
+          className="SupporterView__featureImage theme"
+          src="/app/images/hub/supporter/feature-theme.png"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="SupporterView--addPaddingTop SupporterView--addPaddingBottom SupporterView--rowDarken"
+  >
+    <div
+      className="row align-middle"
+    >
+      <div
+        className="SupporterView__feature columns small-12 medium-4 medium-offset-1"
+      >
+        <img
+          alt="hub_supporter_feature_support_title"
+          className="SupporterView__featureImage support"
+          src="/app/images/hub/supporter/feature-support.svg"
+        />
+      </div>
+      <div
+        className="SupporterView__feature columns small-12 medium-5 medium-offset-1"
+      >
+        <div
+          className="SupporterView__headingTitle"
+        >
+          hub_supporter_feature_support_title
+        </div>
+        <div
+          className="SupporterView__headingDescription"
+        >
+          hub_supporter_feature_support_description
+        </div>
+        <div
+          className="SupporterView__button button disabled"
+        >
+          hub_supporter_button_text_alt
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="SupporterView--addPaddingTop"
+  >
+    <div
+      className="row align-middle-center"
+    >
+      <div
+        className="SupporterView__feature columns small-12 medium-6 medium-offset-3 text-center"
+      >
+        <div
+          className="SupporterView__headingTitle"
+        >
+          hub_supporter_feature_more_title
+        </div>
+        <div
+          className="SupporterView__headingDescription"
+        >
+          hub_supporter_feature_more_description
+        </div>
+        <img
+          alt="hub_supporter_feature_more_title"
+          className="SupporterView__featureImage more"
+          src="/app/images/hub/supporter/feature-more.svg"
+        />
+      </div>
+    </div>
+    <div
+      className="SupporterView--addPaddingTop"
+    >
+      <div
+        className="row align-center-middle"
+      >
+        <div
+          className="SupporterView__bar flex-child-grow"
+        />
+        <div
+          className="SupporterView__button button SupporterView--addSideMargin disabled"
+        >
+          hub_supporter_button_text_alt
+        </div>
+        <div
+          className="SupporterView__bar flex-child-grow"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-renderer supporter view is rendered correctly when the user is not a supporter 1`] = `
+<div
+  className="SupporterView"
+>
+  <div
+    className="row align-center"
+  >
+    <div
+      className="columns"
+    >
+      <div
+        className="SupporterView__headeingImage"
+      />
+      <div
+        className="SupporterView__headingTitle text-center"
+      >
+        hub_supporter_header_title
+      </div>
+      <div
+        className="SupporterView__headingDescription text-center"
+      >
+        hub_supporter_header_description
+      </div>
+      <div
+        className="flex-container align-center-middle"
+      >
+        <a
+          className="SupporterView__button button SupporterView--addSideMargin"
+          href="https://account.ghosterystage.com/subscription"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          hub_supporter_button_text
+        </a>
+        <div
+          className="SupporterView__headingCost SupporterView--addSideMargin flex-container align-middle"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "hub_supporter_price",
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="SupporterView--addPaddingTop row align-center"
+  >
+    <div
+      className="SupporterView__perk columns text-center"
+    >
+      <div
+        className="SupporterView__perkIcon themes"
+      />
+      <div
+        className="SupporterView__perkTitle"
+      >
+        hub_supporter_perk_themes_title
+      </div>
+      <div
+        className="SupporterView__perkDescription"
+      >
+        hub_supporter_perk_themes_description
+      </div>
+    </div>
+    <div
+      className="SupporterView__perk columns text-center"
+    >
+      <div
+        className="SupporterView__perkIcon support"
+      />
+      <div
+        className="SupporterView__perkTitle"
+      >
+        hub_supporter_perk_support_title
+      </div>
+      <div
+        className="SupporterView__perkDescription"
+      >
+        hub_supporter_perk_support_description
+      </div>
+    </div>
+    <div
+      className="SupporterView__perk columns text-center"
+    >
+      <div
+        className="SupporterView__perkIcon more"
+      />
+      <div
+        className="SupporterView__perkTitle"
+      >
+        hub_supporter_perk_more_title
+      </div>
+      <div
+        className="SupporterView__perkDescription"
+      >
+        hub_supporter_perk_more_description
+      </div>
+    </div>
+  </div>
+  <div
+    className="SupporterView__manifestoContainer"
+  >
+    <div
+      className="SupporterView__manifestoBackground row align-center"
+    >
+      <div
+        className="SupporterView__manifestoText columns small-12 medium-10 large-8 text-center"
+      >
+        hub_supporter_manifesto
+      </div>
+    </div>
+  </div>
+  <div
+    className="SupporterView--addPaddingTop SupporterView--addPaddingBottom"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="SupporterView__feature columns small-12 medium-4 medium-offset-1"
+      >
+        <div
+          className="SupporterView__headingTitle SupporterView--addPaddingTop"
+        >
+          hub_supporter_feature_theme_title
+        </div>
+        <div
+          className="SupporterView__headingDescription"
+        >
+          hub_supporter_feature_theme_description
+        </div>
+        <a
+          className="SupporterView__button button"
+          href="https://account.ghosterystage.com/subscription"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          hub_supporter_button_text
+        </a>
+      </div>
+      <div
+        className="SupporterView__feature columns small-12 medium-6"
+      >
+        <img
+          alt="hub_supporter_feature_theme_title"
+          className="SupporterView__featureImage theme"
+          src="/app/images/hub/supporter/feature-theme.png"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="SupporterView--addPaddingTop SupporterView--addPaddingBottom SupporterView--rowDarken"
+  >
+    <div
+      className="row align-middle"
+    >
+      <div
+        className="SupporterView__feature columns small-12 medium-4 medium-offset-1"
+      >
+        <img
+          alt="hub_supporter_feature_support_title"
+          className="SupporterView__featureImage support"
+          src="/app/images/hub/supporter/feature-support.svg"
+        />
+      </div>
+      <div
+        className="SupporterView__feature columns small-12 medium-5 medium-offset-1"
+      >
+        <div
+          className="SupporterView__headingTitle"
+        >
+          hub_supporter_feature_support_title
+        </div>
+        <div
+          className="SupporterView__headingDescription"
+        >
+          hub_supporter_feature_support_description
+        </div>
+        <a
+          className="SupporterView__button button"
+          href="https://account.ghosterystage.com/subscription"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          hub_supporter_button_text
+        </a>
+      </div>
+    </div>
+  </div>
+  <div
+    className="SupporterView--addPaddingTop"
+  >
+    <div
+      className="row align-middle-center"
+    >
+      <div
+        className="SupporterView__feature columns small-12 medium-6 medium-offset-3 text-center"
+      >
+        <div
+          className="SupporterView__headingTitle"
+        >
+          hub_supporter_feature_more_title
+        </div>
+        <div
+          className="SupporterView__headingDescription"
+        >
+          hub_supporter_feature_more_description
+        </div>
+        <img
+          alt="hub_supporter_feature_more_title"
+          className="SupporterView__featureImage more"
+          src="/app/images/hub/supporter/feature-more.svg"
+        />
+      </div>
+    </div>
+    <div
+      className="SupporterView--addPaddingTop"
+    >
+      <div
+        className="row align-center-middle"
+      >
+        <div
+          className="SupporterView__bar flex-child-grow"
+        />
+        <a
+          className="SupporterView__button button SupporterView--addSideMargin"
+          href="https://account.ghosterystage.com/subscription"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          hub_supporter_button_text
+        </a>
+        <div
+          className="SupporterView__bar flex-child-grow"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
