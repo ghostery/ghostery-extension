@@ -98,12 +98,16 @@ exports[`app/hub/Views/RewardsView component Snapshot tests with react-test-rend
     </div>
   </div>
   <div
-    className="RewardsView--paddingTop row align-center"
+    className="RewardsView__backgroundStars"
   >
     <div
-      className="RewardsView__closerText"
+      className="RewardsView--paddingTop row align-center"
     >
-      hub_rewards_closer
+      <div
+        className="RewardsView__closerText"
+      >
+        hub_rewards_closer
+      </div>
     </div>
   </div>
 </div>
