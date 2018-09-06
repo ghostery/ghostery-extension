@@ -99,7 +99,6 @@ class Subscription extends React.Component {
 					<Route path="/subscription/info" render={this.SubscriptionInfoComponent} />
 					<Route path="/subscription/themes" render={this.SubscriptionThemesComponent} />
 					<Route path="/subscription/prioritysupport" render={this.PrioritySupportComponent} />
-					{/* <Route path="/subscription/trackerstats" render={this.TrackerStatsComponent} /> */}
 				</div>
 			</div>
 		);

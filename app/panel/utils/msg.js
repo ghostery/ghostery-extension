@@ -119,8 +119,8 @@ export function sendRewardMessage(name, message, callback = function () {}) {
  * This should be used for messages that don't require a callback.
  * @memberOf PanelUtils
  */
-export function openSupporterPage() {
-	sendMessage('account.openSupporterPage');
+export function openSubscriptionPage() {
+	sendMessage('account.openSubscriptionPage');
 	window.close();
 }
 

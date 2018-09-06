@@ -13,7 +13,7 @@
  */
 
 import React from 'react';
-import { openSupporterPage } from '../../utils/msg';
+import { openSubscriptionPage } from '../../utils/msg';
 
 /**
  * @class Implement Subscription Info in subview as a React component.
@@ -43,7 +43,7 @@ const SubscriptionInfo = (props) => {
 									<span className="status-label">{`${t('subscription_status')}: `}</span>
 									<span className="status-value red">{ t('subscription_days_left', plan_ends.toString()) }</span>
 									<div style={{ marginTop: '20px' }}>
-										<span className="status-value blue resubscribe" onClick={openSupporterPage}>{ t('subscription_resubscribe') }</span>
+										<span className="status-value blue resubscribe" onClick={openSubscriptionPage}>{ t('subscription_resubscribe') }</span>
 									</div>
 								</div>
 							) : (
@@ -65,7 +65,7 @@ const SubscriptionInfo = (props) => {
 									</div>
 									<div className="manage-row">
 										<div className="manage-icon" />
-										<span className="manage-link" onClick={openSupporterPage}>{t('subscription_manage')}</span>
+										<span className="manage-link" onClick={openSubscriptionPage}>{t('subscription_manage')}</span>
 									</div>
 								</div>
 							)}
