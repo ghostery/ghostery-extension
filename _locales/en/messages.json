@@ -1599,6 +1599,30 @@
 	"setup_upgrade_button_go": {
 		"message": "Set Me Up"
 	},
+	"hub_side_navigation_home": {
+		"message": "Home"
+	},
+	"hub_side_navigation_setup": {
+		"message": "Customize Setup"
+	},
+	"hub_side_navigation_tutorial": {
+		"message": "Take a Tutorial"
+	},
+	"hub_side_navigation_supporter": {
+		"message": "Become a Supporter"
+	},
+	"hub_side_navigation_rewards": {
+		"message": "Try Ghostery Rewards"
+	},
+	"hub_side_navigation_products": {
+		"message": "See More Ghostery Products"
+	},
+	"hub_side_navigation_create_account": {
+		"message": "Create Account"
+	},
+	"hub_side_navigation_log_in": {
+		"message": "Sign In"
+	},
 	"hub_home_page_title": {
 		"message": "Ghostery Hub - Home"
 	},

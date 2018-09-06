@@ -27,7 +27,7 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
         className="flex-container align-center-middle"
       >
         <div
-          className="SupporterView__button SupporterView--addSideMargin button disabled"
+          className="SupporterView__button button SupporterView--addSideMargin disabled"
         >
           hub_supporter_button_text_alt
         </div>
@@ -218,7 +218,7 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
           className="SupporterView__bar flex-child-grow"
         />
         <div
-          className="SupporterView__button SupporterView--addSideMargin button disabled"
+          className="SupporterView__button button SupporterView--addSideMargin disabled"
         >
           hub_supporter_button_text_alt
         </div>
@@ -257,11 +257,14 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
       <div
         className="flex-container align-center-middle"
       >
-        <div
-          className="SupporterView__button SupporterView--addSideMargin button"
+        <a
+          className="SupporterView__button button SupporterView--addSideMargin"
+          href="https://account.ghosterystage.com/subscription"
+          rel="noopener noreferrer"
+          target="_blank"
         >
           hub_supporter_button_text
-        </div>
+        </a>
         <div
           className="SupporterView__headingCost SupporterView--addSideMargin flex-container align-middle"
           dangerouslySetInnerHTML={
@@ -360,11 +363,14 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
         >
           hub_supporter_feature_theme_description
         </div>
-        <div
+        <a
           className="SupporterView__button button"
+          href="https://account.ghosterystage.com/subscription"
+          rel="noopener noreferrer"
+          target="_blank"
         >
           hub_supporter_button_text
-        </div>
+        </a>
       </div>
       <div
         className="SupporterView__feature columns small-12 medium-6"
@@ -405,11 +411,14 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
         >
           hub_supporter_feature_support_description
         </div>
-        <div
+        <a
           className="SupporterView__button button"
+          href="https://account.ghosterystage.com/subscription"
+          rel="noopener noreferrer"
+          target="_blank"
         >
           hub_supporter_button_text
-        </div>
+        </a>
       </div>
     </div>
   </div>
@@ -448,11 +457,14 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
         <div
           className="SupporterView__bar flex-child-grow"
         />
-        <div
-          className="SupporterView__button SupporterView--addSideMargin button"
+        <a
+          className="SupporterView__button button SupporterView--addSideMargin"
+          href="https://account.ghosterystage.com/subscription"
+          rel="noopener noreferrer"
+          target="_blank"
         >
           hub_supporter_button_text
-        </div>
+        </a>
         <div
           className="SupporterView__bar flex-child-grow"
         />

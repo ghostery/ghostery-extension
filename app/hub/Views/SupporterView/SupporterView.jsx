@@ -14,6 +14,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
+import globals from '../../../../src/classes/Globals';
+
+/**
+ * Helper render function for rendering the Supporter Button
+ * @param  {Boolean} isSupporter    whether the user is a subscriber
+ * @param  {Boolean} addSideMargin  whether to add spacing around the button
+ * @return {JSX} JSX of the Supporter Button
+ */
+function _renderButton(isSupporter, addSideMargin) {
+	const buttonHref = `https://account.${globals.GHOSTERY_DOMAIN}.com/subscription`;
+	const buttonClassNames = ClassNames('SupporterView__button', 'button', {
+		'SupporterView--addSideMargin': addSideMargin,
+		disabled: isSupporter,
+	});
+
+	return isSupporter ? (
+		<div className={buttonClassNames}>
+			{t('hub_supporter_button_text_alt')}
+		</div>
+	) : (
+		<a className={buttonClassNames} href={buttonHref} target="_blank" rel="noopener noreferrer">
+			{t('hub_supporter_button_text')}
+		</a>
+	);
+}
 
 /**
  * A Functional React component for rendering the Supporter View
@@ -22,12 +47,6 @@ import ClassNames from 'classnames';
  */
 const SupporterView = (props) => {
 	const { isSupporter } = props;
-	const buttonClassNames = ClassNames('SupporterView__button button', {
-		disabled: isSupporter,
-	});
-	const buttonMarginClassNames = ClassNames('SupporterView__button SupporterView--addSideMargin button', {
-		disabled: isSupporter,
-	});
 
 	return (
 		<div className="SupporterView">
@@ -41,9 +60,7 @@ const SupporterView = (props) => {
 						{t('hub_supporter_header_description')}
 					</div>
 					<div className="flex-container align-center-middle">
-						<div className={buttonMarginClassNames}>
-							{isSupporter ? t('hub_supporter_button_text_alt') : t('hub_supporter_button_text')}
-						</div>
+						{_renderButton(isSupporter, true)}
 						<div
 							className="SupporterView__headingCost SupporterView--addSideMargin flex-container align-middle"
 							dangerouslySetInnerHTML={{ __html: t('hub_supporter_price') }}
@@ -96,9 +113,7 @@ const SupporterView = (props) => {
 						<div className="SupporterView__headingDescription">
 							{t('hub_supporter_feature_theme_description')}
 						</div>
-						<div className={buttonClassNames}>
-							{isSupporter ? t('hub_supporter_button_text_alt') : t('hub_supporter_button_text')}
-						</div>
+						{_renderButton(isSupporter, false)}
 					</div>
 					<div className="SupporterView__feature columns small-12 medium-6">
 						<img
@@ -125,9 +140,7 @@ const SupporterView = (props) => {
 						<div className="SupporterView__headingDescription">
 							{t('hub_supporter_feature_support_description')}
 						</div>
-						<div className={buttonClassNames}>
-							{isSupporter ? t('hub_supporter_button_text_alt') : t('hub_supporter_button_text')}
-						</div>
+						{_renderButton(isSupporter, false)}
 					</div>
 				</div>
 			</div>
@@ -150,9 +163,7 @@ const SupporterView = (props) => {
 				<div className="SupporterView--addPaddingTop">
 					<div className="row align-center-middle">
 						<div className="SupporterView__bar flex-child-grow" />
-						<div className={buttonMarginClassNames}>
-							{isSupporter ? t('hub_supporter_button_text_alt') : t('hub_supporter_button_text')}
-						</div>
+						{_renderButton(isSupporter, true)}
 						<div className="SupporterView__bar flex-child-grow" />
 					</div>
 				</div>
