@@ -30,7 +30,6 @@ import ProductsView from './Views/ProductsView';
 import CreateAccountView from './Views/CreateAccountView';
 import LogInView from './Views/LogInView';
 
-
 const store = createStore();
 
 /**

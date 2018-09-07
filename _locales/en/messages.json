@@ -1683,6 +1683,9 @@
 	"hub_home_feature_supporter_button": {
 		"message": "Become a Supporter"
 	},
+	"hub_home_feature_supporter_button_alt": {
+		"message": "Already Subscribed"
+	},
 	"hub_setup_page_title": {
 		"message": "Ghostery Hub - Setup"
 	},

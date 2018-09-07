@@ -15,6 +15,7 @@ import React from 'react';
 import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
+import globals from '../../../../src/classes/Globals';
 import { ToggleCheckbox } from '../../../shared-components';
 
 /**
@@ -29,13 +30,10 @@ const HomeView = (props) => {
 		tutorial_complete,
 		enable_metrics,
 		changeMetrics,
-		account_text,
-		account_link,
 		email,
-		emailClick,
-		loginAlertText,
-		closeAlert,
+		isSupporter,
 	} = props;
+	const accountHref = `https://account.${globals.GHOSTERY_DOMAIN}.com`;
 	const tutorialFeatureClassNames = ClassNames('HomeView__onboardingFeature columns flex-container align-middle flex-dir-column', {
 		'feature-tutorial-complete': tutorial_complete,
 		'feature-tutorial': !tutorial_complete,
@@ -50,10 +48,7 @@ const HomeView = (props) => {
 	const setupButtonClassNames = ClassNames('HomeView__featureButton button primary', {
 		hollow: setup_complete,
 	});
-	const loginAlert = ClassNames({
-		'create-account-result': true,
-		success: !!loginAlertText,
-	});
+
 	return (
 		<div className="HomeView row align-center">
 			<div className="columns small-12 medium-10 large-8">
@@ -95,18 +90,16 @@ const HomeView = (props) => {
 						{t('hub_home_subheader_optimize')}
 					</div>
 					{email ? (
-						<div onClick={emailClick} className="HomeView__emailLink">{email}</div>
+						<a className="HomeView__userEmail" href={accountHref} target="_blank" rel="noopener noreferrer">
+							{email}
+						</a>
 					) : (
-						<NavLink to={account_link}>
-							{account_text}
+						<NavLink className="HomeView__createAccount" to="/create-account">
+							{t('hub_home_subheader_create_account')}
 						</NavLink>
 					)}
 				</div>
 				<div className="HomeView__onboarding row">
-					<div className={loginAlert}>
-						{loginAlertText}
-						<span className="account-close-button" onClick={closeAlert} />
-					</div>
 					<div className={tutorialFeatureClassNames}>
 						<div className="HomeView__featureIcon" />
 						<div className="HomeView__featureTitle">
@@ -140,9 +133,15 @@ const HomeView = (props) => {
 						</div>
 						<div className="HomeView__featureIcon columns shrink feature-supporter" />
 						<div className="columns flex-container align-center-middle">
-							<NavLink to="/supporter" className="HomeView__featureButton button primary">
-								{t('hub_home_feature_supporter_button')}
-							</NavLink>
+							{isSupporter ? (
+								<div className="HomeView__featureButton button primary disabled">
+									{t('hub_home_feature_supporter_button_alt')}
+								</div>
+							) : (
+								<NavLink to="/supporter" className="HomeView__featureButton button primary">
+									{t('hub_home_feature_supporter_button')}
+								</NavLink>
+							)}
 						</div>
 					</div>
 				</div>
@@ -158,11 +157,8 @@ HomeView.propTypes = {
 	tutorial_complete: PropTypes.bool.isRequired,
 	enable_metrics: PropTypes.bool.isRequired,
 	changeMetrics: PropTypes.func.isRequired,
-	account_text: PropTypes.string.isRequired,
-	account_link: PropTypes.string.isRequired,
 	email: PropTypes.string.isRequired,
-	loginAlertText: PropTypes.string.isRequired,
-	closeAlert: PropTypes.func.isRequired,
+	isSupporter: PropTypes.bool.isRequired,
 };
 
 export default HomeView;

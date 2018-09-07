@@ -39,4 +39,3 @@ export function setMetrics(actionData) {
 		});
 	};
 }
-

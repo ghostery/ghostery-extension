@@ -45,11 +45,6 @@
 	font-size: 16px;
 	font-weight: 500;
 	line-height: 32px;
-	.HomeView__emailLink {
-		@extend %pointer;
-		text-decoration: underline;
-		color: $ghosty-blue;
-	}
 }
 .HomeView__subHeader a {
 	text-decoration: underline;

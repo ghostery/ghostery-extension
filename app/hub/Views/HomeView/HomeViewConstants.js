@@ -14,4 +14,3 @@
 // Home View
 export const GET_HOME_PROPS = 'GET_HOME_PROPS';
 export const SET_METRICS = 'SET_METRICS';
-

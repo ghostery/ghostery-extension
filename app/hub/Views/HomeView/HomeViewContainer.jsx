@@ -15,7 +15,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import QueryString from 'query-string';
 import HomeView from './HomeView';
-import { sendMessage } from '../../utils';
 
 /**
  * @class Implement the Home View Container for the Ghostery Hub
@@ -26,16 +25,10 @@ class HomeViewContainer extends Component {
 	constructor(props) {
 		super(props);
 
-		let { justInstalled } = QueryString.parse(window.location.search);
-		if (justInstalled === 'true' && (this.props.fromLoginPage || this.props.fromCreateAccountPage)) {
-			const { origin, pathname, hash } = window.location;
-			window.history.pushState({}, '', `${origin}${pathname}${hash}`);
-			justInstalled = false;
-		}
+		const { justInstalled } = QueryString.parse(window.location.search);
 		this.state = {
 			justInstalled: justInstalled === 'true',
 		};
-
 
 		const title = t('hub_home_page_title');
 		window.document.title = title;
@@ -52,55 +45,25 @@ class HomeViewContainer extends Component {
 	}
 
 	/**
-	* Function to handle click on user email which
-	* replaces create account link in logged in state
-	*/
-	_handleEmailClick = () => {
-		sendMessage('OPEN_USER_PROFILE');
-	}
-
-	/**
-	* Function to handle click on 'X' of the successful login banner
-	* Cleared params return back as property values which hide the banner.
-	*/
-	_closeAlert = () => {
-		this.props.actions.clearLoginParams();
-	}
-
-	/**
 	 * React's required render function. Returns JSX
 	 * @return {JSX} JSX for rendering the Home View of the Hub app
 	 */
 	render() {
-		// ToDo: Get these from action, reducer and props. Will be on this.props.home
-		// These are passed as props so we can the user's email and link to their account when they are signed in
-		const account_text = t('hub_home_subheader_create_account');
-		const account_link = '/create-account';
-
 		const { justInstalled } = this.state;
-		const { user, fromLoginPage, fromCreateAccountPage } = this.props;
-		const email = user ? user.email : '';
-
-		const loginAlertText = (fromLoginPage && !fromCreateAccountPage) ?
-			`${t('panel_signin_success')} ${email}` :
-			(!fromLoginPage && fromCreateAccountPage) ? `${t('create_account_success')} ${t('panel_signin_success')} ${email}` : '';
+		const { home, user, subscriptionsSupporter } = this.props;
 		const {
 			setup_complete,
 			tutorial_complete,
 			enable_metrics,
-		} = this.props.home;
+		} = home;
 		const childProps = {
 			justInstalled,
 			setup_complete,
 			tutorial_complete,
 			enable_metrics,
 			changeMetrics: this._handleToggleMetrics,
-			account_text,
-			account_link,
-			email,
-			loginAlertText,
-			emailClick: this._handleEmailClick,
-			closeAlert: this._closeAlert,
+			email: user ? user.email : '',
+			isSupporter: !!subscriptionsSupporter,
 		};
 
 		return <HomeView {...childProps} />;
@@ -115,23 +78,23 @@ HomeViewContainer.propTypes = {
 		tutorial_complete: PropTypes.bool,
 		enable_metrics: PropTypes.bool,
 	}),
-	account_text: PropTypes.string,
-	account_link: PropTypes.string,
-	email: PropTypes.string,
-	loginAlertText: PropTypes.string,
+	user: PropTypes.shape({
+		email: PropTypes.string,
+	}),
+	subscriptionsSupporter: PropTypes.bool
 };
 
-// Default props used throughout the Setup flow
+// Default props used on the Home View
 HomeViewContainer.defaultProps = {
 	home: {
 		setup_complete: false,
 		tutorial_complete: false,
 		enable_metrics: false,
 	},
-	account_text: '',
-	account_link: '',
-	email: '',
-	loginAlertText: '',
+	user: {
+		email: '',
+	},
+	subscriptionsSupporter: false,
 };
 
 export default HomeViewContainer;

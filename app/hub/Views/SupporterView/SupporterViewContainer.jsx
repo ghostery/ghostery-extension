@@ -32,7 +32,7 @@ class SupporterViewContainer extends Component {
 	}
 
 	render() {
-		const isSupporter = !!(this.props.user && this.props.user.subscriptionsSupporter);
+		const isSupporter = !!(this.props.subscriptionsSupporter);
 
 		return <SupporterView isSupporter={isSupporter} />;
 	}
@@ -40,9 +40,7 @@ class SupporterViewContainer extends Component {
 
 // PropTypes ensure we pass required props of the correct type
 SupporterViewContainer.propTypes = {
-	user: PropTypes.shape({
-		subscriptionsSupporter: PropTypes.bool,
-	}),
+	subscriptionsSupporter: PropTypes.bool,
 	actions: PropTypes.shape({
 		getUser: PropTypes.func.isRequired,
 	}).isRequired,
@@ -50,9 +48,7 @@ SupporterViewContainer.propTypes = {
 
 // Default props used in the Supporter View
 SupporterViewContainer.defaultProps = {
-	user: {
-		subscriptionsSupporter: false,
-	},
+	subscriptionsSupporter: false,
 };
 
 export default SupporterViewContainer;

@@ -17,7 +17,6 @@ import { bindActionCreators } from 'redux';
 import HomeViewContainer from './HomeViewContainer';
 import HomeViewReducer from './HomeViewReducer';
 import * as HomeViewActions from './HomeViewActions';
-import { clearLoginParams } from '../AppView/AppViewActions';
 
 /**
  * Map redux store state properties to the component's own properties.
@@ -27,8 +26,7 @@ import { clearLoginParams } from '../AppView/AppViewActions';
  */
 const mapStateToProps = state => Object.assign({}, state.home, {
 	user: state.account.user,
-	fromLoginPage: state.app.fromLoginPage,
-	fromCreateAccountPage: state.app.fromCreateAccountPage,
+	subscriptionsSupporter: state.account.subscriptionsSupporter,
 });
 
 /**
@@ -38,7 +36,7 @@ const mapStateToProps = state => Object.assign({}, state.home, {
  * @memberof SetupContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign(HomeViewActions, { clearLoginParams }), dispatch),
+	actions: bindActionCreators(Object.assign(HomeViewActions), dispatch),
 });
 
 export const reducer = HomeViewReducer;
