@@ -45,9 +45,8 @@ html, body, #root {
 @import './partials/_hub_svgs';
 
 // Imports from ../hub directory
-@import '../hub/Views/HomeView/HomeView.scss';
 @import '../hub/Views/SideNavigationView/SideNavigationView.scss';
-@import '../hub/Views/CreateAccountView/AccountView.scss';
+@import '../hub/Views/HomeView/HomeView.scss';
 @import '../hub/Views/SetupView/SetupView.scss';
 @import '../hub/Views/SetupViews/SetupHeader/SetupHeader.scss';
 @import '../hub/Views/SetupViews/SetupBlockingView/SetupBlockingView.scss';
@@ -56,8 +55,10 @@ html, body, #root {
 @import '../hub/Views/SetupViews/SetupHumanWebView/SetupHumanWebView.scss';
 @import '../hub/Views/SetupViews/SetupDoneView/SetupDoneView.scss';
 @import '../hub/Views/TutorialView/TutorialView.scss';
+@import '../hub/Views/SupporterView/SupporterView.scss';
 @import '../hub/Views/RewardsView/RewardsView.scss';
 @import '../hub/Views/ProductsView/ProductsView.scss';
+@import '../hub/Views/CreateAccountView/AccountView.scss';
 
 // Imports from ../shared-components directory
 @import '../shared-components/ExitButton/ExitButton.scss';

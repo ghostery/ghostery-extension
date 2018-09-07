@@ -21,20 +21,20 @@ import {
 } from 'redux';
 import thunk from 'redux-thunk';
 
+import { reducer as app } from './Views/AppView';
 import { reducer as home } from './Views/HomeView';
 import { reducer as setup } from './Views/SetupView';
 import { reducer as tutorial } from './Views/TutorialView';
-import { reducer as app } from './Views/AppView';
 import account from '../Account/AccountReducer';
 import settings from '../panel/reducers/settings';
 
 const reducer = combineReducers({
+	app,
 	home,
 	setup,
 	tutorial,
 	account,
 	settings,
-	app,
 });
 
 /**

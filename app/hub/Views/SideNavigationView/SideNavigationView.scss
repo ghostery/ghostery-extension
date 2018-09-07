@@ -32,17 +32,23 @@
 	padding-bottom: 48px;
 }
 .SideNavigation__bottom {
-	padding-bottom: 21px;
+	padding-bottom: 26px;
 }
 .SideNavigation__item {
 	position: relative;
-	min-height: 80px;
 	font-size: 14px;
 	font-weight: 700;
 	line-height: 1.3;
 	letter-spacing: 0.5px;
 	color: #ffffff;
 	pointer-events: none;
+}
+.SideNavigation__menuItem {
+	min-height: 80px;
+}
+.SideNavigation__bottomItem {
+	min-height: 30px;
+	padding-left: 20px;
 }
 .SideNavigation__item a {
 	color: #ffffff;
@@ -60,8 +66,7 @@
 .SideNavigation__item a.active::before {
 	content: '';
 	position: absolute;
-	top:0;
-	right:0;
+	right: 0;
 	height: 0;
 	width: 0;
 	border-style: solid;
@@ -71,13 +76,24 @@
 .SideNavigation__item a.active::after {
 	content: '';
 	position: absolute;
-	bottom: 0;
 	right: 0;
 	height: 0;
 	width: 0;
 	border-style: solid;
 	border-width: 0 30px 40px 0;
 	border-color: transparent #ffffff transparent transparent;
+}
+.SideNavigation__menuItem a.active::before {
+	top: 0;
+}
+.SideNavigation__menuItem a.active::after {
+	bottom: 0;
+}
+.SideNavigation__bottomItem a.active::before {
+	top: -25px;
+}
+.SideNavigation__bottomItem a.active::after {
+	bottom: -25px;
 }
 .SideNavigation__menuIcon {
 	min-width: 55px;

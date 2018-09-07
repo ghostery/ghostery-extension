@@ -25,12 +25,12 @@ class SideNavigationViewContainer extends Component {
 		super(props);
 		this.state = {
 			menuItems: [
-				{ href: '/', icon: 'home', text: 'Home' },
-				{ href: '/setup', icon: 'setup', text: 'Customize Setup' },
-				{ href: '/tutorial', icon: 'tutorial', text: 'Take a Tutorial' },
-				{ href: '/supporter', icon: 'supporter', text: 'Become a Supporter' },
-				{ href: '/rewards', icon: 'rewards', text: 'Try Ghostery Rewards' },
-				{ href: '/products', icon: 'products', text: 'See More Ghostery Products' },
+				{ href: '/', icon: 'home', text: t('hub_side_navigation_home') },
+				{ href: '/setup', icon: 'setup', text: t('hub_side_navigation_setup') },
+				{ href: '/tutorial', icon: 'tutorial', text: t('hub_side_navigation_tutorial') },
+				{ href: '/supporter', icon: 'supporter', text: t('hub_side_navigation_supporter') },
+				{ href: '/rewards', icon: 'rewards', text: t('hub_side_navigation_rewards') },
+				{ href: '/products', icon: 'products', text: t('hub_side_navigation_products') },
 			],
 		};
 	}
