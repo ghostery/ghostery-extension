@@ -33,6 +33,10 @@ class Globals {
 		};
 		this.IS_CLIQZ = false; // TEMP !!((manifest.applications && manifest.applications.gecko && manifest.applications.gecko.update_url));
 
+		this.IS_MOBILE_APP = manifest.applications && manifest.applications.gecko &&
+			manifest.applications.gecko.update_url &&
+			/https:\/\/s3\.amazonaws\.com\/cdncliqz\/update\/android_browser.*\/firefox@ghostery\.com\/update\.json/.exec(manifest.applications.gecko.update_url);
+
 		// flags
 		this.JUST_INSTALLED = false;
 		this.JUST_UPGRADED = false;
