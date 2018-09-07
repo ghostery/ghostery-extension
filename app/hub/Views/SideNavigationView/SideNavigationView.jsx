@@ -33,8 +33,8 @@ const SideNavigationView = (props) => {
 			{ user ? (
 				<div className="SideNavigation__bottom flex-container flex-dir-column">
 					{bottomItems.map(item => (
-						<div key={item.id} onClick={item.clickHandler} className="SideNavigation__item SideNavigation__bottomItem logged-in flex-container align-middle">
-							{item.text}
+						<div key={item.id} className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle">
+							<span className="logged-in" onClick={item.clickHandler} >{item.text}</span>
 						</div>
 					))}
 				</div>

@@ -35,11 +35,11 @@ class SideNavigationViewContainer extends Component {
 		};
 	}
 
-	openUserProfile = () => {
+	_openUserProfile = () => {
 		sendMessage('OPEN_USER_PROFILE');
 	}
 
-	logout = () => {
+	_logout = () => {
 		this.props.actions.logout();
 	}
 
@@ -50,15 +50,16 @@ class SideNavigationViewContainer extends Component {
 			[
 				{
 					id: 'email',
+					clickHandler: this._openUserProfile,
 					text: user.email,
-					clickHandler: this.openUserProfile,
 				},
 				{
 					id: 'logout',
+					clickHandler: this._logout,
 					text: 'Sign Out',
-					clickHandler: this.logout,
 				}
-			] : [
+			] :
+			[
 				{
 					href: '/create-account',
 					text: 'Create Account',
