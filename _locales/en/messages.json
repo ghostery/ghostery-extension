@@ -1623,6 +1623,9 @@
 	"hub_side_navigation_log_in": {
 		"message": "Sign In"
 	},
+	"hub_side_navigation_log_out": {
+		"message": "Sign Out"
+	},
 	"hub_home_page_title": {
 		"message": "Ghostery Hub - Home"
 	},
@@ -2070,30 +2073,6 @@
 	"popup_apply_code_button": {
 		"message": "Apply code"
 	},
-	"setup_sign_in": {
-		"message": "Sign in to your account."
-	},
-	"setup_create_account": {
-		"message": "Why create an account? Creating an account allows you to sync settings across browsers and devices."
-	},
-	"create_account_promotions": {
-		"message": "Send me Ghostery updates & promotions."
-	},
-	"account_already_present": {
-		"message": "I already have an account. Sign in."
-	},
-	"do_not_have_account": {
-		"message": "Don't have an account? Sign Up."
-	},
-	"create_account_error": {
-		"message": "Create Account Error"
-	},
-	"exit_create_account": {
-		"message": "Exit Create Account"
-	},
-	"exit_sign_in": {
-		"message": "Exit Sign In"
-	},
 	"subscription_info": {
 		"message": "Subscription Info"
 	},
@@ -2150,10 +2129,10 @@
 	},
 	"subscription_themes_tooltip": {
 		"message": "Change the color scheme of Ghostery!"
-  },
-  "subscription_tracker_stats": {
-  		"message": "Historical Tracker Stats"
-  },
+	},
+	"subscription_tracker_stats": {
+		"message": "Historical Tracker Stats"
+	},
 	"subscription_tracker_stats_title" : {
 		"message": "Historical Tracker Stats"
 	},
@@ -2165,5 +2144,29 @@
 	},
 	"subscription_auto_renewal": {
 		"message": "Auto Renewal"
+	},
+	"setup_sign_in": {
+		"message": "Sign in to your account."
+	},
+	"setup_create_account": {
+		"message": "Why create an account? Creating an account allows you to sync settings across browsers and devices."
+	},
+	"create_account_promotions": {
+		"message": "Send me Ghostery updates & promotions."
+	},
+	"account_already_present": {
+		"message": "I already have an account. Sign in."
+	},
+	"do_not_have_account": {
+		"message": "Don't have an account? Sign Up."
+	},
+	"create_account_error": {
+		"message": "Create Account Error"
+	},
+	"exit_create_account": {
+		"message": "Exit Create Account"
+	},
+	"exit_sign_in": {
+		"message": "Exit Sign In"
 	}
 }

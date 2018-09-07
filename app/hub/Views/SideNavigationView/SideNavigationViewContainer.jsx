@@ -21,20 +21,6 @@ import { sendMessage } from '../../utils';
  * @memberof HubComponents
  */
 class SideNavigationViewContainer extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			menuItems: [
-				{ href: '/', icon: 'home', text: t('hub_side_navigation_home') },
-				{ href: '/setup', icon: 'setup', text: t('hub_side_navigation_setup') },
-				{ href: '/tutorial', icon: 'tutorial', text: t('hub_side_navigation_tutorial') },
-				{ href: '/supporter', icon: 'supporter', text: t('hub_side_navigation_supporter') },
-				{ href: '/rewards', icon: 'rewards', text: t('hub_side_navigation_rewards') },
-				{ href: '/products', icon: 'products', text: t('hub_side_navigation_products') },
-			],
-		};
-	}
-
 	_openUserProfile = () => {
 		sendMessage('OPEN_USER_PROFILE');
 	}
@@ -45,32 +31,24 @@ class SideNavigationViewContainer extends Component {
 
 	render() {
 		const { user } = this.props;
+		const menuItems = [
+			{ href: '/', icon: 'home', text: t('hub_side_navigation_home') },
+			{ href: '/setup', icon: 'setup', text: t('hub_side_navigation_setup') },
+			{ href: '/tutorial', icon: 'tutorial', text: t('hub_side_navigation_tutorial') },
+			{ href: '/supporter', icon: 'supporter', text: t('hub_side_navigation_supporter') },
+			{ href: '/rewards', icon: 'rewards', text: t('hub_side_navigation_rewards') },
+			{ href: '/products', icon: 'products', text: t('hub_side_navigation_products') },
+		];
+		const bottomItems = user ? [
+			{ id: 'email', text: user.email, clickHandler: this._openUserProfile },
+			{ id: 'logout', text: t('hub_side_navigation_log_out'), clickHandler: this._logout },
+		] : [
+			{ href: '/create-account', text: t('hub_side_navigation_create_account') },
+			{ href: '/log-in', text: t('hub_side_navigation_log_in') },
+		];
+		const childProps = { user, menuItems, bottomItems };
 
-		const bottomItems = user ?
-			[
-				{
-					id: 'email',
-					clickHandler: this._openUserProfile,
-					text: user.email,
-				},
-				{
-					id: 'logout',
-					clickHandler: this._logout,
-					text: 'Sign Out',
-				}
-			] :
-			[
-				{
-					href: '/create-account',
-					text: 'Create Account',
-				},
-				{
-					href: '/log-in',
-					text: 'Sign In',
-				}
-			];
-		const { menuItems } = this.state;
-		return <SideNavigationView menuItems={menuItems} bottomItems={bottomItems} user={user} />;
+		return <SideNavigationView {...childProps} />;
 	}
 }
 
