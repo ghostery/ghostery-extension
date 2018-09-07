@@ -1,5 +1,5 @@
 /**
- * Tutorial View Container
+ * Home View Container
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -26,10 +26,16 @@ class HomeViewContainer extends Component {
 	constructor(props) {
 		super(props);
 
-		const { justInstalled } = QueryString.parse(window.location.search);
+		let { justInstalled } = QueryString.parse(window.location.search);
+		if (justInstalled === 'true' && (this.props.fromLoginPage || this.props.fromCreateAccountPage)) {
+			const { origin, pathname, hash } = window.location;
+			window.history.pushState({}, '', `${origin}${pathname}${hash}`);
+			justInstalled = false;
+		}
 		this.state = {
 			justInstalled: justInstalled === 'true',
 		};
+
 
 		const title = t('hub_home_page_title');
 		window.document.title = title;
@@ -45,10 +51,18 @@ class HomeViewContainer extends Component {
 		this.props.actions.setMetrics({ enable_metrics });
 	}
 
+	/**
+	* Function to handle click on user email which
+	* replaces create account link in logged in state
+	*/
 	_handleEmailClick = () => {
 		sendMessage('OPEN_USER_PROFILE');
 	}
 
+	/**
+	* Function to handle click on 'X' of the successful login banner
+	* Cleared params return back as property values which hide the banner.
+	*/
 	_closeAlert = () => {
 		this.props.actions.clearLoginParams();
 	}

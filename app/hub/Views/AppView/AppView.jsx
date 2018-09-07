@@ -1,5 +1,5 @@
 /**
- * App Component
+ * App View Component
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/

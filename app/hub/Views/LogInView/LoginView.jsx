@@ -1,5 +1,5 @@
 /**
- * Log In View Container
+ * LogIn View
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/

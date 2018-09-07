@@ -1,5 +1,5 @@
 /**
- * Tutorial View Container
+ * App View Container
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/

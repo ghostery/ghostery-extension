@@ -1,5 +1,5 @@
 /**
- * Point of entry index.js file for Home View
+ * Point of entry index.js file for App View
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
