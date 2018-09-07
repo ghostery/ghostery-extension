@@ -23,15 +23,17 @@ describe('app/hub/Views/SideNavigationView component', () => {
 			const initialState = {
 				menuItems: [
 					{ href: '/', icon: 'home', text: 'Home' },
-					{ href: '/setup', icon: 'setup', text: 'Customize Setup' },
-					{ href: '/tutorial', icon: 'tutorial', text: 'Take a Tutorial' },
-					{ href: '/supporter', icon: 'supporter', text: 'Become a Supporter' },
-					{ href: '/rewards', icon: 'rewards', text: 'Try Ghostery Rewards' },
-					{ href: '/products', icon: 'products', text: 'See More Ghostery Products' },
+					{ href: '/setup', icon: 'setup', text: 'Setup' },
+					{ href: '/tutorial', icon: 'tutorial', text: 'Tutorial' },
+					{ href: '/supporter', icon: 'supporter', text: 'Supporter' },
+					{ href: '/rewards', icon: 'rewards', text: 'Rewards' },
+					{ href: '/products', icon: 'products', text: 'Products' },
 				],
 				bottomItems: [
-					{ href: '/create-account', text: 'Create Account' },
-					{ href: '/log-in', text: 'Sign In' },
+					{ id: 'create-account', href: '/create-account', text: 'Create Account' },
+					{ id: 'login', href: '/log-in', text: 'Log In' },
+					{ id: 'email', href: 'https://account.ghostery.com/', text: 'test@example.com' },
+					{ id: 'logout', text: 'Log Out', clickHandler: () => {} },
 				],
 			};
 
@@ -65,15 +67,17 @@ describe('app/hub/Views/SideNavigationView component', () => {
 			const initialState = {
 				menuItems: [
 					{ href: '/', icon: 'home', text: 'Home' },
-					{ href: '/setup', icon: 'setup', text: 'Customize Setup' },
-					{ href: '/tutorial', icon: 'tutorial', text: 'Take a Tutorial' },
-					{ href: '/supporter', icon: 'supporter', text: 'Become a Supporter' },
-					{ href: '/rewards', icon: 'rewards', text: 'Try Ghostery Rewards' },
-					{ href: '/products', icon: 'products', text: 'See More Ghostery Products' },
+					{ href: '/setup', icon: 'setup', text: 'Setup' },
+					{ href: '/tutorial', icon: 'tutorial', text: 'Tutorial' },
+					{ href: '/supporter', icon: 'supporter', text: 'Supporter' },
+					{ href: '/rewards', icon: 'rewards', text: 'Rewards' },
+					{ href: '/products', icon: 'products', text: 'Products' },
 				],
 				bottomItems: [
-					{ href: '/create-account', text: 'Create Account' },
-					{ href: '/log-in', text: 'Sign In' },
+					{ id: 'create-account', href: '/create-account', text: 'Create Account' },
+					{ id: 'login', href: '/log-in', text: 'Log In' },
+					{ id: 'email', href: 'https://account.ghostery.com/', text: 'test@example.com' },
+					{ id: 'logout', text: 'Log Out', clickHandler: () => {} },
 				],
 			};
 

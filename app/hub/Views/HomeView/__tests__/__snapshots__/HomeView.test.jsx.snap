@@ -72,7 +72,7 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
       </div>
       <a
         aria-current={null}
-        className="HomeView__createAccount"
+        className={undefined}
         href="/create-account"
         onClick={[Function]}
         style={undefined}
@@ -248,7 +248,6 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
         hub_home_subheader_optimize
       </div>
       <a
-        className="HomeView__userEmail"
         href="https://account.ghosterystage.com"
         rel="noopener noreferrer"
         target="_blank"
@@ -332,11 +331,15 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
         <div
           className="columns flex-container align-center-middle"
         >
-          <div
-            className="HomeView__featureButton button primary disabled"
+          <a
+            aria-current={null}
+            className="HomeView__featureButton button primary"
+            href="/supporter"
+            onClick={[Function]}
+            style={undefined}
           >
             hub_home_feature_supporter_button_alt
-          </div>
+          </a>
         </div>
       </div>
     </div>

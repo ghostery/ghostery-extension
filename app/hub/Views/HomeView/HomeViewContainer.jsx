@@ -34,6 +34,7 @@ class HomeViewContainer extends Component {
 		window.document.title = title;
 
 		this.props.actions.getHomeProps();
+		props.actions.getUser();
 	}
 
 	/**
@@ -63,7 +64,7 @@ class HomeViewContainer extends Component {
 			enable_metrics,
 			changeMetrics: this._handleToggleMetrics,
 			email: user ? user.email : '',
-			isSupporter: !!subscriptionsSupporter,
+			isSupporter: !!(user && user.subscriptionsSupporter),
 		};
 
 		return <HomeView {...childProps} />;
@@ -80,8 +81,13 @@ HomeViewContainer.propTypes = {
 	}),
 	user: PropTypes.shape({
 		email: PropTypes.string,
+		subscriptionsSupporter: PropTypes.bool,
 	}),
-	subscriptionsSupporter: PropTypes.bool
+	actions: PropTypes.shape({
+		getHomeProps: PropTypes.func.isRequired,
+		setMetrics: PropTypes.func.isRequired,
+		getUser: PropTypes.func.isRequired,
+	}).isRequired,
 };
 
 // Default props used on the Home View
@@ -93,8 +99,8 @@ HomeViewContainer.defaultProps = {
 	},
 	user: {
 		email: '',
+		subscriptionsSupporter: false,
 	},
-	subscriptionsSupporter: false,
 };
 
 export default HomeViewContainer;

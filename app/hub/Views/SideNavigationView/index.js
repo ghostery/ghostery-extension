@@ -13,7 +13,6 @@
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { withRouter } from 'react-router-dom';
 
 import SideNavigationViewContainer from './SideNavigationViewContainer';
 import { logout } from '../../../Account/AccountActions';
@@ -24,7 +23,9 @@ import { logout } from '../../../Account/AccountActions';
  * @return {function}        this function returns a plain object, which will be merged into the component's props
  * @memberof HubContainers
  */
-const mapStateToProps = state => Object.assign({}, { user: state.account.user });
+const mapStateToProps = state => Object.assign({}, {
+	user: state.account.user
+});
 
 /**
  * Bind the component's action creators using Redux's bindActionCreators.
@@ -33,8 +34,7 @@ const mapStateToProps = state => Object.assign({}, { user: state.account.user })
  * @memberof SetupContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign({ logout }), dispatch),
+	actions: bindActionCreators(Object.assign({}, { logout }), dispatch),
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SideNavigationViewContainer));
-
+export default connect(mapStateToProps, mapDispatchToProps)(SideNavigationViewContainer);

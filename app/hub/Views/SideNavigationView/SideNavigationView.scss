@@ -50,6 +50,7 @@
 	min-height: 30px;
 	padding-left: 20px;
 }
+.SideNavigation__item .clickable,
 .SideNavigation__item a {
 	color: #ffffff;
 	pointer-events: all;
@@ -122,12 +123,4 @@
 }
 .SideNavigation__menuText {
 	max-width: 145px;
-}
-.SideNavigation__bottomItem {
-	padding-left: 20px;
-	margin: -24px 0;
-	span.logged-in {
-		@extend %pointer;
-		pointer-events: all;
-	}
 }

@@ -141,7 +141,7 @@ class CreateAccountViewContainer extends Component {
 
 	/**
 	 * React's required render function. Returns JSX
-	 * @return {JSX} JSX for rendering the Log In View of the Hub app
+	 * @return {JSX} JSX for rendering the Create Account View of the Hub app
 	 */
 	render() {
 		const childProps = Object.assign({}, this.state, {

@@ -15,6 +15,44 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
+/**
+ * Helper render function for rendering a list item for the Navigation Bottom
+ * @param  {Object} item the bottom menu list item
+ * @return {JSX} JSX of the Navigation Bottom Item
+ */
+function _renderBottomItem(item) {
+	if (item.id === 'email') {
+		return (
+			<div key={`bottom-item-${item.id}`} className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle">
+				<a href={item.href} target="_blank" rel="noopener noreferrer">
+					{item.text}
+				</a>
+			</div>
+		);
+	} else if (item.id === 'logout') {
+		return (
+			<div key={`bottom-item-${item.id}`} className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle">
+				<div className="clickable" onClick={item.clickHandler}>
+					{item.text}
+				</div>
+			</div>
+		);
+	}
+
+	return (
+		<div key={`bottom-item-${item.id}`} className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle">
+			<NavLink to={item.href}>
+				{item.text}
+			</NavLink>
+		</div>
+	);
+}
+
+/**
+ * A Functional React component for rendering the Side Navigation View
+ * @return {JSX} JSX for rendering the Side Navigation View of the Hub app
+ * @memberof HubComponents
+ */
 const SideNavigationView = (props) => {
 	const { menuItems, bottomItems, user } = props;
 	return (
@@ -30,25 +68,9 @@ const SideNavigationView = (props) => {
 					</div>
 				))}
 			</div>
-			{ user ? (
-				<div className="SideNavigation__bottom flex-container flex-dir-column">
-					{bottomItems.map(item => (
-						<div key={item.id} className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle">
-							<span className="logged-in" onClick={item.clickHandler} >{item.text}</span>
-						</div>
-					))}
-				</div>
-			) : (
-				<div className="SideNavigation__bottom flex-container flex-dir-column">
-					{bottomItems.map(item => (
-						<div key={`bottom-item-${item.href.substring(1)}`} className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle">
-							<NavLink to={item.href}>
-								{item.text}
-							</NavLink>
-						</div>
-					))}
-				</div>
-			)}
+			<div className="SideNavigation__bottom flex-container flex-dir-column">
+				{bottomItems.map(_renderBottomItem)}
+			</div>
 		</div>
 	);
 };
@@ -61,10 +83,10 @@ SideNavigationView.propTypes = {
 		text: PropTypes.string.isRequired,
 	})).isRequired,
 	bottomItems: PropTypes.arrayOf(PropTypes.shape({
-		href: PropTypes.string,
-		id: PropTypes.string,
-		clickHandler: PropTypes.func,
+		id: PropTypes.string.isRequired,
 		text: PropTypes.string.isRequired,
+		href: PropTypes.string,
+		clickHandler: PropTypes.func,
 	})).isRequired,
 };
 

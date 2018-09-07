@@ -70,7 +70,7 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         <div
           className="SideNavigation__menuText"
         >
-          Customize Setup
+          Setup
         </div>
       </a>
     </div>
@@ -90,7 +90,7 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         <div
           className="SideNavigation__menuText"
         >
-          Take a Tutorial
+          Tutorial
         </div>
       </a>
     </div>
@@ -110,7 +110,7 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         <div
           className="SideNavigation__menuText"
         >
-          Become a Supporter
+          Supporter
         </div>
       </a>
     </div>
@@ -130,7 +130,7 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         <div
           className="SideNavigation__menuText"
         >
-          Try Ghostery Rewards
+          Rewards
         </div>
       </a>
     </div>
@@ -150,7 +150,7 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         <div
           className="SideNavigation__menuText"
         >
-          See More Ghostery Products
+          Products
         </div>
       </a>
     </div>
@@ -181,8 +181,29 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         onClick={[Function]}
         style={undefined}
       >
-        Sign In
+        Log In
       </a>
+    </div>
+    <div
+      className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle"
+    >
+      <a
+        href="https://account.ghostery.com/"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        test@example.com
+      </a>
+    </div>
+    <div
+      className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle"
+    >
+      <div
+        className="clickable"
+        onClick={[Function]}
+      >
+        Log Out
+      </div>
     </div>
   </div>
 </div>

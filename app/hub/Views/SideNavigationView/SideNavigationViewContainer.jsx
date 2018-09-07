@@ -12,7 +12,9 @@
  */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import SideNavigationView from './SideNavigationView';
+import globals from '../../../../src/classes/Globals';
 import { sendMessage } from '../../utils';
 
 /**
@@ -20,36 +22,48 @@ import { sendMessage } from '../../utils';
  * @extends Component
  * @memberof HubComponents
  */
-class SideNavigationViewContainer extends Component {
-	_openUserProfile = () => {
-		sendMessage('OPEN_USER_PROFILE');
-	}
+ /**
+  * A Functional React component for rendering the Side Navigation Container
+  * @return {JSX} JSX for rendering the Side Navigation Container of the Hub app
+  * @memberof HubComponents
+  */
+const SideNavigationViewContainer = (props) => {
+	const { actions, user } = props;
+	const menuItems = [
+		{ href: '/', icon: 'home', text: t('hub_side_navigation_home') },
+		{ href: '/setup', icon: 'setup', text: t('hub_side_navigation_setup') },
+		{ href: '/tutorial', icon: 'tutorial', text: t('hub_side_navigation_tutorial') },
+		{ href: '/supporter', icon: 'supporter', text: t('hub_side_navigation_supporter') },
+		{ href: '/rewards', icon: 'rewards', text: t('hub_side_navigation_rewards') },
+		{ href: '/products', icon: 'products', text: t('hub_side_navigation_products') },
+	];
+	const bottomItems = user ? [
+		{ id: 'email', href: `https://account.${globals.GHOSTERY_DOMAIN}.com/`, text: user.email },
+		{ id: 'logout', text: t('hub_side_navigation_log_out'), clickHandler: actions.logout },
+	] : [
+		{ id: 'create-account', href: '/create-account', text: t('hub_side_navigation_create_account') },
+		{ id: 'log-id', href: '/log-in', text: t('hub_side_navigation_log_in') },
+	];
+	const childProps = { user, menuItems, bottomItems };
 
-	_logout = () => {
-		this.props.actions.logout();
-	}
+	return <SideNavigationView {...childProps} />;
+};
 
-	render() {
-		const { user } = this.props;
-		const menuItems = [
-			{ href: '/', icon: 'home', text: t('hub_side_navigation_home') },
-			{ href: '/setup', icon: 'setup', text: t('hub_side_navigation_setup') },
-			{ href: '/tutorial', icon: 'tutorial', text: t('hub_side_navigation_tutorial') },
-			{ href: '/supporter', icon: 'supporter', text: t('hub_side_navigation_supporter') },
-			{ href: '/rewards', icon: 'rewards', text: t('hub_side_navigation_rewards') },
-			{ href: '/products', icon: 'products', text: t('hub_side_navigation_products') },
-		];
-		const bottomItems = user ? [
-			{ id: 'email', text: user.email, clickHandler: this._openUserProfile },
-			{ id: 'logout', text: t('hub_side_navigation_log_out'), clickHandler: this._logout },
-		] : [
-			{ href: '/create-account', text: t('hub_side_navigation_create_account') },
-			{ href: '/log-in', text: t('hub_side_navigation_log_in') },
-		];
-		const childProps = { user, menuItems, bottomItems };
+// PropTypes ensure we pass required props of the correct type
+SideNavigationViewContainer.propTypes = {
+	actions: PropTypes.shape({
+		logout: PropTypes.func.isRequired,
+	}).isRequired,
+	user: PropTypes.shape({
+		email: PropTypes.string,
+	}),
+};
 
-		return <SideNavigationView {...childProps} />;
-	}
-}
+// Default props used on the Side Navigation View
+SideNavigationViewContainer.defaultProps = {
+	user: {
+		email: '',
+	},
+};
 
 export default SideNavigationViewContainer;

@@ -92,17 +92,11 @@ describe('app/hub/Views/HomeView component', () => {
 			component.setProps({ setup_complete: true });
 			expect(component.find('.HomeView__featureButton.hollow').length).toBe(2);
 
-			expect(component.find('.HomeView__userEmail').length).toBe(0);
-			expect(component.find('.HomeView__createAccount').length).toBe(1);
+			expect(component.find('.HomeView__subHeader a').length).toBe(0);
+			expect(component.find('.HomeView__subHeader NavLink').length).toBe(1);
 			component.setProps({ email: 'test@example.com' });
-			expect(component.find('.HomeView__userEmail').length).toBe(1);
-			expect(component.find('.HomeView__createAccount').length).toBe(0);
-
-			expect(component.find('NavLink.HomeView__featureButton').length).toBe(3);
-			expect(component.find('div.HomeView__featureButton.disabled').length).toBe(0);
-			component.setProps({ isSupporter: true });
-			expect(component.find('NavLink.HomeView__featureButton').length).toBe(2);
-			expect(component.find('div.HomeView__featureButton.disabled').length).toBe(1);
+			expect(component.find('.HomeView__subHeader a').length).toBe(1);
+			expect(component.find('.HomeView__subHeader NavLink').length).toBe(0);
 		});
 	});
 });

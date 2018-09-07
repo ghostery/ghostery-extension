@@ -123,12 +123,4 @@
 		display: inline-block;
 		background-color: #e74055;
 	}
-	.account-close-button {
-		width: 12px;
-		height: 12px;
-		background-image: url('/app/images/hub/account/close-button.svg');
-		float: right;
-		margin: 15px;
-		@extend %pointer;
-	}
 }

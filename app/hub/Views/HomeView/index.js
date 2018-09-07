@@ -17,6 +17,7 @@ import { bindActionCreators } from 'redux';
 import HomeViewContainer from './HomeViewContainer';
 import HomeViewReducer from './HomeViewReducer';
 import * as HomeViewActions from './HomeViewActions';
+import * as AccountActions from '../../../Account/AccountActions';
 
 /**
  * Map redux store state properties to the component's own properties.
@@ -24,10 +25,7 @@ import * as HomeViewActions from './HomeViewActions';
  * @return {function}        this function returns a plain object, which will be merged into the component's props
  * @memberof HubContainers
  */
-const mapStateToProps = state => Object.assign({}, state.home, {
-	user: state.account.user,
-	subscriptionsSupporter: state.account.subscriptionsSupporter,
-});
+const mapStateToProps = state => Object.assign({}, state.home, state.account);
 
 /**
  * Bind the component's action creators using Redux's bindActionCreators.
@@ -36,7 +34,9 @@ const mapStateToProps = state => Object.assign({}, state.home, {
  * @memberof SetupContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign(HomeViewActions), dispatch),
+	actions: bindActionCreators(Object.assign({}, HomeViewActions, {
+		getUser: AccountActions.getUser,
+	}), dispatch),
 });
 
 export const reducer = HomeViewReducer;

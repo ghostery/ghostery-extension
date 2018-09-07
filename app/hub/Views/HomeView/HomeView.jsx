@@ -90,11 +90,11 @@ const HomeView = (props) => {
 						{t('hub_home_subheader_optimize')}
 					</div>
 					{email ? (
-						<a className="HomeView__userEmail" href={accountHref} target="_blank" rel="noopener noreferrer">
+						<a href={accountHref} target="_blank" rel="noopener noreferrer">
 							{email}
 						</a>
 					) : (
-						<NavLink className="HomeView__createAccount" to="/create-account">
+						<NavLink to="/create-account">
 							{t('hub_home_subheader_create_account')}
 						</NavLink>
 					)}
@@ -133,15 +133,9 @@ const HomeView = (props) => {
 						</div>
 						<div className="HomeView__featureIcon columns shrink feature-supporter" />
 						<div className="columns flex-container align-center-middle">
-							{isSupporter ? (
-								<div className="HomeView__featureButton button primary disabled">
-									{t('hub_home_feature_supporter_button_alt')}
-								</div>
-							) : (
-								<NavLink to="/supporter" className="HomeView__featureButton button primary">
-									{t('hub_home_feature_supporter_button')}
-								</NavLink>
-							)}
+							<NavLink to="/supporter" className="HomeView__featureButton button primary">
+								{isSupporter ? t('hub_home_feature_supporter_button_alt') : t('hub_home_feature_supporter_button')}
+							</NavLink>
 						</div>
 					</div>
 				</div>

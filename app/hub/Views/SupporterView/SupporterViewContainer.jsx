@@ -31,8 +31,12 @@ class SupporterViewContainer extends Component {
 		props.actions.getUser();
 	}
 
+	/**
+	 * React's required render function. Returns JSX
+	 * @return {JSX} JSX for rendering the Supporter View of the Hub app
+	 */
 	render() {
-		const isSupporter = !!(this.props.subscriptionsSupporter);
+		const isSupporter = !!(this.props.user && this.props.user.subscriptionsSupporter);
 
 		return <SupporterView isSupporter={isSupporter} />;
 	}
@@ -40,7 +44,9 @@ class SupporterViewContainer extends Component {
 
 // PropTypes ensure we pass required props of the correct type
 SupporterViewContainer.propTypes = {
-	subscriptionsSupporter: PropTypes.bool,
+	user: PropTypes.shape({
+		subscriptionsSupporter: PropTypes.bool,
+	}),
 	actions: PropTypes.shape({
 		getUser: PropTypes.func.isRequired,
 	}).isRequired,
@@ -48,7 +54,9 @@ SupporterViewContainer.propTypes = {
 
 // Default props used in the Supporter View
 SupporterViewContainer.defaultProps = {
-	subscriptionsSupporter: false,
+	user: {
+		subscriptionsSupporter: false,
+	},
 };
 
 export default SupporterViewContainer;
