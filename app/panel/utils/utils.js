@@ -138,6 +138,22 @@ export function validateConfirmEmail(email, confirmEmail) {
 }
 
 /**
+ * Check for confirm email equality to email
+ * @memberOf PanelUtils
+ * @param  {string} email 			email
+ * @param  {string} confirmEmail 	confirm email to validate
+ * @return {boolean}				true if equal, false otherwise
+ */
+export function validateEmailsMatch(email, confirmEmail) {
+	if (!email || !confirmEmail) {
+		return false;
+	}
+	const lEmail = email.toLowerCase();
+	const lConfirmEmail = confirmEmail.toLowerCase();
+	return lEmail === lConfirmEmail;
+}
+
+/**
  * Check for valid password
  * @memberOf PanelUtils
  * @param  {string} pwd 	password to validate

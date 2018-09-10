@@ -12,9 +12,10 @@
  */
 
 import React, { Component } from 'react';
-import RSVP from 'rsvp';
 import { validateEmail } from '../../../panel/utils/utils';
-import LogInView from './LoginView';
+import LogInView from './LogInView';
+import SignedInView from '../SignedInView';
+import { ToastMessage } from '../../../shared-components';
 /**
  * @class Implement the Log In View for the Ghostery Hub
  * @extends Component
@@ -28,25 +29,43 @@ class LogInViewContainer extends Component {
 			password: '',
 			emailError: false,
 			passwordError: false,
-			loginSuccess: false,
-			loginErrorText: '',
+			toastMessage: '',
+			toastClass: ''
 		};
 	}
 
 	/**
-	 * Update state with changed values.
-	 * @param {Object}  event 	'change' event
+	 * Update input values by updating state.
+	 * @param  {Object} event the 'change' event
 	 */
-	handleInputChange = (e) => {
-		const { name, value } = e.target;
+	_handleInputChange = (event) => {
+		const { name, value } = event.target;
 		this.setState({ [name]: value });
+
+		switch (name) {
+			case 'email': {
+				const emailIsValid = value && validateEmail(value);
+				this.setState({
+					emailError: !emailIsValid,
+				});
+				break;
+			}
+			case 'password': {
+				this.setState({
+					passwordError: !value,
+				});
+				break;
+			}
+			default: break;
+		}
 	}
 
 	/**
-	 * Validate entered login data and, if it is good, trigger Login action.
+	 * Handle logging in, but validate the data first.
+	 * @param  {Object} event the 'submit' event
 	 */
-	handleSubmit = (e) => {
-		e.preventDefault();
+	_handleLoginAttempt = (event) => {
+		event.preventDefault();
 		const { email, password } = this.state;
 		const emailIsValid = email && validateEmail(email);
 
@@ -55,57 +74,68 @@ class LogInViewContainer extends Component {
 			passwordError: !password,
 		});
 
-		if (!emailIsValid || !password) { return; }
+		if (!emailIsValid || !password) {
+			return;
+		}
 
 		this.setState({
-			loginErrorText: '',
-			loginSuccess: false,
-		}, () => {
-			this.props.actions.login(email, password)
-				.then((success) => {
-					if (success) {
-						new RSVP.Promise((resolve, reject) => {
-							this.props.actions.getUser()
-								.then((getUserSuccess) => {
-									if (getUserSuccess) {
-										this.props.actions.getUserSettings()
-											.then((getUserSettingsSuccess) => {
-												if (getUserSettingsSuccess) {
-													this.setState({
-														loginSuccess: true,
-													});
-													resolve();
-													this.props.history.push('/');
-												} else {
-													reject();
-												}
-											});
-									} else {
-										reject();
-									}
-								})
-								.catch(() => {
-									this.setState({
-										loginErrorText: t('banner_no_such_account_message'),
-									});
-								});
-						})
-							.finally(() => {});
-					} else {
-						this.setState({
-							loginErrorText: t('banner_no_such_account_message'),
-						});
-					}
+			toastMessage: t('hub_login_toast_attempt'),
+			toastClass: 'success'
+		});
+		this.props.actions.login(email, password).then((success) => {
+			if (success) {
+				const { origin, pathname, hash } = window.location;
+				window.history.pushState({}, '', `${origin}${pathname}${hash}`);
+				this.setState({
+					toastMessage: t('hub_login_toast_success'),
+					toastClass: 'success'
 				});
+				this.props.actions.getUser();
+			} else {
+				this.setState({
+					toastMessage: t('hub_login_toast_error'),
+					toastClass: 'alert'
+				});
+			}
 		});
 	}
+
 	/**
 	 * React's required render function. Returns JSX
 	 * @return {JSX} JSX for rendering the Log In View of the Hub app
 	 */
 	render() {
-		const childProps = Object.assign({}, this.state, { handleInputChange: this.handleInputChange, handleSubmit: this.handleSubmit });
-		return <LogInView {...childProps} />;
+		const { loggedIn, user } = this.props;
+		const {
+			email,
+			password,
+			emailError,
+			passwordError,
+			toastMessage,
+			toastClass,
+		} = this.state;
+		const logInChildProps = {
+			email,
+			password,
+			emailError,
+			passwordError,
+			handleInputChange: this._handleInputChange,
+			handleSubmit: this._handleLoginAttempt,
+		};
+		const signedInChildProps = {
+			email: user && user.email || 'email',
+		};
+
+		return (
+			<div>
+				<ToastMessage toastText={toastMessage} toastClass={toastClass} />
+				{loggedIn ? (
+					<SignedInView {...signedInChildProps} />
+				) : (
+					<LogInView {...logInChildProps} />
+				)}
+			</div>
+		);
 	}
 }
 

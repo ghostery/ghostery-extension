@@ -54,7 +54,7 @@ function _renderBottomItem(item) {
  * @memberof HubComponents
  */
 const SideNavigationView = (props) => {
-	const { menuItems, bottomItems, user } = props;
+	const { menuItems, bottomItems } = props;
 	return (
 		<div className="SideNavigation flex-container flex-dir-column">
 			<NavLink to="/" className="SideNavigation__top" />

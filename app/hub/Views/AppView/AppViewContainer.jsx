@@ -22,7 +22,7 @@ import AppView from './AppView';
 class AppViewContainer extends Component {
 	constructor(props) {
 		super(props);
-		this.props.actions.getUser();
+		// this.props.actions.getUser();
 	}
 
 	/**

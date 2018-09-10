@@ -185,7 +185,7 @@ class Account {
 
 	updateEmailPreferences = (set) => {
 		this._getUserID().then(userID => (
-			api.update('email_preferences',	{
+			api.update('email_preferences', {
 				type: 'email_preferences',
 				id: userID,
 				attributes: {

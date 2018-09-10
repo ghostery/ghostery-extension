@@ -612,11 +612,6 @@ function handleGhosteryHub(name, message, callback) {
 			callback({ tutorial_complete });
 			break;
 		}
-		case 'OPEN_USER_PROFILE': {
-			const tabUrl = `https://account.${globals.GHOSTERY_DOMAIN}.com/en`;
-			utils.openNewTab({ url: tabUrl, become_active: true });
-			break;
-		}
 		default: break;
 	}
 }
@@ -967,7 +962,13 @@ function onMessageHandler(request, sender, callback) {
 			});
 		return true;
 	} else if (name === 'account.promotions') {
-		account.updateEmailPreferences(message);
+		const { promotions } = message;
+		account.updateEmailPreferences(promotions).then((success) => {
+			callback(success);
+		}).catch((err) => {
+			callback({ errors: _getJSONAPIErrorsObject(err) });
+			log('UPDATE PROMOTIOS FAIL', err);
+		});
 		return false;
 	} else if (name === 'update_database') {
 		checkLibraryVersion().then((result) => {

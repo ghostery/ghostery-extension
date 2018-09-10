@@ -51,7 +51,7 @@ class HomeViewContainer extends Component {
 	 */
 	render() {
 		const { justInstalled } = this.state;
-		const { home, user, subscriptionsSupporter } = this.props;
+		const { home, user } = this.props;
 		const {
 			setup_complete,
 			tutorial_complete,

@@ -39,6 +39,7 @@ html, body, #root {
 .full-height { height: 100%; }
 .full-width { width: 100%; }
 .display-inline { display: inline-block; }
+.flex-shrink-none { flex-shrink: 0; }
 
 @import 'settings_hub'; // Import Foundation
 @import './partials/_hub_mixins';
@@ -58,11 +59,14 @@ html, body, #root {
 @import '../hub/Views/SupporterView/SupporterView.scss';
 @import '../hub/Views/RewardsView/RewardsView.scss';
 @import '../hub/Views/ProductsView/ProductsView.scss';
-@import '../hub/Views/CreateAccountView/AccountView.scss';
+@import '../hub/Views/SignedInView/SignedInView.scss';
+@import '../hub/Views/LogInView/LogInView.scss';
+@import '../hub/Views/CreateAccountView/CreateAccountView.scss';
 
 // Imports from ../shared-components directory
 @import '../shared-components/ExitButton/ExitButton.scss';
 @import '../shared-components/Modal/Modal.scss';
 @import '../shared-components/SteppedNavigation/SteppedNavigation.scss';
+@import '../shared-components/ToastMessage/ToastMessage.scss';
 @import '../shared-components/ToggleCheckbox/ToggleCheckbox.scss';
 @import '../shared-components/ToggleSwitch/ToggleSwitch.scss';

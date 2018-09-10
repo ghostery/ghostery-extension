@@ -12,13 +12,10 @@
  */
 
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
-import { ExitButton } from '../../../shared-components';
-
-// Components
-import SetupHeader from '../SetupViews/SetupHeader';
+import { NavLink } from 'react-router-dom';
+import { ExitButton, ToggleCheckbox } from '../../../shared-components';
 
 /**
  * A Functional React component for rendering the Create Account View
@@ -37,153 +34,159 @@ const CreateAccountView = (props) => {
 		passwordInvalidError,
 		passwordLengthError,
 		promotionsChecked,
-		createAccountSuccess,
-		createAccountErrorText,
 		handleInputChange,
 		handleCheckboxChange,
 		handleSubmit,
 	} = props;
-	const createAccountAlert = ClassNames({
-		'create-account-result': true,
-		success: createAccountSuccess || false,
-		error: !!createAccountErrorText || false
+
+	const emailInputClassNames = ClassNames('CreateAccountView__inputBox', {
+		error: emailError,
 	});
-	const CheckboxImagePath = promotionsChecked ? '/app/images/hub/account/account-checkbox-on.svg' : '/app/images/hub/account/account-checkbox-off.svg';
+	const confirmInputClassNames = ClassNames('CreateAccountView__inputBox', {
+		error: confirmEmailError,
+	});
+	const passwordInputClassNames = ClassNames('CreateAccountView__inputBox', {
+		error: passwordInvalidError || passwordLengthError,
+	});
+
 	return (
-		<div className="full-height flex-container flex-dir-column">
-			<div className="flex-child-grow">
-				<div>
-					<ExitButton hrefExit="/" textExit={t('exit_create_account')} />
-					<SetupHeader
-						title={t('setup_create_account')}
-						titleImage="/app/images/hub/account/ghosty-account.svg"
-					/>
-					<div className="row align-center account-content">
-						<div className={createAccountAlert}>
-							{createAccountErrorText || (createAccountSuccess ? 'Account Created' : '')}
+		<div className="CreateAccountView">
+			<ExitButton hrefExit="/" textExit={t('hub_create_account_exit')} />
+			<div className="CreateAccountView--addPaddingTop row align-center">
+				<div className="columns small-12 large-10">
+					<div className="flex-container align-center-middle">
+						<img className="CreateAccountView__headerImage" src="/app/images/hub/account/ghosty-account.svg" />
+						<div className="CreateAccountView__headerTitle">
+							<h3>
+								{t('hub_create_account_header_title')}
+							</h3>
 						</div>
-						<form onSubmit={handleSubmit}>
-							<div className="CreateAccount">
-								<div className="row">
-									<div className="columns">
-										<div className={(emailError ? 'panel-error' : '')}>
-											<label htmlFor="create-account-email" className="flex-container flex-dir-column">
-												<div className="flex-child-grow flex-container align-left-middle">{ t('email_field_label') }<span className="asterisk">*</span></div>
-												<input
-													onChange={handleInputChange}
-													value={email}
-													id="create-input-email"
-													name="email"
-													pattern=".{1,}"
-													autoComplete="off"
-													required
-													type="text"
-												/>
-											</label>
-											<p className="warning">{ t('invalid_email_create') }</p>
-										</div>
-									</div>
-									<div className="columns">
-										<div className={(confirmEmailError ? 'panel-error' : '')}>
-											<label htmlFor="create-input-email-confirm" className="flex-container flex-dir-column">
-												<div className="flex-child-grow flex-container align-left-middle">{ t('email_confirm_field_label') }<span className="asterisk">*</span></div>
-												<input
-													onChange={handleInputChange}
-													value={confirmEmail}
-													id="create-input-email-confirm"
-													name="confirmEmail"
-													pattern=".{1,}"
-													autoComplete="off"
-													required
-													type="text"
-												/>
-											</label>
-											<p className="warning">{ t('invalid_email_confirmation') }</p>
-										</div>
-									</div>
-								</div>
-								<div className="row" >
-									<div className="columns">
-										<div>
-											<label htmlFor="ccreate-input-first-name" className="flex-container flex-dir-column">
-												<div className="flex-child-grow flex-container align-left-middle">{ t('first_name_field_label') }</div>
-												<input
-													onChange={handleInputChange}
-													value={firstName}
-													id="create-input-first-name"
-													name="firstName"
-													pattern=".{1,}"
-													type="text"
-												/>
-											</label>
-										</div>
-									</div>
-									<div className="columns">
-										<div>
-											<label htmlFor="create-input-last-name" className="flex-container flex-dir-column">
-												<div className="flex-child-grow flex-container align-left-middle">{ t('last_name_field_label') }</div>
-												<input
-													onChange={handleInputChange}
-													value={lastName}
-													id="create-input-last-name"
-													name="lastName"
-													pattern=".{1,}"
-													type="text"
-												/>
-											</label>
-										</div>
-									</div>
-								</div>
-								<div className="row">
-									<div className="columns">
-										<div className={(passwordInvalidError || passwordLengthError ? 'panel-error' : '')}>
-											<label htmlFor="create-account-password" className="flex-container flex-dir-column">
-												<div className="flex-child-grow flex-container align-left-middle">{ t('create_password_field_label') }<span className="asterisk">*</span></div>
-												<input
-													onChange={handleInputChange}
-													value={password}
-													className="create-account-input"
-													id="create-account-password"
-													name="password"
-													pattern=".{1,}"
-													required
-													type="password"
-												/>
-											</label>
-											<p className="warning">
-												<span className={(passwordLengthError ? 'panel-error show' : '')}>
-													{ t('password_requirements') }
-												</span>
-												<span className={(passwordInvalidError ? 'panel-error show' : '')}>
-													{ t('password_characters_requirements') }
-												</span>
-											</p>
-										</div>
-									</div>
-									<div>
-										<span className="account-checkbox-container" onClick={handleCheckboxChange}>
-											<img src={CheckboxImagePath} className="account-checkbox" />
-											<span>{ t('create_account_promotions') }</span>
-										</span>
-									</div>
-								</div>
-								<span className="row account-sign-in">
-									<span className="columns">
-										<NavLink to="/log-in">
-											{ t('account_already_present') }
-										</NavLink>
-									</span>
-								</span>
-								<div className="row align-right">
-									<button type="submit" className="account-submit">
-										<span>{ t('panel_title_create_account') }</span>
-									</button>
-								</div>
-							</div>
-						</form>
 					</div>
 				</div>
 			</div>
+			<form onSubmit={handleSubmit}>
+				<div className="CreateAccountView--addPaddingTop row align-center-middle">
+					<div className="columns small-12 medium-5">
+						<label className="CreateAccountView__inputLabel">
+							{t('hub_create_account_label_email')}
+						</label>
+						<input
+							className={emailInputClassNames}
+							name="email"
+							type="text"
+							value={email}
+							onChange={handleInputChange}
+							pattern=".{1,}"
+							autoComplete="off"
+						/>
+						{emailError && (
+							<div className="CreateAccountView__inputError">
+								{t('hub_create_account_label_email_invalid')}
+							</div>
+						)}
+					</div>
+					<div className="columns small-12 medium-5">
+						<label className="CreateAccountView__inputLabel">
+							{t('hub_create_account_label_email_confirm')}
+						</label>
+						<input
+							className={confirmInputClassNames}
+							name="confirmEmail"
+							type="text"
+							value={confirmEmail}
+							onChange={handleInputChange}
+							pattern=".{1,}"
+							autoComplete="off"
+						/>
+						{confirmEmailError && (
+							<div className="CreateAccountView__inputError">
+								{t('hub_create_account_label_email_confirm_invalid')}
+							</div>
+						)}
+					</div>
+				</div>
+				<div className="row align-center-middle">
+					<div className="columns small-12 medium-5">
+						<label className="CreateAccountView__inputLabel">
+							{t('hub_create_account_label_first_name')}
+						</label>
+						<input
+							className="CreateAccountView__inputBox"
+							name="firstName"
+							type="text"
+							value={firstName}
+							onChange={handleInputChange}
+							pattern=".{1,}"
+							autoComplete="off"
+						/>
+					</div>
+					<div className="columns small-12 medium-5">
+						<label className="CreateAccountView__inputLabel">
+							{t('hub_create_account_label_email_last_name')}
+						</label>
+						<input
+							className="CreateAccountView__inputBox"
+							name="lastName"
+							type="text"
+							value={lastName}
+							onChange={handleInputChange}
+							pattern=".{1,}"
+							autoComplete="off"
+						/>
+					</div>
+				</div>
+				<div className="row align-center-middle">
+					<div className="columns small-12 medium-5">
+						<label className="CreateAccountView__inputLabel">
+							{t('hub_create_account_label_password')}
+						</label>
+						<input
+							className={passwordInputClassNames}
+							name="password"
+							type="password"
+							value={password}
+							onChange={handleInputChange}
+							pattern=".{1,}"
+							autoComplete="off"
+						/>
+						{passwordInvalidError && (
+							<div className="CreateAccountView__inputError">
+								{t('hub_create_account_label_password_invalid')}
+							</div>
+						)}
+						{passwordLengthError && (
+							<div className="CreateAccountView__inputError">
+								{t('hub_create_account_label_password_invalid_length')}
+							</div>
+						)}
+					</div>
+					<div className="columns small-12 medium-5">
+						<div className="CreateAccountView--marginBottom flex-container align-middle">
+							<ToggleCheckbox
+								checked={promotionsChecked}
+								onChange={handleCheckboxChange}
+							/>
+							<span className="CreateAccountView__inputLabel clickable" onClick={handleCheckboxChange}>
+								{t('hub_create_account_checkbox_promotions')}
+							</span>
+						</div>
+					</div>
+				</div>
+				<div className="row align-center">
+					<div className="columns small-12 medium-10">
+						<NavLink to="/log-in" className="CreateAccountView__link">
+							{ t('hub_create_account_link_login') }
+						</NavLink>
+					</div>
+				</div>
+				<div className="CreateAccountView--addPaddingTop row align-center">
+					<div className="columns small-12 medium-10 flex-container flex-dir-row-reverse">
+						<button type="submit" className="CreateAccountView__button button success">
+							{ t('hub_create_account_button_submit') }
+						</button>
+					</div>
+				</div>
+			</form>
 		</div>
 	);
 };
@@ -200,8 +203,6 @@ CreateAccountView.propTypes = {
 	passwordInvalidError: PropTypes.bool.isRequired,
 	passwordLengthError: PropTypes.bool.isRequired,
 	promotionsChecked: PropTypes.bool.isRequired,
-	createAccountSuccess: PropTypes.bool.isRequired,
-	createAccountErrorText: PropTypes.string.isRequired,
 	handleInputChange: PropTypes.func.isRequired,
 	handleCheckboxChange: PropTypes.func.isRequired,
 	handleSubmit: PropTypes.func.isRequired,

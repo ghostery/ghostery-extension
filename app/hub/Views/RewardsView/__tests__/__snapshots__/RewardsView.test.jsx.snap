@@ -2,10 +2,10 @@
 
 exports[`app/hub/Views/RewardsView component Snapshot tests with react-test-renderer rewards view is rendered correctly 1`] = `
 <div
-  className="RewardsView RewardsView--paddingTop full-height"
+  className="RewardsView RewardsView--paddingTop full-height flex-container flex-dir-column"
 >
   <div
-    className="RewardsView__header row align-center"
+    className="RewardsView__header row align-center flex-shrink-none"
   >
     <div
       className="RewardsView__screenshot columns"
@@ -43,7 +43,7 @@ exports[`app/hub/Views/RewardsView component Snapshot tests with react-test-rend
     </div>
   </div>
   <div
-    className="RewardsView--paddingTop row align-center"
+    className="RewardsView--paddingTop row align-center flex-shrink-none"
   >
     <div
       className="RewardsView__promoFeature columns"
@@ -98,7 +98,7 @@ exports[`app/hub/Views/RewardsView component Snapshot tests with react-test-rend
     </div>
   </div>
   <div
-    className="RewardsView__backgroundStars"
+    className="RewardsView__backgroundStars flex-child-grow"
   >
     <div
       className="RewardsView--paddingTop row align-center"

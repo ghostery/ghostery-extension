@@ -12,10 +12,15 @@
  */
 
 import React, { Component } from 'react';
-import RSVP from 'rsvp';
-import { validateEmail, validatePassword, validateConfirmEmail } from '../../../panel/utils/utils';
-import { sendMessage } from '../../../panel/utils/msg';
+import {
+	validateEmail,
+	validatePassword,
+	validateEmailsMatch,
+	validateConfirmEmail
+} from '../../../panel/utils/utils';
 import CreateAccountView from './CreateAccountView';
+import SignedInView from '../SignedInView';
+import { ToastMessage } from '../../../shared-components';
 
 /**
  * @class Implement the Create Account View for the Ghostery Hub
@@ -36,106 +41,105 @@ class CreateAccountViewContainer extends Component {
 			passwordInvalidError: false,
 			passwordLengthError: false,
 			promotionsChecked: true,
-			createAccountSuccess: false,
-			createAccountErrorText: '',
+			toastMessage: '',
+			toastClass: ''
 		};
 	}
 
 	/**
-	 * Update state with changed values.
-	 * @param {Object}  event 	'change' event
+	 * Update input values by updating state.
+	 * @param  {Object} event the 'change' event
 	 */
-	handleInputChange = (e) => {
-		const { name, value } = e.target;
+	_handleInputChange = (event) => {
+		const { name, value } = event.target;
 		this.setState({ [name]: value });
-	}
 
-	/**
-	 * Update state with changed checkbox value.
-	 */
-	handleCheckboxChange = () => {
-		const promotionsChecked = !this.state.promotionsChecked;
-		this.setState({ promotionsChecked });
-		if (this.state.createAccountSuccess) {
-			sendMessage('account.promotions', promotionsChecked);
+		switch (name) {
+			case 'email': {
+				const emailIsValid = value && validateEmail(value);
+				this.setState({
+					emailError: !emailIsValid,
+				});
+				break;
+			}
+			case 'confirmEmail': {
+				const { email } = this.state;
+				const confirmIsValid = value && validateEmailsMatch(email, value);
+				this.setState({
+					confirmEmailError: !confirmIsValid,
+				});
+				break;
+			}
+			case 'password': {
+				const passwordIsValid = value && validatePassword(value);
+				const invalidChars = !passwordIsValid && value.length >= 8 && value.length <= 50;
+				const invalidLength = !passwordIsValid && !invalidChars;
+				this.setState({
+					passwordInvalidError: invalidChars,
+					passwordLengthError: invalidLength,
+				});
+				break;
+			}
+			default: break;
 		}
 	}
 
 	/**
-	 * Validate input parameters, notify user if they have to be
-	 * updated. If the data is valid trigger createAccount action
-	 * to be processed by PanelActions.
+	 * Update input checkbox values by updating state.
 	 */
-	handleSubmit = (e) => {
-		e.preventDefault();
+	_handleCheckboxChange = () => {
+		const promotionsChecked = !this.state.promotionsChecked;
+		this.setState({ promotionsChecked });
+	}
+
+	/**
+	 * Handle creating an account, but validate the data first.
+	 * @param  {Object} event the 'submit' event
+	 */
+	_handleCreateAccountAttempt = (event) => {
+		event.preventDefault();
+		const {
+			email,
+			confirmEmail,
+			firstName,
+			lastName,
+			password,
+			promotionsChecked
+		} = this.state;
+		const emailIsValid = email && validateEmail(email);
+		const confirmIsValid = confirmEmail && validateConfirmEmail(email, confirmEmail);
+		const passwordIsValid = password && validatePassword(password);
+		const invalidChars = !passwordIsValid && password.length >= 8 && password.length <= 50;
+		const invalidLength = !passwordIsValid && !invalidChars;
+
 		this.setState({
-			createAccountSuccess: false,
-			createAccountErrorText: '',
-			confirmEmailError: false,
-			passwordInvalidError: false,
-			passwordLengthError: false,
-		}, () => {
-			const {
-				email, confirmEmail, firstName, lastName, password, promotionsChecked
-			} = this.state;
-			if (!validateEmail(email)) {
+			emailError: !emailIsValid,
+			confirmEmailError: !confirmIsValid,
+			passwordInvalidError: invalidChars,
+			passwordLengthError: invalidLength,
+		});
+
+		if (!emailIsValid || !confirmIsValid || !passwordIsValid) {
+			return;
+		}
+		this.setState({
+			toastMessage: t('hub_create_account_toast_attempt'),
+			toastClass: 'success'
+		});
+		this.props.actions.register(email, confirmEmail, firstName, lastName, password).then((success) => {
+			if (success) {
 				this.setState({
-					emailError: true,
+					toastMessage: t('hub_create_account_toast_success'),
+					toastClass: 'success'
 				});
-				return;
-			}
-			if (!validateConfirmEmail(email, confirmEmail)) {
+				this.props.actions.updateAccountPromotions(promotionsChecked);
+				this.props.actions.getUser();
+			} else {
 				this.setState({
-					confirmEmailError: true,
+					toastMessage: t('hub_create_account_toast_error'),
+					toastClass: 'alert'
 				});
-				return;
 			}
-			if (!validatePassword(password)) {
-				if (password.length >= 8 && password.length <= 50) {
-					this.setState({
-						passwordInvalidError: true,
-					});
-				} else {
-					this.setState({
-						passwordLengthError: true,
-					});
-				}
-				return;
-			}
-			this.props.actions.register(email, confirmEmail, firstName, lastName, password).then((success) => {
-				if (success) {
-					new RSVP.Promise((resolve, reject) => {
-						this.props.actions.getUser()
-							.then((getUserSuccess) => {
-								if (getUserSuccess) {
-									this.setState({
-										createAccountSuccess: true,
-									}, () => {
-										if (promotionsChecked) {
-											sendMessage('account.promotions', true);
-										}
-										this.props.history.push('/');
-										resolve();
-									});
-								} else {
-									reject();
-								}
-								reject();
-							})
-							.catch(() => {
-								this.setState({
-									createAccountErrorText: t('create_account_error'),
-								});
-								resolve();
-							});
-					})
-						.finally(() => {});
-				} else {
-					this.setState({
-						createAccountErrorText: t('create_account_error'),
-					});
-				}
-			});
 		});
 	}
 
@@ -144,12 +148,50 @@ class CreateAccountViewContainer extends Component {
 	 * @return {JSX} JSX for rendering the Create Account View of the Hub app
 	 */
 	render() {
-		const childProps = Object.assign({}, this.state, {
-			handleInputChange: this.handleInputChange,
-			handleCheckboxChange: this.handleCheckboxChange,
-			handleSubmit: this.handleSubmit
-		});
-		return <CreateAccountView {...childProps} />;
+		const { loggedIn, user } = this.props;
+		const {
+			email,
+			emailError,
+			confirmEmail,
+			confirmEmailError,
+			firstName,
+			lastName,
+			password,
+			passwordInvalidError,
+			passwordLengthError,
+			promotionsChecked,
+			toastMessage,
+			toastClass,
+		} = this.state;
+		const createAccountChildProps = {
+			email,
+			emailError,
+			confirmEmail,
+			confirmEmailError,
+			firstName,
+			lastName,
+			password,
+			passwordInvalidError,
+			passwordLengthError,
+			promotionsChecked,
+			handleInputChange: this._handleInputChange,
+			handleCheckboxChange: this._handleCheckboxChange,
+			handleSubmit: this._handleCreateAccountAttempt
+		};
+		const signedInChildProps = {
+			email: user && user.email || email,
+		};
+
+		return (
+			<div>
+				<ToastMessage toastText={toastMessage} toastClass={toastClass} />
+				{loggedIn ? (
+					<SignedInView {...signedInChildProps} />
+				) : (
+					<CreateAccountView {...createAccountChildProps} />
+				)}
+			</div>
+		);
 	}
 }
 
