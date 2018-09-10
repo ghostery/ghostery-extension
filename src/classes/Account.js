@@ -159,6 +159,12 @@ class Account {
 			})
 	)
 
+	getUserSubscriptionData = () => (
+		this._getUserID()
+			.then(userID => api.get('stripe/customers', userID, 'cards,subscriptions'))
+			.then(res => build(normalize(res), 'customers', res.data.id))
+	)
+
 	saveUserSettings = () => (
 		this._getUserID()
 			.then(userID => (

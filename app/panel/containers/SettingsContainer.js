@@ -27,7 +27,7 @@ import { sendSignal } from '../actions/RewardsActions';
  * in this case it won't be passed by React (see https://github.com/reactjs/react-redux/blob/master/docs/api.md).
  */
 const mapStateToProps = state => Object.assign({}, state.settings, {
-	email: state.panel.email,
+	user: state.account.user,
 	is_expanded: state.panel.is_expanded,
 	language: state.panel.language,
 	pageHost: state.summary.pageHost,
