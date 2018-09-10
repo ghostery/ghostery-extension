@@ -1,5 +1,5 @@
 /**
- * Point of entry index.js file for Log In View
+ * Point of entry index.js file for LogIn View
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
