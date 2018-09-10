@@ -13,6 +13,7 @@
  */
 
 import React from 'react';
+import { openSupportPage } from '../../utils/msg';
 
 /**
  * @class Implement Priority Support subview as a React component.
@@ -27,6 +28,12 @@ const PrioritySupport = () =>
 			<div className="row">
 				<div className="columns column-subscription">
 					<h1>{ t('subscription_priority_support_title') }</h1>
+					<div className="status-row">
+						<span className="status-value">{ t('subscription_support') }</span>
+						<div style={{ marginTop: '20px' }}>
+							<span className="status-value blue resubscribe" onClick={openSupportPage}>{ t('subscription_submit_issue') }</span>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

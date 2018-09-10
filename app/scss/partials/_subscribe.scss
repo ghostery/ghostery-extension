@@ -39,6 +39,7 @@
 			text-decoration: underline;
 		}
 		.pitch-become-subscriber {
+			@extend %pointer;
 			display: block;
 			margin-top: 20px;
 			margin-bottom: 20px;
@@ -92,34 +93,40 @@
 	}
 	.status-label {
 		@extend .field-label;
+		padding-right: 7px !important;
 		&.light {
 			font-weight: normal !important;
 		}
 	}
 	.status-value {
 		@extend .field-label;
-		padding-left: 7px !important;
-		padding-right: 7px !important;
 		&.blue {
 			color: $ghosty-blue;
+		}
+		&.red {
+			color: #be4948;
 		}
 		&.light {
 			font-weight: normal !important;
 		}
+		&.resubscribe {
+			@extend %pointer;
+			border-radius: 2px;
+  			border: solid 2px #2092bf;
+  			line-height: 31px;
+  			padding: 5px 10px !important;
+		}
 	}
 	.manage-link {
-		display: inline-block;
 		@extend .field-label;
 		font-weight: normal !important;
 		color: $ghosty-blue;
 		text-decoration: underline;
-		padding-left: 7px;
+		padding-left: 7px !important;
 	}
-
 	.status-row {
 		margin-top: 18px;
 	}
-
 	.list-row {
 		padding: 12px;
 		margin-top: 8px;
@@ -131,11 +138,19 @@
 		padding-left: 12px;
 	}
 	.manage-row {
+		@extend %pointer;
 		display: inline-flex;
 	}
 	.manage-icon {
+		margin-top: 2px;
 		width: 14px;
 		height: 12px;
 		background-image: url('/app/images/panel/manage-subscription.svg');
+	}
+	.loading {
+		width: 219px;
+		height: 219px;
+		background-image: url('/app/images/panel/loading.svg');
+		opacity: 0.75; 
 	}
 }
