@@ -15,9 +15,9 @@
 .SideNavigation {
 	position: fixed;
 	height: 100%;
-	overflow-y: scroll;
 	min-width: 230px;
 	max-width: 230px;
+	overflow-y: auto;
 	background-color: #5d7d85;
 }
 .SideNavigation__top {

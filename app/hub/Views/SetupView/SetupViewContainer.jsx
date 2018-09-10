@@ -12,7 +12,7 @@
  */
 
 import React, { Component } from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
+import { NavLink} from 'react-router-dom';
 import QueryString from 'query-string';
 import PropTypes from 'prop-types';
 import SetupView from './SetupView';
@@ -276,4 +276,4 @@ SetupViewContainer.defaultProps = {
 	},
 };
 
-export default withRouter(SetupViewContainer);
+export default SetupViewContainer;

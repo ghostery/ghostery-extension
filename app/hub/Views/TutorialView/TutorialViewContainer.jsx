@@ -14,7 +14,6 @@
  */
 
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import TutorialView from './TutorialView';
 
 // Component Views
@@ -106,4 +105,4 @@ TutorialViewContainer.defaultProps = {
 };
 
 
-export default withRouter(TutorialViewContainer);
+export default TutorialViewContainer;

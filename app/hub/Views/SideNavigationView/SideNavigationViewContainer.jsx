@@ -60,7 +60,7 @@ class SideNavigationViewContainer extends Component {
 			{ id: 'create-account', href: '/create-account', text: t('hub_side_navigation_create_account') },
 			{ id: 'log-id', href: '/log-in', text: t('hub_side_navigation_log_in') },
 		];
-		const childProps = { user, menuItems, bottomItems };
+		const childProps = { menuItems, bottomItems };
 
 		return <SideNavigationView {...childProps} />;
 	}
