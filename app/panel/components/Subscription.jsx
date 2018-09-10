@@ -56,12 +56,11 @@ class Subscription extends React.Component {
 			const languageToken = this.props.language.toLowerCase().replace('_', '-');
 			moment.locale(languageToken);
 			const {
-				planAmount, planCurrency, planInterval, currentPeriodEnd, cancelAtPeriodEnd, status
+				planAmount, planInterval, currentPeriodEnd, cancelAtPeriodEnd, status
 			} = sd;
-			const plan_amount = Math.floor(planAmount / 100);
 			const plan_ends = cancelAtPeriodEnd ? moment.duration(moment.unix(currentPeriodEnd).diff(moment(new Date()))).days() : '';
 			return {
-				plan_amount: new Intl.NumberFormat(languageToken, { style: 'currency', currency: planCurrency }).format(plan_amount),
+				plan_amount: `$${(planAmount / 100).toFixed(2)}`,
 				plan_interval: planInterval,
 				active: (status === 'active'),
 				charge_date: moment.unix(currentPeriodEnd).format('MMMM Do, YYYY'),
