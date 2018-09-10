@@ -44,7 +44,9 @@ class SideNavigationViewContainer extends Component {
 	 * @return {JSX} JSX for rendering the Side Navigation View of the Hub app
 	 */
 	render() {
-		const { user } = this.props;
+		const { user, location } = this.props;
+		const disableRegEx = /^(\/setup)|(\/tutorial)|(\/create-account)|(\/log-in)/;
+
 		const menuItems = [
 			{ href: '/', icon: 'home', text: t('hub_side_navigation_home') },
 			{ href: '/setup', icon: 'setup', text: t('hub_side_navigation_setup') },
@@ -60,7 +62,11 @@ class SideNavigationViewContainer extends Component {
 			{ id: 'create-account', href: '/create-account', text: t('hub_side_navigation_create_account') },
 			{ id: 'log-id', href: '/log-in', text: t('hub_side_navigation_log_in') },
 		];
-		const childProps = { menuItems, bottomItems };
+		const childProps = {
+			menuItems,
+			bottomItems,
+			disableNav: disableRegEx.test(location.pathname),
+		};
 
 		return <SideNavigationView {...childProps} />;
 	}

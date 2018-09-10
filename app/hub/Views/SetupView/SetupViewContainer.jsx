@@ -12,7 +12,7 @@
  */
 
 import React, { Component } from 'react';
-import { NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import QueryString from 'query-string';
 import PropTypes from 'prop-types';
 import SetupView from './SetupView';
