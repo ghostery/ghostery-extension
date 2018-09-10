@@ -20,7 +20,7 @@ import PropTypes from 'prop-types';
  * @memberof SharedComponents
  */
 const ToastMessage = props => (
-	<div className="ToastMessage">
+	<div className="ToastMessage full-width">
 		{props.toastText && (
 			<div className="callout-container">
 				<div className={`callout toast ${props.toastClass}`}>

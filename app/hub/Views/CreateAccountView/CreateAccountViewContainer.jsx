@@ -12,6 +12,7 @@
  */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
 	validateEmail,
 	validatePassword,
@@ -20,7 +21,6 @@ import {
 } from '../../../panel/utils/utils';
 import CreateAccountView from './CreateAccountView';
 import SignedInView from '../SignedInView';
-import { ToastMessage } from '../../../shared-components';
 
 /**
  * @class Implement the Create Account View for the Ghostery Hub
@@ -41,9 +41,12 @@ class CreateAccountViewContainer extends Component {
 			passwordInvalidError: false,
 			passwordLengthError: false,
 			promotionsChecked: true,
-			toastMessage: '',
-			toastClass: ''
 		};
+
+		this.props.actions.setToast({
+			toastMessage: '',
+			toastClass: '',
+		});
 	}
 
 	/**
@@ -122,20 +125,21 @@ class CreateAccountViewContainer extends Component {
 		if (!emailIsValid || !confirmIsValid || !passwordIsValid) {
 			return;
 		}
-		this.setState({
-			toastMessage: t('hub_create_account_toast_attempt'),
-			toastClass: 'success'
+		this.props.actions.setToast({
+			toastMessage: '',
+			toastClass: ''
 		});
 		this.props.actions.register(email, confirmEmail, firstName, lastName, password).then((success) => {
 			if (success) {
-				this.setState({
+				this.props.actions.updateAccountPromotions(promotionsChecked);
+				this.props.actions.getUser();
+				this.props.actions.setToast({
 					toastMessage: t('hub_create_account_toast_success'),
 					toastClass: 'success'
 				});
-				this.props.actions.updateAccountPromotions(promotionsChecked);
-				this.props.actions.getUser();
+				this.props.history.push('/');
 			} else {
-				this.setState({
+				this.props.actions.setToast({
 					toastMessage: t('hub_create_account_toast_error'),
 					toastClass: 'alert'
 				});
@@ -160,8 +164,6 @@ class CreateAccountViewContainer extends Component {
 			passwordInvalidError,
 			passwordLengthError,
 			promotionsChecked,
-			toastMessage,
-			toastClass,
 		} = this.state;
 		const createAccountChildProps = {
 			email,
@@ -182,17 +184,22 @@ class CreateAccountViewContainer extends Component {
 			email: user && user.email || email,
 		};
 
-		return (
-			<div>
-				<ToastMessage toastText={toastMessage} toastClass={toastClass} />
-				{loggedIn ? (
-					<SignedInView {...signedInChildProps} />
-				) : (
-					<CreateAccountView {...createAccountChildProps} />
-				)}
-			</div>
+		return loggedIn ? (
+			<SignedInView {...signedInChildProps} />
+		) : (
+			<CreateAccountView {...createAccountChildProps} />
 		);
 	}
 }
+
+// PropTypes ensure we pass required props of the correct type
+CreateAccountViewContainer.propTypes = {
+	actions: PropTypes.shape({
+		setToast: PropTypes.func.isRequired,
+		register: PropTypes.func.isRequired,
+		getUser: PropTypes.func.isRequired,
+		updateAccountPromotions: PropTypes.func.isRequired,
+	}).isRequired,
+};
 
 export default CreateAccountViewContainer;

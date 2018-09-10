@@ -12,6 +12,7 @@
  */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import AppView from './AppView';
 
 /**
@@ -20,9 +21,14 @@ import AppView from './AppView';
  * @memberof HubContainers
  */
 class AppViewContainer extends Component {
-	constructor(props) {
-		super(props);
-		// this.props.actions.getUser();
+	/**
+	 * Handle clicking to exit the Toast Message.
+	 */
+	_exitToast = () => {
+		this.props.actions.setToast({
+			toastMessage: '',
+			toastClass: '',
+		});
 	}
 
 	/**
@@ -30,8 +36,31 @@ class AppViewContainer extends Component {
 	 * @return {JSX} JSX for rendering the Home View of the Hub app
 	 */
 	render() {
-		return <AppView {...this.props} />;
+		const childProps = {
+			...this.props,
+			exitToast: this._exitToast,
+		};
+		return <AppView {...childProps} />;
 	}
 }
+
+// PropTypes ensure we pass required props of the correct type
+AppViewContainer.propTypes = {
+	actions: PropTypes.shape({
+		setToast: PropTypes.func.isRequired,
+	}).isRequired,
+	app: PropTypes.shape({
+		toastMessage: PropTypes.string,
+		toastClass: PropTypes.string,
+	}),
+};
+
+// Default props used in the App
+AppViewContainer.defaultProps = {
+	app: {
+		toastMessage: '',
+		toastClass: '',
+	},
+};
 
 export default AppViewContainer;

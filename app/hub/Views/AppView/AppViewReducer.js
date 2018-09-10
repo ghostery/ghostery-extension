@@ -11,24 +11,20 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { CLEAR_LOGIN_PARAMS } from './AppViewConstants';
-import { LOGIN_SUCCESS, REGISTER_SUCCESS, LOGOUT_SUCCESS } from '../../../Account/AccountConstants';
+import { SET_TOAST } from './AppViewConstants';
 
-const initialState = { fromLoginPage: false, fromCreateAccountPage: false };
+const initialState = {};
 
 function AppViewReducer(state = initialState, action) {
 	switch (action.type) {
-		case LOGIN_SUCCESS: {
-			return Object.assign({}, state, { fromLoginPage: true, fromCreateAccountPage: false });
-		}
-		case REGISTER_SUCCESS: {
-			return Object.assign({}, state, { fromLoginPage: false, fromCreateAccountPage: true });
-		}
-		case LOGOUT_SUCCESS: {
-			return Object.assign({}, state, initialState);
-		}
-		case CLEAR_LOGIN_PARAMS: {
-			return Object.assign({}, state, initialState);
+		case SET_TOAST: {
+			const { toastMessage, toastClass } = action.data;
+			return Object.assign({}, state, {
+				app: Object.assign({}, {
+					toastMessage,
+					toastClass
+				}),
+			});
 		}
 		default: return state;
 	}

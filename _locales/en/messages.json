@@ -2002,10 +2002,7 @@
 		"message": "Sign In"
 	},
 	"hub_login_toast_success": {
-		"message": "Account SignIn Successful"
-	},
-	"hub_login_toast_attempt": {
-		"message": "Attempting to Sign In"
+		"message": "Sign in successful! Your account settings have been imported."
 	},
 	"hub_login_toast_error": {
 		"message": "Looks like we can't find this email and password combo. Give it another shot."
@@ -2054,9 +2051,6 @@
 	},
 	"hub_create_account_toast_success": {
 		"message": "Account Successfully Created"
-	},
-	"hub_create_account_toast_attempt": {
-		"message": "Attempting to Create Account"
 	},
 	"hub_create_account_toast_error": {
 		"message": "Create Account Error"

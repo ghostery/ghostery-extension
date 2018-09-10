@@ -16,6 +16,7 @@ import { bindActionCreators } from 'redux';
 
 import SideNavigationViewContainer from './SideNavigationViewContainer';
 import * as AccountActions from '../../../Account/AccountActions';
+import { setToast } from '../AppView/AppViewActions';
 
 /**
  * Map redux store state properties to the component's own properties.
@@ -33,6 +34,7 @@ const mapStateToProps = state => Object.assign({}, state.account);
  */
 const mapDispatchToProps = dispatch => ({
 	actions: bindActionCreators(Object.assign({}, {
+		setToast,
 		getUser: AccountActions.getUser,
 		logout: AccountActions.logout,
 	}), dispatch),

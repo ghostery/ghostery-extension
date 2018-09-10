@@ -12,5 +12,4 @@
  */
 
 // App View
-export const CLEAR_LOGIN_PARAMS = 'CLEAR_LOGIN_PARAMS';
-
+export const SET_TOAST = 'SET_TOAST';

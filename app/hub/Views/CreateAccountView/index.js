@@ -16,6 +16,7 @@ import { bindActionCreators } from 'redux';
 
 import CreateAccountViewContainer from './CreateAccountViewContainer';
 import * as AccountActions from '../../../Account/AccountActions';
+import { setToast } from '../AppView/AppViewActions';
 
 /**
  * Map redux store state properties to the component's own properties.
@@ -31,6 +32,13 @@ const mapStateToProps = state => Object.assign({}, state.account);
  * @return {function}          to be used as an argument in redux connect call
  * @memberof SetupContainers
  */
-const mapDispatchToProps = dispatch => ({ actions: bindActionCreators(Object.assign(AccountActions), dispatch) });
+const mapDispatchToProps = dispatch => ({
+	actions: bindActionCreators(Object.assign({}, {
+		setToast,
+		register: AccountActions.register,
+		getUser: AccountActions.getUser,
+		updateAccountPromotions: AccountActions.updateAccountPromotions,
+	}), dispatch),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateAccountViewContainer);

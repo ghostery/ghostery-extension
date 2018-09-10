@@ -29,11 +29,22 @@ class SideNavigationViewContainer extends Component {
 	}
 
 	/**
+	* Function to handle clicking Log Out
+	*/
+	_handleLogoutClick = () => {
+		this.props.actions.setToast({
+			toastMessage: '',
+			toastClass: '',
+		});
+		this.props.actions.logout();
+	}
+
+	/**
 	 * React's required render function. Returns JSX
 	 * @return {JSX} JSX for rendering the Side Navigation View of the Hub app
 	 */
 	render() {
-		const { actions, user } = this.props;
+		const { user } = this.props;
 		const menuItems = [
 			{ href: '/', icon: 'home', text: t('hub_side_navigation_home') },
 			{ href: '/setup', icon: 'setup', text: t('hub_side_navigation_setup') },
@@ -44,7 +55,7 @@ class SideNavigationViewContainer extends Component {
 		];
 		const bottomItems = user ? [
 			{ id: 'email', href: `https://account.${globals.GHOSTERY_DOMAIN}.com/`, text: user.email },
-			{ id: 'logout', text: t('hub_side_navigation_log_out'), clickHandler: actions.logout },
+			{ id: 'logout', text: t('hub_side_navigation_log_out'), clickHandler: this._handleLogoutClick },
 		] : [
 			{ id: 'create-account', href: '/create-account', text: t('hub_side_navigation_create_account') },
 			{ id: 'log-id', href: '/log-in', text: t('hub_side_navigation_log_in') },

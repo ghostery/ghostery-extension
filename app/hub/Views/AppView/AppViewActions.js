@@ -11,14 +11,11 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import { SET_TOAST } from './AppViewConstants';
 
-import { CLEAR_LOGIN_PARAMS } from './AppViewConstants';
-
-export function clearLoginParams() {
-	return function (dispatch) {
-		dispatch({
-			type: CLEAR_LOGIN_PARAMS,
-		});
+export function setToast(data) {
+	return {
+		type: SET_TOAST,
+		data,
 	};
 }
-

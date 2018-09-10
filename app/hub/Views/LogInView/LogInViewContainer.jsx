@@ -12,10 +12,10 @@
  */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { validateEmail } from '../../../panel/utils/utils';
 import LogInView from './LogInView';
 import SignedInView from '../SignedInView';
-import { ToastMessage } from '../../../shared-components';
 /**
  * @class Implement the Log In View for the Ghostery Hub
  * @extends Component
@@ -29,9 +29,12 @@ class LogInViewContainer extends Component {
 			password: '',
 			emailError: false,
 			passwordError: false,
-			toastMessage: '',
-			toastClass: ''
 		};
+
+		this.props.actions.setToast({
+			toastMessage: '',
+			toastClass: '',
+		});
 	}
 
 	/**
@@ -78,21 +81,23 @@ class LogInViewContainer extends Component {
 			return;
 		}
 
-		this.setState({
-			toastMessage: t('hub_login_toast_attempt'),
-			toastClass: 'success'
+		this.props.actions.setToast({
+			toastMessage: '',
+			toastClass: ''
 		});
 		this.props.actions.login(email, password).then((success) => {
 			if (success) {
 				const { origin, pathname, hash } = window.location;
 				window.history.pushState({}, '', `${origin}${pathname}${hash}`);
-				this.setState({
+				this.props.actions.getUser();
+				this.props.actions.getUserSettings();
+				this.props.actions.setToast({
 					toastMessage: t('hub_login_toast_success'),
 					toastClass: 'success'
 				});
-				this.props.actions.getUser();
+				this.props.history.push('/');
 			} else {
-				this.setState({
+				this.props.actions.setToast({
 					toastMessage: t('hub_login_toast_error'),
 					toastClass: 'alert'
 				});
@@ -111,8 +116,6 @@ class LogInViewContainer extends Component {
 			password,
 			emailError,
 			passwordError,
-			toastMessage,
-			toastClass,
 		} = this.state;
 		const logInChildProps = {
 			email,
@@ -126,17 +129,22 @@ class LogInViewContainer extends Component {
 			email: user && user.email || 'email',
 		};
 
-		return (
-			<div>
-				<ToastMessage toastText={toastMessage} toastClass={toastClass} />
-				{loggedIn ? (
-					<SignedInView {...signedInChildProps} />
-				) : (
-					<LogInView {...logInChildProps} />
-				)}
-			</div>
+		return loggedIn ? (
+			<SignedInView {...signedInChildProps} />
+		) : (
+			<LogInView {...logInChildProps} />
 		);
 	}
 }
+
+// PropTypes ensure we pass required props of the correct type
+LogInViewContainer.propTypes = {
+	actions: PropTypes.shape({
+		setToast: PropTypes.func.isRequired,
+		login: PropTypes.func.isRequired,
+		getUser: PropTypes.func.isRequired,
+		getUserSettings: PropTypes.func.isRequired,
+	}).isRequired,
+};
 
 export default LogInViewContainer;
