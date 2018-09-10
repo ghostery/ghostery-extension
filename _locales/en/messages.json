@@ -2164,16 +2164,16 @@
 		"message": "Apply code"
 	},
 	"subscription_info": {
-		"message": "Subscription Info"
+		"message": "Subscription Details"
 	},
 	"subscription_themes": {
-		"message": "Themes"
+		"message": "Ghostery Themes"
 	},
 	"subscription_priority_support": {
 		"message": "Priority Support"
 	},
 	"subscription_info_title": {
-		"message": "Subscription Info"
+		"message": "Ghostery Supporter"
 	},
 	"subscription_themes_title": {
 		"message": "Themes"
@@ -2227,12 +2227,34 @@
 		"message": "Historical Tracker Stats"
 	},
 	"subscription_charge_date" : {
-		"message": "Next Charge Date"
+		"message": "Next Payment Date"
 	},
 	"subscription_expired": {
 		"message": "Account expired"
 	},
 	"subscription_auto_renewal": {
 		"message": "Auto Renewal"
+	},
+	"subscription_plan": {
+		"message": "Plan"
+	},
+	"subscription_days_left": {
+		"message": "You have $DAYS$ days remaining of your subscription.",
+		"placeholders": {
+			"days": {
+				"content": "$1",
+				"example": "info@ghostery.com"
+			} 
+		}
+	},
+	"subscription_resubscribe": {
+		"message": "Resubscribe"
+	},
+	"subscription_support": {
+		"message": "Find a broken page? Need assistance with blocking? Drop us a note!"
+	},
+	"subscription_submit_issue": {
+		"message": "Submit Issue"
 	}
 }
+

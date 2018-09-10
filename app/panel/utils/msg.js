@@ -112,3 +112,26 @@ export function sendRewardMessage(name, message, callback = function () {}) {
 		origin: 'rewardsPanel',
 	}, callback);
 }
+
+/**
+ * Send a message to open a Subscription or Subscribe tab.
+ * Which one is determined in background based on the current user state.
+ * This should be used for messages that don't require a callback.
+ * @memberOf PanelUtils
+ */
+export function openSubscriptionPage() {
+	sendMessage('account.openSubscriptionPage');
+	window.close();
+}
+
+/**
+ * Send a message to open a Support tab
+ * based on the current user state.
+ * This should be used for messages that don't require a callback.
+ * @memberOf PanelUtils
+ */
+export function openSupportPage() {
+	sendMessage('account.openSupportPage');
+	window.close();
+}
+

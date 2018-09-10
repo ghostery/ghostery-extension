@@ -297,8 +297,6 @@ class PanelData {
 			show_tracker_urls: this._confData.get('show_tracker_urls'),
 			toggle_individual_trackers: this._confData.get('toggle_individual_trackers'),
 			language: this._confData.get('language'), // required for the setup page that does not have access to panelView data
-			firstName: this._confData.get('firstName'),
-			lastName: this._confData.get('lastName'),
 		};
 
 		return this._settingsView;

@@ -27,7 +27,9 @@ import {
 	GET_USER_SETTINGS_SUCCESS,
 	GET_USER_SETTINGS_FAIL,
 	UPDATE_PROMOTIOS_FAIL,
-	UPDATE_PROMOTIOS_SUCCESS
+	UPDATE_PROMOTIOS_SUCCESS,
+	GET_USER_SUBSCRIPTION_DATA_FAIL,
+	GET_USER_SUBSCRIPTION_DATA_SUCCESS
 } from './AccountConstants';
 
 export const getUserSettings = () => dispatch => (
@@ -69,6 +71,24 @@ export const getUser = () => dispatch => (
 				payload: { user },
 			});
 			return true;
+		})
+);
+export const getUserSubscriptionData = () => dispatch => (
+	sendMessageInPromise('account.getUserSubsciptionData')
+		.then((res) => {
+			const { errors, subscriptionData } = res;
+			if (errors) {
+				dispatch({
+					type: GET_USER_SUBSCRIPTION_DATA_FAIL,
+					payload: { errors },
+				});
+			} else {
+				dispatch({
+					type: GET_USER_SUBSCRIPTION_DATA_SUCCESS,
+					payload: { subscriptionData },
+				});
+			}
+			return res;
 		})
 );
 
