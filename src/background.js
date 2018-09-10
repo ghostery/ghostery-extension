@@ -942,17 +942,17 @@ function onMessageHandler(request, sender, callback) {
 		let tabUrl;
 		if (conf.account && conf.account.user) {
 			if (conf.account.user.subscriptionsSupporter) {
-				tabUrl = `https://account.${globals.GHOSTERY_DOMAIN}.com/en/subscription`;
+				tabUrl = `https://account.${globals.GHOSTERY_DOMAIN}.com/subscription`;
 			} else {
-				tabUrl = `https://signon.${globals.GHOSTERY_DOMAIN}.com/en/subscribe`;
+				tabUrl = `https://signon.${globals.GHOSTERY_DOMAIN}.com/subscribe`;
 			}
 		} else {
-			tabUrl = `https://signon.${globals.GHOSTERY_DOMAIN}.com/en/subscribe`;
+			tabUrl = `https://signon.${globals.GHOSTERY_DOMAIN}.com/subscribe`;
 		}
 		utils.openNewTab({ url: tabUrl, become_active: true });
 		return true;
 	} else if (name === 'account.openSupportPage') {
-		const tabUrl = `https://account.${globals.GHOSTERY_DOMAIN}.com/en/support`;
+		const tabUrl = `https://account.${globals.GHOSTERY_DOMAIN}.com/support`;
 		utils.openNewTab({ url: tabUrl, become_active: true });
 		return true;
 	} else if (name === 'account.resetPassword') {
