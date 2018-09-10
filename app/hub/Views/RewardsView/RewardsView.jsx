@@ -19,10 +19,9 @@ import React, { Component } from 'react';
  * @memberof HubComponents
  */
 class RewardsView extends Component {
-	/**
-	 * Lifecycle Event
-	 */
-	componentWillMount() {
+	constructor(props) {
+		super(props);
+
 		const title = t('hub_rewards_page_title');
 		window.document.title = title;
 	}
@@ -81,12 +80,13 @@ class RewardsView extends Component {
 						</div>
 					</div>
 				</div>
-				<div className="RewardsView--paddingTop row align-center">
-					<div className="RewardsView__closerText">
-						{t('hub_rewards_closer')}
+				<div className="RewardsView__backgroundStars">
+					<div className="RewardsView--paddingTop row align-center">
+						<div className="RewardsView__closerText">
+							{t('hub_rewards_closer')}
+						</div>
 					</div>
 				</div>
-
 			</div>
 		);
 	}
