@@ -13,7 +13,7 @@
 
 import React from 'react';
 import { Route } from 'react-router-dom';
-import moment from 'moment/min/moment-with-locales.min';
+import moment from 'moment';
 
 import SubscriptionMenu from './Subscription/SubscriptionMenu';
 import SubscriptionInfo from './Subscription/SubscriptionInfo';
@@ -53,8 +53,6 @@ class Subscription extends React.Component {
 	parseSubscriptionData = () => {
 		const sd = this.props.subscriptionData;
 		if (sd) {
-			const languageToken = this.props.language.toLowerCase().replace('_', '-');
-			moment.locale(languageToken);
 			const {
 				planAmount, planInterval, currentPeriodEnd, cancelAtPeriodEnd, status
 			} = sd;
