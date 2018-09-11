@@ -1755,7 +1755,7 @@
 		"message": "No trackers blocked"
 	},
 	"hub_setup_blocking_text_everything": {
-		"message": "Block Everyting"
+		"message": "Block Everything"
 	},
 	"hub_setup_blocking_description_everything": {
 		"message": "All trackers blocked"
@@ -1850,7 +1850,7 @@
 		"message": "Mobile Privacy Browser"
 	},
 	"hub_products_main_promo_description": {
-		"message": "Browse ad-and tracker free on the go with our updated and enhanced mobile browser. Now equipped with a private search engine!"
+		"message": "Browse ad- and tracker-free on the go with our updated and enhanced mobile browser. Now equipped with a private search engine!"
 	},
 	"hub_products_second_promo_title": {
 		"message": "Ghostery New Tab"
@@ -1895,7 +1895,7 @@
 		"message": "Specialized offers are timely, relevant, and exclusive for our users"
 	},
 	"hub_rewards_closer": {
-		"message": "You can turn on Ghostery Rewards in the extension through custom setup."
+		"message": "You can turn on Ghostery Rewards in the extension or through custom setup."
 	},
 	"hub_supporter_page_title": {
 		"message": "Ghostery Hub - Support Ghostery"
@@ -2244,7 +2244,7 @@
 			"days": {
 				"content": "$1",
 				"example": "info@ghostery.com"
-			} 
+			}
 		}
 	},
 	"subscription_resubscribe": {
@@ -2257,4 +2257,3 @@
 		"message": "Submit Issue"
 	}
 }
-
