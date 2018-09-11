@@ -21,15 +21,14 @@ import SetupDoneView from './SetupDoneView';
  * @memberof HubComponents
  */
 class SetupDoneViewContainer extends Component {
-	/**
-	 * Lifecycle Event
-	 */
-	componentWillMount() {
+	constructor(props) {
+		super(props);
+
 		const title = t('hub_setup_page_title_done');
 		window.document.title = title;
 
-		const { index, sendMountActions } = this.props;
-		this.props.actions.setSetupNavigation({
+		const { index, sendMountActions } = props;
+		props.actions.setSetupNavigation({
 			activeIndex: index,
 			hrefPrev: `/setup/${index - 1}`,
 			hrefNext: '/',
@@ -40,7 +39,7 @@ class SetupDoneViewContainer extends Component {
 		});
 
 		if (sendMountActions) {
-			this.props.actions.setSetupComplete();
+			props.actions.setSetupComplete();
 		}
 	}
 

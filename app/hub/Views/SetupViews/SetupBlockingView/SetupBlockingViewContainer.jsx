@@ -27,15 +27,14 @@ import {
  * @memberof HubComponents
  */
 class SetupBlockingViewContainer extends Component {
-	/**
-	 * Lifecycle Event
-	 */
-	componentWillMount() {
+	constructor(props) {
+		super(props);
+
 		const title = t('hub_setup_page_title_blocking');
 		window.document.title = title;
 
-		const { index, setup, sendMountActions } = this.props;
-		this.props.actions.setSetupNavigation({
+		const { index, setup, sendMountActions } = props;
+		props.actions.setSetupNavigation({
 			activeIndex: index,
 			hrefPrev: false,
 			hrefNext: `/setup/${index + 1}`,
@@ -47,7 +46,7 @@ class SetupBlockingViewContainer extends Component {
 
 		if (sendMountActions) {
 			const { blockingPolicy } = setup;
-			this.props.actions.setBlockingPolicy({ blockingPolicy });
+			props.actions.setBlockingPolicy({ blockingPolicy });
 		}
 	}
 

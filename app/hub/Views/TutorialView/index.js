@@ -12,6 +12,7 @@
  */
 
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 
 import TutorialViewContainer from './TutorialViewContainer';
@@ -38,4 +39,4 @@ const mapDispatchToProps = dispatch => ({
 
 export const reducer = TutorialViewReducer;
 
-export default connect(mapStateToProps, mapDispatchToProps)(TutorialViewContainer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TutorialViewContainer));

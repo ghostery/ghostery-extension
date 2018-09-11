@@ -1,0 +1,69 @@
+/**
+ * Log In View Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+// Log In View
+.LogInView {
+	margin-top: 40px;
+	padding-bottom: 40px;
+}
+.LogInView--addPaddingTop {
+	padding-top: 40px;
+}
+.LogInView__headerImage {
+	max-width: 180px;
+}
+.LogInView__headerTitle h3 {
+	font-size: 24px;
+	line-height: 1.75;
+	color: #4a4a4a;
+	margin: 0 25px;
+}
+.LogInView__inputLabel {
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 40px;
+	color: #4a4a4a;
+}
+.LogInView__inputBox {
+	font-size: 14;
+	line-height: 24px;
+	color: #4a4a4a;
+	margin-bottom: 35px;
+
+	// Foundation Overrides
+	border-radius: 0;
+	box-shadow: none;
+	border: 1px solid #c8c7c2;
+}
+.LogInView__inputBox.error {
+	margin-bottom: 8px;
+	border-color: #e74055;
+}
+.LogInView__inputBox:focus {
+	// Foundation Overrides
+	box-shadow: none;
+	border-color: #4a4a4a;
+}
+.LogInView__inputError {
+	font-size: 12;
+	line-height: 14px;
+	color: #e74055;
+	margin-bottom: 13px;
+}
+.LogInView__link {
+	font-size: 14px;
+	line-height: 30px;
+}
+.LogInView__button {
+	min-width: 180px;
+}
