@@ -33,9 +33,7 @@ const mapStateToProps = state => Object.assign({}, state.tutorial);
  * @memberof TutorialContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign({}, TutorialAntiSuiteViewActions, {
-		setTutorialNavigation,
-	}), dispatch),
+	actions: bindActionCreators(Object.assign({}, TutorialAntiSuiteViewActions, { setTutorialNavigation }), dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TutorialAntiSuiteViewContainer);

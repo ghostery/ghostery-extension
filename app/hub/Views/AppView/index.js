@@ -32,9 +32,7 @@ const mapStateToProps = state => Object.assign({}, state.app);
  * @memberof SetupContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign({}, {
-		setToast,
-	}), dispatch),
+	actions: bindActionCreators(Object.assign({}, { setToast }), dispatch),
 });
 
 export const reducer = AppViewReducer;

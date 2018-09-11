@@ -33,9 +33,7 @@ const mapStateToProps = state => Object.assign({}, state.setup);
  * @memberof SetupContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign({}, SetupDoneViewActions, {
-		setSetupNavigation,
-	}), dispatch),
+	actions: bindActionCreators(Object.assign({}, SetupDoneViewActions, { setSetupNavigation }), dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SetupDoneViewContainer);

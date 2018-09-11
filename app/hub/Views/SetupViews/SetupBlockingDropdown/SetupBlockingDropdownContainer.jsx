@@ -12,7 +12,6 @@
  */
 
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import SetupBlockingDropdown from './SetupBlockingDropdown';
 import { Modal } from '../../../../shared-components';
@@ -57,4 +56,4 @@ SetupBlockingDropdownContainer.propTypes = {
 	sendMountActions: PropTypes.bool.isRequired,
 };
 
-export default withRouter(SetupBlockingDropdownContainer);
+export default SetupBlockingDropdownContainer;

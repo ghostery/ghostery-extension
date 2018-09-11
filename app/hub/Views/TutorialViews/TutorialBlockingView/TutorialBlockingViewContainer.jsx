@@ -39,6 +39,10 @@ class TutorialBlockingViewContainer extends Component {
 		});
 	}
 
+	/**
+	 * React's required render function. Returns JSX
+	 * @return {JSX} JSX for rendering the Tutorial Blocking View of the Hub app
+	 */
 	render() {
 		return <TutorialBlockingView />;
 	}

@@ -15,7 +15,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import { NavLink } from 'react-router-dom';
-import { ExitButton, ToggleCheckbox } from '../../../shared-components';
+import { ToggleCheckbox } from '../../../shared-components';
 
 /**
  * A Functional React component for rendering the Create Account View
@@ -51,7 +51,6 @@ const CreateAccountView = (props) => {
 
 	return (
 		<div className="CreateAccountView">
-			<ExitButton hrefExit="/" textExit={t('hub_create_account_exit')} />
 			<div className="CreateAccountView--addPaddingTop row align-center">
 				<div className="columns small-12 large-10">
 					<div className="flex-container align-center-middle">

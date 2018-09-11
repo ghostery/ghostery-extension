@@ -40,7 +40,7 @@
 	@return '%23' + str-slice('#{$color}', 2, -1);
 }
 
-// Used in Exit Button
+// Used in Exit Button and Toast Message
 @function buildIconX($primary-color) {
 	@return url('data:image/svg+xml;charset%3dUS-ASCII,%3Csvg%20width%3D%2215%22%20height%3D%2215%22%20xmlns%3D%22http://www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M10.078%207.5l4.386-4.386a1.824%201.824%200%200%200-2.578-2.58L7.5%204.922%203.114.534a1.824%201.824%200%201%200-2.58%202.58L4.92%207.5.534%2011.886a1.824%201.824%200%200%200%202.578%202.58L7.5%2010.078l4.386%204.386a1.824%201.824%200%201%200%202.58-2.58L10.078%207.5z%22%20fill%3D%22#{_url-friendly-color($primary-color)}%22%20fill-rule%3D%22evenodd%22/%3E%3C/svg%3E');
 }

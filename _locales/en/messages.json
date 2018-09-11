@@ -1846,11 +1846,11 @@
 	"hub_tutorial_page_title_trackerlist": {
 		"message": "Ghostery Hub - Tutorial Trackers"
 	},
-	"hub_tutorial_page_title_layout": {
-		"message": "Ghostery Hub - Tutorial Layout"
-	},
 	"hub_tutorial_page_title_blocking": {
 		"message": "Ghostery Hub - Tutorial Blocking"
+	},
+	"hub_tutorial_page_title_layout": {
+		"message": "Ghostery Hub - Tutorial Layout"
 	},
 	"hub_tutorial_page_title_trust": {
 		"message": "Ghostery Hub - Tutorial Trust and Restrict"
@@ -2088,9 +2088,6 @@
 	"hub_login_header_title": {
 		"message": "Sign in to your account."
 	},
-	"hub_login_exit": {
-		"message": "Exit Sign In"
-	},
 	"hub_login_label_email": {
 		"message": "Email:"
 	},
@@ -2114,9 +2111,6 @@
 	},
 	"hub_login_toast_error": {
 		"message": "Looks like we can't find this email and password combo. Give it another shot."
-	},
-	"hub_create_account_exit": {
-		"message": "Exit Create Account"
 	},
 	"hub_create_account_header_title": {
 		"message": "Why create an account? Creating an account allows you to sync settings across browsers and devices."

@@ -22,10 +22,9 @@ import { SteppedNavigation } from '../../../../shared-components';
  */
 const TutorialNavigationContainer = (props) => {
 	const { totalSteps, tutorial } = props;
-	const { navigation } = tutorial;
 	const childProps = {
 		totalSteps,
-		...navigation,
+		...tutorial.navigation,
 	};
 	return <SteppedNavigation {...childProps} />;
 };

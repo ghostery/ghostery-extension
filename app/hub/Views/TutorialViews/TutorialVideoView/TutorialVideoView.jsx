@@ -25,7 +25,7 @@ const TutorialVideoView = () => (
 				{t('hub_tutorial_video_title')}
 			</div>
 			<div className="TutorialVideoView__videoContainer text-center">
-				<video
+				<video // eslint-disable-line jsx-a11y/media-has-caption
 					controls
 					height="360"
 					width="640"

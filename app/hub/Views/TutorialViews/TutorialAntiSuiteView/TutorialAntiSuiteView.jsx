@@ -13,7 +13,6 @@
 
 import React from 'react';
 
-
 /**
  * A Functional React component for rendering the Tutorial Anti Suite View
  * @return {JSX} JSX for rendering the Tutorial Anti Suite View of the Hub app

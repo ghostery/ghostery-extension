@@ -13,6 +13,7 @@
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { withRouter } from 'react-router-dom';
 
 import SetupBlockingViewContainer from './SetupBlockingViewContainer';
 import * as SetupBlockingViewActions from './SetupBlockingViewActions';
@@ -33,9 +34,7 @@ const mapStateToProps = state => Object.assign({}, state.setup);
  * @memberof SetupContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign(SetupBlockingViewActions, {
-		setSetupNavigation,
-	}), dispatch),
+	actions: bindActionCreators(Object.assign({}, SetupBlockingViewActions, { setSetupNavigation }), dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SetupBlockingViewContainer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SetupBlockingViewContainer));
