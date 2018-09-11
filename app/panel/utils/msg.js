@@ -134,4 +134,3 @@ export function openSupportPage() {
 	sendMessage('account.openSupportPage');
 	window.close();
 }
-

@@ -33,7 +33,7 @@
 		}
 		.pitch-learn-more {
 			display: block;
-			font-size: 14px; 
+			font-size: 14px;
 			font-weight: bold;
 			color: $ghosty-blue;
 			text-decoration: underline;
@@ -47,7 +47,7 @@
 			box-shadow: 0px 1px 10px 0px rgba(0,0,0,0.20);
 			border-radius: 4px;
 			line-height: 40px;
-			font-size: 16px; 
+			font-size: 16px;
 			font-weight: bold;
 			color: $white;
 		}
@@ -65,11 +65,11 @@
 		}
 		input:focus + .ToggleSlider__slider {
 				box-shadow: 0 0 1px #2196f3 !important;
-		}	
+		}
 		input:checked + .ToggleSlider__slider + .ToggleSlider__slider_circle {
 				background-color: #2092BF !important;
 				border-color: #2092BF !important;
-		} 
+		}
 	}
 	.field-label {
 		font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
@@ -79,7 +79,7 @@
 		text-size-adjust: 100%;
 		-webkit-font-smoothing: antialiased;
 		text-align: left;
-	}	
+	}
 	.themes-slider-label {
 		@extend .field-label;
 		padding-right: 20px !important;
@@ -112,9 +112,9 @@
 		&.resubscribe {
 			@extend %pointer;
 			border-radius: 2px;
-  			border: solid 2px #2092bf;
-  			line-height: 31px;
-  			padding: 5px 10px !important;
+			border: solid 2px #2092bf;
+			line-height: 31px;
+			padding: 5px 10px !important;
 		}
 	}
 	.manage-link {
@@ -151,6 +151,6 @@
 		width: 219px;
 		height: 219px;
 		background-image: url('/app/images/panel/loading.svg');
-		opacity: 0.75; 
+		opacity: 0.75;
 	}
 }
