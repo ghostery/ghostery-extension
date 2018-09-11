@@ -16,6 +16,7 @@
 import parser from 'ua-parser-js';
 
 const manifest = chrome.runtime.getManifest();
+const MOBILE_UPDATE_URL = 'https://s3.amazonaws.com/cdncliqz/update/android_browser/firefox@ghostery.com/update.json';
 /**
  * Structure which holds parameters to be used throughout the code, a.k.a. global values.
  * Most of them (but not all) are const.
@@ -34,8 +35,7 @@ class Globals {
 		this.IS_CLIQZ = false; // TEMP !!((manifest.applications && manifest.applications.gecko && manifest.applications.gecko.update_url));
 
 		this.IS_MOBILE_APP = manifest.applications && manifest.applications.gecko &&
-			manifest.applications.gecko.update_url &&
-			/https:\/\/s3\.amazonaws\.com\/cdncliqz\/update\/android_browser.*\/firefox@ghostery\.com\/update\.json/.exec(manifest.applications.gecko.update_url);
+			manifest.applications.gecko.update_url && manifest.applications.gecko.update_url.indexOf(MOBILE_UPDATE_URL) === 0;
 
 		// flags
 		this.JUST_INSTALLED = false;
