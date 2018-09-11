@@ -214,3 +214,120 @@ export function setTheme(doc, themeName, theme) {
 		document.head.appendChild(themeStyle);
 	}
 }
+/**
+ * Calculates metrics of a single line of text. This helper
+ * will be called mutiple times, so we save created element
+ * as a property of this function. After it is used it should be cleaned up.
+ * @param   {string} text  string of text
+ * @param   {object} font object with font CSS parameters and values
+ * @return  {object} width and height of the text
+ * @private
+ */
+const _getTextMetrics = (text, font) => {
+	const gtm = _getTextMetrics;
+	if (!gtm.clear) {
+		gtm.clear = () => {
+			gtm.span.parentNode.removeChild(gtm.span);
+			delete gtm.span;
+		};
+	}
+	const { fontFamily, fontSize, fontWeight } = font;
+	if (!gtm.span) {
+		const span = document.createElement('span');
+		span.style.visibility = 'hidden';
+		gtm.span = document.body.appendChild(span);
+	}
+	gtm.span.textContent = text;
+	gtm.span.style.fontSize = fontSize;
+	gtm.span.style.fontWeight = fontWeight;
+	gtm.span.style.fontFamily = fontFamily;
+	return gtm.span;
+};
+
+
+/**
+ * Calculates metrics for mutiline text
+ * @memberOf PanelUtils
+ * @param  {object} font object with CSS font parameters and their values
+ * @param  {number} initialWidth initial width of the span
+ * @param  {number} maxWidth max available width
+ * @param  {number} height of the span which we don't want to surpass
+ */
+export function getTextWidth(str, font, initialWidth, maxWidth, height) {
+	if (!str) {
+		return {
+			canBeDone: true,
+			lineCount: 0,
+			initialWidth,
+			details: 'empty_string',
+		};
+	}
+
+	let width = initialWidth;
+	const span = _getTextMetrics('text', font);
+	const lineHeight = span.offsetHeight;
+	let maxLineCount = Math.floor(height / (1.5 * lineHeight));
+	const delta = lineHeight;
+
+	const words = str.split(' ');
+	let longestWordWidth = 0;
+	words.forEach((word) => {
+		const wordWidth = _getTextMetrics(word, font).offsetWidth;
+		if (longestWordWidth < wordWidth) {
+			longestWordWidth = wordWidth;
+		}
+	});
+	if (longestWordWidth > maxWidth) {
+		span.parentNode.removeChild(span);
+		_getTextMetrics.clear();
+		return {
+			canBeDone: false,
+			lineCount: 0,
+			width: maxWidth,
+			details: 'word_too_long',
+		};
+	}
+
+	let canBeDone = true;
+	let lineCount = 0;
+	let count = 0;
+	const countMax = Math.floor((maxWidth - width) / delta) + 2;
+	while (count++ < countMax) {
+		let lineCountIncremented = false;
+		let line = 0;
+		let wordIndex = 0;
+		lineCount = 0;
+
+		while (wordIndex < words.length && lineCount <= maxLineCount) {
+			const word = ` ${words[wordIndex]}`;
+			if (_getTextMetrics(line + word, font).offsetWidth <= width) {
+				if (!lineCountIncremented) {
+					lineCount++;
+					lineCountIncremented = true;
+				}
+				line += word;
+				wordIndex++;
+			} else {
+				line = 0;
+				lineCountIncremented = false;
+			}
+		}
+		if (lineCount <= maxLineCount) {
+			break;
+		} else if (width + delta <= maxWidth) {
+			width += delta;
+		} else {
+			width = maxWidth;
+			maxLineCount++;
+			canBeDone = false;
+		}
+	}
+	_getTextMetrics.clear();
+
+	return {
+		canBeDone,
+		lineCount,
+		width,
+		details: canBeDone ? 'none' : 'overflow',
+	};
+}

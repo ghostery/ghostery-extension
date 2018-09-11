@@ -11,24 +11,42 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { openSubscriptionPage } from '../utils/msg';
+import { getTextWidth } from '../utils/utils';
 /**
  * Render Subscribe panel.
  * @return {ReactComponent}   ReactComponent instance
  */
-function Subscribe() {
+const Subscribe = (props) => {
+	// str, font, width, maxWidth, height
+	const font = {
+		fontFamily: '"Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif 18px bold',
+		fontSize: '18px',
+		fontWeight: 'bold',
+	};
+	const result = getTextWidth(t('subscribe_pitch'), font, 380, 540, 140);
+	const padding = `${Math.floor((580 - result.width) / 2)}px`;
+	const { loggedIn } = props.match.params;
 	return (
 		<div className="content-subscription">
 			<div className="badge" />
-			<div className="pitch-container">
+			<div className="pitch-container" style={{ paddingLeft: padding, paddingRight: padding }}>
 				<span className="pitch-text">{t('subscribe_pitch')}</span>
-				<a href="https://www.ghostery.com/supporter/" target="_blank" rel="noopener noreferrer">
-					<span className="pitch-learn-more">{t('subscribe_pitch_learn_more')}</span>
-				</a>
+			</div>
+			<a href="https://www.ghostery.com/supporter/" target="_blank" rel="noopener noreferrer">
+				<span className="pitch-learn-more">{t('subscribe_pitch_learn_more')}</span>
+			</a>
+			<div>
 				<span className="pitch-become-subscriber" onClick={openSubscriptionPage}>{t('subscribe_pitch_button_label')}</span>
 			</div>
+			{(loggedIn === 'false') &&
+				<NavLink to="/login" className="pitch-already-subscriber">
+					<span>{t('subscribe_pitch_sign_here')}</span>
+				</NavLink>
+			}
 		</div>
 	);
-}
+};
 
 export default Subscribe;
