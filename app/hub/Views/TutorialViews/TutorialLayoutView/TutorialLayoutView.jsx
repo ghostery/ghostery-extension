@@ -19,7 +19,7 @@ import React from 'react';
  * @memberof HubComponents
  */
 const TutorialLayoutView = () => (
-	<div className="TutorialView--paddingTopSmall row align-center-middle">
+	<div className="row align-center-middle">
 		<div className="columns small-12 medium-6">
 			<img
 				className="TutorialLayoutView__image simple"

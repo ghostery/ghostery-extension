@@ -19,7 +19,7 @@ import React from 'react';
  * @memberof HubComponents
  */
 const TutorialTrackerListView = () => (
-	<div className="TutorialView--paddingTopSmall row align-center">
+	<div className="row align-center">
 		<div className="columns small-12 medium-9">
 			<img
 				className="TutorialTrackerListView__image"

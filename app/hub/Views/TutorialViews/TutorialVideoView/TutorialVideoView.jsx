@@ -19,7 +19,7 @@ import React from 'react';
  * @memberof HubComponents
  */
 const TutorialVideoView = () => (
-	<div className="TutorialView--paddingTopLarge row align-center">
+	<div className="row align-center full-width">
 		<div className="columns small-12 medium-10 large-8">
 			<div className="TutorialView__title text-center">
 				{t('hub_tutorial_video_title')}

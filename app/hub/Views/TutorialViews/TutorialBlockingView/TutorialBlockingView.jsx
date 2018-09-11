@@ -19,7 +19,7 @@ import React from 'react';
  * @memberof HubComponents
  */
 const TutorialBlockingView = () => (
-	<div className="TutorialView--paddingTopSmall row align-center-middle">
+	<div className="row align-center-middle">
 		<div className="columns small-12 medium-6">
 			<div className="TutorialView__imageTitle">
 				{t('hub_tutorial_detailed_view')}
