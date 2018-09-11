@@ -17,7 +17,7 @@ import { bindActionCreators } from 'redux';
 import HomeViewContainer from './HomeViewContainer';
 import HomeViewReducer from './HomeViewReducer';
 import * as HomeViewActions from './HomeViewActions';
-import * as AccountActions from '../../../Account/AccountActions';
+import { getUser } from '../../../Account/AccountActions';
 
 /**
  * Map redux store state properties to the component's own properties.
@@ -35,7 +35,7 @@ const mapStateToProps = state => Object.assign({}, state.home, state.account);
  */
 const mapDispatchToProps = dispatch => ({
 	actions: bindActionCreators(Object.assign({}, HomeViewActions, {
-		getUser: AccountActions.getUser,
+		getUser,
 	}), dispatch),
 });
 

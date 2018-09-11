@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import SupporterViewContainer from './SupporterViewContainer';
-import * as AccountActions from '../../../Account/AccountActions';
+import { getUser } from '../../../Account/AccountActions';
 
 /**
  * Map redux store state properties to the component's own properties.
@@ -33,7 +33,7 @@ const mapStateToProps = state => Object.assign({}, state.account);
  */
 const mapDispatchToProps = dispatch => ({
 	actions: bindActionCreators(Object.assign({}, {
-		getUser: AccountActions.getUser,
+		getUser,
 	}), dispatch),
 });
 

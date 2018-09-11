@@ -24,8 +24,13 @@ const ToastMessage = props => (
 		{props.toastText && (
 			<div className="callout-container">
 				<div className={`callout toast ${props.toastClass}`}>
-					<div className="callout-text">
-						{props.toastText}
+					<div className="flex-container align-center-middle">
+						<div className="callout-text">
+							{props.toastText}
+						</div>
+						{props.toastExit && (
+							<div className="ToastMessage__close clickable" onClick={props.toastExit} />
+						)}
 					</div>
 				</div>
 			</div>
@@ -37,6 +42,15 @@ const ToastMessage = props => (
 ToastMessage.propTypes = {
 	toastText: PropTypes.string.isRequired,
 	toastClass: PropTypes.string.isRequired,
+	toastExit: PropTypes.oneOfType([
+		PropTypes.func,
+		PropTypes.bool,
+	]),
+};
+
+// Default props used in the Toast Message
+ToastMessage.defaultProps = {
+	toastExit: false,
 };
 
 export default ToastMessage;

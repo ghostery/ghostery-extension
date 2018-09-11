@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import CreateAccountViewContainer from './CreateAccountViewContainer';
-import * as AccountActions from '../../../Account/AccountActions';
+import { register, getUser, updateAccountPromotions } from '../../../Account/AccountActions';
 import { setToast } from '../AppView/AppViewActions';
 
 /**
@@ -35,9 +35,9 @@ const mapStateToProps = state => Object.assign({}, state.account);
 const mapDispatchToProps = dispatch => ({
 	actions: bindActionCreators(Object.assign({}, {
 		setToast,
-		register: AccountActions.register,
-		getUser: AccountActions.getUser,
-		updateAccountPromotions: AccountActions.updateAccountPromotions,
+		register,
+		getUser,
+		updateAccountPromotions,
 	}), dispatch),
 });
 

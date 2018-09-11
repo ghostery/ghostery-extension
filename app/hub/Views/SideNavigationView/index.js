@@ -16,7 +16,7 @@ import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 
 import SideNavigationViewContainer from './SideNavigationViewContainer';
-import * as AccountActions from '../../../Account/AccountActions';
+import { getUser, logout } from '../../../Account/AccountActions';
 import { setToast } from '../AppView/AppViewActions';
 
 /**
@@ -36,8 +36,8 @@ const mapStateToProps = state => Object.assign({}, state.account);
 const mapDispatchToProps = dispatch => ({
 	actions: bindActionCreators(Object.assign({}, {
 		setToast,
-		getUser: AccountActions.getUser,
-		logout: AccountActions.logout,
+		getUser,
+		logout,
 	}), dispatch),
 });
 

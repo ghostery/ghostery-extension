@@ -41,6 +41,7 @@ class CreateAccountViewContainer extends Component {
 			passwordInvalidError: false,
 			passwordLengthError: false,
 			promotionsChecked: true,
+			validateInput: false,
 		};
 
 		this.props.actions.setToast({
@@ -56,6 +57,10 @@ class CreateAccountViewContainer extends Component {
 	_handleInputChange = (event) => {
 		const { name, value } = event.target;
 		this.setState({ [name]: value });
+
+		if (!this.state.validateInput) {
+			return;
+		}
 
 		switch (name) {
 			case 'email': {
@@ -120,6 +125,7 @@ class CreateAccountViewContainer extends Component {
 			confirmEmailError: !confirmIsValid,
 			passwordInvalidError: invalidChars,
 			passwordLengthError: invalidLength,
+			validateInput: true,
 		});
 
 		if (!emailIsValid || !confirmIsValid || !passwordIsValid) {

@@ -29,6 +29,18 @@ describe('app/shared-components/ToastMessage', () => {
 			).toJSON();
 			expect(component).toMatchSnapshot();
 		});
+
+		test('toast message is rendered correctly with a close button', () => {
+			const initialState = {
+				toastText: 'example text',
+				toastClass: 'example-class',
+				toastExit: () => {},
+			};
+			const component = renderer.create(
+				<ToastMessage {...initialState} />
+			).toJSON();
+			expect(component).toMatchSnapshot();
+		});
 	});
 
 	describe('More Snapshot tests with react-test-renderer, but for edge cases', () => {
@@ -49,6 +61,7 @@ describe('app/shared-components/ToastMessage', () => {
 			const initialState = {
 				toastText: 'sample text',
 				toastClass: 'test-class',
+				toastExit: jest.fn(),
 			};
 
 			const component = shallow(<ToastMessage {...initialState} />);
@@ -56,6 +69,14 @@ describe('app/shared-components/ToastMessage', () => {
 			expect(component.find('.callout-container').length).toBe(1);
 			expect(component.find('.callout.toast.test-class').length).toBe(1);
 			expect(component.find('.callout-text').length).toBe(1);
+			expect(component.find('.ToastMessage__close').length).toBe(1);
+
+			expect(initialState.toastExit.mock.calls.length).toBe(0);
+			component.find('.ToastMessage__close').simulate('click');
+			expect(initialState.toastExit.mock.calls.length).toBe(1);
+
+			component.setProps({ toastExit: false });
+			expect(component.find('.ToastMessage__close').length).toBe(0);
 		});
 
 		test('the edge cases of the component', () => {

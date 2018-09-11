@@ -33,7 +33,7 @@ class HomeViewContainer extends Component {
 		const title = t('hub_home_page_title');
 		window.document.title = title;
 
-		this.props.actions.getHomeProps();
+		props.actions.getHomeProps();
 		props.actions.getUser();
 	}
 

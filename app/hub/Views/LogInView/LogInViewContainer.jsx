@@ -29,6 +29,7 @@ class LogInViewContainer extends Component {
 			password: '',
 			emailError: false,
 			passwordError: false,
+			validateInput: false,
 		};
 
 		this.props.actions.setToast({
@@ -44,6 +45,10 @@ class LogInViewContainer extends Component {
 	_handleInputChange = (event) => {
 		const { name, value } = event.target;
 		this.setState({ [name]: value });
+
+		if (!this.state.validateInput) {
+			return;
+		}
 
 		switch (name) {
 			case 'email': {
@@ -75,6 +80,7 @@ class LogInViewContainer extends Component {
 		this.setState({
 			emailError: !emailIsValid,
 			passwordError: !password,
+			validateInput: true,
 		});
 
 		if (!emailIsValid || !password) {

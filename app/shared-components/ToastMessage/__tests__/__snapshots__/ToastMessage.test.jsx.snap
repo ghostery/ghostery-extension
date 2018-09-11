@@ -19,9 +19,41 @@ exports[`app/shared-components/ToastMessage Snapshot tests with react-test-rende
       className="callout toast test-class"
     >
       <div
-        className="callout-text"
+        className="flex-container align-center-middle"
       >
-        sample text
+        <div
+          className="callout-text"
+        >
+          sample text
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/shared-components/ToastMessage Snapshot tests with react-test-renderer toast message is rendered correctly with a close button 1`] = `
+<div
+  className="ToastMessage full-width"
+>
+  <div
+    className="callout-container"
+  >
+    <div
+      className="callout toast example-class"
+    >
+      <div
+        className="flex-container align-center-middle"
+      >
+        <div
+          className="callout-text"
+        >
+          example text
+        </div>
+        <div
+          className="ToastMessage__close clickable"
+          onClick={[Function]}
+        />
       </div>
     </div>
   </div>
