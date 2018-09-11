@@ -26,8 +26,11 @@ const TutorialVideoView = () => (
 			</div>
 			<div className="TutorialVideoView__videoContainer text-center">
 				<video
-					controls preload="metadata" width="640" height="360"
-					poster="https://www.ghostery.com/wp-content/uploads/2018/08/promo_placeholder-1024x575.png"
+					controls
+					height="360"
+					width="640"
+					preload="metadata"
+					poster="/app/images/hub/tutorial/video-poster.png"
 				>
 					<source type="video/mp4" src="https://www.ghostery.com/wp-content/uploads/2018/08/ghostery_promo.mp4?_=1" />
 					<source type="video/webm" src="https://www.ghostery.com/wp-content/uploads/2018/08/ghostery_promo.webm?_=1" />

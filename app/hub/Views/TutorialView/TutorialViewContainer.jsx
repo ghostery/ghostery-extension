@@ -19,8 +19,8 @@ import TutorialView from './TutorialView';
 // Component Views
 import TutorialVideoView from '../TutorialViews/TutorialVideoView';
 import TutorialTrackerListView from '../TutorialViews/TutorialTrackerListView';
-import TutorialLayoutView from '../TutorialViews/TutorialLayoutView';
 import TutorialBlockingView from '../TutorialViews/TutorialBlockingView';
+import TutorialLayoutView from '../TutorialViews/TutorialLayoutView';
 import TutorialTrustView from '../TutorialViews/TutorialTrustView';
 import TutorialAntiSuiteView from '../TutorialViews/TutorialAntiSuiteView';
 

@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/hub/Views/TutorialView container Snapshot tests with react-test-renderer tutorial view container is rendered correctly on the tutorial anti suite step 1`] = `
+<div
+  className="full-height flex-container flex-dir-column"
+>
+  <div
+    className="flex-child-grow"
+  >
+    <div>
+      Mock Tutorial Anti Suite View
+    </div>
+  </div>
+  <div>
+    Mock Tutorial Navigation View
+  </div>
+</div>
+`;
+
+exports[`app/hub/Views/TutorialView container Snapshot tests with react-test-renderer tutorial view container is rendered correctly on the tutorial blocking step 1`] = `
+<div
+  className="full-height flex-container flex-dir-column"
+>
+  <div
+    className="flex-child-grow"
+  >
+    <div>
+      Mock Tutorial Blocking View
+    </div>
+  </div>
+  <div>
+    Mock Tutorial Navigation View
+  </div>
+</div>
+`;
+
+exports[`app/hub/Views/TutorialView container Snapshot tests with react-test-renderer tutorial view container is rendered correctly on the tutorial layout step 1`] = `
+<div
+  className="full-height flex-container flex-dir-column"
+>
+  <div
+    className="flex-child-grow"
+  >
+    <div>
+      Mock Tutorial Layout View
+    </div>
+  </div>
+  <div>
+    Mock Tutorial Navigation View
+  </div>
+</div>
+`;
+
+exports[`app/hub/Views/TutorialView container Snapshot tests with react-test-renderer tutorial view container is rendered correctly on the tutorial tracker list step 1`] = `
+<div
+  className="full-height flex-container flex-dir-column"
+>
+  <div
+    className="flex-child-grow"
+  >
+    <div>
+      Mock Tutorial Tracker List View
+    </div>
+  </div>
+  <div>
+    Mock Tutorial Navigation View
+  </div>
+</div>
+`;
+
+exports[`app/hub/Views/TutorialView container Snapshot tests with react-test-renderer tutorial view container is rendered correctly on the tutorial trust and restrict step 1`] = `
+<div
+  className="full-height flex-container flex-dir-column"
+>
+  <div
+    className="flex-child-grow"
+  >
+    <div>
+      Mock Tutorial Trust View
+    </div>
+  </div>
+  <div>
+    Mock Tutorial Navigation View
+  </div>
+</div>
+`;
+
+exports[`app/hub/Views/TutorialView container Snapshot tests with react-test-renderer tutorial view container is rendered correctly on the tutorial video step 1`] = `
+<div
+  className="full-height flex-container flex-dir-column"
+>
+  <div
+    className="flex-child-grow"
+  >
+    <div>
+      Mock Tutorial Video View
+    </div>
+  </div>
+  <div>
+    Mock Tutorial Navigation View
+  </div>
+</div>
+`;
