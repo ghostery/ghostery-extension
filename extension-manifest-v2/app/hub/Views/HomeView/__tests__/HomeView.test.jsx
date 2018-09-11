@@ -15,6 +15,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 import { MemoryRouter } from 'react-router';
+import { NavLink } from 'react-router-dom';
 import HomeView from '../HomeView';
 
 describe('app/hub/Views/HomeView component', () => {
@@ -26,8 +27,8 @@ describe('app/hub/Views/HomeView component', () => {
 				tutorial_complete: true,
 				enable_metrics: true,
 				changeMetrics: () => {},
-				account_text: 'test create account',
-				account_link: '/test/create-account',
+				email: 'test@example.com',
+				isSupporter: true,
 			};
 
 			const component = renderer.create(
@@ -45,8 +46,8 @@ describe('app/hub/Views/HomeView component', () => {
 				tutorial_complete: false,
 				enable_metrics: false,
 				changeMetrics: () => {},
-				account_text: 'test@example.com',
-				account_link: '/test/user-profile',
+				email: '',
+				isSupporter: false,
 			};
 
 			const component = renderer.create(
@@ -65,8 +66,8 @@ describe('app/hub/Views/HomeView component', () => {
 				tutorial_complete: false,
 				enable_metrics: false,
 				changeMetrics: jest.fn(),
-				account_text: 'test username',
-				account_link: '/test/url',
+				email: '',
+				isSupporter: false,
 			};
 
 			const component = shallow(<HomeView {...initialState} />);
@@ -90,6 +91,12 @@ describe('app/hub/Views/HomeView component', () => {
 
 			component.setProps({ setup_complete: true });
 			expect(component.find('.HomeView__featureButton.hollow').length).toBe(2);
+
+			expect(component.find('.HomeView__subHeader a').length).toBe(0);
+			expect(component.find('.HomeView__subHeader NavLink').length).toBe(1);
+			component.setProps({ email: 'test@example.com' });
+			expect(component.find('.HomeView__subHeader a').length).toBe(1);
+			expect(component.find('.HomeView__subHeader NavLink').length).toBe(0);
 		});
 	});
 });

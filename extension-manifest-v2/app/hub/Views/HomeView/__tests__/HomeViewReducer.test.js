@@ -21,8 +21,6 @@ const initialState = Immutable({
 		setup_complete: false,
 		tutorial_complete: false,
 		enable_metrics: false,
-		account_text: '',
-		account_link: '',
 	},
 });
 
@@ -36,8 +34,6 @@ describe('app/hub/Views/HomeView reducer', () => {
 			setup_complete: true,
 			tutorial_complete: true,
 			enable_metrics: true,
-			account_text: 'test@example.com',
-			account_link: '/users/test',
 		};
 		const action = { data, type: GET_HOME_PROPS };
 

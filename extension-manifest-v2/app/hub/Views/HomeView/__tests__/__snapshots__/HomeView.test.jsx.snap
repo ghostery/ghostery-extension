@@ -73,11 +73,11 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
       <a
         aria-current={null}
         className={undefined}
-        href="/test/user-profile"
+        href="/create-account"
         onClick={[Function]}
         style={undefined}
       >
-        test@example.com
+        hub_home_subheader_create_account
       </a>
     </div>
     <div
@@ -248,13 +248,11 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
         hub_home_subheader_optimize
       </div>
       <a
-        aria-current={null}
-        className={undefined}
-        href="/test/create-account"
-        onClick={[Function]}
-        style={undefined}
+        href="https://account.ghosterystage.com"
+        rel="noopener noreferrer"
+        target="_blank"
       >
-        test create account
+        test@example.com
       </a>
     </div>
     <div
@@ -340,7 +338,7 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
             onClick={[Function]}
             style={undefined}
           >
-            hub_home_feature_supporter_button
+            hub_home_feature_supporter_button_alt
           </a>
         </div>
       </div>

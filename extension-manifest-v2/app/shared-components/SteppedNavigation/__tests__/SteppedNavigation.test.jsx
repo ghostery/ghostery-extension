@@ -16,6 +16,7 @@ import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 import { MemoryRouter } from 'react-router';
 import SteppedNavigation from '../SteppedNavigation';
+import ExitButton from '../../ExitButton';
 
 describe('app/shared-components/SteppedNavigation', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
@@ -132,9 +133,7 @@ describe('app/shared-components/SteppedNavigation', () => {
 			};
 
 			const component = shallow(<SteppedNavigation {...initialState} />);
-			expect(component.find('.SteppedNavigation__exit').length).toBe(1);
-			expect(component.find('.SteppedNavigation__exitText').length).toBe(1);
-			expect(component.find('.SteppedNavigation__exitIcon').length).toBe(1);
+			expect(component.find(ExitButton).length).toBe(1);
 			expect(component.find('.SteppedNavigation__buttonContainer').length).toBe(2);
 			expect(component.find('.SteppedNavigation__buttonContainer .button').length).toBe(1);
 			expect(component.find('.SteppedNavigation__circles NavLink').length).toBe(2);
@@ -146,9 +145,7 @@ describe('app/shared-components/SteppedNavigation', () => {
 				hrefNext: '/test/3',
 				textPrev: 'Back',
 			});
-			expect(component.find('.SteppedNavigation__exit').length).toBe(1);
-			expect(component.find('.SteppedNavigation__exitText').length).toBe(1);
-			expect(component.find('.SteppedNavigation__exitIcon').length).toBe(1);
+			expect(component.find(ExitButton).length).toBe(1);
 			expect(component.find('.SteppedNavigation__buttonContainer').length).toBe(2);
 			expect(component.find('.SteppedNavigation__buttonContainer .button').length).toBe(2);
 			expect(component.find('.SteppedNavigation__circles NavLink').length).toBe(2);
@@ -162,9 +159,7 @@ describe('app/shared-components/SteppedNavigation', () => {
 				textNext: 'Done',
 				textDone: false,
 			});
-			expect(component.find('.SteppedNavigation__exit').length).toBe(0);
-			expect(component.find('.SteppedNavigation__exitText').length).toBe(0);
-			expect(component.find('.SteppedNavigation__exitIcon').length).toBe(0);
+			expect(component.find(ExitButton).length).toBe(0);
 			expect(component.find('.SteppedNavigation__buttonContainer').length).toBe(2);
 			expect(component.find('.SteppedNavigation__buttonContainer .button').length).toBe(2);
 			expect(component.find('.SteppedNavigation__circles NavLink').length).toBe(2);
@@ -185,9 +180,7 @@ describe('app/shared-components/SteppedNavigation', () => {
 
 			// Happy State
 			const component = shallow(<SteppedNavigation {...initialState} />);
-			expect(component.find('.SteppedNavigation__exit').length).toBe(1);
-			expect(component.find('.SteppedNavigation__exitText').length).toBe(1);
-			expect(component.find('.SteppedNavigation__exitIcon').length).toBe(1);
+			expect(component.find(ExitButton).length).toBe(1);
 			expect(component.find('.SteppedNavigation__buttonContainer').length).toBe(2);
 			expect(component.find('.SteppedNavigation__buttonContainer .button').length).toBe(1);
 			expect(component.find('.SteppedNavigation__circles NavLink').length).toBe(2);
@@ -201,9 +194,7 @@ describe('app/shared-components/SteppedNavigation', () => {
 				textPrev: 'Beginning',
 				textNext: 'Exit',
 			});
-			expect(component.find('.SteppedNavigation__exit').length).toBe(1);
-			expect(component.find('.SteppedNavigation__exitText').length).toBe(1);
-			expect(component.find('.SteppedNavigation__exitIcon').length).toBe(1);
+			expect(component.find(ExitButton).length).toBe(1);
 			expect(component.find('.SteppedNavigation__buttonContainer').length).toBe(2);
 			expect(component.find('.SteppedNavigation__buttonContainer .button').length).toBe(2);
 			expect(component.find('.SteppedNavigation__circles NavLink').length).toBe(3);
@@ -211,9 +202,7 @@ describe('app/shared-components/SteppedNavigation', () => {
 
 			// Edge Case: textDone is false
 			component.setProps({ textDone: false });
-			expect(component.find('.SteppedNavigation__exit').length).toBe(1);
-			expect(component.find('.SteppedNavigation__exitText').length).toBe(0);
-			expect(component.find('.SteppedNavigation__exitIcon').length).toBe(1);
+			expect(component.find(ExitButton).length).toBe(1);
 			expect(component.find('.SteppedNavigation__buttonContainer').length).toBe(2);
 			expect(component.find('.SteppedNavigation__buttonContainer .button').length).toBe(2);
 			expect(component.find('.SteppedNavigation__circles NavLink').length).toBe(3);
@@ -221,9 +210,7 @@ describe('app/shared-components/SteppedNavigation', () => {
 
 			// Edge Case: hrefDone and textDone are false
 			component.setProps({ hrefDone: false });
-			expect(component.find('.SteppedNavigation__exit').length).toBe(0);
-			expect(component.find('.SteppedNavigation__exitText').length).toBe(0);
-			expect(component.find('.SteppedNavigation__exitIcon').length).toBe(0);
+			expect(component.find(ExitButton).length).toBe(0);
 			expect(component.find('.SteppedNavigation__buttonContainer').length).toBe(2);
 			expect(component.find('.SteppedNavigation__buttonContainer .button').length).toBe(2);
 			expect(component.find('.SteppedNavigation__circles NavLink').length).toBe(3);
