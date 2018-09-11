@@ -2152,7 +2152,7 @@
 			"days": {
 				"content": "$1",
 				"example": "info@ghostery.com"
-			} 
+			}
 		}
 	},
 	"subscription_resubscribe": {
@@ -2165,4 +2165,3 @@
 		"message": "Submit Issue"
 	}
 }
-
