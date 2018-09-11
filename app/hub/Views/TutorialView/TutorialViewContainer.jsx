@@ -11,8 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TutorialView from './TutorialView';
 
@@ -29,7 +28,7 @@ import TutorialAntiSuiteView from '../TutorialViews/TutorialAntiSuiteView';
  * @extends Component
  * @memberof HubContainers
  */
-class TutorialViewContainer extends React.Component {
+class TutorialViewContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -147,4 +146,4 @@ TutorialViewContainer.defaultProps = {
 };
 
 
-export default withRouter(TutorialViewContainer);
+export default TutorialViewContainer;

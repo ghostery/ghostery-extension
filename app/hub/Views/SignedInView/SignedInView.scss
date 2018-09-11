@@ -1,0 +1,33 @@
+/**
+ * Signed In View Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+// Signed In View
+.SignedInView {
+	margin-top: 40px;
+	padding-bottom: 40px;
+}
+.SignedInView--addPaddingTop {
+	padding-top: 40px;
+}
+.SignedInView--blueText {
+	color: #00aef0;
+}
+.SignedInView__headerImage {
+	max-width: 180px;
+}
+.SignedInView__headerTitle h3 {
+	font-size: 24px;
+	line-height: 1.75;
+	color: #4a4a4a;
+	margin: 0 25px;
+}

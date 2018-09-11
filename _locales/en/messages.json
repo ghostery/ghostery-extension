@@ -1623,6 +1623,9 @@
 	"hub_side_navigation_log_in": {
 		"message": "Sign In"
 	},
+	"hub_side_navigation_log_out": {
+		"message": "Sign Out"
+	},
 	"hub_home_page_title": {
 		"message": "Ghostery Hub - Home"
 	},
@@ -1679,6 +1682,9 @@
 	},
 	"hub_home_feature_supporter_button": {
 		"message": "Become a Supporter"
+	},
+	"hub_home_feature_supporter_button_alt": {
+		"message": "Already Subscribed"
 	},
 	"hub_setup_page_title": {
 		"message": "Ghostery Hub - Setup"
@@ -1749,7 +1755,7 @@
 		"message": "No trackers blocked"
 	},
 	"hub_setup_blocking_text_everything": {
-		"message": "Block Everyting"
+		"message": "Block Everything"
 	},
 	"hub_setup_blocking_description_everything": {
 		"message": "All trackers blocked"
@@ -1952,7 +1958,7 @@
 		"message": "Mobile Privacy Browser"
 	},
 	"hub_products_main_promo_description": {
-		"message": "Browse ad-and tracker free on the go with our updated and enhanced mobile browser. Now equipped with a private search engine!"
+		"message": "Browse ad- and tracker-free on the go with our updated and enhanced mobile browser. Now equipped with a private search engine!"
 	},
 	"hub_products_second_promo_title": {
 		"message": "Ghostery New Tab"
@@ -1997,7 +2003,7 @@
 		"message": "Specialized offers are timely, relevant, and exclusive for our users"
 	},
 	"hub_rewards_closer": {
-		"message": "You can turn on Ghostery Rewards in the extension through custom setup."
+		"message": "You can turn on Ghostery Rewards in the extension or through custom setup."
 	},
 	"hub_supporter_page_title": {
 		"message": "Ghostery Hub - Support Ghostery"
@@ -2069,6 +2075,93 @@
 	},
 	"hub_supporter_feature_more_description": {
 		"message": "Stay tuned for other cool features and insights as we continue to make your Ghostery experience enjoyable."
+	},
+	"hub_signedin_exit": {
+		"message": "Back to Home"
+	},
+	"hub_signedin_header_title": {
+		"message": "You are already signed in"
+	},
+	"hub_signedin_as_email": {
+		"message": "Signed in as"
+	},
+	"hub_login_header_title": {
+		"message": "Sign in to your account."
+	},
+	"hub_login_exit": {
+		"message": "Exit Sign In"
+	},
+	"hub_login_label_email": {
+		"message": "Email:"
+	},
+	"hub_login_label_password": {
+		"message": "Password:"
+	},
+	"hub_login_label_email_invalid": {
+		"message": "Please enter a valid email."
+	},
+	"hub_login_label_password_invalid": {
+		"message": "Use between 8 and 50 characters."
+	},
+	"hub_login_link_create_account": {
+		"message": "Don't have an account? Sign up."
+	},
+	"hub_login_button_submit": {
+		"message": "Sign In"
+	},
+	"hub_login_toast_success": {
+		"message": "Sign in successful! Your account settings have been imported."
+	},
+	"hub_login_toast_error": {
+		"message": "Looks like we can't find this email and password combo. Give it another shot."
+	},
+	"hub_create_account_exit": {
+		"message": "Exit Create Account"
+	},
+	"hub_create_account_header_title": {
+		"message": "Why create an account? Creating an account allows you to sync settings across browsers and devices."
+	},
+	"hub_create_account_label_email": {
+		"message": "Email:"
+	},
+	"hub_create_account_label_email_confirm": {
+		"message": "Confirm Email:"
+	},
+	"hub_create_account_label_first_name": {
+		"message": "First Name (Optional):"
+	},
+	"hub_create_account_label_email_last_name": {
+		"message": "Last Name (Optional):"
+	},
+	"hub_create_account_label_password": {
+		"message": "Password:"
+	},
+	"hub_create_account_label_email_invalid": {
+		"message": "Please enter a valid email."
+	},
+	"hub_create_account_label_email_confirm_invalid": {
+		"message": "Your emails do not match."
+	},
+	"hub_create_account_label_password_invalid": {
+		"message": "Only these special characters are allowed: !@#$%^&*=+()<>{}[];:,./?"
+	},
+	"hub_create_account_label_password_invalid_length": {
+		"message": "Use between 8 and 50 characters."
+	},
+	"hub_create_account_checkbox_promotions": {
+		"message": "Send me Ghostery updates & promotions."
+	},
+	"hub_create_account_link_login": {
+		"message": "I already have an account. Sign in."
+	},
+	"hub_create_account_button_submit": {
+		"message": "Create Account"
+	},
+	"hub_create_account_toast_success": {
+		"message": "Account Successfully Created"
+	},
+	"hub_create_account_toast_error": {
+		"message": "Create Account Error"
 	},
 	"enable_when_paused": {
 		"message": "To use this function, Resume Ghostery."
@@ -2179,16 +2272,16 @@
 		"message": "Apply code"
 	},
 	"subscription_info": {
-		"message": "Subscription Info"
+		"message": "Subscription Details"
 	},
 	"subscription_themes": {
-		"message": "Themes"
+		"message": "Ghostery Themes"
 	},
 	"subscription_priority_support": {
 		"message": "Priority Support"
 	},
 	"subscription_info_title": {
-		"message": "Subscription Info"
+		"message": "Ghostery Supporter"
 	},
 	"subscription_themes_title": {
 		"message": "Themes"
@@ -2229,26 +2322,46 @@
 	"subscription_inactive_tooltip": {
 		"message": "Your Ghostery Supporter subscription is now inactive"
 	},
-
 	"subscription_manage": {
 		"message": "Manage My Subscription"
 	},
 	"subscription_themes_tooltip": {
 		"message": "Change the color scheme of Ghostery!"
-  	},
-  	"subscription_tracker_stats": {
-  		"message": "Historical Tracker Stats"
-  	},
+	},
+	"subscription_tracker_stats": {
+		"message": "Historical Tracker Stats"
+	},
 	"subscription_tracker_stats_title" : {
 		"message": "Historical Tracker Stats"
 	},
 	"subscription_charge_date" : {
-		"message": "Next Charge Date"
+		"message": "Next Payment Date"
 	},
 	"subscription_expired": {
 		"message": "Account expired"
 	},
 	"subscription_auto_renewal": {
 		"message": "Auto Renewal"
+	},
+	"subscription_plan": {
+		"message": "Plan"
+	},
+	"subscription_days_left": {
+		"message": "You have $DAYS$ days remaining of your subscription.",
+		"placeholders": {
+			"days": {
+				"content": "$1",
+				"example": "info@ghostery.com"
+			}
+		}
+	},
+	"subscription_resubscribe": {
+		"message": "Resubscribe"
+	},
+	"subscription_support": {
+		"message": "Find a broken page? Need assistance with blocking? Drop us a note!"
+	},
+	"subscription_submit_issue": {
+		"message": "Submit Issue"
 	}
 }

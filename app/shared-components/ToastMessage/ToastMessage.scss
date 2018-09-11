@@ -1,0 +1,28 @@
+/**
+ * Toast Message Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+// Toast Message
+.ToastMessage {
+	position: relative;
+	top: 30px;
+	height: 0;
+}
+.ToastMessage__close {
+	height: 13px;
+	width: 13px;
+	margin-left: 15px;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 13px 13px;
+	background-image: buildIconX(#ffffff);
+}

@@ -12,6 +12,7 @@
  */
 
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 
 import SetupViewContainer from './SetupViewContainer';
@@ -55,4 +56,4 @@ const mapDispatchToProps = dispatch => ({
 
 export const reducer = SetupViewReducer;
 
-export default connect(mapStateToProps, mapDispatchToProps)(SetupViewContainer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SetupViewContainer));

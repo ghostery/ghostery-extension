@@ -15,6 +15,7 @@ import React from 'react';
 import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
+import globals from '../../../../src/classes/Globals';
 import { ToggleCheckbox } from '../../../shared-components';
 
 /**
@@ -29,9 +30,10 @@ const HomeView = (props) => {
 		tutorial_complete,
 		enable_metrics,
 		changeMetrics,
-		account_text,
-		account_link,
+		email,
+		isSupporter,
 	} = props;
+	const accountHref = `https://account.${globals.GHOSTERY_DOMAIN}.com`;
 	const tutorialFeatureClassNames = ClassNames('HomeView__onboardingFeature columns flex-container align-middle flex-dir-column', {
 		'feature-tutorial-complete': tutorial_complete,
 		'feature-tutorial': !tutorial_complete,
@@ -87,9 +89,15 @@ const HomeView = (props) => {
 					<div>
 						{t('hub_home_subheader_optimize')}
 					</div>
-					<NavLink to={account_link}>
-						{account_text}
-					</NavLink>
+					{email ? (
+						<a href={accountHref} target="_blank" rel="noopener noreferrer">
+							{email}
+						</a>
+					) : (
+						<NavLink to="/create-account">
+							{t('hub_home_subheader_create_account')}
+						</NavLink>
+					)}
 				</div>
 				<div className="HomeView__onboarding row">
 					<div className={tutorialFeatureClassNames}>
@@ -126,7 +134,7 @@ const HomeView = (props) => {
 						<div className="HomeView__featureIcon columns shrink feature-supporter" />
 						<div className="columns flex-container align-center-middle">
 							<NavLink to="/supporter" className="HomeView__featureButton button primary">
-								{t('hub_home_feature_supporter_button')}
+								{isSupporter ? t('hub_home_feature_supporter_button_alt') : t('hub_home_feature_supporter_button')}
 							</NavLink>
 						</div>
 					</div>
@@ -143,8 +151,8 @@ HomeView.propTypes = {
 	tutorial_complete: PropTypes.bool.isRequired,
 	enable_metrics: PropTypes.bool.isRequired,
 	changeMetrics: PropTypes.func.isRequired,
-	account_text: PropTypes.string.isRequired,
-	account_link: PropTypes.string.isRequired,
+	email: PropTypes.string.isRequired,
+	isSupporter: PropTypes.bool.isRequired,
 };
 
 export default HomeView;

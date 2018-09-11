@@ -28,6 +28,9 @@
 	background-position: center center;
 	background-repeat: no-repeat;
 }
+.SideNavigation__top.disabled {
+	pointer-events: none;
+}
 .SideNavigation__menu {
 	padding-bottom: 48px;
 }
@@ -51,6 +54,7 @@
 	min-height: 28px;
 	padding-left: 20px;
 }
+.SideNavigation__item .clickable,
 .SideNavigation__item a {
 	color: #ffffff;
 	pointer-events: all;
@@ -60,6 +64,20 @@
 .SideNavigation__item a:hover {
 	color: #ffffff;
 }
+.SideNavigation__item .clickable.disabled,
+.SideNavigation__item a.disabled {
+	pointer-events: none;
+	color: #a9b9be;
+}
+.SideNavigation__item a.disabled:active,
+.SideNavigation__item a.disabled:visited,
+.SideNavigation__item a.disabled:hover {
+	color: #a9b9be;
+}
+.SideNavigation__item a.disabled.active {
+	color: #ffffff;
+}
+
 .SideNavigation__item a.active {
 	text-decoration: underline;
 	padding-right: 35px;
@@ -99,23 +117,47 @@
 	background-repeat: no-repeat;
 	background-position: center center;
 }
-.SideNavigation__menuIcon.home {
+a .SideNavigation__menuIcon.home,
+a.disabled.active .SideNavigation__menuIcon.home {
 	background-image: buildIconHome(#ffffff);
 }
-.SideNavigation__menuIcon.setup {
+a .SideNavigation__menuIcon.setup,
+a.disabled.active .SideNavigation__menuIcon.setup {
 	background-image: buildIconSetup(#ffffff);
 }
-.SideNavigation__menuIcon.tutorial {
+a .SideNavigation__menuIcon.tutorial,
+a.disabled.active .SideNavigation__menuIcon.tutorial {
 	background-image: buildIconTutorial(#ffffff);
 }
-.SideNavigation__menuIcon.supporter {
+a .SideNavigation__menuIcon.supporter,
+a.disabled.active .SideNavigation__menuIcon.supporter {
 	background-image: buildIconSupporter(#ffffff);
 }
-.SideNavigation__menuIcon.rewards {
+a .SideNavigation__menuIcon.rewards,
+a.disabled.active .SideNavigation__menuIcon.rewards {
 	background-image: buildIconRewards(#ffffff);
 }
-.SideNavigation__menuIcon.products {
+a .SideNavigation__menuIcon.products,
+a.disabled.active .SideNavigation__menuIcon.products {
 	background-image: buildIconProducts(#ffffff);
+}
+a.disabled .SideNavigation__menuIcon.home {
+	background-image: buildIconHome(#a9b9be);
+}
+a.disabled .SideNavigation__menuIcon.setup {
+	background-image: buildIconSetup(#a9b9be);
+}
+a.disabled .SideNavigation__menuIcon.tutorial {
+	background-image: buildIconTutorial(#a9b9be);
+}
+a.disabled .SideNavigation__menuIcon.supporter {
+	background-image: buildIconSupporter(#a9b9be);
+}
+a.disabled .SideNavigation__menuIcon.rewards {
+	background-image: buildIconRewards(#a9b9be);
+}
+a.disabled .SideNavigation__menuIcon.products {
+	background-image: buildIconProducts(#a9b9be);
 }
 .SideNavigation__menuText {
 	max-width: 145px;

@@ -16,7 +16,9 @@ import {
 	LOGOUT_SUCCESS,
 	REGISTER_SUCCESS,
 	GET_USER_SUCCESS,
-	GET_USER_SETTINGS_SUCCESS
+	GET_USER_SETTINGS_SUCCESS,
+	GET_USER_SUBSCRIPTION_DATA_FAIL,
+	GET_USER_SUBSCRIPTION_DATA_SUCCESS
 } from './AccountConstants';
 import { GET_PANEL_DATA } from '../panel/constants/constants';
 
@@ -65,6 +67,19 @@ export default (state = initialState, action) => {
 				userSettings: settings
 			});
 		}
+		case GET_USER_SUBSCRIPTION_DATA_FAIL: {
+			return Object.assign({}, state, {
+				subscriptionData: {}
+			});
+		}
+		case GET_USER_SUBSCRIPTION_DATA_SUCCESS: {
+			const { subscriptionData } = action.payload;
+			return Object.assign({}, state, {
+				loggedIn: true,
+				subscriptionData
+			});
+		}
+
 		default: return state;
 	}
 };

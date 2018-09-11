@@ -927,6 +927,34 @@ function onMessageHandler(request, sender, callback) {
 				callback({ errors: _getJSONAPIErrorsObject(err) });
 			});
 		return true;
+	} else if (name === 'account.getUserSubsciptionData') {
+		account.getUserSubscriptionData()
+			.then((customer) => {
+				const subscriptionData = customer.subscriptions;
+				callback({ subscriptionData });
+			})
+			.catch((err) => {
+				log('Error getting user subscription data:', err);
+				callback({ errors: _getJSONAPIErrorsObject(err) });
+			});
+		return true;
+	} else if (name === 'account.openSubscriptionPage') {
+		let tabUrl;
+		if (conf.account && conf.account.user) {
+			if (conf.account.user.subscriptionsSupporter) {
+				tabUrl = `https://account.${globals.GHOSTERY_DOMAIN}.com/subscription`;
+			} else {
+				tabUrl = `https://signon.${globals.GHOSTERY_DOMAIN}.com/subscribe`;
+			}
+		} else {
+			tabUrl = `https://signon.${globals.GHOSTERY_DOMAIN}.com/subscribe`;
+		}
+		utils.openNewTab({ url: tabUrl, become_active: true });
+		return true;
+	} else if (name === 'account.openSupportPage') {
+		const tabUrl = `https://account.${globals.GHOSTERY_DOMAIN}.com/support`;
+		utils.openNewTab({ url: tabUrl, become_active: true });
+		return true;
 	} else if (name === 'account.resetPassword') {
 		const { email } = message;
 		account.resetPassword(email)
@@ -961,6 +989,15 @@ function onMessageHandler(request, sender, callback) {
 				log('sendValidateAccountEmail error', err);
 			});
 		return true;
+	} else if (name === 'account.promotions') {
+		const { promotions } = message;
+		account.updateEmailPreferences(promotions).then((success) => {
+			callback(success);
+		}).catch((err) => {
+			callback({ errors: _getJSONAPIErrorsObject(err) });
+			log('UPDATE PROMOTIOS FAIL', err);
+		});
+		return false;
 	} else if (name === 'update_database') {
 		checkLibraryVersion().then((result) => {
 			callback(result);

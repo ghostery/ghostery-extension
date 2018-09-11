@@ -159,6 +159,12 @@ class Account {
 			})
 	)
 
+	getUserSubscriptionData = () => (
+		this._getUserID()
+			.then(userID => api.get('stripe/customers', userID, 'cards,subscriptions'))
+			.then(res => build(normalize(res), 'customers', res.data.id))
+	)
+
 	saveUserSettings = () => (
 		this._getUserID()
 			.then(userID => (
@@ -182,6 +188,18 @@ class Account {
 				.catch(err => reject(err));
 		})
 	)
+
+	updateEmailPreferences = (set) => {
+		this._getUserID().then(userID => (
+			api.update('email_preferences', {
+				type: 'email_preferences',
+				id: userID,
+				attributes: {
+					updates: set,
+				}
+			})
+		));
+	}
 
 	sendValidateAccountEmail = () => (
 		this._getUserID()
