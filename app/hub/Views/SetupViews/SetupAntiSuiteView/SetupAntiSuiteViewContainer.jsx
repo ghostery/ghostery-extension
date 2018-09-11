@@ -21,15 +21,14 @@ import SetupAntiSuiteView from './SetupAntiSuiteView';
  * @memberof HubComponents
  */
 class SetupAntiSuiteViewContainer extends Component {
-	/**
-	 * Lifecycle Event
-	 */
-	componentWillMount() {
+	constructor(props) {
+		super(props);
+
 		const title = t('hub_setup_page_title_antisuite');
 		window.document.title = title;
 
-		const { index, setup, sendMountActions } = this.props;
-		this.props.actions.setSetupNavigation({
+		const { index, setup, sendMountActions } = props;
+		props.actions.setSetupNavigation({
 			activeIndex: index,
 			hrefPrev: `/setup/${index - 1}`,
 			hrefNext: `/setup/${index + 1}`,
@@ -46,10 +45,10 @@ class SetupAntiSuiteViewContainer extends Component {
 				enable_smart_blocking,
 				enable_ghostery_rewards,
 			} = setup;
-			this.props.actions.setAntiTracking({ enable_anti_tracking });
-			this.props.actions.setAdBlock({ enable_ad_block });
-			this.props.actions.setSmartBlocking({ enable_smart_blocking });
-			this.props.actions.setGhosteryRewards({ enable_ghostery_rewards });
+			props.actions.setAntiTracking({ enable_anti_tracking });
+			props.actions.setAdBlock({ enable_ad_block });
+			props.actions.setSmartBlocking({ enable_smart_blocking });
+			props.actions.setGhosteryRewards({ enable_ghostery_rewards });
 		}
 	}
 

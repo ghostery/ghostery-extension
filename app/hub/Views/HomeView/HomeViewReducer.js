@@ -22,16 +22,12 @@ function HomeViewReducer(state = initialState, action) {
 				setup_complete,
 				tutorial_complete,
 				enable_metrics,
-				account_text,
-				account_link,
 			} = action.data;
 			return Object.assign({}, state, {
 				home: Object.assign({}, state.home, {
 					setup_complete,
 					tutorial_complete,
 					enable_metrics,
-					account_text,
-					account_link,
 				}),
 			});
 		}

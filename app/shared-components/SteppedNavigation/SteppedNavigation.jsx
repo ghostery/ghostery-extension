@@ -14,6 +14,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
+import ExitButton from '../ExitButton';
 
 /**
  * A Functional React component for a Stepped Navigation
@@ -44,12 +45,7 @@ const SteppedNavigation = (props) => {
 		<div className="row align-center">
 			<div className="columns small-12">
 				{hrefDone && (
-					<NavLink to={hrefDone} className="SteppedNavigation__exit flex-container align-middle">
-						{textDone && (
-							<span className="SteppedNavigation__exitText">{textDone}</span>
-						)}
-						<span className="SteppedNavigation__exitIcon" />
-					</NavLink>
+					<ExitButton hrefExit={hrefDone} textExit={textDone} />
 				)}
 				<div className="SteppedNavigation flex-container">
 					<div className="flex-child-grow flex-container flex-dir-row-reverse">

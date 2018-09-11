@@ -1,3 +1,16 @@
+/**
+ * Account Action creators
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
 import { sendMessageInPromise } from '../panel/utils/msg';
 import { log } from '../../src/utils/common';
 import {
@@ -12,6 +25,9 @@ import {
 	GET_USER_SUCCESS,
 	GET_USER_FAIL,
 	GET_USER_SETTINGS_SUCCESS,
+	GET_USER_SETTINGS_FAIL,
+	UPDATE_PROMOTIOS_FAIL,
+	UPDATE_PROMOTIOS_SUCCESS,
 	GET_USER_SUBSCRIPTION_DATA_FAIL,
 	GET_USER_SUBSCRIPTION_DATA_SUCCESS
 } from './AccountConstants';
@@ -19,13 +35,23 @@ import {
 export const getUserSettings = () => dispatch => (
 	sendMessageInPromise('account.getUserSettings')
 		.then((settings) => {
+			const { errors } = settings;
+			if (errors) {
+				dispatch({
+					type: GET_USER_SETTINGS_FAIL,
+					payload: { errors },
+				});
+				return false;
+			}
 			dispatch({
 				type: GET_USER_SETTINGS_SUCCESS,
 				payload: { settings },
 			});
+			return true;
 		})
 		.catch((error) => {
 			log('PanelActions getUserSettings error', error);
+			return false;
 		})
 );
 
@@ -38,13 +64,13 @@ export const getUser = () => dispatch => (
 					type: GET_USER_FAIL,
 					payload: { errors },
 				});
-			} else {
-				dispatch({
-					type: GET_USER_SUCCESS,
-					payload: { user },
-				});
+				return false;
 			}
-			return res;
+			dispatch({
+				type: GET_USER_SUCCESS,
+				payload: { user },
+			});
+			return true;
 		})
 );
 export const getUserSubscriptionData = () => dispatch => (
@@ -85,12 +111,14 @@ export const login = (email, password) => dispatch => (
 		})
 		.catch((err) => {
 			log('account.login() error:', err);
+			const errors = [{ title: err.toString(), detail: err.toString() }];
 			dispatch({
 				type: LOGIN_FAIL,
 				payload: {
-					errors: [{ title: err.toString(), detail: err.toString() }],
+					errors,
 				},
 			});
+			return false;
 		})
 );
 
@@ -112,12 +140,14 @@ export const register = (email, confirmEmail, firstName, lastName, password) => 
 		});
 		return true;
 	}).catch((err) => {
+		const errors = [{ title: err.toString(), detail: err.toString() }];
 		dispatch({
 			type: REGISTER_FAIL,
 			payload: {
-				errors: [{ title: err.toString(), detail: err.toString() }],
+				errors,
 			},
 		});
+		return false;
 	})
 );
 
@@ -127,10 +157,11 @@ export const logout = () => dispatch => (
 			dispatch({ type: LOGOUT_SUCCESS });
 		})
 		.catch((err) => {
+			const errors = [{ title: err.toString(), detail: err.toString() }];
 			dispatch({
 				type: LOGOUT_FAIL,
 				payload: {
-					errors: [{ title: err.toString(), detail: err.toString() }],
+					errors,
 				},
 			});
 		})
@@ -151,11 +182,35 @@ export const resetPassword = email => dispatch => (
 			return true;
 		})
 		.catch((err) => {
+			const errors = [{ title: err.toString(), detail: err.toString() }];
 			dispatch({
 				type: RESET_PASSWORD_FAIL,
 				payload: {
-					errors: [{ title: err.toString(), detail: err.toString() }],
+					errors,
 				},
 			});
 		})
+);
+
+export const updateAccountPromotions = promotions => dispatch => (
+	sendMessageInPromise('account.promotions', { promotions }).then((res) => {
+		const { errors } = res;
+		if (errors) {
+			dispatch({
+				type: UPDATE_PROMOTIOS_FAIL,
+				payload: { errors },
+			});
+			return false;
+		}
+		dispatch({ type: UPDATE_PROMOTIOS_SUCCESS });
+		return true;
+	}).catch((err) => {
+		const errors = [{ title: err.toString(), detail: err.toString() }];
+		dispatch({
+			type: UPDATE_PROMOTIOS_FAIL,
+			payload: {
+				errors,
+			},
+		});
+	})
 );

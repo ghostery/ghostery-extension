@@ -1623,6 +1623,9 @@
 	"hub_side_navigation_log_in": {
 		"message": "Sign In"
 	},
+	"hub_side_navigation_log_out": {
+		"message": "Sign Out"
+	},
 	"hub_home_page_title": {
 		"message": "Ghostery Hub - Home"
 	},
@@ -1679,6 +1682,9 @@
 	},
 	"hub_home_feature_supporter_button": {
 		"message": "Become a Supporter"
+	},
+	"hub_home_feature_supporter_button_alt": {
+		"message": "Already Subscribed"
 	},
 	"hub_setup_page_title": {
 		"message": "Ghostery Hub - Setup"
@@ -1962,6 +1968,93 @@
 	"hub_supporter_feature_more_description": {
 		"message": "Stay tuned for other cool features and insights as we continue to make your Ghostery experience enjoyable."
 	},
+	"hub_signedin_exit": {
+		"message": "Back to Home"
+	},
+	"hub_signedin_header_title": {
+		"message": "You are already signed in"
+	},
+	"hub_signedin_as_email": {
+		"message": "Signed in as"
+	},
+	"hub_login_header_title": {
+		"message": "Sign in to your account."
+	},
+	"hub_login_exit": {
+		"message": "Exit Sign In"
+	},
+	"hub_login_label_email": {
+		"message": "Email:"
+	},
+	"hub_login_label_password": {
+		"message": "Password:"
+	},
+	"hub_login_label_email_invalid": {
+		"message": "Please enter a valid email."
+	},
+	"hub_login_label_password_invalid": {
+		"message": "Use between 8 and 50 characters."
+	},
+	"hub_login_link_create_account": {
+		"message": "Don't have an account? Sign up."
+	},
+	"hub_login_button_submit": {
+		"message": "Sign In"
+	},
+	"hub_login_toast_success": {
+		"message": "Sign in successful! Your account settings have been imported."
+	},
+	"hub_login_toast_error": {
+		"message": "Looks like we can't find this email and password combo. Give it another shot."
+	},
+	"hub_create_account_exit": {
+		"message": "Exit Create Account"
+	},
+	"hub_create_account_header_title": {
+		"message": "Why create an account? Creating an account allows you to sync settings across browsers and devices."
+	},
+	"hub_create_account_label_email": {
+		"message": "Email:"
+	},
+	"hub_create_account_label_email_confirm": {
+		"message": "Confirm Email:"
+	},
+	"hub_create_account_label_first_name": {
+		"message": "First Name (Optional):"
+	},
+	"hub_create_account_label_email_last_name": {
+		"message": "Last Name (Optional):"
+	},
+	"hub_create_account_label_password": {
+		"message": "Password:"
+	},
+	"hub_create_account_label_email_invalid": {
+		"message": "Please enter a valid email."
+	},
+	"hub_create_account_label_email_confirm_invalid": {
+		"message": "Your emails do not match."
+	},
+	"hub_create_account_label_password_invalid": {
+		"message": "Only these special characters are allowed: !@#$%^&*=+()<>{}[];:,./?"
+	},
+	"hub_create_account_label_password_invalid_length": {
+		"message": "Use between 8 and 50 characters."
+	},
+	"hub_create_account_checkbox_promotions": {
+		"message": "Send me Ghostery updates & promotions."
+	},
+	"hub_create_account_link_login": {
+		"message": "I already have an account. Sign in."
+	},
+	"hub_create_account_button_submit": {
+		"message": "Create Account"
+	},
+	"hub_create_account_toast_success": {
+		"message": "Account Successfully Created"
+	},
+	"hub_create_account_toast_error": {
+		"message": "Create Account Error"
+	},
 	"enable_when_paused": {
 		"message": "To use this function, Resume Ghostery."
 	},
@@ -2121,16 +2214,15 @@
 	"subscription_inactive_tooltip": {
 		"message": "Your Ghostery Supporter subscription is now inactive"
 	},
-
 	"subscription_manage": {
 		"message": "Manage My Subscription"
 	},
 	"subscription_themes_tooltip": {
 		"message": "Change the color scheme of Ghostery!"
-  	},
-  	"subscription_tracker_stats": {
-  		"message": "Historical Tracker Stats"
-  	},
+	},
+	"subscription_tracker_stats": {
+		"message": "Historical Tracker Stats"
+	},
 	"subscription_tracker_stats_title" : {
 		"message": "Historical Tracker Stats"
 	},

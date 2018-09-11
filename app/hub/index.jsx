@@ -19,10 +19,8 @@ import { HashRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import createStore from './createStore';
 
-// Components
-import App from './App';
-
 // Containers
+import AppView from './Views/AppView';
 import HomeView from './Views/HomeView';
 import SetupView from './Views/SetupView';
 import TutorialView from './Views/TutorialView';
@@ -39,7 +37,7 @@ const store = createStore();
  * @memberof HubComponents
  */
 const Hub = () => (
-	<App>
+	<AppView>
 		<Route exact path="/" component={HomeView} />
 		<Route path="/setup" component={SetupView} />
 		<Route path="/tutorial" component={TutorialView} />
@@ -48,7 +46,7 @@ const Hub = () => (
 		<Route exact path="/products" component={ProductsView} />
 		<Route exact path="/create-account" component={CreateAccountView} />
 		<Route exact path="/log-in" component={LogInView} />
-	</App>
+	</AppView>
 );
 
 ReactDOM.render(
