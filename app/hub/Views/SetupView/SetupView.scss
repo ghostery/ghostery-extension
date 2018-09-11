@@ -29,21 +29,6 @@
 	border: 2px solid #930194;
 	z-index: 10;
 }
-.SetupModal__exit {
-	position: absolute;
-	top: -13px;
-	right: -13px;
-	height: 26px;
-	width: 26px;
-	border-radius: 50%;
-	border: 1px solid #930194;
-	background-color: #f7f7f7;
-	background-image: buildIconX(#4a4a4a);
-	background-repeat: no-repeat;
-	background-position: center center;
-	background-size: 12px 12px;
-	cursor: pointer;
-}
 .SetupModal__image {
 	height: 64px;
 	width: 64px;
@@ -62,9 +47,4 @@
 .SetupModal__buttonContainer {
 	background-color: #e7ecee;
 	padding: 25px 25px 0;
-}
-.SetupModal__buttonContainer {
-	font-size: 12px;
-	color: #4a4a4a;
-	cursor: pointer;
 }

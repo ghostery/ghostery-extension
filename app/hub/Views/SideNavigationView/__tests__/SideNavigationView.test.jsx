@@ -23,16 +23,46 @@ describe('app/hub/Views/SideNavigationView component', () => {
 			const initialState = {
 				menuItems: [
 					{ href: '/', icon: 'home', text: 'Home' },
-					{ href: '/setup', icon: 'setup', text: 'Customize Setup' },
-					{ href: '/tutorial', icon: 'tutorial', text: 'Take a Tutorial' },
-					{ href: '/supporter', icon: 'supporter', text: 'Become a Supporter' },
-					{ href: '/rewards', icon: 'rewards', text: 'Try Ghostery Rewards' },
-					{ href: '/products', icon: 'products', text: 'See More Ghostery Products' },
+					{ href: '/setup', icon: 'setup', text: 'Setup' },
+					{ href: '/tutorial', icon: 'tutorial', text: 'Tutorial' },
+					{ href: '/supporter', icon: 'supporter', text: 'Supporter' },
+					{ href: '/rewards', icon: 'rewards', text: 'Rewards' },
+					{ href: '/products', icon: 'products', text: 'Products' },
 				],
 				bottomItems: [
-					{ href: '/create-account', text: 'Create Account' },
-					{ href: '/log-in', text: 'Sign In' },
+					{ id: 'create-account', href: '/create-account', text: 'Create Account' },
+					{ id: 'login', href: '/log-in', text: 'Log In' },
+					{ id: 'email', href: 'https://account.ghostery.com/', text: 'test@example.com' },
+					{ id: 'logout', text: 'Log Out', clickHandler: () => {} },
 				],
+				disableNav: false,
+			};
+
+			const component = renderer.create(
+				<MemoryRouter>
+					<SideNavigationView {...initialState} />
+				</MemoryRouter>
+			).toJSON();
+			expect(component).toMatchSnapshot();
+		});
+
+		test('side navigation view is rendered correctly when disabled', () => {
+			const initialState = {
+				menuItems: [
+					{ href: '/', icon: 'home', text: 'Home' },
+					{ href: '/setup', icon: 'setup', text: 'Setup' },
+					{ href: '/tutorial', icon: 'tutorial', text: 'Tutorial' },
+					{ href: '/supporter', icon: 'supporter', text: 'Supporter' },
+					{ href: '/rewards', icon: 'rewards', text: 'Rewards' },
+					{ href: '/products', icon: 'products', text: 'Products' },
+				],
+				bottomItems: [
+					{ id: 'create-account', href: '/create-account', text: 'Create Account' },
+					{ id: 'login', href: '/log-in', text: 'Log In' },
+					{ id: 'email', href: 'https://account.ghostery.com/', text: 'test@example.com' },
+					{ id: 'logout', text: 'Log Out', clickHandler: () => {} },
+				],
+				disableNav: true,
 			};
 
 			const component = renderer.create(
@@ -49,6 +79,7 @@ describe('app/hub/Views/SideNavigationView component', () => {
 			const initialState = {
 				menuItems: [],
 				bottomItems: [],
+				disableNav: false,
 			};
 
 			const component = renderer.create(
@@ -65,16 +96,19 @@ describe('app/hub/Views/SideNavigationView component', () => {
 			const initialState = {
 				menuItems: [
 					{ href: '/', icon: 'home', text: 'Home' },
-					{ href: '/setup', icon: 'setup', text: 'Customize Setup' },
-					{ href: '/tutorial', icon: 'tutorial', text: 'Take a Tutorial' },
-					{ href: '/supporter', icon: 'supporter', text: 'Become a Supporter' },
-					{ href: '/rewards', icon: 'rewards', text: 'Try Ghostery Rewards' },
-					{ href: '/products', icon: 'products', text: 'See More Ghostery Products' },
+					{ href: '/setup', icon: 'setup', text: 'Setup' },
+					{ href: '/tutorial', icon: 'tutorial', text: 'Tutorial' },
+					{ href: '/supporter', icon: 'supporter', text: 'Supporter' },
+					{ href: '/rewards', icon: 'rewards', text: 'Rewards' },
+					{ href: '/products', icon: 'products', text: 'Products' },
 				],
 				bottomItems: [
-					{ href: '/create-account', text: 'Create Account' },
-					{ href: '/log-in', text: 'Sign In' },
+					{ id: 'create-account', href: '/create-account', text: 'Create Account' },
+					{ id: 'login', href: '/log-in', text: 'Log In' },
+					{ id: 'email', href: 'https://account.ghostery.com/', text: 'test@example.com' },
+					{ id: 'logout', text: 'Log Out', clickHandler: () => {} },
 				],
+				disableNav: false,
 			};
 
 			const component = shallow(<SideNavigationView {...initialState} />);
@@ -86,6 +120,14 @@ describe('app/hub/Views/SideNavigationView component', () => {
 			expect(component.find('.SideNavigation__menuItem').length).toBe(initialState.menuItems.length);
 			expect(component.find('.SideNavigation__menuIcon').length).toBe(initialState.menuItems.length);
 			expect(component.find('.SideNavigation__bottomItem').length).toBe(initialState.bottomItems.length);
+
+			expect(component.find('.SideNavigation__top.disabled').length).toBe(0);
+			expect(component.find('.SideNavigation__menuItem .disabled').length).toBe(0);
+			expect(component.find('.SideNavigation__bottomItem .disabled').length).toBe(0);
+			component.setProps({ disableNav: true });
+			expect(component.find('.SideNavigation__top.disabled').length).toBe(1);
+			expect(component.find('.SideNavigation__menuItem .disabled').length).toBe(initialState.menuItems.length);
+			expect(component.find('.SideNavigation__bottomItem .disabled').length).toBe(initialState.bottomItems.length);
 		});
 	});
 });

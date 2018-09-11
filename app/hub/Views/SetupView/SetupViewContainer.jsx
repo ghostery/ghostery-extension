@@ -11,8 +11,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
+import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import QueryString from 'query-string';
 import PropTypes from 'prop-types';
 import SetupView from './SetupView';
@@ -31,7 +31,7 @@ import SetupDoneView from '../SetupViews/SetupDoneView';
  * @extends Component
  * @memberof HubContainers
  */
-class SetupViewContainer extends React.Component {
+class SetupViewContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -276,4 +276,4 @@ SetupViewContainer.defaultProps = {
 	},
 };
 
-export default withRouter(SetupViewContainer);
+export default SetupViewContainer;

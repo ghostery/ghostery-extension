@@ -83,13 +83,13 @@ exports[`app/shared-components/SteppedNavigation More Snapshot tests with react-
   >
     <a
       aria-current="page"
-      className="SteppedNavigation__exit flex-container align-middle active"
+      className="ExitButton__exit flex-container align-middle active"
       href="/"
       onClick={[Function]}
       style={Object {}}
     >
       <span
-        className="SteppedNavigation__exitIcon"
+        className="ExitButton__exitIcon"
       />
     </a>
     <div
@@ -154,18 +154,18 @@ exports[`app/shared-components/SteppedNavigation Snapshot tests with react-test-
   >
     <a
       aria-current="page"
-      className="SteppedNavigation__exit flex-container align-middle active"
+      className="ExitButton__exit flex-container align-middle active"
       href="/"
       onClick={[Function]}
       style={Object {}}
     >
       <span
-        className="SteppedNavigation__exitText"
+        className="ExitButton__exitText"
       >
         Exit
       </span>
       <span
-        className="SteppedNavigation__exitIcon"
+        className="ExitButton__exitIcon"
       />
     </a>
     <div
@@ -311,18 +311,18 @@ exports[`app/shared-components/SteppedNavigation Snapshot tests with react-test-
   >
     <a
       aria-current={null}
-      className="SteppedNavigation__exit flex-container align-middle"
+      className="ExitButton__exit flex-container align-middle"
       href="/more-examples"
       onClick={[Function]}
       style={undefined}
     >
       <span
-        className="SteppedNavigation__exitText"
+        className="ExitButton__exitText"
       >
         Leave
       </span>
       <span
-        className="SteppedNavigation__exitIcon"
+        className="ExitButton__exitIcon"
       />
     </a>
     <div

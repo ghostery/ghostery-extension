@@ -989,6 +989,15 @@ function onMessageHandler(request, sender, callback) {
 				log('sendValidateAccountEmail error', err);
 			});
 		return true;
+	} else if (name === 'account.promotions') {
+		const { promotions } = message;
+		account.updateEmailPreferences(promotions).then((success) => {
+			callback(success);
+		}).catch((err) => {
+			callback({ errors: _getJSONAPIErrorsObject(err) });
+			log('UPDATE PROMOTIOS FAIL', err);
+		});
+		return false;
 	} else if (name === 'update_database') {
 		checkLibraryVersion().then((result) => {
 			callback(result);

@@ -1623,6 +1623,9 @@
 	"hub_side_navigation_log_in": {
 		"message": "Sign In"
 	},
+	"hub_side_navigation_log_out": {
+		"message": "Sign Out"
+	},
 	"hub_home_page_title": {
 		"message": "Ghostery Hub - Home"
 	},
@@ -1679,6 +1682,9 @@
 	},
 	"hub_home_feature_supporter_button": {
 		"message": "Become a Supporter"
+	},
+	"hub_home_feature_supporter_button_alt": {
+		"message": "Already Subscribed"
 	},
 	"hub_setup_page_title": {
 		"message": "Ghostery Hub - Setup"
@@ -1831,7 +1837,115 @@
 	"hub_setup_feature_products_button": {
 		"message": "Yes, please!"
 	},
-	"hub_products_page_title": {
+	"hub_tutorial_page_title": {
+		"message": "Ghostery Hub - Tutorial"
+	},
+	"hub_tutorial_page_title_video": {
+		"message": "Ghostery Hub - Tutorial Overview"
+	},
+	"hub_tutorial_page_title_trackerlist": {
+		"message": "Ghostery Hub - Tutorial Trackers"
+	},
+	"hub_tutorial_page_title_blocking": {
+		"message": "Ghostery Hub - Tutorial Blocking"
+	},
+	"hub_tutorial_page_title_layout": {
+		"message": "Ghostery Hub - Tutorial Layout"
+	},
+	"hub_tutorial_page_title_trust": {
+		"message": "Ghostery Hub - Tutorial Trust and Restrict"
+	},
+	"hub_tutorial_page_title_anti_suite": {
+		"message": "Ghostery Hub - Tutorial Additional Features"
+	},
+	"hub_tutorial_exit_flow": {
+		"message": "Exit Tutorial"
+	},
+	"hub_tutorial_nav_previous": {
+		"message": "Previous"
+	},
+	"hub_tutorial_nav_next": {
+		"message": "Next"
+	},
+	"hub_tutorial_nav_done": {
+		"message": "Done"
+	},
+	"hub_tutorial_simple_view": {
+		"message": "Simple View"
+	},
+	"hub_tutorial_detailed_view": {
+		"message": "Detailed View"
+	},
+	"hub_tutorial_detailed_expanded_view": {
+		"message": "Detailed Expanded View"
+	},
+	"hub_tutorial_video_title": {
+		"message": "What Ghostery Can Do For You"
+	},
+	"hub_tutorial_video_tagline": {
+		"message": "Block trackers and ads, protect your privacy, and speed up page loads."
+	},
+	"hub_tutorial_trackerlist_title": {
+		"message": "Tracker List"
+	},
+	"hub_tutorial_trackerlist_tagline": {
+		"message": "Ghostery helps you stay informed about what companies are tracking you by listing the trackers on each website you visit."
+	},
+	"hub_tutorial_blocking_title": {
+		"message": "Choose what and how you want to block"
+	},
+	"hub_tutorial_blocking_tagline": {
+		"message": "Take control of your privacy and browsing experience by blocking or unblocking trackers in the list."
+	},
+	"hub_tutorial_blocking_allow": {
+		"message": "Always allow tracker on current site."
+	},
+	"hub_tutorial_blocking_block": {
+		"message": "Always block tracker on current site."
+	},
+	"hub_tutorial_blocking_block_always": {
+		"message": "Always block tracker on every site."
+	},
+	"hub_tutorial_layout_title": {
+		"message": "Simple and Detailed Views"
+	},
+	"hub_tutorial_layout_tagline": {
+		"message": "Toggle between a simplified or detailed view depending on what you'd like Ghostery to display."
+	},
+	"hub_tutorial_trust_title": {
+		"message": "Trust & Restrict Sites"
+	},
+	"hub_tutorial_trust_tagline": {
+		"message": "Whitelist or blacklist websites with one click."
+	},
+	"hub_tutorial_trust_trust_site": {
+		"message": "Always allow trackers on the site."
+	},
+	"hub_tutorial_trust_restrict_site": {
+		"message": "Always block trackers on the site."
+	},
+	"hub_tutorial_antisuite_title": {
+		"message": "Get extra protection and automated control with our enhanced privacy features:"
+	},
+	"hub_tutorial_antisuite_antitracking_title": {
+		"message": "Enhanced Anti-Tracking"
+	},
+	"hub_tutorial_antisuite_antitracking_description": {
+		"message": "Remove data points that websites can use to identify you."
+	},
+	"hub_tutorial_antisuite_adblocking_title": {
+		"message": "Enhanced Ad Blocking"
+	},
+	"hub_tutorial_antisuite_adblocking_description": {
+		"message": "Block advertisements on the pages you visit."
+	},
+	"hub_tutorial_antisuite_smartblocking_title": {
+		"message": "Smart Blocking"
+	},
+	"hub_tutorial_antisuite_smartblocking_description": {
+		"message": "Automatically block and unblock trackers to optimize page performance."
+	},
+	"hub_products_page_title" : {
 		"message": "Ghostery Hub - Try Other Ghostery Products"
 	},
 	"hub_products_header_title" : {
@@ -1961,6 +2075,87 @@
 	},
 	"hub_supporter_feature_more_description": {
 		"message": "Stay tuned for other cool features and insights as we continue to make your Ghostery experience enjoyable."
+	},
+	"hub_signedin_exit": {
+		"message": "Back to Home"
+	},
+	"hub_signedin_header_title": {
+		"message": "You are already signed in"
+	},
+	"hub_signedin_as_email": {
+		"message": "Signed in as"
+	},
+	"hub_login_header_title": {
+		"message": "Sign in to your account."
+	},
+	"hub_login_label_email": {
+		"message": "Email:"
+	},
+	"hub_login_label_password": {
+		"message": "Password:"
+	},
+	"hub_login_label_email_invalid": {
+		"message": "Please enter a valid email."
+	},
+	"hub_login_label_password_invalid": {
+		"message": "Use between 8 and 50 characters."
+	},
+	"hub_login_link_create_account": {
+		"message": "Don't have an account? Sign up."
+	},
+	"hub_login_button_submit": {
+		"message": "Sign In"
+	},
+	"hub_login_toast_success": {
+		"message": "Sign in successful! Your account settings have been imported."
+	},
+	"hub_login_toast_error": {
+		"message": "Looks like we can't find this email and password combo. Give it another shot."
+	},
+	"hub_create_account_header_title": {
+		"message": "Why create an account? Creating an account allows you to sync settings across browsers and devices."
+	},
+	"hub_create_account_label_email": {
+		"message": "Email:"
+	},
+	"hub_create_account_label_email_confirm": {
+		"message": "Confirm Email:"
+	},
+	"hub_create_account_label_first_name": {
+		"message": "First Name (Optional):"
+	},
+	"hub_create_account_label_email_last_name": {
+		"message": "Last Name (Optional):"
+	},
+	"hub_create_account_label_password": {
+		"message": "Password:"
+	},
+	"hub_create_account_label_email_invalid": {
+		"message": "Please enter a valid email."
+	},
+	"hub_create_account_label_email_confirm_invalid": {
+		"message": "Your emails do not match."
+	},
+	"hub_create_account_label_password_invalid": {
+		"message": "Only these special characters are allowed: !@#$%^&*=+()<>{}[];:,./?"
+	},
+	"hub_create_account_label_password_invalid_length": {
+		"message": "Use between 8 and 50 characters."
+	},
+	"hub_create_account_checkbox_promotions": {
+		"message": "Send me Ghostery updates & promotions."
+	},
+	"hub_create_account_link_login": {
+		"message": "I already have an account. Sign in."
+	},
+	"hub_create_account_button_submit": {
+		"message": "Create Account"
+	},
+	"hub_create_account_toast_success": {
+		"message": "Account Successfully Created"
+	},
+	"hub_create_account_toast_error": {
+		"message": "Create Account Error"
 	},
 	"enable_when_paused": {
 		"message": "To use this function, Resume Ghostery."
@@ -2121,16 +2316,15 @@
 	"subscription_inactive_tooltip": {
 		"message": "Your Ghostery Supporter subscription is now inactive"
 	},
-
 	"subscription_manage": {
 		"message": "Manage My Subscription"
 	},
 	"subscription_themes_tooltip": {
 		"message": "Change the color scheme of Ghostery!"
-  	},
-  	"subscription_tracker_stats": {
-  		"message": "Historical Tracker Stats"
-  	},
+	},
+	"subscription_tracker_stats": {
+		"message": "Historical Tracker Stats"
+	},
 	"subscription_tracker_stats_title" : {
 		"message": "Historical Tracker Stats"
 	},

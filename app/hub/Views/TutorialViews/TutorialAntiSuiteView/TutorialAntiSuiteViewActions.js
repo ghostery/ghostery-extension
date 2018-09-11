@@ -1,5 +1,5 @@
 /**
- * Tutorial Done View Action creators
+ * Tutorial Anti Suite View Action creators
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/

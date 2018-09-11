@@ -15,6 +15,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { debounce } from 'underscore';
 import GlobalBlocking from '../../../../panel/components/Settings/GlobalBlocking';
+import { ToastMessage } from '../../../../shared-components';
 
 /**
  * @class Implement the Blocking Dropdown Component
@@ -68,17 +69,13 @@ class SetupBlockingDropdown extends Component {
 	 * @return {JSX} JSX for rendering the Blocking Dropdown Component
 	 */
 	render() {
-		const { showToast } = this.state;
+		const { showToast, toastText } = this.state;
 		const { actions, handleDoneClick, settingsData } = this.props;
 
 		return (
 			<div className="SetupBlockingDropdown">
 				{showToast && (
-					<div className="callout-container">
-						<div className="callout toast success">
-							<div className="callout-text">{this.state.toastText}</div>
-						</div>
-					</div>
+					<ToastMessage toastText={toastText} toastClass="success" />
 				)}
 				<GlobalBlocking settingsData={settingsData} actions={actions} showToast={this._showToast} hideToast={this._hideToastDebounce} language={settingsData.language} />
 				<div className="SetupBlockingDropdown__buttonContainer flex-container flex-dir-row-reverse">

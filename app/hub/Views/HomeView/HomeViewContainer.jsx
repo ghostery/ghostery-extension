@@ -1,5 +1,5 @@
 /**
- * Tutorial View Container
+ * Home View Container
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -11,17 +11,17 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import QueryString from 'query-string';
 import HomeView from './HomeView';
 
 /**
- * @class Implement the Home View Container for the Ghostery Hub
+ * @class Implement the Home View for the Ghostery Hub
  * @extends Component
  * @memberof HubContainers
  */
-class HomeViewContainer extends React.Component {
+class HomeViewContainer extends Component {
 	constructor(props) {
 		super(props);
 
@@ -33,7 +33,8 @@ class HomeViewContainer extends React.Component {
 		const title = t('hub_home_page_title');
 		window.document.title = title;
 
-		this.props.actions.getHomeProps();
+		props.actions.getHomeProps();
+		props.actions.getUser();
 	}
 
 	/**
@@ -49,25 +50,21 @@ class HomeViewContainer extends React.Component {
 	 * @return {JSX} JSX for rendering the Home View of the Hub app
 	 */
 	render() {
-		// ToDo: Get these from action, reducer and props. Will be on this.props.home
-		// These are passed as props so we can the user's email and link to their account when they are signed in
-		const account_text = t('hub_home_subheader_create_account');
-		const account_link = '/create-account';
-
 		const { justInstalled } = this.state;
+		const { home, user } = this.props;
 		const {
 			setup_complete,
 			tutorial_complete,
 			enable_metrics,
-		} = this.props.home;
+		} = home;
 		const childProps = {
 			justInstalled,
 			setup_complete,
 			tutorial_complete,
 			enable_metrics,
 			changeMetrics: this._handleToggleMetrics,
-			account_text,
-			account_link,
+			email: user ? user.email : '',
+			isSupporter: user && user.subscriptionsSupporter || false,
 		};
 
 		return <HomeView {...childProps} />;
@@ -81,19 +78,28 @@ HomeViewContainer.propTypes = {
 		setup_complete: PropTypes.bool,
 		tutorial_complete: PropTypes.bool,
 		enable_metrics: PropTypes.bool,
-		account_text: PropTypes.string,
-		account_link: PropTypes.string,
 	}),
+	user: PropTypes.shape({
+		email: PropTypes.string,
+		subscriptionsSupporter: PropTypes.bool,
+	}),
+	actions: PropTypes.shape({
+		getHomeProps: PropTypes.func.isRequired,
+		setMetrics: PropTypes.func.isRequired,
+		getUser: PropTypes.func.isRequired,
+	}).isRequired,
 };
 
-// Default props used throughout the Setup flow
+// Default props used on the Home View
 HomeViewContainer.defaultProps = {
 	home: {
 		setup_complete: false,
 		tutorial_complete: false,
 		enable_metrics: false,
-		account_text: '',
-		account_link: '',
+	},
+	user: {
+		email: '',
+		subscriptionsSupporter: false,
 	},
 };
 

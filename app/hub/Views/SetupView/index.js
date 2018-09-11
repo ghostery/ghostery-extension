@@ -13,6 +13,7 @@
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { withRouter } from 'react-router-dom';
 
 import SetupViewContainer from './SetupViewContainer';
 import SetupViewReducer from './SetupViewReducer';
@@ -42,7 +43,7 @@ const mapStateToProps = state => Object.assign({}, state.setup);
  * @memberof SetupContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign(SetupViewActions, {
+	actions: bindActionCreators(Object.assign({}, SetupViewActions, {
 		setBlockingPolicy,
 		setAntiTracking,
 		setAdBlock,
@@ -55,4 +56,4 @@ const mapDispatchToProps = dispatch => ({
 
 export const reducer = SetupViewReducer;
 
-export default connect(mapStateToProps, mapDispatchToProps)(SetupViewContainer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SetupViewContainer));

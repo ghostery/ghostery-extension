@@ -22,13 +22,12 @@ import { Modal } from '../../../../shared-components';
  * @memberof HubComponents
  */
 class SetupBlockingDropdownContainer extends Component {
-	/**
-	 * Lifecycle Event
-	 */
-	componentWillMount() {
-		const { sendMountActions } = this.props;
+	constructor(props) {
+		super(props);
+
+		const { sendMountActions } = props;
 		if (sendMountActions) {
-			this.props.actions.getSettingsData();
+			props.actions.getSettingsData();
 		}
 	}
 

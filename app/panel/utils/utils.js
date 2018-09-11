@@ -129,7 +129,28 @@ export function validateEmail(email) {
  * @return {boolean}				true if valid, false otherwise
  */
 export function validateConfirmEmail(email, confirmEmail) {
-	return validateEmail(confirmEmail) && email === confirmEmail || false;
+	if (!email || !confirmEmail) {
+		return false;
+	}
+	const lEmail = email.toLowerCase();
+	const lConfirmEmail = confirmEmail.toLowerCase();
+	return validateEmail(confirmEmail) && (lEmail === lConfirmEmail) || false;
+}
+
+/**
+ * Check for confirm email equality to email
+ * @memberOf PanelUtils
+ * @param  {string} email 			email
+ * @param  {string} confirmEmail 	confirm email to validate
+ * @return {boolean}				true if equal, false otherwise
+ */
+export function validateEmailsMatch(email, confirmEmail) {
+	if (!email || !confirmEmail) {
+		return false;
+	}
+	const lEmail = email.toLowerCase();
+	const lConfirmEmail = confirmEmail.toLowerCase();
+	return lEmail === lConfirmEmail;
 }
 
 /**
@@ -190,7 +211,6 @@ export function doXHR(method, url, query) {
  * @param  {string} themeName unique name of the theme
  * @param {string} theme css of the theme
  */
-
 export function setTheme(doc, themeName, theme) {
 	const styleTitlePrefix = 'Ghostery Theme';
 	// First remove all other style elements which may be there
