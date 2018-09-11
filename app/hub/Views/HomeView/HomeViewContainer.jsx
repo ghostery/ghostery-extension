@@ -64,7 +64,7 @@ class HomeViewContainer extends Component {
 			enable_metrics,
 			changeMetrics: this._handleToggleMetrics,
 			email: user ? user.email : '',
-			isSupporter: !!(user && user.subscriptionsSupporter),
+			isSupporter: user && user.subscriptionsSupporter || false,
 		};
 
 		return <HomeView {...childProps} />;

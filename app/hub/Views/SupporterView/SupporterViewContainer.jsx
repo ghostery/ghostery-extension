@@ -36,7 +36,7 @@ class SupporterViewContainer extends Component {
 	 * @return {JSX} JSX for rendering the Supporter View of the Hub app
 	 */
 	render() {
-		const isSupporter = !!(this.props.user && this.props.user.subscriptionsSupporter);
+		const isSupporter = this.props.user && this.props.user.subscriptionsSupporter || false;
 
 		return <SupporterView isSupporter={isSupporter} />;
 	}
