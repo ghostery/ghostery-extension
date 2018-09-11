@@ -34,9 +34,7 @@ const mapStateToProps = state => Object.assign({}, state.home, state.account);
  * @memberof SetupContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign({}, HomeViewActions, {
-		getUser,
-	}), dispatch),
+	actions: bindActionCreators(Object.assign({}, HomeViewActions, { getUser }), dispatch),
 });
 
 export const reducer = HomeViewReducer;

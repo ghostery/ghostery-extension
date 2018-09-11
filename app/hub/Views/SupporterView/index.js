@@ -32,9 +32,7 @@ const mapStateToProps = state => Object.assign({}, state.account);
  * @memberof TutorialContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign({}, {
-		getUser,
-	}), dispatch),
+	actions: bindActionCreators(Object.assign({}, { getUser }), dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SupporterViewContainer);

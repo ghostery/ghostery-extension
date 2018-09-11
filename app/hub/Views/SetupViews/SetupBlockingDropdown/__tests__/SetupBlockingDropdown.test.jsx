@@ -15,6 +15,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 import SetupBlockingDropdown from '../SetupBlockingDropdown';
+import { ToastMessage } from '../../../../../shared-components';
 
 // Mock Necessary Imports
 jest.mock('../../../../../panel/components/Settings/GlobalBlocking', () => props => <div>Mock Global Blocking</div>);
@@ -63,18 +64,14 @@ describe('app/hub/Views/SetupViews/SetupBlockingDropdown component', () => {
 
 			const component = shallow(<SetupBlockingDropdown {...initialState} />);
 			expect(component.find('.SetupBlockingDropdown').length).toBe(1);
-			expect(component.find('.callout-container').length).toBe(0);
-			expect(component.find('.callout.toast.success').length).toBe(0);
-			expect(component.find('.callout-text').length).toBe(0);
 			expect(component.find('.SetupBlockingDropdown__buttonContainer').length).toBe(1);
 
+			expect(component.find('ToastMessage').length).toBe(0);
 			component.setState({
 				showToast: true,
 				toastText: 'example text',
 			});
-			expect(component.find('.callout-container').length).toBe(1);
-			expect(component.find('.callout.toast.success').length).toBe(1);
-			expect(component.find('.callout-text').length).toBe(1);
+			expect(component.find('ToastMessage').length).toBe(1);
 
 			expect(initialState.handleDoneClick.mock.calls.length).toBe(0);
 			component.find('.SetupBlockingDropdown__buttonContainer .button').simulate('click');
