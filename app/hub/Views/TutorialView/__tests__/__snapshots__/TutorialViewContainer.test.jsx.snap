@@ -5,7 +5,7 @@ exports[`app/hub/Views/TutorialView container Snapshot tests with react-test-ren
   className="full-height flex-container flex-dir-column"
 >
   <div
-    className="flex-child-grow"
+    className="TutorialView--paddingTopSmall flex-child-grow flex-container align-middle"
   >
     <div>
       Mock Tutorial Anti Suite View
@@ -22,7 +22,7 @@ exports[`app/hub/Views/TutorialView container Snapshot tests with react-test-ren
   className="full-height flex-container flex-dir-column"
 >
   <div
-    className="flex-child-grow"
+    className="TutorialView--paddingTopSmall flex-child-grow flex-container align-middle"
   >
     <div>
       Mock Tutorial Blocking View
@@ -39,7 +39,7 @@ exports[`app/hub/Views/TutorialView container Snapshot tests with react-test-ren
   className="full-height flex-container flex-dir-column"
 >
   <div
-    className="flex-child-grow"
+    className="TutorialView--paddingTopSmall flex-child-grow flex-container align-middle"
   >
     <div>
       Mock Tutorial Layout View
@@ -56,7 +56,7 @@ exports[`app/hub/Views/TutorialView container Snapshot tests with react-test-ren
   className="full-height flex-container flex-dir-column"
 >
   <div
-    className="flex-child-grow"
+    className="TutorialView--paddingTopSmall flex-child-grow flex-container align-middle"
   >
     <div>
       Mock Tutorial Tracker List View
@@ -73,7 +73,7 @@ exports[`app/hub/Views/TutorialView container Snapshot tests with react-test-ren
   className="full-height flex-container flex-dir-column"
 >
   <div
-    className="flex-child-grow"
+    className="TutorialView--paddingTopSmall flex-child-grow flex-container align-middle"
   >
     <div>
       Mock Tutorial Trust View
@@ -90,7 +90,7 @@ exports[`app/hub/Views/TutorialView container Snapshot tests with react-test-ren
   className="full-height flex-container flex-dir-column"
 >
   <div
-    className="flex-child-grow"
+    className="TutorialView--paddingTopSmall flex-child-grow flex-container align-middle"
   >
     <div>
       Mock Tutorial Video View
