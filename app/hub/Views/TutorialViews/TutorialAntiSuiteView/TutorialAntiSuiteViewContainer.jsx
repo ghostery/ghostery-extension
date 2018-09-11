@@ -13,7 +13,6 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import TutorialAntiSuiteView from './TutorialAntiSuiteView';
 
 /**
@@ -25,16 +24,18 @@ class TutorialAntiSuiteViewContainer extends Component {
 	constructor(props) {
 		super(props);
 
-		// TODO call setTutorialNavigation action
-		const { index, sendMountActions } = this.props;
-		this.props.actions.setTutorialNavigation({
+		const title = t('hub_tutorial_page_title_anti_suite');
+		window.document.title = title;
+
+		const { index, sendMountActions } = props;
+		props.actions.setTutorialNavigation({
 			activeIndex: index,
 			hrefPrev: `/tutorial/${index - 1}`,
 			hrefNext: '/',
-			hrefDone: '/',
-			textPrev: t('hub_setup_nav_previous'),
-			textNext: t('hub_setup_nav_done'),
-			textDone: t('hub_setup_exit_flow'),
+			hrefDone: false,
+			textPrev: t('hub_tutorial_nav_previous'),
+			textNext: t('hub_tutorial_nav_done'),
+			textDone: false,
 		});
 
 		if (sendMountActions) {
@@ -42,6 +43,10 @@ class TutorialAntiSuiteViewContainer extends Component {
 		}
 	}
 
+	/**
+	 * React's required render function. Returns JSX
+	 * @return {JSX} JSX for rendering the Tutorial Anti Suite View of the Hub app
+	 */
 	render() {
 		return <TutorialAntiSuiteView />;
 	}
@@ -52,7 +57,9 @@ TutorialAntiSuiteViewContainer.propTypes = {
 	index: PropTypes.number.isRequired,
 	actions: PropTypes.shape({
 		setTutorialNavigation: PropTypes.func.isRequired,
+		setTutorialComplete: PropTypes.func.isRequired,
 	}).isRequired,
+	sendMountActions: PropTypes.bool.isRequired,
 };
 
 export default TutorialAntiSuiteViewContainer;

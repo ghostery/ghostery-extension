@@ -15,7 +15,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { SteppedNavigation } from '../../../../shared-components';
 
-
 /**
  * A Functional React component for the Setup version of Stepped Navigation
  * @return {JSX} JSX for rendering the Setup version of Stepped Navigation

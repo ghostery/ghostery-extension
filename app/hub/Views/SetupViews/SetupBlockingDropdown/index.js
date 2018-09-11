@@ -33,7 +33,7 @@ const mapStateToProps = state => Object.assign({}, state.settings);
  * @memberof SetupContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(SettingsActions, dispatch),
+	actions: bindActionCreators(Object.assign({}, SettingsActions), dispatch),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SetupBlockingDropdownContainer));

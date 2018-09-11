@@ -17,7 +17,7 @@ import QueryString from 'query-string';
 import HomeView from './HomeView';
 
 /**
- * @class Implement the Home View Container for the Ghostery Hub
+ * @class Implement the Home View for the Ghostery Hub
  * @extends Component
  * @memberof HubContainers
  */

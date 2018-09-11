@@ -24,28 +24,21 @@ import TutorialNavigation from '../TutorialViews/TutorialNavigation';
  * @memberof HubComponents
  */
 const TutorialView = (props) => {
-	const {
-		steps,
-		sendMountActions,
-	} = props;
+	const { sendMountActions, steps } = props;
 
 	return (
 		<div className="full-height flex-container flex-dir-column">
-			<div className="flex-child-grow">
+			<div className="TutorialView--paddingTopSmall flex-child-grow flex-container align-middle">
 				{steps.map(step => (
 					<Route
 						key={`route-${step.index}`}
 						path={step.path}
-						render={() => (
-							<div>
-								<step.bodyComponent index={step.index} sendMountActions={sendMountActions} />
-							</div>
-						)}
+						render={() => <step.bodyComponent index={step.index} sendMountActions={sendMountActions} />}
 					/>
 				))}
 			</div>
 
-			<TutorialNavigation totalSteps={props.steps.length} />
+			<TutorialNavigation totalSteps={steps.length} />
 		</div>
 	);
 };

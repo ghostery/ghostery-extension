@@ -15,7 +15,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import { NavLink } from 'react-router-dom';
-import { ExitButton } from '../../../shared-components';
 
 /**
  * A Functional React component for rendering the Login View
@@ -41,7 +40,6 @@ const LogInView = (props) => {
 
 	return (
 		<div className="LogInView">
-			<ExitButton hrefExit="/" textExit={t('hub_login_exit')} />
 			<div className="LogInView--addPaddingTop row align-center">
 				<div className="columns small-12 large-10">
 					<div className="flex-container align-center-middle">

@@ -12,8 +12,8 @@
  */
 
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
+import { withRouter } from 'react-router-dom';
 
 import SideNavigationViewContainer from './SideNavigationViewContainer';
 import { getUser, logout } from '../../../Account/AccountActions';
