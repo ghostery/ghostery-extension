@@ -45,7 +45,7 @@ class SideNavigationViewContainer extends Component {
 	 */
 	render() {
 		const { user, location } = this.props;
-		const disableRegEx = /^(\/setup)|(\/tutorial)|(\/create-account)|(\/log-in)/;
+		const disableRegEx = /^(\/setup)|(\/tutorial)/;
 
 		const menuItems = [
 			{ href: '/', icon: 'home', text: t('hub_side_navigation_home') },

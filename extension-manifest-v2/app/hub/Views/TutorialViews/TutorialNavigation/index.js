@@ -12,8 +12,6 @@
  */
 
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-
 import TutorialNavigationContainer from './TutorialNavigationContainer';
 
 /**
@@ -24,15 +22,4 @@ import TutorialNavigationContainer from './TutorialNavigationContainer';
  */
 const mapStateToProps = state => Object.assign({}, state.tutorial);
 
-/**
- * Bind the component's action creators using Redux's bindActionCreators.
- * @param  {function} dispatch redux store method which dispatches actions
- * @return {function}          to be used as an argument in redux connect call
- * @memberof SetupContainers
- */
-const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign({}, {
-	}), dispatch),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(TutorialNavigationContainer);
+export default connect(mapStateToProps)(TutorialNavigationContainer);

@@ -16,19 +16,17 @@ import PropTypes from 'prop-types';
 import { SteppedNavigation } from '../../../../shared-components';
 
 /**
- * @class Implement the Tutorial version of the Stepped Navigation Component
- * @extends Component
+ * A Functional React component for the Tutorial version of Stepped Navigation
+ * @return {JSX} JSX for rendering the Tutorial version of Stepped Navigation
  * @memberof HubComponents
  */
-
 const TutorialNavigationContainer = (props) => {
 	const { totalSteps, tutorial } = props;
-	const { navigation } = tutorial;
-	const navigationProps = {
+	const childProps = {
 		totalSteps,
-		...navigation,
+		...tutorial.navigation,
 	};
-	return <SteppedNavigation {...navigationProps} />;
+	return <SteppedNavigation {...childProps} />;
 };
 
 // PropTypes ensure we pass required props of the correct type

@@ -12,8 +12,8 @@
  */
 
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
+import { withRouter } from 'react-router-dom';
 
 import TutorialViewContainer from './TutorialViewContainer';
 import TutorialViewReducer from './TutorialViewReducer';
@@ -34,7 +34,7 @@ const mapStateToProps = state => Object.assign({}, state.tutorial);
  * @memberof SetupContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign(TutorialViewActions), dispatch),
+	actions: bindActionCreators(Object.assign({}, TutorialViewActions), dispatch),
 });
 
 export const reducer = TutorialViewReducer;
