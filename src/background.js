@@ -57,7 +57,7 @@ const { sendMessage } = utils;
 const { onMessage } = chrome.runtime;
 // simple consts
 const {
-	CDN_SUB_DOMAIN, BROWSER_INFO, IS_CLIQZ, DEBUG
+	CDN_SUB_DOMAIN, BROWSER_INFO, IS_CLIQZ, IS_MOBILE_APP, DEBUG
 } = globals;
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const VERSION_CHECK_URL = `https://${CDN_SUB_DOMAIN}.ghostery.com/update/version`;
@@ -1536,7 +1536,10 @@ function initializeGhosteryModules() {
 					conf.enable_ad_block = !adblocker.isDisabled;
 					conf.enable_anti_tracking = !antitracking.isDisabled;
 					conf.enable_human_web = !humanweb.isDisabled;
-					conf.enable_offers = !offers.isDisabled;
+					if (!IS_MOBILE_APP) {
+						// this little guy makes the whole browser freeze on first start
+						conf.enable_offers = !offers.isDisabled;
+					}
 				}
 			}
 		});
@@ -1640,6 +1643,11 @@ function init() {
 			globals.INIT_COMPLETE = true;
 			if (IS_CLIQZ) {
 				importCliqzSettings(cliqz, conf);
+			} else if (IS_MOBILE_APP) {
+				chrome.runtime.sendMessage({
+					target: 'ANDROID_BROWSER',
+					action: 'ready'
+				});
 			}
 		}));
 	}).catch((err) => {
