@@ -53,6 +53,7 @@
 .SideNavigation__bottomItem {
 	min-height: 28px;
 	padding-left: 20px;
+	padding-right: 35px;
 }
 .SideNavigation__item .clickable,
 .SideNavigation__item a {
@@ -108,7 +109,7 @@
 	top: -26px;
 }
 .SideNavigation__bottomItem a.active::after {
-	bottom: -26px;
+	top: 14px;
 }
 .SideNavigation__menuIcon {
 	min-width: 55px;
