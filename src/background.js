@@ -740,57 +740,7 @@ function onMessageHandler(request, sender, callback) {
 	}
 
 	// HANDLE UNIVERSAL EVENTS HERE (NO ORIGIN LISTED ABOVE)
-	if (name === 'disableShowAlert') {
-		conf.show_alert = false;
-	} else if (name === 'updateDataCollection') {
-		if (!IS_CLIQZ && !IS_EDGE) {
-			conf.enable_human_web = message && true;
-			conf.enable_offers = message && true;
-		}
-		conf.enable_metrics = message && true;
-	} else if (name === 'updateDisplayMode') {
-		conf.is_expert = message;
-	} else if (name === 'updateAntiTrack') {
-		conf.enable_anti_tracking = message;
-	} else if (name === 'updateSmartBlock') {
-		conf.enable_smart_block = message;
-	} else if (name === 'updateAdBlock') {
-		conf.enable_ad_block = message;
-	} else if (name === 'updateBlocking') {
-		switch (message) {
-			case 'UPDATE_BLOCK_ALL':
-				conf.selected_app_ids = {};
-				for (const app_id in bugDb.db.apps) {
-					if (!conf.selected_app_ids.hasOwnProperty(app_id)) {
-						conf.selected_app_ids[app_id] = 1;
-					}
-				}
-				break;
-			case 'UPDATE_BLOCK_NONE':
-				// TODO: can't wipe these settings for upgrade users
-				conf.selected_app_ids = {};
-				break;
-			case 'UPDATE_BLOCK_ADS':
-				conf.selected_app_ids = {};
-				for (const app_id in bugDb.db.apps) {
-					if (bugDb.db.apps[app_id].cat === 'advertising' &&
-						!conf.selected_app_ids.hasOwnProperty(app_id)) {
-						conf.selected_app_ids[app_id] = 1;
-					}
-				}
-				break;
-			default:
-				break;
-		}
-	} else if (name === 'skipSetup') {
-		// link to blog post
-		chrome.tabs.update(tab_id, { url: 'https://www.ghostery.com/blog/product-releases/browse-smarter-with-ghostery-8/' });
-		return false;
-	} else if (name === 'closeSetup') {
-		// link to blog post
-		chrome.tabs.update(tab_id, { url: 'https://www.ghostery.com/blog/product-releases/browse-smarter-with-ghostery-8/' });
-		return false;
-	} else if (name === 'getPanelData') {
+	if (name === 'getPanelData') {
 		if (!message.tabId) {
 			utils.getActiveTab((tab) => {
 				const data = panelData.get(message.view, tab);
@@ -1067,18 +1017,6 @@ function onMessageHandler(request, sender, callback) {
 			}
 		});
 		return true;
-	} else if (name === 'setupStep' && globals.JUST_INSTALLED) {
-		if (message.final) {
-			metrics.ping('install_complete');
-		} else if (message.setup_block !== undefined) {
-			conf.setup_block = message.setup_block;
-		} else if (message.setup_path !== undefined) {
-			conf.setup_path = message.setup_path;
-		} else if (message.setup_step !== undefined) {
-			if (message.setup_step > conf.setup_step) {
-				conf.setup_step = message.setup_step;
-			}
-		}
 	}
 }
 
