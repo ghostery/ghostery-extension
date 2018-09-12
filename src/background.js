@@ -651,6 +651,9 @@ function onMessageHandler(request, sender, callback) {
 				// TODO: can't wipe these settings for upgrade users
 				conf.selected_app_ids = {};
 				break;
+			case 'UPDATE_BLOCK_RECOMMENDED':
+				setGhosteryDefaultBlocking();
+				break;
 			case 'UPDATE_BLOCK_ADS':
 				conf.selected_app_ids = {};
 				for (const app_id in bugDb.db.apps) {
