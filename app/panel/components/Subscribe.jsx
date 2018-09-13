@@ -13,25 +13,16 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { openSubscriptionPage } from '../utils/msg';
-import { getTextWidth } from '../utils/utils';
 /**
  * Render Subscribe panel.
  * @return {ReactComponent}   ReactComponent instance
  */
 const Subscribe = (props) => {
-	// str, font, width, maxWidth, height
-	const font = {
-		fontFamily: '"Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif 18px bold',
-		fontSize: '18px',
-		fontWeight: 'bold',
-	};
-	const result = getTextWidth(t('subscribe_pitch'), font, 380, 540, 140);
-	const padding = `${Math.floor((580 - result.width) / 2)}px`;
 	const { loggedIn } = props.match.params;
 	return (
 		<div className="content-subscription">
 			<div className="badge" />
-			<div className="pitch-container" style={{ paddingLeft: padding, paddingRight: padding }}>
+			<div className="pitch-container">
 				<span className="pitch-text">{t('subscribe_pitch')}</span>
 			</div>
 			<a href="https://www.ghostery.com/supporter/" target="_blank" rel="noopener noreferrer">
