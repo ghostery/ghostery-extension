@@ -25,38 +25,40 @@
 	.pitch-container {
 		width: 100%;
 		text-align: center;
-		padding-left: 100px;
-		padding-right: 100px;
+		padding-left: 50px;
+		padding-right: 50px;
 		.pitch-text {
 			font-size: 18px;
 			font-weight: bold;
 		}
-		.pitch-learn-more {
-			display: block;
-			font-size: 14px;
-			font-weight: bold;
-			color: $ghosty-blue;
-			text-decoration: underline;
-		}
-		.pitch-become-subscriber {
-			@extend %pointer;
-			display: block;
-			margin-top: 20px;
-			margin-bottom: 20px;
-			background-color: $ghosty-blue;
-			box-shadow: 0px 1px 10px 0px rgba(0,0,0,0.20);
-			border-radius: 4px;
-			line-height: 40px;
-			font-size: 16px;
-			font-weight: bold;
-			color: $white;
-		}
-		.pitch-already-subscriber {
-			font-size: 14px;
-			font-weight: normal;
-			color: $ghosty-blue;
-			text-decoration: underline;
-		}
+	}
+	.pitch-learn-more {
+		display: block;
+		text-align: center;
+		font-size: 14px;
+		font-weight: bold;
+		color: $ghosty-blue;
+		text-decoration: underline;
+	}
+	.pitch-become-subscriber {
+		@extend %pointer;
+		display: block;
+		text-align: center;		
+		margin: 20px 80px 20px 80px;
+		background-color: $ghosty-blue;
+		box-shadow: 0px 1px 10px 0px rgba(0,0,0,0.20);
+		border-radius: 4px;
+		line-height: 40px;
+		font-size: 16px;
+		font-weight: bold;
+		color: $white;
+	}
+	.pitch-already-subscriber {
+		font-size: 14px;
+		font-weight: normal;
+		color: $ghosty-blue;
+		text-decoration: underline;
+		text-align: center;		
 	}
 	.themes-slider {
 		margin-right: 14px;

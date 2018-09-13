@@ -25,6 +25,7 @@ const SubscriptionInfo = (props) => {
 	const {
 		active, plan_amount, plan_interval, charge_date, plan_ends, loading
 	} = props.subscriptionData;
+	const subscriptionExpiration = (plan_ends > 1) ? t('subscription_days_left', plan_ends.toString()) : t('subscription_one_day_left');
 	return (
 		<div className="content-subscription s-tabs-panel">
 			<div className="row">
@@ -41,7 +42,7 @@ const SubscriptionInfo = (props) => {
 							{ plan_ends ? (
 								<div className="status-row">
 									<span className="status-label">{`${t('subscription_status')}: `}</span>
-									<span className="status-value red">{ t('subscription_days_left', plan_ends.toString()) }</span>
+									<span className="status-value red">{ subscriptionExpiration }</span>
 									<div style={{ marginTop: '20px' }}>
 										<span className="status-value blue resubscribe" onClick={openSubscriptionPage}>{ t('subscription_resubscribe') }</span>
 									</div>

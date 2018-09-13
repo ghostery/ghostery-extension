@@ -2028,7 +2028,7 @@
 		"message": "Priority Support"
 	},
 	"subscribe_pitch": {
-		"message": "We work hard to keep Ghostery's privacy protection free for all our users. If you like what we do, you can support us with a small subscription of $$2 per month."
+		"message": "While Ghostery is free, you can choose to support us through a small subscription of $$2 per month in exchange for cool perks, such as color themes, priority help service, and more. Join our mission and subscribe!"
 	},
 	"subscribe_pitch_learn_more": {
 		"message": "Learn more"
@@ -2085,10 +2085,12 @@
 		"message": "You have $DAYS$ days remaining of your subscription.",
 		"placeholders": {
 			"days": {
-				"content": "$1",
-				"example": "info@ghostery.com"
-			}
+				"content": "$1"
+			} 
 		}
+	},
+	"subscription_one_day_left": {
+		"message": "Your subscription expires tomorrow."
 	},
 	"subscription_resubscribe": {
 		"message": "Resubscribe"
@@ -2100,3 +2102,4 @@
 		"message": "Submit Issue"
 	}
 }
+
