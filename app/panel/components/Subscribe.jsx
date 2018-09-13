@@ -11,24 +11,33 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { openSubscriptionPage } from '../utils/msg';
 /**
  * Render Subscribe panel.
  * @return {ReactComponent}   ReactComponent instance
  */
-function Subscribe() {
+const Subscribe = (props) => {
+	const { loggedIn } = props.match.params;
 	return (
 		<div className="content-subscription">
 			<div className="badge" />
 			<div className="pitch-container">
 				<span className="pitch-text">{t('subscribe_pitch')}</span>
-				<a href="https://www.ghostery.com/supporter/" target="_blank" rel="noopener noreferrer">
-					<span className="pitch-learn-more">{t('subscribe_pitch_learn_more')}</span>
-				</a>
+			</div>
+			<a href="https://www.ghostery.com/supporter/" target="_blank" rel="noopener noreferrer">
+				<span className="pitch-learn-more">{t('subscribe_pitch_learn_more')}</span>
+			</a>
+			<div>
 				<span className="pitch-become-subscriber" onClick={openSubscriptionPage}>{t('subscribe_pitch_button_label')}</span>
 			</div>
+			{(loggedIn === 'false') &&
+				<NavLink to="/login" className="pitch-already-subscriber">
+					<span>{t('subscribe_pitch_sign_here')}</span>
+				</NavLink>
+			}
 		</div>
 	);
-}
+};
 
 export default Subscribe;

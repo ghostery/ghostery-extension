@@ -119,7 +119,7 @@ class Header extends React.Component {
 
 	clickBadge = () => {
 		const subscriber = this.props.user && this.props.user.subscriptionsSupporter;
-		this.props.history.push(subscriber ? '/subscription/info' : '/subscribe');
+		this.props.history.push(subscriber ? '/subscription/info' : `/subscribe/${!!this.props.user}`);
 	}
 
 	/**

@@ -890,12 +890,8 @@ function onMessageHandler(request, sender, callback) {
 		return true;
 	} else if (name === 'account.openSubscriptionPage') {
 		let tabUrl;
-		if (conf.account && conf.account.user) {
-			if (conf.account.user.subscriptionsSupporter) {
-				tabUrl = `https://account.${globals.GHOSTERY_DOMAIN}.com/subscription`;
-			} else {
-				tabUrl = `https://signon.${globals.GHOSTERY_DOMAIN}.com/subscribe`;
-			}
+		if (conf.account) {
+			tabUrl = `https://account.${globals.GHOSTERY_DOMAIN}.com/subscription`;
 		} else {
 			tabUrl = `https://signon.${globals.GHOSTERY_DOMAIN}.com/subscribe`;
 		}
