@@ -14,7 +14,7 @@ exports[`app/hub/Views/SetupViews/SetupBlockingDropdown component Snapshot tests
       className="button success"
       onClick={[Function]}
     >
-      setup_button_done
+      hub_setup_nav_done
     </div>
   </div>
 </div>

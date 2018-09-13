@@ -32,7 +32,7 @@ class Licenses extends React.Component {
 	 * @return {Object}
 	 */
 	createFooterMarkup() {
-		return { __html: t('setup_footer_license') };
+		return { __html: t('license_footer') };
 	}
 	/**
 	 * Render page.
