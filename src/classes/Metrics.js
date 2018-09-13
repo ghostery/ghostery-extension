@@ -146,7 +146,6 @@ class Metrics {
 			case 'antitrack_off':
 			case 'antitrack_on':
 			case 'create_account_extension':
-			case 'create_account_setup':
 			case 'list_dash':
 			case 'rewards_dash':
 			case 'rewards_learn':
