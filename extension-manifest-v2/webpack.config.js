@@ -28,7 +28,6 @@ const SHARED_COMP_DIR = path.resolve(__dirname, 'app/shared-components');
 const PANEL_DIR = path.resolve(__dirname, 'app/panel');
 const PANEL_ANDROID_DIR = path.resolve(__dirname, 'app/panel-android');
 const HUB_DIR = path.resolve(__dirname, 'app/hub');
-const SETUP_DIR = path.resolve(__dirname, 'app/setup');
 const LICENSES_DIR = path.resolve(__dirname, 'app/licenses');
 const REWARDS_DIR = path.resolve(__dirname, 'app/rewards');
 const SASS_DIR = path.resolve(__dirname, 'app/scss');
@@ -53,7 +52,6 @@ const cleanTmpStyleFiles = new WebpackShellPlugin({
 		`${RM} ./dist/purplebox_styles.js`,
 		`${RM} ./dist/rewards_styles.js`,
 		`${RM} ./dist/hub.js`,
-		`${RM} ./dist/setup.js`,
 	]
 });
 
@@ -131,7 +129,6 @@ const config = {
 		panel_react: [PANEL_DIR + '/index.jsx'],
 		panel_android_react: [PANEL_ANDROID_DIR + '/index.jsx'],
 		hub_react: [HUB_DIR + '/index.jsx'],
-		setup_react: [SETUP_DIR + '/index.jsx'],
 		licenses_react: [LICENSES_DIR + '/Licenses.jsx', LICENSES_DIR + '/License.jsx'],
 		// Sass
 		foundation: [SASS_DIR + '/vendor/foundation.scss'],
@@ -142,10 +139,8 @@ const config = {
 		panel_android: [SASS_DIR + '/panel_android.scss'],
 		purplebox_styles: [SASS_DIR + '/purplebox.scss'],
 		hub: [SASS_DIR + '/hub.scss'],
-		setup: [SASS_DIR + '/setup.scss'],
 		licenses: [SASS_DIR + '/licenses.scss'],
 		rewards_styles: [SASS_DIR + '/rewards.scss'],
-		setup: [SASS_DIR + '/setup.scss'],
 	},
 	devtool: 'none',
 	performance: { hints: false },
@@ -167,7 +162,7 @@ const config = {
 				}
 			},{
 				test: /\.(jsx|js)?/,
-				include : [SHARED_COMP_DIR, PANEL_ANDROID_DIR, PANEL_DIR, HUB_DIR, SETUP_DIR, LICENSES_DIR, CONTENT_SCRIPTS_DIR, REWARDS_DIR],
+				include : [SHARED_COMP_DIR, PANEL_ANDROID_DIR, PANEL_DIR, HUB_DIR, LICENSES_DIR, CONTENT_SCRIPTS_DIR, REWARDS_DIR],
 				use: {
 					loader: 'babel-loader'
 				}

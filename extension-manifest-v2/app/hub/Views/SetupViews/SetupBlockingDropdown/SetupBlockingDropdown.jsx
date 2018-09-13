@@ -80,7 +80,7 @@ class SetupBlockingDropdown extends Component {
 				<GlobalBlocking settingsData={settingsData} actions={actions} showToast={this._showToast} hideToast={this._hideToastDebounce} language={settingsData.language} />
 				<div className="SetupBlockingDropdown__buttonContainer flex-container flex-dir-row-reverse">
 					<div className="button success" onClick={handleDoneClick}>
-						{t('setup_button_done')}
+						{t('hub_setup_nav_done')}
 					</div>
 				</div>
 			</div>
