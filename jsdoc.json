@@ -6,7 +6,8 @@
 			"app/content-scripts",
 			"app/licenses",
 			"app/panel",
-			"app/setup"
+			"app/hub",
+			"app/shared-components"
 		],
 		"includePattern": ".+\\.js(doc|x)?$",
 		"excludePattern": "(^|\\/|\\\\)_"
