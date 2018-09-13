@@ -1854,7 +1854,7 @@
 		"message": "Looks like we can't find this email and password combo. Give it another shot."
 	},
 	"hub_create_account_header_title": {
-		"message": "Why create an account? Creating an account allows you to sync settings across browsers and devices."
+		"message": "Would you like to create a Ghostery account to sync settings across browsers and devices?"
 	},
 	"hub_create_account_label_email": {
 		"message": "Email:"
