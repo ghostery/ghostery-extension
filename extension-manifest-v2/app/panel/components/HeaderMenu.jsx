@@ -150,7 +150,7 @@ class HeaderMenu extends React.Component {
 	 */
 	clickSubscriber = () => {
 		this.props.toggleDropdown();
-		this.props.history.push(this.props.subscriber ? '/subscription/info' : '/subscribe');
+		this.props.history.push(this.props.subscriber ? '/subscription/info' : `/subscribe/${this.props.loggedIn}`);
 	}
 	/**
 	 * Render drop-down menu.
