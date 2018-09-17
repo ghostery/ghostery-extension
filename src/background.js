@@ -638,14 +638,15 @@ function onMessageHandler(request, sender, callback) {
 	} else if (name === 'updateAdBlock') {
 		conf.enable_ad_block = message;
 	} else if (name === 'updateBlocking') {
+		const newBlockingState = {};
 		switch (message) {
 			case 'UPDATE_BLOCK_ALL':
-				conf.selected_app_ids = {};
 				for (const app_id in bugDb.db.apps) {
-					if (!conf.selected_app_ids.hasOwnProperty(app_id)) {
-						conf.selected_app_ids[app_id] = 1;
+					if (!newBlockingState.hasOwnProperty(app_id)) {
+						newBlockingState[app_id] = 1;
 					}
 				}
+				conf.selected_app_ids = newBlockingState;
 				break;
 			case 'UPDATE_BLOCK_NONE':
 				// TODO: can't wipe these settings for upgrade users
@@ -653,15 +654,16 @@ function onMessageHandler(request, sender, callback) {
 				break;
 			case 'UPDATE_BLOCK_RECOMMENDED':
 				setGhosteryDefaultBlocking();
+				conf.selected_app_ids = conf.selected_app_ids;
 				break;
 			case 'UPDATE_BLOCK_ADS':
-				conf.selected_app_ids = {};
 				for (const app_id in bugDb.db.apps) {
 					if (bugDb.db.apps[app_id].cat === 'advertising' &&
-						!conf.selected_app_ids.hasOwnProperty(app_id)) {
-						conf.selected_app_ids[app_id] = 1;
+						!newBlockingState.hasOwnProperty(app_id)) {
+						newBlockingState[app_id] = 1;
 					}
 				}
+				conf.selected_app_ids = newBlockingState;
 				break;
 			default:
 				break;
