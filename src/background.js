@@ -624,7 +624,7 @@ function onMessageHandler(request, sender, callback) {
 	if (name === 'disableShowAlert') {
 		conf.show_alert = false;
 	} else if (name === 'updateDataCollection') {
-		if (!IS_CLIQZ && !IS_EDGE) {
+		if (!IS_CLIQZ && !IS_EDGE && !IS_MOBILE_APP) {
 			conf.enable_human_web = message && true;
 			conf.enable_offers = message && true;
 		}
@@ -926,7 +926,7 @@ function initializeDispatcher() {
 		panelData.init();
 	});
 	dispatcher.on('conf.save.enable_human_web', (enableHumanWeb) => {
-		if (!IS_EDGE && !IS_CLIQZ) {
+		if (!IS_EDGE && !IS_CLIQZ && !IS_MOBILE_APP) {
 			setCliqzModuleEnabled(humanweb, enableHumanWeb).then(() => {
 				setupABTest();
 			});
@@ -1537,10 +1537,10 @@ function initializeGhosteryModules() {
 					// Otherwise we respect browser-core default settings
 					conf.enable_ad_block = !adblocker.isDisabled;
 					conf.enable_anti_tracking = !antitracking.isDisabled;
-					conf.enable_human_web = !humanweb.isDisabled;
 					if (!IS_MOBILE_APP) {
 						// this little guy makes the whole browser freeze on first start
 						conf.enable_offers = !offers.isDisabled;
+						conf.enable_human_web = !humanweb.isDisabled;
 					}
 				}
 			}
