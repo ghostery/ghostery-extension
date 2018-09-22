@@ -1762,7 +1762,7 @@
 		"message": "Already Subscribed"
 	},
 	"hub_supporter_price": {
-		"message": "$SUP_START$$$$SUP_END$$SPAN_START$2$SPAN_END$ per month",
+		"message": "$SUP_START$$DOLLAR_SIGN$$SUP_END$$SPAN_START$2$SPAN_END$ per month",
 		"placeholders": {
 			"sup_start": {
 				"content": "<sup>"
@@ -1775,6 +1775,9 @@
 			},
 			"span_end": {
 				"content": "</span>"
+			},
+			"dollar_sign": {
+				"content": "$1"
 			}
 		}
 	},

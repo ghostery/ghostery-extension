@@ -63,7 +63,7 @@ const SupporterView = (props) => {
 						{_renderButton(isSupporter, true)}
 						<div
 							className="SupporterView__headingCost SupporterView--addSideMargin flex-container align-middle"
-							dangerouslySetInnerHTML={{ __html: t('hub_supporter_price') }}
+							dangerouslySetInnerHTML={{ __html: t('hub_supporter_price', '$') }}
 						/>
 					</div>
 				</div>
