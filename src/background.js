@@ -1541,6 +1541,10 @@ function initializeGhosteryModules() {
 						// this little guy makes the whole browser freeze on first start
 						conf.enable_offers = !offers.isDisabled;
 						conf.enable_human_web = !humanweb.isDisabled;
+					} else {
+						humanweb.isReady().then(() => {
+							setCliqzModuleEnabled(humanweb, false);
+						});
 					}
 				}
 			}
