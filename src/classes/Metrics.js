@@ -137,7 +137,7 @@ class Metrics {
 			case 'resume':
 			case 'sign_in':
 			case 'trust_site':
-				this._sendReq(type, ['all', 'daily', 'weekly']);
+				this._sendReq(type, ['all', 'daily']);
 				break;
 
 			// New to Ghostery 8
@@ -147,7 +147,6 @@ class Metrics {
 			case 'antitrack_on':
 			case 'create_account_extension':
 			case 'list_dash':
-			case 'rewards_dash':
 			case 'rewards_learn':
 			case 'pause_snooze':
 			case 'smartblock_off':
@@ -155,7 +154,10 @@ class Metrics {
 			case 'viewchange_from_detailed':
 			case 'viewchange_from_expanded':
 			case 'viewchange_from_simple':
-				this._sendReq(type, ['all', 'daily', 'weekly', 'monthly']);
+				this._sendReq(type, ['all', 'daily']);
+				break;
+			case 'rewards_dash':
+				this._sendReq(type, ['all', 'daily', 'monthly']);
 				break;
 
 			// Rewards Pings
@@ -171,6 +173,26 @@ class Metrics {
 			case 'rewards_first_reject':
 			case 'rewards_first_reject_optin':
 			case 'rewards_first_reject_optout':
+				this._sendReq(type, ['all']);
+				break;
+
+			// New to Ghostery 8.3
+			// case 'sign_in_success':
+			case 'tutorial_start':
+			case 'tutorial_complete':
+			case 'setup_start':
+			case 'supporter_cta_hub':
+			case 'supporter_cta_extension':
+			case 'products_cta_android':
+			case 'products_cta_ios':
+			case 'products_cta_lite':
+			case 'supporter_panel_from_badge':
+			case 'supporter_panel_from_menu':
+			case 'resubscribe':
+			case 'priority_support_submit':
+			case 'theme_change':
+			case 'manage_subscription':
+			case 'broken_page':
 				this._sendReq(type, ['all']);
 				break;
 
@@ -240,7 +262,7 @@ class Metrics {
 			// Random number, assigned at install (former install_rand)
 			`&ir=${encodeURIComponent(conf.install_random_number)}` +
 			// Login state (former signed_in)
-			`&sn=${encodeURIComponent(conf.account ? '1' : '0')}` +
+			`&sn=${encodeURIComponent(this._getSignedInState().toString())}` +
 			// Date of install (former install_date)
 			`&id=${encodeURIComponent(conf.install_date)}` +
 			// Noncritical ping (former noncritical)
@@ -261,14 +283,35 @@ class Metrics {
 			`&at=${encodeURIComponent(conf.enable_anti_tracking ? '1' : '0')}` +
 			// The deepest setup page reached by user during setup
 			`&ss=${encodeURIComponent((conf.metrics.install_complete_all || type === 'install_complete') ? conf.setup_step.toString() : '-1')}` +
-			// User choice of default or custom path during setup
-			`&sp=${encodeURIComponent(conf.setup_path.toString())}` +
+			// The number of times the user has gone through setup
+			`&sp=${encodeURIComponent(conf.setup_number.toString())}` +
 			// Type of blocking selected during setup
 			`&sb=${encodeURIComponent(conf.setup_block.toString())}` +
 			// Recency, days since last active daily ping
 			`&rc=${encodeURIComponent(this._getRecency(type, frequency).toString())}` +
 			// Current number of rewards received
-			`&rr=${encodeURIComponent(this._getRewardsCount().toString())}`;
+			`&rr=${encodeURIComponent(this._getRewardsCount().toString())}` +
+
+			// New parameters to Ghostery 8.3
+			// Active Velocity
+			`&va=${encodeURIComponent(this._getRealData().toString())}` +
+			// Engaged Recency
+			`&re=${encodeURIComponent(this._getRealData().toString())}` +
+			// Engaged Velocity
+			`&ve=${encodeURIComponent(this._getRealData().toString())}` +
+			// Shared Ghostery
+			`&sg=${encodeURIComponent(this._getRealData().toString())}` +
+			// Account Type
+			`&ac=${encodeURIComponent(this._getRealData().toString())}` +
+			// Theme
+			`&th=${encodeURIComponent(this._getRealData().toString())}`;
+
+		if (type === 'broken_page') {
+			// only send broken page url when necessary
+			metrics_url +=
+			// Broken URL
+			`&bu=${encodeURIComponent(this._getRealData().toString())}`;
+		}
 
 		if (CAMPAIGN_METRICS.includes(type)) {
 			// only send campaign attribution when necessary
@@ -339,6 +382,19 @@ class Metrics {
 		});
 	}
 	/**
+	 * Get the Signed in state.
+	 *
+	 * @private
+	 *
+	 * @return {number} 	number representing signed in state
+	 */
+	_getSignedInState() {
+		if (!conf.account) {
+			return 0;
+		}
+		return 1;
+	}
+	/**
 	 * Calculate days since the last daily active ping.
 	 *
 	 * @private
@@ -350,6 +406,13 @@ class Metrics {
 			return Math.floor((Number(new Date().getTime()) - conf.metrics.active_daily) / 86400000);
 		}
 		return -1;
+	}
+	/**
+	 * Replace with real functions and real data.
+	 * @return {String} Dummy data to be replaced.
+	 */
+	_getRealData() {
+		return '';
 	}
 	/**
 	 * Get the number of Rewards shown to the user.

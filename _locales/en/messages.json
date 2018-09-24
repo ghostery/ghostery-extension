@@ -2083,7 +2083,7 @@
 		"placeholders": {
 			"days": {
 				"content": "$1"
-			} 
+			}
 		}
 	},
 	"subscription_one_day_left": {
@@ -2099,4 +2099,3 @@
 		"message": "Submit Issue"
 	}
 }
-

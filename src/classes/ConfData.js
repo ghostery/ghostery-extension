@@ -130,7 +130,7 @@ class ConfData {
 			_initProperty('toggle_individual_trackers', true);
 			_initProperty('setup_step', 0);
 			_initProperty('setup_show_warning_override', true);
-			_initProperty('setup_path', 0);
+			_initProperty('setup_number', 0);
 			_initProperty('setup_block', 1);
 			_initProperty('setup_complete', false);
 			_initProperty('tutorial_complete', false);

@@ -32,13 +32,20 @@ class SupporterViewContainer extends Component {
 	}
 
 	/**
+	 * Sends the necessary ping to background
+	 */
+	_sendSupporterPing = () => {
+		this.props.actions.sendPing({ type: 'supporter_cta_hub' });
+	}
+
+	/**
 	 * React's required render function. Returns JSX
 	 * @return {JSX} JSX for rendering the Supporter View of the Hub app
 	 */
 	render() {
 		const isSupporter = this.props.user && this.props.user.subscriptionsSupporter || false;
 
-		return <SupporterView isSupporter={isSupporter} />;
+		return <SupporterView isSupporter={isSupporter} onSupporterClick={this._sendSupporterPing} />;
 	}
 }
 
@@ -48,6 +55,7 @@ SupporterViewContainer.propTypes = {
 		subscriptionsSupporter: PropTypes.bool,
 	}),
 	actions: PropTypes.shape({
+		sendPing: PropTypes.func.isRequired,
 		getUser: PropTypes.func.isRequired,
 	}).isRequired,
 };

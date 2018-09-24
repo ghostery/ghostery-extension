@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import TutorialVideoViewContainer from './TutorialVideoViewContainer';
+import { sendPing } from '../../AppView/AppViewActions';
 import { setTutorialNavigation } from '../../TutorialView/TutorialViewActions';
 
 /**
@@ -32,7 +33,10 @@ const mapStateToProps = state => Object.assign({}, state.tutorial);
  * @memberof TutorialContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign({}, { setTutorialNavigation }), dispatch),
+	actions: bindActionCreators(Object.assign({}, {
+		sendPing,
+		setTutorialNavigation,
+	}), dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TutorialVideoViewContainer);

@@ -118,6 +118,7 @@ class Header extends React.Component {
 	}
 
 	clickBadge = () => {
+		sendMessage('ping', 'supporter_panel_from_badge');
 		const subscriber = this.props.user && this.props.user.subscriptionsSupporter;
 		this.props.history.push(subscriber ? '/subscription/info' : `/subscribe/${!!this.props.user}`);
 	}

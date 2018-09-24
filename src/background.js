@@ -511,6 +511,12 @@ function handleRewards(name, message, callback) {
  */
 function handleGhosteryHub(name, message, callback) {
 	switch (name) {
+		case 'SEND_PING': {
+			const { type } = message;
+			metrics.ping(type);
+			callback();
+			break;
+		}
 		case 'GET_HOME_PROPS': {
 			const {
 				setup_complete,
@@ -530,6 +536,21 @@ function handleGhosteryHub(name, message, callback) {
 			callback({ enable_metrics });
 			break;
 		}
+		case 'SET_SETUP_STEP': {
+			let { setup_step } = message;
+			if (setup_step === -1) {
+				const { setup_number } = conf;
+				conf.setup_step = setup_step;
+				conf.setup_number = setup_number ? 2 : 1;
+				metrics.ping('setup_start');
+			} else if (setup_step > conf.setup_step) {
+				conf.setup_step = setup_step;
+			} else {
+				setup_step = conf.setup_step;
+			}
+			callback({ setup_step });
+			break;
+		}
 		case 'GET_SETUP_SHOW_WARNING_OVERRIDE': {
 			const { setup_show_warning_override } = conf;
 			callback({ setup_show_warning_override });
@@ -545,14 +566,17 @@ function handleGhosteryHub(name, message, callback) {
 			const { blockingPolicy } = message;
 			switch (blockingPolicy) {
 				case 'BLOCKING_POLICY_RECOMMENDED': {
+					conf.setup_block = 1;
 					setGhosteryDefaultBlocking();
 					break;
 				}
 				case 'BLOCKING_POLICY_NOTHING': {
+					conf.setup_block = 0;
 					conf.selected_app_ids = {};
 					break;
 				}
 				case 'BLOCKING_POLICY_EVERYTHING': {
+					conf.setup_block = 2;
 					conf.selected_app_ids = {};
 					for (const app_id in bugDb.db.apps) {
 						if (!conf.selected_app_ids.hasOwnProperty(app_id)) {
@@ -562,6 +586,7 @@ function handleGhosteryHub(name, message, callback) {
 					break;
 				}
 				case 'BLOCKING_POLICY_CUSTOM': {
+					conf.setup_block = 3;
 					// Blocking app_ids will be handled by Global Blocking blocking.js
 					break;
 				}
@@ -609,6 +634,7 @@ function handleGhosteryHub(name, message, callback) {
 		case 'SET_TUTORIAL_COMPLETE': {
 			const tutorial_complete = true;
 			conf.tutorial_complete = tutorial_complete;
+			metrics.ping('tutorial_complete');
 			callback({ tutorial_complete });
 			break;
 		}
@@ -759,6 +785,9 @@ function onMessageHandler(request, sender, callback) {
 		callback();
 		return false;
 	} else if (name === 'account.getTheme') {
+		if (conf.current_theme !== message.currentTheme) {
+			metrics.ping('theme_change');
+		}
 		if (message.currentTheme !== 'default' &&
 			account.hasScopesUnverified(['subscriptions:supporter'])) {
 			// try to get it locally
@@ -898,6 +927,7 @@ function onMessageHandler(request, sender, callback) {
 		utils.openNewTab({ url: tabUrl, become_active: true });
 		return true;
 	} else if (name === 'account.openSupportPage') {
+		metrics.ping('priority_support_submit');
 		const tabUrl = `https://account.${globals.GHOSTERY_DOMAIN}.com/support`;
 		utils.openNewTab({ url: tabUrl, become_active: true });
 		return true;

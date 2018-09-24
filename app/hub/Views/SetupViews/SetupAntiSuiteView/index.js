@@ -16,7 +16,7 @@ import { bindActionCreators } from 'redux';
 
 import SetupAntiSuiteViewContainer from './SetupAntiSuiteViewContainer';
 import * as SetupAntiSuiteViewActions from './SetupAntiSuiteViewActions';
-import { setSetupNavigation } from '../../SetupView/SetupViewActions';
+import { setSetupStep, setSetupNavigation } from '../../SetupView/SetupViewActions';
 
 /**
  * Map redux store state properties to the component's own properties.
@@ -33,7 +33,10 @@ const mapStateToProps = state => Object.assign({}, state.setup);
  * @memberof SetupContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign({}, SetupAntiSuiteViewActions, { setSetupNavigation }), dispatch),
+	actions: bindActionCreators(Object.assign({}, SetupAntiSuiteViewActions, {
+		setSetupStep,
+		setSetupNavigation,
+	}), dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SetupAntiSuiteViewContainer);

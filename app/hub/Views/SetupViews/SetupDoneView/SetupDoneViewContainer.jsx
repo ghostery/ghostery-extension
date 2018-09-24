@@ -39,6 +39,7 @@ class SetupDoneViewContainer extends Component {
 		});
 
 		if (sendMountActions) {
+			props.actions.setSetupStep({ setup_step: 3 });
 			props.actions.setSetupComplete();
 		}
 	}
@@ -79,6 +80,7 @@ class SetupDoneViewContainer extends Component {
 SetupDoneViewContainer.propTypes = {
 	index: PropTypes.number.isRequired,
 	actions: PropTypes.shape({
+		setSetupStep: PropTypes.func.isRequired,
 		setSetupNavigation: PropTypes.func.isRequired,
 	}).isRequired,
 };

@@ -27,7 +27,7 @@ class TutorialVideoViewContainer extends Component {
 		const title = t('hub_tutorial_page_title_video');
 		window.document.title = title;
 
-		const { index } = props;
+		const { index, sendMountActions } = props;
 		props.actions.setTutorialNavigation({
 			activeIndex: index,
 			hrefPrev: false,
@@ -37,6 +37,10 @@ class TutorialVideoViewContainer extends Component {
 			textNext: t('hub_tutorial_nav_next'),
 			textDone: t('hub_tutorial_exit_flow'),
 		});
+
+		if (sendMountActions) {
+			this.props.actions.sendPing({ type: 'tutorial_start' });
+		}
 	}
 
 	/**
@@ -52,8 +56,10 @@ class TutorialVideoViewContainer extends Component {
 TutorialVideoViewContainer.propTypes = {
 	index: PropTypes.number.isRequired,
 	actions: PropTypes.shape({
+		sendPing: PropTypes.func.isRequired,
 		setTutorialNavigation: PropTypes.func.isRequired,
 	}).isRequired,
+	sendMountActions: PropTypes.bool.isRequired,
 };
 
 export default TutorialVideoViewContainer;

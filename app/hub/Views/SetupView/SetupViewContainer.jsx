@@ -46,6 +46,7 @@ class SetupViewContainer extends Component {
 		const title = t('hub_setup_page_title');
 		window.document.title = title;
 
+		this.props.actions.setSetupStep({ setup_step: -1 });
 		this.props.actions.initSetupProps(this.props.setup);
 		this.props.actions.getSetupShowWarningOverride().then((data) => {
 			const { setup_show_warning_override } = data;
@@ -242,6 +243,7 @@ SetupViewContainer.propTypes = {
 		getSetupShowWarningOverride: PropTypes.func.isRequired,
 		setSetupShowWarningOverride: PropTypes.func.isRequired,
 		initSetupProps: PropTypes.func.isRequired,
+		setSetupStep: PropTypes.func.isRequired,
 		setSetupNavigation: PropTypes.func.isRequired,
 		setBlockingPolicy: PropTypes.func.isRequired,
 		setAntiTracking: PropTypes.func.isRequired,
