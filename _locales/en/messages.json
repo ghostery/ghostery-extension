@@ -1762,7 +1762,7 @@
 		"message": "Already Subscribed"
 	},
 	"hub_supporter_price": {
-		"message": "$SUP_START$$DOLLAR_SIGN$$SUP_END$$SPAN_START$2$SPAN_END$ per month",
+		"message": "$SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$ per month",
 		"placeholders": {
 			"sup_start": {
 				"content": "<sup>"
@@ -1775,9 +1775,6 @@
 			},
 			"span_end": {
 				"content": "</span>"
-			},
-			"dollar_sign": {
-				"content": "$1"
 			}
 		}
 	},
@@ -2028,12 +2025,7 @@
 		"message": "Priority Support"
 	},
 	"subscribe_pitch": {
-		"message": "While Ghostery is free, you can choose to support us through a small subscription of $DOLLARS$ per month in exchange for cool perks, such as color themes, priority help service, and more. Join our mission and subscribe!",
-		"placeholders": {
-			"dollars": {
-				"content": "$1"
-			}
-		}
+		"message": "While Ghostery is free, you can choose to support us through a small subscription of &#36;2 per month in exchange for cool perks, such as color themes, priority help service, and more. Join our mission and subscribe!"
 	},
 	"subscribe_pitch_learn_more": {
 		"message": "Learn more"

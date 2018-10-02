@@ -23,7 +23,7 @@ const Subscribe = (props) => {
 		<div className="content-subscription">
 			<div className="badge" />
 			<div className="pitch-container">
-				<span className="pitch-text">{t('subscribe_pitch', '$2')}</span>
+				<span className="pitch-text" dangerouslySetInnerHTML={{ __html: t('subscribe_pitch') }} />
 			</div>
 			<a href="https://www.ghostery.com/supporter/" target="_blank" rel="noopener noreferrer">
 				<span className="pitch-learn-more">{t('subscribe_pitch_learn_more')}</span>
