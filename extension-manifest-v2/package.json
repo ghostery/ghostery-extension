@@ -67,7 +67,7 @@
     "ua-parser-js": "^0.7.17",
     "underscore": "^1.8.3",
     "url-search-params": "^0.10.2",
-    "whatwg-fetch": "^2.0.4"
+    "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
