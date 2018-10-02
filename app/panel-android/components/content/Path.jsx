@@ -14,15 +14,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const INTERVAL = 1000; // Define the maximum rendering time for this path
+
 export default class Path extends React.Component {
 	constructor(props) {
 		super(props);
 		this.myRef = React.createRef();
+		this.timer = null;
 	}
 
 	componentDidMount() {
 		const node = this.myRef.current;
 		node.style.setProperty('--stroke-length', `${node.getTotalLength()}`);
+		// Check and call props.handler() if the animationEnd event doesn't get fired somehow
+		this.timer = setInterval(() => {
+			clearInterval(this.timer); // Run this only once
+			this.props.handler();
+		}, INTERVAL);
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.timer);
+	}
+
+	onAnimationEndHandler = () => {
+		clearInterval(this.timer);
+		this.props.handler();
 	}
 
 	polarToCartesian(centerX, centerY, radius, angleInDegrees) {
@@ -62,7 +79,7 @@ export default class Path extends React.Component {
 				data-category={category}
 				className="path"
 				ref={this.myRef}
-				onAnimationEnd={this.props.handler}
+				onAnimationEnd={this.onAnimationEndHandler}
 			/>
 		);
 	}
