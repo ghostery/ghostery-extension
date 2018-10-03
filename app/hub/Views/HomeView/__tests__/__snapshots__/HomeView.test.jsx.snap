@@ -159,7 +159,7 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
           <a
             aria-current={null}
             className="HomeView__featureButton button primary"
-            href="/supporter"
+            href="/plus"
             onClick={[Function]}
             style={undefined}
           >
@@ -334,7 +334,7 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
           <a
             aria-current={null}
             className="HomeView__featureButton button primary"
-            href="/supporter"
+            href="/plus"
             onClick={[Function]}
             style={undefined}
           >
