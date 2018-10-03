@@ -43,7 +43,7 @@
 	.pitch-become-subscriber {
 		@extend %pointer;
 		display: block;
-		text-align: center;		
+		text-align: center;
 		margin: 20px 80px 20px 80px;
 		background-color: $ghosty-blue;
 		box-shadow: 0px 1px 10px 0px rgba(0,0,0,0.20);
@@ -52,13 +52,14 @@
 		font-size: 16px;
 		font-weight: bold;
 		color: $white;
+		text-transform: uppercase;
 	}
 	.pitch-already-subscriber {
 		font-size: 14px;
 		font-weight: normal;
 		color: $ghosty-blue;
 		text-decoration: underline;
-		text-align: center;		
+		text-align: center;
 	}
 	.themes-slider {
 		margin-right: 14px;

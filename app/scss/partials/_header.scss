@@ -65,7 +65,7 @@
 				div {
 					display: inline-flex;
 				}
-			} 
+			}
 		}
 		.base-badge {
 			@extend %pointer;
@@ -83,8 +83,8 @@
 		.non-subscriber-badge {
 			@extend .base-badge;
 			path {
-				fill: $gold; 
-			} 
+				fill: $gold;
+			}
 		}
 		.header-kebab {
 			@extend %pointer;
@@ -120,7 +120,7 @@
 				top: 50%;
 				transform: translateY(-50%);
 			}
-			.menu-icon {fill: $light-gray; stroke:  $light-gray;}
+			.menu-icon {fill: $light-gray; stroke: none;}
 			.about-icon {
 				fill: none;
 				path {
@@ -162,7 +162,7 @@
 			}
 			&:hover {
 				span {color: $ghosty-blue}
-				.menu-icon {fill: $ghosty-blue; stroke: $ghosty-blue;}
+				.menu-icon {fill: $ghosty-blue; stroke: none;}
 				.subscriber {
 					path {
 						stroke: $ghosty-blue;
