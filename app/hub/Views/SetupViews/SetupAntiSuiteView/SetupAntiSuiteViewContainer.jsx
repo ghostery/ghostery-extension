@@ -14,6 +14,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import SetupAntiSuiteView from './SetupAntiSuiteView';
+import globals from '../../../../../src/classes/Globals';
+
+const isEdge = (globals.BROWSER_INFO.name === 'edge');
 
 /**
  * @class Implement the Setup Anti-Suite View for the Ghostery Hub
@@ -48,7 +51,9 @@ class SetupAntiSuiteViewContainer extends Component {
 			props.actions.setAntiTracking({ enable_anti_tracking });
 			props.actions.setAdBlock({ enable_ad_block });
 			props.actions.setSmartBlocking({ enable_smart_blocking });
-			props.actions.setGhosteryRewards({ enable_ghostery_rewards });
+			if (!isEdge) {
+				props.actions.setGhosteryRewards({ enable_ghostery_rewards });
+			}
 		}
 	}
 
@@ -132,6 +137,10 @@ class SetupAntiSuiteViewContainer extends Component {
 			},
 		];
 
+		if (isEdge) {
+			features.splice(features.findIndex(item => item.id === 'ghostery-rewards'), 1);
+		}
+
 		return <SetupAntiSuiteView features={features} />;
 	}
 }
@@ -144,7 +153,7 @@ SetupAntiSuiteViewContainer.propTypes = {
 		setAntiTracking: PropTypes.func.isRequired,
 		setAdBlock: PropTypes.func.isRequired,
 		setSmartBlocking: PropTypes.func.isRequired,
-		setGhosteryRewards: PropTypes.func.isRequired,
+		setGhosteryRewards: isEdge ? PropTypes.undefined : PropTypes.func.isRequired,
 	}).isRequired,
 	sendMountActions: PropTypes.bool.isRequired,
 };

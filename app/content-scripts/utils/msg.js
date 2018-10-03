@@ -35,6 +35,8 @@ export default function (origin) {
 	 * @param  {Object} 	message 	message data
 	 * @return {Promise}				response or null
 	 */
+	let MESSAGE_ID = 0;
+	let LISTENER_ADDED = false;
 	function sendMessageInPromise(name, message) {
 		// On Edge 39.14965.1001.0 callback is not called when multiple
 		// Edge instances running. So instead we shoot message back
@@ -42,15 +44,19 @@ export default function (origin) {
 		// in src/background.js.To be removed, once Edge fixed.
 		if (IS_EDGE) {
 			return new Promise((resolve) => {
-				const messageId = (`EDGE_${window.performance.now()}`).replace('.', '_');
-				onMessage.addListener((request, sender, sendResponse) => {
-					if (messageId === request.name) {
-						resolve(request.message);
-					}
-					if (sendResponse) {
-						sendResponse();
-					}
-				});
+				const messageId = MESSAGE_ID.toString();
+				MESSAGE_ID += 1;
+				if (!LISTENER_ADDED) {
+					LISTENER_ADDED = true;
+					onMessage.addListener((request, sender, sendResponse) => {
+						if (messageId === request.name) {
+							resolve(request.message);
+						}
+						if (sendResponse) {
+							sendResponse();
+						}
+					});
+				}
 				chrome.runtime.sendMessage({
 					name,
 					message,
