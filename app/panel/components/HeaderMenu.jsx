@@ -15,7 +15,6 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ReactSVG from 'react-svg';
 import ClassNames from 'classnames';
 
 import ClickOutside from './BuildingBlocks/ClickOutside';
@@ -216,7 +215,7 @@ class HeaderMenu extends React.Component {
 									<svg width="17" height="21" viewBox="0 0 17 21">
 										<g className="about-icon" fill="none" fillRule="evenodd">
 											<path d="M8.5 2l7.36 4.25v8.5L8.5 19l-7.36-4.25v-8.5z" />
-											<path class="text" d="M9.057 14H7.752V8.188h1.305V14zM7.671 6.68c0-.201.064-.368.191-.5.127-.133.309-.199.545-.199.237 0 .42.066.548.199a.687.687 0 0 1 .193.5c0 .196-.064.36-.193.49-.129.131-.311.197-.548.197-.236 0-.418-.066-.545-.196a.677.677 0 0 1-.19-.492z" />
+											<path className="text" d="M9.057 14H7.752V8.188h1.305V14zM7.671 6.68c0-.201.064-.368.191-.5.127-.133.309-.199.545-.199.237 0 .42.066.548.199a.687.687 0 0 1 .193.5c0 .196-.064.36-.193.49-.129.131-.311.197-.548.197-.236 0-.418-.066-.545-.196a.677.677 0 0 1-.19-.492z" />
 										</g>
 									</svg>
 								</div>
