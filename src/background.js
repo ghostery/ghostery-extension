@@ -862,9 +862,13 @@ function onMessageHandler(request, sender, callback) {
 		});
 		return true;
 	} else if (name === 'account.login') {
+		metrics.ping('sign_in');
 		const { email, password } = message;
 		account.login(email, password)
 			.then((response) => {
+				if (!response.hasOwnProperty('errors')) {
+					metrics.ping('sign_in_success')
+				}
 				callback(response);
 			})
 			.catch((err) => {
@@ -874,11 +878,16 @@ function onMessageHandler(request, sender, callback) {
 			});
 		return true;
 	} else if (name === 'account.register') {
+		const senderOrigin = (sender.url.indexOf('templates/panel.html') >= 0) ? 'extension' : 'setup';
+		metrics.ping(`create_account_${senderOrigin}`);
 		const {
 			email, confirmEmail, password, firstName, lastName
 		} = message;
 		account.register(email, confirmEmail, password, firstName, lastName)
 			.then((response) => {
+				if (!response.hasOwnProperty('errors')) {
+					metrics.ping('create_account_success');
+				}
 				callback(response);
 			})
 			.catch((err) => {

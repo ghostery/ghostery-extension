@@ -134,7 +134,6 @@ class HeaderMenu extends React.Component {
 	 * Handle click on 'Sign in' menu item and navigate to Login panel.
 	 */
 	clickSignIn = () => {
-		sendMessage('ping', 'sign_in');
 		this.props.toggleDropdown();
 		this.props.history.push('/login');
 	}

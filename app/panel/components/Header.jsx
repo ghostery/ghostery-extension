@@ -67,7 +67,6 @@ class Header extends React.Component {
 	}
 
 	handleSignin = () => {
-		sendMessage('ping', 'sign_in');
 		this.props.history.push('/login');
 	}
 

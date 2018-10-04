@@ -146,6 +146,7 @@ class Metrics {
 			case 'antitrack_off':
 			case 'antitrack_on':
 			case 'create_account_extension':
+			case 'create_account_setup':
 			case 'list_dash':
 			case 'rewards_learn':
 			case 'pause_snooze':
@@ -177,7 +178,8 @@ class Metrics {
 				break;
 
 			// New to Ghostery 8.3
-			// case 'sign_in_success':
+			case 'sign_in_success':
+			case 'create_account_success':
 			case 'tutorial_start':
 			case 'tutorial_complete':
 			case 'setup_start':
