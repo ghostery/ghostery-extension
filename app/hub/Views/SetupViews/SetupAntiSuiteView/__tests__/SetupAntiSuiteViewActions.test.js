@@ -18,7 +18,7 @@ import * as SetupAntiSuiteViewActions from '../SetupAntiSuiteViewActions';
 import {
 	SET_ANTI_TRACKING,
 	SET_AD_BLOCK,
-	SET_SMART_BLOCKING,
+	SET_SMART_BLOCK,
 	SET_GHOSTERY_REWARDS
 } from '../../../SetupView/SetupViewConstants';
 
@@ -36,7 +36,7 @@ utils.sendMessageInPromise = jest.fn((name, message) => new Promise((resolve, re
 			resolve(message);
 			break;
 		}
-		case SET_SMART_BLOCKING: {
+		case SET_SMART_BLOCK: {
 			resolve(message);
 			break;
 		}
@@ -80,7 +80,7 @@ describe('app/hub/Views/SetupViews/SetupAntiSuiteView actions', () => {
 		const store = mockStore(initialState);
 
 		const data = testData;
-		const expectedPayload = { data, type: SET_SMART_BLOCKING };
+		const expectedPayload = { data, type: SET_SMART_BLOCK };
 
 		return store.dispatch(SetupAntiSuiteViewActions.setSmartBlocking(data)).then(() => {
 			const actions = store.getActions();

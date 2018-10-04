@@ -27,7 +27,7 @@ export const BLOCKING_POLICY_CUSTOM = 'BLOCKING_POLICY_CUSTOM';
 // Setup Anti-Suite
 export const SET_ANTI_TRACKING = 'SET_ANTI_TRACKING';
 export const SET_AD_BLOCK = 'SET_AD_BLOCK';
-export const SET_SMART_BLOCKING = 'SET_SMART_BLOCKING';
+export const SET_SMART_BLOCK = 'SET_SMART_BLOCK';
 export const SET_GHOSTERY_REWARDS = 'SET_GHOSTERY_REWARDS';
 
 // Setup Human Web

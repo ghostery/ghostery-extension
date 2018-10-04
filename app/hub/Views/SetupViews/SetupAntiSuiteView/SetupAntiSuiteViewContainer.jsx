@@ -42,12 +42,12 @@ class SetupAntiSuiteViewContainer extends Component {
 			const {
 				enable_anti_tracking,
 				enable_ad_block,
-				enable_smart_blocking,
+				enable_smart_block,
 				enable_ghostery_rewards,
 			} = setup;
 			props.actions.setAntiTracking({ enable_anti_tracking });
 			props.actions.setAdBlock({ enable_ad_block });
-			props.actions.setSmartBlocking({ enable_smart_blocking });
+			props.actions.setSmartBlocking({ enable_smart_block });
 			props.actions.setGhosteryRewards({ enable_ghostery_rewards });
 		}
 	}
@@ -69,8 +69,8 @@ class SetupAntiSuiteViewContainer extends Component {
 				break;
 			}
 			case 'smart-blocking': {
-				const enable_smart_blocking = !this.props.setup.enable_smart_blocking;
-				this.props.actions.setSmartBlocking({ enable_smart_blocking });
+				const enable_smart_block = !this.props.setup.enable_smart_block;
+				this.props.actions.setSmartBlocking({ enable_smart_block });
 				break;
 			}
 			case 'ghostery-rewards': {
@@ -90,7 +90,7 @@ class SetupAntiSuiteViewContainer extends Component {
 		const {
 			enable_anti_tracking,
 			enable_ad_block,
-			enable_smart_blocking,
+			enable_smart_block,
 			enable_ghostery_rewards,
 		} = this.props.setup;
 		const features = [
@@ -115,7 +115,7 @@ class SetupAntiSuiteViewContainer extends Component {
 			{
 				id: 'smart-blocking',
 				name: t('hub_setup_smartblocking_name_smartblocking'),
-				enabled: enable_smart_blocking,
+				enabled: enable_smart_block,
 				toggle: () => {
 					this._handleToggle('smart-blocking');
 				},
