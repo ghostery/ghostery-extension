@@ -133,6 +133,11 @@ class Rewards extends React.Component {
 	 * @return {JSX} JSX for the Rewards Header
 	 */
 	renderRewardsHeader() {
+		let reward;
+		const id = this.props.location.pathname.split('/detail/rewards/detail/')[1];
+		if (id && this.state.rewardsArray) {
+			reward = this.state.rewardsArray.find(el => el.id === id);
+		}
 		const { enable_offers, location } = this.props;
 		const showBack = location.pathname.indexOf('/detail/rewards/detail') !== -1;
 		const showToggle = location.pathname === '/detail/rewards/list';
@@ -165,6 +170,9 @@ class Rewards extends React.Component {
 						/>
 					</span>
 				)}
+				{!showToggle && reward &&
+					<img className="RewardDetail__logo" src={reward.logo_url} />
+				}
 			</div>
 		);
 	}
@@ -260,7 +268,6 @@ class Rewards extends React.Component {
 	renderRewardDetailComponent(routeProps) {
 		const { id } = routeProps.match.params;
 		const reward = this.state.rewardsArray.find(el => el.id === id);
-
 		return (
 			<RewardDetail
 				id={reward.id}
