@@ -58,9 +58,6 @@ class Globals {
 		this.AUTH_SERVER = `https://consumerapi.${this.GHOSTERY_DOMAIN}.com`;
 		this.ACCOUNT_SERVER = `https://accountapi.${this.GHOSTERY_DOMAIN}.com`;
 
-		// global message id for edge
-		this.MESSAGE_ID = 0;
-
 		// data stores
 		this.REDIRECT_MAP = new Map();
 		this.BLOCKED_REDIRECT_DATA = {};

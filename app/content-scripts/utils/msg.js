@@ -45,7 +45,7 @@ export default function (origin) {
 		if (IS_EDGE) {
 			return new Promise((resolve) => {
 				const messageId = MESSAGE_ID.toString();
-				MESSAGE_ID += 1;
+				MESSAGE_ID++;
 				if (!LISTENER_ADDED) {
 					LISTENER_ADDED = true;
 					onMessage.addListener((request, sender, sendResponse) => {
