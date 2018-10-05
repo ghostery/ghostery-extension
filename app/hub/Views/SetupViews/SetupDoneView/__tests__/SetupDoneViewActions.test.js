@@ -21,10 +21,10 @@ const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 const testData = { test: true };
-utils.sendMessageInPromise = jest.fn((name) => new Promise((resolve, reject) => {
+utils.sendMessageInPromise = jest.fn((name, message) => new Promise((resolve, reject) => {
 	switch (name) {
 		case SET_SETUP_COMPLETE: {
-			resolve(testData);
+			resolve(message);
 			break;
 		}
 		default: resolve(message);
@@ -39,7 +39,7 @@ describe('app/hub/Views/SetupViews/SetupDoneView actions', () => {
 		const data = testData;
 		const expectedPayload = { data, type: SET_SETUP_COMPLETE };
 
-		return store.dispatch(SetupDoneViewActions.setSetupComplete()).then(() => {
+		return store.dispatch(SetupDoneViewActions.setSetupComplete(data)).then(() => {
 			const actions = store.getActions();
 			expect(actions).toEqual([expectedPayload]);
 		});
