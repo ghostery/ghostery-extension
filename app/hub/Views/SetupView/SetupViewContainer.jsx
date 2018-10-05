@@ -26,6 +26,10 @@ import SetupAntiSuiteView from '../SetupViews/SetupAntiSuiteView';
 import SetupHumanWebView from '../SetupViews/SetupHumanWebView';
 import SetupDoneView from '../SetupViews/SetupDoneView';
 
+import globals from '../../../../src/classes/Globals';
+
+const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
+
 /**
  * @class Implement the Setup View for the Ghostery Hub
  * @extends Component
@@ -70,9 +74,11 @@ class SetupViewContainer extends Component {
 		this.props.actions.setBlockingPolicy({ blockingPolicy: BLOCKING_POLICY_RECOMMENDED });
 		this.props.actions.setAntiTracking({ enable_anti_tracking: true });
 		this.props.actions.setAdBlock({ enable_ad_block: true });
-		this.props.actions.setSmartBlocking({ enable_smart_blocking: true });
-		this.props.actions.setGhosteryRewards({ enable_ghostery_rewards: true });
-		this.props.actions.setHumanWeb({ enable_human_web: true });
+		this.props.actions.setSmartBlocking({ enable_smart_block: true });
+		if (!IS_EDGE) {
+			this.props.actions.setGhosteryRewards({ enable_ghostery_rewards: true });
+			this.props.actions.setHumanWeb({ enable_human_web: true });
+		}
 	}
 
 	/**
@@ -180,6 +186,17 @@ class SetupViewContainer extends Component {
 				},
 			},
 		];
+
+		if (IS_EDGE) {
+			const index = steps.findIndex(item => item.headerProps.title === t('hub_setup_header_title_humanweb'));
+			steps.splice(index, 1);
+			for (let i = index; i < steps.length; i++) {
+				const item = steps[i];
+				item.index -= 1;
+				item.path = `/setup/${item.index}`;
+			}
+		}
+
 		const extraRoutes = [
 			{
 				name: '1/custom',
@@ -235,7 +252,7 @@ SetupViewContainer.propTypes = {
 		blockingPolicy: PropTypes.string,
 		enable_anti_tracking: PropTypes.bool,
 		enable_ad_block: PropTypes.bool,
-		enable_smart_blocking: PropTypes.bool,
+		enable_smart_block: PropTypes.bool,
 		enable_ghostery_rewards: PropTypes.bool,
 		enable_human_web: PropTypes.bool,
 	}),
@@ -272,7 +289,7 @@ SetupViewContainer.defaultProps = {
 		blockingPolicy: BLOCKING_POLICY_RECOMMENDED,
 		enable_anti_tracking: true,
 		enable_ad_block: true,
-		enable_smart_blocking: true,
+		enable_smart_block: true,
 		enable_ghostery_rewards: true,
 		enable_human_web: true,
 	},

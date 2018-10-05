@@ -15,7 +15,7 @@ import { log, sendMessageInPromise } from '../../../utils';
 import {
 	SET_ANTI_TRACKING,
 	SET_AD_BLOCK,
-	SET_SMART_BLOCKING,
+	SET_SMART_BLOCK,
 	SET_GHOSTERY_REWARDS
 } from '../../SetupView/SetupViewConstants';
 
@@ -47,9 +47,9 @@ export function setAdBlock(actionData) {
 
 export function setSmartBlocking(actionData) {
 	return function (dispatch) {
-		return sendMessageInPromise(SET_SMART_BLOCKING, actionData).then((data) => {
+		return sendMessageInPromise(SET_SMART_BLOCK, actionData).then((data) => {
 			dispatch({
-				type: SET_SMART_BLOCKING,
+				type: SET_SMART_BLOCK,
 				data,
 			});
 		}).catch((err) => {
