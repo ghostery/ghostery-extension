@@ -276,13 +276,15 @@ class OfferCard extends Component {
 									</span>
 								</div>
 								<div className="flex-grow" />
-								<div className="reward-code">
-									<div>
-										{this.state.rewardUI.code}
-										<input readOnly className="reward-code-input" value={this.state.rewardUI.code} type="text" />
+								{ this.state.rewardUI.code &&
+									<div className="reward-code">
+										<div>
+											{this.state.rewardUI.code}
+											<input readOnly className="reward-code-input" value={this.state.rewardUI.code} type="text" />
+										</div>
+										<a onClick={this.copyCode}>{this.state.copyText}</a>
 									</div>
-									<a onClick={this.copyCode}>{this.state.copyText}</a>
-								</div>
+								}
 								<div className="reward-content-footer">
 									<span>
 										{ this.renderExpiresText() }
