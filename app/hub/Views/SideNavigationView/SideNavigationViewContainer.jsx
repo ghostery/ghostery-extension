@@ -16,6 +16,8 @@ import PropTypes from 'prop-types';
 import SideNavigationView from './SideNavigationView';
 import globals from '../../../../src/classes/Globals';
 
+const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
+
 /**
  * @class Implement the Side Navigation View for the Ghostery Hub
  * @extends Component
@@ -53,8 +55,12 @@ class SideNavigationViewContainer extends Component {
 			{ href: '/tutorial', icon: 'tutorial', text: t('hub_side_navigation_tutorial') },
 			{ href: '/plus', icon: 'plus', text: t('hub_side_navigation_supporter') },
 			{ href: '/rewards', icon: 'rewards', text: t('hub_side_navigation_rewards') },
-			{ href: '/products', icon: 'products', text: t('hub_side_navigation_products') },
+			{ href: '/products', icon: 'products', text: t('hub_side_navigation_products') }
 		];
+		if (IS_EDGE) {
+			menuItems.splice(menuItems.findIndex(item => item.href === '/rewards'), 1);
+		}
+
 		const bottomItems = user ? [
 			{ id: 'email', href: `https://account.${globals.GHOSTERY_DOMAIN}.com/`, text: user.email },
 			{ id: 'logout', text: t('hub_side_navigation_log_out'), clickHandler: this._handleLogoutClick },
