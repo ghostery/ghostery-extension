@@ -96,6 +96,7 @@ class RewardDetail extends React.Component {
 			code,
 			text,
 			description,
+			benefit,
 			conditions,
 			logoUrl,
 			pictureUrl,
@@ -108,6 +109,11 @@ class RewardDetail extends React.Component {
 					<img className="RewardDetail__logo" src={logoUrl} />
 					<div className="RewardDetail__picture" style={{ backgroundImage: `url('${pictureUrl}')` }} />
 				</div>
+				{benefit && (
+					<div className="RewardDetail__benefit">
+						{ benefit }
+					</div>
+				)}
 				{text && (
 					<div className="RewardDetail__title">
 						{ text }

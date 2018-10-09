@@ -189,19 +189,30 @@
 	width: auto;
 	margin: 16px 17px;
 }
-.RewardDetail__title {
-	margin: 0 17px;
-	font-size: 18px;
+.RewardDetail__benefit {
+	margin: 0 27px;
+	font-size: 16px;
+	font-weight: bold;
 	line-height: 24px;
 	max-height: 48px;
 	color: #4a4a4a;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
-.RewardDetail__description {
+.RewardDetail__title {
 	margin: 0 17px;
-	font-size: 13px;
-	line-height: 18px;
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 1.27;
+	max-height: 48px;
+	color: #4a4a4a;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.RewardDetail__description {
+	margin: 0 17px 5px 17px;
+	font-size: 12px;
+	line-height: 1.27;
 	max-height: 36px;
 	color: #4a4a4a;
 }
@@ -256,7 +267,6 @@
 	font-size: 14px;
 	font-weight: 600;
 	text-align: center;
-	margin: 0 17px 8px;
 	padding: 10px;
 	text-transform: uppercase;
 	white-space: nowrap;
