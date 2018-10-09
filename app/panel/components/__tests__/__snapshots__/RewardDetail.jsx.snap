@@ -7,10 +7,6 @@ exports[`app/panel/components/BuildingBlocks/RewardDetail.jsx Snapshot tests wit
   <div
     className="RewardDetail__image_container"
   >
-    <img
-      className="RewardDetail__logo"
-      src="https://www.ghostery.com/wp-content/themes/ghostery/images/ghostery_logo.svg"
-    />
     <div
       className="RewardDetail__picture"
       style={
@@ -86,10 +82,6 @@ exports[`app/panel/components/BuildingBlocks/RewardDetail.jsx Snapshot tests wit
   <div
     className="RewardDetail__image_container"
   >
-    <img
-      className="RewardDetail__logo"
-      src="https://www.ghostery.com/wp-content/themes/ghostery/images/ghostery_logo.svg"
-    />
     <div
       className="RewardDetail__picture"
       style={
@@ -144,10 +136,6 @@ exports[`app/panel/components/BuildingBlocks/RewardDetail.jsx Snapshot tests wit
   <div
     className="RewardDetail__image_container"
   >
-    <img
-      className="RewardDetail__logo"
-      src="https://www.ghostery.com/wp-content/themes/ghostery/images/ghostery_logo.svg"
-    />
     <div
       className="RewardDetail__picture"
       style={
@@ -215,10 +203,6 @@ exports[`app/panel/components/BuildingBlocks/RewardDetail.jsx Snapshot tests wit
   <div
     className="RewardDetail__image_container"
   >
-    <img
-      className="RewardDetail__logo"
-      src="https://www.ghostery.com/wp-content/themes/ghostery/images/ghostery_logo.svg"
-    />
     <div
       className="RewardDetail__picture"
       style={
@@ -290,10 +274,6 @@ exports[`app/panel/components/BuildingBlocks/RewardDetail.jsx Snapshot tests wit
   <div
     className="RewardDetail__image_container"
   >
-    <img
-      className="RewardDetail__logo"
-      src="https://www.ghostery.com/wp-content/themes/ghostery/images/ghostery_logo.svg"
-    />
     <div
       className="RewardDetail__picture"
       style={

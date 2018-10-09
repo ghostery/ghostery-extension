@@ -97,7 +97,6 @@ class RewardDetail extends React.Component {
 			text,
 			description,
 			conditions,
-			logoUrl,
 			pictureUrl,
 			redeemText
 		} = this.props;
@@ -105,7 +104,6 @@ class RewardDetail extends React.Component {
 		return (
 			<div className="RewardDetail flex-container flex-dir-column align-justify">
 				<div className="RewardDetail__image_container">
-					<img className="RewardDetail__logo" src={logoUrl} />
 					<div className="RewardDetail__picture" style={{ backgroundImage: `url('${pictureUrl}')` }} />
 				</div>
 				{text && (
