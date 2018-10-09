@@ -92,8 +92,7 @@ class Rewards extends React.Component {
 	/**
 	 * Handles clicking the back button
 	 */
-	handleBackClick() {
-		const offerId = this.props.location.pathname.split('/detail/rewards/detail/')[1];
+	handleBackClick(offerId) {
 		this.props.actions.sendSignal('offer_return_hub', offerId);
 	}
 
@@ -132,9 +131,9 @@ class Rewards extends React.Component {
 	 * Helper render function for the Rewards Header
 	 * @return {JSX} JSX for the Rewards Header
 	 */
-	renderRewardsHeader() {
+	renderRewardsHeader = (routeProps) => {
 		let reward;
-		const id = this.props.location.pathname.split('/detail/rewards/detail/')[1];
+		const { id } = routeProps.match.params;
 		if (id && this.state.rewardsArray) {
 			reward = this.state.rewardsArray.find(el => el.id === id);
 		}
@@ -151,7 +150,7 @@ class Rewards extends React.Component {
 		return (
 			<div className={headerClassNames}>
 				{showBack && (
-					<Link to="/detail/rewards/list" className="RewardPanel__back flex-container clickable" onClick={this.handleBackClick}>
+					<Link to="/detail/rewards/list" className="RewardPanel__back flex-container clickable" onClick={() => { this.handleBackClick(id); }}>
 						<svg height="16" width="10" fillRule="evenodd">
 							<path d="M10 1.833L8.108 0 0 7.857l8.108 7.857L10 13.881 3.784 7.857z" />
 						</svg>
@@ -292,7 +291,7 @@ class Rewards extends React.Component {
 	render() {
 		return (
 			<div className="RewardsPanel">
-				{this.renderRewardsHeader()}
+				<Route path="/detail/rewards/(list|detail)/:id?" render={this.renderRewardsHeader} />
 				<Route path="/detail/rewards/list" render={this.renderRewardListComponent} />
 				<Route path="/detail/rewards/detail/:id" render={this.renderRewardDetailComponent} />
 			</div>
