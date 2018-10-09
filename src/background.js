@@ -134,16 +134,17 @@ function autoUpdateBugDb() {
 function setGhosteryDefaultBlocking() {
 	log('Blocking all apps in categories:', 'advertising', 'pornvertising', 'site_analytics');
 	const categoriesBlock = ['advertising', 'pornvertising', 'site_analytics'];
-	conf.selected_app_ids = {};
+	const selected_app_ids = {};
 	for (const app_id in bugDb.db.apps) {
 		if (bugDb.db.apps.hasOwnProperty(app_id)) {
 			const category = bugDb.db.apps[app_id].cat;
 			if (categoriesBlock.indexOf(category) >= 0 &&
-			!conf.selected_app_ids.hasOwnProperty(app_id)) {
-				conf.selected_app_ids[app_id] = 1;
+			!selected_app_ids.hasOwnProperty(app_id)) {
+				selected_app_ids[app_id] = 1;
 			}
 		}
 	}
+	panelData.set({ selected_app_ids });
 }
 
 /**
@@ -524,20 +525,8 @@ function handleGhosteryHub(name, message, callback) {
 			});
 			break;
 		}
-		case 'SET_METRICS': {
-			const { enable_metrics } = message;
-			conf.enable_metrics = enable_metrics;
-			callback({ enable_metrics });
-			break;
-		}
 		case 'GET_SETUP_SHOW_WARNING_OVERRIDE': {
 			const { setup_show_warning_override } = conf;
-			callback({ setup_show_warning_override });
-			break;
-		}
-		case 'SET_SETUP_SHOW_WARNING_OVERRIDE': {
-			const { setup_show_warning_override } = message;
-			conf.setup_show_warning_override = setup_show_warning_override;
 			callback({ setup_show_warning_override });
 			break;
 		}
@@ -549,20 +538,22 @@ function handleGhosteryHub(name, message, callback) {
 					break;
 				}
 				case 'BLOCKING_POLICY_NOTHING': {
-					conf.selected_app_ids = {};
+					const selected_app_ids = {};
+					panelData.set({ selected_app_ids });
 					break;
 				}
 				case 'BLOCKING_POLICY_EVERYTHING': {
-					conf.selected_app_ids = {};
+					const selected_app_ids = {};
 					for (const app_id in bugDb.db.apps) {
-						if (!conf.selected_app_ids.hasOwnProperty(app_id)) {
-							conf.selected_app_ids[app_id] = 1;
+						if (!selected_app_ids.hasOwnProperty(app_id)) {
+							selected_app_ids[app_id] = 1;
 						}
 					}
+					panelData.set({ selected_app_ids });
 					break;
 				}
 				case 'BLOCKING_POLICY_CUSTOM': {
-					// Blocking app_ids will be handled by Global Blocking blocking.js
+					// Blocking app_ids is handled by Global Blocking blocking.js
 					break;
 				}
 				default: break;
@@ -570,46 +561,35 @@ function handleGhosteryHub(name, message, callback) {
 			callback({ blockingPolicy });
 			break;
 		}
-		case 'SET_ANTI_TRACKING': {
-			const { enable_anti_tracking } = message;
-			conf.enable_anti_tracking = enable_anti_tracking;
-			callback({ enable_anti_tracking });
-			break;
-		}
-		case 'SET_AD_BLOCK': {
-			const { enable_ad_block } = message;
-			conf.enable_ad_block = enable_ad_block;
-			callback({ enable_ad_block });
-			break;
-		}
-		case 'SET_SMART_BLOCKING': {
-			const { enable_smart_blocking } = message;
-			conf.enable_smart_block = enable_smart_blocking;
-			callback({ enable_smart_blocking });
-			break;
-		}
 		case 'SET_GHOSTERY_REWARDS': {
 			const { enable_ghostery_rewards } = message;
-			conf.enable_offers = enable_ghostery_rewards;
+			if (!offers.isEnabled && enable_ghostery_rewards === true) {
+				OFFERS_ENABLE_SIGNAL = {
+					actionId: 'rewards_on',
+					origin: 'ghostery-setup-flow',
+					type: 'action-signal',
+				};
+			} else if (enable_ghostery_rewards === false) {
+				rewards.sendSignal({
+					actionId: 'rewards_off',
+					origin: 'ghostery-setup-flow',
+					type: 'action-signal',
+				});
+			}
+			panelData.set({ enable_offers: enable_ghostery_rewards });
 			callback({ enable_ghostery_rewards });
 			break;
 		}
-		case 'SET_HUMAN_WEB': {
-			const { enable_human_web } = message;
-			conf.enable_human_web = enable_human_web;
-			callback({ enable_human_web });
-			break;
-		}
-		case 'SET_SETUP_COMPLETE': {
-			const setup_complete = true;
-			conf.setup_complete = setup_complete;
-			callback({ setup_complete });
-			break;
-		}
+		case 'SET_METRICS':
+		case 'SET_SETUP_SHOW_WARNING_OVERRIDE':
+		case 'SET_ANTI_TRACKING':
+		case 'SET_AD_BLOCK':
+		case 'SET_SMART_BLOCK':
+		case 'SET_HUMAN_WEB':
+		case 'SET_SETUP_COMPLETE':
 		case 'SET_TUTORIAL_COMPLETE': {
-			const tutorial_complete = true;
-			conf.tutorial_complete = tutorial_complete;
-			callback({ tutorial_complete });
+			panelData.set(message);
+			callback(message);
 			break;
 		}
 		default: break;

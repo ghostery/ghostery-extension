@@ -14,6 +14,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import SetupAntiSuiteView from './SetupAntiSuiteView';
+import globals from '../../../../../src/classes/Globals';
+
+const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 
 /**
  * @class Implement the Setup Anti-Suite View for the Ghostery Hub
@@ -42,13 +45,15 @@ class SetupAntiSuiteViewContainer extends Component {
 			const {
 				enable_anti_tracking,
 				enable_ad_block,
-				enable_smart_blocking,
+				enable_smart_block,
 				enable_ghostery_rewards,
 			} = setup;
 			props.actions.setAntiTracking({ enable_anti_tracking });
 			props.actions.setAdBlock({ enable_ad_block });
-			props.actions.setSmartBlocking({ enable_smart_blocking });
-			props.actions.setGhosteryRewards({ enable_ghostery_rewards });
+			props.actions.setSmartBlocking({ enable_smart_block });
+			if (!IS_EDGE) {
+				props.actions.setGhosteryRewards({ enable_ghostery_rewards });
+			}
 		}
 	}
 
@@ -69,13 +74,15 @@ class SetupAntiSuiteViewContainer extends Component {
 				break;
 			}
 			case 'smart-blocking': {
-				const enable_smart_blocking = !this.props.setup.enable_smart_blocking;
-				this.props.actions.setSmartBlocking({ enable_smart_blocking });
+				const enable_smart_block = !this.props.setup.enable_smart_block;
+				this.props.actions.setSmartBlocking({ enable_smart_block });
 				break;
 			}
 			case 'ghostery-rewards': {
 				const enable_ghostery_rewards = !this.props.setup.enable_ghostery_rewards;
-				this.props.actions.setGhosteryRewards({ enable_ghostery_rewards });
+				if (!IS_EDGE) {
+					this.props.actions.setGhosteryRewards({ enable_ghostery_rewards });
+				}
 				break;
 			}
 			default: break;
@@ -90,7 +97,7 @@ class SetupAntiSuiteViewContainer extends Component {
 		const {
 			enable_anti_tracking,
 			enable_ad_block,
-			enable_smart_blocking,
+			enable_smart_block,
 			enable_ghostery_rewards,
 		} = this.props.setup;
 		const features = [
@@ -115,7 +122,7 @@ class SetupAntiSuiteViewContainer extends Component {
 			{
 				id: 'smart-blocking',
 				name: t('hub_setup_smartblocking_name_smartblocking'),
-				enabled: enable_smart_blocking,
+				enabled: enable_smart_block,
 				toggle: () => {
 					this._handleToggle('smart-blocking');
 				},
@@ -131,6 +138,10 @@ class SetupAntiSuiteViewContainer extends Component {
 				description: t('hub_setup_ghosteryrewards_description_rewards'),
 			},
 		];
+
+		if (IS_EDGE) {
+			features.splice(features.findIndex(item => item.id === 'ghostery-rewards'), 1);
+		}
 
 		return <SetupAntiSuiteView features={features} />;
 	}
