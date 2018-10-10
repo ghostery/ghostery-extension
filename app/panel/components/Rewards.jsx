@@ -68,6 +68,7 @@ class Rewards extends React.Component {
 					code: reward.ui_info.template_data.code,
 					text: reward.ui_info.template_data.title,
 					description: reward.ui_info.template_data.desc,
+					benefit: reward.ui_info.template_data.benefit,
 					conditions: reward.ui_info.template_data.conditions,
 					logo_url: reward.ui_info.template_data.logo_url,
 					picture_url: reward.ui_info.template_data.picture_url,
@@ -273,6 +274,7 @@ class Rewards extends React.Component {
 				code={reward.code}
 				text={reward.text}
 				description={reward.description}
+				benefit={reward.benefit}
 				conditions={reward.conditions}
 				logoUrl={reward.logo_url}
 				pictureUrl={reward.picture_url}
