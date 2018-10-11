@@ -48,7 +48,7 @@ class SetupAntiSuiteViewContainer extends Component {
 				enable_smart_block,
 				enable_ghostery_rewards,
 			} = setup;
-			props.actions.setSetupStep({ setup_step: 1 });
+			props.actions.setSetupStep({ setup_step: 9 });
 			props.actions.setAntiTracking({ enable_anti_tracking });
 			props.actions.setAdBlock({ enable_ad_block });
 			props.actions.setSmartBlocking({ enable_smart_block });

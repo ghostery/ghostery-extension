@@ -50,7 +50,7 @@ class SetupViewContainer extends Component {
 		const title = t('hub_setup_page_title');
 		window.document.title = title;
 
-		this.props.actions.setSetupStep({ setup_step: -1 });
+		this.props.actions.setSetupStep({ setup_step: 7 });
 		this.props.actions.initSetupProps(this.props.setup);
 		this.props.actions.getSetupShowWarningOverride().then((data) => {
 			const { setup_show_warning_override } = data;

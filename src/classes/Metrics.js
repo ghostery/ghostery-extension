@@ -127,7 +127,7 @@ class Metrics {
 				this._recordActive();
 				break;
 			case 'engaged':
-				this._sendReq('engaged', ['daily', 'weekly', 'monthly']);
+				this._recordEngaged();
 				break;
 
 			// Extension Usage
@@ -264,7 +264,7 @@ class Metrics {
 			// Random number, assigned at install (former install_rand)
 			`&ir=${encodeURIComponent(conf.install_random_number)}` +
 			// Login state (former signed_in)
-			`&sn=${encodeURIComponent(this._getSignedInState().toString())}` +
+			`&sn=${encodeURIComponent(conf.login_info.logged_in ? '1' : '0')}` +
 			// Date of install (former install_date)
 			`&id=${encodeURIComponent(conf.install_date)}` +
 			// Noncritical ping (former noncritical)
@@ -286,34 +286,23 @@ class Metrics {
 			// The deepest setup page reached by user during setup
 			`&ss=${encodeURIComponent((conf.metrics.install_complete_all || type === 'install_complete') ? conf.setup_step.toString() : '-1')}` +
 			// The number of times the user has gone through setup
-			`&sp=${encodeURIComponent(conf.setup_number.toString())}` +
+			`&sl=${encodeURIComponent(conf.setup_number.toString())}` +
 			// Type of blocking selected during setup
 			`&sb=${encodeURIComponent(conf.setup_block.toString())}` +
 			// Recency, days since last active daily ping
-			`&rc=${encodeURIComponent(this._getRecency(type, frequency).toString())}` +
+			`&rc=${encodeURIComponent(this._getRecencyActive(type, frequency).toString())}` +
 			// Current number of rewards received
 			`&rr=${encodeURIComponent(this._getRewardsCount().toString())}` +
 
 			// New parameters to Ghostery 8.3
 			// Active Velocity
-			`&va=${encodeURIComponent(this._getRealData().toString())}` +
+			`&va=${encodeURIComponent(this._getVelocityActive().toString())}` +
 			// Engaged Recency
-			`&re=${encodeURIComponent(this._getRealData().toString())}` +
+			`&re=${encodeURIComponent(this._getRecencyEngaged(type, frequency).toString())}` +
 			// Engaged Velocity
-			`&ve=${encodeURIComponent(this._getRealData().toString())}` +
-			// Shared Ghostery
-			`&sg=${encodeURIComponent(this._getRealData().toString())}` +
-			// Account Type
-			`&ac=${encodeURIComponent(this._getRealData().toString())}` +
+			`&ve=${encodeURIComponent(this._getVelocityEngaged().toString())}` +
 			// Theme
-			`&th=${encodeURIComponent(this._getRealData().toString())}`;
-
-		if (type === 'broken_page') {
-			// only send broken page url when necessary
-			metrics_url +=
-			// Broken URL
-			`&bu=${encodeURIComponent(this._getRealData().toString())}`;
-		}
+			`&th=${encodeURIComponent(conf.current_theme.toString())}`;
 
 		if (CAMPAIGN_METRICS.includes(type)) {
 			// only send campaign attribution when necessary
@@ -384,30 +373,50 @@ class Metrics {
 		});
 	}
 	/**
-	 * Get the Signed in state.
-	 *
-	 * @private
-	 *
-	 * @return {number} 	number representing signed in state
-	 */
-	_getSignedInState() {
-		if (!conf.account) {
-			return 0;
-		}
-		return 1;
-	}
-	/**
 	 * Calculate days since the last daily active ping.
 	 *
 	 * @private
 	 *
 	 * @return {number} 	in days since the last daily active ping
 	 */
-	_getRecency(type, frequency) {
+	_getRecencyActive(type, frequency) {
 		if (conf.metrics.active_daily && type === 'active' && frequency === 'daily') {
 			return Math.floor((Number(new Date().getTime()) - conf.metrics.active_daily) / 86400000);
 		}
 		return -1;
+	}
+	/**
+	 * Calculate days since the last daily engaged ping.
+	 *
+	 * @private
+	 *
+	 * @return {number} 	in days since the last daily engaged ping
+	 */
+	_getRecencyEngaged(type, frequency) {
+		if (conf.metrics.engaged_daily && type === 'engaged' && frequency === 'daily') {
+			return Math.floor((Number(new Date().getTime()) - conf.metrics.engaged_daily) / 86400000);
+		}
+		return -1;
+	}
+	/**
+	 * Get the Active Velocity
+	 * @private
+	 * @return {number}  The Active Velocity
+	 */
+	_getVelocityActive() {
+		const active_daily_velocity = conf.metrics.active_daily_velocity || [];
+		const today = Math.floor(Number(new Date().getTime()) / 86400000);
+		return active_daily_velocity.filter(el => el > today - 7).length;
+	}
+	/**
+	 * Get the Engaged Velocity
+	 * @private
+	 * @return {number}  The Engaged Velocity
+	 */
+	_getVelocityEngaged() {
+		const engaged_daily_velocity = conf.metrics.engaged_daily_velocity || [];
+		const today = Math.floor(Number(new Date().getTime()) / 86400000);
+		return engaged_daily_velocity.filter(el => el > today - 7).length;
 	}
 	/**
 	 * Replace with real functions and real data.
@@ -539,6 +548,17 @@ class Metrics {
 	 * @private
 	 */
 	_recordActive() {
+		const active_daily_velocity = conf.metrics.active_daily_velocity || [];
+		const today = Math.floor(Number(new Date().getTime()) / 86400000);
+		active_daily_velocity.sort();
+		if (!active_daily_velocity.includes(today)) {
+			active_daily_velocity.push(today);
+			if (active_daily_velocity.length > 7) {
+				active_daily_velocity.shift();
+			}
+		}
+		conf.metrics.active_daily_velocity = active_daily_velocity;
+
 		const daily = this._timeToExpired('active', 'daily');
 		if (daily > 0) {
 			setTimeout(() => {
@@ -588,6 +608,25 @@ class Metrics {
 			this._sendReq('active', ['monthly']);
 			this._repeat();
 		}
+	}
+
+	/**
+	 * Record Engaged event
+	 * @private
+	 */
+	_recordEngaged() {
+		const engaged_daily_velocity = conf.metrics.engaged_daily_velocity || [];
+		const today = Math.floor(Number(new Date().getTime()) / 86400000);
+		engaged_daily_velocity.sort();
+		if (!engaged_daily_velocity.includes(today)) {
+			engaged_daily_velocity.push(today);
+			if (engaged_daily_velocity.length > 7) {
+				engaged_daily_velocity.shift();
+			}
+		}
+		conf.metrics.engaged_daily_velocity = engaged_daily_velocity;
+
+		this._sendReq('engaged', ['daily', 'weekly', 'monthly']);
 	}
 
 	/**

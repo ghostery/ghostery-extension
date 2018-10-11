@@ -39,7 +39,7 @@ class SetupDoneViewContainer extends Component {
 		});
 
 		if (sendMountActions) {
-			props.actions.setSetupStep({ setup_step: 3 });
+			props.actions.setSetupStep({ setup_step: 11 });
 			props.actions.setSetupComplete({
 				setup_complete: true,
 			});

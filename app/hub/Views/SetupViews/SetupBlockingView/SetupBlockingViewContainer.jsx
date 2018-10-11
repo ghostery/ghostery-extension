@@ -47,7 +47,7 @@ class SetupBlockingViewContainer extends Component {
 		if (sendMountActions) {
 			const { blockingPolicy } = setup;
 			props.actions.setBlockingPolicy({ blockingPolicy });
-			props.actions.setSetupStep({ setup_step: 0 });
+			props.actions.setSetupStep({ setup_step: 8 });
 		}
 	}
 

@@ -40,7 +40,7 @@ class SetupHumanWebViewContainer extends Component {
 
 		if (sendMountActions) {
 			const { enable_human_web } = setup;
-			props.actions.setSetupStep({ setup_step: 2 });
+			props.actions.setSetupStep({ setup_step: 10 });
 			props.actions.setHumanWeb({ enable_human_web });
 		}
 	}
