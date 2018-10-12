@@ -132,7 +132,7 @@ class SetupViewContainer extends Component {
 					</div>
 					<div className="flex-container align-center-middle">
 						<ToggleCheckbox checked={!setup_show_warning_override} onChange={this._toggleCheckbox} />
-						<div className="SetupModal__checkboxText" onClick={this._toggleCheckbox}>
+						<div className="SetupModal__checkboxText clickable" onClick={this._toggleCheckbox}>
 							{t('hub_setup_modal_button_ask_again')}
 						</div>
 					</div>
