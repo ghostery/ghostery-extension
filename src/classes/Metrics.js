@@ -264,7 +264,7 @@ class Metrics {
 			// Random number, assigned at install (former install_rand)
 			`&ir=${encodeURIComponent(conf.install_random_number)}` +
 			// Login state (former signed_in)
-			`&sn=${encodeURIComponent(conf.login_info.logged_in ? '1' : '0')}` +
+			`&sn=${encodeURIComponent(conf.account ? '1' : '0')}` +
 			// Date of install (former install_date)
 			`&id=${encodeURIComponent(conf.install_date)}` +
 			// Noncritical ping (former noncritical)
@@ -295,6 +295,10 @@ class Metrics {
 			`&rr=${encodeURIComponent(this._getRewardsCount().toString())}` +
 
 			// New parameters to Ghostery 8.3
+			// Subscription Type
+			`&st=${encodeURIComponent(this._getSubscriptionType().toString())}` +
+			// Subscription Status
+			`&su=${encodeURIComponent(this._getSubscriptionStatus().toString())}` +
 			// Active Velocity
 			`&va=${encodeURIComponent(this._getVelocityActive().toString())}` +
 			// Engaged Recency
@@ -417,6 +421,34 @@ class Metrics {
 		const engaged_daily_velocity = conf.metrics.engaged_daily_velocity || [];
 		const today = Math.floor(Number(new Date().getTime()) / 86400000);
 		return engaged_daily_velocity.filter(el => el > today - 7).length;
+	}
+	/**
+	 * Get the Subscription Type
+	 * @return {string} Subscription Name
+	 */
+	_getSubscriptionType() {
+		if (!conf.account) {
+			return -1;
+		}
+		const subscriptions = conf.account.subscriptionData && conf.account.subscriptionData.subscriptions;
+		if (!subscriptions) {
+			return -1;
+		}
+		return subscriptions.productName.toUpperCase().replace(' ', '_');
+	}
+	/**
+	 * Get the Subscription Status
+	 * @return {number} 0 or 1 for whether the subscription will auto-renew
+	 */
+	_getSubscriptionStatus() {
+		if (!conf.account) {
+			return -1;
+		}
+		const subscriptions = conf.account.subscriptionData && conf.account.subscriptionData.subscriptions;
+		if (!subscriptions) {
+			return -1;
+		}
+		return (subscriptions.cancelAtPeriodEnd) ? 0 : 1;
 	}
 	/**
 	 * Replace with real functions and real data.
