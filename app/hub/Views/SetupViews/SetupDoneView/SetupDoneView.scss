@@ -41,12 +41,13 @@
 	margin: 0 auto;
 	background-repeat: no-repeat;
 	background-position: center center;
+	background-size: contain;
 }
 .SetupDone__feature_icon.feature-tutorial {
 	background-image: buildFeatureTutorialIcon(#4a4a4a);
 }
 .SetupDone__feature_icon.feature-supporter {
-	background-image: buildFeatureSupporterIcon(#4a4a4a);
+	background-image: buildFeaturePlusIcon(#4a4a4a);
 }
 .SetupDone__feature_icon.feature-products {
 	background-image: buildFeatureProductsIcon(#4a4a4a);

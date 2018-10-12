@@ -65,26 +65,24 @@
 				div {
 					display: inline-flex;
 				}
-			} 
+			}
 		}
 		.base-badge {
 			@extend %pointer;
-			width: 29px;
-			height: 20px;
+			width: 38px;
+			height: 36px;
 			display: block;
 			margin-left: 10px;
 		}
 		.subscriber-badge {
 			@extend .base-badge;
-			path {
-				fill: $white;
-			}
+			path {fill: $white;}
+			path.text {fill: $ghosty-blue;}
 		}
 		.non-subscriber-badge {
 			@extend .base-badge;
-			path {
-				fill: $gold; 
-			} 
+			path {fill: #d3af36;}
+			path.text {fill: #ffffff;}
 		}
 		.header-kebab {
 			@extend %pointer;
@@ -120,16 +118,15 @@
 				top: 50%;
 				transform: translateY(-50%);
 			}
-			.menu-icon {fill: $light-gray; stroke:  $light-gray;}
+			.menu-icon {fill: $light-gray; stroke: none;}
 			.about-icon {
 				fill: none;
 				path {
 					stroke: $light-gray;
 					stroke-width: 2;
 				}
-				text {
-					font-size: 11px;
-					font-weight:400;
+				path.text {
+					stroke-width: 0;
 					fill: $light-gray;
 				}
 			}
@@ -154,22 +151,21 @@
 		.menu-option {
 			@extend .menu-option-base;
 			.subscriber {
-				width: 23px;
+				width: 18px;
 				height: 16px;
-				path {
-					stroke: $light-gray;
-				}
+				path {fill: $light-gray;}
+				path.text {fill: #4a4a4a;}
 			}
 			&:hover {
 				span {color: $ghosty-blue}
-				.menu-icon {fill: $ghosty-blue; stroke: $ghosty-blue;}
-				.subscriber {
-					path {
-						stroke: $ghosty-blue;
-					}
+				.menu-icon {fill: $ghosty-blue; stroke: none;}
+				.subscriber .about-icon {
+					path {fill: $ghosty-blue;}
+					path.text {fill: #4a4a4a;}
 				}
 				.about-icon {
-					path, text {stroke: $ghosty-blue;}
+					path {stroke: $ghosty-blue;}
+					path.text {fill: $ghosty-blue;}
 				}
 			}
 			span {
@@ -180,17 +176,15 @@
 		.menu-option-non-subscriber {
 			@extend .menu-option-base;
 			.non-subscriber {
-				width: 23px;
+				width: 18px;
 				height: 16px;
-				path {
-					stroke: $gold;
-				}
+				path {fill: $gold;}
+				path.text {fill: #4a4a4a;}
 			}
 			&:hover {
 				.non-subscriber {
-					path {
-						stroke: $bright-gold;
-					}
+					path {fill: $bright-gold;}
+					path.text {fill: #4a4a4a;}
 				}
 				span {color: $bright_gold}
 			}

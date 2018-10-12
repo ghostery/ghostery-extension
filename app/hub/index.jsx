@@ -41,7 +41,7 @@ const Hub = () => (
 		<Route exact path="/" component={HomeView} />
 		<Route path="/setup" component={SetupView} />
 		<Route path="/tutorial" component={TutorialView} />
-		<Route exact path="/supporter" component={SupporterView} />
+		<Route exact path="/plus" component={SupporterView} />
 		<Route exact path="/rewards" component={RewardsView} />
 		<Route exact path="/products" component={ProductsView} />
 		<Route exact path="/create-account" component={CreateAccountView} />
