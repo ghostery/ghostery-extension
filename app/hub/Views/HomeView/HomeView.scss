@@ -98,7 +98,11 @@
 	background-image: buildIconClipboardCheck(#4a4a4a, #daf4ff, #1dafed);
 }
 .HomeView__featureIcon.feature-supporter {
-	background-image: buildIconFlag(#4a4a4a, #daf4ff);
+	position: relative;
+	top: -26px;
+	height: 46px;
+	background-image: buildIconGhosteryPlus(#4a4a4a, #daf4ff);
+	background-size: contain;
 }
 .HomeView__featureTitle {
 	text-align: center;
