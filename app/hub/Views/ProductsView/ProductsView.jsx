@@ -85,7 +85,7 @@ const ProductsView = props => (
 				<div className="ProductsView__secondaryPromoDescription">
 					{t('hub_products_third_promo_description')}
 				</div>
-				<div className="ProductsView__storeImageContainer">
+				<div className="ProductsView__storeImageContainer hide">
 					<a href="https://itunes.apple.com/us/app/ghostery-privacy-browser/id472789016?mt=81" onClick={props.onLiteClick} target="_blank" rel="noopener noreferrer">
 						<img
 							className="ProductsView__imageAppStoreMac"
