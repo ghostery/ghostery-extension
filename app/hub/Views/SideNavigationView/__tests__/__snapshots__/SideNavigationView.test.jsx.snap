@@ -100,12 +100,12 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
       <a
         aria-current={null}
         className="flex-container align-middle"
-        href="/supporter"
+        href="/plus"
         onClick={[Function]}
         style={undefined}
       >
         <div
-          className="SideNavigation__menuIcon supporter"
+          className="SideNavigation__menuIcon plus"
         />
         <div
           className="SideNavigation__menuText"
@@ -290,12 +290,12 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
       <a
         aria-current={null}
         className="flex-container align-middle disabled"
-        href="/supporter"
+        href="/plus"
         onClick={[Function]}
         style={undefined}
       >
         <div
-          className="SideNavigation__menuIcon supporter"
+          className="SideNavigation__menuIcon plus"
         />
         <div
           className="SideNavigation__menuText"

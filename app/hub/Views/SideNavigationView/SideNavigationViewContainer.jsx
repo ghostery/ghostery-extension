@@ -53,7 +53,7 @@ class SideNavigationViewContainer extends Component {
 			{ href: '/', icon: 'home', text: t('hub_side_navigation_home') },
 			{ href: '/setup', icon: 'setup', text: t('hub_side_navigation_setup') },
 			{ href: '/tutorial', icon: 'tutorial', text: t('hub_side_navigation_tutorial') },
-			{ href: '/supporter', icon: 'supporter', text: t('hub_side_navigation_supporter') },
+			{ href: '/plus', icon: 'plus', text: t('hub_side_navigation_supporter') },
 			{ href: '/rewards', icon: 'rewards', text: t('hub_side_navigation_rewards') },
 			{ href: '/products', icon: 'products', text: t('hub_side_navigation_products') }
 		];
