@@ -68,7 +68,7 @@ const SupporterView = (props) => {
 					</div>
 				</div>
 			</div>
-			<div className="SupporterView--addPaddingTop row align-center">
+			<div className="SupporterView--addPaddingTop row small-up-1 medium-up-1 large-up-3 align-center">
 				<div className="SupporterView__perk columns text-center">
 					<div className="SupporterView__perkIcon themes" />
 					<div className="SupporterView__perkTitle">
@@ -105,7 +105,7 @@ const SupporterView = (props) => {
 				</div>
 			</div>
 			<div className="SupporterView--addPaddingTop SupporterView--addPaddingBottom">
-				<div className="row">
+				<div className="row small-up-1 medium-up-1 large-up-3">
 					<div className="SupporterView__feature columns small-12 medium-4 medium-offset-1">
 						<div className="SupporterView__headingTitle SupporterView--addPaddingTop">
 							{t('hub_supporter_feature_theme_title')}
@@ -125,7 +125,7 @@ const SupporterView = (props) => {
 				</div>
 			</div>
 			<div className="SupporterView--addPaddingTop SupporterView--addPaddingBottom SupporterView--rowDarken">
-				<div className="row align-middle">
+				<div className="row align-middle small-up-1 medium-up-1 large-up-3">
 					<div className="SupporterView__feature columns small-12 medium-4 medium-offset-1">
 						<img
 							className="SupporterView__featureImage support"
