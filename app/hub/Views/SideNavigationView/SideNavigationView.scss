@@ -136,9 +136,9 @@ a .SideNavigation__menuIcon.tutorial,
 a.disabled.active .SideNavigation__menuIcon.tutorial {
 	background-image: buildIconTutorial(#ffffff);
 }
-a .SideNavigation__menuIcon.supporter,
-a.disabled.active .SideNavigation__menuIcon.supporter {
-	background-image: buildIconSupporter(#ffffff);
+a .SideNavigation__menuIcon.plus,
+a.disabled.active .SideNavigation__menuIcon.plus {
+	background-image: buildIconPlus(#ffffff);
 }
 a .SideNavigation__menuIcon.rewards,
 a.disabled.active .SideNavigation__menuIcon.rewards {
@@ -157,8 +157,8 @@ a.disabled .SideNavigation__menuIcon.setup {
 a.disabled .SideNavigation__menuIcon.tutorial {
 	background-image: buildIconTutorial(#a9b9be);
 }
-a.disabled .SideNavigation__menuIcon.supporter {
-	background-image: buildIconSupporter(#a9b9be);
+a.disabled .SideNavigation__menuIcon.plus {
+	background-image: buildIconPlus(#a9b9be);
 }
 a.disabled .SideNavigation__menuIcon.rewards {
 	background-image: buildIconRewards(#a9b9be);
