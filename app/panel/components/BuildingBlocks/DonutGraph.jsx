@@ -14,7 +14,6 @@
 import React from 'react';
 import ClassNames from 'classnames';
 import * as d3 from 'd3';
-import { scaleLinear } from 'd3-scale';
 import Tooltip from '../Tooltip';
 
 /**
@@ -52,8 +51,8 @@ class DonutGraph extends React.Component {
 						return '#e8e8e8';
 				}
 			},
-			redscale: scaleLinear().range(['#f75065', '#ffb0Ba']),
-			greyscale: scaleLinear().range(['#848484', '#c9c9c9']),
+			redscale: d3.scaleLinear().range(['#f75065', '#ffb0Ba']),
+			greyscale: d3.scaleLinear().range(['#848484', '#c9c9c9']),
 		};
 	}
 
