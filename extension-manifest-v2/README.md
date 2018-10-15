@@ -30,7 +30,7 @@ $ yarn install --frozen-lockfile
 ```sh
 # Upgrade packages according to package.json version range
 # https://yarnpkg.com/en/docs/cli/upgrade/
-yarn upgrade
+$ yarn upgrade
 ```
 
 ## Building
