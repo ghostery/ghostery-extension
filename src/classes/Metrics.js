@@ -451,13 +451,6 @@ class Metrics {
 		return (subscriptions.cancelAtPeriodEnd) ? 0 : 1;
 	}
 	/**
-	 * Replace with real functions and real data.
-	 * @return {String} Dummy data to be replaced.
-	 */
-	_getRealData() {
-		return '';
-	}
-	/**
 	 * Get the number of Rewards shown to the user.
 	 *
 	 * @private
