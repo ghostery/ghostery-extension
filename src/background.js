@@ -871,7 +871,7 @@ function onMessageHandler(request, sender, callback) {
 	} else if (name === 'account.openSubscriptionPage') {
 		let tabUrl;
 		if (conf.account) {
-			tabUrl = `https://account.${globals.GHOSTERY_DOMAIN}.com/subscription`;
+			tabUrl = `https://account.${globals.GHOSTERY_DOMAIN}.com/subscription?target=subscribe`;
 		} else {
 			tabUrl = `https://signon.${globals.GHOSTERY_DOMAIN}.com/subscribe`;
 		}
