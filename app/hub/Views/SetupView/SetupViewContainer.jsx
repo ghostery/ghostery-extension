@@ -71,6 +71,7 @@ class SetupViewContainer extends Component {
 	 */
 	_setDefaultSettings() {
 		this.setState({ sendMountActions: true });
+		this.props.actions.setSetupStep({ setup_step: 8 });
 		this.props.actions.setBlockingPolicy({ blockingPolicy: BLOCKING_POLICY_RECOMMENDED });
 		this.props.actions.setAntiTracking({ enable_anti_tracking: true });
 		this.props.actions.setAdBlock({ enable_ad_block: true });
