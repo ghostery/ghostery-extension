@@ -83,7 +83,7 @@ function _renderBottomItem(item, disableNav) {
  */
 const SideNavigationView = (props) => {
 	const {
-		menuItems, bottomItems, disableNav, toggleNav, expanded
+		menuItems, bottomItems, disableNav, toggleNav, expandOrCompress
 	} = props;
 	const topClassNamesSmall = ClassNames('SideNavigation__top small-logo hide-for-medium', {
 		disabled: disableNav,
@@ -94,9 +94,9 @@ const SideNavigationView = (props) => {
 
 	return (
 		<div
-			className={`SideNavigation flex-container flex-dir-column ${expanded}`}
+			className={`SideNavigation flex-container flex-dir-column ${expandOrCompress}`}
 			onMouseEnter={() => toggleNav('SideNavigation--expanded')}
-			onMouseLeave={() => toggleNav('')}
+			onMouseLeave={() => toggleNav('SideNavigation--compressed')}
 		>
 			<NavLink to="/" className={topClassNamesSmall} />
 			<NavLink to="/" className={topClassNamesMedium} />
