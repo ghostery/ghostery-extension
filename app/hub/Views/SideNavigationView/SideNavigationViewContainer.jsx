@@ -26,7 +26,7 @@ const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 class SideNavigationViewContainer extends Component {
 	constructor(props) {
 		super(props);
-
+		this.state = { expanded: null };
 		props.actions.getUser();
 	}
 
@@ -39,6 +39,13 @@ class SideNavigationViewContainer extends Component {
 			toastClass: '',
 		});
 		this.props.actions.logout();
+	}
+
+	/**
+	* Function to handle expanding/compressing the SideNavigation bar
+	*/
+	toggleNav = (expandedClassOrEmpty) => {
+		this.setState({ expanded: expandedClassOrEmpty });
 	}
 
 	/**
@@ -72,6 +79,8 @@ class SideNavigationViewContainer extends Component {
 			menuItems,
 			bottomItems,
 			disableNav: disableRegEx.test(location.pathname),
+			expanded: this.state.expanded,
+			toggleNav: this.toggleNav,
 		};
 
 		return <SideNavigationView {...childProps} />;

@@ -15,8 +15,7 @@
 .SideNavigation {
 	position: fixed;
 	height: 100%;
-	min-width: 230px;
-	max-width: 230px;
+	width: 230px;
 	overflow-y: auto;
 	background-color: #5d7d85;
 }
@@ -171,7 +170,38 @@ a.disabled .SideNavigation__menuIcon.products {
 }
 @media only screen and (max-width: 840px)  {
 	.SideNavigation {
-		min-width: 56px;
-		max-width: 56px;
+		width: 54px;
+		transition: width 0.5s;
+	}
+	.SideNavigation--expanded {
+		width: 230px;
+	}
+	.SideNavigation__item a.active::before {
+		border-width: 0 0 0 0;
+	}
+	.SideNavigation__item a.active::after {
+		border-width: 0 0 0 0;
+	}
+	.SideNavigation--expanded .SideNavigation__item a.active::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		right: 0;
+		height: 0;
+		width: 0;
+		border-style: solid;
+		border-width: 0 0 40px 30px;
+		border-color: transparent transparent #ffffff transparent;
+	}
+	.SideNavigation--expanded .SideNavigation__item a.active::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		height: 0;
+		width: 0;
+		border-style: solid;
+		border-width: 0 30px 40px 0;
+		border-color: transparent #ffffff transparent transparent;
 	}
 }

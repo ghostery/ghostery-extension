@@ -30,7 +30,7 @@ function _renderMenuItem(item, disableNav) {
 		<div key={`menu-item-${item.href.substring(1)}`} className="SideNavigation__item SideNavigation__menuItem flex-container align-middle">
 			<NavLink to={item.href} exact={item.href === '/'} className={linkClassNames}>
 				<div className={`SideNavigation__menuIcon ${item.icon}`} />
-				<div className="SideNavigation__menuText hide-for-small-only">{item.text}</div>
+				<div className="SideNavigation__menuText">{item.text}</div>
 			</NavLink>
 		</div>
 	);
@@ -82,7 +82,9 @@ function _renderBottomItem(item, disableNav) {
  * @memberof HubComponents
  */
 const SideNavigationView = (props) => {
-	const { menuItems, bottomItems, disableNav } = props;
+	const {
+		menuItems, bottomItems, disableNav, toggleNav, expanded
+	} = props;
 	const topClassNamesSmall = ClassNames('SideNavigation__top small-logo hide-for-medium', {
 		disabled: disableNav,
 	});
@@ -91,7 +93,11 @@ const SideNavigationView = (props) => {
 	});
 
 	return (
-		<div className="SideNavigation flex-container flex-dir-column">
+		<div
+			className={`SideNavigation flex-container flex-dir-column ${expanded}`}
+			onMouseEnter={() => toggleNav('SideNavigation--expanded')}
+			onMouseLeave={() => toggleNav('')}
+		>
 			<NavLink to="/" className={topClassNamesSmall} />
 			<NavLink to="/" className={topClassNamesMedium} />
 			<div className="SideNavigation__menu flex-child-grow flex-container flex-dir-column">
