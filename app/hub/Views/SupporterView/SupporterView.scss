@@ -16,10 +16,10 @@
 	margin: 40px 0 80px;
 }
 .SupporterView--addPaddingTop {
-	padding-top: 30px;
+	padding-top: 40px;
 }
 .SupporterView--addPaddingBottom {
-	padding-bottom: 60px;
+	padding-bottom: 40px;
 }
 .SupporterView--addSideMargin {
 	margin-left: 35px;
@@ -144,4 +144,36 @@
 .SupporterView__bar {
 	height: 1px;
 	background-color: #9b9b9b;
+}
+@media only screen and (max-width: 1224px) {
+	.SupporterView__featureImage.theme {
+		margin-top: 30px;
+		margin-right: -20px;
+		max-width: 350px;
+	}
+	.SupporterView__featureImage.support {
+		margin-top: 25px;
+		margin-bottom: -10px;
+		margin-left: -33px;
+		max-width: 240px;
+	}
+	.SupporterView__feature {
+		width: 300px;
+		text-align: center;
+	}
+	.SupporterView__headingDescription {
+		width: 500px;
+		line-height: 30px;
+		margin-top: 10px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+@media only screen and (max-width: 840px) {
+	.SupporterView__manifestoText {
+		margin-top: -20px;
+		font-size: 20px;
+		line-height: 30px;
+		padding: 50px 60px;
+	}
 }

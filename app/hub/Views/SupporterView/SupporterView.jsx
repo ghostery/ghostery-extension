@@ -106,7 +106,7 @@ const SupporterView = (props) => {
 			</div>
 			<div className="SupporterView--addPaddingTop SupporterView--addPaddingBottom">
 				<div className="row small-up-1 medium-up-1 large-up-3">
-					<div className="SupporterView__feature columns small-12 medium-4 medium-offset-1">
+					<div className="SupporterView__feature columns small-12 medium-4">
 						<div className="SupporterView__headingTitle SupporterView--addPaddingTop">
 							{t('hub_supporter_feature_theme_title')}
 						</div>
@@ -126,14 +126,14 @@ const SupporterView = (props) => {
 			</div>
 			<div className="SupporterView--addPaddingTop SupporterView--addPaddingBottom SupporterView--rowDarken">
 				<div className="row align-middle small-up-1 medium-up-1 large-up-3">
-					<div className="SupporterView__feature columns small-12 medium-4 medium-offset-1">
+					<div className="SupporterView__feature columns small-12 medium-4 hide-for-medium-only hide-for-small-only">
 						<img
 							className="SupporterView__featureImage support"
 							src="/app/images/hub/supporter/feature-support.svg"
 							alt={t('hub_supporter_feature_support_title')}
 						/>
 					</div>
-					<div className="SupporterView__feature columns small-12 medium-5 medium-offset-1">
+					<div className="SupporterView__feature columns small-12 medium-5">
 						<div className="SupporterView__headingTitle">
 							{t('hub_supporter_feature_support_title')}
 						</div>
@@ -141,6 +141,13 @@ const SupporterView = (props) => {
 							{t('hub_supporter_feature_support_description')}
 						</div>
 						{_renderButton(isSupporter, false)}
+					</div>
+					<div className="SupporterView__feature columns small-12 medium-4 hide-for-large">
+						<img
+							className="SupporterView__featureImage support"
+							src="/app/images/hub/supporter/feature-support.svg"
+							alt={t('hub_supporter_feature_support_title')}
+						/>
 					</div>
 				</div>
 			</div>
