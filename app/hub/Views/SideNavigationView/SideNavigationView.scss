@@ -147,6 +147,10 @@ a .SideNavigation__menuIcon.products,
 a.disabled.active .SideNavigation__menuIcon.products {
 	background-image: buildIconProducts(#ffffff);
 }
+a .SideNavigation__menuIcon.profile,
+a.disabled.active .SideNavigation__menuIcon.profile {
+	background-image: buildIconProfile(#ffffff);
+}
 a.disabled .SideNavigation__menuIcon.home {
 	background-image: buildIconHome(#a9b9be);
 }
@@ -165,8 +169,15 @@ a.disabled .SideNavigation__menuIcon.rewards {
 a.disabled .SideNavigation__menuIcon.products {
 	background-image: buildIconProducts(#a9b9be);
 }
+a.disabled .SideNavigation__menuIcon.profile {
+	background-image: buildIconProfile(#a9b9be);
+}
 .SideNavigation__menuText {
 	width: 145px;
+}
+.SideNavigation__menuIcon.profile {
+	position: fixed;
+	left: 0px;
 }
 @media only screen and (max-width: 840px)  {
 	.SideNavigation {
@@ -210,13 +221,23 @@ a.disabled .SideNavigation__menuIcon.products {
 		opacity: 1;
 		transition: opacity 1s;
 	}
-	.SideNavigation--compressed .SideNavigation__bottomItem {
+	.SideNavigation--compressed .SideNavigation__bottomText {
 		opacity: 0;
 		transition: opacity .5s;
 	}
-	.SideNavigation--expanded .SideNavigation__bottomItem {
+	.SideNavigation--expanded .SideNavigation__bottomText {
 		opacity: 1;
 		transition: opacity 1s;
+		transition-delay: .5s;
+	}
+	.SideNavigation--compressed .SideNavigation__menuIcon.profile {
+		opacity: 1;
+		transition: opacity .5s;
+		transition-delay: .5s;
+	}
+	.SideNavigation--expanded .SideNavigation__menuIcon.profile {
+		opacity: 0;
+		transition: opacity .5s;
 	}
 	.SideNavigation--expanded .SideNavigation__bottomItem a.active::before {
 		top: -26px;

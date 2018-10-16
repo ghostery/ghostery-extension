@@ -73,7 +73,12 @@ class SideNavigationViewContainer extends Component {
 			{ id: 'logout', text: t('hub_side_navigation_log_out'), clickHandler: this._handleLogoutClick },
 		] : [
 			{ id: 'create-account', href: '/create-account', text: t('hub_side_navigation_create_account') },
-			{ id: 'log-id', href: '/log-in', text: t('hub_side_navigation_log_in') },
+			{
+				id: 'log-id',
+				href: '/log-in',
+				text: t('hub_side_navigation_log_in'),
+				icon: 'profile',
+			},
 		];
 		const childProps = {
 			menuItems,

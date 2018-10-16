@@ -53,7 +53,7 @@ function _renderBottomItem(item, disableNav) {
 		return (
 			<div key={`bottom-item-${item.id}`} className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle">
 				<a href={item.href} target="_blank" rel="noopener noreferrer" className={linkClassNames}>
-					{item.text}
+					<p className="SideNavigation__bottomText">{item.text}</p>
 				</a>
 			</div>
 		);
@@ -61,7 +61,7 @@ function _renderBottomItem(item, disableNav) {
 		return (
 			<div key={`bottom-item-${item.id}`} className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle">
 				<div className={logoutClassNames} onClick={item.clickHandler}>
-					{item.text}
+					<p className="SideNavigation__bottomText">{item.text}</p>
 				</div>
 			</div>
 		);
@@ -70,7 +70,8 @@ function _renderBottomItem(item, disableNav) {
 	return (
 		<div key={`bottom-item-${item.id}`} className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle">
 			<NavLink to={item.href} className={linkClassNames}>
-				{item.text}
+				{item.id === 'log-id' && (<div className={`SideNavigation__menuIcon ${item.icon} hide-for-medium`} />)}
+				<p className="SideNavigation__bottomText">{item.text}</p>
 			</NavLink>
 		</div>
 	);
