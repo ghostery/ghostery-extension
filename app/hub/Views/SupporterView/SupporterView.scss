@@ -153,10 +153,9 @@
 	align-self: center;
 }
 .SupporterView--flex .SupporterView__headingDescription {
-	width: 500px;
 	align-self: center;
 }
-@media only screen and (max-width: 1224px) {
+@media only screen and (max-width: 960px) {
 	.SupporterView__perkIcon {
 		margin-bottom: 10px;
 	}
@@ -181,14 +180,11 @@
 		text-align: center;
 	}
 	.SupporterView__headingDescription {
-		width: 500px;
 		line-height: 30px;
 		margin-top: 10px;
 		margin-left: auto;
 		margin-right: auto;
 	}
-}
-@media only screen and (max-width: 840px) {
 	.SupporterView__manifestoText {
 		margin-top: -20px;
 		font-size: 20px;

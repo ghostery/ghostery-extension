@@ -126,7 +126,7 @@ const SupporterView = (props) => {
 			</div>
 			<div className="SupporterView--addPaddingTop SupporterView--addPaddingBottom SupporterView--rowDarken">
 				<div className="row align-middle small-up-1 medium-up-1 large-up-3">
-					<div className="SupporterView__feature columns small-12 medium-4 large-offset-1 hide-for-medium-only hide-for-small-only">
+					<div className="SupporterView__feature columns small-12 medium-4 large-offset-1 show-for-large">
 						<img
 							className="SupporterView__featureImage support"
 							src="/app/images/hub/supporter/feature-support.svg"
