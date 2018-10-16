@@ -52,7 +52,7 @@ const SupporterView = (props) => {
 		<div className="SupporterView">
 			<div className="row align-center">
 				<div className="columns">
-					<div className="SupporterView__headeingImage" />
+					<div className="SupporterView__headingImage" />
 					<div className="SupporterView__headingTitle text-center">
 						{t('hub_supporter_header_title')}
 					</div>

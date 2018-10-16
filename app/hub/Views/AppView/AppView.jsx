@@ -21,10 +21,12 @@ import { ToastMessage } from '../../../shared-components';
  * @return {JSX} JSX for rendering the Ghostery Hub App
  * @memberof HubComponents
  */
+
+// flex-child-grow in App__mainContent
 const AppView = props => (
 	<div className="App full-height full-width flex-container">
 		<SideNavigation />
-		<div className="App__mainContent full-height flex-child-grow">
+		<div className="App__mainContent full-height">
 			<ToastMessage toastText={props.app.toastMessage} toastClass={props.app.toastClass} toastExit={props.exitToast} />
 			{props.children}
 		</div>
