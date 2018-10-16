@@ -157,6 +157,15 @@
 	align-self: center;
 }
 @media only screen and (max-width: 1224px) {
+	.SupporterView__perkIcon {
+		margin-bottom: 10px;
+	}
+	.SupporterView__perkTitle {
+		margin-bottom: 10px;
+	}
+	.SupporterView__manifestoContainer {
+		margin-top: 60px;
+	}
 	.SupporterView__featureImage.theme {
 		margin-top: 30px;
 		margin-right: -20px;
