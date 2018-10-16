@@ -145,6 +145,17 @@
 	height: 1px;
 	background-color: #9b9b9b;
 }
+.SupporterView--flex {
+	display: flex;
+	flex-direction: column;
+}
+.SupporterView__featureImage.more {
+	align-self: center;
+}
+.SupporterView--flex .SupporterView__headingDescription {
+	width: 500px;
+	align-self: center;
+}
 @media only screen and (max-width: 1224px) {
 	.SupporterView__featureImage.theme {
 		margin-top: 30px;
