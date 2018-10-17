@@ -142,9 +142,9 @@
     traceur "0.0.105"
     uglify-js "^2.6.1"
 
-"@cliqz/adblocker@0.1.11":
+"@cliqz/adblocker@https://github.com/cliqz-oss/adblocker/releases/download/v0.1.11/cliqz-adblocker-0.1.11.tgz":
   version "0.1.11"
-  resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-0.1.11.tgz#e0326f07ce6bf26a65eb1565481f2979e9ff4184"
+  resolved "https://github.com/cliqz-oss/adblocker/releases/download/v0.1.11/cliqz-adblocker-0.1.11.tgz#8856aaadfdaba7ed256859956353692e2e77cc94"
   dependencies:
     tldjs "2.3.1"
 
@@ -1739,14 +1739,14 @@ brorand@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
 
-"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.28/7.28.6.8830376.tgz":
-  version "7.28.6"
-  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.28/7.28.6.8830376.tgz#f48a1cfdd4689a202b37d28c647c19544a5bc5be"
+"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.28/7.28.7.66af47d.tgz":
+  version "7.28.7"
+  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.28/7.28.7.66af47d.tgz#5339db6d48d4eb21735c6e047423d9fc0ab56862"
   dependencies:
     "@cliqz-oss/dexie" "2.0.3"
     "@cliqz-oss/pouchdb" "6.3.4-security-error-fix-2"
     "@cliqz-oss/systemjs-builder" "0.16.13"
-    "@cliqz/adblocker" "0.1.11"
+    "@cliqz/adblocker" "https://github.com/cliqz-oss/adblocker/releases/download/v0.1.11/cliqz-adblocker-0.1.11.tgz"
     BigInt "5.5.3"
     ajv "6.5.0"
     anonymous-credentials "https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.0/anonymous-credentials-0.1.0.tgz"
