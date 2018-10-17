@@ -59,7 +59,7 @@ const SupporterView = (props) => {
 					<div className="SupporterView__headingDescription text-center">
 						{t('hub_supporter_header_description')}
 					</div>
-					<div className="flex-container align-center-middle">
+					<div className="SupporterView__buttonWithCost flex-container align-center-middle">
 						{_renderButton(isSupporter, true)}
 						<div
 							className="SupporterView__headingCost SupporterView--addSideMargin flex-container align-middle"

@@ -14,6 +14,7 @@
 // Supporter View
 .SupporterView {
 	margin: 40px 0 80px;
+	overflow-x: hidden;
 }
 .SupporterView--addPaddingTop {
 	padding-top: 40px;
@@ -130,7 +131,7 @@
 	background: linear-gradient(to bottom left, #ecd868, #d4af37);
 }
 .SupporterView__manifestoBackground {
-	padding-top: 20px;
+	padding-bottom: 20px;
 	background-image: url('/app/images/hub/supporter/manifesto-background.svg');
 	background-size: 100%;
 }
@@ -165,6 +166,15 @@
 	.SupporterView__manifestoContainer {
 		margin-top: 60px;
 	}
+	.SupporterView__manifestoBackground {
+		padding-bottom: 10px;
+	}
+	.SupporterView__manifestoText {
+		margin-top: -20px;
+		font-size: 20px;
+		line-height: 30px;
+		padding: 50px 60px;
+	}
 	.SupporterView__featureImage.theme {
 		margin: 30px -20px 15px 0;
 		max-width: 350px;
@@ -181,14 +191,24 @@
 	}
 	.SupporterView__headingDescription {
 		line-height: 30px;
-		margin-top: 10px;
+		margin-top: 4px;
 		margin-left: auto;
 		margin-right: auto;
 	}
-	.SupporterView__manifestoText {
-		margin-top: -20px;
-		font-size: 20px;
-		line-height: 30px;
-		padding: 50px 60px;
+	.SupporterView__buttonWithCost {
+		justify-content: space-between;
+		max-width: 382px;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 24px;
+		margin-bottom: 0px;
+	}
+	.SupporterView__button {
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+	.SupporterView__headingCost {
+		margin-left: 0px;
+		margin-right: 0px;
 	}
 }
