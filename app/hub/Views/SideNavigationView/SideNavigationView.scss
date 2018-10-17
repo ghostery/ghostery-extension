@@ -35,7 +35,7 @@
 	background-image: url('/app/images/hub/side-navigation/ghostery-stacked-logo.svg');
 	background-size: 40px auto;
 }
-.SideNavigation--expanded .SideNavigation__top.small-logo {
+.SideNavigation:hover .SideNavigation__top.small-logo {
 	background-image: url('/app/images/hub/side-navigation/ghostery-logo.svg');
 	background-size: 140px auto;
 }
@@ -192,34 +192,34 @@ a.disabled .SideNavigation__menuIcon.profile {
 	.SideNavigation {
 		width: 54px;
 	}
-	.SideNavigation--expanded {
+	.SideNavigation:hover {
 		width: 230px;
 	}
-	.SideNavigation:not(.SideNavigation--expanded) .SideNavigation__item a.active::before,
-  .SideNavigation:not(.SideNavigation--expanded) .SideNavigation__item a.active::after {
+	.SideNavigation:not(:hover) .SideNavigation__item a.active::before,
+  .SideNavigation:not(:hover) .SideNavigation__item a.active::after {
     opacity: 0;
     @include transition(opacity .25s);
   }
-	.SideNavigation--compressed .SideNavigation__bottomText {
+	.SideNavigation__bottomText {
 		opacity: 0;
 		@include transition(opacity .5s);
 	}
-	.SideNavigation--expanded .SideNavigation__bottomText {
+	.SideNavigation:hover .SideNavigation__bottomText {
 		opacity: 1;
 		@include transition(opacity 1s ease .5s);
 	}
-	.SideNavigation--compressed .SideNavigation__menuIcon.profile {
+	.SideNavigation__menuIcon.profile {
 		opacity: 1;
 		@include transition(opacity .5s ease .5s);
 	}
-	.SideNavigation--expanded .SideNavigation__menuIcon.profile {
+	.SideNavigation:hover .SideNavigation__menuIcon.profile {
 		opacity: 0;
 		@include transition(opacity .5s);
 	}
-	.SideNavigation--expanded .SideNavigation__bottomItem a.active::before {
+	.SideNavigation:hover .SideNavigation__bottomItem a.active::before {
 		top: -26px;
 	}
-	.SideNavigation--expanded .SideNavigation__bottomItem a.active::after {
+	.SideNavigation:hover .SideNavigation__bottomItem a.active::after {
 		top: 14px;
 	}
 }
