@@ -68,7 +68,7 @@ const SupporterView = (props) => {
 					</div>
 				</div>
 			</div>
-			<div className="SupporterView--addPaddingTop row small-up-1 medium-up-1 large-up-3 align-center">
+			<div className="SupporterView--addPaddingTop row small-up-1 large-up-3 align-center">
 				<div className="SupporterView__perk columns text-center">
 					<div className="SupporterView__perkIcon themes" />
 					<div className="SupporterView__perkTitle">
@@ -105,7 +105,7 @@ const SupporterView = (props) => {
 				</div>
 			</div>
 			<div className="SupporterView--addPaddingTop SupporterView--addPaddingBottom">
-				<div className="row small-up-1 medium-up-1 large-up-3">
+				<div className="row small-up-1 large-up-3">
 					<div className="SupporterView__feature columns small-12 medium-4 large-offset-1">
 						<div className="SupporterView__headingTitle SupporterView--addPaddingTop">
 							{t('hub_supporter_feature_theme_title')}
@@ -125,15 +125,15 @@ const SupporterView = (props) => {
 				</div>
 			</div>
 			<div className="SupporterView--addPaddingTop SupporterView--addPaddingBottom SupporterView--rowDarken">
-				<div className="row align-middle small-up-1 medium-up-1 large-up-3">
-					<div className="SupporterView__feature columns small-12 medium-4 large-offset-1 show-for-large">
+				<div className="row align-middle small-up-1 large-up-3">
+					<div className="SupporterView__feature columns large-offset-1 show-for-large">
 						<img
 							className="SupporterView__featureImage support"
 							src="/app/images/hub/supporter/feature-support.svg"
 							alt={t('hub_supporter_feature_support_title')}
 						/>
 					</div>
-					<div className="SupporterView__feature columns small-12 medium-5 large-offset-1">
+					<div className="SupporterView__feature columns large-offset-1">
 						<div className="SupporterView__headingTitle">
 							{t('hub_supporter_feature_support_title')}
 						</div>
@@ -142,7 +142,7 @@ const SupporterView = (props) => {
 						</div>
 						{_renderButton(isSupporter, false)}
 					</div>
-					<div className="SupporterView__feature columns small-12 medium-4 large-offset-1 hide-for-large">
+					<div className="SupporterView__feature columns large-offset-1 hide-for-large">
 						<img
 							className="SupporterView__featureImage support"
 							src="/app/images/hub/supporter/feature-support.svg"
@@ -153,7 +153,7 @@ const SupporterView = (props) => {
 			</div>
 			<div className="SupporterView--addPaddingTop">
 				<div className="row align-middle-center">
-					<div className="SupporterView__feature SupporterView--flex columns large-8 large-offset-2 text-center">
+					<div className="SupporterView__feature columns large-8 large-offset-2 text-center">
 						<div className="SupporterView__headingTitle">
 							{t('hub_supporter_feature_more_title')}
 						</div>

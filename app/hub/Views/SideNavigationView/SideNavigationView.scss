@@ -19,6 +19,7 @@
 	overflow-y: auto;
 	background-color: #5d7d85;
 	overflow-x: hidden;
+	@include transition(width .5s);
 }
 .SideNavigation__top {
 	min-height: 80px;
@@ -103,6 +104,7 @@
 	border-style: solid;
 	border-width: 0 0 40px 30px;
 	border-color: transparent transparent #ffffff transparent;
+	@include transition(opacity 1s);
 }
 .SideNavigation__item a.active::after {
 	content: '';
@@ -114,6 +116,7 @@
 	border-style: solid;
 	border-width: 0 30px 40px 0;
 	border-color: transparent #ffffff transparent transparent;
+	@include transition(opacity 1s);
 }
 .SideNavigation__bottomItem a.active::before {
 	top: -26px;
@@ -188,62 +191,30 @@ a.disabled .SideNavigation__menuIcon.profile {
 @media only screen and (max-width: 740px)  {
 	.SideNavigation {
 		width: 54px;
-		transition: width .5s;
 	}
 	.SideNavigation--expanded {
 		width: 230px;
 	}
-	.SideNavigation__item a.active::before {
-		opacity: 0;
-		transition: opacity .25s;
-	}
-	.SideNavigation__item a.active::after {
-		opacity: 0;
-		transition: opacity .25s;
-	}
-	.SideNavigation--expanded .SideNavigation__item a.active::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		right: 0;
-		height: 0;
-		width: 0;
-		border-style: solid;
-		border-width: 0 0 40px 30px;
-		border-color: transparent transparent #ffffff transparent;
-		opacity: 1;
-		transition: opacity 1s;
-	}
-	.SideNavigation--expanded .SideNavigation__item a.active::after {
-		content: '';
-		position: absolute;
-		bottom: 0;
-		right: 0;
-		height: 0;
-		width: 0;
-		border-style: solid;
-		border-width: 0 30px 40px 0;
-		border-color: transparent #ffffff transparent transparent;
-		opacity: 1;
-		transition: opacity 1s;
-	}
+	.SideNavigation:not(.SideNavigation--expanded) .SideNavigation__item a.active::before,
+  .SideNavigation:not(.SideNavigation--expanded) .SideNavigation__item a.active::after {
+    opacity: 0;
+    @include transition(opacity .25s);
+  }
 	.SideNavigation--compressed .SideNavigation__bottomText {
 		opacity: 0;
-		transition: opacity .5s;
+		@include transition(opacity .5s);
 	}
 	.SideNavigation--expanded .SideNavigation__bottomText {
 		opacity: 1;
-		transition: opacity 1s;
-		transition-delay: .5s;
+		@include transition(opacity 1s ease .5s);
 	}
 	.SideNavigation--compressed .SideNavigation__menuIcon.profile {
 		opacity: 1;
-		transition: opacity .5s;
-		transition-delay: .5s;
+		@include transition(opacity .5s ease .5s);
 	}
 	.SideNavigation--expanded .SideNavigation__menuIcon.profile {
 		opacity: 0;
-		transition: opacity .5s;
+		@include transition(opacity .5s);
 	}
 	.SideNavigation--expanded .SideNavigation__bottomItem a.active::before {
 		top: -26px;

@@ -146,16 +146,6 @@
 	height: 1px;
 	background-color: #9b9b9b;
 }
-.SupporterView--flex {
-	display: flex;
-	flex-direction: column;
-}
-.SupporterView__featureImage.more {
-	align-self: center;
-}
-.SupporterView--flex .SupporterView__headingDescription {
-	align-self: center;
-}
 @media only screen and (max-width: 960px) {
 	.SupporterView__perkIcon {
 		margin-bottom: 10px;
@@ -180,20 +170,15 @@
 		max-width: 350px;
 	}
 	.SupporterView__featureImage.support {
-		margin-top: 25px;
-		margin-bottom: -10px;
-		margin-left: -33px;
+		margin: 25px 0 -10px -33px;
 		max-width: 240px;
 	}
 	.SupporterView__feature {
-		width: 300px;
 		text-align: center;
 	}
 	.SupporterView__headingDescription {
 		line-height: 30px;
 		margin-top: 4px;
-		margin-left: auto;
-		margin-right: auto;
 	}
 	.SupporterView__buttonWithCost {
 		justify-content: space-between;
