@@ -12,20 +12,16 @@
  */
 
 import React from 'react';
-import { sendMessage } from '../utils/msg';
+import { sendMessage, openSupportPage } from '../utils/msg';
 /**
  * @class Implement Help view which opens from the main drop-down menu.
  * @memberof PanelClasses
  */
 class Help extends React.Component {
-	constructor(props) {
-		super(props);
-
-		// event bindings
-		this.openNewTab = this.openNewTab.bind(this);
-	}
-
-	openNewTab(e) {
+	/**
+	 * Handle click on 'Set Up Ghostery' menu item
+	 */
+	openHubTab = (e) => {
 		e.preventDefault();
 		sendMessage('openNewTab', {
 			url: chrome.runtime.getURL('./app/templates/hub.html'),
@@ -33,6 +29,16 @@ class Help extends React.Component {
 		});
 		window.close();
 	}
+
+	/**
+	 * Handle click on 'Support' menu item
+	 */
+	openSupportTab = (e) => {
+		e.preventDefault();
+		openSupportPage();
+		window.close();
+	}
+	// "https://ghostery.zendesk.com/hc/"
 	/**
 	 * Render Help view.
 	 * @return {ReactComponent}   ReactComponent instance
@@ -44,13 +50,13 @@ class Help extends React.Component {
 					<div className="small-12 columns">
 						<h1>{ t('panel_help_panel_header') }</h1>
 						<div className="support-section">
-							<a href="#" onClick={this.openNewTab}>{ t('panel_help_setup') }</a>
+							<a href="#" onClick={this.openHubTab}>{ t('panel_help_setup') }</a>
 						</div>
 						<div className="support-section">
 							<h3>{ t('panel_help_questions_header') }</h3>
 							<a href="https://ghostery.zendesk.com/hc/" target="_blank" rel="noopener noreferrer">{ t('panel_help_faq') }</a>
 							<a href="https://www.ghostery.com/survey/in-app" target="_blank" rel="noopener noreferrer">{ t('panel_help_feedback') }</a>
-							<a href="https://ghostery.zendesk.com/hc/" target="_blank" rel="noopener noreferrer">{ t('panel_help_support') }</a>
+							<a href="#" onClick={this.openSupportTab}>{ t('panel_help_support') }</a>
 						</div>
 						<div className="support-section">
 							<h3>{ t('panel_help_contact_header') }</h3>
