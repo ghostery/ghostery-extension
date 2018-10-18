@@ -33,7 +33,7 @@ class ProductsView extends Component {
 	render() {
 		return (
 			<div className="ProductsView">
-				<div className="ProductsView--rowPaddingTop row align-center-middle">
+				<div className="ProductsView--rowPaddingTop row small-up-1 large-up-2 align-center-middle">
 					<div className="columns text-center">
 						<img
 							className="ProductsView__mobileScreenshots"
@@ -41,7 +41,7 @@ class ProductsView extends Component {
 							alt={t('hub_products_main_promo_title')}
 						/>
 					</div>
-					<div className="columns">
+					<div className="ProductsView__header columns">
 						<h1 className="ProductsView__headerTitle">
 							{t('hub_products_header_title')}
 						</h1>
@@ -70,7 +70,7 @@ class ProductsView extends Component {
 						</div>
 					</div>
 				</div>
-				<div className="ProductsView--rowPaddingTop row align-center">
+				<div className="ProductsView--rowPaddingTop row small-up-1 large-up-2 align-center">
 					<div className="ProductsView__secondaryPromo columns">
 						<img
 							className="ProductsView__secondaryPromoImage"
