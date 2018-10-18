@@ -88,10 +88,12 @@ const LogInView = (props) => {
 								{t('hub_login_label_password_invalid')}
 							</div>
 						)}
-						<NavLink to="/create-account" className="LogInView__link">
-							{ t('hub_login_link_create_account') }
-						</NavLink>
-						<div className="LogInView--addPaddingTop flex-container flex-dir-row-reverse">
+						<div className="flex-container align-center">
+							<NavLink to="/create-account" className="LogInView__link">
+								{ t('hub_login_link_create_account') }
+							</NavLink>
+						</div>
+						<div className="LogInView--addPaddingTop flex-container align-center">
 							<button type="submit" className="LogInView__button button success">
 								{ t('hub_login_button_submit') }
 							</button>
