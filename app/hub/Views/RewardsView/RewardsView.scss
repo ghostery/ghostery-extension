@@ -41,7 +41,7 @@
 	font-size: 14px;
 }
 .RewardsView__promoFeature {
-	margin: 0 50px;
+	padding: 40px 50px 100px 50px;
 	font-size: 14px;
 	max-width: 250px;
 }
@@ -78,4 +78,48 @@
 }
 .RewardsView__closerText {
 	font-size: 14px;
+	text-align: center;
+}
+@media only screen and (max-width: 960px) {
+	.RewardsView--paddingTop {
+		padding-top: 0;
+	}
+	.RewardsView__screenshot {
+		padding: 40px 90px 0 90px;
+	}
+	.RewardsView__headerText {
+		padding: 50px;
+		align-items: center;
+		text-align: center;
+	}
+	.RewardsView__promoFeature {
+		padding: 50px 100px;
+	}
+	.RewardsView__closerText {
+		position: static;
+		padding: 100px 140px 0 140px;
+	}
+	.RewardsView__backgroundStars {
+		padding-bottom: 60px;
+		background:
+			url('/app/images/hub/rewards/background-stars-left.svg') no-repeat left 30px bottom 20px,
+			url('/app/images/hub/rewards/background-stars-right.svg') no-repeat right 30px bottom 50px;
+	}
+}
+@media only screen and (max-width: 600px) {
+	.RewardsView__screenshot {
+		padding: 40px 50px 0 50px;
+	}
+	.RewardsView__promoFeature {
+		padding: 50px 50px;
+	}
+	.RewardsView__closerText {
+		padding: 100px 100px 0 100px;
+	}
+	.RewardsView__backgroundStars {
+		padding-bottom: 60px;
+		background:
+			url('/app/images/hub/rewards/background-stars-left.svg') no-repeat left 20px bottom 20px,
+			url('/app/images/hub/rewards/background-stars-right.svg') no-repeat right 20px bottom 50px;
+	}
 }
