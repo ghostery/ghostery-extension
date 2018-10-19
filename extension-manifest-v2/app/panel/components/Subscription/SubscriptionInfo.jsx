@@ -13,7 +13,23 @@
  */
 
 import React from 'react';
-import { openSubscriptionPage } from '../../utils/msg';
+import { sendMessage, openSubscriptionPage } from '../../utils/msg';
+
+/**
+ * Helper function to handle clicking on the Resubscribe button
+ */
+function _handleResubscribeClick() {
+	sendMessage('ping', 'resubscribe');
+	openSubscriptionPage();
+}
+
+/**
+ * Helper function to handle clicking on the Manage Subscription button
+ */
+function _handleManageClick() {
+	sendMessage('ping', 'manage_subscription');
+	openSubscriptionPage();
+}
 
 /**
  * @class Implement Subscription Info in subview as a React component.
@@ -44,7 +60,7 @@ const SubscriptionInfo = (props) => {
 									<span className="status-label">{`${t('subscription_status')}: `}</span>
 									<span className="status-value red">{ subscriptionExpiration }</span>
 									<div style={{ marginTop: '20px' }}>
-										<span className="status-value blue resubscribe" onClick={openSubscriptionPage}>{ t('subscription_resubscribe') }</span>
+										<span className="status-value blue resubscribe" onClick={_handleResubscribeClick}>{ t('subscription_resubscribe') }</span>
 									</div>
 								</div>
 							) : (
@@ -66,7 +82,7 @@ const SubscriptionInfo = (props) => {
 									</div>
 									<div className="manage-row">
 										<div className="manage-icon" />
-										<span className="manage-link" onClick={openSubscriptionPage}>{t('subscription_manage')}</span>
+										<span className="manage-link" onClick={_handleManageClick}>{t('subscription_manage')}</span>
 									</div>
 								</div>
 							)}

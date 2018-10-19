@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import SupporterViewContainer from './SupporterViewContainer';
+import { sendPing } from '../AppView/AppViewActions';
 import { getUser } from '../../../Account/AccountActions';
 
 /**
@@ -32,7 +33,10 @@ const mapStateToProps = state => Object.assign({}, state.account);
  * @memberof TutorialContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign({}, { getUser }), dispatch),
+	actions: bindActionCreators(Object.assign({}, {
+		sendPing,
+		getUser,
+	}), dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SupporterViewContainer);

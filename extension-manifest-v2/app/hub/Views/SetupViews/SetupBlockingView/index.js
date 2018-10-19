@@ -17,7 +17,7 @@ import { withRouter } from 'react-router-dom';
 
 import SetupBlockingViewContainer from './SetupBlockingViewContainer';
 import * as SetupBlockingViewActions from './SetupBlockingViewActions';
-import { setSetupNavigation } from '../../SetupView/SetupViewActions';
+import { setSetupStep, setSetupNavigation } from '../../SetupView/SetupViewActions';
 
 /**
  * Map redux store state properties to the component's own properties.
@@ -34,7 +34,10 @@ const mapStateToProps = state => Object.assign({}, state.setup);
  * @memberof SetupContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign({}, SetupBlockingViewActions, { setSetupNavigation }), dispatch),
+	actions: bindActionCreators(Object.assign({}, SetupBlockingViewActions, {
+		setSetupStep,
+		setSetupNavigation,
+	}), dispatch),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SetupBlockingViewContainer));
