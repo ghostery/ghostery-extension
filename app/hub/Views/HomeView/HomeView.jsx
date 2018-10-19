@@ -51,13 +51,14 @@ const HomeView = (props) => {
 
 	return (
 		<div className="HomeView row align-center">
-			<div className="columns small-12 medium-10 large-8">
+			<div className="HomeView__display columns small-10 medium-10 large-8">
 				<div className="HomeView__header row align-center-middle">
-					<img className="columns" src="/app/images/hub/home/ghosty-bubble-heart.svg" />
+					<img className="columns hide-for-small show-for-large" src="/app/images/hub/home/ghosty-bubble-heart.svg" />
 					<div className="HomeView__title columns">
 						<h1>
 							{t('hub_home_header_text')}
 						</h1>
+						<img className="columns hide-for-large-only" src="/app/images/hub/home/ghosty-bubble-heart.svg" />
 						{justInstalled && (
 							<div className="HomeView__headerTagline">
 								{t('hub_home_header_tagline')}
@@ -99,7 +100,7 @@ const HomeView = (props) => {
 						</NavLink>
 					)}
 				</div>
-				<div className="HomeView__onboarding row">
+				<div className="HomeView__onboarding row small-up-1 large-unstack">
 					<div className={tutorialFeatureClassNames}>
 						<div className="HomeView__featureIcon" />
 						<div className="HomeView__featureTitle">
@@ -112,7 +113,8 @@ const HomeView = (props) => {
 							{tutorial_complete ? t('hub_home_feature_tutorial_button_alt') : t('hub_home_feature_tutorial_button')}
 						</NavLink>
 					</div>
-					<div className="HomeView__onboardingFeatureDivider column shrink" />
+					<div className="HomeView__onboardingFeatureDivider1 column shrink hide-for-small show-for-large" />
+					<div className="HomeView__onboardingFeatureDivider2 row shrink hide-for-large" />
 					<div className={setupFeatureClassNames}>
 						<div className="HomeView__featureIcon" />
 						<div className="HomeView__featureTitle">
@@ -126,17 +128,16 @@ const HomeView = (props) => {
 						</NavLink>
 					</div>
 				</div>
-				<div className="HomeView__supporter row">
-					<div className="HomeView__supporterFeature columns flex-container align-middle">
-						<div className="HomeView__featureText columns">
-							{t('hub_home_feature_supporter_text')}
-						</div>
-						<div className="HomeView__featureIcon columns shrink feature-supporter" />
-						<div className="columns flex-container align-center-middle">
-							<NavLink to="/plus" className="HomeView__featureButton button primary">
-								{isSupporter ? t('hub_home_feature_supporter_button_alt') : t('hub_home_feature_supporter_button')}
-							</NavLink>
-						</div>
+				<div className="HomeView__supporter row small-up-1 large-unstack">
+					<div className="HomeView__featureIcon feature-supporter column-supporter hide-for-large" />
+					<div className="HomeView__featureText columns">
+						{t('hub_home_feature_supporter_text')}
+					</div>
+					<div className="HomeView__featureIcon columns shrink feature-supporter hide-for-small show-for-large" />
+					<div className="columns flex-container align-center-middle">
+						<NavLink to="/plus" className="HomeView__featureButton button primary">
+							{isSupporter ? t('hub_home_feature_supporter_button_alt') : t('hub_home_feature_supporter_button')}
+						</NavLink>
 					</div>
 				</div>
 			</div>

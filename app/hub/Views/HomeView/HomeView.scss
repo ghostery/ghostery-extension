@@ -59,9 +59,14 @@
 	margin: 0 8px;
 	padding: 0 36px;
 }
-.HomeView__onboardingFeatureDivider {
+.HomeView__onboardingFeatureDivider1 {
 	margin: 7px 0 4px;
 	width: 1px;
+	padding: 0;
+	background-color: #979797;
+}
+.HomeView__onboardingFeatureDivider2 {
+	height: 1px;
 	padding: 0;
 	background-color: #979797;
 }
@@ -104,6 +109,10 @@
 	background-image: buildIconGhosteryPlus(#4a4a4a, #daf4ff);
 	background-size: contain;
 }
+.HomeView__featureIcon.feature-supporter.column-supporter {
+	margin: auto;
+	top: -23px;
+}
 .HomeView__featureTitle {
 	text-align: center;
 	font-size: 18px;
@@ -120,4 +129,9 @@
 .HomeView__onboarding .HomeView__featureButton {
 	margin-top: 26px;
 	min-width: 130px;
+}
+@media only screen and (max-width: 960px) {
+	.HomeView__supporter .HomeView__featureButton {
+		margin-top: 14px;
+	}
 }
