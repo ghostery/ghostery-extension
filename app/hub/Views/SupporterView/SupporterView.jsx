@@ -18,16 +18,14 @@ import globals from '../../../../src/classes/Globals';
 
 /**
  * Helper render function for rendering the Supporter Button
- * @param  {Boolean} isSupporter    whether the user is a subscriber
- * @param  {Boolean} addSideMargin  whether to add spacing around the button
+ * @param  {Boolean} isSupporter       whether the user is a subscriber
+ * @param  {String} additionalClasses  classes to add to button for additional styling
  * @return {JSX} JSX of the Supporter Button
  */
-function _renderButton(isSupporter, addSideMargin, hideShowBreakpoints) {
+function _renderButton(isSupporter, additionalClasses) {
 	const buttonHref = `https://account.${globals.GHOSTERY_DOMAIN}.com/subscription`;
-	const buttonClassNames = ClassNames('SupporterView__button', 'button', {
-		'SupporterView--addSideMargin': addSideMargin,
+	const buttonClassNames = ClassNames('SupporterView__button', 'button', additionalClasses, {
 		disabled: isSupporter,
-		'hide-for-small show-for-large': hideShowBreakpoints,
 	});
 
 	return isSupporter ? (
@@ -61,7 +59,7 @@ const SupporterView = (props) => {
 						{t('hub_supporter_header_description')}
 					</div>
 					<div className="SupporterView__costContainer flex-container align-middle align-justify">
-						{_renderButton(isSupporter, false)}
+						{_renderButton(isSupporter)}
 						<div
 							className="SupporterView__headingCost flex-container align-middle"
 							dangerouslySetInnerHTML={{ __html: t('hub_supporter_price') }}
@@ -114,7 +112,7 @@ const SupporterView = (props) => {
 						<div className="SupporterView__headingDescription">
 							{t('hub_supporter_feature_theme_description')}
 						</div>
-						{_renderButton(isSupporter, false, true)}
+						{_renderButton(isSupporter, 'hide-for-small show-for-large')}
 					</div>
 					<div className="SupporterView__feature columns small-12 medium-6">
 						<img
@@ -127,7 +125,7 @@ const SupporterView = (props) => {
 				<div className="SupporterView--addPaddingTop hide-for-large">
 					<div className="row align-center-middle">
 						<div className="SupporterView__bar flex-child-grow" />
-						{_renderButton(isSupporter, true, false)}
+						{_renderButton(isSupporter, 'SupporterView--addSideMargin')}
 						<div className="SupporterView__bar flex-child-grow" />
 					</div>
 				</div>
@@ -148,7 +146,7 @@ const SupporterView = (props) => {
 						<div className="SupporterView__headingDescription">
 							{t('hub_supporter_feature_support_description')}
 						</div>
-						{_renderButton(isSupporter, false, true)}
+						{_renderButton(isSupporter, 'hide-for-small show-for-large')}
 					</div>
 					<div className="SupporterView__feature columns hide-for-large">
 						<img
@@ -161,7 +159,7 @@ const SupporterView = (props) => {
 				<div className="SupporterView--addPaddingTop hide-for-large">
 					<div className="row align-center-middle">
 						<div className="SupporterView__bar flex-child-grow" />
-						{_renderButton(isSupporter, true, false)}
+						{_renderButton(isSupporter, 'SupporterView--addSideMargin')}
 						<div className="SupporterView__bar flex-child-grow" />
 					</div>
 				</div>
@@ -175,19 +173,17 @@ const SupporterView = (props) => {
 						<div className="SupporterView__headingDescription">
 							{t('hub_supporter_feature_more_description')}
 						</div>
-						<div className="SupporterView__imageContainer">
-							<img
-								className="SupporterView__featureImage more"
-								src="/app/images/hub/supporter/feature-more.svg"
-								alt={t('hub_supporter_feature_more_title')}
-							/>
-						</div>
+						<img
+							className="SupporterView__featureImage more"
+							src="/app/images/hub/supporter/feature-more.svg"
+							alt={t('hub_supporter_feature_more_title')}
+						/>
 					</div>
 				</div>
 				<div className="SupporterView--addPaddingTop">
 					<div className="row align-center-middle">
 						<div className="SupporterView__bar flex-child-grow" />
-						{_renderButton(isSupporter, true, false)}
+						{_renderButton(isSupporter, 'SupporterView--addSideMargin')}
 						<div className="SupporterView__bar flex-child-grow" />
 					</div>
 				</div>

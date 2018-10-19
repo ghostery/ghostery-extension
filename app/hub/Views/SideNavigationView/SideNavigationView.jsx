@@ -70,7 +70,7 @@ function _renderBottomItem(item, disableNav) {
 	return (
 		<div key={`bottom-item-${item.id}`} className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle">
 			<NavLink to={item.href} className={linkClassNames}>
-				{item.id === 'log-id' && (
+				{item.icon && (
 					<div className={`SideNavigation__menuIcon ${item.icon} hide-for-medium`} />
 				)}
 				<p className="SideNavigation__bottomText">{item.text}</p>
@@ -86,17 +86,13 @@ function _renderBottomItem(item, disableNav) {
  */
 const SideNavigationView = (props) => {
 	const { menuItems, bottomItems, disableNav } = props;
-	const topClassNamesSmall = ClassNames('SideNavigation__top small-logo hide-for-medium', {
-		disabled: disableNav,
-	});
-	const topClassNamesMedium = ClassNames('SideNavigation__top medium-logo hide-for-small-only', {
+	const topClassNames = ClassNames('SideNavigation__top', {
 		disabled: disableNav,
 	});
 
 	return (
 		<div className="SideNavigation flex-container flex-dir-column">
-			<NavLink to="/" className={topClassNamesSmall} />
-			<NavLink to="/" className={topClassNamesMedium} />
+			<NavLink to="/" className={topClassNames} />
 			<div className="SideNavigation__menu flex-child-grow flex-container flex-dir-column">
 				{menuItems.map(item => _renderMenuItem(item, disableNav))}
 			</div>

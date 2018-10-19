@@ -61,6 +61,7 @@ describe('app/hub/Views/SupporterView component', () => {
 			expect(component.find('.SupporterView__manifestoBackground').length).toBe(1);
 			expect(component.find('.SupporterView__manifestoText').length).toBe(1);
 			expect(component.find('.SupporterView__featureImage').length).toBe(4);
+
 			expect(component.find('.SupporterView__button').length).toBe(6);
 			expect(component.find('.SupporterView__button.disabled').length).toBe(0);
 			component.setProps({ isSupporter: true });

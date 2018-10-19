@@ -59,14 +59,16 @@
 	margin: 0 8px;
 	padding: 0 36px;
 }
-.HomeView__onboardingFeatureDivider1 {
+.HomeView__onboarding .HomeView__onboardingFeatureDivider1 {
 	margin: 7px 0 4px;
-	width: 1px;
+	max-width: 1px;
 	padding: 0;
 	background-color: #979797;
 }
-.HomeView__onboardingFeatureDivider2 {
+.HomeView__onboarding .HomeView__onboardingFeatureDivider2 {
+	margin: 0 25px;
 	height: 1px;
+	width: 100%;
 	padding: 0;
 	background-color: #979797;
 }
@@ -135,5 +137,19 @@
 @media only screen and (max-width: 960px) {
 	.HomeView__supporter .HomeView__featureButton {
 		margin-top: 14px;
+	}
+	.HomeView__header img {
+		margin-right: 0;
+		margin-bottom: 20px;
+	}
+	.HomeView__header h1 {
+		margin-bottom: 10px;
+		text-align: center;
+	}
+	.feature-tutorial, .feature-tutorial-complete {
+		margin: 12px 0 40px;
+	}
+	.feature-setup, .feature-setup-complete {
+		margin: 35px 0 15px;
 	}
 }
