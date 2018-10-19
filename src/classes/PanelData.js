@@ -169,12 +169,12 @@ class PanelData {
 	 * @return {Object}		panel data shared by multiple views
 	 */
 	get panelView() {
-		let currentTheme = this._confData.get('currentTheme');
+		let current_theme = this._confData.get('current_theme');
 		let theme;
-		if (currentTheme !== 'default') {
-			theme = this._confData.get('themes')[currentTheme];
+		if (current_theme !== 'default') {
+			theme = this._confData.get('themes')[current_theme];
 			if (!theme) {
-				currentTheme = 'default';
+				current_theme = 'default';
 			}
 		}
 		const currentAccount = this._confData.get('account');
@@ -193,7 +193,7 @@ class PanelData {
 				language: this._confData.get('language'),
 				reload_banner_status: this._confData.get('reload_banner_status'),
 				trackers_banner_status: this._confData.get('trackers_banner_status'),
-				currentTheme,
+				current_theme,
 				theme,
 
 				needsReload: this._trackerData.get('needsReload'),
@@ -348,7 +348,7 @@ class PanelData {
 			.set('trackers_banner_status', conf.trackers_banner_status)
 			.set('expand_all_trackers', conf.expand_all_trackers)
 			.set('account', conf.account)
-			.set('currentTheme', conf.current_theme)
+			.set('current_theme', conf.current_theme)
 			.set('themes', conf.themes);
 	}
 

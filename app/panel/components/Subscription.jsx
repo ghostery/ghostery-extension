@@ -30,7 +30,7 @@ class Subscription extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isChecked: (props.currentTheme !== 'default'),
+			isChecked: (props.current_theme !== 'default'),
 		};
 	}
 
@@ -73,9 +73,9 @@ class Subscription extends React.Component {
 		const newChecked = !this.state.isChecked;
 		this.setState({ isChecked: newChecked });
 		if (newChecked) {
-			this.props.actions.getTheme({ currentTheme: 'midnight-theme' });
+			this.props.actions.getTheme({ current_theme: 'midnight-theme' });
 		} else {
-			this.props.actions.getTheme({ currentTheme: 'default' });
+			this.props.actions.getTheme({ current_theme: 'default' });
 		}
 	}
 

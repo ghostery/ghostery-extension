@@ -771,46 +771,46 @@ function onMessageHandler(request, sender, callback) {
 		callback();
 		return false;
 	} else if (name === 'account.getTheme') {
-		if (conf.current_theme !== message.currentTheme) {
+		if (conf.current_theme !== message.current_theme) {
 			metrics.ping('theme_change');
 		}
-		if (message.currentTheme !== 'default' &&
-			account.hasScopesUnverified(['subscriptions:supporter'])) {
-			// try to get it locally
-			message.theme = conf.themes[message.currentTheme];
-			if (message.theme) {
-				// This will trigger panelData.set through dispatch
-				// as currentTheme is in SYNC_ARRAY
-				conf.current_theme = message.currentTheme;
-				callback(message);
-				return false;
-			}
-			account.getTheme(`${message.currentTheme}.css`).then((theme) => {
-				if (theme) {
-					const { themes } = conf;
-					themes[message.currentTheme] = theme;
-					conf.themes = themes;
-					conf.current_theme = message.currentTheme;
-					message.theme = theme;
-				} else {
-					conf.current_theme = 'default';
-					message.currentTheme = 'default';
-				}
-				callback(message);
-			})
-				.catch((err) => {
-					log('GET SET THEME ERROR', err);
-					conf.current_theme = 'default';
-					message.currentTheme = 'default';
+		if (account.hasScopesUnverified(['subscriptions:supporter'])) {
+			panelData.set(message);
+			if (message.current_theme !== 'default') {
+				// try to get it locally
+				message.theme = conf.themes[message.current_theme];
+				if (message.theme) {
+					conf.current_theme = message.current_theme;
 					callback(message);
-				});
-			// Signifying asynchronous callback here. Other cases are synchronous.
-			return true;
+					return false;
+				}
+				account.getTheme(`${message.current_theme}.css`).then((theme) => {
+					if (theme) {
+						const { themes } = conf;
+						themes[message.current_theme] = theme;
+						conf.themes = themes;
+						conf.current_theme = message.current_theme;
+						message.theme = theme;
+					} else {
+						conf.current_theme = 'default';
+						message.current_theme = 'default';
+					}
+					callback(message);
+				})
+					.catch((err) => {
+						log('GET SET THEME ERROR', err);
+						conf.current_theme = 'default';
+						message.current_theme = 'default';
+						callback(message);
+					});
+				// Signifying asynchronous callback here. Other cases are synchronous.
+				return true;
+			}
+			conf.current_theme = 'default';
+			message.current_theme = 'default';
+			callback(message);
+			return false;
 		}
-		conf.current_theme = 'default';
-		message.currentTheme = 'default';
-		callback(message);
-		return false;
 	} else if (name === 'getCliqzModuleData') {
 		const modules = { adblock: {}, antitracking: {} };
 
