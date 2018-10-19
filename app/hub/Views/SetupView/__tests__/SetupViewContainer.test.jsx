@@ -39,6 +39,7 @@ const actions = {
 	},
 	setSetupShowWarningOverride: () => {},
 	initSetupProps: () => {},
+	setSetupStep: () => {},
 	setSetupNavigation: () => {},
 	setBlockingPolicy: () => {},
 	setAntiTracking: () => {},

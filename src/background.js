@@ -512,6 +512,12 @@ function handleRewards(name, message, callback) {
  */
 function handleGhosteryHub(name, message, callback) {
 	switch (name) {
+		case 'SEND_PING': {
+			const { type } = message;
+			metrics.ping(type);
+			callback();
+			break;
+		}
 		case 'GET_HOME_PROPS': {
 			const {
 				setup_complete,
@@ -530,19 +536,39 @@ function handleGhosteryHub(name, message, callback) {
 			callback({ setup_show_warning_override });
 			break;
 		}
+		case 'SET_SETUP_STEP': {
+			let { setup_step } = message;
+			if (setup_step === 7) {
+				panelData.set({ setup_step });
+			} else if (setup_step > conf.setup_step) {
+				panelData.set({ setup_step });
+				if (setup_step === 8) {
+					const { setup_number } = conf;
+					panelData.set({ setup_number: setup_number ? 2 : 1 });
+					metrics.ping('setup_start');
+				}
+			} else {
+				({ setup_step } = setup_step);
+			}
+			callback({ setup_step });
+			break;
+		}
 		case 'SET_BLOCKING_POLICY': {
 			const { blockingPolicy } = message;
 			switch (blockingPolicy) {
 				case 'BLOCKING_POLICY_RECOMMENDED': {
+					panelData.set({ setup_block: 5 });
 					setGhosteryDefaultBlocking();
 					break;
 				}
 				case 'BLOCKING_POLICY_NOTHING': {
+					panelData.set({ setup_block: 1 });
 					const selected_app_ids = {};
 					panelData.set({ selected_app_ids });
 					break;
 				}
 				case 'BLOCKING_POLICY_EVERYTHING': {
+					panelData.set({ setup_block: 3 });
 					const selected_app_ids = {};
 					for (const app_id in bugDb.db.apps) {
 						if (!selected_app_ids.hasOwnProperty(app_id)) {
@@ -553,6 +579,7 @@ function handleGhosteryHub(name, message, callback) {
 					break;
 				}
 				case 'BLOCKING_POLICY_CUSTOM': {
+					panelData.set({ setup_block: 4 });
 					// Blocking app_ids is handled by Global Blocking blocking.js
 					break;
 				}
@@ -580,14 +607,19 @@ function handleGhosteryHub(name, message, callback) {
 			callback({ enable_ghostery_rewards });
 			break;
 		}
+		case 'SET_TUTORIAL_COMPLETE': {
+			panelData.set(message);
+			metrics.ping('tutorial_complete');
+			callback(message);
+			break;
+		}
 		case 'SET_METRICS':
 		case 'SET_SETUP_SHOW_WARNING_OVERRIDE':
 		case 'SET_ANTI_TRACKING':
 		case 'SET_AD_BLOCK':
 		case 'SET_SMART_BLOCK':
 		case 'SET_HUMAN_WEB':
-		case 'SET_SETUP_COMPLETE':
-		case 'SET_TUTORIAL_COMPLETE': {
+		case 'SET_SETUP_COMPLETE': {
 			panelData.set(message);
 			callback(message);
 			break;
@@ -739,6 +771,9 @@ function onMessageHandler(request, sender, callback) {
 		callback();
 		return false;
 	} else if (name === 'account.getTheme') {
+		if (conf.current_theme !== message.currentTheme) {
+			metrics.ping('theme_change');
+		}
 		if (message.currentTheme !== 'default' &&
 			account.hasScopesUnverified(['subscriptions:supporter'])) {
 			// try to get it locally
@@ -813,9 +848,13 @@ function onMessageHandler(request, sender, callback) {
 		});
 		return true;
 	} else if (name === 'account.login') {
+		metrics.ping('sign_in');
 		const { email, password } = message;
 		account.login(email, password)
 			.then((response) => {
+				if (!response.hasOwnProperty('errors')) {
+					metrics.ping('sign_in_success');
+				}
 				callback(response);
 			})
 			.catch((err) => {
@@ -825,11 +864,16 @@ function onMessageHandler(request, sender, callback) {
 			});
 		return true;
 	} else if (name === 'account.register') {
+		const senderOrigin = (sender.url.indexOf('templates/panel.html') >= 0) ? 'extension' : 'setup';
+		metrics.ping(`create_account_${senderOrigin}`);
 		const {
 			email, confirmEmail, password, firstName, lastName
 		} = message;
 		account.register(email, confirmEmail, password, firstName, lastName)
 			.then((response) => {
+				if (!response.hasOwnProperty('errors')) {
+					metrics.ping('create_account_success');
+				}
 				callback(response);
 			})
 			.catch((err) => {
@@ -878,6 +922,7 @@ function onMessageHandler(request, sender, callback) {
 		utils.openNewTab({ url: tabUrl, become_active: true });
 		return true;
 	} else if (name === 'account.openSupportPage') {
+		metrics.ping('priority_support_submit');
 		const subscriber = account.hasScopesUnverified(['subscriptions:supporter']);
 		const tabUrl = subscriber ? `https://account.${globals.GHOSTERY_DOMAIN}.com/support` : 'https://ghostery.zendesk.com/hc/';
 		utils.openNewTab({ url: tabUrl, become_active: true });

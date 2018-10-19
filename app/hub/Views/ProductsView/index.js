@@ -11,6 +11,20 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import ProductsView from './ProductsView';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-export default ProductsView;
+import ProductsViewContainer from './ProductsViewContainer';
+import { sendPing } from '../AppView/AppViewActions';
+
+/**
+ * Bind the component's action creators using Redux's bindActionCreators.
+ * @param  {function} dispatch redux store method which dispatches actions
+ * @return {function}          to be used as an argument in redux connect call
+ * @memberof TutorialContainers
+ */
+const mapDispatchToProps = dispatch => ({
+	actions: bindActionCreators(Object.assign({}, { sendPing }), dispatch),
+});
+
+export default connect(null, mapDispatchToProps)(ProductsViewContainer);

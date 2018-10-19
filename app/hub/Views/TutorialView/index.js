@@ -18,6 +18,7 @@ import { withRouter } from 'react-router-dom';
 import TutorialViewContainer from './TutorialViewContainer';
 import TutorialViewReducer from './TutorialViewReducer';
 import * as TutorialViewActions from './TutorialViewActions';
+import { sendPing } from '../AppView/AppViewActions';
 
 /**
  * Map redux store state properties to the component's own properties.
@@ -34,7 +35,7 @@ const mapStateToProps = state => Object.assign({}, state.tutorial);
  * @memberof SetupContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign({}, TutorialViewActions), dispatch),
+	actions: bindActionCreators(Object.assign({}, TutorialViewActions, { sendPing }), dispatch),
 });
 
 export const reducer = TutorialViewReducer;

@@ -19,6 +19,7 @@ import {
 	GET_SETUP_SHOW_WARNING_OVERRIDE,
 	SET_SETUP_SHOW_WARNING_OVERRIDE,
 	INIT_SETUP_PROPS,
+	SET_SETUP_STEP,
 	SET_SETUP_NAVIGATION
 } from '../SetupViewConstants';
 
@@ -34,6 +35,10 @@ utils.sendMessageInPromise = jest.fn((name, message) => new Promise((resolve, re
 		}
 		case SET_SETUP_SHOW_WARNING_OVERRIDE: {
 			resolve(message);
+			break;
+		}
+		case SET_SETUP_STEP: {
+			resolve(testData);
 			break;
 		}
 		default: resolve(message);
@@ -74,6 +79,19 @@ describe('app/hub/Views/SetupView/ actions', () => {
 		expect(SetupViewActions.initSetupProps(testData)).toEqual({
 			type: INIT_SETUP_PROPS,
 			data: testData,
+		});
+	});
+
+	test('setSetupStep action should return correctly', () => {
+		const initialState = {};
+		const store = mockStore(initialState);
+
+		const data = testData;
+		const expectedPayload = { data, type: SET_SETUP_STEP };
+
+		return store.dispatch(SetupViewActions.setSetupStep(data)).then(() => {
+			const actions = store.getActions();
+			expect(actions).toEqual([expectedPayload]);
 		});
 	});
 

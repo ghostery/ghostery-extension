@@ -16,6 +16,7 @@ import {
 	GET_SETUP_SHOW_WARNING_OVERRIDE,
 	SET_SETUP_SHOW_WARNING_OVERRIDE,
 	INIT_SETUP_PROPS,
+	SET_SETUP_STEP,
 	SET_SETUP_NAVIGATION
 } from './SetupViewConstants';
 
@@ -52,6 +53,19 @@ export function initSetupProps(data) {
 	return {
 		type: INIT_SETUP_PROPS,
 		data,
+	};
+}
+
+export function setSetupStep(actionData) {
+	return function (dispatch) {
+		return sendMessageInPromise(SET_SETUP_STEP, actionData).then((data) => {
+			dispatch({
+				type: SET_SETUP_STEP,
+				data,
+			});
+		}).catch((err) => {
+			log('setupView Action setSetupStep Error', err);
+		});
 	};
 }
 

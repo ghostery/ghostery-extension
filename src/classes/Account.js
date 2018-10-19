@@ -1,4 +1,3 @@
-
 /**
  * User Accounts
  *
@@ -85,6 +84,7 @@ class Account {
 			}
 			this._getUserIDFromCookie().then((userID) => {
 				this._setAccountInfo(userID);
+				this.getUserSubscriptionData();
 			});
 			return {};
 		});
@@ -106,6 +106,7 @@ class Account {
 			}
 			this._getUserIDFromCookie().then((userID) => {
 				this._setAccountInfo(userID);
+				this.getUserSubscriptionData();
 			});
 			return {};
 		});
@@ -162,7 +163,11 @@ class Account {
 	getUserSubscriptionData = () => (
 		this._getUserID()
 			.then(userID => api.get('stripe/customers', userID, 'cards,subscriptions'))
-			.then(res => build(normalize(res), 'customers', res.data.id))
+			.then((res) => {
+				const subscriptionData = build(normalize(res), 'customers', res.data.id);
+				this._setSubscriptionData(subscriptionData);
+				return subscriptionData;
+			})
 	)
 
 	saveUserSettings = () => (
@@ -282,6 +287,7 @@ class Account {
 				]).then(() => {
 					// login
 					this._setAccountInfo(UserId);
+					this.getUserSubscriptionData();
 					chrome.storage.local.remove(legacyLoginInfoKey, () => resolve());
 				}).catch((err) => {
 					resolve(err);
@@ -302,6 +308,7 @@ class Account {
 					}, (cookie) => {
 						if (cookie !== null) {
 							this._setAccountInfo(cookie.value);
+							this.getUserSubscriptionData();
 						}
 						resolve();
 					});
@@ -414,6 +421,7 @@ class Account {
 			userID,
 			user: null,
 			userSettings: null,
+			subscriptionData: null,
 		};
 	}
 
@@ -424,6 +432,15 @@ class Account {
 
 	_setAccountUserSettings = (settings) => {
 		conf.account.userSettings = settings;
+		dispatcher.trigger('conf.save.account');
+	}
+
+	_setSubscriptionData = (subscriptionData) => {
+		if (!conf.paid_subscription && subscriptionData.hasOwnProperty('subscriptions')) {
+			conf.paid_subscription = true;
+			dispatcher.trigger('conf.save.paid_subscription');
+		}
+		conf.account.subscriptionData = subscriptionData;
 		dispatcher.trigger('conf.save.account');
 	}
 
