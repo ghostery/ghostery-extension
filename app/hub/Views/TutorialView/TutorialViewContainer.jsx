@@ -44,6 +44,7 @@ class TutorialViewContainer extends Component {
 
 		this.props.actions.initTutorialProps(this.props.tutorial).then(() => {
 			this.setState({ sendMountActions: true });
+			this.props.actions.sendPing({ type: 'tutorial_start' });
 		});
 	}
 
@@ -126,6 +127,7 @@ TutorialViewContainer.propTypes = {
 	actions: PropTypes.shape({
 		initTutorialProps: PropTypes.func.isRequired,
 		setTutorialNavigation: PropTypes.func.isRequired,
+		sendPing: PropTypes.func.isRequired,
 	}).isRequired,
 };
 

@@ -47,6 +47,7 @@ class SetupBlockingViewContainer extends Component {
 		if (sendMountActions) {
 			const { blockingPolicy } = setup;
 			props.actions.setBlockingPolicy({ blockingPolicy });
+			props.actions.setSetupStep({ setup_step: 8 });
 		}
 	}
 
@@ -107,6 +108,7 @@ class SetupBlockingViewContainer extends Component {
 SetupBlockingViewContainer.propTypes = {
 	index: PropTypes.number.isRequired,
 	actions: PropTypes.shape({
+		setSetupStep: PropTypes.func.isRequired,
 		setSetupNavigation: PropTypes.func.isRequired,
 		setBlockingPolicy: PropTypes.func.isRequired,
 	}).isRequired,

@@ -27,7 +27,6 @@ class Account extends React.Component {
 	 * view to open Sign In (Login) view.
 	 */
 	clickSigninCreate = () => {
-		sendMessage('ping', 'sign_in');
 		this.props.settingsData.history.push('/login');
 	}
 	/**

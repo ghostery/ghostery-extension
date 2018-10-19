@@ -44,22 +44,24 @@ exports[`app/hub/Views/ProductsView component Snapshot tests with react-test-ren
       >
         <a
           href="https://itunes.apple.com/us/app/ghostery-privacy-browser/id472789016?mt=8"
+          onClick={[Function]}
           rel="noopener noreferrer"
           target="_blank"
         >
           <img
-            className="ProductsView__imageAppStore"
-            src="/app/images/hub/products/appstore-icon.png"
+            className="ProductsView__imageAppStoreIos"
+            src="/app/images/hub/products/app_store_badge_us.svg"
           />
         </a>
         <a
           href="https://play.google.com/store/apps/details?id=com.ghostery.android.ghostery"
+          onClick={[Function]}
           rel="noopener noreferrer"
           target="_blank"
         >
           <img
             className="ProductsView__imagePlayStore"
-            src="/app/images/hub/products/googleplay-icon.png"
+            src="/app/images/hub/products/google-play-badge.png"
           />
         </a>
       </div>
@@ -109,13 +111,14 @@ exports[`app/hub/Views/ProductsView component Snapshot tests with react-test-ren
         className="ProductsView__storeImageContainer hide"
       >
         <a
-          href="https://itunes.apple.com/us/app/ghostery-privacy-browser/id472789016?mt=8"
+          href="https://itunes.apple.com/us/app/ghostery-privacy-browser/id472789016?mt=81"
+          onClick={[Function]}
           rel="noopener noreferrer"
           target="_blank"
         >
           <img
-            className="ProductsView__imageAppStore"
-            src="/app/images/hub/products/appstore-icon.png"
+            className="ProductsView__imageAppStoreMac"
+            src="/app/images/hub/products/app_store_mac_badge_us.svg"
           />
         </a>
       </div>

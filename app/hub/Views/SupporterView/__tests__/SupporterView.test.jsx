@@ -21,6 +21,7 @@ describe('app/hub/Views/SupporterView component', () => {
 		test('supporter view is rendered correctly when the user is not a supporter', () => {
 			const initialState = {
 				isSupporter: false,
+				onSupporterClick: () => {},
 			};
 
 			const component = renderer.create(
@@ -32,6 +33,7 @@ describe('app/hub/Views/SupporterView component', () => {
 		test('supporter view is rendered correctly when the user is a supporter', () => {
 			const initialState = {
 				isSupporter: true,
+				onSupporterClick: () => {},
 			};
 
 			const component = renderer.create(
@@ -45,6 +47,7 @@ describe('app/hub/Views/SupporterView component', () => {
 		test('the happy path of the component', () => {
 			const initialState = {
 				isSupporter: false,
+				onSupporterClick: jest.fn(),
 			};
 
 			const component = shallow(<SupporterView {...initialState} />);
@@ -61,6 +64,10 @@ describe('app/hub/Views/SupporterView component', () => {
 			expect(component.find('.SupporterView__manifestoBackground').length).toBe(1);
 			expect(component.find('.SupporterView__manifestoText').length).toBe(1);
 			expect(component.find('.SupporterView__featureImage').length).toBe(3);
+
+			expect(initialState.onSupporterClick.mock.calls.length).toBe(0);
+			component.find('.SupporterView__button').first().simulate('click');
+			expect(initialState.onSupporterClick.mock.calls.length).toBe(1);
 
 			expect(component.find('.SupporterView__button').length).toBe(4);
 			expect(component.find('.SupporterView__button.disabled').length).toBe(0);

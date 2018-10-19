@@ -260,6 +260,7 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
         <a
           className="SupporterView__button button SupporterView--addSideMargin"
           href="https://account.ghosterystage.com/subscription"
+          onClick={[Function]}
           rel="noopener noreferrer"
           target="_blank"
         >
@@ -366,6 +367,7 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
         <a
           className="SupporterView__button button"
           href="https://account.ghosterystage.com/subscription"
+          onClick={[Function]}
           rel="noopener noreferrer"
           target="_blank"
         >
@@ -414,6 +416,7 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
         <a
           className="SupporterView__button button"
           href="https://account.ghosterystage.com/subscription"
+          onClick={[Function]}
           rel="noopener noreferrer"
           target="_blank"
         >
@@ -460,6 +463,7 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
         <a
           className="SupporterView__button button SupporterView--addSideMargin"
           href="https://account.ghosterystage.com/subscription"
+          onClick={[Function]}
           rel="noopener noreferrer"
           target="_blank"
         >

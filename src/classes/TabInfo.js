@@ -28,6 +28,7 @@
 
 import PolicySmartBlock from './PolicySmartBlock';
 import { processUrl } from '../utils/utils';
+import metrics from './Metrics';
 
 /**
  * Class for handling a map of tab objects corresponding to
@@ -68,6 +69,10 @@ class TabInfo {
 			},
 			insecureRedirects: [],
 		};
+
+		if (info.reloaded) {
+			metrics.ping('broken_page');
+		}
 
 		this._tabInfo[tab_id] = info;
 		this._updateUrl(tab_id, tab_url);
