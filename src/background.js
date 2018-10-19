@@ -923,7 +923,8 @@ function onMessageHandler(request, sender, callback) {
 		return true;
 	} else if (name === 'account.openSupportPage') {
 		metrics.ping('priority_support_submit');
-		const tabUrl = `https://account.${globals.GHOSTERY_DOMAIN}.com/support`;
+		const subscriber = account.hasScopesUnverified(['subscriptions:supporter']);
+		const tabUrl = subscriber ? `https://account.${globals.GHOSTERY_DOMAIN}.com/support` : 'https://ghostery.zendesk.com/hc/';
 		utils.openNewTab({ url: tabUrl, become_active: true });
 		return true;
 	} else if (name === 'account.resetPassword') {
