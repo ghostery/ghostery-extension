@@ -104,6 +104,8 @@
 }
 .HomeView__featureIcon.feature-supporter {
 	position: relative;
+	margin-left: 0;
+	margin-right: 0;
 	top: -25px;
 	height: 46px;
 	background-image: buildIconGhosteryPlus(#4a4a4a, #daf4ff);

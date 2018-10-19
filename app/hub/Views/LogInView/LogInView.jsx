@@ -41,8 +41,8 @@ const LogInView = (props) => {
 	return (
 		<div className="LogInView">
 			<div className="LogInView--addPaddingTop row align-center">
-				<div className="columns small-12 large-10">
-					<div className="flex-container align-center-middle">
+				<div className="columns">
+					<div className="LogInView__header flex-container align-center-middle">
 						<img className="LogInView__headerImage" src="/app/images/hub/account/ghosty-account.svg" />
 						<div className="LogInView__headerTitle">
 							<h3>
@@ -53,7 +53,7 @@ const LogInView = (props) => {
 				</div>
 			</div>
 			<div className="LogInView--addPaddingTop row align-center">
-				<div className="columns small-12 medium-6">
+				<div className="columns small-12 medium-10 large-6">
 					<form onSubmit={handleSubmit}>
 						<label className="LogInView__inputLabel">
 							{t('hub_login_label_email')}

@@ -70,7 +70,9 @@ function _renderBottomItem(item, disableNav) {
 	return (
 		<div key={`bottom-item-${item.id}`} className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle">
 			<NavLink to={item.href} className={linkClassNames}>
-				{item.id === 'log-id' && (<div className={`SideNavigation__menuIcon ${item.icon} hide-for-medium`} />)}
+				{item.id === 'log-id' && (
+					<div className={`SideNavigation__menuIcon ${item.icon} hide-for-medium`} />
+				)}
 				<p className="SideNavigation__bottomText">{item.text}</p>
 			</NavLink>
 		</div>

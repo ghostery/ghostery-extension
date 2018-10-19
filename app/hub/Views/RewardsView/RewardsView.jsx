@@ -33,11 +33,11 @@ class RewardsView extends Component {
 	render() {
 		return (
 			<div className="RewardsView RewardsView--paddingTop full-height flex-container flex-dir-column">
-				<div className="RewardsView__header row small-up-1 large-up-2 align-center flex-shrink-none">
+				<div className="row small-up-1 large-up-2 align-center flex-shrink-none">
 					<div className="RewardsView__screenshot columns">
 						<img src="/app/images/hub/rewards/ghostery-rewards-laptop.png" alt="Laptop" />
 					</div>
-					<div className="RewardsView__headerText columns .flex-dir-column">
+					<div className="RewardsView__headerText columns">
 						<div className="RewardsView__headerTitle">
 							{t('hub_rewards_header_title')}
 						</div>
@@ -81,7 +81,7 @@ class RewardsView extends Component {
 					</div>
 				</div>
 				<div className="RewardsView__backgroundStars flex-child-grow">
-					<div className="RewardsView--paddingTop row align-center">
+					<div className="RewardsView--paddingTop row align-center text-center">
 						<div className="RewardsView__closerText">
 							{t('hub_rewards_closer')}
 						</div>

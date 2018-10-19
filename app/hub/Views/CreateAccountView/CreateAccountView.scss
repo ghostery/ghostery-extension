@@ -78,15 +78,15 @@
 	.CreateAccountView {
 		padding-top: 20px;
 	}
- .CreateAccountView__header {
-	 flex-direction: column;
- }
- .CreateAccountView__headerTitle {
-	 padding-top: 30px;
-	 text-align: center;
- }
- .CreateAccountView__submit {
-	 display: flex;
-	 justify-content: center;
- }
+	.CreateAccountView__header {
+		flex-direction: column;
+	}
+	.CreateAccountView__headerTitle {
+		padding-top: 30px;
+		text-align: center;
+	}
+	.CreateAccountView__submit {
+		display: flex;
+		justify-content: center;
+	}
 }

@@ -24,7 +24,7 @@ import { ToastMessage } from '../../../shared-components';
 const AppView = props => (
 	<div className="App full-height full-width flex-container">
 		<SideNavigation />
-		<div className="App__mainContent full-height">
+		<div className="App__mainContent full-height full-width">
 			<ToastMessage toastText={props.app.toastMessage} toastClass={props.app.toastClass} toastExit={props.exitToast} />
 			{props.children}
 		</div>
