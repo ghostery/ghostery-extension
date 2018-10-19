@@ -58,7 +58,7 @@ const HomeView = (props) => {
 						<h1>
 							{t('hub_home_header_text')}
 						</h1>
-						<img className="columns hide-for-large-only" src="/app/images/hub/home/ghosty-bubble-heart.svg" />
+						<img className="columns hide-for-large" src="/app/images/hub/home/ghosty-bubble-heart.svg" />
 						{justInstalled && (
 							<div className="HomeView__headerTagline">
 								{t('hub_home_header_tagline')}
@@ -77,6 +77,7 @@ const HomeView = (props) => {
 						</div>
 						<div className="HomeView__supportContainer flex-container align-middle">
 							<ToggleCheckbox
+								className="flex-shrink-none"
 								checked={enable_metrics}
 								onChange={changeMetrics}
 							/>

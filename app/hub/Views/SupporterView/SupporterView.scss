@@ -29,6 +29,10 @@
 .SupporterView--rowDarken {
 	background-color: #f7f7f7;
 }
+.SupporterView__costContainer {
+	margin: 0 auto;
+	max-width: 382px;
+}
 .SupporterView__button {
 	min-width: 180px;
 	margin-bottom: 0;
@@ -122,9 +126,9 @@
 .SupporterView__featureImage.support{
 	max-width: 275px;
 }
-.SupporterView__featureImage.more {
-	max-width: 375px;
-}
+// .SupporterView__featureImage.more {
+// 	max-width: 375px;
+// }
 .SupporterView__manifestoContainer {
 	margin: 80px 0 0;
 	padding-top: 40px;
@@ -170,7 +174,7 @@
 		max-width: 350px;
 	}
 	.SupporterView__featureImage.support {
-		margin: 25px 0 -10px -33px;
+		margin: 0 0 -10px -33px;
 		max-width: 240px;
 	}
 	.SupporterView__feature {
@@ -180,17 +184,7 @@
 		line-height: 30px;
 		margin-top: 4px;
 	}
-	.SupporterView__buttonWithCost {
-		margin: 24px auto 0px auto;
-		justify-content: space-between;
-		max-width: 382px;
-	}
-	.SupporterView__button {
-		margin-left: 0px;
-		margin-right: 0px;
-	}
-	.SupporterView__headingCost {
-		margin-left: 0px;
-		margin-right: 0px;
+	.SupporterView__costContainer {
+		margin-top: 24px;
 	}
 }
