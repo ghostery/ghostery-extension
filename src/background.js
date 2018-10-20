@@ -771,46 +771,45 @@ function onMessageHandler(request, sender, callback) {
 		callback();
 		return false;
 	} else if (name === 'account.getTheme') {
-		if (conf.current_theme !== message.current_theme) {
+		const { current_theme } = message;
+		if (conf.current_theme !== current_theme) {
 			metrics.ping('theme_change');
 		}
-		if (account.hasScopesUnverified(['subscriptions:supporter'])) {
-			panelData.set(message);
-			if (message.current_theme !== 'default') {
-				// try to get it locally
-				message.theme = conf.themes[message.current_theme];
-				if (message.theme) {
-					conf.current_theme = message.current_theme;
-					callback(message);
-					return false;
-				}
-				account.getTheme(`${message.current_theme}.css`).then((theme) => {
-					if (theme) {
-						const { themes } = conf;
-						themes[message.current_theme] = theme;
-						conf.themes = themes;
-						conf.current_theme = message.current_theme;
-						message.theme = theme;
-					} else {
-						conf.current_theme = 'default';
-						message.current_theme = 'default';
-					}
-					callback(message);
-				})
-					.catch((err) => {
-						log('GET SET THEME ERROR', err);
-						conf.current_theme = 'default';
-						message.current_theme = 'default';
-						callback(message);
-					});
-				// Signifying asynchronous callback here. Other cases are synchronous.
-				return true;
+		if (current_theme !== 'default' &&
+			account.hasScopesUnverified(['subscriptions:supporter'])) {
+			// try to get it locally
+			const theme = conf.themes[current_theme];
+			if (theme) {
+				panelData.set(message);
+				message.theme = theme;
+				callback(message);
+				return false;
 			}
-			conf.current_theme = 'default';
-			message.current_theme = 'default';
-			callback(message);
-			return false;
+			account.getTheme(`${current_theme}.css`).then((theme) => {
+				if (theme) {
+					const { themes } = conf;
+					themes[current_theme] = theme;
+					conf.themes = themes;
+
+					message.theme = theme;
+				} else {
+					message.current_theme = 'default';
+				}
+				panelData.set(message);
+				callback(message);
+			})
+				.catch((err) => {
+					log('GET SET THEME ERROR', err);
+					message.current_theme = 'default';
+					panelData.set(message);
+					callback(message);
+				});
+			return true;
 		}
+		message.current_theme = 'default';
+		panelData.set(message);
+		callback(message);
+		return false;
 	} else if (name === 'getCliqzModuleData') {
 		const modules = { adblock: {}, antitracking: {} };
 
