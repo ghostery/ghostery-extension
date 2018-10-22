@@ -176,6 +176,7 @@ class PanelData {
 		const current_theme = this._confData.get('current_theme');
 		const themes = this._confData.get('themes');
 		const theme = themes[current_theme];
+		// Get theme if it is not there
 		if (current_theme !== 'default' && !theme) {
 			this.getTheme(`${current_theme}.css`)
 				.then((data) => {
