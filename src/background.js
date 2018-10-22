@@ -771,44 +771,37 @@ function onMessageHandler(request, sender, callback) {
 		callback();
 		return false;
 	} else if (name === 'account.getTheme') {
-		if (conf.current_theme !== message.currentTheme) {
+		const { current_theme } = message;
+		if (conf.current_theme !== current_theme) {
 			metrics.ping('theme_change');
 		}
-		if (message.currentTheme !== 'default' &&
+		if (current_theme !== 'default' &&
 			account.hasScopesUnverified(['subscriptions:supporter'])) {
 			// try to get it locally
-			message.theme = conf.themes[message.currentTheme];
-			if (message.theme) {
-				// This will trigger panelData.set through dispatch
-				// as currentTheme is in SYNC_ARRAY
-				conf.current_theme = message.currentTheme;
+			const theme = conf.themes[current_theme];
+			if (theme) {
+				panelData.set(message);
+				message.theme = theme;
 				callback(message);
 				return false;
 			}
-			account.getTheme(`${message.currentTheme}.css`).then((theme) => {
-				if (theme) {
-					const { themes } = conf;
-					themes[message.currentTheme] = theme;
-					conf.themes = themes;
-					conf.current_theme = message.currentTheme;
-					message.theme = theme;
-				} else {
-					conf.current_theme = 'default';
-					message.currentTheme = 'default';
-				}
+			account.getTheme(`${current_theme}.css`).then((theme) => {
+				const { themes } = conf;
+				themes[current_theme] = theme;
+				conf.themes = themes;
+
+				message.theme = theme;
+				panelData.set(message);
 				callback(message);
 			})
 				.catch((err) => {
 					log('GET SET THEME ERROR', err);
-					conf.current_theme = 'default';
-					message.currentTheme = 'default';
+					panelData.set(message);
 					callback(message);
 				});
-			// Signifying asynchronous callback here. Other cases are synchronous.
 			return true;
 		}
-		conf.current_theme = 'default';
-		message.currentTheme = 'default';
+		panelData.set(message);
 		callback(message);
 		return false;
 	} else if (name === 'getCliqzModuleData') {
