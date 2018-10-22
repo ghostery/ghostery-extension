@@ -174,7 +174,19 @@ class PanelData {
 			currentAccount.user.subscriptionsSupporter = account.hasScopesUnverified(['subscriptions:supporter']);
 		}
 		const current_theme = this._confData.get('current_theme');
-		const theme = this._confData.get('themes')[current_theme];
+		const themes = this._confData.get('themes');
+		const theme = themes[current_theme];
+		if (current_theme !== 'default' && !theme) {
+			this.getTheme(`${current_theme}.css`)
+				.then((data) => {
+					themes[current_theme] = data;
+					conf.themes = themes;
+					this._confData.set('themes', themes);
+				})
+				.catch((err) => {
+					log('ERROR GETTTING THEME', err);
+				});
+		}
 		this._panelView = {
 			panel: {
 				enable_ad_block: this._confData.get('enable_ad_block'),

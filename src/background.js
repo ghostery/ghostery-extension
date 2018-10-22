@@ -786,27 +786,21 @@ function onMessageHandler(request, sender, callback) {
 				return false;
 			}
 			account.getTheme(`${current_theme}.css`).then((theme) => {
-				if (theme) {
-					const { themes } = conf;
-					themes[current_theme] = theme;
-					conf.themes = themes;
+				const { themes } = conf;
+				themes[current_theme] = theme;
+				conf.themes = themes;
 
-					message.theme = theme;
-				} else {
-					message.current_theme = 'default';
-				}
+				message.theme = theme;
 				panelData.set(message);
 				callback(message);
 			})
 				.catch((err) => {
 					log('GET SET THEME ERROR', err);
-					message.current_theme = 'default';
 					panelData.set(message);
 					callback(message);
 				});
 			return true;
 		}
-		message.current_theme = 'default';
 		panelData.set(message);
 		callback(message);
 		return false;

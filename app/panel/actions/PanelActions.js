@@ -46,17 +46,6 @@ export function getPanelData(tabId) {
 			tabId,
 			view: 'panel',
 		}).then((data) => {
-			const { current_theme, theme } = data.panel;
-			if (current_theme !== 'default' && !theme) {
-				return sendMessageInPromise('account.getTheme', { current_theme })
-					.then((themeData) => {
-						data.panel.theme = themeData.theme;
-						dispatch({
-							type: GET_PANEL_DATA,
-							data: data.panel,
-						});
-					});
-			}
 			// On initial load, getPanelData returns combined Panel
 			// and Summary data and dispatches to respective reducers
 			dispatch({
