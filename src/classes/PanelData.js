@@ -169,18 +169,12 @@ class PanelData {
 	 * @return {Object}		panel data shared by multiple views
 	 */
 	get panelView() {
-		let current_theme = this._confData.get('current_theme');
-		let theme;
-		if (current_theme !== 'default') {
-			theme = this._confData.get('themes')[current_theme];
-			if (!theme) {
-				current_theme = 'default';
-			}
-		}
 		const currentAccount = this._confData.get('account');
 		if (currentAccount && currentAccount.user) {
 			currentAccount.user.subscriptionsSupporter = account.hasScopesUnverified(['subscriptions:supporter']);
 		}
+		const current_theme = this._confData.get('current_theme');
+		const theme = this._confData.get('themes')[current_theme];
 		this._panelView = {
 			panel: {
 				enable_ad_block: this._confData.get('enable_ad_block'),
