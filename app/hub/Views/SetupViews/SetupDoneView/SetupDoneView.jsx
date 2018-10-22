@@ -32,19 +32,19 @@ const SetupDoneView = props => (
 					<div className="SetupDone__bar columns" />
 				</div>
 
-				<div className="row align-spaced">
+				<div className="SetupDone__featureList row align-spaced flex-container">
 					{props.features.map((feature) => {
-						const iconClassNames = `SetupDone__feature_icon feature-${feature.id}`;
+						const iconClassNames = `SetupDone__featureIcon feature-${feature.id}`;
 
 						return (
 							<div key={`feature-${feature.id}`} className="SetupDone__feature columns flex-container flex-dir-column">
 								<div className={iconClassNames} />
-								<div className="SetupDone__feature_title flex-container align-center-middle">
+								<div className="SetupDone__featureTitle flex-container align-center-middle">
 									{feature.title}
 								</div>
 								<div className="SetupDone__bar" />
 								<div className="flex-child-grow">{feature.description}</div>
-								<NavLink className="SetupDone__feature_button button primary" to={feature.buttonHref}>
+								<NavLink className="SetupDone__featureButton button primary" to={feature.buttonHref}>
 									{feature.buttonText}
 								</NavLink>
 							</div>

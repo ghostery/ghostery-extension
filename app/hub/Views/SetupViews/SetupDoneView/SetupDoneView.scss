@@ -35,7 +35,7 @@
 	border-radius: 4px;
 	text-align: center;
 }
-.SetupDone__feature_icon {
+.SetupDone__featureIcon {
 	height: 50px;
 	width: 50px;
 	margin: 0 auto;
@@ -43,16 +43,16 @@
 	background-position: center center;
 	background-size: contain;
 }
-.SetupDone__feature_icon.feature-tutorial {
+.SetupDone__featureIcon.feature-tutorial {
 	background-image: buildFeatureTutorialIcon(#4a4a4a);
 }
-.SetupDone__feature_icon.feature-supporter {
+.SetupDone__featureIcon.feature-supporter {
 	background-image: buildFeaturePlusIcon(#4a4a4a);
 }
-.SetupDone__feature_icon.feature-products {
+.SetupDone__featureIcon.feature-products {
 	background-image: buildFeatureProductsIcon(#4a4a4a);
 }
-.SetupDone__feature_title {
+.SetupDone__featureTitle {
 	margin-top: 10px;
 	font-size: 14px;
 	font-weight: 500;
@@ -62,6 +62,15 @@
 .SetupDone__feature .SetupDone__bar {
 	margin: 10px;
 }
-.SetupDone__feature_button {
+.SetupDone__featureButton {
 	margin: 20px 10px 10px;
+}
+@media only screen and (max-width: 840px) {
+	.SetupDone__featureList {
+		flex-direction: column;
+		align-items: center;
+	}
+	.SetupDone__feature {
+		margin-top: 20px;
+	}
 }

@@ -48,4 +48,5 @@
 .ToggleSwitch.ToggleSwitch--active .ToggleSwitch__circle {
 	margin-left: 14px;
 	background-color: #1dafed;
+	@include transition(margin-left 0.2s)
 }
