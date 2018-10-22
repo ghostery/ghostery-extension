@@ -24,7 +24,7 @@
 }
 .SteppedNavigation__buttonContainer {
 	width: 250px;
-	margin: 0 15px;
+	margin: 20px 15px;
 }
 .SteppedNavigation__circles a {
 	display: inline-block;
@@ -46,4 +46,10 @@
 	right: -6px;
 	border-radius: 50%;
 	border: 2px solid purple;
+}
+@media only screen and (max-width: 960px) {
+	.SteppedNavigation {
+		flex-direction: column;
+		margin: 40px 0 40px;
+	}
 }

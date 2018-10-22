@@ -28,7 +28,7 @@ const TutorialView = (props) => {
 
 	return (
 		<div className="full-height flex-container flex-dir-column">
-			<div className="TutorialView--paddingTopSmall flex-child-grow flex-container align-middle">
+			<div className="TutorialView--paddingTopLarge flex-child-grow flex-container align-middle">
 				{steps.map(step => (
 					<Route
 						key={`route-${step.index}`}

@@ -19,8 +19,8 @@ import React from 'react';
  * @memberof HubComponents
  */
 const TutorialLayoutView = () => (
-	<div className="row align-center-middle">
-		<div className="columns small-12 medium-6">
+	<div className="TutorialLayoutView row align-center-middle flex-container">
+		<div className="columns small-10 medium-8 large-6">
 			<img
 				className="TutorialLayoutView__image simple"
 				src="/app/images/hub/tutorial/layout-simple.png"
@@ -32,7 +32,7 @@ const TutorialLayoutView = () => (
 				alt={t('hub_tutorial_detailed_view')}
 			/>
 		</div>
-		<div className="columns small-12 medium-4 medium-offset-1">
+		<div className="columns small-10 medium-6 large-4 large-offset-1">
 			<div className="TutorialView__title">
 				{t('hub_tutorial_layout_title')}
 			</div>

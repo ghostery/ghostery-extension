@@ -19,15 +19,15 @@ import React from 'react';
  * @memberof HubComponents
  */
 const TutorialTrackerListView = () => (
-	<div className="row align-center">
+	<div className="TutorialTrackerListView row align-center flex-container">
 		<div className="columns small-12 medium-9">
 			<img
-				className="TutorialTrackerListView__image"
+				className="TutorialTrackerListView__image shrink"
 				src="/app/images/hub/tutorial/tracker-list.png"
 				alt={t('hub_tutorial_trackerlist_title')}
 			/>
 		</div>
-		<div className="TutorialView--paddingTopSmall columns small-12 medium-3">
+		<div className="TutorialView--paddingTopSmall columns small-10 medium-6 large-3">
 			<div className="TutorialView__title">
 				{t('hub_tutorial_trackerlist_title')}
 			</div>

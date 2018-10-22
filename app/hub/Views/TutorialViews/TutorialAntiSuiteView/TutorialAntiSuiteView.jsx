@@ -19,8 +19,8 @@ import React from 'react';
  * @memberof HubComponents
  */
 const TutorialAntiSuiteView = () => (
-	<div className="row align-center-middle">
-		<div className="columns small-12 medium-6">
+	<div className="TutorialAntiSuiteView row align-center-middle">
+		<div className="columns small-10 small-offset-1 medium-8 large-6">
 			<div className="TutorialView__imageTitle">
 				{t('hub_tutorial_simple_view')}
 			</div>
@@ -38,7 +38,7 @@ const TutorialAntiSuiteView = () => (
 				alt={t('hub_tutorial_detailed_view')}
 			/>
 		</div>
-		<div className="columns small-12 medium-4 medium-offset-1">
+		<div className="columns small-12 medium-10 large-4">
 			<div className="TutorialView__title">
 				{t('hub_tutorial_antisuite_title')}
 			</div>
