@@ -52,7 +52,7 @@ const HomeView = (props) => {
 	return (
 		<div className="HomeView row align-center">
 			<div className="HomeView__display columns small-10 medium-10 large-8">
-				<div className="HomeView__header row samll-up-1 large-unstack align-center-middle">
+				<div className="HomeView__header row large-unstack align-center-middle">
 					<img className="columns" src="/app/images/hub/home/ghosty-bubble-heart.svg" />
 					<div className="columns">
 						<h1>
@@ -100,7 +100,7 @@ const HomeView = (props) => {
 						</NavLink>
 					)}
 				</div>
-				<div className="HomeView__onboarding row small-up-1 large-unstack align-center">
+				<div className="HomeView__onboarding row large-unstack align-center">
 					<div className={tutorialFeatureClassNames}>
 						<div className="HomeView__featureIcon" />
 						<div className="HomeView__featureTitle">
@@ -113,8 +113,8 @@ const HomeView = (props) => {
 							{tutorial_complete ? t('hub_home_feature_tutorial_button_alt') : t('hub_home_feature_tutorial_button')}
 						</NavLink>
 					</div>
-					<div className="HomeView__onboardingFeatureDivider1 column shrink hide-for-small show-for-large" />
-					<div className="HomeView__onboardingFeatureDivider2 hide-for-large" />
+					<div className="HomeView__dividerVertical column shrink hide-for-small show-for-large" />
+					<div className="HomeView__dividerHorizontal hide-for-large" />
 					<div className={setupFeatureClassNames}>
 						<div className="HomeView__featureIcon" />
 						<div className="HomeView__featureTitle">
@@ -128,7 +128,7 @@ const HomeView = (props) => {
 						</NavLink>
 					</div>
 				</div>
-				<div className="HomeView__supporter row small-up-1 large-unstack">
+				<div className="HomeView__supporter row large-unstack">
 					<div className="HomeView__featureIcon feature-supporter column-supporter hide-for-large" />
 					<div className="HomeView__featureText columns">
 						{t('hub_home_feature_supporter_text')}

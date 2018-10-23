@@ -21,6 +21,7 @@
 	border-radius: 3px;
 	border: 1px solid #efefef;
 	background-color: #ffffff;
+	@include transition(background-color 0.2s);
 }
 .ExitButton__exit:hover {
 	background-color: #efefef;

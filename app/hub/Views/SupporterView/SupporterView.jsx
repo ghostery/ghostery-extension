@@ -18,8 +18,8 @@ import globals from '../../../../src/classes/Globals';
 
 /**
  * Helper render function for rendering the Supporter Button
- * @param  {Boolean} isSupporter       whether the user is a subscriber
- * @param  {String} additionalClasses  classes to add to button for additional styling
+ * @param  {Boolean}  isSupporter        whether the user is a subscriber
+ * @param  {String}   additionalClasses  classes to add to button for additional styling
  * @return {JSX} JSX of the Supporter Button
  */
 function _renderButton(isSupporter, additionalClasses) {

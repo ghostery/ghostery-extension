@@ -59,13 +59,13 @@
 	margin: 0 8px;
 	padding: 0 36px;
 }
-.HomeView__onboarding .HomeView__onboardingFeatureDivider1 {
+.HomeView__dividerVertical {
 	margin: 7px 0 4px;
 	max-width: 1px;
 	padding: 0;
 	background-color: #979797;
 }
-.HomeView__onboarding .HomeView__onboardingFeatureDivider2 {
+.HomeView__dividerHorizontal {
 	margin: 0 25px;
 	height: 1px;
 	width: 100%;
@@ -139,17 +139,17 @@
 		margin-top: 14px;
 	}
 	.HomeView__header img {
-		margin-right: 0;
-		margin-bottom: 20px;
+		margin: 0 0 20px 0;
 	}
 	.HomeView__header h1 {
-		margin-bottom: 20px;
 		text-align: center;
 	}
-	.feature-tutorial, .feature-tutorial-complete {
+	.HomeView__onboardingFeature.feature-tutorial,
+	.HomeView__onboardingFeature.feature-tutorial-complete {
 		margin: 12px 0 40px;
 	}
-	.feature-setup, .feature-setup-complete {
+	.HomeView__onboardingFeature.feature-setup,
+	.HomeView__onboardingFeature.feature-setup-complete {
 		margin: 35px 0 15px;
 	}
 }

@@ -89,9 +89,12 @@ const SideNavigationView = (props) => {
 	const topClassNames = ClassNames('SideNavigation__top', {
 		disabled: disableNav,
 	});
+	const containerClassNames = ClassNames('SideNavigation flex-container flex-dir-column', {
+		disabled: disableNav,
+	});
 
 	return (
-		<div className="SideNavigation flex-container flex-dir-column">
+		<div className={containerClassNames}>
 			<NavLink to="/" className={topClassNames} />
 			<div className="SideNavigation__menu flex-child-grow flex-container flex-dir-column">
 				{menuItems.map(item => _renderMenuItem(item, disableNav))}

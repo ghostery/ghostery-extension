@@ -182,7 +182,7 @@ a.disabled .SideNavigation__menuIcon.profile {
 	opacity: 1;
 	@include transition(opacity .5s ease .5s);
 }
-.SideNavigation:hover .SideNavigation__menuIcon.profile {
+.SideNavigation:not(.disabled):hover .SideNavigation__menuIcon.profile {
 	opacity: 0;
 	@include transition(opacity .5s);
 }
@@ -190,15 +190,18 @@ a.disabled .SideNavigation__menuIcon.profile {
 	.SideNavigation {
 		width: 55px;
 	}
-	.SideNavigation:hover {
+	.SideNavigation:not(.disabled):hover {
 		width: 230px;
 	}
-	.SideNavigation:not(:hover) .SideNavigation__top {
+	.SideNavigation:not(:hover) .SideNavigation__top,
+	.SideNavigation__top.disabled {
 		background-image: url('/app/images/hub/side-navigation/ghostery-stacked-logo.svg');
 		background-size: 40px auto;
 	}
 	.SideNavigation:not(:hover) .SideNavigation__item a.active::before,
-	.SideNavigation:not(:hover) .SideNavigation__item a.active::after {
+	.SideNavigation:not(:hover) .SideNavigation__item a.active::after,
+	.SideNavigation.disabled .SideNavigation__item a.active::before,
+	.SideNavigation.disabled .SideNavigation__item a.active::after, {
 		opacity: 0;
 		@include transition(opacity .25s);
 	}
@@ -206,7 +209,7 @@ a.disabled .SideNavigation__menuIcon.profile {
 		opacity: 0;
 		@include transition(opacity .5s);
 	}
-	.SideNavigation:hover .SideNavigation__bottomText {
+	.SideNavigation:not(.disabled):hover .SideNavigation__bottomText {
 		opacity: 1;
 		@include transition(opacity 1s ease .5s);
 	}
