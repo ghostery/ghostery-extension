@@ -153,3 +153,13 @@
 		margin: 35px 0 15px;
 	}
 }
+
+// Firefox Font Size Override and Image Size Override
+@-moz-document url-prefix() {
+	.HomeView--firefoxFontSize {
+		font-size: 75%;
+	}
+	.HomeView--firefoxImageSize {
+		height: 113.875px !important;
+	}
+}

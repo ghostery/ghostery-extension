@@ -53,7 +53,7 @@ const HomeView = (props) => {
 		<div className="HomeView row align-center">
 			<div className="HomeView__display columns small-10 medium-10 large-8">
 				<div className="HomeView__header row large-unstack align-center-middle">
-					<img className="columns" src="/app/images/hub/home/ghosty-bubble-heart.svg" />
+					<img className="columns HomeView--firefoxImageSize" src="/app/images/hub/home/ghosty-bubble-heart.svg" />
 					<div className="columns">
 						<h1>
 							{t('hub_home_header_text')}
@@ -66,7 +66,7 @@ const HomeView = (props) => {
 						<div className="HomeView__headerTagline HomeView--bolded">
 							{t('hub_home_header_tagline_2')}
 						</div>
-						<div className="HomeView__supportContainer HomeView--pad-left">
+						<div className="HomeView__supportContainer HomeView--pad-left HomeView--firefoxFontSize">
 							<span>
 								{t('hub_home_header_info')}
 							</span>
@@ -80,7 +80,7 @@ const HomeView = (props) => {
 								checked={enable_metrics}
 								onChange={changeMetrics}
 							/>
-							<span className="clickable" onClick={changeMetrics}>
+							<span className="clickable HomeView--firefoxFontSize" onClick={changeMetrics}>
 								{t('hub_home_header_checkbox_label')}
 							</span>
 						</div>
