@@ -19,7 +19,7 @@ import React from 'react';
  * @memberof HubComponents
  */
 const TutorialTrackerListView = () => (
-	<div className="TutorialTrackerListView row align-center flex-container">
+	<div className="TutorialTrackerListView TutorialView--mediumFlexColumn row align-center flex-container">
 		<div className="columns small-12 medium-9">
 			<img
 				className="TutorialTrackerListView__image shrink"

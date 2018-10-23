@@ -43,7 +43,7 @@ const SetupAntiSuiteView = props => (
 								/>
 							</div>
 						</div>
-						<div className="columns small-12 large-8">
+						<div className="SetupAntiSuite--alignOnMedium columns small-12 large-8">
 							<div className="flex-container align-middle">
 								<div className="SetupAntiSuite__featureTitle display-inline">
 									{feature.name}

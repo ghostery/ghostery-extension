@@ -19,7 +19,7 @@ import React from 'react';
  * @memberof HubComponents
  */
 const TutorialAntiSuiteView = () => (
-	<div className="TutorialAntiSuiteView row align-center-middle">
+	<div className="TutorialAntiSuiteView TutorialView--mediumFlexColumn row align-center-middle">
 		<div className="columns small-10 small-offset-1 medium-8 large-6">
 			<div className="TutorialView__imageTitle">
 				{t('hub_tutorial_simple_view')}

@@ -19,7 +19,7 @@ import React from 'react';
  * @memberof HubComponents
  */
 const TutorialLayoutView = () => (
-	<div className="TutorialLayoutView row align-center-middle flex-container">
+	<div className="TutorialLayoutView TutorialView--mediumFlexColumn row align-center-middle flex-container">
 		<div className="columns small-10 medium-8 large-6">
 			<img
 				className="TutorialLayoutView__image simple"

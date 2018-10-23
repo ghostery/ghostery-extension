@@ -42,6 +42,14 @@
 	font-weight: 500;
 }
 
+// Medium Breakpoint Flex Helper Class
+@media only screen and (max-width: 960px) {
+	.TutorialView--mediumFlexColumn {
+		display: flex;
+		flex-direction: column-reverse;
+		align-items: center;
+	}
+
 // Tutorial Video View
 .TutorialVideoView__videoContainer {
 	height: auto;
@@ -61,9 +69,8 @@
 
 // Tutorial Tracker List View
 @media only screen and (max-width: 960px) {
-	.TutorialTrackerListView {
-		flex-direction: column;
-		align-items: center;
+	.TutorialTrackerListView .TutorialView__tagline {
+		margin-bottom: 30px;
 	}
 }
 
@@ -102,7 +109,7 @@
 }
 @media only screen and (max-width: 740px) {
 	.TutorialBlockingView {
-		flex-direction: column;
+		flex-direction: column-reverse;
 		align-items: center;
 	}
 	.TutorialBlockingView .TutorialView__title {
@@ -115,6 +122,7 @@
 		background-position: center top;
 		padding: 40px 10px 0 10px;
 		text-align: center;
+		margin-bottom: 30px;
 	}
 }
 
@@ -124,11 +132,8 @@
 	margin-bottom: 30px;
 }
 @media only screen and (max-width: 960px) {
-	.TutorialLayoutView {
-		flex-direction: column;
-	}
-	.TutorialLayoutView .TutorialView__title {
-		margin-top: 30px;
+	.TutorialLayoutView .TutorialView__tagline {
+		margin-bottom: 40px;
 	}
 }
 
@@ -171,8 +176,9 @@
 		align-items: center;
 		padding-bottom: 0;
 	}
-	.TutorialTrustView .TutorialView__title {
-		margin-top: 30px;
+	.TutorialTrustView .TutorialView__title,
+	.TutorialTrustView .TutorialView__tagline {
+		text-align: center;
 	}
 }
 
@@ -219,10 +225,10 @@
 	line-height: 20px;
 }
 @media only screen and (max-width: 960px) {
-	.TutorialAntiSuiteView .TutorialView__title {
-		margin-top: 35px;
-	}
 	.TutorialAntiSuiteView__key {
 		margin: 30px;
+	}
+	.TutorialAntiSuiteView__key:last-of-type {
+		margin-bottom: 15px;
 	}
 }
