@@ -252,7 +252,7 @@ class Rewards extends React.Component {
 				key={reward.id}
 				isLong={is_expanded}
 				unread={reward.unread}
-				text={reward.text}
+				text={reward.benefit}
 				logoUrl={reward.logo_url}
 				expires={reward.expires}
 				actions={actions}
