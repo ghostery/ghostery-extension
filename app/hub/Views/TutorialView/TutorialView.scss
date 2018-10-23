@@ -13,9 +13,6 @@
 
 // Tutorial View
 .TutorialView--paddingTopLarge {
-	padding-top: 160px;
-}
-.TutorialView--paddingTopLarge {
 	padding-top: 80px;
 }
 .TutorialView--paddingTopSmall {
@@ -45,7 +42,6 @@
 	font-weight: 500;
 }
 
-
 // Tutorial Video View
 .TutorialVideoView__videoContainer {
 	height: auto;
@@ -72,11 +68,7 @@
 }
 
 // Tutorial Blocking View
-.TutorialBlockingView__image.detailed {
-	// max-width: 450px;
-}
 .TutorialBlockingView__image.detailed-expanded {
-	// max-width: 450px;
 	margin-top: 10px;
 }
 .TutorialBlockingView__key {
@@ -128,12 +120,8 @@
 
 // Tutorial Layout View
 .TutorialLayoutView__image.simple {
-	// max-width: 350px;
 	margin-left: -6px;
 	margin-bottom: 30px;
-}
-.TutorialLayoutView__image.detailed {
-	// max-width: 360px;
 }
 @media only screen and (max-width: 960px) {
 	.TutorialLayoutView {
@@ -145,13 +133,6 @@
 }
 
 // Tutorial Trust View
-.TutorialTrustView__image.simple {
-	// max-width: 350px;
-}
-.TutorialTrustView__image.detailed {
-	// max-width: 400px;
-	// margin-left: -50px;
-}
 .TutorialTrustView__key {
 	margin-top: 30px;
 }
@@ -196,11 +177,7 @@
 }
 
 // Tutorial Anti Suite View
-.TutorialAntiSuiteView__image.simple {
-	// max-width: 400px;
-}
 .TutorialAntiSuiteView__image.detailed {
-	// max-width: 400px;
 	margin-left: -30px;
 }
 .TutorialAntiSuiteView__key {

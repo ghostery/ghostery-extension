@@ -198,6 +198,16 @@ a.disabled .SideNavigation__menuIcon.profile {
 		background-image: url('/app/images/hub/side-navigation/ghostery-stacked-logo.svg');
 		background-size: 40px auto;
 	}
+	.SideNavigation:not(.disabled):hover .SideNavigation__item a.active .SideNavigation__menuIcon {
+		border-right: 3px solid rgba(white, 0);
+		@include transition(none);
+	}
+	.SideNavigation__item a.active .SideNavigation__menuIcon {
+		border-right: 3px solid white;
+    margin: 0 1px 0 4px;
+    min-width: 50px;
+		@include transition(border-color .3s ease .4s);
+	}
 	.SideNavigation:not(:hover) .SideNavigation__item a.active::before,
 	.SideNavigation:not(:hover) .SideNavigation__item a.active::after,
 	.SideNavigation.disabled .SideNavigation__item a.active::before,
