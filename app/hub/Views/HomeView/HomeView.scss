@@ -162,4 +162,10 @@
 	.HomeView--firefoxImageSize {
 		height: 113.875px;
 	}
+	@media only screen and (max-width: 740px) {
+		.HomeView--firefoxImageSize {
+			min-width: 126px !important;
+			max-width: 146px !important;
+		}
+	}
 }
