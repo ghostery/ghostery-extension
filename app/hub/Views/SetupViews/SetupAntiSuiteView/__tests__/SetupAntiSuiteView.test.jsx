@@ -83,9 +83,9 @@ describe('app/hub/Views/SetupViews/SetupAntiSuiteView component', () => {
 
 			const component = shallow(<SetupAntiSuiteView {...initialState} />);
 			expect(component.find('.row').length).toBe(3);
-			expect(component.find('.test-feature-1').length).toBe(1);
-			expect(component.find('.test-feature-2').length).toBe(1);
-			expect(component.find('.test-feature-1.active').length).toBe(1);
+			expect(component.find('.test-feature-1').length).toBe(2);
+			expect(component.find('.test-feature-2').length).toBe(2);
+			expect(component.find('.test-feature-1.active').length).toBe(2);
 			expect(component.find('.test-feature-2.active').length).toBe(0);
 		});
 

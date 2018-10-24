@@ -168,7 +168,11 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         onClick={[Function]}
         style={undefined}
       >
-        Create Account
+        <p
+          className="SideNavigation__bottomText"
+        >
+          Create Account
+        </p>
       </a>
     </div>
     <div
@@ -181,7 +185,11 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         onClick={[Function]}
         style={undefined}
       >
-        Log In
+        <p
+          className="SideNavigation__bottomText"
+        >
+          Log In
+        </p>
       </a>
     </div>
     <div
@@ -193,7 +201,11 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         rel="noopener noreferrer"
         target="_blank"
       >
-        test@example.com
+        <p
+          className="SideNavigation__bottomText"
+        >
+          test@example.com
+        </p>
       </a>
     </div>
     <div
@@ -203,7 +215,11 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         className="clickable"
         onClick={[Function]}
       >
-        Log Out
+        <p
+          className="SideNavigation__bottomText"
+        >
+          Log Out
+        </p>
       </div>
     </div>
   </div>
@@ -212,7 +228,7 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
 
 exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-test-renderer side navigation view is rendered correctly when disabled 1`] = `
 <div
-  className="SideNavigation flex-container flex-dir-column"
+  className="SideNavigation flex-container flex-dir-column disabled"
 >
   <a
     aria-current="page"
@@ -358,7 +374,11 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         onClick={[Function]}
         style={undefined}
       >
-        Create Account
+        <p
+          className="SideNavigation__bottomText"
+        >
+          Create Account
+        </p>
       </a>
     </div>
     <div
@@ -371,7 +391,11 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         onClick={[Function]}
         style={undefined}
       >
-        Log In
+        <p
+          className="SideNavigation__bottomText"
+        >
+          Log In
+        </p>
       </a>
     </div>
     <div
@@ -383,7 +407,11 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         rel="noopener noreferrer"
         target="_blank"
       >
-        test@example.com
+        <p
+          className="SideNavigation__bottomText"
+        >
+          test@example.com
+        </p>
       </a>
     </div>
     <div
@@ -393,7 +421,11 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         className="clickable disabled"
         onClick={[Function]}
       >
-        Log Out
+        <p
+          className="SideNavigation__bottomText"
+        >
+          Log Out
+        </p>
       </div>
     </div>
   </div>

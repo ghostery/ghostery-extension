@@ -26,16 +26,16 @@ exports[`app/hub/Views/SetupViews/SetupDoneView component Snapshot tests with re
         />
       </div>
       <div
-        className="row align-spaced"
+        className="SetupDone__featureList row align-spaced flex-container"
       >
         <div
           className="SetupDone__feature columns flex-container flex-dir-column"
         >
           <div
-            className="SetupDone__feature_icon feature-feature-1"
+            className="SetupDone__featureIcon feature-feature-1"
           />
           <div
-            className="SetupDone__feature_title flex-container align-center-middle"
+            className="SetupDone__featureTitle flex-container align-center-middle"
           >
             Feature 1 Title
           </div>
@@ -49,7 +49,7 @@ exports[`app/hub/Views/SetupViews/SetupDoneView component Snapshot tests with re
           </div>
           <a
             aria-current={null}
-            className="SetupDone__feature_button button primary"
+            className="SetupDone__featureButton button primary"
             href="/feature/1"
             onClick={[Function]}
             style={undefined}
@@ -61,10 +61,10 @@ exports[`app/hub/Views/SetupViews/SetupDoneView component Snapshot tests with re
           className="SetupDone__feature columns flex-container flex-dir-column"
         >
           <div
-            className="SetupDone__feature_icon feature-feature-2"
+            className="SetupDone__featureIcon feature-feature-2"
           />
           <div
-            className="SetupDone__feature_title flex-container align-center-middle"
+            className="SetupDone__featureTitle flex-container align-center-middle"
           >
             Feature 2 Title
           </div>
@@ -78,7 +78,7 @@ exports[`app/hub/Views/SetupViews/SetupDoneView component Snapshot tests with re
           </div>
           <a
             aria-current={null}
-            className="SetupDone__feature_button button primary"
+            className="SetupDone__featureButton button primary"
             href="/feature/2"
             onClick={[Function]}
             style={undefined}
@@ -90,10 +90,10 @@ exports[`app/hub/Views/SetupViews/SetupDoneView component Snapshot tests with re
           className="SetupDone__feature columns flex-container flex-dir-column"
         >
           <div
-            className="SetupDone__feature_icon feature-feature-3"
+            className="SetupDone__featureIcon feature-feature-3"
           />
           <div
-            className="SetupDone__feature_title flex-container align-center-middle"
+            className="SetupDone__featureTitle flex-container align-center-middle"
           >
             Feature 3 Title
           </div>
@@ -107,7 +107,7 @@ exports[`app/hub/Views/SetupViews/SetupDoneView component Snapshot tests with re
           </div>
           <a
             aria-current={null}
-            className="SetupDone__feature_button button primary"
+            className="SetupDone__featureButton button primary"
             href="/feature/3"
             onClick={[Function]}
             style={undefined}
