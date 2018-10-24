@@ -180,11 +180,11 @@ a.disabled .SideNavigation__menuIcon.profile {
 }
 .SideNavigation__menuIcon.profile {
 	opacity: 1;
-	@include transition(opacity .5s ease .5s);
+	@include transition(opacity .3s ease .4s);
 }
 .SideNavigation:not(.disabled):hover .SideNavigation__menuIcon.profile {
 	opacity: 0;
-	@include transition(opacity .5s);
+	@include transition(opacity .3s);
 }
 @media only screen and (max-width: 740px)  {
 	.SideNavigation {
@@ -217,10 +217,10 @@ a.disabled .SideNavigation__menuIcon.profile {
 	}
 	.SideNavigation__bottomText {
 		opacity: 0;
-		@include transition(opacity .5s);
+		@include transition(opacity .3s);
 	}
 	.SideNavigation:not(.disabled):hover .SideNavigation__bottomText {
 		opacity: 1;
-		@include transition(opacity 1s ease .5s);
+		@include transition(opacity .3s ease .4s);
 	}
 }
