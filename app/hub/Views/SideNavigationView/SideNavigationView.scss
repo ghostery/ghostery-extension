@@ -94,7 +94,7 @@
 	border-style: solid;
 	border-width: 0 0 40px 30px;
 	border-color: transparent transparent #ffffff transparent;
-	@include transition(opacity 1s);
+	@include transition(opacity .3s ease .4s);
 }
 .SideNavigation__item a.active::after {
 	content: '';
@@ -106,7 +106,7 @@
 	border-style: solid;
 	border-width: 0 30px 40px 0;
 	border-color: transparent #ffffff transparent transparent;
-	@include transition(opacity 1s);
+	@include transition(opacity .3s ease .4s);
 }
 .SideNavigation__bottomItem a.active::before {
 	top: -26px;
@@ -186,6 +186,9 @@ a.disabled .SideNavigation__menuIcon.profile {
 	opacity: 0;
 	@include transition(opacity .3s);
 }
+.SideNavigation__item a.active .SideNavigation__menuIcon {
+	@include transition(border-color .3s ease .4s);
+}
 @media only screen and (max-width: 740px)  {
 	.SideNavigation {
 		width: 55px;
@@ -213,7 +216,7 @@ a.disabled .SideNavigation__menuIcon.profile {
 	.SideNavigation.disabled .SideNavigation__item a.active::before,
 	.SideNavigation.disabled .SideNavigation__item a.active::after, {
 		opacity: 0;
-		@include transition(opacity .25s);
+		@include transition(opacity .3s);
 	}
 	.SideNavigation__bottomText {
 		opacity: 0;
