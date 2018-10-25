@@ -171,14 +171,17 @@
 	margin-bottom: 0;
 }
 @media only screen and (max-width: 960px) {
+	.TutorialTrustView .TutorialView__title,
+	.TutorialTrustView .TutorialView__tagline {
+		text-align: center;
+	}
 	.TutorialTrustView__key {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		padding-bottom: 0;
 	}
-	.TutorialTrustView .TutorialView__title,
-	.TutorialTrustView .TutorialView__tagline {
+	.TutorialTrustView .TutorialView__keyText {
 		text-align: center;
 	}
 }
@@ -226,6 +229,9 @@
 	line-height: 20px;
 }
 @media only screen and (max-width: 960px) {
+	.TutorialAntiSuiteView .TutorialView__title {
+		text-align: center;
+	}
 	.TutorialAntiSuiteView__key {
 		margin: 30px;
 	}
