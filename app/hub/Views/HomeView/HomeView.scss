@@ -32,8 +32,9 @@
 	margin-bottom: 19px;
 }
 .HomeView__headerTagline {
+	margin-top: 7px;
 	font-size: 20px;
-	line-height: 38px;
+	line-height: 30px;
 	color: #4a4a4a;
 }
 .HomeView__supportContainer {
@@ -141,7 +142,7 @@
 	.HomeView__header img {
 		margin: 0 0 20px 0;
 	}
-	.HomeView__header h1 {
+	.HomeView__header h1, .HomeView__headerTagline {
 		text-align: center;
 	}
 	.HomeView__onboardingFeature.feature-tutorial,
