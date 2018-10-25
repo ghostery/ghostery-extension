@@ -135,7 +135,7 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
         className="columns small-12 medium-5"
       >
         <div
-          className="CreateAccountView--marginBottom flex-container align-middle"
+          className="CreateAccountView__checkboxContainer CreateAccountView--marginBottom flex-container align-middle"
         >
           <div
             className="ToggleCheckbox ToggleCheckbox--active"
@@ -162,7 +162,7 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
       className="row align-center"
     >
       <div
-        className="columns small-12 medium-10"
+        className="CreateAccountView__linkContainer columns small-12 medium-10"
       >
         <a
           aria-current={null}
