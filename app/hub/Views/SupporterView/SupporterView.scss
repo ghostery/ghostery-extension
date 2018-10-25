@@ -185,3 +185,8 @@
 		margin-top: 24px;
 	}
 }
+@media only screen and (max-width: 500px) {
+	.SupporterView__bar {
+		display: none;
+	}
+}

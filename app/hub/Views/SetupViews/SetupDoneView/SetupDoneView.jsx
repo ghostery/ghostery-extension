@@ -23,8 +23,8 @@ import { NavLink } from 'react-router-dom';
 const SetupDoneView = props => (
 	<div className="row align-center">
 		<div className="columns small-12 large-10">
-			<div className="SetupDone">
-				<div className="SetupDone__title_bar row align-middle">
+			<div>
+				<div className="SetupDone__titleBar row align-middle">
 					<div className="SetupDone__bar columns" />
 					<div className="SetupDone__title columns shrink">
 						{t('hub_setup_ready_heading')}

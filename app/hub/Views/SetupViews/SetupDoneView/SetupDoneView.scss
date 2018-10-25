@@ -12,7 +12,7 @@
  */
 
 // Setup Blocking View
-.SetupDone__title_bar {
+.SetupDone__titleBar {
 	margin-bottom: 25px;
 }
 .SetupDone__bar {
@@ -75,5 +75,13 @@
 	}
 	.SetupDone__feature {
 		margin-top: 20px;
+	}
+}
+@media only screen and (max-width: 960px) {
+	.SetupDone__titleBar {
+		margin-bottom: 0;
+	}
+	.SetupDone__titleBar .SetupDone__bar {
+		background-color: #ffffff;
 	}
 }
