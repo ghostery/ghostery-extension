@@ -436,6 +436,10 @@ class Account {
 	}
 
 	_setSubscriptionData = (subscriptionData) => {
+		if (!conf.paid_subscription && subscriptionData.hasOwnProperty('subscriptions')) {
+			conf.paid_subscription = true;
+			dispatcher.trigger('conf.save.paid_subscription');
+		}
 		conf.account.subscriptionData = subscriptionData;
 		dispatcher.trigger('conf.save.account');
 	}

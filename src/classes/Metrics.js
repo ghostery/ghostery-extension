@@ -297,14 +297,14 @@ class Metrics {
 			// New parameters to Ghostery 8.3
 			// Subscription Type
 			`&st=${encodeURIComponent(this._getSubscriptionType().toString())}` +
-			// Subscription Status
-			`&su=${encodeURIComponent(this._getSubscriptionStatus().toString())}` +
+			// Whether the computer ever had a Paid Subscription
+			`&ps=${encodeURIComponent(conf.paid_subscription ? '1' : '0')}` +
 			// Active Velocity
-			`&va=${encodeURIComponent(this._getVelocityActive().toString())}` +
+			`&va=${encodeURIComponent(this._getVelocityActive(type).toString())}` +
 			// Engaged Recency
 			`&re=${encodeURIComponent(this._getRecencyEngaged(type, frequency).toString())}` +
 			// Engaged Velocity
-			`&ve=${encodeURIComponent(this._getVelocityEngaged().toString())}` +
+			`&ve=${encodeURIComponent(this._getVelocityEngaged(type).toString())}` +
 			// Theme
 			`&th=${encodeURIComponent(conf.current_theme.toString())}`;
 
@@ -384,7 +384,7 @@ class Metrics {
 	 * @return {number} 	in days since the last daily active ping
 	 */
 	_getRecencyActive(type, frequency) {
-		if (conf.metrics.active_daily && type === 'active' && frequency === 'daily') {
+		if (conf.metrics.active_daily && (type === 'active' || type === 'engaged') && frequency === 'daily') {
 			return Math.floor((Number(new Date().getTime()) - conf.metrics.active_daily) / 86400000);
 		}
 		return -1;
@@ -397,7 +397,7 @@ class Metrics {
 	 * @return {number} 	in days since the last daily engaged ping
 	 */
 	_getRecencyEngaged(type, frequency) {
-		if (conf.metrics.engaged_daily && type === 'engaged' && frequency === 'daily') {
+		if (conf.metrics.engaged_daily && (type === 'active' || type === 'engaged') && frequency === 'daily') {
 			return Math.floor((Number(new Date().getTime()) - conf.metrics.engaged_daily) / 86400000);
 		}
 		return -1;
@@ -407,7 +407,10 @@ class Metrics {
 	 * @private
 	 * @return {number}  The Active Velocity
 	 */
-	_getVelocityActive() {
+	_getVelocityActive(type) {
+		if (type !== 'active' && type !== 'engaged') {
+			return -1;
+		}
 		const active_daily_velocity = conf.metrics.active_daily_velocity || [];
 		const today = Math.floor(Number(new Date().getTime()) / 86400000);
 		return active_daily_velocity.filter(el => el > today - 7).length;
@@ -417,7 +420,10 @@ class Metrics {
 	 * @private
 	 * @return {number}  The Engaged Velocity
 	 */
-	_getVelocityEngaged() {
+	_getVelocityEngaged(type) {
+		if (type !== 'active' && type !== 'engaged') {
+			return -1;
+		}
 		const engaged_daily_velocity = conf.metrics.engaged_daily_velocity || [];
 		const today = Math.floor(Number(new Date().getTime()) / 86400000);
 		return engaged_daily_velocity.filter(el => el > today - 7).length;
@@ -435,20 +441,6 @@ class Metrics {
 			return -1;
 		}
 		return subscriptions.productName.toUpperCase().replace(' ', '_');
-	}
-	/**
-	 * Get the Subscription Status
-	 * @return {number} 0 or 1 for whether the subscription will auto-renew
-	 */
-	_getSubscriptionStatus() {
-		if (!conf.account) {
-			return -1;
-		}
-		const subscriptions = conf.account.subscriptionData && conf.account.subscriptionData.subscriptions;
-		if (!subscriptions) {
-			return -1;
-		}
-		return (subscriptions.cancelAtPeriodEnd) ? 0 : 1;
 	}
 	/**
 	 * Get the number of Rewards shown to the user.

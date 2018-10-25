@@ -134,6 +134,7 @@ class ConfData {
 			_initProperty('setup_block', 1);
 			_initProperty('setup_complete', false);
 			_initProperty('tutorial_complete', false);
+			_initProperty('paid_subscription', false);
 			_initProperty('cliqz_import_state', 0);
 			_initProperty('current_theme', 'default');
 
