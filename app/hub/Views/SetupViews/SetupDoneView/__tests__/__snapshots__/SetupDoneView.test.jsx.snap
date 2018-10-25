@@ -7,11 +7,9 @@ exports[`app/hub/Views/SetupViews/SetupDoneView component Snapshot tests with re
   <div
     className="columns small-12 large-10"
   >
-    <div
-      className="SetupDone"
-    >
+    <div>
       <div
-        className="SetupDone__title_bar row align-middle"
+        className="SetupDone__titleBar row align-middle"
       >
         <div
           className="SetupDone__bar columns"

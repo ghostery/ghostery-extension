@@ -54,7 +54,7 @@ exports[`app/hub/Views/SetupViews/SetupBlockingView component Snapshot tests wit
               </div>
             </label>
             <div
-              className="SetupBlocking__description hide-for-small show-for-large"
+              className="SetupBlocking__description show-for-large"
             >
               This is your TEST below text
             </div>
@@ -91,7 +91,7 @@ exports[`app/hub/Views/SetupViews/SetupBlockingView component Snapshot tests wit
               </div>
             </label>
             <div
-              className="SetupBlocking__description hide-for-small show-for-large"
+              className="SetupBlocking__description show-for-large"
             >
               This is your EXAMPLE below text
             </div>
