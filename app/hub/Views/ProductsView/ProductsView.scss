@@ -46,8 +46,11 @@
 .ProductsView__storeImageContainer {
 	margin-top: 20px;
 }
-.ProductsView__imageAppStore {
-	max-width: 130px;
+.ProductsView__imageAppStoreIos {
+	max-width: 120px;
+}
+.ProductsView__imageAppStoreMac {
+	max-width: 156px;
 }
 .ProductsView__imagePlayStore {
 	max-width: 140px;

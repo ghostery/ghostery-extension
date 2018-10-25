@@ -16,7 +16,7 @@ import { bindActionCreators } from 'redux';
 
 import SetupHumanWebViewContainer from './SetupHumanWebViewContainer';
 import * as SetupHumanWebViewActions from './SetupHumanWebViewActions';
-import { setSetupNavigation } from '../../SetupView/SetupViewActions';
+import { setSetupStep, setSetupNavigation } from '../../SetupView/SetupViewActions';
 
 /**
  * Map redux store state properties to the component's own properties.
@@ -33,7 +33,10 @@ const mapStateToProps = state => Object.assign({}, state.setup);
  * @memberof SetupContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign({}, SetupHumanWebViewActions, { setSetupNavigation }), dispatch),
+	actions: bindActionCreators(Object.assign({}, SetupHumanWebViewActions, {
+		setSetupStep,
+		setSetupNavigation
+	}), dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SetupHumanWebViewContainer);

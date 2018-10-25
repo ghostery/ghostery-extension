@@ -127,7 +127,7 @@ class Metrics {
 				this._recordActive();
 				break;
 			case 'engaged':
-				this._sendReq('engaged', ['daily', 'weekly', 'monthly']);
+				this._recordEngaged();
 				break;
 
 			// Extension Usage
@@ -137,7 +137,7 @@ class Metrics {
 			case 'resume':
 			case 'sign_in':
 			case 'trust_site':
-				this._sendReq(type, ['all', 'daily', 'weekly']);
+				this._sendReq(type, ['all', 'daily']);
 				break;
 
 			// New to Ghostery 8
@@ -146,8 +146,8 @@ class Metrics {
 			case 'antitrack_off':
 			case 'antitrack_on':
 			case 'create_account_extension':
+			case 'create_account_setup':
 			case 'list_dash':
-			case 'rewards_dash':
 			case 'rewards_learn':
 			case 'pause_snooze':
 			case 'smartblock_off':
@@ -155,7 +155,10 @@ class Metrics {
 			case 'viewchange_from_detailed':
 			case 'viewchange_from_expanded':
 			case 'viewchange_from_simple':
-				this._sendReq(type, ['all', 'daily', 'weekly', 'monthly']);
+				this._sendReq(type, ['all', 'daily']);
+				break;
+			case 'rewards_dash':
+				this._sendReq(type, ['all', 'daily', 'monthly']);
 				break;
 
 			// Rewards Pings
@@ -171,6 +174,27 @@ class Metrics {
 			case 'rewards_first_reject':
 			case 'rewards_first_reject_optin':
 			case 'rewards_first_reject_optout':
+				this._sendReq(type, ['all']);
+				break;
+
+			// New to Ghostery 8.3
+			case 'sign_in_success':
+			case 'create_account_success':
+			case 'tutorial_start':
+			case 'tutorial_complete':
+			case 'setup_start':
+			case 'supporter_cta_hub':
+			case 'supporter_cta_extension':
+			case 'products_cta_android':
+			case 'products_cta_ios':
+			case 'products_cta_lite':
+			case 'supporter_panel_from_badge':
+			case 'supporter_panel_from_menu':
+			case 'resubscribe':
+			case 'priority_support_submit':
+			case 'theme_change':
+			case 'manage_subscription':
+			case 'broken_page':
 				this._sendReq(type, ['all']);
 				break;
 
@@ -261,14 +285,28 @@ class Metrics {
 			`&at=${encodeURIComponent(conf.enable_anti_tracking ? '1' : '0')}` +
 			// The deepest setup page reached by user during setup
 			`&ss=${encodeURIComponent((conf.metrics.install_complete_all || type === 'install_complete') ? conf.setup_step.toString() : '-1')}` +
-			// User choice of default or custom path during setup
-			`&sp=${encodeURIComponent(conf.setup_path.toString())}` +
+			// The number of times the user has gone through setup
+			`&sl=${encodeURIComponent(conf.setup_number.toString())}` +
 			// Type of blocking selected during setup
 			`&sb=${encodeURIComponent(conf.setup_block.toString())}` +
 			// Recency, days since last active daily ping
-			`&rc=${encodeURIComponent(this._getRecency(type, frequency).toString())}` +
+			`&rc=${encodeURIComponent(this._getRecencyActive(type, frequency).toString())}` +
 			// Current number of rewards received
-			`&rr=${encodeURIComponent(this._getRewardsCount().toString())}`;
+			`&rr=${encodeURIComponent(this._getRewardsCount().toString())}` +
+
+			// New parameters to Ghostery 8.3
+			// Subscription Type
+			`&st=${encodeURIComponent(this._getSubscriptionType().toString())}` +
+			// Whether the computer ever had a Paid Subscription
+			`&ps=${encodeURIComponent(conf.paid_subscription ? '1' : '0')}` +
+			// Active Velocity
+			`&va=${encodeURIComponent(this._getVelocityActive(type).toString())}` +
+			// Engaged Recency
+			`&re=${encodeURIComponent(this._getRecencyEngaged(type, frequency).toString())}` +
+			// Engaged Velocity
+			`&ve=${encodeURIComponent(this._getVelocityEngaged(type).toString())}` +
+			// Theme
+			`&th=${encodeURIComponent(conf.current_theme.toString())}`;
 
 		if (CAMPAIGN_METRICS.includes(type)) {
 			// only send campaign attribution when necessary
@@ -345,11 +383,64 @@ class Metrics {
 	 *
 	 * @return {number} 	in days since the last daily active ping
 	 */
-	_getRecency(type, frequency) {
-		if (conf.metrics.active_daily && type === 'active' && frequency === 'daily') {
+	_getRecencyActive(type, frequency) {
+		if (conf.metrics.active_daily && (type === 'active' || type === 'engaged') && frequency === 'daily') {
 			return Math.floor((Number(new Date().getTime()) - conf.metrics.active_daily) / 86400000);
 		}
 		return -1;
+	}
+	/**
+	 * Calculate days since the last daily engaged ping.
+	 *
+	 * @private
+	 *
+	 * @return {number} 	in days since the last daily engaged ping
+	 */
+	_getRecencyEngaged(type, frequency) {
+		if (conf.metrics.engaged_daily && (type === 'active' || type === 'engaged') && frequency === 'daily') {
+			return Math.floor((Number(new Date().getTime()) - conf.metrics.engaged_daily) / 86400000);
+		}
+		return -1;
+	}
+	/**
+	 * Get the Active Velocity
+	 * @private
+	 * @return {number}  The Active Velocity
+	 */
+	_getVelocityActive(type) {
+		if (type !== 'active' && type !== 'engaged') {
+			return -1;
+		}
+		const active_daily_velocity = conf.metrics.active_daily_velocity || [];
+		const today = Math.floor(Number(new Date().getTime()) / 86400000);
+		return active_daily_velocity.filter(el => el > today - 7).length;
+	}
+	/**
+	 * Get the Engaged Velocity
+	 * @private
+	 * @return {number}  The Engaged Velocity
+	 */
+	_getVelocityEngaged(type) {
+		if (type !== 'active' && type !== 'engaged') {
+			return -1;
+		}
+		const engaged_daily_velocity = conf.metrics.engaged_daily_velocity || [];
+		const today = Math.floor(Number(new Date().getTime()) / 86400000);
+		return engaged_daily_velocity.filter(el => el > today - 7).length;
+	}
+	/**
+	 * Get the Subscription Type
+	 * @return {string} Subscription Name
+	 */
+	_getSubscriptionType() {
+		if (!conf.account) {
+			return -1;
+		}
+		const subscriptions = conf.account.subscriptionData && conf.account.subscriptionData.subscriptions;
+		if (!subscriptions) {
+			return -1;
+		}
+		return subscriptions.productName.toUpperCase().replace(' ', '_');
 	}
 	/**
 	 * Get the number of Rewards shown to the user.
@@ -474,6 +565,17 @@ class Metrics {
 	 * @private
 	 */
 	_recordActive() {
+		const active_daily_velocity = conf.metrics.active_daily_velocity || [];
+		const today = Math.floor(Number(new Date().getTime()) / 86400000);
+		active_daily_velocity.sort();
+		if (!active_daily_velocity.includes(today)) {
+			active_daily_velocity.push(today);
+			if (active_daily_velocity.length > 7) {
+				active_daily_velocity.shift();
+			}
+		}
+		conf.metrics.active_daily_velocity = active_daily_velocity;
+
 		const daily = this._timeToExpired('active', 'daily');
 		if (daily > 0) {
 			setTimeout(() => {
@@ -523,6 +625,25 @@ class Metrics {
 			this._sendReq('active', ['monthly']);
 			this._repeat();
 		}
+	}
+
+	/**
+	 * Record Engaged event
+	 * @private
+	 */
+	_recordEngaged() {
+		const engaged_daily_velocity = conf.metrics.engaged_daily_velocity || [];
+		const today = Math.floor(Number(new Date().getTime()) / 86400000);
+		engaged_daily_velocity.sort();
+		if (!engaged_daily_velocity.includes(today)) {
+			engaged_daily_velocity.push(today);
+			if (engaged_daily_velocity.length > 7) {
+				engaged_daily_velocity.shift();
+			}
+		}
+		conf.metrics.engaged_daily_velocity = engaged_daily_velocity;
+
+		this._sendReq('engaged', ['daily', 'weekly', 'monthly']);
 	}
 
 	/**

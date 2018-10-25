@@ -11,190 +11,195 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import globals from '../../../../src/classes/Globals';
 
 /**
- * Helper render function for rendering the Supporter Button
- * @param  {Boolean}  isSupporter        whether the user is a subscriber
- * @param  {String}   additionalClasses  classes to add to button for additional styling
- * @return {JSX} JSX of the Supporter Button
- */
-function _renderButton(isSupporter, additionalClasses) {
-	const buttonHref = `https://account.${globals.GHOSTERY_DOMAIN}.com/subscription`;
-	const buttonClassNames = ClassNames('SupporterView__button', 'button', additionalClasses, {
-		disabled: isSupporter,
-	});
-
-	return isSupporter ? (
-		<div className={buttonClassNames}>
-			{t('hub_supporter_button_text_alt')}
-		</div>
-	) : (
-		<a className={buttonClassNames} href={buttonHref} target="_blank" rel="noopener noreferrer">
-			{t('hub_supporter_button_text')}
-		</a>
-	);
-}
-
-/**
- * A Functional React component for rendering the Supporter View
- * @return {JSX} JSX for rendering the Supporter View of the Hub app
+ * @class Implement the Supporter View for the Ghostery Hub
+ * @extends Component
  * @memberof HubComponents
  */
-const SupporterView = (props) => {
-	const { isSupporter } = props;
+class SupporterView extends Component {
+	/**
+	 * Helper render function for rendering the Supporter Button
+	 * @param  {Boolean} addSideMargin  whether to add spacing around the button
+	 * @return {JSX} JSX of the Supporter Button
+	 */
+	_renderButton = (additionalClasses) => {
+		const { isSupporter, onSupporterClick } = this.props;
+		const buttonHref = `https://account.${globals.GHOSTERY_DOMAIN}.com/subscription`;
+		const buttonClassNames = ClassNames('SupporterView__button', 'button', additionalClasses, {
+			disabled: isSupporter,
+		});
 
-	return (
-		<div className="SupporterView">
-			<div className="row align-center">
-				<div className="columns">
-					<div className="SupporterView__headingImage" />
-					<div className="SupporterView__headingTitle text-center">
-						{t('hub_supporter_header_title')}
-					</div>
-					<div className="SupporterView__headingDescription text-center">
-						{t('hub_supporter_header_description')}
-					</div>
-					<div className="SupporterView__costContainer flex-container align-middle align-justify">
-						{_renderButton(isSupporter)}
-						<div
-							className="SupporterView__headingCost flex-container align-middle"
-							dangerouslySetInnerHTML={{ __html: t('hub_supporter_price') }}
-						/>
-					</div>
-				</div>
+		return isSupporter ? (
+			<div className={buttonClassNames}>
+				{t('hub_supporter_button_text_alt')}
 			</div>
-			<div className="SupporterView--addPaddingTop row small-up-1 large-up-3 align-center">
-				<div className="SupporterView__perk columns text-center">
-					<div className="SupporterView__perkIcon themes" />
-					<div className="SupporterView__perkTitle">
-						{t('hub_supporter_perk_themes_title')}
-					</div>
-					<div className="SupporterView__perkDescription">
-						{t('hub_supporter_perk_themes_description')}
-					</div>
-				</div>
-				<div className="SupporterView__perk columns text-center">
-					<div className="SupporterView__perkIcon support" />
-					<div className="SupporterView__perkTitle">
-						{t('hub_supporter_perk_support_title')}
-					</div>
-					<div className="SupporterView__perkDescription">
-						{t('hub_supporter_perk_support_description')}
-					</div>
-				</div>
-				<div className="SupporterView__perk columns text-center">
-					<div className="SupporterView__perkIcon more" />
-					<div className="SupporterView__perkTitle">
-						{t('hub_supporter_perk_more_title')}
-					</div>
-					<div className="SupporterView__perkDescription">
-						{t('hub_supporter_perk_more_description')}
-					</div>
-				</div>
-			</div>
-			<div className="SupporterView__manifestoContainer">
-				<div className="SupporterView__manifestoBackground row align-center">
-					<div className="SupporterView__manifestoText columns small-12 medium-10 large-8 text-center">
-						{t('hub_supporter_manifesto')}
-					</div>
-				</div>
-			</div>
-			<div className="SupporterView--addPaddingTop SupporterView--addPaddingBottom">
-				<div className="row small-up-1 large-up-3">
-					<div className="SupporterView__feature columns large-offset-1">
-						<div className="SupporterView__headingTitle SupporterView--addPaddingTop">
-							{t('hub_supporter_feature_theme_title')}
+		) : (
+			<a className={buttonClassNames} href={buttonHref} onClick={onSupporterClick} target="_blank" rel="noopener noreferrer">
+				{t('hub_supporter_button_text')}
+			</a>
+		);
+	}
+
+	/**
+	 * React's required render function. Returns JSX
+	 * @return {JSX} JSX for rendering the Supporter View of the Hub app
+	 */
+	render() {
+		return (
+			<div className="SupporterView">
+				<div className="row align-center">
+					<div className="columns">
+						<div className="SupporterView__headingImage" />
+						<div className="SupporterView__headingTitle text-center">
+							{t('hub_supporter_header_title')}
 						</div>
-						<div className="SupporterView__headingDescription">
-							{t('hub_supporter_feature_theme_description')}
+						<div className="SupporterView__headingDescription text-center">
+							{t('hub_supporter_header_description')}
 						</div>
-						{_renderButton(isSupporter, 'hide-for-small show-for-large')}
-					</div>
-					<div className="SupporterView__feature columns small-12 medium-6">
-						<img
-							className="SupporterView__featureImage theme"
-							src="/app/images/hub/supporter/feature-theme.png"
-							alt={t('hub_supporter_feature_theme_title')}
-						/>
+						<div className="SupporterView__costContainer flex-container align-middle align-justify">
+							{this._renderButton()}
+							<div
+								className="SupporterView__headingCost flex-container align-middle"
+								dangerouslySetInnerHTML={{ __html: t('hub_supporter_price') }}
+							/>
+						</div>
 					</div>
 				</div>
-				<div className="SupporterView--addPaddingTop hide-for-large">
-					<div className="row align-center-middle">
-						<div className="SupporterView__bar flex-child-grow" />
-						{_renderButton(isSupporter, 'SupporterView--addSideMargin')}
-						<div className="SupporterView__bar flex-child-grow" />
+				<div className="SupporterView--addPaddingTop row small-up-1 large-up-3 align-center">
+					<div className="SupporterView__perk columns text-center">
+						<div className="SupporterView__perkIcon themes" />
+						<div className="SupporterView__perkTitle">
+							{t('hub_supporter_perk_themes_title')}
+						</div>
+						<div className="SupporterView__perkDescription">
+							{t('hub_supporter_perk_themes_description')}
+						</div>
+					</div>
+					<div className="SupporterView__perk columns text-center">
+						<div className="SupporterView__perkIcon support" />
+						<div className="SupporterView__perkTitle">
+							{t('hub_supporter_perk_support_title')}
+						</div>
+						<div className="SupporterView__perkDescription">
+							{t('hub_supporter_perk_support_description')}
+						</div>
+					</div>
+					<div className="SupporterView__perk columns text-center">
+						<div className="SupporterView__perkIcon more" />
+						<div className="SupporterView__perkTitle">
+							{t('hub_supporter_perk_more_title')}
+						</div>
+						<div className="SupporterView__perkDescription">
+							{t('hub_supporter_perk_more_description')}
+						</div>
 					</div>
 				</div>
-			</div>
-			<div className="SupporterView--addPaddingTop SupporterView--addPaddingBottom SupporterView--rowDarken">
-				<div className="row align-middle small-up-1 large-up-3">
-					<div className="SupporterView__feature columns large-offset-1 show-for-large">
-						<img
-							className="SupporterView__featureImage support"
-							src="/app/images/hub/supporter/feature-support.svg"
-							alt={t('hub_supporter_feature_support_title')}
-						/>
-					</div>
-					<div className="SupporterView__feature columns large-offset-1">
-						<div className="SupporterView__headingTitle">
-							{t('hub_supporter_feature_support_title')}
+				<div className="SupporterView__manifestoContainer">
+					<div className="SupporterView__manifestoBackground row align-center">
+						<div className="SupporterView__manifestoText columns small-12 medium-10 large-8 text-center">
+							{t('hub_supporter_manifesto')}
 						</div>
-						<div className="SupporterView__headingDescription">
-							{t('hub_supporter_feature_support_description')}
-						</div>
-						{_renderButton(isSupporter, 'hide-for-small show-for-large')}
-					</div>
-					<div className="SupporterView__feature columns hide-for-large">
-						<img
-							className="SupporterView__featureImage support"
-							src="/app/images/hub/supporter/feature-support.svg"
-							alt={t('hub_supporter_feature_support_title')}
-						/>
 					</div>
 				</div>
-				<div className="SupporterView--addPaddingTop hide-for-large">
-					<div className="row align-center-middle">
-						<div className="SupporterView__bar flex-child-grow" />
-						{_renderButton(isSupporter, 'SupporterView--addSideMargin')}
-						<div className="SupporterView__bar flex-child-grow" />
+				<div className="SupporterView--addPaddingTop SupporterView--addPaddingBottom">
+					<div className="row small-up-1 large-up-3">
+						<div className="SupporterView__feature columns large-offset-1">
+							<div className="SupporterView__headingTitle SupporterView--addPaddingTop">
+								{t('hub_supporter_feature_theme_title')}
+							</div>
+							<div className="SupporterView__headingDescription">
+								{t('hub_supporter_feature_theme_description')}
+							</div>
+							{this._renderButton('show-for-large')}
+						</div>
+						<div className="SupporterView__feature columns small-12 medium-6">
+							<img
+								className="SupporterView__featureImage theme"
+								src="/app/images/hub/supporter/feature-theme.png"
+								alt={t('hub_supporter_feature_theme_title')}
+							/>
+						</div>
+					</div>
+					<div className="SupporterView--addPaddingTop hide-for-large">
+						<div className="row align-center-middle">
+							<div className="SupporterView__bar flex-child-grow" />
+							{this._renderButton('SupporterView--addSideMargin')}
+							<div className="SupporterView__bar flex-child-grow" />
+						</div>
 					</div>
 				</div>
-			</div>
-			<div className="SupporterView--addPaddingTop">
-				<div className="row align-middle-center">
-					<div className="SupporterView__feature columns large-8 large-offset-2 text-center">
-						<div className="SupporterView__headingTitle">
-							{t('hub_supporter_feature_more_title')}
+				<div className="SupporterView--addPaddingTop SupporterView--addPaddingBottom SupporterView--rowDarken">
+					<div className="row align-middle small-up-1 large-up-3">
+						<div className="SupporterView__feature columns large-offset-1 show-for-large">
+							<img
+								className="SupporterView__featureImage support"
+								src="/app/images/hub/supporter/feature-support.svg"
+								alt={t('hub_supporter_feature_support_title')}
+							/>
 						</div>
-						<div className="SupporterView__headingDescription">
-							{t('hub_supporter_feature_more_description')}
+						<div className="SupporterView__feature columns large-offset-1">
+							<div className="SupporterView__headingTitle">
+								{t('hub_supporter_feature_support_title')}
+							</div>
+							<div className="SupporterView__headingDescription">
+								{t('hub_supporter_feature_support_description')}
+							</div>
+							{this._renderButton('hide-for-small show-for-large')}
 						</div>
-						<img
-							className="SupporterView__featureImage more"
-							src="/app/images/hub/supporter/feature-more.svg"
-							alt={t('hub_supporter_feature_more_title')}
-						/>
+						<div className="SupporterView__feature columns hide-for-large">
+							<img
+								className="SupporterView__featureImage support"
+								src="/app/images/hub/supporter/feature-support.svg"
+								alt={t('hub_supporter_feature_support_title')}
+							/>
+						</div>
+					</div>
+					<div className="SupporterView--addPaddingTop hide-for-large">
+						<div className="row align-center-middle">
+							<div className="SupporterView__bar flex-child-grow" />
+							{this._renderButton('SupporterView--addSideMargin')}
+							<div className="SupporterView__bar flex-child-grow" />
+						</div>
 					</div>
 				</div>
 				<div className="SupporterView--addPaddingTop">
-					<div className="row align-center-middle">
-						<div className="SupporterView__bar flex-child-grow" />
-						{_renderButton(isSupporter, 'SupporterView--addSideMargin')}
-						<div className="SupporterView__bar flex-child-grow" />
+					<div className="row align-middle-center">
+						<div className="SupporterView__feature columns large-8 large-offset-2 text-center">
+							<div className="SupporterView__headingTitle">
+								{t('hub_supporter_feature_more_title')}
+							</div>
+							<div className="SupporterView__headingDescription">
+								{t('hub_supporter_feature_more_description')}
+							</div>
+							<img
+								className="SupporterView__featureImage more"
+								src="/app/images/hub/supporter/feature-more.svg"
+								alt={t('hub_supporter_feature_more_title')}
+							/>
+						</div>
+					</div>
+					<div className="SupporterView--addPaddingTop">
+						<div className="row align-center-middle">
+							<div className="SupporterView__bar flex-child-grow" />
+							{this._renderButton('SupporterView--addSideMargin')}
+							<div className="SupporterView__bar flex-child-grow" />
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	);
-};
+		);
+	}
+}
 
 // PropTypes ensure we pass required props of the correct type
 SupporterView.propTypes = {
 	isSupporter: PropTypes.bool.isRequired,
+	onSupporterClick: PropTypes.func.isRequired,
 };
 
 export default SupporterView;

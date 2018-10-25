@@ -12,7 +12,16 @@
  */
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { openSubscriptionPage } from '../utils/msg';
+import { sendMessage, openSubscriptionPage } from '../utils/msg';
+
+/**
+ * Helper function to handle clicking on the Become a Subscriber button
+ */
+function _handleBecomeClick() {
+	sendMessage('ping', 'supporter_cta_extension');
+	openSubscriptionPage();
+}
+
 /**
  * Render Subscribe panel.
  * @return {ReactComponent}   ReactComponent instance
@@ -25,11 +34,11 @@ const Subscribe = (props) => {
 			<div className="pitch-container">
 				<span className="pitch-text" dangerouslySetInnerHTML={{ __html: t('subscribe_pitch') }} />
 			</div>
-			<a href="https://www.ghostery.com/supporter/" target="_blank" rel="noopener noreferrer">
+			<a href="https://www.ghostery.com/products/plus/" target="_blank" rel="noopener noreferrer">
 				<span className="pitch-learn-more">{t('subscribe_pitch_learn_more')}</span>
 			</a>
 			<div>
-				<span className="pitch-become-subscriber" onClick={openSubscriptionPage}>{t('subscribe_pitch_button_label')}</span>
+				<span className="pitch-become-subscriber" onClick={_handleBecomeClick}>{t('subscribe_pitch_button_label')}</span>
 			</div>
 			{(loggedIn === 'false') &&
 				<NavLink to="/login" className="pitch-already-subscriber">

@@ -40,6 +40,7 @@ class SetupHumanWebViewContainer extends Component {
 
 		if (sendMountActions) {
 			const { enable_human_web } = setup;
+			props.actions.setSetupStep({ setup_step: 10 });
 			props.actions.setHumanWeb({ enable_human_web });
 		}
 	}
@@ -69,6 +70,7 @@ class SetupHumanWebViewContainer extends Component {
 SetupHumanWebViewContainer.propTypes = {
 	index: PropTypes.number.isRequired,
 	actions: PropTypes.shape({
+		setSetupStep: PropTypes.func.isRequired,
 		setSetupNavigation: PropTypes.func.isRequired,
 		setHumanWeb: PropTypes.func.isRequired,
 	}).isRequired,

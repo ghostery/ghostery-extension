@@ -50,6 +50,7 @@ class SetupViewContainer extends Component {
 		const title = t('hub_setup_page_title');
 		window.document.title = title;
 
+		this.props.actions.setSetupStep({ setup_step: 7 });
 		this.props.actions.initSetupProps(this.props.setup);
 		this.props.actions.getSetupShowWarningOverride().then((data) => {
 			const { setup_show_warning_override } = data;
@@ -70,6 +71,7 @@ class SetupViewContainer extends Component {
 	 */
 	_setDefaultSettings() {
 		this.setState({ sendMountActions: true });
+		this.props.actions.setSetupStep({ setup_step: 8 });
 		this.props.actions.setBlockingPolicy({ blockingPolicy: BLOCKING_POLICY_RECOMMENDED });
 		this.props.actions.setAntiTracking({ enable_anti_tracking: true });
 		this.props.actions.setAdBlock({ enable_ad_block: true });
@@ -259,6 +261,7 @@ SetupViewContainer.propTypes = {
 		getSetupShowWarningOverride: PropTypes.func.isRequired,
 		setSetupShowWarningOverride: PropTypes.func.isRequired,
 		initSetupProps: PropTypes.func.isRequired,
+		setSetupStep: PropTypes.func.isRequired,
 		setSetupNavigation: PropTypes.func.isRequired,
 		setBlockingPolicy: PropTypes.func.isRequired,
 		setAntiTracking: PropTypes.func.isRequired,

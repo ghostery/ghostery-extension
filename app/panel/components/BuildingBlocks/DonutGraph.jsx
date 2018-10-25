@@ -13,8 +13,14 @@
 
 import React from 'react';
 import ClassNames from 'classnames';
-import * as d3 from 'd3';
-import { scaleLinear } from 'd3-scale';
+import {
+	arc,
+	easeLinear,
+	interpolate,
+	pie,
+	scaleLinear,
+	select
+} from 'd3';
 import Tooltip from '../Tooltip';
 
 /**
@@ -145,7 +151,7 @@ class DonutGraph extends React.Component {
 		}
 
 		// Clear graph
-		d3.select(this.node).selectAll('*').remove();
+		select(this.node).selectAll('*').remove();
 
 		// Clear tooltips
 		categories.forEach((cat) => {
@@ -156,7 +162,7 @@ class DonutGraph extends React.Component {
 		});
 
 		// Draw graph
-		const chart = d3.select(this.node)
+		const chart = select(this.node)
 			.append('svg')
 			.attr('class', 'donutSvg')
 			.attr('width', '100%')
@@ -165,16 +171,16 @@ class DonutGraph extends React.Component {
 			.attr('preserveAspectRatio', 'xMinYMin')
 			.append('g')
 			.attr('transform', `translate(${width / 2}, ${height / 2})`);
-		const arc = d3.arc()
+		const trackerArc = arc()
 			.innerRadius(radius - 13)
 			.outerRadius(radius);
-		const pie = d3.pie()
+		const trackerPie = pie()
 			.startAngle(-Math.PI)
 			.endAngle(Math.PI)
 			.sort(null)
 			.value(d => d.value);
 		const g = chart.selectAll('.arc')
-			.data(pie(graphData))
+			.data(trackerPie(graphData))
 			.enter().append('g')
 			.attr('class', 'arc');
 
@@ -196,8 +202,8 @@ class DonutGraph extends React.Component {
 				return 'disabled';
 			})
 			.on('mouseover', (d) => {
-				const pX = arc.centroid(d)[0] + (width / 2);
-				const pY = arc.centroid(d)[1] + (height / 2);
+				const pX = trackerArc.centroid(d)[0] + (width / 2);
+				const pY = trackerArc.centroid(d)[1] + (height / 2);
 				const tooltip = document.getElementById(`${d.data.id}_tooltip`);
 				if (tooltip) {
 					tooltip.style.left = `${pX - (tooltip.offsetWidth / 2)}px`;
@@ -233,13 +239,13 @@ class DonutGraph extends React.Component {
 				return sum;
 			})
 			.attrTween('d', (d) => {
-				const i = d3.interpolate(d.startAngle, d.endAngle);
+				const i = interpolate(d.startAngle, d.endAngle);
 				return function (t) {
 					d.endAngle = i(t);
-					return arc(d);
+					return trackerArc(d);
 				};
 			})
-			.ease(d3.easeLinear);
+			.ease(easeLinear);
 	}
 
 	/**

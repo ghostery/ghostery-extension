@@ -13,3 +13,4 @@
 
 // App View
 export const SET_TOAST = 'SET_TOAST';
+export const SEND_PING = 'SEND_PING';
