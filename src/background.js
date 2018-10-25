@@ -70,7 +70,10 @@ const onHeadersReceived = events.onHeadersReceived.bind(events);
 const humanweb = cliqz.modules['human-web'];
 const { adblocker, antitracking, hpn } = cliqz.modules;
 const messageCenter = cliqz.modules['message-center'];
-const offers = cliqz.modules['offers-v2'];
+const offers = cliqz.modules['offers-v2'] || {
+	isEnabled: false,
+	on: () => {},
+};
 let OFFERS_ENABLE_SIGNAL;
 
 /**
