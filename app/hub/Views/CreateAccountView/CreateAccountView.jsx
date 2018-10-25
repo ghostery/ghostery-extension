@@ -160,7 +160,7 @@ const CreateAccountView = (props) => {
 						)}
 					</div>
 					<div className="columns small-12 medium-5">
-						<div className="CreateAccountView--marginBottom flex-container align-middle">
+						<div className="CreateAccountView__checkboxContainer CreateAccountView--marginBottom flex-container align-middle">
 							<ToggleCheckbox
 								checked={promotionsChecked}
 								onChange={handleCheckboxChange}
@@ -172,7 +172,7 @@ const CreateAccountView = (props) => {
 					</div>
 				</div>
 				<div className="row align-center">
-					<div className="columns small-12 medium-10">
+					<div className="CreateAccountView__linkContainer columns small-12 medium-10">
 						<NavLink to="/log-in" className="CreateAccountView__link">
 							{ t('hub_create_account_link_login') }
 						</NavLink>
