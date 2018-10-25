@@ -97,3 +97,9 @@
 		text-align: center;
 	}
 }
+@media only screen and (max-width: 500px)  {
+	.CreateAccountView__headerTitle h3 {
+		font-size: 20px;
+		margin: 0 10px;
+	}
+}

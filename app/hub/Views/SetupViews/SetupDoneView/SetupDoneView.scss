@@ -22,8 +22,9 @@
 .SetupDone__title {
 	color: #4a4a4a;
 	font-size: 16px;
-	line-height: 42px;
-	padding: 0 25px;
+	line-height: 30px;
+	text-align: center;
+	padding: 5px 25px;
 	margin: 0;
 }
 .SetupDone__feature {
@@ -36,7 +37,9 @@
 	text-align: center;
 }
 .SetupDone__featureIcon {
-	height: 50px;
+	// Cannot use regular height attribute due to Firefox stylesheet overrides
+	min-height: 50px;
+	max-height: 50px;
 	width: 50px;
 	margin: 0 auto;
 	background-repeat: no-repeat;

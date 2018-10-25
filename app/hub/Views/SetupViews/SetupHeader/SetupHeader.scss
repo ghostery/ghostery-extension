@@ -37,3 +37,11 @@
 		margin: 0 10px;
 	}
 }
+@media only screen and (max-width: 400px) {
+	.SetupHeader {
+		margin: 80px 30px 40px;
+	}
+	.SetupHeader__title h3 {
+		margin: 0 0;
+	}
+}
