@@ -52,7 +52,7 @@ const SetupBlockingView = props => (
 											{choice.text}
 										</div>
 									</label>
-									<div className="SetupBlocking__description hide-for-small show-for-large">{choice.description}</div>
+									<div className="SetupBlocking__description show-for-large">{choice.description}</div>
 								</div>
 
 								<input
