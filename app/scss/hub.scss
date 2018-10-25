@@ -19,6 +19,7 @@ html, body, #root {
 
 .App {
 	position: fixed;
+	z-index: 0;
 }
 .App__mainContent {
 	margin-left: 230px;
