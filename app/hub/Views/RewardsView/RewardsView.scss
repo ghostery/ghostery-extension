@@ -119,3 +119,8 @@
 			url('/app/images/hub/rewards/background-stars-right.svg') no-repeat right 20px bottom 50px;
 	}
 }
+@media only screen and (max-width: 400px) {
+	.RewardsView__closerText {
+		padding: 100px 60px 50px 60px;
+	}
+}
