@@ -16,6 +16,15 @@
 import parser from 'ua-parser-js';
 
 const manifest = chrome.runtime.getManifest();
+const MOBILE_APP_UPDATE_URL = 'https://s3.amazonaws.com/cdncliqz/update/android_browser/firefox@ghostery.com/update.json';
+const CLIQZ_UPDATE_URL = 'https://s3.amazonaws.com/cdncliqz/update/browser/firefox@ghostery.com/update.json';
+
+function isUpdateUrl(applications, url) {
+	return applications
+		&& applications.gecko
+		&& applications.gecko.update_url
+		&& applications.gecko.update_url.indexOf(url) === 0;
+}
 /**
  * Structure which holds parameters to be used throughout the code, a.k.a. global values.
  * Most of them (but not all) are const.
@@ -31,7 +40,8 @@ class Globals {
 		this.BROWSER_INFO = {
 			displayName: '', name: '', token: '', version: '', os: 'other'
 		};
-		this.IS_CLIQZ = !!((manifest.applications && manifest.applications.gecko && manifest.applications.gecko.update_url));
+		this.IS_CLIQZ = isUpdateUrl(manifest.applications, CLIQZ_UPDATE_URL);
+		this.IS_MOBILE_APP = isUpdateUrl(manifest.applications, MOBILE_APP_UPDATE_URL);
 
 		// flags
 		this.JUST_INSTALLED = false;
@@ -132,6 +142,10 @@ class Globals {
 			this.BROWSER_INFO.displayName = 'Cliqz';
 			this.BROWSER_INFO.name = 'cliqz';
 			this.BROWSER_INFO.token = 'cl';
+		} else if (this.IS_MOBILE_APP) {
+			this.BROWSER_INFO.displayName = 'Ghostery Mobile';
+			this.BROWSER_INFO.name = 'ghosty';
+			this.BROWSER_INFO.token = 'an';
 		} else if (browser.includes('edge')) {
 			this.BROWSER_INFO.displayName = 'Edge';
 			this.BROWSER_INFO.name = 'edge';

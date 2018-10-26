@@ -59,7 +59,7 @@ const { sendMessage } = utils;
 const { onMessage } = chrome.runtime;
 // simple consts
 const {
-	CDN_SUB_DOMAIN, BROWSER_INFO, IS_CLIQZ, DEBUG
+	CDN_SUB_DOMAIN, BROWSER_INFO, IS_CLIQZ, IS_MOBILE_APP, DEBUG
 } = globals;
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const VERSION_CHECK_URL = `https://${CDN_SUB_DOMAIN}.ghostery.com/update/version`;
@@ -553,20 +553,24 @@ function handleGhosteryHub(name, message, callback) {
 			callback({ setup_step });
 			break;
 		}
+		case 'updateBlocking': // legacy: to be compatible with older Ghostery Mobile
 		case 'SET_BLOCKING_POLICY': {
 			const { blockingPolicy } = message;
 			switch (blockingPolicy) {
+				case 'UPDATE_BLOCK_RECOMMENDED': // legacy: to be compatible with older Ghostery Mobile
 				case 'BLOCKING_POLICY_RECOMMENDED': {
 					panelData.set({ setup_block: 5 });
 					setGhosteryDefaultBlocking();
 					break;
 				}
+				case 'UPDATE_BLOCK_NONE': // legacy: to be compatible with older Ghostery Mobile
 				case 'BLOCKING_POLICY_NOTHING': {
 					panelData.set({ setup_block: 1 });
 					const selected_app_ids = {};
 					panelData.set({ selected_app_ids });
 					break;
 				}
+				case 'UPDATE_BLOCK_ALL': // legacy: to be compatible with older Ghostery Mobile
 				case 'BLOCKING_POLICY_EVERYTHING': {
 					panelData.set({ setup_block: 3 });
 					const selected_app_ids = {};
@@ -770,6 +774,25 @@ function onMessageHandler(request, sender, callback) {
 		panelData.set(message);
 		callback();
 		return false;
+	} else if (name === 'adblockToggle') {
+		cliqz.modules.adblocker.background.actions.toggleUrl(message.url, message.isDomain);
+	} else if (name === 'getAndroidPanelData') {
+		utils.getActiveTab((tab) => {
+			// we are pushing all the possible data for now
+			onMessageHandler({ name: 'getCliqzModuleData' }, {}, (cliqz) => {
+				chrome.runtime.sendMessage({
+					target: 'ANDROID_BROWSER',
+					action: 'panelData',
+					payload: {
+						panel: panelData.get('panel', tab),
+						summary: panelData.get('summary', tab),
+						blocking: panelData.get('blocking', tab),
+						settings: panelData.get('settings'),
+						cliqz
+					}
+				});
+			});
+		});
 	} else if (name === 'account.getTheme') {
 		if (conf.current_theme !== message.currentTheme) {
 			metrics.ping('theme_change');
@@ -814,14 +837,18 @@ function onMessageHandler(request, sender, callback) {
 	} else if (name === 'getCliqzModuleData') {
 		const modules = { adblock: {}, antitracking: {} };
 
-		const getCliqzModuleDataForTab = (tabId, callback) => {
+		const getCliqzModuleDataForTab = (tab, callback) => {
 			button.update();
 			if (conf.enable_ad_block) {
 				// update adblock count. callback() handled below based on anti-tracking status
-				modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tabId) || {};
+				modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tab.id) || {};
+
+				const whitelist = cliqz.modules.adblocker.background.adb.urlWhitelist.getState(tab.url);
+				modules.adblock.disabledForDomain = whitelist.hostname;
+				modules.adblock.disabledForUrl = whitelist.url;
 			}
 			if (conf.enable_anti_tracking) {
-				cliqz.modules.antitracking.background.actions.aggregatedBlockingStats(tabId).then((data) => {
+				cliqz.modules.antitracking.background.actions.aggregatedBlockingStats(tab.id).then((data) => {
 					modules.antitracking = data || {};
 					callback(modules);
 				}).catch(() => {
@@ -833,10 +860,12 @@ function onMessageHandler(request, sender, callback) {
 		};
 
 		if (message && message.tabId) {
-			getCliqzModuleDataForTab(+message.tabId, callback);
+			utils.getTab(+message.tabId, (tab) => {
+				getCliqzModuleDataForTab(tab, callback);
+			});
 		} else {
 			utils.getActiveTab((tab) => {
-				getCliqzModuleDataForTab(tab.id, callback);
+				getCliqzModuleDataForTab(tab, callback);
 			});
 		}
 
@@ -1067,7 +1096,7 @@ function initializeDispatcher() {
 		panelData.init();
 	});
 	dispatcher.on('conf.save.enable_human_web', (enableHumanWeb) => {
-		if (!IS_EDGE && !IS_CLIQZ) {
+		if (!IS_EDGE && !IS_CLIQZ && !IS_MOBILE_APP) {
 			setCliqzModuleEnabled(humanweb, enableHumanWeb).then(() => {
 				setupABTest();
 			});
@@ -1645,10 +1674,13 @@ function initializeGhosteryModules() {
 		}, 300000);
 
 		// open the Ghostery Hub on install with justInstalled query parameter set to true
-		chrome.tabs.create({
-			url: chrome.runtime.getURL('./app/templates/hub.html?justInstalled=true'),
-			active: true
-		});
+		// this page should not open on the Ghostery Android browser
+		if (!IS_MOBILE_APP) {
+			chrome.tabs.create({
+				url: chrome.runtime.getURL('./app/templates/hub.html?justInstalled=true'),
+				active: true
+			});
+		}
 	} else {
 		// Record install if the user previously closed the browser before the install ping fired
 		metrics.ping('install');
@@ -1681,8 +1713,15 @@ function initializeGhosteryModules() {
 					// Otherwise we respect browser-core default settings
 					conf.enable_ad_block = !adblocker.isDisabled;
 					conf.enable_anti_tracking = !antitracking.isDisabled;
-					conf.enable_human_web = !humanweb.isDisabled;
-					conf.enable_offers = !offers.isDisabled;
+					if (!IS_MOBILE_APP) {
+						// this little guy makes the whole browser freeze on first start
+						conf.enable_offers = !offers.isDisabled;
+						conf.enable_human_web = !humanweb.isDisabled;
+					} else {
+						humanweb.isReady().then(() => {
+							setCliqzModuleEnabled(humanweb, false);
+						});
+					}
 				}
 			}
 		});
@@ -1786,6 +1825,11 @@ function init() {
 			globals.INIT_COMPLETE = true;
 			if (IS_CLIQZ) {
 				importCliqzSettings(cliqz, conf);
+			} else if (IS_MOBILE_APP) {
+				chrome.runtime.sendMessage({
+					target: 'ANDROID_BROWSER',
+					action: 'ready'
+				});
 			}
 		}));
 	}).catch((err) => {
