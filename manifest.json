@@ -78,7 +78,8 @@
 		"tabs",
 		"http://*/*",
 		"https://*/*",
-		"storage"
+		"storage",
+		"unlimitedStorage"
 	],
 	"background": {
 		"scripts": [
