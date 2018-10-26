@@ -772,9 +772,6 @@ function onMessageHandler(request, sender, callback) {
 		return false;
 	} else if (name === 'account.getTheme') {
 		const { current_theme } = message;
-		if (conf.current_theme !== current_theme) {
-			metrics.ping('theme_change');
-		}
 		if (current_theme !== 'default' &&
 			account.hasScopesUnverified(['subscriptions:supporter'])) {
 			// try to get it locally
