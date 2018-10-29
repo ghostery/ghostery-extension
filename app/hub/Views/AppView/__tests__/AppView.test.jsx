@@ -55,6 +55,11 @@ describe('app/hub/Views/AppView component', () => {
 			expect(component.find('.App__mainContent').length).toBe(1);
 
 			expect(component.find('.toast-class').length).toBe(0);
+			component.setProps({ app: { toastMessage: 'Example toast message', toastClass: 'toast-class' }});
+			expect(component.find('.toast-class').length).toBe(1);
+
+			component.find('.ToastMessage__close').simulate('click');
+			expect(initialState.exitToast.mock.calls.length).toBe(1);
 		});
 	});
 });

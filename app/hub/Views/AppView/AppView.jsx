@@ -24,13 +24,13 @@ import { ToastMessage } from '../../../shared-components';
 class AppView extends Component {
 	constructor(props) {
 		super(props);
-		// Creates a Ref on the AppView component to be used in componentDidUpdate
 		this.mainContent = React.createRef();
 	}
 
-	componentDidUpdate() {
-		// Scrolls to the top of the Hub's main content when a new page is rendered
-		this.mainContent.current.scroll(0, 0);
+	componentDidUpdate(prevProps) {
+		if (prevProps.children !== this.props.children) {
+			this.mainContent.current.scroll(0, 0);
+		}
 	}
 
 	render() {
