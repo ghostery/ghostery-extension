@@ -83,6 +83,7 @@ class RewardListItem extends React.Component {
 			id,
 			isLong,
 			text,
+			benefit,
 			unread,
 			disabled,
 			logoUrl,
@@ -102,7 +103,8 @@ class RewardListItem extends React.Component {
 						<img className="RewardListItem__image" src={logoUrl} />
 					</div>
 					<div className="flex-grow">
-						<div className="RewardListItem__text">{ text }</div>
+						<div className="RewardListItem__benefit">{ benefit }</div>
+						<div className="RewardListItem__title">{ text }</div>
 						<div className="RewardListItem__expires">{ this.renderExpiresText() }</div>
 					</div>
 					<div className="flex-container align-justify flex-dir-column full-height">
