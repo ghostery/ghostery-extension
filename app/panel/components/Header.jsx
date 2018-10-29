@@ -14,6 +14,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ClassNames from 'classnames';
+import Tooltip from './Tooltip';
 import HeaderMenu from './HeaderMenu';
 import { sendMessage, sendMessageInPromise } from '../utils/msg';
 import { log } from '../../../src/utils/common';
@@ -102,7 +103,10 @@ class Header extends React.Component {
 	}
 
 	generateLink = () => {
-		const { loggedIn, user } = this.props;
+		const { location, loggedIn, user } = this.props;
+		const { pathname } = location;
+		const showTabs = (pathname === '/' || pathname.startsWith('/detail'));
+
 		let text = '';
 		let handleOnClick = null;
 		if (!loggedIn) {
@@ -113,9 +117,29 @@ class Header extends React.Component {
 			handleOnClick = this.handleSendValidateAccountEmail;
 		}
 
+		let accountIcon;
+		if (!loggedIn || loggedIn && user && !user.emailValidated) {
+			accountIcon = (
+				<div className="g-tooltip">
+					<svg width="26" height="23" viewBox="0 0 26 21">
+						<g fill="none" fillRule="nonzero">
+							<g fill="#ffffff" stroke="#ffffff" strokeWidth=".5">
+								<path d="M16 5.519a2.788 2.788 0 0 1 2.772 2.772A2.788 2.788 0 0 1 16 11.063a2.788 2.788 0 0 1-2.772-2.772A2.788 2.788 0 0 1 16 5.52zm0 .911c-1.025 0-1.86.836-1.86 1.861s.835 1.86 1.86 1.86c1.025 0 1.86-.835 1.86-1.86 0-1.025-.835-1.86-1.86-1.86z" />
+								<path d="M16 1c4.975 0 9 4.025 9 9s-4.025 9-9 9-9-4.025-9-9 4.025-9 9-9zm0 10.367c2.734 0 5.013 2.013 5.43 4.595A8.035 8.035 0 0 0 24.09 10c0-4.481-3.646-8.089-8.089-8.089A8.071 8.071 0 0 0 7.911 10a8.141 8.141 0 0 0 2.62 5.962c.456-2.582 2.735-4.595 5.469-4.595zm4.595 5.279A4.593 4.593 0 0 0 16 12.278c-2.468 0-4.481 1.937-4.633 4.368A8.167 8.167 0 0 0 16 18.089a7.957 7.957 0 0 0 4.595-1.443z" />
+							</g>
+							{loggedIn && (
+								<path fill="#FFC063" d="M6 10a6 6 0 1 0 0 12 6 6 0 0 0 0-12zm0 9.927a.873.873 0 1 1 0-1.745.873.873 0 0 1 0 1.745zm.947-6.746l-.336 3.953a.61.61 0 0 1-1.222 0l-.336-3.953a.96.96 0 1 1 1.895 0z" />
+							)}
+						</g>
+					</svg>
+					<Tooltip header={text} position="bottom" />
+				</div>
+			);
+		}
+
 		return (
 			<div onClick={handleOnClick} className="header-helper-text">
-				{text}
+				{showTabs ? accountIcon : text}
 			</div>
 		);
 	}
