@@ -21,7 +21,10 @@ exports[`app/panel/components/BuildingBlocks/RewardListItem.jsx Snapshot tests w
       className="flex-grow"
     >
       <div
-        className="RewardListItem__text"
+        className="RewardListItem__benefit"
+      />
+      <div
+        className="RewardListItem__title"
       >
         test reward title
       </div>
@@ -87,7 +90,10 @@ exports[`app/panel/components/BuildingBlocks/RewardListItem.jsx Snapshot tests w
       className="flex-grow"
     >
       <div
-        className="RewardListItem__text"
+        className="RewardListItem__benefit"
+      />
+      <div
+        className="RewardListItem__title"
       >
         test reward title
       </div>
@@ -153,7 +159,10 @@ exports[`app/panel/components/BuildingBlocks/RewardListItem.jsx Snapshot tests w
       className="flex-grow"
     >
       <div
-        className="RewardListItem__text"
+        className="RewardListItem__benefit"
+      />
+      <div
+        className="RewardListItem__title"
       >
         test reward title
       </div>
@@ -219,7 +228,10 @@ exports[`app/panel/components/BuildingBlocks/RewardListItem.jsx Snapshot tests w
       className="flex-grow"
     >
       <div
-        className="RewardListItem__text"
+        className="RewardListItem__benefit"
+      />
+      <div
+        className="RewardListItem__title"
       >
         test reward title
       </div>
@@ -285,7 +297,10 @@ exports[`app/panel/components/BuildingBlocks/RewardListItem.jsx Snapshot tests w
       className="flex-grow"
     >
       <div
-        className="RewardListItem__text"
+        className="RewardListItem__benefit"
+      />
+      <div
+        className="RewardListItem__title"
       >
         test reward title
       </div>
