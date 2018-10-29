@@ -73,7 +73,7 @@
 
 // Reward List Item Component Classes
 .RewardListItem {
-	height: 72px;
+	height: 85px;
 	border: 1px solid #cecece;
 	border-left-width: 0;
 	border-radius: 0;
@@ -85,7 +85,7 @@
 }
 .RewardListItem.RewardListItem--unread + .RewardListItem.RewardListItem--unread,
 .RewardListItem:not(.RewardListItem--unread) + .RewardListItem:not(.RewardListItem--unread) {
-	height: 71px;
+	height: 85px;
 	border-top: 0;
 }
 .RewardListItem__image_container {
@@ -104,17 +104,24 @@
 	-webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
 	filter: grayscale(100%);
 }
-.RewardListItem__text {
+.RewardListItem__benefit {
 	color: #4a4a4a;
-	font-size: 13.5px;
+	font-size: 11px;
 	font-weight: 600;
 	max-width: 188px;
-	margin-bottom: 7px;
 	line-height: 20px;
 	max-height: 40px;
 	text-overflow: ellipsis;
-	overflow: hidden;
 	word-wrap: break-word;
+}
+.RewardListItem__title {
+	color: #4a4a4a;
+	font-size: 11px;
+	max-width: 188px;
+	max-height: 40px;
+	text-overflow: ellipsis;
+	word-wrap: break-word;
+	margin-bottom: 7px;
 }
 .RewardListItem--greyscale .RewardListItem__text {
 	color: #9b9b9b;
