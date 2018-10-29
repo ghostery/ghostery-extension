@@ -173,9 +173,10 @@ class PanelData {
 		if (currentAccount && currentAccount.user) {
 			currentAccount.user.subscriptionsSupporter = account.hasScopesUnverified(['subscriptions:supporter']);
 		}
-		const current_theme = this._confData.get('current_theme');
-		const themes = this._confData.get('themes');
-		const theme = themes[current_theme];
+		const isSupporter = currentAccount && currentAccount.user.subscriptionsSupporter;
+		const current_theme = isSupporter ? this._confData.get('current_theme') : 'default';
+		const themes = isSupporter ? this._confData.get('themes') : {};
+		const theme = isSupporter ? themes[current_theme] : '';
 		// Get theme if it is not there
 		if (current_theme !== 'default' && !theme) {
 			account.getTheme(`${current_theme}.css`)
@@ -187,6 +188,9 @@ class PanelData {
 				.catch((err) => {
 					log('ERROR GETTTING THEME', err);
 				});
+		} else {
+			this.set({ current_theme, themes });
+			this.init();
 		}
 		this._panelView = {
 			panel: {
