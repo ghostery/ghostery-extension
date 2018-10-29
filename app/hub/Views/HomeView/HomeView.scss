@@ -107,16 +107,12 @@
 }
 .HomeView__featureIcon.feature-supporter {
 	position: relative;
-	margin-left: 0;
-	margin-right: 0;
+	margin-left: auto;
+	margin-right: auto;
 	top: -25px;
 	height: 46px;
 	background-image: buildIconGhosteryPlus(#4a4a4a, #daf4ff);
 	background-size: contain;
-}
-.HomeView__featureIcon.feature-supporter.column-supporter {
-	margin: auto;
-	top: -25px;
 }
 .HomeView__featureTitle {
 	text-align: center;
@@ -142,7 +138,8 @@
 	.HomeView__header img {
 		margin: 0 0 20px 0;
 	}
-	.HomeView__header h1, .HomeView__headerTagline {
+	.HomeView__header h1,
+	.HomeView__headerTagline {
 		text-align: center;
 	}
 	.HomeView__onboardingFeature.feature-tutorial,

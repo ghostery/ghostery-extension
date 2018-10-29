@@ -32,7 +32,7 @@ const SetupAntiSuiteView = props => (
 
 				return (
 					<div key={`feature-${feature.id}`} className="SetupAntiSuite__feature row align-center-middle flex-container">
-						<div className="flex-container align-center-middle hide-for-small show-for-large">
+						<div className="flex-container align-center-middle show-for-large">
 							<div>
 								<div className={iconClassNames} />
 							</div>
@@ -49,7 +49,7 @@ const SetupAntiSuiteView = props => (
 									{feature.name}
 								</div>
 								{feature.enabled && (
-									<div className="SetupAntiSuite__featureEnabled display-inline hide-for-small show-for-large">
+									<div className="SetupAntiSuite__featureEnabled display-inline show-for-large">
 										{t('hub_setup_antisuite_feature_enabled')}
 									</div>
 								)}

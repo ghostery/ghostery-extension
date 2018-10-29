@@ -194,7 +194,7 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
           hub_supporter_feature_support_description
         </div>
         <div
-          className="SupporterView__button button hide-for-small show-for-large disabled"
+          className="SupporterView__button button show-for-large disabled"
         >
           hub_supporter_button_text_alt
         </div>
@@ -484,7 +484,7 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
           hub_supporter_feature_support_description
         </div>
         <a
-          className="SupporterView__button button hide-for-small show-for-large"
+          className="SupporterView__button button show-for-large"
           href="https://account.ghosterystage.com/subscription"
           onClick={[Function]}
           rel="noopener noreferrer"

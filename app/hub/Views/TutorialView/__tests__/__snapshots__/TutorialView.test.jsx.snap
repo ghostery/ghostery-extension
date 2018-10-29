@@ -6,7 +6,14 @@ exports[`app/hub/Views/TutorialView component Snapshot tests with react-test-ren
 >
   <div
     className="TutorialView--paddingTopLarge flex-child-grow flex-container align-middle"
-  />
+  >
+    <div>
+      test component
+    </div>
+    <div>
+      test component
+    </div>
+  </div>
   <div>
     Mock Tutorial Navigation
   </div>

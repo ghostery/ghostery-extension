@@ -44,7 +44,7 @@ const LogInView = (props) => {
 				<div className="columns">
 					<div className="LogInView__header flex-container align-center-middle">
 						<img className="LogInView__headerImage" src="/app/images/hub/account/ghosty-account.svg" />
-						<div className="LogInView__headerTitle">
+						<div className="LogInView__headerTitle text-center">
 							<h3>
 								{t('hub_login_header_title')}
 							</h3>
@@ -89,7 +89,7 @@ const LogInView = (props) => {
 							</div>
 						)}
 						<div className="flex-container align-center">
-							<NavLink to="/create-account" className="LogInView__link">
+							<NavLink to="/create-account" className="LogInView__link text-center">
 								{ t('hub_login_link_create_account') }
 							</NavLink>
 						</div>

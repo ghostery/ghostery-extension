@@ -43,6 +43,31 @@ describe('app/hub/Views/CreateAccount component', () => {
 			).toJSON();
 			expect(component).toMatchSnapshot();
 		});
+
+		test('create account view is rendered correctly with empty inputs and errors', () => {
+			const initialState = {
+				email: '',
+				emailError: true,
+				confirmEmail: '',
+				confirmEmailError: true,
+				firstName: '',
+				lastName: '',
+				password: '',
+				passwordInvalidError: true,
+				passwordLengthError: true,
+				promotionsChecked: false,
+				handleInputChange: () => {},
+				handleCheckboxChange: () => {},
+				handleSubmit: () => {},
+			};
+
+			const component = renderer.create(
+				<MemoryRouter>
+					<CreateAccountView {...initialState} />
+				</MemoryRouter>
+			).toJSON();
+			expect(component).toMatchSnapshot();
+		});
 	});
 
 	describe('Shallow snapshot tests rendered with Enzyme', () => {
@@ -60,7 +85,7 @@ describe('app/hub/Views/CreateAccount component', () => {
 				promotionsChecked: true,
 				handleInputChange: () => {},
 				handleCheckboxChange: () => {},
-				handleSubmit: () => {},
+				handleSubmit: jest.fn(),
 			};
 
 			const component = shallow(<CreateAccountView {...initialState} />);
@@ -72,6 +97,10 @@ describe('app/hub/Views/CreateAccount component', () => {
 			expect(component.find('.CreateAccountView__inputError').length).toBe(0);
 			component.setProps({ emailError: true });
 			expect(component.find('.CreateAccountView__inputError').length).toBe(1);
+
+			expect(initialState.handleSubmit.mock.calls.length).toBe(0);
+			component.find('form').simulate('submit');
+			expect(initialState.handleSubmit.mock.calls.length).toBe(1);
 		});
 	});
 });

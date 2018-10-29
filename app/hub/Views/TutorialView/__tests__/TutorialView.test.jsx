@@ -20,11 +20,25 @@ import TutorialView from '../TutorialView';
 // Mock Necessary Imports
 jest.mock('../../TutorialViews/TutorialNavigation', () => props => <div>Mock Tutorial Navigation</div>);
 
+// Mock Test Component
+const TestComponent = props => <div>test component</div>;
+
 describe('app/hub/Views/TutorialView component', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('tutorial view is rendered correctly', () => {
 			const initialState = {
-				steps: [],
+				steps: [
+					{
+						index: 0,
+						path: '',
+						bodyComponent: TestComponent,
+					},
+					{
+						index: 1,
+						path: '',
+						bodyComponent: TestComponent,
+					},
+				],
 				sendMountActions: true,
 			};
 
@@ -53,12 +67,12 @@ describe('app/hub/Views/TutorialView component', () => {
 				{
 					index: 0,
 					path: '',
-					bodyComponent: () => {},
+					bodyComponent: TestComponent,
 				},
 				{
 					index: 1,
 					path: '',
-					bodyComponent: () => {},
+					bodyComponent: TestComponent,
 				},
 			] });
 			expect(component.find('[totalSteps=0]').length).toBe(0);

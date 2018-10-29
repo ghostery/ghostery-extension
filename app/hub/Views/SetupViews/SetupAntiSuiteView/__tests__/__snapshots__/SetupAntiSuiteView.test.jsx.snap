@@ -21,7 +21,7 @@ exports[`app/hub/Views/SetupViews/SetupAntiSuiteView component Snapshot tests wi
       className="SetupAntiSuite__feature row align-center-middle flex-container"
     >
       <div
-        className="flex-container align-center-middle hide-for-small show-for-large"
+        className="flex-container align-center-middle show-for-large"
       >
         <div>
           <div
@@ -56,7 +56,7 @@ exports[`app/hub/Views/SetupViews/SetupAntiSuiteView component Snapshot tests wi
             Test Feature One
           </div>
           <div
-            className="SetupAntiSuite__featureEnabled display-inline hide-for-small show-for-large"
+            className="SetupAntiSuite__featureEnabled display-inline show-for-large"
           >
             hub_setup_antisuite_feature_enabled
           </div>
@@ -96,7 +96,7 @@ exports[`app/hub/Views/SetupViews/SetupAntiSuiteView component Snapshot tests wi
       className="SetupAntiSuite__feature row align-center-middle flex-container"
     >
       <div
-        className="flex-container align-center-middle hide-for-small show-for-large"
+        className="flex-container align-center-middle show-for-large"
       >
         <div>
           <div

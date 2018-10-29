@@ -22,9 +22,27 @@ describe('app/hub/Views/LogIn component', () => {
 		test('login view is rendered correctly', () => {
 			const initialState = {
 				email: 'test@example.com',
-				password: '',
+				password: 'examplePassword',
 				emailError: false,
 				passwordError: false,
+				handleSubmit: () => {},
+				handleInputChange: () => {},
+			};
+
+			const component = renderer.create(
+				<MemoryRouter>
+					<LogInView {...initialState} />
+				</MemoryRouter>
+			).toJSON();
+			expect(component).toMatchSnapshot();
+		});
+
+		test('login view is rendered correctly with empty strings and errors', () => {
+			const initialState = {
+				email: '',
+				password: '',
+				emailError: true,
+				passwordError: true,
 				handleSubmit: () => {},
 				handleInputChange: () => {},
 			};
@@ -42,10 +60,10 @@ describe('app/hub/Views/LogIn component', () => {
 		test('the happy path of the component', () => {
 			const initialState = {
 				email: 'test@example.com',
-				password: '',
+				password: 'examplePassword',
 				emailError: false,
 				passwordError: false,
-				handleSubmit: () => {},
+				handleSubmit: jest.fn(),
 				handleInputChange: () => {},
 			};
 
@@ -57,6 +75,10 @@ describe('app/hub/Views/LogIn component', () => {
 			expect(component.find('.LogInView__inputError').length).toBe(0);
 			component.setProps({ emailError: true });
 			expect(component.find('.LogInView__inputError').length).toBe(1);
+
+			expect(initialState.handleSubmit.mock.calls.length).toBe(0);
+			component.find('form').simulate('submit');
+			expect(initialState.handleSubmit.mock.calls.length).toBe(1);
 		});
 	});
 });

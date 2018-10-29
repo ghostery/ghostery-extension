@@ -51,9 +51,9 @@ const HomeView = (props) => {
 
 	return (
 		<div className="HomeView row align-center">
-			<div className="HomeView__display columns small-10 medium-10 large-8">
+			<div className="HomeView__display columns small-10 large-8">
 				<div className="HomeView__header row large-unstack align-center-middle">
-					<img className="columns HomeView--firefoxImageSize" src="/app/images/hub/home/ghosty-bubble-heart.svg" />
+					<img className="HomeView--firefoxImageSize columns" src="/app/images/hub/home/ghosty-bubble-heart.svg" />
 					<div className="columns">
 						<h1>
 							{t('hub_home_header_text')}
@@ -113,7 +113,7 @@ const HomeView = (props) => {
 							{tutorial_complete ? t('hub_home_feature_tutorial_button_alt') : t('hub_home_feature_tutorial_button')}
 						</NavLink>
 					</div>
-					<div className="HomeView__dividerVertical column shrink hide-for-small show-for-large" />
+					<div className="HomeView__dividerVertical column shrink show-for-large" />
 					<div className="HomeView__dividerHorizontal hide-for-large" />
 					<div className={setupFeatureClassNames}>
 						<div className="HomeView__featureIcon" />
@@ -129,7 +129,7 @@ const HomeView = (props) => {
 					</div>
 				</div>
 				<div className="HomeView__supporter row large-unstack">
-					<div className="HomeView__featureIcon feature-supporter column-supporter hide-for-large" />
+					<div className="HomeView__featureIcon feature-supporter hide-for-large" />
 					<div className="HomeView__featureText columns">
 						{t('hub_home_feature_supporter_text')}
 					</div>

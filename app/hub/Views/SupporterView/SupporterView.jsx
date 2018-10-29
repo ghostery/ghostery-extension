@@ -149,7 +149,7 @@ class SupporterView extends Component {
 							<div className="SupporterView__headingDescription">
 								{t('hub_supporter_feature_support_description')}
 							</div>
-							{this._renderButton('hide-for-small show-for-large')}
+							{this._renderButton('show-for-large')}
 						</div>
 						<div className="SupporterView__feature columns hide-for-large">
 							<img

@@ -27,7 +27,7 @@ const ProductsView = props => (
 				<img
 					className="ProductsView__mobileScreenshots"
 					src="/app/images/hub/products/product-mobile-browser.png"
-					alt="hub_products_main_promo_title"
+					alt={t('hub_products_main_promo_title')}
 				/>
 			</div>
 			<div className="ProductsView__header columns">

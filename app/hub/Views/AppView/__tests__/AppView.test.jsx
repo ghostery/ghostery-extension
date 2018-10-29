@@ -13,7 +13,7 @@
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { MemoryRouter } from 'react-router';
 import AppView from '../AppView';
 
@@ -44,15 +44,17 @@ describe('app/hub/Views/AppView component', () => {
 		test('the happy path of the component', () => {
 			const initialState = {
 				app: {
-					toastMessage: 'Example toast message',
+					toastMessage: '',
 					toastClass: 'toast-class',
 				},
-				exitToast: () => {},
+				exitToast: jest.fn(),
 			};
 
-			const component = shallow(<AppView {...initialState} />);
+			const component = mount(<AppView {...initialState} />);
 			expect(component.find('.App').length).toBe(1);
 			expect(component.find('.App__mainContent').length).toBe(1);
+
+			expect(component.find('.toast-class').length).toBe(0);
 		});
 	});
 });
