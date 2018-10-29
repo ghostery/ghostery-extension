@@ -133,7 +133,7 @@ const HomeView = (props) => {
 					<div className="HomeView__featureText columns">
 						{t('hub_home_feature_supporter_text')}
 					</div>
-					<div className="HomeView__featureIcon columns shrink feature-supporter hide-for-small show-for-large" />
+					<div className="HomeView__featureIcon columns shrink feature-supporter show-for-large" />
 					<div className="columns flex-container align-center-middle">
 						<NavLink to="/plus" className="HomeView__featureButton button primary">
 							{isSupporter ? t('hub_home_feature_supporter_button_alt') : t('hub_home_feature_supporter_button')}

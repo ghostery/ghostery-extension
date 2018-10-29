@@ -27,12 +27,19 @@ class AppView extends Component {
 		this.mainContent = React.createRef();
 	}
 
+	/**
+	 * Lifecycle Event
+	 */
 	componentDidUpdate(prevProps) {
 		if (prevProps.children !== this.props.children) {
 			this.mainContent.current.scroll(0, 0);
 		}
 	}
 
+	/**
+	 * React's required render function. Returns JSX
+	 * @return {JSX} JSX for rendering the App View Component
+	 */
 	render() {
 		const { app, exitToast, children } = this.props;
 

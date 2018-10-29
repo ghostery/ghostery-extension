@@ -154,7 +154,7 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
         hub_home_feature_supporter_text
       </div>
       <div
-        className="HomeView__featureIcon columns shrink feature-supporter hide-for-small show-for-large"
+        className="HomeView__featureIcon columns shrink feature-supporter show-for-large"
       />
       <div
         className="columns flex-container align-center-middle"
@@ -331,7 +331,7 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
         hub_home_feature_supporter_text
       </div>
       <div
-        className="HomeView__featureIcon columns shrink feature-supporter hide-for-small show-for-large"
+        className="HomeView__featureIcon columns shrink feature-supporter show-for-large"
       />
       <div
         className="columns flex-container align-center-middle"
