@@ -20,15 +20,15 @@ import React from 'react';
  */
 const TutorialVideoView = () => (
 	<div className="row align-center full-width">
-		<div className="columns small-12 medium-10 large-8">
+		<div className="columns flex-container flex-dir-column">
 			<div className="TutorialView__title text-center">
 				{t('hub_tutorial_video_title')}
 			</div>
 			<div className="TutorialVideoView__videoContainer text-center">
 				<video // eslint-disable-line jsx-a11y/media-has-caption
 					controls
-					height="360"
-					width="640"
+					height="auto"
+					width="100%"
 					preload="metadata"
 					poster="/app/images/hub/tutorial/video-poster.png"
 				>

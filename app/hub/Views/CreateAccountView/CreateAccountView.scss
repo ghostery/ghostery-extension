@@ -38,7 +38,7 @@
 .CreateAccountView__inputLabel {
 	font-size: 14px;
 	font-weight: 500;
-	line-height: 40px;
+	line-height: 20px;
 	color: #4a4a4a;
 }
 .CreateAccountView__inputBox {
@@ -73,4 +73,33 @@
 }
 .CreateAccountView__button {
 	min-width: 180px;
+}
+@media only screen and (max-width: 740px)  {
+	.CreateAccountView {
+		padding-top: 20px;
+	}
+	.CreateAccountView__header {
+		flex-direction: column;
+	}
+	.CreateAccountView__headerTitle {
+		padding-top: 30px;
+		text-align: center;
+	}
+	.CreateAccountView__submit {
+		display: flex;
+		justify-content: center;
+	}
+	.CreateAccountView__checkboxContainer {
+		padding-right: 12px;
+		justify-content: center;
+	}
+	.CreateAccountView__linkContainer {
+		text-align: center;
+	}
+}
+@media only screen and (max-width: 500px)  {
+	.CreateAccountView__headerTitle h3 {
+		font-size: 20px;
+		margin: 0 10px;
+	}
 }

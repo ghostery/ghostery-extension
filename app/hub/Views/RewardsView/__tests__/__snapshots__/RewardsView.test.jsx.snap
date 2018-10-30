@@ -5,7 +5,7 @@ exports[`app/hub/Views/RewardsView component Snapshot tests with react-test-rend
   className="RewardsView RewardsView--paddingTop full-height flex-container flex-dir-column"
 >
   <div
-    className="RewardsView__header row align-center flex-shrink-none"
+    className="row small-up-1 large-up-2 align-center flex-shrink-none"
   >
     <div
       className="RewardsView__screenshot columns"
@@ -43,7 +43,7 @@ exports[`app/hub/Views/RewardsView component Snapshot tests with react-test-rend
     </div>
   </div>
   <div
-    className="RewardsView--paddingTop row align-center flex-shrink-none"
+    className="RewardsView--paddingTop row small-up-1 large-up-3 align-center flex-shrink-none"
   >
     <div
       className="RewardsView__promoFeature columns"
@@ -101,7 +101,7 @@ exports[`app/hub/Views/RewardsView component Snapshot tests with react-test-rend
     className="RewardsView__backgroundStars flex-child-grow"
   >
     <div
-      className="RewardsView--paddingTop row align-center"
+      className="RewardsView--paddingTop row align-center text-center"
     >
       <div
         className="RewardsView__closerText"

@@ -84,7 +84,7 @@ describe('app/hub/Views/SetupViews/SetupDoneView component', () => {
 			};
 
 			const component = shallow(<SetupDoneView {...initialState} />);
-			expect(component.find('.SetupDone').length).toBe(1);
+			expect(component.find('.SetupDone__feature').length).toBe(3);
 		});
 	});
 });

@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/hub/Views/SignedIn component Snapshot tests with react-test-renderer signed in view is rendered correctly 1`] = `
+<div
+  className="SignedInView"
+>
+  <a
+    aria-current="page"
+    className="ExitButton__exit flex-container align-middle active"
+    href="/"
+    onClick={[Function]}
+    style={Object {}}
+  >
+    <span
+      className="ExitButton__exitText"
+    >
+      hub_signedin_exit
+    </span>
+    <span
+      className="ExitButton__exitIcon"
+    />
+  </a>
+  <div
+    className="SignedInView--addPaddingTop row align-center"
+  >
+    <div
+      className="columns small-12 large-10"
+    >
+      <div
+        className="flex-container align-center-middle"
+      >
+        <img
+          className="SignedInView__headerImage"
+          src="/app/images/hub/account/ghosty-account.svg"
+        />
+        <div
+          className="SignedInView__headerTitle"
+        >
+          <h3>
+            hub_signedin_header_title
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="SignedInView--addPaddingTop row align-center"
+  >
+    <div
+      className="columns small-12 medium-6 text-center"
+    >
+      <h3
+        className="SignedInView--blueText"
+      >
+        hub_signedin_as_email test@example.com
+      </h3>
+    </div>
+  </div>
+</div>
+`;

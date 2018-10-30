@@ -65,7 +65,7 @@ describe('app/hub/Views/ProductsView component', () => {
 			expect(initialState.onIosClick.mock.calls.length).toBe(1);
 
 			expect(initialState.onLiteClick.mock.calls.length).toBe(0);
-			component.find('.ProductsView__storeImageContainer a[href="https://itunes.apple.com/us/app/ghostery-privacy-browser/id472789016?mt=81"]').simulate('click');
+			component.find('.ProductsView__storeImageContainer a[href="https://itunes.apple.com/us/app/ghostery-lite/id1436953057"]').simulate('click');
 			expect(initialState.onLiteClick.mock.calls.length).toBe(1);
 		});
 	});

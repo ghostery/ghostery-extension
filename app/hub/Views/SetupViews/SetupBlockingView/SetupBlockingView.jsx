@@ -24,7 +24,7 @@ const SetupBlockingView = props => (
 	<div className="row align-center">
 		<div className="columns small-12 large-10">
 			<div className="SetupBlocking">
-				<div className="row small-up-4">
+				<div className="row small-up-1 medium-up-2 large-up-4 align-center">
 					{props.choices.map((choice) => {
 						const choiceSelected = choice.name === props.blockingPolicy;
 						const bigCheckSrc = '/app/images/hub/setup/block-selected.svg';
@@ -52,7 +52,7 @@ const SetupBlockingView = props => (
 											{choice.text}
 										</div>
 									</label>
-									<div className="SetupBlocking__description">{choice.description}</div>
+									<div className="SetupBlocking__description show-for-large">{choice.description}</div>
 								</div>
 
 								<input

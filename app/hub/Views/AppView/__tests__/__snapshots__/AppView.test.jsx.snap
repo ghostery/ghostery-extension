@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/hub/Views/AppView component Snapshot tests with react-test-renderer app view is rendered correctly 1`] = `
+<div
+  className="App full-height full-width flex-container"
+>
+  <div>
+    Mock Side Navigation
+  </div>
+  <div
+    className="App__mainContent full-height full-width"
+  >
+    <div
+      className="ToastMessage full-width"
+    >
+      <div
+        className="callout-container"
+      >
+        <div
+          className="callout toast toast-class"
+        >
+          <div
+            className="flex-container align-center-middle"
+          >
+            <div
+              className="callout-text"
+            >
+              Example toast message
+            </div>
+            <div
+              className="ToastMessage__close clickable"
+              onClick={[Function]}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

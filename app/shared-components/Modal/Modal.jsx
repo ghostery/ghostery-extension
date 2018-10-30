@@ -42,7 +42,7 @@ Modal.propTypes = {
 	children: PropTypes.element.isRequired,
 };
 
-// Default props used throughout the Setup flow
+// Default props instantiation
 Modal.defaultProps = {
 	toggle: false,
 };

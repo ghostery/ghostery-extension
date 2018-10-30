@@ -19,19 +19,19 @@
 .SetupAntiSuite__feature:last-of-type {
 	border-bottom: none;
 }
-.SetupAntiSuite__feature_title {
+.SetupAntiSuite__featureTitle {
 	font-size: 17.3px;
 	font-weight: 700;
 	color: #4a4a4a;
 }
-.SetupAntiSuite__feature_enabled {
+.SetupAntiSuite__featureEnabled {
 	color: #1dafed;
 	font-size: 12.5px;
 	font-weight: 500;
 	margin-left: 50px;
 }
-.SetupAntiSuite__feature_description {
-	font-size: 10.6px;
+.SetupAntiSuite__featureDescription {
+	font-size: 12px;
 	line-height: 1.75;
 	margin: 15px 0 10px;
 	color: #4a4a4a;
@@ -39,9 +39,12 @@
 .SetupAntiSuite__icon {
 	height: 50px;
 	width: 50px;
-	margin: 0 auto;
+	margin-bottom: 8px;
 	background-repeat: no-repeat;
 	background-position: center center;
+}
+.SetupAntiSuite__featureToggle {
+	margin: 3px 0 0 10px;
 }
 
 // Anti-Tracking Icon
@@ -74,4 +77,16 @@
 }
 .SetupAntiSuite__feature .ghostery-rewards.active {
 	background-image: buildGhosteryRewardsActiveIcon(#1dafed);
+}
+
+@media only screen and (max-width: 960px) {
+	.SetupAntiSuite--alignOnMedium {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	}
+	.SetupAntiSuite__featureToggle {
+		text-align: justify;
+	}
 }

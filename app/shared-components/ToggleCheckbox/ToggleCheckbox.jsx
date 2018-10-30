@@ -21,7 +21,7 @@ import ClassNames from 'classnames';
  * @memberof SharedComponents
  */
 const ToggleCheckbox = (props) => {
-	const checkboxClassNames = ClassNames('ToggleCheckbox', {
+	const checkboxClassNames = ClassNames('ToggleCheckbox', props.className, {
 		'ToggleCheckbox--active': props.checked,
 	});
 
@@ -42,6 +42,12 @@ const ToggleCheckbox = (props) => {
 ToggleCheckbox.propTypes = {
 	checked: PropTypes.bool.isRequired,
 	onChange: PropTypes.func.isRequired,
+	className: PropTypes.string,
+};
+
+// Default props instantiation
+ToggleCheckbox.defaultProps = {
+	className: '',
 };
 
 export default ToggleCheckbox;
