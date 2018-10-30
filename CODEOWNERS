@@ -11,6 +11,9 @@
 /src/classes/EventHandlers.js @jsignanini
 /src/classes/Metrics.js @jsignanini
 /src/classes/PolicySmartBlock.js @jsignanini
+/src/classes/Conf.js @zarembsky
+/src/classes/ConfData.js @zarembsky
+/src/classes/PanelData.js @zarembsky
 
 # Background
 /src/background.js @zarembsky

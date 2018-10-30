@@ -34,7 +34,7 @@ import { setSetupComplete } from '../SetupViews/SetupDoneView/SetupDoneViewActio
  * @return {function}        this function returns a plain object, which will be merged into the component's props
  * @memberof HubContainers
  */
-const mapStateToProps = state => Object.assign({}, state.setup);
+const mapStateToProps = state => Object.assign({}, state.setup, state.account);
 
 /**
  * Bind the component's action creators using Redux's bindActionCreators.

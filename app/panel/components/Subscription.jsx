@@ -14,6 +14,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import moment from 'moment';
+import { sendMessage } from '../utils/msg';
 
 import SubscriptionMenu from './Subscription/SubscriptionMenu';
 import SubscriptionInfo from './Subscription/SubscriptionInfo';
@@ -30,7 +31,7 @@ class Subscription extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isChecked: (props.currentTheme !== 'default'),
+			isChecked: (props.current_theme !== 'default'),
 		};
 	}
 
@@ -72,11 +73,10 @@ class Subscription extends React.Component {
 	toggleThemes = () => {
 		const newChecked = !this.state.isChecked;
 		this.setState({ isChecked: newChecked });
-		if (newChecked) {
-			this.props.actions.getTheme({ currentTheme: 'midnight-theme' });
-		} else {
-			this.props.actions.getTheme({ currentTheme: 'default' });
-		}
+		const updated_theme = newChecked ? 'midnight-theme' : 'default';
+		this.props.actions.getTheme({ current_theme: updated_theme }).then(() => {
+			sendMessage('ping', 'theme_change');
+		});
 	}
 
 	SubscriptionInfoComponent = () => (<SubscriptionInfo subscriptionData={this.parseSubscriptionData()} />);
