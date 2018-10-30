@@ -1192,7 +1192,7 @@
 		"message": "Unblocked Trackers"
 	},
 	"settings_filter_new": {
-		"message": "New Since Last Update"
+		"message": "New Trackers"
 	},
 	"alert_ghostery_paused": {
 		"message": "Ghostery extension has been paused."
