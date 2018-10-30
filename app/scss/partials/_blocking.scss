@@ -34,11 +34,10 @@
 	background-repeat: no-repeat;
 	background-image: url('../../app/images/panel/tracker-list-background.svg');
 	position: relative;
-	overflow: hidden;
+	overflow: scroll;
 	.scroll-content {
-		height: inherit;
+		height: auto;
 		overflow-y: scroll;
-		overflow-x: hidden;
 		.blocking-category {
 			&:last-of-type {
 				border-bottom: 1px solid #e8e8e8;
