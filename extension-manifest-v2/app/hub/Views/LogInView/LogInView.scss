@@ -24,9 +24,9 @@
 }
 .LogInView__headerTitle h3 {
 	font-size: 24px;
-	line-height: 1.75;
+	line-height: 1.5;
 	color: #4a4a4a;
-	margin: 0 25px;
+	margin: 20px 25px 0;
 }
 .LogInView__inputLabel {
 	font-size: 14px;
@@ -66,4 +66,9 @@
 }
 .LogInView__button {
 	min-width: 180px;
+}
+@media only screen and (max-width: 740px)  {
+	.LogInView__header {
+		flex-direction: column;
+	}
 }

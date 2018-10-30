@@ -19,8 +19,8 @@ import React from 'react';
  * @memberof HubComponents
  */
 const TutorialTrustView = () => (
-	<div className="row align-center-middle">
-		<div className="columns small-12 medium-6">
+	<div className="TutorialTrustView TutorialView--mediumFlexColumn row align-center-middle">
+		<div className="columns small-10 medium-8 large-6">
 			<div className="TutorialView__imageTitle">
 				{t('hub_tutorial_simple_view')}
 			</div>
@@ -38,7 +38,7 @@ const TutorialTrustView = () => (
 				alt={t('hub_tutorial_detailed_view')}
 			/>
 		</div>
-		<div className="columns small-12 medium-4 medium-offset-1">
+		<div className="columns small-12 medium-8 large-4 large-offset-1">
 			<div className="TutorialView__title">
 				{t('hub_tutorial_trust_title')}
 			</div>
@@ -55,7 +55,7 @@ const TutorialTrustView = () => (
 				<div className="TutorialView__keyButton restrict button secondary hollow">
 					{t('summary_restrict_site')}
 				</div>
-				<div className="TutorialView__keyText">
+				<div className="TutorialView__keyText TutorialView--removeMarginBottom">
 					{t('hub_tutorial_trust_restrict_site')}
 				</div>
 			</div>

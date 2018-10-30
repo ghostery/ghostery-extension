@@ -11,7 +11,7 @@ exports[`app/hub/Views/SetupViews/SetupBlockingView component More Snapshot test
       className="SetupBlocking"
     >
       <div
-        className="row small-up-4"
+        className="row small-up-1 medium-up-2 large-up-4 align-center"
       />
     </div>
   </div>
@@ -29,7 +29,7 @@ exports[`app/hub/Views/SetupViews/SetupBlockingView component Snapshot tests wit
       className="SetupBlocking"
     >
       <div
-        className="row small-up-4"
+        className="row small-up-1 medium-up-2 large-up-4 align-center"
       >
         <div
           className="columns"
@@ -54,7 +54,7 @@ exports[`app/hub/Views/SetupViews/SetupBlockingView component Snapshot tests wit
               </div>
             </label>
             <div
-              className="SetupBlocking__description"
+              className="SetupBlocking__description show-for-large"
             >
               This is your TEST below text
             </div>
@@ -91,7 +91,7 @@ exports[`app/hub/Views/SetupViews/SetupBlockingView component Snapshot tests wit
               </div>
             </label>
             <div
-              className="SetupBlocking__description"
+              className="SetupBlocking__description show-for-large"
             >
               This is your EXAMPLE below text
             </div>

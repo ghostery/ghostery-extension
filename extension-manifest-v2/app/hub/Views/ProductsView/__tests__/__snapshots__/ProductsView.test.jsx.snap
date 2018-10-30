@@ -5,7 +5,7 @@ exports[`app/hub/Views/ProductsView component Snapshot tests with react-test-ren
   className="ProductsView"
 >
   <div
-    className="ProductsView--rowPaddingTop row align-center-middle"
+    className="ProductsView--rowPaddingTop row small-up-1 large-up-2 align-center-middle"
   >
     <div
       className="columns text-center"
@@ -17,7 +17,7 @@ exports[`app/hub/Views/ProductsView component Snapshot tests with react-test-ren
       />
     </div>
     <div
-      className="columns"
+      className="ProductsView__header columns"
     >
       <h1
         className="ProductsView__headerTitle"
@@ -68,7 +68,7 @@ exports[`app/hub/Views/ProductsView component Snapshot tests with react-test-ren
     </div>
   </div>
   <div
-    className="ProductsView--rowPaddingTop row align-center"
+    className="ProductsView--rowPaddingTop row small-up-1 large-up-2 align-center"
   >
     <div
       className="ProductsView__secondaryPromo columns"
@@ -108,10 +108,10 @@ exports[`app/hub/Views/ProductsView component Snapshot tests with react-test-ren
         hub_products_third_promo_description
       </div>
       <div
-        className="ProductsView__storeImageContainer hide"
+        className="ProductsView__storeImageContainer"
       >
         <a
-          href="https://itunes.apple.com/us/app/ghostery-privacy-browser/id472789016?mt=81"
+          href="https://itunes.apple.com/us/app/ghostery-lite/id1436953057"
           onClick={[Function]}
           rel="noopener noreferrer"
           target="_blank"

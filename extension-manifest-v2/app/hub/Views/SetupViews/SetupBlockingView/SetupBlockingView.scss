@@ -15,7 +15,7 @@
 .SetupBlocking__description {
 	display: none;
 	max-width: 180px;
-	margin-top: 30px;
+	margin: 30px auto 0 auto;
 	padding: 0 5px;
 	color: #920094;
 	font-size: 12px;
@@ -26,6 +26,7 @@
 	border: 2px solid rgba(#000000, 0);
 	min-height: 180px;
 	max-width: 180px;
+	margin: 30px auto 0 auto;
 }
 .SetupBlocking--selected,
 .SetupBlocking__choiceBox:hover {

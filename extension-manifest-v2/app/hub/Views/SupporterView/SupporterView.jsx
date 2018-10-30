@@ -27,11 +27,10 @@ class SupporterView extends Component {
 	 * @param  {Boolean} addSideMargin  whether to add spacing around the button
 	 * @return {JSX} JSX of the Supporter Button
 	 */
-	_renderButton = (addSideMargin) => {
+	_renderButton = (additionalClasses) => {
 		const { isSupporter, onSupporterClick } = this.props;
 		const buttonHref = `https://account.${globals.GHOSTERY_DOMAIN}.com/subscription`;
-		const buttonClassNames = ClassNames('SupporterView__button', 'button', {
-			'SupporterView--addSideMargin': addSideMargin,
+		const buttonClassNames = ClassNames('SupporterView__button', 'button', additionalClasses, {
 			disabled: isSupporter,
 		});
 
@@ -55,23 +54,23 @@ class SupporterView extends Component {
 			<div className="SupporterView">
 				<div className="row align-center">
 					<div className="columns">
-						<div className="SupporterView__headeingImage" />
+						<div className="SupporterView__headingImage" />
 						<div className="SupporterView__headingTitle text-center">
 							{t('hub_supporter_header_title')}
 						</div>
 						<div className="SupporterView__headingDescription text-center">
 							{t('hub_supporter_header_description')}
 						</div>
-						<div className="flex-container align-center-middle">
-							{this._renderButton(true)}
+						<div className="SupporterView__costContainer flex-container align-middle align-justify">
+							{this._renderButton()}
 							<div
-								className="SupporterView__headingCost SupporterView--addSideMargin flex-container align-middle"
+								className="SupporterView__headingCost flex-container align-middle"
 								dangerouslySetInnerHTML={{ __html: t('hub_supporter_price') }}
 							/>
 						</div>
 					</div>
 				</div>
-				<div className="SupporterView--addPaddingTop row align-center">
+				<div className="SupporterView--addPaddingTop row small-up-1 large-up-3 align-center">
 					<div className="SupporterView__perk columns text-center">
 						<div className="SupporterView__perkIcon themes" />
 						<div className="SupporterView__perkTitle">
@@ -108,15 +107,15 @@ class SupporterView extends Component {
 					</div>
 				</div>
 				<div className="SupporterView--addPaddingTop SupporterView--addPaddingBottom">
-					<div className="row">
-						<div className="SupporterView__feature columns small-12 medium-4 medium-offset-1">
+					<div className="row small-up-1 large-up-3">
+						<div className="SupporterView__feature columns large-offset-1">
 							<div className="SupporterView__headingTitle SupporterView--addPaddingTop">
 								{t('hub_supporter_feature_theme_title')}
 							</div>
 							<div className="SupporterView__headingDescription">
 								{t('hub_supporter_feature_theme_description')}
 							</div>
-							{this._renderButton(false)}
+							{this._renderButton('show-for-large')}
 						</div>
 						<div className="SupporterView__feature columns small-12 medium-6">
 							<img
@@ -126,30 +125,51 @@ class SupporterView extends Component {
 							/>
 						</div>
 					</div>
+					<div className="SupporterView--addPaddingTop hide-for-large">
+						<div className="row align-center-middle">
+							<div className="SupporterView__bar flex-child-grow" />
+							{this._renderButton('SupporterView--addSideMargin')}
+							<div className="SupporterView__bar flex-child-grow" />
+						</div>
+					</div>
 				</div>
 				<div className="SupporterView--addPaddingTop SupporterView--addPaddingBottom SupporterView--rowDarken">
-					<div className="row align-middle">
-						<div className="SupporterView__feature columns small-12 medium-4 medium-offset-1">
+					<div className="row align-middle small-up-1 large-up-3">
+						<div className="SupporterView__feature columns large-offset-1 show-for-large">
 							<img
 								className="SupporterView__featureImage support"
 								src="/app/images/hub/supporter/feature-support.svg"
 								alt={t('hub_supporter_feature_support_title')}
 							/>
 						</div>
-						<div className="SupporterView__feature columns small-12 medium-5 medium-offset-1">
+						<div className="SupporterView__feature columns large-offset-1">
 							<div className="SupporterView__headingTitle">
 								{t('hub_supporter_feature_support_title')}
 							</div>
 							<div className="SupporterView__headingDescription">
 								{t('hub_supporter_feature_support_description')}
 							</div>
-							{this._renderButton(false)}
+							{this._renderButton('show-for-large')}
+						</div>
+						<div className="SupporterView__feature columns hide-for-large">
+							<img
+								className="SupporterView__featureImage support"
+								src="/app/images/hub/supporter/feature-support.svg"
+								alt={t('hub_supporter_feature_support_title')}
+							/>
+						</div>
+					</div>
+					<div className="SupporterView--addPaddingTop hide-for-large">
+						<div className="row align-center-middle">
+							<div className="SupporterView__bar flex-child-grow" />
+							{this._renderButton('SupporterView--addSideMargin')}
+							<div className="SupporterView__bar flex-child-grow" />
 						</div>
 					</div>
 				</div>
 				<div className="SupporterView--addPaddingTop">
 					<div className="row align-middle-center">
-						<div className="SupporterView__feature columns small-12 medium-6 medium-offset-3 text-center">
+						<div className="SupporterView__feature columns large-8 large-offset-2 text-center">
 							<div className="SupporterView__headingTitle">
 								{t('hub_supporter_feature_more_title')}
 							</div>
@@ -166,7 +186,7 @@ class SupporterView extends Component {
 					<div className="SupporterView--addPaddingTop">
 						<div className="row align-center-middle">
 							<div className="SupporterView__bar flex-child-grow" />
-							{this._renderButton(true)}
+							{this._renderButton('SupporterView--addSideMargin')}
 							<div className="SupporterView__bar flex-child-grow" />
 						</div>
 					</div>

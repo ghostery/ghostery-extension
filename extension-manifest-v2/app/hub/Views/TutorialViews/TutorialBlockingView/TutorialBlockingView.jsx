@@ -19,8 +19,8 @@ import React from 'react';
  * @memberof HubComponents
  */
 const TutorialBlockingView = () => (
-	<div className="row align-center-middle">
-		<div className="columns small-12 medium-6">
+	<div className="TutorialBlockingView row align-center-middle flex-container">
+		<div className="columns small-11 small-offset-1 medium-6">
 			<div className="TutorialView__imageTitle">
 				{t('hub_tutorial_detailed_view')}
 			</div>
@@ -38,14 +38,14 @@ const TutorialBlockingView = () => (
 				alt={t('hub_tutorial_detailed_expanded_view')}
 			/>
 		</div>
-		<div className="columns small-12 medium-4 medium-offset-1">
+		<div className="columns small-12 medium-5 large-4 large-offset-1">
 			<div className="TutorialView__title">
 				{t('hub_tutorial_blocking_title')}
 			</div>
 			<div className="TutorialView__tagline">
 				{t('hub_tutorial_blocking_tagline')}
 			</div>
-			<div className="TutorialBlockingView__key">
+			<div className="TutorialBlockingView__key flex-container flex-dir-column">
 				<div className="TutorialView__keyText allow">
 					{t('hub_tutorial_blocking_allow')}
 				</div>

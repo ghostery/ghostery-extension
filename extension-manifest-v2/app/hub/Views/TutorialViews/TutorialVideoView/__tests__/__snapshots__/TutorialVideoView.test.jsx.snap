@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/hub/Views/TutorialViews/TutorialVideoView component Snapshot tests with react-test-renderer tutorial video view is rendered correctly 1`] = `
+<div
+  className="row align-center full-width"
+>
+  <div
+    className="columns flex-container flex-dir-column"
+  >
+    <div
+      className="TutorialView__title text-center"
+    >
+      hub_tutorial_video_title
+    </div>
+    <div
+      className="TutorialVideoView__videoContainer text-center"
+    >
+      <video
+        controls={true}
+        height="auto"
+        poster="/app/images/hub/tutorial/video-poster.png"
+        preload="metadata"
+        width="100%"
+      >
+        <source
+          src="https://www.ghostery.com/wp-content/uploads/2018/08/ghostery_promo.mp4?_=1"
+          type="video/mp4"
+        />
+        <source
+          src="https://www.ghostery.com/wp-content/uploads/2018/08/ghostery_promo.webm?_=1"
+          type="video/webm"
+        />
+        <source
+          src="https://www.ghostery.com/wp-content/uploads/2018/08/ghostery_promo.ogv?_=1"
+          type="video/ogg"
+        />
+      </video>
+    </div>
+    <div
+      className="TutorialView__tagline text-center"
+    >
+      hub_tutorial_video_tagline
+    </div>
+  </div>
+</div>
+`;
