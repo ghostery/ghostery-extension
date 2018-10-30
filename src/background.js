@@ -1757,18 +1757,18 @@ function init() {
 		initializePopup();
 		initializeEventListeners();
 		initializeVersioning();
-		account.migrate()
-			.then(() => {
-				if (conf.account !== null) {
-					return account.getUser()
-						.then(account.getUserSettings);
-				} else if (globals.JUST_INSTALLED) {
-					setGhosteryDefaultBlocking();
-				}
-			})
-			.catch(err => log(err));
 
 		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => {
+			account.migrate()
+				.then(() => {
+					if (conf.account !== null) {
+						return account.getUser()
+							.then(account.getUserSettings);
+					} else if (globals.JUST_INSTALLED) {
+						setGhosteryDefaultBlocking();
+					}
+				})
+				.catch(err => log(err));
 			// persist Conf properties to storage only after init has completed
 			common.prefsSet(globals.initProps);
 			globals.INIT_COMPLETE = true;
