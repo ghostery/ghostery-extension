@@ -147,6 +147,7 @@
 	border-top: 1px solid $silver-chalice;
 	border-left: 1px solid $silver-chalice;
 	border-bottom: 1px solid $silver-chalice;
+	background-color: #F7F8FB;
 	.filter-menu-item {
 		@extend .filter-text;
 		background-color: $alabaster;
@@ -164,5 +165,11 @@
 	.filter-menu-item-new {
 		@extend .filter-menu-item;
 		color: $ghosty-blue;
+	}
+	.filter-menu-item,
+	.filter-menu-item-new {
+		overflow-x: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 }
