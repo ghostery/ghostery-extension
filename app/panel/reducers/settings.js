@@ -315,8 +315,7 @@ const _updateSearchValue = (state, action) => {
 };
 
 /**
- * Expands categories with trackers selected
- * according to the specified filter.
+ * Hides or displays trackers according to the specified filter.
  * @memberOf  PanelReactReducers
  * @private
  *
