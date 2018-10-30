@@ -103,17 +103,14 @@ const _updateSitePolicy = (state, action) => {
 	} = state;
 	const msg = action.data;
 	let host;
-	if (msg.pageHost) { // Adds url which was manually entered through the Settings' Trust/Restrict tab
+	if (msg.pageHost) {
 		host = msg.pageHost.replace(/^www\./, '');
-	} else { // Adds url of the page we're currently on using Trust/Restrict button
-		/* eslint-disable no-lonely-if */
-		if (pageUrl.search(/chrome-extension|moz-extension|ms-browser-extension/) >= 0) {
-			// Handles extension pages. Adds the extension ID to the white/black list
-			host = pageUrl.split('/')[2]; // eslint-disable-line prefer-destructuring
-		} else {
-			host = pageHost.replace(/^www\./, '');
-		}
-		/* eslint-enable no-lonely-if */
+	} else if (pageUrl.search(/chrome-extension|moz-extension|ms-browser-extension/) >= 0) {
+		// Handles extension pages. Adds the extension ID to the white/black list
+		const pageUrlTokens = pageUrl.split('/');
+		host = pageUrlTokens.length > 2 ? pageUrlTokens[2] : pageHost.replace(/^www\./, '');
+	} else {
+		host = pageHost.replace(/^www\./, '');
 	}
 	let updated_site_policy;
 	let updated_blacklist = site_blacklist.slice(0);
