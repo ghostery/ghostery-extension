@@ -280,10 +280,10 @@ class BlockingHeader extends React.Component {
 										<span className="caret-down" />
 									</div>
 									<div className={this.state.filterMenuOpened ? 'filter-menu' : 'hide'}>
-										<div className="filter-menu-item" onClick={this.filterAll}>{t('settings_filter_all')}</div>
-										<div className="filter-menu-item" onClick={this.filterBlocked}>{t('settings_filter_blocked')}</div>
-										<div className="filter-menu-item" onClick={this.filterUnblocked}>{t('settings_filter_unblocked')}</div>
-										<div className="filter-menu-item-new" onClick={this.filterNew}>{t('settings_filter_new')}</div>
+										<div className="filter-menu-item" title={t('settings_filter_all')} onClick={this.filterAll}>{t('settings_filter_all')}</div>
+										<div className="filter-menu-item" title={t('settings_filter_blocked')} onClick={this.filterBlocked}>{t('settings_filter_blocked')}</div>
+										<div className="filter-menu-item" title={t('settings_filter_unblocked')} onClick={this.filterUnblocked}>{t('settings_filter_unblocked')}</div>
+										<div className="filter-menu-item-new" title={t('settings_filter_new')} onClick={this.filterNew}>{t('settings_filter_new')}</div>
 									</div>
 								</ClickOutside>
 							</div>
