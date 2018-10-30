@@ -35,6 +35,7 @@ const actions = {
 		});
 	},
 	setTutorialNavigation: () => {},
+	sendPing: () => {},
 };
 
 describe('app/hub/Views/TutorialView container', () => {

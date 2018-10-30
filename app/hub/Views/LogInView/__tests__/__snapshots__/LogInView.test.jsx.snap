@@ -1,0 +1,195 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/hub/Views/LogIn component Snapshot tests with react-test-renderer login view is rendered correctly 1`] = `
+<div
+  className="LogInView"
+>
+  <div
+    className="LogInView--addPaddingTop row align-center"
+  >
+    <div
+      className="columns"
+    >
+      <div
+        className="LogInView__header flex-container align-center-middle"
+      >
+        <img
+          className="LogInView__headerImage"
+          src="/app/images/hub/account/ghosty-account.svg"
+        />
+        <div
+          className="LogInView__headerTitle text-center"
+        >
+          <h3>
+            hub_login_header_title
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="LogInView--addPaddingTop row align-center"
+  >
+    <div
+      className="columns small-12 medium-10 large-6"
+    >
+      <form
+        onSubmit={[Function]}
+      >
+        <label
+          className="LogInView__inputLabel"
+        >
+          hub_login_label_email
+        </label>
+        <input
+          autoComplete="off"
+          className="LogInView__inputBox"
+          name="email"
+          onChange={[Function]}
+          pattern=".{1,}"
+          type="text"
+          value="test@example.com"
+        />
+        <label
+          className="LogInView__inputLabel"
+        >
+          hub_login_label_password
+        </label>
+        <input
+          className="LogInView__inputBox"
+          name="password"
+          onChange={[Function]}
+          pattern=".{1,}"
+          type="password"
+          value="examplePassword"
+        />
+        <div
+          className="flex-container align-center"
+        >
+          <a
+            aria-current={null}
+            className="LogInView__link text-center"
+            href="/create-account"
+            onClick={[Function]}
+            style={undefined}
+          >
+            hub_login_link_create_account
+          </a>
+        </div>
+        <div
+          className="LogInView--addPaddingTop flex-container align-center"
+        >
+          <button
+            className="LogInView__button button success"
+            type="submit"
+          >
+            hub_login_button_submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/hub/Views/LogIn component Snapshot tests with react-test-renderer login view is rendered correctly with empty strings and errors 1`] = `
+<div
+  className="LogInView"
+>
+  <div
+    className="LogInView--addPaddingTop row align-center"
+  >
+    <div
+      className="columns"
+    >
+      <div
+        className="LogInView__header flex-container align-center-middle"
+      >
+        <img
+          className="LogInView__headerImage"
+          src="/app/images/hub/account/ghosty-account.svg"
+        />
+        <div
+          className="LogInView__headerTitle text-center"
+        >
+          <h3>
+            hub_login_header_title
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="LogInView--addPaddingTop row align-center"
+  >
+    <div
+      className="columns small-12 medium-10 large-6"
+    >
+      <form
+        onSubmit={[Function]}
+      >
+        <label
+          className="LogInView__inputLabel"
+        >
+          hub_login_label_email
+        </label>
+        <input
+          autoComplete="off"
+          className="LogInView__inputBox error"
+          name="email"
+          onChange={[Function]}
+          pattern=".{1,}"
+          type="text"
+          value=""
+        />
+        <div
+          className="LogInView__inputError"
+        >
+          hub_login_label_email_invalid
+        </div>
+        <label
+          className="LogInView__inputLabel"
+        >
+          hub_login_label_password
+        </label>
+        <input
+          className="LogInView__inputBox error"
+          name="password"
+          onChange={[Function]}
+          pattern=".{1,}"
+          type="password"
+          value=""
+        />
+        <div
+          className="LogInView__inputError"
+        >
+          hub_login_label_password_invalid
+        </div>
+        <div
+          className="flex-container align-center"
+        >
+          <a
+            aria-current={null}
+            className="LogInView__link text-center"
+            href="/create-account"
+            onClick={[Function]}
+            style={undefined}
+          >
+            hub_login_link_create_account
+          </a>
+        </div>
+        <div
+          className="LogInView--addPaddingTop flex-container align-center"
+        >
+          <button
+            className="LogInView__button button success"
+            type="submit"
+          >
+            hub_login_button_submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+`;

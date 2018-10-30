@@ -48,3 +48,15 @@
 	background-color: #e7ecee;
 	padding: 25px 25px 0;
 }
+@media only screen and (max-width: 400px) {
+	.SetupModal__content {
+		width: 300px;
+	}
+	.SetupModal__text {
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+	.SetupModal__buttonContainer .button {
+		min-width: 110px;
+	}
+}

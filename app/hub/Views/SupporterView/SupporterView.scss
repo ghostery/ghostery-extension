@@ -14,12 +14,13 @@
 // Supporter View
 .SupporterView {
 	margin: 40px 0 80px;
+	overflow-x: hidden;
 }
 .SupporterView--addPaddingTop {
-	padding-top: 60px;
+	padding-top: 40px;
 }
 .SupporterView--addPaddingBottom {
-	padding-bottom: 60px;
+	padding-bottom: 40px;
 }
 .SupporterView--addSideMargin {
 	margin-left: 35px;
@@ -27,6 +28,10 @@
 }
 .SupporterView--rowDarken {
 	background-color: #f7f7f7;
+}
+.SupporterView__costContainer {
+	margin: 0 auto;
+	max-width: 382px;
 }
 .SupporterView__button {
 	min-width: 180px;
@@ -44,7 +49,7 @@
 	border: 1px solid #154700;
 	line-height: 18.2px;
 }
-.SupporterView__headeingImage {
+.SupporterView__headingImage {
 	height: 195px;
 	margin-right: 30px;
 	margin-bottom: 30px;
@@ -81,7 +86,7 @@
 	color: #4a4a4a;
 }
 .SupporterView__perk {
-	padding: 0 60px;
+	padding: 30px;
 }
 .SupporterView__perkTitle {
 	font-size: 14px;
@@ -121,16 +126,13 @@
 .SupporterView__featureImage.support{
 	max-width: 275px;
 }
-.SupporterView__featureImage.more {
-	max-width: 375px;
-}
 .SupporterView__manifestoContainer {
 	margin: 80px 0 0;
 	padding-top: 40px;
 	background: linear-gradient(to bottom left, #ecd868, #d4af37);
 }
 .SupporterView__manifestoBackground {
-	padding-top: 20px;
+	padding-bottom: 20px;
 	background-image: url('/app/images/hub/supporter/manifesto-background.svg');
 	background-size: 100%;
 }
@@ -144,4 +146,47 @@
 .SupporterView__bar {
 	height: 1px;
 	background-color: #9b9b9b;
+}
+@media only screen and (max-width: 960px) {
+	.SupporterView__perkIcon {
+		margin-bottom: 10px;
+	}
+	.SupporterView__perkTitle {
+		margin-bottom: 10px;
+	}
+	.SupporterView__manifestoContainer {
+		margin-top: 60px;
+	}
+	.SupporterView__manifestoBackground {
+		padding-bottom: 10px;
+	}
+	.SupporterView__manifestoText {
+		margin-top: -20px;
+		font-size: 20px;
+		line-height: 30px;
+		padding: 50px 60px;
+	}
+	.SupporterView__featureImage.theme {
+		margin: 30px -20px 15px 0;
+		max-width: 350px;
+	}
+	.SupporterView__featureImage.support {
+		margin: 0 0 -10px -33px;
+		max-width: 240px;
+	}
+	.SupporterView__feature {
+		text-align: center;
+	}
+	.SupporterView__headingDescription {
+		line-height: 30px;
+		margin-top: 4px;
+	}
+	.SupporterView__costContainer {
+		margin-top: 24px;
+	}
+}
+@media only screen and (max-width: 500px) {
+	.SupporterView__bar {
+		display: none;
+	}
 }

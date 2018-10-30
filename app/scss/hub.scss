@@ -19,10 +19,18 @@ html, body, #root {
 
 .App {
 	position: fixed;
+	z-index: 0;
 }
 .App__mainContent {
 	margin-left: 230px;
 	overflow-y: auto;
+	// Very small windows/phone screens in Firefox slightly overflows on the x-axis
+	overflow-x: hidden;
+}
+@media only screen and (max-width: 740px)  {
+	.App__mainContent {
+		margin-left: 54px;
+	}
 }
 
 // Foundation Overrides
