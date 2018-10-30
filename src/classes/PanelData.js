@@ -169,17 +169,28 @@ class PanelData {
 	 * @return {Object}		panel data shared by multiple views
 	 */
 	get panelView() {
-		let currentTheme = this._confData.get('currentTheme');
-		let theme;
-		if (currentTheme !== 'default') {
-			theme = this._confData.get('themes')[currentTheme];
-			if (!theme) {
-				currentTheme = 'default';
-			}
-		}
 		const currentAccount = this._confData.get('account');
 		if (currentAccount && currentAccount.user) {
 			currentAccount.user.subscriptionsSupporter = account.hasScopesUnverified(['subscriptions:supporter']);
+		}
+		const isSupporter = currentAccount && currentAccount.user.subscriptionsSupporter;
+		const current_theme = isSupporter ? this._confData.get('current_theme') : 'default';
+		const themes = isSupporter ? this._confData.get('themes') : {};
+		const theme = isSupporter ? themes[current_theme] : '';
+		// Get theme if it is not there
+		if (current_theme !== 'default' && !theme) {
+			account.getTheme(`${current_theme}.css`)
+				.then((data) => {
+					themes[current_theme] = data;
+					conf.themes = themes;
+					this._confData.set('themes', themes);
+				})
+				.catch((err) => {
+					log('ERROR GETTTING THEME', err);
+				});
+		} else {
+			this.set({ current_theme, themes });
+			this.init();
 		}
 		this._panelView = {
 			panel: {
@@ -193,7 +204,7 @@ class PanelData {
 				language: this._confData.get('language'),
 				reload_banner_status: this._confData.get('reload_banner_status'),
 				trackers_banner_status: this._confData.get('trackers_banner_status'),
-				currentTheme,
+				current_theme,
 				theme,
 
 				needsReload: this._trackerData.get('needsReload'),
@@ -348,7 +359,7 @@ class PanelData {
 			.set('trackers_banner_status', conf.trackers_banner_status)
 			.set('expand_all_trackers', conf.expand_all_trackers)
 			.set('account', conf.account)
-			.set('currentTheme', conf.current_theme)
+			.set('current_theme', conf.current_theme)
 			.set('themes', conf.themes);
 	}
 
