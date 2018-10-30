@@ -1762,9 +1762,7 @@ function init() {
 				if (conf.account !== null) {
 					return account.getUser()
 						.then(account.getUserSettings);
-				}
-				// Set the default ghostery blocking settings
-				if (globals.JUST_INSTALLED) {
+				} else if (globals.JUST_INSTALLED) {
 					setGhosteryDefaultBlocking();
 				}
 			})
