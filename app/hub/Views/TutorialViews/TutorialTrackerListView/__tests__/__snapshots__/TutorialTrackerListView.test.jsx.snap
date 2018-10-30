@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/hub/Views/TutorialViews/TutorialTrackerListView component Snapshot tests with react-test-renderer tutorial tracker list view is rendered correctly 1`] = `
+<div
+  className="TutorialTrackerListView TutorialView--mediumFlexColumn row align-center flex-container"
+>
+  <div
+    className="columns small-12 medium-9"
+  >
+    <img
+      alt="hub_tutorial_trackerlist_title"
+      className="TutorialTrackerListView__image shrink"
+      src="/app/images/hub/tutorial/tracker-list.png"
+    />
+  </div>
+  <div
+    className="TutorialView--paddingTopSmall columns small-10 medium-6 large-3"
+  >
+    <div
+      className="TutorialView__title"
+    >
+      hub_tutorial_trackerlist_title
+    </div>
+    <div
+      className="TutorialView__tagline"
+    >
+      hub_tutorial_trackerlist_tagline
+    </div>
+  </div>
+</div>
+`;

@@ -31,28 +31,41 @@ const SetupAntiSuiteView = props => (
 				});
 
 				return (
-					<div key={`feature-${feature.id}`} className="SetupAntiSuite__feature row align-center-middle">
-						<div className="columns shrink">
-							<div className={iconClassNames} />
+					<div key={`feature-${feature.id}`} className="SetupAntiSuite__feature row align-center-middle flex-container">
+						<div className="flex-container align-center-middle show-for-large">
+							<div>
+								<div className={iconClassNames} />
+							</div>
+							<div className="columns shrink">
+								<ToggleSwitch
+									checked={feature.enabled}
+									onChange={feature.toggle}
+								/>
+							</div>
 						</div>
-						<div className="columns shrink">
-							<ToggleSwitch
-								checked={feature.enabled}
-								onChange={feature.toggle}
-							/>
-						</div>
-						<div className="columns small-12 large-8">
+						<div className="SetupAntiSuite--alignOnMedium columns small-12 large-8">
 							<div className="flex-container align-middle">
-								<div className="SetupAntiSuite__feature_title display-inline">
+								<div className="SetupAntiSuite__featureTitle display-inline">
 									{feature.name}
 								</div>
 								{feature.enabled && (
-									<div className="SetupAntiSuite__feature_enabled display-inline">
+									<div className="SetupAntiSuite__featureEnabled display-inline show-for-large">
 										{t('hub_setup_antisuite_feature_enabled')}
 									</div>
 								)}
+								<div className="SetupAntiSuite__featureToggle flex-container align-center-middle hide-for-large">
+									<div>
+										<div className={iconClassNames} />
+									</div>
+									<div className="columns shrink">
+										<ToggleSwitch
+											checked={feature.enabled}
+											onChange={feature.toggle}
+										/>
+									</div>
+								</div>
 							</div>
-							<div className="SetupAntiSuite__feature_description">
+							<div className="SetupAntiSuite__featureDescription">
 								{feature.description}
 							</div>
 						</div>

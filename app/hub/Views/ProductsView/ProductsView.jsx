@@ -22,7 +22,7 @@ import PropTypes from 'prop-types';
  */
 const ProductsView = props => (
 	<div className="ProductsView">
-		<div className="ProductsView--rowPaddingTop row align-center-middle">
+		<div className="ProductsView--rowPaddingTop row small-up-1 large-up-2 align-center-middle">
 			<div className="columns text-center">
 				<img
 					className="ProductsView__mobileScreenshots"
@@ -30,7 +30,7 @@ const ProductsView = props => (
 					alt={t('hub_products_main_promo_title')}
 				/>
 			</div>
-			<div className="columns">
+			<div className="ProductsView__header columns">
 				<h1 className="ProductsView__headerTitle">
 					{t('hub_products_header_title')}
 				</h1>
@@ -59,7 +59,7 @@ const ProductsView = props => (
 				</div>
 			</div>
 		</div>
-		<div className="ProductsView--rowPaddingTop row align-center">
+		<div className="ProductsView--rowPaddingTop row small-up-1 large-up-2 align-center">
 			<div className="ProductsView__secondaryPromo columns">
 				<img
 					className="ProductsView__secondaryPromoImage"
@@ -85,8 +85,8 @@ const ProductsView = props => (
 				<div className="ProductsView__secondaryPromoDescription">
 					{t('hub_products_third_promo_description')}
 				</div>
-				<div className="ProductsView__storeImageContainer hide">
-					<a href="https://itunes.apple.com/us/app/ghostery-privacy-browser/id472789016?mt=81" onClick={props.onLiteClick} target="_blank" rel="noopener noreferrer">
+				<div className="ProductsView__storeImageContainer">
+					<a href="https://itunes.apple.com/us/app/ghostery-lite/id1436953057" onClick={props.onLiteClick} target="_blank" rel="noopener noreferrer">
 						<img
 							className="ProductsView__imageAppStoreMac"
 							src="/app/images/hub/products/app_store_mac_badge_us.svg"

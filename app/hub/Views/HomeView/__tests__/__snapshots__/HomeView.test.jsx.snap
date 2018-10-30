@@ -5,17 +5,17 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
   className="HomeView row align-center"
 >
   <div
-    className="columns small-12 medium-10 large-8"
+    className="HomeView__display columns small-10 large-8"
   >
     <div
-      className="HomeView__header row align-center-middle"
+      className="HomeView__header row large-unstack align-center-middle"
     >
       <img
-        className="columns"
+        className="HomeView--firefoxImageSize columns"
         src="/app/images/hub/home/ghosty-bubble-heart.svg"
       />
       <div
-        className="HomeView__title columns"
+        className="columns"
       >
         <h1>
           hub_home_header_text
@@ -26,7 +26,7 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
           hub_home_header_tagline_2
         </div>
         <div
-          className="HomeView__supportContainer HomeView--pad-left"
+          className="HomeView__supportContainer HomeView--pad-left HomeView--firefoxFontSize"
         >
           <span>
             hub_home_header_info
@@ -44,7 +44,7 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
           className="HomeView__supportContainer flex-container align-middle"
         >
           <div
-            className="ToggleCheckbox"
+            className="ToggleCheckbox flex-shrink-none"
             onClick={[Function]}
           >
             <svg
@@ -56,7 +56,7 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
             </svg>
           </div>
           <span
-            className="clickable"
+            className="clickable HomeView--firefoxFontSize"
             onClick={[Function]}
           >
             hub_home_header_checkbox_label
@@ -81,7 +81,7 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
       </a>
     </div>
     <div
-      className="HomeView__onboarding row"
+      className="HomeView__onboarding row large-unstack align-center"
     >
       <div
         className="HomeView__onboardingFeature columns flex-container align-middle flex-dir-column feature-tutorial"
@@ -110,7 +110,10 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
         </a>
       </div>
       <div
-        className="HomeView__onboardingFeatureDivider column shrink"
+        className="HomeView__dividerVertical column shrink show-for-large"
+      />
+      <div
+        className="HomeView__dividerHorizontal hide-for-large"
       />
       <div
         className="HomeView__onboardingFeature columns flex-container align-middle flex-dir-column feature-setup"
@@ -140,32 +143,31 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
       </div>
     </div>
     <div
-      className="HomeView__supporter row"
+      className="HomeView__supporter row large-unstack"
     >
       <div
-        className="HomeView__supporterFeature columns flex-container align-middle"
+        className="HomeView__featureIcon feature-supporter hide-for-large"
+      />
+      <div
+        className="HomeView__featureText columns"
       >
-        <div
-          className="HomeView__featureText columns"
+        hub_home_feature_supporter_text
+      </div>
+      <div
+        className="HomeView__featureIcon columns shrink feature-supporter show-for-large"
+      />
+      <div
+        className="columns flex-container align-center-middle"
+      >
+        <a
+          aria-current={null}
+          className="HomeView__featureButton button primary"
+          href="/plus"
+          onClick={[Function]}
+          style={undefined}
         >
-          hub_home_feature_supporter_text
-        </div>
-        <div
-          className="HomeView__featureIcon columns shrink feature-supporter"
-        />
-        <div
-          className="columns flex-container align-center-middle"
-        >
-          <a
-            aria-current={null}
-            className="HomeView__featureButton button primary"
-            href="/plus"
-            onClick={[Function]}
-            style={undefined}
-          >
-            hub_home_feature_supporter_button
-          </a>
-        </div>
+          hub_home_feature_supporter_button
+        </a>
       </div>
     </div>
   </div>
@@ -177,17 +179,17 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
   className="HomeView row align-center"
 >
   <div
-    className="columns small-12 medium-10 large-8"
+    className="HomeView__display columns small-10 large-8"
   >
     <div
-      className="HomeView__header row align-center-middle"
+      className="HomeView__header row large-unstack align-center-middle"
     >
       <img
-        className="columns"
+        className="HomeView--firefoxImageSize columns"
         src="/app/images/hub/home/ghosty-bubble-heart.svg"
       />
       <div
-        className="HomeView__title columns"
+        className="columns"
       >
         <h1>
           hub_home_header_text
@@ -203,7 +205,7 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
           hub_home_header_tagline_2
         </div>
         <div
-          className="HomeView__supportContainer HomeView--pad-left"
+          className="HomeView__supportContainer HomeView--pad-left HomeView--firefoxFontSize"
         >
           <span>
             hub_home_header_info
@@ -221,7 +223,7 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
           className="HomeView__supportContainer flex-container align-middle"
         >
           <div
-            className="ToggleCheckbox ToggleCheckbox--active"
+            className="ToggleCheckbox flex-shrink-none ToggleCheckbox--active"
             onClick={[Function]}
           >
             <svg
@@ -233,7 +235,7 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
             </svg>
           </div>
           <span
-            className="clickable"
+            className="clickable HomeView--firefoxFontSize"
             onClick={[Function]}
           >
             hub_home_header_checkbox_label
@@ -256,7 +258,7 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
       </a>
     </div>
     <div
-      className="HomeView__onboarding row"
+      className="HomeView__onboarding row large-unstack align-center"
     >
       <div
         className="HomeView__onboardingFeature columns flex-container align-middle flex-dir-column feature-tutorial-complete"
@@ -285,7 +287,10 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
         </a>
       </div>
       <div
-        className="HomeView__onboardingFeatureDivider column shrink"
+        className="HomeView__dividerVertical column shrink show-for-large"
+      />
+      <div
+        className="HomeView__dividerHorizontal hide-for-large"
       />
       <div
         className="HomeView__onboardingFeature columns flex-container align-middle flex-dir-column feature-setup-complete"
@@ -315,32 +320,31 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
       </div>
     </div>
     <div
-      className="HomeView__supporter row"
+      className="HomeView__supporter row large-unstack"
     >
       <div
-        className="HomeView__supporterFeature columns flex-container align-middle"
+        className="HomeView__featureIcon feature-supporter hide-for-large"
+      />
+      <div
+        className="HomeView__featureText columns"
       >
-        <div
-          className="HomeView__featureText columns"
+        hub_home_feature_supporter_text
+      </div>
+      <div
+        className="HomeView__featureIcon columns shrink feature-supporter show-for-large"
+      />
+      <div
+        className="columns flex-container align-center-middle"
+      >
+        <a
+          aria-current={null}
+          className="HomeView__featureButton button primary"
+          href="/plus"
+          onClick={[Function]}
+          style={undefined}
         >
-          hub_home_feature_supporter_text
-        </div>
-        <div
-          className="HomeView__featureIcon columns shrink feature-supporter"
-        />
-        <div
-          className="columns flex-container align-center-middle"
-        >
-          <a
-            aria-current={null}
-            className="HomeView__featureButton button primary"
-            href="/plus"
-            onClick={[Function]}
-            style={undefined}
-          >
-            hub_home_feature_supporter_button_alt
-          </a>
-        </div>
+          hub_home_feature_supporter_button_alt
+        </a>
       </div>
     </div>
   </div>

@@ -52,8 +52,8 @@ const CreateAccountView = (props) => {
 	return (
 		<div className="CreateAccountView">
 			<div className="CreateAccountView--addPaddingTop row align-center">
-				<div className="columns small-12 large-10">
-					<div className="flex-container align-center-middle">
+				<div className="columns small-10">
+					<div className="CreateAccountView__header flex-container align-center-middle">
 						<img className="CreateAccountView__headerImage" src="/app/images/hub/account/ghosty-account.svg" />
 						<div className="CreateAccountView__headerTitle">
 							<h3>
@@ -160,7 +160,7 @@ const CreateAccountView = (props) => {
 						)}
 					</div>
 					<div className="columns small-12 medium-5">
-						<div className="CreateAccountView--marginBottom flex-container align-middle">
+						<div className="CreateAccountView__checkboxContainer CreateAccountView--marginBottom flex-container align-middle">
 							<ToggleCheckbox
 								checked={promotionsChecked}
 								onChange={handleCheckboxChange}
@@ -172,14 +172,14 @@ const CreateAccountView = (props) => {
 					</div>
 				</div>
 				<div className="row align-center">
-					<div className="columns small-12 medium-10">
+					<div className="CreateAccountView__linkContainer columns small-12 medium-10">
 						<NavLink to="/log-in" className="CreateAccountView__link">
 							{ t('hub_create_account_link_login') }
 						</NavLink>
 					</div>
 				</div>
 				<div className="CreateAccountView--addPaddingTop row align-center">
-					<div className="columns small-12 medium-10 flex-container flex-dir-row-reverse">
+					<div className="CreateAccountView__submit columns small-12 medium-10 flex-container flex-dir-row-reverse">
 						<button type="submit" className="CreateAccountView__button button success">
 							{ t('hub_create_account_button_submit') }
 						</button>

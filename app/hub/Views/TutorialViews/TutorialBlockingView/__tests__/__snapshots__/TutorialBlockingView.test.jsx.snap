@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/hub/Views/TutorialViews/TutorialBlockingView component Snapshot tests with react-test-renderer tutorial blocking view is rendered correctly 1`] = `
+<div
+  className="TutorialBlockingView row align-center-middle flex-container"
+>
+  <div
+    className="columns small-11 small-offset-1 medium-6"
+  >
+    <div
+      className="TutorialView__imageTitle"
+    >
+      hub_tutorial_detailed_view
+    </div>
+    <img
+      alt="hub_tutorial_detailed_view"
+      className="TutorialBlockingView__image detailed"
+      src="/app/images/hub/tutorial/blocking-detailed.png"
+    />
+    <div
+      className="TutorialView__imageTitle"
+    >
+      hub_tutorial_detailed_expanded_view
+    </div>
+    <img
+      alt="hub_tutorial_detailed_expanded_view"
+      className="TutorialBlockingView__image detailed-expanded"
+      src="/app/images/hub/tutorial/blocking-detailed-expanded.png"
+    />
+  </div>
+  <div
+    className="columns small-12 medium-5 large-4 large-offset-1"
+  >
+    <div
+      className="TutorialView__title"
+    >
+      hub_tutorial_blocking_title
+    </div>
+    <div
+      className="TutorialView__tagline"
+    >
+      hub_tutorial_blocking_tagline
+    </div>
+    <div
+      className="TutorialBlockingView__key flex-container flex-dir-column"
+    >
+      <div
+        className="TutorialView__keyText allow"
+      >
+        hub_tutorial_blocking_allow
+      </div>
+      <div
+        className="TutorialView__keyText block"
+      >
+        hub_tutorial_blocking_block
+      </div>
+      <div
+        className="TutorialView__keyText block-global"
+      >
+        hub_tutorial_blocking_block_always
+      </div>
+    </div>
+  </div>
+</div>
+`;

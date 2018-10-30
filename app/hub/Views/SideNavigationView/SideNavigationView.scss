@@ -14,16 +14,18 @@
 // Side Navigation View
 .SideNavigation {
 	position: fixed;
+	z-index: 1;
 	height: 100%;
-	min-width: 230px;
-	max-width: 230px;
+	width: 230px;
 	overflow-y: auto;
 	background-color: #5d7d85;
+	overflow-x: hidden;
+	@include transition(width .5s);
 }
 .SideNavigation__top {
 	min-height: 80px;
-	background-image: url('/app/images/hub/side-navigation/ghostery-logo.svg');
 	background-color: #e7ecee;
+	background-image: url('/app/images/hub/side-navigation/ghostery-logo.svg');
 	background-size: 140px auto;
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -54,6 +56,7 @@
 	min-height: 28px;
 	padding-left: 20px;
 	padding-right: 35px;
+	width: 230px;
 }
 .SideNavigation__item .clickable,
 .SideNavigation__item a {
@@ -78,7 +81,6 @@
 .SideNavigation__item a.disabled.active {
 	color: #ffffff;
 }
-
 .SideNavigation__item a.active {
 	text-decoration: underline;
 	padding-right: 35px;
@@ -93,6 +95,7 @@
 	border-style: solid;
 	border-width: 0 0 40px 30px;
 	border-color: transparent transparent #ffffff transparent;
+	@include transition(opacity .3s ease .4s);
 }
 .SideNavigation__item a.active::after {
 	content: '';
@@ -104,6 +107,7 @@
 	border-style: solid;
 	border-width: 0 30px 40px 0;
 	border-color: transparent #ffffff transparent transparent;
+	@include transition(opacity .3s ease .4s);
 }
 .SideNavigation__bottomItem a.active::before {
 	top: -26px;
@@ -142,6 +146,10 @@ a .SideNavigation__menuIcon.products,
 a.disabled.active .SideNavigation__menuIcon.products {
 	background-image: buildIconProducts(#ffffff);
 }
+a .SideNavigation__menuIcon.profile,
+a.disabled.active .SideNavigation__menuIcon.profile {
+	background-image: buildIconProfile(#ffffff);
+}
 a.disabled .SideNavigation__menuIcon.home {
 	background-image: buildIconHome(#a9b9be);
 }
@@ -160,6 +168,63 @@ a.disabled .SideNavigation__menuIcon.rewards {
 a.disabled .SideNavigation__menuIcon.products {
 	background-image: buildIconProducts(#a9b9be);
 }
+a.disabled .SideNavigation__menuIcon.profile {
+	background-image: buildIconProfile(#a9b9be);
+}
 .SideNavigation__menuText {
-	max-width: 145px;
+	width: 145px;
+}
+.SideNavigation__menuIcon.profile {
+	position: absolute;
+	top: -25px;
+	left: 0px;
+}
+.SideNavigation__menuIcon.profile {
+	opacity: 1;
+	@include transition(opacity .3s ease .4s);
+}
+.SideNavigation:not(.disabled):hover .SideNavigation__menuIcon.profile {
+	opacity: 0;
+	@include transition(opacity .3s);
+}
+.SideNavigation__item a.active .SideNavigation__menuIcon {
+	@include transition(border-color .3s ease .4s);
+}
+@media only screen and (max-width: 740px)  {
+	.SideNavigation {
+		width: 55px;
+	}
+	.SideNavigation:not(.disabled):hover {
+		width: 230px;
+	}
+	.SideNavigation:not(:hover) .SideNavigation__top,
+	.SideNavigation__top.disabled {
+		background-image: url('/app/images/hub/side-navigation/ghostery-stacked-logo.svg');
+		background-size: 40px auto;
+	}
+	.SideNavigation:not(.disabled):hover .SideNavigation__item a.active .SideNavigation__menuIcon {
+		border-right: 3px solid rgba(white, 0);
+		@include transition(none);
+	}
+	.SideNavigation__item a.active .SideNavigation__menuIcon {
+		border-right: 3px solid white;
+    margin: 0 1px 0 4px;
+    min-width: 50px;
+		@include transition(border-color .3s ease .4s);
+	}
+	.SideNavigation:not(:hover) .SideNavigation__item a.active::before,
+	.SideNavigation:not(:hover) .SideNavigation__item a.active::after,
+	.SideNavigation.disabled .SideNavigation__item a.active::before,
+	.SideNavigation.disabled .SideNavigation__item a.active::after, {
+		opacity: 0;
+		@include transition(opacity .3s);
+	}
+	.SideNavigation__bottomText {
+		opacity: 0;
+		@include transition(opacity .3s);
+	}
+	.SideNavigation:not(.disabled):hover .SideNavigation__bottomText {
+		opacity: 1;
+		@include transition(opacity .3s ease .4s);
+	}
 }

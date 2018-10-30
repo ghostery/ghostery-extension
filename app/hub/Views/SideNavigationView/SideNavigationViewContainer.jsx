@@ -26,7 +26,6 @@ const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 class SideNavigationViewContainer extends Component {
 	constructor(props) {
 		super(props);
-
 		props.actions.getUser();
 	}
 
@@ -47,7 +46,7 @@ class SideNavigationViewContainer extends Component {
 	 */
 	render() {
 		const { user, location } = this.props;
-		const disableRegEx = /^(\/setup)|(\/tutorial)/;
+		const disableRegEx = /^(\/setup(?!\/4$))|(\/tutorial(?!\/6$))/;
 
 		const menuItems = [
 			{ href: '/', icon: 'home', text: t('hub_side_navigation_home') },
@@ -66,7 +65,12 @@ class SideNavigationViewContainer extends Component {
 			{ id: 'logout', text: t('hub_side_navigation_log_out'), clickHandler: this._handleLogoutClick },
 		] : [
 			{ id: 'create-account', href: '/create-account', text: t('hub_side_navigation_create_account') },
-			{ id: 'log-id', href: '/log-in', text: t('hub_side_navigation_log_in') },
+			{
+				id: 'log-id',
+				href: '/log-in',
+				text: t('hub_side_navigation_log_in'),
+				icon: 'profile',
+			},
 		];
 		const childProps = {
 			menuItems,

@@ -32,8 +32,9 @@
 	margin-bottom: 19px;
 }
 .HomeView__headerTagline {
+	margin-top: 7px;
 	font-size: 20px;
-	line-height: 38px;
+	line-height: 30px;
 	color: #4a4a4a;
 }
 .HomeView__supportContainer {
@@ -59,9 +60,16 @@
 	margin: 0 8px;
 	padding: 0 36px;
 }
-.HomeView__onboardingFeatureDivider {
+.HomeView__dividerVertical {
 	margin: 7px 0 4px;
-	width: 1px;
+	max-width: 1px;
+	padding: 0;
+	background-color: #979797;
+}
+.HomeView__dividerHorizontal {
+	margin: 0 25px;
+	height: 1px;
+	width: 100%;
 	padding: 0;
 	background-color: #979797;
 }
@@ -99,7 +107,9 @@
 }
 .HomeView__featureIcon.feature-supporter {
 	position: relative;
-	top: -26px;
+	margin-left: auto;
+	margin-right: auto;
+	top: -25px;
 	height: 46px;
 	background-image: buildIconGhosteryPlus(#4a4a4a, #daf4ff);
 	background-size: contain;
@@ -120,4 +130,40 @@
 .HomeView__onboarding .HomeView__featureButton {
 	margin-top: 26px;
 	min-width: 130px;
+}
+@media only screen and (max-width: 960px) {
+	.HomeView__supporter .HomeView__featureButton {
+		margin-top: 14px;
+	}
+	.HomeView__header img {
+		margin: 0 0 20px 0;
+	}
+	.HomeView__header h1,
+	.HomeView__headerTagline {
+		text-align: center;
+	}
+	.HomeView__onboardingFeature.feature-tutorial,
+	.HomeView__onboardingFeature.feature-tutorial-complete {
+		margin: 12px 0 40px;
+	}
+	.HomeView__onboardingFeature.feature-setup,
+	.HomeView__onboardingFeature.feature-setup-complete {
+		margin: 35px 0 15px;
+	}
+}
+
+// Firefox Font Size Override and Image Size Override
+@-moz-document url-prefix() {
+	.HomeView--firefoxFontSize {
+		font-size: 75%;
+	}
+	.HomeView--firefoxImageSize {
+		height: 113.875px;
+	}
+	@media only screen and (max-width: 740px) {
+		.HomeView--firefoxImageSize {
+			min-width: 126px !important;
+			max-width: 146px !important;
+		}
+	}
 }
