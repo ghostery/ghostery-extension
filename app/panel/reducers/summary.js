@@ -99,45 +99,48 @@ export default (state = initialState, action) => {
  */
 const _updateSitePolicy = (state, action) => {
 	const {
-		sitePolicy, site_blacklist, site_whitelist, pageUrl
+		sitePolicy, site_blacklist, site_whitelist, pageUrl, pageHost
 	} = state;
 	const msg = action.data;
-	let pageHost = (msg.pageHost ? msg.pageHost : state.pageHost).replace(/^www\./, '');
-
-	// Handle extension pages. Adds the extension ID to the white/black list
-	if (state.pageUrl.search(/chrome-extension|moz-extension|ms-browser-extension/) >= 0) {
-		pageHost = pageUrl.split('/')[2]; // eslint-disable-line prefer-destructuring
+	let host;
+	if (msg.pageHost) {
+		host = msg.pageHost.replace(/^www\./, '');
+	} else if (pageUrl.search(/chrome-extension|moz-extension|ms-browser-extension/) >= 0) {
+		// Handles extension pages. Adds the extension ID to the white/black list
+		const pageUrlTokens = pageUrl.split('/');
+		host = pageUrlTokens.length > 2 ? pageUrlTokens[2] : pageHost.replace(/^www\./, '');
+	} else {
+		host = pageHost.replace(/^www\./, '');
 	}
-
 	let updated_site_policy;
 	let updated_blacklist = site_blacklist.slice(0);
 	let updated_whitelist = site_whitelist.slice(0);
 
 	if (msg.type === 'whitelist') {
 		updated_site_policy = (sitePolicy === 1 || !sitePolicy) ? 2 : false;
-		if (site_blacklist.includes(pageHost)) {
+		if (site_blacklist.includes(host)) {
 			// remove from backlist if site is whitelisted
-			updated_blacklist = removeFromArray(site_blacklist, site_blacklist.indexOf(pageHost));
+			updated_blacklist = removeFromArray(site_blacklist, site_blacklist.indexOf(host));
 		}
-		if (!site_whitelist.includes(pageHost)) {
+		if (!site_whitelist.includes(host)) {
 			// add to whitelist
-			updated_whitelist = addToArray(site_whitelist, pageHost);
+			updated_whitelist = addToArray(site_whitelist, host);
 		} else {
 			// remove from whitelist
-			updated_whitelist = removeFromArray(site_whitelist, site_whitelist.indexOf(pageHost));
+			updated_whitelist = removeFromArray(site_whitelist, site_whitelist.indexOf(host));
 		}
 	} else {
 		updated_site_policy = (sitePolicy === 2 || !sitePolicy) ? 1 : false;
-		if (site_whitelist.includes(pageHost)) {
+		if (site_whitelist.includes(host)) {
 			// remove from whitelisted if site is blacklisted
-			updated_whitelist = removeFromArray(site_whitelist, site_whitelist.indexOf(pageHost));
+			updated_whitelist = removeFromArray(site_whitelist, site_whitelist.indexOf(host));
 		}
-		if (!site_blacklist.includes(pageHost)) {
+		if (!site_blacklist.includes(host)) {
 			// add to blacklist
-			updated_blacklist = addToArray(site_blacklist, pageHost);
+			updated_blacklist = addToArray(site_blacklist, host);
 		} else {
 			// remove from blacklist
-			updated_blacklist = removeFromArray(site_blacklist, site_blacklist.indexOf(pageHost));
+			updated_blacklist = removeFromArray(site_blacklist, site_blacklist.indexOf(host));
 		}
 	}
 
