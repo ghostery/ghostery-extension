@@ -42,7 +42,6 @@ class SetupViewContainer extends Component {
 			sendMountActions: false,
 			showModal: false,
 		};
-
 		if (!props.preventRedirect) {
 			this.props.history.push('/setup/1');
 		}
@@ -55,8 +54,9 @@ class SetupViewContainer extends Component {
 		this.props.actions.getSetupShowWarningOverride().then((data) => {
 			const { setup_show_warning_override } = data;
 			const { justInstalled } = QueryString.parse(window.location.search);
+			const { user } = props;
 
-			if (justInstalled !== 'true' && setup_show_warning_override) {
+			if (((justInstalled !== 'true') || user) && setup_show_warning_override) {
 				this._toggleModal();
 			} else {
 				const { origin, pathname, hash } = window.location;

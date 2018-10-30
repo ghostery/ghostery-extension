@@ -58,7 +58,7 @@ const initialState = {
 	loggedIn: false,
 	email: '',
 	emailValidated: false,
-	currentTheme: 'default',
+	current_theme: 'default',
 	theme: ''
 };
 /**
@@ -73,12 +73,12 @@ const initialState = {
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case GET_PANEL_DATA: {
-			setTheme(document, action.data.currentTheme, action.data.theme);
+			setTheme(document, action.data.current_theme, action.data.theme);
 			return Object.assign({}, state, action.data, { initialized: true });
 		}
 		case SET_THEME: {
-			setTheme(document, action.data.currentTheme, action.data.theme);
-			return Object.assign({}, state, { currentTheme: action.data.currentTheme, theme: action.data.theme });
+			setTheme(document, action.data.current_theme, action.data.theme);
+			return Object.assign({}, state, { current_theme: action.data.current_theme, theme: action.data.theme });
 		}
 		case SHOW_NOTIFICATION: {
 			const updated = _showNotification(state, action);
@@ -146,7 +146,7 @@ export default (state = initialState, action) => {
 		}
 		case LOGOUT_SUCCESS: {
 			setTheme(document, 'default');
-			return Object.assign({}, state, { currentTheme: 'default', theme: '' });
+			return Object.assign({}, state, { current_theme: 'default', theme: '' });
 		}
 		// @TODO?
 		// case LOGOUT_SUCCESS: {

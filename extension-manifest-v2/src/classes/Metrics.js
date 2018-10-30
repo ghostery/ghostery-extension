@@ -306,7 +306,7 @@ class Metrics {
 			// Engaged Velocity
 			`&ve=${encodeURIComponent(this._getVelocityEngaged(type).toString())}` +
 			// Theme
-			`&th=${encodeURIComponent(conf.current_theme.toString())}`;
+			`&th=${encodeURIComponent(this._getThemeValue().toString())}`;
 
 		if (CAMPAIGN_METRICS.includes(type)) {
 			// only send campaign attribution when necessary
@@ -470,6 +470,18 @@ class Metrics {
 	_getRewardId() {
 		const currentOffer = rewards.currentOffer || { offer_id: 'no_id' };
 		return currentOffer.offer_id;
+	}
+	/**
+	 * Get the Int associated with the Current Theme.
+	 * @private
+	 * @return {Int} value associated with the Current Theme
+	 */
+	_getThemeValue() {
+		const { current_theme } = conf;
+		if (current_theme === 'midnight-theme') {
+			return 1;
+		}
+		return 0;
 	}
 	/**
 	 * Calculate remaining scheduled time for a ping
