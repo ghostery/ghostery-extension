@@ -132,8 +132,8 @@ function autoUpdateBugDb() {
  * Set Default Blocking: all apps in Advertising, Adult Advertising, and Site Analytics
  */
 function setGhosteryDefaultBlocking() {
-	log('Blocking all apps in categories:', 'advertising', 'pornvertising', 'site_analytics');
 	const categoriesBlock = ['advertising', 'pornvertising', 'site_analytics'];
+	log('Blocking all trackers in categories:', ...categoriesBlock);
 	const selected_app_ids = {};
 	for (const app_id in bugDb.db.apps) {
 		if (bugDb.db.apps.hasOwnProperty(app_id)) {
@@ -771,44 +771,34 @@ function onMessageHandler(request, sender, callback) {
 		callback();
 		return false;
 	} else if (name === 'account.getTheme') {
-		if (conf.current_theme !== message.currentTheme) {
-			metrics.ping('theme_change');
-		}
-		if (message.currentTheme !== 'default' &&
+		const { current_theme } = message;
+		if (current_theme !== 'default' &&
 			account.hasScopesUnverified(['subscriptions:supporter'])) {
 			// try to get it locally
-			message.theme = conf.themes[message.currentTheme];
-			if (message.theme) {
-				// This will trigger panelData.set through dispatch
-				// as currentTheme is in SYNC_ARRAY
-				conf.current_theme = message.currentTheme;
+			const theme = conf.themes[current_theme];
+			if (theme) {
+				panelData.set(message);
+				message.theme = theme;
 				callback(message);
 				return false;
 			}
-			account.getTheme(`${message.currentTheme}.css`).then((theme) => {
-				if (theme) {
-					const { themes } = conf;
-					themes[message.currentTheme] = theme;
-					conf.themes = themes;
-					conf.current_theme = message.currentTheme;
-					message.theme = theme;
-				} else {
-					conf.current_theme = 'default';
-					message.currentTheme = 'default';
-				}
+			account.getTheme(`${current_theme}.css`).then((theme) => {
+				const { themes } = conf;
+				themes[current_theme] = theme;
+				conf.themes = themes;
+
+				message.theme = theme;
+				panelData.set(message);
 				callback(message);
 			})
 				.catch((err) => {
 					log('GET SET THEME ERROR', err);
-					conf.current_theme = 'default';
-					message.currentTheme = 'default';
+					panelData.set(message);
 					callback(message);
 				});
-			// Signifying asynchronous callback here. Other cases are synchronous.
 			return true;
 		}
-		conf.current_theme = 'default';
-		message.currentTheme = 'default';
+		panelData.set(message);
 		callback(message);
 		return false;
 	} else if (name === 'getCliqzModuleData') {
@@ -1749,10 +1739,6 @@ function initializeGhosteryModules() {
 		surrogatedb.init(globals.JUST_UPGRADED),
 		cliqzStartup,
 	]).then(() => {
-		// Set the default ghostery blocking settings
-		if (globals.JUST_INSTALLED) {
-			setGhosteryDefaultBlocking();
-		}
 		// run scheduledTasks on init
 		scheduledTasks();
 		// initialize panel data
@@ -1771,16 +1757,18 @@ function init() {
 		initializePopup();
 		initializeEventListeners();
 		initializeVersioning();
-		account.migrate()
-			.then(() => {
-				if (conf.account !== null) {
-					return account.getUser()
-						.then(account.getUserSettings);
-				}
-			})
-			.catch(err => log(err));
 
 		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => {
+			account.migrate()
+				.then(() => {
+					if (conf.account !== null) {
+						return account.getUser()
+							.then(account.getUserSettings);
+					} else if (globals.JUST_INSTALLED) {
+						setGhosteryDefaultBlocking();
+					}
+				})
+				.catch(err => log(err));
 			// persist Conf properties to storage only after init has completed
 			common.prefsSet(globals.initProps);
 			globals.INIT_COMPLETE = true;
