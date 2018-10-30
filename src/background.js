@@ -1739,10 +1739,6 @@ function initializeGhosteryModules() {
 		surrogatedb.init(globals.JUST_UPGRADED),
 		cliqzStartup,
 	]).then(() => {
-		// Set the default ghostery blocking settings
-		if (globals.JUST_INSTALLED) {
-			setGhosteryDefaultBlocking();
-		}
 		// run scheduledTasks on init
 		scheduledTasks();
 		// initialize panel data
@@ -1766,6 +1762,10 @@ function init() {
 				if (conf.account !== null) {
 					return account.getUser()
 						.then(account.getUserSettings);
+				}
+				// Set the default ghostery blocking settings
+				if (globals.JUST_INSTALLED) {
+					setGhosteryDefaultBlocking();
 				}
 			})
 			.catch(err => log(err));
