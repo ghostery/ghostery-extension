@@ -132,8 +132,8 @@ function autoUpdateBugDb() {
  * Set Default Blocking: all apps in Advertising, Adult Advertising, and Site Analytics
  */
 function setGhosteryDefaultBlocking() {
-	log('Blocking all apps in categories:', 'advertising', 'pornvertising', 'site_analytics');
 	const categoriesBlock = ['advertising', 'pornvertising', 'site_analytics'];
+	log('Blocking all trackers in categories:', ...categoriesBlock);
 	const selected_app_ids = {};
 	for (const app_id in bugDb.db.apps) {
 		if (bugDb.db.apps.hasOwnProperty(app_id)) {
