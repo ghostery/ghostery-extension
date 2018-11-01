@@ -32,7 +32,7 @@ class AppView extends Component {
 	 */
 	componentDidUpdate(prevProps) {
 		if (prevProps.children !== this.props.children) {
-			this.mainContent.current.scrollIntoView(true);
+			this.mainContent.current.scrollTop = 0;
 		}
 	}
 
