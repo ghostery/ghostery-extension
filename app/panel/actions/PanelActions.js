@@ -11,7 +11,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 import {
-	GET_PANEL_DATA, GET_SUMMARY_DATA, GET_BLOCKING_DATA,
+	GET_PANEL_DATA,
+	GET_SUMMARY_DATA,
+	GET_BLOCKING_DATA,
 	TOGGLE_CLIQZ_FEATURE,
 	SHOW_NOTIFICATION,
 	CLOSE_NOTIFICATION,
@@ -113,5 +115,14 @@ export function getTheme(data) {
 					data: result,
 				});
 			});
+	};
+}
+
+export function setTheme(data) {
+	return function (dispatch) {
+		dispatch({
+			type: SET_THEME,
+			data
+		});
 	};
 }

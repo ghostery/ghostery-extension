@@ -22,10 +22,16 @@ import conf from '../classes/Conf';
 import dispatcher from '../classes/Dispatcher';
 import { log } from '../utils/common';
 import Api from '../utils/api';
+import { sendMessageToPanel } from '../utils/utils';
 
 const api = new Api();
 const {
-	GHOSTERY_DOMAIN, AUTH_SERVER, ACCOUNT_SERVER, SYNC_ARRAY, IS_CLIQZ, BROWSER_INFO
+	GHOSTERY_DOMAIN,
+	AUTH_SERVER,
+	ACCOUNT_SERVER,
+	SYNC_ARRAY,
+	IS_CLIQZ,
+	BROWSER_INFO
 } = globals;
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const SYNC_SET = new Set(SYNC_ARRAY);
@@ -118,13 +124,19 @@ class Account {
 				url: `https://${GHOSTERY_DOMAIN}.com`,
 				name: 'csrf_token',
 			}, (cookie) => {
-				if (cookie === null) { return reject(); }
+				if (cookie === null) {
+					return reject();
+				}
 				return fetch(`${AUTH_SERVER}/api/v2/logout`, {
 					method: 'POST',
 					credentials: 'include',
-					headers: { 'X-CSRF-Token': cookie.value },
+					headers: {
+						'X-CSRF-Token': cookie.value
+					},
 				}).then((res) => {
-					if (res.status < 400) { return resolve(); }
+					if (res.status < 400) {
+						return resolve();
+					}
 					return res.json().then(json => reject(json));
 				}).catch(err => reject(err));
 			});
@@ -151,11 +163,38 @@ class Account {
 		this._getUserID()
 			.then(userID => api.get('settings', userID))
 			.then((res) => {
-				const settings = build(normalize(res, { camelizeKeys: false }), 'settings', res.data.id);
+				const settings = build(normalize(res, {	camelizeKeys: false	}), 'settings', res.data.id);
 				const { settings_json } = settings;
-				// @TODO setConfUserSettings settings.settingsJson
 				this._setConfUserSettings(settings_json);
 				this._setAccountUserSettings(settings_json);
+
+				const isSupporter = this.hasScopesUnverified(['subscriptions:supporter']);
+
+				if (!isSupporter) {
+					conf.current_theme = 'default';
+					settings_json.current_theme = 'default';
+					conf.themes = {};
+
+					sendMessageToPanel('SET_THEME', { current_theme: 'default', theme: '' });
+					return settings_json;
+				}
+				const { current_theme } = settings_json;
+				const {	themes } = conf;
+				conf.current_theme = current_theme;
+				const currentTheme = (current_theme !== 'default') ? themes[current_theme] : '';
+				if (current_theme !== 'default' && !currentTheme) {
+					this.getTheme(`${current_theme}.css`).then((theme) => {
+						themes[current_theme] = theme;
+						conf.themes = themes;
+						sendMessageToPanel('SET_THEME', { current_theme, theme });
+					})
+						.catch((err) => {
+							log('GET SET THEME ERROR', err);
+						});
+				} else {
+					sendMessageToPanel('SET_THEME', { current_theme, theme: currentTheme });
+				}
+
 				return settings_json;
 			})
 	)
@@ -187,7 +226,7 @@ class Account {
 		new Promise((resolve, reject) => {
 			api.get('themes', name)
 				.then((res) => {
-					const { css } = build(normalize(res), 'themes', res.data.id);
+					const {	css	} = build(normalize(res), 'themes', res.data.id);
 					resolve(css);
 				})
 				.catch(err => reject(err));
@@ -238,20 +277,28 @@ class Account {
 					return;
 				}
 
-				const { login_info } = items;
+				const {
+					login_info
+				} = items;
 				if (!items || !login_info) {
 					resolve();
 					return;
 				}
 
 				// ensure we have all the necessary info
-				const { decoded_user_token, user_token } = login_info;
+				const {
+					decoded_user_token,
+					user_token
+				} = login_info;
 				if (!decoded_user_token || !user_token) {
 					chrome.storage.local.remove(legacyLoginInfoKey, () => resolve());
 					return;
 				}
 				const {
-					UserId, csrf_token, RefreshToken, exp
+					UserId,
+					csrf_token,
+					RefreshToken,
+					exp
 				} = decoded_user_token;
 				if (!UserId || !csrf_token || !RefreshToken || !exp) {
 					chrome.storage.local.remove(legacyLoginInfoKey, () => resolve());
@@ -295,8 +342,8 @@ class Account {
 			});
 		})
 			.then(() => (
-			// Checks if user is already logged in
-			// @TODO move this into an init() function
+				// Checks if user is already logged in
+				// @TODO move this into an init() function
 				new Promise((resolve) => {
 					if (conf.account !== null) {
 						resolve();
@@ -329,14 +376,24 @@ class Account {
 	 * @return {boolean}				true if the user scopes match at least one of the required scope combination(s)
 	 */
 	hasScopesUnverified = (...required) => {
-		if (conf.account === null) { return false; }
-		if (conf.account.user === null) { return false; }
+		if (conf.account === null) {
+			return false;
+		}
+		if (conf.account.user === null) {
+			return false;
+		}
 		const userScopes = conf.account.user.scopes;
-		if (userScopes === null) { return false; }
-		if (required.length === 0) { return false; }
+		if (userScopes === null) {
+			return false;
+		}
+		if (required.length === 0) {
+			return false;
+		}
 
 		// check scopes
-		if (userScopes.indexOf('god') >= 0) { return true; }
+		if (userScopes.indexOf('god') >= 0) {
+			return true;
+		}
 		for (const sArr of required) {
 			let matches = true;
 			if (sArr.length > 0) {
@@ -383,7 +440,10 @@ class Account {
 	_setLoginCookie = details => (
 		new Promise((resolve, reject) => {
 			const {
-				name, value, expirationDate, httpOnly
+				name,
+				value,
+				expirationDate,
+				httpOnly
 			} = details;
 			if (!name || !value) {
 				reject(new Error(`One or more required values missing: ${JSON.stringify({ name, value })}`));

@@ -173,25 +173,9 @@ class PanelData {
 		if (currentAccount && currentAccount.user) {
 			currentAccount.user.subscriptionsSupporter = account.hasScopesUnverified(['subscriptions:supporter']);
 		}
-		const isSupporter = currentAccount && currentAccount.user.subscriptionsSupporter;
-		const current_theme = isSupporter ? this._confData.get('current_theme') : 'default';
-		const themes = isSupporter ? this._confData.get('themes') : {};
-		const theme = isSupporter ? themes[current_theme] : '';
-		// Get theme if it is not there
-		if (current_theme !== 'default' && !theme) {
-			account.getTheme(`${current_theme}.css`)
-				.then((data) => {
-					themes[current_theme] = data;
-					conf.themes = themes;
-					this._confData.set('themes', themes);
-				})
-				.catch((err) => {
-					log('ERROR GETTTING THEME', err);
-				});
-		} else {
-			this.set({ current_theme, themes });
-			this.init();
-		}
+
+		const current_theme = this._confData.get('current_theme');
+		const theme = this._confData.get('themes')[current_theme];
 		this._panelView = {
 			panel: {
 				enable_ad_block: this._confData.get('enable_ad_block'),
@@ -380,7 +364,9 @@ class PanelData {
 		this._trackerData
 			.set('alertCounts', tab && foundBugs.getAppsCountByIssues(tab_id, tab_url) || {})
 			.set('categories', this._buildCategories(tab_id, tab_url, pageHost, trackerList))
-			.set('needsReload', tab && tabInfo.getTabInfo(tab_id, 'needsReload') || { changes: {} })
+			.set('needsReload', tab && tabInfo.getTabInfo(tab_id, 'needsReload') || {
+				changes: {}
+			})
 			.set('pageUrl', tab_url || '')
 			.set('pageHost', pageHost)
 			.set('performanceData', tab && tabInfo.getTabInfo(tab_id, 'pageTiming'))
@@ -400,7 +386,9 @@ class PanelData {
 		const categories = bugDb.db.categories || [];
 		const selectedApps = conf.selected_app_ids || {};
 		categories.forEach((category) => {
-			const { trackers } = category;
+			const {
+				trackers
+			} = category;
 			category.num_blocked = 0;
 			trackers.forEach((tracker) => {
 				tracker.blocked = selectedApps.hasOwnProperty(tracker.id);
@@ -479,7 +467,7 @@ class PanelData {
 			});
 		});
 
-		let	categoryName;
+		let categoryName;
 		for (categoryName in categories) {
 			if (categories.hasOwnProperty(categoryName)) {
 				categoryArray.push(categories[categoryName]);
