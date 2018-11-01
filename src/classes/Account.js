@@ -169,7 +169,6 @@ class Account {
 				this._setAccountUserSettings(settings_json);
 				const { current_theme } = settings_json;
 				const {	themes } = conf;
-				conf.current_theme = current_theme;
 				const currentTheme = (current_theme !== 'default') ? themes[current_theme] : '';
 				if (current_theme !== 'default' && !currentTheme) {
 					this.getTheme(`${current_theme}.css`).then((theme) => {
