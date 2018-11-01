@@ -167,17 +167,6 @@ class Account {
 				const { settings_json } = settings;
 				this._setConfUserSettings(settings_json);
 				this._setAccountUserSettings(settings_json);
-
-				const isSupporter = this.hasScopesUnverified(['subscriptions:supporter']);
-
-				if (!isSupporter) {
-					conf.current_theme = 'default';
-					settings_json.current_theme = 'default';
-					conf.themes = {};
-
-					sendMessageToPanel('SET_THEME', { current_theme: 'default', theme: '' });
-					return settings_json;
-				}
 				const { current_theme } = settings_json;
 				const {	themes } = conf;
 				conf.current_theme = current_theme;
