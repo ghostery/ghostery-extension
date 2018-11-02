@@ -1420,7 +1420,7 @@ function initializePopup() {
  */
 function addCommonGhosteryAndAntitrackingListeners() {
 	chrome.webRequest.onBeforeRequest.addListener(onBeforeRequest, {
-		urls: ['http://*/*', 'https://*/*']
+		urls: ['http://*/*', 'https://*/*', 'ws://*/*', 'wss://*/*']
 	}, ['blocking']);
 	chrome.webRequest.onHeadersReceived.addListener(onHeadersReceived, {
 		urls: ['http://*/*', 'https://*/*']
