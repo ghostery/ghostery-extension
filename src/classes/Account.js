@@ -471,7 +471,7 @@ class Account {
 	}
 
 	_setAccountUserInfo = (user) => {
-		if(conf.account === null) {
+		if (conf.account === null) {
 			return;
 		}
 		conf.account.user = user;
@@ -479,7 +479,7 @@ class Account {
 	}
 
 	_setAccountUserSettings = (settings) => {
-		if(conf.account === null) {
+		if (conf.account === null) {
 			return;
 		}
 		conf.account.userSettings = settings;
