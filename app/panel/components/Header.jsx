@@ -103,9 +103,7 @@ class Header extends React.Component {
 	}
 
 	generateLink = () => {
-		const { location, loggedIn, user } = this.props;
-		const { pathname } = location;
-		const showTabs = (pathname === '/' || pathname.startsWith('/detail'));
+		const { loggedIn, user } = this.props;
 
 		let text = '';
 		let handleOnClick = null;
@@ -139,7 +137,7 @@ class Header extends React.Component {
 
 		return (
 			<div onClick={handleOnClick} className="header-helper-text">
-				{showTabs ? accountIcon : text}
+				{accountIcon}
 			</div>
 		);
 	}
