@@ -433,11 +433,11 @@ class Metrics {
 	 * @return {string} Subscription Name
 	 */
 	_getSubscriptionType() {
-		if (!conf.account) {
+		if (conf.account === null) {
 			return -1;
 		}
-		const subscriptions = conf.account.subscriptionData && conf.account.subscriptionData.subscriptions;
-		if (!subscriptions) {
+		const subscriptions = (conf.account !== null) && conf.account.subscriptionData && conf.account.subscriptionData.subscriptions;
+		if (!subscriptions || typeof subscriptions.productName !== 'string') {
 			return -1;
 		}
 		return subscriptions.productName.toUpperCase().replace(' ', '_');

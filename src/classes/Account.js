@@ -364,10 +364,7 @@ class Account {
 	 * @return {boolean}				true if the user scopes match at least one of the required scope combination(s)
 	 */
 	hasScopesUnverified = (...required) => {
-		if (conf.account === null) {
-			return false;
-		}
-		if (conf.account.user === null) {
+		if (conf.account === null || conf.account.user === null) {
 			return false;
 		}
 		const userScopes = conf.account.user.scopes;
@@ -474,16 +471,25 @@ class Account {
 	}
 
 	_setAccountUserInfo = (user) => {
+		if(conf.account === null) {
+			return;
+		}
 		conf.account.user = user;
 		dispatcher.trigger('conf.save.account');
 	}
 
 	_setAccountUserSettings = (settings) => {
+		if(conf.account === null) {
+			return;
+		}
 		conf.account.userSettings = settings;
 		dispatcher.trigger('conf.save.account');
 	}
 
 	_setSubscriptionData = (subscriptionData) => {
+		if (!subscriptionData || conf.account === null) {
+			return;
+		}
 		if (!conf.paid_subscription && subscriptionData.hasOwnProperty('subscriptions')) {
 			conf.paid_subscription = true;
 			dispatcher.trigger('conf.save.paid_subscription');

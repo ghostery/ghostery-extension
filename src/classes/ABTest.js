@@ -47,7 +47,7 @@ class ABTest {
 			&install_date=${encodeURIComponent(conf.install_date)}
 			&ir=${encodeURIComponent(conf.install_random_number)}
 			&gv=${encodeURIComponent(EXTENSION_VERSION)}
-			&si=${conf.account ? '1' : '0'}
+			&si=${(conf.account !== null) ? '1' : '0'}
 			&ua=${encodeURIComponent(BROWSER_INFO.name)}
 			&v=${encodeURIComponent(conf.cmp_version)}
 			&l=${encodeURIComponent(conf.language)}`;
