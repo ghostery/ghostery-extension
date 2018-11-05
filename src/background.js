@@ -1419,9 +1419,12 @@ function initializePopup() {
  * @memberOf Background
  */
 function addCommonGhosteryAndAntitrackingListeners() {
-	chrome.webRequest.onBeforeRequest.addListener(onBeforeRequest, {
-		urls: ['http://*/*', 'https://*/*', 'ws://*/*', 'wss://*/*']
-	}, ['blocking']);
+	// Edge doesn't support WebSockets
+	const urls = ['http://*/*', 'https://*/*'];
+	if (!IS_EDGE) {
+		urls.push('ws://*/*', 'wss://*/*');
+	}
+	chrome.webRequest.onBeforeRequest.addListener(onBeforeRequest, { urls }, ['blocking']);
 	chrome.webRequest.onHeadersReceived.addListener(onHeadersReceived, {
 		urls: ['http://*/*', 'https://*/*']
 	}, ['responseHeaders']);
