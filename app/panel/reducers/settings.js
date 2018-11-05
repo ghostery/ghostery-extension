@@ -315,8 +315,7 @@ const _updateSearchValue = (state, action) => {
 };
 
 /**
- * Expands categories with trackers selected
- * according to the specified filter.
+ * Hides or displays trackers according to the specified filter.
  * @memberOf  PanelReactReducers
  * @private
  *
@@ -330,11 +329,6 @@ const _filter = (state, action) => {
 	updated_categories.forEach((category) => {
 		category.num_total = 0;
 		category.num_blocked = 0;
-		if (action.data === 'all') {
-			category.expanded = false;
-		} else {
-			category.expanded = true;
-		}
 		category.trackers.forEach((tracker) => {
 			switch (action.data) {
 				case 'all':
