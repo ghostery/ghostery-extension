@@ -27,7 +27,7 @@ import { getUserSubscriptionData } from '../../Account/AccountActions';
  */
 const mapStateToProps = state => Object.assign({}, state.account, {
 	theme: state.panel.theme,
-	currentTheme: state.panel.currentTheme,
+	current_theme: state.panel.current_theme,
 	subscriber: state.panel.subscriber,
 	language: state.panel.language,
 });
