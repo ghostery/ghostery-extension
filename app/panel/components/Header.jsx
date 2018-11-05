@@ -95,9 +95,7 @@ class Header extends React.Component {
 	}
 
 	generateLink = () => {
-		const { location, loggedIn, user } = this.props;
-		const { pathname } = location;
-		const showTabs = (pathname === '/' || pathname.startsWith('/detail'));
+		const { loggedIn, user } = this.props;
 
 		let text = '';
 		let handleOnClick = null;
@@ -113,7 +111,7 @@ class Header extends React.Component {
 		if (!loggedIn || loggedIn && user && !user.emailValidated) {
 			accountIcon = (
 				<div className="g-tooltip">
-					<svg width="26" height="40" viewBox="0 0 26 16">
+					<svg width="26" height="40" viewBox="5 0 26 16">
 						<g fill="none" fillRule="nonzero">
 							<g fill="#ffffff" stroke="#ffffff" strokeWidth=".5">
 								<path d="M16 5.519a2.788 2.788 0 0 1 2.772 2.772A2.788 2.788 0 0 1 16 11.063a2.788 2.788 0 0 1-2.772-2.772A2.788 2.788 0 0 1 16 5.52zm0 .911c-1.025 0-1.86.836-1.86 1.861s.835 1.86 1.86 1.86c1.025 0 1.86-.835 1.86-1.86 0-1.025-.835-1.86-1.86-1.86z" />
@@ -131,7 +129,7 @@ class Header extends React.Component {
 
 		return (
 			<div onClick={handleOnClick} className="header-helper-text">
-				{showTabs ? accountIcon : text}
+				{accountIcon}
 			</div>
 		);
 	}
