@@ -9,8 +9,8 @@
 	"author": "Ghostery",
 	"name": "__MSG_name__",
 	"short_name": "Ghostery",
-	"version": "8.2.4",
-	"version_name": "8.2.4",
+	"version": "8.3.0",
+	"version_name": "8.3.0",
 	"default_locale": "en",
 	"description": "__MSG_short_description__",
 	"debug": true,
@@ -79,6 +79,8 @@
 		"tabs",
 		"http://*/*",
 		"https://*/*",
+		"ws://*/*",
+		"wss://*/*",
 		"storage"
 	],
 	"background": {
@@ -88,8 +90,8 @@
 		"persistent": true
 	},
 	"minimum_edge_version": "33.14281.1000.0",
-	"minimum_chrome_version": "49",
-	"minimum_opera_version": "36",
+	"minimum_chrome_version": "58",
+	"minimum_opera_version": "45",
 	"web_accessible_resources": [
 		"app/images/*",
 		"dist/css/rewards_styles.css"
