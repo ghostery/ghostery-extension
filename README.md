@@ -140,8 +140,8 @@ $ ./fern.js pack configs/ghostery.js
 
 + Firefox: 52+
 + Firefox Android: 55+
-+ Chrome: 49+
-+ Opera: 36+
++ Chrome: 58+
++ Opera: 45+
 + Edge: 34.14291+
 
 ## Contribute

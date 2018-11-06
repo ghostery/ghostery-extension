@@ -1248,12 +1248,18 @@ function initializePopup() {
  * @memberOf Background
  */
 function addCommonGhosteryAndAntitrackingListeners() {
-	chrome.webRequest.onBeforeRequest.addListener(onBeforeRequest, {
-		urls: ['http://*/*', 'https://*/*']
-	}, ['blocking']);
-	chrome.webRequest.onHeadersReceived.addListener(onHeadersReceived, {
-		urls: ['http://*/*', 'https://*/*']
-	}, ['responseHeaders']);
+	let urlFilters = ['http://*/*', 'https://*/*', 'ws://*/*', 'wss://*/*'];
+	if (IS_EDGE) {
+		// Edge doesn't support WebSockets
+		urlFilters = urlFilters.reduce((accumulator, currentValue) => {
+			if (!currentValue.match(/^wss?:\/\//)) {
+				accumulator.push(currentValue);
+			}
+			return accumulator;
+		}, []);
+	}
+	chrome.webRequest.onBeforeRequest.addListener(onBeforeRequest, { urls: urlFilters }, ['blocking']);
+	chrome.webRequest.onHeadersReceived.addListener(onHeadersReceived, { urls: urlFilters }, ['responseHeaders']);
 }
 
 /**
