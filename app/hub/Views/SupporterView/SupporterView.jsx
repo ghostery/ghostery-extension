@@ -28,8 +28,10 @@ class SupporterView extends Component {
 	 * @return {JSX} JSX of the Supporter Button
 	 */
 	_renderButton = (additionalClasses) => {
-		const { isSupporter, onSupporterClick } = this.props;
-		const buttonHref = `https://account.${globals.GHOSTERY_DOMAIN}.com/subscription`;
+		const { isSignedIn, isSupporter, onSupporterClick } = this.props;
+		const buttonHref = (isSignedIn) ?
+			`https://account.${globals.GHOSTERY_DOMAIN}.com/subscription?target=subscribe` :
+			`https://signon.${globals.GHOSTERY_DOMAIN}.com/subscribe`;
 		const buttonClassNames = ClassNames('SupporterView__button', 'button', additionalClasses, {
 			disabled: isSupporter,
 		});
@@ -198,6 +200,7 @@ class SupporterView extends Component {
 
 // PropTypes ensure we pass required props of the correct type
 SupporterView.propTypes = {
+	isSignedIn: PropTypes.bool.isRequired,
 	isSupporter: PropTypes.bool.isRequired,
 	onSupporterClick: PropTypes.func.isRequired,
 };

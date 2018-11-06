@@ -20,6 +20,20 @@ describe('app/hub/Views/SupporterView component', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('supporter view is rendered correctly when the user is not a supporter', () => {
 			const initialState = {
+				isSignedIn: false,
+				isSupporter: false,
+				onSupporterClick: () => {},
+			};
+
+			const component = renderer.create(
+				<SupporterView {...initialState} />
+			).toJSON();
+			expect(component).toMatchSnapshot();
+		});
+
+		test('supporter view is rendered correctly when the user is signed in but not a supporter', () => {
+			const initialState = {
+				isSignedIn: true,
 				isSupporter: false,
 				onSupporterClick: () => {},
 			};
@@ -32,6 +46,7 @@ describe('app/hub/Views/SupporterView component', () => {
 
 		test('supporter view is rendered correctly when the user is a supporter', () => {
 			const initialState = {
+				isSignedIn: true,
 				isSupporter: true,
 				onSupporterClick: () => {},
 			};
@@ -46,6 +61,7 @@ describe('app/hub/Views/SupporterView component', () => {
 	describe('Shallow snapshot tests rendered with Enzyme', () => {
 		test('the happy path of the component', () => {
 			const initialState = {
+				isSignedIn: false,
 				isSupporter: false,
 				onSupporterClick: jest.fn(),
 			};
@@ -68,6 +84,10 @@ describe('app/hub/Views/SupporterView component', () => {
 			expect(initialState.onSupporterClick.mock.calls.length).toBe(0);
 			component.find('.SupporterView__button').first().simulate('click');
 			expect(initialState.onSupporterClick.mock.calls.length).toBe(1);
+
+			expect(component.find('.SupporterView__button').first().props().href).toBe('https://signon.ghosterystage.com/subscribe')
+			component.setProps({ isSignedIn: true });
+			expect(component.find('.SupporterView__button').first().props().href).toBe('https://account.ghosterystage.com/subscription?target=subscribe')
 
 			expect(component.find('.SupporterView__button').length).toBe(6);
 			expect(component.find('.SupporterView__button.disabled').length).toBe(0);

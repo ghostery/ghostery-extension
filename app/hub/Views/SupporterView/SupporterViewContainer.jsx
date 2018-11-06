@@ -43,15 +43,20 @@ class SupporterViewContainer extends Component {
 	 * @return {JSX} JSX for rendering the Supporter View of the Hub app
 	 */
 	render() {
-		const isSupporter = this.props.user && this.props.user.subscriptionsSupporter || false;
+		const childProps = {
+			isSignedIn: !!(this.props.user && this.props.user.email),
+			isSupporter: this.props.user && this.props.user.subscriptionsSupporter || false,
+			onSupporterClick: this._sendSupporterPing,
+		};
 
-		return <SupporterView isSupporter={isSupporter} onSupporterClick={this._sendSupporterPing} />;
+		return <SupporterView {...childProps} />;
 	}
 }
 
 // PropTypes ensure we pass required props of the correct type
 SupporterViewContainer.propTypes = {
 	user: PropTypes.shape({
+		email: PropTypes.string,
 		subscriptionsSupporter: PropTypes.bool,
 	}),
 	actions: PropTypes.shape({
@@ -63,6 +68,7 @@ SupporterViewContainer.propTypes = {
 // Default props used in the Supporter View
 SupporterViewContainer.defaultProps = {
 	user: {
+		email: false,
 		subscriptionsSupporter: false,
 	},
 };
