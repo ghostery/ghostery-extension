@@ -138,13 +138,12 @@
     traceur "0.0.105"
     uglify-js "^2.6.1"
 
-"@cliqz/adblocker@^0.1.11":
-  version "0.1.13"
-  resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-0.1.13.tgz#a89b3a56408245768d64abfc9ffa31750391d564"
-  integrity sha512-NOKQYCMOH3CCEuT6hnZdHM7vo6Yv5nrXO/M36iC4RWK6PsbUe/hhKz6PKNRbX2HU3FCXha8WEA+ATb7y+i/Ylw==
+"@cliqz/adblocker@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-0.2.1.tgz#9545d185dad832e3dcc9605a5b260f2b1a8234fc"
+  integrity sha512-fPAg7Nh1zLneuBYtuiSsS/o30nbFhWgd/EVoaSsPwqpweCWbUwTT+zMkZBoVEtPTk6Y9XF0reqEIQ0Uf07t7RQ==
   dependencies:
-    cross-fetch "2.2.2"
-    tldjs "2.3.1"
+    tldts "^3.0.0"
 
 "@sinonjs/formatio@3.0.0":
   version "3.0.0"
@@ -1753,13 +1752,13 @@ brorand@^1.0.1:
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
   integrity sha1-EsJe/kCkXjwyPrhnWgoM5XsiNx8=
 
-"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.30/7.30.0.1ee098a.tgz":
-  version "7.30.0"
-  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.30/7.30.0.1ee098a.tgz#60b97d8b36ddd153307798ab99cf343bde642dc3"
+"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.31/7.31.1.7fbd725.tgz":
+  version "7.31.1"
+  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.31/7.31.1.7fbd725.tgz#1e7f8291a5efca6e741438bb29aadf7045bf2b3e"
   dependencies:
     "@cliqz-oss/dexie" "^2.0.4"
     "@cliqz-oss/systemjs-builder" "^0.16.13"
-    "@cliqz/adblocker" "^0.1.11"
+    "@cliqz/adblocker" "^0.2.1"
     BigInt "^5.5.3"
     ajv "^6.5.0"
     anonymous-credentials "https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.1/anonymous-credentials-0.1.1.tgz"
@@ -1802,11 +1801,12 @@ brorand@^1.0.1:
     spanan "^2.0.0"
     tablesorter "^2.29.2"
     text-encoding "^0.6.4"
-    tldjs "^2.3.1"
+    tldts "^3.0.0"
     ua-parser-js "^0.7.12"
     untildify "^3.0.2"
     url-pattern "^1.0.3"
     useragent.js "^0.5.6"
+    whatwg-fetch "^3.0.0"
     xhr2 "^0.1.4"
     ytdl-core "^0.20.2"
     yuidoc-bootstrap-theme "^1.0.6"
@@ -2571,14 +2571,6 @@ cross-env@^5.1.3:
   dependencies:
     cross-spawn "^6.0.5"
     is-windows "^1.0.0"
-
-cross-fetch@2.2.2:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-2.2.2.tgz#a47ff4f7fc712daba8f6a695a11c948440d45723"
-  integrity sha1-pH/09/xxLauo9qaVoRyUhEDUVyM=
-  dependencies:
-    node-fetch "2.1.2"
-    whatwg-fetch "2.0.4"
 
 cross-spawn@^3.0.0:
   version "3.0.1"
@@ -6725,11 +6717,6 @@ node-abi@^2.2.0:
   dependencies:
     semver "^5.4.1"
 
-node-fetch@2.1.2:
-  version "2.1.2"
-  resolved "http://registry.npmjs.org/node-fetch/-/node-fetch-2.1.2.tgz#ab884e8e7e57e38a944753cec706f788d1768bb5"
-  integrity sha1-q4hOjn5X44qUR1POxwb3iNF2i7U=
-
 node-fetch@^1.0.1, node-fetch@^1.7.1:
   version "1.7.3"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-1.7.3.tgz#980f6f72d85211a5347c6b2bc18c5b84c3eb47ef"
@@ -7935,7 +7922,7 @@ punycode@^1.2.4, punycode@^1.3.2, punycode@^1.4.1:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
   integrity sha1-wNWmOycYgArY4esPpSachN1BhF4=
 
-punycode@^2.1.0:
+punycode@^2.1.0, punycode@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
@@ -9644,12 +9631,12 @@ tiny-emitter@2.0.2:
   resolved "https://registry.yarnpkg.com/tiny-emitter/-/tiny-emitter-2.0.2.tgz#82d27468aca5ade8e5fd1e6d22b57dd43ebdfb7c"
   integrity sha512-2NM0auVBGft5tee/OxP4PI3d8WItkDM+fPnaRAVo6xTDI2knbz9eC5ArWGqtGlYqiH3RU5yMpdyTTO7MguC4ow==
 
-tldjs@2.3.1, tldjs@^2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/tldjs/-/tldjs-2.3.1.tgz#cf09c3eb5d7403a9e214b7d65f3cf9651c0ab039"
-  integrity sha512-W/YVH/QczLUxVjnQhFC61Iq232NWu3TqDdO0S/MtXVz4xybejBov4ud+CIwN9aYqjOecEqIy0PscGkwpG9ZyTw==
+tldts@^3.0.0:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/tldts/-/tldts-3.0.2.tgz#28ce00e41afd1a0450897f987a587022183e84eb"
+  integrity sha512-5vcPwDwhUdBKLk7dSb86+w5y/33kPOwlUBwBRN3HvVBJGPwp5bO5uEoh3SMi6zCeyYD75cDJTfCW2F3p5lHhcw==
   dependencies:
-    punycode "^1.4.1"
+    punycode "^2.1.1"
 
 tmp@0.0.28:
   version "0.0.28"
@@ -10288,11 +10275,6 @@ whatwg-encoding@^1.0.1, whatwg-encoding@^1.0.3:
   integrity sha512-b5lim54JOPN9HtzvK9HFXvBma/rnfFeqsic0hSpjtDbVxR3dJKLc+KB4V6GgiGOvl7CY/KNh8rxSo9DKQrnUEw==
   dependencies:
     iconv-lite "0.4.24"
-
-whatwg-fetch@2.0.4:
-  version "2.0.4"
-  resolved "http://registry.npmjs.org/whatwg-fetch/-/whatwg-fetch-2.0.4.tgz#dde6a5df315f9d39991aa17621853d720b85566f"
-  integrity sha512-dcQ1GWpOD/eEQ97k66aiEVpNnapVj90/+R+SXTPYGHpYBBypfKJEQjLrvMZ7YXbKm21gXd4NcuxUTjiv1YtLng==
 
 whatwg-fetch@>=0.10.0, whatwg-fetch@^3.0.0:
   version "3.0.0"
