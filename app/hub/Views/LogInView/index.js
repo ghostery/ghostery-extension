@@ -16,6 +16,7 @@ import { bindActionCreators } from 'redux';
 
 import LogInViewContainer from './LogInViewContainer';
 import { login, getUser, getUserSettings } from '../../../Account/AccountActions';
+import { getTheme } from '../../../panel/actions/PanelActions';
 import { setToast } from '../AppView/AppViewActions';
 
 /**
@@ -38,6 +39,7 @@ const mapDispatchToProps = dispatch => ({
 		login,
 		getUser,
 		getUserSettings,
+		getTheme,
 	}), dispatch),
 });
 

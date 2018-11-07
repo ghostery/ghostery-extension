@@ -25,7 +25,8 @@ import {
 	REMOVE_OFFER,
 	SET_OFFER_READ,
 	TOGGLE_EXPANDED,
-	SET_THEME
+	SET_THEME,
+	CLEAR_THEME
 } from '../constants/constants';
 import {
 	LOGIN_SUCCESS,
@@ -59,7 +60,6 @@ const initialState = {
 	email: '',
 	emailValidated: false,
 	current_theme: 'default',
-	theme: ''
 };
 /**
  * Default export for panel view reducer. Handles actions
@@ -73,12 +73,18 @@ const initialState = {
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case GET_PANEL_DATA: {
-			setTheme(document, action.data.current_theme, action.data.theme);
+			const { current_theme, account } = action.data;
+			setTheme(document, current_theme, account);
 			return Object.assign({}, state, action.data, { initialized: true });
 		}
 		case SET_THEME: {
-			setTheme(document, action.data.current_theme, action.data.theme);
-			return Object.assign({}, state, { current_theme: action.data.current_theme, theme: action.data.theme });
+			const { name, css } = action.data;
+			setTheme(document, name, { themeData: { [name]: { name, css } } });
+			return Object.assign({}, state, { current_theme: name });
+		}
+		case CLEAR_THEME: {
+			setTheme(document, initialState.current_theme);
+			return Object.assign({}, state, { current_theme: initialState.current_theme });
 		}
 		case SHOW_NOTIFICATION: {
 			const updated = _showNotification(state, action);
@@ -145,8 +151,8 @@ export default (state = initialState, action) => {
 			return Object.assign({}, state, updated);
 		}
 		case LOGOUT_SUCCESS: {
-			setTheme(document, 'default');
-			return Object.assign({}, state, { current_theme: 'default', theme: '' });
+			setTheme(document);
+			return Object.assign({}, state, { current_theme: initialState.current_theme });
 		}
 		// @TODO?
 		// case LOGOUT_SUCCESS: {
