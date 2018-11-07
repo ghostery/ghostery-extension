@@ -173,25 +173,6 @@ class PanelData {
 		if (currentAccount && currentAccount.user) {
 			currentAccount.user.subscriptionsSupporter = account.hasScopesUnverified(['subscriptions:supporter']);
 		}
-		const isSupporter = currentAccount && currentAccount.user.subscriptionsSupporter;
-		const current_theme = isSupporter ? this._confData.get('current_theme') : 'default';
-		const themes = isSupporter ? this._confData.get('themes') : {};
-		const theme = isSupporter ? themes[current_theme] : '';
-		// Get theme if it is not there
-		if (current_theme !== 'default' && !theme) {
-			account.getTheme(`${current_theme}.css`)
-				.then((data) => {
-					themes[current_theme] = data;
-					conf.themes = themes;
-					this._confData.set('themes', themes);
-				})
-				.catch((err) => {
-					log('ERROR GETTTING THEME', err);
-				});
-		} else {
-			this.set({ current_theme, themes });
-			this.init();
-		}
 		this._panelView = {
 			panel: {
 				enable_ad_block: this._confData.get('enable_ad_block'),
@@ -204,8 +185,7 @@ class PanelData {
 				language: this._confData.get('language'),
 				reload_banner_status: this._confData.get('reload_banner_status'),
 				trackers_banner_status: this._confData.get('trackers_banner_status'),
-				current_theme,
-				theme,
+				current_theme: this._confData.get('current_theme'),
 
 				needsReload: this._trackerData.get('needsReload'),
 				smartBlock: this._trackerData.get('smartBlock'),
@@ -359,8 +339,7 @@ class PanelData {
 			.set('trackers_banner_status', conf.trackers_banner_status)
 			.set('expand_all_trackers', conf.expand_all_trackers)
 			.set('account', conf.account)
-			.set('current_theme', conf.current_theme)
-			.set('themes', conf.themes);
+			.set('current_theme', conf.current_theme);
 	}
 
 	/**

@@ -67,4 +67,4 @@ export const GET_SETTINGS_DATA = 'GET_SETTINGS_DATA';
 
 // subscription
 export const SET_THEME = 'SET_THEME';
-
+export const CLEAR_THEME = 'CLEAR_THEME';

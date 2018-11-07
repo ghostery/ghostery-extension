@@ -771,35 +771,14 @@ function onMessageHandler(request, sender, callback) {
 		callback();
 		return false;
 	} else if (name === 'account.getTheme') {
-		const { current_theme } = message;
-		if (current_theme !== 'default' &&
-			account.hasScopesUnverified(['subscriptions:supporter'])) {
-			// try to get it locally
-			const theme = conf.themes[current_theme];
-			if (theme) {
-				panelData.set(message);
-				message.theme = theme;
-				callback(message);
-				return false;
-			}
-			account.getTheme(`${current_theme}.css`).then((theme) => {
-				const { themes } = conf;
-				themes[current_theme] = theme;
-				conf.themes = themes;
-
-				message.theme = theme;
-				panelData.set(message);
-				callback(message);
-			})
-				.catch((err) => {
-					log('GET SET THEME ERROR', err);
-					panelData.set(message);
-					callback(message);
+		if (conf.current_theme !== 'default') {
+			account.getTheme(conf.current_theme)
+				.then(() => {
+					callback(conf.account.themeData[conf.current_theme]);
 				});
-			return true;
+			return false;
 		}
-		panelData.set(message);
-		callback(message);
+		callback();
 		return false;
 	} else if (name === 'getCliqzModuleData') {
 		const modules = { adblock: {}, antitracking: {} };
@@ -1769,7 +1748,12 @@ function init() {
 				.then(() => {
 					if (conf.account !== null) {
 						return account.getUser()
-							.then(account.getUserSettings);
+							.then(account.getUserSettings)
+							.then(() => {
+								if (conf.current_theme !== 'default') {
+									return account.getTheme(conf.current_theme);
+								}
+							});
 					} else if (globals.JUST_INSTALLED) {
 						setGhosteryDefaultBlocking();
 					}
