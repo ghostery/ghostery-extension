@@ -74,7 +74,7 @@ class Subscription extends React.Component {
 		const newChecked = !this.state.isChecked;
 		this.setState({ isChecked: newChecked });
 		const updated_theme = newChecked ? 'midnight-theme' : 'default';
-		this.props.actions.getTheme({ current_theme: updated_theme }).then(() => {
+		this.props.actions.getTheme(updated_theme).then(() => {
 			sendMessage('ping', 'theme_change');
 		});
 	}

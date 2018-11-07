@@ -95,8 +95,13 @@ class LogInViewContainer extends Component {
 			if (success) {
 				const { origin, pathname, hash } = window.location;
 				window.history.pushState({}, '', `${origin}${pathname}${hash}`);
+
 				this.props.actions.getUser();
-				this.props.actions.getUserSettings();
+				this.props.actions.getUserSettings()
+					.then((settings) => {
+						const { current_theme } = settings;
+						return this.props.actions.getTheme(current_theme);
+					});
 				this.props.actions.setToast({
 					toastMessage: t('hub_login_toast_success'),
 					toastClass: 'success'
