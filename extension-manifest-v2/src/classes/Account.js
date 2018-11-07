@@ -132,7 +132,6 @@ class Account {
 			// remove cookies in case fetch fails
 			this._removeCookies();
 			this._clearAccountInfo();
-			this._clearSupporterPerks();
 		})
 	)
 
@@ -184,14 +183,25 @@ class Account {
 	)
 
 	getTheme = name => (
-		new Promise((resolve, reject) => {
-			api.get('themes', name)
-				.then((res) => {
-					const { css } = build(normalize(res), 'themes', res.data.id);
-					resolve(css);
-				})
-				.catch(err => reject(err));
-		})
+		this._getUserID()
+			.then(() => {
+				const now = Date.now();
+				const { themeData } = conf.account;
+				if (!themeData || !themeData[name]) { return true; }
+				const { timestamp } = themeData[name];
+				return now - timestamp > 86400000; // true if 24hrs have passed
+			})
+			.then((shouldGet) => {
+				if (!shouldGet) {
+					return conf.account.themeData[name].css;
+				}
+				return api.get('themes', `${name}.css`)
+					.then((res) => {
+						const { css } = build(normalize(res), 'themes', res.data.id);
+						this._setThemeData({ name, css });
+						return css;
+					});
+			})
 	)
 
 	updateEmailPreferences = (set) => {
@@ -422,6 +432,7 @@ class Account {
 			user: null,
 			userSettings: null,
 			subscriptionData: null,
+			themeData: null,
 		};
 	}
 
@@ -444,13 +455,17 @@ class Account {
 		dispatcher.trigger('conf.save.account');
 	}
 
-	_clearAccountInfo = () => {
-		conf.account = null;
+	_setThemeData = (data) => {
+		if (conf.account.themeData === null) {
+			conf.account.themeData = {};
+		}
+		const { name } = data;
+		conf.account.themeData[name] = Object.assign({ timestamp: Date.now() }, data);
+		dispatcher.trigger('conf.save.account');
 	}
 
-	_clearSupporterPerks = () => {
-		conf.current_theme = 'default';
-		conf.themes = {};
+	_clearAccountInfo = () => {
+		conf.account = null;
 	}
 
 	_getUserIDFromCookie = () => (

@@ -47,7 +47,7 @@ export const getUserSettings = () => dispatch => (
 				type: GET_USER_SETTINGS_SUCCESS,
 				payload: { settings },
 			});
-			return true;
+			return settings;
 		})
 		.catch((error) => {
 			log('PanelActions getUserSettings error', error);
@@ -70,7 +70,7 @@ export const getUser = () => dispatch => (
 				type: GET_USER_SUCCESS,
 				payload: { user },
 			});
-			return true;
+			return user;
 		})
 );
 export const getUserSubscriptionData = () => dispatch => (

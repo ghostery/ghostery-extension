@@ -16,7 +16,8 @@ import {
 	SHOW_NOTIFICATION,
 	CLOSE_NOTIFICATION,
 	TOGGLE_EXPERT,
-	SET_THEME
+	SET_THEME,
+	CLEAR_THEME
 } from '../constants/constants';
 import { sendMessageInPromise } from '../utils/msg';
 
@@ -104,14 +105,19 @@ export function toggleExpert() {
 	};
 }
 
-export function getTheme(data) {
-	return function (dispatch) {
-		return sendMessageInPromise('account.getTheme', data)
-			.then((result) => {
+export const getTheme = name => dispatch => (
+	sendMessageInPromise('setPanelData', { current_theme: name })
+		.then(() => sendMessageInPromise('account.getTheme'))
+		.then((res) => {
+			if (res) {
 				dispatch({
 					type: SET_THEME,
-					data: result,
+					data: res,
 				});
-			});
-	};
-}
+			} else {
+				dispatch({
+					type: CLEAR_THEME,
+				});
+			}
+		})
+);
