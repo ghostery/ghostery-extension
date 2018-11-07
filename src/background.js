@@ -776,10 +776,9 @@ function onMessageHandler(request, sender, callback) {
 				.then(() => {
 					callback(conf.account.themeData[conf.current_theme]);
 				});
-			return false;
+			return true;
 		}
 		callback();
-		return false;
 	} else if (name === 'getCliqzModuleData') {
 		const modules = { adblock: {}, antitracking: {} };
 
