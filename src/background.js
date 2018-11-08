@@ -20,7 +20,7 @@
  */
 import _ from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
-import cliqz from './classes/Cliqz';
+import cliqz, { prefs } from './classes/Cliqz';
 // object classes
 import Events from './classes/EventHandlers';
 import PanelData from './classes/PanelData';
@@ -1136,6 +1136,9 @@ function setupABTest() {
 			log('antitracking', 'set config option', opt, val);
 			antitracking.action('setConfigOption', opt, val);
 		});
+	}
+	if (abtest.hasTest('antitracking_whitelist2')) {
+		prefs.set('attrackBloomFilter', false);
 	}
 }
 
