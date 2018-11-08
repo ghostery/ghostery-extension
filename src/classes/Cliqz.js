@@ -16,3 +16,4 @@ import CLIQZ from 'browser-core';
 import globals from './Globals';
 
 export default new (CLIQZ.App)({ debug: globals.DEBUG });
+export const { prefs } = CLIQZ;
