@@ -30,6 +30,46 @@ import PrioritySupport from './Subscription/PrioritySupport';
 class Subscription extends React.Component {
 	constructor(props) {
 		super(props);
+		/* eslint-disable object-curly-newline */
+		this.countries = [
+			{ name: 'Australia', code: 'AU', languageCode: 'en-AU', currencySymbol: 'A$', currencyCode: 'aud', currencyDecimals: 2 },
+			{ name: 'Austria', code: 'AT', languageCode: 'de-AT', currencySymbol: '€', currencyCode: 'eur', currencyDecimals: 2 },
+			{ name: 'Belgium', code: 'BE', languageCode: 'fr-BE', currencySymbol: '€', currencyCode: 'eur', currencyDecimals: 2, currencySymbolAfter: true },
+			{ name: 'Brazil', code: 'BR', languageCode: 'pt-BR', currencySymbol: 'R$', currencyCode: 'brl', currencyDecimals: 2 },
+			{ name: 'Bulgaria', code: 'BG', languageCode: 'bg', currencySymbol: '€', currencyCode: 'eur', currencyDecimals: 2, currencySymbolAfter: true },
+			{ name: 'Canada', code: 'CA', languageCode: 'en-CA', currencySymbol: 'C$', currencyCode: 'cad', currencyDecimals: 2 },
+			{ name: 'China', code: 'CN', languageCode: 'zh-CN', currencySymbol: '¥', currencyCode: 'cny', currencyDecimals: 2 },
+			{ name: 'Croatia', code: 'HR', languageCode: 'hr', currencySymbol: 'kn', currencyCode: 'hrk', currencyDecimals: 2, currencySymbolAfter: true },
+			{ name: 'Cyprus', code: 'CY', languageCode: 'el', currencySymbol: '€', currencyCode: 'eur', currencyDecimals: 2 },
+			{ name: 'Czechia', code: 'CZ', languageCode: 'cs', currencySymbol: 'Kč', currencyCode: 'czk', currencyDecimals: 2 },
+			{ name: 'Denmark', code: 'DK', languageCode: 'da', currencySymbol: 'kr', currencyCode: 'dkk', currencyDecimals: 2, currencySymbolAfter: true },
+			{ name: 'Estonia', code: 'EE', languageCode: 'et', currencySymbol: '€', currencyCode: 'eur', currencyDecimals: 2, currencySymbolAfter: true },
+			{ name: 'Finland', code: 'FI', languageCode: 'fi', currencySymbol: '€', currencyCode: 'eur', currencyDecimals: 2, currencySymbolAfter: true },
+			{ name: 'France', code: 'FR', languageCode: 'fr', currencySymbol: '€', currencyCode: 'eur', currencyDecimals: 2, currencySymbolAfter: true },
+			{ name: 'Germany', code: 'DE', languageCode: 'de', currencySymbol: '€', currencyCode: 'eur', currencyDecimals: 2, currencySymbolAfter: true },
+			{ name: 'Greece', code: 'GR', languageCode: 'el', currencySymbol: '€', currencyCode: 'eur', currencyDecimals: 2, currencySymbolAfter: true },
+			{ name: 'Hungary', code: 'HU', languageCode: 'hu', currencySymbol: 'Ft', currencyCode: 'huf', currencyDecimals: 2, currencySymbolAfter: true },
+			{ name: 'Ireland', code: 'IE', languageCode: 'en-IE', currencySymbol: '€', currencyCode: 'eur', currencyDecimals: 2 },
+			{ name: 'Italy', code: 'IT', languageCode: 'it', currencySymbol: '€', currencyCode: 'eur', currencyDecimals: 2, currencySymbolAfter: true },
+			{ name: 'Japan', code: 'JP', languageCode: 'ja', currencySymbol: '¥', currencyCode: 'jpy', currencyDecimals: 0 },
+			{ name: 'Latvia', code: 'LV', languageCode: 'lv', currencySymbol: '€', currencyCode: 'eur', currencyDecimals: 2, currencySymbolAfter: true },
+			{ name: 'Lithuania', code: 'LT', languageCode: 'lt', currencySymbol: '€', currencyCode: 'eur', currencyDecimals: 2, currencySymbolAfter: true },
+			{ name: 'Luxembourg', code: 'LU', languageCode: 'de-lu', currencySymbol: '€', currencyCode: 'eur', currencyDecimals: 2, currencySymbolAfter: true },
+			{ name: 'Malta', code: 'MT', languageCode: 'mt', currencySymbol: '€', currencyCode: 'eur', currencyDecimals: 2 },
+			{ name: 'Netherlands', code: 'NL', languageCode: 'nl', currencySymbol: '€', currencyCode: 'eur', currencyDecimals: 2 },
+			{ name: 'Poland', code: 'PL', languageCode: 'pl', currencySymbol: 'zł', currencyCode: 'pln', currencyDecimals: 2, currencySymbolAfter: true },
+			{ name: 'Portugal', code: 'PT', languageCode: 'pt', currencySymbol: '€', currencyCode: 'eur', currencyDecimals: 2, currencySymbolAfter: true },
+			{ name: 'Romania', code: 'RO', languageCode: 'ro', currencySymbol: '€', currencyCode: 'eur', currencyDecimals: 2, currencySymbolAfter: true },
+			{ name: 'Slovakia', code: 'SK', languageCode: 'sk', currencySymbol: '€', currencyCode: 'eur', currencyDecimals: 2, currencySymbolAfter: true },
+			{ name: 'Slovenia', code: 'SI', languageCode: 'sl', currencySymbol: '€', currencyCode: 'eur', currencyDecimals: 2, currencySymbolAfter: true },
+			{ name: 'Spain', code: 'ES', languageCode: 'es', currencySymbol: '€', currencyCode: 'eur', currencyDecimals: 2, currencySymbolAfter: true },
+			{ name: 'Sweden', code: 'SE', languageCode: 'sv', currencySymbol: 'kr', currencyCode: 'sek', currencyDecimals: 2, currencySymbolAfter: true },
+			{ name: 'Ukraine', code: 'UA', languageCode: 'uk', currencySymbol: '₴', currencyCode: 'uah', currencyDecimals: 2 },
+			{ name: 'United Kingdom of Great Britain and Northern Ireland', code: 'GB', languageCode: 'en-GB', currencySymbol: '£', currencyCode: 'gbp', currencyDecimals: 2 },
+			{ name: 'United States of America', code: 'US', languageCode: 'en-US', currencySymbol: '$', currencyCode: 'usd', currencyDecimals: 2 },
+		];
+		/* eslint-enable object-curly-newline */
+
 		this.state = {
 			isChecked: (props.current_theme !== 'default'),
 		};
@@ -55,11 +95,25 @@ class Subscription extends React.Component {
 		const sd = this.props.subscriptionData;
 		if (sd) {
 			const {
-				planAmount, planInterval, currentPeriodEnd, cancelAtPeriodEnd, status
+				planAmount, planInterval, currentPeriodEnd, cancelAtPeriodEnd, status, country,
 			} = sd;
 			const plan_ends = cancelAtPeriodEnd ? moment.duration(moment.unix(currentPeriodEnd).diff(moment(new Date()))).days() : '';
+			let countryCurrency;
+			for (let i = 0; i < this.countries.length; i++) {
+				if (this.countries[i].code === country) {
+					countryCurrency = this.countries[i];
+					break;
+				}
+			}
+			const planCost = (planAmount / 100).toFixed(2);
+			let planString;
+			if (countryCurrency.currencySymbolAfter) {
+				planString = `${planCost} ${countryCurrency.currencySymbol}`;
+			} else {
+				planString = `${countryCurrency.currencySymbol} ${planCost}`;
+			}
 			return {
-				plan_amount: `$${(planAmount / 100).toFixed(2)}`,
+				plan_amount: planString,
 				plan_interval: planInterval,
 				active: (status === 'active'),
 				charge_date: moment.unix(currentPeriodEnd).format('MMMM Do, YYYY'),
