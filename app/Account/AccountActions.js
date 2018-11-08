@@ -74,7 +74,7 @@ export const getUser = () => dispatch => (
 		})
 );
 export const getUserSubscriptionData = () => dispatch => (
-	sendMessageInPromise('account.getUserSubsciptionData')
+	sendMessageInPromise('account.getUserSubscriptionData')
 		.then((res) => {
 			const { errors, subscriptionData } = res;
 			if (errors) {
