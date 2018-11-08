@@ -46,7 +46,7 @@ class Licenses extends React.Component {
 			<div id="licenses-page">
 				<div id="header" className="row padded-content expanded valign-middle">
 					<div className="column medium-2">
-						<img className="logo" src="/app/images/setup/logo-title-white.svg" />
+						<img className="logo" src="/app/images/licenses/logo-title-white.svg" />
 					</div>
 					<div className="column" />
 					<div className="column medium-6 text-right">
