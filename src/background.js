@@ -869,7 +869,7 @@ function onMessageHandler(request, sender, callback) {
 				callback({ errors: _getJSONAPIErrorsObject(err) });
 			});
 		return true;
-	} else if (name === 'account.getUserSubsciptionData') {
+	} else if (name === 'account.getUserSubscriptionData') {
 		account.getUserSubscriptionData()
 			.then((customer) => {
 				const subscriptionData = customer.subscriptions;
