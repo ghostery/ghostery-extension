@@ -101,19 +101,18 @@ class Subscription extends React.Component {
 			let countryCurrency;
 			for (let i = 0; i < this.countries.length; i++) {
 				if (this.countries[i].code === country) {
-					countryCurrency = this.countries[i];
-					break;
+					countryCurrency = this.countries[i]; break;
 				}
 			}
 			const planCost = (planAmount / 100).toFixed(2);
-			let planString;
+			let plan_amount;
 			if (countryCurrency.currencySymbolAfter) {
-				planString = `${planCost} ${countryCurrency.currencySymbol}`;
+				plan_amount = `${planCost} ${countryCurrency.currencySymbol}`;
 			} else {
-				planString = `${countryCurrency.currencySymbol} ${planCost}`;
+				plan_amount = `${countryCurrency.currencySymbol} ${planCost}`;
 			}
 			return {
-				plan_amount: planString,
+				plan_amount,
 				plan_interval: planInterval,
 				active: (status === 'active'),
 				charge_date: moment.unix(currentPeriodEnd).format('MMMM Do, YYYY'),
