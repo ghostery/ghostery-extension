@@ -54,7 +54,7 @@ class Subscription extends React.Component {
 		const sd = this.props.subscriptionData;
 		if (sd) {
 			const {
-				planAmount, planInterval, currentPeriodEnd, cancelAtPeriodEnd, status, country,
+				planAmount, planInterval, currentPeriodEnd, cancelAtPeriodEnd, status, country
 			} = sd;
 			const plan_ends = cancelAtPeriodEnd ? moment.duration(moment.unix(currentPeriodEnd).diff(moment(new Date()))).days() : '';
 			let countryCurrency;
@@ -63,13 +63,12 @@ class Subscription extends React.Component {
 					countryCurrency = Countries[i]; break;
 				}
 			}
-			const planCost = (planAmount / 100).toFixed(2);
-			let plan_amount;
-			if (countryCurrency.currencySymbolAfter) {
-				plan_amount = `${planCost} ${countryCurrency.currencySymbol}`;
-			} else {
-				plan_amount = `${countryCurrency.currencySymbol} ${planCost}`;
-			}
+			const {
+				languageCode, currencyDecimals, currencySymbol, currencySymbolAfter
+			} = countryCurrency;
+			const planCost = (planAmount / 10 ** currencyDecimals)
+				.toLocaleString(languageCode, { minimumFractionDigits: currencyDecimals, maximumFractionDigits: currencyDecimals });
+			const plan_amount = currencySymbolAfter ? `${planCost} ${currencySymbol}` : `${planCost} ${currencySymbol}`;
 			return {
 				plan_amount,
 				plan_interval: planInterval,
