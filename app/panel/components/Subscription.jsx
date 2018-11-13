@@ -68,7 +68,7 @@ class Subscription extends React.Component {
 			} = countryCurrency;
 			const planCost = (planAmount / 10 ** currencyDecimals)
 				.toLocaleString(languageCode, { minimumFractionDigits: currencyDecimals, maximumFractionDigits: currencyDecimals });
-			const plan_amount = currencySymbolAfter ? `${planCost} ${currencySymbol}` : `${planCost} ${currencySymbol}`;
+			const plan_amount = currencySymbolAfter ? `${planCost} ${currencySymbol}` : `${currencySymbol} ${planCost}`;
 			return {
 				plan_amount,
 				plan_interval: planInterval,
