@@ -466,6 +466,7 @@ class Account {
 
 	_clearAccountInfo = () => {
 		conf.account = null;
+		conf.current_theme = 'default';
 	}
 
 	_getUserIDFromCookie = () => (
