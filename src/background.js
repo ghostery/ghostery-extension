@@ -873,7 +873,7 @@ function onMessageHandler(request, sender, callback) {
 		account.getUserSubscriptionData()
 			.then((customer) => {
 				const subscriptionData = customer.subscriptions;
-				subscriptionData.country = customer.metadata.addressCountry;
+				subscriptionData.country = customer.cards.addressCountry;
 				callback({ subscriptionData });
 			})
 			.catch((err) => {
