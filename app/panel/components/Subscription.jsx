@@ -20,7 +20,7 @@ import SubscriptionMenu from './Subscription/SubscriptionMenu';
 import SubscriptionInfo from './Subscription/SubscriptionInfo';
 import SubscriptionThemes from './Subscription/SubscriptionThemes';
 import PrioritySupport from './Subscription/PrioritySupport';
-import Countries from '../../countries.json';
+import Currencies from '../../currencies.json';
 
 
 // import TrackerStats from './Subscription/TrackerStats';
@@ -54,18 +54,18 @@ class Subscription extends React.Component {
 		const sd = this.props.subscriptionData;
 		if (sd) {
 			const {
-				planAmount, planInterval, currentPeriodEnd, cancelAtPeriodEnd, status, country
+				planAmount, planInterval, planCurrency, currentPeriodEnd, cancelAtPeriodEnd, status
 			} = sd;
 			const plan_ends = cancelAtPeriodEnd ? moment.duration(moment.unix(currentPeriodEnd).diff(moment(new Date()))).days() : '';
-			let countryCurrency;
-			for (let i = 0; i < Countries.length; i++) {
-				if (Countries[i].code === country) {
-					countryCurrency = Countries[i]; break;
+			let currency;
+			for (let i = 0; i < Currencies.length; i++) {
+				if (Currencies[i].currencyCode === planCurrency) {
+					currency = Currencies[i]; break;
 				}
 			}
 			const {
 				languageCode, currencyDecimals, currencySymbol, currencySymbolAfter
-			} = countryCurrency;
+			} = currency;
 			const planCost = (planAmount / 10 ** currencyDecimals)
 				.toLocaleString(languageCode, { minimumFractionDigits: currencyDecimals, maximumFractionDigits: currencyDecimals });
 			const plan_amount = currencySymbolAfter ? `${planCost} ${currencySymbol}` : `${currencySymbol} ${planCost}`;

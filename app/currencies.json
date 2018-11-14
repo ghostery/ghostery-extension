@@ -7,38 +7,12 @@
 	"currencyDecimals": 2
 },
 {
-	"name": "Austria",
-	"code": "AT",
-	"languageCode": "de-AT",
-	"currencySymbol": "€",
-	"currencyCode": "eur",
-	"currencyDecimals": 2
-},
-{
-	"name": "Belgium",
-	"code": "BE",
-	"languageCode": "fr-BE",
-	"currencySymbol": "€",
-	"currencyCode": "eur",
-	"currencyDecimals": 2,
-	"currencySymbolAfter": true
-},
-{
 	"name": "Brazil",
 	"code": "BR",
 	"languageCode": "pt-BR",
 	"currencySymbol": "R$",
 	"currencyCode": "brl",
 	"currencyDecimals": 2
-},
-{
-	"name": "Bulgaria",
-	"code": "BG",
-	"languageCode": "bg",
-	"currencySymbol": "€",
-	"currencyCode": "eur",
-	"currencyDecimals": 2,
-	"currencySymbolAfter": true
 },
 {
 	"name": "Canada",
@@ -66,14 +40,6 @@
 	"currencySymbolAfter": true
 },
 {
-	"name": "Cyprus",
-	"code": "CY",
-	"languageCode": "el",
-	"currencySymbol": "€",
-	"currencyCode": "eur",
-	"currencyDecimals": 2
-},
-{
 	"name": "Czechia",
 	"code": "CZ",
 	"languageCode": "cs",
@@ -91,6 +57,108 @@
 	"currencySymbolAfter": true
 },
 {
+	"name": "France",
+	"code": "FR",
+	"languageCode": "fr",
+	"currencySymbol": "€",
+	"currencyCode": "eur",
+	"currencyDecimals": 2,
+	"currencySymbolAfter": true
+},
+{
+	"name": "Hungary",
+	"code": "HU",
+	"languageCode": "hu",
+	"currencySymbol": "Ft",
+	"currencyCode": "huf",
+	"currencyDecimals": 2,
+	"currencySymbolAfter": true
+},
+{
+	"name": "Japan",
+	"code": "JP",
+	"languageCode": "ja",
+	"currencySymbol": "¥",
+	"currencyCode": "jpy",
+	"currencyDecimals": 0
+},
+{
+	"name": "Poland",
+	"code": "PL",
+	"languageCode": "pl",
+	"currencySymbol": "zł",
+	"currencyCode": "pln",
+	"currencyDecimals": 2,
+	"currencySymbolAfter": true
+},
+{
+	"name": "Sweden",
+	"code": "SE",
+	"languageCode": "sv",
+	"currencySymbol": "kr",
+	"currencyCode": "sek",
+	"currencyDecimals": 2,
+	"currencySymbolAfter": true
+},
+{
+	"name": "Ukraine",
+	"code": "UA",
+	"languageCode": "uk",
+	"currencySymbol": "₴",
+	"currencyCode": "uah",
+	"currencyDecimals": 2
+},
+{
+	"name": "United Kingdom of Great Britain and Northern Ireland",
+	"code": "GB",
+	"languageCode": "en-GB",
+	"currencySymbol": "£",
+	"currencyCode": "gbp",
+	"currencyDecimals": 2
+},
+{
+	"name": "United States of America",
+	"code": "US",
+	"languageCode": "en-US",
+	"currencySymbol": "$",
+	"currencyCode": "usd",
+	"currencyDecimals": 2
+},
+{
+	"name": "Austria",
+	"code": "AT",
+	"languageCode": "de-AT",
+	"currencySymbol": "€",
+	"currencyCode": "eur",
+	"currencyDecimals": 2
+},
+{
+	"name": "Belgium",
+	"code": "BE",
+	"languageCode": "fr-BE",
+	"currencySymbol": "€",
+	"currencyCode": "eur",
+	"currencyDecimals": 2,
+	"currencySymbolAfter": true
+},
+{
+	"name": "Bulgaria",
+	"code": "BG",
+	"languageCode": "bg",
+	"currencySymbol": "€",
+	"currencyCode": "eur",
+	"currencyDecimals": 2,
+	"currencySymbolAfter": true
+},
+{
+	"name": "Cyprus",
+	"code": "CY",
+	"languageCode": "el",
+	"currencySymbol": "€",
+	"currencyCode": "eur",
+	"currencyDecimals": 2
+},
+{
 	"name": "Estonia",
 	"code": "EE",
 	"languageCode": "et",
@@ -103,15 +171,6 @@
 	"name": "Finland",
 	"code": "FI",
 	"languageCode": "fi",
-	"currencySymbol": "€",
-	"currencyCode": "eur",
-	"currencyDecimals": 2,
-	"currencySymbolAfter": true
-},
-{
-	"name": "France",
-	"code": "FR",
-	"languageCode": "fr",
 	"currencySymbol": "€",
 	"currencyCode": "eur",
 	"currencyDecimals": 2,
@@ -136,15 +195,6 @@
 	"currencySymbolAfter": true
 },
 {
-	"name": "Hungary",
-	"code": "HU",
-	"languageCode": "hu",
-	"currencySymbol": "Ft",
-	"currencyCode": "huf",
-	"currencyDecimals": 2,
-	"currencySymbolAfter": true
-},
-{
 	"name": "Ireland",
 	"code": "IE",
 	"languageCode": "en-IE",
@@ -160,14 +210,6 @@
 	"currencyCode": "eur",
 	"currencyDecimals": 2,
 	"currencySymbolAfter": true
-},
-{
-	"name": "Japan",
-	"code": "JP",
-	"languageCode": "ja",
-	"currencySymbol": "¥",
-	"currencyCode": "jpy",
-	"currencyDecimals": 0
 },
 {
 	"name": "Latvia",
@@ -213,15 +255,6 @@
 	"currencyDecimals": 2
 },
 {
-	"name": "Poland",
-	"code": "PL",
-	"languageCode": "pl",
-	"currencySymbol": "zł",
-	"currencyCode": "pln",
-	"currencyDecimals": 2,
-	"currencySymbolAfter": true
-},
-{
 	"name": "Portugal",
 	"code": "PT",
 	"languageCode": "pt",
@@ -265,37 +298,4 @@
 	"currencyCode": "eur",
 	"currencyDecimals": 2,
 	"currencySymbolAfter": true
-},
-{
-	"name": "Sweden",
-	"code": "SE",
-	"languageCode": "sv",
-	"currencySymbol": "kr",
-	"currencyCode": "sek",
-	"currencyDecimals": 2,
-	"currencySymbolAfter": true
-},
-{
-	"name": "Ukraine",
-	"code": "UA",
-	"languageCode": "uk",
-	"currencySymbol": "₴",
-	"currencyCode": "uah",
-	"currencyDecimals": 2
-},
-{
-	"name": "United Kingdom of Great Britain and Northern Ireland",
-	"code": "GB",
-	"languageCode": "en-GB",
-	"currencySymbol": "£",
-	"currencyCode": "gbp",
-	"currencyDecimals": 2
-},
-{
-	"name": "United States of America",
-	"code": "US",
-	"languageCode": "en-US",
-	"currencySymbol": "$",
-	"currencyCode": "usd",
-	"currencyDecimals": 2
 }]
