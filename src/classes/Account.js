@@ -163,7 +163,7 @@ class Account {
 		this._getUserID()
 			.then(userID => api.get('stripe/customers', userID, 'cards,subscriptions'))
 			.then((res) => {
-				const subscriptionData = build(normalize(res), 'customers', res.data.id);
+				const subscriptionData = build(normalize(res), { camelizeKeys: false }, 'customers', res.data.id);
 				this._setSubscriptionData(subscriptionData);
 				return subscriptionData;
 			})
@@ -437,6 +437,7 @@ class Account {
 	}
 
 	_setAccountUserInfo = (user) => {
+		console.log('here _setAccountUserInfo', user);
 		conf.account.user = user;
 		dispatcher.trigger('conf.save.account');
 	}
