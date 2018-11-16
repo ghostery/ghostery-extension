@@ -221,15 +221,13 @@ p.warning {
 			font-size: 13px;
 			line-height: 16px;
 			font-weight: 400;
+			display: flex;
 		}
 		input {
 			float: left;
 			margin-right: 12px;
 			position: relative;
 			top: 3px;
-		}
-		#accept-privacy-label {
-			display: flex;
 		}
 	}
 	#account-creation-buttons .button {
