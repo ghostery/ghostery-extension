@@ -20,7 +20,7 @@ import SubscriptionMenu from './Subscription/SubscriptionMenu';
 import SubscriptionInfo from './Subscription/SubscriptionInfo';
 import SubscriptionThemes from './Subscription/SubscriptionThemes';
 import PrioritySupport from './Subscription/PrioritySupport';
-import Currencies from '../../currencies.json';
+import Currencies from '../../countries.json';
 
 
 // import TrackerStats from './Subscription/TrackerStats';
