@@ -93,6 +93,9 @@ export function prefsSet(prefs) {
 	log('PREFS SET', prefs);
 	return new Promise(((resolve, reject) => {
 		if (typeof prefs !== 'undefined') {
+			if (prefs.bugs) {
+				delete prefs.bugs;
+			}
 			chrome.storage.local.set(prefs, () => {
 				if (chrome.runtime.lastError) {
 					log('prefsSet ERROR', chrome.runtime.lastError);
