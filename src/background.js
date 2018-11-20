@@ -69,12 +69,17 @@ const onBeforeRequest = events.onBeforeRequest.bind(events);
 const onHeadersReceived = events.onHeadersReceived.bind(events);
 
 // Cliqz Modules
+const moduleMock = {
+	isEnabled: false,
+	on: () => {},
+};
 const humanweb = cliqz.modules['human-web'];
 const { adblocker, antitracking, hpn } = cliqz.modules;
-const messageCenter = cliqz.modules['message-center'];
-const offers = cliqz.modules['offers-v2'];
+const messageCenter = cliqz.modules['message-center'] || moduleMock;
+const offers = cliqz.modules['offers-v2'] || moduleMock;
 // add ghostery module to expose ghostery state to cliqz
 cliqz.modules.ghostery = new GhosteryModule();
+
 let OFFERS_ENABLE_SIGNAL;
 
 /**
