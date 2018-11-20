@@ -142,7 +142,8 @@ const config = {
 	},
 	resolve: {
 		symlinks: false,
-		extensions: ['.js', '.jsx']
+		extensions: ['.js', '.jsx'],
+		mainFields: ['main', 'module'],
 	},
 	plugins: buildPlugins,
 	module: {
