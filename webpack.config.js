@@ -111,6 +111,9 @@ const buildPlugins = [
 
 // configs
 const config = {
+  externals: [{
+    xmlhttprequest: '{XMLHttpRequest:XMLHttpRequest}'
+  }],
 	entry: {
 		background: [SRC_DIR + '/background.js'],
 		blocked_redirect: [CONTENT_SCRIPTS_DIR + '/blocked_redirect.js'],
