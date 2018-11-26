@@ -1518,9 +1518,9 @@ brorand@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
 
-"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.31/7.31.2.c8b8533.tgz":
-  version "7.31.2"
-  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.31/7.31.2.c8b8533.tgz#4ebcfcc163a39e0d74b2bbe1f55301c646822157"
+"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.31/7.31.3.1bb8818.tgz":
+  version "7.31.3"
+  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.31/7.31.3.1bb8818.tgz#4138800430143ba48d19a7d88efed8812e960c55"
   dependencies:
     "@cliqz-oss/dexie" "^2.0.4"
     "@cliqz-oss/systemjs-builder" "^0.16.13"

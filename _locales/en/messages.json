@@ -2100,5 +2100,20 @@
 	},
 	"panel_stats_menu_daily": {
 		"message": "Daily"
+	},
+	"panel_stats_header_title": {
+		"message": "Historical Tracker Stats"
+	},
+	"panel_stats_trackers_seen": {
+		"message": "Trackers Seen"
+	},
+	"panel_stats_trackers_blocked": {
+		"message": "Trackers Blocked"
+	},
+	"panel_stats_trackers_anonymized": {
+		"message": "Data Points Anonymized"
+	},
+	"panel_stats_ads_blocked": {
+		"message": "Ads Blocked"		
 	}
 }
