@@ -36,6 +36,12 @@ const SubscriptionMenu = () => (
 				<span>{ t('subscription_priority_support') }</span>
 			</NavLink>
 		</li>
+
+		<li className="s-tabs-title">
+			<NavLink to="/subscription/historystats">
+				<span>{ t('subscription_history_stats') }</span>
+			</NavLink>
+		</li>
 	</ul>
 );
 

@@ -34,6 +34,7 @@ class Detail extends React.Component {
 	componentWillMount() {
 		// trigger default tab (aka route)
 		this.props.history.push('/detail/blocking');
+		console.log("DETAIL PROPS", this.props);
 	}
 
 	BlockingComponent = () => (<Blocking />);
@@ -64,7 +65,7 @@ class Detail extends React.Component {
 					<div className={condensedToggleClassNames} onClick={this.toggleExpanded} />
 					<Route path="/detail/blocking" render={this.BlockingComponent} />
 					<Route path="/detail/rewards" render={this.RewardsComponent} />
-					<DetailMenu hasReward={enable_offers && unread_offer_ids.length > 0} />
+					<DetailMenu hasReward={enable_offers && unread_offer_ids.length > 0} subscriptionsSupporter={this.props.user && this.props.user.subscriptionsSupporter} />
 				</div>
 			</div>
 		);

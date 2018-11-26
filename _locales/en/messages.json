@@ -732,6 +732,9 @@
 	"panel_detail_menu_rewards_title": {
 		"message": "Rewards"
 	},
+	"panel_detail_menu_stats_title": {
+		"message": "Historical stats"
+	},	
 	"panel_detail_menu_premium_title": {
 		"message": "Premium"
 	},
@@ -2088,5 +2091,14 @@
 	},
 	"subscription_submit_issue": {
 		"message": "Submit Issue"
+	},
+	"panel_stats_menu_cumulative": {
+		"message": "Cumulative"
+	},
+	"panel_stats_menu_monthly": {
+		"message": "Monthly"
+	},
+	"panel_stats_menu_daily": {
+		"message": "Daily"
 	}
 }
