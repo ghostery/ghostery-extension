@@ -39,7 +39,7 @@ class DetailMenu extends React.Component {
 		this.state = {
 			menu: {
 				showBlocking: true,
-				showStats: false,				
+				showStats: false,
 				showRewards: false,
 			},
 		};

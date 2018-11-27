@@ -81,6 +81,8 @@ const insights = cliqz.modules.insights || moduleMock;
 // add ghostery module to expose ghostery state to cliqz
 cliqz.modules.ghostery = new GhosteryModule();
 
+insights.enable();
+
 let OFFERS_ENABLE_SIGNAL;
 
 /**
@@ -771,6 +773,11 @@ function onMessageHandler(request, sender, callback) {
 			});
 		}
 		account.getUserSettings().catch(err => log('Error getting user settings from getPanelData:', err));
+		return true;
+	} else if (name === 'getStats') {
+		insights.background.actions.getStatsTimeline(message.from, message.to, true, true).then((data) => {
+			callback(data);
+		});
 		return true;
 	} else if (name === 'setPanelData') {
 		panelData.set(message);
