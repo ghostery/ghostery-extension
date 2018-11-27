@@ -44,6 +44,7 @@ class EventHandlers {
 		this.policy = new Policy();
 		this.policySmartBlock = new PolicySmartBlock();
 		this.purplebox = new PurpleBox();
+		this._pageListeners = new Set();
 
 		// Use leading:false so button.update is called after requests are complete.
 		// Use a 1sec interval to limit calls on pages with a large number of requests.
@@ -733,8 +734,28 @@ class EventHandlers {
 	 * @param  {number} tab_id
 	 */
 	_clearTabData(tab_id) {
+		const lastTabBugs = foundBugs.getBugs(tab_id);
+		const lastTabApps = foundBugs.getApps(tab_id);
+		const lastTabInfo = tabInfo.getTabInfo(tab_id);
 		foundBugs.clear(tab_id);
 		tabInfo.clear(tab_id);
+		if (lastTabInfo && lastTabBugs) {
+			this._pageListeners.forEach((fn) => {
+				fn(tab_id, lastTabInfo, lastTabApps, lastTabBugs);
+			});
+		}
+	}
+
+	addPageListener(fn) {
+		this._pageListeners.add(fn);
+	}
+
+	removePageListener(fn) {
+		this._pageListeners.delete(fn);
+	}
+
+	clearPageListeners() {
+		this._pageListeners.clear();
 	}
 
 	/**
