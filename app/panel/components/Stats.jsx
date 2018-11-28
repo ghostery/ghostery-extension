@@ -74,6 +74,25 @@ class Stats extends React.Component {
 		}
 	}
 
+	getSelectionText(type, view) {
+		const viewText = this.getViewText(view);
+		if (viewText) {
+			switch (type) {
+				case 'cumulative':
+					return `${viewText} (${t('panel_stats_cumulative')})`;
+				case 'monthly':
+					return `${viewText} (${t('panel_stats_monthly')})`;
+				case 'daily':
+					return `${viewText} (${t('panel_stats_daily')})`;
+				default: {
+					return viewText;
+				}
+			}
+		}
+
+		return '';
+	}
+
 	/**
 	 * Set view selection according to the clicked button. Save it in state.
 	 * @param {Object} event 		click event
