@@ -39,6 +39,12 @@ class StatsGraph extends React.Component {
 		this.generateGraph();
 	}
 
+	componentDidUpdate() {
+		// this.determineType();
+		// this.parseData();
+		this.generateGraph();
+	}
+
 	// TODO: Add a setDateRange() class method for changing user's selection
 	// This will need our current date, along with the set that we are on
 	// Note that in your D3, you will need to know if we are on daily or monthly view

@@ -113,12 +113,13 @@ class Stats extends React.Component {
 				tooltipText: t('panel_stats_trackers_seen'),
 				summaryData: {},
 				selectionData: [],
+				currentIndex: 0,
 			},
 			dailyData: [],
 			monthlyData: [],
 			cumulativeData: {},
 			monthlyAverageData: {},
-			dailyAverageData: {}
+			dailyAverageData: {},
 		};
 
 		// event bindings
@@ -179,6 +180,7 @@ class Stats extends React.Component {
 						monthAdsBlocked += dataItem.adsBlocked;
 
 						const monthlyObj = {
+							date: beginOfMonth.format('YYYY-MM-DD'),
 							trackersSeen: (scale === 1) ? monthTrackersSeen : Math.floor(monthTrackersSeen * scale),
 							trackersBlocked: (scale === 1) ? monthTrackersBlocked : Math.floor(monthTrackersBlocked * scale),
 							trackersAnonymized: (scale === 1) ? monthTrackersAnonymized : Math.floor(monthTrackersAnonymized * scale),
@@ -246,6 +248,11 @@ class Stats extends React.Component {
 				});
 			}
 		});
+
+		// eslint-disable-next-line react/no-did-mount-set-state
+		this.setState({ selection: { currentIndex: this.state.monthlyData.length - 1 } });
+
+		this.determineSelectionData();
 
 		// this.getStats(moment().subtract(30, 'days'), moment()).then((allData) => {
 		// 	this.setState({ selection, allData }, () => {
@@ -365,6 +372,7 @@ class Stats extends React.Component {
 
 	/**
 	 * Set type selection according to the clicked button. Save it in state.
+	 * Update current index if switching from monthly/cumulative to daily (or reverse)
 	 * @param {Object} event 		click event
 	 */
 	selectType(event) {
@@ -372,11 +380,29 @@ class Stats extends React.Component {
 		// eslint-disable-next-line prefer-destructuring
 		const selection = state.selection;
 		if (event.currentTarget.id !== selection.type) {
+			const lastType = selection.type === 'cumulative' ? 'monthly' : selection.type;
 			selection.type = event.currentTarget.id;
 			selection.graphTitle = this.getGraphTitle(selection.type, selection.view);
 			selection.summaryTitle = this.getSummaryTitle(selection.type);
 			selection.summaryData = this.getSummaryData(state, selection.type);
 			sendMessage('ping', selection.type);
+
+			const { monthlyData, dailyData, currentIndex } = this.state;
+			if (selection.type === 'daily' && lastType === 'monthly') {
+				const currentDate = dailyData[currentIndex].date;
+				for (let i = monthlyData.length; i >= 0; i--) {
+					if (monthlyData[i].date === currentDate) {
+						selection.currentIndex = i;
+					}
+				}
+			} else if (selection.type === 'monthly' && lastType === 'daily') {
+				const currentDate = monthlyData[currentIndex].date;
+				for (let i = dailyData.length; i >= 0; i--) {
+					if (dailyData[i].date === currentDate) {
+						selection.currentIndex = i;
+					}
+				}
+			}
 
 			this.setState({ selection }, () => {
 				console.log('SELECTION:', this.state.selection);
@@ -385,11 +411,34 @@ class Stats extends React.Component {
 	}
 
 	/**
-	 * Set type selection according to the clicked button. Save it in state.
+	 * Determine data selection for Stats Graph according to parameters in state
+	 * Save it in state
+	 */
+	determineSelectionData() {
+		const {
+			selection, dailyData, monthlyData
+		} = this.state;
+		const data = selection.type === 'daily' ? dailyData : monthlyData;
+		const dataSlice = data.slice(selection.currentIndex - 7, selection.currentIndex - 1);
+		const selectionData = dataSlice.map((entry) => {
+			const parsedEntry = { amount: entry[this.state.view], date: entry.date };
+			return parsedEntry;
+		});
+		this.setState({ selection: { selectionData } });
+	}
+
+	/**
+	 * Change time frame based on user's selection
+	 * Save it in state under currentIndex
 	 * @param {Object} event 		click event
 	 */
-	selectTimeFrame() {
-
+	selectTimeFrame(e) {
+		// This class method will be tied to click handlers on the arrows in the graph
+		if (e.target.id === 'stats-forward') {
+			this.setState({ currentIndex: this.state.currentIndex + 6 });
+		} else if (e.target.id === 'stats-forward') {
+			this.setState({ currentIndex: this.state.currentIndex - 6 });
+		}
 	}
 
 	resetStats() {
