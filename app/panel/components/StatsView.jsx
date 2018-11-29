@@ -32,11 +32,12 @@ const StatsView = (props) => {
 		subscriber,
 	} = props;
 
-	const { type, view, selectionText } = selection;
+	const {
+		type, view, graphTitle, summaryTitle, summaryData
+	} = selection;
 	const {
 		trackersSeen, trackersBlocked, trackersAnonymized, adsBlocked
-	} = (selection.summaryData || {});
-	const { selectedData } = selection;
+	} = summaryData;
 
 	console.log('VALUES', selection, trackersSeen, trackersBlocked, trackersAnonymized, adsBlocked);
 
@@ -82,14 +83,14 @@ const StatsView = (props) => {
 	return (
 		<div id="content-stats">
 			<div className="stats-top-header">
-				<span className="stats-top-header-title">{selectionText}</span>
+				<span className="stats-top-header-title">{graphTitle}</span>
 				<span className="stats-top-header-reset" onClick={resetStats}>{t('panel_stats_reset')}</span>
 				<span className="clear-float" />
 			</div>
 			<div className="graph" />
 			<div className="tab-header">
 				<div className="tab-container">
-					<div className="tab-header-title">{t('panel_stats_header_title')}</div>
+					<div className="tab-header-title">{summaryTitle}</div>
 					<div id="cumulative" className={tabCumulative} onClick={selectType} >
 						<span className="header-tab-text">
 							{t('panel_stats_menu_cumulative')}

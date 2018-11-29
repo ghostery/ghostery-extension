@@ -691,6 +691,30 @@ function reportCliqzOffer(message) {
 	cliqzCore.action('publishEvent', 'offers-recv-ch', msgToOffersCore);
 }
 
+function generateHistoryData(numDays) {
+	const data = [];
+	let newDay = moment().subtract(numDays, 'days');
+	console.log('FORMAT', newDay.format('YYYY-MM-DD'));
+	for (let i = 0; i < numDays; i++) {
+		newDay = newDay.add(1, 'day');
+		const dataItem = {
+			day: newDay.format('YYYY-MM-DD'),
+			trackersDetected: Math.floor(Math.random() * Math.floor(100)),
+			trackersBlocked: Math.floor(Math.random() * Math.floor(50)),
+			cookiesBlocked: Math.floor(Math.random() * Math.floor(200)),
+			fingerprintsRemoved: Math.floor(Math.random() * Math.floor(150)),
+			adsBlocked: Math.floor(Math.random() * Math.floor(80)),
+		};
+
+		if (i === 1) {
+			console.log('DATA ITEM', dataItem);
+		}
+		data.push(dataItem);
+	}
+
+	return data;
+}
+
 /**
  * Aggregated handler for <b>runtime.onMessage</b>
  *
@@ -775,9 +799,21 @@ function onMessageHandler(request, sender, callback) {
 		account.getUserSettings().catch(err => log('Error getting user settings from getPanelData:', err));
 		return true;
 	} else if (name === 'getStats') {
-		insights.background.actions.getStatsTimeline(message.from, message.to, true, true).then((data) => {
+		insights.action('getStatsTimeline', message.from, message.to, true, true).then((data) => {
 			callback(data);
 		});
+		return true;
+	} else if (name === 'getAllStats') {
+		// insights.action('getAllDays').then((data) => {
+		// 	insights.action('getStatsTimeline', moment(data[0]), moment(), true, true).then((data) => {
+		// 		const dataArray = [];
+		// 		for (let i = 0; i < 4380; i++) {
+		// 			dataArray.push(data[ 0 ]);
+		// 		}
+		// 		callback(dataArray);
+		// 	});
+		// });
+		callback(generateHistoryData(4380));
 		return true;
 	} else if (name === 'setPanelData') {
 		panelData.set(message);

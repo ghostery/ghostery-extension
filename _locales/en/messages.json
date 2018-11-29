@@ -2104,6 +2104,12 @@
 	"panel_stats_header_title": {
 		"message": "Historical Tracker Stats"
 	},
+	"panel_stats_header_title_monthly": {
+		"message": "Historical Tracker Stats (Monthly Avg.)"
+	},
+	"panel_stats_header_title_daily": {
+		"message": "Historical Tracker Stats (Daily Avg.)"
+	},
 	"panel_stats_trackers_seen": {
 		"message": "Trackers Seen"
 	},
