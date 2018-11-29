@@ -167,22 +167,19 @@ class Stats extends React.Component {
 						monthTrackersAnonymized += dataItem.cookiesBlocked + dataItem.fingerprintsRemoved;
 						monthAdsBlocked += dataItem.adsBlocked;
 
-						const trackersSeen = (scale === 1) ? monthTrackersSeen : Math.floor(monthTrackersSeen * scale);
-						const trackersBlocked = (scale === 1) ? monthTrackersBlocked : Math.floor(monthTrackersBlocked * scale);
-						const trackersAnonymized = (scale === 1) ? monthTrackersAnonymized : Math.floor(monthTrackersAnonymized * scale);
-						const adsBlocked = (scale === 1) ? monthAdsBlocked : Math.floor(monthAdsBlocked * scale);
+						const monthlyObj = {
+							trackersSeen: (scale === 1) ? monthTrackersSeen : Math.floor(monthTrackersSeen * scale),
+							trackersBlocked: (scale === 1) ? monthTrackersBlocked : Math.floor(monthTrackersBlocked * scale),
+							trackersAnonymized: (scale === 1) ? monthTrackersAnonymized : Math.floor(monthTrackersAnonymized * scale),
+							adsBlocked: (scale === 1) ? monthAdsBlocked : Math.floor(monthAdsBlocked * scale),
+						};
 
-						monthTrackersSeenArray.push(trackersSeen);
-						monthTrackersBlockedArray.push(trackersBlocked);
-						monthTrackersAnonymizedArray.push(trackersAnonymized);
-						monthAdsBlockedArray.push(adsBlocked);
+						monthTrackersSeenArray.push(monthlyObj.trackersSeen);
+						monthTrackersBlockedArray.push(monthlyObj.trackersBlocked);
+						monthTrackersAnonymizedArray.push(monthlyObj.trackersAnonymized);
+						monthAdsBlockedArray.push(monthlyObj.adsBlocked);
 
-						monthlyData.push({
-							trackersSeen,
-							trackersBlocked,
-							trackersAnonymized,
-							adsBlocked,
-						});
+						monthlyData.push(monthlyObj);
 
 						endOfMonth = moment(dataItem.day).endOf('month');
 						dayCount = 1;
