@@ -243,16 +243,14 @@ class Stats extends React.Component {
 				state.dailyData = dailyData;
 				state.monthlyData = monthlyData;
 				state.selection.summaryData = state.cumulativeData;
+				state.selection.currentIndex = this.state.monthlyData.length - 1;
+				state.selection.selectionData = this.determineSelectionData(state);
+
 				this.setState(state, () => {
 					console.log('STATE:', this.state);
 				});
 			}
 		});
-
-		// eslint-disable-next-line react/no-did-mount-set-state
-		this.setState({ selection: { currentIndex: this.state.monthlyData.length - 1 } });
-
-		this.determineSelectionData();
 
 		// this.getStats(moment().subtract(30, 'days'), moment()).then((allData) => {
 		// 	this.setState({ selection, allData }, () => {
@@ -390,16 +388,18 @@ class Stats extends React.Component {
 			const { monthlyData, dailyData, currentIndex } = this.state;
 			if (selection.type === 'daily' && lastType === 'monthly') {
 				const currentDate = dailyData[currentIndex].date;
-				for (let i = monthlyData.length; i >= 0; i--) {
+				for (let i = monthlyData.length - 1; i >= 0; i--) {
 					if (monthlyData[i].date === currentDate) {
 						selection.currentIndex = i;
+						break;
 					}
 				}
 			} else if (selection.type === 'monthly' && lastType === 'daily') {
 				const currentDate = monthlyData[currentIndex].date;
-				for (let i = dailyData.length; i >= 0; i--) {
+				for (let i = dailyData.length - 1; i >= 0; i--) {
 					if (dailyData[i].date === currentDate) {
 						selection.currentIndex = i;
+						break;
 					}
 				}
 			}
@@ -414,17 +414,16 @@ class Stats extends React.Component {
 	 * Determine data selection for Stats Graph according to parameters in state
 	 * Save it in state
 	 */
-	determineSelectionData() {
-		const {
-			selection, dailyData, monthlyData
-		} = this.state;
+	determineSelectionData(passedState) {
+		const state = passedState || Object.assign({}, this.state);
+		const { dailyData, monthlyData, selection } = state;
 		const data = selection.type === 'daily' ? dailyData : monthlyData;
 		const dataSlice = data.slice(selection.currentIndex - 7, selection.currentIndex - 1);
 		const selectionData = dataSlice.map((entry) => {
-			const parsedEntry = { amount: entry[this.state.view], date: entry.date };
+			const parsedEntry = { amount: entry[state.selection.view], date: entry.date };
 			return parsedEntry;
 		});
-		this.setState({ selection: { selectionData } });
+		return selectionData;
 	}
 
 	/**
@@ -433,7 +432,11 @@ class Stats extends React.Component {
 	 * @param {Object} event 		click event
 	 */
 	selectTimeFrame(e) {
-		// This class method will be tied to click handlers on the arrows in the graph
+		/**
+		*
+		TODO: This class method will be tied to click handlers on the arrows in the graph
+		*
+		*/
 		if (e.target.id === 'stats-forward') {
 			this.setState({ currentIndex: this.state.currentIndex + 6 });
 		} else if (e.target.id === 'stats-forward') {

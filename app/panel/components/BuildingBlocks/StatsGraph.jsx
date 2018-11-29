@@ -20,92 +20,16 @@ import * as D3 from 'd3';
  * @memberof PanelClasses
  */
 class StatsGraph extends React.Component {
-	// constructor(props) {
-	// 	super(props);
-	// 	this.state = {
-	// 		data: [],
-	// 		dataTypes: [],
-	// 		dayOrMonth: '',
-	// 		tooltipText: '',
-	// 	};
-	// }
-
 	/**
 	 * Lifecycle event
 	 */
 	componentDidMount() {
-		// this.determineType();
-		// this.parseData();
 		this.generateGraph();
 	}
 
 	componentDidUpdate() {
-		// this.determineType();
-		// this.parseData();
 		this.generateGraph();
 	}
-
-	// TODO: Add a setDateRange() class method for changing user's selection
-	// This will need our current date, along with the set that we are on
-	// Note that in your D3, you will need to know if we are on daily or monthly view
-	// This class method will be associated with the clickers to move back/forth on the graph
-
-	/**
-	 * Determine which type of data needs to be pulled from the data array prop
-	 */
-	// determineType() {
-	// 	switch (this.props.dataType) {
-	// 		case 'trackersSeen':
-	// 			this.setState({
-	// 				dataTypes: ['trackersDetected'],
-	// 				tooltipText: t('panel_stats_trackers_seen'),
-	// 			});
-	// 			break;
-	// 		case 'trackersBlocked':
-	// 			this.setState({
-	// 				dataTypes: ['trackersBlocked'],
-	// 				tooltipText: t('panel_stats_trackers_blocked'),
-	// 			});
-	// 			break;
-	// 		case 'trackersAnonymized':
-	// 			this.setState({
-	// 				dataTypes: ['cookiesBlocked', 'fingerprintsRemoved'],
-	// 				tooltipText: t('panel_stats_trackers_anonymized'),
-	// 			});
-	// 			break;
-	// 		case 'adsBlocked':
-	// 			this.setState({
-	// 				dataTypes: ['adsBlocked'],
-	// 				tooltipText: t('panel_stats_ads_blocked'),
-	// 			});
-	// 			break;
-	// 		default:
-	// 	}
-	//
-	// 	this.props.data[0].keys.forEach((key) => {
-	// 		if (key === ('day' || 'month')) {
-	// 			this.setState({ dayOrMonth: key });
-	// 		}
-	// 	});
-	// }
-
-	/**
-	 * Parse data coming from Stats View depending on user's selection and data type
-	 */
-	// parseData() {
-	// 	// TODO: make this change based off of user's time range selection
-	// 	const dataSlice = this.props.data.slice(0, 5);
-	//
-	// 	const data = dataSlice.map((dataEntry) => {
-	// 		const parsedEntry = { date: dataEntry[this.state.dayOrMonth], amount: 0 };
-	// 		this.state.dataTypes.forEach((dataType) => {
-	// 			parsedEntry.amount += data[dataType];
-	// 		});
-	// 		return parsedEntry;
-	// 	});
-	//
-	// 	this.setState({ data });
-	// }
 
 	/**
 	 * Generate line graph with the stats for the selected time slot
@@ -113,6 +37,9 @@ class StatsGraph extends React.Component {
 	 * Add tooltips for each data point
 	 */
 	generateGraph() {
+		// Clear graph
+		D3.select(this.node).selectAll('*').remove();
+
 		// Add svg
 		const margin = {
 			top: 20, right: 40, bottom: 20, left: 40
@@ -127,28 +54,25 @@ class StatsGraph extends React.Component {
 			.append('g')
 			.attr('transform', `translate(${margin.left},${margin.top})`);
 
-		// DUMMY DATA
-		const data = [
-			{ month: '05-2018', amount: 25 },
-			{ month: '06-2018', amount: 19 },
-			{ month: '07-2018', amount: 42 },
-			{ month: '08-2018', amount: 50 },
-			{ month: '09-2018', amount: 73 }
-		];
-
 		// Date formatting
-		const parseMonth = D3.timeParse('%m-%Y');
+		/**
+		*
+		TODO: add a different parser based off of the dailyOrMonthly prop
+		*
+		*/
+		const parseMonth = D3.timeParse('%Y-%m-%d');
 		const formatLabelDate = D3.timeFormat("%b '%y");
 		const formatTooltipDate = D3.timeFormat('%b %Y');
 
+		const data = JSON.parse(JSON.stringify(this.props.data));
 		data.forEach((entry) => {
-			entry.month = parseMonth(entry.month);
+			entry.date = parseMonth(entry.date);
 		});
 
 		// Set scales
 		const x = D3.scaleTime()
 			.range([0, width])
-			.domain(D3.extent(data, d => d.month));
+			.domain(D3.extent(data, d => d.date));
 
 		const y = D3.scaleLinear()
 			.range([height, 0])
@@ -191,7 +115,7 @@ class StatsGraph extends React.Component {
 		const pathGroup = canvas.append('g').datum(data);
 
 		const line = D3.line()
-			.x(d => x(d.month))
+			.x(d => x(d.date))
 			.y(d => y(d.amount));
 		// .curve(D3.curveMonotoneX); // <-- Used on to smoothen data path
 
@@ -234,7 +158,7 @@ class StatsGraph extends React.Component {
 			.append('circle')
 			.attr('class', (d, i) => `point point-${i}`)
 			.attr('fill', '#124559')
-			.attr('cx', d => x(d.month))
+			.attr('cx', d => x(d.date))
 			.attr('cy', d => y(d.amount))
 			.attr('r', 0)
 			.on('click', function (d, i) {
@@ -253,7 +177,7 @@ class StatsGraph extends React.Component {
 		canvas.selectAll('circle')
 			.each((d, i) => {
 				let tooltipFlipped = false;
-				let tooltipPositionX = x(d.month);
+				let tooltipPositionX = x(d.date);
 				let tooltipPositionY = y(d.amount) - 80;
 
 				if (tooltipPositionY < height / 5) {
@@ -277,7 +201,7 @@ class StatsGraph extends React.Component {
 
 				div.append('p')
 					.attr('class', 'tooltip-text-top')
-					.html(`${formatTooltipDate(d.month)}<br/>${this.props.tooltipText}`);
+					.html(`${formatTooltipDate(d.date)}<br/>${this.props.tooltipText}`);
 				div.append('p')
 					.attr('class', 'tooltip-text-bottom')
 					.html(d.amount);
@@ -319,6 +243,7 @@ class StatsGraph extends React.Component {
 	 * @return {JSX} JSX for rendering the donut-graph portion of the Summary View
 	 */
 	render() {
+		console.log('GRAPH PROPS', this.props);
 		return (
 			<div className="line-graph-container">
 				<div className="line-graph-ref" ref={(node) => { this.node = node; }} />
