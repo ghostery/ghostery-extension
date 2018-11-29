@@ -20,6 +20,7 @@ import SubscriptionMenu from './Subscription/SubscriptionMenu';
 import SubscriptionInfo from './Subscription/SubscriptionInfo';
 import SubscriptionThemes from './Subscription/SubscriptionThemes';
 import PrioritySupport from './Subscription/PrioritySupport';
+import Currencies from '../../countries.json';
 
 
 // import TrackerStats from './Subscription/TrackerStats';
@@ -30,9 +31,7 @@ import PrioritySupport from './Subscription/PrioritySupport';
 class Subscription extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			isChecked: (props.current_theme !== 'default'),
-		};
+		this.state = { isChecked: (props.current_theme !== 'default') };
 	}
 
 	/**
@@ -55,11 +54,23 @@ class Subscription extends React.Component {
 		const sd = this.props.subscriptionData;
 		if (sd) {
 			const {
-				planAmount, planInterval, currentPeriodEnd, cancelAtPeriodEnd, status
+				planAmount, planInterval, planCurrency, currentPeriodEnd, cancelAtPeriodEnd, status
 			} = sd;
 			const plan_ends = cancelAtPeriodEnd ? moment.duration(moment.unix(currentPeriodEnd).diff(moment(new Date()))).days() : '';
+			let currency;
+			for (let i = 0; i < Currencies.length; i++) {
+				if (Currencies[i].currencyCode === planCurrency) {
+					currency = Currencies[i]; break;
+				}
+			}
+			const {
+				languageCode, currencyDecimals, currencySymbol, currencySymbolAfter
+			} = currency;
+			const planCost = (planAmount / 10 ** currencyDecimals)
+				.toLocaleString(languageCode, { minimumFractionDigits: currencyDecimals, maximumFractionDigits: currencyDecimals });
+			const plan_amount = currencySymbolAfter ? `${planCost} ${currencySymbol}` : `${currencySymbol} ${planCost}`;
 			return {
-				plan_amount: `$${(planAmount / 100).toFixed(2)}`,
+				plan_amount,
 				plan_interval: planInterval,
 				active: (status === 'active'),
 				charge_date: moment.unix(currentPeriodEnd).format('MMMM Do, YYYY'),
