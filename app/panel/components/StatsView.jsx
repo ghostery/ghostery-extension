@@ -36,7 +36,7 @@ const StatsView = (props) => {
 	} = props;
 
 	const {
-		type, view, graphTitle, summaryTitle, summaryData, selectionData
+		type, view, graphTitle, summaryTitle, summaryData, selectionData, tooltipText
 	} = selection;
 	const {
 		trackersSeen, trackersBlocked, trackersAnonymized, adsBlocked
@@ -96,7 +96,7 @@ const StatsView = (props) => {
 				</span>
 				<span className="clear-float" />
 			</div>
-			<StatsGraph dataType={view} data={selectionData} />
+			<StatsGraph data={selectionData} dailyOrMonthly={type} tooltipText={tooltipText} />
 			<div className="tab-header">
 				<div className="tab-container">
 					<div className="tab-header-title">{summaryTitle}</div>

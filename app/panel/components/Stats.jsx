@@ -110,14 +110,16 @@ class Stats extends React.Component {
 				view: 'trackersSeen',
 				graphTitle: this.getGraphTitle('cumulative', 'trackersSeen'),
 				summaryTitle: this.getSummaryTitle('cumulative'),
+				tooltipText: t('panel_stats_trackers_seen'),
 				summaryData: {},
 				selectionData: [],
+				currentIndex: 0,
 			},
 			dailyData: [],
 			monthlyData: [],
 			cumulativeData: {},
 			monthlyAverageData: {},
-			dailyAverageData: {}
+			dailyAverageData: {},
 		};
 
 		// event bindings
@@ -147,7 +149,17 @@ class Stats extends React.Component {
 				let monthTrackersAnonymized = 0;
 				let monthAdsBlocked = 0;
 				const monthlyData = [];
+				const dailyData = [];
 				allData.forEach((dataItem) => {
+					// Day reassignments
+					dailyData.push({
+						trackersSeen: dataItem.trackersDetected,
+						trackersBlocked: dataItem.trackersBlocked,
+						trackersAnonymized: dataItem.cookiesBlocked + dataItem.fingerprintsRemoved,
+						adsBlocked: dataItem.adsBlocked,
+						date: dataItem.day,
+					});
+
 					// Monthly calculations
 					if (moment(dataItem.day).isSameOrBefore(endOfMonth)) {
 						dayCount++;
@@ -168,6 +180,7 @@ class Stats extends React.Component {
 						monthAdsBlocked += dataItem.adsBlocked;
 
 						const monthlyObj = {
+							date: beginOfMonth.format('YYYY-MM-DD'),
 							trackersSeen: (scale === 1) ? monthTrackersSeen : Math.floor(monthTrackersSeen * scale),
 							trackersBlocked: (scale === 1) ? monthTrackersBlocked : Math.floor(monthTrackersBlocked * scale),
 							trackersAnonymized: (scale === 1) ? monthTrackersAnonymized : Math.floor(monthTrackersAnonymized * scale),
@@ -227,7 +240,7 @@ class Stats extends React.Component {
 					adsBlocked,
 				};
 
-				state.dailyData = allData;
+				state.dailyData = dailyData;
 				state.monthlyData = monthlyData;
 				state.selection.summaryData = state.cumulativeData;
 				this.setState(state, () => {
@@ -235,6 +248,11 @@ class Stats extends React.Component {
 				});
 			}
 		});
+
+		// eslint-disable-next-line react/no-did-mount-set-state
+		this.setState({ selection: { currentIndex: this.state.monthlyData.length - 1 } });
+
+		this.determineSelectionData();
 
 		// this.getStats(moment().subtract(30, 'days'), moment()).then((allData) => {
 		// 	this.setState({ selection, allData }, () => {
@@ -246,9 +264,11 @@ class Stats extends React.Component {
 	getStats(from, to) {
 		return sendMessageInPromise('getStats', { from, to });
 	}
+
 	getAllStats() {
 		return sendMessageInPromise('getAllStats');
 	}
+
 	getGraphTitleBase(view) {
 		switch (view) {
 			case 'trackersSeen':
@@ -284,7 +304,6 @@ class Stats extends React.Component {
 	}
 
 	getSummaryTitle(type) {
-		const baseText = t('panel_stats_header_title');
 		switch (type) {
 			case 'cumulative':
 				return t('panel_stats_header_title');
@@ -314,6 +333,21 @@ class Stats extends React.Component {
 		}
 	}
 
+	getTooltipText(view) {
+		switch (view) {
+			case 'trackersSeen':
+				return t('panel_stats_trackers_seen');
+			case 'trackersBlocked':
+				return t('panel_stats_trackers_blocked');
+			case 'trackersAnonymized':
+				return t('panel_stats_trackers_anonymized');
+			case 'adsBlocked':
+				return t('panel_stats_ads_blocked');
+			default:
+				return t('panel_stats_trackers_seen');
+		}
+	}
+
 	/**
 	 * Set view selection according to the clicked button. Save it in state.
 	 * @param {Object} event 		click event
@@ -328,6 +362,8 @@ class Stats extends React.Component {
 			selection.graphTitle = this.getGraphTitle(selection.type, selection.view);
 			selection.summaryTitle = this.getSummaryTitle(selection.type);
 			selection.summaryData = this.getSummaryData(state, selection.type);
+			selection.tooltipText = this.getTooltipText(selection.view);
+
 			this.setState({ selection }, () => {
 				console.log('SELECTION:', this.state.selection);
 			});
@@ -336,6 +372,7 @@ class Stats extends React.Component {
 
 	/**
 	 * Set type selection according to the clicked button. Save it in state.
+	 * Update current index if switching from monthly/cumulative to daily (or reverse)
 	 * @param {Object} event 		click event
 	 */
 	selectType(event) {
@@ -343,15 +380,64 @@ class Stats extends React.Component {
 		// eslint-disable-next-line prefer-destructuring
 		const selection = state.selection;
 		if (event.currentTarget.id !== selection.type) {
+			const lastType = selection.type === 'cumulative' ? 'monthly' : selection.type;
 			selection.type = event.currentTarget.id;
 			selection.graphTitle = this.getGraphTitle(selection.type, selection.view);
 			selection.summaryTitle = this.getSummaryTitle(selection.type);
 			selection.summaryData = this.getSummaryData(state, selection.type);
 			sendMessage('ping', selection.type);
 
+			const { monthlyData, dailyData, currentIndex } = this.state;
+			if (selection.type === 'daily' && lastType === 'monthly') {
+				const currentDate = dailyData[currentIndex].date;
+				for (let i = monthlyData.length; i >= 0; i--) {
+					if (monthlyData[i].date === currentDate) {
+						selection.currentIndex = i;
+					}
+				}
+			} else if (selection.type === 'monthly' && lastType === 'daily') {
+				const currentDate = monthlyData[currentIndex].date;
+				for (let i = dailyData.length; i >= 0; i--) {
+					if (dailyData[i].date === currentDate) {
+						selection.currentIndex = i;
+					}
+				}
+			}
+
 			this.setState({ selection }, () => {
 				console.log('SELECTION:', this.state.selection);
 			});
+		}
+	}
+
+	/**
+	 * Determine data selection for Stats Graph according to parameters in state
+	 * Save it in state
+	 */
+	determineSelectionData() {
+		const {
+			selection, dailyData, monthlyData
+		} = this.state;
+		const data = selection.type === 'daily' ? dailyData : monthlyData;
+		const dataSlice = data.slice(selection.currentIndex - 7, selection.currentIndex - 1);
+		const selectionData = dataSlice.map((entry) => {
+			const parsedEntry = { amount: entry[this.state.view], date: entry.date };
+			return parsedEntry;
+		});
+		this.setState({ selection: { selectionData } });
+	}
+
+	/**
+	 * Change time frame based on user's selection
+	 * Save it in state under currentIndex
+	 * @param {Object} event 		click event
+	 */
+	selectTimeFrame(e) {
+		// This class method will be tied to click handlers on the arrows in the graph
+		if (e.target.id === 'stats-forward') {
+			this.setState({ currentIndex: this.state.currentIndex + 6 });
+		} else if (e.target.id === 'stats-forward') {
+			this.setState({ currentIndex: this.state.currentIndex - 6 });
 		}
 	}
 
