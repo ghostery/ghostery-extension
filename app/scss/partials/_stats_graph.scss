@@ -1,76 +1,80 @@
 /* NOTE: may need to use color variables in CSS rather than D3 code accessors
 so that you can support switching between midnight theme and regular theme */
-.axis line, .axis path, .grid line {
-	stroke: #c8c7c2;
-}
-.axis text {
-	fill: #4a4a4a;
-	font-size: 12px;
-}
-.axis.y text {
-	transform: translate(-10px, 0px);
-}
-.axis.x text {
-	transform: translate(0px, 25px);
-}
-.grid path {
-	stroke: none;
-}
-.grid line {
-	stroke: #c8c7c2;
-}
-.selected {
-	stroke: #2092bf;
-	stroke-width: 3px;
-}
-.tooltip {
-	font-family: 'Open Sans', sans-serif;
-	font-weight: 500;
-	text-align: center;
-	line-height: 16px;
-	position: fixed;
-	width: 92px;
-	height: 58px;
-	padding: 10px 0px;
-	background-color: #f7f7f7;
-	pointer-events: none;
-	color: #124559;
-	border: 1.4px solid #124559;
-}
-.tooltip-text-top {
-	margin: 0px;
-	font-size: 12px;
-}
-.tooltip-text-bottom {
-	margin-top: 8px;
-	font-size: 14px;
-}
-.pointer {
-	position: absolute;
-}
-.pointer.under {
-	left: 38px;
-	border-left: 8px solid transparent;
-	border-right: 8px solid transparent;
-}
-.pointer.over {
-	left: 36px;
-	border-left: 10px solid transparent;
-	border-right: 10px solid transparent;
-}
-.pointer.top.under {
-	top: -9px;
-	border-bottom: 8px solid #124559;
-}
-.pointer.top.over {
-	top: -7.6px;
-	border-bottom: 10px solid #f7f7f7;
-}
-.pointer.bottom.under {
-	bottom: -9px;
-	border-top: 8px solid #124559;
-}
-.pointer.bottom.over {
-	bottom: -7.6px;
-	border-top: 10px solid #f7f7f7;
+.line-graph-container {
+	height: 306px;
+
+	.axis line, .axis path, .grid line {
+		stroke: #c8c7c2;
+	}
+	.axis text {
+		fill: #4a4a4a;
+		font-size: 12px;
+	}
+	.axis.y text {
+		transform: translate(-10px, 0px);
+	}
+	.axis.x text {
+		transform: translate(0px, 25px);
+	}
+	.grid path {
+		stroke: none;
+	}
+	.grid line {
+		stroke: #c8c7c2;
+	}
+	.selected {
+		stroke: #2092bf;
+		stroke-width: 3px;
+	}
+	.tooltip {
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 500;
+		text-align: center;
+		line-height: 16px;
+		position: fixed;
+		width: 92px;
+		height: 58px;
+		padding: 10px 0px;
+		background-color: #f7f7f7;
+		pointer-events: none;
+		color: #124559;
+		border: 1.4px solid #124559;
+	}
+	.tooltip-text-top {
+		margin: 0px;
+		font-size: 12px;
+	}
+	.tooltip-text-bottom {
+		margin-top: 8px;
+		font-size: 14px;
+	}
+	.pointer {
+		position: absolute;
+	}
+	.pointer.under {
+		left: 38px;
+		border-left: 8px solid transparent;
+		border-right: 8px solid transparent;
+	}
+	.pointer.over {
+		left: 36px;
+		border-left: 10px solid transparent;
+		border-right: 10px solid transparent;
+	}
+	.pointer.top.under {
+		top: -9px;
+		border-bottom: 8px solid #124559;
+	}
+	.pointer.top.over {
+		top: -7.6px;
+		border-bottom: 10px solid #f7f7f7;
+	}
+	.pointer.bottom.under {
+		bottom: -9px;
+		border-top: 8px solid #124559;
+	}
+	.pointer.bottom.over {
+		bottom: -7.6px;
+		border-top: 10px solid #f7f7f7;
+	}
 }
