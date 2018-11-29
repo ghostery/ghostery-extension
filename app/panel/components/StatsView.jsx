@@ -13,6 +13,7 @@
 
 import React from 'react';
 import ClassNames from 'classnames';
+import ReactSVG from 'react-svg';
 
 import StatsGraph from './BuildingBlocks/StatsGraph';
 
@@ -85,8 +86,14 @@ const StatsView = (props) => {
 	return (
 		<div id="content-stats">
 			<div className="stats-top-header">
-				<span className="stats-top-header-title">{graphTitle}</span>
-				<span className="stats-top-header-reset" onClick={resetStats}>{t('panel_stats_reset')}</span>
+				<span className="stats-top-header-title">
+					<ReactSVG path="../../app/images/panel/eye.svg" className="stats-top-header-icon" />
+					{graphTitle}
+				</span>
+				<span className="stats-top-header-reset" onClick={resetStats}>
+					{t('panel_stats_reset')}
+					<ReactSVG path="../../app/images/panel/info.svg" className="stats-top-header-info-icon" />
+				</span>
 				<span className="clear-float" />
 			</div>
 			<StatsGraph dataType={view} data={selectionData} />

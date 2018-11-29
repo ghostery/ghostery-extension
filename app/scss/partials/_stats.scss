@@ -20,37 +20,43 @@
         // border: 1px red dashed;
     }
     .stats-top-header {
-        height: 47px;
+        height: 40px;
         font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
         font-size: 13px;
         font-weight: bold;
-        line-height: 47px;
+        line-height: 40px;
         color: #4a4a4a; 
-        margin-left: 70px;
-        &:before { 
+        margin-left: 80px;
+        .stats-top-header-icon  { 
+            display: inline-flex;
             width: 16px;
             height: 21px;
-            content: url('../../app/images/panel/stats-locked.svg');
             position: relative;
-            top: 4px;
-            left: -7px; 
+            top: 2px;
+            left: -21px; 
+            div {
+                display: inline-flex;
+            }
         }   
     }
     .stats-top-header-reset {
         font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
         font-size: 12px;
-        line-height: 47px;
+        line-height: 40px;
         color: #00aef0;
         float: right;
         margin-right: 39px;
         cursor: pointer;
-        &:after { 
+        .stats-top-header-info-icon  { 
+            display: inline-flex;
             width: 16px;
             height: 21px;
-            content: url('../../app/images/panel/stats-locked.svg');
             position: relative;
             top: 4px;
             left: 7px; 
+            div {
+                display: inline-flex;
+            }
         }           
     }
     .clear-float {
