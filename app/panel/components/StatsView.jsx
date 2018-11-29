@@ -14,6 +14,8 @@
 import React from 'react';
 import ClassNames from 'classnames';
 
+import StatsGraph from './BuildingBlocks/StatsGraph';
+
 /**
  * A Functional React component for rendering the Stats View
  * @return {JSX} JSX for rendering the Home View of the Hub app
@@ -86,7 +88,7 @@ const StatsView = (props) => {
 				<span className="stats-top-header-reset" onClick={resetStats}>{t('panel_stats_reset')}</span>
 				<span className="clear-float" />
 			</div>
-			<div className="graph" />
+			<StatsGraph />
 			<div className="tab-header">
 				<div className="tab-container">
 					<div className="tab-header-title">{t('panel_stats_header_title')}</div>
