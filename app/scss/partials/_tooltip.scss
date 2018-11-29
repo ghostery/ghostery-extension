@@ -69,14 +69,13 @@
 			}
 		}
 		&.bottom {
-			width: 150px;
-			top: 125%;
-			left: 50%;
-			margin-left: -60px;
+			width: 60px;
+			top: 95%;
+			left: -20px;
 			&:after {
 				bottom: calc(100% - 10px);  /* At the top of the tooltip */
 				left: 50%;
-				margin-left: -8px;
+				margin-left: 8px;
 				border-width: 5px;
 				transform: rotate(135deg);
 			}
