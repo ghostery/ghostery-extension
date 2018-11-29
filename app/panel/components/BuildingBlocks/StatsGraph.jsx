@@ -33,7 +33,7 @@ class StatsGraph extends React.Component {
 	 * Add tooltips for each data point
 	 */
 	generateGraph() {
-		// Add svg container
+		// Add svg
 		const margin = {
 			top: 20, right: 40, bottom: 20, left: 40
 		};
@@ -183,7 +183,7 @@ class StatsGraph extends React.Component {
 					tooltipPositionX += 1;
 				}
 
-				const div = D3.select('body').append('div')
+				const div = D3.select('.tooltip-container').append('div')
 					.attr('class', `tooltip tooltip-${i}`)
 					.style('opacity', 0)
 					.style('left', `${tooltipPositionX}px`)
@@ -212,7 +212,7 @@ class StatsGraph extends React.Component {
 			});
 
 		// Add event listener to container for closing tooltip
-		D3.select('.line-graph')
+		D3.select('.line-graph-container')
 			.on('click', () => {
 				if (D3.event.target.className.baseVal !== 'point' &&
 				D3.event.target.className !== 'tooltip') {
@@ -241,7 +241,10 @@ class StatsGraph extends React.Component {
 	 */
 	render() {
 		return (
-			<div className="graph-ref" ref={(node) => { this.node = node; }} />
+			<div className="line-graph-container">
+				<div className="line-graph-ref" ref={(node) => { this.node = node; }} />
+				<div className="tooltip-container" />
+			</div>
 		);
 	}
 }
