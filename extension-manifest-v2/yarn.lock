@@ -138,13 +138,12 @@
     traceur "0.0.105"
     uglify-js "^2.6.1"
 
-"@cliqz/adblocker@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-0.3.0.tgz#c16c0a09b949ee369d232409cb0eac8d7ec0795b"
-  integrity sha512-VwvF3AhOr9XOUOtO5BGjHKE2PsqvqSEXYhQPkWEf8n75CRUxvxPPE4LyHJiSXQwe4WeEgpkEGDOVcCJPMZeQHQ==
+"@cliqz/adblocker@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-0.2.1.tgz#9545d185dad832e3dcc9605a5b260f2b1a8234fc"
+  integrity sha512-fPAg7Nh1zLneuBYtuiSsS/o30nbFhWgd/EVoaSsPwqpweCWbUwTT+zMkZBoVEtPTk6Y9XF0reqEIQ0Uf07t7RQ==
   dependencies:
     tldts "^3.0.0"
-    tslib "^1.9.3"
 
 "@sinonjs/formatio@3.0.0":
   version "3.0.0"
@@ -1753,13 +1752,13 @@ brorand@^1.0.1:
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
   integrity sha1-EsJe/kCkXjwyPrhnWgoM5XsiNx8=
 
-"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.31/7.31.4.284d902.tgz":
-  version "7.31.4"
-  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.31/7.31.4.284d902.tgz#8e26b6a9e724dee1b40dbb7c57307bef2f38f4e2"
+"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.31.2/7.31.2.a5e65dc.tgz":
+  version "7.31.2"
+  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.31.2/7.31.2.a5e65dc.tgz#8155b2bba65131a5e10f9cdbc186cb1576d1cf9f"
   dependencies:
     "@cliqz-oss/dexie" "^2.0.4"
     "@cliqz-oss/systemjs-builder" "^0.16.13"
-    "@cliqz/adblocker" "^0.3.0"
+    "@cliqz/adblocker" "^0.2.1"
     BigInt "^5.5.3"
     ajv "^6.5.0"
     anonymous-credentials "https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.1/anonymous-credentials-0.1.1.tgz"
@@ -9776,7 +9775,7 @@ truncate-utf8-bytes@^1.0.0:
   dependencies:
     utf8-byte-length "^1.0.1"
 
-tslib@^1.9.0, tslib@^1.9.3:
+tslib@^1.9.0:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
   integrity sha512-4krF8scpejhaOgqzBEcGM7yDIEfi0/8+8zDRZhNZZ2kjmHJ4hv3zCbQWxoJGz1iw5U0Jl0nma13xzHXcncMavQ==
