@@ -113,7 +113,8 @@ class Stats extends React.Component {
 				summaryData: {},
 				selectionData: [],
 			},
-			allData: {},
+			dailyData: [],
+			monthlyData: [],
 			cumulativeData: {},
 			monthlyAverageData: {},
 			dailyAverageData: {}
@@ -145,7 +146,7 @@ class Stats extends React.Component {
 				let monthTrackersBlocked = 0;
 				let monthTrackersAnonymized = 0;
 				let monthAdsBlocked = 0;
-
+				const monthlyData = [];
 				allData.forEach((dataItem) => {
 					// Monthly calculations
 					if (moment(dataItem.day).isSameOrBefore(endOfMonth)) {
@@ -166,10 +167,22 @@ class Stats extends React.Component {
 						monthTrackersAnonymized += dataItem.cookiesBlocked + dataItem.fingerprintsRemoved;
 						monthAdsBlocked += dataItem.adsBlocked;
 
-						monthTrackersSeenArray.push(monthTrackersSeen * scale);
-						monthTrackersBlockedArray.push(monthTrackersBlocked * scale);
-						monthTrackersAnonymizedArray.push(monthTrackersAnonymized * scale);
-						monthAdsBlockedArray.push(monthAdsBlocked * scale);
+						const trackersSeen = (scale === 1) ? monthTrackersSeen : Math.floor(monthTrackersSeen * scale);
+						const trackersBlocked = (scale === 1) ? monthTrackersBlocked : Math.floor(monthTrackersBlocked * scale);
+						const trackersAnonymized = (scale === 1) ? monthTrackersAnonymized : Math.floor(monthTrackersAnonymized * scale);
+						const adsBlocked = (scale === 1) ? monthAdsBlocked : Math.floor(monthAdsBlocked * scale);
+
+						monthTrackersSeenArray.push(trackersSeen);
+						monthTrackersBlockedArray.push(trackersBlocked);
+						monthTrackersAnonymizedArray.push(trackersAnonymized);
+						monthAdsBlockedArray.push(adsBlocked);
+
+						monthlyData.push({
+							trackersSeen,
+							trackersBlocked,
+							trackersAnonymized,
+							adsBlocked,
+						});
 
 						endOfMonth = moment(dataItem.day).endOf('month');
 						dayCount = 1;
@@ -217,10 +230,11 @@ class Stats extends React.Component {
 					adsBlocked,
 				};
 
+				state.dailyData = allData;
+				state.monthlyData = monthlyData;
 				state.selection.summaryData = state.cumulativeData;
-				state.allData = allData;
 				this.setState(state, () => {
-					console.log('SELECTION:', this.state);
+					console.log('STATE:', this.state);
 				});
 			}
 		});
