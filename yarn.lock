@@ -1740,9 +1740,9 @@ brorand@^1.0.1:
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
   integrity sha1-EsJe/kCkXjwyPrhnWgoM5XsiNx8=
 
-"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.31/7.31.2.c8b8533.tgz":
+"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.31.2/7.31.2.a5e65dc.tgz":
   version "7.31.2"
-  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.31/7.31.2.c8b8533.tgz#4ebcfcc163a39e0d74b2bbe1f55301c646822157"
+  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.31.2/7.31.2.a5e65dc.tgz#8155b2bba65131a5e10f9cdbc186cb1576d1cf9f"
   dependencies:
     "@cliqz-oss/dexie" "^2.0.4"
     "@cliqz-oss/systemjs-builder" "^0.16.13"
