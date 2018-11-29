@@ -110,6 +110,7 @@ class Stats extends React.Component {
 				view: 'trackersSeen',
 				graphTitle: this.getGraphTitle('cumulative', 'trackersSeen'),
 				summaryTitle: this.getSummaryTitle('cumulative'),
+				tooltipText: t('panel_stats_trackers_seen'),
 				summaryData: {},
 				selectionData: [],
 			},
@@ -147,7 +148,17 @@ class Stats extends React.Component {
 				let monthTrackersAnonymized = 0;
 				let monthAdsBlocked = 0;
 				const monthlyData = [];
+				const dailyData = [];
 				allData.forEach((dataItem) => {
+					// Day reassignments
+					dailyData.push({
+						trackersSeen: dataItem.trackersDetected,
+						trackersBlocked: dataItem.trackersBlocked,
+						trackersAnonymized: dataItem.cookiesBlocked + dataItem.fingerprintsRemoved,
+						adsBlocked: dataItem.adsBlocked,
+						date: dataItem.day,
+					});
+
 					// Monthly calculations
 					if (moment(dataItem.day).isSameOrBefore(endOfMonth)) {
 						dayCount++;
@@ -227,7 +238,7 @@ class Stats extends React.Component {
 					adsBlocked,
 				};
 
-				state.dailyData = allData;
+				state.dailyData = dailyData;
 				state.monthlyData = monthlyData;
 				state.selection.summaryData = state.cumulativeData;
 				this.setState(state, () => {
@@ -246,9 +257,11 @@ class Stats extends React.Component {
 	getStats(from, to) {
 		return sendMessageInPromise('getStats', { from, to });
 	}
+
 	getAllStats() {
 		return sendMessageInPromise('getAllStats');
 	}
+
 	getGraphTitleBase(view) {
 		switch (view) {
 			case 'trackersSeen':
@@ -284,7 +297,6 @@ class Stats extends React.Component {
 	}
 
 	getSummaryTitle(type) {
-		const baseText = t('panel_stats_header_title');
 		switch (type) {
 			case 'cumulative':
 				return t('panel_stats_header_title');
@@ -314,6 +326,21 @@ class Stats extends React.Component {
 		}
 	}
 
+	getTooltipText(view) {
+		switch (view) {
+			case 'trackersSeen':
+				return t('panel_stats_trackers_seen');
+			case 'trackersBlocked':
+				return t('panel_stats_trackers_blocked');
+			case 'trackersAnonymized':
+				return t('panel_stats_trackers_anonymized');
+			case 'adsBlocked':
+				return t('panel_stats_ads_blocked');
+			default:
+				return t('panel_stats_trackers_seen');
+		}
+	}
+
 	/**
 	 * Set view selection according to the clicked button. Save it in state.
 	 * @param {Object} event 		click event
@@ -328,6 +355,8 @@ class Stats extends React.Component {
 			selection.graphTitle = this.getGraphTitle(selection.type, selection.view);
 			selection.summaryTitle = this.getSummaryTitle(selection.type);
 			selection.summaryData = this.getSummaryData(state, selection.type);
+			selection.tooltipText = this.getTooltipText(selection.view);
+
 			this.setState({ selection }, () => {
 				console.log('SELECTION:', this.state.selection);
 			});
@@ -353,6 +382,14 @@ class Stats extends React.Component {
 				console.log('SELECTION:', this.state.selection);
 			});
 		}
+	}
+
+	/**
+	 * Set type selection according to the clicked button. Save it in state.
+	 * @param {Object} event 		click event
+	 */
+	selectTimeFrame() {
+
 	}
 
 	resetStats() {

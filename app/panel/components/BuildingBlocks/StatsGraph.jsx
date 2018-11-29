@@ -20,22 +20,22 @@ import * as D3 from 'd3';
  * @memberof PanelClasses
  */
 class StatsGraph extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			data: [],
-			dataTypes: [],
-			dayOrMonth: '',
-			tooltipText: '',
-		};
-	}
+	// constructor(props) {
+	// 	super(props);
+	// 	this.state = {
+	// 		data: [],
+	// 		dataTypes: [],
+	// 		dayOrMonth: '',
+	// 		tooltipText: '',
+	// 	};
+	// }
 
 	/**
 	 * Lifecycle event
 	 */
 	componentDidMount() {
-		this.determineType();
-		this.parseData();
+		// this.determineType();
+		// this.parseData();
 		this.generateGraph();
 	}
 
@@ -47,58 +47,59 @@ class StatsGraph extends React.Component {
 	/**
 	 * Determine which type of data needs to be pulled from the data array prop
 	 */
-	determineType() {
-		switch (this.props.dataType) {
-			case 'trackersSeen':
-				this.setState({
-					dataTypes: ['trackersDetected'],
-					tooltipText: t('panel_stats_trackers_seen'),
-				});
-				break;
-			case 'trackersBlocked':
-				this.setState({
-					dataTypes: ['trackersBlocked'],
-					tooltipText: t('panel_stats_trackers_blocked'),
-				});
-				break;
-			case 'trackersAnonymized':
-				this.setState({
-					dataTypes: ['cookiesBlocked', 'fingerprintsRemoved'],
-					tooltipText: t('panel_stats_trackers_anonymized'),
-				});
-				break;
-			case 'adsBlocked':
-				this.setState({
-					dataTypes: ['adsBlocked'],
-					tooltipText: t('panel_stats_ads_blocked'),
-				});
-				break;
-			default:
-		}
-
-		this.props.data[0].keys.forEach((key) => {
-			if (key === ('day' || 'month')) {
-				this.setState({ dayOrMonth: key });
-			}
-		});
-	}
+	// determineType() {
+	// 	switch (this.props.dataType) {
+	// 		case 'trackersSeen':
+	// 			this.setState({
+	// 				dataTypes: ['trackersDetected'],
+	// 				tooltipText: t('panel_stats_trackers_seen'),
+	// 			});
+	// 			break;
+	// 		case 'trackersBlocked':
+	// 			this.setState({
+	// 				dataTypes: ['trackersBlocked'],
+	// 				tooltipText: t('panel_stats_trackers_blocked'),
+	// 			});
+	// 			break;
+	// 		case 'trackersAnonymized':
+	// 			this.setState({
+	// 				dataTypes: ['cookiesBlocked', 'fingerprintsRemoved'],
+	// 				tooltipText: t('panel_stats_trackers_anonymized'),
+	// 			});
+	// 			break;
+	// 		case 'adsBlocked':
+	// 			this.setState({
+	// 				dataTypes: ['adsBlocked'],
+	// 				tooltipText: t('panel_stats_ads_blocked'),
+	// 			});
+	// 			break;
+	// 		default:
+	// 	}
+	//
+	// 	this.props.data[0].keys.forEach((key) => {
+	// 		if (key === ('day' || 'month')) {
+	// 			this.setState({ dayOrMonth: key });
+	// 		}
+	// 	});
+	// }
 
 	/**
 	 * Parse data coming from Stats View depending on user's selection and data type
 	 */
-	parseData() {
-		const dataSlice = this.props.data.slice(0, 5);
-
-		const data = dataSlice.map((dataEntry) => {
-			const parsedEntry = { date: dataEntry[this.state.dayOrMonth], amount: 0 };
-			this.state.dataTypes.forEach((dataType) => {
-				parsedEntry.amount += data[dataType];
-			});
-			return parsedEntry;
-		});
-
-		this.setState({ data });
-	}
+	// parseData() {
+	// 	// TODO: make this change based off of user's time range selection
+	// 	const dataSlice = this.props.data.slice(0, 5);
+	//
+	// 	const data = dataSlice.map((dataEntry) => {
+	// 		const parsedEntry = { date: dataEntry[this.state.dayOrMonth], amount: 0 };
+	// 		this.state.dataTypes.forEach((dataType) => {
+	// 			parsedEntry.amount += data[dataType];
+	// 		});
+	// 		return parsedEntry;
+	// 	});
+	//
+	// 	this.setState({ data });
+	// }
 
 	/**
 	 * Generate line graph with the stats for the selected time slot
@@ -128,7 +129,6 @@ class StatsGraph extends React.Component {
 			{ month: '08-2018', amount: 50 },
 			{ month: '09-2018', amount: 73 }
 		];
-		console.log(this.state.data);
 
 		// Date formatting
 		const parseMonth = D3.timeParse('%m-%Y');
@@ -271,7 +271,7 @@ class StatsGraph extends React.Component {
 
 				div.append('p')
 					.attr('class', 'tooltip-text-top')
-					.html(`${formatTooltipDate(d.month)}<br/>${this.state.tooltipText}`);
+					.html(`${formatTooltipDate(d.month)}<br/>${this.props.tooltipText}`);
 				div.append('p')
 					.attr('class', 'tooltip-text-bottom')
 					.html(d.amount);
