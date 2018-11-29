@@ -20,11 +20,56 @@ import * as D3 from 'd3';
  * @memberof PanelClasses
  */
 class StatsGraph extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			data: [],
+			tooltipText: 'dummy text',
+			// dataType: [],
+		};
+	}
+
 	/**
 	 * Lifecycle event
 	 */
 	componentDidMount() {
+		this.determineType();
+		this.parseData();
 		this.generateGraph();
+	}
+
+	// TODO: Add a setDateRange() class method for changing user's selection
+	// This will need our current date, along with the set that we are on
+	// Note that in your D3, you will need to know if we are on daily or monthly view
+
+	/**
+	 * Determine which type of data needs to be pulled from the data array prop
+	 */
+	determineType() {
+		console.log(this.props.dataType);
+		// switch (this.props.dataType) {
+		// 	case "trackersSeen" "trackersBlocked" "trackersAnonymized" "adsBlocked"
+		// }
+	}
+
+	/**
+	 * Parse data coming from Stats View depending on user's selection and data type
+	 */
+	parseData() {
+		// console.log(this.props.data);
+		//
+		// const dataSlice = this.props.data.slice(0, 5);
+		//
+		// const data = dataSlice.map((dataEntry) => {
+		// 	const parsedEntry = {}
+		//
+		// 	switch(this.props.dataType) {
+		// 		case '':
+		//
+		// 	}
+		// });
+		//
+		// this.setState({ data });
 	}
 
 	/**
@@ -37,8 +82,8 @@ class StatsGraph extends React.Component {
 		const margin = {
 			top: 20, right: 40, bottom: 20, left: 40
 		};
-		const width = 600 - margin.left - margin.right;
-		const height = 400 - margin.top - margin.bottom;
+		const width = 560 - margin.left - margin.right;
+		const height = 280 - margin.top - margin.bottom;
 
 		const canvas = D3.select(this.node).append('svg')
 			.attr('class', 'line-graph')
@@ -55,6 +100,7 @@ class StatsGraph extends React.Component {
 			{ month: '08-2018', amount: 50 },
 			{ month: '09-2018', amount: 73 }
 		];
+		console.log(this.state.data);
 
 		// Date formatting
 		const parseMonth = D3.timeParse('%m-%Y');
@@ -158,9 +204,8 @@ class StatsGraph extends React.Component {
 			.attr('cy', d => y(d.amount))
 			.attr('r', 0)
 			.on('click', function (d, i) {
-				const that = this;
 				setTimeout(() => {
-					D3.select(that)
+					D3.select(this)
 						.classed('selected', true)
 						.attr('r', 6);
 					D3.select(`.tooltip-${i}`)
@@ -198,7 +243,7 @@ class StatsGraph extends React.Component {
 
 				div.append('p')
 					.attr('class', 'tooltip-text-top')
-					.html(`${formatTooltipDate(d.month)}<br/>Ads Blocked`);
+					.html(`${formatTooltipDate(d.month)}<br/>${this.state.tooltipText}`);
 				div.append('p')
 					.attr('class', 'tooltip-text-bottom')
 					.html(d.amount);

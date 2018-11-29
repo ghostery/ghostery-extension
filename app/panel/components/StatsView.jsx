@@ -35,7 +35,7 @@ const StatsView = (props) => {
 	} = props;
 
 	const {
-		type, view, graphTitle, summaryTitle, summaryData
+		type, view, graphTitle, summaryTitle, summaryData, selectionData
 	} = selection;
 	const {
 		trackersSeen, trackersBlocked, trackersAnonymized, adsBlocked
@@ -89,7 +89,7 @@ const StatsView = (props) => {
 				<span className="stats-top-header-reset" onClick={resetStats}>{t('panel_stats_reset')}</span>
 				<span className="clear-float" />
 			</div>
-			<StatsGraph />
+			<StatsGraph dataType={view} data={selectionData} />
 			<div className="tab-header">
 				<div className="tab-container">
 					<div className="tab-header-title">{summaryTitle}</div>
