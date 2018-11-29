@@ -1,5 +1,5 @@
 /**
- * StatsView Component
+ * Stats View Component
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -19,7 +19,7 @@ import StatsGraph from './BuildingBlocks/StatsGraph';
 
 /**
  * A Functional React component for rendering the Stats View
- * @return {JSX} JSX for rendering the Home View of the Hub app
+ * @return {JSX} JSX for rendering the Stats View
  * @memberof PanelClasses
  */
 const StatsView = (props) => {
