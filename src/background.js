@@ -62,6 +62,7 @@ const {
 	CDN_SUB_DOMAIN, BROWSER_INFO, IS_CLIQZ, DEBUG
 } = globals;
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
+const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
 const VERSION_CHECK_URL = `https://${CDN_SUB_DOMAIN}.ghostery.com/update/version`;
 const OFFERS_HANDLER_ID = 'ghostery';
 const REAL_ESTATE_ID = 'ghostery';
@@ -1416,7 +1417,8 @@ function initializePopup() {
  */
 function addCommonGhosteryAndAntitrackingListeners() {
 	let urlFilters = ['http://*/*', 'https://*/*', 'ws://*/*', 'wss://*/*'];
-	if (IS_EDGE) {
+	if (IS_EDGE || IS_FIREFOX) {
+		// Prevent Firefox from asking users to re-validate permissions on upgrade
 		// Edge doesn't support WebSockets
 		urlFilters = urlFilters.reduce((accumulator, currentValue) => {
 			if (!currentValue.match(/^wss?:\/\//)) {
