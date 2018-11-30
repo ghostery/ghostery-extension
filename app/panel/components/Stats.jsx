@@ -109,6 +109,7 @@ class Stats extends React.Component {
 				type: 'cumulative',
 				view: 'trackersSeen',
 				graphTitle: this.getGraphTitle('cumulative', 'trackersSeen'),
+				graphIconPath: this.getGraphIconPath('trackersSeen'),
 				summaryTitle: this.getSummaryTitle('cumulative'),
 				tooltipText: t('panel_stats_trackers_seen'),
 				summaryData: {},
@@ -120,6 +121,7 @@ class Stats extends React.Component {
 			cumulativeData: {},
 			monthlyAverageData: {},
 			dailyAverageData: {},
+			showResetModal: false,
 		};
 
 		// event bindings
@@ -243,12 +245,8 @@ class Stats extends React.Component {
 				state.dailyData = dailyData;
 				state.monthlyData = monthlyData;
 				state.selection.summaryData = state.cumulativeData;
-<<<<<<< HEAD
 
 				state.selection.currentIndex = state.monthlyData.length - 1;
-=======
-				state.selection.currentIndex = this.state.monthlyData.length - 1;
->>>>>>> 24a325fb75b70f0c726f2ced3d5d9eafab32f404
 				state.selection.selectionData = this.determineSelectionData(state);
 
 				this.setState(state, () => {
@@ -262,10 +260,6 @@ class Stats extends React.Component {
 		// 		console.log('SELECTION:', this.state);
 		// 	});
 		// });
-	}
-
-	getStats(from, to) {
-		return sendMessageInPromise('getStats', { from, to });
 	}
 
 	getAllStats() {
@@ -305,7 +299,20 @@ class Stats extends React.Component {
 
 		return '';
 	}
-
+	getGraphIconPath(view) {
+		switch (view) {
+			case 'trackersSeen':
+				return "../../app/images/panel/eye.svg";
+			case 'trackersBlocked':
+				return "../../app/images/panel/blocked.svg";
+			case 'trackersAnonymized':
+				return "../../app/images/panel/anonymized.svg";
+			case 'adsBlocked':
+				return "../../app/images/panel/adsblocked.svg";
+			default:
+				return "../../app/images/panel/eye.svg";
+		}		
+	}
 	getSummaryTitle(type) {
 		switch (type) {
 			case 'cumulative':
@@ -363,6 +370,7 @@ class Stats extends React.Component {
 			selection.view = event.currentTarget.id;
 			sendMessage('ping', selection.view);
 			selection.graphTitle = this.getGraphTitle(selection.type, selection.view);
+			selection.graphIconPath = this.getGraphIconPath(selection.view);
 			selection.summaryTitle = this.getSummaryTitle(selection.type);
 			selection.summaryData = this.getSummaryData(state, selection.type);
 			selection.tooltipText = this.getTooltipText(selection.view);
@@ -386,11 +394,14 @@ class Stats extends React.Component {
 			const lastType = selection.type === 'cumulative' ? 'monthly' : selection.type;
 			selection.type = event.currentTarget.id;
 			selection.graphTitle = this.getGraphTitle(selection.type, selection.view);
+			selection.graphIconPath = this.getGraphIconPath(selection.view);
 			selection.summaryTitle = this.getSummaryTitle(selection.type);
 			selection.summaryData = this.getSummaryData(state, selection.type);
 			sendMessage('ping', selection.type);
 
-			const { monthlyData, dailyData, currentIndex } = this.state;
+			const { monthlyData, dailyData } = state;
+			const { currentIndex } = state.selection;
+			console.log("STATE", state);
 			if (selection.type === 'daily' && lastType === 'monthly') {
 				const currentDate = dailyData[currentIndex].date;
 				for (let i = monthlyData.length - 1; i >= 0; i--) {
@@ -419,22 +430,9 @@ class Stats extends React.Component {
 	 * Determine data selection for Stats Graph according to parameters in state
 	 * Save it in state
 	 */
-<<<<<<< HEAD
-	determineSelectionData(state) {
-		let localState = {};
-		if (!state) {
-			localState = Object.assign({}, this.state);
-		} else {
-			localState = state;
-		}
-		const {
-			selection, dailyData, monthlyData
-		} = localState;
-=======
 	determineSelectionData(passedState) {
 		const state = passedState || Object.assign({}, this.state);
 		const { dailyData, monthlyData, selection } = state;
->>>>>>> 24a325fb75b70f0c726f2ced3d5d9eafab32f404
 		const data = selection.type === 'daily' ? dailyData : monthlyData;
 		const dataSlice = data.slice(selection.currentIndex - 7, selection.currentIndex - 1);
 		const selectionData = dataSlice.map((entry) => {
@@ -464,6 +462,7 @@ class Stats extends React.Component {
 
 	resetStats() {
 		console.log('RESET STATS CALLED');
+		this.setState({ showResetModal: true });
 	}
 
 	/**
@@ -474,7 +473,7 @@ class Stats extends React.Component {
 		console.log("RENDERING", this.state);
 		return (
 			<div id="content-stats">
-				<StatsView getStats={this.getStats} subscriber selection={this.state.selection} selectView={this.selectView} selectType={this.selectType} resetStats={this.resetStats} />
+				<StatsView showResetModal={this.state.showResetModal} getStats={this.getStats} subscriber selection={this.state.selection} selectView={this.selectView} selectType={this.selectType} resetStats={this.resetStats} />
 			</div>
 		);
 	}

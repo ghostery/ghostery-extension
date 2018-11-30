@@ -28,6 +28,7 @@ const StatsView = (props) => {
 	 * @return {ReactComponent}   ReactComponent instance
 	 */
 	const {
+		showResetModal,
 		selection,
 		selectType,
 		selectView,
@@ -36,8 +37,10 @@ const StatsView = (props) => {
 	} = props;
 
 	const {
-		type, view, graphTitle, summaryTitle, summaryData, selectionData, tooltipText
+		type, view, graphTitle, summaryTitle, summaryData, selectionData, tooltipText, graphIconPath
 	} = selection;
+
+	//graphIconPath = graphIconPath || "../../app/images/panel/eye.svg";
 	const {
 		trackersSeen, trackersBlocked, trackersAnonymized, adsBlocked
 	} = summaryData;
@@ -87,7 +90,7 @@ const StatsView = (props) => {
 		<div id="content-stats">
 			<div className="stats-top-header">
 				<span className="stats-top-header-title">
-					<ReactSVG path="../../app/images/panel/eye.svg" className="stats-top-header-icon" />
+					<ReactSVG path={graphIconPath} className="stats-top-header-icon" />
 					{graphTitle}
 				</span>
 				<span className="stats-top-header-reset" onClick={resetStats}>
@@ -135,6 +138,9 @@ const StatsView = (props) => {
 					<div className="tile-value"><p className={adsBlockedValueClassNames}>{subscriber ? adsBlocked : ''}</p></div>
 				</div>
 			</div>
+			{ showResetModal &&
+				<div className="modal-reset-warning" />
+			}
 		</div>
 	);
 };
