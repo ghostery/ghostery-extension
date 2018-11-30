@@ -233,30 +233,19 @@ class Stats extends React.Component {
 					trackersAnonymized,
 					adsBlocked,
 				};
-				// Day averages
-				trackersSeen = Math.floor(trackersSeen / allData.length);
-				trackersBlocked = Math.floor(trackersBlocked / allData.length);
-				trackersAnonymized = Math.floor(trackersAnonymized / allData.length);
-				adsBlocked = Math.floor(adsBlocked / allData.length);
-
+				// Daily averages
 				state.dailyAverageData = {
-					trackersSeen,
-					trackersBlocked,
-					trackersAnonymized,
-					adsBlocked,
+					trackersSeen: Math.floor(trackersSeen / allData.length),
+					trackersBlocked: Math.floor(trackersBlocked / allData.length),
+					trackersAnonymized: Math.floor(trackersAnonymized / allData.length),
+					adsBlocked: Math.floor(adsBlocked / allData.length),
 				};
 				// Monthly averages
-				// NOTE: We can calculate the averages with the cumulativeData values / monthlyData.length
-				trackersSeen = Math.floor(monthTrackersSeenArray.reduce((a, b) => (a + b), 0) / monthTrackersSeenArray.length);
-				trackersBlocked = Math.floor(monthTrackersBlockedArray.reduce((a, b) => (a + b), 0) / monthTrackersBlockedArray.length);
-				trackersAnonymized = Math.floor(monthTrackersAnonymizedArray.reduce((a, b) => (a + b), 0) / monthTrackersAnonymizedArray.length);
-				adsBlocked = Math.floor(monthAdsBlockedArray.reduce((a, b) => (a + b), 0) / monthAdsBlockedArray.length);
-
 				state.monthlyAverageData = {
-					trackersSeen,
-					trackersBlocked,
-					trackersAnonymized,
-					adsBlocked,
+					trackersSeen: Math.floor(trackersSeen / monthlyData.length),
+					trackersBlocked: Math.floor(trackersBlocked / monthlyData.length),
+					trackersAnonymized: Math.floor(trackersAnonymized / monthlyData.length),
+					adsBlocked: Math.floor(adsBlocked / monthlyData.length),
 				};
 
 				state.dailyData = dailyData;
@@ -450,7 +439,7 @@ class Stats extends React.Component {
 	 * Determine data selection for Stats Graph according to parameters in state
 	 * Save it in state
 	 */
-	determineSelectionData(state = Object.assign({}, this.state)) {
+	determineSelectionData = (state = Object.assign({}, this.state)) => {
 		const {
 			dailyData, monthlyData, cumulativeMonthlyData, selection
 		} = state;
@@ -475,7 +464,8 @@ class Stats extends React.Component {
 	 * Save it in state under currentIndex
 	 * @param {Object} event 		click event
 	 */
-	selectTimeFrame(e) {
+	selectTimeframe = (e) => {
+		console.log('WE MADE IT');
 		const state = Object.assign({}, this.state);
 		if (e.target.id === 'stats-forward') {
 			state.selection.currentIndex += 6;
@@ -516,7 +506,7 @@ class Stats extends React.Component {
 					selection={this.state.selection}
 					selectView={this.selectView}
 					selectType={this.selectType}
-					selectTimeFrame={this.selectTimeFrame}
+					selectTimeframe={this.selectTimeframe}
 					resetStats={this.resetStats}
 					doReset={this.doReset}
 					cancelReset={this.cancelReset}

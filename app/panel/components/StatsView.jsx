@@ -32,7 +32,7 @@ const StatsView = (props) => {
 		selection,
 		selectType,
 		selectView,
-		selectTimeFrame,
+		selectTimeframe,
 		resetStats,
 		subscriber,
 		doReset,
@@ -106,7 +106,7 @@ const StatsView = (props) => {
 				data={selectionData}
 				dailyOrMonthly={type}
 				tooltipText={tooltipText}
-				selectTimeFrame={selectTimeFrame}
+				selectTimeframe={selectTimeframe}
 			/>
 			<div className="tab-header">
 				<div className="tab-container">

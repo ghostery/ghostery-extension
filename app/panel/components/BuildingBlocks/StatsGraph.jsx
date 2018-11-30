@@ -251,10 +251,10 @@ class StatsGraph extends React.Component {
 			<div className="line-graph-container">
 				<div className="line-graph-ref" ref={(node) => { this.node = node; }} />
 				<div className="tooltip-container" />
-				<div id="stats-back" className="brackets" onClick={this.props.selectTimeFrame}>
+				<div id="stats-back" className="brackets" onClick={this.props.selectTimeframe}>
 					{'<'}
 				</div>
-				<div id="stats-forward" className="brackets" onClick={this.props.selectTimeFrame}>
+				<div id="stats-forward" className="brackets" onClick={this.props.selectTimeframe}>
 					{'>'}
 				</div>
 			</div>
