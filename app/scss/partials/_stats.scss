@@ -161,9 +161,65 @@
             }
         }
     }
+    .modal-reset-warning {
+        position: absolute;
+        top: 40px;
+        left: 110px;
+        width: 364px;
+        height: 208px;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+        background-color: #f7f7f7;
+        .modal-reset-content {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            .modal-reset-title {
+                display: table;
+                height: 140px; 
+                .modal-reset-title-text {
+                    display: table-cell; 
+                    vertical-align: middle; 
+                    text-align: center; 
+                    padding: 0 60px 0 60px;                    
+                    font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+                    font-weight: bold;
+                    font-size: 13px;
+                    color: #4a4a4a;
+                    &.active {
+                        font-weight: 700;
+                    }
+                }                
+            }
+        }
+        .modal-reset-buttons {
+            display: flex;
+            justify-content: center;
+        } 
 
-	.clickable { cursor: pointer; }
-	.not-clickable { cursor: not-allowed; }
+        .modal-reset-buttons-base {
+            width: 148px;
+            height: 31px;
+            border-radius: 3px;
+            border:  #00aef0 1px solid;
+            font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            line-height: 31px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .modal-reset-button-yes {
+            @extend .modal-reset-buttons-base;
+            background-color: #ffffff;
+            color: #00aef0;
+            margin-right: 10px; 
+        }
 
-
+        .modal-reset-button-no {
+            @extend .modal-reset-buttons-base;
+            background-color:#00aef0;;
+            color: #ffffff;
+            margin-left: 10px; 
+        }        
+    }
 }

@@ -1,5 +1,5 @@
 /**
- * StatsView Component
+ * Stats View Component
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -19,7 +19,7 @@ import StatsGraph from './BuildingBlocks/StatsGraph';
 
 /**
  * A Functional React component for rendering the Stats View
- * @return {JSX} JSX for rendering the Home View of the Hub app
+ * @return {JSX} JSX for rendering the Stats View
  * @memberof PanelClasses
  */
 const StatsView = (props) => {
@@ -28,17 +28,22 @@ const StatsView = (props) => {
 	 * @return {ReactComponent}   ReactComponent instance
 	 */
 	const {
+		showResetModal,
 		selection,
 		selectType,
 		selectView,
+		selectTimeFrame,
 		resetStats,
 		subscriber,
-		selectTimeFrame,
+		doReset,
+		cancelReset,
 	} = props;
 
 	const {
-		type, view, graphTitle, summaryTitle, summaryData, selectionData, tooltipText
+		type, view, graphTitle, summaryTitle, summaryData, selectionData, tooltipText, graphIconPath
 	} = selection;
+
+	// graphIconPath = graphIconPath || "../../app/images/panel/eye.svg";
 	const {
 		trackersSeen, trackersBlocked, trackersAnonymized, adsBlocked
 	} = summaryData;
@@ -88,7 +93,7 @@ const StatsView = (props) => {
 		<div id="content-stats">
 			<div className="stats-top-header">
 				<span className="stats-top-header-title">
-					<ReactSVG path="../../app/images/panel/eye.svg" className="stats-top-header-icon" />
+					<ReactSVG path={graphIconPath} className="stats-top-header-icon" />
 					{graphTitle}
 				</span>
 				<span className="stats-top-header-reset" onClick={resetStats}>
@@ -141,6 +146,18 @@ const StatsView = (props) => {
 					<div className="tile-value"><p className={adsBlockedValueClassNames}>{subscriber ? adsBlocked : ''}</p></div>
 				</div>
 			</div>
+			{ showResetModal &&
+				<div className="modal-reset-warning" >
+					<div className="modal-reset-content" >
+						<div className="modal-reset-title" >
+							<span className="modal-reset-title-text">{t('panel_stats_reset_modal_text')}</span>
+						</div>
+						<div className="modal-reset-buttons">
+							<div className="modal-reset-button-yes" onClick={doReset}>{t('modal_reset_button_text_yes')}</div><div className="modal-reset-button-no" onClick={cancelReset}>{t('modal_reset_button_text_no')}</div>
+						</div>
+					</div>
+				</div>
+			}
 		</div>
 	);
 };

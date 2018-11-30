@@ -109,6 +109,7 @@ class Stats extends React.Component {
 				type: 'cumulative',
 				view: 'trackersSeen',
 				graphTitle: this.getGraphTitle('cumulative', 'trackersSeen'),
+				graphIconPath: this.getGraphIconPath('trackersSeen'),
 				summaryTitle: this.getSummaryTitle('cumulative'),
 				tooltipText: t('panel_stats_trackers_seen'),
 				summaryData: {},
@@ -121,12 +122,8 @@ class Stats extends React.Component {
 			cumulativeData: {},
 			monthlyAverageData: {},
 			dailyAverageData: {},
+			showResetModal: false,
 		};
-
-		// event bindings
-		this.selectView = this.selectView.bind(this);
-		this.selectType = this.selectType.bind(this);
-		this.selectTimeFrame = this.selectTimeFrame.bind(this);
 	}
 
 	componentDidMount() {
@@ -282,15 +279,11 @@ class Stats extends React.Component {
 		// });
 	}
 
-	getStats(from, to) {
-		return sendMessageInPromise('getStats', { from, to });
-	}
+	getAllStats = () => (
+		sendMessageInPromise('getAllStats')
+	);
 
-	getAllStats() {
-		return sendMessageInPromise('getAllStats');
-	}
-
-	getGraphTitleBase(view) {
+	getGraphTitleBase = (view) => {
 		switch (view) {
 			case 'trackersSeen':
 				return t('panel_stats_total_trackers_seen');
@@ -305,7 +298,7 @@ class Stats extends React.Component {
 		}
 	}
 
-	getGraphTitle(type, view) {
+	getGraphTitle = (type, view) => {
 		const viewText = this.getGraphTitleBase(view);
 		if (viewText) {
 			switch (type) {
@@ -323,8 +316,21 @@ class Stats extends React.Component {
 
 		return '';
 	}
-
-	getSummaryTitle(type) {
+	getGraphIconPath = (view) => {
+		switch (view) {
+			case 'trackersSeen':
+				return '../../app/images/panel/eye.svg';
+			case 'trackersBlocked':
+				return '../../app/images/panel/blocked.svg';
+			case 'trackersAnonymized':
+				return '../../app/images/panel/anonymized.svg';
+			case 'adsBlocked':
+				return '../../app/images/panel/adsblocked.svg';
+			default:
+				return '../../app/images/panel/eye.svg';
+		}
+	}
+	getSummaryTitle = (type) => {
 		switch (type) {
 			case 'cumulative':
 				return t('panel_stats_header_title');
@@ -337,7 +343,7 @@ class Stats extends React.Component {
 		}
 	}
 
-	getSummaryData(state, type) {
+	getSummaryData = (state, type) => {
 		switch (type) {
 			case 'cumulative': {
 				return state.cumulativeData;
@@ -354,7 +360,7 @@ class Stats extends React.Component {
 		}
 	}
 
-	getTooltipText(view) {
+	getTooltipText = (view) => {
 		switch (view) {
 			case 'trackersSeen':
 				return t('panel_stats_trackers_seen');
@@ -373,7 +379,7 @@ class Stats extends React.Component {
 	 * Set view selection according to the clicked button. Save it in state.
 	 * @param {Object} event 		click event
 	 */
-	selectView(event) {
+	selectView = (event) => {
 		const state = Object.assign({}, this.state);
 		// eslint-disable-next-line prefer-destructuring
 		const selection = state.selection;
@@ -381,6 +387,7 @@ class Stats extends React.Component {
 			selection.view = event.currentTarget.id;
 			sendMessage('ping', selection.view);
 			selection.graphTitle = this.getGraphTitle(selection.type, selection.view);
+			selection.graphIconPath = this.getGraphIconPath(selection.view);
 			selection.summaryTitle = this.getSummaryTitle(selection.type);
 			selection.summaryData = this.getSummaryData(state, selection.type);
 			selection.tooltipText = this.getTooltipText(selection.view);
@@ -399,7 +406,7 @@ class Stats extends React.Component {
 	 * Update current index if switching from monthly/cumulative to daily (or reverse)
 	 * @param {Object} event 		click event
 	 */
-	selectType(event) {
+	selectType = (event) => {
 		const state = Object.assign({}, this.state);
 		// eslint-disable-next-line prefer-destructuring
 		const selection = state.selection;
@@ -407,6 +414,7 @@ class Stats extends React.Component {
 			const lastType = selection.type;
 			selection.type = event.currentTarget.id;
 			selection.graphTitle = this.getGraphTitle(selection.type, selection.view);
+			selection.graphIconPath = this.getGraphIconPath(selection.view);
 			selection.summaryTitle = this.getSummaryTitle(selection.type);
 			selection.summaryData = this.getSummaryData(state, selection.type);
 			sendMessage('ping', selection.type);
@@ -478,8 +486,19 @@ class Stats extends React.Component {
 		this.setState(state);
 	}
 
-	resetStats() {
+	resetStats = () => {
 		console.log('RESET STATS CALLED');
+		this.setState({ showResetModal: true });
+	}
+
+	doReset = () => {
+		this.setState({ showResetModal: false });
+		sendMessage('resetStats');
+	}
+
+	cancelReset = () => {
+		// Do nothing, just close the modal
+		this.setState({ showResetModal: false });
 	}
 
 	/**
@@ -487,9 +506,11 @@ class Stats extends React.Component {
 	 * @return {ReactComponent}   ReactComponent instance
 	 */
 	render() {
+		console.log('RENDERING', this.state);
 		return (
 			<div id="content-stats">
 				<StatsView
+					showResetModal={this.state.showResetModal}
 					getStats={this.getStats}
 					subscriber
 					selection={this.state.selection}
@@ -497,6 +518,8 @@ class Stats extends React.Component {
 					selectType={this.selectType}
 					selectTimeFrame={this.selectTimeFrame}
 					resetStats={this.resetStats}
+					doReset={this.doReset}
+					cancelReset={this.cancelReset}
 				/>
 			</div>
 		);
