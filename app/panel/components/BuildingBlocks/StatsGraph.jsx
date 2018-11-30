@@ -23,10 +23,6 @@ class StatsGraph extends React.Component {
 	/**
 	 * Lifecycle event
 	 */
-	componentDidMount() {
-		this.generateGraph();
-	}
-
 	componentDidUpdate() {
 		this.generateGraph();
 	}
@@ -39,10 +35,11 @@ class StatsGraph extends React.Component {
 	generateGraph() {
 		// Clear graph
 		D3.select(this.node).selectAll('*').remove();
+		D3.select('.tooltip-container').selectAll('*').remove();
 
 		// Add svg
 		const margin = {
-			top: 20, right: 40, bottom: 20, left: 40
+			top: 20, right: 40, bottom: 20, left: 60
 		};
 		const width = 560 - margin.left - margin.right;
 		const height = 280 - margin.top - margin.bottom;
@@ -55,14 +52,17 @@ class StatsGraph extends React.Component {
 			.attr('transform', `translate(${margin.left},${margin.top})`);
 
 		// Date formatting
-		/**
-		*
-		TODO: add a different parser based off of the dailyOrMonthly prop
-		*
-		*/
 		const parseMonth = D3.timeParse('%Y-%m-%d');
-		const formatLabelDate = D3.timeFormat("%b '%y");
-		const formatTooltipDate = D3.timeFormat('%b %Y');
+
+		let formatLabelDate;
+		let formatTooltipDate;
+		if (this.props.dailyOrMonthly === 'daily') {
+			formatLabelDate = D3.timeFormat('%b %d');
+			formatTooltipDate = D3.timeFormat('%b %d');
+		} else {
+			formatLabelDate = D3.timeFormat("%b '%y");
+			formatTooltipDate = D3.timeFormat('%b %Y');
+		}
 
 		const data = JSON.parse(JSON.stringify(this.props.data));
 		data.forEach((entry) => {
@@ -88,6 +88,7 @@ class StatsGraph extends React.Component {
 		const yAxis = D3.axisLeft()
 			.ticks(6)
 			.tickSize(0)
+			.tickFormat(D3.format('.2s'))
 			.scale(y);
 
 		canvas.append('g')
@@ -177,13 +178,13 @@ class StatsGraph extends React.Component {
 		canvas.selectAll('circle')
 			.each((d, i) => {
 				let tooltipFlipped = false;
-				let tooltipPositionX = x(d.date);
-				let tooltipPositionY = y(d.amount) - 80;
+				let tooltipPositionX = x(d.date) + 12.5;
+				let tooltipPositionY = y(d.amount) - 10;
 
-				if (tooltipPositionY < height / 5) {
+				if (tooltipPositionY < height / 3) {
 					tooltipFlipped = true;
-					tooltipPositionY += 138;
-					tooltipPositionX += 1;
+					tooltipPositionY += 130;
+					tooltipPositionX += 0;
 				}
 
 				const div = D3.select('.tooltip-container').append('div')
@@ -215,7 +216,7 @@ class StatsGraph extends React.Component {
 			});
 
 		// Add event listener to container for closing tooltip
-		D3.select('.line-graph-container')
+		D3.select('#content-stats')
 			.on('click', () => {
 				if (D3.event.target.className.baseVal !== 'point' &&
 				D3.event.target.className !== 'tooltip') {
@@ -228,13 +229,16 @@ class StatsGraph extends React.Component {
 				}
 			});
 
+		let additionalSeconds = 0;
+
 		// Animate data points
 		canvas.selectAll('circle')
 			.each(function (d, i) {
 				D3.select(this).transition()
 					.duration(700)
-					.delay(i * 150)
+					.delay(i * 130 + additionalSeconds)
 					.attr('r', 4.5);
+				additionalSeconds += 20;
 			});
 	}
 
@@ -243,11 +247,16 @@ class StatsGraph extends React.Component {
 	 * @return {JSX} JSX for rendering the donut-graph portion of the Summary View
 	 */
 	render() {
-		console.log('GRAPH PROPS', this.props);
 		return (
 			<div className="line-graph-container">
 				<div className="line-graph-ref" ref={(node) => { this.node = node; }} />
 				<div className="tooltip-container" />
+				<div id="stats-back" className="brackets" onClick={this.props.selectTimeFrame}>
+					{'<'}
+				</div>
+				<div id="stats-forward" className="brackets" onClick={this.props.selectTimeFrame}>
+					{'>'}
+				</div>
 			</div>
 		);
 	}

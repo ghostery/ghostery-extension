@@ -126,6 +126,7 @@ class Stats extends React.Component {
 		// event bindings
 		this.selectView = this.selectView.bind(this);
 		this.selectType = this.selectType.bind(this);
+		this.selectTimeFrame = this.selectTimeFrame.bind(this);
 	}
 
 	componentDidMount() {
@@ -384,6 +385,9 @@ class Stats extends React.Component {
 			selection.summaryData = this.getSummaryData(state, selection.type);
 			selection.tooltipText = this.getTooltipText(selection.view);
 
+			state.selection = selection;
+			selection.selectionData = this.determineSelectionData(state);
+
 			this.setState({ selection }, () => {
 				console.log('SELECTION:', this.state.selection);
 			});
@@ -400,7 +404,7 @@ class Stats extends React.Component {
 		// eslint-disable-next-line prefer-destructuring
 		const selection = state.selection;
 		if (event.currentTarget.id !== selection.type) {
-			const lastType = selection.type === 'cumulative' ? 'monthly' : selection.type;
+			const lastType = selection.type;
 			selection.type = event.currentTarget.id;
 			selection.graphTitle = this.getGraphTitle(selection.type, selection.view);
 			selection.summaryTitle = this.getSummaryTitle(selection.type);
@@ -408,7 +412,7 @@ class Stats extends React.Component {
 			sendMessage('ping', selection.type);
 
 			const { monthlyData, dailyData } = state;
-			if (selection.type === 'daily' && lastType === 'monthly') {
+			if (selection.type === 'daily' && lastType !== 'daily') {
 				const currentDate = monthlyData[selection.currentIndex].date;
 				for (let i = dailyData.length - 1; i >= 0; i--) {
 					if (dailyData[i].date === currentDate) {
@@ -416,10 +420,10 @@ class Stats extends React.Component {
 						break;
 					}
 				}
-			} else if (selection.type === 'monthly' && lastType === 'daily') {
+			} else if (selection.type !== 'daily' && lastType === 'daily') {
 				const currentDate = dailyData[selection.currentIndex].date;
 				for (let i = monthlyData.length - 1; i >= 0; i--) {
-					if (monthlyData[i].date === currentDate) {
+					if (monthlyData[i].date.slice(0, 8) === currentDate.slice(0, 8)) {
 						selection.currentIndex = i;
 						break;
 					}
@@ -438,8 +442,7 @@ class Stats extends React.Component {
 	 * Determine data selection for Stats Graph according to parameters in state
 	 * Save it in state
 	 */
-	determineSelectionData(passedState) {
-		const state = passedState || Object.assign({}, this.state);
+	determineSelectionData(state = Object.assign({}, this.state)) {
 		const {
 			dailyData, monthlyData, cumulativeMonthlyData, selection
 		} = state;
@@ -465,16 +468,14 @@ class Stats extends React.Component {
 	 * @param {Object} event 		click event
 	 */
 	selectTimeFrame(e) {
-		/**
-		*
-		TODO: This class method will be tied to click handlers on the arrows in the graph
-		*
-		*/
+		const state = Object.assign({}, this.state);
 		if (e.target.id === 'stats-forward') {
-			this.setState({ currentIndex: this.state.currentIndex + 6 });
-		} else if (e.target.id === 'stats-forward') {
-			this.setState({ currentIndex: this.state.currentIndex - 6 });
+			state.selection.currentIndex += 6;
+		} else if (e.target.id === 'stats-back') {
+			state.selection.currentIndex -= 6;
 		}
+		state.selection.selectionData = this.determineSelectionData(state);
+		this.setState(state);
 	}
 
 	resetStats() {
@@ -488,7 +489,15 @@ class Stats extends React.Component {
 	render() {
 		return (
 			<div id="content-stats">
-				<StatsView getStats={this.getStats} subscriber selection={this.state.selection} selectView={this.selectView} selectType={this.selectType} resetStats={this.resetStats} />
+				<StatsView
+					getStats={this.getStats}
+					subscriber
+					selection={this.state.selection}
+					selectView={this.selectView}
+					selectType={this.selectType}
+					selectTimeFrame={this.selectTimeFrame}
+					resetStats={this.resetStats}
+				/>
 			</div>
 		);
 	}

@@ -33,6 +33,7 @@ const StatsView = (props) => {
 		selectView,
 		resetStats,
 		subscriber,
+		selectTimeFrame,
 	} = props;
 
 	const {
@@ -96,7 +97,12 @@ const StatsView = (props) => {
 				</span>
 				<span className="clear-float" />
 			</div>
-			<StatsGraph data={selectionData} dailyOrMonthly={type} tooltipText={tooltipText} />
+			<StatsGraph
+				data={selectionData}
+				dailyOrMonthly={type}
+				tooltipText={tooltipText}
+				selectTimeFrame={selectTimeFrame}
+			/>
 			<div className="tab-header">
 				<div className="tab-container">
 					<div className="tab-header-title">{summaryTitle}</div>
