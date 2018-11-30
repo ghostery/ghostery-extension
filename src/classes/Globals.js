@@ -16,6 +16,7 @@
 import parser from 'ua-parser-js';
 
 const manifest = chrome.runtime.getManifest();
+const isCliqzBrowser = !!(chrome.runtime.isCliqz);
 /**
  * Structure which holds parameters to be used throughout the code, a.k.a. global values.
  * Most of them (but not all) are const.
@@ -31,7 +32,7 @@ class Globals {
 		this.BROWSER_INFO = {
 			displayName: '', name: '', token: '', version: '', os: 'other'
 		};
-		this.IS_CLIQZ = !!((manifest.applications && manifest.applications.gecko && manifest.applications.gecko.update_url));
+		this.IS_CLIQZ = !!((manifest.applications && manifest.applications.gecko && manifest.applications.gecko.update_url) || isCliqzBrowser);
 
 		// flags
 		this.JUST_INSTALLED = false;
