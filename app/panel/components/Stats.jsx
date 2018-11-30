@@ -243,16 +243,15 @@ class Stats extends React.Component {
 				state.dailyData = dailyData;
 				state.monthlyData = monthlyData;
 				state.selection.summaryData = state.cumulativeData;
+
+				state.selection.currentIndex = state.monthlyData.length - 1;
+				state.selection.selectionData = this.determineSelectionData(state);
+
 				this.setState(state, () => {
 					console.log('STATE:', this.state);
 				});
 			}
 		});
-
-		// eslint-disable-next-line react/no-did-mount-set-state
-		this.setState({ selection: { currentIndex: this.state.monthlyData.length - 1 } });
-
-		this.determineSelectionData();
 
 		// this.getStats(moment().subtract(30, 'days'), moment()).then((allData) => {
 		// 	this.setState({ selection, allData }, () => {
@@ -414,17 +413,23 @@ class Stats extends React.Component {
 	 * Determine data selection for Stats Graph according to parameters in state
 	 * Save it in state
 	 */
-	determineSelectionData() {
+	determineSelectionData(state) {
+		let localState = {};
+		if (!state) {
+			localState = Object.assign({}, this.state);
+		} else {
+			localState = state;
+		}
 		const {
 			selection, dailyData, monthlyData
-		} = this.state;
+		} = localState;
 		const data = selection.type === 'daily' ? dailyData : monthlyData;
 		const dataSlice = data.slice(selection.currentIndex - 7, selection.currentIndex - 1);
 		const selectionData = dataSlice.map((entry) => {
 			const parsedEntry = { amount: entry[this.state.view], date: entry.date };
 			return parsedEntry;
 		});
-		this.setState({ selection: { selectionData } });
+		return selectionData;
 	}
 
 	/**
@@ -450,6 +455,7 @@ class Stats extends React.Component {
 	 * @return {ReactComponent}   ReactComponent instance
 	 */
 	render() {
+		console.log("RENDERING", this.state);
 		return (
 			<div id="content-stats">
 				<StatsView getStats={this.getStats} subscriber selection={this.state.selection} selectView={this.selectView} selectType={this.selectType} resetStats={this.resetStats} />
