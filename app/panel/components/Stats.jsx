@@ -117,6 +117,7 @@ class Stats extends React.Component {
 			},
 			dailyData: [],
 			monthlyData: [],
+			cumulativeMonthlyData: [],
 			cumulativeData: {},
 			monthlyAverageData: {},
 			dailyAverageData: {},
@@ -148,8 +149,9 @@ class Stats extends React.Component {
 				let monthTrackersBlocked = 0;
 				let monthTrackersAnonymized = 0;
 				let monthAdsBlocked = 0;
-				const monthlyData = [];
 				const dailyData = [];
+				const monthlyData = [];
+				const cumulativeMonthlyData = [];
 				allData.forEach((dataItem) => {
 					// Day reassignments
 					dailyData.push({
@@ -159,6 +161,11 @@ class Stats extends React.Component {
 						adsBlocked: dataItem.adsBlocked,
 						date: dataItem.day,
 					});
+
+					trackersSeen += dataItem.trackersDetected;
+					trackersBlocked += dataItem.trackersBlocked;
+					trackersAnonymized += dataItem.cookiesBlocked + dataItem.fingerprintsRemoved;
+					adsBlocked += dataItem.adsBlocked;
 
 					// Monthly calculations
 					if (moment(dataItem.day).isSameOrBefore(endOfMonth)) {
@@ -179,22 +186,35 @@ class Stats extends React.Component {
 						monthTrackersAnonymized += dataItem.cookiesBlocked + dataItem.fingerprintsRemoved;
 						monthAdsBlocked += dataItem.adsBlocked;
 
+						endOfMonth = moment(dataItem.day).endOf('month');
+
 						const monthlyObj = {
-							date: beginOfMonth.format('YYYY-MM-DD'),
+							date: endOfMonth.format('YYYY-MM-DD'),
 							trackersSeen: (scale === 1) ? monthTrackersSeen : Math.floor(monthTrackersSeen * scale),
 							trackersBlocked: (scale === 1) ? monthTrackersBlocked : Math.floor(monthTrackersBlocked * scale),
 							trackersAnonymized: (scale === 1) ? monthTrackersAnonymized : Math.floor(monthTrackersAnonymized * scale),
 							adsBlocked: (scale === 1) ? monthAdsBlocked : Math.floor(monthAdsBlocked * scale),
 						};
 
+						const cumulativeMonthlyObj = {
+							date: endOfMonth.format('YYYY-MM-DD'),
+							trackersSeen,
+							trackersBlocked,
+							trackersAnonymized,
+							adsBlocked,
+						};
+
+						// Use data below to create cumulativeMonthlyData array
+						// NOTE: May not need this array for averages (see below)
 						monthTrackersSeenArray.push(monthlyObj.trackersSeen);
 						monthTrackersBlockedArray.push(monthlyObj.trackersBlocked);
 						monthTrackersAnonymizedArray.push(monthlyObj.trackersAnonymized);
 						monthAdsBlockedArray.push(monthlyObj.adsBlocked);
 
 						monthlyData.push(monthlyObj);
+						cumulativeMonthlyData.push(cumulativeMonthlyObj);
 
-						endOfMonth = moment(dataItem.day).endOf('month');
+						// endOfMonth = moment(dataItem.day).endOf('month'); // <-- moved to above
 						dayCount = 1;
 						scale = 1;
 
@@ -203,10 +223,10 @@ class Stats extends React.Component {
 						monthTrackersAnonymized = 0;
 						monthAdsBlocked = 0;
 					}
-					trackersSeen += dataItem.trackersDetected;
-					trackersBlocked += dataItem.trackersBlocked;
-					trackersAnonymized += dataItem.cookiesBlocked + dataItem.fingerprintsRemoved;
-					adsBlocked += dataItem.adsBlocked;
+					// trackersSeen += dataItem.trackersDetected; // <-- moved to above
+					// trackersBlocked += dataItem.trackersBlocked;
+					// trackersAnonymized += dataItem.cookiesBlocked + dataItem.fingerprintsRemoved;
+					// adsBlocked += dataItem.adsBlocked;
 				});
 				// Cumulative data
 				state.cumulativeData = {
@@ -228,6 +248,7 @@ class Stats extends React.Component {
 					adsBlocked,
 				};
 				// Monthly averages
+				// NOTE: We can calculate the averages with the cumulativeData values / monthlyData.length
 				trackersSeen = Math.floor(monthTrackersSeenArray.reduce((a, b) => (a + b), 0) / monthTrackersSeenArray.length);
 				trackersBlocked = Math.floor(monthTrackersBlockedArray.reduce((a, b) => (a + b), 0) / monthTrackersBlockedArray.length);
 				trackersAnonymized = Math.floor(monthTrackersAnonymizedArray.reduce((a, b) => (a + b), 0) / monthTrackersAnonymizedArray.length);
@@ -242,8 +263,9 @@ class Stats extends React.Component {
 
 				state.dailyData = dailyData;
 				state.monthlyData = monthlyData;
+				state.cumulativeMonthlyData = cumulativeMonthlyData;
 				state.selection.summaryData = state.cumulativeData;
-				state.selection.currentIndex = this.state.monthlyData.length - 1;
+				state.selection.currentIndex = monthlyData.length - 1;
 				state.selection.selectionData = this.determineSelectionData(state);
 
 				this.setState(state, () => {
@@ -385,24 +407,26 @@ class Stats extends React.Component {
 			selection.summaryData = this.getSummaryData(state, selection.type);
 			sendMessage('ping', selection.type);
 
-			const { monthlyData, dailyData, currentIndex } = this.state;
+			const { monthlyData, dailyData } = state;
 			if (selection.type === 'daily' && lastType === 'monthly') {
-				const currentDate = dailyData[currentIndex].date;
-				for (let i = monthlyData.length - 1; i >= 0; i--) {
-					if (monthlyData[i].date === currentDate) {
-						selection.currentIndex = i;
-						break;
-					}
-				}
-			} else if (selection.type === 'monthly' && lastType === 'daily') {
-				const currentDate = monthlyData[currentIndex].date;
+				const currentDate = monthlyData[selection.currentIndex].date;
 				for (let i = dailyData.length - 1; i >= 0; i--) {
 					if (dailyData[i].date === currentDate) {
 						selection.currentIndex = i;
 						break;
 					}
 				}
+			} else if (selection.type === 'monthly' && lastType === 'daily') {
+				const currentDate = dailyData[selection.currentIndex].date;
+				for (let i = monthlyData.length - 1; i >= 0; i--) {
+					if (monthlyData[i].date === currentDate) {
+						selection.currentIndex = i;
+						break;
+					}
+				}
 			}
+
+			selection.selectionData = this.determineSelectionData(state);
 
 			this.setState({ selection }, () => {
 				console.log('SELECTION:', this.state.selection);
@@ -416,8 +440,17 @@ class Stats extends React.Component {
 	 */
 	determineSelectionData(passedState) {
 		const state = passedState || Object.assign({}, this.state);
-		const { dailyData, monthlyData, selection } = state;
-		const data = selection.type === 'daily' ? dailyData : monthlyData;
+		const {
+			dailyData, monthlyData, cumulativeMonthlyData, selection
+		} = state;
+		let data;
+		if (selection.type === 'cumulative') {
+			data = cumulativeMonthlyData;
+		} else if (selection.type === 'monthly') {
+			data = monthlyData;
+		} else if (selection.type === 'daily') {
+			data = dailyData;
+		}
 		const dataSlice = data.slice(selection.currentIndex - 7, selection.currentIndex - 1);
 		const selectionData = dataSlice.map((entry) => {
 			const parsedEntry = { amount: entry[state.selection.view], date: entry.date };
