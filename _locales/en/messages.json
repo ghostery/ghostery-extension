@@ -2145,5 +2145,14 @@
 	},
 	"panel_stats_reset": {
 		"message": "Reset all stats"
+	},
+	"panel_stats_reset_modal_text": {
+		"message": "You statistics history will be reset. There is no way to recover this data. Do you want to continue?"
+	},
+	"modal_reset_button_text_yes": {
+		"message": "Yes, Reset"
+	},
+	"modal_reset_button_text_no": {
+		"message": "No, Keep History"
 	}
 }

@@ -123,10 +123,6 @@ class Stats extends React.Component {
 			dailyAverageData: {},
 			showResetModal: false,
 		};
-
-		// event bindings
-		this.selectView = this.selectView.bind(this);
-		this.selectType = this.selectType.bind(this);
 	}
 
 	componentDidMount() {
@@ -262,11 +258,11 @@ class Stats extends React.Component {
 		// });
 	}
 
-	getAllStats() {
-		return sendMessageInPromise('getAllStats');
-	}
+	getAllStats = () => (
+		sendMessageInPromise('getAllStats')
+	);
 
-	getGraphTitleBase(view) {
+	getGraphTitleBase = (view) => {
 		switch (view) {
 			case 'trackersSeen':
 				return t('panel_stats_total_trackers_seen');
@@ -281,7 +277,7 @@ class Stats extends React.Component {
 		}
 	}
 
-	getGraphTitle(type, view) {
+	getGraphTitle = (type, view) => {
 		const viewText = this.getGraphTitleBase(view);
 		if (viewText) {
 			switch (type) {
@@ -299,21 +295,21 @@ class Stats extends React.Component {
 
 		return '';
 	}
-	getGraphIconPath(view) {
+	getGraphIconPath = (view) => {
 		switch (view) {
 			case 'trackersSeen':
-				return "../../app/images/panel/eye.svg";
+				return '../../app/images/panel/eye.svg';
 			case 'trackersBlocked':
-				return "../../app/images/panel/blocked.svg";
+				return '../../app/images/panel/blocked.svg';
 			case 'trackersAnonymized':
-				return "../../app/images/panel/anonymized.svg";
+				return '../../app/images/panel/anonymized.svg';
 			case 'adsBlocked':
-				return "../../app/images/panel/adsblocked.svg";
+				return '../../app/images/panel/adsblocked.svg';
 			default:
-				return "../../app/images/panel/eye.svg";
-		}		
+				return '../../app/images/panel/eye.svg';
+		}
 	}
-	getSummaryTitle(type) {
+	getSummaryTitle = (type) => {
 		switch (type) {
 			case 'cumulative':
 				return t('panel_stats_header_title');
@@ -326,7 +322,7 @@ class Stats extends React.Component {
 		}
 	}
 
-	getSummaryData(state, type) {
+	getSummaryData = (state, type) => {
 		switch (type) {
 			case 'cumulative': {
 				return state.cumulativeData;
@@ -343,7 +339,7 @@ class Stats extends React.Component {
 		}
 	}
 
-	getTooltipText(view) {
+	getTooltipText = (view) => {
 		switch (view) {
 			case 'trackersSeen':
 				return t('panel_stats_trackers_seen');
@@ -362,7 +358,7 @@ class Stats extends React.Component {
 	 * Set view selection according to the clicked button. Save it in state.
 	 * @param {Object} event 		click event
 	 */
-	selectView(event) {
+	selectView = (event) => {
 		const state = Object.assign({}, this.state);
 		// eslint-disable-next-line prefer-destructuring
 		const selection = state.selection;
@@ -386,7 +382,7 @@ class Stats extends React.Component {
 	 * Update current index if switching from monthly/cumulative to daily (or reverse)
 	 * @param {Object} event 		click event
 	 */
-	selectType(event) {
+	selectType = (event) => {
 		const state = Object.assign({}, this.state);
 		// eslint-disable-next-line prefer-destructuring
 		const selection = state.selection;
@@ -401,7 +397,7 @@ class Stats extends React.Component {
 
 			const { monthlyData, dailyData } = state;
 			const { currentIndex } = state.selection;
-			console.log("STATE", state);
+			console.log('STATE', state);
 			if (selection.type === 'daily' && lastType === 'monthly') {
 				const currentDate = dailyData[currentIndex].date;
 				for (let i = monthlyData.length - 1; i >= 0; i--) {
@@ -430,7 +426,7 @@ class Stats extends React.Component {
 	 * Determine data selection for Stats Graph according to parameters in state
 	 * Save it in state
 	 */
-	determineSelectionData(passedState) {
+	determineSelectionData = (passedState) => {
 		const state = passedState || Object.assign({}, this.state);
 		const { dailyData, monthlyData, selection } = state;
 		const data = selection.type === 'daily' ? dailyData : monthlyData;
@@ -447,7 +443,7 @@ class Stats extends React.Component {
 	 * Save it in state under currentIndex
 	 * @param {Object} event 		click event
 	 */
-	selectTimeFrame(e) {
+	selectTimeFrame = (e) => {
 		/**
 		*
 		TODO: This class method will be tied to click handlers on the arrows in the graph
@@ -460,9 +456,19 @@ class Stats extends React.Component {
 		}
 	}
 
-	resetStats() {
+	resetStats = () => {
 		console.log('RESET STATS CALLED');
 		this.setState({ showResetModal: true });
+	}
+
+	doReset = () => {
+		this.setState({ showResetModal: false });
+		sendMessage('resetStats');
+	}
+
+	cancelReset = () => {
+		// Do nothing, just close the modal
+		this.setState({ showResetModal: false });
 	}
 
 	/**
@@ -470,10 +476,20 @@ class Stats extends React.Component {
 	 * @return {ReactComponent}   ReactComponent instance
 	 */
 	render() {
-		console.log("RENDERING", this.state);
+		console.log('RENDERING', this.state);
 		return (
 			<div id="content-stats">
-				<StatsView showResetModal={this.state.showResetModal} getStats={this.getStats} subscriber selection={this.state.selection} selectView={this.selectView} selectType={this.selectType} resetStats={this.resetStats} />
+				<StatsView
+					showResetModal={this.state.showResetModal}
+					getStats={this.getStats}
+					subscriber
+					selection={this.state.selection}
+					selectView={this.selectView}
+					selectType={this.selectType}
+					resetStats={this.resetStats}
+					doReset={this.doReset}
+					cancelReset={this.cancelReset}
+				/>
 			</div>
 		);
 	}

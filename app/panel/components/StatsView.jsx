@@ -34,13 +34,15 @@ const StatsView = (props) => {
 		selectView,
 		resetStats,
 		subscriber,
+		doReset,
+		cancelReset,
 	} = props;
 
 	const {
 		type, view, graphTitle, summaryTitle, summaryData, selectionData, tooltipText, graphIconPath
 	} = selection;
 
-	//graphIconPath = graphIconPath || "../../app/images/panel/eye.svg";
+	// graphIconPath = graphIconPath || "../../app/images/panel/eye.svg";
 	const {
 		trackersSeen, trackersBlocked, trackersAnonymized, adsBlocked
 	} = summaryData;
@@ -139,7 +141,16 @@ const StatsView = (props) => {
 				</div>
 			</div>
 			{ showResetModal &&
-				<div className="modal-reset-warning" />
+				<div className="modal-reset-warning" >
+					<div className="modal-reset-content" >
+						<div className="modal-reset-title" >
+							<span className="modal-reset-title-text">{t('panel_stats_reset_modal_text')}</span>
+						</div>
+						<div className="modal-reset-buttons">
+							<div className="modal-reset-button-yes" onClick={doReset}>{t('modal_reset_button_text_yes')}</div><div className="modal-reset-button-no" onClick={cancelReset}>{t('modal_reset_button_text_no')}</div>
+						</div>
+					</div>
+				</div>
 			}
 		</div>
 	);
