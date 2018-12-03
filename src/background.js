@@ -813,7 +813,7 @@ function onMessageHandler(request, sender, callback) {
 		// 		callback(dataArray);
 		// 	});
 		// });
-		callback(generateHistoryData(4380));
+		callback(generateHistoryData(1));
 		return true;
 	} else if (name === 'setPanelData') {
 		panelData.set(message);

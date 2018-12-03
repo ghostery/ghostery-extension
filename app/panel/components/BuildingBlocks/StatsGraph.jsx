@@ -69,18 +69,40 @@ class StatsGraph extends React.Component {
 			entry.date = parseMonth(entry.date);
 		});
 
+		let tickAmount;
+		switch (data.length) {
+			case 0:
+			case 1:
+			case 6:
+				tickAmount = data.length;
+				break;
+			case 2:
+			case 3:
+			case 4:
+			case 5:
+				tickAmount = data.length - 1;
+				break;
+			default:
+				tickAmount = 6;
+		}
+
 		// Set scales
 		const x = D3.scaleTime()
 			.range([0, width])
 			.domain(D3.extent(data, d => d.date));
 
 		const y = D3.scaleLinear()
-			.range([height, 0])
-			.domain(D3.extent(data, d => d.amount));
+			.range([height, 0]);
+		// ~ Handle axis styling for edge case of only one data point ~
+		if (data.length === 1) {
+			y.domain([0, D3.max(data, d => d.amount) * 2]);
+		} else {
+			y.domain(D3.extent(data, d => d.amount));
+		}
 
 		// Add axes
 		const xAxis = D3.axisBottom()
-			.ticks(data.length)
+			.ticks(tickAmount)
 			.tickSize(0)
 			.tickFormat(formatLabelDate)
 			.scale(x);

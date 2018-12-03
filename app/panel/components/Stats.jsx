@@ -117,6 +117,7 @@ class Stats extends React.Component {
 				currentIndex: 0,
 				timeframeSelectors: { back: 'disabled', forward: 'disabled' },
 			},
+
 			dailyData: [],
 			monthlyData: [],
 			cumulativeMonthlyData: [],
@@ -140,10 +141,6 @@ class Stats extends React.Component {
 				let endOfMonth = moment(startDate).endOf('month');
 				let dayCount = 0;
 				let scale = 1;
-				const monthTrackersSeenArray = [];
-				const monthTrackersBlockedArray = [];
-				const monthTrackersAnonymizedArray = [];
-				const monthAdsBlockedArray = [];
 				let monthTrackersSeen = 0;
 				let monthTrackersBlocked = 0;
 				let monthTrackersAnonymized = 0;
@@ -151,7 +148,7 @@ class Stats extends React.Component {
 				const dailyData = [];
 				const monthlyData = [];
 				const cumulativeMonthlyData = [];
-				allData.forEach((dataItem) => {
+				allData.forEach((dataItem, i) => {
 					// Day reassignments
 					dailyData.push({
 						trackersSeen: dataItem.trackersDetected,
@@ -167,7 +164,7 @@ class Stats extends React.Component {
 					adsBlocked += dataItem.adsBlocked;
 
 					// Monthly calculations
-					if (moment(dataItem.day).isSameOrBefore(endOfMonth)) {
+					if (moment(dataItem.day).isSameOrBefore(endOfMonth) && i !== allData.length - 1) {
 						dayCount++;
 						monthTrackersSeen += dataItem.trackersDetected;
 						monthTrackersBlocked += dataItem.trackersBlocked;
@@ -201,11 +198,6 @@ class Stats extends React.Component {
 							trackersAnonymized,
 							adsBlocked,
 						};
-
-						monthTrackersSeenArray.push(monthlyObj.trackersSeen);
-						monthTrackersBlockedArray.push(monthlyObj.trackersBlocked);
-						monthTrackersAnonymizedArray.push(monthlyObj.trackersAnonymized);
-						monthAdsBlockedArray.push(monthlyObj.adsBlocked);
 
 						monthlyData.push(monthlyObj);
 						cumulativeMonthlyData.push(cumulativeMonthlyObj);
@@ -300,6 +292,7 @@ class Stats extends React.Component {
 
 		return '';
 	}
+
 	getGraphIconPath = (view) => {
 		switch (view) {
 			case 'trackersSeen':
@@ -314,6 +307,7 @@ class Stats extends React.Component {
 				return '../../app/images/panel/eye.svg';
 		}
 	}
+
 	getSummaryTitle = (type) => {
 		switch (type) {
 			case 'cumulative':
@@ -450,7 +444,7 @@ class Stats extends React.Component {
 		} else if (selection.type === 'daily') {
 			data = dailyData;
 		}
-		const dataSlice = data.slice(selection.currentIndex - 5, selection.currentIndex + 1);
+		const dataSlice = data.length <= 6 ? data : data.slice(selection.currentIndex - 5, selection.currentIndex + 1);
 		const selectionData = dataSlice.map((entry) => {
 			const parsedEntry = { amount: entry[state.selection.view], date: entry.date };
 			return parsedEntry;
