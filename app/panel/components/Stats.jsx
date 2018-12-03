@@ -14,7 +14,7 @@
 import React from 'react';
 import moment from 'moment/min/moment-with-locales.min';
 import StatsView from './StatsView';
-import { sendMessage, sendMessageInPromise } from '../utils/msg';
+import { sendMessage, sendMessageInPromise, openSubscriptionPage } from '../utils/msg';
 /* Insights API
 	* Stats from ghostery when a navigation event happens.
 	* @param tabId int
@@ -104,33 +104,13 @@ class Stats extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {
-			selection: {
-				type: 'cumulative',
-				view: 'trackersSeen',
-				graphTitle: this.getGraphTitle('cumulative', 'trackersSeen'),
-				graphIconPath: this.getGraphIconPath('trackersSeen'),
-				summaryTitle: this.getSummaryTitle('cumulative'),
-				tooltipText: t('panel_stats_trackers_seen'),
-				summaryData: {},
-				selectionData: [],
-				currentIndex: 0,
-			},
-			dailyData: [],
-			monthlyData: [],
-			cumulativeMonthlyData: [],
-			cumulativeData: {},
-			monthlyAverageData: {},
-			dailyAverageData: {},
-			showResetModal: false,
-		};
+		this.state = this._reset();
 	}
 
 	componentDidMount() {
 		const state = Object.assign({}, this.state);
 		this.getAllStats().then((allData) => {
 			if (Array.isArray(allData) && allData.length) {
-				console.log('DATA:', allData);
 				let trackersSeen = 0;
 				let trackersBlocked = 0;
 				let trackersAnonymized = 0;
@@ -482,7 +462,7 @@ class Stats extends React.Component {
 	}
 
 	doReset = () => {
-		this.setState({ showResetModal: false });
+		this.setState(this._reset());
 		sendMessage('resetStats');
 	}
 
@@ -490,19 +470,56 @@ class Stats extends React.Component {
 		// Do nothing, just close the modal
 		this.setState({ showResetModal: false });
 	}
+	/**
+	 * Helper function to handle clicking on the Become a Subscriber button on modal
+	 */
+	subscribe = () => {
+		sendMessage('ping', 'supporter_cta_extension');
+		openSubscriptionPage();
+	}
+	/**
+	 * Helper function to handle clicking on Sign in link on modal
+	 */
+	signIn = () => {
+		this.props.history.push('/login');
+	}
 
+	_reset = () => (
+		{
+			selection: {
+				type: 'cumulative',
+				view: 'trackersSeen',
+				graphTitle: this.getGraphTitle('cumulative', 'trackersSeen'),
+				graphIconPath: this.getGraphIconPath('trackersSeen'),
+				summaryTitle: this.getSummaryTitle('cumulative'),
+				tooltipText: t('panel_stats_trackers_seen'),
+				summaryData: {},
+				selectionData: [],
+				currentIndex: 0,
+			},
+			dailyData: [],
+			monthlyData: [],
+			cumulativeMonthlyData: [],
+			cumulativeData: {},
+			monthlyAverageData: {},
+			dailyAverageData: {},
+			showResetModal: false,
+			showPitchModal: (!this.props.user || !this.props.user.subscriptionsSupporter),
+		}
+	)
 	/**
 	 * Render the expert view footer.
 	 * @return {ReactComponent}   ReactComponent instance
 	 */
 	render() {
-		console.log('RENDERING', this.state);
+		console.log('RENDERING', this.state, this.props);
 		return (
 			<div id="content-stats">
 				<StatsView
 					showResetModal={this.state.showResetModal}
+					showPitchModal={!this.props.user || !this.props.user.subscriptionsSupporter}
+					loggedIn={this.props.loggedIn}
 					getStats={this.getStats}
-					subscriber
 					selection={this.state.selection}
 					selectView={this.selectView}
 					selectType={this.selectType}
@@ -510,6 +527,8 @@ class Stats extends React.Component {
 					resetStats={this.resetStats}
 					doReset={this.doReset}
 					cancelReset={this.cancelReset}
+					subscribe={this.subscribe}
+					signIn={this.signIn}
 				/>
 			</div>
 		);

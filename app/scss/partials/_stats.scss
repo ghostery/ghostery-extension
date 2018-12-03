@@ -161,7 +161,7 @@
             }
         }
     }
-    .modal-reset-warning {
+    .modal-container {
         position: absolute;
         top: 40px;
         left: 110px;
@@ -169,35 +169,51 @@
         height: 208px;
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
         background-color: #f7f7f7;
-        .modal-reset-content {
+        .modal-content {
             display: flex;
             flex-direction: column;
             position: relative;
-            .modal-reset-title {
+            margin-top: 35px;
+            .modal-text-container {
                 display: table;
-                height: 140px; 
-                .modal-reset-title-text {
+                .modal-title-text {
                     display: table-cell; 
                     vertical-align: middle; 
                     text-align: center; 
                     padding: 0 60px 0 60px;                    
                     font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-                    font-weight: bold;
                     font-size: 13px;
                     color: #4a4a4a;
-                    &.active {
-                        font-weight: 700;
+                    font-weight: bolder;
+                    span {
+                        color: #00aef0;
                     }
+                    a {
+                        color: #00aef0;
+                        text-decoration: underline;
+                        font-weight: normal;                        
+                    }
+                } 
+                .modal-text {
+                    display: table-cell; 
+                    vertical-align: middle; 
+                    text-align: center; 
+                    padding: 0 10px 0 10px;                    
+                    font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+                    font-size: 12px;
+                    color: #00aef0;
+                    font-weight: normal;
                 }                
             }
         }
-        .modal-reset-buttons {
+        .modal-buttons-container {
             display: flex;
             justify-content: center;
+            margin: 15px 0 15px 0;
         } 
 
-        .modal-reset-buttons-base {
-            width: 148px;
+        .modal-buttons-base {
+            min-width: 148px;
             height: 31px;
             border-radius: 3px;
             border:  #00aef0 1px solid;
@@ -207,16 +223,17 @@
             line-height: 31px;
             text-align: center;
             cursor: pointer;
+            padding: 0 10px 0 10px;
         }
-        .modal-reset-button-yes {
-            @extend .modal-reset-buttons-base;
+        .modal-hollow-button {
+            @extend .modal-buttons-base;
             background-color: #ffffff;
             color: #00aef0;
             margin-right: 10px; 
         }
 
-        .modal-reset-button-no {
-            @extend .modal-reset-buttons-base;
+        .modal-filled-button {
+            @extend .modal-buttons-base;
             background-color:#00aef0;;
             color: #ffffff;
             margin-left: 10px; 

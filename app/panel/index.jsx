@@ -31,7 +31,7 @@ import configureStore from './store/configureStore';
 import Help from './components/Help';
 import About from './components/About';
 import Subscribe from './components/Subscribe';
-import Stats from './components/Stats';
+import Stats from './containers/StatsContainer';
 
 const store = configureStore();
 /**

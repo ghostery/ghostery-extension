@@ -14,6 +14,7 @@
 import React from 'react';
 import ClassNames from 'classnames';
 import ReactSVG from 'react-svg';
+import { NavLink } from 'react-router-dom';
 
 import StatsGraph from './BuildingBlocks/StatsGraph';
 
@@ -29,26 +30,28 @@ const StatsView = (props) => {
 	 */
 	const {
 		showResetModal,
+		showPitchModal,
 		selection,
 		selectType,
 		selectView,
 		selectTimeframe,
 		resetStats,
-		subscriber,
+		loggedIn,
 		doReset,
 		cancelReset,
+		subscribe,
+		signIn,
 	} = props;
 
 	const {
 		type, view, graphTitle, summaryTitle, summaryData, selectionData, tooltipText, graphIconPath
 	} = selection;
 
-	// graphIconPath = graphIconPath || "../../app/images/panel/eye.svg";
 	const {
 		trackersSeen, trackersBlocked, trackersAnonymized, adsBlocked
 	} = summaryData;
 
-	console.log('VALUES', selection, trackersSeen, trackersBlocked, trackersAnonymized, adsBlocked);
+	const subscriber = !showPitchModal;
 
 	const tabCumulative = ClassNames('tab', {
 		active: type === 'cumulative',
@@ -147,14 +150,34 @@ const StatsView = (props) => {
 				</div>
 			</div>
 			{ showResetModal &&
-				<div className="modal-reset-warning" >
-					<div className="modal-reset-content" >
-						<div className="modal-reset-title" >
-							<span className="modal-reset-title-text">{t('panel_stats_reset_modal_text')}</span>
+				<div className="modal-container" >
+					<div className="modal-content" >
+						<div className="modal-text-container" >
+							<span className="modal-title-text">{t('panel_stats_reset_modal_text')}</span>
 						</div>
-						<div className="modal-reset-buttons">
-							<div className="modal-reset-button-yes" onClick={doReset}>{t('modal_reset_button_text_yes')}</div><div className="modal-reset-button-no" onClick={cancelReset}>{t('modal_reset_button_text_no')}</div>
+						<div className="modal-buttons-container">
+							<div className="modal-hollow-button" onClick={doReset}>{t('panel_stats_reset_modal_yes')}</div><div className="modal-filled-button" onClick={cancelReset}>{t('panel_stats_reset_modal_no')}</div>
 						</div>
+					</div>
+				</div>
+			}
+			{ showPitchModal &&
+				<div className="modal-container" >
+					<div className="modal-content" >
+						<div className="modal-text-container" >
+							<span className="modal-title-text" dangerouslySetInnerHTML={{ __html: t('panel_stats_pitch_modal_text') }} />
+						</div>
+						<div className="modal-buttons-container">
+							<div className="modal-filled-button" onClick={subscribe}>{t('panel_pitch_modal_subscribe')}</div>
+						</div>
+						{ !loggedIn &&
+						<div className="modal-text-container" >
+							<div className="modal-text">
+								<span>{`${t('panel_stats_pitch_already')} `}</span>
+								<span style={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={signIn}>{t('panel_stats_pitch_sign_in')}</span>
+							</div>
+						</div>
+						}
 					</div>
 				</div>
 			}

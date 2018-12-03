@@ -2149,10 +2149,36 @@
 	"panel_stats_reset_modal_text": {
 		"message": "You statistics history will be reset. There is no way to recover this data. Do you want to continue?"
 	},
-	"modal_reset_button_text_yes": {
+	"panel_stats_reset_modal_yes": {
 		"message": "Yes, Reset"
 	},
-	"modal_reset_button_text_no": {
+	"panel_stats_reset_modal_no": {
 		"message": "No, Keep History"
+	},
+	"panel_stats_pitch_modal_text": {
+		"message": "Unlock your historical stats (and other cool perks) by upgrading to Ghostery Plus for $SPAN_START$&#36;2/month.$SPAN_END$$LINK_START$Learn More$LINK_END$",
+		"placeholders": {
+			"span_start": {
+				"content": "<span>"
+			},
+			"span_end": {
+				"content": "</span>"
+			},
+			"link_end": {
+				"content": "</a>"
+			},
+			"link_start": {
+				"content": "<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.ghostery.com/products/plus/\">"
+			}
+		}
+	},
+	"panel_stats_pitch_already": {
+		"message": "Already a Ghostery Supporter?"
+	},
+	"panel_stats_pitch_sign_in": {
+		"message": "Sign in here"
+	},
+	"panel_pitch_modal_subscribe": {
+		"message": "Get Ghostery Plus!"
 	}
 }

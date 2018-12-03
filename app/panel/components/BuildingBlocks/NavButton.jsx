@@ -27,11 +27,13 @@ const NavButton = (props) => {
 	 */
 	const {
 		path,
+		params,
 		imagePath,
 		classNames
 	} = props;
+
 	return (
-		<NavLink to={path} className={classNames} >
+		<NavLink to={{ pathname: path, params }} className={classNames} >
 			<ReactSVG path={imagePath} />
 		</NavLink>
 	);
