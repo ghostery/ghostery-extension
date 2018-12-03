@@ -2024,6 +2024,9 @@
 	"subscription_priority_support": {
 		"message": "Priority Support"
 	},
+	"subscription_history_stats": {
+		"message": "History Stats"
+	},
 	"subscribe_pitch": {
 		"message": "While Ghostery is free, you can choose to support us through a small subscription of &#36;2 per month in exchange for cool perks, such as color themes, priority help service, and more. Join our mission and subscribe!"
 	},

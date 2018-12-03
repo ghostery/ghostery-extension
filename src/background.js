@@ -815,6 +815,9 @@ function onMessageHandler(request, sender, callback) {
 		// });
 		callback(generateHistoryData(4380));
 		return true;
+	} else if (name === 'resetStats') {
+		// insights.action('clearData');
+		return false;
 	} else if (name === 'setPanelData') {
 		panelData.set(message);
 		callback();
