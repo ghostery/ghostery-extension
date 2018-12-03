@@ -44,7 +44,7 @@ const StatsView = (props) => {
 	} = props;
 
 	const {
-		type, view, graphTitle, summaryTitle, summaryData, selectionData, tooltipText, graphIconPath
+		type, view, graphTitle, summaryTitle, summaryData, selectionData, tooltipText, graphIconPath, timeframeSelectors
 	} = selection;
 
 	const {
@@ -110,6 +110,7 @@ const StatsView = (props) => {
 				dailyOrMonthly={type}
 				tooltipText={tooltipText}
 				selectTimeframe={selectTimeframe}
+				timeframeSelectors={timeframeSelectors}
 			/>
 			<div className="tab-header">
 				<div className="tab-container">

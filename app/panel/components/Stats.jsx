@@ -103,7 +103,6 @@ pushGhosteryPageStats(tabId, pageInfo, apps, bugs) {
 class Stats extends React.Component {
 	constructor(props) {
 		super(props);
-
 		this.state = this._reset();
 	}
 
@@ -119,10 +118,6 @@ class Stats extends React.Component {
 				let endOfMonth = moment(startDate).endOf('month');
 				let dayCount = 0;
 				let scale = 1;
-				const monthTrackersSeenArray = [];
-				const monthTrackersBlockedArray = [];
-				const monthTrackersAnonymizedArray = [];
-				const monthAdsBlockedArray = [];
 				let monthTrackersSeen = 0;
 				let monthTrackersBlocked = 0;
 				let monthTrackersAnonymized = 0;
@@ -130,7 +125,7 @@ class Stats extends React.Component {
 				const dailyData = [];
 				const monthlyData = [];
 				const cumulativeMonthlyData = [];
-				allData.forEach((dataItem) => {
+				allData.forEach((dataItem, i) => {
 					// Day reassignments
 					dailyData.push({
 						trackersSeen: dataItem.trackersDetected,
@@ -146,7 +141,7 @@ class Stats extends React.Component {
 					adsBlocked += dataItem.adsBlocked;
 
 					// Monthly calculations
-					if (moment(dataItem.day).isSameOrBefore(endOfMonth)) {
+					if (moment(dataItem.day).isSameOrBefore(endOfMonth) && i !== allData.length - 1) {
 						dayCount++;
 						monthTrackersSeen += dataItem.trackersDetected;
 						monthTrackersBlocked += dataItem.trackersBlocked;
@@ -164,35 +159,27 @@ class Stats extends React.Component {
 						monthTrackersAnonymized += dataItem.cookiesBlocked + dataItem.fingerprintsRemoved;
 						monthAdsBlocked += dataItem.adsBlocked;
 
-						endOfMonth = moment(dataItem.day).endOf('month');
-
 						const monthlyObj = {
-							date: endOfMonth.format('YYYY-MM-DD'),
+							date: beginOfMonth.format('YYYY-MM-DD'),
 							trackersSeen: (scale === 1) ? monthTrackersSeen : Math.floor(monthTrackersSeen * scale),
 							trackersBlocked: (scale === 1) ? monthTrackersBlocked : Math.floor(monthTrackersBlocked * scale),
 							trackersAnonymized: (scale === 1) ? monthTrackersAnonymized : Math.floor(monthTrackersAnonymized * scale),
 							adsBlocked: (scale === 1) ? monthAdsBlocked : Math.floor(monthAdsBlocked * scale),
 						};
 
+						// Cumulative data by month
 						const cumulativeMonthlyObj = {
-							date: endOfMonth.format('YYYY-MM-DD'),
+							date: beginOfMonth.format('YYYY-MM-DD'),
 							trackersSeen,
 							trackersBlocked,
 							trackersAnonymized,
 							adsBlocked,
 						};
 
-						// Use data below to create cumulativeMonthlyData array
-						// NOTE: May not need this array for averages (see below)
-						monthTrackersSeenArray.push(monthlyObj.trackersSeen);
-						monthTrackersBlockedArray.push(monthlyObj.trackersBlocked);
-						monthTrackersAnonymizedArray.push(monthlyObj.trackersAnonymized);
-						monthAdsBlockedArray.push(monthlyObj.adsBlocked);
-
 						monthlyData.push(monthlyObj);
 						cumulativeMonthlyData.push(cumulativeMonthlyObj);
 
-						// endOfMonth = moment(dataItem.day).endOf('month'); // <-- moved to above
+						endOfMonth = moment(dataItem.day).endOf('month');
 						dayCount = 1;
 						scale = 1;
 
@@ -201,12 +188,8 @@ class Stats extends React.Component {
 						monthTrackersAnonymized = 0;
 						monthAdsBlocked = 0;
 					}
-					// trackersSeen += dataItem.trackersDetected; // <-- moved to above
-					// trackersBlocked += dataItem.trackersBlocked;
-					// trackersAnonymized += dataItem.cookiesBlocked + dataItem.fingerprintsRemoved;
-					// adsBlocked += dataItem.adsBlocked;
 				});
-				// Cumulative data
+				// Cumulative data totals
 				state.cumulativeData = {
 					trackersSeen,
 					trackersBlocked,
@@ -233,6 +216,7 @@ class Stats extends React.Component {
 				state.cumulativeMonthlyData = cumulativeMonthlyData;
 				state.selection.summaryData = state.cumulativeData;
 				state.selection.currentIndex = monthlyData.length - 1;
+				state.selection.timeframeSelectors.back = monthlyData.length > 6 ? '' : 'disabled';
 				state.selection.selectionData = this.determineSelectionData(state);
 
 				this.setState(state, () => {
@@ -285,6 +269,7 @@ class Stats extends React.Component {
 
 		return '';
 	}
+
 	getGraphIconPath = (view) => {
 		switch (view) {
 			case 'trackersSeen':
@@ -299,6 +284,7 @@ class Stats extends React.Component {
 				return '../../app/images/panel/eye.svg';
 		}
 	}
+
 	getSummaryTitle = (type) => {
 		switch (type) {
 			case 'cumulative':
@@ -392,19 +378,23 @@ class Stats extends React.Component {
 			if (selection.type === 'daily' && lastType !== 'daily') {
 				const currentDate = monthlyData[selection.currentIndex].date;
 				for (let i = dailyData.length - 1; i >= 0; i--) {
-					if (dailyData[i].date === currentDate) {
+					if (dailyData[i].date.slice(0, 7) === currentDate.slice(0, 7)) {
 						selection.currentIndex = i;
 						break;
 					}
 				}
+				selection.timeframeSelectors.back = selection.currentIndex - 6 <= 0 ? 'disabled' : '';
+				selection.timeframeSelectors.forward = selection.currentIndex + 7 >= dailyData.length ? 'disabled' : '';
 			} else if (selection.type !== 'daily' && lastType === 'daily') {
 				const currentDate = dailyData[selection.currentIndex].date;
 				for (let i = monthlyData.length - 1; i >= 0; i--) {
-					if (monthlyData[i].date.slice(0, 8) === currentDate.slice(0, 8)) {
+					if (monthlyData[i].date.slice(0, 7) === currentDate.slice(0, 7)) {
 						selection.currentIndex = i;
 						break;
 					}
 				}
+				selection.timeframeSelectors.back = selection.currentIndex - 6 <= 0 ? 'disabled' : '';
+				selection.timeframeSelectors.forward = selection.currentIndex + 7 >= monthlyData.length ? 'disabled' : '';
 			}
 
 			selection.selectionData = this.determineSelectionData(state);
@@ -431,7 +421,7 @@ class Stats extends React.Component {
 		} else if (selection.type === 'daily') {
 			data = dailyData;
 		}
-		const dataSlice = data.slice(selection.currentIndex - 7, selection.currentIndex - 1);
+		const dataSlice = data.length <= 6 ? data : data.slice(selection.currentIndex - 5, selection.currentIndex + 1);
 		const selectionData = dataSlice.map((entry) => {
 			const parsedEntry = { amount: entry[state.selection.view], date: entry.date };
 			return parsedEntry;
@@ -445,19 +435,32 @@ class Stats extends React.Component {
 	 * @param {Object} event 		click event
 	 */
 	selectTimeframe = (e) => {
-		console.log('WE MADE IT');
 		const state = Object.assign({}, this.state);
+		const data = state.selection.type === 'daily' ? state.dailyData : state.monthlyData;
 		if (e.target.id === 'stats-forward') {
 			state.selection.currentIndex += 6;
+			if (state.selection.currentIndex + 1 >= data.length) {
+				state.selection.currentIndex = data.length - 1;
+				state.selection.timeframeSelectors.forward = 'disabled';
+			} else {
+				state.selection.timeframeSelectors.forward = '';
+			}
+			state.selection.timeframeSelectors.back = '';
 		} else if (e.target.id === 'stats-back') {
 			state.selection.currentIndex -= 6;
+			if (state.selection.currentIndex - 6 <= 0) {
+				state.selection.currentIndex = 5;
+				state.selection.timeframeSelectors.back = 'disabled';
+			} else {
+				state.selection.timeframeSelectors.back = '';
+			}
+			state.selection.timeframeSelectors.forward = '';
 		}
 		state.selection.selectionData = this.determineSelectionData(state);
 		this.setState(state);
 	}
 
 	resetStats = () => {
-		console.log('RESET STATS CALLED');
 		this.setState({ showResetModal: true });
 	}
 
@@ -512,7 +515,6 @@ class Stats extends React.Component {
 	 * @return {ReactComponent}   ReactComponent instance
 	 */
 	render() {
-		console.log('RENDERING', this.state, this.props);
 		return (
 			<div id="content-stats">
 				<StatsView

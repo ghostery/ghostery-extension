@@ -58,7 +58,7 @@ class StatsGraph extends React.Component {
 		let formatTooltipDate;
 		if (this.props.dailyOrMonthly === 'daily') {
 			formatLabelDate = D3.timeFormat('%b %d');
-			formatTooltipDate = D3.timeFormat('%b %d');
+			formatTooltipDate = D3.timeFormat('%b %d, %Y');
 		} else {
 			formatLabelDate = D3.timeFormat("%b '%y");
 			formatTooltipDate = D3.timeFormat('%b %Y');
@@ -69,18 +69,40 @@ class StatsGraph extends React.Component {
 			entry.date = parseMonth(entry.date);
 		});
 
+		let tickAmount;
+		switch (data.length) {
+			case 0:
+			case 1:
+			case 6:
+				tickAmount = data.length;
+				break;
+			case 2:
+			case 3:
+			case 4:
+			case 5:
+				tickAmount = data.length - 1;
+				break;
+			default:
+				tickAmount = 6;
+		}
+
 		// Set scales
 		const x = D3.scaleTime()
 			.range([0, width])
 			.domain(D3.extent(data, d => d.date));
 
 		const y = D3.scaleLinear()
-			.range([height, 0])
-			.domain([0, D3.max(data, d => d.amount)]);
+			.range([height, 0]);
+		// ~ Handle axis styling for edge case of only one data point ~
+		if (data.length === 1) {
+			y.domain([0, D3.max(data, d => d.amount) * 2]);
+		} else {
+			y.domain(D3.extent(data, d => d.amount));
+		}
 
 		// Add axes
 		const xAxis = D3.axisBottom()
-			.ticks(6)
+			.ticks(tickAmount)
 			.tickSize(0)
 			.tickFormat(formatLabelDate)
 			.scale(x);
@@ -118,7 +140,7 @@ class StatsGraph extends React.Component {
 		const line = D3.line()
 			.x(d => x(d.date))
 			.y(d => y(d.amount));
-		// .curve(D3.curveMonotoneX); // <-- Used on to smoothen data path
+			// .curve(D3.curveMonotoneX); // <-- Uncomment to smoothen data path
 
 		// ---------------------------------------------------------------------- //
 		// Animate data path using Mike Bostock's technique found here:
@@ -168,10 +190,35 @@ class StatsGraph extends React.Component {
 						.classed('selected', true)
 						.attr('r', 6);
 					D3.select(`.tooltip-${i}`)
+						.classed('clicked', true)
 						.transition()
 						.duration(300)
 						.style('opacity', 1);
 				}, 1);
+			})
+			.on('mouseenter', function (d, i) {
+				setTimeout(() => {
+					D3.select(this)
+						.classed('selected', true)
+						.attr('r', 6);
+					D3.select(`.tooltip-${i}`)
+						.transition()
+						.duration(300)
+						.style('opacity', 1);
+				}, 1);
+			})
+			.on('mouseleave', function (d, i) {
+				if (!D3.select(`.tooltip-${i}`).classed('clicked')) {
+					setTimeout(() => {
+						D3.select(this)
+							.classed('selected', false)
+							.attr('r', 4.5);
+						D3.select(`.tooltip-${i}`)
+							.transition()
+							.duration(200)
+							.style('opacity', 0);
+					}, 1);
+				}
 			});
 
 		// Add a tooltip to each data point
@@ -187,7 +234,8 @@ class StatsGraph extends React.Component {
 					tooltipPositionX += 0;
 				}
 
-				const div = D3.select('.tooltip-container').append('div')
+				const div = D3.select('.tooltip-container')
+					.append('div')
 					.attr('class', `tooltip tooltip-${i}`)
 					.style('opacity', 0)
 					.style('left', `${tooltipPositionX}px`)
@@ -223,7 +271,9 @@ class StatsGraph extends React.Component {
 					D3.selectAll('.selected')
 						.classed('selected', false)
 						.attr('r', 4.5);
-					D3.selectAll('.tooltip').transition()
+					D3.selectAll('.tooltip')
+						.classed('clicked', false)
+						.transition()
 						.duration(200)
 						.style('opacity', 0);
 				}
@@ -234,7 +284,8 @@ class StatsGraph extends React.Component {
 		// Animate data points
 		canvas.selectAll('circle')
 			.each(function (d, i) {
-				D3.select(this).transition()
+				D3.select(this)
+					.transition()
 					.duration(700)
 					.delay(i * 130 + additionalSeconds)
 					.attr('r', 4.5);
@@ -251,10 +302,18 @@ class StatsGraph extends React.Component {
 			<div className="line-graph-container">
 				<div className="line-graph-ref" ref={(node) => { this.node = node; }} />
 				<div className="tooltip-container" />
-				<div id="stats-back" className="brackets" onClick={this.props.selectTimeframe}>
+				<div
+					id="stats-back"
+					className={`bracket ${this.props.timeframeSelectors.back}`}
+					onClick={this.props.selectTimeframe}
+				>
 					{'<'}
 				</div>
-				<div id="stats-forward" className="brackets" onClick={this.props.selectTimeframe}>
+				<div
+					id="stats-forward"
+					className={`bracket ${this.props.timeframeSelectors.forward}`}
+					onClick={this.props.selectTimeframe}
+				>
 					{'>'}
 				</div>
 			</div>
