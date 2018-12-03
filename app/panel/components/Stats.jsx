@@ -499,6 +499,7 @@ class Stats extends React.Component {
 				summaryData: {},
 				selectionData: [],
 				currentIndex: 0,
+				timeframeSelectors: { back: 'disabled', forward: 'disabled' },
 			},
 			dailyData: [],
 			monthlyData: [],
