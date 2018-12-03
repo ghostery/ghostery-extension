@@ -40,6 +40,7 @@ so that you can support switching between midnight theme and regular theme */
 		pointer-events: none;
 		color: #124559;
 		border: 1.4px solid #124559;
+		z-index: 1;
 	}
 	.tooltip-text-top {
 		margin: 0px;

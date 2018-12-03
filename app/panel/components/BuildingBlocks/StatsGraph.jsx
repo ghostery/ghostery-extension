@@ -58,7 +58,7 @@ class StatsGraph extends React.Component {
 		let formatTooltipDate;
 		if (this.props.dailyOrMonthly === 'daily') {
 			formatLabelDate = D3.timeFormat('%b %d');
-			formatTooltipDate = D3.timeFormat('%b %d');
+			formatTooltipDate = D3.timeFormat('%b %d, %Y');
 		} else {
 			formatLabelDate = D3.timeFormat("%b '%y");
 			formatTooltipDate = D3.timeFormat('%b %Y');
@@ -76,11 +76,11 @@ class StatsGraph extends React.Component {
 
 		const y = D3.scaleLinear()
 			.range([height, 0])
-			.domain([0, D3.max(data, d => d.amount)]);
+			.domain(D3.extent(data, d => d.amount));
 
 		// Add axes
 		const xAxis = D3.axisBottom()
-			.ticks(6)
+			.ticks(data.length)
 			.tickSize(0)
 			.tickFormat(formatLabelDate)
 			.scale(x);
@@ -118,7 +118,7 @@ class StatsGraph extends React.Component {
 		const line = D3.line()
 			.x(d => x(d.date))
 			.y(d => y(d.amount));
-		// .curve(D3.curveMonotoneX); // <-- Used on to smoothen data path
+			// .curve(D3.curveMonotoneX); // <-- Uncomment to smoothen data path
 
 		// ---------------------------------------------------------------------- //
 		// Animate data path using Mike Bostock's technique found here:

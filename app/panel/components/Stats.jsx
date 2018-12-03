@@ -115,7 +115,7 @@ class Stats extends React.Component {
 				summaryData: {},
 				selectionData: [],
 				currentIndex: 0,
-				timeframeSelectors: { back: '', forward: 'disabled' },
+				timeframeSelectors: { back: 'disabled', forward: 'disabled' },
 			},
 			dailyData: [],
 			monthlyData: [],
@@ -247,6 +247,7 @@ class Stats extends React.Component {
 				state.cumulativeMonthlyData = cumulativeMonthlyData;
 				state.selection.summaryData = state.cumulativeData;
 				state.selection.currentIndex = monthlyData.length - 1;
+				state.selection.timeframeSelectors.back = monthlyData.length > 6 ? '' : 'disabled';
 				state.selection.selectionData = this.determineSelectionData(state);
 
 				this.setState(state, () => {
@@ -411,6 +412,8 @@ class Stats extends React.Component {
 						break;
 					}
 				}
+				selection.timeframeSelectors.back = selection.currentIndex - 6 <= 0 ? 'disabled' : '';
+				selection.timeframeSelectors.forward = selection.currentIndex + 7 >= dailyData.length ? 'disabled' : '';
 			} else if (selection.type !== 'daily' && lastType === 'daily') {
 				const currentDate = dailyData[selection.currentIndex].date;
 				for (let i = monthlyData.length - 1; i >= 0; i--) {
@@ -419,6 +422,8 @@ class Stats extends React.Component {
 						break;
 					}
 				}
+				selection.timeframeSelectors.back = selection.currentIndex - 6 <= 0 ? 'disabled' : '';
+				selection.timeframeSelectors.forward = selection.currentIndex + 7 >= monthlyData.length ? 'disabled' : '';
 			}
 
 			selection.selectionData = this.determineSelectionData(state);
@@ -460,7 +465,7 @@ class Stats extends React.Component {
 	 */
 	selectTimeframe = (e) => {
 		const state = Object.assign({}, this.state);
-		const data = state.view === 'daily' ? state.dailyData : state.monthlyData;
+		const data = state.selection.type === 'daily' ? state.dailyData : state.monthlyData;
 		if (e.target.id === 'stats-forward') {
 			state.selection.currentIndex += 6;
 			if (state.selection.currentIndex + 1 >= data.length) {
