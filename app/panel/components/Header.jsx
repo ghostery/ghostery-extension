@@ -122,7 +122,7 @@ class Header extends React.Component {
 							)}
 						</g>
 					</svg>
-					<Tooltip header={text} position="bottom" />
+					<Tooltip header={text} position="bottom-left" />
 				</div>
 			);
 		}
