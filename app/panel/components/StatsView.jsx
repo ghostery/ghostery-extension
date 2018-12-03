@@ -40,7 +40,7 @@ const StatsView = (props) => {
 	} = props;
 
 	const {
-		type, view, graphTitle, summaryTitle, summaryData, selectionData, tooltipText, graphIconPath
+		type, view, graphTitle, summaryTitle, summaryData, selectionData, tooltipText, graphIconPath, timeframeSelectors
 	} = selection;
 
 	// graphIconPath = graphIconPath || "../../app/images/panel/eye.svg";
@@ -107,6 +107,7 @@ const StatsView = (props) => {
 				dailyOrMonthly={type}
 				tooltipText={tooltipText}
 				selectTimeframe={selectTimeframe}
+				timeframeSelectors={timeframeSelectors}
 			/>
 			<div className="tab-header">
 				<div className="tab-container">

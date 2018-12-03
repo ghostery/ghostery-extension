@@ -168,10 +168,35 @@ class StatsGraph extends React.Component {
 						.classed('selected', true)
 						.attr('r', 6);
 					D3.select(`.tooltip-${i}`)
+						.classed('clicked', true)
 						.transition()
 						.duration(300)
 						.style('opacity', 1);
 				}, 1);
+			})
+			.on('mouseenter', function (d, i) {
+				setTimeout(() => {
+					D3.select(this)
+						.classed('selected', true)
+						.attr('r', 6);
+					D3.select(`.tooltip-${i}`)
+						.transition()
+						.duration(300)
+						.style('opacity', 1);
+				}, 1);
+			})
+			.on('mouseleave', function (d, i) {
+				if (!D3.select(`.tooltip-${i}`).classed('clicked')) {
+					setTimeout(() => {
+						D3.select(this)
+							.classed('selected', false)
+							.attr('r', 4.5);
+						D3.select(`.tooltip-${i}`)
+							.transition()
+							.duration(200)
+							.style('opacity', 0);
+					}, 1);
+				}
 			});
 
 		// Add a tooltip to each data point
@@ -187,7 +212,8 @@ class StatsGraph extends React.Component {
 					tooltipPositionX += 0;
 				}
 
-				const div = D3.select('.tooltip-container').append('div')
+				const div = D3.select('.tooltip-container')
+					.append('div')
 					.attr('class', `tooltip tooltip-${i}`)
 					.style('opacity', 0)
 					.style('left', `${tooltipPositionX}px`)
@@ -223,7 +249,9 @@ class StatsGraph extends React.Component {
 					D3.selectAll('.selected')
 						.classed('selected', false)
 						.attr('r', 4.5);
-					D3.selectAll('.tooltip').transition()
+					D3.selectAll('.tooltip')
+						.classed('clicked', false)
+						.transition()
 						.duration(200)
 						.style('opacity', 0);
 				}
@@ -234,7 +262,8 @@ class StatsGraph extends React.Component {
 		// Animate data points
 		canvas.selectAll('circle')
 			.each(function (d, i) {
-				D3.select(this).transition()
+				D3.select(this)
+					.transition()
 					.duration(700)
 					.delay(i * 130 + additionalSeconds)
 					.attr('r', 4.5);
@@ -251,10 +280,18 @@ class StatsGraph extends React.Component {
 			<div className="line-graph-container">
 				<div className="line-graph-ref" ref={(node) => { this.node = node; }} />
 				<div className="tooltip-container" />
-				<div id="stats-back" className="brackets" onClick={this.props.selectTimeframe}>
+				<div
+					id="stats-back"
+					className={`bracket ${this.props.timeframeSelectors.back}`}
+					onClick={this.props.selectTimeframe}
+				>
 					{'<'}
 				</div>
-				<div id="stats-forward" className="brackets" onClick={this.props.selectTimeframe}>
+				<div
+					id="stats-forward"
+					className={`bracket ${this.props.timeframeSelectors.forward}`}
+					onClick={this.props.selectTimeframe}
+				>
 					{'>'}
 				</div>
 			</div>

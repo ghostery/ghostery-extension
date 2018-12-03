@@ -79,10 +79,13 @@ so that you can support switching between midnight theme and regular theme */
 		border-top: 10px solid #f7f7f7;
 	}
 
-	.brackets {
+	.bracket {
 		position: fixed;
 		top: 351px;
 		cursor: pointer;
+	}
+	.bracket.disabled {
+		display: none;
 	}
 	#stats-back {
 		left: 31px;
