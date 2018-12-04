@@ -2175,13 +2175,16 @@
 			}
 		}
 	},
-	"panel_stats_pitch_already": {
+	"panel_stats_pitch_modal_already": {
 		"message": "Already a Ghostery Supporter?"
 	},
-	"panel_stats_pitch_sign_in": {
+	"panel_stats_pitch_modal_sign_in": {
 		"message": "Sign in here"
 	},
-	"panel_pitch_modal_subscribe": {
+	"panel_stats_pitch_modal_subscribe": {
 		"message": "Get Ghostery Plus!"
+	},
+	"panel_stats_pitch_modal_tooltip": {
+		"message": "Erase all statistics history up until this point in time."
 	}
 }
