@@ -1,3 +1,8 @@
+### GHOSTERY 8.2.6 (December 4, 2018)
+
++ Remove WebSocket permissions and filter support for Firefox
++ Minor UI tweaks
+
 ### GHOSTERY 8.2.5 (November 27, 2018)
 
 + Multiple UI fixes for Rewards panel
