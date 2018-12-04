@@ -256,6 +256,11 @@
             color: #ffffff;
             margin-left: 10px;
         }
+				&.reset-modal {
+						.modal-text-container {
+								margin-bottom: 30px;
+						}
+				}
     }
 
     %hs-tooltip {
@@ -267,7 +272,7 @@
             line-height: 14px;
          }
     }
-    
+
     .hs-tooltip-down {
         @extend %hs-tooltip;
         @extend %g-tooltip-down-left;

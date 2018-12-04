@@ -157,7 +157,7 @@ const StatsView = (props) => {
 				</div>
 			</div>
 			{ showResetModal &&
-				<div className="modal-container" >
+				<div className="modal-container reset-modal" >
 					<div className="modal-content" >
 						<div className="modal-text-container" >
 							<span className="modal-title-text">{t('panel_stats_reset_modal_text')}</span>
