@@ -6,7 +6,6 @@ so that you can support switching between midnight theme and regular theme */
 	@return '%23' + str-slice('#{$color}', 2, -1);
 }
 
-
 // Left caret SVG
 @function buildLeftCaret($color) {
 	@return url('data:image/svg+xml;charset%3dUS-ASCII,%3Csvg%20width%3D%226%22%20height%3D%2210%22%20xmlns%3D%22http://www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M1.845%205l4.052-3.938A.313.313%200%200%200%206%20.832a.312.312%200%200%200-.103-.23L5.381.1a.33.33%200%200%200-.474%200L.103%204.77A.313.313%200%200%200%200%205c0%20.087.034.164.103.23L4.907%209.9a.33.33%200%200%200%20.474%200l.516-.501A.313.313%200%200%200%206%209.169a.313.313%200%200%200-.103-.231L1.845%205z%22%20fill%3D%22#{_url-friendly-color($color)}%22%20fill-rule%3D%22evenodd%22/%3E%3C/svg%3E');
@@ -18,7 +17,7 @@ so that you can support switching between midnight theme and regular theme */
 }
 
 .line-graph-container {
-	height: 306px;
+	height: 316px;
 
 	.axis line, .axis path, .grid line {
 		stroke: #c8c7c2;
@@ -51,7 +50,7 @@ so that you can support switching between midnight theme and regular theme */
 		line-height: 16px;
 		position: fixed;
 		width: 92px;
-		height: 80px;
+		height: 82px;
 		padding: 10px 0px;
 		background-color: #f7f7f7;
 		pointer-events: none;
@@ -102,7 +101,7 @@ so that you can support switching between midnight theme and regular theme */
 
 	.caret {
 		position: fixed;
-		top: 354px;
+		top: 364px;
 		height: 10px;
 		width: 6px;
 		cursor: pointer;
@@ -111,7 +110,7 @@ so that you can support switching between midnight theme and regular theme */
 		display: none;
 	}
 	#stats-back {
-		left: 31px;
+		left: 33px;
 		background-image: buildLeftCaret(#00AEF0);
 		background-repeat: no-repeat;
 	}

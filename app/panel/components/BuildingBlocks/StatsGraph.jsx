@@ -39,10 +39,10 @@ class StatsGraph extends React.Component {
 
 		// Add svg
 		const margin = {
-			top: 20, right: 40, bottom: 20, left: 70
+			top: 18, right: 40, bottom: 20, left: 70
 		};
 		const width = 560 - margin.left - margin.right;
-		const height = 280 - margin.top - margin.bottom;
+		const height = 290 - margin.top - margin.bottom;
 
 		const canvas = D3.select(this.node).append('svg')
 			.attr('class', 'line-graph')
@@ -110,7 +110,7 @@ class StatsGraph extends React.Component {
 		const yAxis = D3.axisLeft()
 			.ticks(6)
 			.tickSize(0)
-			// .tickFormat(D3.format('.2s'))
+			// .tickFormat(D3.format('.2s')) <-- Uncomment to abbreviate y-axis labels
 			.scale(y);
 
 		canvas.append('g')
@@ -228,7 +228,7 @@ class StatsGraph extends React.Component {
 				let tooltipPositionX = x(d.date) + 22.5;
 				let tooltipPositionY = Math.ceil(y(d.amount) - 9);
 
-				if (tooltipPositionY < height / 3) {
+				if (tooltipPositionY < height / 2.5) {
 					tooltipFlipped = true;
 					tooltipPositionY += 130;
 					tooltipPositionX += 0;
