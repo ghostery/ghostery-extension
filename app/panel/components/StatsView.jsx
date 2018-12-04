@@ -101,7 +101,9 @@ const StatsView = (props) => {
 				</span>
 				<span className="stats-top-header-reset" onClick={resetStats}>
 					{t('panel_stats_reset')}
-					<ReactSVG path="../../app/images/panel/info.svg" className="stats-top-header-info-icon" />
+					<div className="hs-tooltip-down" data-g-tooltip={t('panel_stats_pitch_modal_tooltip')}>
+						<ReactSVG path="../../app/images/panel/info.svg" className="stats-top-header-info-icon" />
+					</div>
 				</span>
 				<span className="clear-float" />
 			</div>
@@ -173,13 +175,13 @@ const StatsView = (props) => {
 							<span className="modal-title-text" dangerouslySetInnerHTML={{ __html: t('panel_stats_pitch_modal_text') }} />
 						</div>
 						<div className="modal-buttons-container">
-							<div className="modal-filled-button" onClick={subscribe}>{t('panel_pitch_modal_subscribe')}</div>
+							<div className="modal-filled-button" onClick={subscribe}>{t('panel_stats_pitch_modal_subscribe')}</div>
 						</div>
 						{ !loggedIn &&
 						<div className="modal-text-container" >
 							<div className="modal-text">
-								<span>{`${t('panel_stats_pitch_already')} `}</span>
-								<span style={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={signIn}>{t('panel_stats_pitch_sign_in')}</span>
+								<span>{`${t('panel_stats_pitch_modal_already')} `}</span>
+								<span style={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={signIn}>{t('panel_stats_pitch_modal_sign_in')}</span>
 							</div>
 						</div>
 						}

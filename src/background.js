@@ -809,7 +809,7 @@ function onMessageHandler(request, sender, callback) {
 				callback(data);
 			});
 		});
-//		callback(generateHistoryData(4380));
+		//		callback(generateHistoryData(4380));
 		return true;
 	} else if (name === 'resetStats') {
 		// insights.action('clearData');
