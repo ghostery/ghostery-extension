@@ -226,7 +226,7 @@ class StatsGraph extends React.Component {
 			.each((d, i) => {
 				let tooltipFlipped = false;
 				let tooltipPositionX = x(d.date) + 22.5;
-				let tooltipPositionY = Math.ceil(y(d.amount) - 9);
+				let tooltipPositionY = Math.ceil(y(d.amount) - 12);
 
 				if (tooltipPositionY < height / 2.5) {
 					tooltipFlipped = true;
