@@ -39,7 +39,7 @@ class StatsGraph extends React.Component {
 
 		// Add svg
 		const margin = {
-			top: 20, right: 40, bottom: 20, left: 60
+			top: 20, right: 40, bottom: 20, left: 70
 		};
 		const width = 560 - margin.left - margin.right;
 		const height = 280 - margin.top - margin.bottom;
@@ -110,7 +110,7 @@ class StatsGraph extends React.Component {
 		const yAxis = D3.axisLeft()
 			.ticks(6)
 			.tickSize(0)
-			.tickFormat(D3.format('.2s'))
+			// .tickFormat(D3.format('.2s'))
 			.scale(y);
 
 		canvas.append('g')
@@ -225,13 +225,15 @@ class StatsGraph extends React.Component {
 		canvas.selectAll('circle')
 			.each((d, i) => {
 				let tooltipFlipped = false;
-				let tooltipPositionX = x(d.date) + 12.5;
-				let tooltipPositionY = y(d.amount) - 10;
+				let tooltipPositionX = x(d.date) + 22.5;
+				let tooltipPositionY = Math.ceil(y(d.amount) - 9);
 
 				if (tooltipPositionY < height / 3) {
 					tooltipFlipped = true;
 					tooltipPositionY += 130;
 					tooltipPositionX += 0;
+				} else if (this.props.view === 'trackersAnonymized') {
+					tooltipPositionY -= 16;
 				}
 
 				const div = D3.select('.tooltip-container')
@@ -240,6 +242,10 @@ class StatsGraph extends React.Component {
 					.style('opacity', 0)
 					.style('left', `${tooltipPositionX}px`)
 					.style('top', `${tooltipPositionY}px`);
+
+				if (this.props.view === 'trackersAnonymized') {
+					div.classed('long-text', true);
+				}
 
 				if (tooltipFlipped) {
 					div.append('div')

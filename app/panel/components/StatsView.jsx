@@ -108,6 +108,7 @@ const StatsView = (props) => {
 			<StatsGraph
 				data={selectionData}
 				dailyOrMonthly={type}
+				view={view}
 				tooltipText={tooltipText}
 				selectTimeframe={selectTimeframe}
 				timeframeSelectors={timeframeSelectors}
