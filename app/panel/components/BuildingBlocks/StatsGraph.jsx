@@ -310,18 +310,14 @@ class StatsGraph extends React.Component {
 				<div className="tooltip-container" />
 				<div
 					id="stats-back"
-					className={`bracket ${this.props.timeframeSelectors.back}`}
+					className={`caret ${this.props.timeframeSelectors.back}`}
 					onClick={this.props.selectTimeframe}
-				>
-					{'<'}
-				</div>
+				/>
 				<div
 					id="stats-forward"
-					className={`bracket ${this.props.timeframeSelectors.forward}`}
+					className={`caret ${this.props.timeframeSelectors.forward}`}
 					onClick={this.props.selectTimeframe}
-				>
-					{'>'}
-				</div>
+				/>
 			</div>
 		);
 	}
