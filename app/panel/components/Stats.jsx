@@ -109,15 +109,24 @@ class Stats extends React.Component {
 	componentDidMount() {
 		const state = Object.assign({}, this.state);
 		this.getAllStats().then((allData) => {
-			if (Array.isArray(allData) && allData.length) {
+			if (Array.isArray(allData)) {
+				if (allData.length === 0) {
+					allData.push({
+						day: moment().format('YYYY-MM-DD'),
+						trackersDetected: 0,
+						trackersBlocked: 0,
+						cookiesBlocked: 0,
+						fingerprintsRemoved: 0,
+						adsBlocked: 0,
+					});
+				}
 				let trackersSeen = 0;
 				let trackersBlocked = 0;
 				let trackersAnonymized = 0;
 				let adsBlocked = 0;
 				const startDate = moment(allData[0].day);
 				let endOfMonth = moment(startDate).endOf('month');
-				// let dayCount = 0;
-				// let scale = 1;
+				let prevDate = '';
 				let monthTrackersSeen = 0;
 				let monthTrackersBlocked = 0;
 				let monthTrackersAnonymized = 0;
@@ -126,6 +135,20 @@ class Stats extends React.Component {
 				const monthlyData = [];
 				const cumulativeMonthlyData = [];
 				allData.forEach((dataItem, i) => {
+					// Add zero values for nonexistent days
+					if (i !== 0) {
+						while (prevDate !== moment(dataItem.day).subtract(1, 'days').format('YYYY-MM-DD')) {
+							prevDate = moment(prevDate).add(1, 'days').format('YYYY-MM-DD');
+							dailyData.push({
+								trackersSeen: 0,
+								trackersBlocked: 0,
+								trackersAnonymized: 0,
+								adsBlocked: 0,
+								date: prevDate,
+							});
+						}
+					}
+
 					// Day reassignments
 					dailyData.push({
 						trackersSeen: dataItem.trackersDetected,
@@ -142,31 +165,17 @@ class Stats extends React.Component {
 
 					// Monthly calculations
 					if (moment(dataItem.day).isSameOrBefore(endOfMonth) && i !== allData.length - 1) {
-						// dayCount++;
 						monthTrackersSeen += dataItem.trackersDetected;
 						monthTrackersBlocked += dataItem.trackersBlocked;
 						monthTrackersAnonymized += dataItem.cookiesBlocked + dataItem.fingerprintsRemoved;
 						monthAdsBlocked += dataItem.adsBlocked;
 					} else {
 						const beginOfMonth = moment(endOfMonth).startOf('month');
-						// const monthLength = endOfMonth.diff(beginOfMonth, 'days');
-						// if (dayCount && dayCount < monthLength) {
-						// 	scale = monthLength / dayCount;
-						// }
 
 						monthTrackersSeen += dataItem.trackersDetected;
 						monthTrackersBlocked += dataItem.trackersBlocked;
 						monthTrackersAnonymized += dataItem.cookiesBlocked + dataItem.fingerprintsRemoved;
 						monthAdsBlocked += dataItem.adsBlocked;
-
-						// Old monthly object that uses scaling to predict rest of month's stats
-						// const monthlyObj = {
-						// 	date: beginOfMonth.format('YYYY-MM-DD'),
-						// 	trackersSeen: (scale === 1) ? monthTrackersSeen : Math.floor(monthTrackersSeen * scale),
-						// 	trackersBlocked: (scale === 1) ? monthTrackersBlocked : Math.floor(monthTrackersBlocked * scale),
-						// 	trackersAnonymized: (scale === 1) ? monthTrackersAnonymized : Math.floor(monthTrackersAnonymized * scale),
-						// 	adsBlocked: (scale === 1) ? monthAdsBlocked : Math.floor(monthAdsBlocked * scale),
-						// };
 
 						const monthlyObj = {
 							date: beginOfMonth.format('YYYY-MM-DD'),
@@ -189,14 +198,13 @@ class Stats extends React.Component {
 						cumulativeMonthlyData.push(cumulativeMonthlyObj);
 
 						endOfMonth = moment(dataItem.day).endOf('month');
-						// dayCount = 1;
-						// scale = 1;
 
 						monthTrackersSeen = 0;
 						monthTrackersBlocked = 0;
 						monthTrackersAnonymized = 0;
 						monthAdsBlocked = 0;
 					}
+					prevDate = dataItem.day;
 				});
 				// Cumulative data totals
 				state.cumulativeData = {
@@ -233,12 +241,6 @@ class Stats extends React.Component {
 				});
 			}
 		});
-
-		// this.getStats(moment().subtract(30, 'days'), moment()).then((allData) => {
-		// 	this.setState({ selection, allData }, () => {
-		// 		console.log('SELECTION:', this.state);
-		// 	});
-		// });
 	}
 
 	getAllStats = () => (

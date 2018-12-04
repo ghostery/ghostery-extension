@@ -168,6 +168,7 @@ class StatsGraph extends React.Component {
 			.attr('d', line)
 			.attr('fill', 'none')
 			.attr('stroke', '#124559')
+			// .attr('stroke', '#00AEF0')
 			.attr('stroke-width', 1.5)
 			.call(animator);
 		// ---------------------------------------------------------------------- //
@@ -181,6 +182,7 @@ class StatsGraph extends React.Component {
 			.append('circle')
 			.attr('class', (d, i) => `point point-${i}`)
 			.attr('fill', '#124559')
+			// .attr('fill', '#00AEF0')
 			.attr('cx', d => x(d.date))
 			.attr('cy', d => y(d.amount))
 			.attr('r', 0)

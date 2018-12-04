@@ -806,14 +806,10 @@ function onMessageHandler(request, sender, callback) {
 	} else if (name === 'getAllStats') {
 		// insights.action('getAllDays').then((data) => {
 		// 	insights.action('getStatsTimeline', moment(data[0]), moment(), true, true).then((data) => {
-		// 		const dataArray = [];
-		// 		for (let i = 0; i < 4380; i++) {
-		// 			dataArray.push(data[ 0 ]);
-		// 		}
-		// 		callback(dataArray);
+		// 		callback(data);
 		// 	});
 		// });
-		callback(generateHistoryData(4380));
+		callback(generateHistoryData(0));
 		return true;
 	} else if (name === 'resetStats') {
 		// insights.action('clearData');

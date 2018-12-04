@@ -56,6 +56,7 @@ so that you can support switching between midnight theme and regular theme */
 		pointer-events: none;
 		color: #124559;
 		border: 1.4px solid #124559;
+		// border: 1.4px solid #00AEF0;
 		z-index: 1;
 	}
 	.tooltip.long-text {
@@ -85,6 +86,7 @@ so that you can support switching between midnight theme and regular theme */
 	.pointer.top.under {
 		top: -9px;
 		border-bottom: 8px solid #124559;
+		// border-bottom: 8px solid #00AEF0;
 	}
 	.pointer.top.over {
 		top: -8px;
@@ -93,6 +95,7 @@ so that you can support switching between midnight theme and regular theme */
 	.pointer.bottom.under {
 		bottom: -9px;
 		border-top: 8px solid #124559;
+		// border-top: 8px solid #00AEF0;
 	}
 	.pointer.bottom.over {
 		bottom: -8px;
