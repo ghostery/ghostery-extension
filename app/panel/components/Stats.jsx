@@ -392,8 +392,8 @@ class Stats extends React.Component {
 						break;
 					}
 				}
-				selection.timeframeSelectors.back = selection.currentIndex - 6 <= 0 ? 'disabled' : '';
-				selection.timeframeSelectors.forward = selection.currentIndex + 7 >= dailyData.length ? 'disabled' : '';
+				selection.timeframeSelectors.back = selection.currentIndex === 0 ? 'disabled' : '';
+				selection.timeframeSelectors.forward = selection.currentIndex + 1 === dailyData.length ? 'disabled' : '';
 			} else if (selection.type !== 'daily' && lastType === 'daily') {
 				const currentDate = dailyData[selection.currentIndex].date;
 				for (let i = monthlyData.length - 1; i >= 0; i--) {
@@ -402,8 +402,8 @@ class Stats extends React.Component {
 						break;
 					}
 				}
-				selection.timeframeSelectors.back = selection.currentIndex - 6 <= 0 ? 'disabled' : '';
-				selection.timeframeSelectors.forward = selection.currentIndex + 7 >= monthlyData.length ? 'disabled' : '';
+				selection.timeframeSelectors.back = selection.currentIndex === 0 ? 'disabled' : '';
+				selection.timeframeSelectors.forward = selection.currentIndex + 1 === monthlyData.length ? 'disabled' : '';
 			}
 
 			selection.selectionData = this.determineSelectionData(state);
