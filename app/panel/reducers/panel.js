@@ -123,11 +123,14 @@ export default (state = initialState, action) => {
 			return Object.assign({}, state, updated);
 		}
 		case REGISTER_SUCCESS: {
-			action.payload.text = t('panel_email_verification_sent', action.payload.email);
+			const { email } = action.payload;
+			action.payload.text = t('panel_email_verification_sent', email);
 			action.payload.classes = 'success';
 			action.payload.overrideNotificationShown = true;
 			const updated = _showNotification(state, action);
-			return Object.assign({}, state, updated);
+			return Object.assign({}, state, updated, {
+				email
+			});
 		}
 		case REGISTER_FAIL: {
 			const { errors } = action.payload;
