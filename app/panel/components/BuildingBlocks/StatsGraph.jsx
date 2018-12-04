@@ -259,7 +259,7 @@ class StatsGraph extends React.Component {
 					.html(`${formatTooltipDate(d.date)}<br/>${this.props.tooltipText}`);
 				div.append('p')
 					.attr('class', 'tooltip-text-bottom')
-					.html(d.amount);
+					.html(D3.format(',')(d.amount));
 
 				if (!tooltipFlipped) {
 					div.append('div')
