@@ -1,7 +1,23 @@
-/* NOTE: may need to use color variables in CSS rather than D3 code accessors
+/* NOTE: will need to use color variables in CSS rather than D3 code accessors
 so that you can support switching between midnight theme and regular theme */
+
+// Function helper with color variables
+@function _url-friendly-color($color) {
+	@return '%23' + str-slice('#{$color}', 2, -1);
+}
+
+// Left caret SVG
+@function buildLeftCaret($color) {
+	@return url('data:image/svg+xml;charset%3dUS-ASCII,%3Csvg%20width%3D%226%22%20height%3D%2210%22%20xmlns%3D%22http://www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M1.845%205l4.052-3.938A.313.313%200%200%200%206%20.832a.312.312%200%200%200-.103-.23L5.381.1a.33.33%200%200%200-.474%200L.103%204.77A.313.313%200%200%200%200%205c0%20.087.034.164.103.23L4.907%209.9a.33.33%200%200%200%20.474%200l.516-.501A.313.313%200%200%200%206%209.169a.313.313%200%200%200-.103-.231L1.845%205z%22%20fill%3D%22#{_url-friendly-color($color)}%22%20fill-rule%3D%22evenodd%22/%3E%3C/svg%3E');
+}
+
+// Right caret SVG
+@function buildRightCaret($color) {
+	@return url('data:image/svg+xml;charset%3dUS-ASCII,%3Csvg%20width%3D%226%22%20height%3D%2210%22%20xmlns%3D%22http://www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M4.155%205L.103%201.062A.313.313%200%200%201%200%20.832C0%20.745.034.668.103.602L.619.1a.33.33%200%200%201%20.474%200l4.804%204.67A.313.313%200%200%201%206%205a.313.313%200%200%201-.103.23L1.093%209.9a.33.33%200%200%201-.474%200l-.516-.501A.313.313%200%200%201%200%209.169c0-.087.034-.164.103-.231L4.155%205z%22%20fill%3D%22#{_url-friendly-color($color)}%22%20fill-rule%3D%22evenodd%22/%3E%3C/svg%3E');
+}
+
 .line-graph-container {
-	height: 306px;
+	height: 316px;
 
 	.axis line, .axis path, .grid line {
 		stroke: #c8c7c2;
@@ -34,13 +50,16 @@ so that you can support switching between midnight theme and regular theme */
 		line-height: 16px;
 		position: fixed;
 		width: 92px;
-		height: 80px;
+		height: 82px;
 		padding: 10px 0px;
 		background-color: #f7f7f7;
 		pointer-events: none;
 		color: #124559;
 		border: 1.4px solid #124559;
 		z-index: 1;
+	}
+	.tooltip.long-text {
+		height: 96px;
 	}
 	.tooltip-text-top {
 		margin: 0px;
@@ -68,7 +87,7 @@ so that you can support switching between midnight theme and regular theme */
 		border-bottom: 8px solid #124559;
 	}
 	.pointer.top.over {
-		top: -7.6px;
+		top: -8px;
 		border-bottom: 10px solid #f7f7f7;
 	}
 	.pointer.bottom.under {
@@ -76,22 +95,28 @@ so that you can support switching between midnight theme and regular theme */
 		border-top: 8px solid #124559;
 	}
 	.pointer.bottom.over {
-		bottom: -7.6px;
+		bottom: -8px;
 		border-top: 10px solid #f7f7f7;
 	}
 
-	.bracket {
+	.caret {
 		position: fixed;
-		top: 351px;
+		top: 364px;
+		height: 10px;
+		width: 6px;
 		cursor: pointer;
 	}
-	.bracket.disabled {
+	.caret.disabled {
 		display: none;
 	}
 	#stats-back {
-		left: 31px;
+		left: 33px;
+		background-image: buildLeftCaret(#00AEF0);
+		background-repeat: no-repeat;
 	}
 	#stats-forward {
-		left: 544px;
+		left: 552px;
+		background-image: buildRightCaret(#00AEF0);
+		background-repeat: no-repeat;
 	}
 }

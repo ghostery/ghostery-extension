@@ -108,6 +108,7 @@ const StatsView = (props) => {
 			<StatsGraph
 				data={selectionData}
 				dailyOrMonthly={type}
+				view={view}
 				tooltipText={tooltipText}
 				selectTimeframe={selectTimeframe}
 				timeframeSelectors={timeframeSelectors}
@@ -137,14 +138,17 @@ const StatsView = (props) => {
 					<div className="tile-title"><p className={trackersSeenClassNames}>{t('panel_stats_trackers_seen')}</p></div>
 					<div className="tile-value"><p className={trackersSeenValueClassNames}>{subscriber ? trackersSeen : ''}</p></div>
 				</div>
+				<div className="tile-divider" />
 				<div id="trackersBlocked" className="tile" onClick={selectView} >
 					<div className="tile-title"><p className={trackersBlockedClassNames}>{t('panel_stats_trackers_blocked')}</p></div>
 					<div className="tile-value"><p className={trackersBlockedValueClassNames}>{subscriber ? trackersBlocked : ''}</p></div>
 				</div>
+				<div className="tile-divider" />
 				<div id="trackersAnonymized" className="tile" onClick={selectView} >
 					<div className="tile-title"><p className={trackersAnonymizedClassNames}>{t('panel_stats_trackers_anonymized')}</p></div>
 					<div className="tile-value"><p className={trackersAnonymizedValueClassNames}>{subscriber ? trackersAnonymized : ''}</p></div>
 				</div>
+				<div className="tile-divider" />
 				<div id="adsBlocked" className="tile" onClick={selectView} >
 					<div className="tile-title"><p className={adsBlockedClassNames}>{t('panel_stats_ads_blocked')}</p></div>
 					<div className="tile-value"><p className={adsBlockedValueClassNames}>{subscriber ? adsBlocked : ''}</p></div>
@@ -157,7 +161,7 @@ const StatsView = (props) => {
 							<span className="modal-title-text">{t('panel_stats_reset_modal_text')}</span>
 						</div>
 						<div className="modal-buttons-container">
-							<div className="modal-hollow-button" onClick={doReset}>{t('panel_stats_reset_modal_yes')}</div><div className="modal-filled-button" onClick={cancelReset}>{t('panel_stats_reset_modal_no')}</div>
+							<div className="modal-hollow-button" onClick={doReset}><p>{t('panel_stats_reset_modal_yes')}</p></div><div className="modal-filled-button" onClick={cancelReset}><p>{t('panel_stats_reset_modal_no')}</p></div>
 						</div>
 					</div>
 				</div>

@@ -116,8 +116,8 @@ class Stats extends React.Component {
 				let adsBlocked = 0;
 				const startDate = moment(allData[0].day);
 				let endOfMonth = moment(startDate).endOf('month');
-				let dayCount = 0;
-				let scale = 1;
+				// let dayCount = 0;
+				// let scale = 1;
 				let monthTrackersSeen = 0;
 				let monthTrackersBlocked = 0;
 				let monthTrackersAnonymized = 0;
@@ -142,29 +142,38 @@ class Stats extends React.Component {
 
 					// Monthly calculations
 					if (moment(dataItem.day).isSameOrBefore(endOfMonth) && i !== allData.length - 1) {
-						dayCount++;
+						// dayCount++;
 						monthTrackersSeen += dataItem.trackersDetected;
 						monthTrackersBlocked += dataItem.trackersBlocked;
 						monthTrackersAnonymized += dataItem.cookiesBlocked + dataItem.fingerprintsRemoved;
 						monthAdsBlocked += dataItem.adsBlocked;
 					} else {
 						const beginOfMonth = moment(endOfMonth).startOf('month');
-						const monthLength = endOfMonth.diff(beginOfMonth, 'days');
-						if (dayCount && dayCount < monthLength) {
-							scale = monthLength / dayCount;
-						}
+						// const monthLength = endOfMonth.diff(beginOfMonth, 'days');
+						// if (dayCount && dayCount < monthLength) {
+						// 	scale = monthLength / dayCount;
+						// }
 
 						monthTrackersSeen += dataItem.trackersDetected;
 						monthTrackersBlocked += dataItem.trackersBlocked;
 						monthTrackersAnonymized += dataItem.cookiesBlocked + dataItem.fingerprintsRemoved;
 						monthAdsBlocked += dataItem.adsBlocked;
 
+						// Old monthly object that uses scaling to predict rest of month's stats
+						// const monthlyObj = {
+						// 	date: beginOfMonth.format('YYYY-MM-DD'),
+						// 	trackersSeen: (scale === 1) ? monthTrackersSeen : Math.floor(monthTrackersSeen * scale),
+						// 	trackersBlocked: (scale === 1) ? monthTrackersBlocked : Math.floor(monthTrackersBlocked * scale),
+						// 	trackersAnonymized: (scale === 1) ? monthTrackersAnonymized : Math.floor(monthTrackersAnonymized * scale),
+						// 	adsBlocked: (scale === 1) ? monthAdsBlocked : Math.floor(monthAdsBlocked * scale),
+						// };
+
 						const monthlyObj = {
 							date: beginOfMonth.format('YYYY-MM-DD'),
-							trackersSeen: (scale === 1) ? monthTrackersSeen : Math.floor(monthTrackersSeen * scale),
-							trackersBlocked: (scale === 1) ? monthTrackersBlocked : Math.floor(monthTrackersBlocked * scale),
-							trackersAnonymized: (scale === 1) ? monthTrackersAnonymized : Math.floor(monthTrackersAnonymized * scale),
-							adsBlocked: (scale === 1) ? monthAdsBlocked : Math.floor(monthAdsBlocked * scale),
+							trackersSeen: monthTrackersSeen,
+							trackersBlocked: monthTrackersBlocked,
+							trackersAnonymized: monthTrackersAnonymized,
+							adsBlocked: monthAdsBlocked,
 						};
 
 						// Cumulative data by month
@@ -180,8 +189,8 @@ class Stats extends React.Component {
 						cumulativeMonthlyData.push(cumulativeMonthlyObj);
 
 						endOfMonth = moment(dataItem.day).endOf('month');
-						dayCount = 1;
-						scale = 1;
+						// dayCount = 1;
+						// scale = 1;
 
 						monthTrackersSeen = 0;
 						monthTrackersBlocked = 0;
