@@ -15,86 +15,7 @@ import React from 'react';
 import moment from 'moment/min/moment-with-locales.min';
 import StatsView from './StatsView';
 import { sendMessage, sendMessageInPromise, openSubscriptionPage } from '../utils/msg';
-/* Insights API
-	* Stats from ghostery when a navigation event happens.
-	* @param tabId int
-	* @param pageInfo Object: {
-	*  timestamp: when page navigation was started
-	*  pageTiming: {
-	*    timing: {
-	*      navigationStart: from performance api
-	*      loadEventEnd: from performance api
-	*    }
-	*  },
-	*  host: first party hostname
-	* }
-	* @param apps Array [{
-	*  id: app ID,
-	*  blocked: Boolean,
-	*  sources: Array [{ src: string url, blocked: boolean }]
-	* }, ...]
-	* @param bugs Object {
-	*  [bug ID]: {
-	*    blocked: Boolean,
-	*    sources: Array [{ src: string url, blocked: boolean }]
-	*  }
-	* }
 
-pushGhosteryPageStats(tabId, pageInfo, apps, bugs) {
-...
-	  const result = {
-		loadTime,
-		timeSaved: timeSaved(loadTime, trackersAndAdsBlocked),
-		trackersDetected: trackersSeen.size,
-		trackersBlocked: blocked,
-		trackerRequestsBlocked: requestsBlocked,
-		cookiesBlocked: cookies,
-		fingerprintsRemoved: fingerprints,
-		adsBlocked: ads,
-		dataSaved,
-		trackers: trackersSeen
-	  };
-  },
-
-  getDashboardStats(period) {
-	var _this6 = this;
-
-	return _asyncToGenerator(function* () {
-	  return _this6.db.getDashboardStats(period);
-	})();
-  },
-
-   * Get an array of daily summaries for a date range.
-   * @param from lower bound for day search in moment compatible format
-   * @param to upper bound for day search in moment compatible format
-   * @param includeFrom if true, the 'from' day should be included in the results
-   * @param includeTo if true, the 'to' day should be included in the results
-   * @returns Array of stat objects for the specified time period
-
-  getStatsTimeline(from, to, includeFrom, includeTo) {
-
-  },
-
-   * Get stats object for a specific day
-   * @param day moment-compatible date.
-   *
-  getStatsForDay(day) {
-  },
-
-   * Get an array of days for which there exists insights stats.
-  getAllDays() {
-	var _this9 = this;
-
-	return _asyncToGenerator(function* () {
-	  return _this9.db.getAllDays();
-	})();
-  },
-
-  clearData() {
-  },
-
-  recordPageInfo(info, sender) {
-} */
 /**
  * @class Implement footer of the detailed (expert) view which
  * acts as a menu and opens additional views.
@@ -107,8 +28,292 @@ class Stats extends React.Component {
 	}
 
 	componentDidMount() {
+		if (!this._isSupporter(this.props)) {
+			return;
+		}
+		this._init();
+	}
+
+	componentWillReceiveProps(nextProps) {
+		const nextSupporter = this._isSupporter(nextProps);
+		const thisSupporter = this._isSupporter(this.props);
+		if (nextSupporter !== thisSupporter) {
+			if (nextSupporter) {
+				this._init();
+			} else {
+				this.setState(this._reset());
+			}
+		}
+	}
+
+	getGraphTitleBase = (view) => {
+		switch (view) {
+			case 'trackersSeen':
+				return t('panel_stats_total_trackers_seen');
+			case 'trackersBlocked':
+				return t('panel_stats_total_trackers_blocked');
+			case 'trackersAnonymized':
+				return t('panel_stats_total_trackers_anonymized');
+			case 'adsBlocked':
+				return t('panel_stats_total_ads_blocked');
+			default:
+				return '';
+		}
+	}
+
+	getGraphTitle = (type, view) => {
+		const viewText = this.getGraphTitleBase(view);
+		if (viewText) {
+			switch (type) {
+				case 'cumulative':
+					return `${viewText} (${t('panel_stats_cumulative')})`;
+				case 'monthly':
+					return `${viewText} (${t('panel_stats_monthly')})`;
+				case 'daily':
+					return `${viewText} (${t('panel_stats_daily')})`;
+				default: {
+					return viewText;
+				}
+			}
+		}
+
+		return '';
+	}
+
+	getGraphIconPath = (view) => {
+		switch (view) {
+			case 'trackersSeen':
+				return '../../app/images/panel/eye.svg';
+			case 'trackersBlocked':
+				return '../../app/images/panel/blocked.svg';
+			case 'trackersAnonymized':
+				return '../../app/images/panel/anonymized.svg';
+			case 'adsBlocked':
+				return '../../app/images/panel/adsblocked.svg';
+			default:
+				return '../../app/images/panel/eye.svg';
+		}
+	}
+
+	getSummaryTitle = (type) => {
+		switch (type) {
+			case 'cumulative':
+				return t('panel_stats_header_title');
+			case 'monthly':
+				return t('panel_stats_header_title_monthly');
+			case 'daily':
+				return t('panel_stats_header_title_daily');
+			default:
+				return t('panel_stats_header_title');
+		}
+	}
+
+	getSummaryData = (state, type) => {
+		switch (type) {
+			case 'cumulative': {
+				return state.cumulativeData;
+			}
+			case 'monthly': {
+				return state.monthlyAverageData;
+			}
+			case 'daily': {
+				return state.dailyAverageData;
+			}
+			default: {
+				return {};
+			}
+		}
+	}
+
+	getTooltipText = (view) => {
+		switch (view) {
+			case 'trackersSeen':
+				return t('panel_stats_trackers_seen');
+			case 'trackersBlocked':
+				return t('panel_stats_trackers_blocked');
+			case 'trackersAnonymized':
+				return t('panel_stats_trackers_anonymized');
+			case 'adsBlocked':
+				return t('panel_stats_ads_blocked');
+			default:
+				return t('panel_stats_trackers_seen');
+		}
+	}
+
+	/**
+	 * Set view selection according to the clicked button. Save it in state.
+	 * @param {Object} event 		click event
+	 */
+	selectView = (event) => {
 		const state = Object.assign({}, this.state);
-		this.getAllStats().then((allData) => {
+		// eslint-disable-next-line prefer-destructuring
+		const selection = state.selection;
+		if (event.currentTarget.id !== selection.view) {
+			selection.view = event.currentTarget.id;
+			sendMessage('ping', selection.view);
+			selection.graphTitle = this.getGraphTitle(selection.type, selection.view);
+			selection.graphIconPath = this.getGraphIconPath(selection.view);
+			selection.summaryTitle = this.getSummaryTitle(selection.type);
+			selection.summaryData = this.getSummaryData(state, selection.type);
+			selection.tooltipText = this.getTooltipText(selection.view);
+
+			state.selection = selection;
+			selection.selectionData = this._determineSelectionData(state);
+
+			this.setState({ selection }, () => {
+				console.log('SELECTION:', this.state.selection);
+			});
+		}
+	}
+
+	/**
+	 * Set type selection according to the clicked button. Save it in state.
+	 * Update current index if switching from monthly/cumulative to daily (or reverse)
+	 * @param {Object} event 		click event
+	 */
+	selectType = (event) => {
+		if (!this._isSupporter(this.props)) {
+			return;
+		}
+		const state = Object.assign({}, this.state);
+		// eslint-disable-next-line prefer-destructuring
+		const selection = state.selection;
+		if (event.currentTarget.id !== selection.type) {
+			const lastType = selection.type;
+			selection.type = event.currentTarget.id;
+			selection.graphTitle = this.getGraphTitle(selection.type, selection.view);
+			selection.graphIconPath = this.getGraphIconPath(selection.view);
+			selection.summaryTitle = this.getSummaryTitle(selection.type);
+			selection.summaryData = this.getSummaryData(state, selection.type);
+			sendMessage('ping', selection.type);
+
+			const { monthlyData, dailyData } = state;
+			if (selection.type === 'daily' && lastType !== 'daily') {
+				const currentDate = monthlyData[selection.currentIndex].date;
+				for (let i = dailyData.length - 1; i >= 0; i--) {
+					if (dailyData[i].date.slice(0, 7) === currentDate.slice(0, 7)) {
+						selection.currentIndex = i;
+						break;
+					}
+				}
+				selection.timeframeSelectors.back = selection.currentIndex === 0 ? 'disabled' : '';
+				selection.timeframeSelectors.forward = selection.currentIndex + 1 === dailyData.length ? 'disabled' : '';
+			} else if (selection.type !== 'daily' && lastType === 'daily') {
+				const currentDate = dailyData[selection.currentIndex].date;
+				for (let i = monthlyData.length - 1; i >= 0; i--) {
+					if (monthlyData[i].date.slice(0, 7) === currentDate.slice(0, 7)) {
+						selection.currentIndex = i;
+						break;
+					}
+				}
+				selection.timeframeSelectors.back = selection.currentIndex === 0 ? 'disabled' : '';
+				selection.timeframeSelectors.forward = selection.currentIndex + 1 === monthlyData.length ? 'disabled' : '';
+			}
+
+			selection.selectionData = this._determineSelectionData(state);
+
+			this.setState({ selection }, () => {
+				console.log('SELECTION:', this.state.selection);
+			});
+		}
+	}
+
+	/**
+	 * Change time frame based on user's selection
+	 * Save it in state under currentIndex
+	 * @param {Object} event 		click event
+	 */
+	selectTimeframe = (e) => {
+		if (!this._isSupporter(this.props)) {
+			return;
+		}
+		const state = Object.assign({}, this.state);
+		const data = state.selection.type === 'daily' ? state.dailyData : state.monthlyData;
+		if (e.target.id === 'stats-forward') {
+			state.selection.currentIndex += 6;
+			if (state.selection.currentIndex + 1 >= data.length) {
+				state.selection.currentIndex = data.length - 1;
+				state.selection.timeframeSelectors.forward = 'disabled';
+			} else {
+				state.selection.timeframeSelectors.forward = '';
+			}
+			state.selection.timeframeSelectors.back = '';
+		} else if (e.target.id === 'stats-back') {
+			state.selection.currentIndex -= 6;
+			if (state.selection.currentIndex - 6 <= 0) {
+				state.selection.currentIndex = 5;
+				state.selection.timeframeSelectors.back = 'disabled';
+			} else {
+				state.selection.timeframeSelectors.back = '';
+			}
+			state.selection.timeframeSelectors.forward = '';
+		}
+		state.selection.selectionData = this._determineSelectionData(state);
+		this.setState(state);
+	}
+
+	resetStats = () => {
+		if (!this._isSupporter(this.props)) {
+			return;
+		}
+		this.setState({ showResetModal: true });
+	}
+
+	doReset = () => {
+		this.setState(this._reset());
+		sendMessage('resetStats');
+	}
+
+	cancelReset = () => {
+		// Do nothing, just close the modal
+		this.setState({ showResetModal: false });
+	}
+	/**
+	 * Helper function to handle clicking on the Become a Subscriber button on modal
+	 */
+	subscribe = () => {
+		sendMessage('ping', 'supporter_cta_extension');
+		openSubscriptionPage();
+	}
+	/**
+	 * Helper function to handle clicking on Sign in link on modal
+	 */
+	signIn = () => {
+		this.props.history.push('/login');
+	}
+
+	_reset = () => (
+		{
+			selection: {
+				type: 'cumulative',
+				view: 'trackersSeen',
+				graphTitle: this.getGraphTitle('cumulative', 'trackersSeen'),
+				graphIconPath: this.getGraphIconPath('trackersSeen'),
+				summaryTitle: this.getSummaryTitle('cumulative'),
+				tooltipText: t('panel_stats_trackers_seen'),
+				summaryData: {},
+				selectionData: [],
+				currentIndex: 0,
+				timeframeSelectors: { back: 'disabled', forward: 'disabled' },
+			},
+			dailyData: [],
+			monthlyData: [],
+			cumulativeMonthlyData: [],
+			cumulativeData: {},
+			monthlyAverageData: {},
+			dailyAverageData: {},
+			showResetModal: false,
+			showPitchModal: (!this.props.user || !this.props.user.subscriptionsSupporter),
+		}
+	)
+
+	_getAllStats = () => (
+		sendMessageInPromise('getAllStats')
+	);
+
+	_init = () => {
+		const state = Object.assign({}, this.state);
+		this._getAllStats().then((allData) => {
 			if (Array.isArray(allData)) {
 				if (allData.length === 0) {
 					allData.push({
@@ -234,7 +439,7 @@ class Stats extends React.Component {
 				state.selection.summaryData = state.cumulativeData;
 				state.selection.currentIndex = monthlyData.length - 1;
 				state.selection.timeframeSelectors.back = monthlyData.length > 6 ? '' : 'disabled';
-				state.selection.selectionData = this.determineSelectionData(state);
+				state.selection.selectionData = this._determineSelectionData(state);
 
 				this.setState(state, () => {
 					console.log('STATE:', this.state);
@@ -243,184 +448,11 @@ class Stats extends React.Component {
 		});
 	}
 
-	getAllStats = () => (
-		sendMessageInPromise('getAllStats')
-	);
-
-	getGraphTitleBase = (view) => {
-		switch (view) {
-			case 'trackersSeen':
-				return t('panel_stats_total_trackers_seen');
-			case 'trackersBlocked':
-				return t('panel_stats_total_trackers_blocked');
-			case 'trackersAnonymized':
-				return t('panel_stats_total_trackers_anonymized');
-			case 'adsBlocked':
-				return t('panel_stats_total_ads_blocked');
-			default:
-				return '';
-		}
-	}
-
-	getGraphTitle = (type, view) => {
-		const viewText = this.getGraphTitleBase(view);
-		if (viewText) {
-			switch (type) {
-				case 'cumulative':
-					return `${viewText} (${t('panel_stats_cumulative')})`;
-				case 'monthly':
-					return `${viewText} (${t('panel_stats_monthly')})`;
-				case 'daily':
-					return `${viewText} (${t('panel_stats_daily')})`;
-				default: {
-					return viewText;
-				}
-			}
-		}
-
-		return '';
-	}
-
-	getGraphIconPath = (view) => {
-		switch (view) {
-			case 'trackersSeen':
-				return '../../app/images/panel/eye.svg';
-			case 'trackersBlocked':
-				return '../../app/images/panel/blocked.svg';
-			case 'trackersAnonymized':
-				return '../../app/images/panel/anonymized.svg';
-			case 'adsBlocked':
-				return '../../app/images/panel/adsblocked.svg';
-			default:
-				return '../../app/images/panel/eye.svg';
-		}
-	}
-
-	getSummaryTitle = (type) => {
-		switch (type) {
-			case 'cumulative':
-				return t('panel_stats_header_title');
-			case 'monthly':
-				return t('panel_stats_header_title_monthly');
-			case 'daily':
-				return t('panel_stats_header_title_daily');
-			default:
-				return t('panel_stats_header_title');
-		}
-	}
-
-	getSummaryData = (state, type) => {
-		switch (type) {
-			case 'cumulative': {
-				return state.cumulativeData;
-			}
-			case 'monthly': {
-				return state.monthlyAverageData;
-			}
-			case 'daily': {
-				return state.dailyAverageData;
-			}
-			default: {
-				return {};
-			}
-		}
-	}
-
-	getTooltipText = (view) => {
-		switch (view) {
-			case 'trackersSeen':
-				return t('panel_stats_trackers_seen');
-			case 'trackersBlocked':
-				return t('panel_stats_trackers_blocked');
-			case 'trackersAnonymized':
-				return t('panel_stats_trackers_anonymized');
-			case 'adsBlocked':
-				return t('panel_stats_ads_blocked');
-			default:
-				return t('panel_stats_trackers_seen');
-		}
-	}
-
-	/**
-	 * Set view selection according to the clicked button. Save it in state.
-	 * @param {Object} event 		click event
-	 */
-	selectView = (event) => {
-		const state = Object.assign({}, this.state);
-		// eslint-disable-next-line prefer-destructuring
-		const selection = state.selection;
-		if (event.currentTarget.id !== selection.view) {
-			selection.view = event.currentTarget.id;
-			sendMessage('ping', selection.view);
-			selection.graphTitle = this.getGraphTitle(selection.type, selection.view);
-			selection.graphIconPath = this.getGraphIconPath(selection.view);
-			selection.summaryTitle = this.getSummaryTitle(selection.type);
-			selection.summaryData = this.getSummaryData(state, selection.type);
-			selection.tooltipText = this.getTooltipText(selection.view);
-
-			state.selection = selection;
-			selection.selectionData = this.determineSelectionData(state);
-
-			this.setState({ selection }, () => {
-				console.log('SELECTION:', this.state.selection);
-			});
-		}
-	}
-
-	/**
-	 * Set type selection according to the clicked button. Save it in state.
-	 * Update current index if switching from monthly/cumulative to daily (or reverse)
-	 * @param {Object} event 		click event
-	 */
-	selectType = (event) => {
-		const state = Object.assign({}, this.state);
-		// eslint-disable-next-line prefer-destructuring
-		const selection = state.selection;
-		if (event.currentTarget.id !== selection.type) {
-			const lastType = selection.type;
-			selection.type = event.currentTarget.id;
-			selection.graphTitle = this.getGraphTitle(selection.type, selection.view);
-			selection.graphIconPath = this.getGraphIconPath(selection.view);
-			selection.summaryTitle = this.getSummaryTitle(selection.type);
-			selection.summaryData = this.getSummaryData(state, selection.type);
-			sendMessage('ping', selection.type);
-
-			const { monthlyData, dailyData } = state;
-			if (selection.type === 'daily' && lastType !== 'daily') {
-				const currentDate = monthlyData[selection.currentIndex].date;
-				for (let i = dailyData.length - 1; i >= 0; i--) {
-					if (dailyData[i].date.slice(0, 7) === currentDate.slice(0, 7)) {
-						selection.currentIndex = i;
-						break;
-					}
-				}
-				selection.timeframeSelectors.back = selection.currentIndex === 0 ? 'disabled' : '';
-				selection.timeframeSelectors.forward = selection.currentIndex + 1 === dailyData.length ? 'disabled' : '';
-			} else if (selection.type !== 'daily' && lastType === 'daily') {
-				const currentDate = dailyData[selection.currentIndex].date;
-				for (let i = monthlyData.length - 1; i >= 0; i--) {
-					if (monthlyData[i].date.slice(0, 7) === currentDate.slice(0, 7)) {
-						selection.currentIndex = i;
-						break;
-					}
-				}
-				selection.timeframeSelectors.back = selection.currentIndex === 0 ? 'disabled' : '';
-				selection.timeframeSelectors.forward = selection.currentIndex + 1 === monthlyData.length ? 'disabled' : '';
-			}
-
-			selection.selectionData = this.determineSelectionData(state);
-
-			this.setState({ selection }, () => {
-				console.log('SELECTION:', this.state.selection);
-			});
-		}
-	}
-
 	/**
 	 * Determine data selection for Stats Graph according to parameters in state
 	 * Save it in state
 	 */
-	determineSelectionData = (state = Object.assign({}, this.state)) => {
+	_determineSelectionData = (state = Object.assign({}, this.state)) => {
 		const {
 			dailyData, monthlyData, cumulativeMonthlyData, selection
 		} = state;
@@ -440,88 +472,8 @@ class Stats extends React.Component {
 		return selectionData;
 	}
 
-	/**
-	 * Change time frame based on user's selection
-	 * Save it in state under currentIndex
-	 * @param {Object} event 		click event
-	 */
-	selectTimeframe = (e) => {
-		const state = Object.assign({}, this.state);
-		const data = state.selection.type === 'daily' ? state.dailyData : state.monthlyData;
-		if (e.target.id === 'stats-forward') {
-			state.selection.currentIndex += 6;
-			if (state.selection.currentIndex + 1 >= data.length) {
-				state.selection.currentIndex = data.length - 1;
-				state.selection.timeframeSelectors.forward = 'disabled';
-			} else {
-				state.selection.timeframeSelectors.forward = '';
-			}
-			state.selection.timeframeSelectors.back = '';
-		} else if (e.target.id === 'stats-back') {
-			state.selection.currentIndex -= 6;
-			if (state.selection.currentIndex - 6 <= 0) {
-				state.selection.currentIndex = 5;
-				state.selection.timeframeSelectors.back = 'disabled';
-			} else {
-				state.selection.timeframeSelectors.back = '';
-			}
-			state.selection.timeframeSelectors.forward = '';
-		}
-		state.selection.selectionData = this.determineSelectionData(state);
-		this.setState(state);
-	}
+	_isSupporter = props => props.user && props.user.subscriptionsSupporter
 
-	resetStats = () => {
-		this.setState({ showResetModal: true });
-	}
-
-	doReset = () => {
-		this.setState(this._reset());
-		sendMessage('resetStats');
-	}
-
-	cancelReset = () => {
-		// Do nothing, just close the modal
-		this.setState({ showResetModal: false });
-	}
-	/**
-	 * Helper function to handle clicking on the Become a Subscriber button on modal
-	 */
-	subscribe = () => {
-		sendMessage('ping', 'supporter_cta_extension');
-		openSubscriptionPage();
-	}
-	/**
-	 * Helper function to handle clicking on Sign in link on modal
-	 */
-	signIn = () => {
-		this.props.history.push('/login');
-	}
-
-	_reset = () => (
-		{
-			selection: {
-				type: 'cumulative',
-				view: 'trackersSeen',
-				graphTitle: this.getGraphTitle('cumulative', 'trackersSeen'),
-				graphIconPath: this.getGraphIconPath('trackersSeen'),
-				summaryTitle: this.getSummaryTitle('cumulative'),
-				tooltipText: t('panel_stats_trackers_seen'),
-				summaryData: {},
-				selectionData: [],
-				currentIndex: 0,
-				timeframeSelectors: { back: 'disabled', forward: 'disabled' },
-			},
-			dailyData: [],
-			monthlyData: [],
-			cumulativeMonthlyData: [],
-			cumulativeData: {},
-			monthlyAverageData: {},
-			dailyAverageData: {},
-			showResetModal: false,
-			showPitchModal: (!this.props.user || !this.props.user.subscriptionsSupporter),
-		}
-	)
 	/**
 	 * Render the expert view footer.
 	 * @return {ReactComponent}   ReactComponent instance

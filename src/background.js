@@ -804,12 +804,12 @@ function onMessageHandler(request, sender, callback) {
 		});
 		return true;
 	} else if (name === 'getAllStats') {
-		// insights.action('getAllDays').then((data) => {
-		// 	insights.action('getStatsTimeline', moment(data[0]), moment(), true, true).then((data) => {
-		// 		callback(data);
-		// 	});
-		// });
-		callback(generateHistoryData(0));
+		insights.action('getAllDays').then((data) => {
+			insights.action('getStatsTimeline', moment(data[0]), moment(), true, true).then((data) => {
+				callback(data);
+			});
+		});
+		//		callback(generateHistoryData(4380));
 		return true;
 	} else if (name === 'resetStats') {
 		// insights.action('clearData');
