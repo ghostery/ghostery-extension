@@ -787,6 +787,7 @@ function onMessageHandler(request, sender, callback) {
 		});
 		return true;
 	} else if (name === 'resetStats') {
+		metrics.ping('hist_reset_stats');
 		insights.action('clearData');
 		return false;
 	} else if (name === 'setPanelData') {

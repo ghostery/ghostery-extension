@@ -27,6 +27,7 @@ class Stats extends React.Component {
 	}
 
 	componentDidMount() {
+		sendMessage('ping', 'hist_stats_panel');
 		if (!this._isSupporter(this.props)) {
 			return;
 		}
@@ -263,7 +264,7 @@ class Stats extends React.Component {
 	 * Helper function to handle clicking on the Become a Subscriber button on modal
 	 */
 	subscribe = () => {
-		sendMessage('ping', 'supporter_cta_extension');
+		sendMessage('ping', 'hist_plus_cta');
 		openSubscriptionPage();
 	}
 	/**

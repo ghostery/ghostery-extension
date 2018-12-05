@@ -319,7 +319,7 @@ class Summary extends React.Component {
 			'not-clickable': this.state.disableBlocking
 		});
 
-		const summaryViewStatsButton = ClassNames('statsButton', {
+		const summaryViewStatsButton = ClassNames('stats-button', {
 			hide: is_expert
 		});
 
