@@ -15,9 +15,6 @@
 	position: absolute;
 	height: 479px;
     width: 100%;
-    * {
-        // border: 1px red dashed;
-    }
     .stats-top-header {
         height: 40px;
         font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
@@ -26,17 +23,26 @@
         line-height: 40px;
         color: #4a4a4a;
         margin-left: 80px;
-        .stats-top-header-icon  {
+        .stats-top-header-icon {
             display: inline-flex;
-            width: 16px;
+            width: 10px;
             height: 21px;
             position: relative;
-            top: 2px;
-            left: -21px;
+            top: 3px;
+            left: -18px;
             div {
                 display: inline-flex;
             }
         }
+				.stats-top-header-icon.trackersSeen {
+					width: 14px;
+					top: 2px;
+					left: -21px;
+				}
+				.stats-top-header-icon.trackersBlocked {
+					width: 12px;
+					top: 4px;
+				}
     }
     .stats-top-header-reset {
         font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;

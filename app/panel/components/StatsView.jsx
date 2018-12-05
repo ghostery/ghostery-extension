@@ -95,7 +95,7 @@ const StatsView = (props) => {
 		<div id="content-stats">
 			<div className="stats-top-header">
 				<span className="stats-top-header-title">
-					<ReactSVG path={graphIconPath} className="stats-top-header-icon" />
+					<ReactSVG path={graphIconPath} className={`stats-top-header-icon ${view}`} />
 					{graphTitle}
 				</span>
 				<span className="stats-top-header-reset" onClick={resetStats}>
