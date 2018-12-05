@@ -691,25 +691,6 @@ function reportCliqzOffer(message) {
 	cliqzCore.action('publishEvent', 'offers-recv-ch', msgToOffersCore);
 }
 
-function generateHistoryData(numDays) {
-	const data = [];
-	let newDay = moment().subtract(numDays, 'days');
-	for (let i = 0; i < numDays; i++) {
-		newDay = newDay.add(1, 'day');
-		const dataItem = {
-			day: newDay.format('YYYY-MM-DD'),
-			trackersDetected: Math.floor(Math.random() * Math.floor(100)),
-			trackersBlocked: Math.floor(Math.random() * Math.floor(50)),
-			cookiesBlocked: Math.floor(Math.random() * Math.floor(200)),
-			fingerprintsRemoved: Math.floor(Math.random() * Math.floor(150)),
-			adsBlocked: Math.floor(Math.random() * Math.floor(80)),
-		};
-		data.push(dataItem);
-	}
-
-	return data;
-}
-
 /**
  * Aggregated handler for <b>runtime.onMessage</b>
  *
@@ -804,10 +785,9 @@ function onMessageHandler(request, sender, callback) {
 				callback(data);
 			});
 		});
-		//		callback(generateHistoryData(4380));
 		return true;
 	} else if (name === 'resetStats') {
-		// insights.action('clearData');
+		insights.action('clearData');
 		return false;
 	} else if (name === 'setPanelData') {
 		panelData.set(message);

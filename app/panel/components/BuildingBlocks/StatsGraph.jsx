@@ -13,6 +13,7 @@
 
 import React from 'react';
 import * as D3 from 'd3';
+import isEqual from 'lodash.isequal';
 
 /**
  * A Functional React component for rendering the Stats Graph
@@ -23,8 +24,10 @@ class StatsGraph extends React.Component {
 	/**
 	 * Lifecycle event
 	 */
-	componentDidUpdate() {
-		this.generateGraph();
+	componentDidUpdate(prevProps) {
+		if (!isEqual(prevProps, this.props)) {
+			this.generateGraph();
+		}
 	}
 
 	/**
