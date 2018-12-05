@@ -34,7 +34,6 @@ class Detail extends React.Component {
 	componentWillMount() {
 		// trigger default tab (aka route)
 		this.props.history.push('/detail/blocking');
-		console.log('DETAIL PROPS', this.props);
 	}
 
 	BlockingComponent = () => (<Blocking />);

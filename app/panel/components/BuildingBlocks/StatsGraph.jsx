@@ -110,7 +110,6 @@ class StatsGraph extends React.Component {
 		const yAxis = D3.axisLeft()
 			.ticks(6)
 			.tickSize(0)
-			// .tickFormat(D3.format('.2s')) <-- Uncomment to abbreviate y-axis labels
 			.scale(y);
 
 		canvas.append('g')
@@ -140,7 +139,6 @@ class StatsGraph extends React.Component {
 		const line = D3.line()
 			.x(d => x(d.date))
 			.y(d => y(d.amount));
-			// .curve(D3.curveMonotoneX); // <-- Uncomment to smoothen data path
 
 		// ---------------------------------------------------------------------- //
 		// Animate data path using Mike Bostock's technique found here:
@@ -168,7 +166,6 @@ class StatsGraph extends React.Component {
 			.attr('d', line)
 			.attr('fill', 'none')
 			.attr('stroke', '#124559')
-			// .attr('stroke', '#00AEF0')
 			.attr('stroke-width', 1.5)
 			.call(animator);
 		// ---------------------------------------------------------------------- //
@@ -182,7 +179,6 @@ class StatsGraph extends React.Component {
 			.append('circle')
 			.attr('class', (d, i) => `point point-${i}`)
 			.attr('fill', '#124559')
-			// .attr('fill', '#00AEF0')
 			.attr('cx', d => x(d.date))
 			.attr('cy', d => y(d.amount))
 			.attr('r', 0)

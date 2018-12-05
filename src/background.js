@@ -694,7 +694,6 @@ function reportCliqzOffer(message) {
 function generateHistoryData(numDays) {
 	const data = [];
 	let newDay = moment().subtract(numDays, 'days');
-	console.log('FORMAT', newDay.format('YYYY-MM-DD'));
 	for (let i = 0; i < numDays; i++) {
 		newDay = newDay.add(1, 'day');
 		const dataItem = {
@@ -705,10 +704,6 @@ function generateHistoryData(numDays) {
 			fingerprintsRemoved: Math.floor(Math.random() * Math.floor(150)),
 			adsBlocked: Math.floor(Math.random() * Math.floor(80)),
 		};
-
-		if (i === 1) {
-			console.log('DATA ITEM', dataItem);
-		}
 		data.push(dataItem);
 	}
 

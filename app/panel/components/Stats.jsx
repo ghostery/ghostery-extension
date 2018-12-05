@@ -17,14 +17,13 @@ import StatsView from './StatsView';
 import { sendMessage, sendMessageInPromise, openSubscriptionPage } from '../utils/msg';
 
 /**
- * @class Implement footer of the detailed (expert) view which
- * acts as a menu and opens additional views.
+ * @class the parent component of Historical Stats View and Graph
  * @memberOf PanelClasses
  */
 class Stats extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = this._reset();
+		this.state = this._reset(true);
 	}
 
 	componentDidMount() {
@@ -41,7 +40,7 @@ class Stats extends React.Component {
 			if (nextSupporter) {
 				this._init();
 			} else {
-				this.setState(this._reset());
+				this.setState(this._reset(true));
 			}
 		}
 	}
@@ -146,8 +145,7 @@ class Stats extends React.Component {
 	 */
 	selectView = (event) => {
 		const state = Object.assign({}, this.state);
-		// eslint-disable-next-line prefer-destructuring
-		const selection = state.selection;
+		const { selection } = state;
 		if (event.currentTarget.id !== selection.view) {
 			selection.view = event.currentTarget.id;
 			sendMessage('ping', selection.view);
@@ -156,13 +154,9 @@ class Stats extends React.Component {
 			selection.summaryTitle = this.getSummaryTitle(selection.type);
 			selection.summaryData = this.getSummaryData(state, selection.type);
 			selection.tooltipText = this.getTooltipText(selection.view);
-
-			state.selection = selection;
 			selection.selectionData = this._determineSelectionData(state);
 
-			this.setState({ selection }, () => {
-				console.log('SELECTION:', this.state.selection);
-			});
+			this.setState({ selection });
 		}
 	}
 
@@ -176,8 +170,7 @@ class Stats extends React.Component {
 			return;
 		}
 		const state = Object.assign({}, this.state);
-		// eslint-disable-next-line prefer-destructuring
-		const selection = state.selection;
+		const { selection } = state;
 		if (event.currentTarget.id !== selection.type) {
 			const lastType = selection.type;
 			selection.type = event.currentTarget.id;
@@ -212,9 +205,7 @@ class Stats extends React.Component {
 
 			selection.selectionData = this._determineSelectionData(state);
 
-			this.setState({ selection }, () => {
-				console.log('SELECTION:', this.state.selection);
-			});
+			this.setState({ selection });
 		}
 	}
 
@@ -260,8 +251,8 @@ class Stats extends React.Component {
 	}
 
 	doReset = () => {
-		this.setState(this._reset());
 		sendMessage('resetStats');
+		this.setState(this._reset());
 	}
 
 	cancelReset = () => {
@@ -282,8 +273,15 @@ class Stats extends React.Component {
 		this.props.history.push('/login');
 	}
 
-	_reset = () => (
-		{
+	_reset = (freeze) => {
+		const clearData = freeze ? {} : {
+			date: moment().format('YYYY-MM-DD'),
+			trackersSeen: 0,
+			trackersBlocked: 0,
+			trackersAnonymized: 0,
+			adsBlocked: 0,
+		};
+		const clearState = {
 			selection: {
 				type: 'cumulative',
 				view: 'trackersSeen',
@@ -291,21 +289,23 @@ class Stats extends React.Component {
 				graphIconPath: this.getGraphIconPath('trackersSeen'),
 				summaryTitle: this.getSummaryTitle('cumulative'),
 				tooltipText: t('panel_stats_trackers_seen'),
-				summaryData: {},
-				selectionData: [],
+				summaryData: clearData,
+				selectionData: [clearData],
 				currentIndex: 0,
 				timeframeSelectors: { back: 'disabled', forward: 'disabled' },
 			},
-			dailyData: [],
-			monthlyData: [],
-			cumulativeMonthlyData: [],
-			cumulativeData: {},
-			monthlyAverageData: {},
-			dailyAverageData: {},
+			dailyData: [clearData],
+			monthlyData: [clearData],
+			cumulativeMonthlyData: [clearData],
+			cumulativeData: clearData,
+			monthlyAverageData: clearData,
+			dailyAverageData: clearData,
 			showResetModal: false,
 			showPitchModal: (!this.props.user || !this.props.user.subscriptionsSupporter),
-		}
-	)
+		};
+		clearState.selection.selectionData = this._determineSelectionData(clearState);
+		return clearState;
+	}
 
 	_getAllStats = () => (
 		sendMessageInPromise('getAllStats')
@@ -316,14 +316,8 @@ class Stats extends React.Component {
 		this._getAllStats().then((allData) => {
 			if (Array.isArray(allData)) {
 				if (allData.length === 0) {
-					allData.push({
-						day: moment().format('YYYY-MM-DD'),
-						trackersDetected: 0,
-						trackersBlocked: 0,
-						cookiesBlocked: 0,
-						fingerprintsRemoved: 0,
-						adsBlocked: 0,
-					});
+					this.setState(this._reset());
+					return;
 				}
 				let trackersSeen = 0;
 				let trackersBlocked = 0;
@@ -441,9 +435,7 @@ class Stats extends React.Component {
 				state.selection.timeframeSelectors.back = monthlyData.length > 6 ? '' : 'disabled';
 				state.selection.selectionData = this._determineSelectionData(state);
 
-				this.setState(state, () => {
-					console.log('STATE:', this.state);
-				});
+				this.setState(state);
 			}
 		});
 	}
@@ -475,7 +467,7 @@ class Stats extends React.Component {
 	_isSupporter = props => props.user && props.user.subscriptionsSupporter
 
 	/**
-	 * Render the expert view footer.
+	 * Render the the Stats View
 	 * @return {ReactComponent}   ReactComponent instance
 	 */
 	render() {

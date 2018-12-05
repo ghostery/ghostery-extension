@@ -14,7 +14,6 @@
 import React from 'react';
 import ClassNames from 'classnames';
 import ReactSVG from 'react-svg';
-import { NavLink } from 'react-router-dom';
 
 import StatsGraph from './BuildingBlocks/StatsGraph';
 
