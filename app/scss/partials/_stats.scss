@@ -47,13 +47,13 @@
         margin-right: 60px;
         cursor: pointer;
         .stats-top-header-info-icon  {
-            cursor: auto;
+            cursor: default;
             display: inline-flex;
             width: 16px;
             height: 21px;
             position: relative;
-            top: 3px;
-            left: 7px;
+            top: -2px;
+            left: 2px;
             div {
                 display: inline-flex;
             }
@@ -274,6 +274,8 @@
     }
 
     .hs-tooltip-down {
+				top: 5px;
+				right: -5px;
         @extend %hs-tooltip;
         @extend %g-tooltip-down-left;
     }
