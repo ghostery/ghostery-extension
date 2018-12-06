@@ -1,5 +1,5 @@
 /**
- * About Component
+ * Subscribe Component
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/

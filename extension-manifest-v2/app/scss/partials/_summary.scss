@@ -197,4 +197,13 @@
 		font-size: 10px;
 		color: #9b9b9b;
 	}
+
+	.stats-button {
+		position: absolute;
+		right: 0;
+		top: 40px;
+		padding: 6px 3px 3px 9px;
+		border: 1px lightgray solid;
+		border-radius: 5px 0 0 5px;
+	}
 }
