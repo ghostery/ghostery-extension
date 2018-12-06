@@ -1,0 +1,122 @@
+/* NOTE: will need to use color variables in CSS rather than D3 code accessors
+so that you can support switching between midnight theme and regular theme */
+
+// Function helper with color variables
+@function _url-friendly-color($color) {
+	@return '%23' + str-slice('#{$color}', 2, -1);
+}
+
+// Left caret SVG
+@function buildLeftCaret($color) {
+	@return url('data:image/svg+xml;charset%3dUS-ASCII,%3Csvg%20width%3D%226%22%20height%3D%2210%22%20xmlns%3D%22http://www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M1.845%205l4.052-3.938A.313.313%200%200%200%206%20.832a.312.312%200%200%200-.103-.23L5.381.1a.33.33%200%200%200-.474%200L.103%204.77A.313.313%200%200%200%200%205c0%20.087.034.164.103.23L4.907%209.9a.33.33%200%200%200%20.474%200l.516-.501A.313.313%200%200%200%206%209.169a.313.313%200%200%200-.103-.231L1.845%205z%22%20fill%3D%22#{_url-friendly-color($color)}%22%20fill-rule%3D%22evenodd%22/%3E%3C/svg%3E');
+}
+
+// Right caret SVG
+@function buildRightCaret($color) {
+	@return url('data:image/svg+xml;charset%3dUS-ASCII,%3Csvg%20width%3D%226%22%20height%3D%2210%22%20xmlns%3D%22http://www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M4.155%205L.103%201.062A.313.313%200%200%201%200%20.832C0%20.745.034.668.103.602L.619.1a.33.33%200%200%201%20.474%200l4.804%204.67A.313.313%200%200%201%206%205a.313.313%200%200%201-.103.23L1.093%209.9a.33.33%200%200%201-.474%200l-.516-.501A.313.313%200%200%201%200%209.169c0-.087.034-.164.103-.231L4.155%205z%22%20fill%3D%22#{_url-friendly-color($color)}%22%20fill-rule%3D%22evenodd%22/%3E%3C/svg%3E');
+}
+
+.line-graph-container {
+	height: 316px;
+
+	.axis line, .axis path, .grid line {
+		stroke: #c8c7c2;
+	}
+	.axis text {
+		fill: #4a4a4a;
+		font-size: 10px;
+	}
+	.axis.y text {
+		transform: translate(-10px, 0px);
+	}
+	.axis.x text {
+		transform: translate(0px, 17px);
+	}
+	.grid path {
+		stroke: none;
+	}
+	.grid line {
+		stroke: #c8c7c2;
+	}
+
+	.selected {
+		stroke: #2092bf;
+		stroke-width: 3px;
+	}
+	.tooltip {
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 500;
+		text-align: center;
+		line-height: 16px;
+		position: fixed;
+		width: 92px;
+		height: 82px;
+		padding: 10px 0px;
+		background-color: #f7f7f7;
+		pointer-events: none;
+		color: #124559;
+		border: 1.4px solid #124559;
+		z-index: 1;
+	}
+	.tooltip.long-text {
+		height: 96px;
+	}
+	.tooltip-text-top {
+		margin: 0px;
+		font-size: 10px;
+	}
+	.tooltip-text-bottom {
+		margin-top: 8px;
+		font-size: 12px;
+	}
+	.pointer {
+		position: absolute;
+	}
+	.pointer.under {
+		left: 38px;
+		border-left: 8px solid transparent;
+		border-right: 8px solid transparent;
+	}
+	.pointer.over {
+		left: 36px;
+		border-left: 10px solid transparent;
+		border-right: 10px solid transparent;
+	}
+	.pointer.top.under {
+		top: -9px;
+		border-bottom: 8px solid #124559;
+	}
+	.pointer.top.over {
+		top: -8px;
+		border-bottom: 10px solid #f7f7f7;
+	}
+	.pointer.bottom.under {
+		bottom: -9px;
+		border-top: 8px solid #124559;
+	}
+	.pointer.bottom.over {
+		bottom: -8px;
+		border-top: 10px solid #f7f7f7;
+	}
+
+	.caret {
+		position: fixed;
+		top: 364px;
+		height: 15px;
+		width: 12px;
+		cursor: pointer;
+	}
+	.caret.disabled {
+		display: none;
+	}
+	#stats-back {
+		left: 34px;
+		background-image: buildLeftCaret(#00AEF0);
+		background-repeat: no-repeat;
+	}
+	#stats-forward {
+		left: 551px;
+		background-image: buildRightCaret(#00AEF0);
+		background-repeat: no-repeat;
+	}
+}

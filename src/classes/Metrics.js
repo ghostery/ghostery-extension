@@ -188,6 +188,9 @@ class Metrics {
 			case 'products_cta_android':
 			case 'products_cta_ios':
 			case 'products_cta_lite':
+			case 'hist_plus_cta':
+			case 'hist_stats_panel':
+			case 'hist_reset_stats':
 			case 'supporter_panel_from_badge':
 			case 'supporter_panel_from_menu':
 			case 'resubscribe':

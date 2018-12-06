@@ -24,7 +24,7 @@ import * as actions from '../actions/DetailActions';
  * @todo  We are not using ownProps, so we better not specify it explicitly,
  * in this case it won't be passed by React (see https://github.com/reactjs/react-redux/blob/master/docs/api.md).
  */
-const mapStateToProps = state => Object.assign({}, state.detail, {
+const mapStateToProps = state => Object.assign({}, state.detail, state.account, {
 	is_expanded: state.panel.is_expanded,
 	enable_offers: state.panel.enable_offers,
 	unread_offer_ids: state.panel.unread_offer_ids,
