@@ -1,5 +1,5 @@
 /**
- * Detail Menu Component
+ * Stats Detail Menu Component
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -26,6 +26,8 @@ class DetailMenu extends React.Component {
 				return 'list_dash';
 			case 'showRewards':
 				return 'rewards_dash';
+			case 'showStats':
+				return 'stats_dash';
 			default:
 				return '';
 		}
@@ -37,6 +39,7 @@ class DetailMenu extends React.Component {
 		this.state = {
 			menu: {
 				showBlocking: true,
+				showStats: false,
 				showRewards: false,
 			},
 		};
@@ -79,6 +82,16 @@ class DetailMenu extends React.Component {
 								</g>
 							</svg>
 							<span>{ t('panel_detail_menu_list_title') }</span>
+						</Link>
+					</div>
+					<div className="menu-item flex-child-grow">
+						<Link to="/stats" onClick={this.setActiveTab} id="showStats" className={this.state.menu.showStats ? 'active ' : ''}>
+							<svg className="list-view-icon" viewBox="0 0 25 25" width="25" height="25">
+								<g className="fill stroke" strokeWidth=".5" fillRule="evenodd">
+									<path d="M1.435 1.226A.444.444 0 0 0 1 1.68V19.32c0 .25.195.453.435.453h19.13c.24 0 .435-.203.435-.453a.444.444 0 0 0-.435-.452H1.87V1.68a.444.444 0 0 0-.435-.453zm15.87 2.488c-.836 0-1.522.715-1.522 1.584 0 .357.118.68.312.947l-2.581 3.838a1.45 1.45 0 0 0-.34-.035c-.424 0-.81.178-1.087.473l-1.82-1.102c.051-.16.08-.326.08-.502 0-.87-.686-1.584-1.52-1.584-.836 0-1.523.715-1.523 1.584 0 .357.118.68.313.947l-2.582 3.838a1.45 1.45 0 0 0-.34-.035c-.835 0-1.521.714-1.521 1.583 0 .87.686 1.583 1.522 1.583.835 0 1.521-.714 1.521-1.583 0-.424-.163-.817-.428-1.103l2.52-3.746c.162.062.336.099.517.099.353 0 .678-.133.938-.346l1.922 1.166c-.02.1-.034.205-.034.311 0 .869.687 1.583 1.522 1.583s1.522-.714 1.522-1.583c0-.424-.164-.817-.428-1.103l2.52-3.746c.162.062.335.099.516.099.836 0 1.522-.714 1.522-1.583 0-.87-.686-1.584-1.522-1.584z" />
+								</g>
+							</svg>
+							<span>{ t('panel_detail_menu_stats_title') }</span>
 						</Link>
 					</div>
 					<div className="menu-item flex-child-grow">

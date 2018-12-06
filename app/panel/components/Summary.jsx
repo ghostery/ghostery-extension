@@ -14,6 +14,7 @@
 import React from 'react';
 import ClassNames from 'classnames';
 import Tooltip from './Tooltip';
+import NavButton from './BuildingBlocks/NavButton';
 import { sendMessage } from '../utils/msg';
 import globals from '../../../src/classes/Globals';
 import {
@@ -318,6 +319,10 @@ class Summary extends React.Component {
 			'not-clickable': this.state.disableBlocking
 		});
 
+		const summaryViewStatsButton = ClassNames('stats-button', {
+			hide: is_expert
+		});
+
 		let trackersBlockedCount;
 		if (paused_blocking || sitePolicy === 2) {
 			trackersBlockedCount = 0;
@@ -448,7 +453,7 @@ class Summary extends React.Component {
 						{ t('summary_map_these_trackers') }
 					</div>
 				)}
-
+				<NavButton path="/stats" imagePath="../../app/images/panel/graph.svg" classNames={summaryViewStatsButton} />
 			</div>
 		);
 	}

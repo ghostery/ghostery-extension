@@ -48,6 +48,7 @@
     "foundation-sites": "^6.4.4-rc1",
     "history": "^4.7.2",
     "json-api-normalizer": "^0.4.10",
+    "lodash.isequal": "^4.5.0",
     "moment": "^2.19.1",
     "prop-types": "^15.6.2",
     "query-string": "^6.1.0",

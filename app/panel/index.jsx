@@ -31,6 +31,7 @@ import configureStore from './store/configureStore';
 import Help from './components/Help';
 import About from './components/About';
 import Subscribe from './components/Subscribe';
+import Stats from './containers/StatsContainer';
 
 const store = configureStore();
 /**
@@ -46,6 +47,7 @@ const Ghostery = () => (
 		<Route path="/help" component={Help} />
 		<Route path="/about" component={About} />
 		<Route path="/subscription" component={Subscription} />
+		<Route path="/stats" component={Stats} />
 		<Route path="/subscribe/:loggedIn" component={Subscribe} />
 		<Route path="/login" component={Login} />
 		<Route path="/create-account" component={CreateAccount} />
