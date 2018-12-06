@@ -68,10 +68,17 @@
 				margin-left: 75px;
 			}
 		}
+		&.bottom-left {
+			width: 105px;
+			top: 97%;
+			left: -75px;
+		}
 		&.bottom {
 			width: 90px;
 			top: 97%;
 			left: -60px;
+		}
+		&.bottom, &.bottom-left {
 			&:after {
 				bottom: calc(100% - 10px);  /* At the top of the tooltip */
 				left: 100%;
