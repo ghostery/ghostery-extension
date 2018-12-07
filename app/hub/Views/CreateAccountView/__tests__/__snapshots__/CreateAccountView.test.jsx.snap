@@ -169,7 +169,6 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
           className="CreateAccountView__link"
           href="/log-in"
           onClick={[Function]}
-          style={undefined}
         >
           hub_create_account_link_login
         </a>
@@ -382,7 +381,6 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
           className="CreateAccountView__link"
           href="/log-in"
           onClick={[Function]}
-          style={undefined}
         >
           hub_create_account_link_login
         </a>
