@@ -12,7 +12,7 @@ node('docker') {
     def img
 	def buildType = ""
 	if (params.IS_PROD){
-        buildType = "production"
+            buildType = "production"
     }
 	
     stage('Build Docker Image') {
