@@ -1391,11 +1391,25 @@ messageCenter.on('enabled', () => {
 				button.update();
 
 				if (msg.data.offer_data.ui_info.notif_type !== 'star') {
-					utils.getActiveTab((tab) => {
-						let tabId = 0;
-						if (tab) tabId = tab.id;
-						rewards.showHotDogOrOffer(tabId, msg.data);
-					});
+					// We use getTabByUrl() instead of getActiveTab()
+					// because user may open the offer-triggering url in a new tab
+					// through the context menu, which may not switch to the new tab
+					if (msg.data.display_rule && msg.data.display_rule.url) {
+						utils.getTabByUrl((tab) => {
+							const tabId = tab ? tab.id : 0;
+							rewards.showHotDogOrOffer(tabId, msg.data);
+						},
+						msg.data.display_rule.url
+						);
+					} else {
+						// We fall back on getActiveTab() so we can still show the offer
+						// if the url is not available or the Cliqz data structure changes
+						utils.getActiveTab((tab) => {
+							let tabId = 0;
+							if (tab) tabId = tab.id;
+							rewards.showHotDogOrOffer(tabId, msg.data);
+						});
+					}
 				}
 			}
 		});
