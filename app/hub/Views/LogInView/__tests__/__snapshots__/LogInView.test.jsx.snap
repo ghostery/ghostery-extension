@@ -71,7 +71,6 @@ exports[`app/hub/Views/LogIn component Snapshot tests with react-test-renderer l
             className="LogInView__link text-center"
             href="/create-account"
             onClick={[Function]}
-            style={undefined}
           >
             hub_login_link_create_account
           </a>
@@ -173,7 +172,6 @@ exports[`app/hub/Views/LogIn component Snapshot tests with react-test-renderer l
             className="LogInView__link text-center"
             href="/create-account"
             onClick={[Function]}
-            style={undefined}
           >
             hub_login_link_create_account
           </a>
