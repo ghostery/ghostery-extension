@@ -1587,12 +1587,9 @@ function initializeEventListeners() {
 
 	// Fired when another extension sends a message, accepts message if it's from Ghostery Tab
 	chrome.runtime.onMessageExternal.addListener((request, sender, sendResponse) => {
-		if (sender.id === globals.GHOSTERY_TAB_ID) {
-			const { name } = request;
-			if (name === 'getStatsAndSettings') {
-				getDataForGhosteryTab(data => sendResponse({ historicalDataAndSettings: data }));
-				return true;
-			}
+		if (sender.id === globals.GHOSTERY_TAB_ID && request.name === 'getStatsAndSettings') {
+			getDataForGhosteryTab(data => sendResponse({ historicalDataAndSettings: data }));
+			return true;
 		}
 		return false;
 	});
@@ -1854,7 +1851,3 @@ function init() {
 
 // Initialize the application.
 init();
-
-// chrome.runtime.sendMessage('deegfjoplcahoocdeddpcdeemkaoldbg', { name: 'getStatsAndSettings' }, data => {
-// 	console.log(data);
-// });
