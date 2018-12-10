@@ -1416,7 +1416,7 @@ insights.on('disabled', () => {
  * Pulls and aggregates data to be passed to Ghostery Tab extension.
  * @memberOf Background
  */
-function getDataForGhosteryTab() {
+function getDataForGhosteryTab(callback) {
 	const passedData = {};
 	insights.action('getAllDays').then((data) => {
 		insights.action('getStatsTimeline', moment(data[0]), moment(), true, true).then((data) => {
@@ -1429,13 +1429,14 @@ function getDataForGhosteryTab() {
 				});
 			});
 			passedData.cumulativeData = cumulativeData;
+		}).then(() => {
+			account.getUserSettings().then((settings) => {
+				passedData.adBlockEnabled = settings.enable_ad_block;
+				passedData.antiTrackingEnabled = settings.enable_anti_tracking;
+				callback(passedData);
+			});
 		});
 	});
-	account.getUserSettings().then((settings) => {
-		passedData.adBlockEnabled = settings.enable_ad_block;
-		passedData.antiTrackingEnabled = settings.enable_anti_tracking;
-	});
-	return passedData;
 }
 
 /**
@@ -1589,7 +1590,7 @@ function initializeEventListeners() {
 		if (sender.id === globals.GHOSTERY_TAB_ID) {
 			const { name } = request;
 			if (name === 'getStatsAndSettings') {
-				sendResponse({ historicalDataAndSettings: getDataForGhosteryTab() });
+				getDataForGhosteryTab(data => sendResponse({ historicalDataAndSettings: data }));
 				return true;
 			}
 		}
@@ -1853,3 +1854,7 @@ function init() {
 
 // Initialize the application.
 init();
+
+// chrome.runtime.sendMessage('deegfjoplcahoocdeddpcdeemkaoldbg', { name: 'getStatsAndSettings' }, data => {
+// 	console.log(data);
+// });
