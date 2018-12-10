@@ -26,7 +26,7 @@ node('docker') {
             withCache {
                 sh 'rm -rf build'
                 withGithubCredentials {
-					sh "moab makezip ${buildType}"
+                    sh "moab makezip ${buildType}"
                 }
             }
         }
