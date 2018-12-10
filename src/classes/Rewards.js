@@ -79,7 +79,7 @@ class Rewards {
 		prefsSet({ unreadOfferIds: this.unreadOfferIds }).then(() => { button.update(); });
 	}
 
-	showHotDog(tab_id, offer) {
+	showHotDogOrOffer(tab_id, offer) {
 		this.updateStoredOffers();
 		this.totalOffersSeen++;
 		prefsSet({ totalOffersSeen: this.totalOffersSeen });

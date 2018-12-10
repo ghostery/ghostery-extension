@@ -1394,7 +1394,7 @@ messageCenter.on('enabled', () => {
 					utils.getActiveTab((tab) => {
 						let tabId = 0;
 						if (tab) tabId = tab.id;
-						rewards.showHotDog(tabId, msg.data);
+						rewards.showHotDogOrOffer(tabId, msg.data);
 					});
 				}
 			}
