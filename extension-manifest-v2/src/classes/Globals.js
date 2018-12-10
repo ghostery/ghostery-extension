@@ -59,6 +59,9 @@ class Globals {
 		this.AUTH_SERVER = `https://consumerapi.${this.GHOSTERY_DOMAIN}.com`;
 		this.ACCOUNT_SERVER = `https://accountapi.${this.GHOSTERY_DOMAIN}.com`;
 
+		// extension IDs
+		this.GHOSTERY_TAB_ID = 'plmapebanmikcofllaaddgeocahboejc';
+
 		// data stores
 		this.REDIRECT_MAP = new Map();
 		this.BLOCKED_REDIRECT_DATA = {};
