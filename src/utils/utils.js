@@ -227,6 +227,21 @@ export function getActiveTab(callback) {
 }
 
 /**
+ * Query the first tab that matches the url argument
+ * @memberOf BackgroundUtils
+ *
+ * @param {function} callback		function to call if tab found
+ * @param {string} url				the tab url to search for
+ */
+export function getTabByUrl(callback, url) {
+	chrome.tabs.query({
+		url
+	}, (tabs) => {
+		callback(tabs[0]);
+	});
+}
+
+/**
  * Helper called by openNewTab.
  * @memberOf BackgroundUtils
  * @private
