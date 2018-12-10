@@ -1402,6 +1402,10 @@ messageCenter.on('enabled', () => {
 	});
 });
 
+/**
+ * Add page listeners for insights stats.
+ * @memberOf Background
+ */
 insights.on('enabled', () => {
 	events.addPageListener((tab_id, info, apps, bugs) => {
 		cliqz.modules.insights.action('pushGhosteryPageStats', tab_id, info, apps, bugs);
@@ -1410,6 +1414,33 @@ insights.on('enabled', () => {
 insights.on('disabled', () => {
 	events.clearPageListeners();
 });
+
+/**
+ * Pulls and aggregates data to be passed to Ghostery Tab extension.
+ * @memberOf Background
+ */
+function getDataForGhosteryTab(callback) {
+	const passedData = {};
+	insights.action('getAllDays').then((data) => {
+		insights.action('getStatsTimeline', moment(data[0]), moment(), true, true).then((data) => {
+			const cumulativeData = {
+				adsBlocked: 0, cookiesBlocked: 0, dataSaved: 0, fingerprintsRemoved: 0, loadTime: 0, pages: 0, timeSaved: 0, trackerRequestsBlocked: 0, trackersBlocked: 0, trackersDetected: 0
+			};
+			data.forEach((entry) => {
+				Object.keys(cumulativeData).forEach((key) => {
+					cumulativeData[key] += entry[key];
+				});
+			});
+			passedData.cumulativeData = cumulativeData;
+		}).then(() => {
+			account.getUserSettings().then((settings) => {
+				passedData.adBlockEnabled = settings.enable_ad_block;
+				passedData.antiTrackingEnabled = settings.enable_anti_tracking;
+				callback(passedData);
+			});
+		});
+	});
+}
 
 /**
  * Initialize Ghostery panel.
@@ -1555,6 +1586,15 @@ function initializeEventListeners() {
 			rewards.panelPort = port;
 			rewards.panelPort.onDisconnect.addListener(rewards.panelHubClosedListener);
 		}
+	});
+
+	// Fired when another extension sends a message, accepts message if it's from Ghostery Tab
+	chrome.runtime.onMessageExternal.addListener((request, sender, sendResponse) => {
+		if (sender.id === globals.GHOSTERY_TAB_ID && request.name === 'getStatsAndSettings') {
+			getDataForGhosteryTab(data => sendResponse({ historicalDataAndSettings: data }));
+			return true;
+		}
+		return false;
 	});
 }
 
