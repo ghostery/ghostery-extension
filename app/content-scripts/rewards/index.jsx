@@ -183,9 +183,13 @@ class RewardsApp {
 	}
 
 	handleMessages(request) {
-		if (request.name === 'showHotDog') {
+		if (request.name === 'showOffer' || request.name === 'showHotDog') {
 			this.reward = request.reward;
 			this.conf = request.conf;
+		}
+
+		if (request.name === 'showOffer') {
+			history.push('/offercard');
 		}
 
 		// in FF 61 react sees some elements in iframes as non interactive

@@ -492,6 +492,9 @@ function handleRewards(name, message, callback) {
 		case 'rewardsPromptAccepted':
 			conf.rewards_accepted = true;
 			break;
+		case 'rewardsPromptOptedIn':
+			conf.rewards_opted_in = true;
+			break;
 		case 'ping':
 			metrics.ping(message);
 			break;

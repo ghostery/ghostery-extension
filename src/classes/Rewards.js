@@ -108,10 +108,11 @@ class Rewards {
 						if (!this.ports.has(tabId)) {
 							this.ports.set(tabId, port);
 							this.ports.get(tabId).onMessage.addListener((message) => {
+								const responseMessage = conf.rewards_opted_in ? 'showOffer' : 'showHotDog';
 								switch (message.name) {
 									case 'rewardsLoaded':
 										this.ports.get(tabId).postMessage({
-											name: 'showHotDog',
+											name: responseMessage,
 											reward: this.currentOffer,
 											conf: {
 												rewardsPromptAccepted: conf.rewards_accepted
