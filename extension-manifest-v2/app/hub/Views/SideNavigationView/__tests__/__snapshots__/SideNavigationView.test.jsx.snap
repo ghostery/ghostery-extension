@@ -62,7 +62,6 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         className="flex-container align-middle"
         href="/setup"
         onClick={[Function]}
-        style={undefined}
       >
         <div
           className="SideNavigation__menuIcon setup"
@@ -82,7 +81,6 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         className="flex-container align-middle"
         href="/tutorial"
         onClick={[Function]}
-        style={undefined}
       >
         <div
           className="SideNavigation__menuIcon tutorial"
@@ -102,7 +100,6 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         className="flex-container align-middle"
         href="/plus"
         onClick={[Function]}
-        style={undefined}
       >
         <div
           className="SideNavigation__menuIcon plus"
@@ -122,7 +119,6 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         className="flex-container align-middle"
         href="/rewards"
         onClick={[Function]}
-        style={undefined}
       >
         <div
           className="SideNavigation__menuIcon rewards"
@@ -142,7 +138,6 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         className="flex-container align-middle"
         href="/products"
         onClick={[Function]}
-        style={undefined}
       >
         <div
           className="SideNavigation__menuIcon products"
@@ -166,7 +161,6 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         className=""
         href="/create-account"
         onClick={[Function]}
-        style={undefined}
       >
         <p
           className="SideNavigation__bottomText"
@@ -183,7 +177,6 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         className=""
         href="/log-in"
         onClick={[Function]}
-        style={undefined}
       >
         <p
           className="SideNavigation__bottomText"
@@ -268,7 +261,6 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         className="flex-container align-middle disabled"
         href="/setup"
         onClick={[Function]}
-        style={undefined}
       >
         <div
           className="SideNavigation__menuIcon setup"
@@ -288,7 +280,6 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         className="flex-container align-middle disabled"
         href="/tutorial"
         onClick={[Function]}
-        style={undefined}
       >
         <div
           className="SideNavigation__menuIcon tutorial"
@@ -308,7 +299,6 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         className="flex-container align-middle disabled"
         href="/plus"
         onClick={[Function]}
-        style={undefined}
       >
         <div
           className="SideNavigation__menuIcon plus"
@@ -328,7 +318,6 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         className="flex-container align-middle disabled"
         href="/rewards"
         onClick={[Function]}
-        style={undefined}
       >
         <div
           className="SideNavigation__menuIcon rewards"
@@ -348,7 +337,6 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         className="flex-container align-middle disabled"
         href="/products"
         onClick={[Function]}
-        style={undefined}
       >
         <div
           className="SideNavigation__menuIcon products"
@@ -372,7 +360,6 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         className="disabled"
         href="/create-account"
         onClick={[Function]}
-        style={undefined}
       >
         <p
           className="SideNavigation__bottomText"
@@ -389,7 +376,6 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         className="disabled"
         href="/log-in"
         onClick={[Function]}
-        style={undefined}
       >
         <p
           className="SideNavigation__bottomText"
