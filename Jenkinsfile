@@ -1,10 +1,20 @@
+properties([
+    parameters([
+        booleanParam(name: 'IS_PROD', defaultValue: true, description: 'Builds the Production ready Extension.')
+    ])
+])
+
 node('docker') {
     stage ('Checkout') {
         checkout scm
     }
 
     def img
-
+	def buildType = ""
+	if (params.IS_PROD){
+        buildType = "production"
+    }
+	
     stage('Build Docker Image') {
         img = docker.build('ghostery/build', '--build-arg UID=`id -u` --build-arg GID=`id -g` .')
         // clean workdir
@@ -16,7 +26,7 @@ node('docker') {
             withCache {
                 sh 'rm -rf build'
                 withGithubCredentials {
-                    sh 'moab makezip production'
+					sh "moab makezip ${buildType}"
                 }
             }
         }
