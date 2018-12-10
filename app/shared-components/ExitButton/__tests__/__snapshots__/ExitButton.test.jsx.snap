@@ -6,7 +6,6 @@ exports[`app/shared-components/ExitButton More Snapshot tests with react-test-re
   className="ExitButton__exit flex-container align-middle"
   href="/test"
   onClick={[Function]}
-  style={undefined}
 >
   
   <span
@@ -21,7 +20,6 @@ exports[`app/shared-components/ExitButton More Snapshot tests with react-test-re
   className="ExitButton__exit flex-container align-middle"
   href="/example"
   onClick={[Function]}
-  style={undefined}
 >
   <span
     className="ExitButton__exitIcon"

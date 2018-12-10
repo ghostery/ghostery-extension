@@ -21,7 +21,6 @@ exports[`app/shared-components/SteppedNavigation More Snapshot tests with react-
             className="button hollow secondary"
             href="/test/1"
             onClick={[Function]}
-            style={undefined}
           >
             Beginning
           </a>
@@ -32,24 +31,18 @@ exports[`app/shared-components/SteppedNavigation More Snapshot tests with react-
       >
         <a
           aria-current={null}
-          className={undefined}
           href="/1"
           onClick={[Function]}
-          style={undefined}
         />
         <a
           aria-current={null}
-          className={undefined}
           href="/2"
           onClick={[Function]}
-          style={undefined}
         />
         <a
           aria-current={null}
-          className={undefined}
           href="/3"
           onClick={[Function]}
-          style={undefined}
         />
       </div>
       <div
@@ -110,17 +103,13 @@ exports[`app/shared-components/SteppedNavigation More Snapshot tests with react-
         />
         <a
           aria-current={null}
-          className={undefined}
           href="/2"
           onClick={[Function]}
-          style={undefined}
         />
         <a
           aria-current={null}
-          className={undefined}
           href="/3"
           onClick={[Function]}
-          style={undefined}
         />
       </div>
       <div
@@ -134,7 +123,6 @@ exports[`app/shared-components/SteppedNavigation More Snapshot tests with react-
             className="button success"
             href="/step/2"
             onClick={[Function]}
-            style={undefined}
           >
             Next
           </a>
@@ -186,38 +174,28 @@ exports[`app/shared-components/SteppedNavigation Snapshot tests with react-test-
         />
         <a
           aria-current={null}
-          className={undefined}
           href="/2"
           onClick={[Function]}
-          style={undefined}
         />
         <a
           aria-current={null}
-          className={undefined}
           href="/3"
           onClick={[Function]}
-          style={undefined}
         />
         <a
           aria-current={null}
-          className={undefined}
           href="/4"
           onClick={[Function]}
-          style={undefined}
         />
         <a
           aria-current={null}
-          className={undefined}
           href="/5"
           onClick={[Function]}
-          style={undefined}
         />
         <a
           aria-current={null}
-          className={undefined}
           href="/6"
           onClick={[Function]}
-          style={undefined}
         />
       </div>
       <div
@@ -231,7 +209,6 @@ exports[`app/shared-components/SteppedNavigation Snapshot tests with react-test-
             className="button success"
             href="/test/2"
             onClick={[Function]}
-            style={undefined}
           >
             Next
           </a>
@@ -263,7 +240,6 @@ exports[`app/shared-components/SteppedNavigation Snapshot tests with react-test-
             className="button hollow secondary"
             href="/test/2"
             onClick={[Function]}
-            style={undefined}
           >
             Back
           </a>
@@ -274,17 +250,13 @@ exports[`app/shared-components/SteppedNavigation Snapshot tests with react-test-
       >
         <a
           aria-current={null}
-          className={undefined}
           href="/1"
           onClick={[Function]}
-          style={undefined}
         />
         <a
           aria-current={null}
-          className={undefined}
           href="/2"
           onClick={[Function]}
-          style={undefined}
         />
         <a
           className="active"
@@ -314,7 +286,6 @@ exports[`app/shared-components/SteppedNavigation Snapshot tests with react-test-
       className="ExitButton__exit flex-container align-middle"
       href="/more-examples"
       onClick={[Function]}
-      style={undefined}
     >
       <span
         className="ExitButton__exitText"
@@ -339,7 +310,6 @@ exports[`app/shared-components/SteppedNavigation Snapshot tests with react-test-
             className="button hollow secondary"
             href="/test/1"
             onClick={[Function]}
-            style={undefined}
           >
             Previous
           </a>
@@ -350,20 +320,16 @@ exports[`app/shared-components/SteppedNavigation Snapshot tests with react-test-
       >
         <a
           aria-current={null}
-          className={undefined}
           href="/1"
           onClick={[Function]}
-          style={undefined}
         />
         <a
           className="active"
         />
         <a
           aria-current={null}
-          className={undefined}
           href="/3"
           onClick={[Function]}
-          style={undefined}
         />
       </div>
       <div
@@ -377,7 +343,6 @@ exports[`app/shared-components/SteppedNavigation Snapshot tests with react-test-
             className="button success"
             href="/test/3"
             onClick={[Function]}
-            style={undefined}
           >
             Foreward
           </a>

@@ -72,10 +72,8 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
       </div>
       <a
         aria-current={null}
-        className={undefined}
         href="/create-account"
         onClick={[Function]}
-        style={undefined}
       >
         hub_home_subheader_create_account
       </a>
@@ -104,7 +102,6 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
           className="HomeView__featureButton button primary"
           href="/tutorial"
           onClick={[Function]}
-          style={undefined}
         >
           hub_home_feature_tutorial_button
         </a>
@@ -136,7 +133,6 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
           className="HomeView__featureButton button primary"
           href="/setup"
           onClick={[Function]}
-          style={undefined}
         >
           hub_home_feature_setup_button
         </a>
@@ -164,7 +160,6 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
           className="HomeView__featureButton button primary"
           href="/plus"
           onClick={[Function]}
-          style={undefined}
         >
           hub_home_feature_supporter_button
         </a>
@@ -281,7 +276,6 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
           className="HomeView__featureButton button primary hollow"
           href="/tutorial"
           onClick={[Function]}
-          style={undefined}
         >
           hub_home_feature_tutorial_button_alt
         </a>
@@ -313,7 +307,6 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
           className="HomeView__featureButton button primary hollow"
           href="/setup"
           onClick={[Function]}
-          style={undefined}
         >
           hub_home_feature_setup_button_alt
         </a>
@@ -341,7 +334,6 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
           className="HomeView__featureButton button primary"
           href="/plus"
           onClick={[Function]}
-          style={undefined}
         >
           hub_home_feature_supporter_button_alt
         </a>
