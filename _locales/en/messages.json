@@ -734,7 +734,7 @@
 	},
 	"panel_detail_menu_stats_title": {
 		"message": "Historical stats"
-	},	
+	},
 	"panel_detail_menu_premium_title": {
 		"message": "Premium"
 	},
@@ -2025,7 +2025,7 @@
 		"message": "Priority Support"
 	},
 	"subscription_history_stats": {
-		"message": "History Stats"
+		"message": "Historical Stats"
 	},
 	"subscribe_pitch": {
 		"message": "While Ghostery is free, you can choose to support us through a small subscription of &#36;2 per month in exchange for cool perks, such as color themes, priority help service, and more. Join our mission and subscribe!"
@@ -2123,28 +2123,28 @@
 		"message": "Data Points Anonymized"
 	},
 	"panel_stats_ads_blocked": {
-		"message": "Ads Blocked"		
+		"message": "Ads Blocked"
 	},
 	"panel_stats_total_trackers_seen": {
-		"message": "Total Trackers Seen"	
+		"message": "Total Trackers Seen"
 	},
 	"panel_stats_total_trackers_blocked": {
-		"message": "Total Trackers Blocked"	
+		"message": "Total Trackers Blocked"
 	},
 	"panel_stats_total_trackers_anonymized": {
-		"message": "Total Trackers Anonymized"	
+		"message": "Total Trackers Anonymized"
 	},
 	"panel_stats_total_ads_blocked": {
-		"message": "Total Ads Blocked"	
+		"message": "Total Ads Blocked"
 	},
 	"panel_stats_cumulative": {
-		"message": "Cumulative"	
+		"message": "Cumulative"
 	},
 	"panel_stats_monthly": {
-		"message": "Monthly"	
+		"message": "Monthly"
 	},
 	"panel_stats_daily": {
-		"message": "Daily"	
+		"message": "Daily"
 	},
 	"panel_stats_reset": {
 		"message": "Reset all stats"

@@ -135,6 +135,12 @@ class Header extends React.Component {
 	}
 
 	clickLogo = () => {
+		const { entries, location } = this.props.history;
+		if (location.pathname === '/stats' &&
+		entries[entries.length - 2].pathname === '/subscription/info') {
+			this.props.history.push('/subscription/info');
+			return;
+		}
 		this.props.history.push(this.props.is_expert ? '/detail/blocking' : '/');
 	}
 
