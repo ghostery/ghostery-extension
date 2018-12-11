@@ -285,7 +285,7 @@ class Stats extends React.Component {
 		const clearState = {
 			selection: {
 				type: 'cumulative',
-				view: 'trackersSeen',
+				view: freeze ? '' : 'trackersSeen',
 				graphTitle: this.getGraphTitle('cumulative', 'trackersSeen'),
 				graphIconPath: this.getGraphIconPath('trackersSeen'),
 				summaryTitle: this.getSummaryTitle('cumulative'),
@@ -434,6 +434,7 @@ class Stats extends React.Component {
 				state.selection.summaryData = state.cumulativeData;
 				state.selection.currentIndex = monthlyData.length - 1;
 				state.selection.timeframeSelectors.back = monthlyData.length > 6 ? '' : 'disabled';
+				state.selection.view = 'trackersSeen';
 				state.selection.selectionData = this._determineSelectionData(state);
 
 				this.setState(state);

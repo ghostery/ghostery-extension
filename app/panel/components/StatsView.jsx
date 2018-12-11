@@ -137,7 +137,7 @@ const StatsView = (props) => {
 			<div className="tile-container">
 				<div id="trackersSeen" className="tile" onClick={selectView} >
 					<div className="tile-title"><p className={trackersSeenClassNames}>{t('panel_stats_trackers_seen')}</p></div>
-					<div className="tile-value">
+					<div className={trackersSeenValueClassNames}>
 						<p className="tile-value-content">{subscriber ? trackersSeen : ''}</p>
 						<div className="active-underline" />
 					</div>

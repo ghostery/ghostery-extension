@@ -154,6 +154,7 @@
 			}
 			.tile-value {
 				display: flex;
+				flex-direction: column;
 				justify-content: center;
 				position: relative;
 				top: -12px;
@@ -161,7 +162,7 @@
 
 				.tile-value-content {
 					text-align: center;
-					padding: 0 20px;
+					padding: 8px 20px 0 20px;
 					font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 					font-size: 20px;
 					color: #00aef0;
@@ -170,13 +171,19 @@
 					background-image: url('../../app/images/panel/stats-locked.svg');
 					background-repeat: no-repeat;
 					background-position: center;
+					padding-top: 37px;
 				}
-				&.active > .tile-value-content {
-					font-weight: 800;
-
+				&.active {
+					.tile-value-content {
+						padding-top: 11px;
+						font-weight: 800;
+					}
 					.active-underline {
-						height: 1px;
+						min-height: 3px;
 						width: 70px;
+						position: relative;
+						top: -17px;
+						left: 37px;
 						background-color: #00aef0;
 					}
 				}
