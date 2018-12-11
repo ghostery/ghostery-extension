@@ -118,7 +118,7 @@ class Policy {
 	 * @param  {string} tab_url 	tab url
 	 * @return {BlockWithReason}	block result with reason
 	 */
-	shouldBlock(app_id, cat_id, tab_id, tab_host, tab_url) {
+	shouldBlock(app_id, cat_id, tab_id, tab_host) {
 		if (globals.SESSION.paused_blocking) {
 			return { block: false, reason: BLOCK_REASON_BLOCK_PAUSED };
 		}

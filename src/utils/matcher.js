@@ -40,9 +40,7 @@ export function isBug(src, tab_url) {
 		// class 1: check host hash
 		_matchesHost(db.patterns.host, processedSrc.host) ||
 		// class 3: check path hash
-		_matchesPath(processedSrc.path) ||
-		// class 4: check regex patterns
-		_matchesRegex(processedSrc.host_with_path);
+		_matchesPath(processedSrc.path);
 
 	if (typeof tab_url !== 'undefined') {
 		// check firstPartyExceptions
@@ -180,28 +178,6 @@ function _matchesHost(root, src_host, src_path) {
 	}
 
 	return bug_id;
-}
-
-// can still produce false positives (when something that
-// matches a tracker is in the path somewhere, for example)
-/**
- * Match a url against a list of regular expression which are mapped to bug ids.
- * @private
- *
- * @param {string} 	src			a url to find a matching entry for
- *
- * @return {int|boolean} 		bug id or false if the match was not found
- */
-function _matchesRegex(src) {
-	const regexes = bugDb.db.patterns.regex;
-
-	for (const bug_id in regexes) {
-		if (regexes[bug_id].test(src)) {
-			return +bug_id;
-		}
-	}
-
-	return false;
 }
 
 /**
