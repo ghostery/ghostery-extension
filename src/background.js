@@ -1379,7 +1379,8 @@ messageCenter.on('enabled', () => {
 			// first check that the message is from core and is the one we expect
 			if (msg.origin === 'offers-core' &&
 				msg.type === 'push-offer' &&
-				msg.data.offer_data) {
+				msg.data.offer_data
+			) {
 				log('RECEIVED OFFER', msg);
 
 				const unreadIdx = rewards.unreadOfferIds.indexOf(msg.data.offer_id);
@@ -1394,21 +1395,21 @@ messageCenter.on('enabled', () => {
 					// We use getTabByUrl() instead of getActiveTab()
 					// because user may open the offer-triggering url in a new tab
 					// through the context menu, which may not switch to the new tab
+					// If the url provided by Cliqz turns out to be invalid, we fall back to getActiveTabs
 					if (msg.data.display_rule && msg.data.display_rule.url) {
-						utils.getTabByUrl((tab) => {
-							const tabId = tab ? tab.id : 0;
-							rewards.showHotDogOrOffer(tabId, msg.data);
-						},
-						msg.data.display_rule.url
+						utils.getTabByUrl(
+							msg.data.display_rule.url,
+							(tab) => {
+								const tabId = tab ? tab.id : 0;
+								rewards.showHotDogOrOffer(tabId, msg.data);
+							},
+							() => {
+								utils.getActiveTab((tab) => {
+									const tabId = tab ? tab.id : 0;
+									rewards.showHotDogOrOffer(tabId, msg.data);
+								});
+							}
 						);
-					} else {
-						// We fall back on getActiveTab() so we can still show the offer
-						// if the url is not available or the Cliqz data structure changes
-						utils.getActiveTab((tab) => {
-							let tabId = 0;
-							if (tab) tabId = tab.id;
-							rewards.showHotDogOrOffer(tabId, msg.data);
-						});
 					}
 				}
 			}
