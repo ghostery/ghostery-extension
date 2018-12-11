@@ -237,7 +237,8 @@ export function getTabByUrl(callback, url) {
 	chrome.tabs.query({
 		url
 	}, (tabs) => {
-		callback(tabs[0]);
+		const tab = tabs ? tabs[0] : false;
+		callback(tab);
 	});
 }
 
