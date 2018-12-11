@@ -46,10 +46,11 @@ class Policy {
 	 * @return {boolean}
 	 */
 	getSitePolicy(url) {
-		if (this.blacklisted(url)) {
+		const { host } = processUrl(url);
+		if (this.blacklisted(host)) {
 			return 1;
 		}
-		if (this.whitelisted(url)) {
+		if (this.whitelisted(host)) {
 			return 2;
 		}
 		return false;
@@ -60,10 +61,9 @@ class Policy {
 	 * @param  {string} url 		site url
 	 * @return {string|boolean} 	corresponding whitelist entry or false, if none
 	 */
-	whitelisted(url) {
-		if (url) {
-			url = processUrl(url).host;
-			url = url.replace(/^www\./, '');
+	whitelisted(host) {
+		if (host) {
+			const url = host.replace(/^www\./, '');
 			const sites = conf.site_whitelist || [];
 			const num_sites = sites.length;
 
@@ -84,10 +84,9 @@ class Policy {
 	 * @param  {string} url 		site url
 	 * @return {string|boolean} 	corresponding blacklist entry or false, if none
 	 */
-	blacklisted(url) {
-		if (url) {
-			url = processUrl(url).host;
-			url = url.replace(/^www\./, '');
+	blacklisted(host) {
+		if (host) {
+			const url = host.replace(/^www\./, '');
 			const sites = conf.site_blacklist || [];
 			const num_sites = sites.length;
 
@@ -126,13 +125,13 @@ class Policy {
 
 		if (conf.selected_app_ids.hasOwnProperty(app_id)) {
 			if (conf.toggle_individual_trackers && conf.site_specific_unblocks.hasOwnProperty(tab_host) && conf.site_specific_unblocks[tab_host].includes(+app_id)) {
-				if (this.blacklisted(tab_url)) {
+				if (this.blacklisted(tab_host)) {
 					const allowedOnce = c2pDb.allowedOnce(tab_id, app_id);
 					return { block: !allowedOnce, reason: allowedOnce ? BLOCK_REASON_C2P_ALLOWED_ONCE : BLOCK_REASON_BLACKLISTED };
 				}
 				return { block: false, reason: BLOCK_REASON_SS_UNBLOCKED };
 			}
-			if (this.whitelisted(tab_url)) {
+			if (this.whitelisted(tab_host)) {
 				return { block: false, reason: BLOCK_REASON_WHITELISTED };
 			}
 			const allowedOnce = c2pDb.allowedOnce(tab_id, app_id);
@@ -140,13 +139,13 @@ class Policy {
 		}
 		// We get here when app_id is not selected for blocking
 		if (conf.toggle_individual_trackers && conf.site_specific_blocks.hasOwnProperty(tab_host) && conf.site_specific_blocks[tab_host].includes(+app_id)) {
-			if (this.whitelisted(tab_url)) {
+			if (this.whitelisted(tab_host)) {
 				return { block: false, reason: BLOCK_REASON_WHITELISTED };
 			}
 			const allowedOnce = c2pDb.allowedOnce(tab_id, app_id);
 			return { block: !allowedOnce, reason: allowedOnce ? BLOCK_REASON_C2P_ALLOWED_ONCE : BLOCK_REASON_SS_BLOCKED };
 		}
-		if (this.blacklisted(tab_url)) {
+		if (this.blacklisted(tab_host)) {
 			const allowedOnce = c2pDb.allowedOnce(tab_id, app_id);
 			return { block: !allowedOnce, reason: allowedOnce ? BLOCK_REASON_C2P_ALLOWED_ONCE : BLOCK_REASON_BLACKLISTED };
 		}
