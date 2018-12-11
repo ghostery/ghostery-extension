@@ -74,19 +74,19 @@ const StatsView = (props) => {
 		active: view === 'adsBlocked',
 	});
 
-	const trackersSeenValueClassNames = ClassNames('tile-value-content', {
+	const trackersSeenValueClassNames = ClassNames('tile-value', {
 		active: view === 'trackersSeen',
 		locked: !subscriber,
 	});
-	const trackersBlockedValueClassNames = ClassNames('tile-value-content', {
+	const trackersBlockedValueClassNames = ClassNames('tile-value', {
 		active: view === 'trackersBlocked',
 		locked: !subscriber,
 	});
-	const trackersAnonymizedValueClassNames = ClassNames('tile-value-content', {
+	const trackersAnonymizedValueClassNames = ClassNames('tile-value', {
 		active: view === 'trackersAnonymized',
 		locked: !subscriber,
 	});
-	const adsBlockedValueClassNames = ClassNames('tile-value-content', {
+	const adsBlockedValueClassNames = ClassNames('tile-value', {
 		active: view === 'adsBlocked',
 		locked: !subscriber,
 	});
@@ -137,22 +137,34 @@ const StatsView = (props) => {
 			<div className="tile-container">
 				<div id="trackersSeen" className="tile" onClick={selectView} >
 					<div className="tile-title"><p className={trackersSeenClassNames}>{t('panel_stats_trackers_seen')}</p></div>
-					<div className="tile-value"><p className={trackersSeenValueClassNames}>{subscriber ? trackersSeen : ''}</p></div>
+					<div className="tile-value">
+						<p className="tile-value-content">{subscriber ? trackersSeen : ''}</p>
+						<div className="active-underline" />
+					</div>
 				</div>
 				<div className="tile-divider" />
 				<div id="trackersBlocked" className="tile" onClick={selectView} >
 					<div className="tile-title"><p className={trackersBlockedClassNames}>{t('panel_stats_trackers_blocked')}</p></div>
-					<div className="tile-value"><p className={trackersBlockedValueClassNames}>{subscriber ? trackersBlocked : ''}</p></div>
+					<div className={trackersBlockedValueClassNames}>
+						<p className="tile-value-content">{subscriber ? trackersBlocked : ''}</p>
+						<div className="active-underline" />
+					</div>
 				</div>
 				<div className="tile-divider" />
 				<div id="trackersAnonymized" className="tile" onClick={selectView} >
 					<div className="tile-title"><p className={trackersAnonymizedClassNames}>{t('panel_stats_trackers_anonymized')}</p></div>
-					<div className="tile-value"><p className={trackersAnonymizedValueClassNames}>{subscriber ? trackersAnonymized : ''}</p></div>
+					<div className={trackersAnonymizedValueClassNames}>
+						<p className="tile-value-content">{subscriber ? trackersAnonymized : ''}</p>
+						<div className="active-underline" />
+					</div>
 				</div>
 				<div className="tile-divider" />
 				<div id="adsBlocked" className="tile" onClick={selectView} >
 					<div className="tile-title"><p className={adsBlockedClassNames}>{t('panel_stats_ads_blocked')}</p></div>
-					<div className="tile-value"><p className={adsBlockedValueClassNames}>{subscriber ? adsBlocked : ''}</p></div>
+					<div className={adsBlockedValueClassNames}>
+						<p className="tile-value-content">{subscriber ? adsBlocked : ''}</p>
+						<div className="active-underline" />
+					</div>
 				</div>
 			</div>
 			{ showResetModal &&

@@ -473,23 +473,21 @@ class Stats extends React.Component {
 	 */
 	render() {
 		return (
-			<div id="content-stats">
-				<StatsView
-					showResetModal={this.state.showResetModal}
-					showPitchModal={!this.props.user || !this.props.user.subscriptionsSupporter}
-					loggedIn={this.props.loggedIn}
-					getStats={this.getStats}
-					selection={this.state.selection}
-					selectView={this.selectView}
-					selectType={this.selectType}
-					selectTimeframe={this.selectTimeframe}
-					resetStats={this.resetStats}
-					doReset={this.doReset}
-					cancelReset={this.cancelReset}
-					subscribe={this.subscribe}
-					signIn={this.signIn}
-				/>
-			</div>
+			<StatsView
+				showResetModal={this.state.showResetModal}
+				showPitchModal={!this.props.user || !this.props.user.subscriptionsSupporter}
+				loggedIn={this.props.loggedIn}
+				getStats={this.getStats}
+				selection={this.state.selection}
+				selectView={this.selectView}
+				selectType={this.selectType}
+				selectTimeframe={this.selectTimeframe}
+				resetStats={this.resetStats}
+				doReset={this.doReset}
+				cancelReset={this.cancelReset}
+				subscribe={this.subscribe}
+				signIn={this.signIn}
+			/>
 		);
 	}
 }
