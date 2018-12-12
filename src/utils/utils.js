@@ -158,7 +158,7 @@ export function processUrl(src) {
 	if (!src) {
 		return {};
 	}
-	const res = url.parse(src);
+	const res = new URL(src);
 
 	return {
 		protocol: res.protocol ? res.protocol.substr(0, res.protocol.length - 1) : '',

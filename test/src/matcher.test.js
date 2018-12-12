@@ -106,15 +106,15 @@ describe('src/utils/matcher.js', () => {
 	describe('testing isBug()', () => {
 		describe('testing basic pattern matching', () => {
 			test('host+path tracker matching works', () => {
-				return expect(isBug('https://apis.google.com/js/plusone.js', 'example.com')).toBe(1240);
+				return expect(isBug('https://apis.google.com/js/plusone.js', 'https://example.com')).toBe(1240);
 			});
 
 			test('path only tracker matching works', () => {
-				return expect(isBug('https://apis.google.com/js/tracking.js', 'example.com')).toBe(13);
+				return expect(isBug('https://apis.google.com/js/tracking.js', 'https://example.com')).toBe(13);
 			});
 
 			test('pattern matching is case insensitive', () => {
-				return expect(isBug('https://APIS.Google.com/js/Tracking.js', 'example.com')).toBe(13);
+				return expect(isBug('https://APIS.Google.com/js/Tracking.js', 'https://example.com')).toBe(13);
 			});
 		});
 
