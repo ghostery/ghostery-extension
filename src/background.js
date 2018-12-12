@@ -19,7 +19,6 @@
  * @namespace Background
  */
 import _ from 'underscore';
-import moment from 'moment/min/moment-with-locales.min';
 import cliqz from './classes/Cliqz';
 // object classes
 import Events from './classes/EventHandlers';
@@ -378,7 +377,7 @@ function handleNotifications(name, message, tab_id, callback) {
 					'onFileImported',
 					{
 						type: 'message',
-						text: `${t('settings_import_success')} ${moment(data.settings_last_imported).format('LLL')}`
+						text: `${t('settings_import_success')}`
 					}
 				);
 			});
