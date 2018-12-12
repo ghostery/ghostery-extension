@@ -46,12 +46,14 @@ class Policy {
 	 * @return {boolean}
 	 */
 	getSitePolicy(url) {
-		const { host } = processUrl(url);
-		if (this.blacklisted(host)) {
-			return 1;
-		}
-		if (this.whitelisted(host)) {
-			return 2;
+		if (url) {
+			const { hostname } = processUrl(url);
+			if (this.blacklisted(hostname)) {
+				return 1;
+			}
+			if (this.whitelisted(hostname)) {
+				return 2;
+			}
 		}
 		return false;
 	}
