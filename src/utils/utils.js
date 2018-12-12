@@ -233,9 +233,9 @@ export function getActiveTab(callback) {
  *
  * @param {string} url				the tab url to search for
  * @param {function} callback		function to call if at least one matching tab is found
- * @param {function} fallback		function to call if the provided url pattern is invalid or no matching tab is found
+ * @param {function} error			function to call if the provided url pattern is invalid or no matching tab is found
  */
-export function getTabByUrl(url, callback, fallback) {
+export function getTabByUrl(url, callback, error) {
 	chrome.tabs.query(
 		{
 			url
@@ -243,12 +243,12 @@ export function getTabByUrl(url, callback, fallback) {
 		(tabs) => {
 			if (chrome.runtime.lastError) {
 				log('getTabByUrl', chrome.runtime.lastError.message);
-				if (fallback && typeof fallback === 'function') {
-					fallback(chrome.runtime.lastError);
+				if (error && typeof error === 'function') {
+					error(chrome.runtime.lastError);
 				}
 			} else if (tabs.length === 0) {
-				if (fallback && typeof fallback === 'function') {
-					fallback();
+				if (error && typeof error === 'function') {
+					error();
 				}
 			} else if (callback && typeof callback === 'function') {
 				callback(tabs[0]);
