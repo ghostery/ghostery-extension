@@ -160,7 +160,6 @@ class OfferCard extends Component {
 	}
 
 	handlePrompt(promptNumber, option) {
-		// @TODO update user settings
 		if (promptNumber === 1) {
 			if (!option) {
 				sendMessage('ping', 'rewards_first_reject');
@@ -169,6 +168,7 @@ class OfferCard extends Component {
 				});
 				return;
 			}
+			this.props.actions.messageBackground('rewardsPromptOptedIn');
 			this.props.actions.sendSignal('offer_first_optin');
 			sendMessage('ping', 'rewards_first_accept');
 		} else if (promptNumber === 2) {
