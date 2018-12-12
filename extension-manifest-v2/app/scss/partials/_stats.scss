@@ -12,9 +12,10 @@
  */
 
 #content-stats {
-	position: absolute;
+	position: relative;
 	height: 479px;
 	width: 100%;
+	overflow: hidden;
 	.stats-top-header {
 		height: 40px;
 		font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
@@ -133,52 +134,66 @@
 			width: 25%;
 			background-color: #f7f7f7;
 			.tile-title {
-				display: table;
+				display: flex;
+				justify-content: center;
+				align-items: center;
 				position: relative;
-				height: 50px;
+				min-height: 60px;
 				.tile-title-text {
-					display: table-cell;
 					vertical-align: middle;
 					text-align: center;
 					padding: 10px 20px 0 20px;
 					font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 					font-size: 12px;
+					line-height: 17px;
 					color: #4a4a4a;
 					&.active {
-						font-weight: 700;
+						font-weight: 800;
 					}
 				}
 			}
 			.tile-value {
-				display: table;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
 				position: relative;
-				top: -8px;
+				top: -12px;
 				height: 50px;
+
 				.tile-value-content {
-					display: table-cell;
-					vertical-align: middle;
 					text-align: center;
-					padding: 0 20px 0 20px;
+					padding: 8px 20px 0 20px;
 					font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 					font-size: 20px;
 					color: #00aef0;
-					&.locked {
-						background-image: url('../../app/images/panel/stats-locked.svg');
-						background-repeat: no-repeat;
-						background-position: center;
+				}
+				&.locked > .tile-value-content {
+					background-image: url('../../app/images/panel/stats-locked.svg');
+					background-repeat: no-repeat;
+					background-position: center;
+					padding-top: 37px;
+				}
+				&.active {
+					.tile-value-content {
+						padding-top: 11px;
+						font-weight: 800;
 					}
-					&.active {
-						font-weight: 700;
-						text-decoration: underline;
+					.active-underline {
+						min-height: 3px;
+						width: 70px;
+						position: relative;
+						top: -17px;
+						left: 37px;
+						background-color: #00aef0;
 					}
 				}
 			}
 		}
 		.tile-divider {
 			width: 1px;
-			height: 70px;
+			height: 60px;
 			position: relative;
-			top: 15px;
+			top: 20px;
 			background-color: darkgray;
 		}
 	}
@@ -194,9 +209,10 @@
 			display: flex;
 			flex-direction: column;
 			position: relative;
-			margin-top: 35px;
+			margin-top: 25px;
 			.modal-text-container {
-				display: table;
+				display: flex;
+				justify-content: center;
 				.modal-title-text {
 					display: table-cell;
 					vertical-align: middle;
@@ -230,7 +246,7 @@
 		.modal-buttons-container {
 			display: flex;
 			justify-content: center;
-			margin: 10px 0 10px 0;
+			margin: 20px 0 10px 0;
 			p {
 				margin-top: 3px;
 			}
@@ -264,7 +280,11 @@
 		}
 		&.reset-modal {
 			.modal-text-container {
+				margin-top: 10px;
 				margin-bottom: 30px;
+			}
+			.modal-buttons-container {
+				margin-top: 10px;
 			}
 		}
 	}
