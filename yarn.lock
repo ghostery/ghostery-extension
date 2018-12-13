@@ -131,12 +131,13 @@
     traceur "0.0.105"
     uglify-js "^2.6.1"
 
-"@cliqz/adblocker@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-0.3.0.tgz#c16c0a09b949ee369d232409cb0eac8d7ec0795b"
-  integrity sha512-VwvF3AhOr9XOUOtO5BGjHKE2PsqvqSEXYhQPkWEf8n75CRUxvxPPE4LyHJiSXQwe4WeEgpkEGDOVcCJPMZeQHQ==
+"@cliqz/adblocker@^0.4.1":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-0.4.1.tgz#a1a046739330800e22758de69765eddb36ff2d43"
+  integrity sha512-lH+6sYh+qKDfc2duZTM4/uYcXL0YzSRhTRB4XA5RVPvWO/jEKoygv2Mo0sZm386BVSIj57+Y33Qybp/nhJeLeg==
   dependencies:
-    tldts "^3.0.0"
+    punycode "^2.1.1"
+    tldts "^3.1.1"
     tslib "^1.9.3"
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
@@ -1944,13 +1945,13 @@ brorand@^1.0.1:
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
   integrity sha1-EsJe/kCkXjwyPrhnWgoM5XsiNx8=
 
-"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery-mobile/v7.31/7.31.4.972a362.tgz":
+"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery-mobile/v7.31/7.31.4.cc1ab49.tgz":
   version "7.31.4"
-  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery-mobile/v7.31/7.31.4.972a362.tgz#3bd2728790e49f599f965e4b48a70c53b3d7fb68"
+  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery-mobile/v7.31/7.31.4.cc1ab49.tgz#b9a216b1f6faf19dc6877bcae715385f41aeb986"
   dependencies:
     "@cliqz-oss/dexie" "^2.0.4"
     "@cliqz-oss/systemjs-builder" "^0.16.13"
-    "@cliqz/adblocker" "^0.3.0"
+    "@cliqz/adblocker" "^0.4.1"
     BigInt "^5.5.3"
     ajv "^6.5.0"
     anonymous-credentials "https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.1/anonymous-credentials-0.1.1.tgz"
@@ -1967,6 +1968,7 @@ brorand@^1.0.1:
     global "^4.3.2"
     hammerjs "^2.0.8"
     handlebars "^4.0.11"
+    htmlparser2 "3.10.0"
     jquery "^3.0.0"
     js-md5 "^0.7.3"
     jsep "^0.3.0"
@@ -1979,21 +1981,21 @@ brorand@^1.0.1:
     pouchdb "^7.0.0"
     prop-types "^15.5.10"
     qrcodejs "^1.0.0"
-    react "^16.3.2"
-    react-dom "^16.3.2"
-    react-modal "^3.4.4"
-    react-native-web "^0.1.11"
-    react-toggle-display "^2.2.0"
-    react-tooltip "^3.3.0"
-    react-touch-carousel "^0.8.2"
+    react "16.3.2"
+    react-dom "16.3.2"
+    react-modal "3.4.4"
+    react-native-web "0.1.11"
+    react-toggle-display "2.2.0"
+    react-tooltip "3.3.0"
+    react-touch-carousel "0.8.2"
     readline "^1.3.0"
-    rxjs "^5.5.6"
+    rxjs "^6.3.3"
     sanitize-filename "^1.6.1"
     simple-statistics "^5.2.1"
     spanan "^2.0.0"
     tablesorter "^2.29.2"
     text-encoding "^0.6.4"
-    tldts "^3.0.0"
+    tldts "^3.1.2"
     ua-parser-js "^0.7.12"
     untildify "^3.0.2"
     url-pattern "^1.0.3"
@@ -2431,7 +2433,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.5:
+classnames@^2.2.0, classnames@^2.2.5:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
   integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
@@ -5250,7 +5252,7 @@ html-minifier@^3.5.8:
     relateurl "0.2.x"
     uglify-js "3.4.x"
 
-htmlparser2@^3.9.0:
+htmlparser2@3.10.0:
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/htmlparser2/-/htmlparser2-3.10.0.tgz#5f5e422dcf6119c0d983ed36260ce9ded0bee464"
   integrity sha512-J1nEUGv+MkXS0weHNWVKJJ+UrLfePxRWpN3C9bEi9fLxL2+ggW94DQvgYVXsaT30PGwYRIZKNZXuyMhp3Di4bQ==
@@ -8923,6 +8925,16 @@ rc@^1.1.6, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-dom@16.3.2:
+  version "16.3.2"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.3.2.tgz#cb90f107e09536d683d84ed5d4888e9640e0e4df"
+  integrity sha512-MMPko3zYncNrz/7gG17wJWUREZDvskZHXOwbttzl0F0L3wDmToyuETuo/r8Y5yvDejwYcRyWI1lvVBjLJWFwKA==
+  dependencies:
+    fbjs "^0.8.16"
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.0"
+
 react-dom@^16.0.0:
   version "16.4.1"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.4.1.tgz#7f8b0223b3a5fbe205116c56deb85de32685dad6"
@@ -8932,16 +8944,6 @@ react-dom@^16.0.0:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.0"
-
-react-dom@^16.3.2:
-  version "16.5.2"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.5.2.tgz#b69ee47aa20bab5327b2b9d7c1fe2a30f2cfa9d7"
-  integrity sha512-RC8LDw8feuZOHVgzEf7f+cxBr/DnKdqp56VU0lAs1f4UfKc4cU8wU4fTq/mgnvynLQo8OtlPC19NUFh/zjZPuA==
-  dependencies:
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-    prop-types "^15.6.2"
-    schedule "^0.5.0"
 
 react-is@^16.4.1:
   version "16.4.1"
@@ -8953,10 +8955,10 @@ react-lifecycles-compat@^3.0.0:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-modal@^3.4.4:
-  version "3.6.1"
-  resolved "https://registry.yarnpkg.com/react-modal/-/react-modal-3.6.1.tgz#54d27a1ec2b493bbc451c7efaa3557b6af82332d"
-  integrity sha512-vAhnawahH1fz8A5x/X/1X20KHMe6Q0mkfU5BKPgKSVPYhMhsxtRbNHSitsoJ7/oP27xZo3naZZlwYuuzuSO1xw==
+react-modal@3.4.4:
+  version "3.4.4"
+  resolved "https://registry.yarnpkg.com/react-modal/-/react-modal-3.4.4.tgz#e9dde25e9e85a59c76831f2a2b468712a546aded"
+  integrity sha512-5VYNvy301Z0xxGBQhPmDdzOcyEkUG8sU7bpRsAPI4OHgEUkbBFrpjzs/ocNI0m824/lOqTxddXzwgmDJXx3s3Q==
   dependencies:
     exenv "^1.2.0"
     prop-types "^15.5.10"
@@ -8972,10 +8974,10 @@ react-motion@0.5.2:
     prop-types "^15.5.8"
     raf "^3.1.0"
 
-react-native-web@^0.1.11:
-  version "0.1.16"
-  resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.1.16.tgz#e0d1a43b3b59a8371cdb538c11088d206b29f2b1"
-  integrity sha512-kRt0HjLR16AOtDJsERy7MOfm3k+oJPY5qleVFEvxF+1jDkL9DSDeaiu+QoIDog5wv1lWsafCUqJU4IcnE3FzIg==
+react-native-web@0.1.11:
+  version "0.1.11"
+  resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.1.11.tgz#f868787dbc0e17a4cdee62607ba590e8b81c3696"
+  integrity sha1-+Gh4fbwOF6TN7mJge6WQ6LgcNpY=
   dependencies:
     animated "^0.2.0"
     array-find-index "^1.0.2"
@@ -9064,28 +9066,37 @@ react-timer-mixin@^0.13.3:
   resolved "https://registry.yarnpkg.com/react-timer-mixin/-/react-timer-mixin-0.13.3.tgz#0da8b9f807ec07dc3e854d082c737c65605b3d22"
   integrity sha1-Dai5+AfsB9w+hU0ILHN8ZWBbPSI=
 
-react-toggle-display@^2.2.0:
+react-toggle-display@2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/react-toggle-display/-/react-toggle-display-2.2.0.tgz#20a66de23e69d5bd975c4bb3cfeaf18748266c49"
   integrity sha1-IKZt4j5p1b2XXEuzz+rxh0gmbEk=
   dependencies:
     prop-types "^15.5.8"
 
-react-tooltip@^3.3.0:
-  version "3.9.0"
-  resolved "https://registry.yarnpkg.com/react-tooltip/-/react-tooltip-3.9.0.tgz#d874df922c3b34b2e547ec62ff8b2eef42017b51"
-  integrity sha512-vpn738FVv2oe2LzdwUchped3WqLgZSQwrBow+ceChS1+lFEJBPjOa9KD3JH/L/s0Aorxawi3A20qBcHX7vqaag==
+react-tooltip@3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/react-tooltip/-/react-tooltip-3.3.0.tgz#51c08ae0221075e2c43d83cd47fc78466612df7d"
+  integrity sha1-UcCK4CIQdeLEPYPNR/x4RmYS330=
   dependencies:
-    classnames "^2.2.5"
-    prop-types "^15.6.0"
-    sanitize-html-react "^1.13.0"
+    classnames "^2.2.0"
+    prop-types "^15.5.8"
 
-react-touch-carousel@^0.8.2:
-  version "0.8.3"
-  resolved "https://registry.yarnpkg.com/react-touch-carousel/-/react-touch-carousel-0.8.3.tgz#32cfcc1c2364655fc7319b21362517899dd314c7"
-  integrity sha512-UYU46RjfZfMiTtKaa/M0nZWzmxNF2JjtOtfziA1I+QEV22yEs6pvnnnmuzs9cMSeFcvONqA5gwiGJ9hORg5Gww==
+react-touch-carousel@0.8.2:
+  version "0.8.2"
+  resolved "https://registry.yarnpkg.com/react-touch-carousel/-/react-touch-carousel-0.8.2.tgz#f669c047726be23b6e21a7574e2e133a2467c7a4"
+  integrity sha512-r9KfeVzfQmfgyNH6+Wit5K7gD9z2jXgt7BpialPh0DCVN34k7c2ku2O5JgRe+Ha8aLhECzuwkupOxelGybXAjg==
   dependencies:
     react-motion "0.5.2"
+
+react@16.3.2:
+  version "16.3.2"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.3.2.tgz#fdc8420398533a1e58872f59091b272ce2f91ea9"
+  integrity sha512-o5GPdkhciQ3cEph6qgvYB7LTOHw/GB0qRI6ZFNugj49qJCFfgHwVNjZ5u+b7nif4vOeMIOuYj3CeYe2IBD74lg==
+  dependencies:
+    fbjs "^0.8.16"
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.0"
 
 react@^16.0.0:
   version "16.4.1"
@@ -9096,16 +9107,6 @@ react@^16.0.0:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.0"
-
-react@^16.3.2:
-  version "16.5.2"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.5.2.tgz#19f6b444ed139baa45609eee6dc3d318b3895d42"
-  integrity sha512-FDCSVd3DjVTmbEAjUNX6FgfAmQ+ypJfHUsqUJOYNCBUp1h8lqmtC+0mXJ+JjsWx4KAVTkk1vKd1hLQPvEviSuw==
-  dependencies:
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-    prop-types "^15.6.2"
-    schedule "^0.5.0"
 
 read-chunk@^2.1.0:
   version "2.1.0"
@@ -9393,11 +9394,6 @@ regex-not@^1.0.0, regex-not@^1.0.2:
   dependencies:
     extend-shallow "^3.0.2"
     safe-regex "^1.1.0"
-
-regexp-quote@0.0.0:
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/regexp-quote/-/regexp-quote-0.0.0.tgz#1e0f4650c862dcbfed54fd42b148e9bb1721fcf2"
-  integrity sha1-Hg9GUMhi3L/tVP1CsUjpuxch/PI=
 
 regexpp@^1.0.1:
   version "1.1.0"
@@ -9749,17 +9745,17 @@ rxjs@^5.5.2:
   dependencies:
     symbol-observable "1.0.1"
 
-rxjs@^5.5.6:
-  version "5.5.12"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.5.12.tgz#6fa61b8a77c3d793dbaf270bee2f43f652d741cc"
-  integrity sha512-xx2itnL5sBbqeeiVgNPVuQQ1nC8Jp2WfNJhXWHmElW9YmrpS9UVnNzhP3EH3HFqexO5Tlp8GhYY+WEcqcVMvGw==
-  dependencies:
-    symbol-observable "1.0.1"
-
 rxjs@^6.1.0:
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.2.1.tgz#246cebec189a6cbc143a3ef9f62d6f4c91813ca1"
   integrity sha512-OwMxHxmnmHTUpgO+V7dZChf3Tixf4ih95cmXjzzadULziVl/FKhHScGLj4goEw9weePVOH2Q0+GcCBUhKCZc/g==
+  dependencies:
+    tslib "^1.9.0"
+
+rxjs@^6.3.3:
+  version "6.3.3"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.3.3.tgz#3c6a7fa420e844a81390fb1158a9ec614f4bad55"
+  integrity sha512-JTWmoY9tWCs7zvIk/CvRjhjGaOd+OVBM987mxFo+OW66cGpdKjZcpmc74ES1sB//7Kl/PAe8+wEakuhG4pcgOw==
   dependencies:
     tslib "^1.9.0"
 
@@ -9808,15 +9804,6 @@ sanitize-filename@^1.6.1:
   dependencies:
     truncate-utf8-bytes "^1.0.0"
 
-sanitize-html-react@^1.13.0:
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/sanitize-html-react/-/sanitize-html-react-1.13.0.tgz#e757b9adbaf2c8a762f3d2dff70138838e05420a"
-  integrity sha1-51e5rbryyKdi89Lf9wE4g44FQgo=
-  dependencies:
-    htmlparser2 "^3.9.0"
-    regexp-quote "0.0.0"
-    xtend "^4.0.0"
-
 sass-graph@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/sass-graph/-/sass-graph-2.2.4.tgz#13fbd63cd1caf0908b9fd93476ad43a51d1e0b49"
@@ -9842,13 +9829,6 @@ sax@^1.1.3, sax@^1.2.4, sax@~1.2.1:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
   integrity sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==
-
-schedule@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/schedule/-/schedule-0.5.0.tgz#c128fffa0b402488b08b55ae74bb9df55cc29cc8"
-  integrity sha512-HUcJicG5Ou8xfR//c2rPT0lPIRR09vVvN81T9fqfVgBmhERUbDEQoYKjpBxbueJnCPpSu2ujXzOnRQt6x9o/jw==
-  dependencies:
-    object-assign "^4.1.1"
 
 schema-utils@^0.3.0:
   version "0.3.0"
@@ -10708,10 +10688,10 @@ tiny-emitter@2.0.2:
   resolved "https://registry.yarnpkg.com/tiny-emitter/-/tiny-emitter-2.0.2.tgz#82d27468aca5ade8e5fd1e6d22b57dd43ebdfb7c"
   integrity sha512-2NM0auVBGft5tee/OxP4PI3d8WItkDM+fPnaRAVo6xTDI2knbz9eC5ArWGqtGlYqiH3RU5yMpdyTTO7MguC4ow==
 
-tldts@^3.0.0:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/tldts/-/tldts-3.0.2.tgz#28ce00e41afd1a0450897f987a587022183e84eb"
-  integrity sha512-5vcPwDwhUdBKLk7dSb86+w5y/33kPOwlUBwBRN3HvVBJGPwp5bO5uEoh3SMi6zCeyYD75cDJTfCW2F3p5lHhcw==
+tldts@^3.1.1, tldts@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/tldts/-/tldts-3.1.2.tgz#7424a7d18309b14d979ba91526e93b442d8ae1bb"
+  integrity sha512-MbTi4o2oE7N3kqx+KC5hc6FM8jWY654lPXnwSjA7mw+J83DiW/tR8LBKEKqMvCvjwfbaZMEkIudyZ91c7dxEJg==
   dependencies:
     punycode "^2.1.1"
 
