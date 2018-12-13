@@ -61,6 +61,8 @@ class Globals {
 
 		// extension IDs
 		this.GHOSTERY_TAB_ID = 'plmapebanmikcofllaaddgeocahboejc';
+		this.GHOSTERY_TAB_CHROME_TEST_ID = 'ifnpgdmcliingpambkkihjlhikmbbjid';
+		this.GHOSTERY_TAB_FIREFOX_TEST_ID = '{0ea88bc4-03bd-4baa-8153-acc861589c1c}';
 
 		// data stores
 		this.REDIRECT_MAP = new Map();
