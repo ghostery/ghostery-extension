@@ -1591,7 +1591,7 @@ function initializeEventListeners() {
 	chrome.runtime.onMessageExternal.addListener((request, sender, sendResponse) => {
 		let recognized;
 		if (globals.DEBUG) {
-			recognized = sender.id === this.GHOSTERY_TAB_CHROME_TEST_ID || sender.id === this.GHOSTERY_TAB_FIREFOX_TEST_ID;
+			recognized = sender.id === globals.GHOSTERY_TAB_CHROME_TEST_ID || sender.id === globals.GHOSTERY_TAB_FIREFOX_TEST_ID;
 		} else {
 			recognized = sender.id === globals.GHOSTERY_TAB_ID;
 		}
