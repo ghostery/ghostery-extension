@@ -492,6 +492,9 @@ function handleRewards(name, message, callback) {
 		case 'rewardsPromptAccepted':
 			conf.rewards_accepted = true;
 			break;
+		case 'rewardsPromptOptedIn':
+			conf.rewards_opted_in = true;
+			break;
 		case 'ping':
 			metrics.ping(message);
 			break;
@@ -1391,7 +1394,7 @@ messageCenter.on('enabled', () => {
 					utils.getActiveTab((tab) => {
 						let tabId = 0;
 						if (tab) tabId = tab.id;
-						rewards.showHotDog(tabId, msg.data);
+						rewards.showHotDogOrOffer(tabId, msg.data);
 					});
 				}
 			}

@@ -121,6 +121,7 @@ class ConfData {
 			_initProperty('notify_library_updates', false);
 			_initProperty('notify_upgrade_updates', true);
 			_initProperty('rewards_accepted', false);
+			_initProperty('rewards_opted_in', false);
 			_initProperty('settings_last_imported', 0);
 			_initProperty('settings_last_exported', 0);
 			_initProperty('show_alert', true);
