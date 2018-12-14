@@ -75,7 +75,7 @@ const moduleMock = {
 	on: () => {},
 };
 const humanweb = cliqz.modules['human-web'];
-const { adblocker, antitracking, hpn } = cliqz.modules;
+const { adblocker, antitracking, hpnv2 } = cliqz.modules;
 const messageCenter = cliqz.modules['message-center'] || moduleMock;
 const offers = cliqz.modules['offers-v2'] || moduleMock;
 const insights = cliqz.modules.insights || moduleMock;
@@ -1752,13 +1752,13 @@ function initializeGhosteryModules() {
 	});
 
 	if (IS_EDGE) {
-		setCliqzModuleEnabled(hpn, false);
+		setCliqzModuleEnabled(hpnv2, false);
 		setCliqzModuleEnabled(humanweb, false);
 		setCliqzModuleEnabled(offers, false);
 	}
 
 	if (IS_CLIQZ) {
-		setCliqzModuleEnabled(hpn, false);
+		setCliqzModuleEnabled(hpnv2, false);
 		setCliqzModuleEnabled(humanweb, false);
 		setCliqzModuleEnabled(antitracking, false);
 		setCliqzModuleEnabled(adblocker, false);
