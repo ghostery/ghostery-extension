@@ -2153,7 +2153,7 @@
 		"message": "Reset all stats"
 	},
 	"panel_stats_reset_modal_text": {
-		"message": "You statistics history will be reset. There is no way to recover this data. Do you want to continue?"
+		"message": "Your statistics history will be reset. There is no way to recover this data. Do you want to continue?"
 	},
 	"panel_stats_reset_modal_yes": {
 		"message": "Yes, Reset"

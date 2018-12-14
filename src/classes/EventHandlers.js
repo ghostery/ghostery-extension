@@ -33,6 +33,7 @@ import { log } from '../utils/common';
 import { isBug } from '../utils/matcher';
 import * as utils from '../utils/utils';
 
+const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 const RequestsMap = new Map();
 /**
  * This class is a collection of handlers for
@@ -115,8 +116,10 @@ class EventHandlers {
 			utils.getTab(tabId, (tab) => {
 				if (tab) {
 					tabInfo.setTabInfo(tabId, 'incognito', tab.incognito);
-					// purplebox.createBox() will first check to make sure this is a valid tab
-					this._createBox(tabId);
+					if (!IS_EDGE) {
+						// purplebox.createBox() will first check to make sure this is a valid tab
+						this._createBox(tabId);
+					}
 				}
 			}, () => {
 				// prefetched tabs will return an error from utils.getTab
@@ -149,6 +152,11 @@ class EventHandlers {
 			if (!tab || tab.id !== tab_id || tab.incognito) {
 				return;
 			}
+
+			if (IS_EDGE) {
+				this._createBox(tab_id);
+			}
+
 			const alert_messages = [
 				'notification_library_update',
 				'notification_library_update_link',
