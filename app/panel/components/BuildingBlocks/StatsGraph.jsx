@@ -114,8 +114,8 @@ class StatsGraph extends React.Component {
 		// Add axes
 		const xAxis = D3.axisBottom()
 			.ticks(tickAmount)
-			.tickFormat(d => formatLabelDate(data[d].date))
 			.tickSize(0)
+			.tickFormat(d => formatLabelDate(data[d].date))
 			.scale(x);
 
 		const yAxis = D3.axisLeft()
@@ -123,12 +123,12 @@ class StatsGraph extends React.Component {
 			.tickSize(0)
 			.scale(y);
 
-		const xAxisElement = canvas.append('g')
+		canvas.append('g')
 			.attr('class', 'x axis')
 			.attr('transform', `translate(0,${height})`)
 			.call(xAxis);
 
-		const yAxisElement = canvas.append('g')
+		canvas.append('g')
 			.attr('class', 'y axis')
 			.call(yAxis);
 
@@ -312,12 +312,6 @@ class StatsGraph extends React.Component {
 					.attr('r', 4.5);
 				additionalSeconds += 20;
 			});
-
-		// Change styling for demo
-		if (demo) {
-			xAxisElement.selectAll('text').remove();
-			yAxisElement.selectAll('text').remove();
-		}
 	}
 
 	/**

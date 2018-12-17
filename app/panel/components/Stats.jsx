@@ -295,12 +295,12 @@ class Stats extends React.Component {
 
 	_reset = (demo) => {
 		const demoData = [
-			{ date: '2018-01-01', amount: 2, index: 0 },
-			{ date: '2018-02-01', amount: 4, index: 1 },
-			{ date: '2018-03-01', amount: 1, index: 2 },
-			{ date: '2018-04-01', amount: 4, index: 3 },
-			{ date: '2018-05-01', amount: 1, index: 4 },
-			{ date: '2018-06-01', amount: 3, index: 5 },
+			{ date: '2018-07-01', amount: 3000, index: 0 },
+			{ date: '2018-08-01', amount: 4500, index: 1 },
+			{ date: '2018-09-01', amount: 1500, index: 2 },
+			{ date: '2018-10-01', amount: 6000, index: 3 },
+			{ date: '2018-11-01', amount: 3000, index: 4 },
+			{ date: '2018-12-01', amount: 4500, index: 5 },
 		];
 
 		const clearData = {
@@ -364,8 +364,8 @@ class Stats extends React.Component {
 				const cumulativeMonthlyData = [];
 				// let prevDate = ''; // <-- see loop below
 				allData.forEach((dataItem, i) => {
-					// Uncomment loop to add zero values for nonexistent days in the case
-					// that users find that to be less confusing than skipping them
+					// Use this loop to add zero values for days Ghostery wasn't used in
+					// case users find that to be clearer than passing over them
 					// if (i !== 0) {
 					// 	while (prevDate !== moment(dataItem.day).subtract(1, 'days').format('YYYY-MM-DD')) {
 					// 		prevDate = moment(prevDate).add(1, 'days').format('YYYY-MM-DD');
