@@ -145,6 +145,9 @@ class Stats extends React.Component {
 	 * @param {Object} event 		click event
 	 */
 	selectView = (event) => {
+		if (!this._isSupporter(this.props)) {
+			return;
+		}
 		const state = Object.assign({}, this.state);
 		const { selection } = state;
 		if (event.currentTarget.id !== selection.view) {
@@ -265,7 +268,7 @@ class Stats extends React.Component {
 
 	doReset = () => {
 		sendMessage('resetStats');
-		this.setState(this._reset());
+		this.setState(this._reset(false));
 	}
 
 	cancelReset = () => {
@@ -286,24 +289,35 @@ class Stats extends React.Component {
 		this.props.history.push('/login');
 	}
 
-	_reset = (freeze) => {
-		const clearData = freeze ? {} : {
+	_reset = (demo) => {
+		const demoData = [
+			{ date: '2018-01-01', amount: 2 },
+			{ date: '2018-02-01', amount: 4 },
+			{ date: '2018-03-01', amount: 1 },
+			{ date: '2018-04-01', amount: 4 },
+			{ date: '2018-05-01', amount: 1 },
+			{ date: '2018-06-01', amount: 3 },
+		];
+
+		const clearData = {
 			date: moment().format('YYYY-MM-DD'),
 			trackersSeen: 0,
 			trackersBlocked: 0,
 			trackersAnonymized: 0,
 			adsBlocked: 0,
 		};
-		const clearState = {
+
+		const clearOrDemoState = {
 			selection: {
 				type: 'cumulative',
-				view: freeze ? '' : 'trackersSeen',
+				view: demo ? '' : 'trackersSeen',
+				demo,
 				graphTitle: this.getGraphTitle('cumulative', 'trackersSeen'),
 				graphIconPath: this.getGraphIconPath('trackersSeen'),
 				summaryTitle: this.getSummaryTitle('cumulative'),
 				tooltipText: t('panel_stats_trackers_seen'),
 				summaryData: clearData,
-				selectionData: [clearData],
+				selectionData: demo ? demoData : [{ date: clearData.date, amount: clearData.trackersSeen }],
 				currentIndex: 0,
 				timeframeSelectors: { back: 'disabled', forward: 'disabled' },
 			},
@@ -316,8 +330,7 @@ class Stats extends React.Component {
 			showResetModal: false,
 			showPitchModal: (!this.props.user || !this.props.user.subscriptionsSupporter),
 		};
-		clearState.selection.selectionData = this._determineSelectionData(clearState);
-		return clearState;
+		return clearOrDemoState;
 	}
 
 	_getAllStats = () => (
@@ -448,6 +461,7 @@ class Stats extends React.Component {
 				state.selection.timeframeSelectors.back = monthlyData.length > 6 ? '' : 'disabled';
 				state.selection.view = 'trackersSeen';
 				state.selection.selectionData = this._determineSelectionData(state);
+				state.selection.demo = false;
 
 				this.setState(state);
 			}
