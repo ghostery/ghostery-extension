@@ -604,6 +604,9 @@
 	"panel_about_licenses": {
 		"message": "Software Licenses"
 	},
+	"panel_about_imprint": {
+		"message": "Imprint"
+	},
 	"panel_menu_settings": {
 		"message": "Settings"
 	},
