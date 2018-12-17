@@ -78,6 +78,7 @@ class StatsGraph extends React.Component {
 		const data = JSON.parse(JSON.stringify(this.props.data));
 		data.forEach((entry) => {
 			entry.date = parseMonth(entry.date);
+			console.log(formatLabelDate(entry.date));
 		});
 
 		let tickAmount;
@@ -97,10 +98,12 @@ class StatsGraph extends React.Component {
 				tickAmount = 6;
 		}
 
+		console.log(data);
+
 		// Set scales
-		const x = D3.scaleTime()
+		const x = D3.scaleLinear()
 			.range([0, width])
-			.domain(D3.extent(data, d => d.date));
+			.domain(D3.extent(data, d => d.index));
 
 		const y = D3.scaleLinear()
 			.range([height, 0]);
@@ -114,8 +117,8 @@ class StatsGraph extends React.Component {
 		// Add axes
 		const xAxis = D3.axisBottom()
 			.ticks(tickAmount)
+			.tickFormat(d => formatLabelDate(data[d].date))
 			.tickSize(0)
-			.tickFormat(formatLabelDate)
 			.scale(x);
 
 		const yAxis = D3.axisLeft()
@@ -148,7 +151,7 @@ class StatsGraph extends React.Component {
 		const pathGroup = canvas.append('g').datum(data);
 
 		const line = D3.line()
-			.x(d => x(d.date))
+			.x(d => x(d.index))
 			.y(d => y(d.amount));
 
 		// ---------------------------------------------------------------------- //
@@ -190,7 +193,7 @@ class StatsGraph extends React.Component {
 			.append('circle')
 			.attr('class', (d, i) => `point point-${i}`)
 			.attr('fill', '#124559')
-			.attr('cx', d => x(d.date))
+			.attr('cx', d => x(d.index))
 			.attr('cy', d => y(d.amount))
 			.attr('r', 0)
 			.on('click', function (d, i) {
@@ -239,7 +242,7 @@ class StatsGraph extends React.Component {
 			canvas.selectAll('circle')
 				.each((d, i) => {
 					let tooltipFlipped = false;
-					let tooltipPositionX = x(d.date) + 22.5;
+					let tooltipPositionX = x(d.index) + 22.5;
 					let tooltipPositionY = Math.ceil(y(d.amount) - 12);
 
 					if (tooltipPositionY < height / 2.5) {

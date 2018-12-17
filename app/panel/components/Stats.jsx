@@ -295,12 +295,12 @@ class Stats extends React.Component {
 
 	_reset = (demo) => {
 		const demoData = [
-			{ date: '2018-01-01', amount: 2 },
-			{ date: '2018-02-01', amount: 4 },
-			{ date: '2018-03-01', amount: 1 },
-			{ date: '2018-04-01', amount: 4 },
-			{ date: '2018-05-01', amount: 1 },
-			{ date: '2018-06-01', amount: 3 },
+			{ date: '2018-01-01', amount: 2, index: 0 },
+			{ date: '2018-02-01', amount: 4, index: 1 },
+			{ date: '2018-03-01', amount: 1, index: 2 },
+			{ date: '2018-04-01', amount: 4, index: 3 },
+			{ date: '2018-05-01', amount: 1, index: 4 },
+			{ date: '2018-06-01', amount: 3, index: 5 },
 		];
 
 		const clearData = {
@@ -321,7 +321,7 @@ class Stats extends React.Component {
 				summaryTitle: this.getSummaryTitle('cumulative'),
 				tooltipText: t('panel_stats_trackers_seen'),
 				summaryData: clearData,
-				selectionData: demo ? demoData : [{ date: clearData.date, amount: clearData.trackersSeen }],
+				selectionData: demo ? demoData : [{ date: clearData.date, amount: clearData.trackersSeen, index: 0 }],
 				currentIndex: 0,
 				timeframeSelectors: { back: 'disabled', forward: 'disabled' },
 			},
@@ -365,18 +365,18 @@ class Stats extends React.Component {
 				const cumulativeMonthlyData = [];
 				allData.forEach((dataItem, i) => {
 					// Add zero values for nonexistent days
-					if (i !== 0) {
-						while (prevDate !== moment(dataItem.day).subtract(1, 'days').format('YYYY-MM-DD')) {
-							prevDate = moment(prevDate).add(1, 'days').format('YYYY-MM-DD');
-							dailyData.push({
-								trackersSeen: 0,
-								trackersBlocked: 0,
-								trackersAnonymized: 0,
-								adsBlocked: 0,
-								date: prevDate,
-							});
-						}
-					}
+					// if (i !== 0) {
+					// 	while (prevDate !== moment(dataItem.day).subtract(1, 'days').format('YYYY-MM-DD')) {
+					// 		prevDate = moment(prevDate).add(1, 'days').format('YYYY-MM-DD');
+					// 		dailyData.push({
+					// 			trackersSeen: 0,
+					// 			trackersBlocked: 0,
+					// 			trackersAnonymized: 0,
+					// 			adsBlocked: 0,
+					// 			date: prevDate,
+					// 		});
+					// 	}
+					// }
 
 					// Day reassignments
 					dailyData.push({
@@ -489,8 +489,8 @@ class Stats extends React.Component {
 			data = dailyData;
 		}
 		const dataSlice = data.length <= 6 ? data : data.slice(selection.currentIndex - 5, selection.currentIndex + 1);
-		const selectionData = dataSlice.map((entry) => {
-			const parsedEntry = { amount: entry[state.selection.view], date: entry.date };
+		const selectionData = dataSlice.map((entry, index) => {
+			const parsedEntry = { amount: entry[state.selection.view], date: entry.date, index };
 			return parsedEntry;
 		});
 		return selectionData;
