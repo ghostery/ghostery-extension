@@ -1935,16 +1935,16 @@
 		}
 	},
 	"rewards_expires_in_days": {
-		"message": "days"
+		"message": "day(s)"
 	},
 	"rewards_expires_in_hours": {
-		"message": "hours"
+		"message": "hour(s)"
 	},
 	"rewards_expires_in_mins": {
-		"message": "minutes"
+		"message": "minute(s)"
 	},
 	"rewards_expires_in_secs": {
-		"message": "seconds"
+		"message": "second(s)"
 	},
 	"rewards_terms_conditions": {
 		"message": "Terms & Conditions"
