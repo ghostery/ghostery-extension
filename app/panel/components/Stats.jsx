@@ -190,8 +190,14 @@ class Stats extends React.Component {
 						break;
 					}
 				}
-				selection.timeframeSelectors.back = selection.currentIndex === 0 ? 'disabled' : '';
-				selection.timeframeSelectors.forward = selection.currentIndex + 1 === dailyData.length ? 'disabled' : '';
+
+				if (dailyData.length < 6) {
+					selection.timeframeSelectors.back = 'disabled';
+					selection.timeframeSelectors.forward = 'disabled';
+				} else {
+					selection.timeframeSelectors.back = selection.currentIndex === 0 ? 'disabled' : '';
+					selection.timeframeSelectors.forward = selection.currentIndex + 1 === dailyData.length ? 'disabled' : '';
+				}
 			} else if (selection.type !== 'daily' && lastType === 'daily') {
 				const currentDate = dailyData[selection.currentIndex].date;
 				for (let i = monthlyData.length - 1; i >= 0; i--) {
@@ -200,8 +206,14 @@ class Stats extends React.Component {
 						break;
 					}
 				}
-				selection.timeframeSelectors.back = selection.currentIndex === 0 ? 'disabled' : '';
-				selection.timeframeSelectors.forward = selection.currentIndex + 1 === monthlyData.length ? 'disabled' : '';
+
+				if (monthlyData.length < 6) {
+					selection.timeframeSelectors.back = 'disabled';
+					selection.timeframeSelectors.forward = 'disabled';
+				} else {
+					selection.timeframeSelectors.back = selection.currentIndex === 0 ? 'disabled' : '';
+					selection.timeframeSelectors.forward = selection.currentIndex + 1 === monthlyData.length ? 'disabled' : '';
+				}
 			}
 
 			selection.selectionData = this._determineSelectionData(state);
