@@ -89,6 +89,13 @@ class BugDb extends Updatable {
 			JUST_UPDATED_WITH_NEW_TRACKERS: false
 		};
 
+		// translate categories
+		db.categories.forEach((category) => {
+			const { name, description } = category;
+			category.name = t(name);
+			category.description = t(description);
+		});
+
 		log('initializing bugdb regexes...');
 
 		for (const id in regexes) {
