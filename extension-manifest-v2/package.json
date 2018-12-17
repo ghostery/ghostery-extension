@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "base64-js": "^1.2.1",
-    "browser-core": "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.32/7.32.0.dd59bfa.tgz",
+    "browser-core": "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.32/7.32.0.3276e62.tgz",
     "@cliqz/adblocker": "0.3.1",
     "classnames": "^2.2.5",
     "d3": "^5.7.0",
