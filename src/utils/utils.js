@@ -227,6 +227,37 @@ export function getActiveTab(callback) {
 }
 
 /**
+ * Query the first tab that matches the url argument.
+ * Will throw an error if the url argument is an invalid url pattern.
+ * @memberOf BackgroundUtils
+ *
+ * @param {string} url				the tab url to search for
+ * @param {function} callback		function to call if at least one matching tab is found
+ * @param {function} error			function to call if the provided url pattern is invalid or no matching tab is found
+ */
+export function getTabByUrl(url, callback, error) {
+	chrome.tabs.query(
+		{
+			url
+		},
+		(tabs) => {
+			if (chrome.runtime.lastError) {
+				log('getTabByUrl', chrome.runtime.lastError.message);
+				if (error && typeof error === 'function') {
+					error(chrome.runtime.lastError);
+				}
+			} else if (tabs.length === 0) {
+				if (error && typeof error === 'function') {
+					error();
+				}
+			} else if (callback && typeof callback === 'function') {
+				callback(tabs[0]);
+			}
+		}
+	);
+}
+
+/**
  * Helper called by openNewTab.
  * @memberOf BackgroundUtils
  * @private
