@@ -108,6 +108,9 @@
 					background-color: #f7f7f7;
 					color: #124559;
 				}
+				&.demo {
+					cursor: default;
+				}
 				&:last-of-type {
 					border: none;
 				}
@@ -187,6 +190,9 @@
 						background-color: #00aef0;
 					}
 				}
+			}
+			&.demo {
+				cursor: default;
 			}
 		}
 		.tile-divider {
