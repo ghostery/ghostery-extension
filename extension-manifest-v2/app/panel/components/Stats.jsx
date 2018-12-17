@@ -25,7 +25,9 @@ class Stats extends React.Component {
 		super(props);
 		this.state = this._reset(true);
 	}
-
+	/**
+	 * Lifecycle event
+	 */
 	componentDidMount() {
 		sendMessage('ping', 'hist_stats_panel');
 		if (!this._isSupporter(this.props)) {
@@ -33,7 +35,9 @@ class Stats extends React.Component {
 		}
 		this._init();
 	}
-
+	/**
+	 * Lifecycle event
+	 */
 	componentWillReceiveProps(nextProps) {
 		const nextSupporter = this._isSupporter(nextProps);
 		const thisSupporter = this._isSupporter(this.props);
@@ -193,8 +197,14 @@ class Stats extends React.Component {
 						break;
 					}
 				}
-				selection.timeframeSelectors.back = selection.currentIndex === 0 ? 'disabled' : '';
-				selection.timeframeSelectors.forward = selection.currentIndex + 1 === dailyData.length ? 'disabled' : '';
+
+				if (dailyData.length < 6) {
+					selection.timeframeSelectors.back = 'disabled';
+					selection.timeframeSelectors.forward = 'disabled';
+				} else {
+					selection.timeframeSelectors.back = selection.currentIndex === 0 ? 'disabled' : '';
+					selection.timeframeSelectors.forward = selection.currentIndex + 1 === dailyData.length ? 'disabled' : '';
+				}
 			} else if (selection.type !== 'daily' && lastType === 'daily') {
 				const currentDate = dailyData[selection.currentIndex].date;
 				for (let i = monthlyData.length - 1; i >= 0; i--) {
@@ -203,8 +213,14 @@ class Stats extends React.Component {
 						break;
 					}
 				}
-				selection.timeframeSelectors.back = selection.currentIndex === 0 ? 'disabled' : '';
-				selection.timeframeSelectors.forward = selection.currentIndex + 1 === monthlyData.length ? 'disabled' : '';
+
+				if (monthlyData.length < 6) {
+					selection.timeframeSelectors.back = 'disabled';
+					selection.timeframeSelectors.forward = 'disabled';
+				} else {
+					selection.timeframeSelectors.back = selection.currentIndex === 0 ? 'disabled' : '';
+					selection.timeframeSelectors.forward = selection.currentIndex + 1 === monthlyData.length ? 'disabled' : '';
+				}
 			}
 
 			selection.selectionData = this._determineSelectionData(state);
@@ -428,10 +444,10 @@ class Stats extends React.Component {
 				};
 				// Daily averages
 				state.dailyAverageData = {
-					trackersSeen: Math.floor(trackersSeen / allData.length),
-					trackersBlocked: Math.floor(trackersBlocked / allData.length),
-					trackersAnonymized: Math.floor(trackersAnonymized / allData.length),
-					adsBlocked: Math.floor(adsBlocked / allData.length),
+					trackersSeen: Math.floor(trackersSeen / dailyData.length),
+					trackersBlocked: Math.floor(trackersBlocked / dailyData.length),
+					trackersAnonymized: Math.floor(trackersAnonymized / dailyData.length),
+					adsBlocked: Math.floor(adsBlocked / dailyData.length),
 				};
 				// Monthly averages
 				state.monthlyAverageData = {
