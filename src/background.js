@@ -1448,11 +1448,10 @@ function getDataForGhosteryTab(callback) {
 			});
 			passedData.cumulativeData = cumulativeData;
 		}).then(() => {
-			account.getUserSettings().then((settings) => {
-				passedData.adBlockEnabled = settings.enable_ad_block;
-				passedData.antiTrackingEnabled = settings.enable_anti_tracking;
-				callback(passedData);
-			});
+			passedData.blockTrackersEnabled = !globals.SESSION.paused_blocking;
+			passedData.adBlockEnabled = globals.SESSION.paused_blocking ? false : conf.enable_ad_block;
+			passedData.antiTrackingEnabled = globals.SESSION.paused_blocking ? false : conf.enable_anti_tracking;
+			callback(passedData);
 		});
 	});
 }
@@ -1605,7 +1604,14 @@ function initializeEventListeners() {
 
 	// Fired when another extension sends a message, accepts message if it's from Ghostery Tab
 	chrome.runtime.onMessageExternal.addListener((request, sender, sendResponse) => {
-		if (sender.id === globals.GHOSTERY_TAB_ID && request.name === 'getStatsAndSettings') {
+		let recognized;
+		if (globals.DEBUG) {
+			recognized = sender.id === globals.GHOSTERY_TAB_CHROME_TEST_ID || sender.id === globals.GHOSTERY_TAB_FIREFOX_TEST_ID;
+		} else {
+			recognized = sender.id === globals.GHOSTERY_TAB_ID;
+		}
+
+		if (recognized && request.name === 'getStatsAndSettings') {
 			getDataForGhosteryTab(data => sendResponse({ historicalDataAndSettings: data }));
 			return true;
 		}
