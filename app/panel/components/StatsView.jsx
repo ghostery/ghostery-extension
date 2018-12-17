@@ -52,6 +52,8 @@ const StatsView = (props) => {
 
 	const subscriber = !showPitchModal;
 
+	const resetStatsButton = ClassNames('stats-top-header-reset', { demo });
+
 	const tabCumulative = ClassNames('tab', {
 		active: type === 'cumulative',
 		demo,
@@ -104,11 +106,13 @@ const StatsView = (props) => {
 					<ReactSVG path={graphIconPath} className={`stats-top-header-icon ${view}`} />
 					{graphTitle}
 				</span>
-				<span className="stats-top-header-reset" onClick={resetStats}>
+				<span className={resetStatsButton} onClick={resetStats}>
 					{t('panel_stats_reset')}
-					<div className="hs-tooltip-down" data-g-tooltip={t('panel_stats_pitch_modal_tooltip')}>
-						<ReactSVG path="../../app/images/panel/info.svg" className="stats-top-header-info-icon" />
-					</div>
+					{!demo && (
+						<div className="hs-tooltip-down" data-g-tooltip={t('panel_stats_pitch_modal_tooltip')}>
+							<ReactSVG path="../../app/images/panel/info.svg" className="stats-top-header-info-icon" />
+						</div>
+					)}
 				</span>
 				<span className="clear-float" />
 			</div>

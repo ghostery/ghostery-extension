@@ -65,6 +65,9 @@
 				display: inline-flex;
 			}
 		}
+		&.demo {
+			cursor: default;
+		}
 	}
 	.clear-float {
 		float: none;
