@@ -25,7 +25,9 @@ class Stats extends React.Component {
 		super(props);
 		this.state = this._reset(true);
 	}
-
+	/**
+	 * Lifecycle event
+	 */
 	componentDidMount() {
 		sendMessage('ping', 'hist_stats_panel');
 		if (!this._isSupporter(this.props)) {
@@ -33,7 +35,9 @@ class Stats extends React.Component {
 		}
 		this._init();
 	}
-
+	/**
+	 * Lifecycle event
+	 */
 	componentWillReceiveProps(nextProps) {
 		const nextSupporter = this._isSupporter(nextProps);
 		const thisSupporter = this._isSupporter(this.props);
@@ -440,10 +444,10 @@ class Stats extends React.Component {
 				};
 				// Daily averages
 				state.dailyAverageData = {
-					trackersSeen: Math.floor(trackersSeen / allData.length),
-					trackersBlocked: Math.floor(trackersBlocked / allData.length),
-					trackersAnonymized: Math.floor(trackersAnonymized / allData.length),
-					adsBlocked: Math.floor(adsBlocked / allData.length),
+					trackersSeen: Math.floor(trackersSeen / dailyData.length),
+					trackersBlocked: Math.floor(trackersBlocked / dailyData.length),
+					trackersAnonymized: Math.floor(trackersAnonymized / dailyData.length),
+					adsBlocked: Math.floor(adsBlocked / dailyData.length),
 				};
 				// Monthly averages
 				state.monthlyAverageData = {
