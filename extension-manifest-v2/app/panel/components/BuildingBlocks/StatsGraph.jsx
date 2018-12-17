@@ -24,6 +24,12 @@ class StatsGraph extends React.Component {
 	/**
 	 * Lifecycle event
 	 */
+	componentDidMount() {
+		this.generateGraph();
+	}
+	/**
+	 * Lifecycle event
+	 */
 	componentDidUpdate(prevProps) {
 		if (!isEqual(prevProps, this.props)) {
 			this.generateGraph();
@@ -36,6 +42,8 @@ class StatsGraph extends React.Component {
 	 * Add tooltips for each data point
 	 */
 	generateGraph() {
+		const { demo } = this.props;
+
 		// Clear graph
 		D3.select(this.node).selectAll('*').remove();
 		D3.select('.tooltip-container').selectAll('*').remove();
@@ -115,12 +123,12 @@ class StatsGraph extends React.Component {
 			.tickSize(0)
 			.scale(y);
 
-		canvas.append('g')
+		const xAxisElement = canvas.append('g')
 			.attr('class', 'x axis')
 			.attr('transform', `translate(0,${height})`)
 			.call(xAxis);
 
-		canvas.append('g')
+		const yAxisElement = canvas.append('g')
 			.attr('class', 'y axis')
 			.call(yAxis);
 
@@ -186,30 +194,34 @@ class StatsGraph extends React.Component {
 			.attr('cy', d => y(d.amount))
 			.attr('r', 0)
 			.on('click', function (d, i) {
-				setTimeout(() => {
-					D3.select(this)
-						.classed('selected', true)
-						.attr('r', 6);
-					D3.select(`.tooltip-${i}`)
-						.classed('clicked', true)
-						.transition()
-						.duration(300)
-						.style('opacity', 1);
-				}, 1);
+				if (!demo) {
+					setTimeout(() => {
+						D3.select(this)
+							.classed('selected', true)
+							.attr('r', 6);
+						D3.select(`.tooltip-${i}`)
+							.classed('clicked', true)
+							.transition()
+							.duration(300)
+							.style('opacity', 1);
+					}, 1);
+				}
 			})
 			.on('mouseenter', function (d, i) {
-				setTimeout(() => {
-					D3.select(this)
-						.classed('selected', true)
-						.attr('r', 6);
-					D3.select(`.tooltip-${i}`)
-						.transition()
-						.duration(300)
-						.style('opacity', 1);
-				}, 1);
+				if (!demo) {
+					setTimeout(() => {
+						D3.select(this)
+							.classed('selected', true)
+							.attr('r', 6);
+						D3.select(`.tooltip-${i}`)
+							.transition()
+							.duration(300)
+							.style('opacity', 1);
+					}, 1);
+				}
 			})
 			.on('mouseleave', function (d, i) {
-				if (!D3.select(`.tooltip-${i}`).classed('clicked')) {
+				if (!demo && !D3.select(`.tooltip-${i}`).classed('clicked')) {
 					setTimeout(() => {
 						D3.select(this)
 							.classed('selected', false)
@@ -223,68 +235,70 @@ class StatsGraph extends React.Component {
 			});
 
 		// Add a tooltip to each data point
-		canvas.selectAll('circle')
-			.each((d, i) => {
-				let tooltipFlipped = false;
-				let tooltipPositionX = x(d.date) + 22.5;
-				let tooltipPositionY = Math.ceil(y(d.amount) - 12);
+		if (!demo) {
+			canvas.selectAll('circle')
+				.each((d, i) => {
+					let tooltipFlipped = false;
+					let tooltipPositionX = x(d.date) + 22.5;
+					let tooltipPositionY = Math.ceil(y(d.amount) - 12);
 
-				if (tooltipPositionY < height / 2.5) {
-					tooltipFlipped = true;
-					tooltipPositionY += 130;
-					tooltipPositionX += 0;
-				} else if (this.props.view === 'trackersAnonymized') {
-					tooltipPositionY -= 16;
-				}
+					if (tooltipPositionY < height / 2.5) {
+						tooltipFlipped = true;
+						tooltipPositionY += 130;
+						tooltipPositionX += 0;
+					} else if (this.props.view === 'trackersAnonymized') {
+						tooltipPositionY -= 16;
+					}
 
-				const div = D3.select('.tooltip-container')
-					.append('div')
-					.attr('class', `tooltip tooltip-${i}`)
-					.style('opacity', 0)
-					.style('left', `${tooltipPositionX}px`)
-					.style('top', `${tooltipPositionY}px`);
+					const div = D3.select('.tooltip-container')
+						.append('div')
+						.attr('class', `tooltip tooltip-${i}`)
+						.style('opacity', 0)
+						.style('left', `${tooltipPositionX}px`)
+						.style('top', `${tooltipPositionY}px`);
 
-				if (this.props.view === 'trackersAnonymized') {
-					div.classed('long-text', true);
-				}
+					if (this.props.view === 'trackersAnonymized') {
+						div.classed('long-text', true);
+					}
 
-				if (tooltipFlipped) {
-					div.append('div')
-						.attr('class', 'pointer top under');
-					div.append('div')
-						.attr('class', 'pointer top over');
-				}
+					if (tooltipFlipped) {
+						div.append('div')
+							.attr('class', 'pointer top under');
+						div.append('div')
+							.attr('class', 'pointer top over');
+					}
 
-				div.append('p')
-					.attr('class', 'tooltip-text-top')
-					.html(`${formatTooltipDate(d.date)}<br/>${this.props.tooltipText}`);
-				div.append('p')
-					.attr('class', 'tooltip-text-bottom')
-					.html(D3.format(',')(d.amount));
+					div.append('p')
+						.attr('class', 'tooltip-text-top')
+						.html(`${formatTooltipDate(d.date)}<br/>${this.props.tooltipText}`);
+					div.append('p')
+						.attr('class', 'tooltip-text-bottom')
+						.html(D3.format(',')(d.amount));
 
-				if (!tooltipFlipped) {
-					div.append('div')
-						.attr('class', 'pointer bottom under');
-					div.append('div')
-						.attr('class', 'pointer bottom over');
-				}
-			});
+					if (!tooltipFlipped) {
+						div.append('div')
+							.attr('class', 'pointer bottom under');
+						div.append('div')
+							.attr('class', 'pointer bottom over');
+					}
+				});
 
-		// Add event listener to container for closing tooltip
-		D3.select('#content-stats')
-			.on('click', () => {
-				if (D3.event.target.className.baseVal !== 'point' &&
-				D3.event.target.className !== 'tooltip') {
-					D3.selectAll('.selected')
-						.classed('selected', false)
-						.attr('r', 4.5);
-					D3.selectAll('.tooltip')
-						.classed('clicked', false)
-						.transition()
-						.duration(200)
-						.style('opacity', 0);
-				}
-			});
+			// Add event listener to container for closing tooltip
+			D3.select('#content-stats')
+				.on('click', () => {
+					if (D3.event.target.className.baseVal !== 'point' &&
+					D3.event.target.className !== 'tooltip') {
+						D3.selectAll('.selected')
+							.classed('selected', false)
+							.attr('r', 4.5);
+						D3.selectAll('.tooltip')
+							.classed('clicked', false)
+							.transition()
+							.duration(200)
+							.style('opacity', 0);
+					}
+				});
+		}
 
 		let additionalSeconds = 0;
 
@@ -298,6 +312,12 @@ class StatsGraph extends React.Component {
 					.attr('r', 4.5);
 				additionalSeconds += 20;
 			});
+
+		// Change styling for demo
+		if (demo) {
+			xAxisElement.selectAll('text').remove();
+			yAxisElement.selectAll('text').remove();
+		}
 	}
 
 	/**
