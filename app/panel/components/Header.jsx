@@ -137,8 +137,9 @@ class Header extends React.Component {
 
 	determineBackPath = () => {
 		const { entries, location } = this.props.history;
+		const subscriptionRegEx = /^(\/subscription)/;
 		if (location.pathname === '/stats' && (entries.length > 1 &&
-		entries[entries.length - 2].pathname.slice(0, 13) === '/subscription')) {
+		subscriptionRegEx.test(entries[entries.length - 2].pathname))) {
 			return 'subscription/info';
 		}
 		return this.props.is_expert ? '/detail/blocking' : '/';
