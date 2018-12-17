@@ -78,7 +78,6 @@ class StatsGraph extends React.Component {
 		const data = JSON.parse(JSON.stringify(this.props.data));
 		data.forEach((entry) => {
 			entry.date = parseMonth(entry.date);
-			console.log(formatLabelDate(entry.date));
 		});
 
 		let tickAmount;
@@ -97,8 +96,6 @@ class StatsGraph extends React.Component {
 			default:
 				tickAmount = 6;
 		}
-
-		console.log(data);
 
 		// Set scales
 		const x = D3.scaleLinear()

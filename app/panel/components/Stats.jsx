@@ -355,7 +355,6 @@ class Stats extends React.Component {
 				let adsBlocked = 0;
 				const startDate = moment(allData[0].day);
 				let endOfMonth = moment(startDate).endOf('month');
-				let prevDate = '';
 				let monthTrackersSeen = 0;
 				let monthTrackersBlocked = 0;
 				let monthTrackersAnonymized = 0;
@@ -363,8 +362,10 @@ class Stats extends React.Component {
 				const dailyData = [];
 				const monthlyData = [];
 				const cumulativeMonthlyData = [];
+				// let prevDate = ''; // <-- see loop below
 				allData.forEach((dataItem, i) => {
-					// Add zero values for nonexistent days
+					// Uncomment loop to add zero values for nonexistent days in the case
+					// that users find that to be less confusing than skipping them
 					// if (i !== 0) {
 					// 	while (prevDate !== moment(dataItem.day).subtract(1, 'days').format('YYYY-MM-DD')) {
 					// 		prevDate = moment(prevDate).add(1, 'days').format('YYYY-MM-DD');
@@ -433,7 +434,7 @@ class Stats extends React.Component {
 						monthTrackersAnonymized = 0;
 						monthAdsBlocked = 0;
 					}
-					prevDate = dataItem.day;
+					// prevDate = dataItem.day; // <-- see loop above
 				});
 				// Cumulative data totals
 				state.cumulativeData = {
