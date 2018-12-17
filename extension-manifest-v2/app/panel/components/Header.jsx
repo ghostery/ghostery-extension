@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ReactSVG from 'react-svg';
 import ClassNames from 'classnames';
 import Tooltip from './Tooltip';
@@ -134,8 +135,14 @@ class Header extends React.Component {
 		);
 	}
 
-	clickLogo = () => {
-		this.props.history.push(this.props.is_expert ? '/detail/blocking' : '/');
+	determineBackPath = () => {
+		const { entries, location } = this.props.history;
+		const subscriptionRegEx = /^(\/subscription)/;
+		if (location.pathname === '/stats' && (entries.length > 1 &&
+		subscriptionRegEx.test(entries[entries.length - 2].pathname))) {
+			return 'subscription/info';
+		}
+		return this.props.is_expert ? '/detail/blocking' : '/';
 	}
 
 	clickBadge = () => {
@@ -185,8 +192,10 @@ class Header extends React.Component {
 					</div>
 				)}
 				<div className="top-bar">
-					<span onClick={this.clickLogo} className="header-logo">
-						<ReactSVG path="/app/images/panel/header-back-arrow.svg" className={headerArrowClasses} />
+					<span className="header-logo">
+						<Link to={this.determineBackPath()}>
+							<ReactSVG path="/app/images/panel/header-back-arrow.svg" className={headerArrowClasses} />
+						</Link>
 						<ReactSVG path="/app/images/panel/header-logo-icon.svg" className="logo-icon" />
 					</span>
 					<div>
