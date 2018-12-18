@@ -1,18 +1,24 @@
 {
 	"account_creation_privacy_statement": {
-		"message": "I consent to Ghostery's data practices found in its $LINK_PS_START$Privacy Statement$LINK_PS_END$ and the terms found in its $LINK_UA_START$License Agreement$LINK_UA_END$.",
+		"message": "Our general $LINK_TERMS_START$Terms and Conditions$LINK_TERMS_END$ and our $LINK_UA_START$License Agreement$LINK_UA_END$ apply. You will find our Privacy Statement $LINK_PS_START$here$LINK_PS_END$.",
 		"placeholders": {
 			"link_ps_end": {
 				"content": "</a>"
 			},
 			"link_ps_start": {
-				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-us/privacy-statements/ghostery-browser-extension/ghostery-browser-extension-privacy-statement/\">"
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" rel=\"noopener noreferrer\">"
 			},
 			"link_ua_end": {
 				"content": "</a>"
 			},
 			"link_ua_start": {
-				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-us/privacy-statements/ghostery-browser-extension/ghostery-browser-extension-end-user-license-agreem/\">"
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/privacy-statements/\" rel=\"noopener noreferrer\">"
+			},
+			"link_terms_end": {
+				"content": "</a>"
+			},
+			"link_terms_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/privacy-statements/\" rel=\"noopener noreferrer\">"
 			}
 		}
 	},
@@ -365,9 +371,6 @@
 				"example": "Disqus"
 			}
 		}
-	},
-	"consent_privacy": {
-		"message": "Consent required."
 	},
 	"copyright": {
 		"description": "Copyright message, shown in page footers.",
@@ -1923,8 +1926,8 @@
 		"message": "code copied"
 	},
 	"rewards_expires_in": {
-		"description": "example: Expires in 8 minutes. TYPE will be rewards_expires_in_TYPE listed below.",
-		"message": "Expires in $COUNT$ $TYPE$",
+		"description": "example: Available for 8 minutes. TYPE will be rewards_expires_in_TYPE listed below. Note: German translation should be 'Verfügbar für...'",
+		"message": "Available for $COUNT$ $TYPE$",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -2028,7 +2031,7 @@
 		"message": "Priority Support"
 	},
 	"subscription_history_stats": {
-		"message": "History Stats"
+		"message": "Historical Stats"
 	},
 	"subscribe_pitch": {
 		"message": "While Ghostery is free, you can choose to support us through a small subscription of &#36;2 per month in exchange for cool perks, such as color themes, priority help service, and more. Join our mission and subscribe!"

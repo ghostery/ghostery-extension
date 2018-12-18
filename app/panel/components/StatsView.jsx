@@ -43,7 +43,7 @@ const StatsView = (props) => {
 	} = props;
 
 	const {
-		type, view, graphTitle, summaryTitle, summaryData, selectionData, tooltipText, graphIconPath, timeframeSelectors
+		type, view, graphTitle, summaryTitle, summaryData, selectionData, tooltipText, graphIconPath, timeframeSelectors, demo
 	} = selection;
 
 	const {
@@ -52,15 +52,23 @@ const StatsView = (props) => {
 
 	const subscriber = !showPitchModal;
 
+	const resetStatsButton = ClassNames('stats-top-header-reset', { demo });
+
 	const tabCumulative = ClassNames('tab', {
 		active: type === 'cumulative',
+		demo,
 	});
 	const tabMonthly = ClassNames('tab', {
 		active: type === 'monthly',
+		demo,
 	});
 	const tabDaily = ClassNames('tab', {
 		active: type === 'daily',
+		demo,
 	});
+
+	const tile = ClassNames('tile', { demo });
+
 	const trackersSeenClassNames = ClassNames('tile-title-text', {
 		active: view === 'trackersSeen',
 	});
@@ -98,15 +106,18 @@ const StatsView = (props) => {
 					<ReactSVG path={graphIconPath} className={`stats-top-header-icon ${view}`} />
 					{graphTitle}
 				</span>
-				<span className="stats-top-header-reset" onClick={resetStats}>
+				<span className={resetStatsButton} onClick={resetStats}>
 					{t('panel_stats_reset')}
-					<div className="hs-tooltip-down" data-g-tooltip={t('panel_stats_pitch_modal_tooltip')}>
-						<ReactSVG path="../../app/images/panel/info.svg" className="stats-top-header-info-icon" />
-					</div>
+					{!demo && (
+						<div className="hs-tooltip-down" data-g-tooltip={t('panel_stats_pitch_modal_tooltip')}>
+							<ReactSVG path="../../app/images/panel/info.svg" className="stats-top-header-info-icon" />
+						</div>
+					)}
 				</span>
 				<span className="clear-float" />
 			</div>
 			<StatsGraph
+				demo={demo}
 				data={selectionData}
 				dailyOrMonthly={type}
 				view={view}
@@ -135,7 +146,7 @@ const StatsView = (props) => {
 				</div>
 			</div>
 			<div className="tile-container">
-				<div id="trackersSeen" className="tile" onClick={selectView} >
+				<div id="trackersSeen" className={tile} onClick={selectView} >
 					<div className="tile-title"><p className={trackersSeenClassNames}>{t('panel_stats_trackers_seen')}</p></div>
 					<div className={trackersSeenValueClassNames}>
 						<p className="tile-value-content">{subscriber ? trackersSeen : ''}</p>
@@ -143,7 +154,7 @@ const StatsView = (props) => {
 					</div>
 				</div>
 				<div className="tile-divider" />
-				<div id="trackersBlocked" className="tile" onClick={selectView} >
+				<div id="trackersBlocked" className={tile} onClick={selectView} >
 					<div className="tile-title"><p className={trackersBlockedClassNames}>{t('panel_stats_trackers_blocked')}</p></div>
 					<div className={trackersBlockedValueClassNames}>
 						<p className="tile-value-content">{subscriber ? trackersBlocked : ''}</p>
@@ -151,7 +162,7 @@ const StatsView = (props) => {
 					</div>
 				</div>
 				<div className="tile-divider" />
-				<div id="trackersAnonymized" className="tile" onClick={selectView} >
+				<div id="trackersAnonymized" className={tile} onClick={selectView} >
 					<div className="tile-title"><p className={trackersAnonymizedClassNames}>{t('panel_stats_trackers_anonymized')}</p></div>
 					<div className={trackersAnonymizedValueClassNames}>
 						<p className="tile-value-content">{subscriber ? trackersAnonymized : ''}</p>
@@ -159,7 +170,7 @@ const StatsView = (props) => {
 					</div>
 				</div>
 				<div className="tile-divider" />
-				<div id="adsBlocked" className="tile" onClick={selectView} >
+				<div id="adsBlocked" className={tile} onClick={selectView} >
 					<div className="tile-title"><p className={adsBlockedClassNames}>{t('panel_stats_ads_blocked')}</p></div>
 					<div className={adsBlockedValueClassNames}>
 						<p className="tile-value-content">{subscriber ? adsBlocked : ''}</p>
