@@ -217,25 +217,15 @@ p.warning {
 		}
 	}
 	#create-account-privacy-container {
-		label {
+		p#accept-privacy-label {
 			font-size: 13px;
 			line-height: 16px;
 			font-weight: 400;
-			display: flex;
-		}
-		input {
-			margin-right: 12px;
-			position: relative;
-			top: 3px;
 		}
 	}
 	#account-creation-buttons .button {
 		margin-bottom: 0;
 		width: 150px;
-	}
-	#accept-privacy-requirement {
-		margin-left: 22px;
-		margin-top: 3px;
 	}
 }
 
