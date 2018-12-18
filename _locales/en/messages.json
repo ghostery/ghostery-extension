@@ -1930,9 +1930,10 @@
 	},
 	"rewards_expires_in_days": {
 		"message": "Expires in $COUNT$ days",
-
 		"placeholders": {
-			"count": "$1"
+			"count": {
+				"content": "$1"
+			}
 		}
 	},
 	"rewards_expires_in_hour": {
@@ -1941,7 +1942,9 @@
 	"rewards_expires_in_hours": {
 		"message": "Expires in $COUNT$ hours",
 		"placeholders": {
-			"count": "$1"
+			"count": {
+				"content": "$1"
+			}
 		}
 	},
 	"rewards_expires_in_min": {
@@ -1950,7 +1953,9 @@
 	"rewards_expires_in_mins": {
 		"message": "Expires in $COUNT$ mins",
 		"placeholders": {
-			"count": "$1"
+			"count": {
+				"content": "$1"
+			}
 		}
 	},
 	"rewards_expires_in_sec": {
@@ -1959,7 +1964,9 @@
 	"rewards_expires_in_secs": {
 		"message": "Expires in $COUNT$ secs",
 		"placeholders": {
-			"count": "$1"
+			"count": {
+				"content": "$1"
+			}
 		}
 	},
 	"rewards_terms_conditions": {
