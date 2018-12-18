@@ -31,7 +31,7 @@ exports[`app/panel/components/BuildingBlocks/RewardListItem.jsx Snapshot tests w
       <div
         className="RewardListItem__expires"
       >
-        rewards_expires_in
+        rewards_expires_in_days
       </div>
     </div>
     <div
@@ -100,7 +100,7 @@ exports[`app/panel/components/BuildingBlocks/RewardListItem.jsx Snapshot tests w
       <div
         className="RewardListItem__expires"
       >
-        rewards_expires_in
+        rewards_expires_in_days
       </div>
     </div>
     <div
@@ -169,7 +169,7 @@ exports[`app/panel/components/BuildingBlocks/RewardListItem.jsx Snapshot tests w
       <div
         className="RewardListItem__expires"
       >
-        rewards_expires_in
+        rewards_expires_in_days
       </div>
     </div>
     <div
@@ -238,7 +238,7 @@ exports[`app/panel/components/BuildingBlocks/RewardListItem.jsx Snapshot tests w
       <div
         className="RewardListItem__expires"
       >
-        rewards_expires_in
+        rewards_expires_in_days
       </div>
     </div>
     <div
@@ -307,7 +307,7 @@ exports[`app/panel/components/BuildingBlocks/RewardListItem.jsx Snapshot tests w
       <div
         className="RewardListItem__expires"
       >
-        rewards_expires_in
+        rewards_expires_in_days
       </div>
     </div>
     <div

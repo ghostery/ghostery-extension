@@ -54,7 +54,7 @@ exports[`app/panel/components/BuildingBlocks/RewardDetail.jsx Snapshot tests wit
     <div
       className="RewardDetail__expires"
     >
-      rewards_expires_in
+      rewards_expires_in_days
     </div>
     <div
       className="g-tooltip clickable"
@@ -108,7 +108,7 @@ exports[`app/panel/components/BuildingBlocks/RewardDetail.jsx Snapshot tests wit
     <div
       className="RewardDetail__expires"
     >
-      rewards_expires_in
+      rewards_expires_in_days
     </div>
     <div
       className="g-tooltip clickable"
@@ -183,7 +183,7 @@ exports[`app/panel/components/BuildingBlocks/RewardDetail.jsx Snapshot tests wit
     <div
       className="RewardDetail__expires"
     >
-      rewards_expires_in
+      rewards_expires_in_days
     </div>
     
   </div>
@@ -246,7 +246,7 @@ exports[`app/panel/components/BuildingBlocks/RewardDetail.jsx Snapshot tests wit
     <div
       className="RewardDetail__expires"
     >
-      rewards_expires_in
+      rewards_expires_in_days
     </div>
     <div
       className="g-tooltip clickable"
@@ -317,7 +317,7 @@ exports[`app/panel/components/BuildingBlocks/RewardDetail.jsx Snapshot tests wit
     <div
       className="RewardDetail__expires"
     >
-      rewards_expires_in
+      rewards_expires_in_days
     </div>
     <div
       className="g-tooltip clickable"
