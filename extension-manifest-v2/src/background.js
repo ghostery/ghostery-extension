@@ -1328,7 +1328,7 @@ offers.on('enabled', () => {
 		if (DEBUG) {
 			offers.action('setConfiguration', {
 				config_location: 'de',
-				triggersBE: 'http://offers-api-stage.clyqz.com:8181',
+				triggersBE: 'https://offers-api-staging.clyqz.com',
 				showConsoleLogs: true,
 				offersLogsEnabled: true,
 				offersDevFlag: true,
