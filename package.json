@@ -17,6 +17,7 @@
     "prebuild.prod": "node ./tools/licenses/fetchLicenses.js",
     "prebuild.watch": "node ./tools/licenses/fetchLicenses.js",
     "test.unit": "cross-env BABEL_ENV=test jest",
+    "test.snapshot": "jest --updateSnapshot",
     "lint": "eslint --ext .js,.jsx ./app ./src",
     "lint.fix": "eslint --ext .js,.jsx ./app ./src --fix",
     "lint.raw": "eslint --ext .js,.jsx",
