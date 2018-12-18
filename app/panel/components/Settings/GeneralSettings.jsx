@@ -89,7 +89,7 @@ class GeneralSettings extends React.Component {
 								</div>
 							</div>
 						</div>
-						<h5>{ t('settings_highlight_trackers') }</h5>
+						<h3 className="s-special">{ t('settings_highlight_trackers') }</h3>
 						<div className="s-tooltip-down-click-to-play-img" data-g-tooltip={t('settings_highlight_trackers_tooltip')}>
 							<img src="../../app/images/panel/icon-information-tooltip.svg" className="s-question" />
 						</div>

@@ -1925,29 +1925,49 @@
 	"rewards_code_copied": {
 		"message": "code copied"
 	},
-	"rewards_expires_in": {
-		"description": "example: Expires in 8 minutes. TYPE will be rewards_expires_in_TYPE listed below.",
-		"message": "Expires in $COUNT$ $TYPE$",
+	"rewards_expires_in_day": {
+		"message": "Expires in 1 day"
+	},
+	"rewards_expires_in_days": {
+		"message": "Expires in $COUNT$ days",
 		"placeholders": {
 			"count": {
 				"content": "$1"
-			},
-			"type": {
-				"content": "$2"
 			}
 		}
 	},
-	"rewards_expires_in_days": {
-		"message": "days"
+	"rewards_expires_in_hour": {
+		"message": "Expires in 1 hour"
 	},
 	"rewards_expires_in_hours": {
-		"message": "hours"
+		"message": "Expires in $COUNT$ hours",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"rewards_expires_in_min": {
+		"message": "Expires in 1 min"
 	},
 	"rewards_expires_in_mins": {
-		"message": "minutes"
+		"message": "Expires in $COUNT$ mins",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"rewards_expires_in_sec": {
+		"message": "Expires in 1 sec"
 	},
 	"rewards_expires_in_secs": {
-		"message": "seconds"
+		"message": "Expires in $COUNT$ secs",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
 	},
 	"rewards_terms_conditions": {
 		"message": "Terms & Conditions"
