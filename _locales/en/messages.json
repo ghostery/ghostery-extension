@@ -1926,8 +1926,8 @@
 		"message": "code copied"
 	},
 	"rewards_expires_in": {
-		"description": "example: Expires in 8 minutes. TYPE will be rewards_expires_in_TYPE listed below.",
-		"message": "Expires in $COUNT$ $TYPE$",
+		"description": "example: Available for 8 minutes. TYPE will be rewards_expires_in_TYPE listed below. Note: German translation should be 'Verfügbar für...'",
+		"message": "Available for $COUNT$ $TYPE$",
 		"placeholders": {
 			"count": {
 				"content": "$1"
