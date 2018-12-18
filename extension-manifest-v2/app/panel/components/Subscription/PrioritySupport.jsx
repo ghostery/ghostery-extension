@@ -1,4 +1,3 @@
-// Priority Support
 /**
  * Priority Support Subscription Component
  *

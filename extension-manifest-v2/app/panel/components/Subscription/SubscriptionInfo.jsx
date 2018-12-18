@@ -1,4 +1,3 @@
-// SubscriptionInfo
 /**
  * Subscription Info Component
  *
@@ -76,8 +75,8 @@ const SubscriptionInfo = (props) => {
 									<div className="list-row">
 										<ul>
 											<li className="list-item">{t('subscription_midnight_theme')}</li>
+											<li className="list-item">{t('subscription_tracker_stats')}</li>
 											<li className="list-item">{t('subscription_priority_support')}</li>
-											{/* <li className="list-item">{t('subscription_tracker_stats')}</li> */}
 										</ul>
 									</div>
 									<div className="manage-row">
