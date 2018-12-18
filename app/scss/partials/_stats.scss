@@ -50,6 +50,8 @@
 		font-size: 12px;
 		line-height: 40px;
 		color: #00aef0;
+		position: relative;
+		top: 1px;
 		float: right;
 		margin-right: 60px;
 		cursor: pointer;
@@ -178,6 +180,7 @@
 					background-repeat: no-repeat;
 					background-position: center;
 					padding-top: 37px;
+					margin-top: 12px;
 				}
 				&.active {
 					.tile-value-content {
@@ -313,5 +316,19 @@
 		right: -5px;
 		@extend %hs-tooltip;
 		@extend %g-tooltip-down-left;
+	}
+}
+
+@-moz-document url-prefix() {
+	#content-stats > .tile-container > .tile > .tile-value {
+		.tile-value-content {
+			padding: 0;
+		}
+		&.locked > .tile-value-content {
+			margin-top: 3px;
+		}
+		&.active > .tile-value-content {
+			padding-top: 0;
+		}
 	}
 }
