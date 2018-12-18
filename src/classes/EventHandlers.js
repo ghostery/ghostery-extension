@@ -116,6 +116,7 @@ class EventHandlers {
 			utils.getTab(tabId, (tab) => {
 				if (tab) {
 					tabInfo.setTabInfo(tabId, 'incognito', tab.incognito);
+					// Edge does not have script execute-ready in onCommited
 					if (!IS_EDGE) {
 						// purplebox.createBox() will first check to make sure this is a valid tab
 						this._createBox(tabId);
@@ -153,6 +154,7 @@ class EventHandlers {
 				return;
 			}
 
+			// Edge does not have script execute-ready in onCommited, so we call this here
 			if (IS_EDGE) {
 				this._createBox(tab_id);
 			}
