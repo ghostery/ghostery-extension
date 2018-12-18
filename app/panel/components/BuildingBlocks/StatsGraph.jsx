@@ -98,9 +98,9 @@ class StatsGraph extends React.Component {
 		}
 
 		// Set scales
-		const x = D3.scaleTime()
+		const x = D3.scaleLinear()
 			.range([0, width])
-			.domain(D3.extent(data, d => d.date));
+			.domain(D3.extent(data, d => d.index));
 
 		const y = D3.scaleLinear()
 			.range([height, 0]);
@@ -115,7 +115,7 @@ class StatsGraph extends React.Component {
 		const xAxis = D3.axisBottom()
 			.ticks(tickAmount)
 			.tickSize(0)
-			.tickFormat(formatLabelDate)
+			.tickFormat(d => formatLabelDate(data[d].date))
 			.scale(x);
 
 		const yAxis = D3.axisLeft()
@@ -123,12 +123,12 @@ class StatsGraph extends React.Component {
 			.tickSize(0)
 			.scale(y);
 
-		const xAxisElement = canvas.append('g')
+		canvas.append('g')
 			.attr('class', 'x axis')
 			.attr('transform', `translate(0,${height})`)
 			.call(xAxis);
 
-		const yAxisElement = canvas.append('g')
+		canvas.append('g')
 			.attr('class', 'y axis')
 			.call(yAxis);
 
@@ -148,7 +148,7 @@ class StatsGraph extends React.Component {
 		const pathGroup = canvas.append('g').datum(data);
 
 		const line = D3.line()
-			.x(d => x(d.date))
+			.x(d => x(d.index))
 			.y(d => y(d.amount));
 
 		// ---------------------------------------------------------------------- //
@@ -190,7 +190,7 @@ class StatsGraph extends React.Component {
 			.append('circle')
 			.attr('class', (d, i) => `point point-${i}`)
 			.attr('fill', '#124559')
-			.attr('cx', d => x(d.date))
+			.attr('cx', d => x(d.index))
 			.attr('cy', d => y(d.amount))
 			.attr('r', 0)
 			.on('click', function (d, i) {
@@ -239,7 +239,7 @@ class StatsGraph extends React.Component {
 			canvas.selectAll('circle')
 				.each((d, i) => {
 					let tooltipFlipped = false;
-					let tooltipPositionX = x(d.date) + 22.5;
+					let tooltipPositionX = x(d.index) + 22.5;
 					let tooltipPositionY = Math.ceil(y(d.amount) - 12);
 
 					if (tooltipPositionY < height / 2.5) {
@@ -312,12 +312,6 @@ class StatsGraph extends React.Component {
 					.attr('r', 4.5);
 				additionalSeconds += 20;
 			});
-
-		// Change styling for demo
-		if (demo) {
-			xAxisElement.selectAll('text').remove();
-			yAxisElement.selectAll('text').remove();
-		}
 	}
 
 	/**
