@@ -900,11 +900,13 @@ function onMessageHandler(request, sender, callback) {
 	} else if (name === 'account.getUserSubscriptionData') {
 		account.getUserSubscriptionData()
 			.then((customer) => {
+				if (!customer || !customer.subscriptions) {
+					throw new TypeError('invalid data');
+				}
 				const subscriptionData = customer.subscriptions;
 				callback({ subscriptionData });
 			})
 			.catch((err) => {
-				log('Error getting user subscription data:', err);
 				callback({ errors: _getJSONAPIErrorsObject(err) });
 			});
 		return true;
