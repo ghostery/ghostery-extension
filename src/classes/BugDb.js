@@ -63,6 +63,92 @@ class BugDb extends Updatable {
 	}
 
 	/**
+	 * Build trackers into category arrays, for use on Global Blocking UI list. This is
+	 * called once on initial startup.
+	 *
+	 * @private
+	 *
+	 * @param  {Object} db      bugs database object
+	 * @return {array}  		array of categories
+	 */
+	_buildCategories(db) {
+		const selectedApps = conf.selected_app_ids || {};
+		let appId;
+		let category;
+		let blocked;
+		let categoryName;
+
+		const categoryArray = [];
+		const categories = {};
+
+		for (appId in db.apps) {
+			if (db.apps.hasOwnProperty(appId)) {
+				category = db.apps[appId].cat;
+				if (t(`category_${category}`) === `category_${category}`) {
+					category = 'uncategorized';
+				}
+				blocked = selectedApps.hasOwnProperty(appId);
+
+				// Because we have two trackers in the DB with the same name
+				if ((categories[category] && categories[category].trackers[db.apps[appId].name])) {
+					// eslint-disable-next-line no-continue
+					continue;
+				}
+
+				if (categories.hasOwnProperty(category)) {
+					categories[category].num_total++;
+					if (blocked) {
+						categories[category].num_blocked++;
+					}
+				} else {
+					categories[category] = {
+						id: category,
+						name: t(`category_${category}`),
+						description: t(`category_${category}_desc`),
+						img_name: (category === 'advertising') ? 'adv' : // Because AdBlock blocks images with 'advertising' in the name.
+							(category === 'social_media') ? 'smed' : category, // Because AdBlock blocks images with 'social' in the name.
+						num_total: 1,
+						num_blocked: (blocked) ? 1 : 0,
+						trackers: []
+					};
+				}
+				categories[category].trackers.push({
+					id: appId,
+					name: db.apps[appId].name,
+					description: '',
+					blocked,
+					shouldShow: true,
+					catId: category,
+				});
+			}
+		}
+
+		for (categoryName in categories) {
+			if (categories.hasOwnProperty(categoryName)) {
+				const category = categories[categoryName];
+				if (category.trackers) {
+					category.trackers.sort((a, b) => {
+						a = a.name.toLowerCase();
+						b = b.name.toLowerCase();
+						return (a > b ? 1 : (a < b ? -1 : 0));
+					});
+				}
+
+				categoryArray.push(category);
+			}
+		}
+
+		// Sort categories by tracker numbers
+		categoryArray.sort((a, b) => {
+			a = a.trackers ? a.trackers.length : 0;
+			b = b.trackers ? b.trackers.length : 0;
+			return (a > b ? -1 : (a < b ? 1 : 0));
+		});
+
+		return categoryArray;
+	}
+
+	/**
 	 * Process bugs from fetched json.
 	 * @param {boolean} fromMemory 			database is from the current conf property
 	 * @param  {Object} bugs 				database json data
@@ -76,7 +162,6 @@ class BugDb extends Updatable {
 		const db = {
 			apps: bugs.apps,
 			bugs: bugs.bugs,
-			categories: bugs.categories,
 			firstPartyExceptions: bugs.firstPartyExceptions,
 			patterns: {
 				host: patterns.host,
@@ -88,13 +173,6 @@ class BugDb extends Updatable {
 			version: bugs.version,
 			JUST_UPDATED_WITH_NEW_TRACKERS: false
 		};
-
-		// translate categories
-		db.categories.forEach((category) => {
-			const { name, description } = category;
-			category.name = t(name);
-			category.description = t(description);
-		});
 
 		log('initializing bugdb regexes...');
 
@@ -153,6 +231,8 @@ class BugDb extends Updatable {
 
 			conf.bugs = bugs;
 		}
+
+		db.categories = this._buildCategories(db);
 
 		this.db = db;
 

@@ -132,7 +132,7 @@ class Updatable {
 	_remoteFetcher(callback) {
 		log(`fetching ${this.type} from remote`);
 		const UPDATE_URL = `https://${CDN_SUB_DOMAIN}.ghostery.com/update/${
-			this.type === 'bugs' ? 'v3.1/bugs' : this.type}`;
+			this.type === 'bugs' ? 'v3/bugs' : this.type}`;
 
 		getJson(UPDATE_URL).then((list) => {
 			callback(true, list);
