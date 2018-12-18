@@ -175,6 +175,11 @@
 			margin-top: 0;
 			margin-bottom: 11px;
 			text-transform: uppercase;
+			&.s-special {
+				display: inline-block;
+				margin-right: 8px;
+				max-width: 240px;
+			}
 		}
 		h5 {
 			display: inline-block;
