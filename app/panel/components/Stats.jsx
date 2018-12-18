@@ -295,12 +295,12 @@ class Stats extends React.Component {
 
 	_reset = (demo) => {
 		const demoData = [
-			{ date: '2018-01-01', amount: 2 },
-			{ date: '2018-02-01', amount: 4 },
-			{ date: '2018-03-01', amount: 1 },
-			{ date: '2018-04-01', amount: 4 },
-			{ date: '2018-05-01', amount: 1 },
-			{ date: '2018-06-01', amount: 3 },
+			{ date: '2018-07-01', amount: 3000, index: 0 },
+			{ date: '2018-08-01', amount: 4500, index: 1 },
+			{ date: '2018-09-01', amount: 1500, index: 2 },
+			{ date: '2018-10-01', amount: 6000, index: 3 },
+			{ date: '2018-11-01', amount: 3000, index: 4 },
+			{ date: '2018-12-01', amount: 4500, index: 5 },
 		];
 
 		const clearData = {
@@ -321,7 +321,7 @@ class Stats extends React.Component {
 				summaryTitle: this.getSummaryTitle('cumulative'),
 				tooltipText: t('panel_stats_trackers_seen'),
 				summaryData: clearData,
-				selectionData: demo ? demoData : [{ date: clearData.date, amount: clearData.trackersSeen }],
+				selectionData: demo ? demoData : [{ date: clearData.date, amount: clearData.trackersSeen, index: 0 }],
 				currentIndex: 0,
 				timeframeSelectors: { back: 'disabled', forward: 'disabled' },
 			},
@@ -355,7 +355,6 @@ class Stats extends React.Component {
 				let adsBlocked = 0;
 				const startDate = moment(allData[0].day);
 				let endOfMonth = moment(startDate).endOf('month');
-				let prevDate = '';
 				let monthTrackersSeen = 0;
 				let monthTrackersBlocked = 0;
 				let monthTrackersAnonymized = 0;
@@ -363,20 +362,22 @@ class Stats extends React.Component {
 				const dailyData = [];
 				const monthlyData = [];
 				const cumulativeMonthlyData = [];
+				// let prevDate = ''; // <-- see loop below
 				allData.forEach((dataItem, i) => {
-					// Add zero values for nonexistent days
-					if (i !== 0) {
-						while (prevDate !== moment(dataItem.day).subtract(1, 'days').format('YYYY-MM-DD')) {
-							prevDate = moment(prevDate).add(1, 'days').format('YYYY-MM-DD');
-							dailyData.push({
-								trackersSeen: 0,
-								trackersBlocked: 0,
-								trackersAnonymized: 0,
-								adsBlocked: 0,
-								date: prevDate,
-							});
-						}
-					}
+					// Use this loop to add zero values for days Ghostery wasn't used in
+					// case users find that to be clearer than passing over them
+					// if (i !== 0) {
+					// 	while (prevDate !== moment(dataItem.day).subtract(1, 'days').format('YYYY-MM-DD')) {
+					// 		prevDate = moment(prevDate).add(1, 'days').format('YYYY-MM-DD');
+					// 		dailyData.push({
+					// 			trackersSeen: 0,
+					// 			trackersBlocked: 0,
+					// 			trackersAnonymized: 0,
+					// 			adsBlocked: 0,
+					// 			date: prevDate,
+					// 		});
+					// 	}
+					// }
 
 					// Day reassignments
 					dailyData.push({
@@ -433,7 +434,7 @@ class Stats extends React.Component {
 						monthTrackersAnonymized = 0;
 						monthAdsBlocked = 0;
 					}
-					prevDate = dataItem.day;
+					// prevDate = dataItem.day; // <-- see loop above
 				});
 				// Cumulative data totals
 				state.cumulativeData = {
@@ -489,8 +490,8 @@ class Stats extends React.Component {
 			data = dailyData;
 		}
 		const dataSlice = data.length <= 6 ? data : data.slice(selection.currentIndex - 5, selection.currentIndex + 1);
-		const selectionData = dataSlice.map((entry) => {
-			const parsedEntry = { amount: entry[state.selection.view], date: entry.date };
+		const selectionData = dataSlice.map((entry, index) => {
+			const parsedEntry = { amount: entry[state.selection.view], date: entry.date, index };
 			return parsedEntry;
 		});
 		return selectionData;
