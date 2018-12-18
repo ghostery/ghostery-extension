@@ -146,7 +146,7 @@ class RewardDetail extends React.Component {
 							<span className="RewardDetail__terms">
 								{ t('rewards_terms_conditions') }
 							</span>
-							<Tooltip header={conditions} position="top" delay="0" theme="dark" />
+							<Tooltip header={conditions} position="top-left-wide" delay="0" theme="dark" />
 						</div>
 					)}
 				</div>

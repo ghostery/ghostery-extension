@@ -25,7 +25,9 @@ class Stats extends React.Component {
 		super(props);
 		this.state = this._reset(true);
 	}
-
+	/**
+	 * Lifecycle event
+	 */
 	componentDidMount() {
 		sendMessage('ping', 'hist_stats_panel');
 		if (!this._isSupporter(this.props)) {
@@ -33,7 +35,9 @@ class Stats extends React.Component {
 		}
 		this._init();
 	}
-
+	/**
+	 * Lifecycle event
+	 */
 	componentWillReceiveProps(nextProps) {
 		const nextSupporter = this._isSupporter(nextProps);
 		const thisSupporter = this._isSupporter(this.props);
@@ -145,6 +149,9 @@ class Stats extends React.Component {
 	 * @param {Object} event 		click event
 	 */
 	selectView = (event) => {
+		if (!this._isSupporter(this.props)) {
+			return;
+		}
 		const state = Object.assign({}, this.state);
 		const { selection } = state;
 		if (event.currentTarget.id !== selection.view) {
@@ -190,8 +197,14 @@ class Stats extends React.Component {
 						break;
 					}
 				}
-				selection.timeframeSelectors.back = selection.currentIndex === 0 ? 'disabled' : '';
-				selection.timeframeSelectors.forward = selection.currentIndex + 1 === dailyData.length ? 'disabled' : '';
+
+				if (dailyData.length < 6) {
+					selection.timeframeSelectors.back = 'disabled';
+					selection.timeframeSelectors.forward = 'disabled';
+				} else {
+					selection.timeframeSelectors.back = selection.currentIndex === 0 ? 'disabled' : '';
+					selection.timeframeSelectors.forward = selection.currentIndex + 1 === dailyData.length ? 'disabled' : '';
+				}
 			} else if (selection.type !== 'daily' && lastType === 'daily') {
 				const currentDate = dailyData[selection.currentIndex].date;
 				for (let i = monthlyData.length - 1; i >= 0; i--) {
@@ -200,8 +213,14 @@ class Stats extends React.Component {
 						break;
 					}
 				}
-				selection.timeframeSelectors.back = selection.currentIndex === 0 ? 'disabled' : '';
-				selection.timeframeSelectors.forward = selection.currentIndex + 1 === monthlyData.length ? 'disabled' : '';
+
+				if (monthlyData.length < 6) {
+					selection.timeframeSelectors.back = 'disabled';
+					selection.timeframeSelectors.forward = 'disabled';
+				} else {
+					selection.timeframeSelectors.back = selection.currentIndex === 0 ? 'disabled' : '';
+					selection.timeframeSelectors.forward = selection.currentIndex + 1 === monthlyData.length ? 'disabled' : '';
+				}
 			}
 
 			selection.selectionData = this._determineSelectionData(state);
@@ -253,7 +272,7 @@ class Stats extends React.Component {
 
 	doReset = () => {
 		sendMessage('resetStats');
-		this.setState(this._reset());
+		this.setState(this._reset(false));
 	}
 
 	cancelReset = () => {
@@ -274,24 +293,35 @@ class Stats extends React.Component {
 		this.props.history.push('/login');
 	}
 
-	_reset = (freeze) => {
-		const clearData = freeze ? {} : {
+	_reset = (demo) => {
+		const demoData = [
+			{ date: '2018-07-01', amount: 3000, index: 0 },
+			{ date: '2018-08-01', amount: 4500, index: 1 },
+			{ date: '2018-09-01', amount: 1500, index: 2 },
+			{ date: '2018-10-01', amount: 6000, index: 3 },
+			{ date: '2018-11-01', amount: 3000, index: 4 },
+			{ date: '2018-12-01', amount: 4500, index: 5 },
+		];
+
+		const clearData = {
 			date: moment().format('YYYY-MM-DD'),
 			trackersSeen: 0,
 			trackersBlocked: 0,
 			trackersAnonymized: 0,
 			adsBlocked: 0,
 		};
-		const clearState = {
+
+		const clearOrDemoState = {
 			selection: {
 				type: 'cumulative',
-				view: freeze ? '' : 'trackersSeen',
+				view: demo ? '' : 'trackersSeen',
+				demo,
 				graphTitle: this.getGraphTitle('cumulative', 'trackersSeen'),
 				graphIconPath: this.getGraphIconPath('trackersSeen'),
 				summaryTitle: this.getSummaryTitle('cumulative'),
 				tooltipText: t('panel_stats_trackers_seen'),
 				summaryData: clearData,
-				selectionData: [clearData],
+				selectionData: demo ? demoData : [{ date: clearData.date, amount: clearData.trackersSeen, index: 0 }],
 				currentIndex: 0,
 				timeframeSelectors: { back: 'disabled', forward: 'disabled' },
 			},
@@ -304,8 +334,7 @@ class Stats extends React.Component {
 			showResetModal: false,
 			showPitchModal: (!this.props.user || !this.props.user.subscriptionsSupporter),
 		};
-		clearState.selection.selectionData = this._determineSelectionData(clearState);
-		return clearState;
+		return clearOrDemoState;
 	}
 
 	_getAllStats = () => (
@@ -326,7 +355,6 @@ class Stats extends React.Component {
 				let adsBlocked = 0;
 				const startDate = moment(allData[0].day);
 				let endOfMonth = moment(startDate).endOf('month');
-				let prevDate = '';
 				let monthTrackersSeen = 0;
 				let monthTrackersBlocked = 0;
 				let monthTrackersAnonymized = 0;
@@ -334,20 +362,22 @@ class Stats extends React.Component {
 				const dailyData = [];
 				const monthlyData = [];
 				const cumulativeMonthlyData = [];
+				// let prevDate = ''; // <-- see loop below
 				allData.forEach((dataItem, i) => {
-					// Add zero values for nonexistent days
-					if (i !== 0) {
-						while (prevDate !== moment(dataItem.day).subtract(1, 'days').format('YYYY-MM-DD')) {
-							prevDate = moment(prevDate).add(1, 'days').format('YYYY-MM-DD');
-							dailyData.push({
-								trackersSeen: 0,
-								trackersBlocked: 0,
-								trackersAnonymized: 0,
-								adsBlocked: 0,
-								date: prevDate,
-							});
-						}
-					}
+					// Use this loop to add zero values for days Ghostery wasn't used in
+					// case users find that to be clearer than passing over them
+					// if (i !== 0) {
+					// 	while (prevDate !== moment(dataItem.day).subtract(1, 'days').format('YYYY-MM-DD')) {
+					// 		prevDate = moment(prevDate).add(1, 'days').format('YYYY-MM-DD');
+					// 		dailyData.push({
+					// 			trackersSeen: 0,
+					// 			trackersBlocked: 0,
+					// 			trackersAnonymized: 0,
+					// 			adsBlocked: 0,
+					// 			date: prevDate,
+					// 		});
+					// 	}
+					// }
 
 					// Day reassignments
 					dailyData.push({
@@ -404,7 +434,7 @@ class Stats extends React.Component {
 						monthTrackersAnonymized = 0;
 						monthAdsBlocked = 0;
 					}
-					prevDate = dataItem.day;
+					// prevDate = dataItem.day; // <-- see loop above
 				});
 				// Cumulative data totals
 				state.cumulativeData = {
@@ -415,10 +445,10 @@ class Stats extends React.Component {
 				};
 				// Daily averages
 				state.dailyAverageData = {
-					trackersSeen: Math.floor(trackersSeen / allData.length),
-					trackersBlocked: Math.floor(trackersBlocked / allData.length),
-					trackersAnonymized: Math.floor(trackersAnonymized / allData.length),
-					adsBlocked: Math.floor(adsBlocked / allData.length),
+					trackersSeen: Math.floor(trackersSeen / dailyData.length),
+					trackersBlocked: Math.floor(trackersBlocked / dailyData.length),
+					trackersAnonymized: Math.floor(trackersAnonymized / dailyData.length),
+					adsBlocked: Math.floor(adsBlocked / dailyData.length),
 				};
 				// Monthly averages
 				state.monthlyAverageData = {
@@ -436,6 +466,7 @@ class Stats extends React.Component {
 				state.selection.timeframeSelectors.back = monthlyData.length > 6 ? '' : 'disabled';
 				state.selection.view = 'trackersSeen';
 				state.selection.selectionData = this._determineSelectionData(state);
+				state.selection.demo = false;
 
 				this.setState(state);
 			}
@@ -459,8 +490,8 @@ class Stats extends React.Component {
 			data = dailyData;
 		}
 		const dataSlice = data.length <= 6 ? data : data.slice(selection.currentIndex - 5, selection.currentIndex + 1);
-		const selectionData = dataSlice.map((entry) => {
-			const parsedEntry = { amount: entry[state.selection.view], date: entry.date };
+		const selectionData = dataSlice.map((entry, index) => {
+			const parsedEntry = { amount: entry[state.selection.view], date: entry.date, index };
 			return parsedEntry;
 		});
 		return selectionData;

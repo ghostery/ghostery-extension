@@ -36,7 +36,6 @@ class CreateAccount extends React.Component {
 			loading: false,
 			passwordInvalidError: false,
 			passwordLengthError: false,
-			consentChecked: true,
 		};
 	}
 
@@ -128,12 +127,9 @@ class CreateAccount extends React.Component {
 	 */
 	render() {
 		const {
-			email, confirmEmail, firstName, lastName, password, consentChecked, loading, emailError, confirmEmailError, passwordInvalidError, passwordLengthError
+			email, confirmEmail, firstName, lastName, password, loading, emailError, confirmEmailError, passwordInvalidError, passwordLengthError
 		} = this.state;
-		const buttonClasses = ClassNames('button ghostery-button', {
-			disabled: !consentChecked,
-			loading
-		});
+		const buttonClasses = ClassNames('button ghostery-button', { loading });
 		return (
 			<div id="create-account-panel">
 				<div className="row align-center">
@@ -201,14 +197,8 @@ class CreateAccount extends React.Component {
 							</div>
 							<div className="row">
 								<div className="small-12 columns">
-									<div id="create-account-privacy-container" className={(!consentChecked ? 'panel-error' : '')}>
-										<label htmlFor="accept-privacy" id="accept-privacy-label">
-											<input onChange={this.handleCheckboxChange} value={consentChecked} name="consentChecked" id="accept-privacy" defaultChecked type="checkbox" />
-											<span className="callout-text" dangerouslySetInnerHTML={{ __html: t('account_creation_privacy_statement') }} />
-										</label>
-										<p id="accept-privacy-requirement" className="warning">
-											{ t('consent_privacy') }
-										</p>
+									<div id="create-account-privacy-container">
+										<p id="accept-privacy-label" dangerouslySetInnerHTML={{ __html: t('account_creation_privacy_statement') }} />
 									</div>
 									<div id="account-creation-buttons" className="row align-center">
 										<div className="small-6 columns text-center">
@@ -217,7 +207,7 @@ class CreateAccount extends React.Component {
 											</Link>
 										</div>
 										<div className="small-6 columns text-center">
-											<button type="submit" id="create-account-button" className={buttonClasses} disabled={!consentChecked}>
+											<button type="submit" id="create-account-button" className={buttonClasses}>
 												<span className="title">{ t('panel_title_create_account') }</span>
 												<span className="loader" />
 											</button>

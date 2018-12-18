@@ -1,18 +1,24 @@
 {
 	"account_creation_privacy_statement": {
-		"message": "I consent to Ghostery's data practices found in its $LINK_PS_START$Privacy Statement$LINK_PS_END$ and the terms found in its $LINK_UA_START$License Agreement$LINK_UA_END$.",
+		"message": "Our general $LINK_TERMS_START$Terms and Conditions$LINK_TERMS_END$ and our $LINK_UA_START$License Agreement$LINK_UA_END$ apply. You will find our Privacy Statement $LINK_PS_START$here$LINK_PS_END$.",
 		"placeholders": {
 			"link_ps_end": {
 				"content": "</a>"
 			},
 			"link_ps_start": {
-				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-us/privacy-statements/ghostery-browser-extension/ghostery-browser-extension-privacy-statement/\">"
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" rel=\"noopener noreferrer\">"
 			},
 			"link_ua_end": {
 				"content": "</a>"
 			},
 			"link_ua_start": {
-				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-us/privacy-statements/ghostery-browser-extension/ghostery-browser-extension-end-user-license-agreem/\">"
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/privacy-statements/\" rel=\"noopener noreferrer\">"
+			},
+			"link_terms_end": {
+				"content": "</a>"
+			},
+			"link_terms_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/privacy-statements/\" rel=\"noopener noreferrer\">"
 			}
 		}
 	},
@@ -365,9 +371,6 @@
 				"example": "Disqus"
 			}
 		}
-	},
-	"consent_privacy": {
-		"message": "Consent required."
 	},
 	"copyright": {
 		"description": "Copyright message, shown in page footers.",
@@ -1922,12 +1925,12 @@
 	"rewards_code_copied": {
 		"message": "code copied"
 	},
-
 	"rewards_expires_in_day": {
 		"message": "Expires in 1 day"
 	},
 	"rewards_expires_in_days": {
 		"message": "Expires in $COUNT$ days",
+
 		"placeholders": {
 			"count": "$1"
 		}
@@ -2166,7 +2169,7 @@
 		"message": "Reset all stats"
 	},
 	"panel_stats_reset_modal_text": {
-		"message": "You statistics history will be reset. There is no way to recover this data. Do you want to continue?"
+		"message": "Your statistics history will be reset. There is no way to recover this data. Do you want to continue?"
 	},
 	"panel_stats_reset_modal_yes": {
 		"message": "Yes, Reset"
