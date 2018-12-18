@@ -22,8 +22,6 @@ import SubscriptionThemes from './Subscription/SubscriptionThemes';
 import PrioritySupport from './Subscription/PrioritySupport';
 import Currencies from '../../countries.json';
 
-
-// import TrackerStats from './Subscription/TrackerStats';
 /**
  * @class Implement base Subscription view which routes navigation to all subscription subviews
  * @memberof PanelClasses
@@ -93,7 +91,6 @@ class Subscription extends React.Component {
 	SubscriptionInfoComponent = () => (<SubscriptionInfo subscriptionData={this.parseSubscriptionData()} />);
 	SubscriptionThemesComponent = () => (<SubscriptionThemes isChecked={this.state.isChecked} toggleThemes={this.toggleThemes} />);
 	PrioritySupportComponent = () => (<PrioritySupport />);
-	// TrackerStatsComponent = () => (<TrackerStats />);
 
 	/**
 	 * Render top level component of the Subscription view.
