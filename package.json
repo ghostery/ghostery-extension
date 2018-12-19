@@ -42,7 +42,8 @@
   },
   "homepage": "https://github.com/ghostery/ghostery-extension#readme",
   "resolutions": {
-    "babel-core": "^7.0.0-bridge.0"
+    "babel-core": "^7.0.0-bridge.0",
+    "@cliqz/adblocker": "0.3.1"
   },
   "dependencies": {
     "base64-js": "^1.2.1",
