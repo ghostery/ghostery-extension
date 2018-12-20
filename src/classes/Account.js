@@ -106,7 +106,6 @@ class Account {
 			}
 			this._getUserIDFromCookie().then((userID) => {
 				this._setAccountInfo(userID);
-				this.getUserSubscriptionData();
 			});
 			return {};
 		});
@@ -146,40 +145,46 @@ class Account {
 			})
 	)
 
-	getUserSettings = () => (
-		this._getUserID()
-			.then(userID => api.get('settings', userID))
-			.then((res) => {
-				const settings = build(normalize(res, { camelizeKeys: false }), 'settings', res.data.id);
-				const { settings_json } = settings;
-				// @TODO setConfUserSettings settings.settingsJson
-				this._setConfUserSettings(settings_json);
-				this._setAccountUserSettings(settings_json);
-				return settings_json;
-			})
-	)
-
-	getUserSubscriptionData = () => (
-		this._getUserID()
-			.then(userID => api.get('stripe/customers', userID, 'cards,subscriptions'))
-			.then((res) => {
-				const subscriptionData = build(normalize(res), 'customers', res.data.id);
-				this._setSubscriptionData(subscriptionData);
-				return subscriptionData;
-			})
-	)
-
-	saveUserSettings = () => (
-		this._getUserID()
-			.then(userID => (
-				api.update('settings', {
-					type: 'settings',
-					id: userID,
-					attributes: {
-						settings_json: this.buildUserSettings()
-					}
+	getUserSettings = () => (!this._isValidated() ? (Promise.resolve(null)) :
+		(
+			this._getUserID()
+				.then(userID => api.get('settings', userID))
+				.then((res) => {
+					const settings = build(normalize(res, { camelizeKeys: false }), 'settings', res.data.id);
+					const { settings_json } = settings;
+					// @TODO setConfUserSettings settings.settingsJson
+					this._setConfUserSettings(settings_json);
+					this._setAccountUserSettings(settings_json);
+					return settings_json;
 				})
-			))
+		)
+	)
+
+	getUserSubscriptionData = () => (!this._isValidated() ? (Promise.resolve(null)) :
+		(
+			this._getUserID()
+				.then(userID => api.get('stripe/customers', userID, 'cards,subscriptions'))
+				.then((res) => {
+					const subscriptionData = build(normalize(res), 'customers', res.data.id);
+					this._setSubscriptionData(subscriptionData);
+					return subscriptionData;
+				})
+		)
+	)
+
+	saveUserSettings = () => (!this._isValidated() ? (Promise.resolve()) :
+		(
+			this._getUserID()
+				.then(userID => (
+					api.update('settings', {
+						type: 'settings',
+						id: userID,
+						attributes: {
+							settings_json: this.buildUserSettings()
+						}
+					})
+				))
+		)
 	)
 
 	getTheme = name => (
@@ -521,6 +526,8 @@ class Account {
 			});
 		});
 	}
+
+	_isValidated = () => conf.account && conf.account.user && conf.account.user.emailValidated;
 }
 
 // Return the class as a singleton
