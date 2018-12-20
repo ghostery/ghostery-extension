@@ -1,3 +1,13 @@
+### GHOSTERY 8.3.0 (UNRELEASED)
+
++ New Ghostery Plus features - Historical Stats, Midnight Theme
++ New intro hub with streamlined setup and tutorial
++ Improved UI for Firefox Android
++ Integration with Ghostery Tab extension for Chrome
++ Improved anti-tracking whitelist logic
++ Improved anti-ad-blocker circumvention
++ Bug fixes and updated translations
+
 ### GHOSTERY 8.2.6 (December 4, 2018)
 
 + Remove WebSocket permissions and filter support for Firefox
