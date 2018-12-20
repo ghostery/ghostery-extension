@@ -2090,10 +2090,7 @@
 		"message": "Change the color scheme of Ghostery!"
 	},
 	"subscription_tracker_stats": {
-		"message": "Historical Tracker Stats"
-	},
-	"subscription_tracker_stats_title" : {
-		"message": "Historical Tracker Stats"
+		"message": "Historical Stats"
 	},
 	"subscription_charge_date" : {
 		"message": "Next Payment Date"
