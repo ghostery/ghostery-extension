@@ -2090,10 +2090,7 @@
 		"message": "Change the color scheme of Ghostery!"
 	},
 	"subscription_tracker_stats": {
-		"message": "Historical Tracker Stats"
-	},
-	"subscription_tracker_stats_title" : {
-		"message": "Historical Tracker Stats"
+		"message": "Historical Stats"
 	},
 	"subscription_charge_date" : {
 		"message": "Next Payment Date"
@@ -2126,6 +2123,9 @@
 	},
 	"subscription_submit_issue": {
 		"message": "Submit Issue"
+	},
+	"subscription_data_error": {
+		"message": "There was an error retrieving your subscription details. Please click the link below to access your account information."
 	},
 	"panel_stats_menu_cumulative": {
 		"message": "Cumulative"
