@@ -97,7 +97,7 @@ allow the computer to push (Submit) and pull (Download) files to/from Transifex.
 
 ```sh
 # Submit translation files to Transifex
-$ tx push -s -b develop
+$ tx push -s -b en
 ```
 
 ```sh
