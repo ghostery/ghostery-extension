@@ -87,18 +87,7 @@ class Api {
 				} else {
 					resolve(data);
 				}
-			})
-				.catch(() => {
-					reject({// eslint-disable-line prefer-promise-reject-errors
-						errors: [
-							{
-								title: 'Data is not a valid JSON',
-								code: 'invalid-data',
-								status: 'data error',
-							}
-						]
-					});
-				});
+			});
 		});
 	}
 

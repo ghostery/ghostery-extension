@@ -76,24 +76,17 @@ export const getUser = () => dispatch => (
 export const getUserSubscriptionData = () => dispatch => (
 	sendMessageInPromise('account.getUserSubscriptionData')
 		.then((res) => {
-			if (!res) {
+			const { errors, subscriptionData } = res;
+			if (errors) {
 				dispatch({
 					type: GET_USER_SUBSCRIPTION_DATA_FAIL,
-					payload: { errors: 'invalid data' },
+					payload: { errors },
 				});
 			} else {
-				const { errors, subscriptionData } = res;
-				if (errors) {
-					dispatch({
-						type: GET_USER_SUBSCRIPTION_DATA_FAIL,
-						payload: { errors },
-					});
-				} else {
-					dispatch({
-						type: GET_USER_SUBSCRIPTION_DATA_SUCCESS,
-						payload: { subscriptionData },
-					});
-				}
+				dispatch({
+					type: GET_USER_SUBSCRIPTION_DATA_SUCCESS,
+					payload: { subscriptionData },
+				});
 			}
 			return res;
 		})
