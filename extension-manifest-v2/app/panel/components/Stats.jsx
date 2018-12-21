@@ -198,7 +198,7 @@ class Stats extends React.Component {
 					}
 				}
 
-				if (dailyData.length < 6) {
+				if (dailyData.length <= 6) {
 					selection.timeframeSelectors.back = 'disabled';
 					selection.timeframeSelectors.forward = 'disabled';
 				} else {
@@ -214,7 +214,7 @@ class Stats extends React.Component {
 					}
 				}
 
-				if (monthlyData.length < 6) {
+				if (monthlyData.length <= 6) {
 					selection.timeframeSelectors.back = 'disabled';
 					selection.timeframeSelectors.forward = 'disabled';
 				} else {
