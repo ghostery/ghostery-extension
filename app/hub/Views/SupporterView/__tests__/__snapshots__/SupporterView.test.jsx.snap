@@ -71,12 +71,12 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
       <div
         className="SupporterView__perkTitle"
       >
-        hub_supporter_perk_support_title
+        hub_supporter_perk_stats_title
       </div>
       <div
         className="SupporterView__perkDescription"
       >
-        hub_supporter_perk_support_description
+        hub_supporter_perk_stats_description
       </div>
     </div>
     <div
@@ -114,10 +114,10 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
     className="SupporterView--addPaddingTop SupporterView--addPaddingBottom"
   >
     <div
-      className="row small-up-1 large-up-3"
+      className="row align-center"
     >
       <div
-        className="SupporterView__feature columns large-offset-1"
+        className="SupporterView__feature small-12 medium-6 large-5 large-offset-1 columns"
       >
         <div
           className="SupporterView__headingTitle SupporterView--addPaddingTop"
@@ -136,7 +136,7 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
         </div>
       </div>
       <div
-        className="SupporterView__feature columns small-12 medium-6"
+        className="SupporterView__feature small-12 medium-6 columns"
       >
         <img
           alt="hub_supporter_feature_theme_title"
@@ -169,19 +169,74 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
     className="SupporterView--addPaddingTop SupporterView--addPaddingBottom SupporterView--rowDarken"
   >
     <div
-      className="row align-middle small-up-1 large-up-3"
+      className="row align-center"
     >
       <div
-        className="SupporterView__feature columns large-offset-1 show-for-large"
+        className="SupporterView__feature small-12 medium-6 large-5 columns show-for-large"
       >
         <img
-          alt="hub_supporter_feature_support_title"
-          className="SupporterView__featureImage support"
-          src="/app/images/hub/supporter/feature-support.svg"
+          alt="hub_supporter_feature_stats_title"
+          className="SupporterView__featureImage stats"
+          src="/app/images/hub/supporter/feature-stats.svg"
         />
       </div>
       <div
-        className="SupporterView__feature columns large-offset-1"
+        className="SupporterView__feature small-12 medium-6 large-5 columns"
+      >
+        <div
+          className="SupporterView__headingTitle"
+        >
+          hub_supporter_feature_stats_title
+        </div>
+        <div
+          className="SupporterView__headingDescription"
+        >
+          hub_supporter_feature_stats_description
+        </div>
+        <div
+          className="SupporterView__button button show-for-large disabled"
+        >
+          hub_supporter_button_text_alt
+        </div>
+      </div>
+      <div
+        className="SupporterView__feature columns hide-for-large"
+      >
+        <img
+          alt="hub_supporter_feature_stats_title"
+          className="SupporterView__featureImage stats"
+          src="/app/images/hub/supporter/feature-stats.svg"
+        />
+      </div>
+    </div>
+    <div
+      className="SupporterView--addPaddingTop hide-for-large"
+    >
+      <div
+        className="row align-center-middle"
+      >
+        <div
+          className="SupporterView__bar flex-child-grow"
+        />
+        <div
+          className="SupporterView__button button SupporterView--addSideMargin disabled"
+        >
+          hub_supporter_button_text_alt
+        </div>
+        <div
+          className="SupporterView__bar flex-child-grow"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="SupporterView--addPaddingTop SupporterView--addPaddingBottom"
+  >
+    <div
+      className="row align-center"
+    >
+      <div
+        className="SupporterView__feature small-12 medium-6 large-5 large-offset-1 columns"
       >
         <div
           className="SupporterView__headingTitle"
@@ -200,7 +255,7 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
         </div>
       </div>
       <div
-        className="SupporterView__feature columns hide-for-large"
+        className="SupporterView__feature columns small-12 medium-6"
       >
         <img
           alt="hub_supporter_feature_support_title"
@@ -230,13 +285,13 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
     </div>
   </div>
   <div
-    className="SupporterView--addPaddingTop"
+    className="SupporterView--addPaddingTop SupporterView--addPaddingBottom SupporterView--rowDarken"
   >
     <div
-      className="row align-middle-center"
+      className="row align-center"
     >
       <div
-        className="SupporterView__feature columns large-8 large-offset-2 text-center"
+        className="SupporterView__feature columns medium-8 large-5 text-center"
       >
         <div
           className="SupporterView__headingTitle"
@@ -353,12 +408,12 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
       <div
         className="SupporterView__perkTitle"
       >
-        hub_supporter_perk_support_title
+        hub_supporter_perk_stats_title
       </div>
       <div
         className="SupporterView__perkDescription"
       >
-        hub_supporter_perk_support_description
+        hub_supporter_perk_stats_description
       </div>
     </div>
     <div
@@ -396,10 +451,10 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
     className="SupporterView--addPaddingTop SupporterView--addPaddingBottom"
   >
     <div
-      className="row small-up-1 large-up-3"
+      className="row align-center"
     >
       <div
-        className="SupporterView__feature columns large-offset-1"
+        className="SupporterView__feature small-12 medium-6 large-5 large-offset-1 columns"
       >
         <div
           className="SupporterView__headingTitle SupporterView--addPaddingTop"
@@ -422,7 +477,7 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
         </a>
       </div>
       <div
-        className="SupporterView__feature columns small-12 medium-6"
+        className="SupporterView__feature small-12 medium-6 columns"
       >
         <img
           alt="hub_supporter_feature_theme_title"
@@ -459,19 +514,82 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
     className="SupporterView--addPaddingTop SupporterView--addPaddingBottom SupporterView--rowDarken"
   >
     <div
-      className="row align-middle small-up-1 large-up-3"
+      className="row align-center"
     >
       <div
-        className="SupporterView__feature columns large-offset-1 show-for-large"
+        className="SupporterView__feature small-12 medium-6 large-5 columns show-for-large"
       >
         <img
-          alt="hub_supporter_feature_support_title"
-          className="SupporterView__featureImage support"
-          src="/app/images/hub/supporter/feature-support.svg"
+          alt="hub_supporter_feature_stats_title"
+          className="SupporterView__featureImage stats"
+          src="/app/images/hub/supporter/feature-stats.svg"
         />
       </div>
       <div
-        className="SupporterView__feature columns large-offset-1"
+        className="SupporterView__feature small-12 medium-6 large-5 columns"
+      >
+        <div
+          className="SupporterView__headingTitle"
+        >
+          hub_supporter_feature_stats_title
+        </div>
+        <div
+          className="SupporterView__headingDescription"
+        >
+          hub_supporter_feature_stats_description
+        </div>
+        <a
+          className="SupporterView__button button show-for-large"
+          href="https://signon.ghosterystage.com/subscribe"
+          onClick={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          hub_supporter_button_text
+        </a>
+      </div>
+      <div
+        className="SupporterView__feature columns hide-for-large"
+      >
+        <img
+          alt="hub_supporter_feature_stats_title"
+          className="SupporterView__featureImage stats"
+          src="/app/images/hub/supporter/feature-stats.svg"
+        />
+      </div>
+    </div>
+    <div
+      className="SupporterView--addPaddingTop hide-for-large"
+    >
+      <div
+        className="row align-center-middle"
+      >
+        <div
+          className="SupporterView__bar flex-child-grow"
+        />
+        <a
+          className="SupporterView__button button SupporterView--addSideMargin"
+          href="https://signon.ghosterystage.com/subscribe"
+          onClick={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          hub_supporter_button_text
+        </a>
+        <div
+          className="SupporterView__bar flex-child-grow"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="SupporterView--addPaddingTop SupporterView--addPaddingBottom"
+  >
+    <div
+      className="row align-center"
+    >
+      <div
+        className="SupporterView__feature small-12 medium-6 large-5 large-offset-1 columns"
       >
         <div
           className="SupporterView__headingTitle"
@@ -494,7 +612,7 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
         </a>
       </div>
       <div
-        className="SupporterView__feature columns hide-for-large"
+        className="SupporterView__feature columns small-12 medium-6"
       >
         <img
           alt="hub_supporter_feature_support_title"
@@ -528,13 +646,13 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
     </div>
   </div>
   <div
-    className="SupporterView--addPaddingTop"
+    className="SupporterView--addPaddingTop SupporterView--addPaddingBottom SupporterView--rowDarken"
   >
     <div
-      className="row align-middle-center"
+      className="row align-center"
     >
       <div
-        className="SupporterView__feature columns large-8 large-offset-2 text-center"
+        className="SupporterView__feature columns medium-8 large-5 text-center"
       >
         <div
           className="SupporterView__headingTitle"
@@ -655,12 +773,12 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
       <div
         className="SupporterView__perkTitle"
       >
-        hub_supporter_perk_support_title
+        hub_supporter_perk_stats_title
       </div>
       <div
         className="SupporterView__perkDescription"
       >
-        hub_supporter_perk_support_description
+        hub_supporter_perk_stats_description
       </div>
     </div>
     <div
@@ -698,10 +816,10 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
     className="SupporterView--addPaddingTop SupporterView--addPaddingBottom"
   >
     <div
-      className="row small-up-1 large-up-3"
+      className="row align-center"
     >
       <div
-        className="SupporterView__feature columns large-offset-1"
+        className="SupporterView__feature small-12 medium-6 large-5 large-offset-1 columns"
       >
         <div
           className="SupporterView__headingTitle SupporterView--addPaddingTop"
@@ -724,7 +842,7 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
         </a>
       </div>
       <div
-        className="SupporterView__feature columns small-12 medium-6"
+        className="SupporterView__feature small-12 medium-6 columns"
       >
         <img
           alt="hub_supporter_feature_theme_title"
@@ -761,19 +879,82 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
     className="SupporterView--addPaddingTop SupporterView--addPaddingBottom SupporterView--rowDarken"
   >
     <div
-      className="row align-middle small-up-1 large-up-3"
+      className="row align-center"
     >
       <div
-        className="SupporterView__feature columns large-offset-1 show-for-large"
+        className="SupporterView__feature small-12 medium-6 large-5 columns show-for-large"
       >
         <img
-          alt="hub_supporter_feature_support_title"
-          className="SupporterView__featureImage support"
-          src="/app/images/hub/supporter/feature-support.svg"
+          alt="hub_supporter_feature_stats_title"
+          className="SupporterView__featureImage stats"
+          src="/app/images/hub/supporter/feature-stats.svg"
         />
       </div>
       <div
-        className="SupporterView__feature columns large-offset-1"
+        className="SupporterView__feature small-12 medium-6 large-5 columns"
+      >
+        <div
+          className="SupporterView__headingTitle"
+        >
+          hub_supporter_feature_stats_title
+        </div>
+        <div
+          className="SupporterView__headingDescription"
+        >
+          hub_supporter_feature_stats_description
+        </div>
+        <a
+          className="SupporterView__button button show-for-large"
+          href="https://account.ghosterystage.com/subscription?target=subscribe"
+          onClick={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          hub_supporter_button_text
+        </a>
+      </div>
+      <div
+        className="SupporterView__feature columns hide-for-large"
+      >
+        <img
+          alt="hub_supporter_feature_stats_title"
+          className="SupporterView__featureImage stats"
+          src="/app/images/hub/supporter/feature-stats.svg"
+        />
+      </div>
+    </div>
+    <div
+      className="SupporterView--addPaddingTop hide-for-large"
+    >
+      <div
+        className="row align-center-middle"
+      >
+        <div
+          className="SupporterView__bar flex-child-grow"
+        />
+        <a
+          className="SupporterView__button button SupporterView--addSideMargin"
+          href="https://account.ghosterystage.com/subscription?target=subscribe"
+          onClick={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          hub_supporter_button_text
+        </a>
+        <div
+          className="SupporterView__bar flex-child-grow"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="SupporterView--addPaddingTop SupporterView--addPaddingBottom"
+  >
+    <div
+      className="row align-center"
+    >
+      <div
+        className="SupporterView__feature small-12 medium-6 large-5 large-offset-1 columns"
       >
         <div
           className="SupporterView__headingTitle"
@@ -796,7 +977,7 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
         </a>
       </div>
       <div
-        className="SupporterView__feature columns hide-for-large"
+        className="SupporterView__feature columns small-12 medium-6"
       >
         <img
           alt="hub_supporter_feature_support_title"
@@ -830,13 +1011,13 @@ exports[`app/hub/Views/SupporterView component Snapshot tests with react-test-re
     </div>
   </div>
   <div
-    className="SupporterView--addPaddingTop"
+    className="SupporterView--addPaddingTop SupporterView--addPaddingBottom SupporterView--rowDarken"
   >
     <div
-      className="row align-middle-center"
+      className="row align-center"
     >
       <div
-        className="SupporterView__feature columns large-8 large-offset-2 text-center"
+        className="SupporterView__feature columns medium-8 large-5 text-center"
       >
         <div
           className="SupporterView__headingTitle"

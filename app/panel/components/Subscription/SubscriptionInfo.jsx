@@ -1,4 +1,3 @@
-// SubscriptionInfo
 /**
  * Subscription Info Component
  *
