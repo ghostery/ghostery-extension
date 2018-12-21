@@ -163,9 +163,9 @@ class Account {
 		this._getUserID()
 			.then(userID => api.get('stripe/customers', userID, 'cards,subscriptions'))
 			.then((res) => {
-				const subscriptionData = build(normalize(res), 'customers', res.data.id);
-				this._setSubscriptionData(subscriptionData);
-				return subscriptionData;
+				const customer = build(normalize(res), 'customers', res.data.id);
+				this._setSubscriptionData(customer);
+				return customer;
 			})
 	)
 
@@ -451,7 +451,7 @@ class Account {
 			conf.paid_subscription = true;
 			dispatcher.trigger('conf.save.paid_subscription');
 		}
-		conf.account.subscriptionData = subscriptionData;
+		conf.account.subscriptionData = subscriptionData.subscriptions || null;
 		dispatcher.trigger('conf.save.account');
 	}
 
