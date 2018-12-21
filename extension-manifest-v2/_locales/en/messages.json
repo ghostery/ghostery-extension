@@ -2124,9 +2124,6 @@
 	"subscription_submit_issue": {
 		"message": "Submit Issue"
 	},
-	"subscription_data_error": {
-		"message": "There was an error retrieving your subscription details. Please click the link below to access your account information."
-	},
 	"panel_stats_menu_cumulative": {
 		"message": "Cumulative"
 	},
