@@ -85,10 +85,10 @@ class SupporterView extends Component {
 					<div className="SupporterView__perk columns text-center">
 						<div className="SupporterView__perkIcon support" />
 						<div className="SupporterView__perkTitle">
-							{t('hub_supporter_perk_support_title')}
+							{t('hub_supporter_perk_stats_title')}
 						</div>
 						<div className="SupporterView__perkDescription">
-							{t('hub_supporter_perk_support_description')}
+							{t('hub_supporter_perk_stats_description')}
 						</div>
 					</div>
 					<div className="SupporterView__perk columns text-center">
@@ -109,8 +109,8 @@ class SupporterView extends Component {
 					</div>
 				</div>
 				<div className="SupporterView--addPaddingTop SupporterView--addPaddingBottom">
-					<div className="row small-up-1 large-up-3">
-						<div className="SupporterView__feature columns large-offset-1">
+					<div className="row align-center">
+						<div className="SupporterView__feature small-12 medium-6 large-5 large-offset-1 columns">
 							<div className="SupporterView__headingTitle SupporterView--addPaddingTop">
 								{t('hub_supporter_feature_theme_title')}
 							</div>
@@ -119,7 +119,7 @@ class SupporterView extends Component {
 							</div>
 							{this._renderButton('show-for-large')}
 						</div>
-						<div className="SupporterView__feature columns small-12 medium-6">
+						<div className="SupporterView__feature small-12 medium-6 columns">
 							<img
 								className="SupporterView__featureImage theme"
 								src="/app/images/hub/supporter/feature-theme.png"
@@ -136,15 +136,42 @@ class SupporterView extends Component {
 					</div>
 				</div>
 				<div className="SupporterView--addPaddingTop SupporterView--addPaddingBottom SupporterView--rowDarken">
-					<div className="row align-middle small-up-1 large-up-3">
-						<div className="SupporterView__feature columns large-offset-1 show-for-large">
+					<div className="row align-center">
+						<div className="SupporterView__feature small-12 medium-6 large-5 columns show-for-large">
 							<img
-								className="SupporterView__featureImage support"
-								src="/app/images/hub/supporter/feature-support.svg"
-								alt={t('hub_supporter_feature_support_title')}
+								className="SupporterView__featureImage stats"
+								src="/app/images/hub/supporter/feature-stats.svg"
+								alt={t('hub_supporter_feature_stats_title')}
 							/>
 						</div>
-						<div className="SupporterView__feature columns large-offset-1">
+						<div className="SupporterView__feature small-12 medium-6 large-5 columns">
+							<div className="SupporterView__headingTitle">
+								{t('hub_supporter_feature_stats_title')}
+							</div>
+							<div className="SupporterView__headingDescription">
+								{t('hub_supporter_feature_stats_description')}
+							</div>
+							{this._renderButton('show-for-large')}
+						</div>
+						<div className="SupporterView__feature columns hide-for-large">
+							<img
+								className="SupporterView__featureImage stats"
+								src="/app/images/hub/supporter/feature-stats.svg"
+								alt={t('hub_supporter_feature_stats_title')}
+							/>
+						</div>
+					</div>
+					<div className="SupporterView--addPaddingTop hide-for-large">
+						<div className="row align-center-middle">
+							<div className="SupporterView__bar flex-child-grow" />
+							{this._renderButton('SupporterView--addSideMargin')}
+							<div className="SupporterView__bar flex-child-grow" />
+						</div>
+					</div>
+				</div>
+				<div className="SupporterView--addPaddingTop SupporterView--addPaddingBottom">
+					<div className="row align-center">
+						<div className="SupporterView__feature small-12 medium-6 large-5 large-offset-1 columns">
 							<div className="SupporterView__headingTitle">
 								{t('hub_supporter_feature_support_title')}
 							</div>
@@ -153,7 +180,7 @@ class SupporterView extends Component {
 							</div>
 							{this._renderButton('show-for-large')}
 						</div>
-						<div className="SupporterView__feature columns hide-for-large">
+						<div className="SupporterView__feature columns small-12 medium-6">
 							<img
 								className="SupporterView__featureImage support"
 								src="/app/images/hub/supporter/feature-support.svg"
@@ -169,9 +196,9 @@ class SupporterView extends Component {
 						</div>
 					</div>
 				</div>
-				<div className="SupporterView--addPaddingTop">
-					<div className="row align-middle-center">
-						<div className="SupporterView__feature columns large-8 large-offset-2 text-center">
+				<div className="SupporterView--addPaddingTop SupporterView--addPaddingBottom SupporterView--rowDarken">
+					<div className="row align-center">
+						<div className="SupporterView__feature columns medium-8 large-5 text-center">
 							<div className="SupporterView__headingTitle">
 								{t('hub_supporter_feature_more_title')}
 							</div>

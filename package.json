@@ -17,6 +17,7 @@
     "prebuild.prod": "node ./tools/licenses/fetchLicenses.js",
     "prebuild.watch": "node ./tools/licenses/fetchLicenses.js",
     "test.unit": "cross-env BABEL_ENV=test jest",
+    "test.snapshot": "jest --updateSnapshot",
     "lint": "eslint --ext .js,.jsx ./app ./src",
     "lint.fix": "eslint --ext .js,.jsx ./app ./src --fix",
     "lint.raw": "eslint --ext .js,.jsx",
@@ -41,11 +42,12 @@
   },
   "homepage": "https://github.com/ghostery/ghostery-extension#readme",
   "resolutions": {
-    "babel-core": "^7.0.0-bridge.0"
+    "babel-core": "^7.0.0-bridge.0",
+    "@cliqz/adblocker": "0.3.1"
   },
   "dependencies": {
     "base64-js": "^1.2.1",
-    "browser-core": "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.32/7.32.0.3276e62.tgz",
+    "browser-core": "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.32/7.32.0.10b1bc0.tgz",
     "@cliqz/adblocker": "0.3.1",
     "classnames": "^2.2.5",
     "d3": "^5.7.0",

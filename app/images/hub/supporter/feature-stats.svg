@@ -1,0 +1,180 @@
+<svg width="306" height="274" viewBox="0 0 306 274" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <filter x="-4.6%" y="-3.7%" width="108.6%" height="110%" filterUnits="objectBoundingBox" id="a">
+      <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur stdDeviation="3.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"/>
+      <feColorMatrix values="0 0 0 0 0.48216943 0 0 0 0 0.48216943 0 0 0 0 0.48216943 0 0 0 0.5 0" in="shadowBlurOuter1" result="shadowMatrixOuter1"/>
+      <feMerge>
+        <feMergeNode in="shadowMatrixOuter1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <path id="c" d="M0 0h290v257.5H0z"/>
+    <filter x="-1.2%" y="-1%" width="102.4%" height="102.7%" filterUnits="objectBoundingBox" id="b">
+      <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur stdDeviation="1" in="shadowOffsetOuter1" result="shadowBlurOuter1"/>
+      <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0" in="shadowBlurOuter1"/>
+    </filter>
+    <path id="d" d="M276.522 4h8.984v9h-8.984z"/>
+  </defs>
+  <g filter="url(#a)" transform="translate(8 5)" fill="none" fill-rule="evenodd">
+    <g transform="translate(0 1)">
+      <use fill="#000" filter="url(#b)" xlink:href="#c"/>
+      <use fill="#FFF" xlink:href="#c"/>
+    </g>
+    <path d="M4.99 10.108L7.438 7.66a.197.197 0 0 0 0-.286l-.312-.312A.197.197 0 0 0 6.983 7a.197.197 0 0 0-.143.062L3.937 9.965a.197.197 0 0 0 0 .287l2.903 2.902a.197.197 0 0 0 .286 0l.312-.31a.197.197 0 0 0 0-.288L4.99 10.108z" fill="#FFF"/>
+    <g transform="translate(264 28.5)">
+      <circle stroke="#9B9B9B" stroke-width=".5" cx="2.8" cy="3.2" r="2.8"/>
+      <text font-family="OpenSans-Bold, Open Sans" font-size="4.8" font-weight="bold" fill="#9B9B9B">
+        <tspan x="2" y="5">i</tspan>
+      </text>
+    </g>
+    <path d="M20.923 183l2.025-1.969a.156.156 0 0 0 .052-.115.156.156 0 0 0-.052-.115l-.257-.25a.165.165 0 0 0-.237 0l-2.402 2.334A.156.156 0 0 0 20 183c0 .043.017.082.052.115l2.402 2.335a.165.165 0 0 0 .237 0l.257-.25a.156.156 0 0 0 .052-.116.156.156 0 0 0-.052-.115L20.923 183z" fill="#124559"/>
+    <text font-family="OpenSans-Regular, Open Sans" font-size="5.5" fill="#4A4A4A">
+      <tspan x="17.479" y="170.5">0K</tspan>
+    </text>
+    <text font-family="OpenSans-Regular, Open Sans" font-size="5.5" fill="#4A4A4A">
+      <tspan x="17.479" y="152.5">5K</tspan>
+    </text>
+    <text font-family="OpenSans-Regular, Open Sans" font-size="5.5" fill="#4A4A4A">
+      <tspan x="14.335" y="134.5">10K</tspan>
+    </text>
+    <text font-family="OpenSans-Regular, Open Sans" font-size="5.5" fill="#4A4A4A">
+      <tspan x="14.335" y="116">15K</tspan>
+    </text>
+    <text font-family="OpenSans-Regular, Open Sans" font-size="5.5" fill="#4A4A4A">
+      <tspan x="14.335" y="98">20K</tspan>
+    </text>
+    <text font-family="OpenSans-Regular, Open Sans" font-size="5.5" fill="#4A4A4A">
+      <tspan x="14.335" y="80">25K</tspan>
+    </text>
+    <text font-family="OpenSans-Regular, Open Sans" font-size="5.5" fill="#4A4A4A">
+      <tspan x="14.335" y="61">30K</tspan>
+    </text>
+    <g fill="#FFF">
+      <g fill-rule="nonzero">
+        <path d="M274 7.001h-2.856a1.223 1.223 0 0 0-.207-.56c-.227-.313-.593-.439-.917-.55-.195-.067-.38-.13-.503-.22-.122-.09-.236-.244-.358-.408-.206-.278-.44-.593-.81-.714-.356-.116-.722-.003-1.044.097-.202.062-.392.12-.555.12-.162 0-.353-.058-.555-.12-.322-.1-.688-.213-1.044-.097-.37.121-.604.436-.81.714-.121.164-.236.319-.357.407-.124.091-.308.154-.503.221-.324.111-.691.237-.917.55-.123.17-.18.363-.207.56H259.5l.933 2.499-.933 2.499h2.857c.027.196.083.39.206.56.227.313.594.439.917.55.195.067.38.13.503.22.121.09.236.244.358.408.206.278.44.593.81.714.355.116.722.003 1.044-.097.202-.062.393-.12.555-.12.162 0 .353.058.555.12.225.07.471.146.72.146.108 0 .217-.014.324-.05.37-.12.604-.435.81-.713.121-.164.236-.319.358-.408.124-.09.308-.153.503-.22.323-.111.69-.237.916-.55.124-.17.18-.364.207-.56H274l-.933-2.499.933-2.499zm-13.567 4.348l.69-1.849-.69-1.849h1.89a1.46 1.46 0 0 1-.05.386c-.045.139-.155.294-.27.458-.2.284-.428.607-.428 1.005 0 .398.227.72.428 1.005.115.164.225.32.27.458.035.108.046.242.05.386h-1.89zm10.537-1.22c-.139.197-.282.4-.357.633-.079.243-.083.5-.087.747-.004.27-.008.525-.112.668-.106.146-.347.229-.603.317-.232.08-.471.161-.675.31-.2.147-.35.35-.496.545-.162.22-.315.426-.49.483-.163.053-.402-.02-.655-.099-.239-.074-.486-.15-.745-.15-.26 0-.506.076-.744.15-.254.078-.494.152-.656.1-.175-.058-.328-.265-.491-.484-.145-.196-.295-.398-.495-.545-.204-.149-.443-.23-.675-.31-.256-.088-.497-.17-.603-.317-.104-.143-.108-.398-.112-.668-.004-.248-.008-.504-.087-.747-.075-.233-.218-.436-.357-.633-.159-.225-.309-.438-.309-.629s.15-.404.309-.629c.139-.196.282-.4.357-.633.079-.243.083-.499.087-.746.004-.27.008-.525.112-.669.106-.146.347-.229.603-.316.232-.08.471-.162.675-.31.2-.147.35-.35.495-.545.163-.22.316-.427.491-.484a.408.408 0 0 1 .127-.018c.149 0 .335.058.529.117.238.074.485.15.744.15.26 0 .506-.076.745-.15.254-.078.493-.152.655-.099.175.057.328.264.49.483.146.196.296.399.497.545.203.149.442.231.674.31.256.089.497.171.603.317.104.144.108.399.112.669.004.247.008.503.087.746.075.233.219.437.357.634.159.224.309.437.309.628s-.15.404-.309.629zm2.097 1.22h-1.89c.005-.144.015-.278.05-.386.045-.139.155-.294.27-.458.2-.285.428-.607.428-1.005 0-.398-.227-.72-.428-1.005-.115-.164-.225-.319-.27-.458a1.46 1.46 0 0 1-.05-.386h1.89l-.69 1.849.69 1.849z"/>
+        <path d="M266.75 6.105a3.405 3.405 0 0 0-3.408 3.395 3.405 3.405 0 0 0 3.408 3.395 3.405 3.405 0 0 0 3.408-3.395 3.406 3.406 0 0 0-3.408-3.395zm0 6.235a2.849 2.849 0 0 1-2.85-2.84 2.849 2.849 0 0 1 2.85-2.84 2.849 2.849 0 0 1 2.85 2.84 2.848 2.848 0 0 1-2.85 2.84z"/>
+      </g>
+      <path d="M268.118 10.601a1.974 1.974 0 0 1-.165-.693v-.87a1.204 1.204 0 1 0-2.407 0v.883a1.987 1.987 0 0 1-.164.68c-.178.41-.03.362.101.328.132-.033.426-.165.518-.003.091.162.168.304.382.212.215-.092.316-.123.346-.123h.042c.03 0 .131.03.346.123.214.092.29-.05.383-.212.091-.162.385-.03.517.003.132.034.279.083.101-.328m-1.74-2.111c.13 0 .235.166.235.372 0 .205-.105.371-.235.371s-.234-.166-.234-.371c0-.206.105-.372.234-.372m.372 1.486c-.286 0-.526-.282-.599-.595.14.193.356.317.599.317a.741.741 0 0 0 .598-.317c-.072.313-.313.595-.598.595m.371-.743c-.13 0-.235-.166-.235-.371 0-.206.106-.372.235-.372.13 0 .235.166.235.372 0 .205-.105.371-.235.371"/>
+    </g>
+    <path fill="#F7F7F7" d="M0 .5h290v18H0z"/>
+    <path d="M18.468 8.5c0 1.657-1.452 3-3.244 3-1.792 0-3.245-1.343-3.245-3s1.453-3 3.245-3 3.244 1.343 3.244 3" fill="#FFFFFE"/>
+    <path d="M19.198 13.22a6.025 6.025 0 0 1-.539-2.184V8.294c0-2.096-1.762-3.794-3.935-3.794-2.174 0-3.936 1.698-3.936 3.794v2.782a6.064 6.064 0 0 1-.537 2.143c-.58 1.294-.1 1.14.33 1.033.43-.106 1.392-.521 1.693-.01.3.512.55.956 1.251.666.701-.29 1.032-.386 1.132-.386h.136c.1 0 .43.097 1.131.386.7.29.951-.154 1.252-.666.3-.511 1.261-.096 1.692.01.43.106.91.26.33-1.033" fill="#124559"/>
+    <path d="M13.726 6.5c.414 0 .749.56.749 1.25S14.14 9 13.726 9c-.413 0-.748-.56-.748-1.25s.335-1.25.748-1.25M14.974 11c-.953 0-1.755-.947-1.996-2 .466.648 1.187 1.064 1.996 1.064.81 0 1.53-.416 1.997-1.064-.242 1.053-1.044 2-1.997 2M15.723 9c-.414 0-.749-.56-.749-1.25s.335-1.25.749-1.25.749.56.749 1.25S16.137 9 15.722 9" fill="#F7F7F7"/>
+    <path d="M21.789 8.943h1.171v1.705c0 .86-.426 1.352-1.248 1.352-.821 0-1.247-.492-1.247-1.352V7.852c0-.86.426-1.352 1.247-1.352.822 0 1.248.491 1.248 1.352v.522h-.791v-.576c0-.384-.167-.53-.434-.53-.266 0-.433.146-.433.53v2.904c0 .384.167.522.433.522.267 0 .434-.138.434-.522V9.71h-.38v-.768M24.409 12h-.95V6.5h.95v2.357h1.079V6.5h.966V12h-.966V9.643h-1.08V12M26.953 7.852c0-.86.441-1.352 1.248-1.352.807 0 1.248.492 1.248 1.352v2.796c0 .86-.44 1.352-1.248 1.352-.807 0-1.248-.492-1.248-1.352V7.852zm.822 2.85c0 .384.165.53.426.53.262 0 .426-.146.426-.53V7.798c0-.384-.164-.53-.426-.53-.261 0-.426.146-.426.53v2.904zM31.204 6.5c.814 0 1.233.492 1.233 1.352v.169h-.792v-.223c0-.384-.152-.53-.419-.53-.266 0-.418.146-.418.53 0 1.106 1.636 1.314 1.636 2.85 0 .86-.426 1.352-1.248 1.352-.821 0-1.248-.491-1.248-1.352v-.33h.792v.384c0 .384.167.522.433.522.267 0 .434-.138.434-.522 0-1.106-1.636-1.314-1.636-2.85 0-.86.419-1.352 1.233-1.352M32.943 6.5h2.496v.786h-.844V12h-.808V7.286h-.844V6.5M36.853 8.818h1.256v.785h-1.256v1.611h1.58V12h-2.495V6.5h2.496v.786h-1.581v1.532M40.611 12c-.043-.141-.073-.228-.073-.676v-.864c0-.51-.16-.7-.525-.7h-.278V12h-.802V6.5h1.211c.832 0 1.19.416 1.19 1.265v.432c0 .566-.168.935-.526 1.116.402.18.533.597.533 1.17v.85c0 .266.007.463.087.667h-.817zm-.876-4.714v1.689h.314c.3 0 .482-.141.482-.582v-.542c0-.393-.124-.565-.409-.565h-.387zM43 10.177L41.928 6.5h.887l.649 2.507.648-2.507h.81l-1.072 3.677V12H43v-1.823" fill="#124559"/>
+    <g transform="translate(0 .5)">
+      <image x="276.522" y="4" width="8.984" height="9" xlink:href="data:image/png;base64,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"/>
+      <use fill="#124559" xlink:href="#d"/>
+    </g>
+    <path d="M4.615 11.608L7.063 9.16a.197.197 0 0 0 0-.286l-.311-.312a.197.197 0 0 0-.144-.062.197.197 0 0 0-.143.062l-2.903 2.903a.197.197 0 0 0 0 .287l2.903 2.902a.197.197 0 0 0 .286 0l.312-.31a.197.197 0 0 0 0-.288l-2.448-2.448z" fill="#124559"/>
+    <rect fill="#F7F7F7" y="196.5" width="290" height="62" rx="1"/>
+    <path fill="#124559" d="M0 196.5h290V210H0z"/>
+    <g font-family="OpenSans-Regular, Open Sans">
+      <text font-size="6" fill="#4A4A4A" transform="translate(92 220.5)">
+        <tspan x="0" y="6">Trackers Blocked</tspan>
+      </text>
+      <text font-size="10" fill="#124559" transform="translate(92 220.5)">
+        <tspan x="4.5" y="25">12,614 </tspan>
+      </text>
+    </g>
+    <g font-family="OpenSans-Regular, Open Sans">
+      <text font-size="6" fill="#4A4A4A" transform="translate(165.5 216)">
+        <tspan x="2" y="6">Data Points </tspan> <tspan x="2" y="14">Anonymized</tspan>
+      </text>
+      <text font-size="10" fill="#124559" transform="translate(165.5 216)">
+        <tspan x="0" y="29.5">18,486 </tspan>
+      </text>
+    </g>
+    <g font-family="OpenSans-Regular, Open Sans">
+      <text font-size="6" fill="#4A4A4A" transform="translate(230.5 220.5)">
+        <tspan x="2.5" y="6">Ads Blocked</tspan>
+      </text>
+      <text font-size="10" fill="#124559" transform="translate(230.5 220.5)">
+        <tspan x="0" y="25">14,614 </tspan>
+      </text>
+    </g>
+    <g stroke="#C8C7C2" stroke-width=".5">
+      <path d="M30.519 43.5V170h238"/>
+      <path d="M30.25 152.25h237.564M30.25 133.75h237.564M30.25 115.25h237.564M30.25 96.75h237.564M30.25 78.25h237.564M30.25 61.25h237.564" stroke-linecap="square"/>
+    </g>
+    <text font-family="OpenSans-Regular, Open Sans" font-size="5.5" fill="#4A4A4A">
+      <tspan x="25.987" y="185">Feb 18</tspan>
+    </text>
+    <text font-family="OpenSans-Regular, Open Sans" font-size="5.5" fill="#4A4A4A">
+      <tspan x="71.012" y="185">Mar 18</tspan>
+    </text>
+    <text font-family="OpenSans-Regular, Open Sans" font-size="5.5" fill="#4A4A4A">
+      <tspan x="118.186" y="185">Apr 18</tspan>
+    </text>
+    <text font-family="OpenSans-Regular, Open Sans" font-size="5.5" fill="#4A4A4A">
+      <tspan x="163.486" y="185">May 18</tspan>
+    </text>
+    <text font-family="OpenSans-Regular, Open Sans" font-size="5.5" fill="#4A4A4A">
+      <tspan x="211.061" y="185">Jun 18</tspan>
+    </text>
+    <text font-family="OpenSans-Regular, Open Sans" font-size="5.5" fill="#4A4A4A">
+      <tspan x="255.046" y="185">Jul 18</tspan>
+    </text>
+    <text font-family="OpenSans-Bold, Open Sans" font-size="6" font-weight="bold" fill="#4A4A4A" transform="translate(20 220.5)">
+      <tspan x="2" y="6">Trackers Seen</tspan>
+    </text>
+    <text font-family="OpenSans-Bold, Open Sans" font-size="10" font-weight="bold" fill="#124559" transform="translate(20 220.5)">
+      <tspan x="6" y="25">20,486 </tspan>
+    </text>
+    <path d="M20.25 250.75h45.5" stroke="#124559" stroke-width="1.5" stroke-linecap="square"/>
+    <path d="M79.25 221.25v25M152.75 221.25v25M217.75 221.25v25" stroke="#979797" stroke-width=".5" stroke-linecap="square"/>
+    <path stroke="#124559" stroke-width=".5" d="M30.5 153.5l48-6 45-8L170 134l45.5-18L260 96.5"/>
+    <circle fill="#124559" cx="260.25" cy="96.25" r="2.25"/>
+    <circle fill="#124559" cx="215.75" cy="115.75" r="2.25"/>
+    <circle fill="#124559" cx="169.75" cy="133.75" r="2.25"/>
+    <circle fill="#124559" cx="124.25" cy="139.25" r="2.25"/>
+    <circle stroke="#1790E4" stroke-width="1.5" fill="#124559" cx="80.5" cy="147" r="3"/>
+    <circle fill="#124559" cx="30.75" cy="153.75" r="2.25"/>
+    <text font-family="OpenSans-SemiBold, Open Sans" font-size="6" font-weight="500" fill="#FFF">
+      <tspan x="7.5" y="205">Historical Tracker Stats</tspan>
+    </text>
+    <text font-family="OpenSans-Regular, Open Sans" font-size="6" fill="#124559" text-decoration="underline">
+      <tspan x="222.5" y="33">Reset all stats</tspan>
+    </text>
+    <g fill="#F7F7F7" stroke="#124559" stroke-width=".5">
+      <path d="M82.25 135.056l-2.5 2.444-2.5-2.444H57V98.5h46v36.556H82.25z"/>
+    </g>
+    <text font-family="OpenSans-SemiBold, Open Sans" font-size="6" font-weight="500" fill="#124559">
+      <tspan x="70.104" y="126.5">6,765 k</tspan>
+    </text>
+    <text font-family="OpenSans-SemiBold, Open Sans" font-size="5" font-weight="500" fill="#124559">
+      <tspan x="65.983" y="109">March 2018</tspan> <tspan x="63.163" y="115">Trackers Seen</tspan>
+    </text>
+    <text font-family="OpenSans-Bold, Open Sans" font-size="6.5" font-weight="bold" fill="#4A4A4A">
+      <tspan x="47" y="33.5">Total Trackers Seen</tspan>
+    </text>
+    <g fill="#124559" fill-rule="nonzero">
+      <path d="M36 34.5c2.876 0 5.207-2.392 5.856-3.135a.553.553 0 0 0 0-.744c-.649-.73-2.98-3.121-5.856-3.121s-5.207 2.392-5.856 3.12a.553.553 0 0 0 0 .745c.649.743 2.98 3.135 5.856 3.135zm0-6.27c2.463 0 4.602 2.114 5.207 2.77-.605.656-2.744 2.77-5.207 2.77-2.463 0-4.602-2.114-5.207-2.77.605-.656 2.744-2.77 5.207-2.77z"/>
+      <path d="M36 33.5c1.372 0 2.5-1.128 2.5-2.5s-1.128-2.5-2.5-2.5a2.511 2.511 0 0 0-2.5 2.5c0 1.372 1.128 2.5 2.5 2.5zm0-4.238a1.737 1.737 0 1 1 .002 3.474A1.737 1.737 0 0 1 36 29.262z"/>
+    </g>
+    <g>
+      <path d="M273.045 16.46l-7.811-3.581a.487.487 0 0 0-.43 0l-7.75 3.58c-.185.1-.554 0-.554-.134V1.167c0-.1.123-.167.308-.167h16.36c.184 0 .307.067.307.167v15.158c.123.134-.246.235-.43.134z" fill="#124559" fill-rule="nonzero" stroke="#124559" stroke-width=".5"/>
+      <text font-family="SignPainter-HouseScript, SignPainter" font-size="7.2" font-style="condensed" fill="#FFF" transform="translate(256.5 1)">
+        <tspan x="3.5" y="9.5">Plus</tspan>
+      </text>
+    </g>
+    <g>
+      <path fill="#7F98A2" d="M204 200.5h43.5v10H204z"/>
+      <text font-family="OpenSans-Regular, Open Sans" font-size="5" fill="#FFF" transform="translate(204 200.5)">
+        <tspan x="12" y="6.5">Monthly</tspan>
+      </text>
+      <path fill="#7F98A2" d="M247 200.5h43.5v10H247z"/>
+      <text font-family="OpenSans-Regular, Open Sans" font-size="5" fill="#FFF" transform="translate(247 200.5)">
+        <tspan x="16" y="6.5">Daily</tspan>
+      </text>
+      <g>
+        <path fill="#F7F7F7" d="M160.5 200.5H204v10h-43.5z"/>
+        <text font-family="OpenSans-Regular, Open Sans" font-size="5" fill="#124559" transform="translate(160.5 200.5)">
+          <tspan x="8.586" y="6.5">Cumulative</tspan>
+        </text>
+      </g>
+      <path d="M247.25 200.75v9.5" stroke="#F7F7F7" stroke-width=".5" stroke-linecap="square"/>
+    </g>
+  </g>
+</svg>

@@ -69,8 +69,8 @@ describe('app/hub/Views/SupporterView component', () => {
 			const component = shallow(<SupporterView {...initialState} />);
 			expect(component.find('.SupporterView').length).toBe(1);
 			expect(component.find('.SupporterView__headingImage').length).toBe(1);
-			expect(component.find('.SupporterView__headingTitle').length).toBe(4);
-			expect(component.find('.SupporterView__headingDescription').length).toBe(4);
+			expect(component.find('.SupporterView__headingTitle').length).toBe(5);
+			expect(component.find('.SupporterView__headingDescription').length).toBe(5);
 			expect(component.find('.SupporterView__headingCost').length).toBe(1);
 			expect(component.find('.SupporterView__perk').length).toBe(3);
 			expect(component.find('.SupporterView__perkIcon').length).toBe(3);
@@ -79,7 +79,7 @@ describe('app/hub/Views/SupporterView component', () => {
 			expect(component.find('.SupporterView__manifestoContainer').length).toBe(1);
 			expect(component.find('.SupporterView__manifestoBackground').length).toBe(1);
 			expect(component.find('.SupporterView__manifestoText').length).toBe(1);
-			expect(component.find('.SupporterView__featureImage').length).toBe(4);
+			expect(component.find('.SupporterView__featureImage').length).toBe(5);
 
 			expect(initialState.onSupporterClick.mock.calls.length).toBe(0);
 			component.find('.SupporterView__button').first().simulate('click');
@@ -89,11 +89,11 @@ describe('app/hub/Views/SupporterView component', () => {
 			component.setProps({ isSignedIn: true });
 			expect(component.find('.SupporterView__button').first().props().href).toBe('https://account.ghosterystage.com/subscription?target=subscribe')
 
-			expect(component.find('.SupporterView__button').length).toBe(6);
+			expect(component.find('.SupporterView__button').length).toBe(8);
 			expect(component.find('.SupporterView__button.disabled').length).toBe(0);
 			component.setProps({ isSupporter: true });
-			expect(component.find('.SupporterView__button').length).toBe(6);
-			expect(component.find('.SupporterView__button.disabled').length).toBe(6);
+			expect(component.find('.SupporterView__button').length).toBe(8);
+			expect(component.find('.SupporterView__button.disabled').length).toBe(8);
 		});
 	});
 });
