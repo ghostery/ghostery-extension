@@ -48,48 +48,32 @@ class Subscription extends React.Component {
 			this.props.history.push('/detail');
 		}
 	}
-
-	_isEmpty = (obj) => {
-		if (!obj) {
-			return true;
-		}
-		return (Object.keys(obj).length === 0 && obj.constructor === Object);
-	}
 	parseSubscriptionData = () => {
-		if (this.props.hasOwnProperty('subscriptionData')) {
-			const sd = this.props.subscriptionData;
-			if (!this._isEmpty(sd)) {
-				const {
-					planAmount, planInterval, planCurrency, currentPeriodEnd, cancelAtPeriodEnd, status
-				} = sd;
-				const plan_ends = cancelAtPeriodEnd ? moment.duration(moment.unix(currentPeriodEnd).diff(moment(new Date()))).days() : '';
-				let currency;
-				for (let i = 0; i < Currencies.length; i++) {
-					if (Currencies[i].currencyCode === planCurrency) {
-						currency = Currencies[i]; break;
-					}
-				}
-
-				if (currency) {
-					const {
-						languageCode, currencyDecimals, currencySymbol, currencySymbolAfter
-					} = currency;
-					const planCost = (planAmount / 10 ** currencyDecimals)
-						.toLocaleString(languageCode, { minimumFractionDigits: currencyDecimals, maximumFractionDigits: currencyDecimals });
-					const plan_amount = currencySymbolAfter ? `${planCost} ${currencySymbol}` : `${currencySymbol} ${planCost}`;
-					return {
-						plan_amount,
-						plan_interval: planInterval,
-						active: (status === 'active'),
-						charge_date: moment.unix(currentPeriodEnd).format('MMMM Do, YYYY'),
-						plan_ends,
-						loading: false,
-					};
+		const sd = this.props.subscriptionData;
+		if (sd) {
+			const {
+				planAmount, planInterval, planCurrency, currentPeriodEnd, cancelAtPeriodEnd, status
+			} = sd;
+			const plan_ends = cancelAtPeriodEnd ? moment.duration(moment.unix(currentPeriodEnd).diff(moment(new Date()))).days() : '';
+			let currency;
+			for (let i = 0; i < Currencies.length; i++) {
+				if (Currencies[i].currencyCode === planCurrency) {
+					currency = Currencies[i]; break;
 				}
 			}
+			const {
+				languageCode, currencyDecimals, currencySymbol, currencySymbolAfter
+			} = currency;
+			const planCost = (planAmount / 10 ** currencyDecimals)
+				.toLocaleString(languageCode, { minimumFractionDigits: currencyDecimals, maximumFractionDigits: currencyDecimals });
+			const plan_amount = currencySymbolAfter ? `${planCost} ${currencySymbol}` : `${currencySymbol} ${planCost}`;
 			return {
-				data_error: true,
-				loading: false
+				plan_amount,
+				plan_interval: planInterval,
+				active: (status === 'active'),
+				charge_date: moment.unix(currentPeriodEnd).format('MMMM Do, YYYY'),
+				plan_ends,
+				loading: false,
 			};
 		}
 		return { loading: true };
