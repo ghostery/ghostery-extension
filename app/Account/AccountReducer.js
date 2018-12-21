@@ -27,6 +27,7 @@ const initialState = {
 	userID: '',
 	user: null,
 	userSettings: null,
+	subscriptionData: null,
 };
 
 export default (state = initialState, action) => {
@@ -36,12 +37,15 @@ export default (state = initialState, action) => {
 			if (account === null) {
 				return Object.assign({}, initialState);
 			}
-			const { userID, user, userSettings } = account;
+			const {
+				userID, user, userSettings, subscriptionData
+			} = account;
 			return Object.assign({}, state, {
 				loggedIn: true,
 				userID,
 				user,
 				userSettings,
+				subscriptionData,
 			});
 		}
 		case REGISTER_SUCCESS:
@@ -68,8 +72,9 @@ export default (state = initialState, action) => {
 			});
 		}
 		case GET_USER_SUBSCRIPTION_DATA_FAIL: {
+			const { subscriptionData } = initialState;
 			return Object.assign({}, state, {
-				subscriptionData: {}
+				subscriptionData,
 			});
 		}
 		case GET_USER_SUBSCRIPTION_DATA_SUCCESS: {
