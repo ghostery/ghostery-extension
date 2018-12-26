@@ -106,7 +106,6 @@ class Account {
 			}
 			this._getUserIDFromCookie().then((userID) => {
 				this._setAccountInfo(userID);
-				this.getUserSubscriptionData();
 			});
 			return {};
 		});
@@ -147,7 +146,7 @@ class Account {
 	)
 
 	getUserSettings = () => (
-		this._getUserID()
+		this._getUserIDIfEmailIsValidated()
 			.then(userID => api.get('settings', userID))
 			.then((res) => {
 				const settings = build(normalize(res, { camelizeKeys: false }), 'settings', res.data.id);
@@ -170,7 +169,7 @@ class Account {
 	)
 
 	saveUserSettings = () => (
-		this._getUserID()
+		this._getUserIDIfEmailIsValidated()
 			.then(userID => (
 				api.update('settings', {
 					type: 'settings',
@@ -424,6 +423,28 @@ class Account {
 			}
 			return resolve(conf.account.userID);
 		})
+	)
+
+	_getUserIDIfEmailIsValidated = () => (
+		this._getUserID()
+			.then(userID => (
+				new Promise((resolve, reject) => {
+					const { user } = conf.account;
+					if (user === null) {
+						return this.getUser()
+							.then(() => {
+								if (user.emailValidated !== true) {
+									return reject(new Error('_getUserIDIfEmailIsValidated() Email not validated'));
+								}
+								return resolve(userID);
+							});
+					}
+					if (user.emailValidated !== true) {
+						return reject(new Error('_getUserIDIfEmailIsValidated() Email not validated'));
+					}
+					return resolve(userID);
+				})
+			))
 	)
 
 	_setAccountInfo = (userID) => {
