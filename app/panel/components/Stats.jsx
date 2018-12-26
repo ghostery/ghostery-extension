@@ -188,39 +188,29 @@ class Stats extends React.Component {
 			selection.summaryData = this.getSummaryData(state, selection.type);
 			sendMessage('ping', selection.type);
 
+			const setTimeframes = (currentData, prevData) => {
+				const currentDate = prevData[selection.currentIndex].date;
+				for (let i = currentData.length - 1; i >= 0; i--) {
+					if (currentData[i].date.slice(0, 7) === currentDate.slice(0, 7)) {
+						selection.currentIndex = i;
+						break;
+					}
+				}
+
+				if (currentData.length <= 6) {
+					selection.timeframeSelectors.back = 'disabled';
+					selection.timeframeSelectors.forward = 'disabled';
+				} else {
+					selection.timeframeSelectors.back = selection.currentIndex === 0 ? 'disabled' : '';
+					selection.timeframeSelectors.forward = selection.currentIndex + 1 === currentData.length ? 'disabled' : '';
+				}
+			};
+
 			const { monthlyData, dailyData } = state;
 			if (selection.type === 'daily' && lastType !== 'daily') {
-				const currentDate = monthlyData[selection.currentIndex].date;
-				for (let i = dailyData.length - 1; i >= 0; i--) {
-					if (dailyData[i].date.slice(0, 7) === currentDate.slice(0, 7)) {
-						selection.currentIndex = i;
-						break;
-					}
-				}
-
-				if (dailyData.length < 6) {
-					selection.timeframeSelectors.back = 'disabled';
-					selection.timeframeSelectors.forward = 'disabled';
-				} else {
-					selection.timeframeSelectors.back = selection.currentIndex === 0 ? 'disabled' : '';
-					selection.timeframeSelectors.forward = selection.currentIndex + 1 === dailyData.length ? 'disabled' : '';
-				}
+				setTimeframes(dailyData, monthlyData);
 			} else if (selection.type !== 'daily' && lastType === 'daily') {
-				const currentDate = dailyData[selection.currentIndex].date;
-				for (let i = monthlyData.length - 1; i >= 0; i--) {
-					if (monthlyData[i].date.slice(0, 7) === currentDate.slice(0, 7)) {
-						selection.currentIndex = i;
-						break;
-					}
-				}
-
-				if (monthlyData.length < 6) {
-					selection.timeframeSelectors.back = 'disabled';
-					selection.timeframeSelectors.forward = 'disabled';
-				} else {
-					selection.timeframeSelectors.back = selection.currentIndex === 0 ? 'disabled' : '';
-					selection.timeframeSelectors.forward = selection.currentIndex + 1 === monthlyData.length ? 'disabled' : '';
-				}
+				setTimeframes(monthlyData, dailyData);
 			}
 
 			selection.selectionData = this._determineSelectionData(state);
@@ -341,6 +331,10 @@ class Stats extends React.Component {
 		sendMessageInPromise('getAllStats')
 	);
 
+	/**
+	 * Retrieve locally stored stats and parse them
+	 * Save it in component's state
+	 */
 	_init = () => {
 		const state = Object.assign({}, this.state);
 		this._getAllStats().then((allData) => {
@@ -362,23 +356,7 @@ class Stats extends React.Component {
 				const dailyData = [];
 				const monthlyData = [];
 				const cumulativeMonthlyData = [];
-				// let prevDate = ''; // <-- see loop below
 				allData.forEach((dataItem, i) => {
-					// Use this loop to add zero values for days Ghostery wasn't used in
-					// case users find that to be clearer than passing over them
-					// if (i !== 0) {
-					// 	while (prevDate !== moment(dataItem.day).subtract(1, 'days').format('YYYY-MM-DD')) {
-					// 		prevDate = moment(prevDate).add(1, 'days').format('YYYY-MM-DD');
-					// 		dailyData.push({
-					// 			trackersSeen: 0,
-					// 			trackersBlocked: 0,
-					// 			trackersAnonymized: 0,
-					// 			adsBlocked: 0,
-					// 			date: prevDate,
-					// 		});
-					// 	}
-					// }
-
 					// Day reassignments
 					dailyData.push({
 						trackersSeen: dataItem.trackersDetected,
@@ -434,7 +412,6 @@ class Stats extends React.Component {
 						monthTrackersAnonymized = 0;
 						monthAdsBlocked = 0;
 					}
-					// prevDate = dataItem.day; // <-- see loop above
 				});
 				// Cumulative data totals
 				state.cumulativeData = {
@@ -475,7 +452,7 @@ class Stats extends React.Component {
 
 	/**
 	 * Determine data selection for Stats Graph according to parameters in state
-	 * Save it in state
+	 * Save it in component's state
 	 */
 	_determineSelectionData = (state = Object.assign({}, this.state)) => {
 		const {
@@ -501,7 +478,7 @@ class Stats extends React.Component {
 
 	/**
 	 * Render the the Stats View
-	 * @return {ReactComponent}   ReactComponent instance
+	 * @return {ReactComponent} StatsView instance
 	 */
 	render() {
 		return (
