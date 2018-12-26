@@ -160,16 +160,14 @@ class Account {
 		)
 	)
 
-	getUserSubscriptionData = () => (!this._isValidated() ? (Promise.resolve(null)) :
-		(
-			this._getUserID()
-				.then(userID => api.get('stripe/customers', userID, 'cards,subscriptions'))
-				.then((res) => {
-					const subscriptionData = build(normalize(res), 'customers', res.data.id);
-					this._setSubscriptionData(subscriptionData);
-					return subscriptionData;
-				})
-		)
+	getUserSubscriptionData = () => (
+		this._getUserID()
+			.then(userID => api.get('stripe/customers', userID, 'cards,subscriptions'))
+			.then((res) => {
+				const subscriptionData = build(normalize(res), 'customers', res.data.id);
+				this._setSubscriptionData(subscriptionData);
+				return subscriptionData;
+			})
 	)
 
 	saveUserSettings = () => (!this._isValidated() ? (Promise.resolve()) :
