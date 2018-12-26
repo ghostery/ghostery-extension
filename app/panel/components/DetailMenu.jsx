@@ -20,26 +20,12 @@ import { sendMessage } from '../utils/msg';
  * @memberOf PanelClasses
  */
 class DetailMenu extends React.Component {
-	static mapItemsToPings(itemName) {
-		switch (itemName) {
-			case 'showBlocking':
-				return 'list_dash';
-			case 'showRewards':
-				return 'rewards_dash';
-			case 'showStats':
-				return 'stats_dash';
-			default:
-				return '';
-		}
-	}
-
 	constructor(props) {
 		super(props);
 
 		this.state = {
 			menu: {
 				showBlocking: true,
-				showStats: false,
 				showRewards: false,
 			},
 		};
@@ -53,17 +39,11 @@ class DetailMenu extends React.Component {
 	 */
 	setActiveTab(event) {
 		const menu = Object.assign({}, this.state.menu);
-		Object.keys(menu).forEach((key) => {
-			if (key === event.currentTarget.id) {
-				menu[key] = true;
-				const pingType = DetailMenu.mapItemsToPings(key);
-				if (pingType) {
-					sendMessage('ping', pingType);
-				}
-			} else {
-				menu[key] = false;
-			}
-		});
+		const selection = event.currentTarget.id;
+		menu.showBlocking = selection === 'showBlocking';
+		menu.showRewards = selection === 'showRewards';
+		const pings = { showBlocking: 'list_dash', showRewards: 'rewards_dash' };
+		sendMessage('ping', pings[selection]);
 		this.setState({ menu });
 	}
 	/**
