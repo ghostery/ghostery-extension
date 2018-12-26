@@ -832,9 +832,7 @@ function onMessageHandler(request, sender, callback) {
 			getCliqzModuleDataForTab(+message.tabId, callback);
 		} else {
 			utils.getActiveTab((tab) => {
-				if (tab && tab.id) {
-					getCliqzModuleDataForTab(tab.id, callback);
-				}
+				getCliqzModuleDataForTab(tab.id, callback);
 			});
 		}
 
