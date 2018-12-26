@@ -16,9 +16,8 @@ import * as D3 from 'd3';
 import isEqual from 'lodash.isequal';
 
 /**
- * A Functional React component for rendering the Stats Graph
- * @return {JSX} JSX for rendering the Home View of the Hub app
- * @memberof PanelClasses
+ * Generates an animated graph displaying locally stored stats
+ * @memberof PanelBuildingBlocks
  */
 class StatsGraph extends React.Component {
 	/**
@@ -181,6 +180,19 @@ class StatsGraph extends React.Component {
 			.call(animator);
 		// ---------------------------------------------------------------------- //
 
+		function toggleTooltip(context, index, selected, radius, clicked, duration, opacity) {
+			setTimeout(() => {
+				D3.select(context)
+					.classed('selected', selected)
+					.attr('r', radius);
+				D3.select(`.tooltip-${index}`)
+					.classed('clicked', clicked)
+					.transition()
+					.duration(duration)
+					.style('opacity', opacity);
+			}, 1);
+		}
+
 		// Add data points with event listeners for opening their respective tooltips
 		canvas.append('g')
 			.attr('class', 'point-group')
@@ -195,42 +207,17 @@ class StatsGraph extends React.Component {
 			.attr('r', 0)
 			.on('click', function (d, i) {
 				if (!demo) {
-					setTimeout(() => {
-						D3.select(this)
-							.classed('selected', true)
-							.attr('r', 6);
-						D3.select(`.tooltip-${i}`)
-							.classed('clicked', true)
-							.transition()
-							.duration(300)
-							.style('opacity', 1);
-					}, 1);
+					toggleTooltip(this, i, true, 6, true, 300, 1);
 				}
 			})
 			.on('mouseenter', function (d, i) {
 				if (!demo) {
-					setTimeout(() => {
-						D3.select(this)
-							.classed('selected', true)
-							.attr('r', 6);
-						D3.select(`.tooltip-${i}`)
-							.transition()
-							.duration(300)
-							.style('opacity', 1);
-					}, 1);
+					toggleTooltip(this, i, true, 6, false, 300, 1);
 				}
 			})
 			.on('mouseleave', function (d, i) {
 				if (!demo && !D3.select(`.tooltip-${i}`).classed('clicked')) {
-					setTimeout(() => {
-						D3.select(this)
-							.classed('selected', false)
-							.attr('r', 4.5);
-						D3.select(`.tooltip-${i}`)
-							.transition()
-							.duration(200)
-							.style('opacity', 0);
-					}, 1);
+					toggleTooltip(this, i, false, 4.5, false, 200, 0);
 				}
 			});
 
@@ -261,12 +248,10 @@ class StatsGraph extends React.Component {
 						div.classed('long-text', true);
 					}
 
-					if (tooltipFlipped) {
-						div.append('div')
-							.attr('class', 'pointer top under');
-						div.append('div')
-							.attr('class', 'pointer top over');
-					}
+					div.append('div')
+						.attr('class', tooltipFlipped ? 'pointer top under' : 'pointer bottom under');
+					div.append('div')
+						.attr('class', tooltipFlipped ? 'pointer top over' : 'pointer bottom over');
 
 					div.append('p')
 						.attr('class', 'tooltip-text-top')
@@ -274,13 +259,6 @@ class StatsGraph extends React.Component {
 					div.append('p')
 						.attr('class', 'tooltip-text-bottom')
 						.html(D3.format(',')(d.amount));
-
-					if (!tooltipFlipped) {
-						div.append('div')
-							.attr('class', 'pointer bottom under');
-						div.append('div')
-							.attr('class', 'pointer bottom over');
-					}
 				});
 
 			// Add event listener to container for closing tooltip
@@ -316,7 +294,7 @@ class StatsGraph extends React.Component {
 
 	/**
 	 * React's required render function. Returns JSX
-	 * @return {JSX} JSX for rendering the donut-graph portion of the Summary View
+	 * @return {JSX} JSX for rendering the Historical Stats Graph in the Stats View component
 	 */
 	render() {
 		return (
