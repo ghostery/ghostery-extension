@@ -19,14 +19,11 @@ import StatsGraph from './BuildingBlocks/StatsGraph';
 
 /**
  * A Functional React component for rendering the Stats View
- * @return {JSX} JSX for rendering the Stats View
+ * @return {JSX} JSX for rendering the Historical Stats UI
+ * @return {ReactComponent} StatsGraph instance
  * @memberof PanelClasses
  */
 const StatsView = (props) => {
-	/**
-	 * Render stats view
-	 * @return {ReactComponent}   ReactComponent instance
-	 */
 	const {
 		showResetModal,
 		showPitchModal,
