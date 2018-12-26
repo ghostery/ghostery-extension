@@ -75,12 +75,14 @@ const moduleMock = {
 	on: () => {},
 };
 const humanweb = cliqz.modules['human-web'];
-const { adblocker, antitracking, hpn } = cliqz.modules;
+const { adblocker, antitracking, hpnv2 } = cliqz.modules;
 const messageCenter = cliqz.modules['message-center'] || moduleMock;
 const offers = cliqz.modules['offers-v2'] || moduleMock;
 const insights = cliqz.modules.insights || moduleMock;
 // add ghostery module to expose ghostery state to cliqz
 cliqz.modules.ghostery = new GhosteryModule();
+
+insights.enable();
 
 let OFFERS_ENABLE_SIGNAL;
 
@@ -507,6 +509,9 @@ function handleRewards(name, message, callback) {
 		case 'rewardsPromptAccepted':
 			conf.rewards_accepted = true;
 			break;
+		case 'rewardsPromptOptedIn':
+			conf.rewards_opted_in = true;
+			break;
 		case 'ping':
 			metrics.ping(message);
 			break;
@@ -790,6 +795,22 @@ function onMessageHandler(request, sender, callback) {
 		}
 		account.getUserSettings().catch(err => log('Error getting user settings from getPanelData:', err));
 		return true;
+	} else if (name === 'getStats') {
+		insights.action('getStatsTimeline', message.from, message.to, true, true).then((data) => {
+			callback(data);
+		});
+		return true;
+	} else if (name === 'getAllStats') {
+		insights.action('getAllDays').then((data) => {
+			insights.action('getStatsTimeline', moment(data[0]), moment(), true, true).then((data) => {
+				callback(data);
+			});
+		});
+		return true;
+	} else if (name === 'resetStats') {
+		metrics.ping('hist_reset_stats');
+		insights.action('clearData');
+		return false;
 	} else if (name === 'setPanelData') {
 		panelData.set(message);
 		callback();
@@ -1324,7 +1345,7 @@ offers.on('enabled', () => {
 		if (DEBUG) {
 			offers.action('setConfiguration', {
 				config_location: 'de',
-				triggersBE: 'http://offers-api-stage.clyqz.com:8181',
+				triggersBE: 'https://offers-api-staging.clyqz.com',
 				showConsoleLogs: true,
 				offersLogsEnabled: true,
 				offersDevFlag: true,
@@ -1375,7 +1396,8 @@ messageCenter.on('enabled', () => {
 			// first check that the message is from core and is the one we expect
 			if (msg.origin === 'offers-core' &&
 				msg.type === 'push-offer' &&
-				msg.data.offer_data) {
+				msg.data.offer_data
+			) {
 				log('RECEIVED OFFER', msg);
 
 				const unreadIdx = rewards.unreadOfferIds.indexOf(msg.data.offer_id);
@@ -1387,17 +1409,35 @@ messageCenter.on('enabled', () => {
 				button.update();
 
 				if (msg.data.offer_data.ui_info.notif_type !== 'star') {
-					utils.getActiveTab((tab) => {
-						let tabId = 0;
-						if (tab) tabId = tab.id;
-						rewards.showHotDog(tabId, msg.data);
-					});
+					// We use getTabByUrl() instead of getActiveTab()
+					// because user may open the offer-triggering url in a new tab
+					// through the context menu, which may not switch to the new tab
+					// If the url provided by Cliqz turns out to be invalid, we fall back to getActiveTabs
+					if (msg.data.display_rule && msg.data.display_rule.url) {
+						utils.getTabByUrl(
+							msg.data.display_rule.url,
+							(tab) => {
+								const tabId = tab ? tab.id : 0;
+								rewards.showHotDogOrOffer(tabId, msg.data);
+							},
+							() => {
+								utils.getActiveTab((tab) => {
+									const tabId = tab ? tab.id : 0;
+									rewards.showHotDogOrOffer(tabId, msg.data);
+								});
+							}
+						);
+					}
 				}
 			}
 		});
 	});
 });
 
+/**
+ * Add page listeners for insights stats.
+ * @memberOf Background
+ */
 insights.on('enabled', () => {
 	events.addPageListener((tab_id, info, apps, bugs) => {
 		cliqz.modules.insights.action('pushGhosteryPageStats', tab_id, info, apps, bugs);
@@ -1406,6 +1446,32 @@ insights.on('enabled', () => {
 insights.on('disabled', () => {
 	events.clearPageListeners();
 });
+
+/**
+ * Pulls and aggregates data to be passed to Ghostery Tab extension.
+ * @memberOf Background
+ */
+function getDataForGhosteryTab(callback) {
+	const passedData = {};
+	insights.action('getAllDays').then((data) => {
+		insights.action('getStatsTimeline', moment(data[0]), moment(), true, true).then((data) => {
+			const cumulativeData = {
+				adsBlocked: 0, cookiesBlocked: 0, dataSaved: 0, fingerprintsRemoved: 0, loadTime: 0, pages: 0, timeSaved: 0, trackerRequestsBlocked: 0, trackersBlocked: 0, trackersDetected: 0
+			};
+			data.forEach((entry) => {
+				Object.keys(cumulativeData).forEach((key) => {
+					cumulativeData[key] += entry[key];
+				});
+			});
+			passedData.cumulativeData = cumulativeData;
+		}).then(() => {
+			passedData.blockTrackersEnabled = !globals.SESSION.paused_blocking;
+			passedData.adBlockEnabled = globals.SESSION.paused_blocking ? false : conf.enable_ad_block;
+			passedData.antiTrackingEnabled = globals.SESSION.paused_blocking ? false : conf.enable_anti_tracking;
+			callback(passedData);
+		});
+	});
+}
 
 /**
  * Initialize Ghostery panel.
@@ -1551,6 +1617,22 @@ function initializeEventListeners() {
 			rewards.panelPort = port;
 			rewards.panelPort.onDisconnect.addListener(rewards.panelHubClosedListener);
 		}
+	});
+
+	// Fired when another extension sends a message, accepts message if it's from Ghostery Tab
+	chrome.runtime.onMessageExternal.addListener((request, sender, sendResponse) => {
+		let recognized;
+		if (globals.DEBUG) {
+			recognized = sender.id === globals.GHOSTERY_TAB_CHROME_TEST_ID || sender.id === globals.GHOSTERY_TAB_FIREFOX_TEST_ID;
+		} else {
+			recognized = sender.id === globals.GHOSTERY_TAB_ID;
+		}
+
+		if (recognized && request.name === 'getStatsAndSettings') {
+			getDataForGhosteryTab(data => sendResponse({ historicalDataAndSettings: data }));
+			return true;
+		}
+		return false;
 	});
 }
 
@@ -1702,13 +1784,13 @@ function initializeGhosteryModules() {
 	});
 
 	if (IS_EDGE) {
-		setCliqzModuleEnabled(hpn, false);
+		setCliqzModuleEnabled(hpnv2, false);
 		setCliqzModuleEnabled(humanweb, false);
 		setCliqzModuleEnabled(offers, false);
 	}
 
 	if (IS_CLIQZ) {
-		setCliqzModuleEnabled(hpn, false);
+		setCliqzModuleEnabled(hpnv2, false);
 		setCliqzModuleEnabled(humanweb, false);
 		setCliqzModuleEnabled(antitracking, false);
 		setCliqzModuleEnabled(adblocker, false);

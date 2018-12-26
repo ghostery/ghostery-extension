@@ -173,7 +173,7 @@ const config = {
 					loader: 'babel-loader',
 					options: {
 						babelrc: false,
-						plugins: ['transform-class-properties']
+						plugins: ['@babel/plugin-proposal-class-properties']
 					}
 				}
 			},{

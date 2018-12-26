@@ -1,18 +1,24 @@
 {
 	"account_creation_privacy_statement": {
-		"message": "I consent to Ghostery's data practices found in its $LINK_PS_START$Privacy Statement$LINK_PS_END$ and the terms found in its $LINK_UA_START$License Agreement$LINK_UA_END$.",
+		"message": "Our general $LINK_TERMS_START$Terms and Conditions$LINK_TERMS_END$ and our $LINK_UA_START$License Agreement$LINK_UA_END$ apply. You will find our Privacy Statement $LINK_PS_START$here$LINK_PS_END$.",
 		"placeholders": {
 			"link_ps_end": {
 				"content": "</a>"
 			},
 			"link_ps_start": {
-				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-us/privacy-statements/ghostery-browser-extension/ghostery-browser-extension-privacy-statement/\">"
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" rel=\"noopener noreferrer\">"
 			},
 			"link_ua_end": {
 				"content": "</a>"
 			},
 			"link_ua_start": {
-				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-us/privacy-statements/ghostery-browser-extension/ghostery-browser-extension-end-user-license-agreem/\">"
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/privacy-statements/\" rel=\"noopener noreferrer\">"
+			},
+			"link_terms_end": {
+				"content": "</a>"
+			},
+			"link_terms_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/privacy-statements/\" rel=\"noopener noreferrer\">"
 			}
 		}
 	},
@@ -366,9 +372,6 @@
 			}
 		}
 	},
-	"consent_privacy": {
-		"message": "Consent required."
-	},
 	"copyright": {
 		"description": "Copyright message, shown in page footers.",
 		"message": "$C$ $YEAR$ $GHOSTERY$, a part of $COMPANY_ADDRESS$",
@@ -604,6 +607,9 @@
 	"panel_about_licenses": {
 		"message": "Software Licenses"
 	},
+	"panel_about_imprint": {
+		"message": "Imprint"
+	},
 	"panel_menu_settings": {
 		"message": "Settings"
 	},
@@ -731,6 +737,9 @@
 	},
 	"panel_detail_menu_rewards_title": {
 		"message": "Rewards"
+	},
+	"panel_detail_menu_stats_title": {
+		"message": "Historical stats"
 	},
 	"panel_detail_menu_premium_title": {
 		"message": "Premium"
@@ -1781,17 +1790,17 @@
 	"hub_supporter_perk_themes_description": {
 		"message": "Customize the Ghostery colors - try our Midnight theme!"
 	},
-	"hub_supporter_perk_support_title": {
-		"message": "Priority Support"
+	"hub_supporter_perk_stats_title": {
+		"message": "Historical Blocking Stats"
 	},
-	"hub_supporter_perk_support_description": {
-		"message": "Resolve issues fast with our Priority help desk service"
+	"hub_supporter_perk_stats_description": {
+		"message": "View your blocking statistics and see how Ghostery is working for you"
 	},
 	"hub_supporter_perk_more_title": {
-		"message": "...and More!"
+		"message": "Priority Support & More"
 	},
 	"hub_supporter_perk_more_description": {
-		"message": "Stay tuned for cool features to come"
+		"message": "Resolve issues fast with our Priority help desk service - and more perks to come"
 	},
 	"hub_supporter_manifesto": {
 		"message": "We strive to deliver the best privacy protection services to our users free of cost. While we do not charge for our privacy suite, you may choose to support us through a small monthly subscription. Join us in our mission by upgrading to Ghostery Plus - and unlock cool perks along the way!"
@@ -1802,11 +1811,17 @@
 	"hub_supporter_feature_theme_description": {
 		"message": "Customize the Ghostery colors for a new visual experience! Introduced through popular request. Check out our special Midnight theme, and more to come."
 	},
+	"hub_supporter_feature_stats_title": {
+		"message": "Historical Blocking Stats"
+	},
+	"hub_supporter_feature_stats_description": {
+		"message": "View historical blocking results with graphs and statistics to reveal trends and learn how Ghostery has affected your browsing."
+	},
 	"hub_supporter_feature_support_title": {
 		"message": "Priority Support"
 	},
 	"hub_supporter_feature_support_description": {
-		"message": "Need assistance? Find a broken page? Have your questions answered and issues resolved fast with our Priority help desk service, accessible only when signed in with a Supporter account."
+		"message": "Need assistance? Find a broken page? Have your questions answered and issues resolved fast with our Priority help desk service, accessible only when signed in with a Plus account."
 	},
 	"hub_supporter_feature_more_title": {
 		"message": "..and More to Come!"
@@ -1916,29 +1931,49 @@
 	"rewards_code_copied": {
 		"message": "code copied"
 	},
-	"rewards_expires_in": {
-		"description": "example: Expires in 8 minutes. TYPE will be rewards_expires_in_TYPE listed below.",
-		"message": "Expires in $COUNT$ $TYPE$",
+	"rewards_expires_in_day": {
+		"message": "Expires in 1 day"
+	},
+	"rewards_expires_in_days": {
+		"message": "Expires in $COUNT$ days",
 		"placeholders": {
 			"count": {
 				"content": "$1"
-			},
-			"type": {
-				"content": "$2"
 			}
 		}
 	},
-	"rewards_expires_in_days": {
-		"message": "days"
+	"rewards_expires_in_hour": {
+		"message": "Expires in 1 hour"
 	},
 	"rewards_expires_in_hours": {
-		"message": "hours"
+		"message": "Expires in $COUNT$ hours",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"rewards_expires_in_min": {
+		"message": "Expires in 1 min"
 	},
 	"rewards_expires_in_mins": {
-		"message": "minutes"
+		"message": "Expires in $COUNT$ mins",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"rewards_expires_in_sec": {
+		"message": "Expires in 1 sec"
 	},
 	"rewards_expires_in_secs": {
-		"message": "seconds"
+		"message": "Expires in $COUNT$ secs",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
 	},
 	"rewards_terms_conditions": {
 		"message": "Terms & Conditions"
@@ -2021,6 +2056,9 @@
 	"subscription_priority_support": {
 		"message": "Priority Support"
 	},
+	"subscription_history_stats": {
+		"message": "Historical Stats"
+	},
 	"subscribe_pitch": {
 		"message": "While Ghostery is free, you can choose to support us through a small subscription of &#36;2 per month in exchange for cool perks, such as color themes, priority help service, and more. Join our mission and subscribe!"
 	},
@@ -2052,10 +2090,7 @@
 		"message": "Change the color scheme of Ghostery!"
 	},
 	"subscription_tracker_stats": {
-		"message": "Historical Tracker Stats"
-	},
-	"subscription_tracker_stats_title" : {
-		"message": "Historical Tracker Stats"
+		"message": "Historical Stats"
 	},
 	"subscription_charge_date" : {
 		"message": "Next Payment Date"
@@ -2088,5 +2123,97 @@
 	},
 	"subscription_submit_issue": {
 		"message": "Submit Issue"
+	},
+	"panel_stats_menu_cumulative": {
+		"message": "Cumulative"
+	},
+	"panel_stats_menu_monthly": {
+		"message": "Monthly"
+	},
+	"panel_stats_menu_daily": {
+		"message": "Daily"
+	},
+	"panel_stats_header_title": {
+		"message": "Historical Tracker Stats"
+	},
+	"panel_stats_header_title_monthly": {
+		"message": "Historical Tracker Stats (Monthly Avg.)"
+	},
+	"panel_stats_header_title_daily": {
+		"message": "Historical Tracker Stats (Daily Avg.)"
+	},
+	"panel_stats_trackers_seen": {
+		"message": "Trackers Seen"
+	},
+	"panel_stats_trackers_blocked": {
+		"message": "Trackers Blocked"
+	},
+	"panel_stats_trackers_anonymized": {
+		"message": "Data Points Anonymized"
+	},
+	"panel_stats_ads_blocked": {
+		"message": "Ads Blocked"
+	},
+	"panel_stats_total_trackers_seen": {
+		"message": "Total Trackers Seen"
+	},
+	"panel_stats_total_trackers_blocked": {
+		"message": "Total Trackers Blocked"
+	},
+	"panel_stats_total_trackers_anonymized": {
+		"message": "Total Trackers Anonymized"
+	},
+	"panel_stats_total_ads_blocked": {
+		"message": "Total Ads Blocked"
+	},
+	"panel_stats_cumulative": {
+		"message": "Cumulative"
+	},
+	"panel_stats_monthly": {
+		"message": "Monthly"
+	},
+	"panel_stats_daily": {
+		"message": "Daily"
+	},
+	"panel_stats_reset": {
+		"message": "Reset all stats"
+	},
+	"panel_stats_reset_modal_text": {
+		"message": "Your statistics history will be reset. There is no way to recover this data. Do you want to continue?"
+	},
+	"panel_stats_reset_modal_yes": {
+		"message": "Yes, Reset"
+	},
+	"panel_stats_reset_modal_no": {
+		"message": "No, Keep History"
+	},
+	"panel_stats_pitch_modal_text": {
+		"message": "Unlock your historical stats (and other cool perks) by upgrading to Ghostery Plus for $SPAN_START$&#36;2/month.$SPAN_END$$LINK_START$Learn More$LINK_END$",
+		"placeholders": {
+			"span_start": {
+				"content": "<span>"
+			},
+			"span_end": {
+				"content": "</span>"
+			},
+			"link_end": {
+				"content": "</a>"
+			},
+			"link_start": {
+				"content": "<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.ghostery.com/products/plus/\">"
+			}
+		}
+	},
+	"panel_stats_pitch_modal_already": {
+		"message": "Already a Ghostery Supporter?"
+	},
+	"panel_stats_pitch_modal_sign_in": {
+		"message": "Sign in here"
+	},
+	"panel_stats_pitch_modal_subscribe": {
+		"message": "Get Ghostery Plus!"
+	},
+	"panel_stats_pitch_modal_tooltip": {
+		"message": "Erase all statistics history up until this point in time."
 	}
 }

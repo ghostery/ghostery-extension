@@ -106,7 +106,6 @@ class Account {
 			}
 			this._getUserIDFromCookie().then((userID) => {
 				this._setAccountInfo(userID);
-				this.getUserSubscriptionData();
 			});
 			return {};
 		});
@@ -147,7 +146,7 @@ class Account {
 	)
 
 	getUserSettings = () => (
-		this._getUserID()
+		this._getUserIDIfEmailIsValidated()
 			.then(userID => api.get('settings', userID))
 			.then((res) => {
 				const settings = build(normalize(res, { camelizeKeys: false }), 'settings', res.data.id);
@@ -163,14 +162,14 @@ class Account {
 		this._getUserID()
 			.then(userID => api.get('stripe/customers', userID, 'cards,subscriptions'))
 			.then((res) => {
-				const subscriptionData = build(normalize(res), { camelizeKeys: false }, 'customers', res.data.id);
-				this._setSubscriptionData(subscriptionData);
-				return subscriptionData;
+				const customer = build(normalize(res), 'customers', res.data.id);
+				this._setSubscriptionData(customer);
+				return customer;
 			})
 	)
 
 	saveUserSettings = () => (
-		this._getUserID()
+		this._getUserIDIfEmailIsValidated()
 			.then(userID => (
 				api.update('settings', {
 					type: 'settings',
@@ -426,6 +425,28 @@ class Account {
 		})
 	)
 
+	_getUserIDIfEmailIsValidated = () => (
+		this._getUserID()
+			.then(userID => (
+				new Promise((resolve, reject) => {
+					const { user } = conf.account;
+					if (user === null) {
+						return this.getUser()
+							.then(() => {
+								if (user.emailValidated !== true) {
+									return reject(new Error('_getUserIDIfEmailIsValidated() Email not validated'));
+								}
+								return resolve(userID);
+							});
+					}
+					if (user.emailValidated !== true) {
+						return reject(new Error('_getUserIDIfEmailIsValidated() Email not validated'));
+					}
+					return resolve(userID);
+				})
+			))
+	)
+
 	_setAccountInfo = (userID) => {
 		conf.account = {
 			userID,
@@ -452,7 +473,7 @@ class Account {
 			conf.paid_subscription = true;
 			dispatcher.trigger('conf.save.paid_subscription');
 		}
-		conf.account.subscriptionData = subscriptionData;
+		conf.account.subscriptionData = subscriptionData.subscriptions || null;
 		dispatcher.trigger('conf.save.account');
 	}
 

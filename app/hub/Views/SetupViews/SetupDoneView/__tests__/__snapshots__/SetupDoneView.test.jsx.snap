@@ -50,7 +50,6 @@ exports[`app/hub/Views/SetupViews/SetupDoneView component Snapshot tests with re
             className="SetupDone__featureButton button primary"
             href="/feature/1"
             onClick={[Function]}
-            style={undefined}
           >
             feature 1 button text
           </a>
@@ -79,7 +78,6 @@ exports[`app/hub/Views/SetupViews/SetupDoneView component Snapshot tests with re
             className="SetupDone__featureButton button primary"
             href="/feature/2"
             onClick={[Function]}
-            style={undefined}
           >
             feature 2 button text
           </a>
@@ -108,7 +106,6 @@ exports[`app/hub/Views/SetupViews/SetupDoneView component Snapshot tests with re
             className="SetupDone__featureButton button primary"
             href="/feature/3"
             onClick={[Function]}
-            style={undefined}
           >
             feature 3 button text
           </a>

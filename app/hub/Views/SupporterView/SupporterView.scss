@@ -13,7 +13,7 @@
 
 // Supporter View
 .SupporterView {
-	margin: 40px 0 80px;
+	margin: 40px 0 0;
 	overflow-x: hidden;
 }
 .SupporterView--addPaddingTop {
@@ -115,9 +115,6 @@
 }
 .SupporterView__perkIcon.more {
 	background-image: buildPerkMoreIcon(#a8ca59, #0a0a0a);
-}
-.SupporterView__feature {
-	padding: 0 40px;
 }
 .SupporterView__featureImage.theme {
 	max-width: 420px;
