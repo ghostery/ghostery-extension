@@ -217,12 +217,23 @@ export function getTab(tab_id, callback, error) {
  *
  * @param  {function} callback		function to call if tab found
  */
-export function getActiveTab(callback) {
+export function getActiveTab(callback, error) {
 	chrome.tabs.query({
 		active: true,
 		currentWindow: true
 	}, (tabs) => {
-		callback(tabs[0]);
+		if (chrome.runtime.lastError) {
+			log('getActiveTab', chrome.runtime.lastError.message);
+			if (error && typeof error === 'function') {
+				error(chrome.runtime.lastError);
+			}
+		} else if (tabs.length === 0) {
+			if (error && typeof error === 'function') {
+				error();
+			}
+		} else if (callback && typeof callback === 'function') {
+			callback(tabs[0]);
+		}
 	});
 }
 
