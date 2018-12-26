@@ -145,19 +145,17 @@ class Account {
 			})
 	)
 
-	getUserSettings = () => (!this._isValidated() ? (Promise.resolve(null)) :
-		(
-			this._getUserID()
-				.then(userID => api.get('settings', userID))
-				.then((res) => {
-					const settings = build(normalize(res, { camelizeKeys: false }), 'settings', res.data.id);
-					const { settings_json } = settings;
-					// @TODO setConfUserSettings settings.settingsJson
-					this._setConfUserSettings(settings_json);
-					this._setAccountUserSettings(settings_json);
-					return settings_json;
-				})
-		)
+	getUserSettings = () => (
+		this._getUserIDIfEmailIsValidated()
+			.then(userID => api.get('settings', userID))
+			.then((res) => {
+				const settings = build(normalize(res, { camelizeKeys: false }), 'settings', res.data.id);
+				const { settings_json } = settings;
+				// @TODO setConfUserSettings settings.settingsJson
+				this._setConfUserSettings(settings_json);
+				this._setAccountUserSettings(settings_json);
+				return settings_json;
+			})
 	)
 
 	getUserSubscriptionData = () => (
@@ -170,19 +168,17 @@ class Account {
 			})
 	)
 
-	saveUserSettings = () => (!this._isValidated() ? (Promise.resolve()) :
-		(
-			this._getUserID()
-				.then(userID => (
-					api.update('settings', {
-						type: 'settings',
-						id: userID,
-						attributes: {
-							settings_json: this.buildUserSettings()
-						}
-					})
-				))
-		)
+	saveUserSettings = () => (
+		this._getUserIDIfEmailIsValidated()
+			.then(userID => (
+				api.update('settings', {
+					type: 'settings',
+					id: userID,
+					attributes: {
+						settings_json: this.buildUserSettings()
+					}
+				})
+			))
 	)
 
 	getTheme = name => (
@@ -429,6 +425,28 @@ class Account {
 		})
 	)
 
+	_getUserIDIfEmailIsValidated = () => (
+		this._getUserID()
+			.then(userID => (
+				new Promise((resolve, reject) => {
+					const { user } = conf.account;
+					if (user === null) {
+						return this.getUser()
+							.then(() => {
+								if (user.emailValidated !== true) {
+									return reject(new Error('_getUserIDIfEmailIsValidated() Email not validated'));
+								}
+								return resolve(userID);
+							});
+					}
+					if (user.emailValidated !== true) {
+						return reject(new Error('_getUserIDIfEmailIsValidated() Email not validated'));
+					}
+					return resolve(userID);
+				})
+			))
+	)
+
 	_setAccountInfo = (userID) => {
 		conf.account = {
 			userID,
@@ -524,8 +542,6 @@ class Account {
 			});
 		});
 	}
-
-	_isValidated = () => conf.account && conf.account.user && conf.account.user.emailValidated;
 }
 
 // Return the class as a singleton
