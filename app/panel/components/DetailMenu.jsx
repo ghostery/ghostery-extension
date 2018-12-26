@@ -39,11 +39,11 @@ class DetailMenu extends React.Component {
 	 */
 	setActiveTab(event) {
 		const menu = Object.assign({}, this.state.menu);
-		const selection = event.currentTarget.id;
-		menu.showBlocking = selection === 'showBlocking';
-		menu.showRewards = selection === 'showRewards';
+		const selectionId = event.currentTarget.id;
 		const pings = { showBlocking: 'list_dash', showRewards: 'rewards_dash' };
-		sendMessage('ping', pings[selection]);
+
+		Object.keys(menu).forEach((key) => { menu[key] = selectionId === key; });
+		sendMessage('ping', pings[selectionId]);
 		this.setState({ menu });
 	}
 	/**
