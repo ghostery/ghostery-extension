@@ -20,15 +20,11 @@ import { sendMessage } from '../utils/msg';
  * @memberOf PanelClasses
  */
 class DetailMenu extends React.Component {
+	static pings = { showBlocking: 'list_dash', showRewards: 'rewards_dash' };
+
 	constructor(props) {
 		super(props);
-
-		this.state = {
-			menu: {
-				showBlocking: true,
-				showRewards: false,
-			},
-		};
+		this.state = { menu: { showBlocking: true, showRewards: false } };
 
 		// event bindings
 		this.setActiveTab = this.setActiveTab.bind(this);
@@ -40,10 +36,9 @@ class DetailMenu extends React.Component {
 	setActiveTab(event) {
 		const menu = Object.assign({}, this.state.menu);
 		const selectionId = event.currentTarget.id;
-		const pings = { showBlocking: 'list_dash', showRewards: 'rewards_dash' };
 
 		Object.keys(menu).forEach((key) => { menu[key] = selectionId === key; });
-		sendMessage('ping', pings[selectionId]);
+		sendMessage('ping', DetailMenu.pings[selectionId]);
 		this.setState({ menu });
 	}
 	/**
