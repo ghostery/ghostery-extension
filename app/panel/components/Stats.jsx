@@ -474,7 +474,7 @@ class Stats extends React.Component {
 		return selectionData;
 	}
 
-	_isSupporter = props => props.user && props.user.subscriptionsSupporter
+	_isSupporter = props => props.user && props.user.subscriptionsSupporter;
 
 	/**
 	 * Render the the Stats View
