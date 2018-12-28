@@ -1701,9 +1701,9 @@ brorand@^1.0.1:
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
   integrity sha1-EsJe/kCkXjwyPrhnWgoM5XsiNx8=
 
-"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery-mobile/ghostery-mobile/1.33.0.e0e19a6.tgz":
+"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery-mobile/ghostery-mobile/7.33.0.ec0ada4.tgz":
   version "1.33.0"
-  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery-mobile/ghostery-mobile/1.33.0.e0e19a6.tgz#47e00ad739f8e75fec23c26ddb9cf313d92294e7"
+  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery-mobile/ghostery-mobile/7.33.0.ec0ada4.tgz#e8afba662ed109858c9e130f0b91f0fa9fc394d2"
   dependencies:
     "@cliqz-oss/dexie" "^2.0.4"
     "@cliqz/adblocker" "^0.4.1"
