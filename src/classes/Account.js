@@ -432,8 +432,8 @@ class Account {
 					const { user } = conf.account;
 					if (user === null) {
 						return this.getUser()
-							.then(() => {
-								if (user.emailValidated !== true) {
+							.then((u) => {
+								if (u.emailValidated !== true) {
 									return reject(new Error('_getUserIDIfEmailIsValidated() Email not validated'));
 								}
 								return resolve(userID);
