@@ -424,7 +424,7 @@ class Account {
 						this._setAccountInfo(userID);
 						resolve(conf.account.userID);
 					})
-					.catch((err) => {
+					.catch(() => {
 						reject(new Error('_getUserID() Not logged in'));
 					});
 			}
