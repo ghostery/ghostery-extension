@@ -277,7 +277,6 @@ function getSiteData() {
  * @param  {string}		tab_url 	tab url
  */
 function handleAccountPages(name, callback) {
-	console.log('HERE', name);
 	switch (name) {
 		case 'accountPage.login':
 		case 'accountPage.register':
