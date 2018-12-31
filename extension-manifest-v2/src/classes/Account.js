@@ -419,7 +419,14 @@ class Account {
 	_getUserID = () => (
 		new Promise((resolve, reject) => {
 			if (conf.account === null) {
-				return reject(new Error('_getUserID() Not logged in'));
+				return this._getUserIDFromCookie()
+					.then((userID) => {
+						this._setAccountInfo(userID);
+						resolve(conf.account.userID);
+					})
+					.catch(() => {
+						reject(new Error('_getUserID() Not logged in'));
+					});
 			}
 			return resolve(conf.account.userID);
 		})
