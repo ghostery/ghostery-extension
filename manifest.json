@@ -50,8 +50,6 @@
 				"dist/account_pages.js"
 			],
 			"matches": [
-				"http://localhost:3000/*",
-				"http://localhost:3001/*",
 				"https://account.ghostery.com/*",
 				"https://account.ghosterystage.com/*"
 			],
