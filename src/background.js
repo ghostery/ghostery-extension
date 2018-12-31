@@ -280,21 +280,21 @@ function handleAccountPages(name, callback) {
 	switch (name) {
 		case 'accountPage.login':
 		case 'accountPage.register':
-		// case 'accountPageLoaded': // legacy
-		// 	if (conf.account === null) {
-			account._getUserIDFromCookie()
-				.then((userID) => {
-					account._setAccountInfo(userID);
-				})
-				.then(account.getUser)
-				.then(account.getUserSettings)
-				.then(account.getUserSubscriptionData)
-				.then(() => callback())
-				.catch((err) => {
-					callback(err);
-					log('handleAccountPages error', err);
-				});
-			// }
+		case 'accountPageLoaded': // legacy
+			if (conf.account === null) {
+				account._getUserIDFromCookie()
+					.then((userID) => {
+						account._setAccountInfo(userID);
+					})
+					.then(account.getUser)
+					.then(account.getUserSettings)
+					.then(account.getUserSubscriptionData)
+					.then(() => callback())
+					.catch((err) => {
+						callback(err);
+						log('handleAccountPages error', err);
+					});
+			}
 			return true;
 		case 'accountPage.getUser':
 			account.getUser()
