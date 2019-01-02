@@ -792,7 +792,7 @@ function onMessageHandler(request, sender, callback) {
 				callback(data);
 			});
 		}
-		account.getUserSettings().catch(err => log('Error getting user settings from getPanelData:', err));
+		account.getUserSettings().catch(err => log('Failed getting user settings from getPanelData:', err));
 		return true;
 	} else if (name === 'getStats') {
 		insights.action('getStatsTimeline', message.from, message.to, true, true).then((data) => {
