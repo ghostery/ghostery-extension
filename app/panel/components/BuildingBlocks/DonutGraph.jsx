@@ -91,7 +91,6 @@ class DonutGraph extends React.Component {
 			categories,
 			renderRedscale,
 			renderGreyscale,
-			totalCount,
 			ghosteryFeatureSelect,
 			isSmall,
 		} = this.props;
@@ -99,7 +98,6 @@ class DonutGraph extends React.Component {
 		if (categories.length !== nextProps.categories.length ||
 			renderRedscale !== nextProps.renderRedscale ||
 			renderGreyscale !== nextProps.renderGreyscale ||
-			totalCount !== nextProps.totalCount ||
 			ghosteryFeatureSelect !== nextProps.ghosteryFeatureSelect ||
 			isSmall !== nextProps.isSmall) {
 			this.generateGraph(nextProps.categories, {
@@ -129,7 +127,7 @@ class DonutGraph extends React.Component {
 		const width = +size;
 		const height = +size;
 		const radius = Math.min(width, height) / 2;
-		const animationDuration = 750;
+		const animationDuration = categories.length > 0 ? 750 : 0;
 		const delays = [];
 
 		// Process categories into graphData
