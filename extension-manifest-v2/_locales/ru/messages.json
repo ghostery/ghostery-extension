@@ -1,1724 +1,62 @@
 {
-	"settings_import_header": {
-		"message": "Импортировать настройки",
-		"description": ""
-	},
-	"panel_header_detailed_view": {
-		"message": "Детальный просмотр",
-		"description": ""
-	},
-	"settings_share_usage": {
-		"message": "Поделиться аналитикой использования расширения",
-		"description": ""
-	},
-	"settings_allow_trackers_tooltip": {
-		"message": "Например, блокировка трекера Facebook на странице facebook.com может нарушить работу веб-сайта.",
-		"description": ""
-	},
-	"blocking_trackers": {
-		"message": "Трекеры",
-		"description": ""
-	},
-	"panel_detail_history_text": {
-		"message": "Функция скоро появится.",
-		"description": ""
-	},
-	"settings_individual_trackers": {
-		"message": "Разрешить и ограничить отдельные трекеры",
-		"description": ""
-	},
-	"setup_data_view_checkbox": {
-		"message": "Поддержать Ghostery, поделившись этой информацией.",
-		"description": ""
-	},
-	"rewards_off_toast_notification": {
-		"message": "Призы Ghostery отключены",
-		"description": ""
-	},
-	"settings_offers_tooltip": {
-		"message": "Призы Ghostery - это функция, которая позволяет вам получать скидки и специальные предложения от наших компаний-партнеров.",
-		"description": ""
-	},
-	"rewards_yes": {
-		"message": "да",
-		"description": ""
-	},
-	"settings_sign_create_text": {
-		"message": "Настройки из вашей учетной записи будут синхронизироваться с этим устройством. Создайте учетную запись, чтобы легко синхронизировать настройки Ghostery на всех устройствах и платформах.",
-		"description": ""
-	},
-	"email_confirm_field_label": {
-		"message": "Подтвердить адрес электронной почты:",
-		"description": ""
-	},
-	"setup_login_view_title": {
-		"message": "Хотите создать учетную запись Ghostery для синхронизации настроек во всех браузерах и устройствах?",
-		"description": ""
-	},
-	"summary_description_not_scanned_1": {
-		"message": "Ghostery сканирует только «http» и «https» страницы.",
-		"description": ""
-	},
-	"drawer_off": {
-		"message": "Выкл",
-		"description": ""
-	},
-	"setup_choice_view_share_data": {
-		"message": "Поделиться моей аналитикой и данными Human Web, чтобы улучшить производительность Ghostery.",
-		"description": ""
-	},
-	"settings_searh_by_tracker": {
-		"message": "Поиск по трекеру",
-		"description": ""
-	},
-	"settings_update_failed": {
-		"message": "Не удалось выполнить обновление. Повторите попытку позже.",
-		"description": ""
-	},
-	"whitelist_error_blacklist_url": {
-		"message": "Этот сайт был удален из вашего списка \"Ограниченные сайты\" и добавлен в список \"Доверенные сайты\".",
-		"description": ""
-	},
-	"settings_filter_all": {
-		"message": "Все трекеры",
-		"description": ""
-	},
-	"global_settings_saved_tracker": {
-		"message": "Глобальные настройки трекера сохранены",
-		"description": ""
-	},
-	"license_email": {
-		"message": "Email",
-		"description": ""
-	},
-	"panel_signin_success_title": {
-		"message": "Поздравляем! Ваша учетная запись Ghostery готова к работе.",
-		"description": ""
-	},
-	"blocking_unblock_all": {
-		"message": "Разблокировать все",
-		"description": ""
-	},
-	"settings_filter_unblocked": {
-		"message": "Разблокированные",
-		"description": ""
-	},
-	"box_trackers": {
-		"message": "Трекеры",
-		"description": ""
-	},
-	"drawer_on": {
-		"message": "Вкл",
-		"description": ""
-	},
-	"setup_blocking_view_block_everything": {
-		"message": "Все",
-		"description": ""
-	},
-	"settings_bottom_right_corner": {
-		"message": "Нижнем правом углу",
-		"description": ""
-	},
-	"settings_hide_alert_trusted": {
-		"message": "Скрыть фиолетовое окно на доверенных веб-сайтах",
-		"description": ""
-	},
-	"setup_login_view_signed_in_as": {
-		"message": "Выполнен вход в качестве",
-		"description": ""
-	},
-	"blocking_category_blocked": {
-		"message": "Заблокированные",
-		"description": "as in '5 (trackers) BLOCKED'"
-	},
-	"setup_header_sign_in": {
-		"message": "Вход",
-		"description": ""
-	},
-	"notification_upgrade": {
-		"message": "Наша трудолюбивая и блестящая команда хорошо потрудилась, чтобы выпустить новую версию Ghostery.",
-		"description": ""
-	},
-	"setup_blocking_view_title": {
-		"message": "Ghostery может блокировать трекеры, чтобы сделать вашу работу в Интернете более простой, быстрой и безопасной. Что бы вы хотели заблокировать?",
-		"description": ""
-	},
-	"summary_resume_ghostery": {
-		"message": "Возобновить",
-		"description": ""
-	},
-	"pause_1_hour_condensed": {
-		"message": "1 ч",
-		"description": ""
-	},
-	"whitelist_error_duplicate_url": {
-		"message": "Этот сайт уже включен в белый список.",
-		"description": "Options page site whitelisting error message shown when whitelisting a URL that is already in the whitelist."
-	},
-	"drawer_status_enable_anti_tracking": {
-		"message": "Анти-трекинг -",
-		"description": ""
-	},
-	"panel_click_to_reload": {
-		"message": "Перезагрузите чтобы увидеть изменения.",
-		"description": ""
-	},
-	"global_settings_saved": {
-		"message": "Глобальные настройки сохранены",
-		"description": ""
-	},
-	"settings_support_ghostery_by": {
-		"message": "Поддержать Ghostery",
-		"description": ""
-	},
-	"rewards_learn_more": {
-		"message": "Подробнее",
-		"description": ""
-	},
-	"category_social_media_desc": {
-		"message": "Включает функции, связанные с социальными ресурсами.",
-		"description": "User-facing description for the Social Media tag category."
-	},
-	"settings_update_success": {
-		"message": "Успешно!",
-		"description": ""
-	},
-	"settings_never": {
-		"message": "Никогда",
-		"description": ""
-	},
-	"panel_title_create_account": {
-		"message": "Создать учетную запись",
-		"description": ""
-	},
-	"box_dismiss_15s": {
-		"message": "Отклонять $SPAN_START$через 15 секунд$SPAN_END$",
-		"description": "",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
-	},
-	"setup_display_view_simple_desc": {
-		"message": "Показывать основную информацию по блокировке.",
-		"description": ""
-	},
-	"first_name_field_label": {
-		"message": "Имя (необязательно):",
-		"description": ""
-	},
-	"alert_ad_block_off": {
-		"message": "Усовершенствованная блокировка рекламы отключена. Реклама не будет заблокирована.",
-		"description": ""
-	},
-	"drawer_tooltip_enable_anti_tracking": {
-		"message": "Анонимизировать разблокированные и неизвестные трекеры для обеспечения большей защиты браузера. На рисунке показано, сколько измерительных точек было удалено на сайте.",
-		"description": ""
-	},
-	"panel_email_verification_sent": {
-		"message": "$BOLD_HTML_STARTS$ Успешно! $BOLD_HTML_END$ Письмо для подтверждения учетной записи было отправлено на адрес $EMAIL$",
-		"description": "",
-		"placeholders": {
-			"bold_html_end": {
-				"content": "</strong>"
-			},
-			"bold_html_starts": {
-				"content": "<strong>"
-			},
-			"email": {
-				"content": "$1",
-				"example": "info@ghostery.com"
-			}
-		}
-	},
-	"panel_detail_rewards_off": {
-		"message": "Призы Ghostery отключены",
-		"description": ""
-	},
-	"panel_detail_rewards_loading": {
-		"message": "Загрузка призов...",
-		"description": ""
-	},
-	"category_audio_video_player": {
-		"message": "Аудио/видео проигрыватель",
-		"description": "Ghostery organizes tags by category. This is one of several tag categories."
-	},
-	"setup_additional_view_antitrack_title": {
-		"message": "Улучшенный анти-трекинг",
-		"description": ""
-	},
-	"tooltip_body_in_cliqz": {
-		"message": "Функция уже активирована в Cliqz по умолчанию.",
-		"description": ""
-	},
-	"setup_additional_view_title": {
-		"message": "Хотели бы вы работать в Интернете с умом, используя наши рекомендуемые функции?",
-		"description": ""
-	},
-	"setup_button_create_account": {
-		"message": "Создать учетную запись",
-		"description": ""
-	},
-	"settings_block_trackers": {
-		"message": "Блокировать новые трекеры, добавленные в Ghostery по умолчанию",
-		"description": ""
-	},
-	"email_address_in_use": {
-		"message": "Этот адрес электронной почты уже используется.  Выберите другой. ",
-		"description": ""
-	},
-	"box_dismiss_0s": {
-		"message": "Отклонять $SPAN_START$никогда$SPAN_END$",
-		"description": "",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
-	},
-	"button_cancel": {
-		"message": "Отмена",
-		"description": "Part of a confirmation dialog. Clicking this cancels the action."
-	},
-	"settings_dismiss_after": {
-		"message": "Отклонить через",
-		"description": ""
-	},
-	"settings_purple_box": {
-		"message": "Фиолетовое окно",
-		"description": ""
-	},
-	"settings_export_text": {
-		"message": "Сохраните копию настроек Ghostery и переместите ее на другой компьютер.",
-		"description": ""
-	},
-	"settings_filter_blocked": {
-		"message": "Заблокированные",
-		"description": ""
-	},
-	"settings_import_text": {
-		"message": "Выберите файл резервной копии .ghost.",
-		"description": ""
-	},
-	"blocking_unblock_shown": {
-		"message": "Разблокировать выборку",
-		"description": ""
-	},
-	"box_warning_compatibility": {
-		"message": "Трекеры поврежденной страницы",
-		"description": ""
-	},
-	"settings_export_error": {
-		"message": "Не удалось выполнить экспорт ваших настроек. Повторите попытку.",
-		"description": ""
-	},
-	"tooltip_smart_block": {
-		"message": "Умная блокировка",
-		"description": ""
-	},
-	"notification_library_update_link": {
-		"message": "Узнайте, что нового",
-		"description": ""
-	},
-	"settings_top_right_corner": {
-		"message": "Верхнем правом углу",
-		"description": ""
-	},
-	"box_display_br": {
-		"message": "Отображать $SPAN_START$в нижней правой части$SPAN_END$",
-		"description": "",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
-	},
-	"box_hide": {
-		"message": "Скрыть окно",
-		"description": ""
-	},
-	"summary_trust_site": {
-		"message": "Доверять сайту",
-		"description": ""
-	},
-	"setup_feature_active_in_cliqz": {
-		"message": "Эта функция уже активирована в Cliqz по умолчанию. $LINK_START$Подробнее.$LINK_END$",
-		"description": "",
-		"placeholders": {
-			"link_start": {
-				"content": "<a href=\"https://www.ghostery.com/faqs/what-are-the-new-ghostery-8-features/\" target=\"_blank\">"
-			},
-			"link_end": {
-				"content": "</a>"
-			}
-		}
-	},
-	"settings_highlight_trackers": {
-		"message": "Выделите интерактивные трекеры",
-		"description": ""
-	},
-	"collapse_all": {
-		"message": "Свернуть все",
-		"description": ""
-	},
-	"summary_restrict_site_active": {
-		"message": "Ограниченные сайты",
-		"description": ""
-	},
-	"panel_detail_rewards_title": {
-		"message": "Призы Ghostery",
-		"description": ""
-	},
-	"panel_about_licenses": {
-		"message": "Лицензии на программное обеспечение",
-		"description": ""
-	},
-	"select_file_for_import": {
-		"message": "Выберите файл .ghost для импорта.",
-		"description": ""
-	},
-	"settings_top_left_corner": {
-		"message": "Верхнем левом углу",
-		"description": ""
-	},
-	"setup_data_view_desc_no_human_web": {
-		"message": "Мы используем анонимные аналитические данные, чтобы улучшить производительность Ghostery, не собирая никаких персональных данных. $LINK_START$Подробнее.$LINK_END$.",
-		"description": "",
-		"placeholders": {
-			"link_start": {
-				"content": "<a href=\"https://www.ghostery.com/faqs/\" target=\"_blank\">"
-			},
-			"link_end": {
-				"content": "</a>"
-			}
-		}
-	},
-	"click2play_comment_form": {
-		"message": "Ghostery заблокировал комментарии от $NAME$.",
-		"description": "",
-		"placeholders": {
-			"name": {
-				"content": "$1",
-				"example": "Disqus"
-			}
-		}
-	},
-	"tooltip_restrict": {
-		"message": "Всегда блокировать трекеры на этом сайте.",
-		"description": ""
-	},
-	"settings_restricted_sites_description": {
-		"message": "Сайты, перечисленные здесь, будут являться запрещенными с блокировкой всех трекеров.",
-		"description": ""
-	},
-	"box_dismiss_5s": {
-		"message": "Отклонять $SPAN_START$через 5 секунд$SPAN_END$",
-		"description": "",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
-	},
-	"setup_login_view_confirm_email_error": {
-		"message": "Извините, адреса электронной почты не совпадают.",
-		"description": ""
-	},
-	"settings_notify_me": {
-		"message": "Уведомить меня, когда Ghostery:",
-		"description": ""
-	},
-	"settings_notifications": {
-		"message": "Уведомления",
-		"description": ""
-	},
-	"click2play_allow_once_tooltip": {
-		"message": "Разрешить один раз и перезагрузить.",
-		"description": "Tooltip that appears over the 'allow once' click2play button."
-	},
-	"settings_global_blocking": {
-		"message": "Глобальная блокировка",
-		"description": ""
-	},
-	"copyright": {
-		"message": "$C$ $YEAR$ $GHOSTERY$, часть $COMPANY_ADDRESS$",
-		"description": "Copyright message, shown in page footers.",
-		"placeholders": {
-			"c": {
-				"content": "&copy;"
-			},
-			"company_address": {
-				"content": "$1",
-				"example": "GHOSTERY, Inc., Such-and-such Street, Such-and-such Floor, New York, NY, Zip Code"
-			},
-			"ghostery": {
-				"content": "<a href='https://www.ghostery.com' target='_blank'>Ghostery</a>"
-			},
-			"year": {
-				"content": "2015"
-			}
-		}
-	},
-	"settings_opt_in": {
-		"message": "Принять участие",
-		"description": ""
-	},
-	"settings_signin_create_header": {
-		"message": "Войти / Создать учетную запись",
-		"description": ""
-	},
-	"panel_tracker_warning_nonsecure_tooltip": {
-		"message": "Трекер небезопасный",
-		"description": ""
-	},
-	"tracker_plural": {
-		"message": "трекеры",
-		"description": ""
-	},
-	"rewards_disable": {
-		"message": "Отключить призы",
-		"description": ""
-	},
-	"settings_allow_offers": {
-		"message": "Принять участие в программе призов Ghostery",
-		"description": ""
-	},
-	"click2play_survey_form": {
-		"message": "Ghostery заблокировал опрос от $NAME$.",
-		"description": "",
-		"placeholders": {
-			"name": {
-				"content": "$1",
-				"example": "Disqus"
-			}
-		}
-	},
-	"tooltip_trust": {
-		"message": "Всегда разрешать трекеры на этом сайте.",
-		"description": ""
-	},
-	"tooltip_smart_block_body_on": {
-		"message": "Блокировка трекеров откорректирована для оптимизации работы страницы.",
-		"description": ""
-	},
-	"settings_new_features": {
-		"message": "Выпускает новые функции",
-		"description": ""
-	},
-	"settings_announcements": {
-		"message": "Делает объявление",
-		"description": ""
-	},
-	"setup_button_done": {
-		"message": "Готово",
-		"description": ""
-	},
-	"blocking_category_tracker": {
-		"message": "Трекер",
-		"description": ""
-	},
-	"page_load": {
-		"message": "Загрузка страницы",
-		"description": ""
-	},
-	"banner_check_your_email_title": {
-		"message": "На вашу почту была отправлена ссылка для сброса пароля.",
-		"description": ""
-	},
-	"settings_filter_new_label": {
-		"message": "Новые трекеры",
-		"description": ""
-	},
-	"pause_1_hour": {
-		"message": "на 1 час",
-		"description": ""
-	},
-	"enable_when_blacklisted": {
-		"message": "Для использования этой функции отмените включение сайта в список ограниченных",
-		"description": ""
-	},
-	"tooltip_restrict_on": {
-		"message": "На сайте трекеры заблокированы и включен анти-трекинг. Нажмите, чтобы отменить.",
-		"description": ""
-	},
-	"panel_detail_premium_text": {
-		"message": "Функция скоро появится.",
-		"description": ""
-	},
-	"setup_upgrade_subtitle": {
-		"message": "Что нового?",
-		"description": ""
-	},
-	"box_display_bl": {
-		"message": "Отображать $SPAN_START$в нижней левой части$SPAN_END$",
-		"description": "",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
-	},
-	"settings_required_trackers": {
-		"message": "Покажите мне, когда нужно разрешить трекеру воспользоваться функциями сайта",
-		"description": ""
-	},
-	"alert_site_trusted": {
-		"message": "Сайт включен в белый список. На этом веб-сайте трекеры будут разрешены и анти-трекинг отключен.",
-		"description": ""
-	},
-	"license_module": {
-		"message": "Модуль",
-		"description": ""
-	},
-	"blacklist_error_whitelist_url": {
-		"message": "Это сайт был удален из вашего списка \"Доверенные сайты\" и добавлен в список \"Ограниченные сайты\"",
-		"description": ""
-	},
-	"panel_help_faq": {
-		"message": "Часто задаваемые вопросы",
-		"description": ""
-	},
-	"settings_filter_new": {
-		"message": "Новые трекеры",
-		"description": ""
-	},
-	"blocking_category_trackers": {
-		"message": "Трекеры",
-		"description": ""
-	},
-	"blocking_block_shown": {
-		"message": "Заблокировать выборку",
-		"description": ""
-	},
-	"panel_menu_signin": {
-		"message": "Вход",
-		"description": ""
-	},
-	"error_email_forgot": {
-		"message": "Хм, я не могу найти этот адрес электронной почты. Попробовать другой?",
-		"description": ""
-	},
-	"setup_display_view_detailed": {
-		"message": "Детальное",
-		"description": ""
-	},
-	"tooltip_ad_block": {
-		"message": "Усовершенствованная блокировка рекламы",
-		"description": ""
-	},
-	"panel_detail_menu_rewards_title": {
-		"message": "Призы",
-		"description": ""
-	},
-	"panel_tracker_trust_tooltip": {
-		"message": "Разрешить на этом сайте",
-		"description": ""
-	},
-	"settings_bottom_left_corner": {
-		"message": "Нижнем левом углу",
-		"description": ""
-	},
-	"settings_import_dialog_error": {
-		"message": "Ghostery не может отобразить просмотр диалога, когда текущая страница является одной из зарезервированных страниц браузера. Перейдите на другую страницу и попробуйте еще раз.",
-		"description": ""
-	},
-	"rewards_disable_notification": {
-		"message": "Призы Ghostery теперь отключены. Вы всегда можете включить их в настройках или на панели управления.",
-		"description": ""
-	},
-	"expand_all": {
-		"message": "Развернуть все",
-		"description": ""
-	},
-	"panel_menu_signout": {
-		"message": "Выход",
-		"description": ""
-	},
-	"drawer_status_enable_smart_block": {
-		"message": "Умная блокировка -",
-		"description": ""
-	},
-	"settings_support_ghostery": {
-		"message": "Поддержка Ghostery",
-		"description": ""
-	},
-	"panel_about_release_notes": {
-		"message": "См. примечания к выпуску для получения информации обо всех обновлениях",
-		"description": ""
-	},
-	"notification_upgrade_link": {
-		"message": "В этой версии мы добавили новые удобные функции и исправили ошибки.",
-		"description": ""
-	},
-	"notification_upgrade_title_v8": {
-		"message": "Представляем Ghostery 8!",
-		"description": ""
-	},
-	"summary_resume_ghostery_ab_pause": {
-		"message": "Возобновить",
-		"description": ""
-	},
-	"box_tracker": {
-		"message": "Трекер",
-		"description": ""
-	},
-	"settings_new_trackers": {
-		"message": "Добавляет новые трекеры в свою библиотеку трекеров",
-		"description": ""
-	},
-	"blocked_redirect_page_title": {
-		"message": "Ghostery предотвратил переадресацию.",
-		"description": "Page title for blocked_redirect.html which appears when a redirect is blocked."
-	},
-	"click2play_video_form": {
-		"message": "Ghostery заблокировал видео проигрыватель $NAME$.",
-		"description": "",
-		"placeholders": {
-			"name": {
-				"content": "$1",
-				"example": "Disqus"
-			}
-		}
-	},
-	"box_dismiss_30s": {
-		"message": "Отклонять $SPAN_START$через 30 секунд$SPAN_END$",
-		"description": "",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
-	},
-	"license_licenses": {
-		"message": "Лицензии",
-		"description": ""
-	},
-	"setup_choice_view_custom_setup": {
-		"message": "Пользовательская настройка",
-		"description": ""
-	},
-	"browse_button_label": {
-		"message": "Обзор...",
-		"description": ""
-	},
-	"alert_ghostery_paused": {
-		"message": "Работа расширения Ghostery приостановлена.",
-		"description": ""
-	},
-	"panel_detail_learn_more": {
-		"message": "Подробнее",
-		"description": ""
-	},
-	"panel_about_license": {
-		"message": "Лицензионное соглашение",
-		"description": ""
-	},
-	"summary_alert": {
-		"message": "Предупреждение",
-		"description": "as in '1 ALERT'"
-	},
-	"setup_data_view_desc": {
-		"message": "Мы используем анонимную аналитику и данные Human Web, чтобы улучшить производительность Ghostery, не собирая никаких персональных данных. $LINK_START$Подробнее$LINK_END$.",
-		"description": "",
-		"placeholders": {
-			"link_start": {
-				"content": "<a href=\"https://www.ghostery.com/faqs/\" target=\"_blank\">"
-			},
-			"link_end": {
-				"content": "</a>"
-			}
-		}
-	},
-	"category_uncategorized_desc": {
-		"message": "Эти трекеры еще не были распределены по категориям.",
-		"description": ""
-	},
-	"setup_blocking_view_block_ads": {
-		"message": "Только рекламные трекеры",
-		"description": ""
-	},
-	"tooltip_smart_block_body": {
-		"message": "Автоматически блокирует и разблокирует трекеры для оптимизации работы страницы.",
-		"description": ""
-	},
-	"rewards_code_copied_toast_notification": {
-		"message": "Код приза скопирован!",
-		"description": ""
-	},
-	"panel_detail_menu_performance_title": {
-		"message": "Активность",
-		"description": ""
-	},
-	"settings_show_patterns_tooltip": {
-		"message": "URL-адреса трекера можно найти под описанием трекера после нажатия на трекер.",
-		"description": ""
-	},
-	"setup_button_sign_in": {
-		"message": "Вход",
-		"description": ""
-	},
-	"settings_blocking": {
-		"message": "Блокировка",
-		"description": ""
-	},
-	"drawer_title_enable_smart_block": {
-		"message": "Умная блокировка",
-		"description": ""
-	},
-	"refresh_and_try_again": {
-		"message": "Обновите страницу и повторите попытку",
-		"description": ""
-	},
-	"panel_help_questions_header": {
-		"message": "Вопросы и комментарии",
-		"description": ""
-	},
-	"panel_needs_reload": {
-		"message": "Режим страницы изменился.",
-		"description": ""
-	},
-	"settings_show_trackers_banner": {
-		"message": "Показывать уведомления баннера оповещений трекера в верхней части расширения",
-		"description": ""
-	},
-	"file_was_not_selected": {
-		"message": "Файл не выбран",
-		"description": ""
-	},
-	"category_audio_video_player_desc": {
-		"message": "Позволяет веб-сайтам публиковать, распространять и оптимизировать аудио- и видеоконтент.",
-		"description": "User-facing description for the Audio/Video Player tag category."
-	},
-	"consent_privacy": {
-		"message": "Требуется согласие.",
-		"description": ""
-	},
-	"password_requirements": {
-		"message": "Используйте от 8 до 50 символов.",
-		"description": ""
-	},
 	"account_creation_privacy_statement": {
-		"message": "Я согласен с порядком обращения с персональными данными Ghostery, описанном в $LINK_PS_START$Заявлении о конфиденциальности$LINK_PS_END$, и условиями, изложенными в $LINK_UA_START$Лицензионном соглашении$LINK_UA_END$.",
-		"description": "",
+		"message": "Применяются наши стандартные $LINK_TERMS_START$Условия и положения$LINK_TERMS_END$ и $LINK_UA_START$Лицензионное соглашение$LINK_UA_END$. Наше Заявление о конфиденциальности доступно $LINK_PS_START$здесь$LINK_PS_END$.",
 		"placeholders": {
 			"link_ps_end": {
 				"content": "</a>"
 			},
 			"link_ps_start": {
-				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-us/privacy-statements/ghostery-browser-extension/ghostery-browser-extension-privacy-statement/\">"
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" rel=\"noopener noreferrer\">"
 			},
 			"link_ua_end": {
 				"content": "</a>"
 			},
 			"link_ua_start": {
-				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-us/privacy-statements/ghostery-browser-extension/ghostery-browser-extension-end-user-license-agreem/\">"
-			}
-		}
-	},
-	"tooltip_custom_settings": {
-		"message": "Использовать мои выбранные настройки трекера.",
-		"description": ""
-	},
-	"setup_footer_license": {
-		"message": "Ghostery$COPY$; - это компания Cliqz. Подробнее о $LINK_START$Cliqz$LINK_END$. $COPY$Cliqz International GmbH, дочерняя компания, находящаяся в полной собственности материнской компании Cliqz GmbH. Все права защищены.",
-		"description": "",
-		"placeholders": {
-			"link_start": {
-				"content": "<a href=\"https://cliqz.com\" target=\"_blank\">"
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/privacy-statements/\" rel=\"noopener noreferrer\">"
 			},
-			"link_end": {
+			"link_terms_end": {
 				"content": "</a>"
 			},
-			"copy": {
-				"content": "&copy;"
+			"link_terms_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/privacy-statements/\" rel=\"noopener noreferrer\">"
 			}
 		}
 	},
-	"panel_detail_premium_title": {
-		"message": "Премиум Ghostery",
-		"description": ""
+	"all": {
+		"description": "Default setting in the 'filter by type' dropdown for the tag browser. Doesn't filter anything out. Should read as 'Show all'.",
+		"message": "все"
 	},
-	"panel_detail_history_title": {
-		"message": "История",
-		"description": ""
-	},
-	"box_warning_nonsecure": {
-		"message": "Небезопасные трекеры",
-		"description": ""
-	},
-	"settings_account": {
-		"message": "Учетная запись",
-		"description": ""
-	},
-	"drawer_status_enable_ad_block": {
-		"message": "Блокировка рекламы -",
-		"description": ""
-	},
-	"none": {
-		"message": "Нет",
-		"description": "Used to say that this item does not belong to any of the groups, as in \"Groups: None\" (as opposed to \"Groups: Group A, Group B, Group C\")."
-	},
-	"rewards_copy_code": {
-		"message": "скопировать код",
-		"description": ""
-	},
-	"notification_library_update": {
-		"message": "Мы обнаружили некоторые новые трекеры и добавили их в базу данных Ghostery.",
-		"description": ""
-	},
-	"settings_replace_social": {
-		"message": "Заменить заблокированные кнопки социальных сетей значком Ghostery",
-		"description": ""
-	},
-	"setup_button_exit": {
-		"message": "Выход",
-		"description": ""
-	},
-	"alert_smart_block_on": {
-		"message": "Умная блокировка включена. Блокировка трекеров будет откорректирована для оптимизации работы страницы.",
-		"description": ""
-	},
-	"setup_upgrade_desc_1": {
-		"message": "$BOLD_START$Умная блокировка$BOLD_END$ автоматически оптимизирует производительность при работе в Интернете.",
-		"description": "",
-		"placeholders": {
-			"bold_start": {
-				"content": "<strong>"
-			},
-			"bold_end": {
-				"content": "</strong>"
-			}
-		}
-	},
-	"summary_pause_ghostery_ab_pause": {
-		"message": "Пауза",
-		"description": ""
-	},
-	"enable_when_not_scanned": {
-		"message": "Для использования этой функции перейдите на другую страницу.",
-		"description": ""
-	},
-	"settings_share_human_web": {
-		"message": "Поделиться данными Human Web",
-		"description": ""
-	},
-	"panel_detail_rewards_cliqz_text": {
-		"message": "Функция уже активирована на контрольной панели Cliqz MyOffrz.",
-		"description": ""
-	},
-	"rewards_code_copied": {
-		"message": "код скопирован",
-		"description": ""
-	},
-	"panel_tracker_slow_non_secure_end": {
-		"message": " на этой странице.",
-		"description": ""
-	},
-	"setup_login_view_last_name": {
-		"message": "Фамилия (необязательно):",
-		"description": ""
-	},
-	"setup_login_view_password_error": {
-		"message": "Используйте от 8 до 50 символов.",
-		"description": ""
-	},
-	"license_unknown": {
-		"message": "неизвестно",
-		"description": ""
-	},
-	"license_generic": {
-		"message": "Стандартный текст лицензии",
-		"description": ""
-	},
-	"panel_about_panel_header": {
-		"message": "Информация о расширении для браузера Ghostery",
-		"description": ""
-	},
-	"setup_login_view_email": {
-		"message": "Email:",
-		"description": ""
-	},
-	"blocked": {
-		"message": "заблокированные трeкеры",
-		"description": "Select this to show only blocked (checked) tags in the tag browser. Should read as 'Show blocked'."
-	},
-	"setup_additional_view_adblock_desc": {
-		"message": "Блокировать всю рекламу на веб-сайтах, которые вы посещаете.",
-		"description": ""
-	},
-	"tooltip_ad_block_body": {
-		"message": "Выполняет блокировку рекламы на сайтах, которые вы посещаете.",
-		"description": ""
-	},
-	"panel_tracker_breaking_page": {
-		"message": "$COUNT$ заблокированных $TRACKERS$",
-		"description": "",
-		"placeholders": {
-			"count": {
-				"content": "$1",
-				"example": "4"
-			},
-			"trackers": {
-				"content": "$2",
-				"example": "trackers"
-			}
-		}
-	},
-	"category_customer_interaction": {
-		"message": "Взаимодействие с клиентами",
-		"description": "Ghostery organizes tags by category. This is one of several tag categories."
-	},
-	"settings_export_header": {
-		"message": "Экспортировать настройки",
-		"description": ""
-	},
-	"panel_about_privacy_statement": {
-		"message": "Заявление о конфиденциальности",
-		"description": ""
-	},
-	"license_url": {
-		"message": "Url-адрес",
-		"description": ""
-	},
-	"settings_allow_trackers": {
-		"message": "Разрешить трекеры, созданные владельцами сайтов",
-		"description": ""
-	},
-	"settings_restricted_sites": {
-		"message": "Ограниченные сайты",
-		"description": ""
-	},
-	"drawer_title_enable_anti_tracking": {
-		"message": "Улучшенный анти-трекинг",
-		"description": ""
-	},
-	"setup_blocking_view_block_nothing": {
-		"message": "Ничего",
-		"description": ""
-	},
-	"email_field_label": {
-		"message": "Email:",
-		"description": ""
-	},
-	"setup_button_previous": {
-		"message": "Назад",
-		"description": ""
-	},
-	"setup_login_view_confirm_email": {
-		"message": "Подтвердить адрес электронной почты:",
-		"description": ""
-	},
-	"password_characters_requirements": {
-		"message": "Разрешены только эти специальные символы: !@#$%^&*=+()<>{}[];:,./?",
-		"description": ""
-	},
-	"setup_choice_view_title": {
-		"message": "Пользуйтесь Интернетом с умом с помощью Ghostery! $BR$Как бы вы хотели начать?",
-		"description": "",
-		"placeholders": {
-			"br": {
-				"content": "<br />"
-			}
-		}
-	},
-	"click2play_review_form": {
-		"message": "Ghostery заблокировал обзоры от $NAME$.",
-		"description": "",
-		"placeholders": {
-			"name": {
-				"content": "$1",
-				"example": "Disqus"
-			}
-		}
-	},
-	"drawer_label_enable_ad_block": {
-		"message": "Реклама заблокирована",
-		"description": ""
-	},
-	"panel_detail_menu_history_title": {
-		"message": "История",
-		"description": ""
-	},
-	"notification_upgrade_link_v8": {
-		"message": "Показать сейчас!",
-		"description": ""
-	},
-	"white_black_list_error_invalid_url": {
-		"message": "Введите действующий URL-адрес.",
-		"description": ""
-	},
-	"license_repository": {
-		"message": "Хранилище",
-		"description": ""
-	},
-	"rewards_second_prompt": {
-		"message": "Хотели бы вы отказаться от будущих призов Ghostery?",
-		"description": ""
-	},
-	"alert_site_restricted_off": {
-		"message": "Сайт удален из черного списка.",
-		"description": ""
-	},
-	"alert_anti_track_off": {
-		"message": "Улучшенный анти-трекинг отключен. Личные данные не будут обезличены.",
-		"description": ""
-	},
-	"blocked_redirect_url_content": {
-		"message": "Этот тег появляется для переадресации на $BREAK$ $A_START$$REDIRECT_URL$$A_END$ Если ссылка выглядит правильно и вы хотите продолжить, нажмите на значок ниже, чтобы разрешить $APP$ и выполнить перезагрузку.",
-		"description": "Text appearing on block_redirect.html when a redirect is blocked and a final 'destination' URL is successfully found.",
-		"placeholders": {
-			"a_end": {
-				"content": "</a>"
-			},
-			"a_start": {
-				"content": "<a href=\"$1\" class=\"ellipsis\" title=\"$1\">"
-			},
-			"app": {
-				"content": "$2",
-				"example": "DoubleClick"
-			},
-			"break": {
-				"content": "<br>"
-			},
-			"redirect_url": {
-				"content": "$1"
-			}
-		}
+	"banner_check_your_email_title": {
+		"message": "На вашу почту была отправлена ссылка для сброса пароля."
 	},
 	"banner_no_such_account_message": {
-		"message": "Похоже, мы не можем найти эту комбинацию электронной почты и пароля. Попробовать еще раз.",
-		"description": ""
+		"message": "Похоже, мы не можем найти эту комбинацию электронной почты и пароля. Попробовать еще раз."
 	},
-	"panel_view_trackers": {
-		"message": "Просмотреть трекеры",
-		"description": ""
+	"blacklist_error_duplicate_url": {
+		"message": "Доступ к этом сайту уже ограничен."
 	},
-	"panel_menu_submit_tracker": {
-		"message": "Отправить новый трекер",
-		"description": ""
+	"blacklist_error_whitelist_url": {
+		"message": "Это сайт был удален из вашего списка \"Доверенные сайты\" и добавлен в список \"Ограниченные сайты\""
 	},
-	"setup_choice_view_learn_more": {
-		"message": "Подробнее.",
-		"description": ""
+	"blocked": {
+		"description": "Select this to show only blocked (checked) tags in the tag browser. Should read as 'Show blocked'.",
+		"message": "заблокированные трeкеры"
 	},
-	"box_display_tr": {
-		"message": "Отображать $SPAN_START$в верхней правой части$SPAN_END$",
-		"description": "",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
+	"blocked_redirect_action_always_title": {
+		"description": "Title for the 'Allow always and reload' button on the blocked redirect page.",
+		"message": "Всегда разрешать и перезагрузить."
 	},
-	"setup_title": {
-		"message": "Настройка Ghostery",
-		"description": ""
+	"blocked_redirect_action_through_once_title": {
+		"description": "Title for the 'Allow once' button on the blocked redirect page.",
+		"message": "Разрешить теги один раз, пока не будет достигнут конечный пункт назначения."
 	},
-	"invalid_email_confirmation": {
-		"message": "Адреса вашей электронной почты не совпадают.",
-		"description": ""
-	},
-	"category_comments_desc": {
-		"message": "Включает разделы комментариев для статей и обзоров продуктов.",
-		"description": "User-facing description for the Comments tag category."
-	},
-	"rewards_new_text": {
-		"message": "Найден новый приз!",
-		"description": ""
-	},
-	"create_password_field_label": {
-		"message": "Пароль:",
-		"description": ""
-	},
-	"panel_detail_performance_title": {
-		"message": "Активность веб-сайта",
-		"description": ""
-	},
-	"category_advertising": {
-		"message": "Реклама",
-		"description": "Ghostery organizes tags by category. This is one of several tag categories."
-	},
-	"settings_import_success": {
-		"message": "Ваши настройки успешно импортированы",
-		"description": ""
-	},
-	"category_site_analytics": {
-		"message": "Аналитика сайта",
-		"description": "Ghostery organizes tags by category. This is one of several tag categories."
-	},
-	"panel_help_panel_header": {
-		"message": "Помощь для расширения браузера Ghostery",
-		"description": ""
-	},
-	"settings_trust_and_restrict": {
-		"message": "Доверие и ограничение",
-		"description": ""
-	},
-	"tooltip_anti_track_body_on": {
-		"message": "Личные данные обезличены.",
-		"description": ""
-	},
-	"settings_auto_update": {
-		"message": "Включить автоматические обновления из библиотеки трекеров Ghostery",
-		"description": ""
-	},
-	"panel_menu_about": {
-		"message": "О программе",
-		"description": ""
-	},
-	"box_display_tl": {
-		"message": "Отображать $SPAN_START$в верхней левой части$SPAN_END$",
-		"description": "",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
-	},
-	"alert_ad_block_on": {
-		"message": "Усовершенствованная блокировка рекламы включена. Реклама будет заблокирована.",
-		"description": ""
-	},
-	"setup_display_view_detailed_desc": {
-		"message": "Составляет список трекеров и позволяет выполнять пользовательскую блокировку с дополнительными сведениями.",
-		"description": ""
-	},
-	"panel_detail_rewards_none_found": {
-		"message": "Призы не найдены",
-		"description": ""
-	},
-	"rewards_settings": {
-		"message": "Настройки призов Ghostery",
-		"description": ""
-	},
-	"settings_last_update": {
-		"message": "Последняя синхронизация",
-		"description": ""
-	},
-	"settings_general_settings": {
-		"message": "Общие настройки",
-		"description": ""
-	},
-	"settings_display_in": {
-		"message": "Отобразить в",
-		"description": ""
-	},
-	"setup_display_view_simple": {
-		"message": "Простое",
-		"description": ""
-	},
-	"settings_edit_account": {
-		"message": "Изменить учетную запись",
-		"description": ""
-	},
-	"category_essential_desc": {
-		"message": "Включает трекеры, критически важные для функциональности веб-сайта, такие как диспетчеры тегов и уведомления о конфиденциальности.",
-		"description": "User-facing description for the Essential tag category."
-	},
-	"last_name_field_label": {
-		"message": "Фамилия (необязательно):",
-		"description": ""
-	},
-	"settings_update_now": {
-		"message": "Обновить сейчас",
-		"description": ""
-	},
-	"alert_site_restricted": {
-		"message": "Сайт помещен в черный список. На этом веб-сайте будут заблокированы трекеры и включен анти-трекинг.",
-		"description": ""
-	},
-	"rewards_expires_in_secs": {
-		"message": "секунды",
-		"description": ""
-	},
-	"setup_header_password": {
-		"message": "Пароль",
-		"description": ""
-	},
-	"tracker_found": {
-		"message": "найдено",
-		"description": ""
-	},
-	"panel_detail_menu_premium_title": {
-		"message": "Премиум",
-		"description": ""
-	},
-	"global_settings_saved_category": {
-		"message": "Глобальные настройки категории сохранены",
-		"description": ""
-	},
-	"settings_filter_blocked_label": {
-		"message": "Заблокированные",
-		"description": ""
-	},
-	"drawer_desc_enable_smart_block": {
-		"message": "Трекеры были временно заблокированы или разблокированы.",
-		"description": ""
-	},
-	"settings_trusted_sites": {
-		"message": "Доверенные сайты",
-		"description": ""
-	},
-	"settings_seconds": {
-		"message": "сек",
-		"description": ""
-	},
-	"setup_done_view_desc": {
-		"message": "Ghostery будет спокойно жить в вашем браузере.",
-		"description": ""
-	},
-	"summary_alerts": {
-		"message": "Предупреждения",
-		"description": "as in '5 ALERTS'"
-	},
-	"panel_menu_settings": {
-		"message": "Настройки",
-		"description": ""
-	},
-	"setup_login_view_create_account": {
-		"message": "Нет учетной записи? Создать.",
-		"description": ""
-	},
-	"settings_show_purple_box_tooltip": {
-		"message": "Фиолетовое окно - это список трекеров в реальном времени, отображаемый в углу браузера. Эта функция поможет вам увидеть трекеры, если они добавлены на веб-страницу.",
-		"description": ""
-	},
-	"settings_show_purple_box": {
-		"message": "Показывать фиолетовое окно в углу браузера",
-		"description": ""
-	},
-	"category_advertising_desc": {
-		"message": "Включает в себя рекламные услуги, такие как сбор данных, поведенческий анализ или ретаргетинг.",
-		"description": "User-facing description for the Advertising tag category."
-	},
-	"settings_export_success": {
-		"message": "Ваши настройки успешно экспортированы в папку загрузок",
-		"description": ""
-	},
-	"tracker_signular": {
-		"message": "трекер",
-		"description": ""
-	},
-	"rewards_expires_in_hours": {
-		"message": "часов",
-		"description": ""
-	},
-	"settings_trusted_restricted_sites": {
-		"message": "Доверие и ограничение",
-		"description": ""
-	},
-	"box_looking": {
-		"message": "Поиск",
-		"description": ""
-	},
-	"panel_signin_success": {
-		"message": "Вы вошли в качестве ",
-		"description": ""
-	},
-	"setup_display_view_title": {
-		"message": "Какое представление вам нравится?",
-		"description": ""
-	},
-	"summary_map_these_trackers": {
-		"message": "Показать карту трекеров",
-		"description": ""
-	},
-	"tracker_description_learn_more": {
-		"message": "Перейти в полный профиль трекера",
-		"description": ""
-	},
-	"not_http_page": {
-		"message": "Убедитесь, что на вашей текущей вкладке открыта страница http или https",
-		"description": ""
-	},
-	"panel_header_verify_account": {
-		"message": "Подтверждение учетной записи",
-		"description": ""
-	},
-	"setup_additional_view_adblock_title": {
-		"message": "Усовершенствованная блокировка рекламы",
-		"description": ""
-	},
-	"settings_filter_all_label": {
-		"message": "Все трекеры",
-		"description": ""
-	},
-	"settings_highlight_trackers_tooltip": {
-		"message": "Иногда такие функции, как передача, комментирование или использование видео проигрывателей в социальных сетях, не будут работать при блокировке определенного трекера. Если вы хотите включить одну из этих заблокированных функций, щелкните этот значок на странице:",
-		"description": ""
-	},
-	"panel_detail_performance_text": {
-		"message": "Функция скоро появится.",
-		"description": ""
-	},
-	"category_essential": {
-		"message": "Важное",
-		"description": "Ghostery organizes tags by category. This is one of several tag categories."
-	},
-	"summary_description_not_scanned_2": {
-		"message": "Перейдите на другую страницу, и я выполню обещанное.",
-		"description": ""
-	},
-	"settings_import_warning": {
-		"message": "ПРЕДУПРЕЖДЕНИЕ: Это действие приведет к перезаписи ваших текущих настроек Ghostery.",
-		"description": ""
-	},
-	"panel_menu_help": {
-		"message": "Помощь",
-		"description": ""
-	},
-	"tooltip_pause": {
-		"message": "Приостановить Ghostery",
-		"description": ""
-	},
-	"settings_trackers": {
-		"message": "Трекеры",
-		"description": ""
-	},
-	"rewards_terms_conditions": {
-		"message": "Условия и положения",
-		"description": ""
-	},
-	"notification_upgrade_v8": {
-		"message": "Настройте наши потрясающие новые функции и узнайте о нашем самом большом релизе.",
-		"description": ""
-	},
-	"panel_tracker_breaking_page_end": {
-		"message": " повреждают страницу.",
-		"description": ""
-	},
-	"settings_filter_unblocked_label": {
-		"message": "Разблокированные",
-		"description": ""
-	},
-	"rewards_no": {
-		"message": "нет",
-		"description": ""
-	},
-	"settings_human_web_tooltip": {
-		"message": "Ghostery теперь реализует Human Web по умолчанию, революционную технологию, которая использует знания людей для создания более конфиденциального интернета",
-		"description": ""
-	},
-	"category_pornvertising": {
-		"message": "Реклама для взрослых",
-		"description": "Ghostery organizes tags by category. This is one of several tag categories."
-	},
-	"settings_update_up_to_date": {
-		"message": "Еще актуально",
-		"description": ""
-	},
-	"panel_tracker_warning_smartunblock_tooltip": {
-		"message": "Трекер разблокирован Smart Blocking",
-		"description": ""
-	},
-	"alert_site_trusted_off": {
-		"message": "Сайт больше не включен в белый список.",
-		"description": ""
-	},
-	"summary_show_menu": {
-		"message": "показать меню",
-		"description": ""
-	},
-	"rewards_about": {
-		"message": "О призах",
-		"description": ""
-	},
-	"category_social_media": {
-		"message": "Социальные сети",
-		"description": "Ghostery organizes tags by category. This is one of several tag categories."
-	},
-	"blocking_category_tracker_found": {
-		"message": "Найдено",
-		"description": ""
-	},
-	"tooltip_ad_block_body_on": {
-		"message": "Реклама заблокирована.",
-		"description": ""
-	},
-	"settings_sites_placeholder": {
-		"message": "example.com",
-		"description": ""
-	},
-	"setup_login_view_log_in": {
-		"message": "Уже есть учетная запись? Вход.",
-		"description": ""
-	},
-	"category_customer_interaction_desc": {
-		"message": "Включает чат, обмен сообщениями по электронной почте, поддержку клиентов и другие инструменты взаимодействия.",
-		"description": "User-facing description for the Customer Interaction tag category."
-	},
-	"panel_forgot_password": {
-		"message": "Забыли пароль?",
-		"description": ""
-	},
-	"click2play_blocked": {
-		"message": "Ghostery заблокировал $APP_NAME$.",
-		"description": "",
-		"placeholders": {
-			"app_name": {
-				"content": "$1",
-				"example": "SoundCloud"
-			}
-		}
-	},
-	"panel_help_setup": {
-		"message": "Настроить Ghostery",
-		"description": ""
-	},
-	"setup_blocking_view_block_custom": {
-		"message": "Пользовательская настройка",
-		"description": ""
-	},
-	"settings_individual_trackers_tooltip": {
-		"message": "Выберите, какие конкретные трекеры блокировать или разрешать на веб-сайте для выполнения пользовательского контроля",
-		"description": ""
-	},
-	"rewards_delete": {
-		"message": "Удалить этот приз",
-		"description": ""
-	},
-	"click2play_allow_always_tooltip": {
-		"message": "Разрешить и перезагрузить.",
-		"description": "Tooltip that appears over the 'allow always' click2play button."
-	},
-	"rewards_expires_in_days": {
-		"message": "дни",
-		"description": ""
-	},
-	"panel_tracker_block_tooltip": {
-		"message": "Заблокировать на всех сайтах",
-		"description": ""
-	},
-	"setup_button_next": {
-		"message": "Далее",
-		"description": ""
-	},
-	"setup_header_email": {
-		"message": "Email",
-		"description": ""
-	},
-	"license_information_missing": {
-		"message": "Информация о хранилище лицензии отсутствует",
-		"description": ""
-	},
-	"box_settings_expanded": {
-		"message": "Мои настройки Ghostery",
-		"description": ""
-	},
-	"rewards_first_prompt": {
-		"message": "Желаете перейти к вашим призам Ghostery?",
-		"description": ""
-	},
-	"drawer_tooltip_enable_ad_block": {
-		"message": "Выполняет блокировку рекламы на сайтах, которые вы посещаете.",
-		"description": ""
-	},
-	"panel_detail_menu_list_title": {
-		"message": "Список трекеров",
-		"description": ""
-	},
-	"forgot_password_message": {
-		"message": "Забыли пароль? Это случается со всеми. Мы отправим вам инструкции по восстановлению пароля на электронную почту.",
-		"description": ""
-	},
-	"box_options_expanded": {
-		"message": "Опции",
-		"description": ""
-	},
-	"drawer_tooltip_enable_smart_block": {
-		"message": "Автоматически блокирует и разблокирует трекеры для оптимизации работы страницы.",
-		"description": ""
-	},
-	"setup_upgrade_desc_3": {
-		"message": "$BOLD_START$Улучшенный анти-трекинг$BOLD_END$ обеспечивает дополнительную защиту ваших личных данных.",
-		"description": "",
-		"placeholders": {
-			"bold_start": {
-				"content": "<strong>"
-			},
-			"bold_end": {
-				"content": "</strong>"
-			}
-		}
-	},
-	"tooltip_trust_on": {
-		"message": "На сайте трекеры разрешены и анти-трекинг отключен. Нажмите, чтобы отменить.",
-		"description": ""
-	},
-	"settings_show_tracker_count_badge": {
-		"message": "Показывать значок счетчика трекеров на значке Ghostery в панели инструментов браузера",
-		"description": ""
-	},
-	"category_comments": {
-		"message": "Комментарии",
-		"description": "Ghostery organizes tags by category. This is one of several tag categories."
-	},
-	"pause_24_hours": {
-		"message": "на 24 часа",
-		"description": ""
-	},
-	"server_error_message": {
-		"message": "Кажется, у нас технические проблемы. Повторите попытку позже.",
-		"description": ""
-	},
-	"panel_detail_rewards_coming_soon": {
-		"message": "Функция скоро появится.",
-		"description": ""
-	},
-	"summary_pause_ghostery": {
-		"message": "Пауза",
-		"description": ""
-	},
-	"unblocked": {
-		"message": "разблокированные трeкеры",
-		"description": "Select this to show only unblocked (unchecked) tags in the tag browser. Should read as 'Show unblocked'."
-	},
-	"tracker_description_none_found": {
-		"message": "Описание трекера не найдено.",
-		"description": ""
-	},
-	"setup_login_view_password": {
-		"message": "Пароль:",
-		"description": ""
-	},
-	"panel_tracker_warning_slow_tooltip": {
-		"message": "Трекер медленный",
-		"description": ""
-	},
-	"setup_choice_view_answer_questions": {
-		"message": "Выбрать мои собственные настройки, ответив на несколько коротких вопросов.",
-		"description": ""
-	},
-	"setup_header_sign_in_hide": {
-		"message": "Скрыть область входа",
-		"description": ""
-	},
-	"setup_login_view_email_error": {
-		"message": "Извините, вам необходимо ввести настоящий адрес электронной почты.",
-		"description": ""
-	},
-	"category_pornvertising_desc": {
-		"message": "Включает рекламные технологии, предназначенные для сайтов с материалами для взрослых.",
-		"description": "User-facing description for the Adult Advertising tag category."
-	},
-	"setup_upgrade_button_go": {
-		"message": "Настроить",
-		"description": ""
-	},
-	"setup_button_skip": {
-		"message": "пропустить",
-		"description": ""
-	},
-	"pause_30_min": {
-		"message": "на 30 мин",
-		"description": ""
-	},
-	"summary_blocked": {
-		"message": "Заблокированные",
-		"description": "as in '5 (trackers) BLOCKED'"
-	},
-	"panel_help_feedback": {
-		"message": "Примите участие в опросе",
-		"description": ""
-	},
-	"license_publisher": {
-		"message": "Издатель",
-		"description": ""
-	},
-	"summary_page_not_scanned": {
-		"message": "Страница не просканирована",
-		"description": ""
-	},
-	"summary_resume_ghostery_tooltip": {
-		"message": "Работа расширения Ghostery приостановлена. Нажмите для возобновления работы.",
-		"description": ""
-	},
-	"box_settings": {
-		"message": "Настройки",
-		"description": ""
-	},
-	"panel_menu_report_broken_site": {
-		"message": "Сообщить о поврежденной странице",
-		"description": ""
-	},
-	"rewards_off": {
-		"message": "выкл",
-		"description": ""
-	},
-	"license_type": {
-		"message": "Тип(-ы) лицензии",
-		"description": ""
-	},
-	"panel_help_support": {
-		"message": "Поддержка",
-		"description": ""
-	},
-	"panel_tracker_slow_non_secure": {
-		"message": "$COUNT$ медленных и/или небезопасных $TRACKERS$",
-		"description": "",
-		"placeholders": {
-			"count": {
-				"content": "$1",
-				"example": "4"
-			},
-			"trackers": {
-				"content": "$2",
-				"example": "trackers"
-			}
-		}
-	},
-	"panel_header_sign_in": {
-		"message": "Вход",
-		"description": ""
-	},
-	"tooltip_anti_track": {
-		"message": "Улучшенный анти-трекинг",
-		"description": ""
-	},
-	"category_site_analytics_desc": {
-		"message": "Включает трекеры анализа данных, использования сайта и активности.",
-		"description": "User-facing description for the Site Analytics tag category."
-	},
-	"tooltip_resume": {
-		"message": "Возобновить работу Ghostery",
-		"description": ""
-	},
-	"license_text": {
-		"message": "Текст лицензии",
-		"description": ""
-	},
-	"settings_import_file_error": {
-		"message": "Неправильный тип файла. Выберите файл .ghost и повторите попытку.",
-		"description": ""
+	"blocked_redirect_page_title": {
+		"description": "Page title for blocked_redirect.html which appears when a redirect is blocked.",
+		"message": "Ghostery предотвратил переадресацию."
 	},
 	"blocked_redirect_prevent": {
-		"message": "Ghostery предотвратил переадресацию с  $BREAK$ $SP_O_START$$ORIGIN$$SP_END$ на $SP_D_START$$DESTINATION$$SP_END$, $BREAK$, которая является частью $A_START$$APP$$A_END$. $BREAK$",
 		"description": "Text appearing on block_redirect.html when a redirect is blocked. Should appear inside \"redirect-prevent\" div.",
+		"message": "Ghostery предотвратил переадресацию с  $BREAK$ $SP_O_START$$ORIGIN$$SP_END$ на $SP_D_START$$DESTINATION$$SP_END$, $BREAK$, которая является частью $A_START$$APP$$A_END$. $BREAK$",
 		"placeholders": {
 			"a_end": {
 				"content": "</a>"
@@ -1750,164 +88,502 @@
 			}
 		}
 	},
-	"blocking_block_all": {
-		"message": "Заблокировать все",
-		"description": ""
-	},
-	"setup_additional_view_antitrack_desc": {
-		"message": "Анонимизировать разблокированные и неизвестные трекеры для обеспечения большей защиты браузера.",
-		"description": ""
-	},
-	"setup_choice_view_legal": {
-		"message": "Устанавливая Ghostery, вы соглашаетесь с $LINK_PP_START$Политикой конфиденциальности$LINK_PP_END$ и $LINK_TERMS_START$Условиями использования$LINK_TERMS_END$ Ghostery.",
-		"description": "",
+	"blocked_redirect_url_content": {
+		"description": "Text appearing on block_redirect.html when a redirect is blocked and a final 'destination' URL is successfully found.",
+		"message": "Этот тег появляется для переадресации на $BREAK$ $A_START$$REDIRECT_URL$$A_END$ Если ссылка выглядит правильно и вы хотите продолжить, нажмите на значок ниже, чтобы разрешить $APP$ и выполнить перезагрузку.",
 		"placeholders": {
-			"link_pp_start": {
-				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" target=\"_blank\">"
-			},
-			"link_pp_end": {
+			"a_end": {
 				"content": "</a>"
 			},
-			"link_terms_start": {
-				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-end-user-license-agreement/\" target=\"_blank\">"
+			"a_start": {
+				"content": "<a href=\"$1\" class=\"ellipsis\" title=\"$1\">"
 			},
-			"link_terms_end": {
-				"content": "</a>"
+			"app": {
+				"content": "$2",
+				"example": "DoubleClick"
+			},
+			"break": {
+				"content": "<br>"
+			},
+			"redirect_url": {
+				"content": "$1"
 			}
 		}
 	},
-	"all": {
-		"message": "все",
-		"description": "Default setting in the 'filter by type' dropdown for the tag browser. Doesn't filter anything out. Should read as 'Show all'."
+	"box_dismiss_0s": {
+		"message": "Отклонять $SPAN_START$никогда$SPAN_END$",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
 	},
-	"settings_share_usage_tooltip": {
-		"message": "Мы собираем аналитику использования, чтобы лучше понять, какие функции нравятся пользователям. Например, если вы нажмете на паузу, мы соберем пинг, который даст нам знать, что вы использовали эту функцию.",
-		"description": ""
+	"box_dismiss_15s": {
+		"message": "Отклонять $SPAN_START$через 15 секунд$SPAN_END$",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
 	},
-	"summary_trust_site_active": {
-		"message": "Доверенные сайты",
-		"description": ""
+	"box_dismiss_30s": {
+		"message": "Отклонять $SPAN_START$через 30 секунд$SPAN_END$",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
 	},
-	"panel_help_contact_header": {
-		"message": "Как с нами связаться",
-		"description": ""
+	"box_dismiss_5s": {
+		"message": "Отклонять $SPAN_START$через 5 секунд$SPAN_END$",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
 	},
-	"drawer_label_enable_smart_block": {
-		"message": "Трекеры скорректированы",
-		"description": ""
+	"box_display_bl": {
+		"message": "Отображать $SPAN_START$в нижней левой части$SPAN_END$",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
 	},
-	"settings_show_patterns": {
-		"message": "Показать URL-адреса трекера",
-		"description": ""
+	"box_display_br": {
+		"message": "Отображать $SPAN_START$в нижней правой части$SPAN_END$",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
 	},
-	"blocked_redirect_action_always_title": {
-		"message": "Всегда разрешать и перезагрузить.",
-		"description": "Title for the 'Allow always and reload' button on the blocked redirect page."
+	"box_display_tl": {
+		"message": "Отображать $SPAN_START$в верхней левой части$SPAN_END$",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
 	},
-	"drawer_title_enable_ad_block": {
-		"message": "Усовершенствованная блокировка рекламы",
-		"description": ""
+	"box_display_tr": {
+		"message": "Отображать $SPAN_START$в верхней правой части$SPAN_END$",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
 	},
-	"settings_export_reserved_page_error": {
-		"message": "Ghostery не может экспортировать настройки, когда текущая страница является одной из зарезервированных страниц браузера. Перейдите на другую страницу и попробуйте еще раз.",
-		"description": ""
-	},
-	"password_field_label": {
-		"message": "Пароль",
-		"description": ""
-	},
-	"rewards_expires_in_mins": {
-		"message": "минуты",
-		"description": ""
-	},
-	"alert_ghostery_resumed": {
-		"message": "Работа расширения Ghostery возобновлена.",
-		"description": ""
-	},
-	"pause_30_min_condensed": {
-		"message": "30 мин",
-		"description": ""
-	},
-	"setup_additional_view_smartblock_desc": {
-		"message": "Автоматически блокирует и разблокирует трекеры для оптимизации работы страницы.",
-		"description": ""
-	},
-	"send_button_label": {
-		"message": "Отправить",
-		"description": ""
-	},
-	"alert_reload": {
-		"message": "Перезагрузите, чтобы увидеть изменения.",
-		"description": ""
+	"box_hide": {
+		"message": "Скрыть окно"
 	},
 	"box_hide_expanded": {
-		"message": "Скрыть фиолетовое окно",
-		"description": ""
+		"message": "Скрыть фиолетовое окно"
 	},
-	"tracker_description_getting": {
-		"message": "Получение описания трекера...",
-		"description": ""
+	"box_looking": {
+		"message": "Поиск"
 	},
-	"drawer_label_enable_anti_tracking": {
-		"message": "Трекеры сделаны анонимными",
-		"description": ""
+	"box_options_expanded": {
+		"message": "Опции"
+	},
+	"box_settings": {
+		"message": "Настройки"
+	},
+	"box_settings_expanded": {
+		"message": "Мои настройки Ghostery"
+	},
+	"box_tracker": {
+		"message": "Трекер"
+	},
+	"box_trackers": {
+		"message": "Трекеры"
+	},
+	"box_warning_slow": {
+		"message": "Медленные трекеры"
+	},
+	"box_warning_nonsecure": {
+		"message": "Небезопасные трекеры"
+	},
+	"box_warning_compatibility": {
+		"message": "Трекеры поврежденной страницы"
+	},
+	"browser_button_tooltip": {
+		"description": "Ghostery's browser button tooltip.",
+		"message": "Просмотреть результаты Ghostery"
+	},
+	"button_cancel": {
+		"description": "Part of a confirmation dialog. Clicking this cancels the action.",
+		"message": "Отмена"
+	},
+	"category_advertising": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "Реклама"
+	},
+	"category_advertising_desc": {
+		"description": "User-facing description for the Advertising tag category.",
+		"message": "Включает в себя рекламные услуги, такие как сбор данных, поведенческий анализ или ретаргетинг."
+	},
+	"category_audio_video_player": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "Аудио/видео проигрыватель"
+	},
+	"category_audio_video_player_desc": {
+		"description": "User-facing description for the Audio/Video Player tag category.",
+		"message": "Позволяет веб-сайтам публиковать, распространять и оптимизировать аудио- и видеоконтент."
+	},
+	"category_comments": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "Комментарии"
+	},
+	"category_comments_desc": {
+		"description": "User-facing description for the Comments tag category.",
+		"message": "Включает разделы комментариев для статей и обзоров продуктов."
+	},
+	"category_customer_interaction": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "Взаимодействие с клиентами"
+	},
+	"category_customer_interaction_desc": {
+		"description": "User-facing description for the Customer Interaction tag category.",
+		"message": "Включает чат, обмен сообщениями по электронной почте, поддержку клиентов и другие инструменты взаимодействия."
+	},
+	"category_essential": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "Важное"
+	},
+	"category_essential_desc": {
+		"description": "User-facing description for the Essential tag category.",
+		"message": "Включает трекеры, критически важные для функциональности веб-сайта, такие как диспетчеры тегов и уведомления о конфиденциальности."
+	},
+	"category_pornvertising": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "Реклама для взрослых"
+	},
+	"category_pornvertising_desc": {
+		"description": "User-facing description for the Adult Advertising tag category.",
+		"message": "Включает рекламные технологии, предназначенные для сайтов с материалами для взрослых."
+	},
+	"category_site_analytics": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "Аналитика сайта"
+	},
+	"category_site_analytics_desc": {
+		"description": "User-facing description for the Site Analytics tag category.",
+		"message": "Включает трекеры анализа данных, использования сайта и активности."
+	},
+	"category_social_media": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "Социальные сети"
+	},
+	"category_social_media_desc": {
+		"description": "User-facing description for the Social Media tag category.",
+		"message": "Включает функции, связанные с социальными ресурсами."
+	},
+	"category_uncategorized": {
+		"message": "Без категории"
+	},
+	"category_uncategorized_desc": {
+		"message": "Эти трекеры еще не были распределены по категориям."
+	},
+	"click2play_allow_always_tooltip": {
+		"description": "Tooltip that appears over the 'allow always' click2play button.",
+		"message": "Разрешить и перезагрузить."
+	},
+	"click2play_allow_once_button_tooltip": {
+		"description": "Tooltip that appears over the click2play replacement for 'social' buttons.",
+		"message": "Ghostery заблокировал $APP_NAME$. Нажмите здесь, чтобы разрешить однократную загрузку.",
+		"placeholders": {
+			"app_name": {
+				"content": "$1",
+				"example": "Twitter Button"
+			}
+		}
+	},
+	"click2play_allow_once_tooltip": {
+		"description": "Tooltip that appears over the 'allow once' click2play button.",
+		"message": "Разрешить один раз и перезагрузить."
+	},
+	"click2play_blocked": {
+		"message": "Ghostery заблокировал $APP_NAME$.",
+		"placeholders": {
+			"app_name": {
+				"content": "$1",
+				"example": "SoundCloud"
+			}
+		}
+	},
+	"click2play_comment_form": {
+		"message": "Ghostery заблокировал комментарии от $NAME$.",
+		"placeholders": {
+			"name": {
+				"content": "$1",
+				"example": "Disqus"
+			}
+		}
+	},
+	"click2play_review_form": {
+		"message": "Ghostery заблокировал обзоры от $NAME$.",
+		"placeholders": {
+			"name": {
+				"content": "$1",
+				"example": "Disqus"
+			}
+		}
+	},
+	"click2play_survey_form": {
+		"message": "Ghostery заблокировал опрос от $NAME$.",
+		"placeholders": {
+			"name": {
+				"content": "$1",
+				"example": "Disqus"
+			}
+		}
+	},
+	"click2play_video_form": {
+		"message": "Ghostery заблокировал видео проигрыватель $NAME$.",
+		"placeholders": {
+			"name": {
+				"content": "$1",
+				"example": "Disqus"
+			}
+		}
+	},
+	"copyright": {
+		"description": "Copyright message, shown in page footers.",
+		"message": "$C$ $YEAR$ $GHOSTERY$, часть $COMPANY_ADDRESS$",
+		"placeholders": {
+			"c": {
+				"content": "&copy;"
+			},
+			"company_address": {
+				"content": "$1",
+				"example": "GHOSTERY, Inc., Such-and-such Street, Such-and-such Floor, New York, NY, Zip Code"
+			},
+			"ghostery": {
+				"content": "<a href='https://www.ghostery.com' target='_blank'>Ghostery</a>"
+			},
+			"year": {
+				"content": "2015"
+			}
+		}
+	},
+	"email_confirm_field_label": {
+		"message": "Подтвердить адрес электронной почты:"
+	},
+	"email_field_label": {
+		"message": "Email:"
+	},
+	"error_email_forgot": {
+		"message": "Хм, я не могу найти этот адрес электронной почты. Попробовать другой?"
+	},
+	"first_name_field_label": {
+		"message": "Имя (необязательно):"
+	},
+	"forgot_password_message": {
+		"message": "Забыли пароль? Это случается со всеми. Мы отправим вам инструкции по восстановлению пароля на электронную почту."
+	},
+	"invalid_email_confirmation": {
+		"message": "Адреса вашей электронной почты не совпадают."
+	},
+	"invalid_email_create": {
+		"message": "Введите действующий адрес электронной почты."
+	},
+	"invalid_email_forgot": {
+		"message": "Извините, вам необходимо ввести настоящий адрес электронной почты."
+	},
+	"invalid_email_login": {
+		"message": "Извините, вам необходимо ввести настоящий адрес электронной почты."
+	},
+	"last_name_field_label": {
+		"message": "Фамилия (необязательно):"
+	},
+	"password_field_label_required": {
+		"message": "Требуется пароль."
 	},
 	"name": {
-		"message": "$EXTENSION_NAME$ – Конфиденциальный Блокировщик Рекламы",
 		"description": "The title of this extension (Ghostery).",
+		"message": "$EXTENSION_NAME$ – Конфиденциальный Блокировщик Рекламы",
 		"placeholders": {
 			"extension_name": {
 				"content": "Ghostery"
 			}
 		}
 	},
+	"none": {
+		"description": "Used to say that this item does not belong to any of the groups, as in \"Groups: None\" (as opposed to \"Groups: Group A, Group B, Group C\").",
+		"message": "Нет"
+	},
+	"summary_blocked": {
+		"description": "as in '5 (trackers) BLOCKED'",
+		"message": "Заблокированные"
+	},
+	"summary_alert": {
+		"description": "as in '1 ALERT'",
+		"message": "Предупреждение"
+	},
+	"summary_alerts": {
+		"description": "as in '5 ALERTS'",
+		"message": "Предупреждения"
+	},
+	"summary_page_not_scanned": {
+		"message": "Страница не просканирована"
+	},
+	"summary_description_not_scanned_1": {
+		"message": "Ghostery сканирует только \"http\" и \"https\" страницы."
+	},
+	"summary_description_not_scanned_2": {
+		"message": "Перейдите на другую страницу, и я выполню обещанное."
+	},
+	"summary_custom_settings": {
+		"message": "Пользовательские настройки"
+	},
+	"summary_trust_site": {
+		"message": "Доверять сайту"
+	},
+	"summary_trust_site_active": {
+		"message": "Доверенные сайты"
+	},
 	"summary_restrict_site": {
-		"message": "Ограничить сайт",
-		"description": ""
+		"message": "Ограничить сайт"
 	},
-	"setup_data_view_title": {
-		"message": "Желаете помочь улучшить Ghostery?",
-		"description": ""
+	"summary_restrict_site_active": {
+		"message": "Ограниченные сайты"
 	},
-	"blacklist_error_duplicate_url": {
-		"message": "Доступ к этом сайту уже ограничен.",
-		"description": ""
+	"summary_undo": {
+		"message": "Вернуть"
 	},
-	"rewards_on": {
-		"message": "вкл",
-		"description": ""
+	"summary_pause_ghostery": {
+		"message": "Приостановить Ghostery"
 	},
-	"category_uncategorized": {
-		"message": "Без категории",
-		"description": ""
+	"summary_pause_ghostery_tooltip": {
+		"message": "Приостановить работу расширения Ghostery."
 	},
-	"drawer_desc_enable_ad_block": {
-		"message": "Рекламные объявления были заблокированы.",
-		"description": ""
+	"summary_pause_ghostery_ab_pause": {
+		"message": "Пауза"
 	},
-	"settings_notify_me_tooltip": {
-		"message": "Разрешить Ghostery отображать сообщения в моем браузере, связанные с новыми функциями продукта, обновлениями и отзывами клиентов.",
-		"description": ""
+	"pause_30_min": {
+		"message": "на 30 мин"
 	},
-	"tooltip_simple": {
-		"message": "Простой вид",
-		"description": ""
+	"pause_30_min_condensed": {
+		"message": "30 мин"
 	},
-	"settings_account_email": {
-		"message": "Email",
-		"description": ""
+	"pause_1_hour": {
+		"message": "на 1 час"
 	},
-	"setup_additional_view_smartblock_title": {
-		"message": "Умная блокировка",
-		"description": ""
+	"pause_1_hour_condensed": {
+		"message": "1 ч"
 	},
-	"rewards_on_toast_notification": {
-		"message": "Призы Ghostery включены",
-		"description": ""
+	"pause_24_hours": {
+		"message": "на 24 часа"
+	},
+	"pause_24_hours_condensed": {
+		"message": "24 ч"
+	},
+	"summary_resume_ghostery": {
+		"message": "Возобновить работу Ghostery"
+	},
+	"summary_resume_ghostery_tooltip": {
+		"message": "Работа расширения Ghostery приостановлена. Нажмите для возобновления работы."
+	},
+	"summary_resume_ghostery_ab_pause": {
+		"message": "Возобновить"
+	},
+	"summary_show_menu": {
+		"message": "показать меню"
+	},
+	"summary_map_these_trackers": {
+		"message": "Показать карту трекеров"
+	},
+	"blocking_trackers": {
+		"message": "Трекеры"
+	},
+	"blocking_block_all": {
+		"message": "Заблокировать все"
+	},
+	"blocking_block_shown": {
+		"message": "Заблокировать выборку"
+	},
+	"blocking_category_tracker": {
+		"message": "Трекер"
+	},
+	"blocking_category_trackers": {
+		"message": "Трекеры"
+	},
+	"blocking_category_blocked": {
+		"description": "as in '5 (trackers) BLOCKED'",
+		"message": "Заблокированные"
+	},
+	"panel_create_account": {
+		"message": "Создать учетную запись"
+	},
+	"panel_email_verification_sent": {
+		"message": "$BOLD_HTML_STARTS$ Успешно! $BOLD_HTML_END$ Письмо для подтверждения учетной записи было отправлено на адрес $EMAIL$",
+		"placeholders": {
+			"bold_html_end": {
+				"content": "</strong>"
+			},
+			"bold_html_starts": {
+				"content": "<strong>"
+			},
+			"email": {
+				"content": "$1",
+				"example": "info@ghostery.com"
+			}
+		}
+	},
+	"panel_forgot_password": {
+		"message": "Забыли пароль?"
+	},
+	"panel_help_panel_header": {
+		"message": "Помощь для расширения браузера Ghostery"
+	},
+	"panel_help_contact_header": {
+		"message": "Как с нами связаться"
+	},
+	"panel_help_faq": {
+		"message": "Часто задаваемые вопросы"
+	},
+	"panel_help_feedback": {
+		"message": "Примите участие в опросе"
+	},
+	"panel_help_questions_header": {
+		"message": "Вопросы и комментарии"
+	},
+	"panel_help_support": {
+		"message": "Поддержка"
+	},
+	"panel_help_setup": {
+		"message": "Настроить Ghostery"
+	},
+	"panel_about_panel_header": {
+		"message": "Информация о расширении для браузера Ghostery"
 	},
 	"panel_about_version_header": {
 		"message": "Ghostery для $BROWSER$ версии $VERSION$",
-		"description": "",
 		"placeholders": {
 			"browser": {
 				"content": "$1",
@@ -1919,190 +595,1628 @@
 			}
 		}
 	},
-	"invalid_email_forgot": {
-		"message": "Извините, вам необходимо ввести настоящий адрес электронной почты.",
-		"description": ""
+	"panel_about_release_notes": {
+		"message": "См. примечания к выпуску для получения информации обо всех обновлениях"
 	},
-	"setup_done_view_title": {
-		"message": "Все готово!",
-		"description": ""
+	"panel_about_license": {
+		"message": "Лицензионное соглашение"
 	},
-	"tooltip_expert": {
-		"message": "Детальный просмотр",
-		"description": ""
+	"panel_about_privacy_statement": {
+		"message": "Заявление о конфиденциальности"
 	},
-	"tooltip_anti_track_body": {
-		"message": "Анонимизировать разблокированные и неизвестные трекеры для обеспечения большей защиты браузера.",
-		"description": ""
+	"panel_about_licenses": {
+		"message": "Лицензии на программное обеспечение"
 	},
-	"enable_when_paused": {
-		"message": "Для использования этой функции возобновите работу Ghostery.",
-		"description": ""
+	"panel_about_imprint": {
+		"message": "Выходные данные"
 	},
-	"blocked_redirect_action_through_once_title": {
-		"message": "Разрешить теги один раз, пока не будет достигнут конечный пункт назначения.",
-		"description": "Title for the 'Allow once' button on the blocked redirect page."
+	"panel_menu_settings": {
+		"message": "Настройки"
 	},
-	"panel_tracker_warning_smartblock_tooltip": {
-		"message": "Трекер заблокирован Smart Blocking",
-		"description": ""
+	"panel_menu_report_broken_site": {
+		"message": "Сообщить о поврежденной странице"
 	},
-	"enable_when_whitelisted": {
-		"message": "Для использования этой функции отмените включение сайта в список доверенных",
-		"description": ""
+	"panel_menu_submit_tracker": {
+		"message": "Отправить новый трекер"
 	},
-	"summary_undo": {
-		"message": "Вернуть",
-		"description": ""
+	"panel_menu_help": {
+		"message": "Помощь"
 	},
-	"setup_upgrade_button_later": {
-		"message": "Может быть позже",
-		"description": ""
+	"panel_menu_about": {
+		"message": "О программе"
 	},
-	"setup_upgrade_title": {
-		"message": "Добро пожаловать в Ghostery 8!",
-		"description": ""
+	"panel_menu_ghostery_subscriber": {
+		"message": "Ghostery Plus"
 	},
-	"settings_show_reload_banner": {
-		"message": "Показывать уведомления баннера перезагрузки страницы в верхней части расширения",
-		"description": ""
+	"panel_menu_signin": {
+		"message": "Вход"
 	},
-	"settings_account_name": {
-		"message": "Имя",
-		"description": ""
+	"panel_menu_signout": {
+		"message": "Выход"
 	},
-	"alert_smart_block_off": {
-		"message": "Умная блокировка отключена. Блокировка трекеров не будет автоматически корректироваться.",
-		"description": ""
+	"global_settings_saved": {
+		"message": "Глобальные настройки сохранены"
 	},
-	"panel_header_simple_view": {
-		"message": "Простой вид",
-		"description": ""
+	"global_settings_saved_tracker": {
+		"message": "Глобальные настройки трекера сохранены"
 	},
-	"setup_choice_view_one_click": {
-		"message": "Настройка одним нажатием",
-		"description": ""
+	"global_settings_saved_category": {
+		"message": "Глобальные настройки категории сохранены"
 	},
-	"invalid_email_login": {
-		"message": "Извините, вам необходимо ввести настоящий адрес электронной почты.",
-		"description": ""
+	"panel_needs_reload": {
+		"message": "Режим страницы изменился."
+	},
+	"panel_click_to_reload": {
+		"message": "Перезагрузите чтобы увидеть изменения."
+	},
+	"panel_tracker_breaking_page": {
+		"message": "$COUNT$ заблокированных $TRACKERS$",
+		"placeholders": {
+			"count": {
+				"content": "$1",
+				"example": "4"
+			},
+			"trackers": {
+				"content": "$2",
+				"example": "trackers"
+			}
+		}
+	},
+	"panel_tracker_breaking_page_end": {
+		"message": " повреждают страницу."
+	},
+	"panel_tracker_slow_non_secure": {
+		"message": "$COUNT$ медленных и/или небезопасных $TRACKERS$",
+		"placeholders": {
+			"count": {
+				"content": "$1",
+				"example": "4"
+			},
+			"trackers": {
+				"content": "$2",
+				"example": "trackers"
+			}
+		}
+	},
+	"panel_tracker_slow_non_secure_end": {
+		"message": " на этой странице."
+	},
+	"panel_tracker_total_tooltip": {
+		"message": "Общее количество обнаруженных трекеров, заблокированной рекламы и анонимизированных точек данных."
+	},
+	"panel_signin_success": {
+		"message": "Вы вошли в качестве "
+	},
+	"panel_view_trackers": {
+		"message": "Просмотреть трекеры"
+	},
+	"panel_signin_success_title": {
+		"message": "Поздравляем! Ваша учетная запись Ghostery готова к работе."
+	},
+	"panel_title_create_account": {
+		"message": "Создать учетную запись"
+	},
+	"panel_tracker_found_sources_title": {
+		"message": "Найденные URL-адреса трекера:"
 	},
 	"panel_tracker_warning_compatibility_tooltip": {
-		"message": "Заблокированный трекер повреждает страницу",
-		"description": ""
+		"message": "Заблокированный трекер повреждает страницу"
+	},
+	"panel_tracker_warning_slow_nonsecure_tooltip": {
+		"message": "Трекер медленный и небезопасный"
+	},
+	"panel_tracker_warning_nonsecure_tooltip": {
+		"message": "Трекер небезопасный"
+	},
+	"panel_tracker_warning_slow_tooltip": {
+		"message": "Трекер медленный"
+	},
+	"panel_tracker_warning_smartblock_tooltip": {
+		"message": "Трекер заблокирован Smart Blocking"
+	},
+	"panel_tracker_warning_smartunblock_tooltip": {
+		"message": "Трекер разблокирован Smart Blocking"
+	},
+	"panel_tracker_block_tooltip": {
+		"message": "Заблокировать на всех сайтах"
+	},
+	"panel_tracker_restrict_tooltip": {
+		"message": "Запретить на этом сайте"
+	},
+	"panel_tracker_trust_tooltip": {
+		"message": "Разрешить на этом сайте"
+	},
+	"panel_detail_menu_list_title": {
+		"message": "Список трекеров"
+	},
+	"panel_detail_menu_history_title": {
+		"message": "История"
+	},
+	"panel_detail_menu_performance_title": {
+		"message": "Активность"
+	},
+	"panel_detail_menu_rewards_title": {
+		"message": "Rewards"
+	},
+	"panel_detail_menu_stats_title": {
+		"message": "Историческая статистика"
+	},
+	"panel_detail_menu_premium_title": {
+		"message": "Премиум"
+	},
+	"panel_detail_learn_more": {
+		"message": "Подробнее"
+	},
+	"panel_detail_history_title": {
+		"message": "История"
+	},
+	"panel_detail_history_text": {
+		"message": "Функция скоро появится."
+	},
+	"panel_detail_performance_title": {
+		"message": "Активность веб-сайта"
+	},
+	"panel_detail_performance_text": {
+		"message": "Функция скоро появится."
+	},
+	"panel_detail_rewards_title": {
+		"message": "Ghostery Rewards"
+	},
+	"panel_detail_rewards_coming_soon": {
+		"message": "Функция скоро появится."
+	},
+	"panel_detail_rewards_cliqz_text": {
+		"message": "Функция уже активирована на контрольной панели Cliqz MyOffrz."
+	},
+	"panel_detail_rewards_loading": {
+		"message": "Загрузка Rewards…"
+	},
+	"panel_detail_rewards_none_found": {
+		"message": "Rewards не найдены"
+	},
+	"panel_detail_rewards_off": {
+		"message": "Ghostery Rewards отключены"
+	},
+	"panel_detail_premium_title": {
+		"message": "Премиум Ghostery"
+	},
+	"panel_detail_premium_text": {
+		"message": "Функция скоро появится."
+	},
+	"notification_upgrade": {
+		"message": "Наша трудолюбивая и блестящая команда хорошо потрудилась, чтобы выпустить новую версию Ghostery."
+	},
+	"notification_upgrade_link": {
+		"message": "В этой версии мы добавили новые удобные функции и исправили ошибки."
+	},
+	"notification_upgrade_title_v8": {
+		"message": "Представляем Ghostery 8!"
+	},
+	"notification_upgrade_v8": {
+		"message": "Настройте наши потрясающие новые функции и узнайте о нашем самом большом релизе."
+	},
+	"notification_upgrade_link_v8": {
+		"message": "Показать сейчас!"
+	},
+	"notification_library_update": {
+		"message": "Мы обнаружили некоторые новые трекеры и добавили их в базу данных Ghostery."
+	},
+	"notification_library_update_link": {
+		"message": "Узнайте, что нового"
+	},
+	"panel_header_sign_in": {
+		"message": "Вход"
+	},
+	"panel_header_verify_account": {
+		"message": "Подтверждение учетной записи"
+	},
+	"panel_header_simple_view": {
+		"message": "Простой вид"
+	},
+	"panel_header_detailed_view": {
+		"message": "Детальный просмотр"
+	},
+	"password_characters_requirements": {
+		"message": "Разрешены только эти специальные символы: !@#$%^&*=+()<>{}[];:,./?"
+	},
+	"password_field_label": {
+		"message": "Пароль"
+	},
+	"create_password_field_label": {
+		"message": "Пароль:"
+	},
+	"password_requirements": {
+		"message": "Используйте от 8 до 50 символов."
+	},
+	"send_button_label": {
+		"message": "Отправить"
+	},
+	"server_error_message": {
+		"message": "Кажется, у нас технические проблемы. Повторите попытку позже."
+	},
+	"email_address_in_use": {
+		"message": "Этот адрес электронной почты уже используется.  Выберите другой. "
+	},
+	"short_description": {
+		"description": "A short description of this extension (Ghostery).",
+		"message": "Ghostery - это мощное расширение для обеспечения конфиденциальности. Блокируйте рекламу, отключайте средства слежения и ускоряйте загрузку веб-сайтов."
+	},
+	"tracker_description_getting": {
+		"message": "Получение описания трекера..."
+	},
+	"tracker_description_learn_more": {
+		"message": "Перейти в полный профиль трекера"
+	},
+	"tracker_description_none_found": {
+		"message": "Описание трекера не найдено."
+	},
+	"unblocked": {
+		"description": "Select this to show only unblocked (unchecked) tags in the tag browser. Should read as 'Show unblocked'.",
+		"message": "разблокированные трeкеры"
+	},
+	"white_black_list_error_invalid_url": {
+		"message": "Введите действующий URL-адрес."
+	},
+	"whitelist_error_blacklist_url": {
+		"message": "Этот сайт был удален из вашего списка \"Ограниченные сайты\" и добавлен в список \"Доверенные сайты\"."
+	},
+	"whitelist_error_duplicate_url": {
+		"description": "Options page site whitelisting error message shown when whitelisting a URL that is already in the whitelist.",
+		"message": "Этот сайт уже включен в белый список."
+	},
+	"settings_purple_box": {
+		"message": "Фиолетовое окно"
+	},
+	"settings_notifications": {
+		"message": "Уведомления"
+	},
+	"settings_support_ghostery": {
+		"message": "Поддержка Ghostery"
+	},
+	"settings_account": {
+		"message": "Учетная запись"
+	},
+	"settings_trackers": {
+		"message": "Трекеры"
+	},
+	"settings_auto_update": {
+		"message": "Включить автоматические обновления из библиотеки трекеров Ghostery"
+	},
+	"settings_last_update": {
+		"message": "Последняя синхронизация"
+	},
+	"settings_update_now": {
+		"message": "Обновить сейчас"
+	},
+	"settings_update_success": {
+		"message": "Успешно!"
+	},
+	"settings_update_up_to_date": {
+		"message": "Еще актуально"
+	},
+	"settings_update_failed": {
+		"message": "Не удалось выполнить обновление. Повторите попытку позже."
+	},
+	"settings_show_patterns": {
+		"message": "Показать URL-адреса трекера"
+	},
+	"settings_highlight_trackers": {
+		"message": "Выделите интерактивные трекеры"
+	},
+	"settings_required_trackers": {
+		"message": "Покажите мне, когда нужно разрешить трекеру воспользоваться функциями сайта"
+	},
+	"settings_replace_social": {
+		"message": "Заменить заблокированные кнопки социальных сетей значком Ghostery"
+	},
+	"settings_blocking": {
+		"message": "Блокировка"
+	},
+	"settings_individual_trackers": {
+		"message": "Разрешайте и ограничивайте отдельные трекеры на сайте"
+	},
+	"settings_allow_trackers": {
+		"message": "Разрешить трекеры, созданные владельцами сайтов"
+	},
+	"settings_block_trackers": {
+		"message": "Блокировать новые трекеры, добавленные в Ghostery по умолчанию"
+	},
+	"settings_show_purple_box": {
+		"message": "Показывать фиолетовое окно в углу браузера"
+	},
+	"settings_dismiss_after": {
+		"message": "Отклонить через"
+	},
+	"settings_display_in": {
+		"message": "Отобразить в"
+	},
+	"settings_bottom_right_corner": {
+		"message": "Нижнем правом углу"
+	},
+	"settings_bottom_left_corner": {
+		"message": "Нижнем левом углу"
+	},
+	"settings_top_right_corner": {
+		"message": "Верхнем правом углу"
+	},
+	"settings_top_left_corner": {
+		"message": "Верхнем левом углу"
+	},
+	"settings_never": {
+		"message": "Никогда"
+	},
+	"settings_seconds": {
+		"message": "сек"
+	},
+	"settings_hide_alert_trusted": {
+		"message": "Скрыть фиолетовое окно на доверенных веб-сайтах"
+	},
+	"settings_notify_me": {
+		"message": "Уведомить меня, когда Ghostery:"
+	},
+	"settings_announcements": {
+		"message": "Делает объявление"
+	},
+	"settings_new_features": {
+		"message": "Выпускает новые функции"
+	},
+	"settings_new_trackers": {
+		"message": "Добавляет новые трекеры в свою библиотеку трекеров"
+	},
+	"settings_show_reload_banner": {
+		"message": "Показывать уведомления баннера перезагрузки страницы в верхней части расширения"
+	},
+	"settings_show_trackers_banner": {
+		"message": "Показывать уведомления баннера оповещений трекера в верхней части расширения"
+	},
+	"settings_show_tracker_count_badge": {
+		"message": "Показывать значок счетчика трекеров на значке Ghostery в панели инструментов браузера"
+	},
+	"settings_support_ghostery_by": {
+		"message": "Поддержать Ghostery"
+	},
+	"settings_share_usage": {
+		"message": "Поделиться аналитикой использования расширения"
+	},
+	"settings_share_human_web": {
+		"message": "Поделиться данными Human Web"
+	},
+	"settings_allow_offers": {
+		"message": "Участие в Ghostery Rewards"
+	},
+	"settings_signin_create_header": {
+		"message": "Войти / Создать учетную запись"
+	},
+	"settings_sign_create_text": {
+		"message": "Настройки из вашей учетной записи будут синхронизироваться с этим устройством. Создайте учетную запись, чтобы легко синхронизировать настройки Ghostery на всех устройствах и платформах."
+	},
+	"settings_account_name": {
+		"message": "Имя"
+	},
+	"settings_account_email": {
+		"message": "Email"
+	},
+	"settings_edit_account": {
+		"message": "Изменить учетную запись"
+	},
+	"settings_export_header": {
+		"message": "Экспортировать настройки"
+	},
+	"settings_export_text": {
+		"message": "Сохраните копию настроек Ghostery и переместите ее на другой компьютер."
+	},
+	"settings_export_success": {
+		"message": "Ваши настройки успешно экспортированы в папку загрузок"
+	},
+	"settings_export_error": {
+		"message": "Не удалось выполнить экспорт ваших настроек. Повторите попытку."
+	},
+	"settings_export_reserved_page_error": {
+		"message": "Ghostery не может экспортировать настройки, когда текущая страница является одной из зарезервированных страниц браузера. Перейдите на другую страницу и попробуйте еще раз."
+	},
+	"settings_import_header": {
+		"message": "Импортировать настройки"
+	},
+	"settings_import_text": {
+		"message": "Выберите файл резервной копии .ghost."
+	},
+	"settings_import_warning": {
+		"message": "ПРЕДУПРЕЖДЕНИЕ: Это действие приведет к перезаписи ваших текущих настроек Ghostery."
+	},
+	"settings_import_success": {
+		"message": "Ваши настройки успешно импортированы"
+	},
+	"settings_import_dialog_error": {
+		"message": "Ghostery не может отобразить просмотр диалога, когда текущая страница является одной из зарезервированных страниц браузера. Перейдите на другую страницу и попробуйте еще раз."
+	},
+	"settings_import_file_error": {
+		"message": "Неправильный тип файла. Выберите файл .ghost и повторите попытку."
+	},
+	"browse_button_label": {
+		"message": "Обзор..."
+	},
+	"select_file_for_import": {
+		"message": "Выберите файл .ghost для импорта."
+	},
+	"file_was_not_selected": {
+		"message": "Файл не выбран"
+	},
+	"refresh_and_try_again": {
+		"message": "Обновите страницу и повторите попытку"
+	},
+	"not_http_page": {
+		"message": "Убедитесь, что на вашей текущей вкладке открыта страница http или https"
+	},
+	"settings_show_patterns_tooltip": {
+		"message": "URL-адреса трекера можно найти под описанием трекера после нажатия на трекер."
+	},
+	"settings_highlight_trackers_tooltip": {
+		"message": "Иногда такие функции, как передача, комментирование или использование видео проигрывателей в социальных сетях, не будут работать при блокировке определенного трекера. Если вы хотите включить одну из этих заблокированных функций, щелкните этот значок на странице:"
+	},
+	"settings_individual_trackers_tooltip": {
+		"message": "Выберите, каким конкретным трекерам всегда доверять или всегда блокировать на определенном веб-сайте."
+	},
+	"settings_allow_trackers_tooltip": {
+		"message": "Например, блокировка трекера Facebook на странице facebook.com может нарушить работу веб-сайта."
+	},
+	"settings_show_purple_box_tooltip": {
+		"message": "Фиолетовое окно - это список трекеров в реальном времени, отображаемый в углу браузера. Эта функция поможет вам увидеть трекеры, если они добавлены на веб-страницу."
+	},
+	"settings_notify_me_tooltip": {
+		"message": "Разрешить Ghostery отображать сообщения в моем браузере, связанные с новыми функциями продукта, обновлениями и отзывами клиентов."
+	},
+	"settings_share_usage_tooltip": {
+		"message": "Мы собираем аналитику использования, чтобы лучше понять, какие функции нравятся пользователям. Например, если вы нажмете на паузу, мы соберем пинг, который даст нам знать, что вы использовали эту функцию."
+	},
+	"settings_human_web_tooltip": {
+		"message": "Ghostery теперь реализует Human Web по умолчанию, революционную технологию, которая использует знания людей для создания более конфиденциального интернета"
+	},
+	"settings_offers_tooltip": {
+		"message": "Ghostery Rewards - это конфиденциальная функция, которая предоставляет вам скидки и специальные предложения от наших компаний-партнеров."
+	},
+	"settings_opt_in": {
+		"message": "Принять участие / отказаться"
+	},
+	"settings_global_blocking": {
+		"message": "Глобальная блокировка"
+	},
+	"settings_trust_and_restrict": {
+		"message": "Доверие и ограничение"
+	},
+	"settings_general_settings": {
+		"message": "Общие настройки"
+	},
+	"settings_searh_by_tracker": {
+		"message": "Поиск по трекеру"
+	},
+	"page_load": {
+		"message": "Загрузка страницы"
 	},
 	"trackers_blocked": {
-		"message": "Заблокированные трекеры:",
-		"description": ""
+		"message": "Заблокированные трекеры:"
 	},
-	"rewards_expires_in": {
-		"message": "Истекает через $COUNT$ $TYPE$",
-		"description": "example: Expires in 8 minutes. TYPE will be rewards_expires_in_TYPE listed below.",
+	"settings_trusted_restricted_sites": {
+		"message": "Доверие и ограничение"
+	},
+	"settings_trusted_sites": {
+		"message": "Доверенные сайты"
+	},
+	"settings_sites_placeholder": {
+		"message": "example.com"
+	},
+	"settings_restricted_sites": {
+		"message": "Ограниченные сайты"
+	},
+	"settings_trusted_sites_description": {
+		"message": "Сайты, перечисленные здесь, будут являться доверенными с разблокированием всех трекеров."
+	},
+	"settings_restricted_sites_description": {
+		"message": "Сайты, перечисленные здесь, будут являться запрещенными с блокировкой всех трекеров."
+	},
+	"expand_all": {
+		"message": "Развернуть все"
+	},
+	"collapse_all": {
+		"message": "Свернуть все"
+	},
+	"blocking_category_tracker_found": {
+		"message": "Найдено"
+	},
+	"drawer_title_enable_anti_tracking": {
+		"message": "Улучшенный анти-трекинг"
+	},
+	"drawer_tooltip_enable_anti_tracking": {
+		"message": "Анонимизировать разблокированные и неизвестные трекеры для обеспечения большей защиты браузера. На рисунке показано, сколько измерительных точек было удалено на сайте."
+	},
+	"drawer_label_enable_anti_tracking": {
+		"message": "Трекеры сделаны анонимными"
+	},
+	"drawer_desc_enable_anti_tracking": {
+		"message": "Частные измерительные точки удалены."
+	},
+	"drawer_status_enable_anti_tracking": {
+		"message": "Анти-трекинг -"
+	},
+	"drawer_title_enable_ad_block": {
+		"message": "Усовершенствованная блокировка рекламы"
+	},
+	"drawer_tooltip_enable_ad_block": {
+		"message": "Выполняет блокировку рекламы на сайтах, которые вы посещаете."
+	},
+	"drawer_label_enable_ad_block": {
+		"message": "Реклама заблокирована"
+	},
+	"drawer_desc_enable_ad_block": {
+		"message": "Рекламные объявления были заблокированы."
+	},
+	"drawer_status_enable_ad_block": {
+		"message": "Блокировка рекламы -"
+	},
+	"drawer_title_enable_smart_block": {
+		"message": "Умная блокировка"
+	},
+	"drawer_tooltip_enable_smart_block": {
+		"message": "Автоматически блокирует и разблокирует трекеры для оптимизации работы страницы."
+	},
+	"drawer_label_enable_smart_block": {
+		"message": "Трекеры скорректированы"
+	},
+	"drawer_desc_enable_smart_block": {
+		"message": "Трекеры были временно заблокированы или разблокированы."
+	},
+	"drawer_status_enable_smart_block": {
+		"message": "Умная блокировка -"
+	},
+	"drawer_on": {
+		"message": "Вкл"
+	},
+	"drawer_off": {
+		"message": "Выкл"
+	},
+	"blocking_unblock_all": {
+		"message": "Разблокировать все"
+	},
+	"blocking_unblock_shown": {
+		"message": "Разблокировать выборку"
+	},
+	"settings_filter_all_label": {
+		"message": "Все трекеры"
+	},
+	"settings_filter_blocked_label": {
+		"message": "Заблокированные"
+	},
+	"settings_filter_unblocked_label": {
+		"message": "Разблокированные"
+	},
+	"settings_filter_new_label": {
+		"message": "Новые трекеры"
+	},
+	"settings_filter_all": {
+		"message": "Все трекеры"
+	},
+	"settings_filter_blocked": {
+		"message": "Заблокированные"
+	},
+	"settings_filter_unblocked": {
+		"message": "Разблокированные"
+	},
+	"settings_filter_new": {
+		"message": "Новые трекеры"
+	},
+	"alert_ghostery_paused": {
+		"message": "Работа расширения Ghostery приостановлена."
+	},
+	"alert_ghostery_resumed": {
+		"message": "Работа расширения Ghostery возобновлена."
+	},
+	"alert_anti_track_on": {
+		"message": "Улучшенный анти-трекинг включен. Личные данные будут обезличены."
+	},
+	"alert_anti_track_off": {
+		"message": "Улучшенный анти-трекинг отключен. Личные данные не будут обезличены."
+	},
+	"alert_ad_block_on": {
+		"message": "Усовершенствованная блокировка рекламы включена. Реклама будет заблокирована."
+	},
+	"alert_ad_block_off": {
+		"message": "Усовершенствованная блокировка рекламы отключена. Реклама не будет заблокирована."
+	},
+	"alert_smart_block_on": {
+		"message": "Умная блокировка включена. Блокировка трекеров будет откорректирована для оптимизации работы страницы."
+	},
+	"alert_smart_block_off": {
+		"message": "Умная блокировка отключена. Блокировка трекеров не будет автоматически корректироваться."
+	},
+	"alert_reload": {
+		"message": "Перезагрузите, чтобы увидеть изменения."
+	},
+	"alert_site_trusted": {
+		"message": "Сайт включен в белый список. На этом веб-сайте трекеры будут разрешены и анти-трекинг отключен."
+	},
+	"alert_site_trusted_off": {
+		"message": "Сайт больше не включен в белый список."
+	},
+	"alert_site_restricted": {
+		"message": "Сайт помещен в черный список. На этом веб-сайте будут заблокированы трекеры и включен анти-трекинг."
+	},
+	"alert_site_restricted_off": {
+		"message": "Сайт удален из черного списка."
+	},
+	"tooltip_anti_track": {
+		"message": "Улучшенный анти-трекинг"
+	},
+	"tooltip_anti_track_body": {
+		"message": "Анонимизировать разблокированные и неизвестные трекеры для обеспечения большей защиты браузера."
+	},
+	"tooltip_anti_track_body_on": {
+		"message": "Личные данные обезличены."
+	},
+	"tooltip_body_in_cliqz": {
+		"message": "Функция уже активирована в Cliqz по умолчанию."
+	},
+	"tooltip_ad_block": {
+		"message": "Усовершенствованная блокировка рекламы"
+	},
+	"tooltip_ad_block_body": {
+		"message": "Выполняет блокировку рекламы на сайтах, которые вы посещаете."
+	},
+	"tooltip_ad_block_body_on": {
+		"message": "Реклама заблокирована."
+	},
+	"tooltip_smart_block": {
+		"message": "Умная блокировка"
+	},
+	"tooltip_smart_block_body": {
+		"message": "Автоматически блокирует и разблокирует трекеры для оптимизации работы страницы."
+	},
+	"tooltip_smart_block_body_on": {
+		"message": "Блокировка трекеров откорректирована для оптимизации работы страницы."
+	},
+	"tooltip_trust": {
+		"message": "Всегда разрешать трекеры на этом сайте."
+	},
+	"tooltip_trust_on": {
+		"message": "На сайте трекеры разрешены и анти-трекинг отключен. Нажмите, чтобы отменить."
+	},
+	"tooltip_restrict": {
+		"message": "Всегда блокировать трекеры на этом сайте."
+	},
+	"tooltip_restrict_on": {
+		"message": "На сайте трекеры заблокированы и включен анти-трекинг. Нажмите, чтобы отменить."
+	},
+	"tooltip_custom_settings": {
+		"message": "Использовать мои выбранные настройки трекера."
+	},
+	"tooltip_pause": {
+		"message": "Приостановить Ghostery"
+	},
+	"tooltip_resume": {
+		"message": "Возобновить работу Ghostery"
+	},
+	"tooltip_expert": {
+		"message": "Детальный просмотр"
+	},
+	"tooltip_simple": {
+		"message": "Простой вид"
+	},
+	"license_module": {
+		"message": "Модуль"
+	},
+	"license_repository": {
+		"message": "Хранилище"
+	},
+	"license_information_missing": {
+		"message": "Информация о хранилище лицензии отсутствует"
+	},
+	"license_type": {
+		"message": "Тип(-ы) лицензии"
+	},
+	"license_publisher": {
+		"message": "Издатель"
+	},
+	"license_url": {
+		"message": "Url-адрес"
+	},
+	"license_email": {
+		"message": "Email"
+	},
+	"license_text": {
+		"message": "Текст лицензии"
+	},
+	"license_unknown": {
+		"message": "неизвестно"
+	},
+	"license_generic": {
+		"message": "Стандартный текст лицензии"
+	},
+	"license_licenses": {
+		"message": "Лицензии"
+	},
+	"license_footer": {
+		"message": "Ghostery$COPY$; - это компания Cliqz. Подробнее о $LINK_START$Cliqz$LINK_END$. $COPY$Cliqz International GmbH, дочерняя компания, находящаяся в полной собственности материнской компании Cliqz GmbH. Все права защищены.",
+		"placeholders": {
+			"link_start": {
+				"content": "<a href=\"https://cliqz.com\" target=\"_blank\">"
+			},
+			"link_end": {
+				"content": "</a>"
+			},
+			"copy": {
+				"content": "&copy;"
+			}
+		}
+	},
+	"hub_side_navigation_home": {
+		"message": "Домашняя страница"
+	},
+	"hub_side_navigation_setup": {
+		"message": "Пользовательская настройка"
+	},
+	"hub_side_navigation_tutorial": {
+		"message": "Пройти обучение"
+	},
+	"hub_side_navigation_supporter": {
+		"message": "Получить Ghostery Plus"
+	},
+	"hub_side_navigation_rewards": {
+		"message": "Попробуйте Ghostery Rewards"
+	},
+	"hub_side_navigation_products": {
+		"message": "Посмотреть другие продукты Ghostery"
+	},
+	"hub_side_navigation_create_account": {
+		"message": "Создать учетную запись"
+	},
+	"hub_side_navigation_log_in": {
+		"message": "Вход"
+	},
+	"hub_side_navigation_log_out": {
+		"message": "Выход"
+	},
+	"hub_home_page_title": {
+		"message": "Ghostery Hub - Домашний экран"
+	},
+	"hub_home_header_text": {
+		"message": "Ghostery готов к работе!"
+	},
+	"hub_home_header_tagline": {
+		"message": "Теперь вы защищены с помощью наших настроек по умолчанию."
+	},
+	"hub_home_header_tagline_2": {
+		"message": "Войти в Интернет!"
+	},
+	"hub_home_header_checkbox_label": {
+		"message": "Делитесь дополнительными анонимными аналитическими данными, чтобы улучшить производительность Ghostery."
+	},
+	"hub_home_header_info": {
+		"message": "Новые пользователи решили принять участие в Human Web и Ghostery Rewards. Вы можете изменить эти параметры в пользовательских настройках или в расширении."
+	},
+	"hub_home_header_info_link": {
+		"message": "Подробнее."
+	},
+	"hub_home_subheader_optimize": {
+		"message": "Оптимизируйте работу Ghostery"
+	},
+	"hub_home_subheader_create_account": {
+		"message": "Создать учетную запись"
+	},
+	"hub_home_feature_tutorial_title": {
+		"message": "Пройти обучение"
+	},
+	"hub_home_feature_tutorial_text": {
+		"message": "Знакомство с основными функциями Ghostery."
+	},
+	"hub_home_feature_tutorial_button": {
+		"message": "Начать"
+	},
+	"hub_home_feature_tutorial_button_alt": {
+		"message": "Обучение завершено"
+	},
+	"hub_home_feature_setup_title": {
+		"message": "Пользовательская настройка"
+	},
+	"hub_home_feature_setup_text": {
+		"message": "Редактируйте настройки и параметры блокировки."
+	},
+	"hub_home_feature_setup_button": {
+		"message": "Изменить настройки"
+	},
+	"hub_home_feature_setup_button_alt": {
+		"message": "Пользовательская настройка завершена"
+	},
+	"hub_home_feature_supporter_text": {
+		"message": "Обновитесь до Ghostery Plus и разблокируйте специальные функции."
+	},
+	"hub_home_feature_supporter_button": {
+		"message": "Получить Ghostery Plus"
+	},
+	"hub_home_feature_supporter_button_alt": {
+		"message": "Уже подписаны"
+	},
+	"hub_setup_page_title": {
+		"message": "Ghostery Hub - Настройка"
+	},
+	"hub_setup_page_title_blocking": {
+		"message": "Ghostery Hub - Настройка блокировки"
+	},
+	"hub_setup_page_title_antisuite": {
+		"message": "Ghostery Hub - Настройка анти-приложений"
+	},
+	"hub_setup_page_title_humanweb": {
+		"message": "Ghostery Hub - Настройка Human Web"
+	},
+	"hub_setup_page_title_done": {
+		"message": "Ghostery Hub - Завершение настройки"
+	},
+	"hub_setup_header_title_blocking": {
+		"message": "Ghostery может блокировать трекеры, чтобы сделать вашу работу в Интернете более простой, быстрой и безопасной.$NEW_LINE$Что вы хотите заблокировать?",
+		"placeholders": {
+			"new_line": {
+				"content": "<br />"
+			}
+		}
+	},
+	"hub_setup_header_title_antisuite": {
+		"message": "Хотели бы вы работать в Интернете с умом, используя наши рекомендуемые функции?"
+	},
+	"hub_setup_header_title_humanweb": {
+		"message": "Желаете помочь улучшить Ghostery?"
+	},
+	"hub_setup_header_title_done": {
+		"message": "Пользовательская настройка завершена!"
+	},
+	"hub_setup_exit_flow": {
+		"message": "Выйти из пользовательской настройки"
+	},
+	"hub_setup_nav_previous": {
+		"message": "Назад"
+	},
+	"hub_setup_nav_next": {
+		"message": "Далее"
+	},
+	"hub_setup_nav_done": {
+		"message": "Готово"
+	},
+	"hub_setup_enter_modal_text": {
+		"message": "Введение пользовательских настроек перезапишет предыдущие настройки Ghostery. Желаете продолжить?"
+	},
+	"hub_setup_modal_button_no": {
+		"message": "Нет"
+	},
+	"hub_setup_modal_button_yes": {
+		"message": "Да"
+	},
+	"hub_setup_modal_button_ask_again": {
+		"message": "Не спрашивайте меня снова"
+	},
+	"hub_setup_blocking_text_recommended": {
+		"message": "Блокировка по умолчанию"
+	},
+	"hub_setup_blocking_description_recommended": {
+		"message": "Рекламные, аналитические трекеры и трекеры взрослой рекламы заблокированы"
+	},
+	"hub_setup_blocking_text_nothing": {
+		"message": "Ничего не блокировать"
+	},
+	"hub_setup_blocking_description_nothing": {
+		"message": "Никакие трекеры не заблокированы"
+	},
+	"hub_setup_blocking_text_everything": {
+		"message": "Блокировать все"
+	},
+	"hub_setup_blocking_description_everything": {
+		"message": "Все трекеры заблокированы"
+	},
+	"hub_setup_blocking_text_custom": {
+		"message": "Выбрать из списка"
+	},
+	"hub_setup_blocking_description_custom": {
+		"message": "Выберите трекеры для блокировки"
+	},
+	"hub_setup_antisuite_name_antitracking": {
+		"message": "Улучшенный анти-трекинг"
+	},
+	"hub_setup_antisuite_description_antitracking": {
+		"message": "Анонимизировать разблокированные и неизвестные трекеры для обеспечения большей защиты браузера."
+	},
+	"hub_setup_adblock_name_adblocking": {
+		"message": "Усовершенствованная блокировка рекламы"
+	},
+	"hub_setup_adblock_description_adblocking": {
+		"message": "Выполняет блокировку рекламы на сайтах, которые вы посещаете."
+	},
+	"hub_setup_smartblocking_name_smartblocking": {
+		"message": "Умная блокировка"
+	},
+	"hub_setup_smartblocking_description_smartblocking": {
+		"message": "Автоматически блокирует и разблокирует трекеры для оптимизации работы страницы."
+	},
+	"hub_setup_ghosteryrewards_name_rewards": {
+		"message": "Rewards"
+	},
+	"hub_setup_ghosteryrewards_description_rewards": {
+		"message": "Разблокируйте специальные возможности для работы в Интернете и совершайте покупки без предоставления данных."
+	},
+	"hub_setup_antisuite_feature_enabled": {
+		"message": "Включено"
+	},
+	"hub_setup_humanweb_header": {
+		"message": "Мы используем обезличенные данные Human Web для улучшения производительности Ghostery. Никогда не осуществляется сбор личных данных. $LINK_LM_START$Подробнее$LINK_LM_END$",
+		"placeholders": {
+			"link_lm_start": {
+				"content": "<a href=\"https://www.ghostery.com/faqs/human-web-data-collected/\" target=\"_blank\" rel=\"noopener noreferrer\">"
+			},
+			"link_lm_end": {
+				"content": "</a>"
+			}
+		}
+	},
+	"hub_setup_humanweb_label": {
+		"message": "Поддержать Ghostery, поделившись этой информацией."
+	},
+	"hub_setup_ready_heading": {
+		"message": "Оптимизируйте работу Ghostery"
+	},
+	"hub_setup_feature_tutorial_title": {
+		"message": "Пройти обучение"
+	},
+	"hub_setup_feature_tutorial_description": {
+		"message": "Знакомство с основными функциями Ghostery."
+	},
+	"hub_setup_feature_tutorial_button": {
+		"message": "Начать"
+	},
+	"hub_setup_feature_supporter_title": {
+		"message": "Получить Ghostery Plus"
+	},
+	"hub_setup_feature_supporter_description": {
+		"message": "Поддержите нас и разблокируйте специальные функции."
+	},
+	"hub_setup_feature_supporter_button": {
+		"message": "Поддержка"
+	},
+	"hub_setup_feature_products_title": {
+		"message": "Посмотреть другие продукты Ghostery"
+	},
+	"hub_setup_feature_products_description": {
+		"message": "Обеспечьте свою полную защиту с помощью нашего пакета программ, обеспечивающего полную конфиденциальность!"
+	},
+	"hub_setup_feature_products_button": {
+		"message": "Да, пожалуйста!"
+	},
+	"hub_tutorial_page_title": {
+		"message": "Ghostery Hub - Руководство"
+	},
+	"hub_tutorial_page_title_video": {
+		"message": "Ghostery Hub - Руководство. Обзор"
+	},
+	"hub_tutorial_page_title_trackerlist": {
+		"message": "Ghostery Hub - Руководство. Трекеры"
+	},
+	"hub_tutorial_page_title_blocking": {
+		"message": "Ghostery Hub - Руководство. Блокировка"
+	},
+	"hub_tutorial_page_title_layout": {
+		"message": "Ghostery Hub - Руководство. Схема"
+	},
+	"hub_tutorial_page_title_trust": {
+		"message": "Ghostery Hub - Руководство. Добавление в список доверенных сайтов и их ограничение"
+	},
+	"hub_tutorial_page_title_anti_suite": {
+		"message": "Ghostery Hub - Руководство. Дополнительные функции"
+	},
+	"hub_tutorial_exit_flow": {
+		"message": "Выйти из руководства"
+	},
+	"hub_tutorial_nav_previous": {
+		"message": "Назад"
+	},
+	"hub_tutorial_nav_next": {
+		"message": "Далее"
+	},
+	"hub_tutorial_nav_done": {
+		"message": "Готово"
+	},
+	"hub_tutorial_simple_view": {
+		"message": "Простой вид"
+	},
+	"hub_tutorial_detailed_view": {
+		"message": "Детальный просмотр"
+	},
+	"hub_tutorial_detailed_expanded_view": {
+		"message": "Детальный расширенный просмотр"
+	},
+	"hub_tutorial_video_title": {
+		"message": "Что Ghostery может сделать для вас"
+	},
+	"hub_tutorial_video_tagline": {
+		"message": "Блокирует трекеры и рекламу, обеспечивает конфиденциальность и ускоряет загрузку страниц."
+	},
+	"hub_tutorial_trackerlist_title": {
+		"message": "Список трекеров"
+	},
+	"hub_tutorial_trackerlist_tagline": {
+		"message": "Ghostery помогает вам оставаться в курсе того, какие компании отслеживают ваши действия, с помощью списка трекеров на каждом посещаемом вами сайте. "
+	},
+	"hub_tutorial_blocking_title": {
+		"message": "Выбирайте что и как блокировать"
+	},
+	"hub_tutorial_blocking_tagline": {
+		"message": "Контролируйте свою конфиденциальность и работу в Интернете путем блокировки и разблокировки трекеров в списке."
+	},
+	"hub_tutorial_blocking_allow": {
+		"message": "Всегда разрешать трекеры на текущем сайте."
+	},
+	"hub_tutorial_blocking_block": {
+		"message": "Всегда блокировать трекеры на текущем сайте."
+	},
+	"hub_tutorial_blocking_block_always": {
+		"message": "Всегда блокировать трекеры на всех сайтах."
+	},
+	"hub_tutorial_layout_title": {
+		"message": "Упрощенный и подробный режим отображения"
+	},
+	"hub_tutorial_layout_tagline": {
+		"message": "Переключайтесь между упрощенным и детальным видом в зависимости от того, что вы хотите видеть в Ghostery."
+	},
+	"hub_tutorial_trust_title": {
+		"message": "Разрешить и ограничить сайты"
+	},
+	"hub_tutorial_trust_tagline": {
+		"message": "Добавляйте веб-сайты в белый или черный список одним нажатием."
+	},
+	"hub_tutorial_trust_trust_site": {
+		"message": "Всегда разрешать трекеры на сайте."
+	},
+	"hub_tutorial_trust_restrict_site": {
+		"message": "Всегда блокировать трекеры на сайте."
+	},
+	"hub_tutorial_antisuite_title": {
+		"message": "Получите дополнительную защиту и автоматизированное управление с помощью наших расширенных функций безопасности:"
+	},
+	"hub_tutorial_antisuite_antitracking_title": {
+		"message": "Улучшенный анти-трекинг"
+	},
+	"hub_tutorial_antisuite_antitracking_description": {
+		"message": "Удалите точки данных, которые веб-сайты могут использовать для вашей идентификации."
+	},
+	"hub_tutorial_antisuite_adblocking_title": {
+		"message": "Усовершенствованная блокировка рекламы"
+	},
+	"hub_tutorial_antisuite_adblocking_description": {
+		"message": "Выполняет блокировку рекламы на страницах, которые вы посещаете."
+	},
+	"hub_tutorial_antisuite_smartblocking_title": {
+		"message": "Умная блокировка"
+	},
+	"hub_tutorial_antisuite_smartblocking_description": {
+		"message": "Автоматически блокирует и разблокирует трекеры для оптимизации работы страницы."
+	},
+	"hub_products_page_title" : {
+		"message": "Ghostery Hub - Попробуйте другие продукты Ghostery"
+	},
+	"hub_products_header_title" : {
+		"message": "Пользуйтесь Интернетом с умом с помощью продуктов Ghostery!"
+	},
+	"hub_products_header_description": {
+		"message": "Находитесь под защитой и улучшайте свой опыт работы в Интернете с помощью нашего комплекса программ, обеспечивающего полную конфиденциальность."
+	},
+	"hub_products_main_promo_title": {
+		"message": "Конфиденциальный браузер для мобильных устройств"
+	},
+	"hub_products_main_promo_description": {
+		"message": "Работайте в Интернете без рекламы и трекеров на ходу с помощью нашего обновленного и улучшенного браузера для мобильных устройств. Теперь в комплект входит конфиденциальная поисковая система!"
+	},
+	"hub_products_second_promo_title": {
+		"message": "Ghostery Start Tab"
+	},
+	"hub_products_second_promo_description": {
+		"message": "Поиск в конфиденциальном режиме, просмотр статистики трекера и управление Rewards с помощью нашей новой функции вкладки. Будет доступно скоро!"
+	},
+	"hub_products_third_promo_title": {
+		"message": "Ghostery Lite"
+	},
+	"hub_products_third_promo_description": {
+		"message": "Обеспечивает конфиденциальность в Интернете и избавляет от рекламы с помощью самого простого нашего продукта, разработанного специально для Safari."
+	},
+	"hub_rewards_page_title": {
+		"message": "Ghostery Hub - Rewards"
+	},
+	"hub_rewards_header_title": {
+		"message": "Попробуйте Ghostery Rewards!"
+	},
+	"hub_rewards_header_description": {
+		"message": "Наша новая функция Rewards предлагает мощный, полностью конфиденциальный новый способ получения настоящих скидок в Интернете. Включите ее и убедитесь сами!"
+	},
+	"hub_rewards_header_learn_more": {
+		"message": "Подробнее"
+	},
+	"hub_rewards_experience_title": {
+		"message": "Более эффективный шоппинг"
+	},
+	"hub_rewards_experience_description": {
+		"message": "Вам предоставляются ценные Rewards, когда вы работаете в Интернете и совершаете покупки"
+	},
+	"hub_rewards_privacy_title": {
+		"message": "Ориентированный на конфиденциальность"
+	},
+	"hub_rewards_privacy_description": {
+		"message": "Без сбора личных данных, построения профилей и использования третьих сторон"
+	},
+	"hub_rewards_relevant_title": {
+		"message": "Уникальные и актуальные"
+	},
+	"hub_rewards_relevant_description": {
+		"message": "Специализированные предложения являются своевременными, актуальными и эксклюзивными для наших пользователей."
+	},
+	"hub_rewards_closer": {
+		"message": "Вы можете включить Ghostery Rewards в расширении или через пользовательские настройки."
+	},
+	"hub_supporter_page_title": {
+		"message": "Ghostery Hub - Ghostery Plus"
+	},
+	"hub_supporter_header_title": {
+		"message": "Обновление до Ghostery Plus"
+	},
+	"hub_supporter_header_description": {
+		"message": "Поддержите нас и разблокируйте специальные функции!"
+	},
+	"hub_supporter_button_text": {
+		"message": "Получить Ghostery Plus"
+	},
+	"hub_supporter_button_text_alt": {
+		"message": "Уже подписаны"
+	},
+	"hub_supporter_price": {
+		"message": "$SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$ в месяц",
+		"placeholders": {
+			"sup_start": {
+				"content": "<sup>"
+			},
+			"sup_end": {
+				"content": "</sup>"
+			},
+			"span_start": {
+				"content": "<span>"
+			},
+			"span_end": {
+				"content": "</span>"
+			}
+		}
+	},
+	"hub_supporter_perk_themes_title": {
+		"message": "Новые темы"
+	},
+	"hub_supporter_perk_themes_description": {
+		"message": "Настраивайте цветовую схему Ghostery. Попробуйте нашу ночную тему!"
+	},
+	"hub_supporter_perk_stats_title": {
+		"message": "Историческая статистика блокировок"
+	},
+	"hub_supporter_perk_stats_description": {
+		"message": "Просмотрите статистику блокировок и узнайте, как Ghostery помогает вам"
+	},
+	"hub_supporter_perk_more_title": {
+		"message": "Приоритетная поддержка и другое"
+	},
+	"hub_supporter_perk_more_description": {
+		"message": "Быстро разрешайте проблемы с помощью нашей приоритетной службы поддержки - доп. функции ожидаются в ближайшее время"
+	},
+	"hub_supporter_manifesto": {
+		"message": "Мы стремимся бесплатно предоставлять нашим пользователям лучшие услуги защиты конфиденциальности. Хотя мы не взимаем плату за набор программ по обеспечению конфиденциальности, вы можете поддержать нас с помощью недорогой ежемесячной подписки. Присоединяйтесь к нам путем обновления до Ghostery Plus и разблокируйте эксклюзивные функции."
+	},
+	"hub_supporter_feature_theme_title": {
+		"message": "Новые темы"
+	},
+	"hub_supporter_feature_theme_description": {
+		"message": "Настраивайте цветовую схему Ghostery и наслаждайтесь новыми визуальными возможностями. Добавлено по популярным запросам. Познакомьтесь с нашей ночной темой. Скоро будут доступны новые цвета."
+	},
+	"hub_supporter_feature_stats_title": {
+		"message": "Историческая статистика блокировок"
+	},
+	"hub_supporter_feature_stats_description": {
+		"message": "Просматривайте исторические результаты блокировок с помощью графиков и статистики, чтобы выявить тенденции и узнать, как Ghostery повлиял на вашу работу в Интернете."
+	},
+	"hub_supporter_feature_support_title": {
+		"message": "Приоритетная поддержка"
+	},
+	"hub_supporter_feature_support_description": {
+		"message": "Нужна помощь? Нашли нерабочую страницу? Быстрее получайте ответы на вопросы и разрешайте проблемы с помощью нашей приоритетной службы поддержки, доступной при входе через учетную запись Plus."
+	},
+	"hub_supporter_feature_more_title": {
+		"message": "...и скоро больше!"
+	},
+	"hub_supporter_feature_more_description": {
+		"message": "Будьте в курсе новых эксклюзивных функций, поскольку мы продолжаем улучшать опыт работы с Ghostery."
+	},
+	"hub_signedin_exit": {
+		"message": "Назад домой"
+	},
+	"hub_signedin_header_title": {
+		"message": "Вы уже вошли"
+	},
+	"hub_signedin_as_email": {
+		"message": "Выполнен вход в качестве"
+	},
+	"hub_login_header_title": {
+		"message": "Войти в учетную запись."
+	},
+	"hub_login_label_email": {
+		"message": "Email:"
+	},
+	"hub_login_label_password": {
+		"message": "Пароль:"
+	},
+	"hub_login_label_email_invalid": {
+		"message": "Введите действующий адрес электронной почты."
+	},
+	"hub_login_label_password_invalid": {
+		"message": "Используйте от 8 до 50 символов."
+	},
+	"hub_login_link_create_account": {
+		"message": "Нет учетной записи? Зарегистрироваться."
+	},
+	"hub_login_button_submit": {
+		"message": "Вход"
+	},
+	"hub_login_toast_success": {
+		"message": "Выход выполнен успешно! Настройки вашей учетной записи успешно импортированы."
+	},
+	"hub_login_toast_error": {
+		"message": "Похоже, мы не можем найти эту комбинацию электронной почты и пароля. Попробовать еще раз."
+	},
+	"hub_create_account_header_title": {
+		"message": "Хотите создать учетную запись Ghostery для синхронизации настроек во всех браузерах и устройствах?"
+	},
+	"hub_create_account_label_email": {
+		"message": "Email:"
+	},
+	"hub_create_account_label_email_confirm": {
+		"message": "Подтвердить адрес электронной почты:"
+	},
+	"hub_create_account_label_first_name": {
+		"message": "Имя (необязательно):"
+	},
+	"hub_create_account_label_email_last_name": {
+		"message": "Фамилия (необязательно):"
+	},
+	"hub_create_account_label_password": {
+		"message": "Пароль:"
+	},
+	"hub_create_account_label_email_invalid": {
+		"message": "Введите действующий адрес электронной почты."
+	},
+	"hub_create_account_label_email_confirm_invalid": {
+		"message": "Адреса вашей электронной почты не совпадают."
+	},
+	"hub_create_account_label_password_invalid": {
+		"message": "Разрешены только эти специальные символы: !@#$%^&*=+()<>{}[];:,./?"
+	},
+	"hub_create_account_label_password_invalid_length": {
+		"message": "Используйте от 8 до 50 символов."
+	},
+	"hub_create_account_checkbox_promotions": {
+		"message": "Присылайте мне обновления и промо-акции Ghostery."
+	},
+	"hub_create_account_link_login": {
+		"message": "У меня уже есть учетная запись. Вход."
+	},
+	"hub_create_account_button_submit": {
+		"message": "Создать учетную запись"
+	},
+	"hub_create_account_toast_success": {
+		"message": "Учетная запись успешно создана"
+	},
+	"hub_create_account_toast_error": {
+		"message": "Ошибка создания учетной записи"
+	},
+	"enable_when_paused": {
+		"message": "Для использования этой функции возобновите работу Ghostery."
+	},
+	"enable_when_whitelisted": {
+		"message": "Для использования этой функции отмените включение сайта в список доверенных"
+	},
+	"enable_when_blacklisted": {
+		"message": "Для использования этой функции отмените включение сайта в список ограниченных"
+	},
+	"enable_when_not_scanned": {
+		"message": "Для использования этой функции перейдите на другую страницу."
+	},
+	"rewards_new_text": {
+		"message": "Открыт новый Reward!"
+	},
+	"rewards_copy_code": {
+		"message": "скопировать код"
+	},
+	"rewards_code_copied": {
+		"message": "код скопирован"
+	},
+	"rewards_expires_in_day": {
+		"message": "Истекает через 1 день"
+	},
+	"rewards_expires_in_days": {
+		"message": "Истекает через $COUNT$ дней",
 		"placeholders": {
 			"count": {
 				"content": "$1"
-			},
-			"type": {
-				"content": "$2"
 			}
 		}
 	},
-	"panel_tracker_warning_slow_nonsecure_tooltip": {
-		"message": "Трекер медленный и небезопасный",
-		"description": ""
+	"rewards_expires_in_hour": {
+		"message": "Истекает через 1 час"
 	},
-	"password_field_label_required": {
-		"message": "Требуется пароль.",
-		"description": ""
-	},
-	"panel_tracker_found_sources_title": {
-		"message": "Найденные URL-адреса трекера:",
-		"description": ""
-	},
-	"setup_upgrade_desc_2": {
-		"message": "$BOLD_START$Динамический интерфейс предоставляет вам$BOLD_END$ несколько вариантов отображения.",
-		"description": "",
+	"rewards_expires_in_hours": {
+		"message": "Истекает через $COUNT$ ч",
 		"placeholders": {
-			"bold_start": {
-				"content": "<strong>"
-			},
-			"bold_end": {
-				"content": "</strong>"
+			"count": {
+				"content": "$1"
 			}
 		}
 	},
-	"setup_login_view_first_name": {
-		"message": "Имя (необязательно):",
-		"description": ""
+	"rewards_expires_in_min": {
+		"message": "Истекает через 1 мин"
 	},
-	"box_warning_slow": {
-		"message": "Медленные трекеры",
-		"description": ""
-	},
-	"settings_trusted_sites_description": {
-		"message": "Сайты, перечисленные здесь, будут являться доверенными с разблокированием всех трекеров.",
-		"description": ""
-	},
-	"invalid_email_create": {
-		"message": "Введите действующий адрес электронной почты.",
-		"description": ""
-	},
-	"panel_create_account": {
-		"message": "Создать учетную запись",
-		"description": ""
-	},
-	"setup_choice_view_share_data_no_human_web": {
-		"message": "Поделиться моими аналитическими данными, чтобы улучшить производительность Ghostery.",
-		"description": ""
-	},
-	"summary_pause_ghostery_tooltip": {
-		"message": "Приостановить работу расширения Ghostery.",
-		"description": ""
-	},
-	"short_description": {
-		"message": "Ghostery - это мощное расширение для обеспечения конфиденциальности. Блокируйте рекламу, отключайте средства слежения и ускоряйте загрузку веб-сайтов.",
-		"description": "A short description of this extension (Ghostery)."
-	},
-	"drawer_desc_enable_anti_tracking": {
-		"message": "Частные измерительные точки удалены.",
-		"description": ""
-	},
-	"summary_custom_settings": {
-		"message": "Пользовательские настройки",
-		"description": ""
-	},
-	"click2play_allow_once_button_tooltip": {
-		"message": "Ghostery заблокировал $APP_NAME$. Нажмите здесь, чтобы разрешить однократную загрузку.",
-		"description": "Tooltip that appears over the click2play replacement for 'social' buttons.",
+	"rewards_expires_in_mins": {
+		"message": "Истекает через $COUNT$ мин",
 		"placeholders": {
-			"app_name": {
-				"content": "$1",
-				"example": "Twitter Button"
+			"count": {
+				"content": "$1"
 			}
 		}
 	},
-	"panel_tracker_restrict_tooltip": {
-		"message": "Запретить на этом сайте",
-		"description": ""
+	"rewards_expires_in_sec": {
+		"message": "Истекает через 1 сек"
+	},
+	"rewards_expires_in_secs": {
+		"message": "Истекает через $COUNT$ сек",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"rewards_terms_conditions": {
+		"message": "Условия и положения"
+	},
+	"rewards_disable": {
+		"message": "Отключить Rewards"
+	},
+	"rewards_disable_notification": {
+		"message": "Ghostery Rewards отключены. Вы всегда можете включить их в своих настройках или на панели инструментов Rewards."
 	},
 	"rewards_disable_confirm": {
-		"message": "Понятно.",
-		"description": ""
+		"message": "Понятно."
 	},
-	"alert_anti_track_on": {
-		"message": "Улучшенный анти-трекинг включен. Личные данные будут обезличены.",
-		"description": ""
+	"rewards_about": {
+		"message": "Информация о Rewards"
 	},
-	"setup_additional_view_enabled": {
-		"message": "Включено",
-		"description": ""
+	"rewards_settings": {
+		"message": "Настройки Ghostery Rewards"
 	},
-	"browser_button_tooltip": {
-		"message": "Просмотреть результаты Ghostery",
-		"description": "Ghostery's browser button tooltip."
+	"rewards_delete": {
+		"message": "Удалить это Reward"
 	},
-	"pause_24_hours_condensed": {
-		"message": "24 ч",
-		"description": ""
+	"rewards_first_prompt": {
+		"message": "Желаете перейти к Ghostery Reward?"
+	},
+	"rewards_second_prompt": {
+		"message": "Желаете отказаться от использования функции Ghostery Rewards?"
+	},
+	"rewards_yes": {
+		"message": "да"
+	},
+	"rewards_no": {
+		"message": "нет"
+	},
+	"rewards_on": {
+		"message": "вкл"
+	},
+	"rewards_off": {
+		"message": "выкл"
+	},
+	"rewards_on_toast_notification": {
+		"message": "Ghostery Rewards включены"
+	},
+	"rewards_off_toast_notification": {
+		"message": "Ghostery Rewards отключены"
+	},
+	"rewards_code_copied_toast_notification": {
+		"message": "Код Rewards скопирован!"
+	},
+	"rewards_learn_more": {
+		"message": "Подробнее"
+	},
+	"offers_hub_copy_btn": {
+		"message": "Скопировать код"
+	},
+	"offers_code_copied": {
+		"message": "Скопировано"
+	},
+	"popup_cancel_button": {
+		"message": "Отмена"
+	},
+	"popup_apply_code_button": {
+		"message": "Применить код"
+	},
+	"subscription_info": {
+		"message": "Подробные сведения о подписке"
+	},
+	"subscription_themes": {
+		"message": "Темы Ghostery"
+	},
+	"subscription_info_title": {
+		"message": "Ghostery Plus"
+	},
+	"subscription_themes_title": {
+		"message": "Темы"
+	},
+	"subscription_priority_support_title": {
+		"message": "Приоритетная поддержка"
+	},
+	"subscription_priority_support": {
+		"message": "Приоритетная поддержка"
+	},
+	"subscription_history_stats": {
+		"message": "Историческая статистика"
+	},
+	"subscribe_pitch": {
+		"message": "Хотя Ghostery является бесплатным, вы можете поддержать нас с помощью недорогой подписки за &#36;2 в месяц в обмен на эксклюзивные функции, такие как цветовые темы, приоритетная поддержка и другое. Присоединяйтесь к нам и оформляйте подписку!"
+	},
+	"subscribe_pitch_learn_more": {
+		"message": "Подробнее"
+	},
+	"subscribe_pitch_button_label": {
+		"message": "Получить Ghostery Plus!"
+	},
+	"subscribe_pitch_sign_here": {
+		"message": "Уже подписаны? Войти"
+	},
+	"subscription_midnight_theme": {
+		"message": "Ночная тема"
+	},
+	"subscription_status": {
+		"message": "Статус"
+	},
+	"subscription_active": {
+		"message": "Активный"
+	},
+	"subscription_inactive": {
+		"message": "Неактивный"
+	},
+	"subscription_manage": {
+		"message": "Управлять подписками"
+	},
+	"subscription_themes_tooltip": {
+		"message": "Измените цветовую схему Ghostery!"
+	},
+	"subscription_tracker_stats": {
+		"message": "Историческая статистика"
+	},
+	"subscription_charge_date" : {
+		"message": "Следующая дата оплаты"
+	},
+	"subscription_expired": {
+		"message": "Срок действия учетной записи истек"
+	},
+	"subscription_auto_renewal": {
+		"message": "Автоматическое продление"
+	},
+	"subscription_plan": {
+		"message": "План"
+	},
+	"subscription_days_left": {
+		"message": "Осталось $DAYS$ дня(дней) подписки.",
+		"placeholders": {
+			"days": {
+				"content": "$1"
+			}
+		}
+	},
+	"subscription_one_day_left": {
+		"message": "Срок действия вашей подписки истекает завтра."
+	},
+	"subscription_resubscribe": {
+		"message": "Подписаться повторно"
+	},
+	"subscription_support": {
+		"message": "Нашли нерабочую страницу? Нужна помощь с блокировкой? Сообщите нам об этом!"
+	},
+	"subscription_submit_issue": {
+		"message": "Сообщить о проблеме"
+	},
+	"subscription_data_error": {
+		"message": "При получении информации о вашей подписке произошла ошибка. Нажмите на ссылку ниже, чтобы получить доступ к информации вашей учетной записи."
+	},
+	"panel_stats_menu_cumulative": {
+		"message": "Накопительные"
+	},
+	"panel_stats_menu_monthly": {
+		"message": "Ежемесячно"
+	},
+	"panel_stats_menu_daily": {
+		"message": "Ежедневно"
+	},
+	"panel_stats_header_title": {
+		"message": "Статистика трекера истории"
+	},
+	"panel_stats_header_title_monthly": {
+		"message": "Историческая статистика трекера (в ср. за месяц)"
+	},
+	"panel_stats_header_title_daily": {
+		"message": "Историческая статистика трекера (в ср. за день)"
+	},
+	"panel_stats_trackers_seen": {
+		"message": "Отслеженные трекеры"
+	},
+	"panel_stats_trackers_blocked": {
+		"message": "Заблокированные трекеры"
+	},
+	"panel_stats_trackers_anonymized": {
+		"message": "Данные обезличены"
+	},
+	"panel_stats_ads_blocked": {
+		"message": "Реклама заблокирована"
+	},
+	"panel_stats_total_trackers_seen": {
+		"message": "Всего отслеженных трекеров"
+	},
+	"panel_stats_total_trackers_blocked": {
+		"message": "Всего трекеров заблокировано"
+	},
+	"panel_stats_total_trackers_anonymized": {
+		"message": "Всего анонимизированных трекеров"
+	},
+	"panel_stats_total_ads_blocked": {
+		"message": "Всего рекламы заблокировано"
+	},
+	"panel_stats_cumulative": {
+		"message": "Накопительные"
+	},
+	"panel_stats_monthly": {
+		"message": "Ежемесячно"
+	},
+	"panel_stats_daily": {
+		"message": "Ежедневно"
+	},
+	"panel_stats_reset": {
+		"message": "Сбросить всю статистику"
+	},
+	"panel_stats_reset_modal_text": {
+		"message": "Ваша история статистики будет сброшена. Невозможно восстановить эти данные. Хотите продолжить?"
+	},
+	"panel_stats_reset_modal_yes": {
+		"message": "Да, сбросить"
+	},
+	"panel_stats_reset_modal_no": {
+		"message": "Нет, сохранить историю"
+	},
+	"panel_stats_pitch_modal_text": {
+		"message": "Разблокируйте историческую статистику (и другие функции) путем обновления до Ghostery Plus за $SPAN_START$&#36;2/месяц.$SPAN_END$$LINK_START$Подробнее$LINK_END$",
+		"placeholders": {
+			"span_start": {
+				"content": "<span>"
+			},
+			"span_end": {
+				"content": "</span>"
+			},
+			"link_end": {
+				"content": "</a>"
+			},
+			"link_start": {
+				"content": "<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.ghostery.com/products/plus/\">"
+			}
+		}
+	},
+	"panel_stats_pitch_modal_already": {
+		"message": "Уже поддерживаете Ghostery?"
+	},
+	"panel_stats_pitch_modal_sign_in": {
+		"message": "Войти"
+	},
+	"panel_stats_pitch_modal_subscribe": {
+		"message": "Получить Ghostery Plus!"
+	},
+	"panel_stats_pitch_modal_tooltip": {
+		"message": "Стереть всю историю статистики до этого момента."
 	}
 }

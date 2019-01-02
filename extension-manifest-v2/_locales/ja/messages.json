@@ -1,1724 +1,62 @@
 {
-	"settings_import_header": {
-		"message": "設定をインポート",
-		"description": ""
-	},
-	"panel_header_detailed_view": {
-		"message": "詳細ビュー",
-		"description": ""
-	},
-	"settings_share_usage": {
-		"message": "拡張機能使用状況分析データの共有",
-		"description": ""
-	},
-	"settings_allow_trackers_tooltip": {
-		"message": "たとえば、facebook.com上でFacebookトラッカーをブロックすると、サイトが区切られることがあります。",
-		"description": ""
-	},
-	"blocking_trackers": {
-		"message": "トラッカー",
-		"description": ""
-	},
-	"panel_detail_history_text": {
-		"message": "近日開始する機能です。",
-		"description": ""
-	},
-	"settings_individual_trackers": {
-		"message": "個々のトラッカーを信頼および制限します",
-		"description": ""
-	},
-	"setup_data_view_checkbox": {
-		"message": "この情報を共有してGhosteryをサポートします。",
-		"description": ""
-	},
-	"rewards_off_toast_notification": {
-		"message": "Ghostery報酬はオフです",
-		"description": ""
-	},
-	"settings_offers_tooltip": {
-		"message": "Ghostery報酬は、パートナー企業から割引や特典を得れるようにする機能です。",
-		"description": ""
-	},
-	"rewards_yes": {
-		"message": "はい",
-		"description": ""
-	},
-	"settings_sign_create_text": {
-		"message": "アカウントの設定はこのデバイスと同期されます。すべてのデバイスとプラットフォーム間でGhostery設定を簡単に同期するには、アカウントを作成してください。",
-		"description": ""
-	},
-	"email_confirm_field_label": {
-		"message": "メールを確認：",
-		"description": ""
-	},
-	"setup_login_view_title": {
-		"message": "Ghosteryアカウントを作成して、ブラウザとデバイス間で設定を同期しますか？",
-		"description": ""
-	},
-	"summary_description_not_scanned_1": {
-		"message": "Ghosteryは「http」と「https」ページのみをスキャンします。",
-		"description": ""
-	},
-	"drawer_off": {
-		"message": "オフ",
-		"description": ""
-	},
-	"setup_choice_view_share_data": {
-		"message": "Ghosteryのパフォーマンスを向上させるために、分析データとHuman Webデータを共有します。",
-		"description": ""
-	},
-	"settings_searh_by_tracker": {
-		"message": "トラッカーで検索",
-		"description": ""
-	},
-	"settings_update_failed": {
-		"message": "更新に失敗しました。後でもう一度お試しください",
-		"description": ""
-	},
-	"whitelist_error_blacklist_url": {
-		"message": "このサイトは、制限されたサイトのリストから削除され、信頼できるサイトのリストに追加されました。",
-		"description": ""
-	},
-	"settings_filter_all": {
-		"message": "すべてのトラッカー",
-		"description": ""
-	},
-	"global_settings_saved_tracker": {
-		"message": "グローバル・トラッカー設定が保存されました",
-		"description": ""
-	},
-	"license_email": {
-		"message": "メール",
-		"description": ""
-	},
-	"panel_signin_success_title": {
-		"message": "おめでとうございます！Ghosteryアカウントを利用できます。",
-		"description": ""
-	},
-	"blocking_unblock_all": {
-		"message": "すべてのブロックを解除",
-		"description": ""
-	},
-	"settings_filter_unblocked": {
-		"message": "ブロックされていないトラッカー",
-		"description": ""
-	},
-	"box_trackers": {
-		"message": "トラッカー",
-		"description": ""
-	},
-	"drawer_on": {
-		"message": "オン",
-		"description": ""
-	},
-	"setup_blocking_view_block_everything": {
-		"message": "すべて",
-		"description": ""
-	},
-	"settings_bottom_right_corner": {
-		"message": "右下隅",
-		"description": ""
-	},
-	"settings_hide_alert_trusted": {
-		"message": "信頼できるウェブサイトで紫色のボックスを非表示にする",
-		"description": ""
-	},
-	"setup_login_view_signed_in_as": {
-		"message": "としてサインインしています",
-		"description": ""
-	},
-	"blocking_category_blocked": {
-		"message": "ブロックされた対象",
-		"description": "as in '5 (trackers) BLOCKED'"
-	},
-	"setup_header_sign_in": {
-		"message": "サインイン",
-		"description": ""
-	},
-	"notification_upgrade": {
-		"message": "私たちの献身的で魅力的なチームが一生懸命に働いて Ghostery の新しいバージョンをリリースしました。",
-		"description": ""
-	},
-	"setup_blocking_view_title": {
-		"message": "Ghosteryは、トラッカーをブロックして、よりクリーンで、より速く、より安全に閲覧できるようにします。何をブロックしたいですか？",
-		"description": ""
-	},
-	"summary_resume_ghostery": {
-		"message": "再開",
-		"description": ""
-	},
-	"pause_1_hour_condensed": {
-		"message": "1時間",
-		"description": ""
-	},
-	"whitelist_error_duplicate_url": {
-		"message": "このサイトは既にホワイトリストに登録されています。",
-		"description": "Options page site whitelisting error message shown when whitelisting a URL that is already in the whitelist."
-	},
-	"drawer_status_enable_anti_tracking": {
-		"message": "追跡防止は",
-		"description": ""
-	},
-	"panel_click_to_reload": {
-		"message": "再ロードし変更を確認しするには、クリックしてください。",
-		"description": ""
-	},
-	"global_settings_saved": {
-		"message": "グローバル設定が保存されました",
-		"description": ""
-	},
-	"settings_support_ghostery_by": {
-		"message": "でGhosteryをサポート",
-		"description": ""
-	},
-	"rewards_learn_more": {
-		"message": "詳細を知る",
-		"description": ""
-	},
-	"category_social_media_desc": {
-		"message": "ソーシャル・メディア・プラットフォームに関連する機能が含まれています。",
-		"description": "User-facing description for the Social Media tag category."
-	},
-	"settings_update_success": {
-		"message": "成功しました！",
-		"description": ""
-	},
-	"settings_never": {
-		"message": "しない",
-		"description": ""
-	},
-	"panel_title_create_account": {
-		"message": "アカウントを作成",
-		"description": ""
-	},
-	"box_dismiss_15s": {
-		"message": "$SPAN_START$15秒後に$SPAN_END$却下",
-		"description": "",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
-	},
-	"setup_display_view_simple_desc": {
-		"message": "基本的なブロック情報を表示します。",
-		"description": ""
-	},
-	"first_name_field_label": {
-		"message": "名（オプション）：",
-		"description": ""
-	},
-	"alert_ad_block_off": {
-		"message": "強化された広告ブロッキングがオフになりました。広告はブロックされません。",
-		"description": ""
-	},
-	"drawer_tooltip_enable_anti_tracking": {
-		"message": "統合トラッカーは、ほとんどのウェブサイト上でのユーザー・アクティビティを記録します。追跡防止は、ユーザー識別に使用できるすべてのデータをトラッカーが収集する前に削除します。この図は、サイト上で削除されたデータ・ポイントの数を示しています。",
-		"description": ""
-	},
-	"panel_email_verification_sent": {
-		"message": "$BOLD_HTML_STARTS$成功しました！$BOLD_HTML_END$ $EMAIL$にアカウント確認メールが送信されました",
-		"description": "",
-		"placeholders": {
-			"bold_html_end": {
-				"content": "</strong>"
-			},
-			"bold_html_starts": {
-				"content": "<strong>"
-			},
-			"email": {
-				"content": "$1",
-				"example": "info@ghostery.com"
-			}
-		}
-	},
-	"panel_detail_rewards_off": {
-		"message": "Ghostery報酬はオフです",
-		"description": ""
-	},
-	"panel_detail_rewards_loading": {
-		"message": "報酬をロード中です…",
-		"description": ""
-	},
-	"category_audio_video_player": {
-		"message": "オーディオ/ビデオ・プレーヤー",
-		"description": "Ghostery organizes tags by category. This is one of several tag categories."
-	},
-	"setup_additional_view_antitrack_title": {
-		"message": "強化された追跡防止",
-		"description": ""
-	},
-	"tooltip_body_in_cliqz": {
-		"message": "デフォルト設定により、既にCliqzで有効になっている機能です。",
-		"description": ""
-	},
-	"setup_additional_view_title": {
-		"message": "当社の推奨機能を使用してよりスマートに閲覧したいですか？",
-		"description": ""
-	},
-	"setup_button_create_account": {
-		"message": "アカウントを作成",
-		"description": ""
-	},
-	"settings_block_trackers": {
-		"message": "Ghosteryにデフォルトで追加された新しいトラッカーをブロックします",
-		"description": ""
-	},
-	"email_address_in_use": {
-		"message": "そのメールアドレスは既に使用されています。別のメールアドレスを選択してください。 ",
-		"description": ""
-	},
-	"box_dismiss_0s": {
-		"message": "却下$SPAN_START$しない$SPAN_END$",
-		"description": "",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
-	},
-	"button_cancel": {
-		"message": "キャンセル",
-		"description": "Part of a confirmation dialog. Clicking this cancels the action."
-	},
-	"settings_dismiss_after": {
-		"message": "後に却下",
-		"description": ""
-	},
-	"settings_purple_box": {
-		"message": "紫色のボックス",
-		"description": ""
-	},
-	"settings_export_text": {
-		"message": "Ghostery環境設定のコピーを保存し、別のコンピュータに転送します。",
-		"description": ""
-	},
-	"settings_filter_blocked": {
-		"message": "ブロックされたトラッカー",
-		"description": ""
-	},
-	"settings_import_text": {
-		"message": "バックアップの.ghostファイルを選択してください。",
-		"description": ""
-	},
-	"blocking_unblock_shown": {
-		"message": "表示されたすべてのブロックを解除",
-		"description": ""
-	},
-	"box_warning_compatibility": {
-		"message": "区切られたページのトラッカー",
-		"description": ""
-	},
-	"settings_export_error": {
-		"message": "設定が正常にエクスポートされませんでした。もう一度お試しください。",
-		"description": ""
-	},
-	"tooltip_smart_block": {
-		"message": "スマート・ブロッキング",
-		"description": ""
-	},
-	"notification_library_update_link": {
-		"message": "最新情報を確認",
-		"description": ""
-	},
-	"settings_top_right_corner": {
-		"message": "右上隅",
-		"description": ""
-	},
-	"box_display_br": {
-		"message": "$SPAN_START$右下に$SPAN_END$表示",
-		"description": "",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
-	},
-	"box_hide": {
-		"message": "ボックスを非表示にする",
-		"description": ""
-	},
-	"summary_trust_site": {
-		"message": "サイトを信頼",
-		"description": ""
-	},
-	"setup_feature_active_in_cliqz": {
-		"message": "デフォルト設定により、この機能は既にCliqzで有効になっています。 $LINK_START$詳細。$LINK_END$",
-		"description": "",
-		"placeholders": {
-			"link_start": {
-				"content": "<a href=\"https://www.ghostery.com/faqs/what-are-the-new-ghostery-8-features/\" target=\"_blank\">"
-			},
-			"link_end": {
-				"content": "</a>"
-			}
-		}
-	},
-	"settings_highlight_trackers": {
-		"message": "インタラクティブなトラッカーを強調表示",
-		"description": ""
-	},
-	"collapse_all": {
-		"message": "すべてを折り畳む",
-		"description": ""
-	},
-	"summary_restrict_site_active": {
-		"message": "制限されたサイト",
-		"description": ""
-	},
-	"panel_detail_rewards_title": {
-		"message": "Ghostery報酬",
-		"description": ""
-	},
-	"panel_about_licenses": {
-		"message": "ソフトウェア・ライセンス",
-		"description": ""
-	},
-	"select_file_for_import": {
-		"message": "インポートする.ghostファイルを選択してください",
-		"description": ""
-	},
-	"settings_top_left_corner": {
-		"message": "左上隅",
-		"description": ""
-	},
-	"setup_data_view_desc_no_human_web": {
-		"message": "当社は、個人データを収集することなく、匿名の分析データを使用してGhosteryのパフォーマンスを向上させます。 $LINK_START$詳細。$LINK_END$.",
-		"description": "",
-		"placeholders": {
-			"link_start": {
-				"content": "<a href=\"https://www.ghostery.com/faqs/\" target=\"_blank\">"
-			},
-			"link_end": {
-				"content": "</a>"
-			}
-		}
-	},
-	"click2play_comment_form": {
-		"message": "Ghosteryが$NAME$のコメントをブロックしました。",
-		"description": "",
-		"placeholders": {
-			"name": {
-				"content": "$1",
-				"example": "Disqus"
-			}
-		}
-	},
-	"tooltip_restrict": {
-		"message": "このサイトでトラッカーを常にブロックします。",
-		"description": ""
-	},
-	"settings_restricted_sites_description": {
-		"message": "ここにリストされているサイトは、すべてのトラッカーがブロックされた状態で制限されます。",
-		"description": ""
-	},
-	"box_dismiss_5s": {
-		"message": "$SPAN_START$5秒後に$SPAN_END$却下",
-		"description": "",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
-	},
-	"setup_login_view_confirm_email_error": {
-		"message": "申し訳ありませんが、メールアドレスが一致しません。",
-		"description": ""
-	},
-	"settings_notify_me": {
-		"message": "Ghosteryが次のことを行うたびに通知します：",
-		"description": ""
-	},
-	"settings_notifications": {
-		"message": "通知",
-		"description": ""
-	},
-	"click2play_allow_once_tooltip": {
-		"message": "一度許可して再ロードします。",
-		"description": "Tooltip that appears over the 'allow once' click2play button."
-	},
-	"settings_global_blocking": {
-		"message": "グローバル・ブロッキング",
-		"description": ""
-	},
-	"copyright": {
-		"message": "$C$ $YEAR$ $GHOSTERY$、$COMPANY_ADDRESS$の一部",
-		"description": "Copyright message, shown in page footers.",
-		"placeholders": {
-			"c": {
-				"content": "&copy;"
-			},
-			"company_address": {
-				"content": "$1",
-				"example": "GHOSTERY, Inc., Such-and-such Street, Such-and-such Floor, New York, NY, Zip Code"
-			},
-			"ghostery": {
-				"content": "<a href='https://www.ghostery.com' target='_blank'>Ghostery</a>"
-			},
-			"year": {
-				"content": "2015"
-			}
-		}
-	},
-	"settings_opt_in": {
-		"message": "オプトイン",
-		"description": ""
-	},
-	"settings_signin_create_header": {
-		"message": "サインイン/アカウント作成",
-		"description": ""
-	},
-	"panel_tracker_warning_nonsecure_tooltip": {
-		"message": "トラッカーが保護されていません",
-		"description": ""
-	},
-	"tracker_plural": {
-		"message": "trackers",
-		"description": ""
-	},
-	"rewards_disable": {
-		"message": "報酬をオフにする",
-		"description": ""
-	},
-	"settings_allow_offers": {
-		"message": "Ghostery報酬に参加",
-		"description": ""
-	},
-	"click2play_survey_form": {
-		"message": "Ghosteryが$NAME$のアンケートをブロックしました。",
-		"description": "",
-		"placeholders": {
-			"name": {
-				"content": "$1",
-				"example": "Disqus"
-			}
-		}
-	},
-	"tooltip_trust": {
-		"message": "このサイトでトラッカーを常に許可します。",
-		"description": ""
-	},
-	"tooltip_smart_block_body_on": {
-		"message": "ページのパフォーマンスを最適化するために、トラッカー・ブロッキングを調整しました。",
-		"description": ""
-	},
-	"settings_new_features": {
-		"message": "新機能をリリース",
-		"description": ""
-	},
-	"settings_announcements": {
-		"message": "お知らせ",
-		"description": ""
-	},
-	"setup_button_done": {
-		"message": "完了",
-		"description": ""
-	},
-	"blocking_category_tracker": {
-		"message": "トラッカー",
-		"description": ""
-	},
-	"page_load": {
-		"message": "ページのロード",
-		"description": ""
-	},
-	"banner_check_your_email_title": {
-		"message": "メールにパスワードをリセットするためのリンクがあるかを簡単に確認してください。",
-		"description": ""
-	},
-	"settings_filter_new_label": {
-		"message": "新規",
-		"description": ""
-	},
-	"pause_1_hour": {
-		"message": "1時間",
-		"description": ""
-	},
-	"enable_when_blacklisted": {
-		"message": "この機能を使用するには、「サイトを制限」を元に戻してください。",
-		"description": ""
-	},
-	"tooltip_restrict_on": {
-		"message": "サイトで、トラッカーがブロックされ、追跡防止が有効になりました。元に戻すにはクリックしてください。",
-		"description": ""
-	},
-	"panel_detail_premium_text": {
-		"message": "近日開始する機能です。",
-		"description": ""
-	},
-	"setup_upgrade_subtitle": {
-		"message": "最新情報",
-		"description": ""
-	},
-	"box_display_bl": {
-		"message": "$SPAN_START$左下に$SPAN_END$表示",
-		"description": "",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
-	},
-	"settings_required_trackers": {
-		"message": "トラッカーがサイトの機能を使用できるようにする必要がある時を示します",
-		"description": ""
-	},
-	"alert_site_trusted": {
-		"message": "サイトがホワイトリストに登録されました。このサイトで、トラッカーは許可され、追跡防止は無効になります。",
-		"description": ""
-	},
-	"license_module": {
-		"message": "モジュール",
-		"description": ""
-	},
-	"blacklist_error_whitelist_url": {
-		"message": "このサイトは、信頼できるサイトのリストから削除され、制限されたサイトのリストに追加されました",
-		"description": ""
-	},
-	"panel_help_faq": {
-		"message": "よくある質問",
-		"description": ""
-	},
-	"settings_filter_new": {
-		"message": "最新の更新以降の新機能",
-		"description": ""
-	},
-	"blocking_category_trackers": {
-		"message": "トラッカー",
-		"description": ""
-	},
-	"blocking_block_shown": {
-		"message": "表示されたすべてをブロック",
-		"description": ""
-	},
-	"panel_menu_signin": {
-		"message": "サインイン",
-		"description": ""
-	},
-	"error_email_forgot": {
-		"message": "うーん、そのメールアドレスがありません。もう一度試しますか？",
-		"description": ""
-	},
-	"setup_display_view_detailed": {
-		"message": "詳細",
-		"description": ""
-	},
-	"tooltip_ad_block": {
-		"message": "強化された広告ブロッキング",
-		"description": ""
-	},
-	"panel_detail_menu_rewards_title": {
-		"message": "報酬",
-		"description": ""
-	},
-	"panel_tracker_trust_tooltip": {
-		"message": "このサイトで信頼",
-		"description": ""
-	},
-	"settings_bottom_left_corner": {
-		"message": "左下隅",
-		"description": ""
-	},
-	"settings_import_dialog_error": {
-		"message": "現在のページが予約済みのブラウザ・ページである場合、Ghosteryはブラウズ・ダイアログを表示できません。別のページに移動してもう一度お試しください。",
-		"description": ""
-	},
-	"rewards_disable_notification": {
-		"message": "Ghostery報酬は現在オフになっています。設定または報酬ダッシュボードでいつでもオンにすることができます。",
-		"description": ""
-	},
-	"expand_all": {
-		"message": "すべてを展開",
-		"description": ""
-	},
-	"panel_menu_signout": {
-		"message": "サインアウト",
-		"description": ""
-	},
-	"drawer_status_enable_smart_block": {
-		"message": "スマート・ブロッキングは",
-		"description": ""
-	},
-	"settings_support_ghostery": {
-		"message": "Ghosteryをサポート",
-		"description": ""
-	},
-	"panel_about_release_notes": {
-		"message": "すべての更新情報についてはリリースノートをご覧ください",
-		"description": ""
-	},
-	"notification_upgrade_link": {
-		"message": "本リリースの素晴らしい新機能と不具合修正を確認してください。",
-		"description": ""
-	},
-	"notification_upgrade_title_v8": {
-		"message": "Ghostery 8の紹介！",
-		"description": ""
-	},
-	"summary_resume_ghostery_ab_pause": {
-		"message": "再開",
-		"description": ""
-	},
-	"box_tracker": {
-		"message": "トラッカー",
-		"description": ""
-	},
-	"settings_new_trackers": {
-		"message": "トラッカー・ライブラリに新しいトラッカーを追加",
-		"description": ""
-	},
-	"blocked_redirect_page_title": {
-		"message": "Ghosteryがリダイレクトを禁止しました。",
-		"description": "Page title for blocked_redirect.html which appears when a redirect is blocked."
-	},
-	"click2play_video_form": {
-		"message": "Ghosteryが$NAME$ビデオ・プレーヤーをブロックしました。",
-		"description": "",
-		"placeholders": {
-			"name": {
-				"content": "$1",
-				"example": "Disqus"
-			}
-		}
-	},
-	"box_dismiss_30s": {
-		"message": "$SPAN_START$30秒後に$SPAN_END$却下",
-		"description": "",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
-	},
-	"license_licenses": {
-		"message": "ライセンス",
-		"description": ""
-	},
-	"setup_choice_view_custom_setup": {
-		"message": "カスタム・セットアップ",
-		"description": ""
-	},
-	"browse_button_label": {
-		"message": "閲覧...",
-		"description": ""
-	},
-	"alert_ghostery_paused": {
-		"message": "Ghostery拡張機能が一時停止されました。",
-		"description": ""
-	},
-	"panel_detail_learn_more": {
-		"message": "詳細を知る",
-		"description": ""
-	},
-	"panel_about_license": {
-		"message": "ライセンス契約",
-		"description": ""
-	},
-	"summary_alert": {
-		"message": "アラート",
-		"description": "as in '1 ALERT'"
-	},
-	"setup_data_view_desc": {
-		"message": "当社は、個人データを収集することなく、 Ghosteryのパフォーマンス を向上させるために匿名分析データとHuman Webデータを使用します。$LINK_START$詳細$LINK_END$。",
-		"description": "",
-		"placeholders": {
-			"link_start": {
-				"content": "<a href=\"https://www.ghostery.com/faqs/\" target=\"_blank\">"
-			},
-			"link_end": {
-				"content": "</a>"
-			}
-		}
-	},
-	"category_uncategorized_desc": {
-		"message": "これらのトラッカーはまだ分類されていません。",
-		"description": ""
-	},
-	"setup_blocking_view_block_ads": {
-		"message": "広告トラッカーのみ",
-		"description": ""
-	},
-	"tooltip_smart_block_body": {
-		"message": "トラッカーを自動的にブロックおよびブロック解除して、ページのパフォーマンスを最適化します。",
-		"description": ""
-	},
-	"rewards_code_copied_toast_notification": {
-		"message": "報酬コードがコピーされました！",
-		"description": ""
-	},
-	"panel_detail_menu_performance_title": {
-		"message": "パフォーマンス",
-		"description": ""
-	},
-	"settings_show_patterns_tooltip": {
-		"message": "トラッカーをクリックすると、トラッカーのURLがトラッカーの説明の下に表示されます。",
-		"description": ""
-	},
-	"setup_button_sign_in": {
-		"message": "サインイン",
-		"description": ""
-	},
-	"settings_blocking": {
-		"message": "ブロック中",
-		"description": ""
-	},
-	"drawer_title_enable_smart_block": {
-		"message": "スマート・ブロッキング",
-		"description": ""
-	},
-	"refresh_and_try_again": {
-		"message": "ページを更新してもう一度お試しください",
-		"description": ""
-	},
-	"panel_help_questions_header": {
-		"message": "質問とコメント",
-		"description": ""
-	},
-	"panel_needs_reload": {
-		"message": "Ghosteryに保留中の更新があります。",
-		"description": ""
-	},
-	"settings_show_trackers_banner": {
-		"message": "拡張機能の上部にトラッカー・アラート・バナー通知を表示",
-		"description": ""
-	},
-	"file_was_not_selected": {
-		"message": "ファイルが選択されていません",
-		"description": ""
-	},
-	"category_audio_video_player_desc": {
-		"message": "ウェブサイトにおけるオーディオおよびビデオ・コンテンツの発行、配布、および最適化を可能にします。",
-		"description": "User-facing description for the Audio/Video Player tag category."
-	},
-	"consent_privacy": {
-		"message": "同意が必要です。",
-		"description": ""
-	},
-	"password_requirements": {
-		"message": "8～50文字を使用してください。",
-		"description": ""
-	},
 	"account_creation_privacy_statement": {
-		"message": "$LINK_PS_START$プライバシーに関する声明$LINK_PS_END$に記載されているGhosteryのデータ・プラクティスと$LINK_UA_START$ライセンス契約$LINK_UA_END$の条項に同意します。",
-		"description": "",
+		"message": "Ghostery が一般的に定める$LINK_TERMS_START$利用規約$LINK_TERMS_END$と$LINK_UA_START$ライセンス契約$LINK_UA_END$が適用されます。個人情報の取扱方針については$LINK_PS_START$こちら$LINK_PS_END$をご覧ください。",
 		"placeholders": {
 			"link_ps_end": {
 				"content": "</a>"
 			},
 			"link_ps_start": {
-				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-us/privacy-statements/ghostery-browser-extension/ghostery-browser-extension-privacy-statement/\">"
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" rel=\"noopener noreferrer\">"
 			},
 			"link_ua_end": {
 				"content": "</a>"
 			},
 			"link_ua_start": {
-				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-us/privacy-statements/ghostery-browser-extension/ghostery-browser-extension-end-user-license-agreem/\">"
-			}
-		}
-	},
-	"tooltip_custom_settings": {
-		"message": "選択したトラッカー設定を使用します。",
-		"description": ""
-	},
-	"setup_footer_license": {
-		"message": "Ghostery$COPY$はCliqz会社です。$LINK_START$Cliqz$LINK_END$についてもっとよく知る。$COPY$Cliqz国際有限責任会社（Cliqz有限責任会社の完全所有子会社）。著作権所有。",
-		"description": "",
-		"placeholders": {
-			"link_start": {
-				"content": "<a href=\"https://cliqz.com\" target=\"_blank\">"
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/privacy-statements/\" rel=\"noopener noreferrer\">"
 			},
-			"link_end": {
+			"link_terms_end": {
 				"content": "</a>"
 			},
-			"copy": {
-				"content": "&copy;"
+			"link_terms_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/privacy-statements/\" rel=\"noopener noreferrer\">"
 			}
 		}
 	},
-	"panel_detail_premium_title": {
-		"message": "Ghosteryプレミアム",
-		"description": ""
+	"all": {
+		"description": "Default setting in the 'filter by type' dropdown for the tag browser. Doesn't filter anything out. Should read as 'Show all'.",
+		"message": "すべて"
 	},
-	"panel_detail_history_title": {
-		"message": "履歴",
-		"description": ""
-	},
-	"box_warning_nonsecure": {
-		"message": "保護のないトラッカー",
-		"description": ""
-	},
-	"settings_account": {
-		"message": "アカウント",
-		"description": ""
-	},
-	"drawer_status_enable_ad_block": {
-		"message": "広告ブロックは",
-		"description": ""
-	},
-	"none": {
-		"message": "なし",
-		"description": "Used to say that this item does not belong to any of the groups, as in \"Groups: None\" (as opposed to \"Groups: Group A, Group B, Group C\")."
-	},
-	"rewards_copy_code": {
-		"message": "コードをコピー",
-		"description": ""
-	},
-	"notification_library_update": {
-		"message": "新しいトラッカーが発見され、Ghosteryデータベースに追加されました。",
-		"description": ""
-	},
-	"settings_replace_social": {
-		"message": "ブロックされたソーシャル・メディア・ボタンをGhosteryアイコンに置き換えます",
-		"description": ""
-	},
-	"setup_button_exit": {
-		"message": "終了",
-		"description": ""
-	},
-	"alert_smart_block_on": {
-		"message": "スマート・ブロッキングがオンになりました。ページのパフォーマンスを最適化するために、トラッカー・ブロッキングを調整します。",
-		"description": ""
-	},
-	"setup_upgrade_desc_1": {
-		"message": "$BOLD_START$スマート・ブロッキング$BOLD_END$により、閲覧時にパフォーマンスが自動的に最適化されます。",
-		"description": "",
-		"placeholders": {
-			"bold_start": {
-				"content": "<strong>"
-			},
-			"bold_end": {
-				"content": "</strong>"
-			}
-		}
-	},
-	"summary_pause_ghostery_ab_pause": {
-		"message": "一時停止",
-		"description": ""
-	},
-	"enable_when_not_scanned": {
-		"message": "この機能を使用するには、別のページに移動してください。",
-		"description": ""
-	},
-	"settings_share_human_web": {
-		"message": "Human Webデータの共有",
-		"description": ""
-	},
-	"panel_detail_rewards_cliqz_text": {
-		"message": "既にCliqz MyOffrzコントロールパネルで有効になっている機能です。",
-		"description": ""
-	},
-	"rewards_code_copied": {
-		"message": "コードがコピーされました",
-		"description": ""
-	},
-	"panel_tracker_slow_non_secure_end": {
-		"message": " このページで。",
-		"description": ""
-	},
-	"setup_login_view_last_name": {
-		"message": "姓（オプション）：",
-		"description": ""
-	},
-	"setup_login_view_password_error": {
-		"message": "8～50文字を使用してください。",
-		"description": ""
-	},
-	"license_unknown": {
-		"message": "未知",
-		"description": ""
-	},
-	"license_generic": {
-		"message": "標準ライセンス・テキスト",
-		"description": ""
-	},
-	"panel_about_panel_header": {
-		"message": "Ghosteryブラウザ拡張について",
-		"description": ""
-	},
-	"setup_login_view_email": {
-		"message": "メール：",
-		"description": ""
-	},
-	"blocked": {
-		"message": "ブロックされた対象",
-		"description": "Select this to show only blocked (checked) tags in the tag browser. Should read as 'Show blocked'."
-	},
-	"setup_additional_view_adblock_desc": {
-		"message": "アクセスしたウェブサイトのすべての広告をブロックします。",
-		"description": ""
-	},
-	"tooltip_ad_block_body": {
-		"message": "アクセスしたウェブサイトの広告をブロックします。",
-		"description": ""
-	},
-	"panel_tracker_breaking_page": {
-		"message": "$COUNT$が$TRACKERS$をブロックしました",
-		"description": "",
-		"placeholders": {
-			"count": {
-				"content": "$1",
-				"example": "4"
-			},
-			"trackers": {
-				"content": "$2",
-				"example": "trackers"
-			}
-		}
-	},
-	"category_customer_interaction": {
-		"message": "顧客インタラクション",
-		"description": "Ghostery organizes tags by category. This is one of several tag categories."
-	},
-	"settings_export_header": {
-		"message": "設定をエクスポート",
-		"description": ""
-	},
-	"panel_about_privacy_statement": {
-		"message": "プライバシーに関する声明",
-		"description": ""
-	},
-	"license_url": {
-		"message": "URL",
-		"description": ""
-	},
-	"settings_allow_trackers": {
-		"message": "サイト所有者が作成したトラッカーを許可します",
-		"description": ""
-	},
-	"settings_restricted_sites": {
-		"message": "制限されたサイト",
-		"description": ""
-	},
-	"drawer_title_enable_anti_tracking": {
-		"message": "強化された追跡防止",
-		"description": ""
-	},
-	"setup_blocking_view_block_nothing": {
-		"message": "ブロックしない",
-		"description": ""
-	},
-	"email_field_label": {
-		"message": "メール：",
-		"description": ""
-	},
-	"setup_button_previous": {
-		"message": "前へ",
-		"description": ""
-	},
-	"setup_login_view_confirm_email": {
-		"message": "メールを確認：",
-		"description": ""
-	},
-	"password_characters_requirements": {
-		"message": "次の特殊文字のみを使用できます：!@#$%^&*=+()<>{}[];:,./?",
-		"description": ""
-	},
-	"setup_choice_view_title": {
-		"message": "Ghosteryを使用すると、よりスマートに閲覧できます！$BR$どのように始めたいですか？",
-		"description": "",
-		"placeholders": {
-			"br": {
-				"content": "<br />"
-			}
-		}
-	},
-	"click2play_review_form": {
-		"message": "Ghosteryが$NAME$のレビューをブロックしました。",
-		"description": "",
-		"placeholders": {
-			"name": {
-				"content": "$1",
-				"example": "Disqus"
-			}
-		}
-	},
-	"drawer_label_enable_ad_block": {
-		"message": "広告がブロックされています",
-		"description": ""
-	},
-	"panel_detail_menu_history_title": {
-		"message": "履歴",
-		"description": ""
-	},
-	"notification_upgrade_link_v8": {
-		"message": "今すぐ見せてください！",
-		"description": ""
-	},
-	"white_black_list_error_invalid_url": {
-		"message": "有効なURLを入力してください。",
-		"description": ""
-	},
-	"license_repository": {
-		"message": "リポジトリ",
-		"description": ""
-	},
-	"rewards_second_prompt": {
-		"message": "今後のGhostery報酬をオプトアウトしますか？",
-		"description": ""
-	},
-	"alert_site_restricted_off": {
-		"message": "サイトがブラックリストから削除されました。",
-		"description": ""
-	},
-	"alert_anti_track_off": {
-		"message": "強化された追跡防止がオフになりました。個人データは匿名化されません。",
-		"description": ""
-	},
-	"blocked_redirect_url_content": {
-		"message": "このタグは$BREAK$ $A_START$$REDIRECT_URL$$A_END$にリダイレクトされているようです。このリンクが正しく表示されている場合は、続行してください。下のアイコンをクリックして$APP$を許可し再ロードしてください。",
-		"description": "Text appearing on block_redirect.html when a redirect is blocked and a final 'destination' URL is successfully found.",
-		"placeholders": {
-			"a_end": {
-				"content": "</a>"
-			},
-			"a_start": {
-				"content": "<a href=\"$1\" class=\"ellipsis\" title=\"$1\">"
-			},
-			"app": {
-				"content": "$2",
-				"example": "DoubleClick"
-			},
-			"break": {
-				"content": "<br>"
-			},
-			"redirect_url": {
-				"content": "$1"
-			}
-		}
+	"banner_check_your_email_title": {
+		"message": "メールにパスワードをリセットするためのリンクがあるかを簡単に確認してください。"
 	},
 	"banner_no_such_account_message": {
-		"message": "このメールアドレスとパスワードの組み合わせが見つかりません。もう一度お試しください。",
-		"description": ""
+		"message": "このメールアドレスとパスワードの組み合わせが見つかりません。もう一度お試しください。"
 	},
-	"panel_view_trackers": {
-		"message": "トラッカーを表示",
-		"description": ""
+	"blacklist_error_duplicate_url": {
+		"message": "このサイトは既に制限されています。"
 	},
-	"panel_menu_submit_tracker": {
-		"message": "新しいトラッカーを提出",
-		"description": ""
+	"blacklist_error_whitelist_url": {
+		"message": "このサイトは、信頼できるサイトのリストから削除され、制限されたサイトのリストに追加されました"
 	},
-	"setup_choice_view_learn_more": {
-		"message": "詳細。",
-		"description": ""
+	"blocked": {
+		"description": "Select this to show only blocked (checked) tags in the tag browser. Should read as 'Show blocked'.",
+		"message": "ブロックされた対象"
 	},
-	"box_display_tr": {
-		"message": "$SPAN_START$右上に$SPAN_END$表示",
-		"description": "",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
+	"blocked_redirect_action_always_title": {
+		"description": "Title for the 'Allow always and reload' button on the blocked redirect page.",
+		"message": "常に許可して再ロードします。"
 	},
-	"setup_title": {
-		"message": "Ghosteryセットアップ",
-		"description": ""
+	"blocked_redirect_action_through_once_title": {
+		"description": "Title for the 'Allow once' button on the blocked redirect page.",
+		"message": "送付先に達するまでタグを一度許可します。"
 	},
-	"invalid_email_confirmation": {
-		"message": "お客様のメールアドレスは一致しません。",
-		"description": ""
-	},
-	"category_comments_desc": {
-		"message": "コメント・セクションで記事や製品レビューを有効にします。",
-		"description": "User-facing description for the Comments tag category."
-	},
-	"rewards_new_text": {
-		"message": "新しい報酬が発見されました！",
-		"description": ""
-	},
-	"create_password_field_label": {
-		"message": "パスワード：",
-		"description": ""
-	},
-	"panel_detail_performance_title": {
-		"message": "ウェブサイトのパフォーマンス",
-		"description": ""
-	},
-	"category_advertising": {
-		"message": "広告",
-		"description": "Ghostery organizes tags by category. This is one of several tag categories."
-	},
-	"settings_import_success": {
-		"message": "に設定が正常にインポートされました",
-		"description": ""
-	},
-	"category_site_analytics": {
-		"message": "サイト分析",
-		"description": "Ghostery organizes tags by category. This is one of several tag categories."
-	},
-	"panel_help_panel_header": {
-		"message": "Ghosteryブラウザ拡張のヘルプ",
-		"description": ""
-	},
-	"settings_trust_and_restrict": {
-		"message": "信頼と制限",
-		"description": ""
-	},
-	"tooltip_anti_track_body_on": {
-		"message": "個人データポイントが匿名化されました。",
-		"description": ""
-	},
-	"settings_auto_update": {
-		"message": "Ghosteryトラッカー・ライブラリーからの自動更新を有効にする",
-		"description": ""
-	},
-	"panel_menu_about": {
-		"message": "バージョン情報",
-		"description": ""
-	},
-	"box_display_tl": {
-		"message": "$SPAN_START$左上に$SPAN_END$表示",
-		"description": "",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
-	},
-	"alert_ad_block_on": {
-		"message": "強化された広告ブロッキングがオンになりました。広告はブロックされます。",
-		"description": ""
-	},
-	"setup_display_view_detailed_desc": {
-		"message": "トラッカーを一覧表示し、追加の洞察力を利用するカスタム・ブロックを可能にします。",
-		"description": ""
-	},
-	"panel_detail_rewards_none_found": {
-		"message": "報酬が見つかりませんでした",
-		"description": ""
-	},
-	"rewards_settings": {
-		"message": "Ghostery報酬の設定",
-		"description": ""
-	},
-	"settings_last_update": {
-		"message": "最後に同期化したサイト",
-		"description": ""
-	},
-	"settings_general_settings": {
-		"message": "一般設定",
-		"description": ""
-	},
-	"settings_display_in": {
-		"message": "に表示",
-		"description": ""
-	},
-	"setup_display_view_simple": {
-		"message": "シンプル",
-		"description": ""
-	},
-	"settings_edit_account": {
-		"message": "アカウントを編集",
-		"description": ""
-	},
-	"category_essential_desc": {
-		"message": "タグ・マネージャやプライバシーに関する通知などのウェブサイト機能に不可欠であるトラッカーが含まれています。",
-		"description": "User-facing description for the Essential tag category."
-	},
-	"last_name_field_label": {
-		"message": "姓（オプション）：",
-		"description": ""
-	},
-	"settings_update_now": {
-		"message": "今すぐ更新",
-		"description": ""
-	},
-	"alert_site_restricted": {
-		"message": "サイトがブラックリストに登録されました。このサイトで、トラッカーはブロックされ、追跡防止は有効になります。",
-		"description": ""
-	},
-	"rewards_expires_in_secs": {
-		"message": "秒",
-		"description": ""
-	},
-	"setup_header_password": {
-		"message": "パスワード",
-		"description": ""
-	},
-	"tracker_found": {
-		"message": "見つかりました",
-		"description": ""
-	},
-	"panel_detail_menu_premium_title": {
-		"message": "プレミアム",
-		"description": ""
-	},
-	"global_settings_saved_category": {
-		"message": "グローバル・カテゴリ設定が保存されました",
-		"description": ""
-	},
-	"settings_filter_blocked_label": {
-		"message": "ブロックされた対象",
-		"description": ""
-	},
-	"drawer_desc_enable_smart_block": {
-		"message": "トラッカーが一時的にブロックまたはブロック解除されました。",
-		"description": ""
-	},
-	"settings_trusted_sites": {
-		"message": "信頼できるサイト",
-		"description": ""
-	},
-	"settings_seconds": {
-		"message": "秒",
-		"description": ""
-	},
-	"setup_done_view_desc": {
-		"message": "Ghosteryはブラウザ・バーで静かに動作します。",
-		"description": ""
-	},
-	"summary_alerts": {
-		"message": "アラート",
-		"description": "as in '5 ALERTS'"
-	},
-	"panel_menu_settings": {
-		"message": "設定",
-		"description": ""
-	},
-	"setup_login_view_create_account": {
-		"message": "アカウントをお持ちでないですか？アカウントを作成してください。",
-		"description": ""
-	},
-	"settings_show_purple_box_tooltip": {
-		"message": "紫色のボックスは、ブラウザの隅に表示されるトラッカーのリアルタイム・リストです。この機能は、ウェブページに追加されたトラッカーを確認するのに役立ちます。",
-		"description": ""
-	},
-	"settings_show_purple_box": {
-		"message": "ブラウザの隅に紫色のボックスを表示します",
-		"description": ""
-	},
-	"category_advertising_desc": {
-		"message": "データ収集、行動分析、リターゲティングなどの広告サービスを含みます。",
-		"description": "User-facing description for the Advertising tag category."
-	},
-	"settings_export_success": {
-		"message": "のダウンロード・フォルダに設定が正常にエクスポートされました。",
-		"description": ""
-	},
-	"tracker_signular": {
-		"message": "トラッカー",
-		"description": ""
-	},
-	"rewards_expires_in_hours": {
-		"message": "時間",
-		"description": ""
-	},
-	"settings_trusted_restricted_sites": {
-		"message": "信頼と制限",
-		"description": ""
-	},
-	"box_looking": {
-		"message": "検索中",
-		"description": ""
-	},
-	"panel_signin_success": {
-		"message": "としてサインインしています ",
-		"description": ""
-	},
-	"setup_display_view_title": {
-		"message": "どのように表示するのが好きですか？",
-		"description": ""
-	},
-	"summary_map_these_trackers": {
-		"message": "トラッカーをマッピングする",
-		"description": ""
-	},
-	"tracker_description_learn_more": {
-		"message": "トラッカーのプロファイルを追加し続ける",
-		"description": ""
-	},
-	"not_http_page": {
-		"message": "現在のタブにhttpまたはhttpsページが開いていることを確認してください",
-		"description": ""
-	},
-	"panel_header_verify_account": {
-		"message": "アカウントを確認",
-		"description": ""
-	},
-	"setup_additional_view_adblock_title": {
-		"message": "強化された広告ブロッキング",
-		"description": ""
-	},
-	"settings_filter_all_label": {
-		"message": "すべて",
-		"description": ""
-	},
-	"settings_highlight_trackers_tooltip": {
-		"message": "特定のトラッカーがブロックされていると、ソーシャル・メディアの共有、コメント、ビデオ・プレーヤーなどの機能が動作しないことがあります。これらのブロックされた機能の1つを有効にするには、ページで次のアイコンをクリックします：",
-		"description": ""
-	},
-	"panel_detail_performance_text": {
-		"message": "近日開始する機能です。",
-		"description": ""
-	},
-	"category_essential": {
-		"message": "必需",
-		"description": "Ghostery organizes tags by category. This is one of several tag categories."
-	},
-	"summary_description_not_scanned_2": {
-		"message": "別のページに移動して、要求に沿うことを約束します。",
-		"description": ""
-	},
-	"settings_import_warning": {
-		"message": "警告：現在のGhostery設定を上書きします。",
-		"description": ""
-	},
-	"panel_menu_help": {
-		"message": "ヘルプ",
-		"description": ""
-	},
-	"tooltip_pause": {
-		"message": "Ghosteryを一時停止",
-		"description": ""
-	},
-	"settings_trackers": {
-		"message": "トラッカー",
-		"description": ""
-	},
-	"rewards_terms_conditions": {
-		"message": "利用規約",
-		"description": ""
-	},
-	"notification_upgrade_v8": {
-		"message": "素晴らしい新機能を設定し、最新のリリースについても学びます。",
-		"description": ""
-	},
-	"panel_tracker_breaking_page_end": {
-		"message": " ページを区切っています。",
-		"description": ""
-	},
-	"settings_filter_unblocked_label": {
-		"message": "ブロックされていない対象",
-		"description": ""
-	},
-	"rewards_no": {
-		"message": "いいえ",
-		"description": ""
-	},
-	"settings_human_web_tooltip": {
-		"message": "Ghosteryは、デフォルトでHuman Webを実装しています。これは、大衆の知恵を活用してよりプライベートなインターネットを構築する革新的な技術です",
-		"description": ""
-	},
-	"category_pornvertising": {
-		"message": "アダルト広告",
-		"description": "Ghostery organizes tags by category. This is one of several tag categories."
-	},
-	"settings_update_up_to_date": {
-		"message": "まだ最新版です",
-		"description": ""
-	},
-	"panel_tracker_warning_smartunblock_tooltip": {
-		"message": "トラッカーがスマート・ブロッキングによってブロック解除されました",
-		"description": ""
-	},
-	"alert_site_trusted_off": {
-		"message": "サイトがホワイトリストから削除されました。",
-		"description": ""
-	},
-	"summary_show_menu": {
-		"message": "メニューを表示",
-		"description": ""
-	},
-	"rewards_about": {
-		"message": "報酬について",
-		"description": ""
-	},
-	"category_social_media": {
-		"message": "ソーシャル・メディア",
-		"description": "Ghostery organizes tags by category. This is one of several tag categories."
-	},
-	"blocking_category_tracker_found": {
-		"message": "見つかりました",
-		"description": ""
-	},
-	"tooltip_ad_block_body_on": {
-		"message": "広告がブロックされました。",
-		"description": ""
-	},
-	"settings_sites_placeholder": {
-		"message": "example.com",
-		"description": ""
-	},
-	"setup_login_view_log_in": {
-		"message": "すでにアカウントをお持ちですか？サインインしてください。",
-		"description": ""
-	},
-	"category_customer_interaction_desc": {
-		"message": "チャット、メール・メッセージ交換、顧客サポート、およびその他の対話ツールがあります。",
-		"description": "User-facing description for the Customer Interaction tag category."
-	},
-	"panel_forgot_password": {
-		"message": "パスワードをお忘れですか？",
-		"description": ""
-	},
-	"click2play_blocked": {
-		"message": "Ghosteryが$APP_NAME$をブロックしました。",
-		"description": "",
-		"placeholders": {
-			"app_name": {
-				"content": "$1",
-				"example": "SoundCloud"
-			}
-		}
-	},
-	"panel_help_setup": {
-		"message": "Ghosteryをセットアップ",
-		"description": ""
-	},
-	"setup_blocking_view_block_custom": {
-		"message": "カスタム",
-		"description": ""
-	},
-	"settings_individual_trackers_tooltip": {
-		"message": "ウェブサイト上でカスタム・コントロールをブロックまたは許可する特定のトラッカーを選択します",
-		"description": ""
-	},
-	"rewards_delete": {
-		"message": "この報酬を削除",
-		"description": ""
-	},
-	"click2play_allow_always_tooltip": {
-		"message": "許可して再ロードします。",
-		"description": "Tooltip that appears over the 'allow always' click2play button."
-	},
-	"rewards_expires_in_days": {
-		"message": "日",
-		"description": ""
-	},
-	"panel_tracker_block_tooltip": {
-		"message": "すべてのサイトでブロック",
-		"description": ""
-	},
-	"setup_button_next": {
-		"message": "次へ",
-		"description": ""
-	},
-	"setup_header_email": {
-		"message": "メール",
-		"description": ""
-	},
-	"license_information_missing": {
-		"message": "ライセンス・リポジトリ情報がありません",
-		"description": ""
-	},
-	"box_settings_expanded": {
-		"message": "私のGhostery設定",
-		"description": ""
-	},
-	"rewards_first_prompt": {
-		"message": "Ghostery報酬を続行しますか？",
-		"description": ""
-	},
-	"drawer_tooltip_enable_ad_block": {
-		"message": "ウェブサイト上のすべての広告を表示またはブロックします。",
-		"description": ""
-	},
-	"panel_detail_menu_list_title": {
-		"message": "リスト・ビュー",
-		"description": ""
-	},
-	"forgot_password_message": {
-		"message": "パスワードをお忘れですか？ねえ、それは誰にでも起こります。パスワードをリセットする手順をメールでお送りします。",
-		"description": ""
-	},
-	"box_options_expanded": {
-		"message": "オプション",
-		"description": ""
-	},
-	"drawer_tooltip_enable_smart_block": {
-		"message": "トラッカーを自動的にブロックおよびブロック解除して、ページのパフォーマンスを最適化します。",
-		"description": ""
-	},
-	"setup_upgrade_desc_3": {
-		"message": "$BOLD_START$強化された追跡防止$BOLD_END$により、個人データ保護が向上されます。",
-		"description": "",
-		"placeholders": {
-			"bold_start": {
-				"content": "<strong>"
-			},
-			"bold_end": {
-				"content": "</strong>"
-			}
-		}
-	},
-	"tooltip_trust_on": {
-		"message": "サイトで、トラッカーが許可され、追跡防止が無効になりました。元に戻すにはクリックしてください。",
-		"description": ""
-	},
-	"settings_show_tracker_count_badge": {
-		"message": "ブラウザ・ツールバーのGhosteryアイコンにトラッカー・カウント・バッジを表示",
-		"description": ""
-	},
-	"category_comments": {
-		"message": "コメント",
-		"description": "Ghostery organizes tags by category. This is one of several tag categories."
-	},
-	"pause_24_hours": {
-		"message": "24時間",
-		"description": ""
-	},
-	"server_error_message": {
-		"message": "技術的な問題があるようです。後でもう一度お試しください。",
-		"description": ""
-	},
-	"panel_detail_rewards_coming_soon": {
-		"message": "近日開始する機能です。",
-		"description": ""
-	},
-	"summary_pause_ghostery": {
-		"message": "一時停止",
-		"description": ""
-	},
-	"unblocked": {
-		"message": "ブロックされていない対象",
-		"description": "Select this to show only unblocked (unchecked) tags in the tag browser. Should read as 'Show unblocked'."
-	},
-	"tracker_description_none_found": {
-		"message": "トラッカーの説明が見つかりませんでした。",
-		"description": ""
-	},
-	"setup_login_view_password": {
-		"message": "パスワード：",
-		"description": ""
-	},
-	"panel_tracker_warning_slow_tooltip": {
-		"message": "トラッカーが遅いです",
-		"description": ""
-	},
-	"setup_choice_view_answer_questions": {
-		"message": "いくつかの短い質問に答えて独自の設定を選択します。",
-		"description": ""
-	},
-	"setup_header_sign_in_hide": {
-		"message": "サインインを非表示",
-		"description": ""
-	},
-	"setup_login_view_email_error": {
-		"message": "申し訳ありませんが、実際のメールアドレスを入力してください。",
-		"description": ""
-	},
-	"category_pornvertising_desc": {
-		"message": "アダルト・コンテンツ・サイト用に開発された広告技術を含みます。",
-		"description": "User-facing description for the Adult Advertising tag category."
-	},
-	"setup_upgrade_button_go": {
-		"message": "セットアップ",
-		"description": ""
-	},
-	"setup_button_skip": {
-		"message": "スキップ",
-		"description": ""
-	},
-	"pause_30_min": {
-		"message": "30分",
-		"description": ""
-	},
-	"summary_blocked": {
-		"message": "ブロックされた対象",
-		"description": "as in '5 (trackers) BLOCKED'"
-	},
-	"panel_help_feedback": {
-		"message": "アンケートにご協力",
-		"description": ""
-	},
-	"license_publisher": {
-		"message": "パブリッシャー",
-		"description": ""
-	},
-	"summary_page_not_scanned": {
-		"message": "スキャンされなかったページ",
-		"description": ""
-	},
-	"summary_resume_ghostery_tooltip": {
-		"message": "Ghostery拡張機能が一時停止されました。再開するにはクリックしてください。",
-		"description": ""
-	},
-	"box_settings": {
-		"message": "設定",
-		"description": ""
-	},
-	"panel_menu_report_broken_site": {
-		"message": "区切られたページを報告",
-		"description": ""
-	},
-	"rewards_off": {
-		"message": "オフ",
-		"description": ""
-	},
-	"license_type": {
-		"message": "ライセンスの種類",
-		"description": ""
-	},
-	"panel_help_support": {
-		"message": "サポート",
-		"description": ""
-	},
-	"panel_tracker_slow_non_secure": {
-		"message": "$COUNT$が低速および/または保護のない$TRACKERS$",
-		"description": "",
-		"placeholders": {
-			"count": {
-				"content": "$1",
-				"example": "4"
-			},
-			"trackers": {
-				"content": "$2",
-				"example": "trackers"
-			}
-		}
-	},
-	"panel_header_sign_in": {
-		"message": "サインイン",
-		"description": ""
-	},
-	"tooltip_anti_track": {
-		"message": "強化された追跡防止",
-		"description": ""
-	},
-	"category_site_analytics_desc": {
-		"message": "データ分析、サイト使用状況、およびパフォーマンス・トラッカーが含まれます。",
-		"description": "User-facing description for the Site Analytics tag category."
-	},
-	"tooltip_resume": {
-		"message": "Ghosteryを再開",
-		"description": ""
-	},
-	"license_text": {
-		"message": "ライセンス・テキスト",
-		"description": ""
-	},
-	"settings_import_file_error": {
-		"message": "間違ったファイル・タイプです。.ghostファイルを選択してもう一度お試しください。",
-		"description": ""
+	"blocked_redirect_page_title": {
+		"description": "Page title for blocked_redirect.html which appears when a redirect is blocked.",
+		"message": "Ghosteryがリダイレクトを禁止しました。"
 	},
 	"blocked_redirect_prevent": {
-		"message": "Ghosteryが$BREAK$ $SP_O_START$$ORIGIN$$SP_END$から$SP_D_START$$DESTINATION$$SP_END$へのリダイレクトを禁止しました。これは$BREAK$$A_START$$APP$$A_END$の部分です。$BREAK$",
 		"description": "Text appearing on block_redirect.html when a redirect is blocked. Should appear inside \"redirect-prevent\" div.",
+		"message": "Ghosteryが$BREAK$ $SP_O_START$$ORIGIN$$SP_END$から$SP_D_START$$DESTINATION$$SP_END$へのリダイレクトを禁止しました。これは$BREAK$$A_START$$APP$$A_END$の部分です。$BREAK$",
 		"placeholders": {
 			"a_end": {
 				"content": "</a>"
@@ -1750,164 +88,502 @@
 			}
 		}
 	},
-	"blocking_block_all": {
-		"message": "すべてをブロック",
-		"description": ""
-	},
-	"setup_additional_view_antitrack_desc": {
-		"message": "閲覧保護を強化するために、ブロックされていないトラッカーと未知のトラッカーを匿名化します。",
-		"description": ""
-	},
-	"setup_choice_view_legal": {
-		"message": "Ghosteryをインストールすると、Ghosteryの$LINK_PP_START$プライバシーポリシーPrivacy Policy$LINK_PP_END$と$LINK_TERMS_START$利用規約$LINK_TERMS_END$に同意したことになります。",
-		"description": "",
+	"blocked_redirect_url_content": {
+		"description": "Text appearing on block_redirect.html when a redirect is blocked and a final 'destination' URL is successfully found.",
+		"message": "このタグは$BREAK$ $A_START$$REDIRECT_URL$$A_END$にリダイレクトされているようです。このリンクが正しく表示されている場合は、続行してください。下のアイコンをクリックして$APP$を許可し再ロードしてください。",
 		"placeholders": {
-			"link_pp_start": {
-				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" target=\"_blank\">"
-			},
-			"link_pp_end": {
+			"a_end": {
 				"content": "</a>"
 			},
-			"link_terms_start": {
-				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-end-user-license-agreement/\" target=\"_blank\">"
+			"a_start": {
+				"content": "<a href=\"$1\" class=\"ellipsis\" title=\"$1\">"
 			},
-			"link_terms_end": {
-				"content": "</a>"
+			"app": {
+				"content": "$2",
+				"example": "DoubleClick"
+			},
+			"break": {
+				"content": "<br>"
+			},
+			"redirect_url": {
+				"content": "$1"
 			}
 		}
 	},
-	"all": {
-		"message": "すべて",
-		"description": "Default setting in the 'filter by type' dropdown for the tag browser. Doesn't filter anything out. Should read as 'Show all'."
+	"box_dismiss_0s": {
+		"message": "却下$SPAN_START$しない$SPAN_END$",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
 	},
-	"settings_share_usage_tooltip": {
-		"message": "当社は、ユーザーが好む機能をよりよく理解するために、使用状況分析データを収集します。たとえば、「一時停止」をクリックすると、この機能を使用したことを知らせるピングが収集されます。",
-		"description": ""
+	"box_dismiss_15s": {
+		"message": "$SPAN_START$15秒後に$SPAN_END$却下",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
 	},
-	"summary_trust_site_active": {
-		"message": "信頼できるサイト",
-		"description": ""
+	"box_dismiss_30s": {
+		"message": "$SPAN_START$30秒後に$SPAN_END$却下",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
 	},
-	"panel_help_contact_header": {
-		"message": "お問い合わせ方法",
-		"description": ""
+	"box_dismiss_5s": {
+		"message": "$SPAN_START$5秒後に$SPAN_END$却下",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
 	},
-	"drawer_label_enable_smart_block": {
-		"message": "トラッカー調整済",
-		"description": ""
+	"box_display_bl": {
+		"message": "$SPAN_START$左下に$SPAN_END$表示",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
 	},
-	"settings_show_patterns": {
-		"message": "トラッカーURLを表示",
-		"description": ""
+	"box_display_br": {
+		"message": "$SPAN_START$右下に$SPAN_END$表示",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
 	},
-	"blocked_redirect_action_always_title": {
-		"message": "常に許可して再ロードします。",
-		"description": "Title for the 'Allow always and reload' button on the blocked redirect page."
+	"box_display_tl": {
+		"message": "$SPAN_START$左上に$SPAN_END$表示",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
 	},
-	"drawer_title_enable_ad_block": {
-		"message": "強化された広告ブロッキング",
-		"description": ""
+	"box_display_tr": {
+		"message": "$SPAN_START$右上に$SPAN_END$表示",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
 	},
-	"settings_export_reserved_page_error": {
-		"message": "現在のページが予約済みのブラウザ・ページである場合、Ghosteryは設定をエクスポートできません。別のページに移動してもう一度お試しください。",
-		"description": ""
-	},
-	"password_field_label": {
-		"message": "パスワード",
-		"description": ""
-	},
-	"rewards_expires_in_mins": {
-		"message": "分",
-		"description": ""
-	},
-	"alert_ghostery_resumed": {
-		"message": "Ghostery拡張機能が再開されました。",
-		"description": ""
-	},
-	"pause_30_min_condensed": {
-		"message": "30分",
-		"description": ""
-	},
-	"setup_additional_view_smartblock_desc": {
-		"message": "トラッカーを自動的にブロックおよびブロック解除して、ページのパフォーマンスを最適化します。",
-		"description": ""
-	},
-	"send_button_label": {
-		"message": "送信",
-		"description": ""
-	},
-	"alert_reload": {
-		"message": "変更を確認するには、リロードしてください。",
-		"description": ""
+	"box_hide": {
+		"message": "ボックスを非表示にする"
 	},
 	"box_hide_expanded": {
-		"message": "紫色のボックスを非表示にする",
-		"description": ""
+		"message": "紫色のボックスを非表示にする"
 	},
-	"tracker_description_getting": {
-		"message": "トラッカーの説明を取得中…",
-		"description": ""
+	"box_looking": {
+		"message": "検索中"
 	},
-	"drawer_label_enable_anti_tracking": {
-		"message": "トラッカーが匿名化されています",
-		"description": ""
+	"box_options_expanded": {
+		"message": "オプション"
+	},
+	"box_settings": {
+		"message": "設定"
+	},
+	"box_settings_expanded": {
+		"message": "私のGhostery設定"
+	},
+	"box_tracker": {
+		"message": "トラッカー"
+	},
+	"box_trackers": {
+		"message": "トラッカー"
+	},
+	"box_warning_slow": {
+		"message": "低速トラッカー"
+	},
+	"box_warning_nonsecure": {
+		"message": "保護のないトラッカー"
+	},
+	"box_warning_compatibility": {
+		"message": "区切られたページのトラッカー"
+	},
+	"browser_button_tooltip": {
+		"description": "Ghostery's browser button tooltip.",
+		"message": "Ghosteryの発見内容を表示"
+	},
+	"button_cancel": {
+		"description": "Part of a confirmation dialog. Clicking this cancels the action.",
+		"message": "キャンセル"
+	},
+	"category_advertising": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "広告"
+	},
+	"category_advertising_desc": {
+		"description": "User-facing description for the Advertising tag category.",
+		"message": "データ収集、行動分析、リターゲティングなどの広告サービスを含みます。"
+	},
+	"category_audio_video_player": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "オーディオ/ビデオ・プレーヤー"
+	},
+	"category_audio_video_player_desc": {
+		"description": "User-facing description for the Audio/Video Player tag category.",
+		"message": "ウェブサイトにおけるオーディオおよびビデオ・コンテンツの発行、配布、および最適化を可能にします。"
+	},
+	"category_comments": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "コメント"
+	},
+	"category_comments_desc": {
+		"description": "User-facing description for the Comments tag category.",
+		"message": "コメント・セクションで記事や製品レビューを有効にします。"
+	},
+	"category_customer_interaction": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "顧客インタラクション"
+	},
+	"category_customer_interaction_desc": {
+		"description": "User-facing description for the Customer Interaction tag category.",
+		"message": "チャット、メール・メッセージ交換、顧客サポート、およびその他の対話ツールがあります。"
+	},
+	"category_essential": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "必需"
+	},
+	"category_essential_desc": {
+		"description": "User-facing description for the Essential tag category.",
+		"message": "タグ・マネージャやプライバシーに関する通知などのウェブサイト機能に不可欠であるトラッカーが含まれています。"
+	},
+	"category_pornvertising": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "アダルト広告"
+	},
+	"category_pornvertising_desc": {
+		"description": "User-facing description for the Adult Advertising tag category.",
+		"message": "アダルト・コンテンツ・サイト用に開発された広告技術を含みます。"
+	},
+	"category_site_analytics": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "サイト分析"
+	},
+	"category_site_analytics_desc": {
+		"description": "User-facing description for the Site Analytics tag category.",
+		"message": "データ分析、サイト使用状況、およびパフォーマンス・トラッカーが含まれます。"
+	},
+	"category_social_media": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "ソーシャル・メディア"
+	},
+	"category_social_media_desc": {
+		"description": "User-facing description for the Social Media tag category.",
+		"message": "ソーシャル・メディア・プラットフォームに関連する機能が含まれています。"
+	},
+	"category_uncategorized": {
+		"message": "未分類"
+	},
+	"category_uncategorized_desc": {
+		"message": "これらのトラッカーはまだ分類されていません。"
+	},
+	"click2play_allow_always_tooltip": {
+		"description": "Tooltip that appears over the 'allow always' click2play button.",
+		"message": "許可して再ロードします。"
+	},
+	"click2play_allow_once_button_tooltip": {
+		"description": "Tooltip that appears over the click2play replacement for 'social' buttons.",
+		"message": "Ghosteryが$APP_NAME$をブロックしました。ここをクリックすると、このアプリを許可して一度だけロードできます。",
+		"placeholders": {
+			"app_name": {
+				"content": "$1",
+				"example": "Twitter Button"
+			}
+		}
+	},
+	"click2play_allow_once_tooltip": {
+		"description": "Tooltip that appears over the 'allow once' click2play button.",
+		"message": "一度許可して再ロードします。"
+	},
+	"click2play_blocked": {
+		"message": "Ghosteryが$APP_NAME$をブロックしました。",
+		"placeholders": {
+			"app_name": {
+				"content": "$1",
+				"example": "SoundCloud"
+			}
+		}
+	},
+	"click2play_comment_form": {
+		"message": "Ghosteryが$NAME$のコメントをブロックしました。",
+		"placeholders": {
+			"name": {
+				"content": "$1",
+				"example": "Disqus"
+			}
+		}
+	},
+	"click2play_review_form": {
+		"message": "Ghosteryが$NAME$のレビューをブロックしました。",
+		"placeholders": {
+			"name": {
+				"content": "$1",
+				"example": "Disqus"
+			}
+		}
+	},
+	"click2play_survey_form": {
+		"message": "Ghosteryが$NAME$のアンケートをブロックしました。",
+		"placeholders": {
+			"name": {
+				"content": "$1",
+				"example": "Disqus"
+			}
+		}
+	},
+	"click2play_video_form": {
+		"message": "Ghosteryが$NAME$ビデオ・プレーヤーをブロックしました。",
+		"placeholders": {
+			"name": {
+				"content": "$1",
+				"example": "Disqus"
+			}
+		}
+	},
+	"copyright": {
+		"description": "Copyright message, shown in page footers.",
+		"message": "$C$ $YEAR$ $GHOSTERY$、$COMPANY_ADDRESS$の一部",
+		"placeholders": {
+			"c": {
+				"content": "&copy;"
+			},
+			"company_address": {
+				"content": "$1",
+				"example": "GHOSTERY, Inc., Such-and-such Street, Such-and-such Floor, New York, NY, Zip Code"
+			},
+			"ghostery": {
+				"content": "<a href='https://www.ghostery.com' target='_blank'>Ghostery</a>"
+			},
+			"year": {
+				"content": "2015"
+			}
+		}
+	},
+	"email_confirm_field_label": {
+		"message": "メールを確認："
+	},
+	"email_field_label": {
+		"message": "メール："
+	},
+	"error_email_forgot": {
+		"message": "うーん、そのメールアドレスがありません。もう一度試しますか？"
+	},
+	"first_name_field_label": {
+		"message": "名（オプション）："
+	},
+	"forgot_password_message": {
+		"message": "パスワードをお忘れですか？ねえ、それは誰にでも起こります。パスワードをリセットする手順をメールでお送りします。"
+	},
+	"invalid_email_confirmation": {
+		"message": "お客様のメールアドレスは一致しません。"
+	},
+	"invalid_email_create": {
+		"message": "有効なメールアドレスを入力してください。"
+	},
+	"invalid_email_forgot": {
+		"message": "申し訳ありませんが、実際のメールアドレスを入力してください。"
+	},
+	"invalid_email_login": {
+		"message": "申し訳ありませんが、実際のメールアドレスを入力してください。"
+	},
+	"last_name_field_label": {
+		"message": "姓（オプション）："
+	},
+	"password_field_label_required": {
+		"message": "パスワードが必要です。"
 	},
 	"name": {
-		"message": "$EXTENSION_NAME$ – プライバシー広告ブロッカー",
 		"description": "The title of this extension (Ghostery).",
+		"message": "$EXTENSION_NAME$ – プライバシー広告ブロッカー",
 		"placeholders": {
 			"extension_name": {
 				"content": "Ghostery"
 			}
 		}
 	},
+	"none": {
+		"description": "Used to say that this item does not belong to any of the groups, as in \"Groups: None\" (as opposed to \"Groups: Group A, Group B, Group C\").",
+		"message": "なし"
+	},
+	"summary_blocked": {
+		"description": "as in '5 (trackers) BLOCKED'",
+		"message": "ブロックされた対象"
+	},
+	"summary_alert": {
+		"description": "as in '1 ALERT'",
+		"message": "アラート"
+	},
+	"summary_alerts": {
+		"description": "as in '5 ALERTS'",
+		"message": "アラート"
+	},
+	"summary_page_not_scanned": {
+		"message": "スキャンされなかったページ"
+	},
+	"summary_description_not_scanned_1": {
+		"message": "Ghosteryは\"http\"と\"https\"のページのみをスキャンします。"
+	},
+	"summary_description_not_scanned_2": {
+		"message": "別のページに移動して、要求に沿うことを約束します。"
+	},
+	"summary_custom_settings": {
+		"message": "カスタム設定"
+	},
+	"summary_trust_site": {
+		"message": "サイトを信頼"
+	},
+	"summary_trust_site_active": {
+		"message": "信頼できるサイト"
+	},
 	"summary_restrict_site": {
-		"message": "サイトを制限",
-		"description": ""
+		"message": "サイトを制限"
 	},
-	"setup_data_view_title": {
-		"message": "Ghosteryの改善にご協力いただけますか？",
-		"description": ""
+	"summary_restrict_site_active": {
+		"message": "制限されたサイト"
 	},
-	"blacklist_error_duplicate_url": {
-		"message": "このサイトは既に制限されています。",
-		"description": ""
+	"summary_undo": {
+		"message": "元に戻す"
 	},
-	"rewards_on": {
-		"message": "オン",
-		"description": ""
+	"summary_pause_ghostery": {
+		"message": "一時停止"
 	},
-	"category_uncategorized": {
-		"message": "未分類",
-		"description": ""
+	"summary_pause_ghostery_tooltip": {
+		"message": "Ghostery拡張機能を一時停止します。"
 	},
-	"drawer_desc_enable_ad_block": {
-		"message": "広告スポットがブロックされました。",
-		"description": ""
+	"summary_pause_ghostery_ab_pause": {
+		"message": "一時停止"
 	},
-	"settings_notify_me_tooltip": {
-		"message": "Ghosteryが新しい製品機能、更新版、および顧客フィードバックに関連したメッセージをブラウザに表示できるようにします。",
-		"description": ""
+	"pause_30_min": {
+		"message": "30分"
 	},
-	"tooltip_simple": {
-		"message": "シンプル・ビュー",
-		"description": ""
+	"pause_30_min_condensed": {
+		"message": "30分"
 	},
-	"settings_account_email": {
-		"message": "メール",
-		"description": ""
+	"pause_1_hour": {
+		"message": "1時間"
 	},
-	"setup_additional_view_smartblock_title": {
-		"message": "スマート・ブロッキング",
-		"description": ""
+	"pause_1_hour_condensed": {
+		"message": "1時間"
 	},
-	"rewards_on_toast_notification": {
-		"message": "Ghostery報酬はオンです",
-		"description": ""
+	"pause_24_hours": {
+		"message": "24時間"
+	},
+	"pause_24_hours_condensed": {
+		"message": "24時間"
+	},
+	"summary_resume_ghostery": {
+		"message": "Ghosteryを再開"
+	},
+	"summary_resume_ghostery_tooltip": {
+		"message": "Ghostery拡張機能が一時停止されました。再開するにはクリックしてください。"
+	},
+	"summary_resume_ghostery_ab_pause": {
+		"message": "再開"
+	},
+	"summary_show_menu": {
+		"message": "メニューを表示"
+	},
+	"summary_map_these_trackers": {
+		"message": "トラッカーをマッピングする"
+	},
+	"blocking_trackers": {
+		"message": "トラッカー"
+	},
+	"blocking_block_all": {
+		"message": "すべてをブロック"
+	},
+	"blocking_block_shown": {
+		"message": "表示されたすべてをブロック"
+	},
+	"blocking_category_tracker": {
+		"message": "トラッカー"
+	},
+	"blocking_category_trackers": {
+		"message": "トラッカー"
+	},
+	"blocking_category_blocked": {
+		"description": "as in '5 (trackers) BLOCKED'",
+		"message": "ブロックされた対象"
+	},
+	"panel_create_account": {
+		"message": "アカウントを作成"
+	},
+	"panel_email_verification_sent": {
+		"message": "$BOLD_HTML_STARTS$成功しました！$BOLD_HTML_END$ $EMAIL$にアカウント確認メールが送信されました",
+		"placeholders": {
+			"bold_html_end": {
+				"content": "</strong>"
+			},
+			"bold_html_starts": {
+				"content": "<strong>"
+			},
+			"email": {
+				"content": "$1",
+				"example": "info@ghostery.com"
+			}
+		}
+	},
+	"panel_forgot_password": {
+		"message": "パスワードをお忘れですか？"
+	},
+	"panel_help_panel_header": {
+		"message": "Ghosteryブラウザ拡張のヘルプ"
+	},
+	"panel_help_contact_header": {
+		"message": "お問い合わせ方法"
+	},
+	"panel_help_faq": {
+		"message": "よくある質問"
+	},
+	"panel_help_feedback": {
+		"message": "アンケートにご協力"
+	},
+	"panel_help_questions_header": {
+		"message": "質問とコメント"
+	},
+	"panel_help_support": {
+		"message": "サポート"
+	},
+	"panel_help_setup": {
+		"message": "Ghosteryをセットアップ"
+	},
+	"panel_about_panel_header": {
+		"message": "Ghosteryブラウザ拡張について"
 	},
 	"panel_about_version_header": {
 		"message": "$BROWSER$バージョン$VERSION$用Ghostery",
-		"description": "",
 		"placeholders": {
 			"browser": {
 				"content": "$1",
@@ -1919,190 +595,1628 @@
 			}
 		}
 	},
-	"invalid_email_forgot": {
-		"message": "申し訳ありませんが、実際のメールアドレスを入力してください。",
-		"description": ""
+	"panel_about_release_notes": {
+		"message": "すべての更新情報についてはリリースノートをご覧ください"
 	},
-	"setup_done_view_title": {
-		"message": "準備ができています！",
-		"description": ""
+	"panel_about_license": {
+		"message": "ライセンス契約"
 	},
-	"tooltip_expert": {
-		"message": "詳細ビュー",
-		"description": ""
+	"panel_about_privacy_statement": {
+		"message": "プライバシーに関する声明"
 	},
-	"tooltip_anti_track_body": {
-		"message": "閲覧保護を強化するために、ブロックされていないトラッカーと未知のトラッカーを匿名化します。",
-		"description": ""
+	"panel_about_licenses": {
+		"message": "ソフトウェア・ライセンス"
 	},
-	"enable_when_paused": {
-		"message": "この機能を使用するには、Ghosteryを再開してください。",
-		"description": ""
+	"panel_about_imprint": {
+		"message": "インプリント"
 	},
-	"blocked_redirect_action_through_once_title": {
-		"message": "送付先に達するまでタグを一度許可します。",
-		"description": "Title for the 'Allow once' button on the blocked redirect page."
+	"panel_menu_settings": {
+		"message": "設定"
 	},
-	"panel_tracker_warning_smartblock_tooltip": {
-		"message": "トラッカーがスマート・ブロッキングによってブロックされました",
-		"description": ""
+	"panel_menu_report_broken_site": {
+		"message": "区切られたページを報告"
 	},
-	"enable_when_whitelisted": {
-		"message": "この機能を使用するには、「サイトを信頼」を元に戻してください",
-		"description": ""
+	"panel_menu_submit_tracker": {
+		"message": "新しいトラッカーを提出"
 	},
-	"summary_undo": {
-		"message": "元に戻す",
-		"description": ""
+	"panel_menu_help": {
+		"message": "ヘルプ"
 	},
-	"setup_upgrade_button_later": {
-		"message": "後にする",
-		"description": ""
+	"panel_menu_about": {
+		"message": "バージョン情報"
 	},
-	"setup_upgrade_title": {
-		"message": "Ghostery 8をご利用いただきありがとうございます！",
-		"description": ""
+	"panel_menu_ghostery_subscriber": {
+		"message": "Ghostery プラス"
 	},
-	"settings_show_reload_banner": {
-		"message": "拡張機能の上部にページ・リロード・バナー通知を表示",
-		"description": ""
+	"panel_menu_signin": {
+		"message": "サインイン"
 	},
-	"settings_account_name": {
-		"message": "名前",
-		"description": ""
+	"panel_menu_signout": {
+		"message": "サインアウト"
 	},
-	"alert_smart_block_off": {
-		"message": "スマート・ブロッキングがオフになりました。トラッカー・ブロッキングは自動的に調整されません。",
-		"description": ""
+	"global_settings_saved": {
+		"message": "グローバル設定が保存されました"
 	},
-	"panel_header_simple_view": {
-		"message": "シンプル・ビュー",
-		"description": ""
+	"global_settings_saved_tracker": {
+		"message": "グローバル・トラッカー設定が保存されました"
 	},
-	"setup_choice_view_one_click": {
-		"message": "ワンクリック・セットアップ",
-		"description": ""
+	"global_settings_saved_category": {
+		"message": "グローバル・カテゴリ設定が保存されました"
 	},
-	"invalid_email_login": {
-		"message": "申し訳ありませんが、実際のメールアドレスを入力してください。",
-		"description": ""
+	"panel_needs_reload": {
+		"message": "Ghosteryに保留中の更新があります。"
+	},
+	"panel_click_to_reload": {
+		"message": "再ロードし変更を確認しするには、クリックしてください。"
+	},
+	"panel_tracker_breaking_page": {
+		"message": "$COUNT$が$TRACKERS$をブロックしました",
+		"placeholders": {
+			"count": {
+				"content": "$1",
+				"example": "4"
+			},
+			"trackers": {
+				"content": "$2",
+				"example": "trackers"
+			}
+		}
+	},
+	"panel_tracker_breaking_page_end": {
+		"message": " ページを区切っています。"
+	},
+	"panel_tracker_slow_non_secure": {
+		"message": "$COUNT$が低速および/または保護のない$TRACKERS$",
+		"placeholders": {
+			"count": {
+				"content": "$1",
+				"example": "4"
+			},
+			"trackers": {
+				"content": "$2",
+				"example": "trackers"
+			}
+		}
+	},
+	"panel_tracker_slow_non_secure_end": {
+		"message": " このページで。"
+	},
+	"panel_tracker_total_tooltip": {
+		"message": "検知されたトラッカー、ブロックされた広告、匿名化されたデータポイントの総数です。"
+	},
+	"panel_signin_success": {
+		"message": "としてサインインしています "
+	},
+	"panel_view_trackers": {
+		"message": "トラッカーを表示"
+	},
+	"panel_signin_success_title": {
+		"message": "おめでとうございます！Ghosteryアカウントを利用できます。"
+	},
+	"panel_title_create_account": {
+		"message": "アカウントを作成"
+	},
+	"panel_tracker_found_sources_title": {
+		"message": "検出されたトラッカーURL："
 	},
 	"panel_tracker_warning_compatibility_tooltip": {
-		"message": "ブロックされたトラッカーがページを区切ります",
-		"description": ""
+		"message": "ブロックされたトラッカーがページを区切ります"
+	},
+	"panel_tracker_warning_slow_nonsecure_tooltip": {
+		"message": "トラッカーが低速で保護されていません"
+	},
+	"panel_tracker_warning_nonsecure_tooltip": {
+		"message": "トラッカーが保護されていません"
+	},
+	"panel_tracker_warning_slow_tooltip": {
+		"message": "トラッカーが遅いです"
+	},
+	"panel_tracker_warning_smartblock_tooltip": {
+		"message": "トラッカーがスマート・ブロッキングによってブロックされました"
+	},
+	"panel_tracker_warning_smartunblock_tooltip": {
+		"message": "トラッカーがスマート・ブロッキングによってブロック解除されました"
+	},
+	"panel_tracker_block_tooltip": {
+		"message": "すべてのサイトでブロック"
+	},
+	"panel_tracker_restrict_tooltip": {
+		"message": "このサイトで制限"
+	},
+	"panel_tracker_trust_tooltip": {
+		"message": "このサイトで信頼"
+	},
+	"panel_detail_menu_list_title": {
+		"message": "リスト・ビュー"
+	},
+	"panel_detail_menu_history_title": {
+		"message": "履歴"
+	},
+	"panel_detail_menu_performance_title": {
+		"message": "パフォーマンス"
+	},
+	"panel_detail_menu_rewards_title": {
+		"message": "Rewards（報酬）"
+	},
+	"panel_detail_menu_stats_title": {
+		"message": "履歴統計"
+	},
+	"panel_detail_menu_premium_title": {
+		"message": "プレミアム"
+	},
+	"panel_detail_learn_more": {
+		"message": "詳細を知る"
+	},
+	"panel_detail_history_title": {
+		"message": "履歴"
+	},
+	"panel_detail_history_text": {
+		"message": "近日開始する機能です。"
+	},
+	"panel_detail_performance_title": {
+		"message": "ウェブサイトのパフォーマンス"
+	},
+	"panel_detail_performance_text": {
+		"message": "近日開始する機能です。"
+	},
+	"panel_detail_rewards_title": {
+		"message": "Ghostery Rewards"
+	},
+	"panel_detail_rewards_coming_soon": {
+		"message": "近日開始する機能です。"
+	},
+	"panel_detail_rewards_cliqz_text": {
+		"message": "既にCliqz MyOffrzコントロールパネルで有効になっている機能です。"
+	},
+	"panel_detail_rewards_loading": {
+		"message": "Rewardsを読み込み中…"
+	},
+	"panel_detail_rewards_none_found": {
+		"message": "Rewards（報酬）はありません"
+	},
+	"panel_detail_rewards_off": {
+		"message": "Ghostery Rewards機能が無効です"
+	},
+	"panel_detail_premium_title": {
+		"message": "Ghosteryプレミアム"
+	},
+	"panel_detail_premium_text": {
+		"message": "近日開始する機能です。"
+	},
+	"notification_upgrade": {
+		"message": "私たちの献身的で魅力的なチームが一生懸命に働いて Ghostery の新しいバージョンをリリースしました。"
+	},
+	"notification_upgrade_link": {
+		"message": "本リリースの素晴らしい新機能と不具合修正を確認してください。"
+	},
+	"notification_upgrade_title_v8": {
+		"message": "Ghostery 8の紹介！"
+	},
+	"notification_upgrade_v8": {
+		"message": "素晴らしい新機能を設定し、最新のリリースについても学びます。"
+	},
+	"notification_upgrade_link_v8": {
+		"message": "今すぐ見せてください！"
+	},
+	"notification_library_update": {
+		"message": "新しいトラッカーが発見され、Ghosteryデータベースに追加されました。"
+	},
+	"notification_library_update_link": {
+		"message": "最新情報を確認"
+	},
+	"panel_header_sign_in": {
+		"message": "サインイン"
+	},
+	"panel_header_verify_account": {
+		"message": "アカウントを確認"
+	},
+	"panel_header_simple_view": {
+		"message": "シンプル・ビュー"
+	},
+	"panel_header_detailed_view": {
+		"message": "詳細ビュー"
+	},
+	"password_characters_requirements": {
+		"message": "次の特殊文字のみを使用できます：!@#$%^&*=+()<>{}[];:,./?"
+	},
+	"password_field_label": {
+		"message": "パスワード"
+	},
+	"create_password_field_label": {
+		"message": "パスワード："
+	},
+	"password_requirements": {
+		"message": "8～50文字を使用してください。"
+	},
+	"send_button_label": {
+		"message": "送信"
+	},
+	"server_error_message": {
+		"message": "技術的な問題があるようです。後でもう一度お試しください。"
+	},
+	"email_address_in_use": {
+		"message": "そのメールアドレスは既に使用されています。別のメールアドレスを選択してください。 "
+	},
+	"short_description": {
+		"description": "A short description of this extension (Ghostery).",
+		"message": "Ghosteryは強力なプライバシー拡張機能です。広告をブロックし、トラッカーを阻止し、ウェブサイトを高速化します。"
+	},
+	"tracker_description_getting": {
+		"message": "トラッカーの説明を取得中…"
+	},
+	"tracker_description_learn_more": {
+		"message": "トラッカーのプロファイルを追加し続ける"
+	},
+	"tracker_description_none_found": {
+		"message": "トラッカーの説明が見つかりませんでした。"
+	},
+	"unblocked": {
+		"description": "Select this to show only unblocked (unchecked) tags in the tag browser. Should read as 'Show unblocked'.",
+		"message": "ブロックされていない対象"
+	},
+	"white_black_list_error_invalid_url": {
+		"message": "有効なURLを入力してください。"
+	},
+	"whitelist_error_blacklist_url": {
+		"message": "このサイトは、制限されたサイトのリストから削除され、信頼できるサイトのリストに追加されました。"
+	},
+	"whitelist_error_duplicate_url": {
+		"description": "Options page site whitelisting error message shown when whitelisting a URL that is already in the whitelist.",
+		"message": "このサイトは既にホワイトリストに登録されています。"
+	},
+	"settings_purple_box": {
+		"message": "紫色のボックス"
+	},
+	"settings_notifications": {
+		"message": "通知"
+	},
+	"settings_support_ghostery": {
+		"message": "Ghosteryをサポート"
+	},
+	"settings_account": {
+		"message": "アカウント"
+	},
+	"settings_trackers": {
+		"message": "トラッカー"
+	},
+	"settings_auto_update": {
+		"message": "Ghosteryトラッカー・ライブラリーからの自動更新を有効にする"
+	},
+	"settings_last_update": {
+		"message": "最後に同期化したサイト"
+	},
+	"settings_update_now": {
+		"message": "今すぐ更新"
+	},
+	"settings_update_success": {
+		"message": "成功しました！"
+	},
+	"settings_update_up_to_date": {
+		"message": "まだ最新版です"
+	},
+	"settings_update_failed": {
+		"message": "更新に失敗しました。後でもう一度お試しください"
+	},
+	"settings_show_patterns": {
+		"message": "トラッカーURLを表示"
+	},
+	"settings_highlight_trackers": {
+		"message": "インタラクティブなトラッカーを強調表示"
+	},
+	"settings_required_trackers": {
+		"message": "トラッカーがサイトの機能を使用できるようにする必要がある時を示します"
+	},
+	"settings_replace_social": {
+		"message": "ブロックされたソーシャル・メディア・ボタンをGhosteryアイコンに置き換えます"
+	},
+	"settings_blocking": {
+		"message": "ブロック中"
+	},
+	"settings_individual_trackers": {
+		"message": "サイトにおける個々のトラッカーを信頼および制限します"
+	},
+	"settings_allow_trackers": {
+		"message": "サイト所有者が作成したトラッカーを許可します"
+	},
+	"settings_block_trackers": {
+		"message": "Ghosteryにデフォルトで追加された新しいトラッカーをブロックします"
+	},
+	"settings_show_purple_box": {
+		"message": "ブラウザの隅に紫色のボックスを表示します"
+	},
+	"settings_dismiss_after": {
+		"message": "後に却下"
+	},
+	"settings_display_in": {
+		"message": "に表示"
+	},
+	"settings_bottom_right_corner": {
+		"message": "右下隅"
+	},
+	"settings_bottom_left_corner": {
+		"message": "左下隅"
+	},
+	"settings_top_right_corner": {
+		"message": "右上隅"
+	},
+	"settings_top_left_corner": {
+		"message": "左上隅"
+	},
+	"settings_never": {
+		"message": "しない"
+	},
+	"settings_seconds": {
+		"message": "秒"
+	},
+	"settings_hide_alert_trusted": {
+		"message": "信頼できるウェブサイトで紫色のボックスを非表示にする"
+	},
+	"settings_notify_me": {
+		"message": "Ghosteryが次のことを行うたびに通知します："
+	},
+	"settings_announcements": {
+		"message": "お知らせ"
+	},
+	"settings_new_features": {
+		"message": "新機能をリリース"
+	},
+	"settings_new_trackers": {
+		"message": "トラッカー・ライブラリに新しいトラッカーを追加"
+	},
+	"settings_show_reload_banner": {
+		"message": "拡張機能の上部にページ・リロード・バナー通知を表示"
+	},
+	"settings_show_trackers_banner": {
+		"message": "拡張機能の上部にトラッカー・アラート・バナー通知を表示"
+	},
+	"settings_show_tracker_count_badge": {
+		"message": "ブラウザ・ツールバーのGhosteryアイコンにトラッカー・カウント・バッジを表示"
+	},
+	"settings_support_ghostery_by": {
+		"message": "でGhosteryをサポート"
+	},
+	"settings_share_usage": {
+		"message": "拡張機能使用状況分析データの共有"
+	},
+	"settings_share_human_web": {
+		"message": "Human Webデータの共有"
+	},
+	"settings_allow_offers": {
+		"message": "Ghostery Rewardsに参加する"
+	},
+	"settings_signin_create_header": {
+		"message": "サインイン/アカウント作成"
+	},
+	"settings_sign_create_text": {
+		"message": "アカウントの設定はこのデバイスと同期されます。すべてのデバイスとプラットフォーム間でGhostery設定を簡単に同期するには、アカウントを作成してください。"
+	},
+	"settings_account_name": {
+		"message": "名前"
+	},
+	"settings_account_email": {
+		"message": "メール"
+	},
+	"settings_edit_account": {
+		"message": "アカウントを編集"
+	},
+	"settings_export_header": {
+		"message": "設定をエクスポート"
+	},
+	"settings_export_text": {
+		"message": "Ghostery環境設定のコピーを保存し、別のコンピュータに転送します。"
+	},
+	"settings_export_success": {
+		"message": "のダウンロード・フォルダに設定が正常にエクスポートされました。"
+	},
+	"settings_export_error": {
+		"message": "設定が正常にエクスポートされませんでした。もう一度お試しください。"
+	},
+	"settings_export_reserved_page_error": {
+		"message": "現在のページが予約済みのブラウザ・ページである場合、Ghosteryは設定をエクスポートできません。別のページに移動してもう一度お試しください。"
+	},
+	"settings_import_header": {
+		"message": "設定をインポート"
+	},
+	"settings_import_text": {
+		"message": "バックアップの.ghostファイルを選択してください。"
+	},
+	"settings_import_warning": {
+		"message": "警告：現在のGhostery設定を上書きします。"
+	},
+	"settings_import_success": {
+		"message": "に設定が正常にインポートされました"
+	},
+	"settings_import_dialog_error": {
+		"message": "現在のページが予約済みのブラウザ・ページである場合、Ghosteryはブラウズ・ダイアログを表示できません。別のページに移動してもう一度お試しください。"
+	},
+	"settings_import_file_error": {
+		"message": "間違ったファイル・タイプです。.ghostファイルを選択してもう一度お試しください。"
+	},
+	"browse_button_label": {
+		"message": "閲覧..."
+	},
+	"select_file_for_import": {
+		"message": "インポートする.ghostファイルを選択してください"
+	},
+	"file_was_not_selected": {
+		"message": "ファイルが選択されていません"
+	},
+	"refresh_and_try_again": {
+		"message": "ページを更新してもう一度お試しください"
+	},
+	"not_http_page": {
+		"message": "現在のタブにhttpまたはhttpsページが開いていることを確認してください"
+	},
+	"settings_show_patterns_tooltip": {
+		"message": "トラッカーをクリックすると、トラッカーのURLがトラッカーの説明の下に表示されます。"
+	},
+	"settings_highlight_trackers_tooltip": {
+		"message": "特定のトラッカーがブロックされていると、ソーシャル・メディアの共有、コメント、ビデオ・プレーヤーなどの機能が動作しないことがあります。これらのブロックされた機能の1つを有効にするには、ページで次のアイコンをクリックします："
+	},
+	"settings_individual_trackers_tooltip": {
+		"message": "特定のサイト内で常に信頼するまたは制限するトラッカーを選択してください。"
+	},
+	"settings_allow_trackers_tooltip": {
+		"message": "たとえば、facebook.com上でFacebookトラッカーをブロックすると、サイトが区切られることがあります。"
+	},
+	"settings_show_purple_box_tooltip": {
+		"message": "紫色のボックスは、ブラウザの隅に表示されるトラッカーのリアルタイム・リストです。この機能は、ウェブページに追加されたトラッカーを確認するのに役立ちます。"
+	},
+	"settings_notify_me_tooltip": {
+		"message": "Ghosteryが新しい製品機能、更新版、および顧客フィードバックに関連したメッセージをブラウザに表示できるようにします。"
+	},
+	"settings_share_usage_tooltip": {
+		"message": "当社は、ユーザーが好む機能をよりよく理解するために、使用状況分析データを収集します。たとえば、「一時停止」をクリックすると、この機能を使用したことを知らせるピングが収集されます。"
+	},
+	"settings_human_web_tooltip": {
+		"message": "Ghosteryは、デフォルトでHuman Webを実装しています。これは、大衆の知恵を活用してよりプライベートなインターネットを構築する革新的な技術です"
+	},
+	"settings_offers_tooltip": {
+		"message": "Ghostery Rewardsは、ブラウジングの際にGhosteryのパートナー企業から割引やスペシャルオファーを受けられる、プライバシーバイデザインの機能です。"
+	},
+	"settings_opt_in": {
+		"message": "オプトイン／オプトアウト"
+	},
+	"settings_global_blocking": {
+		"message": "グローバル・ブロッキング"
+	},
+	"settings_trust_and_restrict": {
+		"message": "信頼と制限"
+	},
+	"settings_general_settings": {
+		"message": "一般設定"
+	},
+	"settings_searh_by_tracker": {
+		"message": "トラッカーで検索"
+	},
+	"page_load": {
+		"message": "ページのロード"
 	},
 	"trackers_blocked": {
-		"message": "ブロックされたトラッカー：",
-		"description": ""
+		"message": "ブロックされたトラッカー："
 	},
-	"rewards_expires_in": {
-		"message": "$COUNT$ $TYPE$に有効期限が切れます",
-		"description": "example: Expires in 8 minutes. TYPE will be rewards_expires_in_TYPE listed below.",
+	"settings_trusted_restricted_sites": {
+		"message": "信頼と制限"
+	},
+	"settings_trusted_sites": {
+		"message": "信頼できるサイト"
+	},
+	"settings_sites_placeholder": {
+		"message": "example.com"
+	},
+	"settings_restricted_sites": {
+		"message": "制限されたサイト"
+	},
+	"settings_trusted_sites_description": {
+		"message": "ここにリストされているサイトは、すべてのトラッカーがブロックされずに信頼されます。"
+	},
+	"settings_restricted_sites_description": {
+		"message": "ここにリストされているサイトは、すべてのトラッカーがブロックされた状態で制限されます。"
+	},
+	"expand_all": {
+		"message": "すべてを展開"
+	},
+	"collapse_all": {
+		"message": "すべてを折り畳む"
+	},
+	"blocking_category_tracker_found": {
+		"message": "見つかりました"
+	},
+	"drawer_title_enable_anti_tracking": {
+		"message": "強化された追跡防止"
+	},
+	"drawer_tooltip_enable_anti_tracking": {
+		"message": "統合トラッカーは、ほとんどのウェブサイト上でのユーザー・アクティビティを記録します。追跡防止は、ユーザー識別に使用できるすべてのデータをトラッカーが収集する前に削除します。この図は、サイト上で削除されたデータ・ポイントの数を示しています。"
+	},
+	"drawer_label_enable_anti_tracking": {
+		"message": "トラッカーが匿名化されています"
+	},
+	"drawer_desc_enable_anti_tracking": {
+		"message": "プライベート・データ・ポイントが削除されました。"
+	},
+	"drawer_status_enable_anti_tracking": {
+		"message": "追跡防止は"
+	},
+	"drawer_title_enable_ad_block": {
+		"message": "強化された広告ブロッキング"
+	},
+	"drawer_tooltip_enable_ad_block": {
+		"message": "ウェブサイト上のすべての広告を表示またはブロックします。"
+	},
+	"drawer_label_enable_ad_block": {
+		"message": "広告がブロックされています"
+	},
+	"drawer_desc_enable_ad_block": {
+		"message": "広告スポットがブロックされました。"
+	},
+	"drawer_status_enable_ad_block": {
+		"message": "広告ブロックは"
+	},
+	"drawer_title_enable_smart_block": {
+		"message": "スマート・ブロッキング"
+	},
+	"drawer_tooltip_enable_smart_block": {
+		"message": "トラッカーを自動的にブロックおよびブロック解除して、ページのパフォーマンスを最適化します。"
+	},
+	"drawer_label_enable_smart_block": {
+		"message": "トラッカー調整済"
+	},
+	"drawer_desc_enable_smart_block": {
+		"message": "トラッカーが一時的にブロックまたはブロック解除されました。"
+	},
+	"drawer_status_enable_smart_block": {
+		"message": "スマート・ブロッキングは"
+	},
+	"drawer_on": {
+		"message": "オン"
+	},
+	"drawer_off": {
+		"message": "オフ"
+	},
+	"blocking_unblock_all": {
+		"message": "すべてのブロックを解除"
+	},
+	"blocking_unblock_shown": {
+		"message": "表示されたすべてのブロックを解除"
+	},
+	"settings_filter_all_label": {
+		"message": "すべて"
+	},
+	"settings_filter_blocked_label": {
+		"message": "ブロックされた対象"
+	},
+	"settings_filter_unblocked_label": {
+		"message": "ブロックされていない対象"
+	},
+	"settings_filter_new_label": {
+		"message": "新規"
+	},
+	"settings_filter_all": {
+		"message": "すべてのトラッカー"
+	},
+	"settings_filter_blocked": {
+		"message": "ブロックされたトラッカー"
+	},
+	"settings_filter_unblocked": {
+		"message": "ブロックされていないトラッカー"
+	},
+	"settings_filter_new": {
+		"message": "新しいトラッカー"
+	},
+	"alert_ghostery_paused": {
+		"message": "Ghostery拡張機能が一時停止されました。"
+	},
+	"alert_ghostery_resumed": {
+		"message": "Ghostery拡張機能が再開されました。"
+	},
+	"alert_anti_track_on": {
+		"message": "強化された追跡防止がオンになりました。個人データは匿名化されます。"
+	},
+	"alert_anti_track_off": {
+		"message": "強化された追跡防止がオフになりました。個人データは匿名化されません。"
+	},
+	"alert_ad_block_on": {
+		"message": "強化された広告ブロッキングがオンになりました。広告はブロックされます。"
+	},
+	"alert_ad_block_off": {
+		"message": "強化された広告ブロッキングがオフになりました。広告はブロックされません。"
+	},
+	"alert_smart_block_on": {
+		"message": "スマート・ブロッキングがオンになりました。ページのパフォーマンスを最適化するために、トラッカー・ブロッキングを調整します。"
+	},
+	"alert_smart_block_off": {
+		"message": "スマート・ブロッキングがオフになりました。トラッカー・ブロッキングは自動的に調整されません。"
+	},
+	"alert_reload": {
+		"message": "変更を確認するには、リロードしてください。"
+	},
+	"alert_site_trusted": {
+		"message": "サイトがホワイトリストに登録されました。このサイトで、トラッカーは許可され、追跡防止は無効になります。"
+	},
+	"alert_site_trusted_off": {
+		"message": "サイトがホワイトリストから削除されました。"
+	},
+	"alert_site_restricted": {
+		"message": "サイトがブラックリストに登録されました。このサイトで、トラッカーはブロックされ、追跡防止は有効になります。"
+	},
+	"alert_site_restricted_off": {
+		"message": "サイトがブラックリストから削除されました。"
+	},
+	"tooltip_anti_track": {
+		"message": "強化された追跡防止"
+	},
+	"tooltip_anti_track_body": {
+		"message": "閲覧保護を強化するために、ブロックされていないトラッカーと未知のトラッカーを匿名化します。"
+	},
+	"tooltip_anti_track_body_on": {
+		"message": "個人データポイントが匿名化されました。"
+	},
+	"tooltip_body_in_cliqz": {
+		"message": "デフォルト設定により、既にCliqzで有効になっている機能です。"
+	},
+	"tooltip_ad_block": {
+		"message": "強化された広告ブロッキング"
+	},
+	"tooltip_ad_block_body": {
+		"message": "アクセスしたウェブサイトの広告をブロックします。"
+	},
+	"tooltip_ad_block_body_on": {
+		"message": "広告がブロックされました。"
+	},
+	"tooltip_smart_block": {
+		"message": "スマート・ブロッキング"
+	},
+	"tooltip_smart_block_body": {
+		"message": "トラッカーを自動的にブロックおよびブロック解除して、ページのパフォーマンスを最適化します。"
+	},
+	"tooltip_smart_block_body_on": {
+		"message": "ページのパフォーマンスを最適化するために、トラッカー・ブロッキングを調整しました。"
+	},
+	"tooltip_trust": {
+		"message": "このサイトでトラッカーを常に許可します。"
+	},
+	"tooltip_trust_on": {
+		"message": "サイトで、トラッカーが許可され、追跡防止が無効になりました。元に戻すにはクリックしてください。"
+	},
+	"tooltip_restrict": {
+		"message": "このサイトでトラッカーを常にブロックします。"
+	},
+	"tooltip_restrict_on": {
+		"message": "サイトで、トラッカーがブロックされ、追跡防止が有効になりました。元に戻すにはクリックしてください。"
+	},
+	"tooltip_custom_settings": {
+		"message": "選択したトラッカー設定を使用します。"
+	},
+	"tooltip_pause": {
+		"message": "一時停止"
+	},
+	"tooltip_resume": {
+		"message": "Ghosteryを再開"
+	},
+	"tooltip_expert": {
+		"message": "詳細ビュー"
+	},
+	"tooltip_simple": {
+		"message": "シンプル・ビュー"
+	},
+	"license_module": {
+		"message": "モジュール"
+	},
+	"license_repository": {
+		"message": "リポジトリ"
+	},
+	"license_information_missing": {
+		"message": "ライセンス・リポジトリ情報がありません"
+	},
+	"license_type": {
+		"message": "ライセンスの種類"
+	},
+	"license_publisher": {
+		"message": "パブリッシャー"
+	},
+	"license_url": {
+		"message": "URL"
+	},
+	"license_email": {
+		"message": "メール"
+	},
+	"license_text": {
+		"message": "ライセンス・テキスト"
+	},
+	"license_unknown": {
+		"message": "未知"
+	},
+	"license_generic": {
+		"message": "標準ライセンス・テキスト"
+	},
+	"license_licenses": {
+		"message": "ライセンス"
+	},
+	"license_footer": {
+		"message": "Ghostery$COPY$はCliqz会社です。$LINK_START$Cliqz$LINK_END$についてもっとよく知る。$COPY$Cliqz国際有限責任会社（Cliqz有限責任会社の完全所有子会社）。著作権所有。",
+		"placeholders": {
+			"link_start": {
+				"content": "<a href=\"https://cliqz.com\" target=\"_blank\">"
+			},
+			"link_end": {
+				"content": "</a>"
+			},
+			"copy": {
+				"content": "&copy;"
+			}
+		}
+	},
+	"hub_side_navigation_home": {
+		"message": "ホーム"
+	},
+	"hub_side_navigation_setup": {
+		"message": "カスタマイズ設定"
+	},
+	"hub_side_navigation_tutorial": {
+		"message": "チュートリアルを受ける"
+	},
+	"hub_side_navigation_supporter": {
+		"message": "「Ghostery プラス」にアップグレードする"
+	},
+	"hub_side_navigation_rewards": {
+		"message": "Ghostery Rewardsを試す"
+	},
+	"hub_side_navigation_products": {
+		"message": "Ghosteryのほかの製品を見る"
+	},
+	"hub_side_navigation_create_account": {
+		"message": "アカウントを作成"
+	},
+	"hub_side_navigation_log_in": {
+		"message": "サインイン"
+	},
+	"hub_side_navigation_log_out": {
+		"message": "サインアウト"
+	},
+	"hub_home_page_title": {
+		"message": "Ghostery ハブ - ホーム"
+	},
+	"hub_home_header_text": {
+		"message": "Ghosteryの準備完了！"
+	},
+	"hub_home_header_tagline": {
+		"message": "初期設定による保護機能が有効になりました。"
+	},
+	"hub_home_header_tagline_2": {
+		"message": "ブラウジングを始めよう！"
+	},
+	"hub_home_header_checkbox_label": {
+		"message": "Ghosteryのパフォーマンス向上のために、匿名分析データを追加し共有します。"
+	},
+	"hub_home_header_info": {
+		"message": "新規ユーザーの方は、Human WebとGhostery Rewardsに参加するように設定されています。カスタム・セットアップまたは拡張機能でこれらの設定を変更できます。"
+	},
+	"hub_home_header_info_link": {
+		"message": "詳細はこちら。"
+	},
+	"hub_home_subheader_optimize": {
+		"message": "Ghostery体験を最適化する"
+	},
+	"hub_home_subheader_create_account": {
+		"message": "アカウントを作成"
+	},
+	"hub_home_feature_tutorial_title": {
+		"message": "チュートリアルを受ける"
+	},
+	"hub_home_feature_tutorial_text": {
+		"message": "Ghosteryの主な機能をご覧ください。"
+	},
+	"hub_home_feature_tutorial_button": {
+		"message": "スタート"
+	},
+	"hub_home_feature_tutorial_button_alt": {
+		"message": "チュートリアル完了"
+	},
+	"hub_home_feature_setup_title": {
+		"message": "カスタマイズ設定"
+	},
+	"hub_home_feature_setup_text": {
+		"message": "必要なブロック機能に応じて設定を編集します。"
+	},
+	"hub_home_feature_setup_button": {
+		"message": "設定を編集する"
+	},
+	"hub_home_feature_setup_button_alt": {
+		"message": "カスタム設定完了"
+	},
+	"hub_home_feature_supporter_text": {
+		"message": "「Ghostery プラス」にアップグレードして高度な機能をご利用ください。"
+	},
+	"hub_home_feature_supporter_button": {
+		"message": "「Ghostery プラス」にアップグレードする"
+	},
+	"hub_home_feature_supporter_button_alt": {
+		"message": "登録済み"
+	},
+	"hub_setup_page_title": {
+		"message": "Ghostery ハブ - 設定"
+	},
+	"hub_setup_page_title_blocking": {
+		"message": "Ghostery ハブ - ブロックの設定"
+	},
+	"hub_setup_page_title_antisuite": {
+		"message": "Ghostery ハブ - 訴訟問題対策の設定"
+	},
+	"hub_setup_page_title_humanweb": {
+		"message": "Ghostery Hub - Human Webの設定"
+	},
+	"hub_setup_page_title_done": {
+		"message": "Ghostery ハブ - 設定の完了"
+	},
+	"hub_setup_header_title_blocking": {
+		"message": "Ghosteryはトラッカーをブロックし、クリーン、高速、安全なブラウジング環境を提供します。$NEW_LINE$ブロックしたいトラッカーはありませんか？",
+		"placeholders": {
+			"new_line": {
+				"content": "<br />"
+			}
+		}
+	},
+	"hub_setup_header_title_antisuite": {
+		"message": "当社の推奨機能を使用してよりスマートに閲覧したいですか？"
+	},
+	"hub_setup_header_title_humanweb": {
+		"message": "Ghosteryの機能改善にご協力ください。"
+	},
+	"hub_setup_header_title_done": {
+		"message": "カスタム設定完了！"
+	},
+	"hub_setup_exit_flow": {
+		"message": "カスタム設定を終了する"
+	},
+	"hub_setup_nav_previous": {
+		"message": "前へ"
+	},
+	"hub_setup_nav_next": {
+		"message": "次へ"
+	},
+	"hub_setup_nav_done": {
+		"message": "完了"
+	},
+	"hub_setup_enter_modal_text": {
+		"message": "カスタム設定を入力すると前の設定が上書きされます。お続けになりますか？"
+	},
+	"hub_setup_modal_button_no": {
+		"message": "いいえ"
+	},
+	"hub_setup_modal_button_yes": {
+		"message": "はい"
+	},
+	"hub_setup_modal_button_ask_again": {
+		"message": "次回以降表示しない"
+	},
+	"hub_setup_blocking_text_recommended": {
+		"message": "ブロックの初期設定"
+	},
+	"hub_setup_blocking_description_recommended": {
+		"message": "ブロックされた広告、サイト分析、アダルト広告トラッカー"
+	},
+	"hub_setup_blocking_text_nothing": {
+		"message": "何もブロックしない"
+	},
+	"hub_setup_blocking_description_nothing": {
+		"message": "ブロックされたトラッカーはありません"
+	},
+	"hub_setup_blocking_text_everything": {
+		"message": "すべてをブロック"
+	},
+	"hub_setup_blocking_description_everything": {
+		"message": "すべてのブロックされたトラッカー"
+	},
+	"hub_setup_blocking_text_custom": {
+		"message": "リストから選択する"
+	},
+	"hub_setup_blocking_description_custom": {
+		"message": "ブロックするトラッカーを選択してください"
+	},
+	"hub_setup_antisuite_name_antitracking": {
+		"message": "強化された追跡防止"
+	},
+	"hub_setup_antisuite_description_antitracking": {
+		"message": "閲覧保護を強化するために、ブロックされていないトラッカーと未知のトラッカーを匿名化します。"
+	},
+	"hub_setup_adblock_name_adblocking": {
+		"message": "強化された広告ブロッキング"
+	},
+	"hub_setup_adblock_description_adblocking": {
+		"message": "アクセスしたウェブサイトの広告をブロックします。"
+	},
+	"hub_setup_smartblocking_name_smartblocking": {
+		"message": "スマート・ブロッキング"
+	},
+	"hub_setup_smartblocking_description_smartblocking": {
+		"message": "トラッカーを自動的にブロックおよびブロック解除して、ページのパフォーマンスを最適化します。"
+	},
+	"hub_setup_ghosteryrewards_name_rewards": {
+		"message": "Rewards（報酬）"
+	},
+	"hub_setup_ghosteryrewards_description_rewards": {
+		"message": "データを共有せずにブラウジングやお買い物をすると、スペシャルオファーが届きます。"
+	},
+	"hub_setup_antisuite_feature_enabled": {
+		"message": "有効になっています"
+	},
+	"hub_setup_humanweb_header": {
+		"message": "Ghosteryのパフォーマンス向上のため、匿名のHuman Webデータを使用しています。個人情報を収集することは絶対にありません$LINK_LM_START$詳細$LINK_LM_END$",
+		"placeholders": {
+			"link_lm_start": {
+				"content": "<a href=\"https://www.ghostery.com/faqs/human-web-data-collected/\" target=\"_blank\" rel=\"noopener noreferrer\">"
+			},
+			"link_lm_end": {
+				"content": "</a>"
+			}
+		}
+	},
+	"hub_setup_humanweb_label": {
+		"message": "この情報を共有してGhosteryをサポート"
+	},
+	"hub_setup_ready_heading": {
+		"message": "Ghostery体験を最適化する"
+	},
+	"hub_setup_feature_tutorial_title": {
+		"message": "チュートリアルを受ける"
+	},
+	"hub_setup_feature_tutorial_description": {
+		"message": "Ghosteryの主な機能をご覧ください。"
+	},
+	"hub_setup_feature_tutorial_button": {
+		"message": "スタート"
+	},
+	"hub_setup_feature_supporter_title": {
+		"message": "「Ghostery プラス」にアップグレードする"
+	},
+	"hub_setup_feature_supporter_description": {
+		"message": "Ghosteryをサポートすると特別機能が利用できます。"
+	},
+	"hub_setup_feature_supporter_button": {
+		"message": "サポート"
+	},
+	"hub_setup_feature_products_title": {
+		"message": "Ghosteryのほかの製品を見る"
+	},
+	"hub_setup_feature_products_description": {
+		"message": "Ghosteryの豊富な機能ならプライバシー保護は万全です！"
+	},
+	"hub_setup_feature_products_button": {
+		"message": "はい、お願いします。"
+	},
+	"hub_tutorial_page_title": {
+		"message": "Ghostery ハブ - チュートリアル"
+	},
+	"hub_tutorial_page_title_video": {
+		"message": "Ghostery ハブ - チュートリアルの概要"
+	},
+	"hub_tutorial_page_title_trackerlist": {
+		"message": "Ghostery ハブ - チュートリアル：トラッカー"
+	},
+	"hub_tutorial_page_title_blocking": {
+		"message": "Ghostery ハブ - チュートリアル：ブロックする"
+	},
+	"hub_tutorial_page_title_layout": {
+		"message": "Ghostery ハブ - チュートリアル：レイアウト"
+	},
+	"hub_tutorial_page_title_trust": {
+		"message": "Ghostery ハブ - チュートリアル：信頼と制限"
+	},
+	"hub_tutorial_page_title_anti_suite": {
+		"message": "Ghostery ハブ - チュートリアル：追加機能"
+	},
+	"hub_tutorial_exit_flow": {
+		"message": "チュートリアルを終了する"
+	},
+	"hub_tutorial_nav_previous": {
+		"message": "前へ"
+	},
+	"hub_tutorial_nav_next": {
+		"message": "次へ"
+	},
+	"hub_tutorial_nav_done": {
+		"message": "完了"
+	},
+	"hub_tutorial_simple_view": {
+		"message": "シンプル・ビュー"
+	},
+	"hub_tutorial_detailed_view": {
+		"message": "詳細ビュー"
+	},
+	"hub_tutorial_detailed_expanded_view": {
+		"message": "詳細を拡張表示"
+	},
+	"hub_tutorial_video_title": {
+		"message": "Ghosteryができること"
+	},
+	"hub_tutorial_video_tagline": {
+		"message": "トラッカーや広告をブロックし、プライバシーを保護しながら表示速度も上がります。"
+	},
+	"hub_tutorial_trackerlist_title": {
+		"message": "トラッカーリスト"
+	},
+	"hub_tutorial_trackerlist_tagline": {
+		"message": "Ghosteryは、アクセスしたサイトにトラッカーを表示することで、追跡している企業情報を提示します。"
+	},
+	"hub_tutorial_blocking_title": {
+		"message": "ブロックの種類と方法を選択してください"
+	},
+	"hub_tutorial_blocking_tagline": {
+		"message": "表示されたトラッカーをブロックまたは許可し、ブラウジングのプライバシー設定を行います。"
+	},
+	"hub_tutorial_blocking_allow": {
+		"message": "現在のサイトでトラッカーを常に許可します。"
+	},
+	"hub_tutorial_blocking_block": {
+		"message": "現在のサイトでトラッカーを常にブロックします。"
+	},
+	"hub_tutorial_blocking_block_always": {
+		"message": "すべてのサイトでトラッカーを常にブロックします。"
+	},
+	"hub_tutorial_layout_title": {
+		"message": "簡易表示と詳細表示"
+	},
+	"hub_tutorial_layout_tagline": {
+		"message": "Ghosteryの表示内容によって、簡易表示と詳細表示の切り替えができます。"
+	},
+	"hub_tutorial_trust_title": {
+		"message": "信頼または制限のあるサイト"
+	},
+	"hub_tutorial_trust_tagline": {
+		"message": "ワンクリックでホワイトリストやブラックリストに登録"
+	},
+	"hub_tutorial_trust_trust_site": {
+		"message": "サイトでトラッカーを常に許可します。"
+	},
+	"hub_tutorial_trust_restrict_site": {
+		"message": "サイトでトラッカーを常にブロックします。"
+	},
+	"hub_tutorial_antisuite_title": {
+		"message": "より強化されたプライバシー機能で保護機能を追加し、追跡を自動化しましょう。"
+	},
+	"hub_tutorial_antisuite_antitracking_title": {
+		"message": "強化された追跡防止"
+	},
+	"hub_tutorial_antisuite_antitracking_description": {
+		"message": "サイトが個人を特定できるようなデータポイントを削除します。"
+	},
+	"hub_tutorial_antisuite_adblocking_title": {
+		"message": "強化された広告ブロッキング"
+	},
+	"hub_tutorial_antisuite_adblocking_description": {
+		"message": "アクセスしたページの広告をブロックします。"
+	},
+	"hub_tutorial_antisuite_smartblocking_title": {
+		"message": "スマート・ブロッキング"
+	},
+	"hub_tutorial_antisuite_smartblocking_description": {
+		"message": "トラッカーを自動的にブロックおよびブロック解除して、ページのパフォーマンスを最適化します。"
+	},
+	"hub_products_page_title" : {
+		"message": "Ghostery ハブ - その他のGhostery製品を試す"
+	},
+	"hub_products_header_title" : {
+		"message": "Ghosteryの機能でよりスマートにブラウジング！"
+	},
+	"hub_products_header_description": {
+		"message": "Ghosteryの保護機能をフルに活用すると、より安心なオンライン体験が実現できます。"
+	},
+	"hub_products_main_promo_title": {
+		"message": "モバイル プライバシー ブラウザ"
+	},
+	"hub_products_main_promo_description": {
+		"message": "機能強化されたモバイルブラウザで、広告やトラッカーに悩まされないブラウジングを。プライベート検索エンジンに搭載可能！"
+	},
+	"hub_products_second_promo_title": {
+		"message": "Ghostery Start Tab"
+	},
+	"hub_products_second_promo_description": {
+		"message": "新しいタブ機能で、トラッカー履歴を確認しながらプライベートに検索し、Rewards（報酬）を管理できます。近日公開予定、ご期待ください！"
+	},
+	"hub_products_third_promo_title": {
+		"message": "Ghostery ライト"
+	},
+	"hub_products_third_promo_description": {
+		"message": "Safari専用の機能で、広告を表示せずにオンライン プライバシーを保護することができます。"
+	},
+	"hub_rewards_page_title": {
+		"message": "Ghostery ハブ - Rewards（報酬）"
+	},
+	"hub_rewards_header_title": {
+		"message": "Ghostery Rewardsをお試しください！"
+	},
+	"hub_rewards_header_description": {
+		"message": "新しいRewards（報酬）機能を使うと、パワフルで100％プライベートな、今までにないオンライン割引を利用できます。機能をオンにしてぜひお試しください！"
+	},
+	"hub_rewards_header_learn_more": {
+		"message": "詳細を知る"
+	},
+	"hub_rewards_experience_title": {
+		"message": "よりスマートなショッピング体験を"
+	},
+	"hub_rewards_experience_description": {
+		"message": "ブラウズして購入した際に、高価値の報酬を直接お届けします。"
+	},
+	"hub_rewards_privacy_title": {
+		"message": "プライバシー優先"
+	},
+	"hub_rewards_privacy_description": {
+		"message": "個人情報の収集、プロファイルの作成および第三者の使用は行いません"
+	},
+	"hub_rewards_relevant_title": {
+		"message": "重要でありながら唯一の存在"
+	},
+	"hub_rewards_relevant_description": {
+		"message": "ユーザーの皆様だけにタイムリーで重要な特別オファーをお届けします"
+	},
+	"hub_rewards_closer": {
+		"message": "拡張機能またはカスタム設定で、Ghostery Rewardsを有効にしてください。"
+	},
+	"hub_supporter_page_title": {
+		"message": "Ghostery ハブ - Ghostery プラス"
+	},
+	"hub_supporter_header_title": {
+		"message": "「Ghostery プラス」にアップグレードする"
+	},
+	"hub_supporter_header_description": {
+		"message": "Ghosteryをサポートして特典をもらおう！"
+	},
+	"hub_supporter_button_text": {
+		"message": "「Ghostery プラス」にアップグレードする"
+	},
+	"hub_supporter_button_text_alt": {
+		"message": "登録済み"
+	},
+	"hub_supporter_price": {
+		"message": "1か月あたり$SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$",
+		"placeholders": {
+			"sup_start": {
+				"content": "<sup>"
+			},
+			"sup_end": {
+				"content": "</sup>"
+			},
+			"span_start": {
+				"content": "<span>"
+			},
+			"span_end": {
+				"content": "</span>"
+			}
+		}
+	},
+	"hub_supporter_perk_themes_title": {
+		"message": "新しいテーマ"
+	},
+	"hub_supporter_perk_themes_description": {
+		"message": "Ghostery のテーマは変更できます。「ミッドナイト」もお試しください！"
+	},
+	"hub_supporter_perk_stats_title": {
+		"message": "ブロック履歴統計"
+	},
+	"hub_supporter_perk_stats_description": {
+		"message": "過去のブロック履歴と Ghostery の対応履歴を見る"
+	},
+	"hub_supporter_perk_more_title": {
+		"message": "優先サポート＆その他機能"
+	},
+	"hub_supporter_perk_more_description": {
+		"message": "プライオリティ・ヘルプデスクが問題をすぐに解決。充実した特典が満載です"
+	},
+	"hub_supporter_manifesto": {
+		"message": "Ghosteryのミッションは、無料かつ最高のプライバシー保護サービスをユーザーに提供することです。サービスは無料ですが、一部のユーザー様からは毎月のご登録料をいただくことで機能改善にご協力いただいております。「Ghostery プラス」にアップグレードしてミッションに参加しませんか。素敵な特典もご用意しております！"
+	},
+	"hub_supporter_feature_theme_title": {
+		"message": "新しいテーマ"
+	},
+	"hub_supporter_feature_theme_description": {
+		"message": "Ghosteryのカラーをカスタマイズして新しいビジュアル体験を！たくさんのご要望にお応えし、ついに実現。「ミッドナイト」やその他の新着テーマをチェックしよう。"
+	},
+	"hub_supporter_feature_stats_title": {
+		"message": "ブロック履歴統計"
+	},
+	"hub_supporter_feature_stats_description": {
+		"message": "グラフや数字を使って過去のブロック結果とその傾向を分析し、Ghostery によるブラウジングの安全性を確認できます。"
+	},
+	"hub_supporter_feature_support_title": {
+		"message": "優先サポート"
+	},
+	"hub_supporter_feature_support_description": {
+		"message": "お困りですか？壊れたページがありますか？Ghostery Plus のお客様専用アカウントでサインインすると、プライオリティ・ヘルプデスクがお客様への回答を優先して対応いたします。"
+	},
+	"hub_supporter_feature_more_title": {
+		"message": "まだまだこれから他にも！"
+	},
+	"hub_supporter_feature_more_description": {
+		"message": "Ghostery体験をさらに楽しめる、その他の便利機能や新着情報にもご注目ください。"
+	},
+	"hub_signedin_exit": {
+		"message": "ホームに戻る"
+	},
+	"hub_signedin_header_title": {
+		"message": "サインインしています"
+	},
+	"hub_signedin_as_email": {
+		"message": "としてサインインしています"
+	},
+	"hub_login_header_title": {
+		"message": "アカウントにサインインします。"
+	},
+	"hub_login_label_email": {
+		"message": "メール："
+	},
+	"hub_login_label_password": {
+		"message": "パスワード："
+	},
+	"hub_login_label_email_invalid": {
+		"message": "有効なメールアドレスを入力してください。"
+	},
+	"hub_login_label_password_invalid": {
+		"message": "8～50文字を使用してください。"
+	},
+	"hub_login_link_create_account": {
+		"message": "アカウントをお持ちでないですか？サインアップしてください。"
+	},
+	"hub_login_button_submit": {
+		"message": "サインイン"
+	},
+	"hub_login_toast_success": {
+		"message": "サインインできました！アカウント設定がインポートされました"
+	},
+	"hub_login_toast_error": {
+		"message": "このメールアドレスとパスワードの組み合わせが見つかりません。もう一度お試しください。"
+	},
+	"hub_create_account_header_title": {
+		"message": "Ghosteryアカウントを作成して、ブラウザとデバイス間で設定を同期しますか？"
+	},
+	"hub_create_account_label_email": {
+		"message": "メール："
+	},
+	"hub_create_account_label_email_confirm": {
+		"message": "メールを確認："
+	},
+	"hub_create_account_label_first_name": {
+		"message": "名（オプション）："
+	},
+	"hub_create_account_label_email_last_name": {
+		"message": "姓（オプション）："
+	},
+	"hub_create_account_label_password": {
+		"message": "パスワード："
+	},
+	"hub_create_account_label_email_invalid": {
+		"message": "有効なメールアドレスを入力してください。"
+	},
+	"hub_create_account_label_email_confirm_invalid": {
+		"message": "お客様のメールアドレスは一致しません。"
+	},
+	"hub_create_account_label_password_invalid": {
+		"message": "次の特殊文字のみを使用できます：!@#$%^&*=+()<>{}[];:,./?"
+	},
+	"hub_create_account_label_password_invalid_length": {
+		"message": "8～50文字を使用してください。"
+	},
+	"hub_create_account_checkbox_promotions": {
+		"message": "Ghosteryのアップデート＆お得な情報を受け取る。"
+	},
+	"hub_create_account_link_login": {
+		"message": "すでにアカウントを持っています。サインインしてください。"
+	},
+	"hub_create_account_button_submit": {
+		"message": "アカウントを作成"
+	},
+	"hub_create_account_toast_success": {
+		"message": "アカウントは正常に作成されました"
+	},
+	"hub_create_account_toast_error": {
+		"message": "アカウント作成エラー"
+	},
+	"enable_when_paused": {
+		"message": "この機能を使用するには、Ghosteryを再開してください。"
+	},
+	"enable_when_whitelisted": {
+		"message": "この機能を使用するには、「サイトを信頼」を元に戻してください"
+	},
+	"enable_when_blacklisted": {
+		"message": "この機能を使用するには、「サイトを制限」を元に戻してください。"
+	},
+	"enable_when_not_scanned": {
+		"message": "この機能を使用するには、別のページに移動してください。"
+	},
+	"rewards_new_text": {
+		"message": "新しいReward（報酬）があります！"
+	},
+	"rewards_copy_code": {
+		"message": "コードをコピー"
+	},
+	"rewards_code_copied": {
+		"message": "コードがコピーされました"
+	},
+	"rewards_expires_in_day": {
+		"message": "あと 1 日で有効期限が切れます"
+	},
+	"rewards_expires_in_days": {
+		"message": "あと $COUNT$ 日で有効期限が切れます",
 		"placeholders": {
 			"count": {
 				"content": "$1"
-			},
-			"type": {
-				"content": "$2"
 			}
 		}
 	},
-	"panel_tracker_warning_slow_nonsecure_tooltip": {
-		"message": "トラッカーが低速で保護されていません",
-		"description": ""
+	"rewards_expires_in_hour": {
+		"message": "あと 1 時間で有効期限が切れます"
 	},
-	"password_field_label_required": {
-		"message": "パスワードが必要です。",
-		"description": ""
-	},
-	"panel_tracker_found_sources_title": {
-		"message": "検出されたトラッカーURL：",
-		"description": ""
-	},
-	"setup_upgrade_desc_2": {
-		"message": "$BOLD_START$動的なUI$BOLD_END$により、複数の表示オプションが提供されます。",
-		"description": "",
+	"rewards_expires_in_hours": {
+		"message": "あと $COUNT$ 時間で有効期限が切れます",
 		"placeholders": {
-			"bold_start": {
-				"content": "<strong>"
-			},
-			"bold_end": {
-				"content": "</strong>"
+			"count": {
+				"content": "$1"
 			}
 		}
 	},
-	"setup_login_view_first_name": {
-		"message": "名（オプション）：",
-		"description": ""
+	"rewards_expires_in_min": {
+		"message": "あと 1 分で有効期限が切れます"
 	},
-	"box_warning_slow": {
-		"message": "低速トラッカー",
-		"description": ""
-	},
-	"settings_trusted_sites_description": {
-		"message": "ここにリストされているサイトは、すべてのトラッカーがブロックされずに信頼されます。",
-		"description": ""
-	},
-	"invalid_email_create": {
-		"message": "有効なメールアドレスを入力してください。",
-		"description": ""
-	},
-	"panel_create_account": {
-		"message": "アカウントを作成",
-		"description": ""
-	},
-	"setup_choice_view_share_data_no_human_web": {
-		"message": "Ghosteryのパフォーマンスを向上させるために、分析データを共有します。",
-		"description": ""
-	},
-	"summary_pause_ghostery_tooltip": {
-		"message": "Ghostery拡張機能を一時停止します。",
-		"description": ""
-	},
-	"short_description": {
-		"message": "Ghosteryは強力なプライバシー拡張機能です。広告をブロックし、トラッカーを阻止し、ウェブサイトを高速化します。",
-		"description": "A short description of this extension (Ghostery)."
-	},
-	"drawer_desc_enable_anti_tracking": {
-		"message": "プライベート・データ・ポイントが削除されました。",
-		"description": ""
-	},
-	"summary_custom_settings": {
-		"message": "カスタム設定",
-		"description": ""
-	},
-	"click2play_allow_once_button_tooltip": {
-		"message": "Ghosteryが$APP_NAME$をブロックしました。ここをクリックすると、このアプリを許可して一度だけロードできます。",
-		"description": "Tooltip that appears over the click2play replacement for 'social' buttons.",
+	"rewards_expires_in_mins": {
+		"message": "あと $COUNT$ 分で有効期限が切れます",
 		"placeholders": {
-			"app_name": {
-				"content": "$1",
-				"example": "Twitter Button"
+			"count": {
+				"content": "$1"
 			}
 		}
 	},
-	"panel_tracker_restrict_tooltip": {
-		"message": "このサイトで制限",
-		"description": ""
+	"rewards_expires_in_sec": {
+		"message": "あと 1 秒で有効期限が切れます"
+	},
+	"rewards_expires_in_secs": {
+		"message": "あと $COUNT$ 秒で有効期限が切れます",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"rewards_terms_conditions": {
+		"message": "利用規約"
+	},
+	"rewards_disable": {
+		"message": "Rewards（報酬）機能を無効にする"
+	},
+	"rewards_disable_notification": {
+		"message": "Ghostery Rewardsが無効になりました。再度有効にする場合は、「設定」またはダッシュボードの「Rewards」で変更してください。"
 	},
 	"rewards_disable_confirm": {
-		"message": "はい、分かりました。",
-		"description": ""
+		"message": "はい、分かりました。"
 	},
-	"alert_anti_track_on": {
-		"message": "強化された追跡防止がオンになりました。個人データは匿名化されます。",
-		"description": ""
+	"rewards_about": {
+		"message": "Rewards（報酬機能）について"
 	},
-	"setup_additional_view_enabled": {
-		"message": "有効になっています",
-		"description": ""
+	"rewards_settings": {
+		"message": "Ghostery Rewards設定"
 	},
-	"browser_button_tooltip": {
-		"message": "Ghosteryの発見内容を表示",
-		"description": "Ghostery's browser button tooltip."
+	"rewards_delete": {
+		"message": "このリワードを削除する"
 	},
-	"pause_24_hours_condensed": {
-		"message": "24時間",
-		"description": ""
+	"rewards_first_prompt": {
+		"message": "Ghostery Rewardsを続けますか？"
+	},
+	"rewards_second_prompt": {
+		"message": "Ghostery Rewardsを停止しますか？"
+	},
+	"rewards_yes": {
+		"message": "はい"
+	},
+	"rewards_no": {
+		"message": "いいえ"
+	},
+	"rewards_on": {
+		"message": "オン"
+	},
+	"rewards_off": {
+		"message": "オフ"
+	},
+	"rewards_on_toast_notification": {
+		"message": "Ghostery Rewards機能が有効です"
+	},
+	"rewards_off_toast_notification": {
+		"message": "Ghostery Rewards機能が無効です"
+	},
+	"rewards_code_copied_toast_notification": {
+		"message": "Rewardsコードがコピーされました！"
+	},
+	"rewards_learn_more": {
+		"message": "詳細を知る"
+	},
+	"offers_hub_copy_btn": {
+		"message": "コードをコピー"
+	},
+	"offers_code_copied": {
+		"message": "コピーされました"
+	},
+	"popup_cancel_button": {
+		"message": "キャンセル"
+	},
+	"popup_apply_code_button": {
+		"message": "コードを適用する"
+	},
+	"subscription_info": {
+		"message": "登録事項の詳細"
+	},
+	"subscription_themes": {
+		"message": "Ghosteryのテーマ"
+	},
+	"subscription_info_title": {
+		"message": "Ghostery プラス"
+	},
+	"subscription_themes_title": {
+		"message": "テーマ"
+	},
+	"subscription_priority_support_title": {
+		"message": "優先サポート"
+	},
+	"subscription_priority_support": {
+		"message": "優先サポート"
+	},
+	"subscription_history_stats": {
+		"message": "履歴統計"
+	},
+	"subscribe_pitch": {
+		"message": "Ghosteryは無料でもご利用いただけますが、1か月&#36;2の登録料でカラーテーマ、優先ヘルプサービスなどの特典をご活用いただきながら、Ghosteryをサポートすることもできます。登録してミッションに参加しよう！"
+	},
+	"subscribe_pitch_learn_more": {
+		"message": "詳細はこちら"
+	},
+	"subscribe_pitch_button_label": {
+		"message": "「Ghostery プラス」にアップグレード！"
+	},
+	"subscribe_pitch_sign_here": {
+		"message": "ご登録済みですか？こちらでサインイン"
+	},
+	"subscription_midnight_theme": {
+		"message": "ミッドナイト テーマ"
+	},
+	"subscription_status": {
+		"message": "ステータス"
+	},
+	"subscription_active": {
+		"message": "アクティブ"
+	},
+	"subscription_inactive": {
+		"message": "非アクティブ"
+	},
+	"subscription_manage": {
+		"message": "登録管理"
+	},
+	"subscription_themes_tooltip": {
+		"message": "Ghosteryのカラースキームは変更できます！"
+	},
+	"subscription_tracker_stats": {
+		"message": "履歴統計"
+	},
+	"subscription_charge_date" : {
+		"message": "次回のお支払日"
+	},
+	"subscription_expired": {
+		"message": "アカウントの有効期限切れ"
+	},
+	"subscription_auto_renewal": {
+		"message": "自動更新"
+	},
+	"subscription_plan": {
+		"message": "プラン"
+	},
+	"subscription_days_left": {
+		"message": "現在のご登録であと$DAYS$日間ご利用いただけます。",
+		"placeholders": {
+			"days": {
+				"content": "$1"
+			}
+		}
+	},
+	"subscription_one_day_left": {
+		"message": "ご登録の有効期限が明日に迫っています。"
+	},
+	"subscription_resubscribe": {
+		"message": "再登録する"
+	},
+	"subscription_support": {
+		"message": "壊れたページがありますか？ブロックで何かお困りですか？メッセージを送ってください。"
+	},
+	"subscription_submit_issue": {
+		"message": "この内容で送信する"
+	},
+	"subscription_data_error": {
+		"message": "登録情報の取得中にエラーが発生しました。以下のリンクをクリックしてアカウント情報にアクセスしてください。"
+	},
+	"panel_stats_menu_cumulative": {
+		"message": "累計"
+	},
+	"panel_stats_menu_monthly": {
+		"message": "毎月"
+	},
+	"panel_stats_menu_daily": {
+		"message": "毎日"
+	},
+	"panel_stats_header_title": {
+		"message": "追跡履歴の統計"
+	},
+	"panel_stats_header_title_monthly": {
+		"message": "追跡履歴の統計（月平均）"
+	},
+	"panel_stats_header_title_daily": {
+		"message": "追跡履歴の統計（日平均）"
+	},
+	"panel_stats_trackers_seen": {
+		"message": "検出されたトラッカー"
+	},
+	"panel_stats_trackers_blocked": {
+		"message": "ブロックされたトラッカー"
+	},
+	"panel_stats_trackers_anonymized": {
+		"message": "匿名化されたデータポイント"
+	},
+	"panel_stats_ads_blocked": {
+		"message": "広告がブロックされています"
+	},
+	"panel_stats_total_trackers_seen": {
+		"message": "検出されたトラッカーの合計"
+	},
+	"panel_stats_total_trackers_blocked": {
+		"message": "ブロックされたトラッカーの合計"
+	},
+	"panel_stats_total_trackers_anonymized": {
+		"message": "匿名化されたトラッカーの合計"
+	},
+	"panel_stats_total_ads_blocked": {
+		"message": "ブロックされた広告数合計"
+	},
+	"panel_stats_cumulative": {
+		"message": "累計"
+	},
+	"panel_stats_monthly": {
+		"message": "毎月"
+	},
+	"panel_stats_daily": {
+		"message": "毎日"
+	},
+	"panel_stats_reset": {
+		"message": "すべての統計をリセットする"
+	},
+	"panel_stats_reset_modal_text": {
+		"message": "統計履歴がリセットされました。このデータは復元できません。お続けになりますか？"
+	},
+	"panel_stats_reset_modal_yes": {
+		"message": "はい、リセットします"
+	},
+	"panel_stats_reset_modal_no": {
+		"message": "いいえ、履歴を保持します"
+	},
+	"panel_stats_pitch_modal_text": {
+		"message": "Ghostery Plus の履歴統計やその他の便利な機能を是非お試しください。1か月$SPAN_START$&#36;2でアップグレードできます。$SPAN_END$$LINK_START$さらに詳しく$LINK_END$",
+		"placeholders": {
+			"span_start": {
+				"content": "<span>"
+			},
+			"span_end": {
+				"content": "</span>"
+			},
+			"link_end": {
+				"content": "</a>"
+			},
+			"link_start": {
+				"content": "<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.ghostery.com/products/plus/\">"
+			}
+		}
+	},
+	"panel_stats_pitch_modal_already": {
+		"message": "Ghostery のサポーターですか？"
+	},
+	"panel_stats_pitch_modal_sign_in": {
+		"message": "サインインはこちら"
+	},
+	"panel_stats_pitch_modal_subscribe": {
+		"message": "「Ghostery プラス」にアップグレード！"
+	},
+	"panel_stats_pitch_modal_tooltip": {
+		"message": "この時点までのすべての履歴統計を削除する"
 	}
 }
