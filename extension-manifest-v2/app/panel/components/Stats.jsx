@@ -23,7 +23,7 @@ import { sendMessage, sendMessageInPromise, openSubscriptionPage } from '../util
 class Stats extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = this._reset(true);
+		this.state = this._reset();
 	}
 	/**
 	 * Lifecycle event
@@ -31,6 +31,8 @@ class Stats extends React.Component {
 	componentDidMount() {
 		sendMessage('ping', 'hist_stats_panel');
 		if (!this._isSupporter(this.props)) {
+			// eslint-disable-next-line
+			this.setState(this._reset(true));
 			return;
 		}
 		this._init();
