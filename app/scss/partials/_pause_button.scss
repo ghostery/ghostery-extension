@@ -42,8 +42,11 @@
 		min-width: 125px;
 		max-width: 125px;
 		line-height: 17px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		.pause-button-text {
-			overflow-x: hidden;
+			overflow: hidden;
 			text-overflow: clip;
 			font-size: 11px;
 		}
@@ -68,6 +71,7 @@
 			min-width: 41px;
 			max-width: 41px;
 			padding-left: 17px;
+			display: inline-block;
 			.pause-button-icon {
 				padding: 0 0 0 15px;
 			}
@@ -149,6 +153,13 @@
 }
 
 .ghostery-features-container .sub-component.pause-button {
+	.button-group {
+		display: flex;
+		&.simple-view {
+			position: relative;
+			top: 19px;
+		}
+	}
 	.button-pause {
 		height: 35px;
 		line-height: 16px;
@@ -160,7 +171,6 @@
 		height: 45px;
 		min-width: 125px;
 		max-width: 125px;
-		line-height: 26px;
 	}
 	.button-caret.smaller {
 		height: 45px;
@@ -194,6 +204,9 @@
 	.dropdown {
 		position: absolute;
 		z-index: 1;
+	}
+	.dropdown-container.simple-view {
+		top: 19px;
 	}
 	.dropdown-container.centered .dropdown-item {
 		padding: 9px 0;

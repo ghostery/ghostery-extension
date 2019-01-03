@@ -5,7 +5,7 @@ exports[`app/panel/components/BuildingBlocks/PauseButton.jsx Snapshot tests with
   className="sub-component pause-button"
 >
   <div
-    className="button-group"
+    className="button-group simple-view"
   >
     <div
       className="button button-left button-pause active smaller"
@@ -27,7 +27,7 @@ exports[`app/panel/components/BuildingBlocks/PauseButton.jsx Snapshot tests with
     </div>
   </div>
   <div
-    className="button-group dropdown-container"
+    className="button-group dropdown-container simple-view"
     style={
       Object {
         "left": "0px",
@@ -42,7 +42,7 @@ exports[`app/panel/components/BuildingBlocks/PauseButton.jsx Snapshot tests with
   className="sub-component pause-button"
 >
   <div
-    className="button-group"
+    className="button-group simple-view"
   >
     <div
       className="button button-left button-pause g-tooltip active smaller"
@@ -66,7 +66,7 @@ exports[`app/panel/components/BuildingBlocks/PauseButton.jsx Snapshot tests with
     </div>
   </div>
   <div
-    className="button-group dropdown-container"
+    className="button-group dropdown-container simple-view"
     style={
       Object {
         "left": "0px",
