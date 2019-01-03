@@ -12,6 +12,13 @@
  */
 
 .sub-component.pause-button {
+	.button-group {
+		display: flex;
+		&.simple-view {
+			position: relative;
+			top: 19px;
+		}
+	}
 	.button {
 		color: #4a4a4a;
 		border-color: #cccccc;
@@ -42,8 +49,11 @@
 		min-width: 125px;
 		max-width: 125px;
 		line-height: 17px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		.pause-button-text {
-			overflow-x: hidden;
+			overflow: hidden;
 			text-overflow: clip;
 			font-size: 11px;
 		}
@@ -68,6 +78,7 @@
 			min-width: 41px;
 			max-width: 41px;
 			padding-left: 17px;
+			display: inline-block;
 			.pause-button-icon {
 				padding: 0 0 0 15px;
 			}
@@ -160,7 +171,7 @@
 		height: 45px;
 		min-width: 125px;
 		max-width: 125px;
-		line-height: 26px;
+		line-height: 17px;
 	}
 	.button-caret.smaller {
 		height: 45px;

@@ -133,6 +133,9 @@ class PauseButton extends React.Component {
 	 * @return {JSX} JSX for rendering the Pause Button on the Summary View
 	 */
 	render() {
+		const containerClassNames = ClassNames('button-group', {
+			'simple-view': !this.props.isCentered,
+		});
 		const pauseButtonClassNames = ClassNames('button', 'button-left', 'button-pause', {
 			'g-tooltip': !this.props.isAbPause,
 			active: this.props.isPaused,
@@ -157,7 +160,7 @@ class PauseButton extends React.Component {
 
 		return (
 			<div className="sub-component pause-button">
-				<div className="button-group">
+				<div className={containerClassNames}>
 					<div
 						className={pauseButtonClassNames}
 						onClick={this.props.clickPause}
