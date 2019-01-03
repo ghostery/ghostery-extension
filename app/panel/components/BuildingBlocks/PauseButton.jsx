@@ -152,6 +152,7 @@ class PauseButton extends React.Component {
 			'dropdown-open': this.state.showDropdown,
 		});
 		const dropdownContainerClassNames = ClassNames('button-group', 'dropdown-container', {
+			'simple-view': !this.props.isCentered,
 			centered: this.props.isCentered,
 		});
 		const dropdownContainerStyles = {
