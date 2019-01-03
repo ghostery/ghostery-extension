@@ -1932,10 +1932,10 @@
 		"message": "code copied"
 	},
 	"rewards_expires_in_day": {
-		"message": "Expires in 1 day"
+		"message": "Available for 1 day"
 	},
 	"rewards_expires_in_days": {
-		"message": "Expires in $COUNT$ days",
+		"message": "Available for $COUNT$ days",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1943,10 +1943,10 @@
 		}
 	},
 	"rewards_expires_in_hour": {
-		"message": "Expires in 1 hour"
+		"message": "Available for 1 hour"
 	},
 	"rewards_expires_in_hours": {
-		"message": "Expires in $COUNT$ hours",
+		"message": "Available for $COUNT$ hours",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1954,10 +1954,10 @@
 		}
 	},
 	"rewards_expires_in_min": {
-		"message": "Expires in 1 min"
+		"message": "Available for 1 min"
 	},
 	"rewards_expires_in_mins": {
-		"message": "Expires in $COUNT$ mins",
+		"message": "Available for $COUNT$ mins",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1965,10 +1965,10 @@
 		}
 	},
 	"rewards_expires_in_sec": {
-		"message": "Expires in 1 sec"
+		"message": "Available for 1 sec"
 	},
 	"rewards_expires_in_secs": {
-		"message": "Expires in $COUNT$ secs",
+		"message": "Available for $COUNT$ secs",
 		"placeholders": {
 			"count": {
 				"content": "$1"

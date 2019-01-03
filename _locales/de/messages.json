@@ -1932,10 +1932,10 @@
 		"message": "Code kopiert"
 	},
 	"rewards_expires_in_day": {
-		"message": "Läuft in 1 Tag ab"
+		"message": "Verfügbar für 1 Tag ab"
 	},
 	"rewards_expires_in_days": {
-		"message": "Läuft in $COUNT$ Tagen ab",
+		"message": "Verfügbar für $COUNT$ Tagen ab",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1943,10 +1943,10 @@
 		}
 	},
 	"rewards_expires_in_hour": {
-		"message": "Läuft in 1 Stunde ab"
+		"message": "Verfügbar für 1 Stunde ab"
 	},
 	"rewards_expires_in_hours": {
-		"message": "Läuft in $COUNT$ Stunden ab",
+		"message": "Verfügbar für $COUNT$ Stunden ab",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1954,10 +1954,10 @@
 		}
 	},
 	"rewards_expires_in_min": {
-		"message": "Läuft in 1 Min. ab"
+		"message": "Verfügbar für 1 Min. ab"
 	},
 	"rewards_expires_in_mins": {
-		"message": "Läuft in $COUNT$ Minuten ab",
+		"message": "Verfügbar für $COUNT$ Minuten ab",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1965,10 +1965,10 @@
 		}
 	},
 	"rewards_expires_in_sec": {
-		"message": "Läuft in 1 Sek. ab"
+		"message": "Verfügbar für 1 Sek. ab"
 	},
 	"rewards_expires_in_secs": {
-		"message": "Läuft in $COUNT$ Sek. ab",
+		"message": "Verfügbar für $COUNT$ Sek. ab",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -2123,9 +2123,6 @@
 	},
 	"subscription_submit_issue": {
 		"message": "Problem melden"
-	},
-	"subscription_data_error": {
-		"message": "Beim Abrufen Ihrer Abonnementdaten ist ein Fehler aufgetreten. Bitte klicken Sie auf den untenstehenden Link, um auf Ihre Kontoinformationen zuzugreifen."
 	},
 	"panel_stats_menu_cumulative": {
 		"message": "Kumulativ"
