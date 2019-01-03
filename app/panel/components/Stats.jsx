@@ -378,12 +378,14 @@ class Stats extends React.Component {
 						monthTrackersAnonymized += dataItem.cookiesBlocked + dataItem.fingerprintsRemoved;
 						monthAdsBlocked += dataItem.adsBlocked;
 					} else {
-						const beginOfMonth = moment(endOfMonth).startOf('month');
+						if (moment(dataItem.day).isSameOrBefore(endOfMonth) && i === allData.length - 1) {
+							monthTrackersSeen += dataItem.trackersDetected;
+							monthTrackersBlocked += dataItem.trackersBlocked;
+							monthTrackersAnonymized += dataItem.cookiesBlocked + dataItem.fingerprintsRemoved;
+							monthAdsBlocked += dataItem.adsBlocked;
+						}
 
-						monthTrackersSeen += dataItem.trackersDetected;
-						monthTrackersBlocked += dataItem.trackersBlocked;
-						monthTrackersAnonymized += dataItem.cookiesBlocked + dataItem.fingerprintsRemoved;
-						monthAdsBlocked += dataItem.adsBlocked;
+						const beginOfMonth = moment(endOfMonth).startOf('month');
 
 						const monthlyObj = {
 							date: beginOfMonth.format('YYYY-MM-DD'),
@@ -407,10 +409,10 @@ class Stats extends React.Component {
 
 						endOfMonth = moment(dataItem.day).endOf('month');
 
-						monthTrackersSeen = 0;
-						monthTrackersBlocked = 0;
-						monthTrackersAnonymized = 0;
-						monthAdsBlocked = 0;
+						monthTrackersSeen = dataItem.trackersDetected;
+						monthTrackersBlocked = dataItem.trackersBlocked;
+						monthTrackersAnonymized = dataItem.cookiesBlocked + dataItem.fingerprintsRemoved;
+						monthAdsBlocked = dataItem.adsBlocked;
 					}
 				});
 				// Cumulative data totals
