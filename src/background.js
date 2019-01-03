@@ -277,29 +277,45 @@ function getSiteData() {
  * @param  {string}		tab_url 	tab url
  */
 function handleAccountPages(name, callback) {
-	if (name === 'accountPageLoaded') {
-		if (conf.account === null) {
-			account._getUserIDFromCookie().then((userID) => {
-				account._setAccountInfo(userID);
-			})
-				.then(account.getUser)
-				.then(account.getUserSettings)
-				.catch((err) => {
-					log('handleAccountPages error', err);
-				});
-		}
-	} else if (name === 'account.logout') {
-		account.logout()
-			.then((response) => {
-				callback(response);
-			})
-			.catch((err) => {
-				log('LOGOUT ERROR', err);
-				callback(err);
-			});
-		return true;
+	switch (name) {
+		case 'accountPage.login':
+		case 'accountPage.register':
+		case 'accountPageLoaded': // legacy
+			if (conf.account === null) {
+				account._getUserIDFromCookie()
+					.then((userID) => {
+						account._setAccountInfo(userID);
+					})
+					.then(account.getUser)
+					.then(account.getUserSettings)
+					.then(account.getUserSubscriptionData)
+					.then(() => callback())
+					.catch((err) => {
+						callback(err);
+						log('handleAccountPages error', err);
+					});
+			}
+			return true;
+		case 'accountPage.getUser':
+			account.getUser()
+				.then(data => callback(data))
+				.catch(err => callback(err));
+			return true;
+		case 'accountPage.getUserSubscriptionData':
+			account.getUserSubscriptionData()
+				.then(data => callback(data))
+				.catch(err => callback(err));
+			return true;
+		case 'accountPage.logout':
+		case 'account.logout': // legacy
+			account.logout()
+				.then(data => callback(data))
+				.catch(err => callback(err));
+			return true;
+
+		default:
+			return false;
 	}
-	return false;
 }
 
 /**
@@ -776,7 +792,7 @@ function onMessageHandler(request, sender, callback) {
 				callback(data);
 			});
 		}
-		account.getUserSettings().catch(err => log('Error getting user settings from getPanelData:', err));
+		account.getUserSettings().catch(err => log('Failed getting user settings from getPanelData:', err));
 		return true;
 	} else if (name === 'getStats') {
 		insights.action('getStatsTimeline', message.from, message.to, true, true).then((data) => {
