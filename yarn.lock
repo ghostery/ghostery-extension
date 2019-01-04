@@ -1702,7 +1702,7 @@ brorand@^1.0.1:
 
 "browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery-mobile/master/7.33.0.1b406.bd0ca58.tgz":
   version "1.33.0"
-  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery-mobile/master/7.33.0.1b406.bd0ca58.tgz#cc0eb60bd5c3d9232f0d06fb5a8bb7f0282b5d39"
+  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery-mobile/master/7.33.0.1b406.bd0ca58.tgz#f6944e741104bac1e3d4db3fadfc45f8f7a5927d"
   dependencies:
     "@cliqz-oss/dexie" "^2.0.4"
     "@cliqz/adblocker" "^0.4.1"
