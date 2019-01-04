@@ -15,7 +15,8 @@ import globals from './Globals';
 import conf from './Conf';
 import { log, prefsSet, prefsGet } from '../utils/common';
 import { processUrlQuery } from '../utils/utils';
-import rewards from './Rewards';
+// import rewards from './Rewards';
+const rewards = {};
 
 // CONSTANTS
 const FREQUENCIES = { // in milliseconds

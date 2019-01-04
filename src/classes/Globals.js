@@ -13,8 +13,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import parser from 'ua-parser-js';
-
 const manifest = chrome.runtime.getManifest();
 const MOBILE_UPDATE_URL = 'https://s3.amazonaws.com/cdncliqz/update/android_browser/firefox@ghostery.com/update.json';
 /**
@@ -125,6 +123,7 @@ class Globals {
 	 * @return {Object}
 	 */
 	buildBrowserInfo() {
+		/*
 		const ua = parser(navigator.userAgent);
 		const browser = ua.browser.name.toLowerCase();
 		const version = parseInt(ua.browser.version.toString(), 10); // convert to string for Chrome
@@ -167,9 +166,23 @@ class Globals {
 		} else if (platform.includes('android')) {
 			this.BROWSER_INFO.os = 'android';
 		}
+		*/
+		this.BROWSER_INFO.os = 'android';
 
-		// Set version property
-		this.BROWSER_INFO.version = version;
+		if (chrome.cliqzAppConstants) {
+			this.BROWSER_INFO.displayName = 'Ghostery';
+			this.BROWSER_INFO.name = 'ghostery';
+			this.BROWSER_INFO.token = 'gh';
+			this.BROWSER_INFO.version = chrome.cliqzAppConstants.get('MOZ_APP_VERSION');
+		} else {
+			this.BROWSER_INFO.displayName = 'Firefox';
+			this.BROWSER_INFO.name = 'firefox';
+			this.BROWSER_INFO.token = 'ff';
+			const versionMatch = /Firefox\/([0-9]+\.[0-9]+)/.exec(navigator.userAgent);
+			if (versionMatch) {
+				this.BROWSER_INFO.version = versionMatch[1]; // eslint-disable-line prefer-destructuring
+			}
+		}
 	}
 }
 
