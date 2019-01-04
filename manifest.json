@@ -30,6 +30,7 @@
 		"page": "app/templates/hub.html",
 		"open_in_tab": true
 	},
+	"options_page": "app/templates/hub.html",
 	"content_scripts": [
 		{
 			"all_frames": false,
