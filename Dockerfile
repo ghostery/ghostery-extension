@@ -1,6 +1,6 @@
 FROM node:8
 
-RUN curl https://s3.amazonaws.com/cdncliqz/update/ghostery/moab/moab_d42f4a2 > /bin/moab && \
+RUN curl https://s3.amazonaws.com/cdncliqz/update/ghostery/moab/moab_b99dc4d > /bin/moab && \
     chmod +x /bin/moab
 
 RUN npm install -g yarn
