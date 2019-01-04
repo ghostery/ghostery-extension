@@ -25,6 +25,32 @@
 		},
 		"default_title": "Ghostery"
 	},
+	"experiment_apis": {
+		"cliqzSearchEngines": {
+			"schema": "cliqz/cliqz-android/schemas/cliqz-search-engines.json",
+			"parent": {
+				"scopes": ["addon_parent"],
+				"script": "cliqz/cliqz-android/cliqz-search-engines.bundle.js",
+				"paths": [["cliqzSearchEngines"]]
+			}
+		},
+		"cliqzNativeBridge": {
+			"schema": "cliqz/cliqz-android/schemas/cliqz-native-bridge.json",
+			"parent": {
+				"scopes": ["addon_parent"],
+				"script": "cliqz/cliqz-android/cliqz-native-bridge.bundle.js",
+				"paths": [["cliqzNativeBridge"]]
+			}
+		},
+		"cliqzAppConstants": {
+			"schema": "cliqz/cliqz-android/schemas/cliqz-app-constants.json",
+			"child": {
+				"scopes": ["addon_child"],
+				"script": "cliqz/cliqz-android/cliqz-app-constants.bundle.js",
+				"paths": [["cliqzAppConstants"]]
+			}
+		}
+	},
 	"content_scripts": [
 		{
 			"all_frames": false,
