@@ -183,16 +183,16 @@ class Metrics {
 			case 'tutorial_start':
 			case 'tutorial_complete':
 			case 'setup_start':
-			case 'supporter_cta_hub':
-			case 'supporter_cta_extension':
+			case 'plus_cta_hub':
+			case 'plus_cta_extension':
 			case 'products_cta_android':
 			case 'products_cta_ios':
 			case 'products_cta_lite':
 			case 'hist_plus_cta':
 			case 'hist_stats_panel':
 			case 'hist_reset_stats':
-			case 'supporter_panel_from_badge':
-			case 'supporter_panel_from_menu':
+			case 'plus_panel_from_badge':
+			case 'plus_panel_from_menu':
 			case 'resubscribe':
 			case 'priority_support_submit':
 			case 'theme_change':
