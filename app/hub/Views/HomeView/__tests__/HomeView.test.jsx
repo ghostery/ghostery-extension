@@ -28,7 +28,7 @@ describe('app/hub/Views/HomeView component', () => {
 				enable_metrics: true,
 				changeMetrics: () => {},
 				email: 'test@example.com',
-				isSupporter: true,
+				isPlus: true,
 			};
 
 			const component = renderer.create(
@@ -47,7 +47,7 @@ describe('app/hub/Views/HomeView component', () => {
 				enable_metrics: false,
 				changeMetrics: () => {},
 				email: '',
-				isSupporter: false,
+				isPlus: false,
 			};
 
 			const component = renderer.create(
@@ -67,7 +67,7 @@ describe('app/hub/Views/HomeView component', () => {
 				enable_metrics: false,
 				changeMetrics: jest.fn(),
 				email: '',
-				isSupporter: false,
+				isPlus: false,
 			};
 
 			const component = shallow(<HomeView {...initialState} />);

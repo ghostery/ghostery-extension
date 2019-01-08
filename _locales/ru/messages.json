@@ -18,7 +18,7 @@
 				"content": "</a>"
 			},
 			"link_terms_start": {
-				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/privacy-statements/\" rel=\"noopener noreferrer\">"
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/\" rel=\"noopener noreferrer\">"
 			}
 		}
 	},
@@ -2179,7 +2179,7 @@
 		"message": "Ежедневно"
 	},
 	"panel_stats_reset": {
-		"message": "Сбросить всю статистику"
+		"message": "Сброс"
 	},
 	"panel_stats_reset_modal_text": {
 		"message": "Ваша история статистики будет сброшена. Невозможно восстановить эти данные. Хотите продолжить?"
