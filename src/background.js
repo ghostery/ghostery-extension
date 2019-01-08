@@ -935,7 +935,7 @@ function onMessageHandler(request, sender, callback) {
 		return true;
 	} else if (name === 'account.openSupportPage') {
 		metrics.ping('priority_support_submit');
-		const subscriber = account.hasScopesUnverified(['subscriptions:supporter']);
+		const subscriber = account.hasScopesUnverified(['subscriptions:plus']);
 		const tabUrl = subscriber ? `https://account.${globals.GHOSTERY_DOMAIN}.com/support` : 'https://ghostery.zendesk.com/hc/';
 		utils.openNewTab({ url: tabUrl, become_active: true });
 		return true;
@@ -954,7 +954,7 @@ function onMessageHandler(request, sender, callback) {
 		account.getUser(message)
 			.then((user) => {
 				if (user) {
-					user.subscriptionsSupporter = account.hasScopesUnverified(['subscriptions:supporter']);
+					user.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus']);
 				}
 				callback({ user });
 			})
