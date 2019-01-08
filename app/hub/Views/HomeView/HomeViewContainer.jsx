@@ -64,7 +64,7 @@ class HomeViewContainer extends Component {
 			enable_metrics,
 			changeMetrics: this._handleToggleMetrics,
 			email: user ? user.email : '',
-			isSupporter: user && user.subscriptionsSupporter || false,
+			isPlus: user && user.subscriptionsPlus || false,
 		};
 
 		return <HomeView {...childProps} />;
@@ -81,7 +81,7 @@ HomeViewContainer.propTypes = {
 	}),
 	user: PropTypes.shape({
 		email: PropTypes.string,
-		subscriptionsSupporter: PropTypes.bool,
+		subscriptionsPlus: PropTypes.bool,
 	}),
 	actions: PropTypes.shape({
 		getHomeProps: PropTypes.func.isRequired,
@@ -99,7 +99,7 @@ HomeViewContainer.defaultProps = {
 	},
 	user: {
 		email: '',
-		subscriptionsSupporter: false,
+		subscriptionsPlus: false,
 	},
 };
 

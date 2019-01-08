@@ -60,7 +60,7 @@ class SetupDoneViewContainer extends Component {
 				buttonHref: '/tutorial/1',
 			},
 			{
-				id: 'supporter',
+				id: 'plus',
 				title: t('hub_setup_feature_supporter_title'),
 				description: t('hub_setup_feature_supporter_description'),
 				buttonText: t('hub_setup_feature_supporter_button'),

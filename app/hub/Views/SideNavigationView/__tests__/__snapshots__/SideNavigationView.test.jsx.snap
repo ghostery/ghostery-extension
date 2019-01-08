@@ -107,7 +107,7 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         <div
           className="SideNavigation__menuText"
         >
-          Supporter
+          Plus
         </div>
       </a>
     </div>
@@ -306,7 +306,7 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
         <div
           className="SideNavigation__menuText"
         >
-          Supporter
+          Plus
         </div>
       </a>
     </div>

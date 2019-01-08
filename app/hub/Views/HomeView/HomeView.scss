@@ -73,13 +73,13 @@
 	padding: 0;
 	background-color: #979797;
 }
-.HomeView__supporter {
+.HomeView__plus {
 	margin-top: 22px;
 	padding: 22px 12px;
 	background-color: #f0f3f4;
 	border-radius: 4px;
 }
-.HomeView__supporterFeature {
+.HomeView__plusFeature {
 	padding: 0 36px;
 }
 .HomeView__featureIcon {
@@ -105,7 +105,7 @@
 	margin: 0 0 0 50px;
 	background-image: buildIconClipboardCheck(#4a4a4a, #daf4ff, #1dafed);
 }
-.HomeView__featureIcon.feature-supporter {
+.HomeView__featureIcon.feature-plus {
 	position: relative;
 	margin-left: auto;
 	margin-right: auto;
@@ -132,7 +132,7 @@
 	min-width: 130px;
 }
 @media only screen and (max-width: 960px) {
-	.HomeView__supporter .HomeView__featureButton {
+	.HomeView__plus .HomeView__featureButton {
 		margin-top: 14px;
 	}
 	.HomeView__header img {

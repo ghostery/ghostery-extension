@@ -1,5 +1,5 @@
 /**
-* Supporter View Sass
+* Plus View Sass
 *
 * Ghostery Browser Extension
 * https://www.ghostery.com/
@@ -11,29 +11,29 @@
 * file, You can obtain one at http://mozilla.org/MPL/2.0
 */
 
-// Supporter View
-.SupporterView {
+// Plus View
+.PlusView {
 	margin: 40px 0 0;
 	overflow-x: hidden;
 }
-.SupporterView--addPaddingTop {
+.PlusView--addPaddingTop {
 	padding-top: 40px;
 }
-.SupporterView--addPaddingBottom {
+.PlusView--addPaddingBottom {
 	padding-bottom: 40px;
 }
-.SupporterView--addSideMargin {
+.PlusView--addSideMargin {
 	margin-left: 35px;
 	margin-right: 35px;
 }
-.SupporterView--rowDarken {
+.PlusView--rowDarken {
 	background-color: #f7f7f7;
 }
-.SupporterView__costContainer {
+.PlusView__costContainer {
 	margin: 0 auto;
 	max-width: 382px;
 }
-.SupporterView__button {
+.PlusView__button {
 	min-width: 180px;
 	margin-bottom: 0;
 	line-height: 20.2px;
@@ -43,147 +43,147 @@
 	border-left-color: #429321;
 	background: linear-gradient(to right, #429321,  #9ecc42);
 }
-.SupporterView__button.disabled,
-.SupporterView__button.disabled:hover {
+.PlusView__button.disabled,
+.PlusView__button.disabled:hover {
 	background: #154700;
 	border: 1px solid #154700;
 	line-height: 18.2px;
 }
-.SupporterView__headingImage {
+.PlusView__headingImage {
 	height: 195px;
 	margin-right: 30px;
 	margin-bottom: 30px;
-	background-image: url('/app/images/hub/supporter/supporter-logo.svg');
+	background-image: url('/app/images/hub/plus/plus-logo.svg');
 	background-repeat: no-repeat;
 	background-position: center center;
 }
-.SupporterView__headingTitle {
+.PlusView__headingTitle {
 	font-size: 24px;
 	font-weight: 700;
 	line-height: 38px;
 	color: #4a4a4a;
 }
-.SupporterView__headingDescription {
+.PlusView__headingDescription {
 	font-size: 14px;
 	line-height: 38px;
 	color: #4a4a4a;
 	margin-bottom: 20px;
 }
-.SupporterView__headingCost {
+.PlusView__headingCost {
 	font-size: 14px;
 	color: #9b9b9b;
 }
-.SupporterView__headingCost sup {
+.PlusView__headingCost sup {
 	padding: 0 2px;
 	font-size: 30px;
 	font-weight: 500;
 	color: #4a4a4a;
 }
-.SupporterView__headingCost span {
+.PlusView__headingCost span {
 	padding-right: 11px;
 	font-size: 64px;
 	font-weight: 500;
 	color: #4a4a4a;
 }
-.SupporterView__perk {
+.PlusView__perk {
 	padding: 30px;
 }
-.SupporterView__perkTitle {
+.PlusView__perkTitle {
 	font-size: 14px;
 	font-weight: 700;
 	line-height: 38px;
 	margin-bottom: 15px;
 	color: #4a4a4a;
 }
-.SupporterView__perkDescription {
+.PlusView__perkDescription {
 	font-size: 14px;
 	line-height: 30px;
 	color: #4a4a4a;
 }
-.SupporterView__perkIcon {
+.PlusView__perkIcon {
 	height: 80px;
 	width: 80px;
 	margin: 0 auto 15px;
 	background-position: center center;
 	background-repeat: no-repeat;
 }
-.SupporterView__perkIcon.themes {
+.PlusView__perkIcon.themes {
 	background-image: buildPerkThemeIcon(#a8ca59, #0a0a0a);
 }
-.SupporterView__perkIcon.support {
+.PlusView__perkIcon.support {
 	background-image: buildPerkSupportIcon(#a8ca59, #0a0a0a);
 }
-.SupporterView__perkIcon.more {
+.PlusView__perkIcon.more {
 	background-image: buildPerkMoreIcon(#a8ca59, #0a0a0a);
 }
-.SupporterView__featureImage.theme {
+.PlusView__featureImage.theme {
 	max-width: 420px;
 	margin-top: -20px;
 }
-.SupporterView__featureImage.support{
+.PlusView__featureImage.support{
 	max-width: 275px;
 }
-.SupporterView__manifestoContainer {
+.PlusView__manifestoContainer {
 	margin: 80px 0 0;
 	padding-top: 40px;
 	background: linear-gradient(to bottom left, #ecd868, #d4af37);
 }
-.SupporterView__manifestoBackground {
+.PlusView__manifestoBackground {
 	padding-bottom: 20px;
-	background-image: url('/app/images/hub/supporter/manifesto-background.svg');
+	background-image: url('/app/images/hub/plus/manifesto-background.svg');
 	background-size: 100%;
 }
-.SupporterView__manifestoText {
+.PlusView__manifestoText {
 	font-size: 24px;
 	font-weight: 700;
 	line-height: 40px;
 	color: #ffffff;
 	padding: 50px 0;
 }
-.SupporterView__bar {
+.PlusView__bar {
 	height: 1px;
 	background-color: #9b9b9b;
 }
 @media only screen and (max-width: 960px) {
-	.SupporterView__perkIcon {
+	.PlusView__perkIcon {
 		margin-bottom: 10px;
 	}
-	.SupporterView__perkTitle {
+	.PlusView__perkTitle {
 		margin-bottom: 10px;
 	}
-	.SupporterView__manifestoContainer {
+	.PlusView__manifestoContainer {
 		margin-top: 60px;
 	}
-	.SupporterView__manifestoBackground {
+	.PlusView__manifestoBackground {
 		padding-bottom: 10px;
 	}
-	.SupporterView__manifestoText {
+	.PlusView__manifestoText {
 		margin-top: -20px;
 		font-size: 20px;
 		line-height: 30px;
 		padding: 50px 60px;
 	}
-	.SupporterView__featureImage.theme {
+	.PlusView__featureImage.theme {
 		margin: 30px -20px 15px 0;
 		max-width: 350px;
 	}
-	.SupporterView__featureImage.support {
+	.PlusView__featureImage.support {
 		margin: 0 0 -10px -33px;
 		max-width: 240px;
 	}
-	.SupporterView__feature {
+	.PlusView__feature {
 		text-align: center;
 	}
-	.SupporterView__headingDescription {
+	.PlusView__headingDescription {
 		line-height: 30px;
 		margin-top: 4px;
 	}
-	.SupporterView__costContainer {
+	.PlusView__costContainer {
 		margin-top: 24px;
 	}
 }
 @media only screen and (max-width: 500px) {
-	.SupporterView__bar {
+	.PlusView__bar {
 		display: none;
 	}
 }
