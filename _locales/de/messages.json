@@ -18,7 +18,7 @@
 				"content": "</a>"
 			},
 			"link_terms_start": {
-				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/privacy-statements/\" rel=\"noopener noreferrer\">"
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/\" rel=\"noopener noreferrer\">"
 			}
 		}
 	},
@@ -1144,7 +1144,7 @@
 		"message": "Jegliche Werbung auf Websites anzeigen oder blockieren."
 	},
 	"drawer_label_enable_ad_block": {
-		"message": "Blockierte Anzeigen"
+		"message": "Blockierte Werbungen"
 	},
 	"drawer_desc_enable_ad_block": {
 		"message": "Ad-Spots wurden blockiert."
@@ -2152,7 +2152,7 @@
 		"message": "Datenpunkte anonymisiert"
 	},
 	"panel_stats_ads_blocked": {
-		"message": "Blockierte Anzeigen"
+		"message": "Blockierte Werbungen"
 	},
 	"panel_stats_total_trackers_seen": {
 		"message": "Gesamt gesehene Tracker"
@@ -2161,10 +2161,10 @@
 		"message": "Blockierte Tracker gesamt"
 	},
 	"panel_stats_total_trackers_anonymized": {
-		"message": " Anonymisierte Tracker gesamt"
+		"message": "Anonymisierte Tracker"
 	},
 	"panel_stats_total_ads_blocked": {
-		"message": "Blockierte Werbung gesamt"
+		"message": "Blockierte Werbungen"
 	},
 	"panel_stats_cumulative": {
 		"message": "Kumulativ"
@@ -2176,7 +2176,7 @@
 		"message": "Täglich"
 	},
 	"panel_stats_reset": {
-		"message": "Alle Statistiken zurücksetzen"
+		"message": "Zurücksetzen"
 	},
 	"panel_stats_reset_modal_text": {
 		"message": "Ihre statistische Chronik wird zurückgesetzt Es gibt keine Möglichkeit, diese Daten wiederherzustellen. Möchten Sie fortfahren?"

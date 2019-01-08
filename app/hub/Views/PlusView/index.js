@@ -1,5 +1,5 @@
 /**
- * Point of entry index.js file for Supporter View
+ * Point of entry index.js file for Plus View
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -14,7 +14,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import SupporterViewContainer from './SupporterViewContainer';
+import PlusViewContainer from './PlusViewContainer';
 import { sendPing } from '../AppView/AppViewActions';
 import { getUser } from '../../../Account/AccountActions';
 
@@ -39,4 +39,4 @@ const mapDispatchToProps = dispatch => ({
 	}), dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SupporterViewContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(PlusViewContainer);

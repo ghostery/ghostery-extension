@@ -18,7 +18,7 @@
 				"content": "</a>"
 			},
 			"link_terms_start": {
-				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/privacy-statements/\" rel=\"noopener noreferrer\">"
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/\" rel=\"noopener noreferrer\">"
 			}
 		}
 	},
@@ -2179,7 +2179,7 @@
 		"message": "Quotidien"
 	},
 	"panel_stats_reset": {
-		"message": "Réinitialiser toutes les stats"
+		"message": "Réinitialiser"
 	},
 	"panel_stats_reset_modal_text": {
 		"message": "Votre historique des stats a été réinitialisé. Impossible de récupérer ces données. Souhaitez-vous poursuivre ?"

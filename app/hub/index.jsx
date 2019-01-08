@@ -24,7 +24,7 @@ import AppView from './Views/AppView';
 import HomeView from './Views/HomeView';
 import SetupView from './Views/SetupView';
 import TutorialView from './Views/TutorialView';
-import SupporterView from './Views/SupporterView';
+import PlusView from './Views/PlusView';
 import RewardsView from './Views/RewardsView';
 import ProductsView from './Views/ProductsView';
 import CreateAccountView from './Views/CreateAccountView';
@@ -41,7 +41,7 @@ const Hub = () => (
 		<Route exact path="/" component={HomeView} />
 		<Route path="/setup" component={SetupView} />
 		<Route path="/tutorial" component={TutorialView} />
-		<Route exact path="/plus" component={SupporterView} />
+		<Route exact path="/plus" component={PlusView} />
 		<Route exact path="/rewards" component={RewardsView} />
 		<Route exact path="/products" component={ProductsView} />
 		<Route exact path="/create-account" component={CreateAccountView} />

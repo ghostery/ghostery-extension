@@ -171,7 +171,7 @@ class PanelData {
 	get panelView() {
 		const currentAccount = this._confData.get('account');
 		if (currentAccount && currentAccount.user) {
-			currentAccount.user.subscriptionsSupporter = account.hasScopesUnverified(['subscriptions:supporter']);
+			currentAccount.user.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus']);
 		}
 		this._panelView = {
 			panel: {

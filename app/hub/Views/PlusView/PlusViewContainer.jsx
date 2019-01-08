@@ -1,5 +1,5 @@
 /**
- * Supporter View Container
+ * Plus View Container
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -14,14 +14,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import SupporterView from './SupporterView';
+import PlusView from './PlusView';
 
 /**
- * @class Implement the Supporter View for the Ghostery Hub
+ * @class Implement the Plus View for the Ghostery Hub
  * @extends Component
  * @memberof HubComponents
  */
-class SupporterViewContainer extends Component {
+class PlusViewContainer extends Component {
 	constructor(props) {
 		super(props);
 
@@ -34,30 +34,30 @@ class SupporterViewContainer extends Component {
 	/**
 	 * Sends the necessary ping to background
 	 */
-	_sendSupporterPing = () => {
-		this.props.actions.sendPing({ type: 'supporter_cta_hub' });
+	_sendPlusPing = () => {
+		this.props.actions.sendPing({ type: 'plus_cta_hub' });
 	}
 
 	/**
 	 * React's required render function. Returns JSX
-	 * @return {JSX} JSX for rendering the Supporter View of the Hub app
+	 * @return {JSX} JSX for rendering the Plus View of the Hub app
 	 */
 	render() {
 		const childProps = {
 			isSignedIn: !!(this.props.user && this.props.user.email),
-			isSupporter: this.props.user && this.props.user.subscriptionsSupporter || false,
-			onSupporterClick: this._sendSupporterPing,
+			isPlus: this.props.user && this.props.user.subscriptionsPlus || false,
+			onPlusClick: this._sendPlusPing,
 		};
 
-		return <SupporterView {...childProps} />;
+		return <PlusView {...childProps} />;
 	}
 }
 
 // PropTypes ensure we pass required props of the correct type
-SupporterViewContainer.propTypes = {
+PlusViewContainer.propTypes = {
 	user: PropTypes.shape({
 		email: PropTypes.string,
-		subscriptionsSupporter: PropTypes.bool,
+		subscriptionsPlus: PropTypes.bool,
 	}),
 	actions: PropTypes.shape({
 		sendPing: PropTypes.func.isRequired,
@@ -65,12 +65,12 @@ SupporterViewContainer.propTypes = {
 	}).isRequired,
 };
 
-// Default props used in the Supporter View
-SupporterViewContainer.defaultProps = {
+// Default props used in the Plus View
+PlusViewContainer.defaultProps = {
 	user: {
 		email: false,
-		subscriptionsSupporter: false,
+		subscriptionsPlus: false,
 	},
 };
 
-export default SupporterViewContainer;
+export default PlusViewContainer;
