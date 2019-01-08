@@ -31,7 +31,7 @@ const HomeView = (props) => {
 		enable_metrics,
 		changeMetrics,
 		email,
-		isSupporter,
+		isPlus,
 	} = props;
 	const accountHref = `https://account.${globals.GHOSTERY_DOMAIN}.com`;
 	const tutorialFeatureClassNames = ClassNames('HomeView__onboardingFeature columns flex-container align-middle flex-dir-column', {
@@ -128,15 +128,15 @@ const HomeView = (props) => {
 						</NavLink>
 					</div>
 				</div>
-				<div className="HomeView__supporter row large-unstack">
-					<div className="HomeView__featureIcon feature-supporter hide-for-large" />
+				<div className="HomeView__plus row large-unstack">
+					<div className="HomeView__featureIcon feature-plus hide-for-large" />
 					<div className="HomeView__featureText columns">
 						{t('hub_home_feature_supporter_text')}
 					</div>
-					<div className="HomeView__featureIcon columns shrink feature-supporter show-for-large" />
+					<div className="HomeView__featureIcon columns shrink feature-plus show-for-large" />
 					<div className="columns flex-container align-center-middle">
 						<NavLink to="/plus" className="HomeView__featureButton button primary">
-							{isSupporter ? t('hub_home_feature_supporter_button_alt') : t('hub_home_feature_supporter_button')}
+							{isPlus ? t('hub_home_feature_supporter_button_alt') : t('hub_home_feature_supporter_button')}
 						</NavLink>
 					</div>
 				</div>
@@ -153,7 +153,7 @@ HomeView.propTypes = {
 	enable_metrics: PropTypes.bool.isRequired,
 	changeMetrics: PropTypes.func.isRequired,
 	email: PropTypes.string.isRequired,
-	isSupporter: PropTypes.bool.isRequired,
+	isPlus: PropTypes.bool.isRequired,
 };
 
 export default HomeView;

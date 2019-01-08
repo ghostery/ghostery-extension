@@ -146,8 +146,8 @@ class Header extends React.Component {
 	}
 
 	clickBadge = () => {
-		sendMessage('ping', 'supporter_panel_from_badge');
-		const subscriber = this.props.user && this.props.user.subscriptionsSupporter;
+		sendMessage('ping', 'plus_panel_from_badge');
+		const subscriber = this.props.user && this.props.user.subscriptionsPlus;
 		this.props.history.push(subscriber ? '/subscription/info' : `/subscribe/${!!this.props.user}`);
 	}
 
@@ -168,7 +168,7 @@ class Header extends React.Component {
 			active: this.props.is_expert,
 		});
 		const { loggedIn, user } = this.props;
-		const subscriber = this.props.user && this.props.user.subscriptionsSupporter;
+		const subscriber = this.props.user && this.props.user.subscriptionsPlus;
 		const rightLink = this.generateLink();
 		const badgeClasses = ClassNames('columns', 'shrink', {
 			'non-subscriber-badge': !subscriber,

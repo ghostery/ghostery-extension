@@ -18,7 +18,7 @@ import { sendMessage, openSubscriptionPage } from '../utils/msg';
  * Helper function to handle clicking on the Become a Subscriber button
  */
 function _handleBecomeClick() {
-	sendMessage('ping', 'supporter_cta_extension');
+	sendMessage('ping', 'plus_cta_extension');
 	openSubscriptionPage();
 }
 

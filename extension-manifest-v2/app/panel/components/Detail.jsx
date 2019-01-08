@@ -64,7 +64,7 @@ class Detail extends React.Component {
 					<div className={condensedToggleClassNames} onClick={this.toggleExpanded} />
 					<Route path="/detail/blocking" render={this.BlockingComponent} />
 					<Route path="/detail/rewards" render={this.RewardsComponent} />
-					<DetailMenu hasReward={enable_offers && unread_offer_ids.length > 0} subscriptionsSupporter={this.props.user && this.props.user.subscriptionsSupporter} />
+					<DetailMenu hasReward={enable_offers && unread_offer_ids.length > 0} subscriptionsPlus={this.props.user && this.props.user.subscriptionsPlus} />
 				</div>
 			</div>
 		);

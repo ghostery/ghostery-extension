@@ -147,7 +147,7 @@ class HeaderMenu extends React.Component {
 	 * Handle click on 'Sibscriber menu item.
 	 */
 	clickSubscriber = () => {
-		sendMessage('ping', 'supporter_panel_from_menu');
+		sendMessage('ping', 'plus_panel_from_menu');
 		this.props.toggleDropdown();
 		this.props.history.push(this.props.subscriber ? '/subscription/info' : `/subscribe/${this.props.loggedIn}`);
 	}
