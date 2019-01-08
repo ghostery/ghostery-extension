@@ -47,7 +47,7 @@ class PauseButton extends React.Component {
 
 	/**
 	 * Handles clicking outside the dropdown menu when the menu is exposed
-	 * @param  {Object} event the click event
+	 * @param {Object} event the click event
 	 */
 	clickOutside(event) {
 		const classes = event.target.className || '';
@@ -63,7 +63,7 @@ class PauseButton extends React.Component {
 	 */
 	/**
 	 * Handles the click event for timed pause in the dropdown list
-	 * @param  {int} time The time in minutes that Ghostery should be paused`
+	 * @param {int} time The time in minutes that Ghostery should be paused`
 	 */
 	clickDropdownPause(time) {
 		this.setState({ showDropdown: false });
@@ -111,17 +111,25 @@ class PauseButton extends React.Component {
 			isCondensed,
 			isAbPause,
 		} = this.props;
-		let buttonText;
+		let buttonEl;
 		if (isCondensed) {
-			buttonText = <span className="pause-button-icon  pause-button-text" />;
+			buttonEl = <span className="pause-button-icon pause-button-text" />;
 		} else if (isAbPause) {
-			buttonText = <span className="pause-button-icon  pause-button-text">{isPaused ? t('summary_resume_ghostery_ab_pause') : t('summary_pause_ghostery_ab_pause')}</span>;
+			buttonEl = (
+				<span className="pause-button-icon pause-button-text">
+					{isPaused ? t('summary_resume_ghostery_ab_pause') : t('summary_pause_ghostery_ab_pause')}
+				</span>
+			);
 		} else {
-			buttonText = <span className="pause-button-text">{isPaused ? t('summary_resume_ghostery') : t('summary_pause_ghostery')}</span>;
+			buttonEl = (
+				<span className="pause-button-text">
+					{isPaused ? t('summary_resume_ghostery') : t('summary_pause_ghostery')}
+				</span>
+			);
 		}
 		return (
 			<span className="flex-container align-center-middle full-height">
-				{buttonText}
+				{buttonEl}
 			</span>
 		);
 	}
