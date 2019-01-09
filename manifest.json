@@ -105,6 +105,11 @@
 		"http://*/*",
 		"https://*/*",
 		"storage",
+		"history",
+		"geolocation",
+		"<all_urls>",
+		"topSites",
+		"clipboardWrite",
 		"unlimitedStorage"
 	],
 	"background": {
