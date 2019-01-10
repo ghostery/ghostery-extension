@@ -147,6 +147,9 @@ const config = {
 		symlinks: false,
 		extensions: ['.js', '.jsx'],
 		mainFields: ['main', 'module'],
+		alias: {
+			'tldts': path.resolve(__dirname, 'node_modules/tldts/dist/tldts-experimental.cjs.js'),
+		},
 	},
 	plugins: buildPlugins,
 	module: {
