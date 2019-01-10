@@ -1092,8 +1092,8 @@ function initialiseWebRequestPipeline() {
  * @return {boolean}
  */
 function isWhitelisted(state) {
-	const { host } = state.sourceUrlParts.host;
-	return globals.SESSION.paused_blocking || state.ghosteryWhitelisted || events.policy.whitelisted(host);
+	const { hostname } = state.sourceUrlParts.host;
+	return globals.SESSION.paused_blocking || state.ghosteryWhitelisted || events.policy.whitelisted(hostname);
 }
 
 /**
