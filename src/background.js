@@ -1619,6 +1619,7 @@ function initializeEventListeners() {
 	});
 
 	// Fired when another extension sends a message, accepts message if it's from Ghostery Tab
+	// NOTE: not supported on Edge and Firefox < v54
 	if (typeof chrome.runtime.onMessageExternal === 'object') {
 		chrome.runtime.onMessageExternal.addListener((request, sender, sendResponse) => {
 			let recognized;
