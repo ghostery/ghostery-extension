@@ -358,6 +358,20 @@ class Stats extends React.Component {
 				const dailyData = [];
 				const monthlyData = [];
 				const cumulativeMonthlyData = [];
+				const accumulateData = (monthlyOrCumulative, currentDataItem) => {
+					if (monthlyOrCumulative === 'monthly') {
+						monthTrackersSeen += currentDataItem.trackersDetected;
+						monthTrackersBlocked += currentDataItem.trackersBlocked;
+						monthTrackersAnonymized += currentDataItem.cookiesBlocked + currentDataItem.fingerprintsRemoved;
+						monthAdsBlocked += currentDataItem.adsBlocked;
+					} else if (monthlyOrCumulative === 'cumulative') {
+						trackersSeen += currentDataItem.trackersDetected;
+						trackersBlocked += currentDataItem.trackersBlocked;
+						trackersAnonymized += currentDataItem.cookiesBlocked + currentDataItem.fingerprintsRemoved;
+						adsBlocked += currentDataItem.adsBlocked;
+					}
+				};
+
 				allData.forEach((dataItem, i) => {
 					// Day reassignments
 					dailyData.push({
@@ -368,23 +382,14 @@ class Stats extends React.Component {
 						date: dataItem.day,
 					});
 
-					trackersSeen += dataItem.trackersDetected;
-					trackersBlocked += dataItem.trackersBlocked;
-					trackersAnonymized += dataItem.cookiesBlocked + dataItem.fingerprintsRemoved;
-					adsBlocked += dataItem.adsBlocked;
-
 					// Monthly calculations
 					if (moment(dataItem.day).isSameOrBefore(endOfMonth) && i !== allData.length - 1) {
-						monthTrackersSeen += dataItem.trackersDetected;
-						monthTrackersBlocked += dataItem.trackersBlocked;
-						monthTrackersAnonymized += dataItem.cookiesBlocked + dataItem.fingerprintsRemoved;
-						monthAdsBlocked += dataItem.adsBlocked;
+						accumulateData('monthly', dataItem);
+						accumulateData('cumulative', dataItem);
 					} else {
 						if (moment(dataItem.day).isSameOrBefore(endOfMonth) && i === allData.length - 1) {
-							monthTrackersSeen += dataItem.trackersDetected;
-							monthTrackersBlocked += dataItem.trackersBlocked;
-							monthTrackersAnonymized += dataItem.cookiesBlocked + dataItem.fingerprintsRemoved;
-							monthAdsBlocked += dataItem.adsBlocked;
+							accumulateData('monthly', dataItem);
+							accumulateData('cumulative', dataItem);
 						}
 
 						const beginOfMonth = moment(endOfMonth).startOf('month');
@@ -409,12 +414,41 @@ class Stats extends React.Component {
 						monthlyData.push(monthlyObj);
 						cumulativeMonthlyData.push(cumulativeMonthlyObj);
 
-						endOfMonth = moment(dataItem.day).endOf('month');
-
 						monthTrackersSeen = dataItem.trackersDetected;
 						monthTrackersBlocked = dataItem.trackersBlocked;
 						monthTrackersAnonymized = dataItem.cookiesBlocked + dataItem.fingerprintsRemoved;
 						monthAdsBlocked = dataItem.adsBlocked;
+
+						if (!moment(dataItem.day).isSameOrBefore(endOfMonth) && i === allData.length - 1) {
+							accumulateData('cumulative', dataItem);
+
+							const oneDayBeginOfMonth = moment(dataItem.day).startOf('month');
+
+							const oneDayMonthlyObj = {
+								date: oneDayBeginOfMonth.format('YYYY-MM-DD'),
+								trackersSeen: monthTrackersSeen,
+								trackersBlocked: monthTrackersBlocked,
+								trackersAnonymized: monthTrackersAnonymized,
+								adsBlocked: monthAdsBlocked,
+							};
+
+							const oneDayCumulativeMonthlyObj = {
+								date: oneDayBeginOfMonth.format('YYYY-MM-DD'),
+								trackersSeen,
+								trackersBlocked,
+								trackersAnonymized,
+								adsBlocked,
+							};
+
+							monthlyData.push(oneDayMonthlyObj);
+							cumulativeMonthlyData.push(oneDayCumulativeMonthlyObj);
+						}
+
+						endOfMonth = moment(dataItem.day).endOf('month');
+
+						if (i !== allData.length - 1) {
+							accumulateData('cumulative', dataItem);
+						}
 					}
 				});
 				// Cumulative data totals
