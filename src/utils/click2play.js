@@ -98,10 +98,6 @@ export function buildC2P(details, app_id) {
 			});
 		}
 	});
-	// })
-	// 	.catch((err) => {
-	// 		log('Click2Play error', err);
-	// 	});
 }
 
 /**
