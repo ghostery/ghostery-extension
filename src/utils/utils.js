@@ -474,54 +474,6 @@ export function getJson(url, extraHeaders) {
 }
 
 /**
- * Fetch local image resource files asynchronously.
- * @memberOf BackgroundUtils
- *
- * @param  {string} url		URI of local resource
- * @return {Promise}		resolve yields fetched data, reject yields error
- */
-export function fetchLocalImageResource(url) {
-	if (typeof fetch === 'function') {
-		return fetch(url, {
-			type: 'image'
-		}).then((response) => {
-			if (!response.ok) {
-				return Promise.reject(new Error(`Failed to fetchLocalImageResource ${url} with status ${response.status} (${response.statusText})`));
-			}
-			return response.text();
-		}).catch((err) => {
-			log(`fetchLocalImageResource error: ${err}`);
-			return Promise.reject(new Error(err));
-		});
-	}
-	return new Promise(((resolve, reject) => {
-		const xhr = new XMLHttpRequest();
-		xhr.onload = function () {
-			// This is called even on 404 etc, so check the status.
-			if (xhr.status >= 200 && xhr.status < 400) {
-				resolve(xhr.responseText);
-			} else {
-				// Otherwise reject with the status text
-				log('fetchLocalImageResource error', xhr.statusText);
-				reject(new Error(xhr.statusText));
-			}
-		};
-
-		// Handle network errors
-		xhr.onerror = function (error) {
-			log('fetchLocalImageResource network error', error);
-			reject(new Error(error));
-		};
-
-		// Make the request
-		log('fetchLocalImageResource request', url);
-		xhr.open('GET', url, true);
-		xhr.overrideMimeType('image/png');
-		xhr.send();
-	}));
-}
-
-/**
  * Fetch local json resource files asynchronously.
  * @memberOf BackgroundUtils
  *
