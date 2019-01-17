@@ -876,8 +876,10 @@ function onMessageHandler(request, sender, callback) {
 			});
 		return true;
 	} else if (name === 'account.register') {
-		const senderOrigin = (sender.url.indexOf('templates/panel.html') >= 0) ? 'extension' : 'setup';
-		metrics.ping(`create_account_${senderOrigin}`);
+		if (!IS_EDGE) {
+			const senderOrigin = (sender.url.indexOf('templates/panel.html') >= 0) ? 'extension' : 'setup';
+			metrics.ping(`create_account_${senderOrigin}`);
+		}
 		const {
 			email, confirmEmail, password, firstName, lastName
 		} = message;
