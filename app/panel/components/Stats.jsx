@@ -158,7 +158,6 @@ class Stats extends React.Component {
 		const { selection } = state;
 		if (event.currentTarget.id !== selection.view) {
 			selection.view = event.currentTarget.id;
-			sendMessage('ping', selection.view);
 			selection.graphTitle = this.getGraphTitle(selection.type, selection.view);
 			selection.graphIconPath = this.getGraphIconPath(selection.view);
 			selection.summaryTitle = this.getSummaryTitle(selection.type);
@@ -188,7 +187,6 @@ class Stats extends React.Component {
 			selection.graphIconPath = this.getGraphIconPath(selection.view);
 			selection.summaryTitle = this.getSummaryTitle(selection.type);
 			selection.summaryData = this.getSummaryData(state, selection.type);
-			sendMessage('ping', selection.type);
 
 			const setTimeframes = (currentData, prevData) => {
 				const currentDate = prevData[selection.currentIndex].date;
