@@ -400,7 +400,7 @@ class Summary extends React.Component {
 						<div className={pageLoadClassNames}>
 							<span className="text">{t('page_load')} </span>
 							<span className="value">
-								{this.state.trackerLatencyTotal ? `${this.state.trackerLatencyTotal} ${t('settings_seconds')}` : <React.Fragment>&mdash;</React.Fragment>}
+								{this.state.trackerLatencyTotal ? `${this.state.trackerLatencyTotal} ${t('settings_seconds')}` : '-'}
 							</span>
 						</div>
 					</div>
