@@ -1089,24 +1089,28 @@ function initializeDispatcher() {
 			setCliqzModuleEnabled(humanweb, false);
 		}
 	});
-	dispatcher.on('conf.save.enable_offers', (enableOffers) => {
+	dispatcher.on('conf.save.enable_offers', (enableOffersIn) => {
 		button.update();
-		if (!IS_EDGE && !IS_CLIQZ) {
-			if (!enableOffers) {
-				const actions = cliqz &&
+		let firstStep = Promise.resolve();
+		let enableOffers = enableOffersIn;
+		if (IS_EDGE || IS_CLIQZ) {
+			enableOffers = false;
+		} else if (!enableOffers) {
+			const actions = cliqz &&
 				cliqz.modules['offers-v2'] &&
 				cliqz.modules['offers-v2'].background &&
 				cliqz.modules['offers-v2'].background.actions;
-				if (actions) {
-					actions.flushSignals();
-				}
-				OFFERS_ENABLE_SIGNAL = undefined;
-				registerWithOffers(offers, enableOffers);
+			if (actions) {
+				firstStep = actions.flushSignals();
 			}
-			setCliqzModuleEnabled(offers, enableOffers);
+			OFFERS_ENABLE_SIGNAL = undefined;
+		}
+		const toggleModule = () => setCliqzModuleEnabled(offers, enableOffers);
+		const toggleConnection = () => registerWithOffers(offers, enableOffers);
+		if (enableOffers) {
+			firstStep.then(toggleModule).then(toggleConnection);
 		} else {
-			setCliqzModuleEnabled(offers, false);
-			registerWithOffers(offers, false);
+			firstStep.then(toggleConnection).then(toggleModule);
 		}
 	});
 	dispatcher.on('conf.save.enable_anti_tracking', (enableAntitracking) => {
