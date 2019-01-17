@@ -39,7 +39,7 @@ class Summary extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			trackerLatencyTotal: '',
+			trackerLatencyTotal: 0,
 			disableBlocking: false,
 			abPause: AB_PAUSE_BUTTON,
 		};
@@ -93,8 +93,8 @@ class Summary extends React.Component {
 	 */
 	setTrackerLatency(props) {
 		const { performanceData } = props;
-		let pageLatency = '';
-		let unfixedLatency = '';
+		let pageLatency = 0;
+		let unfixedLatency = 0;
 
 		// calculate and display page speed
 		if (performanceData) {
@@ -105,10 +105,10 @@ class Summary extends React.Component {
 				pageLatency = (Number(timing.loadEventEnd - timing.navigationStart) / 1000).toFixed();
 			} else if (unfixedLatency >= 10 && unfixedLatency < 100) { // 100 > 10 use one decimal
 				pageLatency = (Number(timing.loadEventEnd - timing.navigationStart) / 1000).toFixed(1);
-			} else if (unfixedLatency < 10) { // < 10s use two decimals
+			} else if (unfixedLatency < 10 && unfixedLatency >= 0) { // < 10s use two decimals
 				pageLatency = (Number(timing.loadEventEnd - timing.navigationStart) / 1000).toFixed(2);
 			}
-			this.setState({ trackerLatencyTotal: `${pageLatency}` });
+			this.setState({ trackerLatencyTotal: pageLatency });
 		}
 	}
 
@@ -311,8 +311,8 @@ class Summary extends React.Component {
 			clickable: is_expert,
 		});
 		const pageLoadClassNames = ClassNames('page-load', {
-			fast: +this.state.trackerLatencyTotal < 5,
-			slow: +this.state.trackerLatencyTotal > 10,
+			fast: this.state.trackerLatencyTotal < 5,
+			slow: this.state.trackerLatencyTotal > 10,
 		});
 		const mapTheseTrackersClassNames = ClassNames('map-these-trackers', {
 			clickable: !this.state.disableBlocking,
@@ -400,7 +400,7 @@ class Summary extends React.Component {
 						<div className={pageLoadClassNames}>
 							<span className="text">{t('page_load')} </span>
 							<span className="value">
-								{this.state.trackerLatencyTotal ? `${this.state.trackerLatencyTotal} ${t('settings_seconds')}` : '-'}
+								{this.state.trackerLatencyTotal ? `${this.state.trackerLatencyTotal} ${t('settings_seconds')}` : <React.Fragment>&mdash;</React.Fragment>}
 							</span>
 						</div>
 					</div>
