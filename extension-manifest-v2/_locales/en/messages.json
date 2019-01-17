@@ -1908,7 +1908,7 @@
 		"message": "Account Successfully Created"
 	},
 	"hub_create_account_toast_error": {
-		"message": "Create Account Error"
+		"message": "That email address is already in use.  Please choose another."
 	},
 	"enable_when_paused": {
 		"message": "To use this function, Resume Ghostery."
