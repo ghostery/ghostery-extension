@@ -734,7 +734,7 @@ function onMessageHandler(request, sender, callback) {
 	const { tab } = sender;
 	const tab_id = tab && tab.id;
 	// Edge does not have url on tab object, as of Build 14342_rc1
-	// const tab_url = tab && (tab.url ? tab.url : (sender.url ? sender.url : ''));
+	const tab_url = tab && (tab.url ? tab.url : (sender.url ? sender.url : ''));
 
 	// On Edge 39.14965.1001.0 callback is lost when multiple
 	// Edge instances running. So instead we shoot message back
@@ -876,10 +876,8 @@ function onMessageHandler(request, sender, callback) {
 			});
 		return true;
 	} else if (name === 'account.register') {
-		if (!IS_EDGE) {
-			const senderOrigin = (sender.url.indexOf('templates/panel.html') >= 0) ? 'extension' : 'setup';
-			metrics.ping(`create_account_${senderOrigin}`);
-		}
+		const senderOrigin = (tab_url.indexOf('templates/panel.html') >= 0) ? 'extension' : 'setup';
+		metrics.ping(`create_account_${senderOrigin}`);
 		const {
 			email, confirmEmail, password, firstName, lastName
 		} = message;
