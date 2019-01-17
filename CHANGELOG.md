@@ -1,4 +1,4 @@
-### GHOSTERY 8.3.0 (UNRELEASED)
+### GHOSTERY 8.3.0 (January 16, 2019)
 
 + New Ghostery Plus features - Historical Stats, Midnight Theme
 + New intro hub with streamlined setup and tutorial

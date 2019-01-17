@@ -935,7 +935,7 @@ function onMessageHandler(request, sender, callback) {
 		return true;
 	} else if (name === 'account.openSupportPage') {
 		metrics.ping('priority_support_submit');
-		const subscriber = account.hasScopesUnverified(['subscriptions:supporter']);
+		const subscriber = account.hasScopesUnverified(['subscriptions:plus']);
 		const tabUrl = subscriber ? `https://account.${globals.GHOSTERY_DOMAIN}.com/support` : 'https://ghostery.zendesk.com/hc/';
 		utils.openNewTab({ url: tabUrl, become_active: true });
 		return true;
@@ -954,7 +954,7 @@ function onMessageHandler(request, sender, callback) {
 		account.getUser(message)
 			.then((user) => {
 				if (user) {
-					user.subscriptionsSupporter = account.hasScopesUnverified(['subscriptions:supporter']);
+					user.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus']);
 				}
 				callback({ user });
 			})
@@ -1087,24 +1087,28 @@ function initializeDispatcher() {
 			setCliqzModuleEnabled(humanweb, false);
 		}
 	});
-	dispatcher.on('conf.save.enable_offers', (enableOffers) => {
+	dispatcher.on('conf.save.enable_offers', (enableOffersIn) => {
 		button.update();
-		if (!IS_EDGE && !IS_CLIQZ) {
-			if (!enableOffers) {
-				const actions = cliqz &&
+		let firstStep = Promise.resolve();
+		let enableOffers = enableOffersIn;
+		if (IS_EDGE || IS_CLIQZ) {
+			enableOffers = false;
+		} else if (!enableOffers) {
+			const actions = cliqz &&
 				cliqz.modules['offers-v2'] &&
 				cliqz.modules['offers-v2'].background &&
 				cliqz.modules['offers-v2'].background.actions;
-				if (actions) {
-					actions.flushSignals();
-				}
-				OFFERS_ENABLE_SIGNAL = undefined;
-				registerWithOffers(offers, enableOffers);
+			if (actions) {
+				firstStep = actions.flushSignals();
 			}
-			setCliqzModuleEnabled(offers, enableOffers);
+			OFFERS_ENABLE_SIGNAL = undefined;
+		}
+		const toggleModule = () => setCliqzModuleEnabled(offers, enableOffers);
+		const toggleConnection = () => registerWithOffers(offers, enableOffers);
+		if (enableOffers) {
+			firstStep.then(toggleModule).then(toggleConnection);
 		} else {
-			setCliqzModuleEnabled(offers, false);
-			registerWithOffers(offers, false);
+			firstStep.then(toggleConnection).then(toggleModule);
 		}
 	});
 	dispatcher.on('conf.save.enable_anti_tracking', (enableAntitracking) => {
@@ -1619,20 +1623,23 @@ function initializeEventListeners() {
 	});
 
 	// Fired when another extension sends a message, accepts message if it's from Ghostery Tab
-	chrome.runtime.onMessageExternal.addListener((request, sender, sendResponse) => {
-		let recognized;
-		if (globals.DEBUG) {
-			recognized = sender.id === globals.GHOSTERY_TAB_CHROME_TEST_ID || sender.id === globals.GHOSTERY_TAB_FIREFOX_TEST_ID;
-		} else {
-			recognized = sender.id === globals.GHOSTERY_TAB_ID;
-		}
+	// NOTE: not supported on Edge and Firefox < v54
+	if (typeof chrome.runtime.onMessageExternal === 'object') {
+		chrome.runtime.onMessageExternal.addListener((request, sender, sendResponse) => {
+			let recognized;
+			if (globals.DEBUG) {
+				recognized = sender.id === globals.GHOSTERY_TAB_CHROME_TEST_ID || sender.id === globals.GHOSTERY_TAB_FIREFOX_TEST_ID;
+			} else {
+				recognized = sender.id === globals.GHOSTERY_TAB_ID;
+			}
 
-		if (recognized && request.name === 'getStatsAndSettings') {
-			getDataForGhosteryTab(data => sendResponse({ historicalDataAndSettings: data }));
-			return true;
-		}
-		return false;
-	});
+			if (recognized && request.name === 'getStatsAndSettings') {
+				getDataForGhosteryTab(data => sendResponse({ historicalDataAndSettings: data }));
+				return true;
+			}
+			return false;
+		});
+	}
 }
 
 /**
