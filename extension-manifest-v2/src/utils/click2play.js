@@ -21,8 +21,9 @@ import globals from '../classes/Globals';
 import Policy from '../classes/Policy';
 import tabInfo from '../classes/TabInfo';
 import { log } from './common';
-import { sendMessage, processUrl, injectScript, fetchLocalImageResource } from './utils';
+import { sendMessage, processUrl, injectScript } from './utils';
 import c2p_tpl from '../../app/templates/click2play';
+import c2p_images from '../../app/data-images/click2play';
 
 const policy = new Policy();
 
@@ -53,73 +54,50 @@ export function buildC2P(details, app_id) {
 	const c2pHtml = [];
 	const tab_host = tabInfo.getTabInfo(tab_id, 'host');
 	const blacklisted = !!policy.blacklisted(tab_host);
-	const promises = [];
 
-	// loop through C2P DB and look for entries with button properties. push to promises[]
-	for (let i = 0; i < c2pApp.length; i++) {
-		if (c2pApp[i].button) {
-			let url = `app/images/click2play/${c2pApp[i].button}`;
-			url = url.replace('.png', '.data');
-			promises.push(_getImage(url));
+	// Generate the templates for each c2p definition (could be multiple for an app ID)
+	c2pApp.forEach((c2pAppDef) => {
+		const tplData = {
+			blacklisted, // if the site is blacklisted, don't show allow_always button
+			button: !!c2pAppDef.button,
+			ghostery_blocked_src: c2p_images.ghosty_blocked,
+			allow_always_src: c2p_images.allow_unblock,
+			allow_always_title: t('click2play_allow_always_tooltip')
+		};
+		if (c2pAppDef.button) {
+			tplData.allow_once_title = t('click2play_allow_once_button_tooltip', app_name);
+			const buttonName = c2pAppDef.button.substring(0, c2pAppDef.button.indexOf('.png'));
+			tplData.allow_once_src = c2p_images[buttonName];
+		} else {
+			tplData.allow_once_title = t('click2play_allow_once_tooltip');
+			tplData.allow_once_src = c2p_images.allow_once;
+
+			tplData.ghostery_blocked_title = t('click2play_blocked', app_name);
+
+			if (c2pAppDef.type) {
+				tplData.click2play_text = t(`click2play_${c2pAppDef.type}_form`, app_name);
+			} else if (app_id === 2575) { // Hubspot forms. Set title.
+				tplData.click2play_text = t('click2play_blocked', app_name);
+			}
 		}
+
+		c2pHtml.push(c2p_tpl(tplData));
+	});
+
+	if (app_id === 2575) { // Hubspot forms. Adjust selector.
+		c2pApp.ele = _getHubspotFormSelector(details.url);
 	}
-
-	promises.push(_getImage('app/images/click2play/ghosty_blocked.data'));
-	promises.push(_getImage('app/images/click2play/allow_unblock.data'));
-	promises.push(_getImage('app/images/click2play/allow_once.data'));
-
-	Promise.all(promises).catch((err) => {
-		log('buildC2P error', err);
-	}).then(() => {
-		// Generate the templates for each c2p definition (could be multiple for an app ID)
-		c2pApp.forEach((c2pAppDef) => {
-			const tplData = {
-				blacklisted, // if the site is blacklisted, don't show allow_always button
-				button: !!c2pAppDef.button,
-				ghostery_blocked_src: conf.ghosty_blocked_data,
-				allow_always_src: conf.allow_unblock_data,
-				allow_always_title: t('click2play_allow_always_tooltip')
-			};
-			if (c2pAppDef.button) {
-				tplData.allow_once_title = t('click2play_allow_once_button_tooltip', app_name);
-				let url = `app/images/click2play/${c2pAppDef.button}`;
-				url = url.replace('.png', '.data');
-				const conf_prop = url.slice(url.lastIndexOf('/') + 1).replace('.', '_');
-				tplData.allow_once_src = conf[conf_prop];
-			} else {
-				tplData.allow_once_title = t('click2play_allow_once_tooltip');
-				tplData.allow_once_src = conf.allow_once_data;
-
-				tplData.ghostery_blocked_title = t('click2play_blocked', app_name);
-
-				if (c2pAppDef.type) {
-					tplData.click2play_text = t(`click2play_${c2pAppDef.type}_form`, app_name);
-				} else if (app_id === 2575) { // Hubspot forms. Set title.
-					tplData.click2play_text = t('click2play_blocked', app_name);
-				}
-			}
-
-			c2pHtml.push(c2p_tpl(tplData));
-		});
-
-		if (app_id === 2575) { // Hubspot forms. Adjust selector.
-			c2pApp.ele = _getHubspotFormSelector(details.url);
+	// TODO top-level documents only for now
+	_injectClickToPlay(tab_id).then((result) => {
+		if (result) {
+			sendMessage(tab_id, 'c2p', {
+				app_id,
+				data: c2pApp,
+				html: c2pHtml
+				// tabWindowId: message.tabWindowId
+			});
 		}
-		// TODO top-level documents only for now
-		_injectClickToPlay(tab_id).then((result) => {
-			if (result) {
-				sendMessage(tab_id, 'c2p', {
-					app_id,
-					data: c2pApp,
-					html: c2pHtml
-					// tabWindowId: message.tabWindowId
-				});
-			}
-		});
-	})
-		.catch((err) => {
-			log('Click2Play error', err);
-		});
+	});
 }
 
 /**
@@ -236,25 +214,5 @@ function _injectClickToPlay(tab_id) {
 	}).catch((err) => {
 		log('_injectClickToPlay error', err);
 		return false; // prevent sendMessage calls
-	});
-}
-
-/**
- * Takes an image name, creates a new Conf property
- * and stores the data image as the value
- * @private
- *
- * @param  {string} imgURL		url of the image
- * @return {Promise}			true/false
- */
-function _getImage(imgURL) {
-	const url = chrome.extension.getURL(imgURL);
-	const conf_prop = url.slice(url.lastIndexOf('/') + 1).replace('.', '_');
-	return fetchLocalImageResource(url).then((result) => {
-		conf[conf_prop] = result;
-		return true;
-	}).catch((err) => {
-		log(`click2play _getImage error: ${err}`);
-		return false;
 	});
 }
