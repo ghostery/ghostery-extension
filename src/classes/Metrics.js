@@ -439,7 +439,7 @@ class Metrics {
 		if (!conf.account) {
 			return -1;
 		}
-		const subscriptions = conf.account.subscriptionData && conf.account.subscriptionData.subscriptions;
+		const subscriptions = conf.account.subscriptionData;
 		if (!subscriptions) {
 			return -1;
 		}
