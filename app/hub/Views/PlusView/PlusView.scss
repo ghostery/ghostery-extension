@@ -110,11 +110,11 @@
 .PlusView__perkIcon.themes {
 	background-image: buildPerkThemeIcon(#a8ca59, #0a0a0a);
 }
+.PlusView__perkIcon.stats {
+	background-image: buildPerkMoreIcon(#a8ca59, #0a0a0a);
+}
 .PlusView__perkIcon.support {
 	background-image: buildPerkSupportIcon(#a8ca59, #0a0a0a);
-}
-.PlusView__perkIcon.more {
-	background-image: buildPerkMoreIcon(#a8ca59, #0a0a0a);
 }
 .PlusView__featureImage.theme {
 	max-width: 420px;
