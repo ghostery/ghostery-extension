@@ -57,7 +57,8 @@ class StatsGraph extends React.Component {
 		const canvas = D3.select(this.node).append('svg')
 			.attr('class', 'line-graph')
 			.attr('width', width + margin.left + margin.right)
-			.attr('height', width + margin.top + margin.bottom)
+			// Add 15 pixels to the height of the SVG to make room for X axis labels
+			.attr('height', height + margin.top + margin.bottom + 15)
 			.append('g')
 			.attr('transform', `translate(${margin.left},${margin.top})`);
 
@@ -132,13 +133,9 @@ class StatsGraph extends React.Component {
 			.call(yAxis);
 
 		// Add grid
-		function addGridlines() {
-			return yAxis;
-		}
-
 		canvas.append('g')
 			.attr('class', 'grid')
-			.call(addGridlines()
+			.call(yAxis
 				.tickSize(-width)
 				.tickFormat('')
 			);

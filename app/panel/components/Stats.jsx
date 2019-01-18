@@ -241,7 +241,7 @@ class Stats extends React.Component {
 			state.selection.timeframeSelectors.back = '';
 		} else if (e.target.id === 'stats-back') {
 			state.selection.currentIndex -= 6;
-			if (state.selection.currentIndex - 6 <= 0) {
+			if (state.selection.currentIndex - 5 <= 0) {
 				state.selection.currentIndex = 5;
 				state.selection.timeframeSelectors.back = 'disabled';
 			} else {
