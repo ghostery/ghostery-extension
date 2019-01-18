@@ -475,6 +475,7 @@ class Account {
 	}
 
 	_setSubscriptionData = (subscriptionData) => {
+		// TODO: Change this so that we aren't writing over subscriptionData
 		if (!conf.paid_subscription && subscriptionData.hasOwnProperty('subscriptions')) {
 			conf.paid_subscription = true;
 			dispatcher.trigger('conf.save.paid_subscription');
