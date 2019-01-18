@@ -52,7 +52,6 @@ class Summary extends React.Component {
 		this.clickTrackersBlocked = this.clickTrackersBlocked.bind(this);
 		this.clickSitePolicy = this.clickSitePolicy.bind(this);
 		this.clickCliqzFeature = this.clickCliqzFeature.bind(this);
-		this.clickMapTheseTrackers = this.clickMapTheseTrackers.bind(this);
 
 		this.pauseOptions = [
 			{ name: t('pause_30_min'), name_condensed: t('pause_30_min_condensed'), val: 30 },
@@ -256,20 +255,6 @@ class Summary extends React.Component {
 	}
 
 	/**
-	 * Handles clicking on Map These Trackers, which opens Evidon page.
-	 */
-	clickMapTheseTrackers() {
-		if (this.state.disableBlocking) { return; }
-		sendMessage('ping', 'live_scan');
-		sendMessage('openNewTab', {
-			url: `https:\/\/www.evidon.com/solutions/trackermap/?url=${this.props.pageUrl}&utm_source=Ghostery&utm_medium=referral&utm_term=&utm_content=&utm_campaign=GhosteryMapTrackers`,
-			tab_id: +this.state.tab_id,
-			become_active: true,
-		});
-		window.close(); // for firefox
-	}
-
-	/**
 	* React's required render function. Returns JSX
 	* @return {JSX} JSX for rendering the Summary View of the panel
 	*/
@@ -313,10 +298,6 @@ class Summary extends React.Component {
 		const pageLoadClassNames = ClassNames('page-load', {
 			fast: this.state.trackerLatencyTotal < 5,
 			slow: this.state.trackerLatencyTotal > 10,
-		});
-		const mapTheseTrackersClassNames = ClassNames('map-these-trackers', {
-			clickable: !this.state.disableBlocking,
-			'not-clickable': this.state.disableBlocking
 		});
 
 		const summaryViewStatsButton = ClassNames('stats-button', {
@@ -448,11 +429,6 @@ class Summary extends React.Component {
 					/>
 				</div>
 
-				{is_expert && !showCondensed && (
-					<div className={mapTheseTrackersClassNames} onClick={this.clickMapTheseTrackers}>
-						{ t('summary_map_these_trackers') }
-					</div>
-				)}
 				<NavButton path="/stats" imagePath="../../app/images/panel/graph.svg" classNames={summaryViewStatsButton} />
 			</div>
 		);

@@ -515,9 +515,6 @@
 	"summary_show_menu": {
 		"message": "show menu"
 	},
-	"summary_map_these_trackers": {
-		"message": "Map These Trackers"
-	},
 	"blocking_trackers": {
 		"message": "Trackers"
 	},
