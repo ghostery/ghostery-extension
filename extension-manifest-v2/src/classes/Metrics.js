@@ -131,7 +131,6 @@ class Metrics {
 				break;
 
 			// Extension Usage
-			case 'live_scan':
 			case 'pause':
 			case 'restrict_site':
 			case 'resume':
