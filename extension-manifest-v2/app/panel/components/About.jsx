@@ -53,6 +53,9 @@ class About extends React.Component {
 							<a href="https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/" target="_blank" rel="noopener noreferrer">
 								{ t('panel_about_privacy_statement') }
 							</a>
+							<a href="https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/" target="_blank" rel="noopener noreferrer">
+								{ t('panel_about_terms_and_conditions') }
+							</a>
 							<a href="https://www.ghostery.com/about-ghostery/imprint/" target="_blank" rel="noopener noreferrer">
 								{ t('panel_about_imprint') }
 							</a>
