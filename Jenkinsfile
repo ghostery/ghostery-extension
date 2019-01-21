@@ -14,22 +14,33 @@ node('docker') {
     if (params.IS_PROD){
         buildType = "production"
     }
-	
+
     stage('Build Docker Image') {
         img = docker.build('ghostery/build', '--build-arg UID=`id -u` --build-arg GID=`id -g` .')
         // clean workdir
         sh 'rm -rf build ghostery-*'
     }
 
-    stage('Build sign and publish') {
-        img.inside() {
-            withCache {
+    img.inside() {
+        withCache() {
+            stage('Build Extension') {
                 sh 'rm -rf build'
                 withGithubCredentials {
                     sh "moab makezip ${buildType}"
                 }
             }
+            stage('Benchmark') {
+                sh 'cp /home/jenkins/benchmarks/session.jl ./benchmarks/'
+                sh 'cd ./benchmarks && node run_benchmarks.js | tee results.txt'
+                def cputime = sh(returnStdout: true, script: 'cat ./benchmarks/results.txt | grep -v \'=\' | jq .cputime | awk \'{ sum+=$1 } END { print sum }\'')
+                def memory = sh(returnStdout: true, script: 'cat ./benchmarks/results.txt | grep -v \'=\' | jq .memory | awk \'{ sum+=$1 } END { print sum }\'')
+                currentBuild.description = "CPU Time: ${cputime}, Memory: ${((memory as Integer) / (5 * 1024 * 1024)) as Integer}MB"
+                sh 'du -hs ./benchmarks/data/idb/*'
+            }
         }
+    }
+
+    stage('Sign and publish') {
         withS3Credentials {
             // get the name of the firefox build
             def artifact = sh(returnStdout: true, script: 'ls build/ | grep firefox').trim()
@@ -37,7 +48,7 @@ node('docker') {
             // build
             def uploadPath = "cdncliqz/update/android_browser_pre/firefox@ghostery.com"
             def uploadLocation = "s3://${uploadPath}"
-            currentBuild.description = uploadLocation
+            //currentBuild.description = uploadLocation
             sh "aws s3 cp build/${artifact} ${uploadLocation}/  --acl public-read"
 
             // publish
