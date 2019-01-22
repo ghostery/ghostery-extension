@@ -55,13 +55,13 @@ class Stats extends React.Component {
 	getGraphTitleBase = (view) => {
 		switch (view) {
 			case 'trackersSeen':
-				return t('panel_stats_total_trackers_seen');
+				return t('panel_stats_trackers_seen');
 			case 'trackersBlocked':
-				return t('panel_stats_total_trackers_blocked');
+				return t('panel_stats_trackers_blocked');
 			case 'trackersAnonymized':
-				return t('panel_stats_total_trackers_anonymized');
+				return t('panel_stats_trackers_anonymized');
 			case 'adsBlocked':
-				return t('panel_stats_total_ads_blocked');
+				return t('panel_stats_ads_blocked');
 			default:
 				return '';
 		}
