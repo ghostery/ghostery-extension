@@ -474,7 +474,7 @@ class Stats extends React.Component {
 				state.dailyData = dailyData;
 				state.monthlyData = monthlyData;
 				state.cumulativeMonthlyData = cumulativeMonthlyData;
-				state.selection.summaryData = state.cumulativeData;
+				state.selection.summaryData = state.dailyAverageData;
 				state.selection.currentIndex = dailyData.length - 1;
 				state.selection.timeframeSelectors.back = dailyData.length > 6 ? '' : 'disabled';
 				state.selection.view = 'trackersSeen';
