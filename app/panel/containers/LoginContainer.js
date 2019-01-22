@@ -28,6 +28,7 @@ import { login, getUser, getUserSettings } from '../../Account/AccountActions';
 const mapStateToProps = state => Object.assign({}, {
 	// get properties from panel redux store
 	is_expert: state.panel.is_expert,
+	current_theme: state.panel.current_theme
 });
 /**
  * Bind Login view component action creators using Redux's bindActionCreators
