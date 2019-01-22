@@ -66,7 +66,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
       className="PlusView__perk columns text-center"
     >
       <div
-        className="PlusView__perkIcon support"
+        className="PlusView__perkIcon stats"
       />
       <div
         className="PlusView__perkTitle"
@@ -83,7 +83,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
       className="PlusView__perk columns text-center"
     >
       <div
-        className="PlusView__perkIcon more"
+        className="PlusView__perkIcon support"
       />
       <div
         className="PlusView__perkTitle"
@@ -403,7 +403,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
       className="PlusView__perk columns text-center"
     >
       <div
-        className="PlusView__perkIcon support"
+        className="PlusView__perkIcon stats"
       />
       <div
         className="PlusView__perkTitle"
@@ -420,7 +420,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
       className="PlusView__perk columns text-center"
     >
       <div
-        className="PlusView__perkIcon more"
+        className="PlusView__perkIcon support"
       />
       <div
         className="PlusView__perkTitle"
@@ -768,7 +768,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
       className="PlusView__perk columns text-center"
     >
       <div
-        className="PlusView__perkIcon support"
+        className="PlusView__perkIcon stats"
       />
       <div
         className="PlusView__perkTitle"
@@ -785,7 +785,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
       className="PlusView__perk columns text-center"
     >
       <div
-        className="PlusView__perkIcon more"
+        className="PlusView__perkIcon support"
       />
       <div
         className="PlusView__perkTitle"
