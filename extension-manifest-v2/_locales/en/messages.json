@@ -2154,18 +2154,6 @@
 	"panel_stats_ads_blocked": {
 		"message": "Ads Blocked"
 	},
-	"panel_stats_total_trackers_seen": {
-		"message": "Total Trackers Seen"
-	},
-	"panel_stats_total_trackers_blocked": {
-		"message": "Total Trackers Blocked"
-	},
-	"panel_stats_total_trackers_anonymized": {
-		"message": "Total Trackers Anonymized"
-	},
-	"panel_stats_total_ads_blocked": {
-		"message": "Total Ads Blocked"
-	},
 	"panel_stats_cumulative": {
 		"message": "Cumulative"
 	},
@@ -2176,7 +2164,7 @@
 		"message": "Daily"
 	},
 	"panel_stats_reset": {
-		"message": "Reset all stats"
+		"message": "Reset"
 	},
 	"panel_stats_reset_modal_text": {
 		"message": "Your statistics history will be reset. There is no way to recover this data. Do you want to continue?"
