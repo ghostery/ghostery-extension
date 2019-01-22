@@ -125,9 +125,9 @@ const StatsView = (props) => {
 			<div className="tab-header">
 				<div className="tab-container">
 					<div className="tab-header-title">{summaryTitle}</div>
-					<div id="cumulative" className={tabCumulative} onClick={selectType} >
+					<div id="daily" className={tabDaily} onClick={selectType} >
 						<span className="header-tab-text">
-							{t('panel_stats_menu_cumulative')}
+							{t('panel_stats_menu_daily')}
 						</span>
 					</div>
 					<div id="monthly" className={tabMonthly} onClick={selectType} >
@@ -135,9 +135,9 @@ const StatsView = (props) => {
 							{t('panel_stats_menu_monthly')}
 						</span>
 					</div>
-					<div id="daily" className={tabDaily} onClick={selectType} >
+					<div id="cumulative" className={tabCumulative} onClick={selectType} >
 						<span className="header-tab-text">
-							{t('panel_stats_menu_daily')}
+							{t('panel_stats_menu_cumulative')}
 						</span>
 					</div>
 				</div>

@@ -285,12 +285,12 @@ class Stats extends React.Component {
 
 	_reset = (demo) => {
 		const demoData = [
-			{ date: '2018-07-01', amount: 3000, index: 0 },
-			{ date: '2018-08-01', amount: 4500, index: 1 },
-			{ date: '2018-09-01', amount: 1500, index: 2 },
-			{ date: '2018-10-01', amount: 6000, index: 3 },
-			{ date: '2018-11-01', amount: 3000, index: 4 },
-			{ date: '2018-12-01', amount: 4500, index: 5 },
+			{ date: '2018-12-28', amount: 300, index: 0 },
+			{ date: '2018-12-29', amount: 450, index: 1 },
+			{ date: '2018-12-30', amount: 150, index: 2 },
+			{ date: '2018-12-31', amount: 600, index: 3 },
+			{ date: '2019-01-01', amount: 300, index: 4 },
+			{ date: '2019-01-02', amount: 450, index: 5 },
 		];
 
 		const clearData = {
@@ -303,12 +303,12 @@ class Stats extends React.Component {
 
 		const clearOrDemoState = {
 			selection: {
-				type: 'cumulative',
+				type: 'daily',
 				view: demo ? '' : 'trackersSeen',
 				demo,
-				graphTitle: this.getGraphTitle('cumulative', 'trackersSeen'),
+				graphTitle: this.getGraphTitle('daily', 'trackersSeen'),
 				graphIconPath: this.getGraphIconPath('trackersSeen'),
-				summaryTitle: this.getSummaryTitle('cumulative'),
+				summaryTitle: this.getSummaryTitle('daily'),
 				tooltipText: t('panel_stats_trackers_seen'),
 				summaryData: clearData,
 				selectionData: demo ? demoData : [{ date: clearData.date, amount: clearData.trackersSeen, index: 0 }],
@@ -474,9 +474,9 @@ class Stats extends React.Component {
 				state.dailyData = dailyData;
 				state.monthlyData = monthlyData;
 				state.cumulativeMonthlyData = cumulativeMonthlyData;
-				state.selection.summaryData = state.cumulativeData;
-				state.selection.currentIndex = monthlyData.length - 1;
-				state.selection.timeframeSelectors.back = monthlyData.length > 6 ? '' : 'disabled';
+				state.selection.summaryData = state.dailyAverageData;
+				state.selection.currentIndex = dailyData.length - 1;
+				state.selection.timeframeSelectors.back = dailyData.length > 6 ? '' : 'disabled';
 				state.selection.view = 'trackersSeen';
 				state.selection.selectionData = this._determineSelectionData(state);
 				state.selection.demo = false;
