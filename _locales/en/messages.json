@@ -596,10 +596,13 @@
 		"message": "See release notes for all updates"
 	},
 	"panel_about_license": {
-		"message": "License Agreement"
+		"message": "Mozilla Public License Agreement"
 	},
 	"panel_about_privacy_statement": {
 		"message": "Privacy Statement"
+	},
+	"panel_about_terms_and_conditions": {
+		"message": "Terms & Conditions"
 	},
 	"panel_about_licenses": {
 		"message": "Software Licenses"
