@@ -1150,7 +1150,7 @@ antitracking.on('enabled', () => {
 adblocker.on('enabled', () => {
 	adblocker.isReady().then(() =>
 		Promise.all([
-			adblocker.action('removePipelineStep', 'checkWhitelist'),
+			// adblocker.action('removePipelineStep', 'checkWhitelist'),
 			adblocker.action('addPipelineStep', {
 				name: 'checkGhosteryWhitelist',
 				spec: 'break',
