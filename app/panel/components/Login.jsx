@@ -66,7 +66,10 @@ class Login extends React.Component {
 							this.props.actions.getUser(),
 							this.props.actions.getUserSettings(),
 						])
-							.then(() => this.props.actions.getTheme(this.props.current_theme))
+							.then((res) => {
+								const {current_theme = 'default'} = res[1];
+								return this.props.actions.getTheme(current_theme);
+							})
 							.finally(() => {
 								this.setState({ loading: false }, () => {
 									this.props.history.push(this.props.is_expert ? '/detail/blocking' : '/');
