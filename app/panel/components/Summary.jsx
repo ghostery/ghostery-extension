@@ -277,7 +277,8 @@ class Summary extends React.Component {
 		const antiTrackUnsafe = enable_anti_tracking && antiTracking && antiTracking.totalUnsafeCount || 0;
 		const adBlockBlocked = enable_ad_block && adBlock && adBlock.totalCount || 0;
 		let sbBlocked = smartBlock && smartBlock.blocked && Object.keys(smartBlock.blocked).length || 0;
-		const hidePageHost = (this.props.pageHost.split('.').length < 2);
+		const pageHost = this.props.pageHost || 'page_host';
+		const hidePageHost = (pageHost.split('.').length < 2);
 		if (sbBlocked === trackerCounts.sbBlocked) {
 			sbBlocked = 0;
 		}
@@ -340,7 +341,7 @@ class Summary extends React.Component {
 
 				{abPause && !this.state.disableBlocking && is_expert && !showCondensed && (
 					<div className={pageHostClassNames}>
-						{this.props.pageHost}
+						{pageHost}
 					</div>
 				)}
 
@@ -371,7 +372,7 @@ class Summary extends React.Component {
 
 				{!this.state.disableBlocking && (!abPause || !is_expert) && !showCondensed && (
 					<div className={pageHostClassNames}>
-						{this.props.pageHost}
+						{pageHost}
 					</div>
 				)}
 
