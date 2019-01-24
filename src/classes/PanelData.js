@@ -25,7 +25,7 @@ import tabInfo from './TabInfo';
 import rewards from './Rewards';
 import account from './Account';
 import dispatcher from './Dispatcher';
-import { getActiveTab, flushChromeMemoryCache } from '../utils/utils';
+import { getActiveTab, flushChromeMemoryCache, processUrl } from '../utils/utils';
 import { objectEntries, log } from '../utils/common';
 
 const SYNC_SET = new Set(globals.SYNC_ARRAY);
@@ -353,8 +353,8 @@ class PanelData {
 	 */
 	_buildTrackerData(tab) {
 		const tab_id = tab && tab.id;
-		const tab_url = tab && tab.url;
-		const pageHost = tab && tabInfo.getTabInfo(tab_id, 'host') || '';
+		const tab_url = tab && tab.url || '';
+		const pageHost = tab_url && processUrl(tab_url).host || '';
 		const trackerList = foundBugs.getApps(tab_id, false, tab_url) || [];
 		this._trackerData
 			.set('alertCounts', tab && foundBugs.getAppsCountByIssues(tab_id, tab_url) || {})
@@ -470,7 +470,6 @@ class PanelData {
 			b = b.name.toLowerCase(); // eslint-disable-line no-param-reassign
 			return (a > b ? 1 : (a < b ? -1 : 0));
 		});
-
 		return categoryArray;
 	}
 }

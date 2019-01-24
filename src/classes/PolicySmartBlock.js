@@ -267,7 +267,7 @@ class PolicySmartBlock {
 	_requestWasSlow(tabId, appId, requestTimestamp) {
 		const THRESHHOLD = 5000; // 5 seconds
 		const pageTimestamp = tabInfo.getTabInfo(tabId, 'timestamp');
-		//TODO: account for lazy-load or widgets triggered by user interaction beyond 5sec
+		// TODO: account for lazy-load or widgets triggered by user interaction beyond 5sec
 		return (requestTimestamp - pageTimestamp > THRESHHOLD) || false;
 	}
 }
