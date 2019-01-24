@@ -119,7 +119,7 @@ class Summary extends React.Component {
 		const { siteNotScanned, categories } = props;
 		const pageUrl = props.pageUrl || '';
 
-		if (siteNotScanned || !categories || pageUrl.search(/http|chrome-extension|moz-extension|ms-browser-extension|newtab/) === -1) {
+		if (siteNotScanned || !categories || pageUrl.search(/http|chrome-extension|moz-extension|ms-browser-extension|newtab|chrome:\/\/startpage\//) === -1) {
 			this.setState({ disableBlocking: true });
 		} else {
 			this.setState({ disableBlocking: false });
