@@ -119,7 +119,7 @@ class Summary extends React.Component {
 		const { siteNotScanned, categories } = props;
 		const pageUrl = props.pageUrl || '';
 
-		if (siteNotScanned || !categories || pageUrl.search(/http|chrome-extension|moz-extension|ms-browser-extension|newtab/) === -1) {
+		if (siteNotScanned || !categories || pageUrl.search(/http|chrome-extension|moz-extension|ms-browser-extension|newtab|chrome:\/\/startpage\//) === -1) {
 			this.setState({ disableBlocking: true });
 		} else {
 			this.setState({ disableBlocking: false });
@@ -277,6 +277,8 @@ class Summary extends React.Component {
 		const antiTrackUnsafe = enable_anti_tracking && antiTracking && antiTracking.totalUnsafeCount || 0;
 		const adBlockBlocked = enable_ad_block && adBlock && adBlock.totalCount || 0;
 		let sbBlocked = smartBlock && smartBlock.blocked && Object.keys(smartBlock.blocked).length || 0;
+		const pageHost = this.props.pageHost || 'page_host';
+		const hidePageHost = (pageHost.split('.').length < 2);
 		if (sbBlocked === trackerCounts.sbBlocked) {
 			sbBlocked = 0;
 		}
@@ -313,6 +315,10 @@ class Summary extends React.Component {
 			trackersBlockedCount = trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked + sbAdjust || 0;
 		}
 
+		const pageHostClassNames = ClassNames('page-host', {
+			invisible: hidePageHost
+		});
+
 		return (
 			<div id="content-summary" className={summaryClassNames}>
 				{abPause && (
@@ -334,8 +340,8 @@ class Summary extends React.Component {
 				)}
 
 				{abPause && !this.state.disableBlocking && is_expert && !showCondensed && (
-					<div className="page-host">
-						{this.props.pageHost}
+					<div className={pageHostClassNames}>
+						{pageHost}
 					</div>
 				)}
 
@@ -365,8 +371,8 @@ class Summary extends React.Component {
 				)}
 
 				{!this.state.disableBlocking && (!abPause || !is_expert) && !showCondensed && (
-					<div className="page-host">
-						{this.props.pageHost}
+					<div className={pageHostClassNames}>
+						{pageHost}
 					</div>
 				)}
 

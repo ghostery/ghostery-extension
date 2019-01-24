@@ -43,6 +43,16 @@ class FoundBugs {
 		this._foundBugs = {};
 	}
 
+	_ensure(tab_id) {
+		if (!tab_id) {
+			return false;
+		}
+		if (!this._foundBugs.hasOwnProperty(tab_id)) {
+			this._foundBugs[tab_id] = {};
+		}
+		return true;
+	}
+
 	/**
 	 * Update this._foundBugs property with bug data for a tab_id
 	 *
@@ -57,8 +67,8 @@ class FoundBugs {
 	 * @param  {string} 	type 		request resource type
 	 */
 	update(tab_id, bug_id, src, blocked, type) {
-		if (!this._foundBugs.hasOwnProperty(tab_id)) {
-			this._foundBugs[tab_id] = {};
+		if (!this._ensure(tab_id)) {
+			return;
 		}
 
 		if (!bug_id) {
@@ -97,7 +107,11 @@ class FoundBugs {
 	 * @return {Object}
 	 */
 	getBugs(tab_id) {
-		return this._foundBugs.hasOwnProperty(tab_id) && this._foundBugs[tab_id];
+		if (!this._ensure(tab_id)) {
+			return {};
+		}
+
+		return this._foundBugs[tab_id];
 	}
 
 	/**
@@ -111,8 +125,13 @@ class FoundBugs {
 	 * @return {array}  				array of tracker objects
 	 */
 	getApps(tab_id, sorted, tab_url, app_id) {
+		if (!this._ensure(tab_id)) {
+			return [];
+		}
+
 		const apps_arr = [];
 		const apps_obj = {};
+
 		const bugs = this.getBugs(tab_id);
 		const { db } = bugDb;
 
@@ -194,6 +213,10 @@ class FoundBugs {
 	 * @return {array}					array of categories
 	 */
 	getCategories(tab_id, sorted) {
+		if (!this._ensure(tab_id)) {
+			return [];
+		}
+
 		const cats_arr = [];
 		const cats_obj = {};
 		const bugs = this.getBugs(tab_id);
@@ -360,6 +383,10 @@ class FoundBugs {
 	 * @return {number} 			tracker id of a slow bug or 0
 	 */
 	checkLatencyIssue(tab_id, bug_id, latency) {
+		if (!this._ensure(tab_id)) {
+			return 0;
+		}
+
 		if (!latency) {
 			return 0;
 		}
@@ -368,7 +395,7 @@ class FoundBugs {
 			return 0;
 		}
 
-		if (!this._foundBugs.hasOwnProperty(tab_id) || !this._foundBugs[tab_id][bug_id]) {
+		if (!this._foundBugs[tab_id][bug_id]) {
 			return 0;
 		}
 
