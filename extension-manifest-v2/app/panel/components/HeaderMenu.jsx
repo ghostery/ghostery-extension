@@ -82,10 +82,10 @@ class HeaderMenu extends React.Component {
 				url,
 				become_active: true,
 			});
+			window.close();
 		}).catch(() => {
 			log('Error gathering page data');
 		});
-		window.close();
 	}
 	/**
 	 * Handle click on 'Submit a new tracker' menu item.
