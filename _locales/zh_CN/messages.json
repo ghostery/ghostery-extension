@@ -515,9 +515,6 @@
 	"summary_show_menu": {
 		"message": "显示菜单"
 	},
-	"summary_map_these_trackers": {
-		"message": "映射这些跟踪器"
-	},
 	"blocking_trackers": {
 		"message": "跟踪器"
 	},
@@ -599,10 +596,13 @@
 		"message": "查看所有更新的版本说明"
 	},
 	"panel_about_license": {
-		"message": "许可协议"
+		"message": "Mozilla 公共许可协议"
 	},
 	"panel_about_privacy_statement": {
 		"message": "隐私声明"
+	},
+	"panel_about_terms_and_conditions": {
+		"message": "条款和条件"
 	},
 	"panel_about_licenses": {
 		"message": "软件许可证"
@@ -1908,7 +1908,7 @@
 		"message": "帐户创建成功"
 	},
 	"hub_create_account_toast_error": {
-		"message": "创建帐户错误"
+		"message": "该电子邮件地址已被使用。  请选择其他电子邮件地址。 "
 	},
 	"enable_when_paused": {
 		"message": "要使用该功能，请恢复 Ghostery。"
@@ -1932,10 +1932,10 @@
 		"message": "代码已复制"
 	},
 	"rewards_expires_in_day": {
-		"message": "1 天后过期"
+		"message": "1 天可用"
 	},
 	"rewards_expires_in_days": {
-		"message": "$COUNT$ 天后过期",
+		"message": "$COUNT$ 天可用",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1943,10 +1943,10 @@
 		}
 	},
 	"rewards_expires_in_hour": {
-		"message": "1 小时后过期"
+		"message": "1 小时可用"
 	},
 	"rewards_expires_in_hours": {
-		"message": "$COUNT$ 小时后过期",
+		"message": "$COUNT$ 小时可用",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1954,10 +1954,10 @@
 		}
 	},
 	"rewards_expires_in_min": {
-		"message": "1 分钟后过期"
+		"message": "1 分钟可用"
 	},
 	"rewards_expires_in_mins": {
-		"message": "$COUNT$ 分钟后过期",
+		"message": "$COUNT$ 分钟可用",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1965,10 +1965,10 @@
 		}
 	},
 	"rewards_expires_in_sec": {
-		"message": "1 秒后过期"
+		"message": "1 秒可用"
 	},
 	"rewards_expires_in_secs": {
-		"message": "$COUNT$ 秒后过期",
+		"message": "$COUNT$ 秒可用",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -2124,9 +2124,6 @@
 	"subscription_submit_issue": {
 		"message": "提交问题"
 	},
-	"subscription_data_error": {
-		"message": "检索您的订阅详情时出错。请点击下方链接，访问您的帐户信息。"
-	},
 	"panel_stats_menu_cumulative": {
 		"message": "累计"
 	},
@@ -2157,18 +2154,6 @@
 	"panel_stats_ads_blocked": {
 		"message": "已拦截广告"
 	},
-	"panel_stats_total_trackers_seen": {
-		"message": "已显示跟踪器总数"
-	},
-	"panel_stats_total_trackers_blocked": {
-		"message": "已拦截跟踪器总数"
-	},
-	"panel_stats_total_trackers_anonymized": {
-		"message": "已匿名跟踪器总数"
-	},
-	"panel_stats_total_ads_blocked": {
-		"message": "已拦截广告总数"
-	},
 	"panel_stats_cumulative": {
 		"message": "累计"
 	},
@@ -2179,7 +2164,7 @@
 		"message": "每日"
 	},
 	"panel_stats_reset": {
-		"message": "重置所有统计数据"
+		"message": "重设"
 	},
 	"panel_stats_reset_modal_text": {
 		"message": "您的历史统计数据将会重置。此数据无法恢复。要继续吗？"

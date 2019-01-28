@@ -515,9 +515,6 @@
 	"summary_show_menu": {
 		"message": "toon menu"
 	},
-	"summary_map_these_trackers": {
-		"message": "Breng deze trackers in kaart"
-	},
 	"blocking_trackers": {
 		"message": "Trackers"
 	},
@@ -599,10 +596,13 @@
 		"message": "Bekijk release notes voor alle updates"
 	},
 	"panel_about_license": {
-		"message": "Licentieovereenkomst"
+		"message": "Mozilla Openbare Licentieovereenkomst"
 	},
 	"panel_about_privacy_statement": {
 		"message": "Privacyverklaring"
+	},
+	"panel_about_terms_and_conditions": {
+		"message": "Algemene Voorwaarden"
 	},
 	"panel_about_licenses": {
 		"message": "Softwarelicenties"
@@ -1908,7 +1908,7 @@
 		"message": "Account aangemaakt"
 	},
 	"hub_create_account_toast_error": {
-		"message": "Account Aanmaken foutmelding"
+		"message": "Dat e-mailadres is al in gebruik.  Gelieve een andere te kiezen."
 	},
 	"enable_when_paused": {
 		"message": "Hervat Ghostery om deze functie te gebruiken."
@@ -1932,10 +1932,10 @@
 		"message": "code gekopieerd"
 	},
 	"rewards_expires_in_day": {
-		"message": "Verloopt in 1 dag"
+		"message": "Beschikbaar voor 1 dag"
 	},
 	"rewards_expires_in_days": {
-		"message": "Verloopt in $COUNT$ dagen",
+		"message": "Beschikbaar voor $COUNT$ dagen",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1943,10 +1943,10 @@
 		}
 	},
 	"rewards_expires_in_hour": {
-		"message": "Verloopt in 1 uur"
+		"message": "Beschikbaar voor 1 uur"
 	},
 	"rewards_expires_in_hours": {
-		"message": "Verloopt in $COUNT$ uur",
+		"message": "Beschikbaar voor $COUNT$ uur",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1954,10 +1954,10 @@
 		}
 	},
 	"rewards_expires_in_min": {
-		"message": "Verloopt in 1 min"
+		"message": "Beschikbaar voor 1 minuut"
 	},
 	"rewards_expires_in_mins": {
-		"message": "Verloopt in $COUNT$ min",
+		"message": "Beschikbaar voor $COUNT$ minuten",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1965,10 +1965,10 @@
 		}
 	},
 	"rewards_expires_in_sec": {
-		"message": "Verloopt in 1 sec"
+		"message": "Beschikbaar voor 1 seconde"
 	},
 	"rewards_expires_in_secs": {
-		"message": "Verloopt in $COUNT$ seconden",
+		"message": "Beschikbaar voor $COUNT$ seconden",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -2124,9 +2124,6 @@
 	"subscription_submit_issue": {
 		"message": "Probleem versturen"
 	},
-	"subscription_data_error": {
-		"message": "Er is een fout ontstaan bij het ophalen van je abonnementsgegevens. Klik op de onderstaande link om toegang te krijgen tot je accountgegevens."
-	},
 	"panel_stats_menu_cumulative": {
 		"message": "Cumulatief"
 	},
@@ -2157,18 +2154,6 @@
 	"panel_stats_ads_blocked": {
 		"message": "Ads Geblokkeerd"
 	},
-	"panel_stats_total_trackers_seen": {
-		"message": "Totaal Aantal Geziene Trackers"
-	},
-	"panel_stats_total_trackers_blocked": {
-		"message": "Totaal Aantal Geblokkeerde Trackers"
-	},
-	"panel_stats_total_trackers_anonymized": {
-		"message": "Totaal Aantal Geanonimiseerde Trackers"
-	},
-	"panel_stats_total_ads_blocked": {
-		"message": "Totaal Aantal Geblokkeerde Ads"
-	},
 	"panel_stats_cumulative": {
 		"message": "Cumulatief"
 	},
@@ -2179,7 +2164,7 @@
 		"message": "Dagelijks"
 	},
 	"panel_stats_reset": {
-		"message": "Herstel alle statistieken"
+		"message": "Reset"
 	},
 	"panel_stats_reset_modal_text": {
 		"message": "Je statistiekengeschiedenis zal worden gereset. Deze data is niet meer te hertellen. Wil je doorgaan?"

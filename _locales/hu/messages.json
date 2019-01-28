@@ -515,9 +515,6 @@
 	"summary_show_menu": {
 		"message": "menü megjelenítése"
 	},
-	"summary_map_these_trackers": {
-		"message": "Követők meghatározása"
-	},
 	"blocking_trackers": {
 		"message": "Trackerek"
 	},
@@ -599,10 +596,13 @@
 		"message": "Az összes"
 	},
 	"panel_about_license": {
-		"message": "Licencszerződés"
+		"message": "Mozilla Nyilvános Licencszerződés"
 	},
 	"panel_about_privacy_statement": {
 		"message": "Adatvédelmi szabályzat"
+	},
+	"panel_about_terms_and_conditions": {
+		"message": "Felhasználási Feltételek"
 	},
 	"panel_about_licenses": {
 		"message": "Szoftverlicencek"
@@ -1908,7 +1908,7 @@
 		"message": "Fiók sikeresen létrehozva"
 	},
 	"hub_create_account_toast_error": {
-		"message": "Fióklétrehozási hiba"
+		"message": "Az emailcím már használatban van.  Kérjük, válasszon másikat."
 	},
 	"enable_when_paused": {
 		"message": "E funkció használatához térjen vissza a Ghostery-hez."
@@ -1932,10 +1932,10 @@
 		"message": "kód másolva"
 	},
 	"rewards_expires_in_day": {
-		"message": "1 nap múlva lejár"
+		"message": "1 napig elérhető"
 	},
 	"rewards_expires_in_days": {
-		"message": "$COUNT$ nap múlva lejár",
+		"message": "$COUNT$ napig elérhető",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1943,10 +1943,10 @@
 		}
 	},
 	"rewards_expires_in_hour": {
-		"message": "1 óra múlva lejár"
+		"message": "1 óráig elérhető"
 	},
 	"rewards_expires_in_hours": {
-		"message": "$COUNT$ óra múlva lejár",
+		"message": "$COUNT$ óráig elérhető",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1954,10 +1954,10 @@
 		}
 	},
 	"rewards_expires_in_min": {
-		"message": "1 perc múlva lejár"
+		"message": "1 percig elérhető"
 	},
 	"rewards_expires_in_mins": {
-		"message": "$COUNT$ perc múlva lejár",
+		"message": "$COUNT$ percig elérhető",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1965,10 +1965,10 @@
 		}
 	},
 	"rewards_expires_in_sec": {
-		"message": "1 mp múlva lejár"
+		"message": "1 másodpercig elérhető"
 	},
 	"rewards_expires_in_secs": {
-		"message": "$COUNT$ mp múlva lejár",
+		"message": "$COUNT$ másodpercig elérhető",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -2124,9 +2124,6 @@
 	"subscription_submit_issue": {
 		"message": "Probléma jelentése"
 	},
-	"subscription_data_error": {
-		"message": "Hiba lépett fel előfizetése részleteinek lekérdezésekor. Fiókadatainak eléréséhez kérjük, kattintson a lenti hivatkozásra."
-	},
 	"panel_stats_menu_cumulative": {
 		"message": "Összesített"
 	},
@@ -2157,18 +2154,6 @@
 	"panel_stats_ads_blocked": {
 		"message": "Hirdetések blokkolva"
 	},
-	"panel_stats_total_trackers_seen": {
-		"message": "Összes érzékelt tracker"
-	},
-	"panel_stats_total_trackers_blocked": {
-		"message": "Összes blokkolt tracker"
-	},
-	"panel_stats_total_trackers_anonymized": {
-		"message": "Összes névtelenített tracker"
-	},
-	"panel_stats_total_ads_blocked": {
-		"message": "Összes blokkolt hirdetés"
-	},
 	"panel_stats_cumulative": {
 		"message": "Összesített"
 	},
@@ -2179,7 +2164,7 @@
 		"message": "Napi"
 	},
 	"panel_stats_reset": {
-		"message": "Minden statisztika nullázása"
+		"message": "Visszaállítás"
 	},
 	"panel_stats_reset_modal_text": {
 		"message": "A statisztika napló nullázva lesz. Nincs lehetőség ezeknek az adatoknak a helyreállítására. Kívánja folytatni?"

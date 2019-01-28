@@ -515,9 +515,6 @@
 	"summary_show_menu": {
 		"message": "показать меню"
 	},
-	"summary_map_these_trackers": {
-		"message": "Показать карту трекеров"
-	},
 	"blocking_trackers": {
 		"message": "Трекеры"
 	},
@@ -599,10 +596,13 @@
 		"message": "См. примечания к выпуску для получения информации обо всех обновлениях"
 	},
 	"panel_about_license": {
-		"message": "Лицензионное соглашение"
+		"message": "Публичное лицензионное соглашение Mozilla"
 	},
 	"panel_about_privacy_statement": {
 		"message": "Заявление о конфиденциальности"
+	},
+	"panel_about_terms_and_conditions": {
+		"message": "Условия и положения"
 	},
 	"panel_about_licenses": {
 		"message": "Лицензии на программное обеспечение"
@@ -1908,7 +1908,7 @@
 		"message": "Учетная запись успешно создана"
 	},
 	"hub_create_account_toast_error": {
-		"message": "Ошибка создания учетной записи"
+		"message": "Этот адрес электронной почты уже используется.  Выберите другой."
 	},
 	"enable_when_paused": {
 		"message": "Для использования этой функции возобновите работу Ghostery."
@@ -1932,10 +1932,10 @@
 		"message": "код скопирован"
 	},
 	"rewards_expires_in_day": {
-		"message": "Истекает через 1 день"
+		"message": "Доступно на 1 день"
 	},
 	"rewards_expires_in_days": {
-		"message": "Истекает через $COUNT$ дней",
+		"message": "Доступно на $COUNT$ дней",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1943,10 +1943,10 @@
 		}
 	},
 	"rewards_expires_in_hour": {
-		"message": "Истекает через 1 час"
+		"message": "Доступно на 1 час"
 	},
 	"rewards_expires_in_hours": {
-		"message": "Истекает через $COUNT$ ч",
+		"message": "Доступно на $COUNT$ часа(ов)",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1954,10 +1954,10 @@
 		}
 	},
 	"rewards_expires_in_min": {
-		"message": "Истекает через 1 мин"
+		"message": "Доступно на 1 минуту"
 	},
 	"rewards_expires_in_mins": {
-		"message": "Истекает через $COUNT$ мин",
+		"message": "Доступно на $COUNT$ минут(ы)",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1965,10 +1965,10 @@
 		}
 	},
 	"rewards_expires_in_sec": {
-		"message": "Истекает через 1 сек"
+		"message": "Доступно на 1 секунду"
 	},
 	"rewards_expires_in_secs": {
-		"message": "Истекает через $COUNT$ сек",
+		"message": "Доступно на $COUNT$ секунд(ы)",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -2124,9 +2124,6 @@
 	"subscription_submit_issue": {
 		"message": "Сообщить о проблеме"
 	},
-	"subscription_data_error": {
-		"message": "При получении информации о вашей подписке произошла ошибка. Нажмите на ссылку ниже, чтобы получить доступ к информации вашей учетной записи."
-	},
 	"panel_stats_menu_cumulative": {
 		"message": "Накопительные"
 	},
@@ -2157,18 +2154,6 @@
 	"panel_stats_ads_blocked": {
 		"message": "Реклама заблокирована"
 	},
-	"panel_stats_total_trackers_seen": {
-		"message": "Всего отслеженных трекеров"
-	},
-	"panel_stats_total_trackers_blocked": {
-		"message": "Всего трекеров заблокировано"
-	},
-	"panel_stats_total_trackers_anonymized": {
-		"message": "Всего анонимизированных трекеров"
-	},
-	"panel_stats_total_ads_blocked": {
-		"message": "Всего рекламы заблокировано"
-	},
 	"panel_stats_cumulative": {
 		"message": "Накопительные"
 	},
@@ -2179,7 +2164,7 @@
 		"message": "Ежедневно"
 	},
 	"panel_stats_reset": {
-		"message": "Сброс"
+		"message": "Сбросить"
 	},
 	"panel_stats_reset_modal_text": {
 		"message": "Ваша история статистики будет сброшена. Невозможно восстановить эти данные. Хотите продолжить?"

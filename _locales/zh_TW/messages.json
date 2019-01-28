@@ -515,9 +515,6 @@
 	"summary_show_menu": {
 		"message": "顯示菜單"
 	},
-	"summary_map_these_trackers": {
-		"message": "映射這些跟踪器"
-	},
 	"blocking_trackers": {
 		"message": "網頁跟蹤器"
 	},
@@ -599,10 +596,13 @@
 		"message": "閱讀發佈說明以了解所有更新"
 	},
 	"panel_about_license": {
-		"message": "准許證協議"
+		"message": "Mozilla公共許可協議"
 	},
 	"panel_about_privacy_statement": {
 		"message": "隱私聲明"
+	},
+	"panel_about_terms_and_conditions": {
+		"message": "條款及條件"
 	},
 	"panel_about_licenses": {
 		"message": "軟體准許證"
@@ -1908,7 +1908,7 @@
 		"message": "已成功創建帳戶"
 	},
 	"hub_create_account_toast_error": {
-		"message": "創建帳戶錯誤"
+		"message": "那個電郵地址已有人使用。  請選擇另外一個。"
 	},
 	"enable_when_paused": {
 		"message": "欲使用此功能，請重啟Ghostery。"
@@ -1932,10 +1932,10 @@
 		"message": "代碼被複製"
 	},
 	"rewards_expires_in_day": {
-		"message": "1天內截止"
+		"message": "1天可用"
 	},
 	"rewards_expires_in_days": {
-		"message": "$COUNT$天內截止",
+		"message": " $COUNT$天可用",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1943,10 +1943,10 @@
 		}
 	},
 	"rewards_expires_in_hour": {
-		"message": "1小時內截止"
+		"message": "1小時可用"
 	},
 	"rewards_expires_in_hours": {
-		"message": "$COUNT$小時內截止",
+		"message": " $COUNT$小時可用",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1954,10 +1954,10 @@
 		}
 	},
 	"rewards_expires_in_min": {
-		"message": "1分鐘內截止"
+		"message": "1分鐘可用"
 	},
 	"rewards_expires_in_mins": {
-		"message": "$COUNT$分鐘內截止",
+		"message": " $COUNT$分鐘可用",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1965,10 +1965,10 @@
 		}
 	},
 	"rewards_expires_in_sec": {
-		"message": "1秒內截止"
+		"message": "1秒鐘可用"
 	},
 	"rewards_expires_in_secs": {
-		"message": "$COUNT$秒內截止",
+		"message": " $COUNT$秒可用",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -2124,9 +2124,6 @@
 	"subscription_submit_issue": {
 		"message": "提交問題"
 	},
-	"subscription_data_error": {
-		"message": "檢索您的訂閱詳情時出現錯誤。請點擊以下鏈接獲取您的帳戶信息。"
-	},
 	"panel_stats_menu_cumulative": {
 		"message": "累計"
 	},
@@ -2157,18 +2154,6 @@
 	"panel_stats_ads_blocked": {
 		"message": "廣告被封鎖了"
 	},
-	"panel_stats_total_trackers_seen": {
-		"message": "已見網頁跟蹤器總數"
-	},
-	"panel_stats_total_trackers_blocked": {
-		"message": "已阻止的網頁跟蹤器總數"
-	},
-	"panel_stats_total_trackers_anonymized": {
-		"message": "匿名網絡跟蹤器總數"
-	},
-	"panel_stats_total_ads_blocked": {
-		"message": "已阻止廣告總數"
-	},
 	"panel_stats_cumulative": {
 		"message": "累計"
 	},
@@ -2179,7 +2164,7 @@
 		"message": "每日"
 	},
 	"panel_stats_reset": {
-		"message": "重置所有統計數據"
+		"message": "重置"
 	},
 	"panel_stats_reset_modal_text": {
 		"message": "您的統計歷史將被重置無法恢復此數據。您是否要繼續？"
