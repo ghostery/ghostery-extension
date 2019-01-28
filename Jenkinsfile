@@ -24,11 +24,18 @@ node('docker') {
     img.inside() {
         withCache() {
             stage('Build Extension') {
+				sh 'rm -rf cliqz'
+				sh 'yarn run postinstall'
+
                 sh 'rm -rf build'
-                withGithubCredentials {
+
+				// TODO: this should not be packaged at all
+				sh 'rm -rf ./benchmarks/data ./benchmarks/*.jl'
+
+				withGithubCredentials {
                     sh "moab makezip ${buildType}"
                 }
-            }
+			}
             stage('Benchmark') {
                 sh 'cp /home/jenkins/benchmarks/session.jl ./benchmarks/'
                 sh 'cd ./benchmarks && node run_benchmarks.js | tee results.txt'
