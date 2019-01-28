@@ -515,9 +515,6 @@
 	"summary_show_menu": {
 		"message": "メニューを表示"
 	},
-	"summary_map_these_trackers": {
-		"message": "トラッカーをマッピングする"
-	},
 	"blocking_trackers": {
 		"message": "トラッカー"
 	},
@@ -599,10 +596,13 @@
 		"message": "すべての更新情報についてはリリースノートをご覧ください"
 	},
 	"panel_about_license": {
-		"message": "ライセンス契約"
+		"message": "Mozilla公有使用許諾契約書"
 	},
 	"panel_about_privacy_statement": {
 		"message": "プライバシーに関する声明"
+	},
+	"panel_about_terms_and_conditions": {
+		"message": "利用規約"
 	},
 	"panel_about_licenses": {
 		"message": "ソフトウェア・ライセンス"
@@ -1908,7 +1908,7 @@
 		"message": "アカウントは正常に作成されました"
 	},
 	"hub_create_account_toast_error": {
-		"message": "アカウント作成エラー"
+		"message": "そのメールアドレスは既に使用されています。  別のメールアドレスを選択してください。"
 	},
 	"enable_when_paused": {
 		"message": "この機能を使用するには、Ghosteryを再開してください。"
@@ -1932,10 +1932,10 @@
 		"message": "コードがコピーされました"
 	},
 	"rewards_expires_in_day": {
-		"message": "あと 1 日で有効期限が切れます"
+		"message": "1日間利用可能"
 	},
 	"rewards_expires_in_days": {
-		"message": "あと $COUNT$ 日で有効期限が切れます",
+		"message": "$COUNT$分間利用可能",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1943,10 +1943,10 @@
 		}
 	},
 	"rewards_expires_in_hour": {
-		"message": "あと 1 時間で有効期限が切れます"
+		"message": "1時間利用可能"
 	},
 	"rewards_expires_in_hours": {
-		"message": "あと $COUNT$ 時間で有効期限が切れます",
+		"message": "$COUNT$時間利用可能",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1954,10 +1954,10 @@
 		}
 	},
 	"rewards_expires_in_min": {
-		"message": "あと 1 分で有効期限が切れます"
+		"message": "1分間利用可能"
 	},
 	"rewards_expires_in_mins": {
-		"message": "あと $COUNT$ 分で有効期限が切れます",
+		"message": "$COUNT$分間利用可能",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1965,10 +1965,10 @@
 		}
 	},
 	"rewards_expires_in_sec": {
-		"message": "あと 1 秒で有効期限が切れます"
+		"message": "1秒間利用可能"
 	},
 	"rewards_expires_in_secs": {
-		"message": "あと $COUNT$ 秒で有効期限が切れます",
+		"message": "$COUNT$秒間利用可能",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -2124,9 +2124,6 @@
 	"subscription_submit_issue": {
 		"message": "この内容で送信する"
 	},
-	"subscription_data_error": {
-		"message": "登録情報の取得中にエラーが発生しました。以下のリンクをクリックしてアカウント情報にアクセスしてください。"
-	},
 	"panel_stats_menu_cumulative": {
 		"message": "累計"
 	},
@@ -2157,18 +2154,6 @@
 	"panel_stats_ads_blocked": {
 		"message": "広告がブロックされています"
 	},
-	"panel_stats_total_trackers_seen": {
-		"message": "検出されたトラッカーの合計"
-	},
-	"panel_stats_total_trackers_blocked": {
-		"message": "ブロックされたトラッカーの合計"
-	},
-	"panel_stats_total_trackers_anonymized": {
-		"message": "匿名化されたトラッカーの合計"
-	},
-	"panel_stats_total_ads_blocked": {
-		"message": "ブロックされた広告数合計"
-	},
 	"panel_stats_cumulative": {
 		"message": "累計"
 	},
@@ -2179,7 +2164,7 @@
 		"message": "毎日"
 	},
 	"panel_stats_reset": {
-		"message": "すべての統計をリセットする"
+		"message": "リセット"
 	},
 	"panel_stats_reset_modal_text": {
 		"message": "統計履歴がリセットされました。このデータは復元できません。お続けになりますか？"

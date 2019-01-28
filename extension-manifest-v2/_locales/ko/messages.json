@@ -515,9 +515,6 @@
 	"summary_show_menu": {
 		"message": "메뉴 표시 "
 	},
-	"summary_map_these_trackers": {
-		"message": "다음 트래커 매핑"
-	},
 	"blocking_trackers": {
 		"message": "트래커 "
 	},
@@ -599,10 +596,13 @@
 		"message": "모든 업데이트 내용은 릴리스 노트를 참조하십시오 "
 	},
 	"panel_about_license": {
-		"message": "사용권 계약서 "
+		"message": "Mozilla 공개 라이선스 계약서 "
 	},
 	"panel_about_privacy_statement": {
 		"message": "개인정보 보호정책 "
+	},
+	"panel_about_terms_and_conditions": {
+		"message": "사용 약관 "
 	},
 	"panel_about_licenses": {
 		"message": "사용권 계약서 "
@@ -1908,7 +1908,7 @@
 		"message": "계정 만들기가 완료되었습니다."
 	},
 	"hub_create_account_toast_error": {
-		"message": "계정 만들기 오류"
+		"message": "해당 이메일 주소는 이미 사용 중입니다.   다른 이메일을 선택하십시오."
 	},
 	"enable_when_paused": {
 		"message": "이 기능을 사용하려면 Ghostery를 다시 시작하십시오."
@@ -1932,10 +1932,10 @@
 		"message": "코드 복사됨 "
 	},
 	"rewards_expires_in_day": {
-		"message": "1일 후 만료됨"
+		"message": "1일 동안 사용 가능 "
 	},
 	"rewards_expires_in_days": {
-		"message": "$COUNT$일 후 만료됨",
+		"message": "$COUNT$일 동안 사용 가능 ",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1943,10 +1943,10 @@
 		}
 	},
 	"rewards_expires_in_hour": {
-		"message": "1시간 후 만료됨"
+		"message": "1시간 동안 사용 가능 "
 	},
 	"rewards_expires_in_hours": {
-		"message": "$COUNT$시간 후 만료됨",
+		"message": "$COUNT$시간 동안 사용 가능 ",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1954,10 +1954,10 @@
 		}
 	},
 	"rewards_expires_in_min": {
-		"message": "1분 후 만료됨"
+		"message": "1분 동안 사용 가능 "
 	},
 	"rewards_expires_in_mins": {
-		"message": "$COUNT$분 후 만료됨",
+		"message": "$COUNT$분 동안 사용 가능 ",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1965,10 +1965,10 @@
 		}
 	},
 	"rewards_expires_in_sec": {
-		"message": "1초 후 만료됨"
+		"message": "1초 동안 사용 가능 "
 	},
 	"rewards_expires_in_secs": {
-		"message": "$COUNT$초 후 만료됨",
+		"message": "$COUNT$초 동안 사용 가능 ",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -2124,9 +2124,6 @@
 	"subscription_submit_issue": {
 		"message": "오류 보고"
 	},
-	"subscription_data_error": {
-		"message": "귀하의 구독 세부정보를 확인하는데 오류가 발생했습니다. 아래 링크를 클릭해서 귀하의 계정 정보에 접속하세요."
-	},
 	"panel_stats_menu_cumulative": {
 		"message": "누적"
 	},
@@ -2157,18 +2154,6 @@
 	"panel_stats_ads_blocked": {
 		"message": "차단된 광고 "
 	},
-	"panel_stats_total_trackers_seen": {
-		"message": "열람된 총 트래커"
-	},
-	"panel_stats_total_trackers_blocked": {
-		"message": "모든 트래커 차단"
-	},
-	"panel_stats_total_trackers_anonymized": {
-		"message": "익명화된 총 트래커"
-	},
-	"panel_stats_total_ads_blocked": {
-		"message": "차단된 총 광고"
-	},
 	"panel_stats_cumulative": {
 		"message": "누적"
 	},
@@ -2179,7 +2164,7 @@
 		"message": "매일"
 	},
 	"panel_stats_reset": {
-		"message": "모든 통계 초기화"
+		"message": "재설정"
 	},
 	"panel_stats_reset_modal_text": {
 		"message": "귀하의 통계 이력이 초기화됩니다. 이 데이터를 복원할 수 있는 방법은 없습니다. 계속하시겠습니까?"

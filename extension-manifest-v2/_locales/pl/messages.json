@@ -515,9 +515,6 @@
 	"summary_show_menu": {
 		"message": "pokaż menu"
 	},
-	"summary_map_these_trackers": {
-		"message": "Mapuj tych tropicieli"
-	},
 	"blocking_trackers": {
 		"message": "Tropiciele"
 	},
@@ -599,10 +596,13 @@
 		"message": "Zobacz informacje o wersji dla wszystkich aktualizacji"
 	},
 	"panel_about_license": {
-		"message": "Umowa licencyjna"
+		"message": "Umowa licencji publicznej Mozilla"
 	},
 	"panel_about_privacy_statement": {
 		"message": "Oświadczenie o zachowaniu prywatności"
+	},
+	"panel_about_terms_and_conditions": {
+		"message": "Warunki"
 	},
 	"panel_about_licenses": {
 		"message": "Licencje na oprogramowanie"
@@ -1908,7 +1908,7 @@
 		"message": "Utworzenie konta powiodło się"
 	},
 	"hub_create_account_toast_error": {
-		"message": "Błąd tworzenia konta"
+		"message": "Ten adres e-mail jest już używany.  Wybierz inny adres. "
 	},
 	"enable_when_paused": {
 		"message": "Aby użyć tej funkcji, wznów Ghostery."
@@ -1932,10 +1932,10 @@
 		"message": "kod skopiowany"
 	},
 	"rewards_expires_in_day": {
-		"message": "Wygaśnie za 1 dzień"
+		"message": "Dostępne przez 1 dzień"
 	},
 	"rewards_expires_in_days": {
-		"message": "Wygasa za $COUNT$ dni.",
+		"message": "Dostępne przez $COUNT$ dni",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1943,10 +1943,10 @@
 		}
 	},
 	"rewards_expires_in_hour": {
-		"message": "Wygaśnie za 1 godzinę"
+		"message": "Dostępne przez 1 godzinę"
 	},
 	"rewards_expires_in_hours": {
-		"message": "Wygasa za $COUNT$ godzin",
+		"message": "Dostępne przez $COUNT$ godzin/y",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1954,10 +1954,10 @@
 		}
 	},
 	"rewards_expires_in_min": {
-		"message": "Wygaśnie za 1 minutę"
+		"message": "Dostępne przez 1 minutę"
 	},
 	"rewards_expires_in_mins": {
-		"message": "Wygasa za $COUNT$ minut",
+		"message": "Dostępne przez $COUNT$ minut/y",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1965,10 +1965,10 @@
 		}
 	},
 	"rewards_expires_in_sec": {
-		"message": "Wygaśnie za 1 sekundę"
+		"message": "Dostępne przez 1 sekundę"
 	},
 	"rewards_expires_in_secs": {
-		"message": "Wygasa za $COUNT$ sekund",
+		"message": "Dostępne przez $COUNT$ sekund/y",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -2124,9 +2124,6 @@
 	"subscription_submit_issue": {
 		"message": "Zgłoś problem"
 	},
-	"subscription_data_error": {
-		"message": "Wystąpił błąd podczas pobierania danych dotyczących subskrypcji. Kliknij poniższy link, aby uzyskać dostęp do danych konta."
-	},
 	"panel_stats_menu_cumulative": {
 		"message": "Całościowo"
 	},
@@ -2157,18 +2154,6 @@
 	"panel_stats_ads_blocked": {
 		"message": "Zablokowane reklamy"
 	},
-	"panel_stats_total_trackers_seen": {
-		"message": "Całkowita ilość widocznych tropicieli"
-	},
-	"panel_stats_total_trackers_blocked": {
-		"message": "Wszyscy tropiciele zablokowani"
-	},
-	"panel_stats_total_trackers_anonymized": {
-		"message": "Całkowita ilość zanonimizowanych tropicieli"
-	},
-	"panel_stats_total_ads_blocked": {
-		"message": "Całkowita ilość zablokowanych reklam"
-	},
 	"panel_stats_cumulative": {
 		"message": "Całościowo"
 	},
@@ -2179,7 +2164,7 @@
 		"message": "Dziennie"
 	},
 	"panel_stats_reset": {
-		"message": "Wyzeruj wszystkie statytstyki"
+		"message": "Resetuj"
 	},
 	"panel_stats_reset_modal_text": {
 		"message": "Twoje archiwalne statystyki zostaną wyzerowane. Brak możliwości odzyskanie tych danych. Chcesz kontynuować?"

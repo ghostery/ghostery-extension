@@ -515,9 +515,6 @@
 	"summary_show_menu": {
 		"message": "mostra menu"
 	},
-	"summary_map_these_trackers": {
-		"message": "Mappa questi tracciatori"
-	},
 	"blocking_trackers": {
 		"message": "Tracker"
 	},
@@ -599,10 +596,13 @@
 		"message": "Vedi le note di rilascio per tutti gli aggiornamenti"
 	},
 	"panel_about_license": {
-		"message": "Accordo di Licenza"
+		"message": "Contratto di licenza pubblica Mozilla"
 	},
 	"panel_about_privacy_statement": {
 		"message": "Informativa sulla Privacy"
+	},
+	"panel_about_terms_and_conditions": {
+		"message": "Termini e Condizioni"
 	},
 	"panel_about_licenses": {
 		"message": "Licenze Software"
@@ -1908,7 +1908,7 @@
 		"message": "Account Creato Correttamente"
 	},
 	"hub_create_account_toast_error": {
-		"message": "Crea Errore Account"
+		"message": "Quell'indirizzo e-mail è già in uso.  Per favore, scegline un altro."
 	},
 	"enable_when_paused": {
 		"message": "Per utilizzare questa funzione, Riattiva Ghostery."
@@ -1932,10 +1932,10 @@
 		"message": "codice copiato"
 	},
 	"rewards_expires_in_day": {
-		"message": "Scade tra 1 giorno"
+		"message": "Disponibile per 1 giorno"
 	},
 	"rewards_expires_in_days": {
-		"message": "Scade tra $COUNT$ giorni",
+		"message": "Disponibile per $COUNT$ giorni",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1943,10 +1943,10 @@
 		}
 	},
 	"rewards_expires_in_hour": {
-		"message": "Scade tra 1 ora"
+		"message": "Disponibile per 1ora"
 	},
 	"rewards_expires_in_hours": {
-		"message": "Scade tra $COUNT$ ore",
+		"message": "Disponibile per $COUNT$ ore",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1954,10 +1954,10 @@
 		}
 	},
 	"rewards_expires_in_min": {
-		"message": "Scade tra 1 min"
+		"message": "Disponibile per 1 min"
 	},
 	"rewards_expires_in_mins": {
-		"message": "Scade tra $COUNT$ min",
+		"message": "Disponibile per $COUNT$ minuti",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1965,10 +1965,10 @@
 		}
 	},
 	"rewards_expires_in_sec": {
-		"message": "Scade tra 1 sec"
+		"message": "Disponibile per 1 sec"
 	},
 	"rewards_expires_in_secs": {
-		"message": "Scade tra $COUNT$ sec",
+		"message": "Disponibile per $COUNT$ secondi",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -2124,9 +2124,6 @@
 	"subscription_submit_issue": {
 		"message": "Invia Problema"
 	},
-	"subscription_data_error": {
-		"message": "Si è verificato un errore nel recuperare i dettagli della tua iscrizione. Fai clic sul collegamento sottostante per accedere alle informazioni del tuo account."
-	},
 	"panel_stats_menu_cumulative": {
 		"message": "Cumulativo"
 	},
@@ -2157,18 +2154,6 @@
 	"panel_stats_ads_blocked": {
 		"message": "Pubblicità Bloccate"
 	},
-	"panel_stats_total_trackers_seen": {
-		"message": "Totale tracker visti"
-	},
-	"panel_stats_total_trackers_blocked": {
-		"message": "Totale tracker bloccati"
-	},
-	"panel_stats_total_trackers_anonymized": {
-		"message": "Totale tracker anonimizzati"
-	},
-	"panel_stats_total_ads_blocked": {
-		"message": "Pubblicità totalmente bloccate"
-	},
 	"panel_stats_cumulative": {
 		"message": "Cumulativo"
 	},
@@ -2179,7 +2164,7 @@
 		"message": "Quotidianamente"
 	},
 	"panel_stats_reset": {
-		"message": "Ripristina tutte le statistiche"
+		"message": "Reimposta"
 	},
 	"panel_stats_reset_modal_text": {
 		"message": "Lo storico delle tue statistiche sarà ripristinato. Questi dati non possono essere recuperati. Desideri continuare?"

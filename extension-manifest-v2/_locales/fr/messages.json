@@ -515,9 +515,6 @@
 	"summary_show_menu": {
 		"message": "Afficher le menu"
 	},
-	"summary_map_these_trackers": {
-		"message": "Mapper ces mouchards"
-	},
 	"blocking_trackers": {
 		"message": "mouchards"
 	},
@@ -599,10 +596,13 @@
 		"message": "Voir les notes de mise à jour pour connaître toutes les nouveautés"
 	},
 	"panel_about_license": {
-		"message": "Contrat de licence"
+		"message": "Contrat de licence publique Mozilla"
 	},
 	"panel_about_privacy_statement": {
 		"message": "Accord de confidentialité"
+	},
+	"panel_about_terms_and_conditions": {
+		"message": "Conditions générales d'utilisation"
 	},
 	"panel_about_licenses": {
 		"message": "Licences d'utilisation de logiciels"
@@ -1908,7 +1908,7 @@
 		"message": "Compte créé avec succès"
 	},
 	"hub_create_account_toast_error": {
-		"message": "Erreur lors de la création du compte"
+		"message": "Cette adresse mail est déjà utilisée.  Choisissez-en une autre."
 	},
 	"enable_when_paused": {
 		"message": "Pour utiliser cette fonction, réactivez Ghostery."
@@ -1932,10 +1932,10 @@
 		"message": "code copié"
 	},
 	"rewards_expires_in_day": {
-		"message": "Expire dans 1 jour"
+		"message": "Disponible pour 1 jour"
 	},
 	"rewards_expires_in_days": {
-		"message": "Expire dans $COUNT$ jours",
+		"message": "Disponible pour $COUNT$ jours",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1943,10 +1943,10 @@
 		}
 	},
 	"rewards_expires_in_hour": {
-		"message": "Expire dans 1 heure"
+		"message": "Disponible pour 1 heure"
 	},
 	"rewards_expires_in_hours": {
-		"message": "Expire dans  $COUNT$ heures",
+		"message": "Disponible pour $COUNT$ heures",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1954,10 +1954,10 @@
 		}
 	},
 	"rewards_expires_in_min": {
-		"message": "Expire dans 1 min"
+		"message": "Disponible pour 1 min"
 	},
 	"rewards_expires_in_mins": {
-		"message": "Expire dans $COUNT$ mins",
+		"message": "Disponible pour $COUNT$ min",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1965,10 +1965,10 @@
 		}
 	},
 	"rewards_expires_in_sec": {
-		"message": "Expire dans 1 sec"
+		"message": "Disponible pour 1 sec"
 	},
 	"rewards_expires_in_secs": {
-		"message": "Expire dans $COUNT$ secs",
+		"message": "Disponible pour $COUNT$ sec",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -2124,9 +2124,6 @@
 	"subscription_submit_issue": {
 		"message": "Soumettre le problème rencontré"
 	},
-	"subscription_data_error": {
-		"message": "Une erreur s'est produite lors de la récupération de vos données d'abonnement. Veuillez cliquer sur le lien ci-dessous pour accéder aux informations de votre compte."
-	},
 	"panel_stats_menu_cumulative": {
 		"message": "Cumulé"
 	},
@@ -2156,18 +2153,6 @@
 	},
 	"panel_stats_ads_blocked": {
 		"message": "Publicités bloquées"
-	},
-	"panel_stats_total_trackers_seen": {
-		"message": "Total des mouchards repérés"
-	},
-	"panel_stats_total_trackers_blocked": {
-		"message": "Total des mouchards bloqués"
-	},
-	"panel_stats_total_trackers_anonymized": {
-		"message": "Total des mouchards anonymisés"
-	},
-	"panel_stats_total_ads_blocked": {
-		"message": "Total des pubs bloquées"
 	},
 	"panel_stats_cumulative": {
 		"message": "Cumulé"
