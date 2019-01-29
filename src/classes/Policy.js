@@ -47,11 +47,11 @@ class Policy {
 	 */
 	getSitePolicy(url) {
 		if (url) {
-			const { hostname } = processUrl(url);
-			if (this.blacklisted(hostname)) {
+			const { host } = processUrl(url);
+			if (this.blacklisted(host)) {
 				return 1;
 			}
-			if (this.whitelisted(hostname)) {
+			if (this.whitelisted(host)) {
 				return 2;
 			}
 		}
