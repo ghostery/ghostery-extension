@@ -904,7 +904,7 @@
 		"message": "Afficher les mouchards interactifs"
 	},
 	"settings_required_trackers": {
-		"message": "Faites-moi savoir si je dois autoriser un mouchard à utiliser l'une des fonctionnalités d'un site."
+		"message": "Faites-moi savoir si je dois autoriser un mouchard pour utiliser l'une des fonctionalités d'un site"
 	},
 	"settings_replace_social": {
 		"message": "Remplacer des boutons de partage bloqués par une icône Ghostery."
@@ -925,7 +925,7 @@
 		"message": "Afficher la case violette dans le coin du navigateur"
 	},
 	"settings_dismiss_after": {
-		"message": "Annuler plus tard"
+		"message": "Annuler après"
 	},
 	"settings_display_in": {
 		"message": "Afficher dans"
