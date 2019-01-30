@@ -474,4 +474,5 @@ class PanelData {
 	}
 }
 
-export default PanelData;
+// return the class as a singleton
+export default new PanelData();

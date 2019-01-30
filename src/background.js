@@ -21,10 +21,10 @@
 import _ from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
 import cliqz, { prefs } from './classes/Cliqz';
-// object classes
+// object class
 import Events from './classes/EventHandlers';
-import PanelData from './classes/PanelData';
 // static classes
+import panelData from './classes/PanelData';
 import bugDb from './classes/BugDb';
 import button from './classes/BrowserButton';
 import c2pDb from './classes/Click2PlayDb';
@@ -52,7 +52,6 @@ import { importCliqzSettings } from './utils/cliqzSettingImport';
 
 // class instantiation
 const events = new Events();
-const panelData = new PanelData();
 // function shortcuts
 const { log } = common;
 const { sendMessage } = utils;
