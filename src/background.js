@@ -1617,9 +1617,15 @@ function initializeEventListeners() {
 
 	// Fired when panel is disconnected
 	chrome.runtime.onConnect.addListener((port) => {
-		if (port && port.name === 'rewardsPanelPort') {
+		if (!port) return;
+
+		if (port.name === 'rewardsPanelPort') {
 			rewards.panelPort = port;
 			rewards.panelPort.onDisconnect.addListener(rewards.panelHubClosedListener);
+		} else if (port.name === 'summaryUIPort') {
+			console.log('-------------');
+			console.log(`IVZ opened port from panel: ${port.name}`);
+			console.log('-------------');
 		}
 	});
 

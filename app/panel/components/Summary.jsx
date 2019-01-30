@@ -73,6 +73,7 @@ class Summary extends React.Component {
 	 */
 	componentDidMount() {
 		this.props.actions.getCliqzModuleData();
+		this.uiPort = chrome.runtime.connect({ name: 'summaryUIPort' });
 	}
 
 	/**
