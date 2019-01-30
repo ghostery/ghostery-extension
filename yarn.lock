@@ -116,10 +116,10 @@
   resolved "https://registry.yarnpkg.com/@cliqz-oss/dexie/-/dexie-2.0.4.tgz#0e710504e2b9198baa9b046abd3a82731b94d56e"
   integrity sha512-HxMbBQfdy0CehThTFierXbRPI+PHDEucUUriCCzViAKbCWWQIlL6uZcyDaaPRMPWy45v78lezPB4457kfjS72g==
 
-"@cliqz/adblocker@^0.5.1":
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-0.5.1.tgz#e43c51cfec6ddcc6dc4ee7fec272b98be451843f"
-  integrity sha512-3o+AQfjJ1GqrJU3Sfix+0NbjBnnicSEiMjE16+fRtdRn/c/GrhzbXmbQ5j22MtbaYfK/oVuLMlQGB1d4s0xBBw==
+"@cliqz/adblocker@^0.6.3":
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-0.6.3.tgz#ef72ed59caa605fcb7e7d465b6443d4d10bd88f6"
+  integrity sha512-Ju090Hp/7vPyvHotfc9DYZ5uTfLLGtZr4IMAjKPhHd9xR7LqCNC71T6wgbVCJGa5qmlxIhvRmFEZgAKDuaH12Q==
   dependencies:
     punycode "^2.1.1"
     tslib "^1.9.3"
@@ -1723,16 +1723,16 @@ brorand@^1.0.1:
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
   integrity sha1-EsJe/kCkXjwyPrhnWgoM5XsiNx8=
 
-"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery-mobile/v3.33/7.33.0.5c73ecc.tgz":
-  version "3.33.0"
-  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery-mobile/v3.33/7.33.0.5c73ecc.tgz#597eca49707380920bfb6193e900a3668caeb124"
+"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery-mobile/master/7.34.0.1b84.0bf5ba1.tgz":
+  version "1.34.0"
+  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery-mobile/master/7.34.0.1b84.0bf5ba1.tgz#38033ac16c00121dd9f79212445a5c5d4d38c885"
   dependencies:
     "@cliqz-oss/dexie" "^2.0.4"
-    "@cliqz/adblocker" "^0.5.1"
+    "@cliqz/adblocker" "^0.6.3"
     ajv "^6.5.0"
     anonymous-credentials "https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.1/anonymous-credentials-0.1.1.tgz"
     classnames "^2.2.5"
-    cliqz-history "https://github.com/cliqz-oss/cliqz-history/releases/download/v1.0.8/cliqz-history-1.0.8.tgz"
+    cliqz-history "https://github.com/cliqz-oss/cliqz-history/releases/download/1.1.1/cliqz-history-1.1.1.tgz"
     cron "^1.2.1"
     cron-parser "^2.4.0"
     deep-equal "^1.0.1"
@@ -2225,9 +2225,9 @@ cli-width@^2.0.0:
   resolved "https://registry.yarnpkg.com/cli-width/-/cli-width-2.2.0.tgz#ff19ede8a9a5e579324147b0c11f0fbcbabed639"
   integrity sha1-/xnt6Kml5XkyQUewwR8PvLq+1jk=
 
-"cliqz-history@https://github.com/cliqz-oss/cliqz-history/releases/download/v1.0.8/cliqz-history-1.0.8.tgz":
-  version "1.0.8"
-  resolved "https://github.com/cliqz-oss/cliqz-history/releases/download/v1.0.8/cliqz-history-1.0.8.tgz#c38913a7f86b7cd5c16e0c0cce283a60cd1c563c"
+"cliqz-history@https://github.com/cliqz-oss/cliqz-history/releases/download/1.1.1/cliqz-history-1.1.1.tgz":
+  version "1.1.1"
+  resolved "https://github.com/cliqz-oss/cliqz-history/releases/download/1.1.1/cliqz-history-1.1.1.tgz#fbca7dd50ff1aadf5b25c2a3dadae1554975a42a"
 
 cliui@^2.1.0:
   version "2.1.0"
