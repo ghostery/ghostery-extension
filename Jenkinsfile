@@ -30,7 +30,9 @@ node('docker') {
                 sh 'rm -rf build'
 
 				// TODO: this should not be packaged at all
-				sh 'rm -rf ./benchmarks/data ./benchmarks/*.jl'
+				sh 'rm -rf benchmarks/data benchmarks/*.jl'
+				sh 'rm -rf app tools dist/react_panel.js dist/setup_react.js dist/rewards.js dist/licenses_react.js dist/css'
+				sh 'rm -rf cliqz/vendor/!(react.js|react-dom.js)'
 
 				withGithubCredentials {
                     sh "moab makezip ${buildType}"
