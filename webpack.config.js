@@ -98,7 +98,7 @@ const buildPlugins = [
 	new webpack.IgnorePlugin(/(locale)/, /node_modules.+(moment)/), // fix for Error: Can't resolve './locale'
 	new lintOnChange(),
 	extractSass,
-	cleanTmpStyleFiles,
+	//cleanTmpStyleFiles,
 	new webpack.DefinePlugin({
 		't': t,
 	}),
@@ -116,7 +116,7 @@ const config = {
   }],
 	entry: {
 		background: [SRC_DIR + '/background.js'],
-		/*
+/*
 		blocked_redirect: [CONTENT_SCRIPTS_DIR + '/blocked_redirect.js'],
 		click_to_play: [CONTENT_SCRIPTS_DIR + '/click_to_play.js'],
 		ghostery_dot_com: [CONTENT_SCRIPTS_DIR + '/ghostery_dot_com.js'],
@@ -125,9 +125,9 @@ const config = {
 		account_pages: [CONTENT_SCRIPTS_DIR + '/account_pages.js'],
 		rewards: [CONTENT_SCRIPTS_DIR + '/rewards'],
 		purplebox: [CONTENT_SCRIPTS_DIR + '/purplebox.js'],
-		*/
+*/
 		content_script_bundle: [CLIQZ_DIR + '/core/content-script.bundle.js'],
-		/*
+/*
 		panel_react: [PANEL_DIR + '/index.jsx'],
 		setup_react: [SETUP_DIR + '/index.jsx'],
 		licenses_react: [LICENSES_DIR + '/Licenses.jsx', LICENSES_DIR + '/License.jsx'],
@@ -139,7 +139,7 @@ const config = {
 		setup: [SASS_DIR + '/setup.scss'],
 		licenses: [SASS_DIR + '/licenses.scss'],
 		rewards_styles: [SASS_DIR + '/rewards.scss'],
-		*/
+*/
 	},
 	devtool: 'none',
 	performance: { hints: false },
