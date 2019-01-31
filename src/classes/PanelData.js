@@ -50,6 +50,8 @@ class PanelData {
 		this._blockingView = {};
 		this._rewardsView = {};
 		this._settingsView = {};
+
+		this.summaryUIPort = null;
 	}
 
 	/**
@@ -59,6 +61,17 @@ class PanelData {
 	 */
 	init() {
 		this._buildConfData();
+	}
+
+	initUIPort(port) {
+		const { portName } = port.name;
+
+		console.log('-------------');
+		console.log(`IVZ opened port from panel: ${port.name}`);
+		console.log('-------------');
+
+		this[portName] = port;
+		this[portName].postMessage('BANANAS FOSTER to you from background!');
 	}
 
 	/**

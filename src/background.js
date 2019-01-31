@@ -1622,10 +1622,11 @@ function initializeEventListeners() {
 		if (port.name === 'rewardsPanelPort') {
 			rewards.panelPort = port;
 			rewards.panelPort.onDisconnect.addListener(rewards.panelHubClosedListener);
-		} else if (port.name === 'summaryUIPort') {
-			console.log('-------------');
-			console.log(`IVZ opened port from panel: ${port.name}`);
-			console.log('-------------');
+			return;
+		}
+
+		if (port.name === 'summaryUIPort') {
+			panelData.initUIPort(port);
 		}
 	});
 
