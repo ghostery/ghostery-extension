@@ -1,3 +1,12 @@
+### GHOSTERY 8.3.1 (January 31, 2019)
+
++ Add `options_ui` support for Intro Hub
++ Add Ghostery Plus support for Opera and Edge
++ Fixes issue where page load speed value could be negative
++ Fixes "Report a Broken Page" link
++ Multiple translation fixes
++ Minor bug fixes
+
 ### GHOSTERY 8.3.0 (January 16, 2019)
 
 + New Ghostery Plus features - Historical Stats, Midnight Theme
