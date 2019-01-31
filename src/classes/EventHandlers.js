@@ -23,6 +23,7 @@ import conf from './Conf';
 import foundBugs from './FoundBugs';
 import globals from './Globals';
 import latency from './Latency';
+import panelData from './PanelData';
 import Policy, { BLOCK_REASON_SS_UNBLOCKED, BLOCK_REASON_C2P_ALLOWED_THROUGH } from './Policy';
 import PolicySmartBlock from './PolicySmartBlock';
 import PurpleBox from './PurpleBox';
@@ -611,6 +612,8 @@ class EventHandlers {
 		foundBugs.update(tab_id, bug_id, url, block, type);
 
 		button.update(details.tab_id);
+
+		panelData.updatePanelUI();
 
 		if (block && (conf.enable_click2play || conf.enable_click2playSocial)) {
 			buildC2P(details, app_id);

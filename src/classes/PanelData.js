@@ -74,6 +74,12 @@ class PanelData {
 		this[portName].postMessage('BANANAS FOSTER to you from background!');
 	}
 
+	updatePanelUI() {
+		console.log('-------------');
+		console.log('IVZ PanelData#updatePanelUI called');
+		console.log('-------------');
+	}
+
 	/**
 	 * Get PanelData for a specific view/tab
 	 * @param  {string} view 	panel view name
