@@ -31,7 +31,7 @@ node('docker') {
 
 				// TODO: this should not be packaged at all
 				sh 'rm -rf benchmarks/data benchmarks/*.jl'
-				sh 'rm -rf app dist/react_panel.js dist/setup_react.js dist/rewards.js dist/licenses_react.js dist/css'
+				sh 'rm -rf dist/react_panel.js dist/setup_react.js dist/rewards.js dist/licenses_react.js dist/css'
 				sh '''#!/bin/bash -l
 					set -x
                 	set -e
