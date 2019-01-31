@@ -18,7 +18,7 @@ node('docker') {
     stage('Build Docker Image') {
         img = docker.build('ghostery/build', '--build-arg UID=`id -u` --build-arg GID=`id -g` .')
         // clean workdir
-        sh 'rm -rf build ghostery-*'
+        sh 'rm -rf build ghostery-* dist'
     }
 
     img.inside() {
@@ -31,7 +31,6 @@ node('docker') {
 
 				// TODO: this should not be packaged at all
 				sh 'rm -rf benchmarks/data benchmarks/*.jl'
-				sh 'rm -rf dist/react_panel.js dist/setup_react.js dist/rewards.js dist/licenses_react.js dist/css'
 				sh '''#!/bin/bash -l
 					set -x
                 	set -e
