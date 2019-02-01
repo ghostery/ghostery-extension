@@ -51,7 +51,7 @@ class PanelData {
 		this._rewardsView = {};
 		this._settingsView = {};
 
-		this.summaryUIPort = null;
+		this.uiPorts = new Map();
 	}
 
 	/**
@@ -70,8 +70,8 @@ class PanelData {
 		console.log(`IVZ opened port from panel: ${port.name}`);
 		console.log('-------------');
 
-		this[portName] = port;
-		this[portName].postMessage('BANANAS FOSTER to you from background!');
+		this.uiPorts.set(portName, port);
+		this.uiPorts.get(portName).postMessage('BANANAS FOSTER to you from background!');
 	}
 
 	updatePanelUI() {
