@@ -92,6 +92,13 @@ class Summary extends React.Component {
 	}
 
 	/**
+	 * Lifecycle event
+	 */
+	componentWillUnmount() {
+		this.uiPort.disconnect();
+	}
+
+	/**
 	 * Calculates total tracker latency and sets it to state
 	 * @param {Object} props Summary's props, either this.props or nextProps.
 	 */

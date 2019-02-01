@@ -64,14 +64,20 @@ class PanelData {
 	}
 
 	initUIPort(port) {
-		const { portName } = port.name;
+		const { name } = port;
+
+		port.onDisconnect.addListener((p) => {
+			console.log('-------------');
+			console.log(`IVZ port disconnected: ${p.name}`);
+			console.log('-------------');
+		});
 
 		console.log('-------------');
 		console.log(`IVZ opened port from panel: ${port.name}`);
 		console.log('-------------');
 
-		this.uiPorts.set(portName, port);
-		this.uiPorts.get(portName).postMessage('BANANAS FOSTER to you from background!');
+		this.uiPorts.set(name, port);
+		this.uiPorts.get(name).postMessage('BANANAS FOSTER to you from background!');
 	}
 
 	updatePanelUI() {
