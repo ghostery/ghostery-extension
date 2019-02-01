@@ -1619,14 +1619,14 @@ function initializeEventListeners() {
 	chrome.runtime.onConnect.addListener((port) => {
 		if (!port) return;
 
-		if (port.name === 'rewardsPanelPort') {
-			rewards.panelPort = port;
-			rewards.panelPort.onDisconnect.addListener(rewards.panelHubClosedListener);
+		if (port.name === 'summaryUIPort') {
+			panelData.initUIPort(port);
 			return;
 		}
 
-		if (port.name === 'summaryUIPort') {
-			panelData.initUIPort(port);
+		if (port.name === 'rewardsPanelPort') {
+			rewards.panelPort = port;
+			rewards.panelPort.onDisconnect.addListener(rewards.panelHubClosedListener);
 		}
 	});
 
