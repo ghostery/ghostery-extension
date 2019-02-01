@@ -32,6 +32,7 @@ const SYNC_SET = new Set(globals.SYNC_ARRAY);
 const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 const { IS_CLIQZ } = globals;
 const policy = new Policy();
+
 /**
  * Class for handling data consumed by Ghostery panel.
  * @memberOf  BackgroundClasses
@@ -67,23 +68,17 @@ class PanelData {
 		const { name } = port;
 
 		port.onDisconnect.addListener((p) => {
-			console.log('-------------');
-			console.log(`IVZ port disconnected: ${p.name}`);
-			console.log('-------------');
+			log(`IVZ port disconnected: ${p.name}`);
 		});
 
-		console.log('-------------');
-		console.log(`IVZ opened port from panel: ${port.name}`);
-		console.log('-------------');
+		log(`IVZ opened port from panel: ${port.name}`);
 
 		this.uiPorts.set(name, port);
 		this.uiPorts.get(name).postMessage('BANANAS FOSTER to you from background!');
 	}
 
 	updatePanelUI() {
-		console.log('-------------');
-		console.log('IVZ PanelData#updatePanelUI called');
-		console.log('-------------');
+		log('IVZ PanelData#updatePanelUI called');
 	}
 
 	/**
