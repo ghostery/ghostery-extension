@@ -69,6 +69,7 @@ class PanelData {
 
 		port.onDisconnect.addListener((p) => {
 			log(`IVZ port disconnected: ${p.name}`);
+			this.uiPorts.delete(p.name);
 		});
 
 		log(`IVZ opened port from panel: ${port.name}`);
@@ -78,6 +79,17 @@ class PanelData {
 	}
 
 	updatePanelUI() {
+		this.uiPorts.forEach((port) => {
+			const { name } = port;
+			switch (name) {
+				case 'summaryUIPort':
+					port.postMessage('IVZ hello from PanelData#updatePanelUI');
+					break;
+				default:
+					break;
+			}
+		});
+
 		log('IVZ PanelData#updatePanelUI called');
 	}
 

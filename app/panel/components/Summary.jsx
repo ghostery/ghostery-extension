@@ -76,7 +76,7 @@ class Summary extends React.Component {
 		this.props.actions.getCliqzModuleData();
 		this.uiPort = chrome.runtime.connect({ name: UI_PORT_NAME });
 		this.uiPort.onMessage.addListener((msg) => {
-			console.log(`IVZ message received from background: ${msg}`);
+			console.log(`IVZ message from background: ${msg}`);
 		});
 	}
 
