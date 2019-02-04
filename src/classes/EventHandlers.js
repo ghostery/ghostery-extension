@@ -369,10 +369,12 @@ class EventHandlers {
 			return { cancel: false };
 		}
 
+		// TODO fuse this into a single call to improve performance
 		const page_url = tabInfo.getTabInfo(tab_id, 'url');
 		const page_host = tabInfo.getTabInfo(tab_id, 'host');
 		const page_protocol = tabInfo.getTabInfo(tab_id, 'protocol');
 		const from_redirect = globals.REDIRECT_MAP.has(request_id);
+		// TODO wait to call isBug until request has passed Smart Blocking
 		const bug_id = (page_url ? isBug(details.url, page_url) : isBug(details.url));
 		const processed = utils.processUrl(details.url);
 
@@ -613,7 +615,7 @@ class EventHandlers {
 
 		button.update(details.tab_id);
 
-		panelData.updatePanelUI();
+		panelData.updatePanelUI(tab);
 
 		if (block && (conf.enable_click2play || conf.enable_click2playSocial)) {
 			buildC2P(details, app_id);

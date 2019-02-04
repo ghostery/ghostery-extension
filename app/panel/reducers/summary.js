@@ -63,6 +63,7 @@ export default (state = initialState, action) => {
 				}
 			}
 			antiTracking.totalUnsafeCount = totalUnsafeCount;
+			// TODO: should we be passing antiTracking instead of action.data.antitracking as the antiTracking prop value?
 			return Object.assign({}, state, { adBlock: action.data.adblock, antiTracking: action.data.antitracking });
 		}
 		case UPDATE_GHOSTERY_PAUSED: {

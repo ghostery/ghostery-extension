@@ -78,12 +78,17 @@ class PanelData {
 		this.uiPorts.get(name).postMessage('BANANAS FOSTER to you from background!');
 	}
 
-	updatePanelUI() {
+	updatePanelUI(tab) {
+		// TODO don't rebuild tracker data for each port
+		// and only build if there's at least one port open
+
 		this.uiPorts.forEach((port) => {
 			const { name } = port;
 			switch (name) {
 				case 'summaryUIPort':
 					port.postMessage('IVZ hello from PanelData#updatePanelUI');
+					// this._buildTrackerData(tab);
+					// port.postMessage(this.panelView);
 					break;
 				default:
 					break;

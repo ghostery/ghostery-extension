@@ -71,6 +71,39 @@ export function getPanelData(tabId) {
 }
 
 /**
+ * Update Panel data
+ * @return {Object}
+ */
+export function updatePanelData(data) {
+	return {
+		type: GET_PANEL_DATA,
+		data,
+	};
+}
+
+/**
+ * Update Summary data
+ * @return {Object}
+ */
+export function updateSummaryData(data) {
+	return {
+		type: GET_SUMMARY_DATA,
+		data,
+	};
+}
+
+/**
+ * Update Blocking data
+ * @return {Object}
+ */
+export function updateBlockingData(data) {
+	return {
+		type: GET_BLOCKING_DATA,
+		data,
+	};
+}
+
+/**
  * Display notification messages on Panel (status, needsReload). Also used to persist
  * the needsReload messages if the panel is closed before the page is refreshed.
  * @param  {Object} data

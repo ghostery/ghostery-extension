@@ -826,6 +826,8 @@ function onMessageHandler(request, sender, callback) {
 		const modules = { adblock: {}, antitracking: {} };
 
 		const getCliqzModuleDataForTab = (tabId, callback) => {
+			// TODO: refactor to reduce duplication
+			// (BrowserButton#update internally calls same cliqz....#aggregatedBlockingStats function again)
 			button.update();
 			if (conf.enable_ad_block) {
 				// update adblock count. callback() handled below based on anti-tracking status
