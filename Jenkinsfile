@@ -24,24 +24,25 @@ node('docker') {
     img.inside() {
         withCache() {
             stage('Build Extension') {
-				sh 'rm -rf cliqz'
-				sh 'yarn run postinstall'
+                sh 'rm -rf cliqz'
+                sh 'yarn run postinstall'
 
                 sh 'rm -rf build'
 
-				// TODO: this should not be packaged at all
-				sh 'rm -rf benchmarks/data benchmarks/*.jl'
-				sh '''#!/bin/bash -l
-					set -x
-                	set -e
-					shopt -s extglob
-					rm -rf cliqz/vendor/!(react.js|react-dom.js)
-				'''
+                // TODO: this should not be packaged at all
+                sh 'rm -rf benchmarks/data benchmarks/*.jl'
+                sh '''#!/bin/bash -l
+                    set -x
+                    set -e
+                    shopt -s extglob
+                    rm -rf cliqz/vendor/!(react.js|react-dom.js)
+                '''
 
-				withGithubCredentials {
+                withGithubCredentials {
                     sh "moab makezip ${buildType}"
                 }
-			}
+            }
+
             stage('Benchmark') {
                 sh 'cp /home/jenkins/benchmarks/session.jl ./benchmarks/'
                 sh 'cd ./benchmarks && node run_benchmarks.js | tee results.txt'

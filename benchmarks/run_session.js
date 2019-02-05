@@ -33,4 +33,7 @@ setTimeout(async () => {
     idb: perf.measureIdbSize(emulator),
     ...emulator.getProbeSummary()
   }));
+  setTimeout(() => {
+    process.exit();
+  }, 1000);
 }, 5000)
