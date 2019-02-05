@@ -59,6 +59,7 @@ class Panel extends React.Component {
 		this.uiPort.onMessage.addListener(() => {
 			this.props.actions.getPanelData();
 			this.props.actions.getCliqzModuleData();
+
 			/*
 			console.log(`IVZ message from background: ${msg}`);
 			if (typeof (msg) === 'object') {
