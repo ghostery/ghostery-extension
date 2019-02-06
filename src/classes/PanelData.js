@@ -93,6 +93,19 @@ class PanelData {
 						console.log(tab);
 
 						port.postMessage(this.get('panel', tab));
+
+						/*
+						panel: {
+							needsReload: this._trackerData.get('needsReload'),
+							smartBlock: this._trackerData.get('smartBlock'),
+						},
+
+						summary: {
+							alertCounts: this._trackerData.get('alertCounts'),
+							categories: this._trackerData.get('categories'), // duplicated in blockingView, used here just for the donut
+							performanceData: this._trackerData.get('performanceData'),
+							trackerCounts: this._trackerData.get('trackerCounts'),
+						*/
 					});
 					break;
 				default:
@@ -412,6 +425,30 @@ class PanelData {
 			.set('tab_id', tab_id)
 			.set('trackerCounts', tab && foundBugs.getAppsCountByBlocked(tab_id) || {})
 			.set('smartBlock', tabInfo.getTabInfo(tab_id, 'smartBlock'));
+	}
+
+	/**
+	 * Update the Panel- and Summary-relevant fields of the local _trackerData map
+	 * Called whenever a new bug is found while the panel is open and the panel UI needs to be updated
+	 *
+	 * @private
+	 *
+	 * @param	{Object} tab	active tab
+	 */
+	_updatePanelAndSummaryTrackerData(tab) {
+		const tab_id = tab && tab.id;
+		const tab_url = tab && tab.url || '';
+		const pageHost = tab_url && processUrl(tab_url).host || '';
+		const trackerList = foundBugs.getApps(tab_id, false, tab_url) || [];
+		this._trackerData
+			// for Panel component
+			.set('needsReload', tab && tabInfo.getTabInfo(tab_id, 'needsReload') || { changes: {} })
+			.set('smartBlock', tabInfo.getTabInfo(tab_id, 'smartBlock'))
+			// for Summary component
+			.set('alertCounts', tab && foundBugs.getAppsCountByIssues(tab_id, tab_url) || {})
+			.set('categories', this._buildCategories(tab_id, tab_url, pageHost, trackerList))
+			.set('performanceData', tab && tabInfo.getTabInfo(tab_id, 'pageTiming'))
+			.set('trackerCounts', tab && foundBugs.getAppsCountByBlocked(tab_id) || {});
 	}
 
 	/**
