@@ -202,7 +202,7 @@ class DonutGraph extends React.Component {
 			});
 			graphData.sort((a, b) => a.value < b.value);
 		}
-		const totalTrackers = graphData.reduce((sum, j) => sum + j.value, 0)
+		const totalTrackers = graphData.reduce((sum, j) => sum + j.value, 0);
 
 		// Clear tooltips
 		categories.forEach((cat) => {

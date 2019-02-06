@@ -56,21 +56,19 @@ class Panel extends React.Component {
 		});
 
 		this.uiPort = chrome.runtime.connect({ name: UI_PORT_NAME });
-		this.uiPort.onMessage.addListener(() => {
-			this.props.actions.getPanelData();
-			this.props.actions.getCliqzModuleData();
+		this.uiPort.onMessage.addListener((msg) => {
+			// this.props.actions.getPanelData();
+			// this.props.actions.getCliqzModuleData();
 
-			/*
-			console.log(`IVZ message from background: ${msg}`);
 			if (typeof (msg) === 'object') {
+				console.log('IVZ new data received through port');
+				console.log(msg);
 				this.props.actions.updatePanelData(msg.panel);
 				this.props.actions.updateSummaryData(msg.summary);
 				if (msg.blocking) {
 					this.props.actions.updateBlockingData(msg.blocking);
 				}
-				console.log('IVZ called updateSummaryData');
 			}
-			*/
 		});
 	}
 
@@ -183,6 +181,8 @@ class Panel extends React.Component {
 	 * @return {JSX} JSX for rendering the Panel
 	 */
 	render() {
+		console.log('IVZ Panel#render called');
+
 		// this prevents double rendering when waiting for getPanelData() to finish
 		if (!this.props.initialized) {
 			return null;

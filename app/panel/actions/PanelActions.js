@@ -12,6 +12,7 @@
  */
 import {
 	GET_PANEL_DATA, GET_SUMMARY_DATA, GET_BLOCKING_DATA,
+	UPDATE_PANEL_DATA,
 	TOGGLE_CLIQZ_FEATURE,
 	SHOW_NOTIFICATION,
 	CLOSE_NOTIFICATION,
@@ -64,6 +65,10 @@ export function getPanelData(tabId) {
 					data: data.blocking,
 				});
 			}
+
+			console.log('IVZ data from original call to getPanelData:');
+			console.log(data);
+
 			// send back to Panel component as promised data
 			return data.panel;
 		});
@@ -76,7 +81,7 @@ export function getPanelData(tabId) {
  */
 export function updatePanelData(data) {
 	return {
-		type: GET_PANEL_DATA,
+		type: UPDATE_PANEL_DATA,
 		data,
 	};
 }

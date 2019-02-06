@@ -78,24 +78,27 @@ class PanelData {
 		this.uiPorts.get(name).postMessage('BANANAS FOSTER to you from background!');
 	}
 
-	updatePanelUI(tab) {
+	updatePanelUI(tab_id) {
 		// TODO don't rebuild tracker data for each port
 		// and only build if there's at least one port open
+		console.log('IVZ tab argument passed to updatePanelUI:');
+		console.log(tab_id);
 
 		this.uiPorts.forEach((port) => {
 			const { name } = port;
 			switch (name) {
 				case 'summaryUIPort':
-					port.postMessage('IVZ hello from PanelData#updatePanelUI');
-					// this._buildTrackerData(tab);
-					// port.postMessage(this.panelView);
+					getActiveTab((tab) => {
+						console.log('IVZ tab retrived using getActiveTab:');
+						console.log(tab);
+
+						port.postMessage(this.get('panel', tab));
+					});
 					break;
 				default:
 					break;
 			}
 		});
-
-		log('IVZ PanelData#updatePanelUI called');
 	}
 
 	/**
@@ -105,6 +108,9 @@ class PanelData {
 	 * @return {Object}      	view data
 	 */
 	get(view, tab) {
+		console.log('IVZ tab passed to PanelData#get:');
+		console.log(tab);
+
 		log(`Get data for ${view} view`);
 		if (view === 'settings') {
 			return this.settingsView;
@@ -330,6 +336,7 @@ class PanelData {
 		return this._settingsView;
 	}
 
+	// TODO would accessing conf directly be simpler than using this mirror (except for categories) data structure?
 	/**
 	 * Build local _confData map. Called during init() and when Conf updates
 	 * @private

@@ -15,6 +15,7 @@
 
 import {
 	GET_PANEL_DATA,
+	UPDATE_PANEL_DATA,
 	SHOW_NOTIFICATION,
 	CLOSE_NOTIFICATION,
 	TOGGLE_EXPERT,
@@ -76,6 +77,9 @@ export default (state = initialState, action) => {
 			const { current_theme, account } = action.data;
 			setTheme(document, current_theme, account);
 			return Object.assign({}, state, action.data, { initialized: true });
+		}
+		case UPDATE_PANEL_DATA: {
+			return Object.assign({}, state, action.data);
 		}
 		case SET_THEME: {
 			const { name, css } = action.data;
