@@ -89,23 +89,8 @@ class PanelData {
 			switch (name) {
 				case 'summaryUIPort':
 					getActiveTab((tab) => {
-						console.log('IVZ tab retrived using getActiveTab:');
-						console.log(tab);
-
-						port.postMessage(this.get('panel', tab));
-
-						/*
-						panel: {
-							needsReload: this._trackerData.get('needsReload'),
-							smartBlock: this._trackerData.get('smartBlock'),
-						},
-
-						summary: {
-							alertCounts: this._trackerData.get('alertCounts'),
-							categories: this._trackerData.get('categories'), // duplicated in blockingView, used here just for the donut
-							performanceData: this._trackerData.get('performanceData'),
-							trackerCounts: this._trackerData.get('trackerCounts'),
-						*/
+						this._buildTrackerData(tab, true);
+						port.postMessage(this.summaryUpdateView);
 					});
 					break;
 				default:
@@ -129,7 +114,7 @@ class PanelData {
 			return this.settingsView;
 		}
 		// update _trackerData with new tab info
-		this._buildTrackerData(tab);
+		this._buildTrackerData(tab, false);
 		switch (view) {
 			case 'panel':
 				return this.panelView;
@@ -280,6 +265,25 @@ class PanelData {
 	}
 
 	/**
+	 * Build UI update object for Summary view
+	 * @return {Object}		Summary-view-relevant data that may update as a page loads
+	 */
+	get summaryUpdateView() {
+		return {
+			panel: {
+				needsReload: this._trackerData.get('needsReload'),
+				smartBlock: this._trackerData.get('smartBlock')
+			},
+			summary: {
+				alertCounts: this._trackerData.get('alertCounts'),
+				categories: this._trackerData.get('categories'),
+				performanceData: this._trackerData.get('performanceData'),
+				trackerCounts: this._trackerData.get('trackerCounts')
+			}
+		};
+	}
+
+	/**
 	 * Get conf and tracker data for Blocking View
 	 * @return {Object}		Blocking view data
 	 */
@@ -401,7 +405,8 @@ class PanelData {
 
 	/**
 	 * Build local _trackerData map. Populates all fields when the extension page is first loaded,
-	 * and updates fields relevant to the currently displayed React components as new bugs are discovered during page loading
+	 * and updates fields relevant to the currently displayed React panel components
+	 * as new bugs are discovered during page loading
 	 *
 	 * @private
 	 *
@@ -434,7 +439,7 @@ class PanelData {
 			.set('siteNotScanned', tab && !foundBugs.getApps(tab_id) || false)
 			.set('tab_id', tab_id);
 
-		this._buildPanelAndSummaryTrackerData(tab_id, tab_url, page_host, trackerList);
+		this._buildPanelAndSummaryTrackerData(tab, tab_id, tab_url, page_host, trackerList);
 	}
 
 	/**
@@ -445,14 +450,14 @@ class PanelData {
 	 *
 	 * @param	{Object} tab	active tab
 	 */
-	_buildPanelAndSummaryTrackerData(tab, tab_id, tab_url, pageHost, trackerList) {
+	_buildPanelAndSummaryTrackerData(tab, tab_id, tab_url, page_host, trackerList) {
 		this._trackerData
 			// for Panel component
 			.set('needsReload', tab && tabInfo.getTabInfo(tab_id, 'needsReload') || { changes: {} })
 			.set('smartBlock', tabInfo.getTabInfo(tab_id, 'smartBlock'))
 			// for Summary component
 			.set('alertCounts', tab && foundBugs.getAppsCountByIssues(tab_id, tab_url) || {})
-			.set('categories', this._buildCategories(tab_id, tab_url, pageHost, trackerList))
+			.set('categories', this._buildCategories(tab_id, tab_url, page_host, trackerList))
 			.set('performanceData', tab && tabInfo.getTabInfo(tab_id, 'pageTiming'))
 			.set('trackerCounts', tab && foundBugs.getAppsCountByBlocked(tab_id) || {});
 	}
