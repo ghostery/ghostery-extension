@@ -116,10 +116,10 @@
   resolved "https://registry.yarnpkg.com/@cliqz-oss/dexie/-/dexie-2.0.4.tgz#0e710504e2b9198baa9b046abd3a82731b94d56e"
   integrity sha512-HxMbBQfdy0CehThTFierXbRPI+PHDEucUUriCCzViAKbCWWQIlL6uZcyDaaPRMPWy45v78lezPB4457kfjS72g==
 
-"@cliqz/adblocker@^0.6.3":
-  version "0.6.3"
-  resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-0.6.3.tgz#ef72ed59caa605fcb7e7d465b6443d4d10bd88f6"
-  integrity sha512-Ju090Hp/7vPyvHotfc9DYZ5uTfLLGtZr4IMAjKPhHd9xR7LqCNC71T6wgbVCJGa5qmlxIhvRmFEZgAKDuaH12Q==
+"@cliqz/adblocker@^0.6.7":
+  version "0.6.7"
+  resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-0.6.7.tgz#e4b24e361edfc667cb81acc4636dbf4146d469c8"
+  integrity sha512-IZzNrSXFERzXKnNwKRCHb5cNDm7lCQ8DtXrCFvxrnassHPnvXlwjCOxXBCBHLEjCfuVccd2Gm+ISt9gRBMSGXA==
   dependencies:
     punycode "^2.1.1"
     tslib "^1.9.3"
@@ -1723,12 +1723,12 @@ brorand@^1.0.1:
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
   integrity sha1-EsJe/kCkXjwyPrhnWgoM5XsiNx8=
 
-"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery-mobile/master/7.34.0.1b95.2826f24.tgz":
+"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery-mobile/master/7.34.0.1b147.644c83d.tgz":
   version "1.34.0"
-  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery-mobile/master/7.34.0.1b95.2826f24.tgz#d07ae96dddf2f31d89568b46b9c7351188a6d369"
+  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery-mobile/master/7.34.0.1b147.644c83d.tgz#20c3743c89f5ec10238ad99c6ad8b75fa276c7f8"
   dependencies:
     "@cliqz-oss/dexie" "^2.0.4"
-    "@cliqz/adblocker" "^0.6.3"
+    "@cliqz/adblocker" "^0.6.7"
     ajv "^6.5.0"
     anonymous-credentials "https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.1/anonymous-credentials-0.1.1.tgz"
     classnames "^2.2.5"
@@ -1759,9 +1759,8 @@ brorand@^1.0.1:
     react-tooltip "3.9.0"
     react-touch-carousel "0.8.3"
     rusha "^0.8.13"
-    rxjs "^6.3.3"
+    rxjs "^6.4.0"
     sanitize-filename "^1.6.1"
-    simple-statistics "^5.2.1"
     spanan "^2.0.0"
     spectre.css "^0.5.7"
     tablesorter "^2.29.2"
@@ -9120,10 +9119,10 @@ rxjs@^6.1.0:
   dependencies:
     tslib "^1.9.0"
 
-rxjs@^6.3.3:
-  version "6.3.3"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.3.3.tgz#3c6a7fa420e844a81390fb1158a9ec614f4bad55"
-  integrity sha512-JTWmoY9tWCs7zvIk/CvRjhjGaOd+OVBM987mxFo+OW66cGpdKjZcpmc74ES1sB//7Kl/PAe8+wEakuhG4pcgOw==
+rxjs@^6.4.0:
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.4.0.tgz#f3bb0fe7bda7fb69deac0c16f17b50b0b8790504"
+  integrity sha512-Z9Yfa11F6B9Sg/BK9MnqnQ+aQYicPLtilXBp2yUtDt2JRCE0h26d33EnfO3ZxoNxG0T92OUucP3Ct7cpfkdFfw==
   dependencies:
     tslib "^1.9.0"
 
@@ -9345,11 +9344,6 @@ signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
   integrity sha1-tf3AjxKH6hF4Yo5BXiUTK3NkbG0=
-
-simple-statistics@^5.2.1:
-  version "5.4.0"
-  resolved "https://registry.yarnpkg.com/simple-statistics/-/simple-statistics-5.4.0.tgz#d54c8394d6d611b5f21ad538cc761efe889df018"
-  integrity sha512-BGTD+w6VBZ7LF4pseTN91gFAFjIRJ/ygQACNKABXQbnVYGWxYByxc7mouATWx+rob7hqvUAINsqxvNEmahpccA==
 
 sinon-chrome@^2.2.1:
   version "2.3.2"
