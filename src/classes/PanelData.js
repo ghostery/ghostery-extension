@@ -400,6 +400,25 @@ class PanelData {
 	}
 
 	/**
+	 * Build local _trackerData map. Populates all fields when the extension page is first loaded,
+	 * and updates fields relevant to the currently displayed React components as new bugs are discovered during page loading
+	 *
+	 * @private
+	 * 
+	 * @param	{Object} tab	active tab
+	 */
+	_buildTrackerData(tab, isUpdate) {
+		const tab_id = tab && tab.id;
+		const tab_url = tab && tab.url || '';
+		const page_host = tab_url && processUrl(tab_url).host || '';
+		const trackerList = foundBugs.getApps(tab_id, false, tab_url) || [];
+
+		isUpdate ? 
+			this._buildPanelAndSummaryTrackerData(tab_id, tab_url, page_host, trackerList) :
+			this._buildAllTrackerData(tab_id, tab_url, page_host, trackerList);
+	}
+
+	/**
 	 * Build local _trackerData map. Called each time a view is fetched. These
 	 * properties represent the initial state of the page on load. They are not updated
 	 * by PanelData.set()
@@ -408,23 +427,15 @@ class PanelData {
 	 *
 	 * @param  {Object} tab 	active tab
 	 */
-	_buildTrackerData(tab) {
-		const tab_id = tab && tab.id;
-		const tab_url = tab && tab.url || '';
-		const pageHost = tab_url && processUrl(tab_url).host || '';
-		const trackerList = foundBugs.getApps(tab_id, false, tab_url) || [];
+	_buildAllTrackerData(tab_id, tab_url, page_host, trackerList) {
 		this._trackerData
-			.set('alertCounts', tab && foundBugs.getAppsCountByIssues(tab_id, tab_url) || {})
-			.set('categories', this._buildCategories(tab_id, tab_url, pageHost, trackerList))
-			.set('needsReload', tab && tabInfo.getTabInfo(tab_id, 'needsReload') || { changes: {} })
 			.set('pageUrl', tab_url || '')
 			.set('pageHost', pageHost)
-			.set('performanceData', tab && tabInfo.getTabInfo(tab_id, 'pageTiming'))
 			.set('sitePolicy', tab && policy.getSitePolicy(tab_url) || false)
 			.set('siteNotScanned', tab && !foundBugs.getApps(tab_id) || false)
 			.set('tab_id', tab_id)
-			.set('trackerCounts', tab && foundBugs.getAppsCountByBlocked(tab_id) || {})
-			.set('smartBlock', tabInfo.getTabInfo(tab_id, 'smartBlock'));
+
+		this._buildPanelAndSummaryTrackerData(tab_id, tab_url, page_host, trackerList);
 	}
 
 	/**
@@ -435,11 +446,7 @@ class PanelData {
 	 *
 	 * @param	{Object} tab	active tab
 	 */
-	_updatePanelAndSummaryTrackerData(tab) {
-		const tab_id = tab && tab.id;
-		const tab_url = tab && tab.url || '';
-		const pageHost = tab_url && processUrl(tab_url).host || '';
-		const trackerList = foundBugs.getApps(tab_id, false, tab_url) || [];
+	_buildPanelAndSummaryTrackerData(tab_id, tab_url, pageHost, trackerList) {
 		this._trackerData
 			// for Panel component
 			.set('needsReload', tab && tabInfo.getTabInfo(tab_id, 'needsReload') || { changes: {} })
