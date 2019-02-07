@@ -404,7 +404,7 @@ class PanelData {
 	 * and updates fields relevant to the currently displayed React components as new bugs are discovered during page loading
 	 *
 	 * @private
-	 * 
+	 *
 	 * @param	{Object} tab	active tab
 	 */
 	_buildTrackerData(tab, isUpdate) {
@@ -413,9 +413,8 @@ class PanelData {
 		const page_host = tab_url && processUrl(tab_url).host || '';
 		const trackerList = foundBugs.getApps(tab_id, false, tab_url) || [];
 
-		isUpdate ? 
-			this._buildPanelAndSummaryTrackerData(tab_id, tab_url, page_host, trackerList) :
-			this._buildAllTrackerData(tab_id, tab_url, page_host, trackerList);
+		if (isUpdate) this._buildPanelAndSummaryTrackerData(tab, tab_id, tab_url, page_host, trackerList);
+		else this._buildAllTrackerData(tab, tab_id, tab_url, page_host, trackerList);
 	}
 
 	/**
@@ -427,13 +426,13 @@ class PanelData {
 	 *
 	 * @param  {Object} tab 	active tab
 	 */
-	_buildAllTrackerData(tab_id, tab_url, page_host, trackerList) {
+	_buildAllTrackerData(tab, tab_id, tab_url, page_host, trackerList) {
 		this._trackerData
 			.set('pageUrl', tab_url || '')
-			.set('pageHost', pageHost)
+			.set('pageHost', page_host)
 			.set('sitePolicy', tab && policy.getSitePolicy(tab_url) || false)
 			.set('siteNotScanned', tab && !foundBugs.getApps(tab_id) || false)
-			.set('tab_id', tab_id)
+			.set('tab_id', tab_id);
 
 		this._buildPanelAndSummaryTrackerData(tab_id, tab_url, page_host, trackerList);
 	}
@@ -446,7 +445,7 @@ class PanelData {
 	 *
 	 * @param	{Object} tab	active tab
 	 */
-	_buildPanelAndSummaryTrackerData(tab_id, tab_url, pageHost, trackerList) {
+	_buildPanelAndSummaryTrackerData(tab, tab_id, tab_url, pageHost, trackerList) {
 		this._trackerData
 			// for Panel component
 			.set('needsReload', tab && tabInfo.getTabInfo(tab_id, 'needsReload') || { changes: {} })
