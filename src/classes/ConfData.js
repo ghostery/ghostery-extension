@@ -21,7 +21,6 @@
 import globals from './Globals';
 import { prefsGet } from '../utils/common';
 
-const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 const { IS_CLIQZ } = globals;
 /**
  * Class for handling user configuration properties synchronously.
@@ -105,9 +104,9 @@ class ConfData {
 			_initProperty('enable_autoupdate', true);
 			_initProperty('enable_click2play', true);
 			_initProperty('enable_click2play_social', true);
-			_initProperty('enable_human_web', !((IS_EDGE || IS_CLIQZ)));
+			_initProperty('enable_human_web', !IS_CLIQZ);
 			_initProperty('enable_metrics', false);
-			_initProperty('enable_offers', !((IS_EDGE || IS_CLIQZ)));
+			_initProperty('enable_offers', !IS_CLIQZ);
 			_initProperty('enable_smart_block', true);
 			_initProperty('expand_all_trackers', true);
 			_initProperty('hide_alert_trusted', false);
