@@ -124,10 +124,10 @@
     punycode "^2.1.1"
     tslib "^1.9.3"
 
-"@cliqz/webextension-emulator@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@cliqz/webextension-emulator/-/webextension-emulator-0.0.5.tgz#df107c2163db93ef7460dbd6423ef203be5b0264"
-  integrity sha512-rm1kXetfoq2742r5ZtZDsIMjzHGkVnTiPMkaJoFGXz6KGr+TGngQMfEmzcBP1E8V4MgRZFmctCX3Ng4TWhMNwA==
+"@cliqz/webextension-emulator@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@cliqz/webextension-emulator/-/webextension-emulator-0.0.8.tgz#1d90be3bbcb2c8c51310aa9fe28bdf943f23977e"
+  integrity sha512-gTnUCbxkDt51xQpE/xUBDzAeKcoBKDI/vRmn2UjCj4l0QNcPIY+vF3p3gIDR5t/cOdESOBBfXlJucBfHv7vs0Q==
   dependencies:
     atob "^2.1.2"
     blob "0.0.5"

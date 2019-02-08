@@ -1,3 +1,4 @@
+const fs = require('fs');
 const perf = require('@cliqz/webextension-emulator');
 
 const sessionFile = process.argv[2];
@@ -12,13 +13,21 @@ const emulator = new Emulator('../', {
   timeMultiplier,
 });
 emulator.createSandbox();
+emulator.mock.createTab({
+  id: 3,
+  active: true,
+  title: 'Ghostery',
+  url: 'https://ghostery.com',
+});
 
 global.gc();
 emulator._probe('memory.heap', process.memoryUsage().heapUsed);
-emulator.startExtension();
 
-// uncomment for stack-traces on errors
-// process.on('unhandledRejection', console.error);
+process.on('unhandledRejection', (e) => {
+  emulator._probe('errors.promiserejection', e.message + '\n' + e.stack);
+});
+
+emulator.startExtension();
 
 setTimeout(async () => {
   global.gc();
@@ -33,4 +42,8 @@ setTimeout(async () => {
     idb: perf.measureIdbSize(emulator),
     ...emulator.getProbeSummary()
   }));
+  fs.appendFileSync('./diagnostics.jl', JSON.stringify(emulator.probes))
+  setTimeout(() => {
+    process.exit();
+  }, 1000);
 }, 5000)
