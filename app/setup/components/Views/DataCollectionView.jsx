@@ -15,7 +15,6 @@ import React, { Component } from 'react';
 import globals from '../../../../src/classes/Globals';
 
 const { IS_CLIQZ } = globals;
-const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 
 /**
  * @class Implement the #data-collection step of the setup flow
@@ -55,7 +54,7 @@ class DataCollectionView extends Component {
 	 * @return {Object}
 	 */
 	createDescriptionMarkup() {
-		return { __html: (IS_EDGE || IS_CLIQZ) ? t('setup_data_view_desc_no_human_web') : t('setup_data_view_desc') };
+		return { __html: (IS_CLIQZ) ? t('setup_data_view_desc_no_human_web') : t('setup_data_view_desc') };
 	}
 
 	/**

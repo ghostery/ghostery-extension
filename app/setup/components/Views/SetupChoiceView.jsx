@@ -16,7 +16,6 @@ import { Link } from 'react-router-dom';
 import globals from '../../../../src/classes/Globals';
 
 const { IS_CLIQZ } = globals;
-const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 
 /**
  * @class Implement the first step in the Setup flow
@@ -99,7 +98,7 @@ class SetupChoiceView extends Component {
 									onChange={this._handleDataCollection}
 								/>
 								<label htmlFor="data-collection-input">
-									{ (IS_EDGE || IS_CLIQZ) ?
+									{ (IS_CLIQZ) ?
 										t('setup_choice_view_share_data_no_human_web') :
 										t('setup_choice_view_share_data')
 									}

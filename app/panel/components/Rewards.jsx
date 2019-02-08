@@ -18,7 +18,6 @@ import { ToggleSlider, RewardListItem, RewardDetail } from './BuildingBlocks';
 import { sendMessage, sendRewardMessage } from '../utils/msg';
 import globals from '../../../src/classes/Globals';
 
-const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 const IS_CLIQZ = (globals.BROWSER_INFO.name === 'cliqz');
 
 /**
@@ -158,7 +157,7 @@ class Rewards extends React.Component {
 					</Link>
 				)}
 				<span className={headerTitleClassNames}>{ t('panel_detail_rewards_title') }</span>
-				{showToggle && !IS_EDGE && !IS_CLIQZ && (
+				{showToggle && !IS_CLIQZ && (
 					<span className="flex-container align-middle">
 						<span className="RewardsPanel__slider_text">
 							{enable_offers ? t('rewards_on') : t('rewards_off')}
@@ -204,17 +203,6 @@ class Rewards extends React.Component {
 				<div className="RewardsPanel__info">
 					{ this.renderRewardSvg() }
 					<div>{ t('panel_detail_rewards_cliqz_text') }</div>
-					<hr />
-					<div className="RewardsPanel__learn_more button primary hollow" onClick={this.handleFaqClick}>
-						{ t('panel_detail_learn_more') }
-					</div>
-				</div>
-			);
-		} else if (IS_EDGE) {
-			return (
-				<div className="RewardsPanel__info">
-					{ this.renderRewardSvg() }
-					<div>{ t('panel_detail_rewards_coming_soon') }</div>
 					<hr />
 					<div className="RewardsPanel__learn_more button primary hollow" onClick={this.handleFaqClick}>
 						{ t('panel_detail_learn_more') }

@@ -17,7 +17,7 @@ import { getJson } from '../utils/utils';
 import { log } from '../utils/common';
 
 const { BROWSER_INFO, CMP_SUB_DOMAIN, EXTENSION_VERSION } = globals;
-const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
+
 /**
  * Class for handling notification and/or marketing campaigns.
  * @memberOf  BackgroundClasses
@@ -39,7 +39,7 @@ class CMP {
 		const URL = `https://${CMP_SUB_DOMAIN}.ghostery.com/check
 			?os=${encodeURIComponent(BROWSER_INFO.os)}
 			&offers=${encodeURIComponent(conf.enable_offers ? '1' : '0')}
-			&hw=${encodeURIComponent(IS_EDGE ? '2' : (conf.enable_human_web ? '1' : '0'))}
+			&hw=${encodeURIComponent(conf.enable_human_web ? '1' : '0')}
 			&install_date=${encodeURIComponent(conf.install_date)}
 			&ir=${encodeURIComponent(conf.install_random_number)}
 			&gv=${encodeURIComponent(EXTENSION_VERSION)}
