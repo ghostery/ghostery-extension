@@ -1,5 +1,6 @@
 const fs = require('fs');
 const perf = require('@cliqz/webextension-emulator');
+const addAndroidApis = require('./android-apis');
 
 const sessionFile = process.argv[2];
 
@@ -12,6 +13,7 @@ const emulator = new Emulator('../', {
   indexedDBPath: './data/idb',
   timeMultiplier,
 });
+addAndroidApis(emulator);
 emulator.createSandbox();
 emulator.mock.createTab({
   id: 3,

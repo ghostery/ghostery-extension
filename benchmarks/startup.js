@@ -1,5 +1,6 @@
 const fs = require('fs');
 const perf = require('@cliqz/webextension-emulator');
+const addAndroidApis = require('./android-apis');
 
 const Emulator = perf.default;
 
@@ -10,6 +11,7 @@ const emulator = new Emulator('../', {
   indexedDBPath: './data/idb',
   timeMultiplier: 10,
 });
+addAndroidApis(emulator);
 emulator.createSandbox();
 
 emulator.startExtension();
