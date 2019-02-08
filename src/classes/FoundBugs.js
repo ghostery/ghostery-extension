@@ -16,6 +16,23 @@
  * 		}
  * }
  *
+ * this._foundApps = {
+ * 		tab_id: [{
+ *			blocked: boolean,
+ *			cat: string,
+ *			hasCompatibilityIssue: boolean,
+ *			hasInsecureIssue: boolean,
+ *			hasLatencyIssue: boolean,
+ *			id: number,
+ * 			name: string,
+ *			sources: [{
+ *				src: string,
+ *				blocked: boolean,
+ *				type: string
+ *			}]
+ *		}]
+ * }
+ *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
@@ -201,6 +218,9 @@ class FoundBugs {
 			});
 		}
 
+		console.log('IVZ RETURNING FROM getApps:');
+		console.log(apps_arr);
+
 		return apps_arr;
 	}
 
@@ -311,8 +331,9 @@ class FoundBugs {
 	 * @param  {string} 	tab_url		tab url
 	 * @return {Object}					counts for different types of issues
 	 */
-	getAppsCountByIssues(tab_id, tab_url) {
-		const apps = this.getApps(tab_id, false, tab_url);
+	getAppsCountByIssues(tab_id, tab_url, currentApps) {
+		const apps = currentApps || this.getApps(tab_id, false, tab_url);
+		// const apps = this.getApps(tab_id, false, tab_url);
 		let compatibility = 0;
 		let insecure = 0;
 		let latency = 0;
@@ -352,8 +373,10 @@ class FoundBugs {
 	 * @param  {number} tab_id 	tab id
 	 * @return {Object}        	counts for blocked and allowed trackers
 	 */
-	getAppsCountByBlocked(tab_id) {
-		const apps = this.getApps(tab_id);
+	getAppsCountByBlocked(tab_id, currentApps) {
+		const apps = currentApps || this.getApps(tab_id);
+
+		// const apps = this.getApps(tab_id);
 		let blocked = 0;
 		let allowed = 0;
 

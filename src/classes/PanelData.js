@@ -436,7 +436,8 @@ class PanelData {
 			.set('pageUrl', tab_url || '')
 			.set('pageHost', page_host)
 			.set('sitePolicy', tab && policy.getSitePolicy(tab_url) || false)
-			.set('siteNotScanned', tab && !foundBugs.getApps(tab_id) || false)
+			// .set('siteNotScanned', tab && !foundBugs.getApps(tab_id) || false)
+			.set('siteNotScanned', tab && !trackerList || false)
 			.set('tab_id', tab_id);
 
 		this._buildPanelAndSummaryTrackerData(tab, tab_id, tab_url, page_host, trackerList);
