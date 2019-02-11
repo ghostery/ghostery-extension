@@ -396,7 +396,7 @@ class FoundBugs {
 
 		if (tab_url) { this._checkForCompatibilityIssues(tab_id, tab_url); }
 
-		const { compatibility, insecure, latency } = this._foundsApps[tab_id].issueCounts;
+		const { compatibility, insecure, latency } = this._foundApps[tab_id].issueCounts;
 		const total = compatibility + insecure + latency;
 		const all = this._foundApps[tab_id].apps.length;
 
