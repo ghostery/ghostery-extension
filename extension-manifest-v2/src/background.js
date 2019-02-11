@@ -50,6 +50,10 @@ import * as utils from './utils/utils';
 import { _getJSONAPIErrorsObject } from './utils/api';
 import { importCliqzSettings } from './utils/cliqzSettingImport';
 
+// For debug purposes, provide Access to the internals of `browser-core`
+// module from Developer Tools Console.
+window.CLIQZ = cliqz;
+
 // class instantiation
 const events = new Events();
 const panelData = new PanelData();
