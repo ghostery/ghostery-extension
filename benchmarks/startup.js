@@ -1,4 +1,6 @@
+const fs = require('fs');
 const perf = require('@cliqz/webextension-emulator');
+const addAndroidApis = require('./android-apis');
 
 const Emulator = perf.default;
 
@@ -9,11 +11,20 @@ const emulator = new Emulator('../', {
   indexedDBPath: './data/idb',
   timeMultiplier: 10,
 });
+addAndroidApis(emulator);
 emulator.createSandbox();
 
 emulator.startExtension();
+emulator.mock.createTab({
+  id: 3,
+  active: true,
+  title: 'Ghostery',
+  url: 'https://ghostery.com',
+});
 
-// process.on('unhandledRejection', console.error);
+process.on('unhandledRejection', (e) => {
+  emulator._probe('errors.promiserejection', e.message + '\n' + e.stack);
+});
 
 setTimeout(() => {
   global.gc();
@@ -28,5 +39,8 @@ setTimeout(() => {
   console.log(JSON.stringify(Object.assign({
     idb: perf.measureIdbSize(emulator),
   }, emulator.getProbeSummary())));
-  process.exit();
+  fs.appendFileSync('./diagnostics.jl', JSON.stringify(emulator.probes))
+  setTimeout(() => {
+    process.exit();
+  }, 1000);
 }, 20000);

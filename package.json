@@ -67,7 +67,7 @@
     "whatwg-fetch": "^2.0.4"
   },
   "devDependencies": {
-    "@cliqz/webextension-emulator": "^0.0.5",
+    "@cliqz/webextension-emulator": "^0.0.8",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.1",
     "babel-loader": "^7.1.5",
