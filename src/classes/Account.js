@@ -26,7 +26,7 @@ import Api from '../utils/api';
 
 const api = new Api();
 const {
-	GHOSTERY_DOMAIN, AUTH_SERVER, ACCOUNT_SERVER, SYNC_ARRAY, IS_CLIQZ, BROWSER_INFO
+	GHOSTERY_DOMAIN, AUTH_SERVER, ACCOUNT_SERVER, SYNC_ARRAY, IS_CLIQZ
 } = globals;
 
 const SYNC_SET = new Set(SYNC_ARRAY);
