@@ -238,6 +238,10 @@ class PanelData {
 			summary: this.summaryView,
 			blocking: this._confData.get('is_expert') ? this.blockingView : false,
 		};
+
+		console.log('IVZ PanelData#_panelView:');
+		console.log(this._panelView);
+
 		return this._panelView;
 	}
 
@@ -436,7 +440,7 @@ class PanelData {
 			.set('pageUrl', tab_url || '')
 			.set('pageHost', page_host)
 			.set('sitePolicy', tab && policy.getSitePolicy(tab_url) || false)
-			// .set('siteNotScanned', tab && !foundBugs.getApps(tab_id) || false)
+			.set('siteNotScanned', tab && !foundBugs.getApps(tab_id) || false)
 			.set('siteNotScanned', tab && !trackerList || false)
 			.set('tab_id', tab_id);
 

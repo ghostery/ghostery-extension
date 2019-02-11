@@ -416,7 +416,7 @@ class FoundBugs {
 	 * @return {Object}        	counts for blocked and allowed trackers
 	 */
 	getAppsCountByBlocked(tab_id) {
-		if (!this.ensure(tab_id)) {
+		if (!this._ensure(tab_id)) {
 			return {
 				blocked: 0,
 				allowed: 0
