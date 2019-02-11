@@ -1,0 +1,262 @@
+/**
+ * Ghostery Sass Importer
+ *
+ * Select the SASS partials to be compiled for this project. SASS files
+ * are compiled and included in the order they are listed.
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+$background:              		#124559;
+$summary_text:					#FFFFFF;
+$enabled_feature:				#EFF6E0;
+$bright_enabled_feature:		#F7FAEF;
+$paled_enabled_feature:			#819D9C;
+$disabled_feature:             	#70888F;
+$paled_disabled_feature:		#A9B8BC;
+$bright_disabled_feature:		#BDC8CB;
+$caption:             			#F7F7F7;
+$tab_inactive:      			#B6C4CA;
+
+// Function helper with color variables
+@function url-friendly-colour($color) {
+	@return '%23' + str-slice('#{$color}', 2, -1)
+}
+
+// Used in Cliqz Features
+@function buildIconAntiTracking($stroke-color) {
+	@return url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2250%22%20height%3D%2250%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20stroke%3D%22#{url-friendly-colour($stroke-color)}%22%20stroke-width%3D%222%22%20fill%3D%22none%22%3E%3Ccircle%20cx%3D%2225%22%20cy%3D%2225%22%20r%3D%2223%22/%3E%3Cpath%20d%3D%22M25.213%2015.032a.721.721%200%200%200-.426%200l-9.149%202.427a.82.82%200%200%200-.638.809c.043%206.514%203.532%2012.56%209.532%2016.604A.859.859%200%200%200%2025%2035c.17%200%20.34-.043.468-.128%206-4.045%209.49-10.09%209.532-16.604a.82.82%200%200%200-.638-.81l-9.15-2.426z%22/%3E%3C/g%3E%3C/svg%3E');
+}
+
+// Used in Cliqz Features
+@function buildIconAdBlocking($stroke-color) {
+	@return url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2250%22%20height%3D%2250%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%3E%3Ccircle%20stroke%3D%22#{url-friendly-colour($stroke-color)}%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20cx%3D%2225%22%20cy%3D%2225%22%20r%3D%2223%22/%3E%3Cpath%20stroke%3D%22#{url-friendly-colour($stroke-color)}%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20fill-rule%3D%22nonzero%22%20transform%3D%22translate%2814%2C14%29%22%20d%3D%22M14.873%201.312l-7.973.07-5.588%205.686.07%207.973%205.686%205.589%207.973-.07%205.589-5.687-.07-7.973-5.687-5.588z%22/%3E%3Cpath%20stroke%3D%22#{url-friendly-colour($stroke-color)}%22%20stroke-width%3D%222%22%20d%3D%22M31.5%2C18.5%20L18.5%2C31.5%22/%3E%3C/g%3E%3C/svg%3E');
+}
+
+// Used in Cliqz Features
+@function buildIconSmartBlocking($stroke-color) {
+	@return url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2250%22%20height%3D%2250%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Ccircle%20stroke%3D%22#{url-friendly-colour($stroke-color)}%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20cx%3D%2225%22%20cy%3D%2225%22%20r%3D%2223%22/%3E%3Cpath%20fill%3D%22#{url-friendly-colour($stroke-color)}%22%20d%3D%22M31.977%2020.24c-.097%201.677-.697%203.156-1.654%204.514-.43.61-.867%201.217-1.285%201.84-.597.887-1.074%201.832-1.258%202.898-.03.175-.141.162-.263.162l-2.525-.001c-.832%200-1.663-.005-2.497.003-.181.002-.246-.05-.283-.238-.197-1.031-.657-1.954-1.241-2.818-.497-.733-1.015-1.454-1.514-2.187A8.257%208.257%200%200%201%2018.011%2020c-.112-2.82%201.486-5.279%204.185-6.42%203.458-1.462%207.547.004%209.166%203.293.521%201.062.682%202.19.615%203.365zM22.352%2032.3v-.63h5.305v.63h-5.305zm4.76%202.681h-4.216c-.508%200-.602-.108-.536-.653h5.28c.075.537-.022.653-.529.653zm6.238-18.576c-1.449-3.169-3.966-4.928-7.385-5.335-2.913-.348-5.446.61-7.511%202.673-2.305%202.306-2.858%205.124-2.19%208.241.351%201.63%201.149%203.046%202.104%204.39.438.617.869%201.243%201.271%201.883.372.593.635%201.241.661%201.946.03.814.008%201.627.008%202.441h.032c0%20.676-.001%201.351.002%202.027.006%201.204.952%202.22%202.15%202.3.158.01.21.056.25.214a2.322%202.322%200%200%200%204.524-.007c.034-.14.072-.194.225-.206a2.329%202.329%200%200%200%202.174-2.337c0-1.257.01-2.515-.003-3.774-.011-.941.208-1.816.706-2.61.402-.64.832-1.268%201.274-1.88%201.263-1.757%202.155-3.653%202.323-5.844.109-1.423-.018-2.816-.615-4.122z%22/%3E%3Cpath%20stroke%3D%22#{url-friendly-colour($stroke-color)}%22%20stroke-width%3D%221.5%22%20fill%3D%22none%22%20d%3D%22M25.096%2018.214a.324.324%200%200%200-.192%200l-4.117%201.092a.37.37%200%200%200-.287.364c.02%202.932%201.59%205.652%204.29%207.472a.387.387%200%200%200%20.21.058c.077%200%20.153-.02.21-.058%202.7-1.82%204.27-4.54%204.29-7.472a.37.37%200%200%200-.287-.364l-4.117-1.092z%22/%3E%3C/svg%3E');
+}
+
+// Used in Cliqz Features
+@function buildIconDash($stroke-color) {
+	@return url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2210%22%20height%3D%2210%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20stroke%3D%22#{url-friendly-colour($stroke-color)}%22%20stroke-width%3D%223%22%20d%3D%22M1%205h8%22/%3E%3C/svg%3E');
+}
+
+// Left caret SVG
+@function buildLeftCaret($color) {
+	@return url('data:image/svg+xml;charset%3dUS-ASCII,%3Csvg%20width%3D%226%22%20height%3D%2210%22%20xmlns%3D%22http://www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M1.845%205l4.052-3.938A.313.313%200%200%200%206%20.832a.312.312%200%200%200-.103-.23L5.381.1a.33.33%200%200%200-.474%200L.103%204.77A.313.313%200%200%200%200%205c0%20.087.034.164.103.23L4.907%209.9a.33.33%200%200%200%20.474%200l.516-.501A.313.313%200%200%200%206%209.169a.313.313%200%200%200-.103-.231L1.845%205z%22%20fill%3D%22#{_url-friendly-color($color)}%22%20fill-rule%3D%22evenodd%22/%3E%3C/svg%3E');
+}
+
+// Right caret SVG
+@function buildRightCaret($color) {
+	@return url('data:image/svg+xml;charset%3dUS-ASCII,%3Csvg%20width%3D%226%22%20height%3D%2210%22%20xmlns%3D%22http://www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M4.155%205L.103%201.062A.313.313%200%200%201%200%20.832C0%20.745.034.668.103.602L.619.1a.33.33%200%200%201%20.474%200l4.804%204.67A.313.313%200%200%201%206%205a.313.313%200%200%201-.103.23L1.093%209.9a.33.33%200%200%201-.474%200l-.516-.501A.313.313%200%200%201%200%209.169c0-.087.034-.164.103-.231L4.155%205z%22%20fill%3D%22#{_url-friendly-color($color)}%22%20fill-rule%3D%22evenodd%22/%3E%3C/svg%3E');
+}
+
+#content-summary {
+	background-color: $background;
+	&.expert.condensed {
+		background-color: $background;
+		.total-tracker-count {
+			color: $summary_text;
+		}
+	}
+
+	.page-host {
+		color: $summary_text;
+	}
+	.page-stats {
+		color: $summary_text;
+	}
+
+	.sub-component.donut-graph .graph-text {
+		color: $summary_text;
+	}
+
+	.sub-component.cliqz-features {
+		.count {
+			color: rgba($disabled_feature, 0);
+			background-image: buildIconDash($disabled_feature);
+		}
+		.active .count {
+			color: $enabled_feature;
+			background: none !important;
+		}
+		&.inactive .count {
+			color: rgba($paled_disabled_feature, 0);
+			background-image: buildIconDash($paled_disabled_feature);
+		}
+		&.inactive .active .count {
+			color: $paled_enabled_feature;
+			background: none !important;
+		}
+
+		.anti-tracking .icon { background-image: buildIconAntiTracking($disabled_feature); }
+		.active.anti-tracking .icon { background-image: buildIconAntiTracking($enabled_feature); }
+		&.inactive .anti-tracking .icon { background-image: buildIconAntiTracking($paled_disabled_feature); }
+		&.inactive .active.anti-tracking .icon { background-image: buildIconAntiTracking($paled_enabled_feature); }
+
+		.ad-blocking .icon { background-image: buildIconAdBlocking($disabled_feature); }
+		.active.ad-blocking .icon { background-image: buildIconAdBlocking($enabled_feature); }
+		&.inactive .ad-blocking .icon { background-image: buildIconAdBlocking($paled_disabled_feature); }
+		&.inactive .active.ad-blocking .icon { background-image: buildIconAdBlocking($paled_enabled_feature); }
+
+		.smart-blocking .icon { background-image: buildIconSmartBlocking($disabled_feature); }
+		.active.smart-blocking .icon { background-image: buildIconSmartBlocking($enabled_feature); }
+		&.inactive .smart-blocking .icon { background-image: buildIconSmartBlocking($paled_disabled_feature); }
+		&.inactive .active.smart-blocking .icon { background-image: buildIconSmartBlocking($paled_enabled_feature); }
+
+		.feature-name {
+			color: $disabled_feature;
+		}
+		.active .feature-name { color: $enabled_feature; }
+		&.inactive .feature-name { color: $paled_disabled_feature; }
+		&.inactive .active .feature-name { color: $paled_enabled_feature; }
+
+		.cliqz-feature.clickable:hover {
+			&.anti-tracking .icon { background-image: buildIconAntiTracking($bright_disabled_feature); }
+			&.ad-blocking .icon { background-image: buildIconAdBlocking($bright_disabled_feature); }
+			&.smart-blocking .icon { background-image: buildIconSmartBlocking($bright_disabled_feature); }
+			.feature-name { color: $bright_disabled_feature; }
+		}
+		.cliqz-feature.active.clickable:hover {
+			.count {
+				color: $bright_enabled_feature;
+			}
+			&.anti-tracking .icon { background-image: buildIconAntiTracking($bright_enabled_feature); }
+			&.ad-blocking .icon { background-image: buildIconAdBlocking($bright_enabled_feature); }
+			&.smart-blocking .icon { background-image: buildIconSmartBlocking($bright_enabled_feature); }
+			.feature-name { color: $bright_enabled_feature; }
+		}
+	}
+	.sub-component.not-scanned {
+		.not-scanned-header {
+			color: $summary_text;
+		}
+		.not-scanned-text {
+			color: $summary_text;
+		}
+	}
+	.stats-button path {
+		fill: #FFF;
+		stroke: #FFF;
+	}
+}
+
+#ghostery-header {
+	.header-tab {
+		color: $summary_text;
+		background-color: $tab_inactive;
+		&.active {
+			color: $summary_text;
+			background-color: $background;
+		}
+		&:last-of-type.active {
+			background-color: $summary_text;
+			color: $background;
+		}
+	}
+	.top-bar {
+	 	background-color: $caption;
+	 	color: $background;
+		.subscriber-badge {
+			path {fill: $background;}
+			path.text {fill: $caption;}
+		}
+		.header-logo {
+			.back-arrow {
+				path {
+					fill: $background;
+				}
+			}
+			.logo-icon {
+				path {
+					fill: $background;
+				}
+				svg > g > path:nth-child(3) {
+				 	fill: $caption;
+				}
+			}
+		}
+		.header-kebab {
+			path {
+				fill: $background;
+			}
+		}
+		.profile-svg {
+			g > g {
+				fill: #124559;
+				stroke: #124559;
+			}
+		}
+	 }
+}
+
+#content-stats {
+	.stats-top-header {
+		.stats-top-header-icon.trackersSeen g {
+			fill: #124559;
+		}
+		.stats-top-header-icon.trackersBlocked path {
+			&:first-of-type {
+				fill: #FFF;
+				stroke: #FFF;
+			}
+			&:nth-of-type(2) {
+				stroke: #124559;
+			}
+			&:last-of-type {
+				fill: #124559;
+			}
+		}
+		.stats-top-header-icon.trackersAnonymized path {
+			stroke: #124559;
+		}
+		.stats-top-header-icon.adsBlocked path {
+			fill: #124559;
+			stroke: #124559;
+		}
+	}
+	.stats-top-header-reset {
+		color: #124559;
+	}
+	.tab-header {
+		background-color: #124559;
+		.tab-container > .tab {
+			background-color: #7f98a2;
+		}
+	}
+	.tile-container > .tile > .tile-value {
+		.tile-value-content {
+			color: #124559;
+		}
+		&.active > .active-underline {
+			background-color: #124559;
+		}
+	}
+	.modal-container {
+		.modal-hollow-button {
+				border: #124559 1px solid;
+				color: #124559;
+		}
+		.modal-filled-button {
+				border: #124559 1px solid;
+				background-color:#124559;;
+		}
+	}
+}
+
+.line-graph-container {
+	#stats-back {
+		background-image: buildLeftCaret(#124559);
+	}
+	#stats-forward {
+		background-image: buildRightCaret(#124559);
+	}
+}
