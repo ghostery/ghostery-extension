@@ -1628,12 +1628,7 @@ function initializeEventListeners() {
 	// NOTE: not supported on Edge and Firefox < v54
 	if (typeof chrome.runtime.onMessageExternal === 'object') {
 		chrome.runtime.onMessageExternal.addListener((request, sender, sendResponse) => {
-			let recognized;
-			if (globals.DEBUG) {
-				recognized = sender.id === globals.GHOSTERY_TAB_CHROME_TEST_ID || sender.id === globals.GHOSTERY_TAB_FIREFOX_TEST_ID;
-			} else {
-				recognized = sender.id === globals.GHOSTERY_TAB_ID;
-			}
+			const recognized = (sender.id === globals.GHOSTERY_TAB_CHROME_PRODUCTION_ID || sender.id === globals.GHOSTERY_TAB_CHROME_PRERELEASE_ID) || (sender.id === globals.GHOSTERY_TAB_CHROME_TEST_ID || sender.id === globals.GHOSTERY_TAB_FIREFOX_TEST_ID);
 
 			if (recognized && request.name === 'getStatsAndSettings') {
 				getDataForGhosteryTab(data => sendResponse({ historicalDataAndSettings: data }));
