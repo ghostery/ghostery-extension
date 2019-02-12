@@ -25,7 +25,6 @@ const TutorialAntiSuiteView = () => (
 				{t('hub_tutorial_simple_view')}
 			</div>
 			<img
-				className="TutorialAntiSuiteView__image simple"
 				src="/app/images/hub/tutorial/antisuite-simple.png"
 				alt={t('hub_tutorial_simple_view')}
 			/>
@@ -33,7 +32,6 @@ const TutorialAntiSuiteView = () => (
 				{t('hub_tutorial_detailed_view')}
 			</div>
 			<img
-				className="TutorialAntiSuiteView__image detailed"
 				src="/app/images/hub/tutorial/antisuite-detailed.png"
 				alt={t('hub_tutorial_detailed_view')}
 			/>
