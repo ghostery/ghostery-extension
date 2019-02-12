@@ -3,9 +3,11 @@ version: 0.2
 phases:
   install:
     commands:
-      - powershell -NoProfile -ExecutionPolicy unrestricted -Command "Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"
+      - powershell -ExecutionPolicy unrestricted -Command "Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"
       - choco install -y yarn
-      - powershell -NoProfile -ExecutionPolicy unrestricted -Command "refreshenv"
+      - powershell -ExecutionPolicy unrestricted -Command "refreshenv"
+      - powershell -ExecutionPolicy unrestricted -Command "yarn -v"
+      - yarn -v
       - node -v
   pre_build:
     commands:
