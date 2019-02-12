@@ -7,7 +7,7 @@ phases:
       - choco install -y yarn
       - set PATH=%PATH%;"C:\Program Files (x86)\Yarn\bin\"
       - echo $Env:PATH
-      - powershelll -ExecutionPolicy unrestricted -Command "set PATH=%PATH%;C:\Program Files (x86)\Yarn\bin\"
+      - powershell -ExecutionPolicy unrestricted -Command "set PATH=%PATH%;C:\Program Files (x86)\Yarn\bin\"
       - echo $Env:PATH
       - dir "C:\Program Files (x86)\Yarn\bin\"
       - '"C:\Program Files (x86)\Yarn\bin\yarn"'
