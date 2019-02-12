@@ -18,7 +18,7 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WebpackShellPlugin = require('webpack-shell-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const spawnSync = require('child_process').spawnSync;
+const { spawnSync } = require('child_process');
 
 // constants
 const BUILD_DIR = path.resolve(__dirname, 'dist');
@@ -35,7 +35,7 @@ const RM = (process.platform === 'win32') ? 'powershell remove-item' : 'rm';
 // webpack plugins
 
 const extractSass = new MiniCssExtractPlugin({
-	filename: "css/[name].css"
+	filename: 'css/[name].css'
 });
 
 // @TODO: Refactor so this isn't necessary
@@ -56,7 +56,7 @@ const t = function (messageName, substitutions) {
 	return chrome.i18n.getMessage(messageName, substitutions);
 };
 
-const lintOnChange = function() {
+const lintOnChange = function () {
 	// @TODO: Why it fails on Windows?
 	if ((process.argv.includes('--env.nolint') || process.env.NO_LINT) ||
 		process.platform === 'win32') {
@@ -66,17 +66,17 @@ const lintOnChange = function() {
 	if (process.argv.includes('--env.fix')) {
 		args.push('--', '--fix')
 	}
-	let lint = spawnSync('npm', args, { stdio: 'inherit'});
+	const lint = spawnSync('npm', args, { stdio: 'inherit'});
 	if (lint.status !== 0) {
 		process.exit(lint.status);
 	}
 };
 
-lintOnChange.prototype.apply = function(compiler) {
+lintOnChange.prototype.apply = function (compiler) {
 	if (process.argv.includes('--env.prod') || (process.argv.includes('--env.nolint') || process.env.NO_LINT)) {
 		return;
 	}
-	compiler.plugin("done", () => {
+	compiler.plugin('done', () => {
 		const changedTimes = compiler.watchFileSystem.watcher.mtimes;
 		const changedFiles = Object.keys(changedTimes).filter((file) => {
 			return file.indexOf('.js') !== -1;

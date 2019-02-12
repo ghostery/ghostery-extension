@@ -25,6 +25,7 @@
 		},
 		"default_title": "Ghostery"
 	},
+	"debug": true,
 	"content_scripts": [
 		{
 			"all_frames": false,
