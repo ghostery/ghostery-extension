@@ -10,15 +10,15 @@ phases:
       - refreshenv
       - echo $Env:PATH
       # - powershell -ExecutionPolicy unrestricted -Command "yarn -v"
-      - yarn -v
+      - "C:\Program Files (x86)\Yarn\bin\yarn" -v
       - node -v
   pre_build:
     commands:
-      - powershell -NoProfile -ExecutionPolicy unrestricted -Command "yarn install"
+      - "C:\Program Files (x86)\Yarn\bin\yarn" install
   build:
     commands:
-      - yarn run lint
-      - yarn run test.unit
-      - yarn run build.prod
+      - "C:\Program Files (x86)\Yarn\bin\yarn" run lint
+      - "C:\Program Files (x86)\Yarn\bin\yarn" run test.unit
+      - "C:\Program Files (x86)\Yarn\bin\yarn" run build.prod
       # - 'dir "C:\Program Files (x86)\Windows Kits\8.1\bin\x64\makeappx.exe"'
       # - 'dir "C:\Program Files (x86)\Windows Kits\8.1\bin\x64\makepri.exe"'
