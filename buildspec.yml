@@ -9,7 +9,7 @@ phases:
       - dir "C:\Program Files (x86)\Yarn\bin\"
       - refreshenv
       - echo $Env:PATH
-      - start "C:\Program Files (x86)\Yarn\bin\yarn" -v
+      - '"C:\Program Files (x86)\Yarn\bin\yarn" -v'
       - node -v
   pre_build:
     commands:
