@@ -18,6 +18,7 @@ phases:
       - yarn install
   build:
     commands:
+      - cd
       - yarn run lint
       - yarn run test.unit
       - yarn run build.prod
