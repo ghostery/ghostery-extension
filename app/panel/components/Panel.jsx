@@ -59,15 +59,10 @@ class Panel extends React.Component {
 		this.uiPort.onMessage.addListener((msg) => {
 			// this.props.actions.getPanelData();
 			// this.props.actions.getCliqzModuleData();
-
-			if (typeof (msg) === 'object') {
-				console.log('IVZ new data received through port');
-				console.log(msg);
-				this.props.actions.updatePanelData(msg.panel);
-				this.props.actions.updateSummaryData(msg.summary);
-				if (msg.blocking) {
-					this.props.actions.updateBlockingData(msg.blocking);
-				}
+			if (msg) {
+				if (msg.panel) { this.props.actions.updatePanelData(msg.panel); }
+				if (msg.summary) { this.props.actions.updateSummaryData(msg.summary); }
+				if (msg.blocking) { this.props.actions.updateBlockingData(msg.blocking); }
 			}
 		});
 	}
