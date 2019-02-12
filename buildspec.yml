@@ -7,17 +7,18 @@ phases:
       - choco install -y yarn
       - powershell -ExecutionPolicy unrestricted -Command "refreshenv"
       - dir "C:\Program Files (x86)\Yarn\bin\"
+      - set PATH=$Env:PATH;"C:\Program Files (x86)\Yarn\bin\yarn"
       - refreshenv
       - echo $Env:PATH
-      - "C:\Program Files (x86)\Yarn\bin\yarn" -v
+      - yarn -v
       - node -v
   pre_build:
     commands:
-      - "C:\Program Files (x86)\Yarn\bin\yarn" install
+      - yarn install
   build:
     commands:
-      - "C:\Program Files (x86)\Yarn\bin\yarn" run lint
-      - "C:\Program Files (x86)\Yarn\bin\yarn" run test.unit
-      - "C:\Program Files (x86)\Yarn\bin\yarn" run build.prod
+      - yarn run lint
+      - yarn run test.unit
+      - yarn run build.prod
       # - 'dir "C:\Program Files (x86)\Windows Kits\8.1\bin\x64\makeappx.exe"'
       # - 'dir "C:\Program Files (x86)\Windows Kits\8.1\bin\x64\makepri.exe"'
