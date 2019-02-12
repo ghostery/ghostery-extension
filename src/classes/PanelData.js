@@ -81,8 +81,8 @@ class PanelData {
 	updatePanelUI(tab_id) {
 		// TODO don't rebuild tracker data for each port
 		// and only build if there's at least one port open
-		console.log('IVZ tab argument passed to updatePanelUI:');
-		console.log(tab_id);
+		// console.log('IVZ tab argument passed to updatePanelUI:');
+		// console.log(tab_id);
 
 		this.uiPorts.forEach((port) => {
 			const { name } = port;

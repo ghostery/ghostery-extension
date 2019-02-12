@@ -466,8 +466,13 @@ class FoundBugs {
 		const { aid } = bugDb.db.bugs[bug_id];
 
 		const { apps, appsById, issueCounts } = this._foundApps[tab_id];
+		console.log('IVZ apps and appsById in hasLatencyIssue');
+		console.log(apps);
+		console.log(appsById);
 		if (appsById.hasOwnProperty(aid) && apps[appsById[aid]] !== undefined) {
 			const { app } = apps[appsById[aid]];
+			console.log('IVZ app in hasLatencyIssue');
+			console.log(app);
 			if (!app.hasLatencyIssue) {
 				issueCounts.latency++;
 			}
