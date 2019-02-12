@@ -3,4 +3,4 @@ version: 0.2
 phases:
   build:
     commands:
-      - 'dir "C:\Program Files (x86)\Windows Kits\"'
+      - 'dir "C:\Program Files (x86)\Windows Kits\10\bin\"'
