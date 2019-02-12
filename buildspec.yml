@@ -4,7 +4,7 @@ phases:
   install:
     commands:
       - powershell -NoProfile -ExecutionPolicy unrestricted -Command "Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"
-      - choco install yarn
+      - choco install -y yarn
   pre_build:
     commands:
       - yarn install
