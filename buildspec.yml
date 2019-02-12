@@ -13,14 +13,13 @@ phases:
       # - '"C:\Program Files (x86)\Yarn\bin\yarn"'
       # - node -v
       - npm install -g yarn
-      - yarn -v
   pre_build:
     commands:
       - yarn install
-  # build:
-    # commands:
-      # - yarn run lint
-      # - yarn run test.unit
-      # - yarn run build.prod
+  build:
+    commands:
+      - yarn run lint
+      - yarn run test.unit
+      - yarn run build.prod
       # - 'dir "C:\Program Files (x86)\Windows Kits\8.1\bin\x64\makeappx.exe"'
       # - 'dir "C:\Program Files (x86)\Windows Kits\8.1\bin\x64\makepri.exe"'
