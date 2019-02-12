@@ -1,8 +1,20 @@
 version: 0.2
 
 phases:
+  install:
+    commands:
+      # Install chocolatey
+      - '@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"'
+      # Install deps
+      - choco install yarn
+  pre_build:
+    commands:
+      - yarn install
+      - node -v
   build:
     commands:
-      - 'dir "C:\Program Files (x86)\Windows Kits\8.1\bin\arm\"'
-      - 'dir "C:\Program Files (x86)\Windows Kits\8.1\bin\x64\"'
-      - 'dir "C:\Program Files (x86)\Windows Kits\8.1\bin\x86\"'
+      - yarn run lint
+      - yarn run test.unit
+      - yarn run build.prod
+      # - 'dir "C:\Program Files (x86)\Windows Kits\8.1\bin\x64\makeappx.exe"'
+      # - 'dir "C:\Program Files (x86)\Windows Kits\8.1\bin\x64\makepri.exe"'
