@@ -9,7 +9,6 @@ phases:
       - dir "C:\Program Files (x86)\Yarn\bin\"
       - refreshenv
       - echo $Env:PATH
-      # - powershell -ExecutionPolicy unrestricted -Command "yarn -v"
       - "C:\Program Files (x86)\Yarn\bin\yarn" -v
       - node -v
   pre_build:
