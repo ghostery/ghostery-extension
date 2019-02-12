@@ -9,7 +9,7 @@ phases:
       - node -v
   pre_build:
     commands:
-      - yarn install
+      - powershell -NoProfile -ExecutionPolicy unrestricted -Command "yarn install"
   build:
     commands:
       - yarn run lint
