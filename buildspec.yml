@@ -3,4 +3,6 @@ version: 0.2
 phases:
   build:
     commands:
-      - 'dir "C:\Program Files (x86)\Windows Kits\8.1\bin\"'
+      - 'dir "C:\Program Files (x86)\Windows Kits\8.1\bin\arm\"'
+      - 'dir "C:\Program Files (x86)\Windows Kits\8.1\bin\x64\"'
+      - 'dir "C:\Program Files (x86)\Windows Kits\8.1\bin\x86\"'
