@@ -4,4 +4,4 @@ phases:
   build:
     commands:
       - 'cd "C:\Program Files (x86)\Windows Kits\10\"'
-      - 'dir . /s'
+      - 'dir . /s /b sortorder:N'
