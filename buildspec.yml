@@ -5,9 +5,9 @@ phases:
     commands:
       - powershell -ExecutionPolicy unrestricted -Command "Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"
       - choco install -y yarn
-      - set PATH=%PATH%;"C:\Program Files (x86)\Yarn\bin\"
-      - echo $Env:PATH
-      - powershell -ExecutionPolicy unrestricted -Command 'set PATH=%PATH%;"C:\Program Files (x86)\Yarn\bin\"'
+      - $env:Path += ";C:\Program Files (x86)\Yarn\bin\"
+      - echo $env:Path
+      - $Env:PATH += ";C:\Program Files (x86)\Yarn\bin\"
       - echo $Env:PATH
       - dir "C:\Program Files (x86)\Yarn\bin\"
       - '"C:\Program Files (x86)\Yarn\bin\yarn"'
