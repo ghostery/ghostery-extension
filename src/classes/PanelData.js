@@ -90,13 +90,12 @@ class PanelData {
 				case 'panelUIPort':
 					getActiveTab((tab) => {
 						this._buildPanelUpdateTrackerData(tab);
-						this._buildTrackerData(tab, 'panelUpdate');
 						port.postMessage(this.panelUpdateView);
 					});
 					break;
 				case 'summaryUIPort':
 					getActiveTab((tab) => {
-						this._buildTrackerData(tab, 'summaryUpdate');
+						this._buildSummaryUpdateTrackerData(tab);
 						port.postMessage(this.summaryUpdateView);
 					});
 					break;
@@ -486,11 +485,14 @@ class PanelData {
 	 * @param	{Object} tab	active tab
 	 */
 	_buildPanelUpdateTrackerData(tab) {
-		const tab_id = tab && tab.id;
+		if (!tab) return;
+
+		const { id } = tab;
+		const { needsReload, smartBlock } = tabInfo.getTabInfo(id);
 
 		this._trackerData
-			.set('needsReload', tab && tabInfo.getTabInfo(tab_id, 'needsReload') || { changes: {} })
-			.set('smartBlock', tabInfo.getTabInfo(tab_id, 'smartBlock'));
+			.set('needsReload', needsReload || { changes: {} })
+			.set('smartBlock', smartBlock);
 	}
 
 	_buildSummaryInitTrackerData(tab, tab_id, tab_url, page_host, trackerList) {
@@ -511,12 +513,18 @@ class PanelData {
 	 *
 	 * @param	{Object} tab	active tab
 	 */
-	_buildSummaryUpdateTrackerData(tab, tab_id, tab_url, page_host, trackerList) {
+	_buildSummaryUpdateTrackerData(tab) {
+		if (!tab) return;
+
+		const { id, url } = tab;
+		const page_host = this._trackerData.get('pageHost') || url && processUrl(url).host || '';
+		const trackerList = foundBugs.getApps(id, false, url) || [];
+
 		this._trackerData
-			.set('alertCounts', tab && foundBugs.getAppsCountByIssues(tab_id, tab_url) || {})
-			.set('categories', this._buildCategories(tab_id, tab_url, page_host, trackerList))
-			.set('performanceData', tab && tabInfo.getTabInfo(tab_id, 'pageTiming'))
-			.set('trackerCounts', tab && foundBugs.getAppsCountByBlocked(tab_id) || {});
+			.set('alertCounts', foundBugs.getAppsCountByIssues(id, url) || {})
+			.set('categories', this._buildCategories(id, url, page_host, trackerList))
+			.set('performanceData', tabInfo.getTabInfo(id, 'pageTiming'))
+			.set('trackerCounts', foundBugs.getAppsCountByBlocked(id) || {});
 	}
 
 	/**
