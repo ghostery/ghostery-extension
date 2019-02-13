@@ -26,7 +26,9 @@ node('docker') {
             stage('Build Extension') {
                 sh 'rm -rf cliqz'
                 sh 'yarn run postinstall'
+
                 sh './tools/merge-locales.sh'
+
 
                 sh 'rm -rf build'
 

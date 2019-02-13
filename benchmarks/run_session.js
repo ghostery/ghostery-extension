@@ -44,7 +44,9 @@ setTimeout(async () => {
     idb: perf.measureIdbSize(emulator),
     ...emulator.getProbeSummary()
   }));
+
   fs.appendFileSync('./diagnostics.jl', JSON.stringify(emulator.probes))
+
   setTimeout(() => {
     process.exit();
   }, 1000);
