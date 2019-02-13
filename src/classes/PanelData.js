@@ -57,31 +57,6 @@ class PanelData {
 		this._activeTab = null;
 	}
 
-	_storeUIPort(port) {
-		const { name } = port;
-
-		port.onDisconnect.addListener((p) => {
-			console.log(`IVZ popup port DISCONNECTED: ${p.name}`);
-			this._uiPorts.set(name, null);
-			this._uiPorts.forEach
-			this._uiPorts.delete(p.name);
-			if (this._uiPorts.size === 0) {
-				this._activeTab = null;
-			}
-		});
-
-		console.log(`IVZ popup CONNECTED with port: ${port.name}`);
-
-		if (!this._uiPorts.get(name)) {
-			// send the initial data
-		}
-
-		this._uiPorts.set(name, port);
-		this._uiPorts.get(name).postMessage('BANANAS FOSTER to you from background!');
-
-		if 
-	}
-
 	/**
 	 * Initialize / update _confData after Conf has loaded. Called via
 	 * initializeGhosteryModules() and Dispatcher event `conf.changed.settings`, which
@@ -92,18 +67,29 @@ class PanelData {
 	}
 
 	initUIPort(port) {
-		if (this._activeTab) {
-			storeUIPort(port);
-			return;
-		}
-
 		getActiveTab((tab) => {
-			this._activeTab = tab;
-			_storeUIPort(port);
+			if (!this._activeTab || this._activeTab !== tab) {
+				// sendInitialData();
+				this._activeTab = tab;
+			}
+
+			const { name } = port;
+	
+			port.onDisconnect.addListener((p) => {
+				console.log(`IVZ popup port DISCONNECTED: ${p.name}`);
+				this._uiPorts.delete(p.name);
+			});
+	
+			console.log(`IVZ popup CONNECTED with port: ${port.name}`);
+
+			this._uiPorts.set(name, port);
+			this._uiPorts.get(name).postMessage('BANANAS FOSTER to you from background!');
 		});
 	}
 
 	updatePanelUI() {
+		if (!this._activeTab) { return; }
+
 		this.uiPorts.forEach((port) => {
 			const { name } = port;
 			switch (name) {
@@ -111,7 +97,6 @@ class PanelData {
 					port.postMessage(this.panelUpdateView);
 					break;
 				case 'summaryUIPort':
-					this._buildSummaryUpdateTrackerData();
 					port.postMessage(this.summaryUpdateView);
 					break;
 				default:
@@ -303,72 +288,24 @@ class PanelData {
 		return this._summaryView;
 	}
 
-	get panelView() {
-		if (this._activeTab) {
-			return {};
-		}
-
-		const currentAccount = this._confData.get('account');
-		if (currentAccount && currentAccount.user) {
-			currentAccount.user.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus']);
-		}
-		this._panelView = {
-			panel: {
-				enable_ad_block: this._confData.get('enable_ad_block'),
-				enable_anti_tracking: this._confData.get('enable_anti_tracking'),
-				enable_smart_block: this._confData.get('enable_smart_block'),
-				enable_offers: this._confData.get('enable_offers'),
-				is_expanded: this._confData.get('is_expanded'),
-				is_expert: this._confData.get('is_expert'),
-				is_android: globals.BROWSER_INFO.os === 'android',
-				language: this._confData.get('language'),
-				reload_banner_status: this._confData.get('reload_banner_status'),
-				trackers_banner_status: this._confData.get('trackers_banner_status'),
-				current_theme: this._confData.get('current_theme'),
-
-				needsReload: this._trackerData.get('needsReload'),
-				smartBlock: this._trackerData.get('smartBlock'),
-				tab_id: this._trackerData.get('tab_id'),
-				unread_offer_ids: rewards.unreadOfferIds,
-
-				account: currentAccount
-			},
-
-		const { id } = this._activeTab;
-		const { needsReload, smartBlock } = tabInfo.getTabInfo(id);
-		return {
-			'tab_id': id,
-			needsReload,
-			smartBlock
-		};
-	}
-
 	get panelUpdateView() {
-		if (this._activeTab) { 
-			return {};
-		};
 		const { id } = this._activeTab;
 		return { needsReload, smartBlock } = tabInfo.getTabInfo(id);
 	}
 
-	/**
-	 * Build UI update object for Summary view
-	 * @return {Object}		Summary-view-relevant data that may update as a page loads
-	 */
 	get summaryUpdateView() {
+		const { id, url } = this._activeTab;
+		const page_host = url && processUrl(url).host || '';
+		const trackerList = foundBugs.getApps(id, false, url) || [];
+
 		return {
-			panel: {
-				needsReload: this._trackerData.get('needsReload'),
-				smartBlock: this._trackerData.get('smartBlock')
-			},
-			summary: {
-				alertCounts: this._trackerData.get('alertCounts'),
-				categories: this._trackerData.get('categories'),
-				performanceData: this._trackerData.get('performanceData'),
-				trackerCounts: this._trackerData.get('trackerCounts')
-			}
+			alertCounts: foundBugs.getAppsCountByIssues(id, url) || {},
+			categories: this._buildCategories(id, url, page_host, trackerList),
+			performanceData: tabInfo.getTabInfo(id, 'pageTiming'),
+			trackerCounts: foundBugs.getAppsCountByBlocked(id) || {}
 		};
 	}
+
 
 	/**
 	 * Get conf and tracker data for Blocking View
