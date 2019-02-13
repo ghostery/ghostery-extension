@@ -3,6 +3,8 @@ version: 0.2
 phases:
   install:
     commands:
+      - dir $CODEBUILD_SRC_DIR_moab
+      - dir ${CODEBUILD_SRC_DIR_moab}
       - powershell -ExecutionPolicy unrestricted -Command "Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"
       # - choco install -y yarn
       - dir "C:\Program Files (x86)\"
@@ -27,7 +29,7 @@ phases:
       # - yarn run lint
       - yarn run test.unit
       - yarn run build.prod --silent
-      - .\$CODEBUILD_SRC_DIR_moab\moab-bin.exe makezip
+      - .\${CODEBUILD_SRC_DIR_moab}\moab-bin.exe makezip
       # - 'dir "C:\Program Files (x86)\Windows Kits\8.1\bin\x64\makeappx.exe"'
       # - 'dir "C:\Program Files (x86)\Windows Kits\8.1\bin\x64\makepri.exe"'
 
