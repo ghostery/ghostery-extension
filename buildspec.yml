@@ -20,12 +20,17 @@ phases:
       - npm install -g yarn
   pre_build:
     commands:
-      - yarn install
+      - yarn install --silent
   build:
     commands:
       # - yarn run lint
       - yarn run test.unit
       - yarn run build.prod --silent
-      # - $CODEBUILD_SRC_DIR_moab\moab-bin.exe build
+      - $CODEBUILD_SRC_DIR_moab\moab-bin.exe makezip
       # - 'dir "C:\Program Files (x86)\Windows Kits\8.1\bin\x64\makeappx.exe"'
       # - 'dir "C:\Program Files (x86)\Windows Kits\8.1\bin\x64\makepri.exe"'
+
+artifacts:
+  files:
+    - build/**/*
+  discard-paths: yes
