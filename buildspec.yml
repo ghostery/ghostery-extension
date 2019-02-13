@@ -5,7 +5,7 @@ phases:
     commands:
       - echo $Env:CODEBUILD_SRC_DIR_moab
       - echo $CODEBUILD_SRC_DIR_moab
-      - dir $CODEBUILD_SRC_DIR_moab
+      - dir $Env:CODEBUILD_SRC_DIR_moab
       - dir ${CODEBUILD_SRC_DIR_moab}
       - powershell -ExecutionPolicy unrestricted -Command "Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"
       # - choco install -y yarn
