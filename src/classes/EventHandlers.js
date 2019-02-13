@@ -615,7 +615,7 @@ class EventHandlers {
 
 		button.update(details.tab_id);
 
-		panelData.updatePanelUI(tab_id);
+		panelData.updatePanelUI();
 
 		if (block && (conf.enable_click2play || conf.enable_click2playSocial)) {
 			buildC2P(details, app_id);

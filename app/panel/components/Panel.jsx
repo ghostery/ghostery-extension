@@ -52,6 +52,18 @@ class Panel extends React.Component {
 				sendMessage('ping', 'engaged_offer');
 			}
 		});
+
+		this.uiPort = chrome.runtime.connect({ name: 'panelUIPort' });
+		this.uiPort.onMessage.addListener((msg) => {
+			if (msg) { this.props.actions.updatePanelData(msg); }
+		});
+	}
+
+	/**
+	 * Lifecycle event
+	 */
+	componentWillUnmount() {
+		this.uiPort.disconnect();
 	}
 
 	/**
