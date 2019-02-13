@@ -52,7 +52,8 @@ class PanelData {
 		this._rewardsView = {};
 		this._settingsView = {};
 
-		this.uiPorts = new Map();
+		this._uiPorts = new Map();
+		this._activeTab = null;
 	}
 
 	/**
@@ -65,39 +66,37 @@ class PanelData {
 	}
 
 	initUIPort(port) {
-		const { name } = port;
+		getActiveTab((tab) => {
+			this._activeTab = tab;
 
-		port.onDisconnect.addListener((p) => {
-			console.log(`IVZ popup port DISCONNECTED: ${p.name}`);
-			this.uiPorts.delete(p.name);
+			const { name } = port;
+
+			port.onDisconnect.addListener((p) => {
+				console.log(`IVZ popup port DISCONNECTED: ${p.name}`);
+				this._uiPorts.delete(p.name);
+				if (this._uiPorts.size === 0) {
+					this._activeTab = null;
+				}
+			});
+
+			console.log(`IVZ popup CONNECTED with port: ${port.name}`);
+
+			this._uiPorts.set(name, port);
+			this._uiPorts.get(name).postMessage('BANANAS FOSTER to you from background!');
 		});
-
-		console.log(`IVZ popup CONNECTED with port: ${port.name}`);
-
-		this.uiPorts.set(name, port);
-		this.uiPorts.get(name).postMessage('BANANAS FOSTER to you from background!');
 	}
 
 	updatePanelUI() {
-		// TODO don't rebuild tracker data for each port
-		// and only build if there's at least one port open
-		// console.log('IVZ tab argument passed to updatePanelUI:');
-		// console.log(tab_id);
-
 		this.uiPorts.forEach((port) => {
 			const { name } = port;
 			switch (name) {
 				case 'panelUIPort':
-					getActiveTab((tab) => {
-						this._buildPanelUpdateTrackerData(tab);
-						port.postMessage(this.panelUpdateView);
-					});
+					this._buildPanelUpdateTrackerData(this._activeTab);
+					port.postMessage(this.panelUpdateView);
 					break;
 				case 'summaryUIPort':
-					getActiveTab((tab) => {
-						this._buildSummaryUpdateTrackerData(tab);
-						port.postMessage(this.summaryUpdateView);
-					});
+					this._buildSummaryUpdateTrackerData(this._activeTab);
+					port.postMessage(this.summaryUpdateView);
 					break;
 				default:
 					break;
