@@ -27,6 +27,7 @@ import account from './Account';
 import dispatcher from './Dispatcher';
 import { getActiveTab, flushChromeMemoryCache, processUrl } from '../utils/utils';
 import { objectEntries, log } from '../utils/common';
+import { linearRegression } from 'simple-statistics';
 
 const SYNC_SET = new Set(globals.SYNC_ARRAY);
 const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
@@ -61,6 +62,8 @@ class PanelData {
 
 		port.onDisconnect.addListener((p) => {
 			console.log(`IVZ popup port DISCONNECTED: ${p.name}`);
+			this._uiPorts.set(name, null);
+			this._uiPorts.forEach
 			this._uiPorts.delete(p.name);
 			if (this._uiPorts.size === 0) {
 				this._activeTab = null;
@@ -69,8 +72,14 @@ class PanelData {
 
 		console.log(`IVZ popup CONNECTED with port: ${port.name}`);
 
+		if (!this._uiPorts.get(name)) {
+			// send the initial data
+		}
+
 		this._uiPorts.set(name, port);
 		this._uiPorts.get(name).postMessage('BANANAS FOSTER to you from background!');
+
+		if 
 	}
 
 	/**
@@ -99,7 +108,6 @@ class PanelData {
 			const { name } = port;
 			switch (name) {
 				case 'panelUIPort':
-					this._buildPanelUpdateTrackerData();
 					port.postMessage(this.panelUpdateView);
 					break;
 				case 'summaryUIPort':
@@ -119,9 +127,22 @@ class PanelData {
 	 * @return {Object}      	view data
 	 */
 	get(view, tab) {
+		/*
 		console.log('IVZ tab passed to PanelData#get:');
 		console.log(tab);
 
+		log(`Get data for ${view} view`);
+		
+		switch (view) {
+			case 'settings':
+				return this.settingsView;
+			case 'panel':
+				return this.panelView;
+		}
+		if (view === 'settings'){
+			return this.settingsView;
+		}
+		
 		log(`Get data for ${view} view`);
 		if (view === 'settings') {
 			return this.settingsView;
@@ -140,6 +161,7 @@ class PanelData {
 			default:
 				return false;
 		}
+		*/
 	}
 
 	/**
@@ -279,6 +301,54 @@ class PanelData {
 			trackerCounts: this._trackerData.get('trackerCounts'),
 		};
 		return this._summaryView;
+	}
+
+	get panelView() {
+		if (this._activeTab) {
+			return {};
+		}
+
+		const currentAccount = this._confData.get('account');
+		if (currentAccount && currentAccount.user) {
+			currentAccount.user.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus']);
+		}
+		this._panelView = {
+			panel: {
+				enable_ad_block: this._confData.get('enable_ad_block'),
+				enable_anti_tracking: this._confData.get('enable_anti_tracking'),
+				enable_smart_block: this._confData.get('enable_smart_block'),
+				enable_offers: this._confData.get('enable_offers'),
+				is_expanded: this._confData.get('is_expanded'),
+				is_expert: this._confData.get('is_expert'),
+				is_android: globals.BROWSER_INFO.os === 'android',
+				language: this._confData.get('language'),
+				reload_banner_status: this._confData.get('reload_banner_status'),
+				trackers_banner_status: this._confData.get('trackers_banner_status'),
+				current_theme: this._confData.get('current_theme'),
+
+				needsReload: this._trackerData.get('needsReload'),
+				smartBlock: this._trackerData.get('smartBlock'),
+				tab_id: this._trackerData.get('tab_id'),
+				unread_offer_ids: rewards.unreadOfferIds,
+
+				account: currentAccount
+			},
+
+		const { id } = this._activeTab;
+		const { needsReload, smartBlock } = tabInfo.getTabInfo(id);
+		return {
+			'tab_id': id,
+			needsReload,
+			smartBlock
+		};
+	}
+
+	get panelUpdateView() {
+		if (this._activeTab) { 
+			return {};
+		};
+		const { id } = this._activeTab;
+		return { needsReload, smartBlock } = tabInfo.getTabInfo(id);
 	}
 
 	/**
@@ -486,25 +556,6 @@ class PanelData {
 	_buildPanelInitTrackerData(tab, tab_id) {
 		this._trackerData.set('tab_id', tab_id);
 		this._buildPanelUpdateTrackerData(tab, tab_id);
-	}
-
-	/**
-	 * Update the Panel-relevant fields of the local _trackerData map
-	 * Called whenever a new bug is found while the panel is open and the Panel UI needs to be updated
-	 *
-	 * @private
-	 *
-	 * @param	{Object} tab	active tab
-	 */
-	_buildPanelUpdateTrackerData() {
-		if (this._activeTab) return;
-
-		const { id } = this._activeTab;
-		const { needsReload, smartBlock } = tabInfo.getTabInfo(id);
-
-		this._trackerData
-			.set('needsReload', needsReload || { changes: {} })
-			.set('smartBlock', smartBlock);
 	}
 
 	_buildSummaryInitTrackerData(tab, tab_url, page_host, trackerList) {
