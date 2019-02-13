@@ -56,6 +56,23 @@ class PanelData {
 		this._activeTab = null;
 	}
 
+	_storeUIPort(port) {
+		const { name } = port;
+
+		port.onDisconnect.addListener((p) => {
+			console.log(`IVZ popup port DISCONNECTED: ${p.name}`);
+			this._uiPorts.delete(p.name);
+			if (this._uiPorts.size === 0) {
+				this._activeTab = null;
+			}
+		});
+
+		console.log(`IVZ popup CONNECTED with port: ${port.name}`);
+
+		this._uiPorts.set(name, port);
+		this._uiPorts.get(name).postMessage('BANANAS FOSTER to you from background!');
+	}
+
 	/**
 	 * Initialize / update _confData after Conf has loaded. Called via
 	 * initializeGhosteryModules() and Dispatcher event `conf.changed.settings`, which
@@ -66,23 +83,14 @@ class PanelData {
 	}
 
 	initUIPort(port) {
+		if (this._activeTab) {
+			storeUIPort(port);
+			return;
+		}
+
 		getActiveTab((tab) => {
 			this._activeTab = tab;
-
-			const { name } = port;
-
-			port.onDisconnect.addListener((p) => {
-				console.log(`IVZ popup port DISCONNECTED: ${p.name}`);
-				this._uiPorts.delete(p.name);
-				if (this._uiPorts.size === 0) {
-					this._activeTab = null;
-				}
-			});
-
-			console.log(`IVZ popup CONNECTED with port: ${port.name}`);
-
-			this._uiPorts.set(name, port);
-			this._uiPorts.get(name).postMessage('BANANAS FOSTER to you from background!');
+			_storeUIPort(port);
 		});
 	}
 
@@ -91,11 +99,11 @@ class PanelData {
 			const { name } = port;
 			switch (name) {
 				case 'panelUIPort':
-					this._buildPanelUpdateTrackerData(this._activeTab);
+					this._buildPanelUpdateTrackerData();
 					port.postMessage(this.panelUpdateView);
 					break;
 				case 'summaryUIPort':
-					this._buildSummaryUpdateTrackerData(this._activeTab);
+					this._buildSummaryUpdateTrackerData();
 					port.postMessage(this.summaryUpdateView);
 					break;
 				default:
@@ -119,7 +127,7 @@ class PanelData {
 			return this.settingsView;
 		}
 		// update _trackerData with new tab info
-		this._buildTrackerData(tab, false);
+		this._buildTrackerData(tab);
 		switch (view) {
 			case 'panel':
 				return this.panelView;
@@ -450,6 +458,9 @@ class PanelData {
 		else this._buildAllTrackerData(tab, tab_id, tab_url, page_host, trackerList);
 	}
 
+
+	
+
 	/**
 	 * Build local _trackerData map. Called each time a view is fetched. These
 	 * properties represent the initial state of the page on load. They are not updated
@@ -470,6 +481,8 @@ class PanelData {
 		this._buildPanelAndSummaryTrackerData(tab, tab_id, tab_url, page_host, trackerList);
 	}
 
+
+
 	_buildPanelInitTrackerData(tab, tab_id) {
 		this._trackerData.set('tab_id', tab_id);
 		this._buildPanelUpdateTrackerData(tab, tab_id);
@@ -483,10 +496,10 @@ class PanelData {
 	 *
 	 * @param	{Object} tab	active tab
 	 */
-	_buildPanelUpdateTrackerData(tab) {
-		if (!tab) return;
+	_buildPanelUpdateTrackerData() {
+		if (this._activeTab) return;
 
-		const { id } = tab;
+		const { id } = this._activeTab;
 		const { needsReload, smartBlock } = tabInfo.getTabInfo(id);
 
 		this._trackerData
@@ -494,14 +507,14 @@ class PanelData {
 			.set('smartBlock', smartBlock);
 	}
 
-	_buildSummaryInitTrackerData(tab, tab_id, tab_url, page_host, trackerList) {
+	_buildSummaryInitTrackerData(tab, tab_url, page_host, trackerList) {
 		this._trackerData
 			.set('pageUrl', tab_url || '')
 			.set('pageHost', page_host)
 			.set('sitePolicy', tab && policy.getSitePolicy(tab_url) || false)
 			.set('siteNotScanned', tab && !trackerList || false);
 		
-		this._buildSummaryUpdateTrackerData(tab, tab_id, tab_url, page_host, trackerList);
+		this._buildSummaryUpdateTrackerData(tab);
 	}
 
 	/**
@@ -512,10 +525,10 @@ class PanelData {
 	 *
 	 * @param	{Object} tab	active tab
 	 */
-	_buildSummaryUpdateTrackerData(tab) {
-		if (!tab) return;
+	_buildSummaryUpdateTrackerData() {
+		if (this._activeTab) return;
 
-		const { id, url } = tab;
+		const { id, url } = this._activeTab;
 		const page_host = this._trackerData.get('pageHost') || url && processUrl(url).host || '';
 		const trackerList = foundBugs.getApps(id, false, url) || [];
 
