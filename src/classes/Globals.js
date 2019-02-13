@@ -172,7 +172,7 @@ class Globals {
 		if (chrome.cliqzAppConstants) {
 			this.BROWSER_INFO.displayName = 'Ghostery';
 			this.BROWSER_INFO.name = 'ghostery';
-			this.BROWSER_INFO.token = 'gh';
+			this.BROWSER_INFO.token = 'an';
 			this.BROWSER_INFO.version = chrome.cliqzAppConstants.get('MOZ_APP_VERSION');
 		} else {
 			this.BROWSER_INFO.displayName = 'Firefox';

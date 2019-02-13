@@ -1520,6 +1520,11 @@ function initializeGhosteryModules() {
 	}
 	// start cliqz app
 	const cliqzStartup = cliqz.start().then(() => {
+		// TODO: remove me
+		// due to missconfiguration of browser-core 33, the telemetry got disabled
+		// this should be removed with update to browser-core 34
+		cliqz.prefs.set('telemetry', true);
+
 		// run wrapper tasks which set up base integrations between ghostery and these modules
 		Promise.all([
 			initialiseWebRequestPipeline(),

@@ -27,6 +27,9 @@ node('docker') {
                 sh 'rm -rf cliqz'
                 sh 'yarn run postinstall'
 
+                sh './tools/merge-locales.sh'
+
+
                 sh 'rm -rf build'
 
                 // TODO: this should not be packaged at all
@@ -50,6 +53,8 @@ node('docker') {
                 def memory = sh(returnStdout: true, script: 'cat ./benchmarks/results.txt | grep -v \'=\' | jq .memory | awk \'{ sum+=$1 } END { print sum }\'')
                 currentBuild.description = "CPU Time: ${cputime}, Memory: ${((memory as Integer) / (5 * 1024 * 1024)) as Integer}MB"
                 sh 'du -hs ./benchmarks/data/idb/*'
+                sh 'cat ./benchmarks/diagnostics.jl | jq .'
+                sh 'rm -r ./benchmarks/data ./benchmarks/diagnostics.jl'
             }
         }
     }
