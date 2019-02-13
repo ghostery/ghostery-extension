@@ -15,8 +15,6 @@ import React from 'react';
 import Header from '../containers/HeaderContainer';
 import { sendMessage } from '../utils/msg';
 
-const UI_PORT_NAME = 'summaryUIPort';
-
 /**
  * @class Implement base view with functionality common to all views.
  * @memberof PanelClasses
@@ -54,24 +52,6 @@ class Panel extends React.Component {
 				sendMessage('ping', 'engaged_offer');
 			}
 		});
-
-		this.uiPort = chrome.runtime.connect({ name: UI_PORT_NAME });
-		this.uiPort.onMessage.addListener((msg) => {
-			// this.props.actions.getPanelData();
-			// this.props.actions.getCliqzModuleData();
-			if (msg) {
-				if (msg.panel) { this.props.actions.updatePanelData(msg.panel); }
-				if (msg.summary) { this.props.actions.updateSummaryData(msg.summary); }
-				if (msg.blocking) { this.props.actions.updateBlockingData(msg.blocking); }
-			}
-		});
-	}
-
-	/**
-	 * Lifecycle event
-	 */
-	componentWillUnmount() {
-		this.uiPort.disconnect();
 	}
 
 	/**

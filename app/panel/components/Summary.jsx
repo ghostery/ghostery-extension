@@ -27,6 +27,7 @@ import {
 
 const { IS_CLIQZ } = globals;
 const AB_PAUSE_BUTTON = false;
+const UI_PORT_NAME = 'summaryUIPort';
 
 /**
  * @class Implements the Summary View, which is displayed as the entire panel
@@ -73,6 +74,17 @@ class Summary extends React.Component {
 	 */
 	componentDidMount() {
 		this.props.actions.getCliqzModuleData();
+
+		this.uiPort = chrome.runtime.connect({ name: UI_PORT_NAME });
+		this.uiPort.onMessage.addListener((msg) => {
+			// this.props.actions.getPanelData();
+			// this.props.actions.getCliqzModuleData();
+			if (msg) {
+				if (msg.panel) { this.props.actions.updatePanelData(msg.panel); }
+				if (msg.summary) { this.props.actions.updateSummaryData(msg.summary); }
+				if (msg.blocking) { this.props.actions.updateBlockingData(msg.blocking); }
+			}
+		});
 	}
 
 	/**
@@ -84,6 +96,13 @@ class Summary extends React.Component {
 
 		// Set page title for Firefox for Android
 		window.document.title = `Ghostery's findings for ${this.props.pageUrl}`;
+	}
+
+	/**
+	 * Lifecycle event
+	 */
+	componentWillUnmount() {
+		this.uiPort.disconnect();
 	}
 
 	/**
