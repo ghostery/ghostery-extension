@@ -7,6 +7,8 @@ phases:
       # - choco install -y yarn
       - dir "C:\Program Files (x86)\"
       - choco install -y googlechrome
+      - dir "C:\Program Files (x86)\Google\"
+      - choco install -y opera
       - dir "C:\Program Files (x86)\"
       # - $env:Path += ";C:\Program Files (x86)\Yarn\bin\"
       # - echo $env:Path
