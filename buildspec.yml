@@ -10,6 +10,7 @@ phases:
       - dir "C:\Program Files (x86)\Google\"
       - choco install -y opera
       - dir "C:\Program Files (x86)\"
+      - dir "C:\Program Files\"
       # - $env:Path += ";C:\Program Files (x86)\Yarn\bin\"
       # - echo $env:Path
       # - $Env:PATH += ";C:\Program Files (x86)\Yarn\bin\"
@@ -26,7 +27,7 @@ phases:
       # - yarn run lint
       - yarn run test.unit
       - yarn run build.prod --silent
-      - $CODEBUILD_SRC_DIR_moab\moab-bin.exe makezip
+      - .\$CODEBUILD_SRC_DIR_moab\moab-bin.exe makezip
       # - 'dir "C:\Program Files (x86)\Windows Kits\8.1\bin\x64\makeappx.exe"'
       # - 'dir "C:\Program Files (x86)\Windows Kits\8.1\bin\x64\makepri.exe"'
 
