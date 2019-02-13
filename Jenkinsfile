@@ -46,6 +46,7 @@ node('docker') {
                 }
             }
 
+            /*
             stage('Benchmark') {
                 sh 'cp /home/jenkins/benchmarks/session.jl ./benchmarks/'
                 sh 'cd ./benchmarks && node run_benchmarks.js | tee results.txt'
@@ -56,6 +57,7 @@ node('docker') {
                 sh 'cat ./benchmarks/diagnostics.jl | jq .'
                 sh 'rm -r ./benchmarks/data ./benchmarks/diagnostics.jl'
             }
+            */
         }
     }
 
