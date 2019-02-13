@@ -116,10 +116,10 @@
   resolved "https://registry.yarnpkg.com/@cliqz-oss/dexie/-/dexie-2.0.4.tgz#0e710504e2b9198baa9b046abd3a82731b94d56e"
   integrity sha512-HxMbBQfdy0CehThTFierXbRPI+PHDEucUUriCCzViAKbCWWQIlL6uZcyDaaPRMPWy45v78lezPB4457kfjS72g==
 
-"@cliqz/adblocker@^0.6.7":
-  version "0.6.7"
-  resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-0.6.7.tgz#e4b24e361edfc667cb81acc4636dbf4146d469c8"
-  integrity sha512-IZzNrSXFERzXKnNwKRCHb5cNDm7lCQ8DtXrCFvxrnassHPnvXlwjCOxXBCBHLEjCfuVccd2Gm+ISt9gRBMSGXA==
+"@cliqz/adblocker@^0.6.8":
+  version "0.6.8"
+  resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-0.6.8.tgz#e4ad16d23d2169041d73465fa141911553fab040"
+  integrity sha512-a0k6gdCcR/9D1HB7OjhZcX6/mP4MZ8iMLPk3YGOSUgZpQ+HRuJ87BjZZp11fMFezoQoGXRaHGK1cT9Xz66UwOQ==
   dependencies:
     punycode "^2.1.1"
     tslib "^1.9.3"
@@ -1723,12 +1723,12 @@ brorand@^1.0.1:
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
   integrity sha1-EsJe/kCkXjwyPrhnWgoM5XsiNx8=
 
-"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery-mobile/master/7.34.0.1b157.0528f98.tgz":
+"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery-mobile/master/7.34.0.1b194.1e7f6d0.tgz":
   version "1.34.0"
-  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery-mobile/master/7.34.0.1b157.0528f98.tgz#ce2f11347f795106ba17634cdc02dc0730f6ba8d"
+  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery-mobile/master/7.34.0.1b194.1e7f6d0.tgz#323ea5f604a642c4d600f20e4a282a0eac5dd049"
   dependencies:
     "@cliqz-oss/dexie" "^2.0.4"
-    "@cliqz/adblocker" "^0.6.7"
+    "@cliqz/adblocker" "^0.6.8"
     ajv "^6.5.0"
     anonymous-credentials "https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.1/anonymous-credentials-0.1.1.tgz"
     classnames "^2.2.5"

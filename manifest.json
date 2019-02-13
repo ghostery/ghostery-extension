@@ -49,6 +49,22 @@
 				"script": "cliqz/cliqz-android/cliqz-app-constants.bundle.js",
 				"paths": [["cliqzAppConstants"]]
 			}
+		},
+		"cliqz": {
+			"schema": "cliqz/webextension-specific/experimental-apis/cliqz/schema.json",
+			"parent": {
+				"scopes": ["addon_parent"],
+				"paths": [["cliqz"]],
+				"script": "cliqz/webextension-specific/experimental-apis/cliqz/api.bundle.js"
+			}
+		},
+		"cliqzSynchronus": {
+			"schema": "cliqz/webextension-specific/experimental-apis/cliqzSynchronus/schema.json",
+			"child": {
+				"scopes": ["addon_child"],
+				"paths": [["cliqzSynchronus"]],
+				"script": "cliqz/webextension-specific/experimental-apis/cliqzSynchronus/api.bundle.js"
+			}
 		}
 	},
 	"content_scripts": [
