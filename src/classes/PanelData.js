@@ -70,6 +70,7 @@ class PanelData {
 		getActiveTab((tab) => {
 			const { name } = port;
 
+			// first time a port is being opened for a particular tab
 			if (name === 'panelUIPort' && this._activeTab !== tab) {
 				this._activeTab = tab;
 				port.postMessage(this.initData);
@@ -258,7 +259,7 @@ class PanelData {
 			summary: this.summaryView,
 			blocking: this._confData.get('is_expert') ? this.blockingView : false,
 		};
-	}``
+	}
 
 	/**
 	 * For initial application load, get combined conf and tracker data for
@@ -473,58 +474,24 @@ class PanelData {
 	 * @param	{Object} tab		active tab
 	 * @param	{string} subset		the subset of tracker data to init/update
 	 */
-	_buildTrackerData(tab, subset) {
+	_buildTrackerData(tab) {
 		const tab_id = tab && tab.id;
 		const tab_url = tab && tab.url || '';
-		const page_host = tab_url && processUrl(tab_url).host || '';
+		const pageHost = tab_url && processUrl(tab_url).host || '';
 		const trackerList = foundBugs.getApps(tab_id, false, tab_url) || [];
-
-		switch(subset) {
-			case 'panelInit':
-				this._buildPanelInitTrackerData(tab, tab_id);
-				break;
-			case 'panelUpdate':
-				this._buildPanelUpdateTrackerData(tab, tab_id);
-				break;
-			case 'summaryInit':
-				this._buildSummaryInitTrackerData(tab, tab_id, tab_url, page_host, trackerList);
-				break;
-			case 'summaryUpdate':
-				this._buildSummaryUpdateTrackerData(tab, tab_id, tab_url, page_host, trackerList);
-				break;
-			default:
-				break;
-		}
-
-		
-		if (isUpdate) this._buildPanelAndSummaryTrackerData(tab, tab_id, tab_url, page_host, trackerList);
-		else this._buildAllTrackerData(tab, tab_id, tab_url, page_host, trackerList);
-	}
-
-
-	
-
-	/**
-	 * Build local _trackerData map. Called each time a view is fetched. These
-	 * properties represent the initial state of the page on load. They are not updated
-	 * by PanelData.set()
-	 *
-	 * @private
-	 *
-	 * @param  {Object} tab 	active tab
-	 */
-	_buildAllTrackerData(tab, tab_id, tab_url, page_host, trackerList) {
 		this._trackerData
+			.set('alertCounts', tab && foundBugs.getAppsCountByIssues(tab_id, tab_url) || {})
+			.set('categories', this._buildCategories(tab_id, tab_url, pageHost, trackerList))
+			.set('needsReload', tab && tabInfo.getTabInfo(tab_id, 'needsReload') || { changes: {} })
 			.set('pageUrl', tab_url || '')
-			.set('pageHost', page_host)
+			.set('pageHost', pageHost)
+			.set('performanceData', tab && tabInfo.getTabInfo(tab_id, 'pageTiming'))
 			.set('sitePolicy', tab && policy.getSitePolicy(tab_url) || false)
-			.set('siteNotScanned', tab && !trackerList || false)
-			.set('tab_id', tab_id);
-
-		this._buildPanelAndSummaryTrackerData(tab, tab_id, tab_url, page_host, trackerList);
+			.set('siteNotScanned', tab && !foundBugs.getApps(tab_id) || false)
+			.set('tab_id', tab_id)
+			.set('trackerCounts', tab && foundBugs.getAppsCountByBlocked(tab_id) || {})
+			.set('smartBlock', tabInfo.getTabInfo(tab_id, 'smartBlock'));
 	}
-
-
 
 	_buildPanelInitTrackerData(tab, tab_id) {
 		this._trackerData.set('tab_id', tab_id);
