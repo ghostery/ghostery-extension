@@ -45,10 +45,6 @@ class PanelData {
 	 */
 	constructor() {
 		this._confData = new Map();
-		this._blockingView = {};
-		this._rewardsView = {};
-		this._settingsView = {};
-
 		this._uiPorts = new Map();
 		this._activeTab = null;
 	}
@@ -304,7 +300,7 @@ class PanelData {
 		const pageHost = url && processUrl(url).host || '';
 		const trackerList = foundBugs.getApps(id, false, url) || [];
 
-		this._blockingView = {
+		return {
 			expand_all_trackers: this._confData.get('expand_all_trackers'),
 			selected_app_ids: this._confData.get('selected_app_ids'),
 			show_tracker_urls: this._confData.get('show_tracker_urls'),
@@ -316,7 +312,6 @@ class PanelData {
 			pageUrl: url,
 			categories: this._buildCategories(id, url, pageHost, trackerList)
 		};
-		return this._blockingView;
 	}
 
 	/**
@@ -324,12 +319,11 @@ class PanelData {
 	 * @return {Object} Rewards view data
 	 */
 	get rewardsView() {
-		this._rewardsView = {
+		return {
 			enable_offers: this._confData.get('enable_offers'),
 			rewards: rewards.storedOffers,
 			unread_offer_ids: rewards.unreadOfferIds,
 		};
-		return this._rewardsView;
 	}
 
 	/**
@@ -338,7 +332,7 @@ class PanelData {
 	 * @return {Object}		Settings View data
 	 */
 	get settingsView() {
-		this._settingsView = {
+		return {
 			alert_bubble_pos: this._confData.get('alert_bubble_pos'),
 			alert_bubble_timeout: this._confData.get('alert_bubble_timeout'),
 			block_by_default: this._confData.get('block_by_default'),
@@ -366,8 +360,6 @@ class PanelData {
 			toggle_individual_trackers: this._confData.get('toggle_individual_trackers'),
 			language: this._confData.get('language'), // required for the setup page that does not have access to panelView data
 		};
-
-		return this._settingsView;
 	}
 
 	// TODO would accessing conf directly be simpler than using this mirror (except for categories) data structure?
