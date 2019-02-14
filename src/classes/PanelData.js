@@ -46,7 +46,6 @@ class PanelData {
 	constructor() {
 		this._confData = new Map();
 		this._trackerData = new Map();
-		this._panelView = {};
 		this._summaryView = {};
 		this._blockingView = {};
 		this._rewardsView = {};
@@ -112,24 +111,13 @@ class PanelData {
 	 * @param  {Object} tab 	tab
 	 * @return {Object}      	view data
 	 */
+	// TODO not using this for initial panel data retrieval anymore, so see if we can unplug it from the rest and remove it altogether
 	get(view, tab) {
-		/*
 		console.log('IVZ tab passed to PanelData#get:');
 		console.log(tab);
 
 		log(`Get data for ${view} view`);
-		
-		switch (view) {
-			case 'settings':
-				return this.settingsView;
-			case 'panel':
-				return this.panelView;
-		}
-		if (view === 'settings'){
-			return this.settingsView;
-		}
-		
-		log(`Get data for ${view} view`);
+
 		if (view === 'settings') {
 			return this.settingsView;
 		}
@@ -147,7 +135,6 @@ class PanelData {
 			default:
 				return false;
 		}
-		*/
 	}
 
 	/**
@@ -258,47 +245,6 @@ class PanelData {
 			summary: this.summaryView,
 			blocking: this._confData.get('is_expert') ? this.blockingView : false,
 		};
-	}
-
-	/**
-	 * For initial application load, get combined conf and tracker data for
-	 * Panel View, Summary View and, if_expert, Blocking View
-	 * @return {Object}		panel data shared by multiple views
-	 */
-	get panelView() {
-		const currentAccount = this._confData.get('account');
-		if (currentAccount && currentAccount.user) {
-			currentAccount.user.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus']);
-		}
-		this._panelView = {
-			panel: {
-				enable_ad_block: this._confData.get('enable_ad_block'),
-				enable_anti_tracking: this._confData.get('enable_anti_tracking'),
-				enable_smart_block: this._confData.get('enable_smart_block'),
-				enable_offers: this._confData.get('enable_offers'),
-				is_expanded: this._confData.get('is_expanded'),
-				is_expert: this._confData.get('is_expert'),
-				is_android: globals.BROWSER_INFO.os === 'android',
-				language: this._confData.get('language'),
-				reload_banner_status: this._confData.get('reload_banner_status'),
-				trackers_banner_status: this._confData.get('trackers_banner_status'),
-				current_theme: this._confData.get('current_theme'),
-
-				needsReload: this._trackerData.get('needsReload'),
-				smartBlock: this._trackerData.get('smartBlock'),
-				tab_id: this._trackerData.get('tab_id'),
-				unread_offer_ids: rewards.unreadOfferIds,
-
-				account: currentAccount
-			},
-			summary: this.summaryView,
-			blocking: this._confData.get('is_expert') ? this.blockingView : false,
-		};
-
-		console.log('IVZ PanelData#_panelView:');
-		console.log(this._panelView);
-
-		return this._panelView;
 	}
 
 	/**
