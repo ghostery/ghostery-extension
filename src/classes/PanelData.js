@@ -27,7 +27,6 @@ import account from './Account';
 import dispatcher from './Dispatcher';
 import { getActiveTab, flushChromeMemoryCache, processUrl } from '../utils/utils';
 import { objectEntries, log } from '../utils/common';
-import { linearRegression } from 'simple-statistics';
 
 const SYNC_SET = new Set(globals.SYNC_ARRAY);
 const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
@@ -491,43 +490,6 @@ class PanelData {
 			.set('tab_id', tab_id)
 			.set('trackerCounts', tab && foundBugs.getAppsCountByBlocked(tab_id) || {})
 			.set('smartBlock', tabInfo.getTabInfo(tab_id, 'smartBlock'));
-	}
-
-	_buildPanelInitTrackerData(tab, tab_id) {
-		this._trackerData.set('tab_id', tab_id);
-		this._buildPanelUpdateTrackerData(tab, tab_id);
-	}
-
-	_buildSummaryInitTrackerData(tab, tab_url, page_host, trackerList) {
-		this._trackerData
-			.set('pageUrl', tab_url || '')
-			.set('pageHost', page_host)
-			.set('sitePolicy', tab && policy.getSitePolicy(tab_url) || false)
-			.set('siteNotScanned', tab && !trackerList || false);
-		
-		this._buildSummaryUpdateTrackerData(tab);
-	}
-
-	/**
-	 * Update the Panel- and Summary-relevant fields of the local _trackerData map
-	 * Called whenever a new bug is found while the panel is open and the panel UI needs to be updated
-	 *
-	 * @private
-	 *
-	 * @param	{Object} tab	active tab
-	 */
-	_buildSummaryUpdateTrackerData() {
-		if (this._activeTab) return;
-
-		const { id, url } = this._activeTab;
-		const page_host = this._trackerData.get('pageHost') || url && processUrl(url).host || '';
-		const trackerList = foundBugs.getApps(id, false, url) || [];
-
-		this._trackerData
-			.set('alertCounts', foundBugs.getAppsCountByIssues(id, url) || {})
-			.set('categories', this._buildCategories(id, url, page_host, trackerList))
-			.set('performanceData', tabInfo.getTabInfo(id, 'pageTiming'))
-			.set('trackerCounts', foundBugs.getAppsCountByBlocked(id) || {});
 	}
 
 	/**
