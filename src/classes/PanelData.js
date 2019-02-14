@@ -73,6 +73,7 @@ class PanelData {
 			if (name === 'panelUIPort' && this._activeTab !== tab) {
 				this._activeTab = tab;
 				port.postMessage(this.initData);
+				account.getUserSettings().catch(err => log('Failed getting user settings from getPanelData:', err));
 			}
 
 			port.onDisconnect.addListener((p) => {
@@ -257,7 +258,7 @@ class PanelData {
 			summary: this.summaryView,
 			blocking: this._confData.get('is_expert') ? this.blockingView : false,
 		};
-	}
+	}``
 
 	/**
 	 * For initial application load, get combined conf and tracker data for

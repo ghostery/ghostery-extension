@@ -33,29 +33,38 @@ class Panel extends React.Component {
 	 */
 	componentDidMount() {
 		sendMessage('ping', 'engaged');
-		this.props.actions.getPanelData().then((data) => {
-			if (data.is_expert) {
-				// load Detail component
-				this.props.history.push('/detail');
-			}
-
-			// persist whitelist/blacklist/paused_blocking notifications in the event that the
-			// panel is openend without a page reload.
-			if (Object.keys(data.needsReload.changes).length) {
-				this.props.actions.showNotification({
-					updated: 'init',
-					reload: true,
-				});
-			}
-
-			if (data.enable_offers && data.unread_offer_ids.length > 0) {
-				sendMessage('ping', 'engaged_offer');
-			}
-		});
 
 		this.uiPort = chrome.runtime.connect({ name: 'panelUIPort' });
 		this.uiPort.onMessage.addListener((msg) => {
-			if (msg) { this.props.actions.updatePanelData(msg); }
+			if (msg) {
+				// init data, only sent when an instance of this port is first opened on a given tab
+				if (msg.summary) {
+					const { panel } = msg;
+					this.props.actions.getPanelData(panel);
+					this.props.actions.updateSummaryData(msg.summary);
+					if (msg.blocking) {this.props.actions.update.updateBlockingData(msg.blocking); }
+
+					if (panel.is_expert) {
+						// load Detail component
+						this.props.history.push('/detail');
+					}
+
+					// persist whitelist/blacklist/paused_blocking notifications in the event that the
+					// panel is openend without a page reload.
+					if (Object.keys(panel.needsReload.changes).length) {
+						this.props.actions.showNotification({
+							updated: 'init',
+							reload: true,
+						});
+					}
+
+					if (panel.enable_offers && data.unread_offer_ids.length > 0) {
+						sendMessage('ping', 'engaged_offer');
+					}
+				} else { // updated data for a tab that's been open
+					this.props.actions.updatePanelData(msg);
+				}
+			}
 		});
 	}
 

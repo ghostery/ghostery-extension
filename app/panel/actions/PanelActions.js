@@ -38,40 +38,13 @@ export function toggleCliqzFeature(featureName, isEnabled) {
 }
 
 /**
- * Fetch panel data from background, only on the initial load. Returns combined
- * Panel, Summary and Blocking data as needed.
- * @return {Object} dispatch
+ * Init Panel data
+ * @return {Object}
  */
-export function getPanelData(tabId) {
-	return function (dispatch) {
-		return sendMessageInPromise('getPanelData', {
-			tabId,
-			view: 'panel',
-		}).then((data) => {
-			// On initial load, getPanelData returns combined Panel
-			// and Summary data and dispatches to respective reducers
-			dispatch({
-				type: GET_PANEL_DATA,
-				data: data.panel,
-			});
-			dispatch({
-				type: GET_SUMMARY_DATA,
-				data: data.summary,
-			});
-			// If we're in Expert view, dispatch Blocking data to reducer
-			if (data.blocking !== false) {
-				dispatch({
-					type: GET_BLOCKING_DATA,
-					data: data.blocking,
-				});
-			}
-
-			console.log('IVZ data from original call to getPanelData:');
-			console.log(data);
-
-			// send back to Panel component as promised data
-			return data.panel;
-		});
+export function getPanelData(data) {
+	return {
+		type: GET_PANEL_DATA,
+		data: data
 	};
 }
 
