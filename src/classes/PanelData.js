@@ -45,7 +45,6 @@ class PanelData {
 	 */
 	constructor() {
 		this._confData = new Map();
-		this._trackerData = new Map();
 		this._blockingView = {};
 		this._rewardsView = {};
 		this._settingsView = {};
@@ -118,22 +117,15 @@ class PanelData {
 
 		log(`Get data for ${view} view`);
 
-		if (view === 'settings') {
-			return this.settingsView;
-		}
-		// update _trackerData with new tab info
-		this._buildTrackerData(tab);
-		switch (view) {
-			case 'panel':
-				return this.panelView;
-			case 'summary':
-				return this.summaryView;
+		switch(view) {
 			case 'blocking':
 				return this.blockingView;
 			case 'rewards':
 				return this.rewardsView;
-			default:
-				return false;
+			case 'settings':
+				return this.settingsView;
+			case 'summary':
+				return this.summaryView;
 		}
 	}
 
@@ -314,10 +306,11 @@ class PanelData {
 			expand_all_trackers: this._confData.get('expand_all_trackers'),
 			selected_app_ids: this._confData.get('selected_app_ids'),
 			show_tracker_urls: this._confData.get('show_tracker_urls'),
-			siteNotScanned: this._trackerData.get('siteNotScanned'),
 			site_specific_blocks: this._confData.get('site_specific_blocks'),
 			site_specific_unblocks: this._confData.get('site_specific_unblocks'),
 			toggle_individual_trackers: this._confData.get('toggle_individual_trackers'),
+
+			siteNoteScanned: !trackerList || false,
 			pageUrl: url,
 			categories: this._buildCategories(id, url, pageHost, trackerList)
 		};
@@ -423,35 +416,6 @@ class PanelData {
 			.set('expand_all_trackers', conf.expand_all_trackers)
 			.set('account', conf.account)
 			.set('current_theme', conf.current_theme);
-	}
-
-	/**
-	 * Build local _trackerData map. Populates all fields when the extension page is first loaded,
-	 * and updates fields relevant to the currently displayed React panel components
-	 * as new bugs are discovered during page loading
-	 *
-	 * @private
-	 *
-	 * @param	{Object} tab		active tab
-	 * @param	{string} subset		the subset of tracker data to init/update
-	 */
-	_buildTrackerData(tab) {
-		const tab_id = tab && tab.id;
-		const tab_url = tab && tab.url || '';
-		const pageHost = tab_url && processUrl(tab_url).host || '';
-		const trackerList = foundBugs.getApps(tab_id, false, tab_url) || [];
-		this._trackerData
-			.set('alertCounts', tab && foundBugs.getAppsCountByIssues(tab_id, tab_url) || {})
-			.set('categories', this._buildCategories(tab_id, tab_url, pageHost, trackerList))
-			.set('needsReload', tab && tabInfo.getTabInfo(tab_id, 'needsReload') || { changes: {} })
-			.set('pageUrl', tab_url || '')
-			.set('pageHost', pageHost)
-			.set('performanceData', tab && tabInfo.getTabInfo(tab_id, 'pageTiming'))
-			.set('sitePolicy', tab && policy.getSitePolicy(tab_url) || false)
-			.set('siteNotScanned', tab && !foundBugs.getApps(tab_id) || false)
-			.set('tab_id', tab_id)
-			.set('trackerCounts', tab && foundBugs.getAppsCountByBlocked(tab_id) || {})
-			.set('smartBlock', tabInfo.getTabInfo(tab_id, 'smartBlock'));
 	}
 
 	/**
