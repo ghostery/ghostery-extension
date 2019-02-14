@@ -68,13 +68,13 @@ class PanelData {
 
 	initUIPort(port) {
 		getActiveTab((tab) => {
-			if (!this._activeTab || this._activeTab !== tab) {
-				// sendInitialData();
+			const { name } = port;
+
+			if (name === 'panelUIPort' && this._activeTab !== tab) {
 				this._activeTab = tab;
+				port.postMessage(this.initData);
 			}
 
-			const { name } = port;
-	
 			port.onDisconnect.addListener((p) => {
 				console.log(`IVZ popup port DISCONNECTED: ${p.name}`);
 				this._uiPorts.delete(p.name);
@@ -222,6 +222,41 @@ class PanelData {
 			// if only SYNC_SET data changed _buildConfData will be called through init in dispatch
 			this._buildConfData();
 		}
+	}
+
+	get initData() {
+		const currentAccount = this._confData.get('account');
+		if (currentAccount && currentAccount.user) {
+			currentAccount.user.subscriptionPlus = account.hasScopesUnverified(['subscriptions:plus']);
+		}
+		const { id } = this._activeTab;
+		const { needsReload, smartBlock } = tabInfo.getTabInfo(id);
+		
+		return {
+			panel: {
+				enable_ad_block: this._confData.get('enable_ad_block'),
+				enable_anti_tracking: this._confData.get('enable_anti_tracking'),
+				enable_smart_block: this._confData.get('enable_smart_block'),
+				enable_offers: this._confData.get('enable_offers'),
+				is_expanded: this._confData.get('is_expanded'),
+				is_expert: this._confData.get('is_expert'),
+				is_android: globals.BROWSER_INFO.os === 'android',
+				language: this._confData.get('language'),
+				reload_banner_status: this._confData.get('reload_banner_status'),
+				trackers_banner_status: this._confData.get('trackers_banner_status'),
+				current_theme: this._confData.get('current_theme'),
+
+				needsReload,
+				smartBlock,
+				tab_id: id,
+
+				unread_offer_ids: rewards.unreadOfferIds,
+
+				account: currentAccount
+			},
+			summary: this.summaryView,
+			blocking: this._confData.get('is_expert') ? this.blockingView : false,
+		};
 	}
 
 	/**
