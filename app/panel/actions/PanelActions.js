@@ -44,7 +44,7 @@ export function toggleCliqzFeature(featureName, isEnabled) {
 export function getPanelData(data) {
 	return {
 		type: GET_PANEL_DATA,
-		data: data
+		data
 	};
 }
 

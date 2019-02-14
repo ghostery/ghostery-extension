@@ -46,7 +46,6 @@ class PanelData {
 	constructor() {
 		this._confData = new Map();
 		this._trackerData = new Map();
-		this._summaryView = {};
 		this._blockingView = {};
 		this._rewardsView = {};
 		this._settingsView = {};
@@ -70,6 +69,7 @@ class PanelData {
 
 			// first time a port is being opened for a particular tab
 			if (name === 'panelUIPort' && this._activeTab !== tab) {
+				console.log('IVZ sending initData from initUIPort');
 				this._activeTab = tab;
 				port.postMessage(this.initData);
 				account.getUserSettings().catch(err => log('Failed getting user settings from getPanelData:', err));
@@ -79,7 +79,7 @@ class PanelData {
 				console.log(`IVZ popup port DISCONNECTED: ${p.name}`);
 				this._uiPorts.delete(p.name);
 			});
-	
+
 			console.log(`IVZ popup CONNECTED with port: ${port.name}`);
 
 			this._uiPorts.set(name, port);
@@ -90,7 +90,7 @@ class PanelData {
 	updatePanelUI() {
 		if (!this._activeTab) { return; }
 
-		this.uiPorts.forEach((port) => {
+		this._uiPorts.forEach((port) => {
 			const { name } = port;
 			switch (name) {
 				case 'panelUIPort':
@@ -219,7 +219,7 @@ class PanelData {
 		}
 		const { id } = this._activeTab;
 		const { needsReload, smartBlock } = tabInfo.getTabInfo(id);
-		
+
 		return {
 			panel: {
 				enable_ad_block: this._confData.get('enable_ad_block'),
@@ -252,27 +252,37 @@ class PanelData {
 	 * @return {Object}		Summary view data
 	 */
 	get summaryView() {
-		this._summaryView = {
+		const tab = this._activeTab;
+		if (!tab) return {};
+
+		const { id, url } = tab;
+		const pageHost = url && processUrl(url).host || '';
+		const trackerList = foundBugs.getApps(id, false, url) || [];
+
+		return {
 			paused_blocking: globals.SESSION.paused_blocking,
 			paused_blocking_timeout: globals.SESSION.paused_blocking_timeout,
 			site_blacklist: this._confData.get('site_blacklist'),
 			site_whitelist: this._confData.get('site_whitelist'),
 
-			alertCounts: this._trackerData.get('alertCounts'),
-			categories: this._trackerData.get('categories'), // duplicated in blockingView, used here just for the donut
-			pageHost: this._trackerData.get('pageHost'),
-			pageUrl: this._trackerData.get('pageUrl'),
-			performanceData: this._trackerData.get('performanceData'),
-			siteNotScanned: this._trackerData.get('siteNotScanned'), // duplicated in blockingView
-			sitePolicy: this._trackerData.get('sitePolicy'),
-			trackerCounts: this._trackerData.get('trackerCounts'),
+			alertCounts: tab && foundBugs.getAppsCountByIssues(id, url) || {},
+			categories: this._buildCategories(id, url, pageHost, trackerList),
+			pageHost,
+			pageUrl: url || '',
+			performanceData: tabInfo.getTabInfo(id, 'pageTiming'),
+			siteNotScanned: !trackerList || false,
+			sitePolicy: policy.getSitePolicy(url) || false,
+			trackerCounts: foundBugs.getAppsCountByBlocked(id) || {}
 		};
-		return this._summaryView;
 	}
 
 	get panelUpdateView() {
 		const { id } = this._activeTab;
-		return { needsReload, smartBlock } = tabInfo.getTabInfo(id);
+		const { needsReload, smartBlock } = tabInfo.getTabInfo(id);
+		return {
+			needsReload,
+			smartBlock
+		};
 	}
 
 	get summaryUpdateView() {
@@ -288,12 +298,18 @@ class PanelData {
 		};
 	}
 
-
 	/**
 	 * Get conf and tracker data for Blocking View
 	 * @return {Object}		Blocking view data
 	 */
 	get blockingView() {
+		const tab = this._activeTab;
+		if (!tab) { return {}; }
+
+		const { id, url } = tab;
+		const pageHost = url && processUrl(url).host || '';
+		const trackerList = foundBugs.getApps(id, false, url) || [];
+
 		this._blockingView = {
 			expand_all_trackers: this._confData.get('expand_all_trackers'),
 			selected_app_ids: this._confData.get('selected_app_ids'),
@@ -302,8 +318,8 @@ class PanelData {
 			site_specific_blocks: this._confData.get('site_specific_blocks'),
 			site_specific_unblocks: this._confData.get('site_specific_unblocks'),
 			toggle_individual_trackers: this._confData.get('toggle_individual_trackers'),
-			pageUrl: this._trackerData.get('pageUrl'),
-			categories: this._trackerData.get('categories'),
+			pageUrl: url,
+			categories: this._buildCategories(id, url, pageHost, trackerList)
 		};
 		return this._blockingView;
 	}

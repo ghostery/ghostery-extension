@@ -39,10 +39,13 @@ class Panel extends React.Component {
 			if (msg) {
 				// init data, only sent when an instance of this port is first opened on a given tab
 				if (msg.summary) {
+					console.log('IVZ receiving init data:');
+					console.log(msg);
+
 					const { panel } = msg;
 					this.props.actions.getPanelData(panel);
 					this.props.actions.updateSummaryData(msg.summary);
-					if (msg.blocking) {this.props.actions.update.updateBlockingData(msg.blocking); }
+					if (msg.blocking) { this.props.actions.update.updateBlockingData(msg.blocking); }
 
 					if (panel.is_expert) {
 						// load Detail component
@@ -58,7 +61,7 @@ class Panel extends React.Component {
 						});
 					}
 
-					if (panel.enable_offers && data.unread_offer_ids.length > 0) {
+					if (panel.enable_offers && panel.unread_offer_ids.length > 0) {
 						sendMessage('ping', 'engaged_offer');
 					}
 				} else { // updated data for a tab that's been open
