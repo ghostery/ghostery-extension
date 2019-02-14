@@ -117,7 +117,7 @@ class PanelData {
 
 		log(`Get data for ${view} view`);
 
-		switch(view) {
+		switch (view) {
 			case 'blocking':
 				return this.blockingView;
 			case 'rewards':
@@ -126,6 +126,8 @@ class PanelData {
 				return this.settingsView;
 			case 'summary':
 				return this.summaryView;
+			default:
+				return false;
 		}
 	}
 
