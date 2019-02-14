@@ -47,6 +47,10 @@ import * as utils from './utils/utils';
 import { _getJSONAPIErrorsObject } from './utils/api';
 import { importCliqzSettings } from './utils/cliqzSettingImport';
 
+window.CLIQZ = {
+	app: cliqz,
+};
+
 // class instantiation
 const events = new Events();
 const panelData = new PanelData();
