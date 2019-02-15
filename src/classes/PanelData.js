@@ -106,7 +106,6 @@ class PanelData {
 	 */
 	set(data) {
 		let syncSetDataChanged = false;
-		let otherDataChanged = false;
 
 		if (IS_EDGE) {
 			data.enable_human_web = false;
@@ -125,8 +124,6 @@ class PanelData {
 				conf[key] = value;
 				if (SYNC_SET.has(key)) {
 					syncSetDataChanged = true;
-				} else {
-					otherDataChanged = true;
 				}
 			} else if (key === 'paused_blocking') {
 				if (typeof value === 'number') {
