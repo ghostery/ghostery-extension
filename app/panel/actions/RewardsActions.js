@@ -18,29 +18,12 @@ import {
 	SET_OFFER_READ,
 	SEND_SIGNAL
 } from '../constants/constants';
-import { sendMessageInPromise } from '../utils/msg';
 
 /**
- * Fetch rewards data from background
- * @param  {Object} tabId null
- * @return {Object}       dispatch
+ * Store rewards data fetched from background
+ * @param	{Object}	data
+ * @return	{Object}
  */
-/*
-export function getRewardsData(tabId) {
-	return function (dispatch) {
-		return sendMessageInPromise('getPanelData', {
-			tabId,
-			view: 'rewards',
-		}).then((data) => {
-			dispatch({
-				type: GET_REWARDS_DATA,
-				data,
-			});
-		});
-	};
-}
-*/
-
 export function getRewardsData(data) {
 	return {
 		type: GET_REWARDS_DATA,

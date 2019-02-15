@@ -52,9 +52,7 @@ class Rewards extends React.Component {
 		this.uiPort.onMessage.addListener((msg) => {
 			this.props.actions.getRewardsData(msg);
 		});
-		// this.props.actions.getRewardsData();
 		this.props.actions.sendSignal('hub_open');
-		// chrome.runtime.connect({ name: 'rewardsPanelPort' });
 	}
 
 	/**
