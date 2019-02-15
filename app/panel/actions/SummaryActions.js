@@ -13,6 +13,7 @@
 
 import {
 	GET_CLIQZ_MODULE_DATA,
+	GET_SUMMARY_DATA,
 	UPDATE_TRACKER_COUNTS,
 	UPDATE_GHOSTERY_PAUSED,
 	UPDATE_SITE_POLICY,
@@ -32,6 +33,17 @@ export function getCliqzModuleData() {
 				data,
 			});
 		});
+	};
+}
+
+/**
+ * Update Summary data
+ * @return {Object}
+ */
+export function updateSummaryData(data) {
+	return {
+		type: GET_SUMMARY_DATA,
+		data,
 	};
 }
 
