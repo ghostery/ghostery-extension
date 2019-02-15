@@ -1067,10 +1067,6 @@ function initializeDispatcher() {
 		utils.flushChromeMemoryCache();
 		cliqz.modules.core.action('refreshAppState');
 	});
-	dispatcher.on('conf.save.account', () => {
-		// update PanelData
-		panelData.init();
-	});
 	dispatcher.on('conf.save.enable_human_web', (enableHumanWeb) => {
 		if (!IS_EDGE && !IS_CLIQZ) {
 			setCliqzModuleEnabled(humanweb, enableHumanWeb).then(() => {
@@ -1121,8 +1117,6 @@ function initializeDispatcher() {
 
 	dispatcher.on('conf.changed.settings', _.debounce((key) => {
 		log('Conf value changed for a watched user setting:', key);
-		// Update PanelData with new Conf properties
-		panelData.init();
 	}, 200));
 
 	dispatcher.on('globals.save.paused_blocking', () => {
@@ -1846,8 +1840,6 @@ function initializeGhosteryModules() {
 	]).then(() => {
 		// run scheduledTasks on init
 		scheduledTasks();
-		// initialize panel data
-		panelData.init();
 	});
 }
 

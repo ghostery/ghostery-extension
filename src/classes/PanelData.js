@@ -34,9 +34,8 @@ const { IS_CLIQZ } = globals;
 const policy = new Policy();
 
 /**
- * Class for handling data consumed by Ghostery panel.
+ * PanelData coordinates the assembly and transmission of data to the extension panel
  * @memberOf  BackgroundClasses
- * @todo  make it a Singelton
  */
 class PanelData {
 	/**
@@ -44,18 +43,8 @@ class PanelData {
 	 * @return {Object}
 	 */
 	constructor() {
-		this._confData = new Map();
 		this._uiPorts = new Map();
 		this._activeTab = null;
-	}
-
-	/**
-	 * Initialize / update _confData after Conf has loaded. Called via
-	 * initializeGhosteryModules() and Dispatcher event `conf.changed.settings`, which
-	 * looks for changed to Globals.globals.SYNC_ARRAY values.
-	 */
-	init() {
-		this._buildConfData();
 	}
 
 	initUIPort(port) {
@@ -203,7 +192,7 @@ class PanelData {
 	}
 
 	get initData() {
-		const currentAccount = this._confData.get('account');
+		const currentAccount = conf.account;
 		if (currentAccount && currentAccount.user) {
 			currentAccount.user.subscriptionPlus = account.hasScopesUnverified(['subscriptions:plus']);
 		}
@@ -212,17 +201,17 @@ class PanelData {
 
 		return {
 			panel: {
-				enable_ad_block: this._confData.get('enable_ad_block'),
-				enable_anti_tracking: this._confData.get('enable_anti_tracking'),
-				enable_smart_block: this._confData.get('enable_smart_block'),
-				enable_offers: this._confData.get('enable_offers'),
-				is_expanded: this._confData.get('is_expanded'),
-				is_expert: this._confData.get('is_expert'),
+				enable_ad_block: conf.enable_ad_block,
+				enable_anti_tracking: conf.enable_anti_tracking,
+				enable_smart_block: conf.enable_smart_block,
+				enable_offers: conf.enable_offers,
+				is_expanded: conf.is_expanded,
+				is_expert: conf.is_expert,
 				is_android: globals.BROWSER_INFO.os === 'android',
-				language: this._confData.get('language'),
-				reload_banner_status: this._confData.get('reload_banner_status'),
-				trackers_banner_status: this._confData.get('trackers_banner_status'),
-				current_theme: this._confData.get('current_theme'),
+				language: conf.language,
+				reload_banner_status: conf.reload_banner_status,
+				trackers_banner_status: conf.trackers_banner_status,
+				current_theme: conf.current_theme,
 
 				needsReload,
 				smartBlock,
@@ -233,7 +222,7 @@ class PanelData {
 				account: currentAccount
 			},
 			summary: this.summaryView,
-			blocking: this._confData.get('is_expert') ? this.blockingView : false,
+			blocking: conf.is_expert ? this.blockingView : false,
 		};
 	}
 
@@ -252,8 +241,8 @@ class PanelData {
 		return {
 			paused_blocking: globals.SESSION.paused_blocking,
 			paused_blocking_timeout: globals.SESSION.paused_blocking_timeout,
-			site_blacklist: this._confData.get('site_blacklist'),
-			site_whitelist: this._confData.get('site_whitelist'),
+			site_blacklist: conf.site_blacklist,
+			site_whitelist: conf.site_whitelist,
 
 			alertCounts: tab && foundBugs.getAppsCountByIssues(id, url) || {},
 			categories: this._buildCategories(id, url, pageHost, trackerList),
@@ -299,15 +288,22 @@ class PanelData {
 		const { id, url } = tab;
 		const pageHost = url && processUrl(url).host || '';
 		const trackerList = foundBugs.getApps(id, false, url) || [];
+		const {
+			expand_all_trackers,
+			selected_app_ids,
+			show_tracker_urls,
+			site_specific_blocks,
+			site_specific_unblocks,
+			toggle_individual_trackers
+		} = conf;
 
 		return {
-			expand_all_trackers: this._confData.get('expand_all_trackers'),
-			selected_app_ids: this._confData.get('selected_app_ids'),
-			show_tracker_urls: this._confData.get('show_tracker_urls'),
-			site_specific_blocks: this._confData.get('site_specific_blocks'),
-			site_specific_unblocks: this._confData.get('site_specific_unblocks'),
-			toggle_individual_trackers: this._confData.get('toggle_individual_trackers'),
-
+			expand_all_trackers,
+			selected_app_ids,
+			show_tracker_urls,
+			site_specific_blocks,
+			site_specific_unblocks,
+			toggle_individual_trackers,
 			siteNoteScanned: !trackerList || false,
 			pageUrl: url,
 			categories: this._buildCategories(id, url, pageHost, trackerList)
@@ -320,7 +316,7 @@ class PanelData {
 	 */
 	get rewardsView() {
 		return {
-			enable_offers: this._confData.get('enable_offers'),
+			enable_offers: conf.enable_offers,
 			rewards: rewards.storedOffers,
 			unread_offer_ids: rewards.unreadOfferIds,
 		};
@@ -333,32 +329,35 @@ class PanelData {
 	 */
 	get settingsView() {
 		return {
-			alert_bubble_pos: this._confData.get('alert_bubble_pos'),
-			alert_bubble_timeout: this._confData.get('alert_bubble_timeout'),
-			block_by_default: this._confData.get('block_by_default'),
-			bugs_last_updated: this._confData.get('bugs_last_updated'),
-			categories: this._confData.get('categories'),
-			enable_autoupdate: this._confData.get('enable_autoupdate'),
-			enable_click2play: this._confData.get('enable_click2play'),
-			enable_click2play_social: this._confData.get('enable_click2play_social'),
-			enable_human_web: this._confData.get('enable_human_web'),
-			enable_offers: this._confData.get('enable_offers'),
-			enable_metrics: this._confData.get('enable_metrics'),
-			hide_alert_trusted: this._confData.get('hide_alert_trusted'),
-			ignore_first_party: this._confData.get('ignore_first_party'),
-			notify_library_updates: this._confData.get('notify_library_updates'),
-			notify_upgrade_updates: this._confData.get('notify_upgrade_updates'),
-			offer_human_web: this._confData.get('offer_human_web'),
-			selected_app_ids: this._confData.get('selected_app_ids'),
-			new_app_ids: this._confData.get('new_app_ids'),
-			settings_last_imported: this._confData.get('settings_last_imported'),
-			settings_last_exported: this._confData.get('settings_last_exported'),
-			show_alert: this._confData.get('show_alert'),
-			show_badge: this._confData.get('show_badge'),
-			show_cmp: this._confData.get('show_cmp'),
-			show_tracker_urls: this._confData.get('show_tracker_urls'),
-			toggle_individual_trackers: this._confData.get('toggle_individual_trackers'),
-			language: this._confData.get('language'), // required for the setup page that does not have access to panelView data
+			// custom
+			categories: this._buildGlobalCategories(),
+			offer_human_web: !IS_EDGE,
+
+			// properties on conf
+			alert_bubble_pos: conf.alert_bubble_pos,
+			alert_bubble_timeout: conf.alert_bubble_timeout,
+			block_by_default: conf.block_by_default,
+			bugs_last_updated: conf.bugs_last_updated,   
+			enable_autoupdate: conf.enable_autoupdate,
+			enable_click2play: conf.enable_click2play,
+			enable_click2play_social: conf.enable_click2play_social,
+			enable_human_web: conf.enable_human_web,
+			enable_offers: conf.enable_offers,
+			enable_metrics: conf.enable_metrics,
+			hide_alert_trusted: conf.hide_alert_trusted,
+			ignore_first_party: conf.ignore_first_party,
+			notify_library_updates: conf.notify_library_updates,
+			notify_upgrade_updates: conf.notify_upgrade_updates,
+			selected_app_ids: conf.selected_app_ids,
+			new_app_ids: conf.new_app_ids,
+			settings_last_imported: conf.settings_last_imported,
+			settings_last_exported: conf.settings_last_exported,
+			show_alert: conf.show_alert,
+			show_badge: conf.show_badge,
+			show_cmp: conf.show_cmp,
+			show_tracker_urls: conf.show_tracker_urls,
+			toggle_individual_trackers: conf.toggle_individual_trackers,
+			language: conf.language // required for the setup page that does not have access to panelView data
 		};
 	}
 
@@ -445,12 +444,12 @@ class PanelData {
 	 * @return {array} 					array of categories
 	 */
 	_buildCategories(tab_id, tab_url, pageHost, trackerList) {
-		const selectedAppIds = this._confData.get('selected_app_ids');
-		const pageUnblocks = this._confData.get('site_specific_unblocks')[pageHost] || [];
-		const pageBlocks = this._confData.get('site_specific_blocks')[pageHost] || [];
+		const selectedAppIds = conf.selected_app_ids;
+		const pageUnblocks = conf.site_specific_unblocks[pageHost] || [];
+		const pageBlocks = conf.site_specific_blocks[pageHost] || [];
 		const categories = {};
 		const categoryArray = [];
-		const smartBlockActive = this._confData.get('enable_smart_block');
+		const smartBlockActive = conf.enable_smart_block;
 		const smartBlock = tabInfo.getTabInfo(tab_id, 'smartBlock');
 
 		trackerList.forEach((tracker) => {
