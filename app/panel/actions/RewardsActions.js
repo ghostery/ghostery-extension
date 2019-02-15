@@ -25,6 +25,7 @@ import { sendMessageInPromise } from '../utils/msg';
  * @param  {Object} tabId null
  * @return {Object}       dispatch
  */
+/*
 export function getRewardsData(tabId) {
 	return function (dispatch) {
 		return sendMessageInPromise('getPanelData', {
@@ -36,6 +37,14 @@ export function getRewardsData(tabId) {
 				data,
 			});
 		});
+	};
+}
+*/
+
+export function getRewardsData(data) {
+	return {
+		type: GET_REWARDS_DATA,
+		data
 	};
 }
 

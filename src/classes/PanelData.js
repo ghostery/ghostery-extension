@@ -63,6 +63,10 @@ class PanelData {
 				port.postMessage(this.settingsView);
 			}
 
+			if (name === 'rewardsUIPort') {
+				port.postMessage(this.rewardsView);
+			}
+
 			port.onDisconnect.addListener((p) => {
 				console.log(`IVZ popup port DISCONNECTED: ${p.name}`);
 				this._uiPorts.delete(p.name);

@@ -1601,21 +1601,20 @@ function initializeEventListeners() {
 	// Fired when a message is sent from either an extension process (by runtime.sendMessage) or a content script (by tabs.sendMessage).
 	onMessage.addListener(onMessageHandler);
 
-	// Ports are used to transmit data to extension panel components
+	// These ports transmit data to panel extension components in response to
+	// user navigation between panel components and to changes in the background data,
+	// making the extension UI dynamic
 	chrome.runtime.onConnect.addListener((port) => {
-		if (!port) return;
+		const portNames = [
+			'blockingUIPort',
+			'panelUIPort',
+			'rewardsUIPort',
+			'settingsUIPort',
+			'summaryUIPort'
+		];
 
-		const { name } = port;
-
-		if (name === 'blockingUIPort' || name === 'panelUIPort' || name === 'settingsUIPort' || name === 'summaryUIPort') {
+		if (portNames.includes(port.name)) {
 			panelData.initUIPort(port);
-			return;
-		}
-
-		if (name === 'rewardsPanelPort') {
-			rewards.panelPort = port;
-			// Fired when panel is disconnected
-			rewards.panelPort.onDisconnect.addListener(rewards.panelHubClosedListener);
 		}
 	});
 
