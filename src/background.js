@@ -1605,7 +1605,7 @@ function initializeEventListeners() {
 	chrome.runtime.onConnect.addListener((port) => {
 		if (!port) return;
 
-		if (port.name === 'panelUIPort' || port.name === 'summaryUIPort') {
+		if (port.name === 'panelUIPort' || port.name === 'summaryUIPort' || port.name === 'blockingUIPort') {
 			panelData.initUIPort(port);
 			return;
 		}
