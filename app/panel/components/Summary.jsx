@@ -271,8 +271,6 @@ class Summary extends React.Component {
 	* @return {JSX} JSX for rendering the Summary View of the panel
 	*/
 	render() {
-		console.log('IVZ Summary#render called');
-
 		const { abPause } = this.state;
 		const {
 			is_expert,

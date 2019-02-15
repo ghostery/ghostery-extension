@@ -180,8 +180,6 @@ class Panel extends React.Component {
 	 * @return {JSX} JSX for rendering the Panel
 	 */
 	render() {
-		console.log('IVZ Panel#render called');
-
 		// this prevents double rendering when waiting for getPanelData() to finish
 		if (!this.props.initialized) {
 			return null;
