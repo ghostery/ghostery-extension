@@ -56,7 +56,7 @@ class PanelData {
 				console.log('IVZ sending initData from initUIPort');
 				this._activeTab = tab;
 				port.postMessage(this.initData);
-				account.getUserSettings().catch(err => log('Failed getting user settings from getPanelData:', err));
+				account.getUserSettings().catch(err => log('Failed getting user settings from PanelData#initUIPort:', err));
 			}
 
 			if (name === 'settingsUIPort') {
