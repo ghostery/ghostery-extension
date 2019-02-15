@@ -56,8 +56,6 @@ class Settings extends React.Component {
 		this.uiPort.onMessage.addListener((msg) => {
 			this.props.actions.getSettingsData(msg);
 		});
-
-		// this.props.actions.getSettingsData();
 	}
 
 	/**
