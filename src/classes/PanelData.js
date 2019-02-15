@@ -355,56 +355,6 @@ class PanelData {
 		};
 	}
 
-	// TODO would accessing conf directly be simpler than using this mirror (except for categories) data structure?
-	/**
-	 * Build local _confData map. Called during init() and when Conf updates
-	 * @private
-	 */
-	_buildConfData() {
-		this._confData
-			.set('alert_bubble_pos', conf.alert_bubble_pos)
-			.set('alert_bubble_timeout', conf.alert_bubble_timeout)
-			.set('block_by_default', conf.block_by_default)
-			.set('bugs_last_updated', conf.bugs_last_updated)
-			.set('categories', this._buildGlobalCategories())
-			.set('enable_ad_block', conf.enable_ad_block)
-			.set('enable_anti_tracking', conf.enable_anti_tracking)
-			.set('enable_autoupdate', conf.enable_autoupdate)
-			.set('enable_click2play', conf.enable_click2play)
-			.set('enable_click2play_social', conf.enable_click2play_social)
-			.set('enable_human_web', conf.enable_human_web)
-			.set('enable_metrics', conf.enable_metrics)
-			.set('enable_offers', conf.enable_offers)
-			.set('enable_smart_block', conf.enable_smart_block)
-			.set('hide_alert_trusted', conf.hide_alert_trusted)
-			.set('ignore_first_party', conf.ignore_first_party)
-			.set('is_expanded', conf.is_expanded)
-			.set('is_expert', conf.is_expert)
-			.set('language', conf.language)
-			.set('notify_library_updates', conf.notify_library_updates)
-			.set('notify_upgrade_updates', conf.notify_upgrade_updates)
-			.set('offer_human_web', !IS_EDGE)
-			.set('paused_blocking', globals.SESSION.paused_blocking)
-			.set('reload_banner_status', conf.reload_banner_status)
-			.set('selected_app_ids', conf.selected_app_ids)
-			.set('new_app_ids', conf.new_app_ids)
-			.set('settings_last_imported', conf.settings_last_imported)
-			.set('settings_last_exported', conf.settings_last_exported)
-			.set('show_alert', conf.show_alert)
-			.set('show_badge', conf.show_badge)
-			.set('show_cmp', conf.show_cmp)
-			.set('show_tracker_urls', conf.show_tracker_urls)
-			.set('site_blacklist', conf.site_blacklist)
-			.set('site_specific_blocks', conf.site_specific_blocks)
-			.set('site_specific_unblocks', conf.site_specific_unblocks)
-			.set('site_whitelist', conf.site_whitelist)
-			.set('toggle_individual_trackers', conf.toggle_individual_trackers)
-			.set('trackers_banner_status', conf.trackers_banner_status)
-			.set('expand_all_trackers', conf.expand_all_trackers)
-			.set('account', conf.account)
-			.set('current_theme', conf.current_theme);
-	}
-
 	/**
 	 * Build category array for all trackers in DB. Used in Settings > Global Blocking
 	 * @private
