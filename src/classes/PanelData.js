@@ -43,6 +43,11 @@ class PanelData {
 		this._activeTab = null;
 	}
 
+	/**
+	 * Invoked from background.js when Panel, Summary, Blocking, and/or Rewards React components
+	 * initiate a port connection to the background in their componentDidMount lifecycle events
+	 * @param 	{Object}	port	the port object that the chrome.runtime API passes to the onConnect listener in background.js
+	 */
 	initUIPort(port) {
 		getActiveTab((tab) => {
 			const { name } = port;
@@ -70,6 +75,9 @@ class PanelData {
 		});
 	}
 
+	/**
+	 * Invoked in EventHandlers as part of onBeforeRequest handling
+	 */
 	updatePanelUI() {
 		if (!this._activeTab) { return; }
 
