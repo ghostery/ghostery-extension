@@ -76,14 +76,7 @@ class Summary extends React.Component {
 
 		this.uiPort = chrome.runtime.connect({ name: 'summaryUIPort' });
 		this.uiPort.onMessage.addListener((msg) => {
-			// this.props.actions.getPanelData();
-			// this.props.actions.getCliqzModuleData();
-			if (msg) {
-				this.props.actions.updateSummaryData(msg);
-				// if (msg.panel) { this.props.actions.updatePanelData(msg.panel); }
-				// if (msg.summary) { this.props.actions.updateSummaryData(msg.summary); }
-				// if (msg.blocking) { this.props.actions.updateBlockingData(msg.blocking); }
-			}
+			this.props.actions.updateSummaryData(msg);
 		});
 	}
 
