@@ -28,8 +28,8 @@ phases:
       - yarn install --silent
       - echo "[projects]" >> C:\Users\ContainerAdministrator\.moabconfig
       - echo "  [projects.ghostery-extension]" >> C:\Users\ContainerAdministrator\.moabconfig
-      - echo "    edge_makepri_path = """C:\Program Files (x86)\Windows Kits\8.1\bin\x64\makepri.exe"" >> C:\Users\ContainerAdministrator\.moabconfig
-      - echo "    edge_makeappx_path = """C:\Program Files (x86)\Windows Kits\8.1\bin\x64\makeappx.exe"" >> C:\Users\ContainerAdministrator\.moabconfig
+      - echo "    edge_makepri_path = ""C:\Program Files (x86)\Windows Kits\8.1\bin\x64\makepri.exe""" >> C:\Users\ContainerAdministrator\.moabconfig
+      - echo "    edge_makeappx_path = ""C:\Program Files (x86)\Windows Kits\8.1\bin\x64\makeappx.exe""" >> C:\Users\ContainerAdministrator\.moabconfig
       - type C:\Users\ContainerAdministrator\.moabconfig
   build:
     commands:
