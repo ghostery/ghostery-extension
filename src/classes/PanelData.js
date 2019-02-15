@@ -244,7 +244,9 @@ class PanelData {
 			site_blacklist: conf.site_blacklist,
 			site_whitelist: conf.site_whitelist,
 
+			// TODO substitute return value from summaryUpdateView for part of this to avoid code duplication
 			alertCounts: tab && foundBugs.getAppsCountByIssues(id, url) || {},
+			// TODO memoize the result of this._buildCategories ?
 			categories: this._buildCategories(id, url, pageHost, trackerList),
 			pageHost,
 			pageUrl: url || '',
@@ -288,22 +290,14 @@ class PanelData {
 		const { id, url } = tab;
 		const pageHost = url && processUrl(url).host || '';
 		const trackerList = foundBugs.getApps(id, false, url) || [];
-		const {
-			expand_all_trackers,
-			selected_app_ids,
-			show_tracker_urls,
-			site_specific_blocks,
-			site_specific_unblocks,
-			toggle_individual_trackers
-		} = conf;
 
 		return {
-			expand_all_trackers,
-			selected_app_ids,
-			show_tracker_urls,
-			site_specific_blocks,
-			site_specific_unblocks,
-			toggle_individual_trackers,
+			expand_all_trackers: conf.expand_all_trackers,
+			selected_app_ids: conf.selected_app_ids,
+			show_tracker_urls: conf.show_tracker_urls,
+			site_specific_blocks: conf.site_specific_blocks,
+			site_specific_unblocks: conf.site_specific_unblocks,
+			toggle_individual_trackers: conf.toggle_individual_trackers,
 			siteNoteScanned: !trackerList || false,
 			pageUrl: url,
 			categories: this._buildCategories(id, url, pageHost, trackerList)
@@ -337,7 +331,7 @@ class PanelData {
 			alert_bubble_pos: conf.alert_bubble_pos,
 			alert_bubble_timeout: conf.alert_bubble_timeout,
 			block_by_default: conf.block_by_default,
-			bugs_last_updated: conf.bugs_last_updated,   
+			bugs_last_updated: conf.bugs_last_updated,
 			enable_autoupdate: conf.enable_autoupdate,
 			enable_click2play: conf.enable_click2play,
 			enable_click2play_social: conf.enable_click2play_social,
@@ -479,7 +473,7 @@ class PanelData {
 					num_total: 1,
 					num_blocked: (ss_blocked || sb_blocked || (blocked && !ss_allowed && !sb_allowed)) ? 1 : 0,
 					trackers: [],
-					expanded: this._confData.get('expand_all_trackers')
+					expanded: conf.expand_all_trackers
 				};
 			}
 			categories[category].trackers.push({
