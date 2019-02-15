@@ -38,10 +38,6 @@ const policy = new Policy();
  * @memberOf  BackgroundClasses
  */
 class PanelData {
-	/**
-	 * Create private instance varialbes for use behind public setters
-	 * @return {Object}
-	 */
 	constructor() {
 		this._uiPorts = new Map();
 		this._activeTab = null;
