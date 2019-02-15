@@ -37,6 +37,7 @@ import globals from '../../../src/classes/Globals';
  * Fetch settings data from background
  * @return {Object} dispatch
  */
+/*
 export function getSettingsData() {
 	return function (dispatch) {
 		return sendMessageInPromise('getPanelData', {
@@ -47,6 +48,14 @@ export function getSettingsData() {
 				data,
 			});
 		});
+	};
+}
+*/
+
+export function getSettingsData(data) {
+	return {
+		type: GET_SETTINGS_DATA,
+		data
 	};
 }
 

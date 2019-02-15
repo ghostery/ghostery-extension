@@ -59,6 +59,10 @@ class PanelData {
 				account.getUserSettings().catch(err => log('Failed getting user settings from getPanelData:', err));
 			}
 
+			if (name === 'settingsUIPort') {
+				port.postMessage(this.settingsView);
+			}
+
 			port.onDisconnect.addListener((p) => {
 				console.log(`IVZ popup port DISCONNECTED: ${p.name}`);
 				this._uiPorts.delete(p.name);
@@ -110,7 +114,7 @@ class PanelData {
 				return this.blockingView;
 			case 'rewards':
 				return this.rewardsView;
-			case 'settings':
+			case 'settings': // no longer used
 				return this.settingsView;
 			case 'summary': // no longer used
 				return this.summaryView;

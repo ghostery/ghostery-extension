@@ -47,11 +47,24 @@ class Settings extends React.Component {
 	componentWillMount() {
 		this.props.history.push('/settings/globalblocking');
 	}
+
 	/**
 	 * Lifecycle event. Triggers action which delivers settings data.
 	 */
 	componentDidMount() {
-		this.props.actions.getSettingsData();
+		this.uiPort = chrome.runtime.connect({ name: 'settingsUIPort' });
+		this.uiPort.onMessage.addListener((msg) => {
+			this.props.actions.getSettingsData(msg);
+		});
+
+		// this.props.actions.getSettingsData();
+	}
+
+	/**
+	 * Lifecycle event
+	 */
+	componentWillUnmount() {
+		this.uiPort.disconnect();
 	}
 
 	GlobalBlockingComponent = () => (<GlobalBlocking toggleCheckbox={this.toggleCheckbox} settingsData={this.props} actions={this.props.actions} showToast={this.showToast} language={this.props.language} />);
