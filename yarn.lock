@@ -343,9 +343,9 @@
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/@cliqz-oss/dexie/-/dexie-2.0.4.tgz#0e710504e2b9198baa9b046abd3a82731b94d56e"
 
-"@cliqz/adblocker@^0.6.8":
-  version "0.6.8"
-  resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-0.6.8.tgz#e4ad16d23d2169041d73465fa141911553fab040"
+"@cliqz/adblocker@0.6.9", "@cliqz/adblocker@^0.6.8":
+  version "0.6.9"
+  resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-0.6.9.tgz#ffe2655f56eb7a73c743d12de6f51826aed36c4e"
   dependencies:
     punycode "^2.1.1"
     tslib "^1.9.3"
@@ -1098,9 +1098,9 @@ brorand@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
 
-"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.33/7.33.0.ee3ca3b.tgz":
+"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.33/7.33.0.504d19a.tgz":
   version "7.33.0"
-  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.33/7.33.0.ee3ca3b.tgz#219e2ac0140c44cdf3dd718edae5ba2f9a1e0359"
+  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.33/7.33.0.504d19a.tgz#141354203c2fa312d20b1b03dfb6d16624723d4f"
   dependencies:
     "@cliqz-oss/dexie" "^2.0.4"
     "@cliqz/adblocker" "^0.6.8"
