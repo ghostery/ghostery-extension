@@ -102,33 +102,6 @@ class PanelData {
 	}
 
 	/**
-	 * Get PanelData for a specific view/tab
-	 * @param  {string} view 	panel view name
-	 * @param  {Object} tab 	tab
-	 * @return {Object}      	view data
-	 */
-	// TODO not using this for initial panel data retrieval anymore, so see if we can unplug it from the rest and remove it altogether
-	get(view, tab) {
-		console.log('IVZ tab passed to PanelData#get:');
-		console.log(tab);
-
-		log(`Get data for ${view} view`);
-
-		switch (view) {
-			case 'blocking': // no longer used
-				return this.blockingView;
-			case 'rewards':
-				return this.rewardsView;
-			case 'settings': // no longer used
-				return this.settingsView;
-			case 'summary': // no longer used
-				return this.summaryView;
-			default:
-				return false;
-		}
-	}
-
-	/**
 	 * Update Conf properties with new data from the UI.
 	 * Called via setPanelData message.
 	 * @param  {Object} data
