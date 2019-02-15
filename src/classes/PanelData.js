@@ -194,7 +194,7 @@ class PanelData {
 	get initData() {
 		const currentAccount = conf.account;
 		if (currentAccount && currentAccount.user) {
-			currentAccount.user.subscriptionPlus = account.hasScopesUnverified(['subscriptions:plus']);
+			currentAccount.user.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus']);
 		}
 		const { id } = this._activeTab;
 		const { needsReload, smartBlock } = tabInfo.getTabInfo(id);
