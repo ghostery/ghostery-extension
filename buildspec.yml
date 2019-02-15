@@ -5,16 +5,10 @@ phases:
     commands:
       - echo $Env:CODEBUILD_SRC_DIR_moab
       - echo $CODEBUILD_SRC_DIR_moab
-      - dir $Env:CODEBUILD_SRC_DIR_moab
-      - dir ${CODEBUILD_SRC_DIR_moab}
       - powershell -ExecutionPolicy unrestricted -Command "Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"
       # - choco install -y yarn
-      - dir "C:\Program Files (x86)\"
       - choco install -y googlechrome
-      - dir "C:\Program Files (x86)\Google\"
       - choco install -y opera
-      - dir "C:\Program Files (x86)\"
-      - dir "C:\Program Files\"
       # - $env:Path += ";C:\Program Files (x86)\Yarn\bin\"
       # - echo $env:Path
       # - $Env:PATH += ";C:\Program Files (x86)\Yarn\bin\"
