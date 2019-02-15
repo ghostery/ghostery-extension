@@ -48,9 +48,13 @@ class Rewards extends React.Component {
 	 * Lifecycle event
 	 */
 	componentDidMount() {
-		this.props.actions.getRewardsData();
+		this.uiPort = chrome.runtime.connect({ name: 'rewardsUIPort' });
+		this.uiPort.onMessage.addListener((msg) => {
+			this.props.actions.getRewardsData(msg);
+		});
+		// this.props.actions.getRewardsData();
 		this.props.actions.sendSignal('hub_open');
-		chrome.runtime.connect({ name: 'rewardsPanelPort' });
+		// chrome.runtime.connect({ name: 'rewardsPanelPort' });
 	}
 
 	/**

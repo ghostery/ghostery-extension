@@ -65,6 +65,7 @@ class PanelData {
 
 			if (name === 'rewardsUIPort') {
 				port.postMessage(this.rewardsView);
+				port.onDisconnect.addListener(rewards.panelHubClosedListener);
 			}
 
 			port.onDisconnect.addListener((p) => {
