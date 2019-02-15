@@ -190,12 +190,6 @@ class PanelData {
 			// Push conf changes to the server
 			account.saveUserSettings().catch(err => log('PanelData saveUserSettings', err));
 		}
-
-		if (otherDataChanged) {
-			// update local _confData.
-			// if only SYNC_SET data changed _buildConfData will be called through init in dispatch
-			this._buildConfData();
-		}
 	}
 
 	get initData() {
