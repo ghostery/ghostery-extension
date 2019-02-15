@@ -51,32 +51,26 @@ class PanelData {
 		getActiveTab((tab) => {
 			const { name } = port;
 
-			// first time a port is being opened for a particular tab
-			if (name === 'panelUIPort' && this._activeTab !== tab) {
-				console.log('IVZ sending initData from initUIPort');
-				this._activeTab = tab;
-				port.postMessage(this.initData);
-				account.getUserSettings().catch(err => log('Failed getting user settings from PanelData#initUIPort:', err));
+			switch (name) {
+				case 'panelUIPort':
+					this._activeTab = tab;
+					port.postMessage(this.initData);
+					account.getUserSettings().catch(err => log('Failed getting user settings from PanelData#initUIPort:', err));
+					break;
+				case 'rewardsUIPort':
+					port.postMessage(this.rewardsView);
+					port.onDisconnect.addListener(rewards.panelHubClosedListener);
+					break;
+				case 'settingsUIPort':
+					port.postMessage(this.settingsView);
+					break;
+				default:
+					break;
 			}
 
-			if (name === 'settingsUIPort') {
-				port.postMessage(this.settingsView);
-			}
-
-			if (name === 'rewardsUIPort') {
-				port.postMessage(this.rewardsView);
-				port.onDisconnect.addListener(rewards.panelHubClosedListener);
-			}
-
-			port.onDisconnect.addListener((p) => {
-				console.log(`IVZ popup port DISCONNECTED: ${p.name}`);
-				this._uiPorts.delete(p.name);
-			});
-
-			console.log(`IVZ popup CONNECTED with port: ${port.name}`);
+			port.onDisconnect.addListener((p) => { this._uiPorts.delete(p.name); });
 
 			this._uiPorts.set(name, port);
-			this._uiPorts.get(name).postMessage('BANANAS FOSTER to you from background!');
 		});
 	}
 
