@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 import {
-	GET_PANEL_DATA, GET_BLOCKING_DATA,
+	GET_PANEL_DATA,
 	UPDATE_PANEL_DATA,
 	TOGGLE_CLIQZ_FEATURE,
 	SHOW_NOTIFICATION,
@@ -55,17 +55,6 @@ export function getPanelData(data) {
 export function updatePanelData(data) {
 	return {
 		type: UPDATE_PANEL_DATA,
-		data,
-	};
-}
-
-/**
- * Update Blocking data
- * @return {Object}
- */
-export function updateBlockingData(data) {
-	return {
-		type: GET_BLOCKING_DATA,
 		data,
 	};
 }

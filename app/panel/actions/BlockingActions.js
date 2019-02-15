@@ -21,12 +21,14 @@ import {
 	TOGGLE_EXPAND_ALL,
 	TOGGLE_EXPAND_CATEGORY
 } from '../constants/constants';
-import { sendMessageInPromise } from '../utils/msg';
+// import { sendMessageInPromise } from '../utils/msg';
+
 
 /**
 * Fetch blocking data from background
 * @return {Object} dispatch
 */
+/*
 export function getBlockingData(tabId) {
 	return function (dispatch) {
 		return sendMessageInPromise('getPanelData', {
@@ -38,6 +40,18 @@ export function getBlockingData(tabId) {
 				data,
 			});
 		});
+	};
+}
+*/
+
+/**
+ * Update Blocking data
+ * @return {Object}
+ */
+export function updateBlockingData(data) {
+	return {
+		type: GET_BLOCKING_DATA,
+		data,
 	};
 }
 

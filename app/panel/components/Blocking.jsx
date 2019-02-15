@@ -40,12 +40,16 @@ class Blocking extends React.Component {
 	 * Lifecycle event
 	 */
 	componentDidMount() {
+		this.uiPort = chrome.runtime.connect({ name: 'blockingUIPort' });
+		this.uiPort.onMessage.addListener((msg) => {
+			this.props.actions.updateBlockingData(msg);
+		});
 		// We only need to fetch blocking data directly on instances where the user swtiches between
 		// simple and expert view. Otherwise, it's fetched via Panel. Here, we check for properties that
 		// are returned by PanelData::blockingView()
-		if (this.props.categories.length === 0 && typeof this.props.toggle_individual_trackers === 'undefined') {
-			this.props.actions.getBlockingData();
-		}
+		// if (this.props.categories.length === 0 && typeof this.props.toggle_individual_trackers === 'undefined') {
+		//	this.props.actions.getBlockingData();
+		// }
 	}
 	/**
 	 * Lifecycle event
@@ -71,6 +75,14 @@ class Blocking extends React.Component {
 		const smartBlock = this.props.smartBlockActive && this.props.smartBlock || { blocked: {}, unblocked: {} };
 		updateSummaryBlockingCount(this.props.categories, smartBlock, this.props.actions.updateTrackerCounts);
 	}
+
+	/**
+	 * Lifecycle event
+	 */
+	componentWillUnmount() {
+		this.uiPort.disconnect();
+	}
+
 	/**
 	* Filter trackers by category, or reset filters. Trigger action.
 	* @param  {string} filterName

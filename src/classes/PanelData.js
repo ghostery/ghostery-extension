@@ -77,6 +77,9 @@ class PanelData {
 		this._uiPorts.forEach((port) => {
 			const { name } = port;
 			switch (name) {
+				case 'blockingUIPort':
+					port.postMessage(this.blockingView);
+					break;
 				case 'panelUIPort':
 					port.postMessage(this.panelUpdateView);
 					break;
