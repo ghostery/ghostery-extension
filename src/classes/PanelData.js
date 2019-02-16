@@ -138,12 +138,6 @@ class PanelData {
 					setTimeout(() => {
 						globals.SESSION.paused_blocking = false;
 						_pausedBlockingHelper();
-						/*
-						// update button
-						button.update();
-						flushChromeMemoryCache();
-						dispatcher.trigger('globals.save.paused_blocking');
-						*/
 					}, value);
 				} else {
 					// toggle blocking
@@ -152,12 +146,6 @@ class PanelData {
 				}
 
 				_pausedBlockingHelper();
-				/*
-				// update button
-				button.update();
-				flushChromeMemoryCache();
-				dispatcher.trigger('globals.save.paused_blocking');
-				*/
 			}
 		}
 
