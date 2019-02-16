@@ -116,6 +116,12 @@ class PanelData {
 			data.enable_anti_tracking = false;
 		}
 
+		const _pausedBlockingHelper = () => {
+			button.update();
+			flushChromeMemoryCache();
+			dispatcher.trigger('globals.save.paused_blocking');
+		};
+
 		// Set the conf from data
 		for (const [key, value] of objectEntries(data)) {
 			if (conf.hasOwnProperty(key) && !_.isEqual(conf[key], value)) {
@@ -131,10 +137,13 @@ class PanelData {
 					// enable after timeout
 					setTimeout(() => {
 						globals.SESSION.paused_blocking = false;
+						_pausedBlockingHelper();
+						/*
 						// update button
 						button.update();
 						flushChromeMemoryCache();
 						dispatcher.trigger('globals.save.paused_blocking');
+						*/
 					}, value);
 				} else {
 					// toggle blocking
@@ -142,10 +151,13 @@ class PanelData {
 					globals.SESSION.paused_blocking_timeout = 0;
 				}
 
+				_pausedBlockingHelper();
+				/*
 				// update button
 				button.update();
 				flushChromeMemoryCache();
 				dispatcher.trigger('globals.save.paused_blocking');
+				*/
 			}
 		}
 
