@@ -107,13 +107,11 @@ class PanelData {
 	set(data) {
 		let syncSetDataChanged = false;
 
-		if (IS_EDGE) {
+		if (IS_EDGE || IS_CLIQZ) {
 			data.enable_human_web = false;
 			data.enable_offers = false;
 		}
 		if (IS_CLIQZ) {
-			data.enable_human_web = false;
-			data.enable_offers = false;
 			data.enable_ad_block = false;
 			data.enable_anti_tracking = false;
 		}
