@@ -16,6 +16,7 @@
 
 import _ from 'underscore';
 import button from './BrowserButton';
+import cliqz from './Cliqz';
 import conf from './Conf';
 import foundBugs from './FoundBugs';
 import bugDb from './BugDb';
@@ -43,6 +44,32 @@ class PanelData {
 		this._activeTab = null;
 	}
 
+	_sendCliqzModulesData(port) {
+		const modules = { adblock: {}, antitracking: {} };
+		const { id: tabId } = this._activeTab;
+
+		// TODO move this, this does not belong in this class
+		button.update();
+
+		if (conf.enable_ad_block) {
+			// update adblock count. callback() handled below based on anti-tracking status
+			modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tabId) || {};
+		}
+
+		if (conf.enable_anti_tracking) {
+			cliqz.modules.antitracking.background.actions.aggregatedBlockingStats(tabId).then((data) => {
+				console.log('IVZ antitracking cliqz module data:');
+				console.log(data);
+				modules.antitracking = data || {};
+				port.postMessage(modules);
+			}).catch(() => {
+				port.postMessage(modules);
+			});
+		} else {
+			port.postMessage(modules);
+		}
+	}
+
 	/**
 	 * Invoked from background.js when Panel, Summary, Blocking, and/or Rewards React components
 	 * initiate a port connection to the background in their componentDidMount lifecycle events
@@ -64,6 +91,9 @@ class PanelData {
 					break;
 				case 'settingsUIPort':
 					port.postMessage(this.settingsView);
+					break;
+				case 'summaryUIPort':
+					this._sendCliqzModulesData(port);
 					break;
 				default:
 					break;

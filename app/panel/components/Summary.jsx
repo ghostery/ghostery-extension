@@ -72,11 +72,17 @@ class Summary extends React.Component {
 	 * Lifecycle event
 	 */
 	componentDidMount() {
-		this.props.actions.getCliqzModuleData();
+		// this.props.actions.getCliqzModuleData();
 
 		this.uiPort = chrome.runtime.connect({ name: 'summaryUIPort' });
 		this.uiPort.onMessage.addListener((msg) => {
-			this.props.actions.updateSummaryData(msg);
+			if (msg.trackerCounts) {
+				this.props.actions.updateSummaryData(msg);
+			} else if (msg.adblock || msg.antitracking) {
+				console.log('IVZ here is the cliqz module data!');
+				console.log(msg);
+				this.props.actions.updateCliqzModuleData(msg);
+			}
 		});
 	}
 

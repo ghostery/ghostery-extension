@@ -813,6 +813,7 @@ function onMessageHandler(request, sender, callback) {
 		}
 		callback();
 	} else if (name === 'getCliqzModuleData') {
+		/*
 		const modules = { adblock: {}, antitracking: {} };
 
 		const getCliqzModuleDataForTab = (tabId, callback) => {
@@ -844,6 +845,7 @@ function onMessageHandler(request, sender, callback) {
 		}
 
 		return true;
+		*/
 	} else if (name === 'getTrackerDescription') {
 		utils.getJson(message.url).then((result) => {
 			const description = (result) ? ((result.company_in_their_own_words) ? result.company_in_their_own_words : ((result.company_description) ? result.company_description : '')) : '';
