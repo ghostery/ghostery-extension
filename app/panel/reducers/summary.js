@@ -56,14 +56,15 @@ export default (state = initialState, action) => {
 			for (const category in antiTracking) {
 				if (antiTracking.hasOwnProperty(category)) {
 					for (const app in antiTracking[category]) {
-						if (antiTracking[category][app] === 'unsafe') {
+						// NOTE: this previously compared against 'unsafe'
+						// but as of 2/17/19 the only values seen are 'blocked' and 'safe
+						if (antiTracking[category][app] === 'blocked') {
 							totalUnsafeCount++;
 						}
 					}
 				}
 			}
 			antiTracking.totalUnsafeCount = totalUnsafeCount;
-			// TODO: should we be passing antiTracking instead of action.data.antitracking as the antiTracking prop value?
 			return Object.assign({}, state, { adBlock: action.data.adblock, antiTracking: action.data.antitracking });
 		}
 		case UPDATE_GHOSTERY_PAUSED: {
