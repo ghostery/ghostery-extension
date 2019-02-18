@@ -21,23 +21,11 @@ import {
 } from '../constants/constants';
 import { sendMessageInPromise } from '../utils/msg';
 
+
 /**
  * Fetch Cliqz Modules data from background
- * @return {Object} dispatch
+ * @return {Object} 
  */
-/*
-export function getCliqzModuleData() {
-	return function (dispatch) {
-		return sendMessageInPromise('getCliqzModuleData').then((data) => {
-			dispatch({
-				type: GET_CLIQZ_MODULE_DATA,
-				data,
-			});
-		});
-	};
-}
-*/
-
 export function updateCliqzModuleData(data) {
 	return {
 		type: GET_CLIQZ_MODULE_DATA,

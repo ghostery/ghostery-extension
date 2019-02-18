@@ -812,40 +812,6 @@ function onMessageHandler(request, sender, callback) {
 			return true;
 		}
 		callback();
-	} else if (name === 'getCliqzModuleData') {
-		/*
-		const modules = { adblock: {}, antitracking: {} };
-
-		const getCliqzModuleDataForTab = (tabId, callback) => {
-			// TODO: refactor to reduce duplication
-			// (BrowserButton#update internally calls same cliqz....#aggregatedBlockingStats function again)
-			button.update();
-			if (conf.enable_ad_block) {
-				// update adblock count. callback() handled below based on anti-tracking status
-				modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tabId) || {};
-			}
-			if (conf.enable_anti_tracking) {
-				cliqz.modules.antitracking.background.actions.aggregatedBlockingStats(tabId).then((data) => {
-					modules.antitracking = data || {};
-					callback(modules);
-				}).catch(() => {
-					callback(modules);
-				});
-			} else {
-				callback(modules);
-			}
-		};
-
-		if (message && message.tabId) {
-			getCliqzModuleDataForTab(+message.tabId, callback);
-		} else {
-			utils.getActiveTab((tab) => {
-				getCliqzModuleDataForTab(tab.id, callback);
-			});
-		}
-
-		return true;
-		*/
 	} else if (name === 'getTrackerDescription') {
 		utils.getJson(message.url).then((result) => {
 			const description = (result) ? ((result.company_in_their_own_words) ? result.company_in_their_own_words : ((result.company_description) ? result.company_description : '')) : '';

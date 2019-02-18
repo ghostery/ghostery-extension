@@ -72,8 +72,6 @@ class Summary extends React.Component {
 	 * Lifecycle event
 	 */
 	componentDidMount() {
-		// this.props.actions.getCliqzModuleData();
-
 		this.uiPort = chrome.runtime.connect({ name: 'summaryUIPort' });
 		this.uiPort.onMessage.addListener((msg) => {
 			if (msg.trackerCounts) {
