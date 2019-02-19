@@ -15,15 +15,12 @@
 
 import conf from './Conf';
 import foundBugs from './FoundBugs';
-import cliqz from './Cliqz';
 import rewards from './Rewards';
 import Policy from './Policy';
 import { getCliqzAntitrackingData, getCliqzAdblockingData } from '../utils/cliqzModuleData';
 import { getTab } from '../utils/utils';
 import { log } from '../utils/common';
 import globals from './Globals';
-
-const { adblocker, antitracking } = cliqz.modules;
 
 /**
  * @class for handling Ghostery button.

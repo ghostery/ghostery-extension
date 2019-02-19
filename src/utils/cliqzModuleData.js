@@ -18,41 +18,41 @@ import cliqz from '../classes/Cliqz';
 const { adblocker, antitracking } = cliqz.modules;
 
 export function getCliqzAntitrackingData(tabId) {
-    return new Promise((resolve) => {
-        if (!conf.enable_anti_tracking || !antitracking.background) {
-            resolve({
-                totalUnsafeCount: 0
-            });
-        }
+	return new Promise((resolve) => {
+		if (!conf.enable_anti_tracking || !antitracking.background) {
+			resolve({
+				totalUnsafeCount: 0
+			});
+		}
 
-        antitracking.background.actions.aggregatedBlockingStats(tabId).then((antitrackingData) => {
-            let totalUnsafeCount = 0;
-            for (const category in antitrackingData) {
-                if (antitrackingData.hasOwnProperty(category)) {
-                    for (const app in antitrackingData[category]) {
-                        if (antitrackingData[category][app] === 'blocked') { // before 2/17/19 we were checking for 'unsafe'
-                            totalUnsafeCount++;
-                        }
-                    }
-                }
-            }
-            antitrackingData.totalUnsafeCount = totalUnsafeCount;
-            resolve(antitrackingData);
-        }).catch(() => {
-            resolve({
-                totalUnsafeCount: 0
-            });
-        });
-    });
+		antitracking.background.actions.aggregatedBlockingStats(tabId).then((antitrackingData) => {
+			let totalUnsafeCount = 0;
+			for (const category in antitrackingData) {
+				if (antitrackingData.hasOwnProperty(category)) {
+					for (const app in antitrackingData[category]) {
+						if (antitrackingData[category][app] === 'blocked') { // before 2/17/19 we were checking for 'unsafe'
+							totalUnsafeCount++;
+						}
+					}
+				}
+			}
+			antitrackingData.totalUnsafeCount = totalUnsafeCount;
+			resolve(antitrackingData);
+		}).catch(() => {
+			resolve({
+				totalUnsafeCount: 0
+			});
+		});
+	});
 }
 
 export function getCliqzAdblockingData(tabId) {
-    if (!conf.enable_ad_block || !adblocker.background) {
-        return {
-            totalCount: 0
-        };
-    }
+	if (!conf.enable_ad_block || !adblocker.background) {
+		return {
+			totalCount: 0
+		};
+	}
 
-    const adBlocking = adblocker.background.actions.getAdBlockInfoForTab(tabId);
-    return adBlocking || { totalCount: 0 };
+	const adBlocking = adblocker.background.actions.getAdBlockInfoForTab(tabId);
+	return adBlocking || { totalCount: 0 };
 }
