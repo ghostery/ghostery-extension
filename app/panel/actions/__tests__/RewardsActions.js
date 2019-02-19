@@ -45,10 +45,10 @@ describe('app/panel/actions/RewardsActions.js', () => {
 		const data = testData;
 		const expectedPayload = { data, type: GET_REWARDS_DATA };
 
-		return store.dispatch(rewardsActions.getRewardsData()).then(() => {
-			const actions = store.getActions();
-			expect(actions).toEqual([expectedPayload]);
-		});
+		store.dispatch(rewardsActions.getRewardsData(data));
+
+		const actions = store.getActions();
+		expect(actions).toEqual([expectedPayload]);
 	});
 
 	test('toggleOffersEnabled action should return correctly', () => {
