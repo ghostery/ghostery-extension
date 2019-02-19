@@ -181,6 +181,10 @@ class BrowserButton {
 	 * @param  {number} tabId  the Tab Id
 	 * @return {Promise}       the number of trackers as a Promise
 	 */
+
+// TODO restructure this to eliminiate duplication of effort and data structures
+// between this class, PanelData, and the summary reducer on the front end
+// probably, this means building out a CliqzModuleData class real quick
 	_getAntiTrackCount(tabId) {
 		return new Promise((resolve) => {
 			if (!conf.enable_anti_tracking || !antitracking.background) {
@@ -191,7 +195,7 @@ class BrowserButton {
 				for (const category in antiTracking) {
 					if (antiTracking.hasOwnProperty(category)) {
 						for (const app in antiTracking[category]) {
-							if (antiTracking[category][app] === 'unsafe') {
+							if (antiTracking[category][app] === 'blocked') { // until 2/17/19 we were checking for 'unsafe'
 								totalUnsafeCount++;
 							}
 						}

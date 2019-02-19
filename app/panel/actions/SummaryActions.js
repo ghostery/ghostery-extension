@@ -24,7 +24,7 @@ import { sendMessageInPromise } from '../utils/msg';
 
 /**
  * Fetch Cliqz Modules data from background
- * @return {Object} 
+ * @return {Object}
  */
 export function updateCliqzModuleData(data) {
 	return {

@@ -49,7 +49,7 @@ class PanelData {
 		const { id: tabId } = this._activeTab;
 
 		// TODO move this, this does not belong in this class
-		button.update();
+		// button.update();
 
 		if (conf.enable_ad_block) {
 			// update adblock count. callback() handled below based on anti-tracking status
@@ -58,8 +58,6 @@ class PanelData {
 
 		if (conf.enable_anti_tracking) {
 			cliqz.modules.antitracking.background.actions.aggregatedBlockingStats(tabId).then((data) => {
-				console.log('IVZ antitracking cliqz module data:');
-				console.log(data);
 				modules.antitracking = data || {};
 				port.postMessage(modules);
 			}).catch(() => {
@@ -122,6 +120,7 @@ class PanelData {
 					break;
 				case 'summaryUIPort':
 					port.postMessage(this.summaryUpdateView);
+					this._sendCliqzModulesData(port);
 					break;
 				default:
 					break;

@@ -54,10 +54,12 @@ export default (state = initialState, action) => {
 			const antiTracking = action.data.antitracking;
 			let totalUnsafeCount = 0;
 			for (const category in antiTracking) {
-				if (!antiTracking.hasOwnProperty(category)) { continue; }
-				for (const app in antiTracking[category]) {
-					if (antiTracking[category][app] !== 'blocked') { continue; } // before 2/17/19 we checked for 'unsafe'
-					totalUnsafeCount++;
+				if (antiTracking.hasOwnProperty(category)) {
+					for (const app in antiTracking[category]) {
+						if (antiTracking[category][app] === 'blocked') { // before 2/17/19 we checked for 'unsafe'
+							totalUnsafeCount++;
+						}
+					}
 				}
 			}
 			antiTracking.totalUnsafeCount = totalUnsafeCount;
