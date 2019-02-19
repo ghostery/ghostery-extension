@@ -51,6 +51,8 @@ export default (state = initialState, action) => {
 			return Object.assign({}, state, action.data);
 		}
 		case GET_CLIQZ_MODULE_DATA: {
+			console.log('IVZ GET_CLIQZ_MODULE_DATA data');
+			console.log(action.data);
 			return Object.assign({}, state, { adBlock: action.data.adblock, antiTracking: action.data.antitracking });
 		}
 		case UPDATE_GHOSTERY_PAUSED: {

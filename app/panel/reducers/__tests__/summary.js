@@ -51,16 +51,39 @@ describe('app/panel/reducers/summary.js', () => {
 	});
 
 	test('reducer correctly handles GET_CLIQZ_MODULE_DATA', () => {
-		const data = { adblock: {}, antitracking: {} };
-		const action = { data, type: GET_CLIQZ_MODULE_DATA };
-		const initState = Immutable({});
-
-		expect(summaryReducer(initState, action)).toEqual({
-			adBlock: {},
-			antiTracking: {
-				totalUnsafeCount: 0
+		const data = {
+			adblock: {
+				unchangedData: false,
+				changedData: true,
+				newData: true
 			},
+			antitracking: {
+				totalUnsafeCount: 3,
+				unchangedData: false,
+				changedData: true,
+				newData: true
+			}
+		};
+		const action = { data, type: GET_CLIQZ_MODULE_DATA };
+		const initState = Immutable({
+			tab_id: 0,
+			adBlock: {
+				unchangedData: false,
+				changedData: false
+			},
+			antiTracking: {
+				totalUnsafeCount: 1,
+				unchangedData: false,
+				changedData: false
+			}
 		});
+
+		const updatedState = Immutable.merge(initState, {
+			adBlock: data.adblock,
+			antiTracking: data.antitracking
+		});
+
+		expect(summaryReducer(initState, action)).toEqual(updatedState);
 	});
 
 	test('reducer correctly handles UPDATE_GHOSTERY_PAUSED', () => {

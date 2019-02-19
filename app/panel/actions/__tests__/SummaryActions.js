@@ -44,11 +44,10 @@ describe('app/panel/actions/SummaryActions.js', () => {
 
 		const data = testData;
 		const expectedPayload = { data, type: GET_CLIQZ_MODULE_DATA };
+		store.dispatch(summaryActions.getCliqzModuleData(data));
 
-		return store.dispatch(summaryActions.getCliqzModuleData()).then(() => {
-			const actions = store.getActions();
-			expect(actions).toEqual([expectedPayload]);
-		});
+		const actions = store.getActions();
+		expect(actions).toEqual([expectedPayload]);
 	});
 
 	test('updateTrackerCounts action should return correctly', () => {

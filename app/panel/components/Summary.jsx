@@ -77,7 +77,7 @@ class Summary extends React.Component {
 			if (msg.trackerCounts) {
 				this.props.actions.updateSummaryData(msg);
 			} else if (msg.adblock || msg.antitracking) {
-				this.props.actions.updateCliqzModuleData(msg);
+				this.props.actions.getCliqzModuleData(msg);
 			}
 		});
 	}
