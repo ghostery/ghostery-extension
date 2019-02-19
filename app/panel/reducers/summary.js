@@ -51,18 +51,6 @@ export default (state = initialState, action) => {
 			return Object.assign({}, state, action.data);
 		}
 		case GET_CLIQZ_MODULE_DATA: {
-			const antiTracking = action.data.antitracking;
-			let totalUnsafeCount = 0;
-			for (const category in antiTracking) {
-				if (antiTracking.hasOwnProperty(category)) {
-					for (const app in antiTracking[category]) {
-						if (antiTracking[category][app] === 'blocked') { // before 2/17/19 we checked for 'unsafe'
-							totalUnsafeCount++;
-						}
-					}
-				}
-			}
-			antiTracking.totalUnsafeCount = totalUnsafeCount;
 			return Object.assign({}, state, { adBlock: action.data.adblock, antiTracking: action.data.antitracking });
 		}
 		case UPDATE_GHOSTERY_PAUSED: {
