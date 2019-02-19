@@ -77,6 +77,8 @@ class Summary extends React.Component {
 			if (msg.trackerCounts) {
 				this.props.actions.updateSummaryData(msg);
 			} else if (msg.adblock || msg.antitracking) {
+				console.log('IVZ Cliqz module data:');
+				console.log(msg);
 				this.props.actions.updateCliqzModuleData(msg);
 			}
 		});
