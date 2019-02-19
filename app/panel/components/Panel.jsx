@@ -39,9 +39,6 @@ class Panel extends React.Component {
 			if (msg) {
 				// init data, only sent when an instance of this port is first opened on a given tab
 				if (msg.summary) {
-					console.log('IVZ receiving init data:');
-					console.log(msg);
-
 					const { panel } = msg;
 					this.props.actions.getPanelData(panel);
 					this.props.actions.updateSummaryData(msg.summary);

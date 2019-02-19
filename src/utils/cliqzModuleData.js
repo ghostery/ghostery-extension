@@ -30,7 +30,7 @@ export function getCliqzAntitrackingData(tabId) {
 			for (const category in antitrackingData) {
 				if (antitrackingData.hasOwnProperty(category)) {
 					for (const app in antitrackingData[category]) {
-						if (antitrackingData[category][app] === 'blocked') { // before 2/17/19 we were checking for 'unsafe'
+						if (antitrackingData[category][app] === 'unsafe') {
 							totalUnsafeCount++;
 						}
 					}
