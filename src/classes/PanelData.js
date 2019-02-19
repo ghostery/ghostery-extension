@@ -16,7 +16,6 @@
 
 import _ from 'underscore';
 import button from './BrowserButton';
-import cliqz from './Cliqz';
 import conf from './Conf';
 import foundBugs from './FoundBugs';
 import bugDb from './BugDb';
@@ -26,6 +25,7 @@ import tabInfo from './TabInfo';
 import rewards from './Rewards';
 import account from './Account';
 import dispatcher from './Dispatcher';
+import { getCliqzAdblockingData, getCliqzAntitrackingData } from '../utils/cliqzModuleData';
 import { getActiveTab, flushChromeMemoryCache, processUrl } from '../utils/utils';
 import { objectEntries, log } from '../utils/common';
 
@@ -48,24 +48,13 @@ class PanelData {
 		const modules = { adblock: {}, antitracking: {} };
 		const { id: tabId } = this._activeTab;
 
-		// TODO move this, this does not belong in this class
-		// button.update();
-
-		if (conf.enable_ad_block) {
-			// update adblock count. callback() handled below based on anti-tracking status
-			modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tabId) || {};
-		}
-
-		if (conf.enable_anti_tracking) {
-			cliqz.modules.antitracking.background.actions.aggregatedBlockingStats(tabId).then((data) => {
-				modules.antitracking = data || {};
-				port.postMessage(modules);
-			}).catch(() => {
-				port.postMessage(modules);
-			});
-		} else {
+		modules.adblock = getCliqzAdblockingData(tabId);
+		getCliqzAntitrackingData(tabId).then((antitrackingData) => {
+			modules.antitracking = antitrackingData;
 			port.postMessage(modules);
-		}
+		}).catch(() => {
+			port.postMessage(modules);
+		});
 	}
 
 	/**
