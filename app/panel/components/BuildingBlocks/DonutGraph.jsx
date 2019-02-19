@@ -153,9 +153,9 @@ class DonutGraph extends React.Component {
 	 */
 	prepareDonutContainer(isSmall) {
 		const size = isSmall ? 94 : 120;
+		this.donutRadius = size / 2;
 
 		select(this.node).selectAll('*').remove();
-
 		this.chart = select(this.node)
 			.append('svg')
 			.attr('class', 'donutSvg')
@@ -163,8 +163,13 @@ class DonutGraph extends React.Component {
 			.attr('height', '100%')
 			.attr('viewBox', `0 0 ${size} ${size}`)
 			.attr('preserveAspectRatio', 'xMinYMin');
+		this.chartCenter = this.chart
+			.append('g')
+			.attr('transform', `translate(${this.donutRadius}, ${this.donutRadius})`);
 
-		this.donutRadius = size / 2;
+		this.trackerArc = arc()
+			.innerRadius(this.donutRadius - 13)
+			.outerRadius(this.donutRadius);
 	}
 
 	/**
@@ -212,24 +217,37 @@ class DonutGraph extends React.Component {
 			}
 		});
 
-		// Draw graph
-		const center = this.chart
-			.append('g')
-			.attr('transform', `translate(${this.donutRadius}, ${this.donutRadius})`);
-		const trackerArc = arc()
-			.innerRadius(this.donutRadius - 13)
-			.outerRadius(this.donutRadius);
+		// const trackerArc = arc()
+		//	.innerRadius(this.donutRadius - 13)
+		//	.outerRadius(this.donutRadius);
+		// this.trackerArc
+			// .innerRadius(this.donutRadiu - 13)
+			// .outerRadius(this.donutRadius);
 		const trackerPie = pie()
 			.startAngle(-Math.PI)
 			.endAngle(Math.PI)
 			.sort(null)
 			.value(d => d.value);
-		const g = center.selectAll('.arc')
-			.data(trackerPie(graphData))
-			.enter().append('g')
-			.attr('class', 'arc');
 
-		g.append('path')
+		const arcs = this.chartCenter.selectAll('g')
+			.data(trackerPie(graphData), d => d.data.id);
+
+		/*
+		arcs.selectAll('path')
+			.attrTween('d', (d) => {
+				const i = interpolate(d.startAngle, d.endAngle);
+				return function (t) {
+					d.endAngle = i(t);
+					return trackerArc(d);
+				};
+			})
+			.ease(easeLinear);
+		*/
+
+		arcs.enter().append('g')
+		// arcs.enter().append('path')
+			.attr('class', 'arc')
+		.append('path')
 			.style('fill', (d, i) => {
 				if (renderGreyscale) {
 					return this.colors.greyscale(this.getTone(categoryCount, i));
@@ -245,7 +263,7 @@ class DonutGraph extends React.Component {
 				return 'disabled';
 			})
 			.on('mouseover', (d) => {
-				const centroid = trackerArc.centroid(d);
+				const centroid = this.trackerArc.centroid(d);
 				const pX = centroid[0] + this.donutRadius;
 				const pY = centroid[1] + this.donutRadius;
 				const tooltip = this.grabTooltip(d);
@@ -284,10 +302,10 @@ class DonutGraph extends React.Component {
 			})
 			.attrTween('d', (d) => {
 				const i = interpolate(d.startAngle, d.endAngle);
-				return function (t) {
+				return (function (t) {
 					d.endAngle = i(t);
-					return trackerArc(d);
-				};
+					return this.trackerArc(d);
+				}).bind(this);
 			})
 			.ease(easeLinear);
 	}
