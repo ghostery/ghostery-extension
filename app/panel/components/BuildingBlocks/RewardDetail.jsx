@@ -25,6 +25,7 @@ class RewardDetail extends React.Component {
 		super(props);
 		this.state = {
 			copyText: t('rewards_copy_code'),
+			code: props.isCodeHidden ? '*****' : props.code,
 		};
 
 		// Event Bindings
@@ -54,7 +55,10 @@ class RewardDetail extends React.Component {
 		});
 
 		// Update and reset Copy Code text
-		this.setState({ copyText: t('rewards_code_copied') });
+		this.setState({
+			code: this.props.code,
+			copyText: t('rewards_code_copied'),
+		});
 		setTimeout(() => {
 			this.setState({ copyText: t('rewards_copy_code') });
 		}, 3000);
@@ -129,7 +133,7 @@ class RewardDetail extends React.Component {
 				{code && (
 					<div className="RewardDetail__code_container flex-container align-middle align-justify">
 						<span className="RewardDetail__code" ref={(node) => { this.copyNode = node; }}>
-							<span>{ code }</span>
+							<span>{this.state.code}</span>
 							<input readOnly type="text" value={code} />
 						</span>
 						<span className="RewardDetail__copy clickable" onClick={this.handleCopyClick}>

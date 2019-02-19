@@ -29,13 +29,18 @@ const { sendMessage } = msg;
 class OfferCard extends Component {
 	constructor(props) {
 		super(props);
-
+		const {
+			attrs: { isCodeHidden } = {},
+			offer_data: offerData = {},
+		} = props.reward || {};
+		const { ui_info: { template_data: templateData = {} } = {} } = offerData;
 		this.state = {
+			code: isCodeHidden ? '*****' : templateData.code,
 			closed: false,
 			copyText: t('rewards_copy_code'),
 			showPrompt: this.props.conf.rewardsPromptAccepted ? false : 1,
 			showSettings: false,
-			rewardUI: props.reward && props.reward.offer_data && props.reward.offer_data.ui_info.template_data || {},
+			rewardUI: templateData,
 		};
 
 		this.iframeEl = window.parent.document.getElementById('ghostery-iframe-container');
@@ -120,7 +125,8 @@ class OfferCard extends Component {
 
 		// 'copied' feedback for user
 		this.setState({
-			copyText: `${t('rewards_code_copied')}!`
+			copyText: `${t('rewards_code_copied')}!`,
+			code: this.state.rewardUI.code,
 		});
 
 		// prevent multiple clicks
@@ -200,6 +206,7 @@ class OfferCard extends Component {
 	}
 
 	redeem() {
+		this.setState({ code: this.state.rewardUI.code });
 		this.props.actions.sendSignal('offer_ca_action');
 	}
 
@@ -283,7 +290,7 @@ class OfferCard extends Component {
 								{ this.state.rewardUI.code &&
 									<div className="reward-code">
 										<div>
-											{this.state.rewardUI.code}
+											{this.state.code}
 											<input readOnly className="reward-code-input" value={this.state.rewardUI.code} type="text" />
 										</div>
 										<a onClick={this.copyCode}>{this.state.copyText}</a>
