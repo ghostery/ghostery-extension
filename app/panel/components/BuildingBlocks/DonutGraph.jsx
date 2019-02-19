@@ -75,6 +75,12 @@ class DonutGraph extends React.Component {
 			isSmall,
 		} = this.props;
 
+		this.trackerPie = pie()
+			.startAngle(-Math.PI)
+			.endAngle(Math.PI)
+			.sort(null)
+			.value(d => d.value);
+
 		this.prepareDonutContainer(isSmall);
 		this.bakeDonut(categories, {
 			renderRedscale,
@@ -217,20 +223,8 @@ class DonutGraph extends React.Component {
 			}
 		});
 
-		// const trackerArc = arc()
-		//	.innerRadius(this.donutRadius - 13)
-		//	.outerRadius(this.donutRadius);
-		// this.trackerArc
-			// .innerRadius(this.donutRadiu - 13)
-			// .outerRadius(this.donutRadius);
-		const trackerPie = pie()
-			.startAngle(-Math.PI)
-			.endAngle(Math.PI)
-			.sort(null)
-			.value(d => d.value);
-
 		const arcs = this.chartCenter.selectAll('g')
-			.data(trackerPie(graphData), d => d.data.id);
+			.data(this.trackerPie(graphData), d => d.data.id);
 
 		/*
 		arcs.selectAll('path')
