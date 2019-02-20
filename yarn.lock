@@ -387,9 +387,9 @@
   integrity sha512-HxMbBQfdy0CehThTFierXbRPI+PHDEucUUriCCzViAKbCWWQIlL6uZcyDaaPRMPWy45v78lezPB4457kfjS72g==
 
 "@cliqz/adblocker@^0.6.8":
-  version "0.6.8"
-  resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-0.6.8.tgz#e4ad16d23d2169041d73465fa141911553fab040"
-  integrity sha512-a0k6gdCcR/9D1HB7OjhZcX6/mP4MZ8iMLPk3YGOSUgZpQ+HRuJ87BjZZp11fMFezoQoGXRaHGK1cT9Xz66UwOQ==
+  version "0.6.9"
+  resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-0.6.9.tgz#ffe2655f56eb7a73c743d12de6f51826aed36c4e"
+  integrity sha512-bioIQwNzI359aJc9EuDDhqKn5mY7DgvdyJnP/Ql04bNgFJDnJQrqQQICAvyT747dV//Gstq5PNeLfExyeoiD0w==
   dependencies:
     punycode "^2.1.1"
     tslib "^1.9.3"
@@ -1239,55 +1239,6 @@ brorand@^1.0.1:
 "browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.33/7.33.0.504d19a.tgz":
   version "7.33.0"
   resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.33/7.33.0.504d19a.tgz#141354203c2fa312d20b1b03dfb6d16624723d4f"
-  dependencies:
-    "@cliqz-oss/dexie" "^2.0.4"
-    "@cliqz/adblocker" "^0.6.8"
-    ajv "^6.5.0"
-    anonymous-credentials "https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.1/anonymous-credentials-0.1.1.tgz"
-    classnames "^2.2.5"
-    cliqz-history "https://github.com/cliqz-oss/cliqz-history/releases/download/1.1.1/cliqz-history-1.1.1.tgz"
-    cron "^1.2.1"
-    cron-parser "^2.4.0"
-    deep-equal "^1.0.1"
-    fast-url-parser "^=1.1.2"
-    fs-extra "^4.0.1"
-    global "^4.3.2"
-    handlebars "^4.0.11"
-    jquery "^3.0.0"
-    jsep "^0.3.0"
-    math-expression-evaluator "^1.2.17"
-    moment "^2.22.2"
-    moment-range "^3.0.3"
-    node-fetch "^1.7.1"
-    node-forge "git+https://git@github.com/digitalbazaar/forge.git#af3f590af9d3c809e1cb44b2bb5398a3a6b944c2"
-    node-persist "^2.0.11"
-    pako "^1.0.6"
-    prop-types "^15.5.10"
-    qrcodejs "^1.0.0"
-    react "16.6.3"
-    react-dom "16.6.3"
-    react-modal "3.6.1"
-    react-native-web "0.9.9"
-    react-toggle-display "^2.2.0"
-    react-tooltip "3.9.0"
-    react-touch-carousel "0.8.3"
-    rusha "^0.8.13"
-    rxjs "^6.3.3"
-    sanitize-filename "^1.6.1"
-    simple-statistics "^5.2.1"
-    spanan "^2.0.0"
-    spectre.css "^0.5.7"
-    tablesorter "^2.29.2"
-    text-encoding "^0.6.4"
-    tldts "^4.0.0"
-    tooltipster "^4.2.6"
-    ua-parser-js "^0.7.12"
-    whatwg-fetch "^3.0.0"
-    ytdl-core "^0.20.2"
-
-"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.33/7.33.0.ee3ca3b.tgz":
-  version "7.33.0"
-  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.33/7.33.0.ee3ca3b.tgz#219e2ac0140c44cdf3dd718edae5ba2f9a1e0359"
   dependencies:
     "@cliqz-oss/dexie" "^2.0.4"
     "@cliqz/adblocker" "^0.6.8"
@@ -2653,7 +2604,7 @@ domain-browser@^1.1.1:
   resolved "https://registry.yarnpkg.com/domain-browser/-/domain-browser-1.2.0.tgz#3d31f50191a6749dd1375a7f522e823d42e54eda"
   integrity sha512-jnjyiM6eRyZl2H+W8Q/zLMA481hzi0eszAaBUzIVnmYVDBbnLxVNnfu1HgEBvCbL+71FrxMl3E6lpKH7Ge3OXA==
 
-domelementtype@1, domelementtype@^1.3.0:
+domelementtype@1, domelementtype@^1.3.0, domelementtype@^1.3.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/domelementtype/-/domelementtype-1.3.1.tgz#d048c44b37b0d10a7f2a3d5fee3f4333d790481f"
   integrity sha512-BSKB+TSpMpFI/HOxCNr1O8aMOTZ8hT3pM3GQ0w/mWRmkhEDSFJkkyzz4XQsBV44BChwGkrDfMyjVD0eA2aFV3w==
@@ -3929,7 +3880,19 @@ html-minifier@^3.5.8:
     relateurl "0.2.x"
     uglify-js "3.4.x"
 
-htmlparser2@^3.9.0, htmlparser2@^3.9.1:
+htmlparser2@^3.9.0:
+  version "3.10.1"
+  resolved "https://registry.yarnpkg.com/htmlparser2/-/htmlparser2-3.10.1.tgz#bd679dc3f59897b6a34bb10749c855bb53a9392f"
+  integrity sha512-IgieNijUMbkDovyoKObU1DUhm1iwNYE/fuifEoEHfd1oZKZDaONBSkal7Y01shxsM49R4XaMdGez3WnF9UfiCQ==
+  dependencies:
+    domelementtype "^1.3.1"
+    domhandler "^2.3.0"
+    domutils "^1.5.1"
+    entities "^1.1.1"
+    inherits "^2.0.1"
+    readable-stream "^3.1.1"
+
+htmlparser2@^3.9.1:
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/htmlparser2/-/htmlparser2-3.10.0.tgz#5f5e422dcf6119c0d983ed36260ce9ded0bee464"
   integrity sha512-J1nEUGv+MkXS0weHNWVKJJ+UrLfePxRWpN3C9bEi9fLxL2+ggW94DQvgYVXsaT30PGwYRIZKNZXuyMhp3Di4bQ==
@@ -5301,7 +5264,7 @@ lolex@^2.2.0, lolex@^2.3.2:
   resolved "https://registry.yarnpkg.com/lolex/-/lolex-2.7.5.tgz#113001d56bfc7e02d56e36291cc5c413d1aa0733"
   integrity sha512-l9x0+1offnKKIzYVjyXU2SiwhXDLekRzKyhnbyldPHvC7BvLPVpdNUNR2KeMAiCN2D/kLNttZgQD5WjSxuBx3Q==
 
-loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.2.0, loose-envify@^1.3.1:
+loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.2.0, loose-envify@^1.3.1, loose-envify@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
   integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
@@ -6845,7 +6808,16 @@ prompts@^0.1.9:
     kleur "^2.0.1"
     sisteransi "^0.1.1"
 
-prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
+prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0:
+  version "15.7.2"
+  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
+  integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
+  dependencies:
+    loose-envify "^1.4.0"
+    object-assign "^4.1.1"
+    react-is "^16.8.1"
+
+prop-types@^15.6.1, prop-types@^15.6.2:
   version "15.7.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.1.tgz#2fa61e0a699d428b40320127733ee2931f05d9d1"
   integrity sha512-f8Lku2z9kERjOCcnDOPm68EBJAO2K00Q5mSgPAUE/gJuBgsYLbVy6owSrtcHj90zt8PvW+z0qaIIgsIhHOa1Qw==
@@ -7280,7 +7252,7 @@ read-pkg@^2.0.0:
     string_decoder "~1.1.1"
     util-deprecate "~1.0.1"
 
-readable-stream@^3.0.6:
+readable-stream@^3.0.6, readable-stream@^3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-3.1.1.tgz#ed6bbc6c5ba58b090039ff18ce670515795aeb06"
   integrity sha512-DkN66hPyqDhnIQ6Jcsvx9bFjhw214O4poMBcIMgPVpQvNy9a0e0Uhg5SqySyDKAmUlwt8LonTBz1ezOnM8pUdA==
