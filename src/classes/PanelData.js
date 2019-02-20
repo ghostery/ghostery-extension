@@ -67,6 +67,9 @@ class PanelData {
 			const { name } = port;
 
 			switch (name) {
+				case 'blockingUIPort':
+					port.postMessage(this.blockingView);
+					break;
 				case 'panelUIPort':
 					this._activeTab = tab;
 					port.postMessage(this.initData);
@@ -212,7 +215,7 @@ class PanelData {
 				account: currentAccount
 			},
 			summary: this.summaryView,
-			blocking: conf.is_expert ? this.blockingView : false,
+			// blocking: conf.is_expert ? this.blockingView : false,
 		};
 	}
 

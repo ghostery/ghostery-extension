@@ -42,7 +42,6 @@ class Panel extends React.Component {
 					const { panel } = msg;
 					this.props.actions.getPanelData(panel);
 					this.props.actions.updateSummaryData(msg.summary);
-					if (msg.blocking) { this.props.actions.updateBlockingData(msg.blocking); }
 
 					if (panel.is_expert) {
 						// load Detail component
