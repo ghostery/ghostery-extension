@@ -27,6 +27,7 @@ class Blocking extends React.Component {
 		this.state = {
 			blockingClasses: '',
 			disableBlocking: false,
+			isCategoryExpanded: new Map()
 		};
 	}
 	/**
@@ -256,6 +257,7 @@ class Blocking extends React.Component {
 		return (
 			<div id="content-blocking">
 				<BlockingHeader
+					isCategoryExpanded={this.state.isCategoryExpanded}
 					categories={categories}
 					expandAll={this.props.expand_all_trackers}
 					actions={this.props.actions}
