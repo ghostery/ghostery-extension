@@ -22,7 +22,7 @@ phases:
     commands:
       # - yarn run lint
       - yarn run test.unit
-      - yarn run build.prod --silent > NUL
+      - yarn run build.prod --silent
       - '& "$env:CODEBUILD_SRC_DIR_moab\moab-bin.exe" makezip'
 
 artifacts:
