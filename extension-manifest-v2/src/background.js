@@ -1276,7 +1276,6 @@ antitracking.on('enabled', () => {
 		// remove Cliqz-side whitelisting steps and replace with ghostery ones.
 		const replacedSteps = ['onBeforeSendHeaders', 'onHeadersReceived'].map(stage =>
 			Promise.all([
-				antitracking.action('removePipelineStep', stage, 'checkIsCookieWhitelisted'),
 				antitracking.action('addPipelineStep', stage, {
 					name: 'checkGhosteryWhitelisted',
 					spec: 'break',
