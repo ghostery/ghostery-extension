@@ -120,13 +120,14 @@ class OfferCard extends Component {
 
 	copyCode() {
 		this.props.actions.sendSignal('code_copied');
-		this.offerCardRef.querySelector('.reward-code-input').select();
-		document.execCommand('copy');
 
 		// 'copied' feedback for user
 		this.setState({
 			copyText: `${t('rewards_code_copied')}!`,
 			code: this.state.rewardUI.code,
+		}, () => {
+			this.offerCardRef.querySelector('.reward-code-input').select();
+			document.execCommand('copy');
 		});
 
 		// prevent multiple clicks

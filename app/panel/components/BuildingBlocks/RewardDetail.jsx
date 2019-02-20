@@ -44,10 +44,6 @@ class RewardDetail extends React.Component {
 	 * Handles clicking the copy button
 	 */
 	handleCopyClick() {
-		// Copy the reward code
-		this.copyNode.querySelector('input').select();
-		document.execCommand('copy');
-
 		// Show a toast notification
 		this.props.actions.showNotification({
 			text: t('rewards_code_copied_toast_notification'),
@@ -58,6 +54,10 @@ class RewardDetail extends React.Component {
 		this.setState({
 			code: this.props.code,
 			copyText: t('rewards_code_copied'),
+		}, () => {
+			// Copy the reward code
+			this.copyNode.querySelector('input').select();
+			document.execCommand('copy');
 		});
 		setTimeout(() => {
 			this.setState({ copyText: t('rewards_copy_code') });
