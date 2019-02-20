@@ -7,8 +7,7 @@ phases:
       - echo $CODEBUILD_SRC_DIR_moab
       - powershell -ExecutionPolicy unrestricted -Command "Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"
       # - choco install -y yarn
-      - choco install -y googlechrome
-      - choco install -y opera
+      - choco install --confirm --limit-output googlechrome opera
       - npm install -g yarn
   pre_build:
     commands:
@@ -23,7 +22,7 @@ phases:
       # - yarn run lint
       - yarn run test.unit
       - yarn run build.prod --silent
-      - '& "$env:CODEBUILD_SRC_DIR_moab\moab-bin.exe" makezip'
+      - '& "$env:CODEBUILD_SRC_DIR_moab\moab-bin.exe" build'
 
 artifacts:
   files:
