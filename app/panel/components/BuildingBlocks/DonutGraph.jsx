@@ -61,6 +61,8 @@ class DonutGraph extends React.Component {
 			redscale: scaleLinear().range(['#f75065', '#ffb0Ba']),
 			greyscale: scaleLinear().range(['#848484', '#c9c9c9']),
 		};
+
+		this.endAngles = new Map();
 	}
 
 	/**
@@ -223,23 +225,38 @@ class DonutGraph extends React.Component {
 			}
 		});
 
+		// CONNECT NEW DATA
 		const arcs = this.chartCenter.selectAll('g')
 			.data(this.trackerPie(graphData), d => d.data.id);
 
-		/*
-		arcs.selectAll('path')
+		// UPDATE
+		arcs.select('path')
+			.attr('d', d => this.trackerArc(d));
+
+			/*
+			.transition()
 			.attrTween('d', (d) => {
-				const i = interpolate(d.startAngle, d.endAngle);
-				return function (t) {
+				console.log('IVZ this.endAngles: ');
+				console.log(this.endAngles);
+
+				const endAngle = this.endAngles.get(d.data.id) || d.endAngle;
+				this.endAngles.set(d.data.id, d.endAngle);
+
+				console.log('IVZ the value passed to attrTween:');
+				console.log(d);
+				console.log('IVZ the value of "this" in attrTween: ');
+				console.log(this);
+
+				const i = interpolate(d.startAngle, endAngle);
+				return (function (t) {
 					d.endAngle = i(t);
-					return trackerArc(d);
-				};
+					return this.trackerArc(d);
+				}).bind(this);
 			})
 			.ease(easeLinear);
-		*/
-
+			*/
+		// ENTER
 		arcs.enter().append('g')
-		// arcs.enter().append('path')
 			.attr('class', 'arc')
 		.append('path')
 			.style('fill', (d, i) => {
@@ -250,6 +267,9 @@ class DonutGraph extends React.Component {
 				}
 				return this.colors.regular(d.data.id);
 			})
+			.attr('d', d => this.trackerArc(d));
+
+			/*
 			.attr('class', (d) => {
 				if (d.data.name) {
 					return (isSmall) ? 'clickable' : 'not-clickable';
@@ -295,13 +315,22 @@ class DonutGraph extends React.Component {
 				return sum;
 			})
 			.attrTween('d', (d) => {
-				const i = interpolate(d.startAngle, d.endAngle);
+				const startAngle = this.endAngles.get(d.data.id) || d.startAngle;
+				this.endAngles.set(d.data.id, d.endAngle);
+
+				console.log('IVZ the value passed to attrTween:');
+				console.log(d);
+				console.log('IVZ the value of "this" in attrTween: ');
+				console.log(this);
+
+				const i = interpolate(startAngle, d.endAngle);
 				return (function (t) {
 					d.endAngle = i(t);
 					return this.trackerArc(d);
 				}).bind(this);
 			})
 			.ease(easeLinear);
+			*/
 	}
 
 	/**
