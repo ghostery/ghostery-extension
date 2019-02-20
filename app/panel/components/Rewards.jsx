@@ -15,7 +15,7 @@ import React from 'react';
 import ClassNames from 'classnames';
 import { Link, Route } from 'react-router-dom';
 import { ToggleSlider, RewardListItem, RewardDetail } from './BuildingBlocks';
-import { sendMessage, sendRewardMessage } from '../utils/msg';
+import { sendMessage } from '../utils/msg';
 import globals from '../../../src/classes/Globals';
 
 const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
@@ -89,7 +89,7 @@ class Rewards extends React.Component {
 	componentWillUnmount() {
 		/* @TODO send message to background to remove port onDisconnect event */
 		this.props.actions.sendSignal('hub_closed');
-		sendRewardMessage('removeDisconnectListener');
+		this.uiPort.disconnect();
 	}
 
 	/**

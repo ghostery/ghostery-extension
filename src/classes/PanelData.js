@@ -89,7 +89,13 @@ class PanelData {
 					break;
 			}
 
-			port.onDisconnect.addListener((p) => { this._uiPorts.delete(p.name); });
+			port.onDisconnect.addListener((p) => {
+				if (name === 'rewardsUIPort') {
+					p.onDisconnect.removeListener(rewards.panelHubClosedListener);
+				}
+
+				this._uiPorts.delete(name);
+			});
 
 			this._uiPorts.set(name, port);
 		});

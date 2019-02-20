@@ -517,9 +517,6 @@ function handleRewards(name, message, callback) {
 		case 'ping':
 			metrics.ping(message);
 			break;
-		case 'removeDisconnectListener':
-			rewards.panelPort.onDisconnect.removeListener(rewards.panelHubClosedListener);
-			break;
 		case 'setPanelData':
 			if (message.hasOwnProperty('enable_offers')) {
 				if (!offers.isEnabled && message.enable_offers === true) {

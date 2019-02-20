@@ -29,7 +29,6 @@ class Rewards {
 	constructor() {
 		this.getStoredOffers();
 		this.currentOffer = null;
-		this.panelPort = null;
 		this.ports = new Map();
 		this.channelsSupported = (typeof chrome.runtime.onConnect === 'object');
 		this.panelHubClosedListener = this.panelHubClosedListener.bind(this);
