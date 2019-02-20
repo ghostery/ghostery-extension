@@ -9,13 +9,6 @@ phases:
       # - choco install -y yarn
       - choco install -y googlechrome
       - choco install -y opera
-      # - $env:Path += ";C:\Program Files (x86)\Yarn\bin\"
-      # - echo $env:Path
-      # - $Env:PATH += ";C:\Program Files (x86)\Yarn\bin\"
-      # - echo $Env:PATH
-      # - dir "C:\Program Files (x86)\Yarn\bin\"
-      # - '"C:\Program Files (x86)\Yarn\bin\yarn"'
-      # - node -v
       - npm install -g yarn
   pre_build:
     commands:
