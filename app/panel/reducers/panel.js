@@ -14,7 +14,6 @@
 /* eslint no-use-before-define: 0 */
 
 import {
-	GET_PANEL_DATA,
 	UPDATE_PANEL_DATA,
 	SHOW_NOTIFICATION,
 	CLOSE_NOTIFICATION,
@@ -73,13 +72,8 @@ const initialState = {
  */
 export default (state = initialState, action) => {
 	switch (action.type) {
-		case GET_PANEL_DATA: {
-			const { current_theme, account } = action.data;
-			setTheme(document, current_theme, account);
-			return Object.assign({}, state, action.data, { initialized: true });
-		}
 		case UPDATE_PANEL_DATA: {
-			return Object.assign({}, state, action.data);
+			return Object.assign({}, state, action.data, { initialized: true });
 		}
 		case SET_THEME: {
 			const { name, css } = action.data;

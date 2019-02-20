@@ -11,7 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 import {
-	GET_PANEL_DATA,
 	UPDATE_PANEL_DATA,
 	TOGGLE_CLIQZ_FEATURE,
 	SHOW_NOTIFICATION,
@@ -38,18 +37,7 @@ export function toggleCliqzFeature(featureName, isEnabled) {
 }
 
 /**
- * Init Panel data
- * @return {Object}
- */
-export function getPanelData(data) {
-	return {
-		type: GET_PANEL_DATA,
-		data
-	};
-}
-
-/**
- * Update Panel data
+ * Init / Update Panel data
  * @return {Object}
  */
 export function updatePanelData(data) {

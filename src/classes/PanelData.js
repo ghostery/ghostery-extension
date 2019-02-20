@@ -68,19 +68,19 @@ class PanelData {
 
 			switch (name) {
 				case 'blockingUIPort':
-					port.postMessage(this.blockingView);
+					port.postMessage(this.blockingView());
 					break;
 				case 'panelUIPort':
 					this._activeTab = tab;
-					port.postMessage(this.initData);
+					port.postMessage(this.panelInitView());
 					account.getUserSettings().catch(err => log('Failed getting user settings from PanelData#initUIPort:', err));
 					break;
 				case 'rewardsUIPort':
-					port.postMessage(this.rewardsView);
+					port.postMessage(this.rewardsView());
 					port.onDisconnect.addListener(rewards.panelHubClosedListener);
 					break;
 				case 'settingsUIPort':
-					port.postMessage(this.settingsView);
+					port.postMessage(this.settingsView());
 					break;
 				case 'summaryUIPort':
 					this._sendCliqzModulesData(port);
@@ -105,13 +105,13 @@ class PanelData {
 			const { name } = port;
 			switch (name) {
 				case 'blockingUIPort':
-					port.postMessage(this.blockingView);
+					port.postMessage(this.blockingView());
 					break;
 				case 'panelUIPort':
-					port.postMessage(this.panelUpdateView);
+					port.postMessage(this.panelUpdateView());
 					break;
 				case 'summaryUIPort':
-					port.postMessage(this.summaryUpdateView);
+					port.postMessage(this.summaryUpdateView());
 					this._sendCliqzModulesData(port);
 					break;
 				default:
@@ -184,13 +184,12 @@ class PanelData {
 		}
 	}
 
-	get initData() {
+	panelInitView() {
 		const currentAccount = conf.account;
 		if (currentAccount && currentAccount.user) {
 			currentAccount.user.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus']);
 		}
 		const { id } = this._activeTab;
-		const { needsReload, smartBlock } = tabInfo.getTabInfo(id);
 
 		return {
 			panel: {
@@ -205,17 +204,22 @@ class PanelData {
 				reload_banner_status: conf.reload_banner_status,
 				trackers_banner_status: conf.trackers_banner_status,
 				current_theme: conf.current_theme,
-
-				needsReload,
-				smartBlock,
 				tab_id: id,
-
 				unread_offer_ids: rewards.unreadOfferIds,
-
-				account: currentAccount
+				account: currentAccount,
+				...this.panelUpdateView(id)
 			},
-			summary: this.summaryView,
-			// blocking: conf.is_expert ? this.blockingView : false,
+			summary: this.summaryInitView(),
+			blocking: conf.is_expert ? this.blockingView() : false
+		};
+	}
+
+	panelUpdateView(tabId) {
+		const id = tabId || this._activeTab.id;
+		const { needsReload, smartBlock } = tabInfo.getTabInfo(id);
+		return {
+			needsReload,
+			smartBlock
 		};
 	}
 
@@ -223,11 +227,11 @@ class PanelData {
 	 * Get conf and tracker data for Summary View
 	 * @return {Object}		Summary view data
 	 */
-	get summaryView() {
+	summaryInitView() {
 		const tab = this._activeTab;
 		if (!tab) return {};
 
-		const { id, url } = tab;
+		const { id, url } = this._activeTab;
 		const pageHost = url && processUrl(url).host || '';
 		const trackerList = foundBugs.getApps(id, false, url) || [];
 
@@ -236,36 +240,23 @@ class PanelData {
 			paused_blocking_timeout: globals.SESSION.paused_blocking_timeout,
 			site_blacklist: conf.site_blacklist,
 			site_whitelist: conf.site_whitelist,
-
-			// TODO substitute return value from summaryUpdateView for part of this to avoid code duplication
-			alertCounts: tab && foundBugs.getAppsCountByIssues(id, url) || {},
-			// TODO memoize the result of this._buildCategories ?
-			categories: this._buildCategories(id, url, pageHost, trackerList),
 			pageHost,
 			pageUrl: url || '',
-			performanceData: tabInfo.getTabInfo(id, 'pageTiming'),
 			siteNotScanned: !trackerList || false,
 			sitePolicy: policy.getSitePolicy(url) || false,
-			trackerCounts: foundBugs.getAppsCountByBlocked(id) || {}
+			...this.summaryUpdateView(id, url, pageHost, trackerList)
 		};
 	}
 
-	get panelUpdateView() {
-		const { id } = this._activeTab;
-		const { needsReload, smartBlock } = tabInfo.getTabInfo(id);
-		return {
-			needsReload,
-			smartBlock
-		};
-	}
-
-	get summaryUpdateView() {
-		const { id, url } = this._activeTab;
-		const page_host = url && processUrl(url).host || '';
-		const trackerList = foundBugs.getApps(id, false, url) || [];
+	summaryUpdateView(tabId, tabUrl, urlPageHost, tabTrackerList) {
+		const id = tabId || this._activeTab.id;
+		const url = tabUrl || this._activeTab.url;
+		const page_host = urlPageHost || (url && processUrl(url).host) || '';
+		const trackerList = tabTrackerList || foundBugs.getApps(id, false, url) || [];
 
 		return {
 			alertCounts: foundBugs.getAppsCountByIssues(id, url) || {},
+			// TODO memoize the result of this._buildCategories ?
 			categories: this._buildCategories(id, url, page_host, trackerList),
 			performanceData: tabInfo.getTabInfo(id, 'pageTiming'),
 			trackerCounts: foundBugs.getAppsCountByBlocked(id) || {}
@@ -276,7 +267,7 @@ class PanelData {
 	 * Get conf and tracker data for Blocking View
 	 * @return {Object}		Blocking view data
 	 */
-	get blockingView() {
+	blockingView() {
 		const tab = this._activeTab;
 		if (!tab) { return {}; }
 
@@ -301,7 +292,7 @@ class PanelData {
 	 * Get rewards data for the Rewards View
 	 * @return {Object} Rewards view data
 	 */
-	get rewardsView() {
+	rewardsView() {
 		return {
 			enable_offers: conf.enable_offers,
 			rewards: rewards.storedOffers,
@@ -314,7 +305,7 @@ class PanelData {
 	 * from blockView incase the user is in Simple Mode.
 	 * @return {Object}		Settings View data
 	 */
-	get settingsView() {
+	settingsView() {
 		return {
 			// custom
 			categories: this._buildGlobalCategories(),

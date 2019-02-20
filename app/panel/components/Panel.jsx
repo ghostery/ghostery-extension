@@ -14,6 +14,7 @@
 import React from 'react';
 import Header from '../containers/HeaderContainer';
 import { sendMessage } from '../utils/msg';
+import { setTheme } from '../utils/utils';
 
 /**
  * @class Implement base view with functionality common to all views.
@@ -27,6 +28,8 @@ class Panel extends React.Component {
 		this.closeNotification = this.closeNotification.bind(this);
 		this.clickReloadBanner = this.clickReloadBanner.bind(this);
 		this.filterTrackers = this.filterTrackers.bind(this);
+
+		this.dataInitialized = false;
 	}
 	/**
 	 * Lifecycle event
@@ -36,33 +39,37 @@ class Panel extends React.Component {
 
 		this.uiPort = chrome.runtime.connect({ name: 'panelUIPort' });
 		this.uiPort.onMessage.addListener((msg) => {
-			if (msg) {
-				// init data, only sent when an instance of this port is first opened on a given tab
-				if (msg.summary) {
-					const { panel } = msg;
-					this.props.actions.getPanelData(panel);
-					this.props.actions.updateSummaryData(msg.summary);
+			if (!this.dataInitialized) {
+				this.dataInitialized = true;
 
-					if (panel.is_expert) {
-						// load Detail component
-						this.props.history.push('/detail');
-					}
+				const { panel, summary, blocking } = msg;
 
-					// persist whitelist/blacklist/paused_blocking notifications in the event that the
-					// panel is openend without a page reload.
-					if (Object.keys(panel.needsReload.changes).length) {
-						this.props.actions.showNotification({
-							updated: 'init',
-							reload: true,
-						});
-					}
+				const { current_theme, account } = panel;
+				setTheme(document, current_theme, account);
 
-					if (panel.enable_offers && panel.unread_offer_ids.length > 0) {
-						sendMessage('ping', 'engaged_offer');
-					}
-				} else { // updated data for a tab that's been open
-					this.props.actions.updatePanelData(msg);
+				if (panel.is_expert) {
+					// load Detail component
+					this.props.history.push('/detail');
 				}
+
+				// persist whitelist/blacklist/paused_blocking notifications in the event that the
+				// panel is opened without a page reload
+				if (Object.keys(panel.needsReload.changes).length) {
+					this.props.actions.showNotification({
+						updated: 'init',
+						reload: true
+					});
+				}
+
+				if (panel.enable_offers && panel.unread_offer_ids.length > 0) {
+					sendMessage('ping', 'engaged_offer');
+				}
+
+				if (blocking) { this.props.actions.updateBlockingData(blocking); }
+				this.props.actions.updateSummaryData(summary);
+				this.props.actions.updatePanelData(panel);
+			} else {
+				this.props.actions.updatePanelData(msg);
 			}
 		});
 	}
