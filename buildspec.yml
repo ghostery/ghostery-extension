@@ -3,7 +3,8 @@ version: 0.2
 phases:
   install:
     commands:
-      - dir "C:\Program Files (x86)\Windows Kits\"
+      - dir "C:\Program Files (x86)\Windows Kits\10\"
+      - dir "C:\Program Files (x86)\Windows Kits\10\bin\"
       - powershell -ExecutionPolicy unrestricted -Command "Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"
       # - choco install -y yarn
       - choco install --confirm --limit-output --no-progress googlechrome opera
