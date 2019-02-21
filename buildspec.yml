@@ -3,8 +3,7 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo $Env:CODEBUILD_SRC_DIR_moab
-      - echo $CODEBUILD_SRC_DIR_moab
+      - dir "C:\Program Files (x86)\Windows Kits\"
       - powershell -ExecutionPolicy unrestricted -Command "Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"
       # - choco install -y yarn
       - choco install --confirm --limit-output --no-progress googlechrome opera
@@ -20,7 +19,7 @@ phases:
   build:
     commands:
       # - yarn run lint
-      - yarn run test.unit
+      - yarn run test.unit --verbose=false
       - yarn run build.prod --silent
       - '& "$env:CODEBUILD_SRC_DIR_moab\moab-bin.exe" build'
 
