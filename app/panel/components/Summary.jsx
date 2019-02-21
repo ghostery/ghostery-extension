@@ -74,10 +74,10 @@ class Summary extends React.Component {
 	componentDidMount() {
 		this.uiPort = chrome.runtime.connect({ name: 'summaryUIPort' });
 		this.uiPort.onMessage.addListener((msg) => {
-			if (msg.trackerCounts) {
-				this.props.actions.updateSummaryData(msg);
-			} else if (msg.adblock || msg.antitracking) {
+			if (msg.adblock || msg.antitracking) {
 				this.props.actions.getCliqzModuleData(msg);
+			} else {
+				this.props.actions.updateSummaryData(msg);
 			}
 		});
 	}
@@ -121,6 +121,9 @@ class Summary extends React.Component {
 			} else if (unfixedLatency < 10 && unfixedLatency >= 0) { // < 10s use two decimals
 				pageLatency = (Number(timing.loadEventEnd - timing.navigationStart) / 1000).toFixed(2);
 			}
+			this.setState({ trackerLatencyTotal: pageLatency });
+		// reset page load value if page is reloaded while panel is open
+		} else if (this.props.performanceData && !performanceData) {
 			this.setState({ trackerLatencyTotal: pageLatency });
 		}
 	}

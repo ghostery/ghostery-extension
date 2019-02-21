@@ -73,6 +73,8 @@ class EventHandlers {
 			RequestsMap.clear();
 			this._clearTabData(tabId);
 			this._resetNotifications();
+			// TODO understand why this does not work when placed in the 'reload' branch in onCommitted
+			panelData.clearPagePerformanceInfo(tabId);
 
 			// initialize tabInfo, foundBugs objects for this tab
 			tabInfo.create(tabId, url);

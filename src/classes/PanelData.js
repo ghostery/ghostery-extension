@@ -264,9 +264,24 @@ class PanelData {
 			alertCounts: foundBugs.getAppsCountByIssues(id, url) || {},
 			// TODO memoize the result of this._buildCategories ?
 			categories: this._buildCategories(id, url, page_host, trackerList),
-			performanceData: tabInfo.getTabInfo(id, 'pageTiming'),
+			// performanceData: tabInfo.getTabInfo(id, 'pageTiming'),
 			trackerCounts: foundBugs.getAppsCountByBlocked(id) || {}
 		};
+	}
+
+	updatePagePerformanceInfo(tab_id, clearData) {
+		if (!this._activeTab || this._activeTab.id !== tab_id) { return; }
+
+		const summaryUIPort = this._uiPorts.get('summaryUIPort');
+		if (!summaryUIPort) { return; }
+
+		summaryUIPort.postMessage({
+			performanceData: clearData ? false : tabInfo.getTabInfo(tab_id, 'pageTiming')
+		});
+	}
+
+	clearPagePerformanceInfo(tab_id) {
+		this.updatePagePerformanceInfo(tab_id, true);
 	}
 
 	/**
