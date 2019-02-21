@@ -3,14 +3,14 @@ version: 0.2
 phases:
   install:
     commands:
+      - powershell -ExecutionPolicy unrestricted -Command "Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"
+      # - choco install -y yarn
+      - choco install --confirm --limit-output --no-progress googlechrome opera windows-sdk-10.1
       - dir "C:\Program Files (x86)\Windows Kits\10\bin\arm\"
       - dir "C:\Program Files (x86)\Windows Kits\10\bin\arm64\"
       - dir "C:\Program Files (x86)\Windows Kits\10\bin\x64\"
       - dir "C:\Program Files (x86)\Windows Kits\10\bin\x64\ucrt\"
       - dir "C:\Program Files (x86)\Windows Kits\10\bin\x86\"
-      - powershell -ExecutionPolicy unrestricted -Command "Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"
-      # - choco install -y yarn
-      - choco install --confirm --limit-output --no-progress googlechrome opera
       - npm install -g yarn
   pre_build:
     commands:
