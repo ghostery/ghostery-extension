@@ -66,6 +66,8 @@ class PanelData {
 		getActiveTab((tab) => {
 			const { name } = port;
 
+			this._uiPorts.set(name, port);
+
 			switch (name) {
 				case 'blockingUIPort':
 					port.postMessage(this.blockingView());
@@ -84,6 +86,7 @@ class PanelData {
 					break;
 				case 'summaryUIPort':
 					this._sendCliqzModulesData(port);
+					this.updatePagePerformanceInfo(tab.id);
 					break;
 				default:
 					break;
@@ -96,8 +99,6 @@ class PanelData {
 
 				this._uiPorts.delete(name);
 			});
-
-			this._uiPorts.set(name, port);
 		});
 	}
 
@@ -264,7 +265,6 @@ class PanelData {
 			alertCounts: foundBugs.getAppsCountByIssues(id, url) || {},
 			// TODO memoize the result of this._buildCategories ?
 			categories: this._buildCategories(id, url, page_host, trackerList),
-			// performanceData: tabInfo.getTabInfo(id, 'pageTiming'),
 			trackerCounts: foundBugs.getAppsCountByBlocked(id) || {}
 		};
 	}
