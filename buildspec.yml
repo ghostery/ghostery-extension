@@ -6,11 +6,6 @@ phases:
       - powershell -ExecutionPolicy unrestricted -Command "Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"
       # - choco install -y yarn
       - choco install --confirm --limit-output --no-progress --ignore-checksums googlechrome opera windows-sdk-10.1
-      - dir "C:\Program Files (x86)\Windows Kits\10\bin\arm\"
-      - dir "C:\Program Files (x86)\Windows Kits\10\bin\arm64\"
-      - dir "C:\Program Files (x86)\Windows Kits\10\bin\x64\"
-      - dir "C:\Program Files (x86)\Windows Kits\10\bin\x64\ucrt\"
-      - dir "C:\Program Files (x86)\Windows Kits\10\bin\x86\"
       - npm install -g yarn
   pre_build:
     commands:
@@ -19,7 +14,6 @@ phases:
       - Add-Content -Path C:\Users\ContainerAdministrator\.moabconfig -Value '  [projects.ghostery-extension]'
       - Add-Content -Path C:\Users\ContainerAdministrator\.moabconfig -Value '    edge_makepri_path = "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.17763.0\\x64\\makepri.exe"'
       - Add-Content -Path C:\Users\ContainerAdministrator\.moabconfig -Value '    edge_makeappx_path = "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.17763.0\\x64\\makeappx.exe"'
-      - type C:\Users\ContainerAdministrator\.moabconfig
   build:
     commands:
       # - yarn run lint
