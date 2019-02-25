@@ -1,12 +1,6 @@
 version: 0.2
 
 phases:
-  install:
-    commands:
-      - powershell -ExecutionPolicy unrestricted -Command "Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"
-      # - choco install -y yarn
-      - choco install --confirm --limit-output --no-progress --ignore-checksums googlechrome opera windows-sdk-10.1
-      - npm install -g yarn
   pre_build:
     commands:
       - yarn install --silent
