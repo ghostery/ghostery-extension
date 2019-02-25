@@ -766,7 +766,7 @@ function onMessageHandler(request, sender, callback) {
 		return handleGhosteryDotCom(name, message, tab_id);
 	} else if (origin === 'page_performance' && name === 'recordPageInfo') {
 		tabInfo.setTabInfo(tab_id, 'pageTiming', message.performanceAPI);
-		panelData.updatePagePerformanceInfo(tab_id);
+		panelData.sendPageLoadTime(tab_id);
 		return false;
 	} else if (origin === 'notifications') {
 		return handleNotifications(name, message, tab_id);
