@@ -19,7 +19,7 @@ phases:
       - '& $env:YARN_BIN install --silent'
   build:
     commands:
-      - '& $env:YARN_BIN run lint'
+      # - '& $env:YARN_BIN run lint'
       - '& $env:YARN_BIN run test.unit --verbose=false'
       - '& $env:YARN_BIN run build.prod --silent'
       - '& $env:MOAB_BIN build'
