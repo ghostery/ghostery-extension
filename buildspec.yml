@@ -1,29 +1,30 @@
 version: 0.2
 
+env:
+  variables:
+    YARN_BIN: 'C:\Program Files (x86)\Yarn\bin\yarn.cmd'
+    MOAB_BIN: '$env:CODEBUILD_SRC_DIR_moab\moab-bin.exe'
+    MOABCONFIG_PATH: 'C:\Users\ContainerAdministrator\.moabconfig'
+
 phases:
-  pre_build:
-    commands:
-      - powershell -ExecutionPolicy unrestricted -Command "Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"
-      - Add-Content -Path C:\Users\ContainerAdministrator\.moabconfig -Value '[projects]'
-      - Add-Content -Path C:\Users\ContainerAdministrator\.moabconfig -Value '  [projects.ghostery-extension]'
-      - Add-Content -Path C:\Users\ContainerAdministrator\.moabconfig -Value '    edge_makepri_path = "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.17763.0\\x64\\makepri.exe"'
-      - Add-Content -Path C:\Users\ContainerAdministrator\.moabconfig -Value '    edge_makeappx_path = "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.17763.0\\x64\\makeappx.exe"'
   install:
     commands:
       - choco install --confirm --limit-output --no-progress --ignore-checksums git nodejs yarn googlechrome opera windows-sdk-10.1
-      - '& "C:\Program Files (x86)\Yarn\bin\yarn.cmd" install --silent'
+      - Add-Content -Path $env:MOABCONFIG_PATH -Value '[projects]'
+      - Add-Content -Path $env:MOABCONFIG_PATH -Value '  [projects.ghostery-extension]'
+      - Add-Content -Path $env:MOABCONFIG_PATH -Value '    edge_makepri_path = "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.17763.0\\x64\\makepri.exe"'
+      - Add-Content -Path $env:MOABCONFIG_PATH -Value '    edge_makeappx_path = "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.17763.0\\x64\\makeappx.exe"'
+  pre_build:
+    commands:
+      - '& $env:YARN_BIN install --silent'
   build:
     commands:
-      # - yarn run lint
-      - '& "C:\Program Files (x86)\Yarn\bin\yarn.cmd" run test.unit --verbose=false'
-      - '& "C:\Program Files (x86)\Yarn\bin\yarn.cmd" run build.prod --silent'
-      - '& "$env:CODEBUILD_SRC_DIR_moab\moab-bin.exe" build'
+      - '& $env:YARN_BIN run lint'
+      - '& $env:YARN_BIN run test.unit --verbose=false'
+      - '& $env:YARN_BIN run build.prod --silent'
+      - '& $env:MOAB_BIN build'
 
 artifacts:
   files:
     - build/**/*
   discard-paths: yes
-
-cache:
-  paths:
-    - 'node_modules/**/*'
