@@ -104,7 +104,7 @@ class FoundBugs {
 				appsMetadata: {},
 				appsById: {},
 				issueCounts: {
-					comptability: 0,
+					compatibility: 0,
 					insecure: 0,
 					latency: 0,
 					blocked: 0

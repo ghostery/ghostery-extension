@@ -40,7 +40,7 @@ const policy = new Policy();
  * Table of contents
  * [PORT MANAGEMENT] 	functions that handle initializing, storing, and tearing down port connections
  * [DATA TRANSFER]		functions that send data to the extension panel through existing ports
- * [DATA SETTING]		functions that set and store non-port data values	
+ * [DATA SETTING]		functions that set and store non-port data values
  * @memberOf  BackgroundClasses
  */
 class PanelData {
@@ -68,6 +68,9 @@ class PanelData {
 
 				this._activeTab = tab;
 				this._activeTab.pageHost = url && processUrl(url).host || '';
+
+				console.log('IVZ PanelData#_activeTab set:');
+				console.log(this._activeTab);
 
 				account.getUserSettings().catch(err => log('Failed getting user settings from PanelData#initUIPort:', err));
 			}
@@ -118,6 +121,8 @@ class PanelData {
 	_sendInitialData(name, port) {
 		if (!this._activeTab) { return; }
 
+		let initData;
+
 		switch (name) {
 			case 'blockingUIPort':
 				this._setTrackerListAndCategories();
@@ -125,7 +130,13 @@ class PanelData {
 				break;
 			case 'panelUIPort':
 				this._setTrackerListAndCategories();
-				port.postMessage(this._getInitData());
+				console.log('IVZ PanelData#_sendInitialData _categories and _trackerList and initData after building:');
+				console.log(this._categories);
+				console.log(this._trackerList);
+				initData = this._getInitData();
+				console.log(initData);
+				// port.postMessage(this._getInitData());
+				port.postMessage(initData);
 				break;
 			case 'rewardsUIPort':
 				port.postMessage(this._getRewardsData());
@@ -146,7 +157,7 @@ class PanelData {
 	// [DATA TRANSFER]
 	/**
 	 * An intent-clarifying wrapper used to call sendPageLoadTime in EventHandlers#onBeforeNavigate
-	 * @param 	{number}	tab_id	
+	 * @param 	{number}	tab_id
 	 */
 	clearPageLoadTime(tab_id) {
 		this.sendPageLoadTime(tab_id, true);
@@ -362,7 +373,7 @@ class PanelData {
 		};
 	}
 
-	/** 
+	/**
 	 * Retrieves antitracking and adblock Cliqz data and sends it to the panel
 	 * @param {Object}	port	the port to send the data through
 	 */
@@ -435,6 +446,17 @@ class PanelData {
 		}
 	}
 
+	// TODO refactor - this work should likely not be the direct responsibility of PanelData
+	/**
+	 * Handles updates that need to happen in response to the extension being paused/unpaused
+	 * Called by #set
+	 */
+	_pausedBlockingHelper() {
+		button.update();
+		flushChromeMemoryCache();
+		dispatcher.trigger('globals.save.paused_blocking');
+	}
+
 	// TODO analyze whether this and foundBugs#getCategories can be refactored to reduce duplication
 	/**
 	 * Build tracker categories based on the current trackerList for a given tab_id.
@@ -446,7 +468,7 @@ class PanelData {
 		const smartBlock = tabInfo.getTabInfo(this._activeTab.id, 'smartBlock');
 
 		this._trackerList.forEach((tracker) => {
-			const trackerState = this._getTrackerState(tracker);
+			const trackerState = this._getTrackerState(tracker, smartBlock);
 			let { cat: category } = tracker;
 
 			if (t(`category_${category}`) === `category_${category}`) {
@@ -473,12 +495,38 @@ class PanelData {
 		return categoryArray;
 	}
 
-	
-	_addsUpToBlocked({ ss_blocked, sb_blocked, blocked, ss_allowed, sb_allowed }) {
+	/**
+	 * _buildCategories helper
+	 * @param	{Object}	trackerState	object containing various block/allow states of a tracker
+	 * @return	{boolean}	is the tracker blocked in one of the possible ways?
+	 */
+	_addsUpToBlocked({
+		ss_blocked, sb_blocked, blocked, ss_allowed, sb_allowed
+	}) {
 		return (ss_blocked || sb_blocked || (blocked && !ss_allowed && !sb_allowed));
 	}
 
-	/** 
+	/**
+	 * _buildCategories helper
+	 * @param	{string}	category		the category of a tracker
+	 * @param	{Object}	trackerState	object containing various block/allow states of a tracker
+	 * @return	{Object}	an object with data for a new category
+	 */
+	_buildCategory(category, trackerState) {
+		return {
+			id: category,
+			name: t(`category_${category}`),
+			description: t(`category_${category}+desc`),
+			img_name: (category === 'advertising') ? 'adv' : // Because AdBlock blocks images with 'advertising' in the name.
+				(category === 'social_media') ? 'smed' : category, // Because AdBlock blocks images with 'social' in the name.
+			num_total: 1,
+			num_blocked: this._addsUpToBlocked(trackerState) ? 1 : 0,
+			trackers: [],
+			expanded: conf.expand_all_trackers
+		};
+	}
+
+	/**
 	 * _buildCategories helper
 	 * Builds the tracker data object for a given tracker
 	 * @private
@@ -488,7 +536,9 @@ class PanelData {
 	 * @return	{Object}	object of tracker data
 	 */
 	_buildTracker(tracker, trackerState, smartBlock) {
-		const { id, name, cat, sources, hasCompatibilityIssue, hasInsecureIssue, hasLatencyIssue } = tracker;
+		const {
+			id, name, cat, sources, hasCompatibilityIssue, hasInsecureIssue, hasLatencyIssue
+		} = tracker;
 		const { blocked, ss_allowed, ss_blocked } = trackerState;
 
 		return {
@@ -508,14 +558,16 @@ class PanelData {
 		};
 	}
 
-	/** 
+	/**
 	 * _buildCategories helper
 	 * Computes the various blocked/allowed states for a given tracker
 	 * @private
 	 * @param 	{Object}	tracker
+	 * @param	{Object}	smartBlock
 	 * @return	{Object}	the tracker's blocked/allowed states
 	 */
-	_getTrackerState({ trackerId }) {
+	_getTrackerState({ trackerId }, smartBlock) {
+		const { pageHost } = this._activeTab;
 		const selectedAppIds = conf.selected_app_ids;
 		const pageUnblocks = conf.site_specific_unblocks[pageHost] || [];
 		const pageBlocks = conf.site_specific_blocks[pageHost] || [];
@@ -528,24 +580,6 @@ class PanelData {
 			sb_blocked: smartBlockActive && smartBlock.blocked.hasOwnProperty(`${trackerId}`),
 			sb_allowed: smartBlockActive && smartBlock.unblocked.hasOwnProperty(`${trackerId}`)
 		};
-	}
-
-
-
-
-
-	_buildCategory(category, trackerState) {
-		return {
-			id: category,
-			name: t(`category_${category}`),
-			description: t(`category_${category}+desc`),
-			img_name: (category === 'advertising') ? 'adv' : // Because AdBlock blocks images with 'advertising' in the name.
-				(category === 'social_media') ? 'smed' : category, // Because AdBlock blocks images with 'social' in the name.
-			num_total: 1,
-			num_blocked: this._addsUpToBlocked(trackerState) ? 1 : 0,
-			trackers: [],
-			expanded: conf.expand_all_trackers
-		}
 	}
 
 	/**
@@ -569,48 +603,17 @@ class PanelData {
 		return categories;
 	}
 
-	// TODO refactor - this work should probably not be the direct responsibility of PanelData
 	/**
-	 * Handles updates that need to happen in response to the extension being paused/unpaused
-	 * Called by #set
-	 */
-	_pausedBlockingHelper() {
-		button.update();
-		flushChromeMemoryCache();
-		dispatcher.trigger('globals.save.paused_blocking');
-	}
-
-	/** 
-	 * Store the tracker list and categories values to reduce code duplicdation between the blocking and summary data getters, 
+	 * Store the tracker list and categories values to reduce code duplicdation between the blocking and summary data getters,
 	 * and since these values may be accessed 2+ times in a single updatePanelUI call
 	 */
 	_setTrackerListAndCategories() {
 		const { id, url } = this._activeTab;
-		
+
 		this._trackerList = foundBugs.getApps(id, false, url) || [];
 		this._categories = this._buildCategories();
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	// [/DATA SETTING]
 }
 
 // return the class as a singleton

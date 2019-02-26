@@ -242,7 +242,7 @@ class DonutGraph extends React.Component {
 		// ENTER
 		arcs.enter().append('g')
 			.attr('class', 'arc')
-		.append('path')
+			.append('path')
 			.style('fill', (d, i) => {
 				if (renderGreyscale) {
 					return this.colors.greyscale(this.getTone(categoryCount, i));
