@@ -3,7 +3,6 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - docker version
       - yarn install --silent
       - Add-Content -Path C:\Users\ContainerAdministrator\.moabconfig -Value '[projects]'
       - Add-Content -Path C:\Users\ContainerAdministrator\.moabconfig -Value '  [projects.ghostery-extension]'
