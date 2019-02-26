@@ -12,7 +12,6 @@
  */
 
 import React from 'react';
-import sinon from 'sinon';
 import renderer from 'react-test-renderer';
 import { MemoryRouter } from 'react-router';
 import Rewards from '../Rewards';
