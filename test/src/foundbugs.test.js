@@ -93,7 +93,7 @@ describe('src/classes/FoundBugs.js', () => {
 		global.fetch.returns(Promise.resolve(res));
 	}
 
-	describe('testing souce, patter, and app counts', () => {
+	describe('testing source, pattern, and app counts', () => {
 		test('there should be seven sources', () => {
 			const bugSources = _.flatten(_.pluck(foundBugs.getBugs(url), 'sources'));
 			return expect(bugSources.length).toBe(7);
