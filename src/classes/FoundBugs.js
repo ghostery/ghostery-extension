@@ -146,7 +146,8 @@ class FoundBugs {
 			this._foundBugs[tab_id][bug_id] = {
 				sources: [],
 				hasLatencyIssue: false,
-				hasInsecureIssue: false
+				hasInsecureIssue: false,
+				blocked: true
 			};
 		}
 
