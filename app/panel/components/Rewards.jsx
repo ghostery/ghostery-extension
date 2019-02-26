@@ -49,12 +49,7 @@ class Rewards extends React.Component {
 	 */
 	componentDidMount() {
 		this.uiPort = chrome.runtime.connect({ name: 'rewardsUIPort' });
-		// this check is necessary to avoid error when snapshot match testing with react-test-renderer,
-		// as that test code does not have access to the background scripts and so the port connect call fails
-		this.uiPort && this.uiPort.onMessage.addListener((msg) => {
-			console.log('IVZ rewards data from background!');
-			console.log(msg);
-
+		this.uiPort.onMessage.addListener((msg) => {
 			this.props.actions.getRewardsData(msg);
 		});
 		this.props.actions.sendSignal('hub_open');
@@ -94,7 +89,7 @@ class Rewards extends React.Component {
 	componentWillUnmount() {
 		/* @TODO send message to background to remove port onDisconnect event */
 		this.props.actions.sendSignal('hub_closed');
-		this.uiPort && this.uiPort.disconnect();
+		this.uiPort.disconnect();
 	}
 
 	/**
