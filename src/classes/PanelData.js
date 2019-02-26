@@ -353,7 +353,7 @@ class PanelData {
 			site_whitelist: conf.site_whitelist,
 			pageHost,
 			pageUrl: url || '',
-			siteNotScanned: this._trackerList || false,
+			siteNotScanned: !this._trackerList || false,
 			sitePolicy: policy.getSitePolicy(url) || false,
 			...this._getSummaryUpdateData()
 		};

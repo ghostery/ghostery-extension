@@ -39,6 +39,9 @@ class Panel extends React.Component {
 
 		this.uiPort = chrome.runtime.connect({ name: 'panelUIPort' });
 		this.uiPort.onMessage.addListener((msg) => {
+			console.log('IVZ data from background:');
+			console.log(msg);
+
 			if (!this.dataInitialized) {
 				this.dataInitialized = true;
 
