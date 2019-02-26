@@ -125,7 +125,6 @@ class FoundBugs {
 	 * @param  {number} 	tab_id		tab id
 	 * @param  {number} 	bug_id 		bug id
 	 * @param  {string} 	src			resource url
-	 * @param  {string}		tab_url		tab url
 	 * @param  {boolean} 	blocked 	blocking status of the tracker id from this tab_id
 	 * @param  {string} 	type 		request resource type
 	 */
