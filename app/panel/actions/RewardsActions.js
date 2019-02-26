@@ -67,6 +67,9 @@ export function setOfferRead(id) {
 	};
 }
 
+// TODO the reducer calls getRewardMessage
+// determine whether it would be better to simply call getRewardMessage directly where sendSignal is called
+// (both since reducers are not supposed to have side effects and also because...why the extra complexity?)
 /**
  * Sends a Signal to the Cliqz Offers
  * @param  {String} actionId the action id of the signal
