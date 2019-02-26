@@ -4,12 +4,14 @@ phases:
   pre_build:
     commands:
       - powershell -ExecutionPolicy unrestricted -Command "Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"
-      - choco install --confirm --limit-output --no-progress --ignore-checksums git nodejs yarn googlechrome opera windows-sdk-10.1
-      - '& "C:\Program Files (x86)\Yarn\bin\yarn.cmd" install --silent'
       - Add-Content -Path C:\Users\ContainerAdministrator\.moabconfig -Value '[projects]'
       - Add-Content -Path C:\Users\ContainerAdministrator\.moabconfig -Value '  [projects.ghostery-extension]'
       - Add-Content -Path C:\Users\ContainerAdministrator\.moabconfig -Value '    edge_makepri_path = "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.17763.0\\x64\\makepri.exe"'
       - Add-Content -Path C:\Users\ContainerAdministrator\.moabconfig -Value '    edge_makeappx_path = "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.17763.0\\x64\\makeappx.exe"'
+  install:
+    commands:
+      - choco install --confirm --limit-output --no-progress --ignore-checksums git nodejs yarn googlechrome opera windows-sdk-10.1
+      - '& "C:\Program Files (x86)\Yarn\bin\yarn.cmd" install --silent'
   build:
     commands:
       # - yarn run lint
@@ -21,3 +23,7 @@ artifacts:
   files:
     - build/**/*
   discard-paths: yes
+
+cache:
+  paths:
+    - 'node_modules/**/*'
