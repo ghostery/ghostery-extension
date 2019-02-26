@@ -69,9 +69,6 @@ class PanelData {
 				this._activeTab = tab;
 				this._activeTab.pageHost = url && processUrl(url).host || '';
 
-				console.log('IVZ PanelData#_activeTab set:');
-				console.log(this._activeTab);
-
 				account.getUserSettings().catch(err => log('Failed getting user settings from PanelData#initUIPort:', err));
 			}
 
@@ -102,6 +99,8 @@ class PanelData {
 			// We disconnect and throw away any remaining open ports when this happens
 			// to reduce the risk of bugs and memory leaks
 			if (name === 'panelUIPort') {
+				console.log('IVZ panelUIPort is closing!');
+
 				this._uiPorts.forEach((leftoverPort) => {
 					leftoverPort.disconnect();
 				});
@@ -121,22 +120,19 @@ class PanelData {
 	_sendInitialData(name, port) {
 		if (!this._activeTab) { return; }
 
-		let initData;
-
+		let blockingData;
 		switch (name) {
 			case 'blockingUIPort':
 				this._setTrackerListAndCategories();
-				port.postMessage(this._getBlockingData());
+				blockingData = this._getBlockingData();
+				console.log('IVZ sending blocking data in PanelData#_sendInitialData:');
+				console.log(blockingData);
+				port.postMessage(blockingData);
+				// port.postMessage(this._getBlockingData());
 				break;
 			case 'panelUIPort':
 				this._setTrackerListAndCategories();
-				console.log('IVZ PanelData#_sendInitialData _categories and _trackerList and initData after building:');
-				console.log(this._categories);
-				console.log(this._trackerList);
-				initData = this._getInitData();
-				console.log(initData);
-				// port.postMessage(this._getInitData());
-				port.postMessage(initData);
+				port.postMessage(this._getInitData());
 				break;
 			case 'rewardsUIPort':
 				port.postMessage(this._getRewardsData());
@@ -223,7 +219,7 @@ class PanelData {
 			siteNoteScanned: !this._trackerList || false, // TODO make sure this does not change the previous logic
 			pageUrl: this._activeTab.url,
 			categories: this._categories,
-			...this._settingsAndBlockingCommonData()
+			...this._getSettingsAndBlockingCommonData()
 		};
 	}
 

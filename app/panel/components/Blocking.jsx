@@ -43,6 +43,9 @@ class Blocking extends React.Component {
 	componentDidMount() {
 		this.uiPort = chrome.runtime.connect({ name: 'blockingUIPort' });
 		this.uiPort.onMessage.addListener((msg) => {
+			console.log('IVZ message from background for blockingUIPort!');
+			console.log(msg);
+
 			this.props.actions.updateBlockingData(msg);
 		});
 	}
