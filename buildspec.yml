@@ -3,13 +3,11 @@ version: 0.2
 env:
   variables:
     YARN_BIN: 'C:\Program Files (x86)\Yarn\bin\yarn.cmd'
-    MOAB_BIN: '$env:CODEBUILD_SRC_DIR_moab\moab-bin.exe'
     MOABCONFIG_PATH: 'C:\Users\ContainerAdministrator\.moabconfig'
 
 phases:
   install:
     commands:
-      - echo $env:MOAB_BIN
       - choco install --confirm --limit-output --no-progress --ignore-checksums git nodejs yarn googlechrome opera windows-sdk-10.1
       - Add-Content -Path $env:MOABCONFIG_PATH -Value '[projects]'
       - Add-Content -Path $env:MOABCONFIG_PATH -Value '  [projects.ghostery-extension]'
@@ -23,7 +21,7 @@ phases:
       # - '& $env:YARN_BIN run lint'
       - '& $env:YARN_BIN run test.unit --verbose=false'
       - '& $env:YARN_BIN run build.prod --silent'
-      - '& $env:MOAB_BIN build'
+      - '& "$env:CODEBUILD_SRC_DIR_moab\moab-bin.exe" build'
 
 artifacts:
   files:
