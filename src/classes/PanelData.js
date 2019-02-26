@@ -64,7 +64,11 @@ class PanelData {
 			this._uiPorts.set(name, port);
 
 			if (name === 'panelUIPort') {
+				const { url } = tab;
+
 				this._activeTab = tab;
+				this._activeTab.pageHost = url && processUrl(url).host || '';
+
 				account.getUserSettings().catch(err => log('Failed getting user settings from PanelData#initUIPort:', err));
 			}
 
@@ -329,8 +333,7 @@ class PanelData {
 	 * @return {Object}		Summary view data
 	 */
 	_getSummaryInitData() {
-		const { id, url } = this._activeTab;
-		const pageHost = url && processUrl(url).host || '';
+		const { url, pageHost } = this._activeTab;
 
 		return {
 			paused_blocking: globals.SESSION.paused_blocking,
@@ -341,7 +344,7 @@ class PanelData {
 			pageUrl: url || '',
 			siteNotScanned: this._trackerList || false,
 			sitePolicy: policy.getSitePolicy(url) || false,
-			...this._getSummaryUpdateData(id, url)
+			...this._getSummaryUpdateData()
 		};
 	}
 
@@ -349,9 +352,8 @@ class PanelData {
 	 * Get the summary view data that may change when a new tracker is found
 	 * @return {Object}		Fresh alertCounts, categories, and trackerCounts values
 	 */
-	_getSummaryUpdateData(tabId, tabUrl) {
-		const id = tabId || this._activeTab.id;
-		const url = tabUrl || this._activeTab.url;
+	_getSummaryUpdateData() {
+		const { id, url } = this._activeTab;
 
 		return {
 			alertCounts: foundBugs.getAppsCountByIssues(id, url) || {},
@@ -380,18 +382,6 @@ class PanelData {
 
 
 	// [DATA SETTING]
-	/** 
-	 * Memoize the tracker list and categories values to reduce code duplicdation between the blocking and summary data getters, 
-	 * and since these values may be accessed 2+ times in a single updatePanelUI call
-	 */
-	_setTrackerListAndCategories() {
-		const { id, url } = this._activeTab;
-		const pageHost = url && processUrl(url).host || '';
-		
-		this._trackerList = foundBugs.getApps(id, false, url) || [];
-		this._categories = this._buildCategories(id, url, pageHost, trackerList);
-	}
-
 	/**
 	 * Update Conf properties with new data from the UI.
 	 * Called via setPanelData message.
@@ -409,19 +399,12 @@ class PanelData {
 			data.enable_anti_tracking = false;
 		}
 
-		const _pausedBlockingHelper = () => {
-			button.update();
-			flushChromeMemoryCache();
-			dispatcher.trigger('globals.save.paused_blocking');
-		};
-
 		// Set the conf from data
 		for (const [key, value] of objectEntries(data)) {
 			if (conf.hasOwnProperty(key) && !_.isEqual(conf[key], value)) {
 				conf[key] = value;
-				if (SYNC_SET.has(key)) {
-					syncSetDataChanged = true;
-				}
+				syncSetDataChanged = SYNC_SET.has(key) ? true : syncSetDataChanged;
+			// TODO refactor - this work should probably not be the direct responsibility of PanelData
 			} else if (key === 'paused_blocking') {
 				if (typeof value === 'number') {
 					// pause blocking
@@ -430,7 +413,7 @@ class PanelData {
 					// enable after timeout
 					setTimeout(() => {
 						globals.SESSION.paused_blocking = false;
-						_pausedBlockingHelper();
+						this._pausedBlockingHelper();
 					}, value);
 				} else {
 					// toggle blocking
@@ -438,16 +421,12 @@ class PanelData {
 					globals.SESSION.paused_blocking_timeout = 0;
 				}
 
-				_pausedBlockingHelper();
+				this._pausedBlockingHelper();
 			}
 		}
 
-		if (data.needsReload) {
-			getActiveTab((tab) => {
-				if (tab && tab.id && tabInfo.getTabInfo(tab.id)) {
-					tabInfo.setTabInfo(tab.id, 'needsReload', data.needsReload);
-				}
-			});
+		if (data.needsReload && this._activeTab) {
+			tabInfo.setTabInfo(this._activeTab.id, 'needsReload', data.needsReload);
 		}
 
 		if (syncSetDataChanged) {
@@ -456,48 +435,19 @@ class PanelData {
 		}
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	// TODO analyze whether this and foundBugs#getCategories can be refactored to reduce duplication
 	/**
 	 * Build tracker categories based on the current trackerList for a given tab_id.
-	 *
 	 * @private
-	 *
-	 * @param  {number}   tab_id			tab id
-	 * @param  {strng} tab_url			tab url
-	 * @param  {strng} pageHost			tab url host
-	 * @param  {Object} trackerList		list of trackers for the tab
-	 * @return {array} 					array of categories
+	 * @return	{array}		array of categories
 	 */
-	_buildCategories(tab_id, tab_url, pageHost, trackerList) {
-		const selectedAppIds = conf.selected_app_ids;
-		const pageUnblocks = conf.site_specific_unblocks[pageHost] || [];
-		const pageBlocks = conf.site_specific_blocks[pageHost] || [];
+	_buildCategories() {
 		const categories = {};
-		const categoryArray = [];
-		const smartBlockActive = conf.enable_smart_block;
-		const smartBlock = tabInfo.getTabInfo(tab_id, 'smartBlock');
+		const smartBlock = tabInfo.getTabInfo(this._activeTab.id, 'smartBlock');
 
-		trackerList.forEach((tracker) => {
-			let category = tracker.cat;
-			const blocked = selectedAppIds.hasOwnProperty(tracker.id);
-			const ss_allowed = pageUnblocks.includes(+tracker.id);
-			const ss_blocked = pageBlocks.includes(+tracker.id);
-			const sb_blocked = smartBlockActive && smartBlock.blocked.hasOwnProperty(`${tracker.id}`);
-			const sb_allowed = smartBlockActive && smartBlock.unblocked.hasOwnProperty(`${tracker.id}`);
+		this._trackerList.forEach((tracker) => {
+			const trackerState = this._getTrackerState(tracker);
+			let { cat: category } = tracker;
 
 			if (t(`category_${category}`) === `category_${category}`) {
 				category = 'uncategorized';
@@ -505,52 +455,97 @@ class PanelData {
 
 			if (categories.hasOwnProperty(category)) {
 				categories[category].num_total++;
-				if (ss_blocked || sb_blocked || (blocked && !ss_allowed && !sb_allowed)) {
-					categories[category].num_blocked++;
-				}
+				if (this._addsUpToBlocked(trackerState)) { categories[category].num_blocked++; }
 			} else {
-				categories[category] = {
-					id: category,
-					name: t(`category_${category}`),
-					description: t(`category_${category}_desc`),
-					img_name: (category === 'advertising') ? 'adv' : // Because AdBlock blocks images with 'advertising' in the name.
-						(category === 'social_media') ? 'smed' : category, // Because AdBlock blocks images with 'social' in the name.
-					num_total: 1,
-					num_blocked: (ss_blocked || sb_blocked || (blocked && !ss_allowed && !sb_allowed)) ? 1 : 0,
-					trackers: [],
-					expanded: conf.expand_all_trackers
-				};
+				categories[category] = this._buildCategory(category, trackerState);
 			}
-			categories[category].trackers.push({
-				id: tracker.id,
-				name: tracker.name,
-				description: '',
-				blocked,
-				ss_allowed,
-				ss_blocked,
-				shouldShow: true, // used for filtering tracker list
-				catId: category,
-				sources: tracker.sources,
-				warningCompatibility: tracker.hasCompatibilityIssue,
-				warningInsecure: tracker.hasInsecureIssue,
-				warningSlow: tracker.hasLatencyIssue,
-				warningSmartBlock: (smartBlock.blocked.hasOwnProperty(tracker.id) && 'blocked') || (smartBlock.unblocked.hasOwnProperty(tracker.id) && 'unblocked') || false,
-			});
+			categories[category].trackers.push(this._buildTracker(tracker, trackerState, smartBlock));
 		});
 
-		let	categoryName;
-		for (categoryName in categories) {
-			if (categories.hasOwnProperty(categoryName)) {
-				categoryArray.push(categories[categoryName]);
-			}
-		}
+		const categoryArray = Object.values(categories);
 
 		categoryArray.sort((a, b) => {
 			a = a.name.toLowerCase(); // eslint-disable-line no-param-reassign
 			b = b.name.toLowerCase(); // eslint-disable-line no-param-reassign
 			return (a > b ? 1 : (a < b ? -1 : 0));
 		});
+
 		return categoryArray;
+	}
+
+	
+	_addsUpToBlocked({ ss_blocked, sb_blocked, blocked, ss_allowed, sb_allowed }) {
+		return (ss_blocked || sb_blocked || (blocked && !ss_allowed && !sb_allowed));
+	}
+
+	/** 
+	 * _buildCategories helper
+	 * Builds the tracker data object for a given tracker
+	 * @private
+	 * @param	{Object}	tracker
+	 * @param	{Object}	trackerState
+	 * @param	{Object}	smartBlock		smart blocking stats for the active tab
+	 * @return	{Object}	object of tracker data
+	 */
+	_buildTracker(tracker, trackerState, smartBlock) {
+		const { id, name, cat, sources, hasCompatibilityIssue, hasInsecureIssue, hasLatencyIssue } = tracker;
+		const { blocked, ss_allowed, ss_blocked } = trackerState;
+
+		return {
+			id,
+			name,
+			description: '',
+			blocked,
+			ss_allowed,
+			ss_blocked,
+			shouldShow: true, // used for filtering tracker list
+			catId: cat,
+			sources,
+			warningCompatibility: hasCompatibilityIssue,
+			warningInsecure: hasInsecureIssue,
+			warningSlow: hasLatencyIssue,
+			warningSmartBlock: (smartBlock.blocked.hasOwnProperty(id) && 'blocked') || (smartBlock.unblocked.hasOwnProperty(id) && 'unblocked') || false
+		};
+	}
+
+	/** 
+	 * _buildCategories helper
+	 * Computes the various blocked/allowed states for a given tracker
+	 * @private
+	 * @param 	{Object}	tracker
+	 * @return	{Object}	the tracker's blocked/allowed states
+	 */
+	_getTrackerState({ trackerId }) {
+		const selectedAppIds = conf.selected_app_ids;
+		const pageUnblocks = conf.site_specific_unblocks[pageHost] || [];
+		const pageBlocks = conf.site_specific_blocks[pageHost] || [];
+		const smartBlockActive = conf.enable_smart_block;
+
+		return {
+			blocked: selectedAppIds.hasOwnProperty(trackerId),
+			ss_allowed: pageUnblocks.includes(+trackerId),
+			ss_blocked: pageBlocks.includes(+trackerId),
+			sb_blocked: smartBlockActive && smartBlock.blocked.hasOwnProperty(`${trackerId}`),
+			sb_allowed: smartBlockActive && smartBlock.unblocked.hasOwnProperty(`${trackerId}`)
+		};
+	}
+
+
+
+
+
+	_buildCategory(category, trackerState) {
+		return {
+			id: category,
+			name: t(`category_${category}`),
+			description: t(`category_${category}+desc`),
+			img_name: (category === 'advertising') ? 'adv' : // Because AdBlock blocks images with 'advertising' in the name.
+				(category === 'social_media') ? 'smed' : category, // Because AdBlock blocks images with 'social' in the name.
+			num_total: 1,
+			num_blocked: this._addsUpToBlocked(trackerState) ? 1 : 0,
+			trackers: [],
+			expanded: conf.expand_all_trackers
+		}
 	}
 
 	/**
@@ -573,6 +568,49 @@ class PanelData {
 		});
 		return categories;
 	}
+
+	// TODO refactor - this work should probably not be the direct responsibility of PanelData
+	/**
+	 * Handles updates that need to happen in response to the extension being paused/unpaused
+	 * Called by #set
+	 */
+	_pausedBlockingHelper() {
+		button.update();
+		flushChromeMemoryCache();
+		dispatcher.trigger('globals.save.paused_blocking');
+	}
+
+	/** 
+	 * Store the tracker list and categories values to reduce code duplicdation between the blocking and summary data getters, 
+	 * and since these values may be accessed 2+ times in a single updatePanelUI call
+	 */
+	_setTrackerListAndCategories() {
+		const { id, url } = this._activeTab;
+		
+		this._trackerList = foundBugs.getApps(id, false, url) || [];
+		this._categories = this._buildCategories();
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 // return the class as a singleton
