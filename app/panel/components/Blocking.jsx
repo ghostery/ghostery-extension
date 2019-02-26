@@ -253,19 +253,28 @@ class Blocking extends React.Component {
 	* @return {ReactComponent}   ReactComponent instance
 	*/
 	render() {
-		const { categories } = this.props;
+		const {
+			actions,
+			categories,
+			isCategoryExpanded,
+			paused_blocking,
+			sitePolicy,
+			smartBlock,
+			smartBlockActive
+		} = this.props;
+
 		return (
 			<div id="content-blocking">
 				<BlockingHeader
 					isCategoryExpanded={this.state.isCategoryExpanded}
 					categories={categories}
 					expandAll={this.props.expand_all_trackers}
-					actions={this.props.actions}
-					sitePolicy={this.props.sitePolicy}
-					paused_blocking={this.props.paused_blocking}
+					actions={actions}
+					sitePolicy={sitePolicy}
+					paused_blocking={paused_blocking}
 					selected_app_ids={this.props.selected_app_ids}
-					smartBlockActive={this.props.smartBlockActive}
-					smartBlock={this.props.smartBlock}
+					smartBlockActive={smartBlockActive}
+					smartBlock={smartBlock}
 				/>
 				{(this.state.disableBlocking && this.props.is_expanded) ?
 					<NotScanned />
@@ -273,14 +282,15 @@ class Blocking extends React.Component {
 					<div className={`${this.state.blockingClasses} blocking-trackers show-warnings`}>
 						{ categories.length > 0 &&
 							<Categories
+								isCategoryExpanded={isCategoryExpanded}
 								categories={categories}
-								actions={this.props.actions}
+								actions={actions}
 								show_tracker_urls={this.props.show_tracker_urls}
-								sitePolicy={this.props.sitePolicy}
-								paused_blocking={this.props.paused_blocking}
+								sitePolicy={sitePolicy}
+								paused_blocking={paused_blocking}
 								language={this.props.language}
-								smartBlockActive={this.props.smartBlockActive}
-								smartBlock={this.props.smartBlock}
+								smartBlockActive={smartBlockActive}
+								smartBlock={smartBlock}
 							/>
 						}
 					</div>
