@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -18,8 +18,7 @@ import {
 	UPDATE_CATEGORY_BLOCKED,
 	UPDATE_TRACKER_BLOCKED,
 	UPDATE_TRACKER_TRUST_RESTRICT,
-	TOGGLE_EXPAND_ALL,
-	TOGGLE_EXPAND_CATEGORY
+	TOGGLE_EXPAND_ALL
 } from '../constants/constants';
 
 /**
@@ -112,18 +111,6 @@ export function updateTrackerTrustRestrict(data) {
 export function toggleExpandAll(data) {
 	return {
 		type: TOGGLE_EXPAND_ALL,
-		data,
-	};
-}
-
-/**
- * Called from Category.toggleCategoryTrackers
- * @param  {Object} data
- * @return {Object}
- */
-export function toggleExpandCategory(data) {
-	return {
-		type: TOGGLE_EXPAND_CATEGORY,
 		data,
 	};
 }

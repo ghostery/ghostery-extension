@@ -170,24 +170,6 @@ export function toggleExpandAll(state, action) {
 }
 
 /**
- * Set property for expanding category
- * @memberOf PanelUtils
- * @param  {Object} state 			current state
- * @param  {Object} action 			action which provides data
- * @return {Object} object 			updated categories
- */
-export function toggleExpandCategory(state, action) {
-	const { expanded } = action.data;
-	const updated_categories = JSON.parse(JSON.stringify(state.categories)); // deep clone
-	const catIndex = updated_categories.findIndex(item => item.id === action.data.cat_id);
-	const updated_category = updated_categories[catIndex];
-	updated_category.expanded = expanded;
-	return {
-		categories: updated_categories,
-	};
-}
-
-/**
  * Update tracker blocked / allowed status. Persist the change.
  * @memberOf PanelUtils
  * @param  {Object} state 			current state

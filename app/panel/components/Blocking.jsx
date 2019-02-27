@@ -16,6 +16,7 @@ import Categories from './Blocking/Categories';
 import BlockingHeader from './Blocking/BlockingHeader';
 import NotScanned from './BuildingBlocks/NotScanned';
 import { updateSummaryBlockingCount } from '../utils/blocking';
+
 /**
  * @class Implement Blocking View in the right
  * pane of the detailed (expert) panel.
@@ -30,6 +31,7 @@ class Blocking extends React.Component {
 			disableBlocking: false
 		};
 	}
+
 	/**
 	 * Lifecycle event
 	 */
@@ -37,15 +39,13 @@ class Blocking extends React.Component {
 		this.updateBlockingClasses(this.props);
 		this.updateSiteNotScanned(this.props);
 	}
+
 	/**
 	 * Lifecycle event
 	 */
 	componentDidMount() {
 		this.uiPort = chrome.runtime.connect({ name: 'blockingUIPort' });
 		this.uiPort.onMessage.addListener((msg) => {
-			console.log('IVZ message from background for blockingUIPort!');
-			console.log(msg);
-
 			this.props.actions.updateBlockingData(msg);
 		});
 	}
@@ -54,22 +54,10 @@ class Blocking extends React.Component {
 	 * Lifecycle event
 	 */
 	componentWillReceiveProps(nextProps) {
-		// triggered by update to the redux store
-		/*
-		nextProps.categories.forEach((nextCat) => {
-			const { id } = nextCat;
-			const oldCat = (categories.filter((cat) => {
-				cat.id === id;
-			}))[0];
-			if (oldCat) {
-				nextCat.expanded = oldCat.expanded
-			}
-		})
-		*/
-
 		this.updateBlockingClasses(nextProps);
 		this.updateSiteNotScanned(nextProps);
 	}
+
 	/**
 	 * Lifecycle event
 	 */
@@ -120,6 +108,7 @@ class Blocking extends React.Component {
 
 		this.props.actions.updateCategories(updated_categories);
 	}
+
 	/**
 	* Filter trackers in categories to show only
 	* those that are blocked. Trigger action.
@@ -143,6 +132,7 @@ class Blocking extends React.Component {
 
 		this.props.actions.updateCategories(updated_categories);
 	}
+
 	/**
 	* Filter trackers in categories to show only
 	* those that have warnings. Trigger action.
@@ -166,6 +156,7 @@ class Blocking extends React.Component {
 
 		this.props.actions.updateCategories(updated_categories);
 	}
+
 	/**
 	* Filter trackers in categories to show only those
 	* that have compatibility warnings. Trigger action.
@@ -189,6 +180,7 @@ class Blocking extends React.Component {
 
 		this.props.actions.updateCategories(updated_categories);
 	}
+
 	/**
 	 * Filter trackers in categories to show only those that
 	 * have slow/insecure warnings. Trigger action.
@@ -212,6 +204,7 @@ class Blocking extends React.Component {
 
 		this.props.actions.updateCategories(updated_categories);
 	}
+
 	/**
 	* Set dynamic classes on .blocking-trackers. Set state.
 	* @param  {Object} props
@@ -225,6 +218,7 @@ class Blocking extends React.Component {
 
 		this.setState({ blockingClasses: classes.join(' ') });
 	}
+
 	/**
 	* Disable controls for a site that cannot be scanned by Ghostery. Set state.
 	* @param {Object}	props	nextProps
@@ -239,6 +233,7 @@ class Blocking extends React.Component {
 			this.setState({ disableBlocking: false });
 		}
 	}
+
 	/**
 	* Filter tracker list based on filter data received from props.
 	*/
@@ -263,6 +258,7 @@ class Blocking extends React.Component {
 			this.setShow(filter.name);
 		}
 	}
+
 	/**
 	* Render blocking panel.
 	* @return {ReactComponent}   ReactComponent instance
@@ -277,9 +273,6 @@ class Blocking extends React.Component {
 			smartBlock,
 			smartBlockActive
 		} = this.props;
-
-		// console.log('IVZ Blocking#render PROPS:');
-		// console.log(this.props);
 
 		return (
 			<div id="content-blocking">
@@ -299,7 +292,6 @@ class Blocking extends React.Component {
 					<div className={`${this.state.blockingClasses} blocking-trackers show-warnings`}>
 						{ categories.length > 0 &&
 							<Categories
-								// areCategoriesExpanded={this.state.areCategoriesExpanded}
 								expandAll={expand_all_trackers}
 								categories={categories}
 								actions={actions}

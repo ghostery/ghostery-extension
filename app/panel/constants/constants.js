@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -45,7 +45,6 @@ export const UPDATE_TRACKER_BLOCKED = 'UPDATE_TRACKER_BLOCKED';
 export const UPDATE_TRACKER_TRUST_RESTRICT = 'UPDATE_TRACKER_TRUST_RESTRICT';
 export const UPDATE_BLOCK_ALL_TRACKERS = 'UPDATE_BLOCK_ALL_TRACKERS';
 export const TOGGLE_EXPAND_ALL = 'TOGGLE_EXPAND_ALL';
-export const TOGGLE_EXPAND_CATEGORY = 'TOGGLE_EXPAND_CATEGORY';
 
 // settings
 export const IMPORT_SETTINGS_DIALOG = 'IMPORT_SETTINGS_DIALOG';

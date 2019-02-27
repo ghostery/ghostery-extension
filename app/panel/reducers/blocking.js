@@ -20,10 +20,9 @@ import {
 	UPDATE_CATEGORY_BLOCKED,
 	UPDATE_TRACKER_BLOCKED,
 	UPDATE_TRACKER_TRUST_RESTRICT,
-	TOGGLE_EXPAND_ALL,
-	TOGGLE_EXPAND_CATEGORY
+	TOGGLE_EXPAND_ALL
 } from '../constants/constants';
-import { updateTrackerBlocked, updateCategoryBlocked, updateBlockAllTrackers, toggleExpandAll, toggleExpandCategory } from '../utils/blocking';
+import { updateTrackerBlocked, updateCategoryBlocked, updateBlockAllTrackers, toggleExpandAll } from '../utils/blocking';
 import { updateObject } from '../utils/utils';
 import { sendMessage } from '../utils/msg';
 
@@ -75,10 +74,6 @@ export default (state = initialState, action) => {
 		}
 		case TOGGLE_EXPAND_ALL: {
 			const updated = toggleExpandAll(state, action);
-			return Object.assign({}, state, updated);
-		}
-		case TOGGLE_EXPAND_CATEGORY: {
-			const updated = toggleExpandCategory(state, action);
 			return Object.assign({}, state, updated);
 		}
 		case UPDATE_TRACKER_TRUST_RESTRICT: {

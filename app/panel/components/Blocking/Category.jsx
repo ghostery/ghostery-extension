@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -13,6 +13,7 @@
 
 import React from 'react';
 import Trackers from './Trackers';
+
 /**
  * @class Implement Category component, which represents a
  * container for the list of trackers. This component is shared
@@ -35,6 +36,7 @@ class Category extends React.Component {
 		this.showTooltip = this.showTooltip.bind(this);
 		this.hideTooltip = this.hideTooltip.bind(this);
 	}
+
 	/**
 	 * Lifecycle event. When view is opening we save in state
 	 * new values related to tracker blocking to ensure correct rendering.
@@ -44,6 +46,7 @@ class Category extends React.Component {
 			this.updateCategoryCheckbox(this.props.category);
 		}
 	}
+
 	/**
 	 * Lifecycle event. When props changed we save in state new values
 	 * to ensure correct rendering.
@@ -52,6 +55,7 @@ class Category extends React.Component {
 		this.updateCategoryExpanded(nextProps.expandAll);
 		this.updateCategoryCheckbox(nextProps.category);
 	}
+
 	/**
 	 * Set tooltip showing state to true in state which results in actual showing
 	 * of the tooltip.
@@ -60,6 +64,7 @@ class Category extends React.Component {
 	showTooltip() {
 		this.setState({ showTooltip: true });
 	}
+
 	/**
 	 * Set tooltip showing state to false in state which results in eventual hiding
 	 * of the tooltip.
@@ -95,20 +100,16 @@ class Category extends React.Component {
 			totalShownBlocked,
 		});
 	}
+
 	/**
 	 * Implement handler for clicking on the category name or on the chevron.
-	 * Trigger action which will result in re-rendering category in
-	 * appropriate (expanded/contracted) state.
 	 */
 	toggleCategoryTrackers() {
-		/*
-		const expanded = !this.props.category.expanded;
-		this.props.actions.toggleExpandCategory({ expanded, cat_id: this.props.category.id });
-		*/
 		this.setState(state => ({
 			isExpanded: !state.isExpanded
 		}));
 	}
+
 	/**
 	 * Implement handler for clicking on the category block/unblock icon.
 	 * Trigger action which will block/unblock all trackers in the category.
@@ -140,6 +141,7 @@ class Category extends React.Component {
 			});
 		}
 	}
+
 	/**
 	 *	Update showTrackers state attribute with the value coming from nextProps.
 	 *	Called in lifecycle events.
@@ -149,17 +151,8 @@ class Category extends React.Component {
 		if (expandAll !== this.props.expandAll && expandAll !== this.state.isExpanded) {
 			this.setState({ isExpanded: expandAll });
 		}
-
-		// console.log('IVZ Category#updateCategoryExpanded called! expandAll, then this.state:');
-		// console.log(expandAll);
-		// console.log(this.state);
-
-		/*
-		if (expanded !== this.state.showTrackers) {
-			this.setState({ showTrackers: expanded });
-		}
-		*/
 	}
+
 	/**
 	* Render a list of categories. Pass globalBlocking flag to all trackers
 	* in the category so that they would know which view they are part of.
@@ -247,7 +240,6 @@ class Category extends React.Component {
 					</div>
 				</div>
 				{
-					// category.expanded &&
 					this.state.isExpanded &&
 					<Trackers
 						globalBlocking={globalBlocking}
