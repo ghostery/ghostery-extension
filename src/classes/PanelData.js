@@ -267,7 +267,7 @@ class PanelData {
 		const id = tabId || this._activeTab.id;
 		const { needsReload, smartBlock } = tabInfo.getTabInfo(id);
 		return {
-			needsReload,
+			needsReload: needsReload || { changes: {} },
 			smartBlock
 		};
 	}
