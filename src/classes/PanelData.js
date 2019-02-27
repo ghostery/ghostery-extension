@@ -517,8 +517,8 @@ class PanelData {
 				(category === 'social_media') ? 'smed' : category, // Because AdBlock blocks images with 'social' in the name.
 			num_total: 1,
 			num_blocked: this._addsUpToBlocked(trackerState) ? 1 : 0,
-			trackers: [],
-			expanded: conf.expand_all_trackers
+			trackers: []
+			// expanded: conf.expand_all_trackers
 		};
 	}
 

@@ -27,11 +27,16 @@ class Categories extends React.Component {
 	* @return {ReactComponent}   ReactComponent instance
 	*/
 	render() {
-		const { categories } = this.props;
+		console.log('IVZ Categories#render PROPS:');
+		console.log(this.props);
+
+		const { categories, expandAll } = this.props;
 		const globalBlocking = !!this.props.globalBlocking;
 		const filtered = !!this.props.filtered;
 		const categoryList = categories.map((cat, index) => (
 			<Category
+				// isCategoryExpanded={areCategoriesExpanded.get(cat)}
+				expandAll={expandAll}
 				globalBlocking={globalBlocking}
 				index={index}
 				category={cat}

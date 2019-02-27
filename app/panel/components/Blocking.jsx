@@ -24,10 +24,10 @@ import { updateSummaryBlockingCount } from '../utils/blocking';
 class Blocking extends React.Component {
 	constructor(props) {
 		super(props);
+
 		this.state = {
 			blockingClasses: '',
-			disableBlocking: false,
-			isCategoryExpanded: new Map()
+			disableBlocking: false
 		};
 	}
 	/**
@@ -55,6 +55,18 @@ class Blocking extends React.Component {
 	 */
 	componentWillReceiveProps(nextProps) {
 		// triggered by update to the redux store
+		/*
+		nextProps.categories.forEach((nextCat) => {
+			const { id } = nextCat;
+			const oldCat = (categories.filter((cat) => {
+				cat.id === id;
+			}))[0];
+			if (oldCat) {
+				nextCat.expanded = oldCat.expanded
+			}
+		})
+		*/
+
 		this.updateBlockingClasses(nextProps);
 		this.updateSiteNotScanned(nextProps);
 	}
@@ -259,19 +271,21 @@ class Blocking extends React.Component {
 		const {
 			actions,
 			categories,
-			isCategoryExpanded,
+			expand_all_trackers,
 			paused_blocking,
 			sitePolicy,
 			smartBlock,
 			smartBlockActive
 		} = this.props;
 
+		// console.log('IVZ Blocking#render PROPS:');
+		// console.log(this.props);
+
 		return (
 			<div id="content-blocking">
 				<BlockingHeader
-					isCategoryExpanded={this.state.isCategoryExpanded}
 					categories={categories}
-					expandAll={this.props.expand_all_trackers}
+					expandAll={expand_all_trackers}
 					actions={actions}
 					sitePolicy={sitePolicy}
 					paused_blocking={paused_blocking}
@@ -285,7 +299,8 @@ class Blocking extends React.Component {
 					<div className={`${this.state.blockingClasses} blocking-trackers show-warnings`}>
 						{ categories.length > 0 &&
 							<Categories
-								isCategoryExpanded={isCategoryExpanded}
+								// areCategoriesExpanded={this.state.areCategoriesExpanded}
+								expandAll={expand_all_trackers}
 								categories={categories}
 								actions={actions}
 								show_tracker_urls={this.props.show_tracker_urls}

@@ -26,6 +26,7 @@ class Category extends React.Component {
 			allShownBlocked: false,
 			totalShownBlocked: false,
 			showTooltip: false,
+			isExpanded: this.props.expandAll
 		};
 
 		// event bindings
@@ -48,7 +49,7 @@ class Category extends React.Component {
 	 * to ensure correct rendering.
 	 */
 	componentWillReceiveProps(nextProps) {
-		this.updateCategoryExpanded(nextProps.expanded);
+		this.updateCategoryExpanded(nextProps.expandAll);
 		this.updateCategoryCheckbox(nextProps.category);
 	}
 	/**
@@ -100,8 +101,13 @@ class Category extends React.Component {
 	 * appropriate (expanded/contracted) state.
 	 */
 	toggleCategoryTrackers() {
+		/*
 		const expanded = !this.props.category.expanded;
 		this.props.actions.toggleExpandCategory({ expanded, cat_id: this.props.category.id });
+		*/
+		this.setState(state => ({
+			isExpanded: !state.isExpanded
+		}));
 	}
 	/**
 	 * Implement handler for clicking on the category block/unblock icon.
@@ -137,12 +143,22 @@ class Category extends React.Component {
 	/**
 	 *	Update showTrackers state attribute with the value coming from nextProps.
 	 *	Called in lifecycle events.
-	 *	@param {boolean}     category expanded state
+	 *	@param {boolean}     global expanded state
 	 */
-	updateCategoryExpanded(expanded) {
+	updateCategoryExpanded(expandAll) {
+		if (expandAll !== this.props.expandAll && expandAll !== this.state.isExpanded) {
+			this.setState({ isExpanded: expandAll });
+		}
+
+		// console.log('IVZ Category#updateCategoryExpanded called! expandAll, then this.state:');
+		// console.log(expandAll);
+		// console.log(this.state);
+
+		/*
 		if (expanded !== this.state.showTrackers) {
 			this.setState({ showTrackers: expanded });
 		}
+		*/
 	}
 	/**
 	* Render a list of categories. Pass globalBlocking flag to all trackers
@@ -231,7 +247,8 @@ class Category extends React.Component {
 					</div>
 				</div>
 				{
-					category.expanded &&
+					// category.expanded &&
+					this.state.isExpanded &&
 					<Trackers
 						globalBlocking={globalBlocking}
 						trackers={category.trackers}
