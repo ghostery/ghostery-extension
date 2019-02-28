@@ -73,7 +73,6 @@ class DonutGraph extends React.Component {
 			categories,
 			renderRedscale,
 			renderGreyscale,
-			totalCount,
 			isSmall,
 		} = this.props;
 
@@ -86,8 +85,7 @@ class DonutGraph extends React.Component {
 		this.prepareDonutContainer(isSmall);
 		this.bakeDonut(categories, {
 			renderRedscale,
-			renderGreyscale,
-			totalCount
+			renderGreyscale
 		});
 	}
 
@@ -149,7 +147,6 @@ class DonutGraph extends React.Component {
 		this.bakeDonut(nextProps.categories, {
 			renderRedscale: nextProps.renderRedscale,
 			renderGreyscale: nextProps.renderGreyscale,
-			totalCount: nextProps.totalCount,
 			isSmall: nextProps.isSmall,
 		});
 	}
