@@ -79,6 +79,7 @@ class DonutGraph extends React.Component {
 			isSmall,
 		} = this.props;
 
+		// TODO add padAngle if it looks good with the 8.4 UI update
 		this.trackerPie = pie()
 			.startAngle(-Math.PI)
 			.endAngle(Math.PI)
@@ -104,17 +105,6 @@ class DonutGraph extends React.Component {
 			isSmall
 		} = this.props;
 
-		/*
-		if (categories.length !== nextProps.categories.length) {
-			this._bakeDonut(nextProps.categories, {
-				renderRedscale: nextProps.renderRedscale,
-				renderGreyscale: nextProps.renderGreyscale,
-				isSmall: nextProps.isSmall,
-			});
-			return;
-		}
-		*/
-
 		if (isSmall !== nextProps.isSmall ||
 			renderRedscale !== nextProps.renderRedscale ||
 			renderGreyscale !== nextProps.renderGreyscale ||
@@ -125,8 +115,8 @@ class DonutGraph extends React.Component {
 			return;
 		}
 
-		// this function gets called many times during page load as new trackers are found
-		// so only calculate trackerTotal if we don't already have to redraw anyway
+		// componentWillReceiveProps gets called many times during page load as new trackers are found
+		// so only compare tracker totals if we don't already have to redraw anyway as a result of the cheaper checks above
 		const trackerTotal = categories.reduce((total, category) => total + category.num_total, 0);
 		const nextTrackerTotal = nextProps.categories.reduce((total, category) => total + category.num_total, 0);
 		if (trackerTotal !== nextTrackerTotal) {
