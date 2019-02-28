@@ -99,8 +99,6 @@ class PanelData {
 			// We disconnect and throw away any remaining open ports when this happens
 			// to reduce the risk of bugs and memory leaks
 			if (name === 'panelUIPort') {
-				console.log('IVZ panelUIPort is closing!');
-
 				this._uiPorts.forEach((leftoverPort) => {
 					leftoverPort.disconnect();
 				});
@@ -120,15 +118,10 @@ class PanelData {
 	_sendInitialData(name, port) {
 		if (!this._activeTab) { return; }
 
-		let blockingData;
 		switch (name) {
 			case 'blockingUIPort':
 				this._setTrackerListAndCategories();
-				blockingData = this._getBlockingData();
-				console.log('IVZ sending blocking data in PanelData#_sendInitialData:');
-				console.log(blockingData);
-				port.postMessage(blockingData);
-				// port.postMessage(this._getBlockingData());
+				port.postMessage(this._getBlockingData());
 				break;
 			case 'panelUIPort':
 				this._setTrackerListAndCategories();

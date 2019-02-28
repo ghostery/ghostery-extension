@@ -63,6 +63,9 @@ class DonutGraph extends React.Component {
 			redscale: scaleLinear().range(['#f75065', '#ffb0Ba']),
 			greyscale: scaleLinear().range(['#848484', '#c9c9c9']),
 		};
+
+		this._startAngles = new Map();
+		this._endAngles = new Map();
 	}
 
 	/**
@@ -100,6 +103,17 @@ class DonutGraph extends React.Component {
 			ghosteryFeatureSelect,
 			isSmall
 		} = this.props;
+
+		/*
+		if (categories.length !== nextProps.categories.length) {
+			this._bakeDonut(nextProps.categories, {
+				renderRedscale: nextProps.renderRedscale,
+				renderGreyscale: nextProps.renderGreyscale,
+				isSmall: nextProps.isSmall,
+			});
+			return;
+		}
+		*/
 
 		if (isSmall !== nextProps.isSmall ||
 			renderRedscale !== nextProps.renderRedscale ||
@@ -174,7 +188,7 @@ class DonutGraph extends React.Component {
 	 * @param  {Array} categories list of categories detected on the site
 	 * @param  {Object} options    options for the graph
 	 */
-	bakeDonut = throttle(this._bakeDonut.bind(this), 750, { leading: true, trailing: true })
+	bakeDonut = throttle(this._bakeDonut.bind(this), 600, { leading: true, trailing: true })
 
 	_bakeDonut(categories, options) {
 		const {
@@ -183,9 +197,8 @@ class DonutGraph extends React.Component {
 			isSmall
 		} = options;
 		const graphData = [];
-		const animationDuration = categories.length > 0 ? 750 : 0;
+		const animationDuration = categories.length > 0 ? 500 : 0;
 		const categoryCount = categories.length;
-		const delays = [];
 
 		// Process categories into graphData
 		if (categoryCount === 0) {
@@ -204,7 +217,6 @@ class DonutGraph extends React.Component {
 			});
 			graphData.sort((a, b) => a.value < b.value);
 		}
-		const totalTrackers = graphData.reduce((sum, j) => sum + j.value, 0);
 
 		const trackerArc = arc()
 			.innerRadius(this.donutRadius - 13)
@@ -225,12 +237,18 @@ class DonutGraph extends React.Component {
 		// UPDATE
 		arcs.select('path')
 			.transition()
-			.duration(d => (d.value / totalTrackers) * animationDuration)
-			.attrTween('d', function (d) {
-				const currentD = this.getAttribute('d');
-				const i = interpolate(currentD, d);
+			.duration(animationDuration)
+			.attrTween('d', (d) => {
+				const { id: catId } = d.data;
+				const lerpStartAngle = interpolate(this._startAngles.get(catId), d.startAngle);
+				const lerpEndAngle = interpolate(this._endAngles.get(catId), d.endAngle);
+				this._startAngles.set(catId, d.startAngle);
+				this._endAngles.set(catId, d.endAngle);
+
 				return function (t) {
-					return trackerArc(i(t));
+					d.startAngle = lerpStartAngle(t);
+					d.endAngle = lerpEndAngle(t);
+					return trackerArc(d);
 				};
 			});
 
@@ -275,22 +293,12 @@ class DonutGraph extends React.Component {
 				}
 			})
 			.transition()
-			.duration((d) => {
-				const delay = (d.value / totalTrackers) * animationDuration;
-				delays.push(delay);
-				return delay;
-			})
-			.delay((d, i) => {
-				if (i === 0) { return 0; }
-
-				let sum = 0;
-				delays.forEach((val, j) => {
-					if (j < i) { sum += val; }
-				});
-
-				return sum;
-			})
+			.duration(animationDuration)
 			.attrTween('d', (d) => {
+				const { id: catId } = d.data;
+				this._startAngles.set(catId, d.startAngle);
+				this._endAngles.set(catId, d.endAngle);
+
 				const i = interpolate(d.startAngle, d.endAngle);
 				return function (t) {
 					d.endAngle = i(t);
