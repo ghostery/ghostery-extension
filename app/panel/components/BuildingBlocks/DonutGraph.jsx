@@ -101,24 +101,18 @@ class DonutGraph extends React.Component {
 			isSmall
 		} = this.props;
 
-		// this function may get called many times during page load,
-		// so order checks by cost
-		if (isSmall !== nextProps.isSmall) {
+		if (isSmall !== nextProps.isSmall ||
+			renderRedscale !== nextProps.renderRedscale ||
+			renderGreyscale !== nextProps.renderGreyscale ||
+			ghosteryFeatureSelect !== nextProps.ghosteryFeatureSelect
+		) {
 			this.prepareDonutContainer(nextProps.isSmall);
 			this.nextPropsDonut(nextProps);
 			return;
 		}
 
-		if (
-			categories.length !== nextProps.categories.length ||
-			renderRedscale !== nextProps.renderRedscale ||
-			renderGreyscale !== nextProps.renderGreyscale ||
-			ghosteryFeatureSelect !== nextProps.ghosteryFeatureSelect
-		) {
-			this.nextPropsDonut(nextProps);
-			return;
-		}
-
+		// this function gets called many times during page load as new trackers are found
+		// so only calculate trackerTotal if we don't already have to redraw anyway
 		const trackerTotal = categories.reduce((total, category) => total + category.num_total, 0);
 		const nextTrackerTotal = nextProps.categories.reduce((total, category) => total + category.num_total, 0);
 		if (trackerTotal !== nextTrackerTotal) {
