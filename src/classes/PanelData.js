@@ -562,7 +562,7 @@ class PanelData {
 	 * @param	{Object}	smartBlock
 	 * @return	{Object}	the tracker's blocked/allowed states
 	 */
-	_getTrackerState({ trackerId }, smartBlock) {
+	_getTrackerState({ id: trackerId }, smartBlock) {
 		const { pageHost } = this._activeTab;
 		const selectedAppIds = conf.selected_app_ids;
 		const pageUnblocks = conf.site_specific_unblocks[pageHost] || [];
