@@ -66,14 +66,19 @@ exports[`app/hub/Views/LogIn component Snapshot tests with react-test-renderer l
         <div
           className="flex-container align-center"
         >
-          <a
-            aria-current={null}
+          <span
             className="LogInView__link text-center"
-            href="/create-account"
-            onClick={[Function]}
           >
-            hub_login_link_create_account
-          </a>
+            hub_login_link_dont_have_account
+             
+            <a
+              aria-current={null}
+              href="/create-account"
+              onClick={[Function]}
+            >
+              hub_login_link_create_account
+            </a>
+          </span>
         </div>
         <div
           className="LogInView--addPaddingTop flex-container align-center"
@@ -167,14 +172,19 @@ exports[`app/hub/Views/LogIn component Snapshot tests with react-test-renderer l
         <div
           className="flex-container align-center"
         >
-          <a
-            aria-current={null}
+          <span
             className="LogInView__link text-center"
-            href="/create-account"
-            onClick={[Function]}
           >
-            hub_login_link_create_account
-          </a>
+            hub_login_link_dont_have_account
+             
+            <a
+              aria-current={null}
+              href="/create-account"
+              onClick={[Function]}
+            >
+              hub_login_link_create_account
+            </a>
+          </span>
         </div>
         <div
           className="LogInView--addPaddingTop flex-container align-center"
