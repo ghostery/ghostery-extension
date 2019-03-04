@@ -1,9 +1,9 @@
 ### GHOSTERY 8.3.2 (UNRELEASED)
 
-+ Ghostery UI panel now updates in realtime using runtime.onConnect port messaging
-+ Sync account creation UI betweem intro hub, panel and signon-web
++ Remove unsupported file types for Opera automated-review
 + Removed uneccesary files for slimmer production build
-+ Performance improvments when browsing certian google sites (gmail, maps)
++ Sync account creation UI betweem intro hub, panel and signon-web
++ Performance improvments when browsing certian Google sites (gmail, maps)
 + Minor UI tweaks
 
 ### GHOSTERY 8.3.1 (January 31, 2019)
