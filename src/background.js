@@ -938,9 +938,9 @@ function onMessageHandler(request, sender, callback) {
 			callback(success);
 		}).catch((err) => {
 			callback({ errors: _getJSONAPIErrorsObject(err) });
-			log('UPDATE PROMOTIOS FAIL', err);
+			log('UPDATE PROMOTIONS FAIL', err);
 		});
-		return false;
+		return true;
 	} else if (name === 'update_database') {
 		checkLibraryVersion().then((result) => {
 			callback(result);
