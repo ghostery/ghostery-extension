@@ -173,9 +173,18 @@ const CreateAccountView = (props) => {
 				</div>
 				<div className="row align-center">
 					<div className="CreateAccountView__linkContainer columns small-12 medium-10">
-						<NavLink to="/log-in" className="CreateAccountView__link">
-							{ t('hub_create_account_link_login') }
-						</NavLink>
+						<p className="CreateAccountView__link">
+							{ t('hub_create_account_already_have_account') }
+							&nbsp;
+							<NavLink to="/log-in">
+								{ t('hub_create_account_link_login') }
+							</NavLink>
+						</p>
+					</div>
+				</div>
+				<div className="row align-center">
+					<div className="CreateAccountView__linkContainer columns small-12 medium-10">
+						<p className="CreateAccountView__termsStatement" dangerouslySetInnerHTML={{ __html: t('account_creation_privacy_statement') }} />
 					</div>
 				</div>
 				<div className="CreateAccountView--addPaddingTop row align-center">

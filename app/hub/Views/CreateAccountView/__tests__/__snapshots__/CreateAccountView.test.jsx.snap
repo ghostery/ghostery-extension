@@ -164,14 +164,35 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
       <div
         className="CreateAccountView__linkContainer columns small-12 medium-10"
       >
-        <a
-          aria-current={null}
+        <p
           className="CreateAccountView__link"
-          href="/log-in"
-          onClick={[Function]}
         >
-          hub_create_account_link_login
-        </a>
+          hub_create_account_already_have_account
+           
+          <a
+            aria-current={null}
+            href="/log-in"
+            onClick={[Function]}
+          >
+            hub_create_account_link_login
+          </a>
+        </p>
+      </div>
+    </div>
+    <div
+      className="row align-center"
+    >
+      <div
+        className="CreateAccountView__linkContainer columns small-12 medium-10"
+      >
+        <p
+          className="CreateAccountView__termsStatement"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "account_creation_privacy_statement",
+            }
+          }
+        />
       </div>
     </div>
     <div
@@ -376,14 +397,35 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
       <div
         className="CreateAccountView__linkContainer columns small-12 medium-10"
       >
-        <a
-          aria-current={null}
+        <p
           className="CreateAccountView__link"
-          href="/log-in"
-          onClick={[Function]}
         >
-          hub_create_account_link_login
-        </a>
+          hub_create_account_already_have_account
+           
+          <a
+            aria-current={null}
+            href="/log-in"
+            onClick={[Function]}
+          >
+            hub_create_account_link_login
+          </a>
+        </p>
+      </div>
+    </div>
+    <div
+      className="row align-center"
+    >
+      <div
+        className="CreateAccountView__linkContainer columns small-12 medium-10"
+      >
+        <p
+          className="CreateAccountView__termsStatement"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "account_creation_privacy_statement",
+            }
+          }
+        />
       </div>
     </div>
     <div

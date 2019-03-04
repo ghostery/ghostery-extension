@@ -985,9 +985,9 @@ function onMessageHandler(request, sender, callback) {
 			callback(success);
 		}).catch((err) => {
 			callback({ errors: _getJSONAPIErrorsObject(err) });
-			log('UPDATE PROMOTIOS FAIL', err);
+			log('UPDATE PROMOTIONS FAIL', err);
 		});
-		return false;
+		return true;
 	} else if (name === 'update_database') {
 		checkLibraryVersion().then((result) => {
 			callback(result);
@@ -1276,7 +1276,6 @@ antitracking.on('enabled', () => {
 		// remove Cliqz-side whitelisting steps and replace with ghostery ones.
 		const replacedSteps = ['onBeforeSendHeaders', 'onHeadersReceived'].map(stage =>
 			Promise.all([
-				antitracking.action('removePipelineStep', stage, 'checkIsCookieWhitelisted'),
 				antitracking.action('addPipelineStep', stage, {
 					name: 'checkGhosteryWhitelisted',
 					spec: 'break',
