@@ -47,6 +47,10 @@ class Panel extends React.Component {
 				const { current_theme, account } = panel;
 				setTheme(document, current_theme, account);
 
+				this.props.actions.updatePanelData(panel);
+				this.props.actions.updateSummaryData(summary);
+				if (blocking) { this.props.actions.updateBlockingData(blocking); }
+
 				if (panel.is_expert) {
 					// load Detail component
 					this.props.history.push('/detail');
@@ -64,10 +68,6 @@ class Panel extends React.Component {
 				if (panel.enable_offers && panel.unread_offer_ids.length > 0) {
 					sendMessage('ping', 'engaged_offer');
 				}
-
-				if (blocking) { this.props.actions.updateBlockingData(blocking); }
-				this.props.actions.updateSummaryData(summary);
-				this.props.actions.updatePanelData(panel);
 			} else {
 				this.props.actions.updatePanelData(msg);
 			}
