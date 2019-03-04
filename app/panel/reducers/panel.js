@@ -14,7 +14,7 @@
 /* eslint no-use-before-define: 0 */
 
 import {
-	UPDATE_PANEL_DATA,
+	GET_PANEL_DATA,
 	SHOW_NOTIFICATION,
 	CLOSE_NOTIFICATION,
 	TOGGLE_EXPERT,
@@ -72,7 +72,7 @@ const initialState = {
  */
 export default (state = initialState, action) => {
 	switch (action.type) {
-		case UPDATE_PANEL_DATA: {
+		case GET_PANEL_DATA: {
 			return Object.assign({}, state, action.data, { initialized: true });
 		}
 		case SET_THEME: {
