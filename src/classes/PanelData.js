@@ -89,12 +89,7 @@ class PanelData {
 			port.onDisconnect.addListener(rewards.panelHubClosedListener);
 		}
 
-		port.onDisconnect.addListener((p) => {
-			// (does the listener run?)
-			if (name === 'rewardsUIPort') {
-				p.onDisconnect.removeListener(rewards.panelHubClosedListener);
-			}
-
+		port.onDisconnect.addListener(() => {
 			// The panel port disconnects when & only when the whole extension panel is closing.
 			// We disconnect and throw away any remaining open ports when this happens
 			// to reduce the risk of bugs and memory leaks
