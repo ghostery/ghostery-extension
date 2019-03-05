@@ -64,10 +64,12 @@ class Rewards extends React.Component {
 		if (nextProps.rewards) {
 			rewardsArray = Object.keys(nextProps.rewards).map((key) => {
 				const reward = nextProps.rewards[key].offer_data;
+				const { isCodeHidden } = nextProps.rewards[key].attrs || {};
 				return {
 					id: reward.offer_id,
 					unread: nextProps.unread_offer_ids.indexOf(reward.offer_id) !== -1,
 					code: reward.ui_info.template_data.code,
+					isCodeHidden,
 					text: reward.ui_info.template_data.title,
 					description: reward.ui_info.template_data.desc,
 					benefit: reward.ui_info.template_data.benefit,
@@ -275,6 +277,7 @@ class Rewards extends React.Component {
 			<RewardDetail
 				id={reward.id}
 				code={reward.code}
+				isCodeHidden={reward.isCodeHidden}
 				text={reward.text}
 				description={reward.description}
 				benefit={reward.benefit}
