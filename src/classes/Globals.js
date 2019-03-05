@@ -63,6 +63,7 @@ class Globals {
 		this.GHOSTERY_TAB_CHROME_PRODUCTION_ID = 'plmapebanmikcofllaaddgeocahboejc';
 		this.GHOSTERY_TAB_CHROME_PRERELEASE_ID = 'fenghpkndeggbbpjeojffgbmdmnaelmf';
 		this.GHOSTERY_TAB_CHROME_TEST_ID = 'ifnpgdmcliingpambkkihjlhikmbbjid';
+		this.GHOSTERY_TAB_FIREFOX_PRODUCTION_ID = 'firefoxtab@ghostery.com';
 		this.GHOSTERY_TAB_FIREFOX_TEST_ID = '{0ea88bc4-03bd-4baa-8153-acc861589c1c}';
 
 		// data stores
