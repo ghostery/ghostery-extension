@@ -91,7 +91,7 @@ class Rewards extends React.Component {
 	componentWillUnmount() {
 		/* @TODO send message to background to remove port onDisconnect event */
 		this.props.actions.sendSignal('hub_closed');
-		this.uiPort.disconnect();
+		this.uiPort.postMessage({ name: 'RewardsComponentWillUnmount' });
 	}
 
 	/**

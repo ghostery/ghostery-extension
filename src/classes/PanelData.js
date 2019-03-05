@@ -72,7 +72,7 @@ class PanelData {
 				account.getUserSettings().catch(err => log('Failed getting user settings from PanelData#initUIPort:', err));
 			}
 
-			this._attachDisconnectListeners(name, port);
+			this._attachListeners(name, port);
 
 			this._sendInitialData(name, port);
 		});
@@ -83,26 +83,22 @@ class PanelData {
 	 * @param	{string}	name	the name of the port being initialized
 	 * @param	{Object}	port	the port that is being initialized
 	 */
-	_attachDisconnectListeners(name, port) {
-		// TODO debug the rewardsUIPort disconnect listener logic so that its net effect isn't zero, heh
+	_attachListeners(name, port) {
 		if (name === 'rewardsUIPort') {
 			port.onDisconnect.addListener(rewards.panelHubClosedListener);
+
+			port.onMessage.addListener((msg) => {
+				if (msg.name === 'RewardsComponentWillUnmount') {
+					port.onDisconnect.removeListener(rewards.panelHubClosedListener);
+				}
+			});
 		}
 
-		port.onDisconnect.addListener(() => {
-			// The panel port disconnects when & only when the whole extension panel is closing.
-			// We disconnect and throw away any remaining open ports when this happens
-			// to reduce the risk of bugs and memory leaks
-			if (name === 'panelUIPort') {
-				this._uiPorts.forEach((leftoverPort) => {
-					leftoverPort.disconnect();
-				});
-				this._uiPorts.clear();
-				this._activeTab = null;
-			} else {
-				this._uiPorts.delete(name);
-			}
-		});
+		if (name === 'panelUIPort') {
+			port.onDisconnect.addListener(() => { this._activeTab = null; });
+		}
+
+		port.onDisconnect.addListener(() => this._uiPorts.delete(name));
 	}
 
 	/**
