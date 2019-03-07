@@ -14,7 +14,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import SetupAntiSuiteView from './SetupAntiSuiteView';
-import globals from '../../../../../src/classes/Globals';
 
 /**
  * @class Implement the Setup Anti-Suite View for the Ghostery Hub

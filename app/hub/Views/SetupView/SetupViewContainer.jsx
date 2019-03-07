@@ -26,8 +26,6 @@ import SetupAntiSuiteView from '../SetupViews/SetupAntiSuiteView';
 import SetupHumanWebView from '../SetupViews/SetupHumanWebView';
 import SetupDoneView from '../SetupViews/SetupDoneView';
 
-import globals from '../../../../src/classes/Globals';
-
 /**
  * @class Implement the Setup View for the Ghostery Hub
  * @extends Component
