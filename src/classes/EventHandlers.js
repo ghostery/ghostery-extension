@@ -617,6 +617,7 @@ class EventHandlers {
 
 		button.update(details.tab_id);
 
+		// throttled in PanelData
 		panelData.updatePanelUI();
 
 		if (block && (conf.enable_click2play || conf.enable_click2playSocial)) {

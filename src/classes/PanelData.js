@@ -163,11 +163,10 @@ class PanelData {
 		});
 	}
 
-	// TODO throtlle
 	/**
 	 * Invoked in EventHandlers#onBeforeRequest when a new bug has been found
 	 */
-	updatePanelUI = throttle(this._updatePanelUI.bind(this), 600, { leading: true, trailing: true });
+	updatePanelUI = throttle(this._updatePanelUI.bind(this), 600, { leading: true, trailing: true }); // matches donut redraw throttling
 	_updatePanelUI() {
 		if (!this._activeTab) { return; }
 
