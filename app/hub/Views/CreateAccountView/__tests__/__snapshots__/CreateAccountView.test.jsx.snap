@@ -1,0 +1,447 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-renderer create account view is rendered correctly 1`] = `
+<div
+  className="CreateAccountView"
+>
+  <div
+    className="CreateAccountView--addPaddingTop row align-center"
+  >
+    <div
+      className="columns small-10"
+    >
+      <div
+        className="CreateAccountView__header flex-container align-center-middle"
+      >
+        <img
+          className="CreateAccountView__headerImage"
+          src="/app/images/hub/account/ghosty-account.svg"
+        />
+        <div
+          className="CreateAccountView__headerTitle"
+        >
+          <h3>
+            hub_create_account_header_title
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <form
+    onSubmit={[Function]}
+  >
+    <div
+      className="CreateAccountView--addPaddingTop row align-center-middle"
+    >
+      <div
+        className="columns small-12 medium-5"
+      >
+        <label
+          className="CreateAccountView__inputLabel"
+        >
+          hub_create_account_label_email
+        </label>
+        <input
+          autoComplete="off"
+          className="CreateAccountView__inputBox"
+          name="email"
+          onChange={[Function]}
+          pattern=".{1,}"
+          type="text"
+          value="test@example.com"
+        />
+      </div>
+      <div
+        className="columns small-12 medium-5"
+      >
+        <label
+          className="CreateAccountView__inputLabel"
+        >
+          hub_create_account_label_email_confirm
+        </label>
+        <input
+          autoComplete="off"
+          className="CreateAccountView__inputBox"
+          name="confirmEmail"
+          onChange={[Function]}
+          pattern=".{1,}"
+          type="text"
+          value="test@example.com"
+        />
+      </div>
+    </div>
+    <div
+      className="row align-center-middle"
+    >
+      <div
+        className="columns small-12 medium-5"
+      >
+        <label
+          className="CreateAccountView__inputLabel"
+        >
+          hub_create_account_label_first_name
+        </label>
+        <input
+          autoComplete="off"
+          className="CreateAccountView__inputBox"
+          name="firstName"
+          onChange={[Function]}
+          pattern=".{1,}"
+          type="text"
+          value="First"
+        />
+      </div>
+      <div
+        className="columns small-12 medium-5"
+      >
+        <label
+          className="CreateAccountView__inputLabel"
+        >
+          hub_create_account_label_email_last_name
+        </label>
+        <input
+          autoComplete="off"
+          className="CreateAccountView__inputBox"
+          name="lastName"
+          onChange={[Function]}
+          pattern=".{1,}"
+          type="text"
+          value="Last"
+        />
+      </div>
+    </div>
+    <div
+      className="row align-center-middle"
+    >
+      <div
+        className="columns small-12 medium-5"
+      >
+        <label
+          className="CreateAccountView__inputLabel"
+        >
+          hub_create_account_label_password
+        </label>
+        <input
+          autoComplete="off"
+          className="CreateAccountView__inputBox"
+          name="password"
+          onChange={[Function]}
+          pattern=".{1,}"
+          type="password"
+          value=""
+        />
+      </div>
+      <div
+        className="columns small-12 medium-5"
+      >
+        <div
+          className="CreateAccountView__checkboxContainer CreateAccountView--marginBottom flex-container align-middle"
+        >
+          <div
+            className="ToggleCheckbox ToggleCheckbox--active"
+            onClick={[Function]}
+          >
+            <svg
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+              />
+            </svg>
+          </div>
+          <span
+            className="CreateAccountView__inputLabel clickable"
+            onClick={[Function]}
+          >
+            hub_create_account_checkbox_promotions
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      className="row align-center"
+    >
+      <div
+        className="CreateAccountView__linkContainer columns small-12 medium-10"
+      >
+        <p
+          className="CreateAccountView__link"
+        >
+          hub_create_account_already_have_account
+           
+          <a
+            aria-current={null}
+            href="/log-in"
+            onClick={[Function]}
+          >
+            hub_create_account_link_login
+          </a>
+        </p>
+      </div>
+    </div>
+    <div
+      className="row align-center"
+    >
+      <div
+        className="CreateAccountView__linkContainer columns small-12 medium-10"
+      >
+        <p
+          className="CreateAccountView__termsStatement"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "account_creation_privacy_statement",
+            }
+          }
+        />
+      </div>
+    </div>
+    <div
+      className="CreateAccountView--addPaddingTop row align-center"
+    >
+      <div
+        className="CreateAccountView__submit columns small-12 medium-10 flex-container flex-dir-row-reverse"
+      >
+        <button
+          className="CreateAccountView__button button success"
+          type="submit"
+        >
+          hub_create_account_button_submit
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+`;
+
+exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-renderer create account view is rendered correctly with empty inputs and errors 1`] = `
+<div
+  className="CreateAccountView"
+>
+  <div
+    className="CreateAccountView--addPaddingTop row align-center"
+  >
+    <div
+      className="columns small-10"
+    >
+      <div
+        className="CreateAccountView__header flex-container align-center-middle"
+      >
+        <img
+          className="CreateAccountView__headerImage"
+          src="/app/images/hub/account/ghosty-account.svg"
+        />
+        <div
+          className="CreateAccountView__headerTitle"
+        >
+          <h3>
+            hub_create_account_header_title
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <form
+    onSubmit={[Function]}
+  >
+    <div
+      className="CreateAccountView--addPaddingTop row align-center-middle"
+    >
+      <div
+        className="columns small-12 medium-5"
+      >
+        <label
+          className="CreateAccountView__inputLabel"
+        >
+          hub_create_account_label_email
+        </label>
+        <input
+          autoComplete="off"
+          className="CreateAccountView__inputBox error"
+          name="email"
+          onChange={[Function]}
+          pattern=".{1,}"
+          type="text"
+          value=""
+        />
+        <div
+          className="CreateAccountView__inputError"
+        >
+          hub_create_account_label_email_invalid
+        </div>
+      </div>
+      <div
+        className="columns small-12 medium-5"
+      >
+        <label
+          className="CreateAccountView__inputLabel"
+        >
+          hub_create_account_label_email_confirm
+        </label>
+        <input
+          autoComplete="off"
+          className="CreateAccountView__inputBox error"
+          name="confirmEmail"
+          onChange={[Function]}
+          pattern=".{1,}"
+          type="text"
+          value=""
+        />
+        <div
+          className="CreateAccountView__inputError"
+        >
+          hub_create_account_label_email_confirm_invalid
+        </div>
+      </div>
+    </div>
+    <div
+      className="row align-center-middle"
+    >
+      <div
+        className="columns small-12 medium-5"
+      >
+        <label
+          className="CreateAccountView__inputLabel"
+        >
+          hub_create_account_label_first_name
+        </label>
+        <input
+          autoComplete="off"
+          className="CreateAccountView__inputBox"
+          name="firstName"
+          onChange={[Function]}
+          pattern=".{1,}"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="columns small-12 medium-5"
+      >
+        <label
+          className="CreateAccountView__inputLabel"
+        >
+          hub_create_account_label_email_last_name
+        </label>
+        <input
+          autoComplete="off"
+          className="CreateAccountView__inputBox"
+          name="lastName"
+          onChange={[Function]}
+          pattern=".{1,}"
+          type="text"
+          value=""
+        />
+      </div>
+    </div>
+    <div
+      className="row align-center-middle"
+    >
+      <div
+        className="columns small-12 medium-5"
+      >
+        <label
+          className="CreateAccountView__inputLabel"
+        >
+          hub_create_account_label_password
+        </label>
+        <input
+          autoComplete="off"
+          className="CreateAccountView__inputBox error"
+          name="password"
+          onChange={[Function]}
+          pattern=".{1,}"
+          type="password"
+          value=""
+        />
+        <div
+          className="CreateAccountView__inputError"
+        >
+          hub_create_account_label_password_invalid
+        </div>
+        <div
+          className="CreateAccountView__inputError"
+        >
+          hub_create_account_label_password_invalid_length
+        </div>
+      </div>
+      <div
+        className="columns small-12 medium-5"
+      >
+        <div
+          className="CreateAccountView__checkboxContainer CreateAccountView--marginBottom flex-container align-middle"
+        >
+          <div
+            className="ToggleCheckbox"
+            onClick={[Function]}
+          >
+            <svg
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+              />
+            </svg>
+          </div>
+          <span
+            className="CreateAccountView__inputLabel clickable"
+            onClick={[Function]}
+          >
+            hub_create_account_checkbox_promotions
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      className="row align-center"
+    >
+      <div
+        className="CreateAccountView__linkContainer columns small-12 medium-10"
+      >
+        <p
+          className="CreateAccountView__link"
+        >
+          hub_create_account_already_have_account
+           
+          <a
+            aria-current={null}
+            href="/log-in"
+            onClick={[Function]}
+          >
+            hub_create_account_link_login
+          </a>
+        </p>
+      </div>
+    </div>
+    <div
+      className="row align-center"
+    >
+      <div
+        className="CreateAccountView__linkContainer columns small-12 medium-10"
+      >
+        <p
+          className="CreateAccountView__termsStatement"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "account_creation_privacy_statement",
+            }
+          }
+        />
+      </div>
+    </div>
+    <div
+      className="CreateAccountView--addPaddingTop row align-center"
+    >
+      <div
+        className="CreateAccountView__submit columns small-12 medium-10 flex-container flex-dir-row-reverse"
+      >
+        <button
+          className="CreateAccountView__button button success"
+          type="submit"
+        >
+          hub_create_account_button_submit
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+`;

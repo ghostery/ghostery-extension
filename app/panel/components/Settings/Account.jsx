@@ -22,51 +22,11 @@ import globals from '../../../../src/classes/Globals';
  * @memberOf SettingsComponents
  */
 class Account extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			accountName: '',
-		};
-
-		// event bindings
-		this.clickSigninCreate = this.clickSigninCreate.bind(this);
-		this.clickEditAccount = this.clickEditAccount.bind(this);
-		this.clickExportSettings = this.clickExportSettings.bind(this);
-		this.clickImportSettings = this.clickImportSettings.bind(this);
-		this.validateImportFile = this.validateImportFile.bind(this);
-	}
-	/**
-	 * Lifecycle event.
-	 */
-	componentWillMount() {
-		this.updateAccountName(this.props.settingsData);
-	}
-	/**
-	 * Lifecycle event.
-	 */
-	componentWillReceiveProps(nextProps) {
-		this.updateAccountName(nextProps.settingsData);
-	}
-	/**
-	 * Prettify the user's name when signed in.
-	 */
-	updateAccountName(settingsData) {
-		const { loggedIn } = settingsData;
-
-		if (loggedIn) {
-			const { firstName, lastName } = settingsData;
-
-			if (firstName || lastName) {
-				this.setState({ accountName: (firstName ? (firstName + (` ${lastName}` || '')) : lastName) });
-			}
-		}
-	}
 	/**
 	 * Implement handler for 'Sign In' link on the Account
 	 * view to open Sign In (Login) view.
 	 */
-	clickSigninCreate() {
-		sendMessage('ping', 'sign_in');
+	clickSigninCreate = () => {
 		this.props.settingsData.history.push('/login');
 	}
 	/**
@@ -74,7 +34,7 @@ class Account extends React.Component {
 	 * view in signed in state to open Profile web page
 	 * where user can adjust data of his/her account.
 	 */
-	clickEditAccount() {
+	clickEditAccount = () => {
 		sendMessage('openNewTab', {
 			url: `https:\/\/account.${globals.GHOSTERY_DOMAIN}.com/`,
 			become_active: true,
@@ -84,14 +44,14 @@ class Account extends React.Component {
 	/**
 	 * Trigger action to export settings in JSON format and save it to a file.
 	 */
-	clickExportSettings() {
+	clickExportSettings = () => {
 		this.props.actions.exportSettings(this.props.settingsData.pageUrl);
 	}
 
 	/**
 	 * Trigger custom Import dialog or a native Open File dialog depending on browser.
 	 */
-	clickImportSettings() {
+	clickImportSettings = () => {
 		const browserName = globals.BROWSER_INFO.name;
 		if (browserName === 'edge' || browserName === 'firefox') {
 			// show ghostery dialog window for import
@@ -105,7 +65,7 @@ class Account extends React.Component {
 	/**
 	 * Parse settings file imported via native browser window. Called via input#select-file onChange.
 	 */
-	validateImportFile() {
+	validateImportFile = () => {
 		this.props.actions.importSettingsNative(this.selectedFile.files[0]);
 	}
 	/**
@@ -114,21 +74,23 @@ class Account extends React.Component {
 	*/
 	render() {
 		const { settingsData } = this.props;
+		const { email, firstName, lastName } = settingsData.user ? settingsData.user : {};
+		const accountName = (firstName || lastName) ? (firstName ? (`${firstName} ${lastName}`) : lastName) : '';
 		return (
 			<div className="s-tabs-panel">
 				<div className="row">
 					<div className="columns">
 						<h3>{ t('settings_account') }</h3>
-						<div className={(settingsData.loggedIn ? 's-hide' : '')} >
+						<div className={email ? 's-hide' : ''} >
 							<p className="s-blue-header" onClick={this.clickSigninCreate} >{ t('settings_signin_create_header') }</p>
 							<p>{ t('settings_sign_create_text') }</p>
 							<div className="s-vgap-46" />
 						</div>
-						<div className={(settingsData.loggedIn ? '' : 's-hide')} >
+						<div className={email ? '' : 's-hide'} >
 							<div className="s-vgap-22" />
-							<h5 className={(this.state.accountName ? '' : 's-hide')} id="settings-account-name">{ t('settings_account_name') }:  <span>{ this.state.accountName }</span></h5>
+							<h5 className={accountName ? '' : 's-hide'} id="settings-account-name">{ t('settings_account_name') }:  <span>{ accountName }</span></h5>
 							<div className="s-vgap-4" />
-							<h5>{ t('settings_account_email') }: <span>{ settingsData.email }</span></h5>
+							<h5>{ t('settings_account_email') }: <span>{ email }</span></h5>
 							<div className="s-vgap-4" />
 							<p className="s-blue-header" onClick={this.clickEditAccount} >{ t('settings_edit_account') }</p>
 							<div className="s-vgap-26" />

@@ -11,12 +11,18 @@
 /src/classes/EventHandlers.js @jsignanini
 /src/classes/Metrics.js @jsignanini
 /src/classes/PolicySmartBlock.js @jsignanini
+/src/classes/Conf.js @zarembsky
+/src/classes/ConfData.js @zarembsky
+/src/classes/PanelData.js @zarembsky
 
 # Background
 /src/background.js @zarembsky
 
-# Setup App
-/app/setup/ @IAmThePan
+# The Ghostery Hub
+/app/hub/ @IAmThePan
+
+# Shared Components
+/app/shared-components @IAmThePan
 
 # Rewards
 /app/content-scripts/rewards/ @trickpattyFH20

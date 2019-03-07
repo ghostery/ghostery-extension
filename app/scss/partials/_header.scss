@@ -10,7 +10,6 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-
 #ghostery-header {
 	.header-tab-group {
 		position: absolute;
@@ -39,36 +38,64 @@
 	.top-bar {
 		background-color: $ghosty-blue;
 		color: $white;
-		padding: 7px 0 7px 20px;
+		padding: 7px 0 7px 15px;
 		height: 36px;
-	}
-	.header-logo {
-		display: block;
-		background-image: url('../../app/images/panel/ghostery-icon.svg');
-		background-size: auto 100%;
-		background-repeat: no-repeat;
-		height: 21px;
-		width: 72px;
-		background-position: right;
-		.back-arrow {
-			display: none;
-			height: 11px;
-		}
-		&.show-back-arrow {
-			width: 90px;
+		.header-logo {
+			height: 21px;
+			display: inline-flex;
 			.back-arrow {
-				display: inline-block;
+				display: none;
+				&.show-back-arrow {
+					@extend %pointer;
+					display: inline-flex;
+					box-sizing: content-box;
+					margin: auto;
+					padding: 4px 7px 0 0;
+					width: 8px;
+					height: 13px;
+					div {
+						display: inline-flex;
+					}
+				}
+			}
+			.logo-icon {
+				width: 75px;
+				height: 22px;
+				display: inline-flex;
+				div {
+					display: inline-flex;
+				}
 			}
 		}
-	}
-	.header-kebab {
-		@extend %pointer;
-		background-image: url('../../app/images/panel/kebab-menu.svg');
-		background-size: 4px 16px;
-		background-position: center;
-		background-repeat: no-repeat;
-		height: 16px;
-		width: 34px;
+		.profile-svg {
+			margin-right: 5px;
+		}
+		.base-badge {
+			@extend %pointer;
+			width: 38px;
+			height: 36px;
+			display: block;
+			margin-left: 10px;
+		}
+		.subscriber-badge {
+			@extend .base-badge;
+			path {fill: $white;}
+			path.text {fill: $ghosty-blue;}
+		}
+		.non-subscriber-badge {
+			@extend .base-badge;
+			path {fill: #d3af36;}
+			path.text {fill: #ffffff;}
+		}
+		.header-kebab {
+			@extend %pointer;
+			height: 16px;
+			width: 34px;
+			svg {
+				display: block;
+				margin: 0 auto;
+			}
+		}
 	}
 	.header-helper-text {
 		@extend %pointer;
@@ -84,9 +111,9 @@
 		left: 363px !important;
 		visibility: visible;
 		ul.menu {background: none;}
-		.menu-option {
-			position: relative;
+		.menu-option-base {
 			@extend %pointer;
+			position: relative;
 			padding: 10px 0;
 			.menu-icon-container {
 				position: absolute;
@@ -94,30 +121,23 @@
 				top: 50%;
 				transform: translateY(-50%);
 			}
-			.menu-icon {fill: #e7ecee;}
+			.menu-icon {fill: $light-gray; stroke: none;}
 			.about-icon {
 				fill: none;
 				path {
-					stroke: #e7ecee;
+					stroke: $light-gray;
 					stroke-width: 2;
 				}
-				text {
-					font-size: 11px;
-					font-weight:400;
-					fill: #e7ecee;
-				}
-			}
-			&:hover {
-				span {color: $ghosty-blue;}
-				.menu-icon {fill: $ghosty-blue;}
-				.about-icon {
-					path, text {stroke: $ghosty-blue;}
+				path.text {
+					stroke-width: 0;
+					fill: $light-gray;
 				}
 			}
 			span {
+				@include user-select(none);
 				font-size: 14px;
 				font-weight: 300;
-				color: #ffffff;
+				color: $light-gray;
 				padding-left: 10px;
 				line-height: 18px;
 				vertical-align: top;
@@ -130,7 +150,52 @@
 				padding: 0;
 			}
 		}
+
+		.menu-option {
+			@extend .menu-option-base;
+			.subscriber {
+				width: 18px;
+				height: 16px;
+				path {fill: $light-gray;}
+				path.text {fill: #4a4a4a;}
+			}
+			&:hover {
+				span {color: $ghosty-blue}
+				.menu-icon {fill: $ghosty-blue; stroke: none;}
+				.subscriber .about-icon {
+					path {fill: $ghosty-blue;}
+					path.text {fill: #4a4a4a;}
+				}
+				.about-icon {
+					path {stroke: $ghosty-blue;}
+					path.text {fill: $ghosty-blue;}
+				}
+			}
+			span {
+				color: #ffffff;
+			}
+		}
+
+		.menu-option-non-subscriber {
+			@extend .menu-option-base;
+			.non-subscriber {
+				width: 18px;
+				height: 16px;
+				path {fill: $gold;}
+				path.text {fill: #4a4a4a;}
+			}
+			&:hover {
+				.non-subscriber {
+					path {fill: $bright-gold;}
+					path.text {fill: #4a4a4a;}
+				}
+				span {color: $bright_gold}
+			}
+			span {color: $gold;}
+		}
+
 		.account-info {
+			@extend %pointer;
 			position: absolute;
 			bottom: 0px;
 			left: 0;

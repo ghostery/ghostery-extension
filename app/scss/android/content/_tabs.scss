@@ -1,0 +1,58 @@
+/**
+ * Tabs Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+#ghostery-header .header-tab-group {
+	margin-top: 20px;
+	z-index: 1;
+}
+
+.tabs-wrapper {
+	ul.tabs-nav {
+		margin: 0px;
+		padding: 0px;
+		list-style: none;
+		display: flex;
+		flex-wrap: wrap;
+		background-color: $cliqz-blue;
+		@include prefix('box-shadow', '3px 2px 10px rgba(0,0,0,0.15)');
+
+			li.tab-item {
+			display: inline-block;
+			flex-grow: 1;
+
+				a.tab-link.custom-link {
+					display: block;
+					padding: 0 10px;
+					text-align: left;
+					cursor: pointer;
+					text-transform: uppercase;
+					color: #fff;
+					font-size: 12px;
+					font-weight: 500;
+					opacity: 0.8;
+					height: $tab-header-height;
+					line-height: $tab-header-height;
+					@include prefix('transition', 'opacity 300ms ease-in');
+
+					&.active {
+						@include prefix('animation', 'tab-animation 800ms cubic-bezier(0.4, 0, 1, 1) alternate 1');
+						border-bottom: 2px solid #fff;
+						opacity: 1;
+					}
+				}
+		}
+	}
+
+	.tabs-active-content {
+
+	}
+}

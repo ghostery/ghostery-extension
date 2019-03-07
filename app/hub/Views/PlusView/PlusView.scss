@@ -1,0 +1,189 @@
+/**
+* Plus View Sass
+*
+* Ghostery Browser Extension
+* https://www.ghostery.com/
+*
+* Copyright 2018 Ghostery, Inc. All rights reserved.
+*
+* This Source Code Form is subject to the terms of the Mozilla Public
+* License, v. 2.0. If a copy of the MPL was not distributed with this
+* file, You can obtain one at http://mozilla.org/MPL/2.0
+*/
+
+// Plus View
+.PlusView {
+	margin: 40px 0 0;
+	overflow-x: hidden;
+}
+.PlusView--addPaddingTop {
+	padding-top: 40px;
+}
+.PlusView--addPaddingBottom {
+	padding-bottom: 40px;
+}
+.PlusView--addSideMargin {
+	margin-left: 35px;
+	margin-right: 35px;
+}
+.PlusView--rowDarken {
+	background-color: #f7f7f7;
+}
+.PlusView__costContainer {
+	margin: 0 auto;
+	max-width: 382px;
+}
+.PlusView__button {
+	min-width: 180px;
+	margin-bottom: 0;
+	line-height: 20.2px;
+	border-top: none;
+	border-bottom: none;
+	border-right-color: #9ecc42;
+	border-left-color: #429321;
+	background: linear-gradient(to right, #429321,  #9ecc42);
+}
+.PlusView__button.disabled,
+.PlusView__button.disabled:hover {
+	background: #154700;
+	border: 1px solid #154700;
+	line-height: 18.2px;
+}
+.PlusView__headingImage {
+	height: 195px;
+	margin-left: -55px;
+	margin-bottom: 30px;
+	background-image: url('/app/images/hub/plus/plus-logo.svg');
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.PlusView__headingTitle {
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 38px;
+	color: #4a4a4a;
+}
+.PlusView__headingDescription {
+	font-size: 14px;
+	line-height: 38px;
+	color: #4a4a4a;
+	margin-bottom: 20px;
+}
+.PlusView__headingCost {
+	font-size: 14px;
+	color: #9b9b9b;
+}
+.PlusView__headingCost sup {
+	padding: 0 2px;
+	font-size: 30px;
+	font-weight: 500;
+	color: #4a4a4a;
+}
+.PlusView__headingCost span {
+	padding-right: 11px;
+	font-size: 64px;
+	font-weight: 500;
+	color: #4a4a4a;
+}
+.PlusView__perk {
+	padding: 30px;
+}
+.PlusView__perkTitle {
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 38px;
+	margin-bottom: 15px;
+	color: #4a4a4a;
+}
+.PlusView__perkDescription {
+	font-size: 14px;
+	line-height: 30px;
+	color: #4a4a4a;
+}
+.PlusView__perkIcon {
+	height: 80px;
+	width: 80px;
+	margin: 0 auto 15px;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+.PlusView__perkIcon.themes {
+	background-image: buildPerkThemeIcon(#a8ca59, #0a0a0a);
+}
+.PlusView__perkIcon.stats {
+	background-image: buildPerkStatsIcon(#a8ca59, #0a0a0a);
+}
+.PlusView__perkIcon.support {
+	background-image: buildPerkSupportIcon(#a8ca59, #0a0a0a);
+}
+.PlusView__featureImage.theme {
+	max-width: 420px;
+	margin-top: -20px;
+}
+.PlusView__featureImage.support{
+	max-width: 275px;
+}
+.PlusView__manifestoContainer {
+	margin: 80px 0 0;
+	padding-top: 40px;
+	background: linear-gradient(to bottom left, #ecd868, #d4af37);
+}
+.PlusView__manifestoBackground {
+	padding-bottom: 20px;
+	background-image: url('/app/images/hub/plus/manifesto-background.svg');
+	background-size: 100%;
+}
+.PlusView__manifestoText {
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 40px;
+	color: #ffffff;
+	padding: 50px 0;
+}
+.PlusView__bar {
+	height: 1px;
+	background-color: #9b9b9b;
+}
+@media only screen and (max-width: 960px) {
+	.PlusView__perkIcon {
+		margin-bottom: 10px;
+	}
+	.PlusView__perkTitle {
+		margin-bottom: 10px;
+	}
+	.PlusView__manifestoContainer {
+		margin-top: 60px;
+	}
+	.PlusView__manifestoBackground {
+		padding-bottom: 10px;
+	}
+	.PlusView__manifestoText {
+		margin-top: -20px;
+		font-size: 20px;
+		line-height: 30px;
+		padding: 50px 60px;
+	}
+	.PlusView__featureImage.theme {
+		margin: 30px -20px 15px 0;
+		max-width: 350px;
+	}
+	.PlusView__featureImage.support {
+		margin: 0 0 -10px -33px;
+		max-width: 240px;
+	}
+	.PlusView__feature {
+		text-align: center;
+	}
+	.PlusView__headingDescription {
+		line-height: 30px;
+		margin-top: 4px;
+	}
+	.PlusView__costContainer {
+		margin-top: 24px;
+	}
+}
+@media only screen and (max-width: 500px) {
+	.PlusView__bar {
+		display: none;
+	}
+}

@@ -1,1724 +1,62 @@
 {
-	"settings_import_header": {
-		"message": "导入设置",
-		"description": ""
-	},
-	"panel_header_detailed_view": {
-		"message": "详细视图",
-		"description": ""
-	},
-	"settings_share_usage": {
-		"message": "分享扩展程序使用情况分析",
-		"description": ""
-	},
-	"settings_allow_trackers_tooltip": {
-		"message": "例如，拦截 facebook.com 上的 Facebook 跟踪器可能会导致该网站崩溃。",
-		"description": ""
-	},
-	"blocking_trackers": {
-		"message": "跟踪器",
-		"description": ""
-	},
-	"panel_detail_history_text": {
-		"message": "功能即将推出。",
-		"description": ""
-	},
-	"settings_individual_trackers": {
-		"message": "信任和限制个别跟踪器",
-		"description": ""
-	},
-	"setup_data_view_checkbox": {
-		"message": "分享此类信息，从而支持 Ghostery。",
-		"description": ""
-	},
-	"rewards_off_toast_notification": {
-		"message": "Ghostery 奖励已关闭",
-		"description": ""
-	},
-	"settings_offers_tooltip": {
-		"message": "Ghostery 奖励功能可让您从合作公司获得折扣和特惠。",
-		"description": ""
-	},
-	"rewards_yes": {
-		"message": "是",
-		"description": ""
-	},
-	"settings_sign_create_text": {
-		"message": "您的帐户设置将同步到此设备。创建一个帐户，轻松地跨所有设备和平台同步您的 Ghostery 设置。",
-		"description": ""
-	},
-	"email_confirm_field_label": {
-		"message": "确认电子邮件地址：",
-		"description": ""
-	},
-	"setup_login_view_title": {
-		"message": "您想创建 Ghostery 帐户来跨浏览器和设备同步设置吗？",
-		"description": ""
-	},
-	"summary_description_not_scanned_1": {
-		"message": "Ghostery 只扫描“http”和“https”网页。",
-		"description": ""
-	},
-	"drawer_off": {
-		"message": "关闭",
-		"description": ""
-	},
-	"setup_choice_view_share_data": {
-		"message": "分享我的分析和 Human Web 数据，以改善 Ghostery 的性能。",
-		"description": ""
-	},
-	"settings_searh_by_tracker": {
-		"message": "按跟踪器搜索",
-		"description": ""
-	},
-	"settings_update_failed": {
-		"message": "更新失败。请稍后再试",
-		"description": ""
-	},
-	"whitelist_error_blacklist_url": {
-		"message": "此网站已从您的“受限制网站”列表中删除，并已添加到“受信任网站”列表中。",
-		"description": ""
-	},
-	"settings_filter_all": {
-		"message": "所有跟踪器",
-		"description": ""
-	},
-	"global_settings_saved_tracker": {
-		"message": "全局跟踪器设置已保存",
-		"description": ""
-	},
-	"license_email": {
-		"message": "电子邮件地址",
-		"description": ""
-	},
-	"panel_signin_success_title": {
-		"message": "恭喜！您的 Ghostery 帐户已准备就绪。",
-		"description": ""
-	},
-	"blocking_unblock_all": {
-		"message": "全部取消拦截",
-		"description": ""
-	},
-	"settings_filter_unblocked": {
-		"message": "未拦截的跟踪器",
-		"description": ""
-	},
-	"box_trackers": {
-		"message": "跟踪器",
-		"description": ""
-	},
-	"drawer_on": {
-		"message": "开启",
-		"description": ""
-	},
-	"setup_blocking_view_block_everything": {
-		"message": "一切",
-		"description": ""
-	},
-	"settings_bottom_right_corner": {
-		"message": "右下角",
-		"description": ""
-	},
-	"settings_hide_alert_trusted": {
-		"message": "在受信任网站上隐藏紫色方框",
-		"description": ""
-	},
-	"setup_login_view_signed_in_as": {
-		"message": "已用此帐户登录：",
-		"description": ""
-	},
-	"blocking_category_blocked": {
-		"message": "已拦截",
-		"description": "as in '5 (trackers) BLOCKED'"
-	},
-	"setup_header_sign_in": {
-		"message": "登录",
-		"description": ""
-	},
-	"notification_upgrade": {
-		"message": "我们的团队爱岗敬业、技术出众，在他们的努力工作下，我们发布全新版本的 Ghostery。",
-		"description": ""
-	},
-	"setup_blocking_view_title": {
-		"message": "Ghostery 可以拦截追踪器，使浏览更清净、快速、安全。您想拦截什么？",
-		"description": ""
-	},
-	"summary_resume_ghostery": {
-		"message": "继续",
-		"description": ""
-	},
-	"pause_1_hour_condensed": {
-		"message": "1 小时\n",
-		"description": ""
-	},
-	"whitelist_error_duplicate_url": {
-		"message": "此网站已列入白名单。",
-		"description": "Options page site whitelisting error message shown when whitelisting a URL that is already in the whitelist."
-	},
-	"drawer_status_enable_anti_tracking": {
-		"message": "反跟踪功能",
-		"description": ""
-	},
-	"panel_click_to_reload": {
-		"message": "点击以重新加载并查看变化。",
-		"description": ""
-	},
-	"global_settings_saved": {
-		"message": "全局设置已保存",
-		"description": ""
-	},
-	"settings_support_ghostery_by": {
-		"message": "支持 Ghostery",
-		"description": ""
-	},
-	"rewards_learn_more": {
-		"message": "了解详情",
-		"description": ""
-	},
-	"category_social_media_desc": {
-		"message": "包括与社交媒体平台相关的功能。",
-		"description": "User-facing description for the Social Media tag category."
-	},
-	"settings_update_success": {
-		"message": "成功！",
-		"description": ""
-	},
-	"settings_never": {
-		"message": "从不",
-		"description": ""
-	},
-	"panel_title_create_account": {
-		"message": "创建帐户",
-		"description": ""
-	},
-	"box_dismiss_15s": {
-		"message": "$SPAN_START$15 秒后$SPAN_END$关闭",
-		"description": "",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
-	},
-	"setup_display_view_simple_desc": {
-		"message": "显示基本拦截信息。",
-		"description": ""
-	},
-	"first_name_field_label": {
-		"message": "名字（可选）：",
-		"description": ""
-	},
-	"alert_ad_block_off": {
-		"message": "增强版广告拦截功能已关闭。广告不会被拦截。",
-		"description": ""
-	},
-	"drawer_tooltip_enable_anti_tracking": {
-		"message": "集成跟踪器可以记录大多数网站上的用户活动。反跟踪功能可以在这些跟踪器收集之前删除所有可用于识别您的数据。该数字显示网站上有多少个数据点被删除。",
-		"description": ""
-	},
-	"panel_email_verification_sent": {
-		"message": "$BOLD_HTML_STARTS$成功！$BOLD_HTML_END$帐户验证电子邮件已发送到 $EMAIL$",
-		"description": "",
-		"placeholders": {
-			"bold_html_end": {
-				"content": "</strong>"
-			},
-			"bold_html_starts": {
-				"content": "<strong>"
-			},
-			"email": {
-				"content": "$1",
-				"example": "info@ghostery.com"
-			}
-		}
-	},
-	"panel_detail_rewards_off": {
-		"message": "Ghostery 奖励已关闭",
-		"description": ""
-	},
-	"panel_detail_rewards_loading": {
-		"message": "正在加载奖励...",
-		"description": ""
-	},
-	"category_audio_video_player": {
-		"message": "音频/视频播放器",
-		"description": "Ghostery organizes tags by category. This is one of several tag categories."
-	},
-	"setup_additional_view_antitrack_title": {
-		"message": "增强型反跟踪",
-		"description": ""
-	},
-	"tooltip_body_in_cliqz": {
-		"message": "Cliqz 中默认激活此功能。",
-		"description": ""
-	},
-	"setup_additional_view_title": {
-		"message": "您想使用我们的推荐功能，让浏览更智能吗？",
-		"description": ""
-	},
-	"setup_button_create_account": {
-		"message": "创建帐户",
-		"description": ""
-	},
-	"settings_block_trackers": {
-		"message": "默认拦截添加到 Ghostery 的新跟踪器",
-		"description": ""
-	},
-	"email_address_in_use": {
-		"message": "该电子邮件地址已被使用。请选择其他电子邮件地址。 ",
-		"description": ""
-	},
-	"box_dismiss_0s": {
-		"message": "$SPAN_START$永不$SPAN_END$关闭",
-		"description": "",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
-	},
-	"button_cancel": {
-		"message": "取消",
-		"description": "Part of a confirmation dialog. Clicking this cancels the action."
-	},
-	"settings_dismiss_after": {
-		"message": "此时间后关闭：",
-		"description": ""
-	},
-	"settings_purple_box": {
-		"message": "紫色方框",
-		"description": ""
-	},
-	"settings_export_text": {
-		"message": "保存 Ghostery 首选项的副本并将其传输到另一台计算机。",
-		"description": ""
-	},
-	"settings_filter_blocked": {
-		"message": "已拦截的跟踪器",
-		"description": ""
-	},
-	"settings_import_text": {
-		"message": "选择备份 .ghost 文件。",
-		"description": ""
-	},
-	"blocking_unblock_shown": {
-		"message": "取消拦截所有显示结果",
-		"description": ""
-	},
-	"box_warning_compatibility": {
-		"message": "导致网页崩溃的跟踪器",
-		"description": ""
-	},
-	"settings_export_error": {
-		"message": "您的设置未成功导出。请再试一次。",
-		"description": ""
-	},
-	"tooltip_smart_block": {
-		"message": "智能拦截",
-		"description": ""
-	},
-	"notification_library_update_link": {
-		"message": "查看新变化",
-		"description": ""
-	},
-	"settings_top_right_corner": {
-		"message": "右上角",
-		"description": ""
-	},
-	"box_display_br": {
-		"message": "$SPAN_START$在右下方$SPAN_END$显示",
-		"description": "",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
-	},
-	"box_hide": {
-		"message": "隐藏方框",
-		"description": ""
-	},
-	"summary_trust_site": {
-		"message": "信任网站",
-		"description": ""
-	},
-	"setup_feature_active_in_cliqz": {
-		"message": "Cliqz 中默认激活此功能。 $LINK_START$了解详情。$LINK_END$",
-		"description": "",
-		"placeholders": {
-			"link_start": {
-				"content": "<a href=\"https://www.ghostery.com/faqs/what-are-the-new-ghostery-8-features/\" target=\"_blank\">"
-			},
-			"link_end": {
-				"content": "</a>"
-			}
-		}
-	},
-	"settings_highlight_trackers": {
-		"message": "突出显示交互式跟踪器",
-		"description": ""
-	},
-	"collapse_all": {
-		"message": "全部折叠",
-		"description": ""
-	},
-	"summary_restrict_site_active": {
-		"message": "受限网站",
-		"description": ""
-	},
-	"panel_detail_rewards_title": {
-		"message": "Ghostery 奖励",
-		"description": ""
-	},
-	"panel_about_licenses": {
-		"message": "软件许可证",
-		"description": ""
-	},
-	"select_file_for_import": {
-		"message": "选择 .ghost 文件进行导入",
-		"description": ""
-	},
-	"settings_top_left_corner": {
-		"message": "左上角",
-		"description": ""
-	},
-	"setup_data_view_desc_no_human_web": {
-		"message": "我们使用匿名分析数据来改善 Ghostery 的性能，而不收集任何个人数据。 $LINK_START$了解详情。$LINK_END$.",
-		"description": "",
-		"placeholders": {
-			"link_start": {
-				"content": "<a href=\"https://www.ghostery.com/faqs/\" target=\"_blank\">"
-			},
-			"link_end": {
-				"content": "</a>"
-			}
-		}
-	},
-	"click2play_comment_form": {
-		"message": "Ghostery 拦截了由$NAME$提供支持的评论。",
-		"description": "",
-		"placeholders": {
-			"name": {
-				"content": "$1",
-				"example": "Disqus"
-			}
-		}
-	},
-	"tooltip_restrict": {
-		"message": "始终拦截此网站上的跟踪器。",
-		"description": ""
-	},
-	"settings_restricted_sites_description": {
-		"message": "此处列出的网站将受限制，所有跟踪器均会遭到拦截。",
-		"description": ""
-	},
-	"box_dismiss_5s": {
-		"message": "$SPAN_START$5 秒后$SPAN_END$关闭",
-		"description": "",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
-	},
-	"setup_login_view_confirm_email_error": {
-		"message": "抱歉，电子邮件地址不符。",
-		"description": ""
-	},
-	"settings_notify_me": {
-		"message": "当 Ghostery 有以下动向时通知我：",
-		"description": ""
-	},
-	"settings_notifications": {
-		"message": "通知",
-		"description": ""
-	},
-	"click2play_allow_once_tooltip": {
-		"message": "允许一次并重新加载。",
-		"description": "Tooltip that appears over the 'allow once' click2play button."
-	},
-	"settings_global_blocking": {
-		"message": "全局拦截",
-		"description": ""
-	},
-	"copyright": {
-		"message": "$C$ $YEAR$ $GHOSTERY$，$COMPANY_ADDRESS$ 的一部分",
-		"description": "Copyright message, shown in page footers.",
-		"placeholders": {
-			"c": {
-				"content": "&copy;"
-			},
-			"company_address": {
-				"content": "$1",
-				"example": "GHOSTERY, Inc., Such-and-such Street, Such-and-such Floor, New York, NY, Zip Code"
-			},
-			"ghostery": {
-				"content": "<a href='https://www.ghostery.com' target='_blank'>Ghostery</a>"
-			},
-			"year": {
-				"content": "2015"
-			}
-		}
-	},
-	"settings_opt_in": {
-		"message": "选择加入",
-		"description": ""
-	},
-	"settings_signin_create_header": {
-		"message": "登录/创建帐户",
-		"description": ""
-	},
-	"panel_tracker_warning_nonsecure_tooltip": {
-		"message": "跟踪器不安全",
-		"description": ""
-	},
-	"tracker_plural": {
-		"message": "跟踪器",
-		"description": ""
-	},
-	"rewards_disable": {
-		"message": "关闭奖励",
-		"description": ""
-	},
-	"settings_allow_offers": {
-		"message": "参与 Ghostery 奖励活动",
-		"description": ""
-	},
-	"click2play_survey_form": {
-		"message": "Ghostery 拦截了由$NAME$提供支持的调查。",
-		"description": "",
-		"placeholders": {
-			"name": {
-				"content": "$1",
-				"example": "Disqus"
-			}
-		}
-	},
-	"tooltip_trust": {
-		"message": "始终允许此网站上的跟踪器。",
-		"description": ""
-	},
-	"tooltip_smart_block_body_on": {
-		"message": "已调整跟踪器拦截功能以优化页面性能。",
-		"description": ""
-	},
-	"settings_new_features": {
-		"message": "发布新功能",
-		"description": ""
-	},
-	"settings_announcements": {
-		"message": "发布公告",
-		"description": ""
-	},
-	"setup_button_done": {
-		"message": "完成",
-		"description": ""
-	},
-	"blocking_category_tracker": {
-		"message": "跟踪器",
-		"description": ""
-	},
-	"page_load": {
-		"message": "网页加载",
-		"description": ""
-	},
-	"banner_check_your_email_title": {
-		"message": "请稍后检查您的电子邮件，获取密码重置链接。",
-		"description": ""
-	},
-	"settings_filter_new_label": {
-		"message": "新增",
-		"description": ""
-	},
-	"pause_1_hour": {
-		"message": "1 小时",
-		"description": ""
-	},
-	"enable_when_blacklisted": {
-		"message": "要使用该功能，请撤销限制网站。",
-		"description": ""
-	},
-	"tooltip_restrict_on": {
-		"message": "网站上的跟踪器已拦截，反跟踪功能已开启。点击撤销。",
-		"description": ""
-	},
-	"panel_detail_premium_text": {
-		"message": "功能即将推出。",
-		"description": ""
-	},
-	"setup_upgrade_subtitle": {
-		"message": "有什么新变化？",
-		"description": ""
-	},
-	"box_display_bl": {
-		"message": "$SPAN_START$在左下方$SPAN_END$显示",
-		"description": "",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
-	},
-	"settings_required_trackers": {
-		"message": "当我需要允许跟踪器来使用网站功能时显示",
-		"description": ""
-	},
-	"alert_site_trusted": {
-		"message": "网站已列入白名单。在此网站上，跟踪器将启用，反跟踪功能将关闭。",
-		"description": ""
-	},
-	"license_module": {
-		"message": "模块",
-		"description": ""
-	},
-	"blacklist_error_whitelist_url": {
-		"message": "此网站已从您的“受信任网站”列表中删除，并已添加到“受限制网站”列表中",
-		"description": ""
-	},
-	"panel_help_faq": {
-		"message": "常见问题解答",
-		"description": ""
-	},
-	"settings_filter_new": {
-		"message": "上次更新后新增",
-		"description": ""
-	},
-	"blocking_category_trackers": {
-		"message": "跟踪器",
-		"description": ""
-	},
-	"blocking_block_shown": {
-		"message": "拦截所有显示结果",
-		"description": ""
-	},
-	"panel_menu_signin": {
-		"message": "登录",
-		"description": ""
-	},
-	"error_email_forgot": {
-		"message": "找不到该电子邮件地址。试试别的？",
-		"description": ""
-	},
-	"setup_display_view_detailed": {
-		"message": "详细",
-		"description": ""
-	},
-	"tooltip_ad_block": {
-		"message": "增强型广告屏蔽",
-		"description": ""
-	},
-	"panel_detail_menu_rewards_title": {
-		"message": "奖励",
-		"description": ""
-	},
-	"panel_tracker_trust_tooltip": {
-		"message": "在此网站上信任",
-		"description": ""
-	},
-	"settings_bottom_left_corner": {
-		"message": "左下角",
-		"description": ""
-	},
-	"settings_import_dialog_error": {
-		"message": "当前页面为浏览器的预留页面时，Ghostery 无法显示浏览器对话框。请浏览其他页面，然后重试。",
-		"description": ""
-	},
-	"rewards_disable_notification": {
-		"message": "Ghostery 奖励已关闭。您可以随时在设置或奖励控制面板中打开它。",
-		"description": ""
-	},
-	"expand_all": {
-		"message": "全部展开",
-		"description": ""
-	},
-	"panel_menu_signout": {
-		"message": "退出",
-		"description": ""
-	},
-	"drawer_status_enable_smart_block": {
-		"message": "智能拦截功能",
-		"description": ""
-	},
-	"settings_support_ghostery": {
-		"message": "支持 Ghostery",
-		"description": ""
-	},
-	"panel_about_release_notes": {
-		"message": "查看所有更新的版本说明",
-		"description": ""
-	},
-	"notification_upgrade_link": {
-		"message": "该版本中新增了一些贴心功能，且修复了缺陷。",
-		"description": ""
-	},
-	"notification_upgrade_title_v8": {
-		"message": "Ghostery 8 隆重发布！",
-		"description": ""
-	},
-	"summary_resume_ghostery_ab_pause": {
-		"message": "继续",
-		"description": ""
-	},
-	"box_tracker": {
-		"message": "跟踪器",
-		"description": ""
-	},
-	"settings_new_trackers": {
-		"message": "添加新跟踪器到跟踪器库",
-		"description": ""
-	},
-	"blocked_redirect_page_title": {
-		"message": "Ghostery 阻止了重定向。",
-		"description": "Page title for blocked_redirect.html which appears when a redirect is blocked."
-	},
-	"click2play_video_form": {
-		"message": "Ghostery 拦截了$NAME$视频播放器。",
-		"description": "",
-		"placeholders": {
-			"name": {
-				"content": "$1",
-				"example": "Disqus"
-			}
-		}
-	},
-	"box_dismiss_30s": {
-		"message": "$SPAN_START$30 秒后$SPAN_END$关闭",
-		"description": "",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
-	},
-	"license_licenses": {
-		"message": "许可证",
-		"description": ""
-	},
-	"setup_choice_view_custom_setup": {
-		"message": "自定义安装",
-		"description": ""
-	},
-	"browse_button_label": {
-		"message": "浏览...",
-		"description": ""
-	},
-	"alert_ghostery_paused": {
-		"message": "Ghostery 扩展程序已暂停。",
-		"description": ""
-	},
-	"panel_detail_learn_more": {
-		"message": "了解详情",
-		"description": ""
-	},
-	"panel_about_license": {
-		"message": "许可协议",
-		"description": ""
-	},
-	"summary_alert": {
-		"message": "个提醒",
-		"description": "as in '1 ALERT'"
-	},
-	"setup_data_view_desc": {
-		"message": "我们使用匿名分析和 Human Web 数据来改善 Ghostery 的性能，而不收集任何个人数据。$LINK_START$了解详情$LINK_END$。",
-		"description": "",
-		"placeholders": {
-			"link_start": {
-				"content": "<a href=\"https://www.ghostery.com/faqs/\" target=\"_blank\">"
-			},
-			"link_end": {
-				"content": "</a>"
-			}
-		}
-	},
-	"category_uncategorized_desc": {
-		"message": "这些跟踪器尚未分类。",
-		"description": ""
-	},
-	"setup_blocking_view_block_ads": {
-		"message": "仅限广告跟踪器",
-		"description": ""
-	},
-	"tooltip_smart_block_body": {
-		"message": "自动拦截和取消拦截跟踪器，优化网页性能。",
-		"description": ""
-	},
-	"rewards_code_copied_toast_notification": {
-		"message": "奖励代码已复制！",
-		"description": ""
-	},
-	"panel_detail_menu_performance_title": {
-		"message": "性能",
-		"description": ""
-	},
-	"settings_show_patterns_tooltip": {
-		"message": "点击跟踪器后，可以在跟踪器描述下方找到跟踪器网址。",
-		"description": ""
-	},
-	"setup_button_sign_in": {
-		"message": "登录",
-		"description": ""
-	},
-	"settings_blocking": {
-		"message": "正在拦截",
-		"description": ""
-	},
-	"drawer_title_enable_smart_block": {
-		"message": "智能拦截",
-		"description": ""
-	},
-	"refresh_and_try_again": {
-		"message": "刷新页面，然后重试",
-		"description": ""
-	},
-	"panel_help_questions_header": {
-		"message": "问题和意见",
-		"description": ""
-	},
-	"panel_needs_reload": {
-		"message": "Ghostery 有未处理的更新。",
-		"description": ""
-	},
-	"settings_show_trackers_banner": {
-		"message": "在扩展程序顶部显示跟踪器提醒横幅通知",
-		"description": ""
-	},
-	"file_was_not_selected": {
-		"message": "未选择文件",
-		"description": ""
-	},
-	"category_audio_video_player_desc": {
-		"message": "使网站能够发布、分发和优化音频与视频内容。",
-		"description": "User-facing description for the Audio/Video Player tag category."
-	},
-	"consent_privacy": {
-		"message": "需要征得同意。",
-		"description": ""
-	},
-	"password_requirements": {
-		"message": "请使用 8 到 50 个字符。",
-		"description": ""
-	},
 	"account_creation_privacy_statement": {
-		"message": "我同意 Ghostery $LINK_PS_START$隐私声明$LINK_PS_END$中所述的数据使用行为及其$LINK_UA_START$许可协议$LINK_UA_END$中的条款。",
-		"description": "",
+		"message": "我们的一般$LINK_TERMS_START$条款和条件$LINK_TERMS_END$ 和$LINK_UA_START$许可协议$LINK_UA_END$适用。您可以在$LINK_PS_START$此处$LINK_PS_END$找到我们的隐私声明。",
 		"placeholders": {
 			"link_ps_end": {
 				"content": "</a>"
 			},
 			"link_ps_start": {
-				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-us/privacy-statements/ghostery-browser-extension/ghostery-browser-extension-privacy-statement/\">"
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" rel=\"noopener noreferrer\">"
 			},
 			"link_ua_end": {
 				"content": "</a>"
 			},
 			"link_ua_start": {
-				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-us/privacy-statements/ghostery-browser-extension/ghostery-browser-extension-end-user-license-agreem/\">"
-			}
-		}
-	},
-	"tooltip_custom_settings": {
-		"message": "使用选定的跟踪器设置。",
-		"description": ""
-	},
-	"setup_footer_license": {
-		"message": "Ghostery $COPY$是 Cliqz 旗下公司。详细了解 $LINK_START$Cliqz$LINK_END$。$COPY$ Cliqz International GmbH，Cliqz GmbH 的全资子公司。保留所有权利。",
-		"description": "",
-		"placeholders": {
-			"link_start": {
-				"content": "<a href=\"https://cliqz.com\" target=\"_blank\">"
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/privacy-statements/\" rel=\"noopener noreferrer\">"
 			},
-			"link_end": {
+			"link_terms_end": {
 				"content": "</a>"
 			},
-			"copy": {
-				"content": "&copy;"
+			"link_terms_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/\" rel=\"noopener noreferrer\">"
 			}
 		}
 	},
-	"panel_detail_premium_title": {
-		"message": "Ghostery 高级版",
-		"description": ""
+	"all": {
+		"description": "Default setting in the 'filter by type' dropdown for the tag browser. Doesn't filter anything out. Should read as 'Show all'.",
+		"message": "全部"
 	},
-	"panel_detail_history_title": {
-		"message": "历史记录",
-		"description": ""
-	},
-	"box_warning_nonsecure": {
-		"message": "不安全的跟踪器",
-		"description": ""
-	},
-	"settings_account": {
-		"message": "帐户",
-		"description": ""
-	},
-	"drawer_status_enable_ad_block": {
-		"message": "广告拦截功能",
-		"description": ""
-	},
-	"none": {
-		"message": "无",
-		"description": "Used to say that this item does not belong to any of the groups, as in \"Groups: None\" (as opposed to \"Groups: Group A, Group B, Group C\")."
-	},
-	"rewards_copy_code": {
-		"message": "复制代码",
-		"description": ""
-	},
-	"notification_library_update": {
-		"message": "我们发掘了一些新的跟踪器，并将其添加到了 Ghostery 数据库。Ghostery 高级版",
-		"description": ""
-	},
-	"settings_replace_social": {
-		"message": "用 Ghostery 图标代替遭拦截的社交媒体按钮",
-		"description": ""
-	},
-	"setup_button_exit": {
-		"message": "退出",
-		"description": ""
-	},
-	"alert_smart_block_on": {
-		"message": "智能拦截功能已开启。将调整跟踪器拦截功能以优化页面性能。",
-		"description": ""
-	},
-	"setup_upgrade_desc_1": {
-		"message": "$BOLD_START$智能拦截$BOLD_END$在您浏览时自动优化性能。",
-		"description": "",
-		"placeholders": {
-			"bold_start": {
-				"content": "<strong>"
-			},
-			"bold_end": {
-				"content": "</strong>"
-			}
-		}
-	},
-	"summary_pause_ghostery_ab_pause": {
-		"message": "暂停",
-		"description": ""
-	},
-	"enable_when_not_scanned": {
-		"message": "要使用此功能，请先转到另一个页面。",
-		"description": ""
-	},
-	"settings_share_human_web": {
-		"message": "分享 Human Web 数据",
-		"description": ""
-	},
-	"panel_detail_rewards_cliqz_text": {
-		"message": "Cliqz MyOffrz 控制面板中已激活此功能。",
-		"description": ""
-	},
-	"rewards_code_copied": {
-		"message": "代码已复制",
-		"description": ""
-	},
-	"panel_tracker_slow_non_secure_end": {
-		"message": " 。",
-		"description": ""
-	},
-	"setup_login_view_last_name": {
-		"message": "姓氏（可选）：",
-		"description": ""
-	},
-	"setup_login_view_password_error": {
-		"message": "请使用 8 到 50 个字符。",
-		"description": ""
-	},
-	"license_unknown": {
-		"message": "未知",
-		"description": ""
-	},
-	"license_generic": {
-		"message": "标准许可证文字",
-		"description": ""
-	},
-	"panel_about_panel_header": {
-		"message": "关于 Ghostery 浏览器扩展程序",
-		"description": ""
-	},
-	"setup_login_view_email": {
-		"message": "电子邮件地址：",
-		"description": ""
-	},
-	"blocked": {
-		"message": "已拦截",
-		"description": "Select this to show only blocked (checked) tags in the tag browser. Should read as 'Show blocked'."
-	},
-	"setup_additional_view_adblock_desc": {
-		"message": "拦截您访问的网站上的所有广告。",
-		"description": ""
-	},
-	"tooltip_ad_block_body": {
-		"message": "拦截您访问的网站上的广告。",
-		"description": ""
-	},
-	"panel_tracker_breaking_page": {
-		"message": "拦截了 $COUNT$ 个导致网页崩溃的$TRACKERS$",
-		"description": "",
-		"placeholders": {
-			"count": {
-				"content": "$1",
-				"example": "4"
-			},
-			"trackers": {
-				"content": "$2",
-				"example": "trackers"
-			}
-		}
-	},
-	"category_customer_interaction": {
-		"message": "客户互动",
-		"description": "Ghostery organizes tags by category. This is one of several tag categories."
-	},
-	"settings_export_header": {
-		"message": "导出设置",
-		"description": ""
-	},
-	"panel_about_privacy_statement": {
-		"message": "隐私声明",
-		"description": ""
-	},
-	"license_url": {
-		"message": "网址",
-		"description": ""
-	},
-	"settings_allow_trackers": {
-		"message": "允许网站所有者创建的跟踪器",
-		"description": ""
-	},
-	"settings_restricted_sites": {
-		"message": "受限制网站",
-		"description": ""
-	},
-	"drawer_title_enable_anti_tracking": {
-		"message": "增强型反跟踪",
-		"description": ""
-	},
-	"setup_blocking_view_block_nothing": {
-		"message": "没有什么",
-		"description": ""
-	},
-	"email_field_label": {
-		"message": "电子邮件地址：",
-		"description": ""
-	},
-	"setup_button_previous": {
-		"message": "上一步",
-		"description": ""
-	},
-	"setup_login_view_confirm_email": {
-		"message": "确认电子邮件地址：",
-		"description": ""
-	},
-	"password_characters_requirements": {
-		"message": "只允许使用这些特殊字符：!@#$%^&amp;*=+()&lt;&gt;{}[];:,./?",
-		"description": ""
-	},
-	"setup_choice_view_title": {
-		"message": "使用 Ghostery，浏览更智能！$BR$您想如何开始？",
-		"description": "",
-		"placeholders": {
-			"br": {
-				"content": "<br />"
-			}
-		}
-	},
-	"click2play_review_form": {
-		"message": "Ghostery 拦截了由$NAME$提供支持的评价。",
-		"description": "",
-		"placeholders": {
-			"name": {
-				"content": "$1",
-				"example": "Disqus"
-			}
-		}
-	},
-	"drawer_label_enable_ad_block": {
-		"message": "已拦截广告",
-		"description": ""
-	},
-	"panel_detail_menu_history_title": {
-		"message": "历史记录",
-		"description": ""
-	},
-	"notification_upgrade_link_v8": {
-		"message": "立即展示！",
-		"description": ""
-	},
-	"white_black_list_error_invalid_url": {
-		"message": "请输入有效的网址。",
-		"description": ""
-	},
-	"license_repository": {
-		"message": "许可证库",
-		"description": ""
-	},
-	"rewards_second_prompt": {
-		"message": "是否选择将来不接收 Ghostery 奖励？",
-		"description": ""
-	},
-	"alert_site_restricted_off": {
-		"message": "网站不再位于黑名单中。",
-		"description": ""
-	},
-	"alert_anti_track_off": {
-		"message": "增强型反跟踪功能已关闭。个人数据不会匿名化。",
-		"description": ""
-	},
-	"blocked_redirect_url_content": {
-		"message": "此跟踪代码似乎重定向到 $BREAK$$A_START$$REDIRECT_URL$$A_END$。如果此链接没有问题并且您想继续，请点击下面的图标允许$APP$并重新加载。",
-		"description": "Text appearing on block_redirect.html when a redirect is blocked and a final 'destination' URL is successfully found.",
-		"placeholders": {
-			"a_end": {
-				"content": "</a>"
-			},
-			"a_start": {
-				"content": "<a href=\"$1\" class=\"ellipsis\" title=\"$1\">"
-			},
-			"app": {
-				"content": "$2",
-				"example": "DoubleClick"
-			},
-			"break": {
-				"content": "<br>"
-			},
-			"redirect_url": {
-				"content": "$1"
-			}
-		}
+	"banner_check_your_email_title": {
+		"message": "请稍后检查您的电子邮件，获取密码重置链接。"
 	},
 	"banner_no_such_account_message": {
-		"message": "似乎无法找到此电子邮件地址和密码组合。再试一次。",
-		"description": ""
+		"message": "似乎无法找到此电子邮件地址和密码组合。再试一次。"
 	},
-	"panel_view_trackers": {
-		"message": "查看跟踪器",
-		"description": ""
+	"blacklist_error_duplicate_url": {
+		"message": "此网站已受到限制。"
 	},
-	"panel_menu_submit_tracker": {
-		"message": "提交新跟踪器",
-		"description": ""
+	"blacklist_error_whitelist_url": {
+		"message": "此网站已从您的“受信任网站”列表中删除，并已添加到“受限制网站”列表中"
 	},
-	"setup_choice_view_learn_more": {
-		"message": "了解详情。",
-		"description": ""
+	"blocked": {
+		"description": "Select this to show only blocked (checked) tags in the tag browser. Should read as 'Show blocked'.",
+		"message": "已拦截"
 	},
-	"box_display_tr": {
-		"message": "$SPAN_START$在右上方$SPAN_END$显示",
-		"description": "",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
+	"blocked_redirect_action_always_title": {
+		"description": "Title for the 'Allow always and reload' button on the blocked redirect page.",
+		"message": "始终允许并重新加载。"
 	},
-	"setup_title": {
-		"message": "Ghostery 安装",
-		"description": ""
+	"blocked_redirect_action_through_once_title": {
+		"description": "Title for the 'Allow once' button on the blocked redirect page.",
+		"message": "允许一次跟踪代码，直到达到最终目标页面。"
 	},
-	"invalid_email_confirmation": {
-		"message": "您的电子邮件地址不符。",
-		"description": ""
-	},
-	"category_comments_desc": {
-		"message": "为文章和产品评论启用评论部分。",
-		"description": "User-facing description for the Comments tag category."
-	},
-	"rewards_new_text": {
-		"message": "发现新奖励！",
-		"description": ""
-	},
-	"create_password_field_label": {
-		"message": "密码：",
-		"description": ""
-	},
-	"panel_detail_performance_title": {
-		"message": "网站性能",
-		"description": ""
-	},
-	"category_advertising": {
-		"message": "广告",
-		"description": "Ghostery organizes tags by category. This is one of several tag categories."
-	},
-	"settings_import_success": {
-		"message": "您的设置已成功导入，导入时间为",
-		"description": ""
-	},
-	"category_site_analytics": {
-		"message": "网站分析",
-		"description": "Ghostery organizes tags by category. This is one of several tag categories."
-	},
-	"panel_help_panel_header": {
-		"message": "Ghostery 浏览器扩展程序帮助",
-		"description": ""
-	},
-	"settings_trust_and_restrict": {
-		"message": "信任和限制",
-		"description": ""
-	},
-	"tooltip_anti_track_body_on": {
-		"message": "个人数据点已匿名化。",
-		"description": ""
-	},
-	"settings_auto_update": {
-		"message": "启用从 Ghostery 跟踪器库自动更新",
-		"description": ""
-	},
-	"panel_menu_about": {
-		"message": "关于",
-		"description": ""
-	},
-	"box_display_tl": {
-		"message": "$SPAN_START$在左上方$SPAN_END$显示",
-		"description": "",
-		"placeholders": {
-			"span_end": {
-				"content": "</span>"
-			},
-			"span_start": {
-				"content": "<span>"
-			}
-		}
-	},
-	"alert_ad_block_on": {
-		"message": "增强型广告拦截功能已开启。广告将被拦截。",
-		"description": ""
-	},
-	"setup_display_view_detailed_desc": {
-		"message": "列出跟踪器，并允许用其他数据分析自定义拦截。",
-		"description": ""
-	},
-	"panel_detail_rewards_none_found": {
-		"message": "未找到奖励",
-		"description": ""
-	},
-	"rewards_settings": {
-		"message": "Ghostery 奖励设置",
-		"description": ""
-	},
-	"settings_last_update": {
-		"message": "上次同步时间",
-		"description": ""
-	},
-	"settings_general_settings": {
-		"message": "常规设置",
-		"description": ""
-	},
-	"settings_display_in": {
-		"message": "显示位置",
-		"description": ""
-	},
-	"setup_display_view_simple": {
-		"message": "简单",
-		"description": ""
-	},
-	"settings_edit_account": {
-		"message": "修改帐户",
-		"description": ""
-	},
-	"category_essential_desc": {
-		"message": "包括对网站功能至关重要的跟踪器，如跟踪代码管理器和隐私权声明。",
-		"description": "User-facing description for the Essential tag category."
-	},
-	"last_name_field_label": {
-		"message": "姓氏（可选）：",
-		"description": ""
-	},
-	"settings_update_now": {
-		"message": "立即更新",
-		"description": ""
-	},
-	"alert_site_restricted": {
-		"message": "网站已列入黑名单。在此网站上，跟踪器将被拦截，反跟踪功能将启用。",
-		"description": ""
-	},
-	"rewards_expires_in_secs": {
-		"message": "秒",
-		"description": ""
-	},
-	"setup_header_password": {
-		"message": "密码",
-		"description": ""
-	},
-	"tracker_found": {
-		"message": "已找到",
-		"description": ""
-	},
-	"panel_detail_menu_premium_title": {
-		"message": "高级版",
-		"description": ""
-	},
-	"global_settings_saved_category": {
-		"message": "全局类别设置已保存",
-		"description": ""
-	},
-	"settings_filter_blocked_label": {
-		"message": "已拦截",
-		"description": ""
-	},
-	"drawer_desc_enable_smart_block": {
-		"message": "跟踪器已被暂时拦截或取消拦截。",
-		"description": ""
-	},
-	"settings_trusted_sites": {
-		"message": "受信任网站",
-		"description": ""
-	},
-	"settings_seconds": {
-		"message": "秒",
-		"description": ""
-	},
-	"setup_done_view_desc": {
-		"message": "Ghostery 会静静显示在您的浏览器栏中。",
-		"description": ""
-	},
-	"summary_alerts": {
-		"message": "个提醒",
-		"description": "as in '5 ALERTS'"
-	},
-	"panel_menu_settings": {
-		"message": "设置",
-		"description": ""
-	},
-	"setup_login_view_create_account": {
-		"message": "没有帐户？创建一个。",
-		"description": ""
-	},
-	"settings_show_purple_box_tooltip": {
-		"message": "紫色方框是一个实时跟踪器列表，显示在浏览器一角。利用此功能，您可以查看添加到网页的跟踪器。",
-		"description": ""
-	},
-	"settings_show_purple_box": {
-		"message": "在浏览器一角显示紫色方框",
-		"description": ""
-	},
-	"category_advertising_desc": {
-		"message": "包括广告服务，如数据收集、行为分析或重新定位。",
-		"description": "User-facing description for the Advertising tag category."
-	},
-	"settings_export_success": {
-		"message": "您的设置已成功导出到您的下载文件夹，导出时间为",
-		"description": ""
-	},
-	"tracker_signular": {
-		"message": "跟踪器",
-		"description": ""
-	},
-	"rewards_expires_in_hours": {
-		"message": "小时",
-		"description": ""
-	},
-	"settings_trusted_restricted_sites": {
-		"message": "信任和限制",
-		"description": ""
-	},
-	"box_looking": {
-		"message": "外观",
-		"description": ""
-	},
-	"panel_signin_success": {
-		"message": "您现在登录的用户为 ",
-		"description": ""
-	},
-	"setup_display_view_title": {
-		"message": "您想要哪种界面？",
-		"description": ""
-	},
-	"summary_map_these_trackers": {
-		"message": "映射这些跟踪器",
-		"description": ""
-	},
-	"tracker_description_learn_more": {
-		"message": "继续查看完整的跟踪器资料",
-		"description": ""
-	},
-	"not_http_page": {
-		"message": "确保您当前的标签页中打开了 http 或 https 网页",
-		"description": ""
-	},
-	"panel_header_verify_account": {
-		"message": "验证帐户",
-		"description": ""
-	},
-	"setup_additional_view_adblock_title": {
-		"message": "增强型广告屏蔽",
-		"description": ""
-	},
-	"settings_filter_all_label": {
-		"message": "全部",
-		"description": ""
-	},
-	"settings_highlight_trackers_tooltip": {
-		"message": "某些跟踪器被拦截时，有时候社交媒体分享、评论或视频播放器等功能将无法工作。若要启用某个被拦截的功能，请点击网页上的此图标：",
-		"description": ""
-	},
-	"panel_detail_performance_text": {
-		"message": "功能即将推出。",
-		"description": ""
-	},
-	"category_essential": {
-		"message": "基本",
-		"description": "Ghostery organizes tags by category. This is one of several tag categories."
-	},
-	"summary_description_not_scanned_2": {
-		"message": "转到其他网页，扩展程序应该可以正常工作。",
-		"description": ""
-	},
-	"settings_import_warning": {
-		"message": "警告：这将覆盖您当前的 Ghostery 设置。",
-		"description": ""
-	},
-	"panel_menu_help": {
-		"message": "帮助",
-		"description": ""
-	},
-	"tooltip_pause": {
-		"message": "暂停 Ghostery",
-		"description": ""
-	},
-	"settings_trackers": {
-		"message": "跟踪器",
-		"description": ""
-	},
-	"rewards_terms_conditions": {
-		"message": "条款和条件",
-		"description": ""
-	},
-	"notification_upgrade_v8": {
-		"message": "设置酷炫的新功能，了解最新版本。",
-		"description": ""
-	},
-	"panel_tracker_breaking_page_end": {
-		"message": " 。",
-		"description": ""
-	},
-	"settings_filter_unblocked_label": {
-		"message": "未拦截",
-		"description": ""
-	},
-	"rewards_no": {
-		"message": "否",
-		"description": ""
-	},
-	"settings_human_web_tooltip": {
-		"message": "Ghostery 现在默认实现了 Human Web，这是一项利用群体智慧打造更私密互联网的革命性技术",
-		"description": ""
-	},
-	"category_pornvertising": {
-		"message": "成人广告",
-		"description": "Ghostery organizes tags by category. This is one of several tag categories."
-	},
-	"settings_update_up_to_date": {
-		"message": "仍为最新",
-		"description": ""
-	},
-	"panel_tracker_warning_smartunblock_tooltip": {
-		"message": "智能拦截功能未拦截的跟踪器",
-		"description": ""
-	},
-	"alert_site_trusted_off": {
-		"message": "网站不再位于白名单中。",
-		"description": ""
-	},
-	"summary_show_menu": {
-		"message": "显示菜单",
-		"description": ""
-	},
-	"rewards_about": {
-		"message": "关于奖励",
-		"description": ""
-	},
-	"category_social_media": {
-		"message": "社交媒体",
-		"description": "Ghostery organizes tags by category. This is one of several tag categories."
-	},
-	"blocking_category_tracker_found": {
-		"message": "已发现",
-		"description": ""
-	},
-	"tooltip_ad_block_body_on": {
-		"message": "广告已被拦截。",
-		"description": ""
-	},
-	"settings_sites_placeholder": {
-		"message": "example.com",
-		"description": ""
-	},
-	"setup_login_view_log_in": {
-		"message": "已经有帐户？请登录。",
-		"description": ""
-	},
-	"category_customer_interaction_desc": {
-		"message": "包括聊天、电子邮件、客户支持和其他交互工具。",
-		"description": "User-facing description for the Customer Interaction tag category."
-	},
-	"panel_forgot_password": {
-		"message": "忘记了密码？",
-		"description": ""
-	},
-	"click2play_blocked": {
-		"message": "Ghostery 拦截了$APP_NAME$。",
-		"description": "",
-		"placeholders": {
-			"app_name": {
-				"content": "$1",
-				"example": "SoundCloud"
-			}
-		}
-	},
-	"panel_help_setup": {
-		"message": "设置 Ghostery",
-		"description": ""
-	},
-	"setup_blocking_view_block_custom": {
-		"message": "自定义",
-		"description": ""
-	},
-	"settings_individual_trackers_tooltip": {
-		"message": "选择要在网站上拦截或允许哪些特定跟踪器，以便进行自定义控制",
-		"description": ""
-	},
-	"rewards_delete": {
-		"message": "删除此奖励",
-		"description": ""
-	},
-	"click2play_allow_always_tooltip": {
-		"message": "允许并重新加载。",
-		"description": "Tooltip that appears over the 'allow always' click2play button."
-	},
-	"rewards_expires_in_days": {
-		"message": "天",
-		"description": ""
-	},
-	"panel_tracker_block_tooltip": {
-		"message": "在所有网站上拦截",
-		"description": ""
-	},
-	"setup_button_next": {
-		"message": "下一步",
-		"description": ""
-	},
-	"setup_header_email": {
-		"message": "电子邮件地址",
-		"description": ""
-	},
-	"license_information_missing": {
-		"message": "缺少许可证库信息",
-		"description": ""
-	},
-	"box_settings_expanded": {
-		"message": "我的 Ghostery 设置",
-		"description": ""
-	},
-	"rewards_first_prompt": {
-		"message": "是否继续前往您的 Ghostery 奖励？",
-		"description": ""
-	},
-	"drawer_tooltip_enable_ad_block": {
-		"message": "显示或拦截网站上的所有广告。",
-		"description": ""
-	},
-	"panel_detail_menu_list_title": {
-		"message": "列表视图",
-		"description": ""
-	},
-	"forgot_password_message": {
-		"message": "忘记了密码？嘿，谁都会遇到这种事。我们会通过电子邮件向您发送密码重置说明。",
-		"description": ""
-	},
-	"box_options_expanded": {
-		"message": "选项",
-		"description": ""
-	},
-	"drawer_tooltip_enable_smart_block": {
-		"message": "自动拦截和取消拦截跟踪器，优化网页性能。",
-		"description": ""
-	},
-	"setup_upgrade_desc_3": {
-		"message": "$BOLD_START$增强型反跟踪$BOLD_END$进一步保护您的个人数据。",
-		"description": "",
-		"placeholders": {
-			"bold_start": {
-				"content": "<strong>"
-			},
-			"bold_end": {
-				"content": "</strong>"
-			}
-		}
-	},
-	"tooltip_trust_on": {
-		"message": "网站上的跟踪器已开启，反跟踪功能已关闭。点击撤销。",
-		"description": ""
-	},
-	"settings_show_tracker_count_badge": {
-		"message": "在浏览器工具栏中的 Ghostery 图标上显示跟踪器计数标志",
-		"description": ""
-	},
-	"category_comments": {
-		"message": "评论",
-		"description": "Ghostery organizes tags by category. This is one of several tag categories."
-	},
-	"pause_24_hours": {
-		"message": "24 小时",
-		"description": ""
-	},
-	"server_error_message": {
-		"message": "我们似乎遇到了技术问题。请稍后再试。",
-		"description": ""
-	},
-	"panel_detail_rewards_coming_soon": {
-		"message": "功能即将推出。",
-		"description": ""
-	},
-	"summary_pause_ghostery": {
-		"message": "暂停",
-		"description": ""
-	},
-	"unblocked": {
-		"message": "未拦截",
-		"description": "Select this to show only unblocked (unchecked) tags in the tag browser. Should read as 'Show unblocked'."
-	},
-	"tracker_description_none_found": {
-		"message": "未找到跟踪器描述。",
-		"description": ""
-	},
-	"setup_login_view_password": {
-		"message": "密码：",
-		"description": ""
-	},
-	"panel_tracker_warning_slow_tooltip": {
-		"message": "跟踪器降低网页加载速度",
-		"description": ""
-	},
-	"setup_choice_view_answer_questions": {
-		"message": "回答几个简短的问题，自行选择设置。",
-		"description": ""
-	},
-	"setup_header_sign_in_hide": {
-		"message": "隐藏登录",
-		"description": ""
-	},
-	"setup_login_view_email_error": {
-		"message": "抱歉，您必须输入真实的电子邮件地址。",
-		"description": ""
-	},
-	"category_pornvertising_desc": {
-		"message": "包括为成人内容网站设计的广告技术。",
-		"description": "User-facing description for the Adult Advertising tag category."
-	},
-	"setup_upgrade_button_go": {
-		"message": "我要安装",
-		"description": ""
-	},
-	"setup_button_skip": {
-		"message": "跳过",
-		"description": ""
-	},
-	"pause_30_min": {
-		"message": "30 分钟",
-		"description": ""
-	},
-	"summary_blocked": {
-		"message": "已拦截",
-		"description": "as in '5 (trackers) BLOCKED'"
-	},
-	"panel_help_feedback": {
-		"message": "参与调查",
-		"description": ""
-	},
-	"license_publisher": {
-		"message": "发布者",
-		"description": ""
-	},
-	"summary_page_not_scanned": {
-		"message": "未扫描页面",
-		"description": ""
-	},
-	"summary_resume_ghostery_tooltip": {
-		"message": "Ghostery 扩展程序已暂停。点击恢复。",
-		"description": ""
-	},
-	"box_settings": {
-		"message": "设置",
-		"description": ""
-	},
-	"panel_menu_report_broken_site": {
-		"message": "报告崩溃页面",
-		"description": ""
-	},
-	"rewards_off": {
-		"message": "关闭",
-		"description": ""
-	},
-	"license_type": {
-		"message": "许可证类型",
-		"description": ""
-	},
-	"panel_help_support": {
-		"message": "支持",
-		"description": ""
-	},
-	"panel_tracker_slow_non_secure": {
-		"message": "此网页上 $COUNT$ 个缓慢和/或不安全的$TRACKERS$",
-		"description": "",
-		"placeholders": {
-			"count": {
-				"content": "$1",
-				"example": "4"
-			},
-			"trackers": {
-				"content": "$2",
-				"example": "trackers"
-			}
-		}
-	},
-	"panel_header_sign_in": {
-		"message": "登录",
-		"description": ""
-	},
-	"tooltip_anti_track": {
-		"message": "增强型反跟踪",
-		"description": ""
-	},
-	"category_site_analytics_desc": {
-		"message": "包括数据分析、网站使用情况和性能跟踪器。",
-		"description": "User-facing description for the Site Analytics tag category."
-	},
-	"tooltip_resume": {
-		"message": "恢复 Ghostery",
-		"description": ""
-	},
-	"license_text": {
-		"message": "许可证文字",
-		"description": ""
-	},
-	"settings_import_file_error": {
-		"message": "文件类型不正确。请选择 .ghost 文件，然后重试。",
-		"description": ""
+	"blocked_redirect_page_title": {
+		"description": "Page title for blocked_redirect.html which appears when a redirect is blocked.",
+		"message": "Ghostery 阻止了重定向。"
 	},
 	"blocked_redirect_prevent": {
-		"message": "Ghostery 阻止了从 $BREAK$ $SP_O_START$$ORIGIN$$SP_END$ 到 $SP_D_START$$DESTINATION$$SP_END$ 的重定向，$BREAK$后者属于$A_START$$APP$$A_END$。$BREAK$",
 		"description": "Text appearing on block_redirect.html when a redirect is blocked. Should appear inside \"redirect-prevent\" div.",
+		"message": "Ghostery 阻止了从 $BREAK$ $SP_O_START$$ORIGIN$$SP_END$ 到 $SP_D_START$$DESTINATION$$SP_END$ 的重定向，$BREAK$后者属于$A_START$$APP$$A_END$。$BREAK$",
 		"placeholders": {
 			"a_end": {
 				"content": "</a>"
@@ -1750,164 +88,499 @@
 			}
 		}
 	},
-	"blocking_block_all": {
-		"message": "全部拦截",
-		"description": ""
-	},
-	"setup_additional_view_antitrack_desc": {
-		"message": "对未拦截和未知的跟踪器保持匿名，获得更好的浏览保护。",
-		"description": ""
-	},
-	"setup_choice_view_legal": {
-		"message": "安装 Ghostery，即表示您同意我们的$LINK_PP_START$隐私政策$LINK_PP_END$及$LINK_TERMS_START$使用条款$LINK_TERMS_END$。",
-		"description": "",
+	"blocked_redirect_url_content": {
+		"description": "Text appearing on block_redirect.html when a redirect is blocked and a final 'destination' URL is successfully found.",
+		"message": "此跟踪代码似乎重定向到 $BREAK$$A_START$$REDIRECT_URL$$A_END$。如果此链接没有问题并且您想继续，请点击下面的图标允许$APP$并重新加载。",
 		"placeholders": {
-			"link_pp_start": {
-				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" target=\"_blank\">"
-			},
-			"link_pp_end": {
+			"a_end": {
 				"content": "</a>"
 			},
-			"link_terms_start": {
-				"content": "<a href=\"https://www.ghostery.com/about-ghostery/browser-extension-end-user-license-agreement/\" target=\"_blank\">"
+			"a_start": {
+				"content": "<a href=\"$1\" class=\"ellipsis\" title=\"$1\">"
 			},
-			"link_terms_end": {
-				"content": "</a>"
+			"app": {
+				"content": "$2",
+				"example": "DoubleClick"
+			},
+			"break": {
+				"content": "<br>"
+			},
+			"redirect_url": {
+				"content": "$1"
 			}
 		}
 	},
-	"all": {
-		"message": "全部",
-		"description": "Default setting in the 'filter by type' dropdown for the tag browser. Doesn't filter anything out. Should read as 'Show all'."
+	"box_dismiss_0s": {
+		"message": "$SPAN_START$永不$SPAN_END$关闭",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
 	},
-	"settings_share_usage_tooltip": {
-		"message": "我们收集使用情况分析，以便更好地了解用户喜欢什么功能。例如，如果您点击暂停，我们将收集一条信息，从而知道您使用了该功能。",
-		"description": ""
+	"box_dismiss_15s": {
+		"message": "$SPAN_START$15 秒后$SPAN_END$关闭",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
 	},
-	"summary_trust_site_active": {
-		"message": "可信网站",
-		"description": ""
+	"box_dismiss_30s": {
+		"message": "$SPAN_START$30 秒后$SPAN_END$关闭",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
 	},
-	"panel_help_contact_header": {
-		"message": "联系方式",
-		"description": ""
+	"box_dismiss_5s": {
+		"message": "$SPAN_START$5 秒后$SPAN_END$关闭",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
 	},
-	"drawer_label_enable_smart_block": {
-		"message": "已调整跟踪器",
-		"description": ""
+	"box_display_bl": {
+		"message": "$SPAN_START$在左下方$SPAN_END$显示",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
 	},
-	"settings_show_patterns": {
-		"message": "显示跟踪器网址",
-		"description": ""
+	"box_display_br": {
+		"message": "$SPAN_START$在右下方$SPAN_END$显示",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
 	},
-	"blocked_redirect_action_always_title": {
-		"message": "始终允许并重新加载。",
-		"description": "Title for the 'Allow always and reload' button on the blocked redirect page."
+	"box_display_tl": {
+		"message": "$SPAN_START$在左上方$SPAN_END$显示",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
 	},
-	"drawer_title_enable_ad_block": {
-		"message": "增强型广告屏蔽",
-		"description": ""
+	"box_display_tr": {
+		"message": "$SPAN_START$在右上方$SPAN_END$显示",
+		"placeholders": {
+			"span_end": {
+				"content": "</span>"
+			},
+			"span_start": {
+				"content": "<span>"
+			}
+		}
 	},
-	"settings_export_reserved_page_error": {
-		"message": "当前页面为浏览器的预留页面时，Ghostery 无法导出设置。请浏览其他页面，然后重试。",
-		"description": ""
-	},
-	"password_field_label": {
-		"message": "密码",
-		"description": ""
-	},
-	"rewards_expires_in_mins": {
-		"message": "分钟",
-		"description": ""
-	},
-	"alert_ghostery_resumed": {
-		"message": "Ghostery 扩展程序已恢复。",
-		"description": ""
-	},
-	"pause_30_min_condensed": {
-		"message": "30 分钟",
-		"description": ""
-	},
-	"setup_additional_view_smartblock_desc": {
-		"message": "自动拦截和取消拦截跟踪器，优化网页性能。",
-		"description": ""
-	},
-	"send_button_label": {
-		"message": "发送",
-		"description": ""
-	},
-	"alert_reload": {
-		"message": "重新加载以查看更改。",
-		"description": ""
+	"box_hide": {
+		"message": "隐藏方框"
 	},
 	"box_hide_expanded": {
-		"message": "隐藏紫色方框",
-		"description": ""
+		"message": "隐藏紫色方框"
 	},
-	"tracker_description_getting": {
-		"message": "正在获取跟踪器描述...",
-		"description": ""
+	"box_looking": {
+		"message": "外观"
 	},
-	"drawer_label_enable_anti_tracking": {
-		"message": "对跟踪器保持匿名",
-		"description": ""
+	"box_options_expanded": {
+		"message": "选项"
+	},
+	"box_settings": {
+		"message": "设置"
+	},
+	"box_settings_expanded": {
+		"message": "我的 Ghostery 设置"
+	},
+	"box_tracker": {
+		"message": "跟踪器"
+	},
+	"box_trackers": {
+		"message": "跟踪器"
+	},
+	"box_warning_slow": {
+		"message": "降低加载速度的跟踪器"
+	},
+	"box_warning_nonsecure": {
+		"message": "不安全的跟踪器"
+	},
+	"box_warning_compatibility": {
+		"message": "导致网页崩溃的跟踪器"
+	},
+	"browser_button_tooltip": {
+		"description": "Ghostery's browser button tooltip.",
+		"message": "查看 Ghostery 的发现"
+	},
+	"button_cancel": {
+		"description": "Part of a confirmation dialog. Clicking this cancels the action.",
+		"message": "取消"
+	},
+	"category_advertising": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "广告"
+	},
+	"category_advertising_desc": {
+		"description": "User-facing description for the Advertising tag category.",
+		"message": "包括广告服务，如数据收集、行为分析或重新定位。"
+	},
+	"category_audio_video_player": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "音频/视频播放器"
+	},
+	"category_audio_video_player_desc": {
+		"description": "User-facing description for the Audio/Video Player tag category.",
+		"message": "使网站能够发布、分发和优化音频与视频内容。"
+	},
+	"category_comments": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "评论"
+	},
+	"category_comments_desc": {
+		"description": "User-facing description for the Comments tag category.",
+		"message": "为文章和产品评论启用评论部分。"
+	},
+	"category_customer_interaction": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "客户互动"
+	},
+	"category_customer_interaction_desc": {
+		"description": "User-facing description for the Customer Interaction tag category.",
+		"message": "包括聊天、电子邮件、客户支持和其他交互工具。"
+	},
+	"category_essential": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "基本"
+	},
+	"category_essential_desc": {
+		"description": "User-facing description for the Essential tag category.",
+		"message": "包括对网站功能至关重要的跟踪器，如跟踪代码管理器和隐私权声明。"
+	},
+	"category_pornvertising": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "成人广告"
+	},
+	"category_pornvertising_desc": {
+		"description": "User-facing description for the Adult Advertising tag category.",
+		"message": "包括为成人内容网站设计的广告技术。"
+	},
+	"category_site_analytics": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "网站分析"
+	},
+	"category_site_analytics_desc": {
+		"description": "User-facing description for the Site Analytics tag category.",
+		"message": "包括数据分析、网站使用情况和性能跟踪器。"
+	},
+	"category_social_media": {
+		"description": "Ghostery organizes tags by category. This is one of several tag categories.",
+		"message": "社交媒体"
+	},
+	"category_social_media_desc": {
+		"description": "User-facing description for the Social Media tag category.",
+		"message": "包括与社交媒体平台相关的功能。"
+	},
+	"category_uncategorized": {
+		"message": "未分类"
+	},
+	"category_uncategorized_desc": {
+		"message": "这些跟踪器尚未分类。"
+	},
+	"click2play_allow_always_tooltip": {
+		"description": "Tooltip that appears over the 'allow always' click2play button.",
+		"message": "允许并重新加载。"
+	},
+	"click2play_allow_once_button_tooltip": {
+		"description": "Tooltip that appears over the click2play replacement for 'social' buttons.",
+		"message": "Ghostery 拦截了$APP_NAME$。点击此处允许它只加载这一次。",
+		"placeholders": {
+			"app_name": {
+				"content": "$1",
+				"example": "Twitter Button"
+			}
+		}
+	},
+	"click2play_allow_once_tooltip": {
+		"description": "Tooltip that appears over the 'allow once' click2play button.",
+		"message": "允许一次并重新加载。"
+	},
+	"click2play_blocked": {
+		"message": "Ghostery 拦截了$APP_NAME$。",
+		"placeholders": {
+			"app_name": {
+				"content": "$1",
+				"example": "SoundCloud"
+			}
+		}
+	},
+	"click2play_comment_form": {
+		"message": "Ghostery 拦截了由$NAME$提供支持的评论。",
+		"placeholders": {
+			"name": {
+				"content": "$1",
+				"example": "Disqus"
+			}
+		}
+	},
+	"click2play_review_form": {
+		"message": "Ghostery 拦截了由$NAME$提供支持的评价。",
+		"placeholders": {
+			"name": {
+				"content": "$1",
+				"example": "Disqus"
+			}
+		}
+	},
+	"click2play_survey_form": {
+		"message": "Ghostery 拦截了由$NAME$提供支持的调查。",
+		"placeholders": {
+			"name": {
+				"content": "$1",
+				"example": "Disqus"
+			}
+		}
+	},
+	"click2play_video_form": {
+		"message": "Ghostery 拦截了$NAME$视频播放器。",
+		"placeholders": {
+			"name": {
+				"content": "$1",
+				"example": "Disqus"
+			}
+		}
+	},
+	"copyright": {
+		"description": "Copyright message, shown in page footers.",
+		"message": "$C$ $YEAR$ $GHOSTERY$，$COMPANY_ADDRESS$ 的一部分",
+		"placeholders": {
+			"c": {
+				"content": "&copy;"
+			},
+			"company_address": {
+				"content": "$1",
+				"example": "GHOSTERY, Inc., Such-and-such Street, Such-and-such Floor, New York, NY, Zip Code"
+			},
+			"ghostery": {
+				"content": "<a href='https://www.ghostery.com' target='_blank'>Ghostery</a>"
+			},
+			"year": {
+				"content": "2015"
+			}
+		}
+	},
+	"email_confirm_field_label": {
+		"message": "确认电子邮件地址："
+	},
+	"email_field_label": {
+		"message": "电子邮件地址："
+	},
+	"error_email_forgot": {
+		"message": "找不到该电子邮件地址。试试别的？"
+	},
+	"first_name_field_label": {
+		"message": "名字（可选）："
+	},
+	"forgot_password_message": {
+		"message": "忘记了密码？嘿，谁都会遇到这种事。我们会通过电子邮件向您发送密码重置说明。"
+	},
+	"invalid_email_confirmation": {
+		"message": "您的电子邮件地址不符。"
+	},
+	"invalid_email_create": {
+		"message": "请输入有效的电子邮件地址。"
+	},
+	"invalid_email_forgot": {
+		"message": "抱歉，您必须输入真实的电子邮件地址。"
+	},
+	"invalid_email_login": {
+		"message": "抱歉，您必须输入真实的电子邮件地址。"
+	},
+	"last_name_field_label": {
+		"message": "姓氏（可选）："
+	},
+	"password_field_label_required": {
+		"message": "密码为必填项。"
 	},
 	"name": {
-		"message": "$EXTENSION_NAME$ – 隐私广告拦截工具",
 		"description": "The title of this extension (Ghostery).",
+		"message": "$EXTENSION_NAME$ – 隐私广告拦截工具",
 		"placeholders": {
 			"extension_name": {
 				"content": "Ghostery"
 			}
 		}
 	},
+	"none": {
+		"description": "Used to say that this item does not belong to any of the groups, as in \"Groups: None\" (as opposed to \"Groups: Group A, Group B, Group C\").",
+		"message": "无"
+	},
+	"summary_blocked": {
+		"description": "as in '5 (trackers) BLOCKED'",
+		"message": "已拦截"
+	},
+	"summary_alert": {
+		"description": "as in '1 ALERT'",
+		"message": "个提醒"
+	},
+	"summary_alerts": {
+		"description": "as in '5 ALERTS'",
+		"message": "个提醒"
+	},
+	"summary_page_not_scanned": {
+		"message": "未扫描页面"
+	},
+	"summary_description_not_scanned_1": {
+		"message": "Ghostery只扫描\\“http\\”和\\“https\\”网页。"
+	},
+	"summary_description_not_scanned_2": {
+		"message": "转到其他网页，扩展程序应该可以正常工作。"
+	},
+	"summary_custom_settings": {
+		"message": "自定义设置"
+	},
+	"summary_trust_site": {
+		"message": "信任网站"
+	},
+	"summary_trust_site_active": {
+		"message": "可信网站"
+	},
 	"summary_restrict_site": {
-		"message": "限制网站",
-		"description": ""
+		"message": "限制网站"
 	},
-	"setup_data_view_title": {
-		"message": "您想帮助改进 Ghostery 吗？",
-		"description": ""
+	"summary_restrict_site_active": {
+		"message": "受限网站"
 	},
-	"blacklist_error_duplicate_url": {
-		"message": "此网站已受到限制。",
-		"description": ""
+	"summary_undo": {
+		"message": "撤消"
 	},
-	"rewards_on": {
-		"message": "日期",
-		"description": ""
+	"summary_pause_ghostery": {
+		"message": "暂停"
 	},
-	"category_uncategorized": {
-		"message": "未分类",
-		"description": ""
+	"summary_pause_ghostery_tooltip": {
+		"message": "暂停 Ghostery 扩展程序。"
 	},
-	"drawer_desc_enable_ad_block": {
-		"message": "广告位已被拦截。",
-		"description": ""
+	"summary_pause_ghostery_ab_pause": {
+		"message": "暂停"
 	},
-	"settings_notify_me_tooltip": {
-		"message": "允许 Ghostery 在浏览器中显示与新产品功能、更新和用户反馈有关的消息。",
-		"description": ""
+	"pause_30_min": {
+		"message": "30 分钟"
 	},
-	"tooltip_simple": {
-		"message": "简单视图",
-		"description": ""
+	"pause_30_min_condensed": {
+		"message": "30 分钟"
 	},
-	"settings_account_email": {
-		"message": "电子邮件地址",
-		"description": ""
+	"pause_1_hour": {
+		"message": "1 小时"
 	},
-	"setup_additional_view_smartblock_title": {
-		"message": "智能拦截",
-		"description": ""
+	"pause_1_hour_condensed": {
+		"message": "1 小时\n"
 	},
-	"rewards_on_toast_notification": {
-		"message": "Ghostery 奖励已开启",
-		"description": ""
+	"pause_24_hours": {
+		"message": "24 小时"
+	},
+	"pause_24_hours_condensed": {
+		"message": "24 小时"
+	},
+	"summary_resume_ghostery": {
+		"message": "恢复 Ghostery"
+	},
+	"summary_resume_ghostery_tooltip": {
+		"message": "Ghostery 扩展程序已暂停。点击恢复。"
+	},
+	"summary_resume_ghostery_ab_pause": {
+		"message": "继续"
+	},
+	"summary_show_menu": {
+		"message": "显示菜单"
+	},
+	"blocking_trackers": {
+		"message": "跟踪器"
+	},
+	"blocking_block_all": {
+		"message": "全部拦截"
+	},
+	"blocking_block_shown": {
+		"message": "拦截所有显示结果"
+	},
+	"blocking_category_tracker": {
+		"message": "跟踪器"
+	},
+	"blocking_category_trackers": {
+		"message": "跟踪器"
+	},
+	"blocking_category_blocked": {
+		"description": "as in '5 (trackers) BLOCKED'",
+		"message": "已拦截"
+	},
+	"panel_create_account": {
+		"message": "创建帐户"
+	},
+	"panel_email_verification_sent": {
+		"message": "$BOLD_HTML_STARTS$成功！$BOLD_HTML_END$帐户验证电子邮件已发送到 $EMAIL$",
+		"placeholders": {
+			"bold_html_end": {
+				"content": "</strong>"
+			},
+			"bold_html_starts": {
+				"content": "<strong>"
+			},
+			"email": {
+				"content": "$1",
+				"example": "info@ghostery.com"
+			}
+		}
+	},
+	"panel_forgot_password": {
+		"message": "忘记了密码？"
+	},
+	"panel_help_panel_header": {
+		"message": "Ghostery 浏览器扩展程序帮助"
+	},
+	"panel_help_contact_header": {
+		"message": "联系方式"
+	},
+	"panel_help_faq": {
+		"message": "常见问题解答"
+	},
+	"panel_help_feedback": {
+		"message": "参与调查"
+	},
+	"panel_help_questions_header": {
+		"message": "问题和意见"
+	},
+	"panel_help_support": {
+		"message": "支持"
+	},
+	"panel_help_setup": {
+		"message": "设置 Ghostery"
+	},
+	"panel_about_panel_header": {
+		"message": "关于 Ghostery 浏览器扩展程序"
 	},
 	"panel_about_version_header": {
 		"message": "适用于 $BROWSER$ $VERSION$ 的 Ghostery",
-		"description": "",
 		"placeholders": {
 			"browser": {
 				"content": "$1",
@@ -1919,190 +592,1616 @@
 			}
 		}
 	},
-	"invalid_email_forgot": {
-		"message": "抱歉，您必须输入真实的电子邮件地址。",
-		"description": ""
+	"panel_about_release_notes": {
+		"message": "查看所有更新的版本说明"
 	},
-	"setup_done_view_title": {
-		"message": "您已准备就绪！",
-		"description": ""
+	"panel_about_license": {
+		"message": "Mozilla 公共许可协议"
 	},
-	"tooltip_expert": {
-		"message": "详细视图",
-		"description": ""
+	"panel_about_privacy_statement": {
+		"message": "隐私声明"
 	},
-	"tooltip_anti_track_body": {
-		"message": "对未拦截和未知的跟踪器保持匿名，获得更好的浏览保护。",
-		"description": ""
+	"panel_about_terms_and_conditions": {
+		"message": "条款和条件"
 	},
-	"enable_when_paused": {
-		"message": "要使用该功能，请恢复 Ghostery。",
-		"description": ""
+	"panel_about_licenses": {
+		"message": "软件许可证"
 	},
-	"blocked_redirect_action_through_once_title": {
-		"message": "允许一次跟踪代码，直到达到最终目标页面。",
-		"description": "Title for the 'Allow once' button on the blocked redirect page."
+	"panel_about_imprint": {
+		"message": "版权声明"
 	},
-	"panel_tracker_warning_smartblock_tooltip": {
-		"message": "智能拦截功能拦截的跟踪器",
-		"description": ""
+	"panel_menu_settings": {
+		"message": "设置"
 	},
-	"enable_when_whitelisted": {
-		"message": "要使用此功能，请撤销“信任网站”",
-		"description": ""
+	"panel_menu_report_broken_site": {
+		"message": "报告崩溃页面"
 	},
-	"summary_undo": {
-		"message": "撤消",
-		"description": ""
+	"panel_menu_submit_tracker": {
+		"message": "提交新跟踪器"
 	},
-	"setup_upgrade_button_later": {
-		"message": "以后再说",
-		"description": ""
+	"panel_menu_help": {
+		"message": "帮助"
 	},
-	"setup_upgrade_title": {
-		"message": "欢迎使用 Ghostery 8！",
-		"description": ""
+	"panel_menu_about": {
+		"message": "关于"
 	},
-	"settings_show_reload_banner": {
-		"message": "在扩展程序顶部显示页面重新加载横幅通知",
-		"description": ""
+	"panel_menu_ghostery_subscriber": {
+		"message": "Ghostery Plus"
 	},
-	"settings_account_name": {
-		"message": "姓名",
-		"description": ""
+	"panel_menu_signin": {
+		"message": "登录"
 	},
-	"alert_smart_block_off": {
-		"message": "智能拦截功能已关闭。跟踪器拦截功能将不会自动调整。",
-		"description": ""
+	"panel_menu_signout": {
+		"message": "退出"
 	},
-	"panel_header_simple_view": {
-		"message": "简单视图",
-		"description": ""
+	"global_settings_saved": {
+		"message": "全局设置已保存"
 	},
-	"setup_choice_view_one_click": {
-		"message": "一键安装",
-		"description": ""
+	"global_settings_saved_tracker": {
+		"message": "全局跟踪器设置已保存"
 	},
-	"invalid_email_login": {
-		"message": "抱歉，您必须输入真实的电子邮件地址。",
-		"description": ""
+	"global_settings_saved_category": {
+		"message": "全局类别设置已保存"
+	},
+	"panel_needs_reload": {
+		"message": "Ghostery 有未处理的更新。"
+	},
+	"panel_click_to_reload": {
+		"message": "点击以重新加载并查看变化。"
+	},
+	"panel_tracker_breaking_page": {
+		"message": "拦截了 $COUNT$ 个导致网页崩溃的$TRACKERS$",
+		"placeholders": {
+			"count": {
+				"content": "$1",
+				"example": "4"
+			},
+			"trackers": {
+				"content": "$2",
+				"example": "trackers"
+			}
+		}
+	},
+	"panel_tracker_breaking_page_end": {
+		"message": " 。"
+	},
+	"panel_tracker_slow_non_secure": {
+		"message": "此网页上 $COUNT$ 个缓慢和/或不安全的$TRACKERS$",
+		"placeholders": {
+			"count": {
+				"content": "$1",
+				"example": "4"
+			},
+			"trackers": {
+				"content": "$2",
+				"example": "trackers"
+			}
+		}
+	},
+	"panel_tracker_slow_non_secure_end": {
+		"message": " 。"
+	},
+	"panel_tracker_total_tooltip": {
+		"message": "找到的追踪器、拦截的广告和匿名处理的数据点的总数量。"
+	},
+	"panel_signin_success": {
+		"message": "您现在登录的用户为 "
+	},
+	"panel_view_trackers": {
+		"message": "查看跟踪器"
+	},
+	"panel_signin_success_title": {
+		"message": "恭喜！您的 Ghostery 帐户已准备就绪。"
+	},
+	"panel_title_create_account": {
+		"message": "创建帐户"
+	},
+	"panel_tracker_found_sources_title": {
+		"message": "检测到的跟踪器网址："
 	},
 	"panel_tracker_warning_compatibility_tooltip": {
-		"message": "拦截了导致页面崩溃的跟踪器",
-		"description": ""
+		"message": "拦截了导致页面崩溃的跟踪器"
+	},
+	"panel_tracker_warning_slow_nonsecure_tooltip": {
+		"message": "跟踪器降低了网页加载速度且不安全"
+	},
+	"panel_tracker_warning_nonsecure_tooltip": {
+		"message": "跟踪器不安全"
+	},
+	"panel_tracker_warning_slow_tooltip": {
+		"message": "跟踪器降低网页加载速度"
+	},
+	"panel_tracker_warning_smartblock_tooltip": {
+		"message": "智能拦截功能拦截的跟踪器"
+	},
+	"panel_tracker_warning_smartunblock_tooltip": {
+		"message": "智能拦截功能未拦截的跟踪器"
+	},
+	"panel_tracker_block_tooltip": {
+		"message": "在所有网站上拦截"
+	},
+	"panel_tracker_restrict_tooltip": {
+		"message": "在此网站上限制"
+	},
+	"panel_tracker_trust_tooltip": {
+		"message": "在此网站上信任"
+	},
+	"panel_detail_menu_list_title": {
+		"message": "列表视图"
+	},
+	"panel_detail_menu_history_title": {
+		"message": "历史记录"
+	},
+	"panel_detail_menu_performance_title": {
+		"message": "性能"
+	},
+	"panel_detail_menu_rewards_title": {
+		"message": "Rewards"
+	},
+	"panel_detail_menu_stats_title": {
+		"message": "历史统计数据"
+	},
+	"panel_detail_menu_premium_title": {
+		"message": "高级版"
+	},
+	"panel_detail_learn_more": {
+		"message": "了解详情"
+	},
+	"panel_detail_history_title": {
+		"message": "历史记录"
+	},
+	"panel_detail_history_text": {
+		"message": "功能即将推出。"
+	},
+	"panel_detail_performance_title": {
+		"message": "网站性能"
+	},
+	"panel_detail_performance_text": {
+		"message": "功能即将推出。"
+	},
+	"panel_detail_rewards_title": {
+		"message": "Ghostery Rewards"
+	},
+	"panel_detail_rewards_coming_soon": {
+		"message": "功能即将推出。"
+	},
+	"panel_detail_rewards_cliqz_text": {
+		"message": "Cliqz MyOffrz 控制面板中已激活此功能。"
+	},
+	"panel_detail_rewards_loading": {
+		"message": "正在加载Rewards…"
+	},
+	"panel_detail_rewards_none_found": {
+		"message": "找不到Rewards"
+	},
+	"panel_detail_rewards_off": {
+		"message": "Ghostery Rewards已关闭"
+	},
+	"panel_detail_premium_title": {
+		"message": "Ghostery 高级版"
+	},
+	"panel_detail_premium_text": {
+		"message": "功能即将推出。"
+	},
+	"notification_upgrade": {
+		"message": "我们的团队爱岗敬业、技术出众，在他们的努力工作下，我们发布全新版本的 Ghostery。"
+	},
+	"notification_upgrade_link": {
+		"message": "该版本中新增了一些贴心功能，且修复了缺陷。"
+	},
+	"notification_upgrade_title_v8": {
+		"message": "Ghostery 8 隆重发布！"
+	},
+	"notification_upgrade_v8": {
+		"message": "设置酷炫的新功能，了解最新版本。"
+	},
+	"notification_upgrade_link_v8": {
+		"message": "立即展示！"
+	},
+	"notification_library_update": {
+		"message": "我们发掘了一些新的跟踪器，并将其添加到了 Ghostery 数据库。Ghostery 高级版"
+	},
+	"notification_library_update_link": {
+		"message": "查看新变化"
+	},
+	"panel_header_sign_in": {
+		"message": "登录"
+	},
+	"panel_header_verify_account": {
+		"message": "验证帐户"
+	},
+	"panel_header_simple_view": {
+		"message": "简单视图"
+	},
+	"panel_header_detailed_view": {
+		"message": "详细视图"
+	},
+	"password_characters_requirements": {
+		"message": "只允许使用这些特殊字符：!@#$%^&amp;*=+()&lt;&gt;{}[];:,./?"
+	},
+	"password_field_label": {
+		"message": "密码"
+	},
+	"create_password_field_label": {
+		"message": "密码："
+	},
+	"password_requirements": {
+		"message": "请使用 8 到 50 个字符。"
+	},
+	"send_button_label": {
+		"message": "发送"
+	},
+	"server_error_message": {
+		"message": "我们似乎遇到了技术问题。请稍后再试。"
+	},
+	"email_address_in_use": {
+		"message": "该电子邮件地址已被使用。请选择其他电子邮件地址。 "
+	},
+	"short_description": {
+		"description": "A short description of this extension (Ghostery).",
+		"message": "Ghostery 是强大的隐私保护扩展程序。拦截广告，停止跟踪器，提高网站速度。"
+	},
+	"tracker_description_getting": {
+		"message": "正在获取跟踪器描述..."
+	},
+	"tracker_description_learn_more": {
+		"message": "继续查看完整的跟踪器资料"
+	},
+	"tracker_description_none_found": {
+		"message": "未找到跟踪器描述。"
+	},
+	"unblocked": {
+		"description": "Select this to show only unblocked (unchecked) tags in the tag browser. Should read as 'Show unblocked'.",
+		"message": "未拦截"
+	},
+	"white_black_list_error_invalid_url": {
+		"message": "请输入有效的网址。"
+	},
+	"whitelist_error_blacklist_url": {
+		"message": "此网站已从您的“受限制网站”列表中删除，并已添加到“受信任网站”列表中。"
+	},
+	"whitelist_error_duplicate_url": {
+		"description": "Options page site whitelisting error message shown when whitelisting a URL that is already in the whitelist.",
+		"message": "此网站已列入白名单。"
+	},
+	"settings_purple_box": {
+		"message": "紫色方框"
+	},
+	"settings_notifications": {
+		"message": "通知"
+	},
+	"settings_support_ghostery": {
+		"message": "支持 Ghostery"
+	},
+	"settings_account": {
+		"message": "帐户"
+	},
+	"settings_trackers": {
+		"message": "跟踪器"
+	},
+	"settings_auto_update": {
+		"message": "启用从 Ghostery 跟踪器库自动更新"
+	},
+	"settings_last_update": {
+		"message": "上次同步时间"
+	},
+	"settings_update_now": {
+		"message": "立即更新"
+	},
+	"settings_update_success": {
+		"message": "成功！"
+	},
+	"settings_update_up_to_date": {
+		"message": "仍为最新"
+	},
+	"settings_update_failed": {
+		"message": "更新失败。请稍后再试"
+	},
+	"settings_show_patterns": {
+		"message": "显示跟踪器网址"
+	},
+	"settings_highlight_trackers": {
+		"message": "突出显示交互式跟踪器"
+	},
+	"settings_required_trackers": {
+		"message": "当我需要允许跟踪器来使用网站功能时显示"
+	},
+	"settings_replace_social": {
+		"message": "用 Ghostery 图标代替遭拦截的社交媒体按钮"
+	},
+	"settings_blocking": {
+		"message": "正在拦截"
+	},
+	"settings_individual_trackers": {
+		"message": "信任和限制网站上的个别跟踪器"
+	},
+	"settings_allow_trackers": {
+		"message": "允许网站所有者创建的跟踪器"
+	},
+	"settings_block_trackers": {
+		"message": "默认拦截添加到 Ghostery 的新跟踪器"
+	},
+	"settings_show_purple_box": {
+		"message": "在浏览器一角显示紫色方框"
+	},
+	"settings_dismiss_after": {
+		"message": "此时间后关闭："
+	},
+	"settings_display_in": {
+		"message": "显示位置"
+	},
+	"settings_bottom_right_corner": {
+		"message": "右下角"
+	},
+	"settings_bottom_left_corner": {
+		"message": "左下角"
+	},
+	"settings_top_right_corner": {
+		"message": "右上角"
+	},
+	"settings_top_left_corner": {
+		"message": "左上角"
+	},
+	"settings_never": {
+		"message": "从不"
+	},
+	"settings_seconds": {
+		"message": "秒"
+	},
+	"settings_hide_alert_trusted": {
+		"message": "在受信任网站上隐藏紫色方框"
+	},
+	"settings_notify_me": {
+		"message": "当 Ghostery 有以下动向时通知我："
+	},
+	"settings_announcements": {
+		"message": "发布公告"
+	},
+	"settings_new_features": {
+		"message": "发布新功能"
+	},
+	"settings_new_trackers": {
+		"message": "添加新跟踪器到跟踪器库"
+	},
+	"settings_show_reload_banner": {
+		"message": "在扩展程序顶部显示页面重新加载横幅通知"
+	},
+	"settings_show_trackers_banner": {
+		"message": "在扩展程序顶部显示跟踪器提醒横幅通知"
+	},
+	"settings_show_tracker_count_badge": {
+		"message": "在浏览器工具栏中的 Ghostery 图标上显示跟踪器计数标志"
+	},
+	"settings_support_ghostery_by": {
+		"message": "支持 Ghostery"
+	},
+	"settings_share_usage": {
+		"message": "分享扩展程序使用情况分析"
+	},
+	"settings_share_human_web": {
+		"message": "分享 Human Web 数据"
+	},
+	"settings_allow_offers": {
+		"message": "已参与Ghostery Rewards"
+	},
+	"settings_signin_create_header": {
+		"message": "登录/创建帐户"
+	},
+	"settings_sign_create_text": {
+		"message": "您的帐户设置将同步到此设备。创建一个帐户，轻松地跨所有设备和平台同步您的 Ghostery 设置。"
+	},
+	"settings_account_name": {
+		"message": "姓名"
+	},
+	"settings_account_email": {
+		"message": "电子邮件地址"
+	},
+	"settings_edit_account": {
+		"message": "修改帐户"
+	},
+	"settings_export_header": {
+		"message": "导出设置"
+	},
+	"settings_export_text": {
+		"message": "保存 Ghostery 首选项的副本并将其传输到另一台计算机。"
+	},
+	"settings_export_success": {
+		"message": "您的设置已成功导出到您的下载文件夹，导出时间为"
+	},
+	"settings_export_error": {
+		"message": "您的设置未成功导出。请再试一次。"
+	},
+	"settings_export_reserved_page_error": {
+		"message": "当前页面为浏览器的预留页面时，Ghostery 无法导出设置。请浏览其他页面，然后重试。"
+	},
+	"settings_import_header": {
+		"message": "导入设置"
+	},
+	"settings_import_text": {
+		"message": "选择备份 .ghost 文件。"
+	},
+	"settings_import_warning": {
+		"message": "警告：这将覆盖您当前的 Ghostery 设置。"
+	},
+	"settings_import_success": {
+		"message": "您的设置已成功导入，导入时间为"
+	},
+	"settings_import_dialog_error": {
+		"message": "当前页面为浏览器的预留页面时，Ghostery 无法显示浏览器对话框。请浏览其他页面，然后重试。"
+	},
+	"settings_import_file_error": {
+		"message": "文件类型不正确。请选择 .ghost 文件，然后重试。"
+	},
+	"browse_button_label": {
+		"message": "浏览..."
+	},
+	"select_file_for_import": {
+		"message": "选择 .ghost 文件进行导入"
+	},
+	"file_was_not_selected": {
+		"message": "未选择文件"
+	},
+	"refresh_and_try_again": {
+		"message": "刷新页面，然后重试"
+	},
+	"not_http_page": {
+		"message": "确保您当前的标签页中打开了 http 或 https 网页"
+	},
+	"settings_show_patterns_tooltip": {
+		"message": "点击跟踪器后，可以在跟踪器描述下方找到跟踪器网址。"
+	},
+	"settings_highlight_trackers_tooltip": {
+		"message": "某些跟踪器被拦截时，有时候社交媒体分享、评论或视频播放器等功能将无法工作。若要启用某个被拦截的功能，请点击网页上的此图标："
+	},
+	"settings_individual_trackers_tooltip": {
+		"message": "选择特定网站上要始终信任或始终限制的具体追踪器。"
+	},
+	"settings_allow_trackers_tooltip": {
+		"message": "例如，拦截 facebook.com 上的 Facebook 跟踪器可能会导致该网站崩溃。"
+	},
+	"settings_show_purple_box_tooltip": {
+		"message": "紫色方框是一个实时跟踪器列表，显示在浏览器一角。利用此功能，您可以查看添加到网页的跟踪器。"
+	},
+	"settings_notify_me_tooltip": {
+		"message": "允许 Ghostery 在浏览器中显示与新产品功能、更新和用户反馈有关的消息。"
+	},
+	"settings_share_usage_tooltip": {
+		"message": "我们收集使用情况分析，以便更好地了解用户喜欢什么功能。例如，如果您点击暂停，我们将收集一条信息，从而知道您使用了该功能。"
+	},
+	"settings_human_web_tooltip": {
+		"message": "Ghostery 现在默认实现了 Human Web，这是一项利用群体智慧打造更私密互联网的革命性技术"
+	},
+	"settings_offers_tooltip": {
+		"message": "Ghostery Rewards是一个按私密原则设计的功能，能在您上网浏览时为您提供来自我们合作公司的折扣和特惠。"
+	},
+	"settings_opt_in": {
+		"message": "加入/退出"
+	},
+	"settings_global_blocking": {
+		"message": "全局拦截"
+	},
+	"settings_trust_and_restrict": {
+		"message": "信任和限制"
+	},
+	"settings_general_settings": {
+		"message": "常规设置"
+	},
+	"settings_searh_by_tracker": {
+		"message": "按跟踪器搜索"
+	},
+	"page_load": {
+		"message": "网页加载"
 	},
 	"trackers_blocked": {
-		"message": "已拦截跟踪器：",
-		"description": ""
+		"message": "已拦截跟踪器："
 	},
-	"rewards_expires_in": {
-		"message": "到期时间：$COUNT$ $TYPE$",
-		"description": "example: Expires in 8 minutes. TYPE will be rewards_expires_in_TYPE listed below.",
+	"settings_trusted_restricted_sites": {
+		"message": "信任和限制"
+	},
+	"settings_trusted_sites": {
+		"message": "受信任网站"
+	},
+	"settings_sites_placeholder": {
+		"message": "example.com"
+	},
+	"settings_restricted_sites": {
+		"message": "受限制网站"
+	},
+	"settings_trusted_sites_description": {
+		"message": "此处列出的网站将受信任，所有跟踪器均不会遭到拦截。"
+	},
+	"settings_restricted_sites_description": {
+		"message": "此处列出的网站将受限制，所有跟踪器均会遭到拦截。"
+	},
+	"expand_all": {
+		"message": "全部展开"
+	},
+	"collapse_all": {
+		"message": "全部折叠"
+	},
+	"blocking_category_tracker_found": {
+		"message": "已发现"
+	},
+	"drawer_title_enable_anti_tracking": {
+		"message": "增强型反跟踪"
+	},
+	"drawer_tooltip_enable_anti_tracking": {
+		"message": "集成跟踪器可以记录大多数网站上的用户活动。反跟踪功能可以在这些跟踪器收集之前删除所有可用于识别您的数据。该数字显示网站上有多少个数据点被删除。"
+	},
+	"drawer_label_enable_anti_tracking": {
+		"message": "对跟踪器保持匿名"
+	},
+	"drawer_desc_enable_anti_tracking": {
+		"message": "私人数据点已被删除。"
+	},
+	"drawer_status_enable_anti_tracking": {
+		"message": "反跟踪功能"
+	},
+	"drawer_title_enable_ad_block": {
+		"message": "增强型广告屏蔽"
+	},
+	"drawer_tooltip_enable_ad_block": {
+		"message": "显示或拦截网站上的所有广告。"
+	},
+	"drawer_label_enable_ad_block": {
+		"message": "已拦截广告"
+	},
+	"drawer_desc_enable_ad_block": {
+		"message": "广告位已被拦截。"
+	},
+	"drawer_status_enable_ad_block": {
+		"message": "广告拦截功能"
+	},
+	"drawer_title_enable_smart_block": {
+		"message": "智能拦截"
+	},
+	"drawer_tooltip_enable_smart_block": {
+		"message": "自动拦截和取消拦截跟踪器，优化网页性能。"
+	},
+	"drawer_label_enable_smart_block": {
+		"message": "已调整跟踪器"
+	},
+	"drawer_desc_enable_smart_block": {
+		"message": "跟踪器已被暂时拦截或取消拦截。"
+	},
+	"drawer_status_enable_smart_block": {
+		"message": "智能拦截功能"
+	},
+	"drawer_on": {
+		"message": "开启"
+	},
+	"drawer_off": {
+		"message": "关闭"
+	},
+	"blocking_unblock_all": {
+		"message": "全部取消拦截"
+	},
+	"blocking_unblock_shown": {
+		"message": "取消拦截所有显示结果"
+	},
+	"settings_filter_all_label": {
+		"message": "全部"
+	},
+	"settings_filter_blocked_label": {
+		"message": "已拦截"
+	},
+	"settings_filter_unblocked_label": {
+		"message": "未拦截"
+	},
+	"settings_filter_new_label": {
+		"message": "新增"
+	},
+	"settings_filter_all": {
+		"message": "所有跟踪器"
+	},
+	"settings_filter_blocked": {
+		"message": "已拦截的跟踪器"
+	},
+	"settings_filter_unblocked": {
+		"message": "未拦截的跟踪器"
+	},
+	"settings_filter_new": {
+		"message": "新跟踪器"
+	},
+	"alert_ghostery_paused": {
+		"message": "Ghostery 扩展程序已暂停。"
+	},
+	"alert_ghostery_resumed": {
+		"message": "Ghostery 扩展程序已恢复。"
+	},
+	"alert_anti_track_on": {
+		"message": "增强型反跟踪功能已开启。个人数据将匿名化。"
+	},
+	"alert_anti_track_off": {
+		"message": "增强型反跟踪功能已关闭。个人数据不会匿名化。"
+	},
+	"alert_ad_block_on": {
+		"message": "增强型广告拦截功能已开启。广告将被拦截。"
+	},
+	"alert_ad_block_off": {
+		"message": "增强版广告拦截功能已关闭。广告不会被拦截。"
+	},
+	"alert_smart_block_on": {
+		"message": "智能拦截功能已开启。将调整跟踪器拦截功能以优化页面性能。"
+	},
+	"alert_smart_block_off": {
+		"message": "智能拦截功能已关闭。跟踪器拦截功能将不会自动调整。"
+	},
+	"alert_reload": {
+		"message": "重新加载以查看更改。"
+	},
+	"alert_site_trusted": {
+		"message": "网站已列入白名单。在此网站上，跟踪器将启用，反跟踪功能将关闭。"
+	},
+	"alert_site_trusted_off": {
+		"message": "网站不再位于白名单中。"
+	},
+	"alert_site_restricted": {
+		"message": "网站已列入黑名单。在此网站上，跟踪器将被拦截，反跟踪功能将启用。"
+	},
+	"alert_site_restricted_off": {
+		"message": "网站不再位于黑名单中。"
+	},
+	"tooltip_anti_track": {
+		"message": "增强型反跟踪"
+	},
+	"tooltip_anti_track_body": {
+		"message": "对未拦截和未知的跟踪器保持匿名，获得更好的浏览保护。"
+	},
+	"tooltip_anti_track_body_on": {
+		"message": "个人数据点已匿名化。"
+	},
+	"tooltip_body_in_cliqz": {
+		"message": "Cliqz 中默认激活此功能。"
+	},
+	"tooltip_ad_block": {
+		"message": "增强型广告屏蔽"
+	},
+	"tooltip_ad_block_body": {
+		"message": "拦截您访问的网站上的广告。"
+	},
+	"tooltip_ad_block_body_on": {
+		"message": "广告已被拦截。"
+	},
+	"tooltip_smart_block": {
+		"message": "智能拦截"
+	},
+	"tooltip_smart_block_body": {
+		"message": "自动拦截和取消拦截跟踪器，优化网页性能。"
+	},
+	"tooltip_smart_block_body_on": {
+		"message": "已调整跟踪器拦截功能以优化页面性能。"
+	},
+	"tooltip_trust": {
+		"message": "始终允许此网站上的跟踪器。"
+	},
+	"tooltip_trust_on": {
+		"message": "网站上的跟踪器已开启，反跟踪功能已关闭。点击撤销。"
+	},
+	"tooltip_restrict": {
+		"message": "始终拦截此网站上的跟踪器。"
+	},
+	"tooltip_restrict_on": {
+		"message": "网站上的跟踪器已拦截，反跟踪功能已开启。点击撤销。"
+	},
+	"tooltip_custom_settings": {
+		"message": "使用选定的跟踪器设置。"
+	},
+	"tooltip_pause": {
+		"message": "暂停"
+	},
+	"tooltip_resume": {
+		"message": "恢复 Ghostery"
+	},
+	"tooltip_expert": {
+		"message": "详细视图"
+	},
+	"tooltip_simple": {
+		"message": "简单视图"
+	},
+	"license_module": {
+		"message": "模块"
+	},
+	"license_repository": {
+		"message": "许可证库"
+	},
+	"license_information_missing": {
+		"message": "缺少许可证库信息"
+	},
+	"license_type": {
+		"message": "许可证类型"
+	},
+	"license_publisher": {
+		"message": "发布者"
+	},
+	"license_url": {
+		"message": "网址"
+	},
+	"license_email": {
+		"message": "电子邮件地址"
+	},
+	"license_text": {
+		"message": "许可证文字"
+	},
+	"license_unknown": {
+		"message": "未知"
+	},
+	"license_generic": {
+		"message": "标准许可证文字"
+	},
+	"license_licenses": {
+		"message": "许可证"
+	},
+	"license_footer": {
+		"message": "Ghostery $COPY$是 Cliqz 旗下公司。详细了解 $LINK_START$Cliqz$LINK_END$。$COPY$ Cliqz International GmbH，Cliqz GmbH 的全资子公司。保留所有权利。",
+		"placeholders": {
+			"link_start": {
+				"content": "<a href=\"https://cliqz.com\" target=\"_blank\">"
+			},
+			"link_end": {
+				"content": "</a>"
+			},
+			"copy": {
+				"content": "&copy;"
+			}
+		}
+	},
+	"hub_side_navigation_home": {
+		"message": "主页"
+	},
+	"hub_side_navigation_setup": {
+		"message": "自定义设置"
+	},
+	"hub_side_navigation_tutorial": {
+		"message": "学习教程"
+	},
+	"hub_side_navigation_supporter": {
+		"message": "获取Ghostery Plus"
+	},
+	"hub_side_navigation_rewards": {
+		"message": "试用Ghostery Rewards"
+	},
+	"hub_side_navigation_products": {
+		"message": "查看更多Ghostery产品"
+	},
+	"hub_side_navigation_create_account": {
+		"message": "创建帐户"
+	},
+	"hub_side_navigation_log_in": {
+		"message": "登录"
+	},
+	"hub_side_navigation_log_out": {
+		"message": "退出"
+	},
+	"hub_home_page_title": {
+		"message": "Ghostery Hub - 主页"
+	},
+	"hub_home_header_text": {
+		"message": "Ghostery已就绪！"
+	},
+	"hub_home_header_tagline": {
+		"message": "现在您已经获得了默认设置的保护。"
+	},
+	"hub_home_header_tagline_2": {
+		"message": "开始浏览！"
+	},
+	"hub_home_header_checkbox_label": {
+		"message": "分享额外的匿名分析数据来提高Ghostery的性能。"
+	},
+	"hub_home_header_info": {
+		"message": "新用户默认选择加入Human Web和Ghostery Rewards。您可以在自定义设置或在扩展中更改相关设置。"
+	},
+	"hub_home_header_info_link": {
+		"message": "了解详情。"
+	},
+	"hub_home_subheader_optimize": {
+		"message": "优化您的Ghostery体验"
+	},
+	"hub_home_subheader_create_account": {
+		"message": "创建帐户"
+	},
+	"hub_home_feature_tutorial_title": {
+		"message": "学习教程"
+	},
+	"hub_home_feature_tutorial_text": {
+		"message": "了解Ghostery的主要功能。"
+	},
+	"hub_home_feature_tutorial_button": {
+		"message": "开始"
+	},
+	"hub_home_feature_tutorial_button_alt": {
+		"message": "教程结束"
+	},
+	"hub_home_feature_setup_title": {
+		"message": "自定义设置"
+	},
+	"hub_home_feature_setup_text": {
+		"message": "编辑您的设置和拦截首选项。"
+	},
+	"hub_home_feature_setup_button": {
+		"message": "编辑设置"
+	},
+	"hub_home_feature_setup_button_alt": {
+		"message": "自定义设置完毕"
+	},
+	"hub_home_feature_supporter_text": {
+		"message": "升级为Ghostery Plus，解锁特别功能。"
+	},
+	"hub_home_feature_supporter_button": {
+		"message": "获取Ghostery Plus"
+	},
+	"hub_home_feature_supporter_button_alt": {
+		"message": "已订阅"
+	},
+	"hub_setup_page_title": {
+		"message": "Ghostery Hub - 设置"
+	},
+	"hub_setup_page_title_blocking": {
+		"message": "Ghostery Hub - 设置拦截"
+	},
+	"hub_setup_page_title_antisuite": {
+		"message": "Ghostery Hub - 设置Anti-Suite"
+	},
+	"hub_setup_page_title_humanweb": {
+		"message": "Ghostery Hub - 设置Human Web"
+	},
+	"hub_setup_page_title_done": {
+		"message": "Ghostery Hub - 设置完毕"
+	},
+	"hub_setup_header_title_blocking": {
+		"message": "Ghostery可以拦截追踪器，让您的浏览体验更清爽、快速和安全。$NEW_LINE$您想拦截什么？",
+		"placeholders": {
+			"new_line": {
+				"content": "<br />"
+			}
+		}
+	},
+	"hub_setup_header_title_antisuite": {
+		"message": "您想使用我们的推荐功能，让浏览更智能吗？"
+	},
+	"hub_setup_header_title_humanweb": {
+		"message": "您愿意帮助改进Ghostery吗？"
+	},
+	"hub_setup_header_title_done": {
+		"message": "自定义设置完毕！"
+	},
+	"hub_setup_exit_flow": {
+		"message": "退出自定义设置"
+	},
+	"hub_setup_nav_previous": {
+		"message": "上一步"
+	},
+	"hub_setup_nav_next": {
+		"message": "下一步"
+	},
+	"hub_setup_nav_done": {
+		"message": "完成"
+	},
+	"hub_setup_enter_modal_text": {
+		"message": "输入自定义设置会覆盖您之前的Ghostery设置。要继续吗？"
+	},
+	"hub_setup_modal_button_no": {
+		"message": "否"
+	},
+	"hub_setup_modal_button_yes": {
+		"message": "是"
+	},
+	"hub_setup_modal_button_ask_again": {
+		"message": "不再询问"
+	},
+	"hub_setup_blocking_text_recommended": {
+		"message": "拦截默认值"
+	},
+	"hub_setup_blocking_description_recommended": {
+		"message": "拦截的广告、站点分析和成人广告追踪器"
+	},
+	"hub_setup_blocking_text_nothing": {
+		"message": "不拦截"
+	},
+	"hub_setup_blocking_description_nothing": {
+		"message": "未拦截追踪器"
+	},
+	"hub_setup_blocking_text_everything": {
+		"message": "拦截全部"
+	},
+	"hub_setup_blocking_description_everything": {
+		"message": "已拦截全部追踪器"
+	},
+	"hub_setup_blocking_text_custom": {
+		"message": "从列表中选择"
+	},
+	"hub_setup_blocking_description_custom": {
+		"message": "选择要拦截的追踪器"
+	},
+	"hub_setup_antisuite_name_antitracking": {
+		"message": "增强型反跟踪"
+	},
+	"hub_setup_antisuite_description_antitracking": {
+		"message": "对未拦截和未知的跟踪器保持匿名，获得更好的浏览保护。"
+	},
+	"hub_setup_adblock_name_adblocking": {
+		"message": "增强型广告屏蔽"
+	},
+	"hub_setup_adblock_description_adblocking": {
+		"message": "拦截您访问的网站上的广告。"
+	},
+	"hub_setup_smartblocking_name_smartblocking": {
+		"message": "智能拦截"
+	},
+	"hub_setup_smartblocking_description_smartblocking": {
+		"message": "自动拦截和取消拦截跟踪器，优化网页性能。"
+	},
+	"hub_setup_ghosteryrewards_name_rewards": {
+		"message": "Rewards"
+	},
+	"hub_setup_ghosteryrewards_description_rewards": {
+		"message": "浏览和购物时不分享任何数据即可解锁特惠。"
+	},
+	"hub_setup_antisuite_feature_enabled": {
+		"message": "已启用"
+	},
+	"hub_setup_humanweb_header": {
+		"message": "我们使用匿名的Human Web数据来提高Ghostery的性能。绝不收集个人数据。$LINK_LM_START$了解详情$LINK_LM_END$",
+		"placeholders": {
+			"link_lm_start": {
+				"content": "<a href=\"https://www.ghostery.com/faqs/human-web-data-collected/\" target=\"_blank\" rel=\"noopener noreferrer\">"
+			},
+			"link_lm_end": {
+				"content": "</a>"
+			}
+		}
+	},
+	"hub_setup_humanweb_label": {
+		"message": "通过分享此信息来支持Ghostery"
+	},
+	"hub_setup_ready_heading": {
+		"message": "优化您的Ghostery体验"
+	},
+	"hub_setup_feature_tutorial_title": {
+		"message": "学习教程"
+	},
+	"hub_setup_feature_tutorial_description": {
+		"message": "了解Ghostery的主要功能。"
+	},
+	"hub_setup_feature_tutorial_button": {
+		"message": "开始"
+	},
+	"hub_setup_feature_supporter_title": {
+		"message": "获取Ghostery Plus"
+	},
+	"hub_setup_feature_supporter_description": {
+		"message": "支持Ghostery并解锁特别福利。"
+	},
+	"hub_setup_feature_supporter_button": {
+		"message": "支持"
+	},
+	"hub_setup_feature_products_title": {
+		"message": "查看更多Ghostery产品"
+	},
+	"hub_setup_feature_products_description": {
+		"message": "借助我们的全套隐私套装全面保护您自己的隐私！"
+	},
+	"hub_setup_feature_products_button": {
+		"message": "好的！"
+	},
+	"hub_tutorial_page_title": {
+		"message": "Ghostery Hub - 教程"
+	},
+	"hub_tutorial_page_title_video": {
+		"message": "Ghostery Hub - 教程概览"
+	},
+	"hub_tutorial_page_title_trackerlist": {
+		"message": "Ghostery Hub - 教程追踪器"
+	},
+	"hub_tutorial_page_title_blocking": {
+		"message": "Ghostery Hub - 教程拦截"
+	},
+	"hub_tutorial_page_title_layout": {
+		"message": "Ghostery Hub - 教程布局"
+	},
+	"hub_tutorial_page_title_trust": {
+		"message": "Ghostery Hub - 教程信任和限制"
+	},
+	"hub_tutorial_page_title_anti_suite": {
+		"message": "Ghostery Hub - 教程附加功能"
+	},
+	"hub_tutorial_exit_flow": {
+		"message": "退出教程"
+	},
+	"hub_tutorial_nav_previous": {
+		"message": "上一步"
+	},
+	"hub_tutorial_nav_next": {
+		"message": "下一步"
+	},
+	"hub_tutorial_nav_done": {
+		"message": "完成"
+	},
+	"hub_tutorial_simple_view": {
+		"message": "简单视图"
+	},
+	"hub_tutorial_detailed_view": {
+		"message": "详细视图"
+	},
+	"hub_tutorial_detailed_expanded_view": {
+		"message": "详细扩展视图"
+	},
+	"hub_tutorial_video_title": {
+		"message": "Ghostery的功能"
+	},
+	"hub_tutorial_video_tagline": {
+		"message": "拦截追踪器和广告，保护您的隐私，并加快页面加载速度。"
+	},
+	"hub_tutorial_trackerlist_title": {
+		"message": "跟踪器列表"
+	},
+	"hub_tutorial_trackerlist_tagline": {
+		"message": "Ghostery会列出您访问的每个网站上的追踪器，让您始终知晓哪些公司在追踪您。"
+	},
+	"hub_tutorial_blocking_title": {
+		"message": "选择要拦截的内容和方式"
+	},
+	"hub_tutorial_blocking_tagline": {
+		"message": "通过拦截或取消拦截列表中的追踪器来控制您的隐私和上网浏览体验。"
+	},
+	"hub_tutorial_blocking_allow": {
+		"message": "始终允许当前网站上的追踪器。"
+	},
+	"hub_tutorial_blocking_block": {
+		"message": "始终拦截当前网站上的追踪器。"
+	},
+	"hub_tutorial_blocking_block_always": {
+		"message": "始终拦截所有网站上的跟踪器。"
+	},
+	"hub_tutorial_layout_title": {
+		"message": "精简和详细视图"
+	},
+	"hub_tutorial_layout_tagline": {
+		"message": "根据您想让Ghostery显示的内容，在精简和详细视图间切换。"
+	},
+	"hub_tutorial_trust_title": {
+		"message": "信任和限制网站"
+	},
+	"hub_tutorial_trust_tagline": {
+		"message": "一键将网站加入白名单或黑名单"
+	},
+	"hub_tutorial_trust_trust_site": {
+		"message": "始终允许网站上的追踪器。"
+	},
+	"hub_tutorial_trust_restrict_site": {
+		"message": "始终拦截网站上的跟踪器。"
+	},
+	"hub_tutorial_antisuite_title": {
+		"message": "通过我们的增强隐私功能获得额外的防护和自动化控制："
+	},
+	"hub_tutorial_antisuite_antitracking_title": {
+		"message": "增强型反跟踪"
+	},
+	"hub_tutorial_antisuite_antitracking_description": {
+		"message": "去除网站可用于识别您身份的数据点。"
+	},
+	"hub_tutorial_antisuite_adblocking_title": {
+		"message": "增强型广告屏蔽"
+	},
+	"hub_tutorial_antisuite_adblocking_description": {
+		"message": "拦截您访问的页面上的广告。"
+	},
+	"hub_tutorial_antisuite_smartblocking_title": {
+		"message": "智能拦截"
+	},
+	"hub_tutorial_antisuite_smartblocking_description": {
+		"message": "自动拦截和取消拦截跟踪器，优化网页性能。"
+	},
+	"hub_products_page_title" : {
+		"message": "Ghostery Hub - 使用其他Ghostery产品"
+	},
+	"hub_products_header_title" : {
+		"message": "使用Ghostery产品，浏览更智能！"
+	},
+	"hub_products_header_description": {
+		"message": "利用我们的全套隐私套装保护隐私并增强上网体验。"
+	},
+	"hub_products_main_promo_title": {
+		"message": "移动端隐私浏览器"
+	},
+	"hub_products_main_promo_description": {
+		"message": "借助我们最新的增强型移动浏览器，随时随地享受无广告、无追踪器的上网浏览体验。现已配备私密搜索引擎！"
+	},
+	"hub_products_second_promo_title": {
+		"message": "Ghostery Start Tab"
+	},
+	"hub_products_second_promo_description": {
+		"message": "借助我们全新的标签页功能以隐身模式搜索、查看追踪器统计数据，以及管理Rewards。即将推出，敬请期待！"
+	},
+	"hub_products_third_promo_title": {
+		"message": "Ghostery Lite"
+	},
+	"hub_products_third_promo_description": {
+		"message": "利用我们有史以来最轻量的Safari专享产品，保护您的网络隐私并去除广告。"
+	},
+	"hub_rewards_page_title": {
+		"message": "Ghostery Hub - Rewards"
+	},
+	"hub_rewards_header_title": {
+		"message": "试用Ghostery Rewards！"
+	},
+	"hub_rewards_header_description": {
+		"message": "我们的新Rewards功能提供了一种完全私密的强大新方法来获取真实的网上折扣。快打开这个功能试用一下吧！"
+	},
+	"hub_rewards_header_learn_more": {
+		"message": "了解详情"
+	},
+	"hub_rewards_experience_title": {
+		"message": "更智能的购物体验"
+	},
+	"hub_rewards_experience_description": {
+		"message": "在您上网浏览和购物时向您直接发放高额奖励。"
+	},
+	"hub_rewards_privacy_title": {
+		"message": "以隐私为重"
+	},
+	"hub_rewards_privacy_description": {
+		"message": "不收集个人数据，不创建档案，不使用第三方服务"
+	},
+	"hub_rewards_relevant_title": {
+		"message": "独特而贴合需求"
+	},
+	"hub_rewards_relevant_description": {
+		"message": "特别优惠是符合我们用户需求的及时独家优惠"
+	},
+	"hub_rewards_closer": {
+		"message": "您可以在扩展中或通过自定义设置打开Ghostery Rewards。"
+	},
+	"hub_supporter_page_title": {
+		"message": "Ghostery Hub - Ghostery Plus"
+	},
+	"hub_supporter_header_title": {
+		"message": "升级为Ghostery Plus"
+	},
+	"hub_supporter_header_description": {
+		"message": "展现您的支持，解锁特别福利！"
+	},
+	"hub_supporter_button_text": {
+		"message": "获取Ghostery Plus"
+	},
+	"hub_supporter_button_text_alt": {
+		"message": "已订阅"
+	},
+	"hub_supporter_price": {
+		"message": "$SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$/月",
+		"placeholders": {
+			"sup_start": {
+				"content": "<sup>"
+			},
+			"sup_end": {
+				"content": "</sup>"
+			},
+			"span_start": {
+				"content": "<span>"
+			},
+			"span_end": {
+				"content": "</span>"
+			}
+		}
+	},
+	"hub_supporter_perk_themes_title": {
+		"message": "新主题"
+	},
+	"hub_supporter_perk_themes_description": {
+		"message": "定制Ghostery的颜色 - 试试我们的午夜黑主题吧！"
+	},
+	"hub_supporter_perk_stats_title": {
+		"message": "历史拦截统计数据"
+	},
+	"hub_supporter_perk_stats_description": {
+		"message": "查看您的拦截数据，了解 Ghostery 如何为您服务"
+	},
+	"hub_supporter_perk_more_title": {
+		"message": "优先支持及更多特权"
+	},
+	"hub_supporter_perk_more_description": {
+		"message": "使用我们的优先帮助台服务快速解决问题，更多特权即将推出"
+	},
+	"hub_supporter_manifesto": {
+		"message": "我们致力于为用户免费提供最出色的隐私保护服务。尽管我们的隐私套装不收费，但是您可以选择通过低价按月订阅来支持我们。升级为Ghostery Plus，加入我们的使命——并解锁各种酷炫福利！"
+	},
+	"hub_supporter_feature_theme_title": {
+		"message": "新主题"
+	},
+	"hub_supporter_feature_theme_description": {
+		"message": "定制Ghostery的颜色，获得全新的视觉体验！通过热门请求引入。快看看我们的特别版午夜黑主题，更多主题敬请期待。"
+	},
+	"hub_supporter_feature_stats_title": {
+		"message": "历史拦截统计数据"
+	},
+	"hub_supporter_feature_stats_description": {
+		"message": "查看历史拦截结果图表及统计数据，揭示趋势并了解 Ghostery 对浏览的影响。"
+	},
+	"hub_supporter_feature_support_title": {
+		"message": "优先支持"
+	},
+	"hub_supporter_feature_support_description": {
+		"message": "需要帮助？发现崩溃页面？使用我们的优先帮助台服务快速回答和解决所有问题，登录 Plus 帐户后才可使用。"
+	},
+	"hub_supporter_feature_more_title": {
+		"message": "……更多内容敬请期待！"
+	},
+	"hub_supporter_feature_more_description": {
+		"message": "请继续关注其他酷炫功能和内部信息，我们也会不断优化您的Ghostery体验。"
+	},
+	"hub_signedin_exit": {
+		"message": "返回主页"
+	},
+	"hub_signedin_header_title": {
+		"message": "您已登录"
+	},
+	"hub_signedin_as_email": {
+		"message": "已用此帐户登录："
+	},
+	"hub_login_header_title": {
+		"message": "登录您的帐户。"
+	},
+	"hub_login_label_email": {
+		"message": "电子邮件地址："
+	},
+	"hub_login_label_password": {
+		"message": "密码："
+	},
+	"hub_login_label_email_invalid": {
+		"message": "请输入有效的电子邮件地址。"
+	},
+	"hub_login_label_password_invalid": {
+		"message": "请使用 8 到 50 个字符。"
+	},
+	"hub_login_link_create_account": {
+		"message": "没有帐户？注册。"
+	},
+	"hub_login_button_submit": {
+		"message": "登录"
+	},
+	"hub_login_toast_success": {
+		"message": "登录成功！您的帐户设置已导入。"
+	},
+	"hub_login_toast_error": {
+		"message": "似乎无法找到此电子邮件地址和密码组合。再试一次。"
+	},
+	"hub_create_account_header_title": {
+		"message": "您想创建 Ghostery 帐户来跨浏览器和设备同步设置吗？"
+	},
+	"hub_create_account_label_email": {
+		"message": "电子邮件地址："
+	},
+	"hub_create_account_label_email_confirm": {
+		"message": "确认电子邮件地址："
+	},
+	"hub_create_account_label_first_name": {
+		"message": "名字（可选）："
+	},
+	"hub_create_account_label_email_last_name": {
+		"message": "姓氏（可选）："
+	},
+	"hub_create_account_label_password": {
+		"message": "密码："
+	},
+	"hub_create_account_label_email_invalid": {
+		"message": "请输入有效的电子邮件地址。"
+	},
+	"hub_create_account_label_email_confirm_invalid": {
+		"message": "您的电子邮件地址不符。"
+	},
+	"hub_create_account_label_password_invalid": {
+		"message": "只允许使用这些特殊字符：!@#$%^&amp;*=+()&lt;&gt;{}[];:,./?"
+	},
+	"hub_create_account_label_password_invalid_length": {
+		"message": "请使用 8 到 50 个字符。"
+	},
+	"hub_create_account_checkbox_promotions": {
+		"message": "给我发送Ghostery动态和促销信息。"
+	},
+	"hub_create_account_link_login": {
+		"message": "我已有帐户。登录。"
+	},
+	"hub_create_account_button_submit": {
+		"message": "创建帐户"
+	},
+	"hub_create_account_toast_success": {
+		"message": "帐户创建成功"
+	},
+	"hub_create_account_toast_error": {
+		"message": "该电子邮件地址已被使用。  请选择其他电子邮件地址。 "
+	},
+	"enable_when_paused": {
+		"message": "要使用该功能，请恢复 Ghostery。"
+	},
+	"enable_when_whitelisted": {
+		"message": "要使用此功能，请撤销“信任网站”"
+	},
+	"enable_when_blacklisted": {
+		"message": "要使用该功能，请撤销限制网站。"
+	},
+	"enable_when_not_scanned": {
+		"message": "要使用此功能，请先转到另一个页面。"
+	},
+	"rewards_new_text": {
+		"message": "发现了新Reward！"
+	},
+	"rewards_copy_code": {
+		"message": "复制代码"
+	},
+	"rewards_code_copied": {
+		"message": "代码已复制"
+	},
+	"rewards_expires_in_day": {
+		"message": "1 天可用"
+	},
+	"rewards_expires_in_days": {
+		"message": "$COUNT$ 天可用",
 		"placeholders": {
 			"count": {
 				"content": "$1"
-			},
-			"type": {
-				"content": "$2"
 			}
 		}
 	},
-	"panel_tracker_warning_slow_nonsecure_tooltip": {
-		"message": "跟踪器降低了网页加载速度且不安全",
-		"description": ""
+	"rewards_expires_in_hour": {
+		"message": "1 小时可用"
 	},
-	"password_field_label_required": {
-		"message": "密码为必填项。",
-		"description": ""
-	},
-	"panel_tracker_found_sources_title": {
-		"message": "检测到的跟踪器网址：",
-		"description": ""
-	},
-	"setup_upgrade_desc_2": {
-		"message": "$BOLD_START$动态用户界面为您提供$BOLD_END$多种显示选项。",
-		"description": "",
+	"rewards_expires_in_hours": {
+		"message": "$COUNT$ 小时可用",
 		"placeholders": {
-			"bold_start": {
-				"content": "<strong>"
-			},
-			"bold_end": {
-				"content": "</strong>"
+			"count": {
+				"content": "$1"
 			}
 		}
 	},
-	"setup_login_view_first_name": {
-		"message": "名字（可选）：",
-		"description": ""
+	"rewards_expires_in_min": {
+		"message": "1 分钟可用"
 	},
-	"box_warning_slow": {
-		"message": "降低加载速度的跟踪器",
-		"description": ""
-	},
-	"settings_trusted_sites_description": {
-		"message": "此处列出的网站将受信任，所有跟踪器均不会遭到拦截。",
-		"description": ""
-	},
-	"invalid_email_create": {
-		"message": "请输入有效的电子邮件地址。",
-		"description": ""
-	},
-	"panel_create_account": {
-		"message": "创建帐户",
-		"description": ""
-	},
-	"setup_choice_view_share_data_no_human_web": {
-		"message": "分享我的分析数据，以改善 Ghostery 的性能。",
-		"description": ""
-	},
-	"summary_pause_ghostery_tooltip": {
-		"message": "暂停 Ghostery 扩展程序。",
-		"description": ""
-	},
-	"short_description": {
-		"message": "Ghostery 是强大的隐私保护扩展程序。拦截广告，停止跟踪器，提高网站速度。",
-		"description": "A short description of this extension (Ghostery)."
-	},
-	"drawer_desc_enable_anti_tracking": {
-		"message": "私人数据点已被删除。",
-		"description": ""
-	},
-	"summary_custom_settings": {
-		"message": "自定义设置",
-		"description": ""
-	},
-	"click2play_allow_once_button_tooltip": {
-		"message": "Ghostery 拦截了$APP_NAME$。点击此处允许它只加载这一次。",
-		"description": "Tooltip that appears over the click2play replacement for 'social' buttons.",
+	"rewards_expires_in_mins": {
+		"message": "$COUNT$ 分钟可用",
 		"placeholders": {
-			"app_name": {
-				"content": "$1",
-				"example": "Twitter Button"
+			"count": {
+				"content": "$1"
 			}
 		}
 	},
-	"panel_tracker_restrict_tooltip": {
-		"message": "在此网站上限制",
-		"description": ""
+	"rewards_expires_in_sec": {
+		"message": "1 秒可用"
+	},
+	"rewards_expires_in_secs": {
+		"message": "$COUNT$ 秒可用",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"rewards_terms_conditions": {
+		"message": "条款和条件"
+	},
+	"rewards_disable": {
+		"message": "关闭Rewards"
+	},
+	"rewards_disable_notification": {
+		"message": "Ghostery Rewards现已关闭。您可以随时在设置中或Rewards仪表板上重新打开。"
 	},
 	"rewards_disable_confirm": {
-		"message": "好，知道了！",
-		"description": ""
+		"message": "好，知道了！"
 	},
-	"alert_anti_track_on": {
-		"message": "增强型反跟踪功能已开启。个人数据将匿名化。",
-		"description": ""
+	"rewards_about": {
+		"message": "关于Rewards"
 	},
-	"setup_additional_view_enabled": {
-		"message": "已启用",
-		"description": ""
+	"rewards_settings": {
+		"message": "Ghostery 奖励设置"
 	},
-	"browser_button_tooltip": {
-		"message": "查看 Ghostery 的发现",
-		"description": "Ghostery's browser button tooltip."
+	"rewards_delete": {
+		"message": "删除此奖励"
 	},
-	"pause_24_hours_condensed": {
-		"message": "24 小时",
-		"description": ""
+	"rewards_first_prompt": {
+		"message": "您要继续前往Ghostery Rewards吗？"
+	},
+	"rewards_second_prompt": {
+		"message": "您要停止接收将来的Ghostery Rewards吗？"
+	},
+	"rewards_yes": {
+		"message": "是"
+	},
+	"rewards_no": {
+		"message": "否"
+	},
+	"rewards_on": {
+		"message": "日期"
+	},
+	"rewards_off": {
+		"message": "关闭"
+	},
+	"rewards_on_toast_notification": {
+		"message": "Ghostery Rewards已打开"
+	},
+	"rewards_off_toast_notification": {
+		"message": "Ghostery Rewards已关闭"
+	},
+	"rewards_code_copied_toast_notification": {
+		"message": "Rewards代码已拷贝！"
+	},
+	"rewards_learn_more": {
+		"message": "了解详情"
+	},
+	"offers_hub_copy_btn": {
+		"message": "复制代码"
+	},
+	"offers_code_copied": {
+		"message": "已复制"
+	},
+	"popup_cancel_button": {
+		"message": "取消"
+	},
+	"popup_apply_code_button": {
+		"message": "应用代码"
+	},
+	"subscription_info": {
+		"message": "订阅详情"
+	},
+	"subscription_themes": {
+		"message": "Ghostery主题"
+	},
+	"subscription_info_title": {
+		"message": "Ghostery Plus"
+	},
+	"subscription_themes_title": {
+		"message": "主题"
+	},
+	"subscription_priority_support_title": {
+		"message": "优先支持"
+	},
+	"subscription_priority_support": {
+		"message": "优先支持"
+	},
+	"subscription_history_stats": {
+		"message": "历史统计数据"
+	},
+	"subscribe_pitch": {
+		"message": "尽管Ghostery是免费的，但是您可以选择通过每月&#36;2的低价订阅来支持我们，同时还能获得酷炫的福利，例如彩色主题、优先帮助服务等等。加入我们的使命并订阅！"
+	},
+	"subscribe_pitch_learn_more": {
+		"message": "了解详情"
+	},
+	"subscribe_pitch_button_label": {
+		"message": "获取Ghostery Plus！"
+	},
+	"subscribe_pitch_sign_here": {
+		"message": "已经订阅了？在此登录"
+	},
+	"subscription_midnight_theme": {
+		"message": "午夜黑主题"
+	},
+	"subscription_status": {
+		"message": "状态"
+	},
+	"subscription_active": {
+		"message": "有效"
+	},
+	"subscription_inactive": {
+		"message": "无效"
+	},
+	"subscription_manage": {
+		"message": "管理我的订阅"
+	},
+	"subscription_themes_tooltip": {
+		"message": "更改Ghostery的颜色主题！"
+	},
+	"subscription_tracker_stats": {
+		"message": "历史统计数据"
+	},
+	"subscription_charge_date" : {
+		"message": "下次支付日期"
+	},
+	"subscription_expired": {
+		"message": "帐户已到期"
+	},
+	"subscription_auto_renewal": {
+		"message": "自动续期"
+	},
+	"subscription_plan": {
+		"message": "套餐"
+	},
+	"subscription_days_left": {
+		"message": "您的订阅还剩$DAYS$天。",
+		"placeholders": {
+			"days": {
+				"content": "$1"
+			}
+		}
+	},
+	"subscription_one_day_left": {
+		"message": "您的订阅明天到期。"
+	},
+	"subscription_resubscribe": {
+		"message": "再次订阅"
+	},
+	"subscription_support": {
+		"message": "找到了受损的页面？需要关于拦截的帮助？给我们留言吧！"
+	},
+	"subscription_submit_issue": {
+		"message": "提交问题"
+	},
+	"panel_stats_menu_cumulative": {
+		"message": "累计"
+	},
+	"panel_stats_menu_monthly": {
+		"message": "每月"
+	},
+	"panel_stats_menu_daily": {
+		"message": "每日"
+	},
+	"panel_stats_header_title": {
+		"message": "历史追踪器统计数据"
+	},
+	"panel_stats_header_title_monthly": {
+		"message": "跟踪器历史统计数据（月均）"
+	},
+	"panel_stats_header_title_daily": {
+		"message": "跟踪器历史统计数据（日均）"
+	},
+	"panel_stats_trackers_seen": {
+		"message": "已显示跟踪器"
+	},
+	"panel_stats_trackers_blocked": {
+		"message": "已拦截跟踪器\n"
+	},
+	"panel_stats_trackers_anonymized": {
+		"message": "数据点已匿名化"
+	},
+	"panel_stats_ads_blocked": {
+		"message": "已拦截广告"
+	},
+	"panel_stats_cumulative": {
+		"message": "累计"
+	},
+	"panel_stats_monthly": {
+		"message": "每月"
+	},
+	"panel_stats_daily": {
+		"message": "每日"
+	},
+	"panel_stats_reset": {
+		"message": "重设"
+	},
+	"panel_stats_reset_modal_text": {
+		"message": "您的历史统计数据将会重置。此数据无法恢复。要继续吗？"
+	},
+	"panel_stats_reset_modal_yes": {
+		"message": "是，重置"
+	},
+	"panel_stats_reset_modal_no": {
+		"message": "不，保留历史数据"
+	},
+	"panel_stats_pitch_modal_text": {
+		"message": "只需 $SPAN_START$&#36;2/月即可升级至 Ghostery Plus，解锁您的历史统计数据（以及其他超酷特权），$SPAN_END$$LINK_START$了解详情$LINK_END$",
+		"placeholders": {
+			"span_start": {
+				"content": "<span>"
+			},
+			"span_end": {
+				"content": "</span>"
+			},
+			"link_end": {
+				"content": "</a>"
+			},
+			"link_start": {
+				"content": "<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.ghostery.com/products/plus/\">"
+			}
+		}
+	},
+	"panel_stats_pitch_modal_already": {
+		"message": "已经是 Ghostery 支持者？"
+	},
+	"panel_stats_pitch_modal_sign_in": {
+		"message": "在此处登录\n"
+	},
+	"panel_stats_pitch_modal_subscribe": {
+		"message": "获取Ghostery Plus！"
+	},
+	"panel_stats_pitch_modal_tooltip": {
+		"message": "删除当前时间点之前的所有历史统计数据。"
 	}
 }

@@ -1,4 +1,36 @@
-### GHOSTERY 8.2.5 (November 21, 2018)
+### GHOSTERY 8.3.2 (UNRELEASED)
+
++ Remove unsupported file types for Opera automated-review
++ Removed uneccesary files for slimmer production build
++ Sync account creation UI betweem intro hub, panel and signon-web
++ Performance improvments when browsing certian Google sites (gmail, maps)
++ Minor UI tweaks
+
+### GHOSTERY 8.3.1 (January 31, 2019)
+
++ Add `options_ui` support for Intro Hub
++ Add Ghostery Plus support for Opera and Edge
++ Fixes issue where page load speed value could be negative
++ Fixes "Report a Broken Page" link
++ Multiple translation fixes
++ Minor bug fixes
+
+### GHOSTERY 8.3.0 (January 16, 2019)
+
++ New Ghostery Plus features - Historical Stats, Midnight Theme
++ New intro hub with streamlined setup and tutorial
++ Improved UI for Firefox Android
++ Integration with Ghostery Tab extension for Chrome
++ Improved anti-tracking whitelist logic
++ Improved anti-ad-blocker circumvention
++ Bug fixes and updated translations
+
+### GHOSTERY 8.2.6 (December 4, 2018)
+
++ Remove WebSocket permissions and filter support for Firefox
++ Minor UI tweaks
+
+### GHOSTERY 8.2.5 (November 27, 2018)
 
 + Multiple UI fixes for Rewards panel
 + Bump minimum Chrome version to 58+, Opera to 45+

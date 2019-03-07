@@ -1,0 +1,51 @@
+/**
+ * Toggle Switch Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+// Toggle Switch
+.ToggleSwitch {
+	position: relative;
+	height: 20px;
+	width: 34px;
+	cursor: pointer;
+}
+.ToggleSwitch__bar {
+	position: absolute;
+	top: 3px;
+	height: 14px;
+	width: 34px;
+	opacity: 0.38;
+	border-radius: 7px;
+
+	background-color: #000000;
+	@include transition(background-color 0.05s);
+}
+.ToggleSwitch__circle {
+	position: absolute;
+	height: 20px;
+	width: 20px;
+	border-radius: 50%;
+	box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),0px 1px 1px 0px rgba(0, 0, 0, 0.14),0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+
+	margin-left: 0;
+	background-color: #fafafa;
+	@include transition(margin-left 0.2s, background-color 0.05s);
+
+}
+.ToggleSwitch.ToggleSwitch--active .ToggleSwitch__bar {
+	background-color: #1dafed;
+
+}
+.ToggleSwitch.ToggleSwitch--active .ToggleSwitch__circle {
+	margin-left: 14px;
+	background-color: #1dafed;
+}

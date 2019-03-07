@@ -1,0 +1,87 @@
+/**
+ * Setup Done View Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+// Setup Blocking View
+.SetupDone__titleBar {
+	margin-bottom: 25px;
+}
+.SetupDone__bar {
+	background-color: #979797;
+	height: 1px;
+}
+.SetupDone__title {
+	color: #4a4a4a;
+	font-size: 16px;
+	line-height: 30px;
+	text-align: center;
+	padding: 5px 25px;
+	margin: 0;
+}
+.SetupDone__feature {
+	background-color: #f0f3f4;
+	color: #4a4a4a;
+	padding: 27px 15px 17px;
+	max-width: 177px;
+	min-height: 273px;
+	border-radius: 4px;
+	text-align: center;
+}
+.SetupDone__featureIcon {
+	// Cannot use regular height attribute due to Firefox stylesheet overrides
+	min-height: 50px;
+	max-height: 50px;
+	width: 50px;
+	margin: 0 auto;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: contain;
+}
+.SetupDone__featureIcon.feature-tutorial {
+	background-image: buildFeatureTutorialIcon(#4a4a4a);
+}
+.SetupDone__featureIcon.feature-plus {
+	background-image: buildFeaturePlusIcon(#4a4a4a);
+}
+.SetupDone__featureIcon.feature-products {
+	background-image: buildFeatureProductsIcon(#4a4a4a);
+}
+.SetupDone__featureTitle {
+	margin-top: 10px;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 22px;
+	min-height: 45px;
+}
+.SetupDone__feature .SetupDone__bar {
+	margin: 10px;
+}
+.SetupDone__featureButton {
+	margin: 20px 10px 10px;
+}
+@media only screen and (max-width: 840px) {
+	.SetupDone__featureList {
+		flex-direction: column;
+		align-items: center;
+	}
+	.SetupDone__feature {
+		margin-top: 20px;
+	}
+}
+@media only screen and (max-width: 960px) {
+	.SetupDone__titleBar {
+		margin-bottom: 0;
+	}
+	.SetupDone__titleBar .SetupDone__bar {
+		background-color: #ffffff;
+	}
+}

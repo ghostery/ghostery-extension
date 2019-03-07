@@ -1,0 +1,344 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/hub/Views/HomeView component Snapshot tests with react-test-renderer home view is rendered correctly: all false 1`] = `
+<div
+  className="HomeView row align-center"
+>
+  <div
+    className="HomeView__display columns small-10 large-8"
+  >
+    <div
+      className="HomeView__header row large-unstack align-center-middle"
+    >
+      <img
+        className="HomeView--firefoxImageSize columns"
+        src="/app/images/hub/home/ghosty-bubble-heart.svg"
+      />
+      <div
+        className="columns"
+      >
+        <h1>
+          hub_home_header_text
+        </h1>
+        <div
+          className="HomeView__headerTagline HomeView--bolded"
+        >
+          hub_home_header_tagline_2
+        </div>
+        <div
+          className="HomeView__supportContainer HomeView--pad-left HomeView--firefoxFontSize"
+        >
+          <span>
+            hub_home_header_info
+          </span>
+          <a
+            alt="hub_home_header_info_link"
+            href="https://www.ghostery.com/faqs/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            hub_home_header_info_link
+          </a>
+        </div>
+        <div
+          className="HomeView__supportContainer flex-container align-middle"
+        >
+          <div
+            className="ToggleCheckbox flex-shrink-none"
+            onClick={[Function]}
+          >
+            <svg
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+              />
+            </svg>
+          </div>
+          <span
+            className="clickable HomeView--firefoxFontSize"
+            onClick={[Function]}
+          >
+            hub_home_header_checkbox_label
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      className="HomeView__subHeader row align-justify"
+    >
+      <div>
+        hub_home_subheader_optimize
+      </div>
+      <a
+        aria-current={null}
+        href="/create-account"
+        onClick={[Function]}
+      >
+        hub_home_subheader_create_account
+      </a>
+    </div>
+    <div
+      className="HomeView__onboarding row large-unstack align-center"
+    >
+      <div
+        className="HomeView__onboardingFeature columns flex-container align-middle flex-dir-column feature-tutorial"
+      >
+        <div
+          className="HomeView__featureIcon"
+        />
+        <div
+          className="HomeView__featureTitle"
+        >
+          hub_home_feature_tutorial_title
+        </div>
+        <div
+          className="HomeView__featureText flex-child-grow"
+        >
+          hub_home_feature_tutorial_text
+        </div>
+        <a
+          aria-current={null}
+          className="HomeView__featureButton button primary"
+          href="/tutorial"
+          onClick={[Function]}
+        >
+          hub_home_feature_tutorial_button
+        </a>
+      </div>
+      <div
+        className="HomeView__dividerVertical column shrink show-for-large"
+      />
+      <div
+        className="HomeView__dividerHorizontal hide-for-large"
+      />
+      <div
+        className="HomeView__onboardingFeature columns flex-container align-middle flex-dir-column feature-setup"
+      >
+        <div
+          className="HomeView__featureIcon"
+        />
+        <div
+          className="HomeView__featureTitle"
+        >
+          hub_home_feature_setup_title
+        </div>
+        <div
+          className="HomeView__featureText flex-child-grow"
+        >
+          hub_home_feature_setup_text
+        </div>
+        <a
+          aria-current={null}
+          className="HomeView__featureButton button primary"
+          href="/setup"
+          onClick={[Function]}
+        >
+          hub_home_feature_setup_button
+        </a>
+      </div>
+    </div>
+    <div
+      className="HomeView__plus row large-unstack"
+    >
+      <div
+        className="HomeView__featureIcon feature-plus hide-for-large"
+      />
+      <div
+        className="HomeView__featureText columns"
+      >
+        hub_home_feature_supporter_text
+      </div>
+      <div
+        className="HomeView__featureIcon columns shrink feature-plus show-for-large"
+      />
+      <div
+        className="columns flex-container align-center-middle"
+      >
+        <a
+          aria-current={null}
+          className="HomeView__featureButton button primary"
+          href="/plus"
+          onClick={[Function]}
+        >
+          hub_home_feature_supporter_button
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/hub/Views/HomeView component Snapshot tests with react-test-renderer home view is rendered correctly: all true 1`] = `
+<div
+  className="HomeView row align-center"
+>
+  <div
+    className="HomeView__display columns small-10 large-8"
+  >
+    <div
+      className="HomeView__header row large-unstack align-center-middle"
+    >
+      <img
+        className="HomeView--firefoxImageSize columns"
+        src="/app/images/hub/home/ghosty-bubble-heart.svg"
+      />
+      <div
+        className="columns"
+      >
+        <h1>
+          hub_home_header_text
+        </h1>
+        <div
+          className="HomeView__headerTagline"
+        >
+          hub_home_header_tagline
+        </div>
+        <div
+          className="HomeView__headerTagline HomeView--bolded"
+        >
+          hub_home_header_tagline_2
+        </div>
+        <div
+          className="HomeView__supportContainer HomeView--pad-left HomeView--firefoxFontSize"
+        >
+          <span>
+            hub_home_header_info
+          </span>
+          <a
+            alt="hub_home_header_info_link"
+            href="https://www.ghostery.com/faqs/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            hub_home_header_info_link
+          </a>
+        </div>
+        <div
+          className="HomeView__supportContainer flex-container align-middle"
+        >
+          <div
+            className="ToggleCheckbox flex-shrink-none ToggleCheckbox--active"
+            onClick={[Function]}
+          >
+            <svg
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+              />
+            </svg>
+          </div>
+          <span
+            className="clickable HomeView--firefoxFontSize"
+            onClick={[Function]}
+          >
+            hub_home_header_checkbox_label
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      className="HomeView__subHeader row align-justify"
+    >
+      <div>
+        hub_home_subheader_optimize
+      </div>
+      <a
+        href="https://account.ghosterystage.com"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        test@example.com
+      </a>
+    </div>
+    <div
+      className="HomeView__onboarding row large-unstack align-center"
+    >
+      <div
+        className="HomeView__onboardingFeature columns flex-container align-middle flex-dir-column feature-tutorial-complete"
+      >
+        <div
+          className="HomeView__featureIcon"
+        />
+        <div
+          className="HomeView__featureTitle"
+        >
+          hub_home_feature_tutorial_title
+        </div>
+        <div
+          className="HomeView__featureText flex-child-grow"
+        >
+          hub_home_feature_tutorial_text
+        </div>
+        <a
+          aria-current={null}
+          className="HomeView__featureButton button primary hollow"
+          href="/tutorial"
+          onClick={[Function]}
+        >
+          hub_home_feature_tutorial_button_alt
+        </a>
+      </div>
+      <div
+        className="HomeView__dividerVertical column shrink show-for-large"
+      />
+      <div
+        className="HomeView__dividerHorizontal hide-for-large"
+      />
+      <div
+        className="HomeView__onboardingFeature columns flex-container align-middle flex-dir-column feature-setup-complete"
+      >
+        <div
+          className="HomeView__featureIcon"
+        />
+        <div
+          className="HomeView__featureTitle"
+        >
+          hub_home_feature_setup_title
+        </div>
+        <div
+          className="HomeView__featureText flex-child-grow"
+        >
+          hub_home_feature_setup_text
+        </div>
+        <a
+          aria-current={null}
+          className="HomeView__featureButton button primary hollow"
+          href="/setup"
+          onClick={[Function]}
+        >
+          hub_home_feature_setup_button_alt
+        </a>
+      </div>
+    </div>
+    <div
+      className="HomeView__plus row large-unstack"
+    >
+      <div
+        className="HomeView__featureIcon feature-plus hide-for-large"
+      />
+      <div
+        className="HomeView__featureText columns"
+      >
+        hub_home_feature_supporter_text
+      </div>
+      <div
+        className="HomeView__featureIcon columns shrink feature-plus show-for-large"
+      />
+      <div
+        className="columns flex-container align-center-middle"
+      >
+        <a
+          aria-current={null}
+          className="HomeView__featureButton button primary"
+          href="/plus"
+          onClick={[Function]}
+        >
+          hub_home_feature_supporter_button_alt
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;

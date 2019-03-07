@@ -18,6 +18,7 @@ import tabInfo from './TabInfo';
 import compDb from './CompatibilityDb';
 import globals from './Globals';
 import Policy from './Policy';
+import { log } from '../utils/common';
 /**
  * Class for handling Smart Blocking site policy.
  * @memberOf  BackgroundClasses
@@ -63,6 +64,7 @@ class PolicySmartBlock {
 		}
 
 		if (reason) {
+			log('Smart Blocking unblokced appId', appId, 'for reason:', reason);
 			tabInfo.setTabSmartBlockAppInfo(tabId, appId, reason, false);
 			return true;
 		}
@@ -102,8 +104,9 @@ class PolicySmartBlock {
 		const result = (reason === 'slow');
 		if (result) {
 			// We don't want record in tabInfo reasons other than 'slow'
-			// Smart blocking should not claim that it unblock trackers which were unlocked
+			// Smart blocking should not claim that it unblocks trackers which were unblocked
 			// for other reasons before shouldBlock was called for them.
+			log('Smart Blocking blocked appId', appId, 'for reason:', reason);
 			tabInfo.setTabSmartBlockAppInfo(tabId, appId, 'slow', true);
 		}
 
@@ -264,6 +267,7 @@ class PolicySmartBlock {
 	_requestWasSlow(tabId, appId, requestTimestamp) {
 		const THRESHHOLD = 5000; // 5 seconds
 		const pageTimestamp = tabInfo.getTabInfo(tabId, 'timestamp');
+		// TODO: account for lazy-load or widgets triggered by user interaction beyond 5sec
 		return (requestTimestamp - pageTimestamp > THRESHHOLD) || false;
 	}
 }

@@ -1,0 +1,334 @@
+/**
+ * Summary Panel Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+#content-stats {
+	position: relative;
+	height: 479px;
+	width: 100%;
+	overflow: hidden;
+	.stats-top-header {
+		height: 40px;
+		font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+		font-size: 13px;
+		font-weight: bold;
+		line-height: 40px;
+		color: #4a4a4a;
+		margin-left: 80px;
+		.stats-top-header-icon {
+			display: inline-flex;
+			width: 10px;
+			height: 21px;
+			position: relative;
+			top: 3px;
+			left: -18px;
+			div {
+				display: inline-flex;
+			}
+		}
+		.stats-top-header-icon.trackersSeen {
+			width: 14px;
+			top: 2px;
+			left: -21px;
+		}
+		.stats-top-header-icon.trackersBlocked {
+			width: 12px;
+			top: 4px;
+		}
+	}
+	.stats-top-header-reset {
+		font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+		font-size: 12px;
+		line-height: 40px;
+		color: #00aef0;
+		position: relative;
+		top: 1px;
+		float: right;
+		margin-right: 60px;
+		cursor: pointer;
+		.stats-top-header-info-icon  {
+			cursor: default;
+			display: inline-flex;
+			width: 16px;
+			height: 21px;
+			position: relative;
+			top: -2px;
+			left: 2px;
+			div {
+				display: inline-flex;
+			}
+		}
+		&.demo {
+			cursor: default;
+		}
+	}
+	.clear-float {
+		float: none;
+	}
+	.graph {
+		height: 306px;
+		background-color: darkgray;
+	}
+
+	.tab-header {
+		height: 27px;
+		background-color: #00aef0;
+		position: relative;
+
+		.tab-container {
+			display: flex;
+			justify-content: flex-end;
+			position: relative;
+			top: 7px;
+			.tab-header-title {
+				position: relative;
+				top: -2px;
+				margin-right: auto;
+				padding-left: 15px;
+				font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+				font-size: 12px;
+				color: #ffffff;
+			}
+			.tab {
+				flex-basis: 87px;
+				padding: 0 10px 0 10px;
+				height: 20px;
+				border-right: 1px solid #f7f7f7;
+				background-color: #2092bf;
+				cursor: pointer;
+				font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+				font-size: 10px;
+				text-align: center;
+				color: #ffffff;
+				&.active {
+					background-color: #f7f7f7;
+					color: #124559;
+				}
+				&.demo {
+					cursor: default;
+				}
+				&:last-of-type {
+					border: none;
+				}
+			}
+			.header-tab-text {
+				position: relative;
+				top: 2px;
+			}
+		}
+	}
+
+	.tile-container {
+		display: flex;
+		height: 100px;
+		align-content: stretch;
+		background-color: #f7f7f7;
+		.tile {
+			display: flex;
+			flex-direction: column;
+			position: relative;
+			cursor: pointer;
+			background-color: lightgreen;
+			height: 100%;
+			width: 25%;
+			background-color: #f7f7f7;
+			.tile-title {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				position: relative;
+				min-height: 60px;
+				.tile-title-text {
+					vertical-align: middle;
+					text-align: center;
+					padding: 10px 20px 0 20px;
+					font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+					font-size: 12px;
+					line-height: 17px;
+					color: #4a4a4a;
+					&.active {
+						font-weight: 800;
+					}
+				}
+			}
+			.tile-value {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				position: relative;
+				top: -12px;
+				height: 50px;
+
+				.tile-value-content {
+					text-align: center;
+					padding: 8px 20px 0 20px;
+					font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+					font-size: 20px;
+					color: #00aef0;
+				}
+				&.locked > .tile-value-content {
+					background-image: url('../../app/images/panel/stats-locked.svg');
+					background-repeat: no-repeat;
+					background-position: center;
+					padding-top: 37px;
+					margin-top: 12px;
+				}
+				&.active {
+					.tile-value-content {
+						padding-top: 11px;
+						font-weight: 800;
+					}
+					.active-underline {
+						min-height: 3px;
+						width: 70px;
+						position: relative;
+						top: -17px;
+						left: 37px;
+						background-color: #00aef0;
+					}
+				}
+			}
+			&.demo {
+				cursor: default;
+			}
+		}
+		.tile-divider {
+			width: 1px;
+			height: 60px;
+			position: relative;
+			top: 20px;
+			background-color: darkgray;
+		}
+	}
+	.modal-container {
+		position: absolute;
+		top: 85px;
+		left: 110px;
+		width: 364px;
+		height: 208px;
+		box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+		background-color: #f7f7f7;
+		.modal-content {
+			display: flex;
+			flex-direction: column;
+			position: relative;
+			margin-top: 25px;
+			.modal-text-container {
+				display: flex;
+				justify-content: center;
+				.modal-title-text {
+					display: table-cell;
+					vertical-align: middle;
+					text-align: center;
+					padding: 0 60px 0 60px;
+					font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+					font-size: 13px;
+					color: #4a4a4a;
+					font-weight: bolder;
+					span {
+						color: #00aef0;
+					}
+					a {
+						color: #00aef0;
+						text-decoration: underline;
+						font-weight: normal;
+					}
+				}
+				.modal-text {
+					display: table-cell;
+					vertical-align: middle;
+					text-align: center;
+					padding: 0 10px 0 10px;
+					font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+					font-size: 12px;
+					color: #00aef0;
+					font-weight: normal;
+				}
+			}
+		}
+		.modal-buttons-container {
+			display: flex;
+			justify-content: center;
+			margin: 20px 0 10px 0;
+			p {
+				margin-top: 3px;
+			}
+		}
+
+		.modal-buttons-base {
+			min-width: 148px;
+			height: 31px;
+			border-radius: 3px;
+			border: #00aef0 1px solid;
+			font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+			font-size: 14px;
+			font-weight: bold;
+			line-height: 31px;
+			text-align: center;
+			cursor: pointer;
+			padding: 0 10px 0 10px;
+		}
+		.modal-hollow-button {
+			@extend .modal-buttons-base;
+			background-color: #ffffff;
+			color: #00aef0;
+			margin-right: 10px;
+		}
+
+		.modal-filled-button {
+			@extend .modal-buttons-base;
+			background-color:#00aef0;;
+			color: #ffffff;
+			margin-left: 10px;
+		}
+		&.reset-modal {
+			.modal-text-container {
+				margin-top: 10px;
+				margin-bottom: 30px;
+			}
+			.modal-buttons-container {
+				margin-top: 10px;
+			}
+		}
+	}
+
+	%hs-tooltip {
+		&:before {
+			white-space: normal !important;
+			width: 150px;
+			font-size: 10px;
+			text-align: left !important;
+			line-height: 14px;
+		}
+	}
+
+	.hs-tooltip-down {
+		top: 5px;
+		right: -5px;
+		@extend %hs-tooltip;
+		@extend %g-tooltip-down-left;
+	}
+}
+
+@-moz-document url-prefix() {
+	#content-stats > .tile-container > .tile > .tile-value {
+		.tile-value-content {
+			padding: 0;
+		}
+		&.locked > .tile-value-content {
+			margin-top: 3px;
+		}
+		&.active > .tile-value-content {
+			padding-top: 0;
+		}
+	}
+}

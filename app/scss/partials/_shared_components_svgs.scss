@@ -1,0 +1,46 @@
+/**
+ * Shared Components - SVGs Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+/*
+	// Use https://jakearchibald.github.io/svgomg/ to strip down Sketch generated SVGs
+
+	// JavaScript function to convert an HTML escaped icon string into a readable XML string
+	function htmlToXml(str) {
+		return str
+			.replace(/%20/gi, ' ')
+			.replace(/%22/gi, '"')
+			.replace(/%3d/gi, '=')
+			.replace(/%3c/gi, '<')
+			.replace(/%3e/gi, '>');
+		}
+
+	// JavaScript function to convert a readable XML string into an HTML escaped icon string
+	function xmlToHtml(str) {
+		return str
+			.replace(/ /gi, '%20')
+			.replace(/"/gi, '%22')
+			.replace(/=/gi, '%3D')
+			.replace(/</gi, '%3C')
+			.replace(/>/gi, '%3E');
+	}
+*/
+
+// Function helper with color variables
+@function _url-friendly-color($color) {
+	@return '%23' + str-slice('#{$color}', 2, -1);
+}
+
+// Used in Exit Button and Toast Message
+@function buildIconX($primary-color) {
+	@return url('data:image/svg+xml;charset%3dUS-ASCII,%3Csvg%20width%3D%2215%22%20height%3D%2215%22%20xmlns%3D%22http://www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M10.078%207.5l4.386-4.386a1.824%201.824%200%200%200-2.578-2.58L7.5%204.922%203.114.534a1.824%201.824%200%201%200-2.58%202.58L4.92%207.5.534%2011.886a1.824%201.824%200%200%200%202.578%202.58L7.5%2010.078l4.386%204.386a1.824%201.824%200%201%200%202.58-2.58L10.078%207.5z%22%20fill%3D%22#{_url-friendly-color($primary-color)}%22%20fill-rule%3D%22evenodd%22/%3E%3C/svg%3E');
+}

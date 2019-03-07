@@ -16,7 +16,9 @@ import {
 	LOGOUT_SUCCESS,
 	REGISTER_SUCCESS,
 	GET_USER_SUCCESS,
-	GET_USER_SETTINGS_SUCCESS
+	GET_USER_SETTINGS_SUCCESS,
+	GET_USER_SUBSCRIPTION_DATA_FAIL,
+	GET_USER_SUBSCRIPTION_DATA_SUCCESS
 } from './AccountConstants';
 import { GET_PANEL_DATA } from '../panel/constants/constants';
 
@@ -25,6 +27,7 @@ const initialState = {
 	userID: '',
 	user: null,
 	userSettings: null,
+	subscriptionData: null,
 };
 
 export default (state = initialState, action) => {
@@ -34,12 +37,15 @@ export default (state = initialState, action) => {
 			if (account === null) {
 				return Object.assign({}, initialState);
 			}
-			const { userID, user, userSettings } = account;
+			const {
+				userID, user, userSettings, subscriptionData
+			} = account;
 			return Object.assign({}, state, {
 				loggedIn: true,
 				userID,
 				user,
 				userSettings,
+				subscriptionData,
 			});
 		}
 		case REGISTER_SUCCESS:
@@ -65,6 +71,20 @@ export default (state = initialState, action) => {
 				userSettings: settings
 			});
 		}
+		case GET_USER_SUBSCRIPTION_DATA_FAIL: {
+			const { subscriptionData } = initialState;
+			return Object.assign({}, state, {
+				subscriptionData,
+			});
+		}
+		case GET_USER_SUBSCRIPTION_DATA_SUCCESS: {
+			const { subscriptionData } = action.payload;
+			return Object.assign({}, state, {
+				loggedIn: true,
+				subscriptionData
+			});
+		}
+
 		default: return state;
 	}
 };

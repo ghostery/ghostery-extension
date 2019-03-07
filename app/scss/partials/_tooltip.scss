@@ -38,12 +38,23 @@
 		}
 		&.top {
 			width: 150px;
-			bottom: 140%;
 			left: 50%;
+			&:after {
+				left: 50%;
+			}
+		}
+		&.top-left-wide {
+			width: 375px;
+			left: -200px;
+			&:after {
+				left: 83.5%;
+			}
+		}
+		&.top, &.top-left-wide {
+			bottom: 140%;
 			margin-left: -75px;
 			&:after {
 				top: 100%; /* At the bottom of the tooltip */
-				left: 50%;
 				margin-left: -10px;
 				transform: rotate(-45deg);
 			}
@@ -68,10 +79,17 @@
 				margin-left: 75px;
 			}
 		}
+		&.bottom-left {
+			width: 105px;
+			top: 97%;
+			left: -75px;
+		}
 		&.bottom {
 			width: 90px;
 			top: 97%;
 			left: -60px;
+		}
+		&.bottom, &.bottom-left {
 			&:after {
 				bottom: calc(100% - 10px);  /* At the top of the tooltip */
 				left: 100%;

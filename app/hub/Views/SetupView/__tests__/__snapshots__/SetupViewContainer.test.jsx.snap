@@ -1,0 +1,264 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/hub/Views/SetupView container Snapshot tests with react-test-renderer setup view container is rendered correctly on the Anti-Suite step 1`] = `
+<div
+  className="full-height"
+>
+  <div
+    className="Modal"
+  />
+  <div
+    className="full-height flex-container flex-dir-column"
+  >
+    <div
+      className="flex-child-grow"
+    >
+      <div>
+        <div
+          className="row align-center"
+        >
+          <div
+            className="columns small-12 large-10"
+          >
+            <div
+              className="SetupHeader flex-container align-center-middle"
+            >
+              <img
+                src="/app/images/hub/setup/ghosty-shield-stop-lightbulb.svg"
+              />
+              <div
+                className="SetupHeader__title"
+              >
+                <h3
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": "hub_setup_header_title_antisuite",
+                    }
+                  }
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          Mock Setup Anti-Suite View
+        </div>
+      </div>
+    </div>
+    <div>
+      Mock Setup Navigation
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/hub/Views/SetupView container Snapshot tests with react-test-renderer setup view container is rendered correctly on the Blocking step 1`] = `
+<div
+  className="full-height"
+>
+  <div
+    className="Modal"
+  />
+  <div
+    className="full-height flex-container flex-dir-column"
+  >
+    <div
+      className="flex-child-grow"
+    >
+      <div>
+        <div
+          className="row align-center"
+        >
+          <div
+            className="columns small-12 large-10"
+          >
+            <div
+              className="SetupHeader flex-container align-center-middle"
+            >
+              <img
+                src="/app/images/hub/setup/ghosty-block-all.svg"
+              />
+              <div
+                className="SetupHeader__title"
+              >
+                <h3
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": "hub_setup_header_title_blocking",
+                    }
+                  }
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          Mock Setup Blocking View
+        </div>
+      </div>
+    </div>
+    <div>
+      Mock Setup Navigation
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/hub/Views/SetupView container Snapshot tests with react-test-renderer setup view container is rendered correctly on the Custom Blocking step 1`] = `
+<div
+  className="full-height"
+>
+  <div
+    className="Modal"
+  />
+  <div
+    className="full-height flex-container flex-dir-column"
+  >
+    <div
+      className="flex-child-grow"
+    >
+      <div>
+        <div
+          className="row align-center"
+        >
+          <div
+            className="columns small-12 large-10"
+          >
+            <div
+              className="SetupHeader flex-container align-center-middle"
+            >
+              <img
+                src="/app/images/hub/setup/ghosty-block-all.svg"
+              />
+              <div
+                className="SetupHeader__title"
+              >
+                <h3
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": "hub_setup_header_title_blocking",
+                    }
+                  }
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          Mock Setup Blocking View
+        </div>
+      </div>
+      <div>
+        Mock Setup Blocking Dropdown
+      </div>
+    </div>
+    <div>
+      Mock Setup Navigation
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/hub/Views/SetupView container Snapshot tests with react-test-renderer setup view container is rendered correctly on the Done step 1`] = `
+<div
+  className="full-height"
+>
+  <div
+    className="Modal"
+  />
+  <div
+    className="full-height flex-container flex-dir-column"
+  >
+    <div
+      className="flex-child-grow"
+    >
+      <div>
+        <div
+          className="row align-center"
+        >
+          <div
+            className="columns small-12 large-10"
+          >
+            <div
+              className="SetupHeader flex-container align-center-middle"
+            >
+              <img
+                src="/app/images/hub/setup/ghosty-check-wrench.svg"
+              />
+              <div
+                className="SetupHeader__title"
+              >
+                <h3
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": "hub_setup_header_title_done",
+                    }
+                  }
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          Mock Setup Done View
+        </div>
+      </div>
+    </div>
+    <div>
+      Mock Setup Navigation
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/hub/Views/SetupView container Snapshot tests with react-test-renderer setup view container is rendered correctly on the Human Web step 1`] = `
+<div
+  className="full-height"
+>
+  <div
+    className="Modal"
+  />
+  <div
+    className="full-height flex-container flex-dir-column"
+  >
+    <div
+      className="flex-child-grow"
+    >
+      <div>
+        <div
+          className="row align-center"
+        >
+          <div
+            className="columns small-12 large-10"
+          >
+            <div
+              className="SetupHeader flex-container align-center-middle"
+            >
+              <img
+                src="/app/images/hub/setup/ghosty-human-web.svg"
+              />
+              <div
+                className="SetupHeader__title"
+              >
+                <h3
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": "hub_setup_header_title_humanweb",
+                    }
+                  }
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          Mock Setup Human Web View
+        </div>
+      </div>
+    </div>
+    <div>
+      Mock Setup Navigation
+    </div>
+  </div>
+</div>
+`;

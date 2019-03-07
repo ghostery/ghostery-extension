@@ -25,10 +25,11 @@ import tabInfo from './TabInfo';
 import rewards from './Rewards';
 import account from './Account';
 import dispatcher from './Dispatcher';
-import { getActiveTab, flushChromeMemoryCache } from '../utils/utils';
+import { getActiveTab, flushChromeMemoryCache, processUrl } from '../utils/utils';
 import { objectEntries, log } from '../utils/common';
 
 const SYNC_SET = new Set(globals.SYNC_ARRAY);
+const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 const { IS_CLIQZ } = globals;
 const policy = new Policy();
 /**
@@ -95,6 +96,11 @@ class PanelData {
 	set(data) {
 		let syncSetDataChanged = false;
 		let otherDataChanged = false;
+
+		if (IS_EDGE) {
+			data.enable_human_web = false;
+			data.enable_offers = false;
+		}
 		if (IS_CLIQZ) {
 			data.enable_human_web = false;
 			data.enable_offers = false;
@@ -163,6 +169,10 @@ class PanelData {
 	 * @return {Object}		panel data shared by multiple views
 	 */
 	get panelView() {
+		const currentAccount = this._confData.get('account');
+		if (currentAccount && currentAccount.user) {
+			currentAccount.user.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus']);
+		}
 		this._panelView = {
 			panel: {
 				enable_ad_block: this._confData.get('enable_ad_block'),
@@ -175,13 +185,14 @@ class PanelData {
 				language: this._confData.get('language'),
 				reload_banner_status: this._confData.get('reload_banner_status'),
 				trackers_banner_status: this._confData.get('trackers_banner_status'),
+				current_theme: this._confData.get('current_theme'),
 
 				needsReload: this._trackerData.get('needsReload'),
 				smartBlock: this._trackerData.get('smartBlock'),
 				tab_id: this._trackerData.get('tab_id'),
 				unread_offer_ids: rewards.unreadOfferIds,
 
-				account: this._confData.get('account')
+				account: currentAccount
 			},
 			summary: this.summaryView,
 			blocking: this._confData.get('is_expert') ? this.blockingView : false,
@@ -277,9 +288,6 @@ class PanelData {
 			show_tracker_urls: this._confData.get('show_tracker_urls'),
 			toggle_individual_trackers: this._confData.get('toggle_individual_trackers'),
 			language: this._confData.get('language'), // required for the setup page that does not have access to panelView data
-			loggedIn: this._confData.get('loggedIn'),
-			firstName: this._confData.get('firstName'),
-			lastName: this._confData.get('lastName'),
 		};
 
 		return this._settingsView;
@@ -312,7 +320,7 @@ class PanelData {
 			.set('language', conf.language)
 			.set('notify_library_updates', conf.notify_library_updates)
 			.set('notify_upgrade_updates', conf.notify_upgrade_updates)
-			.set('offer_human_web', conf.enable_human_web)
+			.set('offer_human_web', !IS_EDGE)
 			.set('paused_blocking', globals.SESSION.paused_blocking)
 			.set('reload_banner_status', conf.reload_banner_status)
 			.set('selected_app_ids', conf.selected_app_ids)
@@ -330,7 +338,8 @@ class PanelData {
 			.set('toggle_individual_trackers', conf.toggle_individual_trackers)
 			.set('trackers_banner_status', conf.trackers_banner_status)
 			.set('expand_all_trackers', conf.expand_all_trackers)
-			.set('account', conf.account);
+			.set('account', conf.account)
+			.set('current_theme', conf.current_theme);
 	}
 
 	/**
@@ -344,8 +353,8 @@ class PanelData {
 	 */
 	_buildTrackerData(tab) {
 		const tab_id = tab && tab.id;
-		const tab_url = tab && tab.url;
-		const pageHost = tab && tabInfo.getTabInfo(tab_id, 'host') || '';
+		const tab_url = tab && tab.url || '';
+		const pageHost = tab_url && processUrl(tab_url).host || '';
 		const trackerList = foundBugs.getApps(tab_id, false, tab_url) || [];
 		this._trackerData
 			.set('alertCounts', tab && foundBugs.getAppsCountByIssues(tab_id, tab_url) || {})
@@ -461,7 +470,6 @@ class PanelData {
 			b = b.name.toLowerCase(); // eslint-disable-line no-param-reassign
 			return (a > b ? 1 : (a < b ? -1 : 0));
 		});
-
 		return categoryArray;
 	}
 }

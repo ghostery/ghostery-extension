@@ -65,11 +65,16 @@ class Login extends React.Component {
 						RSVP.all([
 							this.props.actions.getUser(),
 							this.props.actions.getUserSettings(),
-						]).finally(() => {
-							this.setState({ loading: false }, () => {
-								this.props.history.push(this.props.is_expert ? '/detail/blocking' : '/');
+						])
+							.then((res) => {
+								const { current_theme = 'default' } = res[1];
+								return this.props.actions.getTheme(current_theme);
+							})
+							.finally(() => {
+								this.setState({ loading: false }, () => {
+									this.props.history.push(this.props.is_expert ? '/detail/blocking' : '/');
+								});
 							});
-						});
 					} else {
 						this.setState({ loading: false });
 					}

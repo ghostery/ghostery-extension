@@ -217,13 +217,55 @@ export function getTab(tab_id, callback, error) {
  *
  * @param  {function} callback		function to call if tab found
  */
-export function getActiveTab(callback) {
+export function getActiveTab(callback, error) {
 	chrome.tabs.query({
 		active: true,
 		currentWindow: true
 	}, (tabs) => {
-		callback(tabs[0]);
+		if (chrome.runtime.lastError) {
+			log('getActiveTab', chrome.runtime.lastError.message);
+			if (error && typeof error === 'function') {
+				error(chrome.runtime.lastError);
+			}
+		} else if (tabs.length === 0) {
+			if (error && typeof error === 'function') {
+				error();
+			}
+		} else if (callback && typeof callback === 'function') {
+			callback(tabs[0]);
+		}
 	});
+}
+
+/**
+ * Query the first tab that matches the url argument.
+ * Will throw an error if the url argument is an invalid url pattern.
+ * @memberOf BackgroundUtils
+ *
+ * @param {string} url				the tab url to search for
+ * @param {function} callback		function to call if at least one matching tab is found
+ * @param {function} error			function to call if the provided url pattern is invalid or no matching tab is found
+ */
+export function getTabByUrl(url, callback, error) {
+	chrome.tabs.query(
+		{
+			url
+		},
+		(tabs) => {
+			if (chrome.runtime.lastError) {
+				log('getTabByUrl', chrome.runtime.lastError.message);
+				if (error && typeof error === 'function') {
+					error(chrome.runtime.lastError);
+				}
+			} else if (tabs.length === 0) {
+				if (error && typeof error === 'function') {
+					error();
+				}
+			} else if (callback && typeof callback === 'function') {
+				callback(tabs[0]);
+			}
+		}
+	);
 }
 
 /**
@@ -429,54 +471,6 @@ export function getJson(url, extraHeaders) {
 		log('getJson error', error);
 		return Promise.reject(error);
 	});
-}
-
-/**
- * Fetch local image resource files asynchronously.
- * @memberOf BackgroundUtils
- *
- * @param  {string} url		URI of local resource
- * @return {Promise}		resolve yields fetched data, reject yields error
- */
-export function fetchLocalImageResource(url) {
-	if (typeof fetch === 'function') {
-		return fetch(url, {
-			type: 'image'
-		}).then((response) => {
-			if (!response.ok) {
-				return Promise.reject(new Error(`Failed to fetchLocalImageResource ${url} with status ${response.status} (${response.statusText})`));
-			}
-			return response.text();
-		}).catch((err) => {
-			log(`fetchLocalImageResource error: ${err}`);
-			return Promise.reject(new Error(err));
-		});
-	}
-	return new Promise(((resolve, reject) => {
-		const xhr = new XMLHttpRequest();
-		xhr.onload = function () {
-			// This is called even on 404 etc, so check the status.
-			if (xhr.status >= 200 && xhr.status < 400) {
-				resolve(xhr.responseText);
-			} else {
-				// Otherwise reject with the status text
-				log('fetchLocalImageResource error', xhr.statusText);
-				reject(new Error(xhr.statusText));
-			}
-		};
-
-		// Handle network errors
-		xhr.onerror = function (error) {
-			log('fetchLocalImageResource network error', error);
-			reject(new Error(error));
-		};
-
-		// Make the request
-		log('fetchLocalImageResource request', url);
-		xhr.open('GET', url, true);
-		xhr.overrideMimeType('image/png');
-		xhr.send();
-	}));
 }
 
 /**

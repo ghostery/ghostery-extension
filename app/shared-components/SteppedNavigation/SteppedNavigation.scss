@@ -1,0 +1,55 @@
+/**
+ * Stepped Navigation Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+// Foundation Overrides
+.SteppedNavigation .button {
+	margin: 0;
+	min-width: 150px;
+	max-width: 250px;
+}
+
+// Bottom Navigation Circles and Buttons
+.SteppedNavigation {
+	margin: 60px 0 45px;
+}
+.SteppedNavigation__buttonContainer {
+	width: 250px;
+	margin: 20px 15px;
+}
+.SteppedNavigation__circles a {
+	display: inline-block;
+	position: relative;
+	height: 10px;
+	width: 10px;
+	margin: 0 10px;
+	border-radius: 50%;
+	background-color: #cccccc;
+	border: 1px solid #a4a4a4;
+}
+.SteppedNavigation__circles a.active::after {
+	content: '';
+	display: block;
+	position: absolute;
+	top: -6px;
+	bottom: -6px;
+	left: -6px;
+	right: -6px;
+	border-radius: 50%;
+	border: 2px solid purple;
+}
+@media only screen and (max-width: 960px) {
+	.SteppedNavigation {
+		flex-direction: column;
+		margin: 40px 0;
+	}
+}

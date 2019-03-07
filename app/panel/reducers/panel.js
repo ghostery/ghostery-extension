@@ -24,18 +24,21 @@ import {
 	TOGGLE_OFFERS_ENABLED,
 	REMOVE_OFFER,
 	SET_OFFER_READ,
-	TOGGLE_EXPANDED
+	TOGGLE_EXPANDED,
+	SET_THEME,
+	CLEAR_THEME
 } from '../constants/constants';
 import {
 	LOGIN_SUCCESS,
 	LOGIN_FAIL,
-	// LOGOUT_SUCCESS,
+	LOGOUT_SUCCESS,
 	REGISTER_SUCCESS,
 	REGISTER_FAIL,
 	RESET_PASSWORD_SUCCESS,
 	RESET_PASSWORD_FAIL
 } from '../../Account/AccountConstants';
 import { sendMessage, sendMessageInPromise } from '../utils/msg';
+import { setTheme } from '../utils/utils';
 
 const initialState = {
 	enable_ad_block: true,
@@ -56,6 +59,7 @@ const initialState = {
 	loggedIn: false,
 	email: '',
 	emailValidated: false,
+	current_theme: 'default',
 };
 /**
  * Default export for panel view reducer. Handles actions
@@ -69,7 +73,18 @@ const initialState = {
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case GET_PANEL_DATA: {
+			const { current_theme, account } = action.data;
+			setTheme(document, current_theme, account);
 			return Object.assign({}, state, action.data, { initialized: true });
+		}
+		case SET_THEME: {
+			const { name, css } = action.data;
+			setTheme(document, name, { themeData: { [name]: { name, css } } });
+			return Object.assign({}, state, { current_theme: name });
+		}
+		case CLEAR_THEME: {
+			setTheme(document, initialState.current_theme);
+			return Object.assign({}, state, { current_theme: initialState.current_theme });
 		}
 		case SHOW_NOTIFICATION: {
 			const updated = _showNotification(state, action);
@@ -108,11 +123,14 @@ export default (state = initialState, action) => {
 			return Object.assign({}, state, updated);
 		}
 		case REGISTER_SUCCESS: {
-			action.payload.text = t('panel_email_verification_sent', action.payload.email);
+			const { email } = action.payload;
+			action.payload.text = t('panel_email_verification_sent', email);
 			action.payload.classes = 'success';
 			action.payload.overrideNotificationShown = true;
 			const updated = _showNotification(state, action);
-			return Object.assign({}, state, updated);
+			return Object.assign({}, state, updated, {
+				email
+			});
 		}
 		case REGISTER_FAIL: {
 			const { errors } = action.payload;
@@ -134,6 +152,10 @@ export default (state = initialState, action) => {
 			action.payload.overrideNotificationShown = true;
 			const updated = _showNotification(state, action);
 			return Object.assign({}, state, updated);
+		}
+		case LOGOUT_SUCCESS: {
+			setTheme(document);
+			return Object.assign({}, state, { current_theme: initialState.current_theme });
 		}
 		// @TODO?
 		// case LOGOUT_SUCCESS: {

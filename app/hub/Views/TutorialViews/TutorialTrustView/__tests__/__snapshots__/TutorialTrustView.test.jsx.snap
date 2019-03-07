@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/hub/Views/TutorialViews/TutorialTrustView component Snapshot tests with react-test-renderer tutorial trust view is rendered correctly 1`] = `
+<div
+  className="TutorialTrustView TutorialView--mediumFlexColumn row align-center-middle"
+>
+  <div
+    className="columns small-10 medium-8 large-6"
+  >
+    <div
+      className="TutorialView__imageTitle"
+    >
+      hub_tutorial_simple_view
+    </div>
+    <img
+      alt="hub_tutorial_simple_view"
+      className="TutorialTrustView__image simple"
+      src="/app/images/hub/tutorial/trustrestrict-simple.png"
+    />
+    <div
+      className="TutorialView__imageTitle"
+    >
+      hub_tutorial_detailed_view
+    </div>
+    <img
+      alt="hub_tutorial_detailed_view"
+      className="TutorialTrustView__image detailed"
+      src="/app/images/hub/tutorial/trustrestrict-detailed.png"
+    />
+  </div>
+  <div
+    className="columns small-12 medium-8 large-4 large-offset-1"
+  >
+    <div
+      className="TutorialView__title"
+    >
+      hub_tutorial_trust_title
+    </div>
+    <div
+      className="TutorialView__tagline"
+    >
+      hub_tutorial_trust_tagline
+    </div>
+    <div
+      className="TutorialTrustView__key"
+    >
+      <div
+        className="TutorialView__keyButton trust button secondary hollow"
+      >
+        summary_trust_site
+      </div>
+      <div
+        className="TutorialView__keyText"
+      >
+        hub_tutorial_trust_trust_site
+      </div>
+      <div
+        className="TutorialView__keyButton restrict button secondary hollow"
+      >
+        summary_restrict_site
+      </div>
+      <div
+        className="TutorialView__keyText TutorialView--removeMarginBottom"
+      >
+        hub_tutorial_trust_restrict_site
+      </div>
+    </div>
+  </div>
+</div>
+`;

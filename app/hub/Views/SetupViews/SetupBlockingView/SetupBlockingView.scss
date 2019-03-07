@@ -1,0 +1,58 @@
+/**
+ * Setup Blocking View Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+// Setup Blocking View
+.SetupBlocking__description {
+	display: none;
+	max-width: 180px;
+	margin: 30px auto 0 auto;
+	padding: 0 5px;
+	color: #920094;
+	font-size: 12px;
+	line-height: 1.75;
+	text-align: center;
+}
+.SetupBlocking__choiceBox {
+	border: 2px solid rgba(#000000, 0);
+	min-height: 180px;
+	max-width: 180px;
+	margin: 30px auto 0 auto;
+}
+.SetupBlocking--selected,
+.SetupBlocking__choiceBox:hover {
+	border-color: #930194;
+}
+.SetupBlocking--selected + .SetupBlocking__description,
+.SetupBlocking__choiceBox:hover + .SetupBlocking__description {
+	display: block;
+}
+.SetupBlocking input {
+	display: none;
+}
+.SetupBlocking__imageContainer {
+	height: 125px;
+	background-color: #f7f7f7;
+}
+.SetupBlocking__imageContainer img {
+	max-width: 75px;
+	max-height: 75px;
+}
+.SetupBlocking__textContainer {
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 1.36;
+	padding: 0 5px;
+	text-align: center;
+	color: #4a4a4a;
+	background-color: #e7ecee;
+}

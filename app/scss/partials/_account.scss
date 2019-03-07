@@ -5,7 +5,7 @@
  * https://www.ghostery.com/
  *
  * Copyright 2018 Ghostery, Inc. All rights reserved.
- * 
+ *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
@@ -200,12 +200,16 @@ p.warning {
 /* CREATE ACCOUNT PANEL */
 #create-account-panel {
 	margin-top: 10px;
-	input {margin-bottom: 5px;}
-	p.warning {margin-bottom: 5px;}
+	input {
+		margin-bottom: 5px;
+		margin-top: 5px;
+	}
+	p.warning {}
 	#create-account-first-name, #create-account-last-name {
-		margin-bottom: 20px; //compensation for no .warning elements
+		margin-bottom: 15px; //compensation for no .warning elements
 	}
 	#create-account-password {
+		margin-bottom: 10px;
 		p.warning {
 			#password-length-requirement,
 			#password-characters-requirement {
@@ -216,27 +220,23 @@ p.warning {
 			}
 		}
 	}
-	#create-account-privacy-container {
+	#create-account-promotions {
+		margin-bottom: 10px;
 		label {
 			font-size: 13px;
+			font-weight: 500;
+		}
+	}
+	#create-account-privacy-container {
+		p#accept-privacy-label {
+			font-size: 12px;
 			line-height: 16px;
 			font-weight: 400;
-		}
-		input {
-			float: left;
-			margin-right: 12px;
-			position: relative;
-			top: 3px;
-			margin-bottom: 30px;
 		}
 	}
 	#account-creation-buttons .button {
 		margin-bottom: 0;
 		width: 150px;
-	}
-	#accept-privacy-requirement {
-		margin-left: 22px;
-		margin-top: 3px;
 	}
 }
 

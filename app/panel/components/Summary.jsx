@@ -14,6 +14,7 @@
 import React from 'react';
 import ClassNames from 'classnames';
 import Tooltip from './Tooltip';
+import NavButton from './BuildingBlocks/NavButton';
 import { sendMessage } from '../utils/msg';
 import globals from '../../../src/classes/Globals';
 import {
@@ -38,7 +39,7 @@ class Summary extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			trackerLatencyTotal: '',
+			trackerLatencyTotal: 0,
 			disableBlocking: false,
 			abPause: AB_PAUSE_BUTTON,
 		};
@@ -51,7 +52,6 @@ class Summary extends React.Component {
 		this.clickTrackersBlocked = this.clickTrackersBlocked.bind(this);
 		this.clickSitePolicy = this.clickSitePolicy.bind(this);
 		this.clickCliqzFeature = this.clickCliqzFeature.bind(this);
-		this.clickMapTheseTrackers = this.clickMapTheseTrackers.bind(this);
 
 		this.pauseOptions = [
 			{ name: t('pause_30_min'), name_condensed: t('pause_30_min_condensed'), val: 30 },
@@ -92,8 +92,8 @@ class Summary extends React.Component {
 	 */
 	setTrackerLatency(props) {
 		const { performanceData } = props;
-		let pageLatency = '';
-		let unfixedLatency = '';
+		let pageLatency = 0;
+		let unfixedLatency = 0;
 
 		// calculate and display page speed
 		if (performanceData) {
@@ -104,10 +104,10 @@ class Summary extends React.Component {
 				pageLatency = (Number(timing.loadEventEnd - timing.navigationStart) / 1000).toFixed();
 			} else if (unfixedLatency >= 10 && unfixedLatency < 100) { // 100 > 10 use one decimal
 				pageLatency = (Number(timing.loadEventEnd - timing.navigationStart) / 1000).toFixed(1);
-			} else if (unfixedLatency < 10) { // < 10s use two decimals
+			} else if (unfixedLatency < 10 && unfixedLatency >= 0) { // < 10s use two decimals
 				pageLatency = (Number(timing.loadEventEnd - timing.navigationStart) / 1000).toFixed(2);
 			}
-			this.setState({ trackerLatencyTotal: `${pageLatency}` });
+			this.setState({ trackerLatencyTotal: pageLatency });
 		}
 	}
 
@@ -119,7 +119,7 @@ class Summary extends React.Component {
 		const { siteNotScanned, categories } = props;
 		const pageUrl = props.pageUrl || '';
 
-		if (siteNotScanned || !categories || pageUrl.search(/http|chrome-extension|moz-extension|ms-browser-extension|newtab/) === -1) {
+		if (siteNotScanned || !categories || pageUrl.search(/http|chrome-extension|moz-extension|ms-browser-extension|newtab|chrome:\/\/startpage\//) === -1) {
 			this.setState({ disableBlocking: true });
 		} else {
 			this.setState({ disableBlocking: false });
@@ -255,20 +255,6 @@ class Summary extends React.Component {
 	}
 
 	/**
-	 * Handles clicking on Map These Trackers, which opens Evidon page.
-	 */
-	clickMapTheseTrackers() {
-		if (this.state.disableBlocking) { return; }
-		sendMessage('ping', 'live_scan');
-		sendMessage('openNewTab', {
-			url: `https:\/\/www.evidon.com/solutions/trackermap/?url=${this.props.pageUrl}&utm_source=Ghostery&utm_medium=referral&utm_term=&utm_content=&utm_campaign=GhosteryMapTrackers`,
-			tab_id: +this.state.tab_id,
-			become_active: true,
-		});
-		window.close(); // for firefox
-	}
-
-	/**
 	* React's required render function. Returns JSX
 	* @return {JSX} JSX for rendering the Summary View of the panel
 	*/
@@ -291,6 +277,8 @@ class Summary extends React.Component {
 		const antiTrackUnsafe = enable_anti_tracking && antiTracking && antiTracking.totalUnsafeCount || 0;
 		const adBlockBlocked = enable_ad_block && adBlock && adBlock.totalCount || 0;
 		let sbBlocked = smartBlock && smartBlock.blocked && Object.keys(smartBlock.blocked).length || 0;
+		const pageHost = this.props.pageHost || 'page_host';
+		const hidePageHost = (pageHost.split('.').length < 2);
 		if (sbBlocked === trackerCounts.sbBlocked) {
 			sbBlocked = 0;
 		}
@@ -310,12 +298,12 @@ class Summary extends React.Component {
 			clickable: is_expert,
 		});
 		const pageLoadClassNames = ClassNames('page-load', {
-			fast: +this.state.trackerLatencyTotal < 5,
-			slow: +this.state.trackerLatencyTotal > 10,
+			fast: this.state.trackerLatencyTotal < 5,
+			slow: this.state.trackerLatencyTotal > 10,
 		});
-		const mapTheseTrackersClassNames = ClassNames('map-these-trackers', {
-			clickable: !this.state.disableBlocking,
-			'not-clickable': this.state.disableBlocking
+
+		const summaryViewStatsButton = ClassNames('stats-button', {
+			hide: is_expert
 		});
 
 		let trackersBlockedCount;
@@ -326,6 +314,10 @@ class Summary extends React.Component {
 		} else {
 			trackersBlockedCount = trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked + sbAdjust || 0;
 		}
+
+		const pageHostClassNames = ClassNames('page-host', {
+			invisible: hidePageHost
+		});
 
 		return (
 			<div id="content-summary" className={summaryClassNames}>
@@ -348,8 +340,8 @@ class Summary extends React.Component {
 				)}
 
 				{abPause && !this.state.disableBlocking && is_expert && !showCondensed && (
-					<div className="page-host">
-						{this.props.pageHost}
+					<div className={pageHostClassNames}>
+						{pageHost}
 					</div>
 				)}
 
@@ -379,8 +371,8 @@ class Summary extends React.Component {
 				)}
 
 				{!this.state.disableBlocking && (!abPause || !is_expert) && !showCondensed && (
-					<div className="page-host">
-						{this.props.pageHost}
+					<div className={pageHostClassNames}>
+						{pageHost}
 					</div>
 				)}
 
@@ -443,12 +435,7 @@ class Summary extends React.Component {
 					/>
 				</div>
 
-				{is_expert && !showCondensed && (
-					<div className={mapTheseTrackersClassNames} onClick={this.clickMapTheseTrackers}>
-						{ t('summary_map_these_trackers') }
-					</div>
-				)}
-
+				<NavButton path="/stats" imagePath="../../app/images/panel/graph.svg" classNames={summaryViewStatsButton} />
 			</div>
 		);
 	}

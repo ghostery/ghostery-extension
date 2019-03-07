@@ -41,13 +41,14 @@
 	.button-pause {
 		min-width: 125px;
 		max-width: 125px;
-		line-height: 17px;
+		line-height: 16px;
 		.pause-button-text {
 			overflow-x: hidden;
 			text-overflow: clip;
 			font-size: 11px;
 		}
 		.pause-button-icon {
+			height: 13px;
 			padding: 0 10px 0 30px;
 			background-repeat: no-repeat;
 			background-position: 0 center;
@@ -160,7 +161,6 @@
 		height: 45px;
 		min-width: 125px;
 		max-width: 125px;
-		line-height: 26px;
 	}
 	.button-caret.smaller {
 		height: 45px;

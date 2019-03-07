@@ -9,9 +9,11 @@
 	"author": "Ghostery",
 	"name": "__MSG_name__",
 	"short_name": "Ghostery",
-	"version": "8.2.6",
-	"version_name": "8.2.6",
+	"version": "8.3.2",
+	"version_name": "8.3.2",
 	"default_locale": "en",
+	"debug": true,
+	"log": true,
 	"description": "__MSG_short_description__",
 	"icons": {
 		"16": "app/images/icon16.png",
@@ -25,7 +27,11 @@
 		},
 		"default_title": "Ghostery"
 	},
-	"debug": true,
+	"options_ui": {
+		"page": "app/templates/hub.html",
+		"open_in_tab": true
+	},
+	"options_page": "app/templates/hub.html",
 	"content_scripts": [
 		{
 			"all_frames": false,
@@ -53,7 +59,7 @@
 				"https://account.ghostery.com/*",
 				"https://account.ghosterystage.com/*"
 			],
-			"run_at": "document_end"
+			"run_at": "document_start"
 		},
 		{
 			"all_frames": true,

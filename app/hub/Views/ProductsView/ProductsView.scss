@@ -1,0 +1,103 @@
+/**
+ * Products View Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+// Products View
+.ProductsView {
+	padding-bottom: 80px;
+	background: linear-gradient(#daf4ff, #ffffff 30%) no-repeat;
+}
+.ProductsView--rowPaddingTop {
+	padding-top: 80px;
+}
+.ProductsView__headerTitle {
+	color: #00aef0;
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 38px;
+}
+.ProductsView__headerDescription {
+	font-size: 18px;
+	margin-bottom: 30px;
+}
+.ProductsView__mainPromoTitle {
+	color: #4a4a4a;
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 30px;
+}
+.ProductsView__mainPromoDescription {
+	color: #4a4a4a;
+	font-size: 14px;
+	line-height: 30px;
+}
+.ProductsView__mobileScreenshots {
+	width: auto;
+}
+.ProductsView__storeImageContainer {
+	margin-top: 20px;
+}
+.ProductsView__imageAppStoreIos {
+	max-width: 120px;
+}
+.ProductsView__imageAppStoreMac {
+	max-width: 156px;
+}
+.ProductsView__imagePlayStore {
+	max-width: 140px;
+	margin-left: 20px;
+}
+.ProductsView__secondaryPromo {
+	padding: 0 60px;
+	text-align: center;
+}
+.ProductsView__secondaryPromoImage {
+	max-height: 200px;
+	margin-bottom: 15px;
+}
+.ProductsView__secondaryPromoTitle {
+	color: #4a4a4a;
+	font-size: 14px;
+	line-height: 30px;
+	font-weight: 700;
+}
+.ProductsView__secondaryPromoDescription {
+	color: #4a4a4a;
+	font-size: 14px;
+	line-height: 30px;
+}
+@media only screen and (max-width: 960px) {
+	.ProductsView {
+		padding-bottom: 0;
+	}
+	.ProductsView__mobileScreenshots {
+		padding: 0 80px 40px 80px;
+	}
+	.ProductsView__header {
+		padding: 0px 30px;
+		text-align: center;
+	}
+	.ProductsView__storeImageContainer {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.ProductsView__secondaryPromo {
+		padding-bottom: 60px;
+	}
+}
+@media only screen and (max-width: 450px) {
+	.ProductsView__mobileScreenshots {
+		width: 216px;
+		padding: 0 0 40px 0;
+	}
+}

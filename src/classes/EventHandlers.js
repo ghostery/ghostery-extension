@@ -33,6 +33,7 @@ import { log } from '../utils/common';
 import { isBug } from '../utils/matcher';
 import * as utils from '../utils/utils';
 
+const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 const RequestsMap = new Map();
 /**
  * This class is a collection of handlers for
@@ -44,6 +45,7 @@ class EventHandlers {
 		this.policy = new Policy();
 		this.policySmartBlock = new PolicySmartBlock();
 		this.purplebox = new PurpleBox();
+		this._pageListeners = new Set();
 
 		// Use leading:false so button.update is called after requests are complete.
 		// Use a 1sec interval to limit calls on pages with a large number of requests.
@@ -114,8 +116,11 @@ class EventHandlers {
 			utils.getTab(tabId, (tab) => {
 				if (tab) {
 					tabInfo.setTabInfo(tabId, 'incognito', tab.incognito);
-					// purplebox.createBox() will first check to make sure this is a valid tab
-					this._createBox(tabId);
+					// Edge does not have script execute-ready in onCommited
+					if (!IS_EDGE) {
+						// purplebox.createBox() will first check to make sure this is a valid tab
+						this._createBox(tabId);
+					}
 				}
 			}, () => {
 				// prefetched tabs will return an error from utils.getTab
@@ -148,6 +153,12 @@ class EventHandlers {
 			if (!tab || tab.id !== tab_id || tab.incognito) {
 				return;
 			}
+
+			// Edge does not have script execute-ready in onCommited, so we call this here
+			if (IS_EDGE) {
+				this._createBox(tab_id);
+			}
+
 			const alert_messages = [
 				'notification_library_update',
 				'notification_library_update_link',
@@ -733,8 +744,28 @@ class EventHandlers {
 	 * @param  {number} tab_id
 	 */
 	_clearTabData(tab_id) {
+		const lastTabBugs = foundBugs.getBugs(tab_id);
+		const lastTabApps = foundBugs.getApps(tab_id);
+		const lastTabInfo = tabInfo.getTabInfo(tab_id);
 		foundBugs.clear(tab_id);
 		tabInfo.clear(tab_id);
+		if (lastTabInfo && lastTabBugs) {
+			this._pageListeners.forEach((fn) => {
+				fn(tab_id, lastTabInfo, lastTabApps, lastTabBugs);
+			});
+		}
+	}
+
+	addPageListener(fn) {
+		this._pageListeners.add(fn);
+	}
+
+	removePageListener(fn) {
+		this._pageListeners.delete(fn);
+	}
+
+	clearPageListeners() {
+		this._pageListeners.clear();
 	}
 
 	/**

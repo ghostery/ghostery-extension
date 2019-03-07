@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/hub/Views/TutorialViews/TutorialAntiSuiteView component Snapshot tests with react-test-renderer tutorial anti-suite view is rendered correctly 1`] = `
+<div
+  className="TutorialAntiSuiteView TutorialView--mediumFlexColumn row align-center-middle"
+>
+  <div
+    className="columns small-10 small-offset-1 medium-8 large-6"
+  >
+    <div
+      className="TutorialView__imageTitle"
+    >
+      hub_tutorial_simple_view
+    </div>
+    <img
+      alt="hub_tutorial_simple_view"
+      className="TutorialAntiSuiteView__image simple"
+      src="/app/images/hub/tutorial/antisuite-simple.png"
+    />
+    <div
+      className="TutorialView__imageTitle"
+    >
+      hub_tutorial_detailed_view
+    </div>
+    <img
+      alt="hub_tutorial_detailed_view"
+      className="TutorialAntiSuiteView__image detailed"
+      src="/app/images/hub/tutorial/antisuite-detailed.png"
+    />
+  </div>
+  <div
+    className="columns small-12 medium-10 large-4"
+  >
+    <div
+      className="TutorialView__title"
+    >
+      hub_tutorial_antisuite_title
+    </div>
+    <div
+      className="TutorialAntiSuiteView__key"
+    >
+      <div
+        className="TutorialView__keyItem flex-container align-middle"
+      >
+        <div
+          className="TutorialView__keyImage anti-track"
+        />
+        <div>
+          <div
+            className="TutorialView__keyTitle"
+          >
+            hub_tutorial_antisuite_antitracking_title
+          </div>
+          <div
+            className="TutorialView__keyText"
+          >
+            hub_tutorial_antisuite_antitracking_description
+          </div>
+        </div>
+      </div>
+      <div
+        className="TutorialView__keyItem flex-container align-middle"
+      >
+        <div
+          className="TutorialView__keyImage ad-block"
+        />
+        <div>
+          <div
+            className="TutorialView__keyTitle"
+          >
+            hub_tutorial_antisuite_adblocking_title
+          </div>
+          <div
+            className="TutorialView__keyText"
+          >
+            hub_tutorial_antisuite_adblocking_description
+          </div>
+        </div>
+      </div>
+      <div
+        className="TutorialView__keyItem flex-container align-middle"
+      >
+        <div
+          className="TutorialView__keyImage smart-block"
+        />
+        <div>
+          <div
+            className="TutorialView__keyTitle"
+          >
+            hub_tutorial_antisuite_smartblocking_title
+          </div>
+          <div
+            className="TutorialView__keyText"
+          >
+            hub_tutorial_antisuite_smartblocking_description
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

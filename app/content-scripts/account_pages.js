@@ -30,13 +30,15 @@ const AccountPagesContentScript = (function (window) {
 	 * @memberOf AccountPagesContentScript
 	 * @package
 	 */
+	const _listeners = [
+		'accountPage.login',
+		'accountPage.register',
+		'accountPage.getUser',
+		'accountPage.getUserSubscriptionData',
+		'accountPage.logout',
+	];
 	const _initialize = function () {
-		window.addEventListener('accountPageLoaded', () => {
-			sendMessage('accountPageLoaded');
-		});
-		window.addEventListener('account.logout', () => {
-			sendMessage('account.logout');
-		});
+		_listeners.forEach(name => window.addEventListener(name, () => sendMessage(name)));
 	};
 
 	return {

@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/hub/Views/TutorialView component Snapshot tests with react-test-renderer tutorial view is rendered correctly 1`] = `
+<div
+  className="full-height flex-container flex-dir-column"
+>
+  <div
+    className="TutorialView--paddingTopLarge flex-child-grow flex-container align-middle"
+  >
+    <div>
+      test component
+    </div>
+    <div>
+      test component
+    </div>
+  </div>
+  <div>
+    Mock Tutorial Navigation
+  </div>
+</div>
+`;

@@ -1,0 +1,108 @@
+/**
+ * Create Account View Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+// Create Account View
+.CreateAccountView {
+	padding-top: 80px;
+	padding-bottom: 40px;
+}
+.CreateAccountView--addPaddingTop {
+	padding-top: 40px;
+}
+.CreateAccountView--addMarginSide {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.CreateAccountView--addMarginBottom {
+	margin-bottom: 20px;
+}
+.CreateAccountView__headerImage {
+	max-width: 180px;
+}
+.CreateAccountView__headerTitle h3 {
+	font-size: 24px;
+	line-height: 1.75;
+	color: #4a4a4a;
+	margin: 0 25px;
+}
+.CreateAccountView__inputLabel {
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 20px;
+	color: #4a4a4a;
+}
+.CreateAccountView__inputBox {
+	font-size: 14;
+	line-height: 24px;
+	color: #4a4a4a;
+	margin-bottom: 35px;
+
+	// Foundation Overrides
+	border-radius: 0;
+	box-shadow: none;
+	border: 1px solid #c8c7c2;
+}
+.CreateAccountView__inputBox.error {
+	margin-bottom: 8px;
+	border-color: #e74055;
+}
+.CreateAccountView__inputBox:focus {
+	// Foundation Overrides
+	box-shadow: none;
+	border-color: #4a4a4a;
+}
+.CreateAccountView__inputError {
+	font-size: 12;
+	line-height: 14px;
+	color: #e74055;
+	margin-bottom: 13px;
+}
+.CreateAccountView__link {
+	font-size: 14px;
+	line-height: 30px;
+}
+.CreateAccountView__termsStatement {
+	font-size: 12px;
+}
+.CreateAccountView__button {
+	min-width: 180px;
+}
+@media only screen and (max-width: 740px)  {
+	.CreateAccountView {
+		padding-top: 20px;
+	}
+	.CreateAccountView__header {
+		flex-direction: column;
+	}
+	.CreateAccountView__headerTitle {
+		padding-top: 30px;
+		text-align: center;
+	}
+	.CreateAccountView__submit {
+		display: flex;
+		justify-content: center;
+	}
+	.CreateAccountView__checkboxContainer {
+		padding-right: 12px;
+		justify-content: center;
+	}
+	.CreateAccountView__linkContainer {
+		text-align: center;
+	}
+}
+@media only screen and (max-width: 500px)  {
+	.CreateAccountView__headerTitle h3 {
+		font-size: 20px;
+		margin: 0 10px;
+	}
+}

@@ -92,12 +92,6 @@
 				margin: 0 0 14px 0;
 			}
 		}
-		.map-trackers {
-			@extend %pointer;
-			color:#9B9B9B;
-			font-size: 10px;
-			text-align: center;
-		}
 	}
 	.toggleExpert {
 		background-image: url('../images/panel/icon-simple-mode.svg');

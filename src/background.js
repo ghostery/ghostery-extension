@@ -50,6 +50,10 @@ import * as utils from './utils/utils';
 import { _getJSONAPIErrorsObject } from './utils/api';
 import { importCliqzSettings } from './utils/cliqzSettingImport';
 
+// For debug purposes, provide Access to the internals of `browser-core`
+// module from Developer Tools Console.
+window.CLIQZ = cliqz;
+
 // class instantiation
 const events = new Events();
 const panelData = new PanelData();
@@ -70,12 +74,20 @@ const onBeforeRequest = events.onBeforeRequest.bind(events);
 const onHeadersReceived = events.onHeadersReceived.bind(events);
 
 // Cliqz Modules
+const moduleMock = {
+	isEnabled: false,
+	on: () => {},
+};
 const humanweb = cliqz.modules['human-web'];
-const { adblocker, antitracking, hpn } = cliqz.modules;
-const messageCenter = cliqz.modules['message-center'];
-const offers = cliqz.modules['offers-v2'];
+const { adblocker, antitracking, hpnv2 } = cliqz.modules;
+const messageCenter = cliqz.modules['message-center'] || moduleMock;
+const offers = cliqz.modules['offers-v2'] || moduleMock;
+const insights = cliqz.modules.insights || moduleMock;
 // add ghostery module to expose ghostery state to cliqz
 cliqz.modules.ghostery = new GhosteryModule();
+
+insights.enable();
+
 let OFFERS_ENABLE_SIGNAL;
 
 /**
@@ -127,6 +139,25 @@ function autoUpdateBugDb() {
 			checkLibraryVersion();
 		}
 	}
+}
+
+/**
+ * Set Default Blocking: all apps in Advertising, Adult Advertising, and Site Analytics
+ */
+function setGhosteryDefaultBlocking() {
+	const categoriesBlock = ['advertising', 'pornvertising', 'site_analytics'];
+	log('Blocking all trackers in categories:', ...categoriesBlock);
+	const selected_app_ids = {};
+	for (const app_id in bugDb.db.apps) {
+		if (bugDb.db.apps.hasOwnProperty(app_id)) {
+			const category = bugDb.db.apps[app_id].cat;
+			if (categoriesBlock.indexOf(category) >= 0 &&
+			!selected_app_ids.hasOwnProperty(app_id)) {
+				selected_app_ids[app_id] = 1;
+			}
+		}
+	}
+	panelData.set({ selected_app_ids });
 }
 
 /**
@@ -250,29 +281,45 @@ function getSiteData() {
  * @param  {string}		tab_url 	tab url
  */
 function handleAccountPages(name, callback) {
-	if (name === 'accountPageLoaded') {
-		if (conf.account === null) {
-			account._getUserIDFromCookie().then((userID) => {
-				account._setAccountInfo(userID);
-			})
-				.then(account.getUser)
-				.then(account.getUserSettings)
-				.catch((err) => {
-					log('handleAccountPages error', err);
-				});
-		}
-	} else if (name === 'account.logout') {
-		account.logout()
-			.then((response) => {
-				callback(response);
-			})
-			.catch((err) => {
-				log('LOGOUT ERROR', err);
-				callback(err);
-			});
-		return true;
+	switch (name) {
+		case 'accountPage.login':
+		case 'accountPage.register':
+		case 'accountPageLoaded': // legacy
+			if (conf.account === null) {
+				account._getUserIDFromCookie()
+					.then((userID) => {
+						account._setAccountInfo(userID);
+					})
+					.then(account.getUser)
+					.then(account.getUserSettings)
+					.then(account.getUserSubscriptionData)
+					.then(() => callback())
+					.catch((err) => {
+						callback(err);
+						log('handleAccountPages error', err);
+					});
+			}
+			return true;
+		case 'accountPage.getUser':
+			account.getUser()
+				.then(data => callback(data))
+				.catch(err => callback(err));
+			return true;
+		case 'accountPage.getUserSubscriptionData':
+			account.getUserSubscriptionData()
+				.then(data => callback(data))
+				.catch(err => callback(err));
+			return true;
+		case 'accountPage.logout':
+		case 'account.logout': // legacy
+			account.logout()
+				.then(data => callback(data))
+				.catch(err => callback(err));
+			return true;
+
+		default:
+			return false;
 	}
-	return false;
 }
 
 /**
@@ -465,6 +512,9 @@ function handleRewards(name, message, callback) {
 		case 'rewardsPromptAccepted':
 			conf.rewards_accepted = true;
 			break;
+		case 'rewardsPromptOptedIn':
+			conf.rewards_opted_in = true;
+			break;
 		case 'ping':
 			metrics.ping(message);
 			break;
@@ -483,6 +533,130 @@ function handleRewards(name, message, callback) {
 			return callback();
 		default:
 			break;
+	}
+}
+
+/**
+ * Handle messages sent from The Ghostery Hub: app/hub.
+ * @param  {string}   name     message name
+ * @param  {object}   message  message data
+ * @param  {function} callback function to call when you have a response
+ */
+function handleGhosteryHub(name, message, callback) {
+	switch (name) {
+		case 'SEND_PING': {
+			const { type } = message;
+			metrics.ping(type);
+			callback();
+			break;
+		}
+		case 'GET_HOME_PROPS': {
+			const {
+				setup_complete,
+				tutorial_complete,
+				enable_metrics,
+			} = conf;
+			callback({
+				setup_complete,
+				tutorial_complete,
+				enable_metrics,
+			});
+			break;
+		}
+		case 'GET_SETUP_SHOW_WARNING_OVERRIDE': {
+			const { setup_show_warning_override } = conf;
+			callback({ setup_show_warning_override });
+			break;
+		}
+		case 'SET_SETUP_STEP': {
+			let { setup_step } = message;
+			if (setup_step === 7) {
+				panelData.set({ setup_step });
+			} else if (setup_step > conf.setup_step) {
+				panelData.set({ setup_step });
+				if (setup_step === 8) {
+					const { setup_number } = conf;
+					panelData.set({ setup_number: setup_number ? 2 : 1 });
+					metrics.ping('setup_start');
+				}
+			} else {
+				({ setup_step } = setup_step);
+			}
+			callback({ setup_step });
+			break;
+		}
+		case 'SET_BLOCKING_POLICY': {
+			const { blockingPolicy } = message;
+			switch (blockingPolicy) {
+				case 'BLOCKING_POLICY_RECOMMENDED': {
+					panelData.set({ setup_block: 5 });
+					setGhosteryDefaultBlocking();
+					break;
+				}
+				case 'BLOCKING_POLICY_NOTHING': {
+					panelData.set({ setup_block: 1 });
+					const selected_app_ids = {};
+					panelData.set({ selected_app_ids });
+					break;
+				}
+				case 'BLOCKING_POLICY_EVERYTHING': {
+					panelData.set({ setup_block: 3 });
+					const selected_app_ids = {};
+					for (const app_id in bugDb.db.apps) {
+						if (!selected_app_ids.hasOwnProperty(app_id)) {
+							selected_app_ids[app_id] = 1;
+						}
+					}
+					panelData.set({ selected_app_ids });
+					break;
+				}
+				case 'BLOCKING_POLICY_CUSTOM': {
+					panelData.set({ setup_block: 4 });
+					// Blocking app_ids is handled by Global Blocking blocking.js
+					break;
+				}
+				default: break;
+			}
+			callback({ blockingPolicy });
+			break;
+		}
+		case 'SET_GHOSTERY_REWARDS': {
+			const { enable_ghostery_rewards } = message;
+			if (!offers.isEnabled && enable_ghostery_rewards === true) {
+				OFFERS_ENABLE_SIGNAL = {
+					actionId: 'rewards_on',
+					origin: 'ghostery-setup-flow',
+					type: 'action-signal',
+				};
+			} else if (enable_ghostery_rewards === false) {
+				rewards.sendSignal({
+					actionId: 'rewards_off',
+					origin: 'ghostery-setup-flow',
+					type: 'action-signal',
+				});
+			}
+			panelData.set({ enable_offers: enable_ghostery_rewards });
+			callback({ enable_ghostery_rewards });
+			break;
+		}
+		case 'SET_TUTORIAL_COMPLETE': {
+			panelData.set(message);
+			metrics.ping('tutorial_complete');
+			callback(message);
+			break;
+		}
+		case 'SET_METRICS':
+		case 'SET_SETUP_SHOW_WARNING_OVERRIDE':
+		case 'SET_ANTI_TRACKING':
+		case 'SET_AD_BLOCK':
+		case 'SET_SMART_BLOCK':
+		case 'SET_HUMAN_WEB':
+		case 'SET_SETUP_COMPLETE': {
+			panelData.set(message);
+			callback(message);
+			break;
+		}
+		default: break;
 	}
 }
 
@@ -605,60 +779,12 @@ function onMessageHandler(request, sender, callback) {
 		return handleBlockedRedirect(name, message, tab_id, callback);
 	} else if (origin === 'rewards' || origin === 'rewardsPanel') {
 		return handleRewards(name, message, callback);
+	} else if (origin === 'ghostery-hub') {
+		return handleGhosteryHub(name, message, callback);
 	}
 
 	// HANDLE UNIVERSAL EVENTS HERE (NO ORIGIN LISTED ABOVE)
-	if (name === 'disableShowAlert') {
-		conf.show_alert = false;
-	} else if (name === 'updateDataCollection') {
-		if (!IS_CLIQZ) {
-			conf.enable_human_web = message && true;
-			conf.enable_offers = message && true;
-		}
-		conf.enable_metrics = message && true;
-	} else if (name === 'updateDisplayMode') {
-		conf.is_expert = message;
-	} else if (name === 'updateAntiTrack') {
-		conf.enable_anti_tracking = message;
-	} else if (name === 'updateSmartBlock') {
-		conf.enable_smart_block = message;
-	} else if (name === 'updateAdBlock') {
-		conf.enable_ad_block = message;
-	} else if (name === 'updateBlocking') {
-		switch (message) {
-			case 'UPDATE_BLOCK_ALL':
-				conf.selected_app_ids = {};
-				for (const app_id in bugDb.db.apps) {
-					if (!conf.selected_app_ids.hasOwnProperty(app_id)) {
-						conf.selected_app_ids[app_id] = 1;
-					}
-				}
-				break;
-			case 'UPDATE_BLOCK_NONE':
-				// TODO: can't wipe these settings for upgrade users
-				conf.selected_app_ids = {};
-				break;
-			case 'UPDATE_BLOCK_ADS':
-				conf.selected_app_ids = {};
-				for (const app_id in bugDb.db.apps) {
-					if (bugDb.db.apps[app_id].cat === 'advertising' &&
-						!conf.selected_app_ids.hasOwnProperty(app_id)) {
-						conf.selected_app_ids[app_id] = 1;
-					}
-				}
-				break;
-			default:
-				break;
-		}
-	} else if (name === 'skipSetup') {
-		// link to blog post
-		chrome.tabs.update(tab_id, { url: 'https://www.ghostery.com/blog/product-releases/browse-smarter-with-ghostery-8/' });
-		return false;
-	} else if (name === 'closeSetup') {
-		// link to blog post
-		chrome.tabs.update(tab_id, { url: 'https://www.ghostery.com/blog/product-releases/browse-smarter-with-ghostery-8/' });
-		return false;
-	} else if (name === 'getPanelData') {
+	if (name === 'getPanelData') {
 		if (!message.tabId) {
 			utils.getActiveTab((tab) => {
 				const data = panelData.get(message.view, tab);
@@ -670,23 +796,49 @@ function onMessageHandler(request, sender, callback) {
 				callback(data);
 			});
 		}
-		account.getUserSettings().catch(err => log('Error getting user settings from getPanelData:', err));
+		account.getUserSettings().catch(err => log('Failed getting user settings from getPanelData:', err));
 		return true;
+	} else if (name === 'getStats') {
+		insights.action('getStatsTimeline', message.from, message.to, true, true).then((data) => {
+			callback(data);
+		});
+		return true;
+	} else if (name === 'getAllStats') {
+		insights.action('getAllDays').then((data) => {
+			insights.action('getStatsTimeline', moment(data[0]), moment(), true, true).then((data) => {
+				callback(data);
+			});
+		});
+		return true;
+	} else if (name === 'resetStats') {
+		metrics.ping('hist_reset_stats');
+		insights.action('clearData');
+		return false;
 	} else if (name === 'setPanelData') {
 		panelData.set(message);
 		callback();
 		return false;
+	} else if (name === 'account.getTheme') {
+		if (conf.current_theme !== 'default') {
+			account.getTheme(conf.current_theme)
+				.then(() => {
+					callback(conf.account.themeData[conf.current_theme]);
+				});
+			return true;
+		}
+		callback();
 	} else if (name === 'getCliqzModuleData') {
 		const modules = { adblock: {}, antitracking: {} };
-		utils.getActiveTab((tab) => {
+
+		const getCliqzModuleDataForTab = (tabId, callback) => {
 			button.update();
 			if (conf.enable_ad_block) {
 				// update adblock count. callback() handled below based on anti-tracking status
-				modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tab.id);
+				modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tabId) || {};
 			}
 			if (conf.enable_anti_tracking) {
-				cliqz.modules.antitracking.background.actions.aggregatedBlockingStats(tab.id).then((data) => {
-					modules.antitracking = data;
+				cliqz.modules.antitracking.background.actions.aggregatedBlockingStats(tabId).then((data) => {
+					modules.antitracking = data || {};
 					callback(modules);
 				}).catch(() => {
 					callback(modules);
@@ -694,7 +846,16 @@ function onMessageHandler(request, sender, callback) {
 			} else {
 				callback(modules);
 			}
-		});
+		};
+
+		if (message && message.tabId) {
+			getCliqzModuleDataForTab(+message.tabId, callback);
+		} else {
+			utils.getActiveTab((tab) => {
+				getCliqzModuleDataForTab(tab.id, callback);
+			});
+		}
+
 		return true;
 	} else if (name === 'getTrackerDescription') {
 		utils.getJson(message.url).then((result) => {
@@ -703,9 +864,13 @@ function onMessageHandler(request, sender, callback) {
 		});
 		return true;
 	} else if (name === 'account.login') {
+		metrics.ping('sign_in');
 		const { email, password } = message;
 		account.login(email, password)
 			.then((response) => {
+				if (!response.hasOwnProperty('errors')) {
+					metrics.ping('sign_in_success');
+				}
 				callback(response);
 			})
 			.catch((err) => {
@@ -715,11 +880,18 @@ function onMessageHandler(request, sender, callback) {
 			});
 		return true;
 	} else if (name === 'account.register') {
+		if (!IS_EDGE) {
+			const senderOrigin = (sender.url.indexOf('templates/panel.html') >= 0) ? 'extension' : 'setup';
+			metrics.ping(`create_account_${senderOrigin}`);
+		}
 		const {
 			email, confirmEmail, password, firstName, lastName
 		} = message;
 		account.register(email, confirmEmail, password, firstName, lastName)
 			.then((response) => {
+				if (!response.hasOwnProperty('errors')) {
+					metrics.ping('create_account_success');
+				}
 				callback(response);
 			})
 			.catch((err) => {
@@ -747,6 +919,32 @@ function onMessageHandler(request, sender, callback) {
 				callback({ errors: _getJSONAPIErrorsObject(err) });
 			});
 		return true;
+	} else if (name === 'account.getUserSubscriptionData') {
+		account.getUserSubscriptionData()
+			.then((customer) => {
+				const subscriptionData = customer.subscriptions;
+				callback({ subscriptionData });
+			})
+			.catch((err) => {
+				log('Error getting user subscription data:', err);
+				callback({ errors: _getJSONAPIErrorsObject(err) });
+			});
+		return true;
+	} else if (name === 'account.openSubscriptionPage') {
+		let tabUrl;
+		if (conf.account) {
+			tabUrl = `https://account.${globals.GHOSTERY_DOMAIN}.com/subscription?target=subscribe`;
+		} else {
+			tabUrl = `https://signon.${globals.GHOSTERY_DOMAIN}.com/subscribe`;
+		}
+		utils.openNewTab({ url: tabUrl, become_active: true });
+		return true;
+	} else if (name === 'account.openSupportPage') {
+		metrics.ping('priority_support_submit');
+		const subscriber = account.hasScopesUnverified(['subscriptions:plus']);
+		const tabUrl = subscriber ? `https://account.${globals.GHOSTERY_DOMAIN}.com/support` : 'https://ghostery.zendesk.com/hc/';
+		utils.openNewTab({ url: tabUrl, become_active: true });
+		return true;
 	} else if (name === 'account.resetPassword') {
 		const { email } = message;
 		account.resetPassword(email)
@@ -761,6 +959,9 @@ function onMessageHandler(request, sender, callback) {
 	} else if (name === 'account.getUser') {
 		account.getUser(message)
 			.then((user) => {
+				if (user) {
+					user.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus']);
+				}
 				callback({ user });
 			})
 			.catch((err) => {
@@ -777,6 +978,15 @@ function onMessageHandler(request, sender, callback) {
 				callback({ errors: _getJSONAPIErrorsObject(err) });
 				log('sendValidateAccountEmail error', err);
 			});
+		return true;
+	} else if (name === 'account.promotions') {
+		const { promotions } = message;
+		account.updateEmailPreferences(promotions).then((success) => {
+			callback(success);
+		}).catch((err) => {
+			callback({ errors: _getJSONAPIErrorsObject(err) });
+			log('UPDATE PROMOTIONS FAIL', err);
+		});
 		return true;
 	} else if (name === 'update_database') {
 		checkLibraryVersion().then((result) => {
@@ -847,18 +1057,6 @@ function onMessageHandler(request, sender, callback) {
 			}
 		});
 		return true;
-	} else if (name === 'setupStep' && globals.JUST_INSTALLED) {
-		if (message.final) {
-			metrics.ping('install_complete');
-		} else if (message.setup_block !== undefined) {
-			conf.setup_block = message.setup_block;
-		} else if (message.setup_path !== undefined) {
-			conf.setup_path = message.setup_path;
-		} else if (message.setup_step !== undefined) {
-			if (message.setup_step > conf.setup_step) {
-				conf.setup_step = message.setup_step;
-			}
-		}
 	}
 }
 
@@ -887,7 +1085,7 @@ function initializeDispatcher() {
 		panelData.init();
 	});
 	dispatcher.on('conf.save.enable_human_web', (enableHumanWeb) => {
-		if (!IS_CLIQZ) {
+		if (!IS_EDGE && !IS_CLIQZ) {
 			setCliqzModuleEnabled(humanweb, enableHumanWeb).then(() => {
 				setupABTest();
 			});
@@ -895,24 +1093,28 @@ function initializeDispatcher() {
 			setCliqzModuleEnabled(humanweb, false);
 		}
 	});
-	dispatcher.on('conf.save.enable_offers', (enableOffers) => {
+	dispatcher.on('conf.save.enable_offers', (enableOffersIn) => {
 		button.update();
-		if (!IS_CLIQZ) {
-			if (!enableOffers) {
-				const actions = cliqz &&
+		let firstStep = Promise.resolve();
+		let enableOffers = enableOffersIn;
+		if (IS_EDGE || IS_CLIQZ) {
+			enableOffers = false;
+		} else if (!enableOffers) {
+			const actions = cliqz &&
 				cliqz.modules['offers-v2'] &&
 				cliqz.modules['offers-v2'].background &&
 				cliqz.modules['offers-v2'].background.actions;
-				if (actions) {
-					actions.flushSignals();
-				}
-				OFFERS_ENABLE_SIGNAL = undefined;
-				registerWithOffers(offers, enableOffers);
+			if (actions) {
+				firstStep = actions.flushSignals();
 			}
-			setCliqzModuleEnabled(offers, enableOffers);
+			OFFERS_ENABLE_SIGNAL = undefined;
+		}
+		const toggleModule = () => setCliqzModuleEnabled(offers, enableOffers);
+		const toggleConnection = () => registerWithOffers(offers, enableOffers);
+		if (enableOffers) {
+			firstStep.then(toggleModule).then(toggleConnection);
 		} else {
-			setCliqzModuleEnabled(offers, false);
-			registerWithOffers(offers, false);
+			firstStep.then(toggleConnection).then(toggleModule);
 		}
 	});
 	dispatcher.on('conf.save.enable_anti_tracking', (enableAntitracking) => {
@@ -1074,7 +1276,6 @@ antitracking.on('enabled', () => {
 		// remove Cliqz-side whitelisting steps and replace with ghostery ones.
 		const replacedSteps = ['onBeforeSendHeaders', 'onHeadersReceived'].map(stage =>
 			Promise.all([
-				antitracking.action('removePipelineStep', stage, 'checkIsCookieWhitelisted'),
 				antitracking.action('addPipelineStep', stage, {
 					name: 'checkGhosteryWhitelisted',
 					spec: 'break',
@@ -1152,7 +1353,7 @@ offers.on('enabled', () => {
 		if (DEBUG) {
 			offers.action('setConfiguration', {
 				config_location: 'de',
-				triggersBE: 'http://offers-api-stage.clyqz.com:8181',
+				triggersBE: 'https://offers-api-staging.clyqz.com',
 				showConsoleLogs: true,
 				offersLogsEnabled: true,
 				offersDevFlag: true,
@@ -1203,7 +1404,8 @@ messageCenter.on('enabled', () => {
 			// first check that the message is from core and is the one we expect
 			if (msg.origin === 'offers-core' &&
 				msg.type === 'push-offer' &&
-				msg.data.offer_data) {
+				msg.data.offer_data
+			) {
 				log('RECEIVED OFFER', msg);
 
 				const unreadIdx = rewards.unreadOfferIds.indexOf(msg.data.offer_id);
@@ -1215,16 +1417,69 @@ messageCenter.on('enabled', () => {
 				button.update();
 
 				if (msg.data.offer_data.ui_info.notif_type !== 'star') {
-					utils.getActiveTab((tab) => {
-						let tabId = 0;
-						if (tab) tabId = tab.id;
-						rewards.showHotDog(tabId, msg.data);
-					});
+					// We use getTabByUrl() instead of getActiveTab()
+					// because user may open the offer-triggering url in a new tab
+					// through the context menu, which may not switch to the new tab
+					// If the url provided by Cliqz turns out to be invalid, we fall back to getActiveTabs
+					if (msg.data.display_rule && msg.data.display_rule.url) {
+						utils.getTabByUrl(
+							msg.data.display_rule.url,
+							(tab) => {
+								const tabId = tab ? tab.id : 0;
+								rewards.showHotDogOrOffer(tabId, msg.data);
+							},
+							() => {
+								utils.getActiveTab((tab) => {
+									const tabId = tab ? tab.id : 0;
+									rewards.showHotDogOrOffer(tabId, msg.data);
+								});
+							}
+						);
+					}
 				}
 			}
 		});
 	});
 });
+
+/**
+ * Add page listeners for insights stats.
+ * @memberOf Background
+ */
+insights.on('enabled', () => {
+	events.addPageListener((tab_id, info, apps, bugs) => {
+		cliqz.modules.insights.action('pushGhosteryPageStats', tab_id, info, apps, bugs);
+	});
+});
+insights.on('disabled', () => {
+	events.clearPageListeners();
+});
+
+/**
+ * Pulls and aggregates data to be passed to Ghostery Tab extension.
+ * @memberOf Background
+ */
+function getDataForGhosteryTab(callback) {
+	const passedData = {};
+	insights.action('getAllDays').then((data) => {
+		insights.action('getStatsTimeline', moment(data[0]), moment(), true, true).then((data) => {
+			const cumulativeData = {
+				adsBlocked: 0, cookiesBlocked: 0, dataSaved: 0, fingerprintsRemoved: 0, loadTime: 0, pages: 0, timeSaved: 0, trackerRequestsBlocked: 0, trackersBlocked: 0, trackersDetected: 0
+			};
+			data.forEach((entry) => {
+				Object.keys(cumulativeData).forEach((key) => {
+					cumulativeData[key] += entry[key];
+				});
+			});
+			passedData.cumulativeData = cumulativeData;
+		}).then(() => {
+			passedData.blockTrackersEnabled = !globals.SESSION.paused_blocking;
+			passedData.adBlockEnabled = globals.SESSION.paused_blocking ? false : conf.enable_ad_block;
+			passedData.antiTrackingEnabled = globals.SESSION.paused_blocking ? false : conf.enable_anti_tracking;
+			callback(passedData);
+		});
+	});
+}
 
 /**
  * Initialize Ghostery panel.
@@ -1371,6 +1626,26 @@ function initializeEventListeners() {
 			rewards.panelPort.onDisconnect.addListener(rewards.panelHubClosedListener);
 		}
 	});
+
+	// Fired when another extension sends a message, accepts message if it's from Ghostery Tab
+	// NOTE: not supported on Edge and Firefox < v54
+	if (typeof chrome.runtime.onMessageExternal === 'object') {
+		chrome.runtime.onMessageExternal.addListener((request, sender, sendResponse) => {
+			const recognized = [
+				globals.GHOSTERY_TAB_CHROME_PRODUCTION_ID,
+				globals.GHOSTERY_TAB_CHROME_PRERELEASE_ID,
+				globals.GHOSTERY_TAB_CHROME_TEST_ID,
+				globals.GHOSTERY_TAB_FIREFOX_PRODUCTION_ID,
+				globals.GHOSTERY_TAB_FIREFOX_TEST_ID
+			].indexOf(sender.id) !== -1;
+
+			if (recognized && request.name === 'getStatsAndSettings') {
+				getDataForGhosteryTab(data => sendResponse({ historicalDataAndSettings: data }));
+				return true;
+			}
+			return false;
+		});
+	}
 }
 
 /**
@@ -1474,9 +1749,9 @@ function initializeGhosteryModules() {
 			metrics.ping('install_complete');
 		}, 300000);
 
-		// open the setup page on install
+		// open the Ghostery Hub on install with justInstalled query parameter set to true
 		chrome.tabs.create({
-			url: chrome.runtime.getURL('./app/templates/setup.html'),
+			url: chrome.runtime.getURL('./app/templates/hub.html?justInstalled=true'),
 			active: true
 		});
 	} else {
@@ -1490,7 +1765,7 @@ function initializeGhosteryModules() {
 		Promise.all([
 			initialiseWebRequestPipeline(),
 		]).then(() => {
-			if (!IS_CLIQZ) {
+			if (!(IS_EDGE || IS_CLIQZ)) {
 				if (globals.JUST_UPGRADED_FROM_7) {
 					// These users had human web already, so we respect their choice
 					conf.enable_human_web = !humanweb.isDisabled;
@@ -1520,8 +1795,14 @@ function initializeGhosteryModules() {
 		log('cliqzStartup error', e);
 	});
 
+	if (IS_EDGE) {
+		setCliqzModuleEnabled(hpnv2, false);
+		setCliqzModuleEnabled(humanweb, false);
+		setCliqzModuleEnabled(offers, false);
+	}
+
 	if (IS_CLIQZ) {
-		setCliqzModuleEnabled(hpn, false);
+		setCliqzModuleEnabled(hpnv2, false);
 		setCliqzModuleEnabled(humanweb, false);
 		setCliqzModuleEnabled(antitracking, false);
 		setCliqzModuleEnabled(adblocker, false);
@@ -1533,7 +1814,7 @@ function initializeGhosteryModules() {
 		// auto-fetch from CMP
 		cmp.fetchCMPData();
 
-		if (!IS_CLIQZ) {
+		if (!IS_EDGE && !IS_CLIQZ) {
 			// auto-fetch human web offer
 			abtest.fetch().then(() => {
 				setupABTest();
@@ -1591,16 +1872,23 @@ function init() {
 		initializePopup();
 		initializeEventListeners();
 		initializeVersioning();
-		account.migrate()
-			.then(() => {
-				if (conf.account !== null) {
-					return account.getUser()
-						.then(account.getUserSettings);
-				}
-			})
-			.catch(err => log(err));
 
 		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => {
+			account.migrate()
+				.then(() => {
+					if (conf.account !== null) {
+						return account.getUser()
+							.then(account.getUserSettings)
+							.then(() => {
+								if (conf.current_theme !== 'default') {
+									return account.getTheme(conf.current_theme);
+								}
+							});
+					} else if (globals.JUST_INSTALLED) {
+						setGhosteryDefaultBlocking();
+					}
+				})
+				.catch(err => log(err));
 			// persist Conf properties to storage only after init has completed
 			common.prefsSet(globals.initProps);
 			globals.INIT_COMPLETE = true;

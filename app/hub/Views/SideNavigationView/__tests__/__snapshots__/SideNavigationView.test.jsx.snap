@@ -1,0 +1,419 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/hub/Views/SideNavigationView component More Snapshot tests with react-test-renderer, but for edge cases edge case where items are empty 1`] = `
+<div
+  className="SideNavigation flex-container flex-dir-column"
+>
+  <a
+    aria-current="page"
+    className="SideNavigation__top active"
+    href="/"
+    onClick={[Function]}
+    style={Object {}}
+  />
+  <div
+    className="SideNavigation__menu flex-child-grow flex-container flex-dir-column"
+  />
+  <div
+    className="SideNavigation__bottom flex-container flex-dir-column"
+  />
+</div>
+`;
+
+exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-test-renderer side navigation view is rendered correctly 1`] = `
+<div
+  className="SideNavigation flex-container flex-dir-column"
+>
+  <a
+    aria-current="page"
+    className="SideNavigation__top active"
+    href="/"
+    onClick={[Function]}
+    style={Object {}}
+  />
+  <div
+    className="SideNavigation__menu flex-child-grow flex-container flex-dir-column"
+  >
+    <div
+      className="SideNavigation__item SideNavigation__menuItem flex-container align-middle"
+    >
+      <a
+        aria-current="page"
+        className="flex-container align-middle active"
+        href="/"
+        onClick={[Function]}
+        style={Object {}}
+      >
+        <div
+          className="SideNavigation__menuIcon home"
+        />
+        <div
+          className="SideNavigation__menuText"
+        >
+          Home
+        </div>
+      </a>
+    </div>
+    <div
+      className="SideNavigation__item SideNavigation__menuItem flex-container align-middle"
+    >
+      <a
+        aria-current={null}
+        className="flex-container align-middle"
+        href="/setup"
+        onClick={[Function]}
+      >
+        <div
+          className="SideNavigation__menuIcon setup"
+        />
+        <div
+          className="SideNavigation__menuText"
+        >
+          Setup
+        </div>
+      </a>
+    </div>
+    <div
+      className="SideNavigation__item SideNavigation__menuItem flex-container align-middle"
+    >
+      <a
+        aria-current={null}
+        className="flex-container align-middle"
+        href="/tutorial"
+        onClick={[Function]}
+      >
+        <div
+          className="SideNavigation__menuIcon tutorial"
+        />
+        <div
+          className="SideNavigation__menuText"
+        >
+          Tutorial
+        </div>
+      </a>
+    </div>
+    <div
+      className="SideNavigation__item SideNavigation__menuItem flex-container align-middle"
+    >
+      <a
+        aria-current={null}
+        className="flex-container align-middle"
+        href="/plus"
+        onClick={[Function]}
+      >
+        <div
+          className="SideNavigation__menuIcon plus"
+        />
+        <div
+          className="SideNavigation__menuText"
+        >
+          Plus
+        </div>
+      </a>
+    </div>
+    <div
+      className="SideNavigation__item SideNavigation__menuItem flex-container align-middle"
+    >
+      <a
+        aria-current={null}
+        className="flex-container align-middle"
+        href="/rewards"
+        onClick={[Function]}
+      >
+        <div
+          className="SideNavigation__menuIcon rewards"
+        />
+        <div
+          className="SideNavigation__menuText"
+        >
+          Rewards
+        </div>
+      </a>
+    </div>
+    <div
+      className="SideNavigation__item SideNavigation__menuItem flex-container align-middle"
+    >
+      <a
+        aria-current={null}
+        className="flex-container align-middle"
+        href="/products"
+        onClick={[Function]}
+      >
+        <div
+          className="SideNavigation__menuIcon products"
+        />
+        <div
+          className="SideNavigation__menuText"
+        >
+          Products
+        </div>
+      </a>
+    </div>
+  </div>
+  <div
+    className="SideNavigation__bottom flex-container flex-dir-column"
+  >
+    <div
+      className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle"
+    >
+      <a
+        aria-current={null}
+        className=""
+        href="/create-account"
+        onClick={[Function]}
+      >
+        <p
+          className="SideNavigation__bottomText"
+        >
+          Create Account
+        </p>
+      </a>
+    </div>
+    <div
+      className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle"
+    >
+      <a
+        aria-current={null}
+        className=""
+        href="/log-in"
+        onClick={[Function]}
+      >
+        <p
+          className="SideNavigation__bottomText"
+        >
+          Log In
+        </p>
+      </a>
+    </div>
+    <div
+      className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle"
+    >
+      <a
+        className=""
+        href="https://account.ghostery.com/"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <p
+          className="SideNavigation__bottomText"
+        >
+          test@example.com
+        </p>
+      </a>
+    </div>
+    <div
+      className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle"
+    >
+      <div
+        className="clickable"
+        onClick={[Function]}
+      >
+        <p
+          className="SideNavigation__bottomText"
+        >
+          Log Out
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-test-renderer side navigation view is rendered correctly when disabled 1`] = `
+<div
+  className="SideNavigation flex-container flex-dir-column disabled"
+>
+  <a
+    aria-current="page"
+    className="SideNavigation__top disabled active"
+    href="/"
+    onClick={[Function]}
+    style={Object {}}
+  />
+  <div
+    className="SideNavigation__menu flex-child-grow flex-container flex-dir-column"
+  >
+    <div
+      className="SideNavigation__item SideNavigation__menuItem flex-container align-middle"
+    >
+      <a
+        aria-current="page"
+        className="flex-container align-middle disabled active"
+        href="/"
+        onClick={[Function]}
+        style={Object {}}
+      >
+        <div
+          className="SideNavigation__menuIcon home"
+        />
+        <div
+          className="SideNavigation__menuText"
+        >
+          Home
+        </div>
+      </a>
+    </div>
+    <div
+      className="SideNavigation__item SideNavigation__menuItem flex-container align-middle"
+    >
+      <a
+        aria-current={null}
+        className="flex-container align-middle disabled"
+        href="/setup"
+        onClick={[Function]}
+      >
+        <div
+          className="SideNavigation__menuIcon setup"
+        />
+        <div
+          className="SideNavigation__menuText"
+        >
+          Setup
+        </div>
+      </a>
+    </div>
+    <div
+      className="SideNavigation__item SideNavigation__menuItem flex-container align-middle"
+    >
+      <a
+        aria-current={null}
+        className="flex-container align-middle disabled"
+        href="/tutorial"
+        onClick={[Function]}
+      >
+        <div
+          className="SideNavigation__menuIcon tutorial"
+        />
+        <div
+          className="SideNavigation__menuText"
+        >
+          Tutorial
+        </div>
+      </a>
+    </div>
+    <div
+      className="SideNavigation__item SideNavigation__menuItem flex-container align-middle"
+    >
+      <a
+        aria-current={null}
+        className="flex-container align-middle disabled"
+        href="/plus"
+        onClick={[Function]}
+      >
+        <div
+          className="SideNavigation__menuIcon plus"
+        />
+        <div
+          className="SideNavigation__menuText"
+        >
+          Plus
+        </div>
+      </a>
+    </div>
+    <div
+      className="SideNavigation__item SideNavigation__menuItem flex-container align-middle"
+    >
+      <a
+        aria-current={null}
+        className="flex-container align-middle disabled"
+        href="/rewards"
+        onClick={[Function]}
+      >
+        <div
+          className="SideNavigation__menuIcon rewards"
+        />
+        <div
+          className="SideNavigation__menuText"
+        >
+          Rewards
+        </div>
+      </a>
+    </div>
+    <div
+      className="SideNavigation__item SideNavigation__menuItem flex-container align-middle"
+    >
+      <a
+        aria-current={null}
+        className="flex-container align-middle disabled"
+        href="/products"
+        onClick={[Function]}
+      >
+        <div
+          className="SideNavigation__menuIcon products"
+        />
+        <div
+          className="SideNavigation__menuText"
+        >
+          Products
+        </div>
+      </a>
+    </div>
+  </div>
+  <div
+    className="SideNavigation__bottom flex-container flex-dir-column"
+  >
+    <div
+      className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle"
+    >
+      <a
+        aria-current={null}
+        className="disabled"
+        href="/create-account"
+        onClick={[Function]}
+      >
+        <p
+          className="SideNavigation__bottomText"
+        >
+          Create Account
+        </p>
+      </a>
+    </div>
+    <div
+      className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle"
+    >
+      <a
+        aria-current={null}
+        className="disabled"
+        href="/log-in"
+        onClick={[Function]}
+      >
+        <p
+          className="SideNavigation__bottomText"
+        >
+          Log In
+        </p>
+      </a>
+    </div>
+    <div
+      className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle"
+    >
+      <a
+        className="disabled"
+        href="https://account.ghostery.com/"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <p
+          className="SideNavigation__bottomText"
+        >
+          test@example.com
+        </p>
+      </a>
+    </div>
+    <div
+      className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle"
+    >
+      <div
+        className="clickable disabled"
+        onClick={[Function]}
+      >
+        <p
+          className="SideNavigation__bottomText"
+        >
+          Log Out
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;

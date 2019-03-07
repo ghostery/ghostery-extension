@@ -1,4 +1,3 @@
-
 /**
  * User Accounts
  *
@@ -85,6 +84,7 @@ class Account {
 			}
 			this._getUserIDFromCookie().then((userID) => {
 				this._setAccountInfo(userID);
+				this.getUserSubscriptionData();
 			});
 			return {};
 		});
@@ -146,7 +146,7 @@ class Account {
 	)
 
 	getUserSettings = () => (
-		this._getUserID()
+		this._getUserIDIfEmailIsValidated()
 			.then(userID => api.get('settings', userID))
 			.then((res) => {
 				const settings = build(normalize(res, { camelizeKeys: false }), 'settings', res.data.id);
@@ -158,8 +158,18 @@ class Account {
 			})
 	)
 
-	saveUserSettings = () => (
+	getUserSubscriptionData = () => (
 		this._getUserID()
+			.then(userID => api.get('stripe/customers', userID, 'cards,subscriptions'))
+			.then((res) => {
+				const customer = build(normalize(res), 'customers', res.data.id);
+				this._setSubscriptionData(customer);
+				return customer;
+			})
+	)
+
+	saveUserSettings = () => (
+		this._getUserIDIfEmailIsValidated()
 			.then(userID => (
 				api.update('settings', {
 					type: 'settings',
@@ -172,14 +182,38 @@ class Account {
 	)
 
 	getTheme = name => (
-		new Promise((resolve, reject) => {
-			api.get('themes', name)
-				.then((res) => {
-					const { css } = build(normalize(res), 'themes', res.data.id);
-					resolve(css);
-				})
-				.catch(err => reject(err));
-		})
+		this._getUserID()
+			.then(() => {
+				const now = Date.now();
+				const { themeData } = conf.account;
+				if (!themeData || !themeData[name]) { return true; }
+				const { timestamp } = themeData[name];
+				return now - timestamp > 86400000; // true if 24hrs have passed
+			})
+			.then((shouldGet) => {
+				if (!shouldGet) {
+					return conf.account.themeData[name].css;
+				}
+				return api.get('themes', `${name}.css`)
+					.then((res) => {
+						const { css } = build(normalize(res), 'themes', res.data.id);
+						this._setThemeData({ name, css });
+						return css;
+					});
+			})
+	)
+
+	updateEmailPreferences = set => (
+		this._getUserID().then(userID => (
+			api.update('email_preferences', {
+				type: 'email_preferences',
+				id: userID,
+				attributes: {
+					updates: set,
+					promotions: set,
+				}
+			})
+		))
 	)
 
 	sendValidateAccountEmail = () => (
@@ -263,6 +297,7 @@ class Account {
 				]).then(() => {
 					// login
 					this._setAccountInfo(UserId);
+					this.getUserSubscriptionData();
 					chrome.storage.local.remove(legacyLoginInfoKey, () => resolve());
 				}).catch((err) => {
 					resolve(err);
@@ -283,6 +318,7 @@ class Account {
 					}, (cookie) => {
 						if (cookie !== null) {
 							this._setAccountInfo(cookie.value);
+							this.getUserSubscriptionData();
 						}
 						resolve();
 					});
@@ -384,10 +420,39 @@ class Account {
 	_getUserID = () => (
 		new Promise((resolve, reject) => {
 			if (conf.account === null) {
-				return reject(new Error('_getUserID() Not logged in'));
+				return this._getUserIDFromCookie()
+					.then((userID) => {
+						this._setAccountInfo(userID);
+						resolve(conf.account.userID);
+					})
+					.catch(() => {
+						reject(new Error('_getUserID() Not logged in'));
+					});
 			}
 			return resolve(conf.account.userID);
 		})
+	)
+
+	_getUserIDIfEmailIsValidated = () => (
+		this._getUserID()
+			.then(userID => (
+				new Promise((resolve, reject) => {
+					const { user } = conf.account;
+					if (user === null) {
+						return this.getUser()
+							.then((u) => {
+								if (u.emailValidated !== true) {
+									return reject(new Error('_getUserIDIfEmailIsValidated() Email not validated'));
+								}
+								return resolve(userID);
+							});
+					}
+					if (user.emailValidated !== true) {
+						return reject(new Error('_getUserIDIfEmailIsValidated() Email not validated'));
+					}
+					return resolve(userID);
+				})
+			))
 	)
 
 	_setAccountInfo = (userID) => {
@@ -395,6 +460,8 @@ class Account {
 			userID,
 			user: null,
 			userSettings: null,
+			subscriptionData: null,
+			themeData: null,
 		};
 	}
 
@@ -408,8 +475,28 @@ class Account {
 		dispatcher.trigger('conf.save.account');
 	}
 
+	_setSubscriptionData = (subscriptionData) => {
+		// TODO: Change this so that we aren't writing over subscriptionData
+		if (!conf.paid_subscription && subscriptionData.hasOwnProperty('subscriptions')) {
+			conf.paid_subscription = true;
+			dispatcher.trigger('conf.save.paid_subscription');
+		}
+		conf.account.subscriptionData = subscriptionData.subscriptions || null;
+		dispatcher.trigger('conf.save.account');
+	}
+
+	_setThemeData = (data) => {
+		if (conf.account.themeData === null) {
+			conf.account.themeData = {};
+		}
+		const { name } = data;
+		conf.account.themeData[name] = Object.assign({ timestamp: Date.now() }, data);
+		dispatcher.trigger('conf.save.account');
+	}
+
 	_clearAccountInfo = () => {
 		conf.account = null;
+		conf.current_theme = 'default';
 	}
 
 	_getUserIDFromCookie = () => (

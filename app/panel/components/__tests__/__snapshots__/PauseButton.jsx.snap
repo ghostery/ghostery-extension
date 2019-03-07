@@ -12,8 +12,12 @@ exports[`app/panel/components/BuildingBlocks/PauseButton.jsx Snapshot tests with
       onClick={[Function]}
     >
       <span
-        className="pause-button-icon pause-button-text"
-      />
+        className="flex-container align-center-middle full-height"
+      >
+        <span
+          className="pause-button-icon pause-button-text"
+        />
+      </span>
     </div>
     <div
       className="button button-right button-caret smaller"
@@ -49,9 +53,13 @@ exports[`app/panel/components/BuildingBlocks/PauseButton.jsx Snapshot tests with
       onClick={[Function]}
     >
       <span
-        className="pause-button-text"
+        className="flex-container align-center-middle full-height"
       >
-        summary_resume_ghostery
+        <span
+          className="pause-button-text"
+        >
+          summary_resume_ghostery
+        </span>
       </span>
     </div>
     <div
@@ -88,9 +96,13 @@ exports[`app/panel/components/BuildingBlocks/PauseButton.jsx Snapshot tests with
       onClick={[Function]}
     >
       <span
-        className="pause-button-text"
+        className="flex-container align-center-middle full-height"
       >
-        summary_pause_ghostery
+        <span
+          className="pause-button-text"
+        >
+          summary_pause_ghostery
+        </span>
       </span>
     </div>
     <div

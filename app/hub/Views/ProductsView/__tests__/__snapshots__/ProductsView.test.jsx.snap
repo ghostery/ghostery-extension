@@ -1,0 +1,128 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/hub/Views/ProductsView component Snapshot tests with react-test-renderer products view is rendered correctly 1`] = `
+<div
+  className="ProductsView"
+>
+  <div
+    className="ProductsView--rowPaddingTop row small-up-1 large-up-2 align-center-middle"
+  >
+    <div
+      className="columns text-center"
+    >
+      <img
+        alt="hub_products_main_promo_title"
+        className="ProductsView__mobileScreenshots"
+        src="/app/images/hub/products/product-mobile-browser.png"
+      />
+    </div>
+    <div
+      className="ProductsView__header columns"
+    >
+      <h1
+        className="ProductsView__headerTitle"
+      >
+        hub_products_header_title
+      </h1>
+      <div
+        className="ProductsView__headerDescription"
+      >
+        hub_products_header_description
+      </div>
+      <div
+        className="ProductsView__mainPromoTitle"
+      >
+        hub_products_main_promo_title
+      </div>
+      <div
+        className="ProductsView__mainPromoDescription"
+      >
+        hub_products_main_promo_description
+      </div>
+      <div
+        className="ProductsView__storeImageContainer"
+      >
+        <a
+          href="https://itunes.apple.com/us/app/ghostery-privacy-browser/id472789016?mt=8"
+          onClick={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <img
+            className="ProductsView__imageAppStoreIos"
+            src="/app/images/hub/products/app_store_badge_us.svg"
+          />
+        </a>
+        <a
+          href="https://play.google.com/store/apps/details?id=com.ghostery.android.ghostery"
+          onClick={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <img
+            className="ProductsView__imagePlayStore"
+            src="/app/images/hub/products/google-play-badge.png"
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+  <div
+    className="ProductsView--rowPaddingTop row small-up-1 large-up-2 align-center"
+  >
+    <div
+      className="ProductsView__secondaryPromo columns"
+    >
+      <img
+        alt="hub_products_second_promo_title"
+        className="ProductsView__secondaryPromoImage"
+        src="/app/images/hub/products/product-new-tab.png"
+      />
+      <div
+        className="ProductsView__secondaryPromoTitle"
+      >
+        hub_products_second_promo_title
+      </div>
+      <div
+        className="ProductsView__secondaryPromoDescription"
+      >
+        hub_products_second_promo_description
+      </div>
+    </div>
+    <div
+      className="ProductsView__secondaryPromo columns"
+    >
+      <img
+        alt="hub_products_third_promo_title"
+        className="ProductsView__secondaryPromoImage"
+        src="/app/images/hub/products/product-ghostery-lite.png"
+      />
+      <div
+        className="ProductsView__secondaryPromoTitle"
+      >
+        hub_products_third_promo_title
+      </div>
+      <div
+        className="ProductsView__secondaryPromoDescription"
+      >
+        hub_products_third_promo_description
+      </div>
+      <div
+        className="ProductsView__storeImageContainer"
+      >
+        <a
+          href="https://itunes.apple.com/us/app/ghostery-lite/id1436953057"
+          onClick={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <img
+            className="ProductsView__imageAppStoreMac"
+            src="/app/images/hub/products/app_store_mac_badge_us.svg"
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;

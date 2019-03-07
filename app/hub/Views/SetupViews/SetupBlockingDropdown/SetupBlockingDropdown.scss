@@ -1,0 +1,257 @@
+/**
+ * Setup Blocking Dropdown Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+// Foundation Overrides
+.SetupBlockingDropdown__buttonContainer .button {
+	min-width: 179px;
+	margin-bottom: 0;
+}
+
+// Setup Blocking Dropdown
+.SetupBlockingDropdown {
+	position: relative;
+	height: 666px;
+	max-width: 750px;
+	color: #4a4a4a;
+	background-color: #ffffff;
+	overflow: hidden;
+	z-index: 10;
+	width: 100%;
+	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+	transition: top .5s linear;
+}
+.SetupBlockingDropdown__buttonContainer {
+	padding: 10px;
+	background-color: #f7f8fb;
+}
+.SetupBlockingDropdown .callout-container {
+	position: relative;
+	top: 22px;
+}
+
+// Overrides for './partials/_blocking'
+.SetupBlockingDropdown #settings-global-blocking {
+	padding: 0 10px;
+	background-color: #f7f8fb;
+	.blocking-header {
+		height: 116px;
+	}
+	.blocking-header .gear-icon {
+		display: none;
+	}
+	.blocking-header .footer {
+		height: 29px;
+		margin-top: 2px;
+		.columns:last-of-type {
+			padding-right: 0;
+		}
+	}
+	.blocking-header .expand-all-text {
+		height: 25px;
+		line-height: 25px;
+	}
+	.blocking-header .filter-menu {
+		top: 111px;
+		right: 9px;
+	}
+	.scroll-content {
+		overflow-y: auto;
+	}
+	.blocking-trackers {
+		height: 497px;
+		.cat-image {
+			margin-top: 12px;
+			margin-left: 18px;
+		}
+	}
+	.global-blocking-trk {
+		border-top: 1px solid #E8E8E8;
+		overflow: hidden;
+	}
+	.global-blocking-trk .trk-header {
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
+	.global-blocking-trk .trk-title {
+		color: #4a4a4a;
+		cursor: pointer;
+		font-size: 14px;
+		font-weight: 400;
+		padding-left: 56px;
+		text-overflow: ellipsis;
+		user-select: none;
+		white-space: nowrap;
+		-webkit-font-smoothing: antialiased;
+	}
+	.global-blocking-trk img {
+		width: 18px;
+	}
+	.global-blocking-trk .global-trk-desc {
+		color: #333333;
+		display: block;
+		font-size: 11px;
+		line-height: 15px;
+		padding-bottom: 10px;
+	}
+}
+
+// Variables needed for './partials/_blocking' import
+$white:								#FFFFFF;
+$whisper:							#F7F8FB; //body-background
+$alabaster:						#F7F7F7; //accordions
+$red:									#E74055;
+$light-gray:					#A6A6A6; //top_nav, button_disabled
+$silver-chalice:			#A3A3A3; //form_field_border
+$hoki:								#5F7C86;
+$tundora:							#4A4A4A; //body-font-color
+$medium-gray:					#333333; //form_label
+$ghosty-blue:					#00AEF0;
+$body-font-family:		'Open Sans', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+
+// Placeholder Selectors needed for './partials/_blocking' import
+%pointer {
+	cursor: pointer;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	&.disabled {
+		cursor: not-allowed;
+	}
+}
+%nowrap {
+	white-space: nowrap;
+	overflow-x: hidden;
+	text-overflow: ellipsis;
+}
+%g-tooltip {
+	display: inline;
+	position: relative;
+
+	&:hover:before {
+		@extend %g-tooltip-body;
+		content: attr(data-g-tooltip);
+	}
+	&:hover:after {
+		@extend %g-tip-body;
+	}
+}
+%g-tip-body {
+	@extend %g-tooltip-animation;
+	border-style: solid;
+	border-color: #333 transparent;
+	content: "";
+	position: absolute;
+	z-index: 11;
+}
+%g-tooltip-body {
+	@extend %g-tooltip-animation;
+	pointer-events:none;
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+	font-size: 12px;
+	font-weight: 400;
+	-webkit-font-smoothing: antialiased;
+	text-align: center;
+	white-space: nowrap;
+	background: #333;
+	background: rgba(0,0,0,.8);
+	border-radius: 1px;
+	color: #fff;
+	padding: 3px 5px;
+	position: absolute;
+	z-index: 10;
+	font-size: 12px;
+	-webkit-box-shadow: 0px 2px 2px -1px rgba(#020202, 0.75);
+	-moz-box-shadow: 0px 2px 2px -1px rgba(#020202, 0.75);
+	box-shadow: 0px 2px 2px -1px rgba(#020202, 0.75);
+}
+%g-tooltip-up {
+	@extend %g-tooltip;
+	&:hover:before {
+		@extend %g-tooltip:hover:before;
+		bottom: 19px;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	&:hover:after {
+		border-width: 6px 6px 0 6px;
+		left: -1px;
+		bottom: 13px;
+	}
+}
+%g-tooltip-up-left{
+	@extend %g-tooltip;
+	&:hover:before {
+		right: -15px;
+		bottom: 26px;
+	}
+	&:hover:after {
+		border-width: 6px 6px 0 6px;
+		left: 20%;
+		bottom: 20px;
+	}
+}
+%g-tooltip-up-right {
+	@extend %g-tooltip;
+	&:hover:before {
+		@extend %g-tooltip:hover:before;
+		left: -15px;
+		bottom: 26px;
+	}
+	&:hover:after {
+		@extend %g-tooltip:hover:after;
+		border-width: 6px 6px 0 6px;
+		left: 20%;
+		bottom: 20px;
+	}
+}
+%g-tooltip-down {
+	@extend %g-tooltip;
+	&:hover:before {
+		@extend %g-tooltip:hover:before;
+		top: 21px;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	&:hover:after {
+		@extend %g-tooltip:hover:after;
+		border-width: 0 6px 6px 6px;
+		bottom: -3px;
+		right: -1px;
+	}
+}
+%g-tooltip-down-left {
+	@extend %g-tooltip;
+	&:hover:before {
+		@extend %g-tooltip:hover:before;
+		right: -100%;
+		top: 20px;
+	}
+	&:hover:after {
+		@extend %g-tooltip:hover:after;
+		border-width: 0 6px 6px 6px;
+		left: 20%;
+		top: 14px;
+	}
+}
+%g-tooltip-animation {
+	animation-name: g-tooltip-animation;
+	animation-duration: 0.2s;
+}
+
+// Imports for Global Blocking
+@import './partials/_blocking';
+@import './partials/_callout';

@@ -129,7 +129,28 @@ export function validateEmail(email) {
  * @return {boolean}				true if valid, false otherwise
  */
 export function validateConfirmEmail(email, confirmEmail) {
-	return validateEmail(confirmEmail) && email === confirmEmail || false;
+	if (!email || !confirmEmail) {
+		return false;
+	}
+	const lEmail = email.toLowerCase();
+	const lConfirmEmail = confirmEmail.toLowerCase();
+	return validateEmail(confirmEmail) && (lEmail === lConfirmEmail) || false;
+}
+
+/**
+ * Check for confirm email equality to email
+ * @memberOf PanelUtils
+ * @param  {string} email 			email
+ * @param  {string} confirmEmail 	confirm email to validate
+ * @return {boolean}				true if equal, false otherwise
+ */
+export function validateEmailsMatch(email, confirmEmail) {
+	if (!email || !confirmEmail) {
+		return false;
+	}
+	const lEmail = email.toLowerCase();
+	const lConfirmEmail = confirmEmail.toLowerCase();
+	return lEmail === lConfirmEmail;
 }
 
 /**
@@ -181,4 +202,41 @@ export function doXHR(method, url, query) {
 		xhr.overrideMimeType('application/json');
 		xhr.send(query);
 	});
+}
+
+/**
+ * Sets the theme
+ * @memberOf PanelUtils
+ * @param  {object} doc document object
+ * @param  {string} themeName unique name of the theme
+ * @param {string} theme css of the theme
+ */
+export function setTheme(doc, name, account) {
+	// if themeName is 'default' all we have to do is to remove style element
+	const styleTitlePrefix = 'Ghostery Theme';
+	// First remove all other style elements which may be there
+	const styleList = doc.head.getElementsByTagName('style');
+	// Other kinds of loops are not supported equally across browsers
+	for (let i = 0; i < styleList.length; i++) {
+		const style = styleList[i];
+		if (style.title.startsWith(styleTitlePrefix)) {
+			doc.head.removeChild(style);
+		}
+	}
+
+	if (name !== 'default') {
+		if (!account) { return; }
+		const { themeData } = account;
+		if (!themeData) { return; }
+		const { css } = themeData[name];
+
+		// Create element for the theme being set, if it is not there
+		const themeStyle = doc.createElement('style');
+		themeStyle.id = name;
+		themeStyle.title = `${styleTitlePrefix} ${name}`;
+
+		// Set content of style element to the theme text.
+		themeStyle.textContent = css;
+		document.head.appendChild(themeStyle);
+	}
 }

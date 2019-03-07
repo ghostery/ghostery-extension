@@ -26,26 +26,32 @@ const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
  * @param  {Object} 	message 	message data
  * @return {Promise}
  */
-export function sendMessageInPromise(name, message) {
+let MESSAGE_ID = 0;
+const LISTENER_ADDED = false;
+export function sendMessageInPromise(name, message, origin = '') {
 	// On Edge 39.14965.1001.0 callback is not called when multiple
 	// Edge instances running. So instead we shoot message back
 	// from background. See onMessageHandler, HANDLE UNIVERSAL EVENTS HERE
 	// in src/background.js.To be removed, once Edge fixed.
 	if (IS_EDGE) {
 		return new Promise((resolve) => {
-			const messageId = (`EDGE_${window.performance.now()}`).replace('.', '_');
-			onMessage.addListener((request, sender, sendResponse) => {
-				if (messageId === request.name) {
-					resolve(request.message);
-				}
-				if (sendResponse) {
-					sendResponse();
-				}
-			});
+			const messageId = MESSAGE_ID.toString();
+			MESSAGE_ID++;
+			if (!LISTENER_ADDED) {
+				onMessage.addListener((request, sender, sendResponse) => {
+					if (messageId === request.name) {
+						resolve(request.message);
+					}
+					if (sendResponse) {
+						sendResponse();
+					}
+				});
+			}
 			chrome.runtime.sendMessage({
 				name,
 				message,
 				messageId,
+				origin,
 			}, () => {});
 		});
 	}
@@ -53,6 +59,7 @@ export function sendMessageInPromise(name, message) {
 		chrome.runtime.sendMessage({
 			name,
 			message,
+			origin,
 		}, (response) => {
 			if (chrome.runtime.lastError) {
 				log(chrome.runtime.lastError, name, message);
@@ -109,4 +116,26 @@ export function sendRewardMessage(name, message, callback = function () {}) {
 		message,
 		origin: 'rewardsPanel',
 	}, callback);
+}
+
+/**
+ * Send a message to open a Subscription or Subscribe tab.
+ * Which one is determined in background based on the current user state.
+ * This should be used for messages that don't require a callback.
+ * @memberOf PanelUtils
+ */
+export function openSubscriptionPage() {
+	sendMessage('account.openSubscriptionPage');
+	window.close();
+}
+
+/**
+ * Send a message to open a Support tab
+ * based on the current user state.
+ * This should be used for messages that don't require a callback.
+ * @memberOf PanelUtils
+ */
+export function openSupportPage() {
+	sendMessage('account.openSupportPage');
+	window.close();
 }

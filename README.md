@@ -30,7 +30,7 @@ $ yarn install --frozen-lockfile
 ```sh
 # Upgrade packages according to package.json version range
 # https://yarnpkg.com/en/docs/cli/upgrade/
-yarn upgrade
+$ yarn upgrade
 ```
 
 ## Building
@@ -97,7 +97,7 @@ allow the computer to push (Submit) and pull (Download) files to/from Transifex.
 
 ```sh
 # Submit translation files to Transifex
-$ tx push -s -b develop
+$ tx push -s
 ```
 
 ```sh

@@ -1,0 +1,81 @@
+/**
+ * Ghostery Hub Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+html, body, #root {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
+
+.App {
+	position: fixed;
+	z-index: 0;
+}
+.App__mainContent {
+	margin-left: 230px;
+	overflow-y: auto;
+	// Very small windows/phone screens in Firefox slightly overflows on the x-axis
+	overflow-x: hidden;
+}
+@media only screen and (max-width: 740px)  {
+	.App__mainContent {
+		margin-left: 54px;
+	}
+}
+
+// Foundation Overrides
+.button {
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 1.3;
+	text-transform: uppercase;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12);
+}
+
+// Helper Classes
+.clickable { cursor: pointer; }
+.full-height { height: 100%; }
+.full-width { width: 100%; }
+.display-inline { display: inline-block; }
+.flex-shrink-none { flex-shrink: 0; }
+
+@import 'settings_hub'; // Import Foundation
+@import './partials/_hub_mixins';
+@import './partials/_hub_svgs';
+@import './partials/_shared_components_svgs';
+
+// Imports from ../hub directory
+@import '../hub/Views/SideNavigationView/SideNavigationView.scss';
+@import '../hub/Views/HomeView/HomeView.scss';
+@import '../hub/Views/SetupView/SetupView.scss';
+@import '../hub/Views/SetupViews/SetupHeader/SetupHeader.scss';
+@import '../hub/Views/SetupViews/SetupBlockingView/SetupBlockingView.scss';
+@import '../hub/Views/SetupViews/SetupBlockingDropdown/SetupBlockingDropdown.scss';
+@import '../hub/Views/SetupViews/SetupAntiSuiteView/SetupAntiSuiteView.scss';
+@import '../hub/Views/SetupViews/SetupHumanWebView/SetupHumanWebView.scss';
+@import '../hub/Views/SetupViews/SetupDoneView/SetupDoneView.scss';
+@import '../hub/Views/TutorialView/TutorialView.scss';
+@import '../hub/Views/PlusView/PlusView.scss';
+@import '../hub/Views/RewardsView/RewardsView.scss';
+@import '../hub/Views/ProductsView/ProductsView.scss';
+@import '../hub/Views/SignedInView/SignedInView.scss';
+@import '../hub/Views/LogInView/LogInView.scss';
+@import '../hub/Views/CreateAccountView/CreateAccountView.scss';
+
+// Imports from ../shared-components directory
+@import '../shared-components/ExitButton/ExitButton.scss';
+@import '../shared-components/Modal/Modal.scss';
+@import '../shared-components/SteppedNavigation/SteppedNavigation.scss';
+@import '../shared-components/ToastMessage/ToastMessage.scss';
+@import '../shared-components/ToggleCheckbox/ToggleCheckbox.scss';
+@import '../shared-components/ToggleSwitch/ToggleSwitch.scss';

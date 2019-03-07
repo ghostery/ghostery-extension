@@ -25,6 +25,7 @@ class RewardDetail extends React.Component {
 		super(props);
 		this.state = {
 			copyText: t('rewards_copy_code'),
+			code: props.isCodeHidden ? '*****' : props.code,
 		};
 
 		// Event Bindings
@@ -43,10 +44,6 @@ class RewardDetail extends React.Component {
 	 * Handles clicking the copy button
 	 */
 	handleCopyClick() {
-		// Copy the reward code
-		this.copyNode.querySelector('input').select();
-		document.execCommand('copy');
-
 		// Show a toast notification
 		this.props.actions.showNotification({
 			text: t('rewards_code_copied_toast_notification'),
@@ -54,7 +51,14 @@ class RewardDetail extends React.Component {
 		});
 
 		// Update and reset Copy Code text
-		this.setState({ copyText: t('rewards_code_copied') });
+		this.setState({
+			code: this.props.code,
+			copyText: t('rewards_code_copied'),
+		}, () => {
+			// Copy the reward code
+			this.copyNode.querySelector('input').select();
+			document.execCommand('copy');
+		});
 		setTimeout(() => {
 			this.setState({ copyText: t('rewards_copy_code') });
 		}, 3000);
@@ -84,7 +88,11 @@ class RewardDetail extends React.Component {
 	renderExpiresText() {
 		const { expires } = this.props;
 		const delta = computeTimeDelta(new Date(expires), new Date());
-		return t('rewards_expires_in', [delta.count, t(`rewards_expires_in_${delta.type}`)]);
+		const { count, type } = delta;
+		if (count === 1) {
+			return t(`rewards_expires_in_${type.slice(0, -1)}`);
+		}
+		return t(`rewards_expires_in_${type}`, [count]);
 	}
 
 	/**
@@ -125,7 +133,7 @@ class RewardDetail extends React.Component {
 				{code && (
 					<div className="RewardDetail__code_container flex-container align-middle align-justify">
 						<span className="RewardDetail__code" ref={(node) => { this.copyNode = node; }}>
-							<span>{ code }</span>
+							<span>{this.state.code}</span>
 							<input readOnly type="text" value={code} />
 						</span>
 						<span className="RewardDetail__copy clickable" onClick={this.handleCopyClick}>
@@ -142,7 +150,7 @@ class RewardDetail extends React.Component {
 							<span className="RewardDetail__terms">
 								{ t('rewards_terms_conditions') }
 							</span>
-							<Tooltip header={conditions} position="top" delay="0" theme="dark" />
+							<Tooltip header={conditions} position="top-left-wide" delay="0" theme="dark" />
 						</div>
 					)}
 				</div>

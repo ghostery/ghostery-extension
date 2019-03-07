@@ -1,0 +1,126 @@
+/**
+ * Rewards View Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2018 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+// Rewards View
+.RewardsView {
+	background: linear-gradient(#daf4ff, #ffffff 30%) no-repeat;
+}
+.RewardsView--paddingTop {
+	padding-top: 80px;
+}
+.RewardsView__screenshot {
+	max-width: 430px;
+	padding-right: 50px;
+}
+.RewardsView__headerText {
+	padding-left: 50px;
+	line-height: 38px;
+	max-width: 350px;
+}
+.RewardsView__headerTitle {
+	font-size: 24px;
+	font-weight: 700;
+}
+.RewardsView__headerDescription {
+	font-size: 14px;
+}
+.RewardsView__buttonContainer {
+	padding-top: 20px;
+}
+.RewardsView__button {
+	font-size: 14px;
+}
+.RewardsView__promoFeature {
+	padding: 40px 50px 100px 50px;
+	font-size: 14px;
+	max-width: 250px;
+}
+.RewardsView__promoTitle {
+	line-height: 38px;
+	font-weight: 700;
+	text-align: center;
+}
+.RewardsView__promoDescription {
+	line-height: 30px;
+	text-align: center;
+}
+.RewardsView__promoIcon {
+	height: 85px;
+	width: 100%;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.RewardsView__lightBulbIcon {
+	background-image: buildIconLightBulb(#4a4a4a, #daf4ff);
+}
+.RewardsView__eyeIcon {
+	background-image: buildIconEye(#4a4a4a, #daf4ff);
+}
+.RewardsView__starIcon {
+	background-image: buildIconStar(#4a4a4a, #daf4ff);
+}
+.RewardsView__backgroundStars {
+	padding-bottom: 60px;
+	background:
+		url('/app/images/hub/rewards/background-stars-left.svg') no-repeat left 70px bottom 20px,
+		url('/app/images/hub/rewards/background-stars-right.svg') no-repeat right 70px bottom 50px;
+}
+.RewardsView__closerText {
+	font-size: 14px;
+}
+@media only screen and (max-width: 960px) {
+	.RewardsView--paddingTop {
+		padding-top: 0;
+	}
+	.RewardsView__screenshot {
+		padding: 40px 90px 0 90px;
+	}
+	.RewardsView__headerText {
+		padding: 50px;
+		align-items: center;
+		text-align: center;
+	}
+	.RewardsView__promoFeature {
+		padding: 50px 100px;
+	}
+	.RewardsView__closerText {
+		padding: 100px 140px 0 140px;
+	}
+	.RewardsView__backgroundStars {
+		background:
+			url('/app/images/hub/rewards/background-stars-left.svg') no-repeat left 30px bottom 20px,
+			url('/app/images/hub/rewards/background-stars-right.svg') no-repeat right 30px bottom 50px;
+	}
+}
+@media only screen and (max-width: 600px) {
+	.RewardsView__screenshot {
+		padding: 40px 50px 0 50px;
+	}
+	.RewardsView__promoFeature {
+		padding: 50px 50px;
+	}
+	.RewardsView__closerText {
+		padding: 100px 100px 0 100px;
+	}
+	.RewardsView__backgroundStars {
+		background:
+			url('/app/images/hub/rewards/background-stars-left.svg') no-repeat left 20px bottom 20px,
+			url('/app/images/hub/rewards/background-stars-right.svg') no-repeat right 20px bottom 50px;
+	}
+}
+@media only screen and (max-width: 400px) {
+	.RewardsView__closerText {
+		padding: 100px 60px 50px 60px;
+	}
+}

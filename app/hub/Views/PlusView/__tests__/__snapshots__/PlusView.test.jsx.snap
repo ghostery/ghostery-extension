@@ -1,0 +1,1064 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/hub/Views/PlusView component Snapshot tests with react-test-renderer plus view is rendered correctly when the user is a plus 1`] = `
+<div
+  className="PlusView"
+>
+  <div
+    className="row align-center"
+  >
+    <div
+      className="columns"
+    >
+      <div
+        className="PlusView__headingImage"
+      />
+      <div
+        className="PlusView__headingTitle text-center"
+      >
+        hub_supporter_header_title
+      </div>
+      <div
+        className="PlusView__headingDescription text-center"
+      >
+        hub_supporter_header_description
+      </div>
+      <div
+        className="PlusView__costContainer flex-container align-middle align-justify"
+      >
+        <div
+          className="PlusView__button button disabled"
+        >
+          hub_supporter_button_text_alt
+        </div>
+        <div
+          className="PlusView__headingCost flex-container align-middle"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "hub_supporter_price",
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="PlusView--addPaddingTop row small-up-1 large-up-3 align-center"
+  >
+    <div
+      className="PlusView__perk columns text-center"
+    >
+      <div
+        className="PlusView__perkIcon themes"
+      />
+      <div
+        className="PlusView__perkTitle"
+      >
+        hub_supporter_perk_themes_title
+      </div>
+      <div
+        className="PlusView__perkDescription"
+      >
+        hub_supporter_perk_themes_description
+      </div>
+    </div>
+    <div
+      className="PlusView__perk columns text-center"
+    >
+      <div
+        className="PlusView__perkIcon stats"
+      />
+      <div
+        className="PlusView__perkTitle"
+      >
+        hub_supporter_perk_stats_title
+      </div>
+      <div
+        className="PlusView__perkDescription"
+      >
+        hub_supporter_perk_stats_description
+      </div>
+    </div>
+    <div
+      className="PlusView__perk columns text-center"
+    >
+      <div
+        className="PlusView__perkIcon support"
+      />
+      <div
+        className="PlusView__perkTitle"
+      >
+        hub_supporter_perk_more_title
+      </div>
+      <div
+        className="PlusView__perkDescription"
+      >
+        hub_supporter_perk_more_description
+      </div>
+    </div>
+  </div>
+  <div
+    className="PlusView__manifestoContainer"
+  >
+    <div
+      className="PlusView__manifestoBackground row align-center"
+    >
+      <div
+        className="PlusView__manifestoText columns small-12 medium-10 large-8 text-center"
+      >
+        hub_supporter_manifesto
+      </div>
+    </div>
+  </div>
+  <div
+    className="PlusView--addPaddingTop PlusView--addPaddingBottom"
+  >
+    <div
+      className="row align-center"
+    >
+      <div
+        className="PlusView__feature small-12 medium-6 large-5 large-offset-1 columns"
+      >
+        <div
+          className="PlusView__headingTitle PlusView--addPaddingTop"
+        >
+          hub_supporter_feature_theme_title
+        </div>
+        <div
+          className="PlusView__headingDescription"
+        >
+          hub_supporter_feature_theme_description
+        </div>
+        <div
+          className="PlusView__button button show-for-large disabled"
+        >
+          hub_supporter_button_text_alt
+        </div>
+      </div>
+      <div
+        className="PlusView__feature small-12 medium-6 columns"
+      >
+        <img
+          alt="hub_supporter_feature_theme_title"
+          className="PlusView__featureImage theme"
+          src="/app/images/hub/plus/feature-theme.png"
+        />
+      </div>
+    </div>
+    <div
+      className="PlusView--addPaddingTop hide-for-large"
+    >
+      <div
+        className="row align-center-middle"
+      >
+        <div
+          className="PlusView__bar flex-child-grow"
+        />
+        <div
+          className="PlusView__button button PlusView--addSideMargin disabled"
+        >
+          hub_supporter_button_text_alt
+        </div>
+        <div
+          className="PlusView__bar flex-child-grow"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="PlusView--addPaddingTop PlusView--addPaddingBottom PlusView--rowDarken"
+  >
+    <div
+      className="row align-center"
+    >
+      <div
+        className="PlusView__feature small-12 medium-6 large-5 columns show-for-large"
+      >
+        <img
+          alt="hub_supporter_feature_stats_title"
+          className="PlusView__featureImage stats"
+          src="/app/images/hub/plus/feature-stats.svg"
+        />
+      </div>
+      <div
+        className="PlusView__feature small-12 medium-6 large-5 columns"
+      >
+        <div
+          className="PlusView__headingTitle"
+        >
+          hub_supporter_feature_stats_title
+        </div>
+        <div
+          className="PlusView__headingDescription"
+        >
+          hub_supporter_feature_stats_description
+        </div>
+        <div
+          className="PlusView__button button show-for-large disabled"
+        >
+          hub_supporter_button_text_alt
+        </div>
+      </div>
+      <div
+        className="PlusView__feature columns hide-for-large"
+      >
+        <img
+          alt="hub_supporter_feature_stats_title"
+          className="PlusView__featureImage stats"
+          src="/app/images/hub/plus/feature-stats.svg"
+        />
+      </div>
+    </div>
+    <div
+      className="PlusView--addPaddingTop hide-for-large"
+    >
+      <div
+        className="row align-center-middle"
+      >
+        <div
+          className="PlusView__bar flex-child-grow"
+        />
+        <div
+          className="PlusView__button button PlusView--addSideMargin disabled"
+        >
+          hub_supporter_button_text_alt
+        </div>
+        <div
+          className="PlusView__bar flex-child-grow"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="PlusView--addPaddingTop PlusView--addPaddingBottom"
+  >
+    <div
+      className="row align-center"
+    >
+      <div
+        className="PlusView__feature small-12 medium-6 large-5 large-offset-1 columns"
+      >
+        <div
+          className="PlusView__headingTitle"
+        >
+          hub_supporter_feature_support_title
+        </div>
+        <div
+          className="PlusView__headingDescription"
+        >
+          hub_supporter_feature_support_description
+        </div>
+        <div
+          className="PlusView__button button show-for-large disabled"
+        >
+          hub_supporter_button_text_alt
+        </div>
+      </div>
+      <div
+        className="PlusView__feature columns small-12 medium-6"
+      >
+        <img
+          alt="hub_supporter_feature_support_title"
+          className="PlusView__featureImage support"
+          src="/app/images/hub/plus/feature-support.svg"
+        />
+      </div>
+    </div>
+    <div
+      className="PlusView--addPaddingTop hide-for-large"
+    >
+      <div
+        className="row align-center-middle"
+      >
+        <div
+          className="PlusView__bar flex-child-grow"
+        />
+        <div
+          className="PlusView__button button PlusView--addSideMargin disabled"
+        >
+          hub_supporter_button_text_alt
+        </div>
+        <div
+          className="PlusView__bar flex-child-grow"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="PlusView--addPaddingTop PlusView--addPaddingBottom PlusView--rowDarken"
+  >
+    <div
+      className="row align-center"
+    >
+      <div
+        className="PlusView__feature columns medium-8 large-5 text-center"
+      >
+        <div
+          className="PlusView__headingTitle"
+        >
+          hub_supporter_feature_more_title
+        </div>
+        <div
+          className="PlusView__headingDescription"
+        >
+          hub_supporter_feature_more_description
+        </div>
+        <img
+          alt="hub_supporter_feature_more_title"
+          className="PlusView__featureImage more"
+          src="/app/images/hub/plus/feature-more.svg"
+        />
+      </div>
+    </div>
+    <div
+      className="PlusView--addPaddingTop"
+    >
+      <div
+        className="row align-center-middle"
+      >
+        <div
+          className="PlusView__bar flex-child-grow"
+        />
+        <div
+          className="PlusView__button button PlusView--addSideMargin disabled"
+        >
+          hub_supporter_button_text_alt
+        </div>
+        <div
+          className="PlusView__bar flex-child-grow"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/hub/Views/PlusView component Snapshot tests with react-test-renderer plus view is rendered correctly when the user is not a plus 1`] = `
+<div
+  className="PlusView"
+>
+  <div
+    className="row align-center"
+  >
+    <div
+      className="columns"
+    >
+      <div
+        className="PlusView__headingImage"
+      />
+      <div
+        className="PlusView__headingTitle text-center"
+      >
+        hub_supporter_header_title
+      </div>
+      <div
+        className="PlusView__headingDescription text-center"
+      >
+        hub_supporter_header_description
+      </div>
+      <div
+        className="PlusView__costContainer flex-container align-middle align-justify"
+      >
+        <a
+          className="PlusView__button button"
+          href="https://signon.ghosterystage.com/subscribe"
+          onClick={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          hub_supporter_button_text
+        </a>
+        <div
+          className="PlusView__headingCost flex-container align-middle"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "hub_supporter_price",
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="PlusView--addPaddingTop row small-up-1 large-up-3 align-center"
+  >
+    <div
+      className="PlusView__perk columns text-center"
+    >
+      <div
+        className="PlusView__perkIcon themes"
+      />
+      <div
+        className="PlusView__perkTitle"
+      >
+        hub_supporter_perk_themes_title
+      </div>
+      <div
+        className="PlusView__perkDescription"
+      >
+        hub_supporter_perk_themes_description
+      </div>
+    </div>
+    <div
+      className="PlusView__perk columns text-center"
+    >
+      <div
+        className="PlusView__perkIcon stats"
+      />
+      <div
+        className="PlusView__perkTitle"
+      >
+        hub_supporter_perk_stats_title
+      </div>
+      <div
+        className="PlusView__perkDescription"
+      >
+        hub_supporter_perk_stats_description
+      </div>
+    </div>
+    <div
+      className="PlusView__perk columns text-center"
+    >
+      <div
+        className="PlusView__perkIcon support"
+      />
+      <div
+        className="PlusView__perkTitle"
+      >
+        hub_supporter_perk_more_title
+      </div>
+      <div
+        className="PlusView__perkDescription"
+      >
+        hub_supporter_perk_more_description
+      </div>
+    </div>
+  </div>
+  <div
+    className="PlusView__manifestoContainer"
+  >
+    <div
+      className="PlusView__manifestoBackground row align-center"
+    >
+      <div
+        className="PlusView__manifestoText columns small-12 medium-10 large-8 text-center"
+      >
+        hub_supporter_manifesto
+      </div>
+    </div>
+  </div>
+  <div
+    className="PlusView--addPaddingTop PlusView--addPaddingBottom"
+  >
+    <div
+      className="row align-center"
+    >
+      <div
+        className="PlusView__feature small-12 medium-6 large-5 large-offset-1 columns"
+      >
+        <div
+          className="PlusView__headingTitle PlusView--addPaddingTop"
+        >
+          hub_supporter_feature_theme_title
+        </div>
+        <div
+          className="PlusView__headingDescription"
+        >
+          hub_supporter_feature_theme_description
+        </div>
+        <a
+          className="PlusView__button button show-for-large"
+          href="https://signon.ghosterystage.com/subscribe"
+          onClick={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          hub_supporter_button_text
+        </a>
+      </div>
+      <div
+        className="PlusView__feature small-12 medium-6 columns"
+      >
+        <img
+          alt="hub_supporter_feature_theme_title"
+          className="PlusView__featureImage theme"
+          src="/app/images/hub/plus/feature-theme.png"
+        />
+      </div>
+    </div>
+    <div
+      className="PlusView--addPaddingTop hide-for-large"
+    >
+      <div
+        className="row align-center-middle"
+      >
+        <div
+          className="PlusView__bar flex-child-grow"
+        />
+        <a
+          className="PlusView__button button PlusView--addSideMargin"
+          href="https://signon.ghosterystage.com/subscribe"
+          onClick={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          hub_supporter_button_text
+        </a>
+        <div
+          className="PlusView__bar flex-child-grow"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="PlusView--addPaddingTop PlusView--addPaddingBottom PlusView--rowDarken"
+  >
+    <div
+      className="row align-center"
+    >
+      <div
+        className="PlusView__feature small-12 medium-6 large-5 columns show-for-large"
+      >
+        <img
+          alt="hub_supporter_feature_stats_title"
+          className="PlusView__featureImage stats"
+          src="/app/images/hub/plus/feature-stats.svg"
+        />
+      </div>
+      <div
+        className="PlusView__feature small-12 medium-6 large-5 columns"
+      >
+        <div
+          className="PlusView__headingTitle"
+        >
+          hub_supporter_feature_stats_title
+        </div>
+        <div
+          className="PlusView__headingDescription"
+        >
+          hub_supporter_feature_stats_description
+        </div>
+        <a
+          className="PlusView__button button show-for-large"
+          href="https://signon.ghosterystage.com/subscribe"
+          onClick={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          hub_supporter_button_text
+        </a>
+      </div>
+      <div
+        className="PlusView__feature columns hide-for-large"
+      >
+        <img
+          alt="hub_supporter_feature_stats_title"
+          className="PlusView__featureImage stats"
+          src="/app/images/hub/plus/feature-stats.svg"
+        />
+      </div>
+    </div>
+    <div
+      className="PlusView--addPaddingTop hide-for-large"
+    >
+      <div
+        className="row align-center-middle"
+      >
+        <div
+          className="PlusView__bar flex-child-grow"
+        />
+        <a
+          className="PlusView__button button PlusView--addSideMargin"
+          href="https://signon.ghosterystage.com/subscribe"
+          onClick={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          hub_supporter_button_text
+        </a>
+        <div
+          className="PlusView__bar flex-child-grow"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="PlusView--addPaddingTop PlusView--addPaddingBottom"
+  >
+    <div
+      className="row align-center"
+    >
+      <div
+        className="PlusView__feature small-12 medium-6 large-5 large-offset-1 columns"
+      >
+        <div
+          className="PlusView__headingTitle"
+        >
+          hub_supporter_feature_support_title
+        </div>
+        <div
+          className="PlusView__headingDescription"
+        >
+          hub_supporter_feature_support_description
+        </div>
+        <a
+          className="PlusView__button button show-for-large"
+          href="https://signon.ghosterystage.com/subscribe"
+          onClick={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          hub_supporter_button_text
+        </a>
+      </div>
+      <div
+        className="PlusView__feature columns small-12 medium-6"
+      >
+        <img
+          alt="hub_supporter_feature_support_title"
+          className="PlusView__featureImage support"
+          src="/app/images/hub/plus/feature-support.svg"
+        />
+      </div>
+    </div>
+    <div
+      className="PlusView--addPaddingTop hide-for-large"
+    >
+      <div
+        className="row align-center-middle"
+      >
+        <div
+          className="PlusView__bar flex-child-grow"
+        />
+        <a
+          className="PlusView__button button PlusView--addSideMargin"
+          href="https://signon.ghosterystage.com/subscribe"
+          onClick={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          hub_supporter_button_text
+        </a>
+        <div
+          className="PlusView__bar flex-child-grow"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="PlusView--addPaddingTop PlusView--addPaddingBottom PlusView--rowDarken"
+  >
+    <div
+      className="row align-center"
+    >
+      <div
+        className="PlusView__feature columns medium-8 large-5 text-center"
+      >
+        <div
+          className="PlusView__headingTitle"
+        >
+          hub_supporter_feature_more_title
+        </div>
+        <div
+          className="PlusView__headingDescription"
+        >
+          hub_supporter_feature_more_description
+        </div>
+        <img
+          alt="hub_supporter_feature_more_title"
+          className="PlusView__featureImage more"
+          src="/app/images/hub/plus/feature-more.svg"
+        />
+      </div>
+    </div>
+    <div
+      className="PlusView--addPaddingTop"
+    >
+      <div
+        className="row align-center-middle"
+      >
+        <div
+          className="PlusView__bar flex-child-grow"
+        />
+        <a
+          className="PlusView__button button PlusView--addSideMargin"
+          href="https://signon.ghosterystage.com/subscribe"
+          onClick={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          hub_supporter_button_text
+        </a>
+        <div
+          className="PlusView__bar flex-child-grow"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/hub/Views/PlusView component Snapshot tests with react-test-renderer plus view is rendered correctly when the user is signed in but not a plus 1`] = `
+<div
+  className="PlusView"
+>
+  <div
+    className="row align-center"
+  >
+    <div
+      className="columns"
+    >
+      <div
+        className="PlusView__headingImage"
+      />
+      <div
+        className="PlusView__headingTitle text-center"
+      >
+        hub_supporter_header_title
+      </div>
+      <div
+        className="PlusView__headingDescription text-center"
+      >
+        hub_supporter_header_description
+      </div>
+      <div
+        className="PlusView__costContainer flex-container align-middle align-justify"
+      >
+        <a
+          className="PlusView__button button"
+          href="https://account.ghosterystage.com/subscription?target=subscribe"
+          onClick={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          hub_supporter_button_text
+        </a>
+        <div
+          className="PlusView__headingCost flex-container align-middle"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "hub_supporter_price",
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="PlusView--addPaddingTop row small-up-1 large-up-3 align-center"
+  >
+    <div
+      className="PlusView__perk columns text-center"
+    >
+      <div
+        className="PlusView__perkIcon themes"
+      />
+      <div
+        className="PlusView__perkTitle"
+      >
+        hub_supporter_perk_themes_title
+      </div>
+      <div
+        className="PlusView__perkDescription"
+      >
+        hub_supporter_perk_themes_description
+      </div>
+    </div>
+    <div
+      className="PlusView__perk columns text-center"
+    >
+      <div
+        className="PlusView__perkIcon stats"
+      />
+      <div
+        className="PlusView__perkTitle"
+      >
+        hub_supporter_perk_stats_title
+      </div>
+      <div
+        className="PlusView__perkDescription"
+      >
+        hub_supporter_perk_stats_description
+      </div>
+    </div>
+    <div
+      className="PlusView__perk columns text-center"
+    >
+      <div
+        className="PlusView__perkIcon support"
+      />
+      <div
+        className="PlusView__perkTitle"
+      >
+        hub_supporter_perk_more_title
+      </div>
+      <div
+        className="PlusView__perkDescription"
+      >
+        hub_supporter_perk_more_description
+      </div>
+    </div>
+  </div>
+  <div
+    className="PlusView__manifestoContainer"
+  >
+    <div
+      className="PlusView__manifestoBackground row align-center"
+    >
+      <div
+        className="PlusView__manifestoText columns small-12 medium-10 large-8 text-center"
+      >
+        hub_supporter_manifesto
+      </div>
+    </div>
+  </div>
+  <div
+    className="PlusView--addPaddingTop PlusView--addPaddingBottom"
+  >
+    <div
+      className="row align-center"
+    >
+      <div
+        className="PlusView__feature small-12 medium-6 large-5 large-offset-1 columns"
+      >
+        <div
+          className="PlusView__headingTitle PlusView--addPaddingTop"
+        >
+          hub_supporter_feature_theme_title
+        </div>
+        <div
+          className="PlusView__headingDescription"
+        >
+          hub_supporter_feature_theme_description
+        </div>
+        <a
+          className="PlusView__button button show-for-large"
+          href="https://account.ghosterystage.com/subscription?target=subscribe"
+          onClick={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          hub_supporter_button_text
+        </a>
+      </div>
+      <div
+        className="PlusView__feature small-12 medium-6 columns"
+      >
+        <img
+          alt="hub_supporter_feature_theme_title"
+          className="PlusView__featureImage theme"
+          src="/app/images/hub/plus/feature-theme.png"
+        />
+      </div>
+    </div>
+    <div
+      className="PlusView--addPaddingTop hide-for-large"
+    >
+      <div
+        className="row align-center-middle"
+      >
+        <div
+          className="PlusView__bar flex-child-grow"
+        />
+        <a
+          className="PlusView__button button PlusView--addSideMargin"
+          href="https://account.ghosterystage.com/subscription?target=subscribe"
+          onClick={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          hub_supporter_button_text
+        </a>
+        <div
+          className="PlusView__bar flex-child-grow"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="PlusView--addPaddingTop PlusView--addPaddingBottom PlusView--rowDarken"
+  >
+    <div
+      className="row align-center"
+    >
+      <div
+        className="PlusView__feature small-12 medium-6 large-5 columns show-for-large"
+      >
+        <img
+          alt="hub_supporter_feature_stats_title"
+          className="PlusView__featureImage stats"
+          src="/app/images/hub/plus/feature-stats.svg"
+        />
+      </div>
+      <div
+        className="PlusView__feature small-12 medium-6 large-5 columns"
+      >
+        <div
+          className="PlusView__headingTitle"
+        >
+          hub_supporter_feature_stats_title
+        </div>
+        <div
+          className="PlusView__headingDescription"
+        >
+          hub_supporter_feature_stats_description
+        </div>
+        <a
+          className="PlusView__button button show-for-large"
+          href="https://account.ghosterystage.com/subscription?target=subscribe"
+          onClick={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          hub_supporter_button_text
+        </a>
+      </div>
+      <div
+        className="PlusView__feature columns hide-for-large"
+      >
+        <img
+          alt="hub_supporter_feature_stats_title"
+          className="PlusView__featureImage stats"
+          src="/app/images/hub/plus/feature-stats.svg"
+        />
+      </div>
+    </div>
+    <div
+      className="PlusView--addPaddingTop hide-for-large"
+    >
+      <div
+        className="row align-center-middle"
+      >
+        <div
+          className="PlusView__bar flex-child-grow"
+        />
+        <a
+          className="PlusView__button button PlusView--addSideMargin"
+          href="https://account.ghosterystage.com/subscription?target=subscribe"
+          onClick={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          hub_supporter_button_text
+        </a>
+        <div
+          className="PlusView__bar flex-child-grow"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="PlusView--addPaddingTop PlusView--addPaddingBottom"
+  >
+    <div
+      className="row align-center"
+    >
+      <div
+        className="PlusView__feature small-12 medium-6 large-5 large-offset-1 columns"
+      >
+        <div
+          className="PlusView__headingTitle"
+        >
+          hub_supporter_feature_support_title
+        </div>
+        <div
+          className="PlusView__headingDescription"
+        >
+          hub_supporter_feature_support_description
+        </div>
+        <a
+          className="PlusView__button button show-for-large"
+          href="https://account.ghosterystage.com/subscription?target=subscribe"
+          onClick={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          hub_supporter_button_text
+        </a>
+      </div>
+      <div
+        className="PlusView__feature columns small-12 medium-6"
+      >
+        <img
+          alt="hub_supporter_feature_support_title"
+          className="PlusView__featureImage support"
+          src="/app/images/hub/plus/feature-support.svg"
+        />
+      </div>
+    </div>
+    <div
+      className="PlusView--addPaddingTop hide-for-large"
+    >
+      <div
+        className="row align-center-middle"
+      >
+        <div
+          className="PlusView__bar flex-child-grow"
+        />
+        <a
+          className="PlusView__button button PlusView--addSideMargin"
+          href="https://account.ghosterystage.com/subscription?target=subscribe"
+          onClick={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          hub_supporter_button_text
+        </a>
+        <div
+          className="PlusView__bar flex-child-grow"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="PlusView--addPaddingTop PlusView--addPaddingBottom PlusView--rowDarken"
+  >
+    <div
+      className="row align-center"
+    >
+      <div
+        className="PlusView__feature columns medium-8 large-5 text-center"
+      >
+        <div
+          className="PlusView__headingTitle"
+        >
+          hub_supporter_feature_more_title
+        </div>
+        <div
+          className="PlusView__headingDescription"
+        >
+          hub_supporter_feature_more_description
+        </div>
+        <img
+          alt="hub_supporter_feature_more_title"
+          className="PlusView__featureImage more"
+          src="/app/images/hub/plus/feature-more.svg"
+        />
+      </div>
+    </div>
+    <div
+      className="PlusView--addPaddingTop"
+    >
+      <div
+        className="row align-center-middle"
+      >
+        <div
+          className="PlusView__bar flex-child-grow"
+        />
+        <a
+          className="PlusView__button button PlusView--addSideMargin"
+          href="https://account.ghosterystage.com/subscription?target=subscribe"
+          onClick={[Function]}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          hub_supporter_button_text
+        </a>
+        <div
+          className="PlusView__bar flex-child-grow"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/hub/Views/SetupViews/SetupBlockingDropdown component Snapshot tests with react-test-renderer setup blocking dropdown component is rendered correctly 1`] = `
+<div
+  className="SetupBlockingDropdown"
+>
+  <div>
+    Mock Global Blocking
+  </div>
+  <div
+    className="SetupBlockingDropdown__buttonContainer flex-container flex-dir-row-reverse"
+  >
+    <div
+      className="button success"
+      onClick={[Function]}
+    >
+      hub_setup_nav_done
+    </div>
+  </div>
+</div>
+`;

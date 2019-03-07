@@ -29,13 +29,18 @@ const { sendMessage } = msg;
 class OfferCard extends Component {
 	constructor(props) {
 		super(props);
-
+		const {
+			attrs: { isCodeHidden } = {},
+			offer_data: offerData = {},
+		} = props.reward || {};
+		const { ui_info: { template_data: templateData = {} } = {} } = offerData;
 		this.state = {
+			code: isCodeHidden ? '*****' : templateData.code,
 			closed: false,
 			copyText: t('rewards_copy_code'),
 			showPrompt: this.props.conf.rewardsPromptAccepted ? false : 1,
 			showSettings: false,
-			rewardUI: props.reward && props.reward.offer_data && props.reward.offer_data.ui_info.template_data || {},
+			rewardUI: templateData,
 		};
 
 		this.iframeEl = window.parent.document.getElementById('ghostery-iframe-container');
@@ -115,12 +120,14 @@ class OfferCard extends Component {
 
 	copyCode() {
 		this.props.actions.sendSignal('code_copied');
-		this.offerCardRef.querySelector('.reward-code-input').select();
-		document.execCommand('copy');
 
 		// 'copied' feedback for user
 		this.setState({
-			copyText: `${t('rewards_code_copied')}!`
+			copyText: `${t('rewards_code_copied')}!`,
+			code: this.state.rewardUI.code,
+		}, () => {
+			this.offerCardRef.querySelector('.reward-code-input').select();
+			document.execCommand('copy');
 		});
 
 		// prevent multiple clicks
@@ -160,7 +167,6 @@ class OfferCard extends Component {
 	}
 
 	handlePrompt(promptNumber, option) {
-		// @TODO update user settings
 		if (promptNumber === 1) {
 			if (!option) {
 				sendMessage('ping', 'rewards_first_reject');
@@ -169,6 +175,7 @@ class OfferCard extends Component {
 				});
 				return;
 			}
+			this.props.actions.messageBackground('rewardsPromptOptedIn');
 			this.props.actions.sendSignal('offer_first_optin');
 			sendMessage('ping', 'rewards_first_accept');
 		} else if (promptNumber === 2) {
@@ -200,6 +207,7 @@ class OfferCard extends Component {
 	}
 
 	redeem() {
+		this.setState({ code: this.state.rewardUI.code });
 		this.props.actions.sendSignal('offer_ca_action');
 	}
 
@@ -218,7 +226,11 @@ class OfferCard extends Component {
 		const { expirationMs } = this.props.reward.offer_data;
 		const expireDays = Math.round((new Date()).setDate(new Date().getDate() + expirationMs / 1000 / 60 / 60 / 24));
 		const delta = computeTimeDelta(new Date(expireDays), new Date());
-		return t('rewards_expires_in', [delta.count, t(`rewards_expires_in_${delta.type}`)]);
+		const { count, type } = delta;
+		if (count === 1) {
+			return t(`rewards_expires_in_${type.slice(0, -1)}`);
+		}
+		return t(`rewards_expires_in_${type}`, [count]);
 	}
 
 	render() {
@@ -279,7 +291,7 @@ class OfferCard extends Component {
 								{ this.state.rewardUI.code &&
 									<div className="reward-code">
 										<div>
-											{this.state.rewardUI.code}
+											{this.state.code}
 											<input readOnly className="reward-code-input" value={this.state.rewardUI.code} type="text" />
 										</div>
 										<a onClick={this.copyCode}>{this.state.copyText}</a>
