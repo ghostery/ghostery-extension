@@ -15,6 +15,7 @@
  */
 
 import _ from 'underscore';
+import throttle from 'lodash.throttle';
 import button from './BrowserButton';
 import conf from './Conf';
 import foundBugs from './FoundBugs';
@@ -162,10 +163,12 @@ class PanelData {
 		});
 	}
 
+	// TODO throtlle
 	/**
 	 * Invoked in EventHandlers#onBeforeRequest when a new bug has been found
 	 */
-	updatePanelUI() {
+	updatePanelUI = throttle(this._updatePanelUI.bind(this), 600, { leading: true, trailing: true });
+	_updatePanelUI() {
 		if (!this._activeTab) { return; }
 
 		if (this._uiPorts.has('summaryUIPort') || this._uiPorts.has('blockingUIPort')) {
