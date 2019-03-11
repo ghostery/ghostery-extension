@@ -50,6 +50,10 @@ import * as utils from './utils/utils';
 import { _getJSONAPIErrorsObject } from './utils/api';
 import { importCliqzSettings } from './utils/cliqzSettingImport';
 
+// For debug purposes, provide Access to the internals of `browser-core`
+// module from Developer Tools Console.
+window.CLIQZ = cliqz;
+
 // class instantiation
 const events = new Events();
 const panelData = new PanelData();
@@ -981,9 +985,9 @@ function onMessageHandler(request, sender, callback) {
 			callback(success);
 		}).catch((err) => {
 			callback({ errors: _getJSONAPIErrorsObject(err) });
-			log('UPDATE PROMOTIOS FAIL', err);
+			log('UPDATE PROMOTIONS FAIL', err);
 		});
-		return false;
+		return true;
 	} else if (name === 'update_database') {
 		checkLibraryVersion().then((result) => {
 			callback(result);
@@ -1272,7 +1276,6 @@ antitracking.on('enabled', () => {
 		// remove Cliqz-side whitelisting steps and replace with ghostery ones.
 		const replacedSteps = ['onBeforeSendHeaders', 'onHeadersReceived'].map(stage =>
 			Promise.all([
-				antitracking.action('removePipelineStep', stage, 'checkIsCookieWhitelisted'),
 				antitracking.action('addPipelineStep', stage, {
 					name: 'checkGhosteryWhitelisted',
 					spec: 'break',
@@ -1628,12 +1631,13 @@ function initializeEventListeners() {
 	// NOTE: not supported on Edge and Firefox < v54
 	if (typeof chrome.runtime.onMessageExternal === 'object') {
 		chrome.runtime.onMessageExternal.addListener((request, sender, sendResponse) => {
-			let recognized;
-			if (globals.DEBUG) {
-				recognized = sender.id === globals.GHOSTERY_TAB_CHROME_TEST_ID || sender.id === globals.GHOSTERY_TAB_FIREFOX_TEST_ID;
-			} else {
-				recognized = sender.id === globals.GHOSTERY_TAB_ID;
-			}
+			const recognized = [
+				globals.GHOSTERY_TAB_CHROME_PRODUCTION_ID,
+				globals.GHOSTERY_TAB_CHROME_PRERELEASE_ID,
+				globals.GHOSTERY_TAB_CHROME_TEST_ID,
+				globals.GHOSTERY_TAB_FIREFOX_PRODUCTION_ID,
+				globals.GHOSTERY_TAB_FIREFOX_TEST_ID
+			].indexOf(sender.id) !== -1;
 
 			if (recognized && request.name === 'getStatsAndSettings') {
 				getDataForGhosteryTab(data => sendResponse({ historicalDataAndSettings: data }));

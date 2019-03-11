@@ -200,12 +200,16 @@ p.warning {
 /* CREATE ACCOUNT PANEL */
 #create-account-panel {
 	margin-top: 10px;
-	input {margin-bottom: 5px;}
-	p.warning {margin-bottom: 5px;}
+	input {
+		margin-bottom: 5px;
+		margin-top: 5px;
+	}
+	p.warning {}
 	#create-account-first-name, #create-account-last-name {
-		margin-bottom: 20px; //compensation for no .warning elements
+		margin-bottom: 15px; //compensation for no .warning elements
 	}
 	#create-account-password {
+		margin-bottom: 10px;
 		p.warning {
 			#password-length-requirement,
 			#password-characters-requirement {
@@ -216,9 +220,16 @@ p.warning {
 			}
 		}
 	}
+	#create-account-promotions {
+		margin-bottom: 10px;
+		label {
+			font-size: 13px;
+			font-weight: 500;
+		}
+	}
 	#create-account-privacy-container {
 		p#accept-privacy-label {
-			font-size: 13px;
+			font-size: 12px;
 			line-height: 16px;
 			font-weight: 400;
 		}

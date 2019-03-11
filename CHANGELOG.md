@@ -1,3 +1,11 @@
+### GHOSTERY 8.3.2 (UNRELEASED)
+
++ Remove unsupported file types for Opera automated-review
++ Removed uneccesary files for slimmer production build
++ Sync account creation UI betweem intro hub, panel and signon-web
++ Performance improvments when browsing certian Google sites (gmail, maps)
++ Minor UI tweaks
+
 ### GHOSTERY 8.3.1 (January 31, 2019)
 
 + Add `options_ui` support for Intro Hub

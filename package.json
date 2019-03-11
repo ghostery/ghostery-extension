@@ -42,13 +42,11 @@
   },
   "homepage": "https://github.com/ghostery/ghostery-extension#readme",
   "resolutions": {
-    "babel-core": "^7.0.0-bridge.0",
-    "@cliqz/adblocker": "0.3.1"
+    "babel-core": "^7.0.0-bridge.0"
   },
   "dependencies": {
     "base64-js": "^1.2.1",
-    "browser-core": "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.32/7.32.0.dec6c4e.tgz",
-    "@cliqz/adblocker": "0.3.1",
+    "browser-core": "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.33/7.33.0.ca77d37.tgz",
     "classnames": "^2.2.5",
     "d3": "^5.7.0",
     "foundation-sites": "^6.4.4-rc1",
