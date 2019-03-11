@@ -43,9 +43,6 @@ class Panel extends React.Component {
 
 			const { body } = msg;
 
-			console.log('IVZ message to dynamic UI port received by PANEL; message:');
-			console.log(msg);
-
 			if (body.panel) {
 				this._initializeData(body);
 			} else if (this._dynamicUIDataInitialized) {
@@ -120,9 +117,6 @@ class Panel extends React.Component {
 	 * @param	{Object}	payload		the body of the message
 	 */
 	_initializeData(payload) {
-		console.log('Panel#_initializeData called with payload: ');
-		console.log(payload);
-
 		this._dynamicUIDataInitialized = true;
 
 		const { panel, summary, blocking } = payload;

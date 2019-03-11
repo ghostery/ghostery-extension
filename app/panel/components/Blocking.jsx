@@ -15,6 +15,7 @@ import React from 'react';
 import Categories from './Blocking/Categories';
 import BlockingHeader from './Blocking/BlockingHeader';
 import NotScanned from './BuildingBlocks/NotScanned';
+import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { updateSummaryBlockingCount } from '../utils/blocking';
 
 /**
@@ -23,6 +24,8 @@ import { updateSummaryBlockingCount } from '../utils/blocking';
  * @memberof PanelClasses
  */
 class Blocking extends React.Component {
+	static contextType = DynamicUIPortContext;
+
 	constructor(props) {
 		super(props);
 
@@ -44,10 +47,13 @@ class Blocking extends React.Component {
 	 * Lifecycle event
 	 */
 	componentDidMount() {
-		this.uiPort = chrome.runtime.connect({ name: 'blockingUIPort' });
-		this.uiPort.onMessage.addListener((msg) => {
-			this.props.actions.updateBlockingData(msg);
+		this._dynamicUIPort = this.context;
+		this._dynamicUIPort.onMessage.addListener((msg) => {
+			if (msg.to !== 'blocking' || !msg.body) { return; }
+
+			this.props.actions.updateBlockingData(msg.body);
 		});
+		this._dynamicUIPort.postMessage({ name: 'BlockingComponentDidMount' });
 	}
 
 	/**
@@ -79,7 +85,7 @@ class Blocking extends React.Component {
 	 * Lifecycle event
 	 */
 	componentWillUnmount() {
-		this.uiPort.disconnect();
+		this._dynamicUIPort.postMessage({ name: 'BlockingComponentWillUnmount' });
 	}
 
 	/**

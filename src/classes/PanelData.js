@@ -106,7 +106,7 @@ class PanelData {
 
 		port.onMessage.addListener((msg) => {
 			switch (msg.name) {
-				case 'BlockingComponentWillMount':
+				case 'BlockingComponentDidMount':
 					this._mountedComponents.blocking = true;
 					this._setTrackerListAndCategories();
 					this._postMessage('blocking', this._getBlockingData());

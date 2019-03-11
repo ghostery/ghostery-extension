@@ -61,8 +61,6 @@ class Summary extends React.Component {
 			{ name: t('pause_1_hour'), name_condensed: t('pause_1_hour_condensed'), val: 60 },
 			{ name: t('pause_24_hours'), name_condensed: t('pause_24_hours_condensed'), val: 1440 },
 		];
-
-		this._dynamicUIPort = null;
 	}
 
 	/**
@@ -102,7 +100,7 @@ class Summary extends React.Component {
 	 * Lifecycle event
 	 */
 	componentWillUnmount() {
-		// this.uiPort.disconnect();
+		this._dynamicUIPort.postMessage({ name: 'SummaryComponentWillUnmount' });
 	}
 
 	/**
