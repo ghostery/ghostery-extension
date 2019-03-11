@@ -92,13 +92,18 @@ class PanelData {
 	 * Attaches disconnect and message listeners to the new port
 	 */
 	_attachListeners() {
-		this._panelPort.onDisconnect.addListener(() => {
+		const port = this._panelPort;
+		const tab = this._activeTab;
+
+		if (!port || !tab) { return;}
+
+		port.onDisconnect.addListener(() => {
 			this._activeTab = null;
 			this._panelPort = null;
 			this._mountedComponents = initMountedComponentsState;
 		});
 
-		this._panelPort.onMessage.addListener((msg) => {
+		port.onMessage.addListener((msg) => {
 			switch (msg.name) {
 				case 'BlockingComponentWillMount':
 					this._mountedComponents.blocking = true;
@@ -127,7 +132,7 @@ class PanelData {
 				case 'SummaryComponentWillMount':
 					this._mountedComponents.summary = true;
 					this._sendCliqzModulesData();
-					this.sendPageLoadTime(this._activeTab.id);
+					this.sendPageLoadTime(tab.id);
 					break;
 				case 'SummaryComponentWillUnmount':
 					this._mountedComponents.summary = false;
@@ -477,6 +482,8 @@ class PanelData {
 	 * @return	{array}		array of categories
 	 */
 	_buildCategories() {
+		if (!this._activeTab) { return; }
+
 		const categories = {};
 		const smartBlock = tabInfo.getTabInfo(this._activeTab.id, 'smartBlock');
 
@@ -581,8 +588,8 @@ class PanelData {
 	_getTrackerState({ id: trackerId }, smartBlock) {
 		const { pageHost } = this._activeTab;
 		const { selectedAppIds, smartBlockActive } = conf;
-		const pageUnblocks = conf.site_specific_unblocks[pageHost] || [];
-		const pageBlocks = conf.site_specific_blocks[pageHost] || [];
+		const pageUnblocks = (pageHost && conf.site_specific_unblocks[pageHost]) || [];
+		const pageBlocks = (pageHost && conf.site_specific_blocks[pageHost]) || [];
 
 		return {
 			blocked: selectedAppIds.hasOwnProperty(trackerId),
@@ -619,6 +626,8 @@ class PanelData {
 	 * and since these values may be accessed 2+ times in a single updatePanelUI call
 	 */
 	_setTrackerListAndCategories() {
+		if (!this._activeTab) { return; }
+		
 		const { id, url } = this._activeTab;
 
 		this._trackerList = foundBugs.getApps(id, false, url) || [];
