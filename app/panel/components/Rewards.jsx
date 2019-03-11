@@ -15,6 +15,7 @@ import React from 'react';
 import ClassNames from 'classnames';
 import { Link, Route } from 'react-router-dom';
 import { ToggleSlider, RewardListItem, RewardDetail } from './BuildingBlocks';
+import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import globals from '../../../src/classes/Globals';
 
@@ -28,6 +29,8 @@ const IS_CLIQZ = (globals.BROWSER_INFO.name === 'cliqz');
  * @memberof PanelClasses
  */
 class Rewards extends React.Component {
+	static contextType = DynamicUIPortContext;
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -48,10 +51,14 @@ class Rewards extends React.Component {
 	 * Lifecycle event
 	 */
 	componentDidMount() {
-		this.uiPort = chrome.runtime.connect({ name: 'rewardsUIPort' });
-		this.uiPort.onMessage.addListener((msg) => {
-			this.props.actions.getRewardsData(msg);
+		this._dynamicUIPort = this.context;
+		this._dynamicUIPort.onMessage.addListener((msg) => {
+			if (msg.to !== 'rewards' || !msg.body) { return; }
+
+			this.props.actions.getRewardsData(msg.body);
 		});
+		this._dynamicUIPort.postMessage({ name: 'RewardsComponentDidMount' });
+
 		this.props.actions.sendSignal('hub_open');
 	}
 
@@ -91,7 +98,7 @@ class Rewards extends React.Component {
 	componentWillUnmount() {
 		/* @TODO send message to background to remove port onDisconnect event */
 		this.props.actions.sendSignal('hub_closed');
-		this.uiPort.postMessage({ name: 'RewardsComponentWillUnmount' });
+		this._dynamicUIPort.postMessage({ name: 'RewardsComponentWillUnmount' });
 	}
 
 	/**
