@@ -28,16 +28,15 @@ class Panel extends React.Component {
 		this.closeNotification = this.closeNotification.bind(this);
 		this.clickReloadBanner = this.clickReloadBanner.bind(this);
 		this.filterTrackers = this.filterTrackers.bind(this);
-
-		this._dynamicUIPort = null;
-		this._dynamicUIDataInitialized = false;
 	}
+
 	/**
 	 * Lifecycle event
 	 */
 	componentDidMount() {
 		sendMessage('ping', 'engaged');
 
+		this._dynamicUIDataInitialized = false;
 		this._dynamicUIPort = chrome.runtime.connect({ name: 'dynamicUIPanelPort' });
 		this._dynamicUIPort.onMessage.addListener((msg) => {
 			if (msg.to !== 'panel' || !msg.body) { return; }

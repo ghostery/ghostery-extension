@@ -130,7 +130,7 @@ class PanelData {
 				case 'SettingsComponentWillUnmount':
 					this._mountedComponents.settings = false;
 					break;
-				case 'SummaryComponentWillMount':
+				case 'SummaryComponentDidMount':
 					this._mountedComponents.summary = true;
 					this._sendCliqzModulesData();
 					this.sendPageLoadTime(tab.id);
@@ -267,10 +267,15 @@ class PanelData {
 		const id = tabId || (this._activeTab && this._activeTab.id) || null;
 
 		const { needsReload, smartBlock } = tabInfo.getTabInfo(id) || { needsReload: false, smartBlock: false };
+		const currentAccount = conf.account;
+		if (currentAccount && currentAccount.user) {
+			currentAccount.user.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus']);
+		}
 
 		return {
 			needsReload: needsReload || { changes: {} },
-			smartBlock
+			smartBlock,
+			account: currentAccount
 		};
 	}
 

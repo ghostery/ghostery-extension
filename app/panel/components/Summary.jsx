@@ -62,41 +62,29 @@ class Summary extends React.Component {
 			{ name: t('pause_24_hours'), name_condensed: t('pause_24_hours_condensed'), val: 1440 },
 		];
 
-		this._dynamicUIPort = this.context;
-
-		console.log('IVZ this in Summary constructor:');
-		console.log(this);
-	}
-
-	/**
-	 * Lifecycle event
-	 */
-	componentWillMount() {
-		this.setTrackerLatency(this.props);
-		this.updateSiteNotScanned(this.props);
+		this._dynamicUIPort = null;
 	}
 
 	/**
 	 * Lifecycle event
 	 */
 	componentDidMount() {
-		/*
-		this._dynamicUIPort.onMessage.addListener((msg) => {
-			console.log('IVZ message to dynamic UI port received in Summary component. Message:');
-			console.log(msg);
-		});
-		*/
+		this.setTrackerLatency(this.props);
+		this.updateSiteNotScanned(this.props);
 
-		/*
-		this.uiPort = chrome.runtime.connect({ name: 'summaryUIPort' });
-		this.uiPort.onMessage.addListener((msg) => {
-			if (msg.adblock || msg.antitracking) {
-				this.props.actions.getCliqzModuleData(msg);
+		this._dynamicUIPort = this.context;
+		this._dynamicUIPort.onMessage.addListener((msg) => {
+			if (msg.to !== 'summary' || !msg.body) { return; }
+
+			const { body } = msg;
+
+			if (body.adblock || body.antitracking) {
+				this.props.actions.getCliqzModuleData(body);
 			} else {
-				this.props.actions.updateSummaryData(msg);
+				this.props.actions.updateSummaryData(body);
 			}
 		});
-		*/
+		this._dynamicUIPort.postMessage({ name: 'SummaryComponentDidMount' });
 	}
 
 	/**
