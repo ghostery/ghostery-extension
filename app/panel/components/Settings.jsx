@@ -61,13 +61,14 @@ class Settings extends React.Component {
 
 			this.props.actions.getSettingsData(msg.body);
 		});
+		this._dynamicUIPort.postMessage({ name: 'SettingsComponentDidMount' });
 	}
 
 	/**
 	 * Lifecycle event
 	 */
 	componentWillUnmount() {
-		this._dynamicUIPort.postMessage({ name: 'SettingsComponentWillUmount' });
+		this._dynamicUIPort.postMessage({ name: 'SettingsComponentWillUnmount' });
 	}
 
 	GlobalBlockingComponent = () => (<GlobalBlocking toggleCheckbox={this.toggleCheckbox} settingsData={this.props} actions={this.props.actions} showToast={this.showToast} language={this.props.language} />);
