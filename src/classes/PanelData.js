@@ -199,14 +199,17 @@ class PanelData {
 	 * @return {Object}		Blocking view data
 	 */
 	_getBlockingData() {
+		if (!this._activeTab) { return; }
+
+		const { url: pageUrl } = this._activeTab;
 		const { expand_all_trackers, site_specific_blocks, site_specific_unblocks } = conf;
 
 		return {
 			expand_all_trackers,
 			site_specific_blocks,
 			site_specific_unblocks,
-			siteNoteScanned: !this._trackerList || false, // TODO make sure this does not change the previous logic
-			pageUrl: this._activeTab.url,
+			siteNoteScanned: !this._trackerList || false, // TODO [] ==  false is true, and ![] == false is true, so this MAY be a bug
+			pageUrl,
 			categories: this._categories,
 			...this._getSettingsAndBlockingCommonData()
 		};
@@ -217,6 +220,8 @@ class PanelData {
 	 * @return {Object}		All data fields used by the panel, summary, and blocking (if in expert mode) views
 	 */
 	_getInitData() {
+		if (!this._activeTab) { return; }
+
 		const currentAccount = conf.account;
 		if (currentAccount && currentAccount.user) {
 			currentAccount.user.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus']);
@@ -258,11 +263,13 @@ class PanelData {
 	 * @return	{Object}	new needsReload and smartBlock values from tabInfo
 	 */
 	_getPanelUpdateData(tabId) {
-		const id = tabId || this._activeTab.id;
-		const { needsReload, smartBlock } = tabInfo.getTabInfo(id);
+		const id = tabId || (this._activeTab && this._activeTab.id) || null;
+
+		const { needsReload, smartBlock } = tabInfo.getTabInfo(id) || { needsReload: false, smartBlock: false };
+
 		return {
 			needsReload: needsReload || { changes: {} },
-			smartBlock
+			smartBlock: smartBlock
 		};
 	}
 
@@ -346,6 +353,8 @@ class PanelData {
 	 * @return {Object}		Summary view data
 	 */
 	_getSummaryInitData() {
+		if (!this._activeTab) { return; }
+
 		const { url, pageHost } = this._activeTab;
 		const { paused_blocking, paused_blocking_timeout } = globals.SESSION;
 		const { site_blacklist, site_whitelist } = conf;
@@ -368,6 +377,8 @@ class PanelData {
 	 * @return {Object}		Fresh alertCounts, categories, and trackerCounts values
 	 */
 	_getSummaryUpdateData() {
+		if (!this._activeTab) { return; }
+
 		const { id, url } = this._activeTab;
 
 		return {
@@ -393,7 +404,6 @@ class PanelData {
 
 	/**
 	 * Retrieves antitracking and adblock Cliqz data and sends it to the panel
-	 * @param {Object}	port	the port to send the data through
 	 */
 	_sendCliqzModulesData() {
 		if (!this._panelPort || !this._activeTab) { return; }
