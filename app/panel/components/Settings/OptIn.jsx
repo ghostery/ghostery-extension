@@ -14,7 +14,6 @@
 import React from 'react';
 import globals from '../../../../src/classes/Globals';
 
-const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 const IS_CLIQZ = (globals.BROWSER_INFO.name === 'cliqz');
 
 /**
@@ -42,7 +41,7 @@ const OptIn = (props) => {
 							</div>
 						</div>
 					</div>
-					{!IS_EDGE && !IS_CLIQZ &&
+					{!IS_CLIQZ &&
 						<div>
 							<div className="s-option-group" id="human-web-section">
 								<div className="s-square-checkbox">
