@@ -14,9 +14,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import SetupAntiSuiteView from './SetupAntiSuiteView';
-import globals from '../../../../../src/classes/Globals';
-
-const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 
 /**
  * @class Implement the Setup Anti-Suite View for the Ghostery Hub
@@ -52,9 +49,7 @@ class SetupAntiSuiteViewContainer extends Component {
 			props.actions.setAntiTracking({ enable_anti_tracking });
 			props.actions.setAdBlock({ enable_ad_block });
 			props.actions.setSmartBlocking({ enable_smart_block });
-			if (!IS_EDGE) {
-				props.actions.setGhosteryRewards({ enable_ghostery_rewards });
-			}
+			props.actions.setGhosteryRewards({ enable_ghostery_rewards });
 		}
 	}
 
@@ -81,9 +76,7 @@ class SetupAntiSuiteViewContainer extends Component {
 			}
 			case 'ghostery-rewards': {
 				const enable_ghostery_rewards = !this.props.setup.enable_ghostery_rewards;
-				if (!IS_EDGE) {
-					this.props.actions.setGhosteryRewards({ enable_ghostery_rewards });
-				}
+				this.props.actions.setGhosteryRewards({ enable_ghostery_rewards });
 				break;
 			}
 			default: break;
@@ -139,10 +132,6 @@ class SetupAntiSuiteViewContainer extends Component {
 				description: t('hub_setup_ghosteryrewards_description_rewards'),
 			},
 		];
-
-		if (IS_EDGE) {
-			features.splice(features.findIndex(item => item.id === 'ghostery-rewards'), 1);
-		}
 
 		return <SetupAntiSuiteView features={features} />;
 	}
