@@ -15,6 +15,7 @@ import React from 'react';
 import ClassNames from 'classnames';
 import Tooltip from './Tooltip';
 import NavButton from './BuildingBlocks/NavButton';
+import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import globals from '../../../src/classes/Globals';
 import {
@@ -36,6 +37,8 @@ const AB_PAUSE_BUTTON = false;
  * @memberof PanelClasses
  */
 class Summary extends React.Component {
+	static contextType = DynamicUIPortContext;
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -58,6 +61,11 @@ class Summary extends React.Component {
 			{ name: t('pause_1_hour'), name_condensed: t('pause_1_hour_condensed'), val: 60 },
 			{ name: t('pause_24_hours'), name_condensed: t('pause_24_hours_condensed'), val: 1440 },
 		];
+
+		this._dynamicUIPort = this.context;
+
+		console.log('IVZ this in Summary constructor:');
+		console.log(this);
 	}
 
 	/**
@@ -72,6 +80,14 @@ class Summary extends React.Component {
 	 * Lifecycle event
 	 */
 	componentDidMount() {
+		/*
+		this._dynamicUIPort.onMessage.addListener((msg) => {
+			console.log('IVZ message to dynamic UI port received in Summary component. Message:');
+			console.log(msg);
+		});
+		*/
+
+		/*
 		this.uiPort = chrome.runtime.connect({ name: 'summaryUIPort' });
 		this.uiPort.onMessage.addListener((msg) => {
 			if (msg.adblock || msg.antitracking) {
@@ -80,6 +96,7 @@ class Summary extends React.Component {
 				this.props.actions.updateSummaryData(msg);
 			}
 		});
+		*/
 	}
 
 	/**
@@ -97,7 +114,7 @@ class Summary extends React.Component {
 	 * Lifecycle event
 	 */
 	componentWillUnmount() {
-		this.uiPort.disconnect();
+		// this.uiPort.disconnect();
 	}
 
 	/**

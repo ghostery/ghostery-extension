@@ -1569,7 +1569,7 @@ function initializeEventListeners() {
 	// This port transmits data to panel extension components in response to user navigation between panel components
 	// and to changes in the background data as the page loads, making the extension UI dynamic
 	chrome.runtime.onConnect.addListener((port) => {
-		if (port.name === 'panelDataPort') {
+		if (port.name === 'dynamicUIPanelPort') {
 			panelData.initPort(port);
 		}
 	});

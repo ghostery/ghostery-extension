@@ -13,9 +13,9 @@
 
 import React from 'react';
 import Header from '../containers/HeaderContainer';
+import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import { setTheme } from '../utils/utils';
-
 /**
  * @class Implement base view with functionality common to all views.
  * @memberof PanelClasses
@@ -29,7 +29,8 @@ class Panel extends React.Component {
 		this.clickReloadBanner = this.clickReloadBanner.bind(this);
 		this.filterTrackers = this.filterTrackers.bind(this);
 
-		this.dataInitialized = false;
+		this._dynamicUIPort = null;
+		this._dynamicUIDataInitialized = false;
 	}
 	/**
 	 * Lifecycle event
@@ -37,39 +38,19 @@ class Panel extends React.Component {
 	componentDidMount() {
 		sendMessage('ping', 'engaged');
 
-		this.uiPort = chrome.runtime.connect({ name: 'panelUIPort' });
-		this.uiPort.onMessage.addListener((msg) => {
-			if (!this.dataInitialized) {
-				this.dataInitialized = true;
+		this._dynamicUIPort = chrome.runtime.connect({ name: 'dynamicUIPanelPort' });
+		this._dynamicUIPort.onMessage.addListener((msg) => {
+			if (msg.to !== 'panel' || !msg.body) { return; }
 
-				const { panel, summary, blocking } = msg;
+			const { body } = msg;
 
-				const { current_theme, account } = panel;
-				setTheme(document, current_theme, account);
+			console.log('IVZ message to dynamic UI port received by PANEL; message:');
+			console.log(msg);
 
-				this.props.actions.updatePanelData(panel);
-				this.props.actions.updateSummaryData(summary);
-				if (blocking) { this.props.actions.updateBlockingData(blocking); }
-
-				if (panel.is_expert) {
-					// load Detail component
-					this.props.history.push('/detail');
-				}
-
-				// persist whitelist/blacklist/paused_blocking notifications in the event that the
-				// panel is opened without a page reload
-				if (Object.keys(panel.needsReload.changes).length) {
-					this.props.actions.showNotification({
-						updated: 'init',
-						reload: true
-					});
-				}
-
-				if (panel.enable_offers && panel.unread_offer_ids.length > 0) {
-					sendMessage('ping', 'engaged_offer');
-				}
-			} else {
-				this.props.actions.updatePanelData(msg);
+			if (body.panel) {
+				this._initializeData(body);
+			} else if (this._dynamicUIDataInitialized) {
+				this.props.actions.updatePanelData(body);
 			}
 		});
 	}
@@ -78,7 +59,7 @@ class Panel extends React.Component {
 	 * Lifecycle event
 	 */
 	componentWillUnmount() {
-		this.uiPort.disconnect();
+		this._dynamicUIPort.disconnect();
 	}
 
 	/**
@@ -132,6 +113,45 @@ class Panel extends React.Component {
 		}
 
 		this.closeNotification();
+	}
+
+	/**
+	 * Dynamic UI data port first payload handling
+	 * Called once, when we get the first message from the background through the port
+	 * @param	{Object}	payload		the body of the message
+	 */
+	_initializeData(payload) {
+		console.log('Panel#_initializeData called with payload: ');
+		console.log(payload);
+
+		this._dynamicUIDataInitialized = true;
+
+		const { panel, summary, blocking } = payload;
+		const { current_theme, account } = panel;
+
+		setTheme(document, current_theme, account);
+
+		this.props.actions.updatePanelData(panel);
+		this.props.actions.updateSummaryData(summary);
+		if (blocking) { this.props.actions.updateBlockingData(blocking); }
+
+		if (panel.is_expert) {
+			// load Detail component
+			this.props.history.push('/detail');
+		}
+
+		// persist whitelist/blacklist/paused_blocking notifications in the event that the
+		// panel is opened without a page reload
+		if (Object.keys(panel.needsReload.changes).length) {
+			this.props.actions.showNotification({
+				updated: 'init',
+				reload: true
+			});
+		}
+
+		if (panel.enable_offers && panel.unread_offer_ids.length > 0) {
+			sendMessage('ping', 'engaged_offer');
+		}
 	}
 
 	/**
@@ -203,7 +223,10 @@ class Panel extends React.Component {
 					</div>
 				</div>
 				<Header />
-				{ this.props.children }
+				<DynamicUIPortContext.Provider value={this._dynamicUIPort}>
+					{ this.props.children }
+				</DynamicUIPortContext.Provider>
+
 			</div>
 		);
 	}

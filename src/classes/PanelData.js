@@ -83,7 +83,8 @@ class PanelData {
 			this._attachListeners();
 
 			this._setTrackerListAndCategories();
-			this._panelPort.postMessage(this._getInitData());
+
+			this._postMessage('panel', this._getInitData());
 		});
 	}
 
@@ -95,7 +96,7 @@ class PanelData {
 		const port = this._panelPort;
 		const tab = this._activeTab;
 
-		if (!port || !tab) { return;}
+		if (!port || !tab) { return; }
 
 		port.onDisconnect.addListener(() => {
 			this._activeTab = null;
@@ -199,7 +200,7 @@ class PanelData {
 	 * @return {Object}		Blocking view data
 	 */
 	_getBlockingData() {
-		if (!this._activeTab) { return; }
+		if (!this._activeTab) { return {}; }
 
 		const { url: pageUrl } = this._activeTab;
 		const { expand_all_trackers, site_specific_blocks, site_specific_unblocks } = conf;
@@ -220,7 +221,7 @@ class PanelData {
 	 * @return {Object}		All data fields used by the panel, summary, and blocking (if in expert mode) views
 	 */
 	_getInitData() {
-		if (!this._activeTab) { return; }
+		if (!this._activeTab) { return {}; }
 
 		const currentAccount = conf.account;
 		if (currentAccount && currentAccount.user) {
@@ -269,7 +270,7 @@ class PanelData {
 
 		return {
 			needsReload: needsReload || { changes: {} },
-			smartBlock: smartBlock
+			smartBlock
 		};
 	}
 
@@ -353,7 +354,7 @@ class PanelData {
 	 * @return {Object}		Summary view data
 	 */
 	_getSummaryInitData() {
-		if (!this._activeTab) { return; }
+		if (!this._activeTab) { return {}; }
 
 		const { url, pageHost } = this._activeTab;
 		const { paused_blocking, paused_blocking_timeout } = globals.SESSION;
@@ -377,7 +378,7 @@ class PanelData {
 	 * @return {Object}		Fresh alertCounts, categories, and trackerCounts values
 	 */
 	_getSummaryUpdateData() {
-		if (!this._activeTab) { return; }
+		if (!this._activeTab) { return {}; }
 
 		const { id, url } = this._activeTab;
 
@@ -492,7 +493,7 @@ class PanelData {
 	 * @return	{array}		array of categories
 	 */
 	_buildCategories() {
-		if (!this._activeTab) { return; }
+		if (!this._activeTab) { return []; }
 
 		const categories = {};
 		const smartBlock = tabInfo.getTabInfo(this._activeTab.id, 'smartBlock');
@@ -597,7 +598,10 @@ class PanelData {
 	 */
 	_getTrackerState({ id: trackerId }, smartBlock) {
 		const { pageHost } = this._activeTab;
-		const { selectedAppIds, smartBlockActive } = conf;
+		const {
+			selected_app_ids: selectedAppIds,
+			enable_smart_block: smartBlockActive
+		} = conf;
 		const pageUnblocks = (pageHost && conf.site_specific_unblocks[pageHost]) || [];
 		const pageBlocks = (pageHost && conf.site_specific_blocks[pageHost]) || [];
 
@@ -637,7 +641,7 @@ class PanelData {
 	 */
 	_setTrackerListAndCategories() {
 		if (!this._activeTab) { return; }
-		
+
 		const { id, url } = this._activeTab;
 
 		this._trackerList = foundBugs.getApps(id, false, url) || [];
