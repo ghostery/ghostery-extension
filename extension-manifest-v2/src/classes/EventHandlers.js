@@ -51,8 +51,8 @@ class EventHandlers {
 		// Use a 1sec interval to limit calls on pages with a large number of requests.
 		// Don't use tabId with button.update for cases where tab is switched before throttle delay is reached.
 		// ToDo: Remove this function when there is an event for AdBlocker:foundAd.
-		this._throttleButtonUpdate = _.throttle(() => {
-			button.update();
+		this._throttleButtonUpdate = _.throttle((tabId) => {
+			button.update(tabId);
 		}, 1000, { leading: false });
 	}
 
@@ -610,7 +610,7 @@ class EventHandlers {
 
 		foundBugs.update(tab_id, bug_id, url, block, type);
 
-		button.update(details.tab_id);
+		this._throttleButtonUpdate(details.tab_id);
 
 		if (block && (conf.enable_click2play || conf.enable_click2playSocial)) {
 			buildC2P(details, app_id);
