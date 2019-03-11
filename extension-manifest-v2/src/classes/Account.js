@@ -25,9 +25,9 @@ import Api from '../utils/api';
 
 const api = new Api();
 const {
-	GHOSTERY_DOMAIN, AUTH_SERVER, ACCOUNT_SERVER, SYNC_ARRAY, IS_CLIQZ, BROWSER_INFO
+	GHOSTERY_DOMAIN, AUTH_SERVER, ACCOUNT_SERVER, SYNC_ARRAY, IS_CLIQZ
 } = globals;
-const IS_EDGE = (BROWSER_INFO.name === 'edge');
+
 const SYNC_SET = new Set(SYNC_ARRAY);
 
 class Account {
@@ -522,10 +522,6 @@ class Account {
 	 */
 	_setConfUserSettings = (settings) => {
 		log('SET USER SETTINGS', settings);
-		if (IS_EDGE) {
-			settings.enable_human_web = false;
-			settings.enable_offers = false;
-		}
 		if (IS_CLIQZ) {
 			settings.enable_human_web = false;
 			settings.enable_offers = false;
