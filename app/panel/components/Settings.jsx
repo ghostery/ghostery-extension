@@ -23,11 +23,14 @@ import Notifications from './Settings/Notifications';
 import OptIn from './Settings/OptIn';
 import Purplebox from './Settings/Purplebox';
 import Account from './Settings/Account';
+import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 /**
  * @class Implement base Settings view which routes navigation to all settings subviews
  * @memberof PanelClasses
  */
 class Settings extends React.Component {
+	static contextType = DynamicUIPortContext;
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -52,9 +55,11 @@ class Settings extends React.Component {
 	 * Lifecycle event. Triggers action which delivers settings data.
 	 */
 	componentDidMount() {
-		this.uiPort = chrome.runtime.connect({ name: 'settingsUIPort' });
-		this.uiPort.onMessage.addListener((msg) => {
-			this.props.actions.getSettingsData(msg);
+		this._dynamicUIPort = this.context;
+		this._dynamicUIPort.onMessage.addListener((msg) => {
+			if (msg.to !== 'settings' || !msg.body) { return; }
+
+			this.props.actions.getSettingsData(msg.body);
 		});
 	}
 
@@ -62,7 +67,7 @@ class Settings extends React.Component {
 	 * Lifecycle event
 	 */
 	componentWillUnmount() {
-		this.uiPort.disconnect();
+		this._dynamicUIPort.postMessage({ name: 'SettingsComponentWillUmount' });
 	}
 
 	GlobalBlockingComponent = () => (<GlobalBlocking toggleCheckbox={this.toggleCheckbox} settingsData={this.props} actions={this.props.actions} showToast={this.showToast} language={this.props.language} />);

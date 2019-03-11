@@ -114,7 +114,7 @@ class PanelData {
 				case 'BlockingComponentWillUnmount':
 					this._mountedComponents.blocking = false;
 					break;
-				case 'RewardsComponentWillMount':
+				case 'RewardsComponentDidMount':
 					this._mountedComponents.rewards = true;
 					this._panelPort.onDisconnect.addListener(rewards.panelHubClosedListener);
 					this._postMessage('rewards', this._getRewardsData());
@@ -123,7 +123,7 @@ class PanelData {
 					this._mountedComponents.rewards = false;
 					this._panelPort.onDisconnect.removeListener(rewards.panelHubClosedListener);
 					break;
-				case 'SettingsComponentWillMount':
+				case 'SettingsComponentDidMount':
 					this._mountedComponents.settings = true;
 					this._postMessage('settings', this._getRewardsData());
 					break;
