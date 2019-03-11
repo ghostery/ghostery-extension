@@ -252,9 +252,15 @@ class PanelData {
 	_getPanelUpdateData(tabId) {
 		const id = tabId || this._activeTab.id;
 		const { needsReload, smartBlock } = tabInfo.getTabInfo(id);
+		const currentAccount = conf.account;
+		if (currentAccount && currentAccount.user) {
+			currentAccount.user.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus']);
+		}
+
 		return {
 			needsReload: needsReload || { changes: {} },
-			smartBlock
+			smartBlock,
+			account: currentAccount
 		};
 	}
 
