@@ -161,14 +161,6 @@ class PanelData {
 		summaryUIPort.postMessage({
 			performanceData: clearData ? false : tabInfo.getTabInfo(tab_id, 'pageTiming')
 		});
-
-		if (!clearData) {
-			const { timing } = tabInfo.getTabInfo(tab_id, 'pageTiming');
-			const time = (Number(timing.loadEventEnd - timing.navigationStart) / 1000);
-
-			conf.ivz_count += 1;
-			conf.ivz_total_page_load_time += time;
-		}
 	}
 
 	/**
