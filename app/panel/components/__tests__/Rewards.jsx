@@ -22,11 +22,6 @@ global.t = function (str) {
 };
 
 describe('app/panel/components/Rewards.jsx', () => {
-	beforeAll(() => {
-		chrome.runtime.connect.withArgs({ name: 'rewardsUIPort' })
-			.returns({ name: 'rewardsUIPort', onMessage: { addListener: () => {} } });
-	});
-
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('rewards is rendered correctly when rewards is on and rewards is null', () => {
 			const initialState = {
