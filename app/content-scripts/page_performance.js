@@ -39,8 +39,7 @@ const PageInfo = (function (window, document) {
 		const pTime = (performance.timing.domContentLoadedEventStart - performance.timing.requestStart);
 		const pageLatency = pTime || 0;
 
-		// log('Sending latency from page_performance', pageLatency);
-		console.log('Sending latency from page_performance', pageLatency);
+		log('Sending latency from page_performance', pageLatency);
 
 		sendMessage('recordPageInfo', {
 			domain: `${protocol}//${host}${pathname}`,
