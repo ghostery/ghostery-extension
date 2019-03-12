@@ -93,6 +93,9 @@ class ConfData {
 			}
 
 			// simple props
+			_initProperty('ivz_count', 0);
+			_initProperty('ivz_total_page_load_time', 0);
+
 			_initProperty('alert_bubble_pos', 'br');
 			_initProperty('alert_bubble_timeout', 15);
 			_initProperty('alert_expanded', false);
