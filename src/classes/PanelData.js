@@ -31,7 +31,6 @@ import { getActiveTab, flushChromeMemoryCache, processUrl } from '../utils/utils
 import { objectEntries, log } from '../utils/common';
 
 const SYNC_SET = new Set(globals.SYNC_ARRAY);
-const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 const { IS_CLIQZ } = globals;
 const policy = new Policy();
 
@@ -438,11 +437,9 @@ class PanelData {
 	set(data) {
 		let syncSetDataChanged = false;
 
-		if (IS_EDGE || IS_CLIQZ) {
+		if (IS_CLIQZ) {
 			data.enable_human_web = false;
 			data.enable_offers = false;
-		}
-		if (IS_CLIQZ) {
 			data.enable_ad_block = false;
 			data.enable_anti_tracking = false;
 		}

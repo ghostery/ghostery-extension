@@ -1034,7 +1034,7 @@ function initializeDispatcher() {
 		cliqz.modules.core.action('refreshAppState');
 	});
 	dispatcher.on('conf.save.enable_human_web', (enableHumanWeb) => {
-		if (!IS_EDGE && !IS_CLIQZ) {
+		if (!IS_CLIQZ) {
 			setCliqzModuleEnabled(humanweb, enableHumanWeb).then(() => {
 				setupABTest();
 			});
@@ -1046,7 +1046,7 @@ function initializeDispatcher() {
 		button.update();
 		let firstStep = Promise.resolve();
 		let enableOffers = enableOffersIn;
-		if (IS_EDGE || IS_CLIQZ) {
+		if (IS_CLIQZ) {
 			enableOffers = false;
 		} else if (!enableOffers) {
 			const actions = cliqz &&
@@ -1578,7 +1578,13 @@ function initializeEventListeners() {
 	// NOTE: not supported on Edge and Firefox < v54
 	if (typeof chrome.runtime.onMessageExternal === 'object') {
 		chrome.runtime.onMessageExternal.addListener((request, sender, sendResponse) => {
-			const recognized = (sender.id === globals.GHOSTERY_TAB_CHROME_PRODUCTION_ID || sender.id === globals.GHOSTERY_TAB_CHROME_PRERELEASE_ID) || (sender.id === globals.GHOSTERY_TAB_CHROME_TEST_ID || sender.id === globals.GHOSTERY_TAB_FIREFOX_TEST_ID);
+			const recognized = [
+				globals.GHOSTERY_TAB_CHROME_PRODUCTION_ID,
+				globals.GHOSTERY_TAB_CHROME_PRERELEASE_ID,
+				globals.GHOSTERY_TAB_CHROME_TEST_ID,
+				globals.GHOSTERY_TAB_FIREFOX_PRODUCTION_ID,
+				globals.GHOSTERY_TAB_FIREFOX_TEST_ID
+			].indexOf(sender.id) !== -1;
 
 			if (recognized && request.name === 'getStatsAndSettings') {
 				getDataForGhosteryTab(data => sendResponse({ historicalDataAndSettings: data }));
@@ -1706,7 +1712,7 @@ function initializeGhosteryModules() {
 		Promise.all([
 			initialiseWebRequestPipeline(),
 		]).then(() => {
-			if (!(IS_EDGE || IS_CLIQZ)) {
+			if (!IS_CLIQZ) {
 				if (globals.JUST_UPGRADED_FROM_7) {
 					// These users had human web already, so we respect their choice
 					conf.enable_human_web = !humanweb.isDisabled;
@@ -1736,12 +1742,6 @@ function initializeGhosteryModules() {
 		log('cliqzStartup error', e);
 	});
 
-	if (IS_EDGE) {
-		setCliqzModuleEnabled(hpnv2, false);
-		setCliqzModuleEnabled(humanweb, false);
-		setCliqzModuleEnabled(offers, false);
-	}
-
 	if (IS_CLIQZ) {
 		setCliqzModuleEnabled(hpnv2, false);
 		setCliqzModuleEnabled(humanweb, false);
@@ -1755,7 +1755,7 @@ function initializeGhosteryModules() {
 		// auto-fetch from CMP
 		cmp.fetchCMPData();
 
-		if (!IS_EDGE && !IS_CLIQZ) {
+		if (!IS_CLIQZ) {
 			// auto-fetch human web offer
 			abtest.fetch().then(() => {
 				setupABTest();
