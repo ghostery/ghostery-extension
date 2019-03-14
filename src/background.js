@@ -782,10 +782,7 @@ function onMessageHandler(request, sender, callback) {
 
 	// HANDLE UNIVERSAL EVENTS HERE (NO ORIGIN LISTED ABOVE)
 	if (name === 'getSettingsData') { // used by the Hub, which does not use a port like the panel
-		utils.getActiveTab(() => {
-			const data = panelData.getSettingsData();
-			callback(data);
-		});
+		callback(panelData.getSettingsData());
 		account.getUserSettings().catch(err => log('Failed getting user settings from getSettingsData:', err));
 		return true;
 	} else if (name === 'getStats') {

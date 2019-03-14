@@ -124,7 +124,7 @@ class PanelData {
 					break;
 				case 'SettingsComponentDidMount':
 					this._mountedComponents.settings = true;
-					this._postMessage('settings', this._getSettingsData());
+					this._postMessage('settings', this.getSettingsData());
 					break;
 				case 'SettingsComponentWillUnmount':
 					this._mountedComponents.settings = false;
