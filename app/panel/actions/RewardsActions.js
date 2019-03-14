@@ -12,7 +12,7 @@
  */
 
 import {
-	GET_REWARDS_DATA,
+	UPDATE_REWARDS_DATA,
 	TOGGLE_OFFERS_ENABLED,
 	REMOVE_OFFER,
 	SET_OFFER_READ,
@@ -24,9 +24,9 @@ import {
  * @param	{Object}	data
  * @return	{Object}
  */
-export function getRewardsData(data) {
+export function updateRewardsData(data) {
 	return {
-		type: GET_REWARDS_DATA,
+		type: UPDATE_REWARDS_DATA,
 		data
 	};
 }

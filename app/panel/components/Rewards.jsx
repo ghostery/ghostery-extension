@@ -55,7 +55,7 @@ class Rewards extends React.Component {
 			this._dynamicUIPort.onMessage.addListener((msg) => {
 				if (msg.to !== 'rewards' || !msg.body) { return; }
 
-				this.props.actions.getRewardsData(msg.body);
+				this.props.actions.updateRewardsData(msg.body);
 			});
 			this._dynamicUIPort.postMessage({ name: 'RewardsComponentDidMount' });
 		}

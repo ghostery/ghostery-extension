@@ -116,7 +116,7 @@ class PanelData {
 				case 'RewardsComponentDidMount':
 					this._mountedComponents.rewards = true;
 					this._panelPort.onDisconnect.addListener(rewards.panelHubClosedListener);
-					this._postMessage('rewards', this._getRewardsData());
+					this._postMessage('rewards', this._updateRewardsData());
 					break;
 				case 'RewardsComponentWillUnmount':
 					this._mountedComponents.rewards = false;
@@ -323,13 +323,11 @@ class PanelData {
 		};
 	}
 
-	// TODO check to see if this might ever need to get updated while panel is open
-	// if not, does this need to be a port?
 	/**
 	 * Get rewards data for the Rewards View
 	 * @return {Object} Rewards view data
 	 */
-	_getRewardsData() {
+	_updateRewardsData() {
 		const { storedOffers, unreadOfferIds } = rewards;
 
 		return {

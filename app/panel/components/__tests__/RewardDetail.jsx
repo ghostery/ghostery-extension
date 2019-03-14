@@ -29,7 +29,7 @@ describe('app/panel/components/BuildingBlocks/RewardDetail.jsx', () => {
 		test('reward detail is rendered with all values present', () => {
 			const initialState = {
 				actions: {
-					getRewardsData: () => {},
+					updateRewardsData: () => {},
 					toggleOffersEnabled: () => {},
 					removeOffer: () => {},
 					setOfferRead: () => {},
@@ -53,7 +53,7 @@ describe('app/panel/components/BuildingBlocks/RewardDetail.jsx', () => {
 		test('reward detail is rendered with missing text', () => {
 			const initialState = {
 				actions: {
-					getRewardsData: () => {},
+					updateRewardsData: () => {},
 					toggleOffersEnabled: () => {},
 					removeOffer: () => {},
 					setOfferRead: () => {},
@@ -77,7 +77,7 @@ describe('app/panel/components/BuildingBlocks/RewardDetail.jsx', () => {
 		test('reward detail is rendered with missing description', () => {
 			const initialState = {
 				actions: {
-					getRewardsData: () => {},
+					updateRewardsData: () => {},
 					toggleOffersEnabled: () => {},
 					removeOffer: () => {},
 					setOfferRead: () => {},
@@ -101,7 +101,7 @@ describe('app/panel/components/BuildingBlocks/RewardDetail.jsx', () => {
 		test('reward detail is rendered with missing code', () => {
 			const initialState = {
 				actions: {
-					getRewardsData: () => {},
+					updateRewardsData: () => {},
 					toggleOffersEnabled: () => {},
 					removeOffer: () => {},
 					setOfferRead: () => {},
@@ -125,7 +125,7 @@ describe('app/panel/components/BuildingBlocks/RewardDetail.jsx', () => {
 		test('reward detail is rendered with missing conditions', () => {
 			const initialState = {
 				actions: {
-					getRewardsData: () => {},
+					updateRewardsData: () => {},
 					toggleOffersEnabled: () => {},
 					removeOffer: () => {},
 					setOfferRead: () => {},
@@ -151,7 +151,7 @@ describe('app/panel/components/BuildingBlocks/RewardDetail.jsx', () => {
 		test('reward detail is rendered correctly the code is copied', () => {
 			const initialState = {
 				actions: {
-					getRewardsData: () => {},
+					updateRewardsData: () => {},
 					toggleOffersEnabled: () => {},
 					removeOffer: () => {},
 					setOfferRead: () => {},

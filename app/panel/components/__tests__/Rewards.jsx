@@ -26,7 +26,7 @@ describe('app/panel/components/Rewards.jsx', () => {
 		test('rewards is rendered correctly when rewards is on and rewards is null', () => {
 			const initialState = {
 				actions: {
-					getRewardsData: () => {},
+					updateRewardsData: () => {},
 					sendSignal: () => {},
 				},
 				location: {
@@ -46,7 +46,7 @@ describe('app/panel/components/Rewards.jsx', () => {
 		test('rewards is rendered correctly when rewards is off and rewards is null', () => {
 			const initialState = {
 				actions: {
-					getRewardsData: () => {},
+					updateRewardsData: () => {},
 					sendSignal: () => {},
 				},
 				location: {
