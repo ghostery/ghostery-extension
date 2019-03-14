@@ -23,7 +23,6 @@ import {
 	UPDATE_SETTINGS_CATEGORY_BLOCKED,
 	UPDATE_SETTINGS_TRACKER_BLOCKED,
 	SETTINGS_TOGGLE_EXPAND_ALL,
-	SETTINGS_TOGGLE_EXPAND_CATEGORY,
 	SETTINGS_UPDATE_SEARCH_VALUE,
 	SETTINGS_SEARCH_SUBMIT,
 	SETTINGS_FILTER,
@@ -248,18 +247,6 @@ export function showNotification(data) {
 export function toggleExpandAll(data) {
 	return {
 		type: SETTINGS_TOGGLE_EXPAND_ALL,
-		data,
-	};
-}
-
-/**
- * Called from Category.toggleCategoryTrackers()
- * @param  {Object} data
- * @return {Object}
- */
-export function toggleExpandCategory(data) {
-	return {
-		type: SETTINGS_TOGGLE_EXPAND_CATEGORY,
 		data,
 	};
 }
