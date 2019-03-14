@@ -35,32 +35,26 @@ import globals from '../../../src/classes/Globals';
 
 /**
  * Fetch settings data from background
- * Used by the SetupBlockingDropdown component in Hub, which does not use ports
+ * The panel uses a dynamic UI port, but the hub does not
  * @return {Object} dispatch
  */
-export function getSettingsDataFromMessage() {
+export function getSettingsData(options = null) {
+	if (!options || !options.forHub) {
+		return {
+			type: GET_SETTINGS_DATA,
+			data
+		};
+	}
+
 	return function (dispatch) {
-		return sendMessageInPromise('getPanelData', {
-			view: 'settings',
-		}).then((data) => {
+		return sendMessageInPromise('getSettingsData', {}).
+		then((data) => {
 			dispatch({
 				type: GET_SETTINGS_DATA,
 				data,
 			});
 		});
-	};
-}
-
-/**
-* Save background-provided settings data
-* Used by the Settings component in panel, which talks to the background using a port
-* @param  {Object}	data
-* @return {Object}
-*/
-export function getSettingsDataFromPort(data) {
-	return {
-		type: GET_SETTINGS_DATA,
-		data
+		
 	};
 }
 

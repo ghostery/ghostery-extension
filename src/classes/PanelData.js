@@ -154,6 +154,51 @@ class PanelData {
 	}
 
 	/**
+	 * Get conf and tracker data for Settings View.
+	 * Public only because the Hub needs to call it through the background message handler
+	 * @return {Object}		Settings View data
+	 */
+	getSettingsData() {
+		const {
+			alert_bubble_pos, alert_bubble_timeout, block_by_default, bugs_last_updated,
+			enable_autoupdate, enable_click2play, enable_click2play_social, enable_human_web,
+			enable_offers, enable_metrics, hide_alert_trusted, ignore_first_party, notify_library_updates,
+			notify_upgrade_updates, new_app_ids, settings_last_imported, settings_last_exported,
+			show_alert, show_badge, show_cmp, language
+		} = conf;
+
+		return {
+			// custom
+			categories: this._buildGlobalCategories(),
+			offer_human_web: true,
+
+			// properties on conf
+			alert_bubble_pos,
+			alert_bubble_timeout,
+			block_by_default,
+			bugs_last_updated,
+			enable_autoupdate,
+			enable_click2play,
+			enable_click2play_social,
+			enable_human_web,
+			enable_offers,
+			enable_metrics,
+			hide_alert_trusted,
+			ignore_first_party,
+			notify_library_updates,
+			notify_upgrade_updates,
+			new_app_ids,
+			settings_last_imported,
+			settings_last_exported,
+			show_alert,
+			show_badge,
+			show_cmp,
+			language, // required for the setup page that does not have access to panelView data
+			...this._getSettingsAndBlockingCommonData()
+		};
+	}
+
+	/**
 	 * The page_performance content script, injected by EventHandlers#onNavigationCompleted,
 	 * gathers window.performance data and sends it in a message to background.js
 	 * The message handler in background.js calls this function so that the data
@@ -291,50 +336,6 @@ class PanelData {
 			enable_offers: conf.enable_offers,
 			storedOffers,
 			unreadOfferIds,
-		};
-	}
-
-	/**
-	 * Get conf and tracker data for Settings View.
-	 * @return {Object}		Settings View data
-	 */
-	_getSettingsData() {
-		const {
-			alert_bubble_pos, alert_bubble_timeout, block_by_default, bugs_last_updated,
-			enable_autoupdate, enable_click2play, enable_click2play_social, enable_human_web,
-			enable_offers, enable_metrics, hide_alert_trusted, ignore_first_party, notify_library_updates,
-			notify_upgrade_updates, new_app_ids, settings_last_imported, settings_last_exported,
-			show_alert, show_badge, show_cmp, language
-		} = conf;
-
-		return {
-			// custom
-			categories: this._buildGlobalCategories(),
-			offer_human_web: true,
-
-			// properties on conf
-			alert_bubble_pos,
-			alert_bubble_timeout,
-			block_by_default,
-			bugs_last_updated,
-			enable_autoupdate,
-			enable_click2play,
-			enable_click2play_social,
-			enable_human_web,
-			enable_offers,
-			enable_metrics,
-			hide_alert_trusted,
-			ignore_first_party,
-			notify_library_updates,
-			notify_upgrade_updates,
-			new_app_ids,
-			settings_last_imported,
-			settings_last_exported,
-			show_alert,
-			show_badge,
-			show_cmp,
-			language, // required for the setup page that does not have access to panelView data
-			...this._getSettingsAndBlockingCommonData()
 		};
 	}
 
