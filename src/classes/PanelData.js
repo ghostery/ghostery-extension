@@ -310,7 +310,7 @@ class PanelData {
 		return {
 			// custom
 			categories: this._buildGlobalCategories(),
-			offer_human_web: !IS_EDGE,
+			offer_human_web: true,
 
 			// properties on conf
 			alert_bubble_pos,
