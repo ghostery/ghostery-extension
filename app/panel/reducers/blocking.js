@@ -13,7 +13,7 @@
 
 /* eslint no-use-before-define: 0 */
 import {
-	GET_BLOCKING_DATA,
+	UPDATE_BLOCKING_DATA,
 	FILTER_TRACKERS,
 	UPDATE_BLOCK_ALL_TRACKERS,
 	UPDATE_CATEGORIES,
@@ -47,7 +47,7 @@ const initialState = {
  */
 export default (state = initialState, action) => {
 	switch (action.type) {
-		case GET_BLOCKING_DATA: {
+		case UPDATE_BLOCKING_DATA: {
 			return Object.assign({}, state, action.data);
 		}
 		case FILTER_TRACKERS: {

@@ -12,7 +12,7 @@
  */
 
 import {
-	GET_BLOCKING_DATA,
+	UPDATE_BLOCKING_DATA,
 	UPDATE_BLOCK_ALL_TRACKERS,
 	UPDATE_CATEGORIES,
 	UPDATE_CATEGORY_BLOCKED,
@@ -27,7 +27,7 @@ import {
  */
 export function updateBlockingData(data) {
 	return {
-		type: GET_BLOCKING_DATA,
+		type: UPDATE_BLOCKING_DATA,
 		data,
 	};
 }
