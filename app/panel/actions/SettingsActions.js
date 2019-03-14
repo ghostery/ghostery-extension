@@ -34,11 +34,30 @@ import { hashCode } from '../../../src/utils/common';
 import globals from '../../../src/classes/Globals';
 
 /**
+ * Fetch settings data from background
+ * Used by the SetupBlockingDropdown component in Hub, which does not use ports
+ * @return {Object} dispatch
+ */
+export function getSettingsDataFromMessage() {
+	return function (dispatch) {
+		return sendMessageInPromise('getPanelData', {
+			view: 'settings',
+		}).then((data) => {
+			dispatch({
+				type: GET_SETTINGS_DATA,
+				data,
+			});
+		});
+	};
+}
+
+/**
 * Save background-provided settings data
+* Used by the Settings component in panel, which talks to the background using a port
 * @param  {Object}	data
 * @return {Object}
 */
-export function getSettingsData(data) {
+export function getSettingsDataFromPort(data) {
 	return {
 		type: GET_SETTINGS_DATA,
 		data

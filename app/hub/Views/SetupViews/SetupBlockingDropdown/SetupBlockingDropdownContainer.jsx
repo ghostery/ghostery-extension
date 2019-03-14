@@ -27,7 +27,7 @@ class SetupBlockingDropdownContainer extends Component {
 
 		const { sendMountActions } = props;
 		if (sendMountActions) {
-			props.actions.getSettingsData();
+			props.actions.getSettingsDataFromMessage();
 		}
 	}
 
