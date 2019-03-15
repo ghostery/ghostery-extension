@@ -52,10 +52,9 @@ class Rewards extends React.Component {
 	 */
 	componentDidMount() {
 		this._dynamicUIPort = this.context;
-		if (this._dynamicUIPort) {
-			this._dynamicUIPort.onMessage.addListener(this.handlePortMessage);
-			this._dynamicUIPort.postMessage({ name: 'RewardsComponentDidMount' });
-		}
+		this._dynamicUIPort.onMessage.addListener(this.handlePortMessage);
+		this._dynamicUIPort.postMessage({ name: 'RewardsComponentDidMount' });
+
 		this.props.actions.sendSignal('hub_open');
 	}
 
@@ -95,10 +94,9 @@ class Rewards extends React.Component {
 	componentWillUnmount() {
 		/* @TODO send message to background to remove port onDisconnect event */
 		this.props.actions.sendSignal('hub_closed');
-		if (this._dynamicUIPort) {
-			this._dynamicUIPort.postMessage({ name: 'RewardsComponentWillUnmount' });
-			this._dynamicUIPort.onMessage.removeListener(this.handlePortMessage);
-		}
+
+		this._dynamicUIPort.postMessage({ name: 'RewardsComponentWillUnmount' });
+		this._dynamicUIPort.onMessage.removeListener(this.handlePortMessage);
 	}
 
 	/**
