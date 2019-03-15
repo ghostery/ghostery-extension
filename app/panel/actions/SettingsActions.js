@@ -46,7 +46,7 @@ export function updateSettingsData(portData) {
 	}
 
 	return function (dispatch) {
-		return sendMessageInPromise('updateSettingsData', {})
+		return sendMessageInPromise('getPanelData', { view: 'settings' })
 			.then((promisedData) => {
 				dispatch({
 					type: GET_SETTINGS_DATA,
