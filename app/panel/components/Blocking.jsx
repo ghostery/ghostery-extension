@@ -33,6 +33,8 @@ class Blocking extends React.Component {
 			blockingClasses: '',
 			disableBlocking: false,
 		};
+
+		this.handlePortMessage = this.handlePortMessage.bind(this);
 	}
 
 	/**
@@ -48,11 +50,7 @@ class Blocking extends React.Component {
 	 */
 	componentDidMount() {
 		this._dynamicUIPort = this.context;
-		this._dynamicUIPort.onMessage.addListener((msg) => {
-			if (msg.to !== 'blocking' || !msg.body) { return; }
-
-			this.props.actions.updateBlockingData(msg.body);
-		});
+		this._dynamicUIPort.onMessage.addListener(this.handlePortMessage);
 		this._dynamicUIPort.postMessage({ name: 'BlockingComponentDidMount' });
 	}
 
@@ -86,6 +84,7 @@ class Blocking extends React.Component {
 	 */
 	componentWillUnmount() {
 		this._dynamicUIPort.postMessage({ name: 'BlockingComponentWillUnmount' });
+		this._dynamicUIPort.onMessage.removeListener(this.handlePortMessage);
 	}
 
 	/**
@@ -209,6 +208,15 @@ class Blocking extends React.Component {
 		});
 
 		this.props.actions.updateCategories(updated_categories);
+	}
+
+	/**
+	 * Handles messages from dynamic UI port to background
+	 */
+	handlePortMessage(msg) {
+		if (msg.to !== 'blocking' || !msg.body) { return; }
+
+		this.props.actions.updateBlockingData(msg.body);
 	}
 
 	/**

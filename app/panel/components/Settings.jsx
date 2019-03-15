@@ -69,6 +69,9 @@ class Settings extends React.Component {
 		this._dynamicUIPort.onMessage.removeListener(this.handlePortMessage);
 	}
 
+	/**
+	 * Handles messages from dynamic UI port to background
+	 */
 	handlePortMessage(msg) {
 		if (msg.to !== 'settings' || !msg.body) { return; }
 
