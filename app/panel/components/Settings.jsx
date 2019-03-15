@@ -43,6 +43,7 @@ class Settings extends React.Component {
 		this.selectItem = this.selectItem.bind(this);
 		this.showToast = this.showToast.bind(this);
 		this.hideToast = this.hideToast.bind(this);
+		this.handlePortMessage = this.handlePortMessage.bind(this);
 	}
 	/**
 	 * Lifecycle event. Default sub view is set here.
@@ -56,11 +57,7 @@ class Settings extends React.Component {
 	 */
 	componentDidMount() {
 		this._dynamicUIPort = this.context;
-		this._dynamicUIPort.onMessage.addListener((msg) => {
-			if (msg.to !== 'settings' || !msg.body) { return; }
-
-			this.props.actions.updateSettingsData(msg.body);
-		});
+		this._dynamicUIPort.onMessage.addListener(this.handlePortMessage);
 		this._dynamicUIPort.postMessage({ name: 'SettingsComponentDidMount' });
 	}
 
@@ -69,6 +66,13 @@ class Settings extends React.Component {
 	 */
 	componentWillUnmount() {
 		this._dynamicUIPort.postMessage({ name: 'SettingsComponentWillUnmount' });
+		this._dynamicUIPort.onMessage.removeListener(this.handlePortMessage);
+	}
+
+	handlePortMessage(msg) {
+		if (msg.to !== 'settings' || !msg.body) { return; }
+
+		this.props.actions.updateSettingsData(msg.body);
 	}
 
 	GlobalBlockingComponent = () => (<GlobalBlocking toggleCheckbox={this.toggleCheckbox} settingsData={this.props} actions={this.props.actions} showToast={this.showToast} language={this.props.language} />);
