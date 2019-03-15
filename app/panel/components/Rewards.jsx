@@ -44,6 +44,7 @@ class Rewards extends React.Component {
 		this.renderRewardDetailComponent = this.renderRewardDetailComponent.bind(this);
 		this.handleBackClick = this.handleBackClick.bind(this);
 		this.handleFaqClick = this.handleFaqClick.bind(this);
+		this.handlePortMessage = this.handlePortMessage.bind(this);
 	}
 
 	/**
@@ -52,11 +53,7 @@ class Rewards extends React.Component {
 	componentDidMount() {
 		this._dynamicUIPort = this.context;
 		if (this._dynamicUIPort) {
-			this._dynamicUIPort.onMessage.addListener((msg) => {
-				if (msg.to !== 'rewards' || !msg.body) { return; }
-
-				this.props.actions.updateRewardsData(msg.body);
-			});
+			this._dynamicUIPort.onMessage.addListener(this.handlePortMessage);
 			this._dynamicUIPort.postMessage({ name: 'RewardsComponentDidMount' });
 		}
 		this.props.actions.sendSignal('hub_open');
@@ -100,7 +97,17 @@ class Rewards extends React.Component {
 		this.props.actions.sendSignal('hub_closed');
 		if (this._dynamicUIPort) {
 			this._dynamicUIPort.postMessage({ name: 'RewardsComponentWillUnmount' });
+			this._dynamicUIPort.onMessage.removeListener(this.handlePortMessage);
 		}
+	}
+
+	/**
+	 * Handles message from the dynamic UI port to background
+	 */
+	handlePortMessage(msg) {
+		if (msg.to !== 'rewards' || !msg.body) { return; }
+
+		this.props.actions.updateRewardsData(msg.body);
 	}
 
 	/**
