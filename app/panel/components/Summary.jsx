@@ -55,6 +55,7 @@ class Summary extends React.Component {
 		this.clickTrackersBlocked = this.clickTrackersBlocked.bind(this);
 		this.clickSitePolicy = this.clickSitePolicy.bind(this);
 		this.clickCliqzFeature = this.clickCliqzFeature.bind(this);
+		this.handlePortMessage = this.handlePortMessage.bind(this);
 
 		this.pauseOptions = [
 			{ name: t('pause_30_min'), name_condensed: t('pause_30_min_condensed'), val: 30 },
@@ -71,17 +72,7 @@ class Summary extends React.Component {
 		this.updateSiteNotScanned(this.props);
 
 		this._dynamicUIPort = this.context;
-		this._dynamicUIPort.onMessage.addListener((msg) => {
-			if (msg.to !== 'summary' || !msg.body) { return; }
-
-			const { body } = msg;
-
-			if (body.adblock || body.antitracking) {
-				this.props.actions.updateCliqzModuleData(body);
-			} else {
-				this.props.actions.updateSummaryData(body);
-			}
-		});
+		this._dynamicUIPort.onMessage.addListener(this.handlePortMessage);
 		this._dynamicUIPort.postMessage({ name: 'SummaryComponentDidMount' });
 	}
 
@@ -101,6 +92,7 @@ class Summary extends React.Component {
 	 */
 	componentWillUnmount() {
 		this._dynamicUIPort.postMessage({ name: 'SummaryComponentWillUnmount' });
+		this._dynamicUIPort.onMessage.removeListener(this.handlePortMessage);
 	}
 
 	/**
@@ -128,6 +120,21 @@ class Summary extends React.Component {
 		// reset page load value if page is reloaded while panel is open
 		} else if (this.props.performanceData && !performanceData) {
 			this.setState({ trackerLatencyTotal: pageLatency });
+		}
+	}
+
+	/**
+	 * Handles messages from dynamic UI port to background
+	 */
+	handlePortMessage(msg) {
+		if (msg.to !== 'summary' || !msg.body) { return; }
+
+		const { body } = msg;
+
+		if (body.adblock || body.antitracking) {
+			this.props.actions.updateCliqzModuleData(body);
+		} else {
+			this.props.actions.updateSummaryData(body);
 		}
 	}
 
