@@ -274,11 +274,20 @@ class Blocking extends React.Component {
 			actions,
 			categories,
 			expand_all_trackers,
+			is_expanded,
+			language,
 			paused_blocking,
+			selected_app_ids,
+			show_tracker_urls,
 			sitePolicy,
 			smartBlock,
 			smartBlockActive
 		} = this.props;
+
+		const {
+			blockingClasses,
+			disableBlocking
+		} = this.state;
 
 		return (
 			<div id="content-blocking">
@@ -288,23 +297,23 @@ class Blocking extends React.Component {
 					actions={actions}
 					sitePolicy={sitePolicy}
 					paused_blocking={paused_blocking}
-					selected_app_ids={this.props.selected_app_ids}
+					selected_app_ids={selected_app_ids}
 					smartBlockActive={smartBlockActive}
 					smartBlock={smartBlock}
 				/>
-				{(this.state.disableBlocking && this.props.is_expanded) ?
+				{(disableBlocking && is_expanded) ?
 					<NotScanned />
 					:
-					<div className={`${this.state.blockingClasses} blocking-trackers show-warnings`}>
+					<div className={`${blockingClasses} blocking-trackers show-warnings`}>
 						{ categories.length > 0 &&
 							<Categories
 								expandAll={expand_all_trackers}
 								categories={categories}
 								actions={actions}
-								show_tracker_urls={this.props.show_tracker_urls}
+								show_tracker_urls={show_tracker_urls}
 								sitePolicy={sitePolicy}
 								paused_blocking={paused_blocking}
-								language={this.props.language}
+								language={language}
 								smartBlockActive={smartBlockActive}
 								smartBlock={smartBlock}
 							/>
