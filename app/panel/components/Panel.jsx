@@ -186,9 +186,7 @@ class Panel extends React.Component {
 			);
 		}
 
-		return (
-			<span dangerouslySetInnerHTML={{ __html: this.props.notificationText }} />
-		);
+		return false;
 	}
 
 	/**
@@ -201,10 +199,12 @@ class Panel extends React.Component {
 			return null;
 		}
 
+		const notificationText = this.renderNotification();
+
 		return (
 			<div id="panel">
 				<div className="callout-container">
-					<div className={`${(!this.props.notificationShown ? 'hide ' : '') + this.props.notificationClasses} callout`}>
+					<div className={`${(!notificationText ? 'hide ' : '') + this.props.notificationClasses} callout`}>
 						<svg onClick={this.closeNotification} width="15px" height="15px" viewBox="0 0 15 15" className="close-button">
 							<g>
 								<path strokeWidth="3" strokeLinecap="round" d="M3,3 L12,12 M3,12 L12,3" />
