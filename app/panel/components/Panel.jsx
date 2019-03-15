@@ -199,7 +199,7 @@ class Panel extends React.Component {
 			return null;
 		}
 
-		const notificationText = this.renderNotification();
+		const notificationText = this.props.notificationShown && this.renderNotification();
 
 		return (
 			<div id="panel">
