@@ -49,6 +49,7 @@ import * as common from './utils/common';
 import * as utils from './utils/utils';
 import { _getJSONAPIErrorsObject } from './utils/api';
 import { importCliqzSettings } from './utils/cliqzSettingImport';
+import { sendCliqzModulesData } from './utils/cliqzModulesData';
 
 // For debug purposes, provide Access to the internals of `browser-core`
 // module from Developer Tools Console.
@@ -815,52 +816,14 @@ function onMessageHandler(request, sender, callback) {
 		}
 		callback();
 	} else if (name === 'getCliqzModuleData') {
-		/*
-		const modules = { adblock: {}, antitracking: {} };
-
-		_sendCliqzModulesData() {
-			if (!this._panelPort || !this._activeTab) { return; }
-
-			const modules = { adblock: {}, antitracking: {} };
-			const { id } = this._activeTab;
-
-			modules.adblock = getCliqzAdblockingData(id);
-			// TODO convert to use finally to avoid duplication (does our Babel transpile it?)
-			getCliqzAntitrackingData(id).then((antitrackingData) => {
-				modules.antitracking = antitrackingData;
-				this._postMessage('summary', modules);
-			}).catch(() => {
-				this._postMessage('summary', modules);
-			});
-		}
-		const getCliqzModuleDataForTab = (tabId, callback) => {
-			button.update();
-			if (conf.enable_ad_block) {
-				// update adblock count. callback() handled below based on anti-tracking status
-				modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tabId) || {};
-			}
-			if (conf.enable_anti_tracking) {
-				cliqz.modules.antitracking.background.actions.aggregatedBlockingStats(tabId).then((data) => {
-					modules.antitracking = data || {};
-					callback(modules);
-				}).catch(() => {
-					callback(modules);
-				});
-			} else {
-				callback(modules);
-			}
-		};
-
 		if (message && message.tabId) {
-			getCliqzModuleDataForTab(+message.tabId, callback);
+			sendCliqzModulesData(message.tabId, callback);
 		} else {
 			utils.getActiveTab((tab) => {
-				getCliqzModuleDataForTab(tab.id, callback);
+				sendCliqzModulesData(tab.id, callback);
 			});
 		}
-
 		return true;
-		*/
 	} else if (name === 'getTrackerDescription') {
 		utils.getJson(message.url).then((result) => {
 			const description = (result) ? ((result.company_in_their_own_words) ? result.company_in_their_own_words : ((result.company_description) ? result.company_description : '')) : '';
