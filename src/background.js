@@ -782,7 +782,21 @@ function onMessageHandler(request, sender, callback) {
 	}
 
 	// HANDLE UNIVERSAL EVENTS HERE (NO ORIGIN LISTED ABOVE)
-	if (name === 'updateSettingsData') { // used by the Hub, which does not use a port like the panel
+	if (name === 'getPanelData') {
+		if (!message.tabId) {
+			utils.getActiveTab((tab) => {
+				const data = panelData.get(message.view, tab);
+				callback(data);
+			});
+		} else {
+			chrome.tabs.get(+message.tabId, (tab) => {
+				const data = panelData.get(message.view, tab);
+				callback(data);
+			});
+		}
+		account.getUserSettings().catch(err => log('Failed getting user settings from getPanelData:', err));
+		return true;
+	} else if (name === 'updateSettingsData') { // used by the Hub, which does not use a port like the panel
 		callback(panelData.updateSettingsData());
 		account.getUserSettings().catch(err => log('Failed getting user settings from updateSettingsData:', err));
 		return true;
