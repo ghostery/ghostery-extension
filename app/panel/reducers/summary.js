@@ -14,7 +14,7 @@
 /* eslint no-use-before-define: 0 */
 
 import {
-	GET_SUMMARY_DATA,
+	UPDATE_SUMMARY_DATA,
 	UPDATE_CLIQZ_MODULE_DATA,
 	UPDATE_GHOSTERY_PAUSED,
 	UPDATE_SITE_POLICY,
@@ -47,7 +47,7 @@ const initialState = {
  */
 export default (state = initialState, action) => {
 	switch (action.type) {
-		case GET_SUMMARY_DATA: {
+		case UPDATE_SUMMARY_DATA: {
 			return Object.assign({}, state, action.data);
 		}
 		case UPDATE_CLIQZ_MODULE_DATA: {

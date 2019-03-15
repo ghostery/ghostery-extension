@@ -14,7 +14,7 @@
 import Immutable from 'seamless-immutable';
 import summaryReducer from '../summary';
 import {
-	GET_SUMMARY_DATA,
+	UPDATE_SUMMARY_DATA,
 	UPDATE_CLIQZ_MODULE_DATA,
 	UPDATE_TRACKER_COUNTS,
 	UPDATE_GHOSTERY_PAUSED,
@@ -42,9 +42,9 @@ describe('app/panel/reducers/summary.js', () => {
 		expect(summaryReducer(undefined, {})).toEqual(initialState);
 	});
 
-	test('reducer correctly handles GET_SUMMARY_DATA', () => {
+	test('reducer correctly handles UPDATE_SUMMARY_DATA', () => {
 		const data = { test: true };
-		const action = { data, type: GET_SUMMARY_DATA };
+		const action = { data, type: UPDATE_SUMMARY_DATA };
 		const initState = Immutable({});
 
 		expect(summaryReducer(initState, action)).toEqual(data);
