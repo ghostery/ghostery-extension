@@ -31,7 +31,7 @@ class Blocking extends React.Component {
 
 		this.state = {
 			blockingClasses: '',
-			disableBlocking: false
+			disableBlocking: false,
 		};
 	}
 
