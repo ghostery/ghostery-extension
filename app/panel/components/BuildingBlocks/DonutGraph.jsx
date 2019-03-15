@@ -296,6 +296,9 @@ class DonutGraph extends React.Component {
 				};
 			})
 			.ease(easeLinear);
+
+		// EXIT
+		arcs.exit().remove();
 	}
 
 	/**
