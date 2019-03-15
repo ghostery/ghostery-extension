@@ -17,7 +17,7 @@ import conf from './Conf';
 import foundBugs from './FoundBugs';
 import rewards from './Rewards';
 import Policy from './Policy';
-import { getCliqzAntitrackingData, getCliqzAdblockingData } from '../utils/cliqzModuleData';
+import { getCliqzAntitrackingData, getCliqzAdblockingData } from '../utils/cliqzModulesData';
 import { getTab } from '../utils/utils';
 import { log } from '../utils/common';
 import globals from './Globals';

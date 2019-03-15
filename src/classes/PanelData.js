@@ -26,7 +26,7 @@ import tabInfo from './TabInfo';
 import rewards from './Rewards';
 import account from './Account';
 import dispatcher from './Dispatcher';
-import { getCliqzAdblockingData, getCliqzAntitrackingData } from '../utils/cliqzModuleData';
+import { sendCliqzModulesData } from '../utils/cliqzModulesData';
 import { getActiveTab, flushChromeMemoryCache, processUrl } from '../utils/utils';
 import { objectEntries, log } from '../utils/common';
 
@@ -152,6 +152,13 @@ class PanelData {
 	clearPageLoadTime(tab_id) {
 		this.sendPageLoadTime(tab_id, true);
 	}
+
+	/**
+	 * Wrapper helper for use with utils/cliqzModuleData#sendCliqzModulesData
+	 */
+	postMessageToSummary = ((message) => {
+		this._postMessage('summary', message);
+	});
 
 	/**
 	 * The page_performance content script, injected by EventHandlers#onNavigationCompleted,
@@ -412,17 +419,7 @@ class PanelData {
 	_sendCliqzModulesData() {
 		if (!this._panelPort || !this._activeTab) { return; }
 
-		const modules = { adblock: {}, antitracking: {} };
-		const { id } = this._activeTab;
-
-		modules.adblock = getCliqzAdblockingData(id);
-		// TODO convert to use finally to avoid duplication (does our Babel transpile it?)
-		getCliqzAntitrackingData(id).then((antitrackingData) => {
-			modules.antitracking = antitrackingData;
-			this._postMessage('summary', modules);
-		}).catch(() => {
-			this._postMessage('summary', modules);
-		});
+		sendCliqzModulesData(this._activeTab.id, this.postMessageToSummary);
 	}
 	// [/DATA TRANSFER]
 

@@ -56,3 +56,16 @@ export function getCliqzAdblockingData(tabId) {
 	const adBlocking = adblocker.background.actions.getAdBlockInfoForTab(tabId);
 	return adBlocking || { totalCount: 0 };
 }
+
+export function sendCliqzModulesData(tabId, callback) {
+	const modules = { adblock: {}, antitracking: {} };
+
+	modules.adblock = getCliqzAdblockingData(tabId);
+	// TODO convert to use finally to avoid duplication (does our Babel transpile it?)
+	getCliqzAntitrackingData(tabId).then((antitrackingData) => {
+		modules.antitracking = antitrackingData;
+		callback(modules);
+	}).catch(() => {
+		callback(modules);
+	});
+}
