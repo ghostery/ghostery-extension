@@ -61,6 +61,7 @@ class GlobalBlocking extends React.Component {
 				<div className="blocking-trackers">
 					{ categories && categories.length > 0 &&
 						<Categories
+							expandAll={expandAll}
 							categories={categories}
 							filtered={this.props.filtered}
 							actions={this.props.actions}
