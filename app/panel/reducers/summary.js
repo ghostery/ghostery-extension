@@ -15,7 +15,7 @@
 
 import {
 	GET_SUMMARY_DATA,
-	GET_CLIQZ_MODULE_DATA,
+	UPDATE_CLIQZ_MODULE_DATA,
 	UPDATE_GHOSTERY_PAUSED,
 	UPDATE_SITE_POLICY,
 	UPDATE_TRACKER_COUNTS
@@ -50,7 +50,7 @@ export default (state = initialState, action) => {
 		case GET_SUMMARY_DATA: {
 			return Object.assign({}, state, action.data);
 		}
-		case GET_CLIQZ_MODULE_DATA: {
+		case UPDATE_CLIQZ_MODULE_DATA: {
 			return Object.assign({}, state, { adBlock: action.data.adblock, antiTracking: action.data.antitracking });
 		}
 		case UPDATE_GHOSTERY_PAUSED: {

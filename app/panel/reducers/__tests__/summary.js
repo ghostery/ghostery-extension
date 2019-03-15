@@ -15,7 +15,7 @@ import Immutable from 'seamless-immutable';
 import summaryReducer from '../summary';
 import {
 	GET_SUMMARY_DATA,
-	GET_CLIQZ_MODULE_DATA,
+	UPDATE_CLIQZ_MODULE_DATA,
 	UPDATE_TRACKER_COUNTS,
 	UPDATE_GHOSTERY_PAUSED,
 	UPDATE_SITE_POLICY
@@ -50,7 +50,7 @@ describe('app/panel/reducers/summary.js', () => {
 		expect(summaryReducer(initState, action)).toEqual(data);
 	});
 
-	test('reducer correctly handles GET_CLIQZ_MODULE_DATA', () => {
+	test('reducer correctly handles UPDATE_CLIQZ_MODULE_DATA', () => {
 		const data = {
 			adblock: {
 				unchangedData: false,
@@ -64,7 +64,7 @@ describe('app/panel/reducers/summary.js', () => {
 				newData: true
 			}
 		};
-		const action = { data, type: GET_CLIQZ_MODULE_DATA };
+		const action = { data, type: UPDATE_CLIQZ_MODULE_DATA };
 		const initState = Immutable({
 			tab_id: 0,
 			adBlock: {

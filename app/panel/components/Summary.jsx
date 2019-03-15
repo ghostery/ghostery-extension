@@ -77,7 +77,7 @@ class Summary extends React.Component {
 			const { body } = msg;
 
 			if (body.adblock || body.antitracking) {
-				this.props.actions.getCliqzModuleData(body);
+				this.props.actions.updateCliqzModuleData(body);
 			} else {
 				this.props.actions.updateSummaryData(body);
 			}
