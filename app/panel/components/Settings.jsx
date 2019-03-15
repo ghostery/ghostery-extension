@@ -59,7 +59,7 @@ class Settings extends React.Component {
 		this._dynamicUIPort.onMessage.addListener((msg) => {
 			if (msg.to !== 'settings' || !msg.body) { return; }
 
-			this.props.actions.getSettingsData(msg.body);
+			this.props.actions.updateSettingsData(msg.body);
 		});
 		this._dynamicUIPort.postMessage({ name: 'SettingsComponentDidMount' });
 	}

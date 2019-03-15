@@ -781,9 +781,9 @@ function onMessageHandler(request, sender, callback) {
 	}
 
 	// HANDLE UNIVERSAL EVENTS HERE (NO ORIGIN LISTED ABOVE)
-	if (name === 'getSettingsData') { // used by the Hub, which does not use a port like the panel
-		callback(panelData.getSettingsData());
-		account.getUserSettings().catch(err => log('Failed getting user settings from getSettingsData:', err));
+	if (name === 'updateSettingsData') { // used by the Hub, which does not use a port like the panel
+		callback(panelData.updateSettingsData());
+		account.getUserSettings().catch(err => log('Failed getting user settings from updateSettingsData:', err));
 		return true;
 	} else if (name === 'getStats') {
 		insights.action('getStatsTimeline', message.from, message.to, true, true).then((data) => {

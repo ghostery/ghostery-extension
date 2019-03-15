@@ -37,7 +37,7 @@ import globals from '../../../src/classes/Globals';
  * The panel uses a dynamic UI port, but the hub does not
  * @return {Object} dispatch
  */
-export function getSettingsData(portData) {
+export function updateSettingsData(portData) {
 	if (portData) {
 		return {
 			type: GET_SETTINGS_DATA,
@@ -46,7 +46,7 @@ export function getSettingsData(portData) {
 	}
 
 	return function (dispatch) {
-		return sendMessageInPromise('getSettingsData', {})
+		return sendMessageInPromise('updateSettingsData', {})
 			.then((promisedData) => {
 				dispatch({
 					type: GET_SETTINGS_DATA,
