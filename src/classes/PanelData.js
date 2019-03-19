@@ -522,9 +522,6 @@ class PanelData {
 	_postUserSettings(userSettings) {
 		if (!this._panelPort || !this._activeTab) { return; }
 
-		console.log('IVZ panelData#_sendUserSettings called and passed this userSettings object:');
-		console.log(userSettings);
-
 		this._postMessage('panel', this._getUserSettingsForPanelView(userSettings));
 
 		const { blocking, settings } = this._mountedComponents;
