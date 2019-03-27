@@ -682,9 +682,9 @@ amdefine@>=0.0.4:
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   integrity sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU=
 
-"anonymous-credentials@https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.1/anonymous-credentials-0.1.1.tgz":
-  version "0.1.1"
-  resolved "https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.1/anonymous-credentials-0.1.1.tgz#62c7ff176599b08d56e7f93ec2d753cab2cc9737"
+"anonymous-credentials@https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.3/anonymous-credentials-0.1.3.tgz":
+  version "0.1.3"
+  resolved "https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.3/anonymous-credentials-0.1.3.tgz#4c40d574fb6072d8ca04f2347f0abb6e132e98d2"
   dependencies:
     bindings "1.3.0"
 
@@ -1236,20 +1236,19 @@ brorand@^1.0.1:
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
   integrity sha1-EsJe/kCkXjwyPrhnWgoM5XsiNx8=
 
-"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.33/7.33.0.ca77d37.tgz":
-  version "7.33.0"
-  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.33/7.33.0.ca77d37.tgz#589bc032a13aa90293de726edd8ad33fb5989e9e"
+"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.35/7.35.1.8ec615c.tgz":
+  version "7.35.1"
+  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.35/7.35.1.8ec615c.tgz#f3af23b470490c5eac352a74b468bca3817f3416"
   dependencies:
     "@cliqz-oss/dexie" "^2.0.4"
     "@cliqz/adblocker" "^0.6.8"
     ajv "^6.5.0"
-    anonymous-credentials "https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.1/anonymous-credentials-0.1.1.tgz"
+    anonymous-credentials "https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.3/anonymous-credentials-0.1.3.tgz"
     classnames "^2.2.5"
-    cliqz-history "https://github.com/cliqz-oss/cliqz-history/releases/download/1.1.1/cliqz-history-1.1.1.tgz"
+    cliqz-history "https://github.com/cliqz-oss/cliqz-history/releases/download/1.1.2/cliqz-history-1.1.2.tgz"
     cron "^1.2.1"
     cron-parser "^2.4.0"
     deep-equal "^1.0.1"
-    fast-url-parser "^=1.1.2"
     fs-extra "^4.0.1"
     global "^4.3.2"
     handlebars "^4.0.11"
@@ -1263,6 +1262,7 @@ brorand@^1.0.1:
     node-persist "^2.0.11"
     pako "^1.0.6"
     prop-types "^15.5.10"
+    punycode "^2.1.1"
     qrcodejs "^1.0.0"
     react "16.6.3"
     react-dom "16.6.3"
@@ -1272,9 +1272,8 @@ brorand@^1.0.1:
     react-tooltip "3.9.0"
     react-touch-carousel "0.8.3"
     rusha "^0.8.13"
-    rxjs "^6.3.3"
+    rxjs "^6.4.0"
     sanitize-filename "^1.6.1"
-    simple-statistics "^5.2.1"
     spanan "^2.0.0"
     spectre.css "^0.5.7"
     tablesorter "^2.29.2"
@@ -1667,9 +1666,9 @@ cli-width@^2.0.0:
   resolved "https://registry.yarnpkg.com/cli-width/-/cli-width-2.2.0.tgz#ff19ede8a9a5e579324147b0c11f0fbcbabed639"
   integrity sha1-/xnt6Kml5XkyQUewwR8PvLq+1jk=
 
-"cliqz-history@https://github.com/cliqz-oss/cliqz-history/releases/download/1.1.1/cliqz-history-1.1.1.tgz":
-  version "1.1.1"
-  resolved "https://github.com/cliqz-oss/cliqz-history/releases/download/1.1.1/cliqz-history-1.1.1.tgz#fbca7dd50ff1aadf5b25c2a3dadae1554975a42a"
+"cliqz-history@https://github.com/cliqz-oss/cliqz-history/releases/download/1.1.2/cliqz-history-1.1.2.tgz":
+  version "1.1.2"
+  resolved "https://github.com/cliqz-oss/cliqz-history/releases/download/1.1.2/cliqz-history-1.1.2.tgz#7e08e6754d9eeab54311c4ab9c6e90ed842a1bde"
 
 cliui@^3.2.0:
   version "3.2.0"
@@ -3232,13 +3231,6 @@ fast-levenshtein@~2.0.4:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
   integrity sha1-PYpcZog6FqMMqGQ+hR8Zuqd5eRc=
-
-fast-url-parser@^=1.1.2:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/fast-url-parser/-/fast-url-parser-1.1.3.tgz#f4af3ea9f34d8a271cf58ad2b3759f431f0b318d"
-  integrity sha1-9K8+qfNNiicc9YrSs3WfQx8LMY0=
-  dependencies:
-    punycode "^1.3.2"
 
 fastparse@^1.1.1:
   version "1.1.2"
@@ -6882,7 +6874,7 @@ punycode@1.3.2:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.3.2.tgz#9653a036fb7c1ee42342f2325cceefea3926c48d"
   integrity sha1-llOgNvt8HuQjQvIyXM7v6jkmxI0=
 
-punycode@^1.2.4, punycode@^1.3.2, punycode@^1.4.1:
+punycode@^1.2.4, punycode@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
   integrity sha1-wNWmOycYgArY4esPpSachN1BhF4=
@@ -7640,7 +7632,7 @@ rx-lite@*, rx-lite@^4.0.8:
   resolved "https://registry.yarnpkg.com/rx-lite/-/rx-lite-4.0.8.tgz#0b1e11af8bc44836f04a6407e92da42467b79444"
   integrity sha1-Cx4Rr4vESDbwSmQH6S2kJGe3lEQ=
 
-rxjs@^6.3.3:
+rxjs@^6.4.0:
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.4.0.tgz#f3bb0fe7bda7fb69deac0c16f17b50b0b8790504"
   integrity sha512-Z9Yfa11F6B9Sg/BK9MnqnQ+aQYicPLtilXBp2yUtDt2JRCE0h26d33EnfO3ZxoNxG0T92OUucP3Ct7cpfkdFfw==
@@ -7863,11 +7855,6 @@ signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
   integrity sha1-tf3AjxKH6hF4Yo5BXiUTK3NkbG0=
-
-simple-statistics@^5.2.1:
-  version "5.4.0"
-  resolved "https://registry.yarnpkg.com/simple-statistics/-/simple-statistics-5.4.0.tgz#d54c8394d6d611b5f21ad538cc761efe889df018"
-  integrity sha512-BGTD+w6VBZ7LF4pseTN91gFAFjIRJ/ygQACNKABXQbnVYGWxYByxc7mouATWx+rob7hqvUAINsqxvNEmahpccA==
 
 sinon-chrome@^2.2.1:
   version "2.3.2"
