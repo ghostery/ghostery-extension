@@ -274,7 +274,9 @@ class PanelData {
 	_getDynamicPanelData(tabId) {
 		const id = tabId || (this._activeTab && this._activeTab.id) || null;
 
-		const { needsReload, smartBlock } = tabInfo.getTabInfo(id) || { needsReload: false, smartBlock: {} };
+		const { needsReload, smartBlock } =
+			tabInfo.getTabInfo(id) ||
+			{ needsReload: false, smartBlock: { blocked: {}, unblocked: {} } };
 
 		return {
 			needsReload: needsReload || { changes: {} },
