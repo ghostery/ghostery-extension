@@ -13,6 +13,7 @@
 
 /* eslint consistent-return: 0 */
 
+import { clone } from 'underscore';
 import button from './BrowserButton';
 import cliqz from './Cliqz';
 import conf from './Conf';
@@ -74,7 +75,12 @@ class Rewards {
 		const newStoredOffers = {};
 		(offers || []).forEach(({ offer_id: offerId, attrs = {}, offer_info: offerInfo }) => {
 			const offer = (this.storedOffers || {})[offerId];
-			if (offer) { newStoredOffers[offerId] = { ...offer, attrs, offer_data: offerInfo }; }
+			if (offer) {
+				const newOffer = clone(offer);
+				newOffer.attrs = attrs;
+				newOffer.offer_data = offerInfo;
+				newStoredOffers[offerId] = newOffer;
+			}
 		});
 		this.storedOffers = newStoredOffers;
 		this.unreadOfferIds = this.unreadOfferIds.filter(id => newStoredOffers[id]);
