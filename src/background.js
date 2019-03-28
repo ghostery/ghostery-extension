@@ -901,10 +901,11 @@ function onMessageHandler(request, sender, callback) {
 			.then((customer) => {
 				// TODO temporary fix to handle multiple subscriptions
 				const subscriptionData = customer.subscriptions.reduce((acc, curr) => {
+					let a = acc;
 					if (curr.productName.includes('Plus')) {
-						acc = curr;
+						a = curr;
 					}
-					return acc;
+					return a;
 				}, {});
 				callback({ subscriptionData });
 			})
