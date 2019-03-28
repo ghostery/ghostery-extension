@@ -922,7 +922,13 @@ function onMessageHandler(request, sender, callback) {
 	} else if (name === 'account.getUserSubscriptionData') {
 		account.getUserSubscriptionData()
 			.then((customer) => {
-				const subscriptionData = customer.subscriptions;
+				// TODO temporary fix to handle multiple subscriptions
+				const subscriptionData = customer.subscriptions.reduce((acc, curr) => {
+					if (curr.productName.includes('Plus')) {
+						return curr;
+					}
+					return acc;
+				}, {});
 				callback({ subscriptionData });
 			})
 			.catch((err) => {
