@@ -166,7 +166,7 @@ class Account {
 				// TODO temporary fix to handle multiple subscriptions
 				const sub = customer.subscriptions.reduce((acc, curr) => {
 					if (curr.productName.includes('Plus')) {
-						return curr;
+						acc = curr;
 					}
 					return acc;
 				}, {});
