@@ -6,9 +6,9 @@
 Ghostery helps you browse smarter by giving you control over ads and tracking technologies to speed up page loads, eliminate clutter, and protect your data. This is the unified code repository for the Ghostery browser extensions in Chrome, Firefox, Opera and Edge.
 
 ## Downloads
-**Firefox** &ndash; [Download](https://addons.mozilla.org/en-US/firefox/addon/ghostery/) &nbsp; ![amo-rating](https://img.shields.io/amo/rating/ghostery.svg?style=flat-square) &nbsp; ![amo-users](https://img.shields.io/amo/users/ghostery.svg?style=flat-square)
+**Firefox** &ndash; [Download](https://addons.mozilla.org/en-US/firefox/addon/ghostery/)
 
-**Chrome** &ndash; [Download](https://chrome.google.com/webstore/detail/ghostery-%E2%80%93-privacy-ad-blo/mlomiejdfkolichcflejclcbmpeaniij) &nbsp; ![Chrome Web Store-rating](https://img.shields.io/chrome-web-store/rating/mlomiejdfkolichcflejclcbmpeaniij.svg?style=flat-square) &nbsp; ![Chrome Web Store-users](https://img.shields.io/chrome-web-store/d/mlomiejdfkolichcflejclcbmpeaniij.svg?style=flat-square&label=users)
+**Chrome** &ndash; [Download](https://chrome.google.com/webstore/detail/ghostery-%E2%80%93-privacy-ad-blo/mlomiejdfkolichcflejclcbmpeaniij)
 
 **Cliqz** &ndash; [Download](https://s3.amazonaws.com/cdncliqz/update/browser/firefox%40ghostery.com/latest.xpi)
 
@@ -155,17 +155,25 @@ See [CONTRIBUTING](CONTRIBUTING.md) and [CODE OF CONDUCT](CODE-OF-CONDUCT.md)
 + [Facebook](https://www.facebook.com/ghostery)
 + [Privacy Policy](https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/)
 
+## Additional Open Source Ghostery Projects
++ [Ghostery Android Browser](https://github.com/ghostery/browser-android)
++ [Ghostery iOS Browser](https://github.com/ghostery/browser-ios)
++ [Cliqz Desktop Browser](https://github.com/cliqz-oss/browser-f)
++ [Ghostery Lite for Safari](https://github.com/ghostery/GhosterySafari)
+
 ## Ghostery Team
 Ghostery relies on [contributions](https://github.com/ghostery/ghostery-extension/graphs/contributors) from lots of talented people. Our core development team looks like this:
 
-![Christopher Tino](https://avatars3.githubusercontent.com/u/4699516?s=460&v=4) | ![José María Signanini](https://static.cliqz.com/wp-content/uploads/2017/08/jose.jpg) | ![Serge Zarembsky](https://static.cliqz.com/wp-content/uploads/2017/08/serge.jpg) | ![Patrick Lawler](https://static.cliqz.com/wp-content/uploads/2017/08/patrick.jpg) | ![Caleb Richelson](https://avatars0.githubusercontent.com/u/1928870?s=400&v=4) | ![Aziz Aithsaine](https://static.cliqz.com/wp-content/uploads/2017/08/aziz.jpg)
-:---:|:---:|:---:|:---:|:---:|:---:
-[Christopher Tino](http://github.com/christophertino) | [José María Signanini](https://github.com/jsignanini) | [Serge Zarembsky](https://github.com/zarembsky) | [Patrick Lawler](https://github.com/trickpattyFH20) | [Caleb Richelson](https://github.com/IAmThePan) | Aziz Aithsaine
+![Christopher Tino](https://static.cliqz.com/wp-content/uploads/2017/08/chris.jpg) | ![José María Signanini](https://static.cliqz.com/wp-content/uploads/2017/08/jose.jpg) | ![Serge Zarembsky](https://static.cliqz.com/wp-content/uploads/2017/08/serge.jpg) | ![Patrick Lawler](https://static.cliqz.com/wp-content/uploads/2017/08/patrick.jpg) | ![Caleb Richelson](https://static.cliqz.com/wp-content/uploads/2018/03/caleb.jpg)
+:---:|:---:|:---:|:---:|:---:
+[Christopher Tino](http://github.com/christophertino) | [José María Signanini](https://github.com/jsignanini) | [Serge Zarembsky](https://github.com/zarembsky) | [Patrick Lawler](https://github.com/trickpattyFH20) | [Caleb Richelson](https://github.com/IAmThePan)
+![Aziz Aithsaine](https://static.cliqz.com/wp-content/uploads/2017/08/aziz.jpg) | ![Ethan Gooding](https://static.cliqz.com/wp-content/uploads/2018/12/Ethan.jpg) | ![Frank Chiarulli](https://static.cliqz.com/wp-content/uploads/2018/12/Frank-Chiarulli.jpg) | ![Ilya Zarembsky](https://static.cliqz.com/wp-content/uploads/2018/12/Ilya-Zarembsky.jpg) | ![Valmik Patel](https://static.cliqz.com/wp-content/uploads/2018/07/Valmik.jpg)
+Aziz Aithsaine | [Ethan Gooding](https://github.com/Eden12345) | [Frank Chiarulli](https://github.com/fcjr) | [Ilya Zarembsky](https://github.com/wlycdgr) | [Valmik Patel](https://github.com/valmikkpatel)
 
 See the full montage of uncommonly attractive Ghosterians/Cliqzers [here](https://www.cliqz.com/about/team).
 
 ## License
-[MPL-2.0](https://www.mozilla.org/en-US/MPL/2.0/) Copyright 2018 Ghostery, Inc. All rights reserved.
+[MPL-2.0](https://www.mozilla.org/en-US/MPL/2.0/) Copyright 2019 Ghostery, Inc. All rights reserved.
 
 See [LICENSE](LICENSE)
 
