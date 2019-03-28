@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -12,32 +12,23 @@
  */
 
 import {
-	GET_BLOCKING_DATA,
+	UPDATE_BLOCKING_DATA,
 	UPDATE_BLOCK_ALL_TRACKERS,
 	UPDATE_CATEGORIES,
 	UPDATE_CATEGORY_BLOCKED,
 	UPDATE_TRACKER_BLOCKED,
 	UPDATE_TRACKER_TRUST_RESTRICT,
-	TOGGLE_EXPAND_ALL,
-	TOGGLE_EXPAND_CATEGORY
+	TOGGLE_EXPAND_ALL
 } from '../constants/constants';
-import { sendMessageInPromise } from '../utils/msg';
 
 /**
-* Fetch blocking data from background
-* @return {Object} dispatch
-*/
-export function getBlockingData(tabId) {
-	return function (dispatch) {
-		return sendMessageInPromise('getPanelData', {
-			tabId,
-			view: 'blocking',
-		}).then((data) => {
-			dispatch({
-				type: GET_BLOCKING_DATA,
-				data,
-			});
-		});
+ * Update Blocking data
+ * @return {Object}
+ */
+export function updateBlockingData(data) {
+	return {
+		type: UPDATE_BLOCKING_DATA,
+		data,
 	};
 }
 
@@ -120,18 +111,6 @@ export function updateTrackerTrustRestrict(data) {
 export function toggleExpandAll(data) {
 	return {
 		type: TOGGLE_EXPAND_ALL,
-		data,
-	};
-}
-
-/**
- * Called from Category.toggleCategoryTrackers
- * @param  {Object} data
- * @return {Object}
- */
-export function toggleExpandCategory(data) {
-	return {
-		type: TOGGLE_EXPAND_CATEGORY,
 		data,
 	};
 }

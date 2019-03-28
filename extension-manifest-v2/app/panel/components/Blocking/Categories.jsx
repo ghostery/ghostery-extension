@@ -13,6 +13,7 @@
 
 import React from 'react';
 import Category from './Category';
+
 /**
  * @class Implement Categories component, which represents a
  * container of available categories. This component is shared
@@ -21,17 +22,19 @@ import Category from './Category';
  */
 class Categories extends React.Component {
 	componentDidMount() {}
+
 	/**
 	* Render a list of categories. Pass globalBlocking flag to all categories
 	* in the list, so that they would know which view they are part of.
 	* @return {ReactComponent}   ReactComponent instance
 	*/
 	render() {
-		const { categories } = this.props;
+		const { categories, expandAll } = this.props;
 		const globalBlocking = !!this.props.globalBlocking;
 		const filtered = !!this.props.filtered;
 		const categoryList = categories.map((cat, index) => (
 			<Category
+				expandAll={expandAll}
 				globalBlocking={globalBlocking}
 				index={index}
 				category={cat}

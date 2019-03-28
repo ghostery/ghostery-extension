@@ -26,12 +26,11 @@ import {
 	UPDATE_SETTINGS_CATEGORY_BLOCKED,
 	UPDATE_SETTINGS_TRACKER_BLOCKED,
 	SETTINGS_TOGGLE_EXPAND_ALL,
-	SETTINGS_TOGGLE_EXPAND_CATEGORY,
 	SETTINGS_UPDATE_SEARCH_VALUE,
 	SETTINGS_FILTER,
 	GET_SETTINGS_DATA
 } from '../constants/constants';
-import { updateTrackerBlocked, updateCategoryBlocked, updateBlockAllTrackers, toggleExpandAll, toggleExpandCategory } from '../utils/blocking';
+import { updateTrackerBlocked, updateCategoryBlocked, updateBlockAllTrackers, toggleExpandAll } from '../utils/blocking';
 import { sendMessage } from '../utils/msg';
 import globals from '../../../src/classes/Globals';
 import { objectEntries } from '../../../src/utils/common';
@@ -101,10 +100,6 @@ export default (state = initialState, action) => {
 		}
 		case SETTINGS_TOGGLE_EXPAND_ALL: {
 			const updated = toggleExpandAll(state, action);
-			return Object.assign({}, state, updated);
-		}
-		case SETTINGS_TOGGLE_EXPAND_CATEGORY: {
-			const updated = toggleExpandCategory(state, action);
 			return Object.assign({}, state, updated);
 		}
 		case UPDATE_SETTINGS_TRACKER_BLOCKED: {

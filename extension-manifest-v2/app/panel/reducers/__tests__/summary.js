@@ -14,8 +14,8 @@
 import Immutable from 'seamless-immutable';
 import summaryReducer from '../summary';
 import {
-	GET_SUMMARY_DATA,
-	GET_CLIQZ_MODULE_DATA,
+	UPDATE_SUMMARY_DATA,
+	UPDATE_CLIQZ_MODULE_DATA,
 	UPDATE_TRACKER_COUNTS,
 	UPDATE_GHOSTERY_PAUSED,
 	UPDATE_SITE_POLICY
@@ -42,25 +42,48 @@ describe('app/panel/reducers/summary.js', () => {
 		expect(summaryReducer(undefined, {})).toEqual(initialState);
 	});
 
-	test('reducer correctly handles GET_SUMMARY_DATA', () => {
+	test('reducer correctly handles UPDATE_SUMMARY_DATA', () => {
 		const data = { test: true };
-		const action = { data, type: GET_SUMMARY_DATA };
+		const action = { data, type: UPDATE_SUMMARY_DATA };
 		const initState = Immutable({});
 
 		expect(summaryReducer(initState, action)).toEqual(data);
 	});
 
-	test('reducer correctly handles GET_CLIQZ_MODULE_DATA', () => {
-		const data = { adblock: {}, antitracking: {} };
-		const action = { data, type: GET_CLIQZ_MODULE_DATA };
-		const initState = Immutable({});
-
-		expect(summaryReducer(initState, action)).toEqual({
-			adBlock: {},
-			antiTracking: {
-				totalUnsafeCount: 0
+	test('reducer correctly handles UPDATE_CLIQZ_MODULE_DATA', () => {
+		const data = {
+			adblock: {
+				unchangedData: false,
+				changedData: true,
+				newData: true
 			},
+			antitracking: {
+				totalUnsafeCount: 3,
+				unchangedData: false,
+				changedData: true,
+				newData: true
+			}
+		};
+		const action = { data, type: UPDATE_CLIQZ_MODULE_DATA };
+		const initState = Immutable({
+			tab_id: 0,
+			adBlock: {
+				unchangedData: false,
+				changedData: false
+			},
+			antiTracking: {
+				totalUnsafeCount: 1,
+				unchangedData: false,
+				changedData: false
+			}
 		});
+
+		const updatedState = Immutable.merge(initState, {
+			adBlock: data.adblock,
+			antiTracking: data.antitracking
+		});
+
+		expect(summaryReducer(initState, action)).toEqual(updatedState);
 	});
 
 	test('reducer correctly handles UPDATE_GHOSTERY_PAUSED', () => {

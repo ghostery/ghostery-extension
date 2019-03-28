@@ -45,6 +45,7 @@
     "babel-core": "^7.0.0-bridge.0"
   },
   "dependencies": {
+    "@cliqz/adblocker": "0.3.1",
     "base64-js": "^1.2.1",
     "browser-core": "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.35/7.35.1.8ec615c.tgz",
     "classnames": "^2.2.5",
@@ -53,6 +54,7 @@
     "history": "^4.7.2",
     "json-api-normalizer": "^0.4.10",
     "lodash.isequal": "^4.5.0",
+    "lodash.throttle": "^4.1.1",
     "moment": "^2.19.1",
     "prop-types": "^15.6.2",
     "query-string": "^6.1.0",

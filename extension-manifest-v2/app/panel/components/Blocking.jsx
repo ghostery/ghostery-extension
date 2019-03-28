@@ -15,20 +15,28 @@ import React from 'react';
 import Categories from './Blocking/Categories';
 import BlockingHeader from './Blocking/BlockingHeader';
 import NotScanned from './BuildingBlocks/NotScanned';
+import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { updateSummaryBlockingCount } from '../utils/blocking';
+
 /**
  * @class Implement Blocking View in the right
  * pane of the detailed (expert) panel.
  * @memberof PanelClasses
  */
 class Blocking extends React.Component {
+	static contextType = DynamicUIPortContext;
+
 	constructor(props) {
 		super(props);
+
 		this.state = {
 			blockingClasses: '',
 			disableBlocking: false,
 		};
+
+		this.handlePortMessage = this.handlePortMessage.bind(this);
 	}
+
 	/**
 	 * Lifecycle event
 	 */
@@ -36,25 +44,24 @@ class Blocking extends React.Component {
 		this.updateBlockingClasses(this.props);
 		this.updateSiteNotScanned(this.props);
 	}
+
 	/**
 	 * Lifecycle event
 	 */
 	componentDidMount() {
-		// We only need to fetch blocking data directly on instances where the user swtiches between
-		// simple and expert view. Otherwise, it's fetched via Panel. Here, we check for properties that
-		// are returned by PanelData::blockingView()
-		if (this.props.categories.length === 0 && typeof this.props.toggle_individual_trackers === 'undefined') {
-			this.props.actions.getBlockingData();
-		}
+		this._dynamicUIPort = this.context;
+		this._dynamicUIPort.onMessage.addListener(this.handlePortMessage);
+		this._dynamicUIPort.postMessage({ name: 'BlockingComponentDidMount' });
 	}
+
 	/**
 	 * Lifecycle event
 	 */
 	componentWillReceiveProps(nextProps) {
-		// triggered by update to the redux store
 		this.updateBlockingClasses(nextProps);
 		this.updateSiteNotScanned(nextProps);
 	}
+
 	/**
 	 * Lifecycle event
 	 */
@@ -71,6 +78,15 @@ class Blocking extends React.Component {
 		const smartBlock = this.props.smartBlockActive && this.props.smartBlock || { blocked: {}, unblocked: {} };
 		updateSummaryBlockingCount(this.props.categories, smartBlock, this.props.actions.updateTrackerCounts);
 	}
+
+	/**
+	 * Lifecycle event
+	 */
+	componentWillUnmount() {
+		this._dynamicUIPort.postMessage({ name: 'BlockingComponentWillUnmount' });
+		this._dynamicUIPort.onMessage.removeListener(this.handlePortMessage);
+	}
+
 	/**
 	* Filter trackers by category, or reset filters. Trigger action.
 	* @param  {string} filterName
@@ -97,6 +113,7 @@ class Blocking extends React.Component {
 
 		this.props.actions.updateCategories(updated_categories);
 	}
+
 	/**
 	* Filter trackers in categories to show only
 	* those that are blocked. Trigger action.
@@ -120,6 +137,7 @@ class Blocking extends React.Component {
 
 		this.props.actions.updateCategories(updated_categories);
 	}
+
 	/**
 	* Filter trackers in categories to show only
 	* those that have warnings. Trigger action.
@@ -143,6 +161,7 @@ class Blocking extends React.Component {
 
 		this.props.actions.updateCategories(updated_categories);
 	}
+
 	/**
 	* Filter trackers in categories to show only those
 	* that have compatibility warnings. Trigger action.
@@ -166,6 +185,7 @@ class Blocking extends React.Component {
 
 		this.props.actions.updateCategories(updated_categories);
 	}
+
 	/**
 	 * Filter trackers in categories to show only those that
 	 * have slow/insecure warnings. Trigger action.
@@ -189,6 +209,16 @@ class Blocking extends React.Component {
 
 		this.props.actions.updateCategories(updated_categories);
 	}
+
+	/**
+	 * Handles messages from dynamic UI port to background
+	 */
+	handlePortMessage(msg) {
+		if (msg.to !== 'blocking' || !msg.body) { return; }
+
+		this.props.actions.updateBlockingData(msg.body);
+	}
+
 	/**
 	* Set dynamic classes on .blocking-trackers. Set state.
 	* @param  {Object} props
@@ -202,6 +232,7 @@ class Blocking extends React.Component {
 
 		this.setState({ blockingClasses: classes.join(' ') });
 	}
+
 	/**
 	* Disable controls for a site that cannot be scanned by Ghostery. Set state.
 	* @param {Object}	props	nextProps
@@ -216,6 +247,7 @@ class Blocking extends React.Component {
 			this.setState({ disableBlocking: false });
 		}
 	}
+
 	/**
 	* Filter tracker list based on filter data received from props.
 	*/
@@ -240,38 +272,58 @@ class Blocking extends React.Component {
 			this.setShow(filter.name);
 		}
 	}
+
 	/**
 	* Render blocking panel.
 	* @return {ReactComponent}   ReactComponent instance
 	*/
 	render() {
-		const { categories } = this.props;
+		const {
+			actions,
+			categories,
+			expand_all_trackers,
+			is_expanded,
+			language,
+			paused_blocking,
+			selected_app_ids,
+			show_tracker_urls,
+			sitePolicy,
+			smartBlock,
+			smartBlockActive
+		} = this.props;
+
+		const {
+			blockingClasses,
+			disableBlocking
+		} = this.state;
+
 		return (
 			<div id="content-blocking">
 				<BlockingHeader
 					categories={categories}
-					expandAll={this.props.expand_all_trackers}
-					actions={this.props.actions}
-					sitePolicy={this.props.sitePolicy}
-					paused_blocking={this.props.paused_blocking}
-					selected_app_ids={this.props.selected_app_ids}
-					smartBlockActive={this.props.smartBlockActive}
-					smartBlock={this.props.smartBlock}
+					expandAll={expand_all_trackers}
+					actions={actions}
+					sitePolicy={sitePolicy}
+					paused_blocking={paused_blocking}
+					selected_app_ids={selected_app_ids}
+					smartBlockActive={smartBlockActive}
+					smartBlock={smartBlock}
 				/>
-				{(this.state.disableBlocking && this.props.is_expanded) ?
+				{(disableBlocking && is_expanded) ?
 					<NotScanned />
 					:
-					<div className={`${this.state.blockingClasses} blocking-trackers show-warnings`}>
+					<div className={`${blockingClasses} blocking-trackers show-warnings`}>
 						{ categories.length > 0 &&
 							<Categories
+								expandAll={expand_all_trackers}
 								categories={categories}
-								actions={this.props.actions}
-								show_tracker_urls={this.props.show_tracker_urls}
-								sitePolicy={this.props.sitePolicy}
-								paused_blocking={this.props.paused_blocking}
-								language={this.props.language}
-								smartBlockActive={this.props.smartBlockActive}
-								smartBlock={this.props.smartBlock}
+								actions={actions}
+								show_tracker_urls={show_tracker_urls}
+								sitePolicy={sitePolicy}
+								paused_blocking={paused_blocking}
+								language={language}
+								smartBlockActive={smartBlockActive}
+								smartBlock={smartBlock}
 							/>
 						}
 					</div>
