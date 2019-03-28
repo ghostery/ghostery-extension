@@ -16,7 +16,7 @@ import thunk from 'redux-thunk';
 import * as msg from '../../utils/msg';
 import * as rewardsActions from '../RewardsActions';
 import {
-	GET_REWARDS_DATA,
+	UPDATE_REWARDS_DATA,
 	TOGGLE_OFFERS_ENABLED,
 	REMOVE_OFFER,
 	SET_OFFER_READ,
@@ -38,17 +38,17 @@ msg.sendMessageInPromise = jest.fn(messageType => new Promise((resolve) => {
 }));
 
 describe('app/panel/actions/RewardsActions.js', () => {
-	test('getRewardsData action should return correctly', () => {
+	test('updateRewardsData action should return correctly', () => {
 		const initialState = {};
 		const store = mockStore(initialState);
 
 		const data = testData;
-		const expectedPayload = { data, type: GET_REWARDS_DATA };
+		const expectedPayload = { data, type: UPDATE_REWARDS_DATA };
 
-		return store.dispatch(rewardsActions.getRewardsData()).then(() => {
-			const actions = store.getActions();
-			expect(actions).toEqual([expectedPayload]);
-		});
+		store.dispatch(rewardsActions.updateRewardsData(data));
+
+		const actions = store.getActions();
+		expect(actions).toEqual([expectedPayload]);
 	});
 
 	test('toggleOffersEnabled action should return correctly', () => {

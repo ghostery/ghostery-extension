@@ -94,7 +94,6 @@ SetupBlockingDropdown.propTypes = {
 		filter: PropTypes.func.isRequired,
 		showNotification: PropTypes.func.isRequired,
 		toggleExpandAll: PropTypes.func.isRequired,
-		toggleExpandCategory: PropTypes.func.isRequired,
 		updateBlockAllTrackers: PropTypes.func.isRequired,
 		updateCategoryBlocked: PropTypes.func.isRequired,
 		updateSearchValue: PropTypes.func.isRequired,

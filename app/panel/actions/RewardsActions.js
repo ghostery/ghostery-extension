@@ -12,30 +12,22 @@
  */
 
 import {
-	GET_REWARDS_DATA,
+	UPDATE_REWARDS_DATA,
 	TOGGLE_OFFERS_ENABLED,
 	REMOVE_OFFER,
 	SET_OFFER_READ,
 	SEND_SIGNAL
 } from '../constants/constants';
-import { sendMessageInPromise } from '../utils/msg';
 
 /**
- * Fetch rewards data from background
- * @param  {Object} tabId null
- * @return {Object}       dispatch
+ * Store rewards data fetched from background
+ * @param	{Object}	data
+ * @return	{Object}
  */
-export function getRewardsData(tabId) {
-	return function (dispatch) {
-		return sendMessageInPromise('getPanelData', {
-			tabId,
-			view: 'rewards',
-		}).then((data) => {
-			dispatch({
-				type: GET_REWARDS_DATA,
-				data,
-			});
-		});
+export function updateRewardsData(data) {
+	return {
+		type: UPDATE_REWARDS_DATA,
+		data
 	};
 }
 
@@ -75,6 +67,9 @@ export function setOfferRead(id) {
 	};
 }
 
+// TODO the reducer calls getRewardMessage
+// determine whether it would be better to simply call getRewardMessage directly where sendSignal is called
+// (both since reducers are not supposed to have side effects and also because...why the extra complexity?)
 /**
  * Sends a Signal to the Cliqz Offers
  * @param  {String} actionId the action id of the signal

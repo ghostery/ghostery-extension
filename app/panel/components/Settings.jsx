@@ -23,11 +23,14 @@ import Notifications from './Settings/Notifications';
 import OptIn from './Settings/OptIn';
 import Purplebox from './Settings/Purplebox';
 import Account from './Settings/Account';
+import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 /**
  * @class Implement base Settings view which routes navigation to all settings subviews
  * @memberof PanelClasses
  */
 class Settings extends React.Component {
+	static contextType = DynamicUIPortContext;
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -40,6 +43,7 @@ class Settings extends React.Component {
 		this.selectItem = this.selectItem.bind(this);
 		this.showToast = this.showToast.bind(this);
 		this.hideToast = this.hideToast.bind(this);
+		this.handlePortMessage = this.handlePortMessage.bind(this);
 	}
 	/**
 	 * Lifecycle event. Default sub view is set here.
@@ -47,11 +51,31 @@ class Settings extends React.Component {
 	componentWillMount() {
 		this.props.history.push('/settings/globalblocking');
 	}
+
 	/**
 	 * Lifecycle event. Triggers action which delivers settings data.
 	 */
 	componentDidMount() {
-		this.props.actions.getSettingsData();
+		this._dynamicUIPort = this.context;
+		this._dynamicUIPort.onMessage.addListener(this.handlePortMessage);
+		this._dynamicUIPort.postMessage({ name: 'SettingsComponentDidMount' });
+	}
+
+	/**
+	 * Lifecycle event
+	 */
+	componentWillUnmount() {
+		this._dynamicUIPort.postMessage({ name: 'SettingsComponentWillUnmount' });
+		this._dynamicUIPort.onMessage.removeListener(this.handlePortMessage);
+	}
+
+	/**
+	 * Handles messages from dynamic UI port to background
+	 */
+	handlePortMessage(msg) {
+		if (msg.to !== 'settings' || !msg.body) { return; }
+
+		this.props.actions.updateSettingsData(msg.body);
 	}
 
 	GlobalBlockingComponent = () => (<GlobalBlocking toggleCheckbox={this.toggleCheckbox} settingsData={this.props} actions={this.props.actions} showToast={this.showToast} language={this.props.language} />);

@@ -23,6 +23,7 @@ import conf from './Conf';
 import foundBugs from './FoundBugs';
 import globals from './Globals';
 import latency from './Latency';
+import panelData from './PanelData';
 import Policy, { BLOCK_REASON_SS_UNBLOCKED, BLOCK_REASON_C2P_ALLOWED_THROUGH } from './Policy';
 import PolicySmartBlock from './PolicySmartBlock';
 import PurpleBox from './PurpleBox';
@@ -72,6 +73,8 @@ class EventHandlers {
 			RequestsMap.clear();
 			this._clearTabData(tabId);
 			this._resetNotifications();
+			// TODO understand why this does not work when placed in the 'reload' branch in onCommitted
+			panelData.clearPageLoadTime(tabId);
 
 			// initialize tabInfo, foundBugs objects for this tab
 			tabInfo.create(tabId, url);
@@ -368,10 +371,12 @@ class EventHandlers {
 			return { cancel: false };
 		}
 
+		// TODO fuse this into a single call to improve performance
 		const page_url = tabInfo.getTabInfo(tab_id, 'url');
 		const page_host = tabInfo.getTabInfo(tab_id, 'host');
 		const page_protocol = tabInfo.getTabInfo(tab_id, 'protocol');
 		const from_redirect = globals.REDIRECT_MAP.has(request_id);
+		// TODO wait to call isBug until request has passed Smart Blocking
 		const bug_id = (page_url ? isBug(details.url, page_url) : isBug(details.url));
 		const processed = utils.processUrl(details.url);
 
@@ -611,6 +616,9 @@ class EventHandlers {
 		foundBugs.update(tab_id, bug_id, url, block, type);
 
 		this._throttleButtonUpdate(details.tab_id);
+
+		// throttled in PanelData
+		panelData.updatePanelUI();
 
 		if (block && (conf.enable_click2play || conf.enable_click2playSocial)) {
 			buildC2P(details, app_id);

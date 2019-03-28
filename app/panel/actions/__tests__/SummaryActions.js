@@ -16,7 +16,7 @@ import thunk from 'redux-thunk';
 import * as msg from '../../utils/msg';
 import * as summaryActions from '../SummaryActions';
 import {
-	GET_CLIQZ_MODULE_DATA,
+	UPDATE_CLIQZ_MODULE_DATA,
 	UPDATE_TRACKER_COUNTS,
 	UPDATE_GHOSTERY_PAUSED,
 	UPDATE_SITE_POLICY,
@@ -29,7 +29,7 @@ const mockStore = configureStore(middlewares);
 const testData = { adblock: {}, antitracking: {} };
 msg.sendMessageInPromise = jest.fn(messageType => new Promise((resolve) => {
 	switch (messageType) {
-		case 'getCliqzModuleData':
+		case 'updateCliqzModuleData':
 			resolve(testData);
 			break;
 		default:
@@ -38,17 +38,16 @@ msg.sendMessageInPromise = jest.fn(messageType => new Promise((resolve) => {
 }));
 
 describe('app/panel/actions/SummaryActions.js', () => {
-	test('getCliqzModuleData action should return correctly', () => {
+	test('updateCliqzModuleData action should return correctly', () => {
 		const initialState = {};
 		const store = mockStore(initialState);
 
 		const data = testData;
-		const expectedPayload = { data, type: GET_CLIQZ_MODULE_DATA };
+		const expectedPayload = { data, type: UPDATE_CLIQZ_MODULE_DATA };
+		store.dispatch(summaryActions.updateCliqzModuleData(data));
 
-		return store.dispatch(summaryActions.getCliqzModuleData()).then(() => {
-			const actions = store.getActions();
-			expect(actions).toEqual([expectedPayload]);
-		});
+		const actions = store.getActions();
+		expect(actions).toEqual([expectedPayload]);
 	});
 
 	test('updateTrackerCounts action should return correctly', () => {

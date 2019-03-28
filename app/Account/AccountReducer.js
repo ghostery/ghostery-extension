@@ -20,7 +20,7 @@ import {
 	GET_USER_SUBSCRIPTION_DATA_FAIL,
 	GET_USER_SUBSCRIPTION_DATA_SUCCESS
 } from './AccountConstants';
-import { GET_PANEL_DATA } from '../panel/constants/constants';
+import { UPDATE_PANEL_DATA } from '../panel/constants/constants';
 
 const initialState = {
 	loggedIn: false,
@@ -32,7 +32,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
 	switch (action.type) {
-		case GET_PANEL_DATA: {
+		case UPDATE_PANEL_DATA: {
 			const { account } = action.data;
 			if (account === null) {
 				return Object.assign({}, initialState);
