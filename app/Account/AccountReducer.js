@@ -34,7 +34,7 @@ export default (state = initialState, action) => {
 	switch (action.type) {
 		case UPDATE_PANEL_DATA: {
 			const { account } = action.data;
-			if (account === null) {
+			if (!account) {
 				return Object.assign({}, initialState);
 			}
 			const {

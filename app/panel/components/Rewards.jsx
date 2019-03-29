@@ -141,7 +141,7 @@ class Rewards extends React.Component {
 			origin: 'rewards-hub',
 			type: 'action-signal',
 		};
-		sendMessage('setPanelData', { enable_offers: !enable_offers, signal }, undefined, 'rewardsPanel');
+		sendMessage('setPanelData', { enable_offers: !enable_offers, signal }, 'rewardsPanel');
 		sendMessage('ping', enable_offers ? 'rewards_on' : 'rewards_off');
 		// TODO catch
 	}
