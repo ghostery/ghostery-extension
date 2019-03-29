@@ -18,6 +18,18 @@ const { onMessage } = chrome.runtime;
 const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 
 /**
+ * Default callback handler for sendMessage. Allows us to handle
+ * 'Unchecked runtime.lastError: The message port closed before a response was received' errors.
+ * This occurs when the `chrome.runtime.onmessage` handler returns `false` with no `callback()`
+ * but `chrome.runtime.sendMessage` has been passed a default callback.
+ */
+const defaultCallback = function () {
+	if (chrome.runtime.lastError) {
+		log('defaultCallback error:', chrome.runtime.lastError);
+	}
+};
+
+/**
  * Send a message to the handlers in src/background wrapped in a
  * promise. This should be used for messages that require a callback.
  * @memberOf PanelUtils
@@ -83,7 +95,7 @@ export function sendMessageInPromise(name, message, origin = '') {
  * @return {Object}		response
  * @todo  runtime.sendMessage does not return any value.
  */
-export function sendMessage(name, message, origin = '', callback = _defaultCallback()) {
+export function sendMessage(name, message, origin = '', callback = defaultCallback()) {
 	log('Panel sendMessage: sending to background', name);
 	// @EDGE chrome.runtime.sendMessage(message) works, but the `callback` of
 	// chrome.runtime.sendMessage(message, callback) fails to
@@ -106,7 +118,7 @@ export function sendMessage(name, message, origin = '', callback = _defaultCallb
  * @return {Object}		response
  * @todo  runtime.sendMessage does not return any value.
  */
-export function sendRewardMessage(name, message, callback = _defaultCallback()) {
+export function sendRewardMessage(name, message, callback = defaultCallback()) {
 	log('Panel sendRewardMessage: sending to background', name);
 	return chrome.runtime.sendMessage({
 		name,
@@ -135,17 +147,4 @@ export function openSubscriptionPage() {
 export function openSupportPage() {
 	sendMessage('account.openSupportPage');
 	window.close();
-}
-
-
-/**
- * Default callback handler for sendMessage. Allows us to handle
- * 'Unchecked runtime.lastError: The message port closed before a response was received' errors.
- * This occurs when the `chrome.runtime.onmessage` handler returns `false` with no `callback()`
- * but `chrome.runtime.sendMessage` has been passed a default callback.
- */
-function _defaultCallback() {
-	if (chrome.runtime.lastError) {
-		log('defaultCallback error:', chrome.runtime.lastError);
-	}
 }
