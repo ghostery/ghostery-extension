@@ -23,7 +23,7 @@ const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
  * This occurs when the `chrome.runtime.onmessage` handler returns `false` with no `callback()`
  * but `chrome.runtime.sendMessage` has been passed a default callback.
  */
-const defaultCallback = function () {
+const defaultCallback = () => {
 	if (chrome.runtime.lastError) {
 		log('defaultCallback error:', chrome.runtime.lastError);
 	}
@@ -65,7 +65,11 @@ export function sendMessageInPromise(name, message, origin = '') {
 				message,
 				messageId,
 				origin,
-			}, () => {});
+			}, () => {
+				if (chrome.runtime.lastError) {
+					log('sendMessageInPromise error:', chrome.runtime.lastError);
+				}
+			});
 		});
 	}
 	return new Promise(((resolve) => {
