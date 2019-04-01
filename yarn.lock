@@ -1259,9 +1259,9 @@ brorand@^1.0.1:
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
   integrity sha1-EsJe/kCkXjwyPrhnWgoM5XsiNx8=
 
-"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.35/7.35.1.8ec615c.tgz":
+"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.35/7.35.1.acd5469.tgz":
   version "7.35.1"
-  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.35/7.35.1.8ec615c.tgz#f3af23b470490c5eac352a74b468bca3817f3416"
+  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.35/7.35.1.acd5469.tgz#758f63214056b5e133bfc1c8a007a0d22c1f28c5"
   dependencies:
     "@cliqz-oss/dexie" "^2.0.4"
     "@cliqz/adblocker" "^0.6.8"
