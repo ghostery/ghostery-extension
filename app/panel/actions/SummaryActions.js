@@ -12,7 +12,8 @@
  */
 
 import {
-	GET_CLIQZ_MODULE_DATA,
+	UPDATE_CLIQZ_MODULE_DATA,
+	UPDATE_SUMMARY_DATA,
 	UPDATE_TRACKER_COUNTS,
 	UPDATE_GHOSTERY_PAUSED,
 	UPDATE_SITE_POLICY,
@@ -20,18 +21,26 @@ import {
 } from '../constants/constants';
 import { sendMessageInPromise } from '../utils/msg';
 
+
 /**
  * Fetch Cliqz Modules data from background
- * @return {Object} dispatch
+ * @return {Object}
  */
-export function getCliqzModuleData() {
-	return function (dispatch) {
-		return sendMessageInPromise('getCliqzModuleData').then((data) => {
-			dispatch({
-				type: GET_CLIQZ_MODULE_DATA,
-				data,
-			});
-		});
+export function updateCliqzModuleData(data) {
+	return {
+		type: UPDATE_CLIQZ_MODULE_DATA,
+		data
+	};
+}
+
+/**
+ * Update Summary data
+ * @return {Object}
+ */
+export function updateSummaryData(data) {
+	return {
+		type: UPDATE_SUMMARY_DATA,
+		data,
 	};
 }
 

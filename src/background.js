@@ -21,10 +21,10 @@
 import _ from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
 import cliqz, { prefs } from './classes/Cliqz';
-// object classes
+// object class
 import Events from './classes/EventHandlers';
-import PanelData from './classes/PanelData';
 // static classes
+import panelData from './classes/PanelData';
 import bugDb from './classes/BugDb';
 import button from './classes/BrowserButton';
 import c2pDb from './classes/Click2PlayDb';
@@ -49,6 +49,7 @@ import * as common from './utils/common';
 import * as utils from './utils/utils';
 import { _getJSONAPIErrorsObject } from './utils/api';
 import { importCliqzSettings } from './utils/cliqzSettingImport';
+import { sendCliqzModulesData } from './utils/cliqzModulesData';
 
 // For debug purposes, provide Access to the internals of `browser-core`
 // module from Developer Tools Console.
@@ -56,7 +57,6 @@ window.CLIQZ = cliqz;
 
 // class instantiation
 const events = new Events();
-const panelData = new PanelData();
 // function shortcuts
 const { log } = common;
 const { sendMessage } = utils;
@@ -518,9 +518,6 @@ function handleRewards(name, message, callback) {
 		case 'ping':
 			metrics.ping(message);
 			break;
-		case 'removeDisconnectListener':
-			rewards.panelPort.onDisconnect.removeListener(rewards.panelHubClosedListener);
-			break;
 		case 'setPanelData':
 			if (message.hasOwnProperty('enable_offers')) {
 				if (!offers.isEnabled && message.enable_offers === true) {
@@ -770,6 +767,7 @@ function onMessageHandler(request, sender, callback) {
 		return handleGhosteryDotCom(name, message, tab_id);
 	} else if (origin === 'page_performance' && name === 'recordPageInfo') {
 		tabInfo.setTabInfo(tab_id, 'pageTiming', message.performanceAPI);
+		panelData.postPageLoadTime(tab_id);
 		return false;
 	} else if (origin === 'notifications') {
 		return handleNotifications(name, message, tab_id);
@@ -828,34 +826,13 @@ function onMessageHandler(request, sender, callback) {
 		}
 		callback();
 	} else if (name === 'getCliqzModuleData') {
-		const modules = { adblock: {}, antitracking: {} };
-
-		const getCliqzModuleDataForTab = (tabId, callback) => {
-			button.update();
-			if (conf.enable_ad_block) {
-				// update adblock count. callback() handled below based on anti-tracking status
-				modules.adblock = cliqz.modules.adblocker.background.actions.getAdBlockInfoForTab(tabId) || {};
-			}
-			if (conf.enable_anti_tracking) {
-				cliqz.modules.antitracking.background.actions.aggregatedBlockingStats(tabId).then((data) => {
-					modules.antitracking = data || {};
-					callback(modules);
-				}).catch(() => {
-					callback(modules);
-				});
-			} else {
-				callback(modules);
-			}
-		};
-
 		if (message && message.tabId) {
-			getCliqzModuleDataForTab(+message.tabId, callback);
+			sendCliqzModulesData(message.tabId, callback);
 		} else {
 			utils.getActiveTab((tab) => {
-				getCliqzModuleDataForTab(tab.id, callback);
+				sendCliqzModulesData(tab.id, callback);
 			});
 		}
-
 		return true;
 	} else if (name === 'getTrackerDescription') {
 		utils.getJson(message.url).then((result) => {
@@ -922,7 +899,14 @@ function onMessageHandler(request, sender, callback) {
 	} else if (name === 'account.getUserSubscriptionData') {
 		account.getUserSubscriptionData()
 			.then((customer) => {
-				const subscriptionData = customer.subscriptions;
+				// TODO temporary fix to handle multiple subscriptions
+				const subscriptionData = customer.subscriptions.reduce((acc, curr) => {
+					let a = acc;
+					if (curr.productName.includes('Plus')) {
+						a = curr;
+					}
+					return a;
+				}, {});
 				callback({ subscriptionData });
 			})
 			.catch((err) => {
@@ -1080,10 +1064,6 @@ function initializeDispatcher() {
 		utils.flushChromeMemoryCache();
 		cliqz.modules.core.action('refreshAppState');
 	});
-	dispatcher.on('conf.save.account', () => {
-		// update PanelData
-		panelData.init();
-	});
 	dispatcher.on('conf.save.enable_human_web', (enableHumanWeb) => {
 		if (!IS_CLIQZ) {
 			setCliqzModuleEnabled(humanweb, enableHumanWeb).then(() => {
@@ -1134,8 +1114,6 @@ function initializeDispatcher() {
 
 	dispatcher.on('conf.changed.settings', _.debounce((key) => {
 		log('Conf value changed for a watched user setting:', key);
-		// Update PanelData with new Conf properties
-		panelData.init();
 	}, 200));
 
 	dispatcher.on('globals.save.paused_blocking', () => {
@@ -1619,11 +1597,11 @@ function initializeEventListeners() {
 	// Fired when a message is sent from either an extension process (by runtime.sendMessage) or a content script (by tabs.sendMessage).
 	onMessage.addListener(onMessageHandler);
 
-	// Fired when panel is disconnected
+	// This port transmits data to panel extension components in response to user navigation between panel components
+	// and to changes in the background data as the page loads, making the extension UI dynamic
 	chrome.runtime.onConnect.addListener((port) => {
-		if (port && port.name === 'rewardsPanelPort') {
-			rewards.panelPort = port;
-			rewards.panelPort.onDisconnect.addListener(rewards.panelHubClosedListener);
+		if (port.name === 'dynamicUIPanelPort') {
+			panelData.initPort(port);
 		}
 	});
 
@@ -1850,8 +1828,6 @@ function initializeGhosteryModules() {
 	]).then(() => {
 		// run scheduledTasks on init
 		scheduledTasks();
-		// initialize panel data
-		panelData.init();
 	});
 }
 

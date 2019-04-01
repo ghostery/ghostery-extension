@@ -14,7 +14,7 @@
 import Immutable from 'seamless-immutable';
 import rewardsReducer from '../rewards';
 import {
-	GET_REWARDS_DATA,
+	UPDATE_REWARDS_DATA,
 	TOGGLE_OFFERS_ENABLED,
 	REMOVE_OFFER,
 	SET_OFFER_READ,
@@ -33,9 +33,9 @@ describe('app/panel/reducers/rewards.js', () => {
 		expect(rewardsReducer(undefined, {})).toEqual(initialState);
 	});
 
-	test('reducer correctly handles GET_REWARDS_DATA', () => {
+	test('reducer correctly handles UPDATE_REWARDS_DATA', () => {
 		const data = { test: true };
-		const action = { data, type: GET_REWARDS_DATA };
+		const action = { data, type: UPDATE_REWARDS_DATA };
 		const initState = Immutable({});
 
 		expect(rewardsReducer(initState, action)).toEqual(data);

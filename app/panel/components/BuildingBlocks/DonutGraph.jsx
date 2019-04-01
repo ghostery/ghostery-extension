@@ -11,6 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import throttle from 'lodash.throttle';
 import React from 'react';
 import ClassNames from 'classnames';
 import {
@@ -21,6 +22,7 @@ import {
 	scaleLinear,
 	select
 } from 'd3';
+
 import Tooltip from '../Tooltip';
 
 /**
@@ -61,6 +63,9 @@ class DonutGraph extends React.Component {
 			redscale: scaleLinear().range(['#f75065', '#ffb0Ba']),
 			greyscale: scaleLinear().range(['#848484', '#c9c9c9']),
 		};
+
+		this._startAngles = new Map();
+		this._endAngles = new Map();
 	}
 
 	/**
@@ -71,15 +76,20 @@ class DonutGraph extends React.Component {
 			categories,
 			renderRedscale,
 			renderGreyscale,
-			totalCount,
 			isSmall,
 		} = this.props;
 
-		this.generateGraph(categories, {
+		// TODO add padAngle if it looks good with the 8.4 UI update
+		this.trackerPie = pie()
+			.startAngle(-Math.PI)
+			.endAngle(Math.PI)
+			.sort(null)
+			.value(d => d.value);
+
+		this.prepareDonutContainer(isSmall);
+		this.bakeDonut(categories, {
 			renderRedscale,
-			renderGreyscale,
-			totalCount,
-			isSmall,
+			renderGreyscale
 		});
 	}
 
@@ -92,21 +102,73 @@ class DonutGraph extends React.Component {
 			renderRedscale,
 			renderGreyscale,
 			ghosteryFeatureSelect,
-			isSmall,
+			isSmall
 		} = this.props;
 
-		if (categories.length !== nextProps.categories.length ||
+		if (isSmall !== nextProps.isSmall ||
 			renderRedscale !== nextProps.renderRedscale ||
 			renderGreyscale !== nextProps.renderGreyscale ||
-			ghosteryFeatureSelect !== nextProps.ghosteryFeatureSelect ||
-			isSmall !== nextProps.isSmall) {
-			this.generateGraph(nextProps.categories, {
-				renderRedscale: nextProps.renderRedscale,
-				renderGreyscale: nextProps.renderGreyscale,
-				totalCount: nextProps.totalCount,
-				isSmall: nextProps.isSmall,
-			});
+			ghosteryFeatureSelect !== nextProps.ghosteryFeatureSelect
+		) {
+			this.prepareDonutContainer(nextProps.isSmall);
+			this.nextPropsDonut(nextProps);
+			return;
 		}
+
+		// componentWillReceiveProps gets called many times during page load as new trackers are found
+		// so only compare tracker totals if we don't already have to redraw anyway as a result of the cheaper checks above
+		const trackerTotal = categories.reduce((total, category) => total + category.num_total, 0);
+		const nextTrackerTotal = nextProps.categories.reduce((total, category) => total + category.num_total, 0);
+		if (trackerTotal !== nextTrackerTotal) {
+			this.nextPropsDonut(nextProps);
+		}
+	}
+
+	/**
+	 *  Helper function that calculates domain value for greyscale / redscale rendering
+	 */
+	getTone(catCount, catIndex) {
+		return catCount > 1 ? 100 / (catCount - 1) * catIndex * 0.01 : 0;
+	}
+
+	/**
+	 *  Helper to retrieve a category's tooltip from the DOM
+	 */
+	grabTooltip(d) {
+		return document.getElementById(`${d.data.id}_tooltip`);
+	}
+
+	/**
+	 *  Helper function that updates donut with nextProps values
+	 */
+	nextPropsDonut(nextProps) {
+		this.bakeDonut(nextProps.categories, {
+			renderRedscale: nextProps.renderRedscale,
+			renderGreyscale: nextProps.renderGreyscale,
+			isSmall: nextProps.isSmall,
+		});
+	}
+
+	/**
+	 *  Initialize the SVG element in which the donut is rendered
+	 *  Called when the component is mounted and when the size of the donut changes
+	 *  @param {boolean} isSmall	are we drawing the small Detailed View donut or the bigger Simple View donut?
+	 */
+	prepareDonutContainer(isSmall) {
+		const size = isSmall ? 94 : 120;
+		this.donutRadius = size / 2;
+
+		select(this.node).selectAll('*').remove();
+		this.chart = select(this.node)
+			.append('svg')
+			.attr('class', 'donutSvg')
+			.attr('width', '100%')
+			.attr('height', '100%')
+			.attr('viewBox', `0 0 ${size} ${size}`)
+			.attr('preserveAspectRatio', 'xMinYMin');
+		this.chartCenter = this.chart
+			.append('g')
+			.attr('transform', `translate(${this.donutRadius}, ${this.donutRadius})`);
 	}
 
 	/**
@@ -116,40 +178,39 @@ class DonutGraph extends React.Component {
 	 * @param  {Array} categories list of categories detected on the site
 	 * @param  {Object} options    options for the graph
 	 */
-	generateGraph(categories, options) {
+	bakeDonut = throttle(this._bakeDonut.bind(this), 600, { leading: true, trailing: true }) // matches panelData#updatePanelUI throttling
+
+	_bakeDonut(categories, options) {
 		const {
 			renderRedscale,
 			renderGreyscale,
 			isSmall
 		} = options;
 		const graphData = [];
-		const size = isSmall ? 94 : 120;
-		const width = +size;
-		const height = +size;
-		const radius = Math.min(width, height) / 2;
-		const animationDuration = categories.length > 0 ? 750 : 0;
-		const delays = [];
+		const animationDuration = categories.length > 0 ? 500 : 0;
+		const categoryCount = categories.length;
 
 		// Process categories into graphData
-		if (categories.length === 0) {
+		if (categoryCount === 0) {
 			graphData.push({
 				id: null,
 				name: null,
-				value: 1,
+				value: 1
 			});
 		} else {
-			categories.forEach((category) => {
+			categories.forEach((cat) => {
 				graphData.push({
-					id: category.id,
-					name: category.name,
-					value: category.num_total,
+					id: cat.id,
+					name: cat.name,
+					value: cat.num_total
 				});
 			});
 			graphData.sort((a, b) => a.value < b.value);
 		}
 
-		// Clear graph
-		select(this.node).selectAll('*').remove();
+		const trackerArc = arc()
+			.innerRadius(this.donutRadius - 13)
+			.outerRadius(this.donutRadius);
 
 		// Clear tooltips
 		categories.forEach((cat) => {
@@ -159,37 +220,37 @@ class DonutGraph extends React.Component {
 			}
 		});
 
-		// Draw graph
-		const chart = select(this.node)
-			.append('svg')
-			.attr('class', 'donutSvg')
-			.attr('width', '100%')
-			.attr('height', '100%')
-			.attr('viewBox', `0 0 ${width} ${height}`)
-			.attr('preserveAspectRatio', 'xMinYMin')
-			.append('g')
-			.attr('transform', `translate(${width / 2}, ${height / 2})`);
-		const trackerArc = arc()
-			.innerRadius(radius - 13)
-			.outerRadius(radius);
-		const trackerPie = pie()
-			.startAngle(-Math.PI)
-			.endAngle(Math.PI)
-			.sort(null)
-			.value(d => d.value);
-		const g = chart.selectAll('.arc')
-			.data(trackerPie(graphData))
-			.enter().append('g')
-			.attr('class', 'arc');
+		// CONNECT NEW DATA
+		const arcs = this.chartCenter.selectAll('g')
+			.data(this.trackerPie(graphData), d => d.data.id);
 
-		g.append('path')
+		// UPDATE
+		arcs.select('path')
+			.transition()
+			.duration(animationDuration)
+			.attrTween('d', (d) => {
+				const { id: catId } = d.data;
+				const lerpStartAngle = interpolate(this._startAngles.get(catId), d.startAngle);
+				const lerpEndAngle = interpolate(this._endAngles.get(catId), d.endAngle);
+				this._startAngles.set(catId, d.startAngle);
+				this._endAngles.set(catId, d.endAngle);
+
+				return function (t) {
+					d.startAngle = lerpStartAngle(t);
+					d.endAngle = lerpEndAngle(t);
+					return trackerArc(d);
+				};
+			});
+
+		// ENTER
+		arcs.enter().append('g')
+			.attr('class', 'arc')
+			.append('path')
 			.style('fill', (d, i) => {
 				if (renderGreyscale) {
-					const greyTone = graphData.length > 1 ? 100 / (graphData.length - 1) * i * 0.01 : 0;
-					return this.colors.greyscale(greyTone);
+					return this.colors.greyscale(this.getTone(categoryCount, i));
 				} else if (renderRedscale) {
-					const redTone = graphData.length > 1 ? 100 / (graphData.length - 1) * i * 0.01 : 0;
-					return this.colors.redscale(redTone);
+					return this.colors.redscale(this.getTone(categoryCount, i));
 				}
 				return this.colors.regular(d.data.id);
 			})
@@ -200,9 +261,10 @@ class DonutGraph extends React.Component {
 				return 'disabled';
 			})
 			.on('mouseover', (d) => {
-				const pX = trackerArc.centroid(d)[0] + (width / 2);
-				const pY = trackerArc.centroid(d)[1] + (height / 2);
-				const tooltip = document.getElementById(`${d.data.id}_tooltip`);
+				const centroid = trackerArc.centroid(d);
+				const pX = centroid[0] + this.donutRadius;
+				const pY = centroid[1] + this.donutRadius;
+				const tooltip = this.grabTooltip(d);
 				if (tooltip) {
 					tooltip.style.left = `${pX - (tooltip.offsetWidth / 2)}px`;
 					tooltip.style.top = `${pY - (tooltip.offsetHeight + 8)}px`;
@@ -210,7 +272,7 @@ class DonutGraph extends React.Component {
 				}
 			})
 			.on('mouseout', (d) => {
-				const tooltip = document.getElementById(`${d.data.id}_tooltip`);
+				const tooltip = this.grabTooltip(d);
 				if (tooltip) {
 					tooltip.classList.remove('show');
 				}
@@ -221,22 +283,12 @@ class DonutGraph extends React.Component {
 				}
 			})
 			.transition()
-			.duration((d) => {
-				const delay = d.value / graphData.reduce((sum, j) => sum + j.value, 0) * animationDuration;
-				delays.push(delay);
-				return delay;
-			})
-			.delay((d, i) => {
-				if (i === 0) { return 0; }
-
-				let sum = 0;
-				delays.forEach((val, j) => {
-					if (j < i) { sum += val; }
-				});
-
-				return sum;
-			})
+			.duration(animationDuration)
 			.attrTween('d', (d) => {
+				const { id: catId } = d.data;
+				this._startAngles.set(catId, d.startAngle);
+				this._endAngles.set(catId, d.endAngle);
+
 				const i = interpolate(d.startAngle, d.endAngle);
 				return function (t) {
 					d.endAngle = i(t);
@@ -244,6 +296,9 @@ class DonutGraph extends React.Component {
 				};
 			})
 			.ease(easeLinear);
+
+		// EXIT
+		arcs.exit().remove();
 	}
 
 	/**

@@ -163,7 +163,15 @@ class Account {
 			.then(userID => api.get('stripe/customers', userID, 'cards,subscriptions'))
 			.then((res) => {
 				const customer = build(normalize(res), 'customers', res.data.id);
-				this._setSubscriptionData(customer);
+				// TODO temporary fix to handle multiple subscriptions
+				const sub = customer.subscriptions.reduce((acc, curr) => {
+					let a = acc;
+					if (curr.productName.includes('Plus')) {
+						a = curr;
+					}
+					return a;
+				}, {});
+				this._setSubscriptionData(sub);
 				return customer;
 			})
 	)
@@ -475,13 +483,13 @@ class Account {
 		dispatcher.trigger('conf.save.account');
 	}
 
-	_setSubscriptionData = (subscriptionData) => {
-		// TODO: Change this so that we aren't writing over subscriptionData
-		if (!conf.paid_subscription && subscriptionData.hasOwnProperty('subscriptions')) {
+	_setSubscriptionData = (data) => {
+		// TODO: Change this so that we aren't writing over data
+		if (!conf.paid_subscription && data) {
 			conf.paid_subscription = true;
 			dispatcher.trigger('conf.save.paid_subscription');
 		}
-		conf.account.subscriptionData = subscriptionData.subscriptions || null;
+		conf.account.subscriptionData = data || null;
 		dispatcher.trigger('conf.save.account');
 	}
 
