@@ -371,13 +371,8 @@ class EventHandlers {
 			return { cancel: false };
 		}
 
-		// TODO fuse this into a single call to improve performance
-		const page_url = tabInfo.getTabInfo(tab_id, 'url');
-		const page_host = tabInfo.getTabInfo(tab_id, 'host');
 		const page_protocol = tabInfo.getTabInfo(tab_id, 'protocol');
 		const from_redirect = globals.REDIRECT_MAP.has(request_id);
-		// TODO wait to call isBug until request has passed Smart Blocking
-		const bug_id = (page_url ? isBug(details.url, page_url) : isBug(details.url));
 		const processed = utils.processUrl(details.url);
 
 		/* ** SMART BLOCKING - Privacy ** */
@@ -385,6 +380,11 @@ class EventHandlers {
 		if (this.policySmartBlock.isInsecureRequest(tab_id, page_protocol, processed.protocol, processed.host)) {
 			return this._blockHelper(details, tab_id, null, null, request_id, from_redirect, true);
 		}
+
+		// TODO fuse this into a single call to improve performance
+		const page_url = tabInfo.getTabInfo(tab_id, 'url');
+		const page_host = tabInfo.getTabInfo(tab_id, 'host');
+		const bug_id = (page_url ? isBug(details.url, page_url) : isBug(details.url));
 
 		// allow if not a tracker
 		if (!bug_id) {
