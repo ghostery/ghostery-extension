@@ -23,7 +23,6 @@ import {
 	UPDATE_SETTINGS_CATEGORY_BLOCKED,
 	UPDATE_SETTINGS_TRACKER_BLOCKED,
 	SETTINGS_TOGGLE_EXPAND_ALL,
-	SETTINGS_TOGGLE_EXPAND_CATEGORY,
 	SETTINGS_UPDATE_SEARCH_VALUE,
 	SETTINGS_SEARCH_SUBMIT,
 	SETTINGS_FILTER,
@@ -35,18 +34,25 @@ import globals from '../../../src/classes/Globals';
 
 /**
  * Fetch settings data from background
+ * The panel uses a dynamic UI port, but the hub does not
  * @return {Object} dispatch
  */
-export function getSettingsData() {
+export function updateSettingsData(portData) {
+	if (portData) {
+		return {
+			type: GET_SETTINGS_DATA,
+			data: portData
+		};
+	}
+
 	return function (dispatch) {
-		return sendMessageInPromise('getPanelData', {
-			view: 'settings',
-		}).then((data) => {
-			dispatch({
-				type: GET_SETTINGS_DATA,
-				data,
+		return sendMessageInPromise('getPanelData', { view: 'settings' })
+			.then((promisedData) => {
+				dispatch({
+					type: GET_SETTINGS_DATA,
+					data: promisedData,
+				});
 			});
-		});
 	};
 }
 
@@ -241,18 +247,6 @@ export function showNotification(data) {
 export function toggleExpandAll(data) {
 	return {
 		type: SETTINGS_TOGGLE_EXPAND_ALL,
-		data,
-	};
-}
-
-/**
- * Called from Category.toggleCategoryTrackers()
- * @param  {Object} data
- * @return {Object}
- */
-export function toggleExpandCategory(data) {
-	return {
-		type: SETTINGS_TOGGLE_EXPAND_CATEGORY,
 		data,
 	};
 }

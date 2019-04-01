@@ -15,7 +15,8 @@ import React from 'react';
 import ClassNames from 'classnames';
 import { Link, Route } from 'react-router-dom';
 import { ToggleSlider, RewardListItem, RewardDetail } from './BuildingBlocks';
-import { sendMessage, sendRewardMessage } from '../utils/msg';
+import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
+import { sendMessage } from '../utils/msg';
 import globals from '../../../src/classes/Globals';
 
 const IS_CLIQZ = (globals.BROWSER_INFO.name === 'cliqz');
@@ -27,6 +28,8 @@ const IS_CLIQZ = (globals.BROWSER_INFO.name === 'cliqz');
  * @memberof PanelClasses
  */
 class Rewards extends React.Component {
+	static contextType = DynamicUIPortContext;
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -41,15 +44,18 @@ class Rewards extends React.Component {
 		this.renderRewardDetailComponent = this.renderRewardDetailComponent.bind(this);
 		this.handleBackClick = this.handleBackClick.bind(this);
 		this.handleFaqClick = this.handleFaqClick.bind(this);
+		this.handlePortMessage = this.handlePortMessage.bind(this);
 	}
 
 	/**
 	 * Lifecycle event
 	 */
 	componentDidMount() {
-		this.props.actions.getRewardsData();
+		this._dynamicUIPort = this.context;
+		this._dynamicUIPort.onMessage.addListener(this.handlePortMessage);
+		this._dynamicUIPort.postMessage({ name: 'RewardsComponentDidMount' });
+
 		this.props.actions.sendSignal('hub_open');
-		chrome.runtime.connect({ name: 'rewardsPanelPort' });
 	}
 
 	/**
@@ -88,7 +94,18 @@ class Rewards extends React.Component {
 	componentWillUnmount() {
 		/* @TODO send message to background to remove port onDisconnect event */
 		this.props.actions.sendSignal('hub_closed');
-		sendRewardMessage('removeDisconnectListener');
+
+		this._dynamicUIPort.postMessage({ name: 'RewardsComponentWillUnmount' });
+		this._dynamicUIPort.onMessage.removeListener(this.handlePortMessage);
+	}
+
+	/**
+	 * Handles message from the dynamic UI port to background
+	 */
+	handlePortMessage(msg) {
+		if (msg.to !== 'rewards' || !msg.body) { return; }
+
+		this.props.actions.updateRewardsData(msg.body);
 	}
 
 	/**

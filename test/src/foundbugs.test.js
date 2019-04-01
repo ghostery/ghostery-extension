@@ -16,7 +16,6 @@ import sinon from 'sinon';
 import 'whatwg-fetch';
 import bugDb from '../../src/classes/BugDb';
 import conf from '../../src/classes/Conf';
-import compDb from '../../src/classes/CompatibilityDb';
 import foundBugs from '../../src/classes/FoundBugs';
 
 describe('src/classes/FoundBugs.js', () => {
@@ -75,24 +74,6 @@ describe('src/classes/FoundBugs.js', () => {
 				}
 
 				done();
-
-
-				// const compJson = JSON.stringify({
-				// 	"compatibility": [{"aid":1510,"urls":["members.oreilly.com"]},{"aid":1552,"urls":["travelsmith.com"]},{"aid":2325,"urls":["engadget.com"]}],
-				// 	"compatibilityVersion":1466012611577
-				// });
-				// setFetchStubResponse(200, compJson);
-				// compDb.init().then(() => {
-				// 		const tagsJson = JSON.stringify({
-				// 			"tags":[{"id": 48,"name": "Analytics","description": ""},
-				// 					{"id": 39,"name": "Social","description": ""}],
-				// 			"tagsVersion":1412056806620
-				// 		});
-				// 		setFetchStubResponse(200, tagsJson);
-        //
-
-						// async finished
-				// });
 			});
 		}).catch(err => console.log(err));
 	});
@@ -112,7 +93,7 @@ describe('src/classes/FoundBugs.js', () => {
 		global.fetch.returns(Promise.resolve(res));
 	}
 
-	describe('testing souce, patter, and app counts', () => {
+	describe('testing source, pattern, and app counts', () => {
 		test('there should be seven sources', () => {
 			const bugSources = _.flatten(_.pluck(foundBugs.getBugs(url), 'sources'));
 			return expect(bugSources.length).toBe(7);
