@@ -1,9 +1,13 @@
 ### GHOSTERY 8.3.2 (UNRELEASED)
 
++ Ghostery tracker panel now updates dynamically in real time!
 + Remove unsupported file types for Opera automated-review
 + Removed uneccesary files for slimmer production build
 + Sync account creation UI betweem intro hub, panel and signon-web
 + Performance improvments when browsing certian Google sites (gmail, maps)
++ Feature parity for Edge browser (Human Web, Rewards)
++ Clean up various errors thrown by content scripts and message handlers
++ Updated Readme (team members and open-source projects)
 + Minor UI tweaks
 
 ### GHOSTERY 8.3.1 (January 31, 2019)
