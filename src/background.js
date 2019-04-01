@@ -1293,19 +1293,7 @@ antitracking.on('enabled', () => {
  * @memberOf Background
  */
 adblocker.on('enabled', () => {
-	adblocker.isReady().then(() =>
-		Promise.all([
-			adblocker.action('removePipelineStep', 'checkWhitelist'),
-			adblocker.action('addPipelineStep', {
-				name: 'checkGhosteryWhitelist',
-				spec: 'break',
-				fn: state => !isWhitelisted(state),
-				before: ['checkBlocklist']
-			}),
-			adblocker.action('addWhiteListCheck',
-				url => isWhitelisted({ sourceUrl: url }))
-		])
-	);
+	adblocker.isReady().then(() => adblocker.action('addWhiteListCheck', url => isWhitelisted({ sourceUrl: url })));
 });
 
 /**

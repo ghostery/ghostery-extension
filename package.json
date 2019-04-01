@@ -45,7 +45,6 @@
     "babel-core": "^7.0.0-bridge.0"
   },
   "dependencies": {
-    "@cliqz/adblocker": "0.3.1",
     "base64-js": "^1.2.1",
     "browser-core": "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.35/7.35.1.8ec615c.tgz",
     "classnames": "^2.2.5",
