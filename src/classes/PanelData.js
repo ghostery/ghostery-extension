@@ -254,7 +254,7 @@ class PanelData {
 
 	/**
 	 * Helper that retrieves the current account information
-	 * @return {Object / null}	the current account object or null
+	 * @return {Object|null}	the current account object or null
 	 */
 	_getCurrentAccount() {
 		const currentAccount = conf.account;
