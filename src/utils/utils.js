@@ -28,6 +28,15 @@ const { BROWSER_INFO } = globals;
 const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
 
 /**
+ * Handle chrome.runtime.lastError messages
+ */
+const defaultCallback = () => {
+	if (chrome.runtime.lastError) {
+		log('defaultCallback error:', chrome.runtime.lastError);
+	}
+};
+
+/**
  * Send message to a specific tab ID.
  * @memberOf BackgroundUtils
  *
@@ -36,7 +45,7 @@ const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
  * @param  {Object} 	message 	message data
  * @param  {function} 	callback	function to call (at most once) when you have a response
  */
-export function sendMessage(tab_id, name, message, callback = function () {}) {
+export function sendMessage(tab_id, name, message, callback = defaultCallback()) {
 	log(`BACKGROUND SENT ${name} TO TAB`);
 	chrome.tabs.sendMessage(tab_id, {
 		name,
@@ -54,7 +63,7 @@ export function sendMessage(tab_id, name, message, callback = function () {}) {
  * @param  {Object} 	message 	message data
  * @param  {function} 	callback 	function to call (at most once) when you have a response
  */
-export function sendMessageToFrame(tab_id, frame_id, name, message, callback = function () {}) {
+export function sendMessageToFrame(tab_id, frame_id, name, message, callback = defaultCallback()) {
 	log(`BACKGROUND SENT ${name} TO TAB ${tab_id} - FRAME ${frame_id}`);
 	chrome.tabs.sendMessage(tab_id, {
 		name,
@@ -72,7 +81,11 @@ export function sendMessageToFrame(tab_id, frame_id, name, message, callback = f
  */
 export function sendMessageToPanel(name, message) {
 	log('BACKGROUND SENDS MESSAGE TO PANEL', name);
-	chrome.runtime.sendMessage({ name,	message });
+	chrome.runtime.sendMessage({ name, message }, () => {
+		if (chrome.runtime.lastError) {
+			log('sendMessageToPanel error:', chrome.runtime.lastError);
+		}
+	});
 }
 
 /**

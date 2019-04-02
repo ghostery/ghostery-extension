@@ -18,6 +18,18 @@ const { onMessage } = chrome.runtime;
 const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 
 /**
+ * Default callback handler for sendMessage. Allows us to handle
+ * 'Unchecked runtime.lastError: The message port closed before a response was received' errors.
+ * This occurs when the `chrome.runtime.onmessage` handler returns `false` with no `callback()`
+ * but `chrome.runtime.sendMessage` has been passed a default callback.
+ */
+const defaultCallback = () => {
+	if (chrome.runtime.lastError) {
+		log('defaultCallback error:', chrome.runtime.lastError);
+	}
+};
+
+/**
  * Send a message to the handlers in src/background wrapped in a
  * promise. This should be used for messages that require a callback.
  * @memberOf PanelUtils
@@ -27,17 +39,18 @@ const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
  * @return {Promise}
  */
 let MESSAGE_ID = 0;
-const LISTENER_ADDED = false;
+let LISTENER_ADDED = false;
 export function sendMessageInPromise(name, message, origin = '') {
 	// On Edge 39.14965.1001.0 callback is not called when multiple
-	// Edge instances running. So instead we shoot message back
+	// Edge instances are running. So instead we pass the message back
 	// from background. See onMessageHandler, HANDLE UNIVERSAL EVENTS HERE
-	// in src/background.js.To be removed, once Edge fixed.
+	// in src/background.js. To be removed, once Edge is fixed.
 	if (IS_EDGE) {
 		return new Promise((resolve) => {
 			const messageId = MESSAGE_ID.toString();
 			MESSAGE_ID++;
 			if (!LISTENER_ADDED) {
+				LISTENER_ADDED = true;
 				onMessage.addListener((request, sender, sendResponse) => {
 					if (messageId === request.name) {
 						resolve(request.message);
@@ -52,7 +65,11 @@ export function sendMessageInPromise(name, message, origin = '') {
 				message,
 				messageId,
 				origin,
-			}, () => {});
+			}, () => {
+				if (chrome.runtime.lastError) {
+					log('sendMessageInPromise error:', chrome.runtime.lastError);
+				}
+			});
 		});
 	}
 	return new Promise(((resolve) => {
@@ -63,7 +80,7 @@ export function sendMessageInPromise(name, message, origin = '') {
 		}, (response) => {
 			if (chrome.runtime.lastError) {
 				log(chrome.runtime.lastError, name, message);
-				resolve(null);
+				resolve(false);
 			}
 			resolve(response);
 		});
@@ -77,16 +94,16 @@ export function sendMessageInPromise(name, message, origin = '') {
  *
  * @param  {string} 	name 		message name
  * @param  {Object} 	message 	message data
+ * @param  {string} 	origin	 	message origin
  * @param  {function} 	callback 	callback message
  * @return {Object}		response
  * @todo  runtime.sendMessage does not return any value.
  */
-export function sendMessage(name, message, callback = function () {}, origin = null) {
+export function sendMessage(name, message, origin = '', callback = defaultCallback()) {
 	log('Panel sendMessage: sending to background', name);
-	// @EDGE chrome.runtime.sendMessage(message) works, but
-	// const callback; chrome.runtime.sendMessage(message, callback) fails to execute and chrome.runtime.lastError is undefined.
-	// const fallback = function () {}; // Workaround for Edge. callback cannot be undefined.
-	// callback = callback || fallback;
+	// @EDGE chrome.runtime.sendMessage(message) works, but the `callback` of
+	// chrome.runtime.sendMessage(message, callback) fails to
+	// execute and chrome.runtime.lastError is undefined.
 	return chrome.runtime.sendMessage({
 		name,
 		message,
@@ -105,12 +122,8 @@ export function sendMessage(name, message, callback = function () {}, origin = n
  * @return {Object}		response
  * @todo  runtime.sendMessage does not return any value.
  */
-export function sendRewardMessage(name, message, callback = function () {}) {
-	log('Panel sendMessage: sending to background', name);
-	// @EDGE chrome.runtime.sendMessage(message) works, but
-	// const callback; chrome.runtime.sendMessage(message, callback) fails to execute and chrome.runtime.lastError is undefined.
-	// const fallback = function () {}; // Workaround for Edge. callback cannot be undefined.
-	// callback = callback || fallback;
+export function sendRewardMessage(name, message, callback = defaultCallback()) {
+	log('Panel sendRewardMessage: sending to background', name);
 	return chrome.runtime.sendMessage({
 		name,
 		message,

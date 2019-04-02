@@ -96,7 +96,7 @@ class Settings extends React.Component {
 				origin: 'rewards-hub',
 				type: 'action-signal',
 			};
-			sendMessage('setPanelData', { enable_offers: event.currentTarget.checked, signal }, undefined, 'rewardsPanel');
+			sendMessage('setPanelData', { enable_offers: event.currentTarget.checked, signal }, 'rewardsPanel');
 			sendMessage('ping', event.currentTarget.checked ? 'rewards_on' : 'rewards_off');
 		}
 		this.props.actions.toggleCheckbox({

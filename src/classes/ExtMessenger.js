@@ -28,7 +28,11 @@ export class ExtMessenger {
 	}
 
 	sendMessage(extensionId, message) {
-		chrome.runtime.sendMessage(extensionId, message, () => {});
+		chrome.runtime.sendMessage(extensionId, message, () => {
+			if (chrome.runtime.lastError) {
+				log('ExtMessenger sendMessage error:', chrome.runtime.lastError);
+			}
+		});
 	}
 }
 
