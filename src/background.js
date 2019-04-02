@@ -909,7 +909,11 @@ function onMessageHandler(request, sender, callback) {
 		account.getUserSubscriptionData()
 			.then((customer) => {
 				// TODO temporary fix to handle multiple subscriptions
-				const subscriptionData = customer.subscriptions.reduce((acc, curr) => {
+				let sub = customer.subscriptions;
+				if (!Array.isArray(sub)) {
+					sub = [sub];
+				}
+				const subscriptionData = sub.reduce((acc, curr) => {
 					let a = acc;
 					if (curr.productName.includes('Plus')) {
 						a = curr;
