@@ -241,12 +241,15 @@ class PanelData {
 	_getBlockingData() {
 		const { selected_app_ids, show_tracker_urls, toggle_individual_trackers } = conf;
 
-		return {
-			selected_app_ids,
-			show_tracker_urls,
-			toggle_individual_trackers,
-			...this._getDynamicBlockingData(),
-		};
+		return Object.assign(
+			{},
+			{
+				selected_app_ids,
+				show_tracker_urls,
+				toggle_individual_trackers,
+			},
+			this._getDynamicBlockingData(),
+		);
 	}
 
 	/**
@@ -319,23 +322,26 @@ class PanelData {
 			trackers_banner_status, current_theme
 		} = conf;
 
-		return {
-			enable_ad_block,
-			enable_anti_tracking,
-			enable_smart_block,
-			enable_offers,
-			is_expanded,
-			is_expert,
-			is_android: globals.BROWSER_INFO.os === 'android',
-			language,
-			reload_banner_status,
-			trackers_banner_status,
-			current_theme,
-			tab_id,
-			unread_offer_ids: rewards.unreadOfferIds,
-			account: currentAccount,
-			...this._getDynamicPanelData(tab_id),
-		};
+		return Object.assign(
+			{},
+			{
+				enable_ad_block,
+				enable_anti_tracking,
+				enable_smart_block,
+				enable_offers,
+				is_expanded,
+				is_expert,
+				is_android: globals.BROWSER_INFO.os === 'android',
+				language,
+				reload_banner_status,
+				trackers_banner_status,
+				current_theme,
+				tab_id,
+				unread_offer_ids: rewards.unreadOfferIds,
+				account: currentAccount,
+			},
+			this._getDynamicPanelData(tab_id),
+		);
 	}
 
 	/**
@@ -375,17 +381,19 @@ class PanelData {
 			settings_last_exported, settings_last_imported
 		} = conf;
 
-		return {
-			bugs_last_updated,
-			categories: this._buildGlobalCategories(),
-			language, // required for the setup page that does not have access to panelView data
-			new_app_ids,
-			offer_human_web: true,
-			settings_last_exported,
-			settings_last_imported,
-
-			...this._getUserSettingsForSettingsView(conf),
-		};
+		return Object.assign(
+			{},
+			{
+				bugs_last_updated,
+				categories: this._buildGlobalCategories(),
+				language, // required for the setup page that does not have access to panelView data
+				new_app_ids,
+				offer_human_web: true,
+				settings_last_exported,
+				settings_last_imported,
+			},
+			this._getUserSettingsForSettingsView(conf),
+		);
 	}
 
 	/**
@@ -399,17 +407,20 @@ class PanelData {
 		const { paused_blocking, paused_blocking_timeout } = globals.SESSION;
 		const { site_blacklist, site_whitelist } = conf;
 
-		return {
-			paused_blocking,
-			paused_blocking_timeout,
-			site_blacklist,
-			site_whitelist,
-			pageHost,
-			pageUrl: url || '',
-			siteNotScanned: !this._trackerList || false,
-			sitePolicy: policy.getSitePolicy(url) || false,
-			...this._getDynamicSummaryData()
-		};
+		return Object.assign(
+			{},
+			{
+				paused_blocking,
+				paused_blocking_timeout,
+				site_blacklist,
+				site_whitelist,
+				pageHost,
+				pageUrl: url || '',
+				siteNotScanned: !this._trackerList || false,
+				sitePolicy: policy.getSitePolicy(url) || false,
+			},
+			this._getDynamicSummaryData()
+		);
 	}
 
 	/**
