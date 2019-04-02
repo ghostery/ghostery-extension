@@ -59,6 +59,7 @@ export function sendMessageInPromise(name, message, origin = '') {
 					const callback = resolveMap.get(request.name);
 					if (callback) {
 						callback(request.message);
+						resolveMap.delete(request.message);
 					}
 					if (sendResponse) {
 						sendResponse();
