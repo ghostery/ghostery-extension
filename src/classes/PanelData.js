@@ -373,8 +373,8 @@ class PanelData {
 
 		return {
 			enable_offers: conf.enable_offers,
-			storedOffers,
-			unreadOfferIds,
+			rewards: storedOffers,
+			unread_offer_ids: unreadOfferIds,
 		};
 	}
 
