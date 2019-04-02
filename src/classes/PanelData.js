@@ -253,6 +253,18 @@ class PanelData {
 	}
 
 	/**
+	 * Helper that retrieves the current account information
+	 * @return {Object|null}	the current account object or null
+	 */
+	_getCurrentAccount() {
+		const currentAccount = conf.account;
+		if (currentAccount && currentAccount.user) {
+			currentAccount.user.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus']);
+		}
+		return currentAccount;
+	}
+
+	/**
 	 * Gets the data needed to update the Blocking view as a tab loads
 	 * @return	{Object}	the scan status, page url, and categories data that may change as new trackers are discovered on the page
 	 */
@@ -283,7 +295,8 @@ class PanelData {
 
 		return {
 			needsReload: needsReload || { changes: {} },
-			smartBlock
+			smartBlock,
+			account: this._getCurrentAccount(),
 		};
 	}
 
@@ -311,10 +324,6 @@ class PanelData {
 	_getPanelData() {
 		if (!this._activeTab) { return {}; }
 
-		const currentAccount = conf.account;
-		if (currentAccount && currentAccount.user) {
-			currentAccount.user.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus']);
-		}
 		const { id: tab_id } = this._activeTab;
 		const {
 			enable_ad_block, enable_anti_tracking, enable_smart_block,
@@ -338,7 +347,6 @@ class PanelData {
 				current_theme,
 				tab_id,
 				unread_offer_ids: rewards.unreadOfferIds,
-				account: currentAccount,
 			},
 			this._getDynamicPanelData(tab_id),
 		);
@@ -455,7 +463,7 @@ class PanelData {
 			is_expanded, is_expert, reload_banner_status, trackers_banner_status,
 		} = userSettings;
 
-		this._postMessage('panel', {
+		return {
 			current_theme,
 			enable_ad_block,
 			enable_anti_tracking,
@@ -464,7 +472,8 @@ class PanelData {
 			is_expert,
 			reload_banner_status,
 			trackers_banner_status,
-		});
+			account: this._getCurrentAccount(),
+		};
 	}
 
 	/**
