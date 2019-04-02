@@ -164,14 +164,18 @@ class Account {
 			.then((res) => {
 				const customer = build(normalize(res), 'customers', res.data.id);
 				// TODO temporary fix to handle multiple subscriptions
-				const sub = customer.subscriptions.reduce((acc, curr) => {
+				let sub = customer.subscriptions;
+				if (!Array.isArray()) {
+					sub = [sub];
+				}
+				const subPlus = sub.reduce((acc, curr) => {
 					let a = acc;
 					if (curr.productName.includes('Plus')) {
 						a = curr;
 					}
 					return a;
 				}, {});
-				this._setSubscriptionData(sub);
+				this._setSubscriptionData(subPlus);
 				return customer;
 			})
 	)
