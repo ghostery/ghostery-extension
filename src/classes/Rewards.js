@@ -13,6 +13,7 @@
 
 /* eslint consistent-return: 0 */
 
+import { clone } from 'underscore';
 import button from './BrowserButton';
 import cliqz from './Cliqz';
 import conf from './Conf';
@@ -42,8 +43,10 @@ class Rewards {
 
 	markRewardRead(offerId) {
 		const rewardIdx = this.unreadOfferIds.indexOf(offerId);
-		this.unreadOfferIds.splice(rewardIdx, 1);
-		this.updateStoredOffers();
+		if (rewardIdx !== -1) {
+			this.unreadOfferIds.splice(rewardIdx, 1);
+			this.updateStoredOffers();
+		}
 	}
 
 	sendSignal(message) {
@@ -64,13 +67,33 @@ class Rewards {
 		cliqz.modules['offers-v2'].background.actions.processRealEstateMessage(signal);
 	}
 
-	getStoredOffers() {
-		return prefsGet('storedOffers', 'unreadOfferIds', 'totalOffersSeen')
-			.then((response) => {
-				this.storedOffers = response.storedOffers || {};
-				this.unreadOfferIds = response.unreadOfferIds || [];
-				this.totalOffersSeen = response.totalOffersSeen || 0;
-			});
+	async filterOffersByRemote() {
+		await cliqz.modules['offers-v2'].isReady();
+		const args = { filters: { by_rs_dest: 'ghostery' } };
+		const offers = cliqz.modules['offers-v2'].background.actions.getStoredOffers(args);
+		const newStoredOffers = {};
+		(offers || []).forEach(({ offer_id: offerId, attrs = {}, offer_info: offerInfo }) => {
+			const offer = (this.storedOffers || {})[offerId];
+			if (offer) {
+				const newOffer = clone(offer);
+				newOffer.attrs = attrs;
+				newOffer.offer_data = offerInfo;
+				newStoredOffers[offerId] = newOffer;
+			}
+		});
+		this.storedOffers = newStoredOffers;
+		this.unreadOfferIds = this.unreadOfferIds.filter(id => newStoredOffers[id]);
+	}
+
+	async getStoredOffers() {
+		const {
+			storedOffers,
+			unreadOfferIds,
+			totalOffersSeen,
+		} = await prefsGet('storedOffers', 'unreadOfferIds', 'totalOffersSeen');
+		this.storedOffers = storedOffers || {};
+		this.unreadOfferIds = unreadOfferIds || [];
+		this.totalOffersSeen = totalOffersSeen || 0;
 	}
 
 	updateStoredOffers() {
