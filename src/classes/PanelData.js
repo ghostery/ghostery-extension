@@ -454,8 +454,15 @@ class PanelData {
 			current_theme, enable_ad_block, enable_anti_tracking, enable_smart_block,
 			is_expanded, is_expert, reload_banner_status, trackers_banner_status,
 		} = userSettings;
+		const currentAccount = conf.account;
+		if (currentAccount && currentAccount.user) {
+			currentAccount.user.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus']);
+		}
 
-		this._postMessage('panel', {
+		console.log('IVZ currentAccount in _ghetUserSettingsForPanelView:');
+		console.log(currentAccount);
+
+		return {
 			current_theme,
 			enable_ad_block,
 			enable_anti_tracking,
@@ -464,7 +471,8 @@ class PanelData {
 			is_expert,
 			reload_banner_status,
 			trackers_banner_status,
-		});
+			account: currentAccount
+		};
 	}
 
 	/**
