@@ -39,21 +39,27 @@ const defaultCallback = () => {
  * @return {Promise}
  */
 let MESSAGE_ID = 0;
-let LISTENER_ADDED = false;
+const listenerSet = new Set();
+const resolveMap = new Map();
+const NO_ORIGIN = 'no_origin';
 export function sendMessageInPromise(name, message, origin = '') {
 	// On Edge 39.14965.1001.0 callback is not called when multiple
 	// Edge instances are running. So instead we pass the message back
 	// from background. See onMessageHandler, HANDLE UNIVERSAL EVENTS HERE
 	// in src/background.js. To be removed, once Edge is fixed.
 	if (IS_EDGE) {
+		MESSAGE_ID++;
+		const messageId = MESSAGE_ID.toString();
 		return new Promise((resolve) => {
-			const messageId = MESSAGE_ID.toString();
-			MESSAGE_ID++;
-			if (!LISTENER_ADDED) {
-				LISTENER_ADDED = true;
+			resolveMap.set(messageId, resolve);
+			const key = (origin === '') ? NO_ORIGIN : origin;
+			if (!listenerSet.has(key)) {
+				listenerSet.add(key);
 				onMessage.addListener((request, sender, sendResponse) => {
-					if (messageId === request.name) {
-						resolve(request.message);
+					const callback = resolveMap.get(request.name);
+					if (callback) {
+						callback(request.message);
+						resolveMap.delete(request.message);
 					}
 					if (sendResponse) {
 						sendResponse();
@@ -64,6 +70,7 @@ export function sendMessageInPromise(name, message, origin = '') {
 				name,
 				message,
 				messageId,
+				resolve,
 				origin,
 			}, () => {
 				if (chrome.runtime.lastError) {
