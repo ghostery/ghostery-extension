@@ -24,7 +24,6 @@ import { injectScript } from '../utils/utils';
 /**
  * Class for handling Ghostery Rewards Box overlay.
  * @memberOf  BackgroundClasses
- * @todo  make it a Singelton
  */
 class Rewards {
 	constructor() {
