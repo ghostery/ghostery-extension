@@ -55,6 +55,9 @@ export function sendMessageInPromise(name, message, origin = '') {
 			const key = (origin === '') ? NO_ORIGIN : origin;
 			if (!listenerSet.has(key)) {
 				listenerSet.add(key);
+				// We need to map individual listeners by origin for each
+				// instantiation (panel, hub, content scripts) since Edge does
+				// not allow a global listener for all uses
 				onMessage.addListener((request, sender, sendResponse) => {
 					const callback = resolveMap.get(request.name);
 					if (callback) {
@@ -70,7 +73,6 @@ export function sendMessageInPromise(name, message, origin = '') {
 				name,
 				message,
 				messageId,
-				resolve,
 				origin,
 			}, () => {
 				if (chrome.runtime.lastError) {
