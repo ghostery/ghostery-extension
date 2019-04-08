@@ -464,7 +464,7 @@ class Summary extends React.Component {
 
 				<div className={summaryViewStatsButton}>
 					<NavButton path="/stats" imagePath="../../app/images/panel/graph.svg" />
-					<Tooltip body={t('panel_stats_header_title')} position="left" />
+					<Tooltip body={t('subscription_history_stats')} position="left" />
 				</div>
 			</div>
 		);
