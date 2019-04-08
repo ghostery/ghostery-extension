@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -26,7 +26,7 @@ describe('app/panel/components/BuildingBlocks/RewardListItem.jsx', () => {
 		test('reward list item is rendered correctly', () => {
 			const initialState = {
 				actions: {
-					getRewardsData: () => {},
+					updateRewardsData: () => {},
 					toggleOffersEnabled: () => {},
 					removeOffer: () => {},
 					setOfferRead: () => {},
@@ -52,7 +52,7 @@ describe('app/panel/components/BuildingBlocks/RewardListItem.jsx', () => {
 		test('reward list item is rendered correctly when disabled', () => {
 			const initialState = {
 				actions: {
-					getRewardsData: () => {},
+					updateRewardsData: () => {},
 					toggleOffersEnabled: () => {},
 					removeOffer: () => {},
 					setOfferRead: () => {},
@@ -78,7 +78,7 @@ describe('app/panel/components/BuildingBlocks/RewardListItem.jsx', () => {
 		test('reward list item is rendered correctly when unread', () => {
 			const initialState = {
 				actions: {
-					getRewardsData: () => {},
+					updateRewardsData: () => {},
 					toggleOffersEnabled: () => {},
 					removeOffer: () => {},
 					setOfferRead: () => {},
@@ -104,7 +104,7 @@ describe('app/panel/components/BuildingBlocks/RewardListItem.jsx', () => {
 		test('reward list item is rendered correctly when elongated', () => {
 			const initialState = {
 				actions: {
-					getRewardsData: () => {},
+					updateRewardsData: () => {},
 					toggleOffersEnabled: () => {},
 					removeOffer: () => {},
 					setOfferRead: () => {},
@@ -130,7 +130,7 @@ describe('app/panel/components/BuildingBlocks/RewardListItem.jsx', () => {
 		test('reward list item is rendered correctly when disabled, unread, and elongated', () => {
 			const initialState = {
 				actions: {
-					getRewardsData: () => {},
+					updateRewardsData: () => {},
 					toggleOffersEnabled: () => {},
 					removeOffer: () => {},
 					setOfferRead: () => {},

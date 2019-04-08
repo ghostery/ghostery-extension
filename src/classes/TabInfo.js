@@ -19,7 +19,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -84,6 +84,8 @@ class TabInfo {
 	 * @param 	{string}	property 	property name
 	 * @return 	{Object}				_tabInfo data
 	 */
+	// TODO consider improving handling of what if we mistype the property name.
+	// always returning object where property might sometimes have returned false could result in subtle bugs.
 	getTabInfo(tab_id, property) {
 		if (this._tabInfo.hasOwnProperty(tab_id)) {
 			if (property) {

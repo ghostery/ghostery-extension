@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -13,17 +13,16 @@
 
 /* eslint no-use-before-define: 0 */
 import {
-	GET_BLOCKING_DATA,
+	UPDATE_BLOCKING_DATA,
 	FILTER_TRACKERS,
 	UPDATE_BLOCK_ALL_TRACKERS,
 	UPDATE_CATEGORIES,
 	UPDATE_CATEGORY_BLOCKED,
 	UPDATE_TRACKER_BLOCKED,
 	UPDATE_TRACKER_TRUST_RESTRICT,
-	TOGGLE_EXPAND_ALL,
-	TOGGLE_EXPAND_CATEGORY
+	TOGGLE_EXPAND_ALL
 } from '../constants/constants';
-import { updateTrackerBlocked, updateCategoryBlocked, updateBlockAllTrackers, toggleExpandAll, toggleExpandCategory } from '../utils/blocking';
+import { updateTrackerBlocked, updateCategoryBlocked, updateBlockAllTrackers, toggleExpandAll } from '../utils/blocking';
 import { updateObject } from '../utils/utils';
 import { sendMessage } from '../utils/msg';
 
@@ -48,7 +47,7 @@ const initialState = {
  */
 export default (state = initialState, action) => {
 	switch (action.type) {
-		case GET_BLOCKING_DATA: {
+		case UPDATE_BLOCKING_DATA: {
 			return Object.assign({}, state, action.data);
 		}
 		case FILTER_TRACKERS: {
@@ -75,10 +74,6 @@ export default (state = initialState, action) => {
 		}
 		case TOGGLE_EXPAND_ALL: {
 			const updated = toggleExpandAll(state, action);
-			return Object.assign({}, state, updated);
-		}
-		case TOGGLE_EXPAND_CATEGORY: {
-			const updated = toggleExpandCategory(state, action);
 			return Object.assign({}, state, updated);
 		}
 		case UPDATE_TRACKER_TRUST_RESTRICT: {

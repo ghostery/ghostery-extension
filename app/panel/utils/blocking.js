@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -166,24 +166,6 @@ export function toggleExpandAll(state, action) {
 	return {
 		categories: updated_categories,
 		expand_all_trackers: action.data
-	};
-}
-
-/**
- * Set property for expanding category
- * @memberOf PanelUtils
- * @param  {Object} state 			current state
- * @param  {Object} action 			action which provides data
- * @return {Object} object 			updated categories
- */
-export function toggleExpandCategory(state, action) {
-	const { expanded } = action.data;
-	const updated_categories = JSON.parse(JSON.stringify(state.categories)); // deep clone
-	const catIndex = updated_categories.findIndex(item => item.id === action.data.cat_id);
-	const updated_category = updated_categories[catIndex];
-	updated_category.expanded = expanded;
-	return {
-		categories: updated_categories,
 	};
 }
 
