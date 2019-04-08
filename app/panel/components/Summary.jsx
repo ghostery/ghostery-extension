@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import ReactSVG from 'react-svg';
 import ClassNames from 'classnames';
 import Tooltip from './Tooltip';
 import NavButton from './BuildingBlocks/NavButton';
@@ -463,6 +464,8 @@ class Summary extends React.Component {
 				</div>
 
 				<NavButton path="/stats" imagePath="../../app/images/panel/graph.svg" classNames={summaryViewStatsButton} />
+
+				<ReactSVG path="/app/images/panel/upgrade-to-plus-cta-green-banner.svg" classNames={summaryViewStatsButton} />
 			</div>
 		);
 	}
