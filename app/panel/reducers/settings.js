@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -26,12 +26,11 @@ import {
 	UPDATE_SETTINGS_CATEGORY_BLOCKED,
 	UPDATE_SETTINGS_TRACKER_BLOCKED,
 	SETTINGS_TOGGLE_EXPAND_ALL,
-	SETTINGS_TOGGLE_EXPAND_CATEGORY,
 	SETTINGS_UPDATE_SEARCH_VALUE,
 	SETTINGS_FILTER,
 	GET_SETTINGS_DATA
 } from '../constants/constants';
-import { updateTrackerBlocked, updateCategoryBlocked, updateBlockAllTrackers, toggleExpandAll, toggleExpandCategory } from '../utils/blocking';
+import { updateTrackerBlocked, updateCategoryBlocked, updateBlockAllTrackers, toggleExpandAll } from '../utils/blocking';
 import { sendMessage } from '../utils/msg';
 import globals from '../../../src/classes/Globals';
 import { objectEntries } from '../../../src/utils/common';
@@ -101,10 +100,6 @@ export default (state = initialState, action) => {
 		}
 		case SETTINGS_TOGGLE_EXPAND_ALL: {
 			const updated = toggleExpandAll(state, action);
-			return Object.assign({}, state, updated);
-		}
-		case SETTINGS_TOGGLE_EXPAND_CATEGORY: {
-			const updated = toggleExpandCategory(state, action);
 			return Object.assign({}, state, updated);
 		}
 		case UPDATE_SETTINGS_TRACKER_BLOCKED: {

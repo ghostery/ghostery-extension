@@ -7,7 +7,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -23,6 +23,7 @@ import conf from './Conf';
 import foundBugs from './FoundBugs';
 import globals from './Globals';
 import latency from './Latency';
+import panelData from './PanelData';
 import Policy, { BLOCK_REASON_SS_UNBLOCKED, BLOCK_REASON_C2P_ALLOWED_THROUGH } from './Policy';
 import PolicySmartBlock from './PolicySmartBlock';
 import PurpleBox from './PurpleBox';
@@ -72,6 +73,8 @@ class EventHandlers {
 			RequestsMap.clear();
 			this._clearTabData(tabId);
 			this._resetNotifications();
+			// TODO understand why this does not work when placed in the 'reload' branch in onCommitted
+			panelData.clearPageLoadTime(tabId);
 
 			// initialize tabInfo, foundBugs objects for this tab
 			tabInfo.create(tabId, url);
@@ -368,11 +371,8 @@ class EventHandlers {
 			return { cancel: false };
 		}
 
-		const page_url = tabInfo.getTabInfo(tab_id, 'url');
-		const page_host = tabInfo.getTabInfo(tab_id, 'host');
 		const page_protocol = tabInfo.getTabInfo(tab_id, 'protocol');
 		const from_redirect = globals.REDIRECT_MAP.has(request_id);
-		const bug_id = (page_url ? isBug(details.url, page_url) : isBug(details.url));
 		const processed = utils.processUrl(details.url);
 
 		/* ** SMART BLOCKING - Privacy ** */
@@ -380,6 +380,11 @@ class EventHandlers {
 		if (this.policySmartBlock.isInsecureRequest(tab_id, page_protocol, processed.protocol, processed.host)) {
 			return this._blockHelper(details, tab_id, null, null, request_id, from_redirect, true);
 		}
+
+		// TODO fuse this into a single call to improve performance
+		const page_url = tabInfo.getTabInfo(tab_id, 'url');
+		const page_host = tabInfo.getTabInfo(tab_id, 'host');
+		const bug_id = (page_url ? isBug(details.url, page_url) : isBug(details.url));
 
 		// allow if not a tracker
 		if (!bug_id) {
@@ -611,6 +616,9 @@ class EventHandlers {
 		foundBugs.update(tab_id, bug_id, url, block, type);
 
 		this._throttleButtonUpdate(details.tab_id);
+
+		// throttled in PanelData
+		panelData.updatePanelUI();
 
 		if (block && (conf.enable_click2play || conf.enable_click2playSocial)) {
 			buildC2P(details, app_id);

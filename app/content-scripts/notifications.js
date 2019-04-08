@@ -7,7 +7,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -539,7 +539,12 @@ const NotificationsContentScript = (function (win, doc) {
 
 				const fileReader = new FileReader();
 				fileReader.onload = (fileLoadedEvent) => {
-					const fallback = function () {}; // Workaround for Edge. callback cannot be undefined.
+					// Workaround for Edge. Callback cannot be undefined.
+					const fallback = () => {
+						if (chrome.runtime.lastError) {
+							log('showBrowseWindow error:', chrome.runtime.lastError);
+						}
+					};
 					chrome.runtime.sendMessage({
 						origin: 'notifications',
 						name: 'importFile',

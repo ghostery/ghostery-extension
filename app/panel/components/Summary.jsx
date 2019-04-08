@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -15,6 +15,7 @@ import React from 'react';
 import ClassNames from 'classnames';
 import Tooltip from './Tooltip';
 import NavButton from './BuildingBlocks/NavButton';
+import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import globals from '../../../src/classes/Globals';
 import {
@@ -36,6 +37,8 @@ const AB_PAUSE_BUTTON = false;
  * @memberof PanelClasses
  */
 class Summary extends React.Component {
+	static contextType = DynamicUIPortContext;
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -52,6 +55,7 @@ class Summary extends React.Component {
 		this.clickTrackersBlocked = this.clickTrackersBlocked.bind(this);
 		this.clickSitePolicy = this.clickSitePolicy.bind(this);
 		this.clickCliqzFeature = this.clickCliqzFeature.bind(this);
+		this.handlePortMessage = this.handlePortMessage.bind(this);
 
 		this.pauseOptions = [
 			{ name: t('pause_30_min'), name_condensed: t('pause_30_min_condensed'), val: 30 },
@@ -63,16 +67,13 @@ class Summary extends React.Component {
 	/**
 	 * Lifecycle event
 	 */
-	componentWillMount() {
+	componentDidMount() {
 		this.setTrackerLatency(this.props);
 		this.updateSiteNotScanned(this.props);
-	}
 
-	/**
-	 * Lifecycle event
-	 */
-	componentDidMount() {
-		this.props.actions.getCliqzModuleData();
+		this._dynamicUIPort = this.context;
+		this._dynamicUIPort.onMessage.addListener(this.handlePortMessage);
+		this._dynamicUIPort.postMessage({ name: 'SummaryComponentDidMount' });
 	}
 
 	/**
@@ -84,6 +85,14 @@ class Summary extends React.Component {
 
 		// Set page title for Firefox for Android
 		window.document.title = `Ghostery's findings for ${this.props.pageUrl}`;
+	}
+
+	/**
+	 * Lifecycle event
+	 */
+	componentWillUnmount() {
+		this._dynamicUIPort.postMessage({ name: 'SummaryComponentWillUnmount' });
+		this._dynamicUIPort.onMessage.removeListener(this.handlePortMessage);
 	}
 
 	/**
@@ -108,6 +117,24 @@ class Summary extends React.Component {
 				pageLatency = (Number(timing.loadEventEnd - timing.navigationStart) / 1000).toFixed(2);
 			}
 			this.setState({ trackerLatencyTotal: pageLatency });
+		// reset page load value if page is reloaded while panel is open
+		} else if (this.props.performanceData && !performanceData) {
+			this.setState({ trackerLatencyTotal: pageLatency });
+		}
+	}
+
+	/**
+	 * Handles messages from dynamic UI port to background
+	 */
+	handlePortMessage(msg) {
+		if (msg.to !== 'summary' || !msg.body) { return; }
+
+		const { body } = msg;
+
+		if (body.adblock || body.antitracking) {
+			this.props.actions.updateCliqzModuleData(body);
+		} else {
+			this.props.actions.updateSummaryData(body);
 		}
 	}
 

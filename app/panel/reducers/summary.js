@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -14,8 +14,8 @@
 /* eslint no-use-before-define: 0 */
 
 import {
-	GET_SUMMARY_DATA,
-	GET_CLIQZ_MODULE_DATA,
+	UPDATE_SUMMARY_DATA,
+	UPDATE_CLIQZ_MODULE_DATA,
 	UPDATE_GHOSTERY_PAUSED,
 	UPDATE_SITE_POLICY,
 	UPDATE_TRACKER_COUNTS
@@ -47,22 +47,10 @@ const initialState = {
  */
 export default (state = initialState, action) => {
 	switch (action.type) {
-		case GET_SUMMARY_DATA: {
+		case UPDATE_SUMMARY_DATA: {
 			return Object.assign({}, state, action.data);
 		}
-		case GET_CLIQZ_MODULE_DATA: {
-			const antiTracking = action.data.antitracking;
-			let totalUnsafeCount = 0;
-			for (const category in antiTracking) {
-				if (antiTracking.hasOwnProperty(category)) {
-					for (const app in antiTracking[category]) {
-						if (antiTracking[category][app] === 'unsafe') {
-							totalUnsafeCount++;
-						}
-					}
-				}
-			}
-			antiTracking.totalUnsafeCount = totalUnsafeCount;
+		case UPDATE_CLIQZ_MODULE_DATA: {
 			return Object.assign({}, state, { adBlock: action.data.adblock, antiTracking: action.data.antitracking });
 		}
 		case UPDATE_GHOSTERY_PAUSED: {

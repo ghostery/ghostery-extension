@@ -6,7 +6,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -163,7 +163,19 @@ class Account {
 			.then(userID => api.get('stripe/customers', userID, 'cards,subscriptions'))
 			.then((res) => {
 				const customer = build(normalize(res), 'customers', res.data.id);
-				this._setSubscriptionData(customer);
+				// TODO temporary fix to handle multiple subscriptions
+				let sub = customer.subscriptions;
+				if (!Array.isArray()) {
+					sub = [sub];
+				}
+				const subPlus = sub.reduce((acc, curr) => {
+					let a = acc;
+					if (curr.productName.includes('Plus')) {
+						a = curr;
+					}
+					return a;
+				}, {});
+				this._setSubscriptionData(subPlus);
 				return customer;
 			})
 	)
@@ -475,13 +487,13 @@ class Account {
 		dispatcher.trigger('conf.save.account');
 	}
 
-	_setSubscriptionData = (subscriptionData) => {
-		// TODO: Change this so that we aren't writing over subscriptionData
-		if (!conf.paid_subscription && subscriptionData.hasOwnProperty('subscriptions')) {
+	_setSubscriptionData = (data) => {
+		// TODO: Change this so that we aren't writing over data
+		if (!conf.paid_subscription && data) {
 			conf.paid_subscription = true;
 			dispatcher.trigger('conf.save.paid_subscription');
 		}
-		conf.account.subscriptionData = subscriptionData.subscriptions || null;
+		conf.account.subscriptionData = data || null;
 		dispatcher.trigger('conf.save.account');
 	}
 
