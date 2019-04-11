@@ -1932,10 +1932,10 @@
 		"message": "Code kopiert"
 	},
 	"rewards_expires_in_day": {
-		"message": "Verfügbar für 1 Tag ab"
+		"message": "Verfügbar für 1 Tag"
 	},
 	"rewards_expires_in_days": {
-		"message": "Verfügbar für $COUNT$ Tagen ab",
+		"message": "Verfügbar für $COUNT$ Tagen",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1943,10 +1943,10 @@
 		}
 	},
 	"rewards_expires_in_hour": {
-		"message": "Verfügbar für 1 Stunde ab"
+		"message": "Verfügbar für 1 Stunde"
 	},
 	"rewards_expires_in_hours": {
-		"message": "Verfügbar für $COUNT$ Stunden ab",
+		"message": "Verfügbar für $COUNT$ Stunden",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1954,10 +1954,10 @@
 		}
 	},
 	"rewards_expires_in_min": {
-		"message": "Verfügbar für 1 Min. ab"
+		"message": "Verfügbar für 1 Min."
 	},
 	"rewards_expires_in_mins": {
-		"message": "Verfügbar für $COUNT$ Minuten ab",
+		"message": "Verfügbar für $COUNT$ Minuten",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1965,10 +1965,10 @@
 		}
 	},
 	"rewards_expires_in_sec": {
-		"message": "Verfügbar für 1 Sek. ab"
+		"message": "Verfügbar für 1 Sek."
 	},
 	"rewards_expires_in_secs": {
-		"message": "Verfügbar für $COUNT$ Sek. ab",
+		"message": "Verfügbar für $COUNT$ Sek.",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1976,7 +1976,7 @@
 		}
 	},
 	"rewards_terms_conditions": {
-		"message": "Geschäftsbedingungen"
+		"message": "Konditionen"
 	},
 	"rewards_disable": {
 		"message": "Rewards ausschalten"
