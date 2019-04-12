@@ -1853,8 +1853,11 @@
 	"hub_login_label_password_invalid": {
 		"message": "Используйте от 8 до 50 символов."
 	},
+	"hub_login_link_dont_have_account": {
+		"message": "Нет учетной записи?"
+	},
 	"hub_login_link_create_account": {
-		"message": "Нет учетной записи? Зарегистрироваться."
+		"message": "Зарегистрироваться."
 	},
 	"hub_login_button_submit": {
 		"message": "Вход"
@@ -1898,8 +1901,11 @@
 	"hub_create_account_checkbox_promotions": {
 		"message": "Присылайте мне обновления и промо-акции Ghostery."
 	},
+	"hub_create_account_already_have_account": {
+		"message": "Уже есть учетная запись Ghostery?"
+	},
 	"hub_create_account_link_login": {
-		"message": "У меня уже есть учетная запись. Вход."
+		"message": "Войти."
 	},
 	"hub_create_account_button_submit": {
 		"message": "Создать учетную запись"

@@ -1853,8 +1853,11 @@
 	"hub_login_label_password_invalid": {
 		"message": "使用 8 至 50 個字符。"
 	},
+	"hub_login_link_dont_have_account": {
+		"message": "沒有帳戶？"
+	},
 	"hub_login_link_create_account": {
-		"message": "沒有帳戶？註冊。"
+		"message": "註冊。"
 	},
 	"hub_login_button_submit": {
 		"message": "登錄"
@@ -1898,8 +1901,11 @@
 	"hub_create_account_checkbox_promotions": {
 		"message": "給我發送Ghostery更新和促銷。"
 	},
+	"hub_create_account_already_have_account": {
+		"message": "已有一個Ghostery帳戶？"
+	},
 	"hub_create_account_link_login": {
-		"message": "我已有一個帳戶。登錄。"
+		"message": "在此登錄"
 	},
 	"hub_create_account_button_submit": {
 		"message": "創建帳戶"
