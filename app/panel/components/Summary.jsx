@@ -334,6 +334,10 @@ class Summary extends React.Component {
 			hide: is_expert
 		});
 
+		const greenUpgradeBanner = ClassNames('upgrade-banner', {
+			hide: is_expert,
+		});
+
 		let trackersBlockedCount;
 		if (paused_blocking || sitePolicy === 2) {
 			trackersBlockedCount = 0;
@@ -465,7 +469,7 @@ class Summary extends React.Component {
 
 				<NavButton path="/stats" imagePath="../../app/images/panel/graph.svg" classNames={summaryViewStatsButton} />
 
-				<ReactSVG path="/app/images/panel/upgrade-to-plus-cta-green-banner.svg" classNames={summaryViewStatsButton} />
+				<ReactSVG path="/app/images/panel/green-upgrade-banner.svg" classNames={greenUpgradeBanner} />
 			</div>
 		);
 	}
