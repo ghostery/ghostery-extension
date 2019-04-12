@@ -1853,8 +1853,11 @@
 	"hub_login_label_password_invalid": {
 		"message": "8자에서 50자까지 사용할 수 있습니다."
 	},
-	"hub_login_link_create_account": {
+	"hub_login_link_dont_have_account": {
 		"message": "계정이 있으신가요?회원 가입"
+	},
+	"hub_login_link_create_account": {
+		"message": "어울리다"
 	},
 	"hub_login_button_submit": {
 		"message": "로그인 "
@@ -1898,8 +1901,11 @@
 	"hub_create_account_checkbox_promotions": {
 		"message": "고스터리 브라우저의 업데이트와 프로모션 소식 받기"
 	},
+	"hub_create_account_already_have_account": {
+		"message": "이미 Ghostery 계정이 있으십니까? "
+	},
 	"hub_create_account_link_login": {
-		"message": "이미 계정이 있습니다. 로그인"
+		"message": "여기에서 로그인하세요."
 	},
 	"hub_create_account_button_submit": {
 		"message": "계정 만들기 "
