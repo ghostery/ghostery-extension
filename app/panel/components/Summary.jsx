@@ -469,7 +469,7 @@ class Summary extends React.Component {
 
 				<NavButton path="/stats" imagePath="../../app/images/panel/graph.svg" classNames={summaryViewStatsButton} />
 
-				<ReactSVG path="/app/images/panel/green-upgrade-banner.svg" classNames={greenUpgradeBanner} />
+				<ReactSVG path="/app/images/panel/green-upgrade-banner.svg" className={greenUpgradeBanner} />
 			</div>
 		);
 	}
