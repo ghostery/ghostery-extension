@@ -70,7 +70,7 @@
 		width: 120px;
 	}
 	&.ab-pause .donut-graph-container {
-		margin-top: 0px;
+		margin-top: 0;
 		margin-bottom: 30px;
 	}
 	&.expert .donut-graph-container {
@@ -80,7 +80,7 @@
 		margin-bottom: 20px;
 	}
 	&.expert.ab-pause .donut-graph-container {
-		margin-top: 0px;
+		margin-top: 0;
 		margin-bottom: 16px;
 	}
 
@@ -201,5 +201,10 @@
 		padding: 6px 3px 3px 9px;
 		border: 1px lightgray solid;
 		border-radius: 5px 0 0 5px;
+	}
+	.green-upgrade-banner {
+		position: absolute;
+		left: 0;
+		top: 10px;
 	}
 }

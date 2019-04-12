@@ -334,7 +334,7 @@ class Summary extends React.Component {
 			hide: is_expert
 		});
 
-		const greenUpgradeBanner = ClassNames('upgrade-banner', {
+		const greenUpgradeBanner = ClassNames('green-upgrade-banner', {
 			hide: is_expert,
 		});
 
