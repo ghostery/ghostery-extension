@@ -306,6 +306,7 @@ class Summary extends React.Component {
 			trackerCounts,
 		} = this.props;
 		const plusSubscriber = account && account.user && account.user.subscriptionsPlus;
+		const is_expanded_and_expert = is_expert && is_expanded;
 		const showCondensed = is_expert && is_expanded;
 		const antiTrackUnsafe = enable_anti_tracking && antiTracking && antiTracking.totalUnsafeCount || 0;
 		const adBlockBlocked = enable_ad_block && adBlock && adBlock.totalCount || 0;
@@ -471,10 +472,12 @@ class Summary extends React.Component {
 				<NavButton path="/stats" imagePath="../../app/images/panel/graph.svg" classNames={summaryViewStatsButton} />
 
 				{
-					(plusSubscriber && <ReactSVG path="/app/images/panel/gold-plus-icon.svg" className="green-upgrade-banner" />) ||
-					(
-						(is_expert && <ReactSVG path="/app/images/panel/green-upgrade-banner-small.svg" className="green-upgrade-banner" />) ||
-						<ReactSVG path="/app/images/panel/green-upgrade-banner.svg" className="green-upgrade-banner" />
+					!is_expanded_and_expert && (
+						(plusSubscriber && <ReactSVG path="/app/images/panel/gold-plus-icon.svg" className="green-upgrade-banner" />) ||
+						(
+							(is_expert && <ReactSVG path="/app/images/panel/green-upgrade-banner-small.svg" className="green-upgrade-banner" />) ||
+							<ReactSVG path="/app/images/panel/green-upgrade-banner.svg" className="green-upgrade-banner" />
+						)
 					)
 				}
 			</div>
