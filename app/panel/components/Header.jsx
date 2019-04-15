@@ -150,19 +150,24 @@ class Header extends React.Component {
 	* @return {JSX} JSX for rendering the Header Component of the panel
 	*/
 	render() {
-		const { pathname } = this.props.location;
+		const {
+			is_expert,
+			location,
+			loggedIn,
+			user,
+		} = this.props;
+		const { pathname } = location;
 		const showTabs = pathname === '/' || pathname.startsWith('/detail');
 		const headerArrowClasses = ClassNames('back-arrow', {
 			'show-back-arrow': (pathname !== '/' && !pathname.startsWith('/detail')),
 		});
 		const tabSimpleClassNames = ClassNames('header-tab', {
-			active: !this.props.is_expert,
+			active: !is_expert,
 		});
 		const tabDetailedClassNames = ClassNames('header-tab', {
-			active: this.props.is_expert,
+			active: is_expert,
 		});
-		const { loggedIn, user } = this.props;
-		const subscriber = this.props.user && this.props.user.subscriptionsPlus;
+		const subscriber = user && user.subscriptionsPlus;
 		const rightLink = this.generateLink();
 
 		return (
@@ -193,6 +198,9 @@ class Header extends React.Component {
 							<div className="columns shrink">
 								{rightLink}
 							</div>
+							<div className="upgrade-banner-container">
+								<ReactSVG path="/app/images/panel/green-upgrade-banner-expanded-view.svg" />
+							</div>
 							<div className="header-kebab shrink columns" onClick={this.toggleDropdown} ref={(node) => { this.kebab = node; }}>
 								<svg width="4" height="16" viewBox="0 0 4 16">
 									<g fill="#FFF" fillRule="evenodd">
@@ -208,7 +216,7 @@ class Header extends React.Component {
 								email={user && user.email}
 								language={this.props.language}
 								tab_id={this.props.tab_id}
-								location={this.props.location}
+								location={location}
 								history={this.props.history}
 								actions={this.props.actions}
 								toggleDropdown={this.toggleDropdown}
