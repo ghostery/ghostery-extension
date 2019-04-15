@@ -349,33 +349,120 @@ class Summary extends React.Component {
 			invisible: hidePageHost
 		});
 
+		const pauseButtonComponent = (
+			<PauseButton
+				isPaused={this.props.paused_blocking}
+				isPausedTimeout={this.props.paused_blocking_timeout}
+				clickPause={this.clickPauseButton}
+				dropdownItems={this.pauseOptions}
+				isAbPause={abPause}
+				isCentered={is_expert}
+				isCondensed={showCondensed}
+			/>);
+
+		const pauseButtonContainerDiv = (
+			<div className="pause-button-container">
+				pauseButtonComponent
+			</div>
+		);
+
+		const pageStatsDiv = (
+			<div className="page-stats">
+				<div className={blockedTrackersClassNames} onClick={this.clickTrackersBlocked}>
+					<span className="text">{t('trackers_blocked')} </span>
+					<span className="value">
+						{trackersBlockedCount}
+					</span>
+				</div>
+				<div className={pageLoadClassNames}>
+					<span className="text">{t('page_load')} </span>
+					<span className="value">
+						{this.state.trackerLatencyTotal ? `${this.state.trackerLatencyTotal} ${t('settings_seconds')}` : '-'}
+					</span>
+				</div>
+			</div>
+		);
+
+		const ghosteryFeaturesContainerDiv = (
+			<div className="ghostery-features-container">
+				<GhosteryFeatures
+					clickButton={this.clickSitePolicy}
+					sitePolicy={this.props.sitePolicy}
+					isAbPause={abPause}
+					isStacked={is_expert}
+					isInactive={this.props.paused_blocking || this.state.disableBlocking}
+					isCondensed={showCondensed}
+				/>
+
+				{!abPause && pauseButtonComponent}
+			</div>
+		);
+
+		const cliqzFeaturesContainerDiv = (
+			<div className="cliqz-features-container">
+				<CliqzFeatures
+					clickButton={this.clickCliqzFeature}
+					antiTrackingActive={this.props.enable_anti_tracking}
+					antiTracking={this.props.antiTracking}
+					adBlockingActive={this.props.enable_ad_block}
+					adBlocking={this.props.adBlock}
+					smartBlockingActive={this.props.enable_smart_block}
+					smartBlocking={this.props.smartBlock}
+					isInactive={this.props.paused_blocking || this.props.sitePolicy || this.state.disableBlocking || IS_CLIQZ}
+					isSmaller={is_expert}
+					isCondensed={showCondensed}
+				/>
+			</div>
+		);
+
+		const statsNavButtonComponent = (<NavButton path="/stats" imagePath="../../app/images/panel/graph.svg" classNames={summaryViewStatsButton} />);
+
+		if (showCondensed) {
+			return (
+				<div id="content-summary" className={summaryClassNames}>
+					{abPause && pauseButtonContainerDiv}
+
+					{!this.state.disableBlocking && (
+						<div className="total-tracker-count clickable" onClick={this.clickTrackersCount}>
+							<span className="summary-total-tracker-count g-tooltip">
+								{this.props.trackerCounts.allowed + this.props.trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
+								<Tooltip
+									header={t('panel_tracker_total_tooltip')}
+									position="right"
+								/>
+							</span>
+						</div>
+					)}
+
+					{!this.state.disableBlocking && pageStatsDiv}
+
+					{this.state.disableBlocking && is_expert && (
+						<div className="not-scanned-expert-condensed-space-taker" />
+					)}
+
+					{ghosteryFeaturesContainerDiv}
+
+					{cliqzFeaturesContainerDiv}
+
+					{statsNavButtonComponent}
+				</div>
+			);
+		}
+
+		// !showCondensed
 		return (
 			<div id="content-summary" className={summaryClassNames}>
-				{abPause && (
-					<div className="pause-button-container">
-						<PauseButton
-							isPaused={this.props.paused_blocking}
-							isPausedTimeout={this.props.paused_blocking_timeout}
-							clickPause={this.clickPauseButton}
-							dropdownItems={this.pauseOptions}
-							isAbPause={abPause}
-							isCentered={is_expert}
-							isCondensed={showCondensed}
-						/>
-					</div>
-				)}
+				{abPause && pauseButtonContainerDiv}
 
-				{this.state.disableBlocking && !showCondensed && (
-					<NotScanned isSmall={is_expert} />
-				)}
+				{this.state.disableBlocking && (<NotScanned isSmall={is_expert} />)}
 
-				{abPause && !this.state.disableBlocking && is_expert && !showCondensed && (
+				{abPause && !this.state.disableBlocking && is_expert && (
 					<div className={pageHostClassNames}>
 						{pageHost}
 					</div>
 				)}
 
-				{!this.state.disableBlocking && !showCondensed && (
+				{!this.state.disableBlocking && (
 					<div className="donut-graph-container">
 						<DonutGraph
 							categories={this.props.categories}
@@ -388,92 +475,26 @@ class Summary extends React.Component {
 						/>
 					</div>
 				)}
-				{!this.state.disableBlocking && showCondensed && (
-					<div className="total-tracker-count clickable" onClick={this.clickTrackersCount}>
-						<span className="summary-total-tracker-count g-tooltip">
-							{this.props.trackerCounts.allowed + this.props.trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
-							<Tooltip
-								header={t('panel_tracker_total_tooltip')}
-								position="right"
-							/>
-						</span>
-					</div>
-				)}
 
-				{!this.state.disableBlocking && (!abPause || !is_expert) && !showCondensed && (
+				{!this.state.disableBlocking && (!abPause || !is_expert) && (
 					<div className={pageHostClassNames}>
 						{pageHost}
 					</div>
 				)}
 
-				{!this.state.disableBlocking && (
-					<div className="page-stats">
-						<div className={blockedTrackersClassNames} onClick={this.clickTrackersBlocked}>
-							<span className="text">{t('trackers_blocked')} </span>
-							<span className="value">
-								{trackersBlockedCount}
-							</span>
-						</div>
-						<div className={pageLoadClassNames}>
-							<span className="text">{t('page_load')} </span>
-							<span className="value">
-								{this.state.trackerLatencyTotal ? `${this.state.trackerLatencyTotal} ${t('settings_seconds')}` : '-'}
-							</span>
-						</div>
-					</div>
-				)}
+				{!this.state.disableBlocking && pageStatsDiv}
 
-				{this.state.disableBlocking && is_expert && showCondensed && (
-					<div className="not-scanned-expert-condensed-space-taker" />
-				)}
+				{ghosteryFeaturesContainerDiv}
 
-				<div className="ghostery-features-container">
-					<GhosteryFeatures
-						clickButton={this.clickSitePolicy}
-						sitePolicy={this.props.sitePolicy}
-						isAbPause={abPause}
-						isStacked={is_expert}
-						isInactive={this.props.paused_blocking || this.state.disableBlocking}
-						isCondensed={showCondensed}
-					/>
+				{cliqzFeaturesContainerDiv}
 
-					{!abPause && (
-						<PauseButton
-							isPaused={this.props.paused_blocking}
-							isPausedTimeout={this.props.paused_blocking_timeout}
-							clickPause={this.clickPauseButton}
-							dropdownItems={this.pauseOptions}
-							isAbPause={abPause}
-							isCentered={is_expert}
-							isCondensed={showCondensed}
-						/>
-					)}
-				</div>
-
-				<div className="cliqz-features-container">
-					<CliqzFeatures
-						clickButton={this.clickCliqzFeature}
-						antiTrackingActive={this.props.enable_anti_tracking}
-						antiTracking={this.props.antiTracking}
-						adBlockingActive={this.props.enable_ad_block}
-						adBlocking={this.props.adBlock}
-						smartBlockingActive={this.props.enable_smart_block}
-						smartBlocking={this.props.smartBlock}
-						isInactive={this.props.paused_blocking || this.props.sitePolicy || this.state.disableBlocking || IS_CLIQZ}
-						isSmaller={is_expert}
-						isCondensed={showCondensed}
-					/>
-				</div>
-
-				<NavButton path="/stats" imagePath="../../app/images/panel/graph.svg" classNames={summaryViewStatsButton} />
+				{statsNavButtonComponent}
 
 				{
-					!showCondensed && (
-						(plusSubscriber && <ReactSVG path="/app/images/panel/gold-plus-icon.svg" className="green-upgrade-banner" />) ||
-						(
-							(is_expert && <ReactSVG path="/app/images/panel/green-upgrade-banner-small.svg" className="green-upgrade-banner" />) ||
-							<ReactSVG path="/app/images/panel/green-upgrade-banner.svg" className="green-upgrade-banner" />
-						)
+					(plusSubscriber && <ReactSVG path="/app/images/panel/gold-plus-icon.svg" className="green-upgrade-banner" />) ||
+					(
+						(is_expert && <ReactSVG path="/app/images/panel/green-upgrade-banner-small.svg" className="green-upgrade-banner" />) ||
+						<ReactSVG path="/app/images/panel/green-upgrade-banner.svg" className="green-upgrade-banner" />
 					)
 				}
 			</div>
