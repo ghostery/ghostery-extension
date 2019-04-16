@@ -15,7 +15,12 @@
 	position: absolute;
 	height: 479px;
 	width: 100%;
-	&.expert { width: 235px; }
+
+	&.expert {
+		width: 235px;
+		margin-top: 15px;
+	}
+
 	&.expert.condensed {
 		width: 66px;
 		background-color: #f9f6f6;
