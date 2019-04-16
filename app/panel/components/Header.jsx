@@ -199,7 +199,10 @@ class Header extends React.Component {
 								{rightLink}
 							</div>
 							<div className="upgrade-banner-container">
-								<ReactSVG path="/app/images/panel/green-upgrade-banner-expanded-view.svg" />
+								{
+									(subscriber && <ReactSVG path="/app/images/panel/gold-plus-icon-expanded-view.svg" />) ||
+									<ReactSVG path="/app/images/panel/green-upgrade-banner-expanded-view.svg" />
+								}
 							</div>
 							<div className="header-kebab shrink columns" onClick={this.toggleDropdown} ref={(node) => { this.kebab = node; }}>
 								<svg width="4" height="16" viewBox="0 0 4 16">
