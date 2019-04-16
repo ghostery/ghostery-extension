@@ -72,20 +72,12 @@
 		}
 		.base-badge {
 			@extend %pointer;
-			width: 38px;
-			height: 36px;
-			display: block;
-			margin-left: 10px;
 		}
 		.subscriber-badge {
 			@extend .base-badge;
-			path {fill: $white;}
-			path.text {fill: $ghosty-blue;}
 		}
 		.non-subscriber-badge {
 			@extend .base-badge;
-			path {fill: #d3af36;}
-			path.text {fill: #ffffff;}
 		}
 		.header-kebab {
 			@extend %pointer;
