@@ -145,7 +145,7 @@ class Header extends React.Component {
 		return this.props.is_expert ? '/detail/blocking' : '/';
 	}
 
-	clickBadge = () => {
+	clickUpgradeBannerOrGoldPlusIcon = () => {
 		// TODO check whether this is the message we want to be sending now
 		sendMessage('ping', 'plus_panel_from_badge');
 		const { user } = this.props;
@@ -206,7 +206,7 @@ class Header extends React.Component {
 							<div className="columns shrink">
 								{rightLink}
 							</div>
-							<div className="upgrade-banner-container" onClick={this.clickBadge}>
+							<div className="upgrade-banner-container" onClick={this.clickUpgradeBannerOrGoldPlusIcon}>
 								{
 									(subscriber && <ReactSVG path="/app/images/panel/gold-plus-icon-expanded-view.svg" />) ||
 									<ReactSVG path="/app/images/panel/green-upgrade-banner-expanded-view.svg" />
