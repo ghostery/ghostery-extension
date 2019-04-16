@@ -360,13 +360,39 @@ class Summary extends React.Component {
 				isCondensed={showCondensed}
 			/>);
 
-		const pauseButtonContainerDiv = (
+		const pauseButton = (
 			<div className="pause-button-container">
 				pauseButtonComponent
 			</div>
 		);
 
-		const pageStatsDiv = (
+		const totalTrackersFound = (
+			<div className="total-tracker-count clickable" onClick={this.clickTrackersCount}>
+				<span className="summary-total-tracker-count g-tooltip">
+					{this.props.trackerCounts.allowed + this.props.trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
+					<Tooltip
+						header={t('panel_tracker_total_tooltip')}
+						position="right"
+					/>
+				</span>
+			</div>
+		);
+
+		const donut = (
+			<div className="donut-graph-container">
+				<DonutGraph
+					categories={this.props.categories}
+					renderRedscale={this.props.sitePolicy === 1}
+					renderGreyscale={this.props.paused_blocking}
+					totalCount={this.props.trackerCounts.allowed + this.props.trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
+					ghosteryFeatureSelect={this.props.sitePolicy}
+					isSmall={is_expert}
+					clickDonut={this.clickDonut}
+				/>
+			</div>
+		);
+
+		const totalTrackersBlockedAndPageLoadTime = (
 			<div className="page-stats">
 				<div className={blockedTrackersClassNames} onClick={this.clickTrackersBlocked}>
 					<span className="text">{t('trackers_blocked')} </span>
@@ -383,7 +409,8 @@ class Summary extends React.Component {
 			</div>
 		);
 
-		const ghosteryFeaturesContainerDiv = (
+		// Trust, Restrict, Pause
+		const ghosteryFeatures = (
 			<div className="ghostery-features-container">
 				<GhosteryFeatures
 					clickButton={this.clickSitePolicy}
@@ -398,7 +425,8 @@ class Summary extends React.Component {
 			</div>
 		);
 
-		const cliqzFeaturesContainerDiv = (
+		// Enhanced Anti-Tracking, Enhanced Ad Blocking, Smart Blocking
+		const cliqzFeatures = (
 			<div className="cliqz-features-container">
 				<CliqzFeatures
 					clickButton={this.clickCliqzFeature}
@@ -415,36 +443,28 @@ class Summary extends React.Component {
 			</div>
 		);
 
-		const statsNavButtonComponent = (<NavButton path="/stats" imagePath="../../app/images/panel/graph.svg" classNames={summaryViewStatsButton} />);
+		const statsNavButton = (<NavButton path="/stats" imagePath="../../app/images/panel/graph.svg" classNames={summaryViewStatsButton} />);
+
+		const plusUpgradeBannerOrSubscriberIcon = (
+			(plusSubscriber && <ReactSVG path="/app/images/panel/gold-plus-icon.svg" className="green-upgrade-banner" />) ||
+			(
+				(is_expert && <ReactSVG path="/app/images/panel/green-upgrade-banner-small.svg" className="green-upgrade-banner" />) ||
+				<ReactSVG path="/app/images/panel/green-upgrade-banner.svg" className="green-upgrade-banner" />
+			)
+		);
 
 		if (showCondensed) {
 			return (
 				<div id="content-summary" className={summaryClassNames}>
-					{abPause && pauseButtonContainerDiv}
-
-					{!this.state.disableBlocking && (
-						<div className="total-tracker-count clickable" onClick={this.clickTrackersCount}>
-							<span className="summary-total-tracker-count g-tooltip">
-								{this.props.trackerCounts.allowed + this.props.trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
-								<Tooltip
-									header={t('panel_tracker_total_tooltip')}
-									position="right"
-								/>
-							</span>
-						</div>
-					)}
-
-					{!this.state.disableBlocking && pageStatsDiv}
-
+					{abPause && pauseButton}
+					{!this.state.disableBlocking && totalTrackersFound}
+					{!this.state.disableBlocking && totalTrackersBlockedAndPageLoadTime}
 					{this.state.disableBlocking && is_expert && (
 						<div className="not-scanned-expert-condensed-space-taker" />
 					)}
-
-					{ghosteryFeaturesContainerDiv}
-
-					{cliqzFeaturesContainerDiv}
-
-					{statsNavButtonComponent}
+					{ghosteryFeatures}
+					{cliqzFeatures}
+					{statsNavButton}
 				</div>
 			);
 		}
@@ -452,51 +472,24 @@ class Summary extends React.Component {
 		// !showCondensed
 		return (
 			<div id="content-summary" className={summaryClassNames}>
-				{abPause && pauseButtonContainerDiv}
-
+				{abPause && pauseButton}
 				{this.state.disableBlocking && (<NotScanned isSmall={is_expert} />)}
-
 				{abPause && !this.state.disableBlocking && is_expert && (
 					<div className={pageHostClassNames}>
 						{pageHost}
 					</div>
 				)}
-
-				{!this.state.disableBlocking && (
-					<div className="donut-graph-container">
-						<DonutGraph
-							categories={this.props.categories}
-							renderRedscale={this.props.sitePolicy === 1}
-							renderGreyscale={this.props.paused_blocking}
-							totalCount={this.props.trackerCounts.allowed + this.props.trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
-							ghosteryFeatureSelect={this.props.sitePolicy}
-							isSmall={is_expert}
-							clickDonut={this.clickDonut}
-						/>
-					</div>
-				)}
-
+				{!this.state.disableBlocking && donut}
 				{!this.state.disableBlocking && (!abPause || !is_expert) && (
 					<div className={pageHostClassNames}>
 						{pageHost}
 					</div>
 				)}
-
-				{!this.state.disableBlocking && pageStatsDiv}
-
-				{ghosteryFeaturesContainerDiv}
-
-				{cliqzFeaturesContainerDiv}
-
-				{statsNavButtonComponent}
-
-				{
-					(plusSubscriber && <ReactSVG path="/app/images/panel/gold-plus-icon.svg" className="green-upgrade-banner" />) ||
-					(
-						(is_expert && <ReactSVG path="/app/images/panel/green-upgrade-banner-small.svg" className="green-upgrade-banner" />) ||
-						<ReactSVG path="/app/images/panel/green-upgrade-banner.svg" className="green-upgrade-banner" />
-					)
-				}
+				{!this.state.disableBlocking && totalTrackersBlockedAndPageLoadTime}
+				{ghosteryFeatures}
+				{cliqzFeatures}
+				{statsNavButton}
+				{plusUpgradeBannerOrSubscriberIcon}
 			</div>
 		);
 	}
