@@ -177,6 +177,10 @@ class Header extends React.Component {
 		});
 		const subscriber = user && user.subscriptionsPlus;
 		const rightLink = this.generateLink();
+		const badgeClasses = ClassNames('columns', 'shrink', {
+			'non-subscriber-badge': !subscriber,
+			'subscriber-badge': subscriber
+		});
 
 		return (
 			<header id="ghostery-header">
@@ -206,7 +210,7 @@ class Header extends React.Component {
 							<div className="columns shrink">
 								{rightLink}
 							</div>
-							<div className="upgrade-banner-container" onClick={this.clickUpgradeBannerOrGoldPlusIcon}>
+							<div className={badgeClasses} onClick={this.clickUpgradeBannerOrGoldPlusIcon}>
 								{
 									(subscriber && <ReactSVG path="/app/images/panel/gold-plus-icon-expanded-view.svg" />) ||
 									<ReactSVG path="/app/images/panel/green-upgrade-banner-expanded-view.svg" />
