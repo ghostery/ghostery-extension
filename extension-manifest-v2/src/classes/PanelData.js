@@ -680,7 +680,7 @@ class PanelData {
 		return {
 			id: category,
 			name: t(`category_${category}`),
-			description: t(`category_${category}+desc`),
+			description: t(`category_${category}_desc`),
 			img_name: (category === 'advertising') ? 'adv' : // Because AdBlock blocks images with 'advertising' in the name.
 				(category === 'social_media') ? 'smed' : category, // Because AdBlock blocks images with 'social' in the name.
 			num_total: 1,
