@@ -95,7 +95,7 @@ class Header extends React.Component {
 		});
 	}
 
-	generateLink = () => {
+	generateAccountLogo = () => {
 		const { loggedIn, user } = this.props;
 
 		let text = '';
@@ -177,13 +177,45 @@ class Header extends React.Component {
 			active: is_expert,
 		});
 		const subscriber = user && user.subscriptionsPlus;
-		const rightLink = this.generateLink();
+		const accountLogolink = this.generateAccountLogo();
 		const badgeClasses = ClassNames('columns', 'shrink', {
 			'non-subscriber-badge': !subscriber,
 			'subscriber-badge': subscriber
 		});
 
-		const upgradeBannerOrGoldPlusIcon = (
+		const simpleTab = (
+			<div className={tabSimpleClassNames} onClick={this.clickSimpleTab}>
+				<span className="header-tab-text">
+					{t('panel_header_simple_view')}
+				</span>
+			</div>
+		);
+
+		const detailedTab = (
+			<div className={tabDetailedClassNames} onClick={this.clickDetailedTab}>
+				<span className="header-tab-text">
+					{t('panel_header_detailed_view')}
+				</span>
+			</div>
+		);
+
+		const tabs = (
+			<div className="header-tab-group flex-container align-bottom">
+				{simpleTab}
+				{detailedTab}
+			</div>
+		);
+
+		const backArrowAndGhostieLogo = (
+			<span className="header-logo">
+				<Link to={this.determineBackPath()}>
+					<ReactSVG path="/app/images/panel/header-back-arrow.svg" className={headerArrowClasses} />
+				</Link>
+				<ReactSVG path="/app/images/panel/header-logo-icon.svg" className="logo-icon" />
+			</span>
+		);
+
+		const plusUpgradeBannerOrSubscriberBadgeLogolink = (
 			<div className={badgeClasses} onClick={this.clickUpgradeBannerOrGoldPlusIcon}>
 				{
 					(subscriber && <ReactSVG path="/app/images/panel/gold-plus-icon-expanded-view.svg" />) ||
@@ -192,7 +224,7 @@ class Header extends React.Component {
 			</div>
 		);
 
-		const kebab = (
+		const headerMenuKebab = (
 			<div className="header-kebab shrink columns" onClick={this.toggleDropdown} ref={(node) => { this.kebab = node; }}>
 				<svg width="4" height="16" viewBox="0 0 4 16">
 					<g fill="#FFF" fillRule="evenodd">
@@ -202,51 +234,35 @@ class Header extends React.Component {
 			</div>
 		);
 
+		const headerMenu = (
+			<HeaderMenu
+				loggedIn={loggedIn}
+				subscriber={subscriber}
+				email={user && user.email}
+				language={this.props.language}
+				tab_id={this.props.tab_id}
+				location={location}
+				history={this.props.history}
+				actions={this.props.actions}
+				toggleDropdown={this.toggleDropdown}
+				kebab={this.kebab}
+			/>
+		);
+
 		return (
 			<header id="ghostery-header">
-				{ showTabs && (
-					<div className="header-tab-group flex-container align-bottom">
-						<div className={tabSimpleClassNames} onClick={this.clickSimpleTab}>
-							<span className="header-tab-text">
-								{t('panel_header_simple_view')}
-							</span>
-						</div>
-						<div className={tabDetailedClassNames} onClick={this.clickDetailedTab}>
-							<span className="header-tab-text">
-								{t('panel_header_detailed_view')}
-							</span>
-						</div>
-					</div>
-				)}
+				{ showTabs && tabs }
 				<div className="top-bar">
-					<span className="header-logo">
-						<Link to={this.determineBackPath()}>
-							<ReactSVG path="/app/images/panel/header-back-arrow.svg" className={headerArrowClasses} />
-						</Link>
-						<ReactSVG path="/app/images/panel/header-logo-icon.svg" className="logo-icon" />
-					</span>
+					{ backArrowAndGhostieLogo }
 					<div>
 						<div className="row align-middle collapse">
 							<div className="columns shrink">
-								{rightLink}
+								{accountLogolink}
 							</div>
-							{(is_expert && is_expanded) && upgradeBannerOrGoldPlusIcon }
-							{kebab}
+							{(is_expert && is_expanded) && plusUpgradeBannerOrSubscriberBadgeLogolink }
+							{headerMenuKebab}
 						</div>
-						{ this.state.dropdownOpen &&
-							<HeaderMenu
-								loggedIn={loggedIn}
-								subscriber={subscriber}
-								email={user && user.email}
-								language={this.props.language}
-								tab_id={this.props.tab_id}
-								location={location}
-								history={this.props.history}
-								actions={this.props.actions}
-								toggleDropdown={this.toggleDropdown}
-								kebab={this.kebab}
-							/>
-						}
+						{ this.state.dropdownOpen && headerMenu }
 					</div>
 				</div>
 			</header>
