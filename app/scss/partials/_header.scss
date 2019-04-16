@@ -72,12 +72,15 @@
 		}
 		.base-badge {
 			@extend %pointer;
+			display: block;
 		}
 		.subscriber-badge {
 			@extend .base-badge;
+			margin-top: 4px;
 		}
 		.non-subscriber-badge {
 			@extend .base-badge;
+			margin-left: 6px;
 		}
 		.header-kebab {
 			@extend %pointer;
