@@ -150,7 +150,7 @@ class Header extends React.Component {
 		sendMessage('ping', 'plus_panel_from_badge');
 		const { user } = this.props;
 		const subscriber = user && user.subscriptionsPlus;
-		this.props.history.push(subscriber ? 'subscriptions/info' : `/subscribe/${!!user}`);
+		this.props.history.push(subscriber ? '/subscription/info' : `/subscribe/${!!user}`);
 	}
 
 	/**
