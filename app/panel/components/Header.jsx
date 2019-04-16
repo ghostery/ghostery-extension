@@ -183,12 +183,22 @@ class Header extends React.Component {
 			'subscriber-badge': subscriber
 		});
 
-		const upgradeBannerOrGoldPlusIconDiv = (
+		const upgradeBannerOrGoldPlusIcon = (
 			<div className={badgeClasses} onClick={this.clickUpgradeBannerOrGoldPlusIcon}>
 				{
 					(subscriber && <ReactSVG path="/app/images/panel/gold-plus-icon-expanded-view.svg" />) ||
 					<ReactSVG path="/app/images/panel/green-upgrade-banner-expanded-view.svg" />
 				}
+			</div>
+		);
+
+		const kebab = (
+			<div className="header-kebab shrink columns" onClick={this.toggleDropdown} ref={(node) => { this.kebab = node; }}>
+				<svg width="4" height="16" viewBox="0 0 4 16">
+					<g fill="#FFF" fillRule="evenodd">
+						<path d="M0 0h4v4H0zM0 6h4v4H0zM0 12h4v4H0z" />
+					</g>
+				</svg>
 			</div>
 		);
 
@@ -220,14 +230,8 @@ class Header extends React.Component {
 							<div className="columns shrink">
 								{rightLink}
 							</div>
-							{ (is_expert && is_expanded) && upgradeBannerOrGoldPlusIconDiv }
-							<div className="header-kebab shrink columns" onClick={this.toggleDropdown} ref={(node) => { this.kebab = node; }}>
-								<svg width="4" height="16" viewBox="0 0 4 16">
-									<g fill="#FFF" fillRule="evenodd">
-										<path d="M0 0h4v4H0zM0 6h4v4H0zM0 12h4v4H0z" />
-									</g>
-								</svg>
-							</div>
+							{(is_expert && is_expanded) && upgradeBannerOrGoldPlusIcon }
+							{kebab}
 						</div>
 						{ this.state.dropdownOpen &&
 							<HeaderMenu
