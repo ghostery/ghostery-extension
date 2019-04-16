@@ -1853,8 +1853,11 @@
 	"hub_login_label_password_invalid": {
 		"message": "Usa entre 8 y 50 caracteres."
 	},
+	"hub_login_link_dont_have_account": {
+		"message": "¿No tienes una cuenta?"
+	},
 	"hub_login_link_create_account": {
-		"message": "¿No tienes una cuenta? Registro."
+		"message": "Registro."
 	},
 	"hub_login_button_submit": {
 		"message": "Conectarse"
@@ -1898,8 +1901,11 @@
 	"hub_create_account_checkbox_promotions": {
 		"message": "Envíame actualizaciones y promociones de Ghostery."
 	},
+	"hub_create_account_already_have_account": {
+		"message": "¿Ya tienes una cuenta de Ghostery?"
+	},
 	"hub_create_account_link_login": {
-		"message": "Ya tengo una cuenta. Conectarme."
+		"message": "Accede aquí."
 	},
 	"hub_create_account_button_submit": {
 		"message": "Crear una cuenta"

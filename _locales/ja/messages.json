@@ -1853,8 +1853,11 @@
 	"hub_login_label_password_invalid": {
 		"message": "8～50文字を使用してください。"
 	},
+	"hub_login_link_dont_have_account": {
+		"message": "アカウントをお持ちでないですか？"
+	},
 	"hub_login_link_create_account": {
-		"message": "アカウントをお持ちでないですか？サインアップしてください。"
+		"message": "サインアップしてください。"
 	},
 	"hub_login_button_submit": {
 		"message": "サインイン"
@@ -1898,8 +1901,11 @@
 	"hub_create_account_checkbox_promotions": {
 		"message": "Ghosteryのアップデート＆お得な情報を受け取る。"
 	},
+	"hub_create_account_already_have_account": {
+		"message": "既にGhosteryアカウントを持っていますか？"
+	},
 	"hub_create_account_link_login": {
-		"message": "すでにアカウントを持っています。サインインしてください。"
+		"message": "ここにサインインしてください。"
 	},
 	"hub_create_account_button_submit": {
 		"message": "アカウントを作成"
