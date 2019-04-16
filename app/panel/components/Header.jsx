@@ -17,7 +17,7 @@ import ReactSVG from 'react-svg';
 import ClassNames from 'classnames';
 import Tooltip from './Tooltip';
 import HeaderMenu from './HeaderMenu';
-import { sendMessageInPromise } from '../utils/msg';
+import { sendMessage, sendMessageInPromise } from '../utils/msg';
 import { log } from '../../../src/utils/common';
 /**
  * @class Implements header component which is common to all panel views
@@ -146,7 +146,11 @@ class Header extends React.Component {
 	}
 
 	clickBadge = () => {
-		console.error('IVZ you clicked the badge!!');
+		// TODO check whether this is the message we want to be sending now
+		sendMessage('ping', 'plus_panel_from_badge');
+		const { user } = this.props;
+		const subscriber = user && user.subscriptionsPlus;
+		this.props.history.push(subscriber ? 'subscriptions/info' : `/subscribe/${!!user}`);
 	}
 
 	/**
