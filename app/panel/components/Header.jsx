@@ -145,6 +145,10 @@ class Header extends React.Component {
 		return this.props.is_expert ? '/detail/blocking' : '/';
 	}
 
+	clickBadge = () => {
+		console.error('IVZ you clicked the badge!!');
+	}
+
 	/**
 	* React's required render function. Returns JSX
 	* @return {JSX} JSX for rendering the Header Component of the panel
@@ -198,7 +202,7 @@ class Header extends React.Component {
 							<div className="columns shrink">
 								{rightLink}
 							</div>
-							<div className="upgrade-banner-container">
+							<div className="upgrade-banner-container" onClick={this.clickBadge}>
 								{
 									(subscriber && <ReactSVG path="/app/images/panel/gold-plus-icon-expanded-view.svg" />) ||
 									<ReactSVG path="/app/images/panel/green-upgrade-banner-expanded-view.svg" />
