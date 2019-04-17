@@ -300,7 +300,6 @@ class Summary extends React.Component {
 	render() {
 		const { abPause } = this.state;
 		const {
-			account,
 			is_expert,
 			is_expanded,
 			enable_anti_tracking,
@@ -312,8 +311,9 @@ class Summary extends React.Component {
 			paused_blocking,
 			sitePolicy,
 			trackerCounts,
+			user
 		} = this.props;
-		const plusSubscriber = account && account.user && account.user.subscriptionsPlus;
+		const plusSubscriber = user && user.subscriptionsPlus;
 		const showCondensed = is_expert && is_expanded;
 		const antiTrackUnsafe = enable_anti_tracking && antiTracking && antiTracking.totalUnsafeCount || 0;
 		const adBlockBlocked = enable_ad_block && adBlock && adBlock.totalCount || 0;
