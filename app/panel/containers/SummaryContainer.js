@@ -29,6 +29,7 @@ const mapStateToProps = state => Object.assign({}, state.summary, state.panel, {
 	is_expanded: state.panel.is_expanded,
 	is_expert: state.panel.is_expert,
 	tab_id: state.panel.tab_id,
+	user: state.account.user
 });
 /**
  * Bind Summary view component action creators using Redux's bindActionCreators

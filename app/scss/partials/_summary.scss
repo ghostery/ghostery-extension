@@ -208,6 +208,7 @@
 		border-radius: 5px 0 0 5px;
 	}
 	.green-upgrade-banner {
+		@extend %pointer;
 		position: absolute;
 		left: 0;
 		top: 10px;
@@ -216,6 +217,7 @@
 		top: -4px;
 	}
 	.gold-plus-icon {
+		@extend %pointer;
 		position: absolute;
 		left: 10px;
 		top: 11px;

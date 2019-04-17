@@ -283,6 +283,17 @@ class Summary extends React.Component {
 	}
 
 	/**
+	 * Handles clicking on the green upgrade banner or gold subscriber badge
+	 */
+	clickUpgradeBannerOrGoldPlusIcon = () => {
+		// TODO check whether this is the message we want to be sending now
+		sendMessage('ping', 'plus_panel_from_badge');
+		const { user } = this.props;
+		const plusSubscriber = user && user.subscriptionsPlus;
+		this.props.history.push(plusSubscriber ? '/subscription/info' : `/subscribe/${!!user}`);
+	}
+
+	/**
 	* React's required render function. Returns JSX
 	* @return {JSX} JSX for rendering the Summary View of the panel
 	*/
@@ -446,11 +457,15 @@ class Summary extends React.Component {
 		const statsNavButton = (<NavButton path="/stats" imagePath="../../app/images/panel/graph.svg" classNames={summaryViewStatsButton} />);
 
 		const plusUpgradeBannerOrSubscriberIcon = (
-			(plusSubscriber && <ReactSVG path="/app/images/panel/gold-plus-icon.svg" className="gold-plus-icon" />) ||
-			(
-				(is_expert && <ReactSVG path="/app/images/panel/green-upgrade-banner-small.svg" className="green-upgrade-banner" />) ||
-				<ReactSVG path="/app/images/panel/green-upgrade-banner.svg" className="green-upgrade-banner" />
-			)
+			<div onClick={this.clickUpgradeBannerOrGoldPlusIcon}>
+				{
+					(plusSubscriber && <ReactSVG path="/app/images/panel/gold-plus-icon.svg" className="gold-plus-icon" />) ||
+					(
+						(is_expert && <ReactSVG path="/app/images/panel/green-upgrade-banner-small.svg" className="green-upgrade-banner" />) ||
+						<ReactSVG path="/app/images/panel/green-upgrade-banner.svg" className="green-upgrade-banner" />
+					)
+				}
+			</div>
 		);
 
 		if (showCondensed) {
