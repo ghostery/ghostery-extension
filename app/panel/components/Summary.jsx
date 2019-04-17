@@ -446,7 +446,7 @@ class Summary extends React.Component {
 		const statsNavButton = (<NavButton path="/stats" imagePath="../../app/images/panel/graph.svg" classNames={summaryViewStatsButton} />);
 
 		const plusUpgradeBannerOrSubscriberIcon = (
-			(plusSubscriber && <ReactSVG path="/app/images/panel/gold-plus-icon.svg" className="green-upgrade-banner" />) ||
+			(plusSubscriber && <ReactSVG path="/app/images/panel/gold-plus-icon.svg" className="gold-plus-icon" />) ||
 			(
 				(is_expert && <ReactSVG path="/app/images/panel/green-upgrade-banner-small.svg" className="green-upgrade-banner" />) ||
 				<ReactSVG path="/app/images/panel/green-upgrade-banner.svg" className="green-upgrade-banner" />
