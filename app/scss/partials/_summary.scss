@@ -18,7 +18,7 @@
 
 	&.expert {
 		width: 235px;
-		margin-top: 15px;
+		padding-top: 15px;
 	}
 
 	&.expert.condensed {
@@ -213,16 +213,10 @@
 		left: 0;
 		top: 10px;
 	}
-	&.expert .green-upgrade-banner {
-		top: -4px;
-	}
 	.gold-plus-icon {
 		@extend %pointer;
 		position: absolute;
 		left: 10px;
 		top: 11px;
-	}
-	&.expert .gold-plus-icon {
-		top: -4px;
 	}
 }
