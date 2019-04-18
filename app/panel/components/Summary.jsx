@@ -469,53 +469,41 @@ class Summary extends React.Component {
 			</div>
 		);
 
-		if (showCondensed) {
-			return (
-				<div id="content-summary" className={summaryClassNames}>
-					{abPause && pauseButton}
-					{!this.state.disableBlocking && totalTrackersFound}
-					{!this.state.disableBlocking &&
-						<div className="page-stats">
-							{totalTrackersBlocked}
-							{pageLoadTime}
-						</div>
-					}
-					{this.state.disableBlocking && is_expert && (
-						<div className="not-scanned-expert-condensed-space-taker" />
-					)}
-					{ghosteryFeatures}
-					{cliqzFeatures}
-					{statsNavButton}
-				</div>
-			);
-		}
-
-		// !showCondensed
 		return (
 			<div id="content-summary" className={summaryClassNames}>
 				{abPause && pauseButton}
-				{this.state.disableBlocking && (<NotScanned isSmall={is_expert} />)}
-				{abPause && !this.state.disableBlocking && is_expert && (
+
+				{!showCondensed && this.state.disableBlocking && (<NotScanned isSmall={is_expert} />)}
+				{!showCondensed && abPause && !this.state.disableBlocking && is_expert && (
 					<div className={pageHostClassNames}>
 						{pageHost}
 					</div>
 				)}
-				{!this.state.disableBlocking && donut}
-				{!this.state.disableBlocking && (!abPause || !is_expert) && (
+				{!showCondensed && !this.state.disableBlocking && donut}
+				{!showCondensed && !this.state.disableBlocking && (!abPause || !is_expert) && (
 					<div className={pageHostClassNames}>
 						{pageHost}
 					</div>
 				)}
+
+				{showCondensed && !this.state.disableBlocking && totalTrackersFound}
+
 				{!this.state.disableBlocking &&
 					<div className="page-stats">
 						{totalTrackersBlocked}
 						{pageLoadTime}
 					</div>
 				}
+
+				{showCondensed && this.state.disableBlocking && is_expert && (
+					<div className="not-scanned-expert-condensed-space-taker" />
+				)}
+
 				{ghosteryFeatures}
 				{cliqzFeatures}
 				{statsNavButton}
-				{plusUpgradeBannerOrSubscriberIcon}
+
+				{!showCondensed && plusUpgradeBannerOrSubscriberIcon}
 			</div>
 		);
 	}
