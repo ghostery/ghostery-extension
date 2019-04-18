@@ -403,20 +403,21 @@ class Summary extends React.Component {
 			</div>
 		);
 
-		const totalTrackersBlockedAndPageLoadTime = (
-			<div className="page-stats">
-				<div className={blockedTrackersClassNames} onClick={this.clickTrackersBlocked}>
-					<span className="text">{t('trackers_blocked')} </span>
-					<span className="value">
-						{trackersBlockedCount}
-					</span>
-				</div>
-				<div className={pageLoadClassNames}>
-					<span className="text">{t('page_load')} </span>
-					<span className="value">
-						{this.state.trackerLatencyTotal ? `${this.state.trackerLatencyTotal} ${t('settings_seconds')}` : '-'}
-					</span>
-				</div>
+		const totalTrackersBlocked = (
+			<div className={blockedTrackersClassNames} onClick={this.clickTrackersBlocked}>
+				<span className="text">{t('trackers_blocked')} </span>
+				<span className="value">
+					{trackersBlockedCount}
+				</span>
+			</div>
+		);
+
+		const pageLoadTime = (
+			<div className={pageLoadClassNames}>
+				<span className="text">{t('page_load')} </span>
+				<span className="value">
+					{this.state.trackerLatencyTotal ? `${this.state.trackerLatencyTotal} ${t('settings_seconds')}` : '-'}
+				</span>
 			</div>
 		);
 
@@ -473,7 +474,12 @@ class Summary extends React.Component {
 				<div id="content-summary" className={summaryClassNames}>
 					{abPause && pauseButton}
 					{!this.state.disableBlocking && totalTrackersFound}
-					{!this.state.disableBlocking && totalTrackersBlockedAndPageLoadTime}
+					{!this.state.disableBlocking &&
+						<div className="page-stats">
+							{totalTrackersBlocked}
+							{pageLoadTime}
+						</div>
+					}
 					{this.state.disableBlocking && is_expert && (
 						<div className="not-scanned-expert-condensed-space-taker" />
 					)}
@@ -500,7 +506,12 @@ class Summary extends React.Component {
 						{pageHost}
 					</div>
 				)}
-				{!this.state.disableBlocking && totalTrackersBlockedAndPageLoadTime}
+				{!this.state.disableBlocking &&
+					<div className="page-stats">
+						{totalTrackersBlocked}
+						{pageLoadTime}
+					</div>
+				}
 				{ghosteryFeatures}
 				{cliqzFeatures}
 				{statsNavButton}
