@@ -207,15 +207,21 @@
 		border: 1px lightgray solid;
 		border-radius: 5px 0 0 5px;
 	}
-	.green-upgrade-banner {
+	.base-badge {
 		@extend %pointer;
 		position: absolute;
+	}
+	.green-upgrade-banner {
+		@extend .base-badge;
 		left: 0;
 		top: 10px;
 	}
+	.green-upgrade-banner text {
+		font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+		font-size: 13px;
+	}
 	.gold-plus-icon {
-		@extend %pointer;
-		position: absolute;
+		@extend .base-badge;
 		left: 10px;
 		top: 11px;
 	}

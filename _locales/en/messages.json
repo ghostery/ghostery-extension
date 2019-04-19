@@ -2130,6 +2130,9 @@
 	"subscription_submit_issue": {
 		"message": "Submit Issue"
 	},
+	"subscription_upgrade_to": {
+		"message": "Upgrade to"
+	},
 	"panel_stats_menu_cumulative": {
 		"message": "Cumulative"
 	},
