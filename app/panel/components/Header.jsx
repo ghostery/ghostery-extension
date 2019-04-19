@@ -180,7 +180,7 @@ class Header extends React.Component {
 		const accountLogolink = this.generateAccountLogo();
 		const badgeClasses = ClassNames('columns', 'shrink', {
 			'non-subscriber-badge': !subscriber,
-			'subscriber-badge': subscriber
+			'gold-subscriber-badge': subscriber
 		});
 
 		const simpleTab = (
