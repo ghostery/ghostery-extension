@@ -215,14 +215,24 @@
 		@extend .base-badge;
 		top: 10px;
 	}
-	.green-upgrade-banner-text {
+	.base-green-upgrade-banner-text {
 		@extend .base-badge;
 		font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-		font-size: 12px;
 		font-weight: bold;
+		color: white;
+
+	}
+	.green-upgrade-banner-text {
+		@extend .base-green-upgrade-banner-text;
+		font-size: 12px;
 		top: 13px;
 		left: 14px;
-		color: white;
+	}
+	.green-upgrade-banner-text-small {
+		@extend .base-green-upgrade-banner-text;
+		font-size: 10px;
+		top: 13px;
+		left: 6px;
 	}
 	.gold-plus-icon {
 		@extend .base-badge;
