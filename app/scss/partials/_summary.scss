@@ -213,12 +213,16 @@
 	}
 	.green-upgrade-banner {
 		@extend .base-badge;
-		left: 0;
 		top: 10px;
 	}
-	.green-upgrade-banner text {
+	.green-upgrade-banner-text {
+		@extend .base-badge;
 		font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-		font-size: 13px;
+		font-size: 12px;
+		font-weight: bold;
+		top: 13px;
+		left: 14px;
+		color: white;
 	}
 	.gold-plus-icon {
 		@extend .base-badge;
