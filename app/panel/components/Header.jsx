@@ -259,7 +259,7 @@ class Header extends React.Component {
 							<div className="columns shrink">
 								{accountLogolink}
 							</div>
-							{(is_expert && is_expanded) && plusUpgradeBannerOrSubscriberBadgeLogolink }
+							{((is_expert && is_expanded) || !showTabs) && plusUpgradeBannerOrSubscriberBadgeLogolink }
 							{headerMenuKebab}
 						</div>
 						{ this.state.dropdownOpen && headerMenu }
