@@ -342,9 +342,6 @@ class Summary extends React.Component {
 		const blockedTrackersClassNames = ClassNames('blocked-trackers', {
 			clickable: is_expert,
 		});
-		const modifiedRequestsClassNames = ClassNames('modified-requests', {
-			clickable: is_expert,
-		});
 		const pageLoadClassNames = ClassNames('page-load', {
 			fast: this.state.trackerLatencyTotal < 5,
 			slow: this.state.trackerLatencyTotal > 10,
@@ -420,11 +417,12 @@ class Summary extends React.Component {
 		);
 
 		const totalRequestsModified = (
-			<div className={modifiedRequestsClassNames} onClick={this.clickRequestsModified}>
+			<div className="modified-requests g-tooltip" onClick={this.clickRequestsModified}>
 				<span className="text">{t('requests_modified')} </span>
 				<span className="value">
 					{86}
 				</span>
+				<Tooltip body={t('requests_modified_tooltip')} position={is_expert ? 'right' : 'top'} />
 			</div>
 		);
 
