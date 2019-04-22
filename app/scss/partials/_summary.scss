@@ -18,7 +18,7 @@
 
 	&.expert {
 		width: 235px;
-		padding-top: 15px;
+		padding-top: 10px;
 	}
 
 	&.expert.condensed {
@@ -62,7 +62,7 @@
 	}
 	&.expert .page-host {
 		margin-top: 20px;
-		margin-bottom: 20px;
+		margin-bottom: 10px;
 	}
 	&.expert.ab-pause .page-host {
 		margin-top: 8px;
@@ -83,6 +83,7 @@
 		width: 94px;
 		margin-top: 21px;
 		margin-bottom: 20px;
+		padding-top: 5px;
 	}
 	&.expert.ab-pause .donut-graph-container {
 		margin-top: 0;
