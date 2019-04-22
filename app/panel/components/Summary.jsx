@@ -421,7 +421,7 @@ class Summary extends React.Component {
 
 		const totalRequestsModified = (
 			<div className={modifiedRequestsClassNames} onClick={this.clickRequestsModified}>
-				<span className="text">Bananas Modified </span>
+				<span className="text">{t('requests_modified')} </span>
 				<span className="value">
 					{86}
 				</span>

@@ -1092,6 +1092,9 @@
 	"page_load": {
 		"message": "Page Load:"
 	},
+	"requests_modified": {
+		"message": "Requests Modified:"
+	},
 	"trackers_blocked": {
 		"message": "Trackers Blocked:"
 	},
