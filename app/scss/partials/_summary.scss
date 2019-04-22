@@ -23,6 +23,7 @@
 
 	&.expert.condensed {
 		width: 66px;
+		padding-top: 0;
 		background-color: #f9f6f6;
 	}
 
@@ -96,7 +97,7 @@
 		color: #4a4a4a;
 		font-size: 24px;
 		font-weight: 600;
-		margin: 18px 0;
+		margin: 10px 0;
 	}
 	&.expert.condensed.ab-pause .total-tracker-count {
 		margin: 13px 0;
@@ -139,7 +140,7 @@
 		div {
 			text-align: center;
 			padding: 0;
-			margin: 21px 0;
+			margin: 5px 0;
 		}
 		.text { display: none; }
 	}
