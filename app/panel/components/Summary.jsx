@@ -222,6 +222,10 @@ class Summary extends React.Component {
 		}
 	}
 
+	clickRequestsModified() {
+		console.error('Summary#clickRequestsModified invoked');
+	}
+
 
 	/**
 	 * Handles clicking on Ghostery Features: Trust Site, Restrict Site, Custom Settings
@@ -338,6 +342,9 @@ class Summary extends React.Component {
 		const blockedTrackersClassNames = ClassNames('blocked-trackers', {
 			clickable: is_expert,
 		});
+		const modifiedRequestsClassNames = ClassNames('modified-requests', {
+			clickable: is_expert,
+		});
 		const pageLoadClassNames = ClassNames('page-load', {
 			fast: this.state.trackerLatencyTotal < 5,
 			slow: this.state.trackerLatencyTotal > 10,
@@ -408,6 +415,15 @@ class Summary extends React.Component {
 				<span className="text">{t('trackers_blocked')} </span>
 				<span className="value">
 					{trackersBlockedCount}
+				</span>
+			</div>
+		);
+
+		const totalRequestsModified = (
+			<div className={modifiedRequestsClassNames} onClick={this.clickRequestsModified}>
+				<span className="text">Bananas Modified </span>
+				<span className="value">
+					{86}
 				</span>
 			</div>
 		);
@@ -501,6 +517,7 @@ class Summary extends React.Component {
 				{!this.state.disableBlocking &&
 					<div className="page-stats">
 						{totalTrackersBlocked}
+						{totalRequestsModified}
 						{pageLoadTime}
 					</div>
 				}
