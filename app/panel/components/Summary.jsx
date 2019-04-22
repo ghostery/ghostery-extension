@@ -222,11 +222,6 @@ class Summary extends React.Component {
 		}
 	}
 
-	clickRequestsModified() {
-		console.error('Summary#clickRequestsModified invoked');
-	}
-
-
 	/**
 	 * Handles clicking on Ghostery Features: Trust Site, Restrict Site, Custom Settings
 	 * @param  {String} button The button that was clicked: trust, restrict, custom
@@ -332,6 +327,7 @@ class Summary extends React.Component {
 			sbAllowed = 0;
 		}
 		const sbAdjust = enable_smart_block && (sbBlocked - sbAllowed) || 0;
+		const requestsModifiedCount = antiTrackUnsafe + adBlockBlocked + sbBlocked + sbAllowed;
 
 		const summaryClassNames = ClassNames('', {
 			expert: is_expert,
@@ -417,10 +413,10 @@ class Summary extends React.Component {
 		);
 
 		const totalRequestsModified = (
-			<div className="modified-requests g-tooltip" onClick={this.clickRequestsModified}>
+			<div className="modified-requests g-tooltip">
 				<span className="text">{t('requests_modified')} </span>
 				<span className="value">
-					{86}
+					{requestsModifiedCount}
 				</span>
 				<Tooltip body={t('requests_modified_tooltip')} position={is_expert ? 'right' : 'top'} />
 			</div>
