@@ -207,6 +207,28 @@
 		border: 1px lightgray solid;
 		border-radius: 5px 0 0 5px;
 	}
+
+	.upgrade-banner-container {
+		@extend %pointer;
+		position: absolute;
+		top: 10px;
+		// background-image: linear-gradient(to bottom left, #9ECC42, #429321);
+		background: url("../../app/images/panel/green-upgrade-banner.svg");
+		background-repeat: no-repeat;
+		background-size: 100% 23px;
+	}
+
+	.upgrade-banner-text {
+		display: inline-block;
+		font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+		font-weight: bold;
+		color: white;
+	}
+
+	.upgrade-banner-plus {
+		display: inline-block;
+	}
+
 	.base-badge {
 		@extend %pointer;
 		position: absolute;
