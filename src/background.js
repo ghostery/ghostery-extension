@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -795,6 +795,9 @@ function onMessageHandler(request, sender, callback) {
 			});
 		}
 		account.getUserSettings().catch(err => log('Failed getting user settings from getPanelData:', err));
+		if (offers.isEnabled && conf.enable_offers && conf.is_expert) {
+			rewards.filterOffersByRemote().catch(err => log('Failed to filter offers by remote:', err));
+		}
 		return true;
 	} else if (name === 'getStats') {
 		insights.action('getStatsTimeline', message.from, message.to, true, true).then((data) => {
@@ -900,7 +903,11 @@ function onMessageHandler(request, sender, callback) {
 		account.getUserSubscriptionData()
 			.then((customer) => {
 				// TODO temporary fix to handle multiple subscriptions
-				const subscriptionData = customer.subscriptions.reduce((acc, curr) => {
+				let sub = customer.subscriptions;
+				if (!Array.isArray(sub)) {
+					sub = [sub];
+				}
+				const subscriptionData = sub.reduce((acc, curr) => {
 					let a = acc;
 					if (curr.productName.includes('Plus')) {
 						a = curr;

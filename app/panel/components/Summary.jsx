@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -329,7 +329,7 @@ class Summary extends React.Component {
 			slow: this.state.trackerLatencyTotal > 10,
 		});
 
-		const summaryViewStatsButton = ClassNames('stats-button', {
+		const summaryViewStatsButton = ClassNames('stats-button', 'g-tooltip', {
 			hide: is_expert
 		});
 
@@ -462,7 +462,10 @@ class Summary extends React.Component {
 					/>
 				</div>
 
-				<NavButton path="/stats" imagePath="../../app/images/panel/graph.svg" classNames={summaryViewStatsButton} />
+				<div className={summaryViewStatsButton}>
+					<NavButton path="/stats" imagePath="../../app/images/panel/graph.svg" />
+					<Tooltip body={t('subscription_history_stats')} position="left" />
+				</div>
 			</div>
 		);
 	}

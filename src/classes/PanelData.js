@@ -241,12 +241,27 @@ class PanelData {
 	_getBlockingData() {
 		const { selected_app_ids, show_tracker_urls, toggle_individual_trackers } = conf;
 
-		return {
-			selected_app_ids,
-			show_tracker_urls,
-			toggle_individual_trackers,
-			...this._getDynamicBlockingData(),
-		};
+		return Object.assign(
+			{},
+			{
+				selected_app_ids,
+				show_tracker_urls,
+				toggle_individual_trackers,
+			},
+			this._getDynamicBlockingData(),
+		);
+	}
+
+	/**
+	 * Helper that retrieves the current account information
+	 * @return {Object|null}	the current account object or null
+	 */
+	_getCurrentAccount() {
+		const currentAccount = conf.account;
+		if (currentAccount && currentAccount.user) {
+			currentAccount.user.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus']);
+		}
+		return currentAccount;
 	}
 
 	/**
@@ -280,7 +295,8 @@ class PanelData {
 
 		return {
 			needsReload: needsReload || { changes: {} },
-			smartBlock
+			smartBlock,
+			account: this._getCurrentAccount(),
 		};
 	}
 
@@ -308,10 +324,6 @@ class PanelData {
 	_getPanelData() {
 		if (!this._activeTab) { return {}; }
 
-		const currentAccount = conf.account;
-		if (currentAccount && currentAccount.user) {
-			currentAccount.user.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus']);
-		}
 		const { id: tab_id } = this._activeTab;
 		const {
 			enable_ad_block, enable_anti_tracking, enable_smart_block,
@@ -319,23 +331,25 @@ class PanelData {
 			trackers_banner_status, current_theme
 		} = conf;
 
-		return {
-			enable_ad_block,
-			enable_anti_tracking,
-			enable_smart_block,
-			enable_offers,
-			is_expanded,
-			is_expert,
-			is_android: globals.BROWSER_INFO.os === 'android',
-			language,
-			reload_banner_status,
-			trackers_banner_status,
-			current_theme,
-			tab_id,
-			unread_offer_ids: rewards.unreadOfferIds,
-			account: currentAccount,
-			...this._getDynamicPanelData(tab_id),
-		};
+		return Object.assign(
+			{},
+			{
+				enable_ad_block,
+				enable_anti_tracking,
+				enable_smart_block,
+				enable_offers,
+				is_expanded,
+				is_expert,
+				is_android: globals.BROWSER_INFO.os === 'android',
+				language,
+				reload_banner_status,
+				trackers_banner_status,
+				current_theme,
+				tab_id,
+				unread_offer_ids: rewards.unreadOfferIds,
+			},
+			this._getDynamicPanelData(tab_id),
+		);
 	}
 
 	/**
@@ -359,8 +373,8 @@ class PanelData {
 
 		return {
 			enable_offers: conf.enable_offers,
-			storedOffers,
-			unreadOfferIds,
+			rewards: storedOffers,
+			unread_offer_ids: unreadOfferIds,
 		};
 	}
 
@@ -375,17 +389,19 @@ class PanelData {
 			settings_last_exported, settings_last_imported
 		} = conf;
 
-		return {
-			bugs_last_updated,
-			categories: this._buildGlobalCategories(),
-			language, // required for the setup page that does not have access to panelView data
-			new_app_ids,
-			offer_human_web: true,
-			settings_last_exported,
-			settings_last_imported,
-
-			...this._getUserSettingsForSettingsView(conf),
-		};
+		return Object.assign(
+			{},
+			{
+				bugs_last_updated,
+				categories: this._buildGlobalCategories(),
+				language, // required for the setup page that does not have access to panelView data
+				new_app_ids,
+				offer_human_web: true,
+				settings_last_exported,
+				settings_last_imported,
+			},
+			this._getUserSettingsForSettingsView(conf),
+		);
 	}
 
 	/**
@@ -399,17 +415,20 @@ class PanelData {
 		const { paused_blocking, paused_blocking_timeout } = globals.SESSION;
 		const { site_blacklist, site_whitelist } = conf;
 
-		return {
-			paused_blocking,
-			paused_blocking_timeout,
-			site_blacklist,
-			site_whitelist,
-			pageHost,
-			pageUrl: url || '',
-			siteNotScanned: !this._trackerList || false,
-			sitePolicy: policy.getSitePolicy(url) || false,
-			...this._getDynamicSummaryData()
-		};
+		return Object.assign(
+			{},
+			{
+				paused_blocking,
+				paused_blocking_timeout,
+				site_blacklist,
+				site_whitelist,
+				pageHost,
+				pageUrl: url || '',
+				siteNotScanned: !this._trackerList || false,
+				sitePolicy: policy.getSitePolicy(url) || false,
+			},
+			this._getDynamicSummaryData()
+		);
 	}
 
 	/**
@@ -444,7 +463,7 @@ class PanelData {
 			is_expanded, is_expert, reload_banner_status, trackers_banner_status,
 		} = userSettings;
 
-		this._postMessage('panel', {
+		return {
 			current_theme,
 			enable_ad_block,
 			enable_anti_tracking,
@@ -453,7 +472,8 @@ class PanelData {
 			is_expert,
 			reload_banner_status,
 			trackers_banner_status,
-		});
+			account: this._getCurrentAccount(),
+		};
 	}
 
 	/**
@@ -660,7 +680,7 @@ class PanelData {
 		return {
 			id: category,
 			name: t(`category_${category}`),
-			description: t(`category_${category}+desc`),
+			description: t(`category_${category}_desc`),
 			img_name: (category === 'advertising') ? 'adv' : // Because AdBlock blocks images with 'advertising' in the name.
 				(category === 'social_media') ? 'smed' : category, // Because AdBlock blocks images with 'social' in the name.
 			num_total: 1,

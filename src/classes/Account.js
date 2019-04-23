@@ -6,7 +6,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -164,14 +164,18 @@ class Account {
 			.then((res) => {
 				const customer = build(normalize(res), 'customers', res.data.id);
 				// TODO temporary fix to handle multiple subscriptions
-				const sub = customer.subscriptions.reduce((acc, curr) => {
+				let sub = customer.subscriptions;
+				if (!Array.isArray()) {
+					sub = [sub];
+				}
+				const subPlus = sub.reduce((acc, curr) => {
 					let a = acc;
 					if (curr.productName.includes('Plus')) {
 						a = curr;
 					}
 					return a;
 				}, {});
-				this._setSubscriptionData(sub);
+				this._setSubscriptionData(subPlus);
 				return customer;
 			})
 	)

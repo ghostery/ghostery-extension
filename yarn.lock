@@ -387,15 +387,7 @@
   resolved "https://registry.yarnpkg.com/@cliqz-oss/dexie/-/dexie-2.0.4.tgz#0e710504e2b9198baa9b046abd3a82731b94d56e"
   integrity sha512-HxMbBQfdy0CehThTFierXbRPI+PHDEucUUriCCzViAKbCWWQIlL6uZcyDaaPRMPWy45v78lezPB4457kfjS72g==
 
-"@cliqz/adblocker@0.3.1":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-0.3.1.tgz#aa726fa8daf70ca3b3ac0731210aa19ffc7d9640"
-  integrity sha512-/OfPpOGkllpVFNHeKnvyAYob14CgVBPTZAikeT7seHgWf44Llq5P1tluiHjsEJ8VxwKwAdQ4+xczdyY2Ocvk/g==
-  dependencies:
-    tldts "^3.0.0"
-    tslib "^1.9.3"
-
-"@cliqz/adblocker@^0.6.8":
+"@cliqz/adblocker@^0.6.9":
   version "0.6.9"
   resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-0.6.9.tgz#ffe2655f56eb7a73c743d12de6f51826aed36c4e"
   integrity sha512-bioIQwNzI359aJc9EuDDhqKn5mY7DgvdyJnP/Ql04bNgFJDnJQrqQQICAvyT747dV//Gstq5PNeLfExyeoiD0w==
@@ -1259,12 +1251,12 @@ brorand@^1.0.1:
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
   integrity sha1-EsJe/kCkXjwyPrhnWgoM5XsiNx8=
 
-"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.35/7.35.1.8ec615c.tgz":
+"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.35/7.35.1.1cf1ba2.tgz":
   version "7.35.1"
-  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.35/7.35.1.8ec615c.tgz#f3af23b470490c5eac352a74b468bca3817f3416"
+  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.35/7.35.1.1cf1ba2.tgz#3a6b14857c3e7b438ca581bbe6b25639dee9827c"
   dependencies:
     "@cliqz-oss/dexie" "^2.0.4"
-    "@cliqz/adblocker" "^0.6.8"
+    "@cliqz/adblocker" "^0.6.9"
     ajv "^6.5.0"
     anonymous-credentials "https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.3/anonymous-credentials-0.1.3.tgz"
     classnames "^2.2.5"
@@ -8476,13 +8468,6 @@ timers-browserify@^2.0.4:
   integrity sha512-YvC1SV1XdOUaL6gx5CoGroT3Gu49pK9+TZ38ErPldOWW4j49GI1HKs9DV+KGq/w6y+LZ72W1c8cKz2vzY+qpzg==
   dependencies:
     setimmediate "^1.0.4"
-
-tldts@^3.0.0:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/tldts/-/tldts-3.1.2.tgz#7424a7d18309b14d979ba91526e93b442d8ae1bb"
-  integrity sha512-MbTi4o2oE7N3kqx+KC5hc6FM8jWY654lPXnwSjA7mw+J83DiW/tR8LBKEKqMvCvjwfbaZMEkIudyZ91c7dxEJg==
-  dependencies:
-    punycode "^2.1.1"
 
 tldts@^4.0.0:
   version "4.0.2"

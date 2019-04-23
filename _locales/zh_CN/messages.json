@@ -1853,8 +1853,11 @@
 	"hub_login_label_password_invalid": {
 		"message": "请使用 8 到 50 个字符。"
 	},
+	"hub_login_link_dont_have_account": {
+		"message": "没有帐户？"
+	},
 	"hub_login_link_create_account": {
-		"message": "没有帐户？注册。"
+		"message": "注册。"
 	},
 	"hub_login_button_submit": {
 		"message": "登录"
@@ -1898,8 +1901,11 @@
 	"hub_create_account_checkbox_promotions": {
 		"message": "给我发送Ghostery动态和促销信息。"
 	},
+	"hub_create_account_already_have_account": {
+		"message": "已经有 Ghostery 帐户？"
+	},
 	"hub_create_account_link_login": {
-		"message": "我已有帐户。登录。"
+		"message": "在此处登录。"
 	},
 	"hub_create_account_button_submit": {
 		"message": "创建帐户"
