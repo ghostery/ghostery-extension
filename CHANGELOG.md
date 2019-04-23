@@ -1,4 +1,4 @@
-### GHOSTERY 8.3.2 (April 17, 2019)
+### GHOSTERY 8.3.2 (April 22, 2019)
 
 + Ghostery tracker panel now updates dynamically in real time!
 + Remove unsupported file types for Opera automated-review
