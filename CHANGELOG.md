@@ -1,3 +1,8 @@
+### GHOSTERY 8.3.3 (April 24, 2019)
+
++ Fixes bug where Ad-Blocker/Anti-Tracking modules did not respect whitelist settings
++ Fixes bug in category description names
+
 ### GHOSTERY 8.3.2 (April 22, 2019)
 
 + Ghostery tracker panel now updates dynamically in real time!
