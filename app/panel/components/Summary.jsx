@@ -463,14 +463,7 @@ class Summary extends React.Component {
 					<ReactSVG path="/app/images/panel/gold-plus-icon.svg" className="gold-plus-icon" />
 				}
 
-				{!plusSubscriber && is_expert &&
-					<div>
-						<ReactSVG path="/app/images/panel/green-upgrade-banner-small.svg" className="green-upgrade-banner" />
-						<span className="green-upgrade-banner-text-small">{t('subscription_upgrade_to')}</span>
-					</div>
-				}
-
-				{!plusSubscriber && !is_expert &&
+				{!plusSubscriber &&
 					<div className="upgrade-banner-container">
 						<span className="upgrade-banner-text">{t('subscription_upgrade_to')}</span>
 						<ReactSVG path="/app/images/panel/upgrade-banner-plus.svg" className="upgrade-banner-plus" />
