@@ -305,4 +305,11 @@
 	&.expert .upgrade-banner-plus {
 		vertical-align: middle;
 	}
+
+	.gold-plus-icon {
+		@extend %pointer;
+		position: absolute;
+		left: 10px;
+		top: 11px;
+	}
 }
