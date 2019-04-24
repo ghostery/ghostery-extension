@@ -1245,8 +1245,9 @@ function initialiseWebRequestPipeline() {
  * @return {boolean}
  */
 function isWhitelisted(state) {
-	const url = state.sourceUrl;
-	return globals.SESSION.paused_blocking || events.policy.getSitePolicy(url) === 2 || state.ghosteryWhitelisted;
+	const url = state.tabUrl;
+	// state.ghosteryWhitelisted is sometimes undefined so force to bool
+	return Boolean(globals.SESSION.paused_blocking || events.policy.getSitePolicy(url) === 2 || state.ghosteryWhitelisted);
 }
 
 /**
@@ -1310,7 +1311,7 @@ adblocker.on('enabled', () => {
 				before: ['checkBlocklist']
 			}),
 			adblocker.action('addWhiteListCheck',
-				url => isWhitelisted({ sourceUrl: url }))
+				url => isWhitelisted({ tabUrl: url }))
 		])
 	);
 });
