@@ -343,7 +343,7 @@ class Summary extends React.Component {
 			slow: this.state.trackerLatencyTotal > 10,
 		});
 
-		const summaryViewStatsButton = ClassNames('stats-button', {
+		const summaryViewStatsButton = ClassNames('stats-button', 'g-tooltip', {
 			hide: is_expert
 		});
 
@@ -455,7 +455,12 @@ class Summary extends React.Component {
 			</div>
 		);
 
-		const statsNavButton = (<NavButton path="/stats" imagePath="../../app/images/panel/graph.svg" classNames={summaryViewStatsButton} />);
+		const statsNavButton = (
+			<div className={summaryViewStatsButton}>
+				<NavButton path="/stats" imagePath="../../app/images/panel/graph.svg" />
+				<Tooltip body={t('subscription_history_stats')} position="left" />
+			</div>
+		);
 
 		const plusUpgradeBannerOrSubscriberIcon = (
 			<div onClick={this.clickUpgradeBannerOrGoldPlusIcon}>
