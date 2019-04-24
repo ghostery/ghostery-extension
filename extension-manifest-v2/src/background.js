@@ -1245,8 +1245,9 @@ function initialiseWebRequestPipeline() {
  * @return {boolean}
  */
 function isWhitelisted(state) {
-	const url = state.sourceUrl;
-	return globals.SESSION.paused_blocking || events.policy.getSitePolicy(url) === 2 || state.ghosteryWhitelisted;
+	const url = state.tabUrl;
+	// state.ghosteryWhitelisted is sometimes undefined so force to bool
+	return Boolean(globals.SESSION.paused_blocking || events.policy.getSitePolicy(url) === 2 || state.ghosteryWhitelisted);
 }
 
 /**
@@ -1300,7 +1301,7 @@ antitracking.on('enabled', () => {
  * @memberOf Background
  */
 adblocker.on('enabled', () => {
-	adblocker.isReady().then(() => adblocker.action('addWhiteListCheck', url => isWhitelisted({ sourceUrl: url })));
+	adblocker.isReady().then(() => adblocker.action('addWhiteListCheck', url => isWhitelisted({ tabUrl: url })));
 });
 
 /**
