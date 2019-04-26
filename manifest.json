@@ -12,6 +12,8 @@
 	"version": "8.3.3",
 	"version_name": "8.3.3",
 	"default_locale": "en",
+	"debug": true,
+	"log": true,
 	"description": "__MSG_short_description__",
 	"icons": {
 		"16": "app/images/icon16.png",

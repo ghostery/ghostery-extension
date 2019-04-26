@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import ReactSVG from 'react-svg';
 import ClassNames from 'classnames';
 import Tooltip from './Tooltip';
 import NavButton from './BuildingBlocks/NavButton';
@@ -282,6 +283,17 @@ class Summary extends React.Component {
 	}
 
 	/**
+	 * Handles clicking on the green upgrade banner or gold subscriber badge
+	 */
+	clickUpgradeBannerOrGoldPlusIcon = () => {
+		// TODO check whether this is the message we want to be sending now
+		sendMessage('ping', 'plus_panel_from_badge');
+		const { user } = this.props;
+		const plusSubscriber = user && user.subscriptionsPlus;
+		this.props.history.push(plusSubscriber ? '/subscription/info' : `/subscribe/${!!user}`);
+	}
+
+	/**
 	* React's required render function. Returns JSX
 	* @return {JSX} JSX for rendering the Summary View of the panel
 	*/
@@ -299,7 +311,9 @@ class Summary extends React.Component {
 			paused_blocking,
 			sitePolicy,
 			trackerCounts,
+			user
 		} = this.props;
+		const plusSubscriber = user && user.subscriptionsPlus;
 		const showCondensed = is_expert && is_expanded;
 		const antiTrackUnsafe = enable_anti_tracking && antiTracking && antiTracking.totalUnsafeCount || 0;
 		const adBlockBlocked = enable_ad_block && adBlock && adBlock.totalCount || 0;
@@ -346,126 +360,158 @@ class Summary extends React.Component {
 			invisible: hidePageHost
 		});
 
+		const pauseButtonComponent = (
+			<PauseButton
+				isPaused={this.props.paused_blocking}
+				isPausedTimeout={this.props.paused_blocking_timeout}
+				clickPause={this.clickPauseButton}
+				dropdownItems={this.pauseOptions}
+				isAbPause={abPause}
+				isCentered={is_expert}
+				isCondensed={showCondensed}
+			/>);
+
+		const pauseButton = (
+			<div className="pause-button-container">
+				pauseButtonComponent
+			</div>
+		);
+
+		const totalTrackersFound = (
+			<div className="total-tracker-count clickable" onClick={this.clickTrackersCount}>
+				<span className="summary-total-tracker-count g-tooltip">
+					{this.props.trackerCounts.allowed + this.props.trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
+					<Tooltip
+						header={t('panel_tracker_total_tooltip')}
+						position="right"
+					/>
+				</span>
+			</div>
+		);
+
+		const donut = (
+			<div className="donut-graph-container">
+				<DonutGraph
+					categories={this.props.categories}
+					renderRedscale={this.props.sitePolicy === 1}
+					renderGreyscale={this.props.paused_blocking}
+					totalCount={this.props.trackerCounts.allowed + this.props.trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
+					ghosteryFeatureSelect={this.props.sitePolicy}
+					isSmall={is_expert}
+					clickDonut={this.clickDonut}
+				/>
+			</div>
+		);
+
+		const totalTrackersBlocked = (
+			<div className={blockedTrackersClassNames} onClick={this.clickTrackersBlocked}>
+				<span className="text">{t('trackers_blocked')} </span>
+				<span className="value">
+					{trackersBlockedCount}
+				</span>
+			</div>
+		);
+
+		const pageLoadTime = (
+			<div className={pageLoadClassNames}>
+				<span className="text">{t('page_load')} </span>
+				<span className="value">
+					{this.state.trackerLatencyTotal ? `${this.state.trackerLatencyTotal} ${t('settings_seconds')}` : '-'}
+				</span>
+			</div>
+		);
+
+		// Trust, Restrict, Pause
+		const ghosteryFeatures = (
+			<div className="ghostery-features-container">
+				<GhosteryFeatures
+					clickButton={this.clickSitePolicy}
+					sitePolicy={this.props.sitePolicy}
+					isAbPause={abPause}
+					isStacked={is_expert}
+					isInactive={this.props.paused_blocking || this.state.disableBlocking}
+					isCondensed={showCondensed}
+				/>
+
+				{!abPause && pauseButtonComponent}
+			</div>
+		);
+
+		// Enhanced Anti-Tracking, Enhanced Ad Blocking, Smart Blocking
+		const cliqzFeatures = (
+			<div className="cliqz-features-container">
+				<CliqzFeatures
+					clickButton={this.clickCliqzFeature}
+					antiTrackingActive={this.props.enable_anti_tracking}
+					antiTracking={this.props.antiTracking}
+					adBlockingActive={this.props.enable_ad_block}
+					adBlocking={this.props.adBlock}
+					smartBlockingActive={this.props.enable_smart_block}
+					smartBlocking={this.props.smartBlock}
+					isInactive={this.props.paused_blocking || this.props.sitePolicy || this.state.disableBlocking || IS_CLIQZ}
+					isSmaller={is_expert}
+					isCondensed={showCondensed}
+				/>
+			</div>
+		);
+
+		const statsNavButton = (
+			<div className={summaryViewStatsButton}>
+				<NavButton path="/stats" imagePath="../../app/images/panel/graph.svg" />
+				<Tooltip body={t('subscription_history_stats')} position="left" />
+			</div>
+		);
+
+		const plusUpgradeBannerOrSubscriberIcon = (
+			<div onClick={this.clickUpgradeBannerOrGoldPlusIcon}>
+				{plusSubscriber &&
+					<ReactSVG path="/app/images/panel/gold-plus-icon.svg" className="gold-plus-icon" />
+				}
+
+				{!plusSubscriber &&
+					<div className="upgrade-banner-container">
+						<span className="upgrade-banner-text">{t('subscription_upgrade_to')}</span>
+						<ReactSVG path="/app/images/panel/upgrade-banner-plus.svg" className="upgrade-banner-plus" />
+					</div>
+				}
+			</div>
+		);
+
 		return (
 			<div id="content-summary" className={summaryClassNames}>
-				{abPause && (
-					<div className="pause-button-container">
-						<PauseButton
-							isPaused={this.props.paused_blocking}
-							isPausedTimeout={this.props.paused_blocking_timeout}
-							clickPause={this.clickPauseButton}
-							dropdownItems={this.pauseOptions}
-							isAbPause={abPause}
-							isCentered={is_expert}
-							isCondensed={showCondensed}
-						/>
+				{abPause && pauseButton}
+
+				{!showCondensed && this.state.disableBlocking && (<NotScanned isSmall={is_expert} />)}
+				{!showCondensed && abPause && !this.state.disableBlocking && is_expert && (
+					<div className={pageHostClassNames}>
+						{pageHost}
 					</div>
 				)}
-
-				{this.state.disableBlocking && !showCondensed && (
-					<NotScanned isSmall={is_expert} />
-				)}
-
-				{abPause && !this.state.disableBlocking && is_expert && !showCondensed && (
+				{!showCondensed && !this.state.disableBlocking && donut}
+				{!showCondensed && !this.state.disableBlocking && (!abPause || !is_expert) && (
 					<div className={pageHostClassNames}>
 						{pageHost}
 					</div>
 				)}
 
-				{!this.state.disableBlocking && !showCondensed && (
-					<div className="donut-graph-container">
-						<DonutGraph
-							categories={this.props.categories}
-							renderRedscale={this.props.sitePolicy === 1}
-							renderGreyscale={this.props.paused_blocking}
-							totalCount={this.props.trackerCounts.allowed + this.props.trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
-							ghosteryFeatureSelect={this.props.sitePolicy}
-							isSmall={is_expert}
-							clickDonut={this.clickDonut}
-						/>
-					</div>
-				)}
-				{!this.state.disableBlocking && showCondensed && (
-					<div className="total-tracker-count clickable" onClick={this.clickTrackersCount}>
-						<span className="summary-total-tracker-count g-tooltip">
-							{this.props.trackerCounts.allowed + this.props.trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
-							<Tooltip
-								header={t('panel_tracker_total_tooltip')}
-								position="right"
-							/>
-						</span>
-					</div>
-				)}
+				{showCondensed && !this.state.disableBlocking && totalTrackersFound}
 
-				{!this.state.disableBlocking && (!abPause || !is_expert) && !showCondensed && (
-					<div className={pageHostClassNames}>
-						{pageHost}
-					</div>
-				)}
-
-				{!this.state.disableBlocking && (
+				{!this.state.disableBlocking &&
 					<div className="page-stats">
-						<div className={blockedTrackersClassNames} onClick={this.clickTrackersBlocked}>
-							<span className="text">{t('trackers_blocked')} </span>
-							<span className="value">
-								{trackersBlockedCount}
-							</span>
-						</div>
-						<div className={pageLoadClassNames}>
-							<span className="text">{t('page_load')} </span>
-							<span className="value">
-								{this.state.trackerLatencyTotal ? `${this.state.trackerLatencyTotal} ${t('settings_seconds')}` : '-'}
-							</span>
-						</div>
+						{totalTrackersBlocked}
+						{pageLoadTime}
 					</div>
-				)}
+				}
 
-				{this.state.disableBlocking && is_expert && showCondensed && (
+				{showCondensed && this.state.disableBlocking && is_expert && (
 					<div className="not-scanned-expert-condensed-space-taker" />
 				)}
 
-				<div className="ghostery-features-container">
-					<GhosteryFeatures
-						clickButton={this.clickSitePolicy}
-						sitePolicy={this.props.sitePolicy}
-						isAbPause={abPause}
-						isStacked={is_expert}
-						isInactive={this.props.paused_blocking || this.state.disableBlocking}
-						isCondensed={showCondensed}
-					/>
+				{ghosteryFeatures}
+				{cliqzFeatures}
+				{statsNavButton}
 
-					{!abPause && (
-						<PauseButton
-							isPaused={this.props.paused_blocking}
-							isPausedTimeout={this.props.paused_blocking_timeout}
-							clickPause={this.clickPauseButton}
-							dropdownItems={this.pauseOptions}
-							isAbPause={abPause}
-							isCentered={is_expert}
-							isCondensed={showCondensed}
-						/>
-					)}
-				</div>
-
-				<div className="cliqz-features-container">
-					<CliqzFeatures
-						clickButton={this.clickCliqzFeature}
-						antiTrackingActive={this.props.enable_anti_tracking}
-						antiTracking={this.props.antiTracking}
-						adBlockingActive={this.props.enable_ad_block}
-						adBlocking={this.props.adBlock}
-						smartBlockingActive={this.props.enable_smart_block}
-						smartBlocking={this.props.smartBlock}
-						isInactive={this.props.paused_blocking || this.props.sitePolicy || this.state.disableBlocking || IS_CLIQZ}
-						isSmaller={is_expert}
-						isCondensed={showCondensed}
-					/>
-				</div>
-
-				<div className={summaryViewStatsButton}>
-					<NavButton path="/stats" imagePath="../../app/images/panel/graph.svg" />
-					<Tooltip body={t('subscription_history_stats')} position="left" />
-				</div>
+				{!showCondensed && plusUpgradeBannerOrSubscriberIcon}
 			</div>
 		);
 	}
