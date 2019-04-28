@@ -343,7 +343,7 @@ class Summary extends React.Component {
 			slow: this.state.trackerLatencyTotal > 10,
 		});
 
-		const summaryViewStatsButton = ClassNames('stats-button', {
+		const summaryViewStatsButton = ClassNames('stats-button', 'g-tooltip', {
 			hide: is_expert
 		});
 
@@ -465,26 +465,24 @@ class Summary extends React.Component {
 			</div>
 		);
 
-		const statsNavButton = (<NavButton path="/stats" imagePath="../../app/images/panel/graph.svg" classNames={summaryViewStatsButton} />);
+		const statsNavButton = (
+			<div className={summaryViewStatsButton}>
+				<NavButton path="/stats" imagePath="../../app/images/panel/graph.svg" />
+				<Tooltip body={t('subscription_history_stats')} position="left" />
+			</div>
+		);
 
 		const plusUpgradeBannerOrSubscriberIcon = (
 			<div onClick={this.clickUpgradeBannerOrGoldPlusIcon}>
 				{plusSubscriber &&
-					<ReactSVG path="/app/images/panel/gold-plus-icon.svg" className="gold-plus-icon" />
+				<ReactSVG path="/app/images/panel/gold-plus-icon.svg" className="gold-plus-icon" />
 				}
 
-				{!plusSubscriber && is_expert &&
-					<div>
-						<ReactSVG path="/app/images/panel/green-upgrade-banner-small.svg" className="green-upgrade-banner" />
-						<span className="green-upgrade-banner-text-small">{t('subscription_upgrade_to')}</span>
-					</div>
-				}
-
-				{!plusSubscriber && !is_expert &&
-					<div>
-						<ReactSVG path="/app/images/panel/green-upgrade-banner.svg" className="green-upgrade-banner" />
-						<span className="green-upgrade-banner-text">{t('subscription_upgrade_to')}</span>
-					</div>
+				{!plusSubscriber &&
+				<div className="upgrade-banner-container">
+					<span className="upgrade-banner-text">{t('subscription_upgrade_to')}</span>
+					<ReactSVG path="/app/images/panel/upgrade-banner-plus.svg" className="upgrade-banner-plus" />
+				</div>
 				}
 			</div>
 		);
