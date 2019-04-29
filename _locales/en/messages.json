@@ -1096,7 +1096,7 @@
 		"message": "Requests Modified:"
 	},
 	"requests_modified_tooltip": {
-		"message": "Total number of tracking requests & elements modified by Anti-Tracking, Ad Blocking, and Smart Blocking"
+		"message": "Total number of tracking requests & elements modified by Anti-Tracking and Ad Blocking"
 	},
 	"trackers_blocked": {
 		"message": "Trackers Blocked:"

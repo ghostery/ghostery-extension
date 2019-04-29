@@ -327,7 +327,7 @@ class Summary extends React.Component {
 			sbAllowed = 0;
 		}
 		const sbAdjust = enable_smart_block && (sbBlocked - sbAllowed) || 0;
-		const requestsModifiedCount = antiTrackUnsafe + adBlockBlocked + sbBlocked + sbAllowed;
+		const requestsModifiedCount = antiTrackUnsafe + adBlockBlocked;
 
 		const summaryClassNames = ClassNames('', {
 			expert: is_expert,
