@@ -216,6 +216,14 @@ class Blocking extends React.Component {
 	handlePortMessage(msg) {
 		if (msg.to !== 'blocking' || !msg.body) { return; }
 
+		if (msg.body.bugs) {
+			console.error('Cliqz Ghostery Stats received by Blocking component');
+			console.error(msg.body);
+		} else {
+			console.error('Categories array received by Blocking component:');
+			console.error(msg.body.categories);
+		}
+
 		this.props.actions.updateBlockingData(msg.body);
 	}
 

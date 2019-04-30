@@ -26,7 +26,7 @@ import tabInfo from './TabInfo';
 import rewards from './Rewards';
 import account from './Account';
 import dispatcher from './Dispatcher';
-import { sendCliqzModulesData } from '../utils/cliqzModulesData';
+import { getCliqzGhosteryStats, sendCliqzModulesData } from '../utils/cliqzModulesData';
 import { getActiveTab, flushChromeMemoryCache, processUrl } from '../utils/utils';
 import { objectEntries, log } from '../utils/common';
 
@@ -110,6 +110,8 @@ class PanelData {
 				case 'BlockingComponentDidMount':
 					this._mountedComponents.blocking = true;
 					this._setTrackerListAndCategories();
+					console.error(getCliqzGhosteryStats(tab.id));
+					this._postMessage('blocking', getCliqzGhosteryStats(tab.id));
 					this._postMessage('blocking', this._getBlockingData());
 					break;
 				case 'BlockingComponentWillUnmount':
@@ -223,6 +225,7 @@ class PanelData {
 		}
 
 		if (blocking) {
+			// this._postMessage('blocking', getCliqzGhosteryStats(this._activeTab.id));
 			this._postMessage('blocking', this._getDynamicBlockingData());
 		}
 
