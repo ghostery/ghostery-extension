@@ -351,9 +351,9 @@ class Summary extends React.Component {
 		if (paused_blocking || sitePolicy === 2) {
 			trackersBlockedCount = 0;
 		} else if (sitePolicy === 1) {
-			trackersBlockedCount = trackerCounts.blocked + trackerCounts.allowed + antiTrackUnsafe + adBlockBlocked || 0;
+			trackersBlockedCount = trackerCounts.blocked + trackerCounts.allowed || 0;
 		} else {
-			trackersBlockedCount = trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked + sbAdjust || 0;
+			trackersBlockedCount = trackerCounts.blocked + sbAdjust || 0;
 		}
 
 		const pageHostClassNames = ClassNames('page-host', {
