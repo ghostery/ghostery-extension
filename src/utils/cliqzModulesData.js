@@ -25,8 +25,9 @@ export function getCliqzAntitrackingData(tabId) {
 			});
 		}
 
-		antitracking.background.actions.aggregatedBlockingStats(tabId).then((antitrackingData) => {
-			let totalUnsafeCount = 0;
+		// antitracking.background.actions.aggregatedBlockingStats(tabId).then((antitrackingData) => {
+		antitracking.background.actions.getGhosteryStats(tabId).then((antitrackingData) => {
+		let totalUnsafeCount = 0;
 			for (const category in antitrackingData) {
 				if (antitrackingData.hasOwnProperty(category)) {
 					for (const app in antitrackingData[category]) {
@@ -37,6 +38,10 @@ export function getCliqzAntitrackingData(tabId) {
 				}
 			}
 			antitrackingData.totalUnsafeCount = totalUnsafeCount;
+
+			console.error('Object returned by Cliqz antitracking.background.actions.getGhosteryStats(tabId)');
+			console.error(antitrackingData);
+
 			resolve(antitrackingData);
 		}).catch(() => {
 			resolve({
