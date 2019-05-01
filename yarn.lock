@@ -387,10 +387,10 @@
   resolved "https://registry.yarnpkg.com/@cliqz-oss/dexie/-/dexie-2.0.4.tgz#0e710504e2b9198baa9b046abd3a82731b94d56e"
   integrity sha512-HxMbBQfdy0CehThTFierXbRPI+PHDEucUUriCCzViAKbCWWQIlL6uZcyDaaPRMPWy45v78lezPB4457kfjS72g==
 
-"@cliqz/adblocker@^0.6.9":
-  version "0.6.9"
-  resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-0.6.9.tgz#ffe2655f56eb7a73c743d12de6f51826aed36c4e"
-  integrity sha512-bioIQwNzI359aJc9EuDDhqKn5mY7DgvdyJnP/Ql04bNgFJDnJQrqQQICAvyT747dV//Gstq5PNeLfExyeoiD0w==
+"@cliqz/adblocker@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-0.8.0.tgz#f9360111d5cd2395fff8299529000b13d9800ed4"
+  integrity sha512-SeCWSPShEu/fzoktqAO0J6S1zEQhNEELmcCU3ZEvGvBZSW3pNIDVPH0vU3lad1lEwi5opkmRytgNpHA0ULU+4g==
   dependencies:
     punycode "^2.1.1"
     tslib "^1.9.3"
@@ -1251,12 +1251,12 @@ brorand@^1.0.1:
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
   integrity sha1-EsJe/kCkXjwyPrhnWgoM5XsiNx8=
 
-"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.35/7.35.1.6e6eb11.tgz":
-  version "7.35.1"
-  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.35/7.35.1.6e6eb11.tgz#8a85e73ca945ae526ba00ecc1159eb56f26cc4b7"
+"browser-core@https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.36/7.36.2.712dbc7.tgz":
+  version "7.36.2"
+  resolved "https://s3.amazonaws.com/cdncliqz/update/edge/ghostery/v7.36/7.36.2.712dbc7.tgz#8caba3e6b972808f4a650c1a0bd2ea9d42aba817"
   dependencies:
     "@cliqz-oss/dexie" "^2.0.4"
-    "@cliqz/adblocker" "^0.6.9"
+    "@cliqz/adblocker" "^0.8.0"
     ajv "^6.5.0"
     anonymous-credentials "https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.3/anonymous-credentials-0.1.3.tgz"
     classnames "^2.2.5"
@@ -1266,7 +1266,7 @@ brorand@^1.0.1:
     deep-equal "^1.0.1"
     fs-extra "^4.0.1"
     global "^4.3.2"
-    handlebars "^4.0.11"
+    handlebars "^4.1.1"
     jquery "^3.0.0"
     jsep "^0.3.0"
     math-expression-evaluator "^1.2.17"
@@ -3676,12 +3676,23 @@ growly@^1.3.0:
   resolved "https://registry.yarnpkg.com/growly/-/growly-1.3.0.tgz#f10748cbe76af964b7c96c93c6bcc28af120c081"
   integrity sha1-8QdIy+dq+WS3yWyTxrzCivEgwIE=
 
-handlebars@^4.0.11, handlebars@^4.0.3:
+handlebars@^4.0.3:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.1.0.tgz#0d6a6f34ff1f63cecec8423aa4169827bf787c3a"
   integrity sha512-l2jRuU1NAWK6AW5qqcTATWQJvNPEwkM7NEKSiv/gqOsoSQbVoWyqVEY5GS+XPQ88zLNmqASRpzfdm8d79hJS+w==
   dependencies:
     async "^2.5.0"
+    optimist "^0.6.1"
+    source-map "^0.6.1"
+  optionalDependencies:
+    uglify-js "^3.1.4"
+
+handlebars@^4.1.1:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.1.2.tgz#b6b37c1ced0306b221e094fc7aca3ec23b131b67"
+  integrity sha512-nvfrjqvt9xQ8Z/w0ijewdD/vvWDTOweBUm96NTr66Wfvo1mJenBLwcYmPs3TIBP5ruzYGD7Hx/DaM9RmhroGPw==
+  dependencies:
+    neo-async "^2.6.0"
     optimist "^0.6.1"
     source-map "^0.6.1"
   optionalDependencies:
@@ -5715,7 +5726,7 @@ needle@^2.2.1:
     iconv-lite "^0.4.4"
     sax "^1.2.4"
 
-neo-async@^2.5.0:
+neo-async@^2.5.0, neo-async@^2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.0.tgz#b9d15e4d71c6762908654b5183ed38b753340835"
   integrity sha512-MFh0d/Wa7vkKO3Y3LlacqAEeHK0mckVqzDieUKTT+KGxi+zIpeVsFxymkIiRpbpDziHc290Xr9A1O4Om7otoRA==
