@@ -149,9 +149,6 @@ class PauseButton extends React.Component {
 		const dropdownContainerClassNames = ClassNames('button-group', 'dropdown-container', {
 			centered: this.props.isCentered,
 		});
-		const dropdownContainerStyles = {
-			left: '0',
-		};
 
 		return (
 			<div className="sub-component pause-button">
@@ -175,7 +172,7 @@ class PauseButton extends React.Component {
 						</span>
 					</div>
 				</div>
-				<div className={dropdownContainerClassNames} style={dropdownContainerStyles}>
+				<div className={dropdownContainerClassNames}>
 					{this.state.showDropdown && this.renderDropdown()}
 				</div>
 			</div>
