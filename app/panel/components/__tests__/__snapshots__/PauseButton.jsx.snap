@@ -8,7 +8,7 @@ exports[`app/panel/components/BuildingBlocks/PauseButton.jsx Snapshot tests with
     className="button-group"
   >
     <div
-      className="button button-left button-pause active smaller"
+      className="button button-left button-pause g-tooltip active smaller"
       onClick={[Function]}
     >
       <span
@@ -32,11 +32,6 @@ exports[`app/panel/components/BuildingBlocks/PauseButton.jsx Snapshot tests with
   </div>
   <div
     className="button-group dropdown-container"
-    style={
-      Object {
-        "left": "0px",
-      }
-    }
   />
 </div>
 `;
@@ -75,11 +70,6 @@ exports[`app/panel/components/BuildingBlocks/PauseButton.jsx Snapshot tests with
   </div>
   <div
     className="button-group dropdown-container"
-    style={
-      Object {
-        "left": "0px",
-      }
-    }
   />
 </div>
 `;
@@ -118,11 +108,6 @@ exports[`app/panel/components/BuildingBlocks/PauseButton.jsx Snapshot tests with
   </div>
   <div
     className="button-group dropdown-container centered"
-    style={
-      Object {
-        "left": "0px",
-      }
-    }
   />
 </div>
 `;
