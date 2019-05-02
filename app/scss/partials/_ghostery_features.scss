@@ -50,15 +50,6 @@
 			background-color: #ce273c;
 		}
 	}
-	.button.active.ab-pause {
-		color: #ffffff;
-		border-color: #2092bf;
-		background-color: #1dafed;
-		box-shadow: inset 0px 1px 7px 2px #2092bf;
-		&:hover {
-			background-color: #0093bd;
-		}
-	}
 
 	.full-height { height: 100%; }
 	.button-trust .button-text,
@@ -98,11 +89,6 @@
 			border-color: #ff8da2;
 			background-color: #ff8da2;
 		}
-		.button.active.ab-pause {
-			color: #ffffff;
-			border-color: #a4d4f2;
-			background-color: #a4d4f2;
-		}
 		.button-trust .button-text {
 			background-image: buildIconTrust(#a4a4a4);
 		}
@@ -136,25 +122,11 @@
 		border-bottom-right-radius: 0;
 		border-bottom: 0;
 	}
-	.button-left {
-		border-top-right-radius: 0;
-		border-bottom-right-radius: 0;
-		border-right: 0;
-	}
+
 	.button-center {
 		border-top-left-radius: 0;
 		border-top-right-radius: 0;
 		border-bottom-left-radius: 0;
 		border-bottom-right-radius: 0;
-	}
-	.button-bottom {
-		border-top-left-radius: 0;
-		border-top-right-radius: 0;
-		border-top: 0;
-	}
-	.button-right {
-		border-top-left-radius: 0;
-		border-bottom-left-radius: 0;
-		border-left: 0;
 	}
 }
