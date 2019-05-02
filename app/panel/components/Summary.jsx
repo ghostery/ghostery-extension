@@ -28,7 +28,6 @@ import {
 } from './BuildingBlocks';
 
 const { IS_CLIQZ } = globals;
-const AB_PAUSE_BUTTON = false;
 
 /**
  * @class Implements the Summary View, which is displayed as the entire panel
@@ -45,7 +44,6 @@ class Summary extends React.Component {
 		this.state = {
 			trackerLatencyTotal: 0,
 			disableBlocking: false,
-			abPause: AB_PAUSE_BUTTON,
 		};
 
 		// Event Bindings
@@ -297,7 +295,6 @@ class Summary extends React.Component {
 	* @return {JSX} JSX for rendering the Summary View of the panel
 	*/
 	render() {
-		const { abPause } = this.state;
 		const {
 			is_expert,
 			is_expanded,
@@ -332,7 +329,6 @@ class Summary extends React.Component {
 		const summaryClassNames = ClassNames('', {
 			expert: is_expert,
 			condensed: showCondensed,
-			'ab-pause': abPause,
 		});
 
 		const blockedTrackersClassNames = ClassNames('blocked-trackers', {
@@ -360,23 +356,6 @@ class Summary extends React.Component {
 			invisible: hidePageHost
 		});
 
-		const pauseButtonComponent = (
-			<PauseButton
-				isPaused={this.props.paused_blocking}
-				isPausedTimeout={this.props.paused_blocking_timeout}
-				clickPause={this.clickPauseButton}
-				dropdownItems={this.pauseOptions}
-				isAbPause={abPause}
-				isCentered={is_expert}
-				isCondensed={showCondensed}
-			/>);
-
-		const pauseButton = (
-			<div className="pause-button-container">
-				pauseButtonComponent
-			</div>
-		);
-
 		const totalTrackersFound = (
 			<div className="total-tracker-count clickable" onClick={this.clickTrackersCount}>
 				<span className="summary-total-tracker-count g-tooltip">
@@ -400,6 +379,12 @@ class Summary extends React.Component {
 					isSmall={is_expert}
 					clickDonut={this.clickDonut}
 				/>
+			</div>
+		);
+
+		const pageHostReadout = (
+			<div className={pageHostClassNames}>
+				{pageHost}
 			</div>
 		);
 
@@ -432,18 +417,24 @@ class Summary extends React.Component {
 		);
 
 		// Trust, Restrict, Pause
-		const ghosteryFeatures = (
+		const trustRestrictAndPause = (
 			<div className="ghostery-features-container">
 				<GhosteryFeatures
 					clickButton={this.clickSitePolicy}
 					sitePolicy={this.props.sitePolicy}
-					isAbPause={abPause}
 					isStacked={is_expert}
 					isInactive={this.props.paused_blocking || this.state.disableBlocking}
 					isCondensed={showCondensed}
 				/>
 
-				{!abPause && pauseButtonComponent}
+				<PauseButton
+					isPaused={this.props.paused_blocking}
+					isPausedTimeout={this.props.paused_blocking_timeout}
+					clickPause={this.clickPauseButton}
+					dropdownItems={this.pauseOptions}
+					isCentered={is_expert}
+					isCondensed={showCondensed}
+				/>
 			</div>
 		);
 
@@ -489,20 +480,9 @@ class Summary extends React.Component {
 
 		return (
 			<div id="content-summary" className={summaryClassNames}>
-				{abPause && pauseButton}
-
 				{!showCondensed && this.state.disableBlocking && (<NotScanned isSmall={is_expert} />)}
-				{!showCondensed && abPause && !this.state.disableBlocking && is_expert && (
-					<div className={pageHostClassNames}>
-						{pageHost}
-					</div>
-				)}
 				{!showCondensed && !this.state.disableBlocking && donut}
-				{!showCondensed && !this.state.disableBlocking && (!abPause || !is_expert) && (
-					<div className={pageHostClassNames}>
-						{pageHost}
-					</div>
-				)}
+				{!showCondensed && !this.state.disableBlocking && !is_expert && pageHostReadout}
 
 				{showCondensed && !this.state.disableBlocking && totalTrackersFound}
 
@@ -518,7 +498,7 @@ class Summary extends React.Component {
 					<div className="not-scanned-expert-condensed-space-taker" />
 				)}
 
-				{ghosteryFeatures}
+				{trustRestrictAndPause}
 				{cliqzFeatures}
 				{statsNavButton}
 

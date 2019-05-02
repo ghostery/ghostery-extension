@@ -109,17 +109,10 @@ class PauseButton extends React.Component {
 		const {
 			isPaused,
 			isCondensed,
-			isAbPause,
 		} = this.props;
 		let buttonEl;
 		if (isCondensed) {
 			buttonEl = <span className="pause-button-icon pause-button-text" />;
-		} else if (isAbPause) {
-			buttonEl = (
-				<span className="pause-button-icon pause-button-text">
-					{isPaused ? t('summary_resume_ghostery_ab_pause') : t('summary_pause_ghostery_ab_pause')}
-				</span>
-			);
 		} else {
 			buttonEl = (
 				<span className="pause-button-text">
@@ -139,8 +132,7 @@ class PauseButton extends React.Component {
 	 * @return {JSX} JSX for rendering the Pause Button on the Summary View
 	 */
 	render() {
-		const pauseButtonClassNames = ClassNames('button', 'button-left', 'button-pause', {
-			'g-tooltip': !this.props.isAbPause,
+		const pauseButtonClassNames = ClassNames('button', 'button-left', 'button-pause', 'g-tooltip', {
 			active: this.props.isPaused,
 			smaller: !this.props.isCentered,
 			smallest: this.props.isCentered && this.props.isCondensed,
@@ -158,7 +150,7 @@ class PauseButton extends React.Component {
 			centered: this.props.isCentered,
 		});
 		const dropdownContainerStyles = {
-			left: `${(this.props.isCentered && this.props.isAbPause) ? this.pauseLeft : 0}px`,
+			left: '0',
 		};
 
 		return (
@@ -173,12 +165,10 @@ class PauseButton extends React.Component {
 						}}
 					>
 						{this.renderPauseButtonText()}
-						{!this.props.isAbPause && (
-							<Tooltip
-								body={this.props.isPaused ? t('summary_resume_ghostery_tooltip') : t('summary_pause_ghostery_tooltip')}
-								position={(this.props.isCentered) ? 'right' : 'top'}
-							/>
-						)}
+						<Tooltip
+							body={this.props.isPaused ? t('summary_resume_ghostery_tooltip') : t('summary_pause_ghostery_tooltip')}
+							position={(this.props.isCentered) ? 'right' : 'top'}
+						/>
 					</div>
 					<div className={dropdownButtonClassNames} onClick={this.clickDropdownCaret}>
 						<span className="show-for-sr">

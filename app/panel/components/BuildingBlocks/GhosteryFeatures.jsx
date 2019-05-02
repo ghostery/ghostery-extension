@@ -86,14 +86,12 @@ class GhosteryFeatures extends React.Component {
 		}
 		this.props.clickButton('restrict');
 	}
-
 	/**
 	 * React's required render function. Returns JSX
 	 * @return {JSX} JSX for rendering the Ghostery Features portion of the Summary View
 	 */
 	render() {
 		const {
-			isAbPause,
 			isInactive,
 			isStacked,
 			isCondensed,
@@ -105,27 +103,14 @@ class GhosteryFeatures extends React.Component {
 			stacked: isStacked,
 		});
 		const trustClassNames = ClassNames('button', 'button-trust', 'g-tooltip', {
-			'ab-pause': isAbPause,
-			'button-left': isAbPause && !isStacked,
-			'button-top': (isAbPause || isCondensed) && isStacked,
+			'button-top': isCondensed && isStacked,
 			condensed: isCondensed,
 			active: sitePolicy === 2,
 			clickable: !isInactive,
 			'not-clickable': isInactive,
 		});
-		const customClassNames = ClassNames('button', 'button-custom', 'g-tooltip', {
-			'ab-pause': isAbPause,
-			'button-center': isAbPause && true,
-			condensed: isCondensed,
-			active: !sitePolicy,
-			clickable: !isInactive,
-			'not-clickable': isInactive,
-		});
 		const restrictClassNames = ClassNames('button', 'button-restrict', 'g-tooltip', {
-			'ab-pause': isAbPause,
-			'button-right': isAbPause && !isStacked,
-			'button-bottom': isAbPause && isStacked,
-			'button-center': !isAbPause && isCondensed && isStacked,
+			'button-center': isCondensed && isStacked,
 			condensed: isCondensed,
 			active: sitePolicy === 1,
 			clickable: !isInactive,
@@ -143,16 +128,6 @@ class GhosteryFeatures extends React.Component {
 						</span>
 						<Tooltip body={(sitePolicy === 2) ? t('tooltip_trust_on') : t('tooltip_trust')} position={(isStacked) ? 'right' : 'top'} />
 					</div>
-					{isAbPause && (
-						<div className={customClassNames} onClick={this.clickCustomButton}>
-							<span className="flex-container align-center-middle full-height">
-								<span className="button-text">
-									{t('summary_custom_settings')}
-								</span>
-							</span>
-							<Tooltip body={t('tooltip_custom_settings')} position={(isStacked) ? 'right' : 'top'} />
-						</div>
-					)}
 					<div className={restrictClassNames} onClick={this.clickRestrictButton}>
 						<span className="flex-container align-center-middle full-height">
 							<span className="button-text">
