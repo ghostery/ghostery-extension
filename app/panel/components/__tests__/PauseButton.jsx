@@ -28,7 +28,6 @@ describe('app/panel/components/BuildingBlocks/PauseButton.jsx', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('unpaused state in simple view', () => {
 			const initialState = {
-				isAbPause: false,
 				isPaused: false,
 				isPausedTimeout: null,
 				clickPause: () => {},
@@ -46,7 +45,6 @@ describe('app/panel/components/BuildingBlocks/PauseButton.jsx', () => {
 
 		test('paused state in detailed view', () => {
 			const initialState = {
-				isAbPause: false,
 				isPaused: true,
 				isPausedTimeout: null,
 				clickPause: () => {},
@@ -64,7 +62,6 @@ describe('app/panel/components/BuildingBlocks/PauseButton.jsx', () => {
 
 		test('paused state in detailed condensed view', () => {
 			const initialState = {
-				isAbPause: true,
 				isPaused: true,
 				isPausedTimeout: null,
 				clickPause: () => {},
