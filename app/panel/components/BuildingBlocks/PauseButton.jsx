@@ -161,7 +161,6 @@ class PauseButton extends React.Component {
 						onClick={this.props.clickPause}
 						ref={(node) => {
 							this.pauseWidth = node && node.clientWidth;
-							this.pauseLeft = node && node.offsetLeft;
 						}}
 					>
 						{this.renderPauseButtonText()}
