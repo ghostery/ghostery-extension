@@ -132,49 +132,66 @@ class PauseButton extends React.Component {
 	 * @return {JSX} JSX for rendering the Pause Button on the Summary View
 	 */
 	render() {
-		const pauseButtonClassNames = ClassNames('button', 'button-left', 'button-pause', 'g-tooltip', {
-			active: this.props.isPaused,
-			smaller: !this.props.isCentered,
-			smallest: this.props.isCentered && this.props.isCondensed,
-			'no-border-radius': this.props.isCentered && this.props.isCondensed,
-			'dropdown-open': this.state.showDropdown,
+		const {
+			isPaused,
+			isCentered,
+			isCondensed
+		} = this.props;
+		const { showDropdown } = this.state;
+		const centeredAndCondensed = isCentered && isCondensed;
+
+		const sharedClassNames = {
+			button: true,
+			smaller: !isCentered,
+			smallest: centeredAndCondensed,
+			'no-border-radius': centeredAndCondensed,
+			'dropdown-open': showDropdown,
+		};
+		const pauseButtonClassNames = ClassNames('button-left', 'button-pause', 'g-tooltip', sharedClassNames, {
+			active: isPaused,
 		});
-		const dropdownButtonClassNames = ClassNames('button', 'button-right', 'button-caret', {
-			active: this.state.showDropdown,
-			smaller: !this.props.isCentered,
-			smallest: this.props.isCentered && this.props.isCondensed,
-			'no-border-radius': this.props.isCentered && this.props.isCondensed,
-			'dropdown-open': this.state.showDropdown,
+		const dropdownButtonClassNames = ClassNames('button-right', 'button-caret', sharedClassNames, {
+			active: showDropdown,
 		});
 		const dropdownContainerClassNames = ClassNames('button-group', 'dropdown-container', {
-			centered: this.props.isCentered,
+			centered: isCentered,
 		});
+
+		const togglePauseButton = (
+			<div
+				className={pauseButtonClassNames}
+				onClick={this.props.clickPause}
+				ref={(node) => { this.pauseWidth = node && node.clientWidth; }}
+			>
+				{this.renderPauseButtonText()}
+				<Tooltip
+					body={isPaused ? t('summary_resume_ghostery_tooltip') : t('summary_pause_ghostery_tooltip')}
+					position={(isCentered) ? 'right' : 'top'}
+				/>
+			</div>
+		);
+
+		const pauseDurationSelectionDropdownCaret = (
+			<div className={dropdownButtonClassNames} onClick={this.clickDropdownCaret}>
+				<span className="show-for-sr">
+					{t('summary_show_menu')}
+				</span>
+			</div>
+		);
+
+		const pauseDurationSelectionDropdown = (
+			<div className={dropdownContainerClassNames}>
+				{this.renderDropdown()}
+			</div>
+		);
 
 		return (
 			<div className="sub-component pause-button">
 				<div className="button-group">
-					<div
-						className={pauseButtonClassNames}
-						onClick={this.props.clickPause}
-						ref={(node) => {
-							this.pauseWidth = node && node.clientWidth;
-						}}
-					>
-						{this.renderPauseButtonText()}
-						<Tooltip
-							body={this.props.isPaused ? t('summary_resume_ghostery_tooltip') : t('summary_pause_ghostery_tooltip')}
-							position={(this.props.isCentered) ? 'right' : 'top'}
-						/>
-					</div>
-					<div className={dropdownButtonClassNames} onClick={this.clickDropdownCaret}>
-						<span className="show-for-sr">
-							{t('summary_show_menu')}
-						</span>
-					</div>
+					{togglePauseButton}
+					{pauseDurationSelectionDropdownCaret}
 				</div>
-				<div className={dropdownContainerClassNames}>
-					{this.state.showDropdown && this.renderDropdown()}
-				</div>
+				{showDropdown && pauseDurationSelectionDropdown}
 			</div>
 		);
 	}
