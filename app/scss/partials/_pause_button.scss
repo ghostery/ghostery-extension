@@ -11,7 +11,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-.sub-component.pause-button {
+/*
+.PauseButton
+
+
+
+ */
+
+.sub-a-dub-component.pause-button {
 	.button {
 		color: #4a4a4a;
 		border-color: #cccccc;
@@ -39,6 +46,8 @@
 	}
 
 	.button-pause {
+		height: 35px;
+
 		min-width: 125px;
 		max-width: 125px;
 		line-height: 16px;
@@ -62,8 +71,9 @@
 			background-image: buildIconPlay(#ffffff);
 		}
 		&.smaller {
-			min-width: 100px;
-			max-width: 150px;
+			height: 45px;
+			min-width: 125px;
+			max-width: 125px;
 		}
 		&.smallest {
 			min-width: 41px;
@@ -75,6 +85,7 @@
 		}
 	}
 	.button-caret {
+		height: 35px;
 		width: 25px;
 		padding-top: 21px;
 		padding-right: 0;
@@ -84,6 +95,9 @@
 		background-image: buildIconCaretDown(#4a4a4a);
 		&.active {
 			background-image: buildIconCaretDown(#ffffff);
+		}
+		&.smaller {
+			height: 45px;
 		}
 	}
 
@@ -148,24 +162,7 @@
 		border-top-right-radius: 0;
 		border-top-left-radius: 0;
 	}
-}
 
-.ghostery-features-container .sub-component.pause-button {
-	.button-pause {
-		height: 35px;
-		line-height: 16px;
-	}
-	.button-caret {
-		height: 35px;
-	}
-	.button-pause.smaller {
-		height: 45px;
-		min-width: 125px;
-		max-width: 125px;
-	}
-	.button-caret.smaller {
-		height: 45px;
-	}
 	.button.active {
 		border-color: #0093bd;
 		background-color: #1dafed;
