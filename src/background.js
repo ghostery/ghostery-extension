@@ -1220,7 +1220,6 @@ function initialiseWebRequestPipeline() {
 				const result = events.onBeforeRequest(state);
 				if (result && (result.cancel === true || result.redirectUrl)) {
 					Object.assign(response, result);
-					return false;
 				}
 				return true;
 			}
