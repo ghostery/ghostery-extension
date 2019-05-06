@@ -11,55 +11,88 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-#content-summary {
-	position: absolute;
+// The donut *container* is specific to the Summary component and should live here
+// The donut itself is not intrinsically tied to Summary and can live wherever
+
+.GhosteryTextLabel {
+	color: #4a4a4a;
+	text-align: center;
+	font-weight: 600;
+}
+
+.GhosteryKeyValueReadout {
+	text-align: center;
+	font-weight: 600;
+}
+
+.GhosteryKeyValueReadout__key {
+	color: #4a4a4a;
+}
+
+.GhosteryKeyValueReadout--totalTrackersBlocked {
+	.GhosteryKeyValueReadout__value { color: #e74055; }
+}
+
+.GhosteryKeyValueReadout--totalRequestsModified {
+	.GhosteryKeyValueReadout__value { color: #00aef0; }
+}
+
+.Summary__pageHostContainer {
+	font-size: 11px;
+}
+
+.Summary__pageStatContainer {
+	font-size: 14px;
+	line-height: 21px;
+}
+
+.Summary {
+	posiiton: absolute;
 	height: 479px;
-	width: 100%;
-
-	&.expert {
-		width: 235px;
-		padding-top: 10px;
-	}
-
-	&.expert.condensed {
-		width: 66px;
-		padding-top: 0;
-		background-color: #f9f6f6;
-	}
 
 	.clickable {
 		cursor: pointer;
 	}
 
-	.not-clickable {
+	.notClickable {
 		cursor: not-allowed;
 	}
 
-	.page-host {
-		color: #4a4a4a;
-		text-align: center;
-		font-size: 11px;
-		font-weight: 600;
+	.invisible {
+		visibility: hidden;
+	}
+}
+
+.Summary--simple {
+	width: 100%;
+
+	.Summary__pageHostContainer {
 		margin-bottom: 36px;
-
-		&.invisible {
-			visibility: hidden;
-		}
 	}
 
-	&.expert .page-host {
-		margin-top: 20px;
-		margin-bottom: 10px;
-	}
-
-	.donut-graph-container {
+	.Summary__donutContainer {
 		margin: 26px auto;
 		height: 120px;
 		width: 120px;
 	}
 
+	.Summary__pageStatContainer {
+		margin-bottom: 40px;
+		display: inline-block;
+		padding: 0 20px;
+	}
+}
 
-	&.expert .donut-graph-container {
+.Summary--expert {
+	width: 235px;
+	padding-top: 10px;
+
+	.Summary__pageHostContainer {
+		margin-top: 20px;
+		margin-bottom: 10px;
+	}
+
+	.Summary__donutContainer {
 		height: 94px;
 		width: 94px;
 		margin-top: 21px;
@@ -67,46 +100,41 @@
 		padding-top: 5px;
 	}
 
-	&.expert.condensed .total-tracker-count {
-		text-align: center;
-		padding: 0;
-		color: #4a4a4a;
+	.Summary__pageStatContainer {
+		margin-bottom: 21px;
+		display: block;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow-x: hidden;
+	}
+}
+
+.Summary--condensed {
+	width: 66px;
+	background-color: #f9f6f6;
+
+	.Summary__totalTrackerCountContainer {
 		font-size: 24px;
-		font-weight: 600;
+		padding: 0;
 		margin: 10px 0;
 	}
+}
 
+.Summary__statsButton {
+	position: absolute;
+	right: 0;
+	top: 40px;
+	padding: 6px 3px 3px 9px;
+	border: 1px lightgray solid;
+	border-radius: 5px 0 0 5px;
+}
+
+#content-summary {
 	.page-stats {
-		color: #4a4a4a;
-		text-align: center;
-		font-size: 14px;
-		line-height: 21px;
-		font-weight: 600;
-		margin-bottom: 40px;
-		.blocked-trackers .value { color: #e74055; }
-		.modified-requests .value { color: #00aef0; }
+
 		.page-load .value { color: #ffc063; }
 		.page-load.fast .value { color: #9ecc42; }
 		.page-load.slow .value { color: #e74055; }
-
-		.blocked-trackers,
-		.modified-requests,
-		.page-load {
-			display: inline-block;
-			padding: 0 20px;
-		}
-	}
-
-	&.expert .page-stats {
-		margin-bottom: 21px;
-
-		.blocked-trackers,
-		.page-load {
-			display: block;
-			text-overflow: ellipsis;
-			white-space: nowrap;
-			overflow-x: hidden;
-		}
 	}
 
 	&.expert.condensed .page-stats {
@@ -159,14 +187,7 @@
 		}
 	}
 
-	.stats-button {
-		position: absolute;
-		right: 0;
-		top: 40px;
-		padding: 6px 3px 3px 9px;
-		border: 1px lightgray solid;
-		border-radius: 5px 0 0 5px;
-	}
+
 
 	.upgrade-banner-container {
 		@extend %pointer;

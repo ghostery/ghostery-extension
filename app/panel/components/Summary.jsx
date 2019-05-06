@@ -326,38 +326,23 @@ class Summary extends React.Component {
 		const sbAdjust = enable_smart_block && (sbBlocked - sbAllowed) || 0;
 		const requestsModifiedCount = antiTrackUnsafe + adBlockBlocked;
 
-		const summaryClassNames = ClassNames('', {
-			expert: is_expert,
-			condensed: showCondensed,
-		});
 
-		const blockedTrackersClassNames = ClassNames('blocked-trackers', {
-			clickable: is_expert,
-		});
-		const pageLoadClassNames = ClassNames('page-load', {
-			fast: this.state.trackerLatencyTotal < 5,
-			slow: this.state.trackerLatencyTotal > 10,
-		});
 
-		const summaryViewStatsButton = ClassNames('stats-button', 'g-tooltip', {
+		const summaryViewStatsButton = ClassNames('Summary__statsButton', 'g-tooltip', {
 			hide: is_expert
 		});
 
-		let trackersBlockedCount;
+		let totalTrackersBlockedCount;
 		if (paused_blocking || sitePolicy === 2) {
-			trackersBlockedCount = 0;
+			totalTrackersBlockedCount = 0;
 		} else if (sitePolicy === 1) {
-			trackersBlockedCount = trackerCounts.blocked + trackerCounts.allowed || 0;
+			totalTrackersBlockedCount = trackerCounts.blocked + trackerCounts.allowed || 0;
 		} else {
-			trackersBlockedCount = trackerCounts.blocked + sbAdjust || 0;
+			totalTrackersBlockedCount = trackerCounts.blocked + sbAdjust || 0;
 		}
 
-		const pageHostClassNames = ClassNames('page-host', {
-			invisible: hidePageHost
-		});
-
 		const totalTrackersFound = (
-			<div className="total-tracker-count clickable" onClick={this.clickTrackersCount}>
+			<div className="Summary_totalTrackerCount clickable" onClick={this.clickTrackersCount}>
 				<span className="summary-total-tracker-count g-tooltip">
 					{this.props.trackerCounts.allowed + this.props.trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
 					<Tooltip
@@ -369,7 +354,7 @@ class Summary extends React.Component {
 		);
 
 		const donut = (
-			<div className="donut-graph-container">
+			<div className="Summary__donutContainer">
 				<DonutGraph
 					categories={this.props.categories}
 					renderRedscale={this.props.sitePolicy === 1}
@@ -382,37 +367,53 @@ class Summary extends React.Component {
 			</div>
 		);
 
+		const pageHostContainerClassNames = ClassNames('Summary__pageHostContainer', {
+			invisible: hidePageHost,
+		});
 		const pageHostReadout = (
-			<div className={pageHostClassNames}>
-				{pageHost}
+			<div className={pageHostContainerClassNames}>
+				<span className="GhosteryTextLabel">{pageHost}</span>
 			</div>
 		);
 
+		const totalTrackersBlockedClassNames = ClassNames('Summary__pageStatContainer', {
+			clickable: is_expert,
+		});
 		const totalTrackersBlocked = (
-			<div className={blockedTrackersClassNames} onClick={this.clickTrackersBlocked}>
-				<span className="text">{t('trackers_blocked')} </span>
-				<span className="value">
-					{trackersBlockedCount}
-				</span>
+			<div className={totalTrackersBlockedClassNames} onClick={this.clickTrackersBlocked}>
+				<div className="GhosteryKeyValueReadout GhosteryKeyValueReadout--totalTrackersBlocked">
+					<span className="GhosteryKeyValueReadout__text">{t('trackers_blocked')} </span>
+					<span className="GhosteryKeyValueReadout__value">
+						{totalTrackersBlockedCount}
+					</span>
+				</div>
 			</div>
 		);
 
 		const totalRequestsModified = (
-			<div className="modified-requests g-tooltip">
-				<span className="text">{t('requests_modified')} </span>
-				<span className="value">
-					{requestsModifiedCount}
-				</span>
+			<div className="Summary__pageStatContainer g-tooltip">
+				<div className="GhosteryKeyValueReadout GhosteryKeyValueReadout--totalRequestsModified">
+					<span className="text">{t('requests_modified')} </span>
+					<span className="value">
+						{requestsModifiedCount}
+					</span>
+				</div>
 				<Tooltip body={t('requests_modified_tooltip')} position={is_expert ? 'right' : 'top'} />
 			</div>
 		);
 
+		const pageLoadTimeClassNames = ClassNames('GhosteryKeyValueReadout', 'GhosteryKeyValueReadout--pageLoadTime', {
+			'GhosteryKeyValueReadout--pageLoadTime-fast': this.state.trackerLatencyTotal < 5,
+			'GhosteryKeyValueReadout--pageLoadTime-slow': this.state.trackerLatencyTotal > 10,
+		});
 		const pageLoadTime = (
-			<div className={pageLoadClassNames}>
-				<span className="text">{t('page_load')} </span>
-				<span className="value">
-					{this.state.trackerLatencyTotal ? `${this.state.trackerLatencyTotal} ${t('settings_seconds')}` : '-'}
-				</span>
+			<div className="Summary__pageStatContainer">
+				<div className={pageLoadTimeClassNames}>
+					<span className="GhosteryKeyValueReadout__text">{t('page_load')} </span>
+					<span className="GhosteryKeyValueReadout__value">
+						{this.state.trackerLatencyTotal ? `${this.state.trackerLatencyTotal} ${t('settings_seconds')}` : '-'}
+					</span>
+				</div>
 			</div>
 		);
 
@@ -478,21 +479,23 @@ class Summary extends React.Component {
 			</div>
 		);
 
+		const summaryClassNames = ClassNames('Summary', {
+			'Summary--simple': !is_expert,
+			'Summary--expert': is_expert && !is_expanded,
+			'Summary--condensed': showCondensed,
+		});
+
 		return (
-			<div id="content-summary" className={summaryClassNames}>
+			<div className={summaryClassNames}>
 				{!showCondensed && this.state.disableBlocking && (<NotScanned isSmall={is_expert} />)}
 				{!showCondensed && !this.state.disableBlocking && donut}
 				{!showCondensed && !this.state.disableBlocking && !is_expert && pageHostReadout}
 
 				{showCondensed && !this.state.disableBlocking && totalTrackersFound}
 
-				{!this.state.disableBlocking &&
-					<div className="page-stats">
-						{totalTrackersBlocked}
-						{totalRequestsModified}
-						{pageLoadTime}
-					</div>
-				}
+				{!this.state.disableBlocking && totalTrackersBlocked}
+				{!this.state.disableBlocking && totalRequestsModified}
+				{!this.state.disableBlocking && pageLoadTime}
 
 				{showCondensed && this.state.disableBlocking && is_expert && (
 					<div className="not-scanned-expert-condensed-space-taker" />
