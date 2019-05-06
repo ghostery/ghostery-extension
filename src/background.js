@@ -1259,39 +1259,7 @@ function isWhitelisted(state) {
  */
 antitracking.on('enabled', () => {
 	antitracking.isReady().then(() => {
-		// remove Cliqz-side whitelisting steps and replace with ghostery ones.
-		const replacedSteps = ['onBeforeSendHeaders', 'onHeadersReceived'].map(stage =>
-			Promise.all([
-				antitracking.action('addPipelineStep', stage, {
-					name: 'checkGhosteryWhitelisted',
-					spec: 'break',
-					fn: (state) => {
-						if (isWhitelisted(state)) {
-							const step = stage === 'onHeadersReceived' ? 'set_cookie' : 'cookie';
-							state.incrementStat(`${step}_allow_whitelisted`);
-							return false;
-						}
-						return true;
-					},
-					before: ['cookieContext.checkCookieTrust'],
-				})
-			])
-		).concat([
-			antitracking.action('removePipelineStep', 'onBeforeRequest', 'checkSourceWhitelisted'),
-			antitracking.action('addPipelineStep', 'onBeforeRequest', {
-				name: 'checkGhosteryWhitelisted',
-				spec: 'break',
-				fn: (state) => {
-					if (isWhitelisted(state)) {
-						state.incrementStat('ghostery_whitelisted');
-						return false;
-					}
-					return true;
-				},
-				before: ['checkShouldBlock'],
-			}),
-		]);
-		return Promise.all(replacedSteps);
+		antitracking.action('setWhiteListCheck', isWhitelisted);
 	});
 });
 
