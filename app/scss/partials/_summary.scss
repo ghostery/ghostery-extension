@@ -14,28 +14,62 @@
 // The donut *container* is specific to the Summary component and should live here
 // The donut itself is not intrinsically tied to Summary and can live wherever
 
+.Ghostery--clickable {
+	cursor: pointer;
+}
+
+.Ghostery--notClickable {
+	cursor: not-allowed;
+}
+
+.Ghostery--invisible {
+	visibility: hidden;
+}
+
 .GhosteryTextLabel {
 	color: #4a4a4a;
 	text-align: center;
 	font-weight: 600;
 }
 
-.GhosteryKeyValueReadout {
+.GhosteryKVReadout {
 	text-align: center;
 	font-weight: 600;
 }
 
-.GhosteryKeyValueReadout__key {
+.GhosteryKVReadout--summaryCondensed {
+	padding: 0;
+	margin: 5px 0;
+}
+
+.GhosteryKVReadout--withoutKey {
+	.GhosteryKVReadout__key { display: none; }
+}
+
+.GhosteryKVReadout__key {
 	color: #4a4a4a;
 }
 
-.GhosteryKeyValueReadout--totalTrackersBlocked {
-	.GhosteryKeyValueReadout__value { color: #e74055; }
+.GhosteryKVReadout--totalTrackersBlocked {
+	.GhosteryKVReadout__value { color: #e74055; }
 }
 
-.GhosteryKeyValueReadout--totalRequestsModified {
-	.GhosteryKeyValueReadout__value { color: #00aef0; }
+.GhosteryKVReadout--totalRequestsModified {
+	.GhosteryKVReadout__value { color: #00aef0; }
 }
+
+.GhosteryKVReadout--pageLoadTime-slow {
+	.GhosteryKVReadout__value { color: #e74055; }
+}
+
+.GhosteryKVReadout--pageLoadTime-medium {
+	.GhosteryKVReadout__value { color: #ffc063; }
+}
+
+.GhosteryKVReadout--pageLoadTime-fast {
+	.GhosteryKVReadout__value { color: #9ecc42; }
+}
+
 
 .Summary__pageHostContainer {
 	font-size: 11px;
@@ -49,18 +83,6 @@
 .Summary {
 	posiiton: absolute;
 	height: 479px;
-
-	.clickable {
-		cursor: pointer;
-	}
-
-	.notClickable {
-		cursor: not-allowed;
-	}
-
-	.invisible {
-		visibility: hidden;
-	}
 }
 
 .Summary--simple {
@@ -80,6 +102,14 @@
 		margin-bottom: 40px;
 		display: inline-block;
 		padding: 0 20px;
+	}
+
+	.Summary__buttonContainer--middle {
+		margin: 12px 28px;
+	}
+
+	.Summary__cliqzFeatureContainer {
+		width: 150px;
 	}
 }
 
@@ -107,6 +137,19 @@
 		white-space: nowrap;
 		overflow-x: hidden;
 	}
+
+	.Summary__buttonContainer--middle {
+		margin: 12px 28px;
+	}
+
+	.Summary__cliqzFeaturesContainer {
+		margin-top: 10px;
+		margin-bottom: 6px;
+	}
+
+	.Summary__cliqzFeatureContainer {
+		width: 55px;
+	}
 }
 
 .Summary--condensed {
@@ -117,6 +160,19 @@
 		font-size: 24px;
 		padding: 0;
 		margin: 10px 0;
+	}
+
+	.Summary__cliqzFeaturesContainer {
+		margin-bottom: 0;
+	}
+
+	.Summary__cliqzFeatureContainer:last-of-type {
+		margin-bottom: 0;
+	}
+
+	.Summary__cliqzFeatureContainer {
+		width: 40px;
+		margin: 0 0 5px;
 	}
 }
 
@@ -129,66 +185,25 @@
 	border-radius: 5px 0 0 5px;
 }
 
+.Summary__spaceTaker {
+	height: 162px;
+}
+
+.Summary__buttonContainer {
+	text-align: center;
+	display: inline-block;
+}
+
+.Summary__cliqzFeaturesContainer {
+	text-align: center;
+}
+
+.Summary__cliqzFeatureContainer {
+	display: inline-block;
+	margin: 0 10px;
+}
+
 #content-summary {
-	.page-stats {
-
-		.page-load .value { color: #ffc063; }
-		.page-load.fast .value { color: #9ecc42; }
-		.page-load.slow .value { color: #e74055; }
-	}
-
-	&.expert.condensed .page-stats {
-		div {
-			text-align: center;
-			padding: 0;
-			margin: 5px 0;
-		}
-
-		.text {
-			display: none;
-		}
-	}
-
-	.not-scanned-expert-condensed-space-taker {
-		height: 162px;
-	}
-
-	.ghostery-features-container {
-		text-align: center;
-
-		.ghostery-features,
-		.pause-button {
-			display: inline-block;
-		}
-	}
-
-	.ghostery-features-container .button-restrict {
-		margin: 12px 28px;
-	}
-
-	&.expert.condensed .ghostery-features-container .button-restrict {
-		margin: 0;
-	}
-
-	.cliqz-features-container {
-		text-align: center;
-	}
-
-	&.expert .cliqz-features-container {
-		margin-top: 10px;
-		margin-bottom: 6px;
-	}
-
-	&.expert.condensed .cliqz-features-container {
-		margin-bottom: 0;
-
-		.cliqz-feature:last-of-type {
-			margin-bottom: 0;
-		}
-	}
-
-
-
 	.upgrade-banner-container {
 		@extend %pointer;
 		position: absolute;

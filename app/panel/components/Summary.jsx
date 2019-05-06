@@ -342,7 +342,7 @@ class Summary extends React.Component {
 		}
 
 		const totalTrackersFound = (
-			<div className="Summary_totalTrackerCount clickable" onClick={this.clickTrackersCount}>
+			<div className="Summary_totalTrackerCount Ghostery--clickable" onClick={this.clickTrackersCount}>
 				<span className="summary-total-tracker-count g-tooltip">
 					{this.props.trackerCounts.allowed + this.props.trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
 					<Tooltip
@@ -376,23 +376,31 @@ class Summary extends React.Component {
 			</div>
 		);
 
-		const totalTrackersBlockedClassNames = ClassNames('Summary__pageStatContainer', {
-			clickable: is_expert,
+		const totalTrackersBlockedContainerClassNames = ClassNames('Summary__pageStatContainer', {
+			'Ghostery--clickable': is_expert,
+		});
+		const totalTrackersBlockedClassNames = ClassNames('GhosteryKVReadout', 'GhosteryKVReadout--totalTrackersBlocked', {
+			'GhosteryKVReadout--withoutKey': showCondensed,
+			'GhosteryKVReadout--summaryCondensed': showCondensed,
 		});
 		const totalTrackersBlocked = (
-			<div className={totalTrackersBlockedClassNames} onClick={this.clickTrackersBlocked}>
-				<div className="GhosteryKeyValueReadout GhosteryKeyValueReadout--totalTrackersBlocked">
-					<span className="GhosteryKeyValueReadout__text">{t('trackers_blocked')} </span>
-					<span className="GhosteryKeyValueReadout__value">
+			<div className={totalTrackersBlockedContainerClassNames} onClick={this.clickTrackersBlocked}>
+				<div className={totalTrackersBlockedClassNames}>
+					<span className="GhosteryKVReadout__text">{t('trackers_blocked')} </span>
+					<span className="GhosteryKVReadout__value">
 						{totalTrackersBlockedCount}
 					</span>
 				</div>
 			</div>
 		);
 
+		const totalRequestsModifiedClassNames = ClassNames('GhosteryKVReadout', 'GhosteryKVReadout--totalRequestsModified', {
+			'GhosteryKVReadout--withoutKey': showCondensed,
+			'GhosteryKVReadout--summaryCondensed': showCondensed,
+		});
 		const totalRequestsModified = (
 			<div className="Summary__pageStatContainer g-tooltip">
-				<div className="GhosteryKeyValueReadout GhosteryKeyValueReadout--totalRequestsModified">
+				<div className={totalRequestsModifiedClassNames}>
 					<span className="text">{t('requests_modified')} </span>
 					<span className="value">
 						{requestsModifiedCount}
@@ -402,15 +410,18 @@ class Summary extends React.Component {
 			</div>
 		);
 
-		const pageLoadTimeClassNames = ClassNames('GhosteryKeyValueReadout', 'GhosteryKeyValueReadout--pageLoadTime', {
-			'GhosteryKeyValueReadout--pageLoadTime-fast': this.state.trackerLatencyTotal < 5,
-			'GhosteryKeyValueReadout--pageLoadTime-slow': this.state.trackerLatencyTotal > 10,
+		const pageLoadTimeClassNames = ClassNames('GhosteryKVReadout', 'GhosteryKVReadout--pageLoadTime', {
+			'GhosteryKVReadout--pageLoadTime-fast': this.state.trackerLatencyTotal < 5,
+			'GhosteryKVReadout--pageLoadTime-slow': this.state.trackerLatencyTotal > 10,
+			'GhosteryKVReadout--pageLoadTime-medium': this.state.trackerLatencyTotal > 5 && this.state.trackerLatencyTotal < 10,
+			'GhosteryKVReadout--withoutKey': showCondensed,
+			'GhosteryKVReadout--summaryCondensed': showCondensed,
 		});
 		const pageLoadTime = (
 			<div className="Summary__pageStatContainer">
 				<div className={pageLoadTimeClassNames}>
-					<span className="GhosteryKeyValueReadout__text">{t('page_load')} </span>
-					<span className="GhosteryKeyValueReadout__value">
+					<span className="GhosteryKVReadout__text">{t('page_load')} </span>
+					<span className="GhosteryKVReadout__value">
 						{this.state.trackerLatencyTotal ? `${this.state.trackerLatencyTotal} ${t('settings_seconds')}` : '-'}
 					</span>
 				</div>
@@ -419,28 +430,64 @@ class Summary extends React.Component {
 
 		// Trust, Restrict, Pause
 		const trustRestrictAndPause = (
-			<div className="ghostery-features-container">
-				<GhosteryFeatures
-					clickButton={this.clickSitePolicy}
-					sitePolicy={this.props.sitePolicy}
-					isStacked={is_expert}
-					isInactive={this.props.paused_blocking || this.state.disableBlocking}
-					isCondensed={showCondensed}
-				/>
-
-				<PauseButton
-					isPaused={this.props.paused_blocking}
-					isPausedTimeout={this.props.paused_blocking_timeout}
-					clickPause={this.clickPauseButton}
-					dropdownItems={this.pauseOptions}
-					isCentered={is_expert}
-					isCondensed={showCondensed}
-				/>
+			<div>
+				<div className="Summary__buttonContainer">
+					<GhosteryFeature
+						clickButton={this.clickSitePolicy}
+						sitePolicy={this.props.sitePolicy}
+						isStacked={is_expert}
+						isInactive={this.props.paused_blocking || this.state.disableBlocking}
+						isCondensed={showCondensed}
+					/>
+				</div>
+				<div className="Summary__buttonContainer Summary__buttonContainer--middle">
+					<GhosteryFeature
+						{this.clickSitePolicy}
+						sitePolicy={this.props.sitePolicy}
+						isStacked={is_expert}
+						isInactive={this.props.paused_blocking || this.state.disableBlocking}
+						isCondensed={showCondensed}
+					/>
+				</div>
+				<div className="Summary__buttonContainer">
+					<PauseButton
+						isPaused={this.props.paused_blocking}
+						isPausedTimeout={this.props.paused_blocking_timeout}
+						clickPause={this.clickPauseButton}
+						dropdownItems={this.pauseOptions}
+						isCentered={is_expert}
+						isCondensed={showCondensed}
+					/>
+				</div>
 			</div>
 		);
 
 		// Enhanced Anti-Tracking, Enhanced Ad Blocking, Smart Blocking
 		const cliqzFeatures = (
+			<div className="Summary__cliqzFeaturesContainer">
+				<div className="Summary__cliqzFeatureContainer">
+					<CliqzFeature
+						clickButton={this.clickCliqzFeature}
+						type={this.props.antiTracking}
+						active={this.props.enable_anti_tracking}
+					/>
+				</div>
+				<div className="Summary__cliqzFeatureContainer">
+					<CliqzFeature
+						clickButton={this.clickCliqzFeature}
+						type={this.props.adBlock}
+						active={this.props.enable_ad_block}
+					/>
+				</div>
+				<div className="Summary__cliqzFeatureContainer">
+					<CliqzFeature
+						clickButton={this.clickCliqzFeature}
+						type={this.props.smartBlock}
+						active={this.props.enable_smart_block}
+					/>
+				</div>
+			</div>
+			/*
 			<div className="cliqz-features-container">
 				<CliqzFeatures
 					clickButton={this.clickCliqzFeature}
@@ -455,6 +502,7 @@ class Summary extends React.Component {
 					isCondensed={showCondensed}
 				/>
 			</div>
+			 */
 		);
 
 		const statsNavButton = (
@@ -498,7 +546,7 @@ class Summary extends React.Component {
 				{!this.state.disableBlocking && pageLoadTime}
 
 				{showCondensed && this.state.disableBlocking && is_expert && (
-					<div className="not-scanned-expert-condensed-space-taker" />
+					<div className="Summary__spaceTaker" />
 				)}
 
 				{trustRestrictAndPause}

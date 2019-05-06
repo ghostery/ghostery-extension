@@ -12,18 +12,7 @@
  */
 
 .sub-component.cliqz-features {
-	.cliqz-feature {
-		display: inline-block;
-		width: 150px;
-		margin: 0 10px;
-	}
-	&.smaller .cliqz-feature {
-		width: 55px;
-		margin: 0 10px;
-	}
 	&.smaller.condensed .cliqz-feature {
-		width: 40px;
-		margin: 0 0 5px;
 		.count {
 			line-height: 14px;
 		}
