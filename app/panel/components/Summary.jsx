@@ -20,7 +20,7 @@ import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import globals from '../../../src/classes/Globals';
 import {
-	CliqzFeatures,
+	CliqzFeature,
 	DonutGraph,
 	GhosteryFeatures,
 	NotScanned,
@@ -324,9 +324,8 @@ class Summary extends React.Component {
 			sbAllowed = 0;
 		}
 		const sbAdjust = enable_smart_block && (sbBlocked - sbAllowed) || 0;
+
 		const requestsModifiedCount = antiTrackUnsafe + adBlockBlocked;
-
-
 
 		const summaryViewStatsButton = ClassNames('Summary__statsButton', 'g-tooltip', {
 			hide: is_expert
@@ -470,60 +469,61 @@ class Summary extends React.Component {
 		//
 
 		// Enhanced Anti-Tracking, Enhanced Ad Blocking, Smart Blocking
-		const isCliqzInactive = this.props.paused_blocking || this.props.sitePolicy || this.state.disableBlocking || IS_CLIQZ;
-		const cliqzFeatures = (
-			<div className="Summary__cliqzFeaturesContainer">
-				<div className="Summary__cliqzFeatureContainer">
-					<CliqzFeature
-						clickButton={this.clickCliqzFeature}
-						type='enable_anti_tracking'
-						data={this.props.antiTracking}
-						active={this.props.enable_anti_tracking}
-						cliqzInactive={isCliqzInactive}
-						onLocaleKey='alert_anti_track_on'
-						offLocaleKey='alert_anti_track_off'
-					/>
-				</div>
-				<div className="Summary__cliqzFeatureContainer">
-					<CliqzFeature
-						clickButton={this.clickCliqzFeature}
-						type='enable_ad_block'
-						data={this.props.antiTracking}
-						active={this.props.enable_ad_block}
-						cliqzInactive={isCliqzInactive}
-						onLocaleKey='alert_ad_block_on'
-						offLocaleKey='alert_ad_block_off'
-					/>
-				</div>
-				<div className="Summary__cliqzFeatureContainer">
-					<CliqzFeature
-						clickButton={this.clickCliqzFeature}
-						type='enable_smart_block'
-						data={this.props.antiTracking}
-						active={this.props.enable_smart_block}
-						cliqzInactive={isCliqzInactive}
-						onLocaleKey='alert_smart_block_on'
-						offLocaleKey='alert_smart_block_off'
-					/>
-				</div>
-			</div>
-			/*
-			<div className="cliqz-features-container">
-				<CliqzFeatures
+		const isCliqzInactive = paused_blocking || sitePolicy || this.state.disableBlocking || IS_CLIQZ;
+		const cliqzAntiTracking = (
+			<div className="Summary__cliqzFeatureContainer">
+				<CliqzFeature
 					clickButton={this.clickCliqzFeature}
-					antiTrackingActive={this.props.enable_anti_tracking}
-					antiTracking={this.props.antiTracking}
-					adBlockingActive={this.props.enable_ad_block}
-					adBlocking={this.props.adBlock}
-					smartBlockingActive={this.props.enable_smart_block}
-					smartBlocking={this.props.smartBlock}
-					isInactive={this.props.paused_blocking || this.props.sitePolicy || this.state.disableBlocking || IS_CLIQZ}
-					isSmaller={is_expert}
-					isCondensed={showCondensed}
+					type='enable_anti_tracking'
+					data={antiTracking}
+					active={enable_anti_tracking}
+					cliqzInactive={isCliqzInactive}
+					onLocaleKey='alert_anti_track_on'
+					offLocaleKey='alert_anti_track_off'
+				/>
+				<Tooltip
+					header={is_expert && t('tooltip_anti_track')}
+					body-{!showCondensed && (enable_anti_tracking ? t('tooltip_anti_track_body_on') : t('tooltip_anti_track_body'))}
+					position={showCondensed ? 'right' : isSmaller ? 'top top-right' : 'top'}
 				/>
 			</div>
-			 */
-		);
+		)
+		const cliqzAdBlock = (
+			<div className="Summary__cliqzFeatureContainer">
+				<CliqzFeature
+					clickButton={this.clickCliqzFeature}
+					type='enable_ad_block'
+					data={antiTracking}
+					active={enable_ad_block}
+					cliqzInactive={isCliqzInactive}
+					onLocaleKey='alert_ad_block_on'
+					offLocaleKey='alert_ad_block_off'
+				/>
+				<Tooltip
+					header={is_expert && t('tooltip_ad_block')}
+					body={!showCondensed && enable_ad_block ? t('tooltip_ad_block_body_on') : t('tooltip_ad_block_body'))}
+					position={showCondensed ? 'right' : 'top'}
+				/>
+			</div>
+		)
+		const cliqzSmartBlock = (
+			<div className="Summary__cliqzFeatureContainer">
+				<CliqzFeature
+					clickButton={this.clickCliqzFeature}
+					type='enable_smart_block'
+					data={antiTracking}
+					active={enable_smart_block}
+					cliqzInactive={isCliqzInactive}
+					onLocaleKey='alert_smart_block_on'
+					offLocaleKey='alert_smart_block_off'
+				/>
+				<Tooltip
+					header={is_expert && t('tooltip_smart_block')}
+					body={!showCondensed && (enable_smart_block ? t('tooltip_smart_block_body_on') : t('tooltip_smart_block_body'))}
+					position={showCondensed ? 'right' : is_expert ? 'top top-left' : 'top'}
+				/>
+			</div>
+		)
 
 		const statsNavButton = (
 			<div className={summaryViewStatsButton}>
@@ -570,7 +570,11 @@ class Summary extends React.Component {
 				)}
 
 				{trustRestrictAndPause}
-				{cliqzFeatures}
+				<div className="Summary__cliqzFeaturesContainer">
+					{cliqzAntiTracking}
+					{cliqzAdBlock}
+					{cliqzSmartBlock}
+				</div>
 				{statsNavButton}
 
 				{!showCondensed && plusUpgradeBannerOrSubscriberIcon}
