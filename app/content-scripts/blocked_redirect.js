@@ -25,7 +25,7 @@
  * @namespace  BlockedRedirectContentScript
  */
 import msgModule from './utils/msg';
-import { ghosty_blocked, allow_once, allow_unblock } from '../data-images/click2play';
+import c2p_images from '../data-images/click2play';
 
 const msg = msgModule('blocked_redirect');
 const { sendMessage, sendMessageInPromise } = msg;
@@ -90,9 +90,9 @@ const { sendMessage, sendMessageInPromise } = msg;
 			const { translations, blacklisted } = blockedRedirectData;
 			document.title = translations.blocked_redirect_page_title;
 			// Set data images
-			document.getElementById('ghosty_blocked').src = ghosty_blocked;
-			document.getElementById('allow_once').src = allow_once;
-			document.getElementById('allow_unblock').src = allow_unblock;
+			document.getElementById('ghosty_blocked').src = c2p_images.ghosty_blocked;
+			document.getElementById('allow_once').src = c2p_images.allow_once;
+			document.getElementById('allow_unblock').src = c2p_images.allow_unblock;
 			// Set translated titles
 			document.getElementById('redirect-prevent').innerHTML = translations.blocked_redirect_prevent;
 			document.getElementById('action-always').firstChild.title = translations.blocked_redirect_action_always_title; // firstChild should be the action_always image
