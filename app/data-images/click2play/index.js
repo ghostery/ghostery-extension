@@ -12,7 +12,7 @@ import ghostery_vkontakte from './ghostery_vkontakte';
 import ghosty_blocked from './ghosty_blocked';
 import ghosty_blocked_big from './ghosty_blocked_big';
 
-export default {
+export {
 	allow_once,
 	allow_unblock,
 	ghostery_facebook,
