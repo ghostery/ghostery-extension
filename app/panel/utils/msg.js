@@ -81,7 +81,7 @@ export function sendMessageInPromise(name, message, origin = '') {
 			});
 		});
 	}
-	return new Promise(((resolve) => {
+	return new Promise((resolve) => {
 		chrome.runtime.sendMessage({
 			name,
 			message,
@@ -93,7 +93,7 @@ export function sendMessageInPromise(name, message, origin = '') {
 			}
 			resolve(response);
 		});
-	}));
+	});
 }
 
 /**
