@@ -461,29 +461,49 @@ class Summary extends React.Component {
 				</div>
 			</div>
 		);
+		//
+		// <Tooltip
+		// 	header={isSmaller && t('tooltip_anti_track')}
+		// 	body={!isCondensed && (antiTrackingActive ? t('tooltip_anti_track_body_on') : t('tooltip_anti_track_body'))}
+		// 	position={isCondensed ? 'right' : isSmaller ? 'top top-right' : 'top'}
+		// />
+		//
 
 		// Enhanced Anti-Tracking, Enhanced Ad Blocking, Smart Blocking
+		const isCliqzInactive = this.props.paused_blocking || this.props.sitePolicy || this.state.disableBlocking || IS_CLIQZ;
 		const cliqzFeatures = (
 			<div className="Summary__cliqzFeaturesContainer">
 				<div className="Summary__cliqzFeatureContainer">
 					<CliqzFeature
 						clickButton={this.clickCliqzFeature}
-						type={this.props.antiTracking}
+						type='enable_anti_tracking'
+						data={this.props.antiTracking}
 						active={this.props.enable_anti_tracking}
+						cliqzInactive={isCliqzInactive}
+						onLocaleKey='alert_anti_track_on'
+						offLocaleKey='alert_anti_track_off'
 					/>
 				</div>
 				<div className="Summary__cliqzFeatureContainer">
 					<CliqzFeature
 						clickButton={this.clickCliqzFeature}
-						type={this.props.adBlock}
+						type='enable_ad_block'
+						data={this.props.antiTracking}
 						active={this.props.enable_ad_block}
+						cliqzInactive={isCliqzInactive}
+						onLocaleKey='alert_ad_block_on'
+						offLocaleKey='alert_ad_block_off'
 					/>
 				</div>
 				<div className="Summary__cliqzFeatureContainer">
 					<CliqzFeature
 						clickButton={this.clickCliqzFeature}
-						type={this.props.smartBlock}
+						type='enable_smart_block'
+						data={this.props.antiTracking}
 						active={this.props.enable_smart_block}
+						cliqzInactive={isCliqzInactive}
+						onLocaleKey='alert_smart_block_on'
+						offLocaleKey='alert_smart_block_off'
 					/>
 				</div>
 			</div>
