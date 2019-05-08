@@ -1,3 +1,7 @@
+### GHOSTERY 8.3.4 (May 8, 2019)
+
++ Fixes bug in Click2Play redirect blocking
+
 ### GHOSTERY 8.3.3 (April 24, 2019)
 
 + Fixes bug where Ad-Blocker/Anti-Tracking modules did not respect whitelist settings
