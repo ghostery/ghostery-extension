@@ -9,7 +9,7 @@ phases:
   install:
     commands:
     #  - choco install --confirm --limit-output --no-progress --ignore-checksums git nodejs yarn googlechrome opera windows-sdk-10.1
-      - choco install --confirm --limit-output --no-progress --ignore-checksums git nodejs yarn googlechrome opera
+      - choco install --confirm --limit-output --no-progress --ignore-checksums git nodejs yarn opera
       - Add-Content -Path $env:MOABCONFIG_PATH -Value '[projects]'
       - Add-Content -Path $env:MOABCONFIG_PATH -Value '  [projects.ghostery-extension]'
     #  - Add-Content -Path $env:MOABCONFIG_PATH -Value '    edge_makepri_path = "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.17763.0\\x64\\makepri.exe"'
