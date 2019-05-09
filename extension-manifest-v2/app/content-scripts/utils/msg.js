@@ -33,7 +33,7 @@ export default function (origin) {
 	 * @return {Promise}				response or null
 	 */
 	function sendMessageInPromise(name, message) {
-		panelSendPromiseMessage(name, message, origin);
+		return panelSendPromiseMessage(name, message, origin);
 	}
 
 	/**
