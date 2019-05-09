@@ -17,7 +17,7 @@
 import ClickOutside from './ClickOutside';
 import CliqzFeature from './CliqzFeature';
 import DonutGraph from './DonutGraph';
-import GhosteryFeatures from './GhosteryFeatures';
+import GhosteryFeature from './GhosteryFeature';
 import NotScanned from './NotScanned';
 import PauseButton from './PauseButton';
 import ToggleSlider from './ToggleSlider';
@@ -28,7 +28,7 @@ export {
 	ClickOutside,
 	CliqzFeature,
 	DonutGraph,
-	GhosteryFeatures,
+	GhosteryFeature,
 	NotScanned,
 	PauseButton,
 	ToggleSlider,

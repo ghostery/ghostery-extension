@@ -67,12 +67,13 @@ class CliqzFeature extends React.Component {
 			active: this.props.active,
 			clickable: !this.props.cliqzInactive,
 			notClickable: this.props.cliqzInactive,
-		})
+		});
 		const featureName = `drawer_title_${this.props.feature}`;
+
 		return (
 			<div className={cliqzFeatureClassNames} onClick={this.clickCliqzFeature}>
 				<div className="CliqzFeature__count">{this.getCount()}</div>
-				<div className="CliqzFeature__icon g-tooltip"></div>
+				<div className="CliqzFeature__icon g-tooltip" />
 				<div className="CliqzFeature__feature-name">
 					{ t({ featureName }) }
 				</div>

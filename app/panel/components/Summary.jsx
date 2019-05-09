@@ -22,7 +22,7 @@ import globals from '../../../src/classes/Globals';
 import {
 	CliqzFeature,
 	DonutGraph,
-	GhosteryFeatures,
+	GhosteryFeature,
 	NotScanned,
 	PauseButton
 } from './BuildingBlocks';
@@ -426,47 +426,59 @@ class Summary extends React.Component {
 				</div>
 			</div>
 		);
+		//
+		// <div className="ghostery-features-container">
+		// 	<GhosteryFeatures
+		// 		clickButton={this.clickSitePolicy}
+		// 		sitePolicy={this.props.sitePolicy}
+		// 		isAbPause={abPause}
+		// 		isStacked={is_expert}
+		// 		isInactive={this.props.paused_blocking || this.state.disableBlocking}
+		// 		isCondensed={showCondensed}
+		// 	/>
+		//
+		// 	{!abPause && pauseButtonComponent}
+		// </div>
 
 		// Trust, Restrict, Pause
-		const trustRestrictAndPause = (
-			<div>
-				<div className="Summary__buttonContainer">
-					<GhosteryFeature
-						clickButton={this.clickSitePolicy}
-						sitePolicy={this.props.sitePolicy}
-						isStacked={is_expert}
-						isInactive={this.props.paused_blocking || this.state.disableBlocking}
-						isCondensed={showCondensed}
-					/>
-				</div>
-				<div className="Summary__buttonContainer Summary__buttonContainer--middle">
-					<GhosteryFeature
-						{this.clickSitePolicy}
-						sitePolicy={this.props.sitePolicy}
-						isStacked={is_expert}
-						isInactive={this.props.paused_blocking || this.state.disableBlocking}
-						isCondensed={showCondensed}
-					/>
-				</div>
-				<div className="Summary__buttonContainer">
-					<PauseButton
-						isPaused={this.props.paused_blocking}
-						isPausedTimeout={this.props.paused_blocking_timeout}
-						clickPause={this.clickPauseButton}
-						dropdownItems={this.pauseOptions}
-						isCentered={is_expert}
-						isCondensed={showCondensed}
-					/>
-				</div>
+		const trustButtonText = showCondensed ?
+			'' :
+			(sitePolicy === 2 ? t('summary_trust_site_active') : t('summary_trust_site');
+		const ghosteryTrustButton = (
+			<div className="Summary__ghosteryFeatureContainer g-tooltip">
+				<GhosteryFeature
+					handleClick={this.clickSitePolicy}
+					type="trust"
+					sitePolicy={sitePolicy}
+					blockingPausedOrDisabled={paused_blocking || this.state.disableBlocking}
+					text={trustButtonText}
+					tooltipBody={}
+				/>
 			</div>
 		);
-		//
-		// <Tooltip
-		// 	header={isSmaller && t('tooltip_anti_track')}
-		// 	body={!isCondensed && (antiTrackingActive ? t('tooltip_anti_track_body_on') : t('tooltip_anti_track_body'))}
-		// 	position={isCondensed ? 'right' : isSmaller ? 'top top-right' : 'top'}
-		// />
-		//
+		const ghosteryRestrictButton = (
+			<div className="Summary__ghosteryFeatureContainer Summary__ghosteryFeatureContainer--middle g-tooltip">
+				<GhosteryFeature
+					clickButton={this.clickSitePolicy}
+					sitePolicy={this.props.sitePolicy}
+					isStacked={is_expert}
+					isInactive={this.props.paused_blocking || this.state.disableBlocking}
+					isCondensed={showCondensed}
+				/>
+			</div>
+		);
+		const pauseButton = (
+			<div className="Summary__pauseButtonContainer">
+				<PauseButton
+					isPaused={this.props.paused_blocking}
+					isPausedTimeout={this.props.paused_blocking_timeout}
+					clickPause={this.clickPauseButton}
+					dropdownItems={this.pauseOptions}
+					isCentered={is_expert}
+					isCondensed={showCondensed}
+				/>
+			</div>
+		);
 
 		// Enhanced Anti-Tracking, Enhanced Ad Blocking, Smart Blocking
 		const isCliqzInactive = paused_blocking || sitePolicy || this.state.disableBlocking || IS_CLIQZ;
@@ -474,48 +486,48 @@ class Summary extends React.Component {
 			<div className="Summary__cliqzFeatureContainer">
 				<CliqzFeature
 					clickButton={this.clickCliqzFeature}
-					type='enable_anti_tracking'
+					type="enable_anti_tracking"
 					data={antiTracking}
 					active={enable_anti_tracking}
 					cliqzInactive={isCliqzInactive}
-					onLocaleKey='alert_anti_track_on'
-					offLocaleKey='alert_anti_track_off'
+					onLocaleKey="alert_anti_track_on"
+					offLocaleKey="alert_anti_track_off"
 				/>
 				<Tooltip
 					header={is_expert && t('tooltip_anti_track')}
-					body-{!showCondensed && (enable_anti_tracking ? t('tooltip_anti_track_body_on') : t('tooltip_anti_track_body'))}
-					position={showCondensed ? 'right' : isSmaller ? 'top top-right' : 'top'}
+					body={!showCondensed && (enable_anti_tracking ? t('tooltip_anti_track_body_on') : t('tooltip_anti_track_body'))}
+					position={showCondensed ? 'right' : is_expert ? 'top top-right' : 'top'}
 				/>
 			</div>
-		)
+		);
 		const cliqzAdBlock = (
 			<div className="Summary__cliqzFeatureContainer">
 				<CliqzFeature
 					clickButton={this.clickCliqzFeature}
-					type='enable_ad_block'
+					type="enable_ad_block"
 					data={antiTracking}
 					active={enable_ad_block}
 					cliqzInactive={isCliqzInactive}
-					onLocaleKey='alert_ad_block_on'
-					offLocaleKey='alert_ad_block_off'
+					onLocaleKey="alert_ad_block_on"
+					offLocaleKey="alert_ad_block_off"
 				/>
 				<Tooltip
 					header={is_expert && t('tooltip_ad_block')}
-					body={!showCondensed && enable_ad_block ? t('tooltip_ad_block_body_on') : t('tooltip_ad_block_body'))}
+					body={!showCondensed && (enable_ad_block ? t('tooltip_ad_block_body_on') : t('tooltip_ad_block_body'))}
 					position={showCondensed ? 'right' : 'top'}
 				/>
 			</div>
-		)
+		);
 		const cliqzSmartBlock = (
 			<div className="Summary__cliqzFeatureContainer">
 				<CliqzFeature
 					clickButton={this.clickCliqzFeature}
-					type='enable_smart_block'
+					type="enable_smart_block"
 					data={antiTracking}
 					active={enable_smart_block}
 					cliqzInactive={isCliqzInactive}
-					onLocaleKey='alert_smart_block_on'
-					offLocaleKey='alert_smart_block_off'
+					onLocaleKey="alert_smart_block_on"
+					offLocaleKey="alert_smart_block_off"
 				/>
 				<Tooltip
 					header={is_expert && t('tooltip_smart_block')}
@@ -523,7 +535,7 @@ class Summary extends React.Component {
 					position={showCondensed ? 'right' : is_expert ? 'top top-left' : 'top'}
 				/>
 			</div>
-		)
+		);
 
 		const statsNavButton = (
 			<div className={summaryViewStatsButton}>
@@ -552,7 +564,6 @@ class Summary extends React.Component {
 			'Summary--expert': is_expert && !is_expanded,
 			'Summary--condensed': showCondensed,
 		});
-
 		return (
 			<div className={summaryClassNames}>
 				{!showCondensed && this.state.disableBlocking && (<NotScanned isSmall={is_expert} />)}
@@ -569,8 +580,12 @@ class Summary extends React.Component {
 					<div className="Summary__spaceTaker" />
 				)}
 
-				{trustRestrictAndPause}
-				<div className="Summary__cliqzFeaturesContainer">
+				<div className="Summary__ghosteryFeaturesContainer"> /* inactive, stacked */
+					{ghosteryTrustButton}
+					{ghosteryRestrictButton}
+					{pauseButton}
+				</div>
+				<div className="Summary__cliqzFeaturesContainer"> /* inactive, stacked */
 					{cliqzAntiTracking}
 					{cliqzAdBlock}
 					{cliqzSmartBlock}
