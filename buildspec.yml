@@ -12,8 +12,8 @@ phases:
       - choco install --confirm --limit-output --no-progress --ignore-checksums git nodejs yarn opera
       - Add-Content -Path $env:MOABCONFIG_PATH -Value '[projects]'
       - Add-Content -Path $env:MOABCONFIG_PATH -Value '  [projects.ghostery-extension]'
-      - Add-Content -Path $env:MOABCONFIG_PATH -Value '    edge_makepri_path = "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.17763.0\\x64\\makepri.exe"'
-      - Add-Content -Path $env:MOABCONFIG_PATH -Value '    edge_makeappx_path = "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.17763.0\\x64\\makeappx.exe"'
+      - Add-Content -Path $env:MOABCONFIG_PATH -Value '    edge_makepri_path = "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.1.18362.1\\x64\\makepri.exe"'
+      - Add-Content -Path $env:MOABCONFIG_PATH -Value '    edge_makeappx_path = "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.1.18362.1\\x64\\makeappx.exe"'
   pre_build:
     commands:
       - '& $env:YARN_BIN install --silent'
