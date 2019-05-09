@@ -13,6 +13,7 @@
 
 import React from 'react';
 import ClassNames from 'classnames';
+import Tooltip from '../Tooltip';
 
 /**
  * @class Rendering and interaction for Ghostery feature button toggles
@@ -23,6 +24,36 @@ class GhosteryFeature extends React.Component {
 		super(props);
 
 		this.handleClick = this.handleClick.bind(this);
+	}
+
+	getButtonText() {
+		const { sitePolicy, showText, type } = this.props;
+
+		if (!showText) {
+			return '';
+		}
+
+		switch (type) {
+			case 'trust':
+				return (sitePolicy === 2 ? t('summary_trust_site_active') : t('summary_trust_site'));
+			case 'restrict':
+				return (sitePolicy === 1 ? t('summary_restrict_site_active') : t('summary_restrict_site'));
+			default:
+				return 'Check button type you are passing to GhosteryFeature for typos and make sure it is being handled by getButtonText';
+		}
+	}
+
+	getTooltipText() {
+		const { sitePolicy, type } = this.props;
+
+		switch (type) {
+			case 'trust':
+				return (sitePolicy === 2 ? t('tooltip_trust_on') : t('tooltip_trust_off'));
+			case 'restrict':
+				return (sitePolicy === 1 ? t('tooltip_restrict_on') : t('tooltip_restrict'));
+			default:
+				return 'Check button type you are passing to GhosteryFeature for typos and make sure it is being handled by getTooltipText';
+		}
 	}
 
 	handleClick() {
@@ -37,12 +68,13 @@ class GhosteryFeature extends React.Component {
 		const {
 			blockingPausedOrDisabled,
 			sitePolicy,
+			tooltipPosition,
 			type
 		} = this.props;
 
 		const typeModifier = `GhosteryFeatureButton--${type}`;
 		const active = (type === 'trust' && sitePolicy === 2) || (type === 'restrict' && sitePolicy === 1);
-		const ghosteryFeatureClassNames = ClassNames('GhosteryFeatureButton', {typeModifier}, {
+		const ghosteryFeatureClassNames = ClassNames('GhosteryFeatureButton', { typeModifier }, {
 			'GhosteryFeatureButton--active': active,
 			clickable: !blockingPausedOrDisabled,
 			notClickable: blockingPausedOrDisabled,
@@ -50,126 +82,15 @@ class GhosteryFeature extends React.Component {
 
 		return (
 			<div className={ghosteryFeatureClassNames} onClick={this.handleClick}>
-				<span className="GhosteryFeatureButton__text">
-					{text}
-				</span>
-			</div>
-		)
-	})
-
-		return (
-			<div className={trustClassNames} onClick={this.clickTrustButton}>
 				<span className="flex-container align-center-middle full-height">
-					<span className="button-text">
-						{this.getTrustText()}
+					<span className="GhosteryFeatureButton__text">
+						{this.getButtonText()}
 					</span>
 				</span>
-				<Tooltip body={(sitePolicy === 2) ? t('tooltip_trust_on') : t('tooltip_trust')} position={(isStacked) ? 'right' : 'top'} />
-			</div>
-			<div className={restrictClassNames} onClick={this.clickRestrictButton}>
-				<span className="flex-container align-center-middle full-height">
-					<span className="button-text">
-						{this.getRestrictText()}
-					</span>
-				</span>
-				<Tooltip body={(sitePolicy === 1) ? t('tooltip_restrict_on') : t('tooltip_restrict')} position={(isStacked) ? 'right' : 'top'} />
+				<Tooltip body={this.getTooltipText()} position={tooltipPosition}/>
 			</div>
 		);
 	}
 }
 
-class GhosteryFeatures extends React.Component {
-	constructor(props) {
-		super(props);
-
-		// Event Bindings
-		this.clickTrustButton = this.clickTrustButton.bind(this);
-		this.clickCustomButton = this.clickCustomButton.bind(this);
-		this.clickRestrictButton = this.clickRestrictButton.bind(this);
-		this.getTrustText = this.getTrustText.bind(this);
-		this.getRestrictText = this.getRestrictText.bind(this);
-	}
-
-	/**
-	 * Gets the text for the Trust Button under different conditions
-	 * @return {String} The text for the Trust Button as a string
-	 */
-	getTrustText() {
-		if (this.props.isCondensed) {
-			return '';
-		} else if (this.props.sitePolicy === 2) {
-			return t('summary_trust_site_active');
-		}
-		return t('summary_trust_site');
-	}
-
-	/**
-	 * Gets the text for the Restrict Button under different conditions
-	 * @return {String} The text for the Restrict Button as a string
-	 */
-	getRestrictText() {
-		if (this.props.isCondensed) {
-			return '';
-		} else if (this.props.sitePolicy === 1) {
-			return t('summary_restrict_site_active');
-		}
-		return t('summary_restrict_site');
-	}
-
-	/**
-	 * React's required render function. Returns JSX
-	 * @return {JSX} JSX for rendering the Ghostery Features portion of the Summary View
-	 */
-	render() {
-		const {
-			isInactive,
-			isStacked,
-			isCondensed,
-			sitePolicy
-		} = this.props;
-
-		const buttonGroupClassNames = ClassNames('button-group', {
-			inactive: isInactive,
-			stacked: isStacked,
-		});
-		const trustClassNames = ClassNames('button', 'button-trust', 'g-tooltip', {
-			'button-top': isCondensed && isStacked,
-			condensed: isCondensed,
-			active: sitePolicy === 2,
-			clickable: !isInactive,
-			'not-clickable': isInactive,
-		});
-		const restrictClassNames = ClassNames('button', 'button-restrict', 'g-tooltip', {
-			'button-center': isCondensed && isStacked,
-			condensed: isCondensed,
-			active: sitePolicy === 1,
-			clickable: !isInactive,
-			'not-clickable': isInactive,
-		});
-
-		return (
-			<div className="sub-component ghostery-features">
-				<div className={buttonGroupClassNames}>
-					<div className={trustClassNames} onClick={this.clickTrustButton}>
-						<span className="flex-container align-center-middle full-height">
-							<span className="button-text">
-								{this.getTrustText()}
-							</span>
-						</span>
-						<Tooltip body={(sitePolicy === 2) ? t('tooltip_trust_on') : t('tooltip_trust')} position={(isStacked) ? 'right' : 'top'} />
-					</div>
-					<div className={restrictClassNames} onClick={this.clickRestrictButton}>
-						<span className="flex-container align-center-middle full-height">
-							<span className="button-text">
-								{this.getRestrictText()}
-							</span>
-						</span>
-						<Tooltip body={(sitePolicy === 1) ? t('tooltip_restrict_on') : t('tooltip_restrict')} position={(isStacked) ? 'right' : 'top'} />
-					</div>
-				</div>
-			</div>
-		);
-	}
-}
-
-export default GhosteryFeatures;
+export default GhosteryFeature;

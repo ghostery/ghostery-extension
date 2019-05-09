@@ -441,9 +441,6 @@ class Summary extends React.Component {
 		// </div>
 
 		// Trust, Restrict, Pause
-		const trustButtonText = showCondensed ?
-			'' :
-			(sitePolicy === 2 ? t('summary_trust_site_active') : t('summary_trust_site');
 		const ghosteryTrustButton = (
 			<div className="Summary__ghosteryFeatureContainer g-tooltip">
 				<GhosteryFeature
@@ -451,8 +448,8 @@ class Summary extends React.Component {
 					type="trust"
 					sitePolicy={sitePolicy}
 					blockingPausedOrDisabled={paused_blocking || this.state.disableBlocking}
-					text={trustButtonText}
-					tooltipBody={}
+					showText={showCondensed}
+					tooltipPosition={is_expert ? 'right' : 'top'}
 				/>
 			</div>
 		);
