@@ -13,6 +13,7 @@ phases:
       - Add-Content -Path $env:MOABCONFIG_PATH -Value '  [projects.ghostery-extension]'
       - Add-Content -Path $env:MOABCONFIG_PATH -Value '    edge_makepri_path = "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.1.18362.0\\x64\\makepri.exe"'
       - Add-Content -Path $env:MOABCONFIG_PATH -Value '    edge_makeappx_path = "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.1.18362.0\\x64\\makeappx.exe"'
+      - Dir "C:\\Program Files (x86)\\Windows Kits\\10\\bin"
   pre_build:
     commands:
       - '& $env:YARN_BIN install --silent'
