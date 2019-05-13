@@ -279,15 +279,19 @@ class Summary extends React.Component {
 		this.props.actions.toggleCliqzFeature(feature, status);
 	}
 
+	isPlusSubscriber() {
+		const { user } = this.props;
+
+		return user && user.subscriptionsPlus;
+	}
+
 	/**
 	 * Handles clicking on the green upgrade banner or gold subscriber badge
 	 */
 	clickUpgradeBannerOrGoldPlusIcon = () => {
 		// TODO check whether this is the message we want to be sending now
 		sendMessage('ping', 'plus_panel_from_badge');
-		const { user } = this.props;
-		const plusSubscriber = user && user.subscriptionsPlus;
-		this.props.history.push(plusSubscriber ? '/subscription/info' : `/subscribe/${!!user}`);
+		this.props.history.push(this.isPlusSubscriber() ? '/subscription/info' : `/subscribe/${!!this.props.user}`);
 	}
 
 	/**
@@ -296,18 +300,11 @@ class Summary extends React.Component {
 	 */
 	renderDonut() {
 		const {
-			adBlock,
-			antiTracking,
 			categories,
-			enable_ad_block,
-			enable_anti_tracking,
 			is_expert,
 			paused_blocking,
 			sitePolicy,
-			trackerCounts,
 		} = this.props;
-		const antiTrackUnsafe = enable_anti_tracking && antiTracking && antiTracking.totalUnsafeCount || 0;
-		const adBlockBlocked = enable_ad_block && adBlock && adBlock.totalCount || 0;
 
 		return (
 			<div className="Summary__donutContainer">
@@ -315,7 +312,7 @@ class Summary extends React.Component {
 					categories={categories}
 					renderRedscale={sitePolicy === 1}
 					renderGreyscale={paused_blocking}
-					totalCount={trackerCounts.allowed + trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
+					totalCount={this.totalTrackersFound()}
 					ghosteryFeatureSelect={sitePolicy}
 					isSmall={is_expert}
 					clickDonut={this.clickDonut}
@@ -324,15 +321,24 @@ class Summary extends React.Component {
 		);
 	}
 
+	pageHost() {
+		return this.props.pageHost || 'page_host';
+	}
+
+	hidePageHost(host = null) {
+		const pageHost = host || this.pageHost();
+
+		return (pageHost.split('.').length < 2);
+	}
+
 	/**
 	 * Render helper for the page host readout
 	 * @return {JSX} JSX for rendering the page host readout
 	 */
 	renderPageHostReadout() {
-		const pageHost = this.props.pageHost || 'page_host';
-		const hidePageHost = (pageHost.split('.').length < 2);
+		const pageHost = this.pageHost();
 		const pageHostContainerClassNames = ClassNames('Summary__pageHostContainer', {
-			invisible: hidePageHost,
+			invisible: this.hidePageHost(pageHost),
 		});
 
 		return (
@@ -484,16 +490,15 @@ class Summary extends React.Component {
 	 * @return {JSX} JSX for rendering the plus upgrade banner or subscriber icon
 	 */
 	renderPlusUpgradeBannerOrSubscriberIcon() {
-		const { user } = this.props;
-		const plusSubscriber = user && user.subscriptionsPlus;
+		const isPlusSubscriber = this.isPlusSubscriber();
 
 		return (
 			<div onClick={this.clickUpgradeBannerOrGoldPlusIcon}>
-				{plusSubscriber &&
+				{isPlusSubscriber &&
 				<ReactSVG path="/app/images/panel/gold-plus-icon.svg" className="gold-plus-icon" />
 				}
 
-				{!plusSubscriber &&
+				{!isPlusSubscriber &&
 				<div className="upgrade-banner-container">
 					<span className="upgrade-banner-text">{t('subscription_upgrade_to')}</span>
 					<ReactSVG path="/app/images/panel/upgrade-banner-plus.svg" className="upgrade-banner-plus" />
@@ -519,21 +524,11 @@ class Summary extends React.Component {
 			smartBlock,
 			paused_blocking,
 			sitePolicy,
-			trackerCounts,
 		} = this.props;
 		const { disableBlocking, trackerLatencyTotal } = this.state;
 		const showCondensed = is_expert && is_expanded;
 		const antiTrackUnsafe = enable_anti_tracking && antiTracking && antiTracking.totalUnsafeCount || 0;
 		const adBlockBlocked = enable_ad_block && adBlock && adBlock.totalCount || 0;
-		let sbBlocked = smartBlock && smartBlock.blocked && Object.keys(smartBlock.blocked).length || 0;
-		if (sbBlocked === trackerCounts.sbBlocked) {
-			sbBlocked = 0;
-		}
-		let sbAllowed = smartBlock && smartBlock.unblocked && Object.keys(smartBlock.unblocked).length || 0;
-		if (sbAllowed === trackerCounts.sbAllowed) {
-			sbAllowed = 0;
-		}
-		const sbAdjust = enable_smart_block && (sbBlocked - sbAllowed) || 0;
 
 		const requestsModifiedCount = antiTrackUnsafe + adBlockBlocked;
 
