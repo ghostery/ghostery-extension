@@ -343,6 +343,112 @@ class Summary extends React.Component {
 	}
 
 	/**
+	 * Render helper for the total trackers found readout shown in condensed view
+	 * @return {JSX} JSX for rendering the condensed view total trackers found readout
+	 */
+	renderTotalTrackersFound() {
+		const {
+			adBlock,
+			antiTracking,
+			enable_ad_block,
+			enable_anti_tracking,
+			trackerCounts,
+		} = this.props;
+		const antiTrackUnsafe = enable_anti_tracking && antiTracking && antiTracking.totalUnsafeCount || 0;
+		const adBlockBlocked = enable_ad_block && adBlock && adBlock.totalCount || 0;
+
+		return (
+			<div className="Summary_totalTrackerCount Ghostery--clickable" onClick={this.clickTrackersCount}>
+				<span className="summary-total-tracker-count g-tooltip">
+					{trackerCounts.allowed + trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
+					<Tooltip
+						header={t('panel_tracker_total_tooltip')}
+						position="right"
+					/>
+				</span>
+			</div>
+		);
+	}
+
+	sbBlocked() {
+		const { smartBlock, trackerCounts } = this.props;
+
+		let sbBlocked = smartBlock && smartBlock.blocked && Object.keys(smartBlock.blocked).length || 0;
+		if (sbBlocked === trackerCounts.sbBlocked) {
+			sbBlocked = 0;
+		}
+
+		return sbBlocked;
+	}
+
+	sbAllowed() {
+		const { smartBlock, trackerCounts } = this.props;
+
+		let sbAllowed = smartBlock && smartBlock.unblocked && Object.keys(smartBlock.unblocked).length || 0;
+		if (sbAllowed === trackerCounts.sbAllowed) {
+			sbAllowed = 0;
+		}
+
+		return sbAllowed;
+	}
+
+	sbAdjust() {
+		const { enable_smart_block } = this.props;
+
+		return enable_smart_block && (this.sbBlocked() - this.sbAllowed()) || 0;
+	}
+
+	totalTrackersBlockedCount() {
+		const {
+			paused_blocking,
+			sitePolicy,
+			trackerCounts
+		} = this.props;
+
+		let totalTrackersBlockedCount;
+		if (paused_blocking || sitePolicy === 2) {
+			totalTrackersBlockedCount = 0;
+		} else if (sitePolicy === 1) {
+			totalTrackersBlockedCount = trackerCounts.blocked + trackerCounts.allowed || 0;
+		} else {
+			totalTrackersBlockedCount = trackerCounts.blocked + this.sbAdjust() || 0;
+		}
+
+		return totalTrackersBlockedCount;
+	}
+
+	/**
+	 * Render helper for the total trackers blocked readout
+	 * @return {JSX} JSX for rendering the total trackers blocked readout
+	 */
+	renderTotalTrackersBlocked() {
+		const {
+			is_expanded,
+			is_expert,
+		} = this.props;
+		const isCondensed = is_expert && is_expanded;
+
+		const totalTrackersBlockedContainerClassNames = ClassNames('Summary__pageStatContainer', {
+			'Ghostery--clickable': is_expert,
+		});
+		const totalTrackersBlockedClassNames = ClassNames('GhosteryKVReadout', 'GhosteryKVReadout--totalTrackersBlocked', {
+			'GhosteryKVReadout--withoutKey': isCondensed,
+			'GhosteryKVReadout--summaryCondensed': isCondensed,
+		});
+
+		return (
+			<div className={totalTrackersBlockedContainerClassNames} onClick={this.clickTrackersBlocked}>
+				<div className={totalTrackersBlockedClassNames}>
+					<span className="GhosteryKVReadout__text">{t('trackers_blocked')} </span>
+					<span className="GhosteryKVReadout__value">
+						{this.totalTrackersBlockedCount()}
+					</span>
+				</div>
+			</div>
+		);
+	}
+
+	/**
 	 * Render helper for the stats nav button
 	 * @return {JSX} JSX for rendering the stats nav button
 	 */
@@ -417,44 +523,6 @@ class Summary extends React.Component {
 
 		const requestsModifiedCount = antiTrackUnsafe + adBlockBlocked;
 
-		let totalTrackersBlockedCount;
-		if (paused_blocking || sitePolicy === 2) {
-			totalTrackersBlockedCount = 0;
-		} else if (sitePolicy === 1) {
-			totalTrackersBlockedCount = trackerCounts.blocked + trackerCounts.allowed || 0;
-		} else {
-			totalTrackersBlockedCount = trackerCounts.blocked + sbAdjust || 0;
-		}
-
-		const totalTrackersFound = (
-			<div className="Summary_totalTrackerCount Ghostery--clickable" onClick={this.clickTrackersCount}>
-				<span className="summary-total-tracker-count g-tooltip">
-					{trackerCounts.allowed + trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
-					<Tooltip
-						header={t('panel_tracker_total_tooltip')}
-						position="right"
-					/>
-				</span>
-			</div>
-		);
-
-		const totalTrackersBlockedContainerClassNames = ClassNames('Summary__pageStatContainer', {
-			'Ghostery--clickable': is_expert,
-		});
-		const totalTrackersBlockedClassNames = ClassNames('GhosteryKVReadout', 'GhosteryKVReadout--totalTrackersBlocked', {
-			'GhosteryKVReadout--withoutKey': showCondensed,
-			'GhosteryKVReadout--summaryCondensed': showCondensed,
-		});
-		const totalTrackersBlocked = (
-			<div className={totalTrackersBlockedContainerClassNames} onClick={this.clickTrackersBlocked}>
-				<div className={totalTrackersBlockedClassNames}>
-					<span className="GhosteryKVReadout__text">{t('trackers_blocked')} </span>
-					<span className="GhosteryKVReadout__value">
-						{totalTrackersBlockedCount}
-					</span>
-				</div>
-			</div>
-		);
 
 		const totalRequestsModifiedClassNames = ClassNames('GhosteryKVReadout', 'GhosteryKVReadout--totalRequestsModified', {
 			'GhosteryKVReadout--withoutKey': showCondensed,
@@ -585,9 +653,9 @@ class Summary extends React.Component {
 				{!showCondensed && !disableBlocking && this.renderDonut()}
 				{!showCondensed && !disableBlocking && !is_expert && this.renderPageHostReadout()}
 
-				{showCondensed && !disableBlocking && totalTrackersFound}
+				{showCondensed && !disableBlocking && this.renderTotalTrackersFound()}
 
-				{!disableBlocking && totalTrackersBlocked}
+				{!disableBlocking && this.renderTotalTrackersBlocked()}
 				{!disableBlocking && totalRequestsModified}
 				{!disableBlocking && pageLoadTime}
 
