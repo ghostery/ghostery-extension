@@ -291,6 +291,58 @@ class Summary extends React.Component {
 	}
 
 	/**
+	 * Render helper for the donut
+	 * @return {JSX} JSX for rendering the donut
+	 */
+	renderDonut() {
+		const {
+			adBlock,
+			antiTracking,
+			categories,
+			enable_ad_block,
+			enable_anti_tracking,
+			is_expert,
+			paused_blocking,
+			sitePolicy,
+			trackerCounts,
+		} = this.props;
+		const antiTrackUnsafe = enable_anti_tracking && antiTracking && antiTracking.totalUnsafeCount || 0;
+		const adBlockBlocked = enable_ad_block && adBlock && adBlock.totalCount || 0;
+
+		return (
+			<div className="Summary__donutContainer">
+				<DonutGraph
+					categories={categories}
+					renderRedscale={sitePolicy === 1}
+					renderGreyscale={paused_blocking}
+					totalCount={trackerCounts.allowed + trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
+					ghosteryFeatureSelect={sitePolicy}
+					isSmall={is_expert}
+					clickDonut={this.clickDonut}
+				/>
+			</div>
+		);
+	}
+
+	/**
+	 * Render helper for the page host readout
+	 * @return {JSX} JSX for rendering the page host readout
+	 */
+	renderPageHostReadout() {
+		const pageHost = this.props.pageHost || 'page_host';
+		const hidePageHost = (pageHost.split('.').length < 2);
+		const pageHostContainerClassNames = ClassNames('Summary__pageHostContainer', {
+			invisible: hidePageHost,
+		});
+
+		return (
+			<div className={pageHostContainerClassNames}>
+				<span className="GhosteryTextLabel">{pageHost}</span>
+			</div>
+		);
+	}
+
+	/**
 	 * Render helper for the stats nav button
 	 * @return {JSX} JSX for rendering the stats nav button
 	 */
@@ -354,8 +406,6 @@ class Summary extends React.Component {
 		const antiTrackUnsafe = enable_anti_tracking && antiTracking && antiTracking.totalUnsafeCount || 0;
 		const adBlockBlocked = enable_ad_block && adBlock && adBlock.totalCount || 0;
 		let sbBlocked = smartBlock && smartBlock.blocked && Object.keys(smartBlock.blocked).length || 0;
-		const pageHost = this.props.pageHost || 'page_host';
-		const hidePageHost = (pageHost.split('.').length < 2);
 		if (sbBlocked === trackerCounts.sbBlocked) {
 			sbBlocked = 0;
 		}
@@ -385,29 +435,6 @@ class Summary extends React.Component {
 						position="right"
 					/>
 				</span>
-			</div>
-		);
-
-		const donut = (
-			<div className="Summary__donutContainer">
-				<DonutGraph
-					categories={this.props.categories}
-					renderRedscale={sitePolicy === 1}
-					renderGreyscale={paused_blocking}
-					totalCount={trackerCounts.allowed + trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
-					ghosteryFeatureSelect={sitePolicy}
-					isSmall={is_expert}
-					clickDonut={this.clickDonut}
-				/>
-			</div>
-		);
-
-		const pageHostContainerClassNames = ClassNames('Summary__pageHostContainer', {
-			invisible: hidePageHost,
-		});
-		const pageHostReadout = (
-			<div className={pageHostContainerClassNames}>
-				<span className="GhosteryTextLabel">{pageHost}</span>
 			</div>
 		);
 
@@ -555,8 +582,8 @@ class Summary extends React.Component {
 		return (
 			<div className={summaryClassNames}>
 				{!showCondensed && disableBlocking && (<NotScanned isSmall={is_expert} />)}
-				{!showCondensed && !disableBlocking && donut}
-				{!showCondensed && !disableBlocking && !is_expert && pageHostReadout}
+				{!showCondensed && !disableBlocking && this.renderDonut()}
+				{!showCondensed && !disableBlocking && !is_expert && this.renderPageHostReadout()}
 
 				{showCondensed && !disableBlocking && totalTrackersFound}
 
