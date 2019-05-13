@@ -291,6 +291,47 @@ class Summary extends React.Component {
 	}
 
 	/**
+	 * Render helper for the stats nav button
+	 * @return {JSX} JSX for rendering the stats nav button
+	 */
+	renderStatsNavButton() {
+		const summaryViewStatsButton = ClassNames('Summary__statsButton', 'g-tooltip', {
+			hide: this.props.is_expert
+		});
+
+		return (
+			<div className={summaryViewStatsButton}>
+				<NavButton path="/stats" imagePath="../../app/images/panel/graph.svg" />
+				<Tooltip body={t('subscription_history_stats')} position="left" />
+			</div>
+		);
+	}
+
+	/**
+	 * Render helper for the plus upgrade banner or subscriber icon
+	 * @return {JSX} JSX for rendering the plus upgrade banner or subscriber icon
+	 */
+	renderPlusUpgradeBannerOrSubscriberIcon() {
+		const { user } = this.props;
+		const plusSubscriber = user && user.subscriptionsPlus;
+
+		return (
+			<div onClick={this.clickUpgradeBannerOrGoldPlusIcon}>
+				{plusSubscriber &&
+				<ReactSVG path="/app/images/panel/gold-plus-icon.svg" className="gold-plus-icon" />
+				}
+
+				{!plusSubscriber &&
+				<div className="upgrade-banner-container">
+					<span className="upgrade-banner-text">{t('subscription_upgrade_to')}</span>
+					<ReactSVG path="/app/images/panel/upgrade-banner-plus.svg" className="upgrade-banner-plus" />
+				</div>
+				}
+			</div>
+		);
+	}
+
+	/**
 	* React's required render function. Returns JSX
 	* @return {JSX} JSX for rendering the Summary View of the panel
 	*/
@@ -307,11 +348,8 @@ class Summary extends React.Component {
 			paused_blocking,
 			sitePolicy,
 			trackerCounts,
-			user,
 		} = this.props;
 		const { disableBlocking, trackerLatencyTotal } = this.state;
-
-		const plusSubscriber = user && user.subscriptionsPlus;
 		const showCondensed = is_expert && is_expanded;
 		const antiTrackUnsafe = enable_anti_tracking && antiTracking && antiTracking.totalUnsafeCount || 0;
 		const adBlockBlocked = enable_ad_block && adBlock && adBlock.totalCount || 0;
@@ -328,10 +366,6 @@ class Summary extends React.Component {
 		const sbAdjust = enable_smart_block && (sbBlocked - sbAllowed) || 0;
 
 		const requestsModifiedCount = antiTrackUnsafe + adBlockBlocked;
-
-		const summaryViewStatsButton = ClassNames('Summary__statsButton', 'g-tooltip', {
-			hide: is_expert
-		});
 
 		let totalTrackersBlockedCount;
 		if (paused_blocking || sitePolicy === 2) {
@@ -512,28 +546,6 @@ class Summary extends React.Component {
 			</div>
 		);
 
-		const statsNavButton = (
-			<div className={summaryViewStatsButton}>
-				<NavButton path="/stats" imagePath="../../app/images/panel/graph.svg" />
-				<Tooltip body={t('subscription_history_stats')} position="left" />
-			</div>
-		);
-
-		const plusUpgradeBannerOrSubscriberIcon = (
-			<div onClick={this.clickUpgradeBannerOrGoldPlusIcon}>
-				{plusSubscriber &&
-				<ReactSVG path="/app/images/panel/gold-plus-icon.svg" className="gold-plus-icon" />
-				}
-
-				{!plusSubscriber &&
-				<div className="upgrade-banner-container">
-					<span className="upgrade-banner-text">{t('subscription_upgrade_to')}</span>
-					<ReactSVG path="/app/images/panel/upgrade-banner-plus.svg" className="upgrade-banner-plus" />
-				</div>
-				}
-			</div>
-		);
-
 		const summaryClassNames = ClassNames('Summary', {
 			'Summary--simple': !is_expert,
 			'Summary--expert': is_expert && !is_expanded,
@@ -566,9 +578,9 @@ class Summary extends React.Component {
 					{cliqzAdBlock}
 					{cliqzSmartBlock}
 				</div>
-				{statsNavButton}
+				{this.renderStatsNavButton()}
 
-				{!showCondensed && plusUpgradeBannerOrSubscriberIcon}
+				{!showCondensed && this.renderPlusUpgradeBannerOrSubscriberIcon()}
 			</div>
 		);
 	}
