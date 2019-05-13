@@ -470,17 +470,13 @@ class Summary extends React.Component {
 			<div className="Summary__cliqzFeatureContainer">
 				<CliqzFeature
 					clickButton={this.clickCliqzFeature}
-					type="enable_anti_tracking"
+					type="anti_tracking"
 					data={antiTracking}
 					active={enable_anti_tracking}
 					cliqzInactive={isCliqzInactive}
-					onLocaleKey="alert_anti_track_on"
-					offLocaleKey="alert_anti_track_off"
-				/>
-				<Tooltip
-					header={is_expert && t('tooltip_anti_track')}
-					body={!showCondensed && (enable_anti_tracking ? t('tooltip_anti_track_body_on') : t('tooltip_anti_track_body'))}
-					position={showCondensed ? 'right' : is_expert ? 'top top-right' : 'top'}
+					isTooltipHeader={is_expert}
+					isTooltipBody={!showCondensed}
+					tooltipPosition={showCondensed ? 'right' : is_expert ? 'top top-right' : 'top'}
 				/>
 			</div>
 		);
@@ -488,17 +484,13 @@ class Summary extends React.Component {
 			<div className="Summary__cliqzFeatureContainer">
 				<CliqzFeature
 					clickButton={this.clickCliqzFeature}
-					type="enable_ad_block"
+					type="ad_block"
 					data={adBlock}
 					active={enable_ad_block}
 					cliqzInactive={isCliqzInactive}
-					onLocaleKey="alert_ad_block_on"
-					offLocaleKey="alert_ad_block_off"
-				/>
-				<Tooltip
-					header={is_expert && t('tooltip_ad_block')}
-					body={!showCondensed && (enable_ad_block ? t('tooltip_ad_block_body_on') : t('tooltip_ad_block_body'))}
-					position={showCondensed ? 'right' : 'top'}
+					isTooltipHeader={is_expert}
+					isTooltipBody={!showCondensed}
+					tooltipPosition={showCondensed ? 'right' : 'top'}
 				/>
 			</div>
 		);
@@ -506,17 +498,13 @@ class Summary extends React.Component {
 			<div className="Summary__cliqzFeatureContainer">
 				<CliqzFeature
 					clickButton={this.clickCliqzFeature}
-					type="enable_smart_block"
+					type="smart_block"
 					data={smartBlock}
 					active={enable_smart_block}
 					cliqzInactive={isCliqzInactive}
-					onLocaleKey="alert_smart_block_on"
-					offLocaleKey="alert_smart_block_off"
-				/>
-				<Tooltip
-					header={is_expert && t('tooltip_smart_block')}
-					body={!showCondensed && (enable_smart_block ? t('tooltip_smart_block_body_on') : t('tooltip_smart_block_body'))}
-					position={showCondensed ? 'right' : is_expert ? 'top top-left' : 'top'}
+					isTooltipHeader={is_expert}
+					isTooltipBody={!showCondensed}
+					tooltipPosition={showCondensed ? 'right' : is_expert ? 'top top-left' : 'top'}
 				/>
 			</div>
 		);

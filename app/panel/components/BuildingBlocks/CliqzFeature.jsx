@@ -13,6 +13,7 @@
 
 import React from 'react';
 import ClassNames from 'classnames';
+import Tooltip from '../Tooltip';
 
 /**
  * @class Implements rendering and interaction for Cliqz feature icon toggles
@@ -23,55 +24,93 @@ class CliqzFeature extends React.Component {
 	constructor(props) {
 		super(props);
 
-		// Event Bindings
-		this.getCount = this.getCount.bind(this);
 		this.clickCliqzFeature = this.clickCliqzFeature.bind(this);
 	}
 
 	getCount() {
-		if (!this.props.active) {
+		const { active, data, type } = this.props;
+
+		if (!active) {
 			return '-';
 		}
 
-		let blockedCount;
-		let unblockedCount;
-		switch (this.props.type) {
-			case 'enable_anti_tracking':
-				return this.props.data && this.props.data.totalUnsafeCount || 0;
-			case 'enable_ad_block':
-				return this.props.data && this.props.data.totalCount || 0;
-			case 'enable_smart_block':
-				blockedCount = this.props.data && Object.keys(this.props.data.blocked).length || 0;
-				unblockedCount = this.props.data && Object.keys(this.props.data.unblocked).length || 0;
-				return blockedCount + unblockedCount;
-			default:
-				return 0;
+		if (type === 'anti_tracking') {
+			return data && data.totalUnsafeCount || 0;
+		} else if (type === 'ad_block') {
+			return data && data.totalCount || 0;
+		} else if (type === 'smart_block') {
+			const blockedCount = data && Object.keys(data.blocked).length || 0;
+			const unblockedCount = data && Object.keys(data.unblocked).length || 0;
+			return blockedCount + unblockedCount;
 		}
+
+		return 0;
+	}
+
+	getTooltipBodyText() {
+		const { active, isTooltipBody, type } = this.props;
+
+		if (!isTooltipBody) {
+			return false;
+		}
+
+		return active ?
+			t(`tooltip_${type}_body_on`) :
+			t(`tooltip_${type}_body`);
+	}
+
+	getTooltipHeaderText() {
+		const { isTooltipHeader, type } = this.props;
+
+		if (isTooltipHeader) {
+			return false;
+		}
+
+		return t(`tooltip_${type}`);
+	}
+
+	getAlertText() {
+		const { active, type } = this.props;
+
+		return active ?
+			t(`alert_${type}_on`) :
+			t(`alert_${type}`);
 	}
 
 	clickCliqzFeature() {
-		if (this.props.cliqzInactive) {
+		const {
+			active,
+			clickButton,
+			cliqzInactive,
+			type
+		} = this.props;
+
+		if (cliqzInactive) {
 			return;
 		}
 
-		this.props.clickButton({
-			feature: this.props.type,
-			status: this.props.active,
-			text: !this.props.active ? t(this.props.onLocaleKey) : t(this.props.offLocaleKey)
+		clickButton({
+			feature: `enable_${type}`,
+			status: active,
+			text: this.getAlertText()
 		});
 	}
 
 	render() {
-		const specificFeatureModifier = `CliqzFeature--${this.props.type}`;
-		const cliqzFeatureClassNames = ClassNames('CliqzFeature', specificFeatureModifier, {
-			active: this.props.active,
-			clickable: !this.props.cliqzInactive,
-			notClickable: this.props.cliqzInactive,
-		});
-		const featureName = t(`drawer_title_${this.props.type}`);
+		const {
+			active,
+			cliqzInactive,
+			tooltipPosition,
+			type
+		} = this.props;
 
-		console.error('IVZ featureName in CliqzFeature#render:');
-		console.error(featureName);
+		const specificFeatureModifier = `CliqzFeature--${type}`;
+		const cliqzFeatureClassNames = ClassNames('CliqzFeature', specificFeatureModifier, {
+			active,
+			clickable: !cliqzInactive,
+			notClickable: cliqzInactive,
+		});
+		const featureName = t(`drawer_title_${type}`);
 
 		return (
 			<div className={cliqzFeatureClassNames} onClick={this.clickCliqzFeature}>
@@ -80,6 +119,11 @@ class CliqzFeature extends React.Component {
 				<div className="CliqzFeature__feature-name">
 					{featureName}
 				</div>
+				<Tooltip
+					header={this.getTooltipHeaderText()}
+					body={this.getTooltipBodyText()}
+					position={tooltipPosition}
+				/>
 			</div>
 		);
 	}
