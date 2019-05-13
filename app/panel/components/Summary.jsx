@@ -347,20 +347,10 @@ class Summary extends React.Component {
 	 * @return {JSX} JSX for rendering the condensed view total trackers found readout
 	 */
 	renderTotalTrackersFound() {
-		const {
-			adBlock,
-			antiTracking,
-			enable_ad_block,
-			enable_anti_tracking,
-			trackerCounts,
-		} = this.props;
-		const antiTrackUnsafe = enable_anti_tracking && antiTracking && antiTracking.totalUnsafeCount || 0;
-		const adBlockBlocked = enable_ad_block && adBlock && adBlock.totalCount || 0;
-
 		return (
 			<div className="Summary_totalTrackerCount Ghostery--clickable" onClick={this.clickTrackersCount}>
 				<span className="summary-total-tracker-count g-tooltip">
-					{trackerCounts.allowed + trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
+					{this.totalTrackersFound()}
 					<Tooltip
 						header={t('panel_tracker_total_tooltip')}
 						position="right"
@@ -368,6 +358,30 @@ class Summary extends React.Component {
 				</span>
 			</div>
 		);
+	}
+
+	adBlockBlocked() {
+		const {
+			adBlock,
+			enable_ad_block,
+		} = this.props;
+
+		return enable_ad_block && adBlock && adBlock.totalCount || 0;
+	}
+
+	antiTrackUnsafe() {
+		const {
+			antiTracking,
+			enable_anti_tracking,
+		} = this.props;
+
+		return enable_anti_tracking && antiTracking && antiTracking.totalUnsafeCount || 0;
+	}
+
+	totalTrackersFound() {
+		const { trackerCounts } = this.props;
+
+		return (trackerCounts.allowed + trackerCounts.blocked + this.antiTrackUnsafe() + this.adBlockBlocked()) || 0;
 	}
 
 	sbBlocked() {
