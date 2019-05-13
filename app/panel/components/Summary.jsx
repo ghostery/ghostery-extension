@@ -307,8 +307,10 @@ class Summary extends React.Component {
 			paused_blocking,
 			sitePolicy,
 			trackerCounts,
-			user
+			user,
 		} = this.props;
+		const { disableBlocking, trackerLatencyTotal } = this.state;
+
 		const plusSubscriber = user && user.subscriptionsPlus;
 		const showCondensed = is_expert && is_expanded;
 		const antiTrackUnsafe = enable_anti_tracking && antiTracking && antiTracking.totalUnsafeCount || 0;
@@ -343,7 +345,7 @@ class Summary extends React.Component {
 		const totalTrackersFound = (
 			<div className="Summary_totalTrackerCount Ghostery--clickable" onClick={this.clickTrackersCount}>
 				<span className="summary-total-tracker-count g-tooltip">
-					{this.props.trackerCounts.allowed + this.props.trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
+					{trackerCounts.allowed + trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
 					<Tooltip
 						header={t('panel_tracker_total_tooltip')}
 						position="right"
@@ -356,10 +358,10 @@ class Summary extends React.Component {
 			<div className="Summary__donutContainer">
 				<DonutGraph
 					categories={this.props.categories}
-					renderRedscale={this.props.sitePolicy === 1}
-					renderGreyscale={this.props.paused_blocking}
-					totalCount={this.props.trackerCounts.allowed + this.props.trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
-					ghosteryFeatureSelect={this.props.sitePolicy}
+					renderRedscale={sitePolicy === 1}
+					renderGreyscale={paused_blocking}
+					totalCount={trackerCounts.allowed + trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
+					ghosteryFeatureSelect={sitePolicy}
 					isSmall={is_expert}
 					clickDonut={this.clickDonut}
 				/>
@@ -410,9 +412,9 @@ class Summary extends React.Component {
 		);
 
 		const pageLoadTimeClassNames = ClassNames('GhosteryKVReadout', 'GhosteryKVReadout--pageLoadTime', {
-			'GhosteryKVReadout--pageLoadTime-fast': this.state.trackerLatencyTotal < 5,
-			'GhosteryKVReadout--pageLoadTime-slow': this.state.trackerLatencyTotal > 10,
-			'GhosteryKVReadout--pageLoadTime-medium': this.state.trackerLatencyTotal > 5 && this.state.trackerLatencyTotal < 10,
+			'GhosteryKVReadout--pageLoadTime-fast': trackerLatencyTotal < 5,
+			'GhosteryKVReadout--pageLoadTime-slow': trackerLatencyTotal > 10,
+			'GhosteryKVReadout--pageLoadTime-medium': trackerLatencyTotal > 5 && trackerLatencyTotal < 10,
 			'GhosteryKVReadout--withoutKey': showCondensed,
 			'GhosteryKVReadout--summaryCondensed': showCondensed,
 		});
@@ -421,7 +423,7 @@ class Summary extends React.Component {
 				<div className={pageLoadTimeClassNames}>
 					<span className="GhosteryKVReadout__text">{t('page_load')} </span>
 					<span className="GhosteryKVReadout__value">
-						{this.state.trackerLatencyTotal ? `${this.state.trackerLatencyTotal} ${t('settings_seconds')}` : '-'}
+						{trackerLatencyTotal ? `${trackerLatencyTotal} ${t('settings_seconds')}` : '-'}
 					</span>
 				</div>
 			</div>
@@ -434,7 +436,7 @@ class Summary extends React.Component {
 					handleClick={this.clickSitePolicy}
 					type="trust"
 					sitePolicy={sitePolicy}
-					blockingPausedOrDisabled={paused_blocking || this.state.disableBlocking}
+					blockingPausedOrDisabled={paused_blocking || disableBlocking}
 					showText={showCondensed}
 					tooltipPosition={is_expert ? 'right' : 'top'}
 				/>
@@ -444,9 +446,10 @@ class Summary extends React.Component {
 			<div className="Summary__ghosteryFeatureContainer Summary__ghosteryFeatureContainer--middle g-tooltip">
 				<GhosteryFeature
 					clickButton={this.clickSitePolicy}
-					sitePolicy={this.props.sitePolicy}
+					type="restrict"
+					sitePolicy={sitePolicy}
 					isStacked={is_expert}
-					isInactive={this.props.paused_blocking || this.state.disableBlocking}
+					isInactive={paused_blocking || disableBlocking}
 					isCondensed={showCondensed}
 				/>
 			</div>
@@ -454,7 +457,7 @@ class Summary extends React.Component {
 		const pauseButton = (
 			<div className="Summary__pauseButtonContainer">
 				<PauseButton
-					isPaused={this.props.paused_blocking}
+					isPaused={paused_blocking}
 					isPausedTimeout={this.props.paused_blocking_timeout}
 					clickPause={this.clickPauseButton}
 					dropdownItems={this.pauseOptions}
@@ -465,7 +468,7 @@ class Summary extends React.Component {
 		);
 
 		// Enhanced Anti-Tracking, Enhanced Ad Blocking, Smart Blocking
-		const isCliqzInactive = paused_blocking || sitePolicy || this.state.disableBlocking || IS_CLIQZ;
+		const isCliqzInactive = paused_blocking || sitePolicy || disableBlocking || IS_CLIQZ;
 		const cliqzAntiTracking = (
 			<div className="Summary__cliqzFeatureContainer">
 				<CliqzFeature
@@ -539,17 +542,17 @@ class Summary extends React.Component {
 		// inactive, stacked on ghosteryFeaturesContainer and cliqzFeaturesContainer
 		return (
 			<div className={summaryClassNames}>
-				{!showCondensed && this.state.disableBlocking && (<NotScanned isSmall={is_expert} />)}
-				{!showCondensed && !this.state.disableBlocking && donut}
-				{!showCondensed && !this.state.disableBlocking && !is_expert && pageHostReadout}
+				{!showCondensed && disableBlocking && (<NotScanned isSmall={is_expert} />)}
+				{!showCondensed && !disableBlocking && donut}
+				{!showCondensed && !disableBlocking && !is_expert && pageHostReadout}
 
-				{showCondensed && !this.state.disableBlocking && totalTrackersFound}
+				{showCondensed && !disableBlocking && totalTrackersFound}
 
-				{!this.state.disableBlocking && totalTrackersBlocked}
-				{!this.state.disableBlocking && totalRequestsModified}
-				{!this.state.disableBlocking && pageLoadTime}
+				{!disableBlocking && totalTrackersBlocked}
+				{!disableBlocking && totalRequestsModified}
+				{!disableBlocking && pageLoadTime}
 
-				{showCondensed && this.state.disableBlocking && is_expert && (
+				{showCondensed && disableBlocking && is_expert && (
 					<div className="Summary__spaceTaker" />
 				)}
 
