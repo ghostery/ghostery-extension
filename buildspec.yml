@@ -9,15 +9,7 @@ phases:
   install:
     commands:
       - choco install --confirm --limit-output --no-progress --ignore-checksums windows-sdk-10.1
-      - Dir "C:\\Program Files (x86)\\Windows Kits\\10\\bin"
-      - Dir "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\arm"
-      - Dir "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\arm64"
-      - Dir "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\x64"
-      - Dir "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\x86"
-      - Dir "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.14393.0"
-      - Dir "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.15063.0"
-      - Dir "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.16299.0"
-      - Dir "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.18362.0"
+      - Dir /s "C:\\Program Files (x86)\\Windows Kits\\10\\bin"
       - Add-Content -Path $env:MOABCONFIG_PATH -Value '[projects]'
       - Add-Content -Path $env:MOABCONFIG_PATH -Value '  [projects.ghostery-extension]'
       - Add-Content -Path $env:MOABCONFIG_PATH -Value '    edge_makepri_path = "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.18362.0\\x64\\makepri.exe"'
