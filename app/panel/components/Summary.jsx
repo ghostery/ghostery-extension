@@ -279,12 +279,6 @@ class Summary extends React.Component {
 		this.props.actions.toggleCliqzFeature(feature, status);
 	}
 
-	isPlusSubscriber() {
-		const { user } = this.props;
-
-		return user && user.subscriptionsPlus;
-	}
-
 	/**
 	 * Handles clicking on the green upgrade banner or gold subscriber badge
 	 */
@@ -294,31 +288,10 @@ class Summary extends React.Component {
 		this.props.history.push(this.isPlusSubscriber() ? '/subscription/info' : `/subscribe/${!!this.props.user}`);
 	}
 
-	/**
-	 * Render helper for the donut
-	 * @return {JSX} JSX for rendering the donut
-	 */
-	renderDonut() {
-		const {
-			categories,
-			is_expert,
-			paused_blocking,
-			sitePolicy,
-		} = this.props;
+	isPlusSubscriber() {
+		const { user } = this.props;
 
-		return (
-			<div className="Summary__donutContainer">
-				<DonutGraph
-					categories={categories}
-					renderRedscale={sitePolicy === 1}
-					renderGreyscale={paused_blocking}
-					totalCount={this.totalTrackersFound()}
-					ghosteryFeatureSelect={sitePolicy}
-					isSmall={is_expert}
-					clickDonut={this.clickDonut}
-				/>
-			</div>
-		);
+		return user && user.subscriptionsPlus;
 	}
 
 	pageHost() {
@@ -329,41 +302,6 @@ class Summary extends React.Component {
 		const pageHost = host || this.pageHost();
 
 		return (pageHost.split('.').length < 2);
-	}
-
-	/**
-	 * Render helper for the page host readout
-	 * @return {JSX} JSX for rendering the page host readout
-	 */
-	renderPageHostReadout() {
-		const pageHost = this.pageHost();
-		const pageHostContainerClassNames = ClassNames('Summary__pageHostContainer', {
-			invisible: this.hidePageHost(pageHost),
-		});
-
-		return (
-			<div className={pageHostContainerClassNames}>
-				<span className="GhosteryTextLabel">{pageHost}</span>
-			</div>
-		);
-	}
-
-	/**
-	 * Render helper for the total trackers found readout shown in condensed view
-	 * @return {JSX} JSX for rendering the condensed view total trackers found readout
-	 */
-	renderTotalTrackersFound() {
-		return (
-			<div className="Summary_totalTrackerCount Ghostery--clickable" onClick={this.clickTrackersCount}>
-				<span className="summary-total-tracker-count g-tooltip">
-					{this.totalTrackersFound()}
-					<Tooltip
-						header={t('panel_tracker_total_tooltip')}
-						position="right"
-					/>
-				</span>
-			</div>
-		);
 	}
 
 	adBlockBlocked() {
@@ -388,6 +326,10 @@ class Summary extends React.Component {
 		const { trackerCounts } = this.props;
 
 		return (trackerCounts.allowed + trackerCounts.blocked + this.antiTrackUnsafe() + this.adBlockBlocked()) || 0;
+	}
+
+	requestsModifiedCount() {
+		return this.antiTrackUnsafe() + this.adBlockBlocked();
 	}
 
 	sbBlocked() {
@@ -437,16 +379,81 @@ class Summary extends React.Component {
 		return totalTrackersBlockedCount;
 	}
 
+	isCondensed() {
+		const { is_expanded, is_expert } = this.props;
+
+		return (is_expert && is_expanded);
+	}
+
+	/**
+	 * Render helper for the donut
+	 * @return {JSX} JSX for rendering the donut
+	 */
+	renderDonut() {
+		const {
+			categories,
+			is_expert,
+			paused_blocking,
+			sitePolicy,
+		} = this.props;
+
+		return (
+			<div className="Summary__donutContainer">
+				<DonutGraph
+					categories={categories}
+					renderRedscale={sitePolicy === 1}
+					renderGreyscale={paused_blocking}
+					totalCount={this.totalTrackersFound()}
+					ghosteryFeatureSelect={sitePolicy}
+					isSmall={is_expert}
+					clickDonut={this.clickDonut}
+				/>
+			</div>
+		);
+	}
+
+	/**
+	 * Render helper for the page host readout
+	 * @return {JSX} JSX for rendering the page host readout
+	 */
+	renderPageHostReadout() {
+		const pageHost = this.pageHost();
+		const pageHostContainerClassNames = ClassNames('Summary__pageHostContainer', {
+			invisible: this.hidePageHost(pageHost),
+		});
+
+		return (
+			<div className={pageHostContainerClassNames}>
+				<span className="GhosteryTextLabel">{pageHost}</span>
+			</div>
+		);
+	}
+
+	/**
+	 * Render helper for the total trackers found readout shown in condensed view
+	 * @return {JSX} JSX for rendering the condensed view total trackers found readout
+	 */
+	renderTotalTrackersFound() {
+		return (
+			<div className="Summary_totalTrackerCount Ghostery--clickable" onClick={this.clickTrackersCount}>
+				<span className="summary-total-tracker-count g-tooltip">
+					{this.totalTrackersFound()}
+					<Tooltip
+						header={t('panel_tracker_total_tooltip')}
+						position="right"
+					/>
+				</span>
+			</div>
+		);
+	}
+
 	/**
 	 * Render helper for the total trackers blocked readout
 	 * @return {JSX} JSX for rendering the total trackers blocked readout
 	 */
 	renderTotalTrackersBlocked() {
-		const {
-			is_expanded,
-			is_expert,
-		} = this.props;
-		const isCondensed = is_expert && is_expanded;
+		const { is_expert } = this.props;
+		const isCondensed = this.isCondensed();
 
 		const totalTrackersBlockedContainerClassNames = ClassNames('Summary__pageStatContainer', {
 			'Ghostery--clickable': is_expert,
@@ -464,6 +471,87 @@ class Summary extends React.Component {
 						{this.totalTrackersBlockedCount()}
 					</span>
 				</div>
+			</div>
+		);
+	}
+
+	renderTotalRequestsModified() {
+		const { is_expert } = this.props;
+		const isCondensed = this.isCondensed();
+
+		const totalRequestsModifiedClassNames = ClassNames('GhosteryKVReadout', 'GhosteryKVReadout--totalRequestsModified', {
+			'GhosteryKVReadout--withoutKey': isCondensed,
+			'GhosteryKVReadout--summaryCondensed': isCondensed,
+		});
+
+		return (
+			<div className="Summary__pageStatContainer g-tooltip">
+				<div className={totalRequestsModifiedClassNames}>
+					<span className="text">{t('requests_modified')} </span>
+					<span className="value">
+						{this.requestsModifiedCount()}
+					</span>
+				</div>
+				<Tooltip body={t('requests_modified_tooltip')} position={is_expert ? 'right' : 'top'} />
+			</div>
+		);
+	}
+
+	isPageLoadFast() {
+		return this.state.trackerLatencyTotal < 5;
+	}
+
+	isPageLoadSlow() {
+		return this.state.trackerLatencyTotal > 10;
+	}
+
+	isPageLoadMedium() {
+		return !this.isPageLoadFast() && !this.isPageLoadSlow();
+	}
+
+	renderPageLoadTime() {
+		const { trackerLatencyTotal } = this.state;
+		const isCondensed = this.isCondensed();
+
+		const pageLoadTimeClassNames = ClassNames('GhosteryKVReadout', 'GhosteryKVReadout--pageLoadTime', {
+			'GhosteryKVReadout--pageLoadTime-fast': this.isPageLoadFast(),
+			'GhosteryKVReadout--pageLoadTime-slow': this.isPageLoadSlow(),
+			'GhosteryKVReadout--pageLoadTime-medium': this.isPageLoadMedium(),
+			'GhosteryKVReadout--withoutKey': isCondensed,
+			'GhosteryKVReadout--summaryCondensed': isCondensed,
+		});
+
+		return (
+			<div className="Summary__pageStatContainer">
+				<div className={pageLoadTimeClassNames}>
+					<span className="GhosteryKVReadout__text">{t('page_load')} </span>
+					<span className="GhosteryKVReadout__value">
+						{trackerLatencyTotal ? `${trackerLatencyTotal} ${t('settings_seconds')}` : '-'}
+					</span>
+				</div>
+			</div>
+		);
+	}
+
+	renderGhosteryFeature(type, ...modifiers){
+		const {
+			is_expert,
+			paused_blocking,
+			sitePolicy,
+		} = this.props;
+		const { disableBlocking } = this.state;
+		const containerClassNames = ClassNames('Summary__ghosteryFeatureContainer', 'g-tooltip', modifiers);
+
+		return (
+			<div className={containerClassNames}>
+				<GhosteryFeature
+					handleClick={this.clickSitePolicy}
+					type={type}
+					sitePolicy={sitePolicy}
+					blockingPausedOrDisabled={paused_blocking || disableBlocking}
+					showText={this.isCondensed()}
+					tooltipPosition={is_expert ? 'right' : 'top'}
+				/>
 			</div>
 		);
 	}
@@ -525,73 +613,10 @@ class Summary extends React.Component {
 			paused_blocking,
 			sitePolicy,
 		} = this.props;
-		const { disableBlocking, trackerLatencyTotal } = this.state;
-		const showCondensed = is_expert && is_expanded;
-		const antiTrackUnsafe = enable_anti_tracking && antiTracking && antiTracking.totalUnsafeCount || 0;
-		const adBlockBlocked = enable_ad_block && adBlock && adBlock.totalCount || 0;
-
-		const requestsModifiedCount = antiTrackUnsafe + adBlockBlocked;
-
-
-		const totalRequestsModifiedClassNames = ClassNames('GhosteryKVReadout', 'GhosteryKVReadout--totalRequestsModified', {
-			'GhosteryKVReadout--withoutKey': showCondensed,
-			'GhosteryKVReadout--summaryCondensed': showCondensed,
-		});
-		const totalRequestsModified = (
-			<div className="Summary__pageStatContainer g-tooltip">
-				<div className={totalRequestsModifiedClassNames}>
-					<span className="text">{t('requests_modified')} </span>
-					<span className="value">
-						{requestsModifiedCount}
-					</span>
-				</div>
-				<Tooltip body={t('requests_modified_tooltip')} position={is_expert ? 'right' : 'top'} />
-			</div>
-		);
-
-		const pageLoadTimeClassNames = ClassNames('GhosteryKVReadout', 'GhosteryKVReadout--pageLoadTime', {
-			'GhosteryKVReadout--pageLoadTime-fast': trackerLatencyTotal < 5,
-			'GhosteryKVReadout--pageLoadTime-slow': trackerLatencyTotal > 10,
-			'GhosteryKVReadout--pageLoadTime-medium': trackerLatencyTotal > 5 && trackerLatencyTotal < 10,
-			'GhosteryKVReadout--withoutKey': showCondensed,
-			'GhosteryKVReadout--summaryCondensed': showCondensed,
-		});
-		const pageLoadTime = (
-			<div className="Summary__pageStatContainer">
-				<div className={pageLoadTimeClassNames}>
-					<span className="GhosteryKVReadout__text">{t('page_load')} </span>
-					<span className="GhosteryKVReadout__value">
-						{trackerLatencyTotal ? `${trackerLatencyTotal} ${t('settings_seconds')}` : '-'}
-					</span>
-				</div>
-			</div>
-		);
+		const { disableBlocking } = this.state;
+		const isCondensed = this.isCondensed();
 
 		// Trust, Restrict, Pause
-		const ghosteryTrustButton = (
-			<div className="Summary__ghosteryFeatureContainer g-tooltip">
-				<GhosteryFeature
-					handleClick={this.clickSitePolicy}
-					type="trust"
-					sitePolicy={sitePolicy}
-					blockingPausedOrDisabled={paused_blocking || disableBlocking}
-					showText={showCondensed}
-					tooltipPosition={is_expert ? 'right' : 'top'}
-				/>
-			</div>
-		);
-		const ghosteryRestrictButton = (
-			<div className="Summary__ghosteryFeatureContainer Summary__ghosteryFeatureContainer--middle g-tooltip">
-				<GhosteryFeature
-					clickButton={this.clickSitePolicy}
-					type="restrict"
-					sitePolicy={sitePolicy}
-					isStacked={is_expert}
-					isInactive={paused_blocking || disableBlocking}
-					isCondensed={showCondensed}
-				/>
-			</div>
-		);
 		const pauseButton = (
 			<div className="Summary__pauseButtonContainer">
 				<PauseButton
@@ -600,7 +625,7 @@ class Summary extends React.Component {
 					clickPause={this.clickPauseButton}
 					dropdownItems={this.pauseOptions}
 					isCentered={is_expert}
-					isCondensed={showCondensed}
+					isCondensed={isCondensed}
 				/>
 			</div>
 		);
@@ -616,8 +641,8 @@ class Summary extends React.Component {
 					active={enable_anti_tracking}
 					cliqzInactive={isCliqzInactive}
 					isTooltipHeader={is_expert}
-					isTooltipBody={!showCondensed}
-					tooltipPosition={showCondensed ? 'right' : is_expert ? 'top top-right' : 'top'}
+					isTooltipBody={!isCondensed}
+					tooltipPosition={isCondensed ? 'right' : is_expert ? 'top top-right' : 'top'}
 				/>
 			</div>
 		);
@@ -630,8 +655,8 @@ class Summary extends React.Component {
 					active={enable_ad_block}
 					cliqzInactive={isCliqzInactive}
 					isTooltipHeader={is_expert}
-					isTooltipBody={!showCondensed}
-					tooltipPosition={showCondensed ? 'right' : 'top'}
+					isTooltipBody={!isCondensed}
+					tooltipPosition={isCondensed ? 'right' : 'top'}
 				/>
 			</div>
 		);
@@ -644,8 +669,8 @@ class Summary extends React.Component {
 					active={enable_smart_block}
 					cliqzInactive={isCliqzInactive}
 					isTooltipHeader={is_expert}
-					isTooltipBody={!showCondensed}
-					tooltipPosition={showCondensed ? 'right' : is_expert ? 'top top-left' : 'top'}
+					isTooltipBody={!isCondensed}
+					tooltipPosition={isCondensed ? 'right' : is_expert ? 'top top-left' : 'top'}
 				/>
 			</div>
 		);
@@ -653,29 +678,29 @@ class Summary extends React.Component {
 		const summaryClassNames = ClassNames('Summary', {
 			'Summary--simple': !is_expert,
 			'Summary--expert': is_expert && !is_expanded,
-			'Summary--condensed': showCondensed,
+			'Summary--condensed': isCondensed,
 		});
 		// inactive, stacked on ghosteryFeaturesContainer and cliqzFeaturesContainer
 		return (
 			<div className={summaryClassNames}>
-				{!showCondensed && disableBlocking && (<NotScanned isSmall={is_expert} />)}
-				{!showCondensed && !disableBlocking && this.renderDonut()}
-				{!showCondensed && !disableBlocking && !is_expert && this.renderPageHostReadout()}
+				{!isCondensed && disableBlocking && (<NotScanned isSmall={is_expert} />)}
+				{!isCondensed && !disableBlocking && this.renderDonut()}
+				{!isCondensed && !disableBlocking && !is_expert && this.renderPageHostReadout()}
 
-				{showCondensed && !disableBlocking && this.renderTotalTrackersFound()}
+				{isCondensed && !disableBlocking && this.renderTotalTrackersFound()}
 
 				{!disableBlocking && this.renderTotalTrackersBlocked()}
-				{!disableBlocking && totalRequestsModified}
-				{!disableBlocking && pageLoadTime}
+				{!disableBlocking && this.renderTotalRequestsModified()}
+				{!disableBlocking && this.renderPageLoadTime()}
 
-				{showCondensed && disableBlocking && is_expert && (
+				{isCondensed && disableBlocking && is_expert && (
 					<div className="Summary__spaceTaker" />
 				)}
 
 				<div className="Summary__ghosteryFeaturesContainer">
-					{ghosteryTrustButton}
-					{ghosteryRestrictButton}
-					{pauseButton}
+					{this.renderGhosteryFeature('trust')}
+					{this.renderGhosteryFeature('restrict', 'Summary__ghosteryFeatureContainer--middle')}
+					{this.renderPauseButton()}
 				</div>
 				<div className="Summary__cliqzFeaturesContainer">
 					{cliqzAntiTracking}
@@ -684,7 +709,7 @@ class Summary extends React.Component {
 				</div>
 				{this.renderStatsNavButton()}
 
-				{!showCondensed && this.renderPlusUpgradeBannerOrSubscriberIcon()}
+				{!isCondensed && this.renderPlusUpgradeBannerOrSubscriberIcon()}
 			</div>
 		);
 	}
