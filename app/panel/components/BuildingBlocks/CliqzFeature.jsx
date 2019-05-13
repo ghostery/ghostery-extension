@@ -68,14 +68,17 @@ class CliqzFeature extends React.Component {
 			clickable: !this.props.cliqzInactive,
 			notClickable: this.props.cliqzInactive,
 		});
-		const featureName = `drawer_title_${this.props.type}`;
+		const featureName = t(`drawer_title_${this.props.type}`);
+
+		console.error('IVZ featureName in CliqzFeature#render:');
+		console.error(featureName);
 
 		return (
 			<div className={cliqzFeatureClassNames} onClick={this.clickCliqzFeature}>
 				<div className="CliqzFeature__count">{this.getCount()}</div>
 				<div className="CliqzFeature__icon g-tooltip" />
 				<div className="CliqzFeature__feature-name">
-					{ t({ featureName }) }
+					{featureName}
 				</div>
 			</div>
 		);
