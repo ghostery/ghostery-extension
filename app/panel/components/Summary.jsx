@@ -426,19 +426,6 @@ class Summary extends React.Component {
 				</div>
 			</div>
 		);
-		//
-		// <div className="ghostery-features-container">
-		// 	<GhosteryFeatures
-		// 		clickButton={this.clickSitePolicy}
-		// 		sitePolicy={this.props.sitePolicy}
-		// 		isAbPause={abPause}
-		// 		isStacked={is_expert}
-		// 		isInactive={this.props.paused_blocking || this.state.disableBlocking}
-		// 		isCondensed={showCondensed}
-		// 	/>
-		//
-		// 	{!abPause && pauseButtonComponent}
-		// </div>
 
 		// Trust, Restrict, Pause
 		const ghosteryTrustButton = (
@@ -502,7 +489,7 @@ class Summary extends React.Component {
 				<CliqzFeature
 					clickButton={this.clickCliqzFeature}
 					type="enable_ad_block"
-					data={antiTracking}
+					data={adBlock}
 					active={enable_ad_block}
 					cliqzInactive={isCliqzInactive}
 					onLocaleKey="alert_ad_block_on"
@@ -520,7 +507,7 @@ class Summary extends React.Component {
 				<CliqzFeature
 					clickButton={this.clickCliqzFeature}
 					type="enable_smart_block"
-					data={antiTracking}
+					data={smartBlock}
 					active={enable_smart_block}
 					cliqzInactive={isCliqzInactive}
 					onLocaleKey="alert_smart_block_on"
