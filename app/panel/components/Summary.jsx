@@ -561,6 +561,7 @@ class Summary extends React.Component {
 			'Summary--expert': is_expert && !is_expanded,
 			'Summary--condensed': showCondensed,
 		});
+		// inactive, stacked on ghosteryFeaturesContainer and cliqzFeaturesContainer
 		return (
 			<div className={summaryClassNames}>
 				{!showCondensed && this.state.disableBlocking && (<NotScanned isSmall={is_expert} />)}
@@ -577,12 +578,12 @@ class Summary extends React.Component {
 					<div className="Summary__spaceTaker" />
 				)}
 
-				<div className="Summary__ghosteryFeaturesContainer"> /* inactive, stacked */
+				<div className="Summary__ghosteryFeaturesContainer">
 					{ghosteryTrustButton}
 					{ghosteryRestrictButton}
 					{pauseButton}
 				</div>
-				<div className="Summary__cliqzFeaturesContainer"> /* inactive, stacked */
+				<div className="Summary__cliqzFeaturesContainer">
 					{cliqzAntiTracking}
 					{cliqzAdBlock}
 					{cliqzSmartBlock}

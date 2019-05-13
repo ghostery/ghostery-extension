@@ -87,7 +87,7 @@ class GhosteryFeature extends React.Component {
 						{this.getButtonText()}
 					</span>
 				</span>
-				<Tooltip body={this.getTooltipText()} position={tooltipPosition}/>
+				<Tooltip body={this.getTooltipText()} position={tooltipPosition} />
 			</div>
 		);
 	}
