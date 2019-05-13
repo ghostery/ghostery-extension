@@ -35,7 +35,7 @@ class CliqzFeature extends React.Component {
 
 		let blockedCount;
 		let unblockedCount;
-		switch (this.props.feature) {
+		switch (this.props.type) {
 			case 'enable_anti_tracking':
 				return this.props.data && this.props.data.totalUnsafeCount || 0;
 			case 'enable_ad_block':
@@ -62,13 +62,13 @@ class CliqzFeature extends React.Component {
 	}
 
 	render() {
-		const specificFeatureModifier = `CliqzFeature--${this.props.feature}`;
+		const specificFeatureModifier = `CliqzFeature--${this.props.type}`;
 		const cliqzFeatureClassNames = ClassNames('CliqzFeature', specificFeatureModifier, {
 			active: this.props.active,
 			clickable: !this.props.cliqzInactive,
 			notClickable: this.props.cliqzInactive,
 		});
-		const featureName = `drawer_title_${this.props.feature}`;
+		const featureName = `drawer_title_${this.props.type}`;
 
 		return (
 			<div className={cliqzFeatureClassNames} onClick={this.clickCliqzFeature}>
