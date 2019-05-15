@@ -16,6 +16,8 @@ import ClassNames from 'classnames';
 import Tooltip from '../Tooltip';
 import globals from '../../../../src/classes/Globals';
 
+const { BLACKLISTED, WHITELISTED } = globals;
+
 /**
  * @class Rendering and interaction for Ghostery feature button toggles
  * @memberof PanelBuildingBlocks
@@ -47,11 +49,11 @@ class GhosteryFeature extends React.Component {
 
 		switch (type) {
 			case 'trust':
-				return (sitePolicy === globals.SITE_POLICY__WHITELISTED ?
+				return (sitePolicy === WHITELISTED ?
 					t('summary_trust_site_active') :
 					t('summary_trust_site'));
 			case 'restrict':
-				return (sitePolicy === globals.SITE_POLICY__BLACKLISTED ?
+				return (sitePolicy === BLACKLISTED ?
 					t('summary_restrict_site_active') :
 					t('summary_restrict_site'));
 			default:
@@ -64,11 +66,11 @@ class GhosteryFeature extends React.Component {
 
 		switch (type) {
 			case 'trust':
-				return (sitePolicy === globals.SITE_POLICY__WHITELISTED ?
+				return (sitePolicy === WHITELISTED ?
 					t('tooltip_trust_on') :
 					t('tooltip_trust_off'));
 			case 'restrict':
-				return (sitePolicy === globals.SITE_POLICY__BLACKLISTED ?
+				return (sitePolicy === BLACKLISTED ?
 					t('tooltip_restrict_on') :
 					t('tooltip_restrict'));
 			default:
@@ -85,7 +87,7 @@ class GhosteryFeature extends React.Component {
 		} = this.props;
 
 		const typeModifier = `GhosteryFeatureButton--${type}`;
-		const active = (type === 'trust' && sitePolicy === 2) || (type === 'restrict' && sitePolicy === 1);
+		const active = (type === 'trust' && sitePolicy === WHITELISTED) || (type === 'restrict' && sitePolicy === BLACKLISTED);
 		const ghosteryFeatureClassNames = ClassNames('GhosteryFeatureButton', { typeModifier }, {
 			'GhosteryFeatureButton--active': active,
 			clickable: !blockingPausedOrDisabled,

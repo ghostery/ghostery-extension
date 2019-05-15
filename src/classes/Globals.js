@@ -67,8 +67,8 @@ class Globals {
 		this.GHOSTERY_TAB_FIREFOX_TEST_ID = '{0ea88bc4-03bd-4baa-8153-acc861589c1c}';
 
 		// Site Policy named constants
-		this.SITE_POLICY__BLACKLISTED = 1;
-		this.SITE_POLICY__WHITELISTED = 2;
+		this.BLACKLISTED = 1;
+		this.WHITELISTED = 2;
 
 		// data stores
 		this.REDIRECT_MAP = new Map();

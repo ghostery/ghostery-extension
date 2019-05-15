@@ -27,7 +27,7 @@ import {
 	PauseButton
 } from './BuildingBlocks';
 
-const { IS_CLIQZ } = globals;
+const { BLACKLISTED, IS_CLIQZ, WHITELISTED } = globals;
 
 /**
  * @class Implements the Summary View, which is displayed as the entire panel
@@ -150,7 +150,6 @@ class Summary extends React.Component {
 	 * Handles clicking on Ghostery Features: Trust Site, Restrict Site
 	 * @param  {String} button The button that was clicked: trust, restrict
 	 */
-	// TODO remove Custom button code
 	clickSitePolicy(button) {
 		const { sitePolicy } = this.props;
 		let type;
@@ -160,13 +159,13 @@ class Summary extends React.Component {
 		if (button === 'trust') {
 			sendMessage('ping', 'trust_site');
 			type = 'whitelist';
-			text = (sitePolicy === 2) ? t('alert_site_trusted_off') : t('alert_site_trusted');
-			classes = (sitePolicy === 2) ? 'warning' : 'success';
+			text = (sitePolicy === WHITELISTED) ? t('alert_site_trusted_off') : t('alert_site_trusted');
+			classes = (sitePolicy === WHITELISTED) ? 'warning' : 'success';
 		} else if (button === 'restrict') {
 			sendMessage('ping', 'restrict_site');
 			type = 'blacklist';
-			text = (sitePolicy === 1) ? t('alert_site_restricted_off') : t('alert_site_restricted');
-			classes = (sitePolicy === 1) ? 'warning' : 'alert';
+			text = (sitePolicy === BLACKLISTED) ? t('alert_site_restricted_off') : t('alert_site_restricted');
+			classes = (sitePolicy === BLACKLISTED) ? 'warning' : 'alert';
 		} else {
 			return;
 		}
@@ -193,7 +192,7 @@ class Summary extends React.Component {
 
 		if (!is_expert) { return; }
 
-		if (sitePolicy === 1) {
+		if (sitePolicy === BLACKLISTED) {
 			this.props.actions.filterTrackers({ type: 'trackers', name: 'all' });
 		} else {
 			this.props.actions.filterTrackers({ type: 'trackers', name: 'blocked' });
@@ -367,9 +366,9 @@ class Summary extends React.Component {
 		} = this.props;
 
 		let totalTrackersBlockedCount;
-		if (paused_blocking || sitePolicy === 2) {
+		if (paused_blocking || sitePolicy === WHITELISTED) {
 			totalTrackersBlockedCount = 0;
-		} else if (sitePolicy === 1) {
+		} else if (sitePolicy === BLACKLISTED) {
 			totalTrackersBlockedCount = trackerCounts.blocked + trackerCounts.allowed || 0;
 		} else {
 			totalTrackersBlockedCount = trackerCounts.blocked + this._sbAdjust() || 0;
@@ -419,7 +418,7 @@ class Summary extends React.Component {
 			<div className="Summary__donutContainer">
 				<DonutGraph
 					categories={categories}
-					renderRedscale={sitePolicy === 1}
+					renderRedscale={sitePolicy === BLACKLISTED}
 					renderGreyscale={paused_blocking}
 					totalCount={this._totalTrackersFound()}
 					ghosteryFeatureSelect={sitePolicy}
