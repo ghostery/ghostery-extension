@@ -26,6 +26,9 @@ class CliqzFeature extends React.Component {
 		this.clickCliqzFeature = this.clickCliqzFeature.bind(this);
 	}
 
+	/**
+	 * Handles clicks on the Cliqz feature icon, toggling it on/off
+	 */
 	clickCliqzFeature() {
 		const {
 			active,
@@ -41,20 +44,8 @@ class CliqzFeature extends React.Component {
 		clickButton({
 			feature: `enable_${type}`,
 			status: active,
-			text: this._getAlertText()
+			text: this._getAlertText(),
 		});
-	}
-
-	_length(object) {
-		return Object.keys(object).length;
-	}
-
-	_blockedCount(data) {
-		return data && this._length(data.blocked) || 0;
-	}
-
-	_unblockedCount(data) {
-		return data && this._length(data.unblocked) || 0;
 	}
 
 	_getCount() {
@@ -69,11 +60,18 @@ class CliqzFeature extends React.Component {
 		} else if (type === 'ad_block') {
 			return data && data.totalCount || 0;
 		} else if (type === 'smart_block') {
-			return this._blockedCount(data) + this._unblockedCount(data);
+			return this._count(data, data.blocked) + this._count(data, data.unblocked);
 		}
 
 		return 0;
 	}
+	_count(object, property) {
+		return object && this._length(property) || 0;
+	}
+	_length(object) {
+		return Object.keys(object).length;
+	}
+
 
 	_getTooltipBodyText() {
 		const { active, isTooltipBody, type } = this.props;
@@ -105,6 +103,10 @@ class CliqzFeature extends React.Component {
 			t(`alert_${type}`);
 	}
 
+	/**
+	 * React's required render function. Returns JSX
+	 * @return {JSX} JSX for rendering a Cliqz Feature icon toggle
+	 */
 	render() {
 		const {
 			active,
