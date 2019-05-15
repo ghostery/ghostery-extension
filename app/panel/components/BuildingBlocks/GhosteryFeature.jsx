@@ -26,7 +26,15 @@ class GhosteryFeature extends React.Component {
 		this.handleClick = this.handleClick.bind(this);
 	}
 
-	getButtonText() {
+	handleClick() {
+		if (this.props.blockingPausedOrDisabled) {
+			return;
+		}
+
+		this.props.handleClick(this.props.type);
+	}
+
+	_getButtonText() {
 		const { sitePolicy, showText, type } = this.props;
 
 		if (!showText) {
@@ -43,7 +51,7 @@ class GhosteryFeature extends React.Component {
 		}
 	}
 
-	getTooltipText() {
+	_getTooltipText() {
 		const { sitePolicy, type } = this.props;
 
 		switch (type) {
@@ -54,14 +62,6 @@ class GhosteryFeature extends React.Component {
 			default:
 				return 'Check button type you are passing to GhosteryFeature for typos and make sure it is being handled by getTooltipText';
 		}
-	}
-
-	handleClick() {
-		if (this.props.blockingPausedOrDisabled) {
-			return;
-		}
-
-		this.props.handleClick(this.props.type);
 	}
 
 	render() {
@@ -84,10 +84,10 @@ class GhosteryFeature extends React.Component {
 			<div className={ghosteryFeatureClassNames} onClick={this.handleClick}>
 				<span className="flex-container align-center-middle full-height">
 					<span className="GhosteryFeatureButton__text">
-						{this.getButtonText()}
+						{this._getButtonText()}
 					</span>
 				</span>
-				<Tooltip body={this.getTooltipText()} position={tooltipPosition} />
+				<Tooltip body={this._getTooltipText()} position={tooltipPosition} />
 			</div>
 		);
 	}
