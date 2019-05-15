@@ -716,7 +716,8 @@ class Summary extends React.Component {
 			<div className={summaryClassNames}>
 				{!isCondensed && disableBlocking && (<NotScanned isSmall={is_expert} />)}
 				{!isCondensed && !disableBlocking && this._renderDonut()}
-				{!isCondensed && !disableBlocking && !is_expert && this._renderPageHostReadout()}
+				{!isCondensed && !disableBlocking && this._renderPageHostReadout()}
+
 
 				{isCondensed && !disableBlocking && this._renderTotalTrackersFound()}
 
