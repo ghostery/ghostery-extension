@@ -152,14 +152,10 @@ class Summary extends React.Component {
 	 */
 	// TODO remove Custom button code
 	clickSitePolicy(button) {
-		const { paused_blocking, sitePolicy } = this.props;
+		const { sitePolicy } = this.props;
 		let type;
 		let text;
 		let classes;
-
-		if (this.state.disableBlocking || paused_blocking) {
-			return;
-		}
 
 		if (button === 'trust') {
 			sendMessage('ping', 'trust_site');

@@ -26,6 +26,9 @@ class GhosteryFeature extends React.Component {
 		this.handleClick = this.handleClick.bind(this);
 	}
 
+	/**
+	 * Handles user click on the Ghostery Feature button
+	 */
 	handleClick() {
 		if (this.props.blockingPausedOrDisabled) {
 			return;
