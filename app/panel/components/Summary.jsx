@@ -147,8 +147,8 @@ class Summary extends React.Component {
 	}
 
 	/**
-	 * Handles clicking on Ghostery Features: Trust Site, Restrict Site, Custom Settings
-	 * @param  {String} button The button that was clicked: trust, restrict, custom
+	 * Handles clicking on Ghostery Features: Trust Site, Restrict Site
+	 * @param  {String} button The button that was clicked: trust, restrict
 	 */
 	// TODO remove Custom button code
 	clickSitePolicy(button) {
@@ -161,12 +161,12 @@ class Summary extends React.Component {
 			return;
 		}
 
-		if (button === 'trust' || (button === 'custom' && sitePolicy === 2)) {
+		if (button === 'trust') {
 			sendMessage('ping', 'trust_site');
 			type = 'whitelist';
 			text = (sitePolicy === 2) ? t('alert_site_trusted_off') : t('alert_site_trusted');
 			classes = (sitePolicy === 2) ? 'warning' : 'success';
-		} else if (button === 'restrict' || (button === 'custom' && sitePolicy === 1)) {
+		} else if (button === 'restrict') {
 			sendMessage('ping', 'restrict_site');
 			type = 'blacklist';
 			text = (sitePolicy === 1) ? t('alert_site_restricted_off') : t('alert_site_restricted');
