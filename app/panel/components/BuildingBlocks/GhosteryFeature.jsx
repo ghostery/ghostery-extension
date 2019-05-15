@@ -14,6 +14,7 @@
 import React from 'react';
 import ClassNames from 'classnames';
 import Tooltip from '../Tooltip';
+import globals from '../../../../src/classes/Globals';
 
 /**
  * @class Rendering and interaction for Ghostery feature button toggles
@@ -46,9 +47,13 @@ class GhosteryFeature extends React.Component {
 
 		switch (type) {
 			case 'trust':
-				return (sitePolicy === 2 ? t('summary_trust_site_active') : t('summary_trust_site'));
+				return (sitePolicy === globals.SITE_POLICY__WHITELISTED ?
+					t('summary_trust_site_active') :
+					t('summary_trust_site'));
 			case 'restrict':
-				return (sitePolicy === 1 ? t('summary_restrict_site_active') : t('summary_restrict_site'));
+				return (sitePolicy === globals.SITE_POLICY__BLACKLISTED ?
+					t('summary_restrict_site_active') :
+					t('summary_restrict_site'));
 			default:
 				return 'Check button type you are passing to GhosteryFeature for typos and make sure it is being handled by getButtonText';
 		}
@@ -59,9 +64,13 @@ class GhosteryFeature extends React.Component {
 
 		switch (type) {
 			case 'trust':
-				return (sitePolicy === 2 ? t('tooltip_trust_on') : t('tooltip_trust_off'));
+				return (sitePolicy === globals.SITE_POLICY__WHITELISTED ?
+					t('tooltip_trust_on') :
+					t('tooltip_trust_off'));
 			case 'restrict':
-				return (sitePolicy === 1 ? t('tooltip_restrict_on') : t('tooltip_restrict'));
+				return (sitePolicy === globals.SITE_POLICY__BLACKLISTED ?
+					t('tooltip_restrict_on') :
+					t('tooltip_restrict'));
 			default:
 				return 'Check button type you are passing to GhosteryFeature for typos and make sure it is being handled by getTooltipText';
 		}
