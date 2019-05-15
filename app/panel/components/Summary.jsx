@@ -47,14 +47,14 @@ class Summary extends React.Component {
 		};
 
 		// Event Bindings
-		this.toggleExpert = this.toggleExpert.bind(this);
-		this.clickPauseButton = this.clickPauseButton.bind(this);
-		this.clickDonut = this.clickDonut.bind(this);
-		this.clickTrackersCount = this.clickTrackersCount.bind(this);
-		this.clickTrackersBlocked = this.clickTrackersBlocked.bind(this);
-		this.clickSitePolicy = this.clickSitePolicy.bind(this);
 		this.clickCliqzFeature = this.clickCliqzFeature.bind(this);
-		this.handlePortMessage = this.handlePortMessage.bind(this);
+		this.clickDonut = this.clickDonut.bind(this);
+		this.clickPauseButton = this.clickPauseButton.bind(this);
+		this.clickSitePolicy = this.clickSitePolicy.bind(this);
+		this.clickTrackersBlocked = this.clickTrackersBlocked.bind(this);
+		this.clickTrackersCount = this.clickTrackersCount.bind(this);
+		this.clickUpgradeBannerOrGoldPlusIcon = this.clickUpgradeBannerOrGoldPlusIcon.bind(this);
+		this.toggleExpert = this.toggleExpert.bind(this);
 
 		this.pauseOptions = [
 			{ name: t('pause_30_min'), name_condensed: t('pause_30_min_condensed'), val: 30 },
@@ -67,11 +67,11 @@ class Summary extends React.Component {
 	 * Lifecycle event
 	 */
 	componentDidMount() {
-		this.setTrackerLatency(this.props);
-		this.updateSiteNotScanned(this.props);
+		this._setTrackerLatency(this.props);
+		this._updateSiteNotScanned(this.props);
 
 		this._dynamicUIPort = this.context;
-		this._dynamicUIPort.onMessage.addListener(this.handlePortMessage);
+		this._dynamicUIPort.onMessage.addListener(this._handlePortMessage);
 		this._dynamicUIPort.postMessage({ name: 'SummaryComponentDidMount' });
 	}
 
@@ -79,8 +79,8 @@ class Summary extends React.Component {
 	 * Lifecycle event
 	 */
 	componentWillReceiveProps(nextProps) {
-		this.setTrackerLatency(nextProps);
-		this.updateSiteNotScanned(nextProps);
+		this._setTrackerLatency(nextProps);
+		this._updateSiteNotScanned(nextProps);
 
 		// Set page title for Firefox for Android
 		window.document.title = `Ghostery's findings for ${this.props.pageUrl}`;
@@ -91,65 +91,35 @@ class Summary extends React.Component {
 	 */
 	componentWillUnmount() {
 		this._dynamicUIPort.postMessage({ name: 'SummaryComponentWillUnmount' });
-		this._dynamicUIPort.onMessage.removeListener(this.handlePortMessage);
+		this._dynamicUIPort.onMessage.removeListener(this._handlePortMessage);
 	}
 
 	/**
-	 * Calculates total tracker latency and sets it to state
-	 * @param {Object} props Summary's props, either this.props or nextProps.
+	 * Handles clicking on Cliqz Features: AntiTracking, AdBlocking, SmartBlocking
+	 * @param {Object} options options including:
+	 * 													feature: enable_anti_tracking, enable_ad_block, enable_smart_block
+	 * 													status: whether the feature should be turned on or off
+	 * 													text: the text for the notification.
 	 */
-	setTrackerLatency(props) {
-		const { performanceData } = props;
-		let pageLatency = 0;
-		let unfixedLatency = 0;
-
-		// calculate and display page speed
-		if (performanceData) {
-			const { timing } = performanceData;
-			// format number of decimal places to use
-			unfixedLatency = Number(timing.loadEventEnd - timing.navigationStart) / 1000;
-			if (unfixedLatency >= 100) { // > 100 no decimal
-				pageLatency = (Number(timing.loadEventEnd - timing.navigationStart) / 1000).toFixed();
-			} else if (unfixedLatency >= 10 && unfixedLatency < 100) { // 100 > 10 use one decimal
-				pageLatency = (Number(timing.loadEventEnd - timing.navigationStart) / 1000).toFixed(1);
-			} else if (unfixedLatency < 10 && unfixedLatency >= 0) { // < 10s use two decimals
-				pageLatency = (Number(timing.loadEventEnd - timing.navigationStart) / 1000).toFixed(2);
-			}
-			this.setState({ trackerLatencyTotal: pageLatency });
-		// reset page load value if page is reloaded while panel is open
-		} else if (this.props.performanceData && !performanceData) {
-			this.setState({ trackerLatencyTotal: pageLatency });
-		}
+	clickCliqzFeature(options) {
+		const { feature, status, text } = options;
+		this.props.actions.showNotification({
+			updated: feature,
+			reload: true,
+			text,
+		});
+		this.props.actions.toggleCliqzFeature(feature, status);
 	}
 
 	/**
-	 * Handles messages from dynamic UI port to background
+	 * Handles clicking on any part of the Donut graph
+	 * @param  {Object} data Properties of the click and resulting filter
 	 */
-	handlePortMessage(msg) {
-		if (msg.to !== 'summary' || !msg.body) { return; }
-
-		const { body } = msg;
-
-		if (body.adblock || body.antitracking) {
-			this.props.actions.updateCliqzModuleData(body);
-		} else {
-			this.props.actions.updateSummaryData(body);
+	clickDonut(data) {
+		if (!this.props.is_expert) {
+			this.toggleExpert();
 		}
-	}
-
-	/**
-	 * Disable controls when Ghostery cannot or has not yet scanned a page.
-	 * @param {Object} props Summary's props, either this.props or nextProps.
-	 */
-	updateSiteNotScanned(props) {
-		const { siteNotScanned, categories } = props;
-		const pageUrl = props.pageUrl || '';
-
-		if (siteNotScanned || !categories || pageUrl.search(/http|chrome-extension|moz-extension|ms-browser-extension|newtab|chrome:\/\/startpage\//) === -1) {
-			this.setState({ disableBlocking: true });
-		} else {
-			this.setState({ disableBlocking: false });
-		}
+		this.props.actions.filterTrackers(data);
 	}
 
 	/**
@@ -177,53 +147,10 @@ class Summary extends React.Component {
 	}
 
 	/**
-	 * Handles clicking on any part of the Donut graph
-	 * @param  {Object} data Properties of the click and resulting filter
-	 */
-	clickDonut(data) {
-		if (!this.props.is_expert) {
-			this.toggleExpert();
-		}
-		this.props.actions.filterTrackers(data);
-	}
-
-	/**
-	 * Handles clicking on the total trackers count on the condensed view
-	 */
-	clickTrackersCount() {
-		this.props.actions.filterTrackers({ type: 'trackers', name: 'all' });
-	}
-
-	/**
-	 * Toggle between Simple and Detailed Views.
-	 */
-	toggleExpert() {
-		this.props.actions.toggleExpert();
-		if (this.props.is_expert) {
-			this.props.history.push('/');
-		} else {
-			this.props.history.push('/detail');
-		}
-	}
-
-	/**
-	 * Handles clicking on Trackers Blocked. Triggers a filter action
-	 */
-	clickTrackersBlocked() {
-		const { sitePolicy, is_expert } = this.props;
-		if (is_expert) {
-			if (sitePolicy === 1) {
-				this.props.actions.filterTrackers({ type: 'trackers', name: 'all' });
-			} else {
-				this.props.actions.filterTrackers({ type: 'trackers', name: 'blocked' });
-			}
-		}
-	}
-
-	/**
 	 * Handles clicking on Ghostery Features: Trust Site, Restrict Site, Custom Settings
 	 * @param  {String} button The button that was clicked: trust, restrict, custom
 	 */
+	// TODO remove Custom button code
 	clickSitePolicy(button) {
 		const { paused_blocking, sitePolicy } = this.props;
 		let type;
@@ -263,48 +190,124 @@ class Summary extends React.Component {
 	}
 
 	/**
-	 * Handles clicking on Cliqz Features: AntiTracking, AdBlocking, SmartBlocking
-	 * @param {Object} options options including:
-	 * 													feature: enable_anti_tracking, enable_ad_block, enable_smart_block
-	 * 													status: whether the feature should be turned on or off
-	 * 													text: the text for the notification.
+	 * Handles clicking on Trackers Blocked. Triggers a filter action
 	 */
-	clickCliqzFeature(options) {
-		const { feature, status, text } = options;
-		this.props.actions.showNotification({
-			updated: feature,
-			reload: true,
-			text,
-		});
-		this.props.actions.toggleCliqzFeature(feature, status);
+	clickTrackersBlocked() {
+		const { sitePolicy, is_expert } = this.props;
+
+		if (!is_expert) { return; }
+
+		if (sitePolicy === 1) {
+			this.props.actions.filterTrackers({ type: 'trackers', name: 'all' });
+		} else {
+			this.props.actions.filterTrackers({ type: 'trackers', name: 'blocked' });
+		}
+	}
+
+	/**
+	 * Handles clicking on the total trackers count on the condensed view
+	 */
+	clickTrackersCount() {
+		this.props.actions.filterTrackers({ type: 'trackers', name: 'all' });
 	}
 
 	/**
 	 * Handles clicking on the green upgrade banner or gold subscriber badge
 	 */
-	clickUpgradeBannerOrGoldPlusIcon = () => {
-		// TODO check whether this is the message we want to be sending now
+	clickUpgradeBannerOrGoldPlusIcon() {
 		sendMessage('ping', 'plus_panel_from_badge');
-		this.props.history.push(this.isPlusSubscriber() ? '/subscription/info' : `/subscribe/${!!this.props.user}`);
+
+		this.props.history.push(this._isPlusSubscriber() ? '/subscription/info' : `/subscribe/${!!this.props.user}`);
 	}
 
-	isPlusSubscriber() {
+	/**
+	 * Toggle between Simple and Detailed Views.
+	 */
+	toggleExpert() {
+		this.props.actions.toggleExpert();
+		if (this.props.is_expert) {
+			this.props.history.push('/');
+		} else {
+			this.props.history.push('/detail');
+		}
+	}
+
+	/**
+	 * Calculates total tracker latency and sets it to state
+	 * @param {Object} props Summary's props, either this.props or nextProps.
+	 */
+	_setTrackerLatency(props) {
+		const { performanceData } = props;
+		let pageLatency = 0;
+
+		// calculate and display page speed
+		if (performanceData) {
+			const { timing } = performanceData;
+			const { loadEventEnd, navigationStart } = timing;
+			// format number of decimal places to use
+			const unfixedLatency = Number(loadEventEnd - navigationStart) / 1000;
+			if (unfixedLatency >= 100) { // > 100 no decimal
+				pageLatency = unfixedLatency.toFixed();
+			} else if (unfixedLatency >= 10 && unfixedLatency < 100) { // 100 > 10 use one decimal
+				pageLatency = unfixedLatency.toFixed(1);
+			} else if (unfixedLatency < 10 && unfixedLatency >= 0) { // < 10s use two decimals
+				pageLatency = unfixedLatency.toFixed(2);
+			}
+			this.setState({ trackerLatencyTotal: pageLatency });
+		// reset page load value if page is reloaded while panel is open
+		} else if (this.props.performanceData && !performanceData) {
+			this.setState({ trackerLatencyTotal: pageLatency });
+		}
+	}
+
+	/**
+	 * Disable controls when Ghostery cannot or has not yet scanned a page.
+	 * @param {Object} props Summary's props, either this.props or nextProps.
+	 */
+	_updateSiteNotScanned(props) {
+		const { siteNotScanned, categories } = props;
+		const pageUrl = props.pageUrl || '';
+
+		if (siteNotScanned || !categories || pageUrl.search(/http|chrome-extension|moz-extension|ms-browser-extension|newtab|chrome:\/\/startpage\//) === -1) {
+			this.setState({ disableBlocking: true });
+		} else {
+			this.setState({ disableBlocking: false });
+		}
+	}
+
+	/**
+	 * Handles messages from dynamic UI port to background
+	 * @param {Object}	msg		updated findings sent from the background by PanelData
+	 */
+	_handlePortMessage(msg) {
+		if (msg.to !== 'summary' || !msg.body) { return; }
+
+		const { body } = msg;
+
+		if (body.adblock || body.antitracking) {
+			this.props.actions.updateCliqzModuleData(body);
+		} else {
+			this.props.actions.updateSummaryData(body);
+		}
+	}
+
+	_isPlusSubscriber() {
 		const { user } = this.props;
 
 		return user && user.subscriptionsPlus;
 	}
 
-	pageHost() {
+	_pageHost() {
 		return this.props.pageHost || 'page_host';
 	}
 
-	hidePageHost(host = null) {
-		const pageHost = host || this.pageHost();
+	_hidePageHost(host = null) {
+		const pageHost = host || this._pageHost();
 
 		return (pageHost.split('.').length < 2);
 	}
 
-	adBlockBlocked() {
+	_adBlockBlocked() {
 		const {
 			adBlock,
 			enable_ad_block,
@@ -313,7 +316,7 @@ class Summary extends React.Component {
 		return enable_ad_block && adBlock && adBlock.totalCount || 0;
 	}
 
-	antiTrackUnsafe() {
+	_antiTrackUnsafe() {
 		const {
 			antiTracking,
 			enable_anti_tracking,
@@ -322,17 +325,17 @@ class Summary extends React.Component {
 		return enable_anti_tracking && antiTracking && antiTracking.totalUnsafeCount || 0;
 	}
 
-	totalTrackersFound() {
+	_totalTrackersFound() {
 		const { trackerCounts } = this.props;
 
-		return (trackerCounts.allowed + trackerCounts.blocked + this.antiTrackUnsafe() + this.adBlockBlocked()) || 0;
+		return (trackerCounts.allowed + trackerCounts.blocked + this._requestsModifiedCount()) || 0;
 	}
 
-	requestsModifiedCount() {
-		return this.antiTrackUnsafe() + this.adBlockBlocked();
+	_requestsModifiedCount() {
+		return this._antiTrackUnsafe() + this._adBlockBlocked();
 	}
 
-	sbBlocked() {
+	_sbBlocked() {
 		const { smartBlock, trackerCounts } = this.props;
 
 		let sbBlocked = smartBlock && smartBlock.blocked && Object.keys(smartBlock.blocked).length || 0;
@@ -343,7 +346,7 @@ class Summary extends React.Component {
 		return sbBlocked;
 	}
 
-	sbAllowed() {
+	_sbAllowed() {
 		const { smartBlock, trackerCounts } = this.props;
 
 		let sbAllowed = smartBlock && smartBlock.unblocked && Object.keys(smartBlock.unblocked).length || 0;
@@ -354,13 +357,13 @@ class Summary extends React.Component {
 		return sbAllowed;
 	}
 
-	sbAdjust() {
+	_sbAdjust() {
 		const { enable_smart_block } = this.props;
 
-		return enable_smart_block && (this.sbBlocked() - this.sbAllowed()) || 0;
+		return enable_smart_block && (this._sbBlocked() - this._sbAllowed()) || 0;
 	}
 
-	totalTrackersBlockedCount() {
+	_totalTrackersBlockedCount() {
 		const {
 			paused_blocking,
 			sitePolicy,
@@ -373,23 +376,42 @@ class Summary extends React.Component {
 		} else if (sitePolicy === 1) {
 			totalTrackersBlockedCount = trackerCounts.blocked + trackerCounts.allowed || 0;
 		} else {
-			totalTrackersBlockedCount = trackerCounts.blocked + this.sbAdjust() || 0;
+			totalTrackersBlockedCount = trackerCounts.blocked + this._sbAdjust() || 0;
 		}
 
 		return totalTrackersBlockedCount;
 	}
 
-	isCondensed() {
+	_isCondensed() {
 		const { is_expanded, is_expert } = this.props;
 
 		return (is_expert && is_expanded);
+	}
+
+	_isPageLoadFast() {
+		return this.state.trackerLatencyTotal < 5;
+	}
+
+	_isPageLoadSlow() {
+		return this.state.trackerLatencyTotal > 10;
+	}
+
+	_isPageLoadMedium() {
+		return !this._isPageLoadFast() && !this._isPageLoadSlow();
+	}
+
+	_isCliqzInactive() {
+		const { paused_blocking, sitePolicy } = this.props;
+		const { disableBlocking } = this.state;
+
+		return paused_blocking || sitePolicy || disableBlocking || IS_CLIQZ;
 	}
 
 	/**
 	 * Render helper for the donut
 	 * @return {JSX} JSX for rendering the donut
 	 */
-	renderDonut() {
+	_renderDonut() {
 		const {
 			categories,
 			is_expert,
@@ -403,7 +425,7 @@ class Summary extends React.Component {
 					categories={categories}
 					renderRedscale={sitePolicy === 1}
 					renderGreyscale={paused_blocking}
-					totalCount={this.totalTrackersFound()}
+					totalCount={this._totalTrackersFound()}
 					ghosteryFeatureSelect={sitePolicy}
 					isSmall={is_expert}
 					clickDonut={this.clickDonut}
@@ -416,10 +438,10 @@ class Summary extends React.Component {
 	 * Render helper for the page host readout
 	 * @return {JSX} JSX for rendering the page host readout
 	 */
-	renderPageHostReadout() {
-		const pageHost = this.pageHost();
+	_renderPageHostReadout() {
+		const pageHost = this._pageHost();
 		const pageHostContainerClassNames = ClassNames('Summary__pageHostContainer', {
-			invisible: this.hidePageHost(pageHost),
+			invisible: this._hidePageHost(pageHost),
 		});
 
 		return (
@@ -433,11 +455,11 @@ class Summary extends React.Component {
 	 * Render helper for the total trackers found readout shown in condensed view
 	 * @return {JSX} JSX for rendering the condensed view total trackers found readout
 	 */
-	renderTotalTrackersFound() {
+	_renderTotalTrackersFound() {
 		return (
 			<div className="Summary_totalTrackerCount Ghostery--clickable" onClick={this.clickTrackersCount}>
 				<span className="summary-total-tracker-count g-tooltip">
-					{this.totalTrackersFound()}
+					{this._totalTrackersFound()}
 					<Tooltip
 						header={t('panel_tracker_total_tooltip')}
 						position="right"
@@ -451,9 +473,9 @@ class Summary extends React.Component {
 	 * Render helper for the total trackers blocked readout
 	 * @return {JSX} JSX for rendering the total trackers blocked readout
 	 */
-	renderTotalTrackersBlocked() {
+	_renderTotalTrackersBlocked() {
 		const { is_expert } = this.props;
-		const isCondensed = this.isCondensed();
+		const isCondensed = this._isCondensed();
 
 		const totalTrackersBlockedContainerClassNames = ClassNames('Summary__pageStatContainer', {
 			'Ghostery--clickable': is_expert,
@@ -468,16 +490,16 @@ class Summary extends React.Component {
 				<div className={totalTrackersBlockedClassNames}>
 					<span className="GhosteryKVReadout__text">{t('trackers_blocked')} </span>
 					<span className="GhosteryKVReadout__value">
-						{this.totalTrackersBlockedCount()}
+						{this._totalTrackersBlockedCount()}
 					</span>
 				</div>
 			</div>
 		);
 	}
 
-	renderTotalRequestsModified() {
+	_renderTotalRequestsModified() {
 		const { is_expert } = this.props;
-		const isCondensed = this.isCondensed();
+		const isCondensed = this._isCondensed();
 
 		const totalRequestsModifiedClassNames = ClassNames('GhosteryKVReadout', 'GhosteryKVReadout--totalRequestsModified', {
 			'GhosteryKVReadout--withoutKey': isCondensed,
@@ -489,7 +511,7 @@ class Summary extends React.Component {
 				<div className={totalRequestsModifiedClassNames}>
 					<span className="text">{t('requests_modified')} </span>
 					<span className="value">
-						{this.requestsModifiedCount()}
+						{this._requestsModifiedCount()}
 					</span>
 				</div>
 				<Tooltip body={t('requests_modified_tooltip')} position={is_expert ? 'right' : 'top'} />
@@ -497,26 +519,14 @@ class Summary extends React.Component {
 		);
 	}
 
-	isPageLoadFast() {
-		return this.state.trackerLatencyTotal < 5;
-	}
-
-	isPageLoadSlow() {
-		return this.state.trackerLatencyTotal > 10;
-	}
-
-	isPageLoadMedium() {
-		return !this.isPageLoadFast() && !this.isPageLoadSlow();
-	}
-
-	renderPageLoadTime() {
+	_renderPageLoadTime() {
 		const { trackerLatencyTotal } = this.state;
-		const isCondensed = this.isCondensed();
+		const isCondensed = this._isCondensed();
 
 		const pageLoadTimeClassNames = ClassNames('GhosteryKVReadout', 'GhosteryKVReadout--pageLoadTime', {
-			'GhosteryKVReadout--pageLoadTime-fast': this.isPageLoadFast(),
-			'GhosteryKVReadout--pageLoadTime-slow': this.isPageLoadSlow(),
-			'GhosteryKVReadout--pageLoadTime-medium': this.isPageLoadMedium(),
+			'GhosteryKVReadout--pageLoadTime-fast': this._isPageLoadFast(),
+			'GhosteryKVReadout--pageLoadTime-slow': this._isPageLoadSlow(),
+			'GhosteryKVReadout--pageLoadTime-medium': this._isPageLoadMedium(),
 			'GhosteryKVReadout--withoutKey': isCondensed,
 			'GhosteryKVReadout--summaryCondensed': isCondensed,
 		});
@@ -533,7 +543,7 @@ class Summary extends React.Component {
 		);
 	}
 
-	renderGhosteryFeature(type, ...modifiers){
+	_renderGhosteryFeature(type, ...modifiers) {
 		const {
 			is_expert,
 			paused_blocking,
@@ -549,8 +559,101 @@ class Summary extends React.Component {
 					type={type}
 					sitePolicy={sitePolicy}
 					blockingPausedOrDisabled={paused_blocking || disableBlocking}
-					showText={this.isCondensed()}
+					showText={this._isCondensed()}
 					tooltipPosition={is_expert ? 'right' : 'top'}
+				/>
+			</div>
+		);
+	}
+
+	_renderPauseButton() {
+		const {
+			is_expert,
+			paused_blocking,
+			paused_blocking_timeout,
+		} = this.props;
+
+		return (
+			<div className="Summary__pauseButtonContainer">
+				<PauseButton
+					isPaused={paused_blocking}
+					isPausedTimeout={paused_blocking_timeout}
+					clickPause={this.clickPauseButton}
+					dropdownItems={this.pauseOptions}
+					isCentered={is_expert}
+					isCondensed={this._isCondensed()}
+				/>
+			</div>
+		);
+	}
+
+	_renderCliqzAntiTracking() {
+		const {
+			antiTracking,
+			enable_anti_tracking,
+			is_expert,
+		} = this.props;
+		const isCondensed = this._isCondensed();
+
+		return (
+			<div className="Summary__cliqzFeatureContainer">
+				<CliqzFeature
+					clickButton={this.clickCliqzFeature}
+					type="anti_tracking"
+					data={antiTracking}
+					active={enable_anti_tracking}
+					cliqzInactive={this._isCliqzInactive()}
+					isTooltipHeader={is_expert}
+					isTooltipBody={!isCondensed}
+					tooltipPosition={isCondensed ? 'right' : is_expert ? 'top top-right' : 'top'}
+				/>
+			</div>
+		);
+	}
+
+	_renderCliqzAdBlock() {
+		const {
+			adBlock,
+			enable_ad_block,
+			is_expert,
+		} = this.props;
+		const isCondensed = this._isCondensed();
+
+		return (
+			<div className="Summary__cliqzFeatureContainer">
+				<CliqzFeature
+					clickButton={this.clickCliqzFeature}
+					type="ad_block"
+					data={adBlock}
+					active={enable_ad_block}
+					cliqzInactive={this._isCliqzInactive()}
+					isTooltipHeader={is_expert}
+					isTooltipBody={!isCondensed}
+					tooltipPosition={isCondensed ? 'right' : 'top'}
+				/>
+			</div>
+		);
+	}
+
+	_renderCliqzSmartBlock() {
+		const {
+			enable_smart_block,
+			is_expert,
+			smartBlock,
+		} = this.props;
+		const isCondensed = this._isCondensed();
+
+		return (
+			<div className="Summary__cliqzFeatureContainer">
+				<CliqzFeature
+					clickButton={this.clickCliqzFeature}
+					type="smart_block"
+					data={smartBlock}
+					active={enable_smart_block}
+					cliqzInactive={this._isCliqzInactive()}
+					isTooltipHeader={is_expert}
+					isTooltipBody={!isCondensed}
+					tooltipPosition={isCondensed ? 'right' : is_expert ? 'top top-left' : 'top'}
 				/>
 			</div>
 		);
@@ -560,7 +663,7 @@ class Summary extends React.Component {
 	 * Render helper for the stats nav button
 	 * @return {JSX} JSX for rendering the stats nav button
 	 */
-	renderStatsNavButton() {
+	_renderStatsNavButton() {
 		const summaryViewStatsButton = ClassNames('Summary__statsButton', 'g-tooltip', {
 			hide: this.props.is_expert
 		});
@@ -577,8 +680,8 @@ class Summary extends React.Component {
 	 * Render helper for the plus upgrade banner or subscriber icon
 	 * @return {JSX} JSX for rendering the plus upgrade banner or subscriber icon
 	 */
-	renderPlusUpgradeBannerOrSubscriberIcon() {
-		const isPlusSubscriber = this.isPlusSubscriber();
+	_renderPlusUpgradeBannerOrSubscriberIcon() {
+		const isPlusSubscriber = this._isPlusSubscriber();
 
 		return (
 			<div onClick={this.clickUpgradeBannerOrGoldPlusIcon}>
@@ -604,112 +707,44 @@ class Summary extends React.Component {
 		const {
 			is_expert,
 			is_expanded,
-			enable_anti_tracking,
-			enable_ad_block,
-			enable_smart_block,
-			antiTracking,
-			adBlock,
-			smartBlock,
-			paused_blocking,
-			sitePolicy,
 		} = this.props;
 		const { disableBlocking } = this.state;
-		const isCondensed = this.isCondensed();
-
-		// Trust, Restrict, Pause
-		const pauseButton = (
-			<div className="Summary__pauseButtonContainer">
-				<PauseButton
-					isPaused={paused_blocking}
-					isPausedTimeout={this.props.paused_blocking_timeout}
-					clickPause={this.clickPauseButton}
-					dropdownItems={this.pauseOptions}
-					isCentered={is_expert}
-					isCondensed={isCondensed}
-				/>
-			</div>
-		);
-
-		// Enhanced Anti-Tracking, Enhanced Ad Blocking, Smart Blocking
-		const isCliqzInactive = paused_blocking || sitePolicy || disableBlocking || IS_CLIQZ;
-		const cliqzAntiTracking = (
-			<div className="Summary__cliqzFeatureContainer">
-				<CliqzFeature
-					clickButton={this.clickCliqzFeature}
-					type="anti_tracking"
-					data={antiTracking}
-					active={enable_anti_tracking}
-					cliqzInactive={isCliqzInactive}
-					isTooltipHeader={is_expert}
-					isTooltipBody={!isCondensed}
-					tooltipPosition={isCondensed ? 'right' : is_expert ? 'top top-right' : 'top'}
-				/>
-			</div>
-		);
-		const cliqzAdBlock = (
-			<div className="Summary__cliqzFeatureContainer">
-				<CliqzFeature
-					clickButton={this.clickCliqzFeature}
-					type="ad_block"
-					data={adBlock}
-					active={enable_ad_block}
-					cliqzInactive={isCliqzInactive}
-					isTooltipHeader={is_expert}
-					isTooltipBody={!isCondensed}
-					tooltipPosition={isCondensed ? 'right' : 'top'}
-				/>
-			</div>
-		);
-		const cliqzSmartBlock = (
-			<div className="Summary__cliqzFeatureContainer">
-				<CliqzFeature
-					clickButton={this.clickCliqzFeature}
-					type="smart_block"
-					data={smartBlock}
-					active={enable_smart_block}
-					cliqzInactive={isCliqzInactive}
-					isTooltipHeader={is_expert}
-					isTooltipBody={!isCondensed}
-					tooltipPosition={isCondensed ? 'right' : is_expert ? 'top top-left' : 'top'}
-				/>
-			</div>
-		);
-
+		const isCondensed = this._isCondensed();
 		const summaryClassNames = ClassNames('Summary', {
 			'Summary--simple': !is_expert,
 			'Summary--expert': is_expert && !is_expanded,
 			'Summary--condensed': isCondensed,
 		});
-		// inactive, stacked on ghosteryFeaturesContainer and cliqzFeaturesContainer
+
 		return (
 			<div className={summaryClassNames}>
 				{!isCondensed && disableBlocking && (<NotScanned isSmall={is_expert} />)}
-				{!isCondensed && !disableBlocking && this.renderDonut()}
-				{!isCondensed && !disableBlocking && !is_expert && this.renderPageHostReadout()}
+				{!isCondensed && !disableBlocking && this._renderDonut()}
+				{!isCondensed && !disableBlocking && !is_expert && this._renderPageHostReadout()}
 
-				{isCondensed && !disableBlocking && this.renderTotalTrackersFound()}
+				{isCondensed && !disableBlocking && this._renderTotalTrackersFound()}
 
-				{!disableBlocking && this.renderTotalTrackersBlocked()}
-				{!disableBlocking && this.renderTotalRequestsModified()}
-				{!disableBlocking && this.renderPageLoadTime()}
+				{!disableBlocking && this._renderTotalTrackersBlocked()}
+				{!disableBlocking && this._renderTotalRequestsModified()}
+				{!disableBlocking && this._renderPageLoadTime()}
 
 				{isCondensed && disableBlocking && is_expert && (
 					<div className="Summary__spaceTaker" />
 				)}
 
 				<div className="Summary__ghosteryFeaturesContainer">
-					{this.renderGhosteryFeature('trust')}
-					{this.renderGhosteryFeature('restrict', 'Summary__ghosteryFeatureContainer--middle')}
-					{this.renderPauseButton()}
+					{this._renderGhosteryFeature('trust')}
+					{this._renderGhosteryFeature('restrict', 'Summary__ghosteryFeatureContainer--middle')}
+					{this._renderPauseButton()}
 				</div>
 				<div className="Summary__cliqzFeaturesContainer">
-					{cliqzAntiTracking}
-					{cliqzAdBlock}
-					{cliqzSmartBlock}
+					{this._renderCliqzAntiTracking()}
+					{this._renderCliqzAdBlock()}
+					{this._renderCliqzSmartBlock()}
 				</div>
-				{this.renderStatsNavButton()}
+				{this._renderStatsNavButton()}
 
-				{!isCondensed && this.renderPlusUpgradeBannerOrSubscriberIcon()}
+				{!isCondensed && this._renderPlusUpgradeBannerOrSubscriberIcon()}
 			</div>
 		);
 	}
