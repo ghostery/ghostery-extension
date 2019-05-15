@@ -55,6 +55,7 @@ class Summary extends React.Component {
 		this.clickTrackersCount = this.clickTrackersCount.bind(this);
 		this.clickUpgradeBannerOrGoldPlusIcon = this.clickUpgradeBannerOrGoldPlusIcon.bind(this);
 		this.toggleExpert = this.toggleExpert.bind(this);
+		this._handlePortMessage = this._handlePortMessage.bind(this);
 
 		this.pauseOptions = [
 			{ name: t('pause_30_min'), name_condensed: t('pause_30_min_condensed'), val: 30 },
