@@ -90,7 +90,7 @@ class GhosteryFeature extends React.Component {
 
 		const typeModifier = `GhosteryFeatureButton--${type}`;
 		const active = (type === 'trust' && sitePolicy === WHITELISTED) || (type === 'restrict' && sitePolicy === BLACKLISTED);
-		const ghosteryFeatureClassNames = ClassNames('GhosteryFeatureButton', { typeModifier }, {
+		const ghosteryFeatureClassNames = ClassNames('GhosteryFeatureButton', typeModifier, {
 			'GhosteryFeatureButton--active': active,
 			clickable: !blockingPausedOrDisabled,
 			notClickable: blockingPausedOrDisabled,

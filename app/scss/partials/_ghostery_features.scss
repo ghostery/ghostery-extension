@@ -11,36 +11,46 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-.sub-component.ghostery-features {
-	.button {
-		width: 150px;
-		height: 45px;
-		font-size: 11px;
-		line-height: 1.5;
-		color: #4a4a4a;
-		border-color: #cccccc;
-		background-color: #ffffff;
-		margin-bottom: 0;
-		box-shadow: inset 0 0 0 0 rgba($white, 0);
+.GhosteryFeatureButton {
+	width: 150px;
+	height: 45px;
+	line-height: 1.5;
+	font-size: 11px;
+	color: #4a4a4a;
+	border-color: #cccccc;
+	background-color: #ffffff;
+	margin-bottom: 0;
+	box-shadow: inset 0 0 0 0 rgba($white, 0);
 
-		transition: background-image 0.25s ease-out,
-			background-color 0.25s ease-out,
-			border-color 0.25s ease-out,
-			box-shadow 0.25 ease-out,
-			color 0.25s ease-out;
-		&:hover {
-			background-color: #efefef;
-		}
+	transition: background-image 0.25s ease-out,
+		background-color 0.25s ease-out,
+		border-color 0.25s ease-out,
+		box-shadow 0.25s ease-out,
+		color 0.25s ease-out;
+
+	&:hover {
+		background-color: #efefef;
 	}
-	.button.active.button-trust {
+}
+
+.GhosteryFeatureButton--active {
+	&.GhosteryFeatureButton--trust {
 		color: #ffffff;
 		border-color: #85b329;
 		background-color: #9ecc42;
 		box-shadow: inset 0px 1px 7px 2px #85b329;
+
 		&:hover {
 			background-color: #85b329;
 		}
 	}
+}
+
+.GhosteryFeatureButton--trust {
+
+}
+
+.sub-component.ghostery-features {
 	.button.active.button-restrict {
 		color: #ffffff;
 		border-color: #ce273c;
