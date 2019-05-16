@@ -555,7 +555,7 @@ class Summary extends React.Component {
 					type={type}
 					sitePolicy={sitePolicy}
 					blockingPausedOrDisabled={paused_blocking || disableBlocking}
-					showText={this._isCondensed()}
+					showText={!this._isCondensed()}
 					tooltipPosition={is_expert ? 'right' : 'top'}
 				/>
 			</div>

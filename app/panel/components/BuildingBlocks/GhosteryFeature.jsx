@@ -86,6 +86,8 @@ class GhosteryFeature extends React.Component {
 			type
 		} = this.props;
 
+		console.error(`IVZ ${type} text: ${this._getButtonText()}`);
+
 		const typeModifier = `GhosteryFeatureButton--${type}`;
 		const active = (type === 'trust' && sitePolicy === WHITELISTED) || (type === 'restrict' && sitePolicy === BLACKLISTED);
 		const ghosteryFeatureClassNames = ClassNames('GhosteryFeatureButton', { typeModifier }, {
