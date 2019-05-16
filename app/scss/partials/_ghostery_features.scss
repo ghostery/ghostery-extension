@@ -11,56 +11,60 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+/*
+.GhosteryFeatureButton
+.GhosteryFeatureButton--inactive
+.GhosteryFeatureButton--active-trust
+.GhosteryFeatureButton--active-restrict
+ */
+
 .GhosteryFeatureButton {
 	width: 150px;
 	height: 45px;
 	line-height: 1.5;
 	font-size: 11px;
-	color: #4a4a4a;
-	border-color: #cccccc;
-	background-color: #ffffff;
 	margin-bottom: 0;
-	box-shadow: inset 0 0 0 0 rgba($white, 0);
 
 	transition: background-image 0.25s ease-out,
 		background-color 0.25s ease-out,
 		border-color 0.25s ease-out,
 		box-shadow 0.25s ease-out,
 		color 0.25s ease-out;
+}
+
+.GhosteryFeatureButton--inactive {
+	color: #4a4a4a;
+	border-color: #cccccc;
+	background-color: #ffffff;
+	box-shadow: inset 0 0 0 0 rgba($white, 0);
 
 	&:hover {
 		background-color: #efefef;
 	}
 }
 
-.GhosteryFeatureButton--active {
-	&.GhosteryFeatureButton--trust {
-		color: #ffffff;
-		border-color: #85b329;
-		background-color: #9ecc42;
-		box-shadow: inset 0px 1px 7px 2px #85b329;
+.GhosteryFeatureButton--active-trust {
+	color: #ffffff;
+	border-color: #85b329;
+	background-color: #9ecc42;
+	box-shadow: inset 0px 1px 7px 2px #85b329;
 
-		&:hover {
-			background-color: #85b329;
-		}
+	&:hover {
+		background-color: #85b329;
 	}
-}
 
-.GhosteryFeatureButton--trust {
+.GhosteryFeatureButton--active-restrict {
+	color: #ffffff;
+	border-color: #ce273c;
+	background-color: #e74055;
+	box-shadow: inset 0px 1px 7px 2px #ce273c;
 
+	&:hover {
+		background-color: #ce273c;
+	}
 }
 
 .sub-component.ghostery-features {
-	.button.active.button-restrict {
-		color: #ffffff;
-		border-color: #ce273c;
-		background-color: #e74055;
-		box-shadow: inset 0px 1px 7px 2px #ce273c;
-		&:hover {
-			background-color: #ce273c;
-		}
-	}
-
 	.full-height { height: 100%; }
 	.button-trust .button-text,
 	.button-restrict .button-text {
