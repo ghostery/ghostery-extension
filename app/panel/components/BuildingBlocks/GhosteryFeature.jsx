@@ -86,12 +86,11 @@ class GhosteryFeature extends React.Component {
 			type
 		} = this.props;
 
-		console.error(`IVZ ${type} text: ${this._getButtonText()}`);
-
-		const typeModifier = `GhosteryFeatureButton--${type}`;
 		const active = (type === 'trust' && sitePolicy === WHITELISTED) || (type === 'restrict' && sitePolicy === BLACKLISTED);
-		const ghosteryFeatureClassNames = ClassNames('GhosteryFeatureButton', typeModifier, {
-			'GhosteryFeatureButton--active': active,
+		const ghosteryFeatureClassNames = ClassNames('GhosteryFeatureButton', {
+			'GhosteryFeatureButton--inactive': !active,
+			'GhosteryFeatureButton--active-trust': active && type === 'trust',
+			'GhosteryFeatureButton--active-restrict': active && type === 'restrict',
 			clickable: !blockingPausedOrDisabled,
 			notClickable: blockingPausedOrDisabled,
 		});
