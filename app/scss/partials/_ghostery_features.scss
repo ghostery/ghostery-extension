@@ -11,13 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/*
-.GhosteryFeatureButton
-.GhosteryFeatureButton--inactive
-.GhosteryFeatureButton--active-trust
-.GhosteryFeatureButton--active-restrict
- */
-
 .GhosteryFeatureButton {
 	width: 150px;
 	height: 45px;
@@ -66,7 +59,6 @@
 }
 
 .sub-component.ghostery-features {
-	.full-height { height: 100%; }
 	.button-trust .button-text,
 	.button-restrict .button-text {
 		padding: 0 10px 0 30px;

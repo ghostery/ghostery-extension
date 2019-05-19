@@ -13,19 +13,6 @@
 
 // The donut *container* is specific to the Summary component and should live here
 // The donut itself is not intrinsically tied to Summary and can live wherever
-
-.Ghostery--clickable {
-	cursor: pointer;
-}
-
-.Ghostery--notClickable {
-	cursor: not-allowed;
-}
-
-.Ghostery--invisible {
-	visibility: hidden;
-}
-
 .GhosteryTextLabel {
 	color: #4a4a4a;
 	font-weight: 600;

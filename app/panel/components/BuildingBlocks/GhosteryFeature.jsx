@@ -92,7 +92,7 @@ class GhosteryFeature extends React.Component {
 			'GhosteryFeatureButton--active-trust': active && type === 'trust',
 			'GhosteryFeatureButton--active-restrict': active && type === 'restrict',
 			clickable: !blockingPausedOrDisabled,
-			notClickable: blockingPausedOrDisabled,
+			'not-clickable': blockingPausedOrDisabled,
 		});
 
 		return (

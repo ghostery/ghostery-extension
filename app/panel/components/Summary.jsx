@@ -55,7 +55,7 @@ class Summary extends React.Component {
 		this.clickTrackersCount = this.clickTrackersCount.bind(this);
 		this.clickUpgradeBannerOrGoldPlusIcon = this.clickUpgradeBannerOrGoldPlusIcon.bind(this);
 		this.toggleExpert = this.toggleExpert.bind(this);
-		this._handlePortMessage = this._handlePortMessage.bind(this);
+		this.handlePortMessage = this.handlePortMessage.bind(this);
 
 		this.pauseOptions = [
 			{ name: t('pause_30_min'), name_condensed: t('pause_30_min_condensed'), val: 30 },
@@ -72,7 +72,7 @@ class Summary extends React.Component {
 		this._updateSiteNotScanned(this.props);
 
 		this._dynamicUIPort = this.context;
-		this._dynamicUIPort.onMessage.addListener(this._handlePortMessage);
+		this._dynamicUIPort.onMessage.addListener(this.handlePortMessage);
 		this._dynamicUIPort.postMessage({ name: 'SummaryComponentDidMount' });
 	}
 
@@ -92,7 +92,7 @@ class Summary extends React.Component {
 	 */
 	componentWillUnmount() {
 		this._dynamicUIPort.postMessage({ name: 'SummaryComponentWillUnmount' });
-		this._dynamicUIPort.onMessage.removeListener(this._handlePortMessage);
+		this._dynamicUIPort.onMessage.removeListener(this.handlePortMessage);
 	}
 
 	/**
@@ -275,7 +275,7 @@ class Summary extends React.Component {
 	 * Handles messages from dynamic UI port to background
 	 * @param {Object}	msg		updated findings sent from the background by PanelData
 	 */
-	_handlePortMessage(msg) {
+	handlePortMessage(msg) {
 		if (msg.to !== 'summary' || !msg.body) { return; }
 
 		const { body } = msg;
@@ -453,7 +453,7 @@ class Summary extends React.Component {
 	 */
 	_renderTotalTrackersFound() {
 		return (
-			<div className="Summary_totalTrackerCount Ghostery--clickable" onClick={this.clickTrackersCount}>
+			<div className="Summary_totalTrackerCount clickable" onClick={this.clickTrackersCount}>
 				<span className="summary-total-tracker-count g-tooltip">
 					{this._totalTrackersFound()}
 					<Tooltip
@@ -474,7 +474,7 @@ class Summary extends React.Component {
 		const isCondensed = this._isCondensed();
 
 		const totalTrackersBlockedContainerClassNames = ClassNames('Summary__pageStatContainer', {
-			'Ghostery--clickable': is_expert,
+			clickable: is_expert,
 		});
 		const totalTrackersBlockedClassNames = ClassNames('GhosteryKVReadout', 'GhosteryKVReadout--totalTrackersBlocked', {
 			'GhosteryKVReadout--withoutKey': isCondensed,

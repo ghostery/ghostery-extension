@@ -14,11 +14,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-//Import Global Partials
+// Import Global Partials
 @import "settings"; //includes _colors.scss
 @import './partials/_fonts';
 @import './partials/_placeholders';
 @import './partials/_mixins';
+
+// IMport shared helpers
+@import 'shared_helper_classes';
 
 html body {
 	margin: 0px;
