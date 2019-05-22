@@ -78,23 +78,38 @@ class GhosteryFeature extends React.Component {
 		}
 	}
 
+	_trustActive() {
+		const { type, sitePolicy } = this.props;
+
+		return (type === 'trust' && sitePolicy === WHITELISTED);
+	}
+
+	_restrictActive() {
+		const { type, sitePolicy } = this.props;
+
+		return (type === 'restrict' && sitePolicy === BLACKLISTED);
+	}
+
 	render() {
 		const {
 			blockingPausedOrDisabled,
-			sitePolicy,
 			tooltipPosition,
 			type
 		} = this.props;
 
-		const active = (type === 'trust' && sitePolicy === WHITELISTED) || (type === 'restrict' && sitePolicy === BLACKLISTED);
-		const ghosteryFeatureClassNames = ClassNames('GhosteryFeatureButton', {
+		const active = this._trustActive() || this._restrictActive();
+		// TODO Foundation dependency: button
+		const ghosteryFeatureClassNames = ClassNames('button', 'GhosteryFeatureButton', {
 			'GhosteryFeatureButton--inactive': !active,
-			'GhosteryFeatureButton--active-trust': active && type === 'trust',
-			'GhosteryFeatureButton--active-restrict': active && type === 'restrict',
+			'GhosteryFeatureButton--active': active,
+			'GhosteryFeatureButton--trust': type === 'trust',
+			'GhosteryFeatureButton--restrict': type === 'restrict',
+			'GhosteryFeatureButton--blockingPausedOrDisabled': blockingPausedOrDisabled,
 			clickable: !blockingPausedOrDisabled,
 			'not-clickable': blockingPausedOrDisabled,
 		});
 
+		// TODO Foundation dependency: flex-container, align-center-middle
 		return (
 			<div className={ghosteryFeatureClassNames} onClick={this.handleClick}>
 				<span className="flex-container align-center-middle full-height">

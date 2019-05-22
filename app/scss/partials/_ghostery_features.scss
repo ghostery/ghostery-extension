@@ -23,62 +23,71 @@
 		border-color 0.25s ease-out,
 		box-shadow 0.25s ease-out,
 		color 0.25s ease-out;
-}
-
-.GhosteryFeatureButton--inactive {
-	color: #4a4a4a;
-	border-color: #cccccc;
-	background-color: #ffffff;
-	box-shadow: inset 0 0 0 0 rgba($white, 0);
 
 	&:hover {
-		background-color: #efefef;
+		background-color: $ghosty-blue;
 	}
 }
 
-.GhosteryFeatureButton--active-trust {
-	color: #ffffff;
+.GhosteryFeatureButton--inactive {
+	color: $tundora;
+	border-color: #cccccc;
+	background-color: $white;
+	box-shadow: inset 0 0 0 0 rgba($white, 0);
+}
+
+.GhosteryFeatureButton--active {
+	color: $white;
+}
+
+.GhosteryFeatureButton--trust.GhosteryFeatureButton--inactive {
+	.GhosteryFeatureButton__text {
+		background-image: buildIconTrust($tundora);
+	}
+}
+
+.GhosteryFeatureButton--trust.GhosteryFeatureButton--active {
 	border-color: #85b329;
-	background-color: #9ecc42;
+	background-color: $atlantis;
 	box-shadow: inset 0px 1px 7px 2px #85b329;
 
 	&:hover {
 		background-color: #85b329;
 	}
+
+	.GhosteryFeatureButton__text {
+		background-image: buildIconTrust($white);
+	}
 }
 
-.GhosteryFeatureButton--active-restrict {
-	color: #ffffff;
+.GhosteryFeatureButton--restrict.GhosteryFeatureButton--inactive {
+	.GhosteryFeatureButton__text {
+		background-image: buildIconRestrict($tundora);
+	}
+}
+
+.GhosteryFeatureButton--restrict.GhosteryFeatureButton--active {
 	border-color: #ce273c;
-	background-color: #e74055;
+	background-color: $red;
 	box-shadow: inset 0px 1px 7px 2px #ce273c;
 
 	&:hover {
 		background-color: #ce273c;
 	}
+
+	.GhosteryFeatureButton__text {
+		background-image: buildIconRestrict($white);
+	}
+}
+
+.GhosteryFeatureButton__text {
+	padding: 0 10px 0 30px;
+	background-repeat: no-repeat;
+	background-position: 0 center;
+	background-size: 14px 14px;
 }
 
 .sub-component.ghostery-features {
-	.button-trust .button-text,
-	.button-restrict .button-text {
-		padding: 0 10px 0 30px;
-		background-repeat: no-repeat;
-		background-position: 0 center;
-		background-size: 14px 14px;
-	}
-	.button-trust .button-text {
-		background-image: buildIconTrust(#4a4a4a);
-	}
-	.button-trust.active .button-text {
-		background-image: buildIconTrust(#ffffff);
-	}
-	.button-restrict .button-text {
-		background-image: buildIconRestrict(#4a4a4a);
-	}
-	.button-restrict.active .button-text {
-		background-image: buildIconRestrict(#ffffff);
-	}
-
 	.button-group.inactive {
 		.button {
 			color: #a4a4a4;
@@ -95,18 +104,6 @@
 			color: #ffffff;
 			border-color: #ff8da2;
 			background-color: #ff8da2;
-		}
-		.button-trust .button-text {
-			background-image: buildIconTrust(#a4a4a4);
-		}
-		.button-trust.active .button-text {
-			background-image: buildIconTrust(#ffffff);
-		}
-		.button-restrict .button-text {
-			background-image: buildIconRestrict(#a4a4a4);
-		}
-		.button-restrict.active .button-text {
-			background-image: buildIconRestrict(#ffffff);
 		}
 	}
 
