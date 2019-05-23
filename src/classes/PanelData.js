@@ -17,6 +17,7 @@
 import _ from 'underscore';
 import throttle from 'lodash.throttle';
 import button from './BrowserButton';
+import cliqz from './Cliqz';
 import conf from './Conf';
 import foundBugs from './FoundBugs';
 import bugDb from './BugDb';
@@ -29,6 +30,12 @@ import dispatcher from './Dispatcher';
 import { sendCliqzModulesData } from '../utils/cliqzModulesData';
 import { getActiveTab, flushChromeMemoryCache, processUrl } from '../utils/utils';
 import { objectEntries, log } from '../utils/common';
+
+const cliqzModuleMock = {
+	isEnabled: false,
+	on: () => {},
+};
+const offers = cliqz.modules['offers-v2'] || cliqzModuleMock;
 
 const SYNC_SET = new Set(globals.SYNC_ARRAY);
 const { IS_CLIQZ } = globals;
@@ -86,7 +93,22 @@ class PanelData {
 			account.getUserSettings()
 				.then(userSettings => this._postUserSettings(userSettings))
 				.catch(err => log('Failed getting user settings from PanelData#initPort:', err));
+
+			this.filterOffersByRemote();
 		});
+	}
+
+	/**
+	 * Handles retrieval of the subset of Cliqz offers that is intended to be shown in the Ghostery extension
+	 * Marked as public because it is called by the 'getPanelData' handler in background.js (used by panel-android and hub)
+	 * as well as by initPort in this class
+	 */
+	filterOffersByRemote() {
+		const { enable_offers, is_expert } = conf;
+
+		if (offers.isEnabled && enable_offers && is_expert) {
+			rewards.filterOffersByRemote().catch(err => log('Failed to filter offers by remote:', err));
+		}
 	}
 
 	/**

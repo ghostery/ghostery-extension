@@ -782,6 +782,8 @@ function onMessageHandler(request, sender, callback) {
 	}
 
 	// HANDLE UNIVERSAL EVENTS HERE (NO ORIGIN LISTED ABOVE)
+	// The 'getPanelData' message is never sent by the panel, which uses ports only since 8.3.2
+	// The  message is still sent by panel-android and by the hub as of 8.4.0
 	if (name === 'getPanelData') {
 		if (!message.tabId) {
 			utils.getActiveTab((tab) => {
@@ -795,9 +797,7 @@ function onMessageHandler(request, sender, callback) {
 			});
 		}
 		account.getUserSettings().catch(err => log('Failed getting user settings from getPanelData:', err));
-		if (offers.isEnabled && conf.enable_offers && conf.is_expert) {
-			rewards.filterOffersByRemote().catch(err => log('Failed to filter offers by remote:', err));
-		}
+		panelData.filterOffersByRemote();
 		return true;
 	} else if (name === 'getStats') {
 		insights.action('getStatsTimeline', message.from, message.to, true, true).then((data) => {
