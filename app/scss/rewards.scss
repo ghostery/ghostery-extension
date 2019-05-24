@@ -207,7 +207,7 @@
 			.reward-content-detail {
 				display: flex;
 				flex-direction: column;
-				width: 200px;
+				width: 220px;
 				margin-bottom: 9px;
 				color: $tundora;
 
@@ -273,6 +273,10 @@
 					font-weight: 500;
 					border: 0px;
 					background-color: transparent;
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					max-width: 50%;
+					overflow: hidden;
 					.reward-code-input {
 						opacity: 0;
 						position: absolute;
