@@ -94,21 +94,10 @@ class PanelData {
 				.then(userSettings => this._postUserSettings(userSettings))
 				.catch(err => log('Failed getting user settings from PanelData#initPort:', err));
 
-			this.filterOffersByRemote();
+			if (this._needToFilterOffersByRemote()) {
+				rewards.filterOffersByRemote().catch(err => log('Failed to filter offers by remote:', err));
+			}
 		});
-	}
-
-	/**
-	 * Handles retrieval of the subset of Cliqz offers that is intended to be shown in the Ghostery extension
-	 * Marked as public because it is called by the 'getPanelData' handler in background.js (used by panel-android and hub)
-	 * as well as by initPort in this class
-	 */
-	filterOffersByRemote() {
-		const { enable_offers, is_expert } = conf;
-
-		if (offers.isEnabled && enable_offers && is_expert) {
-			rewards.filterOffersByRemote().catch(err => log('Failed to filter offers by remote:', err));
-		}
 	}
 
 	/**
@@ -140,7 +129,16 @@ class PanelData {
 				case 'RewardsComponentDidMount':
 					this._mountedComponents.rewards = true;
 					this._panelPort.onDisconnect.addListener(rewards.panelHubClosedListener);
-					this._postMessage('rewards', this._getRewardsData());
+					if (this._needToFilterOffersByRemote()) {
+						rewards.filterOffersByRemote()
+							.then(() => this._postRewardsData())
+							.catch((err) => {
+								log('Failed to filter offers by remote:', err);
+								this._postRewardsData();
+							});
+					} else {
+						this._postRewardsData();
+					}
 					break;
 				case 'RewardsComponentWillUnmount':
 					this._mountedComponents.rewards = false;
@@ -176,6 +174,7 @@ class PanelData {
 	clearPageLoadTime(tab_id) {
 		this.postPageLoadTime(tab_id, true);
 	}
+
 
 	// TODO convert Android panel and Hub to also use port so we can have a single streamlined communication channel & API
 	/**
@@ -536,6 +535,16 @@ class PanelData {
 	}
 
 	/**
+	 * Checks to see whether we need to retrieve a filtered set of rewards from Cliqz
+	 * @returns {boolean}	true if we do need to retrieve filtered rewards
+	 */
+	_needToFilterOffersByRemote() {
+		const { enable_offers, is_expert } = conf;
+
+		return (offers.isEnabled && enable_offers && is_expert);
+	}
+
+	/**
 	 * Retrieves antitracking and adblock Cliqz data and sends it to the panel
 	 */
 	_postCliqzModulesData() {
@@ -556,6 +565,14 @@ class PanelData {
 			to,
 			body: data
 		});
+	}
+
+	/**
+	 * Legibility wrapper
+	 * @private
+	 */
+	_postRewardsData() {
+		this._postMessage('rewards', this._getRewardsData());
 	}
 
 	/**

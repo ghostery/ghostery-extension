@@ -797,7 +797,6 @@ function onMessageHandler(request, sender, callback) {
 			});
 		}
 		account.getUserSettings().catch(err => log('Failed getting user settings from getPanelData:', err));
-		panelData.filterOffersByRemote();
 		return true;
 	} else if (name === 'getStats') {
 		insights.action('getStatsTimeline', message.from, message.to, true, true).then((data) => {
