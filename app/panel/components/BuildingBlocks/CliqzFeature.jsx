@@ -115,11 +115,30 @@ class CliqzFeature extends React.Component {
 			type
 		} = this.props;
 
-		const specificFeatureModifier = `CliqzFeature--${type}`;
+		let cssType;
+		switch (type) {
+			case 'anti_tracking':
+				cssType = 'antitrack';
+				break;
+			case 'ad_block':
+				cssType = 'adblock';
+				break;
+			case 'smart_block':
+				cssType = 'smartblock';
+				break;
+			default:
+				cssType = 'check-the-type-props-you-are-passing-to-CliqzFeature';
+				break;
+		}
+
+		const specificFeatureModifier = `CliqzFeature--${cssType}`;
 		const cliqzFeatureClassNames = ClassNames('CliqzFeature', specificFeatureModifier, {
-			active,
+			'CliqzFeature--active': active,
+			'CliqzFeature--inactive': !active,
+			'CliqzFeature--cliqzInactive': cliqzInactive,
+			'CliqzFeature--cliqzActive': !cliqzInactive,
 			clickable: !cliqzInactive,
-			notClickable: cliqzInactive,
+			'not-clickable': cliqzInactive,
 		});
 		const featureName = t(`drawer_title_${type}`);
 
