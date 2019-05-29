@@ -546,7 +546,7 @@ class Summary extends React.Component {
 			sitePolicy,
 		} = this.props;
 		const { disableBlocking } = this.state;
-		const containerClassNames = ClassNames('Summary__ghosteryFeatureContainer', 'g-tooltip', modifiers);
+		const containerClassNames = ClassNames('Summary__ghosteryFeatureContainer', modifiers);
 
 		return (
 			<div className={containerClassNames}>

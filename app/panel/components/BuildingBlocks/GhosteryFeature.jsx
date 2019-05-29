@@ -40,9 +40,7 @@ class GhosteryFeature extends React.Component {
 		this.props.handleClick(this.props.type);
 	}
 
-	_getButtonText() {
-		const { sitePolicy, showText, type } = this.props;
-
+	_getButtonText(sitePolicy, showText, type) {
 		if (!showText) {
 			return '';
 		}
@@ -61,9 +59,7 @@ class GhosteryFeature extends React.Component {
 		}
 	}
 
-	_getTooltipText() {
-		const { sitePolicy, type } = this.props;
-
+	_getTooltipText(sitePolicy, type) {
 		switch (type) {
 			case 'trust':
 				return (sitePolicy === WHITELISTED ?
@@ -93,34 +89,123 @@ class GhosteryFeature extends React.Component {
 	render() {
 		const {
 			blockingPausedOrDisabled,
+			sitePolicy,
+			showText,
 			tooltipPosition,
 			type
 		} = this.props;
 
 		const active = this._trustActive() || this._restrictActive();
 		// TODO Foundation dependency: button
-		const ghosteryFeatureClassNames = ClassNames('button', 'GhosteryFeatureButton', {
-			'GhosteryFeatureButton--inactive': !active,
-			'GhosteryFeatureButton--active': active,
-			'GhosteryFeatureButton--trust': type === 'trust',
-			'GhosteryFeatureButton--restrict': type === 'restrict',
-			'GhosteryFeatureButton--blockingPausedOrDisabled': blockingPausedOrDisabled,
-			clickable: !blockingPausedOrDisabled,
-			'not-clickable': blockingPausedOrDisabled,
-		});
+		const ghosteryFeatureClassNames = ClassNames(
+			'button',
+			'g-tooltip',
+			'GhosteryFeatureButton',
+			'GhosteryFeatureButton--FoundationButtonOverrides',
+			{
+				'GhosteryFeatureButton--inactive': !active,
+				'GhosteryFeatureButton--active': active,
+				'GhosteryFeatureButton--trust': type === 'trust',
+				'GhosteryFeatureButton--restrict': type === 'restrict',
+				'GhosteryFeatureButton--blockingPausedOrDisabled': blockingPausedOrDisabled,
+				clickable: !blockingPausedOrDisabled,
+				'not-clickable': blockingPausedOrDisabled,
+			}
+		);
 
 		// TODO Foundation dependency: flex-container, align-center-middle
 		return (
 			<div className={ghosteryFeatureClassNames} onClick={this.handleClick}>
 				<span className="flex-container align-center-middle full-height">
 					<span className="GhosteryFeatureButton__text">
-						{this._getButtonText()}
+						{this._getButtonText(sitePolicy, showText, type)}
 					</span>
 				</span>
-				<Tooltip body={this._getTooltipText()} position={tooltipPosition} />
+				<Tooltip body={this._getTooltipText(sitePolicy, type)} position={tooltipPosition} />
 			</div>
 		);
 	}
+
+	/**
+	 * React's required render function. Returns JSX
+	 * @return {JSX} JSX for rendering the Ghostery Features portion of the Summary View
+	 */
+	/*
+	render() {
+		const {
+			isAbPause,
+			isInactive,
+			isStacked,
+			isCondensed,
+			sitePolicy
+		} = this.props;
+
+		const buttonGroupClassNames = ClassNames('button-group', {
+			inactive: isInactive,
+			stacked: isStacked,
+		});
+		const trustClassNames = ClassNames('button', 'button-trust', 'g-tooltip', {
+			'ab-pause': isAbPause,
+			'button-left': isAbPause && !isStacked,
+			'button-top': (isAbPause || isCondensed) && isStacked,
+			condensed: isCondensed,
+			active: sitePolicy === 2,
+			clickable: !isInactive,
+			'not-clickable': isInactive,
+		});
+		const customClassNames = ClassNames('button', 'button-custom', 'g-tooltip', {
+			'ab-pause': isAbPause,
+			'button-center': isAbPause && true,
+			condensed: isCondensed,
+			active: !sitePolicy,
+			clickable: !isInactive,
+			'not-clickable': isInactive,
+		});
+		const restrictClassNames = ClassNames('button', 'button-restrict', 'g-tooltip', {
+			'ab-pause': isAbPause,
+			'button-right': isAbPause && !isStacked,
+			'button-bottom': isAbPause && isStacked,
+			'button-center': !isAbPause && isCondensed && isStacked,
+			condensed: isCondensed,
+			active: sitePolicy === 1,
+			clickable: !isInactive,
+			'not-clickable': isInactive,
+		});
+
+		return (
+			<div className="sub-component ghostery-features">
+				<div className={buttonGroupClassNames}>
+					<div className={trustClassNames} onClick={this.clickTrustButton}>
+						<span className="flex-container align-center-middle full-height">
+							<span className="button-text">
+								{this.getTrustText()}
+							</span>
+						</span>
+						<Tooltip body={(sitePolicy === 2) ? t('tooltip_trust_on') : t('tooltip_trust')} position={(isStacked) ? 'right' : 'top'} />
+					</div>
+					{isAbPause && (
+						<div className={customClassNames} onClick={this.clickCustomButton}>
+							<span className="flex-container align-center-middle full-height">
+								<span className="button-text">
+									{t('summary_custom_settings')}
+								</span>
+							</span>
+							<Tooltip body={t('tooltip_custom_settings')} position={(isStacked) ? 'right' : 'top'} />
+						</div>
+					)}
+					<div className={restrictClassNames} onClick={this.clickRestrictButton}>
+						<span className="flex-container align-center-middle full-height">
+							<span className="button-text">
+								{this.getRestrictText()}
+							</span>
+						</span>
+						<Tooltip body={(sitePolicy === 1) ? t('tooltip_restrict_on') : t('tooltip_restrict')} position={(isStacked) ? 'right' : 'top'} />
+					</div>
+				</div>
+			</div>
+		);
+	}
+	 */
 }
 
 export default GhosteryFeature;
