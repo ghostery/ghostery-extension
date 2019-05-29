@@ -104,20 +104,24 @@ $cliqz-feature--light-gray: #dedede;
 	background-image: buildIconSmartBlocking($cliqz-feature--pale-blue);
 }
 
+.CliqzFeature__feature-name {
+	color: $cliqz-feature--gray;
+	text-align: center;
+	font-size: 11px;
+	line-height: 26px;
+	font-weight: 600;
+	transition: color 0.25s ease-out;
+
+	white-space: nowrap;
+	overflow-x: hidden;
+	text-overflow: ellipsis;
+}
+
+.CliqzFeature--active .CliqzFeature__feature-name {
+	color: $cliqz-feature--blue;
+}
+
 .sub-component.cliqz-features {
-
-	.feature-name {
-		color: $cliqz-feature--gray;
-		text-align: center;
-		font-size: 11px;
-		line-height: 26px;
-		font-weight: 600;
-		transition: color 0.25s ease-out;
-
-		white-space: nowrap;
-		overflow-x: hidden;
-		text-overflow: ellipsis;
-	}
 	.active .feature-name { color: $cliqz-feature--blue; }
 	&.inactive .feature-name { color: $cliqz-feature--light-gray; }
 	&.inactive .active .feature-name { color: $cliqz-feature--pale-blue; }

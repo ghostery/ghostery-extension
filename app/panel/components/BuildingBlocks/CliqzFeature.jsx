@@ -140,7 +140,7 @@ class CliqzFeature extends React.Component {
 			clickable: !cliqzInactive,
 			'not-clickable': cliqzInactive,
 		});
-		const featureName = t(`drawer_title_${type}`);
+		const featureName = t(`drawer_title_enable_${type}`);
 
 		return (
 			<div className={cliqzFeatureClassNames} onClick={this.clickCliqzFeature}>
