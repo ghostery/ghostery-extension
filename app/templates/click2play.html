@@ -49,7 +49,9 @@
 						<p id="text"><%= data.click2play_text %></p>
 					<% } %>
 					<img id="ghostery-blocked" src="<%= data.ghostery_blocked_src %>" title="<%= data.ghostery_blocked_title %>">
-					<a id="action-once" href="#" onclick="return false"><img src="<%= data.allow_once_src %>" title="<%= data.allow_once_title %>"></a>
+					<% if (data.smartBlocked === false) { %>
+						<a id="action-once" href="#" onclick="return false"><img src="<%= data.allow_once_src %>" title="<%= data.allow_once_title %>"></a>
+					<% } %>
 					<% if (data.blacklisted === false) { %>
 						<a id="action-always" href="#" onclick="return false"><img src="<%= data.allow_always_src %>" title="<%= data.allow_always_title %>"></a>
 					<% } %>

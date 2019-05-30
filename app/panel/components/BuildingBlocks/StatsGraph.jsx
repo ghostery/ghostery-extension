@@ -11,9 +11,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import _ from 'underscore';
 import React from 'react';
 import * as D3 from 'd3';
-import isEqual from 'lodash.isequal';
 
 /**
  * Generates an animated graph displaying locally stored stats
@@ -30,7 +30,7 @@ class StatsGraph extends React.Component {
 	 * Lifecycle event
 	 */
 	componentDidUpdate(prevProps) {
-		if (!isEqual(prevProps, this.props)) {
+		if (!_.isEqual(prevProps, this.props)) {
 			this.generateGraph();
 		}
 	}

@@ -22,20 +22,28 @@ import Policy from '../classes/Policy';
 import tabInfo from '../classes/TabInfo';
 import { log } from './common';
 import { sendMessage, processUrl, injectScript } from './utils';
-import c2p_tpl from '../../app/templates/click2play';
+import c2p_tpl from '../../app/templates/click2play.html';
 import c2p_images from '../../app/data-images/click2play';
 
 const policy = new Policy();
 
 /**
  * Builds Click2Play templates for a given tab_id.
+ *
+ * Restricted Sites: Only show the "allow once" option, since blacklisting overrides
+ * site-specific tracker allow settings.
+ *
+ * Smart Blocking: If the app was blocked by Smart Blocking, we only show the "allow always" option because
+ * the tracker was most likely a lazy-loaded widget (comment, video) and C2P will reset the allowOnceList
+ * before the widget has a chance to load.
+ *
  * @memberOf BackgroundUtils
  *
  * @param  {Object} details 	request parameters
  * @param  {number} app_id 		tracker id
  */
 export function buildC2P(details, app_id) {
-	const { tab_id } = details;
+	const { tab_id, smartBlocked } = details;
 	let c2pApp = c2pDb.db.apps && c2pDb.db.apps[app_id];
 
 	if (!c2pApp) {
@@ -59,6 +67,7 @@ export function buildC2P(details, app_id) {
 	c2pApp.forEach((c2pAppDef) => {
 		const tplData = {
 			blacklisted, // if the site is blacklisted, don't show allow_always button
+			smartBlocked, // if the app has been Smart Blocked, don't show allow_once (see comment block)
 			button: !!c2pAppDef.button,
 			ghostery_blocked_src: c2p_images.ghosty_blocked,
 			allow_always_src: c2p_images.allow_unblock,
@@ -81,7 +90,7 @@ export function buildC2P(details, app_id) {
 			}
 		}
 
-		c2pHtml.push(c2p_tpl(tplData));
+		c2pHtml.push(c2p_tpl({ data: tplData }));
 	});
 
 	if (app_id === 2575) { // Hubspot forms. Adjust selector.
@@ -181,7 +190,7 @@ function _getHubspotFormSelector(url) {
 	// Hubspot url has a fixed format
 	// https://forms.hubspot.com/embed/v3/form/532040/95b5de3a-6d4a-4729-bebf-07c41268d773?callback=hs_reqwest_0&hutk=941df50e9277ee76755310cd78647a08
 	// The following three parameters are privacy-safe:
-	// 532040 - parner id
+	// 532040 - partner id
 	// 95b5de3a-6d4a-4729-bebf-07c41268d773 - form id on the page
 	// hs_reqwest_0 - function which will be called on the client after the request
 	//

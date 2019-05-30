@@ -18,6 +18,7 @@ import tabInfo from './TabInfo';
 import compDb from './CompatibilityDb';
 import globals from './Globals';
 import Policy from './Policy';
+import c2pDb from './Click2PlayDb';
 import { log } from '../utils/common';
 /**
  * Class for handling Smart Blocking site policy.
@@ -86,7 +87,7 @@ class PolicySmartBlock {
 
 		let reason;
 
-		// block if it's been more than 5 seconds since page load started
+		// Block all trackers that load after 5 seconds from when page load started
 		if (this._requestWasSlow(tabId, appId, requestTimestamp)) {
 			reason = 'slow';
 
@@ -98,14 +99,14 @@ class PolicySmartBlock {
 				reason = 'allowedType'; 	// allow if tracker is in breaking type
 			} else if (this._pageWasReloaded(tabId, appId)) {
 				reason = 'pageReloaded'; 	// allow if page has been reloaded recently
+			} else if (c2pDb.allowedOnce(tabId, appId)) {
+				reason = 'c2pAllowOnce'; // allow if the user has selected "allow once" in Click2Play
 			}
 		}
 
+		// We are only blocking slow trackers that do not cause page breakage
 		const result = (reason === 'slow');
 		if (result) {
-			// We don't want record in tabInfo reasons other than 'slow'
-			// Smart blocking should not claim that it unblocks trackers which were unblocked
-			// for other reasons before shouldBlock was called for them.
 			log('Smart Blocking blocked appId', appId, 'for reason:', reason);
 			tabInfo.setTabSmartBlockAppInfo(tabId, appId, 'slow', true);
 		}
@@ -258,7 +259,7 @@ class PolicySmartBlock {
 	}
 
 	/**
-	 * Check if request loaded after a threshhold time since page load.
+	 * Check if request loaded after a threshold time since page load.
 	 * @param  	{string}	tabId				tab id
 	 * @param  	{string} 	appId				tracker id
 	 * @param  	{number} 	requestTimestamp   	timestamp of the request
