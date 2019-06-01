@@ -660,9 +660,14 @@ class Summary extends React.Component {
 	 * @return {JSX} JSX for rendering the stats nav button
 	 */
 	_renderStatsNavButton() {
-		const summaryViewStatsButton = ClassNames('Summary__statsButton', 'g-tooltip', {
-			hide: this.props.is_expert
-		});
+		const summaryViewStatsButton = ClassNames(
+			'Summary__statsButton',
+			'Summary__statsButton--absolutely-positioned',
+			'g-tooltip',
+			{
+				hide: this.props.is_expert,
+			}
+		);
 
 		return (
 			<div className={summaryViewStatsButton}>

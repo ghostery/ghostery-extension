@@ -56,6 +56,11 @@
 	.GhosteryKVReadout__value { color: #9ecc42; }
 }
 
+.Summary {
+	position: absolute;
+	height: 479px;
+}
+
 .Summary__pageHostContainer {
 	text-align: center;
 	font-size: 11px;
@@ -64,11 +69,6 @@
 .Summary__pageStatContainer {
 	font-size: 14px;
 	line-height: 21px;
-}
-
-.Summary {
-	posiiton: absolute;
-	height: 479px;
 }
 
 .Summary--simple {
@@ -162,7 +162,7 @@
 	}
 }
 
-.Summary__statsButton {
+.Summary__statsButton.Summary__statsButton--absolutely-positioned {
 	position: absolute;
 	right: 0;
 	top: 40px;
