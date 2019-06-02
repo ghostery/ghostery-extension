@@ -691,9 +691,11 @@ class Summary extends React.Component {
 				}
 
 				{!isPlusSubscriber &&
-				<div className="upgrade-banner-container">
-					<span className="upgrade-banner-text">{t('subscription_upgrade_to')}</span>
-					<ReactSVG path="/app/images/panel/upgrade-banner-plus.svg" className="upgrade-banner-plus" />
+				<div className="Summary__upgradeBannerContainer">
+					<div className="UpgradeBanner">
+						<span className="UpgradeBanner__text">{t('subscription_upgrade_to')}</span>
+						<ReactSVG path="/app/images/panel/upgrade-banner-plus.svg" className="UpgradeBanner__plus" />
+					</div>
 				</div>
 				}
 			</div>
