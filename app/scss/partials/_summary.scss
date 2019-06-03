@@ -195,11 +195,8 @@
 	top: 10px;
 }
 
-#content-summary {
-	.gold-plus-icon {
-		@extend %pointer;
-		position: absolute;
-		left: 10px;
-		top: 11px;
-	}
+.Summary__subscriberBadgeContainer {
+	position: absolute;
+	left: 10px;
+	top: 11px;
 }

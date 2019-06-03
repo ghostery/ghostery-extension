@@ -693,7 +693,11 @@ class Summary extends React.Component {
 		return (
 			<div onClick={this.clickUpgradeBannerOrGoldPlusIcon}>
 				{isPlusSubscriber &&
-				<ReactSVG path="/app/images/panel/gold-plus-icon.svg" className="gold-plus-icon" />
+					<div className="Summary__subscriberBadgeContainer">
+						<div className="SubscriberBadge">
+							<ReactSVG path="/app/images/panel/gold-plus-icon.svg" className="gold-plus-icon" />
+						</div>
+					</div>
 				}
 
 				{!isPlusSubscriber &&
