@@ -484,7 +484,7 @@ class Summary extends React.Component {
 		return (
 			<div className={totalTrackersBlockedContainerClassNames} onClick={this.clickTrackersBlocked}>
 				<div className={totalTrackersBlockedClassNames}>
-					<span className="GhosteryKVReadout__text">{t('trackers_blocked')} </span>
+					<span className="GhosteryKVReadout__key">{t('trackers_blocked')} </span>
 					<span className="GhosteryKVReadout__value">
 						{this._totalTrackersBlockedCount()}
 					</span>
@@ -505,8 +505,8 @@ class Summary extends React.Component {
 		return (
 			<div className="Summary__pageStatContainer g-tooltip">
 				<div className={totalRequestsModifiedClassNames}>
-					<span className="text">{t('requests_modified')} </span>
-					<span className="value">
+					<span className="GhosteryKVReadout__key">{t('requests_modified')} </span>
+					<span className="GhosteryKVReadout__value">
 						{this._requestsModifiedCount()}
 					</span>
 				</div>
@@ -530,7 +530,7 @@ class Summary extends React.Component {
 		return (
 			<div className="Summary__pageStatContainer">
 				<div className={pageLoadTimeClassNames}>
-					<span className="GhosteryKVReadout__text">{t('page_load')} </span>
+					<span className="GhosteryKVReadout__key">{t('page_load')} </span>
 					<span className="GhosteryKVReadout__value">
 						{trackerLatencyTotal ? `${trackerLatencyTotal} ${t('settings_seconds')}` : '-'}
 					</span>
