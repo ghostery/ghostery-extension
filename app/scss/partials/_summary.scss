@@ -11,8 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-// The donut *container* is specific to the Summary component and should live here
-// The donut itself is not intrinsically tied to Summary and can live wherever
 .GhosteryTextLabel {
 	color: #4a4a4a;
 	font-weight: 600;
@@ -175,10 +173,6 @@
 	height: 162px;
 }
 
-.Summary__ghosteryFeaturesContainer {
-
-}
-
 .Summary__ghosteryFeatureContainer {
 	display: inline-block;
 }
@@ -199,52 +193,6 @@
 .Summary__upgradeBannerContainer {
 	position: absolute;
 	top: 10px;
-}
-
-.UpgradeBanner {
-	@extend %pointer;
-	background: url("../../app/images/panel/green-upgrade-banner.svg");
-	background-size: contain;
-}
-
-.UpgradeBanner--normal {
-	height: 23px;
-
-	.UpgradeBanner__text {
-		font-size: 12px;
-		vertical-align: sub;
-		padding: 0 4px 0 10px;
-	}
-
-	.UpgradeBanner__plus {
-		vertical-align: sub;
-	}
-}
-
-.UpgradeBanner--small {
-	height: 20px;
-
-	.UpgradeBanner__text {
-		font-size: 10px;
-		vertical-align: baseline;
-		padding: 0 4px 0 8px;
-	}
-
-	.UpgradeBanner__plus {
-		vertical-align: middle;
-	}
-}
-
-.UpgradeBanner__text {
-	display: inline-block;
-	font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-	font-weight: bold;
-	color: white;
-}
-
-.UpgradeBanner__plus {
-	display: inline-block;
-	padding-right: 18px;
 }
 
 #content-summary {
