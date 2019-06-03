@@ -682,7 +682,13 @@ class Summary extends React.Component {
 	 * @return {JSX} JSX for rendering the plus upgrade banner or subscriber icon
 	 */
 	_renderPlusUpgradeBannerOrSubscriberIcon() {
+		const { is_expert } = this.props;
+
 		const isPlusSubscriber = this._isPlusSubscriber();
+		const upgradeBannerClassNames = ClassNames('UpgradeBanner', {
+			'UpgradeBanner--normal': !is_expert,
+			'UpgradeBanner--small': is_expert,
+		});
 
 		return (
 			<div onClick={this.clickUpgradeBannerOrGoldPlusIcon}>
@@ -692,7 +698,7 @@ class Summary extends React.Component {
 
 				{!isPlusSubscriber &&
 				<div className="Summary__upgradeBannerContainer">
-					<div className="UpgradeBanner">
+					<div className={upgradeBannerClassNames}>
 						<span className="UpgradeBanner__text">{t('subscription_upgrade_to')}</span>
 						<ReactSVG path="/app/images/panel/upgrade-banner-plus.svg" className="UpgradeBanner__plus" />
 					</div>

@@ -203,43 +203,51 @@
 
 .UpgradeBanner {
 	@extend %pointer;
-	height: 23px;
 	background: url("../../app/images/panel/green-upgrade-banner.svg");
 	background-size: contain;
 }
 
+.UpgradeBanner--normal {
+	height: 23px;
+
+	.UpgradeBanner__text {
+		font-size: 12px;
+		vertical-align: sub;
+		padding: 0 4px 0 10px;
+	}
+
+	.UpgradeBanner__plus {
+		vertical-align: sub;
+	}
+}
+
+.UpgradeBanner--small {
+	height: 20px;
+
+	.UpgradeBanner__text {
+		font-size: 10px;
+		vertical-align: baseline;
+		padding: 0 4px 0 8px;
+	}
+
+	.UpgradeBanner__plus {
+		vertical-align: middle;
+	}
+}
+
 .UpgradeBanner__text {
 	display: inline-block;
-	padding: 0 4px 0 10px;
-	vertical-align: sub;
 	font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 	font-weight: bold;
-	font-size: 12px;
 	color: white;
 }
 
 .UpgradeBanner__plus {
 	display: inline-block;
 	padding-right: 18px;
-	vertical-align: sub;
 }
 
 #content-summary {
-	&.expert .upgrade-banner-container {
-		background-size: 100% 20px;
-		height: 20px;
-	}
-
-	&.expert .upgrade-banner-text {
-		font-size: 10px;
-		vertical-align: baseline;
-		padding-left: 8px;
-	}
-
-	&.expert .upgrade-banner-plus {
-		vertical-align: middle;
-	}
-
 	.gold-plus-icon {
 		@extend %pointer;
 		position: absolute;
