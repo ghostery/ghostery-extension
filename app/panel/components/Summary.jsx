@@ -293,10 +293,12 @@ class Summary extends React.Component {
 			enable_anti_tracking,
 			enable_ad_block,
 			enable_smart_block,
+			categories,
 			antiTracking,
 			adBlock,
 			smartBlock,
 			paused_blocking,
+			paused_blocking_timeout,
 			sitePolicy,
 			trackerCounts,
 		} = this.props;
@@ -351,8 +353,8 @@ class Summary extends React.Component {
 				{abPause && (
 					<div className="pause-button-container">
 						<PauseButton
-							isPaused={this.props.paused_blocking}
-							isPausedTimeout={this.props.paused_blocking_timeout}
+							isPaused={paused_blocking}
+							isPausedTimeout={paused_blocking_timeout}
 							clickPause={this.clickPauseButton}
 							dropdownItems={this.pauseOptions}
 							isAbPause={abPause}
@@ -375,20 +377,21 @@ class Summary extends React.Component {
 				{!this.state.disableBlocking && !showCondensed && (
 					<div className="donut-graph-container">
 						<DonutGraph
-							categories={this.props.categories}
-							renderRedscale={this.props.sitePolicy === 1}
-							renderGreyscale={this.props.paused_blocking}
-							totalCount={this.props.trackerCounts.allowed + this.props.trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
-							ghosteryFeatureSelect={this.props.sitePolicy}
+							categories={categories}
+							renderRedscale={sitePolicy === 1}
+							renderGreyscale={paused_blocking}
+							totalCount={trackerCounts.allowed + trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
+							ghosteryFeatureSelect={sitePolicy}
 							isSmall={is_expert}
 							clickDonut={this.clickDonut}
+							antiTracking={antiTracking}
 						/>
 					</div>
 				)}
 				{!this.state.disableBlocking && showCondensed && (
 					<div className="total-tracker-count clickable" onClick={this.clickTrackersCount}>
 						<span className="summary-total-tracker-count g-tooltip">
-							{this.props.trackerCounts.allowed + this.props.trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
+							{trackerCounts.allowed + trackerCounts.blocked + antiTrackUnsafe + adBlockBlocked || 0}
 							<Tooltip
 								header={t('panel_tracker_total_tooltip')}
 								position="right"
@@ -427,17 +430,17 @@ class Summary extends React.Component {
 				<div className="ghostery-features-container">
 					<GhosteryFeatures
 						clickButton={this.clickSitePolicy}
-						sitePolicy={this.props.sitePolicy}
+						sitePolicy={sitePolicy}
 						isAbPause={abPause}
 						isStacked={is_expert}
-						isInactive={this.props.paused_blocking || this.state.disableBlocking}
+						isInactive={paused_blocking || this.state.disableBlocking}
 						isCondensed={showCondensed}
 					/>
 
 					{!abPause && (
 						<PauseButton
-							isPaused={this.props.paused_blocking}
-							isPausedTimeout={this.props.paused_blocking_timeout}
+							isPaused={paused_blocking}
+							isPausedTimeout={paused_blocking_timeout}
 							clickPause={this.clickPauseButton}
 							dropdownItems={this.pauseOptions}
 							isAbPause={abPause}
@@ -450,13 +453,13 @@ class Summary extends React.Component {
 				<div className="cliqz-features-container">
 					<CliqzFeatures
 						clickButton={this.clickCliqzFeature}
-						antiTrackingActive={this.props.enable_anti_tracking}
-						antiTracking={this.props.antiTracking}
-						adBlockingActive={this.props.enable_ad_block}
-						adBlocking={this.props.adBlock}
-						smartBlockingActive={this.props.enable_smart_block}
-						smartBlocking={this.props.smartBlock}
-						isInactive={this.props.paused_blocking || this.props.sitePolicy || this.state.disableBlocking || IS_CLIQZ}
+						antiTrackingActive={enable_anti_tracking}
+						antiTracking={antiTracking}
+						adBlockingActive={enable_ad_block}
+						adBlocking={adBlock}
+						smartBlockingActive={enable_smart_block}
+						smartBlocking={smartBlock}
+						isInactive={paused_blocking || sitePolicy || this.state.disableBlocking || IS_CLIQZ}
 						isSmaller={is_expert}
 						isCondensed={showCondensed}
 					/>

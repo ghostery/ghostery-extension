@@ -56,6 +56,8 @@ class DonutGraph extends React.Component {
 						return '#87d7ef';
 					case 'social_media':
 						return '#388ee8';
+					case 'other_data_points':
+						return '#8459a5';
 					default:
 						return '#e8e8e8';
 				}
@@ -74,6 +76,7 @@ class DonutGraph extends React.Component {
 	componentDidMount() {
 		const {
 			categories,
+			antiTracking,
 			renderRedscale,
 			renderGreyscale,
 			isSmall,
@@ -87,7 +90,7 @@ class DonutGraph extends React.Component {
 			.value(d => d.value);
 
 		this.prepareDonutContainer(isSmall);
-		this.bakeDonut(categories, {
+		this.bakeDonut(categories, antiTracking, {
 			renderRedscale,
 			renderGreyscale
 		});
@@ -99,6 +102,7 @@ class DonutGraph extends React.Component {
 	componentWillReceiveProps(nextProps) {
 		const {
 			categories,
+			antiTracking,
 			renderRedscale,
 			renderGreyscale,
 			ghosteryFeatureSelect,
@@ -115,11 +119,19 @@ class DonutGraph extends React.Component {
 			return;
 		}
 
-		// componentWillReceiveProps gets called many times during page load as new trackers are found
+		// componentWillReceiveProps gets called many times during page load as new trackers or unsafe data points are found
 		// so only compare tracker totals if we don't already have to redraw anyway as a result of the cheaper checks above
 		const trackerTotal = categories.reduce((total, category) => total + category.num_total, 0);
 		const nextTrackerTotal = nextProps.categories.reduce((total, category) => total + category.num_total, 0);
 		if (trackerTotal !== nextTrackerTotal) {
+			this.nextPropsDonut(nextProps);
+			return;
+		}
+
+		if (!antiTracking && !nextProps.antiTracking) { return; }
+		const unsafeDataPoints = antiTracking ? antiTracking.totalUnsafeCount : 0;
+		const nextUnsafeDataPoints = nextProps.antiTracking ? nextProps.antiTracking.totalUnsafeCount : 0;
+		if (unsafeDataPoints !== nextUnsafeDataPoints) {
 			this.nextPropsDonut(nextProps);
 		}
 	}
@@ -142,7 +154,7 @@ class DonutGraph extends React.Component {
 	 *  Helper function that updates donut with nextProps values
 	 */
 	nextPropsDonut(nextProps) {
-		this.bakeDonut(nextProps.categories, {
+		this.bakeDonut(nextProps.categories, nextProps.antiTracking, {
 			renderRedscale: nextProps.renderRedscale,
 			renderGreyscale: nextProps.renderGreyscale,
 			isSmall: nextProps.isSmall,
@@ -180,7 +192,7 @@ class DonutGraph extends React.Component {
 	 */
 	bakeDonut = throttle(this._bakeDonut.bind(this), 600, { leading: true, trailing: true }) // matches panelData#updatePanelUI throttling
 
-	_bakeDonut(categories, options) {
+	_bakeDonut(categories, antiTracking, options) {
 		const {
 			renderRedscale,
 			renderGreyscale,
@@ -206,6 +218,14 @@ class DonutGraph extends React.Component {
 				});
 			});
 			graphData.sort((a, b) => a.value < b.value);
+		}
+
+		if (antiTracking && antiTracking.totalUnsafeCount) {
+			graphData.push({
+				id: 'other_data_points',
+				name: 'Data Points Anonymized',
+				value: antiTracking.totalUnsafeCount,
+			});
 		}
 
 		const trackerArc = arc()
@@ -313,7 +333,7 @@ class DonutGraph extends React.Component {
 	 * @return {JSX} JSX for rendering the donut-graph portion of the Summary View
 	 */
 	render() {
-		const { isSmall, totalCount } = this.props;
+		const { isSmall, totalCount, antiTracking } = this.props;
 		const componentClasses = ClassNames('sub-component', 'donut-graph', {
 			small: isSmall,
 			big: !isSmall,
@@ -327,6 +347,11 @@ class DonutGraph extends React.Component {
 							{cat.name}
 						</span>
 					))}
+					{antiTracking && !!antiTracking.totalUnsafeCount && (
+						<span key="other_data_points" id="other_data_points_tooltip" className="tooltip top">
+							Other Data Points
+						</span>
+					)}
 				</div>
 				<div className="graph-ref" ref={(node) => { this.node = node; }} />
 				<div className="graph-text clickable" onClick={this.clickGraphText}>
