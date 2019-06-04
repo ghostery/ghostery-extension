@@ -453,7 +453,7 @@ class Summary extends React.Component {
 	 */
 	_renderTotalTrackersFound() {
 		return (
-			<div className="Summary_totalTrackerCount clickable" onClick={this.clickTrackersCount}>
+			<div className="Summary__totalTrackerCountContainer clickable" onClick={this.clickTrackersCount}>
 				<span className="summary-total-tracker-count g-tooltip">
 					{this._totalTrackersFound()}
 					<Tooltip
