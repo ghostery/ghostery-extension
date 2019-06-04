@@ -314,23 +314,23 @@ class DonutGraph extends React.Component {
 	 */
 	render() {
 		const { isSmall, totalCount } = this.props;
-		const componentClasses = ClassNames('sub-component', 'donut-graph', {
-			small: isSmall,
-			big: !isSmall,
+		const componentClasses = ClassNames('DonutGraph', {
+			'DonutGraph--big': !isSmall,
+			'DonutGraph--small': isSmall,
 		});
 
 		return (
 			<div className={componentClasses}>
-				<div className="tooltip-container">
+				<div className="DonutGraph__tooltipContainer">
 					{this.props.categories.map(cat => (
-						<span key={cat.id} id={`${cat.id}_tooltip`} className="tooltip top">
+						<span key={cat.id} id={`${cat.id}_tooltip`} className="DonutGraph__tooltip DonutGraph__tooltip--hide top">
 							{cat.name}
 						</span>
 					))}
 				</div>
-				<div className="graph-ref" ref={(node) => { this.node = node; }} />
-				<div className="graph-text clickable" onClick={this.clickGraphText}>
-					<div className="graph-text-count g-tooltip">
+				<div className="DonutGraph__ref" ref={(node) => { this.node = node; }} />
+				<div className="DonutGraph__textCountContainer clickable" onClick={this.clickGraphText}>
+					<div className="DonutGraph__textCount g-tooltip">
 						{totalCount}
 						<Tooltip
 							delay="0"

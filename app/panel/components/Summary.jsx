@@ -735,7 +735,6 @@ class Summary extends React.Component {
 				{!isCondensed && !disableBlocking && this._renderDonut()}
 				{!isCondensed && !disableBlocking && this._renderPageHostReadout()}
 
-
 				{isCondensed && !disableBlocking && this._renderTotalTrackersFound()}
 
 				{!disableBlocking && this._renderTotalTrackersBlocked()}

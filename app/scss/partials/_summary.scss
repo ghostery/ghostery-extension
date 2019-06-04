@@ -59,6 +59,10 @@
 	height: 479px;
 }
 
+.Summary__donutContainer {
+	margin: 26px auto;
+}
+
 .Summary__pageHostContainer {
 	text-align: center;
 	font-size: 11px;
@@ -77,7 +81,6 @@
 	}
 
 	.Summary__donutContainer {
-		margin: 26px auto;
 		height: 120px;
 		width: 120px;
 	}
