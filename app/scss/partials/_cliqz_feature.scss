@@ -1,0 +1,137 @@
+/**
+ * Cliqz Features Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+$cliqz-feature--darker-blue: #0093bd;
+$cliqz-feature--blue: #1dafed;
+$cliqz-feature--pale-blue: #a4d4f2;
+$cliqz-feature--gray: #c8c7c2;
+$cliqz-feature--light-gray: #dedede;
+$cliqz-feature--darker-gray: #a4a4a4;
+
+// *** CliqzFeature hover states  ***
+.CliqzFeature.active.clickable:hover {
+	.CliqzFeature__count { color: $cliqz-feature--darker-blue; }
+	.CliqzFeature__icon.anti-tracking { background-image: buildIconAntiTracking($cliqz-feature--darker-blue); }
+	.CliqzFeature__icon.ad-blocking { background-image: buildIconAdBlocking($cliqz-feature--darker-blue); }
+	.CliqzFeature__icon.smart-blocking { background-image: buildIconSmartBlocking($cliqz-feature--darker-blue); }
+	.CliqzFeature__feature-name { color: $cliqz-feature--darker-blue; }
+}
+
+.CliqzFeature.inactive.clickable:hover {
+	.CliqzFeature__count { background-image: buildIconDash($cliqz-feature--darker-gray); }
+	.CliqzFeature__icon.anti-tracking { background-image: buildIconAntiTracking($cliqz-feature--darker-gray); }
+	.CliqzFeature__icon.ad-blocking { background-image: buildIconAdBlocking($cliqz-feature--darker-gray); }
+	.CliqzFeature__icon.smart-blocking { background-image: buildIconSmartBlocking($cliqz-feature--darker-gray); }
+	.CliqzFeature__feature-name { color: $cliqz-feature--darker-gray; }
+}
+
+// *** count ***
+.CliqzFeature__count {
+	text-align: center;
+	font-size: 14px;
+	font-weight: 600;
+	transition: color 0.25s ease-out;
+	transition: background-image 0.25s ease-out;
+}
+
+.CliqzFeature.normal .CliqzFeature__count,
+.CliqzFeature.smaller .CliqzFeature__count {
+	line-height: 28px;
+}
+
+.CliqzFeature.condensed .CliqzFeature__count {
+	line-height: 14px;
+}
+
+.CliqzFeature__count.active.clickable {
+	color: $cliqz-feature--blue;
+	background: none;
+}
+
+.CliqzFeature__count.active.not-clickable {
+	color: $cliqz-feature--pale-blue;
+	background: none;
+}
+
+.CliqzFeature__count.inactive.clickable  {
+	color: rgba($cliqz-feature--gray, 0);
+	background-image: buildIconDash($cliqz-feature--gray);
+}
+
+.CliqzFeature__count.inactive.not-clickable {
+	color: rgba($cliqz-feature--light-gray, 0);
+	background-image: buildIconDash($cliqz-feature--light-gray);
+}
+
+.CliqzFeature__count.inactive {
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 10px 10px;
+}
+
+// *** icon ***
+.CliqzFeature__icon {
+	margin: 0 auto;
+	background-repeat: no-repeat;
+	background-position: center center;
+	transition: background-image 0.25s ease-out;
+}
+
+.CliqzFeature.normal .CliqzFeature__icon,
+.CliqzFeature.smaller .CliqzFeature__icon {
+	height: 50px;
+	width: 50px;
+	background-size: 50px 50px;
+}
+
+.CliqzFeature.condensed .CliqzFeature__icon {
+	height: 40px;
+	width: 40px;
+	background-size: 30px 30px;
+}
+
+.CliqzFeature__icon.anti-tracking.active.clickable { background-image: buildIconAntiTracking($cliqz-feature--blue); }
+.CliqzFeature__icon.anti-tracking.inactive.clickable { background-image: buildIconAntiTracking($cliqz-feature--gray); }
+.CliqzFeature__icon.anti-tracking.active.not-clickable { background-image: buildIconAntiTracking($cliqz-feature--pale-blue); }
+.CliqzFeature__icon.anti-tracking.inactive.not-clickable { background-image: buildIconAntiTracking($cliqz-feature--light-gray); }
+
+.CliqzFeature__icon.ad-blocking.active.clickable { background-image: buildIconAdBlocking($cliqz-feature--blue); }
+.CliqzFeature__icon.ad-blocking.inactive.clickable { background-image: buildIconAdBlocking($cliqz-feature--gray); }
+.CliqzFeature__icon.ad-blocking.active.not-clickable { background-image: buildIconAdBlocking($cliqz-feature--pale-blue); }
+.CliqzFeature__icon.ad-blocking.inactive.not-clickable { background-image: buildIconAdBlocking($cliqz-feature--light-gray); }
+
+.CliqzFeature__icon.smart-blocking.active.clickable { background-image: buildIconSmartBlocking($cliqz-feature--blue); }
+.CliqzFeature__icon.smart-blocking.inactive.clickable { background-image: buildIconSmartBlocking($cliqz-feature--gray); }
+.CliqzFeature__icon.smart-blocking.active.not-clickable { background-image: buildIconSmartBlocking($cliqz-feature--pale-blue); }
+.CliqzFeature__icon.smart-blocking.inactive.not-clickable { background-image: buildIconSmartBlocking($cliqz-feature--light-gray); }
+
+// *** feature-name ***
+.CliqzFeature__feature-name {
+	text-align: center;
+	font-size: 11px;
+	line-height: 26px;
+	font-weight: 600;
+	transition: color 0.25s ease-out;
+
+	white-space: nowrap;
+	overflow-x: hidden;
+	text-overflow: ellipsis;
+}
+
+.CliqzFeature.smaller .CliqzFeature__feature-name { display: none; }
+.CliqzFeature.condensed .CliqzFeature__feature-name { display: none; }
+
+.CliqzFeature__feature-name.active.clickable { color: $cliqz-feature--blue; }
+.CliqzFeature__feature-name.inactive.clickable { color: $cliqz-feature--gray; }
+.CliqzFeature__feature-name.active.not-clickable { color: $cliqz-feature--pale-blue; }
+.CliqzFeature__feature-name.inactive.not-clickable { color: $cliqz-feature--light-gray; }

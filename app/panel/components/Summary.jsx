@@ -595,10 +595,12 @@ class Summary extends React.Component {
 			<div className="Summary__cliqzFeatureContainer">
 				<CliqzFeature
 					clickButton={this.clickCliqzFeature}
-					type="anti_tracking"
+					type="anti-tracking"
 					data={antiTracking}
 					active={enable_anti_tracking}
 					cliqzInactive={this._isCliqzInactive()}
+					isSmaller={is_expert && !isCondensed}
+					isCondensed={isCondensed}
 					isTooltipHeader={is_expert}
 					isTooltipBody={!isCondensed}
 					tooltipPosition={isCondensed ? 'right' : is_expert ? 'top top-right' : 'top'}
@@ -619,10 +621,12 @@ class Summary extends React.Component {
 			<div className="Summary__cliqzFeatureContainer">
 				<CliqzFeature
 					clickButton={this.clickCliqzFeature}
-					type="ad_block"
+					type="ad-blocking"
 					data={adBlock}
 					active={enable_ad_block}
 					cliqzInactive={this._isCliqzInactive()}
+					isSmaller={is_expert && !isCondensed}
+					isCondensed={is_expert && isCondensed}
 					isTooltipHeader={is_expert}
 					isTooltipBody={!isCondensed}
 					tooltipPosition={isCondensed ? 'right' : 'top'}
@@ -643,10 +647,12 @@ class Summary extends React.Component {
 			<div className="Summary__cliqzFeatureContainer">
 				<CliqzFeature
 					clickButton={this.clickCliqzFeature}
-					type="smart_block"
+					type="smart-blocking"
 					data={smartBlock}
 					active={enable_smart_block}
 					cliqzInactive={this._isCliqzInactive()}
+					isSmaller={is_expert && !isCondensed}
+					isCondensed={isCondensed}
 					isTooltipHeader={is_expert}
 					isTooltipBody={!isCondensed}
 					tooltipPosition={isCondensed ? 'right' : is_expert ? 'top top-left' : 'top'}
