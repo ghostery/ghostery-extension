@@ -77,8 +77,8 @@ class Tooltip extends React.Component {
 	 * Implements mouseleave.
 	 */
 	leave() {
-		// clearTimeout(this.delay);
-		// this.setState({ show: false });
+		clearTimeout(this.delay);
+		this.setState({ show: false });
 	}
 
 	/**
