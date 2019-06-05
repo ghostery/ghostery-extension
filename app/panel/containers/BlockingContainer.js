@@ -34,6 +34,7 @@ const mapStateToProps = state => Object.assign({}, state.blocking, {
 	sitePolicy: state.summary.sitePolicy,
 	smartBlockActive: state.panel.enable_smart_block,
 	smartBlock: state.panel.smartBlock,
+	antiTracking: state.summary.antiTracking,
 });
 /**
  * Bind Blocking view component action creators using Redux's bindActionCreators

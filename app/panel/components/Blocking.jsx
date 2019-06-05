@@ -281,6 +281,7 @@ class Blocking extends React.Component {
 		const {
 			actions,
 			categories,
+			antiTracking,
 			expand_all_trackers,
 			is_expanded,
 			language,
@@ -324,6 +325,7 @@ class Blocking extends React.Component {
 								language={language}
 								smartBlockActive={smartBlockActive}
 								smartBlock={smartBlock}
+								antiTracking={antiTracking}
 							/>
 						}
 					</div>

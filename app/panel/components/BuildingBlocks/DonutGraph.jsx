@@ -333,7 +333,12 @@ class DonutGraph extends React.Component {
 	 * @return {JSX} JSX for rendering the donut-graph portion of the Summary View
 	 */
 	render() {
-		const { isSmall, totalCount, antiTracking } = this.props;
+		const {
+			isSmall,
+			categories,
+			antiTracking,
+			totalCount,
+		} = this.props;
 		const componentClasses = ClassNames('sub-component', 'donut-graph', {
 			small: isSmall,
 			big: !isSmall,
@@ -342,7 +347,7 @@ class DonutGraph extends React.Component {
 		return (
 			<div className={componentClasses}>
 				<div className="tooltip-container">
-					{this.props.categories.map(cat => (
+					{categories.map(cat => (
 						<span key={cat.id} id={`${cat.id}_tooltip`} className="tooltip top">
 							{cat.name}
 						</span>

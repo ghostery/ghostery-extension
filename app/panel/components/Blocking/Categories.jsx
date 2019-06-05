@@ -29,7 +29,8 @@ class Categories extends React.Component {
 	* @return {ReactComponent}   ReactComponent instance
 	*/
 	render() {
-		const { categories, expandAll } = this.props;
+		const { categories, expandAll, antiTracking } = this.props;
+		console.log(categories, antiTracking)
 		const globalBlocking = !!this.props.globalBlocking;
 		const filtered = !!this.props.filtered;
 		const categoryList = categories.map((cat, index) => (
@@ -50,7 +51,12 @@ class Categories extends React.Component {
 				smartBlock={this.props.smartBlock}
 			/>
 		));
-		return <div className="scroll-content">{ categoryList }</div>;
+		return (
+			<div className="scroll-content">
+				{categoryList}
+				{antiTracking && <div />}
+			</div>
+		);
 	}
 }
 
