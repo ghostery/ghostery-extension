@@ -27,7 +27,10 @@ import {
 	PauseButton
 } from './BuildingBlocks';
 
-const { BLACKLISTED, IS_CLIQZ, WHITELISTED } = globals;
+const {
+	IS_CLIQZ,
+	BLACKLISTED, WHITELISTED,
+} = globals;
 
 /**
  * @class Implements the Summary View, which is displayed as the entire panel
@@ -595,7 +598,7 @@ class Summary extends React.Component {
 			<div className="Summary__cliqzFeatureContainer">
 				<CliqzFeature
 					clickButton={this.clickCliqzFeature}
-					type="anti-tracking"
+					type="anti_track"
 					data={antiTracking}
 					active={enable_anti_tracking}
 					cliqzInactive={this._isCliqzInactive()}
@@ -621,7 +624,7 @@ class Summary extends React.Component {
 			<div className="Summary__cliqzFeatureContainer">
 				<CliqzFeature
 					clickButton={this.clickCliqzFeature}
-					type="ad-blocking"
+					type="ad_block"
 					data={adBlock}
 					active={enable_ad_block}
 					cliqzInactive={this._isCliqzInactive()}
@@ -647,7 +650,7 @@ class Summary extends React.Component {
 			<div className="Summary__cliqzFeatureContainer">
 				<CliqzFeature
 					clickButton={this.clickCliqzFeature}
-					type="smart-blocking"
+					type="smart_block"
 					data={smartBlock}
 					active={enable_smart_block}
 					cliqzInactive={this._isCliqzInactive()}

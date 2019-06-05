@@ -41,20 +41,7 @@ class CliqzFeature extends React.Component {
 			return;
 		}
 
-		let featureType;
-		switch (type) {
-			case 'anti-tracking':
-				featureType = 'anti_tracking';
-				break;
-			case 'ad-blocking':
-				featureType = 'ad_block';
-				break;
-			case 'smart-blocking':
-				featureType = 'smart_block';
-				break;
-			default:
-				featureType = '';
-		}
+		const featureType = type === 'anti_track' ? 'anti_tracking' : type;
 
 		clickButton({
 			feature: `enable_${featureType}`,
@@ -70,11 +57,11 @@ class CliqzFeature extends React.Component {
 			return '-';
 		}
 
-		if (type === 'anti-tracking') {
+		if (type === 'anti_track') {
 			return data && data.totalUnsafeCount || 0;
-		} else if (type === 'ad-blocking') {
+		} else if (type === 'ad_block') {
 			return data && data.totalCount || 0;
-		} else if (type === 'smart-blocking') {
+		} else if (type === 'smart_block') {
 			return this._count(data, data.blocked) + this._count(data, data.unblocked);
 		}
 
@@ -103,7 +90,7 @@ class CliqzFeature extends React.Component {
 	_getTooltipHeaderText() {
 		const { isTooltipHeader, type } = this.props;
 
-		if (isTooltipHeader) {
+		if (!isTooltipHeader) {
 			return false;
 		}
 
@@ -145,36 +132,25 @@ class CliqzFeature extends React.Component {
 		});
 		const cliqzFeatureCountClassNames = ClassNames('CliqzFeature__count', sharedClassNames);
 		const cliqzFeatureNameClassNames = ClassNames('CliqzFeature__feature-name', sharedClassNames);
-		const iconClassNames = ClassNames('CliqzFeature__icon', sharedClassNames, type, 'g-tooltip');
+		const cssTypeName = type.replace('_', '-');
+		const iconClassNames = ClassNames('CliqzFeature__icon', sharedClassNames, cssTypeName, 'g-tooltip');
 
-		let localeType = '';
-		switch (type) {
-			case 'anti-tracking':
-				localeType = 'anti_tracking';
-				break;
-			case 'ad-blocking':
-				localeType = 'ad_block';
-				break;
-			case 'smart-blocking':
-				localeType = 'smart_block';
-				break;
-			default:
-				localeType = '';
-		}
-		const featureName = t(`drawer_title_enable_${localeType}`);
+		const featureType = type === 'anti_track' ? 'anti_tracking' : type;
+		const featureName = t(`drawer_title_enable_${featureType}`);
 
 		return (
 			<div className={cliqzFeatureClassNames} onClick={this.clickCliqzFeature}>
 				<div className={cliqzFeatureCountClassNames}>{this._getCount()}</div>
-				<div className={iconClassNames} />
+				<div className={iconClassNames}>
+					<Tooltip
+						header={this._getTooltipHeaderText()}
+						body={this._getTooltipBodyText()}
+						position={tooltipPosition}
+					/>
+				</div>
 				<div className={cliqzFeatureNameClassNames}>
 					{featureName}
 				</div>
-				<Tooltip
-					header={this._getTooltipHeaderText()}
-					body={this._getTooltipBodyText()}
-					position={tooltipPosition}
-				/>
 			</div>
 		);
 	}

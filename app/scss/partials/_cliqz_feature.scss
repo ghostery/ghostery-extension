@@ -21,17 +21,17 @@ $cliqz-feature--darker-gray: #a4a4a4;
 // *** CliqzFeature hover states  ***
 .CliqzFeature.active.clickable:hover {
 	.CliqzFeature__count { color: $cliqz-feature--darker-blue; }
-	.CliqzFeature__icon.anti-tracking { background-image: buildIconAntiTracking($cliqz-feature--darker-blue); }
-	.CliqzFeature__icon.ad-blocking { background-image: buildIconAdBlocking($cliqz-feature--darker-blue); }
-	.CliqzFeature__icon.smart-blocking { background-image: buildIconSmartBlocking($cliqz-feature--darker-blue); }
+	.CliqzFeature__icon.anti-track { background-image: buildIconAntiTracking($cliqz-feature--darker-blue); }
+	.CliqzFeature__icon.ad-block { background-image: buildIconAdBlocking($cliqz-feature--darker-blue); }
+	.CliqzFeature__icon.smart-block { background-image: buildIconSmartBlocking($cliqz-feature--darker-blue); }
 	.CliqzFeature__feature-name { color: $cliqz-feature--darker-blue; }
 }
 
 .CliqzFeature.inactive.clickable:hover {
 	.CliqzFeature__count { background-image: buildIconDash($cliqz-feature--darker-gray); }
-	.CliqzFeature__icon.anti-tracking { background-image: buildIconAntiTracking($cliqz-feature--darker-gray); }
-	.CliqzFeature__icon.ad-blocking { background-image: buildIconAdBlocking($cliqz-feature--darker-gray); }
-	.CliqzFeature__icon.smart-blocking { background-image: buildIconSmartBlocking($cliqz-feature--darker-gray); }
+	.CliqzFeature__icon.anti-track { background-image: buildIconAntiTracking($cliqz-feature--darker-gray); }
+	.CliqzFeature__icon.ad-block { background-image: buildIconAdBlocking($cliqz-feature--darker-gray); }
+	.CliqzFeature__icon.smart-block { background-image: buildIconSmartBlocking($cliqz-feature--darker-gray); }
 	.CliqzFeature__feature-name { color: $cliqz-feature--darker-gray; }
 }
 
@@ -100,20 +100,20 @@ $cliqz-feature--darker-gray: #a4a4a4;
 	background-size: 30px 30px;
 }
 
-.CliqzFeature__icon.anti-tracking.active.clickable { background-image: buildIconAntiTracking($cliqz-feature--blue); }
-.CliqzFeature__icon.anti-tracking.inactive.clickable { background-image: buildIconAntiTracking($cliqz-feature--gray); }
-.CliqzFeature__icon.anti-tracking.active.not-clickable { background-image: buildIconAntiTracking($cliqz-feature--pale-blue); }
-.CliqzFeature__icon.anti-tracking.inactive.not-clickable { background-image: buildIconAntiTracking($cliqz-feature--light-gray); }
+.CliqzFeature__icon.anti-track.active.clickable { background-image: buildIconAntiTracking($cliqz-feature--blue); }
+.CliqzFeature__icon.anti-track.inactive.clickable { background-image: buildIconAntiTracking($cliqz-feature--gray); }
+.CliqzFeature__icon.anti-track.active.not-clickable { background-image: buildIconAntiTracking($cliqz-feature--pale-blue); }
+.CliqzFeature__icon.anti-track.inactive.not-clickable { background-image: buildIconAntiTracking($cliqz-feature--light-gray); }
 
-.CliqzFeature__icon.ad-blocking.active.clickable { background-image: buildIconAdBlocking($cliqz-feature--blue); }
-.CliqzFeature__icon.ad-blocking.inactive.clickable { background-image: buildIconAdBlocking($cliqz-feature--gray); }
-.CliqzFeature__icon.ad-blocking.active.not-clickable { background-image: buildIconAdBlocking($cliqz-feature--pale-blue); }
-.CliqzFeature__icon.ad-blocking.inactive.not-clickable { background-image: buildIconAdBlocking($cliqz-feature--light-gray); }
+.CliqzFeature__icon.ad-block.active.clickable { background-image: buildIconAdBlocking($cliqz-feature--blue); }
+.CliqzFeature__icon.ad-block.inactive.clickable { background-image: buildIconAdBlocking($cliqz-feature--gray); }
+.CliqzFeature__icon.ad-block.active.not-clickable { background-image: buildIconAdBlocking($cliqz-feature--pale-blue); }
+.CliqzFeature__icon.ad-block.inactive.not-clickable { background-image: buildIconAdBlocking($cliqz-feature--light-gray); }
 
-.CliqzFeature__icon.smart-blocking.active.clickable { background-image: buildIconSmartBlocking($cliqz-feature--blue); }
-.CliqzFeature__icon.smart-blocking.inactive.clickable { background-image: buildIconSmartBlocking($cliqz-feature--gray); }
-.CliqzFeature__icon.smart-blocking.active.not-clickable { background-image: buildIconSmartBlocking($cliqz-feature--pale-blue); }
-.CliqzFeature__icon.smart-blocking.inactive.not-clickable { background-image: buildIconSmartBlocking($cliqz-feature--light-gray); }
+.CliqzFeature__icon.smart-block.active.clickable { background-image: buildIconSmartBlocking($cliqz-feature--blue); }
+.CliqzFeature__icon.smart-block.inactive.clickable { background-image: buildIconSmartBlocking($cliqz-feature--gray); }
+.CliqzFeature__icon.smart-block.active.not-clickable { background-image: buildIconSmartBlocking($cliqz-feature--pale-blue); }
+.CliqzFeature__icon.smart-block.inactive.not-clickable { background-image: buildIconSmartBlocking($cliqz-feature--light-gray); }
 
 // *** feature-name ***
 .CliqzFeature__feature-name {
