@@ -479,16 +479,15 @@ class Summary extends React.Component {
 		const totalTrackersBlockedContainerClassNames = ClassNames('Summary__pageStatContainer', {
 			clickable: is_expert,
 		});
-		const totalTrackersBlockedClassNames = ClassNames('GhosteryKVReadout', 'GhosteryKVReadout--totalTrackersBlocked', {
-			'GhosteryKVReadout--withoutKey': isCondensed,
-			'GhosteryKVReadout--summaryCondensed': isCondensed,
+		const totalTrackersBlockedClassNames = ClassNames('SummaryPageStat', 'total-trackers-blocked', {
+			'SummaryPageStat--condensed-view': isCondensed,
 		});
 
 		return (
 			<div className={totalTrackersBlockedContainerClassNames} onClick={this.clickTrackersBlocked}>
 				<div className={totalTrackersBlockedClassNames}>
-					<span className="GhosteryKVReadout__key">{t('trackers_blocked')} </span>
-					<span className="GhosteryKVReadout__value">
+					<span className="SummaryPageStat__label">{t('trackers_blocked')} </span>
+					<span className="SummaryPageStat__value">
 						{this._totalTrackersBlockedCount()}
 					</span>
 				</div>
@@ -500,16 +499,15 @@ class Summary extends React.Component {
 		const { is_expert } = this.props;
 		const isCondensed = this._isCondensed();
 
-		const totalRequestsModifiedClassNames = ClassNames('GhosteryKVReadout', 'GhosteryKVReadout--totalRequestsModified', {
-			'GhosteryKVReadout--withoutKey': isCondensed,
-			'GhosteryKVReadout--summaryCondensed': isCondensed,
+		const totalRequestsModifiedClassNames = ClassNames('SummaryPageStat', 'total-requests-modified', {
+			'SummaryPageStat--condensed-view': isCondensed,
 		});
 
 		return (
 			<div className="Summary__pageStatContainer g-tooltip">
 				<div className={totalRequestsModifiedClassNames}>
-					<span className="GhosteryKVReadout__key">{t('requests_modified')} </span>
-					<span className="GhosteryKVReadout__value">
+					<span className="SummaryPageStat__label">{t('requests_modified')} </span>
+					<span className="SummaryPageStat__value">
 						{this._requestsModifiedCount()}
 					</span>
 				</div>
@@ -522,19 +520,18 @@ class Summary extends React.Component {
 		const { trackerLatencyTotal } = this.state;
 		const isCondensed = this._isCondensed();
 
-		const pageLoadTimeClassNames = ClassNames('GhosteryKVReadout', 'GhosteryKVReadout--pageLoadTime', {
-			'GhosteryKVReadout--pageLoadTime-fast': this._isPageLoadFast(),
-			'GhosteryKVReadout--pageLoadTime-slow': this._isPageLoadSlow(),
-			'GhosteryKVReadout--pageLoadTime-medium': this._isPageLoadMedium(),
-			'GhosteryKVReadout--withoutKey': isCondensed,
-			'GhosteryKVReadout--summaryCondensed': isCondensed,
+		const pageLoadTimeClassNames = ClassNames('SummaryPageStat', {
+			'page-load-time-slow': this._isPageLoadSlow(),
+			'page-load-time-medium': this._isPageLoadMedium(),
+			'page-load-time-fast': this._isPageLoadFast(),
+			'SummaryPageStat--condensed-view': isCondensed,
 		});
 
 		return (
 			<div className="Summary__pageStatContainer">
 				<div className={pageLoadTimeClassNames}>
-					<span className="GhosteryKVReadout__key">{t('page_load')} </span>
-					<span className="GhosteryKVReadout__value">
+					<span className="SummaryPageStat__label">{t('page_load')} </span>
+					<span className="SummaryPageStat__value">
 						{trackerLatencyTotal ? `${trackerLatencyTotal} ${t('settings_seconds')}` : '-'}
 					</span>
 				</div>

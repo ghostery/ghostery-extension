@@ -16,6 +16,26 @@
 	font-weight: 600;
 }
 
+.SummaryPageStat {
+	text-align: center;
+	font-weight: 600;
+}
+
+.SummaryPageStat--condensed-view {
+	padding: 0;
+	margin: 5px 0;
+
+	.SummaryPageStat__label {
+		color: #4a4a4a;
+	}
+}
+
+.SummaryPageStat.total-trackers-blocked .SummaryPageStat__value { color: #e74055; }
+.SummaryPageStat.total-requests-modified .SummaryPageStat__value { color: #00aef0; }
+.SummaryPageStat.page-load-time-slow .SummaryPageStat__value { color: #e74055; }
+.SummaryPageStat.page-load-time-medium .SummaryPageStat__value { color: #ffc063; }
+.SummaryPageStat.page-load-time-fast .SummaryPageStat__value { color: #9ecc42; }
+
 .GhosteryKVReadout {
 	text-align: center;
 	font-weight: 600;
