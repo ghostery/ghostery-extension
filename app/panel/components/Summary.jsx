@@ -445,7 +445,7 @@ class Summary extends React.Component {
 
 		return (
 			<div className={pageHostContainerClassNames}>
-				<span className="GhosteryTextLabel">{pageHost}</span>
+				<span className="SummaryPageHost">{pageHost}</span>
 			</div>
 		);
 	}

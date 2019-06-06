@@ -11,10 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-.GhosteryTextLabel {
-	color: #4a4a4a;
-	font-weight: 600;
-}
 
 .SummaryPageStat {
 	text-align: center;
@@ -47,7 +43,12 @@
 
 .Summary__pageHostContainer {
 	text-align: center;
+}
+
+.SummaryPageHost {
 	font-size: 11px;
+	color: #4a4a4a;
+	font-weight: 600;
 }
 
 .Summary__pageStatContainer {
