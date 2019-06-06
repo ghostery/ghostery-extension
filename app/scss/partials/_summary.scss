@@ -36,44 +36,6 @@
 .SummaryPageStat.page-load-time-medium .SummaryPageStat__value { color: #ffc063; }
 .SummaryPageStat.page-load-time-fast .SummaryPageStat__value { color: #9ecc42; }
 
-.GhosteryKVReadout {
-	text-align: center;
-	font-weight: 600;
-}
-
-.GhosteryKVReadout--summaryCondensed {
-	padding: 0;
-	margin: 5px 0;
-}
-
-.GhosteryKVReadout--withoutKey {
-	.GhosteryKVReadout__key { display: none; }
-}
-
-.GhosteryKVReadout__key {
-	color: #4a4a4a;
-}
-
-.GhosteryKVReadout--totalTrackersBlocked {
-	.GhosteryKVReadout__value { color: #e74055; }
-}
-
-.GhosteryKVReadout--totalRequestsModified {
-	.GhosteryKVReadout__value { color: #00aef0; }
-}
-
-.GhosteryKVReadout--pageLoadTime-slow {
-	.GhosteryKVReadout__value { color: #e74055; }
-}
-
-.GhosteryKVReadout--pageLoadTime-medium {
-	.GhosteryKVReadout__value { color: #ffc063; }
-}
-
-.GhosteryKVReadout--pageLoadTime-fast {
-	.GhosteryKVReadout__value { color: #9ecc42; }
-}
-
 .Summary {
 	position: absolute;
 	height: 479px;

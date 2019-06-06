@@ -474,13 +474,12 @@ class Summary extends React.Component {
 	 */
 	_renderTotalTrackersBlocked() {
 		const { is_expert } = this.props;
-		const isCondensed = this._isCondensed();
 
 		const totalTrackersBlockedContainerClassNames = ClassNames('Summary__pageStatContainer', {
 			clickable: is_expert,
 		});
 		const totalTrackersBlockedClassNames = ClassNames('SummaryPageStat', 'total-trackers-blocked', {
-			'SummaryPageStat--condensed-view': isCondensed,
+			'SummaryPageStat--condensed-view': this._isCondensed(),
 		});
 
 		return (
@@ -497,10 +496,9 @@ class Summary extends React.Component {
 
 	_renderTotalRequestsModified() {
 		const { is_expert } = this.props;
-		const isCondensed = this._isCondensed();
 
 		const totalRequestsModifiedClassNames = ClassNames('SummaryPageStat', 'total-requests-modified', {
-			'SummaryPageStat--condensed-view': isCondensed,
+			'SummaryPageStat--condensed-view': this._isCondensed(),
 		});
 
 		return (
@@ -518,13 +516,12 @@ class Summary extends React.Component {
 
 	_renderPageLoadTime() {
 		const { trackerLatencyTotal } = this.state;
-		const isCondensed = this._isCondensed();
 
 		const pageLoadTimeClassNames = ClassNames('SummaryPageStat', {
 			'page-load-time-slow': this._isPageLoadSlow(),
 			'page-load-time-medium': this._isPageLoadMedium(),
 			'page-load-time-fast': this._isPageLoadFast(),
-			'SummaryPageStat--condensed-view': isCondensed,
+			'SummaryPageStat--condensed-view': this._isCondensed(),
 		});
 
 		return (
