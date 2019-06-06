@@ -740,9 +740,11 @@ class Summary extends React.Component {
 
 				{isCondensed && !disableBlocking && this._renderTotalTrackersFound()}
 
-				{!disableBlocking && this._renderTotalTrackersBlocked()}
-				{!disableBlocking && this._renderTotalRequestsModified()}
-				{!disableBlocking && this._renderPageLoadTime()}
+				<div className="Summary__pageStatsContainer">
+					{!disableBlocking && this._renderTotalTrackersBlocked()}
+					{!disableBlocking && this._renderTotalRequestsModified()}
+					{!disableBlocking && this._renderPageLoadTime()}
+				</div>
 
 				{isCondensed && disableBlocking && is_expert && (
 					<div className="Summary__spaceTaker" />
