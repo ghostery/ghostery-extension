@@ -107,9 +107,8 @@ class Rewards {
 		this.currentOffer = offer;
 		const tab = tabInfo.getTabInfo(tab_id);
 
-		// If the tab is prefetched, we can't add purplebox to it.
-		if (!conf.enable_offers ||
-			!tab || tab.rewards) {
+		// If the tab is prefetched, we can't add Rewards hotdog to it
+		if (!conf.enable_offers || !tab || tab.rewards) {
 			return Promise.resolve(false);
 		}
 
