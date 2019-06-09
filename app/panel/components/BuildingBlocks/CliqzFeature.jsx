@@ -51,7 +51,6 @@ class CliqzFeature extends React.Component {
 	}
 
 	_getCount(active, data, type) {
-	_getCount(active, data, type) {
 		if (!active) {
 			return '-';
 		}
