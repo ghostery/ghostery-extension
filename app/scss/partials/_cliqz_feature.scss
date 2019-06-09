@@ -18,24 +18,7 @@ $cliqz-feature--gray: #c8c7c2;
 $cliqz-feature--light-gray: #dedede;
 $cliqz-feature--darker-gray: #a4a4a4;
 
-// *** CliqzFeature hover states  ***
-.CliqzFeature.active.clickable:hover {
-	.CliqzFeature__count { color: $cliqz-feature--darker-blue; }
-	.CliqzFeature__icon.anti-track { background-image: buildIconAntiTracking($cliqz-feature--darker-blue); }
-	.CliqzFeature__icon.ad-block { background-image: buildIconAdBlocking($cliqz-feature--darker-blue); }
-	.CliqzFeature__icon.smart-block { background-image: buildIconSmartBlocking($cliqz-feature--darker-blue); }
-	.CliqzFeature__feature-name { color: $cliqz-feature--darker-blue; }
-}
-
-.CliqzFeature.inactive.clickable:hover {
-	.CliqzFeature__count { background-image: buildIconDash($cliqz-feature--darker-gray); }
-	.CliqzFeature__icon.anti-track { background-image: buildIconAntiTracking($cliqz-feature--darker-gray); }
-	.CliqzFeature__icon.ad-block { background-image: buildIconAdBlocking($cliqz-feature--darker-gray); }
-	.CliqzFeature__icon.smart-block { background-image: buildIconSmartBlocking($cliqz-feature--darker-gray); }
-	.CliqzFeature__feature-name { color: $cliqz-feature--darker-gray; }
-}
-
-// *** count ***
+// Default styling for the elements of the CliqzFeature BEM block
 .CliqzFeature__count {
 	text-align: center;
 	font-size: 14px;
@@ -44,42 +27,6 @@ $cliqz-feature--darker-gray: #a4a4a4;
 	transition: background-image 0.25s ease-out;
 }
 
-.CliqzFeature.normal .CliqzFeature__count,
-.CliqzFeature.smaller .CliqzFeature__count {
-	line-height: 28px;
-}
-
-.CliqzFeature.condensed .CliqzFeature__count {
-	line-height: 14px;
-}
-
-.CliqzFeature__count.active.clickable {
-	color: $cliqz-feature--blue;
-	background: none;
-}
-
-.CliqzFeature__count.active.not-clickable {
-	color: $cliqz-feature--pale-blue;
-	background: none;
-}
-
-.CliqzFeature__count.inactive.clickable  {
-	color: rgba($cliqz-feature--gray, 0);
-	background-image: buildIconDash($cliqz-feature--gray);
-}
-
-.CliqzFeature__count.inactive.not-clickable {
-	color: rgba($cliqz-feature--light-gray, 0);
-	background-image: buildIconDash($cliqz-feature--light-gray);
-}
-
-.CliqzFeature__count.inactive {
-	background-repeat: no-repeat;
-	background-position: center center;
-	background-size: 10px 10px;
-}
-
-// *** icon ***
 .CliqzFeature__icon {
 	margin: 0 auto;
 	background-repeat: no-repeat;
@@ -87,35 +34,6 @@ $cliqz-feature--darker-gray: #a4a4a4;
 	transition: background-image 0.25s ease-out;
 }
 
-.CliqzFeature.normal .CliqzFeature__icon,
-.CliqzFeature.smaller .CliqzFeature__icon {
-	height: 50px;
-	width: 50px;
-	background-size: 50px 50px;
-}
-
-.CliqzFeature.condensed .CliqzFeature__icon {
-	height: 40px;
-	width: 40px;
-	background-size: 30px 30px;
-}
-
-.CliqzFeature__icon.anti-track.active.clickable { background-image: buildIconAntiTracking($cliqz-feature--blue); }
-.CliqzFeature__icon.anti-track.inactive.clickable { background-image: buildIconAntiTracking($cliqz-feature--gray); }
-.CliqzFeature__icon.anti-track.active.not-clickable { background-image: buildIconAntiTracking($cliqz-feature--pale-blue); }
-.CliqzFeature__icon.anti-track.inactive.not-clickable { background-image: buildIconAntiTracking($cliqz-feature--light-gray); }
-
-.CliqzFeature__icon.ad-block.active.clickable { background-image: buildIconAdBlocking($cliqz-feature--blue); }
-.CliqzFeature__icon.ad-block.inactive.clickable { background-image: buildIconAdBlocking($cliqz-feature--gray); }
-.CliqzFeature__icon.ad-block.active.not-clickable { background-image: buildIconAdBlocking($cliqz-feature--pale-blue); }
-.CliqzFeature__icon.ad-block.inactive.not-clickable { background-image: buildIconAdBlocking($cliqz-feature--light-gray); }
-
-.CliqzFeature__icon.smart-block.active.clickable { background-image: buildIconSmartBlocking($cliqz-feature--blue); }
-.CliqzFeature__icon.smart-block.inactive.clickable { background-image: buildIconSmartBlocking($cliqz-feature--gray); }
-.CliqzFeature__icon.smart-block.active.not-clickable { background-image: buildIconSmartBlocking($cliqz-feature--pale-blue); }
-.CliqzFeature__icon.smart-block.inactive.not-clickable { background-image: buildIconSmartBlocking($cliqz-feature--light-gray); }
-
-// *** feature-name ***
 .CliqzFeature__feature-name {
 	text-align: center;
 	font-size: 11px;
@@ -128,10 +46,102 @@ $cliqz-feature--darker-gray: #a4a4a4;
 	text-overflow: ellipsis;
 }
 
-.CliqzFeature.smaller .CliqzFeature__feature-name { display: none; }
-.CliqzFeature.condensed .CliqzFeature__feature-name { display: none; }
+// Modifications to element styling based on size-related block-level modifiers
+// The CliqzFeature block is always one of normal, smaller, or condensed
+.CliqzFeature--normal,
+.CliqzFeature--smaller {
+	.CliqzFeature__count { line-height: 28px; }
+	.CliqzFeature__icon {
+		height: 50px;
+		width: 50px;
+		background-size: 50px 50px;
+	}
+}
 
-.CliqzFeature__feature-name.active.clickable { color: $cliqz-feature--blue; }
-.CliqzFeature__feature-name.inactive.clickable { color: $cliqz-feature--gray; }
-.CliqzFeature__feature-name.active.not-clickable { color: $cliqz-feature--pale-blue; }
-.CliqzFeature__feature-name.inactive.not-clickable { color: $cliqz-feature--light-gray; }
+.CliqzFeature--smaller {
+	.CliqzFeature__feature-name { display: none; }
+}
+
+.CliqzFeature--condensed {
+	.CliqzFeature__count { line-height: 14px; }
+	.CliqzFeature__icon {
+		height: 40px;
+		width: 40px;
+		background-size: 30px 30px;
+	}
+	.CliqzFeature__feature-name { display: none; }
+}
+
+// Modifications to element styling based on state-related block-level modifiers
+// The CliqzFeature block is always either active or inactive
+// and always either clickable or not-clickable
+.CliqzFeature--active.clickable {
+	.CliqzFeature__count {
+		color: $cliqz-feature--blue;
+		background: none;
+	}
+	.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($cliqz-feature--blue); }
+	.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($cliqz-feature--blue); }
+	.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($cliqz-feature--blue); }
+	.CliqzFeature__feature-name { color: $cliqz-feature--blue; }
+
+	&:hover {
+		.CliqzFeature__count { color: $cliqz-feature--darker-blue; }
+		.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($cliqz-feature--darker-blue); }
+		.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($cliqz-feature--darker-blue); }
+		.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($cliqz-feature--darker-blue); }
+		.CliqzFeature__feature-name { color: $cliqz-feature--darker-blue; }
+	}
+}
+
+.CliqzFeature--active.not-clickable {
+	.CliqzFeature__count {
+		color: $cliqz-feature--pale-blue;
+		background: none;
+	}
+	.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($cliqz-feature--pale-blue); }
+	.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($cliqz-feature--pale-blue); }
+	.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($cliqz-feature--pale-blue); }
+	.CliqzFeature__feature-name { color: $cliqz-feature--pale-blue; }
+
+}
+
+.CliqzFeature--inactive {
+	.CliqzFeature__count {
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: 10px 10px;
+	}
+}
+
+.CliqzFeature--inactive.clickable {
+	.CliqzFeature__count {
+		color: rgba($cliqz-feature--gray, 0);
+		background-image: buildIconDash($cliqz-feature--gray);
+	}
+	.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($cliqz-feature--gray); }
+	.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($cliqz-feature--gray); }
+	.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($cliqz-feature--gray); }
+	.CliqzFeature__feature-name { color: $cliqz-feature--gray; }
+
+	&:hover {
+		.CliqzFeature__count { background-image: buildIconDash($cliqz-feature--darker-gray); }
+		.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($cliqz-feature--darker-gray); }
+		.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($cliqz-feature--darker-gray); }
+		.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($cliqz-feature--darker-gray); }
+		.CliqzFeature__feature-name { color: $cliqz-feature--darker-gray; }
+	}
+}
+
+.CliqzFeature--inactive.not-clickable {
+	.CliqzFeature__count {
+		color: rgba($cliqz-feature--light-gray, 0);
+		background-image: buildIconDash($cliqz-feature--light-gray);
+	}
+
+	.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($cliqz-feature--light-gray); }
+	.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($cliqz-feature--light-gray); }
+	.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($cliqz-feature--light-gray); }
+	.CliqzFeature__feature-name { color: $cliqz-feature--light-gray; }
+}
+

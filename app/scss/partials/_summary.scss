@@ -154,6 +154,7 @@
 	}
 }
 
+// Additional specificity needed to overwrite the position value of g-tooltip
 .Summary__statsButton.Summary__statsButton--absolutely-positioned {
 	position: absolute;
 	right: 0;
