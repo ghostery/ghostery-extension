@@ -64,7 +64,7 @@ class GhosteryFeature extends React.Component {
 			case 'trust':
 				return (sitePolicy === WHITELISTED ?
 					t('tooltip_trust_on') :
-					t('tooltip_trust_off'));
+					t('tooltip_trust'));
 			case 'restrict':
 				return (sitePolicy === BLACKLISTED ?
 					t('tooltip_restrict_on') :
