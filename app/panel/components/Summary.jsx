@@ -543,6 +543,7 @@ class Summary extends React.Component {
 			sitePolicy,
 		} = this.props;
 		const { disableBlocking } = this.state;
+		const isCondensed = this._isCondensed();
 		const containerClassNames = ClassNames('Summary__ghosteryFeatureContainer', modifiers);
 
 		return (
@@ -554,6 +555,8 @@ class Summary extends React.Component {
 					blockingPausedOrDisabled={paused_blocking || disableBlocking}
 					showText={!this._isCondensed()}
 					tooltipPosition={is_expert ? 'right' : 'top'}
+					short={is_expert && !isCondensed}
+					narrow={isCondensed}
 				/>
 			</div>
 		);

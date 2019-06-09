@@ -74,40 +74,42 @@ class GhosteryFeature extends React.Component {
 		}
 	}
 
-	_trustActive() {
-		const { type, sitePolicy } = this.props;
-
-		return (type === 'trust' && sitePolicy === WHITELISTED);
-	}
-
-	_restrictActive() {
-		const { type, sitePolicy } = this.props;
-
-		return (type === 'restrict' && sitePolicy === BLACKLISTED);
+	_isFeatureActive(type, sitePolicy) {
+		switch (type) {
+			case 'trust':
+				return sitePolicy === WHITELISTED;
+			case 'restrict':
+				return sitePolicy === BLACKLISTED;
+			default:
+				return false;
+		}
 	}
 
 	render() {
 		const {
 			blockingPausedOrDisabled,
-			sitePolicy,
+			narrow,
+			short,
 			showText,
+			sitePolicy,
 			tooltipPosition,
 			type
 		} = this.props;
 
-		const active = this._trustActive() || this._restrictActive();
+		const active = this._isFeatureActive(type, sitePolicy);
 		// TODO Foundation dependency: button
 		const ghosteryFeatureClassNames = ClassNames(
 			'button',
 			'g-tooltip',
 			'GhosteryFeatureButton',
-			'GhosteryFeatureButton--FoundationButtonOverrides',
 			{
+				'GhosteryFeatureButton--normal': !narrow && !short,
+				'GhosteryFeatureButton--short': short,
+				'GhosteryFeatureButton--narrow': narrow,
 				'GhosteryFeatureButton--inactive': !active,
 				'GhosteryFeatureButton--active': active,
-				'GhosteryFeatureButton--trust': type === 'trust',
-				'GhosteryFeatureButton--restrict': type === 'restrict',
-				'GhosteryFeatureButton--blockingPausedOrDisabled': blockingPausedOrDisabled,
+				trust: type === 'trust',
+				restrict: type === 'restrict',
 				clickable: !blockingPausedOrDisabled,
 				'not-clickable': blockingPausedOrDisabled,
 			}
