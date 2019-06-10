@@ -1,5 +1,5 @@
 /**
- * Ghostery Features Sass
+ * Ghostery Feature Sass
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -10,56 +10,6 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-
-/**
- * Ghostery Features Sass
- *
- * Ghostery Browser Extension
- * https://www.ghostery.com/
- *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
- *
- * This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0
- */
-
-/*
-.sub-component.ghostery-features {
-	.button {
-		&:hover {
-			background-color: #efefef;
-		}
-	}
-
-	.button-top {
-		border-bottom-left-radius: 0;
-		border-bottom-right-radius: 0;
-		border-bottom: 0;
-	}
-	.button-left {
-		border-top-right-radius: 0;
-		border-bottom-right-radius: 0;
-		border-right: 0;
-	}
-	.button-center {
-		border-top-left-radius: 0;
-		border-top-right-radius: 0;
-		border-bottom-left-radius: 0;
-		border-bottom-right-radius: 0;
-	}
-	.button-bottom {
-		border-top-left-radius: 0;
-		border-top-right-radius: 0;
-		border-top: 0;
-	}
-	.button-right {
-		border-top-left-radius: 0;
-		border-bottom-left-radius: 0;
-		border-left: 0;
-	}
-}
-*/
 
 .GhosteryFeatureButton__text {
 	background-repeat: no-repeat;
