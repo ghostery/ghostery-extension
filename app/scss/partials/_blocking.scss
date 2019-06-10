@@ -131,6 +131,9 @@
 				color: #9b9b9b;
 				font-style: italic;
 				text-decoration: line-through;
+				&.data-point {
+					color: #1DAFED;
+				}
 			}
 			.trk-src-link {
 				font-style: italic;
@@ -170,6 +173,9 @@
 				color: #9b9b9b;
 				font-style: italic;
 				text-decoration: line-through;
+				&.data-point {
+					color: #1DAFED;
+				}
 			}
 			.trk-src-link {
 				font-style: italic;
@@ -246,6 +252,9 @@
 				color: #9b9b9b;
 				font-style: italic;
 				text-decoration: line-through;
+				&.data-point {
+					color: #1DAFED;
+				}
 			}
 			.trk-src-link {
 				font-style: italic;

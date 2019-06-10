@@ -18,7 +18,8 @@ import {
 	UPDATE_CLIQZ_MODULE_DATA,
 	UPDATE_GHOSTERY_PAUSED,
 	UPDATE_SITE_POLICY,
-	UPDATE_TRACKER_COUNTS
+	UPDATE_TRACKER_COUNTS,
+	UPDATE_ANTI_TRACKING_NUM_SHOWN
 } from '../constants/constants';
 import { addToArray, removeFromArray } from '../utils/utils';
 import { sendMessage } from '../utils/msg';
@@ -70,6 +71,12 @@ export default (state = initialState, action) => {
 					sbBlocked: action.data.num_sb_blocked,
 					sbAllowed: action.data.num_sb_allowed,
 				},
+			});
+		}
+		case UPDATE_ANTI_TRACKING_NUM_SHOWN: {
+			console.log('here1', action.data)
+			return Object.assign({}, state, {
+				antiTracking: action.data
 			});
 		}
 		default: return state;

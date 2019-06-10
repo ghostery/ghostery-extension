@@ -163,7 +163,6 @@ class Category extends React.Component {
 		const globalBlocking = !!this.props.globalBlocking;
 		const filteredText = { color: 'red' };
 		const checkBoxStyle = `${(this.state.totalShownBlocked && this.state.allShownBlocked) ? 'all-blocked ' : (this.state.totalShownBlocked ? 'some-blocked ' : '')} checkbox-container`;
-
 		let trackersBlockedCount;
 		if (paused_blocking || sitePolicy === 2) {
 			trackersBlockedCount = 0;
@@ -197,45 +196,58 @@ class Category extends React.Component {
 									}
 									<span className="count">{`${category.num_total} `}</span>
 									<span className="text">
-										{ (category.num_total === 1) ? t('blocking_category_tracker') : t('blocking_category_trackers') }
+										{ category.id === 'other_data_points' ? ' DATA POINTS' : (category.num_total === 1) ? t('blocking_category_tracker') : t('blocking_category_trackers') }
 									</span>
 								</div>
 								{
-									!!trackersBlockedCount &&
+									(!!trackersBlockedCount || category.id === 'other_data_points') &&
 									<div className="blocked-count">
-										<span className="count">{`${trackersBlockedCount} `}</span>
-										<span className="text">{ t('blocking_category_blocked') }</span>
+										<span className="count">
+											{category.id === 'other_data_points' ? category.num_total : `${trackersBlockedCount} `}
+										</span>
+										<span className="text">
+											{category.id === 'other_data_points' ? ' ANONYMIZED' : t('blocking_category_blocked') }
+										</span>
 									</div>
 								}
 							</div>
 						</div>
 						<div className="columns collapse-left collapse-right shrink align-self-justify">
 							<div className={this.state.isExpanded ? 'caret-up' : 'caret-down'} onClick={this.toggleCategoryTrackers} />
-							<div className={checkBoxStyle} onClick={this.clickCategoryStatus}>
-								<span className={this.props.index ? 't-tooltip-up-left' : 't-tooltip-down-left'} data-g-tooltip={t('panel_tracker_block_tooltip')} onMouseOver={this.showTooltip} onMouseOut={this.hideTooltip} >
-									<svg className="blocking-icons status t-tooltip-up-left" data-g-tooltip={t('panel_tracker_block_tooltip')} onClick={this.clickTrackerStatus} width="20px" height="20px" viewBox="0 0 20 20">
-										<g transform="translate(1 1)" fill="none" fillRule="evenodd">
-											<path className="border" d="M-.5-.5h18.3v18.217H-.5z" />
-											<path className="background" d="M.5.5h16.3v16.217H.5z" />
-											<svg width="20px" height="20px" viewBox="1.5 1 20 20">
-												<path className="dash" d="M5,10.5 15,10.5" />
-											</svg>
-											<svg width="20px" height="20px" viewBox="-2.5 -2.5 20 20">
-												<path className="check" d="M8.062 6l3.51-3.51c.57-.57.57-1.493 0-2.063-.57-.57-1.495-.57-2.063 0L6 3.937 2.49.428c-.57-.57-1.493-.57-2.063 0-.57.57-.57 1.494 0 2.064L3.937 6 .426 9.51c-.57.57-.57 1.493 0 2.063.57.57 1.494.57 2.063 0L6 8.063l3.51 3.508c.57.57 1.493.57 2.063 0 .57-.57.57-1.493 0-2.062L8.063 6z" fillRule="nonzero" />
-											</svg>
-											<svg width="20px" height="20px" viewBox="-2.75 -2.75 20 20">
-												<circle className="trust-circle" cx="5.875" cy="5.875" r="5.875" fillRule="evenodd" />
-											</svg>
-											<svg width="20px" height="20px" viewBox="-2 -2 20 20">
-												<g className="restrict-circle" transform="translate(1 1)" fillRule="evenodd">
-													<path d="M1.958 1.958l7.834 7.834" />
-													<circle cx="5.753" cy="5.753" r="5.753" />
-												</g>
-											</svg>
-										</g>
+							{category.id !== 'other_data_points' && (
+								<div className={checkBoxStyle} onClick={this.clickCategoryStatus}>
+									<span className={this.props.index ? 't-tooltip-up-left' : 't-tooltip-down-left'} data-g-tooltip={t('panel_tracker_block_tooltip')} onMouseOver={this.showTooltip} onMouseOut={this.hideTooltip} >
+										<svg className="blocking-icons status t-tooltip-up-left" data-g-tooltip={t('panel_tracker_block_tooltip')} onClick={this.clickTrackerStatus} width="20px" height="20px" viewBox="0 0 20 20">
+											<g transform="translate(1 1)" fill="none" fillRule="evenodd">
+												<path className="border" d="M-.5-.5h18.3v18.217H-.5z" />
+												<path className="background" d="M.5.5h16.3v16.217H.5z" />
+												<svg width="20px" height="20px" viewBox="1.5 1 20 20">
+													<path className="dash" d="M5,10.5 15,10.5" />
+												</svg>
+												<svg width="20px" height="20px" viewBox="-2.5 -2.5 20 20">
+													<path className="check" d="M8.062 6l3.51-3.51c.57-.57.57-1.493 0-2.063-.57-.57-1.495-.57-2.063 0L6 3.937 2.49.428c-.57-.57-1.493-.57-2.063 0-.57.57-.57 1.494 0 2.064L3.937 6 .426 9.51c-.57.57-.57 1.493 0 2.063.57.57 1.494.57 2.063 0L6 8.063l3.51 3.508c.57.57 1.493.57 2.063 0 .57-.57.57-1.493 0-2.062L8.063 6z" fillRule="nonzero" />
+												</svg>
+												<svg width="20px" height="20px" viewBox="-2.75 -2.75 20 20">
+													<circle className="trust-circle" cx="5.875" cy="5.875" r="5.875" fillRule="evenodd" />
+												</svg>
+												<svg width="20px" height="20px" viewBox="-2 -2 20 20">
+													<g className="restrict-circle" transform="translate(1 1)" fillRule="evenodd">
+														<path d="M1.958 1.958l7.834 7.834" />
+														<circle cx="5.753" cy="5.753" r="5.753" />
+													</g>
+												</svg>
+											</g>
+										</svg>
+									</span>
+								</div>
+							)}
+							{category.id === 'other_data_points' && (
+								<span className={this.props.index ? 't-tooltip-up-left' : 't-tooltip-down-left'} data-g-tooltip="Data points anonymized by Anti-Tracking" onMouseOver={this.showTooltip} onMouseOut={this.hideTooltip} >
+									<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+										<path d="M10.190881 1.028859c-.114948-.038479-.267884-.038479-.382831 0L1.574491 3.211632C1.229895 3.2881 1 3.594463 1 3.93906c.038479 5.85937 3.178574 11.297185 8.578155 14.935303.114948.076469.268129.114948.42131.114948.153182 0 .306363-.038479.42131-.114948 5.399581-3.638118 8.539676-9.075933 8.578155-14.935303 0-.344597-.229894-.65096-.574491-.727428l-8.233558-2.182773z" stroke="#1DAFED" strokeWidth="2" fill="none" fillRule="evenodd" />
 									</svg>
 								</span>
-							</div>
+							)}
 						</div>
 					</div>
 				</div>
@@ -253,6 +265,7 @@ class Category extends React.Component {
 						language={this.props.language}
 						smartBlockActive={this.props.smartBlockActive}
 						smartBlock={this.props.smartBlock}
+						isDataPoint={category.id === 'other_data_points'}
 					/>
 				}
 			</div>

@@ -29,6 +29,10 @@
 			font-weight: 400;
 			color: #4a4a4a;
 			@extend %nowrap;
+			&.data-point {
+				pointer-events: none;
+				cursor: default;
+			}
 		}
 		.svg-container {
 			height: 20px;

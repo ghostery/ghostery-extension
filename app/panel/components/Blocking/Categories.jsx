@@ -30,9 +30,9 @@ class Categories extends React.Component {
 	*/
 	render() {
 		const { categories, expandAll, antiTracking } = this.props;
-		console.log(categories, antiTracking)
 		const globalBlocking = !!this.props.globalBlocking;
 		const filtered = !!this.props.filtered;
+
 		const categoryList = categories.map((cat, index) => (
 			<Category
 				expandAll={expandAll}
@@ -51,10 +51,57 @@ class Categories extends React.Component {
 				smartBlock={this.props.smartBlock}
 			/>
 		));
+
+		const otherDataPointsCategory = (antiTracking && antiTracking.totalUnsafeCount) ? (
+			<Category
+				expandAll={expandAll}
+				globalBlocking={globalBlocking}
+				index={categoryList.length}
+				category={(() => {
+					const unknownURLs = Object.keys(antiTracking.unknown);
+					const unsafeURLs = unknownURLs.filter(url => antiTracking.unknown[url] === 'unsafe');
+					return {
+						id: 'other_data_points',
+						name: 'Other Data Points',
+						description: 'Anonymized data points by Anti-Tracking',
+						img_name: 'other_data_points',
+						num_total: antiTracking.totalUnsafeCount,
+						num_blocked: 0,
+						num_shown: antiTracking.num_shown,
+						trackers: unsafeURLs.map((url, idx) => ({
+							blocked: false,
+							catId: 'other_data_points',
+							description: '',
+							id: 100000000 + idx,
+							name: url,
+							shouldShow: true,
+							sources: false,
+							ss_allowed: false,
+							ss_blocked: true,
+							warningCompatibility: false,
+							warningInsecure: false,
+							warningSlow: false,
+							warningSmartBlock: false,
+						})),
+					};
+				})()}
+				actions={this.props.actions}
+				key="other_data_points"
+				filtered={filtered}
+				showToast={this.props.showToast}
+				show_tracker_urls={this.props.show_tracker_urls}
+				sitePolicy={this.props.sitePolicy}
+				paused_blocking={this.props.paused_blocking}
+				language={this.props.language}
+				smartBlockActive={this.props.smartBlockActive}
+				smartBlock={this.props.smartBlock}
+			/>
+		) : null;
+
 		return (
 			<div className="scroll-content">
 				{categoryList}
-				{antiTracking && <div />}
+				{otherDataPointsCategory}
 			</div>
 		);
 	}

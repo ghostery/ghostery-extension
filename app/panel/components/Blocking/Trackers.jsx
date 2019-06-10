@@ -38,7 +38,7 @@ class Trackers extends React.Component {
 	* @return {ReactComponent}   ReactComponent instance
 	*/
 	render() {
-		const { trackers } = this.props;
+		const { trackers, isDataPoint } = this.props;
 		let trackerList;
 		if (this.props.globalBlocking) {
 			const trackersToShow = [];
@@ -72,6 +72,7 @@ class Trackers extends React.Component {
 					language={this.props.language}
 					smartBlockActive={this.props.smartBlockActive}
 					smartBlock={this.props.smartBlock}
+					isDataPoint={isDataPoint}
 				/>
 			));
 		}

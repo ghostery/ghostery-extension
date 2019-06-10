@@ -18,7 +18,8 @@ import {
 	UPDATE_CATEGORY_BLOCKED,
 	UPDATE_TRACKER_BLOCKED,
 	UPDATE_TRACKER_TRUST_RESTRICT,
-	TOGGLE_EXPAND_ALL
+	TOGGLE_EXPAND_ALL,
+	UPDATE_ANTI_TRACKING_NUM_SHOWN
 } from '../constants/constants';
 
 /**
@@ -52,6 +53,19 @@ export function updateBlockAllTrackers(data) {
 export function updateCategories(data) {
 	return {
 		type: UPDATE_CATEGORIES,
+		data,
+	};
+}
+
+/**
+ * Called from Blocking setShow functions
+ * Hits the Summary reducer, as that is where the AntiTracking data is stored
+ * @param  {Object} data
+ * @return {Object}
+ */
+export function updateAntiTrackingNumShown(data) {
+	return {
+		type: UPDATE_ANTI_TRACKING_NUM_SHOWN,
 		data,
 	};
 }
