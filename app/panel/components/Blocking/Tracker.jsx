@@ -14,6 +14,7 @@
 /* eslint react/no-array-index-key: 0 */
 
 import React from 'react';
+import ReactSVG from 'react-svg';
 import globals from '../../../../src/classes/Globals';
 import { log } from '../../../../src/utils/common';
 import { sendMessageInPromise } from '../../utils/msg';
@@ -231,6 +232,7 @@ class Tracker extends React.Component {
 					<div className="columns collapse-left">
 						<div className="trk-name" onClick={this.toggleDescription}>{ tracker.name }</div>
 						<div className="trk-cliqz-stats-container">
+							<ReactSVG path="/app/images/panel/cookies-and-fingerprints-cliqz-badge.svg" className="trk-cliqz-stat-shield-badge-svg" />
 							<span className="trk-cliqz-stat-cookies-count">5 Cookies</span>
 							<span className="trk-cliqz-stat-fingerprint-count">1 Fingerprint</span>
 						</div>
