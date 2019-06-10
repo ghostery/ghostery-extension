@@ -132,9 +132,6 @@
 .expert .sub-component.cliqz-features .g-tooltip .tooltip-content.right {
 	margin-left: 16px;
 }
-.expert .sub-component.ghostery-features .g-tooltip .tooltip-content.right {
-	margin-top: -18px;
-}
 .expert .sub-component.pause-button .g-tooltip .tooltip-content.right {
 	margin-top: -12px;
 	margin-left: 28px;
@@ -149,6 +146,10 @@
 }
 .sub-component.pause-button .g-tooltip .tooltip-content.top {
 	left: 75px;
+}
+
+.GhosteryFeatureButton--short.g-tooltip .tooltip-content.right {
+	margin-top: -18px;
 }
 
 .CliqzFeature--smaller .g-tooltip .tooltip-content.top {
