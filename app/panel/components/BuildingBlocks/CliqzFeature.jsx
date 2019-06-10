@@ -50,28 +50,9 @@ class CliqzFeature extends React.Component {
 		});
 	}
 
-	_getCount(active, data, type) {
-		if (!active) {
-			return '-';
-		}
-
-		if (type === 'anti_track') {
-			return data && data.totalUnsafeCount || 0;
-		} else if (type === 'ad_block') {
-			return data && data.totalCount || 0;
-		} else if (type === 'smart_block') {
-			return this._count(data, data.blocked) + this._count(data, data.unblocked);
-		}
-
-		return 0;
+	_getStatus(active) {
+		return active ? t('drawer_on') : t('drawer_off');
 	}
-	_count(object, property) {
-		return object && this._length(property) || 0;
-	}
-	_length(object) {
-		return Object.keys(object).length;
-	}
-
 
 	_getTooltipBodyText(active, isTooltipBody, type) {
 		if (!isTooltipBody) return false;
@@ -125,7 +106,7 @@ class CliqzFeature extends React.Component {
 
 		return (
 			<div className={cliqzFeatureClassNames} onClick={this.clickCliqzFeature}>
-				<div className="CliqzFeature__count">{this._getCount(active, data, type)}</div>
+				<div className="CliqzFeature__status">{this._getStatus(active)}</div>
 				<div className={iconClassNames}>
 					<Tooltip
 						header={this._getTooltipHeaderText(isTooltipHeader, type)}
