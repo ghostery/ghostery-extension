@@ -129,9 +129,6 @@
 	margin-top: 5px;
 	margin-left: 10px;
 }
-.expert .sub-component.cliqz-features .g-tooltip .tooltip-content.right {
-	margin-left: 16px;
-}
 .expert .sub-component.pause-button .g-tooltip .tooltip-content.right {
 	margin-top: -12px;
 	margin-left: 28px;
@@ -148,8 +145,16 @@
 	left: 75px;
 }
 
+
 .GhosteryFeatureButton--short.g-tooltip .tooltip-content.right {
 	margin-top: -18px;
+}
+.GhosteryFeatureButton--narrow.g-tooltip .tooltip-content.right {
+	margin-top: -18px;
+}
+
+.CliqzFeature--condensed .g-tooltip .tooltip-content.right {
+	margin-left: 16px;
 }
 
 .CliqzFeature--smaller .g-tooltip .tooltip-content.top {
