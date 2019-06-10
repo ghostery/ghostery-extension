@@ -62,12 +62,12 @@ class Rewards extends React.Component {
 	 * Lifecycle event
 	 */
 	componentWillReceiveProps(nextProps) {
-		const dateNow = new Date();
 		let rewardsArray = null;
 		if (nextProps.rewards) {
 			rewardsArray = Object.keys(nextProps.rewards).map((key) => {
 				const reward = nextProps.rewards[key].offer_data;
 				const { isCodeHidden } = nextProps.rewards[key].attrs || {};
+				const createdTS = nextProps.rewards[key].createdTs;
 				return {
 					id: reward.offer_id,
 					unread: nextProps.unread_offer_ids.indexOf(reward.offer_id) !== -1,
@@ -81,9 +81,9 @@ class Rewards extends React.Component {
 					picture_url: reward.ui_info.template_data.picture_url,
 					redeem_url: reward.ui_info.template_data.call_to_action.url,
 					redeem_text: reward.ui_info.template_data.call_to_action.text,
-					expires: Math.round((new Date()).setDate(dateNow.getDate() + reward.expirationMs / 1000 / 60 / 60 / 24)),
+					expires: new Date(createdTS + reward.expirationMs),
 				};
-			});
+			}).filter(reward => reward.expires > Date.now());
 		}
 		this.setState({ rewardsArray });
 	}
