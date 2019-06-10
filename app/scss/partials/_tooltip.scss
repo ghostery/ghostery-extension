@@ -129,10 +129,6 @@
 	margin-top: 5px;
 	margin-left: 10px;
 }
-.expert .sub-component.pause-button .g-tooltip .tooltip-content.right {
-	margin-top: -12px;
-	margin-left: 28px;
-}
 .expert .modified-requests.g-tooltip .tooltip-content.right {
 	margin-top: -51px;
 	margin-left: -26px;
@@ -141,34 +137,51 @@
 	margin-top: -44px;
 	margin-left: 33px;
 }
-.sub-component.pause-button .g-tooltip .tooltip-content.top {
-	left: 75px;
+
+.Summary {
+	.sub-component.pause-button .g-tooltip .tooltip-content.top {
+		left: 75px;
+	}
 }
 
+.Summary--expert {
+	.sub-component.pause-button .g-tooltip .tooltip-content.right {
+		margin-top: -12px;
+		margin-left: 28px;
+	}
 
-.GhosteryFeatureButton--short.g-tooltip .tooltip-content.right {
-	margin-top: -18px;
-}
-.GhosteryFeatureButton--narrow.g-tooltip .tooltip-content.right {
-	margin-top: -18px;
-}
+	.GhosteryFeatureButton.g-tooltip .tooltip-content.right {
+		margin-top: -18px;
+	}
 
-.CliqzFeature--condensed .g-tooltip .tooltip-content.right {
-	margin-left: 16px;
-}
-
-.CliqzFeature--smaller .g-tooltip .tooltip-content.top {
-	&.top-right {
-		margin-left: -40px;
-		&:after {
-			left: 40px;
+	.CliqzFeature .g-tooltip .tooltip-content.top {
+		&.top-right {
+			margin-left: -40px;
+			&:after {
+				left: 40px;
+			}
+		}
+		&.top-left {
+			margin-left: -110px;
+			&:after {
+				left: 110px;
+			}
 		}
 	}
-	&.top-left {
-		margin-left: -110px;
-		&:after {
-			left: 110px;
-		}
+}
+
+.Summary--condensed {
+	.sub-component.pause-button .g-tooltip .tooltip-content.right {
+		margin-top: -12px;
+		margin-left: 28px;
+	}
+
+	.GhosteryFeatureButton.g-tooltip .tooltip-content.right {
+		margin-top: -18px;
+	}
+
+	.CliqzFeature .g-tooltip .tooltip-content.right {
+		margin-left: 16px;
 	}
 }
 
