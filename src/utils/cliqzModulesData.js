@@ -26,7 +26,7 @@ export function getCliqzAntitrackingData(tabId) {
 		}
 
 		antitracking.background.actions.aggregatedBlockingStats(tabId).then((antitrackingData) => {
-		let totalUnsafeCount = 0;
+			let totalUnsafeCount = 0;
 			for (const category in antitrackingData) {
 				if (antitrackingData.hasOwnProperty(category)) {
 					for (const app in antitrackingData[category]) {

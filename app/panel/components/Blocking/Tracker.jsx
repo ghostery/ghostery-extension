@@ -230,6 +230,10 @@ class Tracker extends React.Component {
 					</div>
 					<div className="columns collapse-left">
 						<div className="trk-name" onClick={this.toggleDescription}>{ tracker.name }</div>
+						<div className="IVZTEST">
+							<span>5 Cookies</span>
+							<span>1 Fingerprint</span>
+						</div>
 					</div>
 					<div className="columns shrink align-self-justify collapse-right">
 						<div className="svg-container">
