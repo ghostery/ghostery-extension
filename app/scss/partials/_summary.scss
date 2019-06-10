@@ -114,6 +114,11 @@
 		display: block;
 		text-overflow: ellipsis;
 		white-space: nowrap;
+	}
+
+	// .total-requests-modified needs to show overflow for tooltip
+	.Summary__pageStatContainer .total-trackers-blocked,
+	.Summary__pageStatContainer .page_load_time {
 		overflow-x: hidden;
 	}
 

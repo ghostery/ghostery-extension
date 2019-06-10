@@ -497,19 +497,19 @@ class Summary extends React.Component {
 	_renderTotalRequestsModified() {
 		const { is_expert } = this.props;
 
-		const totalRequestsModifiedClassNames = ClassNames('SummaryPageStat', 'total-requests-modified', {
+		const totalRequestsModifiedClassNames = ClassNames('SummaryPageStat', 'g-tooltip', 'total-requests-modified', {
 			'SummaryPageStat--condensed-view': this._isCondensed(),
 		});
 
 		return (
-			<div className="Summary__pageStatContainer g-tooltip">
+			<div className="Summary__pageStatContainer">
 				<div className={totalRequestsModifiedClassNames}>
 					<span className="SummaryPageStat__label">{t('requests_modified')} </span>
 					<span className="SummaryPageStat__value">
 						{this._requestsModifiedCount()}
 					</span>
+					<Tooltip body={t('requests_modified_tooltip')} position={is_expert ? 'right' : 'top'} />
 				</div>
-				<Tooltip body={t('requests_modified_tooltip')} position={is_expert ? 'right' : 'top'} />
 			</div>
 		);
 	}

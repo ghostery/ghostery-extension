@@ -129,15 +129,6 @@
 	margin-top: 5px;
 	margin-left: 10px;
 }
-.expert .modified-requests.g-tooltip .tooltip-content.right {
-	margin-top: -51px;
-	margin-left: -26px;
-}
-.expert.condensed .modified-requests.g-tooltip .tooltip-content.right {
-	margin-top: -44px;
-	margin-left: 33px;
-}
-
 .Summary {
 	.sub-component.pause-button .g-tooltip .tooltip-content.top {
 		left: 75px;
@@ -168,6 +159,14 @@
 			}
 		}
 	}
+
+	.SummaryPageStat.total-requests-modified.g-tooltip .tooltip-content.right {
+		margin-top: -43px;
+
+		// Overwrite the expert view Summary__pageStatContainer
+		// white-space: nowrap value
+		white-space: normal;
+	}
 }
 
 .Summary--condensed {
@@ -182,6 +181,11 @@
 
 	.CliqzFeature .g-tooltip .tooltip-content.right {
 		margin-left: 16px;
+	}
+
+	.SummaryPageStat.total-requests-modified.g-tooltip .tooltip-content.right {
+		margin-top: -42px;
+		margin-left: 31px;
 	}
 }
 
