@@ -46,12 +46,9 @@
 .DonutGraph__tooltip {
 	white-space: nowrap;
 	pointer-events: none;
-	transition: opacity .2s ease-in;
-}
-
-.DonutGraph__tooltip--hide {
 	visibility: hidden;
 	opacity: 0;
+	transition: opacity .2s ease-in;
 }
 
 .DonutGraph__tooltip--show {

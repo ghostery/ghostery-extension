@@ -216,7 +216,7 @@ class DonutGraph extends React.Component {
 		categories.forEach((cat) => {
 			const tooltip = document.getElementById(`${cat.id}_tooltip`);
 			if (tooltip) {
-				tooltip.classList.remove('show');
+				tooltip.classList.remove('DonutGraph__tooltip--show');
 			}
 		});
 
@@ -268,13 +268,13 @@ class DonutGraph extends React.Component {
 				if (tooltip) {
 					tooltip.style.left = `${pX - (tooltip.offsetWidth / 2)}px`;
 					tooltip.style.top = `${pY - (tooltip.offsetHeight + 8)}px`;
-					tooltip.classList.add('show');
+					tooltip.classList.add('DonutGraph__tooltip--show');
 				}
 			})
 			.on('mouseout', (d) => {
 				const tooltip = this.grabTooltip(d);
 				if (tooltip) {
-					tooltip.classList.remove('show');
+					tooltip.classList.remove('DonutGraph__tooltip--show');
 				}
 			})
 			.on('click', (d) => {
@@ -323,7 +323,7 @@ class DonutGraph extends React.Component {
 			<div className={componentClasses}>
 				<div className="DonutGraph__tooltipContainer">
 					{this.props.categories.map(cat => (
-						<span key={cat.id} id={`${cat.id}_tooltip`} className="DonutGraph__tooltip DonutGraph__tooltip--hide top">
+						<span key={cat.id} id={`${cat.id}_tooltip`} className="DonutGraph__tooltip  top">
 							{cat.name}
 						</span>
 					))}
