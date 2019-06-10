@@ -186,7 +186,7 @@ class PauseButton extends React.Component {
 		);
 
 		return (
-			<div className="sub-a-dub-component pause-button">
+			<div className="sub-component pause-button">
 				<div className="button-group">
 					{togglePauseButton}
 					{pauseDurationSelectionDropdownCaret}
