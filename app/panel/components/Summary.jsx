@@ -585,7 +585,6 @@ class Summary extends React.Component {
 
 	_renderCliqzAntiTracking() {
 		const {
-			antiTracking,
 			enable_anti_tracking,
 			is_expert,
 		} = this.props;
@@ -596,7 +595,6 @@ class Summary extends React.Component {
 				<CliqzFeature
 					clickButton={this.clickCliqzFeature}
 					type="anti_track"
-					data={antiTracking}
 					active={enable_anti_tracking}
 					cliqzInactive={this._isCliqzInactive()}
 					isSmaller={is_expert && !isCondensed}
@@ -611,7 +609,6 @@ class Summary extends React.Component {
 
 	_renderCliqzAdBlock() {
 		const {
-			adBlock,
 			enable_ad_block,
 			is_expert,
 		} = this.props;
@@ -622,7 +619,6 @@ class Summary extends React.Component {
 				<CliqzFeature
 					clickButton={this.clickCliqzFeature}
 					type="ad_block"
-					data={adBlock}
 					active={enable_ad_block}
 					cliqzInactive={this._isCliqzInactive()}
 					isSmaller={is_expert && !isCondensed}
@@ -639,7 +635,6 @@ class Summary extends React.Component {
 		const {
 			enable_smart_block,
 			is_expert,
-			smartBlock,
 		} = this.props;
 		const isCondensed = this._isCondensed();
 
@@ -648,7 +643,6 @@ class Summary extends React.Component {
 				<CliqzFeature
 					clickButton={this.clickCliqzFeature}
 					type="smart_block"
-					data={smartBlock}
 					active={enable_smart_block}
 					cliqzInactive={this._isCliqzInactive()}
 					isSmaller={is_expert && !isCondensed}

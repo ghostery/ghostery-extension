@@ -19,10 +19,11 @@ $cliqz-feature--light-gray: #dedede;
 $cliqz-feature--darker-gray: #a4a4a4;
 
 // Default styling for the elements of the CliqzFeature BEM block
-.CliqzFeature__count {
+.CliqzFeature__status {
 	text-align: center;
 	font-size: 14px;
 	font-weight: 600;
+	text-transform: uppercase;
 	transition: color 0.25s ease-out;
 	transition: background-image 0.25s ease-out;
 }
@@ -50,7 +51,7 @@ $cliqz-feature--darker-gray: #a4a4a4;
 // The CliqzFeature block is always one of normal, smaller, or condensed
 .CliqzFeature--normal,
 .CliqzFeature--smaller {
-	.CliqzFeature__count { line-height: 28px; }
+	.CliqzFeature__status { line-height: 28px; }
 	.CliqzFeature__icon {
 		height: 50px;
 		width: 50px;
@@ -63,7 +64,7 @@ $cliqz-feature--darker-gray: #a4a4a4;
 }
 
 .CliqzFeature--condensed {
-	.CliqzFeature__count { line-height: 14px; }
+	.CliqzFeature__status { line-height: 14px; }
 	.CliqzFeature__icon {
 		height: 40px;
 		width: 40px;
@@ -76,7 +77,7 @@ $cliqz-feature--darker-gray: #a4a4a4;
 // The CliqzFeature block is always either active or inactive
 // and always either clickable or not-clickable
 .CliqzFeature--active.clickable {
-	.CliqzFeature__count {
+	.CliqzFeature__status {
 		color: $cliqz-feature--blue;
 		background: none;
 	}
@@ -86,7 +87,7 @@ $cliqz-feature--darker-gray: #a4a4a4;
 	.CliqzFeature__feature-name { color: $cliqz-feature--blue; }
 
 	&:hover {
-		.CliqzFeature__count { color: $cliqz-feature--darker-blue; }
+		.CliqzFeature__status { color: $cliqz-feature--darker-blue; }
 		.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($cliqz-feature--darker-blue); }
 		.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($cliqz-feature--darker-blue); }
 		.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($cliqz-feature--darker-blue); }
@@ -95,10 +96,7 @@ $cliqz-feature--darker-gray: #a4a4a4;
 }
 
 .CliqzFeature--active.not-clickable {
-	.CliqzFeature__count {
-		color: $cliqz-feature--pale-blue;
-		background: none;
-	}
+	.CliqzFeature__status { color: $cliqz-feature--pale-blue; }
 	.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($cliqz-feature--pale-blue); }
 	.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($cliqz-feature--pale-blue); }
 	.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($cliqz-feature--pale-blue); }
@@ -106,26 +104,15 @@ $cliqz-feature--darker-gray: #a4a4a4;
 
 }
 
-.CliqzFeature--inactive {
-	.CliqzFeature__count {
-		background-repeat: no-repeat;
-		background-position: center center;
-		background-size: 10px 10px;
-	}
-}
-
 .CliqzFeature--inactive.clickable {
-	.CliqzFeature__count {
-		color: rgba($cliqz-feature--gray, 0);
-		background-image: buildIconDash($cliqz-feature--gray);
-	}
+	.CliqzFeature__status { color: $cliqz-feature--gray; }
 	.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($cliqz-feature--gray); }
 	.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($cliqz-feature--gray); }
 	.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($cliqz-feature--gray); }
 	.CliqzFeature__feature-name { color: $cliqz-feature--gray; }
 
 	&:hover {
-		.CliqzFeature__count { background-image: buildIconDash($cliqz-feature--darker-gray); }
+		.CliqzFeature__status { color: $cliqz-feature--darker-gray; }
 		.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($cliqz-feature--darker-gray); }
 		.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($cliqz-feature--darker-gray); }
 		.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($cliqz-feature--darker-gray); }
@@ -134,14 +121,9 @@ $cliqz-feature--darker-gray: #a4a4a4;
 }
 
 .CliqzFeature--inactive.not-clickable {
-	.CliqzFeature__count {
-		color: rgba($cliqz-feature--light-gray, 0);
-		background-image: buildIconDash($cliqz-feature--light-gray);
-	}
-
+	.CliqzFeature__status { color: $cliqz-feature--light-gray; }
 	.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($cliqz-feature--light-gray); }
 	.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($cliqz-feature--light-gray); }
 	.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($cliqz-feature--light-gray); }
 	.CliqzFeature__feature-name { color: $cliqz-feature--light-gray; }
 }
-
