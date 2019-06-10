@@ -1938,10 +1938,10 @@
 		"message": "Code kopiert"
 	},
 	"rewards_expires_in_day": {
-		"message": "Verfügbar für 1 Tag"
+		"message": "Läuft in 1 Tag ab"
 	},
 	"rewards_expires_in_days": {
-		"message": "Verfügbar für $COUNT$ Tagen",
+		"message": "Läuft in $COUNT$ Tagen ab",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1949,10 +1949,10 @@
 		}
 	},
 	"rewards_expires_in_hour": {
-		"message": "Verfügbar für 1 Stunde"
+		"message": "Läuft in 1 Stunde ab"
 	},
 	"rewards_expires_in_hours": {
-		"message": "Verfügbar für $COUNT$ Stunden",
+		"message": "Läuft in $COUNT$ Stunden ab",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1960,10 +1960,10 @@
 		}
 	},
 	"rewards_expires_in_min": {
-		"message": "Verfügbar für 1 Min."
+		"message": "Läuft in 1 Minute ab"
 	},
 	"rewards_expires_in_mins": {
-		"message": "Verfügbar für $COUNT$ Minuten",
+		"message": "Läuft in $COUNT$ Minuten ab",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1971,10 +1971,10 @@
 		}
 	},
 	"rewards_expires_in_sec": {
-		"message": "Verfügbar für 1 Sek."
+		"message": "Läuft in 1 Sekunde ab"
 	},
 	"rewards_expires_in_secs": {
-		"message": "Verfügbar für $COUNT$ Sek.",
+		"message": "Läuft in $COUNT$ Sekunden ab",
 		"placeholders": {
 			"count": {
 				"content": "$1"
