@@ -782,6 +782,8 @@ function onMessageHandler(request, sender, callback) {
 	}
 
 	// HANDLE UNIVERSAL EVENTS HERE (NO ORIGIN LISTED ABOVE)
+	// The 'getPanelData' message is never sent by the panel, which uses ports only since 8.3.2
+	// The  message is still sent by panel-android and by the hub as of 8.4.0
 	if (name === 'getPanelData') {
 		if (!message.tabId) {
 			utils.getActiveTab((tab) => {
@@ -795,9 +797,6 @@ function onMessageHandler(request, sender, callback) {
 			});
 		}
 		account.getUserSettings().catch(err => log('Failed getting user settings from getPanelData:', err));
-		if (offers.isEnabled && conf.enable_offers && conf.is_expert) {
-			rewards.filterOffersByRemote().catch(err => log('Failed to filter offers by remote:', err));
-		}
 		return true;
 	} else if (name === 'getStats') {
 		insights.action('getStatsTimeline', message.from, message.to, true, true).then((data) => {
@@ -1220,7 +1219,6 @@ function initialiseWebRequestPipeline() {
 				const result = events.onBeforeRequest(state);
 				if (result && (result.cancel === true || result.redirectUrl)) {
 					Object.assign(response, result);
-					return false;
 				}
 				return true;
 			}
@@ -1259,39 +1257,7 @@ function isWhitelisted(state) {
  */
 antitracking.on('enabled', () => {
 	antitracking.isReady().then(() => {
-		// remove Cliqz-side whitelisting steps and replace with ghostery ones.
-		const replacedSteps = ['onBeforeSendHeaders', 'onHeadersReceived'].map(stage =>
-			Promise.all([
-				antitracking.action('addPipelineStep', stage, {
-					name: 'checkGhosteryWhitelisted',
-					spec: 'break',
-					fn: (state) => {
-						if (isWhitelisted(state)) {
-							const step = stage === 'onHeadersReceived' ? 'set_cookie' : 'cookie';
-							state.incrementStat(`${step}_allow_whitelisted`);
-							return false;
-						}
-						return true;
-					},
-					before: ['cookieContext.checkCookieTrust'],
-				})
-			])
-		).concat([
-			antitracking.action('removePipelineStep', 'onBeforeRequest', 'checkSourceWhitelisted'),
-			antitracking.action('addPipelineStep', 'onBeforeRequest', {
-				name: 'checkGhosteryWhitelisted',
-				spec: 'break',
-				fn: (state) => {
-					if (isWhitelisted(state)) {
-						state.incrementStat('ghostery_whitelisted');
-						return false;
-					}
-					return true;
-				},
-				before: ['checkShouldBlock'],
-			}),
-		]);
-		return Promise.all(replacedSteps);
+		antitracking.action('setWhiteListCheck', isWhitelisted);
 	});
 });
 
