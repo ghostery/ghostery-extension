@@ -87,8 +87,8 @@ class CliqzFeature extends React.Component {
 
 	_getAlertText(active, type) {
 		return active ?
-			t(`alert_${type}_on`) :
-			t(`alert_${type}`);
+			t(`alert_${type}_off`) :
+			t(`alert_${type}_on`);
 	}
 
 	/**
