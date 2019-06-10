@@ -98,11 +98,12 @@ describe('app/panel/components/BuildingBlocks/PauseButton.jsx', () => {
 			expect(component.find('.button.button-pause.active').length).toBe(0);
 			expect(component.find('.button.button-pause.smaller').length).toBe(1);
 			expect(component.find('.button.button-pause.smallest').length).toBe(0);
-			expect(component.find('.dropdown-container').length).toBe(1);
+			expect(component.find('.dropdown-container').length).toBe(0);
 			expect(component.find('.dropdown-container .dropdown-item').length).toBe(0);
 			expect(component.find('.button-caret').length).toBe(1);
 			expect(component.find('.button-caret.active').length).toBe(0);
 			component.setState({ showDropdown: true });
+			expect(component.find('.dropdown-container').length).toBe(1);
 			expect(component.find('.dropdown-container .dropdown-item').length).toBe(3);
 			expect(component.find('.dropdown-container .dropdown-item.selected').length).toBe(0);
 			expect(component.find('.button-caret.active').length).toBe(1);
@@ -127,11 +128,12 @@ describe('app/panel/components/BuildingBlocks/PauseButton.jsx', () => {
 			expect(component.find('.button.button-pause.active').length).toBe(1);
 			expect(component.find('.button.button-pause.smaller').length).toBe(0);
 			expect(component.find('.button.button-pause.smallest').length).toBe(0);
-			expect(component.find('.dropdown-container').length).toBe(1);
+			expect(component.find('.dropdown-container').length).toBe(0);
 			expect(component.find('.dropdown-container .dropdown-item').length).toBe(0);
 			expect(component.find('.button-caret').length).toBe(1);
 			expect(component.find('.button-caret.active').length).toBe(0);
 			component.setState({ showDropdown: true });
+			expect(component.find('.dropdown-container').length).toBe(1);
 			expect(component.find('.dropdown-container .dropdown-item').length).toBe(3);
 			expect(component.find('.dropdown-container .dropdown-item.selected').length).toBe(1);
 			expect(component.find('.button-caret.active').length).toBe(1);
