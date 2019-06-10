@@ -80,7 +80,6 @@ class CliqzFeature extends React.Component {
 		const {
 			active,
 			cliqzInactive,
-			data,
 			isSmaller,
 			isCondensed,
 			isTooltipBody,
