@@ -319,11 +319,12 @@ class DonutGraph extends React.Component {
 			'DonutGraph--small': isSmall,
 		});
 
+		// TODO Foundation dependency: tooltip
 		return (
 			<div className={componentClasses}>
 				<div className="DonutGraph__tooltipContainer">
 					{this.props.categories.map(cat => (
-						<span key={cat.id} id={`${cat.id}_tooltip`} className="DonutGraph__tooltip  top">
+						<span key={cat.id} id={`${cat.id}_tooltip`} className="DonutGraph__tooltip tooltip  top">
 							{cat.name}
 						</span>
 					))}
