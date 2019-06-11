@@ -276,6 +276,13 @@ class FoundBugs {
 		return apps_arr;
 	}
 
+	/**
+	 * Returns an object where the keys are the ids of the apps found on this tab
+	 * and the values are their indices in the array returned by #getApps
+	 *
+	 * @param  {number}		tab_id		tab id
+	 * @return {Object}					object of app-id-to-#getApps-array-index mappings
+	 */
 	getAppsById(tab_id) {
 		if (!this._ensure(tab_id)) {
 			return [];
