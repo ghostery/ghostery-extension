@@ -33,10 +33,6 @@ const policy = new Policy();
  * Restricted Sites: Only show the "allow once" option, since blacklisting overrides
  * site-specific tracker allow settings.
  *
- * Smart Blocking: If the app was blocked by Smart Blocking, we only show the "allow always" option because
- * the tracker was most likely a lazy-loaded widget (comment, video) and C2P will reset the allowOnceList
- * before the widget has a chance to load.
- *
  * @memberOf BackgroundUtils
  *
  * @param  {Object} details 	request parameters
