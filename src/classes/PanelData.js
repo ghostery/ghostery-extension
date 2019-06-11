@@ -839,7 +839,10 @@ class PanelData {
 
 			bugsIds.forEach((bugsId) => {
 				const trackerId = conf.bugs.bugs[bugsId];
+				if (!trackerId) return;
+
 				const trackerListIndex = appsById[trackerId.aid];
+				if (!trackerListIndex) return;
 
 				this._trackerList[trackerListIndex].cliqzCookieCount = gsBugs[bugsId].cookies;
 				this._trackerList[trackerListIndex].cliqzFingerprintCount = gsBugs[bugsId].fingerprints;
