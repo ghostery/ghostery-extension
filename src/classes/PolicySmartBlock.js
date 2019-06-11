@@ -65,7 +65,7 @@ class PolicySmartBlock {
 		}
 
 		if (reason) {
-			log('Smart Blocking unblokced appId', appId, 'for reason:', reason);
+			log('Smart Blocking unblocked appId', appId, 'for reason:', reason);
 			tabInfo.setTabSmartBlockAppInfo(tabId, appId, reason, false);
 			return true;
 		}
