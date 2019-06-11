@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import _ from 'underscore';
+import { isEqual } from 'underscore';
 import React from 'react';
 import * as D3 from 'd3';
 
@@ -30,7 +30,7 @@ class StatsGraph extends React.Component {
 	 * Lifecycle event
 	 */
 	componentDidUpdate(prevProps) {
-		if (!_.isEqual(prevProps, this.props)) {
+		if (!isEqual(prevProps, this.props)) {
 			this.generateGraph();
 		}
 	}

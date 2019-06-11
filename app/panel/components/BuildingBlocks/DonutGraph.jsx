@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import _ from 'underscore';
+import { throttle } from 'underscore';
 import React from 'react';
 import ClassNames from 'classnames';
 import {
@@ -178,7 +178,7 @@ class DonutGraph extends React.Component {
 	 * @param  {Array} categories list of categories detected on the site
 	 * @param  {Object} options    options for the graph
 	 */
-	bakeDonut = _.throttle(this._bakeDonut.bind(this), 600, { leading: true, trailing: true }) // matches panelData#updatePanelUI throttling
+	bakeDonut = throttle(this._bakeDonut.bind(this), 600, { leading: true, trailing: true }) // matches panelData#updatePanelUI throttling
 
 	_bakeDonut(categories, options) {
 		const {
