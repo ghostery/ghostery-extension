@@ -1,0 +1,58 @@
+/**
+ * Upgrade Banner Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+.UpgradeBanner {
+	@extend %pointer;
+	background: url("../../app/images/panel/green-upgrade-banner.svg");
+	background-size: contain;
+}
+
+.UpgradeBanner--normal {
+	height: 23px;
+
+	.UpgradeBanner__text {
+		font-size: 12px;
+		vertical-align: sub;
+		padding: 0 4px 0 10px;
+	}
+
+	.UpgradeBanner__plus {
+		vertical-align: sub;
+	}
+}
+
+.UpgradeBanner--small {
+	height: 20px;
+
+	.UpgradeBanner__text {
+		font-size: 10px;
+		vertical-align: baseline;
+		padding: 0 4px 0 8px;
+	}
+
+	.UpgradeBanner__plus {
+		vertical-align: middle;
+	}
+}
+
+.UpgradeBanner__text {
+	display: inline-block;
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+	font-weight: bold;
+	color: white;
+}
+
+.UpgradeBanner__plus {
+	display: inline-block;
+	padding-right: 18px;
+}
