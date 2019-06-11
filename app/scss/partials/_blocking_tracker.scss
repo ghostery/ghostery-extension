@@ -19,13 +19,11 @@
 		border-top: none;
 	}
 	.trk-header {
-		padding-top: 5px;
-		padding-bottom: 5px;
 		height: 61px;
 		.trk-name {
 			@extend %pointer;
 			font-size: 14px;
-			line-height: 19px;
+			line-height: 25px;
 			font-weight: 400;
 			color: #4a4a4a;
 			@extend %nowrap;
