@@ -99,12 +99,9 @@ class PolicySmartBlock {
 				reason = 'allowedType'; 	// allow if tracker is in breaking type
 			} else if (this._pageWasReloaded(tabId, appId)) {
 				reason = 'pageReloaded'; 	// allow if page has been reloaded recently
-			} else if (c2pDb.allowedOnce(tabId, appId)) {
-				reason = 'c2pAllowOnce'; // allow if the user has selected "allow once" in Click2Play
 			}
 		}
 
-		// We are only blocking slow trackers that do not cause page breakage
 		const result = (reason === 'slow');
 		if (result) {
 			log('Smart Blocking blocked appId', appId, 'for reason:', reason);
