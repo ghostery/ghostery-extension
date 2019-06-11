@@ -117,44 +117,78 @@
 	}
 }
 
-.summary-total-tracker-count.g-tooltip .tooltip-content.right {
-	margin-top: -20px;
-	margin-left: 24px;
-}
-.sub-component.donut-graph.small .g-tooltip .tooltip-content.right {
-	margin-top: -8px;
-	margin-left: 15px;
-}
-.sub-component.donut-graph.big .g-tooltip .tooltip-content.right {
-	margin-top: 5px;
-	margin-left: 10px;
-}
-.expert .sub-component.cliqz-features .g-tooltip .tooltip-content.right {
-	margin-left: 16px;
-}
-.expert .sub-component.ghostery-features .g-tooltip .tooltip-content.right {
-	margin-top: -18px;
-}
-.expert .sub-component.pause-button .g-tooltip .tooltip-content.right {
-	margin-top: -12px;
-	margin-left: 28px;
-}
-.sub-component.pause-button .g-tooltip .tooltip-content.top {
-	left: 75px;
+.Summary {
+	.DonutGraph .g-tooltip .tooltip-content.right {
+		margin-top: 5px;
+		margin-left: 10px;
+	}
+
+	.sub-component.pause-button .g-tooltip .tooltip-content.top {
+		left: 75px;
+	}
 }
 
-.expert .g-tooltip .tooltip-content.top {
-	&.top-right {
-		margin-left: -40px;
-		&:after {
-			left: 40px;
+.Summary--expert {
+	.DonutGraph .g-tooltip .tooltip-content.right {
+		margin-top: -8px;
+		margin-left: 15px;
+	}
+
+	.SummaryPageStat.total-requests-modified.g-tooltip .tooltip-content.right {
+		margin-top: -43px;
+
+		// Overwrite the expert view Summary__pageStatContainer
+		// white-space: nowrap value
+		white-space: normal;
+	}
+
+	.GhosteryFeatureButton.g-tooltip .tooltip-content.right {
+		margin-top: -18px;
+	}
+
+	.sub-component.pause-button .g-tooltip .tooltip-content.right {
+		margin-top: -12px;
+		margin-left: 28px;
+	}
+
+	.CliqzFeature .g-tooltip .tooltip-content.top {
+		&.top-right {
+			margin-left: -40px;
+			&:after {
+				left: 40px;
+			}
+		}
+		&.top-left {
+			margin-left: -110px;
+			&:after {
+				left: 110px;
+			}
 		}
 	}
-	&.top-left {
-		margin-left: -110px;
-		&:after {
-			left: 110px;
-		}
+}
+
+.Summary--condensed {
+	.Summary__totalTrackerCount.g-tooltip .tooltip-content.right {
+		margin-top: -20px;
+		margin-left: 24px;
+	}
+
+	.SummaryPageStat.total-requests-modified.g-tooltip .tooltip-content.right {
+		margin-top: -42px;
+		margin-left: 31px;
+	}
+
+	.sub-component.pause-button .g-tooltip .tooltip-content.right {
+		margin-top: -12px;
+		margin-left: 28px;
+	}
+
+	.GhosteryFeatureButton.g-tooltip .tooltip-content.right {
+		margin-top: -18px;
+	}
+
+	.CliqzFeature .g-tooltip .tooltip-content.right {
+		margin-left: 16px;
 	}
 }
 

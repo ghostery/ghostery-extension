@@ -15,9 +15,9 @@
  * @namespace  PanelBuildingBlocks
  */
 import ClickOutside from './ClickOutside';
-import CliqzFeatures from './CliqzFeatures';
+import CliqzFeature from './CliqzFeature';
 import DonutGraph from './DonutGraph';
-import GhosteryFeatures from './GhosteryFeatures';
+import GhosteryFeature from './GhosteryFeature';
 import NotScanned from './NotScanned';
 import PauseButton from './PauseButton';
 import ToggleSlider from './ToggleSlider';
@@ -26,9 +26,9 @@ import RewardListItem from './RewardListItem';
 
 export {
 	ClickOutside,
-	CliqzFeatures,
+	CliqzFeature,
 	DonutGraph,
-	GhosteryFeatures,
+	GhosteryFeature,
 	NotScanned,
 	PauseButton,
 	ToggleSlider,

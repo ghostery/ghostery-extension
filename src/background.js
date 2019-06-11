@@ -18,7 +18,7 @@
 /**
  * @namespace Background
  */
-import _ from 'underscore';
+import { debounce, every, size } from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
 import cliqz, { prefs } from './classes/Cliqz';
 // object class
@@ -782,6 +782,8 @@ function onMessageHandler(request, sender, callback) {
 	}
 
 	// HANDLE UNIVERSAL EVENTS HERE (NO ORIGIN LISTED ABOVE)
+	// The 'getPanelData' message is never sent by the panel, which uses ports only since 8.3.2
+	// The  message is still sent by panel-android and by the hub as of 8.4.0
 	if (name === 'getPanelData') {
 		if (!message.tabId) {
 			utils.getActiveTab((tab) => {
@@ -795,9 +797,6 @@ function onMessageHandler(request, sender, callback) {
 			});
 		}
 		account.getUserSettings().catch(err => log('Failed getting user settings from getPanelData:', err));
-		if (offers.isEnabled && conf.enable_offers && conf.is_expert) {
-			rewards.filterOffersByRemote().catch(err => log('Failed to filter offers by remote:', err));
-		}
 		return true;
 	} else if (name === 'getStats') {
 		insights.action('getStatsTimeline', message.from, message.to, true, true).then((data) => {
@@ -1059,11 +1058,11 @@ function onMessageHandler(request, sender, callback) {
  */
 function initializeDispatcher() {
 	dispatcher.on('conf.save.selected_app_ids', (appIds) => {
-		const num_selected = _.size(appIds);
+		const num_selected = size(appIds);
 		const { db } = bugDb;
 		db.noneSelected = (num_selected === 0);
-		// can't simply compare num_selected and _.size(db.apps) since apps get removed sometimes
-		db.allSelected = (!!num_selected && _.every(db.apps, (app, app_id) => appIds.hasOwnProperty(app_id)));
+		// can't simply compare num_selected and size(db.apps) since apps get removed sometimes
+		db.allSelected = (!!num_selected && every(db.apps, (app, app_id) => appIds.hasOwnProperty(app_id)));
 	});
 	dispatcher.on('conf.save.site_whitelist', () => {
 		// TODO debounce with below
@@ -1119,7 +1118,7 @@ function initializeDispatcher() {
 		}
 	});
 
-	dispatcher.on('conf.changed.settings', _.debounce((key) => {
+	dispatcher.on('conf.changed.settings', debounce((key) => {
 		log('Conf value changed for a watched user setting:', key);
 	}, 200));
 

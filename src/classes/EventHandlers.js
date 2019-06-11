@@ -14,7 +14,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import _ from 'underscore';
+import { map, object, reduce, throttle } from 'underscore';
 import bugDb from './BugDb';
 import button from './BrowserButton';
 import c2pDb from './Click2PlayDb';
@@ -35,7 +35,6 @@ import { isBug } from '../utils/matcher';
 import * as utils from '../utils/utils';
 
 const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
-const RequestsMap = new Map();
 /**
  * This class is a collection of handlers for
  * webNavigation, webRequest and tabs events.
@@ -52,7 +51,7 @@ class EventHandlers {
 		// Use a 1sec interval to limit calls on pages with a large number of requests.
 		// Don't use tabId with button.update for cases where tab is switched before throttle delay is reached.
 		// ToDo: Remove this function when there is an event for AdBlocker:foundAd.
-		this._throttleButtonUpdate = _.throttle((tabId) => {
+		this._throttleButtonUpdate = throttle((tabId) => {
 			button.update(tabId);
 		}, 1000, { leading: false });
 	}
@@ -66,11 +65,10 @@ class EventHandlers {
 	onBeforeNavigate(details) {
 		const { tabId, frameId, url } = details;
 
-		// frameId === 0 indicates the navigation event ocurred in the content window, not a subframe
+		// frameId === 0 indicates the navigation event occurred in the content window, not a subframe
 		if (frameId === 0) {
 			log(`❤ ❤ ❤ Tab ${tabId} navigating to ${url} ❤ ❤ ❤`);
 
-			RequestsMap.clear();
 			this._clearTabData(tabId);
 			this._resetNotifications();
 			// TODO understand why this does not work when placed in the 'reload' branch in onCommitted
@@ -80,6 +78,7 @@ class EventHandlers {
 			tabInfo.create(tabId, url);
 			foundBugs.update(tabId);
 			button.update(tabId);
+			this._eventReset(details.tabId);
 
 			// Workaround for foundBugs/tabInfo memory leak when the user triggers
 			// prefetching/prerendering but never loads the page. Wait two minutes
@@ -105,7 +104,7 @@ class EventHandlers {
 			tabId, frameId, transitionType, transitionQualifiers
 		} = details;
 
-		// frameId === 0 indicates the navigation event ocurred in the content window, not a subframe
+		// frameId === 0 indicates the navigation event occurred in the content window, not a subframe
 		if (frameId === 0) {
 			// update reload info before creating/clearing tab info
 			if (transitionType === 'reload' && !transitionQualifiers.includes('forward_back')) {
@@ -245,7 +244,7 @@ class EventHandlers {
 					if (result) {
 						utils.sendMessage(
 							tab_id, 'showUpgradeAlert', {
-								translations: _.object(_.map(alert_messages, key => [key, chrome.i18n.getMessage(key)])),
+								translations: object(map(alert_messages, key => [key, chrome.i18n.getMessage(key)])),
 								language: conf.language,
 								major_upgrade: globals.JUST_UPGRADED_FROM_7
 							},
@@ -263,7 +262,7 @@ class EventHandlers {
 						if (result) {
 							utils.sendMessage(
 								tab_id, 'showLibraryUpdateAlert', {
-									translations: _.object(_.map(alert_messages, key => [key, chrome.i18n.getMessage(key)])),
+									translations: object(map(alert_messages, key => [key, chrome.i18n.getMessage(key)])),
 									language: conf.language
 								},
 								() => {
@@ -291,8 +290,6 @@ class EventHandlers {
 			return;
 		}
 
-		RequestsMap.clear();
-
 		// Code below executes for top level frame only
 		log(`foundBugs: ${foundBugs.getAppsCount(details.tabId)}, tab_id: ${details.tabId}`);
 
@@ -302,11 +299,6 @@ class EventHandlers {
 				log('onNavigationCompleted injectScript error', err);
 			});
 		}
-		// The problem is that requests may continue well after onNavigationCompleted
-		// This breaks allow once for C2P, as it clears too early
-		setTimeout(() => {
-			this._eventReset(details.tabId);
-		}, 2000);
 	}
 
 	/**
@@ -433,6 +425,9 @@ class EventHandlers {
 			};
 		}
 
+		const smartBlocked = !block ? this.policySmartBlock.shouldBlock(app_id, cat_id, tab_id, page_url, details.type, details.timeStamp) : false;
+		const smartUnblocked = block ? this.policySmartBlock.shouldUnblock(app_id, cat_id, tab_id, page_url, details.type) : false;
+
 		// process the tracker asynchronously
 		// very important to block request processing as little as necessary
 		setTimeout(() => {
@@ -442,20 +437,16 @@ class EventHandlers {
 				type: details.type,
 				url: details.url,
 				block,
+				smartBlocked,
 				tab_id,
 				from_frame: details.parentFrameId !== -1
 			});
 		}, 1);
 
-		if (block) {
-			if (this.policySmartBlock.shouldUnblock(app_id, cat_id, tab_id, page_url, details.type)) {
-				return { cancel: false };
-			}
+		if ((block && !smartUnblocked) || smartBlocked) {
 			return this._blockHelper(details, tab_id, app_id, bug_id, request_id, fromRedirect);
 		}
-		if (this.policySmartBlock.shouldBlock(app_id, cat_id, tab_id, page_url, details.type, details.timeStamp)) {
-			return this._blockHelper(details, tab_id, app_id, bug_id, request_id);
-		}
+
 		return { cancel: false };
 	}
 
@@ -606,13 +597,14 @@ class EventHandlers {
 	 */
 	_processBug(details) {
 		const {
-			bug_id, app_id, type, url, block, tab_id
+			bug_id, app_id, type, url, block, smartBlocked, tab_id
 		} = details;
 		const tab = tabInfo.getTabInfo(tab_id);
+		const allowedOnce = c2pDb.allowedOnce(details.tab_id, app_id);
 
 		let num_apps_old;
 
-		log((block ? 'Blocked' : 'Found'), type, url);
+		log((block || smartBlocked ? 'Blocked' : 'Found'), type, url);
 		log(`^^^ Pattern ID ${bug_id} on tab ID ${tab_id}`);
 
 		if (conf.show_alert) {
@@ -626,13 +618,13 @@ class EventHandlers {
 		// throttled in PanelData
 		panelData.updatePanelUI();
 
-		if (block && (conf.enable_click2play || conf.enable_click2playSocial)) {
+		if ((block || smartBlocked) && (conf.enable_click2play || conf.enable_click2playSocial) && !allowedOnce) {
 			buildC2P(details, app_id);
 		}
 
 		// Note: tab.purplebox handles a race condition where this function is sometimes called before onNavigation()
 		if (conf.show_alert && tab && !tab.prefetched && tab.purplebox) {
-			if (foundBugs.getAppsCount(details.tab_id) > num_apps_old || c2pDb.allowedOnce(details.tab_id, app_id)) {
+			if (foundBugs.getAppsCount(details.tab_id) > num_apps_old || allowedOnce) {
 				this.purplebox.updateBox(details.tab_id, app_id);
 			}
 		}
@@ -684,7 +676,7 @@ class EventHandlers {
 				const surrogates = surrogatedb.getForTracker(details.url, appId, bugId, ti.host);
 
 				if (surrogates.length > 0) {
-					code = _.reduce(surrogates, (memo, s) => {
+					code = reduce(surrogates, (memo, s) => {
 						memo += s.code; // eslint-disable-line no-param-reassign
 						return memo;
 					}, '');

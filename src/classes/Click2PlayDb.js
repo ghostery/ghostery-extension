@@ -66,18 +66,35 @@ class Click2PlayDb extends Updatable {
 
 	// TODO memory leak when you close tabs before reset() can run?
 	reset(tab_id) {
-		delete this.allowOnceList[tab_id];
+		if (!this.allowOnceList.hasOwnProperty(tab_id)) { return; }
+
+		const entries = Object.entries(this.allowOnceList[tab_id]);
+		let keep = false;
+		for (const [appID, count] of entries) {
+			const newCount = count - 1;
+			this.allowOnceList[tab_id][appID] = newCount;
+			if (newCount > 0) {
+				keep = true;
+			}
+		}
+		if (!keep) {
+			delete this.allowOnceList[tab_id];
+		}
 	}
 
 	allowedOnce(tab_id, aid) {
-		return this.allowOnceList.hasOwnProperty(tab_id) && this.allowOnceList[tab_id].hasOwnProperty(aid);
+		return (
+			this.allowOnceList.hasOwnProperty(tab_id) &&
+			this.allowOnceList[tab_id].hasOwnProperty(aid) &&
+			this.allowOnceList[tab_id][aid] > 0
+		);
 	}
 
 	allowOnce(app_ids, tab_id) {
 		this.allowOnceList[tab_id] = {};
 
 		app_ids.forEach((app_id) => {
-			this.allowOnceList[tab_id][app_id] = 1;
+			this.allowOnceList[tab_id][app_id] = 2;
 		});
 	}
 

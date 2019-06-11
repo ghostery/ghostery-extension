@@ -14,9 +14,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import _ from 'underscore';
-import throttle from 'lodash.throttle';
+import { isEqual, throttle } from 'underscore';
 import button from './BrowserButton';
+import cliqz from './Cliqz';
 import conf from './Conf';
 import foundBugs from './FoundBugs';
 import bugDb from './BugDb';
@@ -29,6 +29,12 @@ import dispatcher from './Dispatcher';
 import { sendCliqzModulesData } from '../utils/cliqzModulesData';
 import { getActiveTab, flushChromeMemoryCache, processUrl } from '../utils/utils';
 import { objectEntries, log } from '../utils/common';
+
+const cliqzModuleMock = {
+	isEnabled: false,
+	on: () => {},
+};
+const offers = cliqz.modules['offers-v2'] || cliqzModuleMock;
 
 const SYNC_SET = new Set(globals.SYNC_ARRAY);
 const { IS_CLIQZ } = globals;
@@ -86,6 +92,10 @@ class PanelData {
 			account.getUserSettings()
 				.then(userSettings => this._postUserSettings(userSettings))
 				.catch(err => log('Failed getting user settings from PanelData#initPort:', err));
+
+			if (this._needToFilterOffersByRemote()) {
+				rewards.filterOffersByRemote().catch(err => log('Failed to filter offers by remote:', err));
+			}
 		});
 	}
 
@@ -118,7 +128,16 @@ class PanelData {
 				case 'RewardsComponentDidMount':
 					this._mountedComponents.rewards = true;
 					this._panelPort.onDisconnect.addListener(rewards.panelHubClosedListener);
-					this._postMessage('rewards', this._getRewardsData());
+					if (this._needToFilterOffersByRemote()) {
+						rewards.filterOffersByRemote()
+							.then(() => this._postRewardsData())
+							.catch((err) => {
+								log('Failed to filter offers by remote:', err);
+								this._postRewardsData();
+							});
+					} else {
+						this._postRewardsData();
+					}
 					break;
 				case 'RewardsComponentWillUnmount':
 					this._mountedComponents.rewards = false;
@@ -154,6 +173,7 @@ class PanelData {
 	clearPageLoadTime(tab_id) {
 		this.postPageLoadTime(tab_id, true);
 	}
+
 
 	// TODO convert Android panel and Hub to also use port so we can have a single streamlined communication channel & API
 	/**
@@ -514,6 +534,16 @@ class PanelData {
 	}
 
 	/**
+	 * Checks to see whether we need to retrieve a filtered set of rewards from Cliqz
+	 * @returns {boolean}	true if we do need to retrieve filtered rewards
+	 */
+	_needToFilterOffersByRemote() {
+		const { enable_offers, is_expert } = conf;
+
+		return (offers.isEnabled && enable_offers && is_expert);
+	}
+
+	/**
 	 * Retrieves antitracking and adblock Cliqz data and sends it to the panel
 	 */
 	_postCliqzModulesData() {
@@ -534,6 +564,14 @@ class PanelData {
 			to,
 			body: data
 		});
+	}
+
+	/**
+	 * Legibility wrapper
+	 * @private
+	 */
+	_postRewardsData() {
+		this._postMessage('rewards', this._getRewardsData());
 	}
 
 	/**
@@ -578,7 +616,7 @@ class PanelData {
 		// Set the conf from data
 		// TODO can this now be replaced by Object.entries?
 		for (const [key, value] of objectEntries(data)) {
-			if (conf.hasOwnProperty(key) && !_.isEqual(conf[key], value)) {
+			if (conf.hasOwnProperty(key) && !isEqual(conf[key], value)) {
 				conf[key] = value;
 				syncSetDataChanged = SYNC_SET.has(key) ? true : syncSetDataChanged;
 			// TODO refactor - this work should probably be the direct responsibility of Globals
