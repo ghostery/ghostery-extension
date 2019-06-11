@@ -2212,5 +2212,17 @@
 	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "Erase all statistics history up until this point in time."
+	},
+	"cookie": {
+		"message": "Cookie"
+	},
+	"cookies": {
+		"message": "Cookies"
+	},
+	"fingerprint": {
+		"message": "Fingerprint"
+	},
+	"fingerprints": {
+		"message": "Fingerprints"
 	}
 }
