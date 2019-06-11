@@ -43,7 +43,7 @@ const policy = new Policy();
  * @param  {number} app_id 		tracker id
  */
 export function buildC2P(details, app_id) {
-	const { tab_id, smartBlocked } = details;
+	const { tab_id } = details;
 	let c2pApp = c2pDb.db.apps && c2pDb.db.apps[app_id];
 
 	if (!c2pApp) {
@@ -67,7 +67,6 @@ export function buildC2P(details, app_id) {
 	c2pApp.forEach((c2pAppDef) => {
 		const tplData = {
 			blacklisted, // if the site is blacklisted, don't show allow_always button
-			smartBlocked, // if the app has been Smart Blocked, don't show allow_once (see comment block)
 			button: !!c2pAppDef.button,
 			ghostery_blocked_src: c2p_images.ghosty_blocked,
 			allow_always_src: c2p_images.allow_unblock,

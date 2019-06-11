@@ -78,6 +78,7 @@ class EventHandlers {
 			tabInfo.create(tabId, url);
 			foundBugs.update(tabId);
 			button.update(tabId);
+			this._eventReset(details.tabId);
 
 			// Workaround for foundBugs/tabInfo memory leak when the user triggers
 			// prefetching/prerendering but never loads the page. Wait two minutes
@@ -292,11 +293,6 @@ class EventHandlers {
 				log('onNavigationCompleted injectScript error', err);
 			});
 		}
-		// Requests may continue well after onNavigationCompleted, which breaks
-		// C2P's "allow once" feature because the allowOnceList is cleared too early
-		setTimeout(() => {
-			this._eventReset(details.tabId);
-		}, 5000); // match THRESHHOLD value in PolicySmartBlock._requestWasSlow()
 	}
 
 	/**
