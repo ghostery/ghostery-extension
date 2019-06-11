@@ -14,7 +14,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import _ from 'underscore';
+import { map, object, reduce, throttle } from 'underscore';
 import bugDb from './BugDb';
 import button from './BrowserButton';
 import c2pDb from './Click2PlayDb';
@@ -51,7 +51,7 @@ class EventHandlers {
 		// Use a 1sec interval to limit calls on pages with a large number of requests.
 		// Don't use tabId with button.update for cases where tab is switched before throttle delay is reached.
 		// ToDo: Remove this function when there is an event for AdBlocker:foundAd.
-		this._throttleButtonUpdate = _.throttle((tabId) => {
+		this._throttleButtonUpdate = throttle((tabId) => {
 			button.update(tabId);
 		}, 1000, { leading: false });
 	}
@@ -238,7 +238,7 @@ class EventHandlers {
 					if (result) {
 						utils.sendMessage(
 							tab_id, 'showUpgradeAlert', {
-								translations: _.object(_.map(alert_messages, key => [key, chrome.i18n.getMessage(key)])),
+								translations: object(map(alert_messages, key => [key, chrome.i18n.getMessage(key)])),
 								language: conf.language,
 								major_upgrade: globals.JUST_UPGRADED_FROM_7
 							},
@@ -256,7 +256,7 @@ class EventHandlers {
 						if (result) {
 							utils.sendMessage(
 								tab_id, 'showLibraryUpdateAlert', {
-									translations: _.object(_.map(alert_messages, key => [key, chrome.i18n.getMessage(key)])),
+									translations: object(map(alert_messages, key => [key, chrome.i18n.getMessage(key)])),
 									language: conf.language
 								},
 								() => {
@@ -670,7 +670,7 @@ class EventHandlers {
 				const surrogates = surrogatedb.getForTracker(details.url, appId, bugId, ti.host);
 
 				if (surrogates.length > 0) {
-					code = _.reduce(surrogates, (memo, s) => {
+					code = reduce(surrogates, (memo, s) => {
 						memo += s.code; // eslint-disable-line no-param-reassign
 						return memo;
 					}, '');

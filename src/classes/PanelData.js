@@ -14,7 +14,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import _ from 'underscore';
+import { isEqual, throttle } from 'underscore';
 import button from './BrowserButton';
 import cliqz from './Cliqz';
 import conf from './Conf';
@@ -232,7 +232,7 @@ class PanelData {
 	 * Invoked in EventHandlers#onBeforeRequest when a new bug has been found
 	 * Sends updated data to the panel and blocking and/or summary components
 	 */
-	updatePanelUI = _.throttle(this._updatePanelUI.bind(this), 600, { leading: true, trailing: true }); // matches donut redraw throttling
+	updatePanelUI = throttle(this._updatePanelUI.bind(this), 600, { leading: true, trailing: true }); // matches donut redraw throttling
 	_updatePanelUI() {
 		if (!this._panelPort || !this._activeTab) { return; }
 
@@ -616,7 +616,7 @@ class PanelData {
 		// Set the conf from data
 		// TODO can this now be replaced by Object.entries?
 		for (const [key, value] of objectEntries(data)) {
-			if (conf.hasOwnProperty(key) && !_.isEqual(conf[key], value)) {
+			if (conf.hasOwnProperty(key) && !isEqual(conf[key], value)) {
 				conf[key] = value;
 				syncSetDataChanged = SYNC_SET.has(key) ? true : syncSetDataChanged;
 			// TODO refactor - this work should probably be the direct responsibility of Globals

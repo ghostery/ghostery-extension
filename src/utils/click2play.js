@@ -13,7 +13,7 @@
 
 /* eslint no-use-before-define: 0 */
 
-import _ from 'underscore';
+import { reject } from 'underscore';
 import bugDb from '../classes/BugDb';
 import c2pDb from '../classes/Click2PlayDb';
 import conf from '../classes/Conf';
@@ -52,7 +52,7 @@ export function buildC2P(details, app_id) {
 
 	// click-to-play for social buttons might be disabled
 	if (!conf.enable_click2play_social) {
-		c2pApp = _.reject(c2pApp, c2pAppDef => !!c2pAppDef.button);
+		c2pApp = reject(c2pApp, c2pAppDef => !!c2pAppDef.button);
 	}
 
 	if (!c2pApp.length) {
