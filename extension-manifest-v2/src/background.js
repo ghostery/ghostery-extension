@@ -1311,7 +1311,7 @@ offers.on('enabled', () => {
  * Set listener for 'enabled' event for Offers module.
  * It registers message handler for messages with the offers.
  * This handler adds incoming message data to the array of
- * notimication messages (CMP_DATA) to be eventually displayed.
+ * notification messages (CMP_DATA) to be eventually displayed.
  * @memberOf Background
  */
 messageCenter.on('enabled', () => {
@@ -1319,7 +1319,7 @@ messageCenter.on('enabled', () => {
 		log('IN MESSAGE CENTER ON ENABLED', offers, messageCenter);
 		// const messageCenter = cliqz.modules['message-center'];
 		return messageCenter.action('registerMessageHandler', OFFERS_HANDLER_ID, (msg) => {
-			// ffers enabled at the moment when message received
+			// offers enabled at the moment when message received
 			messageCenter.action('hideMessage', OFFERS_HANDLER_ID, msg);
 			msg.Dismiss = 1; // to be immediately dismissed once shown
 			/**
@@ -1356,7 +1356,8 @@ messageCenter.on('enabled', () => {
 				rewards.unreadOfferIds.push(msg.data.offer_id);
 				button.update();
 
-				if (msg.data.offer_data.ui_info.notif_type !== 'star') {
+				// Don't show the Rewards hotdog if Ghostery is currently paused
+				if (msg.data.offer_data.ui_info.notif_type !== 'star' && !globals.SESSION.paused_blocking) {
 					// We use getTabByUrl() instead of getActiveTab()
 					// because user may open the offer-triggering url in a new tab
 					// through the context menu, which may not switch to the new tab

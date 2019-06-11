@@ -146,11 +146,17 @@ class EventHandlers {
 	onDOMContentLoaded(details) {
 		const tab_id = details.tabId;
 
+		// ignore if this is a sub-frame
 		if (!utils.isValidTopLevelNavigation(details)) {
 			return;
 		}
 
-		// show upgrade notifications
+		// do not show CMP notifications if Ghostery is paused
+		if (globals.SESSION.paused_blocking) {
+			return;
+		}
+
+		// show CMP upgrade notifications
 		utils.getActiveTab((tab) => {
 			if (!tab || tab.id !== tab_id || tab.incognito) {
 				return;
