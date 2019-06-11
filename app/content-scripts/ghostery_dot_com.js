@@ -40,12 +40,12 @@ const { onMessage } = chrome.runtime;
 const GhosteryDotComContentScript = (function (window) {
 	/**
 	 * Update https://www.ghostery.com/Products page to signify
-	 * that Ghoster extension is installed.
+	 * that Ghostery extension is installed.
 	 * @memberOf  GhosteryDotComContentScript
 	 * @package
 	 */
 	const productsPage = function () {
-		const $installButton = $('.install-button').not('.disabled');
+		const $installButton = $('#ghostery-extension-versions .install-button').not('.disabled');
 		$installButton.addClass('success').text('Installed ✓');
 		$installButton.removeAttr('onclick');
 		$('.success').on('click', (e) => {
