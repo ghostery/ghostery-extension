@@ -201,6 +201,17 @@ class Tracker extends React.Component {
 			reload: true,
 		});
 	}
+
+	_renderCliqzStatsContainer() {
+		return (
+			<div className="trk-cliqz-stats-container">
+				<ReactSVG path="/app/images/panel/cookies-and-fingerprints-cliqz-badge.svg" className="trk-cliqz-stat-shield-badge-svg" />
+				<span className="trk-cliqz-stat-cookies-count">5 Cookies</span>
+				<span className="trk-cliqz-stat-fingerprint-count">1 Fingerprint</span>
+			</div>
+		);
+	}
+
 	/**
 	* Render a tracker in Blocking view.
 	* @return {ReactComponent}   ReactComponent instance
@@ -231,11 +242,7 @@ class Tracker extends React.Component {
 					</div>
 					<div className="columns collapse-left">
 						<div className="trk-name" onClick={this.toggleDescription}>{ tracker.name }</div>
-						<div className="trk-cliqz-stats-container">
-							<ReactSVG path="/app/images/panel/cookies-and-fingerprints-cliqz-badge.svg" className="trk-cliqz-stat-shield-badge-svg" />
-							<span className="trk-cliqz-stat-cookies-count">5 Cookies</span>
-							<span className="trk-cliqz-stat-fingerprint-count">1 Fingerprint</span>
-						</div>
+						{this._renderCliqzStatsContainer()}
 					</div>
 					<div className="columns shrink align-self-justify collapse-right">
 						<div className="svg-container">
