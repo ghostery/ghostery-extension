@@ -18,7 +18,7 @@
 /**
  * @namespace Background
  */
-import _ from 'underscore';
+import { debounce, every, size } from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
 import cliqz, { prefs } from './classes/Cliqz';
 // object class
@@ -1058,11 +1058,11 @@ function onMessageHandler(request, sender, callback) {
  */
 function initializeDispatcher() {
 	dispatcher.on('conf.save.selected_app_ids', (appIds) => {
-		const num_selected = _.size(appIds);
+		const num_selected = size(appIds);
 		const { db } = bugDb;
 		db.noneSelected = (num_selected === 0);
-		// can't simply compare num_selected and _.size(db.apps) since apps get removed sometimes
-		db.allSelected = (!!num_selected && _.every(db.apps, (app, app_id) => appIds.hasOwnProperty(app_id)));
+		// can't simply compare num_selected and size(db.apps) since apps get removed sometimes
+		db.allSelected = (!!num_selected && every(db.apps, (app, app_id) => appIds.hasOwnProperty(app_id)));
 	});
 	dispatcher.on('conf.save.site_whitelist', () => {
 		// TODO debounce with below
@@ -1118,7 +1118,7 @@ function initializeDispatcher() {
 		}
 	});
 
-	dispatcher.on('conf.changed.settings', _.debounce((key) => {
+	dispatcher.on('conf.changed.settings', debounce((key) => {
 		log('Conf value changed for a watched user setting:', key);
 	}, 200));
 

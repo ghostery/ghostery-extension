@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-// depenencies
+// dependencies
 const glob = require('glob');
 const path = require('path');
 const webpack = require('webpack');
@@ -158,7 +158,7 @@ const config = {
 			{
 				test: /\.(html)$/,
 				use: {
-					loader: 'html-loader'
+					loader: 'underscore-template-loader'
 				}
 			},{
 				test: /\.(jsx|js)?/,

@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import throttle from 'lodash.throttle';
+import { throttle } from 'underscore';
 import React from 'react';
 import ClassNames from 'classnames';
 import {
