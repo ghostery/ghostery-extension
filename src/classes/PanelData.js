@@ -739,7 +739,16 @@ class PanelData {
 	 */
 	_buildTracker(tracker, trackerState, smartBlock) {
 		const {
-			id, name, cat, sources, hasCompatibilityIssue, hasInsecureIssue, hasLatencyIssue, cliqz_cookies, cliqz_fingerprints
+			cat,
+			cliqzAdCount,
+			cliqzCookieCount,
+			cliqzFingerprintCount,
+			hasCompatibilityIssue,
+			hasInsecureIssue,
+			hasLatencyIssue,
+			id,
+			name,
+			sources,
 		} = tracker;
 		const { blocked, ss_allowed, ss_blocked } = trackerState;
 
@@ -757,8 +766,9 @@ class PanelData {
 			warningInsecure: hasInsecureIssue,
 			warningSlow: hasLatencyIssue,
 			warningSmartBlock: (smartBlock.blocked.hasOwnProperty(id) && 'blocked') || (smartBlock.unblocked.hasOwnProperty(id) && 'unblocked') || false,
-			cliqz_cookies,
-			cliqz_fingerprints,
+			cliqzAdCount,
+			cliqzCookieCount,
+			cliqzFingerprintCount,
 		};
 	}
 
@@ -831,8 +841,9 @@ class PanelData {
 				const trackerId = conf.bugs.bugs[bugsId];
 				const trackerListIndex = appsById[trackerId.aid];
 
-				this._trackerList[trackerListIndex].cliqz_cookies = gsBugs[bugsId].cookies;
-				this._trackerList[trackerListIndex].cliqz_fingerprints = gsBugs[bugsId].fingerprints;
+				this._trackerList[trackerListIndex].cliqzCookieCount = gsBugs[bugsId].cookies;
+				this._trackerList[trackerListIndex].cliqzFingerprintCount = gsBugs[bugsId].fingerprints;
+				this._trackerList[trackerListIndex].cliqzAdCount = gsBugs[bugsId].ads;
 			});
 		}
 

@@ -29,21 +29,27 @@
 			@extend %nowrap;
 		}
 		.trk-cliqz-stats-container {
-			color: #1dafed;
 			font-size: 10px;
 			font-family: "Open Sans", "Roboto", Arial, Helvetica, sans-serif;
 			font-weight: 600;
 		}
-		.trk-cliqz-stat-shield-badge-svg {
+		.trk-cliqz-stat-cookies-and-fingerprints-icon-svg,
+		.trk-cliqz-stat-ads-icon-svg {
 			display: inline-block;
 			padding-right: 6px;
 			vertical-align: middle;
 		}
-		.trk-cliqz-stat-cookies-count {
+		.trk-cliqz-stat {
+			color: #1dafed;
+		}
+		.trk-cliqz-stat-cookies-count,
+		.trk-cliqz-stat-fingerprints-count {
 			padding-right: 4px;
 		}
-		.trk-cliqz-stat-fingerprint-count {
-
+		.trk-cliqz-stat-divider {
+			padding-left: 4px;
+			padding-right: 8px;
+			color: #c8c7c2;
 		}
 		.svg-container {
 			height: 20px;

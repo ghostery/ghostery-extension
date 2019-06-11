@@ -204,19 +204,46 @@ class Tracker extends React.Component {
 
 	_renderCliqzStatsContainer() {
 		const { tracker } = this.props;
-		const { cliqz_cookies, cliqz_fingerprints } = tracker;
+		const { cliqzAdCount, cliqzCookieCount, cliqzFingerprintCount } = tracker;
 
-		const oneOrMoreCookies = cliqz_cookies >= 1;
-		const oneOrMoreFingerprints = cliqz_fingerprints >= 1;
-		const oneCookie = cliqz_cookies === 1;
-		const oneFingerprint = cliqz_fingerprints === 1;
+		const oneOrMoreCookies = cliqzCookieCount >= 1;
+		const oneOrMoreFingerprints = cliqzFingerprintCount >= 1;
+		const oneOrMoreAds = cliqzAdCount >= 1;
 
 		return (
 			<div className="trk-cliqz-stats-container">
-				{(oneOrMoreCookies || oneOrMoreFingerprints) && <ReactSVG path="/app/images/panel/cookies-and-fingerprints-cliqz-badge.svg" className="trk-cliqz-stat-shield-badge-svg" />}
-				{oneOrMoreCookies && <span className="trk-cliqz-stat-cookies-count">{cliqz_cookies} {oneCookie ? t('cookie') : t('cookies')}</span>}
-				{oneOrMoreFingerprints && <span className="trk-cliqz-stat-fingerprint-count">{cliqz_fingerprints} {oneFingerprint ? t('fingerprint') : t('fingerprints')}</span>}
+				{(oneOrMoreCookies || oneOrMoreFingerprints) && this._renderCookiesAndFingerprintsIcon()}
+				{oneOrMoreCookies && this._renderCliqzCookieStat(cliqzCookieCount)}
+				{oneOrMoreFingerprints && this._renderCliqzFingerprintStat(cliqzFingerprintCount)}
+				{(oneOrMoreCookies || oneOrMoreFingerprints) && oneOrMoreAds && this._renderDivider()}
+				{oneOrMoreAds && this._renderAdsIcon()}
+				{oneOrMoreAds && this._renderCliqzAdStat(cliqzAdCount)}
 			</div>
+		);
+	}
+	_renderCookiesAndFingerprintsIcon() {
+		return (
+			<ReactSVG path="/app/images/panel/tracker-detail-cliqz-cookies-and-fingerprints-icon.svg" className="trk-cliqz-stat-cookies-and-fingerprints-icon-svg" />
+		);
+	}
+	_renderAdsIcon() {
+		return (
+			<ReactSVG path="/app/images/panel/tracker-detail-cliqz-ads-icon.svg" className="trk-cliqz-stat-ads-icon-svg" />
+		);
+	}
+	_renderDivider() { return (<span className="trk-cliqz-stat-divider">|</span>); }
+	_renderCliqzCookieStat(count) { return this._renderCliqzStat(count, 'cookie'); }
+	_renderCliqzFingerprintStat(count) { return this._renderCliqzStat(count, 'fingerprint'); }
+	_renderCliqzAdStat(count) { return this._renderCliqzStat(count, 'ad'); }
+	_renderCliqzStat(count, type) {
+		const exactlyOne = count === 1;
+		const label = exactlyOne ?
+			t(`tracker_detail_cliqz_${type}`) :
+			t(`tracker_detail_cliqz_${type}s`);
+		const cssClass = `trk-cliqz-stat trk-cliqz-stat-${type}s-count`;
+
+		return (
+			<span className={cssClass}>{count} {label}</span>
 		);
 	}
 
