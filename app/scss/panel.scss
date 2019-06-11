@@ -14,11 +14,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-//Import Global Partials
+// Import Global Partials
 @import "settings"; //includes _colors.scss
 @import './partials/_fonts';
 @import './partials/_placeholders';
 @import './partials/_mixins';
+
+// Import shared helpers
+@import 'shared_helper_classes';
 
 html body {
 	margin: 0px;
@@ -51,6 +54,8 @@ html body {
 @import './partials/_header';
 @import './partials/_callout';
 @import './partials/_summary';
+@import './partials/_upgrade_banner';
+@import './partials/_subscriber_badge';
 @import './partials/_detail';
 @import './partials/_blocking';
 @import './partials/_rewards';
@@ -61,8 +66,8 @@ html body {
 @import './partials/_toggle_slider';
 @import './partials/_pause_button';
 @import './partials/_donut_graph';
-@import './partials/_ghostery_features';
-@import './partials/_cliqz_features';
+@import './partials/_ghostery_feature';
+@import './partials/_cliqz_feature';
 @import './partials/_tooltip';
 @import './partials/_not_scanned';
 @import './partials/_subscribe';

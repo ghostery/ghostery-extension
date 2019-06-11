@@ -48,10 +48,10 @@ class Policy {
 	 */
 	getSitePolicy(url) {
 		if (this.blacklisted(url)) {
-			return 1;
+			return globals.BLACKLISTED;
 		}
 		if (this.whitelisted(url)) {
-			return 2;
+			return globals.WHITELISTED;
 		}
 		return false;
 	}
