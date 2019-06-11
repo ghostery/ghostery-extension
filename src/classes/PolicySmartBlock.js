@@ -122,6 +122,7 @@ class PolicySmartBlock {
 	 * 3. Page is neither whitelisted or blacklisted
 	 * 4. Tracker is not site-specific unblocked
 	 * 5. Tracker is not site-specific blocked
+	 * 6. Tracker does not have entry in Click2Play
 	 *
 	 * @param  {number} 			tabId 	tab id
 	 * @param  {string | boolean} 	appId 	tracker id
@@ -136,7 +137,8 @@ class PolicySmartBlock {
 			!globals.SESSION.paused_blocking &&
 			!this.policy.getSitePolicy(tabUrl) &&
 			((appId && (!conf.site_specific_unblocks.hasOwnProperty(tabHost) || !conf.site_specific_unblocks[tabHost].includes(+appId))) || appId === false) &&
-			((appId && (!conf.site_specific_blocks.hasOwnProperty(tabHost) || !conf.site_specific_blocks[tabHost].includes(+appId))) || appId === false)
+			((appId && (!conf.site_specific_blocks.hasOwnProperty(tabHost) || !conf.site_specific_blocks[tabHost].includes(+appId))) || appId === false) &&
+			!c2pDb.db.apps.hasOwnProperty(appId)
 		);
 	}
 
