@@ -51,7 +51,7 @@ class CliqzFeature extends React.Component {
 	}
 
 	_getStatus(active) {
-		return active ? t('drawer_on') : t('drawer_off');
+		return active ? t('cliqz_feature_status_on') : t('cliqz_feature_status_off');
 	}
 
 	_getTooltipBodyText(active, isTooltipBody, type) {

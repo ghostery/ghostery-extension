@@ -2206,5 +2206,11 @@
 	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "Erase all statistics history up until this point in time."
+	},
+	"cliqz_feature_status_on": {
+		"message": "On"
+	},
+	"cliqz_feature_status_off": {
+		"message": "Off"
 	}
 }
