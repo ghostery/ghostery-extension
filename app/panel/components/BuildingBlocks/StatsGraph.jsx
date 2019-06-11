@@ -11,9 +11,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import { isEqual } from 'underscore';
 import React from 'react';
 import * as D3 from 'd3';
-import isEqual from 'lodash.isequal';
 
 /**
  * Generates an animated graph displaying locally stored stats

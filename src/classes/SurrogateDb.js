@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import _ from 'underscore';
+import { any, filter, isArray, map } from 'underscore';
 import conf from './Conf';
 import Updatable from './Updatable';
 import { log } from '../utils/common';
@@ -59,14 +59,14 @@ class SurrogateDb extends Updatable {
 
 			// convert single values to arrays first
 			['pattern_id', 'app_id', 'sites', 'match'].forEach((prop) => {
-				if (s.hasOwnProperty(prop) && !_.isArray(s[prop])) {
+				if (s.hasOwnProperty(prop) && !isArray(s[prop])) {
 					s[prop] = [s[prop]];
 				}
 			});
 
 			// initialize regexes
 			if (s.hasOwnProperty('match')) {
-				s.match = _.map(s.match, match => new RegExp(match, ''));
+				s.match = map(s.match, match => new RegExp(match, ''));
 			}
 
 			if (s.hasOwnProperty('pattern_id') || s.hasOwnProperty('app_id')) {
@@ -108,7 +108,7 @@ class SurrogateDb extends Updatable {
 			candidates = candidates.concat(this.db.pattern_ids[pattern_id]);
 		}
 
-		return _.filter(candidates, (surrogate) => {
+		return filter(candidates, (surrogate) => {
 			// note: does not support *.example.com (exact matches only)
 			if (surrogate.hasOwnProperty('sites')) { // array of site hosts
 				if (!surrogate.sites.includes(host_name)) {
@@ -117,7 +117,7 @@ class SurrogateDb extends Updatable {
 			}
 
 			if (surrogate.hasOwnProperty('match')) {
-				if (!_.any(surrogate.match, match => script_src.match(match))) {
+				if (!any(surrogate.match, match => script_src.match(match))) {
 					return false;
 				}
 			}
