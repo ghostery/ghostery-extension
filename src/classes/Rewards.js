@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -13,6 +13,7 @@
 
 /* eslint consistent-return: 0 */
 
+import { clone } from 'underscore';
 import button from './BrowserButton';
 import cliqz from './Cliqz';
 import conf from './Conf';
@@ -23,13 +24,11 @@ import { injectScript } from '../utils/utils';
 /**
  * Class for handling Ghostery Rewards Box overlay.
  * @memberOf  BackgroundClasses
- * @todo  make it a Singelton
  */
 class Rewards {
 	constructor() {
 		this.getStoredOffers();
 		this.currentOffer = null;
-		this.panelPort = null;
 		this.ports = new Map();
 		this.channelsSupported = (typeof chrome.runtime.onConnect === 'object');
 		this.panelHubClosedListener = this.panelHubClosedListener.bind(this);
@@ -43,8 +42,10 @@ class Rewards {
 
 	markRewardRead(offerId) {
 		const rewardIdx = this.unreadOfferIds.indexOf(offerId);
-		this.unreadOfferIds.splice(rewardIdx, 1);
-		this.updateStoredOffers();
+		if (rewardIdx !== -1) {
+			this.unreadOfferIds.splice(rewardIdx, 1);
+			this.updateStoredOffers();
+		}
 	}
 
 	sendSignal(message) {
@@ -65,13 +66,33 @@ class Rewards {
 		cliqz.modules['offers-v2'].background.actions.processRealEstateMessage(signal);
 	}
 
-	getStoredOffers() {
-		return prefsGet('storedOffers', 'unreadOfferIds', 'totalOffersSeen')
-			.then((response) => {
-				this.storedOffers = response.storedOffers || {};
-				this.unreadOfferIds = response.unreadOfferIds || [];
-				this.totalOffersSeen = response.totalOffersSeen || 0;
-			});
+	async filterOffersByRemote() {
+		await cliqz.modules['offers-v2'].isReady();
+		const args = { filters: { by_rs_dest: 'ghostery' } };
+		const offers = cliqz.modules['offers-v2'].background.actions.getStoredOffers(args);
+		const newStoredOffers = {};
+		(offers || []).forEach(({ offer_id: offerId, attrs = {}, offer_info: offerInfo }) => {
+			const offer = (this.storedOffers || {})[offerId];
+			if (offer) {
+				const newOffer = clone(offer);
+				newOffer.attrs = attrs;
+				newOffer.offer_data = offerInfo;
+				newStoredOffers[offerId] = newOffer;
+			}
+		});
+		this.storedOffers = newStoredOffers;
+		this.unreadOfferIds = this.unreadOfferIds.filter(id => newStoredOffers[id]);
+	}
+
+	async getStoredOffers() {
+		const {
+			storedOffers,
+			unreadOfferIds,
+			totalOffersSeen,
+		} = await prefsGet('storedOffers', 'unreadOfferIds', 'totalOffersSeen');
+		this.storedOffers = storedOffers || {};
+		this.unreadOfferIds = unreadOfferIds || [];
+		this.totalOffersSeen = totalOffersSeen || 0;
 	}
 
 	updateStoredOffers() {
@@ -86,9 +107,8 @@ class Rewards {
 		this.currentOffer = offer;
 		const tab = tabInfo.getTabInfo(tab_id);
 
-		// If the tab is prefetched, we can't add purplebox to it.
-		if (!conf.enable_offers ||
-			!tab || tab.rewards) {
+		// If the tab is prefetched, we can't add Rewards hotdog to it
+		if (!conf.enable_offers || !tab || tab.rewards) {
 			return Promise.resolve(false);
 		}
 

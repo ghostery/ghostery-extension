@@ -16,7 +16,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -32,7 +32,6 @@ import dispatcher from './Dispatcher';
 import metrics from './Metrics';
 import globals from './Globals';
 
-const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 const { IS_CLIQZ } = globals;
 
 /**
@@ -63,13 +62,6 @@ const handler = {
 				key === 'enable_offers' ||
 				key === 'enable_anti_tracking' ||
 				key === 'enable_ad_block') {
-				value = false;
-			}
-		}
-		// Edge currently does not support Human Web and Offers
-		if (IS_EDGE) {
-			if (key === 'enable_human_web' ||
-				key === 'enable_offers') {
 				value = false;
 			}
 		}

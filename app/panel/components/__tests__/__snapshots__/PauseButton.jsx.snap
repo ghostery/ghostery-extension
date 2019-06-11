@@ -8,7 +8,7 @@ exports[`app/panel/components/BuildingBlocks/PauseButton.jsx Snapshot tests with
     className="button-group"
   >
     <div
-      className="button button-left button-pause active smaller"
+      className="button-left button-pause g-tooltip button smaller active"
       onClick={[Function]}
     >
       <span
@@ -20,7 +20,7 @@ exports[`app/panel/components/BuildingBlocks/PauseButton.jsx Snapshot tests with
       </span>
     </div>
     <div
-      className="button button-right button-caret smaller"
+      className="button-right button-caret button smaller"
       onClick={[Function]}
     >
       <span
@@ -30,14 +30,6 @@ exports[`app/panel/components/BuildingBlocks/PauseButton.jsx Snapshot tests with
       </span>
     </div>
   </div>
-  <div
-    className="button-group dropdown-container"
-    style={
-      Object {
-        "left": "0px",
-      }
-    }
-  />
 </div>
 `;
 
@@ -49,7 +41,7 @@ exports[`app/panel/components/BuildingBlocks/PauseButton.jsx Snapshot tests with
     className="button-group"
   >
     <div
-      className="button button-left button-pause g-tooltip active smaller"
+      className="button-left button-pause g-tooltip button smaller active"
       onClick={[Function]}
     >
       <span
@@ -63,7 +55,7 @@ exports[`app/panel/components/BuildingBlocks/PauseButton.jsx Snapshot tests with
       </span>
     </div>
     <div
-      className="button button-right button-caret smaller"
+      className="button-right button-caret button smaller"
       onClick={[Function]}
     >
       <span
@@ -73,14 +65,6 @@ exports[`app/panel/components/BuildingBlocks/PauseButton.jsx Snapshot tests with
       </span>
     </div>
   </div>
-  <div
-    className="button-group dropdown-container"
-    style={
-      Object {
-        "left": "0px",
-      }
-    }
-  />
 </div>
 `;
 
@@ -92,7 +76,7 @@ exports[`app/panel/components/BuildingBlocks/PauseButton.jsx Snapshot tests with
     className="button-group"
   >
     <div
-      className="button button-left button-pause g-tooltip"
+      className="button-left button-pause g-tooltip button"
       onClick={[Function]}
     >
       <span
@@ -106,7 +90,7 @@ exports[`app/panel/components/BuildingBlocks/PauseButton.jsx Snapshot tests with
       </span>
     </div>
     <div
-      className="button button-right button-caret"
+      className="button-right button-caret button"
       onClick={[Function]}
     >
       <span
@@ -116,13 +100,5 @@ exports[`app/panel/components/BuildingBlocks/PauseButton.jsx Snapshot tests with
       </span>
     </div>
   </div>
-  <div
-    className="button-group dropdown-container centered"
-    style={
-      Object {
-        "left": "0px",
-      }
-    }
-  />
 </div>
 `;

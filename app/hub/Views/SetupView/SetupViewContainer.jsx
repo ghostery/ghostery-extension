@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -25,10 +25,6 @@ import SetupBlockingDropdown from '../SetupViews/SetupBlockingDropdown';
 import SetupAntiSuiteView from '../SetupViews/SetupAntiSuiteView';
 import SetupHumanWebView from '../SetupViews/SetupHumanWebView';
 import SetupDoneView from '../SetupViews/SetupDoneView';
-
-import globals from '../../../../src/classes/Globals';
-
-const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 
 /**
  * @class Implement the Setup View for the Ghostery Hub
@@ -76,10 +72,8 @@ class SetupViewContainer extends Component {
 		this.props.actions.setAntiTracking({ enable_anti_tracking: true });
 		this.props.actions.setAdBlock({ enable_ad_block: true });
 		this.props.actions.setSmartBlocking({ enable_smart_block: true });
-		if (!IS_EDGE) {
-			this.props.actions.setGhosteryRewards({ enable_ghostery_rewards: true });
-			this.props.actions.setHumanWeb({ enable_human_web: true });
-		}
+		this.props.actions.setGhosteryRewards({ enable_ghostery_rewards: true });
+		this.props.actions.setHumanWeb({ enable_human_web: true });
 	}
 
 	/**
@@ -187,16 +181,6 @@ class SetupViewContainer extends Component {
 				},
 			},
 		];
-
-		if (IS_EDGE) {
-			const index = steps.findIndex(item => item.headerProps.title === t('hub_setup_header_title_humanweb'));
-			steps.splice(index, 1);
-			for (let i = index; i < steps.length; i++) {
-				const item = steps[i];
-				item.index -= 1;
-				item.path = `/setup/${item.index}`;
-			}
-		}
 
 		const extraRoutes = [
 			{

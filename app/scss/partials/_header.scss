@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -72,20 +72,15 @@
 		}
 		.base-badge {
 			@extend %pointer;
-			width: 38px;
-			height: 36px;
 			display: block;
-			margin-left: 10px;
 		}
-		.subscriber-badge {
+		.gold-subscriber-badge {
 			@extend .base-badge;
-			path {fill: $white;}
-			path.text {fill: $ghosty-blue;}
+			margin-top: 4px;
 		}
 		.non-subscriber-badge {
 			@extend .base-badge;
-			path {fill: #d3af36;}
-			path.text {fill: #ffffff;}
+			margin-left: 6px;
 		}
 		.header-kebab {
 			@extend %pointer;

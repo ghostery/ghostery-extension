@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -15,9 +15,9 @@
  * @namespace  PanelBuildingBlocks
  */
 import ClickOutside from './ClickOutside';
-import CliqzFeatures from './CliqzFeatures';
+import CliqzFeature from './CliqzFeature';
 import DonutGraph from './DonutGraph';
-import GhosteryFeatures from './GhosteryFeatures';
+import GhosteryFeature from './GhosteryFeature';
 import NotScanned from './NotScanned';
 import PauseButton from './PauseButton';
 import ToggleSlider from './ToggleSlider';
@@ -26,9 +26,9 @@ import RewardListItem from './RewardListItem';
 
 export {
 	ClickOutside,
-	CliqzFeatures,
+	CliqzFeature,
 	DonutGraph,
-	GhosteryFeatures,
+	GhosteryFeature,
 	NotScanned,
 	PauseButton,
 	ToggleSlider,

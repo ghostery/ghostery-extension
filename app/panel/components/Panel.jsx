@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -13,7 +13,9 @@
 
 import React from 'react';
 import Header from '../containers/HeaderContainer';
+import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
+import { setTheme } from '../utils/utils';
 /**
  * @class Implement base view with functionality common to all views.
  * @memberof PanelClasses
@@ -27,30 +29,33 @@ class Panel extends React.Component {
 		this.clickReloadBanner = this.clickReloadBanner.bind(this);
 		this.filterTrackers = this.filterTrackers.bind(this);
 	}
+
 	/**
 	 * Lifecycle event
 	 */
 	componentDidMount() {
 		sendMessage('ping', 'engaged');
-		this.props.actions.getPanelData().then((data) => {
-			if (data.is_expert) {
-				// load Detail component
-				this.props.history.push('/detail');
-			}
 
-			// persist whitelist/blacklist/paused_blocking notifications in the event that the
-			// panel is openend without a page reload.
-			if (Object.keys(data.needsReload.changes).length) {
-				this.props.actions.showNotification({
-					updated: 'init',
-					reload: true,
-				});
-			}
+		this._dynamicUIDataInitialized = false;
+		this._dynamicUIPort = chrome.runtime.connect({ name: 'dynamicUIPanelPort' });
+		this._dynamicUIPort.onMessage.addListener((msg) => {
+			if (msg.to !== 'panel' || !msg.body) { return; }
 
-			if (data.enable_offers && data.unread_offer_ids.length > 0) {
-				sendMessage('ping', 'engaged_offer');
+			const { body } = msg;
+
+			if (body.panel) {
+				this._initializeData(body);
+			} else if (this._dynamicUIDataInitialized) {
+				this.props.actions.updatePanelData(body);
 			}
 		});
+	}
+
+	/**
+	 * Lifecycle event
+	 */
+	componentWillUnmount() {
+		this._dynamicUIPort.disconnect();
 	}
 
 	/**
@@ -107,6 +112,42 @@ class Panel extends React.Component {
 	}
 
 	/**
+	 * Dynamic UI data port first payload handling
+	 * Called once, when we get the first message from the background through the port
+	 * @param	{Object}	payload		the body of the message
+	 */
+	_initializeData(payload) {
+		this._dynamicUIDataInitialized = true;
+
+		const { panel, summary, blocking } = payload;
+		const { current_theme, account } = panel;
+
+		setTheme(document, current_theme, account);
+
+		this.props.actions.updatePanelData(panel);
+		this.props.actions.updateSummaryData(summary);
+		if (blocking) { this.props.actions.updateBlockingData(blocking); }
+
+		if (panel.is_expert) {
+			// load Detail component
+			this.props.history.push('/detail');
+		}
+
+		// persist whitelist/blacklist/paused_blocking notifications in the event that the
+		// panel is opened without a page reload
+		if (Object.keys(panel.needsReload.changes).length) {
+			this.props.actions.showNotification({
+				updated: 'init',
+				reload: true
+			});
+		}
+
+		if (panel.enable_offers && panel.unread_offer_ids.length > 0) {
+			sendMessage('ping', 'engaged_offer');
+		}
+	}
+
+	/**
 	 * Helper render function for the notification callout
 	 * @return {JSX} JSX for the notification callout
 	 */
@@ -145,9 +186,7 @@ class Panel extends React.Component {
 			);
 		}
 
-		return (
-			<span dangerouslySetInnerHTML={{ __html: this.props.notificationText }} />
-		);
+		return false;
 	}
 
 	/**
@@ -160,10 +199,12 @@ class Panel extends React.Component {
 			return null;
 		}
 
+		const notificationText = this.props.notificationShown && this.renderNotification();
+
 		return (
 			<div id="panel">
 				<div className="callout-container">
-					<div className={`${(!this.props.notificationShown ? 'hide ' : '') + this.props.notificationClasses} callout`}>
+					<div className={`${(!notificationText ? 'hide ' : '') + this.props.notificationClasses} callout`}>
 						<svg onClick={this.closeNotification} width="15px" height="15px" viewBox="0 0 15 15" className="close-button">
 							<g>
 								<path strokeWidth="3" strokeLinecap="round" d="M3,3 L12,12 M3,12 L12,3" />
@@ -175,7 +216,10 @@ class Panel extends React.Component {
 					</div>
 				</div>
 				<Header />
-				{ this.props.children }
+				<DynamicUIPortContext.Provider value={this._dynamicUIPort}>
+					{ this.props.children }
+				</DynamicUIPortContext.Provider>
+
 			</div>
 		);
 	}

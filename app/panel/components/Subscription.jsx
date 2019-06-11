@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -20,7 +20,6 @@ import SubscriptionMenu from './Subscription/SubscriptionMenu';
 import SubscriptionInfo from './Subscription/SubscriptionInfo';
 import SubscriptionThemes from './Subscription/SubscriptionThemes';
 import PrioritySupport from './Subscription/PrioritySupport';
-import Currencies from '../../countries.json';
 
 /**
  * @class Implement base Subscription view which routes navigation to all subscription subviews
@@ -55,20 +54,16 @@ class Subscription extends React.Component {
 				planAmount, planInterval, planCurrency, currentPeriodEnd, cancelAtPeriodEnd, status
 			} = sd;
 			const plan_ends = cancelAtPeriodEnd ? moment.duration(moment.unix(currentPeriodEnd).diff(moment(new Date()))).days() : '';
-			let currency;
-			for (let i = 0; i < Currencies.length; i++) {
-				if (Currencies[i].currencyCode === planCurrency) {
-					currency = Currencies[i]; break;
-				}
+			let planAmountAdjusted = planAmount;
+			if (planCurrency !== 'jpy') {
+				planAmountAdjusted = planAmount / 100;
 			}
-			const {
-				languageCode, currencyDecimals, currencySymbol, currencySymbolAfter
-			} = currency;
-			const planCost = (planAmount / 10 ** currencyDecimals)
-				.toLocaleString(languageCode, { minimumFractionDigits: currencyDecimals, maximumFractionDigits: currencyDecimals });
-			const plan_amount = currencySymbolAfter ? `${planCost} ${currencySymbol}` : `${currencySymbol} ${planCost}`;
+			const amountWithCurrency = planAmountAdjusted.toLocaleString(undefined, {
+				style: 'currency',
+				currency: planCurrency
+			});
 			return {
-				plan_amount,
+				plan_amount: amountWithCurrency,
 				plan_interval: planInterval,
 				active: (status === 'active'),
 				charge_date: moment.unix(currentPeriodEnd).format('MMMM Do, YYYY'),

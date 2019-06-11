@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -28,7 +28,6 @@ describe('app/panel/components/BuildingBlocks/PauseButton.jsx', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('unpaused state in simple view', () => {
 			const initialState = {
-				isAbPause: false,
 				isPaused: false,
 				isPausedTimeout: null,
 				clickPause: () => {},
@@ -46,7 +45,6 @@ describe('app/panel/components/BuildingBlocks/PauseButton.jsx', () => {
 
 		test('paused state in detailed view', () => {
 			const initialState = {
-				isAbPause: false,
 				isPaused: true,
 				isPausedTimeout: null,
 				clickPause: () => {},
@@ -64,7 +62,6 @@ describe('app/panel/components/BuildingBlocks/PauseButton.jsx', () => {
 
 		test('paused state in detailed condensed view', () => {
 			const initialState = {
-				isAbPause: true,
 				isPaused: true,
 				isPausedTimeout: null,
 				clickPause: () => {},
@@ -101,11 +98,12 @@ describe('app/panel/components/BuildingBlocks/PauseButton.jsx', () => {
 			expect(component.find('.button.button-pause.active').length).toBe(0);
 			expect(component.find('.button.button-pause.smaller').length).toBe(1);
 			expect(component.find('.button.button-pause.smallest').length).toBe(0);
-			expect(component.find('.dropdown-container').length).toBe(1);
+			expect(component.find('.dropdown-container').length).toBe(0);
 			expect(component.find('.dropdown-container .dropdown-item').length).toBe(0);
 			expect(component.find('.button-caret').length).toBe(1);
 			expect(component.find('.button-caret.active').length).toBe(0);
 			component.setState({ showDropdown: true });
+			expect(component.find('.dropdown-container').length).toBe(1);
 			expect(component.find('.dropdown-container .dropdown-item').length).toBe(3);
 			expect(component.find('.dropdown-container .dropdown-item.selected').length).toBe(0);
 			expect(component.find('.button-caret.active').length).toBe(1);
@@ -130,11 +128,12 @@ describe('app/panel/components/BuildingBlocks/PauseButton.jsx', () => {
 			expect(component.find('.button.button-pause.active').length).toBe(1);
 			expect(component.find('.button.button-pause.smaller').length).toBe(0);
 			expect(component.find('.button.button-pause.smallest').length).toBe(0);
-			expect(component.find('.dropdown-container').length).toBe(1);
+			expect(component.find('.dropdown-container').length).toBe(0);
 			expect(component.find('.dropdown-container .dropdown-item').length).toBe(0);
 			expect(component.find('.button-caret').length).toBe(1);
 			expect(component.find('.button-caret.active').length).toBe(0);
 			component.setState({ showDropdown: true });
+			expect(component.find('.dropdown-container').length).toBe(1);
 			expect(component.find('.dropdown-container .dropdown-item').length).toBe(3);
 			expect(component.find('.dropdown-container .dropdown-item.selected').length).toBe(1);
 			expect(component.find('.button-caret.active').length).toBe(1);

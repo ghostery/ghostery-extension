@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -89,9 +89,13 @@ const LogInView = (props) => {
 							</div>
 						)}
 						<div className="flex-container align-center">
-							<NavLink to="/create-account" className="LogInView__link text-center">
-								{ t('hub_login_link_create_account') }
-							</NavLink>
+							<span className="LogInView__link text-center">
+								{ t('hub_login_link_dont_have_account') }
+								&nbsp;
+								<NavLink to="/create-account" >
+									{ t('hub_login_link_create_account') }
+								</NavLink>
+							</span>
 						</div>
 						<div className="LogInView--addPaddingTop flex-container align-center">
 							<button type="submit" className="LogInView__button button success">

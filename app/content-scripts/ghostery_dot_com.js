@@ -9,7 +9,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -40,12 +40,12 @@ const { onMessage } = chrome.runtime;
 const GhosteryDotComContentScript = (function (window) {
 	/**
 	 * Update https://www.ghostery.com/Products page to signify
-	 * that Ghoster extension is installed.
+	 * that Ghostery extension is installed.
 	 * @memberOf  GhosteryDotComContentScript
 	 * @package
 	 */
 	const productsPage = function () {
-		const $installButton = $('.install-button').not('.disabled');
+		const $installButton = $('#ghostery-extension-versions .install-button').not('.disabled');
 		$installButton.addClass('success').text('Installed ✓');
 		$installButton.removeAttr('onclick');
 		$('.success').on('click', (e) => {

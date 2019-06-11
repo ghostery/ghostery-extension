@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -61,6 +61,7 @@ class GlobalBlocking extends React.Component {
 				<div className="blocking-trackers">
 					{ categories && categories.length > 0 &&
 						<Categories
+							expandAll={expandAll}
 							categories={categories}
 							filtered={this.props.filtered}
 							actions={this.props.actions}

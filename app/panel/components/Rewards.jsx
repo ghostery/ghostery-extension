@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -15,10 +15,10 @@ import React from 'react';
 import ClassNames from 'classnames';
 import { Link, Route } from 'react-router-dom';
 import { ToggleSlider, RewardListItem, RewardDetail } from './BuildingBlocks';
-import { sendMessage, sendRewardMessage } from '../utils/msg';
+import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
+import { sendMessage } from '../utils/msg';
 import globals from '../../../src/classes/Globals';
 
-const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 const IS_CLIQZ = (globals.BROWSER_INFO.name === 'cliqz');
 
 /**
@@ -28,6 +28,8 @@ const IS_CLIQZ = (globals.BROWSER_INFO.name === 'cliqz');
  * @memberof PanelClasses
  */
 class Rewards extends React.Component {
+	static contextType = DynamicUIPortContext;
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -42,30 +44,35 @@ class Rewards extends React.Component {
 		this.renderRewardDetailComponent = this.renderRewardDetailComponent.bind(this);
 		this.handleBackClick = this.handleBackClick.bind(this);
 		this.handleFaqClick = this.handleFaqClick.bind(this);
+		this.handlePortMessage = this.handlePortMessage.bind(this);
 	}
 
 	/**
 	 * Lifecycle event
 	 */
 	componentDidMount() {
-		this.props.actions.getRewardsData();
+		this._dynamicUIPort = this.context;
+		this._dynamicUIPort.onMessage.addListener(this.handlePortMessage);
+		this._dynamicUIPort.postMessage({ name: 'RewardsComponentDidMount' });
+
 		this.props.actions.sendSignal('hub_open');
-		chrome.runtime.connect({ name: 'rewardsPanelPort' });
 	}
 
 	/**
 	 * Lifecycle event
 	 */
 	componentWillReceiveProps(nextProps) {
-		const dateNow = new Date();
 		let rewardsArray = null;
 		if (nextProps.rewards) {
 			rewardsArray = Object.keys(nextProps.rewards).map((key) => {
 				const reward = nextProps.rewards[key].offer_data;
+				const { isCodeHidden } = nextProps.rewards[key].attrs || {};
+				const createdTS = nextProps.rewards[key].createdTs;
 				return {
 					id: reward.offer_id,
 					unread: nextProps.unread_offer_ids.indexOf(reward.offer_id) !== -1,
 					code: reward.ui_info.template_data.code,
+					isCodeHidden,
 					text: reward.ui_info.template_data.title,
 					description: reward.ui_info.template_data.desc,
 					benefit: reward.ui_info.template_data.benefit,
@@ -74,9 +81,9 @@ class Rewards extends React.Component {
 					picture_url: reward.ui_info.template_data.picture_url,
 					redeem_url: reward.ui_info.template_data.call_to_action.url,
 					redeem_text: reward.ui_info.template_data.call_to_action.text,
-					expires: Math.round((new Date()).setDate(dateNow.getDate() + reward.expirationMs / 1000 / 60 / 60 / 24)),
+					expires: new Date(createdTS + reward.expirationMs),
 				};
-			});
+			}).filter(reward => reward.expires > Date.now());
 		}
 		this.setState({ rewardsArray });
 	}
@@ -87,7 +94,18 @@ class Rewards extends React.Component {
 	componentWillUnmount() {
 		/* @TODO send message to background to remove port onDisconnect event */
 		this.props.actions.sendSignal('hub_closed');
-		sendRewardMessage('removeDisconnectListener');
+
+		this._dynamicUIPort.postMessage({ name: 'RewardsComponentWillUnmount' });
+		this._dynamicUIPort.onMessage.removeListener(this.handlePortMessage);
+	}
+
+	/**
+	 * Handles message from the dynamic UI port to background
+	 */
+	handlePortMessage(msg) {
+		if (msg.to !== 'rewards' || !msg.body) { return; }
+
+		this.props.actions.updateRewardsData(msg.body);
 	}
 
 	/**
@@ -123,7 +141,7 @@ class Rewards extends React.Component {
 			origin: 'rewards-hub',
 			type: 'action-signal',
 		};
-		sendMessage('setPanelData', { enable_offers: !enable_offers, signal }, undefined, 'rewardsPanel');
+		sendMessage('setPanelData', { enable_offers: !enable_offers, signal }, 'rewardsPanel');
 		sendMessage('ping', enable_offers ? 'rewards_on' : 'rewards_off');
 		// TODO catch
 	}
@@ -158,7 +176,7 @@ class Rewards extends React.Component {
 					</Link>
 				)}
 				<span className={headerTitleClassNames}>{ t('panel_detail_rewards_title') }</span>
-				{showToggle && !IS_EDGE && !IS_CLIQZ && (
+				{showToggle && !IS_CLIQZ && (
 					<span className="flex-container align-middle">
 						<span className="RewardsPanel__slider_text">
 							{enable_offers ? t('rewards_on') : t('rewards_off')}
@@ -204,17 +222,6 @@ class Rewards extends React.Component {
 				<div className="RewardsPanel__info">
 					{ this.renderRewardSvg() }
 					<div>{ t('panel_detail_rewards_cliqz_text') }</div>
-					<hr />
-					<div className="RewardsPanel__learn_more button primary hollow" onClick={this.handleFaqClick}>
-						{ t('panel_detail_learn_more') }
-					</div>
-				</div>
-			);
-		} else if (IS_EDGE) {
-			return (
-				<div className="RewardsPanel__info">
-					{ this.renderRewardSvg() }
-					<div>{ t('panel_detail_rewards_coming_soon') }</div>
 					<hr />
 					<div className="RewardsPanel__learn_more button primary hollow" onClick={this.handleFaqClick}>
 						{ t('panel_detail_learn_more') }
@@ -273,6 +280,7 @@ class Rewards extends React.Component {
 			<RewardDetail
 				id={reward.id}
 				code={reward.code}
+				isCodeHidden={reward.isCodeHidden}
 				text={reward.text}
 				description={reward.description}
 				benefit={reward.benefit}

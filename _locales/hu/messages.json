@@ -1853,8 +1853,11 @@
 	"hub_login_label_password_invalid": {
 		"message": "8–50 karaktert használjon."
 	},
+	"hub_login_link_dont_have_account": {
+		"message": "Nem rendelkezik fiókkal?"
+	},
 	"hub_login_link_create_account": {
-		"message": "Nem rendelkezik fiókkal? Regisztráljon!"
+		"message": "Regisztráljon!"
 	},
 	"hub_login_button_submit": {
 		"message": "Bejelentkezés"
@@ -1898,8 +1901,11 @@
 	"hub_create_account_checkbox_promotions": {
 		"message": "Küldjenek nekem friss Ghostery híreket és promóciókat!"
 	},
+	"hub_create_account_already_have_account": {
+		"message": "Már van Ghostery fiókja?"
+	},
 	"hub_create_account_link_login": {
-		"message": "Már van fiókom. Bejelentkezés."
+		"message": "Jelentkezzen be itt!"
 	},
 	"hub_create_account_button_submit": {
 		"message": "Fiók létrehozása"

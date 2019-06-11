@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -33,6 +33,7 @@ class CreateAccount extends React.Component {
 			firstName: '',
 			lastName: '',
 			password: '',
+			promotionsChecked: true,
 			loading: false,
 			passwordInvalidError: false,
 			passwordLengthError: false,
@@ -66,7 +67,7 @@ class CreateAccount extends React.Component {
 		e.preventDefault();
 		this.setState({ loading: true }, () => {
 			const {
-				email, confirmEmail, firstName, lastName, password
+				email, confirmEmail, firstName, lastName, password, promotionsChecked
 			} = this.state;
 			this.setState({ loading: true }, () => {
 				if (!validateEmail(email)) {
@@ -107,6 +108,7 @@ class CreateAccount extends React.Component {
 					this.props.actions.register(email, confirmEmail, firstName, lastName, password).then((success) => {
 						this.setState({ loading: false });
 						if (success) {
+							this.props.actions.updateAccountPromotions(promotionsChecked);
 							new RSVP.Promise((resolve) => {
 								this.props.actions.getUser()
 									.then(() => resolve())
@@ -127,7 +129,7 @@ class CreateAccount extends React.Component {
 	 */
 	render() {
 		const {
-			email, confirmEmail, firstName, lastName, password, loading, emailError, confirmEmailError, passwordInvalidError, passwordLengthError
+			email, confirmEmail, firstName, lastName, password, promotionsChecked, loading, emailError, confirmEmailError, passwordInvalidError, passwordLengthError
 		} = this.state;
 		const buttonClasses = ClassNames('button ghostery-button', { loading });
 		return (
@@ -192,6 +194,14 @@ class CreateAccount extends React.Component {
 												{ t('password_characters_requirements') }
 											</span>
 										</p>
+									</div>
+								</div>
+							</div>
+							<div className="row">
+								<div className="small-12 columns">
+									<div id="create-account-promotions">
+										<input id="promotionsChecked" name="promotionsChecked" type="checkbox" checked={promotionsChecked} onChange={this.handleCheckboxChange} />
+										<label htmlFor="promotionsChecked">{t('hub_create_account_checkbox_promotions')}</label>
 									</div>
 								</div>
 							</div>

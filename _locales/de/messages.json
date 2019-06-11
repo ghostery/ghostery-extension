@@ -1853,8 +1853,11 @@
 	"hub_login_label_password_invalid": {
 		"message": "Verwenden Sie zwischen 8 und 50 Zeichen."
 	},
+	"hub_login_link_dont_have_account": {
+		"message": "Haben Sie kein Konto?"
+	},
 	"hub_login_link_create_account": {
-		"message": "Haben Sie noch kein Benutzerkonto? Registrieren."
+		"message": "Melden Sie sich an."
 	},
 	"hub_login_button_submit": {
 		"message": "Anmelden"
@@ -1898,8 +1901,11 @@
 	"hub_create_account_checkbox_promotions": {
 		"message": "Schicken Sie mir Ghostery-Aktualisierungen & Promotions."
 	},
+	"hub_create_account_already_have_account": {
+		"message": "Sie haben bereits ein Ghostery-Konto?"
+	},
 	"hub_create_account_link_login": {
-		"message": "Ich habe bereits ein Konto. Melden Sie sich an."
+		"message": "Hier anmelden."
 	},
 	"hub_create_account_button_submit": {
 		"message": "Konto erstellen"
@@ -1932,10 +1938,10 @@
 		"message": "Code kopiert"
 	},
 	"rewards_expires_in_day": {
-		"message": "Verfügbar für 1 Tag ab"
+		"message": "Läuft in 1 Tag ab"
 	},
 	"rewards_expires_in_days": {
-		"message": "Verfügbar für $COUNT$ Tagen ab",
+		"message": "Läuft in $COUNT$ Tagen ab",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1943,10 +1949,10 @@
 		}
 	},
 	"rewards_expires_in_hour": {
-		"message": "Verfügbar für 1 Stunde ab"
+		"message": "Läuft in 1 Stunde ab"
 	},
 	"rewards_expires_in_hours": {
-		"message": "Verfügbar für $COUNT$ Stunden ab",
+		"message": "Läuft in $COUNT$ Stunden ab",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1954,10 +1960,10 @@
 		}
 	},
 	"rewards_expires_in_min": {
-		"message": "Verfügbar für 1 Min. ab"
+		"message": "Läuft in 1 Minute ab"
 	},
 	"rewards_expires_in_mins": {
-		"message": "Verfügbar für $COUNT$ Minuten ab",
+		"message": "Läuft in $COUNT$ Minuten ab",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1965,10 +1971,10 @@
 		}
 	},
 	"rewards_expires_in_sec": {
-		"message": "Verfügbar für 1 Sek. ab"
+		"message": "Läuft in 1 Sekunde ab"
 	},
 	"rewards_expires_in_secs": {
-		"message": "Verfügbar für $COUNT$ Sek. ab",
+		"message": "Läuft in $COUNT$ Sekunden ab",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1976,7 +1982,7 @@
 		}
 	},
 	"rewards_terms_conditions": {
-		"message": "Geschäftsbedingungen"
+		"message": "Konditionen"
 	},
 	"rewards_disable": {
 		"message": "Rewards ausschalten"

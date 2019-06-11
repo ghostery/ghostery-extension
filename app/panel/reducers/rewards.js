@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -12,7 +12,7 @@
  */
 
 import {
-	GET_REWARDS_DATA,
+	UPDATE_REWARDS_DATA,
 	TOGGLE_OFFERS_ENABLED,
 	REMOVE_OFFER,
 	SET_OFFER_READ,
@@ -36,7 +36,7 @@ const initialState = {
  */
 export default (state = initialState, action) => {
 	switch (action.type) {
-		case GET_REWARDS_DATA: {
+		case UPDATE_REWARDS_DATA: {
 			return Object.assign({}, state, action.data);
 		}
 		case TOGGLE_OFFERS_ENABLED: {

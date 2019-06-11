@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -25,6 +25,7 @@ class RewardDetail extends React.Component {
 		super(props);
 		this.state = {
 			copyText: t('rewards_copy_code'),
+			code: props.isCodeHidden ? '*****' : props.code,
 		};
 
 		// Event Bindings
@@ -43,10 +44,6 @@ class RewardDetail extends React.Component {
 	 * Handles clicking the copy button
 	 */
 	handleCopyClick() {
-		// Copy the reward code
-		this.copyNode.querySelector('input').select();
-		document.execCommand('copy');
-
 		// Show a toast notification
 		this.props.actions.showNotification({
 			text: t('rewards_code_copied_toast_notification'),
@@ -54,7 +51,14 @@ class RewardDetail extends React.Component {
 		});
 
 		// Update and reset Copy Code text
-		this.setState({ copyText: t('rewards_code_copied') });
+		this.setState({
+			code: this.props.code,
+			copyText: t('rewards_code_copied'),
+		}, () => {
+			// Copy the reward code
+			this.copyNode.querySelector('input').select();
+			document.execCommand('copy');
+		});
 		setTimeout(() => {
 			this.setState({ copyText: t('rewards_copy_code') });
 		}, 3000);
@@ -129,7 +133,7 @@ class RewardDetail extends React.Component {
 				{code && (
 					<div className="RewardDetail__code_container flex-container align-middle align-justify">
 						<span className="RewardDetail__code" ref={(node) => { this.copyNode = node; }}>
-							<span>{ code }</span>
+							<span>{this.state.code}</span>
 							<input readOnly type="text" value={code} />
 						</span>
 						<span className="RewardDetail__copy clickable" onClick={this.handleCopyClick}>
