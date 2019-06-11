@@ -276,6 +276,16 @@ class FoundBugs {
 		return apps_arr;
 	}
 
+	getAppsById(tab_id) {
+		if (!this._ensure(tab_id)) {
+			return [];
+		}
+
+		const { appsById } = this._foundApps[tab_id];
+
+		return appsById;
+	}
+
 	/**
 	 * Get the categories from BugsDb that match bugs found
 	 * on a tab_id.

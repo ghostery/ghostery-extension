@@ -203,18 +203,19 @@ class Tracker extends React.Component {
 	}
 
 	_renderCliqzStatsContainer() {
-		const cookieCount = Math.floor(Math.random() * 3);
-		const fingerprintCount = Math.floor(Math.random() * 3);
-		const oneOrMoreCookies = cookieCount >= 1;
-		const oneOrMoreFingerprints = fingerprintCount >= 1;
-		const oneCookie = cookieCount === 1;
-		const oneFingerprint = fingerprintCount === 1;
+		const { tracker } = this.props;
+		const { cliqz_cookies, cliqz_fingerprints } = tracker;
+
+		const oneOrMoreCookies = cliqz_cookies >= 1;
+		const oneOrMoreFingerprints = cliqz_fingerprints >= 1;
+		const oneCookie = cliqz_cookies === 1;
+		const oneFingerprint = cliqz_fingerprints === 1;
 
 		return (
 			<div className="trk-cliqz-stats-container">
 				{(oneOrMoreCookies || oneOrMoreFingerprints) && <ReactSVG path="/app/images/panel/cookies-and-fingerprints-cliqz-badge.svg" className="trk-cliqz-stat-shield-badge-svg" />}
-				{oneOrMoreCookies && <span className="trk-cliqz-stat-cookies-count">{cookieCount} {oneCookie ? t('cookie') : t('cookies')}</span>}
-				{oneOrMoreFingerprints && <span className="trk-cliqz-stat-fingerprint-count">{fingerprintCount} {oneFingerprint ? t('fingerprint') : t('fingerprints')}</span>}
+				{oneOrMoreCookies && <span className="trk-cliqz-stat-cookies-count">{cliqz_cookies} {oneCookie ? t('cookie') : t('cookies')}</span>}
+				{oneOrMoreFingerprints && <span className="trk-cliqz-stat-fingerprint-count">{cliqz_fingerprints} {oneFingerprint ? t('fingerprint') : t('fingerprints')}</span>}
 			</div>
 		);
 	}

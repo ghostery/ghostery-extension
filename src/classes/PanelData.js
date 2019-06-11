@@ -121,8 +121,6 @@ class PanelData {
 				case 'BlockingComponentDidMount':
 					this._mountedComponents.blocking = true;
 					this._setTrackerListAndCategories();
-					console.error(getCliqzGhosteryStats(tab.id));
-					this._postMessage('blocking', getCliqzGhosteryStats(tab.id));
 					this._postMessage('blocking', this._getBlockingData());
 					break;
 				case 'BlockingComponentWillUnmount':
@@ -246,7 +244,6 @@ class PanelData {
 		}
 
 		if (blocking) {
-			// this._postMessage('blocking', getCliqzGhosteryStats(this._activeTab.id));
 			this._postMessage('blocking', this._getDynamicBlockingData());
 		}
 
@@ -742,7 +739,7 @@ class PanelData {
 	 */
 	_buildTracker(tracker, trackerState, smartBlock) {
 		const {
-			id, name, cat, sources, hasCompatibilityIssue, hasInsecureIssue, hasLatencyIssue
+			id, name, cat, sources, hasCompatibilityIssue, hasInsecureIssue, hasLatencyIssue, cliqz_cookies, cliqz_fingerprints
 		} = tracker;
 		const { blocked, ss_allowed, ss_blocked } = trackerState;
 
@@ -759,7 +756,9 @@ class PanelData {
 			warningCompatibility: hasCompatibilityIssue,
 			warningInsecure: hasInsecureIssue,
 			warningSlow: hasLatencyIssue,
-			warningSmartBlock: (smartBlock.blocked.hasOwnProperty(id) && 'blocked') || (smartBlock.unblocked.hasOwnProperty(id) && 'unblocked') || false
+			warningSmartBlock: (smartBlock.blocked.hasOwnProperty(id) && 'blocked') || (smartBlock.unblocked.hasOwnProperty(id) && 'unblocked') || false,
+			cliqz_cookies,
+			cliqz_fingerprints,
 		};
 	}
 
@@ -811,7 +810,7 @@ class PanelData {
 	}
 
 	/**
-	 * Store the tracker list and categories values to reduce code duplicdation between the blocking and summary data getters,
+	 * Store the tracker list and categories values to reduce code duplication between the blocking and summary data getters,
 	 * and since these values may be accessed 2+ times in a single updatePanelUI call
 	 */
 	_setTrackerListAndCategories() {
@@ -820,6 +819,23 @@ class PanelData {
 		const { id, url } = this._activeTab;
 
 		this._trackerList = foundBugs.getApps(id, false, url) || [];
+
+		const ghosteryStats = getCliqzGhosteryStats(id);
+
+		if (ghosteryStats && ghosteryStats.bugs) {
+			const gsBugs = ghosteryStats.bugs;
+			const bugsIds = Object.keys(gsBugs);
+			const appsById = foundBugs.getAppsById(id);
+
+			bugsIds.forEach((bugsId) => {
+				const trackerId = conf.bugs.bugs[bugsId];
+				const trackerListIndex = appsById[trackerId.aid];
+
+				this._trackerList[trackerListIndex].cliqz_cookies = gsBugs[bugsId].cookies;
+				this._trackerList[trackerListIndex].cliqz_fingerprints = gsBugs[bugsId].fingerprints;
+			});
+		}
+
 		this._categories = this._buildCategories();
 	}
 	// [/DATA SETTING]
