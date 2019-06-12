@@ -458,9 +458,6 @@
 	"summary_description_not_scanned_2": {
 		"message": "Navigate to another page and I promise I'll deliver the goods."
 	},
-	"summary_custom_settings": {
-		"message": "Custom Settings"
-	},
 	"summary_trust_site": {
 		"message": "Trust Site"
 	},
@@ -481,9 +478,6 @@
 	},
 	"summary_pause_ghostery_tooltip": {
 		"message": "Pause Ghostery extension."
-	},
-	"summary_pause_ghostery_ab_pause": {
-		"message": "Pause"
 	},
 	"pause_30_min": {
 		"message": "for 30 min"
@@ -508,9 +502,6 @@
 	},
 	"summary_resume_ghostery_tooltip": {
 		"message": "Ghostery extension paused. Click to resume."
-	},
-	"summary_resume_ghostery_ab_pause": {
-		"message": "Resume"
 	},
 	"summary_show_menu": {
 		"message": "show menu"
@@ -1092,6 +1083,12 @@
 	"page_load": {
 		"message": "Page Load:"
 	},
+	"requests_modified": {
+		"message": "Requests Modified:"
+	},
+	"requests_modified_tooltip": {
+		"message": "Total number of tracking requests & elements modified by Anti-Tracking and Ad Blocking"
+	},
 	"trackers_blocked": {
 		"message": "Trackers Blocked:"
 	},
@@ -1283,9 +1280,6 @@
 	},
 	"tooltip_restrict_on": {
 		"message": "Trackers blocked and Anti-Tracking enabled on site. Click to Undo."
-	},
-	"tooltip_custom_settings": {
-		"message": "Use my selected tracker settings."
 	},
 	"tooltip_pause": {
 		"message": "Pause Ghostery"
@@ -2230,5 +2224,11 @@
 	},
 	"ads": {
 		"message": "ads"
+	},
+	"cliqz_feature_status_on": {
+		"message": "On"
+	},
+	"cliqz_feature_status_off": {
+		"message": "Off"
 	}
 }

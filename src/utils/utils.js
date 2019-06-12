@@ -18,7 +18,7 @@
 /**
  * @namespace BackgroundUtils
  */
-import _ from 'underscore';
+import { debounce } from 'underscore';
 import url from 'url';
 import tabInfo from '../classes/TabInfo';
 import globals from '../classes/Globals';
@@ -114,7 +114,7 @@ export function isValidTopLevelNavigation(details) {
  * (can default to 20 if undefined)
  * @memberOf BackgroundUtils
  */
-export const flushChromeMemoryCache = _.debounce(() => {
+export const flushChromeMemoryCache = debounce(() => {
 	chrome.webRequest.handlerBehaviorChanged();
 }, 1000 * 35, true);
 

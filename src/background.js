@@ -18,7 +18,7 @@
 /**
  * @namespace Background
  */
-import _ from 'underscore';
+import { debounce, every, size } from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
 import cliqz, { prefs } from './classes/Cliqz';
 // object class
@@ -1058,11 +1058,11 @@ function onMessageHandler(request, sender, callback) {
  */
 function initializeDispatcher() {
 	dispatcher.on('conf.save.selected_app_ids', (appIds) => {
-		const num_selected = _.size(appIds);
+		const num_selected = size(appIds);
 		const { db } = bugDb;
 		db.noneSelected = (num_selected === 0);
-		// can't simply compare num_selected and _.size(db.apps) since apps get removed sometimes
-		db.allSelected = (!!num_selected && _.every(db.apps, (app, app_id) => appIds.hasOwnProperty(app_id)));
+		// can't simply compare num_selected and size(db.apps) since apps get removed sometimes
+		db.allSelected = (!!num_selected && every(db.apps, (app, app_id) => appIds.hasOwnProperty(app_id)));
 	});
 	dispatcher.on('conf.save.site_whitelist', () => {
 		// TODO debounce with below
@@ -1118,7 +1118,7 @@ function initializeDispatcher() {
 		}
 	});
 
-	dispatcher.on('conf.changed.settings', _.debounce((key) => {
+	dispatcher.on('conf.changed.settings', debounce((key) => {
 		log('Conf value changed for a watched user setting:', key);
 	}, 200));
 
@@ -1311,7 +1311,7 @@ offers.on('enabled', () => {
  * Set listener for 'enabled' event for Offers module.
  * It registers message handler for messages with the offers.
  * This handler adds incoming message data to the array of
- * notimication messages (CMP_DATA) to be eventually displayed.
+ * notification messages (CMP_DATA) to be eventually displayed.
  * @memberOf Background
  */
 messageCenter.on('enabled', () => {
@@ -1319,7 +1319,7 @@ messageCenter.on('enabled', () => {
 		log('IN MESSAGE CENTER ON ENABLED', offers, messageCenter);
 		// const messageCenter = cliqz.modules['message-center'];
 		return messageCenter.action('registerMessageHandler', OFFERS_HANDLER_ID, (msg) => {
-			// ffers enabled at the moment when message received
+			// offers enabled at the moment when message received
 			messageCenter.action('hideMessage', OFFERS_HANDLER_ID, msg);
 			msg.Dismiss = 1; // to be immediately dismissed once shown
 			/**
@@ -1356,7 +1356,8 @@ messageCenter.on('enabled', () => {
 				rewards.unreadOfferIds.push(msg.data.offer_id);
 				button.update();
 
-				if (msg.data.offer_data.ui_info.notif_type !== 'star') {
+				// Don't show the Rewards hotdog if Ghostery is currently paused
+				if (msg.data.offer_data.ui_info.notif_type !== 'star' && !globals.SESSION.paused_blocking) {
 					// We use getTabByUrl() instead of getActiveTab()
 					// because user may open the offer-triggering url in a new tab
 					// through the context menu, which may not switch to the new tab

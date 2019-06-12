@@ -18,6 +18,7 @@ import tabInfo from './TabInfo';
 import compDb from './CompatibilityDb';
 import globals from './Globals';
 import Policy from './Policy';
+import c2pDb from './Click2PlayDb';
 import { log } from '../utils/common';
 /**
  * Class for handling Smart Blocking site policy.
@@ -64,7 +65,7 @@ class PolicySmartBlock {
 		}
 
 		if (reason) {
-			log('Smart Blocking unblokced appId', appId, 'for reason:', reason);
+			log('Smart Blocking unblocked appId', appId, 'for reason:', reason);
 			tabInfo.setTabSmartBlockAppInfo(tabId, appId, reason, false);
 			return true;
 		}
@@ -86,7 +87,7 @@ class PolicySmartBlock {
 
 		let reason;
 
-		// block if it's been more than 5 seconds since page load started
+		// Block all trackers that load after 5 seconds from when page load started
 		if (this._requestWasSlow(tabId, appId, requestTimestamp)) {
 			reason = 'slow';
 
@@ -103,9 +104,6 @@ class PolicySmartBlock {
 
 		const result = (reason === 'slow');
 		if (result) {
-			// We don't want record in tabInfo reasons other than 'slow'
-			// Smart blocking should not claim that it unblocks trackers which were unblocked
-			// for other reasons before shouldBlock was called for them.
 			log('Smart Blocking blocked appId', appId, 'for reason:', reason);
 			tabInfo.setTabSmartBlockAppInfo(tabId, appId, 'slow', true);
 		}
@@ -121,6 +119,7 @@ class PolicySmartBlock {
 	 * 3. Page is neither whitelisted or blacklisted
 	 * 4. Tracker is not site-specific unblocked
 	 * 5. Tracker is not site-specific blocked
+	 * 6. Tracker does not have entry in Click2Play
 	 *
 	 * @param  {number} 			tabId 	tab id
 	 * @param  {string | boolean} 	appId 	tracker id
@@ -135,7 +134,8 @@ class PolicySmartBlock {
 			!globals.SESSION.paused_blocking &&
 			!this.policy.getSitePolicy(tabUrl) &&
 			((appId && (!conf.site_specific_unblocks.hasOwnProperty(tabHost) || !conf.site_specific_unblocks[tabHost].includes(+appId))) || appId === false) &&
-			((appId && (!conf.site_specific_blocks.hasOwnProperty(tabHost) || !conf.site_specific_blocks[tabHost].includes(+appId))) || appId === false)
+			((appId && (!conf.site_specific_blocks.hasOwnProperty(tabHost) || !conf.site_specific_blocks[tabHost].includes(+appId))) || appId === false) &&
+			!c2pDb.db.apps.hasOwnProperty(appId)
 		);
 	}
 
@@ -258,7 +258,7 @@ class PolicySmartBlock {
 	}
 
 	/**
-	 * Check if request loaded after a threshhold time since page load.
+	 * Check if request loaded after a threshold time since page load.
 	 * @param  	{string}	tabId				tab id
 	 * @param  	{string} 	appId				tracker id
 	 * @param  	{number} 	requestTimestamp   	timestamp of the request
