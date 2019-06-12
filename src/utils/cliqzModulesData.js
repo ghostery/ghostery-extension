@@ -81,6 +81,13 @@ export function getCliqzAdblockingData(tabId) {
 	}
  */
 export function getCliqzGhosteryStats(tabId) {
+	if (!antitracking || !antitracking.background || !antitracking.background.actions) {
+		return {
+			bugs: {},
+			others: {},
+		};
+	}
+
 	const ghosteryStats = antitracking.background.actions.getGhosteryStats(tabId);
 	return ghosteryStats;
 }
