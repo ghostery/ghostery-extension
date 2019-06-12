@@ -14,6 +14,7 @@
 import React from 'react';
 import Tracker from './Tracker';
 import GlobalTracker from './GlobalTracker';
+import OtherDataPoint from './OtherDataPoint';
 /**
  * @class Implement Trackers component which represents a container for trackers
  * in both Blocking view and Global Blocking subview of Settings.
@@ -57,6 +58,22 @@ class Trackers extends React.Component {
 					actions={this.props.actions}
 					showToast={this.props.showToast}
 					language={this.props.language}
+				/>
+			));
+		} else if (isDataPoint) {
+			trackerList = trackers.map(tracker => (
+				<OtherDataPoint
+					tracker={tracker}
+					key={tracker.id}
+					cat_id={this.props.cat_id}
+					actions={this.props.actions}
+					show_tracker_urls={this.props.show_tracker_urls}
+					sitePolicy={this.props.sitePolicy}
+					paused_blocking={this.props.paused_blocking}
+					language={this.props.language}
+					smartBlockActive={this.props.smartBlockActive}
+					smartBlock={this.props.smartBlock}
+					isDataPoint={isDataPoint}
 				/>
 			));
 		} else {

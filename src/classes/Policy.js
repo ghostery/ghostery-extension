@@ -65,6 +65,7 @@ class Policy {
 			url = processUrl(url).host;
 			url = url.replace(/^www\./, '');
 			const sites = conf.site_whitelist || [];
+			console.log('WHITELIST CHECK (we will want to make a new function similar to this just for anti-tracking)', sites);
 			const num_sites = sites.length;
 
 			// TODO: speed up

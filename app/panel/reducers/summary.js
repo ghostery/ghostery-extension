@@ -16,10 +16,11 @@
 import {
 	UPDATE_SUMMARY_DATA,
 	UPDATE_CLIQZ_MODULE_DATA,
+	UPDATE_ANTI_TRACKING_NUM_SHOWN,
+	UPDATE_ANTI_TRACKING_WHITELIST,
 	UPDATE_GHOSTERY_PAUSED,
 	UPDATE_SITE_POLICY,
-	UPDATE_TRACKER_COUNTS,
-	UPDATE_ANTI_TRACKING_NUM_SHOWN
+	UPDATE_TRACKER_COUNTS
 } from '../constants/constants';
 import { addToArray, removeFromArray } from '../utils/utils';
 import { sendMessage } from '../utils/msg';
@@ -52,7 +53,15 @@ export default (state = initialState, action) => {
 			return Object.assign({}, state, action.data);
 		}
 		case UPDATE_CLIQZ_MODULE_DATA: {
+			console.log('RECEIVING ANTITRACKING DATA', action.data.antitracking);
 			return Object.assign({}, state, { adBlock: action.data.adblock, antiTracking: action.data.antitracking });
+		}
+		case UPDATE_ANTI_TRACKING_WHITELIST: {
+			const updated = _updateSitePolicy(state, action);
+			return Object.assign({}, state, updated);
+		}
+		case UPDATE_ANTI_TRACKING_NUM_SHOWN: {
+			return Object.assign({}, state, { antiTracking: action.data });
 		}
 		case UPDATE_GHOSTERY_PAUSED: {
 			return Object.assign({}, state, { paused_blocking: action.data.ghosteryPaused, paused_blocking_timeout: action.data.time });
@@ -73,18 +82,12 @@ export default (state = initialState, action) => {
 				},
 			});
 		}
-		case UPDATE_ANTI_TRACKING_NUM_SHOWN: {
-			console.log('here1', action.data)
-			return Object.assign({}, state, {
-				antiTracking: action.data
-			});
-		}
 		default: return state;
 	}
 };
 
 /**
- * Update blacklist / whitelist
+ * Update site blacklist / whitelist
  * @memberOf  PanelReactReducers
  * @private
  *
@@ -140,6 +143,7 @@ const _updateSitePolicy = (state, action) => {
 	}
 
 	// persist to background - note that sitePolicy is not included
+	// console.log("HEY WOA -> we'll need to do this for anti-trakcing whitelisting, too")
 	sendMessage('setPanelData', {
 		site_whitelist: updated_whitelist,
 		site_blacklist: updated_blacklist,

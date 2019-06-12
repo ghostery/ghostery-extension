@@ -816,6 +816,7 @@ function onMessageHandler(request, sender, callback) {
 		insights.action('clearData');
 		return false;
 	} else if (name === 'setPanelData') {
+		console.log('SET PANEL DATA IS CALLED', message);
 		panelData.set(message);
 		callback();
 		return false;
@@ -1246,6 +1247,10 @@ function initialiseWebRequestPipeline() {
  */
 function isWhitelisted(state) {
 	const url = state.tabUrl;
+	if (state.url && state.url.includes('yahoo.com') && state.tabUrl.includes('huffpost.com')) {
+		console.log('HUFF POST WORKING', state.url, state.tabUrl, state.originUrl);
+		return true;
+	}
 	// state.ghosteryWhitelisted is sometimes undefined so force to bool
 	return Boolean(globals.SESSION.paused_blocking || events.policy.getSitePolicy(url) === 2 || state.ghosteryWhitelisted);
 }

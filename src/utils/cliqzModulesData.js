@@ -37,10 +37,13 @@ export function getCliqzAntitrackingData(tabId) {
 				}
 			}
 			antitrackingData.totalUnsafeCount = totalUnsafeCount;
+			console.log('PASSING ANTITRACKING DATA', conf.anti_tracking_whitelist);
+			antitrackingData.whitelistedUrls = conf.anti_tracking_whitelist;
 			resolve(antitrackingData);
 		}).catch(() => {
 			resolve({
-				totalUnsafeCount: 0
+				totalUnsafeCount: 0,
+				whitelistedUrls: conf.anti_tracking_whitelist
 			});
 		});
 	});

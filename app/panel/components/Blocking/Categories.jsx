@@ -69,7 +69,7 @@ class Categories extends React.Component {
 						num_blocked: 0,
 						num_shown: antiTracking.num_shown,
 						trackers: unsafeURLs.map((url, idx) => ({
-							blocked: false,
+							blocked: true,
 							catId: 'other_data_points',
 							description: '',
 							id: 100000000 + idx,
@@ -77,7 +77,7 @@ class Categories extends React.Component {
 							shouldShow: true,
 							sources: false,
 							ss_allowed: false,
-							ss_blocked: true,
+							ss_blocked: false,
 							warningCompatibility: false,
 							warningInsecure: false,
 							warningSlow: false,

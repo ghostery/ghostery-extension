@@ -150,6 +150,7 @@ class ConfData {
 			_initProperty('site_specific_blocks', {});
 			_initProperty('site_specific_unblocks', {});
 			_initProperty('site_whitelist', []);
+			_initProperty('anti_tracking_whitelist', {});
 			_initProperty('surrogates', {});
 			_initProperty('version_history', []);
 			_initProperty('account', null);
