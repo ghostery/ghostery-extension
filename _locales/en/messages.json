@@ -2213,22 +2213,22 @@
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "Erase all statistics history up until this point in time."
 	},
-	"tracker_detail_cliqz_cookie": {
-		"message": "Cookie"
+	"cookie": {
+		"message": "cookie"
 	},
-	"tracker_detail_cliqz_cookies": {
-		"message": "Cookies"
+	"cookies": {
+		"message": "cookies"
 	},
-	"tracker_detail_cliqz_fingerprint": {
-		"message": "Fingerprint"
+	"fingerprint": {
+		"message": "fingerprint"
 	},
-	"tracker_detail_cliqz_fingerprints": {
-		"message": "Fingerprints"
+	"fingerprints": {
+		"message": "fingerprints"
 	},
-	"tracker_detail_cliqz_ad": {
-		"message": "Ad"
+	"ad": {
+		"message": "ad"
 	},
-	"tracker_detail_cliqz_ads": {
-		"message": "Ads"
+	"ads": {
+		"message": "ads"
 	}
 }

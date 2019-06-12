@@ -238,8 +238,8 @@ class Tracker extends React.Component {
 	_renderCliqzStat(count, type) {
 		const exactlyOne = count === 1;
 		const label = exactlyOne ?
-			t(`tracker_detail_cliqz_${type}`) :
-			t(`tracker_detail_cliqz_${type}s`);
+			t(`${type}`) :
+			t(`${type}s`);
 		const cssClass = `trk-cliqz-stat trk-cliqz-stat-${type}s-count`;
 
 		return (
