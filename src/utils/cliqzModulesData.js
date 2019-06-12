@@ -81,7 +81,7 @@ export function getCliqzAdblockingData(tabId) {
 	}
  */
 export function getCliqzGhosteryStats(tabId) {
-	if (!antitracking || !antitracking.background || !antitracking.background.actions) {
+	if (!conf.enable_anti_tracking) {
 		return {
 			bugs: {},
 			others: {},
