@@ -14,6 +14,7 @@
 /* eslint react/no-array-index-key: 0 */
 
 import React from 'react';
+import ReactSVG from 'react-svg';
 import globals from '../../../../src/classes/Globals';
 import { log } from '../../../../src/utils/common';
 import { sendMessageInPromise } from '../../utils/msg';
@@ -200,6 +201,57 @@ class Tracker extends React.Component {
 			reload: true,
 		});
 	}
+
+	_renderCliqzStatsContainer() {
+		const { tracker } = this.props;
+		const { cliqzAdCount, cliqzCookieCount, cliqzFingerprintCount } = tracker;
+
+		const oneOrMoreCookies = cliqzCookieCount >= 1;
+		const oneOrMoreFingerprints = cliqzFingerprintCount >= 1;
+		const oneOrMoreAds = cliqzAdCount >= 1;
+
+		return (
+			<div className="trk-cliqz-stats-outer-container">
+				{(oneOrMoreCookies || oneOrMoreFingerprints) &&
+					<div className="trk-cliqz-stats-container">
+						{this._renderCliqzCookiesAndFingerprintsIcon()}
+						{oneOrMoreCookies && this._renderCliqzCookieStat(cliqzCookieCount)}
+						{oneOrMoreFingerprints && this._renderCliqzFingerprintStat(cliqzFingerprintCount)}
+					</div>
+				}
+				{oneOrMoreAds &&
+					<div className="trk-cliqz-stats-container">
+						{this._renderCliqzAdsIcon()}
+						{this._renderCliqzAdStat(cliqzAdCount)}
+					</div>
+				}
+			</div>
+		);
+	}
+	_renderCliqzCookiesAndFingerprintsIcon() { return this._renderCliqzStatsIcon('cookies-and-fingerprints'); }
+	_renderCliqzAdsIcon() { return this._renderCliqzStatsIcon('ads'); }
+	_renderCliqzStatsIcon(type) {
+		const path = `/app/images/panel/tracker-detail-cliqz-${type}-icon.svg`;
+
+		return (
+			<ReactSVG path={path} className="trk-cliqz-stats-icon" />
+		);
+	}
+	_renderCliqzCookieStat(count) { return this._renderCliqzStat(count, 'cookie'); }
+	_renderCliqzFingerprintStat(count) { return this._renderCliqzStat(count, 'fingerprint'); }
+	_renderCliqzAdStat(count) { return this._renderCliqzStat(count, 'ad'); }
+	_renderCliqzStat(count, type) {
+		const exactlyOne = count === 1;
+		const label = exactlyOne ?
+			t(`${type}`) :
+			t(`${type}s`);
+		const cssClass = `trk-cliqz-stat trk-cliqz-stat-${type}s-count`;
+
+		return (
+			<span className={cssClass}>{count} {label}</span>
+		);
+	}
+
 	/**
 	* Render a tracker in Blocking view.
 	* @return {ReactComponent}   ReactComponent instance
@@ -230,6 +282,7 @@ class Tracker extends React.Component {
 					</div>
 					<div className="columns collapse-left">
 						<div className="trk-name" onClick={this.toggleDescription}>{ tracker.name }</div>
+						{this._renderCliqzStatsContainer()}
 					</div>
 					<div className="columns shrink align-self-justify collapse-right">
 						<div className="svg-container">

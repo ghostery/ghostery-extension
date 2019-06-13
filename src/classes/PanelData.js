@@ -26,7 +26,7 @@ import tabInfo from './TabInfo';
 import rewards from './Rewards';
 import account from './Account';
 import dispatcher from './Dispatcher';
-import { sendCliqzModulesData } from '../utils/cliqzModulesData';
+import { getCliqzGhosteryStats, sendCliqzModulesData } from '../utils/cliqzModulesData';
 import { getActiveTab, flushChromeMemoryCache, processUrl } from '../utils/utils';
 import { objectEntries, log } from '../utils/common';
 
@@ -738,7 +738,16 @@ class PanelData {
 	 */
 	_buildTracker(tracker, trackerState, smartBlock) {
 		const {
-			id, name, cat, sources, hasCompatibilityIssue, hasInsecureIssue, hasLatencyIssue
+			cat,
+			cliqzAdCount,
+			cliqzCookieCount,
+			cliqzFingerprintCount,
+			hasCompatibilityIssue,
+			hasInsecureIssue,
+			hasLatencyIssue,
+			id,
+			name,
+			sources,
 		} = tracker;
 		const { blocked, ss_allowed, ss_blocked } = trackerState;
 
@@ -755,7 +764,10 @@ class PanelData {
 			warningCompatibility: hasCompatibilityIssue,
 			warningInsecure: hasInsecureIssue,
 			warningSlow: hasLatencyIssue,
-			warningSmartBlock: (smartBlock.blocked.hasOwnProperty(id) && 'blocked') || (smartBlock.unblocked.hasOwnProperty(id) && 'unblocked') || false
+			warningSmartBlock: (smartBlock.blocked.hasOwnProperty(id) && 'blocked') || (smartBlock.unblocked.hasOwnProperty(id) && 'unblocked') || false,
+			cliqzAdCount,
+			cliqzCookieCount,
+			cliqzFingerprintCount,
 		};
 	}
 
@@ -807,7 +819,7 @@ class PanelData {
 	}
 
 	/**
-	 * Store the tracker list and categories values to reduce code duplicdation between the blocking and summary data getters,
+	 * Store the tracker list and categories values to reduce code duplication between the blocking and summary data getters,
 	 * and since these values may be accessed 2+ times in a single updatePanelUI call
 	 */
 	_setTrackerListAndCategories() {
@@ -816,6 +828,27 @@ class PanelData {
 		const { id, url } = this._activeTab;
 
 		this._trackerList = foundBugs.getApps(id, false, url) || [];
+
+		const ghosteryStats = getCliqzGhosteryStats(id);
+
+		if (ghosteryStats && ghosteryStats.bugs) {
+			const gsBugs = ghosteryStats.bugs;
+			const bugsIds = Object.keys(gsBugs);
+			const appsById = foundBugs.getAppsById(id);
+
+			bugsIds.forEach((bugsId) => {
+				const trackerId = conf.bugs.bugs[bugsId];
+				if (!trackerId) return;
+
+				const trackerListIndex = appsById[trackerId.aid];
+				if (!trackerListIndex) return;
+
+				this._trackerList[trackerListIndex].cliqzCookieCount = gsBugs[bugsId].cookies;
+				this._trackerList[trackerListIndex].cliqzFingerprintCount = gsBugs[bugsId].fingerprints;
+				this._trackerList[trackerListIndex].cliqzAdCount = gsBugs[bugsId].ads;
+			});
+		}
+
 		this._categories = this._buildCategories();
 	}
 	// [/DATA SETTING]
