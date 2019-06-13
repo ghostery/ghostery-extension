@@ -229,7 +229,7 @@ class Tracker extends React.Component {
 		);
 	}
 	_renderCliqzCookiesAndFingerprintsIcon() { return this._renderCliqzStatsIcon('cookies-and-fingerprints'); }
-	_renderCliqzAdsIcon() { return this._renderCliqzStatsIcon('ads')}
+	_renderCliqzAdsIcon() { return this._renderCliqzStatsIcon('ads'); }
 	_renderCliqzStatsIcon(type) {
 		const path = `/app/images/panel/tracker-detail-cliqz-${type}-icon.svg`;
 
