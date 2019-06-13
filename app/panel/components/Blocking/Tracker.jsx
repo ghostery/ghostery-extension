@@ -213,17 +213,17 @@ class Tracker extends React.Component {
 		return (
 			<div className="trk-cliqz-stats-outer-container">
 				{(oneOrMoreCookies || oneOrMoreFingerprints) &&
-				<div className="trk-cliqz-stats-container">
-					{this._renderCliqzCookiesAndFingerprintsIcon()}
-					{oneOrMoreCookies && this._renderCliqzCookieStat(cliqzCookieCount)}
-					{oneOrMoreFingerprints && this._renderCliqzFingerprintStat(cliqzFingerprintCount)}
-				</div>
+					<div className="trk-cliqz-stats-container">
+						{this._renderCliqzCookiesAndFingerprintsIcon()}
+						{oneOrMoreCookies && this._renderCliqzCookieStat(cliqzCookieCount)}
+						{oneOrMoreFingerprints && this._renderCliqzFingerprintStat(cliqzFingerprintCount)}
+					</div>
 				}
 				{oneOrMoreAds &&
-				<div className="trk-cliqz-stats-container">
-					{this._renderCliqzAdsIcon()}
-					{this._renderCliqzAdStat(cliqzAdCount)}
-				</div>
+					<div className="trk-cliqz-stats-container">
+						{this._renderCliqzAdsIcon()}
+						{this._renderCliqzAdStat(cliqzAdCount)}
+					</div>
 				}
 			</div>
 		);
