@@ -19,7 +19,7 @@
 		border-top: none;
 	}
 	.trk-header {
-		height: 61px;
+		height: 54px;
 		.trk-name {
 			@extend %pointer;
 			font-size: 14px;
@@ -28,30 +28,43 @@
 			color: #4a4a4a;
 			@extend %nowrap;
 		}
-		.trk-cliqz-stats-container {
+		.trk-cliqz-stats-outer-container {
+			// prevent jitter from breaking to new line
+			// if all three of cookies fingerprints and ads are present
+			// and we hover over the ad icon while the cookies & fingerprints section is expanded
+			white-space: nowrap;
+
 			font-size: 10px;
 			font-family: "Open Sans", "Roboto", Arial, Helvetica, sans-serif;
 			font-weight: 600;
 		}
-		.trk-cliqz-stat-cookies-and-fingerprints-icon-svg,
-		.trk-cliqz-stat-ads-icon-svg {
+		.trk-cliqz-stats-icon {
+			// vertical alignment with text label
+			position: relative;
+			top: -2px;
+
 			display: inline-block;
 			padding-right: 6px;
-			vertical-align: middle;
 		}
 		.trk-cliqz-stat {
 			color: #1dafed;
 			text-transform: capitalize;
+			display: inline-block;
+			max-width: 0px;
+			padding-right: 0px;
+			transition: max-width 0.6s, padding 0.6s;
+			transition-delay: 0.2s;
+			overflow-x: hidden;
+			white-space: nowrap;
 		}
-		.trk-cliqz-stat-cookies-count,
-		.trk-cliqz-stat-fingerprints-count {
+		.trk-cliqz-stats-container {
+			display: inline-block;
+		}
+		.trk-cliqz-stats-container:hover .trk-cliqz-stat {
+			max-width: 100px;
 			padding-right: 4px;
 		}
-		.trk-cliqz-stat-divider {
-			padding-left: 4px;
-			padding-right: 8px;
-			color: #c8c7c2;
-		}
+
 		.svg-container {
 			height: 20px;
 		}

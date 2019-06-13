@@ -211,27 +211,32 @@ class Tracker extends React.Component {
 		const oneOrMoreAds = cliqzAdCount >= 1;
 
 		return (
-			<div className="trk-cliqz-stats-container">
-				{(oneOrMoreCookies || oneOrMoreFingerprints) && this._renderCookiesAndFingerprintsIcon()}
-				{oneOrMoreCookies && this._renderCliqzCookieStat(cliqzCookieCount)}
-				{oneOrMoreFingerprints && this._renderCliqzFingerprintStat(cliqzFingerprintCount)}
-				{(oneOrMoreCookies || oneOrMoreFingerprints) && oneOrMoreAds && this._renderDivider()}
-				{oneOrMoreAds && this._renderAdsIcon()}
-				{oneOrMoreAds && this._renderCliqzAdStat(cliqzAdCount)}
+			<div className="trk-cliqz-stats-outer-container">
+				{(oneOrMoreCookies || oneOrMoreFingerprints) &&
+				<div className="trk-cliqz-stats-container">
+					{this._renderCliqzCookiesAndFingerprintsIcon()}
+					{oneOrMoreCookies && this._renderCliqzCookieStat(cliqzCookieCount)}
+					{oneOrMoreFingerprints && this._renderCliqzFingerprintStat(cliqzFingerprintCount)}
+				</div>
+				}
+				{oneOrMoreAds &&
+				<div className="trk-cliqz-stats-container">
+					{this._renderCliqzAdsIcon()}
+					{this._renderCliqzAdStat(cliqzAdCount)}
+				</div>
+				}
 			</div>
 		);
 	}
-	_renderCookiesAndFingerprintsIcon() {
+	_renderCliqzCookiesAndFingerprintsIcon() { return this._renderCliqzStatsIcon('cookies-and-fingerprints'); }
+	_renderCliqzAdsIcon() { return this._renderCliqzStatsIcon('ads')}
+	_renderCliqzStatsIcon(type) {
+		const path = `/app/images/panel/tracker-detail-cliqz-${type}-icon.svg`;
+
 		return (
-			<ReactSVG path="/app/images/panel/tracker-detail-cliqz-cookies-and-fingerprints-icon.svg" className="trk-cliqz-stat-cookies-and-fingerprints-icon-svg" />
+			<ReactSVG path={path} className="trk-cliqz-stats-icon" />
 		);
 	}
-	_renderAdsIcon() {
-		return (
-			<ReactSVG path="/app/images/panel/tracker-detail-cliqz-ads-icon.svg" className="trk-cliqz-stat-ads-icon-svg" />
-		);
-	}
-	_renderDivider() { return (<span className="trk-cliqz-stat-divider">|</span>); }
 	_renderCliqzCookieStat(count) { return this._renderCliqzStat(count, 'cookie'); }
 	_renderCliqzFingerprintStat(count) { return this._renderCliqzStat(count, 'fingerprint'); }
 	_renderCliqzAdStat(count) { return this._renderCliqzStat(count, 'ad'); }
