@@ -20,7 +20,7 @@ import React from 'react';
  */
 const TutorialTrustView = () => (
 	<div className="TutorialTrustView TutorialView--mediumFlexColumn row align-center-middle">
-		<div className="columns small-10 medium-8 large-6">
+		<div className="columns small-10 small-offset-1 medium-8 large-6">
 			<div className="TutorialView__imageTitle">
 				{t('hub_tutorial_simple_view')}
 			</div>
@@ -38,7 +38,7 @@ const TutorialTrustView = () => (
 				alt={t('hub_tutorial_detailed_view')}
 			/>
 		</div>
-		<div className="columns small-12 medium-8 large-4 large-offset-1">
+		<div className="columns small-12 medium-8 large-4">
 			<div className="TutorialView__title">
 				{t('hub_tutorial_trust_title')}
 			</div>
