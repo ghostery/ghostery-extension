@@ -129,8 +129,10 @@
 
 // Tutorial Layout View
 .TutorialLayoutView__image.simple {
-	margin-left: -6px;
 	margin-bottom: 30px;
+}
+.TutorialLayoutView__image {
+	padding-left: 10%;
 }
 @media only screen and (max-width: 960px) {
 	.TutorialLayoutView .TutorialView__tagline {
