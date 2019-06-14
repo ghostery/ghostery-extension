@@ -185,6 +185,21 @@
 		text-align: center;
 	}
 }
+@media only screen and (min-width: 46.25em) {
+	.columns { padding-left: 1.9375rem; }
+}
+.TutorialTrustView .columns {
+	padding-left: 1.625rem;
+
+}
+.TutorialView__image {
+	&.trustrestrict-simple {
+		left: -1.35%;
+		padding-right: 12.5%;
+	}
+	&.trustrestrict-detailed { left: -14% }
+}
+
 
 // Tutorial Anti Suite View
 .TutorialAntiSuiteView__key {
@@ -235,4 +250,12 @@
 	.TutorialAntiSuiteView__key:last-of-type {
 		margin-bottom: 15px;
 	}
+}
+.TutorialView__image {
+	&.antisuite-simple { left: -1% }
+	&.antisuite-detailed { left: -13.5% }
+}
+
+.TutorialView__image {
+	position: relative;
 }

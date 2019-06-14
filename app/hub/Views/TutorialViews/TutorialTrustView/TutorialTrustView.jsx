@@ -25,7 +25,7 @@ const TutorialTrustView = () => (
 				{t('hub_tutorial_simple_view')}
 			</div>
 			<img
-				className="TutorialTrustView__image simple"
+				className="TutorialView__image trustrestrict-simple"
 				src="/app/images/hub/tutorial/trustrestrict-simple.png"
 				alt={t('hub_tutorial_simple_view')}
 			/>
@@ -33,7 +33,7 @@ const TutorialTrustView = () => (
 				{t('hub_tutorial_detailed_view')}
 			</div>
 			<img
-				className="TutorialTrustView__image detailed"
+				className="TutorialView__image trustrestrict-detailed"
 				src="/app/images/hub/tutorial/trustrestrict-detailed.png"
 				alt={t('hub_tutorial_detailed_view')}
 			/>
