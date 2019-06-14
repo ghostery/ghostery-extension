@@ -22,12 +22,12 @@ const TutorialLayoutView = () => (
 	<div className="TutorialLayoutView TutorialView--mediumFlexColumn row align-center-middle flex-container">
 		<div className="columns small-10 medium-8 large-6 small-offset-1">
 			<img
-				className="TutorialLayoutView__image simple"
+				className="TutorialLayoutView__image layout-simple"
 				src="/app/images/hub/tutorial/layout-simple.png"
 				alt={t('hub_tutorial_simple_view')}
 			/>
 			<img
-				className="TutorialLayoutView__image detailed"
+				className="TutorialLayoutView__image layout-detailed"
 				src="/app/images/hub/tutorial/layout-detailed.png"
 				alt={t('hub_tutorial_detailed_view')}
 			/>
