@@ -38,7 +38,7 @@ class Help extends React.Component {
 		openSupportPage();
 		window.close();
 	}
-	// "https://ghostery.zendesk.com/hc/"
+
 	/**
 	 * Render Help view.
 	 * @return {ReactComponent}   ReactComponent instance
@@ -54,7 +54,7 @@ class Help extends React.Component {
 						</div>
 						<div className="support-section">
 							<h3>{ t('panel_help_questions_header') }</h3>
-							<a href="https://ghostery.zendesk.com/hc/" target="_blank" rel="noopener noreferrer">{ t('panel_help_faq') }</a>
+							<a href="https://www.ghostery.com/faqs/" target="_blank" rel="noopener noreferrer">{ t('panel_help_faq') }</a>
 							<a href="https://www.ghostery.com/survey/in-app" target="_blank" rel="noopener noreferrer">{ t('panel_help_feedback') }</a>
 							<a href="#" onClick={this.openSupportTab}>{ t('panel_help_support') }</a>
 						</div>
