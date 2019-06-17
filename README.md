@@ -150,7 +150,7 @@ See [CONTRIBUTING](CONTRIBUTING.md) and [CODE OF CONDUCT](CODE-OF-CONDUCT.md)
 
 ## Links
 + [Website](https://ghostery.com/)
-+ [Support](https://ghostery.zendesk.com/)
++ [Support](mailto:support@ghostery.com)
 + [Twitter (@ghostery)](https://twitter.com/ghostery)
 + [Facebook](https://www.facebook.com/ghostery)
 + [Privacy Policy](https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/)
