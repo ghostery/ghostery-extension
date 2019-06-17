@@ -2084,10 +2084,10 @@
 		"message": "Statut"
 	},
 	"subscription_active": {
-		"message": "Actif/ve"
+		"message": "ACTIF"
 	},
 	"subscription_inactive": {
-		"message": "Non-actif/ve"
+		"message": "NON-ACTIF"
 	},
 	"subscription_manage": {
 		"message": "Gérer mon abonnement"
