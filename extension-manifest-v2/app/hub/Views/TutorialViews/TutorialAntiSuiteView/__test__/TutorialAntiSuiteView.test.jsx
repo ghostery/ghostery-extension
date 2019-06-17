@@ -28,7 +28,7 @@ describe('app/hub/Views/TutorialViews/TutorialAntiSuiteView component', () => {
 		test('the happy path of the component', () => {
 			const component = shallow(<TutorialAntiSuiteView />);
 			expect(component.find('.TutorialAntiSuiteView').length).toBe(1);
-			expect(component.find('.TutorialAntiSuiteView__image').length).toBe(2);
+			expect(component.find('img').length).toBe(2);
 			expect(component.find('.TutorialView__keyItem').length).toBe(3);
 		});
 	});
