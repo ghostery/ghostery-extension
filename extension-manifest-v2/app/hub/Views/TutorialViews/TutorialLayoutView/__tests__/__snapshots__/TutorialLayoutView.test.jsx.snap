@@ -19,7 +19,7 @@ exports[`app/hub/Views/TutorialViews/TutorialLayoutView component Snapshot tests
     />
   </div>
   <div
-    className="columns small-10 medium-6 large-4 small-offset-1"
+    className="columns small-10 medium-6 large-4"
   >
     <div
       className="TutorialView__title"

@@ -32,7 +32,7 @@ const TutorialLayoutView = () => (
 				alt={t('hub_tutorial_detailed_view')}
 			/>
 		</div>
-		<div className="columns small-10 medium-6 large-4 small-offset-1">
+		<div className="columns small-10 medium-6 large-4">
 			<div className="TutorialView__title">
 				{t('hub_tutorial_layout_title')}
 			</div>

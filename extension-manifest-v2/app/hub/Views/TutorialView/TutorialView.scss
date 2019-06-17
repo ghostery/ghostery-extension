@@ -142,11 +142,15 @@
 }
 
 // Tutorial Layout View
-.TutorialLayoutView__image.layout-simple {
-	margin-bottom: 30px;
-}
 .TutorialLayoutView__image {
-	padding-left: 10%;
+	position: relative;
+
+	&.layout-simple {
+		left: 1%;
+		padding-right: 12%;
+		margin-bottom: 30px;
+	}
+	&.layout-detailed { left: -11%; }
 }
 @media only screen and (max-width: 960px) {
 	.TutorialLayoutView .TutorialView__tagline {
