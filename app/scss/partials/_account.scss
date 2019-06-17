@@ -1,5 +1,5 @@
 /**
- * Acount Panel Sass
+ * Account Panel Sass
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -35,7 +35,7 @@ label {
 	}
 	&:not(.hollow) {
 		&:hover, &:focus {
-			background-color: $ghosty-blue !important;
+			background-color: $ghosty-blue;
 		}
 	}
 }

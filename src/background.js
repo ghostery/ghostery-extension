@@ -162,7 +162,7 @@ function setGhosteryDefaultBlocking() {
 
 /**
  * Pulls down latest version.json and triggers
- * udpates of all db files.
+ * updates of all db files.
  * @memberOf Background
  *
  * @return {Promise} 	database updated data
