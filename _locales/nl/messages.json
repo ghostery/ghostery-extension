@@ -458,9 +458,6 @@
 	"summary_description_not_scanned_2": {
 		"message": "Ga naar een andere pagina en ik beloof je dat ik mezelf zal bewijzen."
 	},
-	"summary_custom_settings": {
-		"message": "Aangepaste Instellingen"
-	},
 	"summary_trust_site": {
 		"message": "Vertrouw Website"
 	},
@@ -481,9 +478,6 @@
 	},
 	"summary_pause_ghostery_tooltip": {
 		"message": "Pauzeer Ghostery extensie."
-	},
-	"summary_pause_ghostery_ab_pause": {
-		"message": "Pauzeer"
 	},
 	"pause_30_min": {
 		"message": "voor 30 min"
@@ -508,9 +502,6 @@
 	},
 	"summary_resume_ghostery_tooltip": {
 		"message": "Ghostery extensie gepauzeerd. Klik om te hervatten."
-	},
-	"summary_resume_ghostery_ab_pause": {
-		"message": "Hervat"
 	},
 	"summary_show_menu": {
 		"message": "toon menu"
@@ -1092,6 +1083,12 @@
 	"page_load": {
 		"message": "Pagina Laden"
 	},
+	"requests_modified": {
+		"message": "Gewijzigde verzoeken:"
+	},
+	"requests_modified_tooltip": {
+		"message": "Totaal aantal trackingverzoeken en -elementen gewijzigd door Anti-Tracking en Ad Blokkering"
+	},
 	"trackers_blocked": {
 		"message": "Geblokkeerde Trackers:"
 	},
@@ -1283,9 +1280,6 @@
 	},
 	"tooltip_restrict_on": {
 		"message": "Trackers geblokkeerd en Anti-Tracking aangezet op deze website. Klik om Ongedaan te maken."
-	},
-	"tooltip_custom_settings": {
-		"message": "Gebruik mijn geselecteerde tracker instellingen."
 	},
 	"tooltip_pause": {
 		"message": "Pauzeer Ghostery"
@@ -2130,6 +2124,9 @@
 	"subscription_submit_issue": {
 		"message": "Probleem versturen"
 	},
+	"subscription_upgrade_to": {
+		"message": "Upgraden naar"
+	},
 	"panel_stats_menu_cumulative": {
 		"message": "Cumulatief"
 	},
@@ -2209,5 +2206,29 @@
 	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "Wis alle statistiekengeschiedenis tot aan dit punt."
+	},
+	"cookie": {
+		"message": "cookie"
+	},
+	"cookies": {
+		"message": "cookies"
+	},
+	"fingerprint": {
+		"message": "vingerafdruk"
+	},
+	"fingerprints": {
+		"message": "vingerafdrukken"
+	},
+	"ad": {
+		"message": "ad"
+	},
+	"ads": {
+		"message": "ads"
+	},
+	"cliqz_feature_status_on": {
+		"message": "Aan"
+	},
+	"cliqz_feature_status_off": {
+		"message": "Uit"
 	}
 }
