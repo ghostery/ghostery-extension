@@ -458,9 +458,6 @@
 	"summary_description_not_scanned_2": {
 		"message": "Continuez vers une autre page et nous promettons de vous livrer vos produits."
 	},
-	"summary_custom_settings": {
-		"message": "Paramètres personnalisés"
-	},
 	"summary_trust_site": {
 		"message": "Se fier à ce site"
 	},
@@ -481,9 +478,6 @@
 	},
 	"summary_pause_ghostery_tooltip": {
 		"message": "Mettre le module Ghostery sur pause."
-	},
-	"summary_pause_ghostery_ab_pause": {
-		"message": "Pause"
 	},
 	"pause_30_min": {
 		"message": "pour 30 min"
@@ -508,9 +502,6 @@
 	},
 	"summary_resume_ghostery_tooltip": {
 		"message": "Module Ghostery mis en pause. Cliquez pour reprendre."
-	},
-	"summary_resume_ghostery_ab_pause": {
-		"message": "Reprendre"
 	},
 	"summary_show_menu": {
 		"message": "Afficher le menu"
@@ -1092,6 +1083,12 @@
 	"page_load": {
 		"message": "Chargement de la page"
 	},
+	"requests_modified": {
+		"message": "Demandes modifiées :"
+	},
+	"requests_modified_tooltip": {
+		"message": "Nombre total de demandes de suivi et d'éléments modifiés par l'Anti-Pistage et le Bloqueur de publicités"
+	},
 	"trackers_blocked": {
 		"message": "Mouchards bloqués :"
 	},
@@ -1283,9 +1280,6 @@
 	},
 	"tooltip_restrict_on": {
 		"message": "Mouchards bloqués et anti-pistage activé sur ce site. Cliquez pour annuler."
-	},
-	"tooltip_custom_settings": {
-		"message": "Utiliser les paramètres de pistage sélectionnés."
 	},
 	"tooltip_pause": {
 		"message": "Pause"
@@ -2130,6 +2124,9 @@
 	"subscription_submit_issue": {
 		"message": "Soumettre le problème rencontré"
 	},
+	"subscription_upgrade_to": {
+		"message": "Mettre à niveau vers"
+	},
 	"panel_stats_menu_cumulative": {
 		"message": "Cumulé"
 	},
@@ -2209,5 +2206,29 @@
 	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "Supprimer tous les historiques des stats connus à ce jour."
+	},
+	"cookie": {
+		"message": "cookie"
+	},
+	"cookies": {
+		"message": "cookies"
+	},
+	"fingerprint": {
+		"message": "empreinte"
+	},
+	"fingerprints": {
+		"message": "empreintes"
+	},
+	"ad": {
+		"message": "publicité"
+	},
+	"ads": {
+		"message": "publicités"
+	},
+	"cliqz_feature_status_on": {
+		"message": "activé"
+	},
+	"cliqz_feature_status_off": {
+		"message": "désactivé"
 	}
 }

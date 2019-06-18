@@ -458,9 +458,6 @@
 	"summary_description_not_scanned_2": {
 		"message": "다른 페이지로 이동하면 제대로 된 결과가 나올 것입니다."
 	},
-	"summary_custom_settings": {
-		"message": "사용자 지정 설정 "
-	},
 	"summary_trust_site": {
 		"message": "사이트 신뢰 "
 	},
@@ -481,9 +478,6 @@
 	},
 	"summary_pause_ghostery_tooltip": {
 		"message": "Ghostery 확장 프로그램 일시 중지."
-	},
-	"summary_pause_ghostery_ab_pause": {
-		"message": "일시 중지 "
 	},
 	"pause_30_min": {
 		"message": "30분 동안 "
@@ -508,9 +502,6 @@
 	},
 	"summary_resume_ghostery_tooltip": {
 		"message": "Ghostery 확장 프로그램 일시 중지됨. 다시 시작하려면 클릭하십시오."
-	},
-	"summary_resume_ghostery_ab_pause": {
-		"message": "다시 시작 "
 	},
 	"summary_show_menu": {
 		"message": "메뉴 표시 "
@@ -1092,6 +1083,12 @@
 	"page_load": {
 		"message": "페이지 로드 "
 	},
+	"requests_modified": {
+		"message": "변경된 요청:"
+	},
+	"requests_modified_tooltip": {
+		"message": "추적 방지와 광고 차단을 통한 추적 요청 및 변경 요소의 총 수"
+	},
 	"trackers_blocked": {
 		"message": "차단된 트래커:"
 	},
@@ -1283,9 +1280,6 @@
 	},
 	"tooltip_restrict_on": {
 		"message": "사이트에서 트래커 차단, 추적 방지 활성화됨. 실행 취소하려면 클릭하십시오."
-	},
-	"tooltip_custom_settings": {
-		"message": "선택한 내 트래커 설정을 사용합니다."
 	},
 	"tooltip_pause": {
 		"message": "Ghostery 일시 중지  "
@@ -2130,6 +2124,9 @@
 	"subscription_submit_issue": {
 		"message": "오류 보고"
 	},
+	"subscription_upgrade_to": {
+		"message": "다음으로 업그레이드"
+	},
 	"panel_stats_menu_cumulative": {
 		"message": "누적"
 	},
@@ -2209,5 +2206,29 @@
 	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "이 시점까지의 모든 통계 이력을 제때 삭제하세요."
+	},
+	"cookie": {
+		"message": "쿠키"
+	},
+	"cookies": {
+		"message": "쿠키"
+	},
+	"fingerprint": {
+		"message": "지문"
+	},
+	"fingerprints": {
+		"message": "지문"
+	},
+	"ad": {
+		"message": "광고"
+	},
+	"ads": {
+		"message": "광고"
+	},
+	"cliqz_feature_status_on": {
+		"message": "켜기 "
+	},
+	"cliqz_feature_status_off": {
+		"message": "끄기 "
 	}
 }

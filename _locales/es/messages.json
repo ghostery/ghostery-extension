@@ -458,9 +458,6 @@
 	"summary_description_not_scanned_2": {
 		"message": "Navega a otra página y te prometo que me encargaré de todo."
 	},
-	"summary_custom_settings": {
-		"message": "Ajustes personalizados"
-	},
 	"summary_trust_site": {
 		"message": "Fiable"
 	},
@@ -481,9 +478,6 @@
 	},
 	"summary_pause_ghostery_tooltip": {
 		"message": "Pausar extensión Ghostery"
-	},
-	"summary_pause_ghostery_ab_pause": {
-		"message": "Pausar"
 	},
 	"pause_30_min": {
 		"message": "durante 30 minutos"
@@ -508,9 +502,6 @@
 	},
 	"summary_resume_ghostery_tooltip": {
 		"message": "Extensión Ghostery pausada. Clic para reactivar."
-	},
-	"summary_resume_ghostery_ab_pause": {
-		"message": "Reactivar"
 	},
 	"summary_show_menu": {
 		"message": "mostrar menú"
@@ -1092,6 +1083,12 @@
 	"page_load": {
 		"message": "Carga de página"
 	},
+	"requests_modified": {
+		"message": "Solicitudes modificadas:"
+	},
+	"requests_modified_tooltip": {
+		"message": "Número total de solicitudes de rastreo y elementos modificados por el antirrastreador y el bloqueador de anuncios"
+	},
 	"trackers_blocked": {
 		"message": "Rastreadores bloqueados:"
 	},
@@ -1283,9 +1280,6 @@
 	},
 	"tooltip_restrict_on": {
 		"message": "En este sitio, se bloquearán los rastreadores y se habilitará Anti-Tracking. Clic para deshacer."
-	},
-	"tooltip_custom_settings": {
-		"message": "Usar mis ajustes de rastreadores seleccionados."
 	},
 	"tooltip_pause": {
 		"message": "Pausar Ghostery"
@@ -2130,6 +2124,9 @@
 	"subscription_submit_issue": {
 		"message": "Enviar problema"
 	},
+	"subscription_upgrade_to": {
+		"message": "Mejorar a"
+	},
 	"panel_stats_menu_cumulative": {
 		"message": "Acumulado"
 	},
@@ -2209,5 +2206,29 @@
 	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "Borrar el historial de estadísticas hasta ahora."
+	},
+	"cookie": {
+		"message": "cookie"
+	},
+	"cookies": {
+		"message": "cookies"
+	},
+	"fingerprint": {
+		"message": "huella dactilar"
+	},
+	"fingerprints": {
+		"message": "huellas dactilares"
+	},
+	"ad": {
+		"message": "anuncio"
+	},
+	"ads": {
+		"message": "anuncios"
+	},
+	"cliqz_feature_status_on": {
+		"message": "Sí"
+	},
+	"cliqz_feature_status_off": {
+		"message": "No"
 	}
 }

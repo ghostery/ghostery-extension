@@ -458,9 +458,6 @@
 	"summary_description_not_scanned_2": {
 		"message": "Перейдите на другую страницу, и я выполню обещанное."
 	},
-	"summary_custom_settings": {
-		"message": "Пользовательские настройки"
-	},
 	"summary_trust_site": {
 		"message": "Доверять сайту"
 	},
@@ -481,9 +478,6 @@
 	},
 	"summary_pause_ghostery_tooltip": {
 		"message": "Приостановить работу расширения Ghostery."
-	},
-	"summary_pause_ghostery_ab_pause": {
-		"message": "Пауза"
 	},
 	"pause_30_min": {
 		"message": "на 30 мин"
@@ -508,9 +502,6 @@
 	},
 	"summary_resume_ghostery_tooltip": {
 		"message": "Работа расширения Ghostery приостановлена. Нажмите для возобновления работы."
-	},
-	"summary_resume_ghostery_ab_pause": {
-		"message": "Возобновить"
 	},
 	"summary_show_menu": {
 		"message": "показать меню"
@@ -1092,6 +1083,12 @@
 	"page_load": {
 		"message": "Загрузка страницы"
 	},
+	"requests_modified": {
+		"message": "Запросы изменены:"
+	},
+	"requests_modified_tooltip": {
+		"message": "Общее количество запросов на отслеживание и элементов, измененных программами анти-отслеживания и блокировки рекламы"
+	},
 	"trackers_blocked": {
 		"message": "Заблокированные трекеры:"
 	},
@@ -1283,9 +1280,6 @@
 	},
 	"tooltip_restrict_on": {
 		"message": "На сайте трекеры заблокированы и включен анти-трекинг. Нажмите, чтобы отменить."
-	},
-	"tooltip_custom_settings": {
-		"message": "Использовать мои выбранные настройки трекера."
 	},
 	"tooltip_pause": {
 		"message": "Приостановить Ghostery"
@@ -2130,6 +2124,9 @@
 	"subscription_submit_issue": {
 		"message": "Сообщить о проблеме"
 	},
+	"subscription_upgrade_to": {
+		"message": "Обновить до"
+	},
 	"panel_stats_menu_cumulative": {
 		"message": "Накопительные"
 	},
@@ -2209,5 +2206,29 @@
 	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "Стереть всю историю статистики до этого момента."
+	},
+	"cookie": {
+		"message": "файл cookie"
+	},
+	"cookies": {
+		"message": "файлы cookie"
+	},
+	"fingerprint": {
+		"message": "отпечаток пальца"
+	},
+	"fingerprints": {
+		"message": "отпечатки пальцев"
+	},
+	"ad": {
+		"message": "рекламное объявление"
+	},
+	"ads": {
+		"message": "рекламные объявления"
+	},
+	"cliqz_feature_status_on": {
+		"message": "Вкл"
+	},
+	"cliqz_feature_status_off": {
+		"message": "Выкл"
 	}
 }
