@@ -458,9 +458,6 @@
 	"summary_description_not_scanned_2": {
 		"message": "Navegue para outra página e prometo que entregarei os produtos."
 	},
-	"summary_custom_settings": {
-		"message": "Configurações personalizadas"
-	},
 	"summary_trust_site": {
 		"message": "Confiar no site"
 	},
@@ -481,9 +478,6 @@
 	},
 	"summary_pause_ghostery_tooltip": {
 		"message": "Extensão Ghostery pausada."
-	},
-	"summary_pause_ghostery_ab_pause": {
-		"message": "Pausar"
 	},
 	"pause_30_min": {
 		"message": "por 30 minutos"
@@ -508,9 +502,6 @@
 	},
 	"summary_resume_ghostery_tooltip": {
 		"message": "Extensão Ghostery pausada. Clique para continuar."
-	},
-	"summary_resume_ghostery_ab_pause": {
-		"message": "Retomar"
 	},
 	"summary_show_menu": {
 		"message": "mostrar menu"
@@ -1092,6 +1083,12 @@
 	"page_load": {
 		"message": "Carregar página"
 	},
+	"requests_modified": {
+		"message": "Solicitações modificadas:"
+	},
+	"requests_modified_tooltip": {
+		"message": "Número total de solicitações de rastreamento e elementos modificados pelo Anti-rastreamento e pelo Bloqueio de anúncios"
+	},
 	"trackers_blocked": {
 		"message": "Rastreadores bloqueados:"
 	},
@@ -1283,9 +1280,6 @@
 	},
 	"tooltip_restrict_on": {
 		"message": "Rastreadores bloqueados e o anti-rastreamento ativado neste site. Clique para Desfazer."
-	},
-	"tooltip_custom_settings": {
-		"message": "Usar minhas configurações de rastreador selecionadas."
 	},
 	"tooltip_pause": {
 		"message": "Pausar"
@@ -2130,6 +2124,9 @@
 	"subscription_submit_issue": {
 		"message": "Enviar problema"
 	},
+	"subscription_upgrade_to": {
+		"message": "Atualizar para"
+	},
 	"panel_stats_menu_cumulative": {
 		"message": "Cumulativas"
 	},
@@ -2209,5 +2206,29 @@
 	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "Apague todo o histórico de estatísticas até o presente momento."
+	},
+	"cookie": {
+		"message": "cookie"
+	},
+	"cookies": {
+		"message": "cookies"
+	},
+	"fingerprint": {
+		"message": "fingerprint"
+	},
+	"fingerprints": {
+		"message": "fingerprints"
+	},
+	"ad": {
+		"message": "anúncio"
+	},
+	"ads": {
+		"message": "anúncios"
+	},
+	"cliqz_feature_status_on": {
+		"message": "Ligado"
+	},
+	"cliqz_feature_status_off": {
+		"message": "Desligado"
 	}
 }

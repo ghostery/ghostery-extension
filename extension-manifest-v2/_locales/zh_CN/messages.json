@@ -458,9 +458,6 @@
 	"summary_description_not_scanned_2": {
 		"message": "转到其他网页，扩展程序应该可以正常工作。"
 	},
-	"summary_custom_settings": {
-		"message": "自定义设置"
-	},
 	"summary_trust_site": {
 		"message": "信任网站"
 	},
@@ -481,9 +478,6 @@
 	},
 	"summary_pause_ghostery_tooltip": {
 		"message": "暂停 Ghostery 扩展程序。"
-	},
-	"summary_pause_ghostery_ab_pause": {
-		"message": "暂停"
 	},
 	"pause_30_min": {
 		"message": "30 分钟"
@@ -508,9 +502,6 @@
 	},
 	"summary_resume_ghostery_tooltip": {
 		"message": "Ghostery 扩展程序已暂停。点击恢复。"
-	},
-	"summary_resume_ghostery_ab_pause": {
-		"message": "继续"
 	},
 	"summary_show_menu": {
 		"message": "显示菜单"
@@ -1092,6 +1083,12 @@
 	"page_load": {
 		"message": "网页加载"
 	},
+	"requests_modified": {
+		"message": "已修改的请求："
+	},
+	"requests_modified_tooltip": {
+		"message": "通过反跟踪和广告拦截功能修改的跟踪请求和元素总数"
+	},
 	"trackers_blocked": {
 		"message": "已拦截跟踪器："
 	},
@@ -1283,9 +1280,6 @@
 	},
 	"tooltip_restrict_on": {
 		"message": "网站上的跟踪器已拦截，反跟踪功能已开启。点击撤销。"
-	},
-	"tooltip_custom_settings": {
-		"message": "使用选定的跟踪器设置。"
 	},
 	"tooltip_pause": {
 		"message": "暂停"
@@ -2130,6 +2124,9 @@
 	"subscription_submit_issue": {
 		"message": "提交问题"
 	},
+	"subscription_upgrade_to": {
+		"message": "升级至"
+	},
 	"panel_stats_menu_cumulative": {
 		"message": "累计"
 	},
@@ -2209,5 +2206,29 @@
 	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "删除当前时间点之前的所有历史统计数据。"
+	},
+	"cookie": {
+		"message": "条 cookie"
+	},
+	"cookies": {
+		"message": "条 cookie"
+	},
+	"fingerprint": {
+		"message": "个指纹"
+	},
+	"fingerprints": {
+		"message": "个指纹"
+	},
+	"ad": {
+		"message": "条广告"
+	},
+	"ads": {
+		"message": "条广告"
+	},
+	"cliqz_feature_status_on": {
+		"message": "开启"
+	},
+	"cliqz_feature_status_off": {
+		"message": "关闭"
 	}
 }
