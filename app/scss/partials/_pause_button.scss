@@ -36,6 +36,7 @@
 	.button.active:hover {
 		border-color: #0093bd;
 		background-color: $ghosty-blue;
+		box-shadow: none;
 	}
 
 	.button-pause {
