@@ -32,10 +32,11 @@
 			border-left-color: #efefea;
 		}
 	}
-	.button:hover { background-color: #0093bd; }
+	.button:hover { background-color: $ghosty-blue; }
 	.button.active:hover {
 		border-color: #0093bd;
-		background-color: #0093bd;
+		background-color: $ghosty-blue;
+		box-shadow: none;
 	}
 
 	.button-pause {

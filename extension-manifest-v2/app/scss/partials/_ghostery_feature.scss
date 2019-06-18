@@ -63,18 +63,13 @@
 	border-color: #cccccc;
 	background-color: $white;
 	box-shadow: inset 0 0 0 0 rgba($white, 0);
-	&:hover {
-		background-color: #0093bd;
-		color: $tundora;
-	}
+	&:hover { color: $tundora; }
 
-	&.trust .GhosteryFeatureButton__text {
-		background-image: buildIconTrust($tundora);
-	}
+	&.trust:hover { background-color: $atlantis; }
+	&.trust .GhosteryFeatureButton__text { background-image: buildIconTrust($tundora); }
 
-	&.restrict .GhosteryFeatureButton__text {
-		background-image: buildIconRestrict($tundora);
-	}
+	&.restrict:hover { background-color: $red; }
+	&.restrict .GhosteryFeatureButton__text { background-image: buildIconRestrict($tundora); }
 }
 
 .GhosteryFeatureButton--inactive.not-clickable {
@@ -101,7 +96,7 @@
 		background-color: $atlantis;
 		box-shadow: inset 0px 1px 7px 2px #85b329;
 	}
-	&.trust:hover { background-color: #85b329; }
+	&.trust:hover { box-shadow: none; }
 	&.trust .GhosteryFeatureButton__text {
 		background-image: buildIconTrust($white);
 	}
@@ -111,7 +106,7 @@
 		background-color: $red;
 		box-shadow: inset 0px 1px 7px 2px #ce273c;
 	}
-	&.restrict:hover { background-color: #ce273c; }
+	&.restrict:hover { box-shadow: none; }
 	&.restrict .GhosteryFeatureButton__text {
 		background-image: buildIconRestrict($white);
 	}
