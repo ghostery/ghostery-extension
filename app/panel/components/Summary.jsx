@@ -690,7 +690,7 @@ class Summary extends React.Component {
 		return (
 			<div className={rewardsIconClassNames} onClick={this.props.actions.toggleExpert}>
 				<NavButton path="/detail/rewards" imagePath="../../app/images/panel/rewards-icon.svg" />
-				<Tooltip body="bananas....foster" position="left" />
+				<Tooltip body={t('ghostery_rewards')} position="left" />
 			</div>
 		);
 	}
