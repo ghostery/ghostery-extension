@@ -168,23 +168,29 @@
 	}
 }
 
-// Additional specificity needed to overwrite the position value of g-tooltip
-.Summary__statsButton.Summary__statsButton--absolutely-positioned {
-	position: absolute;
-	right: 0;
-	top: 40px;
-	padding: 6px 3px 3px 9px;
-	border: 1px lightgray solid;
-	border-radius: 5px 0 0 5px;
-}
 
+// Additional specificity needed to overwrite the position value of g-tooltip
+.Summary__statsButton.Summary__statsButton--absolutely-positioned,
 .Summary__rewardsIcon.Summary__rewardsIcon--absolutely-positioned {
 	position: absolute;
 	right: 0;
-	top: 80px;
-	padding: 6px 3px 3px 9px;
+	padding-top: 6px;
+	padding-bottom: 3px;
 	border: 1px lightgray solid;
+	border-right: none;
 	border-radius: 5px 0 0 5px;
+	background-color: $whisper;
+}
+// Differences in padding improve icon visual alignment
+.Summary__statsButton.Summary__statsButton--absolutely-positioned {
+	top: 40px;
+	padding-right: 3px;
+	padding-left: 9px;
+}
+.Summary__rewardsIcon.Summary__rewardsIcon--absolutely-positioned {
+	top: 85px;
+	padding-right: 6px;
+	padding-left: 10px;
 }
 
 .Summary__spaceTaker {
