@@ -178,6 +178,15 @@
 	border-radius: 5px 0 0 5px;
 }
 
+.Summary__rewardsIcon.Summary__rewardsIcon--absolutely-positioned {
+	position: absolute;
+	right: 0;
+	top: 80px;
+	padding: 6px 3px 3px 9px;
+	border: 1px lightgray solid;
+	border-radius: 5px 0 0 5px;
+}
+
 .Summary__spaceTaker {
 	height: 162px;
 }

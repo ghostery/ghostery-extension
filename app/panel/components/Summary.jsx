@@ -677,6 +677,24 @@ class Summary extends React.Component {
 		);
 	}
 
+	_renderRewardsIcon() {
+		const rewardsIconClassNames = ClassNames(
+			'Summary__rewardsIcon',
+			'Summary__rewardsIcon--absolutely-positioned',
+			'g-tooltip',
+			{
+				hide: this.props.is_expert,
+			}
+		);
+
+		return (
+			<div className={rewardsIconClassNames} onClick={this.props.actions.toggleExpert}>
+				<NavButton path="/detail/rewards" imagePath="../../app/images/panel/graph.svg" />
+				<Tooltip body="bananas....foster" position="left" />
+			</div>
+		);
+	}
+
 	/**
 	 * Render helper for the plus upgrade banner or subscriber icon
 	 * @return {JSX} JSX for rendering the plus upgrade banner or subscriber icon
@@ -758,6 +776,7 @@ class Summary extends React.Component {
 					{this._renderCliqzSmartBlock()}
 				</div>
 				{this._renderStatsNavButton()}
+				{this._renderRewardsIcon()}
 
 				{!isCondensed && this._renderPlusUpgradeBannerOrSubscriberIcon()}
 			</div>
