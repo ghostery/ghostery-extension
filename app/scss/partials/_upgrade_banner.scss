@@ -18,7 +18,7 @@
 }
 
 .UpgradeBanner--normal {
-	height: 23px;
+	height: 24px;
 
 	.UpgradeBanner__text {
 		font-size: 12px;
@@ -30,9 +30,13 @@
 		vertical-align: sub;
 	}
 }
+.UpgradeBanner--normal.UpgradeBanner--japanese,
+.UpgradeBanner--normal.UpgradeBanner--korean {
+	.UpgradeBanner__text { font-size: 9px; }
+}
 
 .UpgradeBanner--small {
-	height: 20px;
+	height: 22px;
 
 	.UpgradeBanner__text {
 		font-size: 10px;
@@ -43,6 +47,10 @@
 	.UpgradeBanner__plus {
 		vertical-align: middle;
 	}
+}
+.UpgradeBanner--small.UpgradeBanner--japanese,
+.UpgradeBanner--normal.UpgradeBanner--korean {
+	.UpgradeBanner__text { font-size: 8px; }
 }
 
 .UpgradeBanner__text {

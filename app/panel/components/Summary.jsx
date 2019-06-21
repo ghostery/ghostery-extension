@@ -684,10 +684,14 @@ class Summary extends React.Component {
 	_renderPlusUpgradeBannerOrSubscriberIcon() {
 		const { is_expert } = this.props;
 
+		const ctaText = t('subscription_upgrade_to');
+
 		const isPlusSubscriber = this._isPlusSubscriber();
 		const upgradeBannerClassNames = ClassNames('UpgradeBanner', {
 			'UpgradeBanner--normal': !is_expert,
 			'UpgradeBanner--small': is_expert,
+			'UpgradeBanner--japanese': ctaText === 'アップグレード先',
+			'UpgradeBanner--korean': ctaText === '다음으로 업그레이드',
 		});
 
 		return (
@@ -703,7 +707,7 @@ class Summary extends React.Component {
 				{!isPlusSubscriber &&
 				<div className="Summary__upgradeBannerContainer">
 					<div className={upgradeBannerClassNames}>
-						<span className="UpgradeBanner__text">{t('subscription_upgrade_to')}</span>
+						<span className="UpgradeBanner__text">{ctaText}</span>
 						<ReactSVG path="/app/images/panel/upgrade-banner-plus.svg" className="UpgradeBanner__plus" />
 					</div>
 				</div>
