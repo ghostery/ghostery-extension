@@ -15,10 +15,11 @@
 	@extend %pointer;
 	background: url("../../app/images/panel/green-upgrade-banner.svg");
 	background-size: contain;
+	background-repeat: repeat-x;
 }
 
 .UpgradeBanner--normal {
-	height: 24px;
+	height: 50px;
 
 	.UpgradeBanner__text {
 		font-size: 12px;
@@ -30,13 +31,9 @@
 		vertical-align: sub;
 	}
 }
-.UpgradeBanner--normal.UpgradeBanner--japanese,
-.UpgradeBanner--normal.UpgradeBanner--korean {
-	.UpgradeBanner__text { font-size: 9px; }
-}
 
 .UpgradeBanner--small {
-	height: 22px;
+	height: 50px;
 
 	.UpgradeBanner__text {
 		font-size: 10px;
@@ -47,10 +44,6 @@
 	.UpgradeBanner__plus {
 		vertical-align: middle;
 	}
-}
-.UpgradeBanner--small.UpgradeBanner--japanese,
-.UpgradeBanner--normal.UpgradeBanner--korean {
-	.UpgradeBanner__text { font-size: 8px; }
 }
 
 .UpgradeBanner__text {

@@ -690,8 +690,6 @@ class Summary extends React.Component {
 		const upgradeBannerClassNames = ClassNames('UpgradeBanner', {
 			'UpgradeBanner--normal': !is_expert,
 			'UpgradeBanner--small': is_expert,
-			'UpgradeBanner--japanese': ctaText === 'アップグレード先',
-			'UpgradeBanner--korean': ctaText === '다음으로 업그레이드',
 		});
 
 		return (
