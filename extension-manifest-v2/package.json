@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "base64-js": "^1.2.1",
-    "browser-core": "https://github.com/cliqz-oss/browser-core/releases/download/7.37.1/browser-core-7.37.1.tgz",
+    "browser-core": "https://github.com/cliqz-oss/browser-core/releases/download/7.37.2/browser-core-7.37.2.tgz",
     "classnames": "^2.2.5",
     "d3": "^5.7.0",
     "foundation-sites": "^6.4.4-rc1",

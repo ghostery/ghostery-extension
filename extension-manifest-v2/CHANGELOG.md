@@ -1,4 +1,4 @@
-### GHOSTERY 8.4.0 (June 24, 2019)
+### GHOSTERY 8.4.0 (June 25, 2019)
 
 + Add new counter for Requests Modified by Anti-Tracking (#392)
 + Show fingerprint, cookie and advertisement icons in Detail View tracker list (#394)
