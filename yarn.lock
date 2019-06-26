@@ -1257,9 +1257,9 @@ brorand@^1.0.1:
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
   integrity sha1-EsJe/kCkXjwyPrhnWgoM5XsiNx8=
 
-"browser-core@https://github.com/cliqz-oss/browser-core/releases/download/7.37.2/browser-core-7.37.2.tgz":
-  version "7.37.2"
-  resolved "https://github.com/cliqz-oss/browser-core/releases/download/7.37.2/browser-core-7.37.2.tgz#3cc39c71f9728f158fb6c9ded16183b0ff11f4b1"
+"browser-core@https://github.com/cliqz-oss/browser-core/releases/download/7.37.3/browser-core-7.37.3.tgz":
+  version "7.37.3"
+  resolved "https://github.com/cliqz-oss/browser-core/releases/download/7.37.3/browser-core-7.37.3.tgz#b5d69d2e23b3e6c14720e2e5bb63670bdc2b4ef8"
   dependencies:
     "@cliqz-oss/dexie" "^2.0.4"
     "@cliqz/adblocker" "^0.10.0"
