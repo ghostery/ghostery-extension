@@ -1,5 +1,8 @@
 /**
- * React Router History
+ * Cliqz Content Scripts
+ *
+ * This file compiles content scripts for Cliqz modules
+ * (Ad-Blocker, HPN, Human Web)
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -10,15 +13,8 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
-
-import { createMemoryHistory } from 'history';
 /**
- * @var {Object} history object to be used by React Routerfor navigation within the Ghostery panel.
- * @memberOf PanelUtils
+ * @namespace CliqzContentScript
  */
-const history = createMemoryHistory({
-	initialEntries: ['/'],
-	initialIndex: 0
-});
 
-export default history;
+import 'browser-core/build/core/content';

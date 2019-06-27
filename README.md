@@ -36,17 +36,17 @@ $ yarn upgrade
 ## Building
 ```sh
 # Build all sources
-$ yarn run build.dev
+$ yarn build.dev
 ```
 
 ```sh
 # Build for production
-$ yarn run build.prod
+$ yarn build.prod
 ```
 
 ```sh
 # Build and watch for changes
-$ yarn run build.watch
+$ yarn build.watch
 ```
 
 ## Enable Debugging / Logging
@@ -58,32 +58,39 @@ $ yarn run build.watch
 
 ## Testing and Linting
 ```sh
+# Update Jest snapshot artifacts
+$ yarn test.snapshot
+```
+
+```sh
 # Run unit tests
-$ yarn run test.unit
+$ yarn test.unit
 ```
 
 ```sh
 # Run linter over the ./app and ./src folders
-$ yarn run lint
+$ yarn lint
 ```
 
 ```sh
 # Lint a specific file
-$ yarn run lint.raw -- src/utils/matcher.js
+$ yarn lint.raw src/utils/matcher.js
 ```
 
 ```sh
-# Disable lint
-$ NO_LINT=true yarn run build.dev
+# Test i18n string lengths for panel UI
+$ yarn leet
+# Reset back to original en language file
+$ yarn leet.reset
 ```
 
 ## Build Docs
 ```sh
 # Build JSDoc files to ./docs
-$ yarn run docs
+$ yarn docs
 ```
 
-## Translating Files
+## Internationalization
 We use Transifex and their CLI to manage our translation files. Follow
 [these instructions](https://docs.transifex.com/client/installing-the-client)
 to get started.

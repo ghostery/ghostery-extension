@@ -34,7 +34,7 @@ const NavButton = (props) => {
 
 	return (
 		<NavLink to={{ pathname: path, params }} className={classNames} >
-			<ReactSVG path={imagePath} />
+			<ReactSVG src={imagePath} />
 		</NavLink>
 	);
 };
