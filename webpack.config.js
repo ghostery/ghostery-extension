@@ -139,7 +139,6 @@ const config = {
 		panel_android: [SASS_DIR + '/panel_android.scss'],
 		purplebox_styles: [SASS_DIR + '/purplebox.scss'],
 		hub: [SASS_DIR + '/hub.scss'],
-		licenses: [SASS_DIR + '/licenses.scss'],
 		rewards_styles: [SASS_DIR + '/rewards.scss'],
 	},
 	devtool: 'none',
