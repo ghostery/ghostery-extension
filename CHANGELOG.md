@@ -1,3 +1,14 @@
+### GHOSTERY 8.4.0 (June 26, 2019)
+
++ Add new counter for Requests Modified by Anti-Tracking (#392)
++ Show fingerprint, cookie and advertisement icons in Detail View tracker list (#394)
++ Improved Anti-Tracking integration (#377)
++ Integrate Click2Play into SmartBlocking (#388)
++ Respect pause state before displaying CMP and Rewards windows (Fixes #389)
++ Performance improvements (Fixes #12)
++ Improved Ad-Blocker filter rule injection (Fixes #381)
++ Updated translations (#397, #400)
+
 ### GHOSTERY 8.3.4 (May 8, 2019)
 
 + Fixes bug in Click2Play redirect blocking
