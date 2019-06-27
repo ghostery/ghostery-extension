@@ -237,7 +237,7 @@ class OfferCard extends Component {
 		return (
 			// @TODO condition for hide class
 			<div ref={(ref) => { this.offerCardRef = ref; }} className="ghostery-rewards-component">
-				{ this.state.closed !== true &&
+				{ this.state.closed !== true && (
 					<div>
 						<div className="ghostery-reward-card">
 							<div className="reward-card-header">
@@ -260,21 +260,21 @@ class OfferCard extends Component {
 										style={{ backgroundImage: this.kebabIcon }}
 										ref={(node) => { this.kebabRef = node; }}
 									/>
-									{ this.state.showSettings &&
+									{ this.state.showSettings && (
 										<div className="rewards-settings-container">
 											<ClickOutside excludeEl={this.kebabRef} onClickOutside={this.toggleSettings} offsetParent={this.iframeContentDocument}>
 												<Settings signal={() => { this.props.actions.sendSignal('about_ghostery_rewards', false); }} disable={this.disableRewardsNotification} />
 											</ClickOutside>
 										</div>
-									}
+									)}
 								</div>
-								{ this.state.rewardUI.picture_url &&
+								{ this.state.rewardUI.picture_url && (
 									<div className="reward-content-img">
 										<div className="flex-grow" />
 										<div className="img" ref={(node) => { this.rewardPictureEl = node; }} />
 										<div className="flex-grow" />
 									</div>
-								}
+								)}
 								<div className="reward-content-detail">
 									{/* <div className="flex-grow" /> */}
 									<div className="reward-benefit">
@@ -288,7 +288,7 @@ class OfferCard extends Component {
 									</span>
 								</div>
 								<div className="flex-grow" />
-								{ this.state.rewardUI.code &&
+								{ this.state.rewardUI.code && (
 									<div className="reward-code">
 										<div>
 											{this.state.code}
@@ -296,17 +296,17 @@ class OfferCard extends Component {
 										</div>
 										<a onClick={this.copyCode}>{this.state.copyText}</a>
 									</div>
-								}
+								)}
 								<div className="reward-content-footer">
 									<span>
 										{ this.renderExpiresText() }
 									</span>
-									{this.state.rewardUI.conditions &&
+									{this.state.rewardUI.conditions && (
 										<div className="reward-terms g-tooltip">
 											{ t('rewards_terms_conditions') }
 											<Tooltip header={this.state.rewardUI.conditions} position="top" delay="0" theme="dark" />
 										</div>
-									}
+									)}
 								</div>
 								<a target="_blank" rel="noopener noreferrer" onClick={this.redeem} href={this.state.rewardUI.call_to_action && this.state.rewardUI.call_to_action.url} className="reward-redeem">
 									{this.state.rewardUI.call_to_action.text}
@@ -331,7 +331,7 @@ class OfferCard extends Component {
 							this.renderNotification(2)
 						}
 					</div>
-				}
+				)}
 			</div>
 		);
 	}

@@ -89,6 +89,7 @@ class Panel extends React.Component {
 		sendMessage('reloadTab', { tab_id: +this.props.tab_id });
 		window.close();
 	}
+
 	/**
 	 * Filter trackers when clicking on compatibility/slow
 	 * tracker notifications and trigger appropriate action.
@@ -163,21 +164,21 @@ class Panel extends React.Component {
 					)}
 				</span>
 			);
-		} else if (needsReload) {
+		} if (needsReload) {
 			return (
 				<span>
 					<span key="0">{t('panel_needs_reload')}</span>
 					<span key="1" className="needs-reload-link" onClick={this.clickReloadBanner}>{ t('alert_reload') }</span>
 				</span>
 			);
-		} else if (this.props.notificationFilter === 'slow') {
+		} if (this.props.notificationFilter === 'slow') {
 			return (
 				<span>
 					<span key="0" className="filter-link slow-insecure" onClick={this.filterTrackers} dangerouslySetInnerHTML={{ __html: this.props.notificationText }} />
 					<span key="1">{ t('panel_tracker_slow_non_secure_end') }</span>
 				</span>
 			);
-		} else if (this.props.notificationFilter === 'compatibility') {
+		} if (this.props.notificationFilter === 'compatibility') {
 			return (
 				<span>
 					<span key="0" className="filter-link compatibility" onClick={this.filterTrackers} dangerouslySetInnerHTML={{ __html: this.props.notificationText }} />
@@ -210,7 +211,7 @@ class Panel extends React.Component {
 								<path strokeWidth="3" strokeLinecap="round" d="M3,3 L12,12 M3,12 L12,3" />
 							</g>
 						</svg>
-						<span className="callout-text" >
+						<span className="callout-text">
 							{this.renderNotification()}
 						</span>
 					</div>

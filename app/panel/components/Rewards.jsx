@@ -120,7 +120,7 @@ class Rewards extends React.Component {
 	 */
 	handleFaqClick() {
 		sendMessage('openNewTab', {
-			url: 'https:\/\/www.ghostery.com/faqs/what-new-ghostery-features-can-we-expect-in-the-future/',
+			url: 'https://www.ghostery.com/faqs/what-new-ghostery-features-can-we-expect-in-the-future/',
 			become_active: true,
 		});
 		sendMessage('ping', 'rewards_learn');
@@ -228,21 +228,21 @@ class Rewards extends React.Component {
 					</div>
 				</div>
 			);
-		} else if (enable_offers && !rewardsArray) {
+		} if (enable_offers && !rewardsArray) {
 			return (
 				<div className="RewardsPanel__info">
 					{ this.renderRewardSvg() }
 					<div>{ t('panel_detail_rewards_loading') }</div>
 				</div>
 			);
-		} else if (enable_offers && rewardsArray.length === 0) {
+		} if (enable_offers && rewardsArray.length === 0) {
 			return (
 				<div className="RewardsPanel__info">
 					{ this.renderRewardSvg() }
 					<div>{ t('panel_detail_rewards_none_found') }</div>
 				</div>
 			);
-		} else if (!enable_offers && (!rewardsArray || rewardsArray.length === 0)) {
+		} if (!enable_offers && (!rewardsArray || rewardsArray.length === 0)) {
 			return (
 				<div className="RewardsPanel__info">
 					{ this.renderRewardSvg() }

@@ -17,10 +17,11 @@ import chrome from 'sinon-chrome';
 // Set up Enzyme for React Snapshot testing
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+
 Enzyme.configure({ adapter: new Adapter() });
 
 // Fake the translation function to only return the translation key
-global.t = function (str) {
+global.t = function(str) {
 	return str;
 };
 
@@ -32,34 +33,30 @@ chrome.runtime.getManifest.returns({
 });
 
 // Create Mock for for Cliqz modules
-jest.mock('../src/classes/Cliqz', () => {
-	return {
-		modules: {
-			adblocker: {
-				background: {
-					actions: {
-						getAdBlockInfoForTab: jest.fn()
-					}
+jest.mock('../src/classes/Cliqz', () => ({
+	modules: {
+		adblocker: {
+			background: {
+				actions: {
+					getAdBlockInfoForTab: jest.fn()
 				}
-			},
-			antitracking: {
-				background: {
-					actions: {
-						aggregatedBlockingStats: jest.fn()
-					}
+			}
+		},
+		antitracking: {
+			background: {
+				actions: {
+					aggregatedBlockingStats: jest.fn()
 				}
 			}
 		}
-	};
-});
+	}
+}));
 
 // Create Mock for the Cliqz dependencies
-jest.mock('browser-core', () => {
-	return { App: class App {} }
-});
+jest.mock('browser-core', () => ({ App: class App {} }));
 
 // Initialization for Globals.js
 Object.defineProperty(navigator, 'userAgent', {
-	value: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36",
+	value: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36',
 	writable: false
 });

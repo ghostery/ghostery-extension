@@ -17,9 +17,9 @@ import { isEqual } from 'underscore';
 import normalize from 'json-api-normalizer';
 import build from 'redux-object';
 import RSVP from 'rsvp';
-import globals from '../classes/Globals';
-import conf from '../classes/Conf';
-import dispatcher from '../classes/Dispatcher';
+import globals from './Globals';
+import conf from './Conf';
+import dispatcher from './Dispatcher';
 import { log } from '../utils/common';
 import Api from '../utils/api';
 
@@ -375,6 +375,7 @@ class Account {
 		}
 		return false;
 	}
+
 	/**
 	 * Create settings object for syncing and/or Export.
 	 * @memberOf BackgroundUtils

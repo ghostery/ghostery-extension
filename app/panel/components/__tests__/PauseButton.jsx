@@ -17,7 +17,7 @@ import { shallow } from 'enzyme';
 import PauseButton from '../BuildingBlocks/PauseButton';
 
 // Fake the translation function to only return the translation key
-global.t = function (str) {
+global.t = function(str) {
 	return str;
 };
 

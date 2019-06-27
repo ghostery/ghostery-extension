@@ -66,10 +66,11 @@ const CreateAccountView = (props) => {
 			<form onSubmit={handleSubmit}>
 				<div className="CreateAccountView--addPaddingTop row align-center-middle">
 					<div className="columns small-12 medium-5">
-						<label className="CreateAccountView__inputLabel">
+						<label htmlFor="create-account-email" className="CreateAccountView__inputLabel">
 							{t('hub_create_account_label_email')}
 						</label>
 						<input
+							id="create-account-email"
 							className={emailInputClassNames}
 							name="email"
 							type="text"
@@ -85,10 +86,11 @@ const CreateAccountView = (props) => {
 						)}
 					</div>
 					<div className="columns small-12 medium-5">
-						<label className="CreateAccountView__inputLabel">
+						<label htmlFor="create-account-confirmEmail" className="CreateAccountView__inputLabel">
 							{t('hub_create_account_label_email_confirm')}
 						</label>
 						<input
+							id="create-account-confirmEmail"
 							className={confirmInputClassNames}
 							name="confirmEmail"
 							type="text"
@@ -106,10 +108,11 @@ const CreateAccountView = (props) => {
 				</div>
 				<div className="row align-center-middle">
 					<div className="columns small-12 medium-5">
-						<label className="CreateAccountView__inputLabel">
+						<label htmlFor="create-account-firstName" className="CreateAccountView__inputLabel">
 							{t('hub_create_account_label_first_name')}
 						</label>
 						<input
+							id="create-account-firstName"
 							className="CreateAccountView__inputBox"
 							name="firstName"
 							type="text"
@@ -120,10 +123,11 @@ const CreateAccountView = (props) => {
 						/>
 					</div>
 					<div className="columns small-12 medium-5">
-						<label className="CreateAccountView__inputLabel">
+						<label htmlFor="create-account-lastName" className="CreateAccountView__inputLabel">
 							{t('hub_create_account_label_email_last_name')}
 						</label>
 						<input
+							id="create-account-lastName"
 							className="CreateAccountView__inputBox"
 							name="lastName"
 							type="text"
@@ -136,10 +140,11 @@ const CreateAccountView = (props) => {
 				</div>
 				<div className="row align-center-middle">
 					<div className="columns small-12 medium-5">
-						<label className="CreateAccountView__inputLabel">
+						<label htmlFor="create-account-password" className="CreateAccountView__inputLabel">
 							{t('hub_create_account_label_password')}
 						</label>
 						<input
+							id="create-account-password"
 							className={passwordInputClassNames}
 							name="password"
 							type="password"

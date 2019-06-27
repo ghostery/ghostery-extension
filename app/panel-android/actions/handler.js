@@ -11,8 +11,12 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { handleTrustButtonClick, handleRestrictButtonClick, handlePauseButtonClick, cliqzFeatureToggle } from './summaryActions';
-import { trustRestrictBlockSiteTracker, blockUnblockGlobalTracker, blockUnBlockAllTrackers, resetSettings } from './trackerActions';
+import {
+	handleTrustButtonClick, handleRestrictButtonClick, handlePauseButtonClick, cliqzFeatureToggle
+} from './summaryActions';
+import {
+	trustRestrictBlockSiteTracker, blockUnblockGlobalTracker, blockUnBlockAllTrackers, resetSettings
+} from './trackerActions';
 
 // Handle all actions in Panel.jsx
 export default function handleAllActions({ actionName, actionData, state }) {

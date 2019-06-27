@@ -34,6 +34,7 @@ class Licenses extends React.Component {
 	createFooterMarkup() {
 		return { __html: t('license_footer') };
 	}
+
 	/**
 	 * Render page.
 	 * @return {ReactComponent}   ReactComponent instance

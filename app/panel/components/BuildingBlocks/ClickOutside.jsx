@@ -26,18 +26,21 @@ class ClickOutside extends React.Component {
 		this.clickHandler = this.clickHandler.bind(this);
 		this.listenerEl = this.props.offsetParent || document;
 	}
+
 	/**
 	 * Lifecycle event. Set 'click' event listener
 	 */
 	componentDidMount() {
 		this.listenerEl.addEventListener('click', this.clickHandler, true);
 	}
+
 	/**
 	 * Lifecycle event. Remove 'click' event listener
 	 */
 	componentWillUnmount() {
 		this.listenerEl.removeEventListener('click', this.clickHandler, true);
 	}
+
 	/**
 	 * Set designated component which has ref attribute
 	 * @param {Object} ref  	DOM element being referenced
@@ -45,6 +48,7 @@ class ClickOutside extends React.Component {
 	getContainer(ref) {
 		this.container = ref;
 	}
+
 	/**
 	 * Implement handler for mouseclick. Trigger onClickOutside action
 	 * which is supplied by component which uses Click Outside Component
@@ -54,7 +58,7 @@ class ClickOutside extends React.Component {
 		// Simple polyfill for Event.composedPath
 		// Edge does not support path or composedPath
 		if (!('composedPath' in Event.prototype)) {
-			Event.prototype.composedPath = function () {
+			Event.prototype.composedPath = function() {
 				const path = [];
 				let el = this.target;
 				while (el) {
@@ -80,6 +84,7 @@ class ClickOutside extends React.Component {
 			this.props.onClickOutside(e);
 		}
 	}
+
 	/**
 	* Render Click Outside Component
 	* @return {ReactComponent}   ReactComponent instance

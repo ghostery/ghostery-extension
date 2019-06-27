@@ -14,7 +14,9 @@
 /* eslint no-param-reassign: 0 */
 /* eslint no-shadow: 0 */
 
-import { difference, each, every, keys, reduce, size } from 'underscore';
+import {
+	difference, each, every, keys, reduce, size
+} from 'underscore';
 import conf from './Conf';
 import Updatable from './Updatable';
 import { defineLazyProperty, flushChromeMemoryCache } from '../utils/utils';
@@ -47,6 +49,7 @@ class BugDb extends Updatable {
 
 		return new_app_ids;
 	}
+
 	/**
 	 * Apply block to all new trackers
 	 * @param  {Object} new_app_ids list of new trackers

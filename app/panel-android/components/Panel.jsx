@@ -20,7 +20,9 @@ import FixedMenu from './content/FixedMenu';
 import SiteTrackers from './SiteTrackers';
 import GlobalTrackers from './GlobalTrackers';
 import TrackersChart from './content/TrackersChart';
-import { getPanelData, getSummaryData, getSettingsData, getBlockingData } from '../actions/panelActions';
+import {
+	getPanelData, getSummaryData, getSettingsData, getBlockingData
+} from '../actions/panelActions';
 import { getCliqzModuleData } from '../actions/cliqzActions';
 import handleAllActions from '../actions/handler';
 import { fromTrackersToChartData } from '../utils/chart';
@@ -60,12 +62,10 @@ export default class Panel extends React.Component {
 	}
 
 	get chartData() {
-		const trackers = this.siteCategories.map(category =>
-			({
-				id: category.id,
-				numTotal: category.num_total,
-			})
-		);
+		const trackers = this.siteCategories.map(category => ({
+			id: category.id,
+			numTotal: category.num_total,
+		}));
 
 		return fromTrackersToChartData(trackers);
 	}
@@ -153,7 +153,11 @@ export default class Panel extends React.Component {
 						num={this.chartData.sum}
 					/>
 					<p>{this.siteProps.hostName}</p>
-					<p className="trackers-blocked-num"><span className="number">{this.siteProps.nTrackersBlocked}</span> Trackers blocked</p>
+					<p className="trackers-blocked-num">
+						<span className="number">{this.siteProps.nTrackersBlocked}</span>
+						{' '}
+Trackers blocked
+					</p>
 				</div>
 				<Tabs>
 					<Tab tabLabel="Overview" linkClassName="custom-link">
@@ -175,6 +179,6 @@ export default class Panel extends React.Component {
 }
 
 Panel.childContextTypes = {
-	siteProps: PropTypes.object,
+	siteProps: PropTypes.shape,
 	callGlobalAction: PropTypes.func,
 };

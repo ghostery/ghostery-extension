@@ -166,7 +166,7 @@ class Updatable {
 		}
 
 		// Fetch new bugs list from remote.  Bind the callback param from _remoteFetcher() to this anonymous function
-		this._remoteFetcher(bind(function (result, list) {
+		this._remoteFetcher(bind(function(result, list) {
 			// if the fetch worked and we have a list returned
 			if (result && list) {
 				const data = this.processList(false, list);

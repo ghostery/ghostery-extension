@@ -40,40 +40,40 @@ module.exports = {
 	rules: {
 		'camelcase': [0],
 		'class-methods-use-this': [0],
-		'comma-dangle': ['error', {
+		'comma-dangle': [2, {
 			'arrays': 'only-multiline',
 			'objects': 'only-multiline',
 			'functions': 'ignore'
 		}],
 		'func-names': [0],
-		'function-paren-newline': [0],
-		'import/prefer-default-export': [0],
 		'indent': [1, 'tab', {
 			'SwitchCase': 1
 		}],
-		'linebreak-style': [0],
 		'lines-between-class-members': [1],
 		'max-len': [0],
-		'no-control-regex': [0],
+		'newline-per-chained-call': [0, { 'ignoreChainWithDepth': 2 }],
 		'no-mixed-operators': [0],
 		'no-nested-ternary': [0],
-		'no-param-reassign': [2, { 'props': false }],
+		'no-param-reassign': [0], // TODO: enable this check
 		'no-plusplus': [0],
-		'no-prototype-builtins': [0],
-		'no-restricted-syntax': [0],
+		'no-prototype-builtins': [0], // TODO: enable this check
+		'no-restricted-syntax': [0], // TODO: enable this check
 		'no-tabs': [0],
 		'no-underscore-dangle': [0],
 		'no-unused-vars': [1],
 		'no-useless-escape': [1],
 		'operator-linebreak': [0],
+		'space-before-function-paren': [2, 'never'],
 
 		// Plugin: Import
 		'import/no-cycle': [0],
+		'import/prefer-default-export': [0],
 
 		// Plugin: React
 		'react/destructuring-assignment': [0],
 		'react/jsx-indent': [1, 'tab'],
 		'react/jsx-indent-props': [1, 'tab'],
+		'react/no-access-state-in-setstate': [0], // TODO: enable this check
 		'react/no-danger': [0],
 		'react/prop-types': [0],
 

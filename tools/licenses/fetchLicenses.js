@@ -11,6 +11,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+/* eslint import/no-extraneous-dependencies: 0 */
+/* eslint no-console: 0 */
+
 // dependencies
 const jsonfile = require('jsonfile');
 const checker = require('license-checker');
