@@ -13,7 +13,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import URLSearchParams from 'url-search-params';
 import Tabs from './content/Tabs';
 import Tab from './content/Tab';
 import Overview from './Overview';

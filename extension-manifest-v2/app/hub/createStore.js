@@ -39,7 +39,6 @@ const reducer = combineReducers({
 
 /**
  * Build store using combined reducers and middleware
- * @return {[type]} [description]
  * @return {Object}
  * @memberof HubReactStore
  */

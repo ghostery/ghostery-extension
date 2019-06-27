@@ -209,17 +209,17 @@ class Header extends React.Component {
 		const backArrowAndGhostieLogo = (
 			<span className="header-logo">
 				<Link to={this.determineBackPath()}>
-					<ReactSVG path="/app/images/panel/header-back-arrow.svg" className={headerArrowClasses} />
+					<ReactSVG src="/app/images/panel/header-back-arrow.svg" className={headerArrowClasses} />
 				</Link>
-				<ReactSVG path="/app/images/panel/header-logo-icon.svg" className="logo-icon" />
+				<ReactSVG src="/app/images/panel/header-logo-icon.svg" className="logo-icon" />
 			</span>
 		);
 
 		const plusUpgradeBannerOrSubscriberBadgeLogolink = (
 			<div className={badgeClasses} onClick={this.clickUpgradeBannerOrGoldPlusIcon}>
 				{
-					(subscriber && <ReactSVG path="/app/images/panel/gold-plus-icon-expanded-view.svg" />) ||
-					<ReactSVG path="/app/images/panel/green-upgrade-banner-expanded-view.svg" />
+					(subscriber && <ReactSVG src="/app/images/panel/gold-plus-icon-expanded-view.svg" />) ||
+					<ReactSVG src="/app/images/panel/green-upgrade-banner-expanded-view.svg" />
 				}
 			</div>
 		);
