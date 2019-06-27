@@ -14,7 +14,7 @@
  * @namespace LicenseClasses
  */
 import React from 'react';
-import Markdown from 'react-remarkable';
+import Markdown from 'react-markdown';
 /**
  * @class Handles license entry on internal licenses.html page
  * which displays licenses for all third-party packages used by Ghostery

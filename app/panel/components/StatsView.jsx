@@ -100,14 +100,14 @@ const StatsView = (props) => {
 		<div id="content-stats">
 			<div className="stats-top-header">
 				<span className="stats-top-header-title">
-					<ReactSVG path={graphIconPath} className={`stats-top-header-icon ${view}`} />
+					<ReactSVG src={graphIconPath} className={`stats-top-header-icon ${view}`} />
 					{graphTitle}
 				</span>
 				<span className={resetStatsButton} onClick={resetStats}>
 					{t('panel_stats_reset')}
 					{!demo && (
 						<div className="hs-tooltip-down" data-g-tooltip={t('panel_stats_pitch_modal_tooltip')}>
-							<ReactSVG path="../../app/images/panel/info.svg" className="stats-top-header-info-icon" />
+							<ReactSVG src="../../app/images/panel/info.svg" className="stats-top-header-info-icon" />
 						</div>
 					)}
 				</span>

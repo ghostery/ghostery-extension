@@ -234,7 +234,7 @@ class Tracker extends React.Component {
 		const path = `/app/images/panel/tracker-detail-cliqz-${type}-icon.svg`;
 
 		return (
-			<ReactSVG path={path} className="trk-cliqz-stats-icon" />
+			<ReactSVG src={path} className="trk-cliqz-stats-icon" />
 		);
 	}
 	_renderCliqzCookieStat(count) { return this._renderCliqzStat(count, 'cookie'); }
