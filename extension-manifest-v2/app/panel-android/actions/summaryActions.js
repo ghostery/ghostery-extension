@@ -148,7 +148,7 @@ export function resetTrustRestrictPause(state) {
 
 	if (isTrusted) {
 		return handleTrustButtonClick({ state });
-	} else if (isRestricted) {
+	} if (isRestricted) {
 		return handleRestrictButtonClick({ state });
 	}
 

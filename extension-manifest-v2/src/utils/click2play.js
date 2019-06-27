@@ -190,7 +190,7 @@ function _getHubspotFormSelector(url) {
 	// hs_reqwest_0 - function which will be called on the client after the request
 	//
 	// hutk=941df50e9277ee76755310cd78647a08 -is user-specific (same every session)
-	const tokens = url.substr(8).split(/\/|\&|\?|\#|\=/ig);
+	const tokens = url.substr(8).split(/\/|\&|\?|\#|\=/ig); // eslint-disable-line no-useless-escape
 	return `form[id="hsForm_${tokens[5]}"]`;
 }
 

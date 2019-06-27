@@ -20,30 +20,28 @@ import { ToggleSlider } from '../BuildingBlocks';
  * It allows to switch between available Ghostery themes. Right now it handles just one theme. Hence - slider.
  * @memberOf SettingsComponents
  */
-const SubscriptionThemes = props =>
-	// const { subscriptionData } = props;
-	(
-		<div className="content-subscription s-tabs-panel">
-			<div className="row">
-				<div className="columns column-subscription">
-					<h1>{ t('subscription_themes_title') }</h1>
-					<div>
-						<span className="flex-container align-middle themes-slider-container">
-							<span className="themes-slider-label">
-								{t('subscription_midnight_theme')}
-							</span>
-							<ToggleSlider
-								className="themes-slider"
-								isChecked={props.isChecked}
-								onChange={props.toggleThemes}
-							/>
-							<div className="s-tooltip-down" data-g-tooltip={t('subscription_themes_tooltip')}>
-								<img src="../../app/images/panel/icon-information-tooltip.svg" className="s-question" />
-							</div>
+const SubscriptionThemes = props => (
+	<div className="content-subscription s-tabs-panel">
+		<div className="row">
+			<div className="columns column-subscription">
+				<h1>{ t('subscription_themes_title') }</h1>
+				<div>
+					<span className="flex-container align-middle themes-slider-container">
+						<span className="themes-slider-label">
+							{t('subscription_midnight_theme')}
 						</span>
-					</div>
+						<ToggleSlider
+							className="themes-slider"
+							isChecked={props.isChecked}
+							onChange={props.toggleThemes}
+						/>
+						<div className="s-tooltip-down" data-g-tooltip={t('subscription_themes_tooltip')}>
+							<img src="../../app/images/panel/icon-information-tooltip.svg" className="s-question" />
+						</div>
+					</span>
 				</div>
 			</div>
 		</div>
-	);
+	</div>
+);
 export default SubscriptionThemes;

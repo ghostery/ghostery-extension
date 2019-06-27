@@ -22,6 +22,7 @@ class GhosteryModule extends Module {
 	get WindowModule() {
 		return class {
 			init() {}
+
 			unload() {}
 		};
 	}

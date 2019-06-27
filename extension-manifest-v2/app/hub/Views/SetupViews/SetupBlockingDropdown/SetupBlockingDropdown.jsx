@@ -62,7 +62,7 @@ class SetupBlockingDropdown extends Component {
 	/**
 	 * Debounce the hide alert function after 3 seconds
 	 */
-	_hideToastDebounce = debounce(this._hideToast, 3000)
+	_hideToastDebounce = debounce(this._hideToast, 3000) // eslint-disable-line react/sort-comp
 
 	/**
 	 * React's required render function. Returns JSX

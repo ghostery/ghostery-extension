@@ -99,14 +99,16 @@ class Login extends React.Component {
 						<form onSubmit={this.handleSubmit}>
 							<div id="login-email" className={(emailError ? 'panel-error' : '')}>
 								<label htmlFor="login-input-email">
-									{ t('email_field_label') }<span className="asterisk">*</span>
+									{ t('email_field_label') }
+									<span className="asterisk">*</span>
 									<input onChange={this.handleInputChange} value={email} id="login-input-email" name="email" pattern=".{1,}" autoComplete="off" type="text" />
 								</label>
 								<p className="warning">{ t('invalid_email_login') }</p>
 							</div>
 							<div id="login-password" className={(passwordError ? 'panel-error' : '')}>
 								<label htmlFor="login-input-password">
-									{ t('password_field_label') }<span className="asterisk">*</span>
+									{ t('password_field_label') }
+									<span className="asterisk">*</span>
 									<input onChange={this.handleInputChange} value={password} id="login-input-password" name="password" pattern=".{1,}" type="password" />
 								</label>
 								<p className="warning">{ t('password_field_label_required') }</p>

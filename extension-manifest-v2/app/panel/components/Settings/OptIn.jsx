@@ -29,7 +29,10 @@ const OptIn = (props) => {
 			<div className="row">
 				<div className="columns">
 					<h3>{ t('settings_support_ghostery') }</h3>
-					<h5>{ t('settings_support_ghostery_by') }:</h5>
+					<h5>
+						{ t('settings_support_ghostery_by') }
+:
+					</h5>
 					<div className="s-option-group">
 						<div className="s-square-checkbox">
 							<input type="checkbox" id="settings-share-usage" name="enable_metrics" defaultChecked={settingsData.enable_metrics} onClick={props.toggleCheckbox} />
@@ -41,7 +44,7 @@ const OptIn = (props) => {
 							</div>
 						</div>
 					</div>
-					{!IS_CLIQZ &&
+					{!IS_CLIQZ && (
 						<div>
 							<div className="s-option-group" id="human-web-section">
 								<div className="s-square-checkbox">
@@ -66,7 +69,7 @@ const OptIn = (props) => {
 								</div>
 							</div>
 						</div>
-					}
+					)}
 				</div>
 			</div>
 		</div>

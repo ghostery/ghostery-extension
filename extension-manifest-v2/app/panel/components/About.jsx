@@ -32,6 +32,7 @@ class About extends React.Component {
 		});
 		window.close();
 	}
+
 	/**
 	 * Render About panel.
 	 * @return {ReactComponent}   ReactComponent instance

@@ -11,14 +11,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-module.exports = function (api) {
+module.exports = function(api) {
 	let presets = ['@babel/preset-react'];
 	let plugins = [
 		'@babel/plugin-proposal-class-properties',
 		'@babel/plugin-proposal-object-rest-spread',
 	];
 
-	switch(api.env()) {
+	switch (api.env()) {
 		case 'app':
 			// @TODO: Add additional plugins for './app' dir as needed
 			break;

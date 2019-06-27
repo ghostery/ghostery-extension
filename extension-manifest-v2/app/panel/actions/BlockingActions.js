@@ -74,7 +74,7 @@ export function updateCategoryBlocked(data) {
  * @return {Object} dispatch
  */
 export function updateTrackerBlocked(data) {
-	return function (dispatch, getState) {
+	return function(dispatch, getState) {
 		const { paused_blocking } = getState().summary;
 		const { sitePolicy } = getState().summary;
 		dispatch({
@@ -92,7 +92,7 @@ export function updateTrackerBlocked(data) {
  * @return {Object} dispatch
  */
 export function updateTrackerTrustRestrict(data) {
-	return function (dispatch, getState) {
+	return function(dispatch, getState) {
 		// use redux-thunk to get pageHost from summary
 		const { pageHost } = getState().summary;
 		dispatch({

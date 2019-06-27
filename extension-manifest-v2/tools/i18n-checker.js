@@ -11,8 +11,13 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+/* eslint import/no-extraneous-dependencies: 0 */
+/* eslint no-console: 0 */
+
 console.time('i18n-checker');
+
 const fs = require('fs-extra');
+const jsonfile = require('jsonfile');
 const oboe = require('oboe');
 
 // Constants
@@ -31,28 +36,8 @@ const MALFORMED_PLACEHOLDERS_FILE = './tools/i18n_results/malformed_placeholders
 // Empty tools/i18n_results directory
 fs.emptyDirSync('./tools/i18n_results');
 
-// Main
-gatherFilePaths().then(paths => {
-	return validateJson(paths);
-}).then(paths => {
-	return Promise.all([
-		findDuplicates(paths),
-		findMissingKeys(paths),
-		findExtraKeys(paths),
-		findMalformedKeys(paths),
-		findMissingPlaceholders(paths),
-		findExtraPlaceholders(paths),
-		findMalformedPlaceholders(paths)
-	]);
-}).catch(() => {
-	console.log('Errors found. Fix the files and run `node tools/i18n-checker` to re-validate locale files.');
-}).then(result => {
-	console.timeEnd('i18n-checker');
-});
-
 /**
  * Gathers the paths of the locale files
- * @params none
  * @const  string  LOCALES_FOLDER                The folder we search for locales
  * @const  array   GATHER_FILE_PATHS_EXCEPTIONS  Files in the LOCALE_FOLDER that we should skip
  * @const  int     LANG_FILES_COUNT              The number of locales we should find in LOCALES_FOLDER
@@ -61,27 +46,27 @@ gatherFilePaths().then(paths => {
  */
 function gatherFilePaths() {
 	return new Promise((resolve, reject) => {
-		let paths = [];
+		const paths = [];
 		fs.readdir(LOCALES_FOLDER, (err, files) => {
 			let langFilesCounted = 0;
-			files.forEach(locale => {
+			files.forEach((locale) => {
 				// Validate that the locale is named correctly, eg: en_GB
-				if (!/^[a-z]{2}(\_[A-Z]{2})?$/.test(locale)) {
+				if (!/^[a-z]{2}(_[A-Z]{2})?$/.test(locale)) {
 					if (GATHER_FILE_PATHS_EXCEPTIONS.indexOf(locale) === -1) {
 						console.log('Error: "%s" is not a valid locale', locale);
 					}
 					return;
 				}
-				langFilesCounted = langFilesCounted + 1;
-				paths.push(LOCALES_FOLDER + '/' + locale + '/messages.json');
+				langFilesCounted += 1;
+				paths.push(`${LOCALES_FOLDER}/${locale}/messages.json`);
 			});
 			if (langFilesCounted === LANG_FILES_COUNT) {
 				console.log('Correctly found %d of %d locale files.',
-							LANG_FILES_COUNT, langFilesCounted);
+					LANG_FILES_COUNT, langFilesCounted);
 				resolve(paths);
 			} else {
 				console.log('Error: there should be %d locale files, only scanned %d.',
-						LANG_FILES_COUNT, langFilesCounted);
+					LANG_FILES_COUNT, langFilesCounted);
 				reject();
 			}
 		});
@@ -97,10 +82,10 @@ function gatherFilePaths() {
 function validateJson(paths) {
 	return new Promise((resolve, reject) => {
 		let hasError = false;
-		paths.forEach(path => {
+		paths.forEach((path) => {
 			try {
-				require('.' + path);
-			} catch(err) {
+				jsonfile.readFileSync(`${path}`);
+			} catch (err) {
 				hasError = true;
 				console.log('Error: file "%s" is not valid JSON.', path);
 			}
@@ -115,8 +100,28 @@ function validateJson(paths) {
 }
 
 /**
+ * Outputs the contents of an object to a .txt file.
+ * @param  string fileName       The location of the file we will output to
+ * @param  object resultsObject  An object with the data we will output
+ * @return none
+ */
+function recordResults(fileName, resultsObject) {
+	const stream = fs.createWriteStream(fileName);
+	stream.once('open', () => {
+		Object.keys(resultsObject).forEach((key) => {
+			stream.write(`${key}[${resultsObject[key].length}]:\n`);
+			resultsObject[key].forEach((duplicate) => {
+				stream.write(`${duplicate}\n`);
+			});
+			stream.write('\n');
+		});
+		stream.end();
+	});
+}
+
+/**
  * Checks for duplicates in all the locale files. Writes found duplicates to a file
- * @params array   paths                  An array of strings denoting the paths to all the locale files
+ * @param array   paths                  An array of strings denoting the paths to all the locale files
  * @const  string  DUPLICATE_TOKENS_FILE  The file where we should write the found duplicates
  * @const  int     LANG_FILES_COUNT       The number of we are searching over
  * @return Promise                        Resolves if no duplicates were found,
@@ -126,13 +131,13 @@ function findDuplicates(paths) {
 	return new Promise((resolve, reject) => {
 		let langFilesCounted = 0;
 		let hasDuplicates = false;
-		let duplicates = {};
-		paths.forEach(path => {
-			let foundKeys = {};
-			let locale = path.match(/_locales\/(.*)\/messages.json/)[1];
+		const duplicates = {};
+		paths.forEach((path) => {
+			const foundKeys = {};
+			const locale = path.match(/_locales\/(.*)\/messages.json/)[1];
 			duplicates[locale] = [];
 			oboe(fs.createReadStream(path)).node('{message}', (val, keys) => {
-				let key = keys[0];
+				const key = keys[0];
 				if (foundKeys.hasOwnProperty(key)) {
 					hasDuplicates = true;
 					duplicates[locale].push(key);
@@ -140,7 +145,7 @@ function findDuplicates(paths) {
 				}
 				foundKeys[key] = true;
 			}).done(() => {
-				langFilesCounted = langFilesCounted + 1;
+				langFilesCounted += 1;
 				if (langFilesCounted === LANG_FILES_COUNT) {
 					if (hasDuplicates) {
 						console.log('Error: duplicate tokens were found. See them in `%s`.', DUPLICATE_TOKENS_FILE);
@@ -158,7 +163,7 @@ function findDuplicates(paths) {
 
 /**
  * Checks for missing tokens in all the locale files. Writes the list of missing tokens to a file
- * @params array   paths                An array of strings denoting the paths to all the locale files
+ * @param array   paths                An array of strings denoting the paths to all the locale files
  * @const  string  DEFAULT_LOCALE_PATH  The location of the default locale JSON file
  * @const  string  MISSING_TOKENS_FILE  The file where we should write the missing tokens
  * @return Promise                      Resolves if no missing tokens were found,
@@ -166,18 +171,17 @@ function findDuplicates(paths) {
  */
 function findMissingKeys(paths) {
 	return new Promise((resolve, reject) => {
-		let defaultLocaleJson = require(DEFAULT_LOCALE_PATH);
+		const defaultLocaleJson = jsonfile.readFileSync(DEFAULT_LOCALE_PATH);
 		let hasMissingKeys = false;
-		let missingKeys = {};
-		paths.forEach(path => {
-			let localeJson = require('.' + path);
-			let locale = path.match(/_locales\/(.*)\/messages.json/)[1];
+		const missingKeys = {};
+		paths.forEach((path) => {
+			const localeJson = jsonfile.readFileSync(`.${path}`);
+			const locale = path.match(/_locales\/(.*)\/messages.json/)[1];
 			missingKeys[locale] = [];
-			Object.keys(defaultLocaleJson).forEach(key => {
+			Object.keys(defaultLocaleJson).forEach((key) => {
 				if (!localeJson.hasOwnProperty(key)) {
 					hasMissingKeys = true;
 					missingKeys[locale].push(key);
-					return;
 				}
 			});
 		});
@@ -194,7 +198,7 @@ function findMissingKeys(paths) {
 
 /**
  * Checks for extra tokens in all the locale files. Writes the list of extra tokens to a file
- * @params array   paths                An array of strings denoting the paths to all the locale files
+ * @param array   paths                An array of strings denoting the paths to all the locale files
  * @const  string  DEFAULT_LOCALE_PATH  The location of the default locale JSON file
  * @const  string  EXTRA_TOKENS_FILE    The file where we should write the extra tokens
  * @return Promise                      Resolves if no extra tokens were found,
@@ -202,18 +206,17 @@ function findMissingKeys(paths) {
  */
 function findExtraKeys(paths) {
 	return new Promise((resolve, reject) => {
-		let defaultLocaleJson = require(DEFAULT_LOCALE_PATH);
+		const defaultLocaleJson = jsonfile.readFileSync(DEFAULT_LOCALE_PATH);
 		let hasExtraKeys = false;
-		let extraKeys = {};
-		paths.forEach(path => {
-			let localeJson = require('.' + path);
-			let locale = path.match(/_locales\/(.*)\/messages.json/)[1];
+		const extraKeys = {};
+		paths.forEach((path) => {
+			const localeJson = jsonfile.readFileSync(`.${path}`);
+			const locale = path.match(/_locales\/(.*)\/messages.json/)[1];
 			extraKeys[locale] = [];
-			Object.keys(localeJson).forEach(key => {
+			Object.keys(localeJson).forEach((key) => {
 				if (!defaultLocaleJson.hasOwnProperty(key)) {
 					hasExtraKeys = true;
 					extraKeys[locale].push(key);
-					return;
 				}
 			});
 		});
@@ -230,7 +233,7 @@ function findExtraKeys(paths) {
 
 /**
  * Checks for malformed token key objects in all the locale files. Writes the list of malformed tokens to a file
- * @params array   paths                  An array of strings denoting the paths to all the locale files
+ * @param array   paths                  An array of strings denoting the paths to all the locale files
  * @const  string  MALFORMED_TOKENS_FILE  The file where we should write the malformed tokens
  * @return Promise                        Resolves if no malformed tokens were found,
  *                                        Rejects otherwise
@@ -238,16 +241,15 @@ function findExtraKeys(paths) {
 function findMalformedKeys(paths) {
 	return new Promise((resolve, reject) => {
 		let hasMalformedKeys = false;
-		let malformedKeys = {};
-		paths.forEach(path => {
-			let localeJson = require('.' + path);
-			let locale = path.match(/_locales\/(.*)\/messages.json/)[1];
+		const malformedKeys = {};
+		paths.forEach((path) => {
+			const localeJson = jsonfile.readFileSync(`.${path}`);
+			const locale = path.match(/_locales\/(.*)\/messages.json/)[1];
 			malformedKeys[locale] = [];
-			Object.keys(localeJson).forEach(key => {
+			Object.keys(localeJson).forEach((key) => {
 				if (!localeJson[key].hasOwnProperty('message')) {
 					hasMalformedKeys = true;
 					malformedKeys[locale].push(key);
-					return;
 				}
 			});
 		});
@@ -264,7 +266,7 @@ function findMalformedKeys(paths) {
 
 /**
  * Checks for missing placeholders in all the locale files. Writes the list of missing placeholders to a file
- * @params array   paths                      An array of strings denoting the paths to all the locale files
+ * @param array   paths                      An array of strings denoting the paths to all the locale files
  * @const  string  DEFAULT_LOCALE_PATH        The location of the default locale JSON file
  * @const  string  MISSING_PLACEHOLDERS_FILE  The file where we should write the extra tokens
  * @return Promise                            Resolves if no extra tokens were found,
@@ -272,24 +274,24 @@ function findMalformedKeys(paths) {
  */
 function findMissingPlaceholders(paths) {
 	return new Promise((resolve, reject) => {
-		let defaultLocaleJson = require(DEFAULT_LOCALE_PATH);
+		const defaultLocaleJson = jsonfile.readFileSync(DEFAULT_LOCALE_PATH);
 		let hasMissingPlaceholders = false;
-		let missingPlaceholders = {};
-		paths.forEach(path => {
-			let localeJson = require('.' + path);
-			let locale = path.match(/_locales\/(.*)\/messages.json/)[1];
+		const missingPlaceholders = {};
+		paths.forEach((path) => {
+			const localeJson = jsonfile.readFileSync(`.${path}`);
+			const locale = path.match(/_locales\/(.*)\/messages.json/)[1];
 			missingPlaceholders[locale] = [];
-			Object.keys(defaultLocaleJson).forEach(key => {
+			Object.keys(defaultLocaleJson).forEach((key) => {
 				if (defaultLocaleJson[key].hasOwnProperty('placeholders')) {
 					if (!localeJson[key] || !localeJson[key].hasOwnProperty('placeholders')) {
 						hasMissingPlaceholders = true;
-						missingPlaceholders[locale].push(key + ': missing ' + Object.keys(defaultLocaleJson[key]['placeholders']).length + ' placeholder(s)');
+						missingPlaceholders[locale].push(`${key}: missing ${Object.keys(defaultLocaleJson[key].placeholders).length} placeholder(s)`);
 						return;
 					}
-					Object.keys(defaultLocaleJson[key]['placeholders']).forEach(placeholder => {
-						if (!localeJson[key]['placeholders'][placeholder]) {
+					Object.keys(defaultLocaleJson[key].placeholders).forEach((placeholder) => {
+						if (!localeJson[key].placeholders[placeholder]) {
 							hasMissingPlaceholders = true;
-							missingPlaceholders[locale].push(key + ': ' + placeholder);
+							missingPlaceholders[locale].push(`${key}: ${placeholder}`);
 						}
 					});
 				}
@@ -308,7 +310,7 @@ function findMissingPlaceholders(paths) {
 
 /**
  * Checks for extra placeholders in all the locale files. Writes the list of extra placeholders to a file
- * @params array   paths                    An array of strings denoting the paths to all the locale files
+ * @param array   paths                    An array of strings denoting the paths to all the locale files
  * @const  string  DEFAULT_LOCALE_PATH      The location of the default locale JSON file
  * @const  string  EXTRA_PLACEHOLDERS_FILE  The file where we should write the extra tokens
  * @return Promise                          Resolves if no extra tokens were found,
@@ -316,24 +318,24 @@ function findMissingPlaceholders(paths) {
  */
 function findExtraPlaceholders(paths) {
 	return new Promise((resolve, reject) => {
-		let defaultLocaleJson = require(DEFAULT_LOCALE_PATH);
+		const defaultLocaleJson = jsonfile.readFileSync(DEFAULT_LOCALE_PATH);
 		let hasExtraPlaceholders = false;
-		let extraPlaceholders = {};
-		paths.forEach(path => {
-			let localeJson = require('.' + path);
-			let locale = path.match(/_locales\/(.*)\/messages.json/)[1];
+		const extraPlaceholders = {};
+		paths.forEach((path) => {
+			const localeJson = jsonfile.readFileSync(`.${path}`);
+			const locale = path.match(/_locales\/(.*)\/messages.json/)[1];
 			extraPlaceholders[locale] = [];
-			Object.keys(localeJson).forEach(key => {
+			Object.keys(localeJson).forEach((key) => {
 				if (localeJson[key].hasOwnProperty('placeholders')) {
 					if (!defaultLocaleJson[key] || !defaultLocaleJson[key].hasOwnProperty('placeholders')) {
 						hasExtraPlaceholders = true;
-						extraPlaceholders[locale].push(key + ': has ' + Object.keys(localeJson[key]['placeholders']).length + ' extra placeholder(s)');
+						extraPlaceholders[locale].push(`${key}: has ${Object.keys(localeJson[key].placeholders).length} extra placeholder(s)`);
 						return;
 					}
-					Object.keys(localeJson[key]['placeholders']).forEach(placeholder => {
-						if (!defaultLocaleJson[key]['placeholders'][placeholder]) {
+					Object.keys(localeJson[key].placeholders).forEach((placeholder) => {
+						if (!defaultLocaleJson[key].placeholders[placeholder]) {
 							hasExtraPlaceholders = true;
-							extraPlaceholders[locale].push(key + ': ' + placeholder);
+							extraPlaceholders[locale].push(`${key}: ${placeholder}`);
 						}
 					});
 				}
@@ -352,7 +354,7 @@ function findExtraPlaceholders(paths) {
 
 /**
  * Checks for malformed placeholders in all the locale files. Writes the list of extra placeholders to a file
- * @params array   paths                        An array of strings denoting the paths to all the locale files
+ * @param array   paths                        An array of strings denoting the paths to all the locale files
  * @const  string  MALFORMED_PLACEHOLDERS_FILE  The file where we should write the extra tokens
  * @return Promise                              Resolves if no extra tokens were found,
  *                                              Rejects otherwise
@@ -360,32 +362,30 @@ function findExtraPlaceholders(paths) {
 function findMalformedPlaceholders(paths) {
 	return new Promise((resolve, reject) => {
 		let hasMalformedPlaceholders = false;
-		let malformedPlaceholders = [];
-		paths.forEach(path => {
-			let localeJson = require('.' + path);
-			let locale = path.match(/_locales\/(.*)\/messages.json/)[1];
+		const malformedPlaceholders = [];
+		paths.forEach((path) => {
+			const localeJson = jsonfile.readFileSync(`.${path}`);
+			const locale = path.match(/_locales\/(.*)\/messages.json/)[1];
 			malformedPlaceholders[locale] = [];
-			Object.keys(localeJson).forEach(key => {
-				let message = localeJson[key].message || '';
-				let placeholders = localeJson[key].placeholders || {};
-				let matchedPlaceholders = message.match(/\$[A-Z_]+\$/gi) || []; // Matches $PLACE_HOLDER$ in the message
+			Object.keys(localeJson).forEach((key) => {
+				const message = localeJson[key].message || '';
+				const placeholders = localeJson[key].placeholders || {};
+				const matchedPlaceholders = message.match(/\$[A-Z_]+\$/gi) || []; // Matches $PLACE_HOLDER$ in the message
 				if (matchedPlaceholders) {
-					matchedPlaceholders.forEach(placeholder => {
-						placeholder = placeholder.toLowerCase().slice(1, -1);
+					matchedPlaceholders.forEach((p) => {
+						const placeholder = p.toLowerCase().slice(1, -1);
 						if (!placeholders.hasOwnProperty(placeholder)) {
 							hasMalformedPlaceholders = true;
-							malformedPlaceholders[locale].push(key + ': needs placeholder "' + placeholder + '"');
-							return;
+							malformedPlaceholders[locale].push(`${key}: needs placeholder "${placeholder}"`);
 						}
 					});
 				}
 				if (placeholders) {
-					Object.keys(placeholders).forEach(placeholder => {
-						placeholder = '$' + placeholder.toUpperCase() + '$';
+					Object.keys(placeholders).forEach((p) => {
+						const placeholder = `$${p.toUpperCase()}$`;
 						if (matchedPlaceholders.indexOf(placeholder) === -1) {
 							hasMalformedPlaceholders = true;
-							malformedPlaceholders[locale].push(key + ': expects placeholder "' + placeholder + '" in message');
-							return;
+							malformedPlaceholders[locale].push(`${key}: expects placeholder "${placeholder}" in message`);
 						}
 					});
 				}
@@ -402,22 +402,17 @@ function findMalformedPlaceholders(paths) {
 	});
 }
 
-/**
- * Outputs the contents of an object to a .txt file.
- * @param  string fileName       The location of the file we will output to
- * @param  object resultsObject  An object with the data we will output
- * @return none
- */
-function recordResults(fileName, resultsObject) {
-	var stream = fs.createWriteStream(fileName);
-	stream.once('open', () => {
-		Object.keys(resultsObject).forEach(key => {
-			stream.write(key + '[' + resultsObject[key].length + ']:\n');
-			resultsObject[key].forEach(duplicate => {
-				stream.write(duplicate + '\n');
-			});
-			stream.write('\n')
-		});
-		stream.end();
-	});
-}
+// Main
+gatherFilePaths().then(paths => validateJson(paths)).then(paths => Promise.all([
+	findDuplicates(paths),
+	findMissingKeys(paths),
+	findExtraKeys(paths),
+	findMalformedKeys(paths),
+	findMissingPlaceholders(paths),
+	findExtraPlaceholders(paths),
+	findMalformedPlaceholders(paths)
+])).catch(() => {
+	console.log('Errors found. Fix the files and run `node tools/i18n-checker` to re-validate locale files.');
+}).then(() => {
+	console.timeEnd('i18n-checker');
+});
