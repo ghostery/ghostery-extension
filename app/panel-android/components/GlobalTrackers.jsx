@@ -17,10 +17,6 @@ import Accordions from './content/Accordions';
 import DotsMenu from './content/DotsMenu';
 
 export default class GlobalTrackers extends React.Component {
-	get categories() {
-		return this.props.categories;
-	}
-
 	actions = [
 		{
 			id: 'blockAllGlobal',
@@ -57,7 +53,11 @@ export default class GlobalTrackers extends React.Component {
 				});
 			},
 		}
-	]
+	];
+
+	get categories() {
+		return this.props.categories;
+	}
 
 	render() {
 		return (

@@ -83,7 +83,8 @@ class ForgotPassword extends React.Component {
 							</h4>
 							<div id="forgot-email" className={(emailError ? 'panel-error invalid-email' : '')}>
 								<label htmlFor="forgot-input-email">
-									{ t('email_field_label') }<span className="asterisk">*</span>
+									{ t('email_field_label') }
+									<span className="asterisk">*</span>
 									<input onChange={this.handleInputChange} value={email} id="forgot-input-email" type="text" name="email" pattern=".{1,}" autoComplete="off" required />
 								</label>
 								<p className="invalid-email warning">

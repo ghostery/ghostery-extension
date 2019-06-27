@@ -378,6 +378,7 @@ class Metrics {
 			}
 		});
 	}
+
 	/**
 	 * Calculate days since the last daily active ping.
 	 *
@@ -391,6 +392,7 @@ class Metrics {
 		}
 		return -1;
 	}
+
 	/**
 	 * Calculate days since the last daily engaged ping.
 	 *
@@ -404,6 +406,7 @@ class Metrics {
 		}
 		return -1;
 	}
+
 	/**
 	 * Get the Active Velocity
 	 * @private
@@ -417,6 +420,7 @@ class Metrics {
 		const today = Math.floor(Number(new Date().getTime()) / 86400000);
 		return active_daily_velocity.filter(el => el > today - 7).length;
 	}
+
 	/**
 	 * Get the Engaged Velocity
 	 * @private
@@ -430,6 +434,7 @@ class Metrics {
 		const today = Math.floor(Number(new Date().getTime()) / 86400000);
 		return engaged_daily_velocity.filter(el => el > today - 7).length;
 	}
+
 	/**
 	 * Get the Subscription Type
 	 * @return {string} Subscription Name
@@ -444,6 +449,7 @@ class Metrics {
 		}
 		return subscriptions.productName.toUpperCase().replace(' ', '_');
 	}
+
 	/**
 	 * Get the number of Rewards shown to the user.
 	 *
@@ -455,13 +461,14 @@ class Metrics {
 		const numShown = rewards.totalOffersSeen;
 		if (numShown >= 6) {
 			return '6+';
-		} else if (numShown >= 2) {
+		} if (numShown >= 2) {
 			return '2-5';
-		} else if (numShown === 1) {
+		} if (numShown === 1) {
 			return '1';
 		}
 		return '0';
 	}
+
 	/**
 	 * Get the current Reward Id.
 	 *
@@ -473,6 +480,7 @@ class Metrics {
 		const currentOffer = rewards.currentOffer || { offer_id: 'no_id' };
 		return currentOffer.offer_id;
 	}
+
 	/**
 	 * Get the Int associated with the Current Theme.
 	 * @private
@@ -485,6 +493,7 @@ class Metrics {
 		}
 		return 0;
 	}
+
 	/**
 	 * Calculate remaining scheduled time for a ping
 	 *
@@ -504,6 +513,7 @@ class Metrics {
 		const frequency_ago = now - FREQUENCIES[frequency];
 		return (last === null) ? 0 : (last - frequency_ago);
 	}
+
 	/**
 	 * Decide if the ping should be sent
 	 *
@@ -534,6 +544,7 @@ class Metrics {
 		}
 		return false;
 	}
+
 	/**
 	 * Record Install event
 	 * @private

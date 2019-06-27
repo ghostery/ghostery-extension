@@ -22,7 +22,7 @@ export function setToast(data) {
 }
 
 export function sendPing(actionData) {
-	return function (dispatch) {
+	return function(dispatch) {
 		return sendMessageInPromise(SEND_PING, actionData).then((data) => {
 			dispatch({
 				type: SEND_PING,

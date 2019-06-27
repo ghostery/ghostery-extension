@@ -20,7 +20,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 // constants
 const BUILD_DIR = path.resolve(__dirname, 'dist');
-const CLIQZ_DIR = path.resolve(__dirname, 'cliqz');
 const SRC_DIR = path.resolve(__dirname, 'src');
 const SHARED_COMP_DIR = path.resolve(__dirname, 'app/shared-components');
 const PANEL_DIR = path.resolve(__dirname, 'app/panel');

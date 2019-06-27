@@ -447,7 +447,7 @@ function handleClick2Play(name, message, tab_id, callback) {
 			});
 			callback();
 			return true;
-		} else if (message.action === 'once') {
+		} if (message.action === 'once') {
 			c2pDb.allowOnce(message.app_ids, tab_id);
 			callback();
 			return true;
@@ -469,7 +469,7 @@ function handleBlockedRedirect(name, message, tab_id, callback) {
 	if (name === 'getBlockedRedirectData') {
 		callback(globals.BLOCKED_REDIRECT_DATA);
 		return true;
-	} else if (name === 'allow_always_page_c2p_tracker') {
+	} if (name === 'allow_always_page_c2p_tracker') {
 		// Allow always - unblock this tracker
 		// Note: if the site is restricted, the 'allow always' button will not be shown
 		const tab_host = tabInfo.getTabInfo(tab_id, 'host');
@@ -742,12 +742,12 @@ function onMessageHandler(request, sender, callback) {
 	if (IS_EDGE && messageId) {
 		if (tab_id) {
 			// eslint-disable-next-line no-param-reassign
-			callback = function (result) {
+			callback = function(result) {
 				utils.sendMessage(tab_id, messageId, result);
 			};
 		} else {
 			// eslint-disable-next-line no-param-reassign
-			callback = function (result) {
+			callback = function(result) {
 				utils.sendMessageToPanel(messageId, result);
 			};
 		}
@@ -757,25 +757,25 @@ function onMessageHandler(request, sender, callback) {
 	if (origin === 'account_pages') {
 		// Account pages
 		return handleAccountPages(name, callback);
-	} else if (origin === 'purplebox') {
+	} if (origin === 'purplebox') {
 		// Purplebox script events
 		return handlePurplebox(name, message, tab_id, callback);
-	} else if (origin === 'ghostery_dot_com') {
+	} if (origin === 'ghostery_dot_com') {
 		// Ghostery.com and apps pages
 		return handleGhosteryDotCom(name, message, tab_id);
-	} else if (origin === 'page_performance' && name === 'recordPageInfo') {
+	} if (origin === 'page_performance' && name === 'recordPageInfo') {
 		tabInfo.setTabInfo(tab_id, 'pageTiming', message.performanceAPI);
 		panelData.postPageLoadTime(tab_id);
 		return false;
-	} else if (origin === 'notifications') {
+	} if (origin === 'notifications') {
 		return handleNotifications(name, message, tab_id);
-	} else if (origin === 'click_to_play') {
+	} if (origin === 'click_to_play') {
 		return handleClick2Play(name, message, tab_id, callback);
-	} else if (origin === 'blocked_redirect') {
+	} if (origin === 'blocked_redirect') {
 		return handleBlockedRedirect(name, message, tab_id, callback);
-	} else if (origin === 'rewards' || origin === 'rewardsPanel') {
+	} if (origin === 'rewards' || origin === 'rewardsPanel') {
 		return handleRewards(name, message, callback);
-	} else if (origin === 'ghostery-hub') {
+	} if (origin === 'ghostery-hub') {
 		return handleGhosteryHub(name, message, callback);
 	}
 
@@ -796,27 +796,27 @@ function onMessageHandler(request, sender, callback) {
 		}
 		account.getUserSettings().catch(err => log('Failed getting user settings from getPanelData:', err));
 		return true;
-	} else if (name === 'getStats') {
+	} if (name === 'getStats') {
 		insights.action('getStatsTimeline', message.from, message.to, true, true).then((data) => {
 			callback(data);
 		});
 		return true;
-	} else if (name === 'getAllStats') {
+	} if (name === 'getAllStats') {
 		insights.action('getAllDays').then((data) => {
 			insights.action('getStatsTimeline', moment(data[0]), moment(), true, true).then((data) => {
 				callback(data);
 			});
 		});
 		return true;
-	} else if (name === 'resetStats') {
+	} if (name === 'resetStats') {
 		metrics.ping('hist_reset_stats');
 		insights.action('clearData');
 		return false;
-	} else if (name === 'setPanelData') {
+	} if (name === 'setPanelData') {
 		panelData.set(message);
 		callback();
 		return false;
-	} else if (name === 'account.getTheme') {
+	} if (name === 'account.getTheme') {
 		if (conf.current_theme !== 'default') {
 			account.getTheme(conf.current_theme)
 				.then(() => {
@@ -1139,12 +1139,12 @@ function getAntitrackingTestConfig() {
 			qsEnabled: true,
 			telemetryMode: 2,
 		};
-	} else if (abtest.hasTest('antitracking_half')) {
+	} if (abtest.hasTest('antitracking_half')) {
 		return {
 			qsEnabled: true,
 			telemetryMode: 1,
 		};
-	} else if (abtest.hasTest('antitracking_collect')) {
+	} if (abtest.hasTest('antitracking_collect')) {
 		return {
 			qsEnabled: false,
 			telemetryMode: 1,
@@ -1817,7 +1817,7 @@ function init() {
 									return account.getTheme(conf.current_theme);
 								}
 							});
-					} else if (globals.JUST_INSTALLED) {
+					} if (globals.JUST_INSTALLED) {
 						setGhosteryDefaultBlocking();
 					}
 				})

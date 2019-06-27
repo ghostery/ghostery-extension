@@ -379,9 +379,9 @@ function _fetchJson(method, url, query, extraHeaders, referrer = 'no-referrer', 
 			// check for 204 status (No Content) from CMP
 			if (response.status === 204) {
 				return false; // send back false to signal no new campaigns
-			} else if (contentType && contentType.includes('application/json')) {
+			} if (contentType && contentType.includes('application/json')) {
 				return response.json();
-			} else if (contentType && contentType.includes('text/html')) {
+			} if (contentType && contentType.includes('text/html')) {
 				return response.text();
 			}
 			return response.text();
@@ -408,7 +408,7 @@ function _fetchJson(method, url, query, extraHeaders, referrer = 'no-referrer', 
 	return new Promise(((resolve, reject) => {
 		const xhr = new XMLHttpRequest();
 
-		xhr.onload = function () {
+		xhr.onload = function() {
 			// This is called even on 404 etc, so check the status.
 			if (xhr.status >= 200 && xhr.status < 400) {
 				// check for 204 status (No Content) from CMP
@@ -435,7 +435,7 @@ function _fetchJson(method, url, query, extraHeaders, referrer = 'no-referrer', 
 		};
 
 		// Handle network errors
-		xhr.onerror = function (error) {
+		xhr.onerror = function(error) {
 			log('_fetchJson network error', error);
 			reject(new Error(error));
 		};
@@ -507,7 +507,7 @@ export function fetchLocalJSONResource(url) {
 	}
 	return new Promise(((resolve, reject) => {
 		const xhr = new XMLHttpRequest();
-		xhr.onload = function () {
+		xhr.onload = function() {
 			// This is called even on 404 etc, so check the status.
 			if (xhr.status >= 200 && xhr.status < 400) {
 				try {
@@ -524,7 +524,7 @@ export function fetchLocalJSONResource(url) {
 		};
 
 		// Handle network errors
-		xhr.onerror = function (error) {
+		xhr.onerror = function(error) {
 			log('fetchLocalJSONResource network error', error);
 			reject(new Error(error));
 		};

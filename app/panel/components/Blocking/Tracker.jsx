@@ -40,18 +40,21 @@ class Tracker extends React.Component {
 		this.clickTrackerTrust = this.clickTrackerTrust.bind(this);
 		this.clickTrackerRestrict = this.clickTrackerRestrict.bind(this);
 	}
+
 	/**
 	 * Lifecycle event.
 	 */
 	componentWillMount() {
 		this.updateTrackerClasses(this.props.tracker);
 	}
+
 	/**
 	 * Lifecycle event.
 	 */
 	componentWillReceiveProps(nextProps) {
 		this.updateTrackerClasses(nextProps.tracker);
 	}
+
 	/**
 	 * React hook used to optimise re-rendering of the list of trackers.
 	 * @param  {Object} nextProps	changed props
@@ -65,6 +68,7 @@ class Tracker extends React.Component {
 		}
 		return true;
 	}
+
 	/**
 	 * Implement handler for clicking on the tracker title
 	 * which shows/hides tracker description. On show it retrieves
@@ -81,7 +85,7 @@ class Tracker extends React.Component {
 		this.setState({ description: t('tracker_description_getting') });
 
 		sendMessageInPromise('getTrackerDescription', {
-			url: `https:\/\/${globals.APPS_SUB_DOMAIN}.ghostery.com/${this.props.language}/apps/${
+			url: `https://${globals.APPS_SUB_DOMAIN}.ghostery.com/${this.props.language}/apps/${
 				encodeURIComponent(tracker.name.replace(/\s+/g, '_').toLowerCase())}?format=json`,
 		}).then((data) => {
 			if (data) {
@@ -96,6 +100,7 @@ class Tracker extends React.Component {
 			this.setState({ description: t('tracker_description_none_found') });
 		});
 	}
+
 	/**
 	 * Set dynamic classes on .blocking-trk and save it in state.
 	 * @param  {Object} tracker    tracker object
@@ -135,6 +140,7 @@ class Tracker extends React.Component {
 			warningImageTitle: updated_title,
 		});
 	}
+
 	/**
 	 * Implement handler for clicking on the tracker global block/unblock checkbox.
 	 * Trigger action which persists new tracker blocked state and spawns
@@ -212,24 +218,27 @@ class Tracker extends React.Component {
 
 		return (
 			<div className="trk-cliqz-stats-outer-container">
-				{(oneOrMoreCookies || oneOrMoreFingerprints) &&
+				{(oneOrMoreCookies || oneOrMoreFingerprints) && (
 					<div className="trk-cliqz-stats-container">
 						{this._renderCliqzCookiesAndFingerprintsIcon()}
 						{oneOrMoreCookies && this._renderCliqzCookieStat(cliqzCookieCount)}
 						{oneOrMoreFingerprints && this._renderCliqzFingerprintStat(cliqzFingerprintCount)}
 					</div>
-				}
-				{oneOrMoreAds &&
+				)}
+				{oneOrMoreAds && (
 					<div className="trk-cliqz-stats-container">
 						{this._renderCliqzAdsIcon()}
 						{this._renderCliqzAdStat(cliqzAdCount)}
 					</div>
-				}
+				)}
 			</div>
 		);
 	}
+
 	_renderCliqzCookiesAndFingerprintsIcon() { return this._renderCliqzStatsIcon('cookies-and-fingerprints'); }
+
 	_renderCliqzAdsIcon() { return this._renderCliqzStatsIcon('ads'); }
+
 	_renderCliqzStatsIcon(type) {
 		const path = `/app/images/panel/tracker-detail-cliqz-${type}-icon.svg`;
 
@@ -237,9 +246,13 @@ class Tracker extends React.Component {
 			<ReactSVG src={path} className="trk-cliqz-stats-icon" />
 		);
 	}
+
 	_renderCliqzCookieStat(count) { return this._renderCliqzStat(count, 'cookie'); }
+
 	_renderCliqzFingerprintStat(count) { return this._renderCliqzStat(count, 'fingerprint'); }
+
 	_renderCliqzAdStat(count) { return this._renderCliqzStat(count, 'ad'); }
+
 	_renderCliqzStat(count, type) {
 		const exactlyOne = count === 1;
 		const label = exactlyOne ?
@@ -248,7 +261,11 @@ class Tracker extends React.Component {
 		const cssClass = `trk-cliqz-stat trk-cliqz-stat-${type}s-count`;
 
 		return (
-			<span className={cssClass}>{count} {label}</span>
+			<span className={cssClass}>
+				{count}
+				{' '}
+				{label}
+			</span>
 		);
 	}
 
@@ -297,7 +314,7 @@ class Tracker extends React.Component {
 									</g>
 								</svg>
 							</span>
-							<span className="t-tooltip-up-left" data-g-tooltip={this.props.tracker.ss_blocked ? t('summary_undo') : t('panel_tracker_restrict_tooltip')} >
+							<span className="t-tooltip-up-left" data-g-tooltip={this.props.tracker.ss_blocked ? t('summary_undo') : t('panel_tracker_restrict_tooltip')}>
 								<svg className="blocking-icons restrict" onClick={this.clickTrackerRestrict} width="20px" height="20px" viewBox="0 0 20 20">
 									<g transform="translate(1 1)" fill="none" fillRule="evenodd">
 										<path className="border" d="M-.5-.5h18.3v18.217H-.5z" />
@@ -311,7 +328,7 @@ class Tracker extends React.Component {
 									</g>
 								</svg>
 							</span>
-							<span className={(!this.props.tracker.ss_blocked && !this.props.tracker.ss_allowed) ? 't-tooltip-up-left' : ''} data-g-tooltip={t('panel_tracker_block_tooltip')} >
+							<span className={(!this.props.tracker.ss_blocked && !this.props.tracker.ss_allowed) ? 't-tooltip-up-left' : ''} data-g-tooltip={t('panel_tracker_block_tooltip')}>
 								<svg className="blocking-icons status" onClick={() => { if (this.props.tracker.ss_allowed || this.props.tracker.ss_blocked) { return; } this.clickTrackerStatus(); }} width="20px" height="20px" viewBox="0 0 20 20">
 									<g transform="translate(1 1)" fill="none" fillRule="evenodd">
 										<path className="border" d="M-.5-.5h18.3v18.217H-.5z" />
@@ -335,24 +352,24 @@ class Tracker extends React.Component {
 					</div>
 				</div>
 				{
-					this.state.showMoreInfo &&
-					<div className={`${!this.state.showMoreInfo ? 'hide' : ''} row trk-moreinfo`}>
-						<div className="columns">
-							<div className="trk-description">
-								{ this.state.description }
-								<div className={(!this.state.showTrackerLearnMore ? 'hide' : '')}>
-									<a target="_blank" rel="noopener noreferrer" title={tracker.name} href={`https://${globals.APPS_SUB_DOMAIN}.ghostery.com/${this.props.language}/apps/${encodeURIComponent(tracker.name.replace(/\s+/g, '_').toLowerCase())}`}>
-										{ t('tracker_description_learn_more') }
-									</a>
+					this.state.showMoreInfo && (
+						<div className={`${!this.state.showMoreInfo ? 'hide' : ''} row trk-moreinfo`}>
+							<div className="columns">
+								<div className="trk-description">
+									{ this.state.description }
+									<div className={(!this.state.showTrackerLearnMore ? 'hide' : '')}>
+										<a target="_blank" rel="noopener noreferrer" title={tracker.name} href={`https://${globals.APPS_SUB_DOMAIN}.ghostery.com/${this.props.language}/apps/${encodeURIComponent(tracker.name.replace(/\s+/g, '_').toLowerCase())}`}>
+											{ t('tracker_description_learn_more') }
+										</a>
+									</div>
+								</div>
+								<div className={`${!this.props.show_tracker_urls ? 'hide' : ''}`}>
+									<div className="trk-srcs-title">{ t('panel_tracker_found_sources_title') }</div>
+									<div className="trk-srcs">{ sources }</div>
 								</div>
 							</div>
-							<div className={`${!this.props.show_tracker_urls ? 'hide' : ''}`}>
-								<div className="trk-srcs-title">{ t('panel_tracker_found_sources_title') }</div>
-								<div className="trk-srcs">{ sources }</div>
-							</div>
 						</div>
-					</div>
-				}
+					)}
 			</div>
 		);
 	}

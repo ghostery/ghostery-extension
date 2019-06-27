@@ -21,7 +21,7 @@ import {
 } from './SetupViewConstants';
 
 export function getSetupShowWarningOverride() {
-	return function (dispatch) {
+	return function(dispatch) {
 		return sendMessageInPromise(GET_SETUP_SHOW_WARNING_OVERRIDE).then((data) => {
 			dispatch({
 				type: GET_SETUP_SHOW_WARNING_OVERRIDE,
@@ -37,7 +37,7 @@ export function getSetupShowWarningOverride() {
 }
 
 export function setSetupShowWarningOverride(actionData) {
-	return function (dispatch) {
+	return function(dispatch) {
 		return sendMessageInPromise(SET_SETUP_SHOW_WARNING_OVERRIDE, actionData).then((data) => {
 			dispatch({
 				type: SET_SETUP_SHOW_WARNING_OVERRIDE,
@@ -57,7 +57,7 @@ export function initSetupProps(data) {
 }
 
 export function setSetupStep(actionData) {
-	return function (dispatch) {
+	return function(dispatch) {
 		return sendMessageInPromise(SET_SETUP_STEP, actionData).then((data) => {
 			dispatch({
 				type: SET_SETUP_STEP,

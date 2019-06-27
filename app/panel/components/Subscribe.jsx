@@ -40,11 +40,11 @@ const Subscribe = (props) => {
 			<div>
 				<span className="pitch-become-subscriber" onClick={_handleBecomeClick}>{t('subscribe_pitch_button_label')}</span>
 			</div>
-			{(loggedIn === 'false') &&
+			{(loggedIn === 'false') && (
 				<NavLink to="/login" className="pitch-already-subscriber">
 					<span>{t('subscribe_pitch_sign_here')}</span>
 				</NavLink>
-			}
+			)}
 		</div>
 	);
 };

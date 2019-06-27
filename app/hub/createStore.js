@@ -42,7 +42,7 @@ const reducer = combineReducers({
  * @return {Object}
  * @memberof HubReactStore
  */
-export default function () {
+export default function() {
 	return createStore(
 		reducer,
 		compose(

@@ -125,17 +125,17 @@ const StatsView = (props) => {
 			<div className="tab-header">
 				<div className="tab-container">
 					<div className="tab-header-title">{summaryTitle}</div>
-					<div id="daily" className={tabDaily} onClick={selectType} >
+					<div id="daily" className={tabDaily} onClick={selectType}>
 						<span className="header-tab-text">
 							{t('panel_stats_menu_daily')}
 						</span>
 					</div>
-					<div id="monthly" className={tabMonthly} onClick={selectType} >
+					<div id="monthly" className={tabMonthly} onClick={selectType}>
 						<span className="header-tab-text">
 							{t('panel_stats_menu_monthly')}
 						</span>
 					</div>
-					<div id="cumulative" className={tabCumulative} onClick={selectType} >
+					<div id="cumulative" className={tabCumulative} onClick={selectType}>
 						<span className="header-tab-text">
 							{t('panel_stats_menu_cumulative')}
 						</span>
@@ -143,7 +143,7 @@ const StatsView = (props) => {
 				</div>
 			</div>
 			<div className="tile-container">
-				<div id="trackersSeen" className={tile} onClick={selectView} >
+				<div id="trackersSeen" className={tile} onClick={selectView}>
 					<div className="tile-title"><p className={trackersSeenClassNames}>{t('panel_stats_trackers_seen')}</p></div>
 					<div className={trackersSeenValueClassNames}>
 						<p className="tile-value-content">{subscriber ? trackersSeen : ''}</p>
@@ -151,7 +151,7 @@ const StatsView = (props) => {
 					</div>
 				</div>
 				<div className="tile-divider" />
-				<div id="trackersBlocked" className={tile} onClick={selectView} >
+				<div id="trackersBlocked" className={tile} onClick={selectView}>
 					<div className="tile-title"><p className={trackersBlockedClassNames}>{t('panel_stats_trackers_blocked')}</p></div>
 					<div className={trackersBlockedValueClassNames}>
 						<p className="tile-value-content">{subscriber ? trackersBlocked : ''}</p>
@@ -159,7 +159,7 @@ const StatsView = (props) => {
 					</div>
 				</div>
 				<div className="tile-divider" />
-				<div id="trackersAnonymized" className={tile} onClick={selectView} >
+				<div id="trackersAnonymized" className={tile} onClick={selectView}>
 					<div className="tile-title"><p className={trackersAnonymizedClassNames}>{t('panel_stats_trackers_anonymized')}</p></div>
 					<div className={trackersAnonymizedValueClassNames}>
 						<p className="tile-value-content">{subscriber ? trackersAnonymized : ''}</p>
@@ -167,7 +167,7 @@ const StatsView = (props) => {
 					</div>
 				</div>
 				<div className="tile-divider" />
-				<div id="adsBlocked" className={tile} onClick={selectView} >
+				<div id="adsBlocked" className={tile} onClick={selectView}>
 					<div className="tile-title"><p className={adsBlockedClassNames}>{t('panel_stats_ads_blocked')}</p></div>
 					<div className={adsBlockedValueClassNames}>
 						<p className="tile-value-content">{subscriber ? adsBlocked : ''}</p>
@@ -175,38 +175,39 @@ const StatsView = (props) => {
 					</div>
 				</div>
 			</div>
-			{ showResetModal &&
-				<div className="modal-container reset-modal" >
-					<div className="modal-content" >
-						<div className="modal-text-container" >
+			{ showResetModal && (
+				<div className="modal-container reset-modal">
+					<div className="modal-content">
+						<div className="modal-text-container">
 							<span className="modal-title-text">{t('panel_stats_reset_modal_text')}</span>
 						</div>
 						<div className="modal-buttons-container">
-							<div className="modal-hollow-button" onClick={doReset}><p>{t('panel_stats_reset_modal_yes')}</p></div><div className="modal-filled-button" onClick={cancelReset}><p>{t('panel_stats_reset_modal_no')}</p></div>
+							<div className="modal-hollow-button" onClick={doReset}><p>{t('panel_stats_reset_modal_yes')}</p></div>
+							<div className="modal-filled-button" onClick={cancelReset}><p>{t('panel_stats_reset_modal_no')}</p></div>
 						</div>
 					</div>
 				</div>
-			}
-			{ showPitchModal &&
-				<div className="modal-container" >
-					<div className="modal-content" >
-						<div className="modal-text-container" >
+			)}
+			{ showPitchModal && (
+				<div className="modal-container">
+					<div className="modal-content">
+						<div className="modal-text-container">
 							<span className="modal-title-text" dangerouslySetInnerHTML={{ __html: t('panel_stats_pitch_modal_text') }} />
 						</div>
 						<div className="modal-buttons-container">
 							<div className="modal-filled-button" onClick={subscribe}>{t('panel_stats_pitch_modal_subscribe')}</div>
 						</div>
-						{ !loggedIn &&
-						<div className="modal-text-container" >
-							<div className="modal-text">
-								<span>{`${t('panel_stats_pitch_modal_already')} `}</span>
-								<span style={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={signIn}>{t('panel_stats_pitch_modal_sign_in')}</span>
+						{ !loggedIn && (
+							<div className="modal-text-container">
+								<div className="modal-text">
+									<span>{`${t('panel_stats_pitch_modal_already')} `}</span>
+									<span style={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={signIn}>{t('panel_stats_pitch_modal_sign_in')}</span>
+								</div>
 							</div>
-						</div>
-						}
+						)}
 					</div>
 				</div>
-			}
+			)}
 		</div>
 	);
 };
