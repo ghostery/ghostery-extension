@@ -250,7 +250,8 @@ class DonutGraph extends React.Component {
 			.style('fill', (d, i) => {
 				if (renderGreyscale) {
 					return this.colors.greyscale(this.getTone(categoryCount, i));
-				} if (renderRedscale) {
+				}
+				if (renderRedscale) {
 					return this.colors.redscale(this.getTone(categoryCount, i));
 				}
 				return this.colors.regular(d.data.id);

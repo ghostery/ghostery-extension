@@ -67,7 +67,8 @@ class Api {
 			if (status === 204) {
 				resolve();
 				return;
-			} if (status === 404) {
+			}
+			if (status === 404) {
 				// TODO resource "not-found" errors should be handled server side
 				reject({ // eslint-disable-line prefer-promise-reject-errors
 					errors: [
