@@ -57,6 +57,7 @@ class Summary extends React.Component {
 		this.clickTrackersBlocked = this.clickTrackersBlocked.bind(this);
 		this.clickTrackersCount = this.clickTrackersCount.bind(this);
 		this.clickUpgradeBannerOrGoldPlusIcon = this.clickUpgradeBannerOrGoldPlusIcon.bind(this);
+		this.showRewardsView = this.showRewardsView.bind(this);
 		this.toggleExpert = this.toggleExpert.bind(this);
 		this.handlePortMessage = this.handlePortMessage.bind(this);
 
@@ -121,7 +122,7 @@ class Summary extends React.Component {
 	 */
 	clickDonut(data) {
 		if (!this.props.is_expert) {
-			this.toggleExpert();
+			this.toggleExpert('blocking');
 		}
 		this.props.actions.filterTrackers(data);
 	}
@@ -220,14 +221,23 @@ class Summary extends React.Component {
 	}
 
 	/**
+	 * Show the Rewards view
+	 * Used to handle user clicking on the Rewards icon
+	 */
+	showRewardsView() {
+		// this.toggleExpert('gotorewards');
+		this.props.actions.toggleExpert();
+	}
+
+	/**
 	 * Toggle between Simple and Detailed Views.
 	 */
-	toggleExpert() {
+	toggleExpert(subview = 'blocking') {
 		this.props.actions.toggleExpert();
 		if (this.props.is_expert) {
 			this.props.history.push('/');
 		} else {
-			this.props.history.push('/detail');
+			this.props.history.push(`/detail/${subview}`);
 		}
 	}
 
@@ -688,8 +698,8 @@ class Summary extends React.Component {
 		);
 
 		return (
-			<div className={rewardsIconClassNames} onClick={this.props.actions.toggleExpert}>
-				<NavButton path="/detail/rewards" imagePath="../../app/images/panel/rewards-icon.svg" />
+			<div className={rewardsIconClassNames} onClick={this.showRewardsView}>
+				<NavButton path="/detail/rewards/list" imagePath="../../app/images/panel/rewards-icon.svg" />
 				<Tooltip body={t('ghostery_rewards')} position="left" />
 			</div>
 		);

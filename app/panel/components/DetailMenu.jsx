@@ -24,7 +24,13 @@ class DetailMenu extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = { menu: { showBlocking: true, showRewards: false } };
+
+		this.state = {
+			menu: {
+				showBlocking: this.props.activeTab === 'blocking',
+				showRewards: this.props.activeTab === 'rewards'
+			}
+		};
 
 		// event bindings
 		this.setActiveTab = this.setActiveTab.bind(this);
