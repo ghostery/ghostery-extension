@@ -379,9 +379,11 @@ function _fetchJson(method, url, query, extraHeaders, referrer = 'no-referrer', 
 			// check for 204 status (No Content) from CMP
 			if (response.status === 204) {
 				return false; // send back false to signal no new campaigns
-			} if (contentType && contentType.includes('application/json')) {
+			}
+			if (contentType && contentType.includes('application/json')) {
 				return response.json();
-			} if (contentType && contentType.includes('text/html')) {
+			}
+			if (contentType && contentType.includes('text/html')) {
 				return response.text();
 			}
 			return response.text();

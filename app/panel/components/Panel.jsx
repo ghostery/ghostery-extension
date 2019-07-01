@@ -164,21 +164,24 @@ class Panel extends React.Component {
 					)}
 				</span>
 			);
-		} if (needsReload) {
+		}
+		if (needsReload) {
 			return (
 				<span>
 					<span key="0">{t('panel_needs_reload')}</span>
 					<span key="1" className="needs-reload-link" onClick={this.clickReloadBanner}>{ t('alert_reload') }</span>
 				</span>
 			);
-		} if (this.props.notificationFilter === 'slow') {
+		}
+		if (this.props.notificationFilter === 'slow') {
 			return (
 				<span>
 					<span key="0" className="filter-link slow-insecure" onClick={this.filterTrackers} dangerouslySetInnerHTML={{ __html: this.props.notificationText }} />
 					<span key="1">{ t('panel_tracker_slow_non_secure_end') }</span>
 				</span>
 			);
-		} if (this.props.notificationFilter === 'compatibility') {
+		}
+		if (this.props.notificationFilter === 'compatibility') {
 			return (
 				<span>
 					<span key="0" className="filter-link compatibility" onClick={this.filterTrackers} dangerouslySetInnerHTML={{ __html: this.props.notificationText }} />

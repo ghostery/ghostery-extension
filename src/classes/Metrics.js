@@ -461,9 +461,11 @@ class Metrics {
 		const numShown = rewards.totalOffersSeen;
 		if (numShown >= 6) {
 			return '6+';
-		} if (numShown >= 2) {
+		}
+		if (numShown >= 2) {
 			return '2-5';
-		} if (numShown === 1) {
+		}
+		if (numShown === 1) {
 			return '1';
 		}
 		return '0';
