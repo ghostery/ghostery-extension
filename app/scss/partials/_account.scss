@@ -223,15 +223,18 @@ p.warning {
 	#create-account-promotions {
 		margin-bottom: 10px;
 		label {
-			font-size: 13px;
+			font-size: 11px;
 			font-weight: 500;
 		}
 	}
 	#create-account-legal-consent-checkbox {
 		margin-bottom: 10px;
 		label {
-			font-size: 13px;
+			font-size: 11px;
 			font-weight: 500;
+			vertical-align: top;
+			margin-right: 0;
+			max-width: 94%;
 		}
 	}
 	#create-account-privacy-container {
