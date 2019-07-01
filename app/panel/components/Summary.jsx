@@ -746,6 +746,7 @@ class Summary extends React.Component {
 	*/
 	render() {
 		const {
+			enable_offers,
 			is_expert,
 			is_expanded,
 		} = this.props;
@@ -786,7 +787,7 @@ class Summary extends React.Component {
 					{this._renderCliqzSmartBlock()}
 				</div>
 				{this._renderStatsNavButton()}
-				{this._renderRewardsIcon()}
+				{enable_offers && this._renderRewardsIcon()}
 
 				{!isCondensed && this._renderPlusUpgradeBannerOrSubscriberIcon()}
 			</div>
