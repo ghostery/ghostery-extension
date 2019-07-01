@@ -2230,5 +2230,42 @@
 	},
 	"cliqz_feature_status_off": {
 		"message": "Off"
+	},
+	"create_account_form_legal_consent_checkbox_label": {
+		"message": "I accept the Terms and Conditions, the Public License Agreement, and consent to data practices found in the Privacy Policy"
+	},
+	"create_account_form_legal_consent_checkbox_label": {
+		"message": "I accept the $LINK_TERMS_START$Terms and Conditions$LINK_TERMS_END$, the",
+		"placeholders": {
+			"link_terms_end": {
+				"content": "</a>"
+			},
+			"link_terms_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/\" rel=\"noopener noreferrer\">"
+			}
+		}
+	},
+	"account_creation_privacy_statement": {
+		"message": "Our general $LINK_TERMS_START$Terms and Conditions$LINK_TERMS_END$ and our $LINK_UA_START$License Agreement$LINK_UA_END$ apply. You will find our Privacy Statement $LINK_PS_START$here$LINK_PS_END$.",
+		"placeholders": {
+			"link_ps_end": {
+				"content": "</a>"
+			},
+			"link_ps_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" rel=\"noopener noreferrer\">"
+			},
+			"link_ua_end": {
+				"content": "</a>"
+			},
+			"link_ua_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/privacy-statements/\" rel=\"noopener noreferrer\">"
+			},
+			"link_terms_end": {
+				"content": "</a>"
+			},
+			"link_terms_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/\" rel=\"noopener noreferrer\">"
+			}
+		}
 	}
 }

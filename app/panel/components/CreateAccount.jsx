@@ -32,6 +32,7 @@ class CreateAccount extends React.Component {
 			confirmEmailError: false,
 			firstName: '',
 			lastName: '',
+			legalConsentChecked: false,
 			password: '',
 			promotionsChecked: true,
 			loading: false,
@@ -129,7 +130,7 @@ class CreateAccount extends React.Component {
 	 */
 	render() {
 		const {
-			email, confirmEmail, firstName, lastName, password, promotionsChecked, loading, emailError, confirmEmailError, passwordInvalidError, passwordLengthError
+			email, confirmEmail, firstName, lastName, password, promotionsChecked, legalConsentChecked, loading, emailError, confirmEmailError, passwordInvalidError, passwordLengthError
 		} = this.state;
 		const buttonClasses = ClassNames('button ghostery-button', { loading });
 		return (
@@ -202,6 +203,14 @@ class CreateAccount extends React.Component {
 									<div id="create-account-promotions">
 										<input id="promotionsChecked" name="promotionsChecked" type="checkbox" checked={promotionsChecked} onChange={this.handleCheckboxChange} />
 										<label htmlFor="promotionsChecked">{t('hub_create_account_checkbox_promotions')}</label>
+									</div>
+								</div>
+							</div>
+							<div className="row">
+								<div className="small-12 columns">
+									<div id="create-account-legal-consent-checkbox">
+										<input id="legalConsentChecked" name="legalConsentChecked" type="checkbox" checked={legalConsentChecked} onChange={this.handleCheckboxChange} />
+										<label htmlFor="legalConsentChecked" dangerouslySetInnerHTML={{ __html: t('create_account_form_legal_consent_checkbox_label') }} />
 									</div>
 								</div>
 							</div>
