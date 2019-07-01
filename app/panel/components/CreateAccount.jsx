@@ -216,9 +216,6 @@ class CreateAccount extends React.Component {
 							</div>
 							<div className="row">
 								<div className="small-12 columns">
-									<div id="create-account-privacy-container">
-										<p id="accept-privacy-label" dangerouslySetInnerHTML={{ __html: t('account_creation_privacy_statement') }} />
-									</div>
 									<div id="account-creation-buttons" className="row align-center">
 										<div className="small-6 columns text-center">
 											<Link to={(this.props.is_expert ? '/detail' : '/')} id="create-account-cancel" className="cancel button hollow">
