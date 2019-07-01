@@ -228,21 +228,24 @@ class Rewards extends React.Component {
 					</div>
 				</div>
 			);
-		} if (enable_offers && !rewardsArray) {
+		}
+		if (enable_offers && !rewardsArray) {
 			return (
 				<div className="RewardsPanel__info">
 					{ this.renderRewardSvg() }
 					<div>{ t('panel_detail_rewards_loading') }</div>
 				</div>
 			);
-		} if (enable_offers && rewardsArray.length === 0) {
+		}
+		if (enable_offers && rewardsArray.length === 0) {
 			return (
 				<div className="RewardsPanel__info">
 					{ this.renderRewardSvg() }
 					<div>{ t('panel_detail_rewards_none_found') }</div>
 				</div>
 			);
-		} if (!enable_offers && (!rewardsArray || rewardsArray.length === 0)) {
+		}
+		if (!enable_offers && (!rewardsArray || rewardsArray.length === 0)) {
 			return (
 				<div className="RewardsPanel__info">
 					{ this.renderRewardSvg() }

@@ -661,16 +661,19 @@ class EventHandlers {
 			return {
 				redirectUrl: details.url.replace(/^http:/, 'https:')
 			};
-		} if (details.type === 'sub_frame') {
+		}
+		if (details.type === 'sub_frame') {
 			return {
 				redirectUrl: 'about:blank'
 			};
-		} if (details.type === 'image') {
+		}
+		if (details.type === 'image') {
 			return {
 				// send PNG (and not GIF) to avoid conflicts with Adblock Plus
 				redirectUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg=='
 			};
-		} if (details.type === 'script' && bugId) {
+		}
+		if (details.type === 'script' && bugId) {
 			let code = '';
 			if (appId === 2575) { // Hubspot
 				code = this._getHubspotFormSurrogate(details.url);
