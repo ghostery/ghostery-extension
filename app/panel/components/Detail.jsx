@@ -61,7 +61,9 @@ class Detail extends React.Component {
 		return (
 			<div className="detail-wrap">
 				<div id="content-detail" className={(this.props.is_expanded ? 'expanded' : '')}>
-					<div className={condensedToggleClassNames} onClick={this.toggleExpanded} />
+					<div className="toggle-bar">
+						<div className={condensedToggleClassNames} onClick={this.toggleExpanded} />
+					</div>
 					<Route path="/detail/blocking" render={this.BlockingComponent} />
 					<Route path="/detail/rewards" render={this.RewardsComponent} />
 					<DetailMenu hasReward={enable_offers && unread_offer_ids.length > 0} subscriptionsPlus={this.props.user && this.props.user.subscriptionsPlus} />
