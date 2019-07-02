@@ -37,10 +37,10 @@ const ProductsView = props => (
 				<div className="ProductsView__headerDescription">
 					{t('hub_products_header_description')}
 				</div>
-				<div className="ProductsView__mainPromoTitle" >
+				<div className="ProductsView__mainPromoTitle">
 					{t('hub_products_main_promo_title')}
 				</div>
-				<div className="ProductsView__mainPromoDescription" >
+				<div className="ProductsView__mainPromoDescription">
 					{t('hub_products_main_promo_description')}
 				</div>
 				<div className="ProductsView__storeImageContainer">

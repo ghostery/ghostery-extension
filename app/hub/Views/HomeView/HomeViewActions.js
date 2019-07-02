@@ -15,7 +15,7 @@ import { log, sendMessageInPromise } from '../../utils';
 import { GET_HOME_PROPS, SET_METRICS } from './HomeViewConstants';
 
 export function getHomeProps() {
-	return function (dispatch) {
+	return function(dispatch) {
 		return sendMessageInPromise(GET_HOME_PROPS).then((data) => {
 			dispatch({
 				type: GET_HOME_PROPS,
@@ -28,7 +28,7 @@ export function getHomeProps() {
 }
 
 export function setMetrics(actionData) {
-	return function (dispatch) {
+	return function(dispatch) {
 		return sendMessageInPromise(SET_METRICS, actionData).then((data) => {
 			dispatch({
 				type: SET_METRICS,

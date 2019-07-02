@@ -30,7 +30,9 @@ import {
 	SETTINGS_FILTER,
 	GET_SETTINGS_DATA
 } from '../constants/constants';
-import { updateTrackerBlocked, updateCategoryBlocked, updateBlockAllTrackers, toggleExpandAll } from '../utils/blocking';
+import {
+	updateTrackerBlocked, updateCategoryBlocked, updateBlockAllTrackers, toggleExpandAll
+} from '../utils/blocking';
 import { sendMessage } from '../utils/msg';
 import globals from '../../../src/classes/Globals';
 import { objectEntries } from '../../../src/utils/common';

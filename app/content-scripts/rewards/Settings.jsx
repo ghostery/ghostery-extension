@@ -40,7 +40,7 @@ class Settings extends Component {
 	render() {
 		return (
 			<div>
-				{!this.state.closed &&
+				{!this.state.closed && (
 					<div className="rewards-settings-container rewards-popup-container">
 						<div className="rewards-settings">
 							<div className="close" onClick={this.close} style={{ backgroundImage: this.closeIcon }} />
@@ -52,7 +52,8 @@ class Settings extends Component {
 							{/* <div className="settings">{t('rewards_settings')}</div>
 							<div className="delete">{t('rewards_delete')}</div> */}
 						</div>
-					</div>}
+					</div>
+				)}
 			</div>
 		);
 	}

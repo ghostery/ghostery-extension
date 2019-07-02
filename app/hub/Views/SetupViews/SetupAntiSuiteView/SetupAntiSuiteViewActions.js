@@ -20,7 +20,7 @@ import {
 } from '../../SetupView/SetupViewConstants';
 
 export function setAntiTracking(actionData) {
-	return function (dispatch) {
+	return function(dispatch) {
 		return sendMessageInPromise(SET_ANTI_TRACKING, actionData).then((data) => {
 			dispatch({
 				type: SET_ANTI_TRACKING,
@@ -33,7 +33,7 @@ export function setAntiTracking(actionData) {
 }
 
 export function setAdBlock(actionData) {
-	return function (dispatch) {
+	return function(dispatch) {
 		return sendMessageInPromise(SET_AD_BLOCK, actionData).then((data) => {
 			dispatch({
 				type: SET_AD_BLOCK,
@@ -46,7 +46,7 @@ export function setAdBlock(actionData) {
 }
 
 export function setSmartBlocking(actionData) {
-	return function (dispatch) {
+	return function(dispatch) {
 		return sendMessageInPromise(SET_SMART_BLOCK, actionData).then((data) => {
 			dispatch({
 				type: SET_SMART_BLOCK,
@@ -59,7 +59,7 @@ export function setSmartBlocking(actionData) {
 }
 
 export function setGhosteryRewards(actionData) {
-	return function (dispatch) {
+	return function(dispatch) {
 		return sendMessageInPromise(SET_GHOSTERY_REWARDS, actionData).then((data) => {
 			dispatch({
 				type: SET_GHOSTERY_REWARDS,

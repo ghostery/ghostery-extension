@@ -25,63 +25,35 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-"use strict";
+/* eslint import/no-extraneous-dependencies: 0 */
+/* eslint no-console: 0 */
+
 const fs = require('fs');
-
-// Check if the copied English messages.json file exists
-if (!fs.existsSync('./tools/leet/messages.en.copy.json')) {
-
-	// Copy the English messages.json file to a temporary location
-	fs.copyFileSync('./_locales/en/messages.json', './tools/leet/messages.en.copy.json');
-
-	// Import the copied messages file
-	let leet = {},
-		key;
-	const en = require('./messages.en.copy.json');
-
-	// Create a LEETed version of the messages.json file
-	for (key in en) {
-		if (en[key].hasOwnProperty('message')) {
-			const message = leet_convert(en[key].message);
-			const placeholders = en[key].placeholders;
-			leet[key] = { message, placeholders };
-		}
-	}
-
-	// Save the leeted version and override the existing English messages.json file
-	fs.writeFileSync('./tools/leet/messages.leet.json', JSON.stringify(leet) , 'utf-8');
-	fs.copyFileSync('./tools/leet/messages.leet.json', './_locales/en/messages.json');
-
-	// Log success to the user
-	console.log('Successfully leeted messages.json.');
-} else {
-	// Log an error to the user
-	console.log('Error: leeting has already been done. Run `npm run leet.reset` and then try again.');
-}
+const jsonfile = require('jsonfile');
 
 // Modified from https://www.npmjs.com/package/leet
-function leet_convert(string) {
+const leet_convert = function(string) {
 	const characterMap = {
-		'a': '4a4',
-		'b': '8b8',
+		a: '4a4',
+		b: '8b8',
 		// 'c': 'c',
 		// 'd': 'd',
-		'e': '3e3',
+		e: '3e3',
 		// 'f': 'f',
-		'g': '6g6',
+		g: '6g6',
 		// 'h': 'h',
 		// 'i': 'i',
 		// 'j': 'j',
 		// 'k': 'k',
-		'l': '1l1',
+		l: '1l1',
 		// 'm': 'm',
 		// 'n': 'n',
-		'o': '0o0',
+		o: '0o0',
 		// 'p': 'p',
 		// 'q': 'q',
 		// 'r': 'r',
-		's': '5s5',
-		't': '7t7'
+		s: '5s5',
+		t: '7t7'
 		// 'u': 'u',
 		// 'v': 'v',
 		// 'w': 'w',
@@ -91,14 +63,44 @@ function leet_convert(string) {
 	};
 
 	let letter;
-	string = string || '';
-	string = string.replace(/cks/g, 'x');
+	let output = string || '';
+	output = output.replace(/cks/g, 'x');
 
 	for (letter in characterMap) {
 		if (characterMap.hasOwnProperty(letter)) {
-			string = string.replace(new RegExp(letter, 'g'), characterMap[letter]);
+			output = output.replace(new RegExp(letter, 'g'), characterMap[letter]);
 		}
 	}
 
-	return string;
+	return output;
+};
+
+// Check if the copied English messages.json file exists
+if (!fs.existsSync('./tools/leet/messages.en.copy.json')) {
+	// Copy the English messages.json file to a temporary location
+	fs.copyFileSync('./_locales/en/messages.json', './tools/leet/messages.en.copy.json');
+
+	// Import the copied messages file
+	const leet = {};
+	let key;
+	const en = jsonfile.readFileSync('./tools/leet/messages.en.copy.json');
+
+	// Create a LEETed version of the messages.json file
+	for (key in en) {
+		if (en[key].hasOwnProperty('message')) {
+			const message = leet_convert(en[key].message);
+			const { placeholders } = en[key];
+			leet[key] = { message, placeholders };
+		}
+	}
+
+	// Save the leeted version and override the existing English messages.json file
+	fs.writeFileSync('./tools/leet/messages.leet.json', JSON.stringify(leet), 'utf-8');
+	fs.copyFileSync('./tools/leet/messages.leet.json', './_locales/en/messages.json');
+
+	// Log success to the user
+	console.log('Successfully leeted messages.json.');
+} else {
+	// Log an error to the user
+	console.log('Error: leeting has already been done. Run `npm run leet.reset` and then try again.');
 }

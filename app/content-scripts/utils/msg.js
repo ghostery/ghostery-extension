@@ -23,7 +23,7 @@ import { sendMessageInPromise as panelSendPromiseMessage, sendMessage as panelSe
  * @param  {string} origin 		content script origin
  * @return {Object}				set of APIs for handling messages
  */
-export default function (origin) {
+export default function(origin) {
 	/**
 	 * Send a message wrapped in a promise.
 	 * @memberOf  ContentScriptUtils

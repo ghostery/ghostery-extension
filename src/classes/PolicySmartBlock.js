@@ -39,6 +39,7 @@ class PolicySmartBlock {
 			'font',
 		];
 	}
+
 	/**
 	 * Determine if the tracker should be unblocked on a particular site to prevent site breaking.
 	 * @param  {string} appId       tracker id
@@ -72,6 +73,7 @@ class PolicySmartBlock {
 
 		return false;
 	}
+
 	/**
 	 * Determine if the tracker should be blocked on a particular site to prevent site breaking.
 	 * @param  {string} appId       tracker id

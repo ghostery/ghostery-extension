@@ -33,6 +33,7 @@ class Trackers extends React.Component {
 		}
 		return true;
 	}
+
 	/**
 	* Render the list of Tracker components in Blocking view or GlobalTracker components in Global Blocking view.
 	* @return {ReactComponent}   ReactComponent instance

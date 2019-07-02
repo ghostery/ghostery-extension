@@ -61,7 +61,7 @@ SetupView.propTypes = {
 	steps: PropTypes.arrayOf(PropTypes.shape({
 		index: PropTypes.number.isRequired,
 		path: PropTypes.string.isRequired,
-		bodyComponent: PropTypes.func.isRequired,
+		bodyComponent: PropTypes.shape.isRequired,
 		headerProps: PropTypes.shape({
 			title: PropTypes.string.isRequired,
 			titleImage: PropTypes.string.isRequired,
