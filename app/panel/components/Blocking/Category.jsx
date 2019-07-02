@@ -190,29 +190,29 @@ class Category extends React.Component {
 							<div className="counts">
 								<div className="total-count">
 									{
-										this.props.filtered &&
-										<span className="text" style={filteredText}>
+										this.props.filtered && (
+											<span className="text" style={filteredText}>
 											t(`blocking_category_tracker_found`)
-										</span>
-									}
+											</span>
+										)}
 									<span className="count">{`${category.num_total} `}</span>
 									<span className="text">
 										{ (category.num_total === 1) ? t('blocking_category_tracker') : t('blocking_category_trackers') }
 									</span>
 								</div>
 								{
-									!!trackersBlockedCount &&
-									<div className="blocked-count">
-										<span className="count">{`${trackersBlockedCount} `}</span>
-										<span className="text">{ t('blocking_category_blocked') }</span>
-									</div>
-								}
+									!!trackersBlockedCount && (
+										<div className="blocked-count">
+											<span className="count">{`${trackersBlockedCount} `}</span>
+											<span className="text">{ t('blocking_category_blocked') }</span>
+										</div>
+									)}
 							</div>
 						</div>
 						<div className="columns collapse-left collapse-right shrink align-self-justify">
 							<div className={this.state.isExpanded ? 'caret-up' : 'caret-down'} onClick={this.toggleCategoryTrackers} />
 							<div className={checkBoxStyle} onClick={this.clickCategoryStatus}>
-								<span className={this.props.index ? 't-tooltip-up-left' : 't-tooltip-down-left'} data-g-tooltip={t('panel_tracker_block_tooltip')} onMouseOver={this.showTooltip} onMouseOut={this.hideTooltip} >
+								<span className={this.props.index ? 't-tooltip-up-left' : 't-tooltip-down-left'} data-g-tooltip={t('panel_tracker_block_tooltip')} onMouseOver={this.showTooltip} onMouseOut={this.hideTooltip}>
 									<svg className="blocking-icons status t-tooltip-up-left" data-g-tooltip={t('panel_tracker_block_tooltip')} onClick={this.clickTrackerStatus} width="20px" height="20px" viewBox="0 0 20 20">
 										<g transform="translate(1 1)" fill="none" fillRule="evenodd">
 											<path className="border" d="M-.5-.5h18.3v18.217H-.5z" />
@@ -240,21 +240,21 @@ class Category extends React.Component {
 					</div>
 				</div>
 				{
-					this.state.isExpanded &&
-					<Trackers
-						globalBlocking={globalBlocking}
-						trackers={category.trackers}
-						cat_id={category.id}
-						actions={this.props.actions}
-						showToast={this.props.showToast}
-						show_tracker_urls={this.props.show_tracker_urls}
-						sitePolicy={this.props.sitePolicy}
-						paused_blocking={this.props.paused_blocking}
-						language={this.props.language}
-						smartBlockActive={this.props.smartBlockActive}
-						smartBlock={this.props.smartBlock}
-					/>
-				}
+					this.state.isExpanded && (
+						<Trackers
+							globalBlocking={globalBlocking}
+							trackers={category.trackers}
+							cat_id={category.id}
+							actions={this.props.actions}
+							showToast={this.props.showToast}
+							show_tracker_urls={this.props.show_tracker_urls}
+							sitePolicy={this.props.sitePolicy}
+							paused_blocking={this.props.paused_blocking}
+							language={this.props.language}
+							smartBlockActive={this.props.smartBlockActive}
+							smartBlock={this.props.smartBlock}
+						/>
+					)}
 			</div>
 		);
 	}

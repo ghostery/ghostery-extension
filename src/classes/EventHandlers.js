@@ -14,7 +14,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { map, object, reduce, throttle } from 'underscore';
+import {
+	map, object, reduce, throttle
+} from 'underscore';
 import bugDb from './BugDb';
 import button from './BrowserButton';
 import c2pDb from './Click2PlayDb';
@@ -323,6 +325,7 @@ class EventHandlers {
 
 		this._eventReset(tab_id);
 	}
+
 	/**
 	 * Handler for webRequest.onBeforeRequest event
 	 * Called when a request is about to occur
@@ -658,16 +661,19 @@ class EventHandlers {
 			return {
 				redirectUrl: details.url.replace(/^http:/, 'https:')
 			};
-		} else if (details.type === 'sub_frame') {
+		}
+		if (details.type === 'sub_frame') {
 			return {
 				redirectUrl: 'about:blank'
 			};
-		} else if (details.type === 'image') {
+		}
+		if (details.type === 'image') {
 			return {
 				// send PNG (and not GIF) to avoid conflicts with Adblock Plus
 				redirectUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg=='
 			};
-		} else if (details.type === 'script' && bugId) {
+		}
+		if (details.type === 'script' && bugId) {
 			let code = '';
 			if (appId === 2575) { // Hubspot
 				code = this._getHubspotFormSurrogate(details.url);
@@ -737,7 +743,7 @@ class EventHandlers {
 		// hs_reqwest_0 - function which will be called on the client after the request
 		//
 		// hutk=941df50e9277ee76755310cd78647a08 -is user-specific (same every session)
-		const tokens = url.substr(8).split(/\/|\&|\?|\#|\=/ig);
+		const tokens = url.substr(8).split(/\/|\&|\?|\#|\=/ig); // eslint-disable-line no-useless-escape
 
 		return `${tokens[7]}({"form":{"portalId":${tokens[4]},"guid": "${tokens[5]}","cssClass":"hs-form stacked","formFieldGroups":[{"fields":[{}]}],"metaData":[]},"properties":{}})`;
 	}

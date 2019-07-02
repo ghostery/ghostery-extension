@@ -11,7 +11,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { any, filter, isArray, map } from 'underscore';
+import {
+	any, filter, isArray, map
+} from 'underscore';
 import conf from './Conf';
 import Updatable from './Updatable';
 import { log } from '../utils/common';

@@ -131,20 +131,20 @@ export default class TrackerItem extends React.Component {
 		return (
 			<li>
 				<div className={`tracker ${this.showMenu ? 'show-menu' : ''} ${this.trackerSelectStatus}`}>
-					<button className="info" onClick={this.openTrackerLink} />
+					<button type="button" className="info" onClick={this.openTrackerLink} />
 					<div onClick={this.toggleMenu} className="trackerName">
 						<span>{this.props.tracker.name}</span>
 						<span className="trackerSelect" />
 					</div>
 
 					<div className={`menu ${this.props.type}`}>
-						<button className="trackerOption trust" onClick={this.clickButtonTrust}>
+						<button type="button" className="trackerOption trust" onClick={this.clickButtonTrust}>
 							{this.props.tracker.ss_allowed ? 'Untrust' : 'Trust'}
 						</button>
-						<button className="trackerOption restrict" onClick={this.clickButtonRestrict}>
+						<button type="button" className="trackerOption restrict" onClick={this.clickButtonRestrict}>
 							{this.props.tracker.ss_blocked ? 'Unrestrict' : 'Restrict'}
 						</button>
-						<button className={`trackerOption block ${this.disabledStatus}`} onClick={this.clickButtonBlock}>
+						<button type="button" className={`trackerOption block ${this.disabledStatus}`} onClick={this.clickButtonBlock}>
 							{this.props.tracker.blocked ? 'UnBlock' : 'Block'}
 						</button>
 					</div>
@@ -172,5 +172,5 @@ TrackerItem.defaultProps = {
 
 TrackerItem.contextTypes = {
 	callGlobalAction: PropTypes.func,
-	siteProps: PropTypes.object,
+	siteProps: PropTypes.shape,
 };

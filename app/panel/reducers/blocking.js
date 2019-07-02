@@ -22,7 +22,9 @@ import {
 	UPDATE_TRACKER_TRUST_RESTRICT,
 	TOGGLE_EXPAND_ALL
 } from '../constants/constants';
-import { updateTrackerBlocked, updateCategoryBlocked, updateBlockAllTrackers, toggleExpandAll } from '../utils/blocking';
+import {
+	updateTrackerBlocked, updateCategoryBlocked, updateBlockAllTrackers, toggleExpandAll
+} from '../utils/blocking';
 import { updateObject } from '../utils/utils';
 import { sendMessage } from '../utils/msg';
 

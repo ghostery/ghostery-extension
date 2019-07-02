@@ -28,6 +28,7 @@ class Detail extends React.Component {
 		// event bindings
 		this.toggleExpanded = this.toggleExpanded.bind(this);
 	}
+
 	/**
 	 * Lifecycle event
 	 */
@@ -37,6 +38,7 @@ class Detail extends React.Component {
 	}
 
 	BlockingComponent = () => (<Blocking />);
+
 	RewardsComponent = () => (<Rewards />);
 
 	/**
@@ -45,6 +47,7 @@ class Detail extends React.Component {
 	toggleExpanded() {
 		this.props.actions.toggleExpanded();
 	}
+
 	/**
 	 * Render detailed view wrapper. Part of it is footer
 	 * menu allowing to switch between blocking view and one of the

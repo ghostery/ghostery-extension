@@ -92,16 +92,16 @@ class Tooltip extends React.Component {
 
 		return (
 			<span className={compClassNames}>
-				{this.state.show &&
+				{this.state.show && (
 					<span className={`tooltip-content ${this.props.position}`}>
 						{this.props.header &&
-							<div className="tooltip-header">{this.props.header}</div>
+						<div className="tooltip-header">{this.props.header}</div>
 						}
 						{this.props.body &&
-							<div className="tooltip-body">{this.props.body}</div>
+						<div className="tooltip-body">{this.props.body}</div>
 						}
 					</span>
-				}
+				)}
 			</span>
 		);
 	}
