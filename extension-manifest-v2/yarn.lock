@@ -301,11 +301,12 @@
   resolved "https://registry.yarnpkg.com/@cliqz-oss/dexie/-/dexie-2.0.4.tgz#0e710504e2b9198baa9b046abd3a82731b94d56e"
   integrity sha512-HxMbBQfdy0CehThTFierXbRPI+PHDEucUUriCCzViAKbCWWQIlL6uZcyDaaPRMPWy45v78lezPB4457kfjS72g==
 
-"@cliqz/adblocker@^0.10.0":
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-0.10.0.tgz#e46911c49dbe6b255e72a71e828eb46f7416ae11"
-  integrity sha512-+0Pl4CzzZW21FxJ1AJSi3X6H6ZaQMZHol+Za9yH32kG2LZjoduMCoXNmm8e1r5wrZs/FWsZyj3UPo7JsOrW5oA==
+"@cliqz/adblocker@^0.11.0":
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-0.11.0.tgz#7677ec56ce9e8b6602b92c1f9a905b71d5c24084"
+  integrity sha512-eBw0+WQuzr05UjsPCptpkKfJi67+K/DB1v4u6f2AtJXQCtQjtUTyMAU1Th0MPY74VR9V9djmmU7Q/rfY0AOXGA==
   dependencies:
+    "@types/puppeteer" "^1.12.4"
     tldts "^5.0.3"
     tslib "^1.9.3"
     tsmaz "^1.2.1"
@@ -581,6 +582,13 @@
   version "12.0.10"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.0.10.tgz#51babf9c7deadd5343620055fc8aff7995c8b031"
   integrity sha512-LcsGbPomWsad6wmMNv7nBLw7YYYyfdYcz6xryKYQhx89c3XXan+8Q6AJ43G5XDIaklaVkK3mE4fCb0SBvMiPSQ==
+
+"@types/puppeteer@^1.12.4":
+  version "1.12.4"
+  resolved "https://registry.yarnpkg.com/@types/puppeteer/-/puppeteer-1.12.4.tgz#8388efdb0b30a54a7e7c4831ca0d709191d77ff1"
+  integrity sha512-aaGbJaJ9TuF9vZfTeoh876sBa+rYJWPwtsmHmYr28pGr42ewJnkDTq2aeSKEmS39SqUdkwLj73y/d7rBSp7mDQ==
+  dependencies:
+    "@types/node" "*"
 
 "@types/stack-utils@^1.0.1":
   version "1.0.1"
@@ -1267,12 +1275,12 @@ brorand@^1.0.1:
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
   integrity sha1-EsJe/kCkXjwyPrhnWgoM5XsiNx8=
 
-"browser-core@https://github.com/cliqz-oss/browser-core/releases/download/7.37.3/browser-core-7.37.3.tgz":
-  version "7.37.3"
-  resolved "https://github.com/cliqz-oss/browser-core/releases/download/7.37.3/browser-core-7.37.3.tgz#b5d69d2e23b3e6c14720e2e5bb63670bdc2b4ef8"
+"browser-core@https://github.com/cliqz-oss/browser-core/releases/download/v7.37.4/browser-core-7.37.4.tgz":
+  version "7.37.4"
+  resolved "https://github.com/cliqz-oss/browser-core/releases/download/v7.37.4/browser-core-7.37.4.tgz#976c25e15e633626f6b9fbb3f5454f2f4edcbf75"
   dependencies:
     "@cliqz-oss/dexie" "^2.0.4"
-    "@cliqz/adblocker" "^0.10.0"
+    "@cliqz/adblocker" "^0.11.0"
     ajv "^6.10.0"
     anonymous-credentials "https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.3/anonymous-credentials-0.1.3.tgz"
     classnames "^2.2.5"

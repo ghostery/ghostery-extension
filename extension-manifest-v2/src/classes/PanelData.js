@@ -232,9 +232,8 @@ class PanelData {
 	 * Invoked in EventHandlers#onBeforeRequest when a new bug has been found
 	 * Sends updated data to the panel and blocking and/or summary components
 	 */
-	updatePanelUI = throttle(this._updatePanelUI.bind(this), 600, { leading: true, trailing: true });
+	updatePanelUI = throttle(this._updatePanelUI.bind(this), 600, { leading: true, trailing: true }); // matches donut redraw throttling
 
-	// matches donut redraw throttling
 	_updatePanelUI() {
 		if (!this._panelPort || !this._activeTab) { return; }
 
