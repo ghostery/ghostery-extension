@@ -15,7 +15,7 @@ import { log, sendMessageInPromise } from '../../../utils';
 import { SET_HUMAN_WEB } from '../../SetupView/SetupViewConstants';
 
 export function setHumanWeb(actionData) {
-	return function (dispatch) {
+	return function(dispatch) {
 		return sendMessageInPromise(SET_HUMAN_WEB, actionData).then((data) => {
 			dispatch({
 				type: SET_HUMAN_WEB,

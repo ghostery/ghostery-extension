@@ -14,7 +14,7 @@
 import { INIT_TUTORIAL_PROPS, SET_TUTORIAL_NAVIGATION } from './TutorialViewConstants';
 
 export function initTutorialProps(data) {
-	return function (dispatch) {
+	return function(dispatch) {
 		return new Promise((resolve) => {
 			dispatch({
 				type: INIT_TUTORIAL_PROPS,

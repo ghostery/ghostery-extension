@@ -16,7 +16,7 @@
 import { log } from '../../../src/utils/common';
 import { sendMessageInPromise as importedSMIP } from '../../panel/utils/msg';
 
-const sendMessageInPromise = function (name, message) {
+const sendMessageInPromise = function(name, message) {
 	return importedSMIP(name, message, 'ghostery-hub');
 };
 

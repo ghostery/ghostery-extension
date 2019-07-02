@@ -26,12 +26,14 @@ class GlobalBlocking extends React.Component {
 		// event bindings
 		this.toggleExpanded = this.toggleExpanded.bind(this);
 	}
+
 	/**
 	 * Trigger action which toggles expanded state.
 	 */
 	toggleExpanded() {
 		this.props.actions.toggleExpanded();
 	}
+
 	/**
 	* Render full list of categories and trackers.
 	* @return {ReactComponent}   ReactComponent instance
@@ -59,7 +61,7 @@ class GlobalBlocking extends React.Component {
 					globalBlocking
 				/>
 				<div className="blocking-trackers">
-					{ categories && categories.length > 0 &&
+					{ categories && categories.length > 0 && (
 						<Categories
 							expandAll={expandAll}
 							categories={categories}
@@ -69,7 +71,7 @@ class GlobalBlocking extends React.Component {
 							language={this.props.language}
 							globalBlocking
 						/>
-					}
+					)}
 				</div>
 			</div>
 		);

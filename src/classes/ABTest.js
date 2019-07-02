@@ -28,6 +28,7 @@ class ABTest {
 	constructor() {
 		this.tests = {};
 	}
+
 	/**
 	 * Determine if a test with specified name is present.
 	 * @param {string} name 	test name
@@ -35,6 +36,7 @@ class ABTest {
 	hasTest(name) {
 		return this.tests.hasOwnProperty(name);
 	}
+
 	/**
 	 * Send parameters to A/B Test server and receive tests data.
 	 * @return {Promise} 		dictionary with all tests to be executed

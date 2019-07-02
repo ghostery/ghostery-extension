@@ -39,6 +39,7 @@ class GlobalTracker extends React.Component {
 		this.toggleDescription = this.toggleDescription.bind(this);
 		this.clickTrackerStatus = this.clickTrackerStatus.bind(this);
 	}
+
 	/**
 	 * Implement handler for clicking on the tracker title
 	 * which shows/hides tracker description. On show it retrieves
@@ -55,7 +56,7 @@ class GlobalTracker extends React.Component {
 		this.setState({ description: t('tracker_description_getting') });
 
 		sendMessageInPromise('getTrackerDescription', {
-			url: `https:\/\/${globals.APPS_SUB_DOMAIN}.ghostery.com/${this.props.language}/apps/${
+			url: `https://${globals.APPS_SUB_DOMAIN}.ghostery.com/${this.props.language}/apps/${
 				encodeURIComponent(tracker.name.replace(/\s+/g, '_').toLowerCase())}?format=json`,
 		}).then((data) => {
 			if (data) {
@@ -70,6 +71,7 @@ class GlobalTracker extends React.Component {
 			this.setState({ description: t('tracker_description_none_found') });
 		});
 	}
+
 	/**
 	 * Implement handler for clicking on the tracker block/unblock checkbox.
 	 * Trigger action which persists new tracker blocked state and spawns re-rendering
@@ -87,6 +89,7 @@ class GlobalTracker extends React.Component {
 			text: t('global_settings_saved_tracker')
 		});
 	}
+
 	/**
 	* Render a tracker in Global Blocking subview of Settings.
 	* @return {ReactComponent}   ReactComponent instance
@@ -104,21 +107,21 @@ class GlobalTracker extends React.Component {
 					</div>
 				</div>
 				{
-					this.state.showMoreInfo &&
-					<div className="row align-middle">
-						<div className="columns global-trk-desc">
-							{ this.state.description }
-							{
-								this.state.showTrackerLearnMore &&
-								<div className={(!this.state.showTrackerLearnMore ? 'hide' : '')}>
-									<a target="_blank" rel="noopener noreferrer" title={tracker.name} href={`https://${globals.APPS_SUB_DOMAIN}.ghostery.com/${this.props.language}/apps/${encodeURIComponent(tracker.name.replace(/\s+/g, '_').toLowerCase())}`}>
-										{ t('tracker_description_learn_more') }
-									</a>
-								</div>
-							}
+					this.state.showMoreInfo && (
+						<div className="row align-middle">
+							<div className="columns global-trk-desc">
+								{ this.state.description }
+								{
+									this.state.showTrackerLearnMore && (
+										<div className={(!this.state.showTrackerLearnMore ? 'hide' : '')}>
+											<a target="_blank" rel="noopener noreferrer" title={tracker.name} href={`https://${globals.APPS_SUB_DOMAIN}.ghostery.com/${this.props.language}/apps/${encodeURIComponent(tracker.name.replace(/\s+/g, '_').toLowerCase())}`}>
+												{ t('tracker_description_learn_more') }
+											</a>
+										</div>
+									)}
+							</div>
 						</div>
-					</div>
-				}
+					)}
 			</div>
 		);
 	}

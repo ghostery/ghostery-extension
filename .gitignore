@@ -1,8 +1,6 @@
 ## Build Files
 dist/
 build/
-web-ext-artifacts/
-*precompiled/
 licenses.json
 
 ## Node

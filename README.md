@@ -36,17 +36,17 @@ $ yarn upgrade
 ## Building
 ```sh
 # Build all sources
-$ yarn run build.dev
+$ yarn build.dev
 ```
 
 ```sh
 # Build for production
-$ yarn run build.prod
+$ yarn build.prod
 ```
 
 ```sh
 # Build and watch for changes
-$ yarn run build.watch
+$ yarn build.watch
 ```
 
 ## Enable Debugging / Logging
@@ -58,32 +58,39 @@ $ yarn run build.watch
 
 ## Testing and Linting
 ```sh
+# Update Jest snapshot artifacts
+$ yarn test.snapshot
+```
+
+```sh
 # Run unit tests
-$ yarn run test.unit
+$ yarn test.unit
 ```
 
 ```sh
 # Run linter over the ./app and ./src folders
-$ yarn run lint
+$ yarn lint
 ```
 
 ```sh
 # Lint a specific file
-$ yarn run lint.raw -- src/utils/matcher.js
+$ yarn lint.raw src/utils/matcher.js
 ```
 
 ```sh
-# Disable lint
-$ NO_LINT=true yarn run build.dev
+# Test i18n string lengths for panel UI
+$ yarn leet
+# Reset back to original en language file
+$ yarn leet.reset
 ```
 
 ## Build Docs
 ```sh
 # Build JSDoc files to ./docs
-$ yarn run docs
+$ yarn docs
 ```
 
-## Translating Files
+## Internationalization
 We use Transifex and their CLI to manage our translation files. Follow
 [these instructions](https://docs.transifex.com/client/installing-the-client)
 to get started.
@@ -162,15 +169,7 @@ See [CONTRIBUTING](CONTRIBUTING.md) and [CODE OF CONDUCT](CODE-OF-CONDUCT.md)
 + [Ghostery Lite for Safari](https://github.com/ghostery/GhosterySafari)
 
 ## Ghostery Team
-Ghostery relies on [contributions](https://github.com/ghostery/ghostery-extension/graphs/contributors) from lots of talented people. Our core development team looks like this:
-
-![Christopher Tino](https://static.cliqz.com/wp-content/uploads/2017/08/chris.jpg) | ![José María Signanini](https://static.cliqz.com/wp-content/uploads/2017/08/jose.jpg) | ![Serge Zarembsky](https://static.cliqz.com/wp-content/uploads/2017/08/serge.jpg) | ![Patrick Lawler](https://static.cliqz.com/wp-content/uploads/2017/08/patrick.jpg) | ![Caleb Richelson](https://static.cliqz.com/wp-content/uploads/2018/03/caleb.jpg)
-:---:|:---:|:---:|:---:|:---:
-[Christopher Tino](http://github.com/christophertino) | [José María Signanini](https://github.com/jsignanini) | [Serge Zarembsky](https://github.com/zarembsky) | [Patrick Lawler](https://github.com/trickpattyFH20) | [Caleb Richelson](https://github.com/IAmThePan)
-![Aziz Aithsaine](https://static.cliqz.com/wp-content/uploads/2017/08/aziz.jpg) | ![Ethan Gooding](https://static.cliqz.com/wp-content/uploads/2018/12/Ethan.jpg) | ![Frank Chiarulli](https://static.cliqz.com/wp-content/uploads/2018/12/Frank-Chiarulli.jpg) | ![Ilya Zarembsky](https://static.cliqz.com/wp-content/uploads/2018/12/Ilya-Zarembsky.jpg) | ![Valmik Patel](https://static.cliqz.com/wp-content/uploads/2018/07/Valmik.jpg)
-Aziz Aithsaine | [Ethan Gooding](https://github.com/Eden12345) | [Frank Chiarulli](https://github.com/fcjr) | [Ilya Zarembsky](https://github.com/wlycdgr) | [Valmik Patel](https://github.com/valmikkpatel)
-
-See the full montage of uncommonly attractive Ghosterians/Cliqzers [here](https://www.cliqz.com/about/team).
+Ghostery relies on [contributions](https://github.com/ghostery/ghostery-extension/graphs/contributors) from lots of talented people. See the full montage of uncommonly attractive Ghosterians/Cliqzers [here](https://www.cliqz.com/about/team).
 
 ## License
 [MPL-2.0](https://www.mozilla.org/en-US/MPL/2.0/) Copyright 2019 Ghostery, Inc. All rights reserved.

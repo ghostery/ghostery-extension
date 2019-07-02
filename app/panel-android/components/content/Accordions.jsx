@@ -43,8 +43,8 @@ class Accordions extends React.Component {
 		return (
 			<div className="accordions">
 				{
-					this.props.categories.map((category, index) =>
-						(<Accordion
+					this.props.categories.map((category, index) => (
+						<Accordion
 							key={category.id}
 							index={index}
 							numBlocked={category.num_blocked}
@@ -56,8 +56,8 @@ class Accordions extends React.Component {
 							open={this.getOpenStatus(index)}
 							id={category.id}
 							type={this.props.type}
-						/>)
-					)
+						/>
+					))
 				}
 			</div>
 		);
