@@ -193,6 +193,12 @@
 	padding-left: 10px;
 	text-transform: capitalize;
 }
+// position the star SVG relative to the gift box SVG
+.Summary__rewardsIcon__star {
+	position: absolute;
+	left: 3px;
+	top: 17px;
+}
 
 .Summary__spaceTaker {
 	height: 162px;

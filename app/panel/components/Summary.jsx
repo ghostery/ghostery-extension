@@ -688,6 +688,10 @@ class Summary extends React.Component {
 	}
 
 	_renderRewardsIcon() {
+		const { unread_offer_ids } = this.props;
+
+		const unreadOffersAvailable = (unread_offer_ids && unread_offer_ids.length > 0) || false;
+
 		const rewardsIconClassNames = ClassNames(
 			'Summary__rewardsIcon',
 			'Summary__rewardsIcon--absolutely-positioned',
@@ -700,6 +704,7 @@ class Summary extends React.Component {
 		return (
 			<div className={rewardsIconClassNames} onClick={this.showRewardsView}>
 				<NavButton path="/detail/rewards/list" imagePath="../../app/images/panel/rewards-icon.svg" />
+				{unreadOffersAvailable && <NavButton classNames="Summary__rewardsIcon__star" path="/detail/rewards/list" imagePath="../../app/images/panel/purple-star.svg" />}
 				<Tooltip body={t('ghostery_rewards')} position="left" />
 			</div>
 		);
