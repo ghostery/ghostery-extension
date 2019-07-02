@@ -752,7 +752,7 @@ class Summary extends React.Component {
 					{!disableBlocking && this._renderPageLoadTime()}
 				</div>
 
-				{isCondensed && disableBlocking && is_expert && (
+				{isCondensed && disableBlocking && (
 					<div className="Summary__spaceTaker" />
 				)}
 
