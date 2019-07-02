@@ -2208,22 +2208,22 @@
 		"message": "Стереть всю историю статистики до этого момента."
 	},
 	"cookie": {
-		"message": "файл cookie"
+		"message": "куки"
 	},
 	"cookies": {
-		"message": "файлы cookie"
+		"message": "куки"
 	},
 	"fingerprint": {
-		"message": "отпечаток пальца"
+		"message": "фингерпринт"
 	},
 	"fingerprints": {
-		"message": "отпечатки пальцев"
+		"message": "фингерпринта"
 	},
 	"ad": {
-		"message": "рекламное объявление"
+		"message": "реклама"
 	},
 	"ads": {
-		"message": "рекламные объявления"
+		"message": "рекламы"
 	},
 	"cliqz_feature_status_on": {
 		"message": "Вкл"
