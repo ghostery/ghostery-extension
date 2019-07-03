@@ -57,7 +57,7 @@ class Summary extends React.Component {
 		this.clickTrackersBlocked = this.clickTrackersBlocked.bind(this);
 		this.clickTrackersCount = this.clickTrackersCount.bind(this);
 		this.clickUpgradeBannerOrGoldPlusIcon = this.clickUpgradeBannerOrGoldPlusIcon.bind(this);
-		this.showRewardsView = this.showRewardsView.bind(this);
+		this.showRewardsList = this.showRewardsList.bind(this);
 		this.toggleExpert = this.toggleExpert.bind(this);
 		this.handlePortMessage = this.handlePortMessage.bind(this);
 
@@ -224,9 +224,8 @@ class Summary extends React.Component {
 	 * Show the Rewards view
 	 * Used to handle user clicking on the Rewards icon
 	 */
-	showRewardsView() {
-		// this.toggleExpert('gotorewards');
-		this.props.actions.toggleExpert();
+	showRewardsList() {
+		this.toggleExpert('rewards/list');
 	}
 
 	/**
@@ -711,9 +710,9 @@ class Summary extends React.Component {
 		);
 
 		return (
-			<div className={rewardsIconClassNames} onClick={this.showRewardsView}>
-				<NavButton path="/detail/rewards/list" imagePath="../../app/images/panel/rewards-icon.svg" />
-				{unreadOffersAvailable && <NavButton classNames="Summary__rewardsIcon__star" path="/detail/rewards/list" imagePath="../../app/images/panel/purple-star.svg" />}
+			<div className={rewardsIconClassNames} onClick={this.showRewardsList}>
+				<ReactSVG src="../../app/images/panel/rewards-icon.svg" />
+				{unreadOffersAvailable && <ReactSVG src="../../app/images/panel/purple-star.svg" className="Summary__rewardsIcon__star" />}
 				<Tooltip body={t('ghostery_rewards')} position="left" />
 			</div>
 		);
