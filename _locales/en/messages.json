@@ -673,7 +673,7 @@
 		"message": " on this page."
 	},
 	"panel_tracker_total_tooltip": {
-		"message": "Total count of trackers found, ads blocked and data points anonymized."
+		"message": "Total count of trackers found + requests modified."
 	},
 	"panel_signin_success": {
 		"message": "You are now signed in as "
