@@ -693,6 +693,10 @@ class Summary extends React.Component {
 		);
 	}
 
+	/**
+	 * Render helper for the rewards clickable icon that displays in the simple version of the view
+	 * @return {JSX} JSX for rendering the rewards clickable icon
+	 */
 	_renderRewardsIcon() {
 		const { unread_offer_ids } = this.props;
 
