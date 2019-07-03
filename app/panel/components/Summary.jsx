@@ -121,9 +121,7 @@ class Summary extends React.Component {
 	 * @param  {Object} data Properties of the click and resulting filter
 	 */
 	clickDonut(data) {
-		if (!this.props.is_expert) {
-			this.toggleExpert('blocking');
-		}
+		if (!this.props.is_expert) { this.toggleExpert(); }
 		this.props.actions.filterTrackers(data);
 	}
 
