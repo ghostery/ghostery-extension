@@ -213,6 +213,7 @@ class CreateAccount extends React.Component {
 								<div className="small-12 columns">
 									<div id="create-account-legal-consent-checkbox">
 										<input id="legalConsentChecked" name="legalConsentChecked" type="checkbox" checked={legalConsentChecked} onChange={this.handleCheckboxChange} />
+										{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
 										<label htmlFor="legalConsentChecked" dangerouslySetInnerHTML={{ __html: t('create_account_form_legal_consent_checkbox_label') }} />
 									</div>
 								</div>
