@@ -33,6 +33,7 @@ class CreateAccount extends React.Component {
 			firstName: '',
 			lastName: '',
 			legalConsentChecked: false,
+			legalConsentNotCheckedError: false,
 			password: '',
 			promotionsChecked: true,
 			loading: false,
@@ -68,7 +69,7 @@ class CreateAccount extends React.Component {
 		e.preventDefault();
 		this.setState({ loading: true }, () => {
 			const {
-				email, confirmEmail, firstName, lastName, password, promotionsChecked
+				email, confirmEmail, firstName, lastName, legalConsentChecked, password, promotionsChecked
 			} = this.state;
 			this.setState({ loading: true }, () => {
 				if (!validateEmail(email)) {
@@ -99,10 +100,18 @@ class CreateAccount extends React.Component {
 					}
 					return;
 				}
+				if (!legalConsentChecked) {
+					this.setState({
+						legalConsentNotCheckedError: true,
+						loading: false,
+					});
+					return;
+				}
 
 				this.setState({
 					emailError: false,
 					confirmEmailError: false,
+					legalConsentNotCheckedError: false,
 					passwordInvalidError: false,
 					passwordLengthError: false,
 				}, () => {
@@ -130,7 +139,7 @@ class CreateAccount extends React.Component {
 	 */
 	render() {
 		const {
-			email, confirmEmail, firstName, lastName, password, promotionsChecked, legalConsentChecked, loading, emailError, confirmEmailError, passwordInvalidError, passwordLengthError
+			email, confirmEmail, firstName, lastName, password, promotionsChecked, legalConsentChecked, loading, emailError, confirmEmailError, legalConsentNotCheckedError, passwordInvalidError, passwordLengthError
 		} = this.state;
 		const buttonClasses = ClassNames('button ghostery-button', { loading });
 		return (
@@ -211,7 +220,7 @@ class CreateAccount extends React.Component {
 							</div>
 							<div className="row">
 								<div className="small-12 columns">
-									<div id="create-account-legal-consent-checkbox">
+									<div id="create-account-legal-consent-checkbox" className={(legalConsentNotCheckedError ? 'checkbox-error' : '')}>
 										<input id="legalConsentChecked" name="legalConsentChecked" type="checkbox" checked={legalConsentChecked} onChange={this.handleCheckboxChange} />
 										{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
 										<label htmlFor="legalConsentChecked" dangerouslySetInnerHTML={{ __html: t('create_account_form_legal_consent_checkbox_label') }} />
