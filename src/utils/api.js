@@ -67,7 +67,8 @@ class Api {
 			if (status === 204) {
 				resolve();
 				return;
-			} else if (status === 404) {
+			}
+			if (status === 404) {
 				// TODO resource "not-found" errors should be handled server side
 				reject({ // eslint-disable-line prefer-promise-reject-errors
 					errors: [
@@ -158,9 +159,10 @@ class Api {
 
 	save = (type, data) => this._sendAuthenticatedRequest('POST', `/api/v2/${type}/`, data)
 
-	update = (type, data) =>
+	update = (type, data) => {
 		// TODO check for data.id and fail
-		this._sendAuthenticatedRequest('PATCH', `/api/v2/${type}/${data.id}`, { data })
+		this._sendAuthenticatedRequest('PATCH', `/api/v2/${type}/${data.id}`, { data });
+	}
 
 	remove = (type, id) => this._sendAuthenticatedRequest('DELETE', `/api/v2/${type}/${id}`)
 }

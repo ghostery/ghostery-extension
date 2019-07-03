@@ -26,6 +26,7 @@ class StatsGraph extends React.Component {
 	componentDidMount() {
 		this.generateGraph();
 	}
+
 	/**
 	 * Lifecycle event
 	 */
@@ -135,10 +136,7 @@ class StatsGraph extends React.Component {
 		// Add grid
 		canvas.append('g')
 			.attr('class', 'grid')
-			.call(yAxis
-				.tickSize(-width)
-				.tickFormat('')
-			);
+			.call(yAxis.tickSize(-width).tickFormat(''));
 
 		// Add data path
 		const pathGroup = canvas.append('g').datum(data);
@@ -154,7 +152,7 @@ class StatsGraph extends React.Component {
 		function interpolator() {
 			const l = this.getTotalLength();
 			const i = D3.interpolateString(`0,${l}`, `${l},${l}`);
-			return function (t) { return i(t); };
+			return function(t) { return i(t); };
 		}
 
 		function animator(path) {
@@ -202,17 +200,17 @@ class StatsGraph extends React.Component {
 			.attr('cx', d => x(d.index))
 			.attr('cy', d => y(d.amount))
 			.attr('r', 0)
-			.on('click', function (d, i) {
+			.on('click', function(d, i) {
 				if (!demo) {
 					toggleTooltip(this, i, true, 6, true, 300, 1);
 				}
 			})
-			.on('mouseenter', function (d, i) {
+			.on('mouseenter', function(d, i) {
 				if (!demo) {
 					toggleTooltip(this, i, true, 6, false, 300, 1);
 				}
 			})
-			.on('mouseleave', function (d, i) {
+			.on('mouseleave', function(d, i) {
 				if (!demo && !D3.select(`.tooltip-${i}`).classed('clicked')) {
 					toggleTooltip(this, i, false, 4.5, false, 200, 0);
 				}
@@ -279,7 +277,7 @@ class StatsGraph extends React.Component {
 
 		// Animate data points
 		canvas.selectAll('circle')
-			.each(function (d, i) {
+			.each(function(d, i) {
 				D3.select(this)
 					.transition()
 					.duration(700)

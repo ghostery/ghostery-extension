@@ -29,6 +29,7 @@ class DetailMenu extends React.Component {
 		// event bindings
 		this.setActiveTab = this.setActiveTab.bind(this);
 	}
+
 	/**
 	 * Change menu according to the clicked button. Save it in state.
 	 * @param {Object} event 		click event
@@ -41,6 +42,7 @@ class DetailMenu extends React.Component {
 		sendMessage('ping', DetailMenu.pings[selectionId]);
 		this.setState({ menu });
 	}
+
 	/**
 	 * Render the expert view footer.
 	 * @return {ReactComponent}   ReactComponent instance

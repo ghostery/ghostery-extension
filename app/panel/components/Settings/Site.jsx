@@ -22,12 +22,14 @@ class Site extends React.Component {
 
 		this.removeSite = this.removeSite.bind(this);
 	}
+
 	/**
 	 * Trigger action for removing site from the list.
 	 */
 	removeSite() {
 		this.props.updateSitePolicy({ type: this.props.listType, pageHost: this.props.site });
 	}
+
 	/**
 	* Render site entry.
 	* @return {ReactComponent}   ReactComponent instance

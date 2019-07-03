@@ -447,7 +447,8 @@ function handleClick2Play(name, message, tab_id, callback) {
 			});
 			callback();
 			return true;
-		} else if (message.action === 'once') {
+		}
+		if (message.action === 'once') {
 			c2pDb.allowOnce(message.app_ids, tab_id);
 			callback();
 			return true;
@@ -469,7 +470,8 @@ function handleBlockedRedirect(name, message, tab_id, callback) {
 	if (name === 'getBlockedRedirectData') {
 		callback(globals.BLOCKED_REDIRECT_DATA);
 		return true;
-	} else if (name === 'allow_always_page_c2p_tracker') {
+	}
+	if (name === 'allow_always_page_c2p_tracker') {
 		// Allow always - unblock this tracker
 		// Note: if the site is restricted, the 'allow always' button will not be shown
 		const tab_host = tabInfo.getTabInfo(tab_id, 'host');
@@ -742,12 +744,12 @@ function onMessageHandler(request, sender, callback) {
 	if (IS_EDGE && messageId) {
 		if (tab_id) {
 			// eslint-disable-next-line no-param-reassign
-			callback = function (result) {
+			callback = function(result) {
 				utils.sendMessage(tab_id, messageId, result);
 			};
 		} else {
 			// eslint-disable-next-line no-param-reassign
-			callback = function (result) {
+			callback = function(result) {
 				utils.sendMessageToPanel(messageId, result);
 			};
 		}
@@ -757,25 +759,33 @@ function onMessageHandler(request, sender, callback) {
 	if (origin === 'account_pages') {
 		// Account pages
 		return handleAccountPages(name, callback);
-	} else if (origin === 'purplebox') {
+	}
+	if (origin === 'purplebox') {
 		// Purplebox script events
 		return handlePurplebox(name, message, tab_id, callback);
-	} else if (origin === 'ghostery_dot_com') {
+	}
+	if (origin === 'ghostery_dot_com') {
 		// Ghostery.com and apps pages
 		return handleGhosteryDotCom(name, message, tab_id);
-	} else if (origin === 'page_performance' && name === 'recordPageInfo') {
+	}
+	if (origin === 'page_performance' && name === 'recordPageInfo') {
 		tabInfo.setTabInfo(tab_id, 'pageTiming', message.performanceAPI);
 		panelData.postPageLoadTime(tab_id);
 		return false;
-	} else if (origin === 'notifications') {
+	}
+	if (origin === 'notifications') {
 		return handleNotifications(name, message, tab_id);
-	} else if (origin === 'click_to_play') {
+	}
+	if (origin === 'click_to_play') {
 		return handleClick2Play(name, message, tab_id, callback);
-	} else if (origin === 'blocked_redirect') {
+	}
+	if (origin === 'blocked_redirect') {
 		return handleBlockedRedirect(name, message, tab_id, callback);
-	} else if (origin === 'rewards' || origin === 'rewardsPanel') {
+	}
+	if (origin === 'rewards' || origin === 'rewardsPanel') {
 		return handleRewards(name, message, callback);
-	} else if (origin === 'ghostery-hub') {
+	}
+	if (origin === 'ghostery-hub') {
 		return handleGhosteryHub(name, message, callback);
 	}
 
@@ -796,36 +806,42 @@ function onMessageHandler(request, sender, callback) {
 		}
 		account.getUserSettings().catch(err => log('Failed getting user settings from getPanelData:', err));
 		return true;
-	} else if (name === 'getStats') {
+	}
+	if (name === 'getStats') {
 		insights.action('getStatsTimeline', message.from, message.to, true, true).then((data) => {
 			callback(data);
 		});
 		return true;
-	} else if (name === 'getAllStats') {
+	}
+	if (name === 'getAllStats') {
 		insights.action('getAllDays').then((data) => {
 			insights.action('getStatsTimeline', moment(data[0]), moment(), true, true).then((data) => {
 				callback(data);
 			});
 		});
 		return true;
-	} else if (name === 'resetStats') {
+	}
+	if (name === 'resetStats') {
 		metrics.ping('hist_reset_stats');
 		insights.action('clearData');
 		return false;
-	} else if (name === 'setPanelData') {
+	}
+	if (name === 'setPanelData') {
 		panelData.set(message);
 		callback();
 		return false;
-	} else if (name === 'account.getTheme') {
+	}
+	if (name === 'account.getTheme') {
 		if (conf.current_theme !== 'default') {
-			account.getTheme(conf.current_theme)
-				.then(() => {
-					callback(conf.account.themeData[conf.current_theme]);
-				});
+			account.getTheme(conf.current_theme).then(() => {
+				callback(conf.account.themeData[conf.current_theme]);
+			});
 			return true;
 		}
 		callback();
-	} else if (name === 'getCliqzModuleData') {
+		return false;
+	}
+	if (name === 'getCliqzModuleData') {
 		if (message && message.tabId) {
 			sendCliqzModulesData(message.tabId, callback);
 		} else {
@@ -834,13 +850,15 @@ function onMessageHandler(request, sender, callback) {
 			});
 		}
 		return true;
-	} else if (name === 'getTrackerDescription') {
+	}
+	if (name === 'getTrackerDescription') {
 		utils.getJson(message.url).then((result) => {
 			const description = (result) ? ((result.company_in_their_own_words) ? result.company_in_their_own_words : ((result.company_description) ? result.company_description : '')) : '';
 			callback(description);
 		});
 		return true;
-	} else if (name === 'account.login') {
+	}
+	if (name === 'account.login') {
 		metrics.ping('sign_in');
 		const { email, password } = message;
 		account.login(email, password)
@@ -853,10 +871,10 @@ function onMessageHandler(request, sender, callback) {
 			.catch((err) => {
 				log('LOGIN ERROR', err);
 				callback({ errors: _getJSONAPIErrorsObject(err) });
-				// callback({ errors: [err] });
 			});
 		return true;
-	} else if (name === 'account.register') {
+	}
+	if (name === 'account.register') {
 		if (!IS_EDGE) {
 			const senderOrigin = (sender.url.indexOf('templates/panel.html') >= 0) ? 'extension' : 'setup';
 			metrics.ping(`create_account_${senderOrigin}`);
@@ -876,7 +894,8 @@ function onMessageHandler(request, sender, callback) {
 				log('REGISTER ERROR', err);
 			});
 		return true;
-	} else if (name === 'account.logout') {
+	}
+	if (name === 'account.logout') {
 		account.logout()
 			.then((response) => {
 				callback(response);
@@ -886,7 +905,8 @@ function onMessageHandler(request, sender, callback) {
 				callback(err);
 			});
 		return true;
-	} else if (name === 'account.getUserSettings') {
+	}
+	if (name === 'account.getUserSettings') {
 		account.getUserSettings()
 			.then((settings) => {
 				callback(settings);
@@ -896,7 +916,8 @@ function onMessageHandler(request, sender, callback) {
 				callback({ errors: _getJSONAPIErrorsObject(err) });
 			});
 		return true;
-	} else if (name === 'account.getUserSubscriptionData') {
+	}
+	if (name === 'account.getUserSubscriptionData') {
 		account.getUserSubscriptionData()
 			.then((customer) => {
 				// TODO temporary fix to handle multiple subscriptions
@@ -918,7 +939,8 @@ function onMessageHandler(request, sender, callback) {
 				callback({ errors: _getJSONAPIErrorsObject(err) });
 			});
 		return true;
-	} else if (name === 'account.openSubscriptionPage') {
+	}
+	if (name === 'account.openSubscriptionPage') {
 		let tabUrl;
 		if (conf.account) {
 			tabUrl = `https://account.${globals.GHOSTERY_DOMAIN}.com/subscription?target=subscribe`;
@@ -926,14 +948,16 @@ function onMessageHandler(request, sender, callback) {
 			tabUrl = `https://signon.${globals.GHOSTERY_DOMAIN}.com/subscribe`;
 		}
 		utils.openNewTab({ url: tabUrl, become_active: true });
-		return true;
-	} else if (name === 'account.openSupportPage') {
+		return false;
+	}
+	if (name === 'account.openSupportPage') {
 		metrics.ping('priority_support_submit');
 		const subscriber = account.hasScopesUnverified(['subscriptions:plus']);
 		const tabUrl = subscriber ? `https://account.${globals.GHOSTERY_DOMAIN}.com/support` : 'https://www.ghostery.com/faqs/';
 		utils.openNewTab({ url: tabUrl, become_active: true });
-		return true;
-	} else if (name === 'account.resetPassword') {
+		return false;
+	}
+	if (name === 'account.resetPassword') {
 		const { email } = message;
 		account.resetPassword(email)
 			.then((success) => {
@@ -944,7 +968,8 @@ function onMessageHandler(request, sender, callback) {
 				log('RESET PASSWORD ERROR', err);
 			});
 		return true;
-	} else if (name === 'account.getUser') {
+	}
+	if (name === 'account.getUser') {
 		account.getUser(message)
 			.then((user) => {
 				if (user) {
@@ -957,7 +982,8 @@ function onMessageHandler(request, sender, callback) {
 				log('FETCH USER ERROR', err);
 			});
 		return true;
-	} else if (name === 'account.sendValidateAccountEmail') {
+	}
+	if (name === 'account.sendValidateAccountEmail') {
 		account.sendValidateAccountEmail()
 			.then((success) => {
 				callback(success);
@@ -967,7 +993,8 @@ function onMessageHandler(request, sender, callback) {
 				log('sendValidateAccountEmail error', err);
 			});
 		return true;
-	} else if (name === 'account.promotions') {
+	}
+	if (name === 'account.promotions') {
 		const { promotions } = message;
 		account.updateEmailPreferences(promotions).then((success) => {
 			callback(success);
@@ -976,24 +1003,29 @@ function onMessageHandler(request, sender, callback) {
 			log('UPDATE PROMOTIONS FAIL', err);
 		});
 		return true;
-	} else if (name === 'update_database') {
+	}
+	if (name === 'update_database') {
 		checkLibraryVersion().then((result) => {
 			callback(result);
 		});
 		return true;
-	} else if (name === 'getSiteData') { // used by HeaderView.js clickBrokenPage()
+	}
+	if (name === 'getSiteData') { // used by HeaderView.js clickBrokenPage()
 		getSiteData().then((result) => {
 			callback(result);
 		});
 		return true;
-	} else if (name === 'openNewTab') {
+	}
+	if (name === 'openNewTab') {
 		utils.openNewTab(message);
 		return false;
-	} else if (name === 'reloadTab') {
+	}
+	if (name === 'reloadTab') {
 		reloadTab(message);
 		closeAndroidPanelTabs();
 		return false;
-	} else if (name === 'getSettingsForExport') {
+	}
+	if (name === 'getSettingsForExport') {
 		utils.getActiveTab((tab) => {
 			if (tab && tab.id && tab.url.startsWith('http')) {
 				const settings = account.buildUserSettings();
@@ -1017,10 +1049,12 @@ function onMessageHandler(request, sender, callback) {
 			}
 		});
 		return true;
-	} else if (name === 'ping') {
+	}
+	if (name === 'ping') {
 		metrics.ping(message);
 		return false;
-	} else if (name === 'showBrowseWindow') {
+	}
+	if (name === 'showBrowseWindow') {
 		utils.getActiveTab((tab) => {
 			if (tab && tab.id && tab.url.startsWith('http')) {
 				utils.injectNotifications(tab.id, true).then((result) => {
@@ -1139,12 +1173,14 @@ function getAntitrackingTestConfig() {
 			qsEnabled: true,
 			telemetryMode: 2,
 		};
-	} else if (abtest.hasTest('antitracking_half')) {
+	}
+	if (abtest.hasTest('antitracking_half')) {
 		return {
 			qsEnabled: true,
 			telemetryMode: 1,
 		};
-	} else if (abtest.hasTest('antitracking_collect')) {
+	}
+	if (abtest.hasTest('antitracking_collect')) {
 		return {
 			qsEnabled: false,
 			telemetryMode: 1,
@@ -1817,7 +1853,8 @@ function init() {
 									return account.getTheme(conf.current_theme);
 								}
 							});
-					} else if (globals.JUST_INSTALLED) {
+					}
+					if (globals.JUST_INSTALLED) {
 						setGhosteryDefaultBlocking();
 					}
 				})

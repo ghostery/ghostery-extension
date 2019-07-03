@@ -311,23 +311,23 @@ class Blocking extends React.Component {
 				/>
 				{(disableBlocking && is_expanded) ?
 					<NotScanned />
-					:
-					<div className={`${blockingClasses} blocking-trackers show-warnings`}>
-						{ categories.length > 0 &&
-							<Categories
-								expandAll={expand_all_trackers}
-								categories={categories}
-								actions={actions}
-								show_tracker_urls={show_tracker_urls}
-								sitePolicy={sitePolicy}
-								paused_blocking={paused_blocking}
-								language={language}
-								smartBlockActive={smartBlockActive}
-								smartBlock={smartBlock}
-							/>
-						}
-					</div>
-				}
+					: (
+						<div className={`${blockingClasses} blocking-trackers show-warnings`}>
+							{ categories.length > 0 && (
+								<Categories
+									expandAll={expand_all_trackers}
+									categories={categories}
+									actions={actions}
+									show_tracker_urls={show_tracker_urls}
+									sitePolicy={sitePolicy}
+									paused_blocking={paused_blocking}
+									language={language}
+									smartBlockActive={smartBlockActive}
+									smartBlock={smartBlock}
+								/>
+							)}
+						</div>
+					)}
 			</div>
 		);
 	}

@@ -175,10 +175,11 @@ class DonutGraph extends React.Component {
 	 * Generate donut-shaped graph with the scanning results.
 	 * Add mouse event listeners to the arcs of the donut graph that filter the
 	 * detailed view to the corresponding tracker category.
+	 * Throttle time matches panelData#updatePanelUI throttling.
 	 * @param  {Array} categories list of categories detected on the site
 	 * @param  {Object} options    options for the graph
 	 */
-	bakeDonut = throttle(this._bakeDonut.bind(this), 600, { leading: true, trailing: true }) // matches panelData#updatePanelUI throttling
+	bakeDonut = throttle(this._bakeDonut.bind(this), 600, { leading: true, trailing: true }) // eslint-disable-line react/sort-comp
 
 	_bakeDonut(categories, options) {
 		const {
@@ -235,7 +236,7 @@ class DonutGraph extends React.Component {
 				this._startAngles.set(catId, d.startAngle);
 				this._endAngles.set(catId, d.endAngle);
 
-				return function (t) {
+				return function(t) {
 					d.startAngle = lerpStartAngle(t);
 					d.endAngle = lerpEndAngle(t);
 					return trackerArc(d);
@@ -249,7 +250,8 @@ class DonutGraph extends React.Component {
 			.style('fill', (d, i) => {
 				if (renderGreyscale) {
 					return this.colors.greyscale(this.getTone(categoryCount, i));
-				} else if (renderRedscale) {
+				}
+				if (renderRedscale) {
 					return this.colors.redscale(this.getTone(categoryCount, i));
 				}
 				return this.colors.regular(d.data.id);
@@ -290,7 +292,7 @@ class DonutGraph extends React.Component {
 				this._endAngles.set(catId, d.endAngle);
 
 				const i = interpolate(d.startAngle, d.endAngle);
-				return function (t) {
+				return function(t) {
 					d.endAngle = i(t);
 					return trackerArc(d);
 				};
