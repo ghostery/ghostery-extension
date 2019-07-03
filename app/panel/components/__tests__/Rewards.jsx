@@ -15,6 +15,8 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { MemoryRouter } from 'react-router';
 import Rewards from '../Rewards';
+import { DynamicUIPortContext } from '../../contexts/DynamicUIPortContext';
+
 
 // Fake the translation function to only return the translation key
 global.t = function(str) {
@@ -22,8 +24,13 @@ global.t = function(str) {
 };
 
 describe('app/panel/components/Rewards.jsx', () => {
+	const dynamicUIPort = {
+		onMessage: { addListener: jest.fn() },
+		postMessage: jest.fn(),
+	};
+
 	describe('Snapshot tests with react-test-renderer', () => {
-		test.skip('rewards is rendered correctly when rewards is on and rewards is null', () => {
+		test('rewards is rendered correctly when rewards is on and rewards is null', () => {
 			const initialState = {
 				actions: {
 					updateRewardsData: () => {},
@@ -37,13 +44,15 @@ describe('app/panel/components/Rewards.jsx', () => {
 			};
 			const component = renderer.create(
 				<MemoryRouter initialEntries={['/detail/rewards/list']}>
-					<Rewards {...initialState} />
+					<DynamicUIPortContext.Provider value={dynamicUIPort}>
+						<Rewards {...initialState} />
+					</DynamicUIPortContext.Provider>
 				</MemoryRouter>
 			).toJSON();
 			expect(component).toMatchSnapshot();
 		});
 
-		test.skip('rewards is rendered correctly when rewards is off and rewards is null', () => {
+		test('rewards is rendered correctly when rewards is off and rewards is null', () => {
 			const initialState = {
 				actions: {
 					updateRewardsData: () => {},
@@ -57,7 +66,9 @@ describe('app/panel/components/Rewards.jsx', () => {
 			};
 			const component = renderer.create(
 				<MemoryRouter initialEntries={['/detail/rewards/list']}>
-					<Rewards {...initialState} />
+					<DynamicUIPortContext.Provider value={dynamicUIPort}>
+						<Rewards {...initialState} />
+					</DynamicUIPortContext.Provider>
 				</MemoryRouter>
 			).toJSON();
 			expect(component).toMatchSnapshot();
