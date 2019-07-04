@@ -19,7 +19,7 @@
  * @namespace BackgroundUtils
  */
 import { debounce } from 'underscore';
-import url from 'url';
+import { URL } from '@cliqz/url-parser';
 import tabInfo from '../classes/TabInfo';
 import globals from '../classes/Globals';
 import { log, objectEntries } from './common';
@@ -168,7 +168,16 @@ export function processFpeUrl(src) {
  * @return {Object} 		contains url parts as properties
  */
 export function processUrl(src) {
-	if (!src) {
+	try {
+		const res = new URL(src);
+		return {
+			protocol: res.protocol ? res.protocol.substr(0, res.protocol.length - 1) : '',
+			host: res.hostname || '',
+			path: res.pathname ? res.pathname.substr(1) : '',
+			host_with_path: (res.host || '') + (res.pathname || ''),
+			anchor: res.hash ? res.hash.substr(1) : '',
+		};
+	} catch (e) {
 		return {
 			protocol: '',
 			host: '',
@@ -177,15 +186,6 @@ export function processUrl(src) {
 			anchor: '',
 		};
 	}
-	const res = url.parse(src);
-
-	return {
-		protocol: res.protocol ? res.protocol.substr(0, res.protocol.length - 1) : '',
-		host: res.hostname || '',
-		path: res.pathname ? res.pathname.substr(1) : '',
-		host_with_path: (res.host || '') + (res.pathname || ''),
-		anchor: res.hash ? res.hash.substr(1) : '',
-	};
 }
 
 /**
@@ -199,7 +199,15 @@ export function processUrlQuery(src) {
 		return {};
 	}
 
-	return url.parse(src, true).query;
+	try {
+		const res = {};
+		for (const [key, value] of new URL(src).searchParams.entries()) {
+			res[key] = value;
+		}
+		return res;
+	} catch (e) {
+		return {};
+	}
 }
 
 /**
