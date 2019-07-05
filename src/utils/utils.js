@@ -165,25 +165,18 @@ export function processFpeUrl(src) {
  * @memberOf BackgroundUtils
  *
  * @param  {string} src 	the source url
- * @return {Object} 		contains url parts as properties
+ * @return {URL} 		contains url parts as properties
+ *
  */
 export function processUrl(src) {
 	try {
 		const res = new URL(src);
-		return {
-			protocol: res.protocol ? res.protocol.substr(0, res.protocol.length - 1) : '',
-			host: res.hostname || '',
-			path: res.pathname ? res.pathname.substr(1) : '',
-			host_with_path: (res.host || '') + (res.pathname || ''),
-			anchor: res.hash ? res.hash.substr(1) : '',
-		};
+		return res;
 	} catch (e) {
 		return {
 			protocol: '',
-			host: '',
-			path: '',
-			host_with_path: '',
-			anchor: '',
+			hostname: '',
+			pathname: '',
 		};
 	}
 }

@@ -63,7 +63,7 @@ class Policy {
 	 */
 	whitelisted(url) {
 		if (url) {
-			url = processUrl(url).host;
+			url = processUrl(url).hostname;
 			url = url.replace(/^www\./, '');
 			const sites = conf.site_whitelist || [];
 			const num_sites = sites.length;
@@ -87,7 +87,7 @@ class Policy {
 	 */
 	blacklisted(url) {
 		if (url) {
-			url = processUrl(url).host;
+			url = processUrl(url).hostname;
 			url = url.replace(/^www\./, '');
 			const sites = conf.site_blacklist || [];
 			const num_sites = sites.length;

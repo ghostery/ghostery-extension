@@ -115,8 +115,8 @@ export function buildC2P(details, app_id) {
  * @return {string}  					url of the internal template of the blocked redirect page
  */
 export function buildRedirectC2P(requestId, redirectUrls, app_id) {
-	const host_url = processUrl(redirectUrls.url).host;
-	const redirect_url = processUrl(redirectUrls.redirectUrl).host;
+	const host_url = processUrl(redirectUrls.url).hostname;
+	const redirect_url = processUrl(redirectUrls.redirectUrl).hostname;
 	const app_name = bugDb.db.apps[app_id].name;
 
 	globals.BLOCKED_REDIRECT_DATA = {};
