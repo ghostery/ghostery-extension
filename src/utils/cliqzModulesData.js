@@ -12,96 +12,84 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import { extend } from 'underscore';
 import conf from '../classes/Conf';
 import cliqz from '../classes/Cliqz';
 
 const { adblocker, antitracking } = cliqz.modules;
 
-export function getCliqzAntitrackingData(tabId) {
-	return new Promise((resolve) => {
-		if (!conf.enable_anti_tracking || !antitracking.background) {
-			resolve({
-				totalUnsafeCount: 0
-			});
-		}
+/**
+ * Get the totalUnsafeCount of trackers found by Anti-Tracking on this tabId
+ * @param  {int} 	tabId
+ * @return {object}	totalUnsafeCount
+ */
+export function getCliqzAntiTrackingCount(tabId) {
+	let count = 0;
+	if (!conf.enable_anti_tracking || !antitracking.background) {
+		return {
+			totalUnsafeCount: count
+		};
+	}
 
-		antitracking.background.actions.aggregatedBlockingStats(tabId).then((antitrackingData) => {
-			let totalUnsafeCount = 0;
-			for (const category in antitrackingData) {
-				if (antitrackingData.hasOwnProperty(category)) {
-					for (const app in antitrackingData[category]) {
-						if (antitrackingData[category][app] === 'unsafe') {
-							totalUnsafeCount++;
-						}
-					}
-				}
-			}
-			antitrackingData.totalUnsafeCount = totalUnsafeCount;
-			resolve(antitrackingData);
-		}).catch(() => {
-			resolve({
-				totalUnsafeCount: 0
-			});
-		});
-	});
+	// Count up number of fingerprints and cookies found
+	const { bugs, others } = antitracking.background.actions.getGhosteryStats(tabId);
+	const allStats = Object.assign({}, bugs, others);
+	const values = Object.values(allStats);
+
+	for (const val of values) {
+		count += val.cookies + val.fingerprints;
+	}
+
+	return {
+		totalUnsafeCount: count
+	};
 }
 
-export function getCliqzAdblockingData(tabId) {
+/**
+ * Get the totalCount of ads found by the Ad Blocker on this tabId
+ * @param  {int} 	tabId
+ * @return {object}
+ */
+export function getCliqzAdBlockingCount(tabId) {
 	if (!conf.enable_ad_block || !adblocker.background) {
 		return {
 			totalCount: 0
 		};
 	}
 
-	const adBlocking = adblocker.background.actions.getAdBlockInfoForTab(tabId);
-	return adBlocking || { totalCount: 0 };
+	const adBlockInfo = adblocker.background.actions.getAdBlockInfoForTab(tabId);
+	return {
+		totalCount: adBlockInfo.totalCount || 0,
+	};
 }
 
 /**
- * TODO: Add a test that verifies the following structure so that we automatically know if Cliqz changes it and we need to updated it
- 	The returned object has the following structure:
-	{
-		bugs: {
-			4147: { cookies: 3, fingerprints: 4, ads: 0 },
-			another_bug_id: { cookies: 2, .....
-			....
-		},
-		others: {
-			CloudFlare: {
-				ads: 0,
-				cat: "cdn",
-				cookies: 3,
-				domains: ["cdnjs.cloudlare.com", ...],
-				fingerprints: 4,
-				name: "CloudFlare",
-				wtm: "cloudflare",
-			},
-			...
-		}
-	}
+ * Get list of matched bug_ids from Anti-Tracking and Ad-Blocking for this
+ * tab, along with list of 'other' trackers found that do not match known bug_ids.
+ * @param  {int} 	tabId
+ * @return {object}
  */
-export function getCliqzGhosteryStats(tabId) {
-	if (!conf.enable_anti_tracking) {
-		return {
-			bugs: {},
-			others: {},
-		};
-	}
+export function getCliqzGhosteryBugs(tabId) {
+	// Merge Ad-Block stats into Anti-Track Stats
+	const antiTrackingStats = (conf.enable_anti_tracking) ? antitracking.background.actions.getGhosteryStats(tabId) : { bugs: {}, others: {} };
+	const adBlockingStats = (conf.enable_ad_block) ? adblocker.background.actions.getGhosteryStats(tabId) : { bugs: {}, others: {} };
 
-	const ghosteryStats = antitracking.background.actions.getGhosteryStats(tabId);
-	return ghosteryStats;
+	return {
+		bugs: extend({}, antiTrackingStats.bugs, adBlockingStats.bugs),
+		others: extend({}, antiTrackingStats.others, adBlockingStats.others),
+	};
 }
 
-export function sendCliqzModulesData(tabId, callback) {
+/**
+ * Send `totalCount` of ads found by Ad Blocker and `totalUnsafeCount`
+ * found by Anti-Tracking
+ * @param  {int}   		tabId
+ * @param  {Function} 	callback
+ */
+export function sendCliqzModuleCounts(tabId, callback) {
 	const modules = { adblock: {}, antitracking: {} };
 
-	modules.adblock = getCliqzAdblockingData(tabId);
-
-	// TODO convert to use finally to avoid duplication (does our Babel transpile it?)
-	getCliqzAntitrackingData(tabId).then((antitrackingData) => {
-		modules.antitracking = antitrackingData;
-		callback(modules);
-	}).catch(() => {
-		callback(modules);
-	});
+	modules.adblock = getCliqzAdBlockingCount(tabId);
+	modules.antitracking = getCliqzAntiTrackingCount(tabId);
+	callback(modules);
 }

@@ -49,7 +49,7 @@ import * as common from './utils/common';
 import * as utils from './utils/utils';
 import { _getJSONAPIErrorsObject } from './utils/api';
 import { importCliqzSettings } from './utils/cliqzSettingImport';
-import { sendCliqzModulesData } from './utils/cliqzModulesData';
+import { sendCliqzModuleCounts } from './utils/cliqzModulesData';
 
 // For debug purposes, provide Access to the internals of `browser-core`
 // module from Developer Tools Console.
@@ -841,12 +841,12 @@ function onMessageHandler(request, sender, callback) {
 		callback();
 		return false;
 	}
-	if (name === 'getCliqzModuleData') {
+	if (name === 'getCliqzModuleData') { // panel-android only
 		if (message && message.tabId) {
-			sendCliqzModulesData(message.tabId, callback);
+			sendCliqzModuleCounts(message.tabId, callback);
 		} else {
 			utils.getActiveTab((tab) => {
-				sendCliqzModulesData(tab.id, callback);
+				sendCliqzModuleCounts(tab.id, callback);
 			});
 		}
 		return true;
