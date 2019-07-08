@@ -97,12 +97,13 @@
 	background-repeat: no-repeat;
 	background-image: url('../../app/images/panel/line.svg');
 	&:hover {
-		background-position: calc(50% - 1.75px);
+		background-position: calc(50% - 2px);
 		background-color: $ghosty-blue;
 		background-size: 7px 20px;
 		background-image: url('../../app/images/panel/caret-left.svg');
 	}
 	&.condensed:hover {
+		background-position: calc(50% - 1px);
 		background-position: center;
 		background-image: url('../../app/images/panel/caret-right.svg');
 	}
