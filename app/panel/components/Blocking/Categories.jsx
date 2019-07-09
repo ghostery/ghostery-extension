@@ -29,7 +29,12 @@ class Categories extends React.Component {
 	* @return {ReactComponent}   ReactComponent instance
 	*/
 	render() {
-		const { categories, expandAll, antiTracking } = this.props;
+		const {
+			categories,
+			expandAll,
+			antiTracking,
+			enable_anti_tracking,
+		} = this.props;
 		const globalBlocking = !!this.props.globalBlocking;
 		const filtered = !!this.props.filtered;
 
@@ -95,6 +100,7 @@ class Categories extends React.Component {
 				language={this.props.language}
 				smartBlockActive={this.props.smartBlockActive}
 				smartBlock={this.props.smartBlock}
+				enable_anti_tracking={enable_anti_tracking}
 			/>
 		) : null;
 

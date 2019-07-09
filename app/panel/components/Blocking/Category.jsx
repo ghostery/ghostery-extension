@@ -13,6 +13,8 @@
 
 import React from 'react';
 import Trackers from './Trackers';
+import { CliqzFeature } from '../BuildingBlocks';
+import { IS_CLIQZ } from '../../../../src/classes/Globals';
 
 /**
  * @class Implement Category component, which represents a
@@ -159,10 +161,21 @@ class Category extends React.Component {
 	* @return {ReactComponent}   ReactComponent instance
 	*/
 	render() {
-		const { category, paused_blocking, sitePolicy } = this.props;
+		const {
+			category,
+			paused_blocking,
+			sitePolicy,
+			enable_anti_tracking,
+			actions,
+		} = this.props;
+
 		const globalBlocking = !!this.props.globalBlocking;
-		const filteredText = { color: 'red' };
+		const isDataPoint = category.id === 'other_data_points';
+
 		const checkBoxStyle = `${(this.state.totalShownBlocked && this.state.allShownBlocked) ? 'all-blocked ' : (this.state.totalShownBlocked ? 'some-blocked ' : '')} checkbox-container`;
+		const caretClasses = (this.state.isExpanded ? 'caret-up' : 'caret-down') + (isDataPoint ? ' Category__antiTrackingCaret' : '');
+		const filteredText = { color: 'red' };
+
 		let trackersBlockedCount;
 		if (paused_blocking || sitePolicy === 2) {
 			trackersBlockedCount = 0;
@@ -171,7 +184,18 @@ class Category extends React.Component {
 		} else {
 			trackersBlockedCount = category.num_blocked || 0;
 		}
-		const isDataPoint = category.id === 'other_data_points';
+
+
+		const clickCliqzFeature = (options) => {
+			const { feature, status, text } = options;
+			this.props.actions.showNotification({
+				updated: feature,
+				reload: true,
+				text,
+			});
+			actions.toggleCliqzFeature(feature, status);
+		};
+		const cliqzInactive = paused_blocking || sitePolicy || IS_CLIQZ;
 
 		return (
 			<div className={`${category.num_shown === 0 ? 'hide' : ''} blocking-category`}>
@@ -180,7 +204,7 @@ class Category extends React.Component {
 						<div className="columns shrink align-self-top">
 							<img className="cat-image" src={`/app/images/panel/${category.img_name}.svg`} />
 						</div>
-						<div className="columns collapse-left collapse-right">
+						<div className="columns collapse-left collapse-right align-self-top">
 							<div className={`cat-name ${this.props.globalBlocking ? 'has-tooltip' : ''}`} onClick={this.toggleCategoryTrackers}>
 								{ category.name }
 							</div>
@@ -214,8 +238,8 @@ class Category extends React.Component {
 							</div>
 						</div>
 						<div className="columns collapse-left collapse-right shrink align-self-justify">
-							<div className={this.state.isExpanded ? 'caret-up' : 'caret-down'} onClick={this.toggleCategoryTrackers} />
-							{category.id !== 'other_data_points' && (
+							<div className={caretClasses} onClick={this.toggleCategoryTrackers} />
+							{!isDataPoint && (
 								<div className={checkBoxStyle} onClick={this.clickCategoryStatus}>
 									<span className={this.props.index ? 't-tooltip-up-left' : 't-tooltip-down-left'} data-g-tooltip={t('panel_tracker_block_tooltip')} onMouseOver={this.showTooltip} onMouseOut={this.hideTooltip} >
 										<svg className="blocking-icons status t-tooltip-up-left" data-g-tooltip={t('panel_tracker_block_tooltip')} onClick={this.clickTrackerStatus} width="20px" height="20px" viewBox="0 0 20 20">
@@ -225,9 +249,13 @@ class Category extends React.Component {
 												<svg width="20px" height="20px" viewBox="1.5 1 20 20">
 													<path className="dash" d="M5,10.5 15,10.5" />
 												</svg>
+												{/* DATAPOINT CHECK: <svg width="14" height="14" viewBox="-3.5 -3.5 17 17">
+													<path className="check" fill="#FFF" fillRule="evenodd" stroke="#FFF" strokeWidth="1.75" d="M7.128 1.02a.433.433 0 0 0-.256 0L1.383 2.474A.492.492 0 0 0 1 2.961c.026 3.908 2.12 7.535 5.72 9.962A.515.515 0 0 0 7 13a.515.515 0 0 0 .28-.077c3.6-2.427 5.694-6.054 5.72-9.962a.492.492 0 0 0-.383-.486L7.127 1.02z" />
+												</svg> */}
 												<svg width="20px" height="20px" viewBox="-2.5 -2.5 20 20">
 													<path className="check" d="M8.062 6l3.51-3.51c.57-.57.57-1.493 0-2.063-.57-.57-1.495-.57-2.063 0L6 3.937 2.49.428c-.57-.57-1.493-.57-2.063 0-.57.57-.57 1.494 0 2.064L3.937 6 .426 9.51c-.57.57-.57 1.493 0 2.063.57.57 1.494.57 2.063 0L6 8.063l3.51 3.508c.57.57 1.493.57 2.063 0 .57-.57.57-1.493 0-2.062L8.063 6z" fillRule="nonzero" />
 												</svg>
+												{/* DO WE NEED THE TWO SVGS BELOW? THEY ARE NEVER DISPLAYED */}
 												<svg width="20px" height="20px" viewBox="-2.75 -2.75 20 20">
 													<circle className="trust-circle" cx="5.875" cy="5.875" r="5.875" fillRule="evenodd" />
 												</svg>
@@ -243,11 +271,18 @@ class Category extends React.Component {
 								</div>
 							)}
 							{isDataPoint && (
-								<span className={this.props.index ? 't-tooltip-up-left' : 't-tooltip-down-left'} data-g-tooltip="Data points anonymized by Anti-Tracking" onMouseOver={this.showTooltip} onMouseOut={this.hideTooltip} >
-									<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg">
-										<path d="M10.190881 1.028859c-.114948-.038479-.267884-.038479-.382831 0L1.574491 3.211632C1.229895 3.2881 1 3.594463 1 3.93906c.038479 5.85937 3.178574 11.297185 8.578155 14.935303.114948.076469.268129.114948.42131.114948.153182 0 .306363-.038479.42131-.114948 5.399581-3.638118 8.539676-9.075933 8.578155-14.935303 0-.344597-.229894-.65096-.574491-.727428l-8.233558-2.182773z" stroke="#1DAFED" strokeWidth="2" fill="none" fillRule="evenodd" />
-									</svg>
-								</span>
+								<div className="Category__antiTrackingButton">
+									<CliqzFeature
+										clickButton={clickCliqzFeature}
+										type="anti_track"
+										active={enable_anti_tracking}
+										cliqzInactive={cliqzInactive}
+										isCondensed
+										isTooltipHeader
+										isTooltipBody
+										tooltipPosition="top top-left"
+									/>
+								</div>
 							)}
 						</div>
 					</div>

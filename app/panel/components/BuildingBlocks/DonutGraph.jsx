@@ -349,12 +349,20 @@ class DonutGraph extends React.Component {
 			<div className={componentClasses}>
 				<div className="DonutGraph__tooltipContainer">
 					{categories.map(cat => (
-						<span key={cat.id} id={`${cat.id}_tooltip`} className="DonutGraph__tooltip tooltip top">
+						<span
+							className="DonutGraph__tooltip tooltip top"
+							id={`${cat.id}_tooltip`}
+							key={cat.id}
+						>
 							{cat.name}
 						</span>
 					))}
 					{antiTracking && !!antiTracking.totalUnsafeCount && (
-						<span key="other_data_points" id="other_data_points_tooltip" className="tooltip top">
+						<span
+							className="DonutGraph__tooltip tooltip top"
+							id="other_data_points_tooltip"
+							key="other_data_points"
+						>
 							Other Data Points
 						</span>
 					)}

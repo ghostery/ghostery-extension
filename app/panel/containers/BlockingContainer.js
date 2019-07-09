@@ -16,7 +16,7 @@ import { bindActionCreators } from 'redux';
 import Blocking from '../components/Blocking';
 import * as blockingActions from '../actions/BlockingActions';
 import { updateTrackerCounts } from '../actions/SummaryActions';
-import { showNotification } from '../actions/PanelActions';
+import { showNotification, toggleCliqzFeature } from '../actions/PanelActions';
 /**
  * Map redux store state properties to Blocking view component own properties.
  * @memberOf PanelContainers
@@ -29,11 +29,12 @@ import { showNotification } from '../actions/PanelActions';
 const mapStateToProps = state => Object.assign({}, state.blocking, {
 	is_expanded: state.panel.is_expanded,
 	language: state.panel.language,
+	smartBlock: state.panel.smartBlock,
+	enable_anti_tracking: state.panel.enable_anti_tracking,
 	pageHost: state.summary.pageHost,
 	paused_blocking: state.summary.paused_blocking,
 	sitePolicy: state.summary.sitePolicy,
 	smartBlockActive: state.panel.enable_smart_block,
-	smartBlock: state.panel.smartBlock,
 	antiTracking: state.summary.antiTracking,
 });
 /**
@@ -44,7 +45,14 @@ const mapStateToProps = state => Object.assign({}, state.blocking, {
  * @return {function}          	  to be used as an argument in redux connect call
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign(blockingActions, { updateTrackerCounts, showNotification }), dispatch)
+	actions: bindActionCreators(
+		Object.assign(blockingActions, {
+			updateTrackerCounts,
+			showNotification,
+			toggleCliqzFeature
+		}),
+		dispatch
+	)
 });
 /**
  * Connects Blocking component to the Redux store.
