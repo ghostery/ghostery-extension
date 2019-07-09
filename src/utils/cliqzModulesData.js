@@ -60,10 +60,46 @@ export function getCliqzAdblockingData(tabId) {
 	return adBlocking || { totalCount: 0 };
 }
 
+/**
+ * TODO: Add a test that verifies the following structure so that we automatically know if Cliqz changes it and we need to updated it
+ 	The returned object has the following structure:
+	{
+		bugs: {
+			4147: { cookies: 3, fingerprints: 4, ads: 0 },
+			another_bug_id: { cookies: 2, .....
+			....
+		},
+		others: {
+			CloudFlare: {
+				ads: 0,
+				cat: "cdn",
+				cookies: 3,
+				domains: ["cdnjs.cloudlare.com", ...],
+				fingerprints: 4,
+				name: "CloudFlare",
+				wtm: "cloudflare",
+			},
+			...
+		}
+	}
+ */
+export function getCliqzGhosteryStats(tabId) {
+	if (!conf.enable_anti_tracking) {
+		return {
+			bugs: {},
+			others: {},
+		};
+	}
+
+	const ghosteryStats = antitracking.background.actions.getGhosteryStats(tabId);
+	return ghosteryStats;
+}
+
 export function sendCliqzModulesData(tabId, callback) {
 	const modules = { adblock: {}, antitracking: {} };
 
 	modules.adblock = getCliqzAdblockingData(tabId);
+
 	// TODO convert to use finally to avoid duplication (does our Babel transpile it?)
 	getCliqzAntitrackingData(tabId).then((antitrackingData) => {
 		modules.antitracking = antitrackingData;

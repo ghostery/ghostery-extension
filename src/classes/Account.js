@@ -13,7 +13,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import _ from 'underscore';
+import { isEqual } from 'underscore';
 import normalize from 'json-api-normalizer';
 import build from 'redux-object';
 import RSVP from 'rsvp';
@@ -542,7 +542,7 @@ class Account {
 		}
 		SYNC_SET.forEach((key) => {
 			if (settings[key] !== undefined &&
-				!_.isEqual(conf[key], settings[key])) {
+				!isEqual(conf[key], settings[key])) {
 				conf[key] = settings[key];
 			}
 		});

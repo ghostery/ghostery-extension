@@ -27,6 +27,7 @@ import globals from './Globals';
  */
 export const BLOCK_REASON_BLOCK_PAUSED = 'BLOCK_REASON_BLOCK_PAUSED';
 export const BLOCK_REASON_GLOBAL_BLOCKED = 'BLOCK_REASON_GLOBAL_BLOCKED';
+export const BLOCK_REASON_GLOBAL_UNBLOCKED = 'BLOCK_REASON_GLOBAL_UNBLOCKED';
 export const BLOCK_REASON_WHITELISTED = 'BLOCK_REASON_WHITELISTED';
 export const BLOCK_REASON_BLACKLISTED = 'BLOCK_REASON_BLACKLISTED';
 export const BLOCK_REASON_SS_UNBLOCKED = 'BLOCK_REASON_SS_UNBLOCKED';
@@ -47,10 +48,10 @@ class Policy {
 	 */
 	getSitePolicy(url) {
 		if (this.blacklisted(url)) {
-			return 1;
+			return globals.BLACKLISTED;
 		}
 		if (this.whitelisted(url)) {
-			return 2;
+			return globals.WHITELISTED;
 		}
 		return false;
 	}
@@ -125,10 +126,10 @@ class Policy {
 			return { block: false, reason: BLOCK_REASON_BLOCK_PAUSED };
 		}
 
+		const allowedOnce = c2pDb.allowedOnce(tab_id, app_id);
 		if (conf.selected_app_ids.hasOwnProperty(app_id)) {
 			if (conf.toggle_individual_trackers && conf.site_specific_unblocks.hasOwnProperty(tab_host) && conf.site_specific_unblocks[tab_host].includes(+app_id)) {
 				if (this.blacklisted(tab_url)) {
-					const allowedOnce = c2pDb.allowedOnce(tab_id, app_id);
 					return { block: !allowedOnce, reason: allowedOnce ? BLOCK_REASON_C2P_ALLOWED_ONCE : BLOCK_REASON_BLACKLISTED };
 				}
 				return { block: false, reason: BLOCK_REASON_SS_UNBLOCKED };
@@ -136,22 +137,19 @@ class Policy {
 			if (this.whitelisted(tab_url)) {
 				return { block: false, reason: BLOCK_REASON_WHITELISTED };
 			}
-			const allowedOnce = c2pDb.allowedOnce(tab_id, app_id);
 			return { block: !allowedOnce, reason: allowedOnce ? BLOCK_REASON_C2P_ALLOWED_ONCE : BLOCK_REASON_GLOBAL_BLOCKED };
 		}
-		// We get here when app_id is not selected for blocking
+		// We get here when app_id is not selected for global blocking
 		if (conf.toggle_individual_trackers && conf.site_specific_blocks.hasOwnProperty(tab_host) && conf.site_specific_blocks[tab_host].includes(+app_id)) {
 			if (this.whitelisted(tab_url)) {
 				return { block: false, reason: BLOCK_REASON_WHITELISTED };
 			}
-			const allowedOnce = c2pDb.allowedOnce(tab_id, app_id);
 			return { block: !allowedOnce, reason: allowedOnce ? BLOCK_REASON_C2P_ALLOWED_ONCE : BLOCK_REASON_SS_BLOCKED };
 		}
 		if (this.blacklisted(tab_url)) {
-			const allowedOnce = c2pDb.allowedOnce(tab_id, app_id);
 			return { block: !allowedOnce, reason: allowedOnce ? BLOCK_REASON_C2P_ALLOWED_ONCE : BLOCK_REASON_BLACKLISTED };
 		}
-		return { block: false, reason: BLOCK_REASON_GLOBAL_BLOCKED };
+		return { block: false, reason: allowedOnce ? BLOCK_REASON_C2P_ALLOWED_ONCE : BLOCK_REASON_GLOBAL_UNBLOCKED };
 	}
 }
 

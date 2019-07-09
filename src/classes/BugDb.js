@@ -14,7 +14,7 @@
 /* eslint no-param-reassign: 0 */
 /* eslint no-shadow: 0 */
 
-import _ from 'underscore';
+import { difference, each, every, keys, reduce, size } from 'underscore';
 import conf from './Conf';
 import Updatable from './Updatable';
 import { defineLazyProperty, flushChromeMemoryCache } from '../utils/utils';
@@ -38,9 +38,9 @@ class BugDb extends Updatable {
 	updateNewAppIds(new_apps, old_apps) {
 		log('updating newAppIds...');
 
-		const new_app_ids = _.difference(
-			_.keys(new_apps),
-			_.keys(old_apps)
+		const new_app_ids = difference(
+			keys(new_apps),
+			keys(old_apps)
 		).map(Number);
 
 		conf.new_app_ids = new_app_ids;
@@ -55,7 +55,7 @@ class BugDb extends Updatable {
 		if (conf.block_by_default) {
 			log('applying block-by-default...');
 			const { selected_app_ids } = conf;
-			_.each(new_app_ids, (app_id) => {
+			each(new_app_ids, (app_id) => {
 				selected_app_ids[app_id] = 1;
 			});
 			conf.selected_app_ids = selected_app_ids;
@@ -184,13 +184,13 @@ class BugDb extends Updatable {
 
 		log('setting bugdb noneSelected/allSelected...');
 
-		const num_selected = _.size(conf.selected_app_ids);
+		const num_selected = size(conf.selected_app_ids);
 		db.noneSelected = (num_selected === 0);
 
 		// since allSelected is slow to eval, make it lazy
 		defineLazyProperty(db, 'allSelected', () => {
-			const num_selected = _.size(conf.selected_app_ids);
-			return (!!num_selected && _.every(db.apps, (app, app_id) => conf.selected_app_ids.hasOwnProperty(app_id)));
+			const num_selected = size(conf.selected_app_ids);
+			return (!!num_selected && every(db.apps, (app, app_id) => conf.selected_app_ids.hasOwnProperty(app_id)));
 		});
 
 		log('processed bugdb...');
@@ -211,7 +211,7 @@ class BugDb extends Updatable {
 
 				// pre-trie/legacy db
 				} else if (old_bugs.hasOwnProperty('bugsVersion') && bugs.version !== old_bugs.bugsVersion) {
-					const old_apps = _.reduce(old_bugs.bugs, (memo, bug) => {
+					const old_apps = reduce(old_bugs.bugs, (memo, bug) => {
 						memo[bug.aid] = true;
 						return memo;
 					}, {});

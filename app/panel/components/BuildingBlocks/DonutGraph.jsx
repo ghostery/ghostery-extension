@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import throttle from 'lodash.throttle';
+import { throttle } from 'underscore';
 import React from 'react';
 import ClassNames from 'classnames';
 import {
@@ -236,7 +236,7 @@ class DonutGraph extends React.Component {
 		categories.forEach((cat) => {
 			const tooltip = document.getElementById(`${cat.id}_tooltip`);
 			if (tooltip) {
-				tooltip.classList.remove('show');
+				tooltip.classList.remove('DonutGraph__tooltip--show');
 			}
 		});
 
@@ -288,13 +288,13 @@ class DonutGraph extends React.Component {
 				if (tooltip) {
 					tooltip.style.left = `${pX - (tooltip.offsetWidth / 2)}px`;
 					tooltip.style.top = `${pY - (tooltip.offsetHeight + 8)}px`;
-					tooltip.classList.add('show');
+					tooltip.classList.add('DonutGraph__tooltip--show');
 				}
 			})
 			.on('mouseout', (d) => {
 				const tooltip = this.grabTooltip(d);
 				if (tooltip) {
-					tooltip.classList.remove('show');
+					tooltip.classList.remove('DonutGraph__tooltip--show');
 				}
 			})
 			.on('click', (d) => {
@@ -339,16 +339,17 @@ class DonutGraph extends React.Component {
 			antiTracking,
 			totalCount,
 		} = this.props;
-		const componentClasses = ClassNames('sub-component', 'donut-graph', {
-			small: isSmall,
-			big: !isSmall,
+		const componentClasses = ClassNames('DonutGraph', {
+			'DonutGraph--big': !isSmall,
+			'DonutGraph--small': isSmall,
 		});
 
+		// TODO Foundation dependency: tooltip
 		return (
 			<div className={componentClasses}>
-				<div className="tooltip-container">
+				<div className="DonutGraph__tooltipContainer">
 					{categories.map(cat => (
-						<span key={cat.id} id={`${cat.id}_tooltip`} className="tooltip top">
+						<span key={cat.id} id={`${cat.id}_tooltip`} className="DonutGraph__tooltip tooltip top">
 							{cat.name}
 						</span>
 					))}
@@ -358,9 +359,9 @@ class DonutGraph extends React.Component {
 						</span>
 					)}
 				</div>
-				<div className="graph-ref" ref={(node) => { this.node = node; }} />
-				<div className="graph-text clickable" onClick={this.clickGraphText}>
-					<div className="graph-text-count g-tooltip">
+				<div className="DonutGraph__ref" ref={(node) => { this.node = node; }} />
+				<div className="DonutGraph__textCountContainer clickable" onClick={this.clickGraphText}>
+					<div className="DonutGraph__textCount g-tooltip">
 						{totalCount}
 						<Tooltip
 							delay="0"

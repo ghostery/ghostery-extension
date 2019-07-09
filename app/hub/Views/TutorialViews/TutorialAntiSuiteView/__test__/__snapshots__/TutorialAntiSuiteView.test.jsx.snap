@@ -14,7 +14,7 @@ exports[`app/hub/Views/TutorialViews/TutorialAntiSuiteView component Snapshot te
     </div>
     <img
       alt="hub_tutorial_simple_view"
-      className="TutorialAntiSuiteView__image simple"
+      className="TutorialAntiSuiteView__image antisuite-simple"
       src="/app/images/hub/tutorial/antisuite-simple.png"
     />
     <div
@@ -24,7 +24,7 @@ exports[`app/hub/Views/TutorialViews/TutorialAntiSuiteView component Snapshot te
     </div>
     <img
       alt="hub_tutorial_detailed_view"
-      className="TutorialAntiSuiteView__image detailed"
+      className="TutorialAntiSuiteView__image antisuite-detailed"
       src="/app/images/hub/tutorial/antisuite-detailed.png"
     />
   </div>

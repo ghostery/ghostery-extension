@@ -18,7 +18,7 @@
 /**
  * @namespace Background
  */
-import _ from 'underscore';
+import { debounce, every, size } from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
 import cliqz, { prefs } from './classes/Cliqz';
 // object class
@@ -85,8 +85,6 @@ const offers = cliqz.modules['offers-v2'] || moduleMock;
 const insights = cliqz.modules.insights || moduleMock;
 // add ghostery module to expose ghostery state to cliqz
 cliqz.modules.ghostery = new GhosteryModule();
-
-insights.enable();
 
 let OFFERS_ENABLE_SIGNAL;
 
@@ -162,7 +160,7 @@ function setGhosteryDefaultBlocking() {
 
 /**
  * Pulls down latest version.json and triggers
- * udpates of all db files.
+ * updates of all db files.
  * @memberOf Background
  *
  * @return {Promise} 	database updated data
@@ -782,6 +780,8 @@ function onMessageHandler(request, sender, callback) {
 	}
 
 	// HANDLE UNIVERSAL EVENTS HERE (NO ORIGIN LISTED ABOVE)
+	// The 'getPanelData' message is never sent by the panel, which uses ports only since 8.3.2
+	// The  message is still sent by panel-android and by the hub as of 8.4.0
 	if (name === 'getPanelData') {
 		if (!message.tabId) {
 			utils.getActiveTab((tab) => {
@@ -795,9 +795,6 @@ function onMessageHandler(request, sender, callback) {
 			});
 		}
 		account.getUserSettings().catch(err => log('Failed getting user settings from getPanelData:', err));
-		if (offers.isEnabled && conf.enable_offers && conf.is_expert) {
-			rewards.filterOffersByRemote().catch(err => log('Failed to filter offers by remote:', err));
-		}
 		return true;
 	} else if (name === 'getStats') {
 		insights.action('getStatsTimeline', message.from, message.to, true, true).then((data) => {
@@ -934,7 +931,7 @@ function onMessageHandler(request, sender, callback) {
 	} else if (name === 'account.openSupportPage') {
 		metrics.ping('priority_support_submit');
 		const subscriber = account.hasScopesUnverified(['subscriptions:plus']);
-		const tabUrl = subscriber ? `https://account.${globals.GHOSTERY_DOMAIN}.com/support` : 'https://ghostery.zendesk.com/hc/';
+		const tabUrl = subscriber ? `https://account.${globals.GHOSTERY_DOMAIN}.com/support` : 'https://www.ghostery.com/faqs/';
 		utils.openNewTab({ url: tabUrl, become_active: true });
 		return true;
 	} else if (name === 'account.resetPassword') {
@@ -1060,11 +1057,11 @@ function onMessageHandler(request, sender, callback) {
  */
 function initializeDispatcher() {
 	dispatcher.on('conf.save.selected_app_ids', (appIds) => {
-		const num_selected = _.size(appIds);
+		const num_selected = size(appIds);
 		const { db } = bugDb;
 		db.noneSelected = (num_selected === 0);
-		// can't simply compare num_selected and _.size(db.apps) since apps get removed sometimes
-		db.allSelected = (!!num_selected && _.every(db.apps, (app, app_id) => appIds.hasOwnProperty(app_id)));
+		// can't simply compare num_selected and size(db.apps) since apps get removed sometimes
+		db.allSelected = (!!num_selected && every(db.apps, (app, app_id) => appIds.hasOwnProperty(app_id)));
 	});
 	dispatcher.on('conf.save.site_whitelist', () => {
 		// TODO debounce with below
@@ -1120,7 +1117,7 @@ function initializeDispatcher() {
 		}
 	});
 
-	dispatcher.on('conf.changed.settings', _.debounce((key) => {
+	dispatcher.on('conf.changed.settings', debounce((key) => {
 		log('Conf value changed for a watched user setting:', key);
 	}, 200));
 
@@ -1221,7 +1218,6 @@ function initialiseWebRequestPipeline() {
 				const result = events.onBeforeRequest(state);
 				if (result && (result.cancel === true || result.redirectUrl)) {
 					Object.assign(response, result);
-					return false;
 				}
 				return true;
 			}
@@ -1264,39 +1260,7 @@ function isWhitelisted(state) {
  */
 antitracking.on('enabled', () => {
 	antitracking.isReady().then(() => {
-		// remove Cliqz-side whitelisting steps and replace with ghostery ones.
-		const replacedSteps = ['onBeforeSendHeaders', 'onHeadersReceived'].map(stage =>
-			Promise.all([
-				antitracking.action('addPipelineStep', stage, {
-					name: 'checkGhosteryWhitelisted',
-					spec: 'break',
-					fn: (state) => {
-						if (isWhitelisted(state)) {
-							const step = stage === 'onHeadersReceived' ? 'set_cookie' : 'cookie';
-							state.incrementStat(`${step}_allow_whitelisted`);
-							return false;
-						}
-						return true;
-					},
-					before: ['cookieContext.checkCookieTrust'],
-				})
-			])
-		).concat([
-			antitracking.action('removePipelineStep', 'onBeforeRequest', 'checkSourceWhitelisted'),
-			antitracking.action('addPipelineStep', 'onBeforeRequest', {
-				name: 'checkGhosteryWhitelisted',
-				spec: 'break',
-				fn: (state) => {
-					if (isWhitelisted(state)) {
-						state.incrementStat('ghostery_whitelisted');
-						return false;
-					}
-					return true;
-				},
-				before: ['checkShouldBlock'],
-			}),
-		]);
-		return Promise.all(replacedSteps);
+		antitracking.action('setWhiteListCheck', isWhitelisted);
 	});
 });
 
@@ -1306,19 +1270,7 @@ antitracking.on('enabled', () => {
  * @memberOf Background
  */
 adblocker.on('enabled', () => {
-	adblocker.isReady().then(() =>
-		Promise.all([
-			adblocker.action('removePipelineStep', 'checkWhitelist'),
-			adblocker.action('addPipelineStep', {
-				name: 'checkGhosteryWhitelist',
-				spec: 'break',
-				fn: state => !isWhitelisted(state),
-				before: ['checkBlocklist']
-			}),
-			adblocker.action('addWhiteListCheck',
-				url => isWhitelisted({ tabUrl: url }))
-		])
-	);
+	adblocker.isReady().then(() => adblocker.action('addWhiteListCheck', url => isWhitelisted({ tabUrl: url })));
 });
 
 /**
@@ -1362,7 +1314,7 @@ offers.on('enabled', () => {
  * Set listener for 'enabled' event for Offers module.
  * It registers message handler for messages with the offers.
  * This handler adds incoming message data to the array of
- * notimication messages (CMP_DATA) to be eventually displayed.
+ * notification messages (CMP_DATA) to be eventually displayed.
  * @memberOf Background
  */
 messageCenter.on('enabled', () => {
@@ -1370,7 +1322,7 @@ messageCenter.on('enabled', () => {
 		log('IN MESSAGE CENTER ON ENABLED', offers, messageCenter);
 		// const messageCenter = cliqz.modules['message-center'];
 		return messageCenter.action('registerMessageHandler', OFFERS_HANDLER_ID, (msg) => {
-			// ffers enabled at the moment when message received
+			// offers enabled at the moment when message received
 			messageCenter.action('hideMessage', OFFERS_HANDLER_ID, msg);
 			msg.Dismiss = 1; // to be immediately dismissed once shown
 			/**
@@ -1407,7 +1359,8 @@ messageCenter.on('enabled', () => {
 				rewards.unreadOfferIds.push(msg.data.offer_id);
 				button.update();
 
-				if (msg.data.offer_data.ui_info.notif_type !== 'star') {
+				// Don't show the Rewards hotdog if Ghostery is currently paused
+				if (msg.data.offer_data.ui_info.notif_type !== 'star' && !globals.SESSION.paused_blocking) {
 					// We use getTabByUrl() instead of getActiveTab()
 					// because user may open the offer-triggering url in a new tab
 					// through the context menu, which may not switch to the new tab
@@ -1640,7 +1593,7 @@ function initializeEventListeners() {
 }
 
 /**
- * Establsh current and previous application versions.
+ * Establish current and previous application versions.
  * @memberOf Background
  */
 function initializeVersioning() {
@@ -1752,6 +1705,8 @@ function initializeGhosteryModules() {
 	}
 	// start cliqz app
 	const cliqzStartup = cliqz.start().then(() => {
+		// enable historical stats
+		setCliqzModuleEnabled(insights, true);
 		// run wrapper tasks which set up base integrations between ghostery and these modules
 		Promise.all([
 			initialiseWebRequestPipeline(),
