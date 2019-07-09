@@ -185,7 +185,7 @@ export function* objectEntries(obj) {
  */
 function _base64urlUnescape(str) {
 	str += new Array(5 - str.length % 4).join('='); // eslint-disable-line no-param-reassign
-	return str.replace(/\-/g, '+').replace(/_/g, '/');
+	return str.replace(/\-/g, '+').replace(/_/g, '/'); // eslint-disable-line no-useless-escape
 }
 
 /**

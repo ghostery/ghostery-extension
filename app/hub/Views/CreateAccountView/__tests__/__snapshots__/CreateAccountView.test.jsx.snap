@@ -38,12 +38,14 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
       >
         <label
           className="CreateAccountView__inputLabel"
+          htmlFor="create-account-email"
         >
           hub_create_account_label_email
         </label>
         <input
           autoComplete="off"
           className="CreateAccountView__inputBox"
+          id="create-account-email"
           name="email"
           onChange={[Function]}
           pattern=".{1,}"
@@ -56,12 +58,14 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
       >
         <label
           className="CreateAccountView__inputLabel"
+          htmlFor="create-account-confirmEmail"
         >
           hub_create_account_label_email_confirm
         </label>
         <input
           autoComplete="off"
           className="CreateAccountView__inputBox"
+          id="create-account-confirmEmail"
           name="confirmEmail"
           onChange={[Function]}
           pattern=".{1,}"
@@ -78,12 +82,14 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
       >
         <label
           className="CreateAccountView__inputLabel"
+          htmlFor="create-account-firstName"
         >
           hub_create_account_label_first_name
         </label>
         <input
           autoComplete="off"
           className="CreateAccountView__inputBox"
+          id="create-account-firstName"
           name="firstName"
           onChange={[Function]}
           pattern=".{1,}"
@@ -96,12 +102,14 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
       >
         <label
           className="CreateAccountView__inputLabel"
+          htmlFor="create-account-lastName"
         >
           hub_create_account_label_email_last_name
         </label>
         <input
           autoComplete="off"
           className="CreateAccountView__inputBox"
+          id="create-account-lastName"
           name="lastName"
           onChange={[Function]}
           pattern=".{1,}"
@@ -118,12 +126,14 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
       >
         <label
           className="CreateAccountView__inputLabel"
+          htmlFor="create-account-password"
         >
           hub_create_account_label_password
         </label>
         <input
           autoComplete="off"
           className="CreateAccountView__inputBox"
+          id="create-account-password"
           name="password"
           onChange={[Function]}
           pattern=".{1,}"
@@ -251,12 +261,14 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
       >
         <label
           className="CreateAccountView__inputLabel"
+          htmlFor="create-account-email"
         >
           hub_create_account_label_email
         </label>
         <input
           autoComplete="off"
           className="CreateAccountView__inputBox error"
+          id="create-account-email"
           name="email"
           onChange={[Function]}
           pattern=".{1,}"
@@ -274,12 +286,14 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
       >
         <label
           className="CreateAccountView__inputLabel"
+          htmlFor="create-account-confirmEmail"
         >
           hub_create_account_label_email_confirm
         </label>
         <input
           autoComplete="off"
           className="CreateAccountView__inputBox error"
+          id="create-account-confirmEmail"
           name="confirmEmail"
           onChange={[Function]}
           pattern=".{1,}"
@@ -301,12 +315,14 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
       >
         <label
           className="CreateAccountView__inputLabel"
+          htmlFor="create-account-firstName"
         >
           hub_create_account_label_first_name
         </label>
         <input
           autoComplete="off"
           className="CreateAccountView__inputBox"
+          id="create-account-firstName"
           name="firstName"
           onChange={[Function]}
           pattern=".{1,}"
@@ -319,12 +335,14 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
       >
         <label
           className="CreateAccountView__inputLabel"
+          htmlFor="create-account-lastName"
         >
           hub_create_account_label_email_last_name
         </label>
         <input
           autoComplete="off"
           className="CreateAccountView__inputBox"
+          id="create-account-lastName"
           name="lastName"
           onChange={[Function]}
           pattern=".{1,}"
@@ -341,12 +359,14 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
       >
         <label
           className="CreateAccountView__inputLabel"
+          htmlFor="create-account-password"
         >
           hub_create_account_label_password
         </label>
         <input
           autoComplete="off"
           className="CreateAccountView__inputBox error"
+          id="create-account-password"
           name="password"
           onChange={[Function]}
           pattern=".{1,}"

@@ -47,6 +47,7 @@ class Subscription extends React.Component {
 			this.props.history.push('/detail');
 		}
 	}
+
 	parseSubscriptionData = () => {
 		const sd = this.props.subscriptionData;
 		if (sd) {
@@ -84,7 +85,9 @@ class Subscription extends React.Component {
 	}
 
 	SubscriptionInfoComponent = () => (<SubscriptionInfo subscriptionData={this.parseSubscriptionData()} />);
+
 	SubscriptionThemesComponent = () => (<SubscriptionThemes isChecked={this.state.isChecked} toggleThemes={this.toggleThemes} />);
+
 	PrioritySupportComponent = () => (<PrioritySupport />);
 
 	/**

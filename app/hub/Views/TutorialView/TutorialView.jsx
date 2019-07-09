@@ -48,7 +48,7 @@ TutorialView.propTypes = {
 	steps: PropTypes.arrayOf(PropTypes.shape({
 		index: PropTypes.number.isRequired,
 		path: PropTypes.string.isRequired,
-		bodyComponent: PropTypes.func.isRequired,
+		bodyComponent: PropTypes.shape.isRequired,
 	})).isRequired,
 	sendMountActions: PropTypes.bool.isRequired,
 };

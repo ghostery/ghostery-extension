@@ -39,11 +39,10 @@ const reducer = combineReducers({
 
 /**
  * Build store using combined reducers and middleware
- * @return {[type]} [description]
  * @return {Object}
  * @memberof HubReactStore
  */
-export default function () {
+export default function() {
 	return createStore(
 		reducer,
 		compose(

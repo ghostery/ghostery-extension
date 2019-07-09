@@ -17,9 +17,9 @@ import { isEqual } from 'underscore';
 import normalize from 'json-api-normalizer';
 import build from 'redux-object';
 import RSVP from 'rsvp';
-import globals from '../classes/Globals';
-import conf from '../classes/Conf';
-import dispatcher from '../classes/Dispatcher';
+import globals from './Globals';
+import conf from './Conf';
+import dispatcher from './Dispatcher';
 import { log } from '../utils/common';
 import Api from '../utils/api';
 
@@ -347,7 +347,7 @@ class Account {
 	 * IMPORTANT: this function does NOT verify the content of the user scopes, therefore scopes
 	 * could have been tampered with.
 	 *
-	 * @param  {rest of string arrays}	string arrays containing the required scope combination(s)
+	 * @param  {...array}	string arrays containing the required scope combination(s)
 	 * @return {boolean}				true if the user scopes match at least one of the required scope combination(s)
 	 */
 	hasScopesUnverified = (...required) => {
@@ -375,6 +375,7 @@ class Account {
 		}
 		return false;
 	}
+
 	/**
 	 * Create settings object for syncing and/or Export.
 	 * @memberOf BackgroundUtils

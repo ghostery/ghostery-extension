@@ -63,20 +63,6 @@ class SetupViewContainer extends Component {
 	}
 
 	/**
-	 * Function to persist the default settings to background
-	 */
-	_setDefaultSettings() {
-		this.setState({ sendMountActions: true });
-		this.props.actions.setSetupStep({ setup_step: 8 });
-		this.props.actions.setBlockingPolicy({ blockingPolicy: BLOCKING_POLICY_RECOMMENDED });
-		this.props.actions.setAntiTracking({ enable_anti_tracking: true });
-		this.props.actions.setAdBlock({ enable_ad_block: true });
-		this.props.actions.setSmartBlocking({ enable_smart_block: true });
-		this.props.actions.setGhosteryRewards({ enable_ghostery_rewards: true });
-		this.props.actions.setHumanWeb({ enable_human_web: true });
-	}
-
-	/**
 	* Function to handle clicking yes on the Modal
 	*/
 	_answerModalYes = () => {
@@ -102,6 +88,20 @@ class SetupViewContainer extends Component {
 		this.props.actions.setSetupShowWarningOverride({
 			setup_show_warning_override: !setup_show_warning_override,
 		});
+	}
+
+	/**
+	 * Function to persist the default settings to background
+	 */
+	_setDefaultSettings() {
+		this.setState({ sendMountActions: true });
+		this.props.actions.setSetupStep({ setup_step: 8 });
+		this.props.actions.setBlockingPolicy({ blockingPolicy: BLOCKING_POLICY_RECOMMENDED });
+		this.props.actions.setAntiTracking({ enable_anti_tracking: true });
+		this.props.actions.setAdBlock({ enable_ad_block: true });
+		this.props.actions.setSmartBlocking({ enable_smart_block: true });
+		this.props.actions.setGhosteryRewards({ enable_ghostery_rewards: true });
+		this.props.actions.setHumanWeb({ enable_human_web: true });
 	}
 
 	/**
@@ -192,7 +192,7 @@ class SetupViewContainer extends Component {
 
 		return (
 			<div className="full-height">
-				<Modal show={showModal} >
+				<Modal show={showModal}>
 					{this._renderModalChildren()}
 				</Modal>
 				<SetupView steps={steps} extraRoutes={extraRoutes} sendMountActions={sendMountActions} />

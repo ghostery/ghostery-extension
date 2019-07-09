@@ -11,5 +11,5 @@ install:
 
 script:
   - node ./tools/licenses/fetchLicenses.js
-  - yarn run lint
-  - yarn run test.unit
+  - yarn lint
+  - yarn test.unit

@@ -55,10 +55,11 @@ const LogInView = (props) => {
 			<div className="LogInView--addPaddingTop row align-center">
 				<div className="columns small-12 medium-10 large-6">
 					<form onSubmit={handleSubmit}>
-						<label className="LogInView__inputLabel">
+						<label htmlFor="login-email" className="LogInView__inputLabel">
 							{t('hub_login_label_email')}
 						</label>
 						<input
+							id="login-email"
 							className={emailInputClassNames}
 							name="email"
 							type="text"
@@ -72,10 +73,11 @@ const LogInView = (props) => {
 								{t('hub_login_label_email_invalid')}
 							</div>
 						)}
-						<label className="LogInView__inputLabel">
+						<label htmlFor="login-password" className="LogInView__inputLabel">
 							{t('hub_login_label_password')}
 						</label>
 						<input
+							id="login-password"
 							className={passwordInputClassNames}
 							name="password"
 							type="password"
@@ -92,7 +94,7 @@ const LogInView = (props) => {
 							<span className="LogInView__link text-center">
 								{ t('hub_login_link_dont_have_account') }
 								&nbsp;
-								<NavLink to="/create-account" >
+								<NavLink to="/create-account">
 									{ t('hub_login_link_create_account') }
 								</NavLink>
 							</span>
