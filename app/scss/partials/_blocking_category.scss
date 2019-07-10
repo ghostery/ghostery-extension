@@ -56,6 +56,13 @@
 		top: 0;
 		z-index: 1;
 		height: 62px;
+
+		&.anti-track-header {
+			height: 80px;
+			border-top: 0;
+			padding-top: 0;
+		}
+
 		.caret-down {
 			@extend %pointer;
 			display: inline-block;
@@ -129,15 +136,28 @@
 			fill: $alabaster;
 		}
 	}
+	.Category__antiTrackingDivider {
+		background-color: #00AEF0;
+		width: 110%;
+		height: 18px;
+		margin-bottom: 9px;
+	}
+	.Category__antiTrackingDividerText {
+		margin: 0;
+		padding-top: 1px;
+		padding-left: 15px;
+		font-size: 10px;
+		color: white;
+	}
 	.Category__antiTrackingCaret {
 		position: relative;
-		top: -22px;
-		right: -19px;
+		bottom: 14px;
+		left: 8px;
 	}
 	.Category__antiTrackingButton {
 		display: inline-block;
 		position: relative;
-		top: -3px;
-		right: -9px;
+		left: 4px;
+		bottom: 4px
 	}
 }
