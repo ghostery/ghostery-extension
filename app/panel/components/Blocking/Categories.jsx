@@ -63,30 +63,25 @@ class Categories extends React.Component {
 				globalBlocking={globalBlocking}
 				index={categoryList.length}
 				category={(() => {
-					const unknownURLs = Object.keys(antiTracking.unknown);
-					const unsafeURLs = unknownURLs.filter(url => antiTracking.unknown[url] === 'unsafe');
+					const antiTrackingUrls = Object.keys(antiTracking.unknown).filter(urlKey => (
+						(antiTracking.unknown[urlKey] === 'safe' && antiTracking.whitelistedUrls[urlKey])
+						|| antiTracking.unknown[urlKey] === 'unsafe'
+					));
 					return {
 						id: 'other_data_points',
 						name: 'Other Data Points',
 						description: 'Anonymized data points by Anti-Tracking',
 						img_name: 'other_data_points',
-						num_total: antiTracking.totalUnsafeCount,
-						num_blocked: 0,
-						num_shown: antiTracking.num_shown,
-						trackers: unsafeURLs.map((url, idx) => ({
-							blocked: true,
+						num_total: antiTrackingUrls.length,
+						num_blocked: antiTracking.totalUnsafeCount,
+						num_shown: antiTrackingUrls.length,
+						trackers: antiTrackingUrls.map((url, idx) => ({
+							blocked: antiTracking.unknown[url] === 'unsafe',
 							catId: 'other_data_points',
 							description: '',
 							id: 100000000 + idx,
 							name: url,
 							shouldShow: true,
-							sources: false,
-							ss_allowed: false,
-							ss_blocked: false,
-							warningCompatibility: false,
-							warningInsecure: false,
-							warningSlow: false,
-							warningSmartBlock: false,
 						})),
 					};
 				})()}

@@ -185,7 +185,6 @@ class Category extends React.Component {
 			trackersBlockedCount = category.num_blocked || 0;
 		}
 
-
 		const clickCliqzFeature = (options) => {
 			const { feature, status, text } = options;
 			this.props.actions.showNotification({
@@ -197,9 +196,11 @@ class Category extends React.Component {
 		};
 		const cliqzInactive = paused_blocking || sitePolicy || IS_CLIQZ;
 
+		console.log('wuttt', category);
+
 		return (
 			<div className={`${category.num_shown === 0 ? 'hide' : ''} blocking-category`}>
-				<div className={`sticky-category${this.state.showTooltip ? ' no-sticky' : ''}${isDataPoint ? ' anti-track-header' : ''}`}>
+				<div className={`sticky-category${this.state.showTooltip ? ' no-sticky' : ''}${isDataPoint ? ' anti-tracking-header' : ''}`}>
 					{isDataPoint && (
 						<div className="Category__antiTrackingDivider">
 							<p className="Category__antiTrackingDividerText">
@@ -235,7 +236,7 @@ class Category extends React.Component {
 									(!!trackersBlockedCount || isDataPoint) &&
 									<div className="blocked-count">
 										<span className="count">
-											{isDataPoint ? category.num_total : `${trackersBlockedCount} `}
+											{isDataPoint ? category.num_blocked : `${trackersBlockedCount} `}
 										</span>
 										<span className="text">
 											{isDataPoint ? ' ANONYMIZED' : t('blocking_category_blocked') }
@@ -256,9 +257,6 @@ class Category extends React.Component {
 												<svg width="20px" height="20px" viewBox="1.5 1 20 20">
 													<path className="dash" d="M5,10.5 15,10.5" />
 												</svg>
-												{/* DATAPOINT CHECK: <svg width="14" height="14" viewBox="-3.5 -3.5 17 17">
-													<path className="check" fill="#FFF" fillRule="evenodd" stroke="#FFF" strokeWidth="1.75" d="M7.128 1.02a.433.433 0 0 0-.256 0L1.383 2.474A.492.492 0 0 0 1 2.961c.026 3.908 2.12 7.535 5.72 9.962A.515.515 0 0 0 7 13a.515.515 0 0 0 .28-.077c3.6-2.427 5.694-6.054 5.72-9.962a.492.492 0 0 0-.383-.486L7.127 1.02z" />
-												</svg> */}
 												<svg width="20px" height="20px" viewBox="-2.5 -2.5 20 20">
 													<path className="check" d="M8.062 6l3.51-3.51c.57-.57.57-1.493 0-2.063-.57-.57-1.495-.57-2.063 0L6 3.937 2.49.428c-.57-.57-1.493-.57-2.063 0-.57.57-.57 1.494 0 2.064L3.937 6 .426 9.51c-.57.57-.57 1.493 0 2.063.57.57 1.494.57 2.063 0L6 8.063l3.51 3.508c.57.57 1.493.57 2.063 0 .57-.57.57-1.493 0-2.062L8.063 6z" fillRule="nonzero" />
 												</svg>
