@@ -64,7 +64,7 @@ export function updateTrackerCounts(data) {
 export function updateGhosteryPaused(data) {
 	const pauseValue = (data.time || data.ghosteryPaused);
 
-	return function (dispatch) {
+	return function(dispatch) {
 		return sendMessageInPromise('setPanelData', { paused_blocking: pauseValue }).then(() => {
 			dispatch({
 				type: UPDATE_GHOSTERY_PAUSED,

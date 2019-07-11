@@ -326,11 +326,11 @@ class Blocking extends React.Component {
 					smartBlockActive={smartBlockActive}
 					smartBlock={smartBlock}
 				/>
-				{(disableBlocking && is_expanded) ?
+				{(disableBlocking && is_expanded) ? (
 					<NotScanned />
-					:
+				) : (
 					<div className={`${blockingClasses} blocking-trackers show-warnings`}>
-						{ categories.length > 0 &&
+						{categories.length > 0 && (
 							<Categories
 								expandAll={expand_all_trackers}
 								categories={categories}
@@ -344,9 +344,9 @@ class Blocking extends React.Component {
 								antiTracking={antiTracking}
 								enable_anti_tracking={enable_anti_tracking}
 							/>
-						}
+						)}
 					</div>
-				}
+				)}
 			</div>
 		);
 	}

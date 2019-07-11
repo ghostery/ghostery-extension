@@ -487,7 +487,10 @@ class Summary extends React.Component {
 		return (
 			<div className={totalTrackersBlockedContainerClassNames} onClick={this.clickTrackersBlocked}>
 				<div className={totalTrackersBlockedClassNames}>
-					<span className="SummaryPageStat__label">{t('trackers_blocked')} </span>
+					<span className="SummaryPageStat__label">
+						{t('trackers_blocked')}
+						{' '}
+					</span>
 					<span className="SummaryPageStat__value">
 						{this._totalTrackersBlockedCount()}
 					</span>
@@ -506,7 +509,10 @@ class Summary extends React.Component {
 		return (
 			<div className="Summary__pageStatContainer">
 				<div className={totalRequestsModifiedClassNames}>
-					<span className="SummaryPageStat__label">{t('requests_modified')} </span>
+					<span className="SummaryPageStat__label">
+						{t('requests_modified')}
+						{' '}
+					</span>
 					<span className="SummaryPageStat__value">
 						{this._requestsModifiedCount()}
 					</span>
@@ -529,7 +535,10 @@ class Summary extends React.Component {
 		return (
 			<div className="Summary__pageStatContainer">
 				<div className={pageLoadTimeClassNames}>
-					<span className="SummaryPageStat__label">{t('page_load')} </span>
+					<span className="SummaryPageStat__label">
+						{t('page_load')}
+						{' '}
+					</span>
 					<span className="SummaryPageStat__value">
 						{trackerLatencyTotal ? `${trackerLatencyTotal} ${t('settings_seconds')}` : '-'}
 					</span>
@@ -694,22 +703,22 @@ class Summary extends React.Component {
 
 		return (
 			<div onClick={this.clickUpgradeBannerOrGoldPlusIcon}>
-				{isPlusSubscriber &&
+				{isPlusSubscriber && (
 					<div className="Summary__subscriberBadgeContainer">
 						<div className="SubscriberBadge">
-							<ReactSVG path="/app/images/panel/gold-plus-icon.svg" className="gold-plus-icon" />
+							<ReactSVG src="/app/images/panel/gold-plus-icon.svg" className="gold-plus-icon" />
 						</div>
 					</div>
-				}
+				)}
 
-				{!isPlusSubscriber &&
-				<div className="Summary__upgradeBannerContainer">
-					<div className={upgradeBannerClassNames}>
-						<span className="UpgradeBanner__text">{t('subscription_upgrade_to')}</span>
-						<ReactSVG path="/app/images/panel/upgrade-banner-plus.svg" className="UpgradeBanner__plus" />
+				{!isPlusSubscriber && (
+					<div className="Summary__upgradeBannerContainer">
+						<div className={upgradeBannerClassNames}>
+							<span className="UpgradeBanner__text">{t('subscription_upgrade_to')}</span>
+							<ReactSVG src="/app/images/panel/upgrade-banner-plus.svg" className="UpgradeBanner__plus" />
+						</div>
 					</div>
-				</div>
-				}
+				)}
 			</div>
 		);
 	}
@@ -745,7 +754,7 @@ class Summary extends React.Component {
 					{!disableBlocking && this._renderPageLoadTime()}
 				</div>
 
-				{isCondensed && disableBlocking && is_expert && (
+				{isCondensed && disableBlocking && (
 					<div className="Summary__spaceTaker" />
 				)}
 

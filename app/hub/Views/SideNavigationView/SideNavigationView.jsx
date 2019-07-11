@@ -57,7 +57,8 @@ function _renderBottomItem(item, disableNav) {
 				</a>
 			</div>
 		);
-	} else if (item.id === 'logout') {
+	}
+	if (item.id === 'logout') {
 		return (
 			<div key={`bottom-item-${item.id}`} className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle">
 				<div className={logoutClassNames} onClick={item.clickHandler}>

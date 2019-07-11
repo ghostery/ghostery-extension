@@ -11,65 +11,61 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-// depenencies
+/* eslint import/no-extraneous-dependencies: 0 */
+/* eslint no-console: 0 */
+
+// dependencies
 const jsonfile = require('jsonfile');
 const checker = require('license-checker');
-const extract = require('markdown-extract')
 const fs = require('fs-extra');
-const read = require('read-file');
-const path = require('path');
 
-path.extname('index.html');
-
-//Build list of licenses
-const licenseList = {};
+// Build list of licenses
 checker.init({
 	start: '.',
 	production: true,
 	json: true,
-}, function(err, json) {
+	direct: true, // get top-level only
+	excludePackages: 'browser-core',
+	customPath: 'licenseTemplate.json',
+}, (err, licenseJSON) => {
 	if (err) {
-			console.error("License Fetcher error:", err);
+		console.error('License Fetcher error:', err);
 	} else {
 		console.log('Generating licenses.json');
-		const dependencies = jsonfile.readFileSync('./package.json').dependencies;
-		const keysArray = [];
-		Object.keys(dependencies).forEach(key => {
-			if(key !== 'browser-core') {
-				const packagePath = `./node_modules/${key}/package.json`;
-				if(fs.pathExistsSync(packagePath)) {
-					const {name, version} = jsonfile.readFileSync(packagePath);
-					if(name && version) {
-						keysArray.push(name + "@" + version);
+
+		const output = {};
+		const packageNames = [];
+		const npmDependencies = jsonfile.readFileSync('./package.json').dependencies;
+
+		// Get all top-level dependencies from package.json (except browser-core)
+		Object.keys(npmDependencies).forEach((packageName) => {
+			if (packageName !== 'browser-core') {
+				const packagePath = `./node_modules/${packageName}/package.json`;
+				if (fs.pathExistsSync(packagePath)) {
+					const { name, version } = jsonfile.readFileSync(packagePath);
+					if (name && version) {
+						packageNames.push(`${name}@${version}`);
 					}
 				}
 			}
 		});
-		const filteredList = {};
-		Object.keys(json).forEach(key => {
-			if(keysArray.indexOf(key) !== -1) {
-				licenseList[key] = json[key];
-				licenseList[key]['name'] = key;
-				delete licenseList[key]['path'];
-				const licenseFile = licenseList[key]['licenseFile'];
-				delete licenseList[key]['licenseFile'];
-				if(fs.pathExistsSync(licenseFile)) {
-					const licenseText = read.sync(licenseFile, {encoding: 'utf8'});
-					if(path.extname(licenseFile) === '.md'
-						&& !path.basename(licenseFile).toLowerCase().includes('license')) {
-						const nodes = extract({type: /heading/, text: /License/, gnp: true}, licenseFile);
-						if(nodes && nodes.length && nodes[ 0 ]) {
-							licenseList[key]['licenseText'] = nodes[ 0 ];
-						} else {
-							licenseList[key]['licenseText'] = '';
-						}
-					} else {
-						licenseList[key]['licenseText'] = licenseText;
-					}
-				}
+
+		// Compare package.json dependencies against licenses found in node_modules
+		Object.keys(licenseJSON).forEach((packageName) => {
+			if (packageNames.indexOf(packageName) !== -1) {
+				// TODO: customPath option for 'license-checker' is broken so we have to manually build the output
+				output[packageName] = {
+					name: packageName,
+					repository: licenseJSON[packageName].repository,
+					licenses: licenseJSON[packageName].licenses,
+					publisher: licenseJSON[packageName].publisher,
+					url: licenseJSON[packageName].url,
+					email: licenseJSON[packageName].email,
+					licenseText: licenseJSON[packageName].licenseText,
+				};
 			}
 		});
-		jsonfile.writeFileSync("./tools/licenses/licenses.json", licenseList);
+		jsonfile.writeFileSync('./tools/licenses/licenses.json', output);
 		console.log('Completed licenses.json');
 	}
 });

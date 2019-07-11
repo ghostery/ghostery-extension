@@ -45,7 +45,7 @@ export function updateSettingsData(portData) {
 		};
 	}
 
-	return function (dispatch) {
+	return function(dispatch) {
 		return sendMessageInPromise('getPanelData', { view: 'settings' })
 			.then((promisedData) => {
 				dispatch({
@@ -63,7 +63,7 @@ export function updateSettingsData(portData) {
 export function importSettingsDialog(pageUrl) {
 	const url = pageUrl || '';
 	// Check if this is http(s) page
-	return function (dispatch) {
+	return function(dispatch) {
 		if (url.search('http') === -1) {
 			dispatch({
 				type: IMPORT_SETTINGS_DIALOG,
@@ -86,7 +86,7 @@ export function importSettingsDialog(pageUrl) {
  * @return {Object} dispatch
  */
 export function importSettingsNative(fileToLoad) {
-	return function (dispatch) {
+	return function(dispatch) {
 		const fileReader = new FileReader();
 		fileReader.onload = (fileLoadedEvent) => {
 			try {
@@ -116,7 +116,7 @@ export function importSettingsNative(fileToLoad) {
 export function exportSettings(pageUrl) {
 	const url = pageUrl || '';
 	// Check if this is http(s) page
-	return function (dispatch) {
+	return function(dispatch) {
 		if (url.search('http') === -1 ||
 			(globals.BROWSER_INFO.name === 'edge' && url.search('www.msn.com/spartan') !== -1)) {
 			dispatch({
@@ -170,7 +170,7 @@ export function toggleCheckbox(data) {
  * @return {Object} dispatch
  */
 export function updateDatabase() {
-	return function (dispatch) {
+	return function(dispatch) {
 		return sendMessageInPromise('update_database').then((result) => {
 			let resultText;
 			if (result && result.success === true) {

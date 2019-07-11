@@ -26,7 +26,7 @@ import tabInfo from './TabInfo';
 import rewards from './Rewards';
 import account from './Account';
 import dispatcher from './Dispatcher';
-import { getCliqzGhosteryStats, sendCliqzModulesData } from '../utils/cliqzModulesData';
+import { getCliqzGhosteryBugs, sendCliqzModuleCounts } from '../utils/cliqzModulesData';
 import { getActiveTab, flushChromeMemoryCache, processUrl } from '../utils/utils';
 import { objectEntries, log } from '../utils/common';
 
@@ -206,7 +206,7 @@ class PanelData {
 	}
 
 	/**
-	 * Wrapper helper passed as callback to utils/cliqzModuleData#sendCliqzModulesData
+	 * Wrapper helper passed as callback to utils/cliqzModuleData#sendCliqzModuleCounts
 	 */
 	postMessageToSummary = ((message) => {
 		this._postMessage('summary', message);
@@ -233,6 +233,7 @@ class PanelData {
 	 * Sends updated data to the panel and blocking and/or summary components
 	 */
 	updatePanelUI = throttle(this._updatePanelUI.bind(this), 600, { leading: true, trailing: true }); // matches donut redraw throttling
+
 	_updatePanelUI() {
 		if (!this._panelPort || !this._activeTab) { return; }
 
@@ -544,12 +545,12 @@ class PanelData {
 	}
 
 	/**
-	 * Retrieves antitracking and adblock Cliqz data and sends it to the panel
+	 * Retrieves antitracking and adblock counts and sends it to the panel
 	 */
 	_postCliqzModulesData() {
 		if (!this._panelPort || !this._activeTab) { return; }
 
-		sendCliqzModulesData(this._activeTab.id, this.postMessageToSummary);
+		sendCliqzModuleCounts(this._activeTab.id, this.postMessageToSummary);
 	}
 
 	/**
@@ -831,23 +832,23 @@ class PanelData {
 
 		this._trackerList = foundBugs.getApps(id, false, url) || [];
 
-		const ghosteryStats = getCliqzGhosteryStats(id);
+		const ghosteryBugs = getCliqzGhosteryBugs(id);
 
-		if (ghosteryStats && ghosteryStats.bugs) {
-			const gsBugs = ghosteryStats.bugs;
-			const bugsIds = Object.keys(gsBugs);
+		if (ghosteryBugs && ghosteryBugs.bugs) {
+			const { bugs } = ghosteryBugs;
+			const bugIds = Object.keys(bugs);
 			const appsById = foundBugs.getAppsById(id);
 
-			bugsIds.forEach((bugsId) => {
+			bugIds.forEach((bugsId) => {
 				const trackerId = conf.bugs.bugs[bugsId];
 				if (!trackerId) return;
 
 				const trackerListIndex = appsById[trackerId.aid];
 				if (!trackerListIndex) return;
 
-				this._trackerList[trackerListIndex].cliqzCookieCount = gsBugs[bugsId].cookies;
-				this._trackerList[trackerListIndex].cliqzFingerprintCount = gsBugs[bugsId].fingerprints;
-				this._trackerList[trackerListIndex].cliqzAdCount = gsBugs[bugsId].ads;
+				this._trackerList[trackerListIndex].cliqzCookieCount = bugs[bugsId].cookies;
+				this._trackerList[trackerListIndex].cliqzFingerprintCount = bugs[bugsId].fingerprints;
+				this._trackerList[trackerListIndex].cliqzAdCount = bugs[bugsId].ads;
 			});
 		}
 

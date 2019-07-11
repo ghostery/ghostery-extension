@@ -25,6 +25,7 @@ class Stats extends React.Component {
 		super(props);
 		this.state = this._reset();
 	}
+
 	/**
 	 * Lifecycle event
 	 */
@@ -37,6 +38,7 @@ class Stats extends React.Component {
 		}
 		this._init();
 	}
+
 	/**
 	 * Lifecycle event
 	 */
@@ -269,6 +271,7 @@ class Stats extends React.Component {
 		// Do nothing, just close the modal
 		this.setState({ showResetModal: false });
 	}
+
 	/**
 	 * Helper function to handle clicking on the Become a Subscriber button on modal
 	 */
@@ -276,6 +279,7 @@ class Stats extends React.Component {
 		sendMessage('ping', 'hist_plus_cta');
 		openSubscriptionPage();
 	}
+
 	/**
 	 * Helper function to handle clicking on Sign in link on modal
 	 */

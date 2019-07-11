@@ -38,12 +38,14 @@ exports[`app/hub/Views/LogIn component Snapshot tests with react-test-renderer l
       >
         <label
           className="LogInView__inputLabel"
+          htmlFor="login-email"
         >
           hub_login_label_email
         </label>
         <input
           autoComplete="off"
           className="LogInView__inputBox"
+          id="login-email"
           name="email"
           onChange={[Function]}
           pattern=".{1,}"
@@ -52,11 +54,13 @@ exports[`app/hub/Views/LogIn component Snapshot tests with react-test-renderer l
         />
         <label
           className="LogInView__inputLabel"
+          htmlFor="login-password"
         >
           hub_login_label_password
         </label>
         <input
           className="LogInView__inputBox"
+          id="login-password"
           name="password"
           onChange={[Function]}
           pattern=".{1,}"
@@ -134,12 +138,14 @@ exports[`app/hub/Views/LogIn component Snapshot tests with react-test-renderer l
       >
         <label
           className="LogInView__inputLabel"
+          htmlFor="login-email"
         >
           hub_login_label_email
         </label>
         <input
           autoComplete="off"
           className="LogInView__inputBox error"
+          id="login-email"
           name="email"
           onChange={[Function]}
           pattern=".{1,}"
@@ -153,11 +159,13 @@ exports[`app/hub/Views/LogIn component Snapshot tests with react-test-renderer l
         </div>
         <label
           className="LogInView__inputLabel"
+          htmlFor="login-password"
         >
           hub_login_label_password
         </label>
         <input
           className="LogInView__inputBox error"
+          id="login-password"
           name="password"
           onChange={[Function]}
           pattern=".{1,}"
