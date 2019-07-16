@@ -15,7 +15,6 @@ import React from 'react';
 import ReactSVG from 'react-svg';
 import ClassNames from 'classnames';
 import Tooltip from './Tooltip';
-import NavButton from './BuildingBlocks/NavButton';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import globals from '../../../src/classes/Globals';
@@ -57,7 +56,8 @@ class Summary extends React.Component {
 		this.clickTrackersBlocked = this.clickTrackersBlocked.bind(this);
 		this.clickTrackersCount = this.clickTrackersCount.bind(this);
 		this.clickUpgradeBannerOrGoldPlusIcon = this.clickUpgradeBannerOrGoldPlusIcon.bind(this);
-		this.showRewardsList = this.showRewardsList.bind(this);
+		this.showRewardsListView = this.showRewardsListView.bind(this);
+		this.showStatsView = this.showStatsView.bind(this);
 		this.toggleExpert = this.toggleExpert.bind(this);
 		this.handlePortMessage = this.handlePortMessage.bind(this);
 
@@ -220,10 +220,18 @@ class Summary extends React.Component {
 
 	/**
 	 * Show the Rewards view
-	 * Used to handle user clicking on the Rewards icon
+	 * Used to handle user clicking on the Rewards Navicon
 	 */
-	showRewardsList() {
+	showRewardsListView() {
 		this.toggleExpert('rewards/list');
+	}
+
+	/**
+	 * Show the Stats view
+	 * Used to handle user clicking on the Stats Navicon
+	 */
+	showStatsView() {
+		this.props.history.push('/stats');
 	}
 
 	/**
@@ -672,13 +680,13 @@ class Summary extends React.Component {
 	}
 
 	/**
-	 * Render helper for the stats nav button
-	 * @return {JSX} JSX for rendering the stats nav button
+	 * Render helper for the stats navicon
+	 * @return {JSX} JSX for rendering the stats navicon
 	 */
-	_renderStatsNavButton() {
-		const summaryViewStatsButton = ClassNames(
-			'Summary__statsButton',
-			'Summary__statsButton--absolutely-positioned',
+	_renderStatsNavicon() {
+		const statsNaviconClassNames = ClassNames(
+			'Summary__statsNavicon',
+			'Summary__statsNavicon--absolutely-positioned',
 			'g-tooltip',
 			{
 				hide: this.props.is_expert,
@@ -686,25 +694,25 @@ class Summary extends React.Component {
 		);
 
 		return (
-			<div className={summaryViewStatsButton}>
-				<NavButton path="/stats" imagePath="../../app/images/panel/graph.svg" />
+			<div className={statsNaviconClassNames} onClick={this.showStatsView}>
+				<ReactSVG src="../../app/images/panel/graph.svg" />
 				<Tooltip body={t('subscription_history_stats')} position="left" />
 			</div>
 		);
 	}
 
 	/**
-	 * Render helper for the rewards clickable icon that displays in the simple version of the view
-	 * @return {JSX} JSX for rendering the rewards clickable icon
+	 * Render helper for the rewards navicon that displays in the simple version of the view
+	 * @return {JSX} JSX for rendering the rewards navicon
 	 */
-	_renderRewardsIcon() {
+	_renderRewardsNavicon() {
 		const { unread_offer_ids } = this.props;
 
 		const unreadOffersAvailable = (unread_offer_ids && unread_offer_ids.length > 0) || false;
 
-		const rewardsIconClassNames = ClassNames(
-			'Summary__rewardsIcon',
-			'Summary__rewardsIcon--absolutely-positioned',
+		const rewardsNaviconClassNames = ClassNames(
+			'Summary__rewardsNavicon',
+			'Summary__rewardsNavicon--absolutely-positioned',
 			'g-tooltip',
 			{
 				hide: this.props.is_expert,
@@ -712,9 +720,9 @@ class Summary extends React.Component {
 		);
 
 		return (
-			<div className={rewardsIconClassNames} onClick={this.showRewardsList}>
+			<div className={rewardsNaviconClassNames} onClick={this.showRewardsListView}>
 				<ReactSVG src="../../app/images/panel/rewards-icon.svg" />
-				{unreadOffersAvailable && <ReactSVG src="../../app/images/panel/purple-star.svg" className="Summary__rewardsIcon__star" />}
+				{unreadOffersAvailable && <ReactSVG src="../../app/images/panel/purple-star.svg" className="Summary__rewardsNavicon__star" />}
 				<Tooltip body={t('ghostery_rewards')} position="left" />
 			</div>
 		);
@@ -801,8 +809,8 @@ class Summary extends React.Component {
 					{this._renderCliqzAdBlock()}
 					{this._renderCliqzSmartBlock()}
 				</div>
-				{this._renderStatsNavButton()}
-				{enable_offers && this._renderRewardsIcon()}
+				{this._renderStatsNavicon()}
+				{enable_offers && this._renderRewardsNavicon()}
 
 				{!isCondensed && this._renderPlusUpgradeBannerOrSubscriberIcon()}
 			</div>
