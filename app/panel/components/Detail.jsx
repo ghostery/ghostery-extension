@@ -33,8 +33,12 @@ class Detail extends React.Component {
 	 * Lifecycle event
 	 */
 	componentWillMount() {
-		// trigger default tab (aka route)
-		this.props.history.push('/detail/blocking');
+		// set default tab / route based on how we got to this view:
+		// did the user click the Rewards icon? Or the donut number / Detailed View tab in the header?
+		const location = this.props.history.location.pathname;
+		if (!location.includes('rewards')) {
+			this.props.history.push('/detail/blocking');
+		}
 	}
 
 	BlockingComponent = () => (<Blocking />);
@@ -61,13 +65,19 @@ class Detail extends React.Component {
 		});
 		const { enable_offers, unread_offer_ids } = this.props;
 
+		const activeTab = this.props.history.location.pathname.includes('rewards') ? 'rewards' : 'blocking';
+
 		return (
 			<div className="detail-wrap">
 				<div id="content-detail" className={(this.props.is_expanded ? 'expanded' : '')}>
 					<div className={condensedToggleClassNames} onClick={this.toggleExpanded} />
 					<Route path="/detail/blocking" render={this.BlockingComponent} />
 					<Route path="/detail/rewards" render={this.RewardsComponent} />
-					<DetailMenu hasReward={enable_offers && unread_offer_ids.length > 0} subscriptionsPlus={this.props.user && this.props.user.subscriptionsPlus} />
+					<DetailMenu
+						hasReward={enable_offers && unread_offer_ids.length > 0}
+						subscriptionsPlus={this.props.user && this.props.user.subscriptionsPlus}
+						activeTab={activeTab}
+					/>
 				</div>
 			</div>
 		);

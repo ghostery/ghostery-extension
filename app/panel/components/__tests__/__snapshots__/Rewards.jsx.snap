@@ -10,7 +10,7 @@ exports[`app/panel/components/Rewards.jsx Snapshot tests with react-test-rendere
     <span
       className="RewardsPanel__title"
     >
-      panel_detail_rewards_title
+      ghostery_rewards
     </span>
     <span
       className="flex-container align-middle"
@@ -76,7 +76,7 @@ exports[`app/panel/components/Rewards.jsx Snapshot tests with react-test-rendere
     <span
       className="RewardsPanel__title"
     >
-      panel_detail_rewards_title
+      ghostery_rewards
     </span>
     <span
       className="flex-container align-middle"
