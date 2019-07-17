@@ -251,7 +251,7 @@ class PolicySmartBlock {
 	checkReloadThreshold(tabId) {
 		if (!this.shouldCheck(tabId)) { return false; }
 
-		const THRESHHOLD = 30000; // 30 seconds
+		const THRESHHOLD = 60000; // 60 seconds
 
 		return (
 			tabInfo.getTabInfoPersist(tabId, 'numOfReloads') > 1 &&
