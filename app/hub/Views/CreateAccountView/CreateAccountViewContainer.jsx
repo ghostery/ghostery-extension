@@ -37,10 +37,10 @@ class CreateAccountViewContainer extends Component {
 			confirmEmailError: false,
 			firstName: '',
 			lastName: '',
+			legalConsentChecked: false,
 			password: '',
 			passwordInvalidError: false,
 			passwordLengthError: false,
-			legalConsentChecked: false,
 			promotionsChecked: true,
 			validateInput: false,
 		};
@@ -94,9 +94,17 @@ class CreateAccountViewContainer extends Component {
 	}
 
 	/**
-	 * Update input checkbox values by updating state.
+	 * Update legal consetnt checkbox  value by updating state
 	 */
-	_handleCheckboxChange = () => {
+	_handleLegalConsentCheckboxChange = () => {
+		const legalConsentChecked = !this.state.legalConsentChecked;
+		this.setState({ legalConsentChecked });
+	}
+
+	/**
+	 * Update promotions checkbox value by updating state
+	 */
+	_handlePromotionsCheckboxChange = () => {
 		const promotionsChecked = !this.state.promotionsChecked;
 		this.setState({ promotionsChecked });
 	}
@@ -112,8 +120,8 @@ class CreateAccountViewContainer extends Component {
 			confirmEmail,
 			firstName,
 			lastName,
-			password,
 			legalConsentChecked,
+			password,
 			promotionsChecked
 		} = this.state;
 		const emailIsValid = email && validateEmail(email);
@@ -168,10 +176,10 @@ class CreateAccountViewContainer extends Component {
 			confirmEmailError,
 			firstName,
 			lastName,
+			legalConsentChecked,
 			password,
 			passwordInvalidError,
 			passwordLengthError,
-			legalConsentChecked,
 			promotionsChecked,
 		} = this.state;
 		const createAccountChildProps = {
@@ -181,13 +189,14 @@ class CreateAccountViewContainer extends Component {
 			confirmEmailError,
 			firstName,
 			lastName,
+			legalConsentChecked,
 			password,
 			passwordInvalidError,
 			passwordLengthError,
-			legalConsentChecked,
 			promotionsChecked,
 			handleInputChange: this._handleInputChange,
-			handleCheckboxChange: this._handleCheckboxChange,
+			handleLegalConsentCheckboxChange: this._handleLegalConsentCheckboxChange,
+			handlePromotionsCheckboxChange: this._handlePromotionsCheckboxChange,
 			handleSubmit: this._handleCreateAccountAttempt
 		};
 		const signedInChildProps = {
