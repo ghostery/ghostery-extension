@@ -953,7 +953,7 @@ function onMessageHandler(request, sender, callback) {
 	if (name === 'account.openSupportPage') {
 		metrics.ping('priority_support_submit');
 		const subscriber = account.hasScopesUnverified(['subscriptions:plus']);
-		const tabUrl = subscriber ? `https://account.${globals.GHOSTERY_DOMAIN}.com/support` : 'https://www.ghostery.com/faqs/';
+		const tabUrl = subscriber ? `https://account.${globals.GHOSTERY_DOMAIN}.com/support` : 'https://www.ghostery.com/support/';
 		utils.openNewTab({ url: tabUrl, become_active: true });
 		return false;
 	}

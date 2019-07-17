@@ -12,6 +12,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+// @namespace BackgroundUtils
+
 import { extend } from 'underscore';
 import conf from '../classes/Conf';
 import cliqz from '../classes/Cliqz';
@@ -20,6 +22,7 @@ const { adblocker, antitracking } = cliqz.modules;
 
 /**
  * Get the totalUnsafeCount of trackers found by Anti-Tracking on this tabId
+ * @memberOf BackgroundUtils
  * @param  {int} 	tabId
  * @return {object}	totalUnsafeCount
  */
@@ -47,6 +50,7 @@ export function getCliqzAntiTrackingCount(tabId) {
 
 /**
  * Get the totalCount of ads found by the Ad Blocker on this tabId
+ * @memberOf BackgroundUtils
  * @param  {int} 	tabId
  * @return {object}
  */
@@ -66,6 +70,7 @@ export function getCliqzAdBlockingCount(tabId) {
 /**
  * Get list of matched bug_ids from Anti-Tracking and Ad-Blocking for this
  * tab, along with list of 'other' trackers found that do not match known bug_ids.
+ * @memberOf BackgroundUtils
  * @param  {int} 	tabId
  * @return {object}
  */
@@ -83,6 +88,7 @@ export function getCliqzGhosteryBugs(tabId) {
 /**
  * Send `totalCount` of ads found by Ad Blocker and `totalUnsafeCount`
  * found by Anti-Tracking
+ * @memberOf BackgroundUtils
  * @param  {int}   		tabId
  * @param  {Function} 	callback
  */
