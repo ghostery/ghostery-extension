@@ -550,7 +550,11 @@ class PanelData {
 	_postCliqzModulesData() {
 		if (!this._panelPort || !this._activeTab) { return; }
 
-		sendCliqzModuleCounts(this._activeTab.id, this.postMessageToSummary);
+		sendCliqzModuleCounts(
+			this._activeTab.id,
+			processUrl(this._activeTab.url).host,
+			this.postMessageToSummary,
+		);
 	}
 
 	/**
@@ -605,7 +609,6 @@ class PanelData {
 	 * @param  {Object} data
 	 */
 	set(data) {
-		console.log('PANEL DATA IS BEING SET', data);
 		let syncSetDataChanged = false;
 
 		if (IS_CLIQZ) {
@@ -618,7 +621,6 @@ class PanelData {
 		// Set the conf from data
 		// TODO can this now be replaced by Object.entries?
 		for (const [key, value] of objectEntries(data)) {
-			console.log('CHECK VALS', key, value);
 			if (conf.hasOwnProperty(key) && !isEqual(conf[key], value)) {
 				conf[key] = value;
 				syncSetDataChanged = SYNC_SET.has(key) ? true : syncSetDataChanged;

@@ -14,7 +14,7 @@
 import React from 'react';
 import Trackers from './Trackers';
 import { CliqzFeature } from '../BuildingBlocks';
-import { IS_CLIQZ } from '../../../../src/classes/Globals';
+import Globals from '../../../../src/classes/Globals';
 
 /**
  * @class Implement Category component, which represents a
@@ -194,9 +194,7 @@ class Category extends React.Component {
 			});
 			actions.toggleCliqzFeature(feature, status);
 		};
-		const cliqzInactive = paused_blocking || sitePolicy || IS_CLIQZ;
-
-		console.log('wuttt', category);
+		const cliqzInactive = paused_blocking || sitePolicy || Globals.IS_CLIQZ;
 
 		return (
 			<div className={`${category.num_shown === 0 ? 'hide' : ''} blocking-category`}>

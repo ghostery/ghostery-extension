@@ -17,7 +17,6 @@ import {
 	UPDATE_SUMMARY_DATA,
 	UPDATE_CLIQZ_MODULE_DATA,
 	UPDATE_ANTI_TRACKING_NUM_SHOWN,
-	UPDATE_ANTI_TRACKING_WHITELIST,
 	UPDATE_GHOSTERY_PAUSED,
 	UPDATE_SITE_POLICY,
 	UPDATE_TRACKER_COUNTS
@@ -38,6 +37,10 @@ const initialState = {
 		blocked: 0,
 	},
 	tab_id: 0,
+	antiTracking: {
+		totalUnsafeCount: 0,
+		totalUnknownCount: 0,
+	}
 };
 /**
  * Default export for summary view reducer.
@@ -53,12 +56,7 @@ export default (state = initialState, action) => {
 			return Object.assign({}, state, action.data);
 		}
 		case UPDATE_CLIQZ_MODULE_DATA: {
-			console.log('RECEIVING ANTITRACKING DATA', action.data.antitracking);
-			return Object.assign({}, state, { adBlock: action.data.adblock, antiTracking: action.data.antitracking });
-		}
-		case UPDATE_ANTI_TRACKING_WHITELIST: {
-			const updated = _updateSitePolicy(state, action);
-			return Object.assign({}, state, updated);
+			return Object.assign({}, state, { adBlock: action.data.adblock, antiTracking: action.data.antiTracking });
 		}
 		case UPDATE_ANTI_TRACKING_NUM_SHOWN: {
 			return Object.assign({}, state, { antiTracking: action.data });

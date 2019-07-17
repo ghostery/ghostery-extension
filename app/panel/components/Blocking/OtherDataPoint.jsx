@@ -14,6 +14,8 @@
 /* eslint react/no-array-index-key: 0 */
 
 import React from 'react';
+import ReactSVG from 'react-svg';
+
 /**
  * @class Implement Tracker component which represents single tracker
  * in the Blocking view.
@@ -26,18 +28,21 @@ class OtherDataPoint extends React.Component {
 			trackerClasses: '',
 		};
 	}
+
 	/**
 	 * Lifecycle event.
 	 */
 	componentWillMount() {
 		this.updateTrackerClasses(this.props.tracker);
 	}
+
 	/**
 	 * Lifecycle event.
 	 */
 	componentWillReceiveProps(nextProps) {
 		this.updateTrackerClasses(nextProps.tracker);
 	}
+
 	/**
 	 * Set dynamic classes on .blocking-trk and save it in state.
 	 * @param  {Object} tracker    tracker object
@@ -91,6 +96,70 @@ class OtherDataPoint extends React.Component {
 			reload: true,
 		});
 	}
+
+	_renderCliqzStatsContainer() {
+		const { tracker } = this.props;
+		const { cliqzAdCount, cliqzCookieCount, cliqzFingerprintCount } = tracker;
+
+		const oneOrMoreCookies = cliqzCookieCount >= 1;
+		const oneOrMoreFingerprints = cliqzFingerprintCount >= 1;
+		const oneOrMoreAds = cliqzAdCount >= 1;
+
+		console.log(tracker);
+
+		return (
+			<div className="trk-cliqz-stats-outer-container">
+				{(oneOrMoreCookies || oneOrMoreFingerprints) && (
+					<div className="trk-cliqz-stats-container">
+						{this._renderCliqzCookiesAndFingerprintsIcon()}
+						{oneOrMoreCookies && this._renderCliqzCookieStat(cliqzCookieCount)}
+						{oneOrMoreFingerprints && this._renderCliqzFingerprintStat(cliqzFingerprintCount)}
+					</div>
+				)}
+				{oneOrMoreAds && (
+					<div className="trk-cliqz-stats-container">
+						{this._renderCliqzAdsIcon()}
+						{this._renderCliqzAdStat(cliqzAdCount)}
+					</div>
+				)}
+			</div>
+		);
+	}
+
+	_renderCliqzCookiesAndFingerprintsIcon() { return this._renderCliqzStatsIcon('cookies-and-fingerprints'); }
+
+	_renderCliqzAdsIcon() { return this._renderCliqzStatsIcon('ads'); }
+
+	_renderCliqzStatsIcon(type) {
+		const path = `/app/images/panel/tracker-detail-cliqz-${type}-icon.svg`;
+
+		return (
+			<ReactSVG src={path} className="trk-cliqz-stats-icon" />
+		);
+	}
+
+	_renderCliqzCookieStat(count) { return this._renderCliqzStat(count, 'cookie'); }
+
+	_renderCliqzFingerprintStat(count) { return this._renderCliqzStat(count, 'fingerprint'); }
+
+	_renderCliqzAdStat(count) { return this._renderCliqzStat(count, 'ad'); }
+
+	_renderCliqzStat(count, type) {
+		const exactlyOne = count === 1;
+		const label = exactlyOne ?
+			t(`${type}`) :
+			t(`${type}s`);
+		const cssClass = `trk-cliqz-stat trk-cliqz-stat-${type}s-count`;
+
+		return (
+			<span className={cssClass}>
+				{count}
+				{' '}
+				{label}
+			</span>
+		);
+	}
+
 	/**
 	* Render a tracker in Blocking view.
 	* @return {ReactComponent}   ReactComponent instance
@@ -103,6 +172,7 @@ class OtherDataPoint extends React.Component {
 				<div className="row align-middle trk-header">
 					<div className="columns collapse-left">
 						<div className="data-point trk-name">{ tracker.name }</div>
+						{this._renderCliqzStatsContainer()}
 					</div>
 					<div className="columns shrink align-self-justify collapse-right">
 						<div className="OtherDataPoint__svgGroup">
@@ -121,7 +191,7 @@ class OtherDataPoint extends React.Component {
 							</span>
 
 							{/* USE INLINE SVG FOR ANTI-TRACKING SHIELD TO CHANGE COLORS WITH CSS */}
-							<span className="t-tooltip-up-left" data-g-tooltip="Scrub on this site" >
+							<span className="t-tooltip-up-left" data-g-tooltip="Scrub on this site">
 								<svg className="" onClick={this.clickTrackerRestrict} width="20px" height="20px" viewBox="0 0 20 20">
 									<g transform="translate(1 1)" fill="none" fillRule="evenodd">
 										<path className="border" stroke="#00AEF0" d="M-.5-.5h18.3v18.217H-.5z" />
