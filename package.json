@@ -42,6 +42,7 @@
   },
   "homepage": "https://github.com/ghostery/ghostery-extension#readme",
   "dependencies": {
+    "@cliqz/url-parser": "^1.0.2",
     "base64-js": "^1.2.1",
     "browser-core": "https://github.com/cliqz-oss/browser-core/releases/download/v7.37.4/browser-core-7.37.4.tgz",
     "classnames": "^2.2.5",
