@@ -40,6 +40,7 @@ class CreateAccountViewContainer extends Component {
 			password: '',
 			passwordInvalidError: false,
 			passwordLengthError: false,
+			legalConsentChecked: false,
 			promotionsChecked: true,
 			validateInput: false,
 		};
@@ -112,6 +113,7 @@ class CreateAccountViewContainer extends Component {
 			firstName,
 			lastName,
 			password,
+			legalConsentChecked,
 			promotionsChecked
 		} = this.state;
 		const emailIsValid = email && validateEmail(email);
@@ -169,6 +171,7 @@ class CreateAccountViewContainer extends Component {
 			password,
 			passwordInvalidError,
 			passwordLengthError,
+			legalConsentChecked,
 			promotionsChecked,
 		} = this.state;
 		const createAccountChildProps = {
@@ -181,6 +184,7 @@ class CreateAccountViewContainer extends Component {
 			password,
 			passwordInvalidError,
 			passwordLengthError,
+			legalConsentChecked,
 			promotionsChecked,
 			handleInputChange: this._handleInputChange,
 			handleCheckboxChange: this._handleCheckboxChange,

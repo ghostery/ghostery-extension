@@ -33,6 +33,7 @@ const CreateAccountView = (props) => {
 		password,
 		passwordInvalidError,
 		passwordLengthError,
+		legalConsentChecked,
 		promotionsChecked,
 		handleInputChange,
 		handleCheckboxChange,
@@ -167,12 +168,14 @@ const CreateAccountView = (props) => {
 					<div className="columns small-12 medium-5">
 						<div className="CreateAccountView__checkboxContainer CreateAccountView--marginBottom flex-container align-middle">
 							<ToggleCheckbox
-								checked={promotionsChecked}
+								checked={legalConsentChecked}
 								onChange={handleCheckboxChange}
 							/>
-							<span className="CreateAccountView__inputLabel clickable" onClick={handleCheckboxChange}>
-								{t('hub_create_account_checkbox_promotions')}
-							</span>
+							<span
+								className="CreateAccountView__inputLabel clickable"
+								onClick={handleCheckboxChange}
+								dangerouslySetInnerHTML={{ __html: t('create_account_form_legal_consent_checkbox_label') }}
+							/>
 						</div>
 						<div className="CreateAccountView__checkboxContainer CreateAccountView--marginBottom flex-container align-middle">
 							<ToggleCheckbox
@@ -224,6 +227,7 @@ CreateAccountView.propTypes = {
 	password: PropTypes.string.isRequired,
 	passwordInvalidError: PropTypes.bool.isRequired,
 	passwordLengthError: PropTypes.bool.isRequired,
+	legalConsentChecked: PropTypes.bool.isRequired,
 	promotionsChecked: PropTypes.bool.isRequired,
 	handleInputChange: PropTypes.func.isRequired,
 	handleCheckboxChange: PropTypes.func.isRequired,
