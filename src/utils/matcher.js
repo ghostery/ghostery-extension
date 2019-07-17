@@ -34,15 +34,17 @@ export function isBug(src, tab_url) {
 	const processedSrc = processUrl(src.toLowerCase());
 	let	found = false;
 
+	const path = processedSrc.pathname ? processedSrc.pathname.substring(1) : '';
+
 	found =
 		// pattern classification 2: check host+path hash
-		_matchesHost(db.patterns.host_path, processedSrc.host, processedSrc.path) ||
+		_matchesHost(db.patterns.host_path, processedSrc.hostname, path) ||
 		// class 1: check host hash
-		_matchesHost(db.patterns.host, processedSrc.host) ||
+		_matchesHost(db.patterns.host, processedSrc.hostname) ||
 		// class 3: check path hash
-		_matchesPath(processedSrc.path) ||
+		_matchesPath(path) ||
 		// class 4: check regex patterns
-		_matchesRegex(processedSrc.host_with_path);
+		_matchesRegex(processedSrc.host + processedSrc.pathname);
 
 	if (typeof tab_url !== 'undefined') {
 		// check firstPartyExceptions
@@ -69,9 +71,9 @@ export function isBug(src, tab_url) {
  */
 export function fuzzyUrlMatcher(url, urls) {
 	const parsed = processUrl(url.toLowerCase());
-	let tab_host = parsed.host;
+	let tab_host = parsed.hostname;
 
-	const tab_path = parsed.path;
+	const tab_path = parsed.pathname ? parsed.pathname.substring(1) : '';
 
 	if (tab_host.startsWith('www.')) {
 		tab_host = tab_host.slice(4);
