@@ -212,18 +212,18 @@ class CreateAccount extends React.Component {
 							</div>
 							<div className="row">
 								<div className="small-12 columns">
-									<div id="create-account-promotions">
-										<input id="promotionsChecked" name="promotionsChecked" type="checkbox" checked={promotionsChecked} onChange={this.handleCheckboxChange} />
-										<label htmlFor="promotionsChecked">{t('hub_create_account_checkbox_promotions')}</label>
+									<div id="create-account-legal-consent-checkbox" className={(legalConsentNotCheckedError ? 'checkbox-error' : '')}>
+										<input id="legalConsentChecked" name="legalConsentChecked" type="checkbox" checked={legalConsentChecked} onChange={this.handleCheckboxChange} />
+										{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+										<label htmlFor="legalConsentChecked" dangerouslySetInnerHTML={{ __html: t('create_account_form_legal_consent_checkbox_label') }} />
 									</div>
 								</div>
 							</div>
 							<div className="row">
 								<div className="small-12 columns">
-									<div id="create-account-legal-consent-checkbox" className={(legalConsentNotCheckedError ? 'checkbox-error' : '')}>
-										<input id="legalConsentChecked" name="legalConsentChecked" type="checkbox" checked={legalConsentChecked} onChange={this.handleCheckboxChange} />
-										{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-										<label htmlFor="legalConsentChecked" dangerouslySetInnerHTML={{ __html: t('create_account_form_legal_consent_checkbox_label') }} />
+									<div id="create-account-promotions">
+										<input id="promotionsChecked" name="promotionsChecked" type="checkbox" checked={promotionsChecked} onChange={this.handleCheckboxChange} />
+										<label htmlFor="promotionsChecked">{t('hub_create_account_checkbox_promotions')}</label>
 									</div>
 								</div>
 							</div>
