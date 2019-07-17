@@ -38,6 +38,7 @@ class CreateAccountViewContainer extends Component {
 			firstName: '',
 			lastName: '',
 			legalConsentChecked: false,
+			legalConsentNotCheckedError: false,
 			password: '',
 			passwordInvalidError: false,
 			passwordLengthError: false,
@@ -133,12 +134,13 @@ class CreateAccountViewContainer extends Component {
 		this.setState({
 			emailError: !emailIsValid,
 			confirmEmailError: !confirmIsValid,
+			legalConsentNotCheckedError: !legalConsentChecked,
 			passwordInvalidError: invalidChars,
 			passwordLengthError: invalidLength,
 			validateInput: true,
 		});
 
-		if (!emailIsValid || !confirmIsValid || !passwordIsValid) {
+		if (!emailIsValid || !confirmIsValid || !legalConsentChecked || !passwordIsValid) {
 			return;
 		}
 		this.props.actions.setToast({
@@ -177,6 +179,7 @@ class CreateAccountViewContainer extends Component {
 			firstName,
 			lastName,
 			legalConsentChecked,
+			legalConsentNotCheckedError,
 			password,
 			passwordInvalidError,
 			passwordLengthError,
@@ -190,6 +193,7 @@ class CreateAccountViewContainer extends Component {
 			firstName,
 			lastName,
 			legalConsentChecked,
+			legalConsentNotCheckedError,
 			password,
 			passwordInvalidError,
 			passwordLengthError,

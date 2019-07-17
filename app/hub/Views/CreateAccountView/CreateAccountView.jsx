@@ -34,6 +34,7 @@ const CreateAccountView = (props) => {
 		passwordInvalidError,
 		passwordLengthError,
 		legalConsentChecked,
+		legalConsentNotCheckedError,
 		promotionsChecked,
 		handleInputChange,
 		handleLegalConsentCheckboxChange,
@@ -46,6 +47,9 @@ const CreateAccountView = (props) => {
 	});
 	const confirmInputClassNames = ClassNames('CreateAccountView__inputBox', {
 		error: confirmEmailError,
+	});
+	const legalConsentCheckboxInputLabelClassNames = ClassNames('CreateAccountView__inputLabel clickable', {
+		error: legalConsentNotCheckedError,
 	});
 	const passwordInputClassNames = ClassNames('CreateAccountView__inputBox', {
 		error: passwordInvalidError || passwordLengthError,
@@ -167,22 +171,22 @@ const CreateAccountView = (props) => {
 						)}
 					</div>
 					<div className="columns small-12 medium-5">
-						<div className="CreateAccountView__checkboxContainer CreateAccountView--marginBottom flex-container align-middle">
+						<div className="CreateAccountView__checkboxContainer CreateAccountView--marginBottom flex-container">
 							<ToggleCheckbox
-								name="legalConsentChecked"
 								checked={legalConsentChecked}
+								className="ToggleCheckbox--flush-left"
 								onChange={handleLegalConsentCheckboxChange}
 							/>
 							<span
-								className="CreateAccountView__inputLabel clickable"
+								className={legalConsentCheckboxInputLabelClassNames}
 								onClick={handleLegalConsentCheckboxChange}
 								dangerouslySetInnerHTML={{ __html: t('create_account_form_legal_consent_checkbox_label') }}
 							/>
 						</div>
-						<div className="CreateAccountView__checkboxContainer CreateAccountView--marginBottom flex-container align-middle">
+						<div className="CreateAccountView__checkboxContainer CreateAccountView--marginBottom flex-container">
 							<ToggleCheckbox
-								name="promotionsChecked"
 								checked={promotionsChecked}
+								className="ToggleCheckbox--flush-left"
 								onChange={handlePromotionsCheckboxChange}
 							/>
 							<span className="CreateAccountView__inputLabel clickable" onClick={handlePromotionsCheckboxChange}>
