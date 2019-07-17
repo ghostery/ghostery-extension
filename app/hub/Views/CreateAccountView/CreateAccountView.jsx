@@ -174,6 +174,15 @@ const CreateAccountView = (props) => {
 								{t('hub_create_account_checkbox_promotions')}
 							</span>
 						</div>
+						<div className="CreateAccountView__checkboxContainer CreateAccountView--marginBottom flex-container align-middle">
+							<ToggleCheckbox
+								checked={promotionsChecked}
+								onChange={handleCheckboxChange}
+							/>
+							<span className="CreateAccountView__inputLabel clickable" onClick={handleCheckboxChange}>
+								{t('hub_create_account_checkbox_promotions')}
+							</span>
+						</div>
 					</div>
 				</div>
 				<div className="row align-center">

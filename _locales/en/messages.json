@@ -2232,9 +2232,6 @@
 		"message": "Off"
 	},
 	"create_account_form_legal_consent_checkbox_label": {
-		"message": "I accept the Terms and Conditions, the Public License Agreement, and consent to data practices found in the Privacy Policy"
-	},
-	"create_account_form_legal_consent_checkbox_label": {
 		"message": "I accept the $LINK_TERMS_START$Terms and Conditions$LINK_END$, the $LINK_LICENSE_START$Public License Agreement$LINK_END$, and consent to data practices found in the $LINK_PRIVACY_START$Privacy Policy$LINK_END$.",
 		"placeholders": {
 			"link_end": {
