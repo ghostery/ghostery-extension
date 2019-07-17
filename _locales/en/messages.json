@@ -750,9 +750,6 @@
 	"panel_detail_performance_text": {
 		"message": "Feature coming soon."
 	},
-	"panel_detail_rewards_title": {
-		"message": "Ghostery Rewards"
-	},
 	"panel_detail_rewards_coming_soon": {
 		"message": "Feature coming soon."
 	},
@@ -2247,5 +2244,8 @@
 				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/\" rel=\"noopener noreferrer\">"
 			}
 		}
+	},
+	"ghostery_rewards": {
+		"message": "ghostery rewards"
 	}
 }
