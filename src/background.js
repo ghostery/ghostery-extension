@@ -1277,13 +1277,11 @@ function initialiseWebRequestPipeline() {
  * @return {boolean}
  */
 function isWhitelisted(state) {
-	const url = state.tabUrl;
-	if (state.url && state.url.includes('yahoo.com') && state.tabUrl.includes('huffpost.com')) {
-		console.log('HUFF POST WORKING', state.url, state.tabUrl, state.originUrl);
-		return true;
-	}
+	const hostUrl = utils.processUrl(state.tabUrl).host;
+	const trackerUrl = utils.processUrl(state.url).host;
+
 	// state.ghosteryWhitelisted is sometimes undefined so force to bool
-	return Boolean(globals.SESSION.paused_blocking || events.policy.getSitePolicy(url) === 2 || state.ghosteryWhitelisted);
+	return Boolean(globals.SESSION.paused_blocking || events.policy.getSitePolicy(hostUrl, trackerUrl) === 2 || state.ghosteryWhitelisted);
 }
 
 /**

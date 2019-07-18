@@ -14,7 +14,7 @@
 import React from 'react';
 import Trackers from './Trackers';
 import { CliqzFeature } from '../BuildingBlocks';
-import { IS_CLIQZ } from '../../../../src/classes/Globals';
+import Globals from '../../../../src/classes/Globals';
 
 /**
  * @class Implement Category component, which represents a
@@ -170,10 +170,10 @@ class Category extends React.Component {
 		} = this.props;
 
 		const globalBlocking = !!this.props.globalBlocking;
-		const isDataPoint = category.id === 'other_data_points';
+		const isUnknown = category.id === 'unknown';
 
 		const checkBoxStyle = `${(this.state.totalShownBlocked && this.state.allShownBlocked) ? 'all-blocked ' : (this.state.totalShownBlocked ? 'some-blocked ' : '')} checkbox-container`;
-		const caretClasses = (this.state.isExpanded ? 'caret-up' : 'caret-down') + (isDataPoint ? ' Category__antiTrackingCaret' : '');
+		const caretClasses = (this.state.isExpanded ? 'caret-up' : 'caret-down') + (isUnknown ? ' Category__antiTrackingCaret' : '');
 		const filteredText = { color: 'red' };
 
 		let trackersBlockedCount;
@@ -194,14 +194,12 @@ class Category extends React.Component {
 			});
 			actions.toggleCliqzFeature(feature, status);
 		};
-		const cliqzInactive = paused_blocking || sitePolicy || IS_CLIQZ;
-
-		console.log('wuttt', category);
+		const cliqzInactive = paused_blocking || sitePolicy || Globals.IS_CLIQZ;
 
 		return (
 			<div className={`${category.num_shown === 0 ? 'hide' : ''} blocking-category`}>
-				<div className={`sticky-category${this.state.showTooltip ? ' no-sticky' : ''}${isDataPoint ? ' anti-tracking-header' : ''}`}>
-					{isDataPoint && (
+				<div className={`sticky-category${this.state.showTooltip ? ' no-sticky' : ''}${isUnknown ? ' anti-tracking-header' : ''}`}>
+					{isUnknown && (
 						<div className="Category__antiTrackingDivider">
 							<p className="Category__antiTrackingDividerText">
 								Enhanced Anti-Tracking
@@ -229,16 +227,16 @@ class Category extends React.Component {
 										)}
 									<span className="count">{`${category.num_total} `}</span>
 									<span className="text">
-										{ isDataPoint ? ' DATA POINTS' : (category.num_total === 1) ? t('blocking_category_tracker') : t('blocking_category_trackers') }
+										{ (category.num_total === 1) ? t('blocking_category_tracker') : t('blocking_category_trackers') }
 									</span>
 								</div>
-								{(!!trackersBlockedCount || isDataPoint) && (
+								{(!!trackersBlockedCount || (isUnknown && category.num_blocked !== category.num_total)) && (
 									<div className="blocked-count">
 										<span className="count">
-											{isDataPoint ? category.num_blocked : `${trackersBlockedCount} `}
+											{isUnknown ? category.num_total - category.num_blocked : `${trackersBlockedCount} `}
 										</span>
 										<span className="text">
-											{isDataPoint ? ' ANONYMIZED' : t('blocking_category_blocked') }
+											{isUnknown ? ' WHITELISTED' : t('blocking_category_blocked') }
 										</span>
 									</div>
 								)}
@@ -246,7 +244,7 @@ class Category extends React.Component {
 						</div>
 						<div className="columns collapse-left collapse-right shrink align-self-justify">
 							<div className={caretClasses} onClick={this.toggleCategoryTrackers} />
-							{!isDataPoint && (
+							{!isUnknown && (
 								<div className={checkBoxStyle} onClick={this.clickCategoryStatus}>
 									<span className={this.props.index ? 't-tooltip-up-left' : 't-tooltip-down-left'} data-g-tooltip={t('panel_tracker_block_tooltip')} onMouseOver={this.showTooltip} onMouseOut={this.hideTooltip}>
 										<svg className="blocking-icons status t-tooltip-up-left" data-g-tooltip={t('panel_tracker_block_tooltip')} onClick={this.clickTrackerStatus} width="20px" height="20px" viewBox="0 0 20 20">
@@ -274,7 +272,7 @@ class Category extends React.Component {
 									</span>
 								</div>
 							)}
-							{isDataPoint && (
+							{isUnknown && (
 								<div className="Category__antiTrackingButton">
 									<CliqzFeature
 										clickButton={clickCliqzFeature}
@@ -304,7 +302,7 @@ class Category extends React.Component {
 						language={this.props.language}
 						smartBlockActive={this.props.smartBlockActive}
 						smartBlock={this.props.smartBlock}
-						isDataPoint={isDataPoint}
+						isUnknown={isUnknown}
 					/>
 				)}
 			</div>

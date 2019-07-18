@@ -56,7 +56,7 @@ class DonutGraph extends React.Component {
 						return '#87d7ef';
 					case 'social_media':
 						return '#388ee8';
-					case 'other_data_points':
+					case 'unknown':
 						return '#8459a5';
 					default:
 						return '#e8e8e8';
@@ -128,10 +128,10 @@ class DonutGraph extends React.Component {
 			return;
 		}
 
-		if (!antiTracking && !nextProps.antiTracking) { return; }
-		const unsafeDataPoints = antiTracking ? antiTracking.totalUnsafeCount : 0;
-		const nextUnsafeDataPoints = nextProps.antiTracking ? nextProps.antiTracking.totalUnsafeCount : 0;
-		if (unsafeDataPoints !== nextUnsafeDataPoints) {
+		if (!antiTracking.totalUnknownCount && !nextProps.antiTracking.totalUnknownCount) { return; }
+		const unknownDataPoints = antiTracking.totalUnknownCount;
+		const nextUnknownDataPoints = nextProps.antiTracking.totalUnknownCount;
+		if (unknownDataPoints !== nextUnknownDataPoints) {
 			this.nextPropsDonut(nextProps);
 		}
 	}
@@ -221,11 +221,11 @@ class DonutGraph extends React.Component {
 			graphData.sort((a, b) => a.value < b.value);
 		}
 
-		if (antiTracking && antiTracking.totalUnsafeCount) {
+		if (antiTracking.totalUnknownCount) {
 			graphData.push({
-				id: 'other_data_points',
-				name: 'Data Points Anonymized',
-				value: antiTracking.totalUnsafeCount,
+				id: 'unknown',
+				name: 'Unknown',
+				value: antiTracking.totalUnknownCount,
 			});
 		}
 
@@ -359,13 +359,13 @@ class DonutGraph extends React.Component {
 							{cat.name}
 						</span>
 					))}
-					{antiTracking && !!antiTracking.totalUnsafeCount && (
+					{!!antiTracking.totalUnknownCount && (
 						<span
 							className="DonutGraph__tooltip tooltip top"
-							id="other_data_points_tooltip"
-							key="other_data_points"
+							id="unknown_tooltip"
+							key="unknown"
 						>
-							Other Data Points
+							Unknown
 						</span>
 					)}
 				</div>

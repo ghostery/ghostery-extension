@@ -112,19 +112,7 @@ class Blocking extends React.Component {
 			category.num_shown = (show) ? count : 0;
 		});
 
-		let whitelistedUrlCount = 0;
-		Object.keys(updatedAntiTracking.unknown).forEach((urlKey) => {
-			if (updatedAntiTracking.whitelistedUrls[urlKey]
-			&& updatedAntiTracking.unknown[urlKey] === 'safe') {
-				whitelistedUrlCount++;
-			}
-		});
-
-		updatedAntiTracking.num_shown = filterName === 'all' || filterName === 'other_data_points'
-			? updatedAntiTracking.totalUnsafeCount + whitelistedUrlCount : 0;
-
-		console.log('UPDTATETEGEAF', updatedAntiTracking);
-
+		updatedAntiTracking.hide = !(filterName === 'all' || filterName === 'unknown');
 		this.props.actions.updateCategories(updated_categories);
 		this.props.actions.updateAntiTrackingNumShown(updatedAntiTracking);
 	}

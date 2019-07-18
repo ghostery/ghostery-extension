@@ -57,34 +57,33 @@ class Categories extends React.Component {
 			/>
 		));
 
-		const otherDataPointsCategory = (antiTracking && antiTracking.totalUnsafeCount) ? (
+		const otherDataPointsCategory = antiTracking.unknownTrackers.length ? (
 			<Category
 				expandAll={expandAll}
 				globalBlocking={globalBlocking}
 				index={categoryList.length}
-				category={(() => {
-					const antiTrackingUrls = Object.keys(antiTracking.unknown).filter(urlKey => (
-						(antiTracking.unknown[urlKey] === 'safe' && antiTracking.whitelistedUrls[urlKey])
-						|| antiTracking.unknown[urlKey] === 'unsafe'
-					));
-					return {
-						id: 'other_data_points',
-						name: 'Other Data Points',
-						description: 'Anonymized data points by Anti-Tracking',
-						img_name: 'other_data_points',
-						num_total: antiTrackingUrls.length,
-						num_blocked: antiTracking.totalUnsafeCount,
-						num_shown: antiTrackingUrls.length,
-						trackers: antiTrackingUrls.map((url, idx) => ({
-							blocked: antiTracking.unknown[url] === 'unsafe',
-							catId: 'other_data_points',
-							description: '',
-							id: 100000000 + idx,
-							name: url,
-							shouldShow: true,
-						})),
-					};
-				})()}
+				category={(() => ({
+					id: 'unknown',
+					name: 'Unknown',
+					description: 'Unknown trackers blocked by Anti-Tracking',
+					img_name: 'unknown',
+					num_total: antiTracking.unknownTrackers.length,
+					num_blocked: antiTracking.unknownTrackerCount,
+					num_shown: antiTracking.hide ? 0 : antiTracking.unknownTrackers.length,
+					trackers: antiTracking.unknownTrackers.map((otherDataPoint, idx) => ({
+						name: otherDataPoint.name,
+						domains: otherDataPoint.domains,
+						whitelisted: otherDataPoint.whitelisted,
+						blocked: !otherDataPoint.whitelisted,
+						catId: 'other_data_points',
+						description: '',
+						id: 100000000 + idx,
+						shouldShow: true,
+						cliqzAdCount: otherDataPoint.ads,
+						cliqzCookieCount: otherDataPoint.cookies,
+						cliqzFingerprintCount: otherDataPoint.fingerprints,
+					})),
+				}))()}
 				actions={this.props.actions}
 				key="other_data_points"
 				filtered={filtered}

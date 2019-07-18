@@ -40,7 +40,7 @@ class Trackers extends React.Component {
 	* @return {ReactComponent}   ReactComponent instance
 	*/
 	render() {
-		const { trackers, isDataPoint } = this.props;
+		const { trackers, isUnknown } = this.props;
 		let trackerList;
 		if (this.props.globalBlocking) {
 			const trackersToShow = [];
@@ -61,7 +61,7 @@ class Trackers extends React.Component {
 					language={this.props.language}
 				/>
 			));
-		} else if (isDataPoint) {
+		} else if (isUnknown) {
 			trackerList = trackers.map(tracker => (
 				<OtherDataPoint
 					tracker={tracker}
@@ -74,7 +74,7 @@ class Trackers extends React.Component {
 					language={this.props.language}
 					smartBlockActive={this.props.smartBlockActive}
 					smartBlock={this.props.smartBlock}
-					isDataPoint={isDataPoint}
+					isUnknown={isUnknown}
 				/>
 			));
 		} else {
@@ -90,7 +90,7 @@ class Trackers extends React.Component {
 					language={this.props.language}
 					smartBlockActive={this.props.smartBlockActive}
 					smartBlock={this.props.smartBlock}
-					isDataPoint={isDataPoint}
+					isUnknown={isUnknown}
 				/>
 			));
 		}

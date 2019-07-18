@@ -18,6 +18,7 @@ import {
 	UPDATE_CATEGORY_BLOCKED,
 	UPDATE_TRACKER_BLOCKED,
 	UPDATE_TRACKER_TRUST_RESTRICT,
+	UPDATE_ANTI_TRACKING_WHITELIST,
 	TOGGLE_EXPAND_ALL,
 	UPDATE_ANTI_TRACKING_NUM_SHOWN
 } from '../constants/constants';
@@ -113,6 +114,22 @@ export function updateTrackerTrustRestrict(data) {
 			type: UPDATE_TRACKER_TRUST_RESTRICT,
 			data,
 			pageHost,
+		});
+	};
+}
+
+/**
+ * Called from Tracker.handleAntiTrackingWhitelist()
+ * @param  {Object} data
+ * @return {Object} dispatch
+ */
+export function updateAntiTrackingWhitelist(unknownTracker) {
+	return function(dispatch, getState) {
+		// use redux-thunk to get pageHost from summary
+		const { pageHost } = getState().summary;
+		dispatch({
+			type: UPDATE_ANTI_TRACKING_WHITELIST,
+			data: { unknownTracker, pageHost },
 		});
 	};
 }

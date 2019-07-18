@@ -17,7 +17,6 @@
 
 import c2pDb from './Click2PlayDb';
 import conf from './Conf';
-import { processUrl } from '../utils/utils';
 import globals from './Globals';
 
 /**
@@ -46,33 +45,32 @@ class Policy {
 	 * @param  {string} url		site url
 	 * @return {boolean}
 	 */
-	getSitePolicy(url) {
-		if (this.blacklisted(url)) {
+	getSitePolicy(hostUrl, trackerUrl) {
+		if (this.blacklisted(hostUrl)) {
 			return globals.BLACKLISTED;
 		}
-		if (this.whitelisted(url)) {
+		if (this.checkSiteWhitelist(hostUrl)
+		|| this.checkAntiTrackingWhitelist(hostUrl, trackerUrl)) {
 			return globals.WHITELISTED;
 		}
 		return false;
 	}
 
 	/**
-	 * Check given url against whitelist
+	 * Check given url against site whitelist
 	 * @param  {string} url 		site url
 	 * @return {string|boolean} 	corresponding whitelist entry or false, if none
 	 */
-	whitelisted(url) {
+	checkSiteWhitelist(url) {
 		if (url) {
-			url = processUrl(url).host;
-			url = url.replace(/^www\./, '');
+			const replacedUrl = url.replace(/^www\./, '');
 			const sites = conf.site_whitelist || [];
-			console.log('WHITELIST CHECK (we will want to make a new function similar to this just for anti-tracking)', sites);
 			const num_sites = sites.length;
 
 			// TODO: speed up
 			for (let i = 0; i < num_sites; i++) {
 				// TODO match from the beginning of the string to avoid false matches (somewhere in the querystring for instance)
-				if (url === sites[i]) {
+				if (replacedUrl === sites[i]) {
 					return sites[i];
 				}
 			}
@@ -82,21 +80,42 @@ class Policy {
 	}
 
 	/**
+	 * Check given url against anti-tracking whitelist
+	 * @param  {string} url 		site url
+	 * @return {string|boolean} 	corresponding whitelist entry or false, if none
+	 */
+	checkAntiTrackingWhitelist(hostUrl, trackerUrl) {
+		let isWhitelisted = false;
+		const antiTrackingWhitelist = conf.anti_tracking_whitelist;
+
+		if (antiTrackingWhitelist[trackerUrl]) {
+			antiTrackingWhitelist[trackerUrl].hosts.some((host) => {
+				if (host === hostUrl) {
+					isWhitelisted = true;
+					return true;
+				}
+				return false;
+			});
+		}
+
+		return isWhitelisted;
+	}
+
+	/**
 	 * Check given url against blacklist
 	 * @param  {string} url 		site url
 	 * @return {string|boolean} 	corresponding blacklist entry or false, if none
 	 */
 	blacklisted(url) {
 		if (url) {
-			url = processUrl(url).host;
-			url = url.replace(/^www\./, '');
+			const replacedUrl = url.replace(/^www\./, '');
 			const sites = conf.site_blacklist || [];
 			const num_sites = sites.length;
 
 			// TODO: speed up
 			for (let i = 0; i < num_sites; i++) {
 				// TODO match from the beginning of the string to avoid false matches (somewhere in the querystring for instance)
-				if (url === sites[i]) {
+				if (replacedUrl === sites[i]) {
 					return sites[i];
 				}
 			}

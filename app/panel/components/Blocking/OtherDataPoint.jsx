@@ -14,6 +14,8 @@
 /* eslint react/no-array-index-key: 0 */
 
 import React from 'react';
+import ReactSVG from 'react-svg';
+
 /**
  * @class Implement Tracker component which represents single tracker
  * in the Blocking view.
@@ -22,22 +24,25 @@ import React from 'react';
 class OtherDataPoint extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			trackerClasses: '',
-		};
+		this.state = { trackerClasses: '' };
+
+		this.handleAntiTrackingWhitelist = this.handleAntiTrackingWhitelist.bind(this);
 	}
+
 	/**
 	 * Lifecycle event.
 	 */
 	componentWillMount() {
 		this.updateTrackerClasses(this.props.tracker);
 	}
+
 	/**
 	 * Lifecycle event.
 	 */
 	componentWillReceiveProps(nextProps) {
 		this.updateTrackerClasses(nextProps.tracker);
 	}
+
 	/**
 	 * Set dynamic classes on .blocking-trk and save it in state.
 	 * @param  {Object} tracker    tracker object
@@ -53,44 +58,81 @@ class OtherDataPoint extends React.Component {
 	}
 
 	/**
-	 * Implement handler for clicking on the tracker site-specific trust icon.
+	 * Implement handler for clicking on the trust or scrub SVGs for an unknown tracker
 	 * Trigger actions which persist the new setting and notify user
 	 * that the page should be reloaded.
 	 */
-	clickTrackerTrust() {
-		const ss_allowed = !this.props.tracker.ss_allowed;
-		this.props.actions.updateTrackerTrustRestrict({
-			app_id: this.props.tracker.id,
-			cat_id: this.props.cat_id,
-			trust: ss_allowed,
-			restrict: false,
-		});
+	handleAntiTrackingWhitelist() {
+		const { tracker } = this.props;
 
+		this.props.actions.updateAntiTrackingWhitelist(tracker);
 		this.props.actions.showNotification({
-			updated: `${this.props.tracker.id}_ss_allowed`,
+			updated: `${tracker.name}-whitelisting-status-changed`,
 			reload: true,
 		});
 	}
 
-	/**
-	 * Implement handler for clicking on the tracker site-specific block icon.
-	 * Trigger actions which persist the new setting and notify user
-	 * that the page should be reloaded.
-	 */
-	clickTrackerRestrict() {
-		const ss_blocked = !this.props.tracker.ss_blocked;
-		this.props.actions.updateTrackerTrustRestrict({
-			app_id: this.props.tracker.id,
-			cat_id: this.props.cat_id,
-			trust: false,
-			restrict: ss_blocked,
-		});
+	_renderCliqzStatsContainer() {
+		const { tracker } = this.props;
+		const { cliqzAdCount, cliqzCookieCount, cliqzFingerprintCount } = tracker;
 
-		this.props.actions.showNotification({
-			updated: `${this.props.tracker.id}_ss_blocked`,
-			reload: true,
-		});
+		const oneOrMoreCookies = cliqzCookieCount >= 1;
+		const oneOrMoreFingerprints = cliqzFingerprintCount >= 1;
+		const oneOrMoreAds = cliqzAdCount >= 1;
+
+		return (
+			<div className="trk-cliqz-stats-outer-container">
+				{(oneOrMoreCookies || oneOrMoreFingerprints) && (
+					<div className="trk-cliqz-stats-container">
+						{this._renderCliqzCookiesAndFingerprintsIcon()}
+						{oneOrMoreCookies && this._renderCliqzCookieStat(cliqzCookieCount)}
+						{oneOrMoreFingerprints && this._renderCliqzFingerprintStat(cliqzFingerprintCount)}
+					</div>
+				)}
+				{oneOrMoreAds && (
+					<div className="trk-cliqz-stats-container">
+						{this._renderCliqzAdsIcon()}
+						{this._renderCliqzAdStat(cliqzAdCount)}
+					</div>
+				)}
+			</div>
+		);
 	}
+
+	_renderCliqzCookiesAndFingerprintsIcon() { return this._renderCliqzStatsIcon('cookies-and-fingerprints'); }
+
+	_renderCliqzAdsIcon() { return this._renderCliqzStatsIcon('ads'); }
+
+	_renderCliqzStatsIcon(type) {
+		const path = `/app/images/panel/tracker-detail-cliqz-${type}-icon.svg`;
+
+		return (
+			<ReactSVG src={path} className="trk-cliqz-stats-icon" />
+		);
+	}
+
+	_renderCliqzCookieStat(count) { return this._renderCliqzStat(count, 'cookie'); }
+
+	_renderCliqzFingerprintStat(count) { return this._renderCliqzStat(count, 'fingerprint'); }
+
+	_renderCliqzAdStat(count) { return this._renderCliqzStat(count, 'ad'); }
+
+	_renderCliqzStat(count, type) {
+		const exactlyOne = count === 1;
+		const label = exactlyOne ?
+			t(`${type}`) :
+			t(`${type}s`);
+		const cssClass = `trk-cliqz-stat trk-cliqz-stat-${type}s-count`;
+
+		return (
+			<span className={cssClass}>
+				{count}
+				{' '}
+				{label}
+			</span>
+		);
+	}
+
 	/**
 	* Render a tracker in Blocking view.
 	* @return {ReactComponent}   ReactComponent instance
@@ -103,13 +145,14 @@ class OtherDataPoint extends React.Component {
 				<div className="row align-middle trk-header">
 					<div className="columns collapse-left">
 						<div className="data-point trk-name">{ tracker.name }</div>
+						{this._renderCliqzStatsContainer()}
 					</div>
 					<div className="columns shrink align-self-justify collapse-right">
 						<div className="OtherDataPoint__svgGroup">
 
 							{/* USE INLINE SVG FOR TRUST CIRCLE TO CHANGE COLORS WITH CSS */}
 							<span className="t-tooltip-up-left" data-g-tooltip="Trust on this site">
-								<svg className="" onClick={this.clickTrackerTrust} width="20px" height="20px" viewBox="0 0 20 20">
+								<svg className="" onClick={this.handleAntiTrackingWhitelist} width="20px" height="20px" viewBox="0 0 20 20">
 									<g transform="translate(1 1)" fill="none" fillRule="evenodd">
 										<path className="border" stroke="#96c761" d="M-.5-.5h18.3v18.217H-.5z" />
 										<path className="background" stroke="#FFF" fill="#96c761" d="M.5.5h16.3v16.217H.5z" />
@@ -121,8 +164,8 @@ class OtherDataPoint extends React.Component {
 							</span>
 
 							{/* USE INLINE SVG FOR ANTI-TRACKING SHIELD TO CHANGE COLORS WITH CSS */}
-							<span className="t-tooltip-up-left" data-g-tooltip="Scrub on this site" >
-								<svg className="" onClick={this.clickTrackerRestrict} width="20px" height="20px" viewBox="0 0 20 20">
+							<span className="t-tooltip-up-left" data-g-tooltip="Scrub on this site">
+								<svg className="" onClick={this.handleAntiTrackingWhitelist} width="20px" height="20px" viewBox="0 0 20 20">
 									<g transform="translate(1 1)" fill="none" fillRule="evenodd">
 										<path className="border" stroke="#00AEF0" d="M-.5-.5h18.3v18.217H-.5z" />
 										<path className="background" stroke="#FFF" fill="#00AEF0" d="M.5.5h16.3v16.217H.5z" />
