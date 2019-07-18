@@ -98,16 +98,14 @@ class CreateAccountViewContainer extends Component {
 	 * Update legal consetnt checkbox  value by updating state
 	 */
 	_handleLegalConsentCheckboxChange = () => {
-		const legalConsentChecked = !this.state.legalConsentChecked;
-		this.setState({ legalConsentChecked });
+		this.setState(prevState => ({ legalConsentChecked: !prevState.legalConsentChecked }));
 	}
 
 	/**
 	 * Update promotions checkbox value by updating state
 	 */
 	_handlePromotionsCheckboxChange = () => {
-		const promotionsChecked = !this.state.promotionsChecked;
-		this.setState({ promotionsChecked });
+		this.setState(prevState => ({ promotionsChecked: !prevState.promotionsChecked }));
 	}
 
 	/**
