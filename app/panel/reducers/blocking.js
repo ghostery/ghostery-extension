@@ -226,6 +226,12 @@ const _updateAntiTrackingWhitelist = (state, action) => {
 		addToWhitelist();
 	}
 
+	updatedAntiTracking.unknownTrackers.forEach((tracker) => {
+		if (tracker.name === unknownTracker.name) {
+			tracker.whitelisted = !tracker.whitelisted;
+		}
+	});
+
 	sendMessage('setPanelData', { anti_tracking_whitelist: whitelistedUrls });
 
 	return updatedAntiTracking;

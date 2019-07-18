@@ -230,8 +230,9 @@ class Category extends React.Component {
 										{ (category.num_total === 1) ? t('blocking_category_tracker') : t('blocking_category_trackers') }
 									</span>
 								</div>
-								{(!!trackersBlockedCount || (isUnknown && category.num_blocked !== category.num_total)) && (
-									<div className="blocked-count">
+								{((!isUnknown && !!trackersBlockedCount)
+								|| (isUnknown && category.num_blocked !== category.num_total)) && (
+									<div className={`blocked-count${isUnknown ? ' ghosty-blue' : ''}`}>
 										<span className="count">
 											{isUnknown ? category.num_total - category.num_blocked : `${trackersBlockedCount} `}
 										</span>

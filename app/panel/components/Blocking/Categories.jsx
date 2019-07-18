@@ -65,7 +65,7 @@ class Categories extends React.Component {
 				category={(() => ({
 					id: 'unknown',
 					name: 'Unknown',
-					description: 'Unknown trackers blocked by Anti-Tracking',
+					description: 'Unknown trackers scrubbed by Anti-Tracking',
 					img_name: 'unknown',
 					num_total: antiTracking.unknownTrackers.length,
 					num_blocked: antiTracking.unknownTrackerCount,
@@ -74,7 +74,7 @@ class Categories extends React.Component {
 						name: otherDataPoint.name,
 						domains: otherDataPoint.domains,
 						whitelisted: otherDataPoint.whitelisted,
-						blocked: !otherDataPoint.whitelisted,
+						blocked: false,
 						catId: 'other_data_points',
 						description: '',
 						id: 100000000 + idx,
