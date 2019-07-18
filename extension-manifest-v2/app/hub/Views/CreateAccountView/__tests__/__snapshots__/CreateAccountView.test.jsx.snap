@@ -145,11 +145,33 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
         className="columns small-12 medium-5"
       >
         <div
-          className="CreateAccountView__checkboxContainer CreateAccountView--marginBottom flex-container align-middle"
+          className="CreateAccountView__checkboxContainer CreateAccountView--marginBottom flex-container"
         >
           <div
-            className="ToggleCheckbox ToggleCheckbox--active"
-            onClick={[Function]}
+            className="ToggleCheckbox ToggleCheckbox--flush-left"
+          >
+            <svg
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+              />
+            </svg>
+          </div>
+          <span
+            className="CreateAccountView__inputLabel clickable"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "create_account_form_legal_consent_checkbox_label",
+              }
+            }
+          />
+        </div>
+        <div
+          className="CreateAccountView__checkboxContainer CreateAccountView--marginBottom flex-container"
+        >
+          <div
+            className="ToggleCheckbox ToggleCheckbox--flush-left ToggleCheckbox--active"
           >
             <svg
               viewBox="0 0 24 24"
@@ -161,7 +183,6 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
           </div>
           <span
             className="CreateAccountView__inputLabel clickable"
-            onClick={[Function]}
           >
             hub_create_account_checkbox_promotions
           </span>
@@ -388,11 +409,10 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
         className="columns small-12 medium-5"
       >
         <div
-          className="CreateAccountView__checkboxContainer CreateAccountView--marginBottom flex-container align-middle"
+          className="CreateAccountView__checkboxContainer CreateAccountView--marginBottom flex-container"
         >
           <div
-            className="ToggleCheckbox"
-            onClick={[Function]}
+            className="ToggleCheckbox ToggleCheckbox--flush-left"
           >
             <svg
               viewBox="0 0 24 24"
@@ -404,7 +424,29 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
           </div>
           <span
             className="CreateAccountView__inputLabel clickable"
-            onClick={[Function]}
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "create_account_form_legal_consent_checkbox_label",
+              }
+            }
+          />
+        </div>
+        <div
+          className="CreateAccountView__checkboxContainer CreateAccountView--marginBottom flex-container"
+        >
+          <div
+            className="ToggleCheckbox ToggleCheckbox--flush-left"
+          >
+            <svg
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+              />
+            </svg>
+          </div>
+          <span
+            className="CreateAccountView__inputLabel clickable"
           >
             hub_create_account_checkbox_promotions
           </span>
