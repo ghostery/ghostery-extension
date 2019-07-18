@@ -378,7 +378,7 @@ class EventHandlers {
 
 		/* ** SMART BLOCKING - Privacy ** */
 		// block HTTP request on HTTPS page
-		if (this.policySmartBlock.isInsecureRequest(tab_id, page_protocol, processed.protocol, processed.host)) {
+		if (this.policySmartBlock.isInsecureRequest(tab_id, page_protocol, processed.scheme, processed.hostname)) {
 			return this._blockHelper(details, tab_id, null, null, request_id, from_redirect, true);
 		}
 
@@ -399,7 +399,7 @@ class EventHandlers {
 
 		/* ** SMART BLOCKING - Breakage ** */
 		// allow first party trackers
-		if (this.policySmartBlock.isFirstPartyRequest(tab_id, page_host, processed.host)) {
+		if (this.policySmartBlock.isFirstPartyRequest(tab_id, page_host, processed.hostname)) {
 			return { cancel: false };
 		}
 
@@ -715,11 +715,11 @@ class EventHandlers {
 	 *
 	 * @private
 	 *
-	 * @param  {Object}  parsedURL
+	 * @param  {URL}  parsedURL
 	 * @return {Boolean}
 	 */
 	_isValidUrl(parsedURL) {
-		if (parsedURL.protocol.startsWith('http') && parsedURL.host.includes('.') && /[A-Za-z]/.test(parsedURL.host) && !parsedURL.path.includes('_/chrome/newtab')) {
+		if (parsedURL && parsedURL.protocol.startsWith('http') && parsedURL.isValidHost() && !parsedURL.pathname.includes('_/chrome/newtab')) {
 			return true;
 		}
 
