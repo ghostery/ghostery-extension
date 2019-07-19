@@ -37,6 +37,8 @@ class CreateAccountViewContainer extends Component {
 			confirmEmailError: false,
 			firstName: '',
 			lastName: '',
+			legalConsentChecked: false,
+			legalConsentNotCheckedError: false,
 			password: '',
 			passwordInvalidError: false,
 			passwordLengthError: false,
@@ -93,11 +95,17 @@ class CreateAccountViewContainer extends Component {
 	}
 
 	/**
-	 * Update input checkbox values by updating state.
+	 * Update legal consetnt checkbox  value by updating state
 	 */
-	_handleCheckboxChange = () => {
-		const promotionsChecked = !this.state.promotionsChecked;
-		this.setState({ promotionsChecked });
+	_handleLegalConsentCheckboxChange = () => {
+		this.setState(prevState => ({ legalConsentChecked: !prevState.legalConsentChecked }));
+	}
+
+	/**
+	 * Update promotions checkbox value by updating state
+	 */
+	_handlePromotionsCheckboxChange = () => {
+		this.setState(prevState => ({ promotionsChecked: !prevState.promotionsChecked }));
 	}
 
 	/**
@@ -111,6 +119,7 @@ class CreateAccountViewContainer extends Component {
 			confirmEmail,
 			firstName,
 			lastName,
+			legalConsentChecked,
 			password,
 			promotionsChecked
 		} = this.state;
@@ -123,12 +132,13 @@ class CreateAccountViewContainer extends Component {
 		this.setState({
 			emailError: !emailIsValid,
 			confirmEmailError: !confirmIsValid,
+			legalConsentNotCheckedError: !legalConsentChecked,
 			passwordInvalidError: invalidChars,
 			passwordLengthError: invalidLength,
 			validateInput: true,
 		});
 
-		if (!emailIsValid || !confirmIsValid || !passwordIsValid) {
+		if (!emailIsValid || !confirmIsValid || !legalConsentChecked || !passwordIsValid) {
 			return;
 		}
 		this.props.actions.setToast({
@@ -166,6 +176,8 @@ class CreateAccountViewContainer extends Component {
 			confirmEmailError,
 			firstName,
 			lastName,
+			legalConsentChecked,
+			legalConsentNotCheckedError,
 			password,
 			passwordInvalidError,
 			passwordLengthError,
@@ -178,12 +190,15 @@ class CreateAccountViewContainer extends Component {
 			confirmEmailError,
 			firstName,
 			lastName,
+			legalConsentChecked,
+			legalConsentNotCheckedError,
 			password,
 			passwordInvalidError,
 			passwordLengthError,
 			promotionsChecked,
 			handleInputChange: this._handleInputChange,
-			handleCheckboxChange: this._handleCheckboxChange,
+			handleLegalConsentCheckboxChange: this._handleLegalConsentCheckboxChange,
+			handlePromotionsCheckboxChange: this._handlePromotionsCheckboxChange,
 			handleSubmit: this._handleCreateAccountAttempt
 		};
 		const signedInChildProps = {

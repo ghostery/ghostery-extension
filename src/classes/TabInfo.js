@@ -177,10 +177,10 @@ class TabInfo {
 	_updateUrl(tab_id, tab_url) {
 		const parsed = processUrl(tab_url);
 		this._tabInfo[tab_id].url = tab_url;
-		this._tabInfo[tab_id].protocol = parsed.protocol;
-		this._tabInfo[tab_id].host = parsed.host;
-		this._tabInfo[tab_id].path = parsed.path;
-		this._tabInfo[tab_id].hash = parsed.anchor;
+		this._tabInfo[tab_id].protocol = parsed.scheme;
+		this._tabInfo[tab_id].host = parsed.hostname;
+		this._tabInfo[tab_id].path = parsed.pathname;
+		this._tabInfo[tab_id].hash = parsed.hash;
 		this._tabInfo[tab_id].partialScan = false;
 	}
 }
