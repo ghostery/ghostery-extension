@@ -42,8 +42,8 @@ class Metrics {
 		this.ping_set = new Set();
 		this._brokenPageWatcher = {
 			flag: false,
-			triggerId: null,
-			triggerTime: null,
+			triggerId: '',
+			triggerTime: '',
 		};
 	}
 
@@ -131,9 +131,8 @@ class Metrics {
 	_clearBrokenPageWatcher() {
 		this._brokenPageWatcher = Object.assign({}, {
 			flag: false,
-			triggerId: null,
-			triggerTime: null,
-			watcherOffSwitch: null
+			triggerId: '',
+			triggerTime: '',
 		});
 	}
 
@@ -361,6 +360,12 @@ class Metrics {
 			metrics_url +=
 				// Reward ID
 				`&rid=${encodeURIComponent(this._getRewardId().toString())}`;
+		} else if (type === 'broken_page' && this._brokenPageWatcher.flag) {
+			metrics_url +=
+				// What triggered the broken page ping?
+				`&setup_path=${encodeURIComponent(this._brokenPageWatcher.triggerId.toString())}` +
+				// How much time passed between the trigger and the page refresh / open in new tab?
+				`&setup_block=${encodeURIComponent((Date.now() - this._brokenPageWatcher.triggerTime).toString())}`;
 		}
 
 		return metrics_url;
