@@ -72,7 +72,8 @@ class Globals {
 
 		// Broken page metrics named constants
 		this.BROKEN_PAGE_REFRESH = 1;
-		this.BROKEN_PAGE_WHITELISTED = 2;
+		this.BROKEN_PAGE_WHITELIST = 2;
+		this.BROKEN_PAGE_PAUSE = 3;
 
 		// data stores
 		this.REDIRECT_MAP = new Map();

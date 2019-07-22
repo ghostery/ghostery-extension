@@ -1101,7 +1101,7 @@ function initializeDispatcher() {
 		button.update();
 		utils.flushChromeMemoryCache();
 		cliqz.modules.core.action('refreshAppState');
-		metrics.handleBrokenPageTrigger(globals.BROKEN_PAGE_WHITELISTED);
+		metrics.handleBrokenPageTrigger(globals.BROKEN_PAGE_WHITELIST);
 	});
 	dispatcher.on('conf.save.enable_human_web', (enableHumanWeb) => {
 		if (!IS_CLIQZ) {
@@ -1157,6 +1157,7 @@ function initializeDispatcher() {
 
 	dispatcher.on('globals.save.paused_blocking', () => {
 		// update content script state when blocking is paused/unpaused
+		if (globals.SESSION.paused_blocking) { metrics.handleBrokenPageTrigger(globals.BROKEN_PAGE_PAUSE); }
 		cliqz.modules.core.action('refreshAppState');
 	});
 }
