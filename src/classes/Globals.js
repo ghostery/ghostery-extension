@@ -70,6 +70,10 @@ class Globals {
 		this.BLACKLISTED = 1;
 		this.WHITELISTED = 2;
 
+		// Broken page metrics named constants
+		this.BROKEN_PAGE_REFRESH = 1;
+		this.BROKEN_PAGE_WHITELISTED = 2;
+
 		// data stores
 		this.REDIRECT_MAP = new Map();
 		this.BLOCKED_REDIRECT_DATA = {};

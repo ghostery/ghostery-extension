@@ -40,9 +40,11 @@ class Metrics {
 		this.utm_source = '';
 		this.utm_campaign = '';
 		this.ping_set = new Set();
-		this._pageMightBeBroken = false;
-		this._pageMightBeBrokenOffSwitch = null;
-		this._brokenPageOnNewTabListener = null;
+		this._brokenPageWatcher = {
+			flag: false,
+			triggerId: null,
+			triggerTime: null,
+		};
 	}
 
 	/**
@@ -111,19 +113,37 @@ class Metrics {
 			});
 	}
 
-	startPossibleBrokenPageTimer() {
-		this._pageMightBeBroken = true;
-
-		// Stand down after a minute
-		if (this._pageMightBeBrokenOffSwitch) {
-			clearTimeout(this._pageMightBeBrokenOffSwitch);
+	handleBrokenPageTrigger(triggerId) {
+		switch (triggerId) {
+			case globals.BROKEN_PAGE_REFRESH:
+				if (this._brokenPageWatcher.flag) {
+					this.ping('broken-page');
+					this._clearBrokenPageWatcher();
+				} else {
+					this._setBrokenPageWatcher(triggerId);
+				}
+				break;
+			default:
+				break;
 		}
-		this._pageMightBeBrokenOffSwitch = setTimeout(() => {
-			this._pageMightBeBroken = false;
-			},
-			BROKEN_PAGE_WATCH_THRESHOLD
-		);
+	}
 
+	_clearBrokenPageWatcher() {
+		this._brokenPageWatcher = Object.assign({}, {
+			flag: false,
+			triggerId: null,
+			triggerTime: null,
+			watcherOffSwitch: null
+		});
+	}
+
+	_setBrokenPageWatcher(triggerId) {
+		this._brokenPageWatcher = Object.assign({}, {
+			flag: true,
+			triggerId,
+			triggerTime: Date.now(),
+		});
+		setTimeout(this._clearBrokenPageWatcher, BROKEN_PAGE_WATCH_THRESHOLD);
 	}
 
 	/**
