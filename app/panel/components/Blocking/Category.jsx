@@ -167,10 +167,10 @@ class Category extends React.Component {
 			sitePolicy,
 			enable_anti_tracking,
 			actions,
+			isUnknown,
 		} = this.props;
 
 		const globalBlocking = !!this.props.globalBlocking;
-		const isUnknown = category.id === 'anti_tracking_unknown';
 
 		const checkBoxStyle = `${(this.state.totalShownBlocked && this.state.allShownBlocked) ? 'all-blocked ' : (this.state.totalShownBlocked ? 'some-blocked ' : '')} checkbox-container`;
 		const caretClasses = (this.state.isExpanded ? 'caret-up' : 'caret-down') + (isUnknown ? ' Category__antiTrackingCaret' : '');
@@ -231,10 +231,10 @@ class Category extends React.Component {
 									</span>
 								</div>
 								{((!isUnknown && !!trackersBlockedCount)
-								|| (isUnknown && category.num_blocked !== category.num_total)) && (
+								|| (isUnknown && !!category.whitelistedTotal)) && (
 									<div className={`blocked-count${isUnknown ? ' ghosty-blue' : ''}`}>
 										<span className="count">
-											{isUnknown ? category.num_total - category.num_blocked : `${trackersBlockedCount} `}
+											{isUnknown ? category.whitelistedTotal : `${trackersBlockedCount} `}
 										</span>
 										<span className="text">
 											{isUnknown ? ' WHITELISTED' : t('blocking_category_blocked') }

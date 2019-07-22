@@ -38,32 +38,10 @@ class Categories extends React.Component {
 		const globalBlocking = !!this.props.globalBlocking;
 		const filtered = !!this.props.filtered;
 
-		const categoryList = categories.map((cat, index) => (
-			<Category
-				expandAll={expandAll}
-				globalBlocking={globalBlocking}
-				index={index}
-				category={cat}
-				actions={this.props.actions}
-				key={cat.id}
-				filtered={filtered}
-				showToast={this.props.showToast}
-				show_tracker_urls={this.props.show_tracker_urls}
-				sitePolicy={this.props.sitePolicy}
-				paused_blocking={this.props.paused_blocking}
-				language={this.props.language}
-				smartBlockActive={this.props.smartBlockActive}
-				smartBlock={this.props.smartBlock}
-			/>
-		));
-
-		// Change name to UnknownCategory
-		const otherDataPointsCategory = antiTracking.unknownTrackers.length ? (
-			<Category
-				expandAll={expandAll}
-				globalBlocking={globalBlocking}
-				index={categoryList.length}
-				category={(() => ({
+		const renderCategory = (category, index, isUnknown) => {
+			let whitelistedTotal = 0;
+			const unknownCategoryMapping = isUnknown ? (
+				{
 					id: 'anti_tracking_unknown',
 					name: 'Unknown',
 					description: 'Unknown trackers scrubbed by Anti-Tracking',
@@ -71,38 +49,57 @@ class Categories extends React.Component {
 					num_total: antiTracking.unknownTrackers.length,
 					num_blocked: antiTracking.unknownTrackerCount,
 					num_shown: antiTracking.hide ? 0 : antiTracking.unknownTrackers.length,
-					trackers: antiTracking.unknownTrackers.map((unknownTracker, idx) => ({
-						name: unknownTracker.name,
-						domains: unknownTracker.domains,
-						whitelisted: unknownTracker.whitelisted,
-						blocked: false,
-						catId: 'anti_tracking_unknown',
-						description: '',
-						id: 100000000 + idx,
-						shouldShow: true,
-						cliqzAdCount: unknownTracker.ads,
-						cliqzCookieCount: unknownTracker.cookies,
-						cliqzFingerprintCount: unknownTracker.fingerprints,
-					})),
-				}))()}
-				actions={this.props.actions}
-				key="anti_tracking_unknown"
-				filtered={filtered}
-				showToast={this.props.showToast}
-				show_tracker_urls={this.props.show_tracker_urls}
-				sitePolicy={this.props.sitePolicy}
-				paused_blocking={this.props.paused_blocking}
-				language={this.props.language}
-				smartBlockActive={this.props.smartBlockActive}
-				smartBlock={this.props.smartBlock}
-				enable_anti_tracking={enable_anti_tracking}
-			/>
-		) : null;
+					trackers: antiTracking.unknownTrackers.map((unknownTracker, idx) => {
+						if (unknownTracker.whitelisted) { whitelistedTotal++; }
+						return {
+							name: unknownTracker.name,
+							domains: unknownTracker.domains,
+							whitelisted: unknownTracker.whitelisted,
+							blocked: false,
+							catId: 'anti_tracking_unknown',
+							description: '',
+							id: 100000000 + idx,
+							shouldShow: true,
+							cliqzAdCount: unknownTracker.ads,
+							cliqzCookieCount: unknownTracker.cookies,
+							cliqzFingerprintCount: unknownTracker.fingerprints,
+						};
+					}),
+					whitelistedTotal,
+				}
+			) : null;
+			console.log(whitelistedTotal)
+
+			return (
+				<Category
+					expandAll={expandAll}
+					globalBlocking={globalBlocking}
+					index={index}
+					category={isUnknown ? unknownCategoryMapping : category}
+					actions={this.props.actions}
+					key={isUnknown ? unknownCategoryMapping.id : category.id}
+					filtered={filtered}
+					showToast={this.props.showToast}
+					show_tracker_urls={this.props.show_tracker_urls}
+					sitePolicy={this.props.sitePolicy}
+					paused_blocking={this.props.paused_blocking}
+					language={this.props.language}
+					smartBlockActive={this.props.smartBlockActive}
+					smartBlock={this.props.smartBlock}
+					enable_anti_tracking={enable_anti_tracking}
+					isUnknown={isUnknown}
+				/>
+			);
+		};
+
+		const categoryList = categories.map((category, index) => renderCategory(category, index));
+		const unknownCategory = antiTracking.unknownTrackers.length
+			? renderCategory(null, categoryList.length, true) : null;
 
 		return (
 			<div className="scroll-content">
 				{categoryList}
-				{otherDataPointsCategory}
+				{unknownCategory}
 			</div>
 		);
 	}

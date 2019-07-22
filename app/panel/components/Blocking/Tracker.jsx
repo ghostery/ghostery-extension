@@ -309,10 +309,13 @@ class Tracker extends React.Component {
 					{ source.src }
 				</a>
 			));
+		} else if (tracker.domains) {
+			sources = tracker.domains.map((domain, index) => (
+				<p className="trk-src-link unknown" key={index}>{domain}</p>
+			));
 		}
 
 		const trackerNameClasses = ClassNames('trk-name', {
-			unknown: isUnknown,
 			'is-whitelisted': tracker.whitelisted,
 		});
 
@@ -347,16 +350,18 @@ class Tracker extends React.Component {
 				{this.state.showMoreInfo && (
 					<div className={`${!this.state.showMoreInfo ? 'hide' : ''} row trk-moreinfo`}>
 						<div className="columns">
-							<div className="trk-description">
-								{ this.state.description }
-								<div className={(!this.state.showTrackerLearnMore ? 'hide' : '')}>
-									<a target="_blank" rel="noopener noreferrer" title={tracker.name} href={`https://${globals.APPS_SUB_DOMAIN}.ghostery.com/${this.props.language}/apps/${encodeURIComponent(tracker.name.replace(/\s+/g, '_').toLowerCase())}`}>
-										{ t('tracker_description_learn_more') }
-									</a>
+							{!isUnknown && (
+								<div className="trk-description">
+									{ this.state.description }
+									<div className={(!this.state.showTrackerLearnMore ? 'hide' : '')}>
+										<a target="_blank" rel="noopener noreferrer" title={tracker.name} href={`https://${globals.APPS_SUB_DOMAIN}.ghostery.com/${this.props.language}/apps/${encodeURIComponent(tracker.name.replace(/\s+/g, '_').toLowerCase())}`}>
+											{ t('tracker_description_learn_more') }
+										</a>
+									</div>
 								</div>
-							</div>
+							)}
 							<div className={`${!this.props.show_tracker_urls ? 'hide' : ''}`}>
-								<div className="trk-srcs-title">{ t('panel_tracker_found_sources_title') }</div>
+								<div className="trk-srcs-title">{isUnknown ? 'Dectected unknown tracker URLs' : t('panel_tracker_found_sources_title') }</div>
 								<div className="trk-srcs">{ sources }</div>
 							</div>
 						</div>

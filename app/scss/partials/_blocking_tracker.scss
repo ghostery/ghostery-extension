@@ -27,10 +27,6 @@
 			font-weight: 400;
 			color: #4a4a4a;
 			@extend %nowrap;
-			&.unknown {
-				pointer-events: none;
-				cursor: default;
-			}
 			&.is-whitelisted {
 				color: #00AEF0;
 			}
@@ -115,6 +111,10 @@
 			margin-right: 10px;
 			overflow-y: hidden;
 			@extend %nowrap;
+			&.unknown {
+				margin: 0 10px 0 0;
+				color: #4a4a4a;
+			}
 		}
 	}
 	svg.blocking-icons {
