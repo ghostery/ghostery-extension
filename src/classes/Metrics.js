@@ -44,6 +44,7 @@ class Metrics {
 			flag: false,
 			triggerId: '',
 			triggerTime: '',
+			timeoutId: null,
 		};
 	}
 
@@ -133,16 +134,21 @@ class Metrics {
 			flag: false,
 			triggerId: '',
 			triggerTime: '',
+			timeoutId: null,
 		});
 	}
 
 	_setBrokenPageWatcher(triggerId) {
+		const { timeoutId } = this._brokenPageWatcher;
+
+		if (timeoutId) { clearTimeout(timeoutId); }
+
 		this._brokenPageWatcher = Object.assign({}, {
 			flag: true,
 			triggerId,
 			triggerTime: Date.now(),
+			timeoutId: setTimeout(this._clearBrokenPageWatcher, BROKEN_PAGE_WATCH_THRESHOLD),
 		});
-		setTimeout(this._clearBrokenPageWatcher, BROKEN_PAGE_WATCH_THRESHOLD);
 	}
 
 	/**
