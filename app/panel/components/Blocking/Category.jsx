@@ -202,7 +202,7 @@ class Category extends React.Component {
 					{isUnknown && (
 						<div className="Category__antiTrackingDivider">
 							<p className="Category__antiTrackingDividerText">
-								Enhanced Anti-Tracking
+								{t('enhanced_anti_tracking')}
 							</p>
 						</div>
 					)}
@@ -212,19 +212,18 @@ class Category extends React.Component {
 						</div>
 						<div className="columns collapse-left collapse-right align-self-top">
 							<div className={`cat-name ${this.props.globalBlocking ? 'has-tooltip' : ''}`} onClick={this.toggleCategoryTrackers}>
-								{ category.name }
+								{category.name}
 							</div>
 							<div className={this.props.globalBlocking ? (this.props.index ? 'cat-tooltip-up' : 'cat-tooltip-down') : 'hide'} data-g-tooltip={category.description} onMouseOver={this.showTooltip} onMouseOut={this.hideTooltip}>
 								<img src="../../app/images/panel/icon-information-tooltip.svg" className="cat-question" />
 							</div>
 							<div className="counts">
 								<div className="total-count">
-									{
-										this.props.filtered && (
-											<span className="text" style={filteredText}>
-											t(`blocking_category_tracker_found`)
-											</span>
-										)}
+									{this.props.filtered && (
+										<span className="text" style={filteredText}>
+											{t('blocking_category_tracker_found')}
+										</span>
+									)}
 									<span className="count">{`${category.num_total} `}</span>
 									<span className="text">
 										{ (category.num_total === 1) ? t('blocking_category_tracker') : t('blocking_category_trackers') }
@@ -234,10 +233,10 @@ class Category extends React.Component {
 								|| (isUnknown && !!category.whitelistedTotal)) && (
 									<div className={`blocked-count${isUnknown ? ' ghosty-blue' : ''}`}>
 										<span className="count">
-											{isUnknown ? category.whitelistedTotal : `${trackersBlockedCount} `}
+											{isUnknown ? `${category.whitelistedTotal} ` : `${trackersBlockedCount} `}
 										</span>
 										<span className="text">
-											{isUnknown ? ' WHITELISTED' : t('blocking_category_blocked') }
+											{isUnknown ? t('blocking_category_whitelisted') : t('blocking_category_blocked') }
 										</span>
 									</div>
 								)}

@@ -361,7 +361,7 @@ class Tracker extends React.Component {
 								</div>
 							)}
 							<div className={`${!this.props.show_tracker_urls ? 'hide' : ''}`}>
-								<div className="trk-srcs-title">{isUnknown ? 'Dectected unknown tracker URLs' : t('panel_tracker_found_sources_title') }</div>
+								<div className="trk-srcs-title">{t('panel_tracker_found_sources_title')}</div>
 								<div className="trk-srcs">{ sources }</div>
 							</div>
 						</div>
