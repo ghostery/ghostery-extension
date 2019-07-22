@@ -22,7 +22,6 @@ const { adblocker, antitracking } = cliqz.modules;
 
 /**
  * Get the totalUnsafeCount of trackers found by Anti-Tracking on this tabId
-<<<<<<< HEAD
  * @memberOf BackgroundUtils
  * @param  {int} 	tabId
  * @return {object}	totalUnsafeCount
@@ -50,29 +49,31 @@ export function getCliqzAntiTrackingData(tabId, tabHostUrl) {
 	}
 
 	for (const other of othersValues) {
-		if (other.cookies || other.fingerprints) {
+		let whitelisted = false;
+		const scrubbed = other.cookies || other.fingerprints;
+
+		other.domains.some((domain) => {
+			if (conf.anti_tracking_whitelist[domain]
+			&& conf.anti_tracking_whitelist[domain].hosts.includes(tabHostUrl)) {
+				whitelisted = true;
+				return true;
+			}
+			return false;
+		});
+
+		if (scrubbed) {
 			totalUnsafeCount += other.cookies + other.fingerprints;
 			totalUnknownCount += other.cookies + other.fingerprints;
 			unknownTrackerCount += 1;
+		}
+
+		if (scrubbed || whitelisted) {
 			const {
 				name, domains, ads, cookies, fingerprints
 			} = other;
+
 			unknownTrackers.push({
-				name, domains, ads, cookies, fingerprints, whitelisted: false
-			});
-		} else {
-			other.domains.some((domain) => {
-				if (conf.anti_tracking_whitelist[domain]
-				&& conf.anti_tracking_whitelist[domain].hosts.includes(tabHostUrl)) {
-					const {
-						name, domains, ads, cookies, fingerprints
-					} = other;
-					unknownTrackers.push({
-						name, domains, ads, cookies, fingerprints, whitelisted: true
-					});
-					return true;
-				}
-				return false;
+				name, domains, ads, cookies, fingerprints, whitelisted
 			});
 		}
 	}

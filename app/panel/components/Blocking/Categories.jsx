@@ -57,35 +57,36 @@ class Categories extends React.Component {
 			/>
 		));
 
+		// Change name to UnknownCategory
 		const otherDataPointsCategory = antiTracking.unknownTrackers.length ? (
 			<Category
 				expandAll={expandAll}
 				globalBlocking={globalBlocking}
 				index={categoryList.length}
 				category={(() => ({
-					id: 'unknown',
+					id: 'anti_tracking_unknown',
 					name: 'Unknown',
 					description: 'Unknown trackers scrubbed by Anti-Tracking',
-					img_name: 'unknown',
+					img_name: 'anti_tracking_unknown',
 					num_total: antiTracking.unknownTrackers.length,
 					num_blocked: antiTracking.unknownTrackerCount,
 					num_shown: antiTracking.hide ? 0 : antiTracking.unknownTrackers.length,
-					trackers: antiTracking.unknownTrackers.map((otherDataPoint, idx) => ({
-						name: otherDataPoint.name,
-						domains: otherDataPoint.domains,
-						whitelisted: otherDataPoint.whitelisted,
+					trackers: antiTracking.unknownTrackers.map((unknownTracker, idx) => ({
+						name: unknownTracker.name,
+						domains: unknownTracker.domains,
+						whitelisted: unknownTracker.whitelisted,
 						blocked: false,
-						catId: 'other_data_points',
+						catId: 'anti_tracking_unknown',
 						description: '',
 						id: 100000000 + idx,
 						shouldShow: true,
-						cliqzAdCount: otherDataPoint.ads,
-						cliqzCookieCount: otherDataPoint.cookies,
-						cliqzFingerprintCount: otherDataPoint.fingerprints,
+						cliqzAdCount: unknownTracker.ads,
+						cliqzCookieCount: unknownTracker.cookies,
+						cliqzFingerprintCount: unknownTracker.fingerprints,
 					})),
 				}))()}
 				actions={this.props.actions}
-				key="other_data_points"
+				key="anti_tracking_unknown"
 				filtered={filtered}
 				showToast={this.props.showToast}
 				show_tracker_urls={this.props.show_tracker_urls}

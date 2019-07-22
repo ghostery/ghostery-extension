@@ -128,9 +128,9 @@ class DonutGraph extends React.Component {
 			return;
 		}
 
-		if (!antiTracking.totalUnknownCount && !nextProps.antiTracking.totalUnknownCount) { return; }
-		const unknownDataPoints = antiTracking.totalUnknownCount;
-		const nextUnknownDataPoints = nextProps.antiTracking.totalUnknownCount;
+		if (!antiTracking.unknownTrackerCount && !nextProps.antiTracking.unknownTrackerCount) { return; }
+		const unknownDataPoints = antiTracking.unknownTrackerCount;
+		const nextUnknownDataPoints = nextProps.antiTracking.unknownTrackerCount;
 		if (unknownDataPoints !== nextUnknownDataPoints) {
 			this.nextPropsDonut(nextProps);
 		}
@@ -221,11 +221,11 @@ class DonutGraph extends React.Component {
 			graphData.sort((a, b) => a.value < b.value);
 		}
 
-		if (antiTracking.totalUnknownCount) {
+		if (antiTracking.unknownTrackerCount) {
 			graphData.push({
 				id: 'unknown',
 				name: 'Unknown',
-				value: antiTracking.totalUnknownCount,
+				value: antiTracking.unknownTrackerCount,
 			});
 		}
 
@@ -359,7 +359,7 @@ class DonutGraph extends React.Component {
 							{cat.name}
 						</span>
 					))}
-					{!!antiTracking.totalUnknownCount && (
+					{!!antiTracking.unknownTrackerCount && (
 						<span
 							className="DonutGraph__tooltip tooltip top"
 							id="unknown_tooltip"

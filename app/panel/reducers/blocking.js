@@ -17,13 +17,13 @@ import {
 	FILTER_TRACKERS,
 	UPDATE_BLOCK_ALL_TRACKERS,
 	UPDATE_CATEGORIES,
+	UPDATE_ANTI_TRACKING_HIDE,
 	UPDATE_CATEGORY_BLOCKED,
 	UPDATE_TRACKER_BLOCKED,
 	UPDATE_TRACKER_TRUST_RESTRICT,
 	UPDATE_ANTI_TRACKING_WHITELIST,
 	TOGGLE_EXPAND_ALL,
-	UPDATE_CLIQZ_MODULE_DATA,
-	UPDATE_ANTI_TRACKING_NUM_SHOWN
+	UPDATE_CLIQZ_MODULE_DATA
 } from '../constants/constants';
 import {
 	updateTrackerBlocked, updateCategoryBlocked, updateBlockAllTrackers, toggleExpandAll
@@ -77,6 +77,9 @@ export default (state = initialState, action) => {
 		case UPDATE_CATEGORIES: {
 			return Object.assign({}, state, { categories: action.data });
 		}
+		case UPDATE_ANTI_TRACKING_HIDE: {
+			return Object.assign({}, state, { antiTracking: action.data });
+		}
 		case UPDATE_CATEGORY_BLOCKED: {
 			const updated = updateCategoryBlocked(state, action);
 			return Object.assign({}, state, updated);
@@ -102,9 +105,6 @@ export default (state = initialState, action) => {
 			return Object.assign({}, state, {
 				antiTracking: Object.assign({}, action.data.antiTracking, { hide })
 			});
-		}
-		case UPDATE_ANTI_TRACKING_NUM_SHOWN: {
-			return Object.assign({}, state, { antiTracking: action.data });
 		}
 
 		default: return state;

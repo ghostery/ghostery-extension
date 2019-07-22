@@ -170,7 +170,7 @@ class Category extends React.Component {
 		} = this.props;
 
 		const globalBlocking = !!this.props.globalBlocking;
-		const isUnknown = category.id === 'unknown';
+		const isUnknown = category.id === 'anti_tracking_unknown';
 
 		const checkBoxStyle = `${(this.state.totalShownBlocked && this.state.allShownBlocked) ? 'all-blocked ' : (this.state.totalShownBlocked ? 'some-blocked ' : '')} checkbox-container`;
 		const caretClasses = (this.state.isExpanded ? 'caret-up' : 'caret-down') + (isUnknown ? ' Category__antiTrackingCaret' : '');

@@ -61,6 +61,8 @@
 		line-height: 19px;
 		&.disabled {
 			color: #acacac;
+			pointer-events: none;
+			visibility: hidden;
 		}
 	}
 	.caret-down {

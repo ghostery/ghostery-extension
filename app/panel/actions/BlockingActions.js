@@ -15,12 +15,12 @@ import {
 	UPDATE_BLOCKING_DATA,
 	UPDATE_BLOCK_ALL_TRACKERS,
 	UPDATE_CATEGORIES,
+	UPDATE_ANTI_TRACKING_HIDE,
 	UPDATE_CATEGORY_BLOCKED,
 	UPDATE_TRACKER_BLOCKED,
 	UPDATE_TRACKER_TRUST_RESTRICT,
 	UPDATE_ANTI_TRACKING_WHITELIST,
-	TOGGLE_EXPAND_ALL,
-	UPDATE_ANTI_TRACKING_NUM_SHOWN
+	TOGGLE_EXPAND_ALL
 } from '../constants/constants';
 
 /**
@@ -64,9 +64,9 @@ export function updateCategories(data) {
  * @param  {Object} data
  * @return {Object}
  */
-export function updateAntiTrackingNumShown(data) {
+export function updateAntiTrackingHide(data) {
 	return {
-		type: UPDATE_ANTI_TRACKING_NUM_SHOWN,
+		type: UPDATE_ANTI_TRACKING_HIDE,
 		data,
 	};
 }

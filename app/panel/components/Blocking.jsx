@@ -114,7 +114,7 @@ class Blocking extends React.Component {
 
 		updatedAntiTracking.hide = !(filterName === 'all' || filterName === 'unknown');
 		this.props.actions.updateCategories(updated_categories);
-		this.props.actions.updateAntiTrackingNumShown(updatedAntiTracking);
+		this.props.actions.updateAntiTrackingHide(updatedAntiTracking);
 	}
 
 	/**

@@ -37,8 +37,9 @@ const initialState = {
 	},
 	tab_id: 0,
 	antiTracking: {
-		totalUnsafeCount: 0,
-		totalUnknownCount: 0,
+		totalUnsafeCount: 0, // The amount of data points scrubbed by Anti-Tracking
+		totalUnknownCount: 0, // The amount of data points scrubbed by Anti-Tracking for Trackers not in the Ghostery DB
+		unknownTrackerCount: 0, // The amount of trackers blocked by Anti-Tracking
 	}
 };
 /**
@@ -55,10 +56,10 @@ export default (state = initialState, action) => {
 			return Object.assign({}, state, action.data);
 		}
 		case UPDATE_CLIQZ_MODULE_DATA: {
-			const { totalUnsafeCount, totalUnknownCount } = action.data.antiTracking;
+			const { totalUnsafeCount, totalUnknownCount, unknownTrackerCount } = action.data.antiTracking;
 			return Object.assign({}, state, {
 				adBlock: action.data.adblock,
-				antiTracking: { totalUnsafeCount, totalUnknownCount },
+				antiTracking: { totalUnsafeCount, totalUnknownCount, unknownTrackerCount },
 			});
 		}
 		case UPDATE_GHOSTERY_PAUSED: {
