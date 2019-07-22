@@ -115,48 +115,31 @@ class Metrics {
 	}
 
 	handleBrokenPageTrigger(triggerId) {
-		switch (triggerId) {
-			case globals.BROKEN_PAGE_REFRESH:
-				if (this._brokenPageWatcher.flag) {
-					this.ping('broken-page');
-					this._unplugBrokenPageWatcher();
-				} else {
-					this._rebootBrokenPageWatcher(triggerId);
-				}
-				break;
-			case globals.BROKEN_PAGE_WHITELIST:
-				if (this._brokenPageWatcher.flag) {
-					this.ping('broken-page');
-					this._unplugBrokenPageWatcher();
-				}
-				break;
-			case globals.BROKEN_PAGE_PAUSE:
-				if (this._brokenPageWatcher.flag) {
-					this.ping('broken-page');
-					this._unplugBrokenPageWatcher();
-				}
-				break;
-			default:
-				break;
+		if (this._brokenPageWatcher.on && triggerId === globals.BROKEN_PAGE_REFRESH) {
+			this.ping('broken-page');
+			this._unplugBrokenPageWatcher();
+			return;
 		}
+
+		this._resetBrokenPageWatcher(triggerId);
 	}
 
 	_unplugBrokenPageWatcher() {
 		this._clearBrokenPageWatcherTimeout();
 
 		this._brokenPageWatcher = Object.assign({},{
-			flag: false,
+			on: false,
 			triggerId: '',
 			triggerTime: '',
 			timeoutId: null,
 		});
 	}
 
-	_rebootBrokenPageWatcher(triggerId) {
+	_resetBrokenPageWatcher(triggerId) {
 		this._clearBrokenPageWatcherTimeout();
 
 		this._brokenPageWatcher = Object.assign({}, {
-			flag: true,
+			on: true,
 			triggerId,
 			triggerTime: Date.now(),
 			timeoutId: setTimeout(this._clearBrokenPageWatcher, BROKEN_PAGE_WATCH_THRESHOLD),

@@ -1096,11 +1096,16 @@ function initializeDispatcher() {
 		// can't simply compare num_selected and size(db.apps) since apps get removed sometimes
 		db.allSelected = (!!num_selected && every(db.apps, (app, app_id) => appIds.hasOwnProperty(app_id)));
 	});
+	dispatcher.on('conf.save.site_specific_unblocks', () => {
+		// if user has unblock a tracker on this page, suspect a broken page
+		metrics.handleBrokenPageTrigger(globals.BROKEN_PAGE_LOCAL_TRACKER_UNBLOCK);
+	})
 	dispatcher.on('conf.save.site_whitelist', () => {
 		// TODO debounce with below
 		button.update();
 		utils.flushChromeMemoryCache();
 		cliqz.modules.core.action('refreshAppState');
+		// if user has whitelisted site, suspect broken page
 		metrics.handleBrokenPageTrigger(globals.BROKEN_PAGE_WHITELIST);
 	});
 	dispatcher.on('conf.save.enable_human_web', (enableHumanWeb) => {
@@ -1156,8 +1161,9 @@ function initializeDispatcher() {
 	}, 200));
 
 	dispatcher.on('globals.save.paused_blocking', () => {
-		// update content script state when blocking is paused/unpaused
+		// if user has paused Ghostery, suspect broken page
 		if (globals.SESSION.paused_blocking) { metrics.handleBrokenPageTrigger(globals.BROKEN_PAGE_PAUSE); }
+		// update content script state when blocking is paused/unpaused
 		cliqz.modules.core.action('refreshAppState');
 	});
 }
