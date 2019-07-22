@@ -87,8 +87,6 @@ describe('app/panel/reducers/summary.js', () => {
 			antiTracking: data.antiTracking
 		});
 
-		console.log('~~~~~~~~~~~~', summaryReducer(initState, action));
-
 		expect(summaryReducer(initState, action)).toEqual(updatedState);
 	});
 
