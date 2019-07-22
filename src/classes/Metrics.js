@@ -30,6 +30,7 @@ const FIRST_REWARD_METRICS = ['rewards_first_accept', 'rewards_first_reject', 'r
 const { METRICS_SUB_DOMAIN, EXTENSION_VERSION, BROWSER_INFO } = globals;
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const MAX_DELAYED_PINGS = 100;
+const BROKEN_PAGE_WATCH_THRESHOLD = 60000; // 60 seconds
 /**
  * Class for handling telemetry pings.
  * @memberOf  BackgroundClasses
@@ -39,6 +40,9 @@ class Metrics {
 		this.utm_source = '';
 		this.utm_campaign = '';
 		this.ping_set = new Set();
+		this._pageMightBeBroken = false;
+		this._pageMightBeBrokenOffSwitch = null;
+		this._brokenPageOnNewTabListener = null;
 	}
 
 	/**
@@ -105,6 +109,21 @@ class Metrics {
 			}).catch((error) => {
 				log('Metrics init() error', error);
 			});
+	}
+
+	startPossibleBrokenPageTimer() {
+		this._pageMightBeBroken = true;
+
+		// Stand down after a minute
+		if (this._pageMightBeBrokenOffSwitch) {
+			clearTimeout(this._pageMightBeBrokenOffSwitch);
+		}
+		this._pageMightBeBrokenOffSwitch = setTimeout(() => {
+			this._pageMightBeBroken = false;
+			},
+			BROKEN_PAGE_WATCH_THRESHOLD
+		);
+
 	}
 
 	/**

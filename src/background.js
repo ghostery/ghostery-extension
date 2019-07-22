@@ -1101,6 +1101,7 @@ function initializeDispatcher() {
 		button.update();
 		utils.flushChromeMemoryCache();
 		cliqz.modules.core.action('refreshAppState');
+		metrics.startPossibleBrokenPageTimer();
 	});
 	dispatcher.on('conf.save.enable_human_web', (enableHumanWeb) => {
 		if (!IS_CLIQZ) {
