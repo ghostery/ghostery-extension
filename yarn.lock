@@ -311,6 +311,13 @@
     tslib "^1.9.3"
     tsmaz "^1.2.1"
 
+"@cliqz/url-parser@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@cliqz/url-parser/-/url-parser-1.0.2.tgz#0c42d73dbe354efad572d9ef39c0aa5d7f6151ea"
+  integrity sha512-4Y5DQqUv41SWoP7nDRO9PBMH0sSor6aiBT/t1wvjCrUDpG4yhjvAvwRaBN2GoGuHPkWUxT7mZN/FKWtSRZ/FIQ==
+  dependencies:
+    tldts "^5.0.3"
+
 "@cnakazawa/watch@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.3.tgz#099139eaec7ebf07a27c1786a3ff64f39464d2ef"

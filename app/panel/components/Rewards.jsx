@@ -175,7 +175,7 @@ class Rewards extends React.Component {
 						</svg>
 					</Link>
 				)}
-				<span className={headerTitleClassNames}>{ t('panel_detail_rewards_title') }</span>
+				<span className={headerTitleClassNames}>{ t('ghostery_rewards') }</span>
 				{showToggle && !IS_CLIQZ && (
 					<span className="flex-container align-middle">
 						<span className="RewardsPanel__slider_text">
