@@ -49,7 +49,7 @@ class Categories extends React.Component {
 					num_total: antiTracking.unknownTrackers.length,
 					num_blocked: antiTracking.unknownTrackerCount,
 					num_shown: antiTracking.hide ? 0 : antiTracking.unknownTrackers.length,
-					trackers: antiTracking.unknownTrackers.map((unknownTracker, idx) => {
+					trackers: antiTracking.unknownTrackers.map((unknownTracker) => {
 						if (unknownTracker.whitelisted) { whitelistedTotal++; }
 						return {
 							name: unknownTracker.name,
@@ -58,7 +58,7 @@ class Categories extends React.Component {
 							blocked: false,
 							catId: 'anti_tracking_unknown',
 							description: '',
-							id: 100000000 + idx,
+							id: unknownTracker.name + unknownTracker.domains[0],
 							shouldShow: true,
 							cliqzAdCount: unknownTracker.ads,
 							cliqzCookieCount: unknownTracker.cookies,
@@ -92,7 +92,7 @@ class Categories extends React.Component {
 		};
 
 		const categoryList = categories.map((category, index) => renderCategory(category, index));
-		const unknownCategory = antiTracking.unknownTrackers.length
+		const unknownCategory = antiTracking && antiTracking.unknownTrackers.length
 			? renderCategory(null, categoryList.length, true) : null;
 
 		return (

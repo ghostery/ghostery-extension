@@ -352,17 +352,17 @@ class Tracker extends React.Component {
 						<div className="columns">
 							{!isUnknown && (
 								<div className="trk-description">
-									{ this.state.description }
+									{this.state.description}
 									<div className={(!this.state.showTrackerLearnMore ? 'hide' : '')}>
 										<a target="_blank" rel="noopener noreferrer" title={tracker.name} href={`https://${globals.APPS_SUB_DOMAIN}.ghostery.com/${this.props.language}/apps/${encodeURIComponent(tracker.name.replace(/\s+/g, '_').toLowerCase())}`}>
-											{ t('tracker_description_learn_more') }
+											{t('tracker_description_learn_more')}
 										</a>
 									</div>
 								</div>
 							)}
 							<div className={`${!this.props.show_tracker_urls ? 'hide' : ''}`}>
 								<div className="trk-srcs-title">{t('panel_tracker_found_sources_title')}</div>
-								<div className="trk-srcs">{ sources }</div>
+								<div className="trk-srcs">{sources}</div>
 							</div>
 						</div>
 					</div>

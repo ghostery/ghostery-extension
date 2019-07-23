@@ -205,6 +205,8 @@ const _updateAntiTrackingWhitelist = (state, action) => {
 	};
 
 	const removeFromWhitelist = (domain) => {
+		if (!whitelistedUrls[domain]) { return; }
+
 		whitelistedUrls[domain].hosts = whitelistedUrls[domain].hosts.filter(hostUrl => (
 			hostUrl !== pageHost
 		));
