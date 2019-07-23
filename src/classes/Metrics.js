@@ -145,6 +145,7 @@ class Metrics {
 
 		this._resetBrokenPageWatcher(triggerId);
 	}
+
 	/**
 	 * handleBrokenPageTrigger helper
 	 * starts the temporary watch for a second suspicious user action in response to a first
@@ -166,6 +167,7 @@ class Metrics {
 			});
 		});
 	}
+
 	/**
 	 * handleBrokenPageTrigger helper
 	 * @private
@@ -173,7 +175,7 @@ class Metrics {
 	_unplugBrokenPageWatcher() {
 		this._clearBrokenPageWatcherTimeout();
 
-		this._brokenPageWatcher = Object.assign({},{
+		this._brokenPageWatcher = Object.assign({}, {
 			on: false,
 			triggerId: '',
 			triggerTime: '',
