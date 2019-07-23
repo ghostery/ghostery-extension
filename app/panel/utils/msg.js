@@ -170,7 +170,8 @@ export function openSubscriptionPage() {
  * This should be used for messages that don't require a callback.
  * @memberOf PanelUtils
  */
-export function openSupportPage() {
+export function openSupportPage(e) {
+	e.preventDefault();
 	sendMessage('account.openSupportPage');
 	window.close();
 }
