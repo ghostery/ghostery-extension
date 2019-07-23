@@ -141,6 +141,19 @@ export function sendRewardMessage(name, message, callback = defaultCallback()) {
 }
 
 /**
+ * Handle clicks on links with a fixed destination
+ */
+export function openFixedDestinationLinkInNewTab(e) {
+	e.preventDefault();
+	const { href } = e.target;
+	sendMessage('openNewTab', {
+		url: href,
+		become_active: true,
+	});
+	window.close();
+}
+
+/**
  * Send a message to open a Subscription or Subscribe tab.
  * Which one is determined in background based on the current user state.
  * This should be used for messages that don't require a callback.

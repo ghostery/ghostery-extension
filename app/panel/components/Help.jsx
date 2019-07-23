@@ -12,25 +12,12 @@
  */
 
 import React from 'react';
-import { sendMessage, openSupportPage } from '../utils/msg';
+import { openFixedDestinationLinkInNewTab, openSupportPage } from '../utils/msg';
 /**
  * @class Implement Help view which opens from the main drop-down menu.
  * @memberof PanelClasses
  */
 class Help extends React.Component {
-	/**
-	 * Handle clicks on links with a fixed destination
-	 */
-	openTab = (e) => {
-		e.preventDefault();
-		const { href } = e.target;
-		sendMessage('openNewTab', {
-			url: href,
-			become_active: true,
-		});
-		window.close();
-	}
-
 	/**
 	 * Handle click on 'Support' menu item
 	 */
@@ -53,12 +40,12 @@ class Help extends React.Component {
 					<div className="small-12 columns">
 						<h1>{ t('panel_help_panel_header') }</h1>
 						<div className="support-section">
-							<a href={hubUrl} onClick={this.openTab}>{ t('panel_help_setup') }</a>
+							<a href={hubUrl} onClick={openFixedDestinationLinkInNewTab}>{ t('panel_help_setup') }</a>
 						</div>
 						<div className="support-section">
 							<h3>{ t('panel_help_questions_header') }</h3>
-							<a href="https://www.ghostery.com/faqs/" onClick={this.openTab}>{ t('panel_help_faq') }</a>
-							<a href="https://www.ghostery.com/survey/in-app" onClick={this.openTab}>{ t('panel_help_feedback') }</a>
+							<a href="https://www.ghostery.com/faqs/" onClick={openFixedDestinationLinkInNewTab}>{ t('panel_help_faq') }</a>
+							<a href="https://www.ghostery.com/survey/in-app" onClick={openFixedDestinationLinkInNewTab}>{ t('panel_help_feedback') }</a>
 							<a href="#" onClick={this.openSupportTab}>{ t('panel_help_support') }</a>
 						</div>
 						<div className="support-section">
