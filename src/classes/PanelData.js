@@ -648,6 +648,10 @@ class PanelData {
 			metrics.handleBrokenPageTrigger(globals.BROKEN_PAGE_TRACKER_TRUST_OR_UNBLOCK);
 		}
 
+		if (data.brokenPageMetricsWhitelistSite) {
+			metrics.handleBrokenPageTrigger(globals.BROKEN_PAGE_WHITELIST);
+		}
+
 		if (syncSetDataChanged) {
 			// Push conf changes to the server
 			account.saveUserSettings().catch(err => log('PanelData saveUserSettings', err));

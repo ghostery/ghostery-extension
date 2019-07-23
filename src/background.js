@@ -1101,8 +1101,6 @@ function initializeDispatcher() {
 		button.update();
 		utils.flushChromeMemoryCache();
 		cliqz.modules.core.action('refreshAppState');
-		// if user has whitelisted site, suspect broken page
-		metrics.handleBrokenPageTrigger(globals.BROKEN_PAGE_WHITELIST);
 	});
 	dispatcher.on('conf.save.enable_human_web', (enableHumanWeb) => {
 		if (!IS_CLIQZ) {
