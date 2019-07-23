@@ -14,7 +14,7 @@
 import globals from './Globals';
 import conf from './Conf';
 import { log, prefsSet, prefsGet } from '../utils/common';
-import { processUrlQuery } from '../utils/utils';
+import { getActiveTab, processUrlQuery } from '../utils/utils';
 import rewards from './Rewards';
 
 // CONSTANTS
@@ -45,6 +45,7 @@ class Metrics {
 			triggerId: '',
 			triggerTime: '',
 			timeoutId: null,
+			url: '',
 		};
 	}
 
@@ -114,16 +115,56 @@ class Metrics {
 			});
 	}
 
-	handleBrokenPageTrigger(triggerId) {
+	/**
+	 * Responds to individual user actions and sequences of user actions that may indicate a broken page,
+	 * sending broken_page pings as needed
+	 * For example, sends a broken_page ping when the user whitelists a site,
+	 * then refreshes the page less than a minute later
+	 * @param 	{int} 		triggerId	'what specifically triggered this broken_page ping?' identifier sent along to the metrics server
+	 * @param 	{string} 	newTabUrl	for checking whether user has opened the same url in a new tab, which confirms a suspicion raised by certain triggers
+	 */
+	handleBrokenPageTrigger(triggerId, newTabUrl = null) {
 		if (this._brokenPageWatcher.on && triggerId === globals.BROKEN_PAGE_REFRESH) {
 			this.ping('broken-page');
 			this._unplugBrokenPageWatcher();
 			return;
 		}
 
+		if (this._brokenPageWatcher.on && triggerId === globals.BROKEN_PAGE_NEW_TAB && this._brokenPageWatcher.url === newTabUrl) {
+			this.ping('broken-page');
+			this._unplugBrokenPageWatcher();
+			return;
+		}
+
+		if (triggerId === globals.BROKEN_PAGE_NEW_TAB) { return; }
+
 		this._resetBrokenPageWatcher(triggerId);
 	}
+	/**
+	 * handleBrokenPageTrigger helper
+	 * starts the temporary watch for a second suspicious user action in response to a first
+	 * @param 	{int} 		triggerId	'what specifically triggered this broken_page ping?' identifier sent along to the metrics server
+	 * @private
+	 */
+	_resetBrokenPageWatcher(triggerId) {
+		this._clearBrokenPageWatcherTimeout();
 
+		getActiveTab((tab) => {
+			const tabUrl = tab && tab.url ? tab.url : '';
+
+			this._brokenPageWatcher = Object.assign({}, {
+				on: true,
+				triggerId,
+				triggerTime: Date.now(),
+				timeoutId: setTimeout(this._clearBrokenPageWatcher, BROKEN_PAGE_WATCH_THRESHOLD),
+				url: tabUrl,
+			});
+		});
+	}
+	/**
+	 * handleBrokenPageTrigger helper
+	 * @private
+	 */
 	_unplugBrokenPageWatcher() {
 		this._clearBrokenPageWatcherTimeout();
 
@@ -132,17 +173,7 @@ class Metrics {
 			triggerId: '',
 			triggerTime: '',
 			timeoutId: null,
-		});
-	}
-
-	_resetBrokenPageWatcher(triggerId) {
-		this._clearBrokenPageWatcherTimeout();
-
-		this._brokenPageWatcher = Object.assign({}, {
-			on: true,
-			triggerId,
-			triggerTime: Date.now(),
-			timeoutId: setTimeout(this._clearBrokenPageWatcher, BROKEN_PAGE_WATCH_THRESHOLD),
+			url: '',
 		});
 	}
 
@@ -366,7 +397,7 @@ class Metrics {
 			metrics_url +=
 				// Reward ID
 				`&rid=${encodeURIComponent(this._getRewardId().toString())}`;
-		} else if (type === 'broken_page' && this._brokenPageWatcher.flag) {
+		} else if (type === 'broken_page' && this._brokenPageWatcher.on) {
 			metrics_url +=
 				// What triggered the broken page ping?
 				`&setup_path=${encodeURIComponent(this._brokenPageWatcher.triggerId.toString())}` +

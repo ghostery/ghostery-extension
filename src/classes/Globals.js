@@ -75,6 +75,7 @@ class Globals {
 		this.BROKEN_PAGE_WHITELIST = 2;
 		this.BROKEN_PAGE_PAUSE = 3;
 		this.BROKEN_PAGE_LOCAL_TRACKER_UNBLOCK = 4;
+		this.BROKEN_PAGE_NEW_TAB = 86;
 
 		// data stores
 		this.REDIRECT_MAP = new Map();
