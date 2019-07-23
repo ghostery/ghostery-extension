@@ -19,12 +19,13 @@ import { sendMessage, openSupportPage } from '../utils/msg';
  */
 class Help extends React.Component {
 	/**
-	 * Handle click on 'Set Up Ghostery' menu item
+	 * Handle clicks on links with a fixed destination
 	 */
-	openHubTab = (e) => {
+	openTab = (e) => {
 		e.preventDefault();
+		const { href } = e.target;
 		sendMessage('openNewTab', {
-			url: chrome.runtime.getURL('./app/templates/hub.html'),
+			url: href,
 			become_active: true,
 		});
 		window.close();
@@ -44,18 +45,20 @@ class Help extends React.Component {
 	 * @return {ReactComponent}   ReactComponent instance
 	 */
 	render() {
+		const hubUrl = chrome.runtime.getURL('./app/templates/hub.html');
+
 		return (
 			<div id="content-help">
 				<div className="row">
 					<div className="small-12 columns">
 						<h1>{ t('panel_help_panel_header') }</h1>
 						<div className="support-section">
-							<a href="#" onClick={this.openHubTab}>{ t('panel_help_setup') }</a>
+							<a href={hubUrl} onClick={this.openTab}>{ t('panel_help_setup') }</a>
 						</div>
 						<div className="support-section">
 							<h3>{ t('panel_help_questions_header') }</h3>
-							<a href="https://www.ghostery.com/faqs/" target="_blank" rel="noopener noreferrer">{ t('panel_help_faq') }</a>
-							<a href="https://www.ghostery.com/survey/in-app" target="_blank" rel="noopener noreferrer">{ t('panel_help_feedback') }</a>
+							<a href="https://www.ghostery.com/faqs/" onClick={this.openTab}>{ t('panel_help_faq') }</a>
+							<a href="https://www.ghostery.com/survey/in-app" onClick={this.openTab}>{ t('panel_help_feedback') }</a>
 							<a href="#" onClick={this.openSupportTab}>{ t('panel_help_support') }</a>
 						</div>
 						<div className="support-section">
