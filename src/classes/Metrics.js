@@ -30,7 +30,12 @@ const FIRST_REWARD_METRICS = ['rewards_first_accept', 'rewards_first_reject', 'r
 const { METRICS_SUB_DOMAIN, EXTENSION_VERSION, BROWSER_INFO } = globals;
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const MAX_DELAYED_PINGS = 100;
-const BROKEN_PAGE_WATCH_THRESHOLD = 60000; // 60 seconds
+
+// Note that this threshold is intentionally different from the 30 second threshold in PolicySmartBlock,
+// which is used to set the reloaded property on tab objects and to activate smart unblock behavior
+// see GH-1797 for more details
+const BROKEN_PAGE_METRICS_THRESHOLD = 60000; // 60 seconds
+
 /**
  * Class for handling telemetry pings.
  * @memberOf  BackgroundClasses
@@ -156,7 +161,7 @@ class Metrics {
 				on: true,
 				triggerId,
 				triggerTime: Date.now(),
-				timeoutId: setTimeout(this._clearBrokenPageWatcher, BROKEN_PAGE_WATCH_THRESHOLD),
+				timeoutId: setTimeout(this._clearBrokenPageWatcher, BROKEN_PAGE_METRICS_THRESHOLD),
 				url: tabUrl,
 			});
 		});
