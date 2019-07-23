@@ -1096,10 +1096,6 @@ function initializeDispatcher() {
 		// can't simply compare num_selected and size(db.apps) since apps get removed sometimes
 		db.allSelected = (!!num_selected && every(db.apps, (app, app_id) => appIds.hasOwnProperty(app_id)));
 	});
-	dispatcher.on('conf.save.site_specific_unblocks', () => {
-		// if user has unblock a tracker on this page, suspect a broken page
-		metrics.handleBrokenPageTrigger(globals.BROKEN_PAGE_LOCAL_TRACKER_UNBLOCK);
-	})
 	dispatcher.on('conf.save.site_whitelist', () => {
 		// TODO debounce with below
 		button.update();
