@@ -791,7 +791,7 @@ function onMessageHandler(request, sender, callback) {
 
 	// HANDLE UNIVERSAL EVENTS HERE (NO ORIGIN LISTED ABOVE)
 	// The 'getPanelData' message is never sent by the panel, which uses ports only since 8.3.2
-	// The  message is still sent by panel-android and by the hub as of 8.4.0
+	// The message is still sent by panel-android and by the setup hub as of 8.4.0
 	if (name === 'getPanelData') {
 		if (!message.tabId) {
 			utils.getActiveTab((tab) => {
@@ -1767,7 +1767,7 @@ function initializeGhosteryModules() {
 					// Otherwise we respect browser-core default settings
 					conf.enable_ad_block = !adblocker.isDisabled;
 					conf.enable_anti_tracking = !antitracking.isDisabled;
-					conf.enable_human_web = !humanweb.isDisabled;
+					conf.enable_human_web = !humanweb.isDisabled && !(IS_FIREFOX && globals.JUST_INSTALLED);
 					conf.enable_offers = !offers.isDisabled;
 				}
 			}
@@ -1845,7 +1845,6 @@ function init() {
 		initializePopup();
 		initializeEventListeners();
 		initializeVersioning();
-
 		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => {
 			account.migrate()
 				.then(() => {
