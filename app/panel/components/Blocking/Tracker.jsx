@@ -15,9 +15,12 @@
 
 import React from 'react';
 import ReactSVG from 'react-svg';
+import ClassNames from 'classnames';
+
 import globals from '../../../../src/classes/Globals';
 import { log } from '../../../../src/utils/common';
 import { sendMessageInPromise } from '../../utils/msg';
+import { renderKnownTrackerButtons, renderUnknownTrackerButtons } from './trackerButtonRenderHelpers';
 /**
  * @class Implement Tracker component which represents single tracker
  * in the Blocking view.
@@ -39,6 +42,7 @@ class Tracker extends React.Component {
 		this.clickTrackerStatus = this.clickTrackerStatus.bind(this);
 		this.clickTrackerTrust = this.clickTrackerTrust.bind(this);
 		this.clickTrackerRestrict = this.clickTrackerRestrict.bind(this);
+		this.handleAntiTrackingWhitelist = this.handleAntiTrackingWhitelist.bind(this);
 	}
 
 	/**
@@ -208,6 +212,21 @@ class Tracker extends React.Component {
 		});
 	}
 
+	/**
+	 * Implement handler for clicking on the trust or scrub SVGs for an unknown tracker
+	 * Trigger actions which persist the new setting and notify user
+	 * that the page should be reloaded.
+	 */
+	handleAntiTrackingWhitelist() {
+		const { tracker } = this.props;
+
+		this.props.actions.updateAntiTrackingWhitelist(tracker);
+		this.props.actions.showNotification({
+			updated: `${tracker.name}-whitelisting-status-changed`,
+			reload: true,
+		});
+	}
+
 	_renderCliqzStatsContainer() {
 		const { tracker } = this.props;
 		const { cliqzAdCount, cliqzCookieCount, cliqzFingerprintCount } = tracker;
@@ -274,9 +293,9 @@ class Tracker extends React.Component {
 	* @return {ReactComponent}   ReactComponent instance
 	*/
 	render() {
-		const { tracker } = this.props;
-		let sources;
+		const { tracker, isUnknown } = this.props;
 
+		let sources;
 		if (tracker.sources) {
 			sources = tracker.sources.map((source, index) => (
 				<a
@@ -290,7 +309,16 @@ class Tracker extends React.Component {
 					{ source.src }
 				</a>
 			));
+		} else if (tracker.domains) {
+			sources = tracker.domains.map((domain, index) => (
+				<p className="trk-src-link unknown" key={index}>{domain}</p>
+			));
 		}
+
+		const trackerNameClasses = ClassNames('trk-name', {
+			'is-whitelisted': tracker.whitelisted,
+		});
+
 		return (
 			<div className={`${this.state.trackerClasses} blocking-trk`}>
 				<div className="row align-middle trk-header">
@@ -298,78 +326,47 @@ class Tracker extends React.Component {
 						<div className={`warning-image right${this.state.warningImageTitle ? ' t-tooltip-up-right' : ''}`} data-g-tooltip={this.state.warningImageTitle} />
 					</div>
 					<div className="columns collapse-left">
-						<div className="trk-name" onClick={this.toggleDescription}>{ tracker.name }</div>
-						{this._renderCliqzStatsContainer()}
+						<div
+							className={trackerNameClasses}
+							onClick={this.toggleDescription}
+						>
+							{tracker.name}
+						</div>
+						{!tracker.whitelisted && this._renderCliqzStatsContainer()}
 					</div>
 					<div className="columns shrink align-self-justify collapse-right">
-						<div className="svg-container">
-							<span className="t-tooltip-up-left" data-g-tooltip={this.props.tracker.ss_allowed ? t('summary_undo') : t('panel_tracker_trust_tooltip')}>
-								<svg className="blocking-icons trust" onClick={this.clickTrackerTrust} width="20px" height="20px" viewBox="0 0 20 20">
-									<g transform="translate(1 1)" fill="none" fillRule="evenodd">
-										<path className="border" d="M-.5-.5h18.3v18.217H-.5z" />
-										<path className="background" d="M.5.5h16.3v16.217H.5z" />
-										<svg width="20px" height="20px" viewBox="-2.75 -2.75 20 20">
-											<circle className="trust-circle" cx="5.875" cy="5.875" r="5.875" fillRule="evenodd" />
-										</svg>
-									</g>
-								</svg>
-							</span>
-							<span className="t-tooltip-up-left" data-g-tooltip={this.props.tracker.ss_blocked ? t('summary_undo') : t('panel_tracker_restrict_tooltip')}>
-								<svg className="blocking-icons restrict" onClick={this.clickTrackerRestrict} width="20px" height="20px" viewBox="0 0 20 20">
-									<g transform="translate(1 1)" fill="none" fillRule="evenodd">
-										<path className="border" d="M-.5-.5h18.3v18.217H-.5z" />
-										<path className="background" d="M.5.5h16.3v16.217H.5z" />
-										<svg width="20px" height="20px" viewBox="-2 -2 20 20">
-											<g className="restrict-circle" transform="translate(1 1)" fillRule="evenodd">
-												<path d="M1.958 1.958l7.834 7.834" />
-												<circle cx="5.753" cy="5.753" r="5.753" />
-											</g>
-										</svg>
-									</g>
-								</svg>
-							</span>
-							<span className={(!this.props.tracker.ss_blocked && !this.props.tracker.ss_allowed) ? 't-tooltip-up-left' : ''} data-g-tooltip={t('panel_tracker_block_tooltip')}>
-								<svg className="blocking-icons status" onClick={() => { if (this.props.tracker.ss_allowed || this.props.tracker.ss_blocked) { return; } this.clickTrackerStatus(); }} width="20px" height="20px" viewBox="0 0 20 20">
-									<g transform="translate(1 1)" fill="none" fillRule="evenodd">
-										<path className="border" d="M-.5-.5h18.3v18.217H-.5z" />
-										<path className="background" d="M.5.5h16.3v16.217H.5z" />
-										<svg width="20px" height="20px" viewBox="-2.5 -2.5 20 20">
-											<path className="check" d="M8.062 6l3.51-3.51c.57-.57.57-1.493 0-2.063-.57-.57-1.495-.57-2.063 0L6 3.937 2.49.428c-.57-.57-1.493-.57-2.063 0-.57.57-.57 1.494 0 2.064L3.937 6 .426 9.51c-.57.57-.57 1.493 0 2.063.57.57 1.494.57 2.063 0L6 8.063l3.51 3.508c.57.57 1.493.57 2.063 0 .57-.57.57-1.493 0-2.062L8.063 6z" fillRule="nonzero" />
-										</svg>
-										<svg width="20px" height="20px" viewBox="-2.75 -2.75 20 20">
-											<circle className="trust-circle" cx="5.875" cy="5.875" r="5.875" fillRule="evenodd" />
-										</svg>
-										<svg width="20px" height="20px" viewBox="-2 -2 20 20">
-											<g className="restrict-circle" transform="translate(1 1)" fillRule="evenodd">
-												<path d="M1.958 1.958l7.834 7.834" />
-												<circle cx="5.753" cy="5.753" r="5.753" />
-											</g>
-										</svg>
-									</g>
-								</svg>
-							</span>
-						</div>
+						{!isUnknown ? renderKnownTrackerButtons(
+							this.props.tracker.ss_allowed,
+							this.props.tracker.ss_blocked,
+							this.clickTrackerTrust,
+							this.clickTrackerRestrict,
+							this.clickTrackerStatus,
+						) : renderUnknownTrackerButtons(
+							this.handleAntiTrackingWhitelist,
+							tracker.whitelisted,
+						)}
 					</div>
 				</div>
-				{
-					this.state.showMoreInfo && (
-						<div className={`${!this.state.showMoreInfo ? 'hide' : ''} row trk-moreinfo`}>
-							<div className="columns">
+				{this.state.showMoreInfo && (
+					<div className={`${!this.state.showMoreInfo ? 'hide' : ''} row trk-moreinfo`}>
+						<div className="columns">
+							{!isUnknown && (
 								<div className="trk-description">
-									{ this.state.description }
+									{this.state.description}
 									<div className={(!this.state.showTrackerLearnMore ? 'hide' : '')}>
 										<a target="_blank" rel="noopener noreferrer" title={tracker.name} href={`https://${globals.APPS_SUB_DOMAIN}.ghostery.com/${this.props.language}/apps/${encodeURIComponent(tracker.name.replace(/\s+/g, '_').toLowerCase())}`}>
-											{ t('tracker_description_learn_more') }
+											{t('tracker_description_learn_more')}
 										</a>
 									</div>
 								</div>
-								<div className={`${!this.props.show_tracker_urls ? 'hide' : ''}`}>
-									<div className="trk-srcs-title">{ t('panel_tracker_found_sources_title') }</div>
-									<div className="trk-srcs">{ sources }</div>
-								</div>
+							)}
+							<div className={`${!this.props.show_tracker_urls ? 'hide' : ''}`}>
+								<div className="trk-srcs-title">{t('panel_tracker_found_sources_title')}</div>
+								<div className="trk-srcs">{sources}</div>
 							</div>
 						</div>
-					)}
+					</div>
+				)}
 			</div>
 		);
 	}

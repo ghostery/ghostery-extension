@@ -551,7 +551,11 @@ class PanelData {
 	_postCliqzModulesData() {
 		if (!this._panelPort || !this._activeTab) { return; }
 
-		sendCliqzModuleCounts(this._activeTab.id, this.postMessageToSummary);
+		sendCliqzModuleCounts(
+			this._activeTab.id,
+			this._activeTab.pageHost,
+			this.postMessageToSummary,
+		);
 	}
 
 	/**

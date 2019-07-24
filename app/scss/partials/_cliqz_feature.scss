@@ -73,6 +73,19 @@ $cliqz-feature--darker-gray: #a4a4a4;
 	.CliqzFeature__feature-name { display: none; }
 }
 
+.CliqzFeature--tiny {
+	.CliqzFeature__status {
+		line-height: 17px;
+		font-size: 9px;
+	}
+	.CliqzFeature__icon {
+		height: 28px;
+		width: 28px;
+		background-size: 26px 26px;
+	}
+	.CliqzFeature__feature-name { display: none; }
+}
+
 // Modifications to element styling based on state-related block-level modifiers
 // The CliqzFeature block is always either active or inactive
 // and always either clickable or not-clickable

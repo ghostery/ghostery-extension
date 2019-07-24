@@ -29,28 +29,78 @@ class Categories extends React.Component {
 	* @return {ReactComponent}   ReactComponent instance
 	*/
 	render() {
-		const { categories, expandAll } = this.props;
+		const {
+			categories,
+			expandAll,
+			antiTracking,
+			enable_anti_tracking,
+		} = this.props;
 		const globalBlocking = !!this.props.globalBlocking;
 		const filtered = !!this.props.filtered;
-		const categoryList = categories.map((cat, index) => (
-			<Category
-				expandAll={expandAll}
-				globalBlocking={globalBlocking}
-				index={index}
-				category={cat}
-				actions={this.props.actions}
-				key={cat.id}
-				filtered={filtered}
-				showToast={this.props.showToast}
-				show_tracker_urls={this.props.show_tracker_urls}
-				sitePolicy={this.props.sitePolicy}
-				paused_blocking={this.props.paused_blocking}
-				language={this.props.language}
-				smartBlockActive={this.props.smartBlockActive}
-				smartBlock={this.props.smartBlock}
-			/>
-		));
-		return <div className="scroll-content">{ categoryList }</div>;
+
+		const renderCategory = (category, index, isUnknown) => {
+			let whitelistedTotal = 0;
+			const unknownCategoryMapping = isUnknown ? (
+				{
+					id: 'anti_tracking_unknown',
+					name: t('unknown'),
+					description: t('unknown_description'),
+					img_name: 'anti_tracking_unknown',
+					num_total: antiTracking.unknownTrackers.length,
+					num_blocked: antiTracking.unknownTrackerCount,
+					num_shown: antiTracking.hide ? 0 : antiTracking.unknownTrackers.length,
+					trackers: antiTracking.unknownTrackers.map((unknownTracker) => {
+						if (unknownTracker.whitelisted) { whitelistedTotal++; }
+						return {
+							name: unknownTracker.name,
+							domains: unknownTracker.domains,
+							whitelisted: unknownTracker.whitelisted,
+							blocked: false,
+							catId: 'anti_tracking_unknown',
+							description: '',
+							id: unknownTracker.name + unknownTracker.domains[0],
+							shouldShow: true,
+							cliqzAdCount: unknownTracker.ads,
+							cliqzCookieCount: unknownTracker.cookies,
+							cliqzFingerprintCount: unknownTracker.fingerprints,
+						};
+					}),
+					whitelistedTotal,
+				}
+			) : null;
+
+			return (
+				<Category
+					expandAll={expandAll}
+					globalBlocking={globalBlocking}
+					index={index}
+					category={isUnknown ? unknownCategoryMapping : category}
+					actions={this.props.actions}
+					key={isUnknown ? unknownCategoryMapping.id : category.id}
+					filtered={filtered}
+					showToast={this.props.showToast}
+					show_tracker_urls={this.props.show_tracker_urls}
+					sitePolicy={this.props.sitePolicy}
+					paused_blocking={this.props.paused_blocking}
+					language={this.props.language}
+					smartBlockActive={this.props.smartBlockActive}
+					smartBlock={this.props.smartBlock}
+					enable_anti_tracking={enable_anti_tracking}
+					isUnknown={isUnknown}
+				/>
+			);
+		};
+
+		const categoryList = categories.map((category, index) => renderCategory(category, index));
+		const unknownCategory = antiTracking && antiTracking.unknownTrackers.length
+			? renderCategory(null, categoryList.length, true) : null;
+
+		return (
+			<div className="scroll-content">
+				{categoryList}
+				{unknownCategory}
+			</div>
+		);
 	}
 }
 
