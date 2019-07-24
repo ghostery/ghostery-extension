@@ -36,6 +36,11 @@ const initialState = {
 		blocked: 0,
 	},
 	tab_id: 0,
+	antiTracking: {
+		totalUnsafeCount: 0, // The amount of data points scrubbed by Anti-Tracking
+		totalUnknownCount: 0, // The amount of data points scrubbed by Anti-Tracking for Trackers not in the Ghostery DB
+		unknownTrackerCount: 0, // The amount of trackers blocked by Anti-Tracking
+	}
 };
 /**
  * Default export for summary view reducer.
@@ -51,7 +56,11 @@ export default (state = initialState, action) => {
 			return Object.assign({}, state, action.data);
 		}
 		case UPDATE_CLIQZ_MODULE_DATA: {
-			return Object.assign({}, state, { adBlock: action.data.adblock, antiTracking: action.data.antitracking });
+			const { totalUnsafeCount, totalUnknownCount, unknownTrackerCount } = action.data.antiTracking;
+			return Object.assign({}, state, {
+				adBlock: action.data.adblock,
+				antiTracking: { totalUnsafeCount, totalUnknownCount, unknownTrackerCount },
+			});
 		}
 		case UPDATE_GHOSTERY_PAUSED: {
 			return Object.assign({}, state, { paused_blocking: action.data.ghosteryPaused, paused_blocking_timeout: action.data.time });
@@ -77,7 +86,7 @@ export default (state = initialState, action) => {
 };
 
 /**
- * Update blacklist / whitelist
+ * Update site blacklist / whitelist
  * @memberOf  PanelReactReducers
  * @private
  *
