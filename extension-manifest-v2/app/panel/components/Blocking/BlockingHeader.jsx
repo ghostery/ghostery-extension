@@ -32,6 +32,7 @@ class BlockingHeader extends React.Component {
 			filtered: false,
 			searchValue: '',
 			filterMenuOpened: false,
+			blockAllDisabled: true,
 		};
 
 		// event bindings
@@ -93,7 +94,12 @@ class BlockingHeader extends React.Component {
 				});
 			});
 			if (this.state.fromHere || totalShown === totalBlocked || totalBlocked === 0) {
-				this.setState({ allBlocked: (totalShown === totalBlocked), filtered, fromHere: false });
+				this.setState({
+					allBlocked: (totalShown === totalBlocked),
+					blockAllDisabled: !totalShown,
+					fromHere: false,
+					filtered
+				});
 			}
 		}
 	}
@@ -256,9 +262,14 @@ class BlockingHeader extends React.Component {
 						</div>
 					</div>
 					<div className="shrink columns align-self-justify text-right">
-						{this.props.categories && this.props.categories.length > 0 &&
-							<div className="block-text" onClick={this.clickBlockAll}>{blockText}</div>
-						}
+						{this.props.categories && this.props.categories.length > 0 && (
+							<div
+								className={`block-text${this.state.blockAllDisabled ? ' disabled' : ''}`}
+								onClick={this.clickBlockAll}
+							>
+								{blockText}
+							</div>
+						)}
 					</div>
 				</div>
 				{
