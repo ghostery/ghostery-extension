@@ -25,6 +25,7 @@ import conf from './Conf';
 import foundBugs from './FoundBugs';
 import globals from './Globals';
 import latency from './Latency';
+import metrics from './Metrics';
 import panelData from './PanelData';
 import Policy, { BLOCK_REASON_SS_UNBLOCKED, BLOCK_REASON_C2P_ALLOWED_THROUGH } from './Policy';
 import PolicySmartBlock from './PolicySmartBlock';
@@ -110,6 +111,7 @@ class EventHandlers {
 		if (frameId === 0) {
 			// update reload info before creating/clearing tab info
 			if (transitionType === 'reload' && !transitionQualifiers.includes('forward_back')) {
+				metrics.handleBrokenPageTrigger(globals.BROKEN_PAGE_REFRESH);
 				tabInfo.setTabInfo(tabId, 'numOfReloads', tabInfo.getTabInfo(tabId, 'numOfReloads') + 1);
 			} else if (transitionType !== 'auto_subframe' && transitionType !== 'manual_subframe') {
 				tabInfo.setTabInfo(tabId, 'reloaded', false);
@@ -545,7 +547,11 @@ class EventHandlers {
 	 *
 	 * @param  {Object} tab 	 Details of the tab that was created
 	 */
-	onTabCreated() {}
+	onTabCreated(tab) {
+		const { url } = tab;
+
+		metrics.handleBrokenPageTrigger(globals.BROKEN_PAGE_NEW_TAB, url);
+	}
 
 	/**
 	 * Handler for tabs.onActivated event.

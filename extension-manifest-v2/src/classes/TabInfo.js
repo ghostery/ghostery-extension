@@ -70,10 +70,6 @@ class TabInfo {
 			insecureRedirects: [],
 		};
 
-		if (info.reloaded) {
-			metrics.ping('broken_page');
-		}
-
 		this._tabInfo[tab_id] = info;
 		this._updateUrl(tab_id, tab_url);
 	}
