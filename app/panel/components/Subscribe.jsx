@@ -12,7 +12,7 @@
  */
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { sendMessage, openSubscriptionPage } from '../utils/msg';
+import { sendMessage, openFixedDestinationLinkInNewTab, openSubscriptionPage } from '../utils/msg';
 
 /**
  * Helper function to handle clicking on the Become a Subscriber button
@@ -34,7 +34,7 @@ const Subscribe = (props) => {
 			<div className="pitch-container">
 				<span className="pitch-text" dangerouslySetInnerHTML={{ __html: t('subscribe_pitch') }} />
 			</div>
-			<a href="https://www.ghostery.com/products/plus/" target="_blank" rel="noopener noreferrer">
+			<a href="https://www.ghostery.com/products/plus/" onClick={openFixedDestinationLinkInNewTab}>
 				<span className="pitch-learn-more">{t('subscribe_pitch_learn_more')}</span>
 			</a>
 			<div>

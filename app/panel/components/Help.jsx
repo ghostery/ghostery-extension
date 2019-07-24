@@ -15,10 +15,9 @@ import React from 'react';
 import { openFixedDestinationLinkInNewTab, openSupportPage } from '../utils/msg';
 
 /**
- * Functional component for rendering the Help view which opens from the header drop-down menu
- * @constructor
+ * Render Help view that user can open from the header drop-down menu
  */
-function Help() {
+const Help = () => {
 	const hubUrl = chrome.runtime.getURL('./app/templates/hub.html');
 
 	return (
