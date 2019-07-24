@@ -82,6 +82,7 @@ class CliqzFeature extends React.Component {
 			cliqzInactive,
 			isSmaller,
 			isCondensed,
+			isTiny,
 			isTooltipBody,
 			isTooltipHeader,
 			tooltipPosition,
@@ -92,6 +93,7 @@ class CliqzFeature extends React.Component {
 			'CliqzFeature--normal': !isSmaller && !isCondensed,
 			'CliqzFeature--smaller': isSmaller,
 			'CliqzFeature--condensed': isCondensed,
+			'CliqzFeature--tiny': isTiny,
 			'CliqzFeature--active': active,
 			'CliqzFeature--inactive': !active,
 			clickable: !cliqzInactive,
@@ -111,6 +113,7 @@ class CliqzFeature extends React.Component {
 						header={this._getTooltipHeaderText(isTooltipHeader, type)}
 						body={this._getTooltipBodyText(active, isTooltipBody, type)}
 						position={tooltipPosition}
+						// className={isTiny ? 'CliqzFeature--tooltipUp' : ''}
 					/>
 				</div>
 				<div className="CliqzFeature__feature-name">

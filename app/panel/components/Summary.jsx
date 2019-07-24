@@ -428,6 +428,7 @@ class Summary extends React.Component {
 	_renderDonut() {
 		const {
 			categories,
+			antiTracking,
 			is_expert,
 			paused_blocking,
 			sitePolicy,
@@ -437,6 +438,7 @@ class Summary extends React.Component {
 			<div className="Summary__donutContainer">
 				<DonutGraph
 					categories={categories}
+					antiTracking={antiTracking}
 					renderRedscale={sitePolicy === BLACKLISTED}
 					renderGreyscale={paused_blocking}
 					totalCount={this._totalTrackersFound()}

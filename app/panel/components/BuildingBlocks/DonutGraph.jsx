@@ -56,6 +56,8 @@ class DonutGraph extends React.Component {
 						return '#87d7ef';
 					case 'social_media':
 						return '#388ee8';
+					case 'unknown':
+						return '#8459a5';
 					default:
 						return '#e8e8e8';
 				}
@@ -74,6 +76,7 @@ class DonutGraph extends React.Component {
 	componentDidMount() {
 		const {
 			categories,
+			antiTracking,
 			renderRedscale,
 			renderGreyscale,
 			isSmall,
@@ -87,7 +90,7 @@ class DonutGraph extends React.Component {
 			.value(d => d.value);
 
 		this.prepareDonutContainer(isSmall);
-		this.bakeDonut(categories, {
+		this.bakeDonut(categories, antiTracking, {
 			renderRedscale,
 			renderGreyscale
 		});
@@ -99,6 +102,7 @@ class DonutGraph extends React.Component {
 	componentWillReceiveProps(nextProps) {
 		const {
 			categories,
+			antiTracking,
 			renderRedscale,
 			renderGreyscale,
 			ghosteryFeatureSelect,
@@ -115,11 +119,19 @@ class DonutGraph extends React.Component {
 			return;
 		}
 
-		// componentWillReceiveProps gets called many times during page load as new trackers are found
+		// componentWillReceiveProps gets called many times during page load as new trackers or unsafe data points are found
 		// so only compare tracker totals if we don't already have to redraw anyway as a result of the cheaper checks above
 		const trackerTotal = categories.reduce((total, category) => total + category.num_total, 0);
 		const nextTrackerTotal = nextProps.categories.reduce((total, category) => total + category.num_total, 0);
 		if (trackerTotal !== nextTrackerTotal) {
+			this.nextPropsDonut(nextProps);
+			return;
+		}
+
+		if (!antiTracking.unknownTrackerCount && !nextProps.antiTracking.unknownTrackerCount) { return; }
+		const unknownDataPoints = antiTracking.unknownTrackerCount;
+		const nextUnknownDataPoints = nextProps.antiTracking.unknownTrackerCount;
+		if (unknownDataPoints !== nextUnknownDataPoints) {
 			this.nextPropsDonut(nextProps);
 		}
 	}
@@ -142,7 +154,7 @@ class DonutGraph extends React.Component {
 	 *  Helper function that updates donut with nextProps values
 	 */
 	nextPropsDonut(nextProps) {
-		this.bakeDonut(nextProps.categories, {
+		this.bakeDonut(nextProps.categories, nextProps.antiTracking, {
 			renderRedscale: nextProps.renderRedscale,
 			renderGreyscale: nextProps.renderGreyscale,
 			isSmall: nextProps.isSmall,
@@ -181,7 +193,7 @@ class DonutGraph extends React.Component {
 	 */
 	bakeDonut = throttle(this._bakeDonut.bind(this), 600, { leading: true, trailing: true }) // eslint-disable-line react/sort-comp
 
-	_bakeDonut(categories, options) {
+	_bakeDonut(categories, antiTracking, options) {
 		const {
 			renderRedscale,
 			renderGreyscale,
@@ -207,6 +219,14 @@ class DonutGraph extends React.Component {
 				});
 			});
 			graphData.sort((a, b) => a.value < b.value);
+		}
+
+		if (antiTracking.unknownTrackerCount) {
+			graphData.push({
+				id: 'unknown',
+				name: 'Unknown',
+				value: antiTracking.unknownTrackerCount,
+			});
 		}
 
 		const trackerArc = arc()
@@ -315,7 +335,12 @@ class DonutGraph extends React.Component {
 	 * @return {JSX} JSX for rendering the donut-graph portion of the Summary View
 	 */
 	render() {
-		const { isSmall, totalCount } = this.props;
+		const {
+			isSmall,
+			categories,
+			antiTracking,
+			totalCount,
+		} = this.props;
 		const componentClasses = ClassNames('DonutGraph', {
 			'DonutGraph--big': !isSmall,
 			'DonutGraph--small': isSmall,
@@ -325,11 +350,24 @@ class DonutGraph extends React.Component {
 		return (
 			<div className={componentClasses}>
 				<div className="DonutGraph__tooltipContainer">
-					{this.props.categories.map(cat => (
-						<span key={cat.id} id={`${cat.id}_tooltip`} className="DonutGraph__tooltip tooltip  top">
+					{categories.map(cat => (
+						<span
+							className="DonutGraph__tooltip tooltip top"
+							id={`${cat.id}_tooltip`}
+							key={cat.id}
+						>
 							{cat.name}
 						</span>
 					))}
+					{!!antiTracking.unknownTrackerCount && (
+						<span
+							className="DonutGraph__tooltip tooltip top"
+							id="unknown_tooltip"
+							key="unknown"
+						>
+							{t('unknown')}
+						</span>
+					)}
 				</div>
 				<div className="DonutGraph__ref" ref={(node) => { this.node = node; }} />
 				<div className="DonutGraph__textCountContainer clickable" onClick={this.clickGraphText}>

@@ -93,6 +93,7 @@ class Blocking extends React.Component {
 	*/
 	setShow(filterName) {
 		const updated_categories = JSON.parse(JSON.stringify(this.props.categories)); // deep clone
+		const updatedAntiTracking = JSON.parse(JSON.stringify(this.props.antiTracking)); // deep clone
 
 		updated_categories.forEach((category) => {
 			let count = 0;
@@ -111,7 +112,9 @@ class Blocking extends React.Component {
 			category.num_shown = (show) ? count : 0;
 		});
 
+		updatedAntiTracking.hide = !(filterName === 'all' || filterName === 'unknown');
 		this.props.actions.updateCategories(updated_categories);
+		this.props.actions.updateAntiTrackingHide(updatedAntiTracking);
 	}
 
 	/**
@@ -281,6 +284,8 @@ class Blocking extends React.Component {
 		const {
 			actions,
 			categories,
+			antiTracking,
+			enable_anti_tracking,
 			expand_all_trackers,
 			is_expanded,
 			language,
@@ -309,25 +314,27 @@ class Blocking extends React.Component {
 					smartBlockActive={smartBlockActive}
 					smartBlock={smartBlock}
 				/>
-				{(disableBlocking && is_expanded) ?
+				{(disableBlocking && is_expanded) ? (
 					<NotScanned />
-					: (
-						<div className={`${blockingClasses} blocking-trackers show-warnings`}>
-							{ categories.length > 0 && (
-								<Categories
-									expandAll={expand_all_trackers}
-									categories={categories}
-									actions={actions}
-									show_tracker_urls={show_tracker_urls}
-									sitePolicy={sitePolicy}
-									paused_blocking={paused_blocking}
-									language={language}
-									smartBlockActive={smartBlockActive}
-									smartBlock={smartBlock}
-								/>
-							)}
-						</div>
-					)}
+				) : (
+					<div className={`${blockingClasses} blocking-trackers show-warnings`}>
+						{categories.length > 0 && (
+							<Categories
+								expandAll={expand_all_trackers}
+								categories={categories}
+								actions={actions}
+								show_tracker_urls={show_tracker_urls}
+								sitePolicy={sitePolicy}
+								paused_blocking={paused_blocking}
+								language={language}
+								smartBlockActive={smartBlockActive}
+								smartBlock={smartBlock}
+								antiTracking={antiTracking}
+								enable_anti_tracking={enable_anti_tracking}
+							/>
+						)}
+					</div>
+				)}
 			</div>
 		);
 	}

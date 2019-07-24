@@ -1155,6 +1155,8 @@ function initializeDispatcher() {
 	}, 200));
 
 	dispatcher.on('globals.save.paused_blocking', () => {
+		// if user has paused Ghostery, suspect broken page
+		if (globals.SESSION.paused_blocking) { metrics.handleBrokenPageTrigger(globals.BROKEN_PAGE_PAUSE); }
 		// update content script state when blocking is paused/unpaused
 		cliqz.modules.core.action('refreshAppState');
 	});
@@ -1277,9 +1279,11 @@ function initialiseWebRequestPipeline() {
  * @return {boolean}
  */
 function isWhitelisted(state) {
-	const url = state.tabUrl;
+	const hostUrl = utils.processUrl(state.tabUrl).host;
+	const trackerUrl = utils.processUrl(state.url).host;
+
 	// state.ghosteryWhitelisted is sometimes undefined so force to bool
-	return Boolean(globals.SESSION.paused_blocking || events.policy.getSitePolicy(url) === 2 || state.ghosteryWhitelisted);
+	return Boolean(globals.SESSION.paused_blocking || events.policy.getSitePolicy(hostUrl, trackerUrl) === 2 || state.ghosteryWhitelisted);
 }
 
 /**
