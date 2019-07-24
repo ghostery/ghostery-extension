@@ -145,6 +145,7 @@ const _updateSitePolicy = (state, action) => {
 	sendMessage('setPanelData', {
 		site_whitelist: updated_whitelist,
 		site_blacklist: updated_blacklist,
+		brokenPageMetricsWhitelistSite: updated_site_policy === 2,
 	});
 
 	return {

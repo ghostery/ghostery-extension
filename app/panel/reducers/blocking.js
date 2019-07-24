@@ -168,6 +168,7 @@ const _updateTrackerTrustRestrict = (state, action) => {
 	sendMessage('setPanelData', {
 		site_specific_unblocks: updated_site_specific_unblocks,
 		site_specific_blocks: updated_site_specific_blocks,
+		brokenPageMetricsTrackerTrustOrUnblock: msg.trust || (!msg.trust && !msg.restrict),
 	});
 
 	return {
