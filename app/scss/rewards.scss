@@ -23,13 +23,6 @@
 	right: 30px;
 }
 
-#ghostery-shadow-root {
-	opacity: 0;
-	&.resolved {
-		opacity: 1;
-	}
-}
-
 #ghostery-iframe-container {
 	border: none;
 	&.hot-dog {
