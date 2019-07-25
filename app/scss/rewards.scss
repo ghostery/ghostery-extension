@@ -25,6 +25,7 @@
 
 #ghostery-shadow-root {
 	opacity: 0;
+	transition: 'opacity 200ms ease-in';
 	&.resolved {
 		opacity: 1;
 	}
