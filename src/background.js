@@ -791,7 +791,7 @@ function onMessageHandler(request, sender, callback) {
 
 	// HANDLE UNIVERSAL EVENTS HERE (NO ORIGIN LISTED ABOVE)
 	// The 'getPanelData' message is never sent by the panel, which uses ports only since 8.3.2
-	// The  message is still sent by panel-android and by the hub as of 8.4.0
+	// The message is still sent by panel-android and by the setup hub as of 8.4.0
 	if (name === 'getPanelData') {
 		if (!message.tabId) {
 			utils.getActiveTab((tab) => {
@@ -1155,6 +1155,8 @@ function initializeDispatcher() {
 	}, 200));
 
 	dispatcher.on('globals.save.paused_blocking', () => {
+		// if user has paused Ghostery, suspect broken page
+		if (globals.SESSION.paused_blocking) { metrics.handleBrokenPageTrigger(globals.BROKEN_PAGE_PAUSE); }
 		// update content script state when blocking is paused/unpaused
 		cliqz.modules.core.action('refreshAppState');
 	});
@@ -1277,9 +1279,11 @@ function initialiseWebRequestPipeline() {
  * @return {boolean}
  */
 function isWhitelisted(state) {
-	const url = state.tabUrl;
+	const hostUrl = utils.processUrl(state.tabUrl).host;
+	const trackerUrl = utils.processUrl(state.url).host;
+
 	// state.ghosteryWhitelisted is sometimes undefined so force to bool
-	return Boolean(globals.SESSION.paused_blocking || events.policy.getSitePolicy(url) === 2 || state.ghosteryWhitelisted);
+	return Boolean(globals.SESSION.paused_blocking || events.policy.getSitePolicy(hostUrl, trackerUrl) === 2 || state.ghosteryWhitelisted);
 }
 
 /**
@@ -1763,7 +1767,7 @@ function initializeGhosteryModules() {
 					// Otherwise we respect browser-core default settings
 					conf.enable_ad_block = !adblocker.isDisabled;
 					conf.enable_anti_tracking = !antitracking.isDisabled;
-					conf.enable_human_web = !humanweb.isDisabled;
+					conf.enable_human_web = !humanweb.isDisabled && !(IS_FIREFOX && globals.JUST_INSTALLED);
 					conf.enable_offers = !offers.isDisabled;
 				}
 			}
@@ -1841,7 +1845,6 @@ function init() {
 		initializePopup();
 		initializeEventListeners();
 		initializeVersioning();
-
 		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => {
 			account.migrate()
 				.then(() => {

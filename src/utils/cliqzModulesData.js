@@ -26,25 +26,64 @@ const { adblocker, antitracking } = cliqz.modules;
  * @param  {int} 	tabId
  * @return {object}	totalUnsafeCount
  */
-export function getCliqzAntiTrackingCount(tabId) {
-	let count = 0;
+export function getCliqzAntiTrackingData(tabId, tabHostUrl) {
+	let totalUnsafeCount = 0;
+	let totalUnknownCount = 0;
+	let unknownTrackerCount = 0;
 	if (!conf.enable_anti_tracking || !antitracking.background) {
 		return {
-			totalUnsafeCount: count
+			totalUnsafeCount,
+			totalUnknownCount,
 		};
 	}
 
 	// Count up number of fingerprints and cookies found
 	const { bugs, others } = antitracking.background.actions.getGhosteryStats(tabId);
-	const allStats = Object.assign({}, bugs, others);
-	const values = Object.values(allStats);
+	const bugsValues = Object.values(bugs);
+	const othersValues = Object.values(others);
 
-	for (const val of values) {
-		count += val.cookies + val.fingerprints;
+	const unknownTrackers = [];
+
+	for (const bug of bugsValues) {
+		totalUnsafeCount += bug.cookies + bug.fingerprints;
+	}
+
+	for (const other of othersValues) {
+		let whitelisted = false;
+		const scrubbed = other.cookies || other.fingerprints;
+
+		other.domains.some((domain) => {
+			if (conf.anti_tracking_whitelist[domain]
+			&& conf.anti_tracking_whitelist[domain].hosts.includes(tabHostUrl)) {
+				whitelisted = true;
+				return true;
+			}
+			return false;
+		});
+
+		if (scrubbed) {
+			totalUnsafeCount += other.cookies + other.fingerprints;
+			totalUnknownCount += other.cookies + other.fingerprints;
+			unknownTrackerCount += 1;
+		}
+
+		if (scrubbed || whitelisted) {
+			const {
+				name, domains, ads, cookies, fingerprints
+			} = other;
+
+			unknownTrackers.push({
+				name, domains, ads, cookies, fingerprints, whitelisted
+			});
+		}
 	}
 
 	return {
-		totalUnsafeCount: count
+		totalUnsafeCount,
+		unknownTrackers,
+		unknownTrackerCount,
+		totalUnknownCount,
+		whitelistedUrls: conf.anti_tracking_whitelist,
 	};
 }
 
@@ -92,10 +131,10 @@ export function getCliqzGhosteryBugs(tabId) {
  * @param  {int}   		tabId
  * @param  {Function} 	callback
  */
-export function sendCliqzModuleCounts(tabId, callback) {
+export function sendCliqzModuleCounts(tabId, tabHostUrl, callback) {
 	const modules = { adblock: {}, antitracking: {} };
 
 	modules.adblock = getCliqzAdBlockingCount(tabId);
-	modules.antitracking = getCliqzAntiTrackingCount(tabId);
+	modules.antiTracking = getCliqzAntiTrackingData(tabId, tabHostUrl);
 	callback(modules);
 }
