@@ -28,7 +28,6 @@
 
 import PolicySmartBlock from './PolicySmartBlock';
 import { processUrl } from '../utils/utils';
-import metrics from './Metrics';
 
 /**
  * Class for handling a map of tab objects corresponding to
