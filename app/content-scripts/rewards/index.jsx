@@ -78,6 +78,9 @@ class RewardsApp {
 	start() {
 		if (document.head.createShadowRoot || document.head.attachShadow) {
 			this.renderShadow();
+			setTimeout(() => {
+				document.getElementById('ghostery-shadow-root').style.opacity = 1;
+			}, 150);
 		} else {
 			// use iframe to encapsulate CSS - fallback for everything else besides chrome
 			this.renderIframe();
@@ -95,8 +98,13 @@ class RewardsApp {
 		document.body.appendChild(this.rewardsContainer);
 		this.mainView = props => (
 			<Router history={history}>
-				<ShadowDOM include={[chrome.extension.getURL('dist/css/rewards_styles.css')]}>
-					<div id="ghostery-shadow-root">
+				<div id="ghostery-shadow-root">
+					<ShadowDOM.span>
+						<link
+							rel="stylesheet"
+							type="text/css"
+							href={chrome.extension.getURL('dist/css/rewards_styles.css')}
+						/>
 						<Route
 							exact
 							path="/"
@@ -116,8 +124,8 @@ class RewardsApp {
 								() => <OfferCard reward={props.reward} conf={props.conf} port={this.port} actions={props.actions} />
 							}
 						/>
-					</div>
-				</ShadowDOM>
+					</ShadowDOM.span>
+				</div>
 			</Router>
 		);
 		this.initListener();
