@@ -161,6 +161,7 @@ class CreateAccount extends React.Component {
 				{t('and_consent_to_data_practices_found_in_the')}
 				&#8200;
 				<PanelToTabLink href={privacyUrl} label={t('privacy_policy')} />
+				.
 			</span>
 		);
 	}
