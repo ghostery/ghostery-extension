@@ -42,6 +42,6 @@ const Help = () => {
 			</div>
 		</div>
 	);
-}
+};
 
 export default Help;
