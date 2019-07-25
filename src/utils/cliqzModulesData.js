@@ -30,10 +30,15 @@ export function getCliqzAntiTrackingData(tabId, tabHostUrl) {
 	let totalUnsafeCount = 0;
 	let totalUnknownCount = 0;
 	let unknownTrackerCount = 0;
+	const unknownTrackers = [];
+	const whitelistedUrls = conf.anti_tracking_whitelist;
 	if (!conf.enable_anti_tracking || !antitracking.background) {
 		return {
 			totalUnsafeCount,
 			totalUnknownCount,
+			unknownTrackerCount,
+			unknownTrackers,
+			whitelistedUrls,
 		};
 	}
 
@@ -41,8 +46,6 @@ export function getCliqzAntiTrackingData(tabId, tabHostUrl) {
 	const { bugs, others } = antitracking.background.actions.getGhosteryStats(tabId);
 	const bugsValues = Object.values(bugs);
 	const othersValues = Object.values(others);
-
-	const unknownTrackers = [];
 
 	for (const bug of bugsValues) {
 		totalUnsafeCount += bug.cookies + bug.fingerprints;
@@ -80,10 +83,10 @@ export function getCliqzAntiTrackingData(tabId, tabHostUrl) {
 
 	return {
 		totalUnsafeCount,
-		unknownTrackers,
-		unknownTrackerCount,
 		totalUnknownCount,
-		whitelistedUrls: conf.anti_tracking_whitelist,
+		unknownTrackerCount,
+		unknownTrackers,
+		whitelistedUrls,
 	};
 }
 
