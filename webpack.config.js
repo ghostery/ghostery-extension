@@ -120,9 +120,6 @@ module.exports = {
 					loader: 'underscore-template-loader'
 				}
 			}, {
-				test: /\.css$/,
-				loader: ['to-string-loader', 'css-loader'],
-			}, {
 				test: /\.(js|jsx)$/,
 				include: [SHARED_COMP_DIR, PANEL_ANDROID_DIR, PANEL_DIR, HUB_DIR, LICENSES_DIR, CONTENT_SCRIPTS_DIR, REWARDS_DIR],
 				exclude: /node_modules/,

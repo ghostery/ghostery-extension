@@ -25,7 +25,6 @@ import OfferCard from './OfferCard';
 import msgModule from '../utils/msg';
 import history from '../../panel/utils/history';
 import globals from '../../../src/classes/Globals';
-import styles from '../../../dist/css/rewards_styles.css';
 
 const msg = msgModule('rewards');
 const { sendMessage } = msg;
@@ -101,7 +100,11 @@ class RewardsApp {
 			<Router history={history}>
 				<div id="ghostery-shadow-root">
 					<ShadowDOM.span>
-						<style type="text/css">{styles}</style>
+						<link
+							rel="stylesheet"
+							type="text/css"
+							href={chrome.extension.getURL('dist/css/rewards_styles.css')}
+						/>
 						<Route
 							exact
 							path="/"
