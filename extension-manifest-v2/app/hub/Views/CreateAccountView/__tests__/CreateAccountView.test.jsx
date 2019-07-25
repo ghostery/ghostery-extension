@@ -27,12 +27,14 @@ describe('app/hub/Views/CreateAccount component', () => {
 				confirmEmailError: false,
 				firstName: 'First',
 				lastName: 'Last',
+				legalConsentChecked: true,
 				password: '',
 				passwordInvalidError: false,
 				passwordLengthError: false,
 				promotionsChecked: true,
 				handleInputChange: () => {},
-				handleCheckboxChange: () => {},
+				handleLegalConsentCheckboxChange: () => {},
+				handlePromotionsCheckboxChange: () => {},
 				handleSubmit: () => {},
 			};
 
@@ -52,12 +54,14 @@ describe('app/hub/Views/CreateAccount component', () => {
 				confirmEmailError: true,
 				firstName: '',
 				lastName: '',
+				legalConsentChecked: false,
 				password: '',
 				passwordInvalidError: true,
 				passwordLengthError: true,
 				promotionsChecked: false,
 				handleInputChange: () => {},
-				handleCheckboxChange: () => {},
+				handleLegalConsentCheckboxChange: () => {},
+				handlePromotionsCheckboxChange: () => {},
 				handleSubmit: () => {},
 			};
 
@@ -79,12 +83,14 @@ describe('app/hub/Views/CreateAccount component', () => {
 				confirmEmailError: false,
 				firstName: 'First',
 				lastName: 'Last',
+				legalConsentChecked: true,
 				password: '',
 				passwordInvalidError: false,
 				passwordLengthError: false,
 				promotionsChecked: true,
 				handleInputChange: () => {},
-				handleCheckboxChange: () => {},
+				handleLegalConsentCheckboxChange: () => {},
+				handlePromotionsCheckboxChange: () => {},
 				handleSubmit: jest.fn(),
 			};
 
