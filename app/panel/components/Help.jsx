@@ -12,7 +12,8 @@
  */
 
 import React from 'react';
-import { openFixedDestinationLinkInNewTab, openSupportPage } from '../utils/msg';
+import { openSupportPage } from '../utils/msg';
+import PanelToTabLink from './BuildingBlocks/PanelToTabLink';
 
 /**
  * Render Help view that user can open from the header drop-down menu
@@ -26,12 +27,12 @@ const Help = () => {
 				<div className="small-12 columns">
 					<h1>{ t('panel_help_panel_header') }</h1>
 					<div className="support-section">
-						<a href={hubUrl} onClick={openFixedDestinationLinkInNewTab}>{ t('panel_help_setup') }</a>
+						<PanelToTabLink href={hubUrl} label={t('panel_help_setup')} />
 					</div>
 					<div className="support-section">
 						<h3>{ t('panel_help_questions_header') }</h3>
-						<a href="https://www.ghostery.com/faqs/" onClick={openFixedDestinationLinkInNewTab}>{ t('panel_help_faq') }</a>
-						<a href="https://www.ghostery.com/survey/in-app" onClick={openFixedDestinationLinkInNewTab}>{ t('panel_help_feedback') }</a>
+						<PanelToTabLink href="https://www.ghostery.com/faqs/" label={t('panel_help_faq')} />
+						<PanelToTabLink href="https://www.ghostery.com/survey/in-app" label={t('panel_help_feedback')} />
 						<a href="#" onClick={openSupportPage}>{ t('panel_help_support') }</a>
 					</div>
 					<div className="support-section">
