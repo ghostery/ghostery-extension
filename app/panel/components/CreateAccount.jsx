@@ -134,11 +134,20 @@ class CreateAccount extends React.Component {
 		});
 	}
 
-	_renderLegalConsentLabel() {
+	/**
+	 * Render helper for the legal consent checkbox label
+	 * @returns {ReactElement}	React element representing the legal consent checkbox label
+	 * @private
+	 */
+	_renderLegalConsentCheckboxLabel() {
 		const termsUrl = 'https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions';
 		const licenseUrl = 'https://www.mozilla.org/en-US/MPL/2.0/';
 		const privacyUrl = 'https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy';
 
+		// Using this ungainly monstrosity instead of our svelte frenemy dangerouslySetInnerHTML
+		// because the latter breaks Opera, which requires panel-to-tab links to be opened using chrome.tabs.create.
+		// See GH-1767 for more details.
+		// ~ Ilya, July 2019
 		return (
 			<span>
 				{t('i_accept_the')}
@@ -237,7 +246,7 @@ class CreateAccount extends React.Component {
 								<div className="small-12 columns">
 									<div id="create-account-legal-consent-checkbox" className={(legalConsentNotCheckedError ? 'checkbox-error' : '')}>
 										<input id="legalConsentChecked" name="legalConsentChecked" type="checkbox" checked={legalConsentChecked} onChange={this.handleCheckboxChange} />
-										<label htmlFor="legalConsentChecked">{this._renderLegalConsentLabel()}</label>
+										<label htmlFor="legalConsentChecked">{this._renderLegalConsentCheckboxLabel()}</label>
 									</div>
 								</div>
 							</div>
