@@ -1,3 +1,16 @@
+### GHOSTERY 8.4.1 (UNRELEASED)
+
++ Add new Data Points tracker category in detail view with anti-tracking whitelist (#417)
++ Fixes error `Uncaught TypeError: c.querySelectorAll` (#406)
++ Show ad-blocking icons in detail view tracker list (#411)
++ Add new terms and conditions acknowledgment to account creation(#414)
++ Implement new Cliqz url parser (#410)
++ Fix donut tooltip (#409)
++ Fix bug in collapsed Summary view on un-scanned pages (#404)
++ Improved broken page metrics (#418)
++ Update all project dependencies to satisfy security alerts (#405)
++ Updated translations (#402)
+
 ### GHOSTERY 8.4.0 (June 26, 2019)
 
 + Add new counter for Requests Modified by Anti-Tracking (#392)

@@ -21,7 +21,8 @@
 import globals from './Globals';
 import { prefsGet } from '../utils/common';
 
-const { IS_CLIQZ } = globals;
+const { IS_CLIQZ, BROWSER_INFO } = globals;
+const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
 /**
  * Class for handling user configuration properties synchronously.
  *
@@ -104,7 +105,7 @@ class ConfData {
 			_initProperty('enable_autoupdate', true);
 			_initProperty('enable_click2play', true);
 			_initProperty('enable_click2play_social', true);
-			_initProperty('enable_human_web', !IS_CLIQZ);
+			_initProperty('enable_human_web', !IS_CLIQZ && !IS_FIREFOX);
 			_initProperty('enable_metrics', false);
 			_initProperty('enable_offers', !IS_CLIQZ);
 			_initProperty('enable_smart_block', true);
@@ -150,6 +151,7 @@ class ConfData {
 			_initProperty('site_specific_blocks', {});
 			_initProperty('site_specific_unblocks', {});
 			_initProperty('site_whitelist', []);
+			_initProperty('anti_tracking_whitelist', {});
 			_initProperty('surrogates', {});
 			_initProperty('version_history', []);
 			_initProperty('account', null);

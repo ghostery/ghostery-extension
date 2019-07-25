@@ -21,6 +21,7 @@ import conf from './Conf';
 import foundBugs from './FoundBugs';
 import bugDb from './BugDb';
 import globals from './Globals';
+import metrics from './Metrics';
 import Policy from './Policy';
 import tabInfo from './TabInfo';
 import rewards from './Rewards';
@@ -550,7 +551,11 @@ class PanelData {
 	_postCliqzModulesData() {
 		if (!this._panelPort || !this._activeTab) { return; }
 
-		sendCliqzModuleCounts(this._activeTab.id, this.postMessageToSummary);
+		sendCliqzModuleCounts(
+			this._activeTab.id,
+			this._activeTab.pageHost,
+			this.postMessageToSummary,
+		);
 	}
 
 	/**
@@ -641,6 +646,14 @@ class PanelData {
 
 		if (data.needsReload && this._activeTab) {
 			tabInfo.setTabInfo(this._activeTab.id, 'needsReload', data.needsReload);
+		}
+
+		if (data.brokenPageMetricsTrackerTrustOrUnblock) {
+			metrics.handleBrokenPageTrigger(globals.BROKEN_PAGE_TRACKER_TRUST_OR_UNBLOCK);
+		}
+
+		if (data.brokenPageMetricsWhitelistSite) {
+			metrics.handleBrokenPageTrigger(globals.BROKEN_PAGE_WHITELIST);
 		}
 
 		if (syncSetDataChanged) {

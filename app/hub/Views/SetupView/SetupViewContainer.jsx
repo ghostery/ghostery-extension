@@ -18,6 +18,7 @@ import PropTypes from 'prop-types';
 import SetupView from './SetupView';
 import { Modal, ToggleCheckbox } from '../../../shared-components';
 import { BLOCKING_POLICY_RECOMMENDED } from './SetupViewConstants';
+import globals from '../../../../src/classes/Globals';
 
 // Component Views
 import SetupBlockingView from '../SetupViews/SetupBlockingView';
@@ -25,6 +26,9 @@ import SetupBlockingDropdown from '../SetupViews/SetupBlockingDropdown';
 import SetupAntiSuiteView from '../SetupViews/SetupAntiSuiteView';
 import SetupHumanWebView from '../SetupViews/SetupHumanWebView';
 import SetupDoneView from '../SetupViews/SetupDoneView';
+
+const { BROWSER_INFO } = globals;
+const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
 
 /**
  * @class Implement the Setup View for the Ghostery Hub
@@ -101,7 +105,7 @@ class SetupViewContainer extends Component {
 		this.props.actions.setAdBlock({ enable_ad_block: true });
 		this.props.actions.setSmartBlocking({ enable_smart_block: true });
 		this.props.actions.setGhosteryRewards({ enable_ghostery_rewards: true });
-		this.props.actions.setHumanWeb({ enable_human_web: true });
+		this.props.actions.setHumanWeb({ enable_human_web: !IS_FIREFOX });
 	}
 
 	/**

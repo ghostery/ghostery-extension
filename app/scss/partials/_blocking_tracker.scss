@@ -27,6 +27,9 @@
 			font-weight: 400;
 			color: #4a4a4a;
 			@extend %nowrap;
+			&.is-whitelisted {
+				color: #00AEF0;
+			}
 		}
 		.trk-cliqz-stats-outer-container {
 			// prevent jitter from breaking to new line
@@ -108,6 +111,10 @@
 			margin-right: 10px;
 			overflow-y: hidden;
 			@extend %nowrap;
+			&.unknown {
+				margin: 0 10px 0 0;
+				color: #4a4a4a;
+			}
 		}
 	}
 	svg.blocking-icons {
@@ -125,6 +132,57 @@
 		.restrict-circle {
 			stroke: #9B9B9B;
 			display: block;
+		}
+	}
+
+	.unknown-svg-container {
+		position: relative;
+		top: 3px;
+		width: 42px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		&:not(.whitelisted) {
+			.anti-track-trust {
+				visibility: hidden;
+				cursor: pointer;
+				.border { stroke: #d8d8d8; }
+				.background { fill: #f7f7f7; }
+				.trust-circle { stroke: #9B9B9B; }
+			}
+
+			.anti-track-scrub {
+				pointer-events: none;
+			}
+		}
+
+		&.whitelisted {
+			flex-direction: row-reverse;
+
+			.anti-track-trust {
+				pointer-events: none;
+			}
+			.anti-track-scrub {
+				visibility: hidden;
+				pointer-events: auto;
+				cursor: pointer;
+				.border { stroke: #d8d8d8; }
+				.background { fill: #f7f7f7; }
+				.shield { stroke: #9B9B9B; }
+			}
+		}
+
+		&:hover {
+			.anti-track-trust {
+				visibility: visible;
+			}
+		}
+
+		&.whitelisted:hover {
+			.anti-track-scrub {
+				visibility: visible;
+			}
 		}
 	}
 }
@@ -166,4 +224,8 @@ svg.blocking-icons {
 		stroke-width: 1.5px;
 		stroke-linecap: square;
 	}
+}
+
+.OtherDataPoint__svgGroup {
+	padding-top: 5px;
 }
