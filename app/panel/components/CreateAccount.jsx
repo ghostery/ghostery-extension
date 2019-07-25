@@ -15,6 +15,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ClassNames from 'classnames';
 import RSVP from 'rsvp';
+import PanelToTabLink from './BuildingBlocks/PanelToTabLink';
 import { validateEmail, validateConfirmEmail, validatePassword } from '../utils/utils';
 
 /**
@@ -133,6 +134,28 @@ class CreateAccount extends React.Component {
 		});
 	}
 
+	_renderLegalConsentLabel() {
+		const termsUrl = 'https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions';
+		const licenseUrl = 'https://www.mozilla.org/en-US/MPL/2.0/';
+		const privacyUrl = 'https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy';
+
+		return (
+			<span>
+				{t('i_accept_the')}
+				&#8200;
+				<PanelToTabLink href={termsUrl} label={t('terms_and_conditions')} />
+				&#8200;
+				{t('and')}
+				&#8200;
+				<PanelToTabLink href={licenseUrl} label={t('public_license_agreement')} />
+				&#8200;
+				{t('and_consent_to_data_practices_found_in_the')}
+				&#8200;
+				<PanelToTabLink href={privacyUrl} label={t('privacy_policy')} />
+			</span>
+		);
+	}
+
 	/**
 	 * Render Create Account panel.
 	 * @return {ReactComponent}   ReactComponent instance
@@ -214,8 +237,7 @@ class CreateAccount extends React.Component {
 								<div className="small-12 columns">
 									<div id="create-account-legal-consent-checkbox" className={(legalConsentNotCheckedError ? 'checkbox-error' : '')}>
 										<input id="legalConsentChecked" name="legalConsentChecked" type="checkbox" checked={legalConsentChecked} onChange={this.handleCheckboxChange} />
-										{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-										<label htmlFor="legalConsentChecked" dangerouslySetInnerHTML={{ __html: t('create_account_form_legal_consent_checkbox_label') }} />
+										<label htmlFor="legalConsentChecked">{this._renderLegalConsentLabel()}</label>
 									</div>
 								</div>
 							</div>

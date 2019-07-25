@@ -2235,23 +2235,6 @@
 	"cliqz_feature_status_off": {
 		"message": "Off"
 	},
-	"create_account_form_legal_consent_checkbox_label": {
-		"message": "I accept the $LINK_TERMS_START$Terms and Conditions$LINK_END$, the $LINK_LICENSE_START$Public License Agreement$LINK_END$, and consent to data practices found in the $LINK_PRIVACY_START$Privacy Policy$LINK_END$.",
-		"placeholders": {
-			"link_end": {
-				"content": "</a>"
-			},
-			"link_license_start": {
-				"content": "<a target=\"_blank\" href=\"https://www.mozilla.org/en-US/MPL/2.0/\" rel=\"noopener noreferrer\">"
-			},
-			"link_privacy_start": {
-				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" rel=\"noopener noreferrer\">"
-			},
-			"link_terms_start": {
-				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/\" rel=\"noopener noreferrer\">"
-			}
-		}
-	},
 	"ghostery_rewards": {
 		"message": "ghostery rewards"
 	},
@@ -2263,5 +2246,23 @@
 	},
 	"unknown_description": {
 		"message": "Unknown trackers scrubbed by Anti-Tracking"
+	},
+	"i_accept_the": {
+		"message": "I accept the"
+	},
+	"terms_and_conditions": {
+		"message": "Terms and Conditions"
+	},
+	"and": {
+		"message": "and"
+	},
+	"public_license_agreement": {
+		"message": "Public License Agreement"
+	},
+	"and_consent_to_data_practices_found_in_the": {
+		"message": "and consent to data practices found in the"
+	},
+	"privacy_policy": {
+		"message": "Privacy Policy"
 	}
 }
