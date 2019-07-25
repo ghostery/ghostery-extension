@@ -19,7 +19,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route } from 'react-router-dom';
-import ShadowDOM from 'react-shadow';
+import root from 'react-shadow';
 import HotDog from './HotDog';
 import OfferCard from './OfferCard';
 import msgModule from '../utils/msg';
@@ -78,9 +78,6 @@ class RewardsApp {
 	start() {
 		if (document.head.createShadowRoot || document.head.attachShadow) {
 			this.renderShadow();
-			setTimeout(() => {
-				document.getElementById('ghostery-shadow-root').style.opacity = 1;
-			}, 150);
 		} else {
 			// use iframe to encapsulate CSS - fallback for everything else besides chrome
 			this.renderIframe();
@@ -98,34 +95,32 @@ class RewardsApp {
 		document.body.appendChild(this.rewardsContainer);
 		this.mainView = props => (
 			<Router history={history}>
-				<div id="ghostery-shadow-root">
-					<ShadowDOM.span>
-						<link
-							rel="stylesheet"
-							type="text/css"
-							href={chrome.extension.getURL('dist/css/rewards_styles.css')}
-						/>
-						<Route
-							exact
-							path="/"
-							render={
-								() => <HotDog reward={props.reward} port={this.port} actions={props.actions} />
-							}
-						/>
-						<Route
-							path="/hotdog"
-							render={
-								() => <HotDog reward={props.reward} port={this.port} actions={props.actions} />
-							}
-						/>
-						<Route
-							path="/offercard"
-							render={
-								() => <OfferCard reward={props.reward} conf={props.conf} port={this.port} actions={props.actions} />
-							}
-						/>
-					</ShadowDOM.span>
-				</div>
+				<root.div>
+					<link
+						rel="stylesheet"
+						type="text/css"
+						href={chrome.extension.getURL('dist/css/rewards_styles.css')}
+					/>
+					<Route
+						exact
+						path="/"
+						render={
+							() => <HotDog reward={props.reward} port={this.port} actions={props.actions} />
+						}
+					/>
+					<Route
+						path="/hotdog"
+						render={
+							() => <HotDog reward={props.reward} port={this.port} actions={props.actions} />
+						}
+					/>
+					<Route
+						path="/offercard"
+						render={
+							() => <OfferCard reward={props.reward} conf={props.conf} port={this.port} actions={props.actions} />
+						}
+					/>
+				</root.div>
 			</Router>
 		);
 		this.initListener();
