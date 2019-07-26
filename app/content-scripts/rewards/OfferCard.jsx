@@ -38,7 +38,8 @@ class OfferCard extends Component {
 			code: isCodeHidden ? '*****' : templateData.code,
 			closed: false,
 			copyText: t('rewards_copy_code'),
-			showPrompt: this.props.conf.rewardsPromptAccepted ? false : 1,
+			showPrompt: false,
+			showOptoutOptions: !this.props.conf.rewardsPromptAccepted,
 			showSettings: false,
 			rewardUI: templateData,
 		};
@@ -48,6 +49,9 @@ class OfferCard extends Component {
 			this.iframeContentDocument = this.iframeEl.contentDocument;
 			this.iframeEl.classList = '';
 			this.iframeEl.classList.add('offer-card');
+			if (this.state.showOptoutOptions) {
+        this.iframeEl.classList.add('offer-card-optout-options');
+      }
 		}
 		this.rewardPictureEl = null;
 
@@ -118,7 +122,8 @@ class OfferCard extends Component {
 		}
 	}
 
-	copyCode() {
+
+	copyCode() { // eslint-disable-line react/sort-comp
 		this.props.actions.sendSignal('code_copied');
 
 		// 'copied' feedback for user
@@ -211,6 +216,21 @@ class OfferCard extends Component {
 		this.props.actions.sendSignal('offer_ca_action');
 	}
 
+  handleAcceptRewards = () => {
+    this.setState({ showOptoutOptions: false });
+		this.props.actions.messageBackground('rewardsPromptAccepted');
+    this.props.actions.messageBackground('rewardsPromptOptedIn');
+    this.props.actions.sendSignal('offer_first_optin');
+    sendMessage('ping', 'rewards_first_accept');
+  }
+
+  handleDeclineRewards = () => {
+    this.props.actions.sendSignal('offer_first_optout');
+    sendMessage('ping', 'rewards_first_reject_optout');
+    this.disableRewards();
+    this.closeOfferCard();
+  }
+
 	handleImageLoaded(e) {
 		e.target.classList.remove('hide');
 	}
@@ -232,6 +252,59 @@ class OfferCard extends Component {
 		}
 		return t(`rewards_expires_in_${type}`, [count]);
 	}
+
+  renderRewardsOptoutOptions() {
+    if (!this.state.showOptoutOptions) { return null; }
+    const href = 'https://www.ghostery.com/faqs/what-is-ghostery-rewards/';
+    return (
+      <React.Fragment>
+        <div className="rewards-footer-optout-text">
+          {t('rewards_first_prompt')}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => {
+              this.props.actions.sendSignal('offer_first_learn');
+              sendMessage('ping', 'rewards_first_learn_more');
+            }}
+            href={href}
+          >
+            {t('rewards_learn_more')}
+          </a>
+        </div>
+        <div className="rewards-footer-optout-actions">
+          <span
+            className="rewards-footer-optout-actions-btn rewards-footer-optout-actions-yes"
+            onClick={this.handleAcceptRewards}
+          >
+            {t('rewards_yes')}
+          </span>
+          <span
+            className="rewards-footer-optout-actions-btn rewards-footer-optout-actions-no"
+            onClick={this.handleDeclineRewards}
+          >
+            {t('rewards_no')}
+          </span>
+        </div>
+      </React.Fragment>
+    );
+  }
+
+  renderFooter() {
+    return (
+      <div className="reward-footer">
+        <div className="reward-footer-top">
+          <div className="reward-feedback">
+            <div className="reward-smile" />
+            <a onClick={this.disableRewardsNotification}>{t('rewards_disable')}</a>
+            <div className="reward-arrow" />
+          </div>
+          <div className="reward-ghosty" style={{ backgroundImage: this.ghostyGrey }} />
+        </div>
+        {this.renderRewardsOptoutOptions()}
+      </div>
+    );
+  }
 
 	render() {
 		return (
@@ -312,14 +385,7 @@ class OfferCard extends Component {
 									{this.state.rewardUI.call_to_action.text}
 								</a>
 							</div>
-							<div className="reward-footer">
-								<div className="reward-feedback">
-									<div className="reward-smile" />
-									<a onClick={this.disableRewardsNotification}>{t('rewards_disable')}</a>
-									<div className="reward-arrow" />
-								</div>
-								<div className="reward-ghosty" style={{ backgroundImage: this.ghostyGrey }} />
-							</div>
+              {this.renderFooter()}
 						</div>
 						{ this.state.showPrompt === 1 &&
 							this.renderNotification(0)
