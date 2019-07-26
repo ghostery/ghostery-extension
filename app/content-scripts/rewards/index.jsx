@@ -105,7 +105,7 @@ class RewardsApp {
 						exact
 						path="/"
 						render={
-							() => <HotDog reward={props.reward} port={this.port} actions={props.actions} />
+							() => <OfferCard reward={props.reward} conf={props.conf} port={this.port} actions={props.actions} />
 						}
 					/>
 					<Route
