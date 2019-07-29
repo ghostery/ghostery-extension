@@ -14,6 +14,7 @@
 import React from 'react';
 import Tracker from './Tracker';
 import GlobalTracker from './GlobalTracker';
+
 /**
  * @class Implement Trackers component which represents a container for trackers
  * in both Blocking view and Global Blocking subview of Settings.
@@ -39,7 +40,7 @@ class Trackers extends React.Component {
 	* @return {ReactComponent}   ReactComponent instance
 	*/
 	render() {
-		const { trackers } = this.props;
+		const { trackers, isUnknown } = this.props;
 		let trackerList;
 		if (this.props.globalBlocking) {
 			const trackersToShow = [];
@@ -73,6 +74,7 @@ class Trackers extends React.Component {
 					language={this.props.language}
 					smartBlockActive={this.props.smartBlockActive}
 					smartBlock={this.props.smartBlock}
+					isUnknown={isUnknown}
 				/>
 			));
 		}

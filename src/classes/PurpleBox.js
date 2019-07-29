@@ -48,7 +48,7 @@ class PurpleBox {
 		// Skip in the event of pause, trust, prefetching, newtab page, or Firefox about:pages
 		if (!conf.show_alert ||
 			globals.SESSION.paused_blocking ||
-			(conf.hide_alert_trusted && !!this.policy.whitelisted(tab.url)) ||
+			(conf.hide_alert_trusted && !!this.policy.checkSiteWhitelist(tab.url)) ||
 			!tab || tab.purplebox || tab.path.includes('_/chrome/newtab') || tab.protocol === 'about' || globals.EXCLUDES.includes(tab.host)) {
 			return Promise.resolve(false);
 		}
