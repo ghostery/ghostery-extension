@@ -10,11 +10,17 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { openFixedDestinationLinkInNewTab } from '../../panel/utils/msg';
 
+/**
+ * A React component for i18n strings that need to include links
+ * @return {JSX} JSX for rendering an i18n string with embedded links
+ * @memberof SharedComponents
+ */
 class I18nWithLink extends Component {
 	constructor(props) {
 		super(props);
