@@ -28,13 +28,13 @@ const About = () => {
 					<h1>{ t('panel_about_panel_header') }</h1>
 					<div className="support-section">
 						<h3>{ t('panel_about_version_header', [BROWSER_INFO.displayName, EXTENSION_VERSION]) }</h3>
-						<PanelToTabLink href="https://github.com/ghostery/ghostery-extension/releases" label={t('panel_about_release_notes')} />
-						<PanelToTabLink href="https://www.mozilla.org/en-US/MPL/2.0/" label={t('panel_about_license')} />
-						<PanelToTabLink href="https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/" label={t('panel_about_privacy_statement')} />
-						<PanelToTabLink href="https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/" label={t('panel_about_terms_and_conditions')} />
-						<PanelToTabLink href="https://www.ghostery.com/about-ghostery/imprint/" label={t('panel_about_imprint')} />
-						<PanelToTabLink href={licensesUrl} label={t('panel_about_licenses')} />
-						<PanelToTabLink href="https://www.ghostery.com/" label="Ghostery.com" />
+						<PanelToTabLink href="https://github.com/ghostery/ghostery-extension/releases">{t('panel_about_release_notes')}</PanelToTabLink>
+						<PanelToTabLink href="https://www.mozilla.org/en-US/MPL/2.0/">{t('panel_about_license')}</PanelToTabLink>
+						<PanelToTabLink href="https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/">{t('panel_about_privacy_statement')}</PanelToTabLink>
+						<PanelToTabLink href="https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/">{t('panel_about_terms_and_conditions')}</PanelToTabLink>
+						<PanelToTabLink href="https://www.ghostery.com/about-ghostery/imprint/">{t('panel_about_imprint')}</PanelToTabLink>
+						<PanelToTabLink href={licensesUrl}>{t('panel_about_licenses')}</PanelToTabLink>
+						<PanelToTabLink href="https://www.ghostery.com/">Ghostery.com</PanelToTabLink>
 					</div>
 				</div>
 			</div>

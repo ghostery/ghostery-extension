@@ -1,5 +1,5 @@
 /**
- * PanelToTab Link Component
+ * PanelToTabLink Component
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -12,17 +12,17 @@
  */
 
 import React from 'react';
-import { openFixedDestinationLinkInNewTab } from '../../utils/msg';
+import { handleClickOnNewTabLink } from '../../utils/msg';
 
 /**
- * Implements panel -> new tab links. Used in Help, About, and other panel views
+ * Implement panel -> new tab links. Used in Help, About, and other panel views
  * @memberof PanelBuildingBlocks
  */
 const PanelToTabLink = (props) => {
-	const { href, label } = props;
+	const { href, children } = props;
 
 	return (
-		<a href={href} onClick={openFixedDestinationLinkInNewTab}>{label}</a>
+		<a href={href} onClick={handleClickOnNewTabLink}>{children}</a>
 	);
 };
 

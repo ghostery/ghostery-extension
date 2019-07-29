@@ -27,12 +27,12 @@ const Help = () => {
 				<div className="small-12 columns">
 					<h1>{ t('panel_help_panel_header') }</h1>
 					<div className="support-section">
-						<PanelToTabLink href={hubUrl} label={t('panel_help_setup')} />
+						<PanelToTabLink href={hubUrl}>{t('panel_help_setup')}</PanelToTabLink>
 					</div>
 					<div className="support-section">
 						<h3>{ t('panel_help_questions_header') }</h3>
-						<PanelToTabLink href="https://www.ghostery.com/faqs/" label={t('panel_help_faq')} />
-						<PanelToTabLink href="https://www.ghostery.com/survey/in-app" label={t('panel_help_feedback')} />
+						<PanelToTabLink href="https://www.ghostery.com/faqs/">{t('panel_help_faq')}</PanelToTabLink>
+						<PanelToTabLink href="https://www.ghostery.com/survey/in-app">{t('panel_help_feedback')}</PanelToTabLink>
 						<a href="#" onClick={openSupportPage}>{ t('panel_help_support') }</a>
 					</div>
 					<div className="support-section">

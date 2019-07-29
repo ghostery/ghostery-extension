@@ -14,7 +14,7 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 
-import { openFixedDestinationLinkInNewTab } from '../../panel/utils/msg';
+import { handleClickOnNewTabLink } from '../../panel/utils/msg';
 
 /**
  * A React component for i18n strings that need to include links
@@ -31,10 +31,9 @@ class I18nWithLink extends Component {
 		const { current: { children } } = this.containerRef;
 		for (let i = 0; i < children.length; i++) {
 			const ele = children[i];
-			if (ele.nodeName.toLowerCase() !== 'a') {
-				return;
+			if (ele.nodeName.toLowerCase() === 'a') {
+				ele.onclick = e => handleClickOnNewTabLink(e);
 			}
-			ele.onclick = e => openFixedDestinationLinkInNewTab(e);
 		}
 	}
 

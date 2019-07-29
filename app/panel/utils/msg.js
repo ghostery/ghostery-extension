@@ -143,9 +143,15 @@ export function sendRewardMessage(name, message, callback = defaultCallback()) {
 /**
  * Handle clicks on links with a fixed destination
  */
-export function openFixedDestinationLinkInNewTab(e) {
+export function handleClickOnNewTabLink(e) {
 	e.preventDefault();
-	const { href } = e.target;
+
+	let linkTag = e.target;
+	while (!linkTag.href) {
+		linkTag = linkTag.parentElement;
+	}
+	const { href } = linkTag;
+
 	sendMessage('openNewTab', {
 		url: href,
 		become_active: true,
