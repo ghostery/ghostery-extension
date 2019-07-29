@@ -15,8 +15,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ClassNames from 'classnames';
 import RSVP from 'rsvp';
-import PanelToTabLink from './BuildingBlocks/PanelToTabLink';
 import { validateEmail, validateConfirmEmail, validatePassword } from '../utils/utils';
+import I18nWithLink from '../../shared-components/I18nWithLink';
 
 /**
  * @class Implement Create Account view which opens
@@ -135,38 +135,6 @@ class CreateAccount extends React.Component {
 	}
 
 	/**
-	 * Render helper for the legal consent checkbox label
-	 * @returns {ReactElement}	React element representing the legal consent checkbox label
-	 * @private
-	 */
-	_renderLegalConsentCheckboxLabel() {
-		const termsUrl = 'https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions';
-		const licenseUrl = 'https://www.mozilla.org/en-US/MPL/2.0/';
-		const privacyUrl = 'https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy';
-
-		// Using this ungainly monstrosity instead of our svelte frenemy dangerouslySetInnerHTML
-		// because the latter breaks Opera, which requires panel-to-tab links to be opened using chrome.tabs.create.
-		// See GH-1767 for more details.
-		// ~ Ilya, July 2019
-		return (
-			<span>
-				{t('i_accept_the')}
-				&#8200;
-				<PanelToTabLink href={termsUrl} label={t('terms_and_conditions')} />
-				&#8200;
-				{t('and')}
-				&#8200;
-				<PanelToTabLink href={licenseUrl} label={t('public_license_agreement')} />
-				&#8200;
-				{t('and_consent_to_data_practices_found_in_the')}
-				&#8200;
-				<PanelToTabLink href={privacyUrl} label={t('privacy_policy')} />
-				.
-			</span>
-		);
-	}
-
-	/**
 	 * Render Create Account panel.
 	 * @return {ReactComponent}   ReactComponent instance
 	 */
@@ -247,7 +215,10 @@ class CreateAccount extends React.Component {
 								<div className="small-12 columns">
 									<div id="create-account-legal-consent-checkbox" className={(legalConsentNotCheckedError ? 'checkbox-error' : '')}>
 										<input id="legalConsentChecked" name="legalConsentChecked" type="checkbox" checked={legalConsentChecked} onChange={this.handleCheckboxChange} />
-										<label htmlFor="legalConsentChecked">{this._renderLegalConsentCheckboxLabel()}</label>
+										{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+										<label htmlFor="legalConsentChecked">
+											<I18nWithLink value="create_account_form_legal_consent_checkbox_label" />
+										</label>
 									</div>
 								</div>
 							</div>
