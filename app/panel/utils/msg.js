@@ -150,7 +150,6 @@ export function openFixedDestinationLinkInNewTab(e) {
 		url: href,
 		become_active: true,
 	});
-	window.close();
 }
 
 /**

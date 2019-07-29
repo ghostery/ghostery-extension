@@ -1,7 +1,7 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 
-import { sendMessage } from '../../panel/utils/msg';
+import { openFixedDestinationLinkInNewTab } from '../../panel/utils/msg';
 
 class I18nWithLink extends Component {
 	constructor(props) {
@@ -16,14 +16,7 @@ class I18nWithLink extends Component {
 			if (ele.nodeName.toLowerCase() !== 'a') {
 				return;
 			}
-			ele.onclick = (e) => {
-				e.preventDefault();
-				const { href } = e.target;
-				sendMessage('openNewTab', {
-					url: href,
-					become_active: true,
-				});
-			};
+			ele.onclick = e => openFixedDestinationLinkInNewTab(e);
 		}
 	}
 
