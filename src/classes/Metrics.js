@@ -130,13 +130,13 @@ class Metrics {
 	 */
 	handleBrokenPageTrigger(triggerId, newTabUrl = null) {
 		if (this._brokenPageWatcher.on && triggerId === globals.BROKEN_PAGE_REFRESH) {
-			this.ping('broken-page');
+			this.ping('broken_page');
 			this._unplugBrokenPageWatcher();
 			return;
 		}
 
 		if (this._brokenPageWatcher.on && triggerId === globals.BROKEN_PAGE_NEW_TAB && this._brokenPageWatcher.url === newTabUrl) {
-			this.ping('broken-page');
+			this.ping('broken_page');
 			this._unplugBrokenPageWatcher();
 			return;
 		}
@@ -162,7 +162,7 @@ class Metrics {
 				on: true,
 				triggerId,
 				triggerTime: Date.now(),
-				timeoutId: setTimeout(this._clearBrokenPageWatcher, BROKEN_PAGE_METRICS_THRESHOLD),
+				timeoutId: setTimeout(this._clearBrokenPageWatcherTimeout.bind(this), BROKEN_PAGE_METRICS_THRESHOLD),
 				url: tabUrl,
 			});
 		});
