@@ -162,7 +162,7 @@ class Metrics {
 				on: true,
 				triggerId,
 				triggerTime: Date.now(),
-				timeoutId: setTimeout(this._clearBrokenPageWatcher, BROKEN_PAGE_METRICS_THRESHOLD),
+				timeoutId: setTimeout(this._clearBrokenPageWatcherTimeout, BROKEN_PAGE_METRICS_THRESHOLD),
 				url: tabUrl,
 			});
 		});
