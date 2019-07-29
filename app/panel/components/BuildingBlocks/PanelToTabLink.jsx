@@ -1,5 +1,5 @@
 /**
- * Pause Button Component
+ * PanelToTab Link Component
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
