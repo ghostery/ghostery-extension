@@ -16,6 +16,7 @@ import ClassNames from 'classnames';
 import ReactSVG from 'react-svg';
 
 import StatsGraph from './BuildingBlocks/StatsGraph';
+import I18nWithLink from '../../shared-components/I18nWithLink';
 
 /**
  * A Functional React component for rendering the Stats View
@@ -192,7 +193,7 @@ const StatsView = (props) => {
 				<div className="modal-container">
 					<div className="modal-content">
 						<div className="modal-text-container">
-							<span className="modal-title-text" dangerouslySetInnerHTML={{ __html: t('panel_stats_pitch_modal_text') }} />
+							<I18nWithLink cssClasses="modal-title-text" value="panel_stats_pitch_modal_text" />
 						</div>
 						<div className="modal-buttons-container">
 							<div className="modal-filled-button" onClick={subscribe}>{t('panel_stats_pitch_modal_subscribe')}</div>
