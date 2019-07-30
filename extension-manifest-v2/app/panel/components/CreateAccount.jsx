@@ -16,6 +16,7 @@ import { Link } from 'react-router-dom';
 import ClassNames from 'classnames';
 import RSVP from 'rsvp';
 import { validateEmail, validateConfirmEmail, validatePassword } from '../utils/utils';
+import I18nWithLink from '../../shared-components/I18nWithLink';
 
 /**
  * @class Implement Create Account view which opens
@@ -215,7 +216,9 @@ class CreateAccount extends React.Component {
 									<div id="create-account-legal-consent-checkbox" className={(legalConsentNotCheckedError ? 'checkbox-error' : '')}>
 										<input id="legalConsentChecked" name="legalConsentChecked" type="checkbox" checked={legalConsentChecked} onChange={this.handleCheckboxChange} />
 										{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-										<label htmlFor="legalConsentChecked" dangerouslySetInnerHTML={{ __html: t('create_account_form_legal_consent_checkbox_label') }} />
+										<label htmlFor="legalConsentChecked">
+											<I18nWithLink value="create_account_form_legal_consent_checkbox_label" />
+										</label>
 									</div>
 								</div>
 							</div>

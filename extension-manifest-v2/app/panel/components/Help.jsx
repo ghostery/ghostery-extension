@@ -12,61 +12,37 @@
  */
 
 import React from 'react';
-import { sendMessage, openSupportPage } from '../utils/msg';
+import { openSupportPage } from '../utils/msg';
+import PanelToTabLink from './BuildingBlocks/PanelToTabLink';
+
 /**
- * @class Implement Help view which opens from the main drop-down menu.
- * @memberof PanelClasses
+ * Render Help view that user can open from the header drop-down menu
  */
-class Help extends React.Component {
-	/**
-	 * Handle click on 'Set Up Ghostery' menu item
-	 */
-	openHubTab = (e) => {
-		e.preventDefault();
-		sendMessage('openNewTab', {
-			url: chrome.runtime.getURL('./app/templates/hub.html'),
-			become_active: true,
-		});
-		window.close();
-	}
+const Help = () => {
+	const hubUrl = chrome.runtime.getURL('./app/templates/hub.html');
 
-	/**
-	 * Handle click on 'Support' menu item
-	 */
-	openSupportTab = (e) => {
-		e.preventDefault();
-		openSupportPage();
-		window.close();
-	}
-
-	/**
-	 * Render Help view.
-	 * @return {ReactComponent}   ReactComponent instance
-	 */
-	render() {
-		return (
-			<div id="content-help">
-				<div className="row">
-					<div className="small-12 columns">
-						<h1>{ t('panel_help_panel_header') }</h1>
-						<div className="support-section">
-							<a href="#" onClick={this.openHubTab}>{ t('panel_help_setup') }</a>
-						</div>
-						<div className="support-section">
-							<h3>{ t('panel_help_questions_header') }</h3>
-							<a href="https://www.ghostery.com/faqs/" target="_blank" rel="noopener noreferrer">{ t('panel_help_faq') }</a>
-							<a href="https://www.ghostery.com/survey/in-app" target="_blank" rel="noopener noreferrer">{ t('panel_help_feedback') }</a>
-							<a href="#" onClick={this.openSupportTab}>{ t('panel_help_support') }</a>
-						</div>
-						<div className="support-section">
-							<h3>{ t('panel_help_contact_header') }</h3>
-							<a className="info" href="mailto:info@ghostery.com">info@ghostery.com</a>
-						</div>
+	return (
+		<div id="content-help">
+			<div className="row">
+				<div className="small-12 columns">
+					<h1>{ t('panel_help_panel_header') }</h1>
+					<div className="support-section">
+						<PanelToTabLink href={hubUrl}>{t('panel_help_setup')}</PanelToTabLink>
+					</div>
+					<div className="support-section">
+						<h3>{ t('panel_help_questions_header') }</h3>
+						<PanelToTabLink href="https://www.ghostery.com/faqs/">{t('panel_help_faq')}</PanelToTabLink>
+						<PanelToTabLink href="https://www.ghostery.com/survey/in-app">{t('panel_help_feedback')}</PanelToTabLink>
+						<a href="#" onClick={openSupportPage}>{ t('panel_help_support') }</a>
+					</div>
+					<div className="support-section">
+						<h3>{ t('panel_help_contact_header') }</h3>
+						<a className="info" href="mailto:info@ghostery.com">info@ghostery.com</a>
 					</div>
 				</div>
 			</div>
-		);
-	}
-}
+		</div>
+	);
+};
 
 export default Help;

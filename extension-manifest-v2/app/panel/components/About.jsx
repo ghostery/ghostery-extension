@@ -12,64 +12,34 @@
  */
 import React from 'react';
 import globals from '../../../src/classes/Globals';
-import { sendMessage } from '../utils/msg';
+import PanelToTabLink from './BuildingBlocks/PanelToTabLink';
 
 const { BROWSER_INFO, EXTENSION_VERSION } = globals;
 /**
- * @class Implement About view which opens from the main drop-down menu.
- * @memberof PanelClasses
+ * Render About view which opens from the main drop-down menu.
  */
-class About extends React.Component {
-	/**
-	 * Open internal Licenses page with licenses of
-	 * all third-party packages used by Ghostery.
-	 * @static
-	 */
-	static openNewTab() {
-		sendMessage('openNewTab', {
-			url: chrome.runtime.getURL('./app/templates/licenses.html'),
-			become_active: true,
-		});
-		window.close();
-	}
+const About = () => {
+	const licensesUrl = chrome.runtime.getURL('./app/templates/licenses.html');
 
-	/**
-	 * Render About panel.
-	 * @return {ReactComponent}   ReactComponent instance
-	 */
-	render() {
-		return (
-			<div id="content-about">
-				<div className="row">
-					<div className="small-12 columns">
-						<h1>{ t('panel_about_panel_header') }</h1>
-						<div className="support-section">
-							<h3>{ t('panel_about_version_header', [BROWSER_INFO.displayName, EXTENSION_VERSION]) }</h3>
-							<a href="https://github.com/ghostery/ghostery-extension/releases" target="_blank" rel="noopener noreferrer">
-								{ t('panel_about_release_notes') }
-							</a>
-							<a href="https://www.mozilla.org/en-US/MPL/2.0/" target="_blank" rel="noopener noreferrer">
-								{ t('panel_about_license') }
-							</a>
-							<a href="https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/" target="_blank" rel="noopener noreferrer">
-								{ t('panel_about_privacy_statement') }
-							</a>
-							<a href="https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/" target="_blank" rel="noopener noreferrer">
-								{ t('panel_about_terms_and_conditions') }
-							</a>
-							<a href="https://www.ghostery.com/about-ghostery/imprint/" target="_blank" rel="noopener noreferrer">
-								{ t('panel_about_imprint') }
-							</a>
-							<div onClick={About.openNewTab}>
-								{ t('panel_about_licenses') }
-							</div>
-							<a href="https://www.ghostery.com/" target="_blank" rel="noopener noreferrer">Ghostery.com</a>
-						</div>
+	return (
+		<div id="content-about">
+			<div className="row">
+				<div className="small-12 columns">
+					<h1>{ t('panel_about_panel_header') }</h1>
+					<div className="support-section">
+						<h3>{ t('panel_about_version_header', [BROWSER_INFO.displayName, EXTENSION_VERSION]) }</h3>
+						<PanelToTabLink href="https://github.com/ghostery/ghostery-extension/releases">{t('panel_about_release_notes')}</PanelToTabLink>
+						<PanelToTabLink href="https://www.mozilla.org/en-US/MPL/2.0/">{t('panel_about_license')}</PanelToTabLink>
+						<PanelToTabLink href="https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/">{t('panel_about_privacy_statement')}</PanelToTabLink>
+						<PanelToTabLink href="https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/">{t('panel_about_terms_and_conditions')}</PanelToTabLink>
+						<PanelToTabLink href="https://www.ghostery.com/about-ghostery/imprint/">{t('panel_about_imprint')}</PanelToTabLink>
+						<PanelToTabLink href={licensesUrl}>{t('panel_about_licenses')}</PanelToTabLink>
+						<PanelToTabLink href="https://www.ghostery.com/">Ghostery.com</PanelToTabLink>
 					</div>
 				</div>
 			</div>
-		);
-	}
-}
+		</div>
+	);
+};
 
 export default About;
