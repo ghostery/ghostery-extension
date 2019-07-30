@@ -525,6 +525,10 @@
 		"description": "as in '5 (trackers) BLOCKED'",
 		"message": "已封鎖"
 	},
+	"blocking_category_whitelisted": {
+		"description": "as in '5 (trackers) WHITELISTED'",
+		"message": "已列入解封名單"
+	},
 	"panel_create_account": {
 		"message": "創建帳戶"
 	},
@@ -673,7 +677,7 @@
 		"message": " 在此網貝。"
 	},
 	"panel_tracker_total_tooltip": {
-		"message": "已發現網頁跟蹤器、已阻止廣告和數據匿名處理總數。"
+		"message": "已發現的網頁跟蹤器和更動的請求總數。"
 	},
 	"panel_signin_success": {
 		"message": "您現在登入為 "
@@ -717,6 +721,9 @@
 	"panel_tracker_trust_tooltip": {
 		"message": "信任此網站"
 	},
+	"panel_tracker_scrub_tooltip": {
+		"message": "清理此網站"
+	},
 	"panel_detail_menu_list_title": {
 		"message": "列表視圖"
 	},
@@ -749,9 +756,6 @@
 	},
 	"panel_detail_performance_text": {
 		"message": "即將添加的功能。"
-	},
-	"panel_detail_rewards_title": {
-		"message": "Ghostery Rewards"
 	},
 	"panel_detail_rewards_coming_soon": {
 		"message": "即將添加的功能。"
@@ -2230,5 +2234,34 @@
 	},
 	"cliqz_feature_status_off": {
 		"message": "關閉"
+	},
+	"create_account_form_legal_consent_checkbox_label": {
+		"message": "我接受$LINK_TERMS_START$條款及條件$LINK_END$、$LINK_LICENSE_START$公共許可協議$LINK_END$，並同意$LINK_PRIVACY_START$隱私政策$LINK_END$中所述的資料處理方式。",
+		"placeholders": {
+			"link_end": {
+				"content": "</a>"
+			},
+			"link_license_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.mozilla.org/en-US/MPL/2.0/\" rel=\"noopener noreferrer\">"
+			},
+			"link_privacy_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" rel=\"noopener noreferrer\">"
+			},
+			"link_terms_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/\" rel=\"noopener noreferrer\">"
+			}
+		}
+	},
+	"ghostery_rewards": {
+		"message": "Ghostery Rewards"
+	},
+	"enhanced_anti_tracking": {
+		"message": "強化的反跟蹤"
+	},
+	"unknown": {
+		"message": "不明的"
+	},
+	"unknown_description": {
+		"message": "反跟蹤功能清出的不明的追蹤器"
 	}
 }

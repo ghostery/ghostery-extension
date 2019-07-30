@@ -1,6 +1,7 @@
 ### GHOSTERY 8.4.1 (UNRELEASED)
 
 + Add new Data Points tracker category in detail view with anti-tracking whitelist (#417)
++ Fixes broken `target=_blank` links in Opera (#426)
 + Fixes error `Uncaught TypeError: c.querySelectorAll` (#406)
 + Show ad-blocking icons in detail view tracker list (#411)
 + Add new terms and conditions acknowledgment to account creation(#414)

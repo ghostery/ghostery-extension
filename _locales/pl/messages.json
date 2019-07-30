@@ -525,6 +525,10 @@
 		"description": "as in '5 (trackers) BLOCKED'",
 		"message": "Zablokowane"
 	},
+	"blocking_category_whitelisted": {
+		"description": "as in '5 (trackers) WHITELISTED'",
+		"message": "Dodano do białej listy"
+	},
 	"panel_create_account": {
 		"message": "Utwórz konto"
 	},
@@ -673,7 +677,7 @@
 		"message": " na tej stronie."
 	},
 	"panel_tracker_total_tooltip": {
-		"message": "Suma odnalezionych tropicieli, zablokowanych reklam i zanonimizowanych punktów danych."
+		"message": "Suma odnalezionych tropicieli + zmodyfikowanych żądań."
 	},
 	"panel_signin_success": {
 		"message": "Jesteś teraz zalogowany/-a jako "
@@ -717,6 +721,9 @@
 	"panel_tracker_trust_tooltip": {
 		"message": "Zaufaj na tej stronie"
 	},
+	"panel_tracker_scrub_tooltip": {
+		"message": "Oczyszczaj na tej stronie"
+	},
 	"panel_detail_menu_list_title": {
 		"message": "Widok listy"
 	},
@@ -749,9 +756,6 @@
 	},
 	"panel_detail_performance_text": {
 		"message": "Funkcja dostępna niebawem."
-	},
-	"panel_detail_rewards_title": {
-		"message": "Ghostery Rewards"
 	},
 	"panel_detail_rewards_coming_soon": {
 		"message": "Funkcja dostępna niebawem."
@@ -2230,5 +2234,34 @@
 	},
 	"cliqz_feature_status_off": {
 		"message": "Wyłączone"
+	},
+	"create_account_form_legal_consent_checkbox_label": {
+		"message": "Akceptuję $LINK_TERMS_START$warunki użytkowania$LINK_END$ i $LINK_LICENSE_START$umowę licencji publicznej$LINK_END$ oraz wyrażam zgodę na zasady ochrony danych zawarte w $LINK_PRIVACY_START$polityce prywatności$LINK_END$.",
+		"placeholders": {
+			"link_end": {
+				"content": "</a>"
+			},
+			"link_license_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.mozilla.org/en-US/MPL/2.0/\" rel=\"noopener noreferrer\">"
+			},
+			"link_privacy_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" rel=\"noopener noreferrer\">"
+			},
+			"link_terms_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/\" rel=\"noopener noreferrer\">"
+			}
+		}
+	},
+	"ghostery_rewards": {
+		"message": "Ghostery Rewards"
+	},
+	"enhanced_anti_tracking": {
+		"message": "Wzmocniona ochrona przed śledzeniem"
+	},
+	"unknown": {
+		"message": "Nieznany"
+	},
+	"unknown_description": {
+		"message": "Nieznane tropiciele zostały oczyszczone przez funkcję ochrony przed śledzeniem"
 	}
 }

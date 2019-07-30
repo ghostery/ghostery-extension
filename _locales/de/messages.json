@@ -525,6 +525,10 @@
 		"description": "as in '5 (trackers) BLOCKED'",
 		"message": "Blockiert"
 	},
+	"blocking_category_whitelisted": {
+		"description": "as in '5 (trackers) WHITELISTED'",
+		"message": "Auf der Wihitelist"
+	},
 	"panel_create_account": {
 		"message": "Konto erstellen"
 	},
@@ -673,7 +677,7 @@
 		"message": " auf dieser Seite."
 	},
 	"panel_tracker_total_tooltip": {
-		"message": "Gesamtzahl der gefundenen Tracker, blockierten Anzeigen und anonymisierten Datenpunkte."
+		"message": "Gesamtzahl der gefundenen Tracker und geänderten Anforderungen."
 	},
 	"panel_signin_success": {
 		"message": "Sie sind jetzt angemeldet als "
@@ -717,6 +721,9 @@
 	"panel_tracker_trust_tooltip": {
 		"message": "Auf dieser Website vertrauen"
 	},
+	"panel_tracker_scrub_tooltip": {
+		"message": "Von dieser Website entfernt"
+	},
 	"panel_detail_menu_list_title": {
 		"message": "Listenansicht"
 	},
@@ -749,9 +756,6 @@
 	},
 	"panel_detail_performance_text": {
 		"message": "Funktion demnächst verfügbar."
-	},
-	"panel_detail_rewards_title": {
-		"message": "Ghostery Rewards"
 	},
 	"panel_detail_rewards_coming_soon": {
 		"message": "Funktion demnächst verfügbar."
@@ -1564,7 +1568,7 @@
 		"message": "Holen Sie sich Ghostery Plus"
 	},
 	"hub_setup_feature_supporter_description": {
-		"message": "Unterstützen Sie Ghostery und schalten Sie spezielle Vergünstigungen frei."
+		"message": "Unterstützen Sie Ghostery und schalten Sie spezielle Features frei."
 	},
 	"hub_setup_feature_supporter_button": {
 		"message": "Support"
@@ -1753,7 +1757,7 @@
 		"message": "Auf Ghostery Plus hochstufen"
 	},
 	"hub_supporter_header_description": {
-		"message": "Zeigen Sie Ihre Unterstützung und schalten Sie spezielle Vergünstigungen frei!"
+		"message": "Zeigen Sie Ihre Unterstützung und schalten Sie spezielle Features frei!"
 	},
 	"hub_supporter_button_text": {
 		"message": "Holen Sie sich Ghostery Plus"
@@ -1797,7 +1801,7 @@
 		"message": "Lösen Sie Probleme schneller mit unserem Priority Helpdesk-Service – und weitere Vorteile"
 	},
 	"hub_supporter_manifesto": {
-		"message": "Wir sind bestrebt, unseren Nutzern die besten Datenschutz-Services kostenlos zur Verfügung zu stellen. Obwohl wir keine Gebühren für unser Datenschutzpaket erheben, können Sie uns durch ein kleines monatliches Abonnement unterstützen. Helfen Sie uns bei unserer Mission, indem Sie auf Ghostery Plus hochstufen – und ganz nebenbei coole Vergünstigungen freischalten!"
+		"message": "Wir sind bestrebt, unseren Nutzern die besten Datenschutz-Services kostenlos zur Verfügung zu stellen. Obwohl wir keine Gebühren für unser Datenschutzpaket erheben, können Sie uns durch ein kleines monatliches Abonnement unterstützen. Helfen Sie uns bei unserer Mission, indem Sie auf Ghostery Plus hochstufen – und ganz nebenbei coole Features freischalten!"
 	},
 	"hub_supporter_feature_theme_title": {
 		"message": "Neue Themes"
@@ -2060,7 +2064,7 @@
 		"message": "Historische Statistiken"
 	},
 	"subscribe_pitch": {
-		"message": "Auch wenn Ghostery kostenlos ist, können Sie uns durch ein kleines Abonnement zum Preis von $ 2 pro Monat unterstützen und erhalten als Gegenleistung coole Vergünstigungen, wie z. B. Farbthemes, Vorzugs-Support und mehr. Werden Sie Teil unserer Mission und melden Sie sich an!"
+		"message": "Auch wenn Ghostery kostenlos ist, können Sie uns durch ein kleines Abonnement zum Preis von € 2 pro Monat unterstützen und erhalten als Gegenleistung coole Features, wie z. B. Farbthemes, Vorzugs-Support und mehr. Werden Sie Teil unserer Mission und melden Sie sich an!"
 	},
 	"subscribe_pitch_learn_more": {
 		"message": "Weitere Informationen"
@@ -2230,5 +2234,34 @@
 	},
 	"cliqz_feature_status_off": {
 		"message": "Aus"
+	},
+	"create_account_form_legal_consent_checkbox_label": {
+		"message": "Ich akzeptiere die $LINK_TERMS_START$Geschäftsbedingungen$LINK_END$ sowie die $LINK_LICENSE_START$Lizenzvereinbarung$LINK_END$ und erkläre mich mit den Praktiken,  die in der $LINK_PRIVACY_START$Datenschutzrichtlinie$LINK_END$ beschrieben sind, einverstanden.",
+		"placeholders": {
+			"link_end": {
+				"content": "</a>"
+			},
+			"link_license_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.mozilla.org/en-US/MPL/2.0/\" rel=\"noopener noreferrer\">"
+			},
+			"link_privacy_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" rel=\"noopener noreferrer\">"
+			},
+			"link_terms_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/\" rel=\"noopener noreferrer\">"
+			}
+		}
+	},
+	"ghostery_rewards": {
+		"message": "Ghostery Rewards"
+	},
+	"enhanced_anti_tracking": {
+		"message": "Verbessertes Anti-Tracking"
+	},
+	"unknown": {
+		"message": "Unbekannt"
+	},
+	"unknown_description": {
+		"message": "Von Anti-Tracking entfernte unbekannte Tracker"
 	}
 }

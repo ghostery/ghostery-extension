@@ -525,6 +525,10 @@
 		"description": "as in '5 (trackers) BLOCKED'",
 		"message": "Заблокированные"
 	},
+	"blocking_category_whitelisted": {
+		"description": "as in '5 (trackers) WHITELISTED'",
+		"message": "В белом списке"
+	},
 	"panel_create_account": {
 		"message": "Создать учетную запись"
 	},
@@ -673,7 +677,7 @@
 		"message": " на этой странице."
 	},
 	"panel_tracker_total_tooltip": {
-		"message": "Общее количество обнаруженных трекеров, заблокированной рекламы и анонимизированных точек данных."
+		"message": "Общее количество найденных трекеров + измененных запросов."
 	},
 	"panel_signin_success": {
 		"message": "Вы вошли в качестве "
@@ -717,6 +721,9 @@
 	"panel_tracker_trust_tooltip": {
 		"message": "Разрешить на этом сайте"
 	},
+	"panel_tracker_scrub_tooltip": {
+		"message": "Очистить на этом сайте"
+	},
 	"panel_detail_menu_list_title": {
 		"message": "Список трекеров"
 	},
@@ -749,9 +756,6 @@
 	},
 	"panel_detail_performance_text": {
 		"message": "Функция скоро появится."
-	},
-	"panel_detail_rewards_title": {
-		"message": "Ghostery Rewards"
 	},
 	"panel_detail_rewards_coming_soon": {
 		"message": "Функция скоро появится."
@@ -2230,5 +2234,34 @@
 	},
 	"cliqz_feature_status_off": {
 		"message": "Выкл"
+	},
+	"create_account_form_legal_consent_checkbox_label": {
+		"message": "Я принимаю $LINK_TERMS_START$Условия и положения$LINK_END$, $LINK_LICENSE_START$Публичное лицензионное соглашение$LINK_END$, а также даю согласие на использование данных, описанное в $LINK_PRIVACY_START$Политике конфиденциальности$LINK_END$.",
+		"placeholders": {
+			"link_end": {
+				"content": "</a>"
+			},
+			"link_license_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.mozilla.org/en-US/MPL/2.0/\" rel=\"noopener noreferrer\">"
+			},
+			"link_privacy_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" rel=\"noopener noreferrer\">"
+			},
+			"link_terms_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/\" rel=\"noopener noreferrer\">"
+			}
+		}
+	},
+	"ghostery_rewards": {
+		"message": "Ghostery Rewards"
+	},
+	"enhanced_anti_tracking": {
+		"message": "Супер анти-трекинг"
+	},
+	"unknown": {
+		"message": "Неизвестный"
+	},
+	"unknown_description": {
+		"message": "Неизвестные трекеры, очищенные анти-трекингом"
 	}
 }

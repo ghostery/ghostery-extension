@@ -1,6 +1,6 @@
 {
 	"account_creation_privacy_statement": {
-		"message": "Az ÁLtalános $LINK_TERMS_START$Szerződési Feltételeink$LINK_TERMS_END$ és a $LINK_UA_START$Licencegyezményünk$LINK_UA_END$ érvényesek és hatályosak. Az Adatvédelmi Nyilatkozatunkat $LINK_PS_START$itt$LINK_PS_END$ találja meg.",
+		"message": "Az Általános $LINK_TERMS_START$Szerződési Feltételeink$LINK_TERMS_END$ és a $LINK_UA_START$Licencegyezményünk$LINK_UA_END$ érvényesek és hatályosak. Az Adatvédelmi Nyilatkozatunkat $LINK_PS_START$itt$LINK_PS_END$ találja meg.",
 		"placeholders": {
 			"link_ps_end": {
 				"content": "</a>"
@@ -525,6 +525,10 @@
 		"description": "as in '5 (trackers) BLOCKED'",
 		"message": "Blokkolva"
 	},
+	"blocking_category_whitelisted": {
+		"description": "as in '5 (trackers) WHITELISTED'",
+		"message": "Engedélyezett"
+	},
 	"panel_create_account": {
 		"message": "Fiók létrehozása"
 	},
@@ -673,7 +677,7 @@
 		"message": " ezen az oldalon."
 	},
 	"panel_tracker_total_tooltip": {
-		"message": "A talált trackerek, blokkolt hirdetések és névtelenített adatpontok összesített száma."
+		"message": "Észlelt követők + módosított kérelmek száma összesen."
 	},
 	"panel_signin_success": {
 		"message": "Ön jelenleg úgy jelentkezett be mint: "
@@ -717,6 +721,9 @@
 	"panel_tracker_trust_tooltip": {
 		"message": "Megbízható ezen az oldalon"
 	},
+	"panel_tracker_scrub_tooltip": {
+		"message": "Javítás ezen a webhelyen"
+	},
 	"panel_detail_menu_list_title": {
 		"message": "Lista nézet"
 	},
@@ -749,9 +756,6 @@
 	},
 	"panel_detail_performance_text": {
 		"message": "Ez a funkció hamarosan érkezik."
-	},
-	"panel_detail_rewards_title": {
-		"message": "Ghostery Rewards"
 	},
 	"panel_detail_rewards_coming_soon": {
 		"message": "Ez a funkció hamarosan érkezik."
@@ -2230,5 +2234,34 @@
 	},
 	"cliqz_feature_status_off": {
 		"message": "Ki"
+	},
+	"create_account_form_legal_consent_checkbox_label": {
+		"message": "Elfogadom a $LINK_TERMS_START$Feltételeket$LINK_END$, a $LINK_LICENSE_START$Nyilvános licencmegállapodást$LINK_END$ és az  $LINK_PRIVACY_START$Adatvédelmi szabályzatban$LINK_END$ ismertetett adatkezelési gyakorlatot.",
+		"placeholders": {
+			"link_end": {
+				"content": "</a>"
+			},
+			"link_license_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.mozilla.org/en-US/MPL/2.0/\" rel=\"noopener noreferrer\">"
+			},
+			"link_privacy_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" rel=\"noopener noreferrer\">"
+			},
+			"link_terms_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/\" rel=\"noopener noreferrer\">"
+			}
+		}
+	},
+	"ghostery_rewards": {
+		"message": "Ghostery Rewards"
+	},
+	"enhanced_anti_tracking": {
+		"message": "Fejlesztett Anti-Tracking"
+	},
+	"unknown": {
+		"message": "Ismeretlen"
+	},
+	"unknown_description": {
+		"message": "Ismeretlen követőket távolított el a követőblokkoló"
 	}
 }
