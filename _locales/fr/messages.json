@@ -722,7 +722,7 @@
 		"message": "Se fier aux mouchards sur ce site"
 	},
 	"panel_tracker_scrub_tooltip": {
-		"message": "Nettoyer ce site"
+		"message": "Nettoyer sur ce site"
 	},
 	"panel_detail_menu_list_title": {
 		"message": "Affichage liste"
@@ -1232,7 +1232,7 @@
 		"message": "Actualisez pour voir les modifications."
 	},
 	"alert_site_trusted": {
-		"message": "Site mis sur la liste blanche Les mouchards seront permis et l'anti-pistage désactivé sur ce site."
+		"message": "Site mis sur la liste blanche. Les mouchards seront permis et l'anti-pistage désactivé sur ce site."
 	},
 	"alert_site_trusted_off": {
 		"message": "Site retiré de la liste blanche."
