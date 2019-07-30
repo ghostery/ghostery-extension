@@ -2253,7 +2253,7 @@
 		}
 	},
 	"ghostery_rewards": {
-		"message": "награды ghostery "
+		"message": "Ghostery Rewards"
 	},
 	"enhanced_anti_tracking": {
 		"message": "Супер анти-трекинг"
@@ -2262,6 +2262,6 @@
 		"message": "Неизвестный"
 	},
 	"unknown_description": {
-		"message": "Неизвестные трекеры, очищенные Anti-Tracking"
+		"message": "Неизвестные трекеры, очищенные анти-трекингом"
 	}
 }
