@@ -1279,11 +1279,8 @@ function initialiseWebRequestPipeline() {
  * @return {boolean}
  */
 function isWhitelisted(state) {
-	const hostUrl = utils.processUrl(state.tabUrl).host;
-	const trackerUrl = utils.processUrl(state.url).host;
-
 	// state.ghosteryWhitelisted is sometimes undefined so force to bool
-	return Boolean(globals.SESSION.paused_blocking || events.policy.getSitePolicy(hostUrl, trackerUrl) === 2 || state.ghosteryWhitelisted);
+	return Boolean(globals.SESSION.paused_blocking || events.policy.getSitePolicy(state.tabUrl, state.url) === 2 || state.ghosteryWhitelisted);
 }
 
 /**

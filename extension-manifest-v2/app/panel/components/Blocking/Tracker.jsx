@@ -316,7 +316,7 @@ class Tracker extends React.Component {
 		}
 
 		const trackerNameClasses = ClassNames('trk-name', {
-			'is-whitelisted': tracker.whitelisted,
+			'is-whitelisted': tracker.whitelisted && !tracker.siteRestricted,
 		});
 
 		return (
@@ -344,6 +344,7 @@ class Tracker extends React.Component {
 						) : renderUnknownTrackerButtons(
 							this.handleAntiTrackingWhitelist,
 							tracker.whitelisted,
+							tracker.siteRestricted,
 						)}
 					</div>
 				</div>
