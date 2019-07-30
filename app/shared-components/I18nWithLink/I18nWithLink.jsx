@@ -38,9 +38,10 @@ class I18nWithLink extends Component {
 	}
 
 	render() {
-		const { value } = this.props;
+		const { value, cssClasses } = this.props;
+
 		return (
-			<span ref={this.containerRef} dangerouslySetInnerHTML={{ __html: t(value) }} />
+			<span className={cssClasses} ref={this.containerRef} dangerouslySetInnerHTML={{ __html: t(value) }} />
 		);
 	}
 }
@@ -48,5 +49,10 @@ class I18nWithLink extends Component {
 export default I18nWithLink;
 
 I18nWithLink.propTypes = {
+	cssClasses: PropTypes.string,
 	value: PropTypes.string.isRequired,
+};
+
+I18nWithLink.defaultProps = {
+	cssClasses: '',
 };
