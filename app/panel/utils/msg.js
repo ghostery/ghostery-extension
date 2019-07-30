@@ -141,6 +141,24 @@ export function sendRewardMessage(name, message, callback = defaultCallback()) {
 }
 
 /**
+ * Handle clicks on links with a fixed destination
+ */
+export function handleClickOnNewTabLink(e) {
+	e.preventDefault();
+
+	let linkTag = e.target;
+	while (!linkTag.href) {
+		linkTag = linkTag.parentElement;
+	}
+	const { href } = linkTag;
+
+	sendMessage('openNewTab', {
+		url: href,
+		become_active: true,
+	});
+}
+
+/**
  * Send a message to open a Subscription or Subscribe tab.
  * Which one is determined in background based on the current user state.
  * This should be used for messages that don't require a callback.
@@ -157,7 +175,8 @@ export function openSubscriptionPage() {
  * This should be used for messages that don't require a callback.
  * @memberOf PanelUtils
  */
-export function openSupportPage() {
+export function openSupportPage(e) {
+	e.preventDefault();
 	sendMessage('account.openSupportPage');
 	window.close();
 }
