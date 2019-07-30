@@ -230,7 +230,7 @@ class Category extends React.Component {
 									</span>
 								</div>
 								{((!isUnknown && !!trackersBlockedCount)
-								|| (isUnknown && !!category.whitelistedTotal)) && (
+								|| (isUnknown && !!category.whitelistedTotal && sitePolicy !== 1)) && (
 									<div className={`blocked-count${isUnknown ? ' ghosty-blue' : ''}`}>
 										<span className="count">
 											{isUnknown ? `${category.whitelistedTotal} ` : `${trackersBlockedCount} `}

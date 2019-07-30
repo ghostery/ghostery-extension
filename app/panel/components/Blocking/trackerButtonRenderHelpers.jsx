@@ -53,8 +53,13 @@ export const renderKnownTrackerButtons = (
 	</div>
 );
 
-export const renderUnknownTrackerButtons = (handleAntiTrackingWhitelist, whitelisted) => {
-	const svgContainerClasses = ClassNames('unknown-svg-container', { whitelisted });
+export const renderUnknownTrackerButtons = (
+	handleAntiTrackingWhitelist, whitelisted, siteRestricted
+) => {
+	const svgContainerClasses = ClassNames('unknown-svg-container', {
+		whitelisted: whitelisted && !siteRestricted,
+		siteRestricted,
+	});
 
 	return (
 		<div className={svgContainerClasses}>

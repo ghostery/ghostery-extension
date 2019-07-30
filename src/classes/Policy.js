@@ -18,6 +18,7 @@
 import c2pDb from './Click2PlayDb';
 import conf from './Conf';
 import globals from './Globals';
+import { processUrl } from '../utils/utils';
 
 /**
  * Enum for reasons returned by shouldBlock
@@ -62,8 +63,9 @@ class Policy {
 	 * @return {string|boolean} 	corresponding whitelist entry or false, if none
 	 */
 	checkSiteWhitelist(url) {
-		if (url) {
-			const replacedUrl = url.replace(/^www\./, '');
+		const hostUrl = processUrl(url).host;
+		if (hostUrl) {
+			const replacedUrl = hostUrl.replace(/^www\./, '');
 			const sites = conf.site_whitelist || [];
 			const num_sites = sites.length;
 
@@ -86,11 +88,13 @@ class Policy {
 	 */
 	checkAntiTrackingWhitelist(hostUrl, trackerUrl) {
 		let isWhitelisted = false;
+		const processedHostUrl = processUrl(hostUrl).host;
+		const processedTrackerUrl = processUrl(trackerUrl).host;
 		const antiTrackingWhitelist = conf.anti_tracking_whitelist;
 
-		if (antiTrackingWhitelist[trackerUrl]) {
-			antiTrackingWhitelist[trackerUrl].hosts.some((host) => {
-				if (host === hostUrl) {
+		if (antiTrackingWhitelist[processedTrackerUrl]) {
+			antiTrackingWhitelist[processedTrackerUrl].hosts.some((host) => {
+				if (host === processedHostUrl) {
 					isWhitelisted = true;
 					return true;
 				}
@@ -107,8 +111,9 @@ class Policy {
 	 * @return {string|boolean} 	corresponding blacklist entry or false, if none
 	 */
 	blacklisted(url) {
-		if (url) {
-			const replacedUrl = url.replace(/^www\./, '');
+		const hostUrl = processUrl(url).host;
+		if (hostUrl) {
+			const replacedUrl = hostUrl.replace(/^www\./, '');
 			const sites = conf.site_blacklist || [];
 			const num_sites = sites.length;
 

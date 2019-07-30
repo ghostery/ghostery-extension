@@ -184,6 +184,10 @@
 				visibility: visible;
 			}
 		}
+
+		&.siteRestricted {
+			pointer-events: none;
+		}
 	}
 }
 

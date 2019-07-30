@@ -34,6 +34,7 @@ class Categories extends React.Component {
 			expandAll,
 			antiTracking,
 			enable_anti_tracking,
+			sitePolicy,
 		} = this.props;
 		const globalBlocking = !!this.props.globalBlocking;
 		const filtered = !!this.props.filtered;
@@ -55,6 +56,7 @@ class Categories extends React.Component {
 							name: unknownTracker.name,
 							domains: unknownTracker.domains,
 							whitelisted: unknownTracker.whitelisted,
+							siteRestricted: sitePolicy === 1,
 							blocked: false,
 							catId: 'anti_tracking_unknown',
 							description: '',
