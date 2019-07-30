@@ -525,6 +525,10 @@
 		"description": "as in '5 (trackers) BLOCKED'",
 		"message": "Bloqueado"
 	},
+	"blocking_category_whitelisted": {
+		"description": "as in '5 (trackers) WHITELISTED'",
+		"message": "En la lista blanca"
+	},
 	"panel_create_account": {
 		"message": "Crear una cuenta"
 	},
@@ -673,7 +677,7 @@
 		"message": " en esta página."
 	},
 	"panel_tracker_total_tooltip": {
-		"message": "Recuento total de rastreadores encontrados, anuncios bloqueados y puntos de datos anónimos."
+		"message": "Recuento total de rastreadores encontrados y solicitudes modificadas."
 	},
 	"panel_signin_success": {
 		"message": "Ya has iniciado sesión como "
@@ -717,6 +721,9 @@
 	"panel_tracker_trust_tooltip": {
 		"message": "Confiar en este sitio"
 	},
+	"panel_tracker_scrub_tooltip": {
+		"message": "Depurar este sitio"
+	},
 	"panel_detail_menu_list_title": {
 		"message": "Vista de lista"
 	},
@@ -749,9 +756,6 @@
 	},
 	"panel_detail_performance_text": {
 		"message": "Función disponible próximamente."
-	},
-	"panel_detail_rewards_title": {
-		"message": "Ghostery Rewards"
 	},
 	"panel_detail_rewards_coming_soon": {
 		"message": "Función disponible próximamente."
@@ -2230,5 +2234,34 @@
 	},
 	"cliqz_feature_status_off": {
 		"message": "No"
+	},
+	"create_account_form_legal_consent_checkbox_label": {
+		"message": "Acepto los $LINK_TERMS_START$Términos y condiciones$LINK_END$ y el $LINK_LICENSE_START$Acuerdo de licencia$LINK_END$ y doy mi consentimiento a las prácticas de datos indicadas en la $LINK_PRIVACY_START$Política de privacidad$LINK_END$.",
+		"placeholders": {
+			"link_end": {
+				"content": "</a>"
+			},
+			"link_license_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.mozilla.org/en-US/MPL/2.0/\" rel=\"noopener noreferrer\">"
+			},
+			"link_privacy_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" rel=\"noopener noreferrer\">"
+			},
+			"link_terms_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/\" rel=\"noopener noreferrer\">"
+			}
+		}
+	},
+	"ghostery_rewards": {
+		"message": "ghostery rewards"
+	},
+	"enhanced_anti_tracking": {
+		"message": "Antirrastreadores mejorado"
+	},
+	"unknown": {
+		"message": "Desconocido"
+	},
+	"unknown_description": {
+		"message": "Los antirrastreadores depuraron los rastreadores desconocidos"
 	}
 }
