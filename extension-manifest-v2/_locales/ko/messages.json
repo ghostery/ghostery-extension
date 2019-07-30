@@ -525,6 +525,10 @@
 		"description": "as in '5 (trackers) BLOCKED'",
 		"message": "차단됨 "
 	},
+	"blocking_category_whitelisted": {
+		"description": "as in '5 (trackers) WHITELISTED'",
+		"message": "허용 목록에 추가됨"
+	},
 	"panel_create_account": {
 		"message": "계정 만들기 "
 	},
@@ -673,7 +677,7 @@
 		"message": " 현재 페이지."
 	},
 	"panel_tracker_total_tooltip": {
-		"message": "확인된 트래커, 차단된 광고와 익명의 데이터 포인트의 총 개수"
+		"message": "확인된 트래커 + 변경된 요청의 총 개수"
 	},
 	"panel_signin_success": {
 		"message": "현재 다음 ID로 로그인되어 있습니다  "
@@ -717,6 +721,9 @@
 	"panel_tracker_trust_tooltip": {
 		"message": "이 사이트에서 신뢰 "
 	},
+	"panel_tracker_scrub_tooltip": {
+		"message": "이 사이트에서 제거"
+	},
 	"panel_detail_menu_list_title": {
 		"message": "목록 보기 "
 	},
@@ -749,9 +756,6 @@
 	},
 	"panel_detail_performance_text": {
 		"message": "기능이 곧 제공됩니다."
-	},
-	"panel_detail_rewards_title": {
-		"message": "Ghostery Rewards"
 	},
 	"panel_detail_rewards_coming_soon": {
 		"message": "기능이 곧 제공됩니다."
@@ -2230,5 +2234,34 @@
 	},
 	"cliqz_feature_status_off": {
 		"message": "끄기 "
+	},
+	"create_account_form_legal_consent_checkbox_label": {
+		"message": "본인은 $LINK_TERMS_START$약관$LINK_END$,  $LINK_LICENSE_START$공개 사용권 계약$LINK_END$에 동의하며 $LINK_PRIVACY_START$개인정보 보호정책$LINK_END$에 제시된 데이터 처리 방식에 동의합니다.",
+		"placeholders": {
+			"link_end": {
+				"content": "</a>"
+			},
+			"link_license_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.mozilla.org/en-US/MPL/2.0/\" rel=\"noopener noreferrer\">"
+			},
+			"link_privacy_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" rel=\"noopener noreferrer\">"
+			},
+			"link_terms_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/\" rel=\"noopener noreferrer\">"
+			}
+		}
+	},
+	"ghostery_rewards": {
+		"message": "Ghostery Rewards"
+	},
+	"enhanced_anti_tracking": {
+		"message": "확장 추적 방지 "
+	},
+	"unknown": {
+		"message": "알 수 없음 "
+	},
+	"unknown_description": {
+		"message": "추적 방지에서 제거한 알 수 없는 트래커"
 	}
 }
