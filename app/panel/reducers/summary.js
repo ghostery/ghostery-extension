@@ -39,11 +39,12 @@ const initialState = {
 	antiTracking: {
 		totalUnsafeCount: 0, // The amount of data points scrubbed by Anti-Tracking
 		totalUnknownCount: 0, // The amount of data points scrubbed by Anti-Tracking for Trackers not in the Ghostery DB
-		unknownTrackerCount: 0, // The amount of unknown trackers scrubbed by Anti-Tracking (which are each associated with 1 or more data points)
+		trackerCount: 0, // The amount of trackers scrubbed by Anti-Tracking (which are each associated with 1 or more data points)
+		unknownTrackerCount: 0, // The amount of unknown trackers scrubbed by Anti-Tracking
 	},
 	adBlock: {
 		totalCount: 0, // The amount of ads blocked by Ad Blocking
-		unknownTrackerCount: 0, // The amount of unknown trackers blocked by Ad Blocking (which are each associated with 1 or more ads)
+		trackerCount: 0, // The amount of trackers blocked by Ad Blocking (which are each associated with 1 or more ads)
 	}
 };
 /**
@@ -56,15 +57,9 @@ const initialState = {
  */
 export default (state = initialState, action) => {
 	switch (action.type) {
-		case UPDATE_SUMMARY_DATA: {
-			return Object.assign({}, state, action.data);
-		}
+		case UPDATE_SUMMARY_DATA:
 		case UPDATE_CLIQZ_MODULE_DATA: {
-			const { totalUnsafeCount, totalUnknownCount, unknownTrackerCount } = action.data.antiTracking;
-			return Object.assign({}, state, {
-				adBlock: action.data.adblock,
-				antiTracking: { totalUnsafeCount, totalUnknownCount, unknownTrackerCount },
-			});
+			return Object.assign({}, state, action.data);
 		}
 		case UPDATE_GHOSTERY_PAUSED: {
 			return Object.assign({}, state, { paused_blocking: action.data.ghosteryPaused, paused_blocking_timeout: action.data.time });

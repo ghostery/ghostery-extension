@@ -23,7 +23,8 @@ import {
 	UPDATE_TRACKER_TRUST_RESTRICT,
 	UPDATE_ANTI_TRACKING_WHITELIST,
 	TOGGLE_EXPAND_ALL,
-	UPDATE_CLIQZ_MODULE_DATA
+	UPDATE_CLIQZ_MODULE_DATA,
+	UPDATE_SUMMARY_DATA
 } from '../constants/constants';
 import {
 	updateTrackerBlocked, updateCategoryBlocked, updateBlockAllTrackers, toggleExpandAll
@@ -43,7 +44,8 @@ const initialState = {
 	antiTracking: {
 		totalUnsafeCount: 0, // The amount of data points scrubbed by Anti-Tracking
 		totalUnknownCount: 0, // The amount of data points scrubbed by Anti-Tracking for Trackers not in the Ghostery DB
-		unknownTrackerCount: 0, // The amount of unknown trackers scrubbed by Anti-Tracking (which are each associated with 1 or more data points)
+		trackerCount: 0, // The amount of trackers scrubbed by Anti-Tracking (which are each associated with 1 or more data points)
+		unknownTrackerCount: 0, // The amount of unknown trackers scrubbed by Anti-Tracking
 		unknownTrackers: [], // An array of objects associated with each unknown Tracker (includes both blocked and whitelisted trackers for this site)
 		whitelistedUrls: {}, // An object of whitelisted url domains pointing to an object with the associated tracker name and an array of whitelisted host domains
 		hide: false, // Whether or not to display the Anti-Tracking blocking category
@@ -100,11 +102,15 @@ export default (state = initialState, action) => {
 			const antiTracking = _updateAntiTrackingWhitelist(state, action);
 			return Object.assign({}, state, { antiTracking });
 		}
-		case UPDATE_CLIQZ_MODULE_DATA: {
-			const { hide } = state.antiTracking;
-			return Object.assign({}, state, {
-				antiTracking: Object.assign({}, action.data.antiTracking, { hide })
-			});
+		case UPDATE_CLIQZ_MODULE_DATA:
+		case UPDATE_SUMMARY_DATA: {
+			if (action.data.antiTracking) {
+				const { hide } = state.antiTracking;
+				return Object.assign({}, state, {
+					antiTracking: Object.assign({}, action.data.antiTracking, { hide })
+				});
+			}
+			return state;
 		}
 
 		default: return state;

@@ -29,6 +29,7 @@ const { adblocker, antitracking } = cliqz.modules;
 export function getCliqzAntiTrackingData(tabId, tabHostUrl) {
 	let totalUnsafeCount = 0;
 	let totalUnknownCount = 0;
+	let trackerCount = 0;
 	let unknownTrackerCount = 0;
 	const unknownTrackers = [];
 	const whitelistedUrls = conf.anti_tracking_whitelist;
@@ -48,7 +49,10 @@ export function getCliqzAntiTrackingData(tabId, tabHostUrl) {
 	const othersValues = Object.values(others);
 
 	for (const bug of bugsValues) {
-		totalUnsafeCount += bug.cookies + bug.fingerprints;
+		if (bug.cookies || bug.fingerprints) {
+			totalUnsafeCount += bug.cookies + bug.fingerprints;
+			trackerCount++;
+		}
 	}
 
 	for (const other of othersValues) {
@@ -67,7 +71,8 @@ export function getCliqzAntiTrackingData(tabId, tabHostUrl) {
 		if (scrubbed) {
 			totalUnsafeCount += other.cookies + other.fingerprints;
 			totalUnknownCount += other.cookies + other.fingerprints;
-			unknownTrackerCount += 1;
+			trackerCount++;
+			unknownTrackerCount++;
 		}
 
 		if (scrubbed || whitelisted) {
@@ -84,6 +89,7 @@ export function getCliqzAntiTrackingData(tabId, tabHostUrl) {
 	return {
 		totalUnsafeCount,
 		totalUnknownCount,
+		trackerCount,
 		unknownTrackerCount,
 		unknownTrackers,
 		whitelistedUrls,
@@ -100,7 +106,7 @@ export function getCliqzAdBlockingCount(tabId) {
 	if (!conf.enable_ad_block || !adblocker.background) {
 		return {
 			totalCount: 0,
-			unknownTrackerCount: 0,
+			trackerCount: 0,
 		};
 	}
 
@@ -111,7 +117,7 @@ export function getCliqzAdBlockingCount(tabId) {
 
 	return {
 		totalCount: adBlockInfo ? adBlockInfo.totalCount : 0,
-		unknownTrackerCount: bugCount + otherCount,
+		trackerCount: bugCount + otherCount,
 	};
 }
 
@@ -141,9 +147,9 @@ export function getCliqzGhosteryBugs(tabId) {
  * @param  {Function} 	callback
  */
 export function sendCliqzModuleCounts(tabId, tabHostUrl, callback) {
-	const modules = { adblock: {}, antiTracking: {} };
+	const modules = { adBlock: {}, antiTracking: {} };
 
-	modules.adblock = getCliqzAdBlockingCount(tabId);
+	modules.adBlock = getCliqzAdBlockingCount(tabId);
 	modules.antiTracking = getCliqzAntiTrackingData(tabId, tabHostUrl);
 	callback(modules);
 }

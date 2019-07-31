@@ -298,7 +298,7 @@ class Summary extends React.Component {
 
 		const { body } = msg;
 
-		if (body.adblock || body.antitracking) {
+		if (body.adBlock || body.antiTracking) {
 			this.props.actions.updateCliqzModuleData(body);
 		} else {
 			this.props.actions.updateSummaryData(body);
@@ -327,7 +327,7 @@ class Summary extends React.Component {
 			enable_ad_block,
 		} = this.props;
 
-		return enable_ad_block && adBlock && adBlock.unknownTrackerCount || 0;
+		return enable_ad_block && adBlock && adBlock.trackerCount || 0;
 	}
 
 	_antiTrackUnsafe() {
@@ -336,7 +336,7 @@ class Summary extends React.Component {
 			enable_anti_tracking,
 		} = this.props;
 
-		return enable_anti_tracking && antiTracking && antiTracking.unknownTrackerCount || 0;
+		return enable_anti_tracking && antiTracking && antiTracking.trackerCount || 0;
 	}
 
 	_requestsModifiedCount() {
