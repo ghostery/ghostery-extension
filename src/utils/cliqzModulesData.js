@@ -99,13 +99,25 @@ export function getCliqzAntiTrackingData(tabId, tabHostUrl) {
 export function getCliqzAdBlockingCount(tabId) {
 	if (!conf.enable_ad_block || !adblocker.background) {
 		return {
-			totalCount: 0
+			totalCount: 0,
+			trackerCount: 0,
 		};
 	}
 
 	const adBlockInfo = adblocker.background.actions.getAdBlockInfoForTab(tabId);
+
+	if (!adBlockInfo) {
+		return {
+			totalCount: 0,
+			trackerCount: 0,
+		};
+	}
+
+	console.log('~~~sawgferw~~~', adBlockInfo)
+
 	return {
-		totalCount: adBlockInfo.totalCount || 0,
+		totalCount: adBlockInfo.totalCount,
+		trackerCount: Object.keys(adBlockInfo.advertisersList).length,
 	};
 }
 

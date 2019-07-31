@@ -340,9 +340,9 @@ class Summary extends React.Component {
 	}
 
 	_totalTrackersFound() {
-		const { trackerCounts } = this.props;
+		const { trackerCounts, antiTracking } = this.props;
 
-		return (trackerCounts.allowed + trackerCounts.blocked + this._requestsModifiedCount()) || 0;
+		return (trackerCounts.allowed + trackerCounts.blocked + antiTracking.unknownTrackerCount) || 0;
 	}
 
 	_requestsModifiedCount() {
