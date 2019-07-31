@@ -39,11 +39,11 @@ const initialState = {
 	antiTracking: {
 		totalUnsafeCount: 0, // The amount of data points scrubbed by Anti-Tracking
 		totalUnknownCount: 0, // The amount of data points scrubbed by Anti-Tracking for Trackers not in the Ghostery DB
-		unknownTrackerCount: 0, // The amount of trackers blocked by Anti-Tracking
+		unknownTrackerCount: 0, // The amount of unknown trackers scrubbed by Anti-Tracking (which are each associated with 1 or more data points)
 	},
 	adBlock: {
 		totalCount: 0, // The amount of ads blocked by Ad Blocking
-		trackerCount: 0, // The amount of trackers blocked by Ad Blocking (which are each associated with 1 or more ads)
+		unknownTrackerCount: 0, // The amount of unknown trackers blocked by Ad Blocking (which are each associated with 1 or more ads)
 	}
 };
 /**

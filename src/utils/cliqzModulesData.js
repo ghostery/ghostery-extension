@@ -100,24 +100,16 @@ export function getCliqzAdBlockingCount(tabId) {
 	if (!conf.enable_ad_block || !adblocker.background) {
 		return {
 			totalCount: 0,
-			trackerCount: 0,
+			unknownTrackerCount: 0,
 		};
 	}
 
 	const adBlockInfo = adblocker.background.actions.getAdBlockInfoForTab(tabId);
-
-	if (!adBlockInfo) {
-		return {
-			totalCount: 0,
-			trackerCount: 0,
-		};
-	}
-
-	console.log('~~~sawgferw~~~', adBlockInfo)
+	const { others } = adblocker.background.actions.getGhosteryStats(tabId);
 
 	return {
-		totalCount: adBlockInfo.totalCount,
-		trackerCount: Object.keys(adBlockInfo.advertisersList).length,
+		totalCount: adBlockInfo ? adBlockInfo.totalCount : 0,
+		unknownTrackerCount: others ? Object.keys(others).length : 0,
 	};
 }
 
@@ -147,7 +139,7 @@ export function getCliqzGhosteryBugs(tabId) {
  * @param  {Function} 	callback
  */
 export function sendCliqzModuleCounts(tabId, tabHostUrl, callback) {
-	const modules = { adblock: {}, antitracking: {} };
+	const modules = { adblock: {}, antiTracking: {} };
 
 	modules.adblock = getCliqzAdBlockingCount(tabId);
 	modules.antiTracking = getCliqzAntiTrackingData(tabId, tabHostUrl);

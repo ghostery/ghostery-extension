@@ -43,7 +43,7 @@ const initialState = {
 	antiTracking: {
 		totalUnsafeCount: 0, // The amount of data points scrubbed by Anti-Tracking
 		totalUnknownCount: 0, // The amount of data points scrubbed by Anti-Tracking for Trackers not in the Ghostery DB
-		unknownTrackerCount: 0, // The amount of trackers blocked by Anti-Tracking
+		unknownTrackerCount: 0, // The amount of unknown trackers scrubbed by Anti-Tracking (which are each associated with 1 or more data points)
 		unknownTrackers: [], // An array of objects associated with each unknown Tracker (includes both blocked and whitelisted trackers for this site)
 		whitelistedUrls: {}, // An object of whitelisted url domains pointing to an object with the associated tracker name and an array of whitelisted host domains
 		hide: false, // Whether or not to display the Anti-Tracking blocking category
