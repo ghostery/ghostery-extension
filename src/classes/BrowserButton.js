@@ -145,8 +145,8 @@ class BrowserButton {
 		}
 
 		const { appsCount, appsAlertCount } = this._getTrackerCount(tabId);
-		const adBlockingCount = getCliqzAdBlockingCount(tabId).totalCount;
-		const antiTrackingCount = getCliqzAntiTrackingData(tabId).totalUnsafeCount;
+		const adBlockingCount = getCliqzAdBlockingCount(tabId).unknownTrackerCount;
+		const antiTrackingCount = getCliqzAntiTrackingData(tabId).unknownTrackerCount;
 
 		alert = (appsAlertCount > 0);
 		trackerCount = (appsCount + antiTrackingCount + adBlockingCount).toString();

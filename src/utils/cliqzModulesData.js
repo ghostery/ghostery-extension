@@ -105,11 +105,13 @@ export function getCliqzAdBlockingCount(tabId) {
 	}
 
 	const adBlockInfo = adblocker.background.actions.getAdBlockInfoForTab(tabId);
-	const { others } = adblocker.background.actions.getGhosteryStats(tabId);
+	const { bugs, others } = adblocker.background.actions.getGhosteryStats(tabId);
+	const bugCount = bugs ? Object.keys(bugs).length : 0;
+	const otherCount = others ? Object.keys(others).length : 0;
 
 	return {
 		totalCount: adBlockInfo ? adBlockInfo.totalCount : 0,
-		unknownTrackerCount: others ? Object.keys(others).length : 0,
+		unknownTrackerCount: bugCount + otherCount,
 	};
 }
 
