@@ -90,7 +90,7 @@ class Policy {
 		let isWhitelisted = false;
 		const processedHostUrl = processUrl(hostUrl).host;
 		const processedTrackerUrl = processUrl(trackerUrl).host;
-		const antiTrackingWhitelist = conf.anti_tracking_whitelist;
+		const antiTrackingWhitelist = conf.cliqz_module_whitelist;
 
 		if (antiTrackingWhitelist[processedTrackerUrl]) {
 			antiTrackingWhitelist[processedTrackerUrl].hosts.some((host) => {

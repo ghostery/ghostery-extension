@@ -345,6 +345,7 @@ class Tracker extends React.Component {
 							this.handleAntiTrackingWhitelist,
 							tracker.whitelisted,
 							tracker.siteRestricted,
+							tracker.type,
 						)}
 					</div>
 				</div>

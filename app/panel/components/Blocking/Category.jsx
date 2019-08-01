@@ -200,11 +200,7 @@ class Category extends React.Component {
 			<div className={`${category.num_shown === 0 ? 'hide' : ''} blocking-category`}>
 				<div className={`sticky-category${this.state.showTooltip ? ' no-sticky' : ''}${isUnknown ? ' anti-tracking-header' : ''}`}>
 					{isUnknown && (
-						<div className="Category__antiTrackingDivider">
-							<p className="Category__antiTrackingDividerText">
-								{t('enhanced_anti_tracking')}
-							</p>
-						</div>
+						<div className="Category__antiTrackingDivider" />
 					)}
 					<div className="row align-middle">
 						<div className="columns shrink align-self-top">
@@ -270,20 +266,6 @@ class Category extends React.Component {
 											</g>
 										</svg>
 									</span>
-								</div>
-							)}
-							{isUnknown && (
-								<div className="Category__antiTrackingButton">
-									<CliqzFeature
-										clickButton={clickCliqzFeature}
-										type="anti_track"
-										active={enable_anti_tracking}
-										cliqzInactive={cliqzInactive}
-										isTiny
-										isTooltipHeader
-										isTooltipBody
-										tooltipPosition="left"
-									/>
 								</div>
 							)}
 						</div>

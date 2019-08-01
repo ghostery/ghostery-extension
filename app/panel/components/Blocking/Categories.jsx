@@ -32,7 +32,7 @@ class Categories extends React.Component {
 		const {
 			categories,
 			expandAll,
-			antiTracking,
+			unknownCategory,
 			enable_anti_tracking,
 			sitePolicy,
 		} = this.props;
@@ -47,15 +47,16 @@ class Categories extends React.Component {
 					name: t('unknown'),
 					description: t('unknown_description'),
 					img_name: 'anti_tracking_unknown',
-					num_total: antiTracking.unknownTrackers.length,
-					num_blocked: antiTracking.unknownTrackerCount,
-					num_shown: antiTracking.hide ? 0 : antiTracking.unknownTrackers.length,
-					trackers: antiTracking.unknownTrackers.map((unknownTracker) => {
+					num_total: unknownCategory.unknownTrackers.length,
+					num_blocked: unknownCategory.unknownTrackerCount,
+					num_shown: unknownCategory.hide ? 0 : unknownCategory.unknownTrackers.length,
+					trackers: unknownCategory.unknownTrackers.map((unknownTracker) => {
 						if (unknownTracker.whitelisted) { whitelistedTotal++; }
 						return {
 							name: unknownTracker.name,
 							domains: unknownTracker.domains,
 							whitelisted: unknownTracker.whitelisted,
+							type: unknownTracker.type,
 							siteRestricted: sitePolicy === 1,
 							blocked: false,
 							catId: 'anti_tracking_unknown',
@@ -94,13 +95,13 @@ class Categories extends React.Component {
 		};
 
 		const categoryList = categories.map((category, index) => renderCategory(category, index));
-		const unknownCategory = antiTracking && antiTracking.unknownTrackers.length
+		const renderUnknownCategory = unknownCategory && unknownCategory.unknownTrackers.length
 			? renderCategory(null, categoryList.length, true) : null;
 
 		return (
 			<div className="scroll-content">
 				{categoryList}
-				{unknownCategory}
+				{renderUnknownCategory}
 			</div>
 		);
 	}

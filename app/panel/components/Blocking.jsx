@@ -93,7 +93,7 @@ class Blocking extends React.Component {
 	*/
 	setShow(filterName) {
 		const updated_categories = JSON.parse(JSON.stringify(this.props.categories)); // deep clone
-		const updatedAntiTracking = JSON.parse(JSON.stringify(this.props.antiTracking)); // deep clone
+		const updatedAntiTracking = JSON.parse(JSON.stringify(this.props.unknownCategory)); // deep clone
 
 		updated_categories.forEach((category) => {
 			let count = 0;
@@ -284,7 +284,7 @@ class Blocking extends React.Component {
 		const {
 			actions,
 			categories,
-			antiTracking,
+			unknownCategory,
 			enable_anti_tracking,
 			expand_all_trackers,
 			is_expanded,
@@ -329,7 +329,7 @@ class Blocking extends React.Component {
 								language={language}
 								smartBlockActive={smartBlockActive}
 								smartBlock={smartBlock}
-								antiTracking={antiTracking}
+								unknownCategory={unknownCategory}
 								enable_anti_tracking={enable_anti_tracking}
 							/>
 						)}

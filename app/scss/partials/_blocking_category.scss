@@ -58,7 +58,7 @@
 		height: 62px;
 
 		&.anti-tracking-header {
-			height: 80px;
+			height: 66px;
 			border-top: 0;
 			padding-top: 0;
 		}
@@ -141,27 +141,14 @@
 		}
 	}
 	.Category__antiTrackingDivider {
-		background-color: #00AEF0;
 		width: 110%;
-		height: 18px;
+		height: 4px;
+		border-top: 1px solid #00AEF0;
+		border-bottom: 1px solid #00AEF0;
 		margin-bottom: 9px;
-	}
-	.Category__antiTrackingDividerText {
-		margin: 0;
-		padding-top: 2px;
-		padding-left: 15px;
-		font-size: 10px;
-		color: white;
 	}
 	.Category__antiTrackingCaret {
 		position: relative;
-		bottom: 14px;
-		left: 8px;
-	}
-	.Category__antiTrackingButton {
-		display: inline-block;
-		position: relative;
-		left: 4px;
-		bottom: 4px
+		left: -20px;
 	}
 }
