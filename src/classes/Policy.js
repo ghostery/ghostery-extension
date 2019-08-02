@@ -50,8 +50,7 @@ class Policy {
 		if (this.blacklisted(hostUrl)) {
 			return globals.BLACKLISTED;
 		}
-		if (this.checkSiteWhitelist(hostUrl)
-		|| this.checkCliqzModuleWhitelist(hostUrl, trackerUrl)) {
+		if (this.checkSiteWhitelist(hostUrl) || this.checkCliqzModuleWhitelist(hostUrl, trackerUrl)) {
 			return globals.WHITELISTED;
 		}
 		return false;
