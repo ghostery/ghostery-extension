@@ -842,13 +842,9 @@ function onMessageHandler(request, sender, callback) {
 		return false;
 	}
 	if (name === 'getCliqzModuleData') { // panel-android only
-		if (message && message.tabId) {
-			sendCliqzModuleCounts(message.tabId, callback);
-		} else {
-			utils.getActiveTab((tab) => {
-				sendCliqzModuleCounts(tab.id, callback);
-			});
-		}
+		utils.getActiveTab((tab) => {
+			sendCliqzModuleCounts(tab.id, tab.pageHost, callback);
+		});
 		return true;
 	}
 	if (name === 'getTrackerDescription') {

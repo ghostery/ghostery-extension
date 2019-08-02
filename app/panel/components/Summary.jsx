@@ -298,7 +298,7 @@ class Summary extends React.Component {
 
 		const { body } = msg;
 
-		if (body.adblock || body.antitracking) {
+		if (body.adBlock || body.antiTracking) {
 			this.props.actions.updateCliqzModuleData(body);
 		} else {
 			this.props.actions.updateSummaryData(body);
@@ -327,7 +327,7 @@ class Summary extends React.Component {
 			enable_ad_block,
 		} = this.props;
 
-		return enable_ad_block && adBlock && adBlock.totalCount || 0;
+		return enable_ad_block && adBlock && adBlock.trackerCount || 0;
 	}
 
 	_antiTrackUnsafe() {
@@ -336,17 +336,17 @@ class Summary extends React.Component {
 			enable_anti_tracking,
 		} = this.props;
 
-		return enable_anti_tracking && antiTracking && antiTracking.totalUnsafeCount || 0;
+		return enable_anti_tracking && antiTracking && antiTracking.trackerCount || 0;
+	}
+
+	_requestsModifiedCount() {
+		return this._antiTrackUnsafe() + this._adBlockBlocked();
 	}
 
 	_totalTrackersFound() {
 		const { trackerCounts } = this.props;
 
 		return (trackerCounts.allowed + trackerCounts.blocked + this._requestsModifiedCount()) || 0;
-	}
-
-	_requestsModifiedCount() {
-		return this._antiTrackUnsafe() + this._adBlockBlocked();
 	}
 
 	_sbBlocked() {
@@ -428,6 +428,7 @@ class Summary extends React.Component {
 	_renderDonut() {
 		const {
 			categories,
+			adBlock,
 			antiTracking,
 			is_expert,
 			paused_blocking,
@@ -438,6 +439,7 @@ class Summary extends React.Component {
 			<div className="Summary__donutContainer">
 				<DonutGraph
 					categories={categories}
+					adBlock={adBlock}
 					antiTracking={antiTracking}
 					renderRedscale={sitePolicy === BLACKLISTED}
 					renderGreyscale={paused_blocking}

@@ -13,16 +13,16 @@
 /src/classes/PolicySmartBlock.js @jsignanini
 /src/classes/Conf.js @zarembsky
 /src/classes/ConfData.js @zarembsky
-/src/classes/PanelData.js @zarembsky
+/src/classes/PanelData.js @wlycdgr
 
 # Background
 /src/background.js @zarembsky
 
 # The Ghostery Hub
-/app/hub/ @IAmThePan
+/app/hub/ @Eden12345
 
 # Shared Components
-/app/shared-components @IAmThePan
+/app/shared-components @wlycdgr
 
 # Build Tools
 .eslintrc.js @christophertino
@@ -30,4 +30,4 @@ babel.config.js @christophertino
 webpack.config.js @christophertino
 
 # Unit Tests
-/test/ @IAmThePan
+/test/ @Eden12345

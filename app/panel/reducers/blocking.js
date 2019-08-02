@@ -17,13 +17,14 @@ import {
 	FILTER_TRACKERS,
 	UPDATE_BLOCK_ALL_TRACKERS,
 	UPDATE_CATEGORIES,
-	UPDATE_ANTI_TRACKING_HIDE,
+	UPDATE_UNKNOWN_CATEGORY_HIDE,
 	UPDATE_CATEGORY_BLOCKED,
 	UPDATE_TRACKER_BLOCKED,
 	UPDATE_TRACKER_TRUST_RESTRICT,
-	UPDATE_ANTI_TRACKING_WHITELIST,
+	UPDATE_CLIQZ_MODULE_WHITELIST,
 	TOGGLE_EXPAND_ALL,
-	UPDATE_CLIQZ_MODULE_DATA
+	UPDATE_CLIQZ_MODULE_DATA,
+	UPDATE_SUMMARY_DATA
 } from '../constants/constants';
 import {
 	updateTrackerBlocked, updateCategoryBlocked, updateBlockAllTrackers, toggleExpandAll
@@ -40,13 +41,14 @@ const initialState = {
 	},
 	site_specific_unblocks: {},
 	site_specific_blocks: {},
-	antiTracking: {
-		totalUnsafeCount: 0, // The amount of data points scrubbed by Anti-Tracking
-		totalUnknownCount: 0, // The amount of data points scrubbed by Anti-Tracking for Trackers not in the Ghostery DB
-		unknownTrackerCount: 0, // The amount of trackers blocked by Anti-Tracking
+	unknownCategory: {
+		totalUnsafeCount: 0, // The amount of data points scrubbed by Anti-Tracking and Ad Block
+		totalUnknownCount: 0, // The amount of data points scrubbed by Anti-Tracking and Ad Block for Trackers not in the Ghostery DB
+		trackerCount: 0, // The amount of trackers scrubbed by Anti-Tracking and Ad Block (which are each associated with 1 or more data points)
+		unknownTrackerCount: 0, // The amount of unknown trackers scrubbed by Anti-Tracking and Ad Block
 		unknownTrackers: [], // An array of objects associated with each unknown Tracker (includes both blocked and whitelisted trackers for this site)
 		whitelistedUrls: {}, // An object of whitelisted url domains pointing to an object with the associated tracker name and an array of whitelisted host domains
-		hide: false, // Whether or not to display the Anti-Tracking blocking category
+		hide: false, // Whether or not to display the Unknown category
 	}
 };
 
@@ -77,8 +79,8 @@ export default (state = initialState, action) => {
 		case UPDATE_CATEGORIES: {
 			return Object.assign({}, state, { categories: action.data });
 		}
-		case UPDATE_ANTI_TRACKING_HIDE: {
-			return Object.assign({}, state, { antiTracking: action.data });
+		case UPDATE_UNKNOWN_CATEGORY_HIDE: {
+			return Object.assign({}, state, { unknownCategory: action.data });
 		}
 		case UPDATE_CATEGORY_BLOCKED: {
 			const updated = updateCategoryBlocked(state, action);
@@ -96,15 +98,35 @@ export default (state = initialState, action) => {
 			const updated = _updateTrackerTrustRestrict(state, action);
 			return Object.assign({}, state, updated);
 		}
-		case UPDATE_ANTI_TRACKING_WHITELIST: {
-			const antiTracking = _updateAntiTrackingWhitelist(state, action);
-			return Object.assign({}, state, { antiTracking });
+		case UPDATE_CLIQZ_MODULE_WHITELIST: {
+			const unknownCategory = _updateCliqzModuleWhitelist(state, action);
+			return Object.assign({}, state, { unknownCategory });
 		}
-		case UPDATE_CLIQZ_MODULE_DATA: {
-			const { hide } = state.antiTracking;
-			return Object.assign({}, state, {
-				antiTracking: Object.assign({}, action.data.antiTracking, { hide })
-			});
+		case UPDATE_CLIQZ_MODULE_DATA:
+		case UPDATE_SUMMARY_DATA: {
+			if (action.data.antiTracking) {
+				const { antiTracking, adBlock } = action.data;
+				let adBlockUnknownTrackers = adBlock.unknownTrackers;
+				antiTracking.unknownTrackers.forEach((tracker) => {
+					if (tracker.whitelisted) {
+						adBlockUnknownTrackers = adBlockUnknownTrackers.filter(adBlockTracker => (
+							adBlockTracker.name !== tracker.name
+						));
+					}
+				});
+
+				const unknownCategory = {
+					totalUnsafeCount: antiTracking.totalUnsafeCount + adBlock.totalUnsafeCount,
+					totalUnknownCount: antiTracking.totalUnknownCount + adBlock.totalUnknownCount,
+					trackerCount: antiTracking.trackerCount + adBlock.trackerCount,
+					unknownTrackerCount: antiTracking.unknownTrackerCount + adBlock.unknownTrackerCount,
+					unknownTrackers: Array.from(new Set(antiTracking.unknownTrackers.concat(adBlockUnknownTrackers))),
+					whitelistedUrls: Object.assign({}, antiTracking.whitelistedUrls, adBlock.whitelistedUrls),
+					hide: state.unknownCategory.hide,
+				};
+				return Object.assign({}, state, { unknownCategory });
+			}
+			return state;
 		}
 
 		default: return state;
@@ -186,9 +208,9 @@ const _updateTrackerTrustRestrict = (state, action) => {
  * @param  {Object} action 		action which provides data
  * @return {Object}        		updated categories and site-specific blocking counters
  */
-const _updateAntiTrackingWhitelist = (state, action) => {
-	const updatedAntiTracking = JSON.parse(JSON.stringify(state.antiTracking));
-	const { whitelistedUrls } = updatedAntiTracking;
+const _updateCliqzModuleWhitelist = (state, action) => {
+	const updatedUnknownCategory = JSON.parse(JSON.stringify(state.unknownCategory));
+	const { whitelistedUrls } = updatedUnknownCategory;
 	const { unknownTracker, pageHost } = action.data;
 
 	const addToWhitelist = () => {
@@ -229,13 +251,13 @@ const _updateAntiTrackingWhitelist = (state, action) => {
 		addToWhitelist();
 	}
 
-	updatedAntiTracking.unknownTrackers.forEach((tracker) => {
+	updatedUnknownCategory.unknownTrackers.forEach((tracker) => {
 		if (tracker.name === unknownTracker.name) {
 			tracker.whitelisted = !tracker.whitelisted;
 		}
 	});
 
-	sendMessage('setPanelData', { anti_tracking_whitelist: whitelistedUrls });
+	sendMessage('setPanelData', { cliqz_module_whitelist: whitelistedUrls });
 
-	return updatedAntiTracking;
+	return updatedUnknownCategory;
 };
