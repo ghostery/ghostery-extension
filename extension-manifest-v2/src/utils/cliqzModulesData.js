@@ -26,16 +26,21 @@ const { adblocker, antitracking } = cliqz.modules;
  * @param  {int} 	tabId
  * @return {object}	totalUnsafeCount
  */
-export function getCliqzAntiTrackingData(tabId, tabHostUrl) {
+export function getCliqzData(tabId, tabHostUrl, antiTracking) {
 	let totalUnsafeCount = 0;
 	let totalUnknownCount = 0;
+	let trackerCount = 0;
 	let unknownTrackerCount = 0;
 	const unknownTrackers = [];
-	const whitelistedUrls = conf.anti_tracking_whitelist;
-	if (!conf.enable_anti_tracking || !antitracking.background) {
+	const whitelistedUrls = conf.cliqz_module_whitelist;
+	const cliqzModule = antiTracking ? antitracking : adblocker;
+	const cliqzModuleEnabled = antiTracking ? conf.enable_anti_tracking : conf.enable_ad_block;
+
+	if (!cliqzModuleEnabled || !cliqzModule.background) {
 		return {
 			totalUnsafeCount,
 			totalUnknownCount,
+			trackerCount,
 			unknownTrackerCount,
 			unknownTrackers,
 			whitelistedUrls,
@@ -43,40 +48,50 @@ export function getCliqzAntiTrackingData(tabId, tabHostUrl) {
 	}
 
 	// Count up number of fingerprints and cookies found
-	const { bugs, others } = antitracking.background.actions.getGhosteryStats(tabId);
+	const { bugs, others } = cliqzModule.background.actions.getGhosteryStats(tabId);
 	const bugsValues = Object.values(bugs);
 	const othersValues = Object.values(others);
+	const getDataPoints = (tracker) => {
+		if (antiTracking) { return tracker.cookies + tracker.fingerprints; }
+		return tracker.ads;
+	};
 
 	for (const bug of bugsValues) {
-		totalUnsafeCount += bug.cookies + bug.fingerprints;
+		const dataPoints = getDataPoints(bug);
+		if (dataPoints) {
+			totalUnsafeCount += dataPoints;
+			trackerCount++;
+		}
 	}
 
 	for (const other of othersValues) {
 		let whitelisted = false;
-		const scrubbed = other.cookies || other.fingerprints;
+		const dataPoints = getDataPoints(other);
 
 		other.domains.some((domain) => {
-			if (conf.anti_tracking_whitelist[domain]
-			&& conf.anti_tracking_whitelist[domain].hosts.includes(tabHostUrl)) {
+			if (whitelistedUrls[domain]
+			&& whitelistedUrls[domain].hosts.includes(tabHostUrl)) {
 				whitelisted = true;
 				return true;
 			}
 			return false;
 		});
 
-		if (scrubbed) {
-			totalUnsafeCount += other.cookies + other.fingerprints;
-			totalUnknownCount += other.cookies + other.fingerprints;
-			unknownTrackerCount += 1;
+		if (dataPoints) {
+			totalUnsafeCount += dataPoints;
+			totalUnknownCount += dataPoints;
+			trackerCount++;
+			unknownTrackerCount++;
 		}
 
-		if (scrubbed || whitelisted) {
+		if (dataPoints || whitelisted) {
+			const type = antiTracking ? 'antiTracking' : 'adBlock';
 			const {
 				name, domains, ads, cookies, fingerprints
 			} = other;
 
 			unknownTrackers.push({
-				name, domains, ads, cookies, fingerprints, whitelisted
+				name, domains, ads, cookies, fingerprints, whitelisted, type
 			});
 		}
 	}
@@ -84,28 +99,10 @@ export function getCliqzAntiTrackingData(tabId, tabHostUrl) {
 	return {
 		totalUnsafeCount,
 		totalUnknownCount,
+		trackerCount,
 		unknownTrackerCount,
 		unknownTrackers,
 		whitelistedUrls,
-	};
-}
-
-/**
- * Get the totalCount of ads found by the Ad Blocker on this tabId
- * @memberOf BackgroundUtils
- * @param  {int} 	tabId
- * @return {object}
- */
-export function getCliqzAdBlockingCount(tabId) {
-	if (!conf.enable_ad_block || !adblocker.background) {
-		return {
-			totalCount: 0
-		};
-	}
-
-	const adBlockInfo = adblocker.background.actions.getAdBlockInfoForTab(tabId);
-	return {
-		totalCount: adBlockInfo.totalCount || 0,
 	};
 }
 
@@ -135,9 +132,9 @@ export function getCliqzGhosteryBugs(tabId) {
  * @param  {Function} 	callback
  */
 export function sendCliqzModuleCounts(tabId, tabHostUrl, callback) {
-	const modules = { adblock: {}, antitracking: {} };
+	const modules = { adBlock: {}, antiTracking: {} };
 
-	modules.adblock = getCliqzAdBlockingCount(tabId);
-	modules.antiTracking = getCliqzAntiTrackingData(tabId, tabHostUrl);
+	modules.adBlock = getCliqzData(tabId, tabHostUrl);
+	modules.antiTracking = getCliqzData(tabId, tabHostUrl, true);
 	callback(modules);
 }
