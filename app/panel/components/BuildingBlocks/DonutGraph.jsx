@@ -76,6 +76,7 @@ class DonutGraph extends React.Component {
 	componentDidMount() {
 		const {
 			categories,
+			adBlock,
 			antiTracking,
 			renderRedscale,
 			renderGreyscale,
@@ -90,7 +91,7 @@ class DonutGraph extends React.Component {
 			.value(d => d.value);
 
 		this.prepareDonutContainer(isSmall);
-		this.bakeDonut(categories, antiTracking, {
+		this.bakeDonut(categories, antiTracking, adBlock, {
 			renderRedscale,
 			renderGreyscale
 		});
@@ -102,6 +103,7 @@ class DonutGraph extends React.Component {
 	componentWillReceiveProps(nextProps) {
 		const {
 			categories,
+			adBlock,
 			antiTracking,
 			renderRedscale,
 			renderGreyscale,
@@ -128,9 +130,10 @@ class DonutGraph extends React.Component {
 			return;
 		}
 
-		if (!antiTracking.unknownTrackerCount && !nextProps.antiTracking.unknownTrackerCount) { return; }
-		const unknownDataPoints = antiTracking.unknownTrackerCount;
-		const nextUnknownDataPoints = nextProps.antiTracking.unknownTrackerCount;
+		if (!antiTracking.unknownTrackerCount && !nextProps.antiTracking.unknownTrackerCount
+			&& !adBlock.unknownTrackerCount && !nextProps.adBlock.unknownTrackerCount) { return; }
+		const unknownDataPoints = antiTracking.unknownTrackerCount + adBlock.unknownTrackerCount;
+		const nextUnknownDataPoints = nextProps.antiTracking.unknownTrackerCount + nextProps.adBlock.unknownTrackerCount;
 		if (unknownDataPoints !== nextUnknownDataPoints) {
 			this.nextPropsDonut(nextProps);
 		}
@@ -154,7 +157,7 @@ class DonutGraph extends React.Component {
 	 *  Helper function that updates donut with nextProps values
 	 */
 	nextPropsDonut(nextProps) {
-		this.bakeDonut(nextProps.categories, nextProps.antiTracking, {
+		this.bakeDonut(nextProps.categories, nextProps.antiTracking, nextProps.adBlock, {
 			renderRedscale: nextProps.renderRedscale,
 			renderGreyscale: nextProps.renderGreyscale,
 			isSmall: nextProps.isSmall,
@@ -193,7 +196,7 @@ class DonutGraph extends React.Component {
 	 */
 	bakeDonut = throttle(this._bakeDonut.bind(this), 600, { leading: true, trailing: true }) // eslint-disable-line react/sort-comp
 
-	_bakeDonut(categories, antiTracking, options) {
+	_bakeDonut(categories, antiTracking, adBlock, options) {
 		const {
 			renderRedscale,
 			renderGreyscale,
@@ -221,11 +224,11 @@ class DonutGraph extends React.Component {
 			graphData.sort((a, b) => a.value < b.value);
 		}
 
-		if (antiTracking.unknownTrackerCount) {
+		if (antiTracking.unknownTrackerCount || adBlock.unknownTrackerCount) {
 			graphData.push({
 				id: 'unknown',
 				name: 'Unknown',
-				value: antiTracking.unknownTrackerCount,
+				value: antiTracking.unknownTrackerCount + adBlock.unknownTrackerCount,
 			});
 		}
 
@@ -338,6 +341,7 @@ class DonutGraph extends React.Component {
 		const {
 			isSmall,
 			categories,
+			adBlock,
 			antiTracking,
 			totalCount,
 		} = this.props;
@@ -359,7 +363,7 @@ class DonutGraph extends React.Component {
 							{cat.name}
 						</span>
 					))}
-					{!!antiTracking.unknownTrackerCount && (
+					{!!antiTracking.unknownTrackerCount && !!adBlock.unknownTrackerCount && (
 						<span
 							className="DonutGraph__tooltip tooltip top"
 							id="unknown_tooltip"

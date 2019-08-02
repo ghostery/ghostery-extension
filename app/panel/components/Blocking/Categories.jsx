@@ -43,10 +43,10 @@ class Categories extends React.Component {
 			let whitelistedTotal = 0;
 			const unknownCategoryMapping = isUnknown ? (
 				{
-					id: 'anti_tracking_unknown',
+					id: 'unknown',
 					name: t('unknown'),
 					description: t('unknown_description'),
-					img_name: 'anti_tracking_unknown',
+					img_name: 'unknown',
 					num_total: unknownCategory.unknownTrackers.length,
 					num_blocked: unknownCategory.unknownTrackerCount,
 					num_shown: unknownCategory.hide ? 0 : unknownCategory.unknownTrackers.length,
@@ -59,7 +59,7 @@ class Categories extends React.Component {
 							type: unknownTracker.type,
 							siteRestricted: sitePolicy === 1,
 							blocked: false,
-							catId: 'anti_tracking_unknown',
+							catId: 'unknown',
 							description: '',
 							id: unknownTracker.name + unknownTracker.domains[0],
 							shouldShow: true,
