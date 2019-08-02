@@ -144,7 +144,7 @@
 		justify-content: space-between;
 
 		&:not(.whitelisted) {
-			.anti-track-trust {
+			.cliqz-tracker-trust {
 				visibility: hidden;
 				cursor: pointer;
 				.border { stroke: #d8d8d8; }
@@ -152,7 +152,7 @@
 				.trust-circle { stroke: #9B9B9B; }
 			}
 
-			.anti-track-scrub {
+			.cliqz-tracker-scrub {
 				pointer-events: none;
 			}
 		}
@@ -160,10 +160,10 @@
 		&.whitelisted {
 			flex-direction: row-reverse;
 
-			.anti-track-trust {
+			.cliqz-tracker-trust {
 				pointer-events: none;
 			}
-			.anti-track-scrub {
+			.cliqz-tracker-scrub {
 				visibility: hidden;
 				pointer-events: auto;
 				cursor: pointer;
@@ -174,13 +174,13 @@
 		}
 
 		&:hover {
-			.anti-track-trust {
+			.cliqz-tracker-trust {
 				visibility: visible;
 			}
 		}
 
 		&.whitelisted:hover {
-			.anti-track-scrub {
+			.cliqz-tracker-scrub {
 				visibility: visible;
 			}
 		}

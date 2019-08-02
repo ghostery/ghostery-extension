@@ -42,7 +42,7 @@ class Tracker extends React.Component {
 		this.clickTrackerStatus = this.clickTrackerStatus.bind(this);
 		this.clickTrackerTrust = this.clickTrackerTrust.bind(this);
 		this.clickTrackerRestrict = this.clickTrackerRestrict.bind(this);
-		this.handleAntiTrackingWhitelist = this.handleAntiTrackingWhitelist.bind(this);
+		this.handleCliqzTrackerWhitelist = this.handleCliqzTrackerWhitelist.bind(this);
 	}
 
 	/**
@@ -217,7 +217,7 @@ class Tracker extends React.Component {
 	 * Trigger actions which persist the new setting and notify user
 	 * that the page should be reloaded.
 	 */
-	handleAntiTrackingWhitelist() {
+	handleCliqzTrackerWhitelist() {
 		const { tracker } = this.props;
 
 		this.props.actions.updateCliqzModuleWhitelist(tracker);
@@ -335,14 +335,15 @@ class Tracker extends React.Component {
 						{!tracker.whitelisted && this._renderCliqzStatsContainer()}
 					</div>
 					<div className="columns shrink align-self-justify collapse-right">
-						{!isUnknown ? renderKnownTrackerButtons(
+						{!isUnknown && renderKnownTrackerButtons(
 							this.props.tracker.ss_allowed,
 							this.props.tracker.ss_blocked,
 							this.clickTrackerTrust,
 							this.clickTrackerRestrict,
 							this.clickTrackerStatus,
-						) : renderUnknownTrackerButtons(
-							this.handleAntiTrackingWhitelist,
+						)}
+						{isUnknown && tracker.type === 'antiTracking' && renderUnknownTrackerButtons(
+							this.handleCliqzTrackerWhitelist,
 							tracker.whitelisted,
 							tracker.siteRestricted,
 							tracker.type,

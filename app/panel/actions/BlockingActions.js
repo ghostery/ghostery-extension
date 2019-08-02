@@ -119,7 +119,7 @@ export function updateTrackerTrustRestrict(data) {
 }
 
 /**
- * Called from Tracker.handleAntiTrackingWhitelist()
+ * Called from Tracker.handleCliqzTrackerWhitelist()
  * @param  {Object} data
  * @return {Object} dispatch
  */
