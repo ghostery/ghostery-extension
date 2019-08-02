@@ -13,8 +13,6 @@
 
 import React from 'react';
 import Trackers from './Trackers';
-import { CliqzFeature } from '../BuildingBlocks';
-import Globals from '../../../../src/classes/Globals';
 
 /**
  * @class Implement Category component, which represents a
@@ -165,8 +163,6 @@ class Category extends React.Component {
 			category,
 			paused_blocking,
 			sitePolicy,
-			enable_anti_tracking,
-			actions,
 			isUnknown,
 		} = this.props;
 
@@ -184,17 +180,6 @@ class Category extends React.Component {
 		} else {
 			trackersBlockedCount = category.num_blocked || 0;
 		}
-
-		const clickCliqzFeature = (options) => {
-			const { feature, status, text } = options;
-			this.props.actions.showNotification({
-				updated: feature,
-				reload: true,
-				text,
-			});
-			actions.toggleCliqzFeature(feature, status);
-		};
-		const cliqzInactive = paused_blocking || sitePolicy || Globals.IS_CLIQZ;
 
 		return (
 			<div className={`${category.num_shown === 0 ? 'hide' : ''} blocking-category`}>

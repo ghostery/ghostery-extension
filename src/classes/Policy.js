@@ -51,7 +51,7 @@ class Policy {
 			return globals.BLACKLISTED;
 		}
 		if (this.checkSiteWhitelist(hostUrl)
-		|| this.checkAntiTrackingWhitelist(hostUrl, trackerUrl)) {
+		|| this.checkCliqzModuleWhitelist(hostUrl, trackerUrl)) {
 			return globals.WHITELISTED;
 		}
 		return false;
@@ -86,14 +86,14 @@ class Policy {
 	 * @param  {string} url 		site url
 	 * @return {string|boolean} 	corresponding whitelist entry or false, if none
 	 */
-	checkAntiTrackingWhitelist(hostUrl, trackerUrl) {
+	checkCliqzModuleWhitelist(hostUrl, trackerUrl) {
 		let isWhitelisted = false;
 		const processedHostUrl = processUrl(hostUrl).host;
 		const processedTrackerUrl = processUrl(trackerUrl).host;
-		const antiTrackingWhitelist = conf.cliqz_module_whitelist;
+		const cliqzModuleWhitelist = conf.cliqz_module_whitelist;
 
-		if (antiTrackingWhitelist[processedTrackerUrl]) {
-			antiTrackingWhitelist[processedTrackerUrl].hosts.some((host) => {
+		if (cliqzModuleWhitelist[processedTrackerUrl]) {
+			cliqzModuleWhitelist[processedTrackerUrl].hosts.some((host) => {
 				if (host === processedHostUrl) {
 					isWhitelisted = true;
 					return true;
