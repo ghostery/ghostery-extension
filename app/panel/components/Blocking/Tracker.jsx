@@ -220,7 +220,7 @@ class Tracker extends React.Component {
 	handleAntiTrackingWhitelist() {
 		const { tracker } = this.props;
 
-		this.props.actions.updateAntiTrackingWhitelist(tracker);
+		this.props.actions.updateCliqzModuleWhitelist(tracker);
 		this.props.actions.showNotification({
 			updated: `${tracker.name}-whitelisting-status-changed`,
 			reload: true,

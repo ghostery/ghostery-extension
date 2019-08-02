@@ -93,7 +93,7 @@ class Blocking extends React.Component {
 	*/
 	setShow(filterName) {
 		const updated_categories = JSON.parse(JSON.stringify(this.props.categories)); // deep clone
-		const updatedAntiTracking = JSON.parse(JSON.stringify(this.props.unknownCategory)); // deep clone
+		const updatedUnknownCategory = JSON.parse(JSON.stringify(this.props.unknownCategory)); // deep clone
 
 		updated_categories.forEach((category) => {
 			let count = 0;
@@ -112,9 +112,9 @@ class Blocking extends React.Component {
 			category.num_shown = (show) ? count : 0;
 		});
 
-		updatedAntiTracking.hide = !(filterName === 'all' || filterName === 'unknown');
+		updatedUnknownCategory.hide = !(filterName === 'all' || filterName === 'unknown');
 		this.props.actions.updateCategories(updated_categories);
-		this.props.actions.updateAntiTrackingHide(updatedAntiTracking);
+		this.props.actions.updateUnknownCategoryHide(updatedUnknownCategory);
 	}
 
 	/**
