@@ -22,7 +22,6 @@ import {
 	scaleLinear,
 	select
 } from 'd3';
-
 import Tooltip from '../Tooltip';
 
 /**
@@ -93,7 +92,8 @@ class DonutGraph extends React.Component {
 		this.prepareDonutContainer(isSmall);
 		this.bakeDonut(categories, antiTracking, adBlock, {
 			renderRedscale,
-			renderGreyscale
+			renderGreyscale,
+			isSmall,
 		});
 	}
 
@@ -363,7 +363,7 @@ class DonutGraph extends React.Component {
 							{cat.name}
 						</span>
 					))}
-					{!!antiTracking.unknownTrackerCount && !!adBlock.unknownTrackerCount && (
+					{!!antiTracking.unknownTrackerCount || !!adBlock.unknownTrackerCount && (
 						<span
 							className="DonutGraph__tooltip tooltip top"
 							id="unknown_tooltip"
