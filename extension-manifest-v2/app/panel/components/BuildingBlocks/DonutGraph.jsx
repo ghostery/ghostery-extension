@@ -243,6 +243,10 @@ class DonutGraph extends React.Component {
 				tooltip.classList.remove('DonutGraph__tooltip--show');
 			}
 		});
+		const unknown_tooltip = document.getElementById('unknown_tooltip');
+		if (unknown_tooltip) {
+			unknown_tooltip.classList.remove('DonutGraph__tooltip--show');
+		}
 
 		// CONNECT NEW DATA
 		const arcs = this.chartCenter.selectAll('g')
@@ -363,7 +367,7 @@ class DonutGraph extends React.Component {
 							{cat.name}
 						</span>
 					))}
-					{!!antiTracking.unknownTrackerCount || !!adBlock.unknownTrackerCount && (
+					{(!!antiTracking.unknownTrackerCount || !!adBlock.unknownTrackerCount) && (
 						<span
 							className="DonutGraph__tooltip tooltip top"
 							id="unknown_tooltip"
