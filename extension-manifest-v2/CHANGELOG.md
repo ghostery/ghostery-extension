@@ -1,4 +1,4 @@
-### GHOSTERY 8.4.1 (UNRELEASED)
+### GHOSTERY 8.4.1 (August 6, 2019)
 
 + Add new Unknown tracker category in detail view with anti-tracking whitelist (#417, #433)
 + Fixes broken `target=_blank` links in Opera (#426)
