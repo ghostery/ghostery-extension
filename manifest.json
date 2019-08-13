@@ -9,10 +9,12 @@
 	"author": "Ghostery",
 	"name": "__MSG_name__",
 	"short_name": "Ghostery",
-	"version": "8.4.1",
-	"version_name": "8.4.1",
+	"version": "8.4.2",
+	"version_name": "8.4.2",
 	"default_locale": "en",
 	"description": "__MSG_short_description__",
+	"debug": true,
+	"log": true,
 	"icons": {
 		"16": "app/images/icon16.png",
 		"48": "app/images/icon48.png",
@@ -98,6 +100,16 @@
 	"minimum_opera_version": "45",
 	"web_accessible_resources": [
 		"app/images/*",
-		"dist/css/rewards_styles.css"
-	]
+		"dist/css/rewards_styles.css",
+		"cliqz/dropdown/dropdown.html",
+		"cliqz/overlay/styles/overlay.css"
+	],
+	"commands": {
+		"toggle-quicksearch": {
+			"suggested_key": {
+				"default": "Ctrl+Shift+Space"
+			},
+			"description": "Toggle in-page quick search"
+		}
+	}
 }
