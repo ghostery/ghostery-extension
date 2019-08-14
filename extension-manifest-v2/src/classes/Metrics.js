@@ -125,7 +125,7 @@ class Metrics {
 	 * sending broken_page pings as needed
 	 * For example, sends a broken_page ping when the user whitelists a site,
 	 * then refreshes the page less than a minute later
-	 * @param 	{int} 		triggerId	'what specifically triggered this broken_page ping?' identifier sent along to the metrics server
+	 * @param 	{number} 	triggerId	'what specifically triggered this broken_page ping?' identifier sent along to the metrics server
 	 * @param 	{string} 	newTabUrl	for checking whether user has opened the same url in a new tab, which confirms a suspicion raised by certain triggers
 	 */
 	handleBrokenPageTrigger(triggerId, newTabUrl = null) {
@@ -149,7 +149,7 @@ class Metrics {
 	/**
 	 * handleBrokenPageTrigger helper
 	 * starts the temporary watch for a second suspicious user action in response to a first
-	 * @param 	{int} 		triggerId	'what specifically triggered this broken_page ping?' identifier sent along to the metrics server
+	 * @param 	{number} 	triggerId	'what specifically triggered this broken_page ping?' identifier sent along to the metrics server
 	 * @private
 	 */
 	_resetBrokenPageWatcher(triggerId) {
@@ -472,7 +472,7 @@ class Metrics {
 	 *
 	 * @private
 	 *
-	 * @return {number} 	in days since the last daily active ping
+	 * @return {number} in days since the last daily active ping
 	 */
 	_getRecencyActive(type, frequency) {
 		if (conf.metrics.active_daily && (type === 'active' || type === 'engaged') && frequency === 'daily') {
@@ -486,7 +486,7 @@ class Metrics {
 	 *
 	 * @private
 	 *
-	 * @return {number} 	in days since the last daily engaged ping
+	 * @return {number}	in days since the last daily engaged ping
 	 */
 	_getRecencyEngaged(type, frequency) {
 		if (conf.metrics.engaged_daily && (type === 'active' || type === 'engaged') && frequency === 'daily') {
@@ -574,7 +574,7 @@ class Metrics {
 	/**
 	 * Get the Int associated with the Current Theme.
 	 * @private
-	 * @return {Int} value associated with the Current Theme
+	 * @return {number} value associated with the Current Theme
 	 */
 	_getThemeValue() {
 		const { current_theme } = conf;
@@ -591,7 +591,7 @@ class Metrics {
 	 *
 	 * @param {string}	type 		type of the recorded event
 	 * @param {string}	frequency 	one of 'all', 'daily', 'weekly'
-	 * @return {number} 				number in milliseconds over the frequency since the last ping
+	 * @return {number} 			number in milliseconds over the frequency since the last ping
 	 */
 	_timeToExpired(type, frequency) {
 		if (frequency === 'all') {
