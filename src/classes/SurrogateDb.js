@@ -100,14 +100,14 @@ class SurrogateDb extends Updatable {
 	 * @return {Object}             filtered list of surrogates
 	 */
 	getForTracker(script_src, app_id, pattern_id, host_name) {
-		let candidates = [];
+		const candidates = [];
 
 		if (this.db.app_ids.hasOwnProperty(app_id)) {
-			candidates = candidates.concat(this.db.app_ids[app_id]);
+			candidates.push(...this.db.app_ids[app_id]);
 		}
 
 		if (this.db.pattern_ids.hasOwnProperty(pattern_id)) {
-			candidates = candidates.concat(this.db.pattern_ids[pattern_id]);
+			candidates.push(...this.db.pattern_ids[pattern_id]);
 		}
 
 		return filter(candidates, (surrogate) => {

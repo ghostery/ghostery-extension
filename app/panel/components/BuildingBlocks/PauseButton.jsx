@@ -60,10 +60,7 @@ class PauseButton extends React.Component {
 
 	/**
 	 * Handles the click event for timed pause in the dropdown list
-	 */
-	/**
-	 * Handles the click event for timed pause in the dropdown list
-	 * @param {int} time The time in minutes that Ghostery should be paused`
+	 * @param {number} time The time in minutes that Ghostery should be paused`
 	 */
 	clickDropdownPause(time) {
 		this.setState({ showDropdown: false });
