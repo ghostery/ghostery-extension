@@ -11,7 +11,7 @@ phases:
       nodejs: 8
       dotnet: 2.2
     commands:
-      - dir "C:\\Program Files (x86)\\Windows Kits\\bin\\"
+      - dir "C:\\Program Files (x86)\\Windows Kits\\10\\"
       - choco install --confirm --limit-output --no-progress --ignore-checksums yarn googlechrome opera
       - choco install --confirm --limit-output --no-progress --ignore-checksums --version 10.1.18362.1 windows-sdk-10.1
       - Add-Content -Path $env:MOABCONFIG_PATH -Value '[projects]'
