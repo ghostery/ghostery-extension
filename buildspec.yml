@@ -28,5 +28,6 @@ phases:
 
 artifacts:
   files:
-    - build/**/*
-  discard-paths: no
+    - '**/*'
+  name: 'ghostery-extension-&env:CODEBUILD_RESOLVED_SOURCE_VERSION'
+  base-directory: build
