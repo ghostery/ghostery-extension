@@ -7,8 +7,12 @@ env:
 
 phases:
   install:
+    runtime-versions:
+      nodejs: 8
+      dotnet: 2.2
     commands:
-      - choco install --confirm --limit-output --no-progress --ignore-checksums git nodejs yarn googlechrome opera
+      - dir "C:\\Program Files (x86)\\Windows Kits\\"
+      - choco install --confirm --limit-output --no-progress --ignore-checksums yarn googlechrome opera
       - choco install --confirm --limit-output --no-progress --ignore-checksums --version 10.1.18362.1 windows-sdk-10.1
       - Add-Content -Path $env:MOABCONFIG_PATH -Value '[projects]'
       - Add-Content -Path $env:MOABCONFIG_PATH -Value '  [projects.ghostery-extension]'
