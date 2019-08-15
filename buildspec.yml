@@ -4,6 +4,7 @@ env:
   variables:
     YARN_BIN: 'C:\Program Files (x86)\Yarn\bin\yarn.cmd'
     MOABCONFIG_PATH: 'C:\Users\ContainerAdministrator\.moabconfig'
+    VERSION: $((Get-Content .\manifest.json | Out-String | ConvertFrom-Json).version)
 
 phases:
   install:
@@ -31,5 +32,5 @@ phases:
 artifacts:
   files:
     - '**/*'
-  name: $($manifest.version).$Env:CODEBUILD_RESOLVED_SOURCE_VERSION
+  name: $Env:VERSION-$Env:CODEBUILD_RESOLVED_SOURCE_VERSION
   # base-directory: build
