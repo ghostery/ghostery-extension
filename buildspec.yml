@@ -10,25 +10,24 @@ phases:
     runtime-versions:
       nodejs: 8
     commands:
-      # - echo $((Get-Content .\manifest.json | Out-String | ConvertFrom-Json).version)
-      # - choco install --confirm --limit-output --no-progress --ignore-checksums yarn googlechrome opera
-      # - choco install --confirm --limit-output --no-progress --ignore-checksums --version 10.1.18362.1 windows-sdk-10.1
-      # - Add-Content -Path $env:MOABCONFIG_PATH -Value '[projects]'
-      # - Add-Content -Path $env:MOABCONFIG_PATH -Value '  [projects.ghostery-extension]'
-      # - Add-Content -Path $env:MOABCONFIG_PATH -Value '    edge_makepri_path = "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.18362.0\\x64\\makepri.exe"'
-      # - Add-Content -Path $env:MOABCONFIG_PATH -Value '    edge_makeappx_path = "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.18362.0\\x64\\makeappx.exe"'
+      - choco install --confirm --limit-output --no-progress --ignore-checksums yarn googlechrome opera
+      - choco install --confirm --limit-output --no-progress --ignore-checksums --version 10.1.18362.1 windows-sdk-10.1
+      - Add-Content -Path $env:MOABCONFIG_PATH -Value '[projects]'
+      - Add-Content -Path $env:MOABCONFIG_PATH -Value '  [projects.ghostery-extension]'
+      - Add-Content -Path $env:MOABCONFIG_PATH -Value '    edge_makepri_path = "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.18362.0\\x64\\makepri.exe"'
+      - Add-Content -Path $env:MOABCONFIG_PATH -Value '    edge_makeappx_path = "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.18362.0\\x64\\makeappx.exe"'
   pre_build:
     commands:
-      # - '& $env:YARN_BIN install --silent'
+      - '& $env:YARN_BIN install --silent'
   build:
     commands:
-      # - '& $env:YARN_BIN run lint'
-      # - '& $env:YARN_BIN run test.unit --verbose=false'
-      # - '& $env:YARN_BIN run build.prod --silent'
-      # - '& "$env:CODEBUILD_SRC_DIR_moab\moab-bin.exe" build'
+      - '& $env:YARN_BIN lint'
+      - '& $env:YARN_BIN test.unit --verbose=false'
+      - '& $env:YARN_BIN build.prod --silent'
+      - '& "$env:CODEBUILD_SRC_DIR_moab\moab-bin.exe" build'
 
 artifacts:
   files:
     - '**/*'
   name: $("$((Get-Content .\manifest.json | Out-String | ConvertFrom-Json).version).$(git rev-parse --short HEAD)")
-  # base-directory: build
+  base-directory: build
