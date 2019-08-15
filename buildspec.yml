@@ -21,7 +21,7 @@ phases:
       - '& $env:YARN_BIN install --silent'
   build:
     commands:
-      - '& $env:YARN_BIN lint'
+      # - '& $env:YARN_BIN lint'
       - '& $env:YARN_BIN test.unit --verbose=false'
       - '& $env:YARN_BIN build.prod --silent'
       - '& "$env:CODEBUILD_SRC_DIR_moab\moab-bin.exe" build'
