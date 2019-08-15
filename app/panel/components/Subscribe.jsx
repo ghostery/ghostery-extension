@@ -13,7 +13,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import PanelToTabLink from './BuildingBlocks/PanelToTabLink';
-import { sendMessage, openSubscriptionPage } from '../utils/msg';
+import { sendMessage, openCheckoutPage } from '../utils/msg';
 
 
 /**
@@ -21,7 +21,7 @@ import { sendMessage, openSubscriptionPage } from '../utils/msg';
  */
 function _handleBecomeClick() {
 	sendMessage('ping', 'plus_cta_extension');
-	openSubscriptionPage();
+	openCheckoutPage();
 }
 
 /**

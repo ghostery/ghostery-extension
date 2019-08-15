@@ -937,13 +937,11 @@ function onMessageHandler(request, sender, callback) {
 		return true;
 	}
 	if (name === 'account.openSubscriptionPage') {
-		let tabUrl;
-		if (conf.account) {
-			tabUrl = `https://account.${globals.GHOSTERY_DOMAIN}.com/subscription?target=subscribe`;
-		} else {
-			tabUrl = `https://signon.${globals.GHOSTERY_DOMAIN}.com/subscribe`;
-		}
-		utils.openNewTab({ url: tabUrl, become_active: true });
+		utils.openNewTab({ url: `https://account.${globals.GHOSTERY_DOMAIN}.com/subscription`, become_active: true });
+		return false;
+	}
+	if (name === 'account.openCheckoutPage') {
+		utils.openNewTab({ url: `https://checkout.${globals.GHOSTERY_DOMAIN}.com/plus`, become_active: true });
 		return false;
 	}
 	if (name === 'account.openSupportPage') {
