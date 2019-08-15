@@ -29,5 +29,5 @@ phases:
 artifacts:
   files:
     - '**/*'
-  name: $($manifest = Get-Content | .\manifest.json | Out-String | ConvertFrom-Json; $manifest.version).$Env:CODEBUILD_RESOLVED_SOURCE_VERSION
+  name: $($manifest = Get-Content .\manifest.json | Out-String | ConvertFrom-Json; $manifest.version).$Env:CODEBUILD_RESOLVED_SOURCE_VERSION
   base-directory: build
