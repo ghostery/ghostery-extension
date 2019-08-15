@@ -121,7 +121,7 @@ class Click2PlayDb extends Updatable {
 				entry.aid
 			];
 			if (entry.alsoAllow) {
-				allow.push(...entry.alsoAllow);
+				allow = allow.concat(entry.alsoAllow);
 			}
 
 			apps[entry.aid].push({
