@@ -9,7 +9,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -37,15 +37,15 @@ const { onMessage } = chrome.runtime;
  * Use this variable to call init and initialize functionality of this script.
  * @var {Object}   	initialized with an object with init as its property
  */
-const GhosteryDotComContentScript = (function (window) {
+const GhosteryDotComContentScript = (function(window) {
 	/**
 	 * Update https://www.ghostery.com/Products page to signify
-	 * that Ghoster extension is installed.
+	 * that Ghostery extension is installed.
 	 * @memberOf  GhosteryDotComContentScript
 	 * @package
 	 */
-	const productsPage = function () {
-		const $installButton = $('.install-button').not('.disabled');
+	const productsPage = function() {
+		const $installButton = $('#ghostery-extension-versions .install-button').not('.disabled');
 		$installButton.addClass('success').text('Installed ✓');
 		$installButton.removeAttr('onclick');
 		$('.success').on('click', (e) => {
@@ -59,7 +59,7 @@ const GhosteryDotComContentScript = (function (window) {
 	 * @memberOf  GhosteryDotComContentScript
 	 * @package
 	 */
-	const toggleBlocking = function (blocked, duration) {
+	const toggleBlocking = function(blocked, duration) {
 		if (!blocked) {
 			$('#app-global-blocking').animate({ 'background-position-x': '-17px' }, {
 				duration,
@@ -83,7 +83,7 @@ const GhosteryDotComContentScript = (function (window) {
 	 * @memberOf  GhosteryDotComContentScript
 	 * @package
 	 */
-	const appsPages = function () {
+	const appsPages = function() {
 		const $appGlobalBlocking = $('#app-global-blocking');
 		const $blockingBox = $('#blockingbox');
 		const app_id = $blockingBox.data('id');
@@ -145,7 +145,7 @@ const GhosteryDotComContentScript = (function (window) {
 	 * @memberOf  GhosteryDotComContentScript
 	 * @package
 	 */
-	const _initialize = function () {
+	const _initialize = function() {
 		// initialize products page
 		if ($('section.products-template').length) {
 			productsPage();

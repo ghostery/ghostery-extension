@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -57,6 +57,7 @@ class CompatibilityDb extends Updatable {
 		// return true for _loadList() callback
 		return true;
 	}
+
 	/**
 	 * Determine if specified site can be broken if a particular
 	 * tracker is blocked.
@@ -67,6 +68,7 @@ class CompatibilityDb extends Updatable {
 	hasIssue(aid, tab_url) {
 		return this.db.list && this.db.list.hasOwnProperty(aid) && fuzzyUrlMatcher(tab_url, this.db.list[aid]);
 	}
+
 	/**
 	 * Take arrays of trackers and index them by
 	 * tracker ids for easy lookup

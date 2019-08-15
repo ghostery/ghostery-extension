@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -24,11 +24,18 @@ class DetailMenu extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = { menu: { showBlocking: true, showRewards: false } };
+
+		this.state = {
+			menu: {
+				showBlocking: this.props.activeTab === 'blocking',
+				showRewards: this.props.activeTab === 'rewards'
+			}
+		};
 
 		// event bindings
 		this.setActiveTab = this.setActiveTab.bind(this);
 	}
+
 	/**
 	 * Change menu according to the clicked button. Save it in state.
 	 * @param {Object} event 		click event
@@ -41,6 +48,7 @@ class DetailMenu extends React.Component {
 		sendMessage('ping', DetailMenu.pings[selectionId]);
 		this.setState({ menu });
 	}
+
 	/**
 	 * Render the expert view footer.
 	 * @return {ReactComponent}   ReactComponent instance

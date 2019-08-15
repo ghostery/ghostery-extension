@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -37,6 +37,7 @@ class HeaderMenu extends React.Component {
 			this.props.toggleDropdown();
 		}
 	}
+
 	/**
 	 * Trigger action which open Settings panel from drop-down menu Settings item.
 	 */
@@ -44,6 +45,7 @@ class HeaderMenu extends React.Component {
 		this.props.toggleDropdown();
 		this.props.history.push('/settings/globalblocking');
 	}
+
 	/**
 	 * Handle click on 'Report a broken page' menu item.
 	 * Currently invokes default 'mailto' handler, and often does not work.
@@ -87,13 +89,14 @@ class HeaderMenu extends React.Component {
 			log('Error gathering page data');
 		});
 	}
+
 	/**
 	 * Handle click on 'Submit a new tracker' menu item.
-	 * It should naviagate to a site where tracker data can be entered.
+	 * It should navigate to a site where tracker data can be entered.
 	 */
 	clickSubmitTracker = () => {
 		sendMessage('openNewTab', {
-			url: 'https:\/\/www.ghostery.com/support/submit-tracker/',
+			url: 'https://www.ghostery.com/support/submit-tracker/',
 			become_active: true,
 		});
 		window.close();
@@ -123,7 +126,7 @@ class HeaderMenu extends React.Component {
 	 */
 	clickSignedInAs = () => {
 		sendMessage('openNewTab', {
-			url: `https:\/\/account.${globals.GHOSTERY_DOMAIN}.com/`,
+			url: `https://account.${globals.GHOSTERY_DOMAIN}.com/`,
 			become_active: true,
 		});
 		window.close();
@@ -136,6 +139,7 @@ class HeaderMenu extends React.Component {
 		this.props.toggleDropdown();
 		this.props.history.push('/login');
 	}
+
 	/**
 	 * Handle click on 'Sign out' menu item (if user is in logged in state) and log out the user.
 	 */
@@ -143,14 +147,16 @@ class HeaderMenu extends React.Component {
 		this.props.toggleDropdown();
 		this.props.actions.logout();
 	}
+
 	/**
-	 * Handle click on 'Sibscriber menu item.
+	 * Handle click on Subscriber menu item.
 	 */
 	clickSubscriber = () => {
 		sendMessage('ping', 'plus_panel_from_menu');
 		this.props.toggleDropdown();
 		this.props.history.push(this.props.subscriber ? '/subscription/info' : `/subscribe/${this.props.loggedIn}`);
 	}
+
 	/**
 	 * Render drop-down menu.
 	 * @return {ReactComponent}   ReactComponent instance
@@ -242,7 +248,7 @@ class HeaderMenu extends React.Component {
 									<path className="menu-icon" d="M10 1c4.975 0 9 4.025 9 9s-4.025 9-9 9-9-4.025-9-9 4.025-9 9-9zm0 10.279c2.65 0 4.858 1.941 5.262 4.431a7.731 7.731 0 0 0 2.578-5.75c0-4.32-3.534-7.8-7.84-7.8a7.842 7.842 0 0 0-5.549 2.28A7.764 7.764 0 0 0 2.16 9.96a7.833 7.833 0 0 0 2.54 5.75c.441-2.49 2.65-4.431 5.3-4.431zm4.36 5.242c-.114-2.238-2.027-3.995-4.347-3.991-2.335 0-4.24 1.77-4.383 3.991a7.918 7.918 0 0 0 4.383 1.319 7.713 7.713 0 0 0 4.347-1.319z" />
 								</g>
 							</svg>
-							<span title={email} >{ email }</span>
+							<span title={email}>{ email }</span>
 						</div>
 						<div onClick={this.clickSignIn} className={`${loggedIn ? 'hide' : ''} menu-option menu-signin small-12 columns`}>
 							<span>{ t('panel_menu_signin') }</span>

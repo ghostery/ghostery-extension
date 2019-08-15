@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -19,7 +19,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route } from 'react-router-dom';
-import ShadowDOM from 'react-shadow';
+import root from 'react-shadow';
 import HotDog from './HotDog';
 import OfferCard from './OfferCard';
 import msgModule from '../utils/msg';
@@ -95,29 +95,32 @@ class RewardsApp {
 		document.body.appendChild(this.rewardsContainer);
 		this.mainView = props => (
 			<Router history={history}>
-				<ShadowDOM include={[chrome.extension.getURL('dist/css/rewards_styles.css')]}>
-					<div id="ghostery-shadow-root">
-						<Route
-							exact
-							path="/"
-							render={
-								() => <HotDog reward={props.reward} port={this.port} actions={props.actions} />
-							}
-						/>
-						<Route
-							path="/hotdog"
-							render={
-								() => <HotDog reward={props.reward} port={this.port} actions={props.actions} />
-							}
-						/>
-						<Route
-							path="/offercard"
-							render={
-								() => <OfferCard reward={props.reward} conf={props.conf} port={this.port} actions={props.actions} />
-							}
-						/>
-					</div>
-				</ShadowDOM>
+				<root.div>
+					<link
+						rel="stylesheet"
+						type="text/css"
+						href={chrome.extension.getURL('dist/css/rewards_styles.css')}
+					/>
+					<Route
+						exact
+						path="/"
+						render={
+							() => <HotDog reward={props.reward} port={this.port} actions={props.actions} />
+						}
+					/>
+					<Route
+						path="/hotdog"
+						render={
+							() => <HotDog reward={props.reward} port={this.port} actions={props.actions} />
+						}
+					/>
+					<Route
+						path="/offercard"
+						render={
+							() => <OfferCard reward={props.reward} conf={props.conf} port={this.port} actions={props.actions} />
+						}
+					/>
+				</root.div>
 			</Router>
 		);
 		this.initListener();

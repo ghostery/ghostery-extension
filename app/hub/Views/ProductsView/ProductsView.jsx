@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -37,10 +37,10 @@ const ProductsView = props => (
 				<div className="ProductsView__headerDescription">
 					{t('hub_products_header_description')}
 				</div>
-				<div className="ProductsView__mainPromoTitle" >
+				<div className="ProductsView__mainPromoTitle">
 					{t('hub_products_main_promo_title')}
 				</div>
-				<div className="ProductsView__mainPromoDescription" >
+				<div className="ProductsView__mainPromoDescription">
 					{t('hub_products_main_promo_description')}
 				</div>
 				<div className="ProductsView__storeImageContainer">

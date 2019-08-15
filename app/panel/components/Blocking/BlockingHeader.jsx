@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -45,6 +45,7 @@ class BlockingHeader extends React.Component {
 		this.filterUnblocked = this.filterUnblocked.bind(this);
 		this.filterNew = this.filterNew.bind(this);
 	}
+
 	/**
 	 * Lifecycle event
 	 */
@@ -59,6 +60,7 @@ class BlockingHeader extends React.Component {
 			updateSummaryBlockingCount(this.props.categories, smartBlock, this.props.actions.updateTrackerCounts);
 		}
 	}
+
 	/**
 	 * Lifecycle event
 	 */
@@ -67,6 +69,7 @@ class BlockingHeader extends React.Component {
 			this.updateBlockAll(nextProps.categories);
 		}
 	}
+
 	/**
 	 * Set appropriate initial text ("Block All" or "Unblock All") in Blocking header
 	 * when Blocking or Global Blocking view opens. Save 'allBlocked' property in state.
@@ -90,10 +93,15 @@ class BlockingHeader extends React.Component {
 				});
 			});
 			if (this.state.fromHere || totalShown === totalBlocked || totalBlocked === 0) {
-				this.setState({ allBlocked: (totalShown === totalBlocked), filtered, fromHere: false });
+				this.setState({
+					allBlocked: (totalShown === totalBlocked),
+					fromHere: false,
+					filtered
+				});
 			}
 		}
 	}
+
 	/**
 	 * Implement handler for "Expand All/Collapse All" in the Blocking header.
 	 * Trigger action which expands/contracts all categories.
@@ -180,6 +188,7 @@ class BlockingHeader extends React.Component {
 	clickFilterText() {
 		this.setState({ filterMenuOpened: !this.state.filterMenuOpened });
 	}
+
 	/**
 	 * Implement handler for "All Trackers" item of the filtering menu.
 	 * Triggers "all" filtering action which returns all trackers
@@ -191,6 +200,7 @@ class BlockingHeader extends React.Component {
 		this.props.actions.filter('all');
 		this.setState({ filterMenuOpened: false });
 	}
+
 	/**
 	 * Implement handler for "Blocked Trackers" item of the filtering menu.
 	 * Triggers "blocked" filtering action which select subset of
@@ -203,6 +213,7 @@ class BlockingHeader extends React.Component {
 		this.props.actions.filter('blocked');
 		this.setState({ filterMenuOpened: false });
 	}
+
 	/**
 	 * Implement handler for "Unblocked Trackers" item of the filtering menu.
 	 * Triggers "unblocked" filtering action which select subset of
@@ -215,6 +226,7 @@ class BlockingHeader extends React.Component {
 		this.props.actions.filter('unblocked');
 		this.setState({ filterMenuOpened: false });
 	}
+
 	/**
 	 * Implement handler for "New Since Last Update" item of the filtering menu.
 	 * Triggers "new" filtering action which select subset of all new trackers
@@ -227,6 +239,7 @@ class BlockingHeader extends React.Component {
 		this.props.actions.filter('new');
 		this.setState({ filterMenuOpened: false });
 	}
+
 	/**
 	* Render appropriate Blocking Header to be part of Blocking or Global Blblocking view.
 	* @return {ReactComponent}   ReactComponent instance
@@ -241,17 +254,24 @@ class BlockingHeader extends React.Component {
 				<div className="row align-middle">
 					<div className="columns">
 						<div className="title">
-							{ globalBlocking ? t('settings_global_blocking') : t('blocking_trackers') } <Link to="/settings/globalblocking" className="gear-icon" />
+							{ globalBlocking ? t('settings_global_blocking') : t('blocking_trackers') }
+							{' '}
+							<Link to="/settings/globalblocking" className="gear-icon" />
 						</div>
 					</div>
 					<div className="shrink columns align-self-justify text-right">
-						{this.props.categories && this.props.categories.length > 0 &&
-							<div className="block-text" onClick={this.clickBlockAll}>{blockText}</div>
-						}
+						{this.props.categories && this.props.categories.length > 0 && (
+							<div
+								className="block-text"
+								onClick={this.clickBlockAll}
+							>
+								{blockText}
+							</div>
+						)}
 					</div>
 				</div>
 				{
-					globalBlocking &&
+					globalBlocking && (
 						<div className="row align-middle s-search-box-container">
 							<div className="columns">
 								<div className="s-search-box">
@@ -260,17 +280,17 @@ class BlockingHeader extends React.Component {
 								</div>
 							</div>
 						</div>
-				}
+					)}
 				<div className="row footer">
 					<div className="columns">
-						{this.props.categories && this.props.categories.length > 0 &&
+						{this.props.categories && this.props.categories.length > 0 && (
 							<span className="expand-all-text" onClick={this.clickExpandAll}>
 								{ (!this.props.expandAll) ? t('expand_all') : t('collapse_all') }
 							</span>
-						}
+						)}
 					</div>
 					{
-						globalBlocking &&
+						globalBlocking && (
 							<div className="shrink columns relative">
 								<ClickOutside
 									onClickOutside={this.state.filterMenuOpened ? this.clickFilterText : () => {}}
@@ -287,7 +307,7 @@ class BlockingHeader extends React.Component {
 									</div>
 								</ClickOutside>
 							</div>
-					}
+						)}
 				</div>
 			</div>
 		);

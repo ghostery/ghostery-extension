@@ -6,7 +6,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -18,6 +18,7 @@ import tabInfo from './TabInfo';
 import compDb from './CompatibilityDb';
 import globals from './Globals';
 import Policy from './Policy';
+import c2pDb from './Click2PlayDb';
 import { log } from '../utils/common';
 /**
  * Class for handling Smart Blocking site policy.
@@ -38,6 +39,7 @@ class PolicySmartBlock {
 			'font',
 		];
 	}
+
 	/**
 	 * Determine if the tracker should be unblocked on a particular site to prevent site breaking.
 	 * @param  {string} appId       tracker id
@@ -64,13 +66,14 @@ class PolicySmartBlock {
 		}
 
 		if (reason) {
-			log('Smart Blocking unblokced appId', appId, 'for reason:', reason);
+			log('Smart Blocking unblocked appId', appId, 'for reason:', reason);
 			tabInfo.setTabSmartBlockAppInfo(tabId, appId, reason, false);
 			return true;
 		}
 
 		return false;
 	}
+
 	/**
 	 * Determine if the tracker should be blocked on a particular site to prevent site breaking.
 	 * @param  {string} appId       tracker id
@@ -86,7 +89,7 @@ class PolicySmartBlock {
 
 		let reason;
 
-		// block if it's been more than 5 seconds since page load started
+		// Block all trackers that load after 5 seconds from when page load started
 		if (this._requestWasSlow(tabId, appId, requestTimestamp)) {
 			reason = 'slow';
 
@@ -103,9 +106,6 @@ class PolicySmartBlock {
 
 		const result = (reason === 'slow');
 		if (result) {
-			// We don't want record in tabInfo reasons other than 'slow'
-			// Smart blocking should not claim that it unblocks trackers which were unblocked
-			// for other reasons before shouldBlock was called for them.
 			log('Smart Blocking blocked appId', appId, 'for reason:', reason);
 			tabInfo.setTabSmartBlockAppInfo(tabId, appId, 'slow', true);
 		}
@@ -121,6 +121,7 @@ class PolicySmartBlock {
 	 * 3. Page is neither whitelisted or blacklisted
 	 * 4. Tracker is not site-specific unblocked
 	 * 5. Tracker is not site-specific blocked
+	 * 6. Tracker does not have entry in Click2Play
 	 *
 	 * @param  {number} 			tabId 	tab id
 	 * @param  {string | boolean} 	appId 	tracker id
@@ -135,7 +136,8 @@ class PolicySmartBlock {
 			!globals.SESSION.paused_blocking &&
 			!this.policy.getSitePolicy(tabUrl) &&
 			((appId && (!conf.site_specific_unblocks.hasOwnProperty(tabHost) || !conf.site_specific_unblocks[tabHost].includes(+appId))) || appId === false) &&
-			((appId && (!conf.site_specific_blocks.hasOwnProperty(tabHost) || !conf.site_specific_blocks[tabHost].includes(+appId))) || appId === false)
+			((appId && (!conf.site_specific_blocks.hasOwnProperty(tabHost) || !conf.site_specific_blocks[tabHost].includes(+appId))) || appId === false) &&
+			!c2pDb.db.apps.hasOwnProperty(appId)
 		);
 	}
 
@@ -249,16 +251,18 @@ class PolicySmartBlock {
 	checkReloadThreshold(tabId) {
 		if (!this.shouldCheck(tabId)) { return false; }
 
-		const THRESHHOLD = 30000; // 30 seconds
+		// Note that this threshold is different from the broken page ping threshold in Metrics, which is 60 seconds
+		// see GH-1797 for more details
+		const SMART_BLOCK_BEHAVIOR_THRESHOLD = 30000; // 30 seconds
 
 		return (
 			tabInfo.getTabInfoPersist(tabId, 'numOfReloads') > 1 &&
-			((Date.now() - tabInfo.getTabInfoPersist(tabId, 'firstLoadTimestamp')) < THRESHHOLD) || false
+			((Date.now() - tabInfo.getTabInfoPersist(tabId, 'firstLoadTimestamp')) < SMART_BLOCK_BEHAVIOR_THRESHOLD) || false
 		);
 	}
 
 	/**
-	 * Check if request loaded after a threshhold time since page load.
+	 * Check if request loaded after a threshold time since page load.
 	 * @param  	{string}	tabId				tab id
 	 * @param  	{string} 	appId				tracker id
 	 * @param  	{number} 	requestTimestamp   	timestamp of the request

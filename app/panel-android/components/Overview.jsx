@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -34,12 +34,10 @@ export default class Overview extends React.Component {
 	}
 
 	get chartData() {
-		const trackers = this.categories.map(category =>
-			({
-				id: category.id,
-				numTotal: category.num_total,
-			})
-		);
+		const trackers = this.categories.map(category => ({
+			id: category.id,
+			numTotal: category.num_total,
+		}));
 
 		return fromTrackersToChartData(trackers);
 	}
@@ -79,12 +77,17 @@ export default class Overview extends React.Component {
 						num={this.chartData.sum}
 					/>
 					<p>{this.hostName}</p>
-					<p className="trackers-blocked-num"><span className="number">{this.nTrackersBlocked}</span> Trackers blocked</p>
+					<p className="trackers-blocked-num">
+						<span className="number">{this.nTrackersBlocked}</span>
+						{' '}
+						Trackers blocked
+					</p>
 				</div>
 
 				<div className="buttons-wrapper row">
 					<div className="small-12">
 						<button
+							type="button"
 							className={`button trust-site-btn ${this.isTrusted ? 'changed' : ''} ${this.isPaused ? 'paused' : ''}`}
 							onClick={this.handleTrustButtonClick}
 						>
@@ -93,6 +96,7 @@ export default class Overview extends React.Component {
 					</div>
 					<div className="small-12">
 						<button
+							type="button"
 							className={`button restrict-site-btn ${this.isRestricted ? 'changed' : ''} ${this.isPaused ? 'paused' : ''}`}
 							onClick={this.handleRestrictButtonClick}
 						>
@@ -101,6 +105,7 @@ export default class Overview extends React.Component {
 					</div>
 					<div className="small-12">
 						<button
+							type="button"
 							className={`button pause-resume-btn ${this.isPaused ? 'changed' : ''}`}
 							onClick={this.handlePauseButtonClick}
 						>
@@ -115,7 +120,7 @@ export default class Overview extends React.Component {
 }
 
 Overview.propTypes = {
-	categories: PropTypes.arrayOf(PropTypes.object),
+	categories: PropTypes.arrayOf(PropTypes.shape),
 };
 
 Overview.defaultProps = {
@@ -123,6 +128,6 @@ Overview.defaultProps = {
 };
 
 Overview.contextTypes = {
-	siteProps: PropTypes.object,
+	siteProps: PropTypes.shape,
 	callGlobalAction: PropTypes.func,
 };

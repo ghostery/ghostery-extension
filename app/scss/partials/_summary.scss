@@ -4,202 +4,236 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-#content-summary {
+.Summary {
 	position: absolute;
 	height: 479px;
+}
+
+.Summary__donutContainer {
+	margin: 26px auto;
+}
+
+.Summary__pageHostContainer {
+	text-align: center;
+}
+
+.SummaryPageHost {
+	font-size: 11px;
+	font-weight: 600;
+	color: #4a4a4a;
+}
+
+.Summary__pageStatsContainer {
+	text-align: center;
+}
+
+.Summary__pageStatContainer {
+	text-align: center;
+}
+
+.SummaryPageStat {
+	line-height: 21px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.SummaryPageStat--condensed-view {
+	padding: 0;
+	margin: 5px 0;
+
+	.SummaryPageStat__label {
+		display: none;
+	}
+}
+
+.SummaryPageStat.total-trackers-blocked .SummaryPageStat__value { color: #e74055; }
+.SummaryPageStat.total-requests-modified .SummaryPageStat__value { color: #00aef0; }
+.SummaryPageStat.page-load-time-slow .SummaryPageStat__value { color: #e74055; }
+.SummaryPageStat.page-load-time-medium .SummaryPageStat__value { color: #ffc063; }
+.SummaryPageStat.page-load-time-fast .SummaryPageStat__value { color: #9ecc42; }
+
+.Summary--simple {
 	width: 100%;
-	&.expert { width: 235px; }
-	&.expert.condensed {
-		width: 66px;
-		background-color: #f9f6f6;
-	}
 
-	.clickable { cursor: pointer; }
-	.not-clickable { cursor: not-allowed; }
-
-	&.ab-pause .pause-button-container {
-		padding: 10px 0 0 10px;
-		text-align: left;
-	}
-	&.ab-pause .sub-component.pause-button {
-		.button-pause {
-			font-size: 11px;
-		}
-	}
-	&.expert.ab-pause .pause-button-container {
-		padding: 10px 0 0 0;
-		text-align: center;
-	}
-	&.expert.condensed.ab-pause .pause-button-container {
-		padding: 0;
-		text-align: left;
-	}
-
-	.page-host {
-		color: #4a4a4a;
-		text-align: center;
-		font-size: 11px;
-		font-weight: 600;
+	.Summary__pageHostContainer {
 		margin-bottom: 36px;
-		&.invisible {
-			visibility: hidden;
-		}
-	}
-	&.ab-pause .page-host {
-		margin-bottom: 30px;
-	}
-	&.expert .page-host {
-		margin-top: 20px;
-		margin-bottom: 20px;
-	}
-	&.expert.ab-pause .page-host {
-		margin-top: 8px;
-		margin-bottom: 8px;
 	}
 
-	.donut-graph-container {
-		margin: 26px auto;
+	.Summary__donutContainer {
 		height: 120px;
 		width: 120px;
 	}
-	&.ab-pause .donut-graph-container {
-		margin-top: 0px;
+
+	.Summary__pageStatsContainer {
 		margin-bottom: 30px;
 	}
-	&.expert .donut-graph-container {
+
+	.Summary__pageStatContainer {
+		display: inline-block;
+		padding: 0 20px;
+	}
+
+	.Summary__ghosteryFeatureContainer--middle {
+		margin: 12px 28px;
+	}
+
+	.Summary__cliqzFeatureContainer {
+		width: 150px;
+	}
+}
+
+.Summary--expert {
+	width: 235px;
+	padding-top: 10px;
+
+	.Summary__pageHostContainer {
+		margin-top: 20px;
+		margin-bottom: 10px;
+	}
+
+	.Summary__donutContainer {
 		height: 94px;
 		width: 94px;
 		margin-top: 21px;
 		margin-bottom: 20px;
-	}
-	&.expert.ab-pause .donut-graph-container {
-		margin-top: 0px;
-		margin-bottom: 16px;
+		padding-top: 5px;
 	}
 
-	&.expert.condensed .total-tracker-count {
-		text-align: center;
-		padding: 0;
-		color: #4a4a4a;
-		font-size: 24px;
-		font-weight: 600;
-		margin: 18px 0;
-	}
-	&.expert.condensed.ab-pause .total-tracker-count {
-		margin: 13px 0;
-	}
-
-	.page-stats {
-		color: #4a4a4a;
-		text-align: center;
-		font-size: 14px;
-		line-height: 21px;
-		font-weight: 600;
-		margin-bottom: 40px;
-		.blocked-trackers .value { color: #e74055; }
-		.page-load .value { color: #ffc063; }
-		.page-load.fast .value { color: #9ecc42; }
-		.page-load.slow .value { color: #e74055; }
-
-		.blocked-trackers,
-		.page-load {
-			display: inline-block;
-			padding: 0 20px;
-		}
-	}
-	&.expert .page-stats {
+	.Summary__pageStatsContainer {
 		margin-bottom: 21px;
-		.blocked-trackers,
-		.page-load {
-			display: block;
-			text-overflow: ellipsis;
-			white-space: nowrap;
-			overflow-x: hidden;
-		}
-	}
-	&.expert.ab-pause .page-stats {
-		margin-bottom: 16px;
-	}
-	&.expert.condensed .page-stats {
-		div {
-			text-align: center;
-			padding: 0;
-			margin: 21px 0;
-		}
-		.text { display: none; }
-	}
-	&.expert.condensed.ab-pause .page-stats {
-		margin-bottom: 0;
-		div { margin: 13px 0; }
 	}
 
-	.not-scanned-expert-condensed-space-taker {
-		height: 162px;
-	}
-	&.ab-pause .not-scanned-expert-condensed-space-taker {
-		height: 130px;
+	.Summary__pageStatContainer {
+		display: block;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 
-	.ghostery-features-container {
-		text-align: center;
-		.ghostery-features,
-		.pause-button {
-			display: inline-block;
-		}
+	// .total-requests-modified needs to show overflow for tooltip
+	.Summary__pageStatContainer .total-trackers-blocked,
+	.Summary__pageStatContainer .page_load_time {
+		overflow-x: hidden;
 	}
-	&.ab-pause .ghostery-features-container {
-		margin-bottom: 22px;
-		.ghostery-features { display: block; }
-	}
-	&.expert.ab-pause .ghostery-features-container {
-			margin-bottom: 16px;
-	}
-	&.expert.condensed.ab-pause .ghostery-features-container {
-		margin-bottom: -8px;
-	}
-	.ghostery-features-container .button-restrict {
+
+	.Summary__ghosteryFeatureContainer--middle {
 		margin: 12px 28px;
 	}
-	&.expert.condensed .ghostery-features-container .button-restrict {
-		margin: 0;
-	}
-	&.ab-pause .ghostery-features-container .button-restrict {
-		margin: 0;
-	}
 
-	.cliqz-features-container {
-		text-align: center;
-	}
-	&.expert .cliqz-features-container {
-		margin-top: 10px;
+	.Summary__cliqzFeaturesContainer {
+		margin-top: 6px;
 		margin-bottom: 6px;
 	}
-	&.expert.ab-pause .cliqz-features-container {
-		margin-top: 0;
-		margin-bottom: 16px;
+
+	.Summary__cliqzFeatureContainer {
+		width: 55px;
 	}
-	&.expert.condensed.ab-pause .cliqz-features-container {
-		margin-top: 14px;
+}
+
+.Summary--condensed {
+	width: 66px;
+	background-color: #f9f6f6;
+
+	.Summary__totalTrackerCountContainer {
+		margin: 10px 0;
+		padding: 0;
+		text-align: center;
+		font-size: 24px;
+		font-weight: 600;
+		color: $tundora;
 	}
-	&.expert.condensed .cliqz-features-container {
+
+	.Summary__pageStatsContainer {
+		margin-bottom: 12px;
+	}
+
+	.Summary__cliqzFeaturesContainer {
+		margin-top: 15px;
 		margin-bottom: 0;
-		.cliqz-feature:last-of-type {
-			margin-bottom: 0;
-		}
 	}
-	.stats-button {
-		position: absolute;
-		right: 0;
-		top: 40px;
-		padding: 6px 3px 3px 9px;
-		border: 1px lightgray solid;
-		border-radius: 5px 0 0 5px;
+
+	.Summary__cliqzFeatureContainer:last-of-type {
+		margin-bottom: 0;
 	}
+
+	.Summary__cliqzFeatureContainer {
+		width: 40px;
+		margin: 0 0 5px;
+	}
+}
+
+
+// Additional specificity needed to overwrite the position value of g-tooltip
+.Summary__statsNavicon.Summary__statsNavicon--absolutely-positioned,
+.Summary__rewardsNavicon.Summary__rewardsNavicon--absolutely-positioned {
+	position: absolute;
+	right: 0;
+	padding-top: 6px;
+	padding-bottom: 3px;
+	border: 1px lightgray solid;
+	border-right: none;
+	border-radius: 5px 0 0 5px;
+	background-color: $whisper;
+}
+// Differences in padding improve icon visual alignment
+.Summary__statsNavicon.Summary__statsNavicon--absolutely-positioned {
+	top: 40px;
+	padding-right: 3px;
+	padding-left: 9px;
+	cursor: pointer;
+}
+.Summary__rewardsNavicon.Summary__rewardsNavicon--absolutely-positioned {
+	top: 85px;
+	padding-right: 6px;
+	padding-left: 10px;
+	text-transform: capitalize;
+	cursor: pointer;
+}
+// position the star SVG relative to the gift box SVG
+.Summary__rewardsNavicon__star {
+	position: absolute;
+	left: 3px;
+	top: 17px;
+}
+
+.Summary__spaceTaker {
+	height: 140px;
+}
+
+.Summary__ghosteryFeaturesContainer {
+	text-align: center;
+}
+
+.Summary__ghosteryFeatureContainer {
+	display: inline-block;
+}
+
+.Summary__pauseButtonContainer {
+	display: inline-block;
+}
+
+.Summary__cliqzFeaturesContainer {
+	text-align: center;
+}
+
+.Summary__cliqzFeatureContainer {
+	display: inline-block;
+	margin: 0 10px;
+}
+
+.Summary__upgradeBannerContainer {
+	position: absolute;
+	top: 10px;
+}
+
+.Summary__subscriberBadgeContainer {
+	position: absolute;
+	left: 10px;
+	top: 11px;
 }

@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -14,7 +14,6 @@
 import React from 'react';
 import globals from '../../../../src/classes/Globals';
 
-const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 const IS_CLIQZ = (globals.BROWSER_INFO.name === 'cliqz');
 
 /**
@@ -30,7 +29,10 @@ const OptIn = (props) => {
 			<div className="row">
 				<div className="columns">
 					<h3>{ t('settings_support_ghostery') }</h3>
-					<h5>{ t('settings_support_ghostery_by') }:</h5>
+					<h5>
+						{ t('settings_support_ghostery_by') }
+:
+					</h5>
 					<div className="s-option-group">
 						<div className="s-square-checkbox">
 							<input type="checkbox" id="settings-share-usage" name="enable_metrics" defaultChecked={settingsData.enable_metrics} onClick={props.toggleCheckbox} />
@@ -42,7 +44,7 @@ const OptIn = (props) => {
 							</div>
 						</div>
 					</div>
-					{!IS_EDGE && !IS_CLIQZ &&
+					{!IS_CLIQZ && (
 						<div>
 							<div className="s-option-group" id="human-web-section">
 								<div className="s-square-checkbox">
@@ -67,7 +69,7 @@ const OptIn = (props) => {
 								</div>
 							</div>
 						</div>
-					}
+					)}
 				</div>
 			</div>
 		</div>

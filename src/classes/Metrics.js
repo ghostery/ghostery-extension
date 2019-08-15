@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -14,7 +14,7 @@
 import globals from './Globals';
 import conf from './Conf';
 import { log, prefsSet, prefsGet } from '../utils/common';
-import { processUrlQuery } from '../utils/utils';
+import { getActiveTab, processUrlQuery } from '../utils/utils';
 import rewards from './Rewards';
 
 // CONSTANTS
@@ -30,6 +30,12 @@ const FIRST_REWARD_METRICS = ['rewards_first_accept', 'rewards_first_reject', 'r
 const { METRICS_SUB_DOMAIN, EXTENSION_VERSION, BROWSER_INFO } = globals;
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const MAX_DELAYED_PINGS = 100;
+
+// Note that this threshold is intentionally different from the 30 second threshold in PolicySmartBlock,
+// which is used to set the reloaded property on tab objects and to activate smart unblock behavior
+// see GH-1797 for more details
+const BROKEN_PAGE_METRICS_THRESHOLD = 60000; // 60 seconds
+
 /**
  * Class for handling telemetry pings.
  * @memberOf  BackgroundClasses
@@ -39,6 +45,13 @@ class Metrics {
 		this.utm_source = '';
 		this.utm_campaign = '';
 		this.ping_set = new Set();
+		this._brokenPageWatcher = {
+			on: false,
+			triggerId: '',
+			triggerTime: '',
+			timeoutId: null,
+			url: '',
+		};
 	}
 
 	/**
@@ -105,6 +118,75 @@ class Metrics {
 			}).catch((error) => {
 				log('Metrics init() error', error);
 			});
+	}
+
+	/**
+	 * Responds to individual user actions and sequences of user actions that may indicate a broken page,
+	 * sending broken_page pings as needed
+	 * For example, sends a broken_page ping when the user whitelists a site,
+	 * then refreshes the page less than a minute later
+	 * @param 	{int} 		triggerId	'what specifically triggered this broken_page ping?' identifier sent along to the metrics server
+	 * @param 	{string} 	newTabUrl	for checking whether user has opened the same url in a new tab, which confirms a suspicion raised by certain triggers
+	 */
+	handleBrokenPageTrigger(triggerId, newTabUrl = null) {
+		if (this._brokenPageWatcher.on && triggerId === globals.BROKEN_PAGE_REFRESH) {
+			this.ping('broken_page');
+			this._unplugBrokenPageWatcher();
+			return;
+		}
+
+		if (this._brokenPageWatcher.on && triggerId === globals.BROKEN_PAGE_NEW_TAB && this._brokenPageWatcher.url === newTabUrl) {
+			this.ping('broken_page');
+			this._unplugBrokenPageWatcher();
+			return;
+		}
+
+		if (triggerId === globals.BROKEN_PAGE_NEW_TAB) { return; }
+
+		this._resetBrokenPageWatcher(triggerId);
+	}
+
+	/**
+	 * handleBrokenPageTrigger helper
+	 * starts the temporary watch for a second suspicious user action in response to a first
+	 * @param 	{int} 		triggerId	'what specifically triggered this broken_page ping?' identifier sent along to the metrics server
+	 * @private
+	 */
+	_resetBrokenPageWatcher(triggerId) {
+		this._clearBrokenPageWatcherTimeout();
+
+		getActiveTab((tab) => {
+			const tabUrl = tab && tab.url ? tab.url : '';
+
+			this._brokenPageWatcher = Object.assign({}, {
+				on: true,
+				triggerId,
+				triggerTime: Date.now(),
+				timeoutId: setTimeout(this._clearBrokenPageWatcherTimeout.bind(this), BROKEN_PAGE_METRICS_THRESHOLD),
+				url: tabUrl,
+			});
+		});
+	}
+
+	/**
+	 * handleBrokenPageTrigger helper
+	 * @private
+	 */
+	_unplugBrokenPageWatcher() {
+		this._clearBrokenPageWatcherTimeout();
+
+		this._brokenPageWatcher = Object.assign({}, {
+			on: false,
+			triggerId: '',
+			triggerTime: '',
+			timeoutId: null,
+			url: '',
+		});
+	}
+
+	_clearBrokenPageWatcherTimeout() {
+		const { timeoutId } = this._brokenPageWatcher;
+		if (timeoutId) { clearTimeout(timeoutId); }
 	}
 
 	/**
@@ -322,6 +404,12 @@ class Metrics {
 			metrics_url +=
 				// Reward ID
 				`&rid=${encodeURIComponent(this._getRewardId().toString())}`;
+		} else if (type === 'broken_page' && this._brokenPageWatcher.on) {
+			metrics_url +=
+				// What triggered the broken page ping?
+				`&setup_path=${encodeURIComponent(this._brokenPageWatcher.triggerId.toString())}` +
+				// How much time passed between the trigger and the page refresh / open in new tab?
+				`&setup_block=${encodeURIComponent((Date.now() - this._brokenPageWatcher.triggerTime).toString())}`;
 		}
 
 		return metrics_url;
@@ -378,6 +466,7 @@ class Metrics {
 			}
 		});
 	}
+
 	/**
 	 * Calculate days since the last daily active ping.
 	 *
@@ -391,6 +480,7 @@ class Metrics {
 		}
 		return -1;
 	}
+
 	/**
 	 * Calculate days since the last daily engaged ping.
 	 *
@@ -404,6 +494,7 @@ class Metrics {
 		}
 		return -1;
 	}
+
 	/**
 	 * Get the Active Velocity
 	 * @private
@@ -417,6 +508,7 @@ class Metrics {
 		const today = Math.floor(Number(new Date().getTime()) / 86400000);
 		return active_daily_velocity.filter(el => el > today - 7).length;
 	}
+
 	/**
 	 * Get the Engaged Velocity
 	 * @private
@@ -430,6 +522,7 @@ class Metrics {
 		const today = Math.floor(Number(new Date().getTime()) / 86400000);
 		return engaged_daily_velocity.filter(el => el > today - 7).length;
 	}
+
 	/**
 	 * Get the Subscription Type
 	 * @return {string} Subscription Name
@@ -444,6 +537,7 @@ class Metrics {
 		}
 		return subscriptions.productName.toUpperCase().replace(' ', '_');
 	}
+
 	/**
 	 * Get the number of Rewards shown to the user.
 	 *
@@ -455,13 +549,16 @@ class Metrics {
 		const numShown = rewards.totalOffersSeen;
 		if (numShown >= 6) {
 			return '6+';
-		} else if (numShown >= 2) {
+		}
+		if (numShown >= 2) {
 			return '2-5';
-		} else if (numShown === 1) {
+		}
+		if (numShown === 1) {
 			return '1';
 		}
 		return '0';
 	}
+
 	/**
 	 * Get the current Reward Id.
 	 *
@@ -473,6 +570,7 @@ class Metrics {
 		const currentOffer = rewards.currentOffer || { offer_id: 'no_id' };
 		return currentOffer.offer_id;
 	}
+
 	/**
 	 * Get the Int associated with the Current Theme.
 	 * @private
@@ -485,6 +583,7 @@ class Metrics {
 		}
 		return 0;
 	}
+
 	/**
 	 * Calculate remaining scheduled time for a ping
 	 *
@@ -504,6 +603,7 @@ class Metrics {
 		const frequency_ago = now - FREQUENCIES[frequency];
 		return (last === null) ? 0 : (last - frequency_ago);
 	}
+
 	/**
 	 * Decide if the ping should be sent
 	 *
@@ -534,6 +634,7 @@ class Metrics {
 		}
 		return false;
 	}
+
 	/**
 	 * Record Install event
 	 * @private

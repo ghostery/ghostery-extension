@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -25,7 +25,7 @@ const TutorialAntiSuiteView = () => (
 				{t('hub_tutorial_simple_view')}
 			</div>
 			<img
-				className="TutorialAntiSuiteView__image simple"
+				className="TutorialAntiSuiteView__image antisuite-simple"
 				src="/app/images/hub/tutorial/antisuite-simple.png"
 				alt={t('hub_tutorial_simple_view')}
 			/>
@@ -33,7 +33,7 @@ const TutorialAntiSuiteView = () => (
 				{t('hub_tutorial_detailed_view')}
 			</div>
 			<img
-				className="TutorialAntiSuiteView__image detailed"
+				className="TutorialAntiSuiteView__image antisuite-detailed"
 				src="/app/images/hub/tutorial/antisuite-detailed.png"
 				alt={t('hub_tutorial_detailed_view')}
 			/>

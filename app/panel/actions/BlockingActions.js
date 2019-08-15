@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -12,32 +12,25 @@
  */
 
 import {
-	GET_BLOCKING_DATA,
+	UPDATE_BLOCKING_DATA,
 	UPDATE_BLOCK_ALL_TRACKERS,
 	UPDATE_CATEGORIES,
+	UPDATE_UNKNOWN_CATEGORY_HIDE,
 	UPDATE_CATEGORY_BLOCKED,
 	UPDATE_TRACKER_BLOCKED,
 	UPDATE_TRACKER_TRUST_RESTRICT,
-	TOGGLE_EXPAND_ALL,
-	TOGGLE_EXPAND_CATEGORY
+	UPDATE_CLIQZ_MODULE_WHITELIST,
+	TOGGLE_EXPAND_ALL
 } from '../constants/constants';
-import { sendMessageInPromise } from '../utils/msg';
 
 /**
-* Fetch blocking data from background
-* @return {Object} dispatch
-*/
-export function getBlockingData(tabId) {
-	return function (dispatch) {
-		return sendMessageInPromise('getPanelData', {
-			tabId,
-			view: 'blocking',
-		}).then((data) => {
-			dispatch({
-				type: GET_BLOCKING_DATA,
-				data,
-			});
-		});
+ * Update Blocking data
+ * @return {Object}
+ */
+export function updateBlockingData(data) {
+	return {
+		type: UPDATE_BLOCKING_DATA,
+		data,
 	};
 }
 
@@ -66,6 +59,19 @@ export function updateCategories(data) {
 }
 
 /**
+ * Called from Blocking setShow functions
+ * Hits the Summary reducer, as that is where the AntiTracking data is stored
+ * @param  {Object} data
+ * @return {Object}
+ */
+export function updateUnknownCategoryHide(data) {
+	return {
+		type: UPDATE_UNKNOWN_CATEGORY_HIDE,
+		data,
+	};
+}
+
+/**
  * Called from Category.clickCategoryStatus()
  * @param  {Object} data
  * @return {Object} dispatch
@@ -83,7 +89,7 @@ export function updateCategoryBlocked(data) {
  * @return {Object} dispatch
  */
 export function updateTrackerBlocked(data) {
-	return function (dispatch, getState) {
+	return function(dispatch, getState) {
 		const { paused_blocking } = getState().summary;
 		const { sitePolicy } = getState().summary;
 		dispatch({
@@ -101,13 +107,29 @@ export function updateTrackerBlocked(data) {
  * @return {Object} dispatch
  */
 export function updateTrackerTrustRestrict(data) {
-	return function (dispatch, getState) {
+	return function(dispatch, getState) {
 		// use redux-thunk to get pageHost from summary
 		const { pageHost } = getState().summary;
 		dispatch({
 			type: UPDATE_TRACKER_TRUST_RESTRICT,
 			data,
 			pageHost,
+		});
+	};
+}
+
+/**
+ * Called from Tracker.handleCliqzTrackerWhitelist()
+ * @param  {Object} data
+ * @return {Object} dispatch
+ */
+export function updateCliqzModuleWhitelist(unknownTracker) {
+	return function(dispatch, getState) {
+		// use redux-thunk to get pageHost from summary
+		const { pageHost } = getState().summary;
+		dispatch({
+			type: UPDATE_CLIQZ_MODULE_WHITELIST,
+			data: { unknownTracker, pageHost },
 		});
 	};
 }
@@ -120,18 +142,6 @@ export function updateTrackerTrustRestrict(data) {
 export function toggleExpandAll(data) {
 	return {
 		type: TOGGLE_EXPAND_ALL,
-		data,
-	};
-}
-
-/**
- * Called from Category.toggleCategoryTrackers
- * @param  {Object} data
- * @return {Object}
- */
-export function toggleExpandCategory(data) {
-	return {
-		type: TOGGLE_EXPAND_CATEGORY,
 		data,
 	};
 }

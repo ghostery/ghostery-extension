@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -18,6 +18,7 @@ import PropTypes from 'prop-types';
 import SetupView from './SetupView';
 import { Modal, ToggleCheckbox } from '../../../shared-components';
 import { BLOCKING_POLICY_RECOMMENDED } from './SetupViewConstants';
+import globals from '../../../../src/classes/Globals';
 
 // Component Views
 import SetupBlockingView from '../SetupViews/SetupBlockingView';
@@ -26,9 +27,8 @@ import SetupAntiSuiteView from '../SetupViews/SetupAntiSuiteView';
 import SetupHumanWebView from '../SetupViews/SetupHumanWebView';
 import SetupDoneView from '../SetupViews/SetupDoneView';
 
-import globals from '../../../../src/classes/Globals';
-
-const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
+const { BROWSER_INFO } = globals;
+const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
 
 /**
  * @class Implement the Setup View for the Ghostery Hub
@@ -67,22 +67,6 @@ class SetupViewContainer extends Component {
 	}
 
 	/**
-	 * Function to persist the default settings to background
-	 */
-	_setDefaultSettings() {
-		this.setState({ sendMountActions: true });
-		this.props.actions.setSetupStep({ setup_step: 8 });
-		this.props.actions.setBlockingPolicy({ blockingPolicy: BLOCKING_POLICY_RECOMMENDED });
-		this.props.actions.setAntiTracking({ enable_anti_tracking: true });
-		this.props.actions.setAdBlock({ enable_ad_block: true });
-		this.props.actions.setSmartBlocking({ enable_smart_block: true });
-		if (!IS_EDGE) {
-			this.props.actions.setGhosteryRewards({ enable_ghostery_rewards: true });
-			this.props.actions.setHumanWeb({ enable_human_web: true });
-		}
-	}
-
-	/**
 	* Function to handle clicking yes on the Modal
 	*/
 	_answerModalYes = () => {
@@ -108,6 +92,20 @@ class SetupViewContainer extends Component {
 		this.props.actions.setSetupShowWarningOverride({
 			setup_show_warning_override: !setup_show_warning_override,
 		});
+	}
+
+	/**
+	 * Function to persist the default settings to background
+	 */
+	_setDefaultSettings() {
+		this.setState({ sendMountActions: true });
+		this.props.actions.setSetupStep({ setup_step: 8 });
+		this.props.actions.setBlockingPolicy({ blockingPolicy: BLOCKING_POLICY_RECOMMENDED });
+		this.props.actions.setAntiTracking({ enable_anti_tracking: true });
+		this.props.actions.setAdBlock({ enable_ad_block: true });
+		this.props.actions.setSmartBlocking({ enable_smart_block: true });
+		this.props.actions.setGhosteryRewards({ enable_ghostery_rewards: true });
+		this.props.actions.setHumanWeb({ enable_human_web: !IS_FIREFOX });
 	}
 
 	/**
@@ -188,16 +186,6 @@ class SetupViewContainer extends Component {
 			},
 		];
 
-		if (IS_EDGE) {
-			const index = steps.findIndex(item => item.headerProps.title === t('hub_setup_header_title_humanweb'));
-			steps.splice(index, 1);
-			for (let i = index; i < steps.length; i++) {
-				const item = steps[i];
-				item.index -= 1;
-				item.path = `/setup/${item.index}`;
-			}
-		}
-
 		const extraRoutes = [
 			{
 				name: '1/custom',
@@ -208,7 +196,7 @@ class SetupViewContainer extends Component {
 
 		return (
 			<div className="full-height">
-				<Modal show={showModal} >
+				<Modal show={showModal}>
 					{this._renderModalChildren()}
 				</Modal>
 				<SetupView steps={steps} extraRoutes={extraRoutes} sendMountActions={sendMountActions} />

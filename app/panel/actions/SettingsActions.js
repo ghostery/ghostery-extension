@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -23,7 +23,6 @@ import {
 	UPDATE_SETTINGS_CATEGORY_BLOCKED,
 	UPDATE_SETTINGS_TRACKER_BLOCKED,
 	SETTINGS_TOGGLE_EXPAND_ALL,
-	SETTINGS_TOGGLE_EXPAND_CATEGORY,
 	SETTINGS_UPDATE_SEARCH_VALUE,
 	SETTINGS_SEARCH_SUBMIT,
 	SETTINGS_FILTER,
@@ -35,18 +34,25 @@ import globals from '../../../src/classes/Globals';
 
 /**
  * Fetch settings data from background
+ * The panel uses a dynamic UI port, but the hub does not
  * @return {Object} dispatch
  */
-export function getSettingsData() {
-	return function (dispatch) {
-		return sendMessageInPromise('getPanelData', {
-			view: 'settings',
-		}).then((data) => {
-			dispatch({
-				type: GET_SETTINGS_DATA,
-				data,
+export function updateSettingsData(portData) {
+	if (portData) {
+		return {
+			type: GET_SETTINGS_DATA,
+			data: portData
+		};
+	}
+
+	return function(dispatch) {
+		return sendMessageInPromise('getPanelData', { view: 'settings' })
+			.then((promisedData) => {
+				dispatch({
+					type: GET_SETTINGS_DATA,
+					data: promisedData,
+				});
 			});
-		});
 	};
 }
 
@@ -57,7 +63,7 @@ export function getSettingsData() {
 export function importSettingsDialog(pageUrl) {
 	const url = pageUrl || '';
 	// Check if this is http(s) page
-	return function (dispatch) {
+	return function(dispatch) {
 		if (url.search('http') === -1) {
 			dispatch({
 				type: IMPORT_SETTINGS_DIALOG,
@@ -80,7 +86,7 @@ export function importSettingsDialog(pageUrl) {
  * @return {Object} dispatch
  */
 export function importSettingsNative(fileToLoad) {
-	return function (dispatch) {
+	return function(dispatch) {
 		const fileReader = new FileReader();
 		fileReader.onload = (fileLoadedEvent) => {
 			try {
@@ -110,7 +116,7 @@ export function importSettingsNative(fileToLoad) {
 export function exportSettings(pageUrl) {
 	const url = pageUrl || '';
 	// Check if this is http(s) page
-	return function (dispatch) {
+	return function(dispatch) {
 		if (url.search('http') === -1 ||
 			(globals.BROWSER_INFO.name === 'edge' && url.search('www.msn.com/spartan') !== -1)) {
 			dispatch({
@@ -164,7 +170,7 @@ export function toggleCheckbox(data) {
  * @return {Object} dispatch
  */
 export function updateDatabase() {
-	return function (dispatch) {
+	return function(dispatch) {
 		return sendMessageInPromise('update_database').then((result) => {
 			let resultText;
 			if (result && result.success === true) {
@@ -241,18 +247,6 @@ export function showNotification(data) {
 export function toggleExpandAll(data) {
 	return {
 		type: SETTINGS_TOGGLE_EXPAND_ALL,
-		data,
-	};
-}
-
-/**
- * Called from Category.toggleCategoryTrackers()
- * @param  {Object} data
- * @return {Object}
- */
-export function toggleExpandCategory(data) {
-	return {
-		type: SETTINGS_TOGGLE_EXPAND_CATEGORY,
 		data,
 	};
 }

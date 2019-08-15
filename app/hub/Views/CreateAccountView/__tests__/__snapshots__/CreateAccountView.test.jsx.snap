@@ -38,12 +38,14 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
       >
         <label
           className="CreateAccountView__inputLabel"
+          htmlFor="create-account-email"
         >
           hub_create_account_label_email
         </label>
         <input
           autoComplete="off"
           className="CreateAccountView__inputBox"
+          id="create-account-email"
           name="email"
           onChange={[Function]}
           pattern=".{1,}"
@@ -56,12 +58,14 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
       >
         <label
           className="CreateAccountView__inputLabel"
+          htmlFor="create-account-confirmEmail"
         >
           hub_create_account_label_email_confirm
         </label>
         <input
           autoComplete="off"
           className="CreateAccountView__inputBox"
+          id="create-account-confirmEmail"
           name="confirmEmail"
           onChange={[Function]}
           pattern=".{1,}"
@@ -78,12 +82,14 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
       >
         <label
           className="CreateAccountView__inputLabel"
+          htmlFor="create-account-firstName"
         >
           hub_create_account_label_first_name
         </label>
         <input
           autoComplete="off"
           className="CreateAccountView__inputBox"
+          id="create-account-firstName"
           name="firstName"
           onChange={[Function]}
           pattern=".{1,}"
@@ -96,12 +102,14 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
       >
         <label
           className="CreateAccountView__inputLabel"
+          htmlFor="create-account-lastName"
         >
           hub_create_account_label_email_last_name
         </label>
         <input
           autoComplete="off"
           className="CreateAccountView__inputBox"
+          id="create-account-lastName"
           name="lastName"
           onChange={[Function]}
           pattern=".{1,}"
@@ -118,12 +126,14 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
       >
         <label
           className="CreateAccountView__inputLabel"
+          htmlFor="create-account-password"
         >
           hub_create_account_label_password
         </label>
         <input
           autoComplete="off"
           className="CreateAccountView__inputBox"
+          id="create-account-password"
           name="password"
           onChange={[Function]}
           pattern=".{1,}"
@@ -135,10 +145,35 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
         className="columns small-12 medium-5"
       >
         <div
-          className="CreateAccountView__checkboxContainer CreateAccountView--marginBottom flex-container align-middle"
+          className="CreateAccountView__checkboxContainer CreateAccountView--marginBottom flex-container"
         >
           <div
-            className="ToggleCheckbox ToggleCheckbox--active"
+            className="ToggleCheckbox ToggleCheckbox--flush-left ToggleCheckbox--active"
+            onClick={[Function]}
+          >
+            <svg
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+              />
+            </svg>
+          </div>
+          <span
+            className="CreateAccountView__inputLabel clickable"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "create_account_form_legal_consent_checkbox_label",
+              }
+            }
+            onClick={[Function]}
+          />
+        </div>
+        <div
+          className="CreateAccountView__checkboxContainer CreateAccountView--marginBottom flex-container"
+        >
+          <div
+            className="ToggleCheckbox ToggleCheckbox--flush-left ToggleCheckbox--active"
             onClick={[Function]}
           >
             <svg
@@ -164,14 +199,35 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
       <div
         className="CreateAccountView__linkContainer columns small-12 medium-10"
       >
-        <a
-          aria-current={null}
+        <p
           className="CreateAccountView__link"
-          href="/log-in"
-          onClick={[Function]}
         >
-          hub_create_account_link_login
-        </a>
+          hub_create_account_already_have_account
+           
+          <a
+            aria-current={null}
+            href="/log-in"
+            onClick={[Function]}
+          >
+            hub_create_account_link_login
+          </a>
+        </p>
+      </div>
+    </div>
+    <div
+      className="row align-center"
+    >
+      <div
+        className="CreateAccountView__linkContainer columns small-12 medium-10"
+      >
+        <p
+          className="CreateAccountView__termsStatement"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "account_creation_privacy_statement",
+            }
+          }
+        />
       </div>
     </div>
     <div
@@ -230,12 +286,14 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
       >
         <label
           className="CreateAccountView__inputLabel"
+          htmlFor="create-account-email"
         >
           hub_create_account_label_email
         </label>
         <input
           autoComplete="off"
           className="CreateAccountView__inputBox error"
+          id="create-account-email"
           name="email"
           onChange={[Function]}
           pattern=".{1,}"
@@ -253,12 +311,14 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
       >
         <label
           className="CreateAccountView__inputLabel"
+          htmlFor="create-account-confirmEmail"
         >
           hub_create_account_label_email_confirm
         </label>
         <input
           autoComplete="off"
           className="CreateAccountView__inputBox error"
+          id="create-account-confirmEmail"
           name="confirmEmail"
           onChange={[Function]}
           pattern=".{1,}"
@@ -280,12 +340,14 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
       >
         <label
           className="CreateAccountView__inputLabel"
+          htmlFor="create-account-firstName"
         >
           hub_create_account_label_first_name
         </label>
         <input
           autoComplete="off"
           className="CreateAccountView__inputBox"
+          id="create-account-firstName"
           name="firstName"
           onChange={[Function]}
           pattern=".{1,}"
@@ -298,12 +360,14 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
       >
         <label
           className="CreateAccountView__inputLabel"
+          htmlFor="create-account-lastName"
         >
           hub_create_account_label_email_last_name
         </label>
         <input
           autoComplete="off"
           className="CreateAccountView__inputBox"
+          id="create-account-lastName"
           name="lastName"
           onChange={[Function]}
           pattern=".{1,}"
@@ -320,12 +384,14 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
       >
         <label
           className="CreateAccountView__inputLabel"
+          htmlFor="create-account-password"
         >
           hub_create_account_label_password
         </label>
         <input
           autoComplete="off"
           className="CreateAccountView__inputBox error"
+          id="create-account-password"
           name="password"
           onChange={[Function]}
           pattern=".{1,}"
@@ -347,10 +413,35 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
         className="columns small-12 medium-5"
       >
         <div
-          className="CreateAccountView__checkboxContainer CreateAccountView--marginBottom flex-container align-middle"
+          className="CreateAccountView__checkboxContainer CreateAccountView--marginBottom flex-container"
         >
           <div
-            className="ToggleCheckbox"
+            className="ToggleCheckbox ToggleCheckbox--flush-left"
+            onClick={[Function]}
+          >
+            <svg
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+              />
+            </svg>
+          </div>
+          <span
+            className="CreateAccountView__inputLabel clickable"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "create_account_form_legal_consent_checkbox_label",
+              }
+            }
+            onClick={[Function]}
+          />
+        </div>
+        <div
+          className="CreateAccountView__checkboxContainer CreateAccountView--marginBottom flex-container"
+        >
+          <div
+            className="ToggleCheckbox ToggleCheckbox--flush-left"
             onClick={[Function]}
           >
             <svg
@@ -376,14 +467,35 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
       <div
         className="CreateAccountView__linkContainer columns small-12 medium-10"
       >
-        <a
-          aria-current={null}
+        <p
           className="CreateAccountView__link"
-          href="/log-in"
-          onClick={[Function]}
         >
-          hub_create_account_link_login
-        </a>
+          hub_create_account_already_have_account
+           
+          <a
+            aria-current={null}
+            href="/log-in"
+            onClick={[Function]}
+          >
+            hub_create_account_link_login
+          </a>
+        </p>
+      </div>
+    </div>
+    <div
+      className="row align-center"
+    >
+      <div
+        className="CreateAccountView__linkContainer columns small-12 medium-10"
+      >
+        <p
+          className="CreateAccountView__termsStatement"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "account_creation_privacy_statement",
+            }
+          }
+        />
       </div>
     </div>
     <div

@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -46,7 +46,7 @@ class AppView extends Component {
 		return (
 			<div className="App full-height full-width flex-container">
 				<SideNavigation />
-				<div ref={this.mainContent} className="App__mainContent full-height full-width" >
+				<div ref={this.mainContent} className="App__mainContent full-height full-width">
 					<ToastMessage toastText={app.toastMessage} toastClass={app.toastClass} toastExit={exitToast} />
 					{children}
 				</div>

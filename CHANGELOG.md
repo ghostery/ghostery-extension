@@ -1,3 +1,49 @@
+### GHOSTERY 8.4.1 (August 6, 2019)
+
++ Add new Unknown tracker category in detail view with anti-tracking whitelist (#417, #433)
++ Fixes broken `target=_blank` links in Opera (#426)
++ Fixes error `Uncaught TypeError: c.querySelectorAll` (#406)
++ Show ad-blocking icons in detail view tracker list (#411)
++ Add new terms and conditions acknowledgment to account creation(#414)
++ Implement new Cliqz url parser (#410)
++ Fix donut tooltip (#409)
++ Fix bug in collapsed Summary view on un-scanned pages (#404)
++ Improved broken page metrics (#418)
++ Update all project dependencies to satisfy security alerts (#405)
++ Updated translations (#402)
+
+### GHOSTERY 8.4.0 (June 26, 2019)
+
++ Add new counter for Requests Modified by Anti-Tracking (#392)
++ Show fingerprint, cookie and advertisement icons in Detail View tracker list (#394)
++ Improved Anti-Tracking integration (#377)
++ Integrate Click2Play into SmartBlocking (#388)
++ Respect pause state before displaying CMP and Rewards windows (Fixes #389)
++ Performance improvements (Fixes #12)
++ Improved Ad-Blocker filter rule injection (Fixes #381)
++ Updated translations (#397, #400)
+
+### GHOSTERY 8.3.4 (May 8, 2019)
+
++ Fixes bug in Click2Play redirect blocking
+
+### GHOSTERY 8.3.3 (April 24, 2019)
+
++ Fixes bug where Ad-Blocker/Anti-Tracking modules did not respect whitelist settings
++ Fixes bug in category description names
+
+### GHOSTERY 8.3.2 (April 22, 2019)
+
++ Ghostery tracker panel now updates dynamically in real time!
++ Remove unsupported file types for Opera automated-review
++ Removed unnecessary files for slimmer production build
++ Sync account creation UI between intro hub, panel and auth-web
++ Performance improvements when browsing certain Google sites (gmail, maps)
++ Feature parity for Edge browser (Human Web, Rewards)
++ Clean up various errors thrown by content scripts and message handlers
++ Updated Readme (team members and open-source projects)
++ Minor UI tweaks
+
 ### GHOSTERY 8.3.1 (January 31, 2019)
 
 + Add `options_ui` support for Intro Hub

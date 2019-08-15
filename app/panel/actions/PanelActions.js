@@ -4,14 +4,14 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 import {
-	GET_PANEL_DATA, GET_SUMMARY_DATA, GET_BLOCKING_DATA,
+	UPDATE_PANEL_DATA,
 	TOGGLE_CLIQZ_FEATURE,
 	SHOW_NOTIFICATION,
 	CLOSE_NOTIFICATION,
@@ -37,36 +37,13 @@ export function toggleCliqzFeature(featureName, isEnabled) {
 }
 
 /**
- * Fetch panel data from background, only on the initial load. Returns combined
- * Panel, Summary and Blocking data as needed.
- * @return {Object} dispatch
+ * Init / Update Panel data
+ * @return {Object}
  */
-export function getPanelData(tabId) {
-	return function (dispatch) {
-		return sendMessageInPromise('getPanelData', {
-			tabId,
-			view: 'panel',
-		}).then((data) => {
-			// On initial load, getPanelData returns combined Panel
-			// and Summary data and dispatches to respective reducers
-			dispatch({
-				type: GET_PANEL_DATA,
-				data: data.panel,
-			});
-			dispatch({
-				type: GET_SUMMARY_DATA,
-				data: data.summary,
-			});
-			// If we're in Expert view, dispatch Blocking data to reducer
-			if (data.blocking !== false) {
-				dispatch({
-					type: GET_BLOCKING_DATA,
-					data: data.blocking,
-				});
-			}
-			// send back to Panel component as promised data
-			return data.panel;
-		});
+export function updatePanelData(data) {
+	return {
+		type: UPDATE_PANEL_DATA,
+		data,
 	};
 }
 

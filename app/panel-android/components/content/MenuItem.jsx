@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -62,7 +62,7 @@ export default class MenuItem extends React.Component {
 					<span className={this.props.type}>{this.props.numData}</span>
 					<p className="headline">{this.props.headline}</p>
 					<p className="description">{this.props.description}</p>
-					<button onClick={this.closeButtonClicked} className="close" />
+					<button type="button" onClick={this.closeButtonClicked} className="close" />
 				</div>
 			</div>
 		);

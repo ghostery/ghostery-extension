@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -40,7 +40,7 @@ class Notification extends Component {
 	render() {
 		return (
 			<div>
-				{!this.state.closed &&
+				{!this.state.closed && (
 					<div className="rewards-notification-container">
 						<div className="rewards-notification-overlay" />
 						<div className="rewards-popup-container">
@@ -49,16 +49,16 @@ class Notification extends Component {
 								<div className="notification-text">
 									{this.props.data.message}
 								</div>
-								{this.props.data.buttons &&
+								{this.props.data.buttons && (
 									<div className="notification-buttons">
-										<button className="btn" onClick={() => { this.closeNotification(true); }}>
+										<button type="button" className="btn" onClick={() => { this.closeNotification(true); }}>
 											{t('rewards_yes')}
 										</button>
-										<button className="btn" onClick={() => { this.closeNotification(false); }}>
+										<button type="button" className="btn" onClick={() => { this.closeNotification(false); }}>
 											{t('rewards_no')}
 										</button>
 									</div>
-								}
+								)}
 								{this.props.data.textLink
 									&& (
 										<a
@@ -79,7 +79,7 @@ class Notification extends Component {
 							</div>
 						</div>
 					</div>
-				}
+				)}
 			</div>
 		);
 	}

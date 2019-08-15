@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -14,8 +14,8 @@
 /* eslint no-use-before-define: 0 */
 
 import {
-	GET_SUMMARY_DATA,
-	GET_CLIQZ_MODULE_DATA,
+	UPDATE_SUMMARY_DATA,
+	UPDATE_CLIQZ_MODULE_DATA,
 	UPDATE_GHOSTERY_PAUSED,
 	UPDATE_SITE_POLICY,
 	UPDATE_TRACKER_COUNTS
@@ -36,6 +36,16 @@ const initialState = {
 		blocked: 0,
 	},
 	tab_id: 0,
+	antiTracking: {
+		totalUnsafeCount: 0, // The amount of data points scrubbed by Anti-Tracking
+		totalUnknownCount: 0, // The amount of data points scrubbed by Anti-Tracking for Trackers not in the Ghostery DB
+		trackerCount: 0, // The amount of trackers scrubbed by Anti-Tracking (which are each associated with 1 or more data points)
+		unknownTrackerCount: 0, // The amount of unknown trackers scrubbed by Anti-Tracking
+	},
+	adBlock: {
+		totalCount: 0, // The amount of ads blocked by Ad Blocking
+		trackerCount: 0, // The amount of trackers blocked by Ad Blocking (which are each associated with 1 or more ads)
+	}
 };
 /**
  * Default export for summary view reducer.
@@ -47,23 +57,9 @@ const initialState = {
  */
 export default (state = initialState, action) => {
 	switch (action.type) {
-		case GET_SUMMARY_DATA: {
+		case UPDATE_SUMMARY_DATA:
+		case UPDATE_CLIQZ_MODULE_DATA: {
 			return Object.assign({}, state, action.data);
-		}
-		case GET_CLIQZ_MODULE_DATA: {
-			const antiTracking = action.data.antitracking;
-			let totalUnsafeCount = 0;
-			for (const category in antiTracking) {
-				if (antiTracking.hasOwnProperty(category)) {
-					for (const app in antiTracking[category]) {
-						if (antiTracking[category][app] === 'unsafe') {
-							totalUnsafeCount++;
-						}
-					}
-				}
-			}
-			antiTracking.totalUnsafeCount = totalUnsafeCount;
-			return Object.assign({}, state, { adBlock: action.data.adblock, antiTracking: action.data.antitracking });
 		}
 		case UPDATE_GHOSTERY_PAUSED: {
 			return Object.assign({}, state, { paused_blocking: action.data.ghosteryPaused, paused_blocking_timeout: action.data.time });
@@ -89,7 +85,7 @@ export default (state = initialState, action) => {
 };
 
 /**
- * Update blacklist / whitelist
+ * Update site blacklist / whitelist
  * @memberOf  PanelReactReducers
  * @private
  *
@@ -148,6 +144,7 @@ const _updateSitePolicy = (state, action) => {
 	sendMessage('setPanelData', {
 		site_whitelist: updated_whitelist,
 		site_blacklist: updated_blacklist,
+		brokenPageMetricsWhitelistSite: updated_site_policy === 2,
 	});
 
 	return {

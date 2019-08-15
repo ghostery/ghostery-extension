@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -62,7 +62,7 @@ class SetupBlockingDropdown extends Component {
 	/**
 	 * Debounce the hide alert function after 3 seconds
 	 */
-	_hideToastDebounce = debounce(this._hideToast, 3000)
+	_hideToastDebounce = debounce(this._hideToast, 3000) // eslint-disable-line react/sort-comp
 
 	/**
 	 * React's required render function. Returns JSX
@@ -94,7 +94,6 @@ SetupBlockingDropdown.propTypes = {
 		filter: PropTypes.func.isRequired,
 		showNotification: PropTypes.func.isRequired,
 		toggleExpandAll: PropTypes.func.isRequired,
-		toggleExpandCategory: PropTypes.func.isRequired,
 		updateBlockAllTrackers: PropTypes.func.isRequired,
 		updateCategoryBlocked: PropTypes.func.isRequired,
 		updateSearchValue: PropTypes.func.isRequired,

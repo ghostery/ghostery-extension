@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -16,6 +16,7 @@ import { Link } from 'react-router-dom';
 import ClassNames from 'classnames';
 import RSVP from 'rsvp';
 import { validateEmail, validateConfirmEmail, validatePassword } from '../utils/utils';
+import I18nWithLink from '../../shared-components/I18nWithLink';
 
 /**
  * @class Implement Create Account view which opens
@@ -32,7 +33,10 @@ class CreateAccount extends React.Component {
 			confirmEmailError: false,
 			firstName: '',
 			lastName: '',
+			legalConsentChecked: false,
+			legalConsentNotCheckedError: false,
 			password: '',
+			promotionsChecked: true,
 			loading: false,
 			passwordInvalidError: false,
 			passwordLengthError: false,
@@ -66,7 +70,7 @@ class CreateAccount extends React.Component {
 		e.preventDefault();
 		this.setState({ loading: true }, () => {
 			const {
-				email, confirmEmail, firstName, lastName, password
+				email, confirmEmail, firstName, lastName, legalConsentChecked, password, promotionsChecked
 			} = this.state;
 			this.setState({ loading: true }, () => {
 				if (!validateEmail(email)) {
@@ -97,16 +101,25 @@ class CreateAccount extends React.Component {
 					}
 					return;
 				}
+				if (!legalConsentChecked) {
+					this.setState({
+						legalConsentNotCheckedError: true,
+						loading: false,
+					});
+					return;
+				}
 
 				this.setState({
 					emailError: false,
 					confirmEmailError: false,
+					legalConsentNotCheckedError: false,
 					passwordInvalidError: false,
 					passwordLengthError: false,
 				}, () => {
 					this.props.actions.register(email, confirmEmail, firstName, lastName, password).then((success) => {
 						this.setState({ loading: false });
 						if (success) {
+							this.props.actions.updateAccountPromotions(promotionsChecked);
 							new RSVP.Promise((resolve) => {
 								this.props.actions.getUser()
 									.then(() => resolve())
@@ -127,7 +140,7 @@ class CreateAccount extends React.Component {
 	 */
 	render() {
 		const {
-			email, confirmEmail, firstName, lastName, password, loading, emailError, confirmEmailError, passwordInvalidError, passwordLengthError
+			email, confirmEmail, firstName, lastName, password, promotionsChecked, legalConsentChecked, loading, emailError, confirmEmailError, legalConsentNotCheckedError, passwordInvalidError, passwordLengthError
 		} = this.state;
 		const buttonClasses = ClassNames('button ghostery-button', { loading });
 		return (
@@ -139,7 +152,8 @@ class CreateAccount extends React.Component {
 								<div className="columns">
 									<div id="create-account-email" className={(emailError ? 'panel-error' : '')}>
 										<label className="create-account-label" id="create-email-label" htmlFor="create-input-email">
-											{ t('email_field_label') }<span className="asterisk">*</span>
+											{ t('email_field_label') }
+											<span className="asterisk">*</span>
 											<input onChange={this.handleInputChange} value={email} className="create-account-input" id="create-input-email" name="email" pattern=".{1,}" autoComplete="off" required type="text" />
 										</label>
 										<p id="email-invalid" className="warning">
@@ -148,7 +162,8 @@ class CreateAccount extends React.Component {
 									</div>
 									<div id="create-account-email-confirm" className={(confirmEmailError ? 'panel-error' : '')}>
 										<label className="create-account-label" id="create-email-confirm-label" htmlFor="create-input-email-confirm">
-											{ t('email_confirm_field_label') }<span className="asterisk">*</span>
+											{ t('email_confirm_field_label') }
+											<span className="asterisk">*</span>
 											<input onChange={this.handleInputChange} value={confirmEmail} className="create-account-input" id="create-input-email-confirm" name="confirmEmail" pattern=".{1,}" autoComplete="off" required type="text" />
 										</label>
 										<p className="warning">{ t('invalid_email_confirmation') }</p>
@@ -179,7 +194,8 @@ class CreateAccount extends React.Component {
 										<div className="row">
 											<div className="columns">
 												<label className="create-account-label" id="create-password-label" htmlFor="create-input-password">
-													{ t('create_password_field_label') }<span className="asterisk">*</span>
+													{ t('create_password_field_label') }
+													<span className="asterisk">*</span>
 													<input onChange={this.handleInputChange} value={password} className="create-account-input" id="create-input-password" name="password" pattern=".{1,}" required type="password" />
 												</label>
 											</div>
@@ -197,9 +213,25 @@ class CreateAccount extends React.Component {
 							</div>
 							<div className="row">
 								<div className="small-12 columns">
-									<div id="create-account-privacy-container">
-										<p id="accept-privacy-label" dangerouslySetInnerHTML={{ __html: t('account_creation_privacy_statement') }} />
+									<div id="create-account-legal-consent-checkbox" className={(legalConsentNotCheckedError ? 'checkbox-error' : '')}>
+										<input id="legalConsentChecked" name="legalConsentChecked" type="checkbox" checked={legalConsentChecked} onChange={this.handleCheckboxChange} />
+										{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+										<label htmlFor="legalConsentChecked">
+											<I18nWithLink value="create_account_form_legal_consent_checkbox_label" />
+										</label>
 									</div>
+								</div>
+							</div>
+							<div className="row">
+								<div className="small-12 columns">
+									<div id="create-account-promotions">
+										<input id="promotionsChecked" name="promotionsChecked" type="checkbox" checked={promotionsChecked} onChange={this.handleCheckboxChange} />
+										<label htmlFor="promotionsChecked">{t('hub_create_account_checkbox_promotions')}</label>
+									</div>
+								</div>
+							</div>
+							<div className="row">
+								<div className="small-12 columns">
 									<div id="account-creation-buttons" className="row align-center">
 										<div className="small-6 columns text-center">
 											<Link to={(this.props.is_expert ? '/detail' : '/')} id="create-account-cancel" className="cancel button hollow">

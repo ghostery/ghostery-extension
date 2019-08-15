@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -12,7 +12,9 @@
  */
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import PanelToTabLink from './BuildingBlocks/PanelToTabLink';
 import { sendMessage, openSubscriptionPage } from '../utils/msg';
+
 
 /**
  * Helper function to handle clicking on the Become a Subscriber button
@@ -34,17 +36,17 @@ const Subscribe = (props) => {
 			<div className="pitch-container">
 				<span className="pitch-text" dangerouslySetInnerHTML={{ __html: t('subscribe_pitch') }} />
 			</div>
-			<a href="https://www.ghostery.com/products/plus/" target="_blank" rel="noopener noreferrer">
+			<PanelToTabLink href="https://www.ghostery.com/products/plus/">
 				<span className="pitch-learn-more">{t('subscribe_pitch_learn_more')}</span>
-			</a>
+			</PanelToTabLink>
 			<div>
 				<span className="pitch-become-subscriber" onClick={_handleBecomeClick}>{t('subscribe_pitch_button_label')}</span>
 			</div>
-			{(loggedIn === 'false') &&
+			{(loggedIn === 'false') && (
 				<NavLink to="/login" className="pitch-already-subscriber">
 					<span>{t('subscribe_pitch_sign_here')}</span>
 				</NavLink>
-			}
+			)}
 		</div>
 	);
 };

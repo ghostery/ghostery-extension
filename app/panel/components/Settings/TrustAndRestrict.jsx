@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -36,6 +36,7 @@ class TrustAndRestrict extends React.Component {
 		this.addSite = this.addSite.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
+
 	/**
 	 * Implement switch between two tabs (whitelisted and blacklisted) on the view
 	 * @param {Object} event 	mouseclick on a tab
@@ -52,6 +53,7 @@ class TrustAndRestrict extends React.Component {
 		});
 		this.setState({ menu: newMenuState });
 	}
+
 	/**
 	 * Save updated value in state as user types site url in the input box.
 	 * @param  {Object} event input box 'change' event
@@ -70,6 +72,7 @@ class TrustAndRestrict extends React.Component {
 			});
 		}
 	}
+
 	/**
 	 * Handle Return key by calling addSite.
 	 * @param  {Object} event 		keyboard event
@@ -79,6 +82,7 @@ class TrustAndRestrict extends React.Component {
 			this.addSite();
 		}
 	}
+
 	/**
 	 * Implement adding site to the list of whitelisted or blacklisted sites
 	 * This routine valides entered url and checks if the entered url is a duplicate, or
@@ -134,6 +138,7 @@ class TrustAndRestrict extends React.Component {
 		}
 		this.props.actions.updateSitePolicy({ type: listType, pageHost });
 	}
+
 	/**
 	 * Save current warning in state.
 	 * @param  {string} warning 	 warning to save
@@ -142,6 +147,7 @@ class TrustAndRestrict extends React.Component {
 	showWarning(warning) {
 		this.setState({ currentWarning: warning });
 	}
+
 	/**
 	* Render Trust and Restrict subview.
 	* @return {ReactComponent}   ReactComponent instance

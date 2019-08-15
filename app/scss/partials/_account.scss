@@ -1,10 +1,10 @@
 /**
- * Acount Panel Sass
+ * Account Panel Sass
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -35,7 +35,7 @@ label {
 	}
 	&:not(.hollow) {
 		&:hover, &:focus {
-			background-color: $ghosty-blue !important;
+			background-color: $ghosty-blue;
 		}
 	}
 }
@@ -65,6 +65,11 @@ p.warning {
 	}
 	label {
 		color: #CC5F5A;
+	}
+}
+.checkbox-error {
+	label {
+		color: #a94442;
 	}
 }
 
@@ -200,12 +205,16 @@ p.warning {
 /* CREATE ACCOUNT PANEL */
 #create-account-panel {
 	margin-top: 10px;
-	input {margin-bottom: 5px;}
-	p.warning {margin-bottom: 5px;}
+	input {
+		margin-bottom: 5px;
+		margin-top: 5px;
+	}
+	p.warning {}
 	#create-account-first-name, #create-account-last-name {
-		margin-bottom: 20px; //compensation for no .warning elements
+		margin-bottom: 15px; //compensation for no .warning elements
 	}
 	#create-account-password {
+		margin-bottom: 10px;
 		p.warning {
 			#password-length-requirement,
 			#password-characters-requirement {
@@ -216,9 +225,26 @@ p.warning {
 			}
 		}
 	}
+	#create-account-promotions {
+		margin-bottom: 10px;
+		label {
+			font-size: 11px;
+			font-weight: 500;
+		}
+	}
+	#create-account-legal-consent-checkbox {
+		margin-bottom: 10px;
+		label {
+			font-size: 11px;
+			font-weight: 500;
+			vertical-align: top;
+			margin-right: 0;
+			max-width: 94%;
+		}
+	}
 	#create-account-privacy-container {
 		p#accept-privacy-label {
-			font-size: 13px;
+			font-size: 12px;
 			line-height: 16px;
 			font-weight: 400;
 		}

@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -57,7 +57,8 @@ function _renderBottomItem(item, disableNav) {
 				</a>
 			</div>
 		);
-	} else if (item.id === 'logout') {
+	}
+	if (item.id === 'logout') {
 		return (
 			<div key={`bottom-item-${item.id}`} className="SideNavigation__item SideNavigation__bottomItem flex-container align-middle">
 				<div className={logoutClassNames} onClick={item.clickHandler}>

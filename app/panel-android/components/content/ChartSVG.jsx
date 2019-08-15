@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -36,7 +36,7 @@ export default class ChartSVG extends React.Component {
 		const { radius } = this.props;
 		let paths = this.props.paths.slice(0, this.state.nItem).map((element, index) => (
 			// eslint-disable-next-line react/no-array-index-key
-			<Path	key={index}	path={element} radius={radius} handler={this.increaseN}	/>
+			<Path key={index} path={element} radius={radius} handler={this.increaseN}	/>
 		));
 
 		if (paths.length === 0) {

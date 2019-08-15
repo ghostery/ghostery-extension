@@ -458,9 +458,6 @@
 	"summary_description_not_scanned_2": {
 		"message": "Navega a otra página y te prometo que me encargaré de todo."
 	},
-	"summary_custom_settings": {
-		"message": "Ajustes personalizados"
-	},
 	"summary_trust_site": {
 		"message": "Fiable"
 	},
@@ -481,9 +478,6 @@
 	},
 	"summary_pause_ghostery_tooltip": {
 		"message": "Pausar extensión Ghostery"
-	},
-	"summary_pause_ghostery_ab_pause": {
-		"message": "Pausar"
 	},
 	"pause_30_min": {
 		"message": "durante 30 minutos"
@@ -509,9 +503,6 @@
 	"summary_resume_ghostery_tooltip": {
 		"message": "Extensión Ghostery pausada. Clic para reactivar."
 	},
-	"summary_resume_ghostery_ab_pause": {
-		"message": "Reactivar"
-	},
 	"summary_show_menu": {
 		"message": "mostrar menú"
 	},
@@ -533,6 +524,10 @@
 	"blocking_category_blocked": {
 		"description": "as in '5 (trackers) BLOCKED'",
 		"message": "Bloqueado"
+	},
+	"blocking_category_whitelisted": {
+		"description": "as in '5 (trackers) WHITELISTED'",
+		"message": "En la lista blanca"
 	},
 	"panel_create_account": {
 		"message": "Crear una cuenta"
@@ -682,7 +677,7 @@
 		"message": " en esta página."
 	},
 	"panel_tracker_total_tooltip": {
-		"message": "Recuento total de rastreadores encontrados, anuncios bloqueados y puntos de datos anónimos."
+		"message": "Recuento total de rastreadores encontrados y solicitudes modificadas."
 	},
 	"panel_signin_success": {
 		"message": "Ya has iniciado sesión como "
@@ -726,6 +721,9 @@
 	"panel_tracker_trust_tooltip": {
 		"message": "Confiar en este sitio"
 	},
+	"panel_tracker_scrub_tooltip": {
+		"message": "Depurar este sitio"
+	},
 	"panel_detail_menu_list_title": {
 		"message": "Vista de lista"
 	},
@@ -758,9 +756,6 @@
 	},
 	"panel_detail_performance_text": {
 		"message": "Función disponible próximamente."
-	},
-	"panel_detail_rewards_title": {
-		"message": "Ghostery Rewards"
 	},
 	"panel_detail_rewards_coming_soon": {
 		"message": "Función disponible próximamente."
@@ -1092,6 +1087,12 @@
 	"page_load": {
 		"message": "Carga de página"
 	},
+	"requests_modified": {
+		"message": "Solicitudes modificadas:"
+	},
+	"requests_modified_tooltip": {
+		"message": "Número total de solicitudes de rastreo y elementos modificados por el antirrastreador y el bloqueador de anuncios"
+	},
 	"trackers_blocked": {
 		"message": "Rastreadores bloqueados:"
 	},
@@ -1283,9 +1284,6 @@
 	},
 	"tooltip_restrict_on": {
 		"message": "En este sitio, se bloquearán los rastreadores y se habilitará Anti-Tracking. Clic para deshacer."
-	},
-	"tooltip_custom_settings": {
-		"message": "Usar mis ajustes de rastreadores seleccionados."
 	},
 	"tooltip_pause": {
 		"message": "Pausar Ghostery"
@@ -1853,8 +1851,11 @@
 	"hub_login_label_password_invalid": {
 		"message": "Usa entre 8 y 50 caracteres."
 	},
+	"hub_login_link_dont_have_account": {
+		"message": "¿No tienes una cuenta?"
+	},
 	"hub_login_link_create_account": {
-		"message": "¿No tienes una cuenta? Registro."
+		"message": "Registro."
 	},
 	"hub_login_button_submit": {
 		"message": "Conectarse"
@@ -1898,8 +1899,11 @@
 	"hub_create_account_checkbox_promotions": {
 		"message": "Envíame actualizaciones y promociones de Ghostery."
 	},
+	"hub_create_account_already_have_account": {
+		"message": "¿Ya tienes una cuenta de Ghostery?"
+	},
 	"hub_create_account_link_login": {
-		"message": "Ya tengo una cuenta. Conectarme."
+		"message": "Accede aquí."
 	},
 	"hub_create_account_button_submit": {
 		"message": "Crear una cuenta"
@@ -2124,6 +2128,9 @@
 	"subscription_submit_issue": {
 		"message": "Enviar problema"
 	},
+	"subscription_upgrade_to": {
+		"message": "Mejorar a"
+	},
 	"panel_stats_menu_cumulative": {
 		"message": "Acumulado"
 	},
@@ -2203,5 +2210,58 @@
 	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "Borrar el historial de estadísticas hasta ahora."
+	},
+	"cookie": {
+		"message": "cookie"
+	},
+	"cookies": {
+		"message": "cookies"
+	},
+	"fingerprint": {
+		"message": "huella dactilar"
+	},
+	"fingerprints": {
+		"message": "huellas dactilares"
+	},
+	"ad": {
+		"message": "anuncio"
+	},
+	"ads": {
+		"message": "anuncios"
+	},
+	"cliqz_feature_status_on": {
+		"message": "Sí"
+	},
+	"cliqz_feature_status_off": {
+		"message": "No"
+	},
+	"create_account_form_legal_consent_checkbox_label": {
+		"message": "Acepto los $LINK_TERMS_START$Términos y condiciones$LINK_END$ y el $LINK_LICENSE_START$Acuerdo de licencia$LINK_END$ y doy mi consentimiento a las prácticas de datos indicadas en la $LINK_PRIVACY_START$Política de privacidad$LINK_END$.",
+		"placeholders": {
+			"link_end": {
+				"content": "</a>"
+			},
+			"link_license_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.mozilla.org/en-US/MPL/2.0/\" rel=\"noopener noreferrer\">"
+			},
+			"link_privacy_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" rel=\"noopener noreferrer\">"
+			},
+			"link_terms_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/\" rel=\"noopener noreferrer\">"
+			}
+		}
+	},
+	"ghostery_rewards": {
+		"message": "Ghostery Rewards"
+	},
+	"enhanced_anti_tracking": {
+		"message": "Antirrastreadores mejorado"
+	},
+	"unknown": {
+		"message": "Desconocido"
+	},
+	"unknown_description": {
+		"message": "Los antirrastreadores depuraron los rastreadores desconocidos"
 	}
 }

@@ -6,28 +6,28 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import _ from 'underscore';
+import { isEqual } from 'underscore';
 import normalize from 'json-api-normalizer';
 import build from 'redux-object';
 import RSVP from 'rsvp';
-import globals from '../classes/Globals';
-import conf from '../classes/Conf';
-import dispatcher from '../classes/Dispatcher';
+import globals from './Globals';
+import conf from './Conf';
+import dispatcher from './Dispatcher';
 import { log } from '../utils/common';
 import Api from '../utils/api';
 
 const api = new Api();
 const {
-	GHOSTERY_DOMAIN, AUTH_SERVER, ACCOUNT_SERVER, SYNC_ARRAY, IS_CLIQZ, BROWSER_INFO
+	GHOSTERY_DOMAIN, AUTH_SERVER, ACCOUNT_SERVER, SYNC_ARRAY, IS_CLIQZ
 } = globals;
-const IS_EDGE = (BROWSER_INFO.name === 'edge');
+
 const SYNC_SET = new Set(SYNC_ARRAY);
 
 class Account {
@@ -163,7 +163,19 @@ class Account {
 			.then(userID => api.get('stripe/customers', userID, 'cards,subscriptions'))
 			.then((res) => {
 				const customer = build(normalize(res), 'customers', res.data.id);
-				this._setSubscriptionData(customer);
+				// TODO temporary fix to handle multiple subscriptions
+				let sub = customer.subscriptions;
+				if (!Array.isArray()) {
+					sub = [sub];
+				}
+				const subPlus = sub.reduce((acc, curr) => {
+					let a = acc;
+					if (curr.productName.includes('Plus')) {
+						a = curr;
+					}
+					return a;
+				}, {});
+				this._setSubscriptionData(subPlus);
 				return customer;
 			})
 	)
@@ -203,17 +215,18 @@ class Account {
 			})
 	)
 
-	updateEmailPreferences = (set) => {
+	updateEmailPreferences = set => (
 		this._getUserID().then(userID => (
 			api.update('email_preferences', {
 				type: 'email_preferences',
 				id: userID,
 				attributes: {
 					updates: set,
+					promotions: set,
 				}
 			})
-		));
-	}
+		))
+	)
 
 	sendValidateAccountEmail = () => (
 		this._getUserID()
@@ -334,7 +347,7 @@ class Account {
 	 * IMPORTANT: this function does NOT verify the content of the user scopes, therefore scopes
 	 * could have been tampered with.
 	 *
-	 * @param  {rest of string arrays}	string arrays containing the required scope combination(s)
+	 * @param  {...array}	string arrays containing the required scope combination(s)
 	 * @return {boolean}				true if the user scopes match at least one of the required scope combination(s)
 	 */
 	hasScopesUnverified = (...required) => {
@@ -362,6 +375,7 @@ class Account {
 		}
 		return false;
 	}
+
 	/**
 	 * Create settings object for syncing and/or Export.
 	 * @memberOf BackgroundUtils
@@ -474,13 +488,13 @@ class Account {
 		dispatcher.trigger('conf.save.account');
 	}
 
-	_setSubscriptionData = (subscriptionData) => {
-		// TODO: Change this so that we aren't writing over subscriptionData
-		if (!conf.paid_subscription && subscriptionData.hasOwnProperty('subscriptions')) {
+	_setSubscriptionData = (data) => {
+		// TODO: Change this so that we aren't writing over data
+		if (!conf.paid_subscription && data) {
 			conf.paid_subscription = true;
 			dispatcher.trigger('conf.save.paid_subscription');
 		}
-		conf.account.subscriptionData = subscriptionData.subscriptions || null;
+		conf.account.subscriptionData = data || null;
 		dispatcher.trigger('conf.save.account');
 	}
 
@@ -521,10 +535,6 @@ class Account {
 	 */
 	_setConfUserSettings = (settings) => {
 		log('SET USER SETTINGS', settings);
-		if (IS_EDGE) {
-			settings.enable_human_web = false;
-			settings.enable_offers = false;
-		}
 		if (IS_CLIQZ) {
 			settings.enable_human_web = false;
 			settings.enable_offers = false;
@@ -533,7 +543,7 @@ class Account {
 		}
 		SYNC_SET.forEach((key) => {
 			if (settings[key] !== undefined &&
-				!_.isEqual(conf[key], settings[key])) {
+				!isEqual(conf[key], settings[key])) {
 				conf[key] = settings[key];
 			}
 		});

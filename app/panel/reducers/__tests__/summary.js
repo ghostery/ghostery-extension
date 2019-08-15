@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -14,8 +14,8 @@
 import Immutable from 'seamless-immutable';
 import summaryReducer from '../summary';
 import {
-	GET_SUMMARY_DATA,
-	GET_CLIQZ_MODULE_DATA,
+	UPDATE_SUMMARY_DATA,
+	UPDATE_CLIQZ_MODULE_DATA,
 	UPDATE_TRACKER_COUNTS,
 	UPDATE_GHOSTERY_PAUSED,
 	UPDATE_SITE_POLICY
@@ -35,6 +35,16 @@ const initialState = Immutable({
 		blocked: 0,
 	},
 	tab_id: 0,
+	antiTracking: {
+		totalUnsafeCount: 0,
+		totalUnknownCount: 0,
+		trackerCount: 0,
+		unknownTrackerCount: 0,
+	},
+	adBlock: {
+		totalCount: 0,
+		trackerCount: 0,
+	},
 });
 
 describe('app/panel/reducers/summary.js', () => {
@@ -42,25 +52,46 @@ describe('app/panel/reducers/summary.js', () => {
 		expect(summaryReducer(undefined, {})).toEqual(initialState);
 	});
 
-	test('reducer correctly handles GET_SUMMARY_DATA', () => {
+	test('reducer correctly handles UPDATE_SUMMARY_DATA', () => {
 		const data = { test: true };
-		const action = { data, type: GET_SUMMARY_DATA };
+		const action = { data, type: UPDATE_SUMMARY_DATA };
 		const initState = Immutable({});
 
 		expect(summaryReducer(initState, action)).toEqual(data);
 	});
 
-	test('reducer correctly handles GET_CLIQZ_MODULE_DATA', () => {
-		const data = { adblock: {}, antitracking: {} };
-		const action = { data, type: GET_CLIQZ_MODULE_DATA };
-		const initState = Immutable({});
-
-		expect(summaryReducer(initState, action)).toEqual({
-			adBlock: {},
-			antiTracking: {
-				totalUnsafeCount: 0
+	test('reducer correctly handles UPDATE_CLIQZ_MODULE_DATA', () => {
+		const data = {
+			adBlock: {
+				totalCount: 3,
+				trackerCount: 2,
 			},
+			antiTracking: {
+				totalUnsafeCount: 5,
+				totalUnknownCount: 3,
+				trackerCount: 1
+			}
+		};
+		const action = { data, type: UPDATE_CLIQZ_MODULE_DATA };
+		const initState = Immutable({
+			tab_id: 0,
+			adBlock: {
+				totalCount: 1,
+				trackerCount: 1,
+			},
+			antiTracking: {
+				totalUnsafeCount: 1,
+				totalUnknownCount: 0,
+				trackerCount: 0
+			}
 		});
+
+		const updatedState = Immutable.merge(initState, {
+			adBlock: data.adBlock,
+			antiTracking: data.antiTracking
+		});
+
+		expect(summaryReducer(initState, action)).toEqual(updatedState);
 	});
 
 	test('reducer correctly handles UPDATE_GHOSTERY_PAUSED', () => {

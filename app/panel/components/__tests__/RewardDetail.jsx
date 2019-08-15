@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -17,7 +17,7 @@ import { shallow } from 'enzyme';
 import RewardDetail from '../BuildingBlocks/RewardDetail';
 
 // Fake the translation function to only return the translation key
-global.t = function (str) {
+global.t = function(str) {
 	return str;
 };
 
@@ -29,7 +29,7 @@ describe('app/panel/components/BuildingBlocks/RewardDetail.jsx', () => {
 		test('reward detail is rendered with all values present', () => {
 			const initialState = {
 				actions: {
-					getRewardsData: () => {},
+					updateRewardsData: () => {},
 					toggleOffersEnabled: () => {},
 					removeOffer: () => {},
 					setOfferRead: () => {},
@@ -53,7 +53,7 @@ describe('app/panel/components/BuildingBlocks/RewardDetail.jsx', () => {
 		test('reward detail is rendered with missing text', () => {
 			const initialState = {
 				actions: {
-					getRewardsData: () => {},
+					updateRewardsData: () => {},
 					toggleOffersEnabled: () => {},
 					removeOffer: () => {},
 					setOfferRead: () => {},
@@ -77,7 +77,7 @@ describe('app/panel/components/BuildingBlocks/RewardDetail.jsx', () => {
 		test('reward detail is rendered with missing description', () => {
 			const initialState = {
 				actions: {
-					getRewardsData: () => {},
+					updateRewardsData: () => {},
 					toggleOffersEnabled: () => {},
 					removeOffer: () => {},
 					setOfferRead: () => {},
@@ -101,7 +101,7 @@ describe('app/panel/components/BuildingBlocks/RewardDetail.jsx', () => {
 		test('reward detail is rendered with missing code', () => {
 			const initialState = {
 				actions: {
-					getRewardsData: () => {},
+					updateRewardsData: () => {},
 					toggleOffersEnabled: () => {},
 					removeOffer: () => {},
 					setOfferRead: () => {},
@@ -125,7 +125,7 @@ describe('app/panel/components/BuildingBlocks/RewardDetail.jsx', () => {
 		test('reward detail is rendered with missing conditions', () => {
 			const initialState = {
 				actions: {
-					getRewardsData: () => {},
+					updateRewardsData: () => {},
 					toggleOffersEnabled: () => {},
 					removeOffer: () => {},
 					setOfferRead: () => {},
@@ -151,7 +151,7 @@ describe('app/panel/components/BuildingBlocks/RewardDetail.jsx', () => {
 		test('reward detail is rendered correctly the code is copied', () => {
 			const initialState = {
 				actions: {
-					getRewardsData: () => {},
+					updateRewardsData: () => {},
 					toggleOffersEnabled: () => {},
 					removeOffer: () => {},
 					setOfferRead: () => {},

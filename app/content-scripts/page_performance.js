@@ -9,7 +9,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -27,14 +27,14 @@ const { sendMessage } = msg;
  * Use to call init to initialize functionality
  * @var  {Object} initialized to an object with init method as its property
  */
-const PageInfo = (function (window, document) {
+const PageInfo = (function(window, document) {
 	let state = document.readyState;
 	/**
 	 * Calculate page domain and latency. Send pageInfo to background.js.
 	 * @memberOf PagePerformanceContentScript
 	 * @package
 	 */
-	const analyzePageInfo = function () {
+	const analyzePageInfo = function() {
 		const { host, pathname, protocol } = document.location;
 		const pTime = (performance.timing.domContentLoadedEventStart - performance.timing.requestStart);
 		const pageLatency = pTime || 0;
@@ -57,11 +57,11 @@ const PageInfo = (function (window, document) {
 	 * @memberOf PagePerformanceContentScript
 	 * @package
 	 */
-	const _initialize = function () {
+	const _initialize = function() {
 		// manually check to see if the onLoad event has fired, since this script runs at document_idle
 		// and does not guarantee that onLoad has triggered
 		if (state !== 'complete') {
-			document.onreadystatechange = function () {
+			document.onreadystatechange = function() {
 				state = document.readyState;
 				if (state === 'complete') {
 					analyzePageInfo();

@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -22,12 +22,14 @@ class Site extends React.Component {
 
 		this.removeSite = this.removeSite.bind(this);
 	}
+
 	/**
 	 * Trigger action for removing site from the list.
 	 */
 	removeSite() {
 		this.props.updateSitePolicy({ type: this.props.listType, pageHost: this.props.site });
 	}
+
 	/**
 	* Render site entry.
 	* @return {ReactComponent}   ReactComponent instance

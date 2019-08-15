@@ -7,7 +7,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -24,7 +24,7 @@ const { sendMessage } = msg;
  * Use to call init to initialize functionality
  * @var  {Object} initialized to an object with init method as its property
  */
-const AccountPagesContentScript = (function (window) {
+const AccountPagesContentScript = (function(window) {
 	/**
 	 * Initialize functionality of this script.
 	 * @memberOf AccountPagesContentScript
@@ -37,7 +37,7 @@ const AccountPagesContentScript = (function (window) {
 		'accountPage.getUserSubscriptionData',
 		'accountPage.logout',
 	];
-	const _initialize = function () {
+	const _initialize = function() {
 		_listeners.forEach(name => window.addEventListener(name, () => sendMessage(name)));
 	};
 

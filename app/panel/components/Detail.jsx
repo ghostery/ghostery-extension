@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -28,15 +28,21 @@ class Detail extends React.Component {
 		// event bindings
 		this.toggleExpanded = this.toggleExpanded.bind(this);
 	}
+
 	/**
 	 * Lifecycle event
 	 */
 	componentWillMount() {
-		// trigger default tab (aka route)
-		this.props.history.push('/detail/blocking');
+		// set default tab / route based on how we got to this view:
+		// did the user click the Rewards icon? Or the donut number / Detailed View tab in the header?
+		const location = this.props.history.location.pathname;
+		if (!location.includes('rewards')) {
+			this.props.history.push('/detail/blocking');
+		}
 	}
 
 	BlockingComponent = () => (<Blocking />);
+
 	RewardsComponent = () => (<Rewards />);
 
 	/**
@@ -45,6 +51,7 @@ class Detail extends React.Component {
 	toggleExpanded() {
 		this.props.actions.toggleExpanded();
 	}
+
 	/**
 	 * Render detailed view wrapper. Part of it is footer
 	 * menu allowing to switch between blocking view and one of the
@@ -58,13 +65,21 @@ class Detail extends React.Component {
 		});
 		const { enable_offers, unread_offer_ids } = this.props;
 
+		const activeTab = this.props.history.location.pathname.includes('rewards') ? 'rewards' : 'blocking';
+
 		return (
 			<div className="detail-wrap">
 				<div id="content-detail" className={(this.props.is_expanded ? 'expanded' : '')}>
-					<div className={condensedToggleClassNames} onClick={this.toggleExpanded} />
+					<div className="toggle-bar">
+						<div className={condensedToggleClassNames} onClick={this.toggleExpanded} />
+					</div>
 					<Route path="/detail/blocking" render={this.BlockingComponent} />
 					<Route path="/detail/rewards" render={this.RewardsComponent} />
-					<DetailMenu hasReward={enable_offers && unread_offer_ids.length > 0} subscriptionsPlus={this.props.user && this.props.user.subscriptionsPlus} />
+					<DetailMenu
+						hasReward={enable_offers && unread_offer_ids.length > 0}
+						subscriptionsPlus={this.props.user && this.props.user.subscriptionsPlus}
+						activeTab={activeTab}
+					/>
 				</div>
 			</div>
 		);

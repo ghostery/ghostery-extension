@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -73,24 +73,39 @@
 	@include expanding-panel(2px);
 }
 
-.condensed-toggle {
+.toggle-bar:hover {
 	position: absolute;
-	height: 50px;
-	width: 25px;
-	top: 198px;
+	height: 100%;
+	width: 2px;
+	top: 0px;
 	z-index: 2;
 	cursor: pointer;
-	background-position: 7px center;
+	background-color: $ghosty-blue;
+}
+
+.condensed-toggle {
+	position: absolute;
+	height: 24px;
+	width: 13px;
+	border-bottom-right-radius: 15px;
+	border-top-right-radius: 15px;
+	top: 215px;
+	z-index: 3;
+	cursor: pointer;
+	background-position: center;
 	background-size: 3px 20px;
 	background-repeat: no-repeat;
-	background-image: url('../../app/images/panel/line-empty-moon.svg');
+	background-image: url('../../app/images/panel/line.svg');
 	&:hover {
-		background-size: 25px 50px;
-		background-position: center;
-		background-image: url('../../app/images/panel/right-left-moon.svg');
+		background-position: calc(50% - 2px);
+		background-color: $ghosty-blue;
+		background-size: 7px 20px;
+		background-image: url('../../app/images/panel/caret-left.svg');
 	}
 	&.condensed:hover {
-		background-image: url('../../app/images/panel/right-right-moon.svg');
+		background-position: calc(50% - 1px);
+		background-position: center;
+		background-image: url('../../app/images/panel/caret-right.svg');
 	}
 }
 

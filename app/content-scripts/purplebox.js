@@ -7,7 +7,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -34,7 +34,7 @@ const { onMessage } = chrome.runtime;
  * Use to call init to initialize purplebox functionality
  * @var  {Object} initialized to an object with init method as its property
  */
-const Ghostery = (function (win, doc) {
+const Ghostery = (function(win, doc) {
 	const TIMEOUTS = {
 		box_position_timeout: 0,
 		box_destroy_timeout: 9999,
@@ -69,7 +69,7 @@ const Ghostery = (function (win, doc) {
 	 * @param  {string} type 	html tag
 	 * @return {Object}      	DOM element
 	 */
-	const createEl = function (type) {
+	const createEl = function(type) {
 		return doc.createElement(type);
 	};
 	/**
@@ -80,7 +80,7 @@ const Ghostery = (function (win, doc) {
 	 * @param  	{Object} 	parent 	parent DOM element
 	 * @param 	{...Object} args 	children DOM element(s)
 	 */
-	const appendChild = function (parent, ...args) {
+	const appendChild = function(parent, ...args) {
 		for (let i = 0; i < args.length; i++) {
 			parent.appendChild(args[i]);
 		}
@@ -94,7 +94,7 @@ const Ghostery = (function (win, doc) {
 	 * @memberOf PurpleBoxContentScript
 	 * @package
 	 */
-	const destroyPurpleBox = function () {
+	const destroyPurpleBox = function() {
 		if (ghostery && ghostery.parentNode) {
 			ghostery.parentNode.removeChild(ghostery);
 		}
@@ -112,7 +112,7 @@ const Ghostery = (function (win, doc) {
 	 * @memberOf PurpleBoxContentScript
 	 * @package
 	 */
-	const resetDestroyTimer = function () {
+	const resetDestroyTimer = function() {
 		clearTimeout(TIMEOUTS.box_destroy_timeout);
 		if (BOX_CONF.alert_bubble_timeout > 0) {
 			TIMEOUTS.box_destroy_timeout = setTimeout(() => {
@@ -125,7 +125,7 @@ const Ghostery = (function (win, doc) {
 	 * @memberOf PurpleBoxContentScript
 	 * @package
 	 */
-	const handleSizeChangeClick = function () {
+	const handleSizeChangeClick = function() {
 		if (ghostery) {
 			BOX_CONF.alert_expanded = !BOX_CONF.alert_expanded;
 			doSizeChange();
@@ -136,7 +136,7 @@ const Ghostery = (function (win, doc) {
 	 * @memberOf PurpleBoxContentScript
 	 * @package
 	 */
-	const removeListeners = function () {
+	const removeListeners = function() {
 		close.removeEventListener('click', destroyPurpleBox);
 		box.removeEventListener('click', handleSizeChangeClick);
 		background.removeEventListener('click', handleSizeChangeClick);
@@ -147,7 +147,7 @@ const Ghostery = (function (win, doc) {
 	 * @memberOf PurpleBoxContentScript
 	 * @package
 	 */
-	const addListeners = function () {
+	const addListeners = function() {
 		close.addEventListener('click', destroyPurpleBox);
 		box.addEventListener('click', handleSizeChangeClick);
 		background.addEventListener('click', handleSizeChangeClick);
@@ -158,7 +158,7 @@ const Ghostery = (function (win, doc) {
 	 * @memberOf PurpleBoxContentScript
 	 * @package
 	 */
-	const doSizeChange = function () {
+	const doSizeChange = function() {
 		const windowHeight = Math.max(win.innerHeight - 105, 55);
 
 		resetDestroyTimer();
@@ -211,7 +211,7 @@ const Ghostery = (function (win, doc) {
 	 * @memberOf PurpleBoxContentScript
 	 * @package
 	 */
-	const setBoxHeights = function () {
+	const setBoxHeights = function() {
 		let digits;
 
 		const listHeight = (list.children.length * 18) + 20; // 20px for top/bottom padding
@@ -303,7 +303,7 @@ const Ghostery = (function (win, doc) {
 	 *
 	 * @return {Object} 	tracker div and hasIcon as its properties
 	 */
-	const createTrackerDiv = function (app) {
+	const createTrackerDiv = function(app) {
 		let icon;
 		let hasIcon = false;
 
@@ -355,7 +355,7 @@ const Ghostery = (function (win, doc) {
 	 * @memberOf PurpleBoxContentScript
 	 * @package
 	 */
-	const handleNewTrackers = function (apps) {
+	const handleNewTrackers = function(apps) {
 		const trackersText = title;
 		const trackers = list.childNodes;
 		for (let n = 0; n < apps.length; n++) {
@@ -420,7 +420,7 @@ const Ghostery = (function (win, doc) {
 	 * @memberOf PurpleBoxContentScript
 	 * @package
 	 */
-	const clearTrackersNone = function () {
+	const clearTrackersNone = function() {
 		count.style.background = 'none';
 		count.style.color = '#ffffff';
 	};
@@ -430,7 +430,7 @@ const Ghostery = (function (win, doc) {
 	 * @memberOf PurpleBoxContentScript
 	 * @package
 	 */
-	const createPurpleBox = function () {
+	const createPurpleBox = function() {
 		ghostery = createEl('div');
 		box = createEl('div');
 		count = createEl('div');
@@ -547,7 +547,7 @@ const Ghostery = (function (win, doc) {
 	 *
 	 * @return {boolean}
 	 */
-	const handleMessages = function (request, sender, sendResponse) {
+	const handleMessages = function(request, sender, sendResponse) {
 		// Filter out messages coming from Cliqz context script bundle
 		if (request.source === 'cliqz-content-script') {
 			return false;
@@ -594,7 +594,7 @@ const Ghostery = (function (win, doc) {
 	 * @package
 	 * @todo  check if channels are supported across the board. Then we can remove fallback code
 	 */
-	const _initialize = function () {
+	const _initialize = function() {
 		if (channelsSupported) {
 			port = chrome.runtime.connect({ name: 'purpleBoxPort' });
 			if (port) {

@@ -1,0 +1,142 @@
+/**
+ * Cliqz Features Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+$cliqz-feature--darker-blue: #0093bd;
+$cliqz-feature--blue: #1dafed;
+$cliqz-feature--pale-blue: #a4d4f2;
+$cliqz-feature--gray: #c8c7c2;
+$cliqz-feature--light-gray: #dedede;
+$cliqz-feature--darker-gray: #a4a4a4;
+
+// Default styling for the elements of the CliqzFeature BEM block
+.CliqzFeature__status {
+	text-align: center;
+	font-size: 14px;
+	font-weight: 600;
+	text-transform: uppercase;
+	transition: color 0.25s ease-out;
+	transition: background-image 0.25s ease-out;
+}
+
+.CliqzFeature__icon {
+	margin: 0 auto;
+	background-repeat: no-repeat;
+	background-position: center center;
+	transition: background-image 0.25s ease-out;
+}
+
+.CliqzFeature__feature-name {
+	text-align: center;
+	font-size: 11px;
+	line-height: 21px;
+	font-weight: 600;
+	transition: color 0.25s ease-out;
+
+	white-space: nowrap;
+	overflow-x: hidden;
+	text-overflow: ellipsis;
+}
+
+// Modifications to element styling based on size-related block-level modifiers
+// The CliqzFeature block is always one of normal, smaller, or condensed
+.CliqzFeature--normal,
+.CliqzFeature--smaller {
+	.CliqzFeature__status { line-height: 28px; }
+	.CliqzFeature__icon {
+		height: 50px;
+		width: 50px;
+		background-size: 50px 50px;
+	}
+}
+
+.CliqzFeature--smaller {
+	.CliqzFeature__feature-name { display: none; }
+}
+
+.CliqzFeature--condensed {
+	.CliqzFeature__status { line-height: 14px; }
+	.CliqzFeature__icon {
+		height: 40px;
+		width: 40px;
+		background-size: 30px 30px;
+	}
+	.CliqzFeature__feature-name { display: none; }
+}
+
+.CliqzFeature--tiny {
+	.CliqzFeature__status {
+		line-height: 17px;
+		font-size: 9px;
+	}
+	.CliqzFeature__icon {
+		height: 28px;
+		width: 28px;
+		background-size: 26px 26px;
+	}
+	.CliqzFeature__feature-name { display: none; }
+}
+
+// Modifications to element styling based on state-related block-level modifiers
+// The CliqzFeature block is always either active or inactive
+// and always either clickable or not-clickable
+.CliqzFeature--active.clickable {
+	.CliqzFeature__status {
+		color: $cliqz-feature--blue;
+		background: none;
+	}
+	.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($cliqz-feature--blue); }
+	.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($cliqz-feature--blue); }
+	.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($cliqz-feature--blue); }
+	.CliqzFeature__feature-name { color: $cliqz-feature--blue; }
+
+	&:hover {
+		.CliqzFeature__status { color: $cliqz-feature--darker-blue; }
+		.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($cliqz-feature--darker-blue); }
+		.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($cliqz-feature--darker-blue); }
+		.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($cliqz-feature--darker-blue); }
+		.CliqzFeature__feature-name { color: $cliqz-feature--darker-blue; }
+	}
+}
+
+.CliqzFeature--active.not-clickable {
+	.CliqzFeature__status { color: $cliqz-feature--pale-blue; }
+	.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($cliqz-feature--pale-blue); }
+	.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($cliqz-feature--pale-blue); }
+	.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($cliqz-feature--pale-blue); }
+	.CliqzFeature__feature-name { color: $cliqz-feature--pale-blue; }
+
+}
+
+.CliqzFeature--inactive.clickable {
+	.CliqzFeature__status { color: $cliqz-feature--gray; }
+	.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($cliqz-feature--gray); }
+	.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($cliqz-feature--gray); }
+	.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($cliqz-feature--gray); }
+	.CliqzFeature__feature-name { color: $cliqz-feature--gray; }
+
+	&:hover {
+		.CliqzFeature__status { color: $cliqz-feature--darker-gray; }
+		.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($cliqz-feature--darker-gray); }
+		.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($cliqz-feature--darker-gray); }
+		.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($cliqz-feature--darker-gray); }
+		.CliqzFeature__feature-name { color: $cliqz-feature--darker-gray; }
+	}
+}
+
+.CliqzFeature--inactive.not-clickable {
+	.CliqzFeature__status { color: $cliqz-feature--light-gray; }
+	.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($cliqz-feature--light-gray); }
+	.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($cliqz-feature--light-gray); }
+	.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($cliqz-feature--light-gray); }
+	.CliqzFeature__feature-name { color: $cliqz-feature--light-gray; }
+}

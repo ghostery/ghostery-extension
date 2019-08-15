@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -43,8 +43,8 @@ class Accordions extends React.Component {
 		return (
 			<div className="accordions">
 				{
-					this.props.categories.map((category, index) =>
-						(<Accordion
+					this.props.categories.map((category, index) => (
+						<Accordion
 							key={category.id}
 							index={index}
 							numBlocked={category.num_blocked}
@@ -56,8 +56,8 @@ class Accordions extends React.Component {
 							open={this.getOpenStatus(index)}
 							id={category.id}
 							type={this.props.type}
-						/>)
-					)
+						/>
+					))
 				}
 			</div>
 		);

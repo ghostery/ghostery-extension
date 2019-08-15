@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -20,7 +20,7 @@ import {
 } from '../../SetupView/SetupViewConstants';
 
 export function setAntiTracking(actionData) {
-	return function (dispatch) {
+	return function(dispatch) {
 		return sendMessageInPromise(SET_ANTI_TRACKING, actionData).then((data) => {
 			dispatch({
 				type: SET_ANTI_TRACKING,
@@ -33,7 +33,7 @@ export function setAntiTracking(actionData) {
 }
 
 export function setAdBlock(actionData) {
-	return function (dispatch) {
+	return function(dispatch) {
 		return sendMessageInPromise(SET_AD_BLOCK, actionData).then((data) => {
 			dispatch({
 				type: SET_AD_BLOCK,
@@ -46,7 +46,7 @@ export function setAdBlock(actionData) {
 }
 
 export function setSmartBlocking(actionData) {
-	return function (dispatch) {
+	return function(dispatch) {
 		return sendMessageInPromise(SET_SMART_BLOCK, actionData).then((data) => {
 			dispatch({
 				type: SET_SMART_BLOCK,
@@ -59,7 +59,7 @@ export function setSmartBlocking(actionData) {
 }
 
 export function setGhosteryRewards(actionData) {
-	return function (dispatch) {
+	return function(dispatch) {
 		return sendMessageInPromise(SET_GHOSTERY_REWARDS, actionData).then((data) => {
 			dispatch({
 				type: SET_GHOSTERY_REWARDS,

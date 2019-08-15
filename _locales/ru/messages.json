@@ -458,9 +458,6 @@
 	"summary_description_not_scanned_2": {
 		"message": "Перейдите на другую страницу, и я выполню обещанное."
 	},
-	"summary_custom_settings": {
-		"message": "Пользовательские настройки"
-	},
 	"summary_trust_site": {
 		"message": "Доверять сайту"
 	},
@@ -481,9 +478,6 @@
 	},
 	"summary_pause_ghostery_tooltip": {
 		"message": "Приостановить работу расширения Ghostery."
-	},
-	"summary_pause_ghostery_ab_pause": {
-		"message": "Пауза"
 	},
 	"pause_30_min": {
 		"message": "на 30 мин"
@@ -509,9 +503,6 @@
 	"summary_resume_ghostery_tooltip": {
 		"message": "Работа расширения Ghostery приостановлена. Нажмите для возобновления работы."
 	},
-	"summary_resume_ghostery_ab_pause": {
-		"message": "Возобновить"
-	},
 	"summary_show_menu": {
 		"message": "показать меню"
 	},
@@ -533,6 +524,10 @@
 	"blocking_category_blocked": {
 		"description": "as in '5 (trackers) BLOCKED'",
 		"message": "Заблокированные"
+	},
+	"blocking_category_whitelisted": {
+		"description": "as in '5 (trackers) WHITELISTED'",
+		"message": "В белом списке"
 	},
 	"panel_create_account": {
 		"message": "Создать учетную запись"
@@ -682,7 +677,7 @@
 		"message": " на этой странице."
 	},
 	"panel_tracker_total_tooltip": {
-		"message": "Общее количество обнаруженных трекеров, заблокированной рекламы и анонимизированных точек данных."
+		"message": "Общее количество найденных трекеров + измененных запросов."
 	},
 	"panel_signin_success": {
 		"message": "Вы вошли в качестве "
@@ -726,6 +721,9 @@
 	"panel_tracker_trust_tooltip": {
 		"message": "Разрешить на этом сайте"
 	},
+	"panel_tracker_scrub_tooltip": {
+		"message": "Очистить на этом сайте"
+	},
 	"panel_detail_menu_list_title": {
 		"message": "Список трекеров"
 	},
@@ -758,9 +756,6 @@
 	},
 	"panel_detail_performance_text": {
 		"message": "Функция скоро появится."
-	},
-	"panel_detail_rewards_title": {
-		"message": "Ghostery Rewards"
 	},
 	"panel_detail_rewards_coming_soon": {
 		"message": "Функция скоро появится."
@@ -1092,6 +1087,12 @@
 	"page_load": {
 		"message": "Загрузка страницы"
 	},
+	"requests_modified": {
+		"message": "Запросы изменены:"
+	},
+	"requests_modified_tooltip": {
+		"message": "Общее количество запросов на отслеживание и элементов, измененных программами анти-отслеживания и блокировки рекламы"
+	},
 	"trackers_blocked": {
 		"message": "Заблокированные трекеры:"
 	},
@@ -1123,7 +1124,7 @@
 		"message": "Найдено"
 	},
 	"drawer_title_enable_anti_tracking": {
-		"message": "Улучшенный анти-трекинг"
+		"message": "Супер анти-трекинг"
 	},
 	"drawer_tooltip_enable_anti_tracking": {
 		"message": "Анонимизировать разблокированные и неизвестные трекеры для обеспечения большей защиты браузера. На рисунке показано, сколько измерительных точек было удалено на сайте."
@@ -1138,7 +1139,7 @@
 		"message": "Анти-трекинг -"
 	},
 	"drawer_title_enable_ad_block": {
-		"message": "Усовершенствованная блокировка рекламы"
+		"message": "Рекламоблокер++"
 	},
 	"drawer_tooltip_enable_ad_block": {
 		"message": "Выполняет блокировку рекламы на сайтах, которые вы посещаете."
@@ -1283,9 +1284,6 @@
 	},
 	"tooltip_restrict_on": {
 		"message": "На сайте трекеры заблокированы и включен анти-трекинг. Нажмите, чтобы отменить."
-	},
-	"tooltip_custom_settings": {
-		"message": "Использовать мои выбранные настройки трекера."
 	},
 	"tooltip_pause": {
 		"message": "Приостановить Ghostery"
@@ -1853,8 +1851,11 @@
 	"hub_login_label_password_invalid": {
 		"message": "Используйте от 8 до 50 символов."
 	},
+	"hub_login_link_dont_have_account": {
+		"message": "Нет учетной записи?"
+	},
 	"hub_login_link_create_account": {
-		"message": "Нет учетной записи? Зарегистрироваться."
+		"message": "Зарегистрироваться."
 	},
 	"hub_login_button_submit": {
 		"message": "Вход"
@@ -1898,8 +1899,11 @@
 	"hub_create_account_checkbox_promotions": {
 		"message": "Присылайте мне обновления и промо-акции Ghostery."
 	},
+	"hub_create_account_already_have_account": {
+		"message": "Уже есть учетная запись Ghostery?"
+	},
 	"hub_create_account_link_login": {
-		"message": "У меня уже есть учетная запись. Вход."
+		"message": "Войти."
 	},
 	"hub_create_account_button_submit": {
 		"message": "Создать учетную запись"
@@ -2124,6 +2128,9 @@
 	"subscription_submit_issue": {
 		"message": "Сообщить о проблеме"
 	},
+	"subscription_upgrade_to": {
+		"message": "Обновить до"
+	},
 	"panel_stats_menu_cumulative": {
 		"message": "Накопительные"
 	},
@@ -2203,5 +2210,58 @@
 	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "Стереть всю историю статистики до этого момента."
+	},
+	"cookie": {
+		"message": "куки"
+	},
+	"cookies": {
+		"message": "куки"
+	},
+	"fingerprint": {
+		"message": "фингерпринт"
+	},
+	"fingerprints": {
+		"message": "фингерпринта"
+	},
+	"ad": {
+		"message": "реклама"
+	},
+	"ads": {
+		"message": "рекламы"
+	},
+	"cliqz_feature_status_on": {
+		"message": "Вкл"
+	},
+	"cliqz_feature_status_off": {
+		"message": "Выкл"
+	},
+	"create_account_form_legal_consent_checkbox_label": {
+		"message": "Я принимаю $LINK_TERMS_START$Условия и положения$LINK_END$, $LINK_LICENSE_START$Публичное лицензионное соглашение$LINK_END$, а также даю согласие на использование данных, описанное в $LINK_PRIVACY_START$Политике конфиденциальности$LINK_END$.",
+		"placeholders": {
+			"link_end": {
+				"content": "</a>"
+			},
+			"link_license_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.mozilla.org/en-US/MPL/2.0/\" rel=\"noopener noreferrer\">"
+			},
+			"link_privacy_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" rel=\"noopener noreferrer\">"
+			},
+			"link_terms_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/\" rel=\"noopener noreferrer\">"
+			}
+		}
+	},
+	"ghostery_rewards": {
+		"message": "Ghostery Rewards"
+	},
+	"enhanced_anti_tracking": {
+		"message": "Супер анти-трекинг"
+	},
+	"unknown": {
+		"message": "Неизвестный"
+	},
+	"unknown_description": {
+		"message": "Неизвестные трекеры, очищенные анти-трекингом"
 	}
 }

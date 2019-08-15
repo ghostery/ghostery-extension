@@ -7,14 +7,16 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import _ from 'underscore';
+import {
+	map, object, reduce, throttle
+} from 'underscore';
 import bugDb from './BugDb';
 import button from './BrowserButton';
 import c2pDb from './Click2PlayDb';
@@ -23,6 +25,8 @@ import conf from './Conf';
 import foundBugs from './FoundBugs';
 import globals from './Globals';
 import latency from './Latency';
+import metrics from './Metrics';
+import panelData from './PanelData';
 import Policy, { BLOCK_REASON_SS_UNBLOCKED, BLOCK_REASON_C2P_ALLOWED_THROUGH } from './Policy';
 import PolicySmartBlock from './PolicySmartBlock';
 import PurpleBox from './PurpleBox';
@@ -34,7 +38,6 @@ import { isBug } from '../utils/matcher';
 import * as utils from '../utils/utils';
 
 const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
-const RequestsMap = new Map();
 /**
  * This class is a collection of handlers for
  * webNavigation, webRequest and tabs events.
@@ -51,8 +54,8 @@ class EventHandlers {
 		// Use a 1sec interval to limit calls on pages with a large number of requests.
 		// Don't use tabId with button.update for cases where tab is switched before throttle delay is reached.
 		// ToDo: Remove this function when there is an event for AdBlocker:foundAd.
-		this._throttleButtonUpdate = _.throttle(() => {
-			button.update();
+		this._throttleButtonUpdate = throttle((tabId) => {
+			button.update(tabId);
 		}, 1000, { leading: false });
 	}
 
@@ -65,18 +68,20 @@ class EventHandlers {
 	onBeforeNavigate(details) {
 		const { tabId, frameId, url } = details;
 
-		// frameId === 0 indicates the navigation event ocurred in the content window, not a subframe
+		// frameId === 0 indicates the navigation event occurred in the content window, not a subframe
 		if (frameId === 0) {
 			log(`❤ ❤ ❤ Tab ${tabId} navigating to ${url} ❤ ❤ ❤`);
 
-			RequestsMap.clear();
 			this._clearTabData(tabId);
 			this._resetNotifications();
+			// TODO understand why this does not work when placed in the 'reload' branch in onCommitted
+			panelData.clearPageLoadTime(tabId);
 
 			// initialize tabInfo, foundBugs objects for this tab
 			tabInfo.create(tabId, url);
 			foundBugs.update(tabId);
 			button.update(tabId);
+			this._eventReset(details.tabId);
 
 			// Workaround for foundBugs/tabInfo memory leak when the user triggers
 			// prefetching/prerendering but never loads the page. Wait two minutes
@@ -102,10 +107,11 @@ class EventHandlers {
 			tabId, frameId, transitionType, transitionQualifiers
 		} = details;
 
-		// frameId === 0 indicates the navigation event ocurred in the content window, not a subframe
+		// frameId === 0 indicates the navigation event occurred in the content window, not a subframe
 		if (frameId === 0) {
 			// update reload info before creating/clearing tab info
 			if (transitionType === 'reload' && !transitionQualifiers.includes('forward_back')) {
+				metrics.handleBrokenPageTrigger(globals.BROKEN_PAGE_REFRESH);
 				tabInfo.setTabInfo(tabId, 'numOfReloads', tabInfo.getTabInfo(tabId, 'numOfReloads') + 1);
 			} else if (transitionType !== 'auto_subframe' && transitionType !== 'manual_subframe') {
 				tabInfo.setTabInfo(tabId, 'reloaded', false);
@@ -144,11 +150,17 @@ class EventHandlers {
 	onDOMContentLoaded(details) {
 		const tab_id = details.tabId;
 
+		// ignore if this is a sub-frame
 		if (!utils.isValidTopLevelNavigation(details)) {
 			return;
 		}
 
-		// show upgrade notifications
+		// do not show CMP notifications if Ghostery is paused
+		if (globals.SESSION.paused_blocking) {
+			return;
+		}
+
+		// show CMP upgrade notifications
 		utils.getActiveTab((tab) => {
 			if (!tab || tab.id !== tab_id || tab.incognito) {
 				return;
@@ -236,7 +248,7 @@ class EventHandlers {
 					if (result) {
 						utils.sendMessage(
 							tab_id, 'showUpgradeAlert', {
-								translations: _.object(_.map(alert_messages, key => [key, chrome.i18n.getMessage(key)])),
+								translations: object(map(alert_messages, key => [key, chrome.i18n.getMessage(key)])),
 								language: conf.language,
 								major_upgrade: globals.JUST_UPGRADED_FROM_7
 							},
@@ -254,7 +266,7 @@ class EventHandlers {
 						if (result) {
 							utils.sendMessage(
 								tab_id, 'showLibraryUpdateAlert', {
-									translations: _.object(_.map(alert_messages, key => [key, chrome.i18n.getMessage(key)])),
+									translations: object(map(alert_messages, key => [key, chrome.i18n.getMessage(key)])),
 									language: conf.language
 								},
 								() => {
@@ -282,8 +294,6 @@ class EventHandlers {
 			return;
 		}
 
-		RequestsMap.clear();
-
 		// Code below executes for top level frame only
 		log(`foundBugs: ${foundBugs.getAppsCount(details.tabId)}, tab_id: ${details.tabId}`);
 
@@ -293,11 +303,6 @@ class EventHandlers {
 				log('onNavigationCompleted injectScript error', err);
 			});
 		}
-		// The problem is that requests may continue well after onNavigationCompleted
-		// This breaks allow once for C2P, as it clears too early
-		setTimeout(() => {
-			this._eventReset(details.tabId);
-		}, 2000);
 	}
 
 	/**
@@ -322,6 +327,7 @@ class EventHandlers {
 
 		this._eventReset(tab_id);
 	}
+
 	/**
 	 * Handler for webRequest.onBeforeRequest event
 	 * Called when a request is about to occur
@@ -368,18 +374,20 @@ class EventHandlers {
 			return { cancel: false };
 		}
 
-		const page_url = tabInfo.getTabInfo(tab_id, 'url');
-		const page_host = tabInfo.getTabInfo(tab_id, 'host');
 		const page_protocol = tabInfo.getTabInfo(tab_id, 'protocol');
 		const from_redirect = globals.REDIRECT_MAP.has(request_id);
-		const bug_id = (page_url ? isBug(details.url, page_url) : isBug(details.url));
 		const processed = utils.processUrl(details.url);
 
 		/* ** SMART BLOCKING - Privacy ** */
 		// block HTTP request on HTTPS page
-		if (this.policySmartBlock.isInsecureRequest(tab_id, page_protocol, processed.protocol, processed.host)) {
+		if (this.policySmartBlock.isInsecureRequest(tab_id, page_protocol, processed.scheme, processed.hostname)) {
 			return this._blockHelper(details, tab_id, null, null, request_id, from_redirect, true);
 		}
+
+		// TODO fuse this into a single call to improve performance
+		const page_url = tabInfo.getTabInfo(tab_id, 'url');
+		const page_host = tabInfo.getTabInfo(tab_id, 'host');
+		const bug_id = (page_url ? isBug(details.url, page_url) : isBug(details.url));
 
 		// allow if not a tracker
 		if (!bug_id) {
@@ -393,7 +401,7 @@ class EventHandlers {
 
 		/* ** SMART BLOCKING - Breakage ** */
 		// allow first party trackers
-		if (this.policySmartBlock.isFirstPartyRequest(tab_id, page_host, processed.host)) {
+		if (this.policySmartBlock.isFirstPartyRequest(tab_id, page_host, processed.hostname)) {
 			return { cancel: false };
 		}
 
@@ -422,6 +430,9 @@ class EventHandlers {
 			};
 		}
 
+		const smartBlocked = !block ? this.policySmartBlock.shouldBlock(app_id, cat_id, tab_id, page_url, details.type, details.timeStamp) : false;
+		const smartUnblocked = block ? this.policySmartBlock.shouldUnblock(app_id, cat_id, tab_id, page_url, details.type) : false;
+
 		// process the tracker asynchronously
 		// very important to block request processing as little as necessary
 		setTimeout(() => {
@@ -431,20 +442,16 @@ class EventHandlers {
 				type: details.type,
 				url: details.url,
 				block,
+				smartBlocked,
 				tab_id,
 				from_frame: details.parentFrameId !== -1
 			});
 		}, 1);
 
-		if (block) {
-			if (this.policySmartBlock.shouldUnblock(app_id, cat_id, tab_id, page_url, details.type)) {
-				return { cancel: false };
-			}
+		if ((block && !smartUnblocked) || smartBlocked) {
 			return this._blockHelper(details, tab_id, app_id, bug_id, request_id, fromRedirect);
 		}
-		if (this.policySmartBlock.shouldBlock(app_id, cat_id, tab_id, page_url, details.type, details.timeStamp)) {
-			return this._blockHelper(details, tab_id, app_id, bug_id, request_id);
-		}
+
 		return { cancel: false };
 	}
 
@@ -540,7 +547,11 @@ class EventHandlers {
 	 *
 	 * @param  {Object} tab 	 Details of the tab that was created
 	 */
-	onTabCreated() {}
+	onTabCreated(tab) {
+		const { url } = tab;
+
+		metrics.handleBrokenPageTrigger(globals.BROKEN_PAGE_NEW_TAB, url);
+	}
 
 	/**
 	 * Handler for tabs.onActivated event.
@@ -595,13 +606,14 @@ class EventHandlers {
 	 */
 	_processBug(details) {
 		const {
-			bug_id, app_id, type, url, block, tab_id
+			bug_id, app_id, type, url, block, smartBlocked, tab_id
 		} = details;
 		const tab = tabInfo.getTabInfo(tab_id);
+		const allowedOnce = c2pDb.allowedOnce(details.tab_id, app_id);
 
 		let num_apps_old;
 
-		log((block ? 'Blocked' : 'Found'), type, url);
+		log((block || smartBlocked ? 'Blocked' : 'Found'), type, url);
 		log(`^^^ Pattern ID ${bug_id} on tab ID ${tab_id}`);
 
 		if (conf.show_alert) {
@@ -610,15 +622,18 @@ class EventHandlers {
 
 		foundBugs.update(tab_id, bug_id, url, block, type);
 
-		button.update(details.tab_id);
+		this._throttleButtonUpdate(details.tab_id);
 
-		if (block && (conf.enable_click2play || conf.enable_click2playSocial)) {
+		// throttled in PanelData
+		panelData.updatePanelUI();
+
+		if ((block || smartBlocked) && (conf.enable_click2play || conf.enable_click2playSocial) && !allowedOnce) {
 			buildC2P(details, app_id);
 		}
 
 		// Note: tab.purplebox handles a race condition where this function is sometimes called before onNavigation()
 		if (conf.show_alert && tab && !tab.prefetched && tab.purplebox) {
-			if (foundBugs.getAppsCount(details.tab_id) > num_apps_old || c2pDb.allowedOnce(details.tab_id, app_id)) {
+			if (foundBugs.getAppsCount(details.tab_id) > num_apps_old || allowedOnce) {
 				this.purplebox.updateBox(details.tab_id, app_id);
 			}
 		}
@@ -652,16 +667,19 @@ class EventHandlers {
 			return {
 				redirectUrl: details.url.replace(/^http:/, 'https:')
 			};
-		} else if (details.type === 'sub_frame') {
+		}
+		if (details.type === 'sub_frame') {
 			return {
 				redirectUrl: 'about:blank'
 			};
-		} else if (details.type === 'image') {
+		}
+		if (details.type === 'image') {
 			return {
 				// send PNG (and not GIF) to avoid conflicts with Adblock Plus
 				redirectUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg=='
 			};
-		} else if (details.type === 'script' && bugId) {
+		}
+		if (details.type === 'script' && bugId) {
 			let code = '';
 			if (appId === 2575) { // Hubspot
 				code = this._getHubspotFormSurrogate(details.url);
@@ -670,7 +688,7 @@ class EventHandlers {
 				const surrogates = surrogatedb.getForTracker(details.url, appId, bugId, ti.host);
 
 				if (surrogates.length > 0) {
-					code = _.reduce(surrogates, (memo, s) => {
+					code = reduce(surrogates, (memo, s) => {
 						memo += s.code; // eslint-disable-line no-param-reassign
 						return memo;
 					}, '');
@@ -703,11 +721,11 @@ class EventHandlers {
 	 *
 	 * @private
 	 *
-	 * @param  {Object}  parsedURL
+	 * @param  {URL}  parsedURL
 	 * @return {Boolean}
 	 */
 	_isValidUrl(parsedURL) {
-		if (parsedURL.protocol.startsWith('http') && parsedURL.host.includes('.') && /[A-Za-z]/.test(parsedURL.host) && !parsedURL.path.includes('_/chrome/newtab')) {
+		if (parsedURL && parsedURL.protocol.startsWith('http') && parsedURL.isValidHost() && !parsedURL.pathname.includes('_/chrome/newtab')) {
 			return true;
 		}
 
@@ -731,7 +749,7 @@ class EventHandlers {
 		// hs_reqwest_0 - function which will be called on the client after the request
 		//
 		// hutk=941df50e9277ee76755310cd78647a08 -is user-specific (same every session)
-		const tokens = url.substr(8).split(/\/|\&|\?|\#|\=/ig);
+		const tokens = url.substr(8).split(/\/|\&|\?|\#|\=/ig); // eslint-disable-line no-useless-escape
 
 		return `${tokens[7]}({"form":{"portalId":${tokens[4]},"guid": "${tokens[5]}","cssClass":"hs-form stacked","formFieldGroups":[{"fields":[{}]}],"metaData":[]},"properties":{}})`;
 	}

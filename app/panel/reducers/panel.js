@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -14,7 +14,7 @@
 /* eslint no-use-before-define: 0 */
 
 import {
-	GET_PANEL_DATA,
+	UPDATE_PANEL_DATA,
 	SHOW_NOTIFICATION,
 	CLOSE_NOTIFICATION,
 	TOGGLE_EXPERT,
@@ -44,7 +44,7 @@ const initialState = {
 	enable_ad_block: true,
 	enable_anti_tracking: true,
 	enable_smart_block: true,
-	initialized: false, // prevent rendering subviews before GET_PANEL_DATA resolves
+	initialized: false, // prevent rendering subviews before UPDATE_PANEL_DATA resolves
 	is_expanded: false,
 	is_expert: false,
 	needsReload: {
@@ -72,9 +72,7 @@ const initialState = {
  */
 export default (state = initialState, action) => {
 	switch (action.type) {
-		case GET_PANEL_DATA: {
-			const { current_theme, account } = action.data;
-			setTheme(document, current_theme, account);
+		case UPDATE_PANEL_DATA: {
 			return Object.assign({}, state, action.data, { initialized: true });
 		}
 		case SET_THEME: {

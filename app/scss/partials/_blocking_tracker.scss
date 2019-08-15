@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -19,17 +19,55 @@
 		border-top: none;
 	}
 	.trk-header {
-		padding-top: 5px;
-		padding-bottom: 5px;
-		height: 39px;
+		height: 54px;
 		.trk-name {
 			@extend %pointer;
 			font-size: 14px;
-			line-height: 19px;
+			line-height: 25px;
 			font-weight: 400;
 			color: #4a4a4a;
 			@extend %nowrap;
+			&.is-whitelisted {
+				color: #00AEF0;
+			}
 		}
+		.trk-cliqz-stats-outer-container {
+			// prevent jitter from breaking to new line
+			// if all three of cookies fingerprints and ads are present
+			// and we hover over the ad icon while the cookies & fingerprints section is expanded
+			white-space: nowrap;
+
+			font-size: 10px;
+			font-family: "Open Sans", "Roboto", Arial, Helvetica, sans-serif;
+			font-weight: 600;
+		}
+		.trk-cliqz-stats-icon {
+			// vertical alignment with text label
+			position: relative;
+			top: -2px;
+
+			display: inline-block;
+			padding-right: 6px;
+		}
+		.trk-cliqz-stat {
+			color: #1dafed;
+			text-transform: capitalize;
+			display: inline-block;
+			max-width: 0px;
+			padding-right: 0px;
+			transition: max-width 0.6s, padding 0.6s;
+			transition-delay: 0.2s;
+			overflow-x: hidden;
+			white-space: nowrap;
+		}
+		.trk-cliqz-stats-container {
+			display: inline-block;
+		}
+		.trk-cliqz-stats-container:hover .trk-cliqz-stat {
+			max-width: 100px;
+			padding-right: 4px;
+		}
+
 		.svg-container {
 			height: 20px;
 		}
@@ -73,6 +111,10 @@
 			margin-right: 10px;
 			overflow-y: hidden;
 			@extend %nowrap;
+			&.unknown {
+				margin: 0 10px 0 0;
+				color: #4a4a4a;
+			}
 		}
 	}
 	svg.blocking-icons {
@@ -90,6 +132,61 @@
 		.restrict-circle {
 			stroke: #9B9B9B;
 			display: block;
+		}
+	}
+
+	.unknown-svg-container {
+		position: relative;
+		top: 3px;
+		width: 42px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		&:not(.whitelisted) {
+			.cliqz-tracker-trust {
+				visibility: hidden;
+				cursor: pointer;
+				.border { stroke: #d8d8d8; }
+				.background { fill: #f7f7f7; }
+				.trust-circle { stroke: #9B9B9B; }
+			}
+
+			.cliqz-tracker-scrub {
+				pointer-events: none;
+			}
+		}
+
+		&.whitelisted {
+			flex-direction: row-reverse;
+
+			.cliqz-tracker-trust {
+				pointer-events: none;
+			}
+			.cliqz-tracker-scrub {
+				visibility: hidden;
+				pointer-events: auto;
+				cursor: pointer;
+				.border { stroke: #d8d8d8; }
+				.background { fill: #f7f7f7; }
+				.shield { stroke: #9B9B9B; }
+			}
+		}
+
+		&:hover {
+			.cliqz-tracker-trust {
+				visibility: visible;
+			}
+		}
+
+		&.whitelisted:hover {
+			.cliqz-tracker-scrub {
+				visibility: visible;
+			}
+		}
+
+		&.siteRestricted {
+			pointer-events: none;
 		}
 	}
 }
@@ -131,4 +228,8 @@ svg.blocking-icons {
 		stroke-width: 1.5px;
 		stroke-linecap: square;
 	}
+}
+
+.OtherDataPoint__svgGroup {
+	padding-top: 5px;
 }

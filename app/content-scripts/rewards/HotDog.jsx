@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -66,16 +66,16 @@ class HotDog extends Component {
 	render() {
 		return (
 			<div className="ghostery-rewards-component">
-				{ this.state.closed !== true &&
+				{ this.state.closed !== true && (
 					<div>
-						<div onClick={this.navigate} className="hot-dog-container" style={{ backgroundImage: this.ghostyStar }} >
+						<div onClick={this.navigate} className="hot-dog-container" style={{ backgroundImage: this.ghostyStar }}>
 							<div className="ghostery-reward-text">
 								{t('rewards_new_text')}
 							</div>
 						</div>
 						<div className="hot-dog-close" onClick={this.close} style={{ backgroundImage: this.closeIcon }} />
 					</div>
-				}
+				)}
 			</div>
 		);
 	}

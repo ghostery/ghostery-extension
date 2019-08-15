@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -26,12 +26,14 @@ class GlobalBlocking extends React.Component {
 		// event bindings
 		this.toggleExpanded = this.toggleExpanded.bind(this);
 	}
+
 	/**
 	 * Trigger action which toggles expanded state.
 	 */
 	toggleExpanded() {
 		this.props.actions.toggleExpanded();
 	}
+
 	/**
 	* Render full list of categories and trackers.
 	* @return {ReactComponent}   ReactComponent instance
@@ -59,8 +61,9 @@ class GlobalBlocking extends React.Component {
 					globalBlocking
 				/>
 				<div className="blocking-trackers">
-					{ categories && categories.length > 0 &&
+					{ categories && categories.length > 0 && (
 						<Categories
+							expandAll={expandAll}
 							categories={categories}
 							filtered={this.props.filtered}
 							actions={this.props.actions}
@@ -68,7 +71,7 @@ class GlobalBlocking extends React.Component {
 							language={this.props.language}
 							globalBlocking
 						/>
-					}
+					)}
 				</div>
 			</div>
 		);

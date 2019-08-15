@@ -458,9 +458,6 @@
 	"summary_description_not_scanned_2": {
 		"message": "別のページに移動して、要求に沿うことを約束します。"
 	},
-	"summary_custom_settings": {
-		"message": "カスタム設定"
-	},
 	"summary_trust_site": {
 		"message": "サイトを信頼"
 	},
@@ -481,9 +478,6 @@
 	},
 	"summary_pause_ghostery_tooltip": {
 		"message": "Ghostery拡張機能を一時停止します。"
-	},
-	"summary_pause_ghostery_ab_pause": {
-		"message": "一時停止"
 	},
 	"pause_30_min": {
 		"message": "30分"
@@ -509,9 +503,6 @@
 	"summary_resume_ghostery_tooltip": {
 		"message": "Ghostery拡張機能が一時停止されました。再開するにはクリックしてください。"
 	},
-	"summary_resume_ghostery_ab_pause": {
-		"message": "再開"
-	},
 	"summary_show_menu": {
 		"message": "メニューを表示"
 	},
@@ -533,6 +524,10 @@
 	"blocking_category_blocked": {
 		"description": "as in '5 (trackers) BLOCKED'",
 		"message": "ブロックされた対象"
+	},
+	"blocking_category_whitelisted": {
+		"description": "as in '5 (trackers) WHITELISTED'",
+		"message": "ホワイトリストに登録済み"
 	},
 	"panel_create_account": {
 		"message": "アカウントを作成"
@@ -682,7 +677,7 @@
 		"message": " このページで。"
 	},
 	"panel_tracker_total_tooltip": {
-		"message": "検知されたトラッカー、ブロックされた広告、匿名化されたデータポイントの総数です。"
+		"message": "検知されたトラッカーと変更されたリクエストの総数です。"
 	},
 	"panel_signin_success": {
 		"message": "としてサインインしています "
@@ -726,6 +721,9 @@
 	"panel_tracker_trust_tooltip": {
 		"message": "このサイトで信頼"
 	},
+	"panel_tracker_scrub_tooltip": {
+		"message": "このサイトのトラッカーを削除"
+	},
 	"panel_detail_menu_list_title": {
 		"message": "リスト・ビュー"
 	},
@@ -758,9 +756,6 @@
 	},
 	"panel_detail_performance_text": {
 		"message": "近日開始する機能です。"
-	},
-	"panel_detail_rewards_title": {
-		"message": "Ghostery Rewards"
 	},
 	"panel_detail_rewards_coming_soon": {
 		"message": "近日開始する機能です。"
@@ -1092,6 +1087,12 @@
 	"page_load": {
 		"message": "ページのロード"
 	},
+	"requests_modified": {
+		"message": "変更済みリクエスト数："
+	},
+	"requests_modified_tooltip": {
+		"message": "追跡防止と広告ブロックにより変更された追跡のリクエストと要素の合計数"
+	},
 	"trackers_blocked": {
 		"message": "ブロックされたトラッカー："
 	},
@@ -1283,9 +1284,6 @@
 	},
 	"tooltip_restrict_on": {
 		"message": "サイトで、トラッカーがブロックされ、追跡防止が有効になりました。元に戻すにはクリックしてください。"
-	},
-	"tooltip_custom_settings": {
-		"message": "選択したトラッカー設定を使用します。"
 	},
 	"tooltip_pause": {
 		"message": "一時停止"
@@ -1853,8 +1851,11 @@
 	"hub_login_label_password_invalid": {
 		"message": "8～50文字を使用してください。"
 	},
+	"hub_login_link_dont_have_account": {
+		"message": "アカウントをお持ちでないですか？"
+	},
 	"hub_login_link_create_account": {
-		"message": "アカウントをお持ちでないですか？サインアップしてください。"
+		"message": "サインアップしてください。"
 	},
 	"hub_login_button_submit": {
 		"message": "サインイン"
@@ -1898,8 +1899,11 @@
 	"hub_create_account_checkbox_promotions": {
 		"message": "Ghosteryのアップデート＆お得な情報を受け取る。"
 	},
+	"hub_create_account_already_have_account": {
+		"message": "既にGhosteryアカウントを持っていますか？"
+	},
 	"hub_create_account_link_login": {
-		"message": "すでにアカウントを持っています。サインインしてください。"
+		"message": "ここにサインインしてください。"
 	},
 	"hub_create_account_button_submit": {
 		"message": "アカウントを作成"
@@ -2124,6 +2128,9 @@
 	"subscription_submit_issue": {
 		"message": "この内容で送信する"
 	},
+	"subscription_upgrade_to": {
+		"message": "アップグレード先"
+	},
 	"panel_stats_menu_cumulative": {
 		"message": "累計"
 	},
@@ -2203,5 +2210,58 @@
 	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "この時点までのすべての履歴統計を削除する"
+	},
+	"cookie": {
+		"message": "クッキー"
+	},
+	"cookies": {
+		"message": "クッキー"
+	},
+	"fingerprint": {
+		"message": "フィンガープリント"
+	},
+	"fingerprints": {
+		"message": "フィンガープリント"
+	},
+	"ad": {
+		"message": "広告"
+	},
+	"ads": {
+		"message": "広告"
+	},
+	"cliqz_feature_status_on": {
+		"message": "オン"
+	},
+	"cliqz_feature_status_off": {
+		"message": "オフ"
+	},
+	"create_account_form_legal_consent_checkbox_label": {
+		"message": "$LINK_TERMS_START$利用規約$LINK_END$、$LINK_LICENSE_START$パブリックライセンス契約$LINK_END$を承認し、$LINK_PRIVACY_START$プライバシー・ポリシー$LINK_END$に記載されたデータ・プラクティスに同意します。",
+		"placeholders": {
+			"link_end": {
+				"content": "</a>"
+			},
+			"link_license_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.mozilla.org/en-US/MPL/2.0/\" rel=\"noopener noreferrer\">"
+			},
+			"link_privacy_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" rel=\"noopener noreferrer\">"
+			},
+			"link_terms_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/\" rel=\"noopener noreferrer\">"
+			}
+		}
+	},
+	"ghostery_rewards": {
+		"message": "Ghostery Rewards"
+	},
+	"enhanced_anti_tracking": {
+		"message": "強化された追跡防止"
+	},
+	"unknown": {
+		"message": "未知"
+	},
+	"unknown_description": {
+		"message": "未知のトラッカーが追跡防止によって削除されました"
 	}
 }

@@ -4,12 +4,14 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+
+$color-create-account-form-error-red: #e74055;
 
 // Create Account View
 .CreateAccountView {
@@ -54,25 +56,35 @@
 }
 .CreateAccountView__inputBox.error {
 	margin-bottom: 8px;
-	border-color: #e74055;
+	border-color: $color-create-account-form-error-red;
 }
 .CreateAccountView__inputBox:focus {
 	// Foundation Overrides
 	box-shadow: none;
-	border-color: #4a4a4a;
+	border-color: $color-create-account-form-error-red;
 }
 .CreateAccountView__inputError {
 	font-size: 12;
 	line-height: 14px;
-	color: #e74055;
+	color: $color-create-account-form-error-red;
 	margin-bottom: 13px;
 }
 .CreateAccountView__link {
 	font-size: 14px;
 	line-height: 30px;
 }
+.CreateAccountView__termsStatement {
+	font-size: 12px;
+}
 .CreateAccountView__button {
 	min-width: 180px;
+}
+.CreateAccountView__inputLabel {
+	flex-grow: 1; // ensure left-justify alignment in single column layout
+	padding-top: 10px; // align with checkbox top
+}
+.CreateAccountView__inputLabel.error{
+	color: $color-create-account-form-error-red;
 }
 @media only screen and (max-width: 740px)  {
 	.CreateAccountView {

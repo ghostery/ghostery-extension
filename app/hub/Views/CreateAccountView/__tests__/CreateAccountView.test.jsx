@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -27,12 +27,14 @@ describe('app/hub/Views/CreateAccount component', () => {
 				confirmEmailError: false,
 				firstName: 'First',
 				lastName: 'Last',
+				legalConsentChecked: true,
 				password: '',
 				passwordInvalidError: false,
 				passwordLengthError: false,
 				promotionsChecked: true,
 				handleInputChange: () => {},
-				handleCheckboxChange: () => {},
+				handleLegalConsentCheckboxChange: () => {},
+				handlePromotionsCheckboxChange: () => {},
 				handleSubmit: () => {},
 			};
 
@@ -52,12 +54,14 @@ describe('app/hub/Views/CreateAccount component', () => {
 				confirmEmailError: true,
 				firstName: '',
 				lastName: '',
+				legalConsentChecked: false,
 				password: '',
 				passwordInvalidError: true,
 				passwordLengthError: true,
 				promotionsChecked: false,
 				handleInputChange: () => {},
-				handleCheckboxChange: () => {},
+				handleLegalConsentCheckboxChange: () => {},
+				handlePromotionsCheckboxChange: () => {},
 				handleSubmit: () => {},
 			};
 
@@ -79,12 +83,14 @@ describe('app/hub/Views/CreateAccount component', () => {
 				confirmEmailError: false,
 				firstName: 'First',
 				lastName: 'Last',
+				legalConsentChecked: true,
 				password: '',
 				passwordInvalidError: false,
 				passwordLengthError: false,
 				promotionsChecked: true,
 				handleInputChange: () => {},
-				handleCheckboxChange: () => {},
+				handleLegalConsentCheckboxChange: () => {},
+				handlePromotionsCheckboxChange: () => {},
 				handleSubmit: jest.fn(),
 			};
 

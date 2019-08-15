@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -83,7 +83,8 @@ class ForgotPassword extends React.Component {
 							</h4>
 							<div id="forgot-email" className={(emailError ? 'panel-error invalid-email' : '')}>
 								<label htmlFor="forgot-input-email">
-									{ t('email_field_label') }<span className="asterisk">*</span>
+									{ t('email_field_label') }
+									<span className="asterisk">*</span>
 									<input onChange={this.handleInputChange} value={email} id="forgot-input-email" type="text" name="email" pattern=".{1,}" autoComplete="off" required />
 								</label>
 								<p className="invalid-email warning">

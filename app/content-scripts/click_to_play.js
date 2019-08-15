@@ -6,7 +6,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -25,7 +25,7 @@ const { onMessage } = chrome.runtime;
  * Use to call init function and initialize Click2PlayContentScript functionality.
  * @var {Object}   initialized with an object with exported init as its property
  */
-const Click2PlayContentScript = (function (win, doc) {
+const Click2PlayContentScript = (function(win, doc) {
 	const	C2P_DATA = {};
 	/**
 	 * Create element for the specified html tag
@@ -35,7 +35,7 @@ const Click2PlayContentScript = (function (win, doc) {
 	 * @param  {string} type 	html tag
 	 * @return {Object}      	DOM element
 	 */
-	const createEl = function (type) {
+	const createEl = function(type) {
 		return doc.createElement(type);
 	};
 	/**
@@ -46,7 +46,7 @@ const Click2PlayContentScript = (function (win, doc) {
 	 * @param  	{Object} 	parent 	parent DOM element
 	 * @param 	{...Object} args 	children DOM element(s)
 	 */
-	const appendChild = function (parent, ...args) {
+	const appendChild = function(parent, ...args) {
 		for (let i = 0; i < args.length; i++) {
 			parent.appendChild(args[i]);
 		}
@@ -63,7 +63,7 @@ const Click2PlayContentScript = (function (win, doc) {
 	 * @param 	{Object} c2pAppDef 		replacement data
 	 * @param 	{string} html 			a fragment of html to be used in replacement.
 	 */
-	const buildC2P = function (c2pFrame, c2pAppDef, html) {
+	const buildC2P = function(c2pFrame, c2pAppDef, html) {
 		c2pFrame.addEventListener('load', () => {
 			const idoc = c2pFrame.contentDocument;
 
@@ -122,7 +122,7 @@ const Click2PlayContentScript = (function (win, doc) {
 	 * @param 	{Object} c2p_app		an array with replacement data
 	 * @param 	{string} html 			a fragment of html to be used in replacement.
 	 */
-	const applyC2P = function (app_id, c2p_app, html) {
+	const applyC2P = function(app_id, c2p_app, html) {
 		c2p_app.forEach((c2pAppDef, idx) => {
 			const els = doc.querySelectorAll(c2pAppDef.ele);
 			for (let i = 0, num_els = els.length; i < num_els; i++) {
@@ -155,7 +155,7 @@ const Click2PlayContentScript = (function (win, doc) {
 	 * @memberof Click2PlayContentScript
 	 * @package
 	 */
-	const _initialize = function () {
+	const _initialize = function() {
 		onMessage.addListener((request, sender, sendResponse) => {
 			if (request.source === 'cliqz-content-script') {
 				return false;

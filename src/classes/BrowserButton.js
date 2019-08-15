@@ -6,7 +6,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -15,14 +15,12 @@
 
 import conf from './Conf';
 import foundBugs from './FoundBugs';
-import cliqz from './Cliqz';
 import rewards from './Rewards';
 import Policy from './Policy';
+import { getCliqzData } from '../utils/cliqzModulesData';
 import { getTab } from '../utils/utils';
 import { log } from '../utils/common';
 import globals from './Globals';
-
-const { adblocker, antitracking } = cliqz.modules;
 
 /**
  * @class for handling Ghostery button.
@@ -133,6 +131,7 @@ class BrowserButton {
 	 */
 	_getIconCount(tab) {
 		const tabId = tab.id;
+		const tabHostUrl = tab.pageHost;
 		let	trackerCount = '';
 		let alert = false;
 
@@ -146,20 +145,19 @@ class BrowserButton {
 			return;
 		}
 
-		this._getAntiTrackCount(tabId).then((antiTrackingCount) => {
-			const { appsCount, appsAlertCount } = this._getTrackerCount(tabId);
-			const adBlockingCount = this._getAdBlockCount(tabId);
+		const { appsCount, appsAlertCount } = this._getTrackerCount(tabId);
+		const adBlockingCount = getCliqzData(tabId, tabHostUrl).trackerCount;
+		const antiTrackingCount = getCliqzData(tabId, tabHostUrl, true).trackerCount;
 
-			alert = (appsAlertCount > 0);
-			trackerCount = (appsCount + antiTrackingCount + adBlockingCount).toString();
+		alert = (appsAlertCount > 0);
+		trackerCount = (appsCount + antiTrackingCount + adBlockingCount).toString();
 
-			// gray-out the icon when blocking has been disabled for whatever reason
-			if (trackerCount === '') {
-				this._setIcon(false, tabId, trackerCount, alert);
-			} else {
-				this._setIcon(!globals.SESSION.paused_blocking && !this.policy.whitelisted(tab.url), tabId, trackerCount, alert);
-			}
-		});
+		// gray-out the icon when blocking has been disabled for whatever reason
+		if (trackerCount === '') {
+			this._setIcon(false, tabId, trackerCount, alert);
+		} else {
+			this._setIcon(!globals.SESSION.paused_blocking && !this.policy.checkSiteWhitelist(tab.url), tabId, trackerCount, alert);
+		}
 	}
 
 	/**
@@ -174,48 +172,6 @@ class BrowserButton {
 			appsCount: apps.all,
 			appsAlertCount: apps.total,
 		};
-	}
-
-	/**
-	 * Get tracker count for Anti Tracking in a promise
-	 * @param  {number} tabId  the Tab Id
-	 * @return {Promise}       the number of trackers as a Promise
-	 */
-	_getAntiTrackCount(tabId) {
-		return new Promise((resolve) => {
-			if (!conf.enable_anti_tracking || !antitracking.background) {
-				resolve(0);
-			}
-			antitracking.background.actions.aggregatedBlockingStats(tabId).then((antiTracking) => {
-				let totalUnsafeCount = 0;
-				for (const category in antiTracking) {
-					if (antiTracking.hasOwnProperty(category)) {
-						for (const app in antiTracking[category]) {
-							if (antiTracking[category][app] === 'unsafe') {
-								totalUnsafeCount++;
-							}
-						}
-					}
-				}
-				resolve(totalUnsafeCount);
-			}).catch(() => {
-				// if we encounter an error, return 0
-				resolve(0);
-			});
-		});
-	}
-
-	/**
-	 * Get tracker count for Ad Blocking
-	 * @param  {number} tabId  the Tab Id
-	 * @return {number}        the number of trackers in an object
-	 */
-	_getAdBlockCount(tabId) {
-		if (!conf.enable_ad_block || !adblocker.background) {
-			return 0;
-		}
-		const adBlocking = adblocker.background.actions.getAdBlockInfoForTab(tabId);
-		return adBlocking && adBlocking.totalCount || 0;
 	}
 }
 

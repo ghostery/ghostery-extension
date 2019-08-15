@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -37,24 +37,34 @@ const Purplebox = (props) => {
 						<div>
 							{ t('settings_dismiss_after') }
 						</div>
-						<select id="settings-dismiss-after" name="alert_bubble_timeout" defaultValue={settingsData.alert_bubble_timeout} onChange={props.selectItem} >
+						<select id="settings-dismiss-after" name="alert_bubble_timeout" defaultValue={settingsData.alert_bubble_timeout} onChange={props.selectItem}>
 							<option value="0">
 								{ t('settings_never') }
 							</option>
 							<option value="3">
-								3 { t('settings_seconds') }
+								3
+								{' '}
+								{ t('settings_seconds') }
 							</option>
 							<option value="5">
-								5 { t('settings_seconds') }
+								5
+								{' '}
+								{ t('settings_seconds') }
 							</option>
 							<option value="10">
-								10 { t('settings_seconds') }
+								10
+								{' '}
+								{ t('settings_seconds') }
 							</option>
 							<option value="15">
-								15 { t('settings_seconds') }
+								15
+								{' '}
+								{ t('settings_seconds') }
 							</option>
 							<option value="30">
-								30 { t('settings_seconds') }
+								30
+								{' '}
+								{ t('settings_seconds') }
 							</option>
 						</select>
 					</div>
@@ -62,7 +72,7 @@ const Purplebox = (props) => {
 						<div>
 							{ t('settings_display_in') }
 						</div>
-						<select id="settings-display-in" name="alert_bubble_pos" defaultValue={settingsData.alert_bubble_pos} onChange={props.selectItem} >
+						<select id="settings-display-in" name="alert_bubble_pos" defaultValue={settingsData.alert_bubble_pos} onChange={props.selectItem}>
 							<option value="br">
 								{ t('settings_bottom_right_corner') }
 							</option>

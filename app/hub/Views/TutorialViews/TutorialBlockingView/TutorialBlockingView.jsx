@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -25,7 +25,7 @@ const TutorialBlockingView = () => (
 				{t('hub_tutorial_detailed_view')}
 			</div>
 			<img
-				className="TutorialBlockingView__image detailed"
+				className="TutorialBlockingView__image blocking-detailed"
 				src="/app/images/hub/tutorial/blocking-detailed.png"
 				alt={t('hub_tutorial_detailed_view')}
 			/>
@@ -33,12 +33,12 @@ const TutorialBlockingView = () => (
 				{t('hub_tutorial_detailed_expanded_view')}
 			</div>
 			<img
-				className="TutorialBlockingView__image detailed-expanded"
+				className="TutorialBlockingView__image blocking-detailed-expanded"
 				src="/app/images/hub/tutorial/blocking-detailed-expanded.png"
 				alt={t('hub_tutorial_detailed_expanded_view')}
 			/>
 		</div>
-		<div className="columns small-12 medium-5 large-4 large-offset-1">
+		<div className="columns small-12 medium-5 large-4">
 			<div className="TutorialView__title">
 				{t('hub_tutorial_blocking_title')}
 			</div>

@@ -4,12 +4,14 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
+
+/* eslint jsx-a11y/label-has-associated-control: 0 */
 
 import React from 'react';
 import ClassNames from 'classnames';
@@ -56,7 +58,7 @@ class ToggleSlider extends React.Component {
 
 	/**
 	 * React's required render function. Returns JSX
-	 * @return {JSX} JSX for rendering the Toggle Slider used throghout the extension
+	 * @return {JSX} JSX for rendering the Toggle Slider used throughout the extension
 	 */
 	render() {
 		const compClassNames = ClassNames('ToggleSlider', this.props.className);

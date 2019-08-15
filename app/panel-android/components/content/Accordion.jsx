@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -17,6 +17,12 @@ import PropTypes from 'prop-types';
 import TrackerItem from './TrackerItem';
 
 export default class Accordion extends React.Component {
+	itemHeight = 50;
+
+	nExtraItems = 40;
+
+	headerheight = 32;
+
 	constructor(props) {
 		super(props);
 		this.myRef = React.createRef();
@@ -158,10 +164,6 @@ export default class Accordion extends React.Component {
 		}
 	}
 
-	itemHeight = 50;
-	nExtraItems = 40;
-	headerheight = 32;
-
 	render() {
 		const titleStyle = { backgroundImage: `url(/app/images/panel-android/categories/${this.props.logo}.svg)` };
 		const contentStyle = { '--trackers-length': `${this.props.open ? (this.state.currentItemsLength * this.itemHeight) + this.headerheight : 0}px` };
@@ -172,10 +174,18 @@ export default class Accordion extends React.Component {
 				<div className={`accordionTitle ${this.state.isActive ? 'active' : ''}`} style={titleStyle} onClick={this.toggleContent}>
 					<h2>{this.props.name}</h2>
 					<p>
-						<span className="total-trackers">{this.props.numTotal} TRACKERS</span>
-						{!!this.props.numBlocked &&
-							<span className="blocked-trackers">{this.props.numBlocked} Blocked</span>
-						}
+						<span className="total-trackers">
+							{this.props.numTotal}
+							{' '}
+							TRACKERS
+						</span>
+						{!!this.props.numBlocked && (
+							<span className="blocked-trackers">
+								{this.props.numBlocked}
+								{' '}
+								Blocked
+							</span>
+						)}
 					</p>
 					<p>
 						On this site
@@ -187,8 +197,8 @@ export default class Accordion extends React.Component {
 						<span>Blocked</span>
 					</p>
 					<ul className="trackers-list">
-						{this.getTrackers(true).slice(0, this.state.currentItemsLength).map((tracker, index) =>
-							(<TrackerItem
+						{this.getTrackers(true).slice(0, this.state.currentItemsLength).map((tracker, index) => (
+							<TrackerItem
 								key={tracker.id}
 								index={index}
 								tracker={tracker}
@@ -196,8 +206,8 @@ export default class Accordion extends React.Component {
 								toggleMenu={this.toggleMenu}
 								categoryId={this.props.id}
 								type={this.props.type}
-							/>)
-						)}
+							/>
+						))}
 					</ul>
 				</div>
 			</div>
@@ -229,6 +239,6 @@ Accordion.defaultProps = {
 };
 
 Accordion.contextTypes = {
-	siteProps: PropTypes.object,
+	siteProps: PropTypes.shape,
 	callGlobalAction: PropTypes.func,
 };

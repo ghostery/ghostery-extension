@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -28,6 +28,7 @@ class ABTest {
 	constructor() {
 		this.tests = {};
 	}
+
 	/**
 	 * Determine if a test with specified name is present.
 	 * @param {string} name 	test name
@@ -35,6 +36,7 @@ class ABTest {
 	hasTest(name) {
 		return this.tests.hasOwnProperty(name);
 	}
+
 	/**
 	 * Send parameters to A/B Test server and receive tests data.
 	 * @return {Promise} 		dictionary with all tests to be executed

@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -17,10 +17,15 @@
 	width: 48px;
 	padding: 12px;
 	cursor: pointer;
+	flex-shrink: 0;
 }
 .ToggleCheckbox path {
 	fill: #6d6d6d;
 }
 .ToggleCheckbox.ToggleCheckbox--active path {
 	fill: #1dafed;
+}
+.ToggleCheckbox--flush-left {
+	width: 36px;
+	padding-left: 0px;
 }

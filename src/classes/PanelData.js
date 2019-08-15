@@ -1,93 +1,609 @@
 /**
  * Panel Data Class
  *
- * Handles data passed to the panel, and manages state by fetching
- * from Conf via Dispatcher events.
+ * Coordinates the assembly and transmission
+ * of bug / Cliqz / settings / rewards data to the extension panel
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import _ from 'underscore';
+import { isEqual, throttle } from 'underscore';
 import button from './BrowserButton';
+import cliqz from './Cliqz';
 import conf from './Conf';
 import foundBugs from './FoundBugs';
 import bugDb from './BugDb';
 import globals from './Globals';
+import metrics from './Metrics';
 import Policy from './Policy';
 import tabInfo from './TabInfo';
 import rewards from './Rewards';
 import account from './Account';
 import dispatcher from './Dispatcher';
+import { getCliqzGhosteryBugs, sendCliqzModuleCounts } from '../utils/cliqzModulesData';
 import { getActiveTab, flushChromeMemoryCache, processUrl } from '../utils/utils';
 import { objectEntries, log } from '../utils/common';
 
+const cliqzModuleMock = {
+	isEnabled: false,
+	on: () => {},
+};
+const offers = cliqz.modules['offers-v2'] || cliqzModuleMock;
+
 const SYNC_SET = new Set(globals.SYNC_ARRAY);
-const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 const { IS_CLIQZ } = globals;
 const policy = new Policy();
+
 /**
- * Class for handling data consumed by Ghostery panel.
+ * PanelData coordinates the assembly and transmission of data to the extension panel
+ *
+ * Table of contents
+ * [PORT MANAGEMENT] 	functions that handle initializing, storing, and tearing down the panel port connection
+ * [DATA TRANSFER]		functions that send data to the extension panel
+ * [DATA SETTING]		functions that set and store non-port data values
  * @memberOf  BackgroundClasses
- * @todo  make it a Singelton
  */
+
+const initMountedComponentsState = {
+	panel: false,
+	blocking: false,
+	rewards: false,
+	settings: false,
+	summary: false
+};
+
 class PanelData {
-	/**
-	 * Create private instance varialbes for use behind public setters
-	 * @return {Object}
-	 */
 	constructor() {
-		this._confData = new Map();
-		this._trackerData = new Map();
-		this._panelView = {};
-		this._summaryView = {};
-		this._blockingView = {};
-		this._rewardsView = {};
-		this._settingsView = {};
+		this._activeTab = null;
+		this._categories = [];
+		this._trackerList = [];
+		this._panelPort = null;
+		this._mountedComponents = initMountedComponentsState;
 	}
 
+	// [PORT MANAGEMENT]
 	/**
-	 * Initialize / update _confData after Conf has loaded. Called via
-	 * initializeGhosteryModules() and Dispatcher event `conf.changed.settings`, which
-	 * looks for changed to Globals.globals.SYNC_ARRAY values.
+	 * Invoked from background.js when the Panel component
+	 * initiates a port connection to the background in its componentDidMount lifecycle event
+	 * @param 	{Object}	port	the port object passed to the onConnect listener in background.js that calls this function
 	 */
-	init() {
-		this._buildConfData();
+	initPort(port) {
+		this._panelPort = port;
+		this._mountedComponents.panel = true;
+
+		getActiveTab((tab) => {
+			const { url } = tab;
+
+			this._activeTab = tab;
+			this._activeTab.pageHost = url && processUrl(url).hostname || '';
+
+			this._attachListeners();
+
+			this._setTrackerListAndCategories();
+
+			this._postMessage('panel', this._getPanelSummaryAndBlockingData());
+
+			account.getUserSettings()
+				.then(userSettings => this._postUserSettings(userSettings))
+				.catch(err => log('Failed getting user settings from PanelData#initPort:', err));
+
+			if (this._needToFilterOffersByRemote()) {
+				rewards.filterOffersByRemote().catch(err => log('Failed to filter offers by remote:', err));
+			}
+		});
 	}
 
 	/**
-	 * Get PanelData for a specific view/tab
+	 * Called only by initPort
+	 * Attaches disconnect and message listeners to the new port
+	 */
+	_attachListeners() {
+		const port = this._panelPort;
+		const tab = this._activeTab;
+
+		if (!port || !tab) { return; }
+
+		port.onDisconnect.addListener(() => {
+			this._activeTab = null;
+			this._panelPort = null;
+			this._mountedComponents = initMountedComponentsState;
+		});
+
+		port.onMessage.addListener((msg) => {
+			switch (msg.name) {
+				case 'BlockingComponentDidMount':
+					this._mountedComponents.blocking = true;
+					this._setTrackerListAndCategories();
+					this._postMessage('blocking', this._getBlockingData());
+					break;
+				case 'BlockingComponentWillUnmount':
+					this._mountedComponents.blocking = false;
+					break;
+				case 'RewardsComponentDidMount':
+					this._mountedComponents.rewards = true;
+					this._panelPort.onDisconnect.addListener(rewards.panelHubClosedListener);
+					if (this._needToFilterOffersByRemote()) {
+						rewards.filterOffersByRemote()
+							.then(() => this._postRewardsData())
+							.catch((err) => {
+								log('Failed to filter offers by remote:', err);
+								this._postRewardsData();
+							});
+					} else {
+						this._postRewardsData();
+					}
+					break;
+				case 'RewardsComponentWillUnmount':
+					this._mountedComponents.rewards = false;
+					this._panelPort.onDisconnect.removeListener(rewards.panelHubClosedListener);
+					break;
+				case 'SettingsComponentDidMount':
+					this._mountedComponents.settings = true;
+					this._postMessage('settings', this._getSettingsData());
+					break;
+				case 'SettingsComponentWillUnmount':
+					this._mountedComponents.settings = false;
+					break;
+				case 'SummaryComponentDidMount':
+					this._mountedComponents.summary = true;
+					this._postCliqzModulesData();
+					this.postPageLoadTime(tab.id);
+					break;
+				case 'SummaryComponentWillUnmount':
+					this._mountedComponents.summary = false;
+					break;
+				default:
+					break;
+			}
+		});
+	}
+	// [/PORT MANAGEMENT]
+
+	// [DATA TRANSFER]
+	/**
+	 * An intent-clarifying wrapper used to call sendPageLoadTime in EventHandlers#onBeforeNavigate
+	 * @param 	{number}	tab_id
+	 */
+	clearPageLoadTime(tab_id) {
+		this.postPageLoadTime(tab_id, true);
+	}
+
+
+	// TODO convert Android panel and Hub to also use port so we can have a single streamlined communication channel & API
+	/**
+	 * Get PanelData for a specific view/tab. Needed for Android panel and Hub, which do not use a port (yet)
 	 * @param  {string} view 	panel view name
 	 * @param  {Object} tab 	tab
 	 * @return {Object}      	view data
 	 */
 	get(view, tab) {
-		log(`Get data for ${view} view`);
+		// Hub and Android panel
 		if (view === 'settings') {
-			return this.settingsView;
+			return this._getSettingsData();
 		}
-		// update _trackerData with new tab info
-		this._buildTrackerData(tab);
+
+		// Android panel only
+		const { url } = tab;
+		this._activeTab = tab;
+		this._activeTab.pageHost = url && processUrl(url).hostname || '';
+		this._setTrackerListAndCategories();
 		switch (view) {
 			case 'panel':
-				return this.panelView;
+				return this._getPanelSummaryAndBlockingData();
 			case 'summary':
-				return this.summaryView;
+				return this._getSummaryData();
 			case 'blocking':
-				return this.blockingView;
-			case 'rewards':
-				return this.rewardsView;
+				return this._getBlockingData();
 			default:
 				return false;
 		}
 	}
 
+	/**
+	 * Wrapper helper passed as callback to utils/cliqzModuleData#sendCliqzModuleCounts
+	 */
+	postMessageToSummary = ((message) => {
+		this._postMessage('summary', message);
+	});
+
+	/**
+	 * The page_performance content script, injected by EventHandlers#onNavigationCompleted,
+	 * gathers window.performance data and sends it in a message to background.js
+	 * The message handler in background.js calls this function so that the data
+	 * gets forwarded to the extension panel if it's open
+	 * @param	{number}	tab_id
+	 * @param	{boolean}	clearData	should we simply blank out the page performance data, or fetch it from tabInfo?
+	 */
+	postPageLoadTime(tab_id, clearData) {
+		if (!this._panelPort || !this._activeTab || this._activeTab.id !== tab_id) { return; }
+
+		this._postMessage('summary', {
+			performanceData: clearData ? false : tabInfo.getTabInfo(tab_id, 'pageTiming')
+		});
+	}
+
+	/**
+	 * Invoked in EventHandlers#onBeforeRequest when a new bug has been found
+	 * Sends updated data to the panel and blocking and/or summary components
+	 */
+	updatePanelUI = throttle(this._updatePanelUI.bind(this), 600, { leading: true, trailing: true }); // matches donut redraw throttling
+
+	_updatePanelUI() {
+		if (!this._panelPort || !this._activeTab) { return; }
+
+		const { blocking, summary } = this._mountedComponents;
+
+		if (blocking || summary) {
+			this._setTrackerListAndCategories();
+		}
+
+		if (blocking) {
+			this._postMessage('blocking', this._getDynamicBlockingData());
+		}
+
+		if (summary) {
+			this._postMessage('summary', this._getDynamicSummaryData());
+			this._postCliqzModulesData();
+		}
+
+		this._postMessage('panel', this._getDynamicPanelData());
+	}
+
+	/**
+	 * Gets the data that needs to be sent to the Blocking component when it's first mounted
+	 * @return	{Object}	the conf, categories, scan status, and page url data the Blocking component needs to display
+	 */
+	_getBlockingData() {
+		const { selected_app_ids, show_tracker_urls, toggle_individual_trackers } = conf;
+
+		return Object.assign(
+			{},
+			{
+				selected_app_ids,
+				show_tracker_urls,
+				toggle_individual_trackers,
+			},
+			this._getDynamicBlockingData(),
+		);
+	}
+
+	/**
+	 * Helper that retrieves the current account information
+	 * @return {Object|null}	the current account object or null
+	 */
+	_getCurrentAccount() {
+		const currentAccount = conf.account;
+		if (currentAccount && currentAccount.user) {
+			currentAccount.user.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus']);
+		}
+		return currentAccount;
+	}
+
+	/**
+	 * Gets the data needed to update the Blocking view as a tab loads
+	 * @return	{Object}	the scan status, page url, and categories data that may change as new trackers are discovered on the page
+	 */
+	_getDynamicBlockingData() {
+		if (!this._activeTab) { return {}; }
+
+		const { url: pageUrl } = this._activeTab;
+
+		return {
+			siteNotScanned: !this._trackerList || false, // TODO [] ==  false is true, and ![] == false is true, so this MAY be a bug
+			pageUrl,
+			categories: this._categories
+		};
+	}
+
+	// TODO: Determine whether needsReload and/or smartBlock ever actually change!
+	/**
+	 * Gets panel data that may change when a new tracker is found
+	 * @param	{number}	tabId
+	 * @return	{Object}	new needsReload and smartBlock values from tabInfo
+	 */
+	_getDynamicPanelData(tabId) {
+		const id = tabId || (this._activeTab && this._activeTab.id) || null;
+
+		const { needsReload, smartBlock } =
+			tabInfo.getTabInfo(id) ||
+			{ needsReload: false, smartBlock: { blocked: {}, unblocked: {} } };
+
+		return {
+			needsReload: needsReload || { changes: {} },
+			smartBlock,
+			account: this._getCurrentAccount(),
+		};
+	}
+
+	/**
+	 * Get the summary view data that may change when a new tracker is found
+	 * @return {Object}		Fresh alertCounts, categories, and trackerCounts values
+	 */
+	_getDynamicSummaryData() {
+		if (!this._activeTab) { return {}; }
+
+		const { id, url } = this._activeTab;
+
+		return {
+			alertCounts: foundBugs.getAppsCountByIssues(id, url) || {},
+			categories: this._categories,
+			trackerCounts: foundBugs.getAppsCountByBlocked(id) || {}
+		};
+	}
+
+	/**
+	 * Gets all the data the top-level Panel component needs for display
+	 * Called one time per panel open, when Panel is first mounted
+	 * @return	{Object}	all the conf and dynamic data used by the Panel component
+	 */
+	_getPanelData() {
+		if (!this._activeTab) { return {}; }
+
+		const { id: tab_id } = this._activeTab;
+		const {
+			enable_ad_block, enable_anti_tracking, enable_smart_block,
+			enable_offers, is_expanded, is_expert, language, reload_banner_status,
+			trackers_banner_status, current_theme
+		} = conf;
+
+		return Object.assign(
+			{},
+			{
+				enable_ad_block,
+				enable_anti_tracking,
+				enable_smart_block,
+				enable_offers,
+				is_expanded,
+				is_expert,
+				is_android: globals.BROWSER_INFO.os === 'android',
+				language,
+				reload_banner_status,
+				trackers_banner_status,
+				current_theme,
+				tab_id,
+				unread_offer_ids: rewards.unreadOfferIds,
+			},
+			this._getDynamicPanelData(tab_id),
+		);
+	}
+
+	/**
+	 * Called when and only when the panel is first (re-)opened on a tab
+	 * @return {Object}		All data fields used by the panel, summary, and blocking (if in expert mode) views
+	 */
+	_getPanelSummaryAndBlockingData() {
+		return {
+			panel: this._getPanelData(),
+			summary: this._getSummaryData(),
+			blocking: conf.is_expert ? this._getBlockingData() : false
+		};
+	}
+
+	/**
+	 * Get rewards data for the Rewards View
+	 * @return {Object} Rewards view data
+	 */
+	_getRewardsData() {
+		const { storedOffers, unreadOfferIds } = rewards;
+
+		return {
+			enable_offers: conf.enable_offers,
+			rewards: storedOffers,
+			unread_offer_ids: unreadOfferIds,
+		};
+	}
+
+	/**
+	 * Get conf and tracker data for Settings View.
+	 * Called when and only when the Settings component is mounted
+	 * @return	{Object}		Settings View data
+	 */
+	_getSettingsData() {
+		const {
+			bugs_last_updated, language, new_app_ids,
+			settings_last_exported, settings_last_imported
+		} = conf;
+
+		return Object.assign(
+			{},
+			{
+				bugs_last_updated,
+				categories: this._buildGlobalCategories(),
+				language, // required for the setup page that does not have access to panelView data
+				new_app_ids,
+				offer_human_web: true,
+				settings_last_exported,
+				settings_last_imported,
+			},
+			this._getUserSettingsForSettingsView(conf),
+		);
+	}
+
+	/**
+	 * Get conf and tracker data for Summary View
+	 * @return {Object}		Summary view data
+	 */
+	_getSummaryData() {
+		if (!this._activeTab) { return {}; }
+
+		const { url, pageHost } = this._activeTab;
+		const { paused_blocking, paused_blocking_timeout } = globals.SESSION;
+		const { site_blacklist, site_whitelist } = conf;
+
+		return Object.assign(
+			{},
+			{
+				paused_blocking,
+				paused_blocking_timeout,
+				site_blacklist,
+				site_whitelist,
+				pageHost,
+				pageUrl: url || '',
+				siteNotScanned: !this._trackerList || false,
+				sitePolicy: policy.getSitePolicy(url) || false,
+			},
+			this._getDynamicSummaryData()
+		);
+	}
+
+	/**
+	 * _sendUserSettings helper
+	 * Invoked iff Blocking component is mounted when account.getUserSettings() resolves, max one time per panel open.
+	 * @param	{Object}	userSettings	the settings retrieved by account.getUserSettings() in _initPort
+	 */
+	_getUserSettingsForBlockingView(userSettings) {
+		const {
+			expand_all_trackers, selected_app_ids, show_tracker_urls,
+			site_specific_blocks, site_specific_unblocks, toggle_individual_trackers,
+		} = userSettings;
+
+		return {
+			expand_all_trackers,
+			selected_app_ids,
+			show_tracker_urls,
+			site_specific_blocks,
+			site_specific_unblocks,
+			toggle_individual_trackers
+		};
+	}
+
+	/**
+	 * _sendUserSettings helper
+	 * Invoked iff Panel is still open account.getUserSettings() resolves, max one time per panel open.
+	 * @param	{Object}	userSettings	the settings retrieved by account.getUserSettings() in _initPort
+	 */
+	_getUserSettingsForPanelView(userSettings) {
+		const {
+			current_theme, enable_ad_block, enable_anti_tracking, enable_smart_block,
+			is_expanded, is_expert, reload_banner_status, trackers_banner_status,
+		} = userSettings;
+
+		return {
+			current_theme,
+			enable_ad_block,
+			enable_anti_tracking,
+			enable_smart_block,
+			is_expanded,
+			is_expert,
+			reload_banner_status,
+			trackers_banner_status,
+			account: this._getCurrentAccount(),
+		};
+	}
+
+	/**
+	 * _sendUserSettings helper
+	 * Invoked iff Settings component is mounted when account.getUserSettings() resolves, max one time per panel open.
+	 * @param	{Object}	userSettings	the settings retrieved by account.getUserSettings() in _initPort, or the conf object provided by getSettings
+	 */
+	_getUserSettingsForSettingsView(userSettingsSource) {
+		const {
+			alert_bubble_pos, alert_bubble_timeout, block_by_default, enable_autoupdate,
+			enable_click2play, enable_click2play_social, enable_human_web, enable_offers,
+			enable_metrics, hide_alert_trusted, ignore_first_party, notify_library_updates,
+			notify_upgrade_updates, selected_app_ids, show_alert, show_badge,
+			show_cmp, show_tracker_urls, toggle_individual_trackers
+		} = userSettingsSource;
+
+		return {
+			alert_bubble_pos,
+			alert_bubble_timeout,
+			block_by_default,
+			enable_autoupdate,
+			enable_click2play,
+			enable_click2play_social,
+			enable_human_web,
+			enable_offers,
+			enable_metrics,
+			hide_alert_trusted,
+			ignore_first_party,
+			notify_library_updates,
+			notify_upgrade_updates,
+			selected_app_ids,
+			show_alert,
+			show_badge,
+			show_cmp,
+			show_tracker_urls,
+			toggle_individual_trackers
+		};
+	}
+
+	/**
+	 * Checks to see whether we need to retrieve a filtered set of rewards from Cliqz
+	 * @returns {boolean}	true if we do need to retrieve filtered rewards
+	 */
+	_needToFilterOffersByRemote() {
+		const { enable_offers, is_expert } = conf;
+
+		return (offers.isEnabled && enable_offers && is_expert);
+	}
+
+	/**
+	 * Retrieves antitracking and adblock counts and sends it to the panel
+	 */
+	_postCliqzModulesData() {
+		if (!this._panelPort || !this._activeTab) { return; }
+
+		sendCliqzModuleCounts(
+			this._activeTab.id,
+			this._activeTab.pageHost,
+			this.postMessageToSummary,
+		);
+	}
+
+	/**
+	 * A wrapper to make posting port messages cleaner
+	 * @param	{string}	to		the destination component
+	 * @param	{Object}	data
+	 */
+	_postMessage(to, data) {
+		if (!this._panelPort) { return; }
+
+		this._panelPort.postMessage({
+			to,
+			body: data
+		});
+	}
+
+	/**
+	 * Legibility wrapper
+	 * @private
+	 */
+	_postRewardsData() {
+		this._postMessage('rewards', this._getRewardsData());
+	}
+
+	/**
+	 * Perform a one-time refresh of panel data with settings retrieved from the account server
+	 * by the call to account.getUserSettings() in initPort
+	 * @param	{Object}	userSettings	the settings retrieved from the account server
+	 */
+	_postUserSettings(userSettings) {
+		if (!this._panelPort || !this._activeTab) { return; }
+
+		this._postMessage('panel', this._getUserSettingsForPanelView(userSettings));
+
+		const { blocking, settings } = this._mountedComponents;
+
+		if (blocking) {
+			this._postMessage('blocking', this._getUserSettingsForBlockingView(userSettings));
+		}
+
+		if (settings) {
+			this._postMessage('settings', this._getUserSettingsForSettingsView(userSettings));
+		}
+	}
+	// [/DATA TRANSFER]
+
+
+	// [DATA SETTING]
 	/**
 	 * Update Conf properties with new data from the UI.
 	 * Called via setPanelData message.
@@ -95,12 +611,7 @@ class PanelData {
 	 */
 	set(data) {
 		let syncSetDataChanged = false;
-		let otherDataChanged = false;
 
-		if (IS_EDGE) {
-			data.enable_human_web = false;
-			data.enable_offers = false;
-		}
 		if (IS_CLIQZ) {
 			data.enable_human_web = false;
 			data.enable_offers = false;
@@ -109,265 +620,195 @@ class PanelData {
 		}
 
 		// Set the conf from data
+		// TODO can this now be replaced by Object.entries?
 		for (const [key, value] of objectEntries(data)) {
-			if (conf.hasOwnProperty(key) && !_.isEqual(conf[key], value)) {
+			if (conf.hasOwnProperty(key) && !isEqual(conf[key], value)) {
 				conf[key] = value;
-				if (SYNC_SET.has(key)) {
-					syncSetDataChanged = true;
-				} else {
-					otherDataChanged = true;
-				}
+				syncSetDataChanged = SYNC_SET.has(key) ? true : syncSetDataChanged;
+			// TODO refactor - this work should probably be the direct responsibility of Globals
+			// can this be achieved without introducing circular dependencies?
 			} else if (key === 'paused_blocking') {
 				if (typeof value === 'number') {
-					// pause blocking
 					globals.SESSION.paused_blocking = true;
 					globals.SESSION.paused_blocking_timeout = value;
-					// enable after timeout
+
 					setTimeout(() => {
 						globals.SESSION.paused_blocking = false;
-						// update button
-						button.update();
-						flushChromeMemoryCache();
-						dispatcher.trigger('globals.save.paused_blocking');
+						this._toggleBlockingHelper();
 					}, value);
 				} else {
-					// toggle blocking
 					globals.SESSION.paused_blocking = value;
 					globals.SESSION.paused_blocking_timeout = 0;
 				}
-
-				// update button
-				button.update();
-				flushChromeMemoryCache();
-				dispatcher.trigger('globals.save.paused_blocking');
+				this._toggleBlockingHelper();
 			}
 		}
 
-		if (data.needsReload) {
-			getActiveTab((tab) => {
-				if (tab && tab.id && tabInfo.getTabInfo(tab.id)) {
-					tabInfo.setTabInfo(tab.id, 'needsReload', data.needsReload);
-				}
-			});
+		if (data.needsReload && this._activeTab) {
+			tabInfo.setTabInfo(this._activeTab.id, 'needsReload', data.needsReload);
+		}
+
+		if (data.brokenPageMetricsTrackerTrustOrUnblock) {
+			metrics.handleBrokenPageTrigger(globals.BROKEN_PAGE_TRACKER_TRUST_OR_UNBLOCK);
+		}
+
+		if (data.brokenPageMetricsWhitelistSite) {
+			metrics.handleBrokenPageTrigger(globals.BROKEN_PAGE_WHITELIST);
 		}
 
 		if (syncSetDataChanged) {
 			// Push conf changes to the server
 			account.saveUserSettings().catch(err => log('PanelData saveUserSettings', err));
 		}
-
-		if (otherDataChanged) {
-			// update local _confData.
-			// if only SYNC_SET data changed _buildConfData will be called through init in dispatch
-			this._buildConfData();
-		}
 	}
 
 	/**
-	 * For initial application load, get combined conf and tracker data for
-	 * Panel View, Summary View and, if_expert, Blocking View
-	 * @return {Object}		panel data shared by multiple views
+	 * Notifies interested parties when blocking is paused / unpaused
 	 */
-	get panelView() {
-		const currentAccount = this._confData.get('account');
-		if (currentAccount && currentAccount.user) {
-			currentAccount.user.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus']);
-		}
-		this._panelView = {
-			panel: {
-				enable_ad_block: this._confData.get('enable_ad_block'),
-				enable_anti_tracking: this._confData.get('enable_anti_tracking'),
-				enable_smart_block: this._confData.get('enable_smart_block'),
-				enable_offers: this._confData.get('enable_offers'),
-				is_expanded: this._confData.get('is_expanded'),
-				is_expert: this._confData.get('is_expert'),
-				is_android: globals.BROWSER_INFO.os === 'android',
-				language: this._confData.get('language'),
-				reload_banner_status: this._confData.get('reload_banner_status'),
-				trackers_banner_status: this._confData.get('trackers_banner_status'),
-				current_theme: this._confData.get('current_theme'),
-
-				needsReload: this._trackerData.get('needsReload'),
-				smartBlock: this._trackerData.get('smartBlock'),
-				tab_id: this._trackerData.get('tab_id'),
-				unread_offer_ids: rewards.unreadOfferIds,
-
-				account: currentAccount
-			},
-			summary: this.summaryView,
-			blocking: this._confData.get('is_expert') ? this.blockingView : false,
-		};
-		return this._panelView;
+	_toggleBlockingHelper() {
+		button.update();
+		flushChromeMemoryCache();
+		dispatcher.trigger('globals.save.paused_blocking');
 	}
 
+	// TODO analyze whether this and foundBugs#getCategories can be refactored to reduce duplication
 	/**
-	 * Get conf and tracker data for Summary View
-	 * @return {Object}		Summary view data
-	 */
-	get summaryView() {
-		this._summaryView = {
-			paused_blocking: globals.SESSION.paused_blocking,
-			paused_blocking_timeout: globals.SESSION.paused_blocking_timeout,
-			site_blacklist: this._confData.get('site_blacklist'),
-			site_whitelist: this._confData.get('site_whitelist'),
-
-			alertCounts: this._trackerData.get('alertCounts'),
-			categories: this._trackerData.get('categories'), // duplicated in blockingView, used here just for the donut
-			pageHost: this._trackerData.get('pageHost'),
-			pageUrl: this._trackerData.get('pageUrl'),
-			performanceData: this._trackerData.get('performanceData'),
-			siteNotScanned: this._trackerData.get('siteNotScanned'), // duplicated in blockingView
-			sitePolicy: this._trackerData.get('sitePolicy'),
-			trackerCounts: this._trackerData.get('trackerCounts'),
-		};
-		return this._summaryView;
-	}
-
-	/**
-	 * Get conf and tracker data for Blocking View
-	 * @return {Object}		Blocking view data
-	 */
-	get blockingView() {
-		this._blockingView = {
-			expand_all_trackers: this._confData.get('expand_all_trackers'),
-			selected_app_ids: this._confData.get('selected_app_ids'),
-			show_tracker_urls: this._confData.get('show_tracker_urls'),
-			siteNotScanned: this._trackerData.get('siteNotScanned'),
-			site_specific_blocks: this._confData.get('site_specific_blocks'),
-			site_specific_unblocks: this._confData.get('site_specific_unblocks'),
-			toggle_individual_trackers: this._confData.get('toggle_individual_trackers'),
-			pageUrl: this._trackerData.get('pageUrl'),
-			categories: this._trackerData.get('categories'),
-		};
-		return this._blockingView;
-	}
-
-	/**
-	 * Get rewards data for the Rewards View
-	 * @return {Object} Rewards view data
-	 */
-	get rewardsView() {
-		this._rewardsView = {
-			enable_offers: this._confData.get('enable_offers'),
-			rewards: rewards.storedOffers,
-			unread_offer_ids: rewards.unreadOfferIds,
-		};
-		return this._rewardsView;
-	}
-
-	/**
-	 * Get conf and tracker data for Settings View. Note we have overlapping properties
-	 * from blockView incase the user is in Simple Mode.
-	 * @return {Object}		Settings View data
-	 */
-	get settingsView() {
-		this._settingsView = {
-			alert_bubble_pos: this._confData.get('alert_bubble_pos'),
-			alert_bubble_timeout: this._confData.get('alert_bubble_timeout'),
-			block_by_default: this._confData.get('block_by_default'),
-			bugs_last_updated: this._confData.get('bugs_last_updated'),
-			categories: this._confData.get('categories'),
-			enable_autoupdate: this._confData.get('enable_autoupdate'),
-			enable_click2play: this._confData.get('enable_click2play'),
-			enable_click2play_social: this._confData.get('enable_click2play_social'),
-			enable_human_web: this._confData.get('enable_human_web'),
-			enable_offers: this._confData.get('enable_offers'),
-			enable_metrics: this._confData.get('enable_metrics'),
-			hide_alert_trusted: this._confData.get('hide_alert_trusted'),
-			ignore_first_party: this._confData.get('ignore_first_party'),
-			notify_library_updates: this._confData.get('notify_library_updates'),
-			notify_upgrade_updates: this._confData.get('notify_upgrade_updates'),
-			offer_human_web: this._confData.get('offer_human_web'),
-			selected_app_ids: this._confData.get('selected_app_ids'),
-			new_app_ids: this._confData.get('new_app_ids'),
-			settings_last_imported: this._confData.get('settings_last_imported'),
-			settings_last_exported: this._confData.get('settings_last_exported'),
-			show_alert: this._confData.get('show_alert'),
-			show_badge: this._confData.get('show_badge'),
-			show_cmp: this._confData.get('show_cmp'),
-			show_tracker_urls: this._confData.get('show_tracker_urls'),
-			toggle_individual_trackers: this._confData.get('toggle_individual_trackers'),
-			language: this._confData.get('language'), // required for the setup page that does not have access to panelView data
-		};
-
-		return this._settingsView;
-	}
-
-	/**
-	 * Build local _confData map. Called during init() and when Conf updates
+	 * Build tracker categories based on the current trackerList for a given tab_id.
 	 * @private
+	 * @return	{array}		array of categories
 	 */
-	_buildConfData() {
-		this._confData
-			.set('alert_bubble_pos', conf.alert_bubble_pos)
-			.set('alert_bubble_timeout', conf.alert_bubble_timeout)
-			.set('block_by_default', conf.block_by_default)
-			.set('bugs_last_updated', conf.bugs_last_updated)
-			.set('categories', this._buildGlobalCategories())
-			.set('enable_ad_block', conf.enable_ad_block)
-			.set('enable_anti_tracking', conf.enable_anti_tracking)
-			.set('enable_autoupdate', conf.enable_autoupdate)
-			.set('enable_click2play', conf.enable_click2play)
-			.set('enable_click2play_social', conf.enable_click2play_social)
-			.set('enable_human_web', conf.enable_human_web)
-			.set('enable_metrics', conf.enable_metrics)
-			.set('enable_offers', conf.enable_offers)
-			.set('enable_smart_block', conf.enable_smart_block)
-			.set('hide_alert_trusted', conf.hide_alert_trusted)
-			.set('ignore_first_party', conf.ignore_first_party)
-			.set('is_expanded', conf.is_expanded)
-			.set('is_expert', conf.is_expert)
-			.set('language', conf.language)
-			.set('notify_library_updates', conf.notify_library_updates)
-			.set('notify_upgrade_updates', conf.notify_upgrade_updates)
-			.set('offer_human_web', !IS_EDGE)
-			.set('paused_blocking', globals.SESSION.paused_blocking)
-			.set('reload_banner_status', conf.reload_banner_status)
-			.set('selected_app_ids', conf.selected_app_ids)
-			.set('new_app_ids', conf.new_app_ids)
-			.set('settings_last_imported', conf.settings_last_imported)
-			.set('settings_last_exported', conf.settings_last_exported)
-			.set('show_alert', conf.show_alert)
-			.set('show_badge', conf.show_badge)
-			.set('show_cmp', conf.show_cmp)
-			.set('show_tracker_urls', conf.show_tracker_urls)
-			.set('site_blacklist', conf.site_blacklist)
-			.set('site_specific_blocks', conf.site_specific_blocks)
-			.set('site_specific_unblocks', conf.site_specific_unblocks)
-			.set('site_whitelist', conf.site_whitelist)
-			.set('toggle_individual_trackers', conf.toggle_individual_trackers)
-			.set('trackers_banner_status', conf.trackers_banner_status)
-			.set('expand_all_trackers', conf.expand_all_trackers)
-			.set('account', conf.account)
-			.set('current_theme', conf.current_theme);
+	_buildCategories() {
+		if (!this._activeTab) { return []; }
+
+		const categories = {};
+		const smartBlock = tabInfo.getTabInfo(this._activeTab.id, 'smartBlock');
+
+		this._trackerList.forEach((tracker) => {
+			const trackerState = this._getTrackerState(tracker, smartBlock);
+			let { cat } = tracker;
+
+			if (t(`category_${cat}`) === `category_${cat}`) {
+				cat = 'uncategorized';
+			}
+
+			if (categories.hasOwnProperty(cat)) {
+				categories[cat].num_total++;
+				if (this._addsUpToBlocked(trackerState)) { categories[cat].num_blocked++; }
+			} else {
+				categories[cat] = this._buildCategory(cat, trackerState);
+			}
+			categories[cat].trackers.push(this._buildTracker(tracker, trackerState, smartBlock));
+		});
+
+		const categoryArray = Object.values(categories);
+
+		categoryArray.sort((a, b) => {
+			a = a.name.toLowerCase(); // eslint-disable-line no-param-reassign
+			b = b.name.toLowerCase(); // eslint-disable-line no-param-reassign
+			return (a > b ? 1 : (a < b ? -1 : 0));
+		});
+
+		return categoryArray;
 	}
 
 	/**
-	 * Build local _trackerData map. Called each time a view is fetched. These
-	 * properties represent the initial state of the page on load. They are not updated
-	 * by PanelData.set()
-	 *
-	 * @private
-	 *
-	 * @param  {Object} tab 	active tab
+	 * _buildCategories helper
+	 * @param	{Object}	trackerState	object containing various block/allow states of a tracker
+	 * @return	{boolean}	is the tracker blocked in one of the possible ways?
 	 */
-	_buildTrackerData(tab) {
-		const tab_id = tab && tab.id;
-		const tab_url = tab && tab.url || '';
-		const pageHost = tab_url && processUrl(tab_url).host || '';
-		const trackerList = foundBugs.getApps(tab_id, false, tab_url) || [];
-		this._trackerData
-			.set('alertCounts', tab && foundBugs.getAppsCountByIssues(tab_id, tab_url) || {})
-			.set('categories', this._buildCategories(tab_id, tab_url, pageHost, trackerList))
-			.set('needsReload', tab && tabInfo.getTabInfo(tab_id, 'needsReload') || { changes: {} })
-			.set('pageUrl', tab_url || '')
-			.set('pageHost', pageHost)
-			.set('performanceData', tab && tabInfo.getTabInfo(tab_id, 'pageTiming'))
-			.set('sitePolicy', tab && policy.getSitePolicy(tab_url) || false)
-			.set('siteNotScanned', tab && !foundBugs.getApps(tab_id) || false)
-			.set('tab_id', tab_id)
-			.set('trackerCounts', tab && foundBugs.getAppsCountByBlocked(tab_id) || {})
-			.set('smartBlock', tabInfo.getTabInfo(tab_id, 'smartBlock'));
+	_addsUpToBlocked({
+		ss_blocked, sb_blocked, blocked, ss_allowed, sb_allowed
+	}) {
+		return (ss_blocked || sb_blocked || (blocked && !ss_allowed && !sb_allowed));
+	}
+
+	/**
+	 * _buildCategories helper
+	 * @param	{string}	category		the category of a tracker
+	 * @param	{Object}	trackerState	object containing various block/allow states of a tracker
+	 * @return	{Object}	an object with data for a new category
+	 */
+	_buildCategory(category, trackerState) {
+		return {
+			id: category,
+			name: t(`category_${category}`),
+			description: t(`category_${category}_desc`),
+			img_name: (category === 'advertising') ? 'adv' : // Because AdBlock blocks images with 'advertising' in the name.
+				(category === 'social_media') ? 'smed' : category, // Because AdBlock blocks images with 'social' in the name.
+			num_total: 1,
+			num_blocked: this._addsUpToBlocked(trackerState) ? 1 : 0,
+			trackers: []
+		};
+	}
+
+	/**
+	 * _buildCategories helper
+	 * Builds the tracker data object for a given tracker
+	 * @private
+	 * @param	{Object}	tracker
+	 * @param	{Object}	trackerState
+	 * @param	{Object}	smartBlock		smart blocking stats for the active tab
+	 * @return	{Object}	object of tracker data
+	 */
+	_buildTracker(tracker, trackerState, smartBlock) {
+		const {
+			cat,
+			cliqzAdCount,
+			cliqzCookieCount,
+			cliqzFingerprintCount,
+			hasCompatibilityIssue,
+			hasInsecureIssue,
+			hasLatencyIssue,
+			id,
+			name,
+			sources,
+		} = tracker;
+		const { blocked, ss_allowed, ss_blocked } = trackerState;
+
+		return {
+			id,
+			name,
+			description: '',
+			blocked,
+			ss_allowed,
+			ss_blocked,
+			shouldShow: true, // used for filtering tracker list
+			catId: cat,
+			sources,
+			warningCompatibility: hasCompatibilityIssue,
+			warningInsecure: hasInsecureIssue,
+			warningSlow: hasLatencyIssue,
+			warningSmartBlock: (smartBlock.blocked.hasOwnProperty(id) && 'blocked') || (smartBlock.unblocked.hasOwnProperty(id) && 'unblocked') || false,
+			cliqzAdCount,
+			cliqzCookieCount,
+			cliqzFingerprintCount,
+		};
+	}
+
+	/**
+	 * _buildCategories helper
+	 * Computes the various blocked/allowed states for a given tracker
+	 * @private
+	 * @param 	{Object}	tracker
+	 * @param	{Object}	smartBlock
+	 * @return	{Object}	the tracker's blocked/allowed states
+	 */
+	_getTrackerState({ id: trackerId }, smartBlock) {
+		const { pageHost } = this._activeTab;
+		const {
+			selected_app_ids: selectedAppIds,
+			enable_smart_block: smartBlockActive
+		} = conf;
+		const pageUnblocks = (pageHost && conf.site_specific_unblocks[pageHost]) || [];
+		const pageBlocks = (pageHost && conf.site_specific_blocks[pageHost]) || [];
+
+		return {
+			blocked: selectedAppIds.hasOwnProperty(trackerId),
+			ss_allowed: pageUnblocks.includes(+trackerId),
+			ss_blocked: pageBlocks.includes(+trackerId),
+			sb_blocked: smartBlockActive && smartBlock.blocked.hasOwnProperty(`${trackerId}`),
+			sb_allowed: smartBlockActive && smartBlock.unblocked.hasOwnProperty(`${trackerId}`)
+		};
 	}
 
 	/**
@@ -392,86 +833,40 @@ class PanelData {
 	}
 
 	/**
-	 * Build tracker categories based on the current trackerList for a given tab_id.
-	 *
-	 * @private
-	 *
-	 * @param  {number}   tab_id			tab id
-	 * @param  {strng} tab_url			tab url
-	 * @param  {strng} pageHost			tab url host
-	 * @param  {Object} trackerList		list of trackers for the tab
-	 * @return {array} 					array of categories
+	 * Store the tracker list and categories values to reduce code duplication between the blocking and summary data getters,
+	 * and since these values may be accessed 2+ times in a single updatePanelUI call
 	 */
-	_buildCategories(tab_id, tab_url, pageHost, trackerList) {
-		const selectedAppIds = this._confData.get('selected_app_ids');
-		const pageUnblocks = this._confData.get('site_specific_unblocks')[pageHost] || [];
-		const pageBlocks = this._confData.get('site_specific_blocks')[pageHost] || [];
-		const categories = {};
-		const categoryArray = [];
-		const smartBlockActive = this._confData.get('enable_smart_block');
-		const smartBlock = tabInfo.getTabInfo(tab_id, 'smartBlock');
+	_setTrackerListAndCategories() {
+		if (!this._activeTab) { return; }
 
-		trackerList.forEach((tracker) => {
-			let category = tracker.cat;
-			const blocked = selectedAppIds.hasOwnProperty(tracker.id);
-			const ss_allowed = pageUnblocks.includes(+tracker.id);
-			const ss_blocked = pageBlocks.includes(+tracker.id);
-			const sb_blocked = smartBlockActive && smartBlock.blocked.hasOwnProperty(`${tracker.id}`);
-			const sb_allowed = smartBlockActive && smartBlock.unblocked.hasOwnProperty(`${tracker.id}`);
+		const { id, url } = this._activeTab;
 
-			if (t(`category_${category}`) === `category_${category}`) {
-				category = 'uncategorized';
-			}
+		this._trackerList = foundBugs.getApps(id, false, url) || [];
 
-			if (categories.hasOwnProperty(category)) {
-				categories[category].num_total++;
-				if (ss_blocked || sb_blocked || (blocked && !ss_allowed && !sb_allowed)) {
-					categories[category].num_blocked++;
-				}
-			} else {
-				categories[category] = {
-					id: category,
-					name: t(`category_${category}`),
-					description: t(`category_${category}_desc`),
-					img_name: (category === 'advertising') ? 'adv' : // Because AdBlock blocks images with 'advertising' in the name.
-						(category === 'social_media') ? 'smed' : category, // Because AdBlock blocks images with 'social' in the name.
-					num_total: 1,
-					num_blocked: (ss_blocked || sb_blocked || (blocked && !ss_allowed && !sb_allowed)) ? 1 : 0,
-					trackers: [],
-					expanded: this._confData.get('expand_all_trackers')
-				};
-			}
-			categories[category].trackers.push({
-				id: tracker.id,
-				name: tracker.name,
-				description: '',
-				blocked,
-				ss_allowed,
-				ss_blocked,
-				shouldShow: true, // used for filtering tracker list
-				catId: category,
-				sources: tracker.sources,
-				warningCompatibility: tracker.hasCompatibilityIssue,
-				warningInsecure: tracker.hasInsecureIssue,
-				warningSlow: tracker.hasLatencyIssue,
-				warningSmartBlock: (smartBlock.blocked.hasOwnProperty(tracker.id) && 'blocked') || (smartBlock.unblocked.hasOwnProperty(tracker.id) && 'unblocked') || false,
+		const ghosteryBugs = getCliqzGhosteryBugs(id);
+
+		if (ghosteryBugs && ghosteryBugs.bugs) {
+			const { bugs } = ghosteryBugs;
+			const bugIds = Object.keys(bugs);
+			const appsById = foundBugs.getAppsById(id);
+
+			bugIds.forEach((bugsId) => {
+				const trackerId = conf.bugs.bugs[bugsId];
+				if (!trackerId) return;
+
+				const trackerListIndex = appsById[trackerId.aid];
+				if (!trackerListIndex) return;
+
+				this._trackerList[trackerListIndex].cliqzCookieCount = bugs[bugsId].cookies;
+				this._trackerList[trackerListIndex].cliqzFingerprintCount = bugs[bugsId].fingerprints;
+				this._trackerList[trackerListIndex].cliqzAdCount = bugs[bugsId].ads;
 			});
-		});
-
-		let	categoryName;
-		for (categoryName in categories) {
-			if (categories.hasOwnProperty(categoryName)) {
-				categoryArray.push(categories[categoryName]);
-			}
 		}
 
-		categoryArray.sort((a, b) => {
-			a = a.name.toLowerCase(); // eslint-disable-line no-param-reassign
-			b = b.name.toLowerCase(); // eslint-disable-line no-param-reassign
-			return (a > b ? 1 : (a < b ? -1 : 0));
-		});
-		return categoryArray;
+		this._categories = this._buildCategories();
 	}
+	// [/DATA SETTING]
 }
 
-export default PanelData;
+// return the class as a singleton
+export default new PanelData();

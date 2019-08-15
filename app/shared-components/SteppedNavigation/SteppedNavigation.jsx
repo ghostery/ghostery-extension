@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -35,10 +35,8 @@ const SteppedNavigation = (props) => {
 
 	const circles = [];
 	for (let i = 1; i <= totalSteps; i++) {
-		circles.push((i === activeIndex) ?
-			<a className="active" key={`nav-${i}`} /> :	// eslint-disable-line jsx-a11y/anchor-has-content
-			<NavLink to={`${i}`} key={`nav-${i}`} />		// ^ Use <a> without an href prop to prevent a call to history with the same URL
-		);
+		// Use <a> without an href prop to prevent a call to history with the same URL
+		circles.push((i === activeIndex) ? <a className="active" key={`nav-${i}`} /> : <NavLink to={`${i}`} key={`nav-${i}`} />); // eslint-disable-line jsx-a11y/anchor-has-content
 	}
 
 	return (

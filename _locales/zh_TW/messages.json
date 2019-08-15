@@ -458,9 +458,6 @@
 	"summary_description_not_scanned_2": {
 		"message": "去瀏覽另一網頁，我保證能夠提供好東西。"
 	},
-	"summary_custom_settings": {
-		"message": "自定義設置"
-	},
 	"summary_trust_site": {
 		"message": "可信任的網站"
 	},
@@ -481,9 +478,6 @@
 	},
 	"summary_pause_ghostery_tooltip": {
 		"message": "暫停 Ghostery擴充功能。"
-	},
-	"summary_pause_ghostery_ab_pause": {
-		"message": "暫停"
 	},
 	"pause_30_min": {
 		"message": "30 分鐘"
@@ -509,9 +503,6 @@
 	"summary_resume_ghostery_tooltip": {
 		"message": "Ghostery擴充功能已暫停。點擊以恢復。"
 	},
-	"summary_resume_ghostery_ab_pause": {
-		"message": "恢復"
-	},
 	"summary_show_menu": {
 		"message": "顯示菜單"
 	},
@@ -533,6 +524,10 @@
 	"blocking_category_blocked": {
 		"description": "as in '5 (trackers) BLOCKED'",
 		"message": "已封鎖"
+	},
+	"blocking_category_whitelisted": {
+		"description": "as in '5 (trackers) WHITELISTED'",
+		"message": "已列入解封名單"
 	},
 	"panel_create_account": {
 		"message": "創建帳戶"
@@ -682,7 +677,7 @@
 		"message": " 在此網貝。"
 	},
 	"panel_tracker_total_tooltip": {
-		"message": "已發現網頁跟蹤器、已阻止廣告和數據匿名處理總數。"
+		"message": "已發現的網頁跟蹤器和更動的請求總數。"
 	},
 	"panel_signin_success": {
 		"message": "您現在登入為 "
@@ -726,6 +721,9 @@
 	"panel_tracker_trust_tooltip": {
 		"message": "信任此網站"
 	},
+	"panel_tracker_scrub_tooltip": {
+		"message": "清理此網站"
+	},
 	"panel_detail_menu_list_title": {
 		"message": "列表視圖"
 	},
@@ -758,9 +756,6 @@
 	},
 	"panel_detail_performance_text": {
 		"message": "即將添加的功能。"
-	},
-	"panel_detail_rewards_title": {
-		"message": "Ghostery Rewards"
 	},
 	"panel_detail_rewards_coming_soon": {
 		"message": "即將添加的功能。"
@@ -1092,6 +1087,12 @@
 	"page_load": {
 		"message": "網頁載入"
 	},
+	"requests_modified": {
+		"message": "被更動請求："
+	},
+	"requests_modified_tooltip": {
+		"message": "被反跟蹤和廣告阻止功能更動的跟蹤請求和元素總數量"
+	},
 	"trackers_blocked": {
 		"message": "跟蹤器被封鎖："
 	},
@@ -1283,9 +1284,6 @@
 	},
 	"tooltip_restrict_on": {
 		"message": "在此網站，跟蹤器已被封鎖， 而反跟蹤功能則已啟動。點擊以取消上次行動。\n"
-	},
-	"tooltip_custom_settings": {
-		"message": "使用我自選的跟蹤器設置。"
 	},
 	"tooltip_pause": {
 		"message": "暫停"
@@ -1853,8 +1851,11 @@
 	"hub_login_label_password_invalid": {
 		"message": "使用 8 至 50 個字符。"
 	},
+	"hub_login_link_dont_have_account": {
+		"message": "沒有帳戶？"
+	},
 	"hub_login_link_create_account": {
-		"message": "沒有帳戶？註冊。"
+		"message": "註冊。"
 	},
 	"hub_login_button_submit": {
 		"message": "登錄"
@@ -1898,8 +1899,11 @@
 	"hub_create_account_checkbox_promotions": {
 		"message": "給我發送Ghostery更新和促銷。"
 	},
+	"hub_create_account_already_have_account": {
+		"message": "已有一個Ghostery帳戶？"
+	},
 	"hub_create_account_link_login": {
-		"message": "我已有一個帳戶。登錄。"
+		"message": "在此登錄"
 	},
 	"hub_create_account_button_submit": {
 		"message": "創建帳戶"
@@ -2124,6 +2128,9 @@
 	"subscription_submit_issue": {
 		"message": "提交問題"
 	},
+	"subscription_upgrade_to": {
+		"message": "升級至"
+	},
 	"panel_stats_menu_cumulative": {
 		"message": "累計"
 	},
@@ -2203,5 +2210,58 @@
 	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "及時清除到此點的所有統計歷史。"
+	},
+	"cookie": {
+		"message": "cookie"
+	},
+	"cookies": {
+		"message": "cookies"
+	},
+	"fingerprint": {
+		"message": "指紋"
+	},
+	"fingerprints": {
+		"message": "指紋"
+	},
+	"ad": {
+		"message": "廣告"
+	},
+	"ads": {
+		"message": "廣告"
+	},
+	"cliqz_feature_status_on": {
+		"message": "啟動"
+	},
+	"cliqz_feature_status_off": {
+		"message": "關閉"
+	},
+	"create_account_form_legal_consent_checkbox_label": {
+		"message": "我接受$LINK_TERMS_START$條款及條件$LINK_END$、$LINK_LICENSE_START$公共許可協議$LINK_END$，並同意$LINK_PRIVACY_START$隱私政策$LINK_END$中所述的資料處理方式。",
+		"placeholders": {
+			"link_end": {
+				"content": "</a>"
+			},
+			"link_license_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.mozilla.org/en-US/MPL/2.0/\" rel=\"noopener noreferrer\">"
+			},
+			"link_privacy_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" rel=\"noopener noreferrer\">"
+			},
+			"link_terms_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/\" rel=\"noopener noreferrer\">"
+			}
+		}
+	},
+	"ghostery_rewards": {
+		"message": "Ghostery Rewards"
+	},
+	"enhanced_anti_tracking": {
+		"message": "強化的反跟蹤"
+	},
+	"unknown": {
+		"message": "不明的"
+	},
+	"unknown_description": {
+		"message": "反跟蹤功能清出的不明的追蹤器"
 	}
 }

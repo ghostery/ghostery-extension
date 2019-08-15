@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -15,8 +15,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import SideNavigationView from './SideNavigationView';
 import globals from '../../../../src/classes/Globals';
-
-const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 
 /**
  * @class Implement the Side Navigation View for the Ghostery Hub
@@ -56,9 +54,6 @@ class SideNavigationViewContainer extends Component {
 			{ href: '/rewards', icon: 'rewards', text: t('hub_side_navigation_rewards') },
 			{ href: '/products', icon: 'products', text: t('hub_side_navigation_products') }
 		];
-		if (IS_EDGE) {
-			menuItems.splice(menuItems.findIndex(item => item.href === '/rewards'), 1);
-		}
 
 		const bottomItems = user ? [
 			{ id: 'email', href: `https://account.${globals.GHOSTERY_DOMAIN}.com/`, text: user.email },

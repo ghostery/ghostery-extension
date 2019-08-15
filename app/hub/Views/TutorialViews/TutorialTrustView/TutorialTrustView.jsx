@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -20,12 +20,12 @@ import React from 'react';
  */
 const TutorialTrustView = () => (
 	<div className="TutorialTrustView TutorialView--mediumFlexColumn row align-center-middle">
-		<div className="columns small-10 medium-8 large-6">
+		<div className="columns small-10 small-offset-1 medium-8 large-6">
 			<div className="TutorialView__imageTitle">
 				{t('hub_tutorial_simple_view')}
 			</div>
 			<img
-				className="TutorialTrustView__image simple"
+				className="TutorialTrustView__image trustrestrict-simple"
 				src="/app/images/hub/tutorial/trustrestrict-simple.png"
 				alt={t('hub_tutorial_simple_view')}
 			/>
@@ -33,12 +33,12 @@ const TutorialTrustView = () => (
 				{t('hub_tutorial_detailed_view')}
 			</div>
 			<img
-				className="TutorialTrustView__image detailed"
+				className="TutorialTrustView__image trustrestrict-detailed"
 				src="/app/images/hub/tutorial/trustrestrict-detailed.png"
 				alt={t('hub_tutorial_detailed_view')}
 			/>
 		</div>
-		<div className="columns small-12 medium-8 large-4 large-offset-1">
+		<div className="columns small-12 medium-8 large-4">
 			<div className="TutorialView__title">
 				{t('hub_tutorial_trust_title')}
 			</div>

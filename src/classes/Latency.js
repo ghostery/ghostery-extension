@@ -6,14 +6,14 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import _ from 'underscore';
+import { isEmpty } from 'underscore';
 import foundBugs from './FoundBugs';
 /**
  * Class for handling request latency data.
@@ -38,7 +38,7 @@ class Latency {
 		}
 		// If the latencies object for this request id is empty then this is
 		// not a tracker. Safe to delete object and return.
-		if (_.isEmpty(this.latencies[request_id])) {
+		if (isEmpty(this.latencies[request_id])) {
 			delete this.latencies[request_id];
 			return 0;
 		}
@@ -55,7 +55,7 @@ class Latency {
 		} = this.latencies[request_id][details.url];
 
 		delete this.latencies[request_id][details.url];
-		if (_.isEmpty(this.latencies[request_id])) {
+		if (isEmpty(this.latencies[request_id])) {
 			delete this.latencies[request_id];
 		}
 

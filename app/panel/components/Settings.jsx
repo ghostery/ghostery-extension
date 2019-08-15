@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -23,11 +23,14 @@ import Notifications from './Settings/Notifications';
 import OptIn from './Settings/OptIn';
 import Purplebox from './Settings/Purplebox';
 import Account from './Settings/Account';
+import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 /**
  * @class Implement base Settings view which routes navigation to all settings subviews
  * @memberof PanelClasses
  */
 class Settings extends React.Component {
+	static contextType = DynamicUIPortContext;
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -40,27 +43,56 @@ class Settings extends React.Component {
 		this.selectItem = this.selectItem.bind(this);
 		this.showToast = this.showToast.bind(this);
 		this.hideToast = this.hideToast.bind(this);
+		this.handlePortMessage = this.handlePortMessage.bind(this);
 	}
+
 	/**
 	 * Lifecycle event. Default sub view is set here.
 	 */
 	componentWillMount() {
 		this.props.history.push('/settings/globalblocking');
 	}
+
 	/**
 	 * Lifecycle event. Triggers action which delivers settings data.
 	 */
 	componentDidMount() {
-		this.props.actions.getSettingsData();
+		this._dynamicUIPort = this.context;
+		this._dynamicUIPort.onMessage.addListener(this.handlePortMessage);
+		this._dynamicUIPort.postMessage({ name: 'SettingsComponentDidMount' });
+	}
+
+	/**
+	 * Lifecycle event
+	 */
+	componentWillUnmount() {
+		this._dynamicUIPort.postMessage({ name: 'SettingsComponentWillUnmount' });
+		this._dynamicUIPort.onMessage.removeListener(this.handlePortMessage);
 	}
 
 	GlobalBlockingComponent = () => (<GlobalBlocking toggleCheckbox={this.toggleCheckbox} settingsData={this.props} actions={this.props.actions} showToast={this.showToast} language={this.props.language} />);
+
 	TrustAndRestrictComponent = () => (<TrustAndRestrict toggleCheckbox={this.toggleCheckbox} site_whitelist={this.props.site_whitelist} site_blacklist={this.props.site_blacklist} actions={this.props.actions} />)
+
 	GeneralSettingsComponent = () => (<GeneralSettings toggleCheckbox={this.toggleCheckbox} settingsData={this.props} actions={this.props.actions} />);
+
 	PurpleboxComponent = () => (<Purplebox toggleCheckbox={this.toggleCheckbox} selectItem={this.selectItem} settingsData={this.props} actions={this.props.actions} />);
+
 	NotificationsComponent = () => (<Notifications toggleCheckbox={this.toggleCheckbox} settingsData={this.props} actions={this.props.actions} />);
+
 	OptInComponent = () => (<OptIn toggleCheckbox={this.toggleCheckbox} settingsData={this.props} actions={this.props.actions} />);
+
 	AccountComponent = () => (<Account toggleCheckbox={this.toggleCheckbox} settingsData={this.props} actions={this.props.actions} />);
+
+	/**
+	 * Handles messages from dynamic UI port to background
+	 */
+	handlePortMessage(msg) {
+		if (msg.to !== 'settings' || !msg.body) { return; }
+
+		this.props.actions.updateSettingsData(msg.body);
+	}
+
 	/**
 	 * Trigger parameterized checkbox action.
 	 * @param  {Object} event 	checking a checkbox event
@@ -72,7 +104,7 @@ class Settings extends React.Component {
 				origin: 'rewards-hub',
 				type: 'action-signal',
 			};
-			sendMessage('setPanelData', { enable_offers: event.currentTarget.checked, signal }, undefined, 'rewardsPanel');
+			sendMessage('setPanelData', { enable_offers: event.currentTarget.checked, signal }, 'rewardsPanel');
 			sendMessage('ping', event.currentTarget.checked ? 'rewards_on' : 'rewards_off');
 		}
 		this.props.actions.toggleCheckbox({
@@ -80,6 +112,7 @@ class Settings extends React.Component {
 			checked: event.currentTarget.checked,
 		});
 	}
+
 	/**
 	 * Trigger parameterized selection action.
 	 */
@@ -89,6 +122,7 @@ class Settings extends React.Component {
 			value: event.currentTarget.value,
 		});
 	}
+
 	/**
 	 * Implement alert which is currently used to inform
 	 * user that altered settings were saved.
@@ -104,12 +138,13 @@ class Settings extends React.Component {
 	/**
 	 * Hide alert in 3 sec. after it has been shown.
 	 */
-	hideToast = debounce(function () {
+	hideToast = debounce(function() { // eslint-disable-line react/sort-comp
 		this.setState({
 			showToast: false,
 			toastText: ''
 		});
 	}, 3000)
+
 	/**
 	 * Render top level component of the Settings view.
 	 * @return {ReactComponent}   ReactComponent instance

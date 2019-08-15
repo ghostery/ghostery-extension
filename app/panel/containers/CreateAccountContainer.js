@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import CreateAccount from '../components/CreateAccount';
 import * as actions from '../actions/PanelActions'; // get shared actions from Panel
-import { register, getUser } from '../../Account/AccountActions';
+import { register, getUser, updateAccountPromotions } from '../../Account/AccountActions';
 
 /**
  * Map redux store state properties to CreateAccount component own properties.
@@ -38,7 +38,7 @@ const mapStateToProps = state => Object.assign({}, state.createAccount, {
  * @param  {Object} 	ownProps  CreateAccount component own props
  * @return {function}          	  to be used as an argument in redux connect call
  */
-const mapDispatchToProps = dispatch => ({ actions: bindActionCreators(Object.assign(actions, { register, getUser }), dispatch) });
+const mapDispatchToProps = dispatch => ({ actions: bindActionCreators(Object.assign(actions, { register, getUser, updateAccountPromotions }), dispatch) });
 /**
  * Connects CreateAccount component to the Redux store.
  * @memberOf PanelContainers

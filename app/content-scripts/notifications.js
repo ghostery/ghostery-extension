@@ -7,7 +7,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -32,13 +32,13 @@ const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
  * Use to call init to initialize functionality
  * @var  {Object} initialized to an object with init method as its property
  */
-const NotificationsContentScript = (function (win, doc) {
+const NotificationsContentScript = (function(win, doc) {
 	const ALERT_ID = 'ALERT_ID_6AEC0607-8CC8-4904-BDEB-00F947E5E3C2';
 	let NOTIFICATION_TRANSLATIONS = {};
 	let CMP_DATA = {};
 	let CSS_INJECTED = false;
 	let ALERT_SHOWN = false;
-	const createEl = function (type) {
+	const createEl = function(type) {
 		return doc.createElement(type);
 	};
 	/**
@@ -49,7 +49,7 @@ const NotificationsContentScript = (function (win, doc) {
 	 * @param  	{Object} 	parent 	parent DOM element
 	 * @param 	{...Object} args 	children DOM element(s)
 	 */
-	const appendChild = function (parent, ...args) {
+	const appendChild = function(parent, ...args) {
 		for (let i = 0; i < args.length; i++) {
 			parent.appendChild(args[i]);
 		}
@@ -59,7 +59,7 @@ const NotificationsContentScript = (function (win, doc) {
 	 * @memberOf NotificationsContentScript
 	 * @package
 	 */
-	const injectCSS = function () {
+	const injectCSS = function() {
 		const style = createEl('style');
 		const imp = ' !important;';
 		const reset = 'padding:0;margin:0;font:13px Arial,Helvetica;text-transform:none;font-size: 100%;vertical-align:baseline;line-height:normal;color:#fff;position:static;';
@@ -130,7 +130,7 @@ const NotificationsContentScript = (function (win, doc) {
 	 * @memberOf NotificationsContentScript
 	 * @package
 	 */
-	const removeAlert = function () {
+	const removeAlert = function() {
 		const el = doc.getElementById(ALERT_ID);
 		if (el) {
 			el.parentNode.removeChild(el);
@@ -145,7 +145,7 @@ const NotificationsContentScript = (function (win, doc) {
 	 *
 	 * @return {Object}  styled div DOM element
 	 */
-	const createCloseButton = function () {
+	const createCloseButton = function() {
 		const closeButton = createEl('div');
 
 		// .button class
@@ -197,7 +197,7 @@ const NotificationsContentScript = (function (win, doc) {
 	 *
 	 * @return {Object}  styled div DOM element
 	 */
-	const createNotificationHeader = function () {
+	const createNotificationHeader = function() {
 		const header = createEl('div');
 		header.style.backgroundColor = '#00aef0';
 		header.style.borderTopLeftRadius = '6px';
@@ -241,7 +241,7 @@ const NotificationsContentScript = (function (win, doc) {
 	 *
 	 * @return {Object}  styled div DOM element
 	 */
-	const createNotificationContent = function (message, linkUrl, linkText, linkClickFunc) {
+	const createNotificationContent = function(message, linkUrl, linkText, linkClickFunc) {
 		const content = createEl('div');
 		content.style.borderRadius = '6px';
 		content.style.setProperty(
@@ -306,7 +306,7 @@ const NotificationsContentScript = (function (win, doc) {
 	 *
 	 * @return {Object}  styled div DOM element
 	 */
-	const createUpgradeNotificationContent = function (
+	const createUpgradeNotificationContent = function(
 		imageData, title, message, linkUrl, linkText
 	) {
 		const content = createEl('div');
@@ -400,7 +400,7 @@ const NotificationsContentScript = (function (win, doc) {
 		`;
 
 		buttonSpan.addEventListener('click', () => {
-			const callback = function () {
+			const callback = function() {
 				removeAlert();
 			};
 			chrome.runtime.sendMessage({
@@ -423,7 +423,7 @@ const NotificationsContentScript = (function (win, doc) {
 	 *
 	 * @return {Object}  styled div DOM element
 	 */
-	const createAlert = function () {
+	const createAlert = function() {
 		let alert_div = doc.getElementById(ALERT_ID);
 		if (alert_div) {
 			alert_div.parentNode.removeChild(alert_div);
@@ -458,7 +458,7 @@ const NotificationsContentScript = (function (win, doc) {
 	 * @memberOf NotificationsContentScript
 	 * @package
 	 */
-	const showBrowseWindow = function (translations) {
+	const showBrowseWindow = function(translations) {
 		if (ALERT_SHOWN) {
 			return;
 		}
@@ -539,7 +539,12 @@ const NotificationsContentScript = (function (win, doc) {
 
 				const fileReader = new FileReader();
 				fileReader.onload = (fileLoadedEvent) => {
-					const fallback = function () {}; // Workaround for Edge. callback cannot be undefined.
+					// Workaround for Edge. Callback cannot be undefined.
+					const fallback = () => {
+						if (chrome.runtime.lastError) {
+							log('showBrowseWindow error:', chrome.runtime.lastError);
+						}
+					};
 					chrome.runtime.sendMessage({
 						origin: 'notifications',
 						name: 'importFile',
@@ -582,7 +587,7 @@ const NotificationsContentScript = (function (win, doc) {
 	 * @memberOf NotificationsContentScript
 	 * @package
 	 */
-	const updateBrowseWindow = function (result = {}) {
+	const updateBrowseWindow = function(result = {}) {
 		const s = doc.getElementById('ghostery-browse-window-span');
 		while (s.firstChild) {
 			s.removeChild(s.firstChild);
@@ -605,7 +610,7 @@ const NotificationsContentScript = (function (win, doc) {
 	 * @memberOf NotificationsContentScript
 	 * @package
 	 */
-	const exportFile = function (content) {
+	const exportFile = function(content) {
 		const textFileAsBlob = new Blob([content], { type: 'text/plain' });
 		const d = new Date();
 		const fileNameToSaveAs = `Ghostery-Backup-${d.getMonth() + 1}-${d.getDate()}-${d.getFullYear()}.ghost`;
@@ -634,7 +639,7 @@ const NotificationsContentScript = (function (win, doc) {
 	 *
 	 * @return {boolean}
 	 */
-	const _isElementInViewport = function (el) {
+	const _isElementInViewport = function(el) {
 		const rect = el.getBoundingClientRect();
 
 		return (
@@ -655,7 +660,7 @@ const NotificationsContentScript = (function (win, doc) {
 	 * @param {string} type 	the type of notification to show
 	 * @param {object} options 	message data to pass to the notification
 	 */
-	const showAlert = function (type, options) {
+	const showAlert = function(type, options) {
 		if (ALERT_SHOWN) {
 			return;
 		}
@@ -722,7 +727,7 @@ const NotificationsContentScript = (function (win, doc) {
 	 *
 	 * @return {boolean}
 	 */
-	const _initialize = function () {
+	const _initialize = function() {
 		onMessage.addListener((request, sender, sendResponse) => {
 			if (request.source === 'cliqz-content-script') {
 				return false;

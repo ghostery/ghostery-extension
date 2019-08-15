@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -15,18 +15,25 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { MemoryRouter } from 'react-router';
 import Rewards from '../Rewards';
+import { DynamicUIPortContext } from '../../contexts/DynamicUIPortContext';
+
 
 // Fake the translation function to only return the translation key
-global.t = function (str) {
+global.t = function(str) {
 	return str;
 };
 
 describe('app/panel/components/Rewards.jsx', () => {
+	const dynamicUIPort = {
+		onMessage: { addListener: jest.fn() },
+		postMessage: jest.fn(),
+	};
+
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('rewards is rendered correctly when rewards is on and rewards is null', () => {
 			const initialState = {
 				actions: {
-					getRewardsData: () => {},
+					updateRewardsData: () => {},
 					sendSignal: () => {},
 				},
 				location: {
@@ -37,7 +44,9 @@ describe('app/panel/components/Rewards.jsx', () => {
 			};
 			const component = renderer.create(
 				<MemoryRouter initialEntries={['/detail/rewards/list']}>
-					<Rewards {...initialState} />
+					<DynamicUIPortContext.Provider value={dynamicUIPort}>
+						<Rewards {...initialState} />
+					</DynamicUIPortContext.Provider>
 				</MemoryRouter>
 			).toJSON();
 			expect(component).toMatchSnapshot();
@@ -46,7 +55,7 @@ describe('app/panel/components/Rewards.jsx', () => {
 		test('rewards is rendered correctly when rewards is off and rewards is null', () => {
 			const initialState = {
 				actions: {
-					getRewardsData: () => {},
+					updateRewardsData: () => {},
 					sendSignal: () => {},
 				},
 				location: {
@@ -57,7 +66,9 @@ describe('app/panel/components/Rewards.jsx', () => {
 			};
 			const component = renderer.create(
 				<MemoryRouter initialEntries={['/detail/rewards/list']}>
-					<Rewards {...initialState} />
+					<DynamicUIPortContext.Provider value={dynamicUIPort}>
+						<Rewards {...initialState} />
+					</DynamicUIPortContext.Provider>
 				</MemoryRouter>
 			).toJSON();
 			expect(component).toMatchSnapshot();

@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -76,9 +76,6 @@
 }
 
 // Tutorial Blocking View
-.TutorialBlockingView__image.detailed-expanded {
-	margin-top: 10px;
-}
 .TutorialBlockingView__key {
 	margin-top: 24px;
 }
@@ -126,11 +123,34 @@
 		margin-bottom: 30px;
 	}
 }
+.TutorialBlockingView__image {
+	// this image has a drop shadow on the left,
+	// so we need to shift it left a bit like this
+	// to align it visually with the 'Detailed View' label
+	// the padding, meanwhile, scales it to match the width of the image below it
+	// other image styling in this stylesheet is done for similar reasons
+	&.blocking-detailed {
+		position: relative;
+		left: -1.5%;
+		padding-left: 0.5%
+	}
+
+	&.blocking-detailed-expanded {
+		position: relative;
+		left: -1.5%
+	}
+}
 
 // Tutorial Layout View
-.TutorialLayoutView__image.simple {
-	margin-left: -6px;
-	margin-bottom: 30px;
+.TutorialLayoutView__image {
+	position: relative;
+
+	&.layout-simple {
+		left: 1%;
+		padding-right: 12%;
+		margin-bottom: 30px;
+	}
+	&.layout-detailed { left: -11%; }
 }
 @media only screen and (max-width: 960px) {
 	.TutorialLayoutView .TutorialView__tagline {
@@ -185,11 +205,18 @@
 		text-align: center;
 	}
 }
+.TutorialTrustView__image {
+	position: relative;
+
+	&.trustrestrict-simple {
+		left: -1.35%;
+		padding-right: 12.5%;
+	}
+	&.trustrestrict-detailed { left: -14% }
+}
+
 
 // Tutorial Anti Suite View
-.TutorialAntiSuiteView__image.detailed {
-	margin-left: -30px;
-}
 .TutorialAntiSuiteView__key {
 	margin-top: 45px;
 }
@@ -238,4 +265,10 @@
 	.TutorialAntiSuiteView__key:last-of-type {
 		margin-bottom: 15px;
 	}
+}
+.TutorialAntiSuiteView__image {
+	position: relative;
+
+	&.antisuite-simple { left: -1% }
+	&.antisuite-detailed { left: -13.5% }
 }

@@ -1,6 +1,6 @@
 {
 	"account_creation_privacy_statement": {
-		"message": "Es gelten unsere allgemeinen $LINK_TERMS_START$Geschäftsbedingungen$LINK_TERMS_END$ und unsere $LINK_UA_START$Lizenzvereinbarung$LINK_UA_END$. Unsere Datenschutzerklärung $LINK_PS_START$ finden Sie hier$LINK_PS_END$.",
+		"message": "Es gelten unsere allgemeinen $LINK_TERMS_START$Konditionen$LINK_TERMS_END$ und unsere $LINK_UA_START$Lizenzvereinbarung$LINK_UA_END$. Unsere Datenschutzerklärung $LINK_PS_START$ finden Sie hier$LINK_PS_END$.",
 		"placeholders": {
 			"link_ps_end": {
 				"content": "</a>"
@@ -458,9 +458,6 @@
 	"summary_description_not_scanned_2": {
 		"message": "Navigieren Sie zu einer anderen Seite und ich verspreche, dass ich meine Arbeit erledigen werde."
 	},
-	"summary_custom_settings": {
-		"message": "Benutzerdefinierte Einstellungen"
-	},
 	"summary_trust_site": {
 		"message": "Tracker entsperren"
 	},
@@ -481,9 +478,6 @@
 	},
 	"summary_pause_ghostery_tooltip": {
 		"message": "Ghostery-Erweiterung unterbrechen."
-	},
-	"summary_pause_ghostery_ab_pause": {
-		"message": "Pause"
 	},
 	"pause_30_min": {
 		"message": "für 30 Min."
@@ -509,9 +503,6 @@
 	"summary_resume_ghostery_tooltip": {
 		"message": "Ghostery-Erweiterung unterbrochen. Zum Fortsetzen klicken."
 	},
-	"summary_resume_ghostery_ab_pause": {
-		"message": "Fortsetzen"
-	},
 	"summary_show_menu": {
 		"message": "Menü zeigen"
 	},
@@ -533,6 +524,10 @@
 	"blocking_category_blocked": {
 		"description": "as in '5 (trackers) BLOCKED'",
 		"message": "Blockiert"
+	},
+	"blocking_category_whitelisted": {
+		"description": "as in '5 (trackers) WHITELISTED'",
+		"message": "Auf der Wihitelist"
 	},
 	"panel_create_account": {
 		"message": "Konto erstellen"
@@ -602,7 +597,7 @@
 		"message": "Datenschutzerklärung"
 	},
 	"panel_about_terms_and_conditions": {
-		"message": "Geschäftsbedingungen"
+		"message": "Konditionen"
 	},
 	"panel_about_licenses": {
 		"message": "Software-Lizenzen"
@@ -682,7 +677,7 @@
 		"message": " auf dieser Seite."
 	},
 	"panel_tracker_total_tooltip": {
-		"message": "Gesamtzahl der gefundenen Tracker, blockierten Anzeigen und anonymisierten Datenpunkte."
+		"message": "Gesamtzahl der gefundenen Tracker und geänderten Anforderungen."
 	},
 	"panel_signin_success": {
 		"message": "Sie sind jetzt angemeldet als "
@@ -726,6 +721,9 @@
 	"panel_tracker_trust_tooltip": {
 		"message": "Auf dieser Website vertrauen"
 	},
+	"panel_tracker_scrub_tooltip": {
+		"message": "Von dieser Website entfernt"
+	},
 	"panel_detail_menu_list_title": {
 		"message": "Listenansicht"
 	},
@@ -758,9 +756,6 @@
 	},
 	"panel_detail_performance_text": {
 		"message": "Funktion demnächst verfügbar."
-	},
-	"panel_detail_rewards_title": {
-		"message": "Ghostery Rewards"
 	},
 	"panel_detail_rewards_coming_soon": {
 		"message": "Funktion demnächst verfügbar."
@@ -1092,6 +1087,12 @@
 	"page_load": {
 		"message": "Laden der Seite"
 	},
+	"requests_modified": {
+		"message": "Geänderte Anfragen:"
+	},
+	"requests_modified_tooltip": {
+		"message": "Summe der durch Anti-Tracking und Ad-Blocking geänderten Verfolgungsanfragen und -elemente"
+	},
 	"trackers_blocked": {
 		"message": "Blockierte Tracker:"
 	},
@@ -1283,9 +1284,6 @@
 	},
 	"tooltip_restrict_on": {
 		"message": "Tracker auf Website blockiert und Anti-Tracking aktiviert. Zum Annullieren klicken."
-	},
-	"tooltip_custom_settings": {
-		"message": "Meine gewählten Tracker-Einstellungen verwenden."
 	},
 	"tooltip_pause": {
 		"message": "Ghostery pausieren"
@@ -1570,7 +1568,7 @@
 		"message": "Holen Sie sich Ghostery Plus"
 	},
 	"hub_setup_feature_supporter_description": {
-		"message": "Unterstützen Sie Ghostery und schalten Sie spezielle Vergünstigungen frei."
+		"message": "Unterstützen Sie Ghostery und schalten Sie spezielle Features frei."
 	},
 	"hub_setup_feature_supporter_button": {
 		"message": "Support"
@@ -1759,7 +1757,7 @@
 		"message": "Auf Ghostery Plus hochstufen"
 	},
 	"hub_supporter_header_description": {
-		"message": "Zeigen Sie Ihre Unterstützung und schalten Sie spezielle Vergünstigungen frei!"
+		"message": "Zeigen Sie Ihre Unterstützung und schalten Sie spezielle Features frei!"
 	},
 	"hub_supporter_button_text": {
 		"message": "Holen Sie sich Ghostery Plus"
@@ -1803,7 +1801,7 @@
 		"message": "Lösen Sie Probleme schneller mit unserem Priority Helpdesk-Service – und weitere Vorteile"
 	},
 	"hub_supporter_manifesto": {
-		"message": "Wir sind bestrebt, unseren Nutzern die besten Datenschutz-Services kostenlos zur Verfügung zu stellen. Obwohl wir keine Gebühren für unser Datenschutzpaket erheben, können Sie uns durch ein kleines monatliches Abonnement unterstützen. Helfen Sie uns bei unserer Mission, indem Sie auf Ghostery Plus hochstufen – und ganz nebenbei coole Vergünstigungen freischalten!"
+		"message": "Wir sind bestrebt, unseren Nutzern die besten Datenschutz-Services kostenlos zur Verfügung zu stellen. Obwohl wir keine Gebühren für unser Datenschutzpaket erheben, können Sie uns durch ein kleines monatliches Abonnement unterstützen. Helfen Sie uns bei unserer Mission, indem Sie auf Ghostery Plus hochstufen – und ganz nebenbei coole Features freischalten!"
 	},
 	"hub_supporter_feature_theme_title": {
 		"message": "Neue Themes"
@@ -1853,8 +1851,11 @@
 	"hub_login_label_password_invalid": {
 		"message": "Verwenden Sie zwischen 8 und 50 Zeichen."
 	},
+	"hub_login_link_dont_have_account": {
+		"message": "Haben Sie kein Konto?"
+	},
 	"hub_login_link_create_account": {
-		"message": "Haben Sie noch kein Benutzerkonto? Registrieren."
+		"message": "Melden Sie sich an."
 	},
 	"hub_login_button_submit": {
 		"message": "Anmelden"
@@ -1898,8 +1899,11 @@
 	"hub_create_account_checkbox_promotions": {
 		"message": "Schicken Sie mir Ghostery-Aktualisierungen & Promotions."
 	},
+	"hub_create_account_already_have_account": {
+		"message": "Sie haben bereits ein Ghostery-Konto?"
+	},
 	"hub_create_account_link_login": {
-		"message": "Ich habe bereits ein Konto. Melden Sie sich an."
+		"message": "Hier anmelden."
 	},
 	"hub_create_account_button_submit": {
 		"message": "Konto erstellen"
@@ -1932,10 +1936,10 @@
 		"message": "Code kopiert"
 	},
 	"rewards_expires_in_day": {
-		"message": "Verfügbar für 1 Tag ab"
+		"message": "Läuft in 1 Tag ab"
 	},
 	"rewards_expires_in_days": {
-		"message": "Verfügbar für $COUNT$ Tagen ab",
+		"message": "Läuft in $COUNT$ Tagen ab",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1943,10 +1947,10 @@
 		}
 	},
 	"rewards_expires_in_hour": {
-		"message": "Verfügbar für 1 Stunde ab"
+		"message": "Läuft in 1 Stunde ab"
 	},
 	"rewards_expires_in_hours": {
-		"message": "Verfügbar für $COUNT$ Stunden ab",
+		"message": "Läuft in $COUNT$ Stunden ab",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1954,10 +1958,10 @@
 		}
 	},
 	"rewards_expires_in_min": {
-		"message": "Verfügbar für 1 Min. ab"
+		"message": "Läuft in 1 Minute ab"
 	},
 	"rewards_expires_in_mins": {
-		"message": "Verfügbar für $COUNT$ Minuten ab",
+		"message": "Läuft in $COUNT$ Minuten ab",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1965,10 +1969,10 @@
 		}
 	},
 	"rewards_expires_in_sec": {
-		"message": "Verfügbar für 1 Sek. ab"
+		"message": "Läuft in 1 Sekunde ab"
 	},
 	"rewards_expires_in_secs": {
-		"message": "Verfügbar für $COUNT$ Sek. ab",
+		"message": "Läuft in $COUNT$ Sekunden ab",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -1976,7 +1980,7 @@
 		}
 	},
 	"rewards_terms_conditions": {
-		"message": "Geschäftsbedingungen"
+		"message": "Konditionen"
 	},
 	"rewards_disable": {
 		"message": "Rewards ausschalten"
@@ -2060,7 +2064,7 @@
 		"message": "Historische Statistiken"
 	},
 	"subscribe_pitch": {
-		"message": "Auch wenn Ghostery kostenlos ist, können Sie uns durch ein kleines Abonnement zum Preis von $ 2 pro Monat unterstützen und erhalten als Gegenleistung coole Vergünstigungen, wie z. B. Farbthemes, Vorzugs-Support und mehr. Werden Sie Teil unserer Mission und melden Sie sich an!"
+		"message": "Auch wenn Ghostery kostenlos ist, können Sie uns durch ein kleines Abonnement zum Preis von € 2 pro Monat unterstützen und erhalten als Gegenleistung coole Features, wie z. B. Farbthemes, Vorzugs-Support und mehr. Werden Sie Teil unserer Mission und melden Sie sich an!"
 	},
 	"subscribe_pitch_learn_more": {
 		"message": "Weitere Informationen"
@@ -2123,6 +2127,9 @@
 	},
 	"subscription_submit_issue": {
 		"message": "Problem melden"
+	},
+	"subscription_upgrade_to": {
+		"message": "Upgrade auf"
 	},
 	"panel_stats_menu_cumulative": {
 		"message": "Kumulativ"
@@ -2203,5 +2210,58 @@
 	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "Löschen Sie die gesamte Chronik bis zu diesem Zeitpunkt."
+	},
+	"cookie": {
+		"message": "Cookie"
+	},
+	"cookies": {
+		"message": "Cookies"
+	},
+	"fingerprint": {
+		"message": "Fingerabdruck"
+	},
+	"fingerprints": {
+		"message": "Fingerabdrucke"
+	},
+	"ad": {
+		"message": "Werbung"
+	},
+	"ads": {
+		"message": "Werbungen"
+	},
+	"cliqz_feature_status_on": {
+		"message": "An"
+	},
+	"cliqz_feature_status_off": {
+		"message": "Aus"
+	},
+	"create_account_form_legal_consent_checkbox_label": {
+		"message": "Ich akzeptiere die $LINK_TERMS_START$Geschäftsbedingungen$LINK_END$ sowie die $LINK_LICENSE_START$Lizenzvereinbarung$LINK_END$ und erkläre mich mit den Praktiken,  die in der $LINK_PRIVACY_START$Datenschutzrichtlinie$LINK_END$ beschrieben sind, einverstanden.",
+		"placeholders": {
+			"link_end": {
+				"content": "</a>"
+			},
+			"link_license_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.mozilla.org/en-US/MPL/2.0/\" rel=\"noopener noreferrer\">"
+			},
+			"link_privacy_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" rel=\"noopener noreferrer\">"
+			},
+			"link_terms_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/\" rel=\"noopener noreferrer\">"
+			}
+		}
+	},
+	"ghostery_rewards": {
+		"message": "Ghostery Rewards"
+	},
+	"enhanced_anti_tracking": {
+		"message": "Verbessertes Anti-Tracking"
+	},
+	"unknown": {
+		"message": "Unbekannt"
+	},
+	"unknown_description": {
+		"message": "Von Anti-Tracking entfernte unbekannte Tracker"
 	}
 }

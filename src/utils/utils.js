@@ -6,7 +6,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -18,14 +18,23 @@
 /**
  * @namespace BackgroundUtils
  */
-import _ from 'underscore';
-import url from 'url';
+import { debounce } from 'underscore';
+import { URL } from '@cliqz/url-parser';
 import tabInfo from '../classes/TabInfo';
 import globals from '../classes/Globals';
 import { log, objectEntries } from './common';
 
 const { BROWSER_INFO } = globals;
 const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
+
+/**
+ * Handle chrome.runtime.lastError messages
+ */
+const defaultCallback = () => {
+	if (chrome.runtime.lastError) {
+		log('defaultCallback error:', chrome.runtime.lastError);
+	}
+};
 
 /**
  * Send message to a specific tab ID.
@@ -36,7 +45,7 @@ const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
  * @param  {Object} 	message 	message data
  * @param  {function} 	callback	function to call (at most once) when you have a response
  */
-export function sendMessage(tab_id, name, message, callback = function () {}) {
+export function sendMessage(tab_id, name, message, callback = defaultCallback()) {
 	log(`BACKGROUND SENT ${name} TO TAB`);
 	chrome.tabs.sendMessage(tab_id, {
 		name,
@@ -54,7 +63,7 @@ export function sendMessage(tab_id, name, message, callback = function () {}) {
  * @param  {Object} 	message 	message data
  * @param  {function} 	callback 	function to call (at most once) when you have a response
  */
-export function sendMessageToFrame(tab_id, frame_id, name, message, callback = function () {}) {
+export function sendMessageToFrame(tab_id, frame_id, name, message, callback = defaultCallback()) {
 	log(`BACKGROUND SENT ${name} TO TAB ${tab_id} - FRAME ${frame_id}`);
 	chrome.tabs.sendMessage(tab_id, {
 		name,
@@ -72,7 +81,11 @@ export function sendMessageToFrame(tab_id, frame_id, name, message, callback = f
  */
 export function sendMessageToPanel(name, message) {
 	log('BACKGROUND SENDS MESSAGE TO PANEL', name);
-	chrome.runtime.sendMessage({ name,	message });
+	chrome.runtime.sendMessage({ name, message }, () => {
+		if (chrome.runtime.lastError) {
+			log('sendMessageToPanel error:', chrome.runtime.lastError);
+		}
+	});
 }
 
 /**
@@ -101,7 +114,7 @@ export function isValidTopLevelNavigation(details) {
  * (can default to 20 if undefined)
  * @memberOf BackgroundUtils
  */
-export const flushChromeMemoryCache = _.debounce(() => {
+export const flushChromeMemoryCache = debounce(() => {
 	chrome.webRequest.handlerBehaviorChanged();
 }, 1000 * 35, true);
 
@@ -152,27 +165,20 @@ export function processFpeUrl(src) {
  * @memberOf BackgroundUtils
  *
  * @param  {string} src 	the source url
- * @return {Object} 		contains url parts as properties
+ * @return {URL} 		contains url parts as properties
+ *
  */
 export function processUrl(src) {
-	if (!src) {
+	try {
+		const res = new URL(src);
+		return res;
+	} catch (e) {
 		return {
 			protocol: '',
-			host: '',
-			path: '',
-			host_with_path: '',
-			anchor: '',
+			hostname: '',
+			pathname: '',
 		};
 	}
-	const res = url.parse(src);
-
-	return {
-		protocol: res.protocol ? res.protocol.substr(0, res.protocol.length - 1) : '',
-		host: res.hostname || '',
-		path: res.pathname ? res.pathname.substr(1) : '',
-		host_with_path: (res.host || '') + (res.pathname || ''),
-		anchor: res.hash ? res.hash.substr(1) : '',
-	};
 }
 
 /**
@@ -186,7 +192,15 @@ export function processUrlQuery(src) {
 		return {};
 	}
 
-	return url.parse(src, true).query;
+	try {
+		const res = {};
+		for (const [key, value] of new URL(src).searchParams.entries()) {
+			res[key] = value;
+		}
+		return res;
+	} catch (e) {
+		return {};
+	}
 }
 
 /**
@@ -366,9 +380,11 @@ function _fetchJson(method, url, query, extraHeaders, referrer = 'no-referrer', 
 			// check for 204 status (No Content) from CMP
 			if (response.status === 204) {
 				return false; // send back false to signal no new campaigns
-			} else if (contentType && contentType.includes('application/json')) {
+			}
+			if (contentType && contentType.includes('application/json')) {
 				return response.json();
-			} else if (contentType && contentType.includes('text/html')) {
+			}
+			if (contentType && contentType.includes('text/html')) {
 				return response.text();
 			}
 			return response.text();
@@ -395,7 +411,7 @@ function _fetchJson(method, url, query, extraHeaders, referrer = 'no-referrer', 
 	return new Promise(((resolve, reject) => {
 		const xhr = new XMLHttpRequest();
 
-		xhr.onload = function () {
+		xhr.onload = function() {
 			// This is called even on 404 etc, so check the status.
 			if (xhr.status >= 200 && xhr.status < 400) {
 				// check for 204 status (No Content) from CMP
@@ -422,7 +438,7 @@ function _fetchJson(method, url, query, extraHeaders, referrer = 'no-referrer', 
 		};
 
 		// Handle network errors
-		xhr.onerror = function (error) {
+		xhr.onerror = function(error) {
 			log('_fetchJson network error', error);
 			reject(new Error(error));
 		};
@@ -494,7 +510,7 @@ export function fetchLocalJSONResource(url) {
 	}
 	return new Promise(((resolve, reject) => {
 		const xhr = new XMLHttpRequest();
-		xhr.onload = function () {
+		xhr.onload = function() {
 			// This is called even on 404 etc, so check the status.
 			if (xhr.status >= 200 && xhr.status < 400) {
 				try {
@@ -511,7 +527,7 @@ export function fetchLocalJSONResource(url) {
 		};
 
 		// Handle network errors
-		xhr.onerror = function (error) {
+		xhr.onerror = function(error) {
 			log('fetchLocalJSONResource network error', error);
 			reject(new Error(error));
 		};

@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -28,18 +28,21 @@ class GeneralSettings extends React.Component {
 		// event bindings
 		this.updateDatabase = this.updateDatabase.bind(this);
 	}
+
 	/**
 	 * Lifecycle event.
 	 */
 	componentWillMount() {
 		this.updateDbLastUpdated(this.props);
 	}
+
 	/**
 	 * Lifecycle event.
 	 */
 	componentWillReceiveProps(nextProps) {
 		this.updateDbLastUpdated(nextProps);
 	}
+
 	/**
 	 * Trigger action to check for new DB updates.
 	 */
@@ -55,6 +58,7 @@ class GeneralSettings extends React.Component {
 		moment.locale(props.language).toLowerCase().replace('_', '-');
 		this.setState({ dbLastUpdated: moment(props.bugs_last_updated).format('LLL') });
 	}
+
 	/**
 	* Render General Settings subview.
 	* @return {ReactComponent}   ReactComponent instance
@@ -73,8 +77,13 @@ class GeneralSettings extends React.Component {
 									{ t('settings_auto_update') }
 								</label>
 								<div className="s-checkbox-label">
-									<span id="last-updated-span">{ t('settings_last_update') }</span> <span id="last-updated-span-value">{ this.state.dbLastUpdated }</span>
-									<span id="update-now-span" className="s-blue-header" onClick={this.updateDatabase} > { settingsData.dbUpdateText }</span>
+									<span id="last-updated-span">{ t('settings_last_update') }</span>
+									{' '}
+									<span id="last-updated-span-value">{ this.state.dbLastUpdated }</span>
+									<span id="update-now-span" className="s-blue-header" onClick={this.updateDatabase}>
+										{' '}
+										{ settingsData.dbUpdateText }
+									</span>
 								</div>
 							</div>
 						</div>

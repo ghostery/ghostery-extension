@@ -458,9 +458,6 @@
 	"summary_description_not_scanned_2": {
 		"message": "Jeśli przejdziesz na inną stronę, wszystko powinno zadziałać jak trzeba."
 	},
-	"summary_custom_settings": {
-		"message": "Ustawienia niestandardowe"
-	},
 	"summary_trust_site": {
 		"message": "Zaufaj stronie"
 	},
@@ -481,9 +478,6 @@
 	},
 	"summary_pause_ghostery_tooltip": {
 		"message": "Wstrzymaj rozszerzenie Ghostery."
-	},
-	"summary_pause_ghostery_ab_pause": {
-		"message": "Wstrzymaj"
 	},
 	"pause_30_min": {
 		"message": "na 30 min."
@@ -509,9 +503,6 @@
 	"summary_resume_ghostery_tooltip": {
 		"message": "Wstrzymano rozszerzenie Ghostery. Kliknij, aby wznowić."
 	},
-	"summary_resume_ghostery_ab_pause": {
-		"message": "Wznów"
-	},
 	"summary_show_menu": {
 		"message": "pokaż menu"
 	},
@@ -533,6 +524,10 @@
 	"blocking_category_blocked": {
 		"description": "as in '5 (trackers) BLOCKED'",
 		"message": "Zablokowane"
+	},
+	"blocking_category_whitelisted": {
+		"description": "as in '5 (trackers) WHITELISTED'",
+		"message": "Dodano do białej listy"
 	},
 	"panel_create_account": {
 		"message": "Utwórz konto"
@@ -682,7 +677,7 @@
 		"message": " na tej stronie."
 	},
 	"panel_tracker_total_tooltip": {
-		"message": "Suma odnalezionych tropicieli, zablokowanych reklam i zanonimizowanych punktów danych."
+		"message": "Suma odnalezionych tropicieli + zmodyfikowanych żądań."
 	},
 	"panel_signin_success": {
 		"message": "Jesteś teraz zalogowany/-a jako "
@@ -726,6 +721,9 @@
 	"panel_tracker_trust_tooltip": {
 		"message": "Zaufaj na tej stronie"
 	},
+	"panel_tracker_scrub_tooltip": {
+		"message": "Oczyszczaj na tej stronie"
+	},
 	"panel_detail_menu_list_title": {
 		"message": "Widok listy"
 	},
@@ -758,9 +756,6 @@
 	},
 	"panel_detail_performance_text": {
 		"message": "Funkcja dostępna niebawem."
-	},
-	"panel_detail_rewards_title": {
-		"message": "Ghostery Rewards"
 	},
 	"panel_detail_rewards_coming_soon": {
 		"message": "Funkcja dostępna niebawem."
@@ -1092,6 +1087,12 @@
 	"page_load": {
 		"message": "Ładowanie strony"
 	},
+	"requests_modified": {
+		"message": "Zmodyfikowane żądania:"
+	},
+	"requests_modified_tooltip": {
+		"message": "Łączna liczba żądań śledzenia i elementów zmodyfikowanych przez Ochronę przed śledzeniem i Blokowanie reklam"
+	},
 	"trackers_blocked": {
 		"message": "Tropiciele zablokowane:"
 	},
@@ -1283,9 +1284,6 @@
 	},
 	"tooltip_restrict_on": {
 		"message": "Tropiciele są na tej stronie blokowane, a ochrona przed śledzeniem włączona. Kliknij, aby cofnąć."
-	},
-	"tooltip_custom_settings": {
-		"message": "Użyj wybranych przez mnie ustawień tropiciela."
 	},
 	"tooltip_pause": {
 		"message": "Wstrzymaj"
@@ -1853,8 +1851,11 @@
 	"hub_login_label_password_invalid": {
 		"message": "Użyj od 8 do 50 znaków."
 	},
+	"hub_login_link_dont_have_account": {
+		"message": "Nie masz konta?"
+	},
 	"hub_login_link_create_account": {
-		"message": "Nie masz konta? Zarejestruj się."
+		"message": "Zarejestruj się. "
 	},
 	"hub_login_button_submit": {
 		"message": "Zaloguj się"
@@ -1898,8 +1899,11 @@
 	"hub_create_account_checkbox_promotions": {
 		"message": "Przesyłaj mi aktualizacje i promocje Ghostery."
 	},
+	"hub_create_account_already_have_account": {
+		"message": "Masz już konto Ghostery?"
+	},
 	"hub_create_account_link_login": {
-		"message": "Mam już konto. Zaloguj się."
+		"message": "Zaloguj się tutaj."
 	},
 	"hub_create_account_button_submit": {
 		"message": "Utwórz konto"
@@ -2124,6 +2128,9 @@
 	"subscription_submit_issue": {
 		"message": "Zgłoś problem"
 	},
+	"subscription_upgrade_to": {
+		"message": "Zaktualizuj do"
+	},
 	"panel_stats_menu_cumulative": {
 		"message": "Całościowo"
 	},
@@ -2203,5 +2210,58 @@
 	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "Usuń całą historię danych statystycznych aż do teraz."
+	},
+	"cookie": {
+		"message": "plik cookie"
+	},
+	"cookies": {
+		"message": "pliki cookie"
+	},
+	"fingerprint": {
+		"message": "odcisk palca"
+	},
+	"fingerprints": {
+		"message": "odciski palca"
+	},
+	"ad": {
+		"message": "reklama"
+	},
+	"ads": {
+		"message": "reklamy"
+	},
+	"cliqz_feature_status_on": {
+		"message": "Włączone"
+	},
+	"cliqz_feature_status_off": {
+		"message": "Wyłączone"
+	},
+	"create_account_form_legal_consent_checkbox_label": {
+		"message": "Akceptuję $LINK_TERMS_START$warunki użytkowania$LINK_END$ i $LINK_LICENSE_START$umowę licencji publicznej$LINK_END$ oraz wyrażam zgodę na zasady ochrony danych zawarte w $LINK_PRIVACY_START$polityce prywatności$LINK_END$.",
+		"placeholders": {
+			"link_end": {
+				"content": "</a>"
+			},
+			"link_license_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.mozilla.org/en-US/MPL/2.0/\" rel=\"noopener noreferrer\">"
+			},
+			"link_privacy_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" rel=\"noopener noreferrer\">"
+			},
+			"link_terms_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/\" rel=\"noopener noreferrer\">"
+			}
+		}
+	},
+	"ghostery_rewards": {
+		"message": "Ghostery Rewards"
+	},
+	"enhanced_anti_tracking": {
+		"message": "Wzmocniona ochrona przed śledzeniem"
+	},
+	"unknown": {
+		"message": "Nieznany"
+	},
+	"unknown_description": {
+		"message": "Nieznane tropiciele zostały oczyszczone przez funkcję ochrony przed śledzeniem"
 	}
 }

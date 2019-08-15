@@ -458,9 +458,6 @@
 	"summary_description_not_scanned_2": {
 		"message": "Continuez vers une autre page et nous promettons de vous livrer vos produits."
 	},
-	"summary_custom_settings": {
-		"message": "Paramètres personnalisés"
-	},
 	"summary_trust_site": {
 		"message": "Se fier à ce site"
 	},
@@ -481,9 +478,6 @@
 	},
 	"summary_pause_ghostery_tooltip": {
 		"message": "Mettre le module Ghostery sur pause."
-	},
-	"summary_pause_ghostery_ab_pause": {
-		"message": "Pause"
 	},
 	"pause_30_min": {
 		"message": "pour 30 min"
@@ -509,9 +503,6 @@
 	"summary_resume_ghostery_tooltip": {
 		"message": "Module Ghostery mis en pause. Cliquez pour reprendre."
 	},
-	"summary_resume_ghostery_ab_pause": {
-		"message": "Reprendre"
-	},
 	"summary_show_menu": {
 		"message": "Afficher le menu"
 	},
@@ -533,6 +524,10 @@
 	"blocking_category_blocked": {
 		"description": "as in '5 (trackers) BLOCKED'",
 		"message": "Bloqué"
+	},
+	"blocking_category_whitelisted": {
+		"description": "as in '5 (trackers) WHITELISTED'",
+		"message": "Mis sur liste blanche"
 	},
 	"panel_create_account": {
 		"message": "Créer un compte"
@@ -682,7 +677,7 @@
 		"message": " sur cette page."
 	},
 	"panel_tracker_total_tooltip": {
-		"message": "Nombre total de mouchards repérés, de publicités bloquées et de points de données anonymisés."
+		"message": "Nombre total de mouchards repérés + demandes modifiées."
 	},
 	"panel_signin_success": {
 		"message": "Vous êtes maintenant connecté(e) sous l'identifiant "
@@ -726,6 +721,9 @@
 	"panel_tracker_trust_tooltip": {
 		"message": "Se fier aux mouchards sur ce site"
 	},
+	"panel_tracker_scrub_tooltip": {
+		"message": "Nettoyer sur ce site"
+	},
 	"panel_detail_menu_list_title": {
 		"message": "Affichage liste"
 	},
@@ -758,9 +756,6 @@
 	},
 	"panel_detail_performance_text": {
 		"message": "Fonction bientôt disponible."
-	},
-	"panel_detail_rewards_title": {
-		"message": "Ghostery Rewards"
 	},
 	"panel_detail_rewards_coming_soon": {
 		"message": "Fonction bientôt disponible."
@@ -1092,6 +1087,12 @@
 	"page_load": {
 		"message": "Chargement de la page"
 	},
+	"requests_modified": {
+		"message": "Demandes modifiées :"
+	},
+	"requests_modified_tooltip": {
+		"message": "Nombre total de demandes de suivi et d'éléments modifiés par l'Anti-Pistage et le Bloqueur de publicités"
+	},
 	"trackers_blocked": {
 		"message": "Mouchards bloqués :"
 	},
@@ -1231,7 +1232,7 @@
 		"message": "Actualisez pour voir les modifications."
 	},
 	"alert_site_trusted": {
-		"message": "Site mis sur la liste blanche Les mouchards seront permis et l'anti-pistage désactivé sur ce site."
+		"message": "Site mis sur la liste blanche. Les mouchards seront permis et l'anti-pistage désactivé sur ce site."
 	},
 	"alert_site_trusted_off": {
 		"message": "Site retiré de la liste blanche."
@@ -1283,9 +1284,6 @@
 	},
 	"tooltip_restrict_on": {
 		"message": "Mouchards bloqués et anti-pistage activé sur ce site. Cliquez pour annuler."
-	},
-	"tooltip_custom_settings": {
-		"message": "Utiliser les paramètres de pistage sélectionnés."
 	},
 	"tooltip_pause": {
 		"message": "Pause"
@@ -1853,8 +1851,11 @@
 	"hub_login_label_password_invalid": {
 		"message": "Utilisez entre 8 et 50 caractères."
 	},
+	"hub_login_link_dont_have_account": {
+		"message": "Vous ne possédez pas de compte ?"
+	},
 	"hub_login_link_create_account": {
-		"message": "Vous ne possédez pas de compte ? Enregistrez-vous."
+		"message": "Inscrivez-vous."
 	},
 	"hub_login_button_submit": {
 		"message": "Connexion"
@@ -1898,8 +1899,11 @@
 	"hub_create_account_checkbox_promotions": {
 		"message": "Envoyez-moi les mises à jour & promotions Ghostery."
 	},
+	"hub_create_account_already_have_account": {
+		"message": "Vous avez déjà un compte Ghostery ?"
+	},
 	"hub_create_account_link_login": {
-		"message": "Je possède déjà un compte. Me connecter."
+		"message": "Connectez-vous ici."
 	},
 	"hub_create_account_button_submit": {
 		"message": "Créer un compte"
@@ -2078,10 +2082,10 @@
 		"message": "Statut"
 	},
 	"subscription_active": {
-		"message": "Actif/ve"
+		"message": "ACTIF"
 	},
 	"subscription_inactive": {
-		"message": "Non-actif/ve"
+		"message": "NON-ACTIF"
 	},
 	"subscription_manage": {
 		"message": "Gérer mon abonnement"
@@ -2123,6 +2127,9 @@
 	},
 	"subscription_submit_issue": {
 		"message": "Soumettre le problème rencontré"
+	},
+	"subscription_upgrade_to": {
+		"message": "Passe à"
 	},
 	"panel_stats_menu_cumulative": {
 		"message": "Cumulé"
@@ -2203,5 +2210,58 @@
 	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "Supprimer tous les historiques des stats connus à ce jour."
+	},
+	"cookie": {
+		"message": "cookie"
+	},
+	"cookies": {
+		"message": "cookies"
+	},
+	"fingerprint": {
+		"message": "empreinte"
+	},
+	"fingerprints": {
+		"message": "empreintes"
+	},
+	"ad": {
+		"message": "publicité"
+	},
+	"ads": {
+		"message": "publicités"
+	},
+	"cliqz_feature_status_on": {
+		"message": "activé"
+	},
+	"cliqz_feature_status_off": {
+		"message": "désactivé"
+	},
+	"create_account_form_legal_consent_checkbox_label": {
+		"message": "J'accepte les $LINK_TERMS_START$conditions générales$LINK_END$, le $LINK_LICENSE_START$contrat de licence public$LINK_END$ et j'accepte les pratiques relatives aux données stipulées dans la $LINK_PRIVACY_START$Politique de confidentialité$LINK_END$.",
+		"placeholders": {
+			"link_end": {
+				"content": "</a>"
+			},
+			"link_license_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.mozilla.org/en-US/MPL/2.0/\" rel=\"noopener noreferrer\">"
+			},
+			"link_privacy_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" rel=\"noopener noreferrer\">"
+			},
+			"link_terms_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/\" rel=\"noopener noreferrer\">"
+			}
+		}
+	},
+	"ghostery_rewards": {
+		"message": "Ghostery Rewards"
+	},
+	"enhanced_anti_tracking": {
+		"message": "Outil amélioré anti-tracking"
+	},
+	"unknown": {
+		"message": "Inconnu"
+	},
+	"unknown_description": {
+		"message": "Mouchards inconnus nettoyés par l'Anti-Pistage"
 	}
 }

@@ -458,9 +458,6 @@
 	"summary_description_not_scanned_2": {
 		"message": "다른 페이지로 이동하면 제대로 된 결과가 나올 것입니다."
 	},
-	"summary_custom_settings": {
-		"message": "사용자 지정 설정 "
-	},
 	"summary_trust_site": {
 		"message": "사이트 신뢰 "
 	},
@@ -481,9 +478,6 @@
 	},
 	"summary_pause_ghostery_tooltip": {
 		"message": "Ghostery 확장 프로그램 일시 중지."
-	},
-	"summary_pause_ghostery_ab_pause": {
-		"message": "일시 중지 "
 	},
 	"pause_30_min": {
 		"message": "30분 동안 "
@@ -509,9 +503,6 @@
 	"summary_resume_ghostery_tooltip": {
 		"message": "Ghostery 확장 프로그램 일시 중지됨. 다시 시작하려면 클릭하십시오."
 	},
-	"summary_resume_ghostery_ab_pause": {
-		"message": "다시 시작 "
-	},
 	"summary_show_menu": {
 		"message": "메뉴 표시 "
 	},
@@ -533,6 +524,10 @@
 	"blocking_category_blocked": {
 		"description": "as in '5 (trackers) BLOCKED'",
 		"message": "차단됨 "
+	},
+	"blocking_category_whitelisted": {
+		"description": "as in '5 (trackers) WHITELISTED'",
+		"message": "허용 목록에 추가됨"
 	},
 	"panel_create_account": {
 		"message": "계정 만들기 "
@@ -682,7 +677,7 @@
 		"message": " 현재 페이지."
 	},
 	"panel_tracker_total_tooltip": {
-		"message": "확인된 트래커, 차단된 광고와 익명의 데이터 포인트의 총 개수"
+		"message": "확인된 트래커 + 변경된 요청의 총 개수"
 	},
 	"panel_signin_success": {
 		"message": "현재 다음 ID로 로그인되어 있습니다  "
@@ -726,6 +721,9 @@
 	"panel_tracker_trust_tooltip": {
 		"message": "이 사이트에서 신뢰 "
 	},
+	"panel_tracker_scrub_tooltip": {
+		"message": "이 사이트에서 제거"
+	},
 	"panel_detail_menu_list_title": {
 		"message": "목록 보기 "
 	},
@@ -758,9 +756,6 @@
 	},
 	"panel_detail_performance_text": {
 		"message": "기능이 곧 제공됩니다."
-	},
-	"panel_detail_rewards_title": {
-		"message": "Ghostery Rewards"
 	},
 	"panel_detail_rewards_coming_soon": {
 		"message": "기능이 곧 제공됩니다."
@@ -1092,6 +1087,12 @@
 	"page_load": {
 		"message": "페이지 로드 "
 	},
+	"requests_modified": {
+		"message": "변경된 요청:"
+	},
+	"requests_modified_tooltip": {
+		"message": "추적 방지와 광고 차단을 통한 추적 요청 및 변경 요소의 총 수"
+	},
 	"trackers_blocked": {
 		"message": "차단된 트래커:"
 	},
@@ -1283,9 +1284,6 @@
 	},
 	"tooltip_restrict_on": {
 		"message": "사이트에서 트래커 차단, 추적 방지 활성화됨. 실행 취소하려면 클릭하십시오."
-	},
-	"tooltip_custom_settings": {
-		"message": "선택한 내 트래커 설정을 사용합니다."
 	},
 	"tooltip_pause": {
 		"message": "Ghostery 일시 중지  "
@@ -1853,8 +1851,11 @@
 	"hub_login_label_password_invalid": {
 		"message": "8자에서 50자까지 사용할 수 있습니다."
 	},
-	"hub_login_link_create_account": {
+	"hub_login_link_dont_have_account": {
 		"message": "계정이 있으신가요?회원 가입"
+	},
+	"hub_login_link_create_account": {
+		"message": "어울리다"
 	},
 	"hub_login_button_submit": {
 		"message": "로그인 "
@@ -1898,8 +1899,11 @@
 	"hub_create_account_checkbox_promotions": {
 		"message": "고스터리 브라우저의 업데이트와 프로모션 소식 받기"
 	},
+	"hub_create_account_already_have_account": {
+		"message": "이미 Ghostery 계정이 있으십니까? "
+	},
 	"hub_create_account_link_login": {
-		"message": "이미 계정이 있습니다. 로그인"
+		"message": "여기에서 로그인하세요."
 	},
 	"hub_create_account_button_submit": {
 		"message": "계정 만들기 "
@@ -2124,6 +2128,9 @@
 	"subscription_submit_issue": {
 		"message": "오류 보고"
 	},
+	"subscription_upgrade_to": {
+		"message": "다음으로 업그레이드"
+	},
 	"panel_stats_menu_cumulative": {
 		"message": "누적"
 	},
@@ -2203,5 +2210,58 @@
 	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "이 시점까지의 모든 통계 이력을 제때 삭제하세요."
+	},
+	"cookie": {
+		"message": "쿠키"
+	},
+	"cookies": {
+		"message": "쿠키"
+	},
+	"fingerprint": {
+		"message": "지문"
+	},
+	"fingerprints": {
+		"message": "지문"
+	},
+	"ad": {
+		"message": "광고"
+	},
+	"ads": {
+		"message": "광고"
+	},
+	"cliqz_feature_status_on": {
+		"message": "켜기 "
+	},
+	"cliqz_feature_status_off": {
+		"message": "끄기 "
+	},
+	"create_account_form_legal_consent_checkbox_label": {
+		"message": "본인은 $LINK_TERMS_START$약관$LINK_END$,  $LINK_LICENSE_START$공개 사용권 계약$LINK_END$에 동의하며 $LINK_PRIVACY_START$개인정보 보호정책$LINK_END$에 제시된 데이터 처리 방식에 동의합니다.",
+		"placeholders": {
+			"link_end": {
+				"content": "</a>"
+			},
+			"link_license_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.mozilla.org/en-US/MPL/2.0/\" rel=\"noopener noreferrer\">"
+			},
+			"link_privacy_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/\" rel=\"noopener noreferrer\">"
+			},
+			"link_terms_start": {
+				"content": "<a target=\"_blank\" href=\"https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/\" rel=\"noopener noreferrer\">"
+			}
+		}
+	},
+	"ghostery_rewards": {
+		"message": "Ghostery Rewards"
+	},
+	"enhanced_anti_tracking": {
+		"message": "확장 추적 방지 "
+	},
+	"unknown": {
+		"message": "알 수 없음 "
+	},
+	"unknown_description": {
+		"message": "추적 방지에서 제거한 알 수 없는 트래커"
 	}
 }

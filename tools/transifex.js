@@ -4,15 +4,20 @@
  * Ghostery Browser Extension
  * http://www.ghostery.com/
  *
- * Copyright 2018 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+/* eslint import/no-extraneous-dependencies: 0 */
+/* eslint no-console: 0 */
+
 console.time('transifex');
+
 const fs = require('fs-extra');
+const jsonfile = require('jsonfile');
 
 // Constants
 const LOCALES_FOLDER = './_locales';
@@ -20,20 +25,8 @@ const GATHER_FILE_PATHS_EXCEPTIONS = ['.DS_Store'];
 const LANG_FILES_COUNT = 14;
 const DEFAULT_LOCALE_PATH = '../_locales/en/messages.json';
 
-// Main
-gatherFilePaths().then(paths => {
-	return validateJson(paths);
-}).then(paths => {
-	fixMissingPlaceholders(paths);
-}).catch(err => {
-	console.log('Errors found:', err);
-}).then(result => {
-	console.timeEnd('transifex');
-});
-
 /**
  * Gathers the paths of the locale files
- * @params none
  * @const  string  LOCALES_FOLDER                The folder we search for locales
  * @const  array   GATHER_FILE_PATHS_EXCEPTIONS  Files in the LOCALE_FOLDER that we should skip
  * @const  int     LANG_FILES_COUNT              The number of locales we should find in LOCALES_FOLDER
@@ -42,27 +35,27 @@ gatherFilePaths().then(paths => {
  */
 function gatherFilePaths() {
 	return new Promise((resolve, reject) => {
-		let paths = [];
+		const paths = [];
 		fs.readdir(LOCALES_FOLDER, (err, files) => {
 			let langFilesCounted = 0;
-			files.forEach(locale => {
+			files.forEach((locale) => {
 				// Validate that the locale is named correctly, eg: en_GB
-				if (!/^[a-z]{2}(\_[A-Z]{2})?$/.test(locale)) {
+				if (!/^[a-z]{2}(_[A-Z]{2})?$/.test(locale)) {
 					if (GATHER_FILE_PATHS_EXCEPTIONS.indexOf(locale) === -1) {
 						console.log('Error: "%s" is not a valid locale', locale);
 					}
 					return;
 				}
-				langFilesCounted = langFilesCounted + 1;
-				paths.push(LOCALES_FOLDER + '/' + locale + '/messages.json');
+				langFilesCounted += 1;
+				paths.push(`${LOCALES_FOLDER}/${locale}/messages.json`);
 			});
 			if (langFilesCounted === LANG_FILES_COUNT) {
 				console.log('Correctly found %d of %d locale files.',
-							LANG_FILES_COUNT, langFilesCounted);
+					LANG_FILES_COUNT, langFilesCounted);
 				resolve(paths);
 			} else {
 				console.log('Error: there should be %d locale files, only scanned %d.',
-						LANG_FILES_COUNT, langFilesCounted);
+					LANG_FILES_COUNT, langFilesCounted);
 				reject();
 			}
 		});
@@ -78,10 +71,10 @@ function gatherFilePaths() {
 function validateJson(paths) {
 	return new Promise((resolve, reject) => {
 		let hasError = false;
-		paths.forEach(path => {
+		paths.forEach((path) => {
 			try {
-				require('.' + path);
-			} catch(err) {
+				jsonfile.readFileSync(`.${path}`);
+			} catch (err) {
 				hasError = true;
 				console.log('Error: file "%s" is not valid JSON.', path);
 			}
@@ -97,18 +90,18 @@ function validateJson(paths) {
 
 /**
  * Checks for missing placeholders in all the locale files. Copy them over from English file
- * @params array   paths                      An array of strings denoting the paths to all the locale files
+ * @param array   paths                      An array of strings denoting the paths to all the locale files
  * @const  string  DEFAULT_LOCALE_PATH        The location of the default locale JSON file
  * @return Promise                            Always call resolve (no error handling)
  */
 function fixMissingPlaceholders(paths) {
-	return new Promise((resolve, reject) => {
-		let defaultLocaleJson = require(DEFAULT_LOCALE_PATH);
-		paths.forEach(path => {
-			if(path !== DEFAULT_LOCALE_PATH) {
+	return new Promise((resolve) => {
+		const defaultLocaleJson = jsonfile.readFileSync(DEFAULT_LOCALE_PATH);
+		paths.forEach((path) => {
+			if (path !== DEFAULT_LOCALE_PATH) {
 				let dirty = false;
-				let localeJson = require('.' + path);
-				Object.keys(defaultLocaleJson).forEach(key => {
+				const localeJson = jsonfile.readFileSync(`.${path}`);
+				Object.keys(defaultLocaleJson).forEach((key) => {
 					if (defaultLocaleJson[key].hasOwnProperty('placeholders')) {
 						if (localeJson[key] && !localeJson[key].hasOwnProperty('placeholders')) {
 							dirty = true;
@@ -116,7 +109,7 @@ function fixMissingPlaceholders(paths) {
 						}
 					}
 				});
-				if(dirty) {
+				if (dirty) {
 					console.log(`Placeholders were added to ${path}`);
 					fs.writeFileSync(path, JSON.stringify(localeJson, null, '\t'));
 				}
@@ -126,3 +119,13 @@ function fixMissingPlaceholders(paths) {
 	});
 }
 
+// Main
+gatherFilePaths().then((paths) => {
+	validateJson(paths);
+}).then((paths) => {
+	fixMissingPlaceholders(paths);
+}).catch((err) => {
+	console.log('Errors found:', err);
+}).then(() => {
+	console.timeEnd('transifex');
+});
