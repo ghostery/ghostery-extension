@@ -22,7 +22,6 @@ phases:
       # - '& $env:YARN_BIN install --silent'
   build:
     commands:
-      - $Env:GHOSTERY_VERSION = $(node --eval "process.stdout.write(require('./manifest.json').version)")
       # - '& $env:YARN_BIN run lint'
       # - '& $env:YARN_BIN run test.unit --verbose=false'
       # - '& $env:YARN_BIN run build.prod --silent'
@@ -31,7 +30,6 @@ phases:
 artifacts:
   files:
     - '**/*'
-  name: $Env:GHOSTERY_VERSION-$Env:CODEBUILD_RESOLVED_SOURCE_VERSION
-  # name: $(((Get-Content .\manifest.json | Out-String | ConvertFrom-Json).version | echo).TrimEnd())-$Env:CODEBUILD_RESOLVED_SOURCE_VERSION
+  name: $(echo "$((Get-Content .\manifest.json | Out-String | ConvertFrom-Json).version | echo)-$Env:CODEBUILD_RESOLVED_SOURCE_VERSION")
   # name: echo $((Get-Content .\manifest.json | Out-String | ConvertFrom-Json).version)-$Env:CODEBUILD_RESOLVED_SOURCE_VERSION
   # base-directory: build
