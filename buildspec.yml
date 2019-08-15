@@ -10,6 +10,7 @@ phases:
     runtime-versions:
       nodejs: 8
     commands:
+      - echo $((Get-Content .\manifest.json | Out-String | ConvertFrom-Json).version)
       - choco install --confirm --limit-output --no-progress --ignore-checksums yarn googlechrome opera
       - choco install --confirm --limit-output --no-progress --ignore-checksums --version 10.1.18362.1 windows-sdk-10.1
       - Add-Content -Path $env:MOABCONFIG_PATH -Value '[projects]'
