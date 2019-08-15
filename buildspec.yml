@@ -29,5 +29,5 @@ phases:
 artifacts:
   files:
     - '**/*'
-  name: 'ghostery-extension-&env:CODEBUILD_RESOLVED_SOURCE_VERSION'
+  name: ghostery-extension-$Env:CODEBUILD_RESOLVED_SOURCE_VERSION
   base-directory: build
