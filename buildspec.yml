@@ -31,6 +31,6 @@ phases:
 artifacts:
   files:
     - '**/*'
-  name: $((Get-Content .\manifest.json | Out-String | ConvertFrom-Json).version | echo)-$Env:CODEBUILD_RESOLVED_SOURCE_VERSION
+  name: $(((Get-Content .\manifest.json | Out-String | ConvertFrom-Json).version | echo).TrimEnd())-$Env:CODEBUILD_RESOLVED_SOURCE_VERSION
   # name: echo $((Get-Content .\manifest.json | Out-String | ConvertFrom-Json).version)-$Env:CODEBUILD_RESOLVED_SOURCE_VERSION
   # base-directory: build
