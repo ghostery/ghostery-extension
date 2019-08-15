@@ -20,20 +20,6 @@ describe('app/hub/Views/PlusView component', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('plus view is rendered correctly when the user is not a plus', () => {
 			const initialState = {
-				isSignedIn: false,
-				isPlus: false,
-				onPlusClick: () => {},
-			};
-
-			const component = renderer.create(
-				<PlusView {...initialState} />
-			).toJSON();
-			expect(component).toMatchSnapshot();
-		});
-
-		test('plus view is rendered correctly when the user is signed in but not a plus', () => {
-			const initialState = {
-				isSignedIn: true,
 				isPlus: false,
 				onPlusClick: () => {},
 			};
@@ -46,7 +32,6 @@ describe('app/hub/Views/PlusView component', () => {
 
 		test('plus view is rendered correctly when the user is a plus', () => {
 			const initialState = {
-				isSignedIn: true,
 				isPlus: true,
 				onPlusClick: () => {},
 			};
@@ -85,9 +70,7 @@ describe('app/hub/Views/PlusView component', () => {
 			component.find('.PlusView__button').first().simulate('click');
 			expect(initialState.onPlusClick.mock.calls.length).toBe(1);
 
-			expect(component.find('.PlusView__button').first().props().href).toBe('https://signon.ghosterystage.com/subscribe')
-			component.setProps({ isSignedIn: true });
-			expect(component.find('.PlusView__button').first().props().href).toBe('https://account.ghosterystage.com/subscription?target=subscribe')
+			expect(component.find('.PlusView__button').first().props().href).toBe('https://checkout.ghosterystage.com/plus')
 
 			expect(component.find('.PlusView__button').length).toBe(8);
 			expect(component.find('.PlusView__button.disabled').length).toBe(0);
