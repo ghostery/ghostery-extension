@@ -10,7 +10,6 @@ phases:
     runtime-versions:
       nodejs: 8
     commands:
-      - $manifest = Get-Content .\manifest.json | Out-String | ConvertFrom-Json
       # - echo $((Get-Content .\manifest.json | Out-String | ConvertFrom-Json).version)
       # - choco install --confirm --limit-output --no-progress --ignore-checksums yarn googlechrome opera
       # - choco install --confirm --limit-output --no-progress --ignore-checksums --version 10.1.18362.1 windows-sdk-10.1
@@ -23,6 +22,7 @@ phases:
       # - '& $env:YARN_BIN install --silent'
   build:
     commands:
+      - $Env:GHOSTERY_VERSION = $(node --eval "process.stdout.write(require('./manifest.json').version)")
       # - '& $env:YARN_BIN run lint'
       # - '& $env:YARN_BIN run test.unit --verbose=false'
       # - '& $env:YARN_BIN run build.prod --silent'
@@ -31,7 +31,7 @@ phases:
 artifacts:
   files:
     - '**/*'
-  name: $(node --eval "process.stdout.write(require('./manifest.json').version)")-$Env:CODEBUILD_RESOLVED_SOURCE_VERSION
+  name: $Env:GHOSTERY_VERSION-$Env:CODEBUILD_RESOLVED_SOURCE_VERSION
   # name: $(((Get-Content .\manifest.json | Out-String | ConvertFrom-Json).version | echo).TrimEnd())-$Env:CODEBUILD_RESOLVED_SOURCE_VERSION
   # name: echo $((Get-Content .\manifest.json | Out-String | ConvertFrom-Json).version)-$Env:CODEBUILD_RESOLVED_SOURCE_VERSION
   # base-directory: build
