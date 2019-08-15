@@ -44,7 +44,6 @@ class PlusViewContainer extends Component {
 	 */
 	render() {
 		const childProps = {
-			isSignedIn: !!(this.props.user && this.props.user.email),
 			isPlus: this.props.user && this.props.user.subscriptionsPlus || false,
 			onPlusClick: this._sendPlusPing,
 		};

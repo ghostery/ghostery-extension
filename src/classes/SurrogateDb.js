@@ -17,6 +17,7 @@ import {
 import conf from './Conf';
 import Updatable from './Updatable';
 import { log } from '../utils/common';
+
 /**
  * Class for handling Ghostery Surrogates json database which is
  * a cross-reference of sites and trackers that would break
@@ -94,7 +95,7 @@ class SurrogateDb extends Updatable {
 	/**
 	 * Get surrogates for a particular tracker.
 	 * @param  {string} script_src	script source
-	 * @param  {number} 	app_id      tracker id
+	 * @param  {number} app_id      tracker id
 	 * @param  {number}	pattern_id  matching pattern id
 	 * @param  {string} host_name   host name
 	 * @return {Object}             filtered list of surrogates

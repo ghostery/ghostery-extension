@@ -23,7 +23,7 @@ const { adblocker, antitracking } = cliqz.modules;
 /**
  * Get the totalUnsafeCount of trackers found by Anti-Tracking on this tabId
  * @memberOf BackgroundUtils
- * @param  {int} 	tabId
+ * @param  {number} tabId
  * @return {object}	totalUnsafeCount
  */
 export function getCliqzData(tabId, tabHostUrl, antiTracking) {
@@ -110,7 +110,7 @@ export function getCliqzData(tabId, tabHostUrl, antiTracking) {
  * Get list of matched bug_ids from Anti-Tracking and Ad-Blocking for this
  * tab, along with list of 'other' trackers found that do not match known bug_ids.
  * @memberOf BackgroundUtils
- * @param  {int} 	tabId
+ * @param  {number} 	tabId
  * @return {object}
  */
 export function getCliqzGhosteryBugs(tabId) {
@@ -128,7 +128,7 @@ export function getCliqzGhosteryBugs(tabId) {
  * Send `totalCount` of ads found by Ad Blocker and `totalUnsafeCount`
  * found by Anti-Tracking
  * @memberOf BackgroundUtils
- * @param  {int}   		tabId
+ * @param  {number}   	tabId
  * @param  {Function} 	callback
  */
 export function sendCliqzModuleCounts(tabId, tabHostUrl, callback) {
