@@ -32,5 +32,6 @@ phases:
 artifacts:
   files:
     - '**/*'
-  name: $Env:VERSION-$Env:CODEBUILD_RESOLVED_SOURCE_VERSION
+  name: $(Get-Date -UFormat "%Y%m%d-%H%M%S")-$Env:CODEBUILD_RESOLVED_SOURCE_VERSION
+  # name: echo $((Get-Content .\manifest.json | Out-String | ConvertFrom-Json).version)-$Env:CODEBUILD_RESOLVED_SOURCE_VERSION
   # base-directory: build
