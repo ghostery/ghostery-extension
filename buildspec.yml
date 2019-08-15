@@ -4,7 +4,7 @@ env:
   variables:
     YARN_BIN: 'C:\Program Files (x86)\Yarn\bin\yarn.cmd'
     MOABCONFIG_PATH: 'C:\Users\ContainerAdministrator\.moabconfig'
-    VERSION: $((Get-Content .\manifest.json | Out-String | ConvertFrom-Json).version)
+    VERSION: echo $((Get-Content .\manifest.json | Out-String | ConvertFrom-Json).version)
 
 phases:
   install:
