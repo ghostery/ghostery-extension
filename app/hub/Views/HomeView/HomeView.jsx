@@ -34,6 +34,9 @@ const HomeView = (props) => {
 		isPlus,
 	} = props;
 	const accountHref = `https://account.${globals.GHOSTERY_DOMAIN}.com`;
+  const headerInfoText = (globals.BROWSER_INFO && globals.BROWSER_INFO.name && globals.BROWSER_INFO.name === 'firefox')
+    ? t('hub_home_header_info_opt_in')
+    : t('hub_home_header_info');
 	const tutorialFeatureClassNames = ClassNames('HomeView__onboardingFeature columns flex-container align-middle flex-dir-column', {
 		'feature-tutorial-complete': tutorial_complete,
 		'feature-tutorial': !tutorial_complete,
@@ -68,7 +71,7 @@ const HomeView = (props) => {
 						</div>
 						<div className="HomeView__supportContainer HomeView--pad-left HomeView--firefoxFontSize">
 							<span>
-								{t('hub_home_header_info')}
+								{headerInfoText}
 							</span>
 							<a href="https://www.ghostery.com/faqs/" alt={t('hub_home_header_info_link')} target="_blank" rel="noopener noreferrer">
 								{t('hub_home_header_info_link')}
