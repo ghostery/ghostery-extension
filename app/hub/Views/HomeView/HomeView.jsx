@@ -34,9 +34,9 @@ const HomeView = (props) => {
 		isPlus,
 	} = props;
 	const accountHref = `https://account.${globals.GHOSTERY_DOMAIN}.com`;
-  const headerInfoText = (globals.BROWSER_INFO && globals.BROWSER_INFO.name === 'firefox')
-    ? t('hub_home_header_info_opted_out')
-    : t('hub_home_header_info');
+	const headerInfoText = (globals.BROWSER_INFO && globals.BROWSER_INFO.name === 'firefox')
+		? t('hub_home_header_info_opted_out')
+		: t('hub_home_header_info');
 	const tutorialFeatureClassNames = ClassNames('HomeView__onboardingFeature columns flex-container align-middle flex-dir-column', {
 		'feature-tutorial-complete': tutorial_complete,
 		'feature-tutorial': !tutorial_complete,
