@@ -32,6 +32,9 @@
 	"banner_no_such_account_message": {
 		"message": "看來我們找不到這個電郵與密碼的組合。再試一次。"
 	},
+	"banner_email_not_in_system_message": {
+		"message": "抱歉，該電子郵件不在我們系統。"
+	},
 	"blacklist_error_duplicate_url": {
 		"message": "此網站已經受到限制。"
 	},
