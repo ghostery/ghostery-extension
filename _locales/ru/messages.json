@@ -32,6 +32,9 @@
 	"banner_no_such_account_message": {
 		"message": "Похоже, мы не можем найти эту комбинацию электронной почты и пароля. Попробовать еще раз."
 	},
+	"banner_email_not_in_system_message": {
+		"message": "К сожалению, этот адрес электронной почты отсутствует в нашей системе."
+	},
 	"blacklist_error_duplicate_url": {
 		"message": "Доступ к этом сайту уже ограничен."
 	},

@@ -32,6 +32,9 @@
 	"banner_no_such_account_message": {
 		"message": "Pare che non riusciamo a trovare questa accoppiata di email e password. Riprova."
 	},
+	"banner_email_not_in_system_message": {
+		"message": "Spiacente, questa email non è presente nel nostro sistema."
+	},
 	"blacklist_error_duplicate_url": {
 		"message": "Questo sito è già limitato."
 	},

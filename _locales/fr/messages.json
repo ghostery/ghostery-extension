@@ -32,6 +32,9 @@
 	"banner_no_such_account_message": {
 		"message": "Nous avons des difficultés à reconnaître l'utilisateur et le mot de passe. Veuillez réessayer. "
 	},
+	"banner_email_not_in_system_message": {
+		"message": "Désolé, cette adresse nous est inconnue."
+	},
 	"blacklist_error_duplicate_url": {
 		"message": "L'accès à ce site est déjà limité."
 	},
