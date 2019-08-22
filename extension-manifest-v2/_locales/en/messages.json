@@ -32,6 +32,9 @@
 	"banner_no_such_account_message": {
 		"message": "Looks like we can't find this email and password combo. Give it another shot."
 	},
+	"banner_email_not_in_system_message": {
+		"message": "Sorry, that email isn't in our system."
+	},
 	"blacklist_error_duplicate_url": {
 		"message": "This site is already restricted."
 	},
