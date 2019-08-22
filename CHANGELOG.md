@@ -1,3 +1,11 @@
+### GHOSTERY 8.4.2 (UNRELEASED)
+
++ Fix slow memory leak in Firefox (#434)
++ Fix error message on Forgot Password panel (#440)
++ Update Intro Hub copy for Firefox (#436)
++ Change Rewards opt-in setting for Firefox (#437)
++ Updated translations
+
 ### GHOSTERY 8.4.1 (August 6, 2019)
 
 + Add new Unknown tracker category in detail view with anti-tracking whitelist (#417, #433)
