@@ -43,9 +43,9 @@
   "homepage": "https://github.com/ghostery/ghostery-extension#readme",
   "dependencies": {
     "@cliqz/adblocker-circumvention": "^0.14.0",
-    "@cliqz/url-parser": "^1.0.2",
+    "@cliqz/url-parser": "^1.0.3",
     "base64-js": "^1.2.1",
-    "browser-core": "https://github.com/cliqz-oss/browser-core/releases/download/v7.37.7/browser-core-7.37.7.tgz",
+    "browser-core": "https://github.com/cliqz-oss/browser-core/releases/download/v7.39.1/browser-core-7.39.1.tgz",
     "classnames": "^2.2.5",
     "d3": "^5.9.7",
     "foundation-sites": "^6.4.4-rc1",
