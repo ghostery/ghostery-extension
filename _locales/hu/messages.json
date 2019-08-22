@@ -32,6 +32,9 @@
 	"banner_no_such_account_message": {
 		"message": "Úgy tűnik, rendszerünkben nem található ez az email és jelszó kombináció. Próbálja meg újra."
 	},
+	"banner_email_not_in_system_message": {
+		"message": "Sajnáljuk, de a megadott e-mail-cím nem található a rendszerünkben."
+	},
 	"blacklist_error_duplicate_url": {
 		"message": "Ez az oldal már korlátozott."
 	},

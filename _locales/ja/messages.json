@@ -32,6 +32,9 @@
 	"banner_no_such_account_message": {
 		"message": "このメールアドレスとパスワードの組み合わせが見つかりません。もう一度お試しください。"
 	},
+	"banner_email_not_in_system_message": {
+		"message": "申し訳ありませんが、そのメールアドレスは当社のシステムに登録されていません。"
+	},
 	"blacklist_error_duplicate_url": {
 		"message": "このサイトは既に制限されています。"
 	},
