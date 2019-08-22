@@ -32,6 +32,9 @@
 	"banner_no_such_account_message": {
 		"message": "Anscheinend können wir diese Kombination aus E-Mail und Passwort nicht finden. Versuchen Sie es noch einmal."
 	},
+	"banner_email_not_in_system_message": {
+		"message": "Entschuldigung, diese E-Mail-Adresse ist nicht in unserem System."
+	},
 	"blacklist_error_duplicate_url": {
 		"message": "Diese Website ist bereits eingeschränkt."
 	},

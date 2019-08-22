@@ -32,6 +32,9 @@
 	"banner_no_such_account_message": {
 		"message": "Het lijkt erop dat we deze email en wachtwoord combi niet kunnen vinden. Probeer het nog een keer."
 	},
+	"banner_email_not_in_system_message": {
+		"message": "Sorry, dat e-mailadres staat niet in ons systeem."
+	},
 	"blacklist_error_duplicate_url": {
 		"message": "Deze website is all beperkt."
 	},

@@ -32,6 +32,9 @@
 	"banner_no_such_account_message": {
 		"message": "似乎无法找到此电子邮件地址和密码组合。再试一次。"
 	},
+	"banner_email_not_in_system_message": {
+		"message": "抱歉，我们的系统中没有该电子邮件地址。"
+	},
 	"blacklist_error_duplicate_url": {
 		"message": "此网站已受到限制。"
 	},
