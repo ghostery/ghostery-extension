@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Build script for AMO Reviewers
+# Build script for AMO reviewers
 #
 # Ghostery Browser Extension
 # http://www.ghostery.com/
@@ -69,7 +69,7 @@ if ! type jq > /dev/null; then
 fi
 
 # Check for nvm
-. /usr/local/opt/nvm/nvm.sh
+source /usr/local/opt/nvm/nvm.sh
 if ! command -v nvm | grep -q 'nvm'; then
 	abort "Please install nvm: https://github.com/nvm-sh/nvm"
 fi
