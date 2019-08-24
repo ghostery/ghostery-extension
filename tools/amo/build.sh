@@ -111,13 +111,13 @@ test -d $BUILD_DIR || mkdir $BUILD_DIR && \
 		app/hub/\* \
 		app/shared-components/\* \
 		build/\* \
-		dist/*.js.map \
 		docs/\* \
 		node_modules/\* \
 		src/\* \
 		test/\* \
 		tools/\* \
 		*.log \
+		*.map \
 		*.md \
 		babel.config.js \
 		CODEOWNERS \

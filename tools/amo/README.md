@@ -37,6 +37,6 @@ Compiled assets live in the `ghostery-extension-X.X.X/dist/` folder. Assets from
 ]
 ```
 
-## `generate.sh` (Not included in submission)
+## `generate.sh`
 
 Fetches source code from GitHub and packages it along with `build.sh` and this README. This creates the complete source code archive that Ghostery sends along with its AMO submissions.
