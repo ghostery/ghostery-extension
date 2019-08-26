@@ -69,7 +69,7 @@ if ! type jq > /dev/null; then
 fi
 
 # Check for nvm
-source /usr/local/opt/nvm/nvm.sh
+source $(brew --prefix nvm)/nvm.sh
 if ! command -v nvm | grep -q 'nvm'; then
 	abort "Please install nvm: https://github.com/nvm-sh/nvm"
 fi
