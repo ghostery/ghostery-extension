@@ -133,12 +133,11 @@ Ghostery implements the following open-source products from [Cliqz](https://cliq
 + [GitHub](https://github.com/cliqz-oss/browser-core/blob/master/modules/offers-v2)
 
 ### Building Cliqz Modules for Ghostery
-Cliqz modules are pre-built and included under the `browser-core` NPM dependency in [package.json](package.json). To reproduce this build process, grab the appropriate Ghostery release (v7.x.x) from the [browser-core](https://github.com/cliqz-oss/browser-core/releases) project.
+Cliqz modules are pre-built and included under the `browser-core` NPM dependency in [package.json](package.json). To reproduce this build process, download the appropriate Ghostery release (v7.x.x) from the [browser-core](https://github.com/cliqz-oss/browser-core/releases) project.
 
 ```sh
-$ npm install
-$ ./fern.js build configs/ghostery.js --no-maps --environment=production
-$ ./fern.js pack configs/ghostery.js
+$ npm ci
+$ ./fern.js build configs/ghostery.js --environment=production --no-debug
 ```
 
 ## Compatibility
