@@ -6,11 +6,9 @@
 Ghostery helps you browse smarter by giving you control over ads and tracking technologies to speed up page loads, eliminate clutter, and protect your data. This is the unified code repository for the Ghostery browser extensions in Chrome, Firefox, Opera and Edge.
 
 ## Downloads
-**Firefox** &ndash; [Download](https://addons.mozilla.org/en-US/firefox/addon/ghostery/)
+**Firefox / Cliqz** &ndash; [Download](https://addons.mozilla.org/en-US/firefox/addon/ghostery/)
 
 **Chrome** &ndash; [Download](https://chrome.google.com/webstore/detail/ghostery-%E2%80%93-privacy-ad-blo/mlomiejdfkolichcflejclcbmpeaniij)
-
-**Cliqz** &ndash; [Download](https://s3.amazonaws.com/cdncliqz/update/browser/firefox%40ghostery.com/latest.xpi)
 
 **Opera** &ndash; [Download](https://addons.opera.com/en/extensions/details/ghostery/)
 

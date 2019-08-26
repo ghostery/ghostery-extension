@@ -385,6 +385,18 @@
   resolved "https://registry.yarnpkg.com/@cliqz-oss/dexie/-/dexie-2.0.4.tgz#0e710504e2b9198baa9b046abd3a82731b94d56e"
   integrity sha512-HxMbBQfdy0CehThTFierXbRPI+PHDEucUUriCCzViAKbCWWQIlL6uZcyDaaPRMPWy45v78lezPB4457kfjS72g==
 
+"@cliqz/adblocker-circumvention@^0.14.0":
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/@cliqz/adblocker-circumvention/-/adblocker-circumvention-0.14.0.tgz#85f0e1167c8ddac3b5fe4002a509bda6d2eec9ff"
+  integrity sha512-ruJr05S//Fe7TEm7pX7l3lxgcPD1dTuRzrdSAD5fMMpRwvZUsiU3MkMNeMt5XtmFLGqVyiyyrizVwyAF9LEZ9g==
+  dependencies:
+    "@cliqz/adblocker-content" "^0.14.0"
+
+"@cliqz/adblocker-content@^0.14.0":
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/@cliqz/adblocker-content/-/adblocker-content-0.14.0.tgz#6f317c7b71c8f2624e4cdb742af34b859bb373eb"
+  integrity sha512-5x6hM0Jsikith8RdK11QXLgjfxTSkGWdutHruNBdOQkGxUfLebQ/+0mCmbrWHWgWxWqOfo5QOZmOY4q4xVhbiQ==
+
 "@cliqz/adblocker@^0.11.0":
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-0.11.0.tgz#7677ec56ce9e8b6602b92c1f9a905b71d5c24084"

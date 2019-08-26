@@ -4,6 +4,7 @@
 + Fix error message on Forgot Password panel (#440)
 + Update Intro Hub copy for Firefox (#436)
 + Change Rewards opt-in setting for Firefox (#437)
++ Adds Cliqz anti-ad-blocker circumvention rules (#443)
 + Updated translations
 
 ### GHOSTERY 8.4.1 (August 6, 2019)
