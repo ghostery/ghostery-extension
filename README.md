@@ -139,7 +139,7 @@ Cliqz modules are pre-built and included under the `browser-core` NPM dependency
 
 ```sh
 $ npm ci
-$ ./fern.js build configs/ghostery.js --no-maps --no-debug --environment=production
+$ ./fern.js build configs/ghostery.js --environment=production --no-debug
 ```
 
 ## Compatibility

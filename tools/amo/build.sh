@@ -41,7 +41,7 @@ rm -rf node_modules
 npm ci
 
 # Build a production version of browser-core for Ghostery
-./fern.js build configs/ghostery.js --no-maps --no-debug --environment=production
+./fern.js build configs/ghostery.js --environment=production --no-debug
 
 echo "Browser Core build complete. Please see build/ directory."
 
@@ -81,6 +81,7 @@ rm -rf build
 rm -rf node_modules
 
 # Set node version
+nvm install lts/carbon
 nvm use
 
 # Install local npm packages
