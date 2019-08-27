@@ -1389,6 +1389,9 @@
 	"hub_home_header_checkbox_label": {
 		"message": "Compartir datos estadísticos adicionales para mejorar el rendimiento de Ghostery."
 	},
+	"hub_home_header_info_opted_out": {
+		"message": "Los nuevos usuarios no participan por defecto en Ghostery Rewards y Human Web. Puedes optar por participar en estas funciones recomendadas en la instalación personalizada o en la extensión. "
+	},
 	"hub_home_header_info": {
 		"message": "Los nuevos usuarios participan por defecto en Human Web y Ghostery Rewards. Se puede cambiar esta configuración en los ajustes personalizados o la extensión."
 	},
