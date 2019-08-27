@@ -1389,6 +1389,9 @@
 	"hub_home_header_checkbox_label": {
 		"message": "分享额外的匿名分析数据来提高Ghostery的性能。"
 	},
+	"hub_home_header_info_opted_out": {
+		"message": "新用户默认选择退出 Ghostery Rewards 和 Human Web。您可以在自定义设置或扩展中选择使用这些推荐功能。"
+	},
 	"hub_home_header_info": {
 		"message": "新用户默认选择加入Human Web和Ghostery Rewards。您可以在自定义设置或在扩展中更改相关设置。"
 	},

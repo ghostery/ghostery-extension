@@ -1389,6 +1389,9 @@
 	"hub_home_header_checkbox_label": {
 		"message": "Weitere Analysedaten anonym teilen, um Ghostery noch leistungsstärker zu machen."
 	},
+	"hub_home_header_info_opted_out": {
+		"message": "Neue Benutzer nehmen standardmäßig nicht an Ghostery Rewards und Human Web teil. Sie können diese empfohlenen Funktionen im benutzerdefinierten Setup oder in der Erweiterung aktivieren."
+	},
 	"hub_home_header_info": {
 		"message": "Neue Benutzer können sich für die Teilnahme an Human Web und Ghostery Rewards entscheiden. Sie können diese Einstellungen im benutzerdefinierten Setup oder in der Erweiterung ändern. "
 	},

@@ -1389,6 +1389,9 @@
 	"hub_home_header_checkbox_label": {
 		"message": "További névtelen analitikai adatok megosztása a Ghostery teljesítményének fejlesztése érdekében."
 	},
+	"hub_home_header_info_opted_out": {
+		"message": "Az új felhasználók esetében a Ghostery Rewards és a Human Web funkciók alapértelmezett módon nincsenek aktiválva. Az egyéni telepítésben vagy a bővítményben aktiválhatja ezeket az ajánlott funkciókat."
+	},
 	"hub_home_header_info": {
 		"message": "Az új felhasználók feliratkoznak a Human Web és Ghostery Rewards szolgáltatásokra. Ezeket a beállításokat egyedi telepítés során vagy a kiegészítőben változtathatja meg."
 	},

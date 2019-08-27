@@ -1389,6 +1389,9 @@
 	"hub_home_header_checkbox_label": {
 		"message": "Deel aanvullende anonieme analytics data om de prestaties van Ghostery te verbeteren."
 	},
+	"hub_home_header_info_opted_out": {
+		"message": "Nieuwe gebruikers zijn standaard niet ingeschreven voor Ghostery Rewards en Human Web. Je kunt deze aanbevolen functies inschakelen in aangepaste setup of in de extensie. "
+	},
 	"hub_home_header_info": {
 		"message": "Nieuwe gebruikers kunnen meedoen aan Human Web en Ghostery Rewards. Je kunt deze instellingen wijzigen in aangepaste setup of in de uitbreiding. "
 	},
