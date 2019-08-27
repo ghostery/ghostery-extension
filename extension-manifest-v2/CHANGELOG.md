@@ -1,4 +1,4 @@
-### GHOSTERY 8.4.2 (UNRELEASED)
+### GHOSTERY 8.4.2 (August 28, 2019)
 
 + Fix slow memory leak in Firefox (#434)
 + Fix error message on Forgot Password panel (#440)
