@@ -413,6 +413,10 @@
 		width: 100%;
 		height: 100%;
 
+    .rewards-notification-optout-image {
+      width: 100%;
+    }
+
 		.rewards-notification {
 			margin-top: 17px;
 			margin-left: auto;
@@ -428,6 +432,9 @@
 			line-height: 2;
 
 			&.first-prompt {
+        margin-top: 37px;
+        height: calc(100% - 74px);
+        width: 244px;
 				background-color: $white;
 				border: 2px solid $dark-purple;
 				color: black;
@@ -435,6 +442,19 @@
 
 			.notification-text {
 				margin: 0px 22px 0px 22px;
+			}
+
+			.notification-text.first-prompt {
+        margin: unset;
+        padding-left: 16px;
+        text-align: left;
+        line-height: 20px;
+        height: 100%;
+        overflow: hidden;
+
+				a {
+          color: black;
+        }
 			}
 
 			a {
@@ -461,6 +481,31 @@
 					border-radius: 3px;
 					text-transform: uppercase;
 				}
+        &.first-prompt {
+          .btn {
+            width: 104px;
+          }
+          button {
+					  &:nth-child(1) {
+              background-color: #5B005C;
+              color: #FFFFFF;
+              &:hover {
+                background-color: #5B005C;
+                color: #FFFFFF;
+              }
+            }
+					  &:nth-child(2) {
+						  border: 2px solid $dark-purple;
+              background-color: transparent;
+              color: $dark-purple;
+              &:hover {
+                border: 2px solid $dark-purple;
+                background-color: transparent;
+                color: $dark-purple;
+              }
+            }
+          }
+        }
 				button {
 					cursor: pointer;
 					font-weight: bold;

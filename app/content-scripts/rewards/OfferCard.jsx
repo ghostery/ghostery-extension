@@ -167,23 +167,23 @@ class OfferCard extends Component {
 	}
 
 	handlePrompt(promptNumber, option) {
+    const reject = () => {
+				this.props.actions.sendSignal('offer_first_optout');
+				sendMessage('ping', 'rewards_first_reject_optout');
+				this.disableRewards();
+				this.closeOfferCard();
+    };
 		if (promptNumber === 1) {
 			if (!option) {
-				sendMessage('ping', 'rewards_first_reject');
-				this.setState({
-					showPrompt: 2
-				});
-				return;
+        reject();
+        return;
 			}
 			this.props.actions.messageBackground('rewardsPromptOptedIn');
 			this.props.actions.sendSignal('offer_first_optin');
 			sendMessage('ping', 'rewards_first_accept');
 		} else if (promptNumber === 2) {
 			if (option) {
-				this.props.actions.sendSignal('offer_first_optout');
-				sendMessage('ping', 'rewards_first_reject_optout');
-				this.disableRewards();
-				this.closeOfferCard();
+        reject();
 				return;
 			}
 			this.props.actions.sendSignal('offer_first_optlater');
