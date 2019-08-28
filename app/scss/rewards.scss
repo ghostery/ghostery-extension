@@ -39,7 +39,6 @@
 .ghostery-rewards-component {
 	* {
 		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
 	}
 
 	.hide {
@@ -525,11 +524,11 @@
               }
             }
 					  &:nth-child(2) {
-						  border: 2px solid $dark-purple;
+						  border: 1px solid $dark-purple;
               background-color: transparent;
               color: $dark-purple;
               &:hover {
-                border: 2px solid $dark-purple;
+                border: 1px solid $dark-purple;
                 background-color: transparent;
                 color: $dark-purple;
               }

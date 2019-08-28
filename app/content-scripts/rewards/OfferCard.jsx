@@ -41,6 +41,7 @@ class OfferCard extends Component {
 			showPrompt: this.props.conf.rewardsPromptAccepted ? false : 1,
 			showSettings: false,
 			rewardUI: templateData,
+			shouldShowCross: this.props.conf.rewardsPromptAccepted,
 		};
 
 		this.iframeEl = window.parent.document.getElementById('ghostery-iframe-container');
@@ -193,7 +194,8 @@ class OfferCard extends Component {
 			this.closeOfferCard();
 		}
 		this.setState({
-			showPrompt: false
+			showPrompt: false,
+			shouldShowCross: true,
 		});
 		this.props.actions.messageBackground('rewardsPromptAccepted');
 	}
@@ -235,6 +237,16 @@ class OfferCard extends Component {
 		return t(`rewards_expires_in_${type}`, [count]);
 	}
 
+	renderCross() {
+		return (
+			<div
+				className="reward-card-close"
+				onClick={() => { this.props.actions.sendSignal('offer_closed_card'); this.closeOfferCard(); }}
+				style={{ backgroundImage: this.closeIcon }}
+			/>
+		);
+	}
+
 	render() {
 		return (
 			// @TODO condition for hide class
@@ -244,11 +256,7 @@ class OfferCard extends Component {
 						<div className="ghostery-reward-card">
 							<div className="reward-card-header">
 								<div className="rewards-logo-beta" style={{ backgroundImage: this.betaLogo }} />
-								<div
-									className="reward-card-close"
-									onClick={() => { this.props.actions.sendSignal('offer_closed_card'); this.closeOfferCard(); }}
-									style={{ backgroundImage: this.closeIcon }}
-								/>
+								{this.state.shouldShowCross && this.renderCross()}
 							</div>
 							<div className="reward-content">
 								<div className="reward-content-header">
