@@ -55,6 +55,8 @@ class OfferCard extends Component {
 		this.closeIcon = `url(${chrome.extension.getURL('app/images/drawer/x.svg')})`;
 		this.ghostyGrey = `url(${chrome.extension.getURL('app/images/rewards/ghosty-grey.svg')})`;
 		this.kebabIcon = `url(${chrome.extension.getURL('app/images/rewards/settings-kebab.svg')})`;
+		this.poweredByMyoffrz =
+      `url(${chrome.extension.getURL('app/images/rewards/powered-by-myoffrz.svg')})`;
 
 		this.closeOfferCard = this.closeOfferCard.bind(this);
 		this.copyCode = this.copyCode.bind(this);
@@ -69,7 +71,7 @@ class OfferCard extends Component {
 			{
 				type: 'first-prompt',
 				buttons: true,
-				message: t('rewards_first_prompt'),
+				message: 'Would you like to receive offers and discounts from trusted Ghostery partners?',
 				textLink: {
 					href: 'https://www.ghostery.com/faqs/what-is-ghostery-rewards/',
 					text: t('rewards_learn_more'),
@@ -315,10 +317,22 @@ class OfferCard extends Component {
 							<div className="reward-footer">
 								<div className="reward-feedback">
 									<div className="reward-smile" />
-									<a onClick={this.disableRewardsNotification}>{t('rewards_disable')}</a>
+                  {this.props.conf.rewardsPromptAccepted &&
+                    <a onClick={this.disableRewardsNotification}>{t('rewards_disable')}</a>
+                  }
 									<div className="reward-arrow" />
 								</div>
-								<div className="reward-ghosty" style={{ backgroundImage: this.ghostyGrey }} />
+                  <a
+                    className="reward-powered-by-myoffrz"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://myoffrz.com/en/fuer-nutzer/"
+                  >
+                    <div
+                      className="reward-ghosty"
+                      style={{ backgroundImage: this.poweredByMyoffrz }}
+                    />
+                  </a>
 							</div>
 						</div>
 						{ this.state.showPrompt === 1 &&

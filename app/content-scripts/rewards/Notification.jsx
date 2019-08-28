@@ -39,9 +39,8 @@ class Notification extends Component {
 
   renderOptoutImage() {
     return (
-      <div>
+      <div className="rewards-notification-optout-image-wrapper">
         <img
-          className="rewards-notification-optout-image"
           src={chrome.extension.getURL('app/images/rewards/ghostery_O.png')}
         />
       </div>
@@ -58,6 +57,23 @@ class Notification extends Component {
       >
         {this.props.data.textLink.text}
       </a>
+    );
+  }
+
+  renderHeadline() {
+    return (
+      <div className="first-prompt-headline">New Reward Discovered!</div>
+    );
+  }
+
+  renderLabels() {
+    return (
+      <div className="first-prompt-labels">
+        <img src={chrome.extension.getURL('app/images/rewards/exclusive.svg')} />
+        <span className="first-prompt-label">exclusive</span>
+        <img src={chrome.extension.getURL('app/images/rewards/best-offer.svg')} />
+        <span className="first-prompt-label">top angebot</span>
+      </div>
     );
   }
 
@@ -80,6 +96,8 @@ class Notification extends Component {
                   )
                 }
 								<div className={`notification-text ${this.props.data.type}`}>
+                  {this.props.data.type === 'first-prompt' && this.renderLabels()}
+                  {this.props.data.type === 'first-prompt' && this.renderHeadline()}
 									{this.props.data.message}
                   {' '}
                   {this.props.data.type === 'first-prompt' && this.renderOptoutLink()}
