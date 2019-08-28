@@ -37,45 +37,45 @@ class Notification extends Component {
 		}
 	}
 
-  renderOptoutImage() {
-    return (
-      <div className="rewards-notification-optout-image-wrapper">
-        <img
-          src={chrome.extension.getURL('app/images/rewards/ghostery_O.png')}
-        />
-      </div>
-    );
-  }
+	renderOptoutImage() {
+		return (
+			<div className="rewards-notification-optout-image-wrapper">
+				<img
+					src={chrome.extension.getURL('app/images/rewards/ghostery_O.png')}
+				/>
+			</div>
+		);
+	}
 
-  renderOptoutLink() {
-    return (
-      <a
-        href={this.props.data.textLink.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={() => this.props.data.textLink.callback()}
-      >
-        {this.props.data.textLink.text}
-      </a>
-    );
-  }
+	renderOptoutLink() {
+		return (
+			<a
+				href={this.props.data.textLink.href}
+				target="_blank"
+				rel="noopener noreferrer"
+				onClick={() => this.props.data.textLink.callback()}
+			>
+				{this.props.data.textLink.text}
+			</a>
+		);
+	}
 
-  renderHeadline() {
-    return (
-      <div className="first-prompt-headline">New Reward Discovered!</div>
-    );
-  }
+	renderHeadline() {
+		return (
+			<div className="first-prompt-headline">New Reward Discovered!</div>
+		);
+	}
 
-  renderLabels() {
-    return (
-      <div className="first-prompt-labels">
-        <img src={chrome.extension.getURL('app/images/rewards/exclusive.svg')} />
-        <span className="first-prompt-label">exclusive</span>
-        <img src={chrome.extension.getURL('app/images/rewards/best-offer.svg')} />
-        <span className="first-prompt-label">top angebot</span>
-      </div>
-    );
-  }
+	renderLabels() {
+		return (
+			<div className="first-prompt-labels">
+				<img src={chrome.extension.getURL('app/images/rewards/exclusive.svg')} />
+				<span className="first-prompt-label">exclusive</span>
+				<img src={chrome.extension.getURL('app/images/rewards/best-offer.svg')} />
+				<span className="first-prompt-label">top angebot</span>
+			</div>
+		);
+	}
 
 	render() {
 		return (
@@ -85,22 +85,22 @@ class Notification extends Component {
 						<div className="rewards-notification-overlay" />
 						<div className="rewards-popup-container">
 							<div className={`rewards-notification ${this.props.data.type}`}>
-                {this.props.data.type === 'first-prompt' && this.renderOptoutImage()}
+								{this.props.data.type === 'first-prompt' && this.renderOptoutImage()}
 								{this.props.data.type !== 'first-prompt'
                   && (
-                    <div
-                      className="close"
-                      onClick={() => { this.closeNotification(); }}
-                      style={{ backgroundImage: this.closeIcon }}
-                    />
+                  	<div
+	className="close"
+	onClick={() => { this.closeNotification(); }}
+	style={{ backgroundImage: this.closeIcon }}
+                  	/>
                   )
-                }
+								}
 								<div className={`notification-text ${this.props.data.type}`}>
-                  {this.props.data.type === 'first-prompt' && this.renderLabels()}
-                  {this.props.data.type === 'first-prompt' && this.renderHeadline()}
+									{this.props.data.type === 'first-prompt' && this.renderLabels()}
+									{this.props.data.type === 'first-prompt' && this.renderHeadline()}
 									{this.props.data.message}
-                  {' '}
-                  {this.props.data.type === 'first-prompt' && this.renderOptoutLink()}
+									{' '}
+									{this.props.data.type === 'first-prompt' && this.renderOptoutLink()}
 								</div>
 								{this.props.data.buttons && (
 									<div className={`notification-buttons ${this.props.data.type}`}>

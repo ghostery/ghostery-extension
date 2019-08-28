@@ -169,23 +169,23 @@ class OfferCard extends Component {
 	}
 
 	handlePrompt(promptNumber, option) {
-    const reject = () => {
-				this.props.actions.sendSignal('offer_first_optout');
-				sendMessage('ping', 'rewards_first_reject_optout');
-				this.disableRewards();
-				this.closeOfferCard();
-    };
+		const reject = () => {
+			this.props.actions.sendSignal('offer_first_optout');
+			sendMessage('ping', 'rewards_first_reject_optout');
+			this.disableRewards();
+			this.closeOfferCard();
+		};
 		if (promptNumber === 1) {
 			if (!option) {
-        reject();
-        return;
+				reject();
+				return;
 			}
 			this.props.actions.messageBackground('rewardsPromptOptedIn');
 			this.props.actions.sendSignal('offer_first_optin');
 			sendMessage('ping', 'rewards_first_accept');
 		} else if (promptNumber === 2) {
 			if (option) {
-        reject();
+				reject();
 				return;
 			}
 			this.props.actions.sendSignal('offer_first_optlater');
@@ -317,22 +317,22 @@ class OfferCard extends Component {
 							<div className="reward-footer">
 								<div className="reward-feedback">
 									<div className="reward-smile" />
-                  {this.props.conf.rewardsPromptAccepted &&
-                    <a onClick={this.disableRewardsNotification}>{t('rewards_disable')}</a>
-                  }
+									{this.props.conf.rewardsPromptAccepted &&
+									<a onClick={this.disableRewardsNotification}>{t('rewards_disable')}</a>
+									}
 									<div className="reward-arrow" />
 								</div>
-                  <a
-                    className="reward-powered-by-myoffrz"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href="https://myoffrz.com/en/fuer-nutzer/"
-                  >
-                    <div
-                      className="reward-ghosty"
-                      style={{ backgroundImage: this.poweredByMyoffrz }}
-                    />
-                  </a>
+								<a
+									className="reward-powered-by-myoffrz"
+									target="_blank"
+									rel="noopener noreferrer"
+									href="https://myoffrz.com/en/fuer-nutzer/"
+								>
+									<div
+										className="reward-ghosty"
+										style={{ backgroundImage: this.poweredByMyoffrz }}
+									/>
+								</a>
 							</div>
 						</div>
 						{ this.state.showPrompt === 1 &&
