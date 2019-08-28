@@ -56,8 +56,7 @@ class OfferCard extends Component {
 		this.closeIcon = `url(${chrome.extension.getURL('app/images/drawer/x.svg')})`;
 		this.ghostyGrey = `url(${chrome.extension.getURL('app/images/rewards/ghosty-grey.svg')})`;
 		this.kebabIcon = `url(${chrome.extension.getURL('app/images/rewards/settings-kebab.svg')})`;
-		this.poweredByMyoffrz =
-      `url(${chrome.extension.getURL('app/images/rewards/powered-by-myoffrz.svg')})`;
+		this.poweredByMyoffrz = `url(${chrome.extension.getURL('app/images/rewards/powered-by-myoffrz.svg')})`;
 
 		this.closeOfferCard = this.closeOfferCard.bind(this);
 		this.copyCode = this.copyCode.bind(this);

@@ -38,7 +38,8 @@
 
 .ghostery-rewards-component {
 	* {
-		-webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 	}
 
 	.hide {
@@ -451,7 +452,7 @@
 				margin: 0px 22px 0px 22px;
 			}
 
-			.notification-text.first-prompt {
+      .notification-text.first-prompt {
         margin: unset;
         padding-left: 16px;
         text-align: left;
@@ -481,7 +482,7 @@
           padding-bottom: 5px;
         }
 
-				a {
+        a {
           color: black;
         }
 			}
@@ -515,7 +516,7 @@
             width: 104px;
           }
           button {
-					  &:nth-child(1) {
+            &:nth-child(1) {
               background-color: $dark-purple;
               color: $white;
               &:hover {
@@ -523,8 +524,8 @@
                 color: $white;
               }
             }
-					  &:nth-child(2) {
-						  border: 1px solid $dark-purple;
+            &:nth-child(2) {
+              border: 1px solid $dark-purple;
               background-color: transparent;
               color: $dark-purple;
               &:hover {
