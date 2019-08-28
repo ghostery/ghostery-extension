@@ -71,7 +71,7 @@ class OfferCard extends Component {
 			{
 				type: 'first-prompt',
 				buttons: true,
-				message: 'Would you like to receive offers and discounts from trusted Ghostery partners?',
+				message: t('rewards_first_prompt_extended'),
 				textLink: {
 					href: 'https://www.ghostery.com/faqs/what-is-ghostery-rewards/',
 					text: t('rewards_learn_more'),

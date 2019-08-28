@@ -62,7 +62,9 @@ class Notification extends Component {
 
 	renderHeadline() {
 		return (
-			<div className="first-prompt-headline">New Reward Discovered!</div>
+			<div className="first-prompt-headline">
+				{t('rewards_first_prompt_headline')}
+			</div>
 		);
 	}
 
@@ -70,9 +72,9 @@ class Notification extends Component {
 		return (
 			<div className="first-prompt-labels">
 				<img src={chrome.extension.getURL('app/images/rewards/exclusive.svg')} />
-				<span className="first-prompt-label">exclusive</span>
+				<span className="first-prompt-label">{t('rewards_exclusive')}</span>
 				<img src={chrome.extension.getURL('app/images/rewards/best-offer.svg')} />
-				<span className="first-prompt-label">top angebot</span>
+				<span className="first-prompt-label">{t('rewards_best_offer')}</span>
 			</div>
 		);
 	}
