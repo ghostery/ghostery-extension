@@ -280,7 +280,8 @@ class BlockingHeader extends React.Component {
 								</div>
 							</div>
 						</div>
-					)}
+					)
+				}
 				<div className="row footer">
 					<div className="columns">
 						{this.props.categories && this.props.categories.length > 0 && (
@@ -307,7 +308,8 @@ class BlockingHeader extends React.Component {
 									</div>
 								</ClickOutside>
 							</div>
-						)}
+						)
+					}
 				</div>
 			</div>
 		);

@@ -38,6 +38,7 @@ module.exports = {
 	],
 	// 0 = off, 1 = warn, 2 = error
 	rules: {
+		'arrow-parens': [2, 'as-needed', { 'requireForBlockBody': true }],
 		'camelcase': [0],
 		'class-methods-use-this': [0],
 		'comma-dangle': [2, {
@@ -63,6 +64,7 @@ module.exports = {
 		'no-unused-vars': [1],
 		'no-useless-escape': [1],
 		'operator-linebreak': [0],
+		'prefer-object-spread': [0], // TODO: enable this check
 		'space-before-function-paren': [2, 'never'],
 
 		// Plugin: Import
@@ -71,8 +73,11 @@ module.exports = {
 
 		// Plugin: React
 		'react/destructuring-assignment': [0],
+		'react/static-property-placement': [0],
+		'react/jsx-curly-newline': [0],
 		'react/jsx-indent': [1, 'tab'],
 		'react/jsx-indent-props': [1, 'tab'],
+		'react/jsx-props-no-spreading': [0], // TODO: enable this check
 		'react/no-access-state-in-setstate': [0], // TODO: enable this check
 		'react/no-danger': [0],
 		'react/prop-types': [0],
