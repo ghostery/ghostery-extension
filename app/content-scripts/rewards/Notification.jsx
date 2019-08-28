@@ -114,8 +114,7 @@ class Notification extends Component {
 										</button>
 									</div>
 								)}
-								{this.props.data.textLink
-                  && this.props.data.type !== 'first-prompt'
+								{this.props.data.textLink && this.props.data.type !== 'first-prompt'
 									&& (
 										<a
 											className="notification-text"
