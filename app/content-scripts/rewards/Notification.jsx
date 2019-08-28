@@ -77,6 +77,16 @@ class Notification extends Component {
 		);
 	}
 
+	renderClose() {
+		return (
+			<div
+				className="close"
+				onClick={() => { this.closeNotification(); }}
+				style={{ backgroundImage: this.closeIcon }}
+			/>
+		);
+	}
+
 	render() {
 		return (
 			<div>
@@ -86,15 +96,7 @@ class Notification extends Component {
 						<div className="rewards-popup-container">
 							<div className={`rewards-notification ${this.props.data.type}`}>
 								{this.props.data.type === 'first-prompt' && this.renderOptoutImage()}
-								{this.props.data.type !== 'first-prompt'
-                  && (
-                  	<div
-	className="close"
-	onClick={() => { this.closeNotification(); }}
-	style={{ backgroundImage: this.closeIcon }}
-                  	/>
-                  )
-								}
+								{this.props.data.type !== 'first-prompt' && this.renderClose()}
 								<div className={`notification-text ${this.props.data.type}`}>
 									{this.props.data.type === 'first-prompt' && this.renderLabels()}
 									{this.props.data.type === 'first-prompt' && this.renderHeadline()}
