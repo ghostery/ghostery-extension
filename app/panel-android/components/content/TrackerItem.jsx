@@ -131,7 +131,7 @@ export default class TrackerItem extends React.Component {
 		return (
 			<li>
 				<div className={`tracker ${this.showMenu ? 'show-menu' : ''} ${this.trackerSelectStatus}`}>
-					<button type="button" className="info" onClick={this.openTrackerLink} />
+					<button type="button" className="info" aria-label="Info" onClick={this.openTrackerLink} />
 					<div onClick={this.toggleMenu} className="trackerName">
 						<span>{this.props.tracker.name}</span>
 						<span className="trackerSelect" />

@@ -62,7 +62,7 @@ export default class MenuItem extends React.Component {
 					<span className={this.props.type}>{this.props.numData}</span>
 					<p className="headline">{this.props.headline}</p>
 					<p className="description">{this.props.description}</p>
-					<button type="button" onClick={this.closeButtonClicked} className="close" />
+					<button type="button" aria-label="Close" onClick={this.closeButtonClicked} className="close" />
 				</div>
 			</div>
 		);

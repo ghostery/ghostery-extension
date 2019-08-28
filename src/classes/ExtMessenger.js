@@ -11,6 +11,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+/* eslint max-classes-per-file: 0 */
+
 import Spanan from 'spanan';
 import { log } from '../utils/common';
 
