@@ -24,7 +24,7 @@
     "docs": "jsdoc -c jsdoc.json -d docs -r",
     "leet": "node ./tools/leet/leet-en.js",
     "leet.reset": "node ./tools/leet/leet-reset.js",
-    "postinstall": "vendor-copy"
+    "postinstall": "vendor-copy && bash ./tools/merge-locales.sh"
   },
   "vendorCopy": [
     {
