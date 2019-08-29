@@ -392,20 +392,40 @@
   dependencies:
     "@cliqz/adblocker-content" "^1.0.1"
 
+"@cliqz/adblocker-content@^0.13.2":
+  version "0.13.2"
+  resolved "https://registry.yarnpkg.com/@cliqz/adblocker-content/-/adblocker-content-0.13.2.tgz#23893a0cea3e8de4c6e1a79d8d22c156dac9ec7c"
+  integrity sha512-WYFLlHB8qNDI6ypZo2rmwzkBp0zZydPpvhcbkJ5q2AuMmZbOI4A7Hx0m+5ybV/wQGifeZtzIKf/SMyPMybhWyA==
+
 "@cliqz/adblocker-content@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@cliqz/adblocker-content/-/adblocker-content-1.0.1.tgz#544ec754c878b68fc8eea5a44f895d34ac48b988"
   integrity sha512-hq3kKYFQcd14GqXIJi8/t1rxiw+APr6YGSa8bTulvTNIfeJwWlIwcbhO5f6zTdvFiqU3sgJ6FlRnuSwzmKMtMw==
 
-"@cliqz/adblocker@^0.11.0":
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-0.11.0.tgz#7677ec56ce9e8b6602b92c1f9a905b71d5c24084"
-  integrity sha512-eBw0+WQuzr05UjsPCptpkKfJi67+K/DB1v4u6f2AtJXQCtQjtUTyMAU1Th0MPY74VR9V9djmmU7Q/rfY0AOXGA==
+"@cliqz/adblocker-webextension-cosmetics@^0.13.2":
+  version "0.13.2"
+  resolved "https://registry.yarnpkg.com/@cliqz/adblocker-webextension-cosmetics/-/adblocker-webextension-cosmetics-0.13.2.tgz#5ef69d992c4832b5ecef969ec3f95055d859fd4b"
+  integrity sha512-M4SWKJVH6v2felEBvALkJib8wJaaZZspkroE8Qij9rYLvf7r8ei1+G6LTtQbUtAoO6TxJ+rGK3MnunSj7oqzcA==
   dependencies:
-    "@types/puppeteer" "^1.12.4"
-    tldts "^5.0.3"
-    tslib "^1.9.3"
-    tsmaz "^1.2.1"
+    "@cliqz/adblocker-content" "^0.13.2"
+
+"@cliqz/adblocker-webextension@^0.13.2":
+  version "0.13.2"
+  resolved "https://registry.yarnpkg.com/@cliqz/adblocker-webextension/-/adblocker-webextension-0.13.2.tgz#88fa25d61bd0b65fc2ff25f4c10e1cef7bbe0556"
+  integrity sha512-x7Jj7bVbzkrFwwp081bK9sZkh47zNq/Mw5UkuIHqwjTjcmKQb1ANMZuqWRY5AMG/s7xqRMgfmK7NOyhx1d4nxg==
+  dependencies:
+    "@cliqz/adblocker" "^0.13.2"
+    "@cliqz/adblocker-content" "^0.13.2"
+    tldts-experimental "^5.3.0"
+
+"@cliqz/adblocker@^0.13.2":
+  version "0.13.2"
+  resolved "https://registry.yarnpkg.com/@cliqz/adblocker/-/adblocker-0.13.2.tgz#671b55149c16c721f3722638d39a88e17a1cf899"
+  integrity sha512-vz89xXdJRiDTksc/btTCoR6fD5EJJnCHzLadxjZuR3AhWFB5YUypKRfLNDOTitEdPtIpj6F3hxsduTlBdcRO3Q==
+  dependencies:
+    tldts-experimental "^5.3.0"
+    tslib "^1.10.0"
+    tsmaz "^1.3.0"
 
 "@cliqz/url-parser@^1.0.3":
   version "1.0.3"
@@ -722,13 +742,6 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.0.10.tgz#51babf9c7deadd5343620055fc8aff7995c8b031"
   integrity sha512-LcsGbPomWsad6wmMNv7nBLw7YYYyfdYcz6xryKYQhx89c3XXan+8Q6AJ43G5XDIaklaVkK3mE4fCb0SBvMiPSQ==
 
-"@types/puppeteer@^1.12.4":
-  version "1.12.4"
-  resolved "https://registry.yarnpkg.com/@types/puppeteer/-/puppeteer-1.12.4.tgz#8388efdb0b30a54a7e7c4831ca0d709191d77ff1"
-  integrity sha512-aaGbJaJ9TuF9vZfTeoh876sBa+rYJWPwtsmHmYr28pGr42ewJnkDTq2aeSKEmS39SqUdkwLj73y/d7rBSp7mDQ==
-  dependencies:
-    "@types/node" "*"
-
 "@types/stack-utils@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-1.0.1.tgz#0a851d3bd96498fa25c33ab7278ed3bd65f06c3e"
@@ -935,6 +948,11 @@ abbrev@1:
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
   integrity sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==
 
+abortcontroller-polyfill@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/abortcontroller-polyfill/-/abortcontroller-polyfill-1.3.0.tgz#de69af32ae926c210b7efbcc29bf644ee4838b00"
+  integrity sha512-lbWQgf+eRvku3va8poBlDBO12FigTQr9Zb7NIjXrePrhxWVKdCP2wbDl1tLDaYa18PWTom3UEWwdH13S46I+yA==
+
 acorn-globals@^4.1.0:
   version "4.3.2"
   resolved "https://registry.yarnpkg.com/acorn-globals/-/acorn-globals-4.3.2.tgz#4e2c2313a597fd589720395f6354b41cd5ec8006"
@@ -1029,11 +1047,11 @@ amdefine@>=0.0.4:
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   integrity sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU=
 
-"anonymous-credentials@https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.3/anonymous-credentials-0.1.3.tgz":
-  version "0.1.3"
-  resolved "https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.3/anonymous-credentials-0.1.3.tgz#4c40d574fb6072d8ca04f2347f0abb6e132e98d2"
+"anonymous-credentials@https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.4/anonymous-credentials-0.1.4.tgz":
+  version "0.1.4"
+  resolved "https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.4/anonymous-credentials-0.1.4.tgz#d4e0ebf272ac5ec85dea4515c44ec55bdccf03bf"
   dependencies:
-    bindings "1.3.0"
+    bindings "1.5.0"
 
 ansi-escapes@^3.0.0, ansi-escapes@^3.2.0:
   version "3.2.0"
@@ -1392,10 +1410,12 @@ binary-extensions@^1.0.0:
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-1.13.1.tgz#598afe54755b2868a5330d2aff9d4ebb53209b65"
   integrity sha512-Un7MIEDdUC5gNpcGDV97op1Ywk748MpHcFTHoYs6qnj1Z3j7I53VG3nwZhKzoBZmbdRNnb6WRdFlwl7tSDuZGw==
 
-bindings@1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.3.0.tgz#b346f6ecf6a95f5a815c5839fc7cdb22502f1ed7"
-  integrity sha512-DpLh5EzMR2kzvX1KIlVC0VkC3iZtHKTgdtZ0a3pglBZdaQFjt5S9g9xd1lE+YvXyfd6mtCeRnrUfOLYiTMlNSw==
+bindings@1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.5.0.tgz#10353c9e945334bc0511a6d90b38fbc7c9c504df"
+  integrity sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==
+  dependencies:
+    file-uri-to-path "1.0.0"
 
 block-stream@*:
   version "0.0.9"
@@ -1453,19 +1473,22 @@ brorand@^1.0.1:
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
   integrity sha1-EsJe/kCkXjwyPrhnWgoM5XsiNx8=
 
-"browser-core@https://github.com/cliqz-oss/browser-core/releases/download/v7.37.7/browser-core-7.37.7.tgz":
-  version "7.37.7"
-  resolved "https://github.com/cliqz-oss/browser-core/releases/download/v7.37.7/browser-core-7.37.7.tgz#37442f50fdd4806508f5277f1fdcb76606d9c708"
+"browser-core@https://github.com/cliqz-oss/browser-core/releases/download/v7.39.1-search/browser-core-7.39.1.tgz":
+  version "7.39.1"
+  resolved "https://github.com/cliqz-oss/browser-core/releases/download/v7.39.1-search/browser-core-7.39.1.tgz#bafed4c25ccfba2089b0f933a4bb4a01492daa92"
   dependencies:
     "@cliqz-oss/dexie" "^2.0.4"
-    "@cliqz/adblocker" "^0.11.0"
+    "@cliqz/adblocker-webextension" "^0.13.2"
+    "@cliqz/adblocker-webextension-cosmetics" "^0.13.2"
+    "@cliqz/url-parser" "^1.0.3"
+    abortcontroller-polyfill "^1.3.0"
     ajv "^6.10.0"
-    anonymous-credentials "https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.3/anonymous-credentials-0.1.3.tgz"
+    anonymous-credentials "https://github.com/cliqz-oss/anonymous-credentials/releases/download/0.1.4/anonymous-credentials-0.1.4.tgz"
     classnames "^2.2.5"
-    cliqz-history "https://github.com/cliqz-oss/cliqz-history/releases/download/1.1.2/cliqz-history-1.1.2.tgz"
+    cliqz-history "https://github.com/cliqz-oss/cliqz-history/releases/download/1.2.0/cliqz-history-1.2.0.tgz"
     deep-equal "^1.0.1"
-    handlebars "^4.1.1"
-    jquery "^3.0.0"
+    handlebars "^4.1.2"
+    jquery "^3.4.1"
     jsep "^0.3.0"
     math-expression-evaluator "^1.2.17"
     moment "^2.22.2"
@@ -1489,11 +1512,12 @@ brorand@^1.0.1:
     spanan "^2.0.0"
     spectre.css "^0.5.7"
     text-encoding "^0.6.4"
-    tldts "^5.0.3"
+    tldts-experimental "^5.3.2"
     tooltipster "^4.2.6"
     ua-parser-js "^0.7.12"
+    webextension-polyfill "^0.4.0"
     whatwg-fetch "^3.0.0"
-    ytdl-core "^0.20.2"
+    ytdl-core "^0.29.4"
 
 browser-process-hrtime@^0.1.2:
   version "0.1.3"
@@ -1811,9 +1835,9 @@ cli-width@^2.0.0:
   resolved "https://registry.yarnpkg.com/cli-width/-/cli-width-2.2.0.tgz#ff19ede8a9a5e579324147b0c11f0fbcbabed639"
   integrity sha1-/xnt6Kml5XkyQUewwR8PvLq+1jk=
 
-"cliqz-history@https://github.com/cliqz-oss/cliqz-history/releases/download/1.1.2/cliqz-history-1.1.2.tgz":
-  version "1.1.2"
-  resolved "https://github.com/cliqz-oss/cliqz-history/releases/download/1.1.2/cliqz-history-1.1.2.tgz#7e08e6754d9eeab54311c4ab9c6e90ed842a1bde"
+"cliqz-history@https://github.com/cliqz-oss/cliqz-history/releases/download/1.2.0/cliqz-history-1.2.0.tgz":
+  version "1.2.0"
+  resolved "https://github.com/cliqz-oss/cliqz-history/releases/download/1.2.0/cliqz-history-1.2.0.tgz#8f34446939fa4aad292cd3ebb866f4288723379f"
 
 cliui@^3.2.0:
   version "3.2.0"
@@ -3230,6 +3254,11 @@ file-loader@4.0.0:
     loader-utils "^1.2.2"
     schema-utils "^1.0.0"
 
+file-uri-to-path@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/file-uri-to-path/-/file-uri-to-path-1.0.0.tgz#553a7b8446ff6f684359c445f1e37a05dacc33dd"
+  integrity sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==
+
 fill-range@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/fill-range/-/fill-range-4.0.0.tgz#d544811d428f98eb06a63dc402d2403c328c38f7"
@@ -3577,7 +3606,7 @@ gud@^1.0.0:
   resolved "https://registry.yarnpkg.com/gud/-/gud-1.0.0.tgz#a489581b17e6a70beca9abe3ae57de7a499852c0"
   integrity sha512-zGEOVKFM5sVPPrYs7J5/hYEw2Pof8KCyOwyhG8sAF26mCAeUFAcYPu1mwB7hhpIP29zOIBaDqwuHdLp0jvZXjw==
 
-handlebars@^4.1.1, handlebars@^4.1.2:
+handlebars@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.1.2.tgz#b6b37c1ced0306b221e094fc7aca3ec23b131b67"
   integrity sha512-nvfrjqvt9xQ8Z/w0ijewdD/vvWDTOweBUm96NTr66Wfvo1mJenBLwcYmPs3TIBP5ruzYGD7Hx/DaM9RmhroGPw==
@@ -4698,7 +4727,7 @@ jest@^24.9.0:
     import-local "^2.0.0"
     jest-cli "^24.9.0"
 
-jquery@^3.0.0:
+jquery@^3.4.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.4.1.tgz#714f1f8d9dde4bdfa55764ba37ef214630d80ef2"
   integrity sha512-36+AdBzCL+y6qjw5Tx7HgzeGCzC81MDDgaUP8ld2zhx58HdqXGoBd+tHdrBMiyjGQs0Hxs/MLZTu/eHNJJuWPw==
@@ -5143,12 +5172,13 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
-m3u8stream@^0.2.1:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/m3u8stream/-/m3u8stream-0.2.2.tgz#02ef837253595f2557efab86c4234018e8a60da2"
-  integrity sha512-R/xWLXBtVr0m9sPruRL4p9uO01JyHxhcQ4nhqQhVgyT802OZyVW+dn+fWHvTnbfE6YMLc65TksZZut+Mh2OVMQ==
+m3u8stream@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/m3u8stream/-/m3u8stream-0.6.2.tgz#c2c62ddce88156d80378dd59be010c8b8e9d120b"
+  integrity sha512-WsuM2bd5pPN80xvfrB+1DZqr4M7+kJl8byi6+ZCy6cmVjEiHhmr/desN53Ngsa6Hs13kYumeVgT4wL0oIJ+v6g==
   dependencies:
-    miniget "^1.1.0"
+    miniget "^1.4.0"
+    sax "^1.2.4"
 
 make-dir@^2.0.0, make-dir@^2.1.0:
   version "2.1.0"
@@ -5364,10 +5394,10 @@ mini-css-extract-plugin@^0.8.0:
     schema-utils "^1.0.0"
     webpack-sources "^1.1.0"
 
-miniget@^1.1.0:
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/miniget/-/miniget-1.5.1.tgz#4f93840d5aaed21634cd12fd07d22f7d64e9d570"
-  integrity sha512-KJ3AyIVZ76QuWAq43BWjkK+jLdhxhy3s4tsdg9Je91+cIFkeOSW2VEj2lSeKw50CPu1eCCkSbiQEBKL36mpA5w==
+miniget@^1.4.0, miniget@^1.5.3:
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/miniget/-/miniget-1.5.3.tgz#d796c7291970d1dfa28b646d9aba3fa6b377c5e8"
+  integrity sha512-6xiJs3ZGBdrNMlPNlEWirHhY53hSW33nG1Ytub9Cg5+jLhFPn9PGe4FmPZK9WlmDE1N7/8DEL7PGr7r9kbxwgw==
 
 minimalistic-assert@^1.0.0, minimalistic-assert@^1.0.1:
   version "1.0.1"
@@ -8031,17 +8061,12 @@ tldts-core@^5.3.2:
   resolved "https://registry.yarnpkg.com/tldts-core/-/tldts-core-5.3.2.tgz#3823653310c2dc6e51d00998098a72a3cc203ea9"
   integrity sha512-bGI7MvrFXnbNhSkKEKAjiRo+eoIuIsuzF/hOtpI7HLMLWamIGtrLuNv2nlBOdN/h6iB6B32B4MxmwPWTZ70TaQ==
 
-tldts-experimental@^5.3.1:
+tldts-experimental@^5.3.0, tldts-experimental@^5.3.1, tldts-experimental@^5.3.2:
   version "5.3.2"
   resolved "https://registry.yarnpkg.com/tldts-experimental/-/tldts-experimental-5.3.2.tgz#2b3ed4178345ebdc4f0aed6595ab6f2ef11c63ee"
   integrity sha512-TJKbNzsOwzYQcOC3C18/0wot7WpJHw2R3MYHKzn4q69l5fgDO5Gu+/wqUGXFB5ps7ezKk8QTqwlqKOa+gqJbNg==
   dependencies:
     tldts-core "^5.3.2"
-
-tldts@^5.0.3:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/tldts/-/tldts-5.2.0.tgz#7556a71dd2db6fc790bed3b93ff8b521132d6e94"
-  integrity sha512-rtC2feorWA6Waa/sD7lWTPwi4UMXG08pvhuAms5HRGMthHm4dZPmc3Tar/T8o5aAicNQJjvakWQqSJN1qn2HAw==
 
 tmp@^0.0.33:
   version "0.0.33"
@@ -8162,15 +8187,15 @@ truncate-utf8-bytes@^1.0.0:
   dependencies:
     utf8-byte-length "^1.0.1"
 
-tslib@^1.9.0, tslib@^1.9.3:
+tslib@^1.10.0, tslib@^1.9.0:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.10.0.tgz#c3c19f95973fb0a62973fb09d90d961ee43e5c8a"
   integrity sha512-qOebF53frne81cf0S9B41ByenJ3/IuH8yJKngAX35CmiZySA0khhkovshKK+jGCaMnVomla7gVlIcc3EvKPbTQ==
 
-tsmaz@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/tsmaz/-/tsmaz-1.2.1.tgz#6da2d42ac41c64f7f90ff48d9562d67feb74acf2"
-  integrity sha512-RobtKrzsPLP3CXb5TfN+wkuLIaeYsPmJg2LfohUUi4iHwf8RkMEUF5GX9zMw+YzirNK5JKjDNxoY2y/HBvG40w==
+tsmaz@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/tsmaz/-/tsmaz-1.3.0.tgz#389196d6ac36b641079892e729b9160f4a1dd382"
+  integrity sha512-vcU8dokp/QecvbTldQIE9Y4MD+ObU8VOpkwKCvhwhLv+yVdLMyjq7vTuc/haLLclRFRtMRj2z+qR7IjN+fnpiQ==
 
 tty-browserify@0.0.0:
   version "0.0.0"
@@ -8525,6 +8550,11 @@ watchpack@^1.6.0:
     graceful-fs "^4.1.2"
     neo-async "^2.5.0"
 
+webextension-polyfill@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/webextension-polyfill/-/webextension-polyfill-0.4.0.tgz#9cc5a60f0f2bf907a6b349fdd7e61701f54956f9"
+  integrity sha512-oreMp+EoAo1pzRMigx4jB5jInIpx6NTCySPSjGyLLee/dCIPiRqowCEfbFP8o20wz9SOtNwSsfkaJ9D/tRgpag==
+
 webidl-conversions@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-4.0.2.tgz#a855980b1f0b6b359ba1d5d9fb39ae941faa63ad"
@@ -8825,12 +8855,12 @@ yargs@^7.0.0:
     y18n "^3.2.1"
     yargs-parser "^5.0.0"
 
-ytdl-core@^0.20.2:
-  version "0.20.4"
-  resolved "https://registry.yarnpkg.com/ytdl-core/-/ytdl-core-0.20.4.tgz#91108882e1fe526e14c1e99a589b4971180ba42a"
-  integrity sha512-d+jthiJxSQ6yqCeCwwMggXYOjFSOJsD7ahvAAE1sFW9nVNnsA/roz91SFH1FzaMGS7/y7AnJfhVgpE9i8uYjJQ==
+ytdl-core@^0.29.4:
+  version "0.29.5"
+  resolved "https://registry.yarnpkg.com/ytdl-core/-/ytdl-core-0.29.5.tgz#278052a1a5a1a75c5931c229b804c0798f18858c"
+  integrity sha512-6WOoLQCeovo/aFYeMKeEXjvS/L+0j/vq85AYF86KSmkSA3lMzUzMdtmlo0GjsrOUN79S03MDkSgXEWOZBWL1Rg==
   dependencies:
     html-entities "^1.1.3"
-    m3u8stream "^0.2.1"
-    miniget "^1.1.0"
+    m3u8stream "^0.6.2"
+    miniget "^1.5.3"
     sax "^1.1.3"
