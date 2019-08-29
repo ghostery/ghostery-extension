@@ -14,7 +14,7 @@
 import React from 'react';
 import moment from 'moment/min/moment-with-locales.min';
 import StatsView from './StatsView';
-import { sendMessage, sendMessageInPromise, openSubscriptionPage } from '../utils/msg';
+import { sendMessage, sendMessageInPromise, openCheckoutPage } from '../utils/msg';
 
 /**
  * @class the parent component of Historical Stats View and Graph
@@ -277,7 +277,7 @@ class Stats extends React.Component {
 	 */
 	subscribe = () => {
 		sendMessage('ping', 'hist_plus_cta');
-		openSubscriptionPage();
+		openCheckoutPage();
 	}
 
 	/**

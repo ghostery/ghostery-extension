@@ -32,6 +32,9 @@
 	"banner_no_such_account_message": {
 		"message": "このメールアドレスとパスワードの組み合わせが見つかりません。もう一度お試しください。"
 	},
+	"banner_email_not_in_system_message": {
+		"message": "申し訳ありませんが、そのメールアドレスは当社のシステムに登録されていません。"
+	},
 	"blacklist_error_duplicate_url": {
 		"message": "このサイトは既に制限されています。"
 	},
@@ -1385,6 +1388,9 @@
 	},
 	"hub_home_header_checkbox_label": {
 		"message": "Ghosteryのパフォーマンス向上のために、匿名分析データを追加し共有します。"
+	},
+	"hub_home_header_info_opted_out": {
+		"message": "新規ユーザーの方は、デフォルトでGhostery RewardsとHuman Webには参加しないように設定されています。カスタム設定または拡張機能で、これらの推奨機能にオプトインすることができます。"
 	},
 	"hub_home_header_info": {
 		"message": "新規ユーザーの方は、Human WebとGhostery Rewardsに参加するように設定されています。カスタム・セットアップまたは拡張機能でこれらの設定を変更できます。"

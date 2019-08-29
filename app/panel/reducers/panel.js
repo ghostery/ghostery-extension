@@ -180,7 +180,7 @@ export default (state = initialState, action) => {
 				switch (err.code) {
 					case '10050':
 					case '10110':
-						errorText = t('banner_no_such_account_message');
+						errorText = t('banner_email_not_in_system_message');
 						break;
 					default:
 						errorText = t('server_error_message');

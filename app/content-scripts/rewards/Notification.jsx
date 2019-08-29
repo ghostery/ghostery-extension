@@ -59,23 +59,21 @@ class Notification extends Component {
 										</button>
 									</div>
 								)}
-								{this.props.data.textLink
-									&& (
-										<a
-											className="notification-text"
-											href={this.props.data.textLink.href}
-											target="_blank"
-											rel="noopener noreferrer"
-											onClick={() => {
-												if (this.props.data.textLink.callback) {
-													this.props.data.textLink.callback();
-												}
-											}}
-										>
-											{this.props.data.textLink.text}
-										</a>
-									)
-								}
+								{this.props.data.textLink && (
+									<a
+										className="notification-text"
+										href={this.props.data.textLink.href}
+										target="_blank"
+										rel="noopener noreferrer"
+										onClick={() => {
+											if (this.props.data.textLink.callback) {
+												this.props.data.textLink.callback();
+											}
+										}}
+									>
+										{this.props.data.textLink.text}
+									</a>
+								)}
 							</div>
 						</div>
 					</div>

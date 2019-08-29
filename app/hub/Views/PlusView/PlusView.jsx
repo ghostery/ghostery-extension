@@ -28,10 +28,8 @@ class PlusView extends Component {
 	 * @return {JSX} JSX of the Plus Button
 	 */
 	_renderButton = (additionalClasses) => {
-		const { isSignedIn, isPlus, onPlusClick } = this.props;
-		const buttonHref = (isSignedIn) ?
-			`https://account.${globals.GHOSTERY_DOMAIN}.com/subscription?target=subscribe` :
-			`https://signon.${globals.GHOSTERY_DOMAIN}.com/subscribe`;
+		const { isPlus, onPlusClick } = this.props;
+		const buttonHref = `https://checkout.${globals.GHOSTERY_DOMAIN}.com/plus`;
 		const buttonClassNames = ClassNames('PlusView__button', 'button', additionalClasses, {
 			disabled: isPlus,
 		});
@@ -227,7 +225,6 @@ class PlusView extends Component {
 
 // PropTypes ensure we pass required props of the correct type
 PlusView.propTypes = {
-	isSignedIn: PropTypes.bool.isRequired,
 	isPlus: PropTypes.bool.isRequired,
 	onPlusClick: PropTypes.func.isRequired,
 };

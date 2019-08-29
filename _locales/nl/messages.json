@@ -32,6 +32,9 @@
 	"banner_no_such_account_message": {
 		"message": "Het lijkt erop dat we deze email en wachtwoord combi niet kunnen vinden. Probeer het nog een keer."
 	},
+	"banner_email_not_in_system_message": {
+		"message": "Sorry, dat e-mailadres staat niet in ons systeem."
+	},
 	"blacklist_error_duplicate_url": {
 		"message": "Deze website is all beperkt."
 	},
@@ -1385,6 +1388,9 @@
 	},
 	"hub_home_header_checkbox_label": {
 		"message": "Deel aanvullende anonieme analytics data om de prestaties van Ghostery te verbeteren."
+	},
+	"hub_home_header_info_opted_out": {
+		"message": "Nieuwe gebruikers zijn standaard niet ingeschreven voor Ghostery Rewards en Human Web. Je kunt deze aanbevolen functies inschakelen in aangepaste setup of in de extensie. "
 	},
 	"hub_home_header_info": {
 		"message": "Nieuwe gebruikers kunnen meedoen aan Human Web en Ghostery Rewards. Je kunt deze instellingen wijzigen in aangepaste setup of in de uitbreiding. "

@@ -937,13 +937,11 @@ function onMessageHandler(request, sender, callback) {
 		return true;
 	}
 	if (name === 'account.openSubscriptionPage') {
-		let tabUrl;
-		if (conf.account) {
-			tabUrl = `https://account.${globals.GHOSTERY_DOMAIN}.com/subscription?target=subscribe`;
-		} else {
-			tabUrl = `https://signon.${globals.GHOSTERY_DOMAIN}.com/subscribe`;
-		}
-		utils.openNewTab({ url: tabUrl, become_active: true });
+		utils.openNewTab({ url: `https://account.${globals.GHOSTERY_DOMAIN}.com/subscription`, become_active: true });
+		return false;
+	}
+	if (name === 'account.openCheckoutPage') {
+		utils.openNewTab({ url: `https://checkout.${globals.GHOSTERY_DOMAIN}.com/plus`, become_active: true });
 		return false;
 	}
 	if (name === 'account.openSupportPage') {
@@ -1332,7 +1330,7 @@ offers.on('enabled', () => {
 		if (DEBUG) {
 			offers.action('setConfiguration', {
 				config_location: 'de',
-				triggersBE: 'https://offers-api-staging.clyqz.com',
+				triggersBE: 'https://offers-api-staging-myo.myoffrz.ninja',
 				showConsoleLogs: true,
 				offersLogsEnabled: true,
 				offersDevFlag: true,
@@ -1769,7 +1767,7 @@ function initializeGhosteryModules() {
 					conf.enable_ad_block = !adblocker.isDisabled;
 					conf.enable_anti_tracking = !antitracking.isDisabled;
 					conf.enable_human_web = !humanweb.isDisabled && !(IS_FIREFOX && globals.JUST_INSTALLED);
-					conf.enable_offers = !offers.isDisabled;
+					conf.enable_offers = !offers.isDisabled && !(IS_FIREFOX && globals.JUST_INSTALLED);
 				}
 			}
 		});

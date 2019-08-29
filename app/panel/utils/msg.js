@@ -159,8 +159,7 @@ export function handleClickOnNewTabLink(e) {
 }
 
 /**
- * Send a message to open a Subscription or Subscribe tab.
- * Which one is determined in background based on the current user state.
+ * Send a message to open a Account.Subscription tab.
  * This should be used for messages that don't require a callback.
  * @memberOf PanelUtils
  */
@@ -170,8 +169,17 @@ export function openSubscriptionPage() {
 }
 
 /**
- * Send a message to open a Support tab
- * based on the current user state.
+ * Send a message to open a Checkout tab.
+ * This should be used for messages that don't require a callback.
+ * @memberOf PanelUtils
+ */
+export function openCheckoutPage() {
+	sendMessage('account.openCheckoutPage');
+	window.close();
+}
+
+/**
+ * Send a message to open a Support tab based on the current user state.
  * This should be used for messages that don't require a callback.
  * @memberOf PanelUtils
  */

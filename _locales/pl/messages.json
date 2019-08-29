@@ -32,6 +32,9 @@
 	"banner_no_such_account_message": {
 		"message": "Wygląda na to, że nie możemy odnaleźć tego zestawu e-mail/hasło. Spróbuj jeszcze raz."
 	},
+	"banner_email_not_in_system_message": {
+		"message": "Niestety, w naszym systemie nie ma tego adresu e-mail."
+	},
 	"blacklist_error_duplicate_url": {
 		"message": "Ta strona jest już zastrzeżona."
 	},
@@ -1385,6 +1388,9 @@
 	},
 	"hub_home_header_checkbox_label": {
 		"message": "Udostępnij dodatkowe anonimowe dane analityczne w celu poprawy wydajności Ghostery."
+	},
+	"hub_home_header_info_opted_out": {
+		"message": "Funkcje Ghostery Rewards i Human Web są domyślnie wyłączone dla nowych użytkowników. Możesz włączyć te zalecane funkcje w niestandardowej konfiguracji lub w rozszerzeniu."
 	},
 	"hub_home_header_info": {
 		"message": "Nowi użytkownicy włączani są do udziału w Human Web oraz Ghostery Rewards. Możesz zmienić te ustawienia w konfiguracji niestandardowej lub w rozszerzeniu."

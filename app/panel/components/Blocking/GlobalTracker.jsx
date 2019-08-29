@@ -118,10 +118,12 @@ class GlobalTracker extends React.Component {
 												{ t('tracker_description_learn_more') }
 											</a>
 										</div>
-									)}
+									)
+								}
 							</div>
 						</div>
-					)}
+					)
+				}
 			</div>
 		);
 	}

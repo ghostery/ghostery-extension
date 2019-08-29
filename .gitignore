@@ -22,6 +22,9 @@ tools/leet/*.json
 # Cliqz
 cliqz/
 
+# Tools
+tools/amo/*.zip
+
 ## JSDoc
 docs/
 jsdocs/

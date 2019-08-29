@@ -127,7 +127,7 @@ class Summary extends React.Component {
 
 	/**
 	 * Handles clicking on the Pause Ghostery button.
-	 * @param  {Int} time Optional number of minutes after which Ghostery should un-pause.
+	 * @param  {number} time Optional number of minutes after which Ghostery should un-pause.
 	 */
 	clickPauseButton(time) {
 		const ghosteryPaused = this.props.paused_blocking;

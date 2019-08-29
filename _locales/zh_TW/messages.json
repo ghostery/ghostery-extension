@@ -32,6 +32,9 @@
 	"banner_no_such_account_message": {
 		"message": "看來我們找不到這個電郵與密碼的組合。再試一次。"
 	},
+	"banner_email_not_in_system_message": {
+		"message": "抱歉，該電子郵件不在我們系統。"
+	},
 	"blacklist_error_duplicate_url": {
 		"message": "此網站已經受到限制。"
 	},
@@ -1385,6 +1388,9 @@
 	},
 	"hub_home_header_checkbox_label": {
 		"message": "分享其他的匿名分析資料以改善 Ghostery 的性能。"
+	},
+	"hub_home_header_info_opted_out": {
+		"message": "新用戶的預設為不參與 Ghostery Rewards 和人類網絡（Human Web）。您可以在自定義設置或擴展中選擇使用這些推薦的功能。"
 	},
 	"hub_home_header_info": {
 		"message": "新用戶可以選擇性參與人類網絡（Human Web）和Ghostery Rewards。您可以在自定義設置或擴展中更改這些設置。"

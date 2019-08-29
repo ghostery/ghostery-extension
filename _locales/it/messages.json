@@ -32,6 +32,9 @@
 	"banner_no_such_account_message": {
 		"message": "Pare che non riusciamo a trovare questa accoppiata di email e password. Riprova."
 	},
+	"banner_email_not_in_system_message": {
+		"message": "Spiacente, questa email non è presente nel nostro sistema."
+	},
 	"blacklist_error_duplicate_url": {
 		"message": "Questo sito è già limitato."
 	},
@@ -1385,6 +1388,9 @@
 	},
 	"hub_home_header_checkbox_label": {
 		"message": "Condividi ulteriori analitiche anonime per migliorare le prestazioni di Ghostery."
+	},
+	"hub_home_header_info_opted_out": {
+		"message": "Per impostazione predefinita, i nuovi utenti non possono partecipare a Ghostery Rewards e Human Web. Puoi utilizzare queste funzioni consigliate nella configurazione personalizzata oppure nell'estensione. "
 	},
 	"hub_home_header_info": {
 		"message": "I nuovi utenti partecipano a Human Web e Ghostery Rewards per impostazione predefinita (opt in). Puoi modificare queste impostazioni nella configurazione personalizzata o nell'estensione."

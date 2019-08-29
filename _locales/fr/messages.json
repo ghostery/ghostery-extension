@@ -32,6 +32,9 @@
 	"banner_no_such_account_message": {
 		"message": "Nous avons des difficultés à reconnaître l'utilisateur et le mot de passe. Veuillez réessayer. "
 	},
+	"banner_email_not_in_system_message": {
+		"message": "Désolé, cette adresse nous est inconnue."
+	},
 	"blacklist_error_duplicate_url": {
 		"message": "L'accès à ce site est déjà limité."
 	},
@@ -1385,6 +1388,9 @@
 	},
 	"hub_home_header_checkbox_label": {
 		"message": "Partagez davantage de données analytiques anonymes pour améliorer les performances de Ghostery."
+	},
+	"hub_home_header_info_opted_out": {
+		"message": "Par défaut, les nouveaux utilisateurs ne participent pas à Ghostery Rewards et à Human Web. Vous pouvez activer ces fonctionnalités recommandées via une configuration personnalisée ou dans l'extension."
 	},
 	"hub_home_header_info": {
 		"message": "Chaque nouvel utilisateur est sélectionné pour participer au Human Web et aux Ghostery Rewards. Ces paramètres peuvent être modifiés via une configuration personnalisée ou dans l'extension."
