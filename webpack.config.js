@@ -156,10 +156,12 @@ module.exports = {
 					{
 						loader: 'sass-loader',
 						options: {
-							includePaths: [
-								path.resolve(__dirname, 'node_modules/foundation-sites/scss'),
-							]
-						}
+							sassOptions: {
+								includePaths: [
+									path.resolve(__dirname, 'node_modules/foundation-sites/scss'),
+								]
+							}
+						},
 					}
 				]
 			}, {

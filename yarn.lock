@@ -385,17 +385,17 @@
   resolved "https://registry.yarnpkg.com/@cliqz-oss/dexie/-/dexie-2.0.4.tgz#0e710504e2b9198baa9b046abd3a82731b94d56e"
   integrity sha512-HxMbBQfdy0CehThTFierXbRPI+PHDEucUUriCCzViAKbCWWQIlL6uZcyDaaPRMPWy45v78lezPB4457kfjS72g==
 
-"@cliqz/adblocker-circumvention@^0.14.0":
-  version "0.14.0"
-  resolved "https://registry.yarnpkg.com/@cliqz/adblocker-circumvention/-/adblocker-circumvention-0.14.0.tgz#85f0e1167c8ddac3b5fe4002a509bda6d2eec9ff"
-  integrity sha512-ruJr05S//Fe7TEm7pX7l3lxgcPD1dTuRzrdSAD5fMMpRwvZUsiU3MkMNeMt5XtmFLGqVyiyyrizVwyAF9LEZ9g==
+"@cliqz/adblocker-circumvention@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@cliqz/adblocker-circumvention/-/adblocker-circumvention-1.0.1.tgz#40f841b4836b52272d5f956d0342a17c827fe30b"
+  integrity sha512-tvDxjF5Fc9rptFoSEvcljEHx0akhijz/OmlPNW/pYqaCXqutCbT8YdMOwNnNbs99yGtVdfgF0rLnl6m8BzhVGA==
   dependencies:
-    "@cliqz/adblocker-content" "^0.14.0"
+    "@cliqz/adblocker-content" "^1.0.1"
 
-"@cliqz/adblocker-content@^0.14.0":
-  version "0.14.0"
-  resolved "https://registry.yarnpkg.com/@cliqz/adblocker-content/-/adblocker-content-0.14.0.tgz#6f317c7b71c8f2624e4cdb742af34b859bb373eb"
-  integrity sha512-5x6hM0Jsikith8RdK11QXLgjfxTSkGWdutHruNBdOQkGxUfLebQ/+0mCmbrWHWgWxWqOfo5QOZmOY4q4xVhbiQ==
+"@cliqz/adblocker-content@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@cliqz/adblocker-content/-/adblocker-content-1.0.1.tgz#544ec754c878b68fc8eea5a44f895d34ac48b988"
+  integrity sha512-hq3kKYFQcd14GqXIJi8/t1rxiw+APr6YGSa8bTulvTNIfeJwWlIwcbhO5f6zTdvFiqU3sgJ6FlRnuSwzmKMtMw==
 
 "@cliqz/adblocker@^0.11.0":
   version "0.11.0"
@@ -633,7 +633,7 @@
   resolved "https://registry.yarnpkg.com/@sinonjs/text-encoding/-/text-encoding-0.7.1.tgz#8da5c6530915653f3a1f38fd5f101d8c3f8079c5"
   integrity sha512-+iTbntw2IZPb/anVDbypzfQa+ay64MW0Zo8aJ8gZPWMMK6/OubMVb6lUPMagqjOPnmtauXnFCACVl3O7ogjeqQ==
 
-"@tanem/svg-injector@^8.0.28":
+"@tanem/svg-injector@^8.0.30":
   version "8.0.30"
   resolved "https://registry.yarnpkg.com/@tanem/svg-injector/-/svg-injector-8.0.30.tgz#aeb2f7b88924beacbcbcc9acb9d9e3cb1ce60a63"
   integrity sha512-fYyP3u0i5d5K53+wFLmZ0FnW9jdzAOWrbs5KMkHVgOUvB6mgBcNMSmBN3/ZwEoushiuqZPdSiAU+r2RJQ8+ebw==
@@ -5028,7 +5028,7 @@ loader-runner@^2.4.0:
   resolved "https://registry.yarnpkg.com/loader-runner/-/loader-runner-2.4.0.tgz#ed47066bfe534d7e84c4c7b9998c2a75607d9357"
   integrity sha512-Jsmr89RcXGIwivFY21FcRrisYZfvLMTWx5kOLc+JTxtpBOG6xML0vzbc6SEQG2FO9/4Fc3wW4LVcB5DmGflaRw==
 
-loader-utils@1.2.3, loader-utils@^1.0.1, loader-utils@^1.0.2, loader-utils@^1.1.0, loader-utils@^1.2.2, loader-utils@^1.2.3:
+loader-utils@1.2.3, loader-utils@^1.0.2, loader-utils@^1.1.0, loader-utils@^1.2.2, loader-utils@^1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-1.2.3.tgz#1ff5dc6911c9f0a062531a4c04b609406108c2c7"
   integrity sha512-fkpz8ejdnEMG3s37wGL07iSBDg99O9D5yflE9RGNH3hRdx9SOwYfnGYdZOUIZitN8E+E2vkq3MUMYMvPYl5ZZA==
@@ -6713,13 +6713,13 @@ react-shadow@^17.1.3:
   dependencies:
     humps "^2.0.1"
 
-react-svg@^10.0.19:
-  version "10.0.19"
-  resolved "https://registry.yarnpkg.com/react-svg/-/react-svg-10.0.19.tgz#17e68f205ae0437e89a939a8cc51f6d79db5b1dc"
-  integrity sha512-JrsrubRA20sf4m4Mlinnz0I5kiB8NYtz341C3QXfQ4mI5fnu3BfOHbYxO1DVLFbb+NcjM/QEPwWsfGp/gUEtDg==
+react-svg@^10.0.20:
+  version "10.0.20"
+  resolved "https://registry.yarnpkg.com/react-svg/-/react-svg-10.0.20.tgz#cbbc7394e711311a6f07a2c679563ea9364bb558"
+  integrity sha512-jX6HMK6Kyj+vMtp54/5jO2ndNQQNWKuSxzkII/BiFRiOQb1QPViekQ8SqrsEPHMO2a0Tnn1UzoSR2pcetx4Dmw==
   dependencies:
     "@babel/runtime" "^7.5.5"
-    "@tanem/svg-injector" "^8.0.28"
+    "@tanem/svg-injector" "^8.0.30"
     prop-types "^15.7.2"
 
 react-test-renderer@^16.0.0-0:
@@ -7271,15 +7271,15 @@ sass-graph@^2.2.4:
     scss-tokenizer "^0.2.3"
     yargs "^7.0.0"
 
-sass-loader@^7.3.1:
-  version "7.3.1"
-  resolved "https://registry.yarnpkg.com/sass-loader/-/sass-loader-7.3.1.tgz#a5bf68a04bcea1c13ff842d747150f7ab7d0d23f"
-  integrity sha512-tuU7+zm0pTCynKYHpdqaPpe+MMTQ76I9TPZ7i4/5dZsigE350shQWe5EZNl5dBidM49TPET75tNqRbcsUZWeNA==
+sass-loader@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/sass-loader/-/sass-loader-8.0.0.tgz#e7b07a3e357f965e6b03dd45b016b0a9746af797"
+  integrity sha512-+qeMu563PN7rPdit2+n5uuYVR0SSVwm0JsOUsaJXzgYcClWSlmX0iHDnmeOobPkf5kUglVot3QS6SyLyaQoJ4w==
   dependencies:
     clone-deep "^4.0.1"
-    loader-utils "^1.0.1"
-    neo-async "^2.5.0"
-    pify "^4.0.1"
+    loader-utils "^1.2.3"
+    neo-async "^2.6.1"
+    schema-utils "^2.1.0"
     semver "^6.3.0"
 
 sax@^1.1.3, sax@^1.2.4:
