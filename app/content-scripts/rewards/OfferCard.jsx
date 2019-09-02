@@ -249,7 +249,7 @@ class OfferCard extends Component {
 	render() {
 		return (
 			// @TODO condition for hide class
-			<div ref={(ref) => { this.offerCardRef = ref; }} className="ghostery-rewards-component">
+			<div style={{ opacity: 0 }} ref={(ref) => { this.offerCardRef = ref; }} className="ghostery-rewards-component">
 				{ this.state.closed !== true && (
 					<div>
 						<div className="ghostery-reward-card">
