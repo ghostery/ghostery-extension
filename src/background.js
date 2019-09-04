@@ -1209,13 +1209,13 @@ function setupABTest() {
 		prefs.set('attrackBloomFilter', false);
 	}
 	// overlay search AB test
-	if (abtest.hasTest('overlay_search')) {
-		cliqz.enableModule('search');
-		cliqz.enableModule('overlay');
-	} else {
-		cliqz.disableModule('search');
-		cliqz.disableModule('overlay');
-	}
+	// if (abtest.hasTest('overlay_search')) {
+	// 	cliqz.enableModule('search');
+	// 	cliqz.enableModule('overlay');
+	// } else {
+	// 	cliqz.disableModule('search');
+	// 	cliqz.disableModule('overlay');
+	// }
 }
 
 /**
