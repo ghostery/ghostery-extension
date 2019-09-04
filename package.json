@@ -24,7 +24,7 @@
     "docs": "jsdoc -c jsdoc.json -d docs -r",
     "leet": "node ./tools/leet/leet-en.js",
     "leet.reset": "node ./tools/leet/leet-reset.js",
-    "postinstall": "vendor-copy && bash ./tools/merge-locales.sh"
+    "postinstall": "vendor-copy"
   },
   "vendorCopy": [
     {
@@ -45,7 +45,7 @@
     "@cliqz/adblocker-circumvention": "^1.0.1",
     "@cliqz/url-parser": "^1.0.3",
     "base64-js": "^1.3.1",
-    "browser-core": "https://github.com/cliqz-oss/browser-core/releases/download/v7.39.1-search/browser-core-7.39.1.tgz",
+    "browser-core": "https://github.com/cliqz-oss/browser-core/releases/download/v7.39.2/browser-core-7.39.2.tgz",
     "classnames": "^2.2.5",
     "d3": "^5.11.0",
     "foundation-sites": "^6.4.4-rc1",
