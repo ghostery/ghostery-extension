@@ -204,7 +204,7 @@ class DonutGraph extends React.Component {
 		} = options;
 		const graphData = [];
 		const animationDuration = categories.length > 0 ? 500 : 0;
-		const categoryCount = categories.length;
+		const categoryCount = categories.length + antiTracking.unknownTrackerCount + adBlock.unknownTrackerCount;
 
 		// Process categories into graphData
 		if (categoryCount === 0) {
