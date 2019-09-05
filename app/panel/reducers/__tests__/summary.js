@@ -36,14 +36,20 @@ const initialState = Immutable({
 	},
 	tab_id: 0,
 	antiTracking: {
-		totalUnsafeCount: 0,
 		totalUnknownCount: 0,
+		totalUnsafeCount: 0,
 		trackerCount: 0,
 		unknownTrackerCount: 0,
+		unknownTrackers: [],
+		whitelistedUrls: {},
 	},
 	adBlock: {
-		totalCount: 0,
+		totalUnknownCount: 0,
+		totalUnsafeCount: 0,
 		trackerCount: 0,
+		unknownTrackerCount: 0,
+		unknownTrackers: [],
+		whitelistedUrls: {},
 	},
 });
 
@@ -63,7 +69,7 @@ describe('app/panel/reducers/summary.js', () => {
 	test('reducer correctly handles UPDATE_CLIQZ_MODULE_DATA', () => {
 		const data = {
 			adBlock: {
-				totalCount: 3,
+				totalUnsafeCount: 3,
 				trackerCount: 2,
 			},
 			antiTracking: {
@@ -76,7 +82,7 @@ describe('app/panel/reducers/summary.js', () => {
 		const initState = Immutable({
 			tab_id: 0,
 			adBlock: {
-				totalCount: 1,
+				totalUnsafeCount: 1,
 				trackerCount: 1,
 			},
 			antiTracking: {
