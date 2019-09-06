@@ -37,9 +37,10 @@
 }
 
 .ghostery-rewards-component {
+  opacity: 1 !important;
 	* {
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 	}
 
 	.hide {
@@ -344,6 +345,11 @@
 				}
 			}
 
+      .reward-powered-by-myoffrz {
+        width: 98px;
+        cursor: pointer;
+      }
+
 			.reward-ghosty {
 				flex: 1;
 				background-repeat: no-repeat;
@@ -410,8 +416,30 @@
 	.rewards-notification-container {
 		position: absolute;
 		top: 0;
+    right: 0;
 		width: 100%;
 		height: 100%;
+    max-height: 600px;
+    max-width: 300px;
+    animation: fadein 0.5s;
+    -webkit-animation: fadein 0.5s;
+
+    @keyframes fadein {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @-webkit-keyframes fadein {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+
+    .rewards-notification-optout-image-wrapper {
+      height: 80%;
+      img {
+        width: 100%;
+      }
+    }
 
 		.rewards-notification {
 			margin-top: 17px;
@@ -428,6 +456,9 @@
 			line-height: 2;
 
 			&.first-prompt {
+        margin-top: 37px;
+        height: calc(100% - 74px);
+        width: 244px;
 				background-color: $white;
 				border: 2px solid $dark-purple;
 				color: black;
@@ -435,6 +466,41 @@
 
 			.notification-text {
 				margin: 0px 22px 0px 22px;
+			}
+
+      .notification-text.first-prompt {
+        margin: unset;
+        padding-left: 16px;
+        text-align: left;
+        line-height: 20px;
+        height: 100%;
+        overflow: hidden;
+
+        .first-prompt-labels {
+          font-size: 9px;
+          img {
+            margin-bottom: -2px;
+          }
+        }
+
+        .first-prompt-label {
+          text-transform: uppercase;
+          color: silver;
+          padding-left: 3px;
+          padding-right: 6px;
+        }
+
+        .first-prompt-headline {
+          color: $dark-purple;
+          font-size: 14px;
+          font-weight: 700;
+          padding-top: 11px;
+          padding-bottom: 5px;
+        }
+
+        a {
+          color: black;
+        }
 			}
 
 			a {
@@ -461,6 +527,31 @@
 					border-radius: 3px;
 					text-transform: uppercase;
 				}
+        &.first-prompt {
+          .btn {
+            width: 104px;
+          }
+          button {
+            &:nth-child(1) {
+              background-color: $dark-purple;
+              color: $white;
+              &:hover {
+                background-color: $dark-purple;
+                color: $white;
+              }
+            }
+            &:nth-child(2) {
+              border: 1px solid $dark-purple;
+              background-color: transparent;
+              color: $dark-purple;
+              &:hover {
+                border: 1px solid $dark-purple;
+                background-color: transparent;
+                color: $dark-purple;
+              }
+            }
+          }
+        }
 				button {
 					cursor: pointer;
 					font-weight: bold;

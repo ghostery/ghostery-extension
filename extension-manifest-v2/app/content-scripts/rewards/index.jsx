@@ -130,7 +130,6 @@ class RewardsApp {
 	renderIframe() {
 		this.rewardsIframe = document.createElement('iframe');
 		this.rewardsIframe.id = 'ghostery-iframe-container';
-		this.rewardsIframe.classList.add('hot-dog');
 		this.rewardsIframe.onload = () => {
 			this.iframeStyle = document.createElement('link');
 			this.iframeStyle.rel = 'stylesheet';
@@ -149,7 +148,7 @@ class RewardsApp {
 							exact
 							path="/"
 							render={
-								() => <HotDog reward={props.reward} port={this.port} actions={props.actions} />
+								() => <OfferCard reward={props.reward} conf={props.conf} port={this.port} actions={props.actions} />
 							}
 						/>
 						<Route

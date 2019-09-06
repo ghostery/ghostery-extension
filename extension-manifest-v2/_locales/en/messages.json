@@ -2006,8 +2006,20 @@
 	"rewards_delete": {
 		"message": "Delete this reward"
 	},
+	"rewards_exclusive": {
+		"message": "exclusive"
+	},
+	"rewards_best_offer": {
+		"message": "best offer"
+	},
 	"rewards_first_prompt": {
 		"message": "Would you like to continue to your Ghostery Reward?"
+	},
+	"rewards_first_prompt_extended": {
+		"message": "Would you like to receive offers and discounts from trusted Ghostery partners?"
+	},
+	"rewards_first_prompt_headline": {
+		"message": "New Reward discovered!"
 	},
 	"rewards_second_prompt": {
 		"message": "Would you like to opt out of future Ghostery Rewards?"
