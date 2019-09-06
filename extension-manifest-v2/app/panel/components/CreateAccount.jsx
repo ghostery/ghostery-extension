@@ -36,7 +36,7 @@ class CreateAccount extends React.Component {
 			legalConsentChecked: false,
 			legalConsentNotCheckedError: false,
 			password: '',
-			promotionsChecked: true,
+			promotionsChecked: false,
 			loading: false,
 			passwordInvalidError: false,
 			passwordLengthError: false,

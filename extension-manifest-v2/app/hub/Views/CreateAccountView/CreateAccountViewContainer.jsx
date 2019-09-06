@@ -42,7 +42,7 @@ class CreateAccountViewContainer extends Component {
 			password: '',
 			passwordInvalidError: false,
 			passwordLengthError: false,
-			promotionsChecked: true,
+			promotionsChecked: false,
 			validateInput: false,
 		};
 
