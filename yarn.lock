@@ -6731,6 +6731,11 @@ react-router@5.0.1, react-router@^5.0.1:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
+react-shadow-dom-retarget-events@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/react-shadow-dom-retarget-events/-/react-shadow-dom-retarget-events-1.0.10.tgz#78c3c039bf2ea4e788d91d390662c9ccaf8d92ad"
+  integrity sha512-OOt7ugDgSuXiy+PmMOMHqvm4ko6X+cJsre/N124dCJhLBXqv1xVLjwuhpeY7/nv7p/YxytvyfwYG+M19NMnSjQ==
+
 react-svg@^10.0.20:
   version "10.0.20"
   resolved "https://registry.yarnpkg.com/react-svg/-/react-svg-10.0.20.tgz#cbbc7394e711311a6f07a2c679563ea9364bb558"
