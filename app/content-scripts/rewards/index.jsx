@@ -94,7 +94,7 @@ class RewardsApp {
 		document.body.appendChild(this.rewardsContainer);
 		const shadowRoot = this.rewardsContainer.attachShadow({ mode: 'open' }); // Get the shadow root
 		shadowRoot.appendChild(this.rewardsApp); // Append React root to shadow root
-		retargetEvents(shadowRoot);
+		retargetEvents(shadowRoot); // Reattach React click events
 
 		this.mainView = props => (
 			<Router history={history}>
@@ -107,7 +107,7 @@ class RewardsApp {
 					exact
 					path="/"
 					render={
-						() => <HotDog reward={props.reward} port={this.port} actions={props.actions} />
+						() => <OfferCard reward={props.reward} conf={props.conf} port={this.port} actions={props.actions} />
 					}
 				/>
 				<Route
