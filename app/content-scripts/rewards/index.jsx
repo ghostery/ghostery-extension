@@ -19,7 +19,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route } from 'react-router-dom';
-import root from 'react-shadow';
 import HotDog from './HotDog';
 import OfferCard from './OfferCard';
 import msgModule from '../utils/msg';
@@ -90,37 +89,37 @@ class RewardsApp {
 	}
 
 	renderShadow() {
-		// use shadowDOM to encapsulate CSS - fully supported in Chrome
-		this.rewardsContainer.appendChild(this.rewardsApp);
+		// Use shadowDOM to encapsulate CSS
 		document.body.appendChild(this.rewardsContainer);
+		const shadowRoot = this.rewardsContainer.attachShadow({ mode: 'open' }); // Get the shadow root
+		shadowRoot.appendChild(this.rewardsApp); // Append React root to shadow root
+
 		this.mainView = props => (
 			<Router history={history}>
-				<root.div>
-					<link
-						rel="stylesheet"
-						type="text/css"
-						href={chrome.extension.getURL('dist/css/rewards_styles.css')}
-					/>
-					<Route
-						exact
-						path="/"
-						render={
-							() => <HotDog reward={props.reward} port={this.port} actions={props.actions} />
-						}
-					/>
-					<Route
-						path="/hotdog"
-						render={
-							() => <HotDog reward={props.reward} port={this.port} actions={props.actions} />
-						}
-					/>
-					<Route
-						path="/offercard"
-						render={
-							() => <OfferCard reward={props.reward} conf={props.conf} port={this.port} actions={props.actions} />
-						}
-					/>
-				</root.div>
+				<link
+					rel="stylesheet"
+					type="text/css"
+					href={chrome.extension.getURL('dist/css/rewards_styles.css')}
+				/>
+				<Route
+					exact
+					path="/"
+					render={
+						() => <HotDog reward={props.reward} port={this.port} actions={props.actions} />
+					}
+				/>
+				<Route
+					path="/hotdog"
+					render={
+						() => <HotDog reward={props.reward} port={this.port} actions={props.actions} />
+					}
+				/>
+				<Route
+					path="/offercard"
+					render={
+						() => <OfferCard reward={props.reward} conf={props.conf} port={this.port} actions={props.actions} />
+					}
+				/>
 			</Router>
 		);
 		this.initListener();
