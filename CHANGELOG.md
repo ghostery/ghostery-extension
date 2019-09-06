@@ -1,3 +1,11 @@
+### GHOSTERY 8.4.3 (UNRELEASED)
+
++ Fixes issue where Detail View is blank when there are only Unknown trackers found ()
++ New opt-in flow for Ghostery Rewards ()
++ Fixes for AMO build script
++ Update all project dependencies to satisfy security alerts
++ Updated translations
+
 ### GHOSTERY 8.4.2 (August 28, 2019)
 
 + Fix slow memory leak in Firefox (#434)
