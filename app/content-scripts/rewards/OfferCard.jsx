@@ -41,6 +41,7 @@ class OfferCard extends Component {
 			showPrompt: this.props.conf.rewardsPromptAccepted ? false : 1,
 			showSettings: false,
 			rewardUI: templateData,
+			shouldShowCross: this.props.conf.rewardsPromptAccepted,
 		};
 
 		this.iframeEl = window.parent.document.getElementById('ghostery-iframe-container');
@@ -55,6 +56,7 @@ class OfferCard extends Component {
 		this.closeIcon = `url(${chrome.extension.getURL('app/images/drawer/x.svg')})`;
 		this.ghostyGrey = `url(${chrome.extension.getURL('app/images/rewards/ghosty-grey.svg')})`;
 		this.kebabIcon = `url(${chrome.extension.getURL('app/images/rewards/settings-kebab.svg')})`;
+		this.poweredByMyoffrz = `url(${chrome.extension.getURL('app/images/rewards/powered-by-myoffrz.svg')})`;
 
 		this.closeOfferCard = this.closeOfferCard.bind(this);
 		this.copyCode = this.copyCode.bind(this);
@@ -69,7 +71,7 @@ class OfferCard extends Component {
 			{
 				type: 'first-prompt',
 				buttons: true,
-				message: t('rewards_first_prompt'),
+				message: t('rewards_first_prompt_extended'),
 				textLink: {
 					href: 'https://www.ghostery.com/faqs/what-is-ghostery-rewards/',
 					text: t('rewards_learn_more'),
@@ -167,12 +169,15 @@ class OfferCard extends Component {
 	}
 
 	handlePrompt(promptNumber, option) {
+		const reject = () => {
+			this.props.actions.sendSignal('offer_first_optout');
+			sendMessage('ping', 'rewards_first_reject_optout');
+			this.disableRewards();
+			this.closeOfferCard();
+		};
 		if (promptNumber === 1) {
 			if (!option) {
-				sendMessage('ping', 'rewards_first_reject');
-				this.setState({
-					showPrompt: 2
-				});
+				reject();
 				return;
 			}
 			this.props.actions.messageBackground('rewardsPromptOptedIn');
@@ -180,10 +185,7 @@ class OfferCard extends Component {
 			sendMessage('ping', 'rewards_first_accept');
 		} else if (promptNumber === 2) {
 			if (option) {
-				this.props.actions.sendSignal('offer_first_optout');
-				sendMessage('ping', 'rewards_first_reject_optout');
-				this.disableRewards();
-				this.closeOfferCard();
+				reject();
 				return;
 			}
 			this.props.actions.sendSignal('offer_first_optlater');
@@ -191,7 +193,8 @@ class OfferCard extends Component {
 			this.closeOfferCard();
 		}
 		this.setState({
-			showPrompt: false
+			showPrompt: false,
+			shouldShowCross: true,
 		});
 		this.props.actions.messageBackground('rewardsPromptAccepted');
 	}
@@ -233,20 +236,26 @@ class OfferCard extends Component {
 		return t(`rewards_expires_in_${type}`, [count]);
 	}
 
+	renderCross() {
+		return (
+			<div
+				className="reward-card-close"
+				onClick={() => { this.props.actions.sendSignal('offer_closed_card'); this.closeOfferCard(); }}
+				style={{ backgroundImage: this.closeIcon }}
+			/>
+		);
+	}
+
 	render() {
 		return (
 			// @TODO condition for hide class
-			<div ref={(ref) => { this.offerCardRef = ref; }} className="ghostery-rewards-component">
+			<div style={{ opacity: 0 }} ref={(ref) => { this.offerCardRef = ref; }} className="ghostery-rewards-component">
 				{ this.state.closed !== true && (
 					<div>
 						<div className="ghostery-reward-card">
 							<div className="reward-card-header">
 								<div className="rewards-logo-beta" style={{ backgroundImage: this.betaLogo }} />
-								<div
-									className="reward-card-close"
-									onClick={() => { this.props.actions.sendSignal('offer_closed_card'); this.closeOfferCard(); }}
-									style={{ backgroundImage: this.closeIcon }}
-								/>
+								{this.state.shouldShowCross && this.renderCross()}
 							</div>
 							<div className="reward-content">
 								<div className="reward-content-header">
@@ -315,10 +324,22 @@ class OfferCard extends Component {
 							<div className="reward-footer">
 								<div className="reward-feedback">
 									<div className="reward-smile" />
+									{this.props.conf.rewardsPromptAccepted &&
 									<a onClick={this.disableRewardsNotification}>{t('rewards_disable')}</a>
+									}
 									<div className="reward-arrow" />
 								</div>
-								<div className="reward-ghosty" style={{ backgroundImage: this.ghostyGrey }} />
+								<a
+									className="reward-powered-by-myoffrz"
+									target="_blank"
+									rel="noopener noreferrer"
+									href="https://myoffrz.com/en/fuer-nutzer/"
+								>
+									<div
+										className="reward-ghosty"
+										style={{ backgroundImage: this.poweredByMyoffrz }}
+									/>
+								</a>
 							</div>
 						</div>
 						{ this.state.showPrompt === 1 &&
