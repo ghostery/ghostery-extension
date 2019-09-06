@@ -19,6 +19,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route } from 'react-router-dom';
+import retargetEvents from 'react-shadow-dom-retarget-events';
 import HotDog from './HotDog';
 import OfferCard from './OfferCard';
 import msgModule from '../utils/msg';
@@ -93,6 +94,7 @@ class RewardsApp {
 		document.body.appendChild(this.rewardsContainer);
 		const shadowRoot = this.rewardsContainer.attachShadow({ mode: 'open' }); // Get the shadow root
 		shadowRoot.appendChild(this.rewardsApp); // Append React root to shadow root
+		retargetEvents(shadowRoot);
 
 		this.mainView = props => (
 			<Router history={history}>
