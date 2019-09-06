@@ -725,7 +725,7 @@
 		"message": "Trust on this site"
 	},
 	"panel_tracker_scrub_tooltip": {
-		"message": "Scrub on this site"
+		"message": "Anonymize on this site"
 	},
 	"panel_detail_menu_list_title": {
 		"message": "List View"
