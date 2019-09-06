@@ -37,14 +37,20 @@ const initialState = {
 	},
 	tab_id: 0,
 	antiTracking: {
-		totalUnsafeCount: 0, // The amount of data points scrubbed by Anti-Tracking
 		totalUnknownCount: 0, // The amount of data points scrubbed by Anti-Tracking for Trackers not in the Ghostery DB
+		totalUnsafeCount: 0, // The amount of data points scrubbed by Anti-Tracking
 		trackerCount: 0, // The amount of trackers scrubbed by Anti-Tracking (which are each associated with 1 or more data points)
 		unknownTrackerCount: 0, // The amount of unknown trackers scrubbed by Anti-Tracking
+		unknownTrackers: [], // List of anti-tracking trackers not matched to Ghostery bug IDs
+		whitelistedUrls: {},
 	},
 	adBlock: {
-		totalCount: 0, // The amount of ads blocked by Ad Blocking
+		totalUnknownCount: 0, // The amount of data points blocked by Ad Blocking for Trackers not in the Ghostery DB
+		totalUnsafeCount: 0, // The amount of data points blocked by Ad Blocking
 		trackerCount: 0, // The amount of trackers blocked by Ad Blocking (which are each associated with 1 or more ads)
+		unknownTrackerCount: 0, // The amount of unknown trackers blocked by Ad Blocking
+		unknownTrackers: [], // List of ad-block trackers not matched to Ghostery bug IDs
+		whitelistedUrls: {},
 	}
 };
 /**

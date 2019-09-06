@@ -1209,13 +1209,13 @@ function setupABTest() {
 		prefs.set('attrackBloomFilter', false);
 	}
 	// overlay search AB test
-	if (abtest.hasTest('overlay_search')) {
-		cliqz.enableModule('search');
-		cliqz.enableModule('overlay');
-	} else {
-		cliqz.disableModule('search');
-		cliqz.disableModule('overlay');
-	}
+	// if (abtest.hasTest('overlay_search')) {
+	// 	cliqz.enableModule('search');
+	// 	cliqz.enableModule('overlay');
+	// } else {
+	// 	cliqz.disableModule('search');
+	// 	cliqz.disableModule('overlay');
+	// }
 }
 
 /**
@@ -1767,7 +1767,7 @@ function initializeGhosteryModules() {
 					conf.enable_ad_block = !adblocker.isDisabled;
 					conf.enable_anti_tracking = !antitracking.isDisabled;
 					conf.enable_human_web = !humanweb.isDisabled && !(IS_FIREFOX && globals.JUST_INSTALLED);
-					conf.enable_offers = !offers.isDisabled && !(IS_FIREFOX && globals.JUST_INSTALLED);
+					conf.enable_offers = !offers.isDisabled;
 				}
 			}
 		});

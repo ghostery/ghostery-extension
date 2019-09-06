@@ -100,17 +100,6 @@
 	"minimum_opera_version": "45",
 	"web_accessible_resources": [
 		"app/images/*",
-		"dist/css/rewards_styles.css",
-		"cliqz/dropdown/dropdown.html",
-		"cliqz/overlay/styles/overlay.css",
-		"cliqz/freshtab/images/ghostery-tab-search-icon.svg"
-	],
-	"commands": {
-		"toggle-quicksearch": {
-			"suggested_key": {
-				"default": "Ctrl+Shift+Space"
-			},
-			"description": "Toggle in-page quick search"
-		}
-	}
+		"dist/css/rewards_styles.css"
+	]
 }
