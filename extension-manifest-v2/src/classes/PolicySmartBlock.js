@@ -137,7 +137,7 @@ class PolicySmartBlock {
 			!this.policy.getSitePolicy(tabUrl) &&
 			((appId && (!conf.site_specific_unblocks.hasOwnProperty(tabHost) || !conf.site_specific_unblocks[tabHost].includes(+appId))) || appId === false) &&
 			((appId && (!conf.site_specific_blocks.hasOwnProperty(tabHost) || !conf.site_specific_blocks[tabHost].includes(+appId))) || appId === false) &&
-			!c2pDb.db.apps.hasOwnProperty(appId)
+			(c2pDb.db.apps && !c2pDb.db.apps.hasOwnProperty(appId))
 		);
 	}
 
