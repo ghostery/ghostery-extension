@@ -192,11 +192,11 @@ class OfferCard extends Component {
 			sendMessage('ping', 'rewards_first_reject_optin');
 			this.closeOfferCard();
 		}
+		this.props.actions.messageBackground('rewardsPromptAccepted');
 		this.setState({
 			showPrompt: false,
 			shouldShowCross: true,
 		});
-		this.props.actions.messageBackground('rewardsPromptAccepted');
 	}
 
 	closeOfferCard() {
