@@ -29,12 +29,12 @@ class Notification extends Component {
 	}
 
 	closeNotification(confirm) {
-		this.setState({
-			closed: true
-		});
 		if (typeof this.props.data.closeCallback === 'function') {
 			this.props.data.closeCallback(confirm);
 		}
+		this.setState({
+			closed: true
+		});
 	}
 
 	renderOptoutImage() {
