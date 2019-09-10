@@ -92,7 +92,7 @@ class PanelData {
 
 			account.getUserSettings()
 				.then(userSettings => this._postUserSettings(userSettings))
-				.catch(err => log('Failed getting user settings from PanelData#initPort:', err));
+				.catch(() => log('Failed getting remote user settings from PanelData#initPort. User not logged in.'));
 
 			if (this._needToFilterOffersByRemote()) {
 				rewards.filterOffersByRemote().catch(err => log('Failed to filter offers by remote:', err));
@@ -261,17 +261,19 @@ class PanelData {
 	 * @return	{Object}	the conf, categories, scan status, and page url data the Blocking component needs to display
 	 */
 	_getBlockingData() {
-		const { selected_app_ids, show_tracker_urls, toggle_individual_trackers } = conf;
+		const {
+			expand_all_trackers, selected_app_ids, show_tracker_urls,
+			site_specific_blocks, site_specific_unblocks, toggle_individual_trackers,
+		} = conf;
 
-		return Object.assign(
-			{},
-			{
-				selected_app_ids,
-				show_tracker_urls,
-				toggle_individual_trackers,
-			},
-			this._getDynamicBlockingData(),
-		);
+		return Object.assign({}, {
+			expand_all_trackers,
+			selected_app_ids,
+			show_tracker_urls,
+			site_specific_blocks,
+			site_specific_unblocks,
+			toggle_individual_trackers
+		}, this._getDynamicBlockingData());
 	}
 
 	/**
@@ -348,30 +350,26 @@ class PanelData {
 
 		const { id: tab_id } = this._activeTab;
 		const {
-			enable_ad_block, enable_anti_tracking, enable_smart_block,
+			current_theme, enable_ad_block, enable_anti_tracking, enable_smart_block,
 			enable_offers, is_expanded, is_expert, language, reload_banner_status,
-			trackers_banner_status, current_theme
+			trackers_banner_status,
 		} = conf;
 
-		return Object.assign(
-			{},
-			{
-				enable_ad_block,
-				enable_anti_tracking,
-				enable_smart_block,
-				enable_offers,
-				is_expanded,
-				is_expert,
-				is_android: globals.BROWSER_INFO.os === 'android',
-				language,
-				reload_banner_status,
-				trackers_banner_status,
-				current_theme,
-				tab_id,
-				unread_offer_ids: rewards.unreadOfferIds,
-			},
-			this._getDynamicPanelData(tab_id),
-		);
+		return Object.assign({}, {
+			current_theme,
+			enable_ad_block,
+			enable_anti_tracking,
+			enable_smart_block,
+			enable_offers,
+			is_expanded,
+			is_expert,
+			is_android: globals.BROWSER_INFO.os === 'android',
+			language,
+			reload_banner_status,
+			tab_id,
+			trackers_banner_status,
+			unread_offer_ids: rewards.unreadOfferIds,
+		}, this._getDynamicPanelData(tab_id));
 	}
 
 	/**
@@ -455,7 +453,7 @@ class PanelData {
 
 	/**
 	 * _sendUserSettings helper
-	 * Invoked iff Blocking component is mounted when account.getUserSettings() resolves, max one time per panel open.
+	 * Invoked if Blocking component is mounted when account.getUserSettings() resolves, max one time per panel open.
 	 * @param	{Object}	userSettings	the settings retrieved by account.getUserSettings() in _initPort
 	 */
 	_getUserSettingsForBlockingView(userSettings) {
@@ -476,13 +474,13 @@ class PanelData {
 
 	/**
 	 * _sendUserSettings helper
-	 * Invoked iff Panel is still open account.getUserSettings() resolves, max one time per panel open.
+	 * Invoked if Panel is still open account.getUserSettings() resolves, max one time per panel open.
 	 * @param	{Object}	userSettings	the settings retrieved by account.getUserSettings() in _initPort
 	 */
 	_getUserSettingsForPanelView(userSettings) {
 		const {
 			current_theme, enable_ad_block, enable_anti_tracking, enable_smart_block,
-			is_expanded, is_expert, reload_banner_status, trackers_banner_status,
+			enable_offers, is_expanded, is_expert, reload_banner_status, trackers_banner_status,
 		} = userSettings;
 
 		return {
@@ -490,6 +488,7 @@ class PanelData {
 			enable_ad_block,
 			enable_anti_tracking,
 			enable_smart_block,
+			enable_offers,
 			is_expanded,
 			is_expert,
 			reload_banner_status,
@@ -500,7 +499,7 @@ class PanelData {
 
 	/**
 	 * _sendUserSettings helper
-	 * Invoked iff Settings component is mounted when account.getUserSettings() resolves, max one time per panel open.
+	 * Invoked if Settings component is mounted when account.getUserSettings() resolves, max one time per panel open.
 	 * @param	{Object}	userSettings	the settings retrieved by account.getUserSettings() in _initPort, or the conf object provided by getSettings
 	 */
 	_getUserSettingsForSettingsView(userSettingsSource) {
