@@ -99,7 +99,9 @@ class ConfData {
 			_initProperty('block_by_default', false);
 			_initProperty('bugs_last_checked', 0);
 			_initProperty('bugs_last_updated', nowTime);
+			_initProperty('cliqz_import_state', 0);
 			_initProperty('cmp_version', 0);
+			_initProperty('current_theme', 'default');
 			_initProperty('enable_ad_block', !IS_CLIQZ);
 			_initProperty('enable_anti_tracking', !IS_CLIQZ);
 			_initProperty('enable_autoupdate', true);
@@ -120,6 +122,7 @@ class ConfData {
 			_initProperty('last_cmp_date', 0);
 			_initProperty('notify_library_updates', false);
 			_initProperty('notify_upgrade_updates', true);
+			_initProperty('paid_subscription', false);
 			_initProperty('rewards_accepted', false);
 			_initProperty('rewards_opted_in', false);
 			_initProperty('settings_last_imported', 0);
@@ -135,11 +138,9 @@ class ConfData {
 			_initProperty('setup_block', 1);
 			_initProperty('setup_complete', false);
 			_initProperty('tutorial_complete', false);
-			_initProperty('paid_subscription', false);
-			_initProperty('cliqz_import_state', 0);
-			_initProperty('current_theme', 'default');
 
 			// Complex props
+			_initProperty('account', null);
 			_initProperty('bugs', {});
 			_initProperty('click2play', {});
 			_initProperty('cmp_data', []);
@@ -154,7 +155,6 @@ class ConfData {
 			_initProperty('cliqz_module_whitelist', {});
 			_initProperty('surrogates', {});
 			_initProperty('version_history', []);
-			_initProperty('account', null);
 		});
 	}
 
