@@ -96,6 +96,8 @@ class Globals {
 			'alert_bubble_timeout',
 			'alert_expanded',
 			'block_by_default',
+			'cliqz_module_whitelist',
+			'current_theme',
 			'enable_ad_block',
 			'enable_anti_tracking',
 			'enable_autoupdate',
@@ -123,7 +125,6 @@ class Globals {
 			'site_specific_unblocks',
 			'toggle_individual_trackers',
 			'trackers_banner_status',
-			'current_theme'
 		];
 
 		this.SESSION = {
