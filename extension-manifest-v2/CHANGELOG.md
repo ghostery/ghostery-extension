@@ -2,8 +2,10 @@
 
 + Fixes issue where Detail View is blank when there are only Unknown trackers found (#446)
 + New opt-in flow for Ghostery Rewards (#444)
-+ Un-check email promotions options for create account view (#446)
++ Uncheck email promotions options for create account view (#446)
 + Revert Rewards opt-in setting for Firefox (#446)
++ Fixes issue where site-specific blocking settings did not persist for some users
++ Fixes issue where Ghostery on-boarding Hub appeared on each browser launch
 + Fixes for AMO build script
 + Update project dependencies
 + Updated translations
