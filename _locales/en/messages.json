@@ -1535,6 +1535,17 @@
 	"hub_setup_smartblocking_description_smartblocking": {
 		"message": "Automatically block and unblock trackers to optimize page performance."
 	},
+	"hub_setup_feature_already_active": {
+		"message": "This feature is already active in Cliqz by default. $LINK_LM_START$Learn More$LINK_LM_END$",
+		"placeholders": {
+			"link_lm_start": {
+				"content": "<a href=\"https://www.ghostery.com/faqs/what-are-the-new-ghostery-8-features/\" target=\"_blank\" rel=\"noopener noreferrer\">"
+			},
+			"link_lm_end": {
+				"content": "</a>"
+			}
+		}
+	},
 	"hub_setup_ghosteryrewards_name_rewards": {
 		"message": "Rewards"
 	},

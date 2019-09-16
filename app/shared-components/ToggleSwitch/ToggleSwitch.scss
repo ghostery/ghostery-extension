@@ -49,3 +49,9 @@
 	margin-left: 14px;
 	background-color: #1dafed;
 }
+.ToggleSwitch.ToggleSwitch--locked {
+	cursor: not-allowed;
+}
+.ToggleSwitch.ToggleSwitch--removed {
+	display: none;
+}

@@ -14,6 +14,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import SetupAntiSuiteView from './SetupAntiSuiteView';
+import globals from '../../../../../src/classes/Globals';
+// simple consts
+const { IS_CLIQZ } = globals;
 
 /**
  * @class Implement the Setup Anti-Suite View for the Ghostery Hub
@@ -43,7 +46,7 @@ class SetupAntiSuiteViewContainer extends Component {
 				enable_anti_tracking,
 				enable_ad_block,
 				enable_smart_block,
-				enable_ghostery_rewards,
+				enable_ghostery_rewards
 			} = setup;
 			props.actions.setSetupStep({ setup_step: 9 });
 			props.actions.setAntiTracking({ enable_anti_tracking });
@@ -94,44 +97,49 @@ class SetupAntiSuiteViewContainer extends Component {
 			enable_smart_block,
 			enable_ghostery_rewards,
 		} = this.props.setup;
+
+		const anti_tracking_enabled = IS_CLIQZ ? false : enable_anti_tracking;
+		const ad_block_enabled = IS_CLIQZ ? false : enable_ad_block;
+		const ghostery_rewards_enabled = !IS_CLIQZ;
 		const features = [
 			{
 				id: 'anti-tracking',
 				name: t('hub_setup_antisuite_name_antitracking'),
-				enabled: enable_anti_tracking,
-				toggle: () => {
-					this._handleToggle('anti-tracking');
-				},
-				description: t('hub_setup_antisuite_description_antitracking'),
+				enabled: anti_tracking_enabled,
+				locked: IS_CLIQZ,
+				toggle: IS_CLIQZ ?
+					() => {} :
+					() => this._handleToggle('anti-tracking'),
+				description: IS_CLIQZ ? t('hub_setup_feature_already_active') : t('hub_setup_antisuite_description_antitracking')
 			},
 			{
 				id: 'ad-block',
 				name: t('hub_setup_adblock_name_adblocking'),
-				enabled: enable_ad_block,
-				toggle: () => {
-					this._handleToggle('ad-block');
-				},
-				description: t('hub_setup_adblock_description_adblocking'),
+				enabled: ad_block_enabled,
+				locked: IS_CLIQZ,
+				toggle: IS_CLIQZ ?
+					() => {} :
+					() => this._handleToggle('ad-block'),
+				description: IS_CLIQZ ? t('hub_setup_feature_already_active') : t('hub_setup_adblock_description_adblocking'),
 			},
 			{
 				id: 'smart-blocking',
 				name: t('hub_setup_smartblocking_name_smartblocking'),
 				enabled: enable_smart_block,
-				toggle: () => {
-					this._handleToggle('smart-blocking');
-				},
+				toggle: () => this._handleToggle('smart-blocking'),
 				description: t('hub_setup_smartblocking_description_smartblocking'),
-			},
-			{
+			}
+		];
+
+		if (ghostery_rewards_enabled) {
+			features.push({
 				id: 'ghostery-rewards',
 				name: t('hub_setup_ghosteryrewards_name_rewards'),
 				enabled: enable_ghostery_rewards,
-				toggle: () => {
-					this._handleToggle('ghostery-rewards');
-				},
+				toggle: () => this._handleToggle('ghostery-rewards'),
 				description: t('hub_setup_ghosteryrewards_description_rewards'),
-			},
-		];
+			});
+		}
 
 		return <SetupAntiSuiteView features={features} />;
 	}
@@ -146,7 +154,7 @@ SetupAntiSuiteViewContainer.propTypes = {
 		setAntiTracking: PropTypes.func.isRequired,
 		setAdBlock: PropTypes.func.isRequired,
 		setSmartBlocking: PropTypes.func.isRequired,
-		setGhosteryRewards: PropTypes.func.isRequired,
+		setGhosteryRewards: PropTypes.func.isRequired
 	}).isRequired,
 	sendMountActions: PropTypes.bool.isRequired,
 };
