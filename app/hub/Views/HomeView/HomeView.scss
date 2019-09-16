@@ -152,6 +152,51 @@
 	}
 }
 
+.PlusPromoModal__content {
+	position: relative;
+	width: 646px;
+	height: 553px;
+	background-color: #f7f7f7;
+	border: 1px solid #930194;
+	z-index: 10;
+}
+
+.PlusPromoModal__thanks-for-download {
+	padding-top: 38px;
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.PlusPromoModal__choose-your-plan {
+	padding-top: 10px;
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.PlusPromoModal__option-boxes-container {
+	width: 100%;
+}
+
+.PlusPromoModal__basic-box {
+	float: left;
+	margin-left: 55px;
+	width: 240px;
+	height: 298px;
+	border: solid 3px #1dafed;
+	background-color: #ffffff;
+}
+
+.PlusPromoModal__plus-box {
+	float: right;
+	margin-right: 55px;
+	width: 240px;
+	height: 298px;
+	border-style: solid;
+	border-width: 3px;
+	border-image-source: linear-gradient(39deg, #f2daa2, #eab968);
+	border-image-slice: 1;
+}
+
 // Firefox Font Size Override and Image Size Override
 @-moz-document url-prefix() {
 	.HomeView--firefoxFontSize {
