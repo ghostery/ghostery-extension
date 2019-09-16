@@ -14,7 +14,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import QueryString from 'query-string';
+import { NavLink } from 'react-router-dom';
 import HomeView from './HomeView';
+import { Modal } from '../../../shared-components';
 
 /**
  * @class Implement the Home View for the Ghostery Hub
@@ -28,6 +30,7 @@ class HomeViewContainer extends Component {
 		const { justInstalled } = QueryString.parse(window.location.search);
 		this.state = {
 			justInstalled: justInstalled === 'true',
+			showPlusPromoModal: !props.home.plus_promo_modal_shown,
 		};
 
 		const title = t('hub_home_page_title');
@@ -45,12 +48,38 @@ class HomeViewContainer extends Component {
 		this.props.actions.setMetrics({ enable_metrics });
 	}
 
+	_dismissModal = () => {
+		this.setState({
+			showPlusPromoModal: false,
+		});
+		this.props.actions.markPlusPromoModalShown();
+	}
+
+	_renderModalChildren = () => (
+		<div className="SetupModal__content flex-container flex-dir-column align-middle">
+			<div className="SetupModal__image" />
+			<div className="SetupModal__text flex-child-grow">
+				{t('hub_setup_enter_modal_text')}
+			</div>
+			<div className="button success hollow" onClick={this._dismissModal}>
+				<span>Select Basic</span>
+			</div>
+			<div className="SetupModal__buttonContainer full-width">
+				<div className="full-width flex-container align-justify">
+					<NavLink to="/" className="button success hollow">
+						{t('hub_setup_modal_button_no')}
+					</NavLink>
+				</div>
+			</div>
+		</div>
+	);
+
 	/**
 	 * React's required render function. Returns JSX
 	 * @return {JSX} JSX for rendering the Home View of the Hub app
 	 */
 	render() {
-		const { justInstalled } = this.state;
+		const { justInstalled, showPlusPromoModal } = this.state;
 		const { home, user } = this.props;
 		const {
 			setup_complete,
@@ -67,7 +96,14 @@ class HomeViewContainer extends Component {
 			isPlus: user && user.subscriptionsPlus || false,
 		};
 
-		return <HomeView {...childProps} />;
+		return (
+			<div className="full-height">
+				<Modal show={showPlusPromoModal}>
+					{this._renderModalChildren()}
+				</Modal>
+				<HomeView {...childProps} />
+			</div>
+		);
 	}
 }
 
@@ -75,9 +111,10 @@ class HomeViewContainer extends Component {
 // Note: isRequired is not needed when a prop has a default value
 HomeViewContainer.propTypes = {
 	home: PropTypes.shape({
+		enable_metrics: PropTypes.bool,
+		plus_promo_modal_shown: PropTypes.bool,
 		setup_complete: PropTypes.bool,
 		tutorial_complete: PropTypes.bool,
-		enable_metrics: PropTypes.bool,
 	}),
 	user: PropTypes.shape({
 		email: PropTypes.string,
@@ -85,17 +122,19 @@ HomeViewContainer.propTypes = {
 	}),
 	actions: PropTypes.shape({
 		getHomeProps: PropTypes.func.isRequired,
-		setMetrics: PropTypes.func.isRequired,
 		getUser: PropTypes.func.isRequired,
+		markPlusPromoModalShown: PropTypes.func.isRequired,
+		setMetrics: PropTypes.func.isRequired,
 	}).isRequired,
 };
 
 // Default props used on the Home View
 HomeViewContainer.defaultProps = {
 	home: {
+		enable_metrics: false,
+		plus_promo_modal_shown: false,
 		setup_complete: false,
 		tutorial_complete: false,
-		enable_metrics: false,
 	},
 	user: {
 		email: '',
