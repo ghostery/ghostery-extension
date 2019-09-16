@@ -29,58 +29,77 @@ class HomeViewContainer extends Component {
 
 		const { justInstalled } = QueryString.parse(window.location.search);
 		this.state = {
+			getUserResolved: false,
 			justInstalled: justInstalled === 'true',
-			showPlusPromoModal: !props.home.plus_promo_modal_shown,
+			plusPromoModalShown: props.home.plus_promo_modal_shown,
 		};
 
 		const title = t('hub_home_page_title');
 		window.document.title = title;
 
 		props.actions.getHomeProps();
-		props.actions.getUser();
+
+		// Prevent flickering in of user's email if getUser() returns after initial render,
+		// as well as flickering of plus promo modal if user is already a subscriber
+		props.actions.getUser()
+			.then(() => {
+				this.setState({
+					getUserResolved: true,
+				});
+			});
 	}
 
 	/**
-	* Function to handle toggling Metrics Opt-In
-	*/
+	 * @private
+	 * Function to handle toggling Metrics Opt-In
+	 */
 	_handleToggleMetrics = () => {
 		const enable_metrics = !this.props.home.enable_metrics;
 		this.props.actions.setMetrics({ enable_metrics });
 	}
 
+	/**
+	 * @private
+	 * Dismisses the  Plus promo modal if user opts to stick with the basic plan
+	 */
 	_dismissModal = () => {
 		this.setState({
-			showPlusPromoModal: false,
+			plusPromoModalShown: true,
 		});
 		this.props.actions.markPlusPromoModalShown();
 	}
 
 	_renderModalChildren = () => (
-		<div className="SetupModal__content flex-container flex-dir-column align-middle">
-			<div className="SetupModal__image" />
-			<div className="SetupModal__text flex-child-grow">
-				{t('hub_setup_enter_modal_text')}
+		<div className="PlusPromoModal__content flex-container flex-dir-column align-middle">
+			<div className="PlusPromoModal__thanks-for-download">
+				Thanks for downloading Ghostery!
 			</div>
-			<div className="button success hollow" onClick={this._dismissModal}>
-				<span>Select Basic</span>
+			<div className="PlusPromoModal__choose-your-plan">
+				Choose your privacy plan
 			</div>
-			<div className="SetupModal__buttonContainer full-width">
-				<div className="full-width flex-container align-justify">
-					<NavLink to="/" className="button success hollow">
-						{t('hub_setup_modal_button_no')}
-					</NavLink>
+			<div className="full-width">
+				<div className="PlusPromoModal__basic-box">
+					Ghostery Basic
 				</div>
+				<div className="PlusPromoModal__plus-box">
+					Ghostery Plus
+				</div>
+			</div>
+			<div className="PlusPromoModal__button-container full-width">
+				<div className="button success hollow" onClick={this._dismissModal}>
+					<span>Select Basic</span>
+				</div>
+				<a href="http://signon.ghostery.com/en/subscribe/" target="_blank" rel="noopener noreferrer" className="button success hollow" onClick={this._dismissModal}>
+					<span>Select Plus</span>
+				</a>
 			</div>
 		</div>
 	);
 
-	/**
-	 * React's required render function. Returns JSX
-	 * @return {JSX} JSX for rendering the Home View of the Hub app
-	 */
-	render() {
-		const { justInstalled, showPlusPromoModal } = this.state;
+	_render() {
+		const { justInstalled, plusPromoModalShown } = this.state;
 		const { home, user } = this.props;
+		const isPlus = user && user.subscriptionsPlus || false;
 		const {
 			setup_complete,
 			tutorial_complete,
@@ -93,17 +112,27 @@ class HomeViewContainer extends Component {
 			enable_metrics,
 			changeMetrics: this._handleToggleMetrics,
 			email: user ? user.email : '',
-			isPlus: user && user.subscriptionsPlus || false,
+			isPlus,
 		};
 
 		return (
 			<div className="full-height">
-				<Modal show={showPlusPromoModal}>
+				<Modal show={!isPlus && !plusPromoModalShown}>
 					{this._renderModalChildren()}
 				</Modal>
 				<HomeView {...childProps} />
 			</div>
 		);
+	}
+
+	/**
+	 * React's required render function. Returns JSX
+	 * @return {JSX} JSX for rendering the Home View of the Hub app
+	 */
+	render() {
+		const { getUserResolved } = this.state;
+
+		return (getUserResolved ? this._render() : null);
 	}
 }
 
