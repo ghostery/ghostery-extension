@@ -100,7 +100,6 @@ class SetupAntiSuiteViewContainer extends Component {
 
 		const anti_tracking_enabled = IS_CLIQZ ? false : enable_anti_tracking;
 		const ad_block_enabled = IS_CLIQZ ? false : enable_ad_block;
-		const ghostery_rewards_enabled = !IS_CLIQZ;
 		const features = [
 			{
 				id: 'anti-tracking',
@@ -131,7 +130,7 @@ class SetupAntiSuiteViewContainer extends Component {
 			}
 		];
 
-		if (ghostery_rewards_enabled) {
+		if (!IS_CLIQZ) {
 			features.push({
 				id: 'ghostery-rewards',
 				name: t('hub_setup_ghosteryrewards_name_rewards'),

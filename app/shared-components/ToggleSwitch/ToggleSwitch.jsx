@@ -23,14 +23,8 @@ import ClassNames from 'classnames';
 const ToggleSwitch = (props) => {
 	const switchClassNames = ClassNames('ToggleSwitch', {
 		'ToggleSwitch--active': props.checked,
-		'ToggleSwitch--locked': props.locked,
-		'ToggleSwitch--removed': props.removed
+		'ToggleSwitch--locked': props.locked
 	});
-
-	ToggleSwitch.defaultProps = {
-		locked: false,
-		removed: false
-	};
 
 	return (
 		<div className={switchClassNames} onClick={props.onChange}>
@@ -44,8 +38,11 @@ const ToggleSwitch = (props) => {
 ToggleSwitch.propTypes = {
 	checked: PropTypes.bool.isRequired,
 	locked: PropTypes.bool,
-	removed: PropTypes.bool,
 	onChange: PropTypes.func.isRequired,
+};
+
+ToggleSwitch.defaultProps = {
+	locked: false
 };
 
 export default ToggleSwitch;

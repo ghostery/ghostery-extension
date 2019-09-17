@@ -22,7 +22,6 @@ describe('app/shared-components/ToggleSwitch component', () => {
 			const initialState = {
 				checked: true,
 				locked: false,
-				removed: false,
 				onChange: () => {},
 			};
 
