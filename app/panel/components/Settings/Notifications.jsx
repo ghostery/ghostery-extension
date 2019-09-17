@@ -44,7 +44,7 @@ const Notifications = (props) => {
 					<div className="s-option-group">
 						<div className="s-square-checkbox">
 							<input type="checkbox" id="settings-new-promotions" name="notify_promotions" defaultChecked={settingsData.notify_promotions} onClick={props.toggleCheckbox} />
-							<label id="settings-new-features-label" htmlFor="settings-new-promotions">{ t('settings_new_promotions') }</label>
+							<label id="settings-new-promotions-label" htmlFor="settings-new-promotions">{ t('settings_new_promotions') }</label>
 						</div>
 					</div>
 					<div className="s-option-group">
