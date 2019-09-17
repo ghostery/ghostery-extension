@@ -173,6 +173,33 @@
 	font-weight: 500;
 }
 
+.PlusPromoModal__option-header {
+	margin-top: 10px;
+	font-size: 19px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.PlusPromoModal__price-text {
+	text-align: center;
+}
+
+.PlusPromoModal__currency-sign {
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.PlusPromoModal__amount {
+	vertical-align: middle;
+	font-size: 58px;
+}
+
+.PlusPromoModal__per-month {
+	vertical-align: sub;
+	font-size: 18px;
+	font-weight: bold;
+}
+
 .PlusPromoModal__basic-box {
 	float: left;
 	margin-left: 55px;
@@ -180,6 +207,12 @@
 	height: 298px;
 	border: solid 3px #1dafed;
 	background-color: #ffffff;
+
+	.PlusPromoModal__option-header,
+	.PlusPromoModal__price-text,
+	.PlusPromoModal__amount {
+		color: #1dafed;
+	}
 }
 
 .PlusPromoModal__plus-box {
@@ -191,6 +224,12 @@
 	border-width: 3px;
 	border-image-source: linear-gradient(39deg, #f2daa2, #eab968);
 	border-image-slice: 1;
+
+	.PlusPromoModal__option-header,
+	.PlusPromoModal__price-text,
+	.PlusPromoModal__amount {
+		color: #ebbf73;
+	}
 }
 
 // Firefox Font Size Override and Image Size Override

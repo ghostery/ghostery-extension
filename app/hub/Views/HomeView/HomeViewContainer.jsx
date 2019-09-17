@@ -69,7 +69,7 @@ class HomeViewContainer extends Component {
 		this.props.actions.markPlusPromoModalShown();
 	}
 
-	_renderModalChildren = () => (
+	_renderPlusPromoModal = () => (
 		<div className="PlusPromoModal__content flex-container flex-dir-column align-middle">
 			<div className="PlusPromoModal__thanks-for-download">
 				Thanks for downloading Ghostery!
@@ -79,10 +79,20 @@ class HomeViewContainer extends Component {
 			</div>
 			<div className="full-width">
 				<div className="PlusPromoModal__basic-box">
-					Ghostery Basic
+					<div className="PlusPromoModal__option-header">Ghostery Basic</div>
+					<div className="PlusPromoModal__price-text">
+						<span className="PlusPromoModal__currency-sign">$</span>
+						<span className="PlusPromoModal__amount">0</span>
+						<span className="PlusPromoModal__per-month">per month</span>
+					</div>
 				</div>
 				<div className="PlusPromoModal__plus-box">
-					Ghostery Plus
+					<div className="PlusPromoModal__option-header">Ghostery Plus</div>
+					<div className="PlusPromoModal__price-text">
+						<span className="PlusPromoModal__currency-sign">$</span>
+						<span className="PlusPromoModal__amount">2</span>
+						<span className="PlusPromoModal__per-month">per month</span>
+					</div>
 				</div>
 			</div>
 			<div className="PlusPromoModal__button-container full-width">
@@ -118,7 +128,7 @@ class HomeViewContainer extends Component {
 		return (
 			<div className="full-height">
 				<Modal show={!isPlus && !plusPromoModalShown}>
-					{this._renderModalChildren()}
+					{this._renderPlusPromoModal()}
 				</Modal>
 				<HomeView {...childProps} />
 			</div>
