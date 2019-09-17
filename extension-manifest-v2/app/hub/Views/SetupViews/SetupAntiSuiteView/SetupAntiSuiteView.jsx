@@ -40,6 +40,7 @@ const SetupAntiSuiteView = props => (
 								<ToggleSwitch
 									checked={feature.enabled}
 									onChange={feature.toggle}
+									locked={feature.locked}
 								/>
 							</div>
 						</div>
@@ -61,13 +62,12 @@ const SetupAntiSuiteView = props => (
 										<ToggleSwitch
 											checked={feature.enabled}
 											onChange={feature.toggle}
+											locked={feature.locked}
 										/>
 									</div>
 								</div>
 							</div>
-							<div className="SetupAntiSuite__featureDescription">
-								{feature.description}
-							</div>
+							<div className="SetupAntiSuite__featureDescription" dangerouslySetInnerHTML={{ __html: feature.description }} />
 						</div>
 					</div>
 				);

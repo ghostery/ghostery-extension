@@ -87,9 +87,12 @@ exports[`app/hub/Views/SetupViews/SetupAntiSuiteView component Snapshot tests wi
         </div>
         <div
           className="SetupAntiSuite__featureDescription"
-        >
-          The first test feature
-        </div>
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "The first test feature",
+            }
+          }
+        />
       </div>
     </div>
     <div
@@ -157,9 +160,12 @@ exports[`app/hub/Views/SetupViews/SetupAntiSuiteView component Snapshot tests wi
         </div>
         <div
           className="SetupAntiSuite__featureDescription"
-        >
-          The second test feature
-        </div>
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "The second test feature",
+            }
+          }
+        />
       </div>
     </div>
   </div>
