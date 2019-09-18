@@ -200,6 +200,11 @@
 	font-weight: bold;
 }
 
+.PlusPromoModal__option-boxes-container {
+	margin-top: 37px;
+	margin-bottom: 30px;
+}
+
 .PlusPromoModal__basic-box {
 	float: left;
 	margin-left: 55px;
@@ -230,6 +235,19 @@
 	.PlusPromoModal__amount {
 		color: #ebbf73;
 	}
+}
+
+.PlusPromoModal__option-description-item {
+	font-size: 16px;
+	text-align: center;
+	color: #333333;
+}
+
+.PlusPromoModal__button-container {
+	width: 98.6%;
+	margin: 0 auto;
+	height: 72px;
+	background-color: #e7ecee;
 }
 
 // Firefox Font Size Override and Image Size Override

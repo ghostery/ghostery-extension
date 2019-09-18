@@ -77,13 +77,25 @@ class HomeViewContainer extends Component {
 			<div className="PlusPromoModal__choose-your-plan">
 				Choose your privacy plan
 			</div>
-			<div className="full-width">
+			<div className="PlusPromoModal__option-boxes-container full-width">
 				<div className="PlusPromoModal__basic-box">
 					<div className="PlusPromoModal__option-header">Ghostery Basic</div>
 					<div className="PlusPromoModal__price-text">
 						<span className="PlusPromoModal__currency-sign">$</span>
 						<span className="PlusPromoModal__amount">0</span>
 						<span className="PlusPromoModal__per-month">per month</span>
+					</div>
+					<div className="PlusPromoModal__option-description">
+						<p className="PlusPromoModal__option-description-item">
+							Protection for
+							<span className="bold">
+								one
+							</span>
+							browser
+						</p>
+						<p className="PlusPromoModal__option-description-item">Blocks Ads</p>
+						<p className="PlusPromoModal__option-description-item">Blocks Trackers</p>
+						<p className="PlusPromoModal__option-description-item">Fast Browsing</p>
 					</div>
 				</div>
 				<div className="PlusPromoModal__plus-box">
@@ -92,6 +104,12 @@ class HomeViewContainer extends Component {
 						<span className="PlusPromoModal__currency-sign">$</span>
 						<span className="PlusPromoModal__amount">2</span>
 						<span className="PlusPromoModal__per-month">per month</span>
+					</div>
+					<div className="PlusPromoModal__option-description">
+						<p className="PlusPromoModal__option-description-item">Ghostery Basic</p>
+						<p className="PlusPromoModal__option-description-item">Historical Tracker Stats</p>
+						<p className="PlusPromoModal__option-description-item">Priority Support</p>
+						<p className="PlusPromoModal__option-description-item">New Color Themes</p>
 					</div>
 				</div>
 			</div>
