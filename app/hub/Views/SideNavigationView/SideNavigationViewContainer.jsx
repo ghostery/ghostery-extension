@@ -47,19 +47,14 @@ class SideNavigationViewContainer extends Component {
 		const { user, location } = this.props;
 		const disableRegEx = /^(\/setup(?!\/4$))|(\/tutorial(?!\/6$))/;
 
-		let menuItems = [
+		const menuItems = [
 			{ href: '/', icon: 'home', text: t('hub_side_navigation_home') },
 			{ href: '/setup', icon: 'setup', text: t('hub_side_navigation_setup') },
 			{ href: '/tutorial', icon: 'tutorial', text: t('hub_side_navigation_tutorial') },
 			{ href: '/plus', icon: 'plus', text: t('hub_side_navigation_supporter') },
-			{ href: '/rewards', icon: 'rewards', text: t('hub_side_navigation_rewards') },
-			{ href: '/products', icon: 'products', text: t('hub_side_navigation_products') }
+			...(IS_CLIQZ ? [] : [{ href: '/rewards', icon: 'rewards', text: t('hub_side_navigation_rewards') }]),
+			...[{ href: '/products', icon: 'products', text: t('hub_side_navigation_products') }]
 		];
-
-		if (IS_CLIQZ) {
-			menuItems = menuItems.filter(item => item.href !== '/rewards');
-		}
-
 		const bottomItems = user ? [
 			{ id: 'email', href: `https://account.${globals.GHOSTERY_DOMAIN}.com/`, text: user.email },
 			{ id: 'logout', text: t('hub_side_navigation_log_out'), clickHandler: this._handleLogoutClick },
