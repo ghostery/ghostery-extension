@@ -725,7 +725,7 @@
 		"message": "Megbízható ezen az oldalon"
 	},
 	"panel_tracker_scrub_tooltip": {
-		"message": "Javítás ezen a webhelyen"
+		"message": "Anonimizálás ezen a weboldalon"
 	},
 	"panel_detail_menu_list_title": {
 		"message": "Lista nézet"
@@ -2006,8 +2006,20 @@
 	"rewards_delete": {
 		"message": "Törölje ezt a jutalmat"
 	},
+	"rewards_exclusive": {
+		"message": "kizárólagos"
+	},
+	"rewards_best_offer": {
+		"message": "legjobb ajánlat"
+	},
 	"rewards_first_prompt": {
 		"message": "Kívánja folytatni a Ghostery Reward szolgáltatás használatával?"
+	},
+	"rewards_first_prompt_extended": {
+		"message": "Szeretne ajánlatokat és kedvezményeket kapni a megbízható Ghostery partnerektől?"
+	},
+	"rewards_first_prompt_headline": {
+		"message": "Új Reward felfedezve!"
 	},
 	"rewards_second_prompt": {
 		"message": "Szeretne leiratkozni a jövőben a Ghostery Rewards szolgáltatásról?"

@@ -725,7 +725,7 @@
 		"message": "Se fier aux mouchards sur ce site"
 	},
 	"panel_tracker_scrub_tooltip": {
-		"message": "Nettoyer sur ce site"
+		"message": "Anonymiser sur ce site"
 	},
 	"panel_detail_menu_list_title": {
 		"message": "Affichage liste"
@@ -2006,8 +2006,20 @@
 	"rewards_delete": {
 		"message": "Supprimer cette récompense"
 	},
+	"rewards_exclusive": {
+		"message": "exclusif"
+	},
+	"rewards_best_offer": {
+		"message": "meilleure offre"
+	},
 	"rewards_first_prompt": {
 		"message": "Souhaitez-vous être dirigé vers votre compte Ghostery Rewards ?"
+	},
+	"rewards_first_prompt_extended": {
+		"message": "Souhaitez-vous recevoir des offres et remises de la part de partenaires Ghostery de confiance ?"
+	},
+	"rewards_first_prompt_headline": {
+		"message": "Nouveau Reward trouvé !"
 	},
 	"rewards_second_prompt": {
 		"message": "Souhaitez-vous ne plus participer à l'avenir aux Ghostery Rewards ?"

@@ -725,7 +725,7 @@
 		"message": "Разрешить на этом сайте"
 	},
 	"panel_tracker_scrub_tooltip": {
-		"message": "Очистить на этом сайте"
+		"message": "Оставаться анонимным на этом сайте"
 	},
 	"panel_detail_menu_list_title": {
 		"message": "Список трекеров"
@@ -2006,8 +2006,20 @@
 	"rewards_delete": {
 		"message": "Удалить это Reward"
 	},
+	"rewards_exclusive": {
+		"message": "эксклюзивный"
+	},
+	"rewards_best_offer": {
+		"message": "лучшее предложение"
+	},
 	"rewards_first_prompt": {
 		"message": "Желаете перейти к Ghostery Reward?"
+	},
+	"rewards_first_prompt_extended": {
+		"message": "Хотите получать предложения и скидки от надежных партнеров Ghostery?"
+	},
+	"rewards_first_prompt_headline": {
+		"message": "Открыт новый Reward!"
 	},
 	"rewards_second_prompt": {
 		"message": "Желаете отказаться от использования функции Ghostery Rewards?"

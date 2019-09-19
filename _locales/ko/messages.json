@@ -725,7 +725,7 @@
 		"message": "이 사이트에서 신뢰 "
 	},
 	"panel_tracker_scrub_tooltip": {
-		"message": "이 사이트에서 제거"
+		"message": "이 사이트에서 익명화"
 	},
 	"panel_detail_menu_list_title": {
 		"message": "목록 보기 "
@@ -2006,8 +2006,20 @@
 	"rewards_delete": {
 		"message": "이 리워드 삭제"
 	},
+	"rewards_exclusive": {
+		"message": "특별한"
+	},
+	"rewards_best_offer": {
+		"message": "최고의 혜택 정보"
+	},
 	"rewards_first_prompt": {
 		"message": "Ghostery Rewards 기능을 계속 이용하시겠습니까?"
+	},
+	"rewards_first_prompt_extended": {
+		"message": "신뢰할 수 있는 Ghostery 파트너로부터 혜택 정보와 할인을 받으시겠습니까?"
+	},
+	"rewards_first_prompt_headline": {
+		"message": "새로운 Rewards 확인!"
 	},
 	"rewards_second_prompt": {
 		"message": "Ghostery Rewards 기능을 그만 이용하시겠습니까?"

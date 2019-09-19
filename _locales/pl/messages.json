@@ -27,7 +27,7 @@
 		"message": "wszystko"
 	},
 	"banner_check_your_email_title": {
-		"message": "Sprawdź niedługo swoją pocztę e-mail, w której znajdziesz wiadomość z linkiem do resetowania hasła."
+		"message": "Sprawdź niedługo swoją pocztę e-mail, w której znajdziesz wiadomość z łączem do resetowania hasła."
 	},
 	"banner_no_such_account_message": {
 		"message": "Wygląda na to, że nie możemy odnaleźć tego zestawu e-mail/hasło. Spróbuj jeszcze raz."
@@ -39,7 +39,7 @@
 		"message": "Ta strona jest już zastrzeżona."
 	},
 	"blacklist_error_whitelist_url": {
-		"message": "Ta strona została usunięta z Twojej listy zaufanych stron i dodana do Twojej listy zastrzeżonych stron"
+		"message": "Ta witryna została usunięta z Twojej listy zaufanych stron i dodana do Twojej listy zastrzeżonych stron"
 	},
 	"blocked": {
 		"description": "Select this to show only blocked (checked) tags in the tag browser. Should read as 'Show blocked'.",
@@ -725,7 +725,7 @@
 		"message": "Zaufaj na tej stronie"
 	},
 	"panel_tracker_scrub_tooltip": {
-		"message": "Oczyszczaj na tej stronie"
+		"message": "Zachowaj anonimowość w tej witrynie"
 	},
 	"panel_detail_menu_list_title": {
 		"message": "Widok listy"
@@ -1491,7 +1491,7 @@
 		"message": "Tak"
 	},
 	"hub_setup_modal_button_ask_again": {
-		"message": "Nie proponuj mi ponownie"
+		"message": "Nie pytaj ponownie"
 	},
 	"hub_setup_blocking_text_recommended": {
 		"message": "Blokuj domyślne"
@@ -1852,7 +1852,7 @@
 		"message": "Hasło:"
 	},
 	"hub_login_label_email_invalid": {
-		"message": "Proszę wpisać prawidłowy e-mail."
+		"message": "Wpisz prawidłowy adres e-mail."
 	},
 	"hub_login_label_password_invalid": {
 		"message": "Użyj od 8 do 50 znaków."
@@ -2006,8 +2006,20 @@
 	"rewards_delete": {
 		"message": "Usuń tę nagrodę"
 	},
+	"rewards_exclusive": {
+		"message": "na wyłączność"
+	},
+	"rewards_best_offer": {
+		"message": "najlepsza oferta"
+	},
 	"rewards_first_prompt": {
 		"message": "Czy chcesz przejść dalej do swojego Ghostery Reward?"
+	},
+	"rewards_first_prompt_extended": {
+		"message": "Czy chcesz otrzymywać oferty i zniżki od zaufanych partnerów Ghostery?"
+	},
+	"rewards_first_prompt_headline": {
+		"message": "Pojawił się nowy element Reward!"
 	},
 	"rewards_second_prompt": {
 		"message": "Czy chcesz zrezygnować z Ghostery Rewards w przyszłości?"
@@ -2236,10 +2248,10 @@
 		"message": "reklamy"
 	},
 	"cliqz_feature_status_on": {
-		"message": "Włączone"
+		"message": "Wł."
 	},
 	"cliqz_feature_status_off": {
-		"message": "Wyłączone"
+		"message": "Wył."
 	},
 	"create_account_form_legal_consent_checkbox_label": {
 		"message": "Akceptuję $LINK_TERMS_START$warunki użytkowania$LINK_END$ i $LINK_LICENSE_START$umowę licencji publicznej$LINK_END$ oraz wyrażam zgodę na zasady ochrony danych zawarte w $LINK_PRIVACY_START$polityce prywatności$LINK_END$.",
