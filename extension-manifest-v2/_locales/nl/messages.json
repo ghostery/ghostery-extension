@@ -725,7 +725,7 @@
 		"message": "Vertrouw op deze website"
 	},
 	"panel_tracker_scrub_tooltip": {
-		"message": "Deze site opschonen"
+		"message": "Anoniem maken op deze website"
 	},
 	"panel_detail_menu_list_title": {
 		"message": "Bekijk Lijst"
@@ -2006,8 +2006,20 @@
 	"rewards_delete": {
 		"message": "Verwijder deze beloning "
 	},
+	"rewards_exclusive": {
+		"message": "exclusief"
+	},
+	"rewards_best_offer": {
+		"message": "beste aanbieding"
+	},
 	"rewards_first_prompt": {
 		"message": "Wil je verdergaan naar je Ghostery Rewards?"
+	},
+	"rewards_first_prompt_extended": {
+		"message": "Wil je aanbiedingen van vertrouwde Ghostery-partners ontvangen?"
+	},
+	"rewards_first_prompt_headline": {
+		"message": "Nieuwe Reward ontdekt!"
 	},
 	"rewards_second_prompt": {
 		"message": "Weet je zeker dat je je wilt afmelden voor toekomstige Ghostery Rewards?"

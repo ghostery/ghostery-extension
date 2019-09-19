@@ -725,7 +725,7 @@
 		"message": "在此网站上信任"
 	},
 	"panel_tracker_scrub_tooltip": {
-		"message": "在此网站上清除"
+		"message": "在此网站上匿名"
 	},
 	"panel_detail_menu_list_title": {
 		"message": "列表视图"
@@ -2006,8 +2006,20 @@
 	"rewards_delete": {
 		"message": "删除此奖励"
 	},
+	"rewards_exclusive": {
+		"message": "专属"
+	},
+	"rewards_best_offer": {
+		"message": "最优报价"
+	},
 	"rewards_first_prompt": {
 		"message": "您要继续前往Ghostery Rewards吗？"
+	},
+	"rewards_first_prompt_extended": {
+		"message": "您希望接收可信 Ghostery 合作伙伴发送的优惠和折扣信息吗？"
+	},
+	"rewards_first_prompt_headline": {
+		"message": "发现了新Reward！"
 	},
 	"rewards_second_prompt": {
 		"message": "您要停止接收将来的Ghostery Rewards吗？"

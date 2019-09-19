@@ -725,7 +725,7 @@
 		"message": "Auf dieser Website vertrauen"
 	},
 	"panel_tracker_scrub_tooltip": {
-		"message": "Von dieser Website entfernt"
+		"message": "Auf dieser Website anonymisieren"
 	},
 	"panel_detail_menu_list_title": {
 		"message": "Listenansicht"
@@ -2006,8 +2006,20 @@
 	"rewards_delete": {
 		"message": "Diesen Reward löschen"
 	},
+	"rewards_exclusive": {
+		"message": "exklusiv"
+	},
+	"rewards_best_offer": {
+		"message": "Bestes Angebot"
+	},
 	"rewards_first_prompt": {
 		"message": "Möchten Sie zu Ihrem Ghostery Reward weitergehen?"
+	},
+	"rewards_first_prompt_extended": {
+		"message": "Möchten Sie jetzt Angebote und Rabatte von vertrauenswürdigen Ghostery-Partnern empfangen?"
+	},
+	"rewards_first_prompt_headline": {
+		"message": "Neuer Reward entdeckt!"
 	},
 	"rewards_second_prompt": {
 		"message": "Möchten Sie sich von zukünftigen Ghostery Rewards abmelden?"
