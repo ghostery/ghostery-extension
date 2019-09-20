@@ -53,7 +53,7 @@ class SideNavigationViewContainer extends Component {
 			{ href: '/tutorial', icon: 'tutorial', text: t('hub_side_navigation_tutorial') },
 			{ href: '/plus', icon: 'plus', text: t('hub_side_navigation_supporter') },
 			...(IS_CLIQZ ? [] : [{ href: '/rewards', icon: 'rewards', text: t('hub_side_navigation_rewards') }]),
-			...[{ href: '/products', icon: 'products', text: t('hub_side_navigation_products') }]
+			{ href: '/products', icon: 'products', text: t('hub_side_navigation_products') }
 		];
 		const bottomItems = user ? [
 			{ id: 'email', href: `https://account.${globals.GHOSTERY_DOMAIN}.com/`, text: user.email },
