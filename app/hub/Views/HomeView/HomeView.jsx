@@ -35,17 +35,12 @@ const HomeView = (props) => {
 	} = props;
 	const accountHref = `https://account.${globals.GHOSTERY_DOMAIN}.com`;
 
-	let headerInfoText;
+	let headerInfoText = t('hub_home_header_info');
 	if (globals.BROWSER_INFO) {
-		switch (globals.BROWSER_INFO.name) {
-			case 'firefox':
-				headerInfoText = t('hub_home_header_info_opted_out');
-				break;
-			case 'cliqz':
-				headerInfoText = t('hub_home_header_info_cliqz');
-				break;
-			default:
-				headerInfoText = t('hub_home_header_info');
+		if (globals.BROWSER_INFO.name === 'firefox') {
+			headerInfoText = t('hub_home_header_info_opted_out');
+		} else if (globals.BROWSER_INFO.name === 'cliqz') {
+			headerInfoText = t('hub_home_header_info_cliqz');
 		}
 	}
 
