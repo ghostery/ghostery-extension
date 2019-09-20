@@ -174,15 +174,34 @@
 }
 
 .PlusPromoModal__options-container {
-	width: 100%;
+	height: 100%;
+	margin-top: 32px;
 	display: flex;
-	justify-content: space-around;
 }
 
 .PlusPromoModal__option-container {
 	display: flex;
-	justify-content: center;
+	width: 50%;
+	align-items: center;
 	flex-direction: column;
+	justify-content: space-between;
+}
+
+.PlusPromoModal__option-description-box {
+	width: 240px;
+	height: 298px;
+	border-style: solid;
+	border-width: 3px;
+	background-color: #FFFFFF;
+
+	&.basic {
+		border-color: #1dafed;
+	}
+
+	&.plus {
+		border-image-source: linear-gradient(39deg, #f2daa2, #eab968);
+		border-image-slice: 1;
+	}
 }
 
 .PlusPromoModal__option-header {
@@ -190,10 +209,16 @@
 	font-size: 19px;
 	font-weight: bold;
 	text-align: center;
+
+	&.basic { color: #1dafed; }
+	&.plus { color: #ebbf73; }
 }
 
 .PlusPromoModal__price-text {
 	text-align: center;
+
+	&.basic { color: #1dafed; }
+	&.plus { color: #ebbf73; }
 }
 
 .PlusPromoModal__currency-sign {
@@ -212,37 +237,6 @@
 	font-weight: bold;
 }
 
-.PlusPromoModal__option-boxes-container {
-	margin-top: 37px;
-	margin-bottom: 30px;
-}
-
-.PlusPromoModal__option-description-box {
-	width: 240px;
-	height: 298px;
-	border-style: solid;
-	border-width: 3px;
-	background-color: #FFFFFF;
-}
-
-.PlusPromoModal__option-description-box--basic {
-	border-color: #1dafed;
-	color: #1dafed;
-}
-
-.PlusPromoModal__plus-box {
-	float: right;
-	margin-right: 55px;
-	border-image-source: linear-gradient(39deg, #f2daa2, #eab968);
-	border-image-slice: 1;
-
-	.PlusPromoModal__option-header,
-	.PlusPromoModal__price-text,
-	.PlusPromoModal__amount {
-		color: #ebbf73;
-	}
-}
-
 .PlusPromoModal__option-description-item {
 	font-size: 16px;
 	text-align: center;
@@ -250,13 +244,16 @@
 }
 
 .PlusPromoModal__button-container {
-	width: 98.6%;
-	margin: 0 auto;
+	width: 100%;
+	margin-bottom: 3px;
 	height: 72px;
 	background-color: #e7ecee;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
+
+	&.left { margin-left: 3px; }
+	&.right { margin-right: 3px; }
 
 	.PlusPromoModal__button {
 		background-color: white;

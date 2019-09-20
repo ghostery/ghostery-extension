@@ -78,10 +78,10 @@ class HomeViewContainer extends Component {
 				Choose your privacy plan
 			</div>
 			<div className="PlusPromoModal__options-container full-width">
-				<div className="PlusPromoModal__option-container PlusPromoModal__option-container--basic">
-					<div className="PlusPromoModal__option-description-box PlusPromoModal__option-description-box--basic">
-						<div className="PlusPromoModal__option-header">Ghostery Basic</div>
-						<div className="PlusPromoModal__price-text">
+				<div className="PlusPromoModal__option-container">
+					<div className="PlusPromoModal__option-description-box basic">
+						<div className="PlusPromoModal__option-header basic">Ghostery Basic</div>
+						<div className="PlusPromoModal__price-text basic">
 							<span className="PlusPromoModal__currency-sign">$</span>
 							<span className="PlusPromoModal__amount">0</span>
 							<span className="PlusPromoModal__per-month">per month</span>
@@ -99,16 +99,16 @@ class HomeViewContainer extends Component {
 							<p className="PlusPromoModal__option-description-item">Fast Browsing</p>
 						</div>
 					</div>
-					<div className="PlusPromoModal__button-container">
+					<div className="PlusPromoModal__button-container left">
 						<div className="PlusPromoModal__button button hollow" onClick={this._dismissModal}>
 							<span>Select Basic</span>
 						</div>
 					</div>
 				</div>
-				<div className="PlusPromoModal__option-container PlusPromoModal__option-container--plus">
-					<div className="PlusPromoModal__option-description-box PlusPromoModal__option-description-box--plus">
-						<div className="PlusPromoModal__option-header">Ghostery Plus</div>
-						<div className="PlusPromoModal__price-text">
+				<div className="PlusPromoModal__option-container">
+					<div className="PlusPromoModal__option-description-box plus">
+						<div className="PlusPromoModal__option-header plus">Ghostery Plus</div>
+						<div className="PlusPromoModal__price-text plus">
 							<span className="PlusPromoModal__currency-sign">$</span>
 							<span className="PlusPromoModal__amount">2</span>
 							<span className="PlusPromoModal__per-month">per month</span>
@@ -120,7 +120,7 @@ class HomeViewContainer extends Component {
 							<p className="PlusPromoModal__option-description-item">New Color Themes</p>
 						</div>
 					</div>
-					<div className="PlusPromoModal__button-container">
+					<div className="PlusPromoModal__button-container right">
 						<a href="http://signon.ghostery.com/en/subscribe/" target="_blank" rel="noopener noreferrer" className="PlusPromoModal__button button primary" onClick={this._dismissModal}>
 							<span>Select Plus</span>
 						</a>
