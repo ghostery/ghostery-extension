@@ -725,7 +725,7 @@
 		"message": "Considera affidabile su questo sito"
 	},
 	"panel_tracker_scrub_tooltip": {
-		"message": "Annulla su questo sito"
+		"message": "Anonimizza su questo sito"
 	},
 	"panel_detail_menu_list_title": {
 		"message": "Vista Elenco"
@@ -2006,8 +2006,20 @@
 	"rewards_delete": {
 		"message": "Cancella questa ricompensa"
 	},
+	"rewards_exclusive": {
+		"message": "esclusivo"
+	},
+	"rewards_best_offer": {
+		"message": "migliore offerta"
+	},
 	"rewards_first_prompt": {
 		"message": "Vuoi proseguire alla tua Ghostery Reward?"
+	},
+	"rewards_first_prompt_extended": {
+		"message": "Desideri ricevere offerte e sconti dai partner Ghostery affidabili?"
+	},
+	"rewards_first_prompt_headline": {
+		"message": "Nuova Reward scoperta!"
 	},
 	"rewards_second_prompt": {
 		"message": "Vuoi effettuare l'opt out dalle tue future Ghostery Rewards?"

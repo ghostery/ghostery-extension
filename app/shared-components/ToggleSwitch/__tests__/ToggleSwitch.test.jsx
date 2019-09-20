@@ -21,6 +21,7 @@ describe('app/shared-components/ToggleSwitch component', () => {
 		test('toggle switch is rendered correctly when checked', () => {
 			const initialState = {
 				checked: true,
+				locked: false,
 				onChange: () => {},
 			};
 
