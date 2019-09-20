@@ -34,11 +34,10 @@ const HomeView = (props) => {
 		isPlus,
 	} = props;
 	const accountHref = `https://account.${globals.GHOSTERY_DOMAIN}.com`;
-	const browserName = globals.BROWSER_INFO.name;
 
 	let headerInfoText;
 	if (globals.BROWSER_INFO) {
-		switch (browserName) {
+		switch (globals.BROWSER_INFO.name) {
 			case 'firefox':
 				headerInfoText = t('hub_home_header_info_opted_out');
 				break;
