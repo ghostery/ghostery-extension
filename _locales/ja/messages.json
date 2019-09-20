@@ -725,7 +725,7 @@
 		"message": "このサイトで信頼"
 	},
 	"panel_tracker_scrub_tooltip": {
-		"message": "このサイトのトラッカーを削除"
+		"message": "このサイトを匿名で閲覧する"
 	},
 	"panel_detail_menu_list_title": {
 		"message": "リスト・ビュー"
@@ -2006,8 +2006,20 @@
 	"rewards_delete": {
 		"message": "このリワードを削除する"
 	},
+	"rewards_exclusive": {
+		"message": "除外"
+	},
+	"rewards_best_offer": {
+		"message": "ベストオファー"
+	},
 	"rewards_first_prompt": {
 		"message": "Ghostery Rewardsを続けますか？"
+	},
+	"rewards_first_prompt_extended": {
+		"message": "信頼できるGhosteryのパートナーからオファーとディスカウントを受け取りますか？"
+	},
+	"rewards_first_prompt_headline": {
+		"message": "新しいReward（報酬）があります！"
 	},
 	"rewards_second_prompt": {
 		"message": "Ghostery Rewardsを停止しますか？"
