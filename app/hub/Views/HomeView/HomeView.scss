@@ -173,6 +173,18 @@
 	font-weight: 500;
 }
 
+.PlusPromoModal__options-container {
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+}
+
+.PlusPromoModal__option-container {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
 .PlusPromoModal__option-header {
 	margin-top: 10px;
 	font-size: 19px;
@@ -205,28 +217,22 @@
 	margin-bottom: 30px;
 }
 
-.PlusPromoModal__basic-box {
-	float: left;
-	margin-left: 55px;
+.PlusPromoModal__option-description-box {
 	width: 240px;
 	height: 298px;
-	border: solid 3px #1dafed;
-	background-color: #ffffff;
+	border-style: solid;
+	border-width: 3px;
+	background-color: #FFFFFF;
+}
 
-	.PlusPromoModal__option-header,
-	.PlusPromoModal__price-text,
-	.PlusPromoModal__amount {
-		color: #1dafed;
-	}
+.PlusPromoModal__option-description-box--basic {
+	border-color: #1dafed;
+	color: #1dafed;
 }
 
 .PlusPromoModal__plus-box {
 	float: right;
 	margin-right: 55px;
-	width: 240px;
-	height: 298px;
-	border-style: solid;
-	border-width: 3px;
 	border-image-source: linear-gradient(39deg, #f2daa2, #eab968);
 	border-image-slice: 1;
 
@@ -248,20 +254,44 @@
 	margin: 0 auto;
 	height: 72px;
 	background-color: #e7ecee;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+
+	.PlusPromoModal__button {
+		background-color: white;
+		color: #2cbcf4;
+		border: solid 2px #15b4f2;
+	}
+}
+
+.PlusPromoModal__button {
+	margin: 0;
+	font-size: 12px;
+	font-weight: 500;
+	width: 135px;
+	background-color: white;
+	height: 40px;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	color: #2cbcf4;
+	border: solid 2px #15b4f2;
+	box-shadow: none;
 }
 
 // Firefox Font Size Override and Image Size Override
 @-moz-document url-prefix() {
-	.HomeView--firefoxFontSize {
-		font-size: 75%;
-	}
+.HomeView--firefoxFontSize {
+	font-size: 75%;
+}
+.HomeView--firefoxImageSize {
+	height: 113.875px;
+}
+@media only screen and (max-width: 740px) {
 	.HomeView--firefoxImageSize {
-		height: 113.875px;
+		min-width: 126px !important;
+		max-width: 146px !important;
 	}
-	@media only screen and (max-width: 740px) {
-		.HomeView--firefoxImageSize {
-			min-width: 126px !important;
-			max-width: 146px !important;
-		}
-	}
+}
 }
