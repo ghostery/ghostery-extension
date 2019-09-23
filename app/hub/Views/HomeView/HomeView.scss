@@ -157,7 +157,7 @@
 	width: 646px;
 	height: 553px;
 	background-color: #f7f7f7;
-	border: 1px solid #930194;
+	border: 1.9px solid #930194;
 	z-index: 10;
 }
 
@@ -199,9 +199,26 @@
 	}
 
 	&.plus {
+		position: relative; // so that the recommended banner is positioned relative to this element
 		border-image-source: linear-gradient(39deg, #f2daa2, #eab968);
 		border-image-slice: 1;
 	}
+}
+
+.PlusPromoModal__recommended-banner {
+	position: absolute;
+	left: -30px;
+	top: -30px;
+}
+
+.PlusPromoModal__recommended-banner-text {
+	position: relative;
+	left: 14px;
+	top: -46px;
+	transform: rotate(-13deg);
+	color: white;
+	font-size: 16px;
+	font-weight: bold;
 }
 
 .PlusPromoModal__option-header {

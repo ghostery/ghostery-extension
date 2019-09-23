@@ -107,6 +107,10 @@ class HomeViewContainer extends Component {
 				</div>
 				<div className="PlusPromoModal__option-container">
 					<div className="PlusPromoModal__option-description-box plus">
+						<div className="PlusPromoModal__recommended-banner">
+							<img src="/app/images/hub/home/recommended-banner.svg" />
+							<div className="PlusPromoModal__recommended-banner-text">Recommended</div>
+						</div>
 						<div className="PlusPromoModal__option-header plus">Ghostery Plus</div>
 						<div className="PlusPromoModal__price-text plus">
 							<span className="PlusPromoModal__currency-sign">$</span>
