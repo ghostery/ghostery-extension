@@ -418,6 +418,13 @@ class Summary extends React.Component {
 		const { paused_blocking, sitePolicy } = this.props;
 		const { disableBlocking } = this.state;
 
+		return paused_blocking || sitePolicy || disableBlocking || IS_CLIQZ;
+	}
+
+	_isSmartBlockingInactive() {
+		const { paused_blocking, sitePolicy } = this.props;
+		const { disableBlocking } = this.state;
+
 		return paused_blocking || sitePolicy || disableBlocking;
 	}
 
@@ -672,7 +679,7 @@ class Summary extends React.Component {
 					clickButton={this.clickCliqzFeature}
 					type="smart_block"
 					active={enable_smart_block}
-					cliqzInactive={this._isCliqzInactive()}
+					cliqzInactive={this._isSmartBlockingInactive()}
 					isSmaller={is_expert && !isCondensed}
 					isCondensed={isCondensed}
 					isTooltipHeader={is_expert}
