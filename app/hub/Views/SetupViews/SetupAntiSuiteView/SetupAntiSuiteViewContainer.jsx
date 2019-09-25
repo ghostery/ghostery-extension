@@ -125,7 +125,10 @@ class SetupAntiSuiteViewContainer extends Component {
 				id: 'smart-blocking',
 				name: t('hub_setup_smartblocking_name_smartblocking'),
 				enabled: enable_smart_block,
-				toggle: () => this._handleToggle('smart-blocking'),
+				locked: IS_CLIQZ,
+				toggle: IS_CLIQZ ?
+					() => {} :
+					() => this._handleToggle('smart-blocking'),
 				description: t('hub_setup_smartblocking_description_smartblocking'),
 			}
 		];
