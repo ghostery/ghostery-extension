@@ -1395,6 +1395,9 @@
 	"hub_home_header_info": {
 		"message": "New users are opted in to participating in Human Web and Ghostery Rewards. You may change these settings in custom setup or in the extension. "
 	},
+	"hub_home_header_info_cliqz": {
+		"message": "New users are opted in to participating in Human Web. You may change this setting in custom setup or in the extension. "
+	},
 	"hub_home_header_info_link": {
 		"message": "Learn More."
 	},

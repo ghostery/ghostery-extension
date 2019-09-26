@@ -16,6 +16,7 @@ import PropTypes from 'prop-types';
 import SideNavigationView from './SideNavigationView';
 import globals from '../../../../src/classes/Globals';
 
+const { IS_CLIQZ } = globals;
 /**
  * @class Implement the Side Navigation View for the Ghostery Hub
  * @extends Component
@@ -51,10 +52,9 @@ class SideNavigationViewContainer extends Component {
 			{ href: '/setup', icon: 'setup', text: t('hub_side_navigation_setup') },
 			{ href: '/tutorial', icon: 'tutorial', text: t('hub_side_navigation_tutorial') },
 			{ href: '/plus', icon: 'plus', text: t('hub_side_navigation_supporter') },
-			{ href: '/rewards', icon: 'rewards', text: t('hub_side_navigation_rewards') },
+			...(IS_CLIQZ ? [] : [{ href: '/rewards', icon: 'rewards', text: t('hub_side_navigation_rewards') }]),
 			{ href: '/products', icon: 'products', text: t('hub_side_navigation_products') }
 		];
-
 		const bottomItems = user ? [
 			{ id: 'email', href: `https://account.${globals.GHOSTERY_DOMAIN}.com/`, text: user.email },
 			{ id: 'logout', text: t('hub_side_navigation_log_out'), clickHandler: this._handleLogoutClick },
