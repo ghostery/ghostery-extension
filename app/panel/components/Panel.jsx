@@ -16,6 +16,8 @@ import Header from '../containers/HeaderContainer';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import { setTheme } from '../utils/utils';
+import { Modal } from '../../shared-components';
+import ModalExitButton from '../../shared-components/ModalExitButton/ModalExitButton';
 /**
  * @class Implement base view with functionality common to all views.
  * @memberof PanelClasses
@@ -23,6 +25,9 @@ import { setTheme } from '../utils/utils';
 class Panel extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			showModal: true
+		};
 
 		// event bindings
 		this.closeNotification = this.closeNotification.bind(this);
@@ -56,6 +61,77 @@ class Panel extends React.Component {
 	 */
 	componentWillUnmount() {
 		this._dynamicUIPort.disconnect();
+	}
+
+	/**
+	* Function to handle clicking yes on the Modal
+	*/
+	_answerModalYes = () => {
+		this._toggleModal();
+	}
+
+	/**
+	* Function to toggle the Modal
+	*/
+	_toggleModal = () => {
+		const { showModal } = this.state;
+		this.setState({
+			showModal: !showModal,
+		});
+	}
+
+	_renderModalChildren() {
+		return (
+			<div className="InsightsModal__content flex-container flex-dir-column align-middle">
+				<ModalExitButton exitModal={this._toggleModal} className="InsightsModal__exitButton" hrefExit="Test" textExit="" />
+				<div className="InsightsModal__image" />
+				<div className="InsightsModal__header">
+					Try Ghostery Insights
+				</div>
+				<div className="InsightsModal__description">
+					Speed up and clean up digital user experience with our professional tag analytics tool.
+				</div>
+				<div className="flex-container">
+					<div className="flex-container flex-dir-column InsightsModal__feature-column-1">
+						<div className="flex-container align-middle">
+							<span className="InsightsModal__checkedCircleIcon" />
+							<div className="InsightsModal__featureText">
+								Identify sources of poor performance
+							</div>
+						</div>
+						<div className="flex-container align-middle">
+							<span className="InsightsModal__checkedCircleIcon" />
+							<span className="InsightsModal__featureText">
+								Audit all marketing tags on a site
+							</span>
+						</div>
+					</div>
+					<div className="InsightsModal__feature-column-2 flex-container flex-dir-column">
+						<div className="flex-container align-middle">
+							<span className="InsightsModal__checkedCircleIcon" />
+							<span className="InsightsModal__featureText">
+								View requests firing in real-time
+							</span>
+						</div>
+						<div className="flex-container align-middle">
+							<span className="InsightsModal__checkedCircleIcon" />
+							<span className="InsightsModal__featureText">
+								View digital trends over time
+							</span>
+						</div>
+					</div>
+				</div>
+				<div className="InsightsModal__callToActionContainer flex-container flex-dir-column">
+					<button type="button" className="btn InsightsModal__callToAction align-self-middle">
+						<span className="InsightsModal__callToActionText">CTA TEXT</span>
+					</button>
+					<div className="InsightsModal__otherOptionsContainer flex-container align-justify">
+						<a className="InsightsModal__link">Already an Insights subscriber?</a>
+						<a className="InsightsModal__link">No thanks, maybe later</a>
+					</div>
+				</div>
+			</div>
+		);
 	}
 
 	/**
@@ -148,6 +224,7 @@ class Panel extends React.Component {
 		}
 	}
 
+
 	/**
 	 * Helper render function for the notification callout
 	 * @return {JSX} JSX for the notification callout
@@ -203,6 +280,7 @@ class Panel extends React.Component {
 			return null;
 		}
 
+		const { showModal } = this.state;
 		const notificationText = this.props.notificationShown && this.renderNotification();
 
 		return (
@@ -220,6 +298,9 @@ class Panel extends React.Component {
 					</div>
 				</div>
 				<Header />
+				<Modal show={showModal}>
+					{this._renderModalChildren()}
+				</Modal>
 				<DynamicUIPortContext.Provider value={this._dynamicUIPort}>
 					{ this.props.children }
 				</DynamicUIPortContext.Provider>
