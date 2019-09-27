@@ -14,7 +14,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import QueryString from 'query-string';
-import { NavLink } from 'react-router-dom';
 import HomeView from './HomeView';
 import { Modal } from '../../../shared-components';
 
@@ -71,6 +70,7 @@ class HomeViewContainer extends Component {
 
 	_renderPlusPromoModal = () => (
 		<div className="PlusPromoModal__content flex-container flex-dir-column align-middle">
+			<div className="PlusPromoModal__buttons-background" />
 			<div className="PlusPromoModal__thanks-for-download">
 				Thanks for downloading Ghostery!
 			</div>
@@ -84,25 +84,18 @@ class HomeViewContainer extends Component {
 						<div className="PlusPromoModal__price-text basic">
 							<span className="PlusPromoModal__currency-sign">$</span>
 							<span className="PlusPromoModal__amount">0</span>
+							<span> </span>
 							<span className="PlusPromoModal__per-month">per month</span>
 						</div>
 						<div className="PlusPromoModal__option-description">
-							<p className="PlusPromoModal__option-description-item">
-								Protection for
-								<span className="bold">
-								one
-								</span>
-								browser
-							</p>
+							<p className="PlusPromoModal__option-description-item">Protection for this browser</p>
 							<p className="PlusPromoModal__option-description-item">Blocks Ads</p>
 							<p className="PlusPromoModal__option-description-item">Blocks Trackers</p>
 							<p className="PlusPromoModal__option-description-item">Fast Browsing</p>
 						</div>
 					</div>
-					<div className="PlusPromoModal__button-container left">
-						<div className="PlusPromoModal__button button hollow" onClick={this._dismissModal}>
-							<span>Select Basic</span>
-						</div>
+					<div className="PlusPromoModal__button basic button" onClick={this._dismissModal}>
+						<span>Select Basic</span>
 					</div>
 				</div>
 				<div className="PlusPromoModal__option-container">
@@ -115,20 +108,19 @@ class HomeViewContainer extends Component {
 						<div className="PlusPromoModal__price-text plus">
 							<span className="PlusPromoModal__currency-sign">$</span>
 							<span className="PlusPromoModal__amount">2</span>
+							<span> </span>
 							<span className="PlusPromoModal__per-month">per month</span>
 						</div>
 						<div className="PlusPromoModal__option-description">
-							<p className="PlusPromoModal__option-description-item">Ghostery Basic</p>
-							<p className="PlusPromoModal__option-description-item">Historical Tracker Stats</p>
-							<p className="PlusPromoModal__option-description-item">Priority Support</p>
-							<p className="PlusPromoModal__option-description-item">New Color Themes</p>
+							<p className="PlusPromoModal__option-description-item">All basic features, plus:</p>
+							<p className="PlusPromoModal__option-description-item bold">Historical Tracker Stats</p>
+							<p className="PlusPromoModal__option-description-item bold">Priority Support</p>
+							<p className="PlusPromoModal__option-description-item bold">New Color Themes</p>
 						</div>
 					</div>
-					<div className="PlusPromoModal__button-container right">
-						<a href="http://signon.ghostery.com/en/subscribe/" target="_blank" rel="noopener noreferrer" className="PlusPromoModal__button button primary" onClick={this._dismissModal}>
-							<span>Select Plus</span>
-						</a>
-					</div>
+					<a href="http://signon.ghostery.com/en/subscribe/" target="_blank" rel="noopener noreferrer" className="PlusPromoModal__button plus button" onClick={this._dismissModal}>
+						<span>Select Plus</span>
+					</a>
 				</div>
 			</div>
 		</div>
