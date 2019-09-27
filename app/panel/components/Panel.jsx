@@ -96,13 +96,13 @@ class Panel extends React.Component {
 						<div className="flex-container align-middle">
 							<span className="InsightsModal__checkedCircleIcon" />
 							<div className="InsightsModal__featureText">
-								Identify sources of poor performance
+								Audit marketing tags on a page
 							</div>
 						</div>
 						<div className="flex-container align-middle">
 							<span className="InsightsModal__checkedCircleIcon" />
 							<span className="InsightsModal__featureText">
-								Audit all marketing tags on a site
+								Trace sources of poor performance
 							</span>
 						</div>
 					</div>
@@ -110,13 +110,13 @@ class Panel extends React.Component {
 						<div className="flex-container align-middle">
 							<span className="InsightsModal__checkedCircleIcon" />
 							<span className="InsightsModal__featureText">
-								View requests firing in real-time
+								Watch pings fire in real-time
 							</span>
 						</div>
 						<div className="flex-container align-middle">
 							<span className="InsightsModal__checkedCircleIcon" />
 							<span className="InsightsModal__featureText">
-								View digital trends over time
+								Explore global digital trends
 							</span>
 						</div>
 					</div>
@@ -127,7 +127,7 @@ class Panel extends React.Component {
 					</button>
 					<div className="InsightsModal__otherOptionsContainer flex-container align-justify">
 						<a className="InsightsModal__link">Already an Insights subscriber?</a>
-						<a className="InsightsModal__link">No thanks, maybe later</a>
+						<a onClick={this._toggleModal} className="InsightsModal__link">No thanks, maybe later</a>
 					</div>
 				</div>
 			</div>
