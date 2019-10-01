@@ -22,20 +22,20 @@ const TutorialAntiSuiteView = () => (
 	<div className="TutorialAntiSuiteView TutorialView--mediumFlexColumn row align-center-middle">
 		<div className="columns small-10 small-offset-1 medium-8 large-6">
 			<div className="TutorialView__imageTitle">
-				{t('hub_tutorial_simple_view')}
+				{t('simple_view')}
 			</div>
 			<img
 				className="TutorialAntiSuiteView__image antisuite-simple"
 				src="/app/images/hub/tutorial/antisuite-simple.png"
-				alt={t('hub_tutorial_simple_view')}
+				alt={t('simple_view')}
 			/>
 			<div className="TutorialView__imageTitle">
-				{t('hub_tutorial_detailed_view')}
+				{t('detailed_view')}
 			</div>
 			<img
 				className="TutorialAntiSuiteView__image antisuite-detailed"
 				src="/app/images/hub/tutorial/antisuite-detailed.png"
-				alt={t('hub_tutorial_detailed_view')}
+				alt={t('detailed_view')}
 			/>
 		</div>
 		<div className="columns small-12 medium-10 large-4">

@@ -271,10 +271,19 @@
 	text-align: center;
 	color: #333333;
 
-	&.bold {
-		font-weight: bold;
-		color: #4a4a4a;
+	&.italic {
+		font-style: italic;
 	}
+}
+
+.PlusPromoModal__check-icon {
+	padding-right: 5px;
+	margin-top: -18px;
+}
+
+.PlusPromoModal__plus-option-description-item-container {
+	display: flex;
+	justify-content: center;
 }
 
 .PlusPromoModal__button {

@@ -73,7 +73,7 @@ const CreateAccountView = (props) => {
 				<div className="CreateAccountView--addPaddingTop row align-center-middle">
 					<div className="columns small-12 medium-5">
 						<label htmlFor="create-account-email" className="CreateAccountView__inputLabel">
-							{t('hub_create_account_label_email')}
+							{t('email_colon')}
 						</label>
 						<input
 							id="create-account-email"
@@ -87,13 +87,13 @@ const CreateAccountView = (props) => {
 						/>
 						{emailError && (
 							<div className="CreateAccountView__inputError">
-								{t('hub_create_account_label_email_invalid')}
+								{t('please_enter_a_valid_email')}
 							</div>
 						)}
 					</div>
 					<div className="columns small-12 medium-5">
 						<label htmlFor="create-account-confirmEmail" className="CreateAccountView__inputLabel">
-							{t('hub_create_account_label_email_confirm')}
+							{t('confirm_email_colon')}
 						</label>
 						<input
 							id="create-account-confirmEmail"
@@ -107,7 +107,7 @@ const CreateAccountView = (props) => {
 						/>
 						{confirmEmailError && (
 							<div className="CreateAccountView__inputError">
-								{t('hub_create_account_label_email_confirm_invalid')}
+								{t('your_emails_do_not_match')}
 							</div>
 						)}
 					</div>
@@ -147,7 +147,7 @@ const CreateAccountView = (props) => {
 				<div className="row align-center-middle">
 					<div className="columns small-12 medium-5">
 						<label htmlFor="create-account-password" className="CreateAccountView__inputLabel">
-							{t('hub_create_account_label_password')}
+							{t('password_colon')}
 						</label>
 						<input
 							id="create-account-password"
@@ -214,7 +214,7 @@ const CreateAccountView = (props) => {
 				<div className="CreateAccountView--addPaddingTop row align-center">
 					<div className="CreateAccountView__submit columns small-12 medium-10 flex-container flex-dir-row-reverse">
 						<button type="submit" className="CreateAccountView__button button success">
-							{ t('hub_create_account_button_submit') }
+							{ t('create_account') }
 						</button>
 					</div>
 				</div>

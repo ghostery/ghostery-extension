@@ -22,12 +22,12 @@ const TutorialBlockingView = () => (
 	<div className="TutorialBlockingView row align-center-middle flex-container">
 		<div className="columns small-11 small-offset-1 medium-6">
 			<div className="TutorialView__imageTitle">
-				{t('hub_tutorial_detailed_view')}
+				{t('detailed_view')}
 			</div>
 			<img
 				className="TutorialBlockingView__image blocking-detailed"
 				src="/app/images/hub/tutorial/blocking-detailed.png"
-				alt={t('hub_tutorial_detailed_view')}
+				alt={t('detailed_view')}
 			/>
 			<div className="TutorialView__imageTitle">
 				{t('hub_tutorial_detailed_expanded_view')}

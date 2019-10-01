@@ -72,50 +72,59 @@ class HomeViewContainer extends Component {
 		<div className="PlusPromoModal__content flex-container flex-dir-column align-middle">
 			<div className="PlusPromoModal__buttons-background" />
 			<div className="PlusPromoModal__thanks-for-download">
-				Thanks for downloading Ghostery!
+				{t('thanks_for_downloading_ghostery')}
 			</div>
 			<div className="PlusPromoModal__choose-your-plan">
-				Choose your privacy plan
+				{t('choose_your_privacy_plan')}
 			</div>
 			<div className="PlusPromoModal__options-container full-width">
 				<div className="PlusPromoModal__option-container">
 					<div className="PlusPromoModal__option-description-box basic">
-						<div className="PlusPromoModal__option-header basic">Ghostery Basic</div>
+						<div className="PlusPromoModal__option-header basic">{t('ghostery_basic')}</div>
 						<div className="PlusPromoModal__price-text basic">
-							<span className="PlusPromoModal__currency-sign">$</span>
+							<span className="PlusPromoModal__currency-sign">{t('locale_appropriate_currency_icon')}</span>
 							<span className="PlusPromoModal__amount">0</span>
 							<span> </span>
-							<span className="PlusPromoModal__per-month">per month</span>
+							<span className="PlusPromoModal__per-month">{t('per_month')}</span>
 						</div>
 						<div className="PlusPromoModal__option-description">
-							<p className="PlusPromoModal__option-description-item">Protection for this browser</p>
-							<p className="PlusPromoModal__option-description-item">Blocks Ads</p>
-							<p className="PlusPromoModal__option-description-item">Blocks Trackers</p>
-							<p className="PlusPromoModal__option-description-item">Fast Browsing</p>
+							<p className="PlusPromoModal__option-description-item no-capitalize">{t('protection_for_this_browser')}</p>
+							<p className="PlusPromoModal__option-description-item">{t('blocks_ads')}</p>
+							<p className="PlusPromoModal__option-description-item">{t('blocks_trackers')}</p>
+							<p className="PlusPromoModal__option-description-item">{t('fast_browsing')}</p>
 						</div>
 					</div>
 					<div className="PlusPromoModal__button basic button" onClick={this._dismissModal}>
-						<span>Select Basic</span>
+						<span>{t('select_basic')}</span>
 					</div>
 				</div>
 				<div className="PlusPromoModal__option-container">
 					<div className="PlusPromoModal__option-description-box plus">
 						<div className="PlusPromoModal__recommended-banner">
 							<img src="/app/images/hub/home/recommended-banner.svg" />
-							<div className="PlusPromoModal__recommended-banner-text">Recommended</div>
+							<div className="PlusPromoModal__recommended-banner-text">{t('recommended')}</div>
 						</div>
 						<div className="PlusPromoModal__option-header plus">Ghostery Plus</div>
 						<div className="PlusPromoModal__price-text plus">
-							<span className="PlusPromoModal__currency-sign">$</span>
-							<span className="PlusPromoModal__amount">2</span>
+							<span className="PlusPromoModal__currency-sign">{t('locale_appropriate_currency_icon')}</span>
+							<span className="PlusPromoModal__amount">{t('plus_monthly_subscription_price_number')}</span>
 							<span> </span>
 							<span className="PlusPromoModal__per-month">per month</span>
 						</div>
 						<div className="PlusPromoModal__option-description">
-							<p className="PlusPromoModal__option-description-item">All basic features, plus:</p>
-							<p className="PlusPromoModal__option-description-item bold">Historical Tracker Stats</p>
-							<p className="PlusPromoModal__option-description-item bold">Priority Support</p>
-							<p className="PlusPromoModal__option-description-item bold">New Color Themes</p>
+							<p className="PlusPromoModal__option-description-item italic">All basic features, plus:</p>
+							<div className="PlusPromoModal__plus-option-description-item-container">
+								<img className="PlusPromoModal__check-icon" src="/app/images/hub/home/check-icon.svg" />
+								<p className="PlusPromoModal__option-description-item">Historical Tracker Stats</p>
+							</div>
+							<div className="PlusPromoModal__plus-option-description-item-container">
+								<img className="PlusPromoModal__check-icon" src="/app/images/hub/home/check-icon.svg" />
+								<p className="PlusPromoModal__option-description-item">Priority Support</p>
+							</div>
+							<div className="PlusPromoModal__plus-option-description-item-container">
+								<img className="PlusPromoModal__check-icon" src="/app/images/hub/home/check-icon.svg" />
+								<p className="PlusPromoModal__option-description-item">New Color Themes</p>
+							</div>
 						</div>
 					</div>
 					<a href="http://signon.ghostery.com/en/subscribe/" target="_blank" rel="noopener noreferrer" className="PlusPromoModal__button plus button" onClick={this._dismissModal}>

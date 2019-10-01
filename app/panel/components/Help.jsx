@@ -33,7 +33,7 @@ const Help = () => {
 						<h3>{ t('panel_help_questions_header') }</h3>
 						<PanelToTabLink href="https://www.ghostery.com/faqs/">{t('panel_help_faq')}</PanelToTabLink>
 						<PanelToTabLink href="https://www.ghostery.com/survey/in-app">{t('panel_help_feedback')}</PanelToTabLink>
-						<a href="#" onClick={openSupportPage}>{ t('panel_help_support') }</a>
+						<a href="#" onClick={openSupportPage}>{ t('support') }</a>
 					</div>
 					<div className="support-section">
 						<h3>{ t('panel_help_contact_header') }</h3>
