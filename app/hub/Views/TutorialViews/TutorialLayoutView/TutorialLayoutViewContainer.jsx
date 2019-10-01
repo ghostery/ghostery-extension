@@ -33,8 +33,8 @@ class TutorialLayoutViewContainer extends Component {
 			hrefPrev: `/tutorial/${index - 1}`,
 			hrefNext: `/tutorial/${index + 1}`,
 			hrefDone: '/',
-			textPrev: t('hub_tutorial_nav_previous'),
-			textNext: t('hub_tutorial_nav_next'),
+			textPrev: t('previous'),
+			textNext: t('next'),
 			textDone: t('hub_tutorial_exit_flow'),
 		});
 	}

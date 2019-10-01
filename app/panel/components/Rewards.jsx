@@ -224,7 +224,7 @@ class Rewards extends React.Component {
 					<div>{ t('panel_detail_rewards_cliqz_text') }</div>
 					<hr />
 					<div className="RewardsPanel__learn_more button primary hollow" onClick={this.handleFaqClick}>
-						{ t('panel_detail_learn_more') }
+						{ t('learn_more') }
 					</div>
 				</div>
 			);

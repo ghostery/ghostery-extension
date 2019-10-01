@@ -707,7 +707,7 @@ class Summary extends React.Component {
 		return (
 			<div className={statsNaviconClassNames} onClick={this.showStatsView}>
 				<ReactSVG src="../../app/images/panel/graph.svg" />
-				<Tooltip body={t('subscription_history_stats')} position="left" />
+				<Tooltip body={t('historical_stats')} position="left" />
 			</div>
 		);
 	}

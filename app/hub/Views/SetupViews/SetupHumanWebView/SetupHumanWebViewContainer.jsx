@@ -33,8 +33,8 @@ class SetupHumanWebViewContainer extends Component {
 			hrefPrev: `/setup/${index - 1}`,
 			hrefNext: `/setup/${index + 1}`,
 			hrefDone: '/',
-			textPrev: t('hub_setup_nav_previous'),
-			textNext: t('hub_setup_nav_next'),
+			textPrev: t('previous'),
+			textNext: t('next'),
 			textDone: t('hub_setup_exit_flow'),
 		});
 
