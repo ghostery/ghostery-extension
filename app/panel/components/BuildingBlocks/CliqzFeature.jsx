@@ -57,13 +57,44 @@ class CliqzFeature extends React.Component {
 	_getTooltipBodyText(active, isTooltipBody, type) {
 		if (!isTooltipBody) return false;
 
-		return active ?
-			t(`tooltip_${type}_body_on`) :
-			t(`tooltip_${type}_body`);
+		if (active) {
+			switch (type) {
+				case 'ad_block':
+					return t('tooltip_ad_block_on');
+				case 'anti_track':
+					return t('tooltip_anti_track_on');
+				case 'smart_block':
+					return t('tooltip_smart_block_on');
+				default:
+					return false;
+			}
+		} else {
+			switch (type) {
+				case 'ad_block':
+					return t('ad_blocking_DESC');
+				case 'anti_track':
+					return t('anti_tracking_DESC');
+				case 'smart_block':
+					return t('smart_blocking_DESC');
+				default:
+					return false;
+			}
+		}
 	}
 
 	_getTooltipHeaderText(isTooltipHeader, type) {
-		return isTooltipHeader ? t(`tooltip_${type}`) : false;
+		if (!isTooltipHeader) return false;
+
+		switch (type) {
+			case 'ad_block':
+				return t('enhanced_ad_blocking');
+			case 'anti_track':
+				return t('enhanced_anti_tracking');
+			case 'smart_block':
+				return t('smart_blocking');
+			default:
+				return false;
+		}
 	}
 
 	_getAlertText(active, type) {
@@ -103,7 +134,14 @@ class CliqzFeature extends React.Component {
 		const iconClassNames = ClassNames('CliqzFeature__icon', cssTypeName, 'g-tooltip');
 
 		const featureType = type === 'anti_track' ? 'anti_tracking' : type;
-		const featureName = t(`drawer_title_enable_${featureType}`);
+		let featureName;
+		if (featureType === 'anti_tracking') {
+			featureName = t('enhanced_anti_tracking');
+		} else if (featureType === 'ad_block') {
+			featureName = t('enhanced_ad_blocking');
+		} else if (featureType === 'smart_block') {
+			featureName = t('smart_blocking');
+		}
 
 		return (
 			<div className={cliqzFeatureClassNames} onClick={this.clickCliqzFeature}>
