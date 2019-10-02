@@ -48,7 +48,7 @@ const TutorialAntiSuiteView = () => (
 					<div className="TutorialView__keyImage anti-track" />
 					<div>
 						<div className="TutorialView__keyTitle">
-							{t('hub_tutorial_antisuite_antitracking_title')}
+							{t('enhanced_anti_tracking')}
 						</div>
 						<div className="TutorialView__keyText">
 							{t('hub_tutorial_antisuite_antitracking_description')}
@@ -59,10 +59,10 @@ const TutorialAntiSuiteView = () => (
 					<div className="TutorialView__keyImage ad-block" />
 					<div>
 						<div className="TutorialView__keyTitle">
-							{t('hub_tutorial_antisuite_adblocking_title')}
+							{t('enhanced_ad_blocking')}
 						</div>
 						<div className="TutorialView__keyText">
-							{t('hub_tutorial_antisuite_adblocking_description')}
+							{t('ad_blocking_DESC')}
 						</div>
 					</div>
 				</div>
@@ -70,10 +70,10 @@ const TutorialAntiSuiteView = () => (
 					<div className="TutorialView__keyImage smart-block" />
 					<div>
 						<div className="TutorialView__keyTitle">
-							{t('hub_tutorial_antisuite_smartblocking_title')}
+							{t('smart_blocking')}
 						</div>
 						<div className="TutorialView__keyText">
-							{t('hub_tutorial_antisuite_smartblocking_description')}
+							{t('smart_blocking_DESC')}
 						</div>
 					</div>
 				</div>

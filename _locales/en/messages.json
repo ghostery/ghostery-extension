@@ -22,15 +22,8 @@
 			}
 		}
 	},
-	"all": {
-		"description": "Default setting in the 'filter by type' dropdown for the tag browser. Doesn't filter anything out. Should read as 'Show all'.",
-		"message": "all"
-	},
 	"banner_check_your_email_title": {
 		"message": "Please check your email shortly for a link to reset your password."
-	},
-	"banner_no_such_account_message": {
-		"message": "Looks like we can't find this email and password combo. Give it another shot."
 	},
 	"banner_email_not_in_system_message": {
 		"message": "Sorry, that email isn't in our system."
@@ -40,10 +33,6 @@
 	},
 	"blacklist_error_whitelist_url": {
 		"message": "This site has been removed from your Trusted Sites list and added to your Restricted Sites list"
-	},
-	"blocked": {
-		"description": "Select this to show only blocked (checked) tags in the tag browser. Should read as 'Show blocked'.",
-		"message": "blocked"
 	},
 	"blocked_redirect_action_always_title": {
 		"description": "Title for the 'Allow always and reload' button on the blocked redirect page.",
@@ -375,25 +364,6 @@
 			}
 		}
 	},
-	"copyright": {
-		"description": "Copyright message, shown in page footers.",
-		"message": "$C$ $YEAR$ $GHOSTERY$, a part of $COMPANY_ADDRESS$",
-		"placeholders": {
-			"c": {
-				"content": "&copy;"
-			},
-			"company_address": {
-				"content": "$1",
-				"example": "GHOSTERY, Inc., Such-and-such Street, Such-and-such Floor, New York, NY, Zip Code"
-			},
-			"ghostery": {
-				"content": "<a href='https://www.ghostery.com' target='_blank'>Ghostery</a>"
-			},
-			"year": {
-				"content": "2015"
-			}
-		}
-	},
 	"error_email_forgot": {
 		"message": "Hmm, I can’t find that email. Maybe try another?"
 	},
@@ -414,15 +384,6 @@
 	},
 	"password_field_label_required": {
 		"message": "Password required."
-	},
-	"name": {
-		"description": "The title of this extension (Ghostery).",
-		"message": "$EXTENSION_NAME$ – Privacy Ad Blocker",
-		"placeholders": {
-			"extension_name": {
-				"content": "Ghostery"
-			}
-		}
 	},
 	"none": {
 		"description": "Used to say that this item does not belong to any of the groups, as in \"Groups: None\" (as opposed to \"Groups: Group A, Group B, Group C\").",
@@ -1099,51 +1060,6 @@
 	"blocking_category_tracker_found": {
 		"message": "Found"
 	},
-	"drawer_title_enable_anti_tracking": {
-		"message": "Enhanced Anti-Tracking"
-	},
-	"drawer_tooltip_enable_anti_tracking": {
-		"message": "Anonymize unblocked and unknown trackers for greater browsing protection"
-	},
-	"drawer_label_enable_anti_tracking": {
-		"message": "Trackers Anonymized"
-	},
-	"drawer_desc_enable_anti_tracking": {
-		"message": "Private data points have been removed."
-	},
-	"drawer_status_enable_anti_tracking": {
-		"message": "Anti-Tracking is"
-	},
-	"drawer_title_enable_ad_block": {
-		"message": "Enhanced Ad Blocking"
-	},
-	"drawer_tooltip_enable_ad_block": {
-		"message": "Block advertisements on websites you visit"
-	},
-	"drawer_label_enable_ad_block": {
-		"message": "Ads Blocked"
-	},
-	"drawer_desc_enable_ad_block": {
-		"message": "Ad spots have been blocked."
-	},
-	"drawer_status_enable_ad_block": {
-		"message": "Ad Blocking is"
-	},
-	"drawer_title_enable_smart_block": {
-		"message": "Smart Blocking"
-	},
-	"drawer_tooltip_enable_smart_block": {
-		"message": "Automatically block and unblock trackers to optimize page performance"
-	},
-	"drawer_label_enable_smart_block": {
-		"message": "Trackers Adjusted"
-	},
-	"drawer_desc_enable_smart_block": {
-		"message": "Trackers have been temporarily blocked or unblocked."
-	},
-	"drawer_status_enable_smart_block": {
-		"message": "Smart Blocking is"
-	},
 	"blocking_unblock_all": {
 		"message": "Unblock All"
 	},
@@ -1213,34 +1129,16 @@
 	"alert_site_restricted_off": {
 		"message": "Site no longer blacklisted."
 	},
-	"tooltip_anti_track": {
-		"message": "Enhanced Anti-Tracking"
-	},
-	"tooltip_anti_track_body": {
-		"message": "Anonymize personal data for greater protection."
-	},
-	"tooltip_anti_track_body_on": {
+	"tooltip_anti_track_on": {
 		"message": "Personal data points anonymized."
 	},
 	"tooltip_body_in_cliqz": {
 		"message": "Feature already active in Cliqz by default."
 	},
-	"tooltip_ad_block": {
-		"message": "Enhanced Ad Blocking"
-	},
-	"tooltip_ad_block_body": {
-		"message": "Block advertisements."
-	},
-	"tooltip_ad_block_body_on": {
+	"tooltip_ad_block_on": {
 		"message": "Advertisements have been blocked."
 	},
-	"tooltip_smart_block": {
-		"message": "Smart Blocking"
-	},
-	"tooltip_smart_block_body": {
-		"message": "Automatically block and unblock trackers to optimize page performance."
-	},
-	"tooltip_smart_block_body_on": {
+	"tooltip_smart_block_on": {
 		"message": "Tracker blocking adjusted to optimize page performance."
 	},
 	"tooltip_trust": {
@@ -1442,23 +1340,8 @@
 	"hub_setup_blocking_description_custom": {
 		"message": "Choose which trackers to block"
 	},
-	"hub_setup_antisuite_name_antitracking": {
-		"message": "Enhanced Anti-Tracking"
-	},
 	"hub_setup_antisuite_description_antitracking": {
 		"message": "Anonymize unblocked and unknown trackers for greater browsing protection."
-	},
-	"hub_setup_adblock_name_adblocking": {
-		"message": "Enhanced Ad Blocking"
-	},
-	"hub_setup_adblock_description_adblocking": {
-		"message": "Block advertisements on websites you visit."
-	},
-	"hub_setup_smartblocking_name_smartblocking": {
-		"message": "Smart Blocking"
-	},
-	"hub_setup_smartblocking_description_smartblocking": {
-		"message": "Automatically block and unblock trackers to optimize page performance."
 	},
 	"hub_setup_feature_already_active": {
 		"message": "This feature is already active in Cliqz by default. $LINK_LM_START$Learn More$LINK_LM_END$",
@@ -1590,23 +1473,8 @@
 	"hub_tutorial_antisuite_title": {
 		"message": "Get extra protection and automated control with our enhanced privacy features:"
 	},
-	"hub_tutorial_antisuite_antitracking_title": {
-		"message": "Enhanced Anti-Tracking"
-	},
 	"hub_tutorial_antisuite_antitracking_description": {
 		"message": "Remove data points that websites can use to identify you."
-	},
-	"hub_tutorial_antisuite_adblocking_title": {
-		"message": "Enhanced Ad Blocking"
-	},
-	"hub_tutorial_antisuite_adblocking_description": {
-		"message": "Block advertisements on the pages you visit."
-	},
-	"hub_tutorial_antisuite_smartblocking_title": {
-		"message": "Smart Blocking"
-	},
-	"hub_tutorial_antisuite_smartblocking_description": {
-		"message": "Automatically block and unblock trackers to optimize page performance."
 	},
 	"hub_products_page_title" : {
 		"message": "Ghostery Hub - Try Other Ghostery Products"
@@ -1744,9 +1612,6 @@
 	},
 	"hub_login_toast_success": {
 		"message": "Sign in successful! Your account settings have been imported."
-	},
-	"hub_login_toast_error": {
-		"message": "Looks like we can't find this email and password combo. Give it another shot."
 	},
 	"hub_create_account_header_title": {
 		"message": "Would you like to create a Ghostery account to sync settings across browsers and devices?"
@@ -2236,5 +2101,23 @@
 	},
 	"off": {
 		"message": "Off"
+	},
+	"enhanced_ad_blocking": {
+		"message": "Enhanced Ad Blocking"
+	},
+	"smart_blocking": {
+		"message": "Smart Blocking"
+	},
+	"smart_blocking_DESC": {
+		"message": "Automatically block and unblock trackers to optimize page performance."
+	},
+	"ad_blocking_DESC": {
+		"message": "Block advertisements on the pages you visit."
+	},
+	"anti_tracking_DESC": {
+		"message": "Anonymize personal data for greater protection."
+	},
+	"no_such_email_password_combo": {
+		"message": "Looks like we can't find this email and password combo. Give it another shot."
 	}
 }

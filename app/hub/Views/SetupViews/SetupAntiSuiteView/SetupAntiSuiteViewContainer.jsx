@@ -103,7 +103,7 @@ class SetupAntiSuiteViewContainer extends Component {
 		const features = [
 			{
 				id: 'anti-tracking',
-				name: t('hub_setup_antisuite_name_antitracking'),
+				name: t('enhanced_anti_tracking'),
 				enabled: anti_tracking_enabled,
 				locked: IS_CLIQZ,
 				toggle: IS_CLIQZ ?
@@ -113,20 +113,20 @@ class SetupAntiSuiteViewContainer extends Component {
 			},
 			{
 				id: 'ad-block',
-				name: t('hub_setup_adblock_name_adblocking'),
+				name: t('enhanced_ad_blocking'),
 				enabled: ad_block_enabled,
 				locked: IS_CLIQZ,
 				toggle: IS_CLIQZ ?
 					() => {} :
 					() => this._handleToggle('ad-block'),
-				description: IS_CLIQZ ? t('hub_setup_feature_already_active') : t('hub_setup_adblock_description_adblocking'),
+				description: IS_CLIQZ ? t('hub_setup_feature_already_active') : t('ad_blocking_DESC'),
 			},
 			{
 				id: 'smart-blocking',
-				name: t('hub_setup_smartblocking_name_smartblocking'),
+				name: t('smart_blocking'),
 				enabled: enable_smart_block,
 				toggle: () => this._handleToggle('smart-blocking'),
-				description: t('hub_setup_smartblocking_description_smartblocking'),
+				description: t('smart_blocking_DESC'),
 			}
 		];
 

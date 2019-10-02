@@ -108,7 +108,7 @@ export default (state = initialState, action) => {
 				switch (err.code) {
 					case '10050':
 					case '10110':
-						errorText = t('banner_no_such_account_message');
+						errorText = t('no_such_email_password_combo');
 						break;
 					default:
 						errorText = t('server_error_message');
