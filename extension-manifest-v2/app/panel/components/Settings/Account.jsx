@@ -93,16 +93,20 @@ class Account extends React.Component {
 							<div className="s-vgap-22" />
 							<h5 className={accountName ? '' : 's-hide'} id="settings-account-name">
 								{ t('settings_account_name') }
-:
-								{' '}
-								<span>{ accountName }</span>
+								<span>
+									:
+									{' '}
+									{ accountName }
+								</span>
 							</h5>
 							<div className="s-vgap-4" />
 							<h5>
 								{ t('settings_account_email') }
-:
-								{' '}
-								<span>{ email }</span>
+								<span>
+									:
+									{' '}
+									{ email }
+								</span>
 							</h5>
 							<div className="s-vgap-4" />
 							<p className="s-blue-header" onClick={this.clickEditAccount}>{ t('settings_edit_account') }</p>

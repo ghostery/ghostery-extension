@@ -154,9 +154,11 @@ export default class Panel extends React.Component {
 					/>
 					<p>{this.siteProps.hostName}</p>
 					<p className="trackers-blocked-num">
-						<span className="number">{this.siteProps.nTrackersBlocked}</span>
-						{' '}
-Trackers blocked
+						<span className="number">
+							{this.siteProps.nTrackersBlocked}
+							{' '}
+						</span>
+						Trackers blocked
 					</p>
 				</div>
 				<Tabs>

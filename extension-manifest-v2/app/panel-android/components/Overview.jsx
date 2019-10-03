@@ -78,8 +78,10 @@ export default class Overview extends React.Component {
 					/>
 					<p>{this.hostName}</p>
 					<p className="trackers-blocked-num">
-						<span className="number">{this.nTrackersBlocked}</span>
-						{' '}
+						<span className="number">
+							{this.nTrackersBlocked}
+							{' '}
+						</span>
 						Trackers blocked
 					</p>
 				</div>
