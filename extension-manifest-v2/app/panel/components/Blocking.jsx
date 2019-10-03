@@ -40,7 +40,7 @@ class Blocking extends React.Component {
 	/**
 	 * Lifecycle event
 	 */
-	componentWillMount() {
+	UNSAFE_componentWillMount() {
 		this.updateBlockingClasses(this.props);
 		this.updateSiteNotScanned(this.props);
 	}
@@ -57,7 +57,7 @@ class Blocking extends React.Component {
 	/**
 	 * Lifecycle event
 	 */
-	componentWillReceiveProps(nextProps) {
+	UNSAFE_componentWillReceiveProps(nextProps) {
 		this.updateBlockingClasses(nextProps);
 		this.updateSiteNotScanned(nextProps);
 	}

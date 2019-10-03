@@ -64,7 +64,7 @@ class BlockingHeader extends React.Component {
 	/**
 	 * Lifecycle event
 	 */
-	componentWillReceiveProps(nextProps) {
+	UNSAFE_componentWillReceiveProps(nextProps) {
 		if (nextProps.categories) {
 			this.updateBlockAll(nextProps.categories);
 		}

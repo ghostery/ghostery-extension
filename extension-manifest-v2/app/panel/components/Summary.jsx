@@ -83,7 +83,7 @@ class Summary extends React.Component {
 	/**
 	 * Lifecycle event
 	 */
-	componentWillReceiveProps(nextProps) {
+	UNSAFE_componentWillReceiveProps(nextProps) {
 		this._setTrackerLatency(nextProps);
 		this._updateSiteNotScanned(nextProps);
 

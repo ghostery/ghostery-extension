@@ -42,7 +42,7 @@ class Stats extends React.Component {
 	/**
 	 * Lifecycle event
 	 */
-	componentWillReceiveProps(nextProps) {
+	UNSAFE_componentWillReceiveProps(nextProps) {
 		const nextPlus = this._isPlus(nextProps);
 		const thisPlus = this._isPlus(this.props);
 		if (nextPlus !== thisPlus) {
