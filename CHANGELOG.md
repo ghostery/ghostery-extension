@@ -1,10 +1,11 @@
-### GHOSTERY 8.4.3 (UNRELEASED)
+### GHOSTERY 8.4.3 (October 1, 2019)
 
 + Fixes issue where Detail View is blank when there are only Unknown trackers found (#446)
 + New opt-in flow for Ghostery Rewards (#444)
 + Uncheck email promotions options for create account view (#446)
 + Revert Rewards opt-in setting for Firefox (#446)
 + Compatibility fixes for Cliqz browser (#450, #452, #455)
++ Fixes issue where Ghostery on-boarding Hub appeared on each browser launch (Fixes #456)
 + Fixes issue where site-specific blocking settings did not persist for some users
 + Fixes for AMO build script
 + Update project dependencies
