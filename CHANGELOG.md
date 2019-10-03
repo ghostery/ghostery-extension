@@ -1,3 +1,7 @@
+### GHOSTERY 8.4.4 (UNRELEASED)
+
++
+
 ### GHOSTERY 8.4.3 (October 1, 2019)
 
 + Fixes issue where Detail View is blank when there are only Unknown trackers found (#446)

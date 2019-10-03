@@ -36,7 +36,7 @@ class RewardDetail extends React.Component {
 	/**
 	 * Lifecycle event
 	 */
-	componentWillMount() {
+	UNSAFE_componentWillMount() {
 		this.props.actions.setOfferRead(this.props.id);
 	}
 

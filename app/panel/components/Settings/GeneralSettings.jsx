@@ -32,14 +32,14 @@ class GeneralSettings extends React.Component {
 	/**
 	 * Lifecycle event.
 	 */
-	componentWillMount() {
+	UNSAFE_componentWillMount() {
 		this.updateDbLastUpdated(this.props);
 	}
 
 	/**
 	 * Lifecycle event.
 	 */
-	componentWillReceiveProps(nextProps) {
+	UNSAFE_componentWillReceiveProps(nextProps) {
 		this.updateDbLastUpdated(nextProps);
 	}
 
@@ -77,8 +77,10 @@ class GeneralSettings extends React.Component {
 									{ t('settings_auto_update') }
 								</label>
 								<div className="s-checkbox-label">
-									<span id="last-updated-span">{ t('settings_last_update') }</span>
-									{' '}
+									<span id="last-updated-span">
+										{ t('settings_last_update') }
+										{' '}
+									</span>
 									<span id="last-updated-span-value">{ this.state.dbLastUpdated }</span>
 									<span id="update-now-span" className="s-blue-header" onClick={this.updateDatabase}>
 										{' '}

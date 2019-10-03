@@ -81,6 +81,17 @@ module.exports = {
 		'react/no-access-state-in-setstate': [0], // TODO: enable this check
 		'react/no-danger': [0],
 		'react/prop-types': [0],
+		'react/sort-comp': [2, {
+			order: [
+				"static-variables",
+				"instance-variables",
+				"constructor",
+				"static-methods",
+				"lifecycle",
+				"everything-else",
+				"render"
+			]
+		}],
 
 		// Plugin: JSX-A11y
 		'jsx-a11y/alt-text': [0],
