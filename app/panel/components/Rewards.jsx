@@ -61,7 +61,7 @@ class Rewards extends React.Component {
 	/**
 	 * Lifecycle event
 	 */
-	componentWillReceiveProps(nextProps) {
+	UNSAFE_componentWillReceiveProps(nextProps) {
 		let rewardsArray = null;
 		if (nextProps.rewards) {
 			rewardsArray = Object.keys(nextProps.rewards).map((key) => {

@@ -80,7 +80,6 @@ module.exports = {
 		'react/jsx-props-no-spreading': [0], // TODO: enable this check
 		'react/no-access-state-in-setstate': [0], // TODO: enable this check
 		'react/no-danger': [0],
-		'react/no-deprecated': [1],
 		'react/prop-types': [0],
 		'react/sort-comp': [2, {
 			order: [

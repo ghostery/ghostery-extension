@@ -100,7 +100,7 @@ class DonutGraph extends React.Component {
 	/**
 	 * Lifecycle event
 	 */
-	componentWillReceiveProps(nextProps) {
+	UNSAFE_componentWillReceiveProps(nextProps) {
 		const {
 			categories,
 			adBlock,

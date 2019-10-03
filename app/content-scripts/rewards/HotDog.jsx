@@ -38,7 +38,7 @@ class HotDog extends Component {
 		this.navigate = this.navigate.bind(this);
 	}
 
-	componentWillReceiveProps(nextProps) {
+	UNSAFE_componentWillReceiveProps(nextProps) {
 		if (nextProps.reward && nextProps.reward !== null && !this.shownSignal) {
 			this.props.actions.sendSignal('offer_notification_hotdog');
 			this.shownSignal = true;

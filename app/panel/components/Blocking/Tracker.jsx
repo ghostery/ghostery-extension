@@ -48,14 +48,14 @@ class Tracker extends React.Component {
 	/**
 	 * Lifecycle event.
 	 */
-	componentWillMount() {
+	UNSAFE_componentWillMount() {
 		this.updateTrackerClasses(this.props.tracker);
 	}
 
 	/**
 	 * Lifecycle event.
 	 */
-	componentWillReceiveProps(nextProps) {
+	UNSAFE_componentWillReceiveProps(nextProps) {
 		this.updateTrackerClasses(nextProps.tracker);
 	}
 

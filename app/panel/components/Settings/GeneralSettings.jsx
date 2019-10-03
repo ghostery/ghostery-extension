@@ -32,14 +32,14 @@ class GeneralSettings extends React.Component {
 	/**
 	 * Lifecycle event.
 	 */
-	componentWillMount() {
+	UNSAFE_componentWillMount() {
 		this.updateDbLastUpdated(this.props);
 	}
 
 	/**
 	 * Lifecycle event.
 	 */
-	componentWillReceiveProps(nextProps) {
+	UNSAFE_componentWillReceiveProps(nextProps) {
 		this.updateDbLastUpdated(nextProps);
 	}
 
