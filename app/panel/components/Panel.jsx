@@ -13,6 +13,7 @@
 
 import React from 'react';
 import Header from '../containers/HeaderContainer';
+import Modal from '../../shared-components/Modal';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import { setTheme } from '../utils/utils';
@@ -193,6 +194,10 @@ class Panel extends React.Component {
 		return false;
 	}
 
+	_plusPromoClickHandlerPlaceholder = () => {
+		console.error('IVZ Panfel#_plusPromoClickHandlerPlaceholder');
+	}
+
 	/**
 	 * React's required render function. Returns JSX
 	 * @return {JSX} JSX for rendering the Panel
@@ -207,6 +212,9 @@ class Panel extends React.Component {
 
 		return (
 			<div id="panel">
+				<Modal show>
+					{Modal.renderPlusPromo('inPanel', this._plusPromoClickHandlerPlaceholder)}
+				</Modal>
 				<div className="callout-container">
 					<div className={`${(!notificationText ? 'hide ' : '') + this.props.notificationClasses} callout`}>
 						<svg onClick={this.closeNotification} width="15px" height="15px" viewBox="0 0 15 15" className="close-button">

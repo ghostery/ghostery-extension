@@ -385,6 +385,15 @@
 	"password_field_label_required": {
 		"message": "Password required."
 	},
+	"name": {
+		"description": "The title of this extension (Ghostery).",
+		"message": "$EXTENSION_NAME$ – Privacy Ad Blocker",
+		"placeholders": {
+			"extension_name": {
+				"content": "Ghostery"
+			}
+		}
+	},
 	"none": {
 		"description": "Used to say that this item does not belong to any of the groups, as in \"Groups: None\" (as opposed to \"Groups: Group A, Group B, Group C\").",
 		"message": "None"
@@ -1959,6 +1968,9 @@
 	},
 	"choose_your_privacy_plan": {
 		"message": "Choose your privacy plan"
+	},
+	"choose_your_ghostery_privacy_plan": {
+		"message": "Choose your Ghostery privacy plan"
 	},
 	"ghostery_basic": {
 		"message": "Ghostery Basic"
