@@ -541,6 +541,10 @@ function handleRewards(name, message, callback) {
  */
 function handleGhosteryHub(name, message, callback) {
 	switch (name) {
+		case 'SET_PLUS_PROMO_MODAL_SEEN':
+			// TODO move this to a Promos class?
+			conf.plus_promo_modal_last_seen = Date.now();
+			break;
 		case 'SEND_PING': {
 			const { type } = message;
 			metrics.ping(type);

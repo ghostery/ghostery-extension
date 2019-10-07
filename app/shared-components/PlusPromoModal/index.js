@@ -1,5 +1,5 @@
 /**
- * Modal Sass
+ * Point of entry index.js file for Plus Promo Modal Component
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -11,16 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-// Modal
-.Modal__background,
-.Modal__container {
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-}
-.Modal__background {
-	background-color: rgba(#000000, 0.25);
-	z-index: 9;
-}
+import PlusPromoModal from './PlusPromoModal';
+
+export default PlusPromoModal;

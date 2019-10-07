@@ -15,7 +15,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import QueryString from 'query-string';
 import HomeView from './HomeView';
-import { Modal } from '../../../shared-components';
+import { PlusPromoModal } from '../../../shared-components';
+import { sendMessage } from '../../utils';
 
 /**
  * @class Implement the Home View for the Ghostery Hub
@@ -30,7 +31,6 @@ class HomeViewContainer extends Component {
 		this.state = {
 			getUserResolved: false,
 			justInstalled: justInstalled === 'true',
-			plusPromoModalShown: props.home.plus_promo_modal_shown,
 		};
 
 		const title = t('hub_home_page_title');
@@ -62,17 +62,16 @@ class HomeViewContainer extends Component {
 	 * Dismisses the Plus promo modal when user clicks either the Select Plus or Select Basic button
 	 */
 	_dismissModal = () => {
-		this.setState({
-			plusPromoModalShown: true,
-		});
 		this.props.actions.markPlusPromoModalShown();
+		sendMessage('SET_PLUS_PROMO_MODAL_SEEN', {});
 	}
 
 	_render() {
-		const { justInstalled, plusPromoModalShown } = this.state;
+		const { justInstalled } = this.state;
 		const { home, user } = this.props;
 		const isPlus = user && user.subscriptionsPlus || false;
 		const {
+			plus_promo_modal_shown,
 			setup_complete,
 			tutorial_complete,
 			enable_metrics,
@@ -89,9 +88,11 @@ class HomeViewContainer extends Component {
 
 		return (
 			<div className="full-height">
-				<Modal show={!isPlus && !plusPromoModalShown}>
-					{Modal.renderPlusPromo('inHub', this._dismissModal)}
-				</Modal>
+				<PlusPromoModal
+					show={!isPlus && !plus_promo_modal_shown}
+					location="hub"
+					clickHandler={this._dismissModal}
+				/>
 				<HomeView {...childProps} />
 			</div>
 		);
