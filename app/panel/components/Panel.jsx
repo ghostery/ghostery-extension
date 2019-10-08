@@ -205,6 +205,24 @@ class Panel extends React.Component {
 		});
 	}
 
+	_renderPlusPromoModal = () => {
+		const { plusPromoModalShown } = this.state;
+		const { haveSeenAPlusPromo, isTimeForAPlusPromo } = this.props;
+
+		if (plusPromoModalShown || !isTimeForAPlusPromo) return null;
+
+		const version = haveSeenAPlusPromo ? 'upgrade' : 'initial';
+
+		return (
+			<PlusPromoModal
+				show
+				location="panel"
+				clickHandler={this._plusPromoClickHandlerPlaceholder}
+				version={version}
+			/>
+		);
+	}
+
 	/**
 	 * React's required render function. Returns JSX
 	 * @return {JSX} JSX for rendering the Panel
@@ -217,18 +235,9 @@ class Panel extends React.Component {
 
 		const notificationText = this.props.notificationShown && this.renderNotification();
 
-		const { plusPromoModalShown } = this.state;
-		const { isTimeForAPlusPromo } = this.props;
-
-		const show = !plusPromoModalShown && isTimeForAPlusPromo;
-
 		return (
 			<div id="panel">
-				<PlusPromoModal
-					show={show}
-					location="panel"
-					clickHandler={this._plusPromoClickHandlerPlaceholder}
-				/>
+				{this._renderPlusPromoModal()}
 				<div className="callout-container">
 					<div className={`${(!notificationText ? 'hide ' : '') + this.props.notificationClasses} callout`}>
 						<svg onClick={this.closeNotification} width="15px" height="15px" viewBox="0 0 15 15" className="close-button">
