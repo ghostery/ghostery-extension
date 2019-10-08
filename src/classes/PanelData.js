@@ -27,7 +27,7 @@ import tabInfo from './TabInfo';
 import rewards from './Rewards';
 import account from './Account';
 import dispatcher from './Dispatcher';
-import modalPromos from './ModalPromos';
+import modalPromos from './PromoModals';
 import { getCliqzGhosteryBugs, sendCliqzModuleCounts } from '../utils/cliqzModulesData';
 import { getActiveTab, flushChromeMemoryCache, processUrl } from '../utils/utils';
 import { objectEntries, log } from '../utils/common';

@@ -35,6 +35,10 @@ class Panel extends React.Component {
 		this.closeNotification = this.closeNotification.bind(this);
 		this.clickReloadBanner = this.clickReloadBanner.bind(this);
 		this.filterTrackers = this.filterTrackers.bind(this);
+
+		this.state = {
+			plusPromoModalShown: false,
+		};
 	}
 
 	/**
@@ -232,7 +236,10 @@ class Panel extends React.Component {
 	}
 
 	_plusPromoClickHandlerPlaceholder = () => {
-		console.error('IVZ Panel#_plusPromoClickHandlerPlaceholder');
+		sendMessage('promoModals.sawPlusPromo', {});
+		this.setState({
+			plusPromoModalShown: true
+		});
 	}
 
 	/**
@@ -247,12 +254,13 @@ class Panel extends React.Component {
 
 		const notificationText = this.props.notificationShown && this.renderNotification();
 
+		const { plusPromoModalShown } = this.state;
 		const { isTimeForAnotherPlusPromo } = this.props;
 
 		return (
 			<div id="panel">
 				<PlusPromoModal
-					show={isTimeForAnotherPlusPromo}
+					show={!plusPromoModalShown && isTimeForAnotherPlusPromo}
 					location="panel"
 					clickHandler={this._plusPromoClickHandlerPlaceholder}
 				/>

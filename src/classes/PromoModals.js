@@ -1,5 +1,5 @@
 /**
- * ModalPromos Class
+ * PromoModals Class
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -19,10 +19,10 @@ const DAYS_BETWEEN_PROMOS = {
 const MSECS_IN_DAY = 1000 * 60 * 60 * 24; // msecs-in-sec * secs-in-min * mins-in-hour * hours-in-day
 
 /**
- * Class for handling the business logic for the display of modal promos (Plus, Insights, etc...)
+ * Class for handling the business logic for the display of promo modals (Plus, Insights, etc...)
  * @memberOf  BackgroundClasses
  */
-class ModalPromos {
+class PromoModals {
 	recordPlusPromoSighting() {
 		this._recordPromoSighting('plus');
 	}
@@ -46,4 +46,4 @@ class ModalPromos {
 }
 
 // return the class as a singleton
-export default new ModalPromos();
+export default new PromoModals();
