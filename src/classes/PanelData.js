@@ -27,7 +27,7 @@ import tabInfo from './TabInfo';
 import rewards from './Rewards';
 import account from './Account';
 import dispatcher from './Dispatcher';
-import modalPromos from './PromoModals';
+import promoModals from './PromoModals';
 import { getCliqzGhosteryBugs, sendCliqzModuleCounts } from '../utils/cliqzModulesData';
 import { getActiveTab, flushChromeMemoryCache, processUrl } from '../utils/utils';
 import { objectEntries, log } from '../utils/common';
@@ -366,8 +366,8 @@ class PanelData {
 			is_expert,
 			is_android: globals.BROWSER_INFO.os === 'android',
 			language,
-			isTimeForAPlusPromo: modalPromos.isTimeForAPlusPromo(),
-			haveSeenAPlusPromo: modalPromos.haveSeenAPlusPromo(),
+			isTimeForAPlusPromo: promoModals.isTimeForAPlusPromo(),
+			haveSeenInitialPlusPromo: promoModals.haveSeenInitialPlusPromo(),
 			reload_banner_status,
 			tab_id,
 			trackers_banner_status,

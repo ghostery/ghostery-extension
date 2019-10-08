@@ -244,11 +244,11 @@ class Panel extends React.Component {
 
 	_renderPlusPromoModal = () => {
 		const { plusPromoModalShown } = this.state;
-		const { haveSeenAPlusPromo, isTimeForAPlusPromo } = this.props;
+		const { haveSeenInitialPlusPromo, isTimeForAPlusPromo } = this.props;
 
 		if (plusPromoModalShown || !isTimeForAPlusPromo) return null;
 
-		const version = haveSeenAPlusPromo ? 'upgrade' : 'initial';
+		const version = haveSeenInitialPlusPromo ? PlusPromoModal.UPGRADE : PlusPromoModal.INITIAL;
 
 		return (
 			<PlusPromoModal

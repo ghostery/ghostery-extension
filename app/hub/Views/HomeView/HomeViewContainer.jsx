@@ -92,6 +92,7 @@ class HomeViewContainer extends Component {
 					show={!isPlus && !plus_promo_modal_shown}
 					location="hub"
 					clickHandler={this._dismissModal}
+					version={PlusPromoModal.INITIAL}
 				/>
 				<HomeView {...childProps} />
 			</div>

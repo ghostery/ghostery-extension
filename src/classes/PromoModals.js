@@ -12,12 +12,12 @@
  */
 
 import conf from './Conf';
+import globals from './Globals';
 
 const DAYS_BETWEEN_PROMOS = {
-	plus: 30
+	plus: globals.DEBUG ? 0.00025 : 30,
 };
-const MSECS_IN_DAY = 1000 * 60 * 60 * 24; // msecs-in-sec * secs-in-min * mins-in-hour * hours-in-day
-
+const MSECS_IN_DAY = 86400000; // 1000 msecs-in-sec * 60 secs-in-min * 60 mins-in-hour * 24 hours-in-day
 const PLUS = 'plus';
 const PROMO_MODAL_LAST_SEEN = 'promo_modal_last_seen';
 
@@ -26,18 +26,16 @@ const PROMO_MODAL_LAST_SEEN = 'promo_modal_last_seen';
  * @memberOf  BackgroundClasses
  */
 class PromoModals {
-	haveSeenAPlusPromo() { return this._haveSeenAPromo(PLUS); }
-
-	isTimeForAPlusPromo() { return this._isTimeForAPromo(PLUS); }
-
-	recordPlusPromoSighting() { this._recordPromoSighting(PLUS); }
-
-	_haveSeenAPromo(type) {
-		const lastSeenTime = conf[`${type}_${PROMO_MODAL_LAST_SEEN}`];
+	static haveSeenInitialPlusPromo() {
+		const lastSeenTime = conf[`${PLUS}_${PROMO_MODAL_LAST_SEEN}`];
 		return (lastSeenTime !== null);
 	}
 
-	_isTimeForAPromo(type) {
+	static isTimeForAPlusPromo() { return this._isTimeForAPromo(PLUS); }
+
+	static recordPlusPromoSighting() { this._recordPromoSighting(PLUS); }
+
+	static _isTimeForAPromo(type) {
 		const lastSeenTime = conf[`${type}_${PROMO_MODAL_LAST_SEEN}`];
 
 		if (lastSeenTime === null) { return true; }
@@ -48,10 +46,11 @@ class PromoModals {
 		);
 	}
 
-	_recordPromoSighting(type) {
+	static _recordPromoSighting(type) {
 		conf[`${type}_${PROMO_MODAL_LAST_SEEN}`] = Date.now();
 	}
 }
 
-// return the class as a singleton
-export default new PromoModals();
+// the class is simply a namespace for some static methods,
+// as we do not need to maintain any state
+export default PromoModals;
