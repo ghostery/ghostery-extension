@@ -17,6 +17,7 @@ import ClassNames from 'classnames';
 import RSVP from 'rsvp';
 import { validateEmail } from '../utils/utils';
 import { log } from '../../../src/utils/common';
+import history from '../utils/history';
 
 /**
  * @class Implement Sign In view which opens from 'Sign In' CTA on the Header.
@@ -72,7 +73,14 @@ class Login extends React.Component {
 							})
 							.finally(() => {
 								this.setState({ loading: false }, () => {
-									this.props.history.push(this.props.is_expert ? '/detail/blocking' : '/');
+									// this.props.history.push({
+									// 	pathname: this.props.is_expert ? '/detail/blocking' : '/',
+									// 	state: { showInsightsPromoModal: true }
+									// });
+									history.push({
+										pathname: this.props.is_expert ? '/detail/blocking' : '/',
+										state: { showInsightsPromoModal: true }
+									});
 								});
 							});
 					} else {
@@ -92,6 +100,7 @@ class Login extends React.Component {
 			email, password, emailError, passwordError, loading
 		} = this.state;
 		const buttonClasses = ClassNames('button ghostery-button', { loading });
+		console.log('Login history: ', this.props.location.state);
 		return (
 			<div id="signin-panel">
 				<div className="row align-center">

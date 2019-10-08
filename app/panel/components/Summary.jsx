@@ -17,6 +17,8 @@ import ClassNames from 'classnames';
 import Tooltip from './Tooltip';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
+import { Modal, InsightsPromoModal } from '../../shared-components';
+import history from '../utils/history';
 import globals from '../../../src/classes/Globals';
 import {
 	CliqzFeature,
@@ -46,6 +48,7 @@ class Summary extends React.Component {
 		this.state = {
 			trackerLatencyTotal: 0,
 			disableBlocking: false,
+			showInsightsPromoModal: false
 		};
 
 		// Event Bindings
@@ -78,6 +81,13 @@ class Summary extends React.Component {
 		this._dynamicUIPort = this.context;
 		this._dynamicUIPort.onMessage.addListener(this.handlePortMessage);
 		this._dynamicUIPort.postMessage({ name: 'SummaryComponentDidMount' });
+
+		const showModal = (this.props.location.state && this.props.location.state.showInsightsPromoModal) !== undefined ? this.props.location.state.showInsightsPromoModal : false;
+		const isInsightsSubscriber = (this.props.user && this.props.user.scopes != null) ? this.props.user.scopes.includes('subscriptions:insights') : false;
+
+		if (!isInsightsSubscriber && showModal) {
+			this.toggleModal();
+		}
 	}
 
 	/**
@@ -97,6 +107,16 @@ class Summary extends React.Component {
 	componentWillUnmount() {
 		this._dynamicUIPort.postMessage({ name: 'SummaryComponentWillUnmount' });
 		this._dynamicUIPort.onMessage.removeListener(this.handlePortMessage);
+	}
+
+	/**
+	* Function to toggle the Modal
+	*/
+	toggleModal = () => {
+		const { showInsightsPromoModal } = this.state;
+		this.setState({
+			showInsightsPromoModal: !showInsightsPromoModal
+		});
 	}
 
 	/**
@@ -245,6 +265,7 @@ class Summary extends React.Component {
 			this.props.history.push(`/detail/${subview}`);
 		}
 	}
+
 
 	/**
 	 * Calculates total tracker latency and sets it to state
@@ -792,39 +813,46 @@ class Summary extends React.Component {
 			'Summary--condensed': isCondensed,
 		});
 
+		// console.log('history: ', this.props.location.state);
+
 		return (
-			<div className={summaryClassNames}>
-				{!isCondensed && disableBlocking && (<NotScanned isSmall={is_expert} />)}
-				{!isCondensed && !disableBlocking && this._renderDonut()}
-				{!isCondensed && !disableBlocking && this._renderPageHostReadout()}
+			<>
+				<Modal show={this.state.showInsightsPromoModal}>
+					<InsightsPromoModal toggleModal={this.toggleModal} />
+				</Modal>
+				<div className={summaryClassNames}>
+					{!isCondensed && disableBlocking && (<NotScanned isSmall={is_expert} />)}
+					{!isCondensed && !disableBlocking && this._renderDonut()}
+					{!isCondensed && !disableBlocking && this._renderPageHostReadout()}
 
-				{isCondensed && !disableBlocking && this._renderTotalTrackersFound()}
+					{isCondensed && !disableBlocking && this._renderTotalTrackersFound()}
 
-				<div className="Summary__pageStatsContainer">
-					{!disableBlocking && this._renderTotalTrackersBlocked()}
-					{!disableBlocking && this._renderTotalRequestsModified()}
-					{!disableBlocking && this._renderPageLoadTime()}
+					<div className="Summary__pageStatsContainer">
+						{!disableBlocking && this._renderTotalTrackersBlocked()}
+						{!disableBlocking && this._renderTotalRequestsModified()}
+						{!disableBlocking && this._renderPageLoadTime()}
+					</div>
+
+					{isCondensed && disableBlocking && (
+						<div className="Summary__spaceTaker" />
+					)}
+
+					<div className="Summary__ghosteryFeaturesContainer">
+						{this._renderGhosteryFeature('trust')}
+						{this._renderGhosteryFeature('restrict', 'Summary__ghosteryFeatureContainer--middle')}
+						{this._renderPauseButton()}
+					</div>
+					<div className="Summary__cliqzFeaturesContainer">
+						{this._renderCliqzAntiTracking()}
+						{this._renderCliqzAdBlock()}
+						{this._renderCliqzSmartBlock()}
+					</div>
+					{this._renderStatsNavicon()}
+					{enable_offers && this._renderRewardsNavicon()}
+
+					{!isCondensed && this._renderPlusUpgradeBannerOrSubscriberIcon()}
 				</div>
-
-				{isCondensed && disableBlocking && (
-					<div className="Summary__spaceTaker" />
-				)}
-
-				<div className="Summary__ghosteryFeaturesContainer">
-					{this._renderGhosteryFeature('trust')}
-					{this._renderGhosteryFeature('restrict', 'Summary__ghosteryFeatureContainer--middle')}
-					{this._renderPauseButton()}
-				</div>
-				<div className="Summary__cliqzFeaturesContainer">
-					{this._renderCliqzAntiTracking()}
-					{this._renderCliqzAdBlock()}
-					{this._renderCliqzSmartBlock()}
-				</div>
-				{this._renderStatsNavicon()}
-				{enable_offers && this._renderRewardsNavicon()}
-
-				{!isCondensed && this._renderPlusUpgradeBannerOrSubscriberIcon()}
-			</div>
+			</>
 		);
 	}
 }

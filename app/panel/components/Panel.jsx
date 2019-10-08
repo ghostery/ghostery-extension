@@ -17,8 +17,7 @@ import Header from '../containers/HeaderContainer';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import { setTheme } from '../utils/utils';
-import { Modal } from '../../shared-components';
-import ModalExitButton from '../../shared-components/ModalExitButton/ModalExitButton';
+import { Modal, InsightsPromoModal, ModalExitButton } from '../../shared-components';
 import { login } from '../../Account/AccountActions';
 /**
  * @class Implement base view with functionality common to all views.
@@ -86,16 +85,15 @@ class Panel extends React.Component {
 	generateModal = () => {
 		const { loggedIn, user } = this.props;
 		const { hasEngagedFrequently } = this.state;
+		console.log('user', user);
+		const isInsightsSubscriber = (user && user.scopes != null) ? user.scopes.includes('subscriptions:insights') : false;
 		if (!loggedIn && hasEngagedFrequently) {
 			return true;
 		}
-		return hasEngagedFrequently && loggedIn && !user.scopes.includes('subscriptions:insights');
+
+		return hasEngagedFrequently && loggedIn && isInsightsSubscriber;
 	}
 
-	clickSignIn = () => {
-		this.props.history.push('/login');
-		this.setState({ hasEngagedFrequently: false });
-	}
 
 	/**
 	 * Reload the current tab
@@ -315,7 +313,7 @@ class Panel extends React.Component {
 				</div>
 				<Header />
 				<Modal show={this.generateModal()}>
-					{this.renderModalChildren()}
+					<InsightsPromoModal toggleModal={this.toggleModal} />
 				</Modal>
 				<DynamicUIPortContext.Provider value={this._dynamicUIPort}>
 					{ this.props.children }
