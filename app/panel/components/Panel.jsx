@@ -12,12 +12,14 @@
  */
 
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import Header from '../containers/HeaderContainer';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import { setTheme } from '../utils/utils';
 import { Modal } from '../../shared-components';
 import ModalExitButton from '../../shared-components/ModalExitButton/ModalExitButton';
+import { login } from '../../Account/AccountActions';
 /**
  * @class Implement base view with functionality common to all views.
  * @memberof PanelClasses
@@ -26,7 +28,7 @@ class Panel extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			showModal: true
+			hasEngagedFrequently: true
 		};
 
 		// event bindings
@@ -40,7 +42,6 @@ class Panel extends React.Component {
 	 */
 	componentDidMount() {
 		sendMessage('ping', 'engaged');
-
 		this._dynamicUIDataInitialized = false;
 		this._dynamicUIPort = chrome.runtime.connect({ name: 'dynamicUIPanelPort' });
 		this._dynamicUIPort.onMessage.addListener((msg) => {
@@ -54,6 +55,15 @@ class Panel extends React.Component {
 				this.props.actions.updatePanelData(body);
 			}
 		});
+
+		chrome.runtime.onMessage.addListener((request) => {
+			if (request.name === 'hasEngagedFrequently') {
+				this.setState({
+					...this.state,
+					hasEngagedFrequently: true
+				});
+			}
+		});
 	}
 
 	/**
@@ -64,74 +74,37 @@ class Panel extends React.Component {
 	}
 
 	/**
-	* Function to handle clicking yes on the Modal
-	*/
-	_answerModalYes = () => {
-		this._toggleModal();
-	}
-
-	/**
 	* Function to toggle the Modal
 	*/
-	_toggleModal = () => {
-		const { showModal } = this.state;
+	toggleModal = () => {
+		const { hasEngagedFrequently } = this.state;
 		this.setState({
-			showModal: !showModal,
+			hasEngagedFrequently: !hasEngagedFrequently
 		});
 	}
 
-	_renderModalChildren() {
-		return (
-			<div className="InsightsModal__content flex-container flex-dir-column align-middle">
-				<ModalExitButton exitModal={this._toggleModal} className="InsightsModal__exitButton" hrefExit="Test" textExit="" />
-				<div className="InsightsModal__image" />
-				<div className="InsightsModal__header">
-					Try Ghostery Insights
-				</div>
-				<div className="InsightsModal__description">
-					Speed up and clean up digital user experience with our professional tag analytics tool.
-				</div>
-				<div className="flex-container">
-					<div className="flex-container flex-dir-column InsightsModal__feature-column-1">
-						<div className="flex-container align-middle">
-							<span className="InsightsModal__checkedCircleIcon" />
-							<div className="InsightsModal__featureText">
-								Audit marketing tags on a page
-							</div>
-						</div>
-						<div className="flex-container align-middle">
-							<span className="InsightsModal__checkedCircleIcon" />
-							<span className="InsightsModal__featureText">
-								Trace sources of poor performance
-							</span>
-						</div>
-					</div>
-					<div className="InsightsModal__feature-column-2 flex-container flex-dir-column">
-						<div className="flex-container align-middle">
-							<span className="InsightsModal__checkedCircleIcon" />
-							<span className="InsightsModal__featureText">
-								Watch pings fire in real-time
-							</span>
-						</div>
-						<div className="flex-container align-middle">
-							<span className="InsightsModal__checkedCircleIcon" />
-							<span className="InsightsModal__featureText">
-								Explore global digital trends
-							</span>
-						</div>
-					</div>
-				</div>
-				<div className="InsightsModal__callToActionContainer flex-container flex-dir-column">
-					<button type="button" className="btn InsightsModal__callToAction align-self-middle">
-						<span className="InsightsModal__callToActionText">CTA TEXT</span>
-					</button>
-					<div className="InsightsModal__otherOptionsContainer flex-container align-justify">
-						<a className="InsightsModal__link">Already an Insights subscriber?</a>
-						<a onClick={this._toggleModal} className="InsightsModal__link">No thanks, maybe later</a>
-					</div>
-				</div>
-			</div>
-		);
+	generateModal = () => {
+		const { loggedIn, user } = this.props;
+		const { hasEngagedFrequently } = this.state;
+		if (!loggedIn && hasEngagedFrequently) {
+			return true;
+		}
+		return hasEngagedFrequently && loggedIn && !user.scopes.includes('subscriptions:insights');
+	}
+
+	clickSignIn = () => {
+		this.props.history.push('/login');
+		this.setState({ hasEngagedFrequently: false });
+	}
+
+	/**
+	 * Reload the current tab
+	 * @param  {Object} event
+	 * @todo  Why do we need explicit argument here?
+	 */
+	clickReloadBanner() {
+		sendMessage('reloadTab', { tab_id: +this.props.tab_id });
+		window.close();
 	}
 
 	/**
@@ -157,16 +130,6 @@ class Panel extends React.Component {
 	}
 
 	/**
-	 * Reload the current tab
-	 * @param  {Object} event
-	 * @todo  Why do we need explicit argument here?
-	 */
-	clickReloadBanner() {
-		sendMessage('reloadTab', { tab_id: +this.props.tab_id });
-		window.close();
-	}
-
-	/**
 	 * Filter trackers when clicking on compatibility/slow
 	 * tracker notifications and trigger appropriate action.
 	 * @param  {Object} event
@@ -187,12 +150,12 @@ class Panel extends React.Component {
 
 		this.closeNotification();
 	}
-
 	/**
 	 * Dynamic UI data port first payload handling
 	 * Called once, when we get the first message from the background through the port
 	 * @param	{Object}	payload		the body of the message
 	 */
+
 	_initializeData(payload) {
 		this._dynamicUIDataInitialized = true;
 
@@ -270,6 +233,60 @@ class Panel extends React.Component {
 		return false;
 	}
 
+	renderModalChildren() {
+		return (
+			<div className="InsightsModal__content flex-container flex-dir-column align-middle">
+				<ModalExitButton exitModal={this.toggleModal} className="InsightsModal__exitButton" hrefExit="Test" textExit="" />
+				<div className="InsightsModal__image" />
+				<div className="InsightsModal__header">
+					Try Ghostery Insights
+				</div>
+				<div className="InsightsModal__description">
+					Speed up and clean up digital user experience with our professional tag analytics tool.
+				</div>
+				<div className="flex-container">
+					<div className="flex-container flex-dir-column InsightsModal__feature-column-1">
+						<div className="flex-container align-middle">
+							<span className="InsightsModal__checkedCircleIcon" />
+							<div className="InsightsModal__featureText">
+								Audit marketing tags on a page
+							</div>
+						</div>
+						<div className="flex-container align-middle">
+							<span className="InsightsModal__checkedCircleIcon" />
+							<span className="InsightsModal__featureText">
+								Trace sources of poor performance
+							</span>
+						</div>
+					</div>
+					<div className="InsightsModal__feature-column-2 flex-container flex-dir-column">
+						<div className="flex-container align-middle">
+							<span className="InsightsModal__checkedCircleIcon" />
+							<span className="InsightsModal__featureText">
+								Watch pings fire in real-time
+							</span>
+						</div>
+						<div className="flex-container align-middle">
+							<span className="InsightsModal__checkedCircleIcon" />
+							<span className="InsightsModal__featureText">
+								Explore global digital trends
+							</span>
+						</div>
+					</div>
+				</div>
+				<div className="InsightsModal__callToActionContainer flex-container flex-dir-column">
+					<a href="https://www.ghostery.com/insights/" target="_blank" rel="noopener noreferrer" className="btn InsightsModal__callToAction align-self-middle">
+						<span className="InsightsModal__callToActionText flex-container align-center">Try for free</span>
+					</a>
+					<div className="InsightsModal__otherOptionsContainer flex-container align-justify">
+						<span onClick={this.clickSignIn} className="InsightsModal__link">Already a subscriber? Sign in</span>
+						<span onClick={this.toggleModal} className="InsightsModal__link">No thanks, maybe later</span>
+					</div>
+				</div>
+			</div>
+		);
+	}
+
 	/**
 	 * React's required render function. Returns JSX
 	 * @return {JSX} JSX for rendering the Panel
@@ -280,7 +297,6 @@ class Panel extends React.Component {
 			return null;
 		}
 
-		const { showModal } = this.state;
 		const notificationText = this.props.notificationShown && this.renderNotification();
 
 		return (
@@ -298,8 +314,8 @@ class Panel extends React.Component {
 					</div>
 				</div>
 				<Header />
-				<Modal show={showModal}>
-					{this._renderModalChildren()}
+				<Modal show={this.generateModal()}>
+					{this.renderModalChildren()}
 				</Modal>
 				<DynamicUIPortContext.Provider value={this._dynamicUIPort}>
 					{ this.props.children }

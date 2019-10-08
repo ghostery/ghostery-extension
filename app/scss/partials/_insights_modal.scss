@@ -87,11 +87,18 @@
 	font-family: 'Roboto Condensed';
 	letter-spacing: .5px;
 	color: #FFFFFF;
+	line-height: 36px;
 }
 .InsightsModal__link {
 	font-family: 'Roboto';
 	font-size: 15px;
 	color: #4a4a4a;
+	&:hover {
+		cursor: pointer;
+		color: $ghosty-blue;
+		text-decoration: underline;
+		text-decoration-color: $link-blue;
+	}
 
 }
 .InsightsModal__otherOptionsContainer {

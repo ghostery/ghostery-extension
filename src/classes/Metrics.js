@@ -16,6 +16,8 @@ import conf from './Conf';
 import { log, prefsSet, prefsGet } from '../utils/common';
 import { getActiveTab, processUrlQuery } from '../utils/utils';
 import rewards from './Rewards';
+import { sendMessage } from '../../app/panel/utils/msg';
+// import getUserSubscriptionData from './Account';
 
 // CONSTANTS
 const FREQUENCIES = { // in milliseconds
@@ -209,6 +211,7 @@ class Metrics {
 				this._recordActive();
 				break;
 			case 'engaged':
+				this._recordEngagedWithRepeats();
 				this._recordEngaged();
 				break;
 
@@ -748,7 +751,7 @@ class Metrics {
 	 */
 	_recordEngaged() {
 		const engaged_daily_velocity = conf.metrics.engaged_daily_velocity || [];
-		const today = Math.floor(Number(new Date().getTime()) / 86400000);
+		const today = Math.floor(Number(new Date().getTime()) / 86400000); // Today's time
 		engaged_daily_velocity.sort();
 		if (!engaged_daily_velocity.includes(today)) {
 			engaged_daily_velocity.push(today);
@@ -756,9 +759,58 @@ class Metrics {
 				engaged_daily_velocity.shift();
 			}
 		}
-		conf.metrics.engaged_daily_velocity = engaged_daily_velocity;
 
+		conf.metrics.engaged_daily_velocity = engaged_daily_velocity;
 		this._sendReq('engaged', ['daily', 'weekly', 'monthly']);
+	}
+
+	/**
+	 * Record Engaged event multiple times in a day
+	 * TODO: Save engaged_daily_velocity_with_repeats to chrome extension storage.
+	 * Current Result: engaged_daily_velocity_with_repeats is saved inside the chrome extension storage, but always is an array with 1 element (today).
+	 * 				   This suggests that conf.metrics.engaged_daily_velocity_with_repeats is an empty array in the beginning, but console.logs are showing correct logic.
+	 * What I have tried: JSON.stringifying the object, using ES6 spread instead of the push since setting an array directly seems to work, checking to see if conf.metrics.engaged_daily_velocity_with_repeats is undefined
+	 * @private
+	 */
+	_recordEngagedWithRepeats() {
+		const engaged_daily_velocity_with_repeats = conf.metrics.engaged_daily_velocity_with_repeats || [];
+		console.log('Accessing engaged_daily_velocity_with_repeats: ', engaged_daily_velocity_with_repeats);
+		const today = Math.floor(Number(new Date().getTime()) / 86400000); // Today's time
+		engaged_daily_velocity_with_repeats.push(today);
+		conf.metrics.engaged_daily_velocity_with_repeats = engaged_daily_velocity_with_repeats;
+		console.log('Accessing engaged_daily_velocity_with_repeats after pushing today: ', engaged_daily_velocity_with_repeats);
+		if (this._hasEngagedFrequently()) {
+			sendMessage('hasEngagedFrequently', '', 'metrics');
+		}
+	}
+
+	/**
+	* Toggle the insights promotion if a user has opened the panel 3 times per day for at least 3 days in the past 7 days
+	* @private
+	*/
+	_hasEngagedFrequently = () => 	{
+		const today = new Date().getTime();
+		const THIRTY_DAYS = 1000 * 60 * 60 * 24 * 30;
+		const insights_promo_modal_last_seen = Number(conf.insights_promo_modal_last_seen) || null; // TODO: Add logic for plus_promotion_last_seen
+		const hasSeenPromotionInPastMonth = today - insights_promo_modal_last_seen <= THIRTY_DAYS;
+		if (!hasSeenPromotionInPastMonth) {
+			const { engaged_daily_velocity_with_repeats } = conf.metrics;
+			const pastSevenDays = Array.from(new Set(engaged_daily_velocity_with_repeats));
+			let timesPerWeek = 0;
+
+			for (let i = 0; i < pastSevenDays.length; i++) {
+				const engagementsEachDay = engaged_daily_velocity_with_repeats.filter(day => day === pastSevenDays[i]).length;
+				if (engagementsEachDay >= 3) {
+					timesPerWeek++;
+				}
+			}
+
+			if (timesPerWeek >= 3) {
+				conf.insights_promo_modal_last_seen = today;
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**

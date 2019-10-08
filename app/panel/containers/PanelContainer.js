@@ -27,10 +27,10 @@ import { updateBlockingData } from '../actions/BlockingActions';
  * @todo  We are not using ownProps, so we better not specify it explicitly,
  * in this case it won't be passed by React (see https://github.com/reactjs/react-redux/blob/master/docs/api.md).
  */
-const mapStateToProps = state => Object.assign({}, state.panel, state.drawer, {
+const mapStateToProps = state => Object.assign({}, state.panel, state.drawer, state.account, {
 	paused_blocking: state.summary.paused_blocking,
 	sitePolicy: state.summary.sitePolicy,
-	trackerCounts: state.summary.trackerCounts,
+	trackerCounts: state.summary.trackerCounts
 });
 /**
  * Bind Panel view component action creators using Redux's bindActionCreators
