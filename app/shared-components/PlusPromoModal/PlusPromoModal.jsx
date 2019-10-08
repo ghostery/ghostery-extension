@@ -17,12 +17,8 @@ import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import Modal from '../Modal/Modal';
 
-/**
- * A Functional React component for a Plus Promo Modal
- * @return {JSX} JSX for rendering a Plus Promo Modal
- * @memberof SharedComponents
- */
-const PlusPromoModal = (props) => {
+// TODO refactor to reduce duplication alongside implementing _renderUpgradeVersion for GH-1813
+function _renderInitialVersion(props) {
 	const { show, location, clickHandler } = props;
 
 	const isInHub = location === 'hub';
@@ -126,13 +122,62 @@ const PlusPromoModal = (props) => {
 			</div>
 		</Modal>
 	);
+}
+
+// TODO flesh out this stub for https://cliqztix.atlassian.net/browse/GH-1813
+function _renderUpgradeVersion(props) {
+	const { clickHandler, location, show } = props;
+
+	const isInHub = location === 'hub';
+
+	const locationClassName = {
+		'in-hub': isInHub,
+		'in-panel': location === 'panel'
+	};
+	const contentClassNames = ClassNames(
+		'PlusPromoModal__content',
+		'flex-container',
+		'flex-dir-column',
+		'align-middle',
+		locationClassName
+	);
+
+	return (
+		<Modal show={show}>
+			<div className={contentClassNames}>
+				<div className="PlusPromoModal__thanks-for-download">[Upgrade version of the Plus Promo modal]</div>
+				<div className="PlusPromoModal__button basic button" onClick={clickHandler}>
+					<span>Dismiss</span>
+				</div>
+			</div>
+		</Modal>
+	);
+}
+
+/**
+ * A Functional React component for a Plus Promo Modal
+ * @return {JSX} JSX for rendering a Plus Promo Modal
+ * @memberof SharedComponents
+ */
+const PlusPromoModal = (props) => {
+	const { version } = props;
+
+	if (version === PlusPromoModal.INITIAL) { return _renderInitialVersion(props); }
+
+	if (version === PlusPromoModal.UPGRADE) { return _renderUpgradeVersion(props); }
+
+	return null;
 };
+
+PlusPromoModal.UPGRADE = 1;
+PlusPromoModal.INITIAL = 2;
 
 // PropTypes ensure we pass required props of the correct type
 PlusPromoModal.propTypes = {
 	show: PropTypes.bool.isRequired,
 	location: PropTypes.string.isRequired,
 	clickHandler: PropTypes.func.isRequired,
+	version: PropTypes.oneOf([PlusPromoModal.UPGRADE, PlusPromoModal.INITIAL]).isRequired,
 };
 
 export default PlusPromoModal;
