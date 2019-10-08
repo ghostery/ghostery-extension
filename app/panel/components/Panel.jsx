@@ -218,12 +218,14 @@ class Panel extends React.Component {
 		const notificationText = this.props.notificationShown && this.renderNotification();
 
 		const { plusPromoModalShown } = this.state;
-		const { isTimeForAnotherPlusPromo } = this.props;
+		const { isTimeForAPlusPromo } = this.props;
+
+		const show = !plusPromoModalShown && isTimeForAPlusPromo;
 
 		return (
 			<div id="panel">
 				<PlusPromoModal
-					show={!plusPromoModalShown && isTimeForAnotherPlusPromo}
+					show={show}
 					location="panel"
 					clickHandler={this._plusPromoClickHandlerPlaceholder}
 				/>
