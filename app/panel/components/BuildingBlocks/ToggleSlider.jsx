@@ -35,7 +35,7 @@ class ToggleSlider extends React.Component {
 	/**
 	 * Lifecycle event
 	 */
-	componentWillReceiveProps(nextProps) {
+	UNSAFE_componentWillReceiveProps(nextProps) {
 		this.setState({
 			checked: nextProps.isChecked,
 		});

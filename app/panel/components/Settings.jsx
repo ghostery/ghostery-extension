@@ -49,7 +49,7 @@ class Settings extends React.Component {
 	/**
 	 * Lifecycle event. Default sub view is set here.
 	 */
-	componentWillMount() {
+	UNSAFE_componentWillMount() {
 		this.props.history.push('/settings/globalblocking');
 	}
 

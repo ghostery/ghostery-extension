@@ -32,7 +32,7 @@ class Detail extends React.Component {
 	/**
 	 * Lifecycle event
 	 */
-	componentWillMount() {
+	UNSAFE_componentWillMount() {
 		// set default tab / route based on how we got to this view:
 		// did the user click the Rewards icon? Or the donut number / Detailed View tab in the header?
 		const location = this.props.history.location.pathname;

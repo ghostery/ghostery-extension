@@ -31,8 +31,10 @@ class TrackersChart extends React.Component {
 			<div className="trackers-chart">
 				<ChartSVG paths={this.props.paths} radius={this.state.config.radius} />
 				<p className="trackers-num">
-					<span>{this.props.num}</span>
-					{' '}
+					<span>
+						{this.props.num}
+						{' '}
+					</span>
 					<span>Trackers found</span>
 				</p>
 			</div>

@@ -51,7 +51,7 @@ class Category extends React.Component {
 	 * Lifecycle event. When props changed we save in state new values
 	 * to ensure correct rendering.
 	 */
-	componentWillReceiveProps(nextProps) {
+	UNSAFE_componentWillReceiveProps(nextProps) {
 		this.updateCategoryExpanded(nextProps.expandAll);
 		this.updateCategoryCheckbox(nextProps.category);
 	}

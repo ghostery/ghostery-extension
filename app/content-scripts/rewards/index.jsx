@@ -86,7 +86,7 @@ class RewardsApp {
 
 	renderReact() {
 		const MainView = this.mainView;
-		ReactDOM.render(<MainView reward={this.reward} conf={this.conf} actions={this.actions} />, this.rewardsApp);
+		ReactDOM.render(<MainView reward={this.reward} conf={this.conf} port={this.port} actions={this.actions} />, this.rewardsApp);
 	}
 
 	renderShadow() {
@@ -107,19 +107,19 @@ class RewardsApp {
 					exact
 					path="/"
 					render={
-						() => <OfferCard reward={props.reward} conf={props.conf} port={this.port} actions={props.actions} />
+						() => <OfferCard reward={props.reward} conf={props.conf} port={props.port} actions={props.actions} />
 					}
 				/>
 				<Route
 					path="/hotdog"
 					render={
-						() => <HotDog reward={props.reward} port={this.port} actions={props.actions} />
+						() => <HotDog reward={props.reward} port={props.port} actions={props.actions} />
 					}
 				/>
 				<Route
 					path="/offercard"
 					render={
-						() => <OfferCard reward={props.reward} conf={props.conf} port={this.port} actions={props.actions} />
+						() => <OfferCard reward={props.reward} conf={props.conf} port={props.port} actions={props.actions} />
 					}
 				/>
 			</Router>
@@ -148,19 +148,19 @@ class RewardsApp {
 							exact
 							path="/"
 							render={
-								() => <OfferCard reward={props.reward} conf={props.conf} port={this.port} actions={props.actions} />
+								() => <OfferCard reward={props.reward} conf={props.conf} port={props.port} actions={props.actions} />
 							}
 						/>
 						<Route
 							path="/hotdog"
 							render={
-								() => <HotDog reward={props.reward} port={this.port} actions={props.actions} />
+								() => <HotDog reward={props.reward} port={props.port} actions={props.actions} />
 							}
 						/>
 						<Route
 							path="/offercard"
 							render={
-								() => <OfferCard reward={props.reward} conf={props.conf} port={this.port} actions={props.actions} />
+								() => <OfferCard reward={props.reward} conf={props.conf} port={props.port} actions={props.actions} />
 							}
 						/>
 					</div>
