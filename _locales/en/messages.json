@@ -1878,9 +1878,6 @@
 	"panel_stats_menu_daily": {
 		"message": "Daily"
 	},
-	"panel_stats_header_title": {
-		"message": "Historical Tracker Stats"
-	},
 	"panel_stats_header_title_monthly": {
 		"message": "Historical Tracker Stats (Monthly Avg.)"
 	},
@@ -2033,6 +2030,9 @@
 	"select_basic": {
 		"message": "Select Basic"
 	},
+	"select_plus": {
+		"message": "Select Plus"
+	},
 	"recommended": {
 		"message": "Recommended"
 	},
@@ -2131,5 +2131,14 @@
 	},
 	"no_such_email_password_combo": {
 		"message": "Looks like we can't find this email and password combo. Give it another shot."
+	},
+	"all_basic_features_plus_COLON": {
+		"message": "All basic features, plus:"
+	},
+	"historical_tracker_stats": {
+		"message": "Historical Tracker Stats"
+	},
+	"new_color_themes": {
+		"message": "New Color Themes"
 	}
 }

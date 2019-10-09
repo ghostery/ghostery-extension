@@ -17,7 +17,6 @@ import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import Modal from '../Modal/Modal';
 
-// TODO refactor to reduce duplication alongside implementing _renderUpgradeVersion for GH-1813
 function _renderInitialVersion(props) {
 	const { show, location, clickHandler } = props;
 
@@ -52,6 +51,7 @@ function _renderInitialVersion(props) {
 		locationClassName
 	);
 
+	// TODO refactor for clarity & concision alongside implementing _renderUpgradeVersion for GH-1813
 	return (
 		<Modal show={show}>
 			<div className={contentClassNames}>
@@ -91,31 +91,31 @@ function _renderInitialVersion(props) {
 								<img src="/app/images/hub/home/recommended-banner.svg" />
 								<div className="PlusPromoModal__recommended-banner-text">{t('recommended')}</div>
 							</div>
-							<div className="PlusPromoModal__option-header plus">Ghostery Plus</div>
+							<div className="PlusPromoModal__option-header plus">{t('ghostery_plus')}</div>
 							<div className="PlusPromoModal__price-text plus">
 								<span className="PlusPromoModal__currency-sign">{t('locale_appropriate_currency_icon')}</span>
 								<span className="PlusPromoModal__amount">{t('plus_monthly_subscription_price_number')}</span>
 								<span> </span>
-								<span className="PlusPromoModal__per-month">per month</span>
+								<span className="PlusPromoModal__per-month">{t('per month')}</span>
 							</div>
 							<div className="PlusPromoModal__option-description">
-								<div className="PlusPromoModal__option-description-item italic">All basic features, plus:</div>
+								<div className="PlusPromoModal__option-description-item italic">{t('all_basic_features_plus_COLON')}</div>
 								<div className="PlusPromoModal__plus-option-description-item-container">
 									<img className="PlusPromoModal__check-icon" src="/app/images/hub/home/check-icon.svg" />
-									<div className="PlusPromoModal__option-description-item">Historical Tracker Stats</div>
+									<div className="PlusPromoModal__option-description-item">{t('historical_tracker_stats')}</div>
 								</div>
 								<div className="PlusPromoModal__plus-option-description-item-container">
 									<img className="PlusPromoModal__check-icon" src="/app/images/hub/home/check-icon.svg" />
-									<div className="PlusPromoModal__option-description-item">Priority Support</div>
+									<div className="PlusPromoModal__option-description-item">{t('priority_support')}</div>
 								</div>
 								<div className="PlusPromoModal__plus-option-description-item-container">
 									<img className="PlusPromoModal__check-icon" src="/app/images/hub/home/check-icon.svg" />
-									<div className="PlusPromoModal__option-description-item">New Color Themes</div>
+									<div className="PlusPromoModal__option-description-item">{t('new_color_themes')}</div>
 								</div>
 							</div>
 						</div>
 						<a href="http://signon.ghostery.com/en/subscribe/" target="_blank" rel="noopener noreferrer" className="PlusPromoModal__button plus button" onClick={clickHandler}>
-							<span>Select Plus</span>
+							<span>{t('select_plus')}</span>
 						</a>
 					</div>
 				</div>
@@ -169,15 +169,15 @@ const PlusPromoModal = (props) => {
 	return null;
 };
 
-PlusPromoModal.UPGRADE = 1;
-PlusPromoModal.INITIAL = 2;
+PlusPromoModal.INITIAL = 1;
+PlusPromoModal.UPGRADE = 2;
 
 // PropTypes ensure we pass required props of the correct type
 PlusPromoModal.propTypes = {
 	show: PropTypes.bool.isRequired,
 	location: PropTypes.string.isRequired,
 	clickHandler: PropTypes.func.isRequired,
-	version: PropTypes.oneOf([PlusPromoModal.UPGRADE, PlusPromoModal.INITIAL]).isRequired,
+	version: PropTypes.oneOf([PlusPromoModal.INITIAL, PlusPromoModal.UPGRADE]).isRequired,
 };
 
 export default PlusPromoModal;
