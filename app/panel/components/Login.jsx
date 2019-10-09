@@ -73,10 +73,6 @@ class Login extends React.Component {
 							})
 							.finally(() => {
 								this.setState({ loading: false }, () => {
-									// this.props.history.push({
-									// 	pathname: this.props.is_expert ? '/detail/blocking' : '/',
-									// 	state: { showInsightsPromoModal: true }
-									// });
 									history.push({
 										pathname: this.props.is_expert ? '/detail/blocking' : '/',
 										state: { showInsightsPromoModal: true }
@@ -100,7 +96,6 @@ class Login extends React.Component {
 			email, password, emailError, passwordError, loading
 		} = this.state;
 		const buttonClasses = ClassNames('button ghostery-button', { loading });
-		console.log('Login history: ', this.props.location.state);
 		return (
 			<div id="signin-panel">
 				<div className="row align-center">

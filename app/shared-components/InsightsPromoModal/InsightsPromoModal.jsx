@@ -18,7 +18,7 @@ import history from '../../panel/utils/history';
 import ModalExitButton from '../ModalExitButton/ModalExitButton';
 
 // A Functional React component for a Modal
-const InsightsPromoModal = ({ toggleModal }) => {
+const InsightsPromoModal = ({ show, toggleModal }) => {
 	const clickSignIn = () => {
 		history.push({
 			pathname: '/login',
@@ -27,61 +27,64 @@ const InsightsPromoModal = ({ toggleModal }) => {
 		toggleModal();
 	};
 	return (
-		<div className="InsightsModal__content flex-container flex-dir-column align-middle">
-			<ModalExitButton exitModal={toggleModal} className="InsightsModal__exitButton" hrefExit="Test" textExit="" />
-			<div className="InsightsModal__image" />
-			<div className="InsightsModal__header">
-				Try Ghostery Insights
-			</div>
-			<div className="InsightsModal__description">
-				Speed up and clean up digital user experience with our professional tag analytics tool.
-			</div>
-			<div className="flex-container">
-				<div className="flex-container flex-dir-column InsightsModal__feature-column-1">
-					<div className="flex-container align-middle">
-						<span className="InsightsModal__checkedCircleIcon" />
-						<div className="InsightsModal__featureText">
-							Audit marketing tags on a page
+		<Modal show={show}>
+			<div className="InsightsModal__content flex-container flex-dir-column align-middle">
+				<ModalExitButton className="InsightsModal__exitButton" toggleModal={toggleModal} />
+				<div className="InsightsModal__image" />
+				<div className="InsightsModal__header">
+					{t('panel_insights_promotion_header')}
+				</div>
+				<div className="InsightsModal__description">
+					{t('panel_insights_promotion_description')}
+				</div>
+				<div className="flex-container">
+					<div className="InsightsModal__features">
+						<div className="flex-container align-middle">
+							<span className="InsightsModal__checked-circle-icon" />
+							<div className="InsightsModal__feature-text">
+								{ t('panel_insights_audit_tags') }
+							</div>
+						</div>
+						<div className="flex-container align-middle">
+							<span className="InsightsModal__checked-circle-icon" />
+							<div className="InsightsModal__feature-text">
+								{ t('panel_insights_promotion_trace_poor_performance') }
+							</div>
 						</div>
 					</div>
-					<div className="flex-container align-middle">
-						<span className="InsightsModal__checkedCircleIcon" />
-						<span className="InsightsModal__featureText">
-							Trace sources of poor performance
-						</span>
+					<div className="InsightsModal__features">
+						<div className="flex-container align-middle">
+							<span className="InsightsModal__checked-circle-icon" />
+							<div className="InsightsModal__feature-text">
+								{ t('panel_insights_promotion_watch_pings') }
+							</div>
+						</div>
+						<div className="flex-container align-middle">
+							<span className="InsightsModal__checked-circle-icon" />
+							<div className="InsightsModal__feature-text">
+								{ t('panel_insights_promotion_explore_trends') }
+							</div>
+						</div>
 					</div>
 				</div>
-				<div className="InsightsModal__feature-column-2 flex-container flex-dir-column">
-					<div className="flex-container align-middle">
-						<span className="InsightsModal__checkedCircleIcon" />
-						<span className="InsightsModal__featureText">
-							Watch pings fire in real-time
-						</span>
+				<div className="InsightsModal__call-to-action-container">
+					<div className="flex-container align-center">
+						<a href="https://www.ghostery.com/insights/" target="_blank" rel="noopener noreferrer" className="btn InsightsModal__call-to-action">
+							<span className="flex-container align-center">{t('panel_insights_promotion_call_to_action')}</span>
+						</a>
 					</div>
-					<div className="flex-container align-middle">
-						<span className="InsightsModal__checkedCircleIcon" />
-						<span className="InsightsModal__featureText">
-							Explore global digital trends
-						</span>
+					<div className="InsightsModal__other-options-container flex-container align-justify">
+						<span onClick={clickSignIn} className="InsightsModal__link">{t('subscribe_pitch_sign_in')}</span>
+						<span onClick={toggleModal} className="InsightsModal__link">{t('subscribe_pitch_no_thanks')}</span>
 					</div>
 				</div>
 			</div>
-			<div className="InsightsModal__callToActionContainer flex-container flex-dir-column">
-				<a href="https://www.ghostery.com/insights/" target="_blank" rel="noopener noreferrer" className="btn InsightsModal__callToAction align-self-middle">
-					<span className="InsightsModal__callToActionText flex-container align-center">Try for free</span>
-				</a>
-				<div className="InsightsModal__otherOptionsContainer flex-container align-justify">
-					<span onClick={clickSignIn} className="InsightsModal__link">Already a subscriber? Sign in</span>
-					{/* <span onClick={this.toggleModal} className="InsightsModal__link">No thanks, maybe later</span> */}
-				</div>
-			</div>
-		</div>
+		</Modal>
 	);
 };
 
 // PropTypes ensure we pass required props of the correct type
 Modal.propTypes = {
-	show: PropTypes.bool.isRequired,
 	toggleModal: PropTypes.func.isRequired
 };
 

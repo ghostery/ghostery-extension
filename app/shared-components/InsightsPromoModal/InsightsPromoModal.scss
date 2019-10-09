@@ -1,0 +1,118 @@
+.InsightsModal__content {
+	background-color: $alabaster;
+	position: relative;
+	width: 518px;
+	min-height: 437px;
+	padding-top: 21px;
+	color: $tundora;
+	border: 2px solid $dark-cyan-blue;
+	z-index: 10;
+}
+
+.InsightsModal__image {
+	height: 94px;
+	width: 177px;
+	margin-bottom: 16px;
+	background-size: 177px 94px;
+	background-image: url('/app/images/panel/insights-ribbon.svg');
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+.InsightsModal__header {
+	font-family: 'Roboto';
+	width: 348px;
+	height: 27.1px;
+	font-size: 20px;
+	font-weight: 900;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 1.35;
+	letter-spacing: normal;
+	text-align: center;
+	color: $tundora;
+	margin-bottom: 8.9px;
+}
+
+.InsightsModal__description {
+	width: 372px;
+	height: 54.2px;
+	font-size: 18px;
+	font-weight: 500;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 1.5;
+	letter-spacing: normal;
+	text-align: center;
+	color: $tundora;
+	margin-bottom: 12.8px;
+	font-family: 'Roboto';
+}
+
+.InsightsModal__features {
+	&:nth-child(odd) {
+		margin-left: 28px;
+		width: 260px;
+	}
+	&:nth-child(even) {
+		width: 229.8px;
+	}
+}
+
+.InsightsModal__feature-text {
+	font-family: 'Roboto';
+	font-size: 14px;
+	line-height: 39px;
+	color: $medium-gray;
+}
+
+.InsightsModal__checked-circle-icon {
+	height: 18px;
+	width: 18px;
+	margin-right: 8px;
+	object-fit: contain;
+	background-image: url('/app/images/panel/checked-circle-icon.svg');
+	padding-right: 10px;
+}
+
+.InsightsModal__call-to-action-container {
+	height: 107px;
+	width: 506px;
+	margin-top: 10px;
+	background-color: $mystic;
+}
+
+.InsightsModal__call-to-action {
+	width: 176px;
+	height: 36px;
+	margin-top: 18px;
+	border-radius: 2px;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12);
+	background-image: linear-gradient(101deg, #070e18, #1678a0);
+	font-size: 14px;
+	font-family: 'Roboto Condensed';
+	letter-spacing: .5px;
+	color: $white;
+	line-height: 36px;
+}
+
+.InsightsModal__link {
+	font-family: 'Roboto';
+	font-size: 15px;
+	color: $tundora;
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.InsightsModal__other-options-container {
+	margin-top: 23px;
+	padding: 0 10.5px;
+	text-decoration: underline;
+	font-size: 15px;
+	color: $tundora;
+}
+
+.InsightsModal__call-to-action-container {
+
+}

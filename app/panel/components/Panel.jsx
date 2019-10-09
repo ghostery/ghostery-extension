@@ -17,7 +17,7 @@ import Header from '../containers/HeaderContainer';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import { setTheme } from '../utils/utils';
-import { Modal, InsightsPromoModal, ModalExitButton } from '../../shared-components';
+import { InsightsPromoModal } from '../../shared-components';
 import { login } from '../../Account/AccountActions';
 /**
  * @class Implement base view with functionality common to all views.
@@ -85,12 +85,11 @@ class Panel extends React.Component {
 	generateModal = () => {
 		const { loggedIn, user } = this.props;
 		const { hasEngagedFrequently } = this.state;
-		console.log('user', user);
-		const isInsightsSubscriber = (user && user.scopes != null) ? user.scopes.includes('subscriptions:insights') : false;
 		if (!loggedIn && hasEngagedFrequently) {
 			return true;
 		}
 
+		const isInsightsSubscriber = (user && user.scopes != null) ? user.scopes.includes('subscriptions:insights') : false;
 		return hasEngagedFrequently && loggedIn && isInsightsSubscriber;
 	}
 
@@ -231,60 +230,6 @@ class Panel extends React.Component {
 		return false;
 	}
 
-	renderModalChildren() {
-		return (
-			<div className="InsightsModal__content flex-container flex-dir-column align-middle">
-				<ModalExitButton exitModal={this.toggleModal} className="InsightsModal__exitButton" hrefExit="Test" textExit="" />
-				<div className="InsightsModal__image" />
-				<div className="InsightsModal__header">
-					Try Ghostery Insights
-				</div>
-				<div className="InsightsModal__description">
-					Speed up and clean up digital user experience with our professional tag analytics tool.
-				</div>
-				<div className="flex-container">
-					<div className="flex-container flex-dir-column InsightsModal__feature-column-1">
-						<div className="flex-container align-middle">
-							<span className="InsightsModal__checkedCircleIcon" />
-							<div className="InsightsModal__featureText">
-								Audit marketing tags on a page
-							</div>
-						</div>
-						<div className="flex-container align-middle">
-							<span className="InsightsModal__checkedCircleIcon" />
-							<span className="InsightsModal__featureText">
-								Trace sources of poor performance
-							</span>
-						</div>
-					</div>
-					<div className="InsightsModal__feature-column-2 flex-container flex-dir-column">
-						<div className="flex-container align-middle">
-							<span className="InsightsModal__checkedCircleIcon" />
-							<span className="InsightsModal__featureText">
-								Watch pings fire in real-time
-							</span>
-						</div>
-						<div className="flex-container align-middle">
-							<span className="InsightsModal__checkedCircleIcon" />
-							<span className="InsightsModal__featureText">
-								Explore global digital trends
-							</span>
-						</div>
-					</div>
-				</div>
-				<div className="InsightsModal__callToActionContainer flex-container flex-dir-column">
-					<a href="https://www.ghostery.com/insights/" target="_blank" rel="noopener noreferrer" className="btn InsightsModal__callToAction align-self-middle">
-						<span className="InsightsModal__callToActionText flex-container align-center">Try for free</span>
-					</a>
-					<div className="InsightsModal__otherOptionsContainer flex-container align-justify">
-						<span onClick={this.clickSignIn} className="InsightsModal__link">Already a subscriber? Sign in</span>
-						<span onClick={this.toggleModal} className="InsightsModal__link">No thanks, maybe later</span>
-					</div>
-				</div>
-			</div>
-		);
-	}
-
 	/**
 	 * React's required render function. Returns JSX
 	 * @return {JSX} JSX for rendering the Panel
@@ -312,9 +257,7 @@ class Panel extends React.Component {
 					</div>
 				</div>
 				<Header />
-				<Modal show={this.generateModal()}>
-					<InsightsPromoModal toggleModal={this.toggleModal} />
-				</Modal>
+				<InsightsPromoModal show={this.generateModal()} toggleModal={this.toggleModal} />
 				<DynamicUIPortContext.Provider value={this._dynamicUIPort}>
 					{ this.props.children }
 				</DynamicUIPortContext.Provider>

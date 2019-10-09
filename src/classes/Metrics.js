@@ -788,7 +788,7 @@ class Metrics {
 	* Toggle the insights promotion if a user has opened the panel 3 times per day for at least 3 days in the past 7 days
 	* @private
 	*/
-	_hasEngagedFrequently = () => 	{
+	_hasEngagedFrequently = () => {
 		const today = new Date().getTime();
 		const THIRTY_DAYS = 1000 * 60 * 60 * 24 * 30;
 		const insights_promo_modal_last_seen = Number(conf.insights_promo_modal_last_seen) || null; // TODO: Add logic for plus_promotion_last_seen
