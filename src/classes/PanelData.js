@@ -352,7 +352,7 @@ class PanelData {
 		const { id: tab_id } = this._activeTab;
 		const {
 			current_theme, enable_ad_block, enable_anti_tracking, enable_smart_block,
-			enable_offers, is_expanded, is_expert, language, plus_promo_modal_last_seen, reload_banner_status,
+			enable_offers, is_expanded, is_expert, language, reload_banner_status,
 			trackers_banner_status,
 		} = conf;
 

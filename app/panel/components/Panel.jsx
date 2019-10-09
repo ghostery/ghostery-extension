@@ -198,7 +198,8 @@ class Panel extends React.Component {
 		return false;
 	}
 
-	_plusPromoClickHandlerPlaceholder = () => {
+	_handlePlusPromoModalClicks = () => {
+		// TODO send appropriate metrics ping(s) for GH-1775
 		sendMessage('promoModals.sawPlusPromo', {});
 		this.setState({
 			plusPromoModalShown: true
@@ -207,7 +208,10 @@ class Panel extends React.Component {
 
 	_renderPlusPromoModal = () => {
 		const { plusPromoModalShown } = this.state;
-		const { haveSeenInitialPlusPromo, isTimeForAPlusPromo } = this.props;
+		const { account, haveSeenInitialPlusPromo, isTimeForAPlusPromo } = this.props;
+
+		if (account && account.user && account.user.subscriptionsPlus) return null; // don't show the promo to Plus subscribers!
+		if (account && account.user && account.user.scopes && account.user.scopes.includes('subscriptions:insights')) return null; // don't show the promo to Insights subscribers, either
 
 		if (plusPromoModalShown || !isTimeForAPlusPromo) return null;
 
@@ -217,7 +221,7 @@ class Panel extends React.Component {
 			<PlusPromoModal
 				show
 				location="panel"
-				clickHandler={this._plusPromoClickHandlerPlaceholder}
+				clickHandler={this._handlePlusPromoModalClicks}
 				version={version}
 			/>
 		);
@@ -232,6 +236,8 @@ class Panel extends React.Component {
 		if (!this.props.initialized) {
 			return null;
 		}
+
+		console.error('IVZ this.props in Panel#render:', this.props);
 
 		const notificationText = this.props.notificationShown && this.renderNotification();
 

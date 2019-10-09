@@ -22,7 +22,7 @@ const PLUS = 'plus';
 const PROMO_MODAL_LAST_SEEN = 'promo_modal_last_seen';
 
 /**
- * Class for handling the business logic for the display of promo modals (Plus, Insights, etc...)
+ * Static 'namespace' class for handling the business logic for the display of promo modals (Plus, Insights, etc...)
  * @memberOf  BackgroundClasses
  */
 class PromoModals {
@@ -35,6 +35,7 @@ class PromoModals {
 
 	static recordPlusPromoSighting() { this._recordPromoSighting(PLUS); }
 
+	// TODO integrate the Insights promo modal into the "has it been long enough since last modal?" logic here
 	static _isTimeForAPromo(type) {
 		const lastSeenTime = conf[`${type}_${PROMO_MODAL_LAST_SEEN}`];
 
