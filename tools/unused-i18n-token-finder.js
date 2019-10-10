@@ -90,8 +90,6 @@ function getFilepaths(whereToLookAndForWhatExtensions, filepaths = []) {
 				}
 			}
 		});
-
-		return filepaths;
 	}
 
 	return filepaths;
