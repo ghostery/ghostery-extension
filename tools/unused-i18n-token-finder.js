@@ -23,9 +23,16 @@ const jsonfile = require('jsonfile');
 
 // Constants
 const DEFAULT_LOCALE_TOKENS_FILE = './_locales/en/messages.json';
-const UNUSED_TOKENS_FILE = './tools/i18n_results/unused_tokens.txt';
+const UNUSED_TOKENS_DIR = './tools/i18n_results';
+const UNUSED_TOKENS_FILENAME = 'unused_tokens.txt';
 
-function saveListOfUnusedTokensToFile(filepath, unusedTokens) {
+function saveListOfUnusedTokensToFile(unusedTokens) {
+	const filepath = `${UNUSED_TOKENS_DIR}/${UNUSED_TOKENS_FILENAME}`;
+
+	if (!fs.existsSync(UNUSED_TOKENS_DIR)) {
+		fs.mkdirSync(UNUSED_TOKENS_DIR);
+	}
+
 	fs.writeFileSync(
 		filepath,
 		unusedTokens.join('\n')
@@ -96,7 +103,6 @@ function getJSONKeys(filepath) {
 }
 
 saveListOfUnusedTokensToFile(
-	UNUSED_TOKENS_FILE,
 	findUnusedTokens(
 		getJSONKeys(DEFAULT_LOCALE_TOKENS_FILE),
 		getFilepaths(
