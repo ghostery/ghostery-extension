@@ -1993,30 +1993,117 @@
 	"ghostery_rewards": {
 		"message": "ghostery rewards"
 	},
-
-  "OFFERS_BEGIN": {
-    "message": ""
-  },
-  "affiliate_link": {
-    "message": "affiliate link"
-  },
-  "why_offers_text": {
-    "message": "No personal data leaves your device. Your browser automatically identifies what you might be interested in based on your previous use. "
-  },
-  "offers_hub_welcome_text": {
-    "message": "As you browse the Internet, we are searching for attractive offers based on your interests."
-  },
-  "offers_hub_welcome_title": {
-    "message": "Hello!"
-  },
-  "OFFERS_ENDS": {
-    "message": ""
-  },
-
 	"enhanced_anti_tracking": {
 		"message": "Enhanced Anti-Tracking"
 	},
 
+  "OFFERS_BEGIN": {
+    "message": ""
+  },
+  "myoffrz_affiliate_link": {
+    "message": "affiliate link"
+  },
+  "myoffrz_copy_and_go": {
+    "message": "copy & go"
+  },
+  "myoffrz_feedback_option1": {
+      "message": "I already used the offer"
+  },
+  "myoffrz_feedback_option2": {
+      "message": "It's not a good deal"
+  },
+  "myoffrz_feedback_option3": {
+      "message": "It's not relevant to me"
+  },
+  "myoffrz_feedback_option4": {
+      "message": "Other reasons"
+  },
+  "myoffrz_feedback_title": {
+      "message": "Feedback"
+  },
+  "myoffrz_get_code": {
+      "message": "Get code"
+  },
+  "myoffrz_help": {
+      "message": "Help"
+  },
+  "myoffrz_learn_more": {
+      "message": "Learn more"
+  },
+  "myoffrz_offer_removed": {
+      "message": "This offer was removed."
+  },
+  "myoffrz_optional": {
+      "message": "Optional"
+  },
+  "myoffrz_powered_by_offrz": {
+      "message": "POWERED BY MyOffrz"
+  },
+  "myoffrz_send": {
+      "message": "Send"
+  },
+  "myoffrz_settings": {
+    "message": "Settings"
+  },
+  "myoffrz_show_code": {
+    "message": "Show code"
+  },
+  "myoffrz_show_more": {
+    "message": "Show more"
+  },
+  "myoffrz_skip": {
+      "message": "Skip"
+  },
+  "myoffrz_tooltip_new_offer": {
+      "message": "You have a new offer"
+  },
+  "myoffrz_welcome_link": {
+      "message": "How It Works"
+  },
+  "myoffrz_welcome_text": {
+      "message": "As you browse the Internet, we are searching for attractive offers based on your interests."
+  },
+  "myoffrz_welcome_title": {
+      "message": "Hello!"
+  },
+  "myoffrz_why_offers_text": {
+      "message": "No personal data leaves your device. Your browser automatically identifies what you might be interested in based on your previous use. "
+  },
+  "myoffrz_why_see_these_offers": {
+      "message": "Why do I see these offers?"
+  },
+  "myoffrz_why_see_this": {
+      "message": "Why do I see this?"
+  },
+
+
+  "myoffrz_badge_text_new": {
+      "message": "NEW"
+  },
+  "myoffrz_expires_day": {
+      "message": "day"
+  },
+  "myoffrz_expires_days": {
+      "message": "days"
+  },
+  "myoffrz_expires_hour": {
+      "message": "hour"
+  },
+  "myoffrz_expires_hours": {
+      "message": "hours"
+  },
+  "myoffrz_expires_in": {
+      "message": "Available for"
+  },
+  "myoffrz_expires_minute": {
+      "message": "minute"
+  },
+  "myoffrz_expires_minutes": {
+      "message": "minutes"
+  },
+  "OFFERS_ENDS": {
+    "message": ""
+  },
 
 	"unknown": {
 		"message": "Unknown"

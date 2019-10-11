@@ -287,7 +287,7 @@ class Rewards extends React.Component {
 			return (
 				<>
 					{this.props.is_expanded && (
-						<div style={{ float: 'left', margin: '45px 0 0 45px' }}>
+						<div style={{ float: 'left', margin: '120px 0 0 45px' }}>
 							<div
 								style={{
 									color: 'purple',
