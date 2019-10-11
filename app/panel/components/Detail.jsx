@@ -66,10 +66,10 @@ class Detail extends React.Component {
 		const { enable_offers, unread_offer_ids } = this.props;
 
 		const activeTab = this.props.history.location.pathname.includes('rewards') ? 'rewards' : 'blocking';
-    const contentDetailsClassNames = ClassNames({
-      expanded: this.props.is_expanded,
-      rewardsView: activeTab === 'rewards',
-    });
+		const contentDetailsClassNames = ClassNames({
+			expanded: this.props.is_expanded,
+			rewardsView: activeTab === 'rewards',
+		});
 
 		return (
 			<div className="detail-wrap">
