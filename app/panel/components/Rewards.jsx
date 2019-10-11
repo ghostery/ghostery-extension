@@ -34,6 +34,10 @@ class Rewards extends React.Component {
 		super(props);
 		this.state = {
 			rewardsArray: null,
+      iframeWidth: 0,
+      iframeHeight: 0,
+      rewardsBoxIsEmpty: false,
+      rewardsCount: 0,
 		};
 
 		// event bindings
@@ -45,6 +49,10 @@ class Rewards extends React.Component {
 		this.handleBackClick = this.handleBackClick.bind(this);
 		this.handleFaqClick = this.handleFaqClick.bind(this);
 		this.handlePortMessage = this.handlePortMessage.bind(this);
+
+    // myoffrz
+    this.iframe = React.createRef();
+    this.handleMyoffrzMessage = this.handleMyoffrzMessage.bind(this);
 	}
 
 	/**
@@ -56,6 +64,7 @@ class Rewards extends React.Component {
 		this._dynamicUIPort.postMessage({ name: 'RewardsComponentDidMount' });
 
 		this.props.actions.sendSignal('hub_open');
+    window.addEventListener('message', this.handleMyoffrzMessage);
 	}
 
 	/**
@@ -97,6 +106,7 @@ class Rewards extends React.Component {
 
 		this._dynamicUIPort.postMessage({ name: 'RewardsComponentWillUnmount' });
 		this._dynamicUIPort.onMessage.removeListener(this.handlePortMessage);
+    window.removeEventListener('message', this.handleMyoffrzMessage);
 	}
 
 	/**
@@ -107,6 +117,41 @@ class Rewards extends React.Component {
 
 		this.props.actions.updateRewardsData(msg.body);
 	}
+
+  iframeResize(data = {}) {
+    const { width = 0, height = 0 } = data;
+    this.setState({ iframeWidth: width, iframeHeight: height });
+  }
+
+  sendToIframe(message) {
+    this.iframe.current.contentWindow.postMessage(JSON.stringify({
+      target: 'cliqz-offers-cc',
+      origin: 'window',
+      message,
+    }), '*');
+  }
+
+  myoffrzSendRuntimeMessage({ message, target }) {
+    chrome.runtime.sendMessage({ message, target }, (result = {}) => {
+      console.log('XXXXX result', result, this.iframe);
+      if (result.action !== 'pushData' || !this.iframe.current) { return; }
+      const { data: { vouchers = [] } = {} } = result;
+      const rewardsCount = vouchers.length;
+      this.setState({ rewardsBoxIsEmpty: rewardsCount === 0, rewardsCount });
+      this.iframe.current.frameBorder = 0;
+      this.sendToIframe(result);
+    });
+  }
+
+  handleMyoffrzMessage(msg = {}) {
+    const { target, message = {} } = JSON.parse(msg.data || '{}');
+    if (target !== 'cliqz-offers-cc') { return; }
+    if (message.action === 'resize') {
+      this.iframeResize(message.data);
+    } else {
+      this.myoffrzSendRuntimeMessage({ message, target });
+    }
+  }
 
 	/**
 	 * Handles clicking the back button
@@ -214,9 +259,6 @@ class Rewards extends React.Component {
 	 * @return {JSX} JSX for the Rewards Items List
 	 */
 	renderRewardListComponent() {
-		const { actions, enable_offers, is_expanded } = this.props;
-		const { rewardsArray } = this.state;
-
 		if (IS_CLIQZ) {
 			return (
 				<div className="RewardsPanel__info">
@@ -229,6 +271,58 @@ class Rewards extends React.Component {
 				</div>
 			);
 		}
+
+		if (this.props.enable_offers && this.state.rewardsBoxIsEmpty) {
+			return (
+				<div className="RewardsPanel__info">
+					{ this.renderRewardSvg() }
+					<div>{ t('panel_detail_rewards_none_found') }</div>
+				</div>
+			);
+		}
+
+    if (true) {
+      const { iframeWidth, iframeHeight } = this.state;
+      const src = chrome.runtime.getURL('cliqz/offers-cc/index.html?cross-origin');
+      return (
+        <>
+          {this.props.is_expanded && (
+          <div style={{ float: 'left', margin: '45px 0 0 45px' }}>
+            <div
+              style={{
+                color: 'purple',
+                fontSize: '48px',
+                textAlign: 'center'
+              }}
+            >
+              {this.state.rewardsCount}
+            </div>
+            <div
+              style={{
+                fontSize: '18px',
+                letterSpacing: '1px',
+                textTransform: 'uppercase'
+              }}
+            >
+              {this.state.rewardsCount === 1 ? 'Reward' : 'Rewards'}
+            </div>
+          </div>
+          )}
+          <iframe
+            ref={this.iframe}
+            style={{ float: 'right', border: 0 }}
+            src={src}
+            width={iframeWidth}
+            height={iframeHeight}
+            title="myoffrz-rewards"
+          />
+        </>
+      );
+    }
+
+		const { actions, enable_offers, is_expanded } = this.props;
+		const { rewardsArray } = this.state;
+
 		if (enable_offers && !rewardsArray) {
 			return (
 				<div className="RewardsPanel__info">
@@ -237,14 +331,7 @@ class Rewards extends React.Component {
 				</div>
 			);
 		}
-		if (enable_offers && rewardsArray.length === 0) {
-			return (
-				<div className="RewardsPanel__info">
-					{ this.renderRewardSvg() }
-					<div>{ t('panel_detail_rewards_none_found') }</div>
-				</div>
-			);
-		}
+
 		if (!enable_offers && (!rewardsArray || rewardsArray.length === 0)) {
 			return (
 				<div className="RewardsPanel__info">
@@ -277,6 +364,8 @@ class Rewards extends React.Component {
 	 * @return {JSX} JSX for the Rewards Detail Item
 	 */
 	renderRewardDetailComponent(routeProps) {
+    if (true) { return null; }
+
 		const { id } = routeProps.match.params;
 		const reward = this.state.rewardsArray.find(el => el.id === id);
 		return (

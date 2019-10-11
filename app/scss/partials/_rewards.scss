@@ -13,7 +13,6 @@
 
 // Rewards Panel Component Classes
 .RewardsPanel {
-	background-color: #ffffff;
 }
 .RewardsPanel__header {
 	padding: 10px 13px;
@@ -45,6 +44,7 @@
 	margin: 0 40px;
 	text-align: center;
 	font-size: 14px;
+  background-color: #f7f8fb;
 }
 .RewardsPanel__reward_icon {
 	margin: 70px 0 20px;

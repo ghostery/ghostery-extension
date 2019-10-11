@@ -1993,9 +1993,31 @@
 	"ghostery_rewards": {
 		"message": "ghostery rewards"
 	},
+
+  "OFFERS_BEGIN": {
+    "message": ""
+  },
+  "affiliate_link": {
+    "message": "affiliate link"
+  },
+  "why_offers_text": {
+    "message": "No personal data leaves your device. Your browser automatically identifies what you might be interested in based on your previous use. "
+  },
+  "offers_hub_welcome_text": {
+    "message": "As you browse the Internet, we are searching for attractive offers based on your interests."
+  },
+  "offers_hub_welcome_title": {
+    "message": "Hello!"
+  },
+  "OFFERS_ENDS": {
+    "message": ""
+  },
+
 	"enhanced_anti_tracking": {
 		"message": "Enhanced Anti-Tracking"
 	},
+
+
 	"unknown": {
 		"message": "Unknown"
 	},

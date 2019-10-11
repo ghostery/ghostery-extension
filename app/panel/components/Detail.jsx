@@ -66,10 +66,14 @@ class Detail extends React.Component {
 		const { enable_offers, unread_offer_ids } = this.props;
 
 		const activeTab = this.props.history.location.pathname.includes('rewards') ? 'rewards' : 'blocking';
+    const contentDetailsClassNames = ClassNames({
+      expanded: this.props.is_expanded,
+      rewardsView: activeTab === 'rewards',
+    });
 
 		return (
 			<div className="detail-wrap">
-				<div id="content-detail" className={(this.props.is_expanded ? 'expanded' : '')}>
+				<div id="content-detail" className={contentDetailsClassNames}>
 					<div className="toggle-bar">
 						<div className={condensedToggleClassNames} onClick={this.toggleExpanded} />
 					</div>
