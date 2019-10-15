@@ -20,7 +20,7 @@
  */
 import { debounce, every, size } from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
-import cliqz, { prefs } from './classes/Cliqz';
+import cliqz from './classes/Cliqz';
 // object class
 import Events from './classes/EventHandlers';
 // static classes
@@ -730,6 +730,16 @@ function reportCliqzOffer(message) {
  * @return {boolean}            denotes async (true) or sync (false)
  */
 function onMessageHandler(request, sender, callback) {
+	if (request.module === 'offers-banner' && request.action === 'send') {
+		console.log('XXXX onMessageHandler', request, sender);
+		// eslint-disable-next-line
+		const [module, _, msg = {}] = request.args;
+		if (module !== 'offers-cc') { return; }
+		if (msg.action === 'myoffrzTurnoffRewards') {
+			panelData.set({ enable_offers: false });
+			return;
+		}
+	}
 	if (request.source === 'cliqz-content-script') {
 		return;
 	}
@@ -1222,7 +1232,7 @@ function setupABTest() {
 		});
 	}
 	if (abtest.hasTest('antitracking_whitelist2')) {
-		prefs.set('attrackBloomFilter', false);
+		cliqz.prefs.set('attrackBloomFilter', false);
 	}
 	// overlay search AB test
 	// if (abtest.hasTest('overlay_search')) {
@@ -1784,6 +1794,13 @@ function initializeGhosteryModules() {
 					conf.enable_anti_tracking = !antitracking.isDisabled;
 					conf.enable_human_web = !humanweb.isDisabled && !(IS_FIREFOX && globals.JUST_INSTALLED);
 					conf.enable_offers = !offers.isDisabled;
+				}
+
+				console.log('XXX!!! g m', conf.rewards_opted_in, cliqz.prefs.get('myoffrz.opted_in'));
+				const myoffrzShouldMigrate = conf.rewards_opted_in !== undefined
+          && cliqz.prefs.get('myoffrz.opted_in') === undefined;
+				if (myoffrzShouldMigrate) {
+					cliqz.prefs.set('myoffrz.opted_in', conf.rewards_opted_in);
 				}
 			}
 		});

@@ -272,6 +272,8 @@ class Rewards extends React.Component {
 			);
 		}
 
+		if (!this.props.enable_offers) { return null; }
+
 		if (this.props.enable_offers && this.state.rewardsBoxIsEmpty) {
 			return (
 				<div className="RewardsPanel__info">
