@@ -24,7 +24,7 @@ const PrioritySupport = () => (
 	<div className="content-subscription s-tabs-panel">
 		<div className="row">
 			<div className="columns column-subscription">
-				<h1>{ t('subscription_priority_support_title') }</h1>
+				<h1>{ t('priority_support') }</h1>
 				<div className="status-row">
 					<span className="status-value">{ t('subscription_support') }</span>
 					<div style={{ marginTop: '20px' }}>

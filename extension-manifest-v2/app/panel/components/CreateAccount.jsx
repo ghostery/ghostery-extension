@@ -152,21 +152,21 @@ class CreateAccount extends React.Component {
 								<div className="columns">
 									<div id="create-account-email" className={(emailError ? 'panel-error' : '')}>
 										<label className="create-account-label" id="create-email-label" htmlFor="create-input-email">
-											{ t('email_field_label') }
+											{ t('email_colon') }
 											<span className="asterisk">*</span>
 											<input onChange={this.handleInputChange} value={email} className="create-account-input" id="create-input-email" name="email" pattern=".{1,}" autoComplete="off" required type="text" />
 										</label>
 										<p id="email-invalid" className="warning">
-											{ t('invalid_email_create') }
+											{ t('please_enter_a_valid_email') }
 										</p>
 									</div>
 									<div id="create-account-email-confirm" className={(confirmEmailError ? 'panel-error' : '')}>
 										<label className="create-account-label" id="create-email-confirm-label" htmlFor="create-input-email-confirm">
-											{ t('email_confirm_field_label') }
+											{ t('confirm_email_colon') }
 											<span className="asterisk">*</span>
 											<input onChange={this.handleInputChange} value={confirmEmail} className="create-account-input" id="create-input-email-confirm" name="confirmEmail" pattern=".{1,}" autoComplete="off" required type="text" />
 										</label>
-										<p className="warning">{ t('invalid_email_confirmation') }</p>
+										<p className="warning">{ t('your_emails_do_not_match') }</p>
 									</div>
 								</div>
 							</div>
@@ -194,7 +194,7 @@ class CreateAccount extends React.Component {
 										<div className="row">
 											<div className="columns">
 												<label className="create-account-label" id="create-password-label" htmlFor="create-input-password">
-													{ t('create_password_field_label') }
+													{ t('password_colon') }
 													<span className="asterisk">*</span>
 													<input onChange={this.handleInputChange} value={password} className="create-account-input" id="create-input-password" name="password" pattern=".{1,}" required type="password" />
 												</label>
@@ -240,7 +240,7 @@ class CreateAccount extends React.Component {
 										</div>
 										<div className="small-6 columns text-center">
 											<button type="submit" id="create-account-button" className={buttonClasses}>
-												<span className="title">{ t('panel_title_create_account') }</span>
+												<span className="title">{ t('create_account') }</span>
 												<span className="loader" />
 											</button>
 										</div>

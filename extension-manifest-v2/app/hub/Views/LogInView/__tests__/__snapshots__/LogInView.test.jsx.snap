@@ -40,7 +40,7 @@ exports[`app/hub/Views/LogIn component Snapshot tests with react-test-renderer l
           className="LogInView__inputLabel"
           htmlFor="login-email"
         >
-          hub_login_label_email
+          email_colon
         </label>
         <input
           autoComplete="off"
@@ -56,7 +56,7 @@ exports[`app/hub/Views/LogIn component Snapshot tests with react-test-renderer l
           className="LogInView__inputLabel"
           htmlFor="login-password"
         >
-          hub_login_label_password
+          password_colon
         </label>
         <input
           className="LogInView__inputBox"
@@ -91,7 +91,7 @@ exports[`app/hub/Views/LogIn component Snapshot tests with react-test-renderer l
             className="LogInView__button button success"
             type="submit"
           >
-            hub_login_button_submit
+            sign_in
           </button>
         </div>
       </form>
@@ -140,7 +140,7 @@ exports[`app/hub/Views/LogIn component Snapshot tests with react-test-renderer l
           className="LogInView__inputLabel"
           htmlFor="login-email"
         >
-          hub_login_label_email
+          email_colon
         </label>
         <input
           autoComplete="off"
@@ -155,13 +155,13 @@ exports[`app/hub/Views/LogIn component Snapshot tests with react-test-renderer l
         <div
           className="LogInView__inputError"
         >
-          hub_login_label_email_invalid
+          please_enter_a_valid_email
         </div>
         <label
           className="LogInView__inputLabel"
           htmlFor="login-password"
         >
-          hub_login_label_password
+          password_colon
         </label>
         <input
           className="LogInView__inputBox error"
@@ -201,7 +201,7 @@ exports[`app/hub/Views/LogIn component Snapshot tests with react-test-renderer l
             className="LogInView__button button success"
             type="submit"
           >
-            hub_login_button_submit
+            sign_in
           </button>
         </div>
       </form>

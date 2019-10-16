@@ -40,7 +40,7 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
           className="CreateAccountView__inputLabel"
           htmlFor="create-account-email"
         >
-          hub_create_account_label_email
+          email_colon
         </label>
         <input
           autoComplete="off"
@@ -60,7 +60,7 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
           className="CreateAccountView__inputLabel"
           htmlFor="create-account-confirmEmail"
         >
-          hub_create_account_label_email_confirm
+          confirm_email_colon
         </label>
         <input
           autoComplete="off"
@@ -128,7 +128,7 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
           className="CreateAccountView__inputLabel"
           htmlFor="create-account-password"
         >
-          hub_create_account_label_password
+          password_colon
         </label>
         <input
           autoComplete="off"
@@ -240,7 +240,7 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
           className="CreateAccountView__button button success"
           type="submit"
         >
-          hub_create_account_button_submit
+          create_account
         </button>
       </div>
     </div>
@@ -288,7 +288,7 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
           className="CreateAccountView__inputLabel"
           htmlFor="create-account-email"
         >
-          hub_create_account_label_email
+          email_colon
         </label>
         <input
           autoComplete="off"
@@ -303,7 +303,7 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
         <div
           className="CreateAccountView__inputError"
         >
-          hub_create_account_label_email_invalid
+          please_enter_a_valid_email
         </div>
       </div>
       <div
@@ -313,7 +313,7 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
           className="CreateAccountView__inputLabel"
           htmlFor="create-account-confirmEmail"
         >
-          hub_create_account_label_email_confirm
+          confirm_email_colon
         </label>
         <input
           autoComplete="off"
@@ -328,7 +328,7 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
         <div
           className="CreateAccountView__inputError"
         >
-          hub_create_account_label_email_confirm_invalid
+          your_emails_do_not_match
         </div>
       </div>
     </div>
@@ -386,7 +386,7 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
           className="CreateAccountView__inputLabel"
           htmlFor="create-account-password"
         >
-          hub_create_account_label_password
+          password_colon
         </label>
         <input
           autoComplete="off"
@@ -508,7 +508,7 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
           className="CreateAccountView__button button success"
           type="submit"
         >
-          hub_create_account_button_submit
+          create_account
         </button>
       </div>
     </div>

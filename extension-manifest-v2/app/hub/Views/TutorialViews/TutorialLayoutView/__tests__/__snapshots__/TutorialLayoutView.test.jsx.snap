@@ -8,12 +8,12 @@ exports[`app/hub/Views/TutorialViews/TutorialLayoutView component Snapshot tests
     className="columns small-10 medium-8 large-6 small-offset-1"
   >
     <img
-      alt="hub_tutorial_simple_view"
+      alt="simple_view"
       className="TutorialLayoutView__image layout-simple"
       src="/app/images/hub/tutorial/layout-simple.png"
     />
     <img
-      alt="hub_tutorial_detailed_view"
+      alt="detailed_view"
       className="TutorialLayoutView__image layout-detailed"
       src="/app/images/hub/tutorial/layout-detailed.png"
     />

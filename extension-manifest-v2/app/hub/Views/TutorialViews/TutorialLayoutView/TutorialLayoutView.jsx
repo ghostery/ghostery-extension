@@ -24,12 +24,12 @@ const TutorialLayoutView = () => (
 			<img
 				className="TutorialLayoutView__image layout-simple"
 				src="/app/images/hub/tutorial/layout-simple.png"
-				alt={t('hub_tutorial_simple_view')}
+				alt={t('simple_view')}
 			/>
 			<img
 				className="TutorialLayoutView__image layout-detailed"
 				src="/app/images/hub/tutorial/layout-detailed.png"
-				alt={t('hub_tutorial_detailed_view')}
+				alt={t('detailed_view')}
 			/>
 		</div>
 		<div className="columns small-10 medium-6 large-4">

@@ -56,7 +56,7 @@ const LogInView = (props) => {
 				<div className="columns small-12 medium-10 large-6">
 					<form onSubmit={handleSubmit}>
 						<label htmlFor="login-email" className="LogInView__inputLabel">
-							{t('hub_login_label_email')}
+							{t('email_colon')}
 						</label>
 						<input
 							id="login-email"
@@ -70,11 +70,11 @@ const LogInView = (props) => {
 						/>
 						{emailError && (
 							<div className="LogInView__inputError">
-								{t('hub_login_label_email_invalid')}
+								{t('please_enter_a_valid_email')}
 							</div>
 						)}
 						<label htmlFor="login-password" className="LogInView__inputLabel">
-							{t('hub_login_label_password')}
+							{t('password_colon')}
 						</label>
 						<input
 							id="login-password"
@@ -101,7 +101,7 @@ const LogInView = (props) => {
 						</div>
 						<div className="LogInView--addPaddingTop flex-container align-center">
 							<button type="submit" className="LogInView__button button success">
-								{ t('hub_login_button_submit') }
+								{ t('sign_in') }
 							</button>
 						</div>
 					</form>

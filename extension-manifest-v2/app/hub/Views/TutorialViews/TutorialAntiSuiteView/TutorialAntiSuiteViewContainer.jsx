@@ -33,8 +33,8 @@ class TutorialAntiSuiteViewContainer extends Component {
 			hrefPrev: `/tutorial/${index - 1}`,
 			hrefNext: '/',
 			hrefDone: '/',
-			textPrev: t('hub_tutorial_nav_previous'),
-			textNext: t('hub_tutorial_nav_done'),
+			textPrev: t('previous'),
+			textNext: t('done'),
 			textDone: t('hub_tutorial_exit_flow'),
 		});
 

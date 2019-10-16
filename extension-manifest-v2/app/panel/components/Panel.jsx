@@ -12,10 +12,13 @@
  */
 
 import React from 'react';
+import ClassNames from 'classnames';
 import Header from '../containers/HeaderContainer';
+import { PlusPromoModal } from '../../shared-components';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import { setTheme } from '../utils/utils';
+import Modal from '../../shared-components/Modal';
 /**
  * @class Implement base view with functionality common to all views.
  * @memberof PanelClasses
@@ -28,6 +31,10 @@ class Panel extends React.Component {
 		this.closeNotification = this.closeNotification.bind(this);
 		this.clickReloadBanner = this.clickReloadBanner.bind(this);
 		this.filterTrackers = this.filterTrackers.bind(this);
+
+		this.state = {
+			plusPromoModalShown: false,
+		};
 	}
 
 	/**
@@ -193,6 +200,57 @@ class Panel extends React.Component {
 		return false;
 	}
 
+	_handlePlusPromoModalClicks = () => {
+		// TODO send appropriate metrics ping(s) for GH-1775
+		sendMessage('promoModals.sawPlusPromo', {});
+		this.setState({
+			plusPromoModalShown: true
+		});
+	}
+
+	_renderPlusPromoUpgradeModal() {
+		const contentClassNames = ClassNames(
+			'PlusPromoModal__content',
+			'flex-container',
+			'flex-dir-column',
+			'align-middle',
+			'panel'
+		);
+
+		return (
+			<Modal show>
+				<div className={contentClassNames}>
+					<div className="PlusPromoModal__thanks-for-download">[Upgrade version of the Plus Promo modal]</div>
+					<div className="PlusPromoModal__button basic button" onClick={this._handlePlusPromoModalClicks}>
+						<span>Dismiss</span>
+					</div>
+				</div>
+			</Modal>
+		);
+	}
+
+	_renderPlusPromoModal = () => {
+		const { plusPromoModalShown } = this.state;
+		const { account, haveSeenInitialPlusPromo, isTimeForAPlusPromo } = this.props;
+
+		if (account && account.user && account.user.subscriptionsPlus) return null; // don't show the promo to Plus subscribers!
+		if (account && account.user && account.user.scopes && account.user.scopes.includes('subscriptions:insights')) return null; // don't show the promo to Insights subscribers, either
+
+		if (plusPromoModalShown || !isTimeForAPlusPromo) return null;
+
+		const version = haveSeenInitialPlusPromo ? PlusPromoModal.UPGRADE : PlusPromoModal.INITIAL;
+
+		if (haveSeenInitialPlusPromo) { return this._renderPlusPromoUpgradeModal(); }
+
+		return (
+			<PlusPromoModal
+				show
+				location="panel"
+				clickHandler={this._handlePlusPromoModalClicks}
+			/>
+		);
+	}
+
 	/**
 	 * React's required render function. Returns JSX
 	 * @return {JSX} JSX for rendering the Panel
@@ -207,6 +265,7 @@ class Panel extends React.Component {
 
 		return (
 			<div id="panel">
+				{this._renderPlusPromoModal()}
 				<div className="callout-container">
 					<div className={`${(!notificationText ? 'hide ' : '') + this.props.notificationClasses} callout`}>
 						<svg onClick={this.closeNotification} width="15px" height="15px" viewBox="0 0 15 15" className="close-button">

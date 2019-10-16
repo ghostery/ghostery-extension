@@ -24,7 +24,7 @@ const oboe = require('oboe');
 const LOCALES_FOLDER = './_locales';
 const GATHER_FILE_PATHS_EXCEPTIONS = ['.DS_Store'];
 const LANG_FILES_COUNT = 14;
-const DEFAULT_LOCALE_PATH = '../_locales/en/messages.json';
+const DEFAULT_LOCALE_PATH = './_locales/en/messages.json';
 const DUPLICATE_TOKENS_FILE = './tools/i18n_results/duplicate_tokens.txt';
 const MISSING_TOKENS_FILE = './tools/i18n_results/missing_tokens.txt';
 const EXTRA_TOKENS_FILE = './tools/i18n_results/extra_tokens.txt';
@@ -175,7 +175,7 @@ function findMissingKeys(paths) {
 		let hasMissingKeys = false;
 		const missingKeys = {};
 		paths.forEach((path) => {
-			const localeJson = jsonfile.readFileSync(`.${path}`);
+			const localeJson = jsonfile.readFileSync(`${path}`);
 			const locale = path.match(/_locales\/(.*)\/messages.json/)[1];
 			missingKeys[locale] = [];
 			Object.keys(defaultLocaleJson).forEach((key) => {
@@ -210,7 +210,7 @@ function findExtraKeys(paths) {
 		let hasExtraKeys = false;
 		const extraKeys = {};
 		paths.forEach((path) => {
-			const localeJson = jsonfile.readFileSync(`.${path}`);
+			const localeJson = jsonfile.readFileSync(`${path}`);
 			const locale = path.match(/_locales\/(.*)\/messages.json/)[1];
 			extraKeys[locale] = [];
 			Object.keys(localeJson).forEach((key) => {
@@ -243,7 +243,7 @@ function findMalformedKeys(paths) {
 		let hasMalformedKeys = false;
 		const malformedKeys = {};
 		paths.forEach((path) => {
-			const localeJson = jsonfile.readFileSync(`.${path}`);
+			const localeJson = jsonfile.readFileSync(`${path}`);
 			const locale = path.match(/_locales\/(.*)\/messages.json/)[1];
 			malformedKeys[locale] = [];
 			Object.keys(localeJson).forEach((key) => {
@@ -278,7 +278,7 @@ function findMissingPlaceholders(paths) {
 		let hasMissingPlaceholders = false;
 		const missingPlaceholders = {};
 		paths.forEach((path) => {
-			const localeJson = jsonfile.readFileSync(`.${path}`);
+			const localeJson = jsonfile.readFileSync(`${path}`);
 			const locale = path.match(/_locales\/(.*)\/messages.json/)[1];
 			missingPlaceholders[locale] = [];
 			Object.keys(defaultLocaleJson).forEach((key) => {
@@ -322,7 +322,7 @@ function findExtraPlaceholders(paths) {
 		let hasExtraPlaceholders = false;
 		const extraPlaceholders = {};
 		paths.forEach((path) => {
-			const localeJson = jsonfile.readFileSync(`.${path}`);
+			const localeJson = jsonfile.readFileSync(`${path}`);
 			const locale = path.match(/_locales\/(.*)\/messages.json/)[1];
 			extraPlaceholders[locale] = [];
 			Object.keys(localeJson).forEach((key) => {
@@ -364,7 +364,7 @@ function findMalformedPlaceholders(paths) {
 		let hasMalformedPlaceholders = false;
 		const malformedPlaceholders = [];
 		paths.forEach((path) => {
-			const localeJson = jsonfile.readFileSync(`.${path}`);
+			const localeJson = jsonfile.readFileSync(`${path}`);
 			const locale = path.match(/_locales\/(.*)\/messages.json/)[1];
 			malformedPlaceholders[locale] = [];
 			Object.keys(localeJson).forEach((key) => {

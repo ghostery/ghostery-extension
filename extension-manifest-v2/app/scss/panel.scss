@@ -73,3 +73,7 @@ html body {
 @import './partials/_subscribe';
 @import './partials/_stats';
 @import './partials/_stats_graph';
+
+// Imports from ../shared-components directory
+@import '../shared-components/Modal/Modal.scss';
+@import '../shared-components/PlusPromoModal/PlusPromoModal.scss';
