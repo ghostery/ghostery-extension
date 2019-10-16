@@ -366,6 +366,7 @@ class PanelData {
 			is_expert,
 			is_android: globals.BROWSER_INFO.os === 'android',
 			language,
+			isTimeForInsightsPromo: promoModals.isTimeForInsightsPromo(),
 			isTimeForAPlusPromo: promoModals.isTimeForAPlusPromo(),
 			haveSeenInitialPlusPromo: promoModals.haveSeenInitialPlusPromo(),
 			reload_banner_status,

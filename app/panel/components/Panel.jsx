@@ -28,17 +28,14 @@ class Panel extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			hasEngagedFrequently: true
+			insightsPromoModalShown: false,
+			plusPromoModalShown: false
 		};
 
 		// event bindings
 		this.closeNotification = this.closeNotification.bind(this);
 		this.clickReloadBanner = this.clickReloadBanner.bind(this);
 		this.filterTrackers = this.filterTrackers.bind(this);
-
-		this.state = {
-			plusPromoModalShown: false,
-		};
 	}
 
 	/**
@@ -61,10 +58,10 @@ class Panel extends React.Component {
 		});
 
 		chrome.runtime.onMessage.addListener((request) => {
-			if (request.name === 'hasEngagedFrequently') {
+			if (request.name === 'showInsightsModal') {
 				this.setState({
 					...this.state,
-					hasEngagedFrequently: true
+					insightsPromoModalShown: true
 				});
 			}
 		});
@@ -81,23 +78,11 @@ class Panel extends React.Component {
 	* Function to toggle the Modal
 	*/
 	toggleModal = () => {
-		const { hasEngagedFrequently } = this.state;
+		const { insightsPromoModalShown } = this.state;
 		this.setState({
-			hasEngagedFrequently: !hasEngagedFrequently
+			insightsPromoModalShown: !insightsPromoModalShown
 		});
 	}
-
-	generateModal = () => {
-		const { loggedIn, user } = this.props;
-		const { hasEngagedFrequently } = this.state;
-		if (!loggedIn && hasEngagedFrequently) {
-			return true;
-		}
-
-		const isInsightsSubscriber = (user && user.scopes != null) ? user.scopes.includes('subscriptions:insights') : false;
-		return hasEngagedFrequently && loggedIn && isInsightsSubscriber;
-	}
-
 
 	/**
 	 * Reload the current tab
@@ -235,9 +220,11 @@ class Panel extends React.Component {
 		return false;
 	}
 
-	_handlePlusPromoModalClicks = () => {
+	_handlePlusPromoModalClicks = (version) => {
 		// TODO send appropriate metrics ping(s) for GH-1775
-		sendMessage('promoModals.sawPlusPromo', {});
+		if (version === PlusPromoModal.UPGRADE) {
+			sendMessage('promoModals.sawPlusPromo', {});
+		}
 		this.setState({
 			plusPromoModalShown: true
 		});
@@ -251,17 +238,37 @@ class Panel extends React.Component {
 		if (account && account.user && account.user.scopes && account.user.scopes.includes('subscriptions:insights')) return null; // don't show the promo to Insights subscribers, either
 
 		if (plusPromoModalShown || !isTimeForAPlusPromo) return null;
-
 		const version = haveSeenInitialPlusPromo ? PlusPromoModal.UPGRADE : PlusPromoModal.INITIAL;
 
 		return (
 			<PlusPromoModal
 				show
 				location="panel"
-				clickHandler={this._handlePlusPromoModalClicks}
+				clickHandler={this._handlePlusPromoModalClicks(version)}
 				version={version}
 			/>
 		);
+	}
+
+	_renderInsightsPromoModal = () => {
+		const { account } = this.props;
+		const { insightsPromoModalShown } = this.state; // might have to refactor to redux
+
+		if (!insightsPromoModalShown) return null;
+		if (account && account.user && account.user.scopes && account.user.scopes.includes('subscriptions:insights')) return null; // don't show the promo to Insights subscribers, either
+
+		// send message here that you did in fact see the insights modal
+		// figure out structure of modal class
+
+		return (
+			<InsightsPromoModal
+				show
+				toggleModal={this.toggleModal}
+			/>
+		);
+
+		// send message here that you did in fact see the insights modal
+		// figure out structure of modal class
 	}
 
 	/**
@@ -281,6 +288,7 @@ class Panel extends React.Component {
 		return (
 			<div id="panel">
 				{this._renderPlusPromoModal()}
+				{this._renderInsightsPromoModal()}
 				<div className="callout-container">
 					<div className={`${(!notificationText ? 'hide ' : '') + this.props.notificationClasses} callout`}>
 						<svg onClick={this.closeNotification} width="15px" height="15px" viewBox="0 0 15 15" className="close-button">
@@ -294,7 +302,6 @@ class Panel extends React.Component {
 					</div>
 				</div>
 				<Header />
-				<InsightsPromoModal show={this.generateModal()} toggleModal={this.toggleModal} />
 				<DynamicUIPortContext.Provider value={this._dynamicUIPort}>
 					{ this.props.children }
 				</DynamicUIPortContext.Provider>

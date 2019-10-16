@@ -19,6 +19,7 @@ const DAYS_BETWEEN_PROMOS = {
 };
 const MSECS_IN_DAY = 86400000; // 1000 msecs-in-sec * 60 secs-in-min * 60 mins-in-hour * 24 hours-in-day
 const PLUS = 'plus';
+const INSIGHTS = 'insights';
 const PROMO_MODAL_LAST_SEEN = 'promo_modal_last_seen';
 
 /**
@@ -33,13 +34,23 @@ class PromoModals {
 
 	static isTimeForAPlusPromo() { return this._isTimeForAPromo(PLUS); }
 
+	static isTimeForInsightsPromo() { return this._isTimeForAPromo(INSIGHTS); }
+
 	static recordPlusPromoSighting() { this._recordPromoSighting(PLUS); }
+
+	static recordInsightsModalSighting() { this._recordPromoSighting(INSIGHTS); }
 
 	// TODO integrate the Insights promo modal into the "has it been long enough since last modal?" logic here
 	static _isTimeForAPromo(type) {
-		const lastSeenTime = conf[`${type}_${PROMO_MODAL_LAST_SEEN}`];
+		const lastSeenPlusPromo = conf[`${PLUS}_${PROMO_MODAL_LAST_SEEN}`];
+		const lastSeenInsightsPromo = conf[`${INSIGHTS}_${PROMO_MODAL_LAST_SEEN}`];
+		const lastSeenTime = Math.max(lastSeenPlusPromo, lastSeenInsightsPromo);
 
 		if (lastSeenTime === null) { return true; }
+
+		if (type === INSIGHTS && !this._hasEngagedFrequently()) {
+			return false;
+		}
 
 		return (
 			(Date.now() - lastSeenTime) >
@@ -49,6 +60,26 @@ class PromoModals {
 
 	static _recordPromoSighting(type) {
 		conf[`${type}_${PROMO_MODAL_LAST_SEEN}`] = Date.now();
+	}
+
+	static _hasEngagedFrequently() {
+		const today = new Date().getTime();
+		const { engaged_daily_velocity_with_repeats } = conf.metrics;
+		const pastSevenDays = Array.from(new Set(engaged_daily_velocity_with_repeats));
+		let timesPerWeek = 0;
+
+		for (let i = 0; i < pastSevenDays.length; i++) {
+			const engagementsEachDay = engaged_daily_velocity_with_repeats.filter(day => day === pastSevenDays[i]).length;
+			if (engagementsEachDay >= 3) {
+				timesPerWeek++;
+			}
+		}
+
+		if (timesPerWeek >= 3) {
+			conf.insights_promo_modal_last_seen = today;
+			return true;
+		}
+		return false;
 	}
 }
 

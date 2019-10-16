@@ -17,6 +17,7 @@ import { log, prefsSet, prefsGet } from '../utils/common';
 import { getActiveTab, processUrlQuery } from '../utils/utils';
 import rewards from './Rewards';
 import { sendMessage } from '../../app/panel/utils/msg';
+import PromoModals from './PromoModals';
 // import getUserSubscriptionData from './Account';
 
 // CONSTANTS
@@ -778,39 +779,10 @@ class Metrics {
 		const today = Math.floor(Number(new Date().getTime()) / 86400000); // Today's time
 		engaged_daily_velocity_with_repeats.push(today);
 		conf.metrics.engaged_daily_velocity_with_repeats = engaged_daily_velocity_with_repeats;
-		console.log('Accessing engaged_daily_velocity_with_repeats after pushing today: ', engaged_daily_velocity_with_repeats);
-		if (this._hasEngagedFrequently()) {
-			sendMessage('hasEngagedFrequently', '', 'metrics');
+		if (PromoModals.isTimeForInsightsPromo()) {
+			sendMessage('promoModals.sawInsightsPromo', '', 'metrics');
+			sendMessage('showInsightsModal', '', 'metrics');
 		}
-	}
-
-	/**
-	* Toggle the insights promotion if a user has opened the panel 3 times per day for at least 3 days in the past 7 days
-	* @private
-	*/
-	_hasEngagedFrequently = () => {
-		const today = new Date().getTime();
-		const THIRTY_DAYS = 1000 * 60 * 60 * 24 * 30;
-		const insights_promo_modal_last_seen = Number(conf.insights_promo_modal_last_seen) || null; // TODO: Add logic for plus_promotion_last_seen
-		const hasSeenPromotionInPastMonth = today - insights_promo_modal_last_seen <= THIRTY_DAYS;
-		if (!hasSeenPromotionInPastMonth) {
-			const { engaged_daily_velocity_with_repeats } = conf.metrics;
-			const pastSevenDays = Array.from(new Set(engaged_daily_velocity_with_repeats));
-			let timesPerWeek = 0;
-
-			for (let i = 0; i < pastSevenDays.length; i++) {
-				const engagementsEachDay = engaged_daily_velocity_with_repeats.filter(day => day === pastSevenDays[i]).length;
-				if (engagementsEachDay >= 3) {
-					timesPerWeek++;
-				}
-			}
-
-			if (timesPerWeek >= 3) {
-				conf.insights_promo_modal_last_seen = today;
-				return true;
-			}
-		}
-		return false;
 	}
 
 	/**
