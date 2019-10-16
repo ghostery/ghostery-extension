@@ -12,14 +12,13 @@
  */
 
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import ClassNames from 'classnames';
 import Header from '../containers/HeaderContainer';
 import { PlusPromoModal } from '../../shared-components';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import { setTheme } from '../utils/utils';
 import { InsightsPromoModal } from '../../shared-components';
-import { login } from '../../Account/AccountActions';
 /**
  * @class Implement base view with functionality common to all views.
  * @memberof PanelClasses
@@ -36,6 +35,10 @@ class Panel extends React.Component {
 		this.closeNotification = this.closeNotification.bind(this);
 		this.clickReloadBanner = this.clickReloadBanner.bind(this);
 		this.filterTrackers = this.filterTrackers.bind(this);
+
+		this.state = {
+			plusPromoModalShown: false,
+		};
 	}
 
 	/**
@@ -220,14 +223,33 @@ class Panel extends React.Component {
 		return false;
 	}
 
-	_handlePlusPromoModalClicks = (version) => {
+	_handlePlusPromoModalClicks = () => {
 		// TODO send appropriate metrics ping(s) for GH-1775
-		if (version === PlusPromoModal.UPGRADE) {
-			sendMessage('promoModals.sawPlusPromo', {});
-		}
+		sendMessage('promoModals.sawPlusPromo', {});
 		this.setState({
 			plusPromoModalShown: true
 		});
+	}
+
+	_renderPlusPromoUpgradeModal() {
+		const contentClassNames = ClassNames(
+			'PlusPromoModal__content',
+			'flex-container',
+			'flex-dir-column',
+			'align-middle',
+			'panel'
+		);
+
+		return (
+			<Modal show>
+				<div className={contentClassNames}>
+					<div className="PlusPromoModal__thanks-for-download">[Upgrade version of the Plus Promo modal]</div>
+					<div className="PlusPromoModal__button basic button" onClick={this._handlePlusPromoModalClicks}>
+						<span>Dismiss</span>
+					</div>
+				</div>
+			</Modal>
+		);
 	}
 
 	_renderPlusPromoModal = () => {
@@ -238,37 +260,18 @@ class Panel extends React.Component {
 		if (account && account.user && account.user.scopes && account.user.scopes.includes('subscriptions:insights')) return null; // don't show the promo to Insights subscribers, either
 
 		if (plusPromoModalShown || !isTimeForAPlusPromo) return null;
+
 		const version = haveSeenInitialPlusPromo ? PlusPromoModal.UPGRADE : PlusPromoModal.INITIAL;
+
+		if (haveSeenInitialPlusPromo) { return this._renderPlusPromoUpgradeModal(); }
 
 		return (
 			<PlusPromoModal
 				show
 				location="panel"
-				clickHandler={this._handlePlusPromoModalClicks(version)}
-				version={version}
+				clickHandler={this._handlePlusPromoModalClicks}
 			/>
 		);
-	}
-
-	_renderInsightsPromoModal = () => {
-		const { account } = this.props;
-		const { insightsPromoModalShown } = this.state; // might have to refactor to redux
-
-		if (!insightsPromoModalShown) return null;
-		if (account && account.user && account.user.scopes && account.user.scopes.includes('subscriptions:insights')) return null; // don't show the promo to Insights subscribers, either
-
-		// send message here that you did in fact see the insights modal
-		// figure out structure of modal class
-
-		return (
-			<InsightsPromoModal
-				show
-				toggleModal={this.toggleModal}
-			/>
-		);
-
-		// send message here that you did in fact see the insights modal
-		// figure out structure of modal class
 	}
 
 	/**
