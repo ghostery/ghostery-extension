@@ -2075,6 +2075,21 @@
   "myoffrz_why_see_this": {
       "message": "Why do I see this?"
   },
+  "myoffrz_optin_description": {
+      "message": "Would you like to receive offers and discounts from trusted Ghostery partners?"
+  },
+  "myoffrz_optin_title": {
+      "message": "New Reward discovered!"
+  },
+  "myoffrz_no": {
+    "message": "no"
+  },
+  "myoffrz_yes": {
+    "message": "yes"
+  },
+  "myoffrz_rewards_new": {
+    "message": "New Reward discovered!"
+  },
 
 
   "myoffrz_badge_text_new": {
@@ -2100,6 +2115,24 @@
   },
   "myoffrz_expires_minutes": {
       "message": "minutes"
+  },
+  "myoffrz_apply_code": {
+      "message": "Apply code"
+  },
+  "myoffrz_cancel": {
+      "message": "Cancel"
+  },
+  "myoffrz_conditions": {
+      "message": "Conditions"
+  },
+  "myoffrz_copied": {
+      "message": "Copied"
+  },
+  "myoffrz_copy_code": {
+      "message": "Copy code"
+  },
+  "myoffrz_get_code": {
+      "message": "Get code"
   },
   "OFFERS_ENDS": {
     "message": ""
