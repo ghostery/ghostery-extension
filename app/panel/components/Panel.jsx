@@ -261,8 +261,6 @@ class Panel extends React.Component {
 			return null;
 		}
 
-		console.error('IVZ this.props in Panel#render:', this.props);
-
 		const notificationText = this.props.notificationShown && this.renderNotification();
 
 		return (
