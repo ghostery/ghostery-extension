@@ -45,7 +45,7 @@ const SubscriptionInfo = (props) => {
 		<div className="content-subscription s-tabs-panel">
 			<div className="row">
 				<div className="columns column-subscription">
-					<h1>{ t('subscription_info_title') }</h1>
+					<h1>{ t('ghostery_plus') }</h1>
 					{loading ? (
 						<div className="loading" />
 					) : (
@@ -75,8 +75,8 @@ const SubscriptionInfo = (props) => {
 									<div className="list-row">
 										<ul>
 											<li className="list-item">{t('subscription_midnight_theme')}</li>
-											<li className="list-item">{t('subscription_tracker_stats')}</li>
-											<li className="list-item">{t('subscription_priority_support')}</li>
+											<li className="list-item">{t('historical_stats')}</li>
+											<li className="list-item">{t('priority_support')}</li>
 										</ul>
 									</div>
 									<div className="manage-row">

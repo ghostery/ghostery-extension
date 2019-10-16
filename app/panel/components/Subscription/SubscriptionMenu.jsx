@@ -33,13 +33,13 @@ const SubscriptionMenu = () => (
 
 		<li className="s-tabs-title">
 			<NavLink to="/subscription/prioritysupport">
-				<span>{ t('subscription_priority_support') }</span>
+				<span>{ t('priority_support') }</span>
 			</NavLink>
 		</li>
 
 		<li className="s-tabs-title">
 			<NavLink to="/stats">
-				<span>{ t('subscription_history_stats') }</span>
+				<span>{ t('historical_stats') }</span>
 			</NavLink>
 		</li>
 	</ul>

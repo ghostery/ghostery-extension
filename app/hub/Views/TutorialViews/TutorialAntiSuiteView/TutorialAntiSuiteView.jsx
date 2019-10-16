@@ -22,20 +22,20 @@ const TutorialAntiSuiteView = () => (
 	<div className="TutorialAntiSuiteView TutorialView--mediumFlexColumn row align-center-middle">
 		<div className="columns small-10 small-offset-1 medium-8 large-6">
 			<div className="TutorialView__imageTitle">
-				{t('hub_tutorial_simple_view')}
+				{t('simple_view')}
 			</div>
 			<img
 				className="TutorialAntiSuiteView__image antisuite-simple"
 				src="/app/images/hub/tutorial/antisuite-simple.png"
-				alt={t('hub_tutorial_simple_view')}
+				alt={t('simple_view')}
 			/>
 			<div className="TutorialView__imageTitle">
-				{t('hub_tutorial_detailed_view')}
+				{t('detailed_view')}
 			</div>
 			<img
 				className="TutorialAntiSuiteView__image antisuite-detailed"
 				src="/app/images/hub/tutorial/antisuite-detailed.png"
-				alt={t('hub_tutorial_detailed_view')}
+				alt={t('detailed_view')}
 			/>
 		</div>
 		<div className="columns small-12 medium-10 large-4">
@@ -48,7 +48,7 @@ const TutorialAntiSuiteView = () => (
 					<div className="TutorialView__keyImage anti-track" />
 					<div>
 						<div className="TutorialView__keyTitle">
-							{t('hub_tutorial_antisuite_antitracking_title')}
+							{t('enhanced_anti_tracking')}
 						</div>
 						<div className="TutorialView__keyText">
 							{t('hub_tutorial_antisuite_antitracking_description')}
@@ -59,10 +59,10 @@ const TutorialAntiSuiteView = () => (
 					<div className="TutorialView__keyImage ad-block" />
 					<div>
 						<div className="TutorialView__keyTitle">
-							{t('hub_tutorial_antisuite_adblocking_title')}
+							{t('enhanced_ad_blocking')}
 						</div>
 						<div className="TutorialView__keyText">
-							{t('hub_tutorial_antisuite_adblocking_description')}
+							{t('ad_blocking_DESC')}
 						</div>
 					</div>
 				</div>
@@ -70,10 +70,10 @@ const TutorialAntiSuiteView = () => (
 					<div className="TutorialView__keyImage smart-block" />
 					<div>
 						<div className="TutorialView__keyTitle">
-							{t('hub_tutorial_antisuite_smartblocking_title')}
+							{t('smart_blocking')}
 						</div>
 						<div className="TutorialView__keyText">
-							{t('hub_tutorial_antisuite_smartblocking_description')}
+							{t('smart_blocking_DESC')}
 						</div>
 					</div>
 				</div>

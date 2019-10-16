@@ -101,7 +101,7 @@ class Header extends React.Component {
 		let text = '';
 		let handleOnClick = null;
 		if (!loggedIn) {
-			text = t('panel_header_sign_in');
+			text = t('sign_in');
 			handleOnClick = this.handleSignin;
 		} else if (loggedIn && user && !user.emailValidated) {
 			text = t('panel_header_verify_account');
@@ -186,7 +186,7 @@ class Header extends React.Component {
 		const simpleTab = (
 			<div className={tabSimpleClassNames} onClick={this.clickSimpleTab}>
 				<span className="header-tab-text">
-					{t('panel_header_simple_view')}
+					{t('simple_view')}
 				</span>
 			</div>
 		);
@@ -194,7 +194,7 @@ class Header extends React.Component {
 		const detailedTab = (
 			<div className={tabDetailedClassNames} onClick={this.clickDetailedTab}>
 				<span className="header-tab-text">
-					{t('panel_header_detailed_view')}
+					{t('detailed_view')}
 				</span>
 			</div>
 		);

@@ -33,8 +33,8 @@ class SetupDoneViewContainer extends Component {
 			hrefPrev: `/setup/${index - 1}`,
 			hrefNext: '/',
 			hrefDone: '/',
-			textPrev: t('hub_setup_nav_previous'),
-			textNext: t('hub_setup_nav_done'),
+			textPrev: t('previous'),
+			textNext: t('done'),
 			textDone: t('hub_setup_exit_flow'),
 		});
 
@@ -56,14 +56,14 @@ class SetupDoneViewContainer extends Component {
 				id: 'tutorial',
 				title: t('hub_setup_feature_tutorial_title'),
 				description: t('hub_setup_feature_tutorial_description'),
-				buttonText: t('hub_setup_feature_tutorial_button'),
+				buttonText: t('start'),
 				buttonHref: '/tutorial/1',
 			},
 			{
 				id: 'plus',
-				title: t('hub_setup_feature_supporter_title'),
+				title: t('get_ghostery_plus'),
 				description: t('hub_setup_feature_supporter_description'),
-				buttonText: t('hub_setup_feature_supporter_button'),
+				buttonText: t('support'),
 				buttonHref: '/plus',
 			},
 			{

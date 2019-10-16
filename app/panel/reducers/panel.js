@@ -108,7 +108,7 @@ export default (state = initialState, action) => {
 				switch (err.code) {
 					case '10050':
 					case '10110':
-						errorText = t('banner_no_such_account_message');
+						errorText = t('no_such_email_password_combo');
 						break;
 					default:
 						errorText = t('server_error_message');
@@ -139,7 +139,7 @@ export default (state = initialState, action) => {
 						errorText = t('email_address_in_use');
 						break;
 					case '10080':
-						errorText = t('invalid_email_confirmation');
+						errorText = t('your_emails_do_not_match');
 						break;
 					default:
 						errorText = t('server_error_message');

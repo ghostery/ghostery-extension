@@ -49,21 +49,21 @@ class SideNavigationViewContainer extends Component {
 
 		const menuItems = [
 			{ href: '/', icon: 'home', text: t('hub_side_navigation_home') },
-			{ href: '/setup', icon: 'setup', text: t('hub_side_navigation_setup') },
+			{ href: '/setup', icon: 'setup', text: t('customize_setup') },
 			{ href: '/tutorial', icon: 'tutorial', text: t('hub_side_navigation_tutorial') },
-			{ href: '/plus', icon: 'plus', text: t('hub_side_navigation_supporter') },
+			{ href: '/plus', icon: 'plus', text: t('get_ghostery_plus') },
 			...(IS_CLIQZ ? [] : [{ href: '/rewards', icon: 'rewards', text: t('hub_side_navigation_rewards') }]),
 			{ href: '/products', icon: 'products', text: t('hub_side_navigation_products') }
 		];
 		const bottomItems = user ? [
 			{ id: 'email', href: `https://account.${globals.GHOSTERY_DOMAIN}.com/`, text: user.email },
-			{ id: 'logout', text: t('hub_side_navigation_log_out'), clickHandler: this._handleLogoutClick },
+			{ id: 'logout', text: t('sign_out'), clickHandler: this._handleLogoutClick },
 		] : [
-			{ id: 'create-account', href: '/create-account', text: t('hub_side_navigation_create_account') },
+			{ id: 'create-account', href: '/create-account', text: t('create_account') },
 			{
 				id: 'log-id',
 				href: '/log-in',
-				text: t('hub_side_navigation_log_in'),
+				text: t('sign_in'),
 				icon: 'profile',
 			},
 		];

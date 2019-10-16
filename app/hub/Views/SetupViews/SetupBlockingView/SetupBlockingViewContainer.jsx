@@ -40,7 +40,7 @@ class SetupBlockingViewContainer extends Component {
 			hrefNext: `/setup/${index + 1}`,
 			hrefDone: '/',
 			textPrev: false,
-			textNext: t('hub_setup_nav_next'),
+			textNext: t('next'),
 			textDone: t('hub_setup_exit_flow'),
 		});
 
