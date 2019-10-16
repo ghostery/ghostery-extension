@@ -31,6 +31,7 @@ function _renderInitialVersion(props) {
 		'flex-container',
 		'flex-dir-column',
 		'align-middle',
+		'initial',
 		locationClassName
 	);
 	const optionsContainerClassNames = ClassNames(
@@ -139,15 +140,18 @@ function _renderUpgradeVersion(props) {
 		'flex-container',
 		'flex-dir-column',
 		'align-middle',
-		locationClassName
+		'upgrade',
+		locationClassName,
 	);
 
 	return (
 		<Modal show={show}>
 			<div className={contentClassNames}>
-				<div className="PlusPromoModal__thanks-for-download">[Upgrade version of the Plus Promo modal]</div>
+				<img className="PlusPromoModal__gold-ghostie-badge" src="/app/images/hub/home/gold-ghostie-badge.svg" />
+				<div className="PlusPromoModal__header">Upgrade your Ghostery experience</div>
+				<div className="PlusPromoModal__description cta">Unlock historical tracker insights, priority support access, and new color themes by upgrading to Ghostery Plus for only $2 per month.</div>
 				<div className="PlusPromoModal__button basic button" onClick={clickHandler}>
-					<span>Dismiss</span>
+					<span>Upgrade to Plus</span>
 				</div>
 			</div>
 		</Modal>

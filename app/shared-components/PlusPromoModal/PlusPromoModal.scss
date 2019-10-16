@@ -1,17 +1,46 @@
+.PlusPromoModal__gold-ghostie-badge {
+	margin-top: 21px;
+	margin-bottom: 16px;
+}
+
+.PlusPromoModal__header {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.PlusPromoModal__description {
+	width: 350px;
+	text-align: center;
+	font-size: 14px;
+	margin-bottom: 5px;
+
+	&.cta {
+		font-weight: bold;
+	}
+}
+
 .PlusPromoModal__content {
 	position: relative;
 	background-color: #f7f7f7;
 	border: 1.9px solid #930194;
 	z-index: 10;
 
-	&.in-hub {
-		width: 646px;
-		height: 553px;
+	&.initial {
+		&.in-hub {
+			width: 646px;
+			height: 553px;
+		}
+
+		&.in-panel {
+			width: 556px;
+			height: 471px;
+		}
 	}
 
-	&.in-panel {
-		width: 556px;
-		height: 471px;
+	&.upgrade {
+		width: 434px;
+		height: 410px;
 	}
 }
 
