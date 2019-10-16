@@ -12,11 +12,13 @@
  */
 
 import React from 'react';
+import ClassNames from 'classnames';
 import Header from '../containers/HeaderContainer';
 import { PlusPromoModal } from '../../shared-components';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import { setTheme } from '../utils/utils';
+import Modal from '../../shared-components/Modal';
 /**
  * @class Implement base view with functionality common to all views.
  * @memberof PanelClasses
@@ -206,6 +208,29 @@ class Panel extends React.Component {
 		});
 	}
 
+	_renderPlusPromoUpgradeModal() {
+		const contentClassNames = ClassNames(
+			'PlusPromoModal__content',
+			'flex-container',
+			'flex-dir-column',
+			'align-middle',
+			'panel'
+		);
+
+		return (
+			<Modal show>
+				<div className={contentClassNames}>
+					<img className="PlusPromoModal__gold-ghostie-badge" src="/app/images/hub/home/gold-ghostie-badge.svg" />
+					<div className="PlusPromoModal__header">Upgrade your Ghostery experience</div>
+					<div className="PlusPromoModal__description cta">Unlock historical tracker insights, priority support access, and new color themes by upgrading to Ghostery Plus for only $2 per month.</div>
+					<div className="PlusPromoModal__button basic button" onClick={this._handlePlusPromoModalClicks}>
+						<span>Upgrade to Plus</span>
+					</div>
+				</div>
+			</Modal>
+		);
+	}
+
 	_renderPlusPromoModal = () => {
 		const { plusPromoModalShown } = this.state;
 		const { account, haveSeenInitialPlusPromo, isTimeForAPlusPromo } = this.props;
@@ -217,12 +242,13 @@ class Panel extends React.Component {
 
 		const version = haveSeenInitialPlusPromo ? PlusPromoModal.UPGRADE : PlusPromoModal.INITIAL;
 
+		if (haveSeenInitialPlusPromo) { return this._renderPlusPromoUpgradeModal(); }
+
 		return (
 			<PlusPromoModal
 				show
 				location="panel"
 				clickHandler={this._handlePlusPromoModalClicks}
-				version={version}
 			/>
 		);
 	}

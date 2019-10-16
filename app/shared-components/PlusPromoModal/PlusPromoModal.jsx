@@ -125,63 +125,18 @@ function _renderInitialVersion(props) {
 	);
 }
 
-// TODO flesh out this stub for https://cliqztix.atlassian.net/browse/GH-1813
-function _renderUpgradeVersion(props) {
-	const { clickHandler, location, show } = props;
-
-	const isInHub = location === 'hub';
-
-	const locationClassName = {
-		'in-hub': isInHub,
-		'in-panel': location === 'panel'
-	};
-	const contentClassNames = ClassNames(
-		'PlusPromoModal__content',
-		'flex-container',
-		'flex-dir-column',
-		'align-middle',
-		'upgrade',
-		locationClassName,
-	);
-
-	return (
-		<Modal show={show}>
-			<div className={contentClassNames}>
-				<img className="PlusPromoModal__gold-ghostie-badge" src="/app/images/hub/home/gold-ghostie-badge.svg" />
-				<div className="PlusPromoModal__header">Upgrade your Ghostery experience</div>
-				<div className="PlusPromoModal__description cta">Unlock historical tracker insights, priority support access, and new color themes by upgrading to Ghostery Plus for only $2 per month.</div>
-				<div className="PlusPromoModal__button basic button" onClick={clickHandler}>
-					<span>Upgrade to Plus</span>
-				</div>
-			</div>
-		</Modal>
-	);
-}
-
 /**
  * A Functional React component for a Plus Promo Modal
  * @return {JSX} JSX for rendering a Plus Promo Modal
  * @memberof SharedComponents
  */
-const PlusPromoModal = (props) => {
-	const { version } = props;
-
-	if (version === PlusPromoModal.INITIAL) { return _renderInitialVersion(props); }
-
-	if (version === PlusPromoModal.UPGRADE) { return _renderUpgradeVersion(props); }
-
-	return null;
-};
-
-PlusPromoModal.INITIAL = 1;
-PlusPromoModal.UPGRADE = 2;
+const PlusPromoModal = props => _renderInitialVersion(props);
 
 // PropTypes ensure we pass required props of the correct type
 PlusPromoModal.propTypes = {
 	show: PropTypes.bool.isRequired,
 	location: PropTypes.string.isRequired,
 	clickHandler: PropTypes.func.isRequired,
-	version: PropTypes.oneOf([PlusPromoModal.INITIAL, PlusPromoModal.UPGRADE]).isRequired,
 };
 
 export default PlusPromoModal;
