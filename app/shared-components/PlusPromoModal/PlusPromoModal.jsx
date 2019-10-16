@@ -124,60 +124,18 @@ function _renderInitialVersion(props) {
 	);
 }
 
-// TODO flesh out this stub for https://cliqztix.atlassian.net/browse/GH-1813
-function _renderUpgradeVersion(props) {
-	const { clickHandler, location, show } = props;
-
-	const isInHub = location === 'hub';
-
-	const locationClassName = {
-		'in-hub': isInHub,
-		'in-panel': location === 'panel'
-	};
-	const contentClassNames = ClassNames(
-		'PlusPromoModal__content',
-		'flex-container',
-		'flex-dir-column',
-		'align-middle',
-		locationClassName
-	);
-
-	return (
-		<Modal show={show}>
-			<div className={contentClassNames}>
-				<div className="PlusPromoModal__thanks-for-download">[Upgrade version of the Plus Promo modal]</div>
-				<div className="PlusPromoModal__button basic button" onClick={clickHandler}>
-					<span>Dismiss</span>
-				</div>
-			</div>
-		</Modal>
-	);
-}
-
 /**
  * A Functional React component for a Plus Promo Modal
  * @return {JSX} JSX for rendering a Plus Promo Modal
  * @memberof SharedComponents
  */
-const PlusPromoModal = (props) => {
-	const { version } = props;
-
-	if (version === PlusPromoModal.INITIAL) { return _renderInitialVersion(props); }
-
-	if (version === PlusPromoModal.UPGRADE) { return _renderUpgradeVersion(props); }
-
-	return null;
-};
-
-PlusPromoModal.INITIAL = 1;
-PlusPromoModal.UPGRADE = 2;
+const PlusPromoModal = props => _renderInitialVersion(props);
 
 // PropTypes ensure we pass required props of the correct type
 PlusPromoModal.propTypes = {
 	show: PropTypes.bool.isRequired,
 	location: PropTypes.string.isRequired,
 	clickHandler: PropTypes.func.isRequired,
-	version: PropTypes.oneOf([PlusPromoModal.INITIAL, PlusPromoModal.UPGRADE]).isRequired,
 };
 
 export default PlusPromoModal;
