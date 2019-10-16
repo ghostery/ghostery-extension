@@ -8,7 +8,7 @@
  * https://www.ghostery.com/
  *
  * Copyright 2019 Ghostery, Inc. All rights reserved.
- * 
+ *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
@@ -181,4 +181,9 @@
 	font-weight: 600;
 	src: local('Open Sans Semibold'), local('OpenSans-Semibold'), url(../fonts/opensans-semibold-latin.woff2) format('woff2');
 	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+@font-face {
+	font-family: Roboto;
+	src: local(Roboto), url(../fonts/roboto-all-charsets.woff2) format('woff2'), url(../fonts/roboto-all-charsets.woff) format('woff');
 }

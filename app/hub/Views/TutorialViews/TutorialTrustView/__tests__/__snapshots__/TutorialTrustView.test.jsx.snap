@@ -10,20 +10,20 @@ exports[`app/hub/Views/TutorialViews/TutorialTrustView component Snapshot tests 
     <div
       className="TutorialView__imageTitle"
     >
-      hub_tutorial_simple_view
+      simple_view
     </div>
     <img
-      alt="hub_tutorial_simple_view"
+      alt="simple_view"
       className="TutorialTrustView__image trustrestrict-simple"
       src="/app/images/hub/tutorial/trustrestrict-simple.png"
     />
     <div
       className="TutorialView__imageTitle"
     >
-      hub_tutorial_detailed_view
+      detailed_view
     </div>
     <img
-      alt="hub_tutorial_detailed_view"
+      alt="detailed_view"
       className="TutorialTrustView__image trustrestrict-detailed"
       src="/app/images/hub/tutorial/trustrestrict-detailed.png"
     />

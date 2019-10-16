@@ -1,5 +1,5 @@
 /**
- * Home Constants
+ * Point of entry index.js file for Plus Promo Modal Component
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -11,7 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-// Home View
-export const GET_HOME_PROPS = 'GET_HOME_PROPS';
-export const MARK_PLUS_PROMO_MODAL_SHOWN = 'MARK_PLUS_PROMO_MODAL_SHOWN';
-export const SET_METRICS = 'SET_METRICS';
+import PlusPromoModal from './PlusPromoModal';
+
+export default PlusPromoModal;

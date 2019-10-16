@@ -109,7 +109,7 @@ class LogInViewContainer extends Component {
 				this.props.history.push('/');
 			} else {
 				this.props.actions.setToast({
-					toastMessage: t('hub_login_toast_error'),
+					toastMessage: t('no_such_email_password_combo'),
 					toastClass: 'alert'
 				});
 			}

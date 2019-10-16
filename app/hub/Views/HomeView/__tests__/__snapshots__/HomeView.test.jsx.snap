@@ -75,7 +75,7 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
         href="/create-account"
         onClick={[Function]}
       >
-        hub_home_subheader_create_account
+        create_account
       </a>
     </div>
     <div
@@ -103,7 +103,7 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
           href="/tutorial"
           onClick={[Function]}
         >
-          hub_home_feature_tutorial_button
+          start
         </a>
       </div>
       <div
@@ -121,7 +121,7 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
         <div
           className="HomeView__featureTitle"
         >
-          hub_home_feature_setup_title
+          customize_setup
         </div>
         <div
           className="HomeView__featureText flex-child-grow"
@@ -161,7 +161,7 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
           href="/plus"
           onClick={[Function]}
         >
-          hub_home_feature_supporter_button
+          get_ghostery_plus
         </a>
       </div>
     </div>
@@ -295,7 +295,7 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
         <div
           className="HomeView__featureTitle"
         >
-          hub_home_feature_setup_title
+          customize_setup
         </div>
         <div
           className="HomeView__featureText flex-child-grow"
@@ -335,7 +335,7 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
           href="/plus"
           onClick={[Function]}
         >
-          hub_home_feature_supporter_button_alt
+          Aready_Subscribed
         </a>
       </div>
     </div>

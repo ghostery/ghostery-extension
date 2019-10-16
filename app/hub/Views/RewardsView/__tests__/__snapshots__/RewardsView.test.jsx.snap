@@ -37,7 +37,7 @@ exports[`app/hub/Views/RewardsView component Snapshot tests with react-test-rend
           rel="noopener noreferrer"
           target="_blank"
         >
-          hub_rewards_header_learn_more
+          learn_more
         </a>
       </div>
     </div>

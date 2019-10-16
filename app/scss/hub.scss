@@ -53,6 +53,7 @@ html, body, #root {
 @import './partials/_hub_mixins';
 @import './partials/_hub_svgs';
 @import './partials/_shared_components_svgs';
+@import './partials/_fonts';
 
 // Imports from ../hub directory
 @import '../hub/Views/SideNavigationView/SideNavigationView.scss';
@@ -75,6 +76,7 @@ html, body, #root {
 // Imports from ../shared-components directory
 @import '../shared-components/ExitButton/ExitButton.scss';
 @import '../shared-components/Modal/Modal.scss';
+@import '../shared-components/PlusPromoModal/PlusPromoModal.scss';
 @import '../shared-components/SteppedNavigation/SteppedNavigation.scss';
 @import '../shared-components/ToastMessage/ToastMessage.scss';
 @import '../shared-components/ToggleCheckbox/ToggleCheckbox.scss';

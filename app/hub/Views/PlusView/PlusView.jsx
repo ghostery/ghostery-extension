@@ -36,11 +36,11 @@ class PlusView extends Component {
 
 		return isPlus ? (
 			<div className={buttonClassNames}>
-				{t('hub_supporter_button_text_alt')}
+				{t('already_subscribed')}
 			</div>
 		) : (
 			<a className={buttonClassNames} href={buttonHref} onClick={onPlusClick} target="_blank" rel="noopener noreferrer">
-				{t('hub_supporter_button_text')}
+				{t('get_ghostery_plus')}
 			</a>
 		);
 	}
@@ -74,7 +74,7 @@ class PlusView extends Component {
 					<div className="PlusView__perk columns text-center">
 						<div className="PlusView__perkIcon themes" />
 						<div className="PlusView__perkTitle">
-							{t('hub_supporter_perk_themes_title')}
+							{t('new_themes')}
 						</div>
 						<div className="PlusView__perkDescription">
 							{t('hub_supporter_perk_themes_description')}
@@ -83,7 +83,7 @@ class PlusView extends Component {
 					<div className="PlusView__perk columns text-center">
 						<div className="PlusView__perkIcon stats" />
 						<div className="PlusView__perkTitle">
-							{t('hub_supporter_perk_stats_title')}
+							{t('historical_blocking_stats')}
 						</div>
 						<div className="PlusView__perkDescription">
 							{t('hub_supporter_perk_stats_description')}
@@ -110,7 +110,7 @@ class PlusView extends Component {
 					<div className="row align-center">
 						<div className="PlusView__feature small-12 medium-6 large-5 large-offset-1 columns">
 							<div className="PlusView__headingTitle PlusView--addPaddingTop">
-								{t('hub_supporter_feature_theme_title')}
+								{t('new_themes')}
 							</div>
 							<div className="PlusView__headingDescription">
 								{t('hub_supporter_feature_theme_description')}
@@ -121,7 +121,7 @@ class PlusView extends Component {
 							<img
 								className="PlusView__featureImage theme"
 								src="/app/images/hub/plus/feature-theme.png"
-								alt={t('hub_supporter_feature_theme_title')}
+								alt={t('new_themes')}
 							/>
 						</div>
 					</div>
@@ -139,12 +139,12 @@ class PlusView extends Component {
 							<img
 								className="PlusView__featureImage stats"
 								src="/app/images/hub/plus/feature-stats.svg"
-								alt={t('hub_supporter_feature_stats_title')}
+								alt={t('historical_blocking_stats')}
 							/>
 						</div>
 						<div className="PlusView__feature small-12 medium-6 large-5 columns">
 							<div className="PlusView__headingTitle">
-								{t('hub_supporter_feature_stats_title')}
+								{t('historical_blocking_stats')}
 							</div>
 							<div className="PlusView__headingDescription">
 								{t('hub_supporter_feature_stats_description')}
@@ -155,7 +155,7 @@ class PlusView extends Component {
 							<img
 								className="PlusView__featureImage stats"
 								src="/app/images/hub/plus/feature-stats.svg"
-								alt={t('hub_supporter_feature_stats_title')}
+								alt={t('historical_blocking_stats')}
 							/>
 						</div>
 					</div>
@@ -171,7 +171,7 @@ class PlusView extends Component {
 					<div className="row align-center">
 						<div className="PlusView__feature small-12 medium-6 large-5 large-offset-1 columns">
 							<div className="PlusView__headingTitle">
-								{t('hub_supporter_feature_support_title')}
+								{t('priority_support')}
 							</div>
 							<div className="PlusView__headingDescription">
 								{t('hub_supporter_feature_support_description')}
@@ -182,7 +182,7 @@ class PlusView extends Component {
 							<img
 								className="PlusView__featureImage support"
 								src="/app/images/hub/plus/feature-support.svg"
-								alt={t('hub_supporter_feature_support_title')}
+								alt={t('priority_support')}
 							/>
 						</div>
 					</div>
