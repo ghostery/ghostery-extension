@@ -36,6 +36,10 @@ class Panel extends React.Component {
 		this.closeNotification = this.closeNotification.bind(this);
 		this.clickReloadBanner = this.clickReloadBanner.bind(this);
 		this.filterTrackers = this.filterTrackers.bind(this);
+
+		this.state = {
+			plusPromoModalShown: false,
+		};
 	}
 
 	/**
@@ -257,6 +261,8 @@ class Panel extends React.Component {
 		if (account && account.user && account.user.scopes && account.user.scopes.includes('subscriptions:insights')) return null; // don't show the promo to Insights subscribers, either
 
 		if (plusPromoModalShown || !isTimeForAPlusPromo) return null;
+
+		const version = haveSeenInitialPlusPromo ? PlusPromoModal.UPGRADE : PlusPromoModal.INITIAL;
 
 		if (haveSeenInitialPlusPromo) { return this._renderPlusPromoUpgradeModal(); }
 
