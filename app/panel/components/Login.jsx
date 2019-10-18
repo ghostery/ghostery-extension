@@ -75,7 +75,7 @@ class Login extends React.Component {
 								this.setState({ loading: false }, () => {
 									history.push({
 										pathname: this.props.is_expert ? '/detail/blocking' : '/',
-										state: { showInsightsPromoModal: true }
+										state: { isInsightsModalHidden: false }
 									});
 								});
 							});

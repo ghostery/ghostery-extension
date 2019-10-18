@@ -48,7 +48,7 @@ class Summary extends React.Component {
 		this.state = {
 			trackerLatencyTotal: 0,
 			disableBlocking: false,
-			showInsightsPromoModal: false
+			isInsightsModalHidden: true
 		};
 
 		// Event Bindings
@@ -82,7 +82,7 @@ class Summary extends React.Component {
 		this._dynamicUIPort.onMessage.addListener(this.handlePortMessage);
 		this._dynamicUIPort.postMessage({ name: 'SummaryComponentDidMount' });
 
-		const showModal = (this.props.location.state && this.props.location.state.showInsightsPromoModal) !== undefined ? this.props.location.state.showInsightsPromoModal : false;
+		const showModal = (this.props.location.state && !this.props.location.state.isInsightsModalHidden) !== undefined ? !this.props.location.state.isInsightsModalHidden : false;
 		const isInsightsSubscriber = (this.props.user && this.props.user.scopes != null) ? this.props.user.scopes.includes('subscriptions:insights') : false;
 
 		if (!isInsightsSubscriber && showModal) {
@@ -113,9 +113,11 @@ class Summary extends React.Component {
 	* Function to toggle the Modal
 	*/
 	toggleModal = () => {
-		const { showInsightsPromoModal } = this.state;
+		const { isInsightsModalHidden } = this.state;
+		console.log('toggling summary modal');
+		console.log('this.summary.props: ', this.props);
 		this.setState({
-			showInsightsPromoModal: !showInsightsPromoModal
+			isInsightsModalHidden: !isInsightsModalHidden
 		});
 	}
 
@@ -795,6 +797,23 @@ class Summary extends React.Component {
 		);
 	}
 
+	_renderInsightsPromoModal = () => {
+		const { account, isTimeForInsightsPromo } = this.props;
+		const { insightsPromoModalShown, isInsightsModalHidden } = this.state;
+
+		if (insightsPromoModalShown || !isTimeForInsightsPromo) return null;
+		if (account && account.user && account.user.scopes && account.user.scopes.includes('subscriptions:insights')) return null; // don't show the promo to Insights subscribers, either
+
+		sendMessage('promoModals.sawInsightsPromo', '', 'metrics');
+
+		return (
+			<InsightsPromoModal
+				show={!isInsightsModalHidden}
+				toggleModal={this.toggleModal}
+			/>
+		);
+	}
+
 	/**
 	* React's required render function. Returns JSX
 	* @return {JSX} JSX for rendering the Summary View of the panel
@@ -813,13 +832,9 @@ class Summary extends React.Component {
 			'Summary--condensed': isCondensed,
 		});
 
-		// console.log('history: ', this.props.location.state);
-
 		return (
 			<>
-				<Modal show={this.state.showInsightsPromoModal}>
-					<InsightsPromoModal toggleModal={this.toggleModal} />
-				</Modal>
+				{this._renderInsightsPromoModal()}
 				<div className={summaryClassNames}>
 					{!isCondensed && disableBlocking && (<NotScanned isSmall={is_expert} />)}
 					{!isCondensed && !disableBlocking && this._renderDonut()}

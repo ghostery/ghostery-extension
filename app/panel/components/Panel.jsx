@@ -28,6 +28,8 @@ class Panel extends React.Component {
 		super(props);
 		this.state = {
 			insightsPromoModalShown: false,
+			shouldRepopInsightsModal: false,
+			isInsightsModalHidden: false,
 			plusPromoModalShown: false
 		};
 
@@ -35,10 +37,6 @@ class Panel extends React.Component {
 		this.closeNotification = this.closeNotification.bind(this);
 		this.clickReloadBanner = this.clickReloadBanner.bind(this);
 		this.filterTrackers = this.filterTrackers.bind(this);
-
-		this.state = {
-			plusPromoModalShown: false,
-		};
 	}
 
 	/**
@@ -81,9 +79,9 @@ class Panel extends React.Component {
 	* Function to toggle the Modal
 	*/
 	toggleModal = () => {
-		const { insightsPromoModalShown } = this.state;
+		const { isInsightsModalHidden } = this.state;
 		this.setState({
-			insightsPromoModalShown: !insightsPromoModalShown
+			isInsightsModalHidden: !isInsightsModalHidden
 		});
 	}
 
@@ -261,8 +259,6 @@ class Panel extends React.Component {
 
 		if (plusPromoModalShown || !isTimeForAPlusPromo) return null;
 
-		const version = haveSeenInitialPlusPromo ? PlusPromoModal.UPGRADE : PlusPromoModal.INITIAL;
-
 		if (haveSeenInitialPlusPromo) { return this._renderPlusPromoUpgradeModal(); }
 
 		return (
@@ -270,6 +266,22 @@ class Panel extends React.Component {
 				show
 				location="panel"
 				clickHandler={this._handlePlusPromoModalClicks}
+			/>
+		);
+	}
+
+	_renderInsightsPromoModal = () => {
+		const { account, isTimeForInsightsPromo } = this.props;
+		const { insightsPromoModalShown } = this.state;
+		if (insightsPromoModalShown || !isTimeForInsightsPromo) return null;
+		if (account && account.user && account.user.scopes && account.user.scopes.includes('subscriptions:insights')) return null;
+
+		sendMessage('promoModals.sawInsightsPromo', '', 'metrics');
+
+		return (
+			<InsightsPromoModal
+				show={!this.state.isInsightsModalHidden}
+				toggleModal={this.toggleModal}
 			/>
 		);
 	}

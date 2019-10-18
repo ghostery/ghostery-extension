@@ -16,6 +16,7 @@ import globals from './Globals';
 
 const DAYS_BETWEEN_PROMOS = {
 	plus: globals.DEBUG ? 0.00025 : 30,
+	insights: globals.DEBUG ? 0.00025 : 30
 };
 const MSECS_IN_DAY = 86400000; // 1000 msecs-in-sec * 60 secs-in-min * 60 mins-in-hour * 24 hours-in-day
 const PLUS = 'plus';
@@ -38,22 +39,21 @@ class PromoModals {
 
 	static recordPlusPromoSighting() { this._recordPromoSighting(PLUS); }
 
-	static recordInsightsModalSighting() { this._recordPromoSighting(INSIGHTS); }
+	static recordInsightsPromoSighting() { this._recordPromoSighting(INSIGHTS); }
 
-	// TODO integrate the Insights promo modal into the "has it been long enough since last modal?" logic here
 	static _isTimeForAPromo(type) {
 		const lastSeenPlusPromo = conf[`${PLUS}_${PROMO_MODAL_LAST_SEEN}`];
 		const lastSeenInsightsPromo = conf[`${INSIGHTS}_${PROMO_MODAL_LAST_SEEN}`];
-		const lastSeenTime = Math.max(lastSeenPlusPromo, lastSeenInsightsPromo);
+		const lastSeenPromo = Math.max(lastSeenPlusPromo, lastSeenInsightsPromo);
 
-		if (lastSeenTime === null) { return true; }
+		if (lastSeenPromo === null) { return true; }
 
 		if (type === INSIGHTS && !this._hasEngagedFrequently()) {
 			return false;
 		}
 
 		return (
-			(Date.now() - lastSeenTime) >
+			(Date.now() - lastSeenPromo) >
 			(MSECS_IN_DAY * DAYS_BETWEEN_PROMOS[type])
 		);
 	}
@@ -63,7 +63,6 @@ class PromoModals {
 	}
 
 	static _hasEngagedFrequently() {
-		const today = new Date().getTime();
 		const { engaged_daily_velocity_with_repeats } = conf.metrics;
 		const pastSevenDays = Array.from(new Set(engaged_daily_velocity_with_repeats));
 		let timesPerWeek = 0;
@@ -76,7 +75,6 @@ class PromoModals {
 		}
 
 		if (timesPerWeek >= 3) {
-			conf.insights_promo_modal_last_seen = today;
 			return true;
 		}
 		return false;

@@ -766,11 +766,6 @@ class Metrics {
 	}
 
 	/**
-	 * Record Engaged event multiple times in a day
-	 * TODO: Save engaged_daily_velocity_with_repeats to chrome extension storage.
-	 * Current Result: engaged_daily_velocity_with_repeats is saved inside the chrome extension storage, but always is an array with 1 element (today).
-	 * 				   This suggests that conf.metrics.engaged_daily_velocity_with_repeats is an empty array in the beginning, but console.logs are showing correct logic.
-	 * What I have tried: JSON.stringifying the object, using ES6 spread instead of the push since setting an array directly seems to work, checking to see if conf.metrics.engaged_daily_velocity_with_repeats is undefined
 	 * @private
 	 */
 	_recordEngagedWithRepeats() {
@@ -779,10 +774,6 @@ class Metrics {
 		const today = Math.floor(Number(new Date().getTime()) / 86400000); // Today's time
 		engaged_daily_velocity_with_repeats.push(today);
 		conf.metrics.engaged_daily_velocity_with_repeats = engaged_daily_velocity_with_repeats;
-		if (PromoModals.isTimeForInsightsPromo()) {
-			sendMessage('promoModals.sawInsightsPromo', '', 'metrics');
-			sendMessage('showInsightsModal', '', 'metrics');
-		}
 	}
 
 	/**

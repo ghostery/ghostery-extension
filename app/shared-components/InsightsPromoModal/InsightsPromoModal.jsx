@@ -22,7 +22,7 @@ const InsightsPromoModal = ({ show, toggleModal }) => {
 	const clickSignIn = () => {
 		history.push({
 			pathname: '/login',
-			state: { showInsightsPromoModal: true }
+			state: { isInsightsModalHidden: false }
 		});
 		toggleModal();
 	};
