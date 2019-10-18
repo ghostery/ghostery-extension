@@ -272,6 +272,7 @@ class Panel extends React.Component {
 	_renderInsightsPromoModal = () => {
 		const { account, isTimeForInsightsPromo } = this.props;
 		const { insightsPromoModalShown } = this.state;
+
 		if (insightsPromoModalShown || !isTimeForInsightsPromo) return null;
 		if (account && account.user && account.user.scopes && account.user.scopes.includes('subscriptions:insights')) return null;
 

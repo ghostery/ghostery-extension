@@ -26,6 +26,7 @@ const InsightsPromoModal = ({ show, toggleModal }) => {
 		});
 		toggleModal();
 	};
+
 	return (
 		<Modal show={show}>
 			<div className="InsightsModal__content flex-container flex-dir-column align-middle">
