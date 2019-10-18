@@ -1,23 +1,24 @@
+$standard-font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
 .PlusPromoModal__gold-ghostie-badge {
 	margin-top: 21px;
 	margin-bottom: 16px;
 }
 
 .PlusPromoModal__header {
+	margin-bottom: 10px;
 	font-size: 20px;
 	font-weight: bold;
-	margin-bottom: 10px;
+	font-family: $standard-font-family;
 }
 
 .PlusPromoModal__description {
+	margin-bottom: 5px;
 	width: 350px;
 	text-align: center;
-	font-size: 14px;
-	margin-bottom: 5px;
-
-	&.cta {
-		font-weight: bold;
-	}
+	font-size: 18px;
+	font-weight: 500;
+	font-family: $standard-font-family
 }
 
 .PlusPromoModal__content {
@@ -51,6 +52,9 @@
 	width: 99%;
 	height: 72px;
 	z-index: -1;
+
+	&.initial { height: 72px; }
+	&.upgrade { height: 107px; }
 }
 
 .PlusPromoModal__thanks-for-download {
@@ -192,22 +196,26 @@
 }
 
 .PlusPromoModal__button {
-	margin: 0;
-	font-size: 11px;
-	font-weight: 600;
-	text-transform: uppercase;
-	letter-spacing: 0.5px;
+	border-radius: 3px;
 	display: flex;
-	align-items: center;
 	justify-content: center;
-	box-shadow: none;
+	align-items: center;
+	font-weight: bold;
+	font-family: $standard-font-family;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: background-color 0.25s ease-out, color 0.25s ease-out;
+	-webkit-appearance: none;
 
 	&.basic {
+		font-size: 11px;
 		width: 135px;
 		height: 40px;
 		border: solid 2px #15b4f2;
 		background-color: white;
 		color: #2cbcf4;
+		box-shadow: none;
 	}
 	&.basic:hover {
 		background-color: #2cbcf4;
@@ -215,15 +223,41 @@
 	}
 
 	&.plus {
+		font-size: 11px;
 		width: 163px;
 		height: 38px;
 		border: none;
 		background-image: linear-gradient(to bottom, #2fdbfa, #15b4f2);
 		color: white;
-		font-weight: 600;
-		letter-spacing: 0.5px;
+		box-shadow: none;
 	}
 	&.plus:hover {
 		background-image: linear-gradient(to bottom, #1fcbea, #05a4e2);
 	}
+
+	&.upgrade {
+		font-size: 13px;
+		width: 176px;
+		height: 36px;
+		box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12);
+		background-color: #1dafed;
+		color: white;
+	}
+	&.upgrade:hover {
+		background-color: #0698d6;
+	}
+}
+
+.PlusPromoModal__text-link-container {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.PlusPromoModal__text-link {
+	margin-left: 10px;
+	margin-right: 10px;
+	font-size: 15px;
+	font-family: $standard-font-family;
+	color: #4a4a4a;
 }

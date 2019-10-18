@@ -214,17 +214,23 @@ class Panel extends React.Component {
 			'flex-container',
 			'flex-dir-column',
 			'align-middle',
-			'panel'
+			'panel',
+			'upgrade'
 		);
 
 		return (
 			<Modal show>
 				<div className={contentClassNames}>
+					<div className="PlusPromoModal__buttons-background upgrade" />
 					<img className="PlusPromoModal__gold-ghostie-badge" src="/app/images/hub/home/gold-ghostie-badge.svg" />
 					<div className="PlusPromoModal__header">Upgrade your Ghostery experience</div>
 					<div className="PlusPromoModal__description cta">Unlock historical tracker insights, priority support access, and new color themes by upgrading to Ghostery Plus for only $2 per month.</div>
-					<div className="PlusPromoModal__button basic button" onClick={this._handlePlusPromoModalClicks}>
+					<div className="PlusPromoModal__button upgrade" onClick={this._handlePlusPromoModalClicks}>
 						<span>Upgrade to Plus</span>
+					</div>
+					<div className="PlusPromoModal__text-link-container">
+						<div className="PlusPromoModal__text-link">Already a subscriber? Sign In</div>
+						<div className="PlusPromoModal__text-link">No thanks, maybe later</div>
 					</div>
 				</div>
 			</Modal>
@@ -239,8 +245,6 @@ class Panel extends React.Component {
 		if (account && account.user && account.user.scopes && account.user.scopes.includes('subscriptions:insights')) return null; // don't show the promo to Insights subscribers, either
 
 		if (plusPromoModalShown || !isTimeForAPlusPromo) return null;
-
-		const version = haveSeenInitialPlusPromo ? PlusPromoModal.UPGRADE : PlusPromoModal.INITIAL;
 
 		if (haveSeenInitialPlusPromo) { return this._renderPlusPromoUpgradeModal(); }
 
