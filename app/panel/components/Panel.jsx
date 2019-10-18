@@ -14,11 +14,10 @@
 import React from 'react';
 import ClassNames from 'classnames';
 import Header from '../containers/HeaderContainer';
-import { PlusPromoModal } from '../../shared-components';
+import { PlusPromoModal, InsightsPromoModal, Modal } from '../../shared-components';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import { setTheme } from '../utils/utils';
-import { InsightsPromoModal } from '../../shared-components';
 /**
  * @class Implement base view with functionality common to all views.
  * @memberof PanelClasses
@@ -295,8 +294,6 @@ class Panel extends React.Component {
 		if (!this.props.initialized) {
 			return null;
 		}
-
-		console.error('IVZ this.props in Panel#render:', this.props);
 
 		const notificationText = this.props.notificationShown && this.renderNotification();
 

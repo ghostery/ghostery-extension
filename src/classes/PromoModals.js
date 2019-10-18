@@ -46,6 +46,7 @@ class PromoModals {
 		const lastSeenInsightsPromo = conf[`${INSIGHTS}_${PROMO_MODAL_LAST_SEEN}`];
 		const lastSeenPromo = Math.max(lastSeenPlusPromo, lastSeenInsightsPromo);
 
+		if (conf.notify_promotions === false) { return false; }
 		if (lastSeenPromo === null) { return true; }
 
 		if (type === INSIGHTS && !this._hasEngagedFrequently()) {

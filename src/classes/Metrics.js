@@ -16,9 +16,6 @@ import conf from './Conf';
 import { log, prefsSet, prefsGet } from '../utils/common';
 import { getActiveTab, processUrlQuery } from '../utils/utils';
 import rewards from './Rewards';
-import { sendMessage } from '../../app/panel/utils/msg';
-import PromoModals from './PromoModals';
-// import getUserSubscriptionData from './Account';
 
 // CONSTANTS
 const FREQUENCIES = { // in milliseconds
@@ -770,7 +767,6 @@ class Metrics {
 	 */
 	_recordEngagedWithRepeats() {
 		const engaged_daily_velocity_with_repeats = conf.metrics.engaged_daily_velocity_with_repeats || [];
-		console.log('Accessing engaged_daily_velocity_with_repeats: ', engaged_daily_velocity_with_repeats);
 		const today = Math.floor(Number(new Date().getTime()) / 86400000); // Today's time
 		engaged_daily_velocity_with_repeats.push(today);
 		conf.metrics.engaged_daily_velocity_with_repeats = engaged_daily_velocity_with_repeats;

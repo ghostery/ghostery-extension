@@ -17,8 +17,7 @@ import ClassNames from 'classnames';
 import Tooltip from './Tooltip';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
-import { Modal, InsightsPromoModal } from '../../shared-components';
-import history from '../utils/history';
+import { InsightsPromoModal } from '../../shared-components';
 import globals from '../../../src/classes/Globals';
 import {
 	CliqzFeature,
@@ -114,8 +113,6 @@ class Summary extends React.Component {
 	*/
 	toggleModal = () => {
 		const { isInsightsModalHidden } = this.state;
-		console.log('toggling summary modal');
-		console.log('this.summary.props: ', this.props);
 		this.setState({
 			isInsightsModalHidden: !isInsightsModalHidden
 		});
