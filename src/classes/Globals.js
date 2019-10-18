@@ -114,6 +114,7 @@ class Globals {
 			'is_expanded',
 			'is_expert',
 			'notify_library_updates',
+			'notify_promotions',
 			'notify_upgrade_updates',
 			'reload_banner_status',
 			'selected_app_ids',
