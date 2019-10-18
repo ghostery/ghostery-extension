@@ -880,6 +880,9 @@
 	"settings_new_features": {
 		"message": "Releases new features"
 	},
+	"settings_new_promotions": {
+		"message": "Has product promotions"
+	},
 	"settings_new_trackers": {
 		"message": "Adds new trackers to its tracker library"
 	},

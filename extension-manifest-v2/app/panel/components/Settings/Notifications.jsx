@@ -43,6 +43,12 @@ const Notifications = (props) => {
 					</div>
 					<div className="s-option-group">
 						<div className="s-square-checkbox">
+							<input type="checkbox" id="settings-new-promotions" name="notify_promotions" defaultChecked={settingsData.notify_promotions} onClick={props.toggleCheckbox} />
+							<label id="settings-new-promotions-label" htmlFor="settings-new-promotions">{ t('settings_new_promotions') }</label>
+						</div>
+					</div>
+					<div className="s-option-group">
+						<div className="s-square-checkbox">
 							<input type="checkbox" id="settings-new-trackers" name="notify_library_updates" defaultChecked={settingsData.notify_library_updates} onClick={props.toggleCheckbox} />
 							<label id="settings-new-trackers-label" htmlFor="settings-new-trackers">{ t('settings_new_trackers') }</label>
 						</div>
