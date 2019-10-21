@@ -262,8 +262,6 @@ class Panel extends React.Component {
 
 		if (plusPromoModalShown || !isTimeForAPlusPromo) return null;
 
-		const version = haveSeenInitialPlusPromo ? PlusPromoModal.UPGRADE : PlusPromoModal.INITIAL;
-
 		if (haveSeenInitialPlusPromo) { return this._renderPlusPromoUpgradeModal(); }
 
 		return (

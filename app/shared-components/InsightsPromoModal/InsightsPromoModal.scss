@@ -94,6 +94,10 @@
 	letter-spacing: .5px;
 	color: $white;
 	line-height: 36px;
+	&:hover {
+		background-image: linear-gradient(101deg, #000004, 	#02648C);
+		color: $white;
+	}
 }
 
 .InsightsModal__link {
@@ -102,6 +106,7 @@
 	color: $tundora;
 	&:hover {
 		cursor: pointer;
+		color: #090909;
 	}
 }
 
