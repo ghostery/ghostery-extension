@@ -53,6 +53,21 @@
 .RewardsPanel__learn_more {
 	margin-top: 10px;
 }
+.RewardsPanel__rewards_count_wrapper {
+  float: 'left';
+  margin: 120px 0 0 45px;
+}
+.RewardsPanel__rewards_count {
+  color: purple;
+  font-size: 48px;
+  text-align: center;
+}
+.RewardsPanel__rewards_count_title {
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
 
 // Reward List Item Component Classes
 .RewardListItem {

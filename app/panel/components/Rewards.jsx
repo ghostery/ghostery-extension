@@ -36,7 +36,7 @@ class Rewards extends React.Component {
 			rewardsArray: null,
 			iframeWidth: 0,
 			iframeHeight: 0,
-			rewardsBoxIsEmpty: false,
+			shouldHideRewards: false,
 			rewardsCount: 0,
 		};
 
@@ -137,14 +137,25 @@ class Rewards extends React.Component {
 			if (result.action !== 'pushData' || !this.iframe.current) { return; }
 			const { data: { vouchers = [] } = {} } = result;
 			const rewardsCount = vouchers.length;
-			this.setState({ rewardsBoxIsEmpty: rewardsCount === 0, rewardsCount });
+			this.setState({ shouldHideRewards: rewardsCount === 0, rewardsCount });
 			this.iframe.current.frameBorder = 0;
 			this.sendToIframe(result);
 		});
 	}
 
 	handleMyoffrzMessage(msg = {}) {
-		const { target, message = {} } = JSON.parse(msg.data || '{}');
+		let target;
+		let message;
+		try {
+			const parsedData = JSON.parse(msg.data || '{}');
+			target = parsedData.target;
+			message = parsedData.message || {};
+			// eslint-disable-next-line
+    } catch (e) {
+			// just silent return
+			return;
+		}
+
 		if (target !== 'cliqz-offers-cc') { return; }
 		if (message.action === 'resize') {
 			this.iframeResize(message.data);
@@ -274,7 +285,7 @@ class Rewards extends React.Component {
 
 		if (!this.props.enable_offers) { return null; }
 
-		if (this.props.enable_offers && this.state.rewardsBoxIsEmpty) {
+		if (this.props.enable_offers && this.state.shouldHideRewards) {
 			return (
 				<div className="RewardsPanel__info">
 					{ this.renderRewardSvg() }
@@ -286,33 +297,22 @@ class Rewards extends React.Component {
 		if (true) {
 			const { iframeWidth, iframeHeight } = this.state;
 			const src = chrome.runtime.getURL('cliqz/offers-cc/index.html?cross-origin');
+			// TODO i18n r === 1 ? 'Reward' : 'Rewards'
 			return (
 				<>
 					{this.props.is_expanded && (
-						<div style={{ float: 'left', margin: '120px 0 0 45px' }}>
-							<div
-								style={{
-									color: 'purple',
-									fontSize: '48px',
-									textAlign: 'center'
-								}}
-							>
+						<div className="RewardsPanel__rewards_count_wrapper">
+							<div className="RewardsPanel__rewards_count">
 								{this.state.rewardsCount}
 							</div>
-							<div
-								style={{
-									fontSize: '18px',
-									letterSpacing: '1px',
-									textTransform: 'uppercase'
-								}}
-							>
+							<div className="RewardsPanel__rewards_count_title">
 								{this.state.rewardsCount === 1 ? 'Reward' : 'Rewards'}
 							</div>
 						</div>
 					)}
 					<iframe
 						ref={this.iframe}
-						style={{ float: 'right', border: 0 }}
+						className="RewardsPanel__myoffrz_iframe"
 						src={src}
 						width={iframeWidth}
 						height={iframeHeight}

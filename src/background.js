@@ -731,7 +731,7 @@ function reportCliqzOffer(message) {
  */
 function onMessageHandler(request, sender, callback) {
 	if (request.module === 'offers-banner' && request.action === 'send') {
-    // TODO check request.source
+		// TODO check request.source
 		console.log('XXXX onMessageHandler', request, sender);
 		// eslint-disable-next-line
 		const [module, _, msg = {}] = request.args;
