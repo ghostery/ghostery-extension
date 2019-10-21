@@ -246,6 +246,11 @@ $standard-font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, 
 	&.upgrade:hover {
 		background-color: #0698d6;
 	}
+
+	.button-text {
+		color: white;
+		text-decoration: none;
+	}
 }
 
 .PlusPromoModal__text-link-container {

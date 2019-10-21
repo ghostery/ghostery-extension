@@ -15,6 +15,7 @@ import React from 'react';
 import ClassNames from 'classnames';
 import Header from '../containers/HeaderContainer';
 import { PlusPromoModal } from '../../shared-components';
+import PanelToTabLink from './BuildingBlocks/PanelToTabLink';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import { setTheme } from '../utils/utils';
@@ -225,8 +226,10 @@ class Panel extends React.Component {
 					<img className="PlusPromoModal__gold-ghostie-badge" src="/app/images/hub/home/gold-ghostie-badge.svg" />
 					<div className="PlusPromoModal__header">Upgrade your Ghostery experience</div>
 					<div className="PlusPromoModal__description cta">Unlock historical tracker insights, priority support access, and new color themes by upgrading to Ghostery Plus for only $2 per month.</div>
-					<div className="PlusPromoModal__button upgrade" onClick={this._handlePlusPromoModalClicks}>
-						<span>Upgrade to Plus</span>
+					<div onClick={this._handlePlusPromoModalClicks}>
+						<PanelToTabLink className="PlusPromoModal__button upgrade" href="http://signon.ghostery.com/en/subscribe/">
+							<span className="button-text">Upgrade to Plus</span>
+						</PanelToTabLink>
 					</div>
 					<div className="PlusPromoModal__text-link-container">
 						<div className="PlusPromoModal__text-link">Already a subscriber? Sign In</div>
