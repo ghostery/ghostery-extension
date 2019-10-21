@@ -54,7 +54,7 @@
 	margin-top: 10px;
 }
 .RewardsPanel__rewards_count_wrapper {
-  float: 'left';
+  float: left;
   margin: 120px 0 0 45px;
 }
 .RewardsPanel__rewards_count {
@@ -67,7 +67,10 @@
   letter-spacing: 1px;
   text-transform: uppercase;
 }
-
+.RewardsPanel__myoffrz_iframe {
+  float: right;
+  border: 0;
+}
 
 // Reward List Item Component Classes
 .RewardListItem {
