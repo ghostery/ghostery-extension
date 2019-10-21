@@ -1786,9 +1786,6 @@
 	"subscribe_pitch_learn_more": {
 		"message": "Learn more"
 	},
-	"subscribe_pitch_sign_here": {
-		"message": "Already a subscriber? Sign in here"
-	},
 	"subscription_midnight_theme": {
 		"message": "Midnight Theme"
 	},
@@ -2113,5 +2110,25 @@
 	},
 	"new_color_themes": {
 		"message": "New Color Themes"
+	},
+	"upgrade_cta_TEXT": {
+		"message": "Unlock historical tracker insights, priority support access, and new color themes by upgrading to Ghostery Plus for only $2 per month.",
+		"description": "Body text in a non-responsive modal. Character limit: 135."
+	},
+	"upgrade_your_ghostery_experience": {
+		"message": "Upgrade your Ghostery experience",
+		"description": "Header text for a non-responsive modal. Character limit: 40."
+	},
+	"upgrade_to_plus": {
+		"message": "Upgrade to Plus",
+		"description": "Button text in a non-responsive modal. Character limit: 35."
+	},
+	"no_thanks_maybe_later": {
+		"message": "No thanks, maybe later",
+		"description": "Text link in a non-responsive modal. Character limit: 25."
+	},
+	"already_subscribed_sign_in": {
+		"message": "Already subscribed? Sign In",
+		"description": "Character limit: 30."
 	}
 }

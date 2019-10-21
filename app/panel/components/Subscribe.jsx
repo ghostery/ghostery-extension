@@ -44,7 +44,7 @@ const Subscribe = (props) => {
 			</div>
 			{(loggedIn === 'false') && (
 				<NavLink to="/login" className="pitch-already-subscriber">
-					<span>{t('subscribe_pitch_sign_here')}</span>
+					<span>{t('already_subscribed_sign_in')}</span>
 				</NavLink>
 			)}
 		</div>

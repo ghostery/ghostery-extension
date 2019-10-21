@@ -195,6 +195,14 @@ $standard-font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, 
 	justify-content: center;
 }
 
+.PlusPromoModal__button-container {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	position: absolute;
+	bottom: 50px;
+}
+
 .PlusPromoModal__button {
 	border-radius: 3px;
 	display: flex;
@@ -237,7 +245,6 @@ $standard-font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, 
 
 	&.upgrade {
 		font-size: 13px;
-		width: 176px;
 		height: 36px;
 		box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12);
 		background-color: #1dafed;
@@ -248,15 +255,18 @@ $standard-font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, 
 	}
 
 	.button-text {
+		padding: 0px 20px 0px;
 		color: white;
 		text-decoration: none;
 	}
 }
 
 .PlusPromoModal__text-link-container {
+	position: absolute;
+	bottom: 10px;
 	width: 100%;
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-evenly;
 }
 
 .PlusPromoModal__text-link {
@@ -265,4 +275,6 @@ $standard-font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, 
 	font-size: 15px;
 	font-family: $standard-font-family;
 	color: #4a4a4a;
+	text-decoration: underline;
+	cursor: pointer;
 }
