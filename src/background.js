@@ -1408,7 +1408,7 @@ messageCenter.on('enabled', () => {
 			// first check that the message is from core and is the one we expect
 			if (msg.origin === 'offers-core' &&
 				msg.type === 'push-offer' &&
-				msg.data.offer_data
+				msg.data.offer_data && false // TODO dont forget remove fake
 			) {
 				log('RECEIVED OFFER', msg);
 
