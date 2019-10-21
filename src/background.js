@@ -731,11 +731,12 @@ function reportCliqzOffer(message) {
  */
 function onMessageHandler(request, sender, callback) {
 	if (request.module === 'offers-banner' && request.action === 'send') {
+    // TODO check request.source
 		console.log('XXXX onMessageHandler', request, sender);
 		// eslint-disable-next-line
 		const [module, _, msg = {}] = request.args;
 		if (module !== 'offers-cc') { return; }
-		if (msg.action === 'myoffrzTurnoffRewards') {
+		if (msg.action === 'myOffrzTurnoff') {
 			panelData.set({ enable_offers: false });
 			return;
 		}
