@@ -209,6 +209,13 @@ class Panel extends React.Component {
 		});
 	}
 
+	_handleNoThanksClick = () => {
+		sendMessage('promoModals.sawPlusPromo', {});
+		this.setState({
+			plusPromoModalShown: true
+		});
+	}
+
 	_renderPlusPromoUpgradeModal() {
 		const contentClassNames = ClassNames(
 			'PlusPromoModal__content',
@@ -233,7 +240,7 @@ class Panel extends React.Component {
 					</div>
 					<div className="PlusPromoModal__text-link-container">
 						<div className="PlusPromoModal__text-link">Already a subscriber? Sign In</div>
-						<div className="PlusPromoModal__text-link">No thanks, maybe later</div>
+						<div onClick={this._handleNoThanksClick} className="PlusPromoModal__text-link">No thanks, maybe later</div>
 					</div>
 				</div>
 			</Modal>
