@@ -2095,26 +2095,23 @@
   "myoffrz_badge_text_new": {
       "message": "NEW"
   },
-  "myoffrz_expires_day": {
-      "message": "day"
+  "myoffrz_expires_in_day": {
+      "message": "Available for 1 day"
   },
-  "myoffrz_expires_days": {
-      "message": "days"
+  "myoffrz_expires_in_days": {
+      "message": "Available for $1 days"
   },
-  "myoffrz_expires_hour": {
-      "message": "hour"
+  "myoffrz_expires_in_hour": {
+      "message": "Available for 1 hour"
   },
-  "myoffrz_expires_hours": {
-      "message": "hours"
+  "myoffrz_expires_in_hours": {
+      "message": "Available for $1 hours"
   },
-  "myoffrz_expires_in": {
-      "message": "Available for"
+  "myoffrz_expires_in_minute": {
+      "message": "Available for 1 minute"
   },
-  "myoffrz_expires_minute": {
-      "message": "minute"
-  },
-  "myoffrz_expires_minutes": {
-      "message": "minutes"
+  "myoffrz_expires_in_minutes": {
+      "message": "Available for $1 minutes"
   },
   "myoffrz_apply_code": {
       "message": "Apply code"
