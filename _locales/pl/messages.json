@@ -2298,6 +2298,9 @@
   "myoffrz_tooltip_new_offer": {
       "message": "Pojawił się nowy element Reward!"
   },
+  "myoffrz_turnoff_notification": {
+      "message": "Funkcja Ghostery Rewards jest teraz wyłączona. Możesz włączyć ją w dowolnym momencie w swoich Ustawieniach lub w panelu Rewards."
+  },
   "myoffrz_optin_description": {
       "message": "Czy chcesz otrzymywać oferty i zniżki od zaufanych partnerów Ghostery?"
   },
@@ -2324,5 +2327,38 @@
   },
   "myoffrz_copy_code": {
       "message": "Kopiuj kod"
+  },
+  "myoffrz_expires_in_day": {
+      "message": "Dostępne przez 1 dzień"
+  },
+  "myoffrz_expires_in_days": {
+      "message": "Dostępne przez $COUNT$ dni",
+      "placeholders": {
+          "count": {
+              "content": "$1"
+          }
+      }
+  },
+  "myoffrz_expires_in_hour": {
+      "message": "Dostępne przez 1 godzinę"
+  },
+  "myoffrz_expires_in_hours": {
+      "message": "Dostępne przez $COUNT$ godzin/y",
+      "placeholders": {
+          "count": {
+              "content": "$1"
+          }
+      }
+  },
+  "myoffrz_expires_in_minute": {
+      "message": "Available for 1 minute"
+  },
+  "myoffrz_expires_in_minutes": {
+      "message": "Available for $COUNT$ minutes",
+      "placeholders": {
+          "count": {
+              "content": "$1"
+          }
+      }
   }
 }

@@ -2057,6 +2057,9 @@
   "myoffrz_tooltip_new_offer": {
       "message": "You have a new offer"
   },
+  "myoffrz_turnoff_notification": {
+      "message": "Ghostery Rewards is now off. You can always turn it on in your Settings         or the Rewards dashboard."
+  },
   "myoffrz_welcome_link": {
       "message": "How It Works"
   },
