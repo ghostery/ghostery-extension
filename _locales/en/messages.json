@@ -2099,19 +2099,34 @@
       "message": "Available for 1 day"
   },
   "myoffrz_expires_in_days": {
-      "message": "Available for $1 days"
+      "message": "Available for $COUNT$ days",
+      "placeholders": {
+          "count": {
+              "content": "$1"
+          }
+      }
   },
   "myoffrz_expires_in_hour": {
       "message": "Available for 1 hour"
   },
   "myoffrz_expires_in_hours": {
-      "message": "Available for $1 hours"
+      "message": "Available for $COUNT$ hours",
+      "placeholders": {
+          "count": {
+              "content": "$1"
+          }
+      }
   },
   "myoffrz_expires_in_minute": {
       "message": "Available for 1 minute"
   },
   "myoffrz_expires_in_minutes": {
-      "message": "Available for $1 minutes"
+      "message": "Available for $COUNT$ minutes",
+      "placeholders": {
+          "count": {
+              "content": "$1"
+          }
+      }
   },
   "myoffrz_apply_code": {
       "message": "Apply code"
