@@ -2024,12 +2024,6 @@
   "myoffrz_get_code": {
       "message": "Get code"
   },
-  "myoffrz_help": {
-      "message": "Help"
-  },
-  "myoffrz_learn_more": {
-      "message": "Learn more"
-  },
   "myoffrz_offer_removed": {
       "message": "This offer was removed."
   },
@@ -2039,12 +2033,6 @@
   "myoffrz_powered_by_offrz": {
       "message": "POWERED BY MyOffrz"
   },
-  "myoffrz_send": {
-      "message": "Send"
-  },
-  "myoffrz_settings": {
-    "message": "Settings"
-  },
   "myoffrz_show_code": {
     "message": "Show code"
   },
@@ -2053,12 +2041,6 @@
   },
   "myoffrz_skip": {
       "message": "Skip"
-  },
-  "myoffrz_tooltip_new_offer": {
-      "message": "You have a new offer"
-  },
-  "myoffrz_turnoff_notification": {
-      "message": "Ghostery Rewards is now off. You can always turn it on in your Settings         or the Rewards dashboard."
   },
   "myoffrz_welcome_link": {
       "message": "How It Works"
@@ -2078,6 +2060,35 @@
   "myoffrz_why_see_this": {
       "message": "Why do I see this?"
   },
+  "myoffrz_badge_text_new": {
+      "message": "NEW"
+  },
+  "myoffrz_conditions": {
+      "message": "Conditions"
+  },
+
+
+  "OFFERS_ALREADY_TRANSLATED": {
+    "message": ""
+  },
+  "myoffrz_help": {
+      "message": "Help"
+  },
+  "myoffrz_learn_more": {
+      "message": "Learn more"
+  },
+  "myoffrz_send": {
+      "message": "Send"
+  },
+  "myoffrz_settings": {
+    "message": "Settings"
+  },
+  "myoffrz_tooltip_new_offer": {
+      "message": "New Reward discovered!"
+  },
+  "myoffrz_turnoff_notification": {
+      "message": "Ghostery Rewards is now off. You can always turn it on in your Settings         or the Rewards dashboard."
+  },
   "myoffrz_optin_description": {
       "message": "Would you like to receive offers and discounts from trusted Ghostery partners?"
   },
@@ -2093,10 +2104,17 @@
   "myoffrz_rewards_new": {
     "message": "New Reward discovered!"
   },
-
-
-  "myoffrz_badge_text_new": {
-      "message": "NEW"
+  "myoffrz_apply_code": {
+      "message": "Apply code"
+  },
+  "myoffrz_cancel": {
+      "message": "Cancel"
+  },
+  "myoffrz_copied": {
+      "message": "Copied"
+  },
+  "myoffrz_copy_code": {
+      "message": "Copy code"
   },
   "myoffrz_expires_in_day": {
       "message": "Available for 1 day"
