@@ -15,7 +15,6 @@ import globals from './Globals';
 import conf from './Conf';
 import { log, prefsSet, prefsGet } from '../utils/common';
 import { getActiveTab, processUrlQuery } from '../utils/utils';
-import rewards from './Rewards';
 
 // CONSTANTS
 const FREQUENCIES = { // in milliseconds
@@ -26,7 +25,6 @@ const FREQUENCIES = { // in milliseconds
 };
 const CRITICAL_METRICS = ['install', 'install_complete', 'upgrade', 'active', 'engaged', 'uninstall'];
 const CAMPAIGN_METRICS = ['install', 'active', 'uninstall'];
-const FIRST_REWARD_METRICS = ['rewards_first_accept', 'rewards_first_reject', 'rewards_first_reject_optin', 'rewards_first_reject_optout', 'rewards_first_learn_more'];
 const { METRICS_SUB_DOMAIN, EXTENSION_VERSION, BROWSER_INFO } = globals;
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const MAX_DELAYED_PINGS = 100;
@@ -229,7 +227,6 @@ class Metrics {
 			case 'create_account_extension':
 			case 'create_account_setup':
 			case 'list_dash':
-			case 'rewards_learn':
 			case 'pause_snooze':
 			case 'smartblock_off':
 			case 'smartblock_on':
@@ -249,13 +246,6 @@ class Metrics {
 			case 'rewards_off':
 			case 'rewards_on':
 				this._sendReq(type, ['all', 'daily']);
-				break;
-			case 'rewards_first_learn_more':
-			case 'rewards_first_accept':
-			case 'rewards_first_reject':
-			case 'rewards_first_reject_optin':
-			case 'rewards_first_reject_optout':
-				this._sendReq(type, ['all']);
 				break;
 
 			// Ghostery 8.3+
@@ -391,8 +381,6 @@ class Metrics {
 			`&sb=${encodeURIComponent(conf.setup_block.toString())}` +
 			// Recency, days since last active daily ping
 			`&rc=${encodeURIComponent(this._getRecencyActive(type, frequency).toString())}` +
-			// Current number of rewards received
-			`&rr=${encodeURIComponent(this._getRewardsCount().toString())}` +
 
 			// New parameters to Ghostery 8.3
 			// Subscription Type
@@ -415,11 +403,6 @@ class Metrics {
 				`&us=${encodeURIComponent(this.utm_source)}` +
 				// Marketing campaign (Former utm_campaign)
 				`&uc=${encodeURIComponent(this.utm_campaign)}`;
-		} else if (FIRST_REWARD_METRICS.includes(type)) {
-			// metrics specific to the first reward instance
-			metrics_url +=
-				// Reward ID
-				`&rid=${encodeURIComponent(this._getRewardId().toString())}`;
 		} else if (type === 'broken_page' && this._brokenPageWatcher.on) {
 			metrics_url +=
 				// What triggered the broken page ping?
@@ -552,39 +535,6 @@ class Metrics {
 			return -1;
 		}
 		return subscriptions.productName.toUpperCase().replace(' ', '_');
-	}
-
-	/**
-	 * Get the number of Rewards shown to the user.
-	 *
-	 * @private
-	 *
-	 * @return {string} 	number of rewards, grouped into ranges.
-	 */
-	_getRewardsCount() {
-		const numShown = rewards.totalOffersSeen;
-		if (numShown >= 6) {
-			return '6+';
-		}
-		if (numShown >= 2) {
-			return '2-5';
-		}
-		if (numShown === 1) {
-			return '1';
-		}
-		return '0';
-	}
-
-	/**
-	 * Get the current Reward Id.
-	 *
-	 * @private
-	 *
-	 * @return {string} 	the current Reward Id
-	 */
-	_getRewardId() {
-		const currentOffer = rewards.currentOffer || { offer_id: 'no_id' };
-		return currentOffer.offer_id;
 	}
 
 	/**

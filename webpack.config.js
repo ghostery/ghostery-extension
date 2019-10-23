@@ -57,7 +57,6 @@ module.exports = {
 		panel_android_react: [`${PANEL_ANDROID_DIR}/index.jsx`],
 		panel_react: [`${PANEL_DIR}/index.jsx`],
 		purplebox: [`${CONTENT_SCRIPTS_DIR}/purplebox.js`],
-		rewards: [`${CONTENT_SCRIPTS_DIR}/rewards`],
 		shared_comp_react: [`${SHARED_COMP_DIR}/index.js`],
 		// Sass
 		foundation: [`${SASS_DIR}/vendor/foundation.scss`],

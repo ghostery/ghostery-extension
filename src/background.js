@@ -107,24 +107,6 @@ function setCliqzModuleEnabled(module, enabled) {
 }
 
 /**
- * Register/unregister real estate with Offers core module.
- * @memberOf Background
- * @param  {Object} offersModule offers module
- * @param  {Boolean} register    true - register, false - unregister
- */
-function registerWithOffers(offersModule, register) {
-	if (!offersModule.isEnabled) {
-		return Promise.resolve();
-	}
-
-	log('REGISTER WITH OFFERS CALLED', register);
-	return offersModule.action(register ? 'registerRealEstate' : 'unregisterRealEstate', { realEstateID: REAL_ESTATE_ID })
-		.catch(() => {
-			log(`FAILED TO ${register ? 'REGISTER' : 'UNREGISTER'} REAL ESTATE WITH OFFERS CORE`);
-		});
-}
-
-/**
  * Check and fetch a new tracker library every hour as needed
  * @memberOf Background
  */
@@ -268,6 +250,24 @@ function getSiteData() {
 }
 
 /**
+ * Register/unregister real estate with Offers core module.
+ * @memberOf Background
+ * @param  {Object} offersModule offers module
+ * @param  {Boolean} register    true - register, false - unregister
+ */
+function registerWithOffers(offersModule, register) {
+	if (!offersModule.isEnabled) {
+		return Promise.resolve();
+	}
+
+	log('REGISTER WITH OFFERS CALLED', register);
+	return offersModule.action(register ? 'registerRealEstate' : 'unregisterRealEstate', { realEstateID: REAL_ESTATE_ID })
+		.catch(() => {
+			log(`FAILED TO ${register ? 'REGISTER' : 'UNREGISTER'} REAL ESTATE WITH OFFERS CORE`);
+		});
+}
+
+/**
  * @todo  consider never return anything explicitly from message handlers
  * as we never make callback calls asynchronously.
  */
@@ -372,14 +372,8 @@ function handleGhosteryDotCom(name, message, tab_id) {
  */
 function handleNotifications(name, message, tab_id, callback) {
 	if (name === 'dismissCMPMessage') {
-		if (utils.isCliqzOffer(message.cmp_data)) {
-			reportCliqzOffer(message);
-		} else if (cmp.CMP_DATA && cmp.CMP_DATA.length) {
+		if (cmp.CMP_DATA && cmp.CMP_DATA.length) {
 			cmp.CMP_DATA.splice(0, 1);
-		}
-	} else if (name === 'cmpMessageShown') {
-		if (utils.isCliqzOffer(message.cmp_data)) {
-			reportCliqzOffer(message);
 		}
 	} else if (name === 'openTab') {
 		utils.openNewTab(message);
@@ -498,34 +492,17 @@ function handleBlockedRedirect(name, message, tab_id, callback) {
  */
 function handleRewards(name, message, callback) {
 	switch (name) {
+    // TODO seems  we do not need `case rewardSignal`, but still better to check
 		case 'rewardSignal':
 			rewards.sendSignal(message);
-			break;
-		case 'rewardSeen':
-			rewards.markRewardRead(message.offerId);
-			button.update();
-			break;
-		case 'deleteReward':
-			rewards.markRewardRead(message.offerId);
-			rewards.deleteReward(message.offerId);
-			button.update();
-			break;
-		case 'rewardsPromptAccepted':
-			conf.rewards_accepted = true;
-			break;
-		case 'rewardsPromptOptedIn':
-			conf.rewards_opted_in = true;
 			break;
 		case 'ping':
 			metrics.ping(message);
 			break;
 		case 'setPanelData':
 			if (message.hasOwnProperty('enable_offers')) {
-				if (!offers.isEnabled && message.enable_offers === true) {
-					OFFERS_ENABLE_SIGNAL = message.signal;
-				} else if (message.enable_offers === false) {
-					rewards.sendSignal(message.signal);
-				}
+        console.log('XXXX signal for turn(on|off) offers', message.signal);
+        rewards.sendSignal(message.signal);
 				panelData.set({ enable_offers: message.enable_offers });
 			}
 			return callback();
@@ -622,20 +599,12 @@ function handleGhosteryHub(name, message, callback) {
 			break;
 		}
 		case 'SET_GHOSTERY_REWARDS': {
-			const { enable_ghostery_rewards } = message;
-			if (!offers.isEnabled && enable_ghostery_rewards === true) {
-				OFFERS_ENABLE_SIGNAL = {
-					actionId: 'rewards_on',
-					origin: 'ghostery-setup-flow',
-					type: 'action-signal',
-				};
-			} else if (enable_ghostery_rewards === false) {
-				rewards.sendSignal({
-					actionId: 'rewards_off',
-					origin: 'ghostery-setup-flow',
-					type: 'action-signal',
-				});
-			}
+			const { enable_ghostery_rewards = true } = message;
+      rewards.sendSignal({ // TODO check manually ghostery hub turnoff
+        actionId: `rewards_${enable_ghostery_rewards ? 'on' : 'off'}',
+        origin: 'ghostery-setup-flow',
+        type: 'action-signal',
+      };
 			panelData.set({ enable_offers: enable_ghostery_rewards });
 			callback({ enable_ghostery_rewards });
 			break;
@@ -682,41 +651,6 @@ function handlePurplebox(name, message) {
 }
 
 /**
- * Reformats messages coming from context script and sends them to Cliqz.
- * @memberOf Background
- *
- * @param  {Object} 	message 	message data
- */
-function reportCliqzOffer(message) {
-	const { offer_id } = message.cmp_data.data.offer_info;
-	const msgToOffersCore = {
-		// OFFERS_HANDLER_ID is scoped to background.js
-		// If we ever need it elswhere - we can make it the property of
-		// globals (src/classes/Globals)
-		origin: OFFERS_HANDLER_ID,
-		type: 'offer-action-signal',
-		data: {
-			action_id: '',
-			offer_id
-		}
-	};
-	// check the type of the message
-	if (message.reason === 'offerShown') {
-		msgToOffersCore.data.action_id = 'offer_shown';
-	} else if (message.reason === 'closeButton') {
-		msgToOffersCore.data.action_id = 'offer_closed';
-	} else if (message.reason === 'link') {
-		msgToOffersCore.data.action_id = 'offer_ca_action';
-	} else {
-		// TODO: @serge how do we log here an error?
-		log('[offers_log]: unknown message reason: ', message.reason);
-		return;
-	}
-	const cliqzCore = cliqz.modules.core;
-	cliqzCore.action('publishEvent', 'offers-recv-ch', msgToOffersCore);
-}
-
-/**
  * Aggregated handler for <b>runtime.onMessage</b>
  *
  * All callbacks are used synchronously.
@@ -732,7 +666,7 @@ function reportCliqzOffer(message) {
 function onMessageHandler(request, sender, callback) {
 	if (request.module === 'offers-banner' && request.action === 'send') {
 		// TODO check request.source
-		console.log('XXXX onMessageHandler', request, sender);
+		console.log('XXXX onMessageHandler check request.source', request, sender);
 		// eslint-disable-next-line
 		const [module, _, msg = {}] = request.args;
 		if (module !== 'offers-cc') { return; }
@@ -1133,20 +1067,17 @@ function initializeDispatcher() {
 		}
 	});
 	dispatcher.on('conf.save.enable_offers', (enableOffersIn) => {
+    console.log('XXXX conf.save.enable_offers dispacher', enableOffersIn);
 		button.update();
 		let firstStep = Promise.resolve();
 		let enableOffers = enableOffersIn;
 		if (IS_CLIQZ) {
 			enableOffers = false;
-		} else if (!enableOffers) {
-			const actions = cliqz &&
-				cliqz.modules['offers-v2'] &&
-				cliqz.modules['offers-v2'].background &&
-				cliqz.modules['offers-v2'].background.actions;
-			if (actions) {
-				firstStep = actions.flushSignals();
-			}
-			OFFERS_ENABLE_SIGNAL = undefined;
+		} else if (!enableOffers && cliqz.modules['offers-v2'].isEnabled) {
+      console.log('XXXX should be true when enabling')
+      // TODO check that signals is flushed
+      // we going to turn off offers maybe we dont need to flush it
+      cliqz.modules['offers-v2'].action('flushSignals');
 		}
 		const toggleModule = () => setCliqzModuleEnabled(offers, enableOffers);
 		const toggleConnection = () => registerWithOffers(offers, enableOffers);
@@ -1340,20 +1271,6 @@ adblocker.on('enabled', () => {
  */
 offers.on('enabled', () => {
 	offers.isReady().then(() => {
-		log('IN OFFERS ON ENABLED', offers, messageCenter);
-		if (OFFERS_ENABLE_SIGNAL) {
-			rewards.sendSignal(OFFERS_ENABLE_SIGNAL);
-
-			const actions = cliqz &&
-			cliqz.modules['offers-v2'] &&
-			cliqz.modules['offers-v2'].background &&
-			cliqz.modules['offers-v2'].background.actions;
-			if (actions) {
-				actions.flushSignals();
-			}
-
-			OFFERS_ENABLE_SIGNAL = undefined;
-		}
 		if (DEBUG) {
 			offers.action('setConfiguration', {
 				config_location: 'de',
@@ -1364,86 +1281,7 @@ offers.on('enabled', () => {
 				offersTelemetryFreq: '10'
 			});
 		}
-		registerWithOffers(offers, true)
-			.then(() => {
-				setCliqzModuleEnabled(messageCenter, true);
-			});
-	});
-});
-
-/**
- * Set listener for 'enabled' event for Offers module.
- * It registers message handler for messages with the offers.
- * This handler adds incoming message data to the array of
- * notification messages (CMP_DATA) to be eventually displayed.
- * @memberOf Background
- */
-messageCenter.on('enabled', () => {
-	messageCenter.isReady().then(() => {
-		log('IN MESSAGE CENTER ON ENABLED', offers, messageCenter);
-		// const messageCenter = cliqz.modules['message-center'];
-		return messageCenter.action('registerMessageHandler', OFFERS_HANDLER_ID, (msg) => {
-			// offers enabled at the moment when message received
-			messageCenter.action('hideMessage', OFFERS_HANDLER_ID, msg);
-			msg.Dismiss = 1; // to be immediately dismissed once shown
-			/**
-			 * We changed the message structure here so we need to map
-			 * to the new way on ghostery 8 after nav-ext 1.18
-			 *
-			 * {
-			 * 	id: offerInfoCpy.display_id,
-			 *  Message: offerInfoCpy.ui_info.template_data.title,
-			 *  Link: offerInfoCpy.ui_info.template_data.call_to_action.url,
-			 *  LinkText: offerInfoCpy.ui_info.template_data.call_to_action.text,
-			 *  type: 'offers',
-			 *  origin: 'cliqz',
-			 *  data: {
-			 *   offer_info: {
-			 *    offer_id: data.offer_data.offer_id,
-			 *    offer_urls: urlsToShow
-			 *   }
-			 *  }
-			 * }
-			*/
-			// first check that the message is from core and is the one we expect
-			if (msg.origin === 'offers-core' &&
-				msg.type === 'push-offer' &&
-				msg.data.offer_data && false // TODO dont forget remove fake
-			) {
-				log('RECEIVED OFFER', msg);
-
-				const unreadIdx = rewards.unreadOfferIds.indexOf(msg.data.offer_id);
-				if (unreadIdx !== -1) {
-					rewards.unreadOfferIds.splice(unreadIdx, 1);
-				}
-				rewards.storedOffers[msg.data.offer_id] = msg.data;
-				rewards.unreadOfferIds.push(msg.data.offer_id);
-				button.update();
-
-				// Don't show the Rewards hotdog if Ghostery is currently paused
-				if (msg.data.offer_data.ui_info.notif_type !== 'star' && !globals.SESSION.paused_blocking) {
-					// We use getTabByUrl() instead of getActiveTab()
-					// because user may open the offer-triggering url in a new tab
-					// through the context menu, which may not switch to the new tab
-					// If the url provided by Cliqz turns out to be invalid, we fall back to getActiveTabs
-					if (msg.data.display_rule && msg.data.display_rule.url) {
-						utils.getTabByUrl(
-							msg.data.display_rule.url,
-							(tab) => {
-								const tabId = tab ? tab.id : 0;
-								rewards.showHotDogOrOffer(tabId, msg.data);
-							},
-							() => {
-								utils.getActiveTab((tab) => {
-									const tabId = tab ? tab.id : 0;
-									rewards.showHotDogOrOffer(tabId, msg.data);
-								});
-							}
-						);
-					}
-				}
-			}
-		});
+    registerWithOffers(offers, true)
 	});
 });
 

@@ -15,7 +15,6 @@
 
 import conf from './Conf';
 import foundBugs from './FoundBugs';
-import rewards from './Rewards';
 import Policy from './Policy';
 import { getCliqzData } from '../utils/cliqzModulesData';
 import { getTab } from '../utils/utils';
@@ -78,8 +77,7 @@ class BrowserButton {
 		if (globals.BROWSER_INFO.os === 'android') { return; }
 		if (tabId <= 0) { return; }
 
-		const iconAlt = (!active) ? '_off' :
-			(conf.enable_offers && rewards.unreadOfferIds.length > 0) ? '_star' : '';
+		const iconAlt = (!active) ? '_off' : '';
 
 		chrome.browserAction.setIcon({
 			path: {
@@ -105,9 +103,7 @@ class BrowserButton {
 
 					// Only show the badge if the conf setting allows it
 					if (conf.show_badge) {
-						// Don't show badgeText when there is a new reward and Ghostery is active
-						// Otherwise set the tracker count to the badgeText
-						const text = (conf.enable_offers && rewards.unreadOfferIds.length && active) ? '' : trackerCount;
+						const text = trackerCount;
 						chrome.browserAction.setBadgeText({ text, tabId });
 
 						// Set badge background color

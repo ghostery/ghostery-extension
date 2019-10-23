@@ -94,10 +94,6 @@ class PanelData {
 			account.getUserSettings()
 				.then(userSettings => this._postUserSettings(userSettings))
 				.catch(() => log('Failed getting remote user settings from PanelData#initPort. User not logged in.'));
-
-			if (this._needToFilterOffersByRemote()) {
-				rewards.filterOffersByRemote().catch(err => log('Failed to filter offers by remote:', err));
-			}
 		});
 	}
 
@@ -130,16 +126,7 @@ class PanelData {
 				case 'RewardsComponentDidMount':
 					this._mountedComponents.rewards = true;
 					this._panelPort.onDisconnect.addListener(rewards.panelHubClosedListener);
-					if (this._needToFilterOffersByRemote()) {
-						rewards.filterOffersByRemote()
-							.then(() => this._postRewardsData())
-							.catch((err) => {
-								log('Failed to filter offers by remote:', err);
-								this._postRewardsData();
-							});
-					} else {
-						this._postRewardsData();
-					}
+          this._postRewardsData();
 					break;
 				case 'RewardsComponentWillUnmount':
 					this._mountedComponents.rewards = false;
@@ -370,7 +357,7 @@ class PanelData {
 			reload_banner_status,
 			tab_id,
 			trackers_banner_status,
-			unread_offer_ids: rewards.unreadOfferIds,
+			unread_offer_ids: [], // TODO remove it
 		}, this._getDynamicPanelData(tab_id));
 	}
 
@@ -391,12 +378,10 @@ class PanelData {
 	 * @return {Object} Rewards view data
 	 */
 	_getRewardsData() {
-		const { storedOffers, unreadOfferIds } = rewards;
-
 		return {
 			enable_offers: conf.enable_offers,
-			rewards: storedOffers,
-			unread_offer_ids: unreadOfferIds,
+			rewards: [],  // TODO remove it
+			unread_offer_ids: [] // TODO remove it
 		};
 	}
 
@@ -535,16 +520,6 @@ class PanelData {
 			show_tracker_urls,
 			toggle_individual_trackers
 		};
-	}
-
-	/**
-	 * Checks to see whether we need to retrieve a filtered set of rewards from Cliqz
-	 * @returns {boolean}	true if we do need to retrieve filtered rewards
-	 */
-	_needToFilterOffersByRemote() {
-		const { enable_offers, is_expert } = conf;
-
-		return (offers.isEnabled && enable_offers && is_expert);
 	}
 
 	/**
