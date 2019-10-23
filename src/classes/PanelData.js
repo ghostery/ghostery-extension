@@ -16,7 +16,6 @@
 
 import { isEqual, throttle } from 'underscore';
 import button from './BrowserButton';
-import cliqz from './Cliqz';
 import conf from './Conf';
 import foundBugs from './FoundBugs';
 import bugDb from './BugDb';
@@ -31,12 +30,6 @@ import promoModals from './PromoModals';
 import { getCliqzGhosteryBugs, sendCliqzModuleCounts } from '../utils/cliqzModulesData';
 import { getActiveTab, flushChromeMemoryCache, processUrl } from '../utils/utils';
 import { objectEntries, log } from '../utils/common';
-
-const cliqzModuleMock = {
-	isEnabled: false,
-	on: () => {},
-};
-const offers = cliqz.modules['offers-v2'] || cliqzModuleMock;
 
 const SYNC_SET = new Set(globals.SYNC_ARRAY);
 const { IS_CLIQZ } = globals;
@@ -126,7 +119,7 @@ class PanelData {
 				case 'RewardsComponentDidMount':
 					this._mountedComponents.rewards = true;
 					this._panelPort.onDisconnect.addListener(rewards.panelHubClosedListener);
-          this._postRewardsData();
+					this._postRewardsData();
 					break;
 				case 'RewardsComponentWillUnmount':
 					this._mountedComponents.rewards = false;
@@ -380,7 +373,7 @@ class PanelData {
 	_getRewardsData() {
 		return {
 			enable_offers: conf.enable_offers,
-			rewards: [],  // TODO remove it
+			rewards: [], // TODO remove it
 			unread_offer_ids: [] // TODO remove it
 		};
 	}

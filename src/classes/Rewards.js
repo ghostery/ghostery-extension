@@ -12,7 +12,6 @@
  */
 
 import cliqz from './Cliqz';
-import conf from './Conf';
 import { log } from '../utils/common';
 
 /**
@@ -24,7 +23,7 @@ class Rewards {
 		this.panelHubClosedListener = this.panelHubClosedListener.bind(this);
 	}
 
-  // used in Background
+	// used in Background
 	sendSignal(message) { // TODO double check if need it
 		const {
 			offerId, actionId, origin, type
@@ -43,7 +42,7 @@ class Rewards {
 		cliqz.modules['offers-v2'].background.actions.processRealEstateMessage(signal);
 	}
 
-  // used in PanelData
+	// used in PanelData
 	panelHubClosedListener() {
 		this.sendSignal({
 			offerId: null,

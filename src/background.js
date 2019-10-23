@@ -69,7 +69,6 @@ const {
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
 const VERSION_CHECK_URL = `https://${CDN_SUB_DOMAIN}.ghostery.com/update/version`;
-const OFFERS_HANDLER_ID = 'ghostery';
 const REAL_ESTATE_ID = 'ghostery';
 const onBeforeRequest = events.onBeforeRequest.bind(events);
 const onHeadersReceived = events.onHeadersReceived.bind(events);
@@ -81,13 +80,10 @@ const moduleMock = {
 };
 const humanweb = cliqz.modules['human-web'];
 const { adblocker, antitracking, hpnv2 } = cliqz.modules;
-const messageCenter = cliqz.modules['message-center'] || moduleMock;
 const offers = cliqz.modules['offers-v2'] || moduleMock;
 const insights = cliqz.modules.insights || moduleMock;
 // add ghostery module to expose ghostery state to cliqz
 cliqz.modules.ghostery = new GhosteryModule();
-
-let OFFERS_ENABLE_SIGNAL;
 
 /**
  * Enable or disable specified module.
@@ -492,7 +488,7 @@ function handleBlockedRedirect(name, message, tab_id, callback) {
  */
 function handleRewards(name, message, callback) {
 	switch (name) {
-    // TODO seems  we do not need `case rewardSignal`, but still better to check
+		// TODO seems  we do not need `case rewardSignal`, but still better to check
 		case 'rewardSignal':
 			rewards.sendSignal(message);
 			break;
@@ -501,8 +497,8 @@ function handleRewards(name, message, callback) {
 			break;
 		case 'setPanelData':
 			if (message.hasOwnProperty('enable_offers')) {
-        console.log('XXXX signal for turn(on|off) offers', message.signal);
-        rewards.sendSignal(message.signal);
+				console.log('XXXX signal for turn(on|off) offers', message.signal);
+				rewards.sendSignal(message.signal);
 				panelData.set({ enable_offers: message.enable_offers });
 			}
 			return callback();
@@ -600,11 +596,11 @@ function handleGhosteryHub(name, message, callback) {
 		}
 		case 'SET_GHOSTERY_REWARDS': {
 			const { enable_ghostery_rewards = true } = message;
-      rewards.sendSignal({ // TODO check manually ghostery hub turnoff
-        actionId: `rewards_${enable_ghostery_rewards ? 'on' : 'off'}',
-        origin: 'ghostery-setup-flow',
-        type: 'action-signal',
-      };
+			rewards.sendSignal({ // TODO check manually ghostery hub turnoff
+				actionId: `rewards_${enable_ghostery_rewards ? 'on' : 'off'}`,
+				origin: 'ghostery-setup-flow',
+				type: 'action-signal',
+			});
 			panelData.set({ enable_offers: enable_ghostery_rewards });
 			callback({ enable_ghostery_rewards });
 			break;
@@ -1067,17 +1063,17 @@ function initializeDispatcher() {
 		}
 	});
 	dispatcher.on('conf.save.enable_offers', (enableOffersIn) => {
-    console.log('XXXX conf.save.enable_offers dispacher', enableOffersIn);
+		console.log('XXXX conf.save.enable_offers dispacher', enableOffersIn);
 		button.update();
-		let firstStep = Promise.resolve();
+		const firstStep = Promise.resolve();
 		let enableOffers = enableOffersIn;
 		if (IS_CLIQZ) {
 			enableOffers = false;
 		} else if (!enableOffers && cliqz.modules['offers-v2'].isEnabled) {
-      console.log('XXXX should be true when enabling')
-      // TODO check that signals is flushed
-      // we going to turn off offers maybe we dont need to flush it
-      cliqz.modules['offers-v2'].action('flushSignals');
+			console.log('XXXX should be true when enabling');
+			// TODO check that signals is flushed
+			// we going to turn off offers maybe we dont need to flush it
+			cliqz.modules['offers-v2'].action('flushSignals');
 		}
 		const toggleModule = () => setCliqzModuleEnabled(offers, enableOffers);
 		const toggleConnection = () => registerWithOffers(offers, enableOffers);
@@ -1281,7 +1277,7 @@ offers.on('enabled', () => {
 				offersTelemetryFreq: '10'
 			});
 		}
-    registerWithOffers(offers, true)
+		registerWithOffers(offers, true);
 	});
 });
 
