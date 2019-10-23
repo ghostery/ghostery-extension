@@ -26,7 +26,8 @@ import {
 	SET_OFFER_READ,
 	TOGGLE_EXPANDED,
 	SET_THEME,
-	CLEAR_THEME
+	CLEAR_THEME,
+	TOGGLE_INSIGHTS_MODAL
 } from '../constants/constants';
 import {
 	LOGIN_SUCCESS,
@@ -60,6 +61,7 @@ const initialState = {
 	email: '',
 	emailValidated: false,
 	current_theme: 'default',
+	isInsightsModalHidden: false,
 };
 /**
  * Default export for panel view reducer. Handles actions
@@ -259,6 +261,12 @@ export default (state = initialState, action) => {
 				return Object.assign({}, state, { unread_offer_ids });
 			}
 			return state;
+		}
+		case TOGGLE_INSIGHTS_MODAL: {
+			return {
+				...state,
+				isInsightsModalHidden: !state.isInsightsModalHidden
+			};
 		}
 		default: return state;
 	}

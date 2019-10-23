@@ -42,12 +42,15 @@ class PromoModals {
 	static recordInsightsPromoSighting() { this._recordPromoSighting(INSIGHTS); }
 
 	static _isTimeForAPromo(type) {
-		const lastSeenPlusPromo = conf[`${PLUS}_${PROMO_MODAL_LAST_SEEN}`];
-		const lastSeenInsightsPromo = conf[`${INSIGHTS}_${PROMO_MODAL_LAST_SEEN}`];
-		const lastSeenPromo = Math.max(lastSeenPlusPromo, lastSeenInsightsPromo);
-
 		if (conf.notify_promotions === false) { return false; }
-		if (lastSeenPromo === null) { return true; }
+
+		// const lastSeenPlusPromo = conf[`${PLUS}_${PROMO_MODAL_LAST_SEEN}`];
+		// const lastSeenInsightsPromo = conf[`${INSIGHTS}_${PROMO_MODAL_LAST_SEEN}`];
+		// const lastSeenPromo = lastSeenPlusPromo > lastSeenInsightsPromo ? lastSeenPlusPromo : lastSeenInsightsPromo;
+		const lastSeenPromo = conf[`${INSIGHTS}_${PROMO_MODAL_LAST_SEEN}`];
+		console.log('lastSeenPromo: ', lastSeenPromo);
+
+		// if (lastSeenPromo === null) { return true; }
 
 		if (type === INSIGHTS && !this._hasEngagedFrequently()) {
 			return false;
@@ -76,6 +79,7 @@ class PromoModals {
 		}
 
 		if (timesPerWeek >= 3) {
+			console.log('timesPerWeek', timesPerWeek);
 			return true;
 		}
 		return false;

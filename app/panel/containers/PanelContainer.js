@@ -30,7 +30,7 @@ import { updateBlockingData } from '../actions/BlockingActions';
 const mapStateToProps = state => Object.assign({}, state.panel, state.drawer, state.account, {
 	paused_blocking: state.summary.paused_blocking,
 	sitePolicy: state.summary.sitePolicy,
-	trackerCounts: state.summary.trackerCounts
+	trackerCounts: state.summary.trackerCounts,
 });
 /**
  * Bind Panel view component action creators using Redux's bindActionCreators

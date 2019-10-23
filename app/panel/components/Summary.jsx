@@ -17,7 +17,6 @@ import ClassNames from 'classnames';
 import Tooltip from './Tooltip';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
-import { InsightsPromoModal } from '../../shared-components';
 import globals from '../../../src/classes/Globals';
 import {
 	CliqzFeature,
@@ -47,7 +46,6 @@ class Summary extends React.Component {
 		this.state = {
 			trackerLatencyTotal: 0,
 			disableBlocking: false,
-			isInsightsModalHidden: true
 		};
 
 		// Event Bindings
@@ -80,13 +78,6 @@ class Summary extends React.Component {
 		this._dynamicUIPort = this.context;
 		this._dynamicUIPort.onMessage.addListener(this.handlePortMessage);
 		this._dynamicUIPort.postMessage({ name: 'SummaryComponentDidMount' });
-
-		const showModal = (this.props.location.state && !this.props.location.state.isInsightsModalHidden) !== undefined ? !this.props.location.state.isInsightsModalHidden : false;
-		const isInsightsSubscriber = (this.props.user && this.props.user.scopes != null) ? this.props.user.scopes.includes('subscriptions:insights') : false;
-
-		if (!isInsightsSubscriber && showModal) {
-			this.toggleModal();
-		}
 	}
 
 	/**
@@ -106,16 +97,6 @@ class Summary extends React.Component {
 	componentWillUnmount() {
 		this._dynamicUIPort.postMessage({ name: 'SummaryComponentWillUnmount' });
 		this._dynamicUIPort.onMessage.removeListener(this.handlePortMessage);
-	}
-
-	/**
-	* Function to toggle the Modal
-	*/
-	toggleModal = () => {
-		const { isInsightsModalHidden } = this.state;
-		this.setState({
-			isInsightsModalHidden: !isInsightsModalHidden
-		});
 	}
 
 	/**
@@ -794,23 +775,6 @@ class Summary extends React.Component {
 		);
 	}
 
-	_renderInsightsPromoModal = () => {
-		const { account, isTimeForInsightsPromo } = this.props;
-		const { insightsPromoModalShown, isInsightsModalHidden } = this.state;
-
-		if (insightsPromoModalShown || !isTimeForInsightsPromo) return null;
-		if (account && account.user && account.user.scopes && account.user.scopes.includes('subscriptions:insights')) return null; // don't show the promo to Insights subscribers, either
-
-		sendMessage('promoModals.sawInsightsPromo', '', 'metrics');
-
-		return (
-			<InsightsPromoModal
-				show={!isInsightsModalHidden}
-				toggleModal={this.toggleModal}
-			/>
-		);
-	}
-
 	/**
 	* React's required render function. Returns JSX
 	* @return {JSX} JSX for rendering the Summary View of the panel
@@ -830,41 +794,38 @@ class Summary extends React.Component {
 		});
 
 		return (
-			<>
-				{this._renderInsightsPromoModal()}
-				<div className={summaryClassNames}>
-					{!isCondensed && disableBlocking && (<NotScanned isSmall={is_expert} />)}
-					{!isCondensed && !disableBlocking && this._renderDonut()}
-					{!isCondensed && !disableBlocking && this._renderPageHostReadout()}
+			<div className={summaryClassNames}>
+				{!isCondensed && disableBlocking && (<NotScanned isSmall={is_expert} />)}
+				{!isCondensed && !disableBlocking && this._renderDonut()}
+				{!isCondensed && !disableBlocking && this._renderPageHostReadout()}
 
-					{isCondensed && !disableBlocking && this._renderTotalTrackersFound()}
+				{isCondensed && !disableBlocking && this._renderTotalTrackersFound()}
 
-					<div className="Summary__pageStatsContainer">
-						{!disableBlocking && this._renderTotalTrackersBlocked()}
-						{!disableBlocking && this._renderTotalRequestsModified()}
-						{!disableBlocking && this._renderPageLoadTime()}
-					</div>
-
-					{isCondensed && disableBlocking && (
-						<div className="Summary__spaceTaker" />
-					)}
-
-					<div className="Summary__ghosteryFeaturesContainer">
-						{this._renderGhosteryFeature('trust')}
-						{this._renderGhosteryFeature('restrict', 'Summary__ghosteryFeatureContainer--middle')}
-						{this._renderPauseButton()}
-					</div>
-					<div className="Summary__cliqzFeaturesContainer">
-						{this._renderCliqzAntiTracking()}
-						{this._renderCliqzAdBlock()}
-						{this._renderCliqzSmartBlock()}
-					</div>
-					{this._renderStatsNavicon()}
-					{enable_offers && this._renderRewardsNavicon()}
-
-					{!isCondensed && this._renderPlusUpgradeBannerOrSubscriberIcon()}
+				<div className="Summary__pageStatsContainer">
+					{!disableBlocking && this._renderTotalTrackersBlocked()}
+					{!disableBlocking && this._renderTotalRequestsModified()}
+					{!disableBlocking && this._renderPageLoadTime()}
 				</div>
-			</>
+
+				{isCondensed && disableBlocking && (
+					<div className="Summary__spaceTaker" />
+				)}
+
+				<div className="Summary__ghosteryFeaturesContainer">
+					{this._renderGhosteryFeature('trust')}
+					{this._renderGhosteryFeature('restrict', 'Summary__ghosteryFeatureContainer--middle')}
+					{this._renderPauseButton()}
+				</div>
+				<div className="Summary__cliqzFeaturesContainer">
+					{this._renderCliqzAntiTracking()}
+					{this._renderCliqzAdBlock()}
+					{this._renderCliqzSmartBlock()}
+				</div>
+				{this._renderStatsNavicon()}
+				{enable_offers && this._renderRewardsNavicon()}
+
+				{!isCondensed && this._renderPlusUpgradeBannerOrSubscriberIcon()}
+			</div>
 		);
 	}
 }

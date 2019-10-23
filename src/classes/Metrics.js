@@ -766,7 +766,9 @@ class Metrics {
 	 * @private
 	 */
 	_recordEngagedWithRepeats() {
-		const engaged_daily_velocity_with_repeats = conf.metrics.engaged_daily_velocity_with_repeats || [];
+		// const engaged_daily_velocity_with_repeats = conf.metrics.engaged_daily_velocity_with_repeats || [];
+		const engaged_daily_velocity_with_repeats = conf.metrics.engaged_daily_velocity_with_repeats || [123, 123, 123, 124, 124, 124, 18192, 18192];
+		console.log('engaged_daily_velocity_with_repeats', engaged_daily_velocity_with_repeats);
 		const today = Math.floor(Number(new Date().getTime()) / 86400000); // Today's time
 		engaged_daily_velocity_with_repeats.push(today);
 		conf.metrics.engaged_daily_velocity_with_repeats = engaged_daily_velocity_with_repeats;

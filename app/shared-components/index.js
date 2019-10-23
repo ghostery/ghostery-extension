@@ -22,8 +22,6 @@ import SteppedNavigation from './SteppedNavigation';
 import ToastMessage from './ToastMessage';
 import ToggleCheckbox from './ToggleCheckbox';
 import ToggleSwitch from './ToggleSwitch';
-import ModalExitButton from './ModalExitButton';
-import InsightsPromoModal from './InsightsPromoModal';
 
 export {
 	ExitButton,
@@ -32,7 +30,5 @@ export {
 	SteppedNavigation,
 	ToastMessage,
 	ToggleCheckbox,
-	ToggleSwitch,
-	ModalExitButton,
-	InsightsPromoModal
+	ToggleSwitch
 };

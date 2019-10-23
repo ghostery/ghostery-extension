@@ -14,7 +14,8 @@
 import React from 'react';
 import ClassNames from 'classnames';
 import Header from '../containers/HeaderContainer';
-import { PlusPromoModal, InsightsPromoModal, Modal } from '../../shared-components';
+import { PlusPromoModal, Modal } from '../../shared-components';
+import InsightsPromoModal from '../containers/InsightsPromoModalContainer';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import { setTheme } from '../utils/utils';
@@ -27,8 +28,6 @@ class Panel extends React.Component {
 		super(props);
 		this.state = {
 			insightsPromoModalShown: false,
-			shouldRepopInsightsModal: false,
-			isInsightsModalHidden: false,
 			plusPromoModalShown: false
 		};
 
@@ -36,10 +35,6 @@ class Panel extends React.Component {
 		this.closeNotification = this.closeNotification.bind(this);
 		this.clickReloadBanner = this.clickReloadBanner.bind(this);
 		this.filterTrackers = this.filterTrackers.bind(this);
-
-		this.state = {
-			plusPromoModalShown: false,
-		};
 	}
 
 	/**
@@ -60,15 +55,6 @@ class Panel extends React.Component {
 				this.props.actions.updatePanelData(body);
 			}
 		});
-
-		chrome.runtime.onMessage.addListener((request) => {
-			if (request.name === 'showInsightsModal') {
-				this.setState({
-					...this.state,
-					insightsPromoModalShown: true
-				});
-			}
-		});
 	}
 
 	/**
@@ -76,16 +62,6 @@ class Panel extends React.Component {
 	 */
 	componentWillUnmount() {
 		this._dynamicUIPort.disconnect();
-	}
-
-	/**
-	* Function to toggle the Modal
-	*/
-	toggleModal = () => {
-		const { isInsightsModalHidden } = this.state;
-		this.setState({
-			isInsightsModalHidden: !isInsightsModalHidden
-		});
 	}
 
 	/**
@@ -274,19 +250,17 @@ class Panel extends React.Component {
 	}
 
 	_renderInsightsPromoModal = () => {
-		const { account, isTimeForInsightsPromo } = this.props;
+		const { account, isTimeForInsightsPromo, isInsightsModalHidden } = this.props;
 		const { insightsPromoModalShown } = this.state;
 
+		if (isInsightsModalHidden) return null;
 		if (insightsPromoModalShown || !isTimeForInsightsPromo) return null;
 		if (account && account.user && account.user.scopes && account.user.scopes.includes('subscriptions:insights')) return null;
 
 		sendMessage('promoModals.sawInsightsPromo', '', 'metrics');
 
 		return (
-			<InsightsPromoModal
-				show={!this.state.isInsightsModalHidden}
-				toggleModal={this.toggleModal}
-			/>
+			<InsightsPromoModal />
 		);
 	}
 

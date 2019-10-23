@@ -73,9 +73,9 @@ class Login extends React.Component {
 							})
 							.finally(() => {
 								this.setState({ loading: false }, () => {
+									this.props.actions.toggleInsightsModal();
 									history.push({
-										pathname: this.props.is_expert ? '/detail/blocking' : '/',
-										state: { isInsightsModalHidden: false }
+										pathname: this.props.is_expert ? '/detail/blocking' : '/'
 									});
 								});
 							});
