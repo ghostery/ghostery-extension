@@ -211,6 +211,7 @@ class Panel extends React.Component {
 
 	_handleNoThanksClick = () => {
 		sendMessage('promoModals.sawPlusPromo', {});
+		sendMessage('promoModals.turnOffPromos', {});
 		this.setState({
 			plusPromoModalShown: true
 		});
@@ -260,7 +261,7 @@ class Panel extends React.Component {
 							)
 						}
 						<div onClick={this._handleNoThanksClick} className="PlusPromoModal__text-link">
-							{t('no_thanks_maybe_later')}
+							{t('no_thanks_turn_promos_off')}
 						</div>
 					</div>
 				</div>

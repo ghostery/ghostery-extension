@@ -1082,6 +1082,10 @@ function onMessageHandler(request, sender, callback) {
 		promoModals.recordPlusPromoSighting();
 		return true;
 	}
+	if (name === 'promoModals.turnOffPromos') {
+		promoModals.turnOffPromos();
+		return true;
+	}
 }
 
 /**

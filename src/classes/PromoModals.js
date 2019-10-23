@@ -35,6 +35,8 @@ class PromoModals {
 
 	static recordPlusPromoSighting() { this._recordPromoSighting(PLUS); }
 
+	static turnOffPromos() { conf.notify_promotions = false; }
+
 	// TODO integrate the Insights promo modal into the "has it been long enough since last modal?" logic here
 	static _isTimeForAPromo(type) {
 		const lastSeenTime = conf[`${type}_${PROMO_MODAL_LAST_SEEN}`];

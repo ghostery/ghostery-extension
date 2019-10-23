@@ -2123,12 +2123,12 @@
 		"message": "Upgrade to Plus",
 		"description": "Button text in a non-responsive modal. Character limit: 35."
 	},
-	"no_thanks_maybe_later": {
-		"message": "No thanks, maybe later",
-		"description": "Text link in a non-responsive modal. Character limit: 25."
+	"no_thanks_turn_promos_off": {
+		"message": "No thanks, turn promos off",
+		"description": "Text link in a non-responsive modal. Character limit: 28."
 	},
 	"already_subscribed_sign_in": {
 		"message": "Already subscribed? Sign In",
-		"description": "Character limit: 30."
+		"description": "Character limit: 28."
 	}
 }
