@@ -209,7 +209,6 @@ class Metrics {
 				this._recordActive();
 				break;
 			case 'engaged':
-				this._recordEngagedWithRepeats();
 				this._recordEngaged();
 				break;
 
@@ -750,6 +749,7 @@ class Metrics {
 	_recordEngaged() {
 		const engaged_daily_velocity = conf.metrics.engaged_daily_velocity || [];
 		const today = Math.floor(Number(new Date().getTime()) / 86400000); // Today's time
+
 		engaged_daily_velocity.sort();
 		if (!engaged_daily_velocity.includes(today)) {
 			engaged_daily_velocity.push(today);
@@ -758,20 +758,16 @@ class Metrics {
 			}
 		}
 
+		const daily_engaged_count = conf.metrics.daily_engaged_count || new Array(engaged_daily_velocity.length).fill(0);
+		daily_engaged_count[engaged_daily_velocity.indexOf(today)]++;
+		if (!daily_engaged_count.includes(today)) {
+			if (daily_engaged_count.length > 7) {
+				daily_engaged_count.shift();
+			}
+		}
+		conf.metrics.daily_engaged_count = daily_engaged_count;
 		conf.metrics.engaged_daily_velocity = engaged_daily_velocity;
 		this._sendReq('engaged', ['daily', 'weekly', 'monthly']);
-	}
-
-	/**
-	 * @private
-	 */
-	_recordEngagedWithRepeats() {
-		// const engaged_daily_velocity_with_repeats = conf.metrics.engaged_daily_velocity_with_repeats || [];
-		const engaged_daily_velocity_with_repeats = conf.metrics.engaged_daily_velocity_with_repeats || [123, 123, 123, 124, 124, 124, 18192, 18192];
-		console.log('engaged_daily_velocity_with_repeats', engaged_daily_velocity_with_repeats);
-		const today = Math.floor(Number(new Date().getTime()) / 86400000); // Today's time
-		engaged_daily_velocity_with_repeats.push(today);
-		conf.metrics.engaged_daily_velocity_with_repeats = engaged_daily_velocity_with_repeats;
 	}
 
 	/**

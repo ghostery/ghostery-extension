@@ -44,13 +44,11 @@ class PromoModals {
 	static _isTimeForAPromo(type) {
 		if (conf.notify_promotions === false) { return false; }
 
-		// const lastSeenPlusPromo = conf[`${PLUS}_${PROMO_MODAL_LAST_SEEN}`];
-		// const lastSeenInsightsPromo = conf[`${INSIGHTS}_${PROMO_MODAL_LAST_SEEN}`];
-		// const lastSeenPromo = lastSeenPlusPromo > lastSeenInsightsPromo ? lastSeenPlusPromo : lastSeenInsightsPromo;
-		const lastSeenPromo = conf[`${INSIGHTS}_${PROMO_MODAL_LAST_SEEN}`];
-		console.log('lastSeenPromo: ', lastSeenPromo);
+		const lastSeenPlusPromo = conf[`${PLUS}_${PROMO_MODAL_LAST_SEEN}`];
+		const lastSeenInsightsPromo = conf[`${INSIGHTS}_${PROMO_MODAL_LAST_SEEN}`];
+		const lastSeenPromo = lastSeenPlusPromo > lastSeenInsightsPromo ? lastSeenPlusPromo : lastSeenInsightsPromo;
 
-		// if (lastSeenPromo === null) { return true; }
+		if (lastSeenPromo === null) { return true; }
 
 		if (type === INSIGHTS && !this._hasEngagedFrequently()) {
 			return false;
@@ -67,21 +65,16 @@ class PromoModals {
 	}
 
 	static _hasEngagedFrequently() {
-		const { engaged_daily_velocity_with_repeats } = conf.metrics;
-		const pastSevenDays = Array.from(new Set(engaged_daily_velocity_with_repeats));
-		let timesPerWeek = 0;
+		const { daily_engaged_count } = conf.metrics;
+		const DAILY_TARGET = 3;
+		const WEEKLY_TARGET = 3;
 
-		for (let i = 0; i < pastSevenDays.length; i++) {
-			const engagementsEachDay = engaged_daily_velocity_with_repeats.filter(day => day === pastSevenDays[i]).length;
-			if (engagementsEachDay >= 3) {
-				timesPerWeek++;
-			}
-		}
+		let very_engaged_days = 0;
+		daily_engaged_count.forEach((count) => {
+			very_engaged_days = count >= DAILY_TARGET ? ++very_engaged_days : very_engaged_days;
+		});
+		if (very_engaged_days >= WEEKLY_TARGET) return true;
 
-		if (timesPerWeek >= 3) {
-			console.log('timesPerWeek', timesPerWeek);
-			return true;
-		}
 		return false;
 	}
 }
