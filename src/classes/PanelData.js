@@ -350,7 +350,6 @@ class PanelData {
 			reload_banner_status,
 			tab_id,
 			trackers_banner_status,
-			unread_offer_ids: [], // TODO remove it
 		}, this._getDynamicPanelData(tab_id));
 	}
 
@@ -373,8 +372,6 @@ class PanelData {
 	_getRewardsData() {
 		return {
 			enable_offers: conf.enable_offers,
-			rewards: [], // TODO remove it
-			unread_offer_ids: [] // TODO remove it
 		};
 	}
 
