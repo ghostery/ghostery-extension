@@ -21,8 +21,6 @@ import GhosteryFeature from './GhosteryFeature';
 import NotScanned from './NotScanned';
 import PauseButton from './PauseButton';
 import ToggleSlider from './ToggleSlider';
-import RewardDetail from './RewardDetail';
-import RewardListItem from './RewardListItem';
 import ModalExitButton from './ModalExitButton';
 
 export {
@@ -33,7 +31,5 @@ export {
 	NotScanned,
 	PauseButton,
 	ToggleSlider,
-	RewardDetail,
-	RewardListItem,
 	ModalExitButton
 };

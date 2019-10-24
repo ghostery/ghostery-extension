@@ -1075,6 +1075,7 @@ function initializeDispatcher() {
 			// we going to turn off offers maybe we dont need to flush it
 			cliqz.modules['offers-v2'].action('flushSignals');
 		}
+
 		const toggleModule = () => setCliqzModuleEnabled(offers, enableOffers);
 		const toggleConnection = () => registerWithOffers(offers, enableOffers);
 		if (enableOffers) {

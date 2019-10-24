@@ -150,10 +150,6 @@ class Panel extends React.Component {
 				reload: true
 			});
 		}
-
-		if (panel.enable_offers && panel.unread_offer_ids.length > 0) {
-			sendMessage('ping', 'engaged_offer');
-		}
 	}
 
 	/**

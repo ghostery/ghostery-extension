@@ -13,8 +13,8 @@
 
 import React from 'react';
 import ClassNames from 'classnames';
-import { Link, Route } from 'react-router-dom';
-import { ToggleSlider, RewardListItem, RewardDetail } from './BuildingBlocks';
+import { Route } from 'react-router-dom';
+import { ToggleSlider } from './BuildingBlocks';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import globals from '../../../src/classes/Globals';
@@ -33,7 +33,6 @@ class Rewards extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			rewardsArray: null,
 			iframeWidth: 0,
 			iframeHeight: 0,
 			shouldHideRewards: false,
@@ -45,10 +44,9 @@ class Rewards extends React.Component {
 
 		// helper render functions
 		this.renderRewardListComponent = this.renderRewardListComponent.bind(this);
-		this.renderRewardDetailComponent = this.renderRewardDetailComponent.bind(this);
-		this.handleBackClick = this.handleBackClick.bind(this);
 		this.handleFaqClick = this.handleFaqClick.bind(this);
-		this.handlePortMessage = this.handlePortMessage.bind(this);
+    this.handlePortMessage = this.handlePortMessage.bind(this);
+
 
 		// myoffrz
 		this.iframe = React.createRef();
@@ -60,8 +58,8 @@ class Rewards extends React.Component {
 	 */
 	componentDidMount() {
 		this._dynamicUIPort = this.context;
-		this._dynamicUIPort.onMessage.addListener(this.handlePortMessage);
 		this._dynamicUIPort.postMessage({ name: 'RewardsComponentDidMount' });
+    this._dynamicUIPort.onMessage.addListener(this.handlePortMessage);
 
 		this.props.actions.sendSignal('hub_open');
 		window.addEventListener('message', this.handleMyoffrzMessage);
@@ -70,53 +68,24 @@ class Rewards extends React.Component {
 	/**
 	 * Lifecycle event
 	 */
-	UNSAFE_componentWillReceiveProps(nextProps) {
-		let rewardsArray = null;
-		if (nextProps.rewards) {
-			rewardsArray = Object.keys(nextProps.rewards).map((key) => {
-				const reward = nextProps.rewards[key].offer_data;
-				const { isCodeHidden } = nextProps.rewards[key].attrs || {};
-				const createdTS = nextProps.rewards[key].createdTs;
-				return {
-					id: reward.offer_id,
-					unread: nextProps.unread_offer_ids.indexOf(reward.offer_id) !== -1,
-					code: reward.ui_info.template_data.code,
-					isCodeHidden,
-					text: reward.ui_info.template_data.title,
-					description: reward.ui_info.template_data.desc,
-					benefit: reward.ui_info.template_data.benefit,
-					conditions: reward.ui_info.template_data.conditions,
-					logo_url: reward.ui_info.template_data.logo_url,
-					picture_url: reward.ui_info.template_data.picture_url,
-					redeem_url: reward.ui_info.template_data.call_to_action.url,
-					redeem_text: reward.ui_info.template_data.call_to_action.text,
-					expires: new Date(createdTS + reward.expirationMs),
-				};
-			}).filter(reward => reward.expires > Date.now());
-		}
-		this.setState({ rewardsArray });
-	}
-
-	/**
-	 * Lifecycle event
-	 */
 	componentWillUnmount() {
 		/* @TODO send message to background to remove port onDisconnect event */
 		this.props.actions.sendSignal('hub_closed');
+    this._dynamicUIPort.onMessage.removeListener(this.handlePortMessage);
 
 		this._dynamicUIPort.postMessage({ name: 'RewardsComponentWillUnmount' });
-		this._dynamicUIPort.onMessage.removeListener(this.handlePortMessage);
 		window.removeEventListener('message', this.handleMyoffrzMessage);
 	}
 
-	/**
-	 * Handles message from the dynamic UI port to background
-	 */
-	handlePortMessage(msg) {
-		if (msg.to !== 'rewards' || !msg.body) { return; }
+  /**
+    * Handles message from the dynamic UI port to background
+    */
+   handlePortMessage(msg) {
+     if (msg.to !== 'rewards' || !msg.body) { return; }
 
-		this.props.actions.updateRewardsData(msg.body);
-	}
+     // msg.body can contain enable_offers prop
+     this.props.actions.updateRewardsData(msg.body);
+   }
 
 	iframeResize(data = {}) {
 		const { width = 0, height = 0 } = data;
@@ -132,6 +101,7 @@ class Rewards extends React.Component {
 	}
 
 	myoffrzSendRuntimeMessage({ message, target }) {
+    // TODO maybe sendMessage
 		chrome.runtime.sendMessage({ message, target }, (result = {}) => {
 			console.log('XXXXX result', result, this.iframe);
 			if (result.action !== 'pushData' || !this.iframe.current) { return; }
@@ -162,13 +132,6 @@ class Rewards extends React.Component {
 		} else {
 			this.myoffrzSendRuntimeMessage({ message, target });
 		}
-	}
-
-	/**
-	 * Handles clicking the back button
-	 */
-	handleBackClick(offerId) {
-		this.props.actions.sendSignal('offer_return_hub', offerId);
 	}
 
 	/**
@@ -206,33 +169,15 @@ class Rewards extends React.Component {
 	 * Helper render function for the Rewards Header
 	 * @return {JSX} JSX for the Rewards Header
 	 */
-	renderRewardsHeader = (routeProps) => {
-		let reward;
-		const { id } = routeProps.match.params;
-		if (id && this.state.rewardsArray) {
-			reward = this.state.rewardsArray.find(el => el.id === id);
-		}
-		const { enable_offers, location } = this.props;
-		const showBack = location.pathname.indexOf('/detail/rewards/detail') !== -1;
-		const showToggle = location.pathname === '/detail/rewards/list';
-		const headerClassNames = ClassNames('RewardsPanel__header', 'flex-container', 'align-middle', {
-			'align-justify': !showBack,
-		});
-		const headerTitleClassNames = ClassNames('RewardsPanel__title', {
-			'RewardsPanel--left-padding': showBack,
-		});
+	renderRewardsHeader = () => {
+		const { enable_offers } = this.props;
+		const headerClassNames = ClassNames('RewardsPanel__header', 'flex-container', 'align-middle', 'align-justify');
+		const headerTitleClassNames = ClassNames('RewardsPanel__title');
 
 		return (
 			<div className={headerClassNames}>
-				{showBack && (
-					<Link to="/detail/rewards/list" className="RewardPanel__back flex-container clickable" onClick={() => { this.handleBackClick(id); }}>
-						<svg height="16" width="10" fillRule="evenodd">
-							<path d="M10 1.833L8.108 0 0 7.857l8.108 7.857L10 13.881 3.784 7.857z" />
-						</svg>
-					</Link>
-				)}
 				<span className={headerTitleClassNames}>{ t('ghostery_rewards') }</span>
-				{showToggle && !IS_CLIQZ && (
+				{!IS_CLIQZ && (
 					<span className="flex-container align-middle">
 						<span className="RewardsPanel__slider_text">
 							{enable_offers ? t('rewards_on') : t('rewards_off')}
@@ -244,9 +189,6 @@ class Rewards extends React.Component {
 						/>
 					</span>
 				)}
-				{!showToggle && reward &&
-					<img className="RewardDetail__logo" src={reward.logo_url} />
-				}
 			</div>
 		);
 	}
@@ -265,128 +207,81 @@ class Rewards extends React.Component {
 		);
 	}
 
+  renderCLIQZtext() {
+    return (
+      <div className="RewardsPanel__info">
+        { this.renderRewardSvg() }
+        <div>{ t('panel_detail_rewards_cliqz_text') }</div>
+        <hr />
+        <div
+          className="RewardsPanel__learn_more button primary hollow"
+          onClick={this.handleFaqClick}
+        >
+          { t('panel_detail_learn_more') }
+        </div>
+      </div>
+    );
+  }
+
+  renderRewardsTurnoffText() {
+    return (
+      <div className="RewardsPanel__info">
+        { this.renderRewardSvg() }
+        <div>{ t('panel_detail_rewards_off') }</div>
+      </div>
+    );
+  }
+
+  renderRewardsNoneFoundText() {
+    return (
+      <div className="RewardsPanel__info">
+        { this.renderRewardSvg() }
+        <div>{ t('panel_detail_rewards_none_found') }</div>
+      </div>
+    );
+  }
+
 	/**
 	 * Helper render function for the list of Rewards Items
 	 * @return {JSX} JSX for the Rewards Items List
 	 */
 	renderRewardListComponent() {
-		if (IS_CLIQZ) {
-			return (
-				<div className="RewardsPanel__info">
-					{ this.renderRewardSvg() }
-					<div>{ t('panel_detail_rewards_cliqz_text') }</div>
-					<hr />
-					<div className="RewardsPanel__learn_more button primary hollow" onClick={this.handleFaqClick}>
-						{ t('learn_more') }
-					</div>
-				</div>
-			);
-		}
+		if (IS_CLIQZ) { return this.renderCLIQZtext(); }
+    const { enable_offers, is_expanded } = this.props;
+		if (!enable_offers) { return this.renderRewardsTurnoffText(); }
 
-		if (!this.props.enable_offers) { return null; }
+    const {
+      shouldHideRewards,
+      iframeWidth,
+      iframeHeight,
+      rewardsCount,
+    } = this.state;
+		if (shouldHideRewards) { return this.renderRewardsNoneFoundText(); }
 
-		if (this.props.enable_offers && this.state.shouldHideRewards) {
-			return (
-				<div className="RewardsPanel__info">
-					{ this.renderRewardSvg() }
-					<div>{ t('panel_detail_rewards_none_found') }</div>
-				</div>
-			);
-		}
-
-		if (true) {
-			const { iframeWidth, iframeHeight } = this.state;
-			const src = chrome.runtime.getURL('cliqz/offers-cc/index.html?cross-origin');
-			// TODO i18n r === 1 ? 'Reward' : 'Rewards'
-			return (
-				<>
-					{this.props.is_expanded && (
-						<div className="RewardsPanel__rewards_count_wrapper">
-							<div className="RewardsPanel__rewards_count">
-								{this.state.rewardsCount}
-							</div>
-							<div className="RewardsPanel__rewards_count_title">
-								{this.state.rewardsCount === 1 ? 'Reward' : 'Rewards'}
-							</div>
-						</div>
-					)}
-					<iframe
-						ref={this.iframe}
-						className="RewardsPanel__myoffrz_iframe"
-						src={src}
-						width={iframeWidth}
-						height={iframeHeight}
-						title="myoffrz-rewards"
-					/>
-				</>
-			);
-		}
-
-		const { actions, enable_offers, is_expanded } = this.props;
-		const { rewardsArray } = this.state;
-
-		if (enable_offers && !rewardsArray) {
-			return (
-				<div className="RewardsPanel__info">
-					{ this.renderRewardSvg() }
-					<div>{ t('panel_detail_rewards_loading') }</div>
-				</div>
-			);
-		}
-
-		if (!enable_offers && (!rewardsArray || rewardsArray.length === 0)) {
-			return (
-				<div className="RewardsPanel__info">
-					{ this.renderRewardSvg() }
-					<div>{ t('panel_detail_rewards_off') }</div>
-				</div>
-			);
-		}
-
-		const rewardsList = rewardsArray.map((reward, index) => (
-			<RewardListItem
-				disabled={!enable_offers}
-				index={index}
-				id={reward.id}
-				key={reward.id}
-				isLong={is_expanded}
-				unread={reward.unread}
-				text={reward.text}
-				benefit={reward.benefit}
-				logoUrl={reward.logo_url}
-				expires={reward.expires}
-				actions={actions}
-			/>
-		));
-		return <div className="RewardsPanel__scroll_content">{ rewardsList }</div>;
-	}
-
-	/**
-	 * Helper render function for an individual Reward Item
-	 * @return {JSX} JSX for the Rewards Detail Item
-	 */
-	renderRewardDetailComponent(routeProps) {
-		if (true) { return null; }
-
-		const { id } = routeProps.match.params;
-		const reward = this.state.rewardsArray.find(el => el.id === id);
-		return (
-			<RewardDetail
-				id={reward.id}
-				code={reward.code}
-				isCodeHidden={reward.isCodeHidden}
-				text={reward.text}
-				description={reward.description}
-				benefit={reward.benefit}
-				conditions={reward.conditions}
-				logoUrl={reward.logo_url}
-				pictureUrl={reward.picture_url}
-				redeemUrl={reward.redeem_url}
-				expires={reward.expires}
-				redeemText={reward.redeem_text}
-				actions={this.props.actions}
-			/>
-		);
+    const src = chrome.runtime.getURL('cliqz/offers-cc/index.html?cross-origin');
+    // TODO i18n r === 1 ? 'Reward' : 'Rewards'
+    return (
+      <>
+        {is_expanded && (
+          <div className="RewardsPanel__rewards_count_wrapper">
+            <div className="RewardsPanel__rewards_count">
+              {rewardsCount}
+            </div>
+            <div className="RewardsPanel__rewards_count_title">
+              {rewardsCount === 1 ? 'Reward' : 'Rewards'}
+            </div>
+          </div>
+        )}
+        <iframe
+          ref={this.iframe}
+          className="RewardsPanel__myoffrz_iframe"
+          src={src}
+          width={iframeWidth}
+          height={iframeHeight}
+          title="myoffrz-rewards"
+        />
+      </>
+    );
 	}
 
 	/**
@@ -396,9 +291,8 @@ class Rewards extends React.Component {
 	render() {
 		return (
 			<div className="RewardsPanel">
-				<Route path="/detail/rewards/(list|detail)/:id?" render={this.renderRewardsHeader} />
+				<Route path="/detail/rewards/list/:id?" render={this.renderRewardsHeader} />
 				<Route path="/detail/rewards/list" render={this.renderRewardListComponent} />
-				<Route path="/detail/rewards/detail/:id" render={this.renderRewardDetailComponent} />
 			</div>
 		);
 	}
