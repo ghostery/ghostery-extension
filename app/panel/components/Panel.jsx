@@ -14,12 +14,12 @@
 import React from 'react';
 import ClassNames from 'classnames';
 import Header from '../containers/HeaderContainer';
-import { PlusPromoModal } from '../../shared-components';
 import PanelToTabLink from './BuildingBlocks/PanelToTabLink';
+import { PlusPromoModal, Modal } from '../../shared-components';
+import InsightsPromoModal from '../containers/InsightsPromoModalContainer';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import { setTheme } from '../utils/utils';
-import Modal from '../../shared-components/Modal';
 /**
  * @class Implement base view with functionality common to all views.
  * @memberof PanelClasses
@@ -27,15 +27,15 @@ import Modal from '../../shared-components/Modal';
 class Panel extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			insightsPromoModalShown: false,
+			plusPromoModalShown: false
+		};
 
 		// event bindings
 		this.closeNotification = this.closeNotification.bind(this);
 		this.clickReloadBanner = this.clickReloadBanner.bind(this);
 		this.filterTrackers = this.filterTrackers.bind(this);
-
-		this.state = {
-			plusPromoModalShown: false,
-		};
 	}
 
 	/**
@@ -43,7 +43,6 @@ class Panel extends React.Component {
 	 */
 	componentDidMount() {
 		sendMessage('ping', 'engaged');
-
 		this._dynamicUIDataInitialized = false;
 		this._dynamicUIPort = chrome.runtime.connect({ name: 'dynamicUIPanelPort' });
 		this._dynamicUIPort.onMessage.addListener((msg) => {
@@ -64,6 +63,16 @@ class Panel extends React.Component {
 	 */
 	componentWillUnmount() {
 		this._dynamicUIPort.disconnect();
+	}
+
+	/**
+	 * Reload the current tab
+	 * @param  {Object} event
+	 * @todo  Why do we need explicit argument here?
+	 */
+	clickReloadBanner() {
+		sendMessage('reloadTab', { tab_id: +this.props.tab_id });
+		window.close();
 	}
 
 	/**
@@ -89,16 +98,6 @@ class Panel extends React.Component {
 	}
 
 	/**
-	 * Reload the current tab
-	 * @param  {Object} event
-	 * @todo  Why do we need explicit argument here?
-	 */
-	clickReloadBanner() {
-		sendMessage('reloadTab', { tab_id: +this.props.tab_id });
-		window.close();
-	}
-
-	/**
 	 * Filter trackers when clicking on compatibility/slow
 	 * tracker notifications and trigger appropriate action.
 	 * @param  {Object} event
@@ -119,12 +118,12 @@ class Panel extends React.Component {
 
 		this.closeNotification();
 	}
-
 	/**
 	 * Dynamic UI data port first payload handling
 	 * Called once, when we get the first message from the background through the port
 	 * @param	{Object}	payload		the body of the message
 	 */
+
 	_initializeData(payload) {
 		this._dynamicUIDataInitialized = true;
 
@@ -155,6 +154,7 @@ class Panel extends React.Component {
 			sendMessage('ping', 'engaged_offer');
 		}
 	}
+
 
 	/**
 	 * Helper render function for the notification callout
@@ -294,6 +294,21 @@ class Panel extends React.Component {
 		);
 	}
 
+	_renderInsightsPromoModal = () => {
+		const { account, isTimeForInsightsPromo, isInsightsModalHidden } = this.props;
+		const { insightsPromoModalShown } = this.state;
+
+		if (isInsightsModalHidden) return null;
+		if (insightsPromoModalShown || !isTimeForInsightsPromo) return null;
+		if (account && account.user && account.user.scopes && account.user.scopes.includes('subscriptions:insights')) return null;
+
+		sendMessage('promoModals.sawInsightsPromo', '', 'metrics');
+
+		return (
+			<InsightsPromoModal />
+		);
+	}
+
 	/**
 	 * React's required render function. Returns JSX
 	 * @return {JSX} JSX for rendering the Panel
@@ -309,6 +324,7 @@ class Panel extends React.Component {
 		return (
 			<div id="panel">
 				{this._renderPlusPromoModal()}
+				{this._renderInsightsPromoModal()}
 				<div className="callout-container">
 					<div className={`${(!notificationText ? 'hide ' : '') + this.props.notificationClasses} callout`}>
 						<svg onClick={this.closeNotification} width="15px" height="15px" viewBox="0 0 15 15" className="close-button">

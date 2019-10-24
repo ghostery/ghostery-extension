@@ -526,6 +526,27 @@
 	"panel_help_setup": {
 		"message": "Set Up Ghostery"
 	},
+	"panel_insights_audit_tags": {
+		"message": "Audit marketing tags on a page"
+	},
+	"panel_insights_promotion_explore_trends": {
+		"message": "Explore global digital trends"
+	},
+	"panel_insights_promotion_call_to_action": {
+		"message": "Try for free"
+	},
+	"panel_insights_promotion_header": {
+		"message": "Try Ghostery Insights"
+	},
+	"panel_insights_promotion_description": {
+		"message": "Speed up and clean up digital user experience with our professional tag analytics tool."
+	},
+	"panel_insights_promotion_trace_poor_performance": {
+		"message": "Trace sources of poor performance"
+	},
+	"panel_insights_promotion_watch_pings": {
+		"message": "Watch pings fire in real-time"
+	},
 	"panel_about_panel_header": {
 		"message": "About Ghostery Browser Extension"
 	},
@@ -1785,6 +1806,18 @@
 	},
 	"subscribe_pitch_learn_more": {
 		"message": "Learn more"
+	},
+	"subscribe_pitch_button_label": {
+		"message": "Get Ghostery Plus!"
+	},
+	"subscribe_pitch_no_thanks": {
+		"message": "No thanks, maybe later"
+	},
+	"subscribe_pitch_sign_here": {
+		"message": "Already a subscriber? Sign in here"
+	},
+	"subscribe_pitch_sign_in": {
+		"message": "Already subscribed? Sign in"
 	},
 	"subscription_midnight_theme": {
 		"message": "Midnight Theme"
