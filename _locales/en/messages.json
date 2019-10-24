@@ -2143,5 +2143,25 @@
 	},
 	"new_color_themes": {
 		"message": "New Color Themes"
+	},
+	"upgrade_cta_TEXT": {
+		"message": "Unlock historical tracker insights, priority support access, and new color themes by upgrading to Ghostery Plus for only $2 per month.",
+		"description": "Body text in a non-responsive modal. Character limit: 135."
+	},
+	"upgrade_your_ghostery_experience": {
+		"message": "Upgrade your Ghostery experience",
+		"description": "Header text for a non-responsive modal. Character limit: 40."
+	},
+	"upgrade_to_plus": {
+		"message": "Upgrade to Plus",
+		"description": "Button text in a non-responsive modal. Character limit: 35."
+	},
+	"no_thanks_turn_promos_off": {
+		"message": "No thanks, turn promos off",
+		"description": "Text link in a non-responsive modal. Character limit: 28."
+	},
+	"already_subscribed_sign_in": {
+		"message": "Already subscribed? Sign In",
+		"description": "Character limit: 28."
 	}
 }

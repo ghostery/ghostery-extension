@@ -14,6 +14,7 @@
 import React from 'react';
 import ClassNames from 'classnames';
 import Header from '../containers/HeaderContainer';
+import PanelToTabLink from './BuildingBlocks/PanelToTabLink';
 import { PlusPromoModal, Modal } from '../../shared-components';
 import InsightsPromoModal from '../containers/InsightsPromoModalContainer';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
@@ -208,21 +209,60 @@ class Panel extends React.Component {
 		});
 	}
 
-	_renderPlusPromoUpgradeModal() {
+	_handleNoThanksClick = () => {
+		sendMessage('promoModals.sawPlusPromo', {});
+		sendMessage('promoModals.turnOffPromos', {});
+		this.setState({
+			plusPromoModalShown: true
+		});
+	}
+
+	_handleSubscriberSignInClick = () => {
+		sendMessage('promoModals.sawPlusPromo', {});
+		this.setState({
+			plusPromoModalShown: true
+		});
+		this.props.history.push('/login');
+	}
+
+	_renderPlusPromoUpgradeModal(signedIn) {
 		const contentClassNames = ClassNames(
 			'PlusPromoModal__content',
 			'flex-container',
 			'flex-dir-column',
 			'align-middle',
-			'panel'
+			'panel',
+			'upgrade'
 		);
 
 		return (
 			<Modal show>
 				<div className={contentClassNames}>
-					<div className="PlusPromoModal__thanks-for-download">[Upgrade version of the Plus Promo modal]</div>
-					<div className="PlusPromoModal__button basic button" onClick={this._handlePlusPromoModalClicks}>
-						<span>Dismiss</span>
+					<div className="PlusPromoModal__buttons-background upgrade" />
+					<img className="PlusPromoModal__gold-ghostie-badge" src="/app/images/hub/home/gold-ghostie-badge.svg" />
+					<div className="PlusPromoModal__header">
+						{t('upgrade_your_ghostery_experience')}
+					</div>
+					<div className="PlusPromoModal__description cta">
+						{t('upgrade_cta_TEXT')}
+					</div>
+					<div className="PlusPromoModal__button-container" onClick={this._handlePlusPromoModalClicks}>
+						<PanelToTabLink className="PlusPromoModal__button upgrade" href="http://signon.ghostery.com/en/subscribe/">
+							<span className="button-text">{t('upgrade_to_plus')}</span>
+						</PanelToTabLink>
+					</div>
+					<div className="PlusPromoModal__text-link-container">
+						{
+							!signedIn &&
+							(
+								<div onClick={this._handleSubscriberSignInClick} className="PlusPromoModal__text-link">
+									{t('already_subscribed_sign_in')}
+								</div>
+							)
+						}
+						<div onClick={this._handleNoThanksClick} className="PlusPromoModal__text-link">
+							{t('no_thanks_turn_promos_off')}
+						</div>
 					</div>
 				</div>
 			</Modal>
@@ -233,12 +273,17 @@ class Panel extends React.Component {
 		const { plusPromoModalShown } = this.state;
 		const { account, haveSeenInitialPlusPromo, isTimeForAPlusPromo } = this.props;
 
-		if (account && account.user && account.user.subscriptionsPlus) return null; // don't show the promo to Plus subscribers!
-		if (account && account.user && account.user.scopes && account.user.scopes.includes('subscriptions:insights')) return null; // don't show the promo to Insights subscribers, either
-
+		// The business logic that controls how often promo modals should be shown lives in src/classes/PromoModals
 		if (plusPromoModalShown || !isTimeForAPlusPromo) return null;
 
-		if (haveSeenInitialPlusPromo) { return this._renderPlusPromoUpgradeModal(); }
+		// Check account status
+		const signedIn = account && account.user;
+		const plusSubscriber = signedIn && account.user.subscriptionsPlus;
+		const insightsSubscriber = signedIn && account.user.scopes && account.user.scopes.includes('subscriptions:insights');
+
+		if (plusSubscriber || insightsSubscriber) return null;
+
+		if (haveSeenInitialPlusPromo) { return this._renderPlusPromoUpgradeModal(signedIn); }
 
 		return (
 			<PlusPromoModal
