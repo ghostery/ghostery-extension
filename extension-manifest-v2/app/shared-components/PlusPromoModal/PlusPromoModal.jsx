@@ -31,6 +31,7 @@ function _renderInitialVersion(props) {
 		'flex-container',
 		'flex-dir-column',
 		'align-middle',
+		'initial',
 		locationClassName
 	);
 	const optionsContainerClassNames = ClassNames(
@@ -55,7 +56,7 @@ function _renderInitialVersion(props) {
 	return (
 		<Modal show={show}>
 			<div className={contentClassNames}>
-				<div className="PlusPromoModal__buttons-background" />
+				<div className="PlusPromoModal__buttons-background initial" />
 				{isInHub && (
 					<div className="PlusPromoModal__thanks-for-download">
 						{t('thanks_for_downloading_ghostery')}
@@ -81,7 +82,7 @@ function _renderInitialVersion(props) {
 								<div className="PlusPromoModal__option-description-item">{t('fast_browsing')}</div>
 							</div>
 						</div>
-						<div className="PlusPromoModal__button basic button" onClick={clickHandler}>
+						<div className="PlusPromoModal__button basic" onClick={clickHandler}>
 							<span>{t('select_basic')}</span>
 						</div>
 					</div>
@@ -114,7 +115,7 @@ function _renderInitialVersion(props) {
 								</div>
 							</div>
 						</div>
-						<a href="http://signon.ghostery.com/en/subscribe/" target="_blank" rel="noopener noreferrer" className="PlusPromoModal__button plus button" onClick={clickHandler}>
+						<a href="http://signon.ghostery.com/en/subscribe/" target="_blank" rel="noopener noreferrer" className="PlusPromoModal__button plus" onClick={clickHandler}>
 							<span>{t('select_plus')}</span>
 						</a>
 					</div>

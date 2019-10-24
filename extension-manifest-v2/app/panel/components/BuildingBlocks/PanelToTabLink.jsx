@@ -19,10 +19,12 @@ import { handleClickOnNewTabLink } from '../../utils/msg';
  * @memberof PanelBuildingBlocks
  */
 const PanelToTabLink = (props) => {
-	const { href, children } = props;
+	const { className, href, children } = props;
+
+	const classes = className || '';
 
 	return (
-		<a href={href} onClick={handleClickOnNewTabLink}>{children}</a>
+		<a className={classes} href={href} onClick={handleClickOnNewTabLink}>{children}</a>
 	);
 };
 

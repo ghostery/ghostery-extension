@@ -41,6 +41,8 @@ class PromoModals {
 
 	static recordInsightsPromoSighting() { this._recordPromoSighting(INSIGHTS); }
 
+	static turnOffPromos() { conf.notify_promotions = false; }
+
 	static _isTimeForAPromo(type) {
 		if (conf.notify_promotions === false) { return false; }
 
