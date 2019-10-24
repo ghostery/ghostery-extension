@@ -16,8 +16,6 @@ import rewardsReducer from '../rewards';
 import {
 	UPDATE_REWARDS_DATA,
 	TOGGLE_OFFERS_ENABLED,
-	REMOVE_OFFER,
-	SET_OFFER_READ,
 	SEND_SIGNAL
 } from '../../constants/constants';
 
@@ -50,74 +48,6 @@ describe('app/panel/reducers/rewards.js', () => {
 		});
 
 		expect(rewardsReducer(initialState, action)).toEqual(updatedState);
-	});
-
-	test('reducer correctly handles REMOVE_OFFER', () => {
-		const data = { id: 'test_reward_id' };
-		const action = { data, type: REMOVE_OFFER };
-
-		const initState = Immutable({
-			rewards: {
-				test_reward_id: { reward: 'test' },
-				test_reward_id_alt: { reward: 'test_alt' },
-			},
-			enable_offers: true,
-			unread_offer_ids: ['test_reward_id', 'test_reward_id_alt'],
-		});
-
-		expect(rewardsReducer(initState, action)).toEqual({
-			rewards: {
-				test_reward_id_alt: { reward: 'test_alt' },
-			},
-			enable_offers: true,
-			unread_offer_ids: ['test_reward_id_alt'],
-		});
-	});
-
-	test('reducer correctly handles SET_OFFER_READ', () => {
-		const data = { id: 'test_reward_id' };
-		const action = { data, type: SET_OFFER_READ };
-
-		const initState = Immutable({
-			rewards: {
-				test_reward_id: { reward: 'test' },
-				test_reward_id_alt: { reward: 'test_alt' },
-			},
-			enable_offers: true,
-			unread_offer_ids: ['test_reward_id', 'test_reward_id_alt'],
-		});
-
-		expect(rewardsReducer(initState, action)).toEqual({
-			rewards: {
-				test_reward_id: { reward: 'test' },
-				test_reward_id_alt: { reward: 'test_alt' },
-			},
-			enable_offers: true,
-			unread_offer_ids: ['test_reward_id_alt'],
-		});
-	});
-
-	test('reducer correctly handles SET_OFFER_READ when offer is not new', () => {
-		const data = { id: 'test_reward_id' };
-		const action = { data, type: SET_OFFER_READ };
-
-		const initState = Immutable({
-			rewards: {
-				test_reward_id: { reward: 'test' },
-				test_reward_id_alt: { reward: 'test_alt' },
-			},
-			enable_offers: true,
-			unread_offer_ids: ['test_reward_id_alt'],
-		});
-
-		expect(rewardsReducer(initState, action)).toEqual({
-			rewards: {
-				test_reward_id: { reward: 'test' },
-				test_reward_id_alt: { reward: 'test_alt' },
-			},
-			enable_offers: true,
-			unread_offer_ids: ['test_reward_id_alt'],
-		});
 	});
 
 	test('reducer correctly handles SEND_SIGNAL', () => {

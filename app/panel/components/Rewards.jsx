@@ -45,7 +45,7 @@ class Rewards extends React.Component {
 		// helper render functions
 		this.renderRewardListComponent = this.renderRewardListComponent.bind(this);
 		this.handleFaqClick = this.handleFaqClick.bind(this);
-    this.handlePortMessage = this.handlePortMessage.bind(this);
+		this.handlePortMessage = this.handlePortMessage.bind(this);
 
 
 		// myoffrz
@@ -59,7 +59,7 @@ class Rewards extends React.Component {
 	componentDidMount() {
 		this._dynamicUIPort = this.context;
 		this._dynamicUIPort.postMessage({ name: 'RewardsComponentDidMount' });
-    this._dynamicUIPort.onMessage.addListener(this.handlePortMessage);
+		this._dynamicUIPort.onMessage.addListener(this.handlePortMessage);
 
 		this.props.actions.sendSignal('hub_open');
 		window.addEventListener('message', this.handleMyoffrzMessage);
@@ -71,21 +71,21 @@ class Rewards extends React.Component {
 	componentWillUnmount() {
 		/* @TODO send message to background to remove port onDisconnect event */
 		this.props.actions.sendSignal('hub_closed');
-    this._dynamicUIPort.onMessage.removeListener(this.handlePortMessage);
+		this._dynamicUIPort.onMessage.removeListener(this.handlePortMessage);
 
 		this._dynamicUIPort.postMessage({ name: 'RewardsComponentWillUnmount' });
 		window.removeEventListener('message', this.handleMyoffrzMessage);
 	}
 
-  /**
+	/**
     * Handles message from the dynamic UI port to background
     */
-   handlePortMessage(msg) {
-     if (msg.to !== 'rewards' || !msg.body) { return; }
+	handlePortMessage(msg) {
+		if (msg.to !== 'rewards' || !msg.body) { return; }
 
-     // msg.body can contain enable_offers prop
-     this.props.actions.updateRewardsData(msg.body);
-   }
+		// msg.body can contain enable_offers prop
+		this.props.actions.updateRewardsData(msg.body);
+	}
 
 	iframeResize(data = {}) {
 		const { width = 0, height = 0 } = data;
@@ -101,7 +101,7 @@ class Rewards extends React.Component {
 	}
 
 	myoffrzSendRuntimeMessage({ message, target }) {
-    // TODO maybe sendMessage
+		// TODO maybe sendMessage
 		chrome.runtime.sendMessage({ message, target }, (result = {}) => {
 			console.log('XXXXX result', result, this.iframe);
 			if (result.action !== 'pushData' || !this.iframe.current) { return; }
@@ -207,39 +207,39 @@ class Rewards extends React.Component {
 		);
 	}
 
-  renderCLIQZtext() {
-    return (
-      <div className="RewardsPanel__info">
-        { this.renderRewardSvg() }
-        <div>{ t('panel_detail_rewards_cliqz_text') }</div>
-        <hr />
-        <div
-          className="RewardsPanel__learn_more button primary hollow"
-          onClick={this.handleFaqClick}
-        >
-          { t('panel_detail_learn_more') }
-        </div>
-      </div>
-    );
-  }
+	renderCLIQZtext() {
+		return (
+			<div className="RewardsPanel__info">
+				{ this.renderRewardSvg() }
+				<div>{ t('panel_detail_rewards_cliqz_text') }</div>
+				<hr />
+				<div
+					className="RewardsPanel__learn_more button primary hollow"
+					onClick={this.handleFaqClick}
+				>
+					{ t('panel_detail_learn_more') }
+				</div>
+			</div>
+		);
+	}
 
-  renderRewardsTurnoffText() {
-    return (
-      <div className="RewardsPanel__info">
-        { this.renderRewardSvg() }
-        <div>{ t('panel_detail_rewards_off') }</div>
-      </div>
-    );
-  }
+	renderRewardsTurnoffText() {
+		return (
+			<div className="RewardsPanel__info">
+				{ this.renderRewardSvg() }
+				<div>{ t('panel_detail_rewards_off') }</div>
+			</div>
+		);
+	}
 
-  renderRewardsNoneFoundText() {
-    return (
-      <div className="RewardsPanel__info">
-        { this.renderRewardSvg() }
-        <div>{ t('panel_detail_rewards_none_found') }</div>
-      </div>
-    );
-  }
+	renderRewardsNoneFoundText() {
+		return (
+			<div className="RewardsPanel__info">
+				{ this.renderRewardSvg() }
+				<div>{ t('panel_detail_rewards_none_found') }</div>
+			</div>
+		);
+	}
 
 	/**
 	 * Helper render function for the list of Rewards Items
@@ -247,41 +247,41 @@ class Rewards extends React.Component {
 	 */
 	renderRewardListComponent() {
 		if (IS_CLIQZ) { return this.renderCLIQZtext(); }
-    const { enable_offers, is_expanded } = this.props;
+		const { enable_offers, is_expanded } = this.props;
 		if (!enable_offers) { return this.renderRewardsTurnoffText(); }
 
-    const {
-      shouldHideRewards,
-      iframeWidth,
-      iframeHeight,
-      rewardsCount,
-    } = this.state;
+		const {
+			shouldHideRewards,
+			iframeWidth,
+			iframeHeight,
+			rewardsCount,
+		} = this.state;
 		if (shouldHideRewards) { return this.renderRewardsNoneFoundText(); }
 
-    const src = chrome.runtime.getURL('cliqz/offers-cc/index.html?cross-origin');
-    // TODO i18n r === 1 ? 'Reward' : 'Rewards'
-    return (
-      <>
-        {is_expanded && (
-          <div className="RewardsPanel__rewards_count_wrapper">
-            <div className="RewardsPanel__rewards_count">
-              {rewardsCount}
-            </div>
-            <div className="RewardsPanel__rewards_count_title">
-              {rewardsCount === 1 ? 'Reward' : 'Rewards'}
-            </div>
-          </div>
-        )}
-        <iframe
-          ref={this.iframe}
-          className="RewardsPanel__myoffrz_iframe"
-          src={src}
-          width={iframeWidth}
-          height={iframeHeight}
-          title="myoffrz-rewards"
-        />
-      </>
-    );
+		const src = chrome.runtime.getURL('cliqz/offers-cc/index.html?cross-origin');
+		// TODO i18n r === 1 ? 'Reward' : 'Rewards'
+		return (
+			<>
+				{is_expanded && (
+					<div className="RewardsPanel__rewards_count_wrapper">
+						<div className="RewardsPanel__rewards_count">
+							{rewardsCount}
+						</div>
+						<div className="RewardsPanel__rewards_count_title">
+							{rewardsCount === 1 ? 'Reward' : 'Rewards'}
+						</div>
+					</div>
+				)}
+				<iframe
+					ref={this.iframe}
+					className="RewardsPanel__myoffrz_iframe"
+					src={src}
+					width={iframeWidth}
+					height={iframeHeight}
+					title="myoffrz-rewards"
+				/>
+			</>
+		);
 	}
 
 	/**
