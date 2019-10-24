@@ -73,7 +73,7 @@ class Login extends React.Component {
 							})
 							.finally(() => {
 								this.setState({ loading: false }, () => {
-									this.props.actions.toggleInsightsModal();
+									this.props.actions.togglePromoModal();
 									history.push({
 										pathname: this.props.is_expert ? '/detail/blocking' : '/'
 									});
