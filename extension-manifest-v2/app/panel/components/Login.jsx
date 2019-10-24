@@ -17,6 +17,7 @@ import ClassNames from 'classnames';
 import RSVP from 'rsvp';
 import { validateEmail } from '../utils/utils';
 import { log } from '../../../src/utils/common';
+import history from '../utils/history';
 
 /**
  * @class Implement Sign In view which opens from 'Sign In' CTA on the Header.
@@ -72,7 +73,10 @@ class Login extends React.Component {
 							})
 							.finally(() => {
 								this.setState({ loading: false }, () => {
-									this.props.history.push(this.props.is_expert ? '/detail/blocking' : '/');
+									this.props.actions.toggleInsightsModal();
+									history.push({
+										pathname: this.props.is_expert ? '/detail/blocking' : '/'
+									});
 								});
 							});
 					} else {
