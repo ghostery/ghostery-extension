@@ -22,14 +22,14 @@ class InsightsPromoModal extends React.Component {
 		history.push({
 			pathname: '/login',
 		});
-		this.props.actions.toggleInsightsModal();
+		this.props.actions.togglePromoModal();
 	};
 
 	render() {
 		return (
 			<Modal show>
 				<div className="InsightsModal__content flex-container flex-dir-column align-middle">
-					<ModalExitButton className="InsightsModal__exitButton" toggleModal={this.props.actions.toggleInsightsModal} />
+					<ModalExitButton className="InsightsModal__exitButton" toggleModal={this.props.actions.togglePromoModal} />
 					<div className="InsightsModal__image" />
 					<div className="InsightsModal__header">
 						{t('panel_insights_promotion_header')}
@@ -75,7 +75,7 @@ class InsightsPromoModal extends React.Component {
 						</div>
 						<div className="InsightsModal__other-options-container flex-container align-justify">
 							<span onClick={this.clickSignIn} className="InsightsModal__link">{t('subscribe_pitch_sign_in')}</span>
-							<span onClick={this.props.actions.toggleInsightsModal} className="InsightsModal__link">{t('subscribe_pitch_no_thanks')}</span>
+							<span onClick={this.props.actions.togglePromoModal} className="InsightsModal__link">{t('subscribe_pitch_no_thanks')}</span>
 						</div>
 					</div>
 				</div>

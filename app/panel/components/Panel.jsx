@@ -27,10 +27,6 @@ import { setTheme } from '../utils/utils';
 class Panel extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			insightsPromoModalShown: false,
-			plusPromoModalShown: false
-		};
 
 		// event bindings
 		this.closeNotification = this.closeNotification.bind(this);
@@ -202,26 +198,16 @@ class Panel extends React.Component {
 	}
 
 	_handlePlusPromoModalClicks = () => {
-		// TODO send appropriate metrics ping(s) for GH-1775
-		sendMessage('promoModals.sawPlusPromo', {});
-		this.setState({
-			plusPromoModalShown: true
-		});
+		this.props.actions.togglePromoModal();
 	}
 
 	_handleNoThanksClick = () => {
-		sendMessage('promoModals.sawPlusPromo', {});
+		this.props.actions.togglePromoModal();
 		sendMessage('promoModals.turnOffPromos', {});
-		this.setState({
-			plusPromoModalShown: true
-		});
 	}
 
 	_handleSubscriberSignInClick = () => {
-		sendMessage('promoModals.sawPlusPromo', {});
-		this.setState({
-			plusPromoModalShown: true
-		});
+		this.props.actions.togglePromoModal();
 		this.props.history.push('/login');
 	}
 
@@ -269,22 +255,34 @@ class Panel extends React.Component {
 		);
 	}
 
+	_signedIn = () => {
+		const { account } = this.props;
+
+		return account && account.user;
+	}
+
+	_plusSubscriber = () => {
+		const { account } = this.props;
+
+		return this._signedIn() && account.user.subscriptionsPlus;
+	}
+
+	_insightsSubscriber = () => {
+		const { account } = this.props;
+
+		return this._signedIn() && account.user.scopes && account.user.scopes.includes('subscriptions:insights');
+	}
+
 	_renderPlusPromoModal = () => {
-		const { plusPromoModalShown } = this.state;
-		const { account, haveSeenInitialPlusPromo, isTimeForAPlusPromo } = this.props;
+		if (this._plusSubscriber() || this._insightsSubscriber()) return null;
 
-		// The business logic that controls how often promo modals should be shown lives in src/classes/PromoModals
-		if (plusPromoModalShown || !isTimeForAPlusPromo) return null;
+		sendMessage('promoModals.sawPlusPromo', {});
 
-		// Check account status
-		const signedIn = account && account.user;
-		const plusSubscriber = signedIn && account.user.subscriptionsPlus;
-		const insightsSubscriber = signedIn && account.user.scopes && account.user.scopes.includes('subscriptions:insights');
+		if (this.props.promoModal === 'plus_upgrade') {
+			return this._renderPlusPromoUpgradeModal(this._signedIn());
+		}
 
-		if (plusSubscriber || insightsSubscriber) return null;
-
-		if (haveSeenInitialPlusPromo) { return this._renderPlusPromoUpgradeModal(signedIn); }
-
+		// promoModal === 'plus_initial'
 		return (
 			<PlusPromoModal
 				show
@@ -295,18 +293,30 @@ class Panel extends React.Component {
 	}
 
 	_renderInsightsPromoModal = () => {
-		const { account, isTimeForInsightsPromo, isInsightsModalHidden } = this.props;
-		const { insightsPromoModalShown } = this.state;
-
-		if (isInsightsModalHidden) return null;
-		if (insightsPromoModalShown || !isTimeForInsightsPromo) return null;
-		if (account && account.user && account.user.scopes && account.user.scopes.includes('subscriptions:insights')) return null;
+		if (this._insightsSubscriber()) return null;
 
 		sendMessage('promoModals.sawInsightsPromo', '', 'metrics');
 
-		return (
-			<InsightsPromoModal />
-		);
+		return <InsightsPromoModal />;
+	}
+
+	_renderPromoModal = () => {
+		const {
+			promoModal,
+			isPromoModalHidden,
+		} = this.props;
+
+		if (isPromoModalHidden) return null;
+
+		if (promoModal === 'insights') {
+			return this._renderInsightsPromoModal();
+		}
+
+		if (promoModal === 'plus_initial' || promoModal === 'plus_upgrade') {
+			return this._renderPlusPromoModal();
+		}
+
+		return null;
 	}
 
 	/**
@@ -323,8 +333,7 @@ class Panel extends React.Component {
 
 		return (
 			<div id="panel">
-				{this._renderPlusPromoModal()}
-				{this._renderInsightsPromoModal()}
+				{this._renderPromoModal()}
 				<div className="callout-container">
 					<div className={`${(!notificationText ? 'hide ' : '') + this.props.notificationClasses} callout`}>
 						<svg onClick={this.closeNotification} width="15px" height="15px" viewBox="0 0 15 15" className="close-button">

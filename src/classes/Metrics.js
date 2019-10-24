@@ -767,6 +767,10 @@ class Metrics {
 		conf.metrics.engaged_daily_count = engaged_daily_count;
 		conf.metrics.engaged_daily_velocity = engaged_daily_velocity;
 		this._sendReq('engaged', ['daily', 'weekly', 'monthly']);
+
+		console.error('IVZ Metrics#_recordEngaged');
+		console.error(`engaged_daily_count: ${engaged_daily_count}`);
+		console.error(`engaged_daily_velocity: ${engaged_daily_velocity}`);
 	}
 
 	/**

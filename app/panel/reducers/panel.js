@@ -27,7 +27,7 @@ import {
 	TOGGLE_EXPANDED,
 	SET_THEME,
 	CLEAR_THEME,
-	TOGGLE_INSIGHTS_MODAL
+	TOGGLE_PROMO_MODAL
 } from '../constants/constants';
 import {
 	LOGIN_SUCCESS,
@@ -61,7 +61,7 @@ const initialState = {
 	email: '',
 	emailValidated: false,
 	current_theme: 'default',
-	isInsightsModalHidden: false,
+	isPromoModalHidden: false,
 };
 /**
  * Default export for panel view reducer. Handles actions
@@ -262,10 +262,10 @@ export default (state = initialState, action) => {
 			}
 			return state;
 		}
-		case TOGGLE_INSIGHTS_MODAL: {
+		case TOGGLE_PROMO_MODAL: {
 			return {
 				...state,
-				isInsightsModalHidden: !state.isInsightsModalHidden
+				isPromoModalHidden: !state.isPromoModalHidden
 			};
 		}
 		default: return state;
