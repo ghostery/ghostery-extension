@@ -18,7 +18,7 @@ import {
 	TOGGLE_EXPERT,
 	SET_THEME,
 	CLEAR_THEME,
-	TOGGLE_INSIGHTS_MODAL
+	TOGGLE_PROMO_MODAL
 } from '../constants/constants';
 import { sendMessageInPromise } from '../utils/msg';
 
@@ -104,8 +104,8 @@ export const getTheme = name => dispatch => (
  * Triggered when the user signs in through the Insights modal into an account that does not have an insights subscription, prompting to re-display the modal, requiring a re-render
  * @return {Object}
  */
-export function toggleInsightsModal() {
+export function togglePromoModal() {
 	return {
-		type: TOGGLE_INSIGHTS_MODAL,
+		type: TOGGLE_PROMO_MODAL,
 	};
 }
