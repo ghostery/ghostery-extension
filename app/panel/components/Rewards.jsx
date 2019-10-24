@@ -1,5 +1,6 @@
 /**
  * Rewards Component
+ *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
@@ -58,11 +59,11 @@ class Rewards extends React.Component {
 	 */
 	componentDidMount() {
 		this._dynamicUIPort = this.context;
-		this._dynamicUIPort.postMessage({ name: 'RewardsComponentDidMount' });
 		this._dynamicUIPort.onMessage.addListener(this.handlePortMessage);
-
-		this.props.actions.sendSignal('hub_open');
 		window.addEventListener('message', this.handleMyoffrzMessage);
+
+		this._dynamicUIPort.postMessage({ name: 'RewardsComponentDidMount' });
+		this.props.actions.sendSignal('hub_open');
 	}
 
 	/**
@@ -71,15 +72,14 @@ class Rewards extends React.Component {
 	componentWillUnmount() {
 		/* @TODO send message to background to remove port onDisconnect event */
 		this.props.actions.sendSignal('hub_closed');
-		this._dynamicUIPort.onMessage.removeListener(this.handlePortMessage);
-
 		this._dynamicUIPort.postMessage({ name: 'RewardsComponentWillUnmount' });
+		this._dynamicUIPort.onMessage.removeListener(this.handlePortMessage);
 		window.removeEventListener('message', this.handleMyoffrzMessage);
 	}
 
 	/**
-    * Handles message from the dynamic UI port to background
-    */
+   * Handles message from the dynamic UI port to background
+   */
 	handlePortMessage(msg) {
 		if (msg.to !== 'rewards' || !msg.body) { return; }
 

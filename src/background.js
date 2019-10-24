@@ -664,9 +664,10 @@ function onMessageHandler(request, sender, callback) {
 		if (module !== 'offers-cc') { return; }
 		if (msg.action === 'myOffrzTurnoff') {
 			panelData.set({ enable_offers: false });
-			return;
 		}
+		return;
 	}
+
 	if (request.source === 'cliqz-content-script') {
 		return;
 	}
