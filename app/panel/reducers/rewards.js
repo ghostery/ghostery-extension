@@ -14,16 +14,12 @@
 import {
 	UPDATE_REWARDS_DATA,
 	TOGGLE_OFFERS_ENABLED,
-	REMOVE_OFFER,
-	SET_OFFER_READ,
 	SEND_SIGNAL
 } from '../constants/constants';
 import { sendRewardMessage } from '../utils/msg';
 
 const initialState = {
-	rewards: null,
 	enable_offers: false,
-	unread_offer_ids: [],
 };
 
 /**
@@ -42,33 +38,6 @@ export default (state = initialState, action) => {
 		case TOGGLE_OFFERS_ENABLED: {
 			const enable_offers = action.data.enabled;
 			return Object.assign({}, state, { enable_offers });
-		}
-
-		case REMOVE_OFFER: {
-			// Remove offer from unread array
-			const unread_offer_ids = [...state.unread_offer_ids];
-			const idx = unread_offer_ids.indexOf(action.data.id);
-			if (idx !== -1) {
-				unread_offer_ids.splice(idx, 1);
-			}
-
-			// Remove offer from offers list
-			const rewards = Object.assign({}, state.rewards);
-			delete rewards[action.data.id];
-
-			sendRewardMessage('deleteReward', { offerId: action.data.id });
-			return Object.assign({}, state, { unread_offer_ids, rewards });
-		}
-
-		case SET_OFFER_READ: {
-			const unread_offer_ids = [...state.unread_offer_ids];
-			const idx = unread_offer_ids.indexOf(action.data.id);
-			if (idx !== -1) {
-				unread_offer_ids.splice(idx, 1);
-				sendRewardMessage('rewardSeen', { offerId: action.data.id });
-				return Object.assign({}, state, { unread_offer_ids });
-			}
-			return state;
 		}
 
 		case SEND_SIGNAL: {

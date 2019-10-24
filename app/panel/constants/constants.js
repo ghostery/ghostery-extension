@@ -33,8 +33,6 @@ export const TOGGLE_EXPANDED = 'TOGGLE_EXPANDED';
 // rewards
 export const UPDATE_REWARDS_DATA = 'UPDATE_REWARDS_DATA';
 export const TOGGLE_OFFERS_ENABLED = 'TOGGLE_OFFERS_ENABLED';
-export const REMOVE_OFFER = 'REMOVE_OFFER';
-export const SET_OFFER_READ = 'SET_OFFER_READ';
 export const SEND_SIGNAL = 'SEND_SIGNAL';
 
 // blocking

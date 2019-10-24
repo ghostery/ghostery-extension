@@ -14,8 +14,6 @@
 import {
 	UPDATE_REWARDS_DATA,
 	TOGGLE_OFFERS_ENABLED,
-	REMOVE_OFFER,
-	SET_OFFER_READ,
 	SEND_SIGNAL
 } from '../constants/constants';
 
@@ -43,29 +41,6 @@ export function toggleOffersEnabled(enabled) {
 	};
 }
 
-/**
- * Removes a reward from the rewards list
- * @param  {String} id The ID of the reward we want to remove.
- * @return {Object}
- */
-export function removeOffer(id) {
-	return {
-		type: REMOVE_OFFER,
-		data: { id }
-	};
-}
-
-/**
- * Sets the unread status of an offer to false
- * @param  {String} id the ID of the reward we want to update.
- * @return {Object}
- */
-export function setOfferRead(id) {
-	return {
-		type: SET_OFFER_READ,
-		data: { id }
-	};
-}
 
 // TODO the reducer calls getRewardMessage
 // determine whether it would be better to simply call getRewardMessage directly where sendSignal is called
