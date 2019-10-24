@@ -21,9 +21,7 @@ import {
 
 // Copied from app/panel/reducers/rewards.js
 const initialState = Immutable({
-	rewards: null,
 	enable_offers: false,
-	unread_offer_ids: [],
 });
 
 describe('app/panel/reducers/rewards.js', () => {
