@@ -488,8 +488,7 @@ function handleBlockedRedirect(name, message, tab_id, callback) {
  */
 function handleRewards(name, message, callback) {
 	switch (name) {
-		// TODO seems  we do not need `case rewardSignal`, but still better to check
-		case 'rewardSignal':
+		case 'rewardSignal': // e.g. hub_open | hub_closed
 			rewards.sendSignal(message);
 			break;
 		case 'ping':
@@ -497,7 +496,6 @@ function handleRewards(name, message, callback) {
 			break;
 		case 'setPanelData':
 			if (message.hasOwnProperty('enable_offers')) {
-				console.log('XXXX signal for turn(on|off) offers', message.signal);
 				rewards.sendSignal(message.signal);
 				panelData.set({ enable_offers: message.enable_offers });
 			}
@@ -596,7 +594,7 @@ function handleGhosteryHub(name, message, callback) {
 		}
 		case 'SET_GHOSTERY_REWARDS': {
 			const { enable_ghostery_rewards = true } = message;
-			rewards.sendSignal({ // TODO check manually ghostery hub turnoff
+			rewards.sendSignal({
 				actionId: `rewards_${enable_ghostery_rewards ? 'on' : 'off'}`,
 				origin: 'ghostery-setup-flow',
 				type: 'action-signal',
@@ -661,8 +659,6 @@ function handlePurplebox(name, message) {
  */
 function onMessageHandler(request, sender, callback) {
 	if (request.module === 'offers-banner' && request.action === 'send') {
-		// TODO check request.source
-		console.log('XXXX onMessageHandler check request.source', request, sender);
 		// eslint-disable-next-line
 		const [module, _, msg = {}] = request.args;
 		if (module !== 'offers-cc') { return; }
@@ -1063,16 +1059,12 @@ function initializeDispatcher() {
 		}
 	});
 	dispatcher.on('conf.save.enable_offers', (enableOffersIn) => {
-		console.log('XXXX conf.save.enable_offers dispacher', enableOffersIn);
 		button.update();
 		const firstStep = Promise.resolve();
 		let enableOffers = enableOffersIn;
 		if (IS_CLIQZ) {
 			enableOffers = false;
 		} else if (!enableOffers && cliqz.modules['offers-v2'].isEnabled) {
-			console.log('XXXX should be true when enabling');
-			// TODO check that signals is flushed
-			// we going to turn off offers maybe we dont need to flush it
 			cliqz.modules['offers-v2'].action('flushSignals');
 		}
 
@@ -1632,9 +1624,7 @@ function initializeGhosteryModules() {
 					conf.enable_offers = !offers.isDisabled;
 				}
 
-				console.log('XXX!!! g m', conf.rewards_opted_in, cliqz.prefs.get('myoffrz.opted_in'));
-				const myoffrzShouldMigrate = conf.rewards_opted_in !== undefined
-          && cliqz.prefs.get('myoffrz.opted_in') === undefined;
+				const myoffrzShouldMigrate = conf.rewards_opted_in !== undefined && cliqz.prefs.get('myoffrz.opted_in') === undefined;
 				if (myoffrzShouldMigrate) {
 					cliqz.prefs.set('myoffrz.opted_in', conf.rewards_opted_in);
 				}

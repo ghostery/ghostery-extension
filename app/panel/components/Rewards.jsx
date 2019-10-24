@@ -1,6 +1,5 @@
 /**
  * Rewards Component
- *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
@@ -18,6 +17,7 @@ import { ToggleSlider } from './BuildingBlocks';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import globals from '../../../src/classes/Globals';
+import { log } from '../../../src/utils/common';
 
 const IS_CLIQZ = (globals.BROWSER_INFO.name === 'cliqz');
 
@@ -101,9 +101,11 @@ class Rewards extends React.Component {
 	}
 
 	myoffrzSendRuntimeMessage({ message, target }) {
-		// TODO maybe sendMessage
 		chrome.runtime.sendMessage({ message, target }, (result = {}) => {
-			console.log('XXXXX result', result, this.iframe);
+			if (chrome.runtime.lastError) {
+				log('myoffrzSendRuntimeMessage, runtime.lastError', chrome.runtime.lastError);
+				return;
+			}
 			if (result.action !== 'pushData' || !this.iframe.current) { return; }
 			const { data: { vouchers = [] } = {} } = result;
 			const rewardsCount = vouchers.length;
@@ -259,17 +261,13 @@ class Rewards extends React.Component {
 		if (shouldHideRewards) { return this.renderRewardsNoneFoundText(); }
 
 		const src = chrome.runtime.getURL('cliqz/offers-cc/index.html?cross-origin');
-		// TODO i18n r === 1 ? 'Reward' : 'Rewards'
+		const text = t(`panel_rewards_view__reward${rewardsCount === 1 ? '' : 's'}`);
 		return (
 			<>
 				{is_expanded && (
 					<div className="RewardsPanel__rewards_count_wrapper">
-						<div className="RewardsPanel__rewards_count">
-							{rewardsCount}
-						</div>
-						<div className="RewardsPanel__rewards_count_title">
-							{rewardsCount === 1 ? 'Reward' : 'Rewards'}
-						</div>
+						<div className="RewardsPanel__rewards_count">{rewardsCount}</div>
+						<div className="RewardsPanel__rewards_count_title">{text}</div>
 					</div>
 				)}
 				<iframe

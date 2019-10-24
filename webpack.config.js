@@ -67,7 +67,6 @@ module.exports = {
 		panel: [`${SASS_DIR}/panel.scss`],
 		panel_android: [`${SASS_DIR}/panel_android.scss`],
 		purplebox_styles: [`${SASS_DIR}/purplebox.scss`],
-		rewards_styles: [`${SASS_DIR}/rewards.scss`],
 	},
 	output: {
 		filename: '[name].js',
@@ -95,7 +94,6 @@ module.exports = {
 				`${RM} ./dist/panel.js`,
 				`${RM} ./dist/panel_android.js`,
 				`${RM} ./dist/purplebox_styles.js`,
-				`${RM} ./dist/rewards_styles.js`,
 			]
 		}),
 		// Create global `t` function for i18n

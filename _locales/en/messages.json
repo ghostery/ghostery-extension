@@ -1997,6 +1997,13 @@
 		"message": "Enhanced Anti-Tracking"
 	},
 
+
+  "panel_rewards_view__reward": {
+      "message": "Reward"
+  },
+  "panel_rewards_view__rewards": {
+      "message": "Rewards"
+  },
   "OFFERS_BEGIN": {
     "message": ""
   },
