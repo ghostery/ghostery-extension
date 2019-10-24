@@ -748,16 +748,24 @@ class Metrics {
 	 */
 	_recordEngaged() {
 		const engaged_daily_velocity = conf.metrics.engaged_daily_velocity || [];
-		const today = Math.floor(Number(new Date().getTime()) / 86400000);
+		const engaged_daily_count = conf.metrics.engaged_daily_count || new Array(engaged_daily_velocity.length).fill(0);
+
+		const today = Math.floor(Number(new Date().getTime()) / 86400000); // Today's time
+
 		engaged_daily_velocity.sort();
 		if (!engaged_daily_velocity.includes(today)) {
 			engaged_daily_velocity.push(today);
+			engaged_daily_count.push(1);
 			if (engaged_daily_velocity.length > 7) {
+				engaged_daily_count.shift();
 				engaged_daily_velocity.shift();
 			}
+		} else {
+			engaged_daily_count[engaged_daily_velocity.indexOf(today)]++;
 		}
-		conf.metrics.engaged_daily_velocity = engaged_daily_velocity;
 
+		conf.metrics.engaged_daily_count = engaged_daily_count;
+		conf.metrics.engaged_daily_velocity = engaged_daily_velocity;
 		this._sendReq('engaged', ['daily', 'weekly', 'monthly']);
 	}
 

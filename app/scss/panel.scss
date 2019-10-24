@@ -51,6 +51,7 @@ html body {
 
 // Partial View SASS files
 @import './partials/_svgs';
+@import './partials/_shared_components_svgs';
 @import './partials/_header';
 @import './partials/_callout';
 @import './partials/_summary';
@@ -73,6 +74,8 @@ html body {
 @import './partials/_subscribe';
 @import './partials/_stats';
 @import './partials/_stats_graph';
+@import './partials/_modal_exit_button';
+@import './partials/insights_promo_modal.scss';
 
 // Imports from ../shared-components directory
 @import '../shared-components/Modal/Modal.scss';
