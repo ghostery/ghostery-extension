@@ -12,11 +12,13 @@
  */
 
 import React from 'react';
+import globals from '../../../src/classes/Globals';
 import Modal from '../../shared-components/Modal';
 import ModalExitButton from './BuildingBlocks/ModalExitButton';
 import PanelToTabLink from './BuildingBlocks/PanelToTabLink';
 
 const INSIGHTS = 'insights';
+const CTA_LINK = globals.DEBUG ? 'https://checkout.ghosterystage.com/insights' : 'http://ghostery.com/insights/';
 
 /**
  * @class Implements the Insights Promo Modal
@@ -73,7 +75,7 @@ class InsightsPromoModal extends React.Component {
 					</div>
 					<div className="InsightsModal__call-to-action-container">
 						<div className="flex-container align-center">
-							<PanelToTabLink className="btn InsightsModal__call-to-action" href="http://ghostery.com/insights/">
+							<PanelToTabLink className="btn InsightsModal__call-to-action" href={CTA_LINK}>
 								<span className="button-text">{t('panel_insights_promotion_call_to_action')}</span>
 							</PanelToTabLink>
 						</div>
