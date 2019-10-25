@@ -68,6 +68,8 @@
 }
 
 .InsightsModal__call-to-action {
+	display: flex;
+	justify-content: center;
 	width: 176px;
 	height: 36px;
 	margin-top: 18px;
