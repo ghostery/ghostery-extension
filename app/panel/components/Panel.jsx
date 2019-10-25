@@ -211,7 +211,9 @@ class Panel extends React.Component {
 		this.props.history.push('/login');
 	}
 
-	_renderPlusPromoUpgradeModal(signedIn) {
+	_renderPlusPromoUpgradeModal() {
+		const { loggedIn } = this.props;
+
 		const contentClassNames = ClassNames(
 			'PlusPromoModal__content',
 			'flex-container',
@@ -239,7 +241,7 @@ class Panel extends React.Component {
 					</div>
 					<div className="PlusPromoModal__text-link-container">
 						{
-							!signedIn &&
+							!loggedIn &&
 							(
 								<div onClick={this._handleSubscriberSignInClick} className="PlusPromoModal__text-link">
 									{t('already_subscribed_sign_in')}
@@ -255,22 +257,16 @@ class Panel extends React.Component {
 		);
 	}
 
-	_signedIn = () => {
-		const { account } = this.props;
-
-		return account && account.user;
-	}
-
 	_plusSubscriber = () => {
-		const { account } = this.props;
+		const { loggedIn, user } = this.props;
 
-		return this._signedIn() && account.user.subscriptionsPlus;
+		return loggedIn && (user && user.subscriptionsPlus);
 	}
 
 	_insightsSubscriber = () => {
-		const { account } = this.props;
+		const { loggedIn, user } = this.props;
 
-		return this._signedIn() && account.user.scopes && account.user.scopes.includes('subscriptions:insights');
+		return loggedIn && (user && user.scopes && user.scopes.includes('subscriptions:insights'));
 	}
 
 	_renderPlusPromoModal = () => {
@@ -279,7 +275,7 @@ class Panel extends React.Component {
 		sendMessage('promoModals.sawPlusPromo', {});
 
 		if (this.props.promoModal === 'plus_upgrade') {
-			return this._renderPlusPromoUpgradeModal(this._signedIn());
+			return this._renderPlusPromoUpgradeModal();
 		}
 
 		// promoModal === 'plus_initial'
