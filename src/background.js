@@ -664,6 +664,10 @@ function onMessageHandler(request, sender, callback) {
 		if (module !== 'offers-cc') { return; }
 		if (msg.action === 'myOffrzTurnoff') {
 			panelData.set({ enable_offers: false });
+			rewards.sendSignal({
+				actionId: 'rewards_off',
+				type: 'action-signal',
+			});
 		}
 		return;
 	}
