@@ -13,23 +13,27 @@
 
 import React from 'react';
 import Modal from '../../shared-components/Modal';
-import history from '../utils/history';
 import ModalExitButton from './BuildingBlocks/ModalExitButton';
+import PanelToTabLink from './BuildingBlocks/PanelToTabLink';
 
-// A Functional React component for a Modal
+const INSIGHTS = 'insights';
+
+/**
+ * @class Implements the Insights Promo Modal
+ * @memberof PanelClasses
+ */
 class InsightsPromoModal extends React.Component {
-	clickSignIn = () => {
-		history.push({
-			pathname: '/login',
-		});
-		this.props.actions.togglePromoModal();
-	};
+	handleNoThanksClick = () => { this.props.handleNoThanksClick(INSIGHTS); };
+
+	handleSignInClick = () => { this.props.handleSignInClick(INSIGHTS); };
+
+	handleXClick = () => { this.props.handleXClick(INSIGHTS); };
 
 	render() {
 		return (
 			<Modal show>
 				<div className="InsightsModal__content flex-container flex-dir-column align-middle">
-					<ModalExitButton className="InsightsModal__exitButton" toggleModal={this.props.actions.togglePromoModal} />
+					<ModalExitButton className="InsightsModal__exitButton" toggleModal={this.handleXClick} />
 					<div className="InsightsModal__image" />
 					<div className="InsightsModal__header">
 						{t('panel_insights_promotion_header')}
@@ -69,13 +73,13 @@ class InsightsPromoModal extends React.Component {
 					</div>
 					<div className="InsightsModal__call-to-action-container">
 						<div className="flex-container align-center">
-							<a href="https://www.ghostery.com/insights/" target="_blank" rel="noopener noreferrer" className="btn InsightsModal__call-to-action">
-								<span className="flex-container align-center">{t('panel_insights_promotion_call_to_action')}</span>
-							</a>
+							<PanelToTabLink className="btn InsightsModal__call-to-action" href="http://ghostery.com/insights/">
+								<span className="button-text">{t('panel_insights_promotion_call_to_action')}</span>
+							</PanelToTabLink>
 						</div>
 						<div className="InsightsModal__other-options-container flex-container align-justify">
-							<span onClick={this.clickSignIn} className="InsightsModal__link">{t('subscribe_pitch_sign_in')}</span>
-							<span onClick={this.props.actions.togglePromoModal} className="InsightsModal__link">{t('subscribe_pitch_no_thanks')}</span>
+							<span onClick={this.handleSignInClick} className="InsightsModal__link">{t('subscribe_pitch_sign_in')}</span>
+							<span onClick={this.handleNoThanksClick} className="InsightsModal__link">{t('no_thanks_turn_promos_off')}</span>
 						</div>
 					</div>
 				</div>
