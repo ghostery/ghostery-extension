@@ -15,7 +15,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
+import globals from '../../../src/classes/Globals';
 import Modal from '../Modal/Modal';
+
+const DOMAIN = globals.DEBUG ? 'ghosterystage' : 'ghostery';
 
 function _renderInitialVersion(props) {
 	const { show, location, clickHandler } = props;
@@ -82,7 +85,7 @@ function _renderInitialVersion(props) {
 								<div className="PlusPromoModal__option-description-item">{t('fast_browsing')}</div>
 							</div>
 						</div>
-						<div className="PlusPromoModal__button basic" onClick={clickHandler}>
+						<div className="PlusPromoModal__button basic" onClick={props.handleSelectBasicClick}>
 							<span>{t('select_basic')}</span>
 						</div>
 					</div>
@@ -115,7 +118,7 @@ function _renderInitialVersion(props) {
 								</div>
 							</div>
 						</div>
-						<a href="http://signon.ghostery.com/en/subscribe/" target="_blank" rel="noopener noreferrer" className="PlusPromoModal__button plus" onClick={clickHandler}>
+						<a href={`https://checkout.${DOMAIN}.com/plus`} target="_blank" rel="noopener noreferrer" className="PlusPromoModal__button plus" onClick={props.handleSelectPlusClick}>
 							<span>{t('select_plus')}</span>
 						</a>
 					</div>
@@ -136,7 +139,8 @@ const PlusPromoModal = props => _renderInitialVersion(props);
 PlusPromoModal.propTypes = {
 	show: PropTypes.bool.isRequired,
 	location: PropTypes.string.isRequired,
-	clickHandler: PropTypes.func.isRequired,
+	handleSelectBasicClick: PropTypes.func.isRequired,
+	handleSelectPlusClick: PropTypes.func.isRequired,
 };
 
 export default PlusPromoModal;

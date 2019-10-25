@@ -59,9 +59,23 @@ class HomeViewContainer extends Component {
 
 	/**
 	 * @private
-	 * Function to handle clicks on Select Plus and Select Basic in the Plus Promo Modal
+	 * Function to handle clicks on Select Basic in the Plus Promo Modal
 	 */
-	_handlePlusPromoModalClicks = () => {
+	// TODO send appropriate metrics ping
+	_handlePromoSelectBasicClick = () => {
+		// GH-1777
+		// we want to show the Plus Promo modal once per Hub visit - not every time the user returns to the Home view
+		this.props.actions.markPlusPromoModalShown();
+
+		sendMessage('SET_PLUS_PROMO_MODAL_SEEN', {});
+	}
+
+	/**
+	 * @private
+	 * Function to handle clicks on Select Plus in the Plus Promo Modal
+	 */
+		// TODO send appropriate metrics ping
+	_handlePromoSelectPlusClick = () => {
 		// GH-1777
 		// we want to show the Plus Promo modal once per Hub visit - not every time the user returns to the Home view
 		this.props.actions.markPlusPromoModalShown();
@@ -94,7 +108,8 @@ class HomeViewContainer extends Component {
 				<PlusPromoModal
 					show={!isPlus && !plus_promo_modal_shown}
 					location="hub"
-					clickHandler={this._handlePlusPromoModalClicks}
+					handleSelectBasicClick={this._handlePromoSelectBasicClick}
+					handleSelectPlusClick={this._handlePromoSelectPlusClick}
 				/>
 				<HomeView {...childProps} />
 			</div>

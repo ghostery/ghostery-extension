@@ -201,7 +201,7 @@ class Panel extends React.Component {
 		// TODO metrics ping
 		this.props.actions.togglePromoModal();
 		sendMessage('promoModals.turnOffPromos', {});
-	}
+	};
 
 	_handlePromoSignInClick = (modal) => {
 		// TODO metrics ping
@@ -209,17 +209,27 @@ class Panel extends React.Component {
 		history.push({
 			pathname: '/login',
 		});
-	}
+	};
+
+	_handlePromoSelectBasicClick = () => {
+		// TODO send metrics ping
+		this.props.actions.togglePromoModal();
+	};
+
+	_handlePromoSelectPlusClick = () => {
+		// TODO send metrics ping
+		this.props.actions.togglePromoModal();
+	};
 
 	_handlePromoSubscribeClick = (modal) => {
 		// TODO send metrics ping
 		this.props.actions.togglePromoModal();
-	}
+	};
 
 	_handlePromoXClick = (modal) => {
 		// TODO send metrics ping
 		this.props.actions.togglePromoModal();
-	}
+	};
 
 	_plusSubscriber = () => {
 		const { loggedIn, user } = this.props;
@@ -254,10 +264,8 @@ class Panel extends React.Component {
 			<PlusPromoModal
 				show
 				location="panel"
-				handleNoThanksClick={this._handlePromoNoThanksClick}
-				handleSignInClick={this._handlePromoSignInClick}
-				handleSubscribeClick={this._handlePromoSubscribeClick}
-				handleXClick={this._handlePromoXClick}
+				handleSelectBasicClick={this._handlePromoSelectBasicClick}
+				handleSelectPlusClick={this._handlePromoSelectPlusClick}
 			/>
 		);
 	}
