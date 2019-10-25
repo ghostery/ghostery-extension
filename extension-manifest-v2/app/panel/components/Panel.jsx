@@ -12,14 +12,14 @@
  */
 
 import React from 'react';
-import ClassNames from 'classnames';
 import Header from '../containers/HeaderContainer';
-import PanelToTabLink from './BuildingBlocks/PanelToTabLink';
 import { PlusPromoModal, Modal } from '../../shared-components';
-import InsightsPromoModal from '../containers/InsightsPromoModalContainer';
+import InsightsPromoModal from './InsightsPromoModal';
+import PlusUpgradePromoModal from './PlusUpgradePromoModal';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import { setTheme } from '../utils/utils';
+import history from '../utils/history';
 /**
  * @class Implement base view with functionality common to all views.
  * @memberof PanelClasses
@@ -197,64 +197,28 @@ class Panel extends React.Component {
 		return false;
 	}
 
-	_handlePlusPromoModalClicks = () => {
-		this.props.actions.togglePromoModal();
-	}
-
-	_handleNoThanksClick = () => {
+	_handlePromoNoThanksClick = (modal) => {
+		// TODO metrics ping
 		this.props.actions.togglePromoModal();
 		sendMessage('promoModals.turnOffPromos', {});
 	}
 
-	_handleSubscriberSignInClick = () => {
+	_handlePromoSignInClick = (modal) => {
+		// TODO metrics ping
 		this.props.actions.togglePromoModal();
-		this.props.history.push('/login');
+		history.push({
+			pathname: '/login',
+		});
 	}
 
-	_renderPlusPromoUpgradeModal() {
-		const { loggedIn } = this.props;
+	_handlePromoSubscribeClick = (modal) => {
+		// TODO send metrics ping
+		this.props.actions.togglePromoModal();
+	}
 
-		const contentClassNames = ClassNames(
-			'PlusPromoModal__content',
-			'flex-container',
-			'flex-dir-column',
-			'align-middle',
-			'panel',
-			'upgrade'
-		);
-
-		return (
-			<Modal show>
-				<div className={contentClassNames}>
-					<div className="PlusPromoModal__buttons-background upgrade" />
-					<img className="PlusPromoModal__gold-ghostie-badge" src="/app/images/hub/home/gold-ghostie-badge.svg" />
-					<div className="PlusPromoModal__header">
-						{t('upgrade_your_ghostery_experience')}
-					</div>
-					<div className="PlusPromoModal__description cta">
-						{t('upgrade_cta_TEXT')}
-					</div>
-					<div className="PlusPromoModal__button-container" onClick={this._handlePlusPromoModalClicks}>
-						<PanelToTabLink className="PlusPromoModal__button upgrade" href="http://signon.ghostery.com/en/subscribe/">
-							<span className="button-text">{t('upgrade_to_plus')}</span>
-						</PanelToTabLink>
-					</div>
-					<div className="PlusPromoModal__text-link-container">
-						{
-							!loggedIn &&
-							(
-								<div onClick={this._handleSubscriberSignInClick} className="PlusPromoModal__text-link">
-									{t('already_subscribed_sign_in')}
-								</div>
-							)
-						}
-						<div onClick={this._handleNoThanksClick} className="PlusPromoModal__text-link">
-							{t('no_thanks_turn_promos_off')}
-						</div>
-					</div>
-				</div>
-			</Modal>
-		);
+	_handlePromoXClick = (modal) => {
+		// TODO send metrics ping
+		this.props.actions.togglePromoModal();
 	}
 
 	_plusSubscriber = () => {
@@ -275,7 +239,14 @@ class Panel extends React.Component {
 		sendMessage('promoModals.sawPlusPromo', {});
 
 		if (this.props.promoModal === 'plus_upgrade') {
-			return this._renderPlusPromoUpgradeModal();
+			return (
+				<PlusUpgradePromoModal
+					handleNoThanksClick={this._handlePromoNoThanksClick}
+					handleSignInClick={this._handlePromoSignInClick}
+					handleSubscribeClick={this._handlePromoSubscribeClick}
+					handleXClick={this._handlePromoXClick}
+				/>
+			);
 		}
 
 		// promoModal === 'plus_initial'
@@ -283,7 +254,10 @@ class Panel extends React.Component {
 			<PlusPromoModal
 				show
 				location="panel"
-				clickHandler={this._handlePlusPromoModalClicks}
+				handleNoThanksClick={this._handlePromoNoThanksClick}
+				handleSignInClick={this._handlePromoSignInClick}
+				handleSubscribeClick={this._handlePromoSubscribeClick}
+				handleXClick={this._handlePromoXClick}
 			/>
 		);
 	}
@@ -293,7 +267,14 @@ class Panel extends React.Component {
 
 		sendMessage('promoModals.sawInsightsPromo', '', 'metrics');
 
-		return <InsightsPromoModal />;
+		return (
+			<InsightsPromoModal
+				handleNoThanksClick={this._handlePromoNoThanksClick}
+				handleSignInClick={this._handlePromoSignInClick}
+				handleSubscribeClick={this._handlePromoSubscribeClick}
+				handleXClick={this._handlePromoXClick}
+			/>
+		);
 	}
 
 	_renderPromoModal = () => {
