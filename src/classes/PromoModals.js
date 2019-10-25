@@ -13,6 +13,7 @@
 
 import conf from './Conf';
 import globals from './Globals';
+import panelData from './PanelData';
 
 const DAYS_BETWEEN_PROMOS = {
 	plus: globals.DEBUG ? 0.00025 : 30,
@@ -49,7 +50,7 @@ class PromoModals {
 
 	static recordInsightsPromoSighting() { this._recordPromoSighting(INSIGHTS); }
 
-	static turnOffPromos() { conf.notify_promotions = false; }
+	static turnOffPromos() { panelData.set({ notify_promotions: false }); }
 
 	static _haveSeenInitialPlusPromo() {
 		const lastSeenTime = conf[`${PLUS}_${PROMO_MODAL_LAST_SEEN}`];
