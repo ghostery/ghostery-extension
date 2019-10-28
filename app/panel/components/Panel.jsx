@@ -13,9 +13,13 @@
 
 import React from 'react';
 import Header from '../containers/HeaderContainer';
+import { PlusPromoModal, Modal } from '../../shared-components';
+import InsightsPromoModal from './InsightsPromoModal';
+import PlusUpgradePromoModal from './PlusUpgradePromoModal';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import { setTheme } from '../utils/utils';
+import history from '../utils/history';
 /**
  * @class Implement base view with functionality common to all views.
  * @memberof PanelClasses
@@ -35,7 +39,6 @@ class Panel extends React.Component {
 	 */
 	componentDidMount() {
 		sendMessage('ping', 'engaged');
-
 		this._dynamicUIDataInitialized = false;
 		this._dynamicUIPort = chrome.runtime.connect({ name: 'dynamicUIPanelPort' });
 		this._dynamicUIPort.onMessage.addListener((msg) => {
@@ -56,6 +59,16 @@ class Panel extends React.Component {
 	 */
 	componentWillUnmount() {
 		this._dynamicUIPort.disconnect();
+	}
+
+	/**
+	 * Reload the current tab
+	 * @param  {Object} event
+	 * @todo  Why do we need explicit argument here?
+	 */
+	clickReloadBanner() {
+		sendMessage('reloadTab', { tab_id: +this.props.tab_id });
+		window.close();
 	}
 
 	/**
@@ -81,16 +94,6 @@ class Panel extends React.Component {
 	}
 
 	/**
-	 * Reload the current tab
-	 * @param  {Object} event
-	 * @todo  Why do we need explicit argument here?
-	 */
-	clickReloadBanner() {
-		sendMessage('reloadTab', { tab_id: +this.props.tab_id });
-		window.close();
-	}
-
-	/**
 	 * Filter trackers when clicking on compatibility/slow
 	 * tracker notifications and trigger appropriate action.
 	 * @param  {Object} event
@@ -111,12 +114,12 @@ class Panel extends React.Component {
 
 		this.closeNotification();
 	}
-
 	/**
 	 * Dynamic UI data port first payload handling
 	 * Called once, when we get the first message from the background through the port
 	 * @param	{Object}	payload		the body of the message
 	 */
+
 	_initializeData(payload) {
 		this._dynamicUIDataInitialized = true;
 
@@ -147,6 +150,7 @@ class Panel extends React.Component {
 			sendMessage('ping', 'engaged_offer');
 		}
 	}
+
 
 	/**
 	 * Helper render function for the notification callout
@@ -193,6 +197,113 @@ class Panel extends React.Component {
 		return false;
 	}
 
+	_handlePromoNoThanksClick = (modal) => {
+		// TODO metrics ping
+		this.props.actions.togglePromoModal();
+		sendMessage('promoModals.turnOffPromos', {});
+	};
+
+	_handlePromoSignInClick = (modal) => {
+		// TODO metrics ping
+		this.props.actions.togglePromoModal();
+		history.push({
+			pathname: '/login',
+		});
+	};
+
+	_handlePromoSelectBasicClick = () => {
+		// TODO send metrics ping
+		this.props.actions.togglePromoModal();
+	};
+
+	_handlePromoSelectPlusClick = () => {
+		// TODO send metrics ping
+		this.props.actions.togglePromoModal();
+	};
+
+	_handlePromoSubscribeClick = (modal) => {
+		// TODO send metrics ping
+		this.props.actions.togglePromoModal();
+	};
+
+	_handlePromoXClick = (modal) => {
+		// TODO send metrics ping
+		this.props.actions.togglePromoModal();
+	};
+
+	_plusSubscriber = () => {
+		const { loggedIn, user } = this.props;
+
+		return loggedIn && (user && user.subscriptionsPlus);
+	}
+
+	_insightsSubscriber = () => {
+		const { loggedIn, user } = this.props;
+
+		return loggedIn && (user && user.scopes && user.scopes.includes('subscriptions:insights'));
+	}
+
+	_renderPlusPromoModal = () => {
+		if (this._plusSubscriber() || this._insightsSubscriber()) return null;
+
+		sendMessage('promoModals.sawPlusPromo', {});
+
+		if (this.props.promoModal === 'plus_upgrade') {
+			return (
+				<PlusUpgradePromoModal
+					handleNoThanksClick={this._handlePromoNoThanksClick}
+					handleSignInClick={this._handlePromoSignInClick}
+					handleSubscribeClick={this._handlePromoSubscribeClick}
+					handleXClick={this._handlePromoXClick}
+				/>
+			);
+		}
+
+		// promoModal === 'plus_initial'
+		return (
+			<PlusPromoModal
+				show
+				location="panel"
+				handleSelectBasicClick={this._handlePromoSelectBasicClick}
+				handleSelectPlusClick={this._handlePromoSelectPlusClick}
+			/>
+		);
+	}
+
+	_renderInsightsPromoModal = () => {
+		if (this._insightsSubscriber()) return null;
+
+		sendMessage('promoModals.sawInsightsPromo', '', 'metrics');
+
+		return (
+			<InsightsPromoModal
+				handleNoThanksClick={this._handlePromoNoThanksClick}
+				handleSignInClick={this._handlePromoSignInClick}
+				handleSubscribeClick={this._handlePromoSubscribeClick}
+				handleXClick={this._handlePromoXClick}
+			/>
+		);
+	}
+
+	_renderPromoModal = () => {
+		const {
+			promoModal,
+			isPromoModalHidden,
+		} = this.props;
+
+		if (isPromoModalHidden) return null;
+
+		if (promoModal === 'insights') {
+			return this._renderInsightsPromoModal();
+		}
+
+		if (promoModal === 'plus_initial' || promoModal === 'plus_upgrade') {
+			return this._renderPlusPromoModal();
+		}
+
+		return null;
+	}
+
 	/**
 	 * React's required render function. Returns JSX
 	 * @return {JSX} JSX for rendering the Panel
@@ -207,6 +318,7 @@ class Panel extends React.Component {
 
 		return (
 			<div id="panel">
+				{this._renderPromoModal()}
 				<div className="callout-container">
 					<div className={`${(!notificationText ? 'hide ' : '') + this.props.notificationClasses} callout`}>
 						<svg onClick={this.closeNotification} width="15px" height="15px" viewBox="0 0 15 15" className="close-button">

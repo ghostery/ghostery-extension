@@ -27,6 +27,7 @@ import tabInfo from './TabInfo';
 import rewards from './Rewards';
 import account from './Account';
 import dispatcher from './Dispatcher';
+import promoModals from './PromoModals';
 import { getCliqzGhosteryBugs, sendCliqzModuleCounts } from '../utils/cliqzModulesData';
 import { getActiveTab, flushChromeMemoryCache, processUrl } from '../utils/utils';
 import { objectEntries, log } from '../utils/common';
@@ -365,6 +366,7 @@ class PanelData {
 			is_expert,
 			is_android: globals.BROWSER_INFO.os === 'android',
 			language,
+			promoModal: promoModals.whichPromoModalShouldWeDisplay(),
 			reload_banner_status,
 			tab_id,
 			trackers_banner_status,
@@ -507,7 +509,7 @@ class PanelData {
 			alert_bubble_pos, alert_bubble_timeout, block_by_default, enable_autoupdate,
 			enable_click2play, enable_click2play_social, enable_human_web, enable_offers,
 			enable_metrics, hide_alert_trusted, ignore_first_party, notify_library_updates,
-			notify_upgrade_updates, selected_app_ids, show_alert, show_badge,
+			notify_promotions, notify_upgrade_updates, selected_app_ids, show_alert, show_badge,
 			show_cmp, show_tracker_urls, toggle_individual_trackers
 		} = userSettingsSource;
 
@@ -524,6 +526,7 @@ class PanelData {
 			hide_alert_trusted,
 			ignore_first_party,
 			notify_library_updates,
+			notify_promotions,
 			notify_upgrade_updates,
 			selected_app_ids,
 			show_alert,

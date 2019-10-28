@@ -106,7 +106,7 @@ const HomeView = (props) => {
 						</a>
 					) : (
 						<NavLink to="/create-account">
-							{t('hub_home_subheader_create_account')}
+							{t('create_account')}
 						</NavLink>
 					)}
 				</div>
@@ -120,7 +120,7 @@ const HomeView = (props) => {
 							{t('hub_home_feature_tutorial_text')}
 						</div>
 						<NavLink to="/tutorial" className={tutorialButtonClassNames}>
-							{tutorial_complete ? t('hub_home_feature_tutorial_button_alt') : t('hub_home_feature_tutorial_button')}
+							{tutorial_complete ? t('hub_home_feature_tutorial_button_alt') : t('start')}
 						</NavLink>
 					</div>
 					<div className="HomeView__dividerVertical column shrink show-for-large" />
@@ -128,7 +128,7 @@ const HomeView = (props) => {
 					<div className={setupFeatureClassNames}>
 						<div className="HomeView__featureIcon" />
 						<div className="HomeView__featureTitle">
-							{t('hub_home_feature_setup_title')}
+							{t('customize_setup')}
 						</div>
 						<div className="HomeView__featureText flex-child-grow">
 							{t('hub_home_feature_setup_text')}
@@ -146,7 +146,7 @@ const HomeView = (props) => {
 					<div className="HomeView__featureIcon columns shrink feature-plus show-for-large" />
 					<div className="columns flex-container align-center-middle">
 						<NavLink to="/plus" className="HomeView__featureButton button primary">
-							{isPlus ? t('hub_home_feature_supporter_button_alt') : t('hub_home_feature_supporter_button')}
+							{isPlus ? t('Aready_Subscribed') : t('get_ghostery_plus')}
 						</NavLink>
 					</div>
 				</div>

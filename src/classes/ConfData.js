@@ -115,14 +115,17 @@ class ConfData {
 			_initProperty('hide_alert_trusted', false);
 			_initProperty('ignore_first_party', true);
 			_initProperty('import_callout_dismissed', true);
+			_initProperty('insights_promo_modal_last_seen', 0);
 			_initProperty('install_random_number', 0);
 			_initProperty('install_date', 0);
 			_initProperty('is_expanded', false);
 			_initProperty('is_expert', false);
 			_initProperty('last_cmp_date', 0);
 			_initProperty('notify_library_updates', false);
+			_initProperty('notify_promotions', true);
 			_initProperty('notify_upgrade_updates', true);
 			_initProperty('paid_subscription', false);
+			_initProperty('plus_promo_modal_last_seen', 0);
 			_initProperty('rewards_accepted', false);
 			_initProperty('rewards_opted_in', false);
 			_initProperty('settings_last_imported', 0);

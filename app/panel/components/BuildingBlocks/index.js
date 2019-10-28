@@ -23,6 +23,7 @@ import PauseButton from './PauseButton';
 import ToggleSlider from './ToggleSlider';
 import RewardDetail from './RewardDetail';
 import RewardListItem from './RewardListItem';
+import ModalExitButton from './ModalExitButton';
 
 export {
 	ClickOutside,
@@ -33,5 +34,6 @@ export {
 	PauseButton,
 	ToggleSlider,
 	RewardDetail,
-	RewardListItem
+	RewardListItem,
+	ModalExitButton
 };

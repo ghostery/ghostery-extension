@@ -106,13 +106,13 @@ class Stats extends React.Component {
 	getSummaryTitle = (type) => {
 		switch (type) {
 			case 'cumulative':
-				return t('panel_stats_header_title');
+				return t('historical_tracker_stats');
 			case 'monthly':
 				return t('panel_stats_header_title_monthly');
 			case 'daily':
 				return t('panel_stats_header_title_daily');
 			default:
-				return t('panel_stats_header_title');
+				return t('historical_tracker_stats');
 		}
 	}
 

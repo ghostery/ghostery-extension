@@ -42,6 +42,7 @@ import metrics from './classes/Metrics';
 import rewards from './classes/Rewards';
 import account from './classes/Account';
 import GhosteryModule from './classes/Module';
+import promoModals from './classes/PromoModals';
 
 // utilities
 import { allowAllwaysC2P } from './utils/click2play';
@@ -541,6 +542,9 @@ function handleRewards(name, message, callback) {
  */
 function handleGhosteryHub(name, message, callback) {
 	switch (name) {
+		case 'SET_PLUS_PROMO_MODAL_SEEN':
+			promoModals.recordPlusPromoSighting();
+			break;
 		case 'SEND_PING': {
 			const { type } = message;
 			metrics.ping(type);
@@ -1073,6 +1077,18 @@ function onMessageHandler(request, sender, callback) {
 			}
 		});
 		return true;
+	}
+	if (name === 'promoModals.sawPlusPromo') {
+		promoModals.recordPlusPromoSighting();
+		return false;
+	}
+	if (name === 'promoModals.sawInsightsPromo') {
+		promoModals.recordInsightsPromoSighting();
+		return false;
+	}
+	if (name === 'promoModals.turnOffPromos') {
+		promoModals.turnOffPromos();
+		return false;
 	}
 }
 

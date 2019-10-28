@@ -154,16 +154,16 @@
 
 // Firefox Font Size Override and Image Size Override
 @-moz-document url-prefix() {
-	.HomeView--firefoxFontSize {
-		font-size: 75%;
-	}
+.HomeView--firefoxFontSize {
+	font-size: 75%;
+}
+.HomeView--firefoxImageSize {
+	height: 113.875px;
+}
+@media only screen and (max-width: 740px) {
 	.HomeView--firefoxImageSize {
-		height: 113.875px;
+		min-width: 126px !important;
+		max-width: 146px !important;
 	}
-	@media only screen and (max-width: 740px) {
-		.HomeView--firefoxImageSize {
-			min-width: 126px !important;
-			max-width: 146px !important;
-		}
-	}
+}
 }

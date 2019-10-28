@@ -17,6 +17,7 @@ import ClassNames from 'classnames';
 import RSVP from 'rsvp';
 import { validateEmail } from '../utils/utils';
 import { log } from '../../../src/utils/common';
+import history from '../utils/history';
 
 /**
  * @class Implement Sign In view which opens from 'Sign In' CTA on the Header.
@@ -72,7 +73,10 @@ class Login extends React.Component {
 							})
 							.finally(() => {
 								this.setState({ loading: false }, () => {
-									this.props.history.push(this.props.is_expert ? '/detail/blocking' : '/');
+									this.props.actions.togglePromoModal();
+									history.push({
+										pathname: this.props.is_expert ? '/detail/blocking' : '/'
+									});
 								});
 							});
 					} else {
@@ -99,7 +103,7 @@ class Login extends React.Component {
 						<form onSubmit={this.handleSubmit}>
 							<div id="login-email" className={(emailError ? 'panel-error' : '')}>
 								<label htmlFor="login-input-email">
-									{ t('email_field_label') }
+									{ t('email_colon') }
 									<span className="asterisk">*</span>
 									<input onChange={this.handleInputChange} value={email} id="login-input-email" name="email" pattern=".{1,}" autoComplete="off" type="text" />
 								</label>
@@ -121,7 +125,7 @@ class Login extends React.Component {
 								</div>
 								<div className="small-6 columns text-center">
 									<button type="submit" id="signin-button" className={buttonClasses}>
-										<span className="title">{ t('panel_menu_signin') }</span>
+										<span className="title">{ t('sign_in') }</span>
 										<span className="loader" />
 									</button>
 								</div>
@@ -136,7 +140,7 @@ class Login extends React.Component {
 								<Link to="/forgot-password">{ t('panel_forgot_password') }</Link>
 							</div>
 							<div className="small-6 columns text-center">
-								<Link to="/create-account">{ t('panel_create_account') }</Link>
+								<Link to="/create-account">{ t('create_account') }</Link>
 							</div>
 						</div>
 					</div>

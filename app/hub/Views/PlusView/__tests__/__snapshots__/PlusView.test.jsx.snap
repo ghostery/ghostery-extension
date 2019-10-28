@@ -29,7 +29,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
         <div
           className="PlusView__button button disabled"
         >
-          hub_supporter_button_text_alt
+          already_subscribed
         </div>
         <div
           className="PlusView__headingCost flex-container align-middle"
@@ -54,7 +54,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
       <div
         className="PlusView__perkTitle"
       >
-        hub_supporter_perk_themes_title
+        new_themes
       </div>
       <div
         className="PlusView__perkDescription"
@@ -71,7 +71,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
       <div
         className="PlusView__perkTitle"
       >
-        hub_supporter_perk_stats_title
+        historical_blocking_stats
       </div>
       <div
         className="PlusView__perkDescription"
@@ -122,7 +122,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
         <div
           className="PlusView__headingTitle PlusView--addPaddingTop"
         >
-          hub_supporter_feature_theme_title
+          new_themes
         </div>
         <div
           className="PlusView__headingDescription"
@@ -132,14 +132,14 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
         <div
           className="PlusView__button button show-for-large disabled"
         >
-          hub_supporter_button_text_alt
+          already_subscribed
         </div>
       </div>
       <div
         className="PlusView__feature small-12 medium-6 columns"
       >
         <img
-          alt="hub_supporter_feature_theme_title"
+          alt="new_themes"
           className="PlusView__featureImage theme"
           src="/app/images/hub/plus/feature-theme.png"
         />
@@ -157,7 +157,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
         <div
           className="PlusView__button button PlusView--addSideMargin disabled"
         >
-          hub_supporter_button_text_alt
+          already_subscribed
         </div>
         <div
           className="PlusView__bar flex-child-grow"
@@ -175,7 +175,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
         className="PlusView__feature small-12 medium-6 large-5 columns show-for-large"
       >
         <img
-          alt="hub_supporter_feature_stats_title"
+          alt="historical_blocking_stats"
           className="PlusView__featureImage stats"
           src="/app/images/hub/plus/feature-stats.svg"
         />
@@ -186,7 +186,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
         <div
           className="PlusView__headingTitle"
         >
-          hub_supporter_feature_stats_title
+          historical_blocking_stats
         </div>
         <div
           className="PlusView__headingDescription"
@@ -196,14 +196,14 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
         <div
           className="PlusView__button button show-for-large disabled"
         >
-          hub_supporter_button_text_alt
+          already_subscribed
         </div>
       </div>
       <div
         className="PlusView__feature columns hide-for-large"
       >
         <img
-          alt="hub_supporter_feature_stats_title"
+          alt="historical_blocking_stats"
           className="PlusView__featureImage stats"
           src="/app/images/hub/plus/feature-stats.svg"
         />
@@ -221,7 +221,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
         <div
           className="PlusView__button button PlusView--addSideMargin disabled"
         >
-          hub_supporter_button_text_alt
+          already_subscribed
         </div>
         <div
           className="PlusView__bar flex-child-grow"
@@ -241,7 +241,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
         <div
           className="PlusView__headingTitle"
         >
-          hub_supporter_feature_support_title
+          priority_support
         </div>
         <div
           className="PlusView__headingDescription"
@@ -251,14 +251,14 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
         <div
           className="PlusView__button button show-for-large disabled"
         >
-          hub_supporter_button_text_alt
+          already_subscribed
         </div>
       </div>
       <div
         className="PlusView__feature columns small-12 medium-6"
       >
         <img
-          alt="hub_supporter_feature_support_title"
+          alt="priority_support"
           className="PlusView__featureImage support"
           src="/app/images/hub/plus/feature-support.svg"
         />
@@ -276,7 +276,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
         <div
           className="PlusView__button button PlusView--addSideMargin disabled"
         >
-          hub_supporter_button_text_alt
+          already_subscribed
         </div>
         <div
           className="PlusView__bar flex-child-grow"
@@ -322,7 +322,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
         <div
           className="PlusView__button button PlusView--addSideMargin disabled"
         >
-          hub_supporter_button_text_alt
+          already_subscribed
         </div>
         <div
           className="PlusView__bar flex-child-grow"
@@ -366,7 +366,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
           rel="noopener noreferrer"
           target="_blank"
         >
-          hub_supporter_button_text
+          get_ghostery_plus
         </a>
         <div
           className="PlusView__headingCost flex-container align-middle"
@@ -391,7 +391,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
       <div
         className="PlusView__perkTitle"
       >
-        hub_supporter_perk_themes_title
+        new_themes
       </div>
       <div
         className="PlusView__perkDescription"
@@ -408,7 +408,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
       <div
         className="PlusView__perkTitle"
       >
-        hub_supporter_perk_stats_title
+        historical_blocking_stats
       </div>
       <div
         className="PlusView__perkDescription"
@@ -459,7 +459,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
         <div
           className="PlusView__headingTitle PlusView--addPaddingTop"
         >
-          hub_supporter_feature_theme_title
+          new_themes
         </div>
         <div
           className="PlusView__headingDescription"
@@ -473,14 +473,14 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
           rel="noopener noreferrer"
           target="_blank"
         >
-          hub_supporter_button_text
+          get_ghostery_plus
         </a>
       </div>
       <div
         className="PlusView__feature small-12 medium-6 columns"
       >
         <img
-          alt="hub_supporter_feature_theme_title"
+          alt="new_themes"
           className="PlusView__featureImage theme"
           src="/app/images/hub/plus/feature-theme.png"
         />
@@ -502,7 +502,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
           rel="noopener noreferrer"
           target="_blank"
         >
-          hub_supporter_button_text
+          get_ghostery_plus
         </a>
         <div
           className="PlusView__bar flex-child-grow"
@@ -520,7 +520,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
         className="PlusView__feature small-12 medium-6 large-5 columns show-for-large"
       >
         <img
-          alt="hub_supporter_feature_stats_title"
+          alt="historical_blocking_stats"
           className="PlusView__featureImage stats"
           src="/app/images/hub/plus/feature-stats.svg"
         />
@@ -531,7 +531,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
         <div
           className="PlusView__headingTitle"
         >
-          hub_supporter_feature_stats_title
+          historical_blocking_stats
         </div>
         <div
           className="PlusView__headingDescription"
@@ -545,14 +545,14 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
           rel="noopener noreferrer"
           target="_blank"
         >
-          hub_supporter_button_text
+          get_ghostery_plus
         </a>
       </div>
       <div
         className="PlusView__feature columns hide-for-large"
       >
         <img
-          alt="hub_supporter_feature_stats_title"
+          alt="historical_blocking_stats"
           className="PlusView__featureImage stats"
           src="/app/images/hub/plus/feature-stats.svg"
         />
@@ -574,7 +574,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
           rel="noopener noreferrer"
           target="_blank"
         >
-          hub_supporter_button_text
+          get_ghostery_plus
         </a>
         <div
           className="PlusView__bar flex-child-grow"
@@ -594,7 +594,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
         <div
           className="PlusView__headingTitle"
         >
-          hub_supporter_feature_support_title
+          priority_support
         </div>
         <div
           className="PlusView__headingDescription"
@@ -608,14 +608,14 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
           rel="noopener noreferrer"
           target="_blank"
         >
-          hub_supporter_button_text
+          get_ghostery_plus
         </a>
       </div>
       <div
         className="PlusView__feature columns small-12 medium-6"
       >
         <img
-          alt="hub_supporter_feature_support_title"
+          alt="priority_support"
           className="PlusView__featureImage support"
           src="/app/images/hub/plus/feature-support.svg"
         />
@@ -637,7 +637,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
           rel="noopener noreferrer"
           target="_blank"
         >
-          hub_supporter_button_text
+          get_ghostery_plus
         </a>
         <div
           className="PlusView__bar flex-child-grow"
@@ -687,7 +687,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
           rel="noopener noreferrer"
           target="_blank"
         >
-          hub_supporter_button_text
+          get_ghostery_plus
         </a>
         <div
           className="PlusView__bar flex-child-grow"

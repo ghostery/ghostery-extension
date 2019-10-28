@@ -1,0 +1,294 @@
+/**
+ * Plus Promo Modal Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+// Plus Promo Modal
+$standard-font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+.PlusPromoModal__gold-ghostie-badge {
+	margin-top: 21px;
+	margin-bottom: 16px;
+}
+
+.PlusPromoModal__header {
+	margin-bottom: 10px;
+	font-size: 20px;
+	font-weight: bold;
+	font-family: $standard-font-family;
+}
+
+.PlusPromoModal__description {
+	margin-bottom: 5px;
+	width: 350px;
+	text-align: center;
+	font-size: 18px;
+	font-weight: 500;
+	font-family: $standard-font-family
+}
+
+.PlusPromoModal__content {
+	position: relative;
+	background-color: #f7f7f7;
+	border: 1.9px solid #930194;
+	z-index: 10;
+
+	&.initial {
+		&.in-hub {
+			width: 646px;
+			height: 553px;
+		}
+
+		&.in-panel {
+			width: 556px;
+			height: 471px;
+		}
+	}
+
+	&.upgrade {
+		width: 434px;
+		height: 410px;
+	}
+}
+
+.PlusPromoModal__buttons-background {
+	background-color: #e7ecee;
+	position: absolute;
+	bottom: 3px;
+	width: 99%;
+	height: 72px;
+	z-index: -1;
+
+	&.initial { height: 72px; }
+	&.upgrade { height: 107px; }
+}
+
+.PlusPromoModal__thanks-for-download {
+	padding-top: 30px;
+	font-size: 26px;
+	font-weight: bold;
+}
+
+.PlusPromoModal__choose-your-plan {
+	font-size: 18px;
+	font-weight: bold;
+
+	&.in-hub { padding-top: 10px; }
+	&.in-panel { padding-top: 17px; }
+}
+
+.PlusPromoModal__options-container {
+	height: 100%;
+	margin-top: 44px;
+	display: flex;
+
+	&.in-hub { justify-content: space-evenly; }
+	&.in-panel { justify-content: space-around; }
+}
+
+.PlusPromoModal__option-container {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.PlusPromoModal__option-description-box {
+	border-style: solid;
+	border-width: 3px;
+	background-color: #FFFFFF;
+
+	&.basic {
+		border-color: #1dafed;
+	}
+
+	&.plus {
+		position: relative; // so that the recommended banner is positioned relative to this element
+		border-image-source: linear-gradient(39deg, #f2daa2, #eab968);
+		border-image-slice: 1;
+	}
+
+	&.in-hub {
+		margin-bottom: 45px;
+		width: 240px;
+		height: 298px;
+	}
+
+	&.in-panel {
+		margin-bottom: 30px;
+		width: 221px;
+		height: 294px;
+	}
+}
+
+.PlusPromoModal__recommended-banner {
+	position: absolute;
+
+	&.in-hub {
+		left: -30px;
+		top: -30px;
+	}
+
+	&.in-panel {
+		left: -10px;
+		top: -32px;
+	}
+}
+
+.PlusPromoModal__recommended-banner-text {
+	position: relative;
+	left: 18px;
+	top: -47px;
+	transform: rotate(-15deg);
+	color: white;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.PlusPromoModal__option-header {
+	margin-top: 20px;
+	font-size: 19px;
+	font-weight: bold;
+	letter-spacing: -0.5px;
+	text-align: center;
+
+	&.basic { color: #1dafed; }
+	&.plus { color: #ebbf73; }
+}
+
+.PlusPromoModal__price-text {
+	line-height: 1.3;
+	text-align: center;
+
+	&.basic { color: #1dafed; }
+	&.plus { color: #ebbf73; }
+}
+
+.PlusPromoModal__currency-sign {
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.PlusPromoModal__amount {
+	vertical-align: middle;
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 58px;
+}
+
+.PlusPromoModal__per-month {
+	vertical-align: sub;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.PlusPromoModal__option-description-item {
+	padding-bottom: 15px;
+	font-size: 16px;
+	text-align: center;
+	color: #333333;
+
+	&.italic {
+		font-style: italic;
+	}
+}
+
+.PlusPromoModal__check-icon {
+	padding-right: 5px;
+	margin-top: -18px;
+}
+
+.PlusPromoModal__plus-option-description-item-container {
+	display: flex;
+	justify-content: center;
+}
+
+.PlusPromoModal__button-container {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	position: absolute;
+	bottom: 50px;
+}
+
+.PlusPromoModal__button {
+	border-radius: 3px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-weight: bold;
+	font-family: $standard-font-family;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: background-color 0.25s ease-out, color 0.25s ease-out;
+	-webkit-appearance: none;
+
+	&.basic {
+		font-size: 11px;
+		width: 135px;
+		height: 40px;
+		border: solid 2px #15b4f2;
+		background-color: white;
+		color: #2cbcf4;
+		box-shadow: none;
+	}
+	&.basic:hover {
+		background-color: #2cbcf4;
+		color: white;
+	}
+
+	&.plus {
+		font-size: 11px;
+		width: 163px;
+		height: 38px;
+		border: none;
+		background-image: linear-gradient(to bottom, #2fdbfa, #15b4f2);
+		color: white;
+		box-shadow: none;
+	}
+	&.plus:hover {
+		background-image: linear-gradient(to bottom, #1fcbea, #05a4e2);
+	}
+
+	&.upgrade {
+		font-size: 13px;
+		height: 36px;
+		box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12);
+		background-color: #1dafed;
+		color: white;
+	}
+	&.upgrade:hover {
+		background-color: #0698d6;
+	}
+
+	.button-text {
+		padding: 0px 20px 0px;
+		color: white;
+		text-decoration: none;
+	}
+}
+
+.PlusPromoModal__text-link-container {
+	position: absolute;
+	bottom: 10px;
+	width: 100%;
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.PlusPromoModal__text-link {
+	margin-left: 10px;
+	margin-right: 10px;
+	font-size: 15px;
+	font-family: $standard-font-family;
+	color: #4a4a4a;
+	text-decoration: underline;
+	cursor: pointer;
+}
