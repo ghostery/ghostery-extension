@@ -50,7 +50,10 @@ class Settings extends React.Component {
 	 * Lifecycle event. Default sub view is set here.
 	 */
 	UNSAFE_componentWillMount() {
-		this.props.history.push('/settings/globalblocking');
+		// Do not redirect to the default if we are trying to access a specific other subview
+		if (this.props.history[this.props.history.length - 1] === '/settings') {
+			this.props.history.push('/settings/globalblocking');
+		}
 	}
 
 	/**

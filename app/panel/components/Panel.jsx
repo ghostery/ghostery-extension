@@ -12,8 +12,9 @@
  */
 
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import Header from '../containers/HeaderContainer';
-import { PlusPromoModal, Modal } from '../../shared-components';
+import { PlusPromoModal } from '../../shared-components';
 import InsightsPromoModal from './InsightsPromoModal';
 import PlusUpgradePromoModal from './PlusUpgradePromoModal';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
@@ -151,7 +152,6 @@ class Panel extends React.Component {
 		}
 	}
 
-
 	/**
 	 * Helper render function for the notification callout
 	 * @return {JSX} JSX for the notification callout
@@ -163,6 +163,9 @@ class Panel extends React.Component {
 			return (
 				<span>
 					<span key="0" dangerouslySetInnerHTML={{ __html: this.props.notificationText || t('panel_needs_reload') }} />
+					{this.props.notificationText === t('promos_turned_off_notification') && (
+						<NavLink className="settings-link" to="/settings/notifications" onClick={this.closeNotification}>{t('settings')}</NavLink>
+					)}
 					{needsReload && (
 						<div key="1" className="needs-reload-link" onClick={this.clickReloadBanner}>{ t('alert_reload') }</div>
 					)}
@@ -201,6 +204,12 @@ class Panel extends React.Component {
 		// TODO metrics ping
 		this.props.actions.togglePromoModal();
 		sendMessage('promoModals.turnOffPromos', {});
+
+		this.props.actions.showNotification({
+			classes: 'warning',
+			reload: false,
+			text: t('promos_turned_off_notification'),
+		});
 	};
 
 	_handlePromoSignInClick = (modal) => {
