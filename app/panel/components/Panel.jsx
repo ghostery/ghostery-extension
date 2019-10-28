@@ -198,9 +198,15 @@ class Panel extends React.Component {
 	}
 
 	_handlePromoNoThanksClick = (modal) => {
-		// TODO metrics ping
 		this.props.actions.togglePromoModal();
+
 		sendMessage('promoModals.turnOffPromos', {});
+
+		if (modal === 'insights') {
+			sendMessage('ping', 'promo_modals_decline_insights_upgrade');
+		} else if (modal === 'plus_upgrade') {
+			sendMessage('ping', 'promo_modals_decline_plus_upgrade');
+		}
 	};
 
 	_handlePromoSignInClick = (modal) => {
@@ -211,24 +217,36 @@ class Panel extends React.Component {
 		});
 	};
 
-	_handlePromoSelectBasicClick = () => {
-		// TODO send metrics ping
+	_handlePromoSelectBasicClick = (location) => {
 		this.props.actions.togglePromoModal();
+
+		sendMessage('ping', 'promo_modals_select_basic_panel');
 	};
 
-	_handlePromoSelectPlusClick = () => {
-		// TODO send metrics ping
+	_handlePromoSelectPlusClick = (location) => {
 		this.props.actions.togglePromoModal();
+
+		sendMessage('ping', 'promo_modals_select_plus_panel');
 	};
 
 	_handlePromoSubscribeClick = (modal) => {
-		// TODO send metrics ping
 		this.props.actions.togglePromoModal();
+
+		if (modal === 'insights') {
+			sendMessage('ping', 'promo_modals_insights_upgrade_cta');
+		} else if (modal === 'plus_upgrade') {
+			sendMessage('ping', 'promo_modals_plus_upgrade_cta');
+		}
 	};
 
 	_handlePromoXClick = (modal) => {
-		// TODO send metrics ping
 		this.props.actions.togglePromoModal();
+
+		if (modal === 'insights') {
+			sendMessage('ping', 'promo_modals_decline_insights_upgrade');
+		} else if (modal === 'plus_upgrade') {
+			sendMessage('ping', 'promo_modals_decline_plus_upgrade');
+		}
 	};
 
 	_plusSubscriber = () => {
@@ -249,6 +267,7 @@ class Panel extends React.Component {
 		sendMessage('promoModals.sawPlusPromo', {});
 
 		if (this.props.promoModal === 'plus_upgrade') {
+			sendMessage('ping', 'promo_modals_show_upgrade_plus');
 			return (
 				<PlusUpgradePromoModal
 					handleNoThanksClick={this._handlePromoNoThanksClick}
@@ -260,6 +279,7 @@ class Panel extends React.Component {
 		}
 
 		// promoModal === 'plus_initial'
+		sendMessage('ping', 'promo_modals_show_plus_choice_panel');
 		return (
 			<PlusPromoModal
 				show
@@ -274,6 +294,8 @@ class Panel extends React.Component {
 		if (this._insightsSubscriber()) return null;
 
 		sendMessage('promoModals.sawInsightsPromo', '', 'metrics');
+
+		sendMessage('ping', 'promo_modals_show_insights');
 
 		return (
 			<InsightsPromoModal

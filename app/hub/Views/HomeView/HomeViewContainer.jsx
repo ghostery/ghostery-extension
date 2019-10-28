@@ -64,10 +64,12 @@ class HomeViewContainer extends Component {
 	// TODO send appropriate metrics ping
 	_handlePromoSelectBasicClick = () => {
 		// GH-1777
-		// we want to show the Plus Promo modal once per Hub visit - not every time the user returns to the Home view
+		// we want to show the Plus Promo modal once per Hub visit
 		this.props.actions.markPlusPromoModalShown();
 
 		sendMessage('SET_PLUS_PROMO_MODAL_SEEN', {});
+
+		sendMessage('ping', 'promo_modals_select_basic_hub');
 	}
 
 	/**
@@ -77,10 +79,12 @@ class HomeViewContainer extends Component {
 		// TODO send appropriate metrics ping
 	_handlePromoSelectPlusClick = () => {
 		// GH-1777
-		// we want to show the Plus Promo modal once per Hub visit - not every time the user returns to the Home view
+		// we want to show the Plus Promo modal once per Hub visit
 		this.props.actions.markPlusPromoModalShown();
 
 		sendMessage('SET_PLUS_PROMO_MODAL_SEEN', {});
+
+		sendMessage('ping', 'promo_modals_select_plus_hub');
 	}
 
 	_render() {
@@ -103,10 +107,15 @@ class HomeViewContainer extends Component {
 			isPlus,
 		};
 
+		const showPromoModal = !isPlus && !plus_promo_modal_shown;
+		if (showPromoModal) {
+			sendMessage('ping', 'promo_modals_show_plus_choice_hub');
+		}
+
 		return (
 			<div className="full-height">
 				<PlusPromoModal
-					show={!isPlus && !plus_promo_modal_shown}
+					show={showPromoModal}
 					location="hub"
 					handleSelectBasicClick={this._handlePromoSelectBasicClick}
 					handleSelectPlusClick={this._handlePromoSelectPlusClick}
