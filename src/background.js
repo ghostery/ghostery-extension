@@ -1080,15 +1080,15 @@ function onMessageHandler(request, sender, callback) {
 	}
 	if (name === 'promoModals.sawPlusPromo') {
 		promoModals.recordPlusPromoSighting();
-		return true;
+		return false;
 	}
 	if (name === 'promoModals.sawInsightsPromo') {
 		promoModals.recordInsightsPromoSighting();
-		return true;
+		return false;
 	}
 	if (name === 'promoModals.turnOffPromos') {
 		promoModals.turnOffPromos();
-		return true;
+		return false;
 	}
 }
 
