@@ -38,7 +38,7 @@ const HomeView = (props) => {
 	let headerInfoText = t('hub_home_header_info');
 	if (globals.BROWSER_INFO) {
 		if (globals.BROWSER_INFO.name === 'firefox') {
-			headerInfoText = t('hub_home_header_info_opted_out');
+			headerInfoText = t('hub_home_header_info_opted_in_rewards');
 		} else if (globals.BROWSER_INFO.name === 'cliqz') {
 			headerInfoText = t('hub_home_header_info_cliqz');
 		}
