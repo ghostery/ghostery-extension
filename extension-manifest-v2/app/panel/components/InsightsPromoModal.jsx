@@ -27,8 +27,6 @@ const CTA_LINK = globals.DEBUG ? 'https://checkout.ghosterystage.com/insights' :
 class InsightsPromoModal extends React.Component {
 	handleNoThanksClick = () => { this.props.handleNoThanksClick(INSIGHTS); };
 
-	handleSignInClick = () => { this.props.handleSignInClick(INSIGHTS); };
-
 	handleXClick = () => { this.props.handleXClick(INSIGHTS); };
 
 	render() {
@@ -80,7 +78,7 @@ class InsightsPromoModal extends React.Component {
 							</PanelToTabLink>
 						</div>
 						<div className="InsightsModal__other-options-container flex-container align-justify">
-							<span onClick={this.handleSignInClick} className="InsightsModal__link">{t('subscribe_pitch_sign_in')}</span>
+							<span onClick={this.props.handleSignInClick} className="InsightsModal__link">{t('subscribe_pitch_sign_in')}</span>
 							<span onClick={this.handleNoThanksClick} className="InsightsModal__link">{t('no_thanks_turn_promos_off')}</span>
 						</div>
 					</div>

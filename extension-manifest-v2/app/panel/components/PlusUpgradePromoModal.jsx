@@ -28,8 +28,6 @@ const DOMAIN = globals.DEBUG ? 'ghosterystage' : 'ghostery';
 class PlusUpgradePromoModal extends React.Component {
 	handleNoThanksClick = () => { this.props.handleNoThanksClick(PLUS_UPGRADE); }
 
-	handleSignInClick = () => { this.props.handleSignInClick(PLUS_UPGRADE); };
-
 	handleSubscribeClick = () => { this.props.handleSubscribeClick(PLUS_UPGRADE); }
 
 	handleXClick = () => { this.props.handleXClick(PLUS_UPGRADE); }
@@ -69,7 +67,7 @@ class PlusUpgradePromoModal extends React.Component {
 						{
 							!loggedIn &&
 							(
-								<div onClick={this.handleSignInClick} className="PlusPromoModal__text-link">
+								<div onClick={this.props.handleSignInClick} className="PlusPromoModal__text-link">
 									{t('already_subscribed_sign_in')}
 								</div>
 							)
