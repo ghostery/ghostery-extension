@@ -61,7 +61,6 @@ class HomeViewContainer extends Component {
 	 * @private
 	 * Function to handle clicks on Select Basic in the Plus Promo Modal
 	 */
-	// TODO send appropriate metrics ping
 	_handlePromoSelectBasicClick = () => {
 		// GH-1777
 		// we want to show the Plus Promo modal once per Hub visit
@@ -76,7 +75,6 @@ class HomeViewContainer extends Component {
 	 * @private
 	 * Function to handle clicks on Select Plus in the Plus Promo Modal
 	 */
-		// TODO send appropriate metrics ping
 	_handlePromoSelectPlusClick = () => {
 		// GH-1777
 		// we want to show the Plus Promo modal once per Hub visit

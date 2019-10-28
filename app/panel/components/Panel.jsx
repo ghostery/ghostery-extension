@@ -13,7 +13,7 @@
 
 import React from 'react';
 import Header from '../containers/HeaderContainer';
-import { PlusPromoModal, Modal } from '../../shared-components';
+import { PlusPromoModal } from '../../shared-components';
 import InsightsPromoModal from './InsightsPromoModal';
 import PlusUpgradePromoModal from './PlusUpgradePromoModal';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
@@ -209,7 +209,7 @@ class Panel extends React.Component {
 		}
 	};
 
-	_handlePromoSignInClick = (modal) => {
+	_handlePromoSignInClick = () => {
 		// TODO metrics ping
 		this.props.actions.togglePromoModal();
 		history.push({
@@ -217,13 +217,13 @@ class Panel extends React.Component {
 		});
 	};
 
-	_handlePromoSelectBasicClick = (location) => {
+	_handlePromoSelectBasicClick = () => {
 		this.props.actions.togglePromoModal();
 
 		sendMessage('ping', 'promo_modals_select_basic_panel');
 	};
 
-	_handlePromoSelectPlusClick = (location) => {
+	_handlePromoSelectPlusClick = () => {
 		this.props.actions.togglePromoModal();
 
 		sendMessage('ping', 'promo_modals_select_plus_panel');
@@ -293,7 +293,7 @@ class Panel extends React.Component {
 	_renderInsightsPromoModal = () => {
 		if (this._insightsSubscriber()) return null;
 
-		sendMessage('promoModals.sawInsightsPromo', '', 'metrics');
+		sendMessage('promoModals.sawInsightsPromo', {});
 
 		sendMessage('ping', 'promo_modals_show_insights');
 
