@@ -20,8 +20,18 @@ import Modal from '../Modal/Modal';
 
 const DOMAIN = globals.DEBUG ? 'ghosterystage' : 'ghostery';
 
-function _renderInitialVersion(props) {
-	const { show, location, clickHandler } = props;
+/**
+ * A functional React component for a Plus Promo Modal that may be displayed in the Hub and/or Panel
+ * @return {JSX} JSX for rendering a Plus Promo Modal
+ * @memberof SharedComponents
+ */
+const PlusPromoModal = (props) => {
+	const {
+		show,
+		location,
+		handleSelectBasicClick,
+		handleSelectPlusClick
+	} = props;
 
 	const isInHub = location === 'hub';
 
@@ -55,7 +65,6 @@ function _renderInitialVersion(props) {
 		locationClassName
 	);
 
-	// TODO refactor for clarity & concision alongside implementing _renderUpgradeVersion for GH-1813
 	return (
 		<Modal show={show}>
 			<div className={contentClassNames}>
@@ -85,7 +94,7 @@ function _renderInitialVersion(props) {
 								<div className="PlusPromoModal__option-description-item">{t('fast_browsing')}</div>
 							</div>
 						</div>
-						<div className="PlusPromoModal__button basic" onClick={props.handleSelectBasicClick}>
+						<div className="PlusPromoModal__button basic" onClick={handleSelectBasicClick}>
 							<span>{t('select_basic')}</span>
 						</div>
 					</div>
@@ -118,7 +127,7 @@ function _renderInitialVersion(props) {
 								</div>
 							</div>
 						</div>
-						<a href={`https://checkout.${DOMAIN}.com/plus`} target="_blank" rel="noopener noreferrer" className="PlusPromoModal__button plus" onClick={props.handleSelectPlusClick}>
+						<a href={`https://checkout.${DOMAIN}.com/plus`} target="_blank" rel="noopener noreferrer" className="PlusPromoModal__button plus" onClick={handleSelectPlusClick}>
 							<span>{t('select_plus')}</span>
 						</a>
 					</div>
@@ -126,14 +135,7 @@ function _renderInitialVersion(props) {
 			</div>
 		</Modal>
 	);
-}
-
-/**
- * A Functional React component for a Plus Promo Modal
- * @return {JSX} JSX for rendering a Plus Promo Modal
- * @memberof SharedComponents
- */
-const PlusPromoModal = props => _renderInitialVersion(props);
+};
 
 // PropTypes ensure we pass required props of the correct type
 PlusPromoModal.propTypes = {
