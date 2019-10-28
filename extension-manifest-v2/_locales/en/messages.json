@@ -2166,5 +2166,12 @@
 	"already_subscribed_sign_in": {
 		"message": "Already subscribed? Sign In",
 		"description": "Character limit: 28."
+	},
+	"promos_turned_off_notification": {
+		"message": "Promos turned off. You can turn them back on in",
+		"description": "translation must take into account that 'Settings' is appended to this string"
+	},
+	"settings": {
+		"message": "Settings"
 	}
 }
