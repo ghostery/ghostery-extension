@@ -229,11 +229,19 @@ class Panel extends React.Component {
 	_handlePromoSelectBasicClick = () => {
 		this.props.actions.togglePromoModal();
 
+		// we do not mark the choice-required initial plus promo as 'seen' until
+		// the user has clicked Select Basic or Select Plus
+		sendMessage('promoModals.sawPlusPromo', {});
+
 		sendMessage('ping', 'promo_modals_select_basic_panel');
 	};
 
 	_handlePromoSelectPlusClick = () => {
 		this.props.actions.togglePromoModal();
+
+		// we do not mark the choice-required initial plus promo as 'seen' until
+		// the user has clicked Select Basic or Select Plus
+		sendMessage('promoModals.sawPlusPromo', {});
 
 		sendMessage('ping', 'promo_modals_select_plus_panel');
 	};
@@ -273,9 +281,9 @@ class Panel extends React.Component {
 	_renderPlusPromoModal = () => {
 		if (this._plusSubscriber() || this._insightsSubscriber()) return null;
 
-		sendMessage('promoModals.sawPlusPromo', {});
-
 		if (this.props.promoModal === 'plus_upgrade') {
+			// the upgrade promo does not require the user to make a choice, so we mark it as 'seen' immediately
+			sendMessage('promoModals.sawPlusPromo', {});
 			sendMessage('ping', 'promo_modals_show_upgrade_plus');
 			return (
 				<PlusUpgradePromoModal

@@ -20,7 +20,7 @@ const DAYS_BETWEEN_PROMOS = {
 	insights: globals.DEBUG ? 0.00025 : 30
 };
 const WEEKLY_INSIGHTS_TARGET = globals.DEBUG ? 1 : 3;
-const DAILY_INSIGHTS_TARGET = 3;
+const DAILY_INSIGHTS_TARGET = globals.DEBUG ? 7 : 3;
 
 const MSECS_IN_DAY = 86400000; // 1000 msecs-in-sec * 60 secs-in-min * 60 mins-in-hour * 24 hours-in-day
 const PLUS = 'plus';
