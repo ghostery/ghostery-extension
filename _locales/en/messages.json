@@ -527,25 +527,31 @@
 		"message": "Set Up Ghostery"
 	},
 	"panel_insights_audit_tags": {
-		"message": "Audit marketing tags on a page"
+		"message": "Audit marketing tags on a page",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 30."
 	},
 	"panel_insights_promotion_explore_trends": {
-		"message": "Explore global digital trends"
+		"message": "Explore global digital trends",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
 	},
 	"panel_insights_promotion_call_to_action": {
 		"message": "Try for free"
 	},
 	"panel_insights_promotion_header": {
-		"message": "Try Ghostery Insights"
+		"message": "Try Ghostery Insights",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 35."
 	},
 	"panel_insights_promotion_description": {
-		"message": "Speed up and clean up digital user experience with our professional tag analytics tool."
+		"message": "Speed up and clean up digital user experience with our professional tag analytics tool.",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 90."
 	},
 	"panel_insights_promotion_trace_poor_performance": {
-		"message": "Trace sources of poor performance"
+		"message": "Trace sources of poor performance",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 33."
 	},
 	"panel_insights_promotion_watch_pings": {
-		"message": "Watch pings fire in real-time"
+		"message": "Watch pings fire in real-time",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
 	},
 	"panel_about_panel_header": {
 		"message": "About Ghostery Browser Extension"
