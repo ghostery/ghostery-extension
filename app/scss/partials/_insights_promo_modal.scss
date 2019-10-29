@@ -1,3 +1,20 @@
+/**
+ * Insights Promo Modal Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+// Insights Promo Modal
+$standard-font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
 .InsightsModal__content {
 	background-color: $alabaster;
 	position: relative;
@@ -17,7 +34,7 @@
 }
 
 .InsightsModal__header {
-	font-family: 'Roboto';
+	font-family: $standard-font-family;
 	height: 27.1px;
 	font-size: 20px;
 	font-weight: 900;
@@ -33,7 +50,7 @@
 	font-weight: 500;
 	text-align: center;
 	margin-bottom: 12.8px;
-	font-family: 'Roboto';
+	font-family: $standard-font-family;
 }
 
 .InsightsModal__features {
@@ -47,7 +64,7 @@
 }
 
 .InsightsModal__feature-text {
-	font-family: 'Roboto';
+	font-family: $standard-font-family;
 	font-size: 14px;
 	line-height: 39px;
 	color: $medium-gray;
@@ -70,14 +87,14 @@
 .InsightsModal__call-to-action {
 	display: flex;
 	justify-content: center;
-	width: 176px;
+	padding: 0px 50px 0px; // more localization-proof than hardcoding width
 	height: 36px;
 	margin-top: 18px;
 	border-radius: 2px;
 	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12);
 	background-image: linear-gradient(101deg, #070e18, #1678a0);
 	font-size: 14px;
-	font-family: 'Roboto Condensed';
+	font-family: $condensed-font-family;
 	letter-spacing: .5px;
 	color: $white;
 	line-height: 36px;
@@ -88,7 +105,7 @@
 }
 
 .InsightsModal__link {
-	font-family: 'Roboto';
+	font-family: $standard-font-family;
 	font-size: 15px;
 	color: $tundora;
 	&:hover {
