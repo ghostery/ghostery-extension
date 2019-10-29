@@ -16,8 +16,8 @@ import globals from './Globals';
 import panelData from './PanelData';
 
 const DAYS_BETWEEN_PROMOS = {
-	plus: globals.DEBUG ? 0.00025 : 30,
-	insights: globals.DEBUG ? 0.00025 : 30
+	plus: globals.DEBUG ? 0.0005 : 30,
+	insights: globals.DEBUG ? 0.0005 : 30
 };
 const WEEKLY_INSIGHTS_TARGET = globals.DEBUG ? 1 : 3;
 const DAILY_INSIGHTS_TARGET = globals.DEBUG ? 7 : 3;
@@ -66,6 +66,11 @@ class PromoModals {
 
 		if (type === INSIGHTS && !this._hasEngagedFrequently()) {
 			return false;
+		}
+
+		// don't wait 30 days to show the first Insights promo if user meets the criteria before then
+		if (type === INSIGHTS && lastSeenInsightsPromo === 0) {
+			return true;
 		}
 
 		return (
