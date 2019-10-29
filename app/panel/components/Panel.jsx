@@ -219,7 +219,6 @@ class Panel extends React.Component {
 	};
 
 	_handlePromoSignInClick = () => {
-		// TODO metrics ping
 		this.props.actions.togglePromoModal();
 		history.push({
 			pathname: '/login',
@@ -303,6 +302,7 @@ class Panel extends React.Component {
 				location="panel"
 				handleSelectBasicClick={this._handlePromoSelectBasicClick}
 				handleSelectPlusClick={this._handlePromoSelectPlusClick}
+				handleSignInClick={this._handlePromoSignInClick}
 			/>
 		);
 	}
