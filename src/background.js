@@ -1629,9 +1629,10 @@ function initializeGhosteryModules() {
 					conf.enable_offers = !offers.isDisabled;
 				}
 
-				const myoffrzShouldMigrate = conf.rewards_opted_in !== undefined && cliqz.prefs.get('myoffrz.opted_in') === undefined;
+				const myoffrzShouldMigrate = conf.rewards_opted_in !== undefined && cliqz.prefs.get('myoffrz.opted_in', undefined) === undefined;
 				if (myoffrzShouldMigrate) {
 					cliqz.prefs.set('myoffrz.opted_in', conf.rewards_opted_in);
+					conf.rewards_opted_in = undefined;
 				}
 			}
 		});
