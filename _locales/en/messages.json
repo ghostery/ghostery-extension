@@ -2022,16 +2022,20 @@
 		"message": "per month"
 	},
 	"protection_for_this_browser": {
-		"message": "Protection for this browser"
+		"message": "Protection for this browser",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
 	},
 	"blocks_ads": {
-		"message": "Blocks Ads"
+		"message": "Blocks Ads",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
 	},
 	"blocks_trackers": {
-		"message": "Blocks Trackers"
+		"message": "Blocks Trackers",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
 	},
 	"fast_browsing": {
-		"message": "Fast Browsing"
+		"message": "Fast Browsing",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
 	},
 	"select_basic": {
 		"message": "Select Basic"
@@ -2112,7 +2116,8 @@
 		"message": "Historical Stats"
 	},
 	"priority_support": {
-		"message": "Priority Support"
+		"message": "Priority Support",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
 	},
 	"on": {
 		"message": "On"
@@ -2139,33 +2144,36 @@
 		"message": "Looks like we can't find this email and password combo. Give it another shot."
 	},
 	"all_basic_features_plus_COLON": {
-		"message": "All basic features, plus:"
+		"message": "All basic features, plus:",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
 	},
 	"historical_tracker_stats": {
-		"message": "Historical Tracker Stats"
+		"message": "Historical Tracker Stats",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
 	},
 	"new_color_themes": {
-		"message": "New Color Themes"
+		"message": "New Color Themes",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
 	},
 	"upgrade_cta_TEXT": {
 		"message": "Unlock historical tracker insights, priority support access, and new color themes by upgrading to Ghostery Plus for only $2 per month.",
-		"description": "Body text in a non-responsive modal. Character limit: 135."
+		"description": "Body text in a non-responsive modal. Character limit (including spaces and punctuation): 135."
 	},
 	"upgrade_your_ghostery_experience": {
 		"message": "Upgrade your Ghostery experience",
-		"description": "Header text for a non-responsive modal. Character limit: 40."
+		"description": "Header text for a non-responsive modal. Character limit (including spaces and punctuation): 40."
 	},
 	"upgrade_to_plus": {
 		"message": "Upgrade to Plus",
-		"description": "Button text in a non-responsive modal. Character limit: 35."
+		"description": "Button text in a non-responsive modal. Character limit (including spaces and punctuation): 35."
 	},
 	"no_thanks_turn_promos_off": {
 		"message": "No thanks, turn promos off",
-		"description": "Text link in a non-responsive modal. Character limit: 28."
+		"description": "Text link in a non-responsive modal. Character limit (including spaces and punctuation): 28."
 	},
 	"already_subscribed_sign_in": {
 		"message": "Already subscribed? Sign In",
-		"description": "Character limit: 28."
+		"description": "Character limit (including spaces and punctuation): 28."
 	},
 	"promos_turned_off_notification": {
 		"message": "Promos turned off. You can turn them back on in",

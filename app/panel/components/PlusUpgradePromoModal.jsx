@@ -60,7 +60,7 @@ class PlusUpgradePromoModal extends React.Component {
 					</div>
 					<div className="PlusPromoModal__button-container">
 						<PanelToTabLink onClick={this.handleSubscribeClick} className="PlusPromoModal__button upgrade" href={`http://checkout.${DOMAIN}.com/plus/`}>
-							<span className="button-text">{t('upgrade_to_plus')}</span>
+							<span className="side-padded button-text">{t('upgrade_to_plus')}</span>
 						</PanelToTabLink>
 					</div>
 					<div className="PlusPromoModal__text-link-container">
