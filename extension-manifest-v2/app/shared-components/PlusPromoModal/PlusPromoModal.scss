@@ -13,6 +13,7 @@
 
 // Plus Promo Modal
 $standard-font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 .PlusPromoModal__gold-ghostie-badge {
 	margin-top: 21px;
@@ -80,6 +81,8 @@ $standard-font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, 
 .PlusPromoModal__choose-your-plan {
 	font-size: 18px;
 	font-weight: bold;
+	font-family: $standard-font-family;
+	color: #4a4a4a;
 
 	&.in-hub { padding-top: 10px; }
 	&.in-panel { padding-top: 17px; }
@@ -87,11 +90,16 @@ $standard-font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, 
 
 .PlusPromoModal__options-container {
 	height: 100%;
-	margin-top: 44px;
 	display: flex;
 
-	&.in-hub { justify-content: space-evenly; }
-	&.in-panel { justify-content: space-around; }
+	&.in-hub {
+		justify-content: space-evenly;
+		margin-top: 44px;
+	}
+	&.in-panel {
+		justify-content: space-around;
+		margin-top: 34px;
+	}
 }
 
 .PlusPromoModal__option-container {
@@ -130,6 +138,7 @@ $standard-font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, 
 
 .PlusPromoModal__recommended-banner {
 	position: absolute;
+	font-family: $standard-font-family;
 
 	&.in-hub {
 		left: -30px;
@@ -154,9 +163,9 @@ $standard-font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, 
 
 .PlusPromoModal__option-header {
 	margin-top: 20px;
+	font-family: $condensed-font-family;
 	font-size: 19px;
 	font-weight: bold;
-	letter-spacing: -0.5px;
 	text-align: center;
 
 	&.basic { color: #1dafed; }
@@ -172,26 +181,30 @@ $standard-font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, 
 }
 
 .PlusPromoModal__currency-sign {
+	font-family: $condensed-font-family;
 	font-size: 30px;
 	font-weight: bold;
 }
 
 .PlusPromoModal__amount {
 	vertical-align: middle;
-	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: $standard-font-family;
 	font-size: 58px;
+	font-weight: normal;
 }
 
 .PlusPromoModal__per-month {
 	vertical-align: sub;
+	font-family: $condensed-font-family;
 	font-size: 18px;
 	font-weight: bold;
 }
 
 .PlusPromoModal__option-description-item {
 	padding-bottom: 15px;
-	font-size: 16px;
 	text-align: center;
+	font-family: $standard-font-family;
+	font-size: 16px;
 	color: #333333;
 
 	&.italic {
@@ -218,12 +231,12 @@ $standard-font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, 
 }
 
 .PlusPromoModal__button {
-	border-radius: 3px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	border-radius: 3px;
 	font-weight: bold;
-	font-family: $standard-font-family;
+	font-family: $condensed-font-family;
 	letter-spacing: 0.5px;
 	text-transform: uppercase;
 	cursor: pointer;
@@ -231,9 +244,8 @@ $standard-font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, 
 	-webkit-appearance: none;
 
 	&.basic {
-		font-size: 11px;
-		width: 135px;
 		height: 40px;
+		font-size: 14px;
 		border: solid 2px #15b4f2;
 		background-color: white;
 		color: #2cbcf4;
@@ -245,8 +257,7 @@ $standard-font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, 
 	}
 
 	&.plus {
-		font-size: 11px;
-		width: 163px;
+		font-size: 14px;
 		height: 38px;
 		border: none;
 		background-image: linear-gradient(to bottom, #2fdbfa, #15b4f2);
@@ -268,8 +279,11 @@ $standard-font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, 
 		background-color: #0698d6;
 	}
 
+	.side-padded {
+		padding: 0px 20px 0px; // more localization-proof than hardcoding width
+	}
+
 	.button-text {
-		padding: 0px 20px 0px;
 		color: white;
 		text-decoration: none;
 	}

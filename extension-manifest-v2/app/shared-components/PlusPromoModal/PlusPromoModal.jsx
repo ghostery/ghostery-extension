@@ -30,10 +30,12 @@ const PlusPromoModal = (props) => {
 		show,
 		location,
 		handleSelectBasicClick,
-		handleSelectPlusClick
+		handleSelectPlusClick,
+		handleSignInClick,
 	} = props;
 
 	const isInHub = location === 'hub';
+	const isInPanel = location === 'panel';
 
 	const locationClassName = {
 		'in-hub': isInHub,
@@ -95,7 +97,7 @@ const PlusPromoModal = (props) => {
 							</div>
 						</div>
 						<div className="PlusPromoModal__button basic" onClick={handleSelectBasicClick}>
-							<span>{t('select_basic')}</span>
+							<span className="side-padded">{t('select_basic')}</span>
 						</div>
 					</div>
 					<div className="PlusPromoModal__option-container">
@@ -109,7 +111,7 @@ const PlusPromoModal = (props) => {
 								<span className="PlusPromoModal__currency-sign">{t('locale_appropriate_currency_icon')}</span>
 								<span className="PlusPromoModal__amount">{t('plus_monthly_subscription_price_number')}</span>
 								<span> </span>
-								<span className="PlusPromoModal__per-month">{t('per month')}</span>
+								<span className="PlusPromoModal__per-month">{t('per_month')}</span>
 							</div>
 							<div className="PlusPromoModal__option-description">
 								<div className="PlusPromoModal__option-description-item italic">{t('all_basic_features_plus_COLON')}</div>
@@ -128,10 +130,15 @@ const PlusPromoModal = (props) => {
 							</div>
 						</div>
 						<a href={`https://checkout.${DOMAIN}.com/plus`} target="_blank" rel="noopener noreferrer" className="PlusPromoModal__button plus" onClick={handleSelectPlusClick}>
-							<span>{t('select_plus')}</span>
+							<span className="side-padded">{t('select_plus')}</span>
 						</a>
 					</div>
 				</div>
+				{isInPanel && (
+					<div onClick={handleSignInClick} className="PlusPromoModal__text-link">
+						{t('already_subscribed_sign_in')}
+					</div>
+				)}
 			</div>
 		</Modal>
 	);
@@ -143,6 +150,11 @@ PlusPromoModal.propTypes = {
 	location: PropTypes.string.isRequired,
 	handleSelectBasicClick: PropTypes.func.isRequired,
 	handleSelectPlusClick: PropTypes.func.isRequired,
+	handleSignInClick: PropTypes.func,
+};
+
+PlusPromoModal.defaultProps = {
+	handleSignInClick: () => {},
 };
 
 export default PlusPromoModal;
