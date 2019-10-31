@@ -13,6 +13,8 @@
 
 
 import PolicySmartBlock from '../../src/classes/PolicySmartBlock';
+import { processUrl } from '../../src/utils/utils';
+
 let policySmartBlock = new PolicySmartBlock();
 
 // Mock imports for dependencies
@@ -52,18 +54,15 @@ describe('src/classes/PolicySmartBlock.js', () => {
 
 		test('PolicySmartBlock isFirstPartyRequest truthy assertion', () => {
 			expect(policySmartBlock.isFirstPartyRequest('tabId', 'example.com', 'example.com')).toBeTruthy();
-			expect(policySmartBlock.isFirstPartyRequest('tabId', 'www.example.com', 'example.com')).toBeTruthy();
-			expect(policySmartBlock.isFirstPartyRequest('tabId', 'example.com', 'www.example.com')).toBeTruthy();
-			expect(policySmartBlock.isFirstPartyRequest('tabId', 'www.example.com', 'www.example.com')).toBeTruthy();
-			expect(policySmartBlock.isFirstPartyRequest('tabId', 'sub.example.com', 'example.com')).toBeTruthy();
-			expect(policySmartBlock.isFirstPartyRequest('tabId', 'example.com', 'sub.example.com')).toBeTruthy();
-			expect(policySmartBlock.isFirstPartyRequest('tabId', 'sub1.sub2.sub3.example.com', 'sub2.sub3.example.com')).toBeTruthy();
-			expect(policySmartBlock.isFirstPartyRequest('tabId', 'www.ghostery.com', 'analytics.ghostery.com')).toBeTruthy();
+			// isFirstPartyRequest() expects pre-parsed domains, so we should parse the test urls
+			const parsedPage = processUrl('https://checkout.ghostery.com/insights');
+			const parsedRequest = processUrl('https://analytics.ghostery.com/piwik.js');
+			expect(policySmartBlock.isFirstPartyRequest('tabId', parsedPage.generalDomain, parsedRequest.generalDomain)).toBeTruthy();
 		});
 
 		test('PolicySmartBlock isFirstPartyRequest falsy assertion', () => {
-			expect(policySmartBlock.isFirstPartyRequest('tabId', 'sub1.example.com', 'sub2.example.com')).toBeFalsy();
-			expect(policySmartBlock.isFirstPartyRequest('tabId', 'sub1.sub2.example.com', 'sub2.sub1.example.com')).toBeFalsy();
+			expect(policySmartBlock.isFirstPartyRequest('tabId', 'www.example.com', 'example.com')).toBeFalsy();
+			expect(policySmartBlock.isFirstPartyRequest('tabId', 'sub.example.com', 'example.com')).toBeFalsy();
 			expect(policySmartBlock.isFirstPartyRequest('tabId', 'example.com', 'test.com')).toBeFalsy();
 			expect(policySmartBlock.isFirstPartyRequest('tabId', 'www.example.com', 'www.test.com')).toBeFalsy();
 		});
