@@ -12,22 +12,21 @@
  */
 
 import React from 'react';
-import globals from '../../../src/classes/Globals';
 import Modal from '../../shared-components/Modal';
 import ModalExitButton from './BuildingBlocks/ModalExitButton';
-import PanelToTabLink from './BuildingBlocks/PanelToTabLink';
 
 const INSIGHTS = 'insights';
-const CTA_LINK = globals.DEBUG ? 'https://checkout.ghosterystage.com/insights' : 'http://ghostery.com/insights/';
 
 /**
  * @class Implements the Insights Promo Modal
  * @memberof PanelClasses
  */
 class InsightsPromoModal extends React.Component {
-	handleNoThanksClick = () => { this.props.handleNoThanksClick(INSIGHTS); };
+	handleNoThanksClick = () => { this.props.handleNoThanksClick(INSIGHTS); }
 
-	handleXClick = () => { this.props.handleXClick(INSIGHTS); };
+	handleSubscribeClick = () => { this.props.handleSubscribeClick(INSIGHTS); }
+
+	handleXClick = () => { this.props.handleXClick(INSIGHTS); }
 
 	render() {
 		return (
@@ -73,9 +72,9 @@ class InsightsPromoModal extends React.Component {
 					</div>
 					<div className="InsightsModal__call-to-action-container">
 						<div className="flex-container align-center">
-							<PanelToTabLink className="btn InsightsModal__call-to-action" href={CTA_LINK}>
+							<span onClick={this.handleSubscribeClick} className="btn InsightsModal__call-to-action">
 								<span className="button-text">{t('panel_insights_promotion_call_to_action')}</span>
-							</PanelToTabLink>
+							</span>
 						</div>
 						<div className="InsightsModal__other-options-container flex-container align-justify">
 							<span onClick={this.props.handleSignInClick} className="InsightsModal__link">{t('subscribe_pitch_sign_in')}</span>

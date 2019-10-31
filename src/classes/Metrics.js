@@ -221,7 +221,7 @@ class Metrics {
 				this._sendReq(type, ['all', 'daily']);
 				break;
 
-			// New to Ghostery 8
+			// Ghostery 8.0+
 			case 'adblock_off':
 			case 'adblock_on':
 			case 'antitrack_off':
@@ -258,7 +258,7 @@ class Metrics {
 				this._sendReq(type, ['all']);
 				break;
 
-			// New to Ghostery 8.3
+			// Ghostery 8.3+
 			case 'sign_in_success':
 			case 'create_account_success':
 			case 'tutorial_start':
@@ -279,6 +279,22 @@ class Metrics {
 			case 'theme_change':
 			case 'manage_subscription':
 			case 'broken_page':
+				this._sendReq(type, ['all']);
+				break;
+
+			// Promo Modals - Ghostery 8.4.4+
+			case 'promo_modals_insights_upgrade_cta':
+			case 'promo_modals_plus_upgrade_cta':
+			case 'promo_modals_select_plus_panel':
+			case 'promo_modals_select_basic_panel':
+			case 'promo_modals_select_plus_hub':
+			case 'promo_modals_select_basic_hub':
+			case 'promo_modals_decline_insights_upgrade':
+			case 'promo_modals_decline_plus_upgrade':
+			case 'promo_modals_show_plus_choice_hub':
+			case 'promo_modals_show_plus_choice_panel':
+			case 'promo_modals_show_upgrade_plus':
+			case 'promo_modals_show_insights':
 				this._sendReq(type, ['all']);
 				break;
 

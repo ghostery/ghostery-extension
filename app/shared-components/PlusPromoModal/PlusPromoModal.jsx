@@ -1,6 +1,5 @@
 /**
  * Plus Promo Modal Component
- * renders Plus Promo inside of the shared Modal component
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -15,10 +14,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
-import globals from '../../../src/classes/Globals';
 import Modal from '../Modal/Modal';
-
-const DOMAIN = globals.DEBUG ? 'ghosterystage' : 'ghostery';
 
 /**
  * A functional React component for a Plus Promo Modal that may be displayed in the Hub and/or Panel
@@ -129,9 +125,9 @@ const PlusPromoModal = (props) => {
 								</div>
 							</div>
 						</div>
-						<a href={`https://checkout.${DOMAIN}.com/plus`} target="_blank" rel="noopener noreferrer" className="PlusPromoModal__button plus" onClick={handleSelectPlusClick}>
+						<span onClick={handleSelectPlusClick} className="PlusPromoModal__button plus">
 							<span className="side-padded">{t('select_plus')}</span>
-						</a>
+						</span>
 					</div>
 				</div>
 				{isInPanel && (

@@ -273,7 +273,7 @@ export default (state = initialState, action) => {
 };
 
 /**
- * Trigger notifcation and needsReload banners. Persist the change.
+ * Trigger notification and needsReload banners. Persist the change.
  * @memberOf  PanelReactReducers
  * @private
  * @param  {Object} state 		current state

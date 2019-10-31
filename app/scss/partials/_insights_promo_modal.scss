@@ -85,6 +85,7 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 }
 
 .InsightsModal__call-to-action {
+	cursor: pointer;
 	display: flex;
 	justify-content: center;
 	padding: 0px 50px 0px; // more localization-proof than hardcoding width
