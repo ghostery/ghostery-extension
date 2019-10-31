@@ -335,7 +335,7 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
           href="/plus"
           onClick={[Function]}
         >
-          Aready_Subscribed
+          already_subscribed
         </a>
       </div>
     </div>
