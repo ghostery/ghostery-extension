@@ -272,10 +272,10 @@ class Panel extends React.Component {
 
 		if (modal === 'insights') {
 			sendMessage('ping', 'promo_modals_insights_upgrade_cta');
-			url += 'insights';
+			url += 'insights?utm_source=gbe&utm_campaign=in_app_upgrade';
 		} else if (modal === 'plus_upgrade') {
 			sendMessage('ping', 'promo_modals_plus_upgrade_cta');
-			url += 'plus';
+			url += 'plus?utm_source=gbe&utm_campaign=in_app_upgrade';
 		}
 
 		sendMessage('openNewTab', {
