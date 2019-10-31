@@ -34,6 +34,12 @@ const PROMO_MODAL_LAST_SEEN = 'promo_modal_last_seen';
  * @memberOf  BackgroundClasses
  */
 class PromoModals {
+	/**
+	 * Determine if a modal should be shown.  Called from PanelData
+	 * when the panel is opened.
+	 *
+	 * @return {string} Type of promo to show
+	 */
 	static whichPromoModalShouldWeDisplay() {
 		if (this._isTimeForAPromo(INSIGHTS)) return INSIGHTS;
 
@@ -57,6 +63,12 @@ class PromoModals {
 		return (lastSeenTime !== 0);
 	}
 
+	/**
+	 * Check Conf values to determine if the enough time has
+	 * passed for `type` modal to be displayed
+	 * @param  {string} type 	The type of modal
+	 * @return {Boolean}
+	 */
 	static _isTimeForAPromo(type) {
 		if (conf.notify_promotions === false) { return false; }
 
@@ -79,6 +91,10 @@ class PromoModals {
 		);
 	}
 
+	/**
+	 * Store ${type}_promo_modal_last_seen value to Conf
+	 * @param  {string} type The type of modal
+	 */
 	static _recordPromoSighting(type) {
 		conf[`${type}_${PROMO_MODAL_LAST_SEEN}`] = Date.now();
 	}

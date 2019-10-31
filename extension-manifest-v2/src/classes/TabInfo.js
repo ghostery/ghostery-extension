@@ -2,8 +2,9 @@
  * TabInfo Class
  *
  * this._tabInfo[tab_id]: {
- *		hash: 			{string} 	location.hash
- *		host: 			{string} 	everything from the start until the first "/"
+ *		domain: 		{string}	the general domain name plus suffix (no sub-domains)
+ *		hash: 			{string} 	hash values appended to the url
+ *		host: 			{string} 	the domain name plus suffix and sub-domains
  *		incognito: 		{boolean} 	enabled/disabled
  *		needsReload: 	{Object}	indicates that changes were made in Ghostery (pause, block, unblock) and the tab should be reloaded
  *		pageTiming		{Object}	window.performance data
@@ -11,7 +12,7 @@
  *		path: 			{string} 	everything after the first "/"
  *		prefetched: 	{boolean}	indicates that the tab was prefetched and not part of the main window
  *		purplebox: 		{boolean}	indicates that the purplebox.js script has been loaded on this tab
- *		protocol: 		{string} 	"http"
+ *		protocol: 		{string} 	request protocol
  *		smartBlock: 	{Object}	smart blocking stats for this tab
  * 		url: 			{string} 	full url
  * }
@@ -174,6 +175,7 @@ class TabInfo {
 		this._tabInfo[tab_id].url = tab_url;
 		this._tabInfo[tab_id].protocol = parsed.scheme;
 		this._tabInfo[tab_id].host = parsed.hostname;
+		this._tabInfo[tab_id].domain = parsed.generalDomain;
 		this._tabInfo[tab_id].path = parsed.pathname;
 		this._tabInfo[tab_id].hash = parsed.hash;
 		this._tabInfo[tab_id].partialScan = false;

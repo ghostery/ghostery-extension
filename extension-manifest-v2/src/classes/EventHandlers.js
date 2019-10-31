@@ -386,7 +386,7 @@ class EventHandlers {
 
 		// TODO fuse this into a single call to improve performance
 		const page_url = tabInfo.getTabInfo(tab_id, 'url');
-		const page_host = tabInfo.getTabInfo(tab_id, 'host');
+		const page_domain = tabInfo.getTabInfo(tab_id, 'domain');
 		const bug_id = (page_url ? isBug(details.url, page_url) : isBug(details.url));
 
 		// allow if not a tracker
@@ -401,7 +401,7 @@ class EventHandlers {
 
 		/* ** SMART BLOCKING - Breakage ** */
 		// allow first party trackers
-		if (this.policySmartBlock.isFirstPartyRequest(tab_id, page_host, processed.hostname)) {
+		if (this.policySmartBlock.isFirstPartyRequest(tab_id, page_domain, processed.generalDomain)) {
 			return { cancel: false };
 		}
 
