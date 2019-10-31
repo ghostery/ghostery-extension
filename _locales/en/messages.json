@@ -2162,7 +2162,7 @@
 		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
 	},
 	"upgrade_cta_TEXT": {
-		"message": "Unlock historical tracker insights, priority support access, and new color themes by upgrading to Ghostery Plus for only $2 per month.",
+		"message": "Unlock historical tracker insights, priority support access, and new color themes by upgrading to Ghostery Plus for only &#36;2 per month.",
 		"description": "Body text in a non-responsive modal. Character limit (including spaces and punctuation): 135."
 	},
 	"upgrade_your_ghostery_experience": {
