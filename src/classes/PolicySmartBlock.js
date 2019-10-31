@@ -142,41 +142,16 @@ class PolicySmartBlock {
 	}
 
 	/**
-	 * Check if request host matches page host
-	 * @TODO: this check will still fail when pageHost is "foo.bar.domain.com"
-	 * and requestHost is "some.other.subdomain.domain.com"
+	 * Check if request domain matches page domain
 	 * @param  {number} tabId			tab id
-	 * @param  {string} pageHost		host of the page url
-	 * @param  {string} requestHost		host of the request url
+	 * @param  {string} pageDomain		domain of the page
+	 * @param  {string} requestDomain	domain of the request
 	 * @return {boolean}
 	 */
-	isFirstPartyRequest(tabId, inputPageHost = '', inputRequestHost = '') {
-		let pageHost = inputPageHost;
-		let requestHost = inputRequestHost;
-
+	isFirstPartyRequest(tabId, pageDomain = '', requestDomain = '') {
 		if (!this.shouldCheck(tabId)) { return false; }
 
-		// Strip out www. to fix the most common sub-domain issue.  See ToDo in function comment.
-		if (pageHost.startsWith('www.')) {
-			pageHost = pageHost.slice(4);
-		}
-		if (requestHost.startsWith('www.')) {
-			requestHost = requestHost.slice(4);
-		}
-
-		const min = Math.min(requestHost.length, pageHost.length);
-		let matches = true;
-		let i = 0;
-		while (i < min && matches) {
-			matches = requestHost.charAt(requestHost.length - i + 1) === pageHost.charAt(pageHost.length - i + 1);
-			i++;
-		}
-
-		if (matches) {
-			// tabInfo.setTabSmartBlockInfo(tabId, 'firstParty');
-		}
-
-		return matches;
+		return pageDomain === requestDomain;
 	}
 
 	/**
