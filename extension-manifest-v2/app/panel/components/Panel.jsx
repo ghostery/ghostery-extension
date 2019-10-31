@@ -21,6 +21,10 @@ import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import { setTheme } from '../utils/utils';
 import history from '../utils/history';
+import globals from '../../../src/classes/Globals';
+
+const DOMAIN = globals.DEBUG ? 'ghosterystage' : 'ghostery';
+
 /**
  * @class Implement base view with functionality common to all views.
  * @memberof PanelClasses
@@ -235,6 +239,10 @@ class Panel extends React.Component {
 		sendMessage('ping', 'promo_modals_select_basic_panel');
 	};
 
+	/**
+	 * @private
+	 * Handle clicks on 'Select Plus' from the Plus Promo Modal (Choose Your Plan)
+	 */
 	_handlePromoSelectPlusClick = () => {
 		this.props.actions.togglePromoModal();
 
@@ -243,16 +251,37 @@ class Panel extends React.Component {
 		sendMessage('promoModals.sawPlusPromo', {});
 
 		sendMessage('ping', 'promo_modals_select_plus_panel');
+
+		const url = `https://checkout.${DOMAIN}.com/plus?utm_source=gbe&utm_campaign=in_app`;
+		sendMessage('openNewTab', {
+			url,
+			become_active: true,
+		});
 	};
 
+	/**
+	 * @private
+	 * Handle click action when user selects Subscribe button in
+	 * Plus Upgrade or Insights modal
+	 * @param  {string} modal Modal type (insights or plus)
+	 */
 	_handlePromoSubscribeClick = (modal) => {
 		this.props.actions.togglePromoModal();
 
+		let url = `https://checkout.${DOMAIN}.com/`;
+
 		if (modal === 'insights') {
 			sendMessage('ping', 'promo_modals_insights_upgrade_cta');
+			url += 'insights';
 		} else if (modal === 'plus_upgrade') {
 			sendMessage('ping', 'promo_modals_plus_upgrade_cta');
+			url += 'plus';
 		}
+
+		sendMessage('openNewTab', {
+			url,
+			become_active: true,
+		});
 	};
 
 	_handlePromoXClick = (modal) => {

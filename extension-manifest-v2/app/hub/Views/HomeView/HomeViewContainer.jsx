@@ -17,6 +17,9 @@ import QueryString from 'query-string';
 import HomeView from './HomeView';
 import { PlusPromoModal } from '../../../shared-components';
 import { sendMessage } from '../../utils';
+import globals from '../../../../src/classes/Globals';
+
+const DOMAIN = globals.DEBUG ? 'ghosterystage' : 'ghostery';
 
 /**
  * @class Implement the Home View for the Ghostery Hub
@@ -73,7 +76,7 @@ class HomeViewContainer extends Component {
 
 	/**
 	 * @private
-	 * Function to handle clicks on Select Plus in the Plus Promo Modal
+	 * Function to handle clicks on 'Select Plus' in the Plus Promo Modal (Choose Your Plan)
 	 */
 	_handlePromoSelectPlusClick = () => {
 		// GH-1777
@@ -83,6 +86,8 @@ class HomeViewContainer extends Component {
 		sendMessage('SET_PLUS_PROMO_MODAL_SEEN', {});
 
 		sendMessage('ping', 'promo_modals_select_plus_hub');
+
+		window.open(`https://checkout.${DOMAIN}.com/plus?utm_source=gbe&utm_campaign=intro_hub`, '_blank');
 	}
 
 	_render() {

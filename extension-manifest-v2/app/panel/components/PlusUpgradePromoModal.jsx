@@ -13,13 +13,10 @@
 
 import React from 'react';
 import ClassNames from 'classnames';
-import globals from '../../../src/classes/Globals';
 import Modal from '../../shared-components/Modal';
 import ModalExitButton from './BuildingBlocks/ModalExitButton';
-import PanelToTabLink from './BuildingBlocks/PanelToTabLink';
 
 const PLUS_UPGRADE = 'plus_upgrade';
-const DOMAIN = globals.DEBUG ? 'ghosterystage' : 'ghostery';
 
 /**
  * @class Implements the Upgrade variant of the Plus Promo Modal
@@ -59,9 +56,9 @@ class PlusUpgradePromoModal extends React.Component {
 						{t('upgrade_cta_TEXT')}
 					</div>
 					<div className="PlusPromoModal__button-container">
-						<PanelToTabLink onClick={this.handleSubscribeClick} className="PlusPromoModal__button upgrade" href={`http://checkout.${DOMAIN}.com/plus/`}>
+						<span onClick={this.handleSubscribeClick} className="PlusPromoModal__button upgrade">
 							<span className="side-padded button-text">{t('upgrade_to_plus')}</span>
-						</PanelToTabLink>
+						</span>
 					</div>
 					<div className="PlusPromoModal__text-link-container">
 						{

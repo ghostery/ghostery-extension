@@ -16,8 +16,8 @@ import globals from './Globals';
 import panelData from './PanelData';
 
 const DAYS_BETWEEN_PROMOS = {
-	plus: globals.DEBUG ? 0.0005 : 30,
-	insights: globals.DEBUG ? 0.0005 : 30
+	plus: globals.DEBUG ? 0.0005 : 30, // 40 seconds on staging
+	insights: globals.DEBUG ? 0.0005 : 30 // 40 seconds on staging
 };
 const WEEKLY_INSIGHTS_TARGET = globals.DEBUG ? 1 : 3;
 const DAILY_INSIGHTS_TARGET = globals.DEBUG ? 7 : 3;
@@ -83,6 +83,11 @@ class PromoModals {
 		conf[`${type}_${PROMO_MODAL_LAST_SEEN}`] = Date.now();
 	}
 
+	/**
+	 * Check the panel engagement rate. If the user has engaged the panel
+	 * DAILY_INSIGHTS_TARGET times per day over WEEKLY_INSIGHTS_TARGET weeks, return true.
+	 * @return {Boolean}
+	 */
 	static _hasEngagedFrequently() {
 		const { engaged_daily_count } = conf.metrics || [];
 

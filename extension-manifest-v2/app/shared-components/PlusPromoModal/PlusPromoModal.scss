@@ -231,6 +231,7 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 }
 
 .PlusPromoModal__button {
+	cursor: pointer;
 	display: flex;
 	justify-content: center;
 	align-items: center;

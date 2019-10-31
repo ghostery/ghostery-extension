@@ -146,7 +146,7 @@ const HomeView = (props) => {
 					<div className="HomeView__featureIcon columns shrink feature-plus show-for-large" />
 					<div className="columns flex-container align-center-middle">
 						<NavLink to="/plus" className="HomeView__featureButton button primary">
-							{isPlus ? t('Aready_Subscribed') : t('get_ghostery_plus')}
+							{isPlus ? t('already_subscribed') : t('get_ghostery_plus')}
 						</NavLink>
 					</div>
 				</div>
