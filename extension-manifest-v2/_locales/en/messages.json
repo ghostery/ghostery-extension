@@ -2002,8 +2002,8 @@
 	"unknown_description": {
 		"message": "Unknown trackers scrubbed by Anti-Tracking"
 	},
-	"thanks_for_downloading_ghostery": {
-		"message": "Thanks for downloading Ghostery!"
+	"ghostery_is_ready": {
+		"message": "Ghostery is Ready!"
 	},
 	"choose_your_privacy_plan": {
 		"message": "Choose your privacy plan"
@@ -2012,7 +2012,7 @@
 		"message": "Choose your Ghostery privacy plan"
 	},
 	"ghostery_basic": {
-		"message": "Ghostery Basic"
+		"message": "Basic"
 	},
 	"ghostery_plus": {
 		"message": "Ghostery Plus"
@@ -2027,20 +2027,20 @@
 	"per_month": {
 		"message": "per month"
 	},
-	"protection_for_this_browser": {
-		"message": "Protection for this browser",
+	"faster_cleaner_browsing": {
+		"message": "Faster, Cleaner Browsing",
 		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
 	},
 	"blocks_ads": {
-		"message": "Blocks Ads",
+		"message": "Ad-Blocking",
 		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
 	},
 	"blocks_trackers": {
-		"message": "Blocks Trackers",
+		"message": "Tracker Blocking",
 		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
 	},
-	"fast_browsing": {
-		"message": "Fast Browsing",
+	"data_protection": {
+		"message": "Data Protection",
 		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
 	},
 	"select_basic": {

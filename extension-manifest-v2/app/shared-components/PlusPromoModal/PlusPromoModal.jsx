@@ -69,7 +69,7 @@ const PlusPromoModal = (props) => {
 				<div className="PlusPromoModal__buttons-background initial" />
 				{isInHub && (
 					<div className="PlusPromoModal__thanks-for-download">
-						{t('thanks_for_downloading_ghostery')}
+						{t('ghostery_is_ready')}
 					</div>
 				)}
 				<div className={chooseYourPlanClassNames}>
@@ -86,10 +86,10 @@ const PlusPromoModal = (props) => {
 								<span className="PlusPromoModal__per-month">{t('per_month')}</span>
 							</div>
 							<div className="PlusPromoModal__option-description">
-								<div className="PlusPromoModal__option-description-item no-capitalize">{t('protection_for_this_browser')}</div>
+								<div className="PlusPromoModal__option-description-item no-capitalize">{t('faster_cleaner_browsing')}</div>
 								<div className="PlusPromoModal__option-description-item">{t('blocks_ads')}</div>
 								<div className="PlusPromoModal__option-description-item">{t('blocks_trackers')}</div>
-								<div className="PlusPromoModal__option-description-item">{t('fast_browsing')}</div>
+								<div className="PlusPromoModal__option-description-item">{t('data_protection')}</div>
 							</div>
 						</div>
 						<div className="PlusPromoModal__button basic" onClick={handleSelectBasicClick}>
