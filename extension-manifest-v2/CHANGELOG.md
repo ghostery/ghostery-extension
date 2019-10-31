@@ -2,8 +2,8 @@
 
 + New upgrade modals for Ghostery Plus & Ghostery Insights (#458,#460,#463,#464,#467,#468)
 + Improves context-detection of WebRequests, particularly for pages using service workers (#461)
-+ Fixes some cases where cookies were blocked for first parties because anti-tracking thought they were 3rd. (#461)
-+ Updates Ad Blocker version. We now support HTML filters on Firefox. (#461)
++ Fixes some cases where cookies were blocked for first parties because anti-tracking thought they were third (#461)
++ Updates Ad Blocker version. We now support HTML filters on Firefox (#461)
 + Human Web cleanup and refactor (#461)
 + Updated telemetry (#466)
 + Updated translations
