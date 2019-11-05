@@ -22,15 +22,8 @@
 			}
 		}
 	},
-	"all": {
-		"description": "Default setting in the 'filter by type' dropdown for the tag browser. Doesn't filter anything out. Should read as 'Show all'.",
-		"message": "mind"
-	},
 	"banner_check_your_email_title": {
 		"message": "Kérjük, nemsokára ellenőrizze a postafiókját a jelszava visszaállítására szolgáló hivatkozásért."
-	},
-	"banner_no_such_account_message": {
-		"message": "Úgy tűnik, rendszerünkben nem található ez az email és jelszó kombináció. Próbálja meg újra."
 	},
 	"banner_email_not_in_system_message": {
 		"message": "Sajnáljuk, de a megadott e-mail-cím nem található a rendszerünkben."
@@ -40,10 +33,6 @@
 	},
 	"blacklist_error_whitelist_url": {
 		"message": "Ezt az oldalt eltávolítottuk a Megbízható oldalak listájáról és hozzáadtuk a Korlátozott oldalak listájához"
-	},
-	"blocked": {
-		"description": "Select this to show only blocked (checked) tags in the tag browser. Should read as 'Show blocked'.",
-		"message": "blokkolva"
 	},
 	"blocked_redirect_action_always_title": {
 		"description": "Title for the 'Allow always and reload' button on the blocked redirect page.",
@@ -375,31 +364,6 @@
 			}
 		}
 	},
-	"copyright": {
-		"description": "Copyright message, shown in page footers.",
-		"message": "$C$ $YEAR$ $GHOSTERY$, $COMPANY_ADDRESS$ tagja",
-		"placeholders": {
-			"c": {
-				"content": "&copy;"
-			},
-			"company_address": {
-				"content": "$1",
-				"example": "GHOSTERY, Inc., Such-and-such Street, Such-and-such Floor, New York, NY, Zip Code"
-			},
-			"ghostery": {
-				"content": "<a href='https://www.ghostery.com' target='_blank'>Ghostery</a>"
-			},
-			"year": {
-				"content": "2015"
-			}
-		}
-	},
-	"email_confirm_field_label": {
-		"message": "Emailcím megerősítése:"
-	},
-	"email_field_label": {
-		"message": "Emailcím:"
-	},
 	"error_email_forgot": {
 		"message": "Hmm, nem ez az emailcím nem található. Megpróbál egy másikat?"
 	},
@@ -408,12 +372,6 @@
 	},
 	"forgot_password_message": {
 		"message": "Elfelejtette a jelszavát? Semmi gond, bárkivel előfordulhat. Egy emailt fogunk Önnek küldeni, amelybe a jelszó visszaállítására vonatkozó útmutatást talál majd."
-	},
-	"invalid_email_confirmation": {
-		"message": "Az emailcímek nem egyeznek."
-	},
-	"invalid_email_create": {
-		"message": "Kérjük, érvényes emailcímet adjon meg."
 	},
 	"invalid_email_forgot": {
 		"message": "Sajnáljuk, de valós emailcímet kell megadnia."
@@ -532,9 +490,6 @@
 		"description": "as in '5 (trackers) WHITELISTED'",
 		"message": "Engedélyezett"
 	},
-	"panel_create_account": {
-		"message": "Fiók létrehozása"
-	},
 	"panel_email_verification_sent": {
 		"message": "$BOLD_HTML_STARTS$ Sikerült! $BOLD_HTML_END$ Egy fiókhitelesítő emailt küldtünk a(z) $EMAIL$ emailcímre",
 		"placeholders": {
@@ -568,11 +523,35 @@
 	"panel_help_questions_header": {
 		"message": "Kérdések és hozzászólások"
 	},
-	"panel_help_support": {
-		"message": "Támogatás"
-	},
 	"panel_help_setup": {
 		"message": "A Ghostery beállítása"
+	},
+	"panel_insights_audit_tags": {
+		"message": "Marketing címkék szerkesztése az oldalon",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 30."
+	},
+	"panel_insights_promotion_explore_trends": {
+		"message": "Ismerkedés a globális digitális trendekkel",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
+	},
+	"panel_insights_promotion_call_to_action": {
+		"message": "Próbálja ki ingyenesen"
+	},
+	"panel_insights_promotion_header": {
+		"message": "A Ghostery Insights kipróbálása",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 35."
+	},
+	"panel_insights_promotion_description": {
+		"message": "Gyorsítsa fel és tegye átláthatóvá a digitális felhasználói élményt professzionális címkeelemző eszközünkkel.",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 90."
+	},
+	"panel_insights_promotion_trace_poor_performance": {
+		"message": "Elégtelen teljesítmény forrásainak azonosítása",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 33."
+	},
+	"panel_insights_promotion_watch_pings": {
+		"message": "Értesítések valós időben való megtekintése",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
 	},
 	"panel_about_panel_header": {
 		"message": "Néhány szó a Ghostery böngészőkiegészítőről"
@@ -622,15 +601,6 @@
 	},
 	"panel_menu_about": {
 		"message": "Rólunk"
-	},
-	"panel_menu_ghostery_subscriber": {
-		"message": "Ghostery Plus"
-	},
-	"panel_menu_signin": {
-		"message": "Bejelentkezés"
-	},
-	"panel_menu_signout": {
-		"message": "Kijelentkezés"
 	},
 	"global_settings_saved": {
 		"message": "Globális beállítások mentve"
@@ -691,9 +661,6 @@
 	"panel_signin_success_title": {
 		"message": "Gratulálunk! Az Ön Ghostery fiókja készen áll a használatra."
 	},
-	"panel_title_create_account": {
-		"message": "Fiók létrehozása"
-	},
 	"panel_tracker_found_sources_title": {
 		"message": "Törölt tracker URL-ek:"
 	},
@@ -739,14 +706,8 @@
 	"panel_detail_menu_rewards_title": {
 		"message": "Rewards"
 	},
-	"panel_detail_menu_stats_title": {
-		"message": "Naplózott statisztikák"
-	},
 	"panel_detail_menu_premium_title": {
 		"message": "Prémium"
-	},
-	"panel_detail_learn_more": {
-		"message": "Tudjon meg többet"
 	},
 	"panel_detail_history_title": {
 		"message": "Előzmények"
@@ -802,26 +763,14 @@
 	"notification_library_update_link": {
 		"message": "Nézze meg, mik az újdonságok"
 	},
-	"panel_header_sign_in": {
-		"message": "Bejelentkezés"
-	},
 	"panel_header_verify_account": {
 		"message": "Fiók hitelesítése"
-	},
-	"panel_header_simple_view": {
-		"message": "Egyszerű nézet"
-	},
-	"panel_header_detailed_view": {
-		"message": "Részletes nézet"
 	},
 	"password_characters_requirements": {
 		"message": "Csak ezek a különleges karakterek engedélyezettek: !@#$%^&*=+()<>{}[];:,./?"
 	},
 	"password_field_label": {
 		"message": "Jelszó"
-	},
-	"create_password_field_label": {
-		"message": "Jelszó:"
 	},
 	"password_requirements": {
 		"message": "8–50 karaktert használjon."
@@ -957,6 +906,9 @@
 	},
 	"settings_new_features": {
 		"message": "Új funkció bocsát ki"
+	},
+	"settings_new_promotions": {
+		"message": "Termékpromóciókkal rendelkezik"
 	},
 	"settings_new_trackers": {
 		"message": "Új trackereket az hozzá a könyvtárához"
@@ -1126,57 +1078,6 @@
 	"blocking_category_tracker_found": {
 		"message": "Találat"
 	},
-	"drawer_title_enable_anti_tracking": {
-		"message": "Fejlesztett Anti-Tracking"
-	},
-	"drawer_tooltip_enable_anti_tracking": {
-		"message": "Egyes integrált trackerek rögzítik a felhasználói tevékenységeket a legtöbb weboldalon és az Anti-Tracking funkció még azelőtt eltávolít minden olyan adatot, amelyet arra lehetne használni, hogy Önt azonosítsák, mielőtt ezek a trackerek begyűjtenék az Ön adatait. Az alábbi ábra az mutatja meg, hogy hány adatpont került eltávolításra az oldalon."
-	},
-	"drawer_label_enable_anti_tracking": {
-		"message": "Trackerek névtelenítve"
-	},
-	"drawer_desc_enable_anti_tracking": {
-		"message": "Személyes adatpontok eltávolítva."
-	},
-	"drawer_status_enable_anti_tracking": {
-		"message": "Az Anti-Tracking"
-	},
-	"drawer_title_enable_ad_block": {
-		"message": "Fejlesztett hirdetésblokkolás"
-	},
-	"drawer_tooltip_enable_ad_block": {
-		"message": "Az összes hirdetés megjelenítése vagy blokkolása a weboldalakon."
-	},
-	"drawer_label_enable_ad_block": {
-		"message": "Hirdetések blokkolva"
-	},
-	"drawer_desc_enable_ad_block": {
-		"message": "Blokkolt hirdetési helyek."
-	},
-	"drawer_status_enable_ad_block": {
-		"message": "A Hirdetésblokkolás"
-	},
-	"drawer_title_enable_smart_block": {
-		"message": "Okos blokkolás"
-	},
-	"drawer_tooltip_enable_smart_block": {
-		"message": "Automatikusan blokkolja vagy feloldja a trackereket az oldal teljesítményének optimalizálásához."
-	},
-	"drawer_label_enable_smart_block": {
-		"message": "Finomhangolt trackerek"
-	},
-	"drawer_desc_enable_smart_block": {
-		"message": "Olyan trackerek, amelyek ideiglenesen blokkoltak vagy feloldottak."
-	},
-	"drawer_status_enable_smart_block": {
-		"message": "Az Okos blokkolás"
-	},
-	"drawer_on": {
-		"message": "Be"
-	},
-	"drawer_off": {
-		"message": "Ki"
-	},
 	"blocking_unblock_all": {
 		"message": "Összes feloldása"
 	},
@@ -1246,34 +1147,16 @@
 	"alert_site_restricted_off": {
 		"message": "Az oldal nem szerepel többé a feketelistán."
 	},
-	"tooltip_anti_track": {
-		"message": "Fejlesztett Anti-Tracking"
-	},
-	"tooltip_anti_track_body": {
-		"message": "Névtelenítse a feloldott és ismeretlen trackereket a fokozottabb böngészési védelem érdekében."
-	},
-	"tooltip_anti_track_body_on": {
+	"tooltip_anti_track_on": {
 		"message": "A személyes adatpontok névtelenítve."
 	},
 	"tooltip_body_in_cliqz": {
 		"message": "Ez a funkció alapértelmezetten már aktív a Cliqz-en belül."
 	},
-	"tooltip_ad_block": {
-		"message": "Fejlesztett hirdetésblokkolás"
-	},
-	"tooltip_ad_block_body": {
-		"message": "Hirdetések blokkolása azokon az oldalakon, amelyeket meglátogat."
-	},
-	"tooltip_ad_block_body_on": {
+	"tooltip_ad_block_on": {
 		"message": "A hirdetések ki lesznek kiszűrve."
 	},
-	"tooltip_smart_block": {
-		"message": "Okos blokkolás"
-	},
-	"tooltip_smart_block_body": {
-		"message": "Automatikusan blokkolja vagy feloldja a trackereket az oldal teljesítményének optimalizálásához."
-	},
-	"tooltip_smart_block_body_on": {
+	"tooltip_smart_block_on": {
 		"message": "A tracker-szűrés az oldal teljesítményének optimalizálására van beállítva."
 	},
 	"tooltip_trust": {
@@ -1293,12 +1176,6 @@
 	},
 	"tooltip_resume": {
 		"message": "Ghostery folytatása"
-	},
-	"tooltip_expert": {
-		"message": "Részletes nézet"
-	},
-	"tooltip_simple": {
-		"message": "Egyszerű nézet"
 	},
 	"license_module": {
 		"message": "Modul"
@@ -1350,29 +1227,14 @@
 	"hub_side_navigation_home": {
 		"message": "Kezdőlap"
 	},
-	"hub_side_navigation_setup": {
-		"message": "Telepítés személyre szabása"
-	},
 	"hub_side_navigation_tutorial": {
 		"message": "Oktatás megtekintése"
-	},
-	"hub_side_navigation_supporter": {
-		"message": "Ghostery Plus beszerzése"
 	},
 	"hub_side_navigation_rewards": {
 		"message": "A Ghostery Rewards kipróbálása"
 	},
 	"hub_side_navigation_products": {
 		"message": "További Ghostery termékek megtekintése"
-	},
-	"hub_side_navigation_create_account": {
-		"message": "Fiók létrehozása"
-	},
-	"hub_side_navigation_log_in": {
-		"message": "Bejelentkezés"
-	},
-	"hub_side_navigation_log_out": {
-		"message": "Kijelentkezés"
 	},
 	"hub_home_page_title": {
 		"message": "Ghostery Központ - Kezdőlap"
@@ -1389,11 +1251,17 @@
 	"hub_home_header_checkbox_label": {
 		"message": "További névtelen analitikai adatok megosztása a Ghostery teljesítményének fejlesztése érdekében."
 	},
+	"hub_home_header_info_opted_in_rewards": {
+		"message": "Az új felhasználók részt vesznek a Ghostery Rewards programban, a Human Web programban azonban nem. Ezek a beállítások az egyéni konfigurációban vagy a bővítményben módosíthatók. "
+	},
 	"hub_home_header_info_opted_out": {
 		"message": "Az új felhasználók esetében a Ghostery Rewards és a Human Web funkciók alapértelmezett módon nincsenek aktiválva. Az egyéni telepítésben vagy a bővítményben aktiválhatja ezeket az ajánlott funkciókat."
 	},
 	"hub_home_header_info": {
 		"message": "Az új felhasználók feliratkoznak a Human Web és Ghostery Rewards szolgáltatásokra. Ezeket a beállításokat egyedi telepítés során vagy a kiegészítőben változtathatja meg."
+	},
+	"hub_home_header_info_cliqz": {
+		"message": "Az új felhasználók részt a Human Web programban. Ez a beállítás az egyéni konfigurációban vagy a bővítményben módosítható. "
 	},
 	"hub_home_header_info_link": {
 		"message": "Tudjon meg többet!"
@@ -1401,23 +1269,14 @@
 	"hub_home_subheader_optimize": {
 		"message": "Optimalizálja a Ghostery felhasználói élményét"
 	},
-	"hub_home_subheader_create_account": {
-		"message": "Fiók létrehozása"
-	},
 	"hub_home_feature_tutorial_title": {
 		"message": "Oktatás megtekintése"
 	},
 	"hub_home_feature_tutorial_text": {
 		"message": "A Ghostery főbb funkcióinak áttekintése."
 	},
-	"hub_home_feature_tutorial_button": {
-		"message": "Indítás"
-	},
 	"hub_home_feature_tutorial_button_alt": {
 		"message": "Oktatás befejezve"
-	},
-	"hub_home_feature_setup_title": {
-		"message": "Telepítés személyre szabása"
 	},
 	"hub_home_feature_setup_text": {
 		"message": "Beállításainak és blokkolási szempontjainak szerkesztése."
@@ -1430,12 +1289,6 @@
 	},
 	"hub_home_feature_supporter_text": {
 		"message": "Bővítsen Ghostery Plus verzióra és oldjon fel különleges funkciókat!"
-	},
-	"hub_home_feature_supporter_button": {
-		"message": "Ghostery Plus beszerzése"
-	},
-	"hub_home_feature_supporter_button_alt": {
-		"message": "Már feliratkozott"
 	},
 	"hub_setup_page_title": {
 		"message": "Ghostery Központ - Beállítás"
@@ -1471,15 +1324,6 @@
 	},
 	"hub_setup_exit_flow": {
 		"message": "Kilépés az egyéni telepítőből"
-	},
-	"hub_setup_nav_previous": {
-		"message": "Előző"
-	},
-	"hub_setup_nav_next": {
-		"message": "Következő"
-	},
-	"hub_setup_nav_done": {
-		"message": "Kész"
 	},
 	"hub_setup_enter_modal_text": {
 		"message": "Az egyéni telepítőbe történő belépéssel felülírja az eddigi Ghostery beállításokat. Kívánja folytatni?"
@@ -1517,23 +1361,19 @@
 	"hub_setup_blocking_description_custom": {
 		"message": "Válassza ki, mely trackerek legyenek blokkolva"
 	},
-	"hub_setup_antisuite_name_antitracking": {
-		"message": "Fejlesztett Anti-Tracking"
-	},
 	"hub_setup_antisuite_description_antitracking": {
 		"message": "Névtelenítse a feloldott és ismeretlen trackereket a fokozottabb böngészési védelem érdekében."
 	},
-	"hub_setup_adblock_name_adblocking": {
-		"message": "Fejlesztett hirdetésblokkolás"
-	},
-	"hub_setup_adblock_description_adblocking": {
-		"message": "Hirdetések blokkolása azokon az oldalakon, amelyeket meglátogat."
-	},
-	"hub_setup_smartblocking_name_smartblocking": {
-		"message": "Okos blokkolás"
-	},
-	"hub_setup_smartblocking_description_smartblocking": {
-		"message": "Automatikusan blokkolja vagy feloldja a trackereket az oldal teljesítményének optimalizálásához."
+	"hub_setup_feature_already_active": {
+		"message": "Ez a funkció alapértelmezés szerint már aktív a Cliqzben. $LINK_LM_START$További tájékoztatás$LINK_LM_END$",
+		"placeholders": {
+			"link_lm_start": {
+				"content": "<a href=\"https://www.ghostery.com/faqs/what-are-the-new-ghostery-8-features/\" target=\"_blank\" rel=\"noopener noreferrer\">"
+			},
+			"link_lm_end": {
+				"content": "</a>"
+			}
+		}
 	},
 	"hub_setup_ghosteryrewards_name_rewards": {
 		"message": "Rewards"
@@ -1567,17 +1407,8 @@
 	"hub_setup_feature_tutorial_description": {
 		"message": "A Ghostery főbb funkcióinak áttekintése."
 	},
-	"hub_setup_feature_tutorial_button": {
-		"message": "Indítás"
-	},
-	"hub_setup_feature_supporter_title": {
-		"message": "Ghostery Plus beszerzése"
-	},
 	"hub_setup_feature_supporter_description": {
 		"message": "Támogassa a Ghosteryt és oldjon fel különleges extra funkciókat!"
-	},
-	"hub_setup_feature_supporter_button": {
-		"message": "Támogatás"
 	},
 	"hub_setup_feature_products_title": {
 		"message": "További Ghostery termékek megtekintése"
@@ -1611,21 +1442,6 @@
 	},
 	"hub_tutorial_exit_flow": {
 		"message": "Kilépés az oktatásból"
-	},
-	"hub_tutorial_nav_previous": {
-		"message": "Előző"
-	},
-	"hub_tutorial_nav_next": {
-		"message": "Következő"
-	},
-	"hub_tutorial_nav_done": {
-		"message": "Kész"
-	},
-	"hub_tutorial_simple_view": {
-		"message": "Egyszerű nézet"
-	},
-	"hub_tutorial_detailed_view": {
-		"message": "Részletes nézet"
 	},
 	"hub_tutorial_detailed_expanded_view": {
 		"message": "Részletes, kibontott nézet"
@@ -1678,23 +1494,8 @@
 	"hub_tutorial_antisuite_title": {
 		"message": "Szerezzen extra védelmet és automatikus felügyeletet a fejlesztett adatvédelmi funkcióinkkal:"
 	},
-	"hub_tutorial_antisuite_antitracking_title": {
-		"message": "Fejlesztett Anti-Tracking"
-	},
 	"hub_tutorial_antisuite_antitracking_description": {
 		"message": "Adatpontok eltávolítása, amelyeket a weboldalak használnak, hogy azonosítsák önt."
-	},
-	"hub_tutorial_antisuite_adblocking_title": {
-		"message": "Fejlesztett hirdetésblokkolás"
-	},
-	"hub_tutorial_antisuite_adblocking_description": {
-		"message": "Hirdetések blokkolása azokon az oldalakon, amelyeket meglátogat."
-	},
-	"hub_tutorial_antisuite_smartblocking_title": {
-		"message": "Okos blokkolás"
-	},
-	"hub_tutorial_antisuite_smartblocking_description": {
-		"message": "Automatikusan blokkolja vagy feloldja a trackereket az oldal teljesítményének optimalizálásához."
 	},
 	"hub_products_page_title" : {
 		"message": "Ghostery Központ - Próbáljon ki más Ghostery termékeket"
@@ -1732,9 +1533,6 @@
 	"hub_rewards_header_description": {
 		"message": "Az új Rewards funkció hatékony és teljesen adatvédett, innovatív megoldást kínál arra, hogy online árengedményeket kapjon. Kapcsolja be és próbálja ki!"
 	},
-	"hub_rewards_header_learn_more": {
-		"message": "Tudjon meg többet"
-	},
 	"hub_rewards_experience_title": {
 		"message": "Okosabb vásárlási élmény"
 	},
@@ -1765,12 +1563,6 @@
 	"hub_supporter_header_description": {
 		"message": "Fejezze ki támogató szándékát és oldjon fel különleges extra funkciókat!"
 	},
-	"hub_supporter_button_text": {
-		"message": "Ghostery Plus beszerzése"
-	},
-	"hub_supporter_button_text_alt": {
-		"message": "Már feliratkozott"
-	},
 	"hub_supporter_price": {
 		"message": "$SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$ havonta",
 		"placeholders": {
@@ -1788,14 +1580,8 @@
 			}
 		}
 	},
-	"hub_supporter_perk_themes_title": {
-		"message": "Új sablonok"
-	},
 	"hub_supporter_perk_themes_description": {
 		"message": "Állítsa kedve szerint a Ghostery színeit - próbálja ki az Éjféli (Midnight) sablonunkat!"
-	},
-	"hub_supporter_perk_stats_title": {
-		"message": "Naplózott blokkolási statisztikák"
 	},
 	"hub_supporter_perk_stats_description": {
 		"message": "Tekintse meg a blokkolási statisztikákat és figyelje meg, hogyan vált be önnek a Ghostery"
@@ -1809,20 +1595,11 @@
 	"hub_supporter_manifesto": {
 		"message": "Arra törekszünk, hogy a legjobb adatvédelmi szolgáltatást nyújtsuk felhasználóinknak költségek nélkül. Annak ellenére, hogy adatvédelmi szolgáltatásunk ingyenes, ön dönthet úgy, hogy támogatja munkánkat egy alacsony összegű havi feliratkozással. Csatlakozzon ön is a küldetésünkhöz azzal, hogy kibővíti szolgáltatásunkat a Ghostery Plus verzióra - és egyúttal nagyszerű extra funkciókhoz férhet hozzá!"
 	},
-	"hub_supporter_feature_theme_title": {
-		"message": "Új sablonok"
-	},
 	"hub_supporter_feature_theme_description": {
 		"message": "Állítsa be egyénileg a Ghostery színeit egy új vizuális élményért! Népszerű kérés alapján bevezetve. Próbálja ki a különleges Éjféli sablonunkat, amelyet még sok fog követni."
 	},
-	"hub_supporter_feature_stats_title": {
-		"message": "Naplózott blokkolási statisztikák"
-	},
 	"hub_supporter_feature_stats_description": {
 		"message": "Naplózott blokkolási eredmények grafikonokkal és statisztikákkal trendek felfedéséhez és annak vizsgálatára, hogy milyen hatással volt a Ghostery az ön böngészésére."
-	},
-	"hub_supporter_feature_support_title": {
-		"message": "Kiemelt támogatás"
 	},
 	"hub_supporter_feature_support_description": {
 		"message": "Segítségre van szüksége? Hibás oldalt talált? Kapjon gyorsan válaszokat kérdéseire és megoldásokat a problémáira az Elsőbbségi támogató szolgáltatásunkkal, amely csak a Plus fiókkal történő bejelentkezés esetén érhető el."
@@ -1845,15 +1622,6 @@
 	"hub_login_header_title": {
 		"message": "Jelentkezzen be a fiókjába!"
 	},
-	"hub_login_label_email": {
-		"message": "Emailcím:"
-	},
-	"hub_login_label_password": {
-		"message": "Jelszó:"
-	},
-	"hub_login_label_email_invalid": {
-		"message": "Kérjük, érvényes emailcímet adjon meg."
-	},
 	"hub_login_label_password_invalid": {
 		"message": "8–50 karaktert használjon."
 	},
@@ -1863,38 +1631,17 @@
 	"hub_login_link_create_account": {
 		"message": "Regisztráljon!"
 	},
-	"hub_login_button_submit": {
-		"message": "Bejelentkezés"
-	},
 	"hub_login_toast_success": {
 		"message": "Sikeres bejelentkezés! Az Ön beállításai importálva."
 	},
-	"hub_login_toast_error": {
-		"message": "Úgy tűnik, rendszerünkben nem található ez az email és jelszó kombináció. Próbálja meg újra."
-	},
 	"hub_create_account_header_title": {
 		"message": "Szeretne létrehozni egy Ghostery-fiókot beállításai szinkronizálásához böngészői és eszközei között?"
-	},
-	"hub_create_account_label_email": {
-		"message": "Emailcím:"
-	},
-	"hub_create_account_label_email_confirm": {
-		"message": "Emailcím megerősítése:"
 	},
 	"hub_create_account_label_first_name": {
 		"message": "Keresztnév (opcionális):"
 	},
 	"hub_create_account_label_email_last_name": {
 		"message": "Vezetéknév (opcionális):"
-	},
-	"hub_create_account_label_password": {
-		"message": "Jelszó:"
-	},
-	"hub_create_account_label_email_invalid": {
-		"message": "Kérjük, érvényes emailcímet adjon meg."
-	},
-	"hub_create_account_label_email_confirm_invalid": {
-		"message": "Az emailcímek nem egyeznek."
 	},
 	"hub_create_account_label_password_invalid": {
 		"message": "Csak ezek a különleges karakterek engedélyezettek: !@#$%^&*=+()<>{}[];:,./?"
@@ -1910,9 +1657,6 @@
 	},
 	"hub_create_account_link_login": {
 		"message": "Jelentkezzen be itt!"
-	},
-	"hub_create_account_button_submit": {
-		"message": "Fiók létrehozása"
 	},
 	"hub_create_account_toast_success": {
 		"message": "Fiók sikeresen létrehozva"
@@ -2045,9 +1789,6 @@
 	"rewards_code_copied_toast_notification": {
 		"message": "Rewards kód másolva!"
 	},
-	"rewards_learn_more": {
-		"message": "Tudjon meg többet"
-	},
 	"offers_hub_copy_btn": {
 		"message": "Kód másolása"
 	},
@@ -2066,20 +1807,8 @@
 	"subscription_themes": {
 		"message": "Ghostery sablonok"
 	},
-	"subscription_info_title": {
-		"message": "Ghostery Plus"
-	},
 	"subscription_themes_title": {
 		"message": "Sablonok"
-	},
-	"subscription_priority_support_title": {
-		"message": "Kiemelt támogatás"
-	},
-	"subscription_priority_support": {
-		"message": "Kiemelt támogatás"
-	},
-	"subscription_history_stats": {
-		"message": "Naplózott statisztikák"
 	},
 	"subscribe_pitch": {
 		"message": "Annak ellenére, hogy a Ghostery ingyenes, ön dönthet úgy, hogy támogatja munkánkat egy alacsony,  havi &#36;2 összegű feliratkozással, és cserébe nagyszerű extra funkciókhoz férhet hozzá, mint például a színsablonok, elsőbbségi támogató szolgáltatás és még sok minden más. Csatlakozzon a küldetésünkhöz és iratkozzon fel!"
@@ -2090,8 +1819,14 @@
 	"subscribe_pitch_button_label": {
 		"message": "Szerezze be a Ghostery Plust!"
 	},
+	"subscribe_pitch_no_thanks": {
+		"message": "Köszönöm, nem. Talán később."
+	},
 	"subscribe_pitch_sign_here": {
 		"message": "Ön már feliratkozott? Jelentkezzen be itt"
+	},
+	"subscribe_pitch_sign_in": {
+		"message": "Már feliratkozott? Jelentkezzen be"
 	},
 	"subscription_midnight_theme": {
 		"message": "Éjféli sablon"
@@ -2110,9 +1845,6 @@
 	},
 	"subscription_themes_tooltip": {
 		"message": "Változtassa meg a Ghostery színsablonját!"
-	},
-	"subscription_tracker_stats": {
-		"message": "Naplózott statisztikák"
 	},
 	"subscription_charge_date" : {
 		"message": "Következő fizetési nap"
@@ -2157,9 +1889,6 @@
 	},
 	"panel_stats_menu_daily": {
 		"message": "Napi"
-	},
-	"panel_stats_header_title": {
-		"message": "Naplózott tracker statisztikák"
 	},
 	"panel_stats_header_title_monthly": {
 		"message": "Naplózott tracker statisztikák (havi átlag)"
@@ -2223,9 +1952,6 @@
 	"panel_stats_pitch_modal_sign_in": {
 		"message": "Jelentkezzen be itt"
 	},
-	"panel_stats_pitch_modal_subscribe": {
-		"message": "Szerezze be a Ghostery Plust!"
-	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "Összes naplózott statisztika törlése eddig az időpontig."
 	},
@@ -2246,12 +1972,6 @@
 	},
 	"ads": {
 		"message": "hirdetések"
-	},
-	"cliqz_feature_status_on": {
-		"message": "Be"
-	},
-	"cliqz_feature_status_off": {
-		"message": "Ki"
 	},
 	"create_account_form_legal_consent_checkbox_label": {
 		"message": "Elfogadom a $LINK_TERMS_START$Feltételeket$LINK_END$, a $LINK_LICENSE_START$Nyilvános licencmegállapodást$LINK_END$ és az  $LINK_PRIVACY_START$Adatvédelmi szabályzatban$LINK_END$ ismertetett adatkezelési gyakorlatot.",
@@ -2281,5 +2001,191 @@
 	},
 	"unknown_description": {
 		"message": "Ismeretlen követőket távolított el a követőblokkoló"
+	},
+	"ghostery_is_ready": {
+		"message": "A Ghostery készen áll!"
+	},
+	"choose_your_privacy_plan": {
+		"message": "Válasszon adatvédelmi csomagot"
+	},
+	"choose_your_ghostery_privacy_plan": {
+		"message": "Válasszon Ghostery adatvédelmi csomagot"
+	},
+	"ghostery_basic": {
+		"message": "Alapvető"
+	},
+	"ghostery_plus": {
+		"message": "Ghostery Plus"
+	},
+	"locale_appropriate_currency_icon": {
+		"message": "$$",
+		"description": "Use '$$' to mean '$'. '$' has a special meaning in the code and the first '$' tells the browser to ignore the special meaning of the second '$' and print it literally."
+	},
+	"plus_monthly_subscription_price_number": {
+		"message": "2"
+	},
+	"per_month": {
+		"message": "havonta"
+	},
+	"faster_cleaner_browsing": {
+		"message": "Gyorsabb, átláthatóbb böngészés",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"blocks_ads": {
+		"message": "Hirdetések blokkolása",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"blocks_trackers": {
+		"message": "Nyomkövetők blokkolása",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"data_protection": {
+		"message": "Adatvédelem",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"select_basic": {
+		"message": "Alapvető kiválasztása"
+	},
+	"select_plus": {
+		"message": "Plus kiválasztása"
+	},
+	"recommended": {
+		"message": "Javasolt"
+	},
+	"get_ghostery_plus": {
+		"message": "Ghostery Plus beszerzése"
+	},
+	"get_ghostery_plus_bang": {
+		"message": "Szerezze be a Ghostery Plust!"
+	},
+	"already_subscribed": {
+		"message": "Már feliratkozott"
+	},
+	"new_themes": {
+		"message": "Új sablonok"
+	},
+	"historical_blocking_stats": {
+		"message": "Blokkolási  előzmények statisztikája"
+	},
+	"sign_in": {
+		"message": "Bejelentkezés"
+	},
+	"sign_out": {
+		"message": "Kijelentkezés"
+	},
+	"create_account": {
+		"message": "Fiók létrehozása"
+	},
+	"email_colon": {
+		"message": "Emailcím:"
+	},
+	"confirm_email_colon": {
+		"message": "Emailcím megerősítése:"
+	},
+	"next": {
+		"message": "Következő"
+	},
+	"previous": {
+		"message": "Előző"
+	},
+	"done": {
+		"message": "Kész"
+	},
+	"simple_view": {
+		"message": "Egyszerű nézet"
+	},
+	"detailed_view": {
+		"message": "Részletes nézet"
+	},
+	"support": {
+		"message": "Támogatás"
+	},
+	"start": {
+		"message": "Indítás"
+	},
+	"password_colon": {
+		"message": "Jelszó:"
+	},
+	"please_enter_a_valid_email": {
+		"message": "Kérjük, érvényes emailcímet adjon meg."
+	},
+	"your_email_do_not_match": {
+		"message": "Az emailcímek nem egyeznek."
+	},
+	"customize_setup": {
+		"message": "Telepítés személyre szabása"
+	},
+	"learn_more": {
+		"message": "Tudjon meg többet"
+	},
+	"historical_stats": {
+		"message": "Naplózott statisztikák"
+	},
+	"priority_support": {
+		"message": "Kiemelt támogatás",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
+	},
+	"on": {
+		"message": "Be"
+	},
+	"off": {
+		"message": "Ki"
+	},
+	"enhanced_ad_blocking": {
+		"message": "Fejlesztett hirdetésblokkolás"
+	},
+	"smart_blocking": {
+		"message": "Okos blokkolás"
+	},
+	"smart_blocking_DESC": {
+		"message": "Automatikusan blokkolja vagy feloldja a trackereket az oldal teljesítményének optimalizálásához."
+	},
+	"ad_blocking_DESC": {
+		"message": "Hirdetések blokkolása azokon az oldalakon, amelyeket meglátogat."
+	},
+	"anti_tracking_DESC": {
+		"message": "Névtelenítse a feloldott és ismeretlen trackereket a fokozottabb böngészési védelem érdekében."
+	},
+	"no_such_email_password_combo": {
+		"message": "Úgy tűnik, hogy rendszerünkben nem található ez az e-mail- és jelszó- kombináció. Próbálja meg újból."
+	},
+	"all_basic_features_plus_COLON": {
+		"message": "Minden alapvető funkció, plusz:",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"historical_tracker_stats": {
+		"message": "Naplózott tracker statisztikák",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
+	},
+	"new_color_themes": {
+		"message": "Új színsablonok",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
+	},
+	"upgrade_cta_TEXT": {
+		"message": "Vegye igénybe a trackerinformációkat, a támogatáshoz való elsőbbségi hozzáférést és az új színtémákat. Ehhez frissítsen a Ghostery Plus alkalmazásra havi &#36;2 összegért.",
+		"description": "Body text in a non-responsive modal. Character limit (including spaces and punctuation): 135."
+	},
+	"upgrade_your_ghostery_experience": {
+		"message": "Még jobb Ghostery-élmény",
+		"description": "Header text for a non-responsive modal. Character limit (including spaces and punctuation): 40."
+	},
+	"upgrade_to_plus": {
+		"message": "Frissítés Plus csomagra",
+		"description": "Button text in a non-responsive modal. Character limit (including spaces and punctuation): 35."
+	},
+	"no_thanks_turn_promos_off": {
+		"message": "Köszönöm, nem. Kikapcsolom a promóciókat.",
+		"description": "Text link in a non-responsive modal. Character limit (including spaces and punctuation): 28."
+	},
+	"already_subscribed_sign_in": {
+		"message": "Már feliratkozott? Jelentkezzen be",
+		"description": "Character limit (including spaces and punctuation): 28."
+	},
+	"promos_turned_off_notification": {
+		"message": "A promóciókat kikapcsoltuk. Visszakapcsolhatja őket",
+		"description": "translation must take into account that 'Settings' is appended to this string"
+	},
+	"settings": {
+		"message": "Beállítások"
 	}
 }

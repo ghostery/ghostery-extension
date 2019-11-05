@@ -22,15 +22,8 @@
 			}
 		}
 	},
-	"all": {
-		"description": "Default setting in the 'filter by type' dropdown for the tag browser. Doesn't filter anything out. Should read as 'Show all'.",
-		"message": "все"
-	},
 	"banner_check_your_email_title": {
 		"message": "На вашу почту была отправлена ссылка для сброса пароля."
-	},
-	"banner_no_such_account_message": {
-		"message": "Похоже, мы не можем найти эту комбинацию электронной почты и пароля. Попробовать еще раз."
 	},
 	"banner_email_not_in_system_message": {
 		"message": "К сожалению, этот адрес электронной почты отсутствует в нашей системе."
@@ -40,10 +33,6 @@
 	},
 	"blacklist_error_whitelist_url": {
 		"message": "Это сайт был удален из вашего списка \"Доверенные сайты\" и добавлен в список \"Ограниченные сайты\""
-	},
-	"blocked": {
-		"description": "Select this to show only blocked (checked) tags in the tag browser. Should read as 'Show blocked'.",
-		"message": "заблокированные трeкеры"
 	},
 	"blocked_redirect_action_always_title": {
 		"description": "Title for the 'Allow always and reload' button on the blocked redirect page.",
@@ -375,31 +364,6 @@
 			}
 		}
 	},
-	"copyright": {
-		"description": "Copyright message, shown in page footers.",
-		"message": "$C$ $YEAR$ $GHOSTERY$, часть $COMPANY_ADDRESS$",
-		"placeholders": {
-			"c": {
-				"content": "&copy;"
-			},
-			"company_address": {
-				"content": "$1",
-				"example": "GHOSTERY, Inc., Such-and-such Street, Such-and-such Floor, New York, NY, Zip Code"
-			},
-			"ghostery": {
-				"content": "<a href='https://www.ghostery.com' target='_blank'>Ghostery</a>"
-			},
-			"year": {
-				"content": "2015"
-			}
-		}
-	},
-	"email_confirm_field_label": {
-		"message": "Подтвердить адрес электронной почты:"
-	},
-	"email_field_label": {
-		"message": "Email:"
-	},
 	"error_email_forgot": {
 		"message": "Хм, я не могу найти этот адрес электронной почты. Попробовать другой?"
 	},
@@ -408,12 +372,6 @@
 	},
 	"forgot_password_message": {
 		"message": "Забыли пароль? Это случается со всеми. Мы отправим вам инструкции по восстановлению пароля на электронную почту."
-	},
-	"invalid_email_confirmation": {
-		"message": "Адреса вашей электронной почты не совпадают."
-	},
-	"invalid_email_create": {
-		"message": "Введите действующий адрес электронной почты."
 	},
 	"invalid_email_forgot": {
 		"message": "Извините, вам необходимо ввести настоящий адрес электронной почты."
@@ -532,9 +490,6 @@
 		"description": "as in '5 (trackers) WHITELISTED'",
 		"message": "В белом списке"
 	},
-	"panel_create_account": {
-		"message": "Создать учетную запись"
-	},
 	"panel_email_verification_sent": {
 		"message": "$BOLD_HTML_STARTS$ Успешно! $BOLD_HTML_END$ Письмо для подтверждения учетной записи было отправлено на адрес $EMAIL$",
 		"placeholders": {
@@ -568,11 +523,35 @@
 	"panel_help_questions_header": {
 		"message": "Вопросы и комментарии"
 	},
-	"panel_help_support": {
-		"message": "Поддержка"
-	},
 	"panel_help_setup": {
 		"message": "Настроить Ghostery"
+	},
+	"panel_insights_audit_tags": {
+		"message": "Аудит маркетинговых тегов на странице",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 30."
+	},
+	"panel_insights_promotion_explore_trends": {
+		"message": "Исследовать мировые цифровые тенденции",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
+	},
+	"panel_insights_promotion_call_to_action": {
+		"message": "Попробовать бесплатно"
+	},
+	"panel_insights_promotion_header": {
+		"message": "Попробовать Ghostery Insights",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 35."
+	},
+	"panel_insights_promotion_description": {
+		"message": "Ускорьте и усовершенствуйте цифровое взаимодействие с нашим профессиональным инструментом анализа тегов.",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 90."
+	},
+	"panel_insights_promotion_trace_poor_performance": {
+		"message": "Отследить источники плохой производительности",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 33."
+	},
+	"panel_insights_promotion_watch_pings": {
+		"message": "Просматривать обработку проверки связи в режиме реального времени",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
 	},
 	"panel_about_panel_header": {
 		"message": "Информация о расширении для браузера Ghostery"
@@ -622,15 +601,6 @@
 	},
 	"panel_menu_about": {
 		"message": "О программе"
-	},
-	"panel_menu_ghostery_subscriber": {
-		"message": "Ghostery Plus"
-	},
-	"panel_menu_signin": {
-		"message": "Вход"
-	},
-	"panel_menu_signout": {
-		"message": "Выход"
 	},
 	"global_settings_saved": {
 		"message": "Глобальные настройки сохранены"
@@ -691,9 +661,6 @@
 	"panel_signin_success_title": {
 		"message": "Поздравляем! Ваша учетная запись Ghostery готова к работе."
 	},
-	"panel_title_create_account": {
-		"message": "Создать учетную запись"
-	},
 	"panel_tracker_found_sources_title": {
 		"message": "Найденные URL-адреса трекера:"
 	},
@@ -739,14 +706,8 @@
 	"panel_detail_menu_rewards_title": {
 		"message": "Rewards"
 	},
-	"panel_detail_menu_stats_title": {
-		"message": "Историческая статистика"
-	},
 	"panel_detail_menu_premium_title": {
 		"message": "Премиум"
-	},
-	"panel_detail_learn_more": {
-		"message": "Подробнее"
 	},
 	"panel_detail_history_title": {
 		"message": "История"
@@ -802,26 +763,14 @@
 	"notification_library_update_link": {
 		"message": "Узнайте, что нового"
 	},
-	"panel_header_sign_in": {
-		"message": "Вход"
-	},
 	"panel_header_verify_account": {
 		"message": "Подтверждение учетной записи"
-	},
-	"panel_header_simple_view": {
-		"message": "Простой вид"
-	},
-	"panel_header_detailed_view": {
-		"message": "Детальный просмотр"
 	},
 	"password_characters_requirements": {
 		"message": "Разрешены только эти специальные символы: !@#$%^&*=+()<>{}[];:,./?"
 	},
 	"password_field_label": {
 		"message": "Пароль"
-	},
-	"create_password_field_label": {
-		"message": "Пароль:"
 	},
 	"password_requirements": {
 		"message": "Используйте от 8 до 50 символов."
@@ -957,6 +906,9 @@
 	},
 	"settings_new_features": {
 		"message": "Выпускает новые функции"
+	},
+	"settings_new_promotions": {
+		"message": "Содержит продвижение продукта"
 	},
 	"settings_new_trackers": {
 		"message": "Добавляет новые трекеры в свою библиотеку трекеров"
@@ -1126,57 +1078,6 @@
 	"blocking_category_tracker_found": {
 		"message": "Найдено"
 	},
-	"drawer_title_enable_anti_tracking": {
-		"message": "Супер анти-трекинг"
-	},
-	"drawer_tooltip_enable_anti_tracking": {
-		"message": "Анонимизировать разблокированные и неизвестные трекеры для обеспечения большей защиты браузера. На рисунке показано, сколько измерительных точек было удалено на сайте."
-	},
-	"drawer_label_enable_anti_tracking": {
-		"message": "Трекеры сделаны анонимными"
-	},
-	"drawer_desc_enable_anti_tracking": {
-		"message": "Частные измерительные точки удалены."
-	},
-	"drawer_status_enable_anti_tracking": {
-		"message": "Анти-трекинг -"
-	},
-	"drawer_title_enable_ad_block": {
-		"message": "Рекламоблокер++"
-	},
-	"drawer_tooltip_enable_ad_block": {
-		"message": "Выполняет блокировку рекламы на сайтах, которые вы посещаете."
-	},
-	"drawer_label_enable_ad_block": {
-		"message": "Реклама заблокирована"
-	},
-	"drawer_desc_enable_ad_block": {
-		"message": "Рекламные объявления были заблокированы."
-	},
-	"drawer_status_enable_ad_block": {
-		"message": "Блокировка рекламы -"
-	},
-	"drawer_title_enable_smart_block": {
-		"message": "Умная блокировка"
-	},
-	"drawer_tooltip_enable_smart_block": {
-		"message": "Автоматически блокирует и разблокирует трекеры для оптимизации работы страницы."
-	},
-	"drawer_label_enable_smart_block": {
-		"message": "Трекеры скорректированы"
-	},
-	"drawer_desc_enable_smart_block": {
-		"message": "Трекеры были временно заблокированы или разблокированы."
-	},
-	"drawer_status_enable_smart_block": {
-		"message": "Умная блокировка -"
-	},
-	"drawer_on": {
-		"message": "Вкл"
-	},
-	"drawer_off": {
-		"message": "Выкл"
-	},
 	"blocking_unblock_all": {
 		"message": "Разблокировать все"
 	},
@@ -1246,34 +1147,16 @@
 	"alert_site_restricted_off": {
 		"message": "Сайт удален из черного списка."
 	},
-	"tooltip_anti_track": {
-		"message": "Улучшенный анти-трекинг"
-	},
-	"tooltip_anti_track_body": {
-		"message": "Анонимизировать разблокированные и неизвестные трекеры для обеспечения большей защиты браузера."
-	},
-	"tooltip_anti_track_body_on": {
+	"tooltip_anti_track_on": {
 		"message": "Личные данные обезличены."
 	},
 	"tooltip_body_in_cliqz": {
 		"message": "Функция уже активирована в Cliqz по умолчанию."
 	},
-	"tooltip_ad_block": {
-		"message": "Усовершенствованная блокировка рекламы"
-	},
-	"tooltip_ad_block_body": {
-		"message": "Выполняет блокировку рекламы на сайтах, которые вы посещаете."
-	},
-	"tooltip_ad_block_body_on": {
+	"tooltip_ad_block_on": {
 		"message": "Реклама заблокирована."
 	},
-	"tooltip_smart_block": {
-		"message": "Умная блокировка"
-	},
-	"tooltip_smart_block_body": {
-		"message": "Автоматически блокирует и разблокирует трекеры для оптимизации работы страницы."
-	},
-	"tooltip_smart_block_body_on": {
+	"tooltip_smart_block_on": {
 		"message": "Блокировка трекеров откорректирована для оптимизации работы страницы."
 	},
 	"tooltip_trust": {
@@ -1293,12 +1176,6 @@
 	},
 	"tooltip_resume": {
 		"message": "Возобновить работу Ghostery"
-	},
-	"tooltip_expert": {
-		"message": "Детальный просмотр"
-	},
-	"tooltip_simple": {
-		"message": "Простой вид"
 	},
 	"license_module": {
 		"message": "Модуль"
@@ -1350,29 +1227,14 @@
 	"hub_side_navigation_home": {
 		"message": "Домашняя страница"
 	},
-	"hub_side_navigation_setup": {
-		"message": "Пользовательская настройка"
-	},
 	"hub_side_navigation_tutorial": {
 		"message": "Пройти обучение"
-	},
-	"hub_side_navigation_supporter": {
-		"message": "Получить Ghostery Plus"
 	},
 	"hub_side_navigation_rewards": {
 		"message": "Попробуйте Ghostery Rewards"
 	},
 	"hub_side_navigation_products": {
 		"message": "Посмотреть другие продукты Ghostery"
-	},
-	"hub_side_navigation_create_account": {
-		"message": "Создать учетную запись"
-	},
-	"hub_side_navigation_log_in": {
-		"message": "Вход"
-	},
-	"hub_side_navigation_log_out": {
-		"message": "Выход"
 	},
 	"hub_home_page_title": {
 		"message": "Ghostery Hub - Домашний экран"
@@ -1389,11 +1251,17 @@
 	"hub_home_header_checkbox_label": {
 		"message": "Делитесь дополнительными анонимными аналитическими данными, чтобы улучшить производительность Ghostery."
 	},
+	"hub_home_header_info_opted_in_rewards": {
+		"message": "Новые пользователи принимают участие в Ghostery Rewards и по умолчанию отказываются от участия в Human Web. Вы можете изменить эти параметры в пользовательских настройках или в расширении."
+	},
 	"hub_home_header_info_opted_out": {
 		"message": "По умолчанию новые пользователи отказываются от участия в Ghostery Rewards и Human Web. Вы можете выбрать эти рекомендуемые функции в настройках пользователя или в расширении."
 	},
 	"hub_home_header_info": {
 		"message": "Новые пользователи решили принять участие в Human Web и Ghostery Rewards. Вы можете изменить эти параметры в пользовательских настройках или в расширении."
+	},
+	"hub_home_header_info_cliqz": {
+		"message": "Новые пользователи принимают участие в Human Web. Вы можете изменить эти параметры в пользовательских настройках или в расширении."
 	},
 	"hub_home_header_info_link": {
 		"message": "Подробнее."
@@ -1401,23 +1269,14 @@
 	"hub_home_subheader_optimize": {
 		"message": "Оптимизируйте работу Ghostery"
 	},
-	"hub_home_subheader_create_account": {
-		"message": "Создать учетную запись"
-	},
 	"hub_home_feature_tutorial_title": {
 		"message": "Пройти обучение"
 	},
 	"hub_home_feature_tutorial_text": {
 		"message": "Знакомство с основными функциями Ghostery."
 	},
-	"hub_home_feature_tutorial_button": {
-		"message": "Начать"
-	},
 	"hub_home_feature_tutorial_button_alt": {
 		"message": "Обучение завершено"
-	},
-	"hub_home_feature_setup_title": {
-		"message": "Пользовательская настройка"
 	},
 	"hub_home_feature_setup_text": {
 		"message": "Редактируйте настройки и параметры блокировки."
@@ -1430,12 +1289,6 @@
 	},
 	"hub_home_feature_supporter_text": {
 		"message": "Обновитесь до Ghostery Plus и разблокируйте специальные функции."
-	},
-	"hub_home_feature_supporter_button": {
-		"message": "Получить Ghostery Plus"
-	},
-	"hub_home_feature_supporter_button_alt": {
-		"message": "Уже подписаны"
 	},
 	"hub_setup_page_title": {
 		"message": "Ghostery Hub - Настройка"
@@ -1471,15 +1324,6 @@
 	},
 	"hub_setup_exit_flow": {
 		"message": "Выйти из пользовательской настройки"
-	},
-	"hub_setup_nav_previous": {
-		"message": "Назад"
-	},
-	"hub_setup_nav_next": {
-		"message": "Далее"
-	},
-	"hub_setup_nav_done": {
-		"message": "Готово"
 	},
 	"hub_setup_enter_modal_text": {
 		"message": "Введение пользовательских настроек перезапишет предыдущие настройки Ghostery. Желаете продолжить?"
@@ -1517,23 +1361,19 @@
 	"hub_setup_blocking_description_custom": {
 		"message": "Выберите трекеры для блокировки"
 	},
-	"hub_setup_antisuite_name_antitracking": {
-		"message": "Улучшенный анти-трекинг"
-	},
 	"hub_setup_antisuite_description_antitracking": {
 		"message": "Анонимизировать разблокированные и неизвестные трекеры для обеспечения большей защиты браузера."
 	},
-	"hub_setup_adblock_name_adblocking": {
-		"message": "Усовершенствованная блокировка рекламы"
-	},
-	"hub_setup_adblock_description_adblocking": {
-		"message": "Выполняет блокировку рекламы на сайтах, которые вы посещаете."
-	},
-	"hub_setup_smartblocking_name_smartblocking": {
-		"message": "Умная блокировка"
-	},
-	"hub_setup_smartblocking_description_smartblocking": {
-		"message": "Автоматически блокирует и разблокирует трекеры для оптимизации работы страницы."
+	"hub_setup_feature_already_active": {
+		"message": "Эта функция уже активна в Cliqz по умолчанию. $LINK_LM_START$Подробнее$LINK_LM_END$",
+		"placeholders": {
+			"link_lm_start": {
+				"content": "<a href=\"https://www.ghostery.com/faqs/what-are-the-new-ghostery-8-features/\" target=\"_blank\" rel=\"noopener noreferrer\">"
+			},
+			"link_lm_end": {
+				"content": "</a>"
+			}
+		}
 	},
 	"hub_setup_ghosteryrewards_name_rewards": {
 		"message": "Rewards"
@@ -1567,17 +1407,8 @@
 	"hub_setup_feature_tutorial_description": {
 		"message": "Знакомство с основными функциями Ghostery."
 	},
-	"hub_setup_feature_tutorial_button": {
-		"message": "Начать"
-	},
-	"hub_setup_feature_supporter_title": {
-		"message": "Получить Ghostery Plus"
-	},
 	"hub_setup_feature_supporter_description": {
 		"message": "Поддержите нас и разблокируйте специальные функции."
-	},
-	"hub_setup_feature_supporter_button": {
-		"message": "Поддержка"
 	},
 	"hub_setup_feature_products_title": {
 		"message": "Посмотреть другие продукты Ghostery"
@@ -1611,21 +1442,6 @@
 	},
 	"hub_tutorial_exit_flow": {
 		"message": "Выйти из руководства"
-	},
-	"hub_tutorial_nav_previous": {
-		"message": "Назад"
-	},
-	"hub_tutorial_nav_next": {
-		"message": "Далее"
-	},
-	"hub_tutorial_nav_done": {
-		"message": "Готово"
-	},
-	"hub_tutorial_simple_view": {
-		"message": "Простой вид"
-	},
-	"hub_tutorial_detailed_view": {
-		"message": "Детальный просмотр"
 	},
 	"hub_tutorial_detailed_expanded_view": {
 		"message": "Детальный расширенный просмотр"
@@ -1678,23 +1494,8 @@
 	"hub_tutorial_antisuite_title": {
 		"message": "Получите дополнительную защиту и автоматизированное управление с помощью наших расширенных функций безопасности:"
 	},
-	"hub_tutorial_antisuite_antitracking_title": {
-		"message": "Улучшенный анти-трекинг"
-	},
 	"hub_tutorial_antisuite_antitracking_description": {
 		"message": "Удалите точки данных, которые веб-сайты могут использовать для вашей идентификации."
-	},
-	"hub_tutorial_antisuite_adblocking_title": {
-		"message": "Усовершенствованная блокировка рекламы"
-	},
-	"hub_tutorial_antisuite_adblocking_description": {
-		"message": "Выполняет блокировку рекламы на страницах, которые вы посещаете."
-	},
-	"hub_tutorial_antisuite_smartblocking_title": {
-		"message": "Умная блокировка"
-	},
-	"hub_tutorial_antisuite_smartblocking_description": {
-		"message": "Автоматически блокирует и разблокирует трекеры для оптимизации работы страницы."
 	},
 	"hub_products_page_title" : {
 		"message": "Ghostery Hub - Попробуйте другие продукты Ghostery"
@@ -1732,9 +1533,6 @@
 	"hub_rewards_header_description": {
 		"message": "Наша новая функция Rewards предлагает мощный, полностью конфиденциальный новый способ получения настоящих скидок в Интернете. Включите ее и убедитесь сами!"
 	},
-	"hub_rewards_header_learn_more": {
-		"message": "Подробнее"
-	},
 	"hub_rewards_experience_title": {
 		"message": "Более эффективный шоппинг"
 	},
@@ -1765,12 +1563,6 @@
 	"hub_supporter_header_description": {
 		"message": "Поддержите нас и разблокируйте специальные функции!"
 	},
-	"hub_supporter_button_text": {
-		"message": "Получить Ghostery Plus"
-	},
-	"hub_supporter_button_text_alt": {
-		"message": "Уже подписаны"
-	},
 	"hub_supporter_price": {
 		"message": "$SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$ в месяц",
 		"placeholders": {
@@ -1788,14 +1580,8 @@
 			}
 		}
 	},
-	"hub_supporter_perk_themes_title": {
-		"message": "Новые темы"
-	},
 	"hub_supporter_perk_themes_description": {
 		"message": "Настраивайте цветовую схему Ghostery. Попробуйте нашу ночную тему!"
-	},
-	"hub_supporter_perk_stats_title": {
-		"message": "Историческая статистика блокировок"
 	},
 	"hub_supporter_perk_stats_description": {
 		"message": "Просмотрите статистику блокировок и узнайте, как Ghostery помогает вам"
@@ -1809,20 +1595,11 @@
 	"hub_supporter_manifesto": {
 		"message": "Мы стремимся бесплатно предоставлять нашим пользователям лучшие услуги защиты конфиденциальности. Хотя мы не взимаем плату за набор программ по обеспечению конфиденциальности, вы можете поддержать нас с помощью недорогой ежемесячной подписки. Присоединяйтесь к нам путем обновления до Ghostery Plus и разблокируйте эксклюзивные функции."
 	},
-	"hub_supporter_feature_theme_title": {
-		"message": "Новые темы"
-	},
 	"hub_supporter_feature_theme_description": {
 		"message": "Настраивайте цветовую схему Ghostery и наслаждайтесь новыми визуальными возможностями. Добавлено по популярным запросам. Познакомьтесь с нашей ночной темой. Скоро будут доступны новые цвета."
 	},
-	"hub_supporter_feature_stats_title": {
-		"message": "Историческая статистика блокировок"
-	},
 	"hub_supporter_feature_stats_description": {
 		"message": "Просматривайте исторические результаты блокировок с помощью графиков и статистики, чтобы выявить тенденции и узнать, как Ghostery повлиял на вашу работу в Интернете."
-	},
-	"hub_supporter_feature_support_title": {
-		"message": "Приоритетная поддержка"
 	},
 	"hub_supporter_feature_support_description": {
 		"message": "Нужна помощь? Нашли нерабочую страницу? Быстрее получайте ответы на вопросы и разрешайте проблемы с помощью нашей приоритетной службы поддержки, доступной при входе через учетную запись Plus."
@@ -1845,15 +1622,6 @@
 	"hub_login_header_title": {
 		"message": "Войти в учетную запись."
 	},
-	"hub_login_label_email": {
-		"message": "Email:"
-	},
-	"hub_login_label_password": {
-		"message": "Пароль:"
-	},
-	"hub_login_label_email_invalid": {
-		"message": "Введите действующий адрес электронной почты."
-	},
 	"hub_login_label_password_invalid": {
 		"message": "Используйте от 8 до 50 символов."
 	},
@@ -1863,38 +1631,17 @@
 	"hub_login_link_create_account": {
 		"message": "Зарегистрироваться."
 	},
-	"hub_login_button_submit": {
-		"message": "Вход"
-	},
 	"hub_login_toast_success": {
 		"message": "Выход выполнен успешно! Настройки вашей учетной записи успешно импортированы."
 	},
-	"hub_login_toast_error": {
-		"message": "Похоже, мы не можем найти эту комбинацию электронной почты и пароля. Попробовать еще раз."
-	},
 	"hub_create_account_header_title": {
 		"message": "Хотите создать учетную запись Ghostery для синхронизации настроек во всех браузерах и устройствах?"
-	},
-	"hub_create_account_label_email": {
-		"message": "Email:"
-	},
-	"hub_create_account_label_email_confirm": {
-		"message": "Подтвердить адрес электронной почты:"
 	},
 	"hub_create_account_label_first_name": {
 		"message": "Имя (необязательно):"
 	},
 	"hub_create_account_label_email_last_name": {
 		"message": "Фамилия (необязательно):"
-	},
-	"hub_create_account_label_password": {
-		"message": "Пароль:"
-	},
-	"hub_create_account_label_email_invalid": {
-		"message": "Введите действующий адрес электронной почты."
-	},
-	"hub_create_account_label_email_confirm_invalid": {
-		"message": "Адреса вашей электронной почты не совпадают."
 	},
 	"hub_create_account_label_password_invalid": {
 		"message": "Разрешены только эти специальные символы: !@#$%^&*=+()<>{}[];:,./?"
@@ -1910,9 +1657,6 @@
 	},
 	"hub_create_account_link_login": {
 		"message": "Войти."
-	},
-	"hub_create_account_button_submit": {
-		"message": "Создать учетную запись"
 	},
 	"hub_create_account_toast_success": {
 		"message": "Учетная запись успешно создана"
@@ -2045,9 +1789,6 @@
 	"rewards_code_copied_toast_notification": {
 		"message": "Код Rewards скопирован!"
 	},
-	"rewards_learn_more": {
-		"message": "Подробнее"
-	},
 	"offers_hub_copy_btn": {
 		"message": "Скопировать код"
 	},
@@ -2066,20 +1807,8 @@
 	"subscription_themes": {
 		"message": "Темы Ghostery"
 	},
-	"subscription_info_title": {
-		"message": "Ghostery Plus"
-	},
 	"subscription_themes_title": {
 		"message": "Темы"
-	},
-	"subscription_priority_support_title": {
-		"message": "Приоритетная поддержка"
-	},
-	"subscription_priority_support": {
-		"message": "Приоритетная поддержка"
-	},
-	"subscription_history_stats": {
-		"message": "Историческая статистика"
 	},
 	"subscribe_pitch": {
 		"message": "Хотя Ghostery является бесплатным, вы можете поддержать нас с помощью недорогой подписки за &#36;2 в месяц в обмен на эксклюзивные функции, такие как цветовые темы, приоритетная поддержка и другое. Присоединяйтесь к нам и оформляйте подписку!"
@@ -2090,8 +1819,14 @@
 	"subscribe_pitch_button_label": {
 		"message": "Получить Ghostery Plus!"
 	},
+	"subscribe_pitch_no_thanks": {
+		"message": "Нет, спасибо, возможно, позже"
+	},
 	"subscribe_pitch_sign_here": {
 		"message": "Уже подписаны? Войти"
+	},
+	"subscribe_pitch_sign_in": {
+		"message": "Уже подписаны? Войдите в систему"
 	},
 	"subscription_midnight_theme": {
 		"message": "Ночная тема"
@@ -2110,9 +1845,6 @@
 	},
 	"subscription_themes_tooltip": {
 		"message": "Измените цветовую схему Ghostery!"
-	},
-	"subscription_tracker_stats": {
-		"message": "Историческая статистика"
 	},
 	"subscription_charge_date" : {
 		"message": "Следующая дата оплаты"
@@ -2157,9 +1889,6 @@
 	},
 	"panel_stats_menu_daily": {
 		"message": "Ежедневно"
-	},
-	"panel_stats_header_title": {
-		"message": "Статистика трекера истории"
 	},
 	"panel_stats_header_title_monthly": {
 		"message": "Историческая статистика трекера (в ср. за месяц)"
@@ -2223,9 +1952,6 @@
 	"panel_stats_pitch_modal_sign_in": {
 		"message": "Войти"
 	},
-	"panel_stats_pitch_modal_subscribe": {
-		"message": "Получить Ghostery Plus!"
-	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "Стереть всю историю статистики до этого момента."
 	},
@@ -2246,12 +1972,6 @@
 	},
 	"ads": {
 		"message": "рекламы"
-	},
-	"cliqz_feature_status_on": {
-		"message": "Вкл"
-	},
-	"cliqz_feature_status_off": {
-		"message": "Выкл"
 	},
 	"create_account_form_legal_consent_checkbox_label": {
 		"message": "Я принимаю $LINK_TERMS_START$Условия и положения$LINK_END$, $LINK_LICENSE_START$Публичное лицензионное соглашение$LINK_END$, а также даю согласие на использование данных, описанное в $LINK_PRIVACY_START$Политике конфиденциальности$LINK_END$.",
@@ -2281,5 +2001,191 @@
 	},
 	"unknown_description": {
 		"message": "Неизвестные трекеры, очищенные анти-трекингом"
+	},
+	"ghostery_is_ready": {
+		"message": "Ghostery готов!"
+	},
+	"choose_your_privacy_plan": {
+		"message": "Выберите свой план конфиденциальности"
+	},
+	"choose_your_ghostery_privacy_plan": {
+		"message": "Выберите свой план конфиденциальности Ghostery"
+	},
+	"ghostery_basic": {
+		"message": "Базовый"
+	},
+	"ghostery_plus": {
+		"message": "Ghostery Plus"
+	},
+	"locale_appropriate_currency_icon": {
+		"message": "$$",
+		"description": "Use '$$' to mean '$'. '$' has a special meaning in the code and the first '$' tells the browser to ignore the special meaning of the second '$' and print it literally."
+	},
+	"plus_monthly_subscription_price_number": {
+		"message": "2"
+	},
+	"per_month": {
+		"message": "в месяц"
+	},
+	"faster_cleaner_browsing": {
+		"message": "Более быстрая и эффективная работа в сети",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"blocks_ads": {
+		"message": "Блокировка рекламы",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"blocks_trackers": {
+		"message": "Блокировка трекеров",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"data_protection": {
+		"message": "Защита данных",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"select_basic": {
+		"message": "Выбрать базовый"
+	},
+	"select_plus": {
+		"message": "Выбрать Plus"
+	},
+	"recommended": {
+		"message": "Рекомендуемый"
+	},
+	"get_ghostery_plus": {
+		"message": "Получить Ghostery Plus"
+	},
+	"get_ghostery_plus_bang": {
+		"message": "Получить Ghostery Plus!"
+	},
+	"already_subscribed": {
+		"message": "Уже подписаны"
+	},
+	"new_themes": {
+		"message": "Новые темы"
+	},
+	"historical_blocking_stats": {
+		"message": "Историческая статистика блокировок"
+	},
+	"sign_in": {
+		"message": "Вход"
+	},
+	"sign_out": {
+		"message": "Выход"
+	},
+	"create_account": {
+		"message": "Создать учетную запись"
+	},
+	"email_colon": {
+		"message": "Email:"
+	},
+	"confirm_email_colon": {
+		"message": "Подтвердить адрес электронной почты:"
+	},
+	"next": {
+		"message": "Далее"
+	},
+	"previous": {
+		"message": "Назад"
+	},
+	"done": {
+		"message": "Готово"
+	},
+	"simple_view": {
+		"message": "Простой вид"
+	},
+	"detailed_view": {
+		"message": "Детальный просмотр"
+	},
+	"support": {
+		"message": "Поддержка"
+	},
+	"start": {
+		"message": "Начать"
+	},
+	"password_colon": {
+		"message": "Пароль:"
+	},
+	"please_enter_a_valid_email": {
+		"message": "Введите действующий адрес электронной почты."
+	},
+	"your_email_do_not_match": {
+		"message": "Адреса вашей электронной почты не совпадают."
+	},
+	"customize_setup": {
+		"message": "Пользовательская настройка"
+	},
+	"learn_more": {
+		"message": "Подробнее"
+	},
+	"historical_stats": {
+		"message": "Историческая статистика"
+	},
+	"priority_support": {
+		"message": "Приоритетная поддержка",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
+	},
+	"on": {
+		"message": "Вкл"
+	},
+	"off": {
+		"message": "Выкл"
+	},
+	"enhanced_ad_blocking": {
+		"message": "Рекламоблокер++"
+	},
+	"smart_blocking": {
+		"message": "Умная блокировка"
+	},
+	"smart_blocking_DESC": {
+		"message": "Автоматически блокирует и разблокирует трекеры для оптимизации работы страницы."
+	},
+	"ad_blocking_DESC": {
+		"message": "Выполняет блокировку рекламы на страницах, которые вы посещаете."
+	},
+	"anti_tracking_DESC": {
+		"message": "Анонимизировать разблокированные и неизвестные трекеры для обеспечения большей защиты браузера."
+	},
+	"no_such_email_password_combo": {
+		"message": "Похоже, мы не можем найти эту комбинацию электронной почты и пароля.  Попробуйте еще раз."
+	},
+	"all_basic_features_plus_COLON": {
+		"message": "Все базовые функции, а также:",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"historical_tracker_stats": {
+		"message": "Статистика трекера истории",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
+	},
+	"new_color_themes": {
+		"message": "Новые цветовые темы",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
+	},
+	"upgrade_cta_TEXT": {
+		"message": "Разблокируйте исторические сведения о трекерах, доступ к приоритетной поддержке и новые цветовые темы, выполнив обновление до Ghostery Plus всего за &#36;2 в месяц.",
+		"description": "Body text in a non-responsive modal. Character limit (including spaces and punctuation): 135."
+	},
+	"upgrade_your_ghostery_experience": {
+		"message": "Обновите свой опыт использования Ghostery",
+		"description": "Header text for a non-responsive modal. Character limit (including spaces and punctuation): 40."
+	},
+	"upgrade_to_plus": {
+		"message": "Обновить до Plus",
+		"description": "Button text in a non-responsive modal. Character limit (including spaces and punctuation): 35."
+	},
+	"no_thanks_turn_promos_off": {
+		"message": "Нет, спасибо, отключить промоакции",
+		"description": "Text link in a non-responsive modal. Character limit (including spaces and punctuation): 28."
+	},
+	"already_subscribed_sign_in": {
+		"message": "Уже подписаны? Войдите в систему",
+		"description": "Character limit (including spaces and punctuation): 28."
+	},
+	"promos_turned_off_notification": {
+		"message": "Промоакции отключены. Вы можете снова подключить их в",
+		"description": "translation must take into account that 'Settings' is appended to this string"
+	},
+	"settings": {
+		"message": "Настройки"
 	}
 }

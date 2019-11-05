@@ -22,15 +22,8 @@
 			}
 		}
 	},
-	"all": {
-		"description": "Default setting in the 'filter by type' dropdown for the tag browser. Doesn't filter anything out. Should read as 'Show all'.",
-		"message": "alles"
-	},
 	"banner_check_your_email_title": {
 		"message": "Bekijk zometeen je email voor een link om je wachtwoord te resetten."
-	},
-	"banner_no_such_account_message": {
-		"message": "Het lijkt erop dat we deze email en wachtwoord combi niet kunnen vinden. Probeer het nog een keer."
 	},
 	"banner_email_not_in_system_message": {
 		"message": "Sorry, dat e-mailadres staat niet in ons systeem."
@@ -40,10 +33,6 @@
 	},
 	"blacklist_error_whitelist_url": {
 		"message": "Deze website is verwijderd uit je lijst met Vertrouwde Websites en toegevoegd aan je lijst met Beperkte Websites"
-	},
-	"blocked": {
-		"description": "Select this to show only blocked (checked) tags in the tag browser. Should read as 'Show blocked'.",
-		"message": "geblokkeerd"
 	},
 	"blocked_redirect_action_always_title": {
 		"description": "Title for the 'Allow always and reload' button on the blocked redirect page.",
@@ -375,31 +364,6 @@
 			}
 		}
 	},
-	"copyright": {
-		"description": "Copyright message, shown in page footers.",
-		"message": "$C$ $YEAR$ $GHOSTERY$, onderdeel van $COMPANY_ADDRESS$",
-		"placeholders": {
-			"c": {
-				"content": "&copy;"
-			},
-			"company_address": {
-				"content": "$1",
-				"example": "GHOSTERY, Inc., Such-and-such Street, Such-and-such Floor, New York, NY, Zip Code"
-			},
-			"ghostery": {
-				"content": "<a href='https://www.ghostery.com' target='_blank'>Ghostery</a>"
-			},
-			"year": {
-				"content": "2015"
-			}
-		}
-	},
-	"email_confirm_field_label": {
-		"message": "Bevestig E-mail:"
-	},
-	"email_field_label": {
-		"message": "E-mail:"
-	},
 	"error_email_forgot": {
 		"message": "Hmm, ik kan die e-mail niet vinden. Misschien een andere proberen?"
 	},
@@ -408,12 +372,6 @@
 	},
 	"forgot_password_message": {
 		"message": "Wachtwoord Vergeten? Ach, dat kan iedereen overkomen. We e-mailen je instructies om je wachtwoord te resetten."
-	},
-	"invalid_email_confirmation": {
-		"message": "Je e-mailadressen komen niet overeen."
-	},
-	"invalid_email_create": {
-		"message": "Voer een geldig e-mailadres in."
 	},
 	"invalid_email_forgot": {
 		"message": "Sorry, je moet een echt e-mailadres invoeren."
@@ -532,9 +490,6 @@
 		"description": "as in '5 (trackers) WHITELISTED'",
 		"message": "Op whitelist geplaatst"
 	},
-	"panel_create_account": {
-		"message": "Account Aanmaken"
-	},
 	"panel_email_verification_sent": {
 		"message": "$BOLD_HTML_STARTS$ Succes! $BOLD_HTML_END$ Een account verificatie e-mail is verstuurd naar $EMAIL$",
 		"placeholders": {
@@ -568,11 +523,35 @@
 	"panel_help_questions_header": {
 		"message": "Vragen en Opmerkingen"
 	},
-	"panel_help_support": {
-		"message": "Helpdesk"
-	},
 	"panel_help_setup": {
 		"message": "Ghostery Instellen"
+	},
+	"panel_insights_audit_tags": {
+		"message": "Tags marketing audit op pagina",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 30."
+	},
+	"panel_insights_promotion_explore_trends": {
+		"message": "Internationale digitale trends",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
+	},
+	"panel_insights_promotion_call_to_action": {
+		"message": "Gratis proberen"
+	},
+	"panel_insights_promotion_header": {
+		"message": "Ghostery Insights proberen",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 35."
+	},
+	"panel_insights_promotion_description": {
+		"message": "Versnel en schoon uw digitale gebruikerservaring op met onze tool voor tag analytics.",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 90."
+	},
+	"panel_insights_promotion_trace_poor_performance": {
+		"message": "Bron slechte prestaties opsporen",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 33."
+	},
+	"panel_insights_promotion_watch_pings": {
+		"message": "Pings in realtime bekijken",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
 	},
 	"panel_about_panel_header": {
 		"message": "Over Ghostery Browser Extension"
@@ -622,15 +601,6 @@
 	},
 	"panel_menu_about": {
 		"message": "Over"
-	},
-	"panel_menu_ghostery_subscriber": {
-		"message": "Ghostery Plus"
-	},
-	"panel_menu_signin": {
-		"message": "Inloggen "
-	},
-	"panel_menu_signout": {
-		"message": "Uitloggen"
 	},
 	"global_settings_saved": {
 		"message": "Algemene Instellingen Opgeslagen"
@@ -691,9 +661,6 @@
 	"panel_signin_success_title": {
 		"message": "Gefeliciteerd! Je Ghostery account is klaar voor gebruik."
 	},
-	"panel_title_create_account": {
-		"message": "Account Aanmaken"
-	},
 	"panel_tracker_found_sources_title": {
 		"message": "Ontdekte tracker URLs:"
 	},
@@ -739,14 +706,8 @@
 	"panel_detail_menu_rewards_title": {
 		"message": "Rewards"
 	},
-	"panel_detail_menu_stats_title": {
-		"message": "Historische statistieken"
-	},
 	"panel_detail_menu_premium_title": {
 		"message": "Premium"
-	},
-	"panel_detail_learn_more": {
-		"message": "Meer Weten"
 	},
 	"panel_detail_history_title": {
 		"message": "Geschiedenis"
@@ -802,26 +763,14 @@
 	"notification_library_update_link": {
 		"message": "Kijk snel wat er nieuw is"
 	},
-	"panel_header_sign_in": {
-		"message": "Inloggen "
-	},
 	"panel_header_verify_account": {
 		"message": "Verifieer Account"
-	},
-	"panel_header_simple_view": {
-		"message": "Eenvoudig Overzicht"
-	},
-	"panel_header_detailed_view": {
-		"message": "Gedetailleerd Overzicht"
 	},
 	"password_characters_requirements": {
 		"message": "Alleen deze speciale karakters zijn toegestaan: !@#$%^&*=+()<>{}[];:,./?"
 	},
 	"password_field_label": {
 		"message": "Wachtwoord"
-	},
-	"create_password_field_label": {
-		"message": "Wachtwoord:"
 	},
 	"password_requirements": {
 		"message": "Gebruik tussen 8 en 50 karakters."
@@ -957,6 +906,9 @@
 	},
 	"settings_new_features": {
 		"message": "Nieuwe features uitbrengt"
+	},
+	"settings_new_promotions": {
+		"message": "Heeft productaanbiedingen"
 	},
 	"settings_new_trackers": {
 		"message": "Nieuwe trackers aan de tracker bibliotheek toevoegt."
@@ -1126,57 +1078,6 @@
 	"blocking_category_tracker_found": {
 		"message": "Gevonden"
 	},
-	"drawer_title_enable_anti_tracking": {
-		"message": "Versterkte Anti-Tracking"
-	},
-	"drawer_tooltip_enable_anti_tracking": {
-		"message": "Geïntegreerde trackers slaan gebruikersactiviteiten op en op de meeste websites verwijdert Anti-tracking alle data die zou kunnen worden gebruikt om je te identificeren alvorens het door deze trackers verzameld kan worden. De afbeelding laat zien hoeveel datapunten verwijderd zijn op de website."
-	},
-	"drawer_label_enable_anti_tracking": {
-		"message": "Trackers Geanonimiseerd"
-	},
-	"drawer_desc_enable_anti_tracking": {
-		"message": "Privé-datapunten zijn verwijderd."
-	},
-	"drawer_status_enable_anti_tracking": {
-		"message": "Anti-Tracking is"
-	},
-	"drawer_title_enable_ad_block": {
-		"message": "Versterkte Ad Blokkering"
-	},
-	"drawer_tooltip_enable_ad_block": {
-		"message": "Toon of blokkeer alle advertenties op websites."
-	},
-	"drawer_label_enable_ad_block": {
-		"message": "Ads Geblokkeerd"
-	},
-	"drawer_desc_enable_ad_block": {
-		"message": "Ad spots zijn geblokkeerd."
-	},
-	"drawer_status_enable_ad_block": {
-		"message": "Ad Blokkering is"
-	},
-	"drawer_title_enable_smart_block": {
-		"message": "Slim Blokkeren"
-	},
-	"drawer_tooltip_enable_smart_block": {
-		"message": "Blokkeer en deblokkeer trackers automatisch om pagina-performance te optimaliseren."
-	},
-	"drawer_label_enable_smart_block": {
-		"message": "Trackers Aangepast"
-	},
-	"drawer_desc_enable_smart_block": {
-		"message": "Trackers tijdelijk geblokkeerd of gedeblokkeerd."
-	},
-	"drawer_status_enable_smart_block": {
-		"message": "Slim Blokkeren is"
-	},
-	"drawer_on": {
-		"message": "Aan"
-	},
-	"drawer_off": {
-		"message": "Uit"
-	},
 	"blocking_unblock_all": {
 		"message": "Deblokkeer Alles"
 	},
@@ -1246,34 +1147,16 @@
 	"alert_site_restricted_off": {
 		"message": "Website niet langer blacklisted."
 	},
-	"tooltip_anti_track": {
-		"message": "Versterkte Anti-Tracking"
-	},
-	"tooltip_anti_track_body": {
-		"message": "Anonimiseer gedeblokkeerde en onbekende trackers voor meer bescherming tijdens het browsen."
-	},
-	"tooltip_anti_track_body_on": {
+	"tooltip_anti_track_on": {
 		"message": "Persoonlijke gegevenspunten geanonimiseerd."
 	},
 	"tooltip_body_in_cliqz": {
 		"message": "Optie is al standaard actief in Cliqz."
 	},
-	"tooltip_ad_block": {
-		"message": "Versterkte Ad Blokkering"
-	},
-	"tooltip_ad_block_body": {
-		"message": "Blokkeer advertenties op de websites die je bezoekt."
-	},
-	"tooltip_ad_block_body_on": {
+	"tooltip_ad_block_on": {
 		"message": "Advertenties zijn geblokkeerd."
 	},
-	"tooltip_smart_block": {
-		"message": "Slim Blokkeren"
-	},
-	"tooltip_smart_block_body": {
-		"message": "Blokkeer en deblokkeer trackers automatisch om pagina-performance te optimaliseren."
-	},
-	"tooltip_smart_block_body_on": {
+	"tooltip_smart_block_on": {
 		"message": "Tracker blokkering aangepast om prestaties van de pagina te optimaliseren."
 	},
 	"tooltip_trust": {
@@ -1293,12 +1176,6 @@
 	},
 	"tooltip_resume": {
 		"message": "Hervat"
-	},
-	"tooltip_expert": {
-		"message": "Gedetailleerd Overzicht"
-	},
-	"tooltip_simple": {
-		"message": "Eenvoudig Overzicht"
 	},
 	"license_module": {
 		"message": "Module"
@@ -1350,29 +1227,14 @@
 	"hub_side_navigation_home": {
 		"message": "Start"
 	},
-	"hub_side_navigation_setup": {
-		"message": "Aangepaste Instelling"
-	},
 	"hub_side_navigation_tutorial": {
 		"message": "Bekijk een Tutorial"
-	},
-	"hub_side_navigation_supporter": {
-		"message": "Ghostery Plus halen"
 	},
 	"hub_side_navigation_rewards": {
 		"message": "Probeer Ghostery Rewards"
 	},
 	"hub_side_navigation_products": {
 		"message": "Bekijk meer Ghostery-producten"
-	},
-	"hub_side_navigation_create_account": {
-		"message": "Account Aanmaken"
-	},
-	"hub_side_navigation_log_in": {
-		"message": "Inloggen "
-	},
-	"hub_side_navigation_log_out": {
-		"message": "Uitloggen"
 	},
 	"hub_home_page_title": {
 		"message": "Ghostery Hub - Start"
@@ -1389,11 +1251,17 @@
 	"hub_home_header_checkbox_label": {
 		"message": "Deel aanvullende anonieme analytics data om de prestaties van Ghostery te verbeteren."
 	},
+	"hub_home_header_info_opted_in_rewards": {
+		"message": "Nieuwe gebruikers zijn standaard ingeschreven voor Ghostery Rewards en niet voor Human Web. Je kunt deze instellingen wijzigen in aangepaste setup of in de extensie. "
+	},
 	"hub_home_header_info_opted_out": {
 		"message": "Nieuwe gebruikers zijn standaard niet ingeschreven voor Ghostery Rewards en Human Web. Je kunt deze aanbevolen functies inschakelen in aangepaste setup of in de extensie. "
 	},
 	"hub_home_header_info": {
 		"message": "Nieuwe gebruikers kunnen meedoen aan Human Web en Ghostery Rewards. Je kunt deze instellingen wijzigen in aangepaste setup of in de uitbreiding. "
+	},
+	"hub_home_header_info_cliqz": {
+		"message": "Nieuwe gebruikers zijn standaard ingeschreven voor Human Web. Je kunt deze aanbevolen functies inschakelen in aangepaste setup of in de extensie. "
 	},
 	"hub_home_header_info_link": {
 		"message": "Meer weten."
@@ -1401,23 +1269,14 @@
 	"hub_home_subheader_optimize": {
 		"message": "Verbeter je Ghostery-beleving"
 	},
-	"hub_home_subheader_create_account": {
-		"message": "Account Aanmaken"
-	},
 	"hub_home_feature_tutorial_title": {
 		"message": "Bekijk een Tutorial"
 	},
 	"hub_home_feature_tutorial_text": {
 		"message": "Loop door Ghostery's belangrijkste opties."
 	},
-	"hub_home_feature_tutorial_button": {
-		"message": "Start"
-	},
 	"hub_home_feature_tutorial_button_alt": {
 		"message": "Tutorial voltooid"
-	},
-	"hub_home_feature_setup_title": {
-		"message": "Aangepaste Instelling"
 	},
 	"hub_home_feature_setup_text": {
 		"message": "Je instellingen en blokkeringsvoorkeuren bewerken."
@@ -1430,12 +1289,6 @@
 	},
 	"hub_home_feature_supporter_text": {
 		"message": "Upgrade naar Ghostery Plus en ontgrendel speciale opties."
-	},
-	"hub_home_feature_supporter_button": {
-		"message": "Ghostery Plus halen"
-	},
-	"hub_home_feature_supporter_button_alt": {
-		"message": "Reeds ingeschreven"
 	},
 	"hub_setup_page_title": {
 		"message": "Ghostery Instellen"
@@ -1471,15 +1324,6 @@
 	},
 	"hub_setup_exit_flow": {
 		"message": "Aangepaste Instelling verlaten"
-	},
-	"hub_setup_nav_previous": {
-		"message": "Vorige"
-	},
-	"hub_setup_nav_next": {
-		"message": "Volgende"
-	},
-	"hub_setup_nav_done": {
-		"message": "Klaar"
 	},
 	"hub_setup_enter_modal_text": {
 		"message": "Met aangepaste instellingen overschrijf je de vorige Ghostery-instellingen. Wil je doorgaan?"
@@ -1517,23 +1361,19 @@
 	"hub_setup_blocking_description_custom": {
 		"message": "Kies welke trackers je wil blokkeren"
 	},
-	"hub_setup_antisuite_name_antitracking": {
-		"message": "Versterkte Anti-Tracking"
-	},
 	"hub_setup_antisuite_description_antitracking": {
 		"message": "Anonimiseer gedeblokkeerde en onbekende trackers voor meer bescherming tijdens het browsen."
 	},
-	"hub_setup_adblock_name_adblocking": {
-		"message": "Versterkte Ad Blokkering"
-	},
-	"hub_setup_adblock_description_adblocking": {
-		"message": "Blokkeer advertenties op de websites die je bezoekt."
-	},
-	"hub_setup_smartblocking_name_smartblocking": {
-		"message": "Slim Blokkeren"
-	},
-	"hub_setup_smartblocking_description_smartblocking": {
-		"message": "Blokkeer en deblokkeer trackers automatisch om pagina-performance te optimaliseren."
+	"hub_setup_feature_already_active": {
+		"message": "Deze functie is standaard actief in Cliqz. $LINK_LM_START$Meer informatie$LINK_LM_END$",
+		"placeholders": {
+			"link_lm_start": {
+				"content": "<a href=\"https://www.ghostery.com/faqs/what-are-the-new-ghostery-8-features/\" target=\"_blank\" rel=\"noopener noreferrer\">"
+			},
+			"link_lm_end": {
+				"content": "</a>"
+			}
+		}
 	},
 	"hub_setup_ghosteryrewards_name_rewards": {
 		"message": "Rewards"
@@ -1567,17 +1407,8 @@
 	"hub_setup_feature_tutorial_description": {
 		"message": "Loop door Ghostery's belangrijkste opties."
 	},
-	"hub_setup_feature_tutorial_button": {
-		"message": "Start"
-	},
-	"hub_setup_feature_supporter_title": {
-		"message": "Ghostery Plus halen"
-	},
 	"hub_setup_feature_supporter_description": {
 		"message": "Steun Ghostery en ontgrendel speciale extra's!"
-	},
-	"hub_setup_feature_supporter_button": {
-		"message": "Helpdesk"
 	},
 	"hub_setup_feature_products_title": {
 		"message": "Bekijk meer Ghostery-producten"
@@ -1611,21 +1442,6 @@
 	},
 	"hub_tutorial_exit_flow": {
 		"message": "Tutorial verlaten"
-	},
-	"hub_tutorial_nav_previous": {
-		"message": "Vorige"
-	},
-	"hub_tutorial_nav_next": {
-		"message": "Volgende"
-	},
-	"hub_tutorial_nav_done": {
-		"message": "Klaar"
-	},
-	"hub_tutorial_simple_view": {
-		"message": "Eenvoudig Overzicht"
-	},
-	"hub_tutorial_detailed_view": {
-		"message": "Gedetailleerd Overzicht"
 	},
 	"hub_tutorial_detailed_expanded_view": {
 		"message": "Gedetailleerd uitgebreid overzicht"
@@ -1678,23 +1494,8 @@
 	"hub_tutorial_antisuite_title": {
 		"message": "Krijg extra bescherming en geautomatiseerde controle met onze verbeterde privacy-opties:"
 	},
-	"hub_tutorial_antisuite_antitracking_title": {
-		"message": "Versterkte Anti-Tracking"
-	},
 	"hub_tutorial_antisuite_antitracking_description": {
 		"message": "Verwijder datapunten waarmee websites jou kunnen identificeren."
-	},
-	"hub_tutorial_antisuite_adblocking_title": {
-		"message": "Versterkte Ad Blokkering"
-	},
-	"hub_tutorial_antisuite_adblocking_description": {
-		"message": "Blokkeer advertenties op de websites die je bezoekt."
-	},
-	"hub_tutorial_antisuite_smartblocking_title": {
-		"message": "Slim Blokkeren"
-	},
-	"hub_tutorial_antisuite_smartblocking_description": {
-		"message": "Blokkeer en deblokkeer trackers automatisch om pagina-performance te optimaliseren."
 	},
 	"hub_products_page_title" : {
 		"message": "Ghostery Hub - Probeer andere Ghostery-producten"
@@ -1732,9 +1533,6 @@
 	"hub_rewards_header_description": {
 		"message": "Onze nieuwe Rewards-functie biedt een nieuwe, krachtige privémanier om online echte kortingen te krijgen. Zet het aan en bekijk het!"
 	},
-	"hub_rewards_header_learn_more": {
-		"message": "Meer Weten"
-	},
 	"hub_rewards_experience_title": {
 		"message": "Een slimmere winkelbeleving"
 	},
@@ -1765,12 +1563,6 @@
 	"hub_supporter_header_description": {
 		"message": "Toon je steun en ontgrendel speciale extra's!"
 	},
-	"hub_supporter_button_text": {
-		"message": "Ghostery Plus halen"
-	},
-	"hub_supporter_button_text_alt": {
-		"message": "Reeds ingeschreven"
-	},
 	"hub_supporter_price": {
 		"message": "$SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$ per maand",
 		"placeholders": {
@@ -1788,14 +1580,8 @@
 			}
 		}
 	},
-	"hub_supporter_perk_themes_title": {
-		"message": "Nieuwe thema's"
-	},
 	"hub_supporter_perk_themes_description": {
 		"message": "Ghostery-kleuren aanpassen - test het Midnight thema!"
-	},
-	"hub_supporter_perk_stats_title": {
-		"message": "Voormalige Blocking Statistieken"
 	},
 	"hub_supporter_perk_stats_description": {
 		"message": "Bekijk je blocking statistieken en zie wat Ghostery doet voor jou"
@@ -1809,20 +1595,11 @@
 	"hub_supporter_manifesto": {
 		"message": "We willen gratis de beste privacybeschermingsdiensten leveren aan onze klanten. Hoewel wij geen kosten rekenen voor onze privacy suite, kun je ons ondersteunen via een klein maandelijks abonnement. Doe mee met onze missie door een upgrade naar Ghostery Plus - en ontgrendel coole extras!"
 	},
-	"hub_supporter_feature_theme_title": {
-		"message": "Nieuwe thema's"
-	},
 	"hub_supporter_feature_theme_description": {
 		"message": "Pas de Ghostery-kleuren aan voor een nieuwe visuele beleving! Na vele verzoeken. Steun ons speciale Midnight-thema, en meer."
 	},
-	"hub_supporter_feature_stats_title": {
-		"message": "Voormalige Blocking Statistieken"
-	},
 	"hub_supporter_feature_stats_description": {
 		"message": "Bekijk geschiedenis blocking resultaten met grafieken en ontdek trends waaruit blijkt hoe Ghostery invloed heeft op jouw browsing."
-	},
-	"hub_supporter_feature_support_title": {
-		"message": "Priority-ondersteuning"
 	},
 	"hub_supporter_feature_support_description": {
 		"message": "Ondersteuning nodig? Een pagina met foutmelding gevonden? Laat je vragen en problemen snel oplossen met onze Priority Ondersteuning, alleen beschikbaar als je bent ingelogd met een Plus account."
@@ -1845,15 +1622,6 @@
 	"hub_login_header_title": {
 		"message": "Log in op je account."
 	},
-	"hub_login_label_email": {
-		"message": "E-mail:"
-	},
-	"hub_login_label_password": {
-		"message": "Wachtwoord:"
-	},
-	"hub_login_label_email_invalid": {
-		"message": "Voer een geldig e-mailadres in."
-	},
 	"hub_login_label_password_invalid": {
 		"message": "Gebruik tussen 8 en 50 karakters."
 	},
@@ -1863,38 +1631,17 @@
 	"hub_login_link_create_account": {
 		"message": "Inschrijven."
 	},
-	"hub_login_button_submit": {
-		"message": "Inloggen "
-	},
 	"hub_login_toast_success": {
 		"message": "Inloggen succesvol! Je instellingen zijn geïmporteerd."
 	},
-	"hub_login_toast_error": {
-		"message": "Het lijkt erop dat we deze email en wachtwoord combi niet kunnen vinden. Probeer het nog een keer."
-	},
 	"hub_create_account_header_title": {
 		"message": "Wil je een Ghostery account aanmaken om instellingen op verschillende browsers en apparaten te synchroniseren?"
-	},
-	"hub_create_account_label_email": {
-		"message": "E-mail:"
-	},
-	"hub_create_account_label_email_confirm": {
-		"message": "Bevestig E-mail:"
 	},
 	"hub_create_account_label_first_name": {
 		"message": "Voornaam (Optioneel):"
 	},
 	"hub_create_account_label_email_last_name": {
 		"message": "Achternaam (Optioneel):"
-	},
-	"hub_create_account_label_password": {
-		"message": "Wachtwoord:"
-	},
-	"hub_create_account_label_email_invalid": {
-		"message": "Voer een geldig e-mailadres in."
-	},
-	"hub_create_account_label_email_confirm_invalid": {
-		"message": "Je e-mailadressen komen niet overeen."
 	},
 	"hub_create_account_label_password_invalid": {
 		"message": "Alleen deze speciale karakters zijn toegestaan: !@#$%^&*=+()<>{}[];:,./?"
@@ -1910,9 +1657,6 @@
 	},
 	"hub_create_account_link_login": {
 		"message": "Hier aanmelden."
-	},
-	"hub_create_account_button_submit": {
-		"message": "Account Aanmaken"
 	},
 	"hub_create_account_toast_success": {
 		"message": "Account aangemaakt"
@@ -2045,9 +1789,6 @@
 	"rewards_code_copied_toast_notification": {
 		"message": "Rewards code gekopieerd!"
 	},
-	"rewards_learn_more": {
-		"message": "Meer Weten"
-	},
 	"offers_hub_copy_btn": {
 		"message": "kopieer code"
 	},
@@ -2066,20 +1807,8 @@
 	"subscription_themes": {
 		"message": "Ghostery thema's"
 	},
-	"subscription_info_title": {
-		"message": "Ghostery Plus"
-	},
 	"subscription_themes_title": {
 		"message": "Thema's"
-	},
-	"subscription_priority_support_title": {
-		"message": "Priority-ondersteuning"
-	},
-	"subscription_priority_support": {
-		"message": "Priority-ondersteuning"
-	},
-	"subscription_history_stats": {
-		"message": "Historische Statistieken"
 	},
 	"subscribe_pitch": {
 		"message": "Ghostery is gratis, maar u kunt ervoor kiezen ons te steunen met een klein abonnement van &#36;2 per maand in ruil voor coole extra's, zoals kleurthema's, priority help service, en meer. Doe mee met onze missie en word lid!"
@@ -2090,8 +1819,14 @@
 	"subscribe_pitch_button_label": {
 		"message": "Haal Ghostery Plus!"
 	},
+	"subscribe_pitch_no_thanks": {
+		"message": "Nee bedankt, misschien later"
+	},
 	"subscribe_pitch_sign_here": {
 		"message": "Al ingeschreven? Hier inschrijven"
+	},
+	"subscribe_pitch_sign_in": {
+		"message": "Al ingeschreven? Aanmelden"
 	},
 	"subscription_midnight_theme": {
 		"message": "Midnight thema"
@@ -2110,9 +1845,6 @@
 	},
 	"subscription_themes_tooltip": {
 		"message": "Wijzig kleurschema van Ghostery!"
-	},
-	"subscription_tracker_stats": {
-		"message": "Historische Statistieken"
 	},
 	"subscription_charge_date" : {
 		"message": "Volgende betaaldag"
@@ -2157,9 +1889,6 @@
 	},
 	"panel_stats_menu_daily": {
 		"message": "Dagelijks"
-	},
-	"panel_stats_header_title": {
-		"message": "Historische trackerstatistieken"
 	},
 	"panel_stats_header_title_monthly": {
 		"message": "Historische Tracker Statistieken (Maandelijks.)"
@@ -2223,9 +1952,6 @@
 	"panel_stats_pitch_modal_sign_in": {
 		"message": "Hier aanmelden"
 	},
-	"panel_stats_pitch_modal_subscribe": {
-		"message": "Haal Ghostery Plus!"
-	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "Wis alle statistiekengeschiedenis tot aan dit punt."
 	},
@@ -2246,12 +1972,6 @@
 	},
 	"ads": {
 		"message": "ads"
-	},
-	"cliqz_feature_status_on": {
-		"message": "Aan"
-	},
-	"cliqz_feature_status_off": {
-		"message": "Uit"
 	},
 	"create_account_form_legal_consent_checkbox_label": {
 		"message": "Ik ga akkoord met de $LINK_TERMS_START$Algemene voorwaarden$LINK_END$ en de $LINK_LICENSE_START$Openbare licentieovereenkomst$LINK_END$ en sta het gebruik van gegevens toe die in het $LINK_PRIVACY_START$Privacybeleid$LINK_END$ worden beschreven.",
@@ -2281,5 +2001,191 @@
 	},
 	"unknown_description": {
 		"message": "Onbekende trackers opgeschoond door Anti-Tracking"
+	},
+	"ghostery_is_ready": {
+		"message": "Ghostery is klaar!"
+	},
+	"choose_your_privacy_plan": {
+		"message": "Kies je privacy-abonnement"
+	},
+	"choose_your_ghostery_privacy_plan": {
+		"message": "Kies je privacy-abonnement van Ghostery"
+	},
+	"ghostery_basic": {
+		"message": "Basic"
+	},
+	"ghostery_plus": {
+		"message": "Ghostery Plus"
+	},
+	"locale_appropriate_currency_icon": {
+		"message": "€",
+		"description": "Use '$$' to mean '$'. '$' has a special meaning in the code and the first '$' tells the browser to ignore the special meaning of the second '$' and print it literally."
+	},
+	"plus_monthly_subscription_price_number": {
+		"message": "2"
+	},
+	"per_month": {
+		"message": "per maand"
+	},
+	"faster_cleaner_browsing": {
+		"message": "Sneller, schoner browsen",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"blocks_ads": {
+		"message": "Advertentieblokkering",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"blocks_trackers": {
+		"message": "Trackers blokkeren",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"data_protection": {
+		"message": "Gegevensbescherming",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"select_basic": {
+		"message": "Basic kiezen"
+	},
+	"select_plus": {
+		"message": "Plus kiezen"
+	},
+	"recommended": {
+		"message": "Aanbevolen"
+	},
+	"get_ghostery_plus": {
+		"message": "Abonneren op Ghostery Plus"
+	},
+	"get_ghostery_plus_bang": {
+		"message": "Haal Ghostery Plus!"
+	},
+	"already_subscribed": {
+		"message": "Reeds ingeschreven"
+	},
+	"new_themes": {
+		"message": "Nieuwe thema's"
+	},
+	"historical_blocking_stats": {
+		"message": "Voormalige Blockingstatistieken"
+	},
+	"sign_in": {
+		"message": "Inloggen "
+	},
+	"sign_out": {
+		"message": "Uitloggen"
+	},
+	"create_account": {
+		"message": "Account Aanmaken"
+	},
+	"email_colon": {
+		"message": "E-mail:"
+	},
+	"confirm_email_colon": {
+		"message": "Bevestig E-mail:"
+	},
+	"next": {
+		"message": "Volgende"
+	},
+	"previous": {
+		"message": "Vorige"
+	},
+	"done": {
+		"message": "Klaar"
+	},
+	"simple_view": {
+		"message": "Eenvoudig Overzicht"
+	},
+	"detailed_view": {
+		"message": "Gedetailleerd Overzicht"
+	},
+	"support": {
+		"message": "Helpdesk"
+	},
+	"start": {
+		"message": "Start"
+	},
+	"password_colon": {
+		"message": "Wachtwoord:"
+	},
+	"please_enter_a_valid_email": {
+		"message": "Voer een geldig e-mailadres in."
+	},
+	"your_email_do_not_match": {
+		"message": "Je e-mailadressen komen niet overeen."
+	},
+	"customize_setup": {
+		"message": "Aangepaste Instelling"
+	},
+	"learn_more": {
+		"message": "Meer Weten"
+	},
+	"historical_stats": {
+		"message": "Historische Statistieken"
+	},
+	"priority_support": {
+		"message": "Priority-ondersteuning",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
+	},
+	"on": {
+		"message": "Aan"
+	},
+	"off": {
+		"message": "Uit"
+	},
+	"enhanced_ad_blocking": {
+		"message": "Versterkte Ad Blokkering"
+	},
+	"smart_blocking": {
+		"message": "Slim Blokkeren"
+	},
+	"smart_blocking_DESC": {
+		"message": "Blokkeer en deblokkeer trackers automatisch om pagina-performance te optimaliseren."
+	},
+	"ad_blocking_DESC": {
+		"message": "Blokkeer advertenties op de websites die je bezoekt."
+	},
+	"anti_tracking_DESC": {
+		"message": "Anonimiseer gedeblokkeerde en onbekende trackers voor meer bescherming tijdens het browsen."
+	},
+	"no_such_email_password_combo": {
+		"message": "Het lijkt erop dat we deze e-mail/wachtwoord combinatie niet kunnen vinden. Probeer het nog een keer."
+	},
+	"all_basic_features_plus_COLON": {
+		"message": "Alle basisfuncties, plus:",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"historical_tracker_stats": {
+		"message": "Historische trackerstatistieken",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
+	},
+	"new_color_themes": {
+		"message": "Nieuwe kleurthema's",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
+	},
+	"upgrade_cta_TEXT": {
+		"message": "Ontgrendel oude trackergegevens, VIP-ondersteuning en nieuwe kleurenthema's door te upgraden naar Ghostery Plus voor &#36;2 per maand.",
+		"description": "Body text in a non-responsive modal. Character limit (including spaces and punctuation): 135."
+	},
+	"upgrade_your_ghostery_experience": {
+		"message": "Je Ghostery-ervaring upgraden",
+		"description": "Header text for a non-responsive modal. Character limit (including spaces and punctuation): 40."
+	},
+	"upgrade_to_plus": {
+		"message": "Upgraden naar Plus",
+		"description": "Button text in a non-responsive modal. Character limit (including spaces and punctuation): 35."
+	},
+	"no_thanks_turn_promos_off": {
+		"message": "Nee, advert. uitschakelen",
+		"description": "Text link in a non-responsive modal. Character limit (including spaces and punctuation): 28."
+	},
+	"already_subscribed_sign_in": {
+		"message": "Al ingeschreven? Aanmelden",
+		"description": "Character limit (including spaces and punctuation): 28."
+	},
+	"promos_turned_off_notification": {
+		"message": "Advertenties uitschakelen. Je kunt ze opnieuw inschakelen in ",
+		"description": "translation must take into account that 'Settings' is appended to this string"
+	},
+	"settings": {
+		"message": "Instellingen"
 	}
 }

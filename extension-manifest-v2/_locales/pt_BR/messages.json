@@ -22,15 +22,8 @@
 			}
 		}
 	},
-	"all": {
-		"description": "Default setting in the 'filter by type' dropdown for the tag browser. Doesn't filter anything out. Should read as 'Show all'.",
-		"message": "tudo"
-	},
 	"banner_check_your_email_title": {
 		"message": "Verifique em breve seu email quanto ao recebimento de um link para redefinir sua senha."
-	},
-	"banner_no_such_account_message": {
-		"message": "Aparentemente, não pudemos encontrar essa combinação de email e senha. Tente outra vez."
 	},
 	"banner_email_not_in_system_message": {
 		"message": "Desculpe, esse e-mail não está em nosso sistema."
@@ -40,10 +33,6 @@
 	},
 	"blacklist_error_whitelist_url": {
 		"message": "Esse site foi removido de nossa lista de Sites Confiados e adicionado à sua lista de Sites Restritos."
-	},
-	"blocked": {
-		"description": "Select this to show only blocked (checked) tags in the tag browser. Should read as 'Show blocked'.",
-		"message": "bloqueadas"
 	},
 	"blocked_redirect_action_always_title": {
 		"description": "Title for the 'Allow always and reload' button on the blocked redirect page.",
@@ -375,31 +364,6 @@
 			}
 		}
 	},
-	"copyright": {
-		"description": "Copyright message, shown in page footers.",
-		"message": "$C$ $YEAR$ $GHOSTERY$, parte da $COMPANY_ADDRESS$",
-		"placeholders": {
-			"c": {
-				"content": "&copy;"
-			},
-			"company_address": {
-				"content": "$1",
-				"example": "GHOSTERY, Inc., Such-and-such Street, Such-and-such Floor, New York, NY, Zip Code"
-			},
-			"ghostery": {
-				"content": "<a href='https://www.ghostery.com' target='_blank'>Ghostery</a>"
-			},
-			"year": {
-				"content": "2015"
-			}
-		}
-	},
-	"email_confirm_field_label": {
-		"message": "Confirmar email:"
-	},
-	"email_field_label": {
-		"message": "Email:"
-	},
 	"error_email_forgot": {
 		"message": "Hmm, não consigo encontrar esse email. Tentar outro, talvez?"
 	},
@@ -408,12 +372,6 @@
 	},
 	"forgot_password_message": {
 		"message": "Esqueceu sua senha? Ei, isso acontece com todo mundo. Enviaremos a você instruções para redefinir sua senha."
-	},
-	"invalid_email_confirmation": {
-		"message": "Seus emails não conferem."
-	},
-	"invalid_email_create": {
-		"message": "Digite um email válido."
 	},
 	"invalid_email_forgot": {
 		"message": "Desculpe, você precisa informar um endereço de email válido."
@@ -532,9 +490,6 @@
 		"description": "as in '5 (trackers) WHITELISTED'",
 		"message": "Colocado na lista branca"
 	},
-	"panel_create_account": {
-		"message": "Criar conta"
-	},
 	"panel_email_verification_sent": {
 		"message": "$BOLD_HTML_STARTS$ Sucesso! $BOLD_HTML_END$ Um email de verificação foi enviado para $EMAIL$",
 		"placeholders": {
@@ -568,11 +523,35 @@
 	"panel_help_questions_header": {
 		"message": "Questões e comentários"
 	},
-	"panel_help_support": {
-		"message": "Suporte"
-	},
 	"panel_help_setup": {
 		"message": "Configurar o Ghostery"
+	},
+	"panel_insights_audit_tags": {
+		"message": "Faça a auditoria de tags em uma página",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 30."
+	},
+	"panel_insights_promotion_explore_trends": {
+		"message": "Explore tendências digitais globais",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
+	},
+	"panel_insights_promotion_call_to_action": {
+		"message": "Faça um teste gratuito"
+	},
+	"panel_insights_promotion_header": {
+		"message": "Experimente o Ghostery Insights",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 35."
+	},
+	"panel_insights_promotion_description": {
+		"message": "Acelere e simplifique a experiência digital do usuário com nossa ferramenta de análise de tags profissional.",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 90."
+	},
+	"panel_insights_promotion_trace_poor_performance": {
+		"message": "Rastreie fontes de baixo desempenho",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 33."
+	},
+	"panel_insights_promotion_watch_pings": {
+		"message": "Veja pings sendo disparados em tempo real",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
 	},
 	"panel_about_panel_header": {
 		"message": "Sobre a extensão do navegador Ghostery"
@@ -622,15 +601,6 @@
 	},
 	"panel_menu_about": {
 		"message": "Sobre"
-	},
-	"panel_menu_ghostery_subscriber": {
-		"message": "Ghostery Plus"
-	},
-	"panel_menu_signin": {
-		"message": "Entrar"
-	},
-	"panel_menu_signout": {
-		"message": "Sair"
 	},
 	"global_settings_saved": {
 		"message": "Configurações Globais Salvas"
@@ -691,9 +661,6 @@
 	"panel_signin_success_title": {
 		"message": "Parabéns! Sua conta Ghostery está pronta."
 	},
-	"panel_title_create_account": {
-		"message": "Criar conta"
-	},
 	"panel_tracker_found_sources_title": {
 		"message": "Rastreadores de URL detectados:"
 	},
@@ -739,14 +706,8 @@
 	"panel_detail_menu_rewards_title": {
 		"message": "Rewards"
 	},
-	"panel_detail_menu_stats_title": {
-		"message": "Estatísticas históricas"
-	},
 	"panel_detail_menu_premium_title": {
 		"message": "Premium"
-	},
-	"panel_detail_learn_more": {
-		"message": "Aprender mais"
 	},
 	"panel_detail_history_title": {
 		"message": "História"
@@ -802,26 +763,14 @@
 	"notification_library_update_link": {
 		"message": "Veja o que há de novo"
 	},
-	"panel_header_sign_in": {
-		"message": "Entrar"
-	},
 	"panel_header_verify_account": {
 		"message": "Verificar conta"
-	},
-	"panel_header_simple_view": {
-		"message": "Visão simples"
-	},
-	"panel_header_detailed_view": {
-		"message": "Visão detalhada"
 	},
 	"password_characters_requirements": {
 		"message": "Apenas esses caracteres especiais são permitidos: !@#$%^&*=+()<>{}[];:,./?"
 	},
 	"password_field_label": {
 		"message": "Senha"
-	},
-	"create_password_field_label": {
-		"message": "Senha:"
 	},
 	"password_requirements": {
 		"message": "Use entre 8 e 50 caracteres."
@@ -957,6 +906,9 @@
 	},
 	"settings_new_features": {
 		"message": "Lançar novas funcionalidades"
+	},
+	"settings_new_promotions": {
+		"message": "Inclui promoção de produtos"
 	},
 	"settings_new_trackers": {
 		"message": "Adiciona novos rastreadores para sua biblioteca de rastreadores"
@@ -1126,57 +1078,6 @@
 	"blocking_category_tracker_found": {
 		"message": "Encontrado"
 	},
-	"drawer_title_enable_anti_tracking": {
-		"message": "Anti-rastreamento aprimorado"
-	},
-	"drawer_tooltip_enable_anti_tracking": {
-		"message": "Os rastreadores integrados registram as atividades do usuário na maioria dos websites. O anti-rastreamento remove todos os dados que possam ser usados para identificar você antes que sejam coletados por estes rastreadores. Essa figura mostra quantos pontos de dados foram removidos no site."
-	},
-	"drawer_label_enable_anti_tracking": {
-		"message": "Rastreadores anonimizados"
-	},
-	"drawer_desc_enable_anti_tracking": {
-		"message": "Os pontos de dados privados foram removidos."
-	},
-	"drawer_status_enable_anti_tracking": {
-		"message": "Anti-rastreamento é"
-	},
-	"drawer_title_enable_ad_block": {
-		"message": "Bloqueio de anúncios aprimorado"
-	},
-	"drawer_tooltip_enable_ad_block": {
-		"message": "Mostrar ou bloquear todos os anúncios nos websites."
-	},
-	"drawer_label_enable_ad_block": {
-		"message": "Anúncios bloqueados"
-	},
-	"drawer_desc_enable_ad_block": {
-		"message": "Locais de anúncios foram bloqueados"
-	},
-	"drawer_status_enable_ad_block": {
-		"message": "Bloqueio de anúncios é"
-	},
-	"drawer_title_enable_smart_block": {
-		"message": "Bloqueio inteligente"
-	},
-	"drawer_tooltip_enable_smart_block": {
-		"message": "Bloquear e desbloquear automaticamente os rastreadores para otimizar o desempenho da página"
-	},
-	"drawer_label_enable_smart_block": {
-		"message": "Rastreadores ajustados"
-	},
-	"drawer_desc_enable_smart_block": {
-		"message": "Os rastreadores foram temporariamente bloqueados ou desbloqueados."
-	},
-	"drawer_status_enable_smart_block": {
-		"message": "Bloqueio inteligente está"
-	},
-	"drawer_on": {
-		"message": "Ligado"
-	},
-	"drawer_off": {
-		"message": "Desligado"
-	},
 	"blocking_unblock_all": {
 		"message": "Desbloquear tudo"
 	},
@@ -1246,34 +1147,16 @@
 	"alert_site_restricted_off": {
 		"message": "O site não está mais na lista negra."
 	},
-	"tooltip_anti_track": {
-		"message": "Anti-rastreamento aprimorado"
-	},
-	"tooltip_anti_track_body": {
-		"message": "Anonimizar rastreadores desbloqueados e desconhecidos para uma maior proteção na navegação."
-	},
-	"tooltip_anti_track_body_on": {
+	"tooltip_anti_track_on": {
 		"message": "Pontos de dados pessoais anonimizados."
 	},
 	"tooltip_body_in_cliqz": {
 		"message": "A funcionalidade já está ativa por padrão no Cliqz."
 	},
-	"tooltip_ad_block": {
-		"message": "Bloqueio de anúncios aprimorado"
-	},
-	"tooltip_ad_block_body": {
-		"message": "Bloqueie anúncios de websites que você visita."
-	},
-	"tooltip_ad_block_body_on": {
+	"tooltip_ad_block_on": {
 		"message": "Os anúncios não foram bloqueados."
 	},
-	"tooltip_smart_block": {
-		"message": "Bloqueio inteligente"
-	},
-	"tooltip_smart_block_body": {
-		"message": "Bloquear e desbloquear automaticamente os rastreadores para otimizar o desempenho da página"
-	},
-	"tooltip_smart_block_body_on": {
+	"tooltip_smart_block_on": {
 		"message": "O bloqueio inteligente ajustado para otimizar o desempenho da página."
 	},
 	"tooltip_trust": {
@@ -1293,12 +1176,6 @@
 	},
 	"tooltip_resume": {
 		"message": "Continuar o Ghostery"
-	},
-	"tooltip_expert": {
-		"message": "Visão detalhada"
-	},
-	"tooltip_simple": {
-		"message": "Visão simples"
 	},
 	"license_module": {
 		"message": "Módulo"
@@ -1350,29 +1227,14 @@
 	"hub_side_navigation_home": {
 		"message": "Início"
 	},
-	"hub_side_navigation_setup": {
-		"message": "Personalizar Configuração"
-	},
 	"hub_side_navigation_tutorial": {
 		"message": "Ver um tutorial"
-	},
-	"hub_side_navigation_supporter": {
-		"message": "Obter o Ghostery Plus"
 	},
 	"hub_side_navigation_rewards": {
 		"message": "Experimente as Recompensas Ghostery"
 	},
 	"hub_side_navigation_products": {
 		"message": "Veja mais produtos Ghostery"
-	},
-	"hub_side_navigation_create_account": {
-		"message": "Criar conta"
-	},
-	"hub_side_navigation_log_in": {
-		"message": "Entrar"
-	},
-	"hub_side_navigation_log_out": {
-		"message": "Sair"
 	},
 	"hub_home_page_title": {
 		"message": "Ghostery Hub - Início"
@@ -1389,11 +1251,17 @@
 	"hub_home_header_checkbox_label": {
 		"message": "Compartilhe dados de análise anônimos adicionais para melhorar o desempenho do Ghostery."
 	},
+	"hub_home_header_info_opted_in_rewards": {
+		"message": "Por padrão, novos usuários participam das Ghostery Rewards, mas não da Human Web. Você pode alterar essas definições em configurações personalizadas ou na extensão."
+	},
 	"hub_home_header_info_opted_out": {
 		"message": "Os novos usuários, por padrão, não participam das Ghostery Rewards e da Human Web. Você pode optar pela inclusão nesses recursos recomendados em configurações personalizadas ou na extensão."
 	},
 	"hub_home_header_info": {
 		"message": "Os novos usuários já optam por participar da Human Web e das Ghostery Rewards. Você pode alterar essas configurações nas configurações personalizadas ou na extensão."
+	},
+	"hub_home_header_info_cliqz": {
+		"message": "Os novos usuários já optam por participar da Human Web. Você pode alterar essas configurações nas configurações personalizadas ou na extensão."
 	},
 	"hub_home_header_info_link": {
 		"message": "Saiba mais."
@@ -1401,23 +1269,14 @@
 	"hub_home_subheader_optimize": {
 		"message": "Otimize sua experiência no Ghostery"
 	},
-	"hub_home_subheader_create_account": {
-		"message": "Criar conta"
-	},
 	"hub_home_feature_tutorial_title": {
 		"message": "Ver um tutorial"
 	},
 	"hub_home_feature_tutorial_text": {
 		"message": "Conheça as principais características do Ghostery."
 	},
-	"hub_home_feature_tutorial_button": {
-		"message": "Início"
-	},
 	"hub_home_feature_tutorial_button_alt": {
 		"message": "Tutorial Concluído"
-	},
-	"hub_home_feature_setup_title": {
-		"message": "Personalizar Configuração"
 	},
 	"hub_home_feature_setup_text": {
 		"message": "Edite suas configurações e preferências de bloqueio."
@@ -1430,12 +1289,6 @@
 	},
 	"hub_home_feature_supporter_text": {
 		"message": "Atualize para o Ghostery Plus e desbloqueie recursos especiais."
-	},
-	"hub_home_feature_supporter_button": {
-		"message": "Obter o Ghostery Plus"
-	},
-	"hub_home_feature_supporter_button_alt": {
-		"message": "Já assinei"
 	},
 	"hub_setup_page_title": {
 		"message": "Ghostery Hub - Configuração"
@@ -1471,15 +1324,6 @@
 	},
 	"hub_setup_exit_flow": {
 		"message": "Sair da instalação personalizada"
-	},
-	"hub_setup_nav_previous": {
-		"message": "Anterior"
-	},
-	"hub_setup_nav_next": {
-		"message": "Próximo"
-	},
-	"hub_setup_nav_done": {
-		"message": "Pronto"
 	},
 	"hub_setup_enter_modal_text": {
 		"message": "Entrar na configuração personalizada substituirá as configurações anteriores do Ghostery. Deseja continuar?"
@@ -1517,23 +1361,19 @@
 	"hub_setup_blocking_description_custom": {
 		"message": "Escolha quais rastreadores bloquear"
 	},
-	"hub_setup_antisuite_name_antitracking": {
-		"message": "Anti-rastreamento aprimorado"
-	},
 	"hub_setup_antisuite_description_antitracking": {
 		"message": "Anonimizar rastreadores desbloqueados e desconhecidos para uma maior proteção na navegação."
 	},
-	"hub_setup_adblock_name_adblocking": {
-		"message": "Bloqueio de anúncios aprimorado"
-	},
-	"hub_setup_adblock_description_adblocking": {
-		"message": "Bloqueie os anúncios de websites que você visita."
-	},
-	"hub_setup_smartblocking_name_smartblocking": {
-		"message": "Bloqueio inteligente"
-	},
-	"hub_setup_smartblocking_description_smartblocking": {
-		"message": "Bloquear e desbloquear automaticamente os rastreadores para otimizar o desempenho da página"
+	"hub_setup_feature_already_active": {
+		"message": "A funcionalidade já está ativa por padrão no Cliqz. $LINK_LM_START$Saiba mais$LINK_LM_END$",
+		"placeholders": {
+			"link_lm_start": {
+				"content": "<a href=\"https://www.ghostery.com/faqs/what-are-the-new-ghostery-8-features/\" target=\"_blank\" rel=\"noopener noreferrer\">"
+			},
+			"link_lm_end": {
+				"content": "</a>"
+			}
+		}
 	},
 	"hub_setup_ghosteryrewards_name_rewards": {
 		"message": "Rewards"
@@ -1567,17 +1407,8 @@
 	"hub_setup_feature_tutorial_description": {
 		"message": "Conheça as principais características do Ghostery."
 	},
-	"hub_setup_feature_tutorial_button": {
-		"message": "Início"
-	},
-	"hub_setup_feature_supporter_title": {
-		"message": "Obter o Ghostery Plus"
-	},
 	"hub_setup_feature_supporter_description": {
 		"message": "Apoie Ghostery e desbloqueie regalias especiais."
-	},
-	"hub_setup_feature_supporter_button": {
-		"message": "Suporte"
 	},
 	"hub_setup_feature_products_title": {
 		"message": "Veja mais Produtos Ghostery "
@@ -1611,21 +1442,6 @@
 	},
 	"hub_tutorial_exit_flow": {
 		"message": "Sair do tutorial"
-	},
-	"hub_tutorial_nav_previous": {
-		"message": "Anterior"
-	},
-	"hub_tutorial_nav_next": {
-		"message": "Próximo"
-	},
-	"hub_tutorial_nav_done": {
-		"message": "Pronto"
-	},
-	"hub_tutorial_simple_view": {
-		"message": "Visão simples"
-	},
-	"hub_tutorial_detailed_view": {
-		"message": "Visão detalhada"
 	},
 	"hub_tutorial_detailed_expanded_view": {
 		"message": "Vista expandida detalhada"
@@ -1678,23 +1494,8 @@
 	"hub_tutorial_antisuite_title": {
 		"message": "Obtenha proteção extra e controle automatizado com nossos recursos de privacidade aprimorados:"
 	},
-	"hub_tutorial_antisuite_antitracking_title": {
-		"message": "Anti-rastreamento aprimorado"
-	},
 	"hub_tutorial_antisuite_antitracking_description": {
 		"message": "Remova os pontos de dados que os sites podem usar para identificar você."
-	},
-	"hub_tutorial_antisuite_adblocking_title": {
-		"message": "Bloqueio de anúncios aprimorado"
-	},
-	"hub_tutorial_antisuite_adblocking_description": {
-		"message": "Bloqueie anúncios nas páginas que você visita."
-	},
-	"hub_tutorial_antisuite_smartblocking_title": {
-		"message": "Bloqueio inteligente"
-	},
-	"hub_tutorial_antisuite_smartblocking_description": {
-		"message": "Bloquear e desbloquear automaticamente os rastreadores para otimizar o desempenho da página"
 	},
 	"hub_products_page_title" : {
 		"message": "Ghostery Hub - Experimente Outros Produtos Ghostery"
@@ -1732,9 +1533,6 @@
 	"hub_rewards_header_description": {
 		"message": "Nosso novo recurso Rewards oferece uma nova forma poderosa e totalmente privada de receber descontos reais on-line. Ative-o e confira!"
 	},
-	"hub_rewards_header_learn_more": {
-		"message": "Aprender mais"
-	},
 	"hub_rewards_experience_title": {
 		"message": "Uma experiência de compra mais inteligente"
 	},
@@ -1765,12 +1563,6 @@
 	"hub_supporter_header_description": {
 		"message": "Demonstre seu apoio e desbloqueie vantagens especiais!"
 	},
-	"hub_supporter_button_text": {
-		"message": "Obter o Ghostery Plus"
-	},
-	"hub_supporter_button_text_alt": {
-		"message": "Já assinei"
-	},
 	"hub_supporter_price": {
 		"message": "$SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$ por mês",
 		"placeholders": {
@@ -1788,14 +1580,8 @@
 			}
 		}
 	},
-	"hub_supporter_perk_themes_title": {
-		"message": "Novos temas"
-	},
 	"hub_supporter_perk_themes_description": {
 		"message": "Personalize as cores Ghostery - experimente o nosso tema da meia-noite!"
-	},
-	"hub_supporter_perk_stats_title": {
-		"message": "Estatísticas históricas de bloqueio"
 	},
 	"hub_supporter_perk_stats_description": {
 		"message": "Veja suas estatísticas de bloqueio e veja como a Ghostery está trabalhando para você"
@@ -1809,20 +1595,11 @@
 	"hub_supporter_manifesto": {
 		"message": "Nós nos esforçamos para oferecer os melhores serviços de proteção de privacidade para nossos usuários sem custos. Apesar de não cobrarmos pelo nosso pacote de privacidade, você pode optar por nos apoiar através de uma pequena assinatura mensal. Junte-se a nós em nossa missão atualizando para Ghostery Plus - e desbloqueie regalias legais pelo caminho!"
 	},
-	"hub_supporter_feature_theme_title": {
-		"message": "Novos temas"
-	},
 	"hub_supporter_feature_theme_description": {
 		"message": "Personalize as cores Ghostery para uma nova experiência visual! Introduzido a pedido popular. Confira nosso tema especial da meia-noite e muito mais por vir."
 	},
-	"hub_supporter_feature_stats_title": {
-		"message": "Estatísticas históricas de bloqueio"
-	},
 	"hub_supporter_feature_stats_description": {
 		"message": "Veja os resultados históricos de bloqueio com gráficos e estatísticas para revelar tendências e saiba como o Ghostery afetou sua navegação."
-	},
-	"hub_supporter_feature_support_title": {
-		"message": "Suporte prioritário"
 	},
 	"hub_supporter_feature_support_description": {
 		"message": "Precisa de assistência? Encontrou uma página quebrada? Tenha suas perguntas respondidas e resolva os problemas rapidamente com o nosso serviço de help desk prioritário, acessível somente quando conectado com uma conta Plus."
@@ -1845,15 +1622,6 @@
 	"hub_login_header_title": {
 		"message": "Faça login em sua conta."
 	},
-	"hub_login_label_email": {
-		"message": "Email:"
-	},
-	"hub_login_label_password": {
-		"message": "Senha:"
-	},
-	"hub_login_label_email_invalid": {
-		"message": "Digite um email válido."
-	},
 	"hub_login_label_password_invalid": {
 		"message": "Use entre 8 e 50 caracteres."
 	},
@@ -1863,38 +1631,17 @@
 	"hub_login_link_create_account": {
 		"message": "Inscrever-se."
 	},
-	"hub_login_button_submit": {
-		"message": "Entrar"
-	},
 	"hub_login_toast_success": {
 		"message": "Sucesso ao entrar! As configurações da sua conta foram importadas."
 	},
-	"hub_login_toast_error": {
-		"message": "Aparentemente, não pudemos encontrar essa combinação de email e senha. Tente outra vez."
-	},
 	"hub_create_account_header_title": {
 		"message": "Gostaria de criar uma conta do Ghostery para sincronizar as configurações em todos os navegadores e dispositivos?"
-	},
-	"hub_create_account_label_email": {
-		"message": "Email:"
-	},
-	"hub_create_account_label_email_confirm": {
-		"message": "Confirmar email:"
 	},
 	"hub_create_account_label_first_name": {
 		"message": "Primeiro nome (opcional):"
 	},
 	"hub_create_account_label_email_last_name": {
 		"message": "Sobrenome (opcional):"
-	},
-	"hub_create_account_label_password": {
-		"message": "Senha:"
-	},
-	"hub_create_account_label_email_invalid": {
-		"message": "Digite um email válido."
-	},
-	"hub_create_account_label_email_confirm_invalid": {
-		"message": "Seus emails não conferem."
 	},
 	"hub_create_account_label_password_invalid": {
 		"message": "Apenas esses caracteres especiais são permitidos: !@#$%^&*=+()<>{}[];:,./?"
@@ -1910,9 +1657,6 @@
 	},
 	"hub_create_account_link_login": {
 		"message": "Entre aqui."
-	},
-	"hub_create_account_button_submit": {
-		"message": "Criar conta"
 	},
 	"hub_create_account_toast_success": {
 		"message": "Conta criada com sucesso"
@@ -2045,9 +1789,6 @@
 	"rewards_code_copied_toast_notification": {
 		"message": "Código de Rewards copiado!"
 	},
-	"rewards_learn_more": {
-		"message": "Aprender mais"
-	},
 	"offers_hub_copy_btn": {
 		"message": "Copiar código"
 	},
@@ -2066,20 +1807,8 @@
 	"subscription_themes": {
 		"message": "Temas do Ghostery"
 	},
-	"subscription_info_title": {
-		"message": "Ghostery Plus"
-	},
 	"subscription_themes_title": {
 		"message": "Temas"
-	},
-	"subscription_priority_support_title": {
-		"message": "Suporte prioritário"
-	},
-	"subscription_priority_support": {
-		"message": "Suporte prioritário"
-	},
-	"subscription_history_stats": {
-		"message": "Estatísticas históricas"
 	},
 	"subscribe_pitch": {
 		"message": "Embora o Ghostery seja gratuito, você pode optar por nos apoiar por meio de uma pequena assinatura de US$ 2 por mês em troca de vantagens legais, como temas de cores, serviço de ajuda prioritária e muito mais. Participe de nossa missão e assine!"
@@ -2090,7 +1819,13 @@
 	"subscribe_pitch_button_label": {
 		"message": "Obtenha o Ghostery Plus!"
 	},
+	"subscribe_pitch_no_thanks": {
+		"message": "Não, obrigado. Talvez mais tarde"
+	},
 	"subscribe_pitch_sign_here": {
+		"message": "Já é assinante? Entre aqui"
+	},
+	"subscribe_pitch_sign_in": {
 		"message": "Já é assinante? Entre aqui"
 	},
 	"subscription_midnight_theme": {
@@ -2110,9 +1845,6 @@
 	},
 	"subscription_themes_tooltip": {
 		"message": "Mude o esquema de cores do Ghostery!"
-	},
-	"subscription_tracker_stats": {
-		"message": "Estatísticas históricas"
 	},
 	"subscription_charge_date" : {
 		"message": "Próxima data de pagamento"
@@ -2157,9 +1889,6 @@
 	},
 	"panel_stats_menu_daily": {
 		"message": "Diário"
-	},
-	"panel_stats_header_title": {
-		"message": "Estatísticas históricas do rastreador"
 	},
 	"panel_stats_header_title_monthly": {
 		"message": "Estatísticas históricas do rastreador (média mensal)"
@@ -2223,9 +1952,6 @@
 	"panel_stats_pitch_modal_sign_in": {
 		"message": "Entre aqui"
 	},
-	"panel_stats_pitch_modal_subscribe": {
-		"message": "Obtenha o Ghostery Plus!"
-	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "Apague todo o histórico de estatísticas até o presente momento."
 	},
@@ -2246,12 +1972,6 @@
 	},
 	"ads": {
 		"message": "anúncios"
-	},
-	"cliqz_feature_status_on": {
-		"message": "Ligado"
-	},
-	"cliqz_feature_status_off": {
-		"message": "Desligado"
 	},
 	"create_account_form_legal_consent_checkbox_label": {
 		"message": "Eu aceito os $LINK_TERMS_START$Termos e Condições$LINK_END$, o $LINK_LICENSE_START$Contrato de Licença Público$LINK_END$, e dou meu consentimento para as práticas de dados encontradas na $LINK_PRIVACY_START$Política de Privacidade$LINK_END$.",
@@ -2281,5 +2001,191 @@
 	},
 	"unknown_description": {
 		"message": "Rastreadores desconhecidos desinfectados por Anti-Tracking"
+	},
+	"ghostery_is_ready": {
+		"message": "Ghostery está pronto!"
+	},
+	"choose_your_privacy_plan": {
+		"message": "Escolha seu plano de privacidade"
+	},
+	"choose_your_ghostery_privacy_plan": {
+		"message": "Escolha seu plano de privacidade Ghostery"
+	},
+	"ghostery_basic": {
+		"message": "Básico"
+	},
+	"ghostery_plus": {
+		"message": "Ghostery Plus"
+	},
+	"locale_appropriate_currency_icon": {
+		"message": "$$",
+		"description": "Use '$$' to mean '$'. '$' has a special meaning in the code and the first '$' tells the browser to ignore the special meaning of the second '$' and print it literally."
+	},
+	"plus_monthly_subscription_price_number": {
+		"message": "2"
+	},
+	"per_month": {
+		"message": "por mês"
+	},
+	"faster_cleaner_browsing": {
+		"message": "Navegador mais rápido e mais simples",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"blocks_ads": {
+		"message": "Bloqueio de anúncios",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"blocks_trackers": {
+		"message": "Bloqueio de rastreadores",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"data_protection": {
+		"message": "Proteção de dados",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"select_basic": {
+		"message": "Selecionar Básico"
+	},
+	"select_plus": {
+		"message": "Selecionar Plus"
+	},
+	"recommended": {
+		"message": "Recomendado"
+	},
+	"get_ghostery_plus": {
+		"message": "Obter o Ghostery Plus"
+	},
+	"get_ghostery_plus_bang": {
+		"message": "Obtenha o Ghostery Plus!"
+	},
+	"already_subscribed": {
+		"message": "Já assinei"
+	},
+	"new_themes": {
+		"message": "Novos temas"
+	},
+	"historical_blocking_stats": {
+		"message": "Estatísticas históricas de bloqueio"
+	},
+	"sign_in": {
+		"message": "Entrar"
+	},
+	"sign_out": {
+		"message": "Sair"
+	},
+	"create_account": {
+		"message": "Criar conta"
+	},
+	"email_colon": {
+		"message": "Email:"
+	},
+	"confirm_email_colon": {
+		"message": "Confirmar email:"
+	},
+	"next": {
+		"message": "Próximo"
+	},
+	"previous": {
+		"message": "Anterior"
+	},
+	"done": {
+		"message": "Pronto"
+	},
+	"simple_view": {
+		"message": "Visão simples"
+	},
+	"detailed_view": {
+		"message": "Visão detalhada"
+	},
+	"support": {
+		"message": "Suporte"
+	},
+	"start": {
+		"message": "Início"
+	},
+	"password_colon": {
+		"message": "Senha:"
+	},
+	"please_enter_a_valid_email": {
+		"message": "Digite um email válido."
+	},
+	"your_email_do_not_match": {
+		"message": "Seus emails não conferem."
+	},
+	"customize_setup": {
+		"message": "Personalizar Configuração"
+	},
+	"learn_more": {
+		"message": "Aprender mais"
+	},
+	"historical_stats": {
+		"message": "Estatísticas históricas"
+	},
+	"priority_support": {
+		"message": "Suporte prioritário",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
+	},
+	"on": {
+		"message": "Ligado"
+	},
+	"off": {
+		"message": "Desligado"
+	},
+	"enhanced_ad_blocking": {
+		"message": "Bloqueio de anúncios aprimorado"
+	},
+	"smart_blocking": {
+		"message": "Bloqueio inteligente"
+	},
+	"smart_blocking_DESC": {
+		"message": "Bloquear e desbloquear automaticamente os rastreadores para otimizar o desempenho da página"
+	},
+	"ad_blocking_DESC": {
+		"message": "Bloqueie anúncios nas páginas que você visita."
+	},
+	"anti_tracking_DESC": {
+		"message": "Anonimizar rastreadores desbloqueados e desconhecidos para uma maior proteção na navegação."
+	},
+	"no_such_email_password_combo": {
+		"message": "Parece que não conseguimos encontrar essa combinação de email e senha. Tente novamente."
+	},
+	"all_basic_features_plus_COLON": {
+		"message": "Todos os recursos do Básico, mais:",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"historical_tracker_stats": {
+		"message": "Estatísticas históricas do rastreador",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
+	},
+	"new_color_themes": {
+		"message": "Novos temas de cores",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
+	},
+	"upgrade_cta_TEXT": {
+		"message": "Desbloqueie insights de rastreamento histórico, acesso prioritário ao suporte e novos temas de cores ao atualizar para o Ghostery Plus por apenas &#36;2 por mês.",
+		"description": "Body text in a non-responsive modal. Character limit (including spaces and punctuation): 135."
+	},
+	"upgrade_your_ghostery_experience": {
+		"message": "Atualize sua experiência Ghostery",
+		"description": "Header text for a non-responsive modal. Character limit (including spaces and punctuation): 40."
+	},
+	"upgrade_to_plus": {
+		"message": "Atualizar para o Plus",
+		"description": "Button text in a non-responsive modal. Character limit (including spaces and punctuation): 35."
+	},
+	"no_thanks_turn_promos_off": {
+		"message": "Não, obrigado. Desativar promoções",
+		"description": "Text link in a non-responsive modal. Character limit (including spaces and punctuation): 28."
+	},
+	"already_subscribed_sign_in": {
+		"message": "Já é assinante? Entre aqui",
+		"description": "Character limit (including spaces and punctuation): 28."
+	},
+	"promos_turned_off_notification": {
+		"message": "As promoções foram desativadas. Você pode reativá-las",
+		"description": "translation must take into account that 'Settings' is appended to this string"
+	},
+	"settings": {
+		"message": "Configurações"
 	}
 }
