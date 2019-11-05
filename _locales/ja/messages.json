@@ -22,15 +22,8 @@
 			}
 		}
 	},
-	"all": {
-		"description": "Default setting in the 'filter by type' dropdown for the tag browser. Doesn't filter anything out. Should read as 'Show all'.",
-		"message": "すべて"
-	},
 	"banner_check_your_email_title": {
 		"message": "メールにパスワードをリセットするためのリンクがあるかを簡単に確認してください。"
-	},
-	"banner_no_such_account_message": {
-		"message": "このメールアドレスとパスワードの組み合わせが見つかりません。もう一度お試しください。"
 	},
 	"banner_email_not_in_system_message": {
 		"message": "申し訳ありませんが、そのメールアドレスは当社のシステムに登録されていません。"
@@ -40,10 +33,6 @@
 	},
 	"blacklist_error_whitelist_url": {
 		"message": "このサイトは、信頼できるサイトのリストから削除され、制限されたサイトのリストに追加されました"
-	},
-	"blocked": {
-		"description": "Select this to show only blocked (checked) tags in the tag browser. Should read as 'Show blocked'.",
-		"message": "ブロックされた対象"
 	},
 	"blocked_redirect_action_always_title": {
 		"description": "Title for the 'Allow always and reload' button on the blocked redirect page.",
@@ -375,31 +364,6 @@
 			}
 		}
 	},
-	"copyright": {
-		"description": "Copyright message, shown in page footers.",
-		"message": "$C$ $YEAR$ $GHOSTERY$、$COMPANY_ADDRESS$の一部",
-		"placeholders": {
-			"c": {
-				"content": "&copy;"
-			},
-			"company_address": {
-				"content": "$1",
-				"example": "GHOSTERY, Inc., Such-and-such Street, Such-and-such Floor, New York, NY, Zip Code"
-			},
-			"ghostery": {
-				"content": "<a href='https://www.ghostery.com' target='_blank'>Ghostery</a>"
-			},
-			"year": {
-				"content": "2015"
-			}
-		}
-	},
-	"email_confirm_field_label": {
-		"message": "メールを確認："
-	},
-	"email_field_label": {
-		"message": "メール："
-	},
 	"error_email_forgot": {
 		"message": "うーん、そのメールアドレスがありません。もう一度試しますか？"
 	},
@@ -408,12 +372,6 @@
 	},
 	"forgot_password_message": {
 		"message": "パスワードをお忘れですか？ねえ、それは誰にでも起こります。パスワードをリセットする手順をメールでお送りします。"
-	},
-	"invalid_email_confirmation": {
-		"message": "お客様のメールアドレスは一致しません。"
-	},
-	"invalid_email_create": {
-		"message": "有効なメールアドレスを入力してください。"
 	},
 	"invalid_email_forgot": {
 		"message": "申し訳ありませんが、実際のメールアドレスを入力してください。"
@@ -532,9 +490,6 @@
 		"description": "as in '5 (trackers) WHITELISTED'",
 		"message": "ホワイトリストに登録済み"
 	},
-	"panel_create_account": {
-		"message": "アカウントを作成"
-	},
 	"panel_email_verification_sent": {
 		"message": "$BOLD_HTML_STARTS$成功しました！$BOLD_HTML_END$ $EMAIL$にアカウント確認メールが送信されました",
 		"placeholders": {
@@ -568,11 +523,35 @@
 	"panel_help_questions_header": {
 		"message": "質問とコメント"
 	},
-	"panel_help_support": {
-		"message": "サポート"
-	},
 	"panel_help_setup": {
 		"message": "Ghosteryをセットアップ"
+	},
+	"panel_insights_audit_tags": {
+		"message": "ページ上のマーケティングタグを検証する",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 30."
+	},
+	"panel_insights_promotion_explore_trends": {
+		"message": "グローバルなデジタルトレンドを検索",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
+	},
+	"panel_insights_promotion_call_to_action": {
+		"message": "無料で試す"
+	},
+	"panel_insights_promotion_header": {
+		"message": "Ghostery Insightsを試す",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 35."
+	},
+	"panel_insights_promotion_description": {
+		"message": "本格的なタグ分析ツールを使用してデジタルユーザーエクスペリエンスを素早く整理する。",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 90."
+	},
+	"panel_insights_promotion_trace_poor_performance": {
+		"message": "パフォーマンスが悪いソースを探知する",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 33."
+	},
+	"panel_insights_promotion_watch_pings": {
+		"message": "リアルタイムでネットワークトラフィックを確認する",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
 	},
 	"panel_about_panel_header": {
 		"message": "Ghosteryブラウザ拡張について"
@@ -622,15 +601,6 @@
 	},
 	"panel_menu_about": {
 		"message": "バージョン情報"
-	},
-	"panel_menu_ghostery_subscriber": {
-		"message": "Ghostery プラス"
-	},
-	"panel_menu_signin": {
-		"message": "サインイン"
-	},
-	"panel_menu_signout": {
-		"message": "サインアウト"
 	},
 	"global_settings_saved": {
 		"message": "グローバル設定が保存されました"
@@ -691,9 +661,6 @@
 	"panel_signin_success_title": {
 		"message": "おめでとうございます！Ghosteryアカウントを利用できます。"
 	},
-	"panel_title_create_account": {
-		"message": "アカウントを作成"
-	},
 	"panel_tracker_found_sources_title": {
 		"message": "検出されたトラッカーURL："
 	},
@@ -739,14 +706,8 @@
 	"panel_detail_menu_rewards_title": {
 		"message": "Rewards（報酬）"
 	},
-	"panel_detail_menu_stats_title": {
-		"message": "履歴統計"
-	},
 	"panel_detail_menu_premium_title": {
 		"message": "プレミアム"
-	},
-	"panel_detail_learn_more": {
-		"message": "詳細を知る"
 	},
 	"panel_detail_history_title": {
 		"message": "履歴"
@@ -802,26 +763,14 @@
 	"notification_library_update_link": {
 		"message": "最新情報を確認"
 	},
-	"panel_header_sign_in": {
-		"message": "サインイン"
-	},
 	"panel_header_verify_account": {
 		"message": "アカウントを確認"
-	},
-	"panel_header_simple_view": {
-		"message": "シンプル・ビュー"
-	},
-	"panel_header_detailed_view": {
-		"message": "詳細ビュー"
 	},
 	"password_characters_requirements": {
 		"message": "次の特殊文字のみを使用できます：!@#$%^&*=+()<>{}[];:,./?"
 	},
 	"password_field_label": {
 		"message": "パスワード"
-	},
-	"create_password_field_label": {
-		"message": "パスワード："
 	},
 	"password_requirements": {
 		"message": "8～50文字を使用してください。"
@@ -957,6 +906,9 @@
 	},
 	"settings_new_features": {
 		"message": "新機能をリリース"
+	},
+	"settings_new_promotions": {
+		"message": "プロモーション有り"
 	},
 	"settings_new_trackers": {
 		"message": "トラッカー・ライブラリに新しいトラッカーを追加"
@@ -1126,57 +1078,6 @@
 	"blocking_category_tracker_found": {
 		"message": "見つかりました"
 	},
-	"drawer_title_enable_anti_tracking": {
-		"message": "強化された追跡防止"
-	},
-	"drawer_tooltip_enable_anti_tracking": {
-		"message": "統合トラッカーは、ほとんどのウェブサイト上でのユーザー・アクティビティを記録します。追跡防止は、ユーザー識別に使用できるすべてのデータをトラッカーが収集する前に削除します。この図は、サイト上で削除されたデータ・ポイントの数を示しています。"
-	},
-	"drawer_label_enable_anti_tracking": {
-		"message": "トラッカーが匿名化されています"
-	},
-	"drawer_desc_enable_anti_tracking": {
-		"message": "プライベート・データ・ポイントが削除されました。"
-	},
-	"drawer_status_enable_anti_tracking": {
-		"message": "追跡防止は"
-	},
-	"drawer_title_enable_ad_block": {
-		"message": "強化された広告ブロッキング"
-	},
-	"drawer_tooltip_enable_ad_block": {
-		"message": "ウェブサイト上のすべての広告を表示またはブロックします。"
-	},
-	"drawer_label_enable_ad_block": {
-		"message": "広告がブロックされています"
-	},
-	"drawer_desc_enable_ad_block": {
-		"message": "広告スポットがブロックされました。"
-	},
-	"drawer_status_enable_ad_block": {
-		"message": "広告ブロックは"
-	},
-	"drawer_title_enable_smart_block": {
-		"message": "スマート・ブロッキング"
-	},
-	"drawer_tooltip_enable_smart_block": {
-		"message": "トラッカーを自動的にブロックおよびブロック解除して、ページのパフォーマンスを最適化します。"
-	},
-	"drawer_label_enable_smart_block": {
-		"message": "トラッカー調整済"
-	},
-	"drawer_desc_enable_smart_block": {
-		"message": "トラッカーが一時的にブロックまたはブロック解除されました。"
-	},
-	"drawer_status_enable_smart_block": {
-		"message": "スマート・ブロッキングは"
-	},
-	"drawer_on": {
-		"message": "オン"
-	},
-	"drawer_off": {
-		"message": "オフ"
-	},
 	"blocking_unblock_all": {
 		"message": "すべてのブロックを解除"
 	},
@@ -1246,34 +1147,16 @@
 	"alert_site_restricted_off": {
 		"message": "サイトがブラックリストから削除されました。"
 	},
-	"tooltip_anti_track": {
-		"message": "強化された追跡防止"
-	},
-	"tooltip_anti_track_body": {
-		"message": "閲覧保護を強化するために、ブロックされていないトラッカーと未知のトラッカーを匿名化します。"
-	},
-	"tooltip_anti_track_body_on": {
+	"tooltip_anti_track_on": {
 		"message": "個人データポイントが匿名化されました。"
 	},
 	"tooltip_body_in_cliqz": {
 		"message": "デフォルト設定により、既にCliqzで有効になっている機能です。"
 	},
-	"tooltip_ad_block": {
-		"message": "強化された広告ブロッキング"
-	},
-	"tooltip_ad_block_body": {
-		"message": "アクセスしたウェブサイトの広告をブロックします。"
-	},
-	"tooltip_ad_block_body_on": {
+	"tooltip_ad_block_on": {
 		"message": "広告がブロックされました。"
 	},
-	"tooltip_smart_block": {
-		"message": "スマート・ブロッキング"
-	},
-	"tooltip_smart_block_body": {
-		"message": "トラッカーを自動的にブロックおよびブロック解除して、ページのパフォーマンスを最適化します。"
-	},
-	"tooltip_smart_block_body_on": {
+	"tooltip_smart_block_on": {
 		"message": "ページのパフォーマンスを最適化するために、トラッカー・ブロッキングを調整しました。"
 	},
 	"tooltip_trust": {
@@ -1293,12 +1176,6 @@
 	},
 	"tooltip_resume": {
 		"message": "Ghosteryを再開"
-	},
-	"tooltip_expert": {
-		"message": "詳細ビュー"
-	},
-	"tooltip_simple": {
-		"message": "シンプル・ビュー"
 	},
 	"license_module": {
 		"message": "モジュール"
@@ -1350,29 +1227,14 @@
 	"hub_side_navigation_home": {
 		"message": "ホーム"
 	},
-	"hub_side_navigation_setup": {
-		"message": "カスタマイズ設定"
-	},
 	"hub_side_navigation_tutorial": {
 		"message": "チュートリアルを受ける"
-	},
-	"hub_side_navigation_supporter": {
-		"message": "「Ghostery プラス」にアップグレードする"
 	},
 	"hub_side_navigation_rewards": {
 		"message": "Ghostery Rewardsを試す"
 	},
 	"hub_side_navigation_products": {
 		"message": "Ghosteryのほかの製品を見る"
-	},
-	"hub_side_navigation_create_account": {
-		"message": "アカウントを作成"
-	},
-	"hub_side_navigation_log_in": {
-		"message": "サインイン"
-	},
-	"hub_side_navigation_log_out": {
-		"message": "サインアウト"
 	},
 	"hub_home_page_title": {
 		"message": "Ghostery ハブ - ホーム"
@@ -1389,11 +1251,17 @@
 	"hub_home_header_checkbox_label": {
 		"message": "Ghosteryのパフォーマンス向上のために、匿名分析データを追加し共有します。"
 	},
+	"hub_home_header_info_opted_in_rewards": {
+		"message": "新規ユーザーがGhostery Rewardsにオプトインし、デフォルト設定によりHuman Webからオプトアウトしました。カスタム設定あるいは拡張機能からこれらの変更を行うことができます。"
+	},
 	"hub_home_header_info_opted_out": {
 		"message": "新規ユーザーの方は、デフォルトでGhostery RewardsとHuman Webには参加しないように設定されています。カスタム設定または拡張機能で、これらの推奨機能にオプトインすることができます。"
 	},
 	"hub_home_header_info": {
 		"message": "新規ユーザーの方は、Human WebとGhostery Rewardsに参加するように設定されています。カスタム・セットアップまたは拡張機能でこれらの設定を変更できます。"
+	},
+	"hub_home_header_info_cliqz": {
+		"message": "新規ユーザーがHuman Webにオプトインしました。カスタム設定あるいは拡張機能でこれらの変更を行うことができます。"
 	},
 	"hub_home_header_info_link": {
 		"message": "詳細はこちら。"
@@ -1401,23 +1269,14 @@
 	"hub_home_subheader_optimize": {
 		"message": "Ghostery体験を最適化する"
 	},
-	"hub_home_subheader_create_account": {
-		"message": "アカウントを作成"
-	},
 	"hub_home_feature_tutorial_title": {
 		"message": "チュートリアルを受ける"
 	},
 	"hub_home_feature_tutorial_text": {
 		"message": "Ghosteryの主な機能をご覧ください。"
 	},
-	"hub_home_feature_tutorial_button": {
-		"message": "スタート"
-	},
 	"hub_home_feature_tutorial_button_alt": {
 		"message": "チュートリアル完了"
-	},
-	"hub_home_feature_setup_title": {
-		"message": "カスタマイズ設定"
 	},
 	"hub_home_feature_setup_text": {
 		"message": "必要なブロック機能に応じて設定を編集します。"
@@ -1430,12 +1289,6 @@
 	},
 	"hub_home_feature_supporter_text": {
 		"message": "「Ghostery プラス」にアップグレードして高度な機能をご利用ください。"
-	},
-	"hub_home_feature_supporter_button": {
-		"message": "「Ghostery プラス」にアップグレードする"
-	},
-	"hub_home_feature_supporter_button_alt": {
-		"message": "登録済み"
 	},
 	"hub_setup_page_title": {
 		"message": "Ghostery ハブ - 設定"
@@ -1471,15 +1324,6 @@
 	},
 	"hub_setup_exit_flow": {
 		"message": "カスタム設定を終了する"
-	},
-	"hub_setup_nav_previous": {
-		"message": "前へ"
-	},
-	"hub_setup_nav_next": {
-		"message": "次へ"
-	},
-	"hub_setup_nav_done": {
-		"message": "完了"
 	},
 	"hub_setup_enter_modal_text": {
 		"message": "カスタム設定を入力すると前の設定が上書きされます。お続けになりますか？"
@@ -1517,23 +1361,19 @@
 	"hub_setup_blocking_description_custom": {
 		"message": "ブロックするトラッカーを選択してください"
 	},
-	"hub_setup_antisuite_name_antitracking": {
-		"message": "強化された追跡防止"
-	},
 	"hub_setup_antisuite_description_antitracking": {
 		"message": "閲覧保護を強化するために、ブロックされていないトラッカーと未知のトラッカーを匿名化します。"
 	},
-	"hub_setup_adblock_name_adblocking": {
-		"message": "強化された広告ブロッキング"
-	},
-	"hub_setup_adblock_description_adblocking": {
-		"message": "アクセスしたウェブサイトの広告をブロックします。"
-	},
-	"hub_setup_smartblocking_name_smartblocking": {
-		"message": "スマート・ブロッキング"
-	},
-	"hub_setup_smartblocking_description_smartblocking": {
-		"message": "トラッカーを自動的にブロックおよびブロック解除して、ページのパフォーマンスを最適化します。"
+	"hub_setup_feature_already_active": {
+		"message": "デフォルト設定により、既にCliqzで有効になっている機能です。$LINK_LM_START$詳細を確認$LINK_LM_END$",
+		"placeholders": {
+			"link_lm_start": {
+				"content": "<a href=\"https://www.ghostery.com/faqs/what-are-the-new-ghostery-8-features/\" target=\"_blank\" rel=\"noopener noreferrer\">"
+			},
+			"link_lm_end": {
+				"content": "</a>"
+			}
+		}
 	},
 	"hub_setup_ghosteryrewards_name_rewards": {
 		"message": "Rewards（報酬）"
@@ -1567,17 +1407,8 @@
 	"hub_setup_feature_tutorial_description": {
 		"message": "Ghosteryの主な機能をご覧ください。"
 	},
-	"hub_setup_feature_tutorial_button": {
-		"message": "スタート"
-	},
-	"hub_setup_feature_supporter_title": {
-		"message": "「Ghostery プラス」にアップグレードする"
-	},
 	"hub_setup_feature_supporter_description": {
 		"message": "Ghosteryをサポートすると特別機能が利用できます。"
-	},
-	"hub_setup_feature_supporter_button": {
-		"message": "サポート"
 	},
 	"hub_setup_feature_products_title": {
 		"message": "Ghosteryのほかの製品を見る"
@@ -1611,21 +1442,6 @@
 	},
 	"hub_tutorial_exit_flow": {
 		"message": "チュートリアルを終了する"
-	},
-	"hub_tutorial_nav_previous": {
-		"message": "前へ"
-	},
-	"hub_tutorial_nav_next": {
-		"message": "次へ"
-	},
-	"hub_tutorial_nav_done": {
-		"message": "完了"
-	},
-	"hub_tutorial_simple_view": {
-		"message": "シンプル・ビュー"
-	},
-	"hub_tutorial_detailed_view": {
-		"message": "詳細ビュー"
 	},
 	"hub_tutorial_detailed_expanded_view": {
 		"message": "詳細を拡張表示"
@@ -1678,23 +1494,8 @@
 	"hub_tutorial_antisuite_title": {
 		"message": "より強化されたプライバシー機能で保護機能を追加し、追跡を自動化しましょう。"
 	},
-	"hub_tutorial_antisuite_antitracking_title": {
-		"message": "強化された追跡防止"
-	},
 	"hub_tutorial_antisuite_antitracking_description": {
 		"message": "サイトが個人を特定できるようなデータポイントを削除します。"
-	},
-	"hub_tutorial_antisuite_adblocking_title": {
-		"message": "強化された広告ブロッキング"
-	},
-	"hub_tutorial_antisuite_adblocking_description": {
-		"message": "アクセスしたページの広告をブロックします。"
-	},
-	"hub_tutorial_antisuite_smartblocking_title": {
-		"message": "スマート・ブロッキング"
-	},
-	"hub_tutorial_antisuite_smartblocking_description": {
-		"message": "トラッカーを自動的にブロックおよびブロック解除して、ページのパフォーマンスを最適化します。"
 	},
 	"hub_products_page_title" : {
 		"message": "Ghostery ハブ - その他のGhostery製品を試す"
@@ -1732,9 +1533,6 @@
 	"hub_rewards_header_description": {
 		"message": "新しいRewards（報酬）機能を使うと、パワフルで100％プライベートな、今までにないオンライン割引を利用できます。機能をオンにしてぜひお試しください！"
 	},
-	"hub_rewards_header_learn_more": {
-		"message": "詳細を知る"
-	},
 	"hub_rewards_experience_title": {
 		"message": "よりスマートなショッピング体験を"
 	},
@@ -1765,12 +1563,6 @@
 	"hub_supporter_header_description": {
 		"message": "Ghosteryをサポートして特典をもらおう！"
 	},
-	"hub_supporter_button_text": {
-		"message": "「Ghostery プラス」にアップグレードする"
-	},
-	"hub_supporter_button_text_alt": {
-		"message": "登録済み"
-	},
 	"hub_supporter_price": {
 		"message": "1か月あたり$SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$",
 		"placeholders": {
@@ -1788,14 +1580,8 @@
 			}
 		}
 	},
-	"hub_supporter_perk_themes_title": {
-		"message": "新しいテーマ"
-	},
 	"hub_supporter_perk_themes_description": {
 		"message": "Ghostery のテーマは変更できます。「ミッドナイト」もお試しください！"
-	},
-	"hub_supporter_perk_stats_title": {
-		"message": "ブロック履歴統計"
 	},
 	"hub_supporter_perk_stats_description": {
 		"message": "過去のブロック履歴と Ghostery の対応履歴を見る"
@@ -1809,20 +1595,11 @@
 	"hub_supporter_manifesto": {
 		"message": "Ghosteryのミッションは、無料かつ最高のプライバシー保護サービスをユーザーに提供することです。サービスは無料ですが、一部のユーザー様からは毎月のご登録料をいただくことで機能改善にご協力いただいております。「Ghostery プラス」にアップグレードしてミッションに参加しませんか。素敵な特典もご用意しております！"
 	},
-	"hub_supporter_feature_theme_title": {
-		"message": "新しいテーマ"
-	},
 	"hub_supporter_feature_theme_description": {
 		"message": "Ghosteryのカラーをカスタマイズして新しいビジュアル体験を！たくさんのご要望にお応えし、ついに実現。「ミッドナイト」やその他の新着テーマをチェックしよう。"
 	},
-	"hub_supporter_feature_stats_title": {
-		"message": "ブロック履歴統計"
-	},
 	"hub_supporter_feature_stats_description": {
 		"message": "グラフや数字を使って過去のブロック結果とその傾向を分析し、Ghostery によるブラウジングの安全性を確認できます。"
-	},
-	"hub_supporter_feature_support_title": {
-		"message": "優先サポート"
 	},
 	"hub_supporter_feature_support_description": {
 		"message": "お困りですか？壊れたページがありますか？Ghostery Plus のお客様専用アカウントでサインインすると、プライオリティ・ヘルプデスクがお客様への回答を優先して対応いたします。"
@@ -1845,15 +1622,6 @@
 	"hub_login_header_title": {
 		"message": "アカウントにサインインします。"
 	},
-	"hub_login_label_email": {
-		"message": "メール："
-	},
-	"hub_login_label_password": {
-		"message": "パスワード："
-	},
-	"hub_login_label_email_invalid": {
-		"message": "有効なメールアドレスを入力してください。"
-	},
 	"hub_login_label_password_invalid": {
 		"message": "8～50文字を使用してください。"
 	},
@@ -1863,38 +1631,17 @@
 	"hub_login_link_create_account": {
 		"message": "サインアップしてください。"
 	},
-	"hub_login_button_submit": {
-		"message": "サインイン"
-	},
 	"hub_login_toast_success": {
 		"message": "サインインできました！アカウント設定がインポートされました"
 	},
-	"hub_login_toast_error": {
-		"message": "このメールアドレスとパスワードの組み合わせが見つかりません。もう一度お試しください。"
-	},
 	"hub_create_account_header_title": {
 		"message": "Ghosteryアカウントを作成して、ブラウザとデバイス間で設定を同期しますか？"
-	},
-	"hub_create_account_label_email": {
-		"message": "メール："
-	},
-	"hub_create_account_label_email_confirm": {
-		"message": "メールを確認："
 	},
 	"hub_create_account_label_first_name": {
 		"message": "名（オプション）："
 	},
 	"hub_create_account_label_email_last_name": {
 		"message": "姓（オプション）："
-	},
-	"hub_create_account_label_password": {
-		"message": "パスワード："
-	},
-	"hub_create_account_label_email_invalid": {
-		"message": "有効なメールアドレスを入力してください。"
-	},
-	"hub_create_account_label_email_confirm_invalid": {
-		"message": "お客様のメールアドレスは一致しません。"
 	},
 	"hub_create_account_label_password_invalid": {
 		"message": "次の特殊文字のみを使用できます：!@#$%^&*=+()<>{}[];:,./?"
@@ -1910,9 +1657,6 @@
 	},
 	"hub_create_account_link_login": {
 		"message": "ここにサインインしてください。"
-	},
-	"hub_create_account_button_submit": {
-		"message": "アカウントを作成"
 	},
 	"hub_create_account_toast_success": {
 		"message": "アカウントは正常に作成されました"
@@ -2045,9 +1789,6 @@
 	"rewards_code_copied_toast_notification": {
 		"message": "Rewardsコードがコピーされました！"
 	},
-	"rewards_learn_more": {
-		"message": "詳細を知る"
-	},
 	"offers_hub_copy_btn": {
 		"message": "コードをコピー"
 	},
@@ -2066,20 +1807,8 @@
 	"subscription_themes": {
 		"message": "Ghosteryのテーマ"
 	},
-	"subscription_info_title": {
-		"message": "Ghostery プラス"
-	},
 	"subscription_themes_title": {
 		"message": "テーマ"
-	},
-	"subscription_priority_support_title": {
-		"message": "優先サポート"
-	},
-	"subscription_priority_support": {
-		"message": "優先サポート"
-	},
-	"subscription_history_stats": {
-		"message": "履歴統計"
 	},
 	"subscribe_pitch": {
 		"message": "Ghosteryは無料でもご利用いただけますが、1か月&#36;2の登録料でカラーテーマ、優先ヘルプサービスなどの特典をご活用いただきながら、Ghosteryをサポートすることもできます。登録してミッションに参加しよう！"
@@ -2090,8 +1819,14 @@
 	"subscribe_pitch_button_label": {
 		"message": "「Ghostery プラス」にアップグレード！"
 	},
+	"subscribe_pitch_no_thanks": {
+		"message": "いいえ、後でします"
+	},
 	"subscribe_pitch_sign_here": {
 		"message": "ご登録済みですか？こちらでサインイン"
+	},
+	"subscribe_pitch_sign_in": {
+		"message": "すでにサブスクライブしていますか？サインイン"
 	},
 	"subscription_midnight_theme": {
 		"message": "ミッドナイト テーマ"
@@ -2110,9 +1845,6 @@
 	},
 	"subscription_themes_tooltip": {
 		"message": "Ghosteryのカラースキームは変更できます！"
-	},
-	"subscription_tracker_stats": {
-		"message": "履歴統計"
 	},
 	"subscription_charge_date" : {
 		"message": "次回のお支払日"
@@ -2157,9 +1889,6 @@
 	},
 	"panel_stats_menu_daily": {
 		"message": "毎日"
-	},
-	"panel_stats_header_title": {
-		"message": "追跡履歴の統計"
 	},
 	"panel_stats_header_title_monthly": {
 		"message": "追跡履歴の統計（月平均）"
@@ -2223,9 +1952,6 @@
 	"panel_stats_pitch_modal_sign_in": {
 		"message": "サインインはこちら"
 	},
-	"panel_stats_pitch_modal_subscribe": {
-		"message": "「Ghostery プラス」にアップグレード！"
-	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "この時点までのすべての履歴統計を削除する"
 	},
@@ -2246,12 +1972,6 @@
 	},
 	"ads": {
 		"message": "広告"
-	},
-	"cliqz_feature_status_on": {
-		"message": "オン"
-	},
-	"cliqz_feature_status_off": {
-		"message": "オフ"
 	},
 	"create_account_form_legal_consent_checkbox_label": {
 		"message": "$LINK_TERMS_START$利用規約$LINK_END$、$LINK_LICENSE_START$パブリックライセンス契約$LINK_END$を承認し、$LINK_PRIVACY_START$プライバシー・ポリシー$LINK_END$に記載されたデータ・プラクティスに同意します。",
@@ -2281,5 +2001,191 @@
 	},
 	"unknown_description": {
 		"message": "未知のトラッカーが追跡防止によって削除されました"
+	},
+	"ghostery_is_ready": {
+		"message": "Ghosteryはあなたを待っています!"
+	},
+	"choose_your_privacy_plan": {
+		"message": "プライバシープランを選択"
+	},
+	"choose_your_ghostery_privacy_plan": {
+		"message": "Ghosteryプライバシープランを選択"
+	},
+	"ghostery_basic": {
+		"message": "ベーシック"
+	},
+	"ghostery_plus": {
+		"message": "Ghostery プラス"
+	},
+	"locale_appropriate_currency_icon": {
+		"message": "$$ ",
+		"description": "Use '$$' to mean '$'. '$' has a special meaning in the code and the first '$' tells the browser to ignore the special meaning of the second '$' and print it literally."
+	},
+	"plus_monthly_subscription_price_number": {
+		"message": "2"
+	},
+	"per_month": {
+		"message": "月ごと"
+	},
+	"faster_cleaner_browsing": {
+		"message": "より早く、よりクリーンなブラウジング",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"blocks_ads": {
+		"message": "広告ブロッキング",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"blocks_trackers": {
+		"message": "トラッカーブロッキング",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"data_protection": {
+		"message": "データ保護",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"select_basic": {
+		"message": "ベーシックを選択"
+	},
+	"select_plus": {
+		"message": "プラスを選択"
+	},
+	"recommended": {
+		"message": "おすすめ"
+	},
+	"get_ghostery_plus": {
+		"message": "Ghostery Plusを取得"
+	},
+	"get_ghostery_plus_bang": {
+		"message": "「Ghostery プラス」にアップグレード！"
+	},
+	"already_subscribed": {
+		"message": "登録済み"
+	},
+	"new_themes": {
+		"message": "新しいテーマ"
+	},
+	"historical_blocking_stats": {
+		"message": "ブロック履歴統計"
+	},
+	"sign_in": {
+		"message": "サインイン"
+	},
+	"sign_out": {
+		"message": "サインアウト"
+	},
+	"create_account": {
+		"message": "アカウントを作成"
+	},
+	"email_colon": {
+		"message": "メール："
+	},
+	"confirm_email_colon": {
+		"message": "メールを確認："
+	},
+	"next": {
+		"message": "次へ"
+	},
+	"previous": {
+		"message": "前へ"
+	},
+	"done": {
+		"message": "完了"
+	},
+	"simple_view": {
+		"message": "シンプル・ビュー"
+	},
+	"detailed_view": {
+		"message": "詳細ビュー"
+	},
+	"support": {
+		"message": "サポート"
+	},
+	"start": {
+		"message": "スタート"
+	},
+	"password_colon": {
+		"message": "パスワード："
+	},
+	"please_enter_a_valid_email": {
+		"message": "有効なメールアドレスを入力してください。"
+	},
+	"your_email_do_not_match": {
+		"message": "お客様のメールアドレスは一致しません。"
+	},
+	"customize_setup": {
+		"message": "カスタマイズ設定"
+	},
+	"learn_more": {
+		"message": "詳細はこちら"
+	},
+	"historical_stats": {
+		"message": "履歴統計"
+	},
+	"priority_support": {
+		"message": "優先サポート",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
+	},
+	"on": {
+		"message": "オン"
+	},
+	"off": {
+		"message": "オフ"
+	},
+	"enhanced_ad_blocking": {
+		"message": "強化された広告ブロッキング"
+	},
+	"smart_blocking": {
+		"message": "スマート・ブロッキング"
+	},
+	"smart_blocking_DESC": {
+		"message": "トラッカーを自動的にブロックおよびブロック解除して、ページのパフォーマンスを最適化します。"
+	},
+	"ad_blocking_DESC": {
+		"message": "アクセスしたページの広告をブロックします。"
+	},
+	"anti_tracking_DESC": {
+		"message": "閲覧保護を強化するために、ブロックされていないトラッカーと未知のトラッカーを匿名化します。"
+	},
+	"no_such_email_password_combo": {
+		"message": "このメールアドレスとパスワードの組み合わせが見つかりません。もう一度お試しください。"
+	},
+	"all_basic_features_plus_COLON": {
+		"message": "ベーシックプランに付帯するすべての機能プラス、以下の機能: ",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"historical_tracker_stats": {
+		"message": "追跡履歴の統計",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
+	},
+	"new_color_themes": {
+		"message": "新しいカラー・テーマ",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
+	},
+	"upgrade_cta_TEXT": {
+		"message": "1ヵ月たったの&#36;2でGhostery Plusにアップグレードし、トラッカーの履歴、優先サポートアクセスおよび新しいテーマカラーを利用できます。",
+		"description": "Body text in a non-responsive modal. Character limit (including spaces and punctuation): 135."
+	},
+	"upgrade_your_ghostery_experience": {
+		"message": "Ghosteryでのエクスペリエンスをアップグレード",
+		"description": "Header text for a non-responsive modal. Character limit (including spaces and punctuation): 40."
+	},
+	"upgrade_to_plus": {
+		"message": "プラスにアップグレード",
+		"description": "Button text in a non-responsive modal. Character limit (including spaces and punctuation): 35."
+	},
+	"no_thanks_turn_promos_off": {
+		"message": "いいえ、結構です。プロモーションを無効にする",
+		"description": "Text link in a non-responsive modal. Character limit (including spaces and punctuation): 28."
+	},
+	"already_subscribed_sign_in": {
+		"message": "既にサブスクライブしていますか？サインイン",
+		"description": "Character limit (including spaces and punctuation): 28."
+	},
+	"promos_turned_off_notification": {
+		"message": "プロモーションを無効にしました。以下でいつでも有効化できます:",
+		"description": "translation must take into account that 'Settings' is appended to this string"
+	},
+	"settings": {
+		"message": "設定"
 	}
 }

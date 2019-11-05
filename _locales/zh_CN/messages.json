@@ -22,15 +22,8 @@
 			}
 		}
 	},
-	"all": {
-		"description": "Default setting in the 'filter by type' dropdown for the tag browser. Doesn't filter anything out. Should read as 'Show all'.",
-		"message": "全部"
-	},
 	"banner_check_your_email_title": {
 		"message": "请稍后检查您的电子邮件，获取密码重置链接。"
-	},
-	"banner_no_such_account_message": {
-		"message": "似乎无法找到此电子邮件地址和密码组合。再试一次。"
 	},
 	"banner_email_not_in_system_message": {
 		"message": "抱歉，我们的系统中没有该电子邮件地址。"
@@ -40,10 +33,6 @@
 	},
 	"blacklist_error_whitelist_url": {
 		"message": "此网站已从您的“受信任网站”列表中删除，并已添加到“受限制网站”列表中"
-	},
-	"blocked": {
-		"description": "Select this to show only blocked (checked) tags in the tag browser. Should read as 'Show blocked'.",
-		"message": "已拦截"
 	},
 	"blocked_redirect_action_always_title": {
 		"description": "Title for the 'Allow always and reload' button on the blocked redirect page.",
@@ -375,31 +364,6 @@
 			}
 		}
 	},
-	"copyright": {
-		"description": "Copyright message, shown in page footers.",
-		"message": "$C$ $YEAR$ $GHOSTERY$，$COMPANY_ADDRESS$ 的一部分",
-		"placeholders": {
-			"c": {
-				"content": "&copy;"
-			},
-			"company_address": {
-				"content": "$1",
-				"example": "GHOSTERY, Inc., Such-and-such Street, Such-and-such Floor, New York, NY, Zip Code"
-			},
-			"ghostery": {
-				"content": "<a href='https://www.ghostery.com' target='_blank'>Ghostery</a>"
-			},
-			"year": {
-				"content": "2015"
-			}
-		}
-	},
-	"email_confirm_field_label": {
-		"message": "确认电子邮件地址："
-	},
-	"email_field_label": {
-		"message": "电子邮件地址："
-	},
 	"error_email_forgot": {
 		"message": "找不到该电子邮件地址。试试别的？"
 	},
@@ -408,12 +372,6 @@
 	},
 	"forgot_password_message": {
 		"message": "忘记了密码？嘿，谁都会遇到这种事。我们会通过电子邮件向您发送密码重置说明。"
-	},
-	"invalid_email_confirmation": {
-		"message": "您的电子邮件地址不符。"
-	},
-	"invalid_email_create": {
-		"message": "请输入有效的电子邮件地址。"
 	},
 	"invalid_email_forgot": {
 		"message": "抱歉，您必须输入真实的电子邮件地址。"
@@ -532,9 +490,6 @@
 		"description": "as in '5 (trackers) WHITELISTED'",
 		"message": "已列入白名单"
 	},
-	"panel_create_account": {
-		"message": "创建帐户"
-	},
 	"panel_email_verification_sent": {
 		"message": "$BOLD_HTML_STARTS$成功！$BOLD_HTML_END$帐户验证电子邮件已发送到 $EMAIL$",
 		"placeholders": {
@@ -568,11 +523,35 @@
 	"panel_help_questions_header": {
 		"message": "问题和意见"
 	},
-	"panel_help_support": {
-		"message": "支持"
-	},
 	"panel_help_setup": {
 		"message": "设置 Ghostery"
+	},
+	"panel_insights_audit_tags": {
+		"message": "审查页面的营销标记",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 30."
+	},
+	"panel_insights_promotion_explore_trends": {
+		"message": "探索全球数字趋势",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
+	},
+	"panel_insights_promotion_call_to_action": {
+		"message": "免费试用"
+	},
+	"panel_insights_promotion_header": {
+		"message": "试用 Ghostery Insights",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 35."
+	},
+	"panel_insights_promotion_description": {
+		"message": "使用我们的专业标记分析工具加速和清理数字用户体验。",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 90."
+	},
+	"panel_insights_promotion_trace_poor_performance": {
+		"message": "追踪表现不佳的根源",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 33."
+	},
+	"panel_insights_promotion_watch_pings": {
+		"message": "实时监控 pings fire",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 29."
 	},
 	"panel_about_panel_header": {
 		"message": "关于 Ghostery 浏览器扩展程序"
@@ -622,15 +601,6 @@
 	},
 	"panel_menu_about": {
 		"message": "关于"
-	},
-	"panel_menu_ghostery_subscriber": {
-		"message": "Ghostery Plus"
-	},
-	"panel_menu_signin": {
-		"message": "登录"
-	},
-	"panel_menu_signout": {
-		"message": "退出"
 	},
 	"global_settings_saved": {
 		"message": "全局设置已保存"
@@ -691,9 +661,6 @@
 	"panel_signin_success_title": {
 		"message": "恭喜！您的 Ghostery 帐户已准备就绪。"
 	},
-	"panel_title_create_account": {
-		"message": "创建帐户"
-	},
 	"panel_tracker_found_sources_title": {
 		"message": "检测到的跟踪器网址："
 	},
@@ -739,14 +706,8 @@
 	"panel_detail_menu_rewards_title": {
 		"message": "Rewards"
 	},
-	"panel_detail_menu_stats_title": {
-		"message": "历史统计数据"
-	},
 	"panel_detail_menu_premium_title": {
 		"message": "高级版"
-	},
-	"panel_detail_learn_more": {
-		"message": "了解详情"
 	},
 	"panel_detail_history_title": {
 		"message": "历史记录"
@@ -802,26 +763,14 @@
 	"notification_library_update_link": {
 		"message": "查看新变化"
 	},
-	"panel_header_sign_in": {
-		"message": "登录"
-	},
 	"panel_header_verify_account": {
 		"message": "验证帐户"
-	},
-	"panel_header_simple_view": {
-		"message": "简单视图"
-	},
-	"panel_header_detailed_view": {
-		"message": "详细视图"
 	},
 	"password_characters_requirements": {
 		"message": "只允许使用这些特殊字符：!@#$%^&amp;*=+()&lt;&gt;{}[];:,./?"
 	},
 	"password_field_label": {
 		"message": "密码"
-	},
-	"create_password_field_label": {
-		"message": "密码："
 	},
 	"password_requirements": {
 		"message": "请使用 8 到 50 个字符。"
@@ -957,6 +906,9 @@
 	},
 	"settings_new_features": {
 		"message": "发布新功能"
+	},
+	"settings_new_promotions": {
+		"message": "提供产品促销"
 	},
 	"settings_new_trackers": {
 		"message": "添加新跟踪器到跟踪器库"
@@ -1126,57 +1078,6 @@
 	"blocking_category_tracker_found": {
 		"message": "已发现"
 	},
-	"drawer_title_enable_anti_tracking": {
-		"message": "增强型反跟踪"
-	},
-	"drawer_tooltip_enable_anti_tracking": {
-		"message": "集成跟踪器可以记录大多数网站上的用户活动。反跟踪功能可以在这些跟踪器收集之前删除所有可用于识别您的数据。该数字显示网站上有多少个数据点被删除。"
-	},
-	"drawer_label_enable_anti_tracking": {
-		"message": "对跟踪器保持匿名"
-	},
-	"drawer_desc_enable_anti_tracking": {
-		"message": "私人数据点已被删除。"
-	},
-	"drawer_status_enable_anti_tracking": {
-		"message": "反跟踪功能"
-	},
-	"drawer_title_enable_ad_block": {
-		"message": "增强型广告屏蔽"
-	},
-	"drawer_tooltip_enable_ad_block": {
-		"message": "显示或拦截网站上的所有广告。"
-	},
-	"drawer_label_enable_ad_block": {
-		"message": "已拦截广告"
-	},
-	"drawer_desc_enable_ad_block": {
-		"message": "广告位已被拦截。"
-	},
-	"drawer_status_enable_ad_block": {
-		"message": "广告拦截功能"
-	},
-	"drawer_title_enable_smart_block": {
-		"message": "智能拦截"
-	},
-	"drawer_tooltip_enable_smart_block": {
-		"message": "自动拦截和取消拦截跟踪器，优化网页性能。"
-	},
-	"drawer_label_enable_smart_block": {
-		"message": "已调整跟踪器"
-	},
-	"drawer_desc_enable_smart_block": {
-		"message": "跟踪器已被暂时拦截或取消拦截。"
-	},
-	"drawer_status_enable_smart_block": {
-		"message": "智能拦截功能"
-	},
-	"drawer_on": {
-		"message": "开启"
-	},
-	"drawer_off": {
-		"message": "关闭"
-	},
 	"blocking_unblock_all": {
 		"message": "全部取消拦截"
 	},
@@ -1246,34 +1147,16 @@
 	"alert_site_restricted_off": {
 		"message": "网站不再位于黑名单中。"
 	},
-	"tooltip_anti_track": {
-		"message": "增强型反跟踪"
-	},
-	"tooltip_anti_track_body": {
-		"message": "对未拦截和未知的跟踪器保持匿名，获得更好的浏览保护。"
-	},
-	"tooltip_anti_track_body_on": {
+	"tooltip_anti_track_on": {
 		"message": "个人数据点已匿名化。"
 	},
 	"tooltip_body_in_cliqz": {
 		"message": "Cliqz 中默认激活此功能。"
 	},
-	"tooltip_ad_block": {
-		"message": "增强型广告屏蔽"
-	},
-	"tooltip_ad_block_body": {
-		"message": "拦截您访问的网站上的广告。"
-	},
-	"tooltip_ad_block_body_on": {
+	"tooltip_ad_block_on": {
 		"message": "广告已被拦截。"
 	},
-	"tooltip_smart_block": {
-		"message": "智能拦截"
-	},
-	"tooltip_smart_block_body": {
-		"message": "自动拦截和取消拦截跟踪器，优化网页性能。"
-	},
-	"tooltip_smart_block_body_on": {
+	"tooltip_smart_block_on": {
 		"message": "已调整跟踪器拦截功能以优化页面性能。"
 	},
 	"tooltip_trust": {
@@ -1293,12 +1176,6 @@
 	},
 	"tooltip_resume": {
 		"message": "恢复 Ghostery"
-	},
-	"tooltip_expert": {
-		"message": "详细视图"
-	},
-	"tooltip_simple": {
-		"message": "简单视图"
 	},
 	"license_module": {
 		"message": "模块"
@@ -1350,29 +1227,14 @@
 	"hub_side_navigation_home": {
 		"message": "主页"
 	},
-	"hub_side_navigation_setup": {
-		"message": "自定义设置"
-	},
 	"hub_side_navigation_tutorial": {
 		"message": "学习教程"
-	},
-	"hub_side_navigation_supporter": {
-		"message": "获取Ghostery Plus"
 	},
 	"hub_side_navigation_rewards": {
 		"message": "试用Ghostery Rewards"
 	},
 	"hub_side_navigation_products": {
 		"message": "查看更多Ghostery产品"
-	},
-	"hub_side_navigation_create_account": {
-		"message": "创建帐户"
-	},
-	"hub_side_navigation_log_in": {
-		"message": "登录"
-	},
-	"hub_side_navigation_log_out": {
-		"message": "退出"
 	},
 	"hub_home_page_title": {
 		"message": "Ghostery Hub - 主页"
@@ -1389,11 +1251,17 @@
 	"hub_home_header_checkbox_label": {
 		"message": "分享额外的匿名分析数据来提高Ghostery的性能。"
 	},
+	"hub_home_header_info_opted_in_rewards": {
+		"message": "新用户默认选择加入 Ghostery Rewards，并退出 Human Web。您可在自定义设置或扩展中更改相关设置。"
+	},
 	"hub_home_header_info_opted_out": {
 		"message": "新用户默认选择退出 Ghostery Rewards 和 Human Web。您可以在自定义设置或扩展中选择使用这些推荐功能。"
 	},
 	"hub_home_header_info": {
 		"message": "新用户默认选择加入Human Web和Ghostery Rewards。您可以在自定义设置或在扩展中更改相关设置。"
+	},
+	"hub_home_header_info_cliqz": {
+		"message": "新用户默认选择加入 Human Web。您可在自定义设置或扩展中更改相关设置。"
 	},
 	"hub_home_header_info_link": {
 		"message": "了解详情。"
@@ -1401,23 +1269,14 @@
 	"hub_home_subheader_optimize": {
 		"message": "优化您的Ghostery体验"
 	},
-	"hub_home_subheader_create_account": {
-		"message": "创建帐户"
-	},
 	"hub_home_feature_tutorial_title": {
 		"message": "学习教程"
 	},
 	"hub_home_feature_tutorial_text": {
 		"message": "了解Ghostery的主要功能。"
 	},
-	"hub_home_feature_tutorial_button": {
-		"message": "开始"
-	},
 	"hub_home_feature_tutorial_button_alt": {
 		"message": "教程结束"
-	},
-	"hub_home_feature_setup_title": {
-		"message": "自定义设置"
 	},
 	"hub_home_feature_setup_text": {
 		"message": "编辑您的设置和拦截首选项。"
@@ -1430,12 +1289,6 @@
 	},
 	"hub_home_feature_supporter_text": {
 		"message": "升级为Ghostery Plus，解锁特别功能。"
-	},
-	"hub_home_feature_supporter_button": {
-		"message": "获取Ghostery Plus"
-	},
-	"hub_home_feature_supporter_button_alt": {
-		"message": "已订阅"
 	},
 	"hub_setup_page_title": {
 		"message": "Ghostery Hub - 设置"
@@ -1471,15 +1324,6 @@
 	},
 	"hub_setup_exit_flow": {
 		"message": "退出自定义设置"
-	},
-	"hub_setup_nav_previous": {
-		"message": "上一步"
-	},
-	"hub_setup_nav_next": {
-		"message": "下一步"
-	},
-	"hub_setup_nav_done": {
-		"message": "完成"
 	},
 	"hub_setup_enter_modal_text": {
 		"message": "输入自定义设置会覆盖您之前的Ghostery设置。要继续吗？"
@@ -1517,23 +1361,19 @@
 	"hub_setup_blocking_description_custom": {
 		"message": "选择要拦截的追踪器"
 	},
-	"hub_setup_antisuite_name_antitracking": {
-		"message": "增强型反跟踪"
-	},
 	"hub_setup_antisuite_description_antitracking": {
 		"message": "对未拦截和未知的跟踪器保持匿名，获得更好的浏览保护。"
 	},
-	"hub_setup_adblock_name_adblocking": {
-		"message": "增强型广告屏蔽"
-	},
-	"hub_setup_adblock_description_adblocking": {
-		"message": "拦截您访问的网站上的广告。"
-	},
-	"hub_setup_smartblocking_name_smartblocking": {
-		"message": "智能拦截"
-	},
-	"hub_setup_smartblocking_description_smartblocking": {
-		"message": "自动拦截和取消拦截跟踪器，优化网页性能。"
+	"hub_setup_feature_already_active": {
+		"message": "Cliqz 中默认激活此功能。$LINK_LM_START$了解更多$LINK_LM_END$",
+		"placeholders": {
+			"link_lm_start": {
+				"content": "<a href=\"https://www.ghostery.com/faqs/what-are-the-new-ghostery-8-features/\" target=\"_blank\" rel=\"noopener noreferrer\">"
+			},
+			"link_lm_end": {
+				"content": "</a>"
+			}
+		}
 	},
 	"hub_setup_ghosteryrewards_name_rewards": {
 		"message": "Rewards"
@@ -1567,17 +1407,8 @@
 	"hub_setup_feature_tutorial_description": {
 		"message": "了解Ghostery的主要功能。"
 	},
-	"hub_setup_feature_tutorial_button": {
-		"message": "开始"
-	},
-	"hub_setup_feature_supporter_title": {
-		"message": "获取Ghostery Plus"
-	},
 	"hub_setup_feature_supporter_description": {
 		"message": "支持Ghostery并解锁特别福利。"
-	},
-	"hub_setup_feature_supporter_button": {
-		"message": "支持"
 	},
 	"hub_setup_feature_products_title": {
 		"message": "查看更多Ghostery产品"
@@ -1611,21 +1442,6 @@
 	},
 	"hub_tutorial_exit_flow": {
 		"message": "退出教程"
-	},
-	"hub_tutorial_nav_previous": {
-		"message": "上一步"
-	},
-	"hub_tutorial_nav_next": {
-		"message": "下一步"
-	},
-	"hub_tutorial_nav_done": {
-		"message": "完成"
-	},
-	"hub_tutorial_simple_view": {
-		"message": "简单视图"
-	},
-	"hub_tutorial_detailed_view": {
-		"message": "详细视图"
 	},
 	"hub_tutorial_detailed_expanded_view": {
 		"message": "详细扩展视图"
@@ -1678,23 +1494,8 @@
 	"hub_tutorial_antisuite_title": {
 		"message": "通过我们的增强隐私功能获得额外的防护和自动化控制："
 	},
-	"hub_tutorial_antisuite_antitracking_title": {
-		"message": "增强型反跟踪"
-	},
 	"hub_tutorial_antisuite_antitracking_description": {
 		"message": "去除网站可用于识别您身份的数据点。"
-	},
-	"hub_tutorial_antisuite_adblocking_title": {
-		"message": "增强型广告屏蔽"
-	},
-	"hub_tutorial_antisuite_adblocking_description": {
-		"message": "拦截您访问的页面上的广告。"
-	},
-	"hub_tutorial_antisuite_smartblocking_title": {
-		"message": "智能拦截"
-	},
-	"hub_tutorial_antisuite_smartblocking_description": {
-		"message": "自动拦截和取消拦截跟踪器，优化网页性能。"
 	},
 	"hub_products_page_title" : {
 		"message": "Ghostery Hub - 使用其他Ghostery产品"
@@ -1732,9 +1533,6 @@
 	"hub_rewards_header_description": {
 		"message": "我们的新Rewards功能提供了一种完全私密的强大新方法来获取真实的网上折扣。快打开这个功能试用一下吧！"
 	},
-	"hub_rewards_header_learn_more": {
-		"message": "了解详情"
-	},
 	"hub_rewards_experience_title": {
 		"message": "更智能的购物体验"
 	},
@@ -1765,12 +1563,6 @@
 	"hub_supporter_header_description": {
 		"message": "展现您的支持，解锁特别福利！"
 	},
-	"hub_supporter_button_text": {
-		"message": "获取Ghostery Plus"
-	},
-	"hub_supporter_button_text_alt": {
-		"message": "已订阅"
-	},
 	"hub_supporter_price": {
 		"message": "$SUP_START$&#36;$SUP_END$$SPAN_START$2$SPAN_END$/月",
 		"placeholders": {
@@ -1788,14 +1580,8 @@
 			}
 		}
 	},
-	"hub_supporter_perk_themes_title": {
-		"message": "新主题"
-	},
 	"hub_supporter_perk_themes_description": {
 		"message": "定制Ghostery的颜色 - 试试我们的午夜黑主题吧！"
-	},
-	"hub_supporter_perk_stats_title": {
-		"message": "历史拦截统计数据"
 	},
 	"hub_supporter_perk_stats_description": {
 		"message": "查看您的拦截数据，了解 Ghostery 如何为您服务"
@@ -1809,20 +1595,11 @@
 	"hub_supporter_manifesto": {
 		"message": "我们致力于为用户免费提供最出色的隐私保护服务。尽管我们的隐私套装不收费，但是您可以选择通过低价按月订阅来支持我们。升级为Ghostery Plus，加入我们的使命——并解锁各种酷炫福利！"
 	},
-	"hub_supporter_feature_theme_title": {
-		"message": "新主题"
-	},
 	"hub_supporter_feature_theme_description": {
 		"message": "定制Ghostery的颜色，获得全新的视觉体验！通过热门请求引入。快看看我们的特别版午夜黑主题，更多主题敬请期待。"
 	},
-	"hub_supporter_feature_stats_title": {
-		"message": "历史拦截统计数据"
-	},
 	"hub_supporter_feature_stats_description": {
 		"message": "查看历史拦截结果图表及统计数据，揭示趋势并了解 Ghostery 对浏览的影响。"
-	},
-	"hub_supporter_feature_support_title": {
-		"message": "优先支持"
 	},
 	"hub_supporter_feature_support_description": {
 		"message": "需要帮助？发现崩溃页面？使用我们的优先帮助台服务快速回答和解决所有问题，登录 Plus 帐户后才可使用。"
@@ -1845,15 +1622,6 @@
 	"hub_login_header_title": {
 		"message": "登录您的帐户。"
 	},
-	"hub_login_label_email": {
-		"message": "电子邮件地址："
-	},
-	"hub_login_label_password": {
-		"message": "密码："
-	},
-	"hub_login_label_email_invalid": {
-		"message": "请输入有效的电子邮件地址。"
-	},
 	"hub_login_label_password_invalid": {
 		"message": "请使用 8 到 50 个字符。"
 	},
@@ -1863,38 +1631,17 @@
 	"hub_login_link_create_account": {
 		"message": "注册。"
 	},
-	"hub_login_button_submit": {
-		"message": "登录"
-	},
 	"hub_login_toast_success": {
 		"message": "登录成功！您的帐户设置已导入。"
 	},
-	"hub_login_toast_error": {
-		"message": "似乎无法找到此电子邮件地址和密码组合。再试一次。"
-	},
 	"hub_create_account_header_title": {
 		"message": "您想创建 Ghostery 帐户来跨浏览器和设备同步设置吗？"
-	},
-	"hub_create_account_label_email": {
-		"message": "电子邮件地址："
-	},
-	"hub_create_account_label_email_confirm": {
-		"message": "确认电子邮件地址："
 	},
 	"hub_create_account_label_first_name": {
 		"message": "名字（可选）："
 	},
 	"hub_create_account_label_email_last_name": {
 		"message": "姓氏（可选）："
-	},
-	"hub_create_account_label_password": {
-		"message": "密码："
-	},
-	"hub_create_account_label_email_invalid": {
-		"message": "请输入有效的电子邮件地址。"
-	},
-	"hub_create_account_label_email_confirm_invalid": {
-		"message": "您的电子邮件地址不符。"
 	},
 	"hub_create_account_label_password_invalid": {
 		"message": "只允许使用这些特殊字符：!@#$%^&amp;*=+()&lt;&gt;{}[];:,./?"
@@ -1910,9 +1657,6 @@
 	},
 	"hub_create_account_link_login": {
 		"message": "在此处登录。"
-	},
-	"hub_create_account_button_submit": {
-		"message": "创建帐户"
 	},
 	"hub_create_account_toast_success": {
 		"message": "帐户创建成功"
@@ -2045,9 +1789,6 @@
 	"rewards_code_copied_toast_notification": {
 		"message": "Rewards代码已拷贝！"
 	},
-	"rewards_learn_more": {
-		"message": "了解详情"
-	},
 	"offers_hub_copy_btn": {
 		"message": "复制代码"
 	},
@@ -2066,20 +1807,8 @@
 	"subscription_themes": {
 		"message": "Ghostery主题"
 	},
-	"subscription_info_title": {
-		"message": "Ghostery Plus"
-	},
 	"subscription_themes_title": {
 		"message": "主题"
-	},
-	"subscription_priority_support_title": {
-		"message": "优先支持"
-	},
-	"subscription_priority_support": {
-		"message": "优先支持"
-	},
-	"subscription_history_stats": {
-		"message": "历史统计数据"
 	},
 	"subscribe_pitch": {
 		"message": "尽管Ghostery是免费的，但是您可以选择通过每月&#36;2的低价订阅来支持我们，同时还能获得酷炫的福利，例如彩色主题、优先帮助服务等等。加入我们的使命并订阅！"
@@ -2090,8 +1819,14 @@
 	"subscribe_pitch_button_label": {
 		"message": "获取Ghostery Plus！"
 	},
+	"subscribe_pitch_no_thanks": {
+		"message": "不用了，稍后再说"
+	},
 	"subscribe_pitch_sign_here": {
 		"message": "已经订阅了？在此登录"
+	},
+	"subscribe_pitch_sign_in": {
+		"message": "已经订阅？登录"
 	},
 	"subscription_midnight_theme": {
 		"message": "午夜黑主题"
@@ -2110,9 +1845,6 @@
 	},
 	"subscription_themes_tooltip": {
 		"message": "更改Ghostery的颜色主题！"
-	},
-	"subscription_tracker_stats": {
-		"message": "历史统计数据"
 	},
 	"subscription_charge_date" : {
 		"message": "下次支付日期"
@@ -2157,9 +1889,6 @@
 	},
 	"panel_stats_menu_daily": {
 		"message": "每日"
-	},
-	"panel_stats_header_title": {
-		"message": "历史追踪器统计数据"
 	},
 	"panel_stats_header_title_monthly": {
 		"message": "跟踪器历史统计数据（月均）"
@@ -2223,9 +1952,6 @@
 	"panel_stats_pitch_modal_sign_in": {
 		"message": "在此处登录\n"
 	},
-	"panel_stats_pitch_modal_subscribe": {
-		"message": "获取Ghostery Plus！"
-	},
 	"panel_stats_pitch_modal_tooltip": {
 		"message": "删除当前时间点之前的所有历史统计数据。"
 	},
@@ -2246,12 +1972,6 @@
 	},
 	"ads": {
 		"message": "条广告"
-	},
-	"cliqz_feature_status_on": {
-		"message": "开启"
-	},
-	"cliqz_feature_status_off": {
-		"message": "关闭"
 	},
 	"create_account_form_legal_consent_checkbox_label": {
 		"message": "我接受$LINK_TERMS_START$条款和条件$LINK_END$、$LINK_LICENSE_START$公共许可协议$LINK_END$，并同意$LINK_PRIVACY_START$隐私政策$LINK_END$中的数据处理方式。",
@@ -2281,5 +2001,191 @@
 	},
 	"unknown_description": {
 		"message": "由 Anti-Tracking 清除的未知跟踪器"
+	},
+	"ghostery_is_ready": {
+		"message": "Ghostery 已就绪！"
+	},
+	"choose_your_privacy_plan": {
+		"message": "请选择您的隐私套餐"
+	},
+	"choose_your_ghostery_privacy_plan": {
+		"message": "请选择您的 Ghostery 隐私套餐"
+	},
+	"ghostery_basic": {
+		"message": "Basic"
+	},
+	"ghostery_plus": {
+		"message": "Ghostery Plus"
+	},
+	"locale_appropriate_currency_icon": {
+		"message": "$$",
+		"description": "Use '$$' to mean '$'. '$' has a special meaning in the code and the first '$' tells the browser to ignore the special meaning of the second '$' and print it literally."
+	},
+	"plus_monthly_subscription_price_number": {
+		"message": "2"
+	},
+	"per_month": {
+		"message": "每月"
+	},
+	"faster_cleaner_browsing": {
+		"message": "更快、更干净的浏览体验",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"blocks_ads": {
+		"message": "广告拦截",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"blocks_trackers": {
+		"message": "跟踪器拦截",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"data_protection": {
+		"message": "数据保护",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"select_basic": {
+		"message": "选择 Basic"
+	},
+	"select_plus": {
+		"message": "选择 Plus"
+	},
+	"recommended": {
+		"message": "建议"
+	},
+	"get_ghostery_plus": {
+		"message": "获取 Ghostery Plus"
+	},
+	"get_ghostery_plus_bang": {
+		"message": "获取Ghostery Plus！"
+	},
+	"already_subscribed": {
+		"message": "已订阅"
+	},
+	"new_themes": {
+		"message": "新主题"
+	},
+	"historical_blocking_stats": {
+		"message": "历史拦截统计数据"
+	},
+	"sign_in": {
+		"message": "登录"
+	},
+	"sign_out": {
+		"message": "退出"
+	},
+	"create_account": {
+		"message": "创建帐户"
+	},
+	"email_colon": {
+		"message": "电子邮件地址："
+	},
+	"confirm_email_colon": {
+		"message": "确认电子邮件地址："
+	},
+	"next": {
+		"message": "下一步"
+	},
+	"previous": {
+		"message": "上一步"
+	},
+	"done": {
+		"message": "完成"
+	},
+	"simple_view": {
+		"message": "简单视图"
+	},
+	"detailed_view": {
+		"message": "详细视图"
+	},
+	"support": {
+		"message": "支持"
+	},
+	"start": {
+		"message": "开始"
+	},
+	"password_colon": {
+		"message": "密码："
+	},
+	"please_enter_a_valid_email": {
+		"message": "请输入有效的电子邮件地址。"
+	},
+	"your_email_do_not_match": {
+		"message": "您的电子邮件地址不符。"
+	},
+	"customize_setup": {
+		"message": "自定义设置"
+	},
+	"learn_more": {
+		"message": "了解详情"
+	},
+	"historical_stats": {
+		"message": "历史统计数据"
+	},
+	"priority_support": {
+		"message": "优先支持",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
+	},
+	"on": {
+		"message": "开启"
+	},
+	"off": {
+		"message": "关闭"
+	},
+	"enhanced_ad_blocking": {
+		"message": "增强型广告屏蔽"
+	},
+	"smart_blocking": {
+		"message": "智能拦截"
+	},
+	"smart_blocking_DESC": {
+		"message": "自动拦截和取消拦截跟踪器，优化网页性能。"
+	},
+	"ad_blocking_DESC": {
+		"message": "拦截您访问的页面上的广告。"
+	},
+	"anti_tracking_DESC": {
+		"message": "对未拦截和未知的跟踪器保持匿名，获得更好的浏览保护。"
+	},
+	"no_such_email_password_combo": {
+		"message": "似乎无法找到此邮箱地址和密码的组合。 请重试。"
+	},
+	"all_basic_features_plus_COLON": {
+		"message": "所有基础功能，另含：",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
+	},
+	"historical_tracker_stats": {
+		"message": "历史追踪器统计数据",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
+	},
+	"new_color_themes": {
+		"message": "新颜色主题",
+		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 25."
+	},
+	"upgrade_cta_TEXT": {
+		"message": "升级到 Ghostery Plus，只需 &#36;2 每月，即可解锁历史跟踪器信息、优先支持访问权限和新的颜色主题。",
+		"description": "Body text in a non-responsive modal. Character limit (including spaces and punctuation): 135."
+	},
+	"upgrade_your_ghostery_experience": {
+		"message": "升级 Ghostery 体验",
+		"description": "Header text for a non-responsive modal. Character limit (including spaces and punctuation): 40."
+	},
+	"upgrade_to_plus": {
+		"message": "升级到 Plus",
+		"description": "Button text in a non-responsive modal. Character limit (including spaces and punctuation): 35."
+	},
+	"no_thanks_turn_promos_off": {
+		"message": "不用了，关闭促销",
+		"description": "Text link in a non-responsive modal. Character limit (including spaces and punctuation): 28."
+	},
+	"already_subscribed_sign_in": {
+		"message": "已经订阅？登录",
+		"description": "Character limit (including spaces and punctuation): 28."
+	},
+	"promos_turned_off_notification": {
+		"message": "促销已关闭。要重新打开，请访问",
+		"description": "translation must take into account that 'Settings' is appended to this string"
+	},
+	"settings": {
+		"message": "设置"
 	}
 }
