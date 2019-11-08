@@ -17,11 +17,9 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 
 .PlusPromoModal__gold-ghostie-badge {
 	margin-top: 21px;
-	margin-bottom: 16px;
 }
 
 .PlusPromoModal__header {
-	margin-bottom: 10px;
 	font-size: 20px;
 	font-weight: bold;
 	font-family: $standard-font-family;
@@ -41,30 +39,27 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 	position: relative;
 	background-color: #f7f7f7;
 	border: 1.9px solid #930194;
+	justify-content: space-between;
 	z-index: 10;
-
 	&.initial {
 		&.in-hub {
 			width: 646px;
 			height: 553px;
 		}
-
 		&.in-panel {
 			width: 556px;
 			height: 471px;
 		}
 	}
-
 	&.upgrade {
 		width: 475px;
-		height: 440px;
+		min-height: 425px;
 	}
 }
 
 .PlusPromoModal__buttons-background {
 	background-color: #e7ecee;
-	position: absolute;
-	bottom: 3px;
+	margin-bottom: 3px;
 	width: 99%;
 	height: 72px;
 	z-index: -1;
@@ -91,6 +86,7 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 	padding-top: 30px;
 	font-size: 26px;
 	font-weight: bold;
+	text-align: center;
 }
 
 .PlusPromoModal__choose-your-plan {
@@ -98,20 +94,19 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 	font-weight: bold;
 	font-family: $standard-font-family;
 	color: #4a4a4a;
-
-	&.in-hub { padding-top: 10px; }
-	&.in-panel { padding-top: 17px; }
+	text-align: center;
+	&.in-hub {margin-top: 10px;}
+	&.in-panel {
+		margin-bottom: 10px;
+		padding-top: 17px;
+	}
 }
 
 .PlusPromoModal__options-container {
 	display: flex;
 	justify-content: space-around;
-	&.in-hub {
-		margin-top: 44px;
-	}
-	&.in-panel {
-		margin-top: 34px;
-	}
+	&.in-hub {}
+	&.in-panel {}
 }
 
 .PlusPromoModal__option-container {
@@ -139,11 +134,13 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 	&.in-hub {
 		width: 240px;
 		flex: 1;
+		min-height: 275px;
 	}
 
 	&.in-panel {
 		width: 221px;
 		flex: 1;
+		min-height: 250px;
 	}
 }
 
@@ -164,7 +161,7 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 
 .PlusPromoModal__recommended-banner-text {
 	position: relative;
-	left: 18px;
+	left: 15px;
 	top: -47px;
 	transform: rotate(-15deg);
 	color: white;

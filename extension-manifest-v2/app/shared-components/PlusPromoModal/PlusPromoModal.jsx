@@ -75,13 +75,15 @@ const PlusPromoModal = (props) => {
 	return (
 		<Modal show={show}>
 			<div className={contentClassNames}>
-				{isInHub && (
-					<div className="PlusPromoModal__thanks-for-download">
-						{t('ghostery_is_ready')}
+				<div>
+					{isInHub && (
+						<div className="PlusPromoModal__thanks-for-download">
+							{t('ghostery_is_ready')}
+						</div>
+					)}
+					<div className={chooseYourPlanClassNames}>
+						{isInHub ? t('choose_your_privacy_plan') : t('choose_your_ghostery_privacy_plan')}
 					</div>
-				)}
-				<div className={chooseYourPlanClassNames}>
-					{isInHub ? t('choose_your_privacy_plan') : t('choose_your_ghostery_privacy_plan')}
 				</div>
 				<div className={optionsContainerClassNames}>
 					<div className="PlusPromoModal__option-container">
@@ -137,19 +139,19 @@ const PlusPromoModal = (props) => {
 							</div>
 						</div>
 					</div>
-					<div className={buttonBackgroundClassNames}>
-						<div className="PlusPromoModal__button basic" onClick={handleSelectBasicClick}>
-							<span className="side-padded">{t('select_basic')}</span>
-						</div>
-						<div onClick={handleSelectPlusClick} className="PlusPromoModal__button plus">
-							<span className="side-padded">{t('select_plus')}</span>
-						</div>
-						{isInPanel && (
-							<div onClick={handleSignInClick} className="PlusPromoModal__text-link sign-in">
-								{t('already_subscribed_sign_in')}
-							</div>
-						)}
+				</div>
+				<div className={buttonBackgroundClassNames}>
+					<div className="PlusPromoModal__button basic" onClick={handleSelectBasicClick}>
+						<span className="side-padded">{t('select_basic')}</span>
 					</div>
+					<div onClick={handleSelectPlusClick} className="PlusPromoModal__button plus">
+						<span className="side-padded">{t('select_plus')}</span>
+					</div>
+					{isInPanel && (
+						<div onClick={handleSignInClick} className="PlusPromoModal__text-link sign-in">
+							{t('already_subscribed_sign_in')}
+						</div>
+					)}
 				</div>
 			</div>
 		</Modal>

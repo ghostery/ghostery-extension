@@ -19,17 +19,17 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 	background-color: $alabaster;
 	position: relative;
 	width: 518px;
-	min-height: 437px;
-	padding-top: 21px;
+	min-height: 450px;
 	color: $tundora;
 	border: 2px solid $dark-cyan-blue;
+	justify-content: space-between;
 	z-index: 10;
 }
 
 .InsightsModal__image {
 	height: 94px;
 	width: 177px;
-	margin-bottom: 16px;
+	margin-top: 20px;
 	background-image: url('/app/images/panel/insights-ribbon.svg');
 }
 
@@ -40,7 +40,7 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 	font-weight: 900;
 	line-height: 1.35;
 	color: $tundora;
-	margin-bottom: 8.9px;
+	margin-bottom: 10px;
 }
 
 .InsightsModal__description {
@@ -86,8 +86,6 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 	width: 99%;
 	margin-top: 10px;
 	background-color: $mystic;
-	position: absolute;
-	bottom: 0;
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
