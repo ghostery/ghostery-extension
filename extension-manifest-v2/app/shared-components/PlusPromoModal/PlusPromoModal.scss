@@ -25,10 +25,11 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 	font-size: 20px;
 	font-weight: bold;
 	font-family: $standard-font-family;
+	padding: 0 15px;
+	text-align: center;
 }
 
 .PlusPromoModal__description {
-	margin-bottom: 5px;
 	width: 350px;
 	text-align: center;
 	font-size: 18px;
@@ -55,8 +56,8 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 	}
 
 	&.upgrade {
-		width: 434px;
-		height: 410px;
+		width: 475px;
+		height: 440px;
 	}
 }
 
@@ -67,9 +68,23 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 	width: 99%;
 	height: 72px;
 	z-index: -1;
-
-	&.initial { height: 72px; }
-	&.upgrade { height: 107px; }
+	display: flex;
+	&.initial {
+		height: 72px;
+		flex-direction: row;
+		justify-content: space-around;
+		align-items: center;
+			&.in-panel {
+			height: 80px;
+			flex-wrap: wrap;
+			align-content: center;
+		}
+	}
+	&.upgrade {
+		height: 95px;
+		flex-direction: column;
+		justify-content: center;
+	}
 }
 
 .PlusPromoModal__thanks-for-download {
@@ -89,15 +104,12 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 }
 
 .PlusPromoModal__options-container {
-	height: 100%;
 	display: flex;
-
+	justify-content: space-around;
 	&.in-hub {
-		justify-content: space-evenly;
 		margin-top: 44px;
 	}
 	&.in-panel {
-		justify-content: space-around;
 		margin-top: 34px;
 	}
 }
@@ -112,6 +124,7 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 	border-style: solid;
 	border-width: 3px;
 	background-color: #FFFFFF;
+	padding: 0 15px;
 
 	&.basic {
 		border-color: #1dafed;
@@ -124,15 +137,13 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 	}
 
 	&.in-hub {
-		margin-bottom: 45px;
 		width: 240px;
-		height: 298px;
+		flex: 1;
 	}
 
 	&.in-panel {
-		margin-bottom: 30px;
 		width: 221px;
-		height: 294px;
+		flex: 1;
 	}
 }
 
@@ -146,7 +157,7 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 	}
 
 	&.in-panel {
-		left: -10px;
+		left: -30px;
 		top: -32px;
 	}
 }
@@ -206,15 +217,18 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 	font-family: $standard-font-family;
 	font-size: 16px;
 	color: #333333;
-
+	line-height: 16px;
+	&.in-panel {
+		padding-bottom: 10px;
+		font-size: 15px;
+	}
 	&.italic {
 		font-style: italic;
 	}
 }
 
 .PlusPromoModal__check-icon {
-	padding-right: 5px;
-	margin-top: -18px;
+	padding-right: 10px;
 }
 
 .PlusPromoModal__plus-option-description-item-container {
@@ -223,11 +237,9 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 }
 
 .PlusPromoModal__button-container {
-	width: 100%;
 	display: flex;
-	justify-content: center;
-	position: absolute;
-	bottom: 50px;
+	margin-bottom: 10px;
+	align-self: center;
 }
 
 .PlusPromoModal__button {
@@ -291,9 +303,6 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 }
 
 .PlusPromoModal__text-link-container {
-	position: absolute;
-	bottom: 10px;
-	width: 100%;
 	display: flex;
 	justify-content: space-evenly;
 }
@@ -301,9 +310,14 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 .PlusPromoModal__text-link {
 	margin-left: 10px;
 	margin-right: 10px;
-	font-size: 15px;
+	font-size: 13px;
 	font-family: $standard-font-family;
 	color: #4a4a4a;
 	text-decoration: underline;
+	text-align: center;
 	cursor: pointer;
+	&.sign-in {
+		margin-top: 5px;
+		width: 100%;
+	}
 }

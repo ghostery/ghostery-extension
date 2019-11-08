@@ -44,44 +44,53 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 }
 
 .InsightsModal__description {
-	width: 372px;
-	height: 54.2px;
+	width: 400px;
 	font-size: 18px;
 	font-weight: 500;
 	text-align: center;
-	margin-bottom: 12.8px;
+	margin-bottom: 10px;
 	font-family: $standard-font-family;
 }
 
 .InsightsModal__features {
 	&:nth-child(odd) {
-		margin-left: 28px;
-		width: 260px;
+		margin-left: 25px;
+		width: 50%;
 	}
 	&:nth-child(even) {
-		width: 229.8px;
+		margin-left: 15px;
+		margin-right: 25px;
+		width: 50%;
 	}
 }
 
 .InsightsModal__feature-text {
 	font-family: $standard-font-family;
 	font-size: 14px;
-	line-height: 39px;
 	color: $medium-gray;
+	padding-bottom: 5px;
+	line-height: 16px;
 }
 
 .InsightsModal__checked-circle-icon {
+	flex: none;
 	height: 18px;
 	width: 18px;
 	margin-right: 8px;
 	background-image: url('/app/images/panel/checked-circle-icon.svg');
+	align-self: flex-start;
 }
 
 .InsightsModal__call-to-action-container {
-	height: 107px;
-	width: 506px;
+	height: 95px;
+	width: 99%;
 	margin-top: 10px;
 	background-color: $mystic;
+	position: absolute;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
 }
 
 .InsightsModal__call-to-action {
@@ -90,7 +99,6 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 	justify-content: center;
 	padding: 0px 50px 0px; // more localization-proof than hardcoding width
 	height: 36px;
-	margin-top: 18px;
 	border-radius: 2px;
 	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12);
 	background-image: linear-gradient(101deg, #070e18, #1678a0);
@@ -107,7 +115,7 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 
 .InsightsModal__link {
 	font-family: $standard-font-family;
-	font-size: 15px;
+	font-size: 13px;
 	color: $tundora;
 	&:hover {
 		cursor: pointer;
@@ -116,9 +124,8 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 }
 
 .InsightsModal__other-options-container {
-	margin-top: 23px;
+	margin-top: 10px;
 	padding: 0 10.5px;
 	text-decoration: underline;
-	font-size: 15px;
 	color: $tundora;
 }

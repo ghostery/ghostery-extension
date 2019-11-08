@@ -47,28 +47,29 @@ class PlusUpgradePromoModal extends React.Component {
 			<Modal show>
 				<div className={contentClassNames}>
 					<ModalExitButton className="InsightsModal__exitButton" toggleModal={this.handleXClick} />
-					<div className="PlusPromoModal__buttons-background upgrade" />
 					<img className="PlusPromoModal__gold-ghostie-badge" src="/app/images/hub/home/gold-ghostie-badge.svg" />
 					<div className="PlusPromoModal__header">
 						{t('upgrade_your_ghostery_experience')}
 					</div>
 					<div className="PlusPromoModal__description cta" dangerouslySetInnerHTML={{ __html: t('upgrade_cta_TEXT') }} />
-					<div className="PlusPromoModal__button-container">
-						<span onClick={this.handleSubscribeClick} className="PlusPromoModal__button upgrade">
-							<span className="side-padded button-text">{t('upgrade_to_plus')}</span>
-						</span>
-					</div>
-					<div className="PlusPromoModal__text-link-container">
-						{
-							!loggedIn &&
-							(
-								<div onClick={this.props.handleSignInClick} className="PlusPromoModal__text-link">
-									{t('already_subscribed_sign_in')}
-								</div>
-							)
-						}
-						<div onClick={this.handleNoThanksClick} className="PlusPromoModal__text-link">
-							{t('no_thanks_turn_promos_off')}
+					<div className="PlusPromoModal__buttons-background upgrade">
+						<div className="PlusPromoModal__button-container">
+							<span onClick={this.handleSubscribeClick} className="PlusPromoModal__button upgrade">
+								<span className="side-padded button-text">{t('upgrade_to_plus')}</span>
+							</span>
+						</div>
+						<div className="PlusPromoModal__text-link-container">
+							{
+								!loggedIn &&
+								(
+									<div onClick={this.props.handleSignInClick} className="PlusPromoModal__text-link">
+										{t('already_subscribed_sign_in')}
+									</div>
+								)
+							}
+							<div onClick={this.handleNoThanksClick} className="PlusPromoModal__text-link">
+								{t('no_thanks_turn_promos_off')}
+							</div>
 						</div>
 					</div>
 				</div>
