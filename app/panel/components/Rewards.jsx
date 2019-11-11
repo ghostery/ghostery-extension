@@ -122,8 +122,7 @@ class Rewards extends React.Component {
 			const parsedData = JSON.parse(msg.data || '{}');
 			target = parsedData.target;
 			message = parsedData.message || {};
-			// eslint-disable-next-line
-    } catch (e) {
+		} catch (e) {
 			// just silent return
 			return;
 		}

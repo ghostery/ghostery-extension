@@ -239,10 +239,6 @@ class Metrics {
 				this._sendReq(type, ['all', 'daily', 'monthly']);
 				break;
 
-			// Rewards Pings
-			case 'engaged_offer':
-				this._sendReq('engaged_offer', ['daily', 'weekly', 'monthly']);
-				break;
 			case 'rewards_off':
 			case 'rewards_on':
 				this._sendReq(type, ['all', 'daily']);
