@@ -1,4 +1,4 @@
-### GHOSTERY 8.4.4 (UNRELEASED)
+### GHOSTERY 8.4.4 (November 12, 2019)
 
 + New upgrade modals for Ghostery Plus & Ghostery Insights (#458,#460,#463,#464,#467,#468)
 + Improves context-detection of WebRequests, particularly for pages using service workers (#461)
