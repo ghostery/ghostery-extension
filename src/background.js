@@ -491,13 +491,6 @@ function handleRewards(name, message, callback) {
 		case 'rewardSignal': // e.g. hub_open | hub_closed
 			rewards.sendSignal(message);
 			break;
-		case 'myOffrzTurnoff':
-			panelData.set({ enable_offers: false });
-			rewards.sendSignal({
-				actionId: 'rewards_off',
-				type: 'action-signal',
-			});
-			break;
 		case 'ping':
 			metrics.ping(message);
 			break;
@@ -1627,6 +1620,13 @@ function initializeGhosteryModules() {
 					cliqz.prefs.set('myoffrz.opted_in', conf.rewards_opted_in);
 					conf.rewards_opted_in = undefined;
 				}
+				cliqz.events.subscribe('myoffrz:turnoff', () => {
+					panelData.set({ enable_offers: false });
+					rewards.sendSignal({
+						actionId: 'rewards_off',
+						type: 'action-signal',
+					});
+				});
 			}
 		});
 	}).catch((e) => {
