@@ -491,6 +491,13 @@ function handleRewards(name, message, callback) {
 		case 'rewardSignal': // e.g. hub_open | hub_closed
 			rewards.sendSignal(message);
 			break;
+		case 'myOffrzTurnoff':
+			panelData.set({ enable_offers: false });
+			rewards.sendSignal({
+				actionId: 'rewards_off',
+				type: 'action-signal',
+			});
+			break;
 		case 'ping':
 			metrics.ping(message);
 			break;
@@ -658,20 +665,6 @@ function handlePurplebox(name, message) {
  * @return {boolean}            denotes async (true) or sync (false)
  */
 function onMessageHandler(request, sender, callback) {
-	if (request.module === 'offers-banner' && request.action === 'send') {
-		// eslint-disable-next-line
-		const [module, _, msg = {}] = request.args;
-		if (module !== 'offers-cc') { return; }
-		if (msg.action === 'myOffrzTurnoff') {
-			panelData.set({ enable_offers: false });
-			rewards.sendSignal({
-				actionId: 'rewards_off',
-				type: 'action-signal',
-			});
-		}
-		return;
-	}
-
 	if (request.source === 'cliqz-content-script') {
 		return;
 	}
