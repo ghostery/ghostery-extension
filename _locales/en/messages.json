@@ -2159,21 +2159,6 @@
           }
       }
   },
-  "myoffrz_apply_code": {
-      "message": "Apply code"
-  },
-  "myoffrz_cancel": {
-      "message": "Cancel"
-  },
-  "myoffrz_conditions": {
-      "message": "Conditions"
-  },
-  "myoffrz_copied": {
-      "message": "Copied"
-  },
-  "myoffrz_copy_code": {
-      "message": "Copy code"
-  },
   "OFFERS_ENDS": {
     "message": ""
   },
