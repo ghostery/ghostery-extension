@@ -90,7 +90,7 @@ const PlusPromoModal = (props) => {
 						<div className={`${optionDescriptionBoxClassNames} basic`}>
 							<div className="PlusPromoModal__option-header basic">{t('ghostery_basic')}</div>
 							<div className="PlusPromoModal__price-text basic">
-								<span className="PlusPromoModal__currency-sign">{t('locale_appropriate_currency_icon')}</span>
+								<span className="PlusPromoModal__currency-sign" dangerouslySetInnerHTML={{ __html: t('dollar_sign') }} />
 								<span className="PlusPromoModal__amount">0</span>
 								<span> </span>
 								<span className="PlusPromoModal__per-month">{t('per_month')}</span>
@@ -111,7 +111,7 @@ const PlusPromoModal = (props) => {
 							</div>
 							<div className="PlusPromoModal__option-header plus">{t('ghostery_plus')}</div>
 							<div className="PlusPromoModal__price-text plus">
-								<span className="PlusPromoModal__currency-sign">{t('locale_appropriate_currency_icon')}</span>
+								<span className="PlusPromoModal__currency-sign" dangerouslySetInnerHTML={{ __html: t('dollar_sign') }} />
 								<span className="PlusPromoModal__amount">{t('plus_monthly_subscription_price_number')}</span>
 								<span> </span>
 								<span className="PlusPromoModal__per-month">{t('per_month')}</span>
