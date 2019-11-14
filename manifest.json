@@ -1,5 +1,7 @@
 {
 	"manifest_version": 2,
+	"debug": true,
+	"log": true,
 	"applications": {
 		"gecko": {
 			"id": "firefox@ghostery.com",

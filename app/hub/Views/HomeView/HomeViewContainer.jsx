@@ -71,7 +71,7 @@ class HomeViewContainer extends Component {
 
 		sendMessage('SET_PLUS_PROMO_MODAL_SEEN', {});
 
-		sendMessage('ping', 'promo_modals_select_basic_hub');
+		sendMessage('SEND_PING', 'promo_modals_select_basic_hub');
 	}
 
 	/**
@@ -85,7 +85,7 @@ class HomeViewContainer extends Component {
 
 		sendMessage('SET_PLUS_PROMO_MODAL_SEEN', {});
 
-		sendMessage('ping', 'promo_modals_select_plus_hub');
+		sendMessage('SEND_PING', 'promo_modals_select_plus_hub');
 
 		window.open(`https://checkout.${DOMAIN}.com/plus?utm_source=gbe&utm_campaign=intro_hub`, '_blank');
 	}
@@ -112,7 +112,7 @@ class HomeViewContainer extends Component {
 
 		const showPromoModal = !isPlus && !plus_promo_modal_shown;
 		if (showPromoModal) {
-			sendMessage('ping', 'promo_modals_show_plus_choice_hub');
+			sendMessage('SEND_PING', 'promo_modals_show_plus_choice_hub');
 		}
 
 		return (
