@@ -285,14 +285,8 @@ class Metrics {
 			// Promo Modals - Ghostery 8.4.4+
 			case 'promo_modals_insights_upgrade_cta':
 			case 'promo_modals_plus_upgrade_cta':
-			case 'promo_modals_select_plus_panel':
-			case 'promo_modals_select_basic_panel':
-			case 'promo_modals_select_plus_hub':
-			case 'promo_modals_select_basic_hub':
 			case 'promo_modals_decline_insights_upgrade':
 			case 'promo_modals_decline_plus_upgrade':
-			case 'promo_modals_show_plus_choice_hub':
-			case 'promo_modals_show_plus_choice_panel':
 			case 'promo_modals_show_upgrade_plus':
 			case 'promo_modals_show_insights':
 				this._sendReq(type, ['all']);
