@@ -1497,10 +1497,10 @@
 	"hub_tutorial_antisuite_antitracking_description": {
 		"message": "サイトが個人を特定できるようなデータポイントを削除します。"
 	},
-	"hub_products_page_title" : {
+	"hub_products_page_title": {
 		"message": "Ghostery ハブ - その他のGhostery製品を試す"
 	},
-	"hub_products_header_title" : {
+	"hub_products_header_title": {
 		"message": "Ghosteryの機能でよりスマートにブラウジング！"
 	},
 	"hub_products_header_description": {
@@ -1846,7 +1846,7 @@
 	"subscription_themes_tooltip": {
 		"message": "Ghosteryのカラースキームは変更できます！"
 	},
-	"subscription_charge_date" : {
+	"subscription_charge_date": {
 		"message": "次回のお支払日"
 	},
 	"subscription_expired": {
@@ -2017,9 +2017,8 @@
 	"ghostery_plus": {
 		"message": "Ghostery プラス"
 	},
-	"locale_appropriate_currency_icon": {
-		"message": "$$ ",
-		"description": "Use '$$' to mean '$'. '$' has a special meaning in the code and the first '$' tells the browser to ignore the special meaning of the second '$' and print it literally."
+	"dollar_sign": {
+		"message":  "&#36;"
 	},
 	"plus_monthly_subscription_price_number": {
 		"message": "2"

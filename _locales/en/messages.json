@@ -2184,9 +2184,8 @@
 	"ghostery_plus": {
 		"message": "Ghostery Plus"
 	},
-	"locale_appropriate_currency_icon": {
-		"message": "$$",
-		"description": "Use '$$' to mean '$'. '$' has a special meaning in the code and the first '$' tells the browser to ignore the special meaning of the second '$' and print it literally."
+	"dollar_sign": {
+		"message": "&#36;"
 	},
 	"plus_monthly_subscription_price_number": {
 		"message": "2"

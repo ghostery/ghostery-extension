@@ -231,8 +231,6 @@ class Panel extends React.Component {
 		// we do not mark the choice-required initial plus promo as 'seen' until
 		// the user has clicked Select Basic or Select Plus
 		sendMessage('promoModals.sawPlusPromo', {});
-
-		sendMessage('ping', 'promo_modals_select_basic_panel');
 	};
 
 	/**
@@ -245,8 +243,6 @@ class Panel extends React.Component {
 		// we do not mark the choice-required initial plus promo as 'seen' until
 		// the user has clicked Select Basic or Select Plus
 		sendMessage('promoModals.sawPlusPromo', {});
-
-		sendMessage('ping', 'promo_modals_select_plus_panel');
 
 		const url = `https://checkout.${DOMAIN}.com/plus?utm_source=gbe&utm_campaign=in_app`;
 		sendMessage('openNewTab', {
@@ -320,7 +316,6 @@ class Panel extends React.Component {
 		}
 
 		// promoModal === 'plus_initial'
-		sendMessage('ping', 'promo_modals_show_plus_choice_panel');
 		return (
 			<PlusPromoModal
 				show
