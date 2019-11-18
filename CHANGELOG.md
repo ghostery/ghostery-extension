@@ -1,3 +1,5 @@
+### GHOSTERY 8.4.5 (UNRELEASED)
+
 ### GHOSTERY 8.4.4 (November 12, 2019)
 
 + New upgrade modals for Ghostery Plus & Ghostery Insights (#458,#460,#463,#464,#467,#468)

@@ -1251,9 +1251,6 @@
 	"hub_home_header_checkbox_label": {
 		"message": "Share additional anonymous analytics data to improve Ghostery’s performance."
 	},
-	"hub_home_header_info_opted_in_rewards": {
-		"message": "New users are opted in to participating in Ghostery Rewards and opted out of Human Web by default. You may change these settings in custom setup or in the extension. "
-	},
 	"hub_home_header_info_opted_out": {
 		"message": "New users are opted out of participating in Ghostery Rewards and Human Web by default. You may opt in to these recommended features in custom setup or in the extension. "
 	},
