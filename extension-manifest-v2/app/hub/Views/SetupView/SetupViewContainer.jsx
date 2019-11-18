@@ -104,7 +104,7 @@ class SetupViewContainer extends Component {
 		this.props.actions.setAntiTracking({ enable_anti_tracking: true });
 		this.props.actions.setAdBlock({ enable_ad_block: true });
 		this.props.actions.setSmartBlocking({ enable_smart_block: true });
-		this.props.actions.setGhosteryRewards({ enable_ghostery_rewards: true });
+		this.props.actions.setGhosteryRewards({ enable_ghostery_rewards: !IS_FIREFOX });
 		this.props.actions.setHumanWeb({ enable_human_web: !IS_FIREFOX });
 	}
 
