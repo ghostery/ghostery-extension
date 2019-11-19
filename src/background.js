@@ -1612,7 +1612,7 @@ function initializeGhosteryModules() {
 					conf.enable_ad_block = !adblocker.isDisabled;
 					conf.enable_anti_tracking = !antitracking.isDisabled;
 					conf.enable_human_web = !humanweb.isDisabled && !(IS_FIREFOX && globals.JUST_INSTALLED);
-					conf.enable_offers = !offers.isDisabled;
+					conf.enable_offers = !offers.isDisabled && !(IS_FIREFOX && globals.JUST_INSTALLED);
 				}
 
 				const myoffrzShouldMigrate = conf.rewards_opted_in !== undefined && cliqz.prefs.get('myoffrz.opted_in', undefined) === undefined;
