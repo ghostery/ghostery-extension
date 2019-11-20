@@ -1,4 +1,7 @@
-### GHOSTERY 8.4.5 (UNRELEASED)
+### GHOSTERY 8.4.5 (November 20, 2019)
+
++ Remove unused telemetry from promo modals (#474)
++ Update Rewards opt-in setting for Firefox
 
 ### GHOSTERY 8.4.4 (November 12, 2019)
 
