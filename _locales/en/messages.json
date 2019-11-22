@@ -782,7 +782,7 @@
 		"message": "We seem to be having a technical issue. Try again later."
 	},
 	"email_address_in_use": {
-		"message": "That email address is already in use.  Please choose another. "
+		"message": "That email address is already in use. Please choose another. "
 	},
 	"short_description": {
 		"description": "A short description of this extension (Ghostery).",
@@ -1659,7 +1659,7 @@
 		"message": "Account Successfully Created"
 	},
 	"hub_create_account_toast_error": {
-		"message": "That email address is already in use.  Please choose another."
+		"message": "That email address is already in use. Please choose another."
 	},
 	"enable_when_paused": {
 		"message": "To use this function, Resume Ghostery."
@@ -1993,173 +1993,168 @@
 	"enhanced_anti_tracking": {
 		"message": "Enhanced Anti-Tracking"
 	},
-
-
-  "panel_rewards_view__reward": {
-      "message": "Reward"
-  },
-  "panel_rewards_view__rewards": {
-      "message": "Rewards"
-  },
-  "OFFERS_BEGIN": {
-    "message": ""
-  },
-  "myoffrz_affiliate_link": {
-    "message": "affiliate link"
-  },
-  "myoffrz_copy_and_go": {
-    "message": "copy & go"
-  },
-  "myoffrz_feedback_option1": {
-      "message": "I already used the offer"
-  },
-  "myoffrz_feedback_option2": {
-      "message": "It's not a good deal"
-  },
-  "myoffrz_feedback_option3": {
-      "message": "It's not relevant to me"
-  },
-  "myoffrz_feedback_option4": {
-      "message": "Other reasons"
-  },
-  "myoffrz_feedback_title": {
-      "message": "Feedback"
-  },
-  "myoffrz_get_code": {
-      "message": "Get code"
-  },
-  "myoffrz_offer_removed": {
-      "message": "This offer was removed."
-  },
-  "myoffrz_optional": {
-      "message": "Optional"
-  },
-  "myoffrz_powered_by_offrz": {
-      "message": "POWERED BY MyOffrz"
-  },
-  "myoffrz_show_code": {
-    "message": "Show code"
-  },
-  "myoffrz_show_more": {
-    "message": "Show more"
-  },
-  "myoffrz_skip": {
-      "message": "Skip"
-  },
-  "myoffrz_welcome_link": {
-      "message": "How It Works"
-  },
-  "myoffrz_welcome_text": {
-      "message": "As you browse the Internet, we are searching for attractive offers based on your interests."
-  },
-  "myoffrz_welcome_title": {
-      "message": "Hello!"
-  },
-  "myoffrz_why_offers_text": {
-      "message": "No personal data leaves your device. Your browser automatically identifies what you might be interested in based on your previous use. "
-  },
-  "myoffrz_why_see_these_offers": {
-      "message": "Why do I see these offers?"
-  },
-  "myoffrz_why_see_this": {
-      "message": "Why do I see this?"
-  },
-  "myoffrz_badge_text_new": {
-      "message": "NEW"
-  },
-  "myoffrz_conditions": {
-      "message": "Conditions"
-  },
-  "myoffrz_turnoff_rewards": {
-      "message": "Turn off Ghostery Rewards"
-  },
-
-
-  "OFFERS_ALREADY_TRANSLATED": {
-    "message": ""
-  },
-  "myoffrz_help": {
-      "message": "Help"
-  },
-  "myoffrz_learn_more": {
-      "message": "Learn more"
-  },
-  "myoffrz_send": {
-      "message": "Send"
-  },
-  "myoffrz_settings": {
-    "message": "Settings"
-  },
-  "myoffrz_tooltip_new_offer": {
-      "message": "New Reward discovered!"
-  },
-  "myoffrz_turnoff_notification": {
-      "message": "Ghostery Rewards is now off. You can always turn it on in your Settings or the Rewards dashboard."
-  },
-  "myoffrz_optin_description": {
-      "message": "Would you like to receive offers and discounts from trusted Ghostery partners?"
-  },
-  "myoffrz_optin_title": {
-      "message": "New Reward discovered!"
-  },
-  "myoffrz_no": {
-    "message": "no"
-  },
-  "myoffrz_yes": {
-    "message": "yes"
-  },
-  "myoffrz_rewards_new": {
-    "message": "New Reward discovered!"
-  },
-  "myoffrz_apply_code": {
-      "message": "Apply code"
-  },
-  "myoffrz_cancel": {
-      "message": "Cancel"
-  },
-  "myoffrz_copied": {
-      "message": "Copied"
-  },
-  "myoffrz_copy_code": {
-      "message": "Copy code"
-  },
-  "myoffrz_expires_in_day": {
-      "message": "Available for 1 day"
-  },
-  "myoffrz_expires_in_days": {
-      "message": "Available for $COUNT$ days",
-      "placeholders": {
-          "count": {
-              "content": "$1"
-          }
-      }
-  },
-  "myoffrz_expires_in_hour": {
-      "message": "Available for 1 hour"
-  },
-  "myoffrz_expires_in_hours": {
-      "message": "Available for $COUNT$ hours",
-      "placeholders": {
-          "count": {
-              "content": "$1"
-          }
-      }
-  },
-  "myoffrz_expires_in_minute": {
-      "message": "Available for 1 minute"
-  },
-  "myoffrz_expires_in_minutes": {
-      "message": "Available for $COUNT$ minutes",
-      "placeholders": {
-          "count": {
-              "content": "$1"
-          }
-      }
-  },
-  "OFFERS_ENDS": {
-    "message": ""
-  },
-
+	"panel_rewards_view__reward": {
+		"message": "Reward"
+	},
+	"panel_rewards_view__rewards": {
+		"message": "Rewards"
+	},
+	"OFFERS_BEGIN": {
+		"message": ""
+	},
+	"myoffrz_affiliate_link": {
+		"message": "affiliate link"
+	},
+	"myoffrz_copy_and_go": {
+		"message": "copy & go"
+	},
+	"myoffrz_feedback_option1": {
+		"message": "I already used the offer"
+	},
+	"myoffrz_feedback_option2": {
+		"message": "It's not a good deal"
+	},
+	"myoffrz_feedback_option3": {
+		"message": "It's not relevant to me"
+	},
+	"myoffrz_feedback_option4": {
+		"message": "Other reasons"
+	},
+	"myoffrz_feedback_title": {
+		"message": "Feedback"
+	},
+	"myoffrz_get_code": {
+		"message": "Get code"
+	},
+	"myoffrz_offer_removed": {
+		"message": "This offer was removed."
+	},
+	"myoffrz_optional": {
+		"message": "Optional"
+	},
+	"myoffrz_powered_by_offrz": {
+		"message": "POWERED BY MyOffrz"
+	},
+	"myoffrz_show_code": {
+		"message": "Show code"
+	},
+	"myoffrz_show_more": {
+		"message": "Show more"
+	},
+	"myoffrz_skip": {
+		"message": "Skip"
+	},
+	"myoffrz_welcome_link": {
+		"message": "How It Works"
+	},
+	"myoffrz_welcome_text": {
+		"message": "As you browse the Internet, we are searching for attractive offers based on your interests."
+	},
+	"myoffrz_welcome_title": {
+		"message": "Hello!"
+	},
+	"myoffrz_why_offers_text": {
+		"message": "No personal data leaves your device. Your browser automatically identifies what you might be interested in based on your previous use. "
+	},
+	"myoffrz_why_see_these_offers": {
+		"message": "Why do I see these offers?"
+	},
+	"myoffrz_why_see_this": {
+		"message": "Why do I see this?"
+	},
+	"myoffrz_badge_text_new": {
+		"message": "NEW"
+	},
+	"myoffrz_conditions": {
+		"message": "Conditions"
+	},
+	"myoffrz_turnoff_rewards": {
+		"message": "Turn off Ghostery Rewards"
+	},
+	"OFFERS_ALREADY_TRANSLATED": {
+		"message": ""
+	},
+	"myoffrz_help": {
+		"message": "Help"
+	},
+	"myoffrz_learn_more": {
+		"message": "Learn more"
+	},
+	"myoffrz_send": {
+		"message": "Send"
+	},
+	"myoffrz_settings": {
+		"message": "Settings"
+	},
+	"myoffrz_tooltip_new_offer": {
+		"message": "New Reward discovered!"
+	},
+	"myoffrz_turnoff_notification": {
+		"message": "Ghostery Rewards is now off. You can always turn it on in your Settings or the Rewards dashboard."
+	},
+	"myoffrz_optin_description": {
+		"message": "Would you like to receive offers and discounts from trusted Ghostery partners?"
+	},
+	"myoffrz_optin_title": {
+		"message": "New Reward discovered!"
+	},
+	"myoffrz_no": {
+		"message": "no"
+	},
+	"myoffrz_yes": {
+		"message": "yes"
+	},
+	"myoffrz_rewards_new": {
+		"message": "New Reward discovered!"
+	},
+	"myoffrz_apply_code": {
+		"message": "Apply code"
+	},
+	"myoffrz_cancel": {
+		"message": "Cancel"
+	},
+	"myoffrz_copied": {
+		"message": "Copied"
+	},
+	"myoffrz_copy_code": {
+		"message": "Copy code"
+	},
+	"myoffrz_expires_in_day": {
+		"message": "Available for 1 day"
+	},
+	"myoffrz_expires_in_days": {
+		"message": "Available for $COUNT$ days",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"myoffrz_expires_in_hour": {
+		"message": "Available for 1 hour"
+	},
+	"myoffrz_expires_in_hours": {
+		"message": "Available for $COUNT$ hours",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"myoffrz_expires_in_minute": {
+		"message": "Available for 1 minute"
+	},
+	"myoffrz_expires_in_minutes": {
+		"message": "Available for $COUNT$ minutes",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"OFFERS_ENDS": {
+		"message": ""
+	},
 	"unknown": {
 		"message": "Unknown"
 	},

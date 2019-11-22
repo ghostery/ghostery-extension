@@ -1,3 +1,7 @@
+### GHOSTERY 8.4.6 (UNRELEASED)
+
++ Modularize Rewards code (#462)
+
 ### GHOSTERY 8.4.5 (November 20, 2019)
 
 + Remove unused telemetry from promo modals (#474)
