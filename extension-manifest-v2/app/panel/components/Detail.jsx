@@ -63,20 +63,23 @@ class Detail extends React.Component {
 		const condensedToggleClassNames = ClassNames('condensed-toggle', {
 			condensed: this.props.is_expanded,
 		});
-		const { enable_offers, unread_offer_ids } = this.props;
 
 		const activeTab = this.props.history.location.pathname.includes('rewards') ? 'rewards' : 'blocking';
+		const contentDetailsClassNames = ClassNames({
+			expanded: this.props.is_expanded,
+			rewardsView: activeTab === 'rewards',
+		});
 
 		return (
 			<div className="detail-wrap">
-				<div id="content-detail" className={(this.props.is_expanded ? 'expanded' : '')}>
+				<div id="content-detail" className={contentDetailsClassNames}>
 					<div className="toggle-bar">
 						<div className={condensedToggleClassNames} onClick={this.toggleExpanded} />
 					</div>
 					<Route path="/detail/blocking" render={this.BlockingComponent} />
 					<Route path="/detail/rewards" render={this.RewardsComponent} />
 					<DetailMenu
-						hasReward={enable_offers && unread_offer_ids.length > 0}
+						hasReward={false}
 						subscriptionsPlus={this.props.user && this.props.user.subscriptionsPlus}
 						activeTab={activeTab}
 					/>

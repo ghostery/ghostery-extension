@@ -1353,9 +1353,9 @@ brorand@^1.0.1:
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
   integrity sha1-EsJe/kCkXjwyPrhnWgoM5XsiNx8=
 
-"browser-core@https://github.com/cliqz-oss/browser-core/releases/download/v7.40.1/browser-core-7.40.1.tgz":
-  version "7.40.1"
-  resolved "https://github.com/cliqz-oss/browser-core/releases/download/v7.40.1/browser-core-7.40.1.tgz#ce3cabff15be5dc26ba539184e8f0f0f28ad2244"
+"browser-core@https://github.com/cliqz-oss/browser-core/releases/download/v7.40.2/browser-core-7.40.2.tgz":
+  version "7.40.2"
+  resolved "https://github.com/cliqz-oss/browser-core/releases/download/v7.40.2/browser-core-7.40.2.tgz#b10ea47c7136685cedf8235677cb8c3df19cc76f"
   dependencies:
     "@cliqz-oss/dexie" "^2.0.4"
     "@cliqz/adblocker-webextension" "^1.3.0"
@@ -6629,11 +6629,6 @@ react-router@5.1.2, react-router@^5.1.2:
     react-is "^16.6.0"
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
-
-react-shadow-dom-retarget-events@^1.0.10:
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/react-shadow-dom-retarget-events/-/react-shadow-dom-retarget-events-1.0.10.tgz#78c3c039bf2ea4e788d91d390662c9ccaf8d92ad"
-  integrity sha512-OOt7ugDgSuXiy+PmMOMHqvm4ko6X+cJsre/N124dCJhLBXqv1xVLjwuhpeY7/nv7p/YxytvyfwYG+M19NMnSjQ==
 
 react-svg@^10.0.22:
   version "10.0.22"

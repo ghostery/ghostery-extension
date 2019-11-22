@@ -718,10 +718,6 @@ class Summary extends React.Component {
 	 * @return {JSX} JSX for rendering the rewards navicon
 	 */
 	_renderRewardsNavicon() {
-		const { unread_offer_ids } = this.props;
-
-		const unreadOffersAvailable = (unread_offer_ids && unread_offer_ids.length > 0) || false;
-
 		const rewardsNaviconClassNames = ClassNames(
 			'Summary__rewardsNavicon',
 			'Summary__rewardsNavicon--absolutely-positioned',
@@ -734,7 +730,6 @@ class Summary extends React.Component {
 		return (
 			<div className={rewardsNaviconClassNames} onClick={this.showRewardsListView}>
 				<ReactSVG src="../../app/images/panel/rewards-icon.svg" />
-				{unreadOffersAvailable && <ReactSVG src="../../app/images/panel/purple-star.svg" className="Summary__rewardsNavicon__star" />}
 				<Tooltip body={t('ghostery_rewards')} position="left" />
 			</div>
 		);

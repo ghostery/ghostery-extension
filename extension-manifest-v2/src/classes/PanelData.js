@@ -16,7 +16,6 @@
 
 import { isEqual, throttle } from 'underscore';
 import button from './BrowserButton';
-import cliqz from './Cliqz';
 import conf from './Conf';
 import foundBugs from './FoundBugs';
 import bugDb from './BugDb';
@@ -31,12 +30,6 @@ import promoModals from './PromoModals';
 import { getCliqzGhosteryBugs, sendCliqzModuleCounts } from '../utils/cliqzModulesData';
 import { getActiveTab, flushChromeMemoryCache, processUrl } from '../utils/utils';
 import { objectEntries, log } from '../utils/common';
-
-const cliqzModuleMock = {
-	isEnabled: false,
-	on: () => {},
-};
-const offers = cliqz.modules['offers-v2'] || cliqzModuleMock;
 
 const SYNC_SET = new Set(globals.SYNC_ARRAY);
 const { IS_CLIQZ } = globals;
@@ -94,10 +87,6 @@ class PanelData {
 			account.getUserSettings()
 				.then(userSettings => this._postUserSettings(userSettings))
 				.catch(() => log('Failed getting remote user settings from PanelData#initPort. User not logged in.'));
-
-			if (this._needToFilterOffersByRemote()) {
-				rewards.filterOffersByRemote().catch(err => log('Failed to filter offers by remote:', err));
-			}
 		});
 	}
 
@@ -130,16 +119,7 @@ class PanelData {
 				case 'RewardsComponentDidMount':
 					this._mountedComponents.rewards = true;
 					this._panelPort.onDisconnect.addListener(rewards.panelHubClosedListener);
-					if (this._needToFilterOffersByRemote()) {
-						rewards.filterOffersByRemote()
-							.then(() => this._postRewardsData())
-							.catch((err) => {
-								log('Failed to filter offers by remote:', err);
-								this._postRewardsData();
-							});
-					} else {
-						this._postRewardsData();
-					}
+					this._postRewardsData();
 					break;
 				case 'RewardsComponentWillUnmount':
 					this._mountedComponents.rewards = false;
@@ -370,7 +350,6 @@ class PanelData {
 			reload_banner_status,
 			tab_id,
 			trackers_banner_status,
-			unread_offer_ids: rewards.unreadOfferIds,
 		}, this._getDynamicPanelData(tab_id));
 	}
 
@@ -391,12 +370,8 @@ class PanelData {
 	 * @return {Object} Rewards view data
 	 */
 	_getRewardsData() {
-		const { storedOffers, unreadOfferIds } = rewards;
-
 		return {
 			enable_offers: conf.enable_offers,
-			rewards: storedOffers,
-			unread_offer_ids: unreadOfferIds,
 		};
 	}
 
@@ -535,16 +510,6 @@ class PanelData {
 			show_tracker_urls,
 			toggle_individual_trackers
 		};
-	}
-
-	/**
-	 * Checks to see whether we need to retrieve a filtered set of rewards from Cliqz
-	 * @returns {boolean}	true if we do need to retrieve filtered rewards
-	 */
-	_needToFilterOffersByRemote() {
-		const { enable_offers, is_expert } = conf;
-
-		return (offers.isEnabled && enable_offers && is_expert);
 	}
 
 	/**

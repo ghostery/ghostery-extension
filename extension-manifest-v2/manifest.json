@@ -98,6 +98,9 @@
 	"minimum_opera_version": "45",
 	"web_accessible_resources": [
 		"app/images/*",
-		"dist/css/rewards_styles.css"
+		"dist/css/rewards_styles.css",
+    "cliqz/offers-cc/index.html",
+    "cliqz/offers-reminder/index.html",
+    "cliqz/popup-notification/images/*"
 	]
 }

@@ -57,7 +57,6 @@ module.exports = {
 		panel_android_react: [`${PANEL_ANDROID_DIR}/index.jsx`],
 		panel_react: [`${PANEL_DIR}/index.jsx`],
 		purplebox: [`${CONTENT_SCRIPTS_DIR}/purplebox.js`],
-		rewards: [`${CONTENT_SCRIPTS_DIR}/rewards`],
 		shared_comp_react: [`${SHARED_COMP_DIR}/index.js`],
 		// Sass
 		foundation: [`${SASS_DIR}/vendor/foundation.scss`],
@@ -68,7 +67,6 @@ module.exports = {
 		panel: [`${SASS_DIR}/panel.scss`],
 		panel_android: [`${SASS_DIR}/panel_android.scss`],
 		purplebox_styles: [`${SASS_DIR}/purplebox.scss`],
-		rewards_styles: [`${SASS_DIR}/rewards.scss`],
 	},
 	output: {
 		filename: '[name].js',
@@ -96,7 +94,6 @@ module.exports = {
 				`${RM} ./dist/panel.js`,
 				`${RM} ./dist/panel_android.js`,
 				`${RM} ./dist/purplebox_styles.js`,
-				`${RM} ./dist/rewards_styles.js`,
 			]
 		}),
 		// Create global `t` function for i18n

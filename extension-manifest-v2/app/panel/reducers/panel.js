@@ -22,8 +22,6 @@ import {
 	UPDATE_NOTIFICATION_STATUS,
 	TOGGLE_CHECKBOX,
 	TOGGLE_OFFERS_ENABLED,
-	REMOVE_OFFER,
-	SET_OFFER_READ,
 	TOGGLE_EXPANDED,
 	SET_THEME,
 	CLEAR_THEME,
@@ -251,16 +249,6 @@ export default (state = initialState, action) => {
 		case TOGGLE_OFFERS_ENABLED: {
 			const enable_offers = action.data.enabled;
 			return Object.assign({}, state, { enable_offers });
-		}
-		case REMOVE_OFFER:
-		case SET_OFFER_READ: {
-			const unread_offer_ids = state.unread_offer_ids.slice();
-			const idx = unread_offer_ids.indexOf(action.data.id);
-			if (idx !== -1) {
-				unread_offer_ids.splice(idx, 1);
-				return Object.assign({}, state, { unread_offer_ids });
-			}
-			return state;
 		}
 		case TOGGLE_PROMO_MODAL: {
 			return {
