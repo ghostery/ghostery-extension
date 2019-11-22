@@ -65,6 +65,10 @@
 	}
 }
 
+#content-detail.rewardsView {
+  background-color: #f7f8fb;
+}
+
 #content-detail {
 	@include expanding-panel(66px);
 }

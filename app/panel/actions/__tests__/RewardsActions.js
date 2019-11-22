@@ -18,8 +18,6 @@ import * as rewardsActions from '../RewardsActions';
 import {
 	UPDATE_REWARDS_DATA,
 	TOGGLE_OFFERS_ENABLED,
-	REMOVE_OFFER,
-	SET_OFFER_READ,
 	SEND_SIGNAL
 } from '../../constants/constants';
 
@@ -58,30 +56,6 @@ describe('app/panel/actions/RewardsActions.js', () => {
 		const enabled = true;
 		const expectedPayload = { data: { enabled }, type: TOGGLE_OFFERS_ENABLED };
 		store.dispatch(rewardsActions.toggleOffersEnabled(enabled));
-
-		const actions = store.getActions();
-		expect(actions).toEqual([expectedPayload]);
-	});
-
-	test('removeOffer action should return correctly', () => {
-		const initialState = {};
-		const store = mockStore(initialState);
-
-		const id = 'test_reward_id';
-		const expectedPayload = { data: { id }, type: REMOVE_OFFER };
-		store.dispatch(rewardsActions.removeOffer(id));
-
-		const actions = store.getActions();
-		expect(actions).toEqual([expectedPayload]);
-	});
-
-	test('setOfferRead action should return correctly', () => {
-		const initialState = {};
-		const store = mockStore(initialState);
-
-		const id = 'test_reward_id';
-		const expectedPayload = { data: { id }, type: SET_OFFER_READ };
-		store.dispatch(rewardsActions.setOfferRead(id));
 
 		const actions = store.getActions();
 		expect(actions).toEqual([expectedPayload]);

@@ -13,7 +13,6 @@
 
 // Rewards Panel Component Classes
 .RewardsPanel {
-	background-color: #ffffff;
 }
 .RewardsPanel__header {
 	padding: 10px 13px;
@@ -37,14 +36,11 @@
 	text-transform: uppercase;
 	padding-right: 7px;
 }
-.RewardsPanel__scroll_content {
-	height: 377px;
-	overflow-y: scroll;
-}
 .RewardsPanel__info {
 	margin: 0 40px;
 	text-align: center;
 	font-size: 14px;
+  background-color: #f7f8fb;
 }
 .RewardsPanel__reward_icon {
 	margin: 70px 0 20px;
@@ -53,213 +49,22 @@
 .RewardsPanel__learn_more {
 	margin-top: 10px;
 }
-
-// Reward List Item Component Classes
-.RewardListItem {
-	height: 85px;
-	border: 1px solid #cecece;
-	border-left-width: 0;
-	border-radius: 0;
-	padding: 10px 0 10px 10px;
-
-	.flex-grow {
-		flex: 1;
-	}
+.RewardsPanel__rewards_count_wrapper {
+  float: left;
+  margin: 120px 0 0 45px;
 }
-.RewardListItem.RewardListItem--unread + .RewardListItem.RewardListItem--unread,
-.RewardListItem:not(.RewardListItem--unread) + .RewardListItem:not(.RewardListItem--unread) {
-	height: 85px;
-	border-top: 0;
+.RewardsPanel__rewards_count {
+  color: purple;
+  font-size: 48px;
+  text-align: center;
 }
-.RewardListItem__image_container {
-	width: 100px;
-	min-width: 100px;
-	text-align: center;
-	padding-right: 8px;
-	border-right: 1px solid #cecece;
-	margin-right: 18px;
+.RewardsPanel__rewards_count_title {
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
-.RewardListItem__image {
-	max-height: 52px;
-	width: auto;
-}
-.RewardListItem--greyscale .RewardListItem__image {
-	-webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-	filter: grayscale(100%);
-}
-.RewardListItem__benefit {
-	color: #4a4a4a;
-	font-size: 11px;
-	font-weight: 600;
-	max-width: 188px;
-	line-height: 20px;
-	max-height: 40px;
-	text-overflow: ellipsis;
-	word-wrap: break-word;
-}
-.RewardListItem__title {
-	color: #4a4a4a;
-	font-size: 11px;
-	max-width: 188px;
-	max-height: 40px;
-	text-overflow: ellipsis;
-	word-wrap: break-word;
-	margin-bottom: 7px;
-}
-.RewardListItem--greyscale .RewardListItem__text {
-	color: #9b9b9b;
-}
-.RewardListItem__expires {
-	color: #9b9b9b;
-	font-size: 11px;
-	max-width: 188px;
-}
-.RewardListItem--elongated .RewardListItem__text,
-.RewardListItem--elongated .RewardListItem__expires {
-	max-width: 354px;
-}
-
-.RewardListItem--greyscale .RewardListItem__close_button,
-.RewardListItem--greyscale .RewardListItem__details_link {
-	display: none;
-}
-.RewardListItem__close_button {
-	line-height: 0;
-	padding: 5px 10px;
-	margin-top: -5px;
-}
-.RewardListItem__details_link {
-	line-height: 0;
-	padding: 5px 10px;
-	margin-bottom: -5px;
-}
-.RewardListItem__close_button svg,
-.RewardListItem__details_link svg {
-	@include transition(fill 0.2s);
-}
-.RewardListItem__close_button svg { fill: #9b9b9b; }
-.RewardListItem__close_button:hover svg { fill: #4a4a4a; }
-
-.RewardListItem__details_link svg { fill: rgba(#4a4a4a, 0); }
-.RewardListItem:hover .RewardListItem__details_link svg { fill: rgba(#4a4a4a, 1); }
-.RewardListItem__close_button:hover + .RewardListItem__details_link svg { fill: rgba(#4a4a4a, 0); }
-
-.RewardListItem--unread {
-	border-color: #5b0059;
-	border-left-width: 7px;
-}
-.RewardListItem--unread .RewardListItem__image_container {
-	border-color: #5b0059;
-	margin-left: -7px;
-}
-.RewardListItem--greyscale.RewardListItem--unread,
-.RewardListItem--greyscale.RewardListItem--unread .RewardListItem__image_container {
-	border-color: #cecece;
-}
-
-// Reward Detail Component Classes
-.RewardDetail {
-	height: 377px;
-}
-.RewardDetail__image_container {
-	height: 167px;
-	width: 100%;
-}
-.RewardDetail__picture {
-	height: 100%;
-	width: 100%;
-	background-color: #efefef;
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center;
-}
-.RewardDetail__logo {
-	position: absolute;
-	right: 10px;
-	height: 35px;
-	width: auto;
-}
-.RewardDetail__benefit {
-	margin: 0 27px;
-	font-size: 16px;
-	font-weight: bold;
-	line-height: 24px;
-	max-height: 48px;
-	color: #4a4a4a;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-.RewardDetail__title {
-	margin: 0 17px;
-	font-size: 12px;
-	font-weight: bold;
-	line-height: 1.27;
-	max-height: 48px;
-	color: #4a4a4a;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-.RewardDetail__description {
-	margin: 0 17px 5px 17px;
-	font-size: 12px;
-	line-height: 1.27;
-	max-height: 36px;
-	color: #4a4a4a;
-}
-.RewardDetail__code_container {
-	margin: 0 17px;
-	padding: 10px;
-	background-color: #efefef;
-	border: 1px solid #cccccc;
-	border-radius: 3px;
-}
-.RewardDetail__code {
-	font-size: 13px;
-	color: #494949;
-	font-weight: 600;
-}
-.RewardDetail__code input {
-	height: 10px;
-	width: 10px;
-	padding: 0;
-	margin: 0;
-	display: inline-block;
-	opacity: 0;
-	cursor: default;
-}
-.RewardDetail__copy {
-	font-size: 10px;
-	color: #5b005c;
-	font-weight: 600;
-	text-transform: uppercase;
-}
-.RewardDetail__details_container {
-	margin: 0 17px;
-}
-.RewardDetail__expires {
-	font-size: 12px;
-	font-weight: 600;
-	color: #4a4a4a;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
-}
-.RewardDetail__terms {
-	font-size: 11px;
-	color: #9b9b9b;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
-}
-.RewardDetail__redeem_button {
-	background-color: #5b0059;
-	color: #ffffff;
-	font-size: 14px;
-	font-weight: 600;
-	text-align: center;
-	padding: 10px;
-	text-transform: uppercase;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
+.RewardsPanel__myoffrz_iframe {
+  float: right;
+  border: 1px solid silver;
+  border-radius: 7px;
 }
