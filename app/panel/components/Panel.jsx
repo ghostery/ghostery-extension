@@ -199,15 +199,18 @@ class Panel extends React.Component {
 		return false;
 	}
 
-	_handlePromoNoThanksClick = (modal) => {
+	/**
+	 * @param modal			'insights' or 'premium'
+	 * @private
+	 * Handle clicks on the link to turn off promos in the promo modals
+	 */
+	_handlePromoGoAwayClick = (modal) => {
 		this.props.actions.togglePromoModal();
 
 		sendMessage('promoModals.turnOffPromos', {});
 
 		if (modal === 'insights') {
 			sendMessage('ping', 'promo_modals_decline_insights_upgrade');
-		} else if (modal === 'plus_upgrade') {
-			sendMessage('ping', 'promo_modals_decline_plus_upgrade');
 		}
 
 		this.props.actions.showNotification({
@@ -217,6 +220,10 @@ class Panel extends React.Component {
 		});
 	};
 
+	/**
+	 * @private
+	 * Handle clicks on sign in links in promo modals
+	 */
 	_handlePromoSignInClick = () => {
 		this.props.actions.togglePromoModal();
 		history.push({
@@ -224,24 +231,28 @@ class Panel extends React.Component {
 		});
 	};
 
-	_handlePromoSelectBasicClick = () => {
+	/**
+	 * @private
+	 * Handle clicks on the download button in the Premium promo modals
+	 */
+	_handlePromoTryMidnightClick = () => {
 		this.props.actions.togglePromoModal();
 
-		// we do not mark the choice-required initial plus promo as 'seen' until
-		// the user has clicked Select Basic or Select Plus
-		sendMessage('promoModals.sawPlusPromo', {});
-	};
+		// TODO detect OS and begin download of appropriate file
+		// TODO update with correct URL once it's available
+		const url = 'https://reddit.com';
+		sendMessage('openNewTab', {
+			url,
+			become_active: true,
+		});
+	}
 
 	/**
 	 * @private
-	 * Handle clicks on 'Select Plus' from the Plus Promo Modal (Choose Your Plan)
+	 * Handle clicks on the 'Get Plus' option in the Premium modals
 	 */
-	_handlePromoSelectPlusClick = () => {
+	_handlePromoGetPlusClick = () => {
 		this.props.actions.togglePromoModal();
-
-		// we do not mark the choice-required initial plus promo as 'seen' until
-		// the user has clicked Select Basic or Select Plus
-		sendMessage('promoModals.sawPlusPromo', {});
 
 		const url = `https://checkout.${DOMAIN}.com/plus?utm_source=gbe&utm_campaign=in_app`;
 		sendMessage('openNewTab', {
@@ -271,6 +282,11 @@ class Panel extends React.Component {
 		});
 	};
 
+	/**
+	 * @param modal			'insights' or 'premium'
+	 * @private
+	 * Handle clicks on the 'X' close icon in promo modals
+	 */
 	_handlePromoXClick = (modal) => {
 		this.props.actions.togglePromoModal();
 
@@ -279,12 +295,22 @@ class Panel extends React.Component {
 		}
 	};
 
+	/**
+	 * @returns {bool}
+	 * @private
+	 * Is the user an Insights subscriber?
+	 */
 	_insightsSubscriber = () => {
 		const { loggedIn, user } = this.props;
 
 		return loggedIn && (user && user.scopes && user.scopes.includes('subscriptions:insights'));
 	}
 
+	/**
+	 * @returns {JSX}
+	 * @private
+	 * Renders the Premium promo modal
+	 */
 	_renderPremiumPromoModal = () => {
 		sendMessage('promoModals.sawPremiumPromo', {});
 
@@ -300,6 +326,11 @@ class Panel extends React.Component {
 		);
 	}
 
+	/**
+	 * @returns {null|JSX}
+	 * @private
+	 * Renders the Insights promo modal if the user is not already an Insights subscriber
+	 */
 	_renderInsightsPromoModal = () => {
 		if (this._insightsSubscriber()) return null;
 
@@ -309,7 +340,7 @@ class Panel extends React.Component {
 
 		return (
 			<InsightsPromoModal
-				handleNoThanksClick={this._handlePromoNoThanksClick}
+				handleGoAwayClick={this._handlePromoGoAwayClick}
 				handleSignInClick={this._handlePromoSignInClick}
 				handleSubscribeClick={this._handlePromoSubscribeClick}
 				handleXClick={this._handlePromoXClick}
@@ -317,6 +348,11 @@ class Panel extends React.Component {
 		);
 	}
 
+	/**
+	 * @returns {null|JSX}
+	 * @private
+	 * Renders either the Insights or the Premium promo modal
+	 */
 	_renderPromoModal = () => {
 		const {
 			promoModal,
