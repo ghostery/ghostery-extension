@@ -23,7 +23,7 @@ const WEEKLY_INSIGHTS_TARGET = globals.DEBUG ? 1 : 3;
 const DAILY_INSIGHTS_TARGET = globals.DEBUG ? 7 : 3;
 
 const MSECS_IN_DAY = 86400000; // 1000 msecs-in-sec * 60 secs-in-min * 60 mins-in-hour * 24 hours-in-day
-const PLUS = 'plus';
+const PREMIUM = 'premium';
 const PLUS_INITIAL = 'plus_initial';
 const PLUS_UPGRADE = 'plus_upgrade';
 const INSIGHTS = 'insights';
@@ -52,7 +52,7 @@ class PromoModals {
 		return null;
 	}
 
-	static recordPlusPromoSighting() { this._recordPromoSighting(PLUS); }
+	static recordPremiumPromoSighting() { this._recordPromoSighting(PREMIUM); }
 
 	static recordInsightsPromoSighting() { this._recordPromoSighting(INSIGHTS); }
 

@@ -15,7 +15,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import QueryString from 'query-string';
 import HomeView from './HomeView';
-import { PlusPromoModal } from '../../../shared-components';
+import { PremiumPromoModal } from '../../../shared-components';
 import { sendMessage } from '../../utils';
 import globals from '../../../../src/classes/Globals';
 
@@ -41,8 +41,7 @@ class HomeViewContainer extends Component {
 
 		props.actions.getHomeProps();
 
-		// Prevent flickering in of user's email if getUser() returns after initial render,
-		// as well as flickering of plus promo modal if user is already a subscriber
+		// Prevent flickering in of user's email if getUser() returns after initial render
 		props.actions.getUser()
 			.then(() => {
 				this.setState({
@@ -61,37 +60,54 @@ class HomeViewContainer extends Component {
 	}
 
 	/**
+	 * Handle clicks on premium promo modal button
+	 * @param type		'basic' (default), 'plus', or 'premium'
 	 * @private
-	 * Function to handle clicks on Select Basic in the Plus Promo Modal
 	 */
-	_handlePromoSelectBasicClick = () => {
+	_handlePremiumPromoModalClick = (type = 'basic') => {
 		// GH-1777
-		// we want to show the Plus Promo modal once per Hub visit
-		this.props.actions.markPlusPromoModalShown();
+		// we want to show the promo modal exactly once per Hub visit
+		this.props.actions.markPremiumPromoModalShown();
 
-		sendMessage('SET_PLUS_PROMO_MODAL_SEEN', {});
+		sendMessage('SET_PREMIUM_PROMO_MODAL_SEEN', {});
+
+		switch (type) {
+			case 'plus':
+				window.open(`https://checkout.${DOMAIN}.com/plus?utm_source=gbe&utm_campaign=intro_hub`, '_blank');
+				break;
+			case 'premium':
+				window.open(`https://reddit.com`, '_blank');
+				break;
+			case 'basic':
+			default:
+				break;
+		}
 	}
 
 	/**
 	 * @private
-	 * Function to handle clicks on 'Select Plus' in the Plus Promo Modal (Choose Your Plan)
+	 * Function to handle clicks on "No thanks, continue with basic" in Premium promo modal
 	 */
-	_handlePromoSelectPlusClick = () => {
-		// GH-1777
-		// we want to show the Plus Promo modal once per Hub visit
-		this.props.actions.markPlusPromoModalShown();
+	_handleKeepBasicClick = () => { this._handlePremiumPromoModalClick(); }
 
-		sendMessage('SET_PLUS_PROMO_MODAL_SEEN', {});
+	/**
+	 * @private
+	 * Function to handle clicks on the "Get Plus instead" link in the Premium promo modal
+	 */
+	_handleGetPlusClick = () => { this._handlePremiumPromoModalClick('plus'); }
 
-		window.open(`https://checkout.${DOMAIN}.com/plus?utm_source=gbe&utm_campaign=intro_hub`, '_blank');
-	}
+	/**
+	 * @private
+	 * Function to handle clicks on the Midnight download button in the Premium promo modal
+	 */
+	_handleTryMidnightClick = () => { this._handleTryMidnightClick('midnight'); }
 
 	_render() {
 		const { justInstalled } = this.state;
 		const { home, user } = this.props;
 		const isPlus = user && user.subscriptionsPlus || false;
 		const {
-			plus_promo_modal_shown,
+			premium_promo_modal_shown,
 			setup_complete,
 			tutorial_complete,
 			enable_metrics,
@@ -106,15 +122,13 @@ class HomeViewContainer extends Component {
 			isPlus,
 		};
 
-		const showPromoModal = !isPlus && !plus_promo_modal_shown;
-
 		return (
 			<div className="full-height">
-				<PlusPromoModal
-					show={showPromoModal}
+				<PremiumPromoModal
+					show={!premium_promo_modal_shown}
 					location="hub"
-					handleSelectBasicClick={this._handlePromoSelectBasicClick}
-					handleSelectPlusClick={this._handlePromoSelectPlusClick}
+					handleKeepBasicClick: {this._handleKeepBasicClick}
+					handleGetPlusClick: {this._handleGetPlusClick}
 				/>
 				<HomeView {...childProps} />
 			</div>
@@ -137,7 +151,7 @@ class HomeViewContainer extends Component {
 HomeViewContainer.propTypes = {
 	home: PropTypes.shape({
 		enable_metrics: PropTypes.bool,
-		plus_promo_modal_shown: PropTypes.bool,
+		premium_promo_modal_shown: PropTypes.bool,
 		setup_complete: PropTypes.bool,
 		tutorial_complete: PropTypes.bool,
 	}),
@@ -148,7 +162,7 @@ HomeViewContainer.propTypes = {
 	actions: PropTypes.shape({
 		getHomeProps: PropTypes.func.isRequired,
 		getUser: PropTypes.func.isRequired,
-		markPlusPromoModalShown: PropTypes.func.isRequired,
+		markPremiumPromoModalShown: PropTypes.func.isRequired,
 		setMetrics: PropTypes.func.isRequired,
 	}).isRequired,
 };
@@ -157,7 +171,7 @@ HomeViewContainer.propTypes = {
 HomeViewContainer.defaultProps = {
 	home: {
 		enable_metrics: false,
-		plus_promo_modal_shown: false,
+		premium_promo_modal_shown: false,
 		setup_complete: false,
 		tutorial_complete: false,
 	},

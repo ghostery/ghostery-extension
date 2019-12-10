@@ -1,5 +1,5 @@
 /**
- * Plus Promo Modal Component
+ * Premium Promo Modal Component
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -17,17 +17,18 @@ import ClassNames from 'classnames';
 import Modal from '../Modal/Modal';
 
 /**
- * A functional React component for a Plus Promo Modal that may be displayed in the Hub and/or Panel
- * @return {JSX} JSX for rendering a Plus Promo Modal
+ * A functional React component for a Premium Promo Modal that may be displayed in the Hub and/or Panel
+ * @return {JSX} JSX for rendering a Premium Promo Modal
  * @memberof SharedComponents
  */
-const PlusPromoModal = (props) => {
+const PremiumPromoModal = (props) => {
 	const {
 		show,
 		location,
-		handleSelectBasicClick,
-		handleSelectPlusClick,
-		handleSignInClick,
+		handleTryMidnightClick,
+		handleGetPlusClick,
+		handleKeepBasicClick,
+		handleGoAwayClick,
 	} = props;
 
 	const isInHub = location === 'hub';
@@ -38,7 +39,7 @@ const PlusPromoModal = (props) => {
 		'in-panel': location === 'panel'
 	};
 	const contentClassNames = ClassNames(
-		'PlusPromoModal__content',
+		'PremiumPromoModal__content',
 		'flex-container',
 		'flex-dir-column',
 		'align-middle',
@@ -46,28 +47,28 @@ const PlusPromoModal = (props) => {
 		locationClassName
 	);
 	const optionsContainerClassNames = ClassNames(
-		'PlusPromoModal__options-container',
+		'PremiumPromoModal__options-container',
 		'full-width',
 		locationClassName
 	);
 	const optionsDecriptionClassNames = ClassNames(
-		'PlusPromoModal__option-description-item',
+		'PremiumPromoModal__option-description-item',
 		locationClassName
 	);
 	const chooseYourPlanClassNames = ClassNames(
-		'PlusPromoModal__choose-your-plan',
+		'PremiumPromoModal__choose-your-plan',
 		locationClassName
 	);
 	const recommendedBannerClassNames = ClassNames(
-		'PlusPromoModal__recommended-banner',
+		'PremiumPromoModal__recommended-banner',
 		locationClassName
 	);
 	const optionDescriptionBoxClassNames = ClassNames(
-		'PlusPromoModal__option-description-box',
+		'PremiumPromoModal__option-description-box',
 		locationClassName
 	);
 	const buttonBackgroundClassNames = ClassNames(
-		'PlusPromoModal__buttons-background',
+		'PremiumPromoModal__buttons-background',
 		'initial',
 		locationClassName
 	);
@@ -77,7 +78,7 @@ const PlusPromoModal = (props) => {
 			<div className={contentClassNames}>
 				<div>
 					{isInHub && (
-						<div className="PlusPromoModal__thanks-for-download">
+						<div className="PremiumPromoModal__thanks-for-download">
 							{t('ghostery_is_ready')}
 						</div>
 					)}
@@ -86,16 +87,16 @@ const PlusPromoModal = (props) => {
 					</div>
 				</div>
 				<div className={optionsContainerClassNames}>
-					<div className="PlusPromoModal__option-container">
+					<div className="PremiumPromoModal__option-container">
 						<div className={`${optionDescriptionBoxClassNames} basic`}>
-							<div className="PlusPromoModal__option-header basic">{t('ghostery_basic')}</div>
-							<div className="PlusPromoModal__price-text basic">
-								<span className="PlusPromoModal__currency-sign" dangerouslySetInnerHTML={{ __html: t('dollar_sign') }} />
-								<span className="PlusPromoModal__amount">0</span>
+							<div className="PremiumPromoModal__option-header basic">{t('ghostery_basic')}</div>
+							<div className="PremiumPromoModal__price-text basic">
+								<span className="PremiumPromoModal__currency-sign" dangerouslySetInnerHTML={{ __html: t('dollar_sign') }} />
+								<span className="PremiumPromoModal__amount">0</span>
 								<span> </span>
-								<span className="PlusPromoModal__per-month">{t('per_month')}</span>
+								<span className="PremiumPromoModal__per-month">{t('per_month')}</span>
 							</div>
-							<div className="PlusPromoModal__option-description">
+							<div className="PremiumPromoModal__option-description">
 								<div className={`${optionsDecriptionClassNames} no-capitalize`}>{t('faster_cleaner_browsing')}</div>
 								<div className={optionsDecriptionClassNames}>{t('blocks_ads')}</div>
 								<div className={optionsDecriptionClassNames}>{t('blocks_trackers')}</div>
@@ -103,36 +104,36 @@ const PlusPromoModal = (props) => {
 							</div>
 						</div>
 					</div>
-					<div className="PlusPromoModal__option-container">
+					<div className="PremiumPromoModal__option-container">
 						<div className={`${optionDescriptionBoxClassNames} plus`}>
 							<div className={recommendedBannerClassNames}>
 								<img src="/app/images/hub/home/recommended-banner.svg" />
-								<div className="PlusPromoModal__recommended-banner-text">{t('recommended')}</div>
+								<div className="PremiumPromoModal__recommended-banner-text">{t('recommended')}</div>
 							</div>
-							<div className="PlusPromoModal__option-header plus">{t('ghostery_plus')}</div>
-							<div className="PlusPromoModal__price-text plus">
-								<span className="PlusPromoModal__currency-sign" dangerouslySetInnerHTML={{ __html: t('dollar_sign') }} />
-								<span className="PlusPromoModal__amount">{t('plus_monthly_subscription_price_number')}</span>
+							<div className="PremiumPromoModal__option-header plus">{t('ghostery_plus')}</div>
+							<div className="PremiumPromoModal__price-text plus">
+								<span className="PremiumPromoModal__currency-sign" dangerouslySetInnerHTML={{ __html: t('dollar_sign') }} />
+								<span className="PremiumPromoModal__amount">{t('plus_monthly_subscription_price_number')}</span>
 								<span> </span>
-								<span className="PlusPromoModal__per-month">{t('per_month')}</span>
+								<span className="PremiumPromoModal__per-month">{t('per_month')}</span>
 							</div>
-							<div className="PlusPromoModal__option-description">
+							<div className="PremiumPromoModal__option-description">
 								<div className={`${optionsDecriptionClassNames} italic`}>{t('all_basic_features_plus_COLON')}</div>
-								<div className="PlusPromoModal__plus-option-description-item-container">
+								<div className="PremiumPromoModal__plus-option-description-item-container">
 									<div className={optionsDecriptionClassNames}>
-										<img className="PlusPromoModal__check-icon" src="/app/images/hub/home/check-icon.svg" />
+										<img className="PremiumPromoModal__check-icon" src="/app/images/hub/home/check-icon.svg" />
 										{t('historical_tracker_stats')}
 									</div>
 								</div>
-								<div className="PlusPromoModal__plus-option-description-item-container">
+								<div className="PremiumPromoModal__plus-option-description-item-container">
 									<div className={optionsDecriptionClassNames}>
-										<img className="PlusPromoModal__check-icon" src="/app/images/hub/home/check-icon.svg" />
+										<img className="PremiumPromoModal__check-icon" src="/app/images/hub/home/check-icon.svg" />
 										{t('priority_support')}
 									</div>
 								</div>
-								<div className="PlusPromoModal__plus-option-description-item-container">
+								<div className="PremiumPromoModal__plus-option-description-item-container">
 									<div className={optionsDecriptionClassNames}>
-										<img className="PlusPromoModal__check-icon" src="/app/images/hub/home/check-icon.svg" />
+										<img className="PremiumPromoModal__check-icon" src="/app/images/hub/home/check-icon.svg" />
 										{t('new_color_themes')}
 									</div>
 								</div>
@@ -141,14 +142,14 @@ const PlusPromoModal = (props) => {
 					</div>
 				</div>
 				<div className={buttonBackgroundClassNames}>
-					<div className="PlusPromoModal__button basic" onClick={handleSelectBasicClick}>
+					<div className="PremiumPromoModal__button basic" onClick={handleTryMidnightClick}>
 						<span className="side-padded">{t('select_basic')}</span>
 					</div>
-					<div onClick={handleSelectPlusClick} className="PlusPromoModal__button plus">
+					<div onClick={handleGetPlusClick} className="PremiumPromoModal__button plus">
 						<span className="side-padded">{t('select_plus')}</span>
 					</div>
 					{isInPanel && (
-						<div onClick={handleSignInClick} className="PlusPromoModal__text-link sign-in">
+						<div onClick={handleKeepBasicClick} className="PremiumPromoModal__text-link sign-in">
 							{t('already_subscribed_sign_in')}
 						</div>
 					)}
@@ -158,17 +159,23 @@ const PlusPromoModal = (props) => {
 	);
 };
 
+
 // PropTypes ensure we pass required props of the correct type
-PlusPromoModal.propTypes = {
+PremiumPromoModal.propTypes = {
 	show: PropTypes.bool.isRequired,
 	location: PropTypes.string.isRequired,
-	handleSelectBasicClick: PropTypes.func.isRequired,
-	handleSelectPlusClick: PropTypes.func.isRequired,
-	handleSignInClick: PropTypes.func,
+	handleTryMidnightClick: PropTypes.func.isRequired,
+	handleGetPlusClick: PropTypes.func.isRequired,
+	handleKeepBasicClick: PropTypes.func,
+	handleGoAwayClick: PropTypes.func,
+	handleXClick: PropTypes.func,
 };
 
-PlusPromoModal.defaultProps = {
-	handleSignInClick: () => {},
+const noop = () => {};
+PremiumPromoModal.defaultProps = {
+	handleKeepBasicClick: noop,
+	handleGoAwayClick: noop,
+	handleXClick: noop,
 };
 
-export default PlusPromoModal;
+export default PremiumPromoModal;
