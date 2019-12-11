@@ -42,22 +42,6 @@ const PremiumPromoModal = (props) => {
 		'flex-dir-column',
 		'align-middle',
 	);
-	const optionsContainerClassNames = ClassNames(
-		'PremiumPromoModal__options-container',
-		'full-width',
-	);
-	const optionsDecriptionClassNames = ClassNames(
-		'PremiumPromoModal__option-description-item',
-	);
-	const chooseYourPlanClassNames = ClassNames(
-		'PremiumPromoModal__choose-your-plan',
-	);
-	const recommendedBannerClassNames = ClassNames(
-		'PremiumPromoModal__recommended-banner',
-	);
-	const optionDescriptionBoxClassNames = ClassNames(
-		'PremiumPromoModal__option-description-box',
-	);
 
 	return (
 		<Modal show={show}>
@@ -68,26 +52,26 @@ const PremiumPromoModal = (props) => {
 				<div className="PremiumPromoModal__midnight-logo" />
 				<div className="PremiumPromoModal__header">
 					<div className="PremiumPromoModal__header-text">
-						<span>Try Ghostery Midnight</span>
+						<span>{t('try_ghostery_midnight')}</span>
 						<div className="PremiumPromoModal__header-beta-icon" />
 					</div>
-					<div className="PremiumPromoModal__header-text">7 Day Free Trial ($14/mo)</div>
+					<div className="PremiumPromoModal__header-text">{t('seven_day_free_trial')}</div>
 				</div>
 				<div className="PremiumPromoModal__sub-header">
-					Get full-coverage protection across all browsers & apps on your device
+					{t('full_coverage_protection_promise')}
 				</div>
 				<div className="PremiumPromoModal__features-container">
 					<div className="PremiumPromoModal__feature-column">
 						<div className="PremiumPromoModal__feature">
 							<span className="PremiumPromoModal__checked-circle-icon" />
 							<div className="PremiumPromoModal__feature-text">
-								System-wide tracker & ad-blocking
+								{t('system_wide_tracker_and_ad_blocking')}
 							</div>
 						</div>
 						<div className="PremiumPromoModal__feature">
 							<span className="PremiumPromoModal__checked-circle-icon" />
 							<div className="PremiumPromoModal__feature-text">
-								Built-in VPN
+								{t('built_in_vpn')}
 							</div>
 						</div>
 					</div>
@@ -95,13 +79,13 @@ const PremiumPromoModal = (props) => {
 						<div className="PremiumPromoModal__feature">
 							<span className="PremiumPromoModal__checked-circle-icon" />
 							<div className="PremiumPromoModal__feature-text">
-								Custom whitelist options
+								{t('custom_whitelist_options')}
 							</div>
 						</div>
 						<div className="PremiumPromoModal__feature">
 							<span className="PremiumPromoModal__checked-circle-icon" />
 							<div className="PremiumPromoModal__feature-text">
-								Historical tracking insights
+								{t('historical_tracking_insights')}
 							</div>
 						</div>
 					</div>
@@ -109,21 +93,21 @@ const PremiumPromoModal = (props) => {
 				<div className="PremiumPromoModal__buttons-background">
 					<div className="PremiumPromoModal__button-container">
 						<div className="PremiumPromoModal__download-button" onClick={handleTryMidnightClick}>
-							<span>Download For Free</span>
+							<span>{t('download_for_free')}</span>
 						</div>
 					</div>
 					<div className="PremiumPromoModal__text-link-container">
 						<div onClick={handleGetPlusClick} className="PremiumPromoModal__text-link">
-							Support Ghostery for $2/mo instead
+							{t('support_ghostery_for_2_instead')}
 						</div>
 						{isInHub && (
 							<div onClick={handleKeepBasicClick} className="PremiumPromoModal__text-link">
-								No thanks, continue with basic
+								{t('no_thanks_continue_with_basic')}
 							</div>
 						)}
 						{isInPanel && (
 							<div onClick={handleGoAwayClick} className="PremiumPromoModal__text-link">
-								No thanks, turn promos off
+								{t('no_thanks_turn_promos_off')}
 							</div>
 						)}
 					</div>
