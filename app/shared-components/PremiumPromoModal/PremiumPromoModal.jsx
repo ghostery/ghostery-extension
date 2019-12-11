@@ -35,109 +35,72 @@ const PremiumPromoModal = (props) => {
 	const isInHub = location === 'hub';
 	const isInPanel = location === 'panel';
 
-	const locationClassName = {
-		'in-hub': isInHub,
-		'in-panel': location === 'panel'
-	};
 	const contentClassNames = ClassNames(
 		'PremiumPromoModal__content',
 		'flex-container',
 		'flex-dir-column',
 		'align-middle',
-		'initial',
-		locationClassName
 	);
 	const optionsContainerClassNames = ClassNames(
 		'PremiumPromoModal__options-container',
 		'full-width',
-		locationClassName
 	);
 	const optionsDecriptionClassNames = ClassNames(
 		'PremiumPromoModal__option-description-item',
-		locationClassName
 	);
 	const chooseYourPlanClassNames = ClassNames(
 		'PremiumPromoModal__choose-your-plan',
-		locationClassName
 	);
 	const recommendedBannerClassNames = ClassNames(
 		'PremiumPromoModal__recommended-banner',
-		locationClassName
 	);
 	const optionDescriptionBoxClassNames = ClassNames(
 		'PremiumPromoModal__option-description-box',
-		locationClassName
 	);
 	const buttonBackgroundClassNames = ClassNames(
 		'PremiumPromoModal__buttons-background',
-		'initial',
-		locationClassName
 	);
 
 	return (
 		<Modal show={show}>
 			<div className={contentClassNames}>
-				<div>
-					{isInHub && (
-						<div className="PremiumPromoModal__thanks-for-download">
-							{t('ghostery_is_ready')}
-						</div>
-					)}
-					<div className={chooseYourPlanClassNames}>
-						{isInHub ? t('choose_your_privacy_plan') : t('choose_your_ghostery_privacy_plan')}
+				<div className="PremiumPromoModal__midnight-logo" />
+				<div className="PremiumPromoModal__header">
+					<div className="PremiumPromoModal__header-text">
+						<span>Try Ghostery Midnight</span>
+						<div className="PremiumPromoModal__header-beta-icon" />
 					</div>
+					<div className="PremiumPromoModal__header-text">7 Day Free Trial ($14/mo)</div>
 				</div>
-				<div className={optionsContainerClassNames}>
-					<div className="PremiumPromoModal__option-container">
-						<div className={`${optionDescriptionBoxClassNames} basic`}>
-							<div className="PremiumPromoModal__option-header basic">{t('ghostery_basic')}</div>
-							<div className="PremiumPromoModal__price-text basic">
-								<span className="PremiumPromoModal__currency-sign" dangerouslySetInnerHTML={{ __html: t('dollar_sign') }} />
-								<span className="PremiumPromoModal__amount">0</span>
-								<span> </span>
-								<span className="PremiumPromoModal__per-month">{t('per_month')}</span>
+				<div className="PremiumPromoModal__sub-header">
+					Get full-coverage protection across all browsers & apps on your device
+				</div>
+				<div className="PremiumPromoModal__features-container">
+					<div className="PremiumPromoModal__feature-column">
+						<div className="PremiumPromoModal__feature">
+							<span className="PremiumPromoModal__checked-circle-icon" />
+							<div className="PremiumPromoModal__feature-text">
+								System-wide tracker & ad-blocking
 							</div>
-							<div className="PremiumPromoModal__option-description">
-								<div className={`${optionsDecriptionClassNames} no-capitalize`}>{t('faster_cleaner_browsing')}</div>
-								<div className={optionsDecriptionClassNames}>{t('blocks_ads')}</div>
-								<div className={optionsDecriptionClassNames}>{t('blocks_trackers')}</div>
-								<div className={optionsDecriptionClassNames}>{t('data_protection')}</div>
+						</div>
+						<div className="PremiumPromoModal__feature">
+							<span className="PremiumPromoModal__checked-circle-icon" />
+							<div className="PremiumPromoModal__feature-text">
+								Custom whitelist options
 							</div>
 						</div>
 					</div>
-					<div className="PremiumPromoModal__option-container">
-						<div className={`${optionDescriptionBoxClassNames} plus`}>
-							<div className={recommendedBannerClassNames}>
-								<img src="/app/images/hub/home/recommended-banner.svg" />
-								<div className="PremiumPromoModal__recommended-banner-text">{t('recommended')}</div>
+					<div className="PremiumPromoModal__feature-column">
+						<div className="PremiumPromoModal__feature">
+							<span className="PremiumPromoModal__checked-circle-icon" />
+							<div className="PremiumPromoModal__feature-text">
+								Built-in VPN
 							</div>
-							<div className="PremiumPromoModal__option-header plus">{t('ghostery_plus')}</div>
-							<div className="PremiumPromoModal__price-text plus">
-								<span className="PremiumPromoModal__currency-sign" dangerouslySetInnerHTML={{ __html: t('dollar_sign') }} />
-								<span className="PremiumPromoModal__amount">{t('plus_monthly_subscription_price_number')}</span>
-								<span> </span>
-								<span className="PremiumPromoModal__per-month">{t('per_month')}</span>
-							</div>
-							<div className="PremiumPromoModal__option-description">
-								<div className={`${optionsDecriptionClassNames} italic`}>{t('all_basic_features_plus_COLON')}</div>
-								<div className="PremiumPromoModal__plus-option-description-item-container">
-									<div className={optionsDecriptionClassNames}>
-										<img className="PremiumPromoModal__check-icon" src="/app/images/hub/home/check-icon.svg" />
-										{t('historical_tracker_stats')}
-									</div>
-								</div>
-								<div className="PremiumPromoModal__plus-option-description-item-container">
-									<div className={optionsDecriptionClassNames}>
-										<img className="PremiumPromoModal__check-icon" src="/app/images/hub/home/check-icon.svg" />
-										{t('priority_support')}
-									</div>
-								</div>
-								<div className="PremiumPromoModal__plus-option-description-item-container">
-									<div className={optionsDecriptionClassNames}>
-										<img className="PremiumPromoModal__check-icon" src="/app/images/hub/home/check-icon.svg" />
-										{t('new_color_themes')}
-									</div>
-								</div>
+						</div>
+						<div className="PremiumPromoModal__feature">
+							<span className="PremiumPromoModal__checked-circle-icon" />
+							<div className="PremiumPromoModal__feature-text">
+								Historical tracking insights
 							</div>
 						</div>
 					</div>
