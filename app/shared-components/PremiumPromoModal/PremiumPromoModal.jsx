@@ -29,6 +29,7 @@ const PremiumPromoModal = (props) => {
 		handleGetPlusClick,
 		handleKeepBasicClick,
 		handleGoAwayClick,
+		handleXClick,
 	} = props;
 
 	const isInHub = location === 'hub';
@@ -152,6 +153,12 @@ const PremiumPromoModal = (props) => {
 						<div onClick={handleKeepBasicClick} className="PremiumPromoModal__text-link sign-in">
 							{t('already_subscribed_sign_in')}
 						</div>
+					)}
+					{isInPanel && (
+						<div onClick={handleXClick} className="requiredToCompileTEST" />
+					)}
+					{isInPanel && (
+						<div onClick={handleGoAwayClick} className="requiredToCompileTEST" />
 					)}
 				</div>
 			</div>

@@ -16,7 +16,7 @@ import globals from './Globals';
 import panelData from './PanelData';
 
 const DAYS_BETWEEN_PROMOS = {
-	plus: globals.DEBUG ? 0.0005 : 30, // 40 seconds on staging
+	premium: globals.DEBUG ? 0.0005 : 30, // 40 seconds on staging
 	insights: globals.DEBUG ? 0.0005 : 30 // 40 seconds on staging
 };
 const WEEKLY_INSIGHTS_TARGET = globals.DEBUG ? 1 : 3;
@@ -24,13 +24,11 @@ const DAILY_INSIGHTS_TARGET = globals.DEBUG ? 7 : 3;
 
 const MSECS_IN_DAY = 86400000; // 1000 msecs-in-sec * 60 secs-in-min * 60 mins-in-hour * 24 hours-in-day
 const PREMIUM = 'premium';
-const PLUS_INITIAL = 'plus_initial';
-const PLUS_UPGRADE = 'plus_upgrade';
 const INSIGHTS = 'insights';
 const PROMO_MODAL_LAST_SEEN = 'promo_modal_last_seen';
 
 /**
- * Static 'namespace' class for handling the business logic for the display of promo modals (Plus, Insights, etc...)
+ * Static 'namespace' class for handling the business logic for the display of promo modals (Premium, Insights, etc...)
  * @memberOf  BackgroundClasses
  */
 class PromoModals {
@@ -41,14 +39,10 @@ class PromoModals {
 	 * @return {string} Type of promo to show
 	 */
 	static whichPromoModalShouldWeDisplay() {
+		// The order is important
+		// Insights takes priority over Premium
 		if (this._isTimeForAPromo(INSIGHTS)) return INSIGHTS;
-
-		if (this._isTimeForAPromo(PLUS)) {
-			if (this._haveSeenInitialPlusPromo()) return PLUS_UPGRADE;
-
-			return PLUS_INITIAL;
-		}
-
+		if (this._isTimeForAPromo(PREMIUM)) return PREMIUM;
 		return null;
 	}
 
@@ -57,11 +51,6 @@ class PromoModals {
 	static recordInsightsPromoSighting() { this._recordPromoSighting(INSIGHTS); }
 
 	static turnOffPromos() { panelData.set({ notify_promotions: false }); }
-
-	static _haveSeenInitialPlusPromo() {
-		const lastSeenTime = conf[`${PLUS}_${PROMO_MODAL_LAST_SEEN}`];
-		return (lastSeenTime !== 0);
-	}
 
 	/**
 	 * Check Conf values to determine if the enough time has
@@ -72,9 +61,9 @@ class PromoModals {
 	static _isTimeForAPromo(type) {
 		if (conf.notify_promotions === false) { return false; }
 
-		const lastSeenPlusPromo = conf[`${PLUS}_${PROMO_MODAL_LAST_SEEN}`];
+		const lastSeenPremiumPromo = conf[`${PREMIUM}_${PROMO_MODAL_LAST_SEEN}`];
 		const lastSeenInsightsPromo = conf[`${INSIGHTS}_${PROMO_MODAL_LAST_SEEN}`];
-		const lastSeenPromo = lastSeenPlusPromo > lastSeenInsightsPromo ? lastSeenPlusPromo : lastSeenInsightsPromo;
+		const lastSeenPromo = Math.max(lastSeenPremiumPromo, lastSeenInsightsPromo);
 
 		if (type === INSIGHTS && !this._hasEngagedFrequently()) {
 			return false;
@@ -107,14 +96,9 @@ class PromoModals {
 	static _hasEngagedFrequently() {
 		const { engaged_daily_count } = conf.metrics || [];
 
-		let very_engaged_days = 0;
-		engaged_daily_count.forEach((count) => {
-			very_engaged_days = count >= DAILY_INSIGHTS_TARGET ? ++very_engaged_days : very_engaged_days;
-		});
+		const very_engaged_days = engaged_daily_count.reduce((acc, count) => (count >= DAILY_INSIGHTS_TARGET ? acc++ : acc), 0);
 
-		if (very_engaged_days >= WEEKLY_INSIGHTS_TARGET) return true;
-
-		return false;
+		return very_engaged_days >= WEEKLY_INSIGHTS_TARGET;
 	}
 }
 

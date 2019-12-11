@@ -76,7 +76,7 @@ class HomeViewContainer extends Component {
 				window.open(`https://checkout.${DOMAIN}.com/plus?utm_source=gbe&utm_campaign=intro_hub`, '_blank');
 				break;
 			case 'premium':
-				window.open(`https://reddit.com`, '_blank');
+				window.open('https://reddit.com', '_blank');
 				break;
 			case 'basic':
 			default:
@@ -100,7 +100,7 @@ class HomeViewContainer extends Component {
 	 * @private
 	 * Function to handle clicks on the Midnight download button in the Premium promo modal
 	 */
-	_handleTryMidnightClick = () => { this._handleTryMidnightClick('midnight'); }
+	_handleTryMidnightClick = () => { this._handlePremiumPromoModalClick('midnight'); }
 
 	_render() {
 		const { justInstalled } = this.state;
@@ -127,8 +127,9 @@ class HomeViewContainer extends Component {
 				<PremiumPromoModal
 					show={!premium_promo_modal_shown}
 					location="hub"
-					handleKeepBasicClick: {this._handleKeepBasicClick}
-					handleGetPlusClick: {this._handleGetPlusClick}
+					handleKeepBasicClick={this._handleKeepBasicClick}
+					handleGetPlusClick={this._handleGetPlusClick}
+					handleTryMidnightClick={this._handleTryMidnightClick}
 				/>
 				<HomeView {...childProps} />
 			</div>
