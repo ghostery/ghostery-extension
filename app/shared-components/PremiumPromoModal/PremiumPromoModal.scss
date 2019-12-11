@@ -16,6 +16,7 @@ $standard-font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, 
 $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 .PremiumPromoModal__content {
+  	position: relative;
   	z-index: 10;
 	width: 518px;
 	height: 437px;

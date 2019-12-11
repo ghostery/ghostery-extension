@@ -15,6 +15,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import Modal from '../Modal/Modal';
+import ModalExitButton from '../../panel/components/BuildingBlocks/ModalExitButton';
 
 /**
  * A functional React component for a Premium Promo Modal that may be displayed in the Hub and/or Panel
@@ -64,6 +65,9 @@ const PremiumPromoModal = (props) => {
 	return (
 		<Modal show={show}>
 			<div className={contentClassNames}>
+				{isInPanel && (
+					<ModalExitButton className="InsightsModal__exitButton" toggleModal={handleXClick} />
+				)}
 				<div className="PremiumPromoModal__midnight-logo" />
 				<div className="PremiumPromoModal__header">
 					<div className="PremiumPromoModal__header-text">
