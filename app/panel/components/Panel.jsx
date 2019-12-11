@@ -238,9 +238,7 @@ class Panel extends React.Component {
 	_handlePromoTryMidnightClick = () => {
 		this.props.actions.togglePromoModal();
 
-		// TODO detect OS and begin download of appropriate file
-		// TODO update with correct URL once it's available
-		const url = 'https://reddit.com';
+		const url = 'https://ghostery.com/thanks-for-downloading-midnight';
 		sendMessage('openNewTab', {
 			url,
 			become_active: true,

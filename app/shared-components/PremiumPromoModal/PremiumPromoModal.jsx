@@ -58,9 +58,6 @@ const PremiumPromoModal = (props) => {
 	const optionDescriptionBoxClassNames = ClassNames(
 		'PremiumPromoModal__option-description-box',
 	);
-	const buttonBackgroundClassNames = ClassNames(
-		'PremiumPromoModal__buttons-background',
-	);
 
 	return (
 		<Modal show={show}>
@@ -90,7 +87,7 @@ const PremiumPromoModal = (props) => {
 						<div className="PremiumPromoModal__feature">
 							<span className="PremiumPromoModal__checked-circle-icon" />
 							<div className="PremiumPromoModal__feature-text">
-								Custom whitelist options
+								Built-in VPN
 							</div>
 						</div>
 					</div>
@@ -98,7 +95,7 @@ const PremiumPromoModal = (props) => {
 						<div className="PremiumPromoModal__feature">
 							<span className="PremiumPromoModal__checked-circle-icon" />
 							<div className="PremiumPromoModal__feature-text">
-								Built-in VPN
+								Custom whitelist options
 							</div>
 						</div>
 						<div className="PremiumPromoModal__feature">
@@ -109,24 +106,27 @@ const PremiumPromoModal = (props) => {
 						</div>
 					</div>
 				</div>
-				<div className={buttonBackgroundClassNames}>
-					<div className="PremiumPromoModal__button basic" onClick={handleTryMidnightClick}>
-						<span className="side-padded">{t('select_basic')}</span>
-					</div>
-					<div onClick={handleGetPlusClick} className="PremiumPromoModal__button plus">
-						<span className="side-padded">{t('select_plus')}</span>
-					</div>
-					{isInPanel && (
-						<div onClick={handleKeepBasicClick} className="PremiumPromoModal__text-link sign-in">
-							{t('already_subscribed_sign_in')}
+				<div className="PremiumPromoModal__buttons-background">
+					<div className="PremiumPromoModal__button-container">
+						<div className="PremiumPromoModal__download-button" onClick={handleTryMidnightClick}>
+							<span>Download For Free</span>
 						</div>
-					)}
-					{isInPanel && (
-						<div onClick={handleXClick} className="requiredToCompileTEST" />
-					)}
-					{isInPanel && (
-						<div onClick={handleGoAwayClick} className="requiredToCompileTEST" />
-					)}
+					</div>
+					<div className="PremiumPromoModal__text-link-container">
+						<div onClick={handleGetPlusClick} className="PremiumPromoModal__text-link">
+							Support Ghostery for $2/mo instead
+						</div>
+						{isInHub && (
+							<div onClick={handleKeepBasicClick} className="PremiumPromoModal__text-link">
+								No thanks, continue with basic
+							</div>
+						)}
+						{isInPanel && (
+							<div onClick={handleGoAwayClick} className="PremiumPromoModal__text-link">
+								No thanks, turn promos off
+							</div>
+						)}
+					</div>
 				</div>
 			</div>
 		</Modal>

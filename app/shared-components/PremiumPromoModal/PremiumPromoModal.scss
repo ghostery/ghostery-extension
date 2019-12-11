@@ -26,8 +26,8 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 
 .PremiumPromoModal__midnight-logo {
   width: 177px;
-  height: 94px;
-  margin: 20px 0px 16px;
+  height: 106px;
+  margin: 22px 0px 16px;
   background-image: url('/app/images/panel/midnight-logo.svg');
 }
 
@@ -53,11 +53,11 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 }
 
 .PremiumPromoModal__sub-header {
-  margin: 9px 0px 12px;
+  margin: 9px 0px 22px;
   width: 438px;
   text-align: center;
   font-size: 18px;
-  font-weight: 500;
+  font-weight: bold;
   line-height: 1.5;
   color: #4A4A4A;
 }
@@ -65,7 +65,7 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 .PremiumPromoModal__features-container {
   display: flex;
   width: 100%;
-  margin-bottom: 12px;
+  margin-bottom: 28px;
 }
 
 .PremiumPromoModal__feature-column {
@@ -105,272 +105,62 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
   align-self: flex-start;
 }
 
-.PremiumPromoModal__description {
-	width: 350px;
-	text-align: center;
-	font-size: 18px;
-	font-weight: 500;
-	font-family: $standard-font-family
-}
-
 .PremiumPromoModal__buttons-background {
 	background-color: #e7ecee;
 	margin-bottom: 3px;
 	width: 99%;
-	height: 72px;
+	height: 107px;
 	z-index: -1;
 	display: flex;
-	&.initial {
-		height: 72px;
-		flex-direction: row;
-		justify-content: space-around;
-		align-items: center;
-			&.in-panel {
-			height: 80px;
-			flex-wrap: wrap;
-			align-content: center;
-		}
-	}
-	&.upgrade {
-		height: 95px;
-		flex-direction: column;
-		justify-content: center;
-	}
-}
-
-.PremiumPromoModal__thanks-for-download {
-	padding-top: 30px;
-	font-size: 26px;
-	font-weight: bold;
-	text-align: center;
-}
-
-.PremiumPromoModal__choose-your-plan {
-	font-size: 18px;
-	font-weight: bold;
-	font-family: $standard-font-family;
-	color: #4a4a4a;
-	text-align: center;
-	&.in-hub {margin-top: 10px;}
-	&.in-panel {
-		margin-bottom: 10px;
-		padding-top: 17px;
-	}
-}
-
-.PremiumPromoModal__options-container {
-	display: flex;
-	justify-content: space-around;
-	&.in-hub {}
-	&.in-panel {}
-}
-
-.PremiumPromoModal__option-container {
-	display: flex;
-	align-items: center;
 	flex-direction: column;
-}
-
-.PremiumPromoModal__option-description-box {
-	border-style: solid;
-	border-width: 3px;
-	background-color: #FFFFFF;
-	padding: 0 15px;
-
-	&.basic {
-		border-color: #1dafed;
-	}
-
-	&.plus {
-		position: relative; // so that the recommended banner is positioned relative to this element
-		border-image-source: linear-gradient(39deg, #f2daa2, #eab968);
-		border-image-slice: 1;
-	}
-
-	&.in-hub {
-		width: 240px;
-		flex: 1;
-		min-height: 275px;
-	}
-
-	&.in-panel {
-		width: 221px;
-		flex: 1;
-		min-height: 250px;
-	}
-}
-
-.PremiumPromoModal__recommended-banner {
-	position: absolute;
-	font-family: $standard-font-family;
-
-	&.in-hub {
-		left: -30px;
-		top: -30px;
-	}
-
-	&.in-panel {
-		left: -30px;
-		top: -32px;
-	}
-}
-
-.PremiumPromoModal__recommended-banner-text {
-	position: relative;
-	left: 15px;
-	top: -47px;
-	transform: rotate(-15deg);
-	color: white;
-	font-size: 16px;
-	font-weight: bold;
-}
-
-.PremiumPromoModal__option-header {
-	margin-top: 20px;
-	font-family: $condensed-font-family;
-	font-size: 19px;
-	font-weight: bold;
-	text-align: center;
-
-	&.basic { color: #1dafed; }
-	&.plus { color: #ebbf73; }
-}
-
-.PremiumPromoModal__price-text {
-	line-height: 1.3;
-	text-align: center;
-
-	&.basic { color: #1dafed; }
-	&.plus { color: #ebbf73; }
-}
-
-.PremiumPromoModal__currency-sign {
-	font-family: $condensed-font-family;
-	font-size: 30px;
-	font-weight: bold;
-}
-
-.PremiumPromoModal__amount {
-	vertical-align: middle;
-	font-family: $standard-font-family;
-	font-size: 58px;
-	font-weight: normal;
-}
-
-.PremiumPromoModal__per-month {
-	vertical-align: sub;
-	font-family: $condensed-font-family;
-	font-size: 18px;
-	font-weight: bold;
-}
-
-.PremiumPromoModal__option-description-item {
-	padding-bottom: 15px;
-	text-align: center;
-	font-family: $standard-font-family;
-	font-size: 16px;
-	color: #333333;
-	line-height: 16px;
-	&.in-panel {
-		padding-bottom: 10px;
-		font-size: 15px;
-	}
-	&.italic {
-		font-style: italic;
-	}
-}
-
-.PremiumPromoModal__check-icon {
-	padding-right: 10px;
-}
-
-.PremiumPromoModal__plus-option-description-item-container {
-	display: flex;
-	justify-content: center;
+	justify-content: space-evenly
 }
 
 .PremiumPromoModal__button-container {
-	display: flex;
-	margin-bottom: 10px;
-	align-self: center;
+  display: flex;
+  justify-content: center;
 }
 
-.PremiumPromoModal__button {
-	cursor: pointer;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border-radius: 3px;
-	font-weight: bold;
-	font-family: $condensed-font-family;
-	letter-spacing: 0.5px;
-	text-transform: uppercase;
-	cursor: pointer;
-	transition: background-color 0.25s ease-out, color 0.25s ease-out;
-	-webkit-appearance: none;
+.PremiumPromoModal__download-button {
+  width: 196px;
+  height: 36px;
+  border-radius: 2px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12);
+  background-image: linear-gradient(101deg, #720174 19%, #00aef0 100%);
 
-	&.basic {
-		height: 40px;
-		font-size: 14px;
-		border: solid 2px #15b4f2;
-		background-color: white;
-		color: #2cbcf4;
-		box-shadow: none;
-	}
-	&.basic:hover {
-		background-color: #2cbcf4;
-		color: white;
-	}
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-	&.plus {
-		font-size: 14px;
-		height: 38px;
-		border: none;
-		background-image: linear-gradient(to bottom, #2fdbfa, #15b4f2);
-		color: white;
-		box-shadow: none;
-	}
-	&.plus:hover {
-		background-image: linear-gradient(to bottom, #1fcbea, #05a4e2);
-	}
+  font-family: $condensed-font-family;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  text-align: center;
+  color: #ffffff;
 
-	&.upgrade {
-		font-size: 13px;
-		height: 36px;
-		box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12);
-		background-color: #1dafed;
-		color: white;
-	}
-	&.upgrade:hover {
-		background-color: #0698d6;
-	}
+  transition: background-color 0.25s ease-out, color 0.25s ease-out;
 
-	.side-padded {
-		padding: 0px 20px 0px; // more localization-proof than hardcoding width
-	}
+  &:hover {
+	background-image: linear-gradient(101deg, #A80AAB 19%, #41BCEA 100%);
+  }
 
-	.button-text {
-		color: white;
-		text-decoration: none;
-	}
+  text-transform: uppercase;
 }
 
 .PremiumPromoModal__text-link-container {
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: space-between;
 }
 
 .PremiumPromoModal__text-link {
 	margin-left: 10px;
 	margin-right: 10px;
-	font-size: 13px;
+	font-size: 15px;
 	font-family: $standard-font-family;
 	color: #4a4a4a;
 	text-decoration: underline;
 	text-align: center;
 	cursor: pointer;
-	&.sign-in {
-		margin-top: 5px;
-		width: 100%;
-	}
 }

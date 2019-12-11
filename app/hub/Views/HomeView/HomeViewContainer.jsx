@@ -76,7 +76,7 @@ class HomeViewContainer extends Component {
 				window.open(`https://checkout.${DOMAIN}.com/plus?utm_source=gbe&utm_campaign=intro_hub`, '_blank');
 				break;
 			case 'premium':
-				window.open('https://reddit.com', '_blank');
+				window.open('https://ghostery.com/thanks-for-downloading-midnight', '_blank');
 				break;
 			case 'basic':
 			default:
@@ -100,7 +100,7 @@ class HomeViewContainer extends Component {
 	 * @private
 	 * Function to handle clicks on the Midnight download button in the Premium promo modal
 	 */
-	_handleTryMidnightClick = () => { this._handlePremiumPromoModalClick('midnight'); }
+	_handleTryMidnightClick = () => { this._handlePremiumPromoModalClick('premium'); }
 
 	_render() {
 		const { justInstalled } = this.state;
