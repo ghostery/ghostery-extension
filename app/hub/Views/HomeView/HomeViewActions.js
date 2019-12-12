@@ -12,7 +12,7 @@
  */
 
 import { log, sendMessageInPromise } from '../../utils';
-import { GET_HOME_PROPS, MARK_PLUS_PROMO_MODAL_SHOWN, SET_METRICS } from './HomeViewConstants';
+import { GET_HOME_PROPS, MARK_PREMIUM_PROMO_MODAL_SHOWN, SET_METRICS } from './HomeViewConstants';
 
 export function getHomeProps() {
 	return function(dispatch) {
@@ -40,8 +40,8 @@ export function setMetrics(actionData) {
 	};
 }
 
-export function markPlusPromoModalShown() {
+export function markPremiumPromoModalShown() {
 	return {
-		type: MARK_PLUS_PROMO_MODAL_SHOWN,
+		type: MARK_PREMIUM_PROMO_MODAL_SHOWN,
 	};
 }
