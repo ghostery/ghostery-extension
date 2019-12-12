@@ -357,9 +357,6 @@ class Panel extends React.Component {
 			isPromoModalHidden,
 		} = this.props;
 
-		console.error(`promoModal: ${promoModal}`);
-		console.error(`isPromoModalHidden: ${isPromoModalHidden}`);
-
 		if (isPromoModalHidden) return null;
 
 		if (promoModal === 'insights') {
