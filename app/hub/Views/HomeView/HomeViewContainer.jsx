@@ -139,6 +139,7 @@ class HomeViewContainer extends Component {
 			<div className="full-height">
 				<PremiumPromoModal
 					show={showPromoModal}
+					isPlus={isPlus}
 					location="hub"
 					handleKeepBasicClick={this._handleKeepBasicClick}
 					handleGetPlusClick={this._handleGetPlusClick}

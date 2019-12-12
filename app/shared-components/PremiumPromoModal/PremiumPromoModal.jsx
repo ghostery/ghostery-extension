@@ -26,6 +26,7 @@ const PremiumPromoModal = (props) => {
 	const {
 		show,
 		location,
+		isPlus,
 		handleTryMidnightClick,
 		handleGetPlusClick,
 		handleKeepBasicClick,
@@ -97,9 +98,11 @@ const PremiumPromoModal = (props) => {
 						</div>
 					</div>
 					<div className="PremiumPromoModal__text-link-container">
-						<div onClick={handleGetPlusClick} className="PremiumPromoModal__text-link">
-							{t('support_ghostery_for_2_instead')}
-						</div>
+						{!isPlus && (
+							<div onClick={handleGetPlusClick} className="PremiumPromoModal__text-link">
+								{t('support_ghostery_for_2_instead')}
+							</div>
+						)}
 						{isInHub && (
 							<div onClick={handleKeepBasicClick} className="PremiumPromoModal__text-link">
 								{t('no_thanks_continue_with_basic')}
@@ -122,6 +125,7 @@ const PremiumPromoModal = (props) => {
 PremiumPromoModal.propTypes = {
 	show: PropTypes.bool.isRequired,
 	location: PropTypes.string.isRequired,
+	isPlus: PropTypes.bool.isRequired,
 	handleTryMidnightClick: PropTypes.func.isRequired,
 	handleGetPlusClick: PropTypes.func.isRequired,
 	handleKeepBasicClick: PropTypes.func,
