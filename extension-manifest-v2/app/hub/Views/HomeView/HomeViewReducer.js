@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { GET_HOME_PROPS, MARK_PLUS_PROMO_MODAL_SHOWN, SET_METRICS } from './HomeViewConstants';
+import { GET_HOME_PROPS, MARK_PREMIUM_PROMO_MODAL_SHOWN, SET_METRICS } from './HomeViewConstants';
 
 const initialState = {};
 
@@ -31,10 +31,10 @@ function HomeViewReducer(state = initialState, action) {
 				}),
 			});
 		}
-		case MARK_PLUS_PROMO_MODAL_SHOWN: {
+		case MARK_PREMIUM_PROMO_MODAL_SHOWN: {
 			return Object.assign({}, state, {
 				home: Object.assign({}, state.home, {
-					plus_promo_modal_shown: true,
+					premium_promo_modal_shown: true,
 				})
 			});
 		}
