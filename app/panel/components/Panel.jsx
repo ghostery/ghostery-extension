@@ -238,7 +238,7 @@ class Panel extends React.Component {
 	_handlePromoTryMidnightClick = () => {
 		this.props.actions.togglePromoModal();
 
-		const url = 'https://ghostery.com/thanks-for-downloading-midnight';
+		const url = 'https://ghostery.com/thanks-for-downloading-midnight?utm_source=gbe&utm_campaign=in_app';
 		sendMessage('openNewTab', {
 			url,
 			become_active: true,
