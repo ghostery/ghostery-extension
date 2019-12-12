@@ -305,11 +305,24 @@ class Panel extends React.Component {
 	}
 
 	/**
+	 * @returns {bool}
+	 * @private
+	 * Is the user a Premium subscriber?
+	 */
+	_premiumSubscriber = () => {
+		const { loggedIn, user } = this.props;
+
+		return loggedIn && (user && user.scopes && user.scopes.includes('subscriptions:premium'));
+	}
+
+	/**
 	 * @returns {JSX}
 	 * @private
 	 * Renders the Premium promo modal
 	 */
 	_renderPremiumPromoModal = () => {
+		if (this._premiumSubscriber()) return null;
+
 		sendMessage('promoModals.sawPremiumPromo', {});
 
 		return (

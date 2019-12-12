@@ -102,6 +102,17 @@ class HomeViewContainer extends Component {
 	 */
 	_handleTryMidnightClick = () => { this._handlePremiumPromoModalClick('premium'); }
 
+	/**
+	 * @returns {bool}
+	 * @private
+	 * Is the user a Premium subscriber?
+	 */
+	_premiumSubscriber = () => {
+		const { loggedIn, user } = this.props;
+
+		return loggedIn && (user && user.scopes && user.scopes.includes('subscriptions:premium'));
+	}
+
 	_render() {
 		const { justInstalled } = this.state;
 		const { home, user } = this.props;
@@ -122,10 +133,12 @@ class HomeViewContainer extends Component {
 			isPlus,
 		};
 
+		const showPromoModal = !premium_promo_modal_shown && !this._premiumSubscriber();
+
 		return (
 			<div className="full-height">
 				<PremiumPromoModal
-					show={!premium_promo_modal_shown}
+					show={showPromoModal}
 					location="hub"
 					handleKeepBasicClick={this._handleKeepBasicClick}
 					handleGetPlusClick={this._handleGetPlusClick}
