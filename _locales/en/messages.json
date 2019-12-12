@@ -727,6 +727,9 @@
 	"panel_detail_rewards_cliqz_text": {
 		"message": "Feature already active in the Cliqz MyOffrz control panel."
 	},
+	"panel_detail_rewards_edge_text": {
+		"message": "Ghostery Rewards are not supported in Edge browser"
+	},
 	"panel_detail_rewards_loading": {
 		"message": "Loading Rewards..."
 	},
