@@ -96,7 +96,7 @@ class PromoModals {
 	static _hasEngagedFrequently() {
 		const { engaged_daily_count } = conf.metrics || [];
 
-		const very_engaged_days = engaged_daily_count.reduce((acc, count) => (count >= DAILY_INSIGHTS_TARGET ? acc++ : acc), 0);
+		const very_engaged_days = engaged_daily_count.reduce((acc, count) => (count >= DAILY_INSIGHTS_TARGET ? ++acc : acc), 0);
 
 		return very_engaged_days >= WEEKLY_INSIGHTS_TARGET;
 	}
