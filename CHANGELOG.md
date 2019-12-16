@@ -1,6 +1,9 @@
 ### GHOSTERY 8.4.6 (UNRELEASED)
 
 + Modularize Rewards code (#462)
++ Updated promo modals for Ghostery Midnight (#485, #486)
++ Disabled Rewards for Edge (#483)
++ Updated translations
 
 ### GHOSTERY 8.4.5 (November 20, 2019)
 
