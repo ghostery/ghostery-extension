@@ -165,7 +165,7 @@ class Account {
 				const customer = build(normalize(res), 'customers', res.data.id);
 				// TODO temporary fix to handle multiple subscriptions
 				let sub = customer.subscriptions;
-				if (!Array.isArray()) {
+				if (!Array.isArray(sub)) {
 					sub = [sub];
 				}
 				const subPlus = sub.reduce((acc, curr) => {
