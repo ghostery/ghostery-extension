@@ -152,7 +152,7 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 
 .PremiumPromoModal__text-link-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around; // Edge does not support space-evenly
 }
 
 .PremiumPromoModal__text-link {
