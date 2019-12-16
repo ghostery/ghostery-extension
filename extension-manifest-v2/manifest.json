@@ -6,6 +6,8 @@
 			"strict_min_version": "52.0"
 		}
 	},
+  	"debug": true,
+  	"log": true,
 	"author": "Ghostery",
 	"name": "__MSG_name__",
 	"short_name": "Ghostery",
