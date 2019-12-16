@@ -29,6 +29,7 @@ import SetupDoneView from '../SetupViews/SetupDoneView';
 
 const { BROWSER_INFO } = globals;
 const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
+const IS_EDGE = (BROWSER_INFO.name === 'edge');
 
 /**
  * @class Implement the Setup View for the Ghostery Hub
@@ -104,7 +105,7 @@ class SetupViewContainer extends Component {
 		this.props.actions.setAntiTracking({ enable_anti_tracking: true });
 		this.props.actions.setAdBlock({ enable_ad_block: true });
 		this.props.actions.setSmartBlocking({ enable_smart_block: true });
-		this.props.actions.setGhosteryRewards({ enable_ghostery_rewards: !IS_FIREFOX });
+		this.props.actions.setGhosteryRewards({ enable_ghostery_rewards: !IS_FIREFOX && !IS_EDGE });
 		this.props.actions.setHumanWeb({ enable_human_web: !IS_FIREFOX });
 	}
 
