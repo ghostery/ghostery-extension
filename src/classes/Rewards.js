@@ -12,6 +12,7 @@
  */
 
 import cliqz from './Cliqz';
+import conf from './Conf';
 import { log } from '../utils/common';
 
 /**
@@ -24,6 +25,9 @@ class Rewards {
 	}
 
 	sendSignal(message) {
+		if (!conf.enable_offers) {
+			return;
+		}
 		const {
 			offerId, actionId, origin, type
 		} = message;
@@ -37,7 +41,7 @@ class Rewards {
 		if (type === 'offer-action-signal') {
 			signal.data.offer_id = offerId;
 		}
-		log('sendSignal: ', signal);
+		log('Rewards sendSignal:', signal);
 		cliqz.modules['offers-v2'].background.actions.processRealEstateMessage(signal);
 	}
 
