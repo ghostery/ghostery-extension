@@ -14,9 +14,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Header from '../containers/HeaderContainer';
-import { PlusPromoModal } from '../../shared-components';
+import { PremiumPromoModal } from '../../shared-components';
 import InsightsPromoModal from './InsightsPromoModal';
-import PlusUpgradePromoModal from './PlusUpgradePromoModal';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import { setTheme } from '../utils/utils';
@@ -200,15 +199,18 @@ class Panel extends React.Component {
 		return false;
 	}
 
-	_handlePromoNoThanksClick = (modal) => {
+	/**
+	 * @param modal			'insights' or 'premium'
+	 * @private
+	 * Handle clicks on the link to turn off promos in the promo modals
+	 */
+	_handlePromoGoAwayClick = (modal) => {
 		this.props.actions.togglePromoModal();
 
 		sendMessage('promoModals.turnOffPromos', {});
 
 		if (modal === 'insights') {
 			sendMessage('ping', 'promo_modals_decline_insights_upgrade');
-		} else if (modal === 'plus_upgrade') {
-			sendMessage('ping', 'promo_modals_decline_plus_upgrade');
 		}
 
 		this.props.actions.showNotification({
@@ -218,6 +220,10 @@ class Panel extends React.Component {
 		});
 	};
 
+	/**
+	 * @private
+	 * Handle clicks on sign in links in promo modals
+	 */
 	_handlePromoSignInClick = () => {
 		this.props.actions.togglePromoModal();
 		history.push({
@@ -225,24 +231,26 @@ class Panel extends React.Component {
 		});
 	};
 
-	_handlePromoSelectBasicClick = () => {
+	/**
+	 * @private
+	 * Handle clicks on the download button in the Premium promo modals
+	 */
+	_handlePromoTryMidnightClick = () => {
 		this.props.actions.togglePromoModal();
 
-		// we do not mark the choice-required initial plus promo as 'seen' until
-		// the user has clicked Select Basic or Select Plus
-		sendMessage('promoModals.sawPlusPromo', {});
-	};
+		const url = 'https://ghostery.com/thanks-for-downloading-midnight';
+		sendMessage('openNewTab', {
+			url,
+			become_active: true,
+		});
+	}
 
 	/**
 	 * @private
-	 * Handle clicks on 'Select Plus' from the Plus Promo Modal (Choose Your Plan)
+	 * Handle clicks on the 'Get Plus' option in the Premium modals
 	 */
-	_handlePromoSelectPlusClick = () => {
+	_handlePromoGetPlusClick = () => {
 		this.props.actions.togglePromoModal();
-
-		// we do not mark the choice-required initial plus promo as 'seen' until
-		// the user has clicked Select Basic or Select Plus
-		sendMessage('promoModals.sawPlusPromo', {});
 
 		const url = `https://checkout.${DOMAIN}.com/plus?utm_source=gbe&utm_campaign=in_app`;
 		sendMessage('openNewTab', {
@@ -253,8 +261,7 @@ class Panel extends React.Component {
 
 	/**
 	 * @private
-	 * Handle click action when user selects Subscribe button in
-	 * Plus Upgrade or Insights modal
+	 * Handle click action when user selects Subscribe button in the Insights modal
 	 * @param  {string} modal Modal type (insights or plus)
 	 */
 	_handlePromoSubscribeClick = (modal) => {
@@ -265,9 +272,6 @@ class Panel extends React.Component {
 		if (modal === 'insights') {
 			sendMessage('ping', 'promo_modals_insights_upgrade_cta');
 			url += 'insights?utm_source=gbe&utm_campaign=in_app_upgrade';
-		} else if (modal === 'plus_upgrade') {
-			sendMessage('ping', 'promo_modals_plus_upgrade_cta');
-			url += 'plus?utm_source=gbe&utm_campaign=in_app_upgrade';
 		}
 
 		sendMessage('openNewTab', {
@@ -276,57 +280,68 @@ class Panel extends React.Component {
 		});
 	};
 
+	/**
+	 * @param modal			'insights' or 'premium'
+	 * @private
+	 * Handle clicks on the 'X' close icon in promo modals
+	 */
 	_handlePromoXClick = (modal) => {
 		this.props.actions.togglePromoModal();
 
 		if (modal === 'insights') {
 			sendMessage('ping', 'promo_modals_decline_insights_upgrade');
-		} else if (modal === 'plus_upgrade') {
-			sendMessage('ping', 'promo_modals_decline_plus_upgrade');
 		}
 	};
 
-	_plusSubscriber = () => {
-		const { loggedIn, user } = this.props;
-
-		return loggedIn && (user && user.subscriptionsPlus);
-	}
-
+	/**
+	 * @returns {bool}
+	 * @private
+	 * Is the user an Insights subscriber?
+	 */
 	_insightsSubscriber = () => {
 		const { loggedIn, user } = this.props;
 
 		return loggedIn && (user && user.scopes && user.scopes.includes('subscriptions:insights'));
 	}
 
-	_renderPlusPromoModal = () => {
-		if (this._plusSubscriber() || this._insightsSubscriber()) return null;
+	/**
+	 * @returns {bool}
+	 * @private
+	 * Is the user a Premium subscriber?
+	 */
+	_premiumSubscriber = () => {
+		const { loggedIn, user } = this.props;
 
-		if (this.props.promoModal === 'plus_upgrade') {
-			// the upgrade promo does not require the user to make a choice, so we mark it as 'seen' immediately
-			sendMessage('promoModals.sawPlusPromo', {});
-			sendMessage('ping', 'promo_modals_show_upgrade_plus');
-			return (
-				<PlusUpgradePromoModal
-					handleNoThanksClick={this._handlePromoNoThanksClick}
-					handleSignInClick={this._handlePromoSignInClick}
-					handleSubscribeClick={this._handlePromoSubscribeClick}
-					handleXClick={this._handlePromoXClick}
-				/>
-			);
-		}
+		return loggedIn && (user && user.scopes && user.scopes.includes('subscriptions:premium'));
+	}
 
-		// promoModal === 'plus_initial'
+	/**
+	 * @returns {JSX}
+	 * @private
+	 * Renders the Premium promo modal
+	 */
+	_renderPremiumPromoModal = () => {
+		if (this._premiumSubscriber()) return null;
+
+		sendMessage('promoModals.sawPremiumPromo', {});
+
 		return (
-			<PlusPromoModal
+			<PremiumPromoModal
 				show
 				location="panel"
-				handleSelectBasicClick={this._handlePromoSelectBasicClick}
-				handleSelectPlusClick={this._handlePromoSelectPlusClick}
-				handleSignInClick={this._handlePromoSignInClick}
+				handleGoAwayClick={this._handlePromoGoAwayClick}
+				handleGetPlusClick={this._handlePromoGetPlusClick}
+				handleTryMidnightClick={this._handlePromoTryMidnightClick}
+				handleXClick={this._handlePromoXClick}
 			/>
 		);
 	}
 
+	/**
+	 * @returns {null|JSX}
+	 * @private
+	 * Renders the Insights promo modal if the user is not already an Insights subscriber
+	 */
 	_renderInsightsPromoModal = () => {
 		if (this._insightsSubscriber()) return null;
 
@@ -336,7 +351,7 @@ class Panel extends React.Component {
 
 		return (
 			<InsightsPromoModal
-				handleNoThanksClick={this._handlePromoNoThanksClick}
+				handleGoAwayClick={this._handlePromoGoAwayClick}
 				handleSignInClick={this._handlePromoSignInClick}
 				handleSubscribeClick={this._handlePromoSubscribeClick}
 				handleXClick={this._handlePromoXClick}
@@ -344,6 +359,11 @@ class Panel extends React.Component {
 		);
 	}
 
+	/**
+	 * @returns {null|JSX}
+	 * @private
+	 * Renders either the Insights or the Premium promo modal
+	 */
 	_renderPromoModal = () => {
 		const {
 			promoModal,
@@ -356,8 +376,8 @@ class Panel extends React.Component {
 			return this._renderInsightsPromoModal();
 		}
 
-		if (promoModal === 'plus_initial' || promoModal === 'plus_upgrade') {
-			return this._renderPlusPromoModal();
+		if (promoModal === 'premium') {
+			return this._renderPremiumPromoModal();
 		}
 
 		return null;

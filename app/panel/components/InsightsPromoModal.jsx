@@ -22,7 +22,7 @@ const INSIGHTS = 'insights';
  * @memberof PanelClasses
  */
 class InsightsPromoModal extends React.Component {
-	handleNoThanksClick = () => { this.props.handleNoThanksClick(INSIGHTS); }
+	handleGoAwayClick = () => { this.props.handleGoAwayClick(INSIGHTS); }
 
 	handleSubscribeClick = () => { this.props.handleSubscribeClick(INSIGHTS); }
 
@@ -78,7 +78,7 @@ class InsightsPromoModal extends React.Component {
 						</div>
 						<div className="InsightsModal__other-options-container flex-container align-justify">
 							<span onClick={this.props.handleSignInClick} className="InsightsModal__link">{t('subscribe_pitch_sign_in')}</span>
-							<span onClick={this.handleNoThanksClick} className="InsightsModal__link">{t('no_thanks_turn_promos_off')}</span>
+							<span onClick={this.handleGoAwayClick} className="InsightsModal__link">{t('no_thanks_turn_promos_off')}</span>
 						</div>
 					</div>
 				</div>

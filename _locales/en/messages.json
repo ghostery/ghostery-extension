@@ -727,6 +727,9 @@
 	"panel_detail_rewards_cliqz_text": {
 		"message": "Feature already active in the Cliqz MyOffrz control panel."
 	},
+	"panel_detail_rewards_edge_text": {
+		"message": "Ghostery Rewards are not supported in Edge browser"
+	},
 	"panel_detail_rewards_loading": {
 		"message": "Loading Rewards..."
 	},
@@ -2345,5 +2348,37 @@
 	},
 	"settings": {
 		"message": "Settings"
+	},
+  	"try_ghostery_midnight": {
+	  "message": "Try Ghostery Midnight"
+	},
+  	"seven_day_free_trial": {
+	  "message": "7 Day Free Trial ($$14/mo)",
+	  "description": "Do not localize currency. Use the $14 USD amount. The second $ is needed to escape the special meaning of $"
+	},
+  	"full_coverage_protection_promise": {
+	  "message": "Get full-coverage protection across all browsers & apps on your device"
+	},
+  	"system_wide_tracker_and_ad_blocking": {
+	  "message": "System-wide tracker & ad-blocking"
+	},
+  	"built_in_vpn": {
+	  "message": "Built-in VPN"
+	},
+  	"custom_whitelist_options": {
+	  "message": "Custom whitelist options"
+	},
+  	"historical_tracking_insights": {
+	  "message": "Historical tracking insights"
+	},
+  	"download_for_free": {
+	  "message": "Download for free"
+	},
+  	"support_ghostery_for_2_instead": {
+	  "message": "Support Ghostery for $$2/mo instead",
+	  "description": "Do not localize currency. Use the $2 USD amount. The second $ is needed to escape the special meaning of $"
+	},
+  	"no_thanks_continue_with_basic": {
+	  "message": "No thanks, continue with basic"
 	}
 }

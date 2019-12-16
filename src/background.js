@@ -513,8 +513,8 @@ function handleRewards(name, message, callback) {
  */
 function handleGhosteryHub(name, message, callback) {
 	switch (name) {
-		case 'SET_PLUS_PROMO_MODAL_SEEN':
-			promoModals.recordPlusPromoSighting();
+		case 'SET_PREMIUM_PROMO_MODAL_SEEN':
+			promoModals.recordPremiumPromoSighting();
 			break;
 		case 'SEND_PING': {
 			const { type } = message;
@@ -1006,8 +1006,8 @@ function onMessageHandler(request, sender, callback) {
 		});
 		return true;
 	}
-	if (name === 'promoModals.sawPlusPromo') {
-		promoModals.recordPlusPromoSighting();
+	if (name === 'promoModals.sawPremiumPromo') {
+		promoModals.recordPremiumPromoSighting();
 		return false;
 	}
 	if (name === 'promoModals.sawInsightsPromo') {
@@ -1612,7 +1612,7 @@ function initializeGhosteryModules() {
 					conf.enable_ad_block = !adblocker.isDisabled;
 					conf.enable_anti_tracking = !antitracking.isDisabled;
 					conf.enable_human_web = !humanweb.isDisabled && !(IS_FIREFOX && globals.JUST_INSTALLED);
-					conf.enable_offers = !offers.isDisabled && !(IS_FIREFOX && globals.JUST_INSTALLED);
+					conf.enable_offers = !offers.isDisabled && !(IS_FIREFOX && globals.JUST_INSTALLED) && !IS_EDGE;
 				}
 
 				const myoffrzShouldMigrate = conf.rewards_opted_in !== undefined && cliqz.prefs.get('myoffrz.opted_in', undefined) === undefined;
