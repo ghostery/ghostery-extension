@@ -76,7 +76,7 @@ class HomeViewContainer extends Component {
 				window.open(`https://checkout.${DOMAIN}.com/plus?utm_source=gbe&utm_campaign=intro_hub`, '_blank');
 				break;
 			case 'premium':
-				window.open('https://ghostery.com/thanks-for-downloading-midnight', '_blank');
+				window.open('https://ghostery.com/thanks-for-downloading-midnight?utm_source=gbe&utm_campaign=intro_hub', '_blank');
 				break;
 			case 'basic':
 			default:
@@ -139,6 +139,7 @@ class HomeViewContainer extends Component {
 			<div className="full-height">
 				<PremiumPromoModal
 					show={showPromoModal}
+					isPlus={isPlus}
 					location="hub"
 					handleKeepBasicClick={this._handleKeepBasicClick}
 					handleGetPlusClick={this._handleGetPlusClick}

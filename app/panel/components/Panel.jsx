@@ -238,7 +238,7 @@ class Panel extends React.Component {
 	_handlePromoTryMidnightClick = () => {
 		this.props.actions.togglePromoModal();
 
-		const url = 'https://ghostery.com/thanks-for-downloading-midnight';
+		const url = 'https://ghostery.com/thanks-for-downloading-midnight?utm_source=gbe&utm_campaign=in_app';
 		sendMessage('openNewTab', {
 			url,
 			become_active: true,
@@ -316,6 +316,17 @@ class Panel extends React.Component {
 	}
 
 	/**
+	 * @returns {bool}
+	 * @private
+	 * Is the user a Plus subscriber?
+	 */
+	_plusSubscriber = () => {
+		const { loggedIn, user } = this.props;
+
+		return loggedIn && (user && user.subscriptionsPlus);
+	}
+
+	/**
 	 * @returns {JSX}
 	 * @private
 	 * Renders the Premium promo modal
@@ -325,9 +336,12 @@ class Panel extends React.Component {
 
 		sendMessage('promoModals.sawPremiumPromo', {});
 
+		const isPlus = this._plusSubscriber();
+
 		return (
 			<PremiumPromoModal
 				show
+				isPlus={isPlus}
 				location="panel"
 				handleGoAwayClick={this._handlePromoGoAwayClick}
 				handleGetPlusClick={this._handlePromoGetPlusClick}
