@@ -23,6 +23,8 @@ import { prefsGet } from '../utils/common';
 
 const { IS_CLIQZ, BROWSER_INFO } = globals;
 const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
+const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
+
 /**
  * Class for handling user configuration properties synchronously.
  *
@@ -109,7 +111,7 @@ class ConfData {
 			_initProperty('enable_click2play_social', true);
 			_initProperty('enable_human_web', !IS_CLIQZ && !IS_FIREFOX);
 			_initProperty('enable_metrics', false);
-			_initProperty('enable_offers', !IS_CLIQZ && !IS_FIREFOX);
+			_initProperty('enable_offers', !IS_CLIQZ && !IS_FIREFOX && !IS_EDGE);
 			_initProperty('enable_smart_block', true);
 			_initProperty('expand_all_trackers', true);
 			_initProperty('hide_alert_trusted', false);

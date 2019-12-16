@@ -15,8 +15,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import SetupAntiSuiteView from './SetupAntiSuiteView';
 import globals from '../../../../../src/classes/Globals';
+
 // simple consts
 const { IS_CLIQZ } = globals;
+const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 
 /**
  * @class Implement the Setup Anti-Suite View for the Ghostery Hub
@@ -130,7 +132,7 @@ class SetupAntiSuiteViewContainer extends Component {
 			}
 		];
 
-		if (!IS_CLIQZ) {
+		if (!IS_CLIQZ && !IS_EDGE) {
 			features.push({
 				id: 'ghostery-rewards',
 				name: t('hub_setup_ghosteryrewards_name_rewards'),
