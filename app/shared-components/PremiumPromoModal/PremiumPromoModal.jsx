@@ -56,7 +56,7 @@ const PremiumPromoModal = (props) => {
 						<span>{t('try_ghostery_midnight')}</span>
 						<div className="PremiumPromoModal__header-beta-icon" />
 					</div>
-					<div className="PremiumPromoModal__header-text">{t('seven_day_free_trial')}</div>
+					<div className="PremiumPromoModal__header-text" dangerouslySetInnerHTML={{ __html: t('seven_day_free_trial') }} />
 				</div>
 				<div className="PremiumPromoModal__sub-header">
 					{t('full_coverage_protection_promise')}
@@ -99,9 +99,7 @@ const PremiumPromoModal = (props) => {
 					</div>
 					<div className="PremiumPromoModal__text-link-container">
 						{!isPlus && (
-							<div onClick={handleGetPlusClick} className="PremiumPromoModal__text-link">
-								{t('support_ghostery_for_2_instead')}
-							</div>
+							<div onClick={handleGetPlusClick} className="PremiumPromoModal__text-link" dangerouslySetInnerHTML={{ __html: t('support_ghostery_for_2_instead') }} />
 						)}
 						{isInHub && (
 							<div onClick={handleKeepBasicClick} className="PremiumPromoModal__text-link">
