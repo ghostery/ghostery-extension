@@ -16,12 +16,12 @@ $standard-font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, 
 $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 .PremiumPromoModal__content {
-  	position: relative;
-  	z-index: 10;
-	width: 518px;
-	height: 437px;
-	border: solid 1.9px #720174;
-	background-color: #f7f7f7;
+  position: relative;
+  z-index: 10;
+  width: 518px;
+  height: 437px;
+  border: solid 1.9px #720174;
+  background-color: #f7f7f7;
 }
 
 .PremiumPromoModal__midnight-logo {
@@ -33,8 +33,8 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 
 .PremiumPromoModal__header {
   display: flex;
-  width: 100%;
-  justify-content: space-evenly;
+  width: 95%;
+  justify-content: space-around; // Edge does not support space-evenly
 }
 
 .PremiumPromoModal__header-text {
@@ -106,19 +106,20 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 }
 
 .PremiumPromoModal__buttons-background {
-	background-color: #e7ecee;
-	margin-bottom: 3px;
-	width: 99%;
-	height: 107px;
-	z-index: -1;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-evenly
+  background-color: #e7ecee;
+  margin-bottom: 3px;
+  width: 99%;
+  height: 107px;
+  z-index: -1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; // Edge does not support space-evenly
 }
 
 .PremiumPromoModal__button-container {
   display: flex;
   justify-content: center;
+  margin-top: 10px;
 }
 
 .PremiumPromoModal__download-button {
@@ -150,17 +151,17 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 }
 
 .PremiumPromoModal__text-link-container {
-	display: flex;
-	justify-content: space-evenly;
+  display: flex;
+  justify-content: space-around; // Edge does not support space-evenly
 }
 
 .PremiumPromoModal__text-link {
-	margin-left: 10px;
-	margin-right: 10px;
-	font-size: 15px;
-	font-family: $standard-font-family;
-	color: #4a4a4a;
-	text-decoration: underline;
-	text-align: center;
-	cursor: pointer;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 15px;
+  font-family: $standard-font-family;
+  color: #4a4a4a;
+  text-decoration: underline;
+  text-align: center;
+  cursor: pointer;
 }
