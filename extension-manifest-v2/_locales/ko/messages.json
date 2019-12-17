@@ -727,6 +727,9 @@
 	"panel_detail_rewards_cliqz_text": {
 		"message": "기능이 이미 Cliqz MyOffrz 제어판에서 활성화되었습니다."
 	},
+	"panel_detail_rewards_edge_text": {
+		"message": "Ghostery Rewards는 Edge 브라우저에서 지원되지 않습니다."
+	},
 	"panel_detail_rewards_loading": {
 		"message": "Rewards 로딩 중"
 	},
@@ -1251,9 +1254,6 @@
 	"hub_home_header_checkbox_label": {
 		"message": "고스터리의 성능을 개선하기 위해 추가로 익명의 분석 데이터를 공유합니다."
 	},
-	"hub_home_header_info_opted_in_rewards": {
-		"message": "새로운 이용자는 기본적으로 Ghostery Rewards에 참여하고 Human Web에 해제되어 있습니다. 사용자 지정 설정 또는 확장 프로그램에서 이러한 설정을 변경할 수 있습니다."
-	},
 	"hub_home_header_info_opted_out": {
 		"message": "새로운 이용자는 기본적으로 Human Web과 Ghostery Rewards 참여가 선택 해제되어 있습니다. 사용자 지정 설정 또는 확장 프로그램에서 이러한 권장 기능을 선택할 수 있습니다."
 	},
@@ -1662,7 +1662,7 @@
 		"message": "계정 만들기가 완료되었습니다."
 	},
 	"hub_create_account_toast_error": {
-		"message": "해당 이메일 주소는 이미 사용 중입니다.   다른 이메일을 선택하십시오."
+		"message": "해당 이메일 주소는 이미 사용 중입니다.  다른 이메일을 선택하십시오. "
 	},
 	"enable_when_paused": {
 		"message": "이 기능을 사용하려면 Ghostery를 다시 시작하십시오."
@@ -1996,6 +1996,168 @@
 	"enhanced_anti_tracking": {
 		"message": "확장 추적 방지 "
 	},
+	"panel_rewards_view__reward": {
+		"message": "Rewards"
+	},
+	"panel_rewards_view__rewards": {
+		"message": "Rewards"
+	},
+	"OFFERS_BEGIN": {
+		"message": ""
+	},
+	"myoffrz_affiliate_link": {
+		"message": "제휴 링크"
+	},
+	"myoffrz_copy_and_go": {
+		"message": "복사 후 이동"
+	},
+	"myoffrz_feedback_option1": {
+		"message": "혜택을 이미 사용했습니다"
+	},
+	"myoffrz_feedback_option2": {
+		"message": "조건이 좋지 않습니다"
+	},
+	"myoffrz_feedback_option3": {
+		"message": "관련이 없습니다"
+	},
+	"myoffrz_feedback_option4": {
+		"message": "기타 이유"
+	},
+	"myoffrz_feedback_title": {
+		"message": "의견"
+	},
+	"myoffrz_get_code": {
+		"message": "코드 받기"
+	},
+	"myoffrz_offer_removed": {
+		"message": "이 혜택은 제거되었습니다."
+	},
+	"myoffrz_optional": {
+		"message": "선택 사항"
+	},
+	"myoffrz_powered_by_offrz": {
+		"message": "MyOffrz 제공"
+	},
+	"myoffrz_show_code": {
+		"message": "코드 표시"
+	},
+	"myoffrz_show_more": {
+		"message": "자세히 표시"
+	},
+	"myoffrz_skip": {
+		"message": "건너뛰기"
+	},
+	"myoffrz_welcome_link": {
+		"message": "작동 방법"
+	},
+	"myoffrz_welcome_text": {
+		"message": "인터넷 검색에 따른 관심 분야를 기반으로 매력적인 헤택을 찾습니다."
+	},
+	"myoffrz_welcome_title": {
+		"message": "안녕하세요."
+	},
+	"myoffrz_why_offers_text": {
+		"message": "개인 데이터가 장치를 벗어나지 않습니다. 이전 사용 내역에 따라 흥미를 느낄만한 항목을 브라우저에서 자동으로 식별합니다."
+	},
+	"myoffrz_why_see_these_offers": {
+		"message": "이러한 혜택이 표시되는 이유는 무엇인가요?"
+	},
+	"myoffrz_why_see_this": {
+		"message": "이것이 표시되는 이유는 무엇인가요?"
+	},
+	"myoffrz_badge_text_new": {
+		"message": "신규"
+	},
+	"myoffrz_conditions": {
+		"message": "조건"
+	},
+	"myoffrz_turnoff_rewards": {
+		"message": "Ghostery Rewards 기능 끄기"
+	},
+	"OFFERS_ALREADY_TRANSLATED": {
+		"message": ""
+	},
+	"myoffrz_help": {
+		"message": "도움말 "
+	},
+	"myoffrz_learn_more": {
+		"message": "자세히 알아보기"
+	},
+	"myoffrz_send": {
+		"message": "보내기 "
+	},
+	"myoffrz_settings": {
+		"message": "설정 "
+	},
+	"myoffrz_tooltip_new_offer": {
+		"message": "새로운 Rewards 확인!"
+	},
+	"myoffrz_turnoff_notification": {
+		"message": "Ghostery Rewards 기능이 꺼졌습니다. 설정 또는 Rewards 대시보드에서 언제든지 기능을 다시 이용하실 수 있습니다."
+	},
+	"myoffrz_optin_description": {
+		"message": "신뢰할 수 있는 Ghostery 파트너로부터 혜택 정보와 할인을 받으시겠습니까?"
+	},
+	"myoffrz_optin_title": {
+		"message": "새로운 Rewards 확인!"
+	},
+	"myoffrz_no": {
+		"message": "아니요 "
+	},
+	"myoffrz_yes": {
+		"message": "예 "
+	},
+	"myoffrz_rewards_new": {
+		"message": "새로운 Rewards 확인!"
+	},
+	"myoffrz_apply_code": {
+		"message": "코드 적용"
+	},
+	"myoffrz_cancel": {
+		"message": "취소 "
+	},
+	"myoffrz_copied": {
+		"message": "복사됨"
+	},
+	"myoffrz_copy_code": {
+		"message": "코드 복사 "
+	},
+	"myoffrz_expires_in_day": {
+		"message": "1일 동안 사용 가능 "
+	},
+	"myoffrz_expires_in_days": {
+		"message": "$COUNT$일 동안 사용 가능 ",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"myoffrz_expires_in_hour": {
+		"message": "1시간 동안 사용 가능 "
+	},
+	"myoffrz_expires_in_hours": {
+		"message": "$COUNT$시간 동안 사용 가능 ",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"myoffrz_expires_in_minute": {
+		"message": "1분 동안 사용 가능 "
+	},
+	"myoffrz_expires_in_minutes": {
+		"message": "$COUNT$분 동안 사용 가능 ",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"OFFERS_ENDS": {
+		"message": ""
+	},
 	"unknown": {
 		"message": "알 수 없음 "
 	},
@@ -2186,5 +2348,37 @@
 	},
 	"settings": {
 		"message": "설정 "
+	},
+  	"try_ghostery_midnight": {
+	  "message": "Ghostery Midnight를 사용해 보세요"
+	},
+  	"seven_day_free_trial": {
+	  "message": "7일 무료 평가판($$14/월)",
+	  "description": "Do not localize currency. Use the $14 USD amount. The second $ is needed to escape the special meaning of $"
+	},
+  	"full_coverage_protection_promise": {
+	  "message": "장치의 모든 브라우저 및 앱을 완전하게 보호하세요"
+	},
+  	"system_wide_tracker_and_ad_blocking": {
+	  "message": "시스템 차원 트래커 및 광고 차단"
+	},
+  	"built_in_vpn": {
+	  "message": "내장 VPN"
+	},
+  	"custom_whitelist_options": {
+	  "message": "사용자 지정 허용 목록 옵션"
+	},
+  	"historical_tracking_insights": {
+	  "message": "추적 기록 서비스"
+	},
+  	"download_for_free": {
+	  "message": "무료 다운로드"
+	},
+  	"support_ghostery_for_2_instead": {
+	  "message": "월 $$2로 Ghostery를 후원합니다",
+	  "description": "Do not localize currency. Use the $2 USD amount. The second $ is needed to escape the special meaning of $"
+	},
+  	"no_thanks_continue_with_basic": {
+	  "message": "괜찮습니다, Basic으로 계속 진행합니다"
 	}
 }

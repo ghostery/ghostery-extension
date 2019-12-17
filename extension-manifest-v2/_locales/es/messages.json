@@ -727,6 +727,9 @@
 	"panel_detail_rewards_cliqz_text": {
 		"message": "Función ya activa en el panel de control de Cliqz MyOffrz."
 	},
+	"panel_detail_rewards_edge_text": {
+		"message": "Ghostery Rewards no se admite en el navegador Edge"
+	},
 	"panel_detail_rewards_loading": {
 		"message": "Cargando Rewards..."
 	},
@@ -1250,9 +1253,6 @@
 	},
 	"hub_home_header_checkbox_label": {
 		"message": "Compartir datos estadísticos adicionales para mejorar el rendimiento de Ghostery."
-	},
-	"hub_home_header_info_opted_in_rewards": {
-		"message": "Los nuevos usuarios participan por defecto en Ghostery Rewards pero no en Human Web. Puedes cambiar estos ajustes en la instalación personalizada o en la extensión. "
 	},
 	"hub_home_header_info_opted_out": {
 		"message": "Los nuevos usuarios no participan por defecto en Ghostery Rewards y Human Web. Puedes optar por participar en estas funciones recomendadas en la instalación personalizada o en la extensión. "
@@ -1996,6 +1996,168 @@
 	"enhanced_anti_tracking": {
 		"message": "Antirrastreadores mejorado"
 	},
+	"panel_rewards_view__reward": {
+		"message": "Reward"
+	},
+	"panel_rewards_view__rewards": {
+		"message": "Rewards"
+	},
+	"OFFERS_BEGIN": {
+		"message": ""
+	},
+	"myoffrz_affiliate_link": {
+		"message": "enlace afiliado"
+	},
+	"myoffrz_copy_and_go": {
+		"message": "copiar e ir"
+	},
+	"myoffrz_feedback_option1": {
+		"message": "Ya he usado la oferta"
+	},
+	"myoffrz_feedback_option2": {
+		"message": "No es una buena oferta"
+	},
+	"myoffrz_feedback_option3": {
+		"message": "No es relevante para mí"
+	},
+	"myoffrz_feedback_option4": {
+		"message": "Otras razones"
+	},
+	"myoffrz_feedback_title": {
+		"message": "Comentarios"
+	},
+	"myoffrz_get_code": {
+		"message": "Obtener código"
+	},
+	"myoffrz_offer_removed": {
+		"message": "Esta oferta se eliminó."
+	},
+	"myoffrz_optional": {
+		"message": "Opcional"
+	},
+	"myoffrz_powered_by_offrz": {
+		"message": "CON TECNOLOGÍA DE MyOffrz"
+	},
+	"myoffrz_show_code": {
+		"message": "Mostrar código"
+	},
+	"myoffrz_show_more": {
+		"message": "Mostrar más"
+	},
+	"myoffrz_skip": {
+		"message": "Omitir"
+	},
+	"myoffrz_welcome_link": {
+		"message": "Cómo funciona"
+	},
+	"myoffrz_welcome_text": {
+		"message": "Mientras navegas por Internet, buscamos ofertas atractivas basadas en tus intereses."
+	},
+	"myoffrz_welcome_title": {
+		"message": "¡Hola!"
+	},
+	"myoffrz_why_offers_text": {
+		"message": "Ningún dato personal sale de tu dispositivo. Tu navegador identifica automáticamente lo que podría interesarte en función de tu uso anterior. "
+	},
+	"myoffrz_why_see_these_offers": {
+		"message": "¿Por qué veo estas ofertas?"
+	},
+	"myoffrz_why_see_this": {
+		"message": "¿Por qué veo esto?"
+	},
+	"myoffrz_badge_text_new": {
+		"message": "NOVEDAD"
+	},
+	"myoffrz_conditions": {
+		"message": "Condiciones"
+	},
+	"myoffrz_turnoff_rewards": {
+		"message": "Desactivar Ghostery Rewards"
+	},
+	"OFFERS_ALREADY_TRANSLATED": {
+		"message": ""
+	},
+	"myoffrz_help": {
+		"message": "Ayuda"
+	},
+	"myoffrz_learn_more": {
+		"message": "Más información"
+	},
+	"myoffrz_send": {
+		"message": "Enviar"
+	},
+	"myoffrz_settings": {
+		"message": "Ajustes"
+	},
+	"myoffrz_tooltip_new_offer": {
+		"message": "¡Nueva Reward descubierta!"
+	},
+	"myoffrz_turnoff_notification": {
+		"message": "Se ha desactivado Ghostery Rewards Puedes reactivarlo en tu Configuración o en el panel de Rewards."
+	},
+	"myoffrz_optin_description": {
+		"message": "¿Quieres recibir ofertas y descuentos por parte de socios de confianza de Ghostery?"
+	},
+	"myoffrz_optin_title": {
+		"message": "¡Nueva Reward descubierta!"
+	},
+	"myoffrz_no": {
+		"message": "no"
+	},
+	"myoffrz_yes": {
+		"message": "sí"
+	},
+	"myoffrz_rewards_new": {
+		"message": "¡Nueva Reward descubierta!"
+	},
+	"myoffrz_apply_code": {
+		"message": "Aplicar código"
+	},
+	"myoffrz_cancel": {
+		"message": "Cancelar"
+	},
+	"myoffrz_copied": {
+		"message": "Copiado"
+	},
+	"myoffrz_copy_code": {
+		"message": "Copiar código"
+	},
+	"myoffrz_expires_in_day": {
+		"message": "Disponible durante 1 día"
+	},
+	"myoffrz_expires_in_days": {
+		"message": "Disponible durante $COUNT$ días",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"myoffrz_expires_in_hour": {
+		"message": "Disponible durante 1 hora"
+	},
+	"myoffrz_expires_in_hours": {
+		"message": "Disponible durante $COUNT$ horas",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"myoffrz_expires_in_minute": {
+		"message": "Disponible durante 1 minuto"
+	},
+	"myoffrz_expires_in_minutes": {
+		"message": "Disponible durante $COUNT$ minutos",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"OFFERS_ENDS": {
+		"message": ""
+	},
 	"unknown": {
 		"message": "Desconocido"
 	},
@@ -2186,5 +2348,37 @@
 	},
 	"settings": {
 		"message": "Ajustes"
+	},
+  	"try_ghostery_midnight": {
+	  "message": "Prueba Ghostery Midnight"
+	},
+  	"seven_day_free_trial": {
+	  "message": "Prueba gratuita de 7 días ($$14/mes)",
+	  "description": "Do not localize currency. Use the $14 USD amount. The second $ is needed to escape the special meaning of $"
+	},
+  	"full_coverage_protection_promise": {
+	  "message": "Obtén protección de cobertura completa en todos los navegadores y aplicaciones de tu dispositivo"
+	},
+  	"system_wide_tracker_and_ad_blocking": {
+	  "message": "Rastreador y bloqueo de anuncios en todo el sistema"
+	},
+  	"built_in_vpn": {
+	  "message": "VPN integrada"
+	},
+  	"custom_whitelist_options": {
+	  "message": "Opciones de lista blanca personalizadas"
+	},
+  	"historical_tracking_insights": {
+	  "message": "Información histórica sobre el seguimiento"
+	},
+  	"download_for_free": {
+	  "message": "Descarga gratuita"
+	},
+  	"support_ghostery_for_2_instead": {
+	  "message": "O apoya a Ghostery por $$2/mes",
+	  "description": "Do not localize currency. Use the $2 USD amount. The second $ is needed to escape the special meaning of $"
+	},
+  	"no_thanks_continue_with_basic": {
+	  "message": "No, gracias, continuar con básico"
 	}
 }

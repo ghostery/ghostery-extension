@@ -727,6 +727,9 @@
 	"panel_detail_rewards_cliqz_text": {
 		"message": "既にCliqz MyOffrzコントロールパネルで有効になっている機能です。"
 	},
+	"panel_detail_rewards_edge_text": {
+		"message": "Ghostery Rewardsは、Edgeブラウザではサポートされていません"
+	},
 	"panel_detail_rewards_loading": {
 		"message": "Rewardsを読み込み中…"
 	},
@@ -1251,9 +1254,6 @@
 	"hub_home_header_checkbox_label": {
 		"message": "Ghosteryのパフォーマンス向上のために、匿名分析データを追加し共有します。"
 	},
-	"hub_home_header_info_opted_in_rewards": {
-		"message": "新規ユーザーがGhostery Rewardsにオプトインし、デフォルト設定によりHuman Webからオプトアウトしました。カスタム設定あるいは拡張機能からこれらの変更を行うことができます。"
-	},
 	"hub_home_header_info_opted_out": {
 		"message": "新規ユーザーの方は、デフォルトでGhostery RewardsとHuman Webには参加しないように設定されています。カスタム設定または拡張機能で、これらの推奨機能にオプトインすることができます。"
 	},
@@ -1497,10 +1497,10 @@
 	"hub_tutorial_antisuite_antitracking_description": {
 		"message": "サイトが個人を特定できるようなデータポイントを削除します。"
 	},
-	"hub_products_page_title": {
+	"hub_products_page_title" : {
 		"message": "Ghostery ハブ - その他のGhostery製品を試す"
 	},
-	"hub_products_header_title": {
+	"hub_products_header_title" : {
 		"message": "Ghosteryの機能でよりスマートにブラウジング！"
 	},
 	"hub_products_header_description": {
@@ -1846,7 +1846,7 @@
 	"subscription_themes_tooltip": {
 		"message": "Ghosteryのカラースキームは変更できます！"
 	},
-	"subscription_charge_date": {
+	"subscription_charge_date" : {
 		"message": "次回のお支払日"
 	},
 	"subscription_expired": {
@@ -1996,6 +1996,168 @@
 	"enhanced_anti_tracking": {
 		"message": "強化された追跡防止"
 	},
+	"panel_rewards_view__reward": {
+		"message": "Reward（報酬）"
+	},
+	"panel_rewards_view__rewards": {
+		"message": "Rewards（報酬）"
+	},
+	"OFFERS_BEGIN": {
+		"message": ""
+	},
+	"myoffrz_affiliate_link": {
+		"message": "関連リンク"
+	},
+	"myoffrz_copy_and_go": {
+		"message": "コピーして移動"
+	},
+	"myoffrz_feedback_option1": {
+		"message": "オファーを既に使用しました"
+	},
+	"myoffrz_feedback_option2": {
+		"message": "良いオファーではありません"
+	},
+	"myoffrz_feedback_option3": {
+		"message": "自分とは関連性がありません"
+	},
+	"myoffrz_feedback_option4": {
+		"message": "その他の理由"
+	},
+	"myoffrz_feedback_title": {
+		"message": "フィードバック"
+	},
+	"myoffrz_get_code": {
+		"message": "コードを取得"
+	},
+	"myoffrz_offer_removed": {
+		"message": "このオファーは削除されました。"
+	},
+	"myoffrz_optional": {
+		"message": "オプション"
+	},
+	"myoffrz_powered_by_offrz": {
+		"message": "POWERED BY MyOffrz"
+	},
+	"myoffrz_show_code": {
+		"message": "コードを表示"
+	},
+	"myoffrz_show_more": {
+		"message": "詳細を表示"
+	},
+	"myoffrz_skip": {
+		"message": "スキップ"
+	},
+	"myoffrz_welcome_link": {
+		"message": "しくみ"
+	},
+	"myoffrz_welcome_text": {
+		"message": "インターネットを閲覧すると、お客様の関心に基づいて魅力的なオファーが表示されます。"
+	},
+	"myoffrz_welcome_title": {
+		"message": "こんにちは！"
+	},
+	"myoffrz_why_offers_text": {
+		"message": "デバイスから個人データが流出することはありません。お使いのブラウザは、以前の使用に基づいてお客様へのおすすめを自動的に識別します。"
+	},
+	"myoffrz_why_see_these_offers": {
+		"message": "これらのオファーが表示される理由"
+	},
+	"myoffrz_why_see_this": {
+		"message": "これが表示される理由"
+	},
+	"myoffrz_badge_text_new": {
+		"message": "新機能"
+	},
+	"myoffrz_conditions": {
+		"message": "条件"
+	},
+	"myoffrz_turnoff_rewards": {
+		"message": "Ghostery Rewardsを無効にする"
+	},
+	"OFFERS_ALREADY_TRANSLATED": {
+		"message": ""
+	},
+	"myoffrz_help": {
+		"message": "ヘルプ"
+	},
+	"myoffrz_learn_more": {
+		"message": "詳細はこちら"
+	},
+	"myoffrz_send": {
+		"message": "送信"
+	},
+	"myoffrz_settings": {
+		"message": "設定"
+	},
+	"myoffrz_tooltip_new_offer": {
+		"message": "新しいReward（報酬）があります！"
+	},
+	"myoffrz_turnoff_notification": {
+		"message": "Ghostery Rewardsが無効になりました。再度有効にする場合は、「設定」またはダッシュボードの「Rewards」で変更してください。"
+	},
+	"myoffrz_optin_description": {
+		"message": "信頼できるGhosteryのパートナーからオファーとディスカウントを受け取りますか？"
+	},
+	"myoffrz_optin_title": {
+		"message": "新しいReward（報酬）があります！"
+	},
+	"myoffrz_no": {
+		"message": "いいえ"
+	},
+	"myoffrz_yes": {
+		"message": "はい"
+	},
+	"myoffrz_rewards_new": {
+		"message": "新しいReward（報酬）があります！"
+	},
+	"myoffrz_apply_code": {
+		"message": "コードを適用する"
+	},
+	"myoffrz_cancel": {
+		"message": "キャンセル"
+	},
+	"myoffrz_copied": {
+		"message": "コピーされました"
+	},
+	"myoffrz_copy_code": {
+		"message": "コードをコピー"
+	},
+	"myoffrz_expires_in_day": {
+		"message": "1日間利用可能"
+	},
+	"myoffrz_expires_in_days": {
+		"message": "$COUNT$分間利用可能",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"myoffrz_expires_in_hour": {
+		"message": "1時間利用可能"
+	},
+	"myoffrz_expires_in_hours": {
+		"message": "$COUNT$時間利用可能",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"myoffrz_expires_in_minute": {
+		"message": "1分間利用可能"
+	},
+	"myoffrz_expires_in_minutes": {
+		"message": "$COUNT$分間利用可能",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"OFFERS_ENDS": {
+		"message": ""
+	},
 	"unknown": {
 		"message": "未知"
 	},
@@ -2018,7 +2180,7 @@
 		"message": "Ghostery プラス"
 	},
 	"dollar_sign": {
-		"message":  "&#36;"
+		"message": "&#36;"
 	},
 	"plus_monthly_subscription_price_number": {
 		"message": "2"
@@ -2186,5 +2348,37 @@
 	},
 	"settings": {
 		"message": "設定"
+	},
+  	"try_ghostery_midnight": {
+	  "message": "Ghostery Midnightを試す"
+	},
+  	"seven_day_free_trial": {
+	  "message": "7日間無料トライアル（月額14ドル）",
+	  "description": "Do not localize currency. Use the $14 USD amount. The second $ is needed to escape the special meaning of $"
+	},
+  	"full_coverage_protection_promise": {
+	  "message": "デバイス上のすべてのブラウザとアプリを包括的に保護しましょう"
+	},
+  	"system_wide_tracker_and_ad_blocking": {
+	  "message": "システム全体を対象としたトラッカーと広告ブロッキング"
+	},
+  	"built_in_vpn": {
+	  "message": "組み込みVPN"
+	},
+  	"custom_whitelist_options": {
+	  "message": "ホワイトリストのカスタムオプション"
+	},
+  	"historical_tracking_insights": {
+	  "message": "追跡履歴情報"
+	},
+  	"download_for_free": {
+	  "message": "無料でダウンロード"
+	},
+  	"support_ghostery_for_2_instead": {
+	  "message": "代わりに月額2ドルでGhosteryをサポート",
+	  "description": "Do not localize currency. Use the $2 USD amount. The second $ is needed to escape the special meaning of $"
+	},
+  	"no_thanks_continue_with_basic": {
+	  "message": "いいえ、ベーシックプランで継続する"
 	}
 }

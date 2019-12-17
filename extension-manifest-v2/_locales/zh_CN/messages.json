@@ -727,6 +727,9 @@
 	"panel_detail_rewards_cliqz_text": {
 		"message": "Cliqz MyOffrz 控制面板中已激活此功能。"
 	},
+	"panel_detail_rewards_edge_text": {
+		"message": "Ghostery Rewards 不支持 Edge 浏览器"
+	},
 	"panel_detail_rewards_loading": {
 		"message": "正在加载Rewards…"
 	},
@@ -1250,9 +1253,6 @@
 	},
 	"hub_home_header_checkbox_label": {
 		"message": "分享额外的匿名分析数据来提高Ghostery的性能。"
-	},
-	"hub_home_header_info_opted_in_rewards": {
-		"message": "新用户默认选择加入 Ghostery Rewards，并退出 Human Web。您可在自定义设置或扩展中更改相关设置。"
 	},
 	"hub_home_header_info_opted_out": {
 		"message": "新用户默认选择退出 Ghostery Rewards 和 Human Web。您可以在自定义设置或扩展中选择使用这些推荐功能。"
@@ -1996,6 +1996,168 @@
 	"enhanced_anti_tracking": {
 		"message": "增强型反跟踪"
 	},
+	"panel_rewards_view__reward": {
+		"message": "Reward"
+	},
+	"panel_rewards_view__rewards": {
+		"message": "Rewards"
+	},
+	"OFFERS_BEGIN": {
+		"message": ""
+	},
+	"myoffrz_affiliate_link": {
+		"message": "关联链接"
+	},
+	"myoffrz_copy_and_go": {
+		"message": "复制并前往"
+	},
+	"myoffrz_feedback_option1": {
+		"message": "我已使用此优惠"
+	},
+	"myoffrz_feedback_option2": {
+		"message": "不划算"
+	},
+	"myoffrz_feedback_option3": {
+		"message": "与我无关"
+	},
+	"myoffrz_feedback_option4": {
+		"message": "其他原因"
+	},
+	"myoffrz_feedback_title": {
+		"message": "反馈"
+	},
+	"myoffrz_get_code": {
+		"message": "获取代码"
+	},
+	"myoffrz_offer_removed": {
+		"message": "此优惠已删除"
+	},
+	"myoffrz_optional": {
+		"message": "可选"
+	},
+	"myoffrz_powered_by_offrz": {
+		"message": "由 MyOffrz 提供支持"
+	},
+	"myoffrz_show_code": {
+		"message": "显示代码"
+	},
+	"myoffrz_show_more": {
+		"message": "显示更多"
+	},
+	"myoffrz_skip": {
+		"message": "跳过"
+	},
+	"myoffrz_welcome_link": {
+		"message": "工作原理"
+	},
+	"myoffrz_welcome_text": {
+		"message": "浏览互联网时，我们会根据您的兴趣搜索最具吸引力的优惠。"
+	},
+	"myoffrz_welcome_title": {
+		"message": "您好！"
+	},
+	"myoffrz_why_offers_text": {
+		"message": "设备中的个人数据绝无泄露风险。您的浏览器会根据历史记录自动识别您可能感兴趣的领域。"
+	},
+	"myoffrz_why_see_these_offers": {
+		"message": "我为何会看到这些优惠？"
+	},
+	"myoffrz_why_see_this": {
+		"message": "我为何会看到这一内容？"
+	},
+	"myoffrz_badge_text_new": {
+		"message": "新"
+	},
+	"myoffrz_conditions": {
+		"message": "条件"
+	},
+	"myoffrz_turnoff_rewards": {
+		"message": "关闭 Ghostery Rewards"
+	},
+	"OFFERS_ALREADY_TRANSLATED": {
+		"message": ""
+	},
+	"myoffrz_help": {
+		"message": "帮助"
+	},
+	"myoffrz_learn_more": {
+		"message": "了解详情"
+	},
+	"myoffrz_send": {
+		"message": "发送"
+	},
+	"myoffrz_settings": {
+		"message": "设置"
+	},
+	"myoffrz_tooltip_new_offer": {
+		"message": "发现了新Reward！"
+	},
+	"myoffrz_turnoff_notification": {
+		"message": "Ghostery Rewards现已关闭。您可以随时在设置中或Rewards仪表板上重新打开。"
+	},
+	"myoffrz_optin_description": {
+		"message": "您希望接收可信 Ghostery 合作伙伴发送的优惠和折扣信息吗？"
+	},
+	"myoffrz_optin_title": {
+		"message": "发现了新Reward！"
+	},
+	"myoffrz_no": {
+		"message": "否"
+	},
+	"myoffrz_yes": {
+		"message": "是"
+	},
+	"myoffrz_rewards_new": {
+		"message": "发现了新Reward！"
+	},
+	"myoffrz_apply_code": {
+		"message": "应用代码"
+	},
+	"myoffrz_cancel": {
+		"message": "取消"
+	},
+	"myoffrz_copied": {
+		"message": "已复制"
+	},
+	"myoffrz_copy_code": {
+		"message": "复制代码"
+	},
+	"myoffrz_expires_in_day": {
+		"message": "1 天可用"
+	},
+	"myoffrz_expires_in_days": {
+		"message": "$COUNT$ 天可用",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"myoffrz_expires_in_hour": {
+		"message": "1 小时可用"
+	},
+	"myoffrz_expires_in_hours": {
+		"message": "$COUNT$ 小时可用",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"myoffrz_expires_in_minute": {
+		"message": "限时 1 分钟"
+	},
+	"myoffrz_expires_in_minutes": {
+		"message": "限时 $COUNT$ 分钟",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"OFFERS_ENDS": {
+		"message": ""
+	},
 	"unknown": {
 		"message": "未知"
 	},
@@ -2186,5 +2348,37 @@
 	},
 	"settings": {
 		"message": "设置"
+	},
+  	"try_ghostery_midnight": {
+	  "message": "试用 Ghostery Midnight"
+	},
+  	"seven_day_free_trial": {
+	  "message": "7 天免费试用（$$14/月）",
+	  "description": "Do not localize currency. Use the $14 USD amount. The second $ is needed to escape the special meaning of $"
+	},
+  	"full_coverage_protection_promise": {
+	  "message": "全面保护设备中的所有浏览器和应用程序"
+	},
+  	"system_wide_tracker_and_ad_blocking": {
+	  "message": "全系统追踪器和广告拦截"
+	},
+  	"built_in_vpn": {
+	  "message": "内嵌 VPN"
+	},
+  	"custom_whitelist_options": {
+	  "message": "自定义白名单选项"
+	},
+  	"historical_tracking_insights": {
+	  "message": "历史追踪记录"
+	},
+  	"download_for_free": {
+	  "message": "免费下载"
+	},
+  	"support_ghostery_for_2_instead": {
+	  "message": "支持 Ghostery（$$2/月）",
+	  "description": "Do not localize currency. Use the $2 USD amount. The second $ is needed to escape the special meaning of $"
+	},
+  	"no_thanks_continue_with_basic": {
+	  "message": "不了，谢谢，继续使用基础版"
 	}
 }

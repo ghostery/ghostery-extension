@@ -727,6 +727,9 @@
 	"panel_detail_rewards_cliqz_text": {
 		"message": "Cliqz MyOffrz控制面板已啟動此功能。"
 	},
+	"panel_detail_rewards_edge_text": {
+		"message": "Ghostery Rewards 不支援 Edge 瀏覽器"
+	},
 	"panel_detail_rewards_loading": {
 		"message": "正在加載Rewards…"
 	},
@@ -782,7 +785,7 @@
 		"message": "我們似乎發生技術問題。請稍後再試。"
 	},
 	"email_address_in_use": {
-		"message": "那電郵址已有人使用。請選擇另一個。 "
+		"message": "該電子郵件地址已有人使用。請使用另一個。"
 	},
 	"short_description": {
 		"description": "A short description of this extension (Ghostery).",
@@ -1251,9 +1254,6 @@
 	"hub_home_header_checkbox_label": {
 		"message": "分享其他的匿名分析資料以改善 Ghostery 的性能。"
 	},
-	"hub_home_header_info_opted_in_rewards": {
-		"message": "新用戶的預設為參與 Ghostery Rewards 及不參與 Human Web。您可以在自訂設置或擴展中更改這些設置。"
-	},
 	"hub_home_header_info_opted_out": {
 		"message": "新用戶的預設為不參與 Ghostery Rewards 和人類網絡（Human Web）。您可以在自定義設置或擴展中選擇使用這些推薦的功能。"
 	},
@@ -1662,7 +1662,7 @@
 		"message": "已成功創建帳戶"
 	},
 	"hub_create_account_toast_error": {
-		"message": "那個電郵地址已有人使用。  請選擇另外一個。"
+		"message": "該電子郵件地址已有人使用。請使用另一個。"
 	},
 	"enable_when_paused": {
 		"message": "欲使用此功能，請重啟Ghostery。"
@@ -1996,6 +1996,168 @@
 	"enhanced_anti_tracking": {
 		"message": "強化的反跟蹤"
 	},
+	"panel_rewards_view__reward": {
+		"message": "Reward"
+	},
+	"panel_rewards_view__rewards": {
+		"message": "Rewards"
+	},
+	"OFFERS_BEGIN": {
+		"message": ""
+	},
+	"myoffrz_affiliate_link": {
+		"message": "推廣連結"
+	},
+	"myoffrz_copy_and_go": {
+		"message": "複製並前往"
+	},
+	"myoffrz_feedback_option1": {
+		"message": "我已使用優惠"
+	},
+	"myoffrz_feedback_option2": {
+		"message": "不划算"
+	},
+	"myoffrz_feedback_option3": {
+		"message": "與我無關"
+	},
+	"myoffrz_feedback_option4": {
+		"message": "其他原因"
+	},
+	"myoffrz_feedback_title": {
+		"message": "意見回饋"
+	},
+	"myoffrz_get_code": {
+		"message": "獲得代碼"
+	},
+	"myoffrz_offer_removed": {
+		"message": "已移除優惠。"
+	},
+	"myoffrz_optional": {
+		"message": "非必要"
+	},
+	"myoffrz_powered_by_offrz": {
+		"message": "由 MyOffrz 提供技術支援"
+	},
+	"myoffrz_show_code": {
+		"message": "顯示代碼"
+	},
+	"myoffrz_show_more": {
+		"message": "顯示更多"
+	},
+	"myoffrz_skip": {
+		"message": "跳過"
+	},
+	"myoffrz_welcome_link": {
+		"message": "運作方式"
+	},
+	"myoffrz_welcome_text": {
+		"message": "您瀏覽網路時，我們會根據您的興趣搜尋划算的優惠。"
+	},
+	"myoffrz_welcome_title": {
+		"message": "您好！"
+	},
+	"myoffrz_why_offers_text": {
+		"message": "個人資訊只會留在您的裝置中。您的瀏覽器會根據先前的使用紀錄自動找出您可能會感興趣的內容。"
+	},
+	"myoffrz_why_see_these_offers": {
+		"message": "我為什麼會看到這些優惠？"
+	},
+	"myoffrz_why_see_this": {
+		"message": "我為什麼會看到這個？"
+	},
+	"myoffrz_badge_text_new": {
+		"message": "新"
+	},
+	"myoffrz_conditions": {
+		"message": "條件"
+	},
+	"myoffrz_turnoff_rewards": {
+		"message": "停用 Ghostery Rewards"
+	},
+	"OFFERS_ALREADY_TRANSLATED": {
+		"message": ""
+	},
+	"myoffrz_help": {
+		"message": "幫助"
+	},
+	"myoffrz_learn_more": {
+		"message": "瞭解更多"
+	},
+	"myoffrz_send": {
+		"message": "發送"
+	},
+	"myoffrz_settings": {
+		"message": "設定"
+	},
+	"myoffrz_tooltip_new_offer": {
+		"message": "發現新的Reward!"
+	},
+	"myoffrz_turnoff_notification": {
+		"message": "Ghostery Rewards現在處於關閉狀態。您可以在您的設置或Rewards儀表板中打開它。"
+	},
+	"myoffrz_optin_description": {
+		"message": "您是否願意從可信賴的 Ghostery 夥伴公司收到優惠和折扣？"
+	},
+	"myoffrz_optin_title": {
+		"message": "發現新的Reward!"
+	},
+	"myoffrz_no": {
+		"message": "沒有"
+	},
+	"myoffrz_yes": {
+		"message": "是"
+	},
+	"myoffrz_rewards_new": {
+		"message": "發現新的Reward!"
+	},
+	"myoffrz_apply_code": {
+		"message": "申請代碼"
+	},
+	"myoffrz_cancel": {
+		"message": "取消"
+	},
+	"myoffrz_copied": {
+		"message": "已拷貝"
+	},
+	"myoffrz_copy_code": {
+		"message": "拷貝代碼"
+	},
+	"myoffrz_expires_in_day": {
+		"message": "1天可用"
+	},
+	"myoffrz_expires_in_days": {
+		"message": " $COUNT$天可用",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"myoffrz_expires_in_hour": {
+		"message": "1小時可用"
+	},
+	"myoffrz_expires_in_hours": {
+		"message": " $COUNT$小時可用",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"myoffrz_expires_in_minute": {
+		"message": "可用 1 分鐘"
+	},
+	"myoffrz_expires_in_minutes": {
+		"message": "可用 $COUNT$ 分鐘",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"OFFERS_ENDS": {
+		"message": ""
+	},
 	"unknown": {
 		"message": "不明的"
 	},
@@ -2186,5 +2348,37 @@
 	},
 	"settings": {
 		"message": "設定"
+	},
+  	"try_ghostery_midnight": {
+	  "message": "試用 Ghostery Midnight"
+	},
+  	"seven_day_free_trial": {
+	  "message": "7 天免費試用（$$14 / 月）",
+	  "description": "Do not localize currency. Use the $14 USD amount. The second $ is needed to escape the special meaning of $"
+	},
+  	"full_coverage_protection_promise": {
+	  "message": "全面防護您裝置上的所有瀏覽器和應用程式"
+	},
+  	"system_wide_tracker_and_ad_blocking": {
+	  "message": "全系統跟蹤器和廣告封鎖"
+	},
+  	"built_in_vpn": {
+	  "message": "內建 VPN"
+	},
+  	"custom_whitelist_options": {
+	  "message": "自訂解封名單選項"
+	},
+  	"historical_tracking_insights": {
+	  "message": "歷史跟蹤資訊"
+	},
+  	"download_for_free": {
+	  "message": "免費下載"
+	},
+  	"support_ghostery_for_2_instead": {
+	  "message": "或以 $$2 / 月來支持 Ghostery",
+	  "description": "Do not localize currency. Use the $2 USD amount. The second $ is needed to escape the special meaning of $"
+	},
+  	"no_thanks_continue_with_basic": {
+	  "message": "不用了，謝謝，繼續使用基本功能"
 	}
 }
