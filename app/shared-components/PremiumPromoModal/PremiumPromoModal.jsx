@@ -51,42 +51,41 @@ const PremiumPromoModal = (props) => {
 					<ModalExitButton className="InsightsModal__exitButton" toggleModal={handleXClick} />
 				)}
 				<div className="PremiumPromoModal__midnight-logo" />
-				<div className="PremiumPromoModal__header">
-					<div className="PremiumPromoModal__header-text">
-						<span>{t('try_ghostery_midnight')}</span>
-						<div className="PremiumPromoModal__header-beta-icon" />
-					</div>
-					<div className="PremiumPromoModal__header-text" dangerouslySetInnerHTML={{ __html: t('seven_day_free_trial') }} />
-				</div>
-				<div className="PremiumPromoModal__sub-header">
-					{t('full_coverage_protection_promise')}
-				</div>
-				<div className="PremiumPromoModal__features-container">
-					<div className="PremiumPromoModal__feature-column">
-						<div className="PremiumPromoModal__feature">
-							<span className="PremiumPromoModal__checked-circle-icon" />
-							<div className="PremiumPromoModal__feature-text">
-								{t('system_wide_tracker_and_ad_blocking')}
-							</div>
-						</div>
-						<div className="PremiumPromoModal__feature">
-							<span className="PremiumPromoModal__checked-circle-icon" />
-							<div className="PremiumPromoModal__feature-text">
-								{t('built_in_vpn')}
-							</div>
+				<div id="ivzflex">
+					<div className="PremiumPromoModal__header">
+						<div className="PremiumPromoModal__header-text">
+							<span>{t('try_ghostery_midnight')}</span>
+							<div className="PremiumPromoModal__header-beta-icon" />
 						</div>
 					</div>
-					<div className="PremiumPromoModal__feature-column">
-						<div className="PremiumPromoModal__feature">
-							<span className="PremiumPromoModal__checked-circle-icon" />
-							<div className="PremiumPromoModal__feature-text">
-								{t('custom_whitelist_options')}
+					<div className="PremiumPromoModal__sub-header" dangerouslySetInnerHTML={{ __html: `${t('full_coverage_protection_promise')}. ${t('seven_day_free_trial')}` }} />
+					<div className="PremiumPromoModal__features-container">
+						<div className="PremiumPromoModal__feature-column">
+							<div className="PremiumPromoModal__feature">
+								<span className="PremiumPromoModal__checked-circle-icon" />
+								<div className="PremiumPromoModal__feature-text">
+									{t('system_wide_tracker_and_ad_blocking')}
+								</div>
+							</div>
+							<div className="PremiumPromoModal__feature">
+								<span className="PremiumPromoModal__checked-circle-icon" />
+								<div className="PremiumPromoModal__feature-text">
+									{t('built_in_vpn')}
+								</div>
 							</div>
 						</div>
-						<div className="PremiumPromoModal__feature">
-							<span className="PremiumPromoModal__checked-circle-icon" />
-							<div className="PremiumPromoModal__feature-text">
-								{t('historical_tracking_insights')}
+						<div className="PremiumPromoModal__feature-column">
+							<div className="PremiumPromoModal__feature">
+								<span className="PremiumPromoModal__checked-circle-icon" />
+								<div className="PremiumPromoModal__feature-text">
+									{t('custom_whitelist_options')}
+								</div>
+							</div>
+							<div className="PremiumPromoModal__feature">
+								<span className="PremiumPromoModal__checked-circle-icon" />
+								<div className="PremiumPromoModal__feature-text">
+									{t('historical_tracking_insights')}
+								</div>
 							</div>
 						</div>
 					</div>

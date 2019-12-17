@@ -27,19 +27,21 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 .PremiumPromoModal__midnight-logo {
   width: 177px;
   height: 103px;
-  margin: 22px 0px 16px;
+  margin: 12px 0px 6px;
   background-image: url('/app/images/panel/midnight-logo.svg');
 }
 
-.PremiumPromoModal__header {
+#ivzflex {
   display: flex;
-  width: 95%;
-  justify-content: space-around; // Edge does not support space-evenly
+  flex-direction: column;
+  align-items: center;
+  height: 210px;
+  justify-content: space-evenly;
 }
 
 .PremiumPromoModal__header-text {
   text-align: center;
-  font-size: 16px;
+  font-size: 24px;
   font-weight: bold;
   font-family: $standard-font-family;
 }
@@ -53,10 +55,10 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 }
 
 .PremiumPromoModal__sub-header {
-  margin: 9px 0px 22px;
   width: 438px;
+  margin-bottom: 12px;
   text-align: center;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: bold;
   line-height: 1.5;
   color: #4A4A4A;
@@ -65,7 +67,6 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 .PremiumPromoModal__features-container {
   display: flex;
   width: 100%;
-  margin-bottom: 18px;
 }
 
 .PremiumPromoModal__feature-column {
@@ -74,7 +75,6 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 	width: 55%;
   }
   &:nth-child(even) {
-	margin-left: -12px;
 	margin-right: 25px;
 	width: 45%;
   }
@@ -84,7 +84,7 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
   display: flex;
   align-items: center;
   &:nth-child(1) {
-	margin-bottom: 20px;
+	margin-bottom: 4px;
   }
 }
 
@@ -109,11 +109,13 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
   background-color: #e7ecee;
   margin-bottom: 3px;
   width: 99%;
-  height: 100px;
+  height: 90px;
   z-index: -1;
   display: flex;
   flex-direction: column;
   justify-content: space-around; // Edge does not support space-evenly
+  position: absolute;
+  bottom: 1px;
 }
 
 .PremiumPromoModal__button-container {
