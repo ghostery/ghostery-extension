@@ -727,6 +727,9 @@
 	"panel_detail_rewards_cliqz_text": {
 		"message": "Fonction déjà activée dans le panneau de commande Cliqz MyOffrz."
 	},
+	"panel_detail_rewards_edge_text": {
+		"message": "Ghostery Rewards n'est pas pris en charge par le navigateur Edge"
+	},
 	"panel_detail_rewards_loading": {
 		"message": "Chargement des Rewards…"
 	},
@@ -782,7 +785,7 @@
 		"message": "Nous rencontrons un problème technique. Veuillez réessayer ultérieurement."
 	},
 	"email_address_in_use": {
-		"message": "Cette adresse e-mail est déjà répertoriée sur Ghostery.  Merci de saisir une autre adresse. "
+		"message": "Cette adresse e-mail est déjà répertoriée sur Ghostery. Merci de saisir une autre adresse. "
 	},
 	"short_description": {
 		"description": "A short description of this extension (Ghostery).",
@@ -1251,9 +1254,6 @@
 	"hub_home_header_checkbox_label": {
 		"message": "Partagez davantage de données analytiques anonymes pour améliorer les performances de Ghostery."
 	},
-	"hub_home_header_info_opted_in_rewards": {
-		"message": "Par défaut, les nouveaux utilisateurs participent à Ghostery Rewards et pas à Human Web. Vous pouvez modifier ces paramètres dans la configuration personnalisée ou dans l'extension."
-	},
 	"hub_home_header_info_opted_out": {
 		"message": "Par défaut, les nouveaux utilisateurs ne participent pas à Ghostery Rewards et à Human Web. Vous pouvez activer ces fonctionnalités recommandées via une configuration personnalisée ou dans l'extension."
 	},
@@ -1662,7 +1662,7 @@
 		"message": "Compte créé avec succès"
 	},
 	"hub_create_account_toast_error": {
-		"message": "Cette adresse mail est déjà utilisée.  Choisissez-en une autre."
+		"message": "Cette adresse e-mail est déjà répertoriée sur Ghostery. Merci de saisir une autre adresse. "
 	},
 	"enable_when_paused": {
 		"message": "Pour utiliser cette fonction, réactivez Ghostery."
@@ -1996,6 +1996,168 @@
 	"enhanced_anti_tracking": {
 		"message": "Outil amélioré anti-tracking"
 	},
+	"panel_rewards_view__reward": {
+		"message": "Promotion"
+	},
+	"panel_rewards_view__rewards": {
+		"message": "Rewards"
+	},
+	"OFFERS_BEGIN": {
+		"message": ""
+	},
+	"myoffrz_affiliate_link": {
+		"message": "lien affilié"
+	},
+	"myoffrz_copy_and_go": {
+		"message": "copier et accéder"
+	},
+	"myoffrz_feedback_option1": {
+		"message": "J'ai déjà utilisé l'offre"
+	},
+	"myoffrz_feedback_option2": {
+		"message": "Il ne s'agit pas d'une offre intéressante"
+	},
+	"myoffrz_feedback_option3": {
+		"message": "Cela ne me concerne pas"
+	},
+	"myoffrz_feedback_option4": {
+		"message": "Autre raison"
+	},
+	"myoffrz_feedback_title": {
+		"message": "Commentaire"
+	},
+	"myoffrz_get_code": {
+		"message": "Obtenir le code"
+	},
+	"myoffrz_offer_removed": {
+		"message": "Cette offre a été supprimée."
+	},
+	"myoffrz_optional": {
+		"message": "Facultatif"
+	},
+	"myoffrz_powered_by_offrz": {
+		"message": "FOURNI PAR MyOffrz"
+	},
+	"myoffrz_show_code": {
+		"message": "Afficher le code"
+	},
+	"myoffrz_show_more": {
+		"message": "Afficher plus"
+	},
+	"myoffrz_skip": {
+		"message": "Ignorer"
+	},
+	"myoffrz_welcome_link": {
+		"message": "Fonctionnement"
+	},
+	"myoffrz_welcome_text": {
+		"message": "Lorsque vous naviguez sur Internet, nous recherchons des offres intéressantes en fonction de vos centres d'intérêt."
+	},
+	"myoffrz_welcome_title": {
+		"message": "Bonjour !"
+	},
+	"myoffrz_why_offers_text": {
+		"message": "Aucune donnée personnelle ne quitte votre appareil. Votre navigateur identifie automatiquement ce qui est susceptible de vous intéresser en fonction de vos utilisations précédentes."
+	},
+	"myoffrz_why_see_these_offers": {
+		"message": "Pourquoi je vois ces offres ?"
+	},
+	"myoffrz_why_see_this": {
+		"message": "Pourquoi je vois ce contenu ?"
+	},
+	"myoffrz_badge_text_new": {
+		"message": "NOUVEAU"
+	},
+	"myoffrz_conditions": {
+		"message": "Conditions"
+	},
+	"myoffrz_turnoff_rewards": {
+		"message": "Désactiver Ghostery Rewards"
+	},
+	"OFFERS_ALREADY_TRANSLATED": {
+		"message": ""
+	},
+	"myoffrz_help": {
+		"message": "Aide"
+	},
+	"myoffrz_learn_more": {
+		"message": "En savoir plus"
+	},
+	"myoffrz_send": {
+		"message": "Envoyer"
+	},
+	"myoffrz_settings": {
+		"message": "Paramètres"
+	},
+	"myoffrz_tooltip_new_offer": {
+		"message": "Nouveau Reward trouvé !"
+	},
+	"myoffrz_turnoff_notification": {
+		"message": "La fonction Ghostery Rewards est maintenant désactivée. Vous pouvez l'activer à tout moment dans les paramètres ou via le tableau de bord des Rewards."
+	},
+	"myoffrz_optin_description": {
+		"message": "Souhaitez-vous recevoir des offres et remises de la part de partenaires Ghostery de confiance ?"
+	},
+	"myoffrz_optin_title": {
+		"message": "Nouveau Reward trouvé !"
+	},
+	"myoffrz_no": {
+		"message": "non"
+	},
+	"myoffrz_yes": {
+		"message": "oui"
+	},
+	"myoffrz_rewards_new": {
+		"message": "Nouveau Reward trouvé !"
+	},
+	"myoffrz_apply_code": {
+		"message": "Appliquer le code"
+	},
+	"myoffrz_cancel": {
+		"message": "Annuler"
+	},
+	"myoffrz_copied": {
+		"message": "Copié/e"
+	},
+	"myoffrz_copy_code": {
+		"message": "Copier le code"
+	},
+	"myoffrz_expires_in_day": {
+		"message": "Disponible pour 1 jour"
+	},
+	"myoffrz_expires_in_days": {
+		"message": "Disponible pour $COUNT$ jours",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"myoffrz_expires_in_hour": {
+		"message": "Disponible pour 1 heure"
+	},
+	"myoffrz_expires_in_hours": {
+		"message": "Disponible pour $COUNT$ heures",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"myoffrz_expires_in_minute": {
+		"message": "Disponible pendant 1 minute"
+	},
+	"myoffrz_expires_in_minutes": {
+		"message": "Disponible pendant $COUNT$ minutes",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"OFFERS_ENDS": {
+		"message": ""
+	},
 	"unknown": {
 		"message": "Inconnu"
 	},
@@ -2186,5 +2348,37 @@
 	},
 	"settings": {
 		"message": "Paramètres"
+	},
+  	"try_ghostery_midnight": {
+	  "message": "Essayez Ghostery et le thème Minuit"
+	},
+  	"seven_day_free_trial": {
+	  "message": "Essai gratuit de 7 jours (14 $$/mois)",
+	  "description": "Do not localize currency. Use the $14 USD amount. The second $ is needed to escape the special meaning of $"
+	},
+  	"full_coverage_protection_promise": {
+	  "message": "Bénéficiez d'une protection complète sur tous les navigateurs et toutes les applications sur votre appareil"
+	},
+  	"system_wide_tracker_and_ad_blocking": {
+	  "message": "Bloqueur des publicités et des trackers dans tout le système"
+	},
+  	"built_in_vpn": {
+	  "message": "VPN intégré"
+	},
+  	"custom_whitelist_options": {
+	  "message": "Options de liste blanche personnalisées"
+	},
+  	"historical_tracking_insights": {
+	  "message": "Historique des informations de pistage"
+	},
+  	"download_for_free": {
+	  "message": "Télécharger gratuitement"
+	},
+  	"support_ghostery_for_2_instead": {
+	  "message": "Aidez Ghostery pour 2 $$/mois",
+	  "description": "Do not localize currency. Use the $2 USD amount. The second $ is needed to escape the special meaning of $"
+	},
+  	"no_thanks_continue_with_basic": {
+	  "message": "Non merci, continuer avec la version de base"
 	}
 }

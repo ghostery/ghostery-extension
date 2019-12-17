@@ -727,6 +727,9 @@
 	"panel_detail_rewards_cliqz_text": {
 		"message": "Functie al actief in het Cliqz MyOffrz controle paneel."
 	},
+	"panel_detail_rewards_edge_text": {
+		"message": "Ghostery Rewards wordt niet ondersteund in de Edge-browser"
+	},
 	"panel_detail_rewards_loading": {
 		"message": "Rewards Laden..."
 	},
@@ -782,7 +785,7 @@
 		"message": "We lijken een technisch probleempje te hebben. Probeer het later nogmaals."
 	},
 	"email_address_in_use": {
-		"message": "Dat e-mailadres is al in gebruik.  Gelieve een andere te kiezen. "
+		"message": "Dat e-mailadres is al in gebruik. Gelieve een ander te kiezen. "
 	},
 	"short_description": {
 		"description": "A short description of this extension (Ghostery).",
@@ -1251,9 +1254,6 @@
 	"hub_home_header_checkbox_label": {
 		"message": "Deel aanvullende anonieme analytics data om de prestaties van Ghostery te verbeteren."
 	},
-	"hub_home_header_info_opted_in_rewards": {
-		"message": "Nieuwe gebruikers zijn standaard ingeschreven voor Ghostery Rewards en niet voor Human Web. Je kunt deze instellingen wijzigen in aangepaste setup of in de extensie. "
-	},
 	"hub_home_header_info_opted_out": {
 		"message": "Nieuwe gebruikers zijn standaard niet ingeschreven voor Ghostery Rewards en Human Web. Je kunt deze aanbevolen functies inschakelen in aangepaste setup of in de extensie. "
 	},
@@ -1662,7 +1662,7 @@
 		"message": "Account aangemaakt"
 	},
 	"hub_create_account_toast_error": {
-		"message": "Dat e-mailadres is al in gebruik.  Gelieve een andere te kiezen."
+		"message": "Dat e-mailadres is al in gebruik.  Gelieve een ander te kiezen."
 	},
 	"enable_when_paused": {
 		"message": "Hervat Ghostery om deze functie te gebruiken."
@@ -1996,6 +1996,168 @@
 	"enhanced_anti_tracking": {
 		"message": "Versterkte Anti-Tracking"
 	},
+	"panel_rewards_view__reward": {
+		"message": "Reward"
+	},
+	"panel_rewards_view__rewards": {
+		"message": "Rewards"
+	},
+	"OFFERS_BEGIN": {
+		"message": ""
+	},
+	"myoffrz_affiliate_link": {
+		"message": "partnerlink"
+	},
+	"myoffrz_copy_and_go": {
+		"message": "kopiëren en verder"
+	},
+	"myoffrz_feedback_option1": {
+		"message": "Ik heb die aanbieding al gebruikt"
+	},
+	"myoffrz_feedback_option2": {
+		"message": "Het is geen goede aanbieding"
+	},
+	"myoffrz_feedback_option3": {
+		"message": "Dit is niet relevant voor mij"
+	},
+	"myoffrz_feedback_option4": {
+		"message": "Andere redenen"
+	},
+	"myoffrz_feedback_title": {
+		"message": "Feedback"
+	},
+	"myoffrz_get_code": {
+		"message": "Code ophalen"
+	},
+	"myoffrz_offer_removed": {
+		"message": "Deze aanbieding is verwijderd."
+	},
+	"myoffrz_optional": {
+		"message": "Optioneel"
+	},
+	"myoffrz_powered_by_offrz": {
+		"message": "POWERED BY MyOffrz"
+	},
+	"myoffrz_show_code": {
+		"message": "Code weergeven"
+	},
+	"myoffrz_show_more": {
+		"message": "Meer weergeven"
+	},
+	"myoffrz_skip": {
+		"message": "Overslaan"
+	},
+	"myoffrz_welcome_link": {
+		"message": "Hoe het werkt"
+	},
+	"myoffrz_welcome_text": {
+		"message": "Terwijl je over internet surft, zoeken we naar aantrekkelijke aanbiedingen gebaseerd op jouw interesses."
+	},
+	"myoffrz_welcome_title": {
+		"message": "Hallo!"
+	},
+	"myoffrz_why_offers_text": {
+		"message": "Persoonlijke gegevens verlaten je apparaat niet. Je browser identificeert automatisch waarin je mogelijk geïnteresseerd bent op basis van eerder gebruik."
+	},
+	"myoffrz_why_see_these_offers": {
+		"message": "Waarom zie ik deze aanbiedingen?"
+	},
+	"myoffrz_why_see_this": {
+		"message": "Waarom zie ik dit?"
+	},
+	"myoffrz_badge_text_new": {
+		"message": "NIEUW"
+	},
+	"myoffrz_conditions": {
+		"message": "Voorwaarden"
+	},
+	"myoffrz_turnoff_rewards": {
+		"message": "Ghostery Rewards uitschakelen"
+	},
+	"OFFERS_ALREADY_TRANSLATED": {
+		"message": ""
+	},
+	"myoffrz_help": {
+		"message": "Help"
+	},
+	"myoffrz_learn_more": {
+		"message": "Meer Weten"
+	},
+	"myoffrz_send": {
+		"message": "Verzenden"
+	},
+	"myoffrz_settings": {
+		"message": "Instellingen"
+	},
+	"myoffrz_tooltip_new_offer": {
+		"message": "Nieuwe Reward ontdekt!"
+	},
+	"myoffrz_turnoff_notification": {
+		"message": "Ghostery Rewards staat nu uit. Je kunt het altijd aanzetten in je Settings of in het Rewards Dashboard."
+	},
+	"myoffrz_optin_description": {
+		"message": "Wil je aanbiedingen van vertrouwde Ghostery-partners ontvangen?"
+	},
+	"myoffrz_optin_title": {
+		"message": "Nieuwe Reward ontdekt!"
+	},
+	"myoffrz_no": {
+		"message": "nee"
+	},
+	"myoffrz_yes": {
+		"message": "ja"
+	},
+	"myoffrz_rewards_new": {
+		"message": "Nieuwe Reward ontdekt!"
+	},
+	"myoffrz_apply_code": {
+		"message": "Code toepassen"
+	},
+	"myoffrz_cancel": {
+		"message": "Annuleren"
+	},
+	"myoffrz_copied": {
+		"message": "Gekopieerd"
+	},
+	"myoffrz_copy_code": {
+		"message": "kopieer code"
+	},
+	"myoffrz_expires_in_day": {
+		"message": "Beschikbaar voor 1 dag"
+	},
+	"myoffrz_expires_in_days": {
+		"message": "Beschikbaar voor $COUNT$ dagen",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"myoffrz_expires_in_hour": {
+		"message": "Beschikbaar voor 1 uur"
+	},
+	"myoffrz_expires_in_hours": {
+		"message": "Beschikbaar voor $COUNT$ uur",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"myoffrz_expires_in_minute": {
+		"message": "Beschikbaar voor 1 minuut"
+	},
+	"myoffrz_expires_in_minutes": {
+		"message": "Beschikbaar voor $COUNT$ minuten",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"OFFERS_ENDS": {
+		"message": ""
+	},
 	"unknown": {
 		"message": "Onbekend"
 	},
@@ -2018,7 +2180,7 @@
 		"message": "Ghostery Plus"
 	},
 	"dollar_sign": {
-		"message":  "&#36;"
+		"message": "&#36;"
 	},
 	"plus_monthly_subscription_price_number": {
 		"message": "2"
@@ -2186,5 +2348,37 @@
 	},
 	"settings": {
 		"message": "Instellingen"
+	},
+  	"try_ghostery_midnight": {
+	  "message": "Ghostery Midnight proberen"
+	},
+  	"seven_day_free_trial": {
+	  "message": "Gratis proefperiode van 7 dagen ($$14/mnd)",
+	  "description": "Do not localize currency. Use the $14 USD amount. The second $ is needed to escape the special meaning of $"
+	},
+  	"full_coverage_protection_promise": {
+	  "message": "Profiteer van volledige dekking voor alle browsers en apps op je apparaat"
+	},
+  	"system_wide_tracker_and_ad_blocking": {
+	  "message": "Systeembrede blokkering van trackers en reclame"
+	},
+  	"built_in_vpn": {
+	  "message": "Ingebouwd VPN"
+	},
+  	"custom_whitelist_options": {
+	  "message": "Aangepaste whitelist-opties"
+	},
+  	"historical_tracking_insights": {
+	  "message": "Historische trackinginzichten"
+	},
+  	"download_for_free": {
+	  "message": "Gratis downloaden"
+	},
+  	"support_ghostery_for_2_instead": {
+	  "message": "Steun in plaats daarvan Ghostery voor $$2/mnd",
+	  "description": "Do not localize currency. Use the $2 USD amount. The second $ is needed to escape the special meaning of $"
+	},
+  	"no_thanks_continue_with_basic": {
+	  "message": "Nee bedankt, doorgaan met Basic"
 	}
 }
