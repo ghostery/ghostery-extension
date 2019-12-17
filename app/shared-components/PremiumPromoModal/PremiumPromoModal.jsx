@@ -51,7 +51,7 @@ const PremiumPromoModal = (props) => {
 					<ModalExitButton className="InsightsModal__exitButton" toggleModal={handleXClick} />
 				)}
 				<div className="PremiumPromoModal__midnight-logo" />
-				<div id="ivzflex">
+				<div className="PremiumPromoModal__main-content-container">
 					<div className="PremiumPromoModal__header">
 						<div className="PremiumPromoModal__header-text">
 							<span>{t('try_ghostery_midnight')}</span>

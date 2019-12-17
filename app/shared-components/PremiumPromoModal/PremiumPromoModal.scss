@@ -31,11 +31,11 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
   background-image: url('/app/images/panel/midnight-logo.svg');
 }
 
-#ivzflex {
+.PremiumPromoModal__main-content-container {
+  height: 210px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 210px;
   justify-content: space-evenly;
 }
 
