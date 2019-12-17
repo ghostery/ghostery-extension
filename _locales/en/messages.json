@@ -2353,8 +2353,7 @@
 	  "message": "Try Ghostery Midnight"
 	},
   	"seven_day_free_trial": {
-	  "message": "7 Day Free Trial ($$14/mo)",
-	  "description": "Do not localize currency. Use the $14 USD amount. The second $ is needed to escape the special meaning of $"
+	  "message": "7 Day Free Trial (&#36;14/mo)"
 	},
   	"full_coverage_protection_promise": {
 	  "message": "Get full-coverage protection across all browsers & apps on your device"
@@ -2375,8 +2374,7 @@
 	  "message": "Download for free"
 	},
   	"support_ghostery_for_2_instead": {
-	  "message": "Support Ghostery for $$2/mo instead",
-	  "description": "Do not localize currency. Use the $2 USD amount. The second $ is needed to escape the special meaning of $"
+	  "message": "Support Ghostery for &#36;2/mo instead"
 	},
   	"no_thanks_continue_with_basic": {
 	  "message": "No thanks, continue with basic"
