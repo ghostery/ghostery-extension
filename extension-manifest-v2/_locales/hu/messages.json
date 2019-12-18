@@ -728,7 +728,7 @@
 		"message": "A funkció már aktív a Cliqz MyOffrz vezérlőpultjában."
 	},
 	"panel_detail_rewards_edge_text": {
-		"message": "Ghostery Rewards are not supported in Edge browser"
+		"message": "A Ghostery Rewards nem támogatott az Edge böngészőben"
 	},
 	"panel_detail_rewards_loading": {
 		"message": "Rewards betöltése…"
@@ -785,7 +785,7 @@
 		"message": "Úgy tűnik, műszaki hiba lépett fel. Próbálja meg később."
 	},
 	"email_address_in_use": {
-		"message": "That email address is already in use. Please choose another. "
+		"message": "Az e-mail cím már használatban van. Kérjük, válasszon másik."
 	},
 	"short_description": {
 		"description": "A short description of this extension (Ghostery).",
@@ -1662,7 +1662,7 @@
 		"message": "Fiók sikeresen létrehozva"
 	},
 	"hub_create_account_toast_error": {
-		"message": "That email address is already in use. Please choose another."
+		"message": "Az e-mail cím már használatban van. Kérjük, válasszon másik."
 	},
 	"enable_when_paused": {
 		"message": "E funkció használatához térjen vissza a Ghostery-hez."
@@ -1997,7 +1997,7 @@
 		"message": "Fejlesztett Anti-Tracking"
 	},
 	"panel_rewards_view__reward": {
-		"message": "Reward"
+		"message": "Jutalom"
 	},
 	"panel_rewards_view__rewards": {
 		"message": "Rewards"
@@ -2006,73 +2006,73 @@
 		"message": ""
 	},
 	"myoffrz_affiliate_link": {
-		"message": "affiliate link"
+		"message": "partnerhirdetés"
 	},
 	"myoffrz_copy_and_go": {
-		"message": "copy & go"
+		"message": "másold és menj"
 	},
 	"myoffrz_feedback_option1": {
-		"message": "I already used the offer"
+		"message": "Már felhasználtam az ajánlatot"
 	},
 	"myoffrz_feedback_option2": {
-		"message": "It's not a good deal"
+		"message": "Ez nem jó ajánlat"
 	},
 	"myoffrz_feedback_option3": {
-		"message": "It's not relevant to me"
+		"message": "Számomra nem releváns"
 	},
 	"myoffrz_feedback_option4": {
-		"message": "Other reasons"
+		"message": "Más okok"
 	},
 	"myoffrz_feedback_title": {
-		"message": "Feedback"
+		"message": "Visszajelzés"
 	},
 	"myoffrz_get_code": {
-		"message": "Get code"
+		"message": "Megkapni a kódot"
 	},
 	"myoffrz_offer_removed": {
-		"message": "This offer was removed."
+		"message": "Ezt az ajánlatot eltávolították."
 	},
 	"myoffrz_optional": {
-		"message": "Optional"
+		"message": "Választható"
 	},
 	"myoffrz_powered_by_offrz": {
-		"message": "POWERED BY MyOffrz"
+		"message": "SZOLGÁLTATÓ: MyOffrz"
 	},
 	"myoffrz_show_code": {
-		"message": "Show code"
+		"message": "Kód megjelenítése"
 	},
 	"myoffrz_show_more": {
-		"message": "Show more"
+		"message": "Több megjelenítése"
 	},
 	"myoffrz_skip": {
-		"message": "Skip"
+		"message": "Konténer"
 	},
 	"myoffrz_welcome_link": {
-		"message": "How It Works"
+		"message": "Így működik"
 	},
 	"myoffrz_welcome_text": {
-		"message": "As you browse the Internet, we are searching for attractive offers based on your interests."
+		"message": "Az Internet böngészése közben vonzó ajánlatokat keresünk az Ön érdekei alapján."
 	},
 	"myoffrz_welcome_title": {
-		"message": "Hello!"
+		"message": "Szia!"
 	},
 	"myoffrz_why_offers_text": {
-		"message": "No personal data leaves your device. Your browser automatically identifies what you might be interested in based on your previous use. "
+		"message": "A személyes adatokat nem távolítja el az eszközéről. Böngészője automatikusan meghatározza, hogy mi a legutóbbi felhasználása alapján."
 	},
 	"myoffrz_why_see_these_offers": {
-		"message": "Why do I see these offers?"
+		"message": "Miért látom ezeket az ajánlatokat?"
 	},
 	"myoffrz_why_see_this": {
-		"message": "Why do I see this?"
+		"message": "Miért látom ezt?"
 	},
 	"myoffrz_badge_text_new": {
-		"message": "NEW"
+		"message": "ÚJ"
 	},
 	"myoffrz_conditions": {
-		"message": "Conditions"
+		"message": "Feltételek"
 	},
 	"myoffrz_turnoff_rewards": {
-		"message": "Turn off Ghostery Rewards"
+		"message": "Kapcsolja ki a Ghostery Rewards szolgáltatást"
 	},
 	"OFFERS_ALREADY_TRANSLATED": {
 		"message": ""
@@ -2145,10 +2145,10 @@
 		}
 	},
 	"myoffrz_expires_in_minute": {
-		"message": "Available for 1 minute"
+		"message": "1 percig elérhető"
 	},
 	"myoffrz_expires_in_minutes": {
-		"message": "Available for $COUNT$ minutes",
+		"message": "$COUNT$ percig elérhető",
 		"placeholders": {
 			"count": {
 				"content": "$1"
@@ -2350,35 +2350,35 @@
 		"message": "Beállítások"
 	},
   	"try_ghostery_midnight": {
-	  "message": "Try Ghostery Midnight"
+	  "message": "Próbálja ki a Ghostery Midnight-t"
 	},
   	"seven_day_free_trial": {
-	  "message": "7 Day Free Trial ($$14/mo)",
+	  "message": "7 napos ingyenes próbaverzió (&#36; 14/hó)",
 	  "description": "Do not localize currency. Use the $14 USD amount. The second $ is needed to escape the special meaning of $"
 	},
   	"full_coverage_protection_promise": {
-	  "message": "Get full-coverage protection across all browsers & apps on your device"
+	  "message": "Teljes védelmet élvezhet az eszköz összes böngészőjével és alkalmazásával"
 	},
   	"system_wide_tracker_and_ad_blocking": {
-	  "message": "System-wide tracker & ad-blocking"
+	  "message": "Rendszeres követő és reklámblokkoló szoftver"
 	},
   	"built_in_vpn": {
-	  "message": "Built-in VPN"
+	  "message": "Beépített VPN"
 	},
   	"custom_whitelist_options": {
-	  "message": "Custom whitelist options"
+	  "message": "engedélyezett egyéni"
 	},
   	"historical_tracking_insights": {
-	  "message": "Historical tracking insights"
+	  "message": "Naplózott követési statisztika"
 	},
   	"download_for_free": {
-	  "message": "Download for free"
+	  "message": "Töltse le ingyen"
 	},
   	"support_ghostery_for_2_instead": {
-	  "message": "Support Ghostery for $$2/mo instead",
+	  "message": "Ehelyett támogassa a Ghostery-t &#36; 2 / hónap alatt",
 	  "description": "Do not localize currency. Use the $2 USD amount. The second $ is needed to escape the special meaning of $"
 	},
   	"no_thanks_continue_with_basic": {
-	  "message": "No thanks, continue with basic"
+	  "message": "Nem, köszönöm, folytassa az alapszinttel"
 	}
 }

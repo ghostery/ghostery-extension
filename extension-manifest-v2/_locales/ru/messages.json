@@ -2353,7 +2353,7 @@
 	  "message": "Попробовать Ghostery Midnight"
 	},
   	"seven_day_free_trial": {
-	  "message": "7-дневная бесплатная бета-версия (14 $ в месяц)",
+	  "message": "7-дневная бесплатная бета-версия (14 &#36; в месяц)",
 	  "description": "Do not localize currency. Use the $14 USD amount. The second $ is needed to escape the special meaning of $"
 	},
   	"full_coverage_protection_promise": {
@@ -2375,7 +2375,7 @@
 	  "message": "Загрузить бесплатно"
 	},
   	"support_ghostery_for_2_instead": {
-	  "message": "Поддержка Ghostery за 22 $ вместо",
+	  "message": "Поддержка Ghostery за 2 &#36; вместо",
 	  "description": "Do not localize currency. Use the $2 USD amount. The second $ is needed to escape the special meaning of $"
 	},
   	"no_thanks_continue_with_basic": {

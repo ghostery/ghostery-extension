@@ -2353,7 +2353,7 @@
 	  "message": "試用 Ghostery Midnight"
 	},
   	"seven_day_free_trial": {
-	  "message": "7 天免費試用（$$14 / 月）",
+	  "message": "7 天免費試用（&#36;14 / 月）",
 	  "description": "Do not localize currency. Use the $14 USD amount. The second $ is needed to escape the special meaning of $"
 	},
   	"full_coverage_protection_promise": {
@@ -2375,7 +2375,7 @@
 	  "message": "免費下載"
 	},
   	"support_ghostery_for_2_instead": {
-	  "message": "或以 $$2 / 月來支持 Ghostery",
+	  "message": "或以 &#36;2 / 月來支持 Ghostery",
 	  "description": "Do not localize currency. Use the $2 USD amount. The second $ is needed to escape the special meaning of $"
 	},
   	"no_thanks_continue_with_basic": {

@@ -2353,7 +2353,7 @@
 	  "message": "Testen Sie Ghostery Midnight"
 	},
   	"seven_day_free_trial": {
-	  "message": "7 Tage kostenlose Testversion ($$14/mtl.)",
+	  "message": "7 Tage kostenlose Testversion (&#36;14/mtl.)",
 	  "description": "Do not localize currency. Use the $14 USD amount. The second $ is needed to escape the special meaning of $"
 	},
   	"full_coverage_protection_promise": {
@@ -2375,7 +2375,7 @@
 	  "message": "Kostenlos herunterladen"
 	},
   	"support_ghostery_for_2_instead": {
-	  "message": "Unterstützen Sie Ghostery stattdessen für $$22/mtl.",
+	  "message": "Unterstützen Sie Ghostery stattdessen für &#36;2/mtl.",
 	  "description": "Do not localize currency. Use the $2 USD amount. The second $ is needed to escape the special meaning of $"
 	},
   	"no_thanks_continue_with_basic": {
