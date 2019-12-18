@@ -58,7 +58,7 @@ const PremiumPromoModal = (props) => {
 							<div className="PremiumPromoModal__header-beta-icon" />
 						</div>
 					</div>
-					<div className="PremiumPromoModal__sub-header" dangerouslySetInnerHTML={{ __html: `${t('full_coverage_protection_promise')}. ${t('seven_day_free_trial')}` }} />
+					<div className="PremiumPromoModal__sub-header">{t('full_coverage_protection_promise')}</div>
 					<div className="PremiumPromoModal__features-container">
 						<div className="PremiumPromoModal__feature-column">
 							<div className="PremiumPromoModal__feature">
@@ -78,14 +78,12 @@ const PremiumPromoModal = (props) => {
 							<div className="PremiumPromoModal__feature">
 								<span className="PremiumPromoModal__checked-circle-icon" />
 								<div className="PremiumPromoModal__feature-text">
-									{t('custom_whitelist_options')}
+									{t('historical_tracking_insights')}
 								</div>
 							</div>
 							<div className="PremiumPromoModal__feature">
 								<span className="PremiumPromoModal__checked-circle-icon" />
-								<div className="PremiumPromoModal__feature-text">
-									{t('historical_tracking_insights')}
-								</div>
+								<div className="PremiumPromoModal__feature-text" dangerouslySetInnerHTML={{ __html: t('seven_day_free_trial') }} />
 							</div>
 						</div>
 					</div>
