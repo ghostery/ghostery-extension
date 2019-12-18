@@ -2353,7 +2353,7 @@
 	  "message": "Ghostery Midnight를 사용해 보세요"
 	},
   	"seven_day_free_trial": {
-	  "message": "7일 무료 평가판($$14/월)",
+	  "message": "7일 무료 평가판(&#36;14/월)",
 	  "description": "Do not localize currency. Use the $14 USD amount. The second $ is needed to escape the special meaning of $"
 	},
   	"full_coverage_protection_promise": {
@@ -2375,7 +2375,7 @@
 	  "message": "무료 다운로드"
 	},
   	"support_ghostery_for_2_instead": {
-	  "message": "월 $$2로 Ghostery를 후원합니다",
+	  "message": "월 &#36;2로 Ghostery를 후원합니다",
 	  "description": "Do not localize currency. Use the $2 USD amount. The second $ is needed to escape the special meaning of $"
 	},
   	"no_thanks_continue_with_basic": {

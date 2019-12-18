@@ -2353,7 +2353,7 @@
 	  "message": "Experimente o Ghostery Midnight"
 	},
   	"seven_day_free_trial": {
-	  "message": "Avaliação gratuita de 7 dias ($$14/mês)",
+	  "message": "Avaliação gratuita de 7 dias (&#36;14/mês)",
 	  "description": "Do not localize currency. Use the $14 USD amount. The second $ is needed to escape the special meaning of $"
 	},
   	"full_coverage_protection_promise": {
@@ -2375,7 +2375,7 @@
 	  "message": "Baixe grátis"
 	},
   	"support_ghostery_for_2_instead": {
-	  "message": "Apoie o Ghostery por $$2/mês",
+	  "message": "Apoie o Ghostery por &#36;2/mês",
 	  "description": "Do not localize currency. Use the $2 USD amount. The second $ is needed to escape the special meaning of $"
 	},
   	"no_thanks_continue_with_basic": {

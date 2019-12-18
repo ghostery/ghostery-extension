@@ -2353,7 +2353,7 @@
 	  "message": "Ghostery Midnight proberen"
 	},
   	"seven_day_free_trial": {
-	  "message": "Gratis proefperiode van 7 dagen ($$14/mnd)",
+	  "message": "Gratis proefperiode van 7 dagen (&#36;14/mnd)",
 	  "description": "Do not localize currency. Use the $14 USD amount. The second $ is needed to escape the special meaning of $"
 	},
   	"full_coverage_protection_promise": {
@@ -2375,7 +2375,7 @@
 	  "message": "Gratis downloaden"
 	},
   	"support_ghostery_for_2_instead": {
-	  "message": "Steun in plaats daarvan Ghostery voor $$2/mnd",
+	  "message": "Steun in plaats daarvan Ghostery voor &#36;2/mnd",
 	  "description": "Do not localize currency. Use the $2 USD amount. The second $ is needed to escape the special meaning of $"
 	},
   	"no_thanks_continue_with_basic": {
