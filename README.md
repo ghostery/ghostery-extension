@@ -89,11 +89,15 @@ $ yarn docs
 ```
 
 ## Internationalization
-We use Transifex and their CLI to manage our translation files. Follow [these instructions](https://docs.transifex.com/client/installing-the-client) to get started.
 
-Note: There is no need to run `tx config` as the project has already been configured to work with Transifex. See the configuration file in `.tx/config`.
+This project is configured to use the Transifex CLI. See their [documentation](https://docs.transifex.com/client/installing-the-client) to get started. *Note*:  You do not need to run `tx config` as the project [configuration file](.tx/config) has already been generated.
 
-Next, [generate an API Token](https://www.transifex.com/user/settings/api/), run `tx init`, and paste the generated API Token when prompted.  This will allow the computer to push (Submit) and pull (Download) files to/from Transifex.
+Generate a Transifex API Token [link](https://www.transifex.com/user/settings/api/)
+
+```sh
+# Configure the Transifex CLI
+$ tx init
+```
 
 ```sh
 # Submit translation files to Transifex
