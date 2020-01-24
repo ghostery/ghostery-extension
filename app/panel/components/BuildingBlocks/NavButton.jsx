@@ -12,7 +12,7 @@
  */
 
 import React from 'react';
-import ReactSVG from 'react-svg';
+import { ReactSVG } from 'react-svg';
 import { NavLink } from 'react-router-dom';
 
 /**

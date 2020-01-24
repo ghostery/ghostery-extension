@@ -48,7 +48,8 @@ module.exports = {
 		}],
 		'func-names': [0],
 		'indent': [1, 'tab', {
-			'SwitchCase': 1
+			'SwitchCase': 1,
+			'ignoredNodes': ['TemplateLiteral']
 		}],
 		'lines-between-class-members': [1],
 		'max-len': [0],
@@ -66,6 +67,7 @@ module.exports = {
 		'operator-linebreak': [0],
 		'prefer-object-spread': [0], // TODO: enable this check
 		'space-before-function-paren': [2, 'never'],
+		'template-curly-spacing': [0],
 
 		// Plugin: Import
 		'import/no-cycle': [0],
