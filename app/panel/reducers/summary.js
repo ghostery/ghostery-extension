@@ -111,9 +111,17 @@ const _updateSitePolicy = (state, action) => {
 		// Handles extension pages. Adds the extension ID to the white/black list
 		const pageUrlTokens = pageUrl.split('/');
 		host = pageUrlTokens.length > 2 ? pageUrlTokens[2] : pageHost.replace(/^www\./, '');
+	} else if (pageHost === 'localhost') {
+		// Handle localhost port number
+		if (pageUrl.includes(':')) {
+			const port = pageUrl.split(':');
+			host = `localhost:${port[port.length - 1]}`;
+			host = host.substring(0, host.length - 1);
+		}
 	} else {
 		host = pageHost.replace(/^www\./, '');
 	}
+
 	let updated_site_policy;
 	let updated_blacklist = site_blacklist.slice(0);
 	let updated_whitelist = site_whitelist.slice(0);
