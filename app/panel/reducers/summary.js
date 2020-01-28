@@ -112,7 +112,7 @@ const _updateSitePolicy = (state, action) => {
 		const pageUrlTokens = pageUrl.split('/');
 		host = pageUrlTokens.length > 2 ? pageUrlTokens[2] : pageHost.replace(/^www\./, '');
 	} else if (pageHost === 'localhost') {
-		// Handle localhost port number
+		// Handle localhost port number.
 		if (pageUrl.includes(':')) {
 			const port = pageUrl.split(':');
 			host = `localhost:${port[port.length - 1]}`;
