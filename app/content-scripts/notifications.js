@@ -26,7 +26,6 @@ import bigLogoImage from '../data-images/popup/bigLogoImage';
 const msg = msgModule('notifications');
 const { sendMessage } = msg;
 const { onMessage } = chrome.runtime;
-const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 
 /**
  * Use to call init to initialize functionality
@@ -621,15 +620,11 @@ const NotificationsContentScript = (function(win, doc) {
 			url = window.webkitURL.createObjectURL(textFileAsBlob);
 		}
 
-		if (IS_EDGE) { // @EDGE does not support chrome.downloads
-			window.navigator.msSaveBlob(textFileAsBlob, fileNameToSaveAs);
-		} else {
-			const link = createEl('a');
-			link.href = url;
-			link.setAttribute('download', fileNameToSaveAs);
-			document.body.appendChild(link);
-			link.click();
-		}
+		const link = createEl('a');
+		link.href = url;
+		link.setAttribute('download', fileNameToSaveAs);
+		document.body.appendChild(link);
+		link.click();
 	};
 	/**
 	 * Determine if a DOM element is visible to user.

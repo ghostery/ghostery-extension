@@ -26,7 +26,6 @@ const FREQUENCIES = { // in milliseconds
 const CRITICAL_METRICS = ['install', 'install_complete', 'upgrade', 'active', 'engaged', 'uninstall'];
 const CAMPAIGN_METRICS = ['install', 'active', 'uninstall'];
 const { METRICS_SUB_DOMAIN, EXTENSION_VERSION, BROWSER_INFO } = globals;
-const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const MAX_DELAYED_PINGS = 100;
 
 // Note that this threshold is intentionally different from the 30 second threshold in PolicySmartBlock,
@@ -61,49 +60,26 @@ class Metrics {
 	 */
 	init(JUST_INSTALLED) {
 		if (JUST_INSTALLED) {
-			if (!IS_EDGE) {
-				return new Promise((resolve) => {
-					let foundUTM = false;
-					// This query fails on Edge
-					chrome.tabs.query({
-						url: [
-							'https://www.ghostery.com/*'
-						]
-					}, (tabs) => {
-						tabs.forEach((tab) => {
-							if (foundUTM) { return; }
-
-							const query = processUrlQuery(tab.url);
-							if (!query.utm_source || !query.utm_campaign) { return; }
-
-							this.utm_source = query.utm_source;
-							this.utm_campaign = query.utm_campaign;
-							foundUTM = true;
-							prefsSet({
-								utm_source: this.utm_source,
-								utm_campaign: this.utm_campaign
-							});
-						});
-						resolve();
-					});
-				});
-			}
 			return new Promise((resolve) => {
-				chrome.tabs.query({}, (tabs) => {
-					let foundUTM = false;
+				let foundUTM = false;
+				chrome.tabs.query({
+					url: [
+						'https://www.ghostery.com/*'
+					]
+				}, (tabs) => {
 					tabs.forEach((tab) => {
 						if (foundUTM) { return; }
-						if (tab.url && tab.url.includes('https://www.ghostery.com/')) {
-							const query = processUrlQuery(tab.url);
-							if (!query.utm_source || !query.utm_campaign) { return; }
-							this.utm_source = query.utm_source;
-							this.utm_campaign = query.utm_campaign;
-							foundUTM = true;
-							prefsSet({
-								utm_source: this.utm_source,
-								utm_campaign: this.utm_campaign
-							});
-						}
+
+						const query = processUrlQuery(tab.url);
+						if (!query.utm_source || !query.utm_campaign) { return; }
+
+						this.utm_source = query.utm_source;
+						this.utm_campaign = query.utm_campaign;
+						foundUTM = true;
+						prefsSet({
+							utm_source: this.utm_source,
+							utm_campaign: this.utm_campaign
+						});
 					});
 					resolve();
 				});
@@ -418,7 +394,7 @@ class Metrics {
 			frequencies = ['all']; // eslint-disable-line no-param-reassign
 		}
 
-		if (!IS_EDGE && typeof fetch === 'function') {
+		if (typeof fetch === 'function') {
 			const headers = new Headers();
 			headers.append('Content-Type', 'image/gif');
 
@@ -441,7 +417,7 @@ class Metrics {
 
 				log(`sending ${type} ping with ${frequency} frequency`);
 
-				if (!IS_EDGE && typeof fetch === 'function') {
+				if (typeof fetch === 'function') {
 					const request = new Request(metrics_url, options);
 					fetch(request).catch((err) => {
 						log(`Error sending Metrics ${type} ping`, err);

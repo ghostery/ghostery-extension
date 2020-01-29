@@ -20,7 +20,6 @@ import { ToggleCheckbox } from '../../../shared-components';
 
 const { IS_CLIQZ } = globals;
 const IS_FIREFOX = (globals.BROWSER_INFO.name === 'firefox');
-const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 
 /**
  * A Functional React component for rendering the Home View
@@ -43,7 +42,7 @@ const HomeView = (props) => {
 	if (globals.BROWSER_INFO) {
 		if (IS_FIREFOX) {
 			headerInfoText = t('hub_home_header_info_opted_out');
-		} else if (IS_CLIQZ || IS_EDGE) {
+		} else if (IS_CLIQZ) {
 			headerInfoText = t('hub_home_header_info_cliqz');
 		}
 	}
