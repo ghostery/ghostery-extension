@@ -12,7 +12,7 @@ Ghostery helps you browse smarter by giving you control over ads and tracking te
 
 **Opera** &ndash; [Download](https://addons.opera.com/en/extensions/details/ghostery/)
 
-**Edge** &ndash; [Download](https://www.microsoft.com/en-us/store/p/ghostery/9nblggh52ngz)
+**Edge** &ndash; [Download](https://microsoftedge.microsoft.com/addons/detail/fclbdkbhjlgkbpfldjodgjncejkkjcme)
 
 ## Installation
 
