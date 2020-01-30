@@ -11,11 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import globals from '../../../src/classes/Globals';
 import { log } from '../../../src/utils/common';
-
-const { onMessage } = chrome.runtime;
-const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 
 /**
  * Default callback handler for sendMessage. Allows us to handle
@@ -38,49 +34,7 @@ const defaultCallback = () => {
  * @param  {Object} 	message 	message data
  * @return {Promise}
  */
-let MESSAGE_ID = 0;
-const listenerSet = new Set();
-const resolveMap = new Map();
-const NO_ORIGIN = 'no_origin';
 export function sendMessageInPromise(name, message, origin = '') {
-	// On Edge 39.14965.1001.0 callback is not called when multiple
-	// Edge instances are running. So instead we pass the message back
-	// from background. See onMessageHandler, HANDLE UNIVERSAL EVENTS HERE
-	// in src/background.js. To be removed, once Edge is fixed.
-	if (IS_EDGE) {
-		MESSAGE_ID++;
-		const messageId = MESSAGE_ID.toString();
-		return new Promise((resolve) => {
-			resolveMap.set(messageId, resolve);
-			const key = (origin === '') ? NO_ORIGIN : origin;
-			if (!listenerSet.has(key)) {
-				listenerSet.add(key);
-				// We need to map individual listeners by origin for each
-				// instantiation (panel, hub, content scripts) since Edge does
-				// not allow a global listener for all uses
-				onMessage.addListener((request, sender, sendResponse) => {
-					const callback = resolveMap.get(request.name);
-					if (callback) {
-						callback(request.message);
-						resolveMap.delete(request.message);
-					}
-					if (sendResponse) {
-						sendResponse();
-					}
-				});
-			}
-			chrome.runtime.sendMessage({
-				name,
-				message,
-				messageId,
-				origin,
-			}, () => {
-				if (chrome.runtime.lastError) {
-					log('sendMessageInPromise error:', chrome.runtime.lastError);
-				}
-			});
-		});
-	}
 	return new Promise((resolve) => {
 		chrome.runtime.sendMessage({
 			name,
@@ -110,9 +64,6 @@ export function sendMessageInPromise(name, message, origin = '') {
  */
 export function sendMessage(name, message, origin = '', callback = defaultCallback()) {
 	log('Panel sendMessage: sending to background', name);
-	// @EDGE chrome.runtime.sendMessage(message) works, but the `callback` of
-	// chrome.runtime.sendMessage(message, callback) fails to
-	// execute and chrome.runtime.lastError is undefined.
 	return chrome.runtime.sendMessage({
 		name,
 		message,
