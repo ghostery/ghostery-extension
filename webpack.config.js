@@ -102,7 +102,7 @@ module.exports = {
 				return chrome.i18n.getMessage(messageName, substitutions);
 			}
 		}),
-		// For @EDGE, set `chrome` global
+		// Set `chrome` global for browsers that don't support it
 		new webpack.BannerPlugin({
 			banner: 'if(typeof browser!=="undefined"){chrome=browser;}',
 			raw: true,

@@ -13,7 +13,7 @@
 
 import React from 'react';
 import ClassNames from 'classnames';
-import ReactSVG from 'react-svg';
+import { ReactSVG } from 'react-svg';
 
 import StatsGraph from './BuildingBlocks/StatsGraph';
 import I18nWithLink from '../../shared-components/I18nWithLink';

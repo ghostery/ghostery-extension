@@ -136,9 +136,6 @@ const _exportSettings = (state, action) => {
 	let updated_exportResultText = state.exportResultText;
 	if (result && result !== 'RESERVED_PAGE') {
 		updated_settings_last_exported = Number((new Date()).getTime());
-		if (globals.BROWSER_INFO.name === 'edge') {
-			window.close();
-		}
 		moment.locale(state.language).toLowerCase().replace('_', '-');
 		updated_exportResultText = `${t('settings_export_success')} ${moment(updated_settings_last_exported).format('LLL')}`;
 		updated_actionSuccess = true;

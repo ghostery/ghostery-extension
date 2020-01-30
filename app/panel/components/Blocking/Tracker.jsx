@@ -14,7 +14,7 @@
 /* eslint react/no-array-index-key: 0 */
 
 import React from 'react';
-import ReactSVG from 'react-svg';
+import { ReactSVG } from 'react-svg';
 import ClassNames from 'classnames';
 
 import globals from '../../../../src/classes/Globals';

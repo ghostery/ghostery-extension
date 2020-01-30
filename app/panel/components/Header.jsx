@@ -13,7 +13,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ReactSVG from 'react-svg';
+import { ReactSVG } from 'react-svg';
 import ClassNames from 'classnames';
 import Tooltip from './Tooltip';
 import HeaderMenu from './HeaderMenu';

@@ -12,7 +12,7 @@
  */
 
 import React from 'react';
-import ReactSVG from 'react-svg';
+import { ReactSVG } from 'react-svg';
 import ClassNames from 'classnames';
 import Tooltip from './Tooltip';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';

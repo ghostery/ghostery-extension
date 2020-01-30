@@ -9,10 +9,12 @@
 	"author": "Ghostery",
 	"name": "__MSG_name__",
 	"short_name": "Ghostery",
-	"version": "8.4.6",
-	"version_name": "8.4.6",
+	"version": "8.4.7",
+	"version_name": "8.4.7",
 	"default_locale": "en",
 	"description": "__MSG_short_description__",
+	"debug":  true,
+	"log": true,
 	"icons": {
 		"16": "app/images/icon16.png",
 		"48": "app/images/icon48.png",
@@ -93,7 +95,7 @@
 		],
 		"persistent": true
 	},
-	"minimum_edge_version": "33.14281.1000.0",
+	"minimum_edge_version": "79.0.309",
 	"minimum_chrome_version": "58",
 	"minimum_opera_version": "45",
 	"web_accessible_resources": [

@@ -1,4 +1,10 @@
-### GHOSTERY 8.4.6 (December 23, 2019)
+### GHOSTERY 8.4.7 (UNRELEASED)
+
++ Migrate to the new Chromium-based Edge browser (#492)
++ Fixes issue when adding localhost to Trusted Sites with port value (Fixes #470)
++ More aggressive cookie-blocking via Anti-Tracking (#490)
+
+### GHOSTERY 8.4.6 (December 24, 2019)
 
 + Modularize Rewards code (#462)
 + Updated promo modals for Ghostery Midnight (#485, #486)

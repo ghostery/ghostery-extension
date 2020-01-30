@@ -662,30 +662,10 @@ function onMessageHandler(request, sender, callback) {
 		return;
 	}
 	const {
-		name, message, messageId, origin
+		name, message, origin
 	} = request;
 	const { tab } = sender;
 	const tab_id = tab && tab.id;
-	// Edge does not have url on tab object, as of Build 14342_rc1
-	// const tab_url = tab && (tab.url ? tab.url : (sender.url ? sender.url : ''));
-
-	// On Edge 39.14965.1001.0 callback is lost when multiple
-	// Edge instances running. So instead we shoot message back
-	// See sendMessageInPromise in app/js/utils/msg.js where we
-	// listen to this message. To be removed, once Edge fixed
-	if (IS_EDGE && messageId) {
-		if (tab_id) {
-			// eslint-disable-next-line no-param-reassign
-			callback = function(result) {
-				utils.sendMessage(tab_id, messageId, result);
-			};
-		} else {
-			// eslint-disable-next-line no-param-reassign
-			callback = function(result) {
-				utils.sendMessageToPanel(messageId, result);
-			};
-		}
-	}
 
 	// HANDLE PAGE EVENTS HERE
 	if (origin === 'account_pages') {
@@ -803,10 +783,6 @@ function onMessageHandler(request, sender, callback) {
 		return true;
 	}
 	if (name === 'account.register') {
-		if (!IS_EDGE) {
-			const senderOrigin = (sender.url.indexOf('templates/panel.html') >= 0) ? 'extension' : 'setup';
-			metrics.ping(`create_account_${senderOrigin}`);
-		}
 		const {
 			email, confirmEmail, password, firstName, lastName
 		} = message;
@@ -1333,7 +1309,6 @@ function addCommonGhosteryAndAntitrackingListeners() {
 	let urlFilters = ['http://*/*', 'https://*/*', 'ws://*/*', 'wss://*/*'];
 	if (IS_EDGE || IS_FIREFOX) {
 		// Prevent Firefox from asking users to re-validate permissions on upgrade
-		// Edge doesn't support WebSockets
 		urlFilters = urlFilters.reduce((accumulator, currentValue) => {
 			if (!currentValue.match(/^wss?:\/\//)) {
 				accumulator.push(currentValue);
@@ -1451,7 +1426,7 @@ function initializeEventListeners() {
 	});
 
 	// Fired when another extension sends a message, accepts message if it's from Ghostery Tab
-	// NOTE: not supported on Edge and Firefox < v54
+	// NOTE: not supported on Firefox < v54
 	if (typeof chrome.runtime.onMessageExternal === 'object') {
 		chrome.runtime.onMessageExternal.addListener((request, sender, sendResponse) => {
 			const recognized = [
@@ -1598,7 +1573,7 @@ function initializeGhosteryModules() {
 					// We introduce these new features initially disabled.
 					conf.enable_ad_block = false;
 					conf.enable_anti_tracking = false;
-					// Enable Offers except on Edge or Cliqz
+					// Enable Offers except or Cliqz
 					conf.enable_offers = true;
 				} else if (globals.JUST_UPGRADED_FROM_8_1) {
 					// These users already had human web, adblocker and antitracking, so we respect their choice
@@ -1612,7 +1587,7 @@ function initializeGhosteryModules() {
 					conf.enable_ad_block = !adblocker.isDisabled;
 					conf.enable_anti_tracking = !antitracking.isDisabled;
 					conf.enable_human_web = !humanweb.isDisabled && !(IS_FIREFOX && globals.JUST_INSTALLED);
-					conf.enable_offers = !offers.isDisabled && !(IS_FIREFOX && globals.JUST_INSTALLED) && !IS_EDGE;
+					conf.enable_offers = !offers.isDisabled && !(IS_FIREFOX && globals.JUST_INSTALLED);
 				}
 
 				const myoffrzShouldMigrate = conf.rewards_opted_in !== undefined && cliqz.prefs.get('myoffrz.opted_in', undefined) === undefined;
