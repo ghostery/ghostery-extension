@@ -17,7 +17,6 @@
  * @namespace  NotificationsContentScript
  */
 import msgModule from './utils/msg';
-import globals from '../../src/classes/Globals';
 import { log } from '../../src/utils/common';
 import xImage from '../data-images/popup/xImage';
 import logoImage from '../data-images/popup/logoImage';

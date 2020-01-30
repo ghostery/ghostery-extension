@@ -34,7 +34,6 @@ import {
 	updateTrackerBlocked, updateCategoryBlocked, updateBlockAllTrackers, toggleExpandAll
 } from '../utils/blocking';
 import { sendMessage } from '../utils/msg';
-import globals from '../../../src/classes/Globals';
 import { objectEntries } from '../../../src/utils/common';
 
 const initialState = {
