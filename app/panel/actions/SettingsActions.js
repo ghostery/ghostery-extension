@@ -30,7 +30,6 @@ import {
 } from '../constants/constants';
 import { sendMessageInPromise } from '../utils/msg';
 import { hashCode } from '../../../src/utils/common';
-import globals from '../../../src/classes/Globals';
 
 /**
  * Fetch settings data from background
