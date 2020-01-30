@@ -93,7 +93,6 @@ class BrowserButton {
 				// provide callbacks, we must check that the tab exists again to compensate for a race
 				// condition that occurs if a user closes the tab while the trackers are still loading
 				getTab(tabId, () => {
-					// @EDGE setTitle not currently supported by EDGE
 					if (typeof chrome.browserAction.setTitle === 'function') {
 						chrome.browserAction.setTitle({
 							title: chrome.i18n.getMessage('browser_button_tooltip'),

@@ -55,7 +55,7 @@ class Account extends React.Component {
 	 */
 	clickImportSettings = () => {
 		const browserName = globals.BROWSER_INFO.name;
-		if (browserName === 'edge' || browserName === 'firefox') {
+		if (browserName === 'firefox') {
 			// show ghostery dialog window for import
 			this.props.actions.importSettingsDialog(this.props.settingsData.pageUrl);
 		} else {

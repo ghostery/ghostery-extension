@@ -56,7 +56,6 @@ class ClickOutside extends React.Component {
 	 */
 	clickHandler(e) {
 		// Simple polyfill for Event.composedPath
-		// Edge does not support path or composedPath
 		if (!('composedPath' in Event.prototype)) {
 			Event.prototype.composedPath = function() {
 				const path = [];

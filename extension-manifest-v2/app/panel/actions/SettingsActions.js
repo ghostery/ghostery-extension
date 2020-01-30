@@ -117,8 +117,7 @@ export function exportSettings(pageUrl) {
 	const url = pageUrl || '';
 	// Check if this is http(s) page
 	return function(dispatch) {
-		if (url.search('http') === -1 ||
-			(globals.BROWSER_INFO.name === 'edge' && url.search('www.msn.com/spartan') !== -1)) {
+		if (url.search('http') === -1) {
 			dispatch({
 				type: EXPORT_SETTINGS,
 				data: 'RESERVED_PAGE',
