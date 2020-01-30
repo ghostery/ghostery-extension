@@ -505,6 +505,13 @@
   dependencies:
     tldts-experimental "^5.3.1"
 
+"@cliqz/url-parser@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@cliqz/url-parser/-/url-parser-1.1.1.tgz#53dbc764e19b509beb55bc7e29f5cb099b297c89"
+  integrity sha512-qV5ziZF1nioIt7KbS+akm8y+a7mD7Tm390Lh75Ocrf++PBCTac8gpbWnIUb4/bW6FduR/CZNUTjoT0/RqPwGmw==
+  dependencies:
+    tldts-experimental "^5.3.1"
+
 "@cnakazawa/watch@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.3.tgz#099139eaec7ebf07a27c1786a3ff64f39464d2ef"
@@ -3947,6 +3954,17 @@ gud@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/gud/-/gud-1.0.0.tgz#a489581b17e6a70beca9abe3ae57de7a499852c0"
   integrity sha512-zGEOVKFM5sVPPrYs7J5/hYEw2Pof8KCyOwyhG8sAF26mCAeUFAcYPu1mwB7hhpIP29zOIBaDqwuHdLp0jvZXjw==
+
+handlebars@^4.5.3:
+  version "4.7.2"
+  resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.7.2.tgz#01127b3840156a0927058779482031afe0e730d7"
+  integrity sha512-4PwqDL2laXtTWZghzzCtunQUTLbo31pcCJrd/B/9JP8XbhVzpS5ZXuKqlOzsd1rtcaLo4KqAn8nl8mkknS4MHw==
+  dependencies:
+    neo-async "^2.6.0"
+    optimist "^0.6.1"
+    source-map "^0.6.1"
+  optionalDependencies:
+    uglify-js "^3.1.4"
 
 handlebars@^4.5.3:
   version "4.7.2"
