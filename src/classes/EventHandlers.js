@@ -37,7 +37,6 @@ import { log } from '../utils/common';
 import { isBug } from '../utils/matcher';
 import * as utils from '../utils/utils';
 
-const IS_EDGE = (globals.BROWSER_INFO.name === 'edge');
 /**
  * This class is a collection of handlers for
  * webNavigation, webRequest and tabs events.
@@ -122,11 +121,8 @@ class EventHandlers {
 			utils.getTab(tabId, (tab) => {
 				if (tab) {
 					tabInfo.setTabInfo(tabId, 'incognito', tab.incognito);
-					// Edge does not have script execute-ready in onCommited
-					if (!IS_EDGE) {
-						// purplebox.createBox() will first check to make sure this is a valid tab
-						this._createBox(tabId);
-					}
+					// purplebox.createBox() will first check to make sure this is a valid tab
+					this._createBox(tabId);
 				}
 			}, () => {
 				// prefetched tabs will return an error from utils.getTab
@@ -164,11 +160,6 @@ class EventHandlers {
 		utils.getActiveTab((tab) => {
 			if (!tab || tab.id !== tab_id || tab.incognito) {
 				return;
-			}
-
-			// Edge does not have script execute-ready in onCommited, so we call this here
-			if (IS_EDGE) {
-				this._createBox(tab_id);
 			}
 
 			const alert_messages = [

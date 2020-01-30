@@ -367,7 +367,6 @@ function _fetchJson(method, url, query, extraHeaders, referrer = 'no-referrer', 
 			credentials
 		};
 		if (method === 'GET' || method === 'HEAD') {
-			// Edge fails to construct Request object for GET and HEAD methods in case body property is present
 			delete options.body;
 		}
 
