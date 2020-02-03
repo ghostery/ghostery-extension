@@ -13,6 +13,7 @@
 
 /* eslint no-use-before-define: 0 */
 
+import { URL } from '@cliqz/url-parser';
 import {
 	UPDATE_SUMMARY_DATA,
 	UPDATE_CLIQZ_MODULE_DATA,
@@ -112,12 +113,8 @@ const _updateSitePolicy = (state, action) => {
 		const pageUrlTokens = pageUrl.split('/');
 		host = pageUrlTokens.length > 2 ? pageUrlTokens[2] : pageHost.replace(/^www\./, '');
 	} else if (pageHost === 'localhost') {
-		// Handle localhost port number.
-		if (pageUrl.includes(':')) {
-			const port = pageUrl.split(':');
-			host = `localhost:${port[port.length - 1]}`;
-			host = host.substring(0, host.length - 1);
-		}
+		const url = new URL(pageUrl);
+		host = url.host;
 	} else {
 		host = pageHost.replace(/^www\./, '');
 	}
