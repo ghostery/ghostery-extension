@@ -113,6 +113,7 @@ const _updateSitePolicy = (state, action) => {
 		const pageUrlTokens = pageUrl.split('/');
 		host = pageUrlTokens.length > 2 ? pageUrlTokens[2] : pageHost.replace(/^www\./, '');
 	} else if (pageHost === 'localhost') {
+		// Include port number with localhost if applicable
 		const url = new URL(pageUrl);
 		host = url.host;
 	} else {
