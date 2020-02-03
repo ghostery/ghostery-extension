@@ -13,6 +13,7 @@
 
 /* eslint no-use-before-define: 0 */
 
+import { URL } from '@cliqz/url-parser';
 import {
 	UPDATE_SUMMARY_DATA,
 	UPDATE_CLIQZ_MODULE_DATA,
@@ -111,9 +112,13 @@ const _updateSitePolicy = (state, action) => {
 		// Handles extension pages. Adds the extension ID to the white/black list
 		const pageUrlTokens = pageUrl.split('/');
 		host = pageUrlTokens.length > 2 ? pageUrlTokens[2] : pageHost.replace(/^www\./, '');
+	} else if (pageHost === 'localhost') {
+		const url = new URL(pageUrl);
+		host = url.host;
 	} else {
 		host = pageHost.replace(/^www\./, '');
 	}
+
 	let updated_site_policy;
 	let updated_blacklist = site_blacklist.slice(0);
 	let updated_whitelist = site_whitelist.slice(0);
