@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import CreateAccountViewContainer from './CreateAccountViewContainer';
-import { register, getUser, updateAccountPromotions } from '../../../Account/AccountActions';
+import { register, getUser, optIntoPromotions } from '../../../Account/AccountActions';
 import { setToast } from '../AppView/AppViewActions';
 
 /**
@@ -37,7 +37,7 @@ const mapDispatchToProps = dispatch => ({
 		setToast,
 		register,
 		getUser,
-		updateAccountPromotions,
+		optIntoPromotions,
 	}), dispatch),
 });
 

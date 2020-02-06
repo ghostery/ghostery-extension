@@ -36,7 +36,6 @@ class CreateAccount extends React.Component {
 			legalConsentChecked: false,
 			legalConsentNotCheckedError: false,
 			password: '',
-			promotionsChecked: false,
 			loading: false,
 			passwordInvalidError: false,
 			passwordLengthError: false,
@@ -70,7 +69,7 @@ class CreateAccount extends React.Component {
 		e.preventDefault();
 		this.setState({ loading: true }, () => {
 			const {
-				email, confirmEmail, firstName, lastName, legalConsentChecked, password, promotionsChecked
+				email, confirmEmail, firstName, lastName, legalConsentChecked, password,
 			} = this.state;
 			this.setState({ loading: true }, () => {
 				if (!validateEmail(email)) {
@@ -119,7 +118,7 @@ class CreateAccount extends React.Component {
 					this.props.actions.register(email, confirmEmail, firstName, lastName, password).then((success) => {
 						this.setState({ loading: false });
 						if (success) {
-							this.props.actions.updateAccountPromotions(promotionsChecked);
+							this.props.actions.optIntoPromotions();
 							new RSVP.Promise((resolve) => {
 								this.props.actions.getUser()
 									.then(() => resolve())
@@ -140,7 +139,7 @@ class CreateAccount extends React.Component {
 	 */
 	render() {
 		const {
-			email, confirmEmail, firstName, lastName, password, promotionsChecked, legalConsentChecked, loading, emailError, confirmEmailError, legalConsentNotCheckedError, passwordInvalidError, passwordLengthError
+			email, confirmEmail, firstName, lastName, password, legalConsentChecked, loading, emailError, confirmEmailError, legalConsentNotCheckedError, passwordInvalidError, passwordLengthError
 		} = this.state;
 		const buttonClasses = ClassNames('button ghostery-button', { loading });
 		return (
@@ -219,14 +218,6 @@ class CreateAccount extends React.Component {
 										<label htmlFor="legalConsentChecked">
 											<I18nWithLink value="create_account_form_legal_consent_checkbox_label" />
 										</label>
-									</div>
-								</div>
-							</div>
-							<div className="row">
-								<div className="small-12 columns">
-									<div id="create-account-promotions">
-										<input id="promotionsChecked" name="promotionsChecked" type="checkbox" checked={promotionsChecked} onChange={this.handleCheckboxChange} />
-										<label htmlFor="promotionsChecked">{t('hub_create_account_checkbox_promotions')}</label>
 									</div>
 								</div>
 							</div>
