@@ -71,7 +71,8 @@ class Policy {
 			// TODO: speed up
 			for (let i = 0; i < num_sites; i++) {
 				// TODO match from the beginning of the string to avoid false matches (somewhere in the querystring for instance)
-				if (replacedUrl === sites[i]) {
+				if (replacedUrl === sites[i]
+					|| this.matchesWildcardOrRegex(replacedUrl, sites[i])) {
 					return sites[i];
 				}
 			}
@@ -119,7 +120,8 @@ class Policy {
 			// TODO: speed up
 			for (let i = 0; i < num_sites; i++) {
 				// TODO match from the beginning of the string to avoid false matches (somewhere in the querystring for instance)
-				if (replacedUrl === sites[i]) {
+				if (replacedUrl === sites[i]
+					|| this.matchesWildcardOrRegex(replacedUrl, sites[i])) {
 					return sites[i];
 				}
 			}
@@ -173,6 +175,25 @@ class Policy {
 			return { block: !allowedOnce, reason: allowedOnce ? BLOCK_REASON_C2P_ALLOWED_ONCE : BLOCK_REASON_BLACKLISTED };
 		}
 		return { block: false, reason: allowedOnce ? BLOCK_REASON_C2P_ALLOWED_ONCE : BLOCK_REASON_GLOBAL_UNBLOCKED };
+	}
+
+	/**
+	 * Check given url against pattern which might be a regex, or a wildcard
+	 * @param  {string} url		site url
+	 * @param  {string} pattern	regex pattern
+	 * @return {boolean}
+	 */
+	matchesWildcardOrRegex(url, pattern) {
+		let regex;
+		try {
+			regex = RegExp(pattern);
+			if (regex.test(url)) { return true; }
+		} catch {
+			const wildcardPattern = pattern.replace(/\*/g, '.*');
+			regex = RegExp(wildcardPattern);
+			if (regex.test(url)) { return true; }
+		}
+		return false;
 	}
 }
 

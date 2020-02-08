@@ -86,9 +86,10 @@ class TrustAndRestrict extends React.Component {
 	/**
 	 * Implement adding site to the list of whitelisted or blacklisted sites
 	 * This routine valides entered url and checks if the entered url is a duplicate, or
-	 * if it has been alreday added to the opposite list. Displays appropriate warnings.
+	 * if it has been already added to the opposite list. Displays appropriate warnings.
 	 */
 	addSite() {
+		// TODO: Implement paygating, use this regex for validating free users who don't have regex/wildcard ability
 		// from node-validator
 		const isValidUrlRegex = /^(?!mailto:)(?:(?:https?|ftp):\/\/)?(?:\S+(?::\S*)?@)?(?:(?:(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))|localhost)(?::\d{2,5})?(?:\/[^\s]*)?$/i;
 		let pageHost;
@@ -121,7 +122,7 @@ class TrustAndRestrict extends React.Component {
 		pageHost = pageHost.toLowerCase().replace(/^(http[s]?:\/\/)?(www\.)?/, '');
 
 		// Check for Validity
-		if (pageHost.length >= 2083 || !isValidUrlRegex.test(pageHost)) {
+		if (pageHost.length >= 2083) {
 			this.showWarning(t('white_black_list_error_invalid_url'));
 			return;
 		}
