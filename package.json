@@ -48,6 +48,7 @@
     "browser-core": "https://github.com/cliqz-oss/browser-core/releases/download/v7.43.1/browser-core-7.43.1.tgz",
     "classnames": "^2.2.5",
     "d3": "^5.15.0",
+    "escape-string-regexp": "^2.0.0",
     "foundation-sites": "^6.6.1",
     "history": "^4.10.1",
     "json-api-normalizer": "^0.4.16",
