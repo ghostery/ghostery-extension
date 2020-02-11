@@ -186,13 +186,13 @@ class Policy {
 		const escapedPattern = pattern.replace(/[|\\{}()[\]^$+*?.-]/g, '\\$&');
 
 		// Input string might be a regex
-		let regex = RegExp(escapedPattern);
+		const regex = RegExp(escapedPattern);
 		if (regex.test(url)) { return true; }
 
 		// or a wildcard
 		const wildcardPattern = escapedPattern.replace(/\*/g, '.*');
-		regex = RegExp(wildcardPattern);
-		if (regex.test(url)) { return true; }
+		const wildcardRegex = RegExp(wildcardPattern);
+		if (wildcardRegex.test(url)) { return true; }
 
 		return false;
 	}
