@@ -14,8 +14,6 @@
  */
 
 /* eslint no-param-reassign: 0 */
-
-import escapeStringRegexp from 'escape-string-regexp';
 import c2pDb from './Click2PlayDb';
 import conf from './Conf';
 import globals from './Globals';
@@ -185,19 +183,17 @@ class Policy {
 	 * @return {boolean}
 	 */
 	matchesWildcardOrRegex(url, pattern) {
-		let regex = escapeStringRegexp(pattern);
-		try {
-			regex = RegExp(pattern);
-			if (regex.test(url)) { return true; }
-		} catch {
-			const wildcardPattern = pattern.replace(/\*/g, '.*');
-			try {
-				regex = RegExp(wildcardPattern);
-				if (regex.test(url)) { return true; }
-			} catch {
-				// Invalid pattern
-			}
-		}
+		const escapedPattern = pattern.replace(/[|\\{}()[\]^$+*?.-]/g, '\\$&');
+
+		// Input string might be a regex
+		let regex = RegExp(escapedPattern);
+		if (regex.test(url)) { return true; }
+
+		// or a wildcard
+		const wildcardPattern = escapedPattern.replace(/\*/g, '.*');
+		regex = RegExp(wildcardPattern);
+		if (regex.test(url)) { return true; }
+
 		return false;
 	}
 }
