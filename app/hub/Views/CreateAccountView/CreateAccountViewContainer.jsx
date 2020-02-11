@@ -207,6 +207,7 @@ CreateAccountViewContainer.propTypes = {
 		setToast: PropTypes.func.isRequired,
 		register: PropTypes.func.isRequired,
 		getUser: PropTypes.func.isRequired,
+		optIntoPromotions: PropTypes.func.isRequired,
 	}).isRequired,
 };
 
