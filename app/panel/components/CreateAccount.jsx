@@ -118,7 +118,6 @@ class CreateAccount extends React.Component {
 					this.props.actions.register(email, confirmEmail, firstName, lastName, password).then((success) => {
 						this.setState({ loading: false });
 						if (success) {
-							this.props.actions.optIntoPromotions();
 							new RSVP.Promise((resolve) => {
 								this.props.actions.getUser()
 									.then(() => resolve())

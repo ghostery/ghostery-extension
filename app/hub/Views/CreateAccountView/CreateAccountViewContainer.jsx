@@ -138,7 +138,6 @@ class CreateAccountViewContainer extends Component {
 		});
 		this.props.actions.register(email, confirmEmail, firstName, lastName, password).then((success) => {
 			if (success) {
-				this.props.actions.optIntoPromotions();
 				this.props.actions.getUser();
 				this.props.actions.setToast({
 					toastMessage: t('hub_create_account_toast_success'),
@@ -207,7 +206,6 @@ CreateAccountViewContainer.propTypes = {
 		setToast: PropTypes.func.isRequired,
 		register: PropTypes.func.isRequired,
 		getUser: PropTypes.func.isRequired,
-		optIntoPromotions: PropTypes.func.isRequired,
 	}).isRequired,
 };
 
