@@ -31,7 +31,7 @@ const OptIn = (props) => {
 					<h3>{ t('settings_support_ghostery') }</h3>
 					<h5>
 						{ t('settings_support_ghostery_by') }
-:
+						:
 					</h5>
 					<div className="s-option-group">
 						<div className="s-square-checkbox">
