@@ -147,7 +147,7 @@ const StatsView = (props) => {
 				<div id="trackersSeen" className={tile} onClick={selectView}>
 					<div className="tile-title"><p className={trackersSeenClassNames}>{t('panel_stats_trackers_seen')}</p></div>
 					<div className={trackersSeenValueClassNames}>
-						<p className="tile-value-content">{subscriber ? trackersSeen : ''}</p>
+						<p className="tile-value-content">{subscriber ? trackersSeen.toLocaleString() : ''}</p>
 						<div className="active-underline" />
 					</div>
 				</div>
@@ -155,7 +155,7 @@ const StatsView = (props) => {
 				<div id="trackersBlocked" className={tile} onClick={selectView}>
 					<div className="tile-title"><p className={trackersBlockedClassNames}>{t('panel_stats_trackers_blocked')}</p></div>
 					<div className={trackersBlockedValueClassNames}>
-						<p className="tile-value-content">{subscriber ? trackersBlocked : ''}</p>
+						<p className="tile-value-content">{subscriber ? trackersBlocked.toLocaleString() : ''}</p>
 						<div className="active-underline" />
 					</div>
 				</div>
@@ -163,7 +163,7 @@ const StatsView = (props) => {
 				<div id="trackersAnonymized" className={tile} onClick={selectView}>
 					<div className="tile-title"><p className={trackersAnonymizedClassNames}>{t('panel_stats_trackers_anonymized')}</p></div>
 					<div className={trackersAnonymizedValueClassNames}>
-						<p className="tile-value-content">{subscriber ? trackersAnonymized : ''}</p>
+						<p className="tile-value-content">{subscriber ? trackersAnonymized.toLocaleString() : ''}</p>
 						<div className="active-underline" />
 					</div>
 				</div>
@@ -171,7 +171,7 @@ const StatsView = (props) => {
 				<div id="adsBlocked" className={tile} onClick={selectView}>
 					<div className="tile-title"><p className={adsBlockedClassNames}>{t('panel_stats_ads_blocked')}</p></div>
 					<div className={adsBlockedValueClassNames}>
-						<p className="tile-value-content">{subscriber ? adsBlocked : ''}</p>
+						<p className="tile-value-content">{subscriber ? adsBlocked.toLocaleString() : ''}</p>
 						<div className="active-underline" />
 					</div>
 				</div>
