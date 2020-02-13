@@ -1309,6 +1309,7 @@ function addCommonGhosteryAndAntitrackingListeners() {
 	let urlFilters = ['http://*/*', 'https://*/*', 'ws://*/*', 'wss://*/*'];
 	if (IS_EDGE || IS_FIREFOX) {
 		// Prevent Firefox from asking users to re-validate permissions on upgrade
+		// TODO: Allow websocket filters on Edge via Cliqz pipeline
 		urlFilters = urlFilters.reduce((accumulator, currentValue) => {
 			if (!currentValue.match(/^wss?:\/\//)) {
 				accumulator.push(currentValue);
