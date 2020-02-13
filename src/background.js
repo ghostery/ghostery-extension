@@ -1616,6 +1616,10 @@ function initializeGhosteryModules() {
 		setCliqzModuleEnabled(offers, false);
 	}
 
+	if (BROWSER_INFO.os === 'android' && IS_FIREFOX) {
+		conf.show_alert = false;
+	}
+
 	// Set these tasks to run every hour
 	function scheduledTasks() {
 		// auto-fetch from CMP
