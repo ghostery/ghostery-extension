@@ -31,10 +31,8 @@ describe('app/hub/Views/CreateAccount component', () => {
 				password: '',
 				passwordInvalidError: false,
 				passwordLengthError: false,
-				promotionsChecked: false,
 				handleInputChange: () => {},
 				handleLegalConsentCheckboxChange: () => {},
-				handlePromotionsCheckboxChange: () => {},
 				handleSubmit: () => {},
 			};
 
@@ -58,10 +56,8 @@ describe('app/hub/Views/CreateAccount component', () => {
 				password: '',
 				passwordInvalidError: true,
 				passwordLengthError: true,
-				promotionsChecked: true,
 				handleInputChange: () => {},
 				handleLegalConsentCheckboxChange: () => {},
-				handlePromotionsCheckboxChange: () => {},
 				handleSubmit: () => {},
 			};
 
@@ -87,10 +83,8 @@ describe('app/hub/Views/CreateAccount component', () => {
 				password: '',
 				passwordInvalidError: false,
 				passwordLengthError: false,
-				promotionsChecked: false,
 				handleInputChange: () => {},
 				handleLegalConsentCheckboxChange: () => {},
-				handlePromotionsCheckboxChange: () => {},
 				handleSubmit: jest.fn(),
 			};
 
