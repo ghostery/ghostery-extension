@@ -1607,6 +1607,7 @@ function initializeGhosteryModules() {
 		setCliqzModuleEnabled(offers, false);
 	}
 
+	// Disable purplebox for Firefox Android users
 	if (BROWSER_INFO.os === 'android' && IS_FIREFOX) {
 		conf.show_alert = false;
 	}
