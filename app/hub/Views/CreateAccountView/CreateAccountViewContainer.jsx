@@ -42,7 +42,6 @@ class CreateAccountViewContainer extends Component {
 			password: '',
 			passwordInvalidError: false,
 			passwordLengthError: false,
-			promotionsChecked: false,
 			validateInput: false,
 		};
 
@@ -102,13 +101,6 @@ class CreateAccountViewContainer extends Component {
 	}
 
 	/**
-	 * Update promotions checkbox value by updating state
-	 */
-	_handlePromotionsCheckboxChange = () => {
-		this.setState(prevState => ({ promotionsChecked: !prevState.promotionsChecked }));
-	}
-
-	/**
 	 * Handle creating an account, but validate the data first.
 	 * @param  {Object} event the 'submit' event
 	 */
@@ -121,7 +113,6 @@ class CreateAccountViewContainer extends Component {
 			lastName,
 			legalConsentChecked,
 			password,
-			promotionsChecked
 		} = this.state;
 		const emailIsValid = email && validateEmail(email);
 		const confirmIsValid = confirmEmail && validateConfirmEmail(email, confirmEmail);
@@ -147,7 +138,6 @@ class CreateAccountViewContainer extends Component {
 		});
 		this.props.actions.register(email, confirmEmail, firstName, lastName, password).then((success) => {
 			if (success) {
-				this.props.actions.updateAccountPromotions(promotionsChecked);
 				this.props.actions.getUser();
 				this.props.actions.setToast({
 					toastMessage: t('hub_create_account_toast_success'),
@@ -181,7 +171,6 @@ class CreateAccountViewContainer extends Component {
 			password,
 			passwordInvalidError,
 			passwordLengthError,
-			promotionsChecked,
 		} = this.state;
 		const createAccountChildProps = {
 			email,
@@ -195,10 +184,8 @@ class CreateAccountViewContainer extends Component {
 			password,
 			passwordInvalidError,
 			passwordLengthError,
-			promotionsChecked,
 			handleInputChange: this._handleInputChange,
 			handleLegalConsentCheckboxChange: this._handleLegalConsentCheckboxChange,
-			handlePromotionsCheckboxChange: this._handlePromotionsCheckboxChange,
 			handleSubmit: this._handleCreateAccountAttempt
 		};
 		const signedInChildProps = {
@@ -219,7 +206,6 @@ CreateAccountViewContainer.propTypes = {
 		setToast: PropTypes.func.isRequired,
 		register: PropTypes.func.isRequired,
 		getUser: PropTypes.func.isRequired,
-		updateAccountPromotions: PropTypes.func.isRequired,
 	}).isRequired,
 };
 
