@@ -26,8 +26,6 @@ import {
 	GET_USER_FAIL,
 	GET_USER_SETTINGS_SUCCESS,
 	GET_USER_SETTINGS_FAIL,
-	UPDATE_PROMOTIOS_FAIL,
-	UPDATE_PROMOTIOS_SUCCESS,
 	GET_USER_SUBSCRIPTION_DATA_FAIL,
 	GET_USER_SUBSCRIPTION_DATA_SUCCESS
 } from './AccountConstants';
@@ -190,27 +188,4 @@ export const resetPassword = email => dispatch => (
 				},
 			});
 		})
-);
-
-export const updateAccountPromotions = promotions => dispatch => (
-	sendMessageInPromise('account.promotions', { promotions }).then((res) => {
-		const { errors } = res;
-		if (errors) {
-			dispatch({
-				type: UPDATE_PROMOTIOS_FAIL,
-				payload: { errors },
-			});
-			return false;
-		}
-		dispatch({ type: UPDATE_PROMOTIOS_SUCCESS });
-		return true;
-	}).catch((err) => {
-		const errors = [{ title: err.toString(), detail: err.toString() }];
-		dispatch({
-			type: UPDATE_PROMOTIOS_FAIL,
-			payload: {
-				errors,
-			},
-		});
-	})
 );
