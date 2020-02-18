@@ -1646,9 +1646,6 @@
 	"hub_create_account_label_password_invalid_length": {
 		"message": "Use between 8 and 50 characters."
 	},
-	"hub_create_account_checkbox_promotions": {
-		"message": "Send me Ghostery updates & promotions."
-	},
 	"hub_create_account_already_have_account": {
 		"message": "Already have a Ghostery Account?"
 	},

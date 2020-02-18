@@ -896,16 +896,6 @@ function onMessageHandler(request, sender, callback) {
 			});
 		return true;
 	}
-	if (name === 'account.promotions') {
-		const { promotions } = message;
-		account.updateEmailPreferences(promotions).then((success) => {
-			callback(success);
-		}).catch((err) => {
-			callback({ errors: _getJSONAPIErrorsObject(err) });
-			log('UPDATE PROMOTIONS FAIL', err);
-		});
-		return true;
-	}
 	if (name === 'update_database') {
 		checkLibraryVersion().then((result) => {
 			callback(result);
@@ -1615,6 +1605,11 @@ function initializeGhosteryModules() {
 		setCliqzModuleEnabled(antitracking, false);
 		setCliqzModuleEnabled(adblocker, false);
 		setCliqzModuleEnabled(offers, false);
+	}
+
+	// Disable purplebox for Firefox Android users
+	if (BROWSER_INFO.os === 'android' && IS_FIREFOX) {
+		conf.show_alert = false;
 	}
 
 	// Set these tasks to run every hour

@@ -132,7 +132,7 @@ class ConfData {
 			_initProperty('rewards_opted_in', false);
 			_initProperty('settings_last_imported', 0);
 			_initProperty('settings_last_exported', 0);
-			_initProperty('show_alert', true);
+			_initProperty('show_alert', BROWSER_INFO.os !== 'android' && !IS_FIREFOX);
 			_initProperty('show_badge', true);
 			_initProperty('show_cmp', true);
 			_initProperty('show_tracker_urls', true);
