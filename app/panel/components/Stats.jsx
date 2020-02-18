@@ -277,7 +277,7 @@ class Stats extends React.Component {
 	 */
 	subscribe = () => {
 		sendMessage('ping', 'hist_plus_cta');
-		openCheckoutPage();
+		openCheckoutPage('historical_stats');
 	}
 
 	/**

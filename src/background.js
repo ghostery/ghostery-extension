@@ -849,7 +849,14 @@ function onMessageHandler(request, sender, callback) {
 		return false;
 	}
 	if (name === 'account.openCheckoutPage') {
-		utils.openNewTab({ url: `https://checkout.${globals.GHOSTERY_DOMAIN}.com/plus`, become_active: true });
+		let url = `https://checkout.${globals.GHOSTERY_DOMAIN}.com/plus`;
+		const { from } = message;
+		if (from === 'historical_stats') {
+			url += '?utm_source=gbe&utm_campaign=in_app_hstats';
+		} else if (from === 'plus_panel') {
+			url += '?utm_source=gbe&utm_campaign=in_app_plus';
+		}
+		utils.openNewTab({ url, become_active: true });
 		return false;
 	}
 	if (name === 'account.openSupportPage') {
