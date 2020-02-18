@@ -1,7 +1,11 @@
 ### GHOSTERY 8.4.7 (UNRELEASED)
 
 + Migrate to the new Chromium-based Edge browser (#492)
++ Disable Purplebox on Firefox Android (#494)
++ Allow white-listing of regex and wildcard domains (#497)
 + Fixes issue when adding localhost to Trusted Sites with port value (Fixes #470)
++ Add locale-appropriate formatting to historical stats numbers (#498)
++ Remove email opt-in from account creation in panel and hub (#495)
 + More aggressive cookie-blocking via Anti-Tracking (#490)
 
 ### GHOSTERY 8.4.6 (December 24, 2019)
