@@ -177,22 +177,22 @@ class Policy {
 	}
 
 	/**
-	 * Check given url against pattern which might be a regex, or a wildcard
+	 * Check given url against pattern which might be a wildcard, or a regex
 	 * @param  {string} url		site url
 	 * @param  {string} pattern	regex pattern
 	 * @return {boolean}
 	 */
 	matchesWildcardOrRegex(url, pattern) {
+		// Input string might be a wildcard
 		const escapedPattern = pattern.replace(/[|\\{}()[\]^$+*?.-]/g, '\\$&');
-
-		// Input string might be a regex
-		const regex = RegExp(escapedPattern);
-		if (regex.test(url)) { return true; }
-
-		// or a wildcard
 		const wildcardPattern = escapedPattern.replace(/\*/g, '.*');
 		const wildcardRegex = RegExp(wildcardPattern);
+
 		if (wildcardRegex.test(url)) { return true; }
+
+		// or a regex
+		const regex = RegExp(pattern);
+		if (regex.test(url)) { return true; }
 
 		return false;
 	}

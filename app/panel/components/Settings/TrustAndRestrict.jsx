@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import safe from 'safe-regex';
 import Sites from './Sites';
 /**
  * @class Implement Trust and Restrict subview presenting the lists
@@ -119,10 +120,12 @@ class TrustAndRestrict extends React.Component {
 		pageHost = pageHost.toLowerCase().replace(/^(http[s]?:\/\/)?(www\.)?/, '');
 
 		// Check for Validity
-		if (pageHost.length >= 2083) {
+		if (pageHost.length >= 2083
+			|| !this.isValidUrlWildcardOrRegex(pageHost)) {
 			this.showWarning(t('white_black_list_error_invalid_url'));
 			return;
 		}
+
 		// Check for Duplicates
 		if (list.includes(pageHost)) {
 			this.showWarning(duplicateWarning);
@@ -135,6 +138,39 @@ class TrustAndRestrict extends React.Component {
 			this.props.actions.updateSitePolicy({ type: otherListType, pageHost });
 		}
 		this.props.actions.updateSitePolicy({ type: listType, pageHost });
+	}
+
+	isValidUrlWildcardOrRegex(pageHost) {
+		// Check for valid URL
+		// from node-validator
+		const isValidUrlRegex = /^(?!mailto:)(?:(?:https?|ftp):\/\/)?(?:\S+(?::\S*)?@)?(?:(?:(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))|localhost)(?::\d{2,5})?(?:\/[^\s]*)?$/i;
+		if (isValidUrlRegex.test(pageHost)) return true;
+
+
+		// Check for valid wildcard
+		const escapedPattern = pageHost.replace(/[|\\{}()[\]^$+*?.-]/g, '\\$&');
+		const wildcardPattern = escapedPattern.replace(/\*/g, '.*');
+		let isValidWildcard = true;
+		try {
+			// eslint-disable-next-line
+			new RegExp(wildcardPattern);
+		} catch {
+			isValidWildcard = false;
+		}
+
+		if (isValidWildcard) return true;
+
+		// Prevent ReDoS attack
+		if (!safe(pageHost)) return false;
+
+		// Check for valid regex
+		try {
+			// eslint-disable-next-line
+			new RegExp(pageHost);
+		} catch {
+			return false;
+		}
+		return false;
 	}
 
 	/**
