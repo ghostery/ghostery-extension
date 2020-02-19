@@ -163,13 +163,15 @@ class TrustAndRestrict extends React.Component {
 		if (!safe(pageHost)) return false;
 
 		// Check for valid regex
+		let isValidRegex = true;
 		try {
 			// eslint-disable-next-line
 			new RegExp(pageHost);
 		} catch {
-			return false;
+			isValidRegex = false;
 		}
-		return false;
+
+		return isValidRegex;
 	}
 
 	/**

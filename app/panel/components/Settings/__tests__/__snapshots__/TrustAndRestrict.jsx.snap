@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/panel/components/Settings/TrustAndRestrict Snapshot test with react-test-renderer Testing TrustAndRestrict is rendering 1`] = `
+<div
+  className="s-trust-restrict-panel s-tabs-panel"
+>
+  <div
+    className="row"
+  >
+    <div
+      className="columns"
+    >
+      <h3>
+        settings_trusted_restricted_sites
+      </h3>
+    </div>
+  </div>
+  <div
+    className="s-trust-restrict-menu"
+  >
+    <div
+      className="s-active-pane s-pane-title"
+      id="showTrustedSites"
+      onClick={[Function]}
+    >
+      <span>
+        settings_trusted_sites
+      </span>
+    </div>
+    <div
+      className="s-pane-title-next"
+      id="showRestrictedSites"
+      onClick={[Function]}
+    >
+      <span>
+        settings_restricted_sites
+      </span>
+    </div>
+  </div>
+  <div
+    className="s-sites-pane"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="columns"
+      >
+        <div
+          className="s-sites-input-box"
+        >
+          <input
+            onChange={[Function]}
+            onKeyDown={[Function]}
+            placeholder="settings_sites_placeholder"
+            type="text"
+            value=""
+          />
+          <div
+            className="s-sites-input-icon"
+            onClick={[Function]}
+          />
+        </div>
+        <div
+          className="s-site-description"
+        >
+          <span>
+            settings_trusted_sites_description
+          </span>
+        </div>
+        <div
+          className="s-invisible s-callout"
+        >
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="s-hide s-sites-pane"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="columns"
+      >
+        <div
+          className="s-sites-input-box"
+        >
+          <input
+            onChange={[Function]}
+            onKeyDown={[Function]}
+            placeholder="settings_sites_placeholder"
+            type="text"
+            value=""
+          />
+          <div
+            className="s-sites-input-icon"
+            onClick={[Function]}
+          />
+        </div>
+        <div
+          className="s-site-description"
+        >
+          <span>
+            settings_restricted_sites_description
+          </span>
+        </div>
+        <div
+          className="s-invisible s-callout"
+        >
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
