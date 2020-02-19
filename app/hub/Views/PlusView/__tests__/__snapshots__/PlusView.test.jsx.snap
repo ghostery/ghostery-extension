@@ -361,7 +361,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
       >
         <a
           className="PlusView__button button"
-          href="https://checkout.ghosterystage.com/plus/?utm_source=gbe&utm_campaign=intro_hub_plus"
+          href="https://checkout.ghosterystage.com/plus?utm_source=gbe&utm_campaign=intro_hub_plus"
           onClick={[Function]}
           rel="noopener noreferrer"
           target="_blank"
@@ -468,7 +468,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
         </div>
         <a
           className="PlusView__button button show-for-large"
-          href="https://checkout.ghosterystage.com/plus/?utm_source=gbe&utm_campaign=intro_hub_plus"
+          href="https://checkout.ghosterystage.com/plus?utm_source=gbe&utm_campaign=intro_hub_plus"
           onClick={[Function]}
           rel="noopener noreferrer"
           target="_blank"
@@ -497,7 +497,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
         />
         <a
           className="PlusView__button button PlusView--addSideMargin"
-          href="https://checkout.ghosterystage.com/plus/?utm_source=gbe&utm_campaign=intro_hub_plus"
+          href="https://checkout.ghosterystage.com/plus?utm_source=gbe&utm_campaign=intro_hub_plus"
           onClick={[Function]}
           rel="noopener noreferrer"
           target="_blank"
@@ -540,7 +540,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
         </div>
         <a
           className="PlusView__button button show-for-large"
-          href="https://checkout.ghosterystage.com/plus/?utm_source=gbe&utm_campaign=intro_hub_plus"
+          href="https://checkout.ghosterystage.com/plus?utm_source=gbe&utm_campaign=intro_hub_plus"
           onClick={[Function]}
           rel="noopener noreferrer"
           target="_blank"
@@ -569,7 +569,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
         />
         <a
           className="PlusView__button button PlusView--addSideMargin"
-          href="https://checkout.ghosterystage.com/plus/?utm_source=gbe&utm_campaign=intro_hub_plus"
+          href="https://checkout.ghosterystage.com/plus?utm_source=gbe&utm_campaign=intro_hub_plus"
           onClick={[Function]}
           rel="noopener noreferrer"
           target="_blank"
@@ -603,7 +603,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
         </div>
         <a
           className="PlusView__button button show-for-large"
-          href="https://checkout.ghosterystage.com/plus/?utm_source=gbe&utm_campaign=intro_hub_plus"
+          href="https://checkout.ghosterystage.com/plus?utm_source=gbe&utm_campaign=intro_hub_plus"
           onClick={[Function]}
           rel="noopener noreferrer"
           target="_blank"
@@ -632,7 +632,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
         />
         <a
           className="PlusView__button button PlusView--addSideMargin"
-          href="https://checkout.ghosterystage.com/plus/?utm_source=gbe&utm_campaign=intro_hub_plus"
+          href="https://checkout.ghosterystage.com/plus?utm_source=gbe&utm_campaign=intro_hub_plus"
           onClick={[Function]}
           rel="noopener noreferrer"
           target="_blank"
@@ -682,7 +682,7 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
         />
         <a
           className="PlusView__button button PlusView--addSideMargin"
-          href="https://checkout.ghosterystage.com/plus/?utm_source=gbe&utm_campaign=intro_hub_plus"
+          href="https://checkout.ghosterystage.com/plus?utm_source=gbe&utm_campaign=intro_hub_plus"
           onClick={[Function]}
           rel="noopener noreferrer"
           target="_blank"

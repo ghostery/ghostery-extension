@@ -70,7 +70,7 @@ describe('app/hub/Views/PlusView component', () => {
 			component.find('.PlusView__button').first().simulate('click');
 			expect(initialState.onPlusClick.mock.calls.length).toBe(1);
 
-			expect(component.find('.PlusView__button').first().props().href).toBe('https://checkout.ghosterystage.com/plus/?utm_source=gbe&utm_campaign=intro_hub_plus')
+			expect(component.find('.PlusView__button').first().props().href).toBe('https://checkout.ghosterystage.com/plus?utm_source=gbe&utm_campaign=intro_hub_plus')
 
 			expect(component.find('.PlusView__button').length).toBe(8);
 			expect(component.find('.PlusView__button.disabled').length).toBe(0);
