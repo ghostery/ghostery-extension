@@ -21,7 +21,10 @@ import { sendMessage, openCheckoutPage } from '../utils/msg';
  */
 function _handleBecomeClick() {
 	sendMessage('ping', 'plus_cta_extension');
-	openCheckoutPage('plus_panel');
+	openCheckoutPage({
+		utm_source: 'gbe',
+		utm_campaign: 'in_app_plus'
+	});
 }
 
 /**
