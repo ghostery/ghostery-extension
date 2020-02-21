@@ -277,7 +277,10 @@ class Stats extends React.Component {
 	 */
 	subscribe = () => {
 		sendMessage('ping', 'hist_plus_cta');
-		openCheckoutPage();
+		openCheckoutPage({
+			utm_source: 'gbe',
+			utm_campaign: 'in_app_hstats'
+		});
 	}
 
 	/**

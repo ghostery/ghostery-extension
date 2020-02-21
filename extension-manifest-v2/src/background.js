@@ -849,7 +849,12 @@ function onMessageHandler(request, sender, callback) {
 		return false;
 	}
 	if (name === 'account.openCheckoutPage') {
-		utils.openNewTab({ url: `https://checkout.${globals.GHOSTERY_DOMAIN}.com/plus`, become_active: true });
+		let url = `https://checkout.${globals.GHOSTERY_DOMAIN}.com/plus`;
+		const { utm } = message || null;
+		if (utm) {
+			url += `?utm_source=${utm.utm_source}&utm_campaign=${utm.utm_campaign}`;
+		}
+		utils.openNewTab({ url, become_active: true });
 		return false;
 	}
 	if (name === 'account.openSupportPage') {
