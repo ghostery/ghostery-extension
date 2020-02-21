@@ -14,7 +14,6 @@
  */
 
 /* eslint no-param-reassign: 0 */
-
 import c2pDb from './Click2PlayDb';
 import conf from './Conf';
 import globals from './Globals';
@@ -71,7 +70,8 @@ class Policy {
 			// TODO: speed up
 			for (let i = 0; i < num_sites; i++) {
 				// TODO match from the beginning of the string to avoid false matches (somewhere in the querystring for instance)
-				if (replacedUrl === sites[i]) {
+				if (replacedUrl === sites[i]
+					|| this.matchesWildcardOrRegex(replacedUrl, sites[i])) {
 					return sites[i];
 				}
 			}
@@ -119,7 +119,8 @@ class Policy {
 			// TODO: speed up
 			for (let i = 0; i < num_sites; i++) {
 				// TODO match from the beginning of the string to avoid false matches (somewhere in the querystring for instance)
-				if (replacedUrl === sites[i]) {
+				if (replacedUrl === sites[i]
+					|| this.matchesWildcardOrRegex(replacedUrl, sites[i])) {
 					return sites[i];
 				}
 			}
@@ -173,6 +174,32 @@ class Policy {
 			return { block: !allowedOnce, reason: allowedOnce ? BLOCK_REASON_C2P_ALLOWED_ONCE : BLOCK_REASON_BLACKLISTED };
 		}
 		return { block: false, reason: allowedOnce ? BLOCK_REASON_C2P_ALLOWED_ONCE : BLOCK_REASON_GLOBAL_UNBLOCKED };
+	}
+
+	/**
+	 * Check given url against pattern which might be a wildcard, or a regex
+	 * @param  {string} url		site url
+	 * @param  {string} pattern	regex pattern
+	 * @return {boolean}
+	 */
+	matchesWildcardOrRegex(url, pattern) {
+		// Input string might be a wildcard
+		const escapedPattern = pattern.replace(/[|\\{}()[\]^$+*?.-]/g, '\\$&');
+		const wildcardPattern = escapedPattern.replace(/\*/g, '.*');
+		const wildcardRegex = RegExp(wildcardPattern);
+		console.log('url: ', url);
+		console.log('wildcardPattern: ', wildcardPattern);
+
+		if (wildcardRegex.test(url)) { return true; }
+
+		console.log('pattern: ', pattern);
+		// or a regex
+		const regex = RegExp(pattern);
+		if (regex.test(url)) { return true; }
+
+		console.log('returning false');
+
+		return false;
 	}
 }
 

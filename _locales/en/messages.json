@@ -802,7 +802,7 @@
 		"message": "unblocked"
 	},
 	"white_black_list_error_invalid_url": {
-		"message": "Please enter a valid URL."
+		"message": "Please enter a valid URL, regex, or wildcard."
 	},
 	"whitelist_error_blacklist_url": {
 		"message": "This site has been removed from your Restricted Sites list and added to your Trusted Sites list."
@@ -1058,7 +1058,7 @@
 		"message": "Trusted Sites"
 	},
 	"settings_sites_placeholder": {
-		"message": "example.com"
+		"message": "example.com (wildcards/regex supported)"
 	},
 	"settings_restricted_sites": {
 		"message": "Restricted Sites"
