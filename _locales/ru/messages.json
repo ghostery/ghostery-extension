@@ -727,9 +727,6 @@
 	"panel_detail_rewards_cliqz_text": {
 		"message": "Функция уже активирована на контрольной панели Cliqz MyOffrz."
 	},
-	"panel_detail_rewards_edge_text": {
-		"message": "Ghostery Rewards не поддерживается в браузере Edge"
-	},
 	"panel_detail_rewards_loading": {
 		"message": "Загрузка Rewards…"
 	},
@@ -1649,9 +1646,6 @@
 	"hub_create_account_label_password_invalid_length": {
 		"message": "Используйте от 8 до 50 символов."
 	},
-	"hub_create_account_checkbox_promotions": {
-		"message": "Присылайте мне обновления и промо-акции Ghostery."
-	},
 	"hub_create_account_already_have_account": {
 		"message": "Уже есть учетная запись Ghostery?"
 	},
@@ -1942,7 +1936,7 @@
 				"content": "</a>"
 			},
 			"link_start": {
-				"content": "<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.ghostery.com/products/plus/\">"
+				"content": "<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.ghostery.com/products/plus?utm_source=gbe&utm_campaign=in_app_hstats_lm\">"
 			}
 		}
 	},
@@ -2353,8 +2347,7 @@
 	  "message": "Попробовать Ghostery Midnight"
 	},
   	"seven_day_free_trial": {
-	  "message": "7-дневная бесплатная бета-версия (14 &#36; в месяц)",
-	  "description": "Do not localize currency. Use the $14 USD amount. The second $ is needed to escape the special meaning of $"
+	  "message": "7-дневная бесплатная бета-версия (14 &#36; в месяц)"
 	},
   	"full_coverage_protection_promise": {
 	  "message": "Получите полную защиту во всех браузерах и приложениях на вашем устройстве"
@@ -2375,8 +2368,7 @@
 	  "message": "Загрузить бесплатно"
 	},
   	"support_ghostery_for_2_instead": {
-	  "message": "Поддержка Ghostery за 2 &#36; вместо",
-	  "description": "Do not localize currency. Use the $2 USD amount. The second $ is needed to escape the special meaning of $"
+	  "message": "Поддержка Ghostery за 2 &#36; вместо"
 	},
   	"no_thanks_continue_with_basic": {
 	  "message": "Нет, спасибо, продолжить с базовым"

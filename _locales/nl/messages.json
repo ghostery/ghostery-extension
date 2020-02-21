@@ -727,9 +727,6 @@
 	"panel_detail_rewards_cliqz_text": {
 		"message": "Functie al actief in het Cliqz MyOffrz controle paneel."
 	},
-	"panel_detail_rewards_edge_text": {
-		"message": "Ghostery Rewards wordt niet ondersteund in de Edge-browser"
-	},
 	"panel_detail_rewards_loading": {
 		"message": "Rewards Laden..."
 	},
@@ -1649,9 +1646,6 @@
 	"hub_create_account_label_password_invalid_length": {
 		"message": "Gebruik tussen 8 en 50 karakters."
 	},
-	"hub_create_account_checkbox_promotions": {
-		"message": "Stuur me Ghostery updates & acties."
-	},
 	"hub_create_account_already_have_account": {
 		"message": "Heb je al een Ghostery Account?"
 	},
@@ -1942,7 +1936,7 @@
 				"content": "</a>"
 			},
 			"link_start": {
-				"content": "<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.ghostery.com/products/plus/\">"
+				"content": "<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.ghostery.com/products/plus?utm_source=gbe&utm_campaign=in_app_hstats_lm\">"
 			}
 		}
 	},
@@ -2353,8 +2347,7 @@
 	  "message": "Ghostery Midnight proberen"
 	},
   	"seven_day_free_trial": {
-	  "message": "Gratis proefperiode van 7 dagen (&#36;14/mnd)",
-	  "description": "Do not localize currency. Use the $14 USD amount. The second $ is needed to escape the special meaning of $"
+	  "message": "Gratis proefperiode van 7 dagen (&#36;14/mnd)"
 	},
   	"full_coverage_protection_promise": {
 	  "message": "Profiteer van volledige dekking voor alle browsers en apps op je apparaat"
@@ -2375,8 +2368,7 @@
 	  "message": "Gratis downloaden"
 	},
   	"support_ghostery_for_2_instead": {
-	  "message": "Steun in plaats daarvan Ghostery voor &#36;2/mnd",
-	  "description": "Do not localize currency. Use the $2 USD amount. The second $ is needed to escape the special meaning of $"
+	  "message": "Steun in plaats daarvan Ghostery voor &#36;2/mnd"
 	},
   	"no_thanks_continue_with_basic": {
 	  "message": "Nee bedankt, doorgaan met Basic"

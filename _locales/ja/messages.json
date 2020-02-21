@@ -727,9 +727,6 @@
 	"panel_detail_rewards_cliqz_text": {
 		"message": "既にCliqz MyOffrzコントロールパネルで有効になっている機能です。"
 	},
-	"panel_detail_rewards_edge_text": {
-		"message": "Ghostery Rewardsは、Edgeブラウザではサポートされていません"
-	},
 	"panel_detail_rewards_loading": {
 		"message": "Rewardsを読み込み中…"
 	},
@@ -1649,9 +1646,6 @@
 	"hub_create_account_label_password_invalid_length": {
 		"message": "8～50文字を使用してください。"
 	},
-	"hub_create_account_checkbox_promotions": {
-		"message": "Ghosteryのアップデート＆お得な情報を受け取る。"
-	},
 	"hub_create_account_already_have_account": {
 		"message": "既にGhosteryアカウントを持っていますか？"
 	},
@@ -1942,7 +1936,7 @@
 				"content": "</a>"
 			},
 			"link_start": {
-				"content": "<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.ghostery.com/products/plus/\">"
+				"content": "<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.ghostery.com/products/plus?utm_source=gbe&utm_campaign=in_app_hstats_lm\">"
 			}
 		}
 	},
@@ -2353,8 +2347,7 @@
 	  "message": "Ghostery Midnightを試す"
 	},
   	"seven_day_free_trial": {
-	  "message": "7日間無料トライアル（月額14ドル）",
-	  "description": "Do not localize currency. Use the $14 USD amount. The second $ is needed to escape the special meaning of $"
+	  "message": "7日間無料トライアル（月額14ドル）"
 	},
   	"full_coverage_protection_promise": {
 	  "message": "デバイス上のすべてのブラウザとアプリを包括的に保護しましょう"
@@ -2375,8 +2368,7 @@
 	  "message": "無料でダウンロード"
 	},
   	"support_ghostery_for_2_instead": {
-	  "message": "代わりに月額2ドルでGhosteryをサポート",
-	  "description": "Do not localize currency. Use the $2 USD amount. The second $ is needed to escape the special meaning of $"
+	  "message": "代わりに月額2ドルでGhosteryをサポート"
 	},
   	"no_thanks_continue_with_basic": {
 	  "message": "いいえ、ベーシックプランで継続する"

@@ -727,9 +727,6 @@
 	"panel_detail_rewards_cliqz_text": {
 		"message": "기능이 이미 Cliqz MyOffrz 제어판에서 활성화되었습니다."
 	},
-	"panel_detail_rewards_edge_text": {
-		"message": "Ghostery Rewards는 Edge 브라우저에서 지원되지 않습니다."
-	},
 	"panel_detail_rewards_loading": {
 		"message": "Rewards 로딩 중"
 	},
@@ -1649,9 +1646,6 @@
 	"hub_create_account_label_password_invalid_length": {
 		"message": "8자에서 50자까지 사용할 수 있습니다."
 	},
-	"hub_create_account_checkbox_promotions": {
-		"message": "고스터리 브라우저의 업데이트와 프로모션 소식 받기"
-	},
 	"hub_create_account_already_have_account": {
 		"message": "이미 Ghostery 계정이 있으십니까? "
 	},
@@ -1942,7 +1936,7 @@
 				"content": "</a>"
 			},
 			"link_start": {
-				"content": "<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.ghostery.com/products/plus/\">"
+				"content": "<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.ghostery.com/products/plus?utm_source=gbe&utm_campaign=in_app_hstats_lm\">"
 			}
 		}
 	},
@@ -2353,8 +2347,7 @@
 	  "message": "Ghostery Midnight를 사용해 보세요"
 	},
   	"seven_day_free_trial": {
-	  "message": "7일 무료 평가판(&#36;14/월)",
-	  "description": "Do not localize currency. Use the $14 USD amount. The second $ is needed to escape the special meaning of $"
+	  "message": "7일 무료 평가판(&#36;14/월)"
 	},
   	"full_coverage_protection_promise": {
 	  "message": "장치의 모든 브라우저 및 앱을 완전하게 보호하세요"
@@ -2375,8 +2368,7 @@
 	  "message": "무료 다운로드"
 	},
   	"support_ghostery_for_2_instead": {
-	  "message": "월 &#36;2로 Ghostery를 후원합니다",
-	  "description": "Do not localize currency. Use the $2 USD amount. The second $ is needed to escape the special meaning of $"
+	  "message": "월 &#36;2로 Ghostery를 후원합니다"
 	},
   	"no_thanks_continue_with_basic": {
 	  "message": "괜찮습니다, Basic으로 계속 진행합니다"
