@@ -727,9 +727,6 @@
 	"panel_detail_rewards_cliqz_text": {
 		"message": "La funzione è già attiva nel pannello di controllo Cliqz MyOffrz."
 	},
-	"panel_detail_rewards_edge_text": {
-		"message": "Il browser Edge non supporta Ghostery Rewards"
-	},
 	"panel_detail_rewards_loading": {
 		"message": "Caricamento Rewards in corso…"
 	},
@@ -1649,9 +1646,6 @@
 	"hub_create_account_label_password_invalid_length": {
 		"message": "Utilizza tra 8 e 50 caratteri."
 	},
-	"hub_create_account_checkbox_promotions": {
-		"message": "Inviatemi aggiornamenti e promozioni su Ghostery"
-	},
 	"hub_create_account_already_have_account": {
 		"message": "Hai già un Account Ghostery?"
 	},
@@ -1942,7 +1936,7 @@
 				"content": "</a>"
 			},
 			"link_start": {
-				"content": "<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.ghostery.com/products/plus/\">"
+				"content": "<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.ghostery.com/products/plus?utm_source=gbe&utm_campaign=in_app_hstats_lm\">"
 			}
 		}
 	},
@@ -2353,8 +2347,7 @@
 	  "message": "Prova Ghostery Midnight"
 	},
   	"seven_day_free_trial": {
-	  "message": "Prova gratuita di 7 giorni (&#36;14/mese)",
-	  "description": "Do not localize currency. Use the $14 USD amount. The second $ is needed to escape the special meaning of $"
+	  "message": "Prova gratuita di 7 giorni (&#36;14/mese)"
 	},
   	"full_coverage_protection_promise": {
 	  "message": "Ottieni la protezione completa per tutti i browser e le app sul tuo dispositivo"
@@ -2375,8 +2368,7 @@
 	  "message": "Scarica gratis"
 	},
   	"support_ghostery_for_2_instead": {
-	  "message": "Sostieni Ghostery al costo di &#36;2/mese",
-	  "description": "Do not localize currency. Use the $2 USD amount. The second $ is needed to escape the special meaning of $"
+	  "message": "Sostieni Ghostery al costo di &#36;2/mese"
 	},
   	"no_thanks_continue_with_basic": {
 	  "message": "No, grazie. Continuo con la versione base"

@@ -727,9 +727,6 @@
 	"panel_detail_rewards_cliqz_text": {
 		"message": "Cliqz MyOffrz 控制面板中已激活此功能。"
 	},
-	"panel_detail_rewards_edge_text": {
-		"message": "Ghostery Rewards 不支持 Edge 浏览器"
-	},
 	"panel_detail_rewards_loading": {
 		"message": "正在加载Rewards…"
 	},
@@ -1649,9 +1646,6 @@
 	"hub_create_account_label_password_invalid_length": {
 		"message": "请使用 8 到 50 个字符。"
 	},
-	"hub_create_account_checkbox_promotions": {
-		"message": "给我发送Ghostery动态和促销信息。"
-	},
 	"hub_create_account_already_have_account": {
 		"message": "已经有 Ghostery 帐户？"
 	},
@@ -1942,7 +1936,7 @@
 				"content": "</a>"
 			},
 			"link_start": {
-				"content": "<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.ghostery.com/products/plus/\">"
+				"content": "<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.ghostery.com/products/plus?utm_source=gbe&utm_campaign=in_app_hstats_lm\">"
 			}
 		}
 	},
@@ -2353,8 +2347,7 @@
 	  "message": "试用 Ghostery Midnight"
 	},
   	"seven_day_free_trial": {
-	  "message": "7 天免费试用（&#36;14/月）",
-	  "description": "Do not localize currency. Use the $14 USD amount. The second $ is needed to escape the special meaning of $"
+	  "message": "7 天免费试用（&#36;14/月）"
 	},
   	"full_coverage_protection_promise": {
 	  "message": "全面保护设备中的所有浏览器和应用程序"
@@ -2375,8 +2368,7 @@
 	  "message": "免费下载"
 	},
   	"support_ghostery_for_2_instead": {
-	  "message": "支持 Ghostery（&#36;2/月）",
-	  "description": "Do not localize currency. Use the $2 USD amount. The second $ is needed to escape the special meaning of $"
+	  "message": "支持 Ghostery（&#36;2/月）"
 	},
   	"no_thanks_continue_with_basic": {
 	  "message": "不了，谢谢，继续使用基础版"

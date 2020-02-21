@@ -727,9 +727,6 @@
 	"panel_detail_rewards_cliqz_text": {
 		"message": "Die Funktion ist im Cliqz MyOffrz-Bedienfeld bereits aktiv."
 	},
-	"panel_detail_rewards_edge_text": {
-		"message": "Ghostery Rewards werden in Edge-Browser nicht unterstützt."
-	},
 	"panel_detail_rewards_loading": {
 		"message": "Rewards werden geladen..."
 	},
@@ -1649,9 +1646,6 @@
 	"hub_create_account_label_password_invalid_length": {
 		"message": "Verwenden Sie zwischen 8 und 50 Zeichen."
 	},
-	"hub_create_account_checkbox_promotions": {
-		"message": "Schicken Sie mir Ghostery-Aktualisierungen & Promotions."
-	},
 	"hub_create_account_already_have_account": {
 		"message": "Sie haben bereits ein Ghostery-Konto?"
 	},
@@ -1942,7 +1936,7 @@
 				"content": "</a>"
 			},
 			"link_start": {
-				"content": "<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.ghostery.com/products/plus/\">"
+				"content": "<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.ghostery.com/products/plus?utm_source=gbe&utm_campaign=in_app_hstats_lm\">"
 			}
 		}
 	},
@@ -2353,8 +2347,7 @@
 	  "message": "Testen Sie Ghostery Midnight"
 	},
   	"seven_day_free_trial": {
-	  "message": "7 Tage kostenlose Testversion (&#36;14/mtl.)",
-	  "description": "Do not localize currency. Use the $14 USD amount. The second $ is needed to escape the special meaning of $"
+	  "message": "7 Tage kostenlose Testversion (&#36;14/mtl.)"
 	},
   	"full_coverage_protection_promise": {
 	  "message": "Holen Sie sich umfassenden Schutz für alle Browser und Apps auf Ihrem Gerät."
@@ -2375,8 +2368,7 @@
 	  "message": "Kostenlos herunterladen"
 	},
   	"support_ghostery_for_2_instead": {
-	  "message": "Unterstützen Sie Ghostery stattdessen für &#36;2/mtl.",
-	  "description": "Do not localize currency. Use the $2 USD amount. The second $ is needed to escape the special meaning of $"
+	  "message": "Unterstützen Sie Ghostery stattdessen für &#36;2/mtl."
 	},
   	"no_thanks_continue_with_basic": {
 	  "message": "Nein, danke. Mit Basisversion fortfahren."

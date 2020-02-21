@@ -727,9 +727,6 @@
 	"panel_detail_rewards_cliqz_text": {
 		"message": "A funkció már aktív a Cliqz MyOffrz vezérlőpultjában."
 	},
-	"panel_detail_rewards_edge_text": {
-		"message": "A Ghostery Rewards nem támogatott az Edge böngészőben"
-	},
 	"panel_detail_rewards_loading": {
 		"message": "Rewards betöltése…"
 	},
@@ -1649,9 +1646,6 @@
 	"hub_create_account_label_password_invalid_length": {
 		"message": "8–50 karaktert használjon."
 	},
-	"hub_create_account_checkbox_promotions": {
-		"message": "Küldjenek nekem friss Ghostery híreket és promóciókat!"
-	},
 	"hub_create_account_already_have_account": {
 		"message": "Már van Ghostery fiókja?"
 	},
@@ -1942,7 +1936,7 @@
 				"content": "</a>"
 			},
 			"link_start": {
-				"content": "<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.ghostery.com/products/plus/\">"
+				"content": "<br><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.ghostery.com/products/plus?utm_source=gbe&utm_campaign=in_app_hstats_lm\">"
 			}
 		}
 	},
@@ -2353,8 +2347,7 @@
 	  "message": "Próbálja ki a Ghostery Midnight-t"
 	},
   	"seven_day_free_trial": {
-	  "message": "7 napos ingyenes próbaverzió (&#36; 14/hó)",
-	  "description": "Do not localize currency. Use the $14 USD amount. The second $ is needed to escape the special meaning of $"
+	  "message": "7 napos ingyenes próbaverzió (&#36; 14/hó)"
 	},
   	"full_coverage_protection_promise": {
 	  "message": "Teljes védelmet élvezhet az eszköz összes böngészőjével és alkalmazásával"
@@ -2375,8 +2368,7 @@
 	  "message": "Töltse le ingyen"
 	},
   	"support_ghostery_for_2_instead": {
-	  "message": "Ehelyett támogassa a Ghostery-t &#36; 2 / hónap alatt",
-	  "description": "Do not localize currency. Use the $2 USD amount. The second $ is needed to escape the special meaning of $"
+	  "message": "Ehelyett támogassa a Ghostery-t &#36; 2 / hónap alatt"
 	},
   	"no_thanks_continue_with_basic": {
 	  "message": "Nem, köszönöm, folytassa az alapszinttel"
