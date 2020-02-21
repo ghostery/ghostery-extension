@@ -21,7 +21,10 @@ import { sendMessage, openCheckoutPage } from '../utils/msg';
  */
 function _handleBecomeClick() {
 	sendMessage('ping', 'plus_cta_extension');
-	openCheckoutPage();
+	openCheckoutPage({
+		utm_source: 'gbe',
+		utm_campaign: 'in_app_plus'
+	});
 }
 
 /**
@@ -36,7 +39,7 @@ const Subscribe = (props) => {
 			<div className="pitch-container">
 				<span className="pitch-text" dangerouslySetInnerHTML={{ __html: t('subscribe_pitch') }} />
 			</div>
-			<PanelToTabLink href="https://www.ghostery.com/products/plus/">
+			<PanelToTabLink href="https://www.ghostery.com/products/plus?utm_source=gbe&utm_campaign=in_app_plus_lm">
 				<span className="pitch-learn-more">{t('subscribe_pitch_learn_more')}</span>
 			</PanelToTabLink>
 			<div>

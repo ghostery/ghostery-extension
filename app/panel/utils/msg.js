@@ -124,8 +124,8 @@ export function openSubscriptionPage() {
  * This should be used for messages that don't require a callback.
  * @memberOf PanelUtils
  */
-export function openCheckoutPage() {
-	sendMessage('account.openCheckoutPage');
+export function openCheckoutPage(utm) {
+	sendMessage('account.openCheckoutPage', { utm });
 	window.close();
 }
 
