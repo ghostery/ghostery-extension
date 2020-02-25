@@ -161,33 +161,21 @@ describe('app/panel/components/Settings/', () => {
 		const wrapper = shallow(<TrustAndRestrict />);
 
 		let input = '/^(\w+\s?)*$/';
-		let fn = jest.spyOn(wrapper.instance(), 'isSafe');
+		let fn = jest.spyOn(wrapper.instance(), 'isValidUrlWildcardOrRegex');
 		when(fn).calledWith(input);
-		let returnValue = wrapper.instance().isSafe(input);
+		let returnValue = wrapper.instance().isValidUrlWildcardOrRegex(input);
 		expect(returnValue).toBe(false);
 
 		input = '/^([0-9]+)*$/';
-		fn = jest.spyOn(wrapper.instance(), 'isSafe');
+		fn = jest.spyOn(wrapper.instance(), 'isValidUrlWildcardOrRegex');
 		when(fn).calledWith(input);
-		returnValue = wrapper.instance().isSafe(input);
-		expect(returnValue).toBe(false);
-
-		input = '(?:.\s*)*?';
-		fn = jest.spyOn(wrapper.instance(), 'isSafe');
-		when(fn).calledWith(input);
-		returnValue = wrapper.instance().isSafe(input);
+		returnValue = wrapper.instance().isValidUrlWildcardOrRegex(input);
 		expect(returnValue).toBe(false);
 
 		input = '(x\w{1,10})+y';
-		fn = jest.spyOn(wrapper.instance(), 'isSafe');
+		fn = jest.spyOn(wrapper.instance(), 'isValidUrlWildcardOrRegex');
 		when(fn).calledWith(input);
-		returnValue = wrapper.instance().isSafe(input);
-		expect(returnValue).toBe(false);
-
-		input = '^((ab)*)+$';
-		fn = jest.spyOn(wrapper.instance(), 'isSafe');
-		when(fn).calledWith(input);
-		returnValue = wrapper.instance().isSafe(input);
+		returnValue = wrapper.instance().isValidUrlWildcardOrRegex(input);
 		expect(returnValue).toBe(false);
 	});
 });
