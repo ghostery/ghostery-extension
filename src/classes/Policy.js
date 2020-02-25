@@ -183,22 +183,24 @@ class Policy {
 	 * @return {boolean}
 	 */
 	matchesWildcardOrRegex(url, pattern) {
-		// Input string might be a wildcard
-		const escapedPattern = pattern.replace(/[|\\{}()[\]^$+*?.-]/g, '\\$&');
-		const wildcardPattern = escapedPattern.replace(/\*/g, '.*');
-		const wildcardRegex = RegExp(wildcardPattern);
-		console.log('url: ', url);
-		console.log('wildcardPattern: ', wildcardPattern);
+		// Pattern might be a wildcard
+		if (pattern.includes('*')) {
+			const wildcardPattern = pattern.replace(/\*/g, '.*');
+			try {
+				const wildcardRegex = new RegExp(wildcardPattern);
+				if (wildcardRegex.test(url)) { return true; }
+			} catch {
+				return false;
+			}
+		}
 
-		if (wildcardRegex.test(url)) { return true; }
-
-		console.log('pattern: ', pattern);
 		// or a regex
-		const regex = RegExp(pattern);
-		if (regex.test(url)) { return true; }
-
-		console.log('returning false');
-
+		try {
+			const regex = new RegExp(pattern);
+			if (regex.test(url)) { return true; }
+		} catch {
+			return false;
+		}
 		return false;
 	}
 }

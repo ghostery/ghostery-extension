@@ -34,58 +34,160 @@ describe('app/panel/components/Settings/', () => {
 		const input = 'ghostery.com';
 
 		const fn = jest.spyOn(wrapper.instance(), 'isValidUrlWildcardOrRegex');
-		when(fn)
-			.calledWith(input)
-			.mockReturnValue(true);
+		when(fn).calledWith(input);
 		const returnValue = wrapper.instance().isValidUrlWildcardOrRegex(input);
 		expect(returnValue).toBe(true);
 	});
 
 	test('isValidUrlWildcardOrRegex should return true with wildcard URL entered', () => {
 		const wrapper = shallow(<TrustAndRestrict />);
-		const input = 'developer.*.org';
 
-		const fn = jest.spyOn(wrapper.instance(), 'isValidUrlWildcardOrRegex');
-		when(fn)
-			.calledWith(input)
-			.mockReturnValue(true);
-		const returnValue = wrapper.instance().isValidUrlWildcardOrRegex(input);
+		let input = 'developer.*.org';
+		let fn = jest.spyOn(wrapper.instance(), 'isValidUrlWildcardOrRegex');
+		when(fn).calledWith(input);
+		let returnValue = wrapper.instance().isValidUrlWildcardOrRegex(input);
+		expect(returnValue).toBe(true);
+
+		input = '*.com';
+		fn = jest.spyOn(wrapper.instance(), 'isValidUrlWildcardOrRegex');
+		when(fn).calledWith(input);
+		returnValue = wrapper.instance().isValidUrlWildcardOrRegex(input);
+		expect(returnValue).toBe(true);
+
+		input = '*';
+		fn = jest.spyOn(wrapper.instance(), 'isValidUrlWildcardOrRegex');
+		when(fn).calledWith(input);
+		returnValue = wrapper.instance().isValidUrlWildcardOrRegex(input);
+		expect(returnValue).toBe(true);
+
+		input = 'developer.*';
+		fn = jest.spyOn(wrapper.instance(), 'isValidUrlWildcardOrRegex');
+		when(fn).calledWith(input);
+		returnValue = wrapper.instance().isValidUrlWildcardOrRegex(input);
+		expect(returnValue).toBe(true);
+
+		input = '****';
+		fn = jest.spyOn(wrapper.instance(), 'isValidUrlWildcardOrRegex');
+		when(fn).calledWith(input);
+		returnValue = wrapper.instance().isValidUrlWildcardOrRegex(input);
 		expect(returnValue).toBe(true);
 	});
 
-	test('isValidUrlWildcardOrRegex should return true with regex URL entered', () => {
+	test('isValidUrlWildcardOrRegex should return false with wildcard URL entered', () => {
 		const wrapper = shallow(<TrustAndRestrict />);
-		const input = '[ds]eveloper.mozilla.org';
 
-		const fn = jest.spyOn(wrapper.instance(), 'isValidUrlWildcardOrRegex');
-		when(fn)
-			.calledWith(input)
-			.mockReturnValue(true);
-		const returnValue = wrapper.instance().isValidUrlWildcardOrRegex(input);
-		expect(returnValue).toBe(true);
-	});
+		let input = '<script>*</script>';
+		let fn = jest.spyOn(wrapper.instance(), 'isValidUrlWildcardOrRegex');
+		when(fn).calledWith(input);
+		let returnValue = wrapper.instance().isValidUrlWildcardOrRegex(input);
+		expect(returnValue).toBe(false);
 
-	test('isValidUrlWildcardOrRegex should return false with unsafe regex entered', () => {
-		const wrapper = shallow(<TrustAndRestrict />);
-		const input = '/^(\w+\s?)*$/';
+		input = '+$@@#$*';
+		fn = jest.spyOn(wrapper.instance(), 'isValidUrlWildcardOrRegex');
+		when(fn).calledWith(input);
+		returnValue = wrapper.instance().isValidUrlWildcardOrRegex(input);
+		expect(returnValue).toBe(false);
 
-		const fn = jest.spyOn(wrapper.instance(), 'isValidUrlWildcardOrRegex');
-		when(fn)
-			.calledWith(input)
-			.mockReturnValue(false);
-		const returnValue = wrapper.instance().isValidUrlWildcardOrRegex(input);
+		input = 'αράδειγμα.δοκιμ.*';
+		fn = jest.spyOn(wrapper.instance(), 'isValidUrlWildcardOrRegex');
+		when(fn).calledWith(input);
+		returnValue = wrapper.instance().isValidUrlWildcardOrRegex(input);
+		expect(returnValue).toBe(false);
+
+		input = 'SELECT * FROM USERS';
+		fn = jest.spyOn(wrapper.instance(), 'isValidUrlWildcardOrRegex');
+		when(fn).calledWith(input);
+		returnValue = wrapper.instance().isValidUrlWildcardOrRegex(input);
 		expect(returnValue).toBe(false);
 	});
 
-	test('isValidUrlWildcardOrRegex should return false with incorrect regex format entered', () => {
+	test('isValidUrlWildcardOrRegex should return true with regex entered', () => {
 		const wrapper = shallow(<TrustAndRestrict />);
-		const input = '[.ghostery.com';
 
-		const fn = jest.spyOn(wrapper.instance(), 'isValidUrlWildcardOrRegex');
-		when(fn)
-			.calledWith(input)
-			.mockReturnValue(false);
-		const returnValue = wrapper.instance().isValidUrlWildcardOrRegex(input);
+		let input = '[de]eveloper.mozilla.org';
+		let fn = jest.spyOn(wrapper.instance(), 'isValidUrlWildcardOrRegex');
+		when(fn).calledWith(input);
+		let returnValue = wrapper.instance().isValidUrlWildcardOrRegex(input);
+		expect(returnValue).toBe(true);
+
+		input = '\d{3}';
+		fn = jest.spyOn(wrapper.instance(), 'isValidUrlWildcardOrRegex');
+		when(fn).calledWith(input);
+		returnValue = wrapper.instance().isValidUrlWildcardOrRegex(input);
+		expect(returnValue).toBe(true);
+
+		input = 'mi.....ft';
+		fn = jest.spyOn(wrapper.instance(), 'isValidUrlWildcardOrRegex');
+		when(fn).calledWith(input);
+		returnValue = wrapper.instance().isValidUrlWildcardOrRegex(input);
+		expect(returnValue).toBe(true);
+
+		input = '^pet';
+		fn = jest.spyOn(wrapper.instance(), 'isValidUrlWildcardOrRegex');
+		when(fn).calledWith(input);
+		returnValue = wrapper.instance().isValidUrlWildcardOrRegex(input);
+		expect(returnValue).toBe(true);
+
+		input = '[lu]z{2,6}';
+		fn = jest.spyOn(wrapper.instance(), 'isValidUrlWildcardOrRegex');
+		when(fn).calledWith(input);
+		returnValue = wrapper.instance().isValidUrlWildcardOrRegex(input);
+		expect(returnValue).toBe(true);
+	});
+
+	test('isValidUrlWildcardOrRegex should return false with regex entered', () => {
+		const wrapper = shallow(<TrustAndRestrict />);
+
+		let input = ')';
+		let fn = jest.spyOn(wrapper.instance(), 'isValidUrlWildcardOrRegex');
+		when(fn).calledWith(input);
+		let returnValue = wrapper.instance().isValidUrlWildcardOrRegex(input);
+		expect(returnValue).toBe(false);
+
+		input = '++';
+		fn = jest.spyOn(wrapper.instance(), 'isValidUrlWildcardOrRegex');
+		when(fn).calledWith(input);
+		returnValue = wrapper.instance().isValidUrlWildcardOrRegex(input);
+		expect(returnValue).toBe(false);
+
+		input = '/foo(?)/';
+		fn = jest.spyOn(wrapper.instance(), 'isValidUrlWildcardOrRegex');
+		when(fn).calledWith(input);
+		returnValue = wrapper.instance().isValidUrlWildcardOrRegex(input);
+		expect(returnValue).toBe(false);
+	});
+
+	test('isValidUrlWildcardOrRegex should return false with unsafe test entered', () => {
+		const wrapper = shallow(<TrustAndRestrict />);
+
+		let input = '/^(\w+\s?)*$/';
+		let fn = jest.spyOn(wrapper.instance(), 'isSafe');
+		when(fn).calledWith(input);
+		let returnValue = wrapper.instance().isSafe(input);
+		expect(returnValue).toBe(false);
+
+		input = '/^([0-9]+)*$/';
+		fn = jest.spyOn(wrapper.instance(), 'isSafe');
+		when(fn).calledWith(input);
+		returnValue = wrapper.instance().isSafe(input);
+		expect(returnValue).toBe(false);
+
+		input = '(?:.\s*)*?';
+		fn = jest.spyOn(wrapper.instance(), 'isSafe');
+		when(fn).calledWith(input);
+		returnValue = wrapper.instance().isSafe(input);
+		expect(returnValue).toBe(false);
+
+		input = '(x\w{1,10})+y';
+		fn = jest.spyOn(wrapper.instance(), 'isSafe');
+		when(fn).calledWith(input);
+		returnValue = wrapper.instance().isSafe(input);
+		expect(returnValue).toBe(false);
+
+		input = '^((ab)*)+$';
+		fn = jest.spyOn(wrapper.instance(), 'isSafe');
+		when(fn).calledWith(input);
+		returnValue = wrapper.instance().isSafe(input);
 		expect(returnValue).toBe(false);
 	});
 });
