@@ -143,11 +143,5 @@ describe('app/panel/components/Settings/', () => {
 		when(fn).calledWith(input);
 		returnValue = wrapper.instance().isValidUrlorWildcard(input);
 		expect(returnValue).toBe(false);
-
-		input = '.*.*.*.*.*.*.*.*.*.*.*';
-		fn = jest.spyOn(wrapper.instance(), 'isValidUrlorWildcard');
-		when(fn).calledWith(input);
-		returnValue = wrapper.instance().isValidUrlorWildcard(input);
-		expect(returnValue).toBe(false);
 	});
 });
