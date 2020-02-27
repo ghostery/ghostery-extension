@@ -12,7 +12,6 @@
  */
 
 import React from 'react';
-import safe from 'safe-regex';
 import Sites from './Sites';
 /**
  * @class Implement Trust and Restrict subview presenting the lists
@@ -121,7 +120,7 @@ class TrustAndRestrict extends React.Component {
 
 		// Check for Validity
 		if (pageHost.length >= 2083
-			|| !this.isValidUrlWildcardOrRegex(pageHost)) {
+			|| !this.isValidUrlorWildcard(pageHost)) {
 			this.showWarning(t('white_black_list_error_invalid_url'));
 			return;
 		}
@@ -138,11 +137,16 @@ class TrustAndRestrict extends React.Component {
 			this.props.actions.updateSitePolicy({ type: otherListType, pageHost });
 		}
 		this.props.actions.updateSitePolicy({ type: listType, pageHost });
+		if (listType === 'whitelist') {
+			this.setState({ trustedValue: '' });
+		} else {
+			this.setState({ restrictedValue: '' });
+		}
 	}
 
-	isValidUrlWildcardOrRegex(pageHost) {
-		// Only allow valid host name, and regex characters as well as : for port numbers
-		const isSafePageHost = /^[a-zA-Z-1-9-:.,^$*+?()[{}|\]]*$/;
+	isValidUrlorWildcard(pageHost) {
+		// Only allow valid host name characters, ':' for port numbers and '*' for wildcards
+		const isSafePageHost = /^[a-zA-Z1-9-.:*]*$/;
 		if (!isSafePageHost.test(pageHost)) { return false; }
 
 		// Check for valid URL from node-validator
@@ -150,32 +154,18 @@ class TrustAndRestrict extends React.Component {
 		if (isValidUrlRegex.test(pageHost)) return true;
 
 		// Check for valid wildcard
-		const escapedPattern = pageHost.replace(/[|\\{}()[\]^$+*?.-]/g, '\\$&');
+		let isValidWildcard = false;
 		if (pageHost.includes('*')) {
-			const wildcardPattern = escapedPattern.replace(/\*/g, '.*');
-			let isValidWildcard = true;
+			const wildcardPattern = pageHost.replace(/\*/g, '.*');
 			try {
 				// eslint-disable-next-line
 				new RegExp(wildcardPattern);
+				isValidWildcard = true;
 			} catch {
-				isValidWildcard = false;
+				return false;
 			}
-			if (isValidWildcard) return true;
 		}
-
-		// Prevent ReDoS attack
-		if (!safe(pageHost)) return false;
-
-		// Check for valid regex
-		let isValidRegex = true;
-		try {
-			// eslint-disable-next-line
-			new RegExp(escapedPattern);
-		} catch {
-			isValidRegex = false;
-		}
-
-		return isValidRegex;
+		return isValidWildcard;
 	}
 
 	/**
