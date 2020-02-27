@@ -187,7 +187,7 @@ class Policy {
 	 * @return {boolean}
 	 */
 	matchesWildcard(url, pattern) {
-		if (typeof pattern !== 'undefined' && pattern.includes('*')) {
+		if (pattern && pattern.includes('*')) {
 			const wildcardPattern = pattern.replace(/\*/g, '.*');
 			try {
 				const wildcardRegex = new RegExp(wildcardPattern);
