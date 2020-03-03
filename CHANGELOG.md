@@ -3,6 +3,7 @@
 + Migrate to the new Chromium-based Edge browser (#492)
 + Disable Purplebox on Firefox Android (#494)
 + Allow white-listing of wildcard domains (#501)
++ Allow site-specific white-listing of Unknown Trackers caught by Ad-Blocker (#503)
 + Fixes issue when adding localhost to Trusted Sites with port value (Fixes #470)
 + Add locale-appropriate formatting to historical stats numbers (#498)
 + Remove email opt-in from account creation in panel and hub (#495)
