@@ -104,23 +104,14 @@ export default (state = initialState, action) => {
 		}
 		case UPDATE_CLIQZ_MODULE_DATA:
 		case UPDATE_SUMMARY_DATA: {
-			if (action.data.antiTracking) {
+			if (action.data.antiTracking && action.data.adBlock) {
 				const { antiTracking, adBlock } = action.data;
-				let adBlockUnknownTrackers = adBlock.unknownTrackers;
-				antiTracking.unknownTrackers.forEach((tracker) => {
-					if (tracker.whitelisted) {
-						adBlockUnknownTrackers = adBlockUnknownTrackers.filter(adBlockTracker => (
-							adBlockTracker.name !== tracker.name
-						));
-					}
-				});
-
 				const unknownCategory = {
 					totalUnsafeCount: antiTracking.totalUnsafeCount + adBlock.totalUnsafeCount,
 					totalUnknownCount: antiTracking.totalUnknownCount + adBlock.totalUnknownCount,
 					trackerCount: antiTracking.trackerCount + adBlock.trackerCount,
 					unknownTrackerCount: antiTracking.unknownTrackerCount + adBlock.unknownTrackerCount,
-					unknownTrackers: Array.from(new Set(antiTracking.unknownTrackers.concat(adBlockUnknownTrackers))),
+					unknownTrackers: Array.from(new Set(antiTracking.unknownTrackers.concat(adBlock.unknownTrackers))),
 					whitelistedUrls: Object.assign({}, antiTracking.whitelistedUrls, adBlock.whitelistedUrls),
 					hide: state.unknownCategory.hide,
 				};

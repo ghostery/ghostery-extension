@@ -77,7 +77,7 @@ export const renderUnknownTrackerButtons = (
 			</span>
 
 			{/* USE INLINE SVG FOR ANTI-TRACKING SHIELD TO CHANGE COLORS WITH CSS */}
-			<span className="t-tooltip-up-left" data-g-tooltip={t('panel_tracker_scrub_tooltip')}>
+			<span className="t-tooltip-up-left" data-g-tooltip={type === 'antiTracking' ? t('panel_tracker_scrub_tooltip') : t('panel_tracker_restrict_tooltip')}>
 				<svg className="cliqz-tracker-scrub" onClick={handleCliqzTrackerWhitelist} width="20px" height="20px" viewBox="0 0 20 20">
 					<g transform="translate(1 1)" fill="none" fillRule="evenodd">
 						<path className="border" stroke="#00AEF0" d="M-.5-.5h18.3v18.217H-.5z" />

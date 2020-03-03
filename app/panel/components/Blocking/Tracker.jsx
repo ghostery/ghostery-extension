@@ -342,7 +342,7 @@ class Tracker extends React.Component {
 							this.clickTrackerRestrict,
 							this.clickTrackerStatus,
 						)}
-						{isUnknown && tracker.type === 'antiTracking' && renderUnknownTrackerButtons(
+						{isUnknown && renderUnknownTrackerButtons(
 							this.handleCliqzTrackerWhitelist,
 							tracker.whitelisted,
 							tracker.siteRestricted,

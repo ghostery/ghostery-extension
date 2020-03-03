@@ -1193,7 +1193,6 @@ function isWhitelisted(state) {
 	// state.ghosteryWhitelisted is sometimes undefined so force to bool
 	return Boolean(globals.SESSION.paused_blocking || events.policy.getSitePolicy(state.tabUrl, state.url) === 2 || state.ghosteryWhitelisted);
 }
-
 /**
  * Set listener for 'enabled' event for Antitracking module which replaces
  * Antitracking isWhitelisted method with Ghostery's isWhitelisted method.
@@ -1213,7 +1212,9 @@ antitracking.on('enabled', () => {
  * @memberOf Background
  */
 adblocker.on('enabled', () => {
-	adblocker.isReady().then(() => adblocker.action('addWhiteListCheck', url => isWhitelisted({ tabUrl: url })));
+	adblocker.isReady().then(() => {
+		adblocker.action('addWhiteListCheck', isWhitelisted);
+	});
 });
 
 /**
