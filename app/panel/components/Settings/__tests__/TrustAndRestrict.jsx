@@ -31,11 +31,17 @@ describe('app/panel/components/Settings/TrustAndRestrict', () => {
 describe('app/panel/components/Settings/', () => {
 	test('isValidUrlorWildcard should return true with url entered', () => {
 		const wrapper = shallow(<TrustAndRestrict />);
-		const input = 'ghostery.com';
+		let input = 'ghostery.com';
 
-		const fn = jest.spyOn(wrapper.instance(), 'isValidUrlorWildcard');
+		let fn = jest.spyOn(wrapper.instance(), 'isValidUrlorWildcard');
 		when(fn).calledWith(input);
-		const returnValue = wrapper.instance().isValidUrlorWildcard(input);
+		let returnValue = wrapper.instance().isValidUrlorWildcard(input);
+		expect(returnValue).toBe(true);
+
+		input = 'localhost:3000';
+		fn = jest.spyOn(wrapper.instance(), 'isValidUrlorWildcard');
+		when(fn).calledWith(input);
+		returnValue = wrapper.instance().isValidUrlorWildcard(input);
 		expect(returnValue).toBe(true);
 	});
 

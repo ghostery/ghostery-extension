@@ -146,7 +146,7 @@ class TrustAndRestrict extends React.Component {
 
 	isValidUrlorWildcard(pageHost) {
 		// Only allow valid host name characters, ':' for port numbers and '*' for wildcards
-		const isSafePageHost = /^[a-zA-Z1-9-.:*]*$/;
+		const isSafePageHost = /^[a-zA-Z0-9-.:*]*$/;
 		if (!isSafePageHost.test(pageHost)) { return false; }
 
 		// Check for valid URL from node-validator
