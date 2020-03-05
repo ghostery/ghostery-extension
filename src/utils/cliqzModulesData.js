@@ -24,7 +24,9 @@ const { adblocker, antitracking } = cliqz.modules;
  * Get the totalUnsafeCount of trackers found by Anti-Tracking on this tabId
  * @memberOf BackgroundUtils
  * @param  {number} tabId
- * @return {object}	totalUnsafeCount
+ * @param  {string} tabHostUrl
+ * @param  {boolean} antiTracking 	Fetch data from the anti-tracking module
+ * @return {object}
  */
 export function getCliqzData(tabId, tabHostUrl, antiTracking) {
 	let totalUnsafeCount = 0;
@@ -129,6 +131,7 @@ export function getCliqzGhosteryBugs(tabId) {
  * found by Anti-Tracking
  * @memberOf BackgroundUtils
  * @param  {number}   	tabId
+ * @param  {string} 	tabHostUrl
  * @param  {Function} 	callback
  */
 export function sendCliqzModuleCounts(tabId, tabHostUrl, callback) {
