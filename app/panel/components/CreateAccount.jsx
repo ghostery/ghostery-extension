@@ -15,7 +15,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ClassNames from 'classnames';
 import RSVP from 'rsvp';
-import { validateEmail, validateConfirmEmail, validatePassword } from '../utils/utils';
+import { validateEmail, validateConfirmEmail, validatePassword } from '../../../src/utils/utils';
 import I18nWithLink from '../../shared-components/I18nWithLink';
 
 /**

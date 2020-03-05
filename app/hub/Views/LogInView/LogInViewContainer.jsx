@@ -13,7 +13,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { validateEmail } from '../../../panel/utils/utils';
+import { validateEmail } from '../../../../src/utils/utils';
 import LogInView from './LogInView';
 import SignedInView from '../SignedInView';
 /**
