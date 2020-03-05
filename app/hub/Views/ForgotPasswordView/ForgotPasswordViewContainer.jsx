@@ -1,5 +1,5 @@
 /**
- * Create Account View Container
+ * Forgot Password View Container
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/

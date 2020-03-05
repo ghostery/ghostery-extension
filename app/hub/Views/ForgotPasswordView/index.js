@@ -34,7 +34,6 @@ const mapStateToProps = state => Object.assign({}, state.account);
  * @memberof SetupContainers
  */
 
-// const mapDispatchToProps = dispatch => ({ actions: bindActionCreators(Object.assign(actions, { resetPassword }), dispatch) });
 const mapDispatchToProps = dispatch => ({
 	actions: bindActionCreators(Object.assign({}, {
 		setToast,
