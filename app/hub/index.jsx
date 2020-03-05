@@ -28,6 +28,7 @@ import PlusView from './Views/PlusView';
 import RewardsView from './Views/RewardsView';
 import ProductsView from './Views/ProductsView';
 import CreateAccountView from './Views/CreateAccountView';
+import ForgotPasswordView from './Views/ForgotPasswordView';
 import LogInView from './Views/LogInView';
 
 const store = createStore();
@@ -45,6 +46,7 @@ const Hub = () => (
 		<Route exact path="/rewards" component={RewardsView} />
 		<Route exact path="/products" component={ProductsView} />
 		<Route exact path="/create-account" component={CreateAccountView} />
+		<Route exact path="/forgot-password" component={ForgotPasswordView} />
 		<Route exact path="/log-in" component={LogInView} />
 	</AppView>
 );

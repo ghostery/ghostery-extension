@@ -92,6 +92,13 @@ const LogInView = (props) => {
 						)}
 						<div className="flex-container align-center">
 							<span className="LogInView__link text-center">
+								<NavLink to="/forgot-password">
+									{ t('forgot_password') }
+								</NavLink>
+							</span>
+						</div>
+						<div className="flex-container align-center">
+							<span className="LogInView__link text-center">
 								{ t('hub_login_link_dont_have_account') }
 								&nbsp;
 								<NavLink to="/create-account">

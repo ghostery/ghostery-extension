@@ -505,7 +505,7 @@
 			}
 		}
 	},
-	"panel_forgot_password": {
+	"forgot_password": {
 		"message": "Forgot Password?"
 	},
 	"panel_help_panel_header": {

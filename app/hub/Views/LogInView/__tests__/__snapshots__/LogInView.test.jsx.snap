@@ -73,6 +73,21 @@ exports[`app/hub/Views/LogIn component Snapshot tests with react-test-renderer l
           <span
             className="LogInView__link text-center"
           >
+            <a
+              aria-current={null}
+              href="/forgot-password"
+              onClick={[Function]}
+            >
+              forgot_password
+            </a>
+          </span>
+        </div>
+        <div
+          className="flex-container align-center"
+        >
+          <span
+            className="LogInView__link text-center"
+          >
             hub_login_link_dont_have_account
              
             <a
@@ -176,6 +191,21 @@ exports[`app/hub/Views/LogIn component Snapshot tests with react-test-renderer l
           className="LogInView__inputError"
         >
           hub_login_label_password_invalid
+        </div>
+        <div
+          className="flex-container align-center"
+        >
+          <span
+            className="LogInView__link text-center"
+          >
+            <a
+              aria-current={null}
+              href="/forgot-password"
+              onClick={[Function]}
+            >
+              forgot_password
+            </a>
+          </span>
         </div>
         <div
           className="flex-container align-center"

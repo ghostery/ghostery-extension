@@ -14,7 +14,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ClassNames from 'classnames';
-import { validateEmail } from '../utils/utils';
+import { validateEmail } from '../../../src/utils/utils';
 /**
  * @class Implement Forgot Password view which opens from the link on Sign In panel.
  * @memberof PanelClasses

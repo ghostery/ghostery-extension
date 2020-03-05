@@ -15,7 +15,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ClassNames from 'classnames';
 import RSVP from 'rsvp';
-import { validateEmail } from '../utils/utils';
+import { validateEmail } from '../../../src/utils/utils';
 import { log } from '../../../src/utils/common';
 import history from '../utils/history';
 
@@ -137,7 +137,7 @@ class Login extends React.Component {
 					<div className="small-11 medium-8 columns">
 						<div className="row">
 							<div className="small-6 columns text-center">
-								<Link to="/forgot-password">{ t('panel_forgot_password') }</Link>
+								<Link to="/forgot-password">{ t('forgot_password') }</Link>
 							</div>
 							<div className="small-6 columns text-center">
 								<Link to="/create-account">{ t('create_account') }</Link>
