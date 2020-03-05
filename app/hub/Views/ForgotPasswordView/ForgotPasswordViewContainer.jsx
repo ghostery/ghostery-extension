@@ -46,32 +46,31 @@ class ForgotPasswordViewContainer extends Component {
 	 */
 	handleSubmit = (e) => {
 		e.preventDefault();
-		this.setState({ loading: true });
-		// this.setState({ loading: true }, () => {
-		// 	const { email } = this.state;
+		this.setState({ loading: true }, () => {
+			const { email } = this.state;
 
-		// 	// validate the email and password
-		// 	if (!validateEmail(email)) {
-		// 		this.setState({
-		// 			emailError: true,
-		// 			loading: false,
-		// 		});
-		// 		return;
-		// 	}
+			// validate the email and password
+			if (!validateEmail(email)) {
+				this.setState({
+					emailError: true,
+					loading: false,
+				});
+				return;
+			}
 
-		// 	// Try to reset the password and display a success/error message
-		// 	this.props.actions.resetPassword(email)
-		// 		.then((success) => {
-		// 			this.setState({ loading: false });
-		// 			if (success) {
-		// 				this.props.history.push('/log-in');
-		// 			}
-		// 			this.props.actions.setToast({
-		// 				toastMessage: this.props.toastMessage,
-		// 				toastClass: this.props.resetPasswordError ? 'alert' : 'success',
-		// 			});
-		// 		});
-		// });
+			// Try to reset the password and display a success/error message
+			this.props.actions.resetPassword(email)
+				.then((success) => {
+					this.setState({ loading: false });
+					if (success) {
+						this.props.history.push('/log-in');
+					}
+					this.props.actions.setToast({
+						toastMessage: this.props.toastMessage,
+						toastClass: this.props.resetPasswordError ? 'alert' : 'success',
+					});
+				});
+		});
 	}
 
 	/**
