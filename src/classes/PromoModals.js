@@ -17,7 +17,8 @@ import panelData from './PanelData';
 
 const DAYS_BETWEEN_PROMOS = {
 	premium: globals.DEBUG ? 0.0005 : 30, // 40 seconds on staging
-	insights: globals.DEBUG ? 0.0005 : 30 // 40 seconds on staging
+	insights: globals.DEBUG ? 0.0005 : 30, // 40 seconds on staging
+	plus: globals.DEBUG ? 0.0005 : 30 // 40 seconds on staging
 };
 const WEEKLY_INSIGHTS_TARGET = globals.DEBUG ? 1 : 3;
 const DAILY_INSIGHTS_TARGET = globals.DEBUG ? 7 : 3;
@@ -25,6 +26,7 @@ const DAILY_INSIGHTS_TARGET = globals.DEBUG ? 7 : 3;
 const MSECS_IN_DAY = 86400000; // 1000 msecs-in-sec * 60 secs-in-min * 60 mins-in-hour * 24 hours-in-day
 const PREMIUM = 'premium';
 const INSIGHTS = 'insights';
+const PLUS = 'plus';
 const PROMO_MODAL_LAST_SEEN = 'promo_modal_last_seen';
 
 /**
@@ -40,15 +42,17 @@ class PromoModals {
 	 */
 	static whichPromoModalShouldWeDisplay() {
 		// The order is important
-		// Insights takes priority over Premium
+		// Insights takes priority over Plus
 		if (this._isTimeForAPromo(INSIGHTS)) return INSIGHTS;
-		if (this._isTimeForAPromo(PREMIUM)) return PREMIUM;
+		if (this._isTimeForAPromo(PLUS)) return PLUS;
 		return null;
 	}
 
 	static recordPremiumPromoSighting() { this._recordPromoSighting(PREMIUM); }
 
 	static recordInsightsPromoSighting() { this._recordPromoSighting(INSIGHTS); }
+
+	static recordPlusPromoSighting() { this._recordPromoSighting(PLUS); }
 
 	static turnOffPromos() { panelData.set({ notify_promotions: false }); }
 
@@ -61,9 +65,9 @@ class PromoModals {
 	static _isTimeForAPromo(type) {
 		if (conf.notify_promotions === false) { return false; }
 
-		const lastSeenPremiumPromo = conf[`${PREMIUM}_${PROMO_MODAL_LAST_SEEN}`];
+		const lastSeenPlusPromo = conf[`${PLUS}_${PROMO_MODAL_LAST_SEEN}`];
 		const lastSeenInsightsPromo = conf[`${INSIGHTS}_${PROMO_MODAL_LAST_SEEN}`];
-		const lastSeenPromo = Math.max(lastSeenPremiumPromo, lastSeenInsightsPromo);
+		const lastSeenPromo = Math.max(lastSeenPlusPromo, lastSeenInsightsPromo);
 
 		if (type === INSIGHTS && !this._hasEngagedFrequently()) {
 			return false;

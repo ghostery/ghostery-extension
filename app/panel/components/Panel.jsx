@@ -16,6 +16,7 @@ import { NavLink } from 'react-router-dom';
 import Header from '../containers/HeaderContainer';
 import { PremiumPromoModal } from '../../shared-components';
 import InsightsPromoModal from './InsightsPromoModal';
+import PlusPromoModal from './PlusPromoModal';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import { setTheme } from '../utils/utils';
@@ -376,26 +377,54 @@ class Panel extends React.Component {
 	/**
 	 * @returns {null|JSX}
 	 * @private
+	 * Renders the Insights promo modal if the user is not already an Insights subscriber
+	 */
+	_renderPlusPromoModal = () => {
+		// if (this._plusSubscriber()) return null;
+		if (this._plusSubscriber()) {
+			console.log('test');
+		}
+
+		// sendMessage('promoModals.sawPlusPromo', {});
+
+		// sendMessage('ping', 'promo_modals_show_plus');
+
+		return (
+			<PlusPromoModal
+				handleGoAwayClick={this._handlePromoGoAwayClick}
+				handleSignInClick={this._handlePromoSignInClick}
+				handleSubscribeClick={this._handlePromoSubscribeClick}
+				handleXClick={this._handlePromoXClick}
+				show
+			/>
+		);
+	}
+
+	_renderPromoModal = () => this._renderPlusPromoModal();
+
+	/**
+	 * @returns {null|JSX}
+	 * @private
 	 * Renders either the Insights or the Premium promo modal
 	 */
-	_renderPromoModal = () => {
-		const {
-			promoModal,
-			isPromoModalHidden,
-		} = this.props;
+	// _renderPromoModal = () => {
+	// 	const {
+	// 		promoModal,
+	// 		isPromoModalHidden,
+	// 	} = this.props;
 
-		if (isPromoModalHidden) return null;
+	// 	if (isPromoModalHidden) return null;
 
-		if (promoModal === 'insights') {
-			return this._renderInsightsPromoModal();
-		}
+	// 	if (promoModal === 'insights') {
+	// 		return this._renderInsightsPromoModal();
+	// 	}
 
-		if (promoModal === 'premium') {
-			return this._renderPremiumPromoModal();
-		}
+	// 	if (promoModal === 'premium') {
+	// 		return this._renderPremiumPromoModal();
+	// 	}
 
-		return null;
-	}
+	// 	return null;
+	// }
 
 	/**
 	 * React's required render function. Returns JSX

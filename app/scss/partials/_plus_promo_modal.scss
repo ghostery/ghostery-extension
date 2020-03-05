@@ -1,0 +1,175 @@
+/**
+ * Plus Promo Modal Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+// Plus Promo Modal
+$standard-font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+.PlusPromoModal__content {
+  position: relative;
+  z-index: 10;
+  width: 456px;
+  height: 410px;
+  border: solid 1.9px $spring-green;
+  background-color: #f7f7f7;
+}
+
+.PlusPromoModal__plus-logo {
+  width: 216px;
+  height: 92px;
+  margin: 22px 0px 6px;
+  background-image: url('/app/images/panel/spring-plus-logo.svg');
+}
+
+.PlusPromoModal__main-content-container {
+  height: 210px;
+  display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  justify-content: center;
+}
+.PlusPromoModal__header {
+	text-align: center;
+	font-weight: bold;
+	font-family: $standard-font-family;
+	.title {
+		font-size: 20px;
+		margin-top: 8px;
+	}
+	.description {
+		font-size: 18px;
+		margin-top: 16px;
+		font-weight: 500;
+		color: $tundora;
+		width: 350px;
+	}
+}
+
+.PlusPromoModal__header-beta-icon {
+  float: right;
+  margin-left: 5px;
+  width: 20px;
+  height: 12px;
+  background-image: url('/app/images/panel/midnight-beta-icon.svg');
+}
+
+.PlusPromoModal__sub-header {
+  width: 438px;
+  margin-bottom: 12px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.5;
+  color: #4A4A4A;
+}
+
+.PlusPromoModal__features-container {
+  display: flex;
+  width: 100%;
+}
+
+.PlusPromoModal__feature-column {
+  &:nth-child(odd) {
+	margin-left: 20px;
+	width: 55%;
+  }
+  &:nth-child(even) {
+	margin-right: 25px;
+	width: 45%;
+  }
+}
+
+.PlusPromoModal__feature {
+  display: flex;
+  align-items: center;
+  &:nth-child(1) {
+	margin-bottom: 4px;
+  }
+}
+
+.PlusPromoModal__feature-text {
+  font-family: $standard-font-family;
+  font-size: 14px;
+  color: $medium-gray;
+  padding-bottom: 5px;
+  line-height: 16px;
+}
+
+.PlusPromoModal__checked-circle-icon {
+  flex: none;
+  height: 18px;
+  width: 18px;
+  margin-right: 8px;
+  background-image: url('/app/images/panel/midnight-check-icon.svg');
+  align-self: flex-start;
+}
+
+.PlusPromoModal__call-to-action-container {
+  background-color: #e7ecee;
+  margin-bottom: 3px;
+  width: 99%;
+  height: 107px;
+  z-index: -1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; // Edge does not support space-evenly
+  position: absolute;
+  bottom: 1px;
+}
+
+.PlusPromoModal__button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.PlusPromoModal__download-button {
+	height: 36px;
+	width: 176px;
+  border-radius: 2px;
+	padding: 0px 20px 0px;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12);
+	background-color: #1dafed;
+
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: $condensed-font-family;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  text-align: center;
+  color: #ffffff;
+
+  transition: background-color 0.25s ease-out, color 0.25s ease-out;
+
+  text-transform: uppercase;
+}
+
+.PlusPromoModal__text-link-container {
+  display: flex;
+  justify-content: space-around; // Edge does not support space-evenly
+}
+
+.PlusPromoModal__link {
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 15px;
+  font-family: $standard-font-family;
+  color: #4a4a4a;
+  text-decoration: underline;
+  text-align: center;
+  cursor: pointer;
+}

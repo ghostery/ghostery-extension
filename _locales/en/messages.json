@@ -2349,6 +2349,9 @@
   	"seven_day_free_trial": {
 	  "message": "7 Day Free Trial (&#36;14/mo)"
 	},
+	"spring_has_sprung": {
+		"message": "Spring has sprung!"
+	},
   	"full_coverage_protection_promise": {
 	  "message": "Get full-coverage protection across all browsers & apps on your device"
 	},
