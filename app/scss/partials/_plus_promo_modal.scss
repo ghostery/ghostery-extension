@@ -171,5 +171,15 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
   color: #4a4a4a;
   text-decoration: underline;
   text-align: center;
-  cursor: pointer;
+	cursor: pointer;
+
+	&.sign-in {
+		float: left;
+		left: 10px;
+	}
+
+	&.turn-promos-off {
+		float: right;
+		right: 10px;
+	}
 }

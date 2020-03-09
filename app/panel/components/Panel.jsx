@@ -16,7 +16,7 @@ import { NavLink } from 'react-router-dom';
 import Header from '../containers/HeaderContainer';
 import { PremiumPromoModal } from '../../shared-components';
 import InsightsPromoModal from './InsightsPromoModal';
-import PlusPromoModal from './PlusPromoModal';
+import PlusPromoModal from '../containers/PlusPromoModalContainer';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import { setTheme } from '../utils/utils';
@@ -248,6 +248,21 @@ class Panel extends React.Component {
 
 	/**
 	 * @private
+	 * Handle clicks on the download button in the Premium promo modals
+	 */
+	_handlePromoTryPlusClick = () => {
+		this.props.actions.togglePromoModal();
+
+		// Add utm params
+		const url = `https://checkout.${DOMAIN}.com/plus?utm_source=gbe&utm_campaign=in_app_spring2020`;
+		sendMessage('openNewTab', {
+			url,
+			become_active: true,
+		});
+	}
+
+	/**
+	 * @private
 	 * Handle clicks on the 'Get Plus' option in the Premium modals
 	 */
 	_handlePromoGetPlusClick = () => {
@@ -287,6 +302,7 @@ class Panel extends React.Component {
 	 * Handle clicks on the 'X' close icon in promo modals
 	 */
 	_handlePromoXClick = (modal) => {
+		console.log('handling x click');
 		this.props.actions.togglePromoModal();
 
 		if (modal === 'insights') {
@@ -370,6 +386,7 @@ class Panel extends React.Component {
 				handleSignInClick={this._handlePromoSignInClick}
 				handleSubscribeClick={this._handlePromoSubscribeClick}
 				handleXClick={this._handlePromoXClick}
+				show
 			/>
 		);
 	}
@@ -380,51 +397,46 @@ class Panel extends React.Component {
 	 * Renders the Insights promo modal if the user is not already an Insights subscriber
 	 */
 	_renderPlusPromoModal = () => {
-		// if (this._plusSubscriber()) return null;
-		if (this._plusSubscriber()) {
-			console.log('test');
-		}
+		if (this._plusSubscriber() || this._premiumSubscriber()) { return null; }
 
-		// sendMessage('promoModals.sawPlusPromo', {});
-
-		// sendMessage('ping', 'promo_modals_show_plus');
+		sendMessage('promoModals.sawPlusPromo', {});
+		sendMessage('ping', 'promo_modals_show_plus');
 
 		return (
 			<PlusPromoModal
 				handleGoAwayClick={this._handlePromoGoAwayClick}
 				handleSignInClick={this._handlePromoSignInClick}
 				handleSubscribeClick={this._handlePromoSubscribeClick}
+				handleTryPlusClick={this._handlePromoTryPlusClick}
 				handleXClick={this._handlePromoXClick}
 				show
 			/>
 		);
 	}
 
-	_renderPromoModal = () => this._renderPlusPromoModal();
-
 	/**
 	 * @returns {null|JSX}
 	 * @private
 	 * Renders either the Insights or the Premium promo modal
 	 */
-	// _renderPromoModal = () => {
-	// 	const {
-	// 		promoModal,
-	// 		isPromoModalHidden,
-	// 	} = this.props;
+	_renderPromoModal = () => {
+		const {
+			promoModal,
+			isPromoModalHidden,
+		} = this.props;
 
-	// 	if (isPromoModalHidden) return null;
+		if (isPromoModalHidden) return null;
 
-	// 	if (promoModal === 'insights') {
-	// 		return this._renderInsightsPromoModal();
-	// 	}
+		if (promoModal === 'insights') {
+			return this._renderInsightsPromoModal();
+		}
 
-	// 	if (promoModal === 'premium') {
-	// 		return this._renderPremiumPromoModal();
-	// 	}
+		if (promoModal === 'plus') {
+			return this._renderPlusPromoModal();
+		}
 
-	// 	return null;
-	// }
+		return null;
+	}
 
 	/**
 	 * React's required render function. Returns JSX

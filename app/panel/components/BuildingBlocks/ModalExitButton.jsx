@@ -28,7 +28,7 @@ const ModalExitButton = (props) => {
 	} = props;
 
 	const borderClassNames = ClassNames('ModalExitButton__exit flex-container align-middle', {
-		'spring-green': border === 'spring-green'
+		green: border === 'green'
 	});
 
 	return (

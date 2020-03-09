@@ -1,5 +1,5 @@
 /**
- * PlusPromo Modal Component
+ * PlusPromoModal Component
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -25,13 +25,11 @@ import ModalExitButton from './BuildingBlocks/ModalExitButton';
 const PlusPromoModal = (props) => {
 	const {
 		show,
-		location,
-		isPlus,
-		handleTryMidnightClick,
-		handleGetPlusClick,
-		handleKeepBasicClick,
+		handleTryPlusClick,
+		handleSignInClick,
 		handleGoAwayClick,
 		handleXClick,
+		loggedIn
 	} = props;
 
 	const contentClassNames = ClassNames(
@@ -44,7 +42,7 @@ const PlusPromoModal = (props) => {
 	return (
 		<Modal show={show}>
 			<div className={contentClassNames}>
-				<ModalExitButton className="PlusPromoModal__exitButton" toggleModal={handleXClick} border="spring-green" />
+				<ModalExitButton className="PlusPromoModal__exitButton" toggleModal={handleXClick} border="green" />
 				<div className="PlusPromoModal__plus-logo" />
 				<div className="PlusPromoModal__main-content-container">
 					<div className="PlusPromoModal__header">
@@ -58,13 +56,15 @@ const PlusPromoModal = (props) => {
 				</div>
 				<div className="PlusPromoModal__call-to-action-container">
 					<div className="PlusPromoModal__button-container flex-container align-center">
-						<button type="button" className="PlusPromoModal__download-button" onClick={handleTryMidnightClick}>
+						<button type="button" className="PlusPromoModal__download-button" onClick={handleTryPlusClick}>
 							<span>UPGRADE TO PLUS</span>
 						</button>
 					</div>
-					<div className="flex-container align-justify">
-						<span className="PlusPromoModal__link">Already a plus subscriber?</span>
-						<span className="PlusPromoModal__link">{t('no_thanks_turn_promos_off')}</span>
+					<div>
+						{!loggedIn &&
+							<span className="PlusPromoModal__link sign-in" onClick={handleSignInClick}>Already a plus subscriber?</span>
+						}
+						<span className="PlusPromoModal__link turn-promos-off" onClick={handleGoAwayClick}>{t('no_thanks_turn_promos_off')}</span>
 					</div>
 				</div>
 			</div>
@@ -74,21 +74,13 @@ const PlusPromoModal = (props) => {
 
 
 // PropTypes ensure we pass required props of the correct type
-// PlusPromoModal.propTypes = {
-// 	show: PropTypes.bool.isRequired,
-// 	isPlus: PropTypes.bool.isRequired,
-// 	handleTryMidnightClick: PropTypes.func.isRequired,
-// 	handleGetPlusClick: PropTypes.func.isRequired,
-// 	handleKeepBasicClick: PropTypes.func,
-// 	handleGoAwayClick: PropTypes.func,
-// 	handleXClick: PropTypes.func,
-// };
-
-// const noop = () => {};
-// PlusPromoModal.defaultProps = {
-// 	handleKeepBasicClick: noop,
-// 	handleGoAwayClick: noop,
-// 	handleXClick: noop,
-// };
+PlusPromoModal.propTypes = {
+	show: PropTypes.bool.isRequired,
+	handleTryPlusClick: PropTypes.func.isRequired,
+	handleSignInClick: PropTypes.func.isRequired,
+	handleGoAwayClick: PropTypes.func.isRequired,
+	handleXClick: PropTypes.func.isRequired,
+	loggedIn: PropTypes.bool.isRequired,
+};
 
 export default PlusPromoModal;

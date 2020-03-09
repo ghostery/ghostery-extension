@@ -29,8 +29,9 @@ class InsightsPromoModal extends React.Component {
 	handleXClick = () => { this.props.handleXClick(INSIGHTS); }
 
 	render() {
+		const { show } = this.props;
 		return (
-			<Modal show>
+			<Modal show={show}>
 				<div className="InsightsModal__content flex-container flex-dir-column align-middle">
 					<ModalExitButton className="InsightsModal__exitButton" toggleModal={this.handleXClick} />
 					<div className="InsightsModal__image" />
