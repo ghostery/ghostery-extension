@@ -1,4 +1,4 @@
-### GHOSTERY 8.4.7 (UNRELEASED)
+### GHOSTERY 8.4.7 (March 10, 2020)
 
 + Migrate to the new Chromium-based Edge browser (#492)
 + Disable Purplebox on Firefox Android (#494)
