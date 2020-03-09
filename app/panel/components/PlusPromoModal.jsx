@@ -47,22 +47,22 @@ const PlusPromoModal = (props) => {
 				<div className="PlusPromoModal__main-content-container">
 					<div className="PlusPromoModal__header">
 						<div className="title">
-							<div>Spring has sprung!</div>
+							<div>{t('spring_has_sprung')}</div>
 						</div>
 						<div className="description">
-							<div>Support us and unlock a new spring theme, personal tracking insights, and other special perks by upgrading to Ghostery Plus for $2 per month.</div>
+							<div dangerouslySetInnerHTML={{ __html: t('subscribe_pitch_spring') }} />
 						</div>
 					</div>
 				</div>
 				<div className="PlusPromoModal__call-to-action-container">
 					<div className="PlusPromoModal__button-container flex-container align-center">
 						<button type="button" className="PlusPromoModal__download-button" onClick={handleTryPlusClick}>
-							<span>UPGRADE TO PLUS</span>
+							<span>{t('upgrade_to_plus').toUpperCase()}</span>
 						</button>
 					</div>
 					<div>
 						{!loggedIn &&
-							<span className="PlusPromoModal__link sign-in" onClick={handleSignInClick}>Already a plus subscriber?</span>
+							<span className="PlusPromoModal__link sign-in" onClick={handleSignInClick}>{t('already_subscribed_to_plus_sign_in')}</span>
 						}
 						<span className="PlusPromoModal__link turn-promos-off" onClick={handleGoAwayClick}>{t('no_thanks_turn_promos_off')}</span>
 					</div>
