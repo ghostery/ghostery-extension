@@ -253,7 +253,6 @@ class Panel extends React.Component {
 	_handlePromoTryPlusClick = () => {
 		this.props.actions.togglePromoModal();
 
-		// Add utm params
 		const url = `https://checkout.${DOMAIN}.com/plus?utm_source=gbe&utm_campaign=in_app_spring2020`;
 		sendMessage('openNewTab', {
 			url,
@@ -302,7 +301,6 @@ class Panel extends React.Component {
 	 * Handle clicks on the 'X' close icon in promo modals
 	 */
 	_handlePromoXClick = (modal) => {
-		console.log('handling x click');
 		this.props.actions.togglePromoModal();
 
 		if (modal === 'insights') {

@@ -990,7 +990,6 @@ function onMessageHandler(request, sender, callback) {
 		return false;
 	}
 	if (name === 'promoModals.turnOffPromos') {
-		console.log('turning off promos');
 		promoModals.turnOffPromos();
 		return false;
 	}
