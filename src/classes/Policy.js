@@ -192,7 +192,7 @@ class Policy {
 			try {
 				const wildcardRegex = new RegExp(wildcardPattern);
 				if (wildcardRegex.test(url)) { return true; }
-			} catch {
+			} catch (err) {
 				return false;
 			}
 		}
