@@ -161,7 +161,7 @@ class TrustAndRestrict extends React.Component {
 				// eslint-disable-next-line
 				new RegExp(wildcardPattern);
 				isValidWildcard = true;
-			} catch {
+			} catch (err) {
 				return false;
 			}
 		}
