@@ -1,0 +1,43 @@
+/**
+ * Radio Button Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+.RadioButtonGroup__label {
+	margin-right: 10px !important;
+	font-weight: bolder;
+}
+.RadioButtonGroup__container {
+	margin: 16px 0;
+	width: 138px;
+}
+.RadioButton__innerCircle {
+	&.checked {
+		height: 8px;
+		width: 8px;
+		background-color: #2092bf;
+		border-radius: 50%;
+		border: 1px solid #2092bf;
+	}
+}
+.RadioButton__outerCircle {
+	position: relative;
+	border: 1px solid #4a4a4a;
+	height: 14px;
+	width: 14px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	&.checked {
+		border: 2px solid #2092bf;
+	}
+}

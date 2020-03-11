@@ -5,7 +5,7 @@
  * https://www.ghostery.com/
  *
  * Copyright 2019 Ghostery, Inc. All rights reserved.
- * 
+ *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
@@ -58,7 +58,6 @@
 				text-align: left;
 			}
 		}
-		
 		.s-tab-title {
 			font-weight: 400;
 			font-size: 18px;
@@ -195,12 +194,11 @@
 			line-height: 1.4;
 		}
 		img.s-question {
-			top: -5px;
-			width: 14px;
+			width: 16px;
 			height: auto;
 			cursor: default;
-			vertical-align: top;
 			opacity: 1.0;
+			margin: -6px 0 0 10px;
 		}
 		.s-option-group {
 			margin-bottom: 12px;
@@ -279,7 +277,7 @@
 				border-color: #CCCCCC;
 				background-size: 8px 5px;
 				-moz-appearance: none;
-				-webkit-appearance:none;				
+				-webkit-appearance: none;
 			}
 		}
 		#select-file {

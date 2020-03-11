@@ -28,7 +28,9 @@ import PrioritySupport from './Subscription/PrioritySupport';
 class Subscription extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { isChecked: (props.current_theme !== 'default') };
+		this.state = {
+			theme: this.props.current_theme
+		};
 	}
 
 	/**
@@ -75,10 +77,8 @@ class Subscription extends React.Component {
 		return { loading: true };
 	}
 
-	toggleThemes = () => {
-		const newChecked = !this.state.isChecked;
-		this.setState({ isChecked: newChecked });
-		const updated_theme = newChecked ? 'midnight-theme' : 'default';
+	changeTheme = (updated_theme) => {
+		this.setState({ theme: updated_theme });
 		this.props.actions.getTheme(updated_theme).then(() => {
 			sendMessage('ping', 'theme_change');
 		});
@@ -86,7 +86,7 @@ class Subscription extends React.Component {
 
 	SubscriptionInfoComponent = () => (<SubscriptionInfo subscriptionData={this.parseSubscriptionData()} />);
 
-	SubscriptionThemesComponent = () => (<SubscriptionThemes isChecked={this.state.isChecked} toggleThemes={this.toggleThemes} />);
+	SubscriptionThemesComponent = () => (<SubscriptionThemes theme={this.state.theme} changeTheme={this.changeTheme} />);
 
 	PrioritySupportComponent = () => (<PrioritySupport />);
 
