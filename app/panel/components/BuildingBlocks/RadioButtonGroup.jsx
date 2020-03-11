@@ -50,7 +50,7 @@ class RadioButtonGroup extends React.Component {
 		const { buttons } = this.state;
 		return (
 			this.props.items.map((item, index) => (
-				<div className="flex-container align-middle align-justify RadioButtonGroup__container">
+				<div className="flex-container align-justify RadioButtonGroup__container">
 					<span className="RadioButtonGroup__label">
 						{t(item.text)}
 					</span>

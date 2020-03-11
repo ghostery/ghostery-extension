@@ -19,6 +19,19 @@
 	margin: 16px 0;
 	width: 138px;
 }
+.RadioButton__outerCircle {
+	border: 1px solid #4a4a4a;
+	height: 16px;
+	width: 16px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	&.checked {
+		border: 2px solid #2092bf;
+	}
+}
 .RadioButton__innerCircle {
 	&.checked {
 		height: 8px;
@@ -26,18 +39,5 @@
 		background-color: #2092bf;
 		border-radius: 50%;
 		border: 1px solid #2092bf;
-	}
-}
-.RadioButton__outerCircle {
-	position: relative;
-	border: 1px solid #4a4a4a;
-	height: 14px;
-	width: 14px;
-	border-radius: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	&.checked {
-		border: 2px solid #2092bf;
 	}
 }
