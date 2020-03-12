@@ -50,12 +50,12 @@ class RadioButtonGroup extends React.Component {
 		const { buttons } = this.state;
 		return (
 			this.props.items.map((item, index) => (
-				<div className="flex-container align-justify RadioButtonGroup__container">
+				<div className="flex-container align-justify RadioButtonGroup__container" key={`${index * 2}`}>
 					<span className="RadioButtonGroup__label">
 						{t(item.text)}
 					</span>
 					<div>
-						<RadioButton key={buttons[index]} checked={buttons[index]} handleClick={() => this.handleClick(index)} />
+						<RadioButton checked={buttons[index]} handleClick={() => this.handleClick(index)} />
 					</div>
 				</div>
 			))
