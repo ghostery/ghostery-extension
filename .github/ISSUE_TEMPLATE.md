@@ -1,4 +1,4 @@
-##### Please read the [CONTRIBUTING](/CONTRIBUTING.md) guide before submitting an issue.
+##### Please read the [CONTRIBUTING](https://github.com/ghostery/ghostery-extension/blob/master/CONTRIBUTING.md) guide before submitting an issue.
 
 ### Description
 
