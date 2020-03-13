@@ -58,6 +58,8 @@ class Globals {
 		this.GCACHE_SUB_DOMAIN = this.DEBUG ? 'staging-gcache' : 'gcache';
 		this.AUTH_SERVER = `https://consumerapi.${this.GHOSTERY_DOMAIN}.com`;
 		this.ACCOUNT_SERVER = `https://accountapi.${this.GHOSTERY_DOMAIN}.com`;
+		this.COOKIE_DOMAIN = `.${this.GHOSTERY_DOMAIN}.com`;
+		this.COOKIE_URL = `https://${this.GHOSTERY_DOMAIN}.com`;
 
 		// extension IDs
 		this.GHOSTERY_TAB_CHROME_PRODUCTION_ID = 'plmapebanmikcofllaaddgeocahboejc';
