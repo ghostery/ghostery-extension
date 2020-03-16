@@ -387,12 +387,7 @@
 	},
 	"name": {
 		"description": "The title of this extension (Ghostery).",
-		"message": "$EXTENSION_NAME$ – 개인정보 보호용 광고 차단기",
-		"placeholders": {
-			"extension_name": {
-				"content": "Ghostery"
-			}
-		}
+		"message": "Ghostery – 개인정보 보호용 광고 차단기"
 	},
 	"none": {
 		"description": "Used to say that this item does not belong to any of the groups, as in \"Groups: None\" (as opposed to \"Groups: Group A, Group B, Group C\").",
@@ -802,7 +797,7 @@
 		"message": "차단되지 않음 "
 	},
 	"white_black_list_error_invalid_url": {
-		"message": "유효한 URL을 입력해 주십시오."
+		"message": "Please enter a valid URL or wildcard."
 	},
 	"whitelist_error_blacklist_url": {
 		"message": "이 사이트는 제한된 사이트 목록에서 제거된 다음 신뢰할 수 있는 사이트 목록에 추가되었습니다."
@@ -1058,7 +1053,7 @@
 		"message": "신뢰할 수 있는 사이트 "
 	},
 	"settings_sites_placeholder": {
-		"message": "example.com"
+		"message": "example.com (wildcards supported)"
 	},
 	"settings_restricted_sites": {
 		"message": "제한된 사이트 "
