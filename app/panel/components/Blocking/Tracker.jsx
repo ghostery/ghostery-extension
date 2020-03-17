@@ -304,7 +304,7 @@ class Tracker extends React.Component {
 					className="trk-src-link"
 					title={source.src}
 					key={index}
-					href={`${encodeURIComponent(globals.GCACHE_FQDN)}/${encodeURIComponent(this.props.language)}/gcache/?n=${encodeURIComponent(tracker.name)}&s=${encodeURIComponent(source.src)}&v=2&t=${source.type}`}
+					href={`${globals.GCACHE_FQDN}/${encodeURIComponent(this.props.language)}/gcache/?n=${encodeURIComponent(tracker.name)}&s=${encodeURIComponent(source.src)}&v=2&t=${source.type}`}
 				>
 					{ source.src }
 				</a>
