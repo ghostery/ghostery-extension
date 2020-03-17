@@ -57,7 +57,7 @@ class SideNavigationViewContainer extends Component {
 			{ href: '/products', icon: 'products', text: t('hub_side_navigation_products') }
 		];
 		const bottomItems = user ? [
-			{ id: 'email', href: `https://account.${globals.GHOSTERY_DOMAIN}.com/`, text: user.email },
+			{ id: 'email', href: `${globals.ACCOUNT_FQDN}/`, text: user.email },
 			{ id: 'logout', text: t('sign_out'), clickHandler: this._handleLogoutClick },
 		] : [
 			{ id: 'create-account', href: '/create-account', text: t('create_account') },

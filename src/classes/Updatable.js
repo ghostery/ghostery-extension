@@ -17,7 +17,7 @@ import conf from './Conf';
 import { getJson, fetchLocalJSONResource } from '../utils/utils';
 import { log } from '../utils/common';
 
-const { CDN_SUB_DOMAIN } = globals;
+const { CDN_FQDN } = globals;
 /**
  * Base class for BugDb, Click2PlayDb, CompatibilityDb and SurrogateDb.
  * It provides update functionality, which all of these subclasses
@@ -131,7 +131,7 @@ class Updatable {
 	 */
 	_remoteFetcher(callback) {
 		log(`fetching ${this.type} from remote`);
-		const UPDATE_URL = `https://${CDN_SUB_DOMAIN}.ghostery.com/update/${
+		const UPDATE_URL = `${CDN_FQDN}/update/${
 			this.type === 'bugs' ? 'v3/bugs' : this.type}`;
 
 		getJson(UPDATE_URL).then((list) => {

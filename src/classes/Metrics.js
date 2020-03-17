@@ -25,7 +25,7 @@ const FREQUENCIES = { // in milliseconds
 };
 const CRITICAL_METRICS = ['install', 'install_complete', 'upgrade', 'active', 'engaged', 'uninstall'];
 const CAMPAIGN_METRICS = ['install', 'active', 'uninstall'];
-const { METRICS_SUB_DOMAIN, EXTENSION_VERSION, BROWSER_INFO } = globals;
+const { METRICS_FQDN, EXTENSION_VERSION, BROWSER_INFO } = globals;
 const MAX_DELAYED_PINGS = 100;
 
 // Note that this threshold is intentionally different from the 30 second threshold in PolicySmartBlock,
@@ -299,7 +299,7 @@ class Metrics {
 	_buildMetricsUrl(type, frequency) {
 		const frequencyString = (type !== 'uninstall') ? `/${frequency}` : '';
 
-		let metrics_url = `https://${METRICS_SUB_DOMAIN}.ghostery.com/${type}${frequencyString}?gr=-1` +
+		let metrics_url = `${METRICS_FQDN}/${type}${frequencyString}?gr=-1` +
 			// Old parameters, old names
 			// Human web
 			`&hw=${encodeURIComponent(conf.enable_human_web ? '1' : '0')}` +

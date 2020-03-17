@@ -89,7 +89,7 @@ class Tracker extends React.Component {
 		this.setState({ description: t('tracker_description_getting') });
 
 		sendMessageInPromise('getTrackerDescription', {
-			url: `https://${globals.APPS_SUB_DOMAIN}.ghostery.com/${this.props.language}/apps/${
+			url: `${globals.APPS_FQDN}/${this.props.language}/apps/${
 				encodeURIComponent(tracker.name.replace(/\s+/g, '_').toLowerCase())}?format=json`,
 		}).then((data) => {
 			if (data) {
@@ -304,7 +304,7 @@ class Tracker extends React.Component {
 					className="trk-src-link"
 					title={source.src}
 					key={index}
-					href={`https://${encodeURIComponent(globals.GCACHE_SUB_DOMAIN)}.ghostery.com/${encodeURIComponent(this.props.language)}/gcache/?n=${encodeURIComponent(tracker.name)}&s=${encodeURIComponent(source.src)}&v=2&t=${source.type}`}
+					href={`${encodeURIComponent(globals.GCACHE_FQDN)}/${encodeURIComponent(this.props.language)}/gcache/?n=${encodeURIComponent(tracker.name)}&s=${encodeURIComponent(source.src)}&v=2&t=${source.type}`}
 				>
 					{ source.src }
 				</a>
@@ -357,7 +357,7 @@ class Tracker extends React.Component {
 								<div className="trk-description">
 									{this.state.description}
 									<div className={(!this.state.showTrackerLearnMore ? 'hide' : '')}>
-										<a target="_blank" rel="noopener noreferrer" title={tracker.name} href={`https://${globals.APPS_SUB_DOMAIN}.ghostery.com/${this.props.language}/apps/${encodeURIComponent(tracker.name.replace(/\s+/g, '_').toLowerCase())}`}>
+										<a target="_blank" rel="noopener noreferrer" title={tracker.name} href={`${globals.APPS_FQDN}/${this.props.language}/apps/${encodeURIComponent(tracker.name.replace(/\s+/g, '_').toLowerCase())}`}>
 											{t('tracker_description_learn_more')}
 										</a>
 									</div>

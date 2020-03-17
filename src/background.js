@@ -64,11 +64,11 @@ const { sendMessage } = utils;
 const { onMessage } = chrome.runtime;
 // simple consts
 const {
-	CDN_SUB_DOMAIN, BROWSER_INFO, IS_CLIQZ, DEBUG
+	CDN_FQDN, BROWSER_INFO, IS_CLIQZ, DEBUG
 } = globals;
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
-const VERSION_CHECK_URL = `https://${CDN_SUB_DOMAIN}.ghostery.com/update/version`;
+const VERSION_CHECK_URL = `${CDN_FQDN}/update/version`;
 const REAL_ESTATE_ID = 'ghostery';
 const onBeforeRequest = events.onBeforeRequest.bind(events);
 const onHeadersReceived = events.onHeadersReceived.bind(events);
@@ -845,11 +845,11 @@ function onMessageHandler(request, sender, callback) {
 		return true;
 	}
 	if (name === 'account.openSubscriptionPage') {
-		utils.openNewTab({ url: `https://account.${globals.GHOSTERY_DOMAIN}.com/subscription`, become_active: true });
+		utils.openNewTab({ url: `${globals.CHECKOUT_FQDN}/subscription`, become_active: true });
 		return false;
 	}
 	if (name === 'account.openCheckoutPage') {
-		let url = `https://checkout.${globals.GHOSTERY_DOMAIN}.com/plus`;
+		let url = `${globals.CHECKOUT_FQDN}/plus`;
 		const { utm } = message || null;
 		if (utm) {
 			url += `?utm_source=${utm.utm_source}&utm_campaign=${utm.utm_campaign}`;
@@ -860,7 +860,7 @@ function onMessageHandler(request, sender, callback) {
 	if (name === 'account.openSupportPage') {
 		metrics.ping('priority_support_submit');
 		const subscriber = account.hasScopesUnverified(['subscriptions:plus']);
-		const tabUrl = subscriber ? `https://account.${globals.GHOSTERY_DOMAIN}.com/support` : 'https://www.ghostery.com/support/';
+		const tabUrl = subscriber ? `${globals.ACCOUNT_FQDN}/support` : 'https://www.ghostery.com/support/';
 		utils.openNewTab({ url: tabUrl, become_active: true });
 		return false;
 	}

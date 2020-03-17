@@ -51,15 +51,19 @@ class Globals {
 
 		// domains
 		this.GHOSTERY_DOMAIN = this.DEBUG ? 'ghosterystage' : 'ghostery';
-		this.METRICS_SUB_DOMAIN = this.DEBUG ? 'staging-d' : 'd';
-		this.CMP_SUB_DOMAIN = this.DEBUG ? 'staging-cmp-cdn' : 'cmp-cdn';
-		this.CDN_SUB_DOMAIN = this.DEBUG ? 'staging-cdn' : 'cdn';
-		this.APPS_SUB_DOMAIN = this.DEBUG ? 'staging-apps' : 'apps';
-		this.GCACHE_SUB_DOMAIN = this.DEBUG ? 'staging-gcache' : 'gcache';
-		this.AUTH_SERVER = `https://consumerapi.${this.GHOSTERY_DOMAIN}.com`;
-		this.ACCOUNT_SERVER = `https://accountapi.${this.GHOSTERY_DOMAIN}.com`;
-		this.COOKIE_DOMAIN = `.${this.GHOSTERY_DOMAIN}.com`;
-		this.COOKIE_URL = `https://${this.GHOSTERY_DOMAIN}.com`;
+		this.GHOSTERY_ROOT_DOMAIN = `${this.GHOSTERY_DOMAIN}.com`;
+		this.GHOSTERY_FQDN = `https://${this.GHOSTERY_ROOT_DOMAIN}`;
+		this.ACCOUNT_FQDN = `https://account.${this.GHOSTERY_ROOT_DOMAIN}`;
+		this.CHECKOUT_FQDN = `https://checkout.${this.GHOSTERY_ROOT_DOMAIN}`;
+		this.METRICS_FQDN = `https://${this.DEBUG ? 'staging-d' : 'd'}.${this.GHOSTERY_ROOT_DOMAIN}`;
+		this.CMP_FQDN = `https://${this.DEBUG ? 'staging-cmp-cdn' : 'cmp-cdn'}.${this.GHOSTERY_ROOT_DOMAIN}`;
+		this.CDN_FQDN = `https://${this.DEBUG ? 'staging-cdn' : 'cdn'}.${this.GHOSTERY_ROOT_DOMAIN}`;
+		this.APPS_FQDN = `https://${this.DEBUG ? 'staging-apps' : 'apps'}.${this.GHOSTERY_ROOT_DOMAIN}`;
+		this.GCACHE_FQDN = `https://${this.DEBUG ? 'staging-gcache' : 'gcache'}.${this.GHOSTERY_ROOT_DOMAIN}`;
+		this.AUTH_SERVER = `https://consumerapi.${this.GHOSTERY_ROOT_DOMAIN}`;
+		this.ACCOUNT_SERVER = `https://accountapi.${this.GHOSTERY_ROOT_DOMAIN}`;
+		this.COOKIE_DOMAIN = `.${this.GHOSTERY_ROOT_DOMAIN}`;
+		this.COOKIE_URL = this.GHOSTERY_FQDN;
 
 		// extension IDs
 		this.GHOSTERY_TAB_CHROME_PRODUCTION_ID = 'plmapebanmikcofllaaddgeocahboejc';

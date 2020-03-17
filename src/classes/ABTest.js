@@ -19,7 +19,7 @@ import globals from './Globals';
 import { getJson } from '../utils/utils';
 import { log } from '../utils/common';
 
-const { BROWSER_INFO, CMP_SUB_DOMAIN, EXTENSION_VERSION } = globals;
+const { BROWSER_INFO, CMP_FQDN, EXTENSION_VERSION } = globals;
 
 /** Helper class for handling A/B tests.
  * @memberof  BackgroundClasses
@@ -44,7 +44,7 @@ class ABTest {
 	fetch() {
 		log('A/B Tests: fetching...');
 
-		const URL = `https://${CMP_SUB_DOMAIN}.ghostery.com/abtestcheck
+		const URL = `${CMP_FQDN}/abtestcheck
 			?os=${encodeURIComponent(BROWSER_INFO.os)}
 			&install_date=${encodeURIComponent(conf.install_date)}
 			&ir=${encodeURIComponent(conf.install_random_number)}

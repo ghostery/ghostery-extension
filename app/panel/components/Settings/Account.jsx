@@ -37,7 +37,7 @@ class Account extends React.Component {
 	 */
 	clickEditAccount = () => {
 		sendMessage('openNewTab', {
-			url: `https://account.${globals.GHOSTERY_DOMAIN}.com/`,
+			url: `${globals.GHOSTERY_ACCOUNT_FQDN}/`,
 			become_active: true,
 		});
 		window.close();

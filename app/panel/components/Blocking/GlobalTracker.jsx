@@ -56,7 +56,7 @@ class GlobalTracker extends React.Component {
 		this.setState({ description: t('tracker_description_getting') });
 
 		sendMessageInPromise('getTrackerDescription', {
-			url: `https://${globals.APPS_SUB_DOMAIN}.ghostery.com/${this.props.language}/apps/${
+			url: `${globals.APPS_FQDN}/${this.props.language}/apps/${
 				encodeURIComponent(tracker.name.replace(/\s+/g, '_').toLowerCase())}?format=json`,
 		}).then((data) => {
 			if (data) {
@@ -114,7 +114,7 @@ class GlobalTracker extends React.Component {
 								{
 									this.state.showTrackerLearnMore && (
 										<div className={(!this.state.showTrackerLearnMore ? 'hide' : '')}>
-											<a target="_blank" rel="noopener noreferrer" title={tracker.name} href={`https://${globals.APPS_SUB_DOMAIN}.ghostery.com/${this.props.language}/apps/${encodeURIComponent(tracker.name.replace(/\s+/g, '_').toLowerCase())}`}>
+											<a target="_blank" rel="noopener noreferrer" title={tracker.name} href={`${globals.APPS_FQDN}/${this.props.language}/apps/${encodeURIComponent(tracker.name.replace(/\s+/g, '_').toLowerCase())}`}>
 												{ t('tracker_description_learn_more') }
 											</a>
 										</div>
