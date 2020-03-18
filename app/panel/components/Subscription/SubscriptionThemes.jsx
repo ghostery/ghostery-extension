@@ -32,7 +32,7 @@ const SubscriptionThemes = (props) => {
 			text: 'subscription_dark_blue_theme',
 		},
 		{
-			name: 'palm',
+			name: 'palm-theme',
 			text: 'subscription_palm_theme',
 		},
 		{

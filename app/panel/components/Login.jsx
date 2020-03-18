@@ -68,6 +68,7 @@ class Login extends React.Component {
 							this.props.actions.getUserSettings(),
 						])
 							.then((res) => {
+								console.log('res: ', res);
 								const { current_theme = 'default' } = res[1];
 								return this.props.actions.getTheme(current_theme);
 							})

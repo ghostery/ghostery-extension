@@ -269,7 +269,7 @@ class Summary extends React.Component {
 				pageLatency = unfixedLatency.toFixed(2);
 			}
 			this.setState({ trackerLatencyTotal: pageLatency });
-		// reset page load value if page is reloaded while panel is open
+			// reset page load value if page is reloaded while panel is open
 		} else if (this.props.performanceData && !performanceData) {
 			this.setState({ trackerLatencyTotal: pageLatency });
 		}
@@ -790,36 +790,40 @@ class Summary extends React.Component {
 
 		return (
 			<div className={summaryClassNames}>
-				{!isCondensed && disableBlocking && (<NotScanned isSmall={is_expert} />)}
-				{!isCondensed && !disableBlocking && this._renderDonut()}
-				{!isCondensed && !disableBlocking && this._renderPageHostReadout()}
+				{/* Case on theme.props here */}
+				<div className="opacityOverlay" />
+				<div className="foreground">
+					{!isCondensed && disableBlocking && (<NotScanned isSmall={is_expert} />)}
+					{!isCondensed && !disableBlocking && this._renderDonut()}
+					{!isCondensed && !disableBlocking && this._renderPageHostReadout()}
 
-				{isCondensed && !disableBlocking && this._renderTotalTrackersFound()}
+					{isCondensed && !disableBlocking && this._renderTotalTrackersFound()}
 
-				<div className="Summary__pageStatsContainer">
-					{!disableBlocking && this._renderTotalTrackersBlocked()}
-					{!disableBlocking && this._renderTotalRequestsModified()}
-					{!disableBlocking && this._renderPageLoadTime()}
+					<div className="Summary__pageStatsContainer">
+						{!disableBlocking && this._renderTotalTrackersBlocked()}
+						{!disableBlocking && this._renderTotalRequestsModified()}
+						{!disableBlocking && this._renderPageLoadTime()}
+					</div>
+
+					{isCondensed && disableBlocking && (
+						<div className="Summary__spaceTaker" />
+					)}
+
+					<div className="Summary__ghosteryFeaturesContainer">
+						{this._renderGhosteryFeature('trust')}
+						{this._renderGhosteryFeature('restrict', 'Summary__ghosteryFeatureContainer--middle')}
+						{this._renderPauseButton()}
+					</div>
+					<div className="Summary__cliqzFeaturesContainer">
+						{this._renderCliqzAntiTracking()}
+						{this._renderCliqzAdBlock()}
+						{this._renderCliqzSmartBlock()}
+					</div>
+					{this._renderStatsNavicon()}
+					{enable_offers && this._renderRewardsNavicon()}
+
+					{!isCondensed && this._renderPlusUpgradeBannerOrSubscriberIcon()}
 				</div>
-
-				{isCondensed && disableBlocking && (
-					<div className="Summary__spaceTaker" />
-				)}
-
-				<div className="Summary__ghosteryFeaturesContainer">
-					{this._renderGhosteryFeature('trust')}
-					{this._renderGhosteryFeature('restrict', 'Summary__ghosteryFeatureContainer--middle')}
-					{this._renderPauseButton()}
-				</div>
-				<div className="Summary__cliqzFeaturesContainer">
-					{this._renderCliqzAntiTracking()}
-					{this._renderCliqzAdBlock()}
-					{this._renderCliqzSmartBlock()}
-				</div>
-				{this._renderStatsNavicon()}
-				{enable_offers && this._renderRewardsNavicon()}
-
-				{!isCondensed && this._renderPlusUpgradeBannerOrSubscriberIcon()}
 			</div>
 		);
 	}

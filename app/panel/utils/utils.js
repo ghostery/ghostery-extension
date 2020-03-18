@@ -225,10 +225,14 @@ export function setTheme(doc, name, account) {
 		}
 	}
 
+	console.log('setting theme...');
 	if (name !== 'default') {
+		console.log('name != default');
 		if (!account) { return; }
+		console.log('account is initialized', account);
 		const { themeData } = account;
 		if (!themeData) { return; }
+		console.log('themeData is initialized', themeData);
 		const { css } = themeData[name];
 
 		// Create element for the theme being set, if it is not there
