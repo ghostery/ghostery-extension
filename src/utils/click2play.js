@@ -130,7 +130,7 @@ export function buildRedirectC2P(requestId, redirectUrls, app_id) {
 			'blocked_redirect_prevent',
 			// It is unlikely that apps pages will ever be translated
 			//			[host_url, redirect_url, app_name, 'https://' + globals.APPS_SUB_DOMAIN + '.ghostery.com/' + conf.language + '/apps/' + encodeURIComponent(app_name.replace(/\s+/g, '_').toLowerCase())]),
-			[host_url, redirect_url, app_name, `${globals.APPS_FQDN}/en/apps/${encodeURIComponent(app_name.replace(/\s+/g, '_').toLowerCase())}`]
+			[host_url, redirect_url, app_name, `${globals.APPS_BASE_URL}/en/apps/${encodeURIComponent(app_name.replace(/\s+/g, '_').toLowerCase())}`]
 		),
 		blocked_redirect_action_always_title: t('blocked_redirect_action_always_title'),
 		blocked_redirect_action_through_once_title: t('blocked_redirect_action_through_once_title'),

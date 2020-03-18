@@ -52,18 +52,18 @@ class Globals {
 		// domains
 		this.GHOSTERY_DOMAIN = this.DEBUG ? 'ghosterystage' : 'ghostery';
 		this.GHOSTERY_ROOT_DOMAIN = `${this.GHOSTERY_DOMAIN}.com`;
-		this.GHOSTERY_FQDN = `https://${this.GHOSTERY_ROOT_DOMAIN}`;
-		this.ACCOUNT_FQDN = `https://account.${this.GHOSTERY_ROOT_DOMAIN}`;
-		this.CHECKOUT_FQDN = `https://checkout.${this.GHOSTERY_ROOT_DOMAIN}`;
-		this.METRICS_FQDN = `https://${this.DEBUG ? 'staging-d' : 'd'}.${this.GHOSTERY_ROOT_DOMAIN}`;
-		this.CMP_FQDN = `https://${this.DEBUG ? 'staging-cmp-cdn' : 'cmp-cdn'}.${this.GHOSTERY_ROOT_DOMAIN}`;
-		this.CDN_FQDN = `https://${this.DEBUG ? 'staging-cdn' : 'cdn'}.${this.GHOSTERY_ROOT_DOMAIN}`;
-		this.APPS_FQDN = `https://${this.DEBUG ? 'staging-apps' : 'apps'}.${this.GHOSTERY_ROOT_DOMAIN}`;
-		this.GCACHE_FQDN = `https://${this.DEBUG ? 'staging-gcache' : 'gcache'}.${this.GHOSTERY_ROOT_DOMAIN}`;
+		this.GHOSTERY_BASE_URL = `https://${this.GHOSTERY_ROOT_DOMAIN}`;
+		this.ACCOUNT_BASE_URL = `https://account.${this.GHOSTERY_ROOT_DOMAIN}`;
+		this.CHECKOUT_BASE_URL = `https://checkout.${this.GHOSTERY_ROOT_DOMAIN}`;
+		this.METRICS_BASE_URL = `https://${this.DEBUG ? 'staging-d' : 'd'}.${this.GHOSTERY_ROOT_DOMAIN}`;
+		this.CMP_BASE_URL = `https://${this.DEBUG ? 'staging-cmp-cdn' : 'cmp-cdn'}.${this.GHOSTERY_ROOT_DOMAIN}`;
+		this.CDN_BASE_URL = `https://${this.DEBUG ? 'staging-cdn' : 'cdn'}.${this.GHOSTERY_ROOT_DOMAIN}`;
+		this.APPS_BASE_URL = `https://${this.DEBUG ? 'staging-apps' : 'apps'}.${this.GHOSTERY_ROOT_DOMAIN}`;
+		this.GCACHE_BASE_URL = `https://${this.DEBUG ? 'staging-gcache' : 'gcache'}.${this.GHOSTERY_ROOT_DOMAIN}`;
 		this.AUTH_SERVER = `https://consumerapi.${this.GHOSTERY_ROOT_DOMAIN}`;
 		this.ACCOUNT_SERVER = `https://accountapi.${this.GHOSTERY_ROOT_DOMAIN}`;
 		this.COOKIE_DOMAIN = `.${this.GHOSTERY_ROOT_DOMAIN}`;
-		this.COOKIE_URL = this.GHOSTERY_FQDN;
+		this.COOKIE_URL = this.GHOSTERY_BASE_URL;
 
 		// extension IDs
 		this.GHOSTERY_TAB_CHROME_PRODUCTION_ID = 'plmapebanmikcofllaaddgeocahboejc';

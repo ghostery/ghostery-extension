@@ -29,7 +29,7 @@ class PlusView extends Component {
 	 */
 	_renderButton = (additionalClasses) => {
 		const { isPlus, onPlusClick } = this.props;
-		const buttonHref = `${globals.CHECKOUT_FQDN}/plus?utm_source=gbe&utm_campaign=intro_hub_plus`;
+		const buttonHref = `${globals.CHECKOUT_BASE_URL}/plus?utm_source=gbe&utm_campaign=intro_hub_plus`;
 		const buttonClassNames = ClassNames('PlusView__button', 'button', additionalClasses, {
 			disabled: isPlus,
 		});

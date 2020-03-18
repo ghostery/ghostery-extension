@@ -126,7 +126,7 @@ class HeaderMenu extends React.Component {
 	 */
 	clickSignedInAs = () => {
 		sendMessage('openNewTab', {
-			url: `${globals.ACCOUNT_FQDN}/`,
+			url: `${globals.ACCOUNT_BASE_URL}/`,
 			become_active: true,
 		});
 		window.close();
