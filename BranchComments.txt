@@ -1,0 +1,7 @@
+1. Two theme scss files palm-theme.scss and midnight-theme.scss are added under app\scss
+2. Couple of lines in .\webpack.config.js ensure the themes are compiled as the rest of SCSS files. 
+They end up in dist\css as palm_theme.css and midnight_theme.css. Will refer to them by file paths.
+3. In src\classes\account.js getTheme function mimics the original, but returns file paths instead of
+css stream.
+4. In app\panel\utils\utils.js setTheme function is changed to add <link rel="stylesheet" href={path_to_theme}/>
+element instead of inline <style> element.
