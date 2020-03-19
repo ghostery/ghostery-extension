@@ -58,12 +58,6 @@ class Panel extends React.Component {
 		});
 	}
 
-	shouldComponentUpdate(nextProps, nextState) {
-		console.log('COMPONENT DID UPDATE CALLED', nextProps, nextState);
-		this.forceUpdate();
-		return false;
-	}
-
 	/**
 	 * Lifecycle event
 	 */
