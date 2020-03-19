@@ -48,6 +48,7 @@ const SubscriptionThemes = (props) => {
 
 	const handleThemeClick = (index) => {
 		const theme = themes[index];
+		console.log('CLICK', index, themes, theme);
 		props.changeTheme(theme.name);
 	};
 

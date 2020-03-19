@@ -216,7 +216,7 @@ export function setTheme(doc, name, account) {
 	// if themeName is 'default' all we have to do is to remove style element
 	const styleTitlePrefix = 'Ghostery Theme';
 	// First remove all other style elements which may be there
-	const styleList = doc.head.getElementsByTagName('style');
+	const styleList = doc.head.getElementsByTagName('link');
 	// Other kinds of loops are not supported equally across browsers
 	for (let i = 0; i < styleList.length; i++) {
 		const style = styleList[i];
@@ -236,12 +236,14 @@ export function setTheme(doc, name, account) {
 		const { css } = themeData[name];
 
 		// Create element for the theme being set, if it is not there
-		const themeStyle = doc.createElement('style');
-		themeStyle.id = name;
+		const themeStyle = doc.createElement('link');
+		themeStyle.rel = 'stylesheet';
+		themeStyle.media = 'screen';
+		themeStyle.type = 'text/css';
 		themeStyle.title = `${styleTitlePrefix} ${name}`;
 
 		// Set content of style element to the theme text.
-		themeStyle.textContent = css;
-		document.head.appendChild(themeStyle);
+		themeStyle.href = css;
+		doc.head.appendChild(themeStyle);
 	}
 }

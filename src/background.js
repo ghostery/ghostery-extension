@@ -666,7 +666,7 @@ function onMessageHandler(request, sender, callback) {
 	} = request;
 	const { tab } = sender;
 	const tab_id = tab && tab.id;
-
+	console.log('MESSAGE', name, message, origin);
 	// HANDLE PAGE EVENTS HERE
 	if (origin === 'account_pages') {
 		// Account pages
@@ -744,8 +744,11 @@ function onMessageHandler(request, sender, callback) {
 		return false;
 	}
 	if (name === 'account.getTheme') {
+		console.log('BKG::HERE 1', conf.current_theme);
 		if (conf.current_theme !== 'default') {
 			account.getTheme(conf.current_theme).then(() => {
+				console.log('THEME DATA', conf.account.themeData);
+				console.log('CALLABACK DATA', conf.account.themeData[conf.current_theme]);
 				callback(conf.account.themeData[conf.current_theme]);
 			});
 			return true;
