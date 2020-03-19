@@ -212,7 +212,7 @@ export function doXHR(method, url, query) {
  * @param  {string} themeName unique name of the theme
  * @param {string} theme css of the theme
  */
-export function setTheme(doc, name, account) {
+export function setTheme(doc, name, account, reload = false) {
 	// if themeName is 'default' all we have to do is to remove style element
 	const styleTitlePrefix = 'Ghostery Theme';
 	// First remove all other style elements which may be there
@@ -245,5 +245,10 @@ export function setTheme(doc, name, account) {
 		// Set content of style element to the theme text.
 		themeStyle.href = css;
 		doc.head.appendChild(themeStyle);
+
+		if( reload ) {
+			console.log("DOCUMENT RELOADED");
+			doc.location.reload();
+		}
 	}
 }

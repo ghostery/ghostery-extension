@@ -96,7 +96,7 @@ class Globals {
 			'alert_expanded',
 			'block_by_default',
 			'cliqz_module_whitelist',
-			// 'current_theme',
+			'current_theme',
 			'enable_ad_block',
 			'enable_anti_tracking',
 			'enable_autoupdate',
@@ -128,7 +128,6 @@ class Globals {
 		];
 
 		this.SESSION = {
-			current_theme: 'default',
 			paused_blocking: false,
 			paused_blocking_timeout: 0,
 			abtests: {},
