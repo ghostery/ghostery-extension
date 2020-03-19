@@ -218,37 +218,38 @@ export function setTheme(doc, name, account, reload = false) {
 	// First remove all other style elements which may be there
 	const styleList = doc.head.getElementsByTagName('link');
 	// Other kinds of loops are not supported equally across browsers
+	let themeStyle = null;
 	for (let i = 0; i < styleList.length; i++) {
 		const style = styleList[i];
 		if (style.title.startsWith(styleTitlePrefix)) {
-			doc.head.removeChild(style);
+			themeStyle = style;
 		}
 	}
 
-	console.log('setting theme...');
 	if (name !== 'default') {
-		console.log('name != default');
 		if (!account) { return; }
-		console.log('account is initialized', account);
 		const { themeData } = account;
 		if (!themeData) { return; }
-		console.log('themeData is initialized', themeData);
 		const { css } = themeData[name];
 
 		// Create element for the theme being set, if it is not there
-		const themeStyle = doc.createElement('link');
-		themeStyle.rel = 'stylesheet';
-		themeStyle.media = 'screen';
-		themeStyle.type = 'text/css';
-		themeStyle.title = `${styleTitlePrefix} ${name}`;
-
-		// Set content of style element to the theme text.
-		themeStyle.href = css;
-		doc.head.appendChild(themeStyle);
-
-		if( reload ) {
-			console.log("DOCUMENT RELOADED");
-			doc.location.reload();
+		if (!themeStyle) {
+			themeStyle = doc.createElement('link');
+			themeStyle.rel = 'stylesheet';
+			themeStyle.media = 'screen';
+			themeStyle.type = 'text/css';
+			themeStyle.title = `${styleTitlePrefix}`;
+			themeStyle.href = css;
+			doc.head.appendChild(themeStyle);
+		} else {
+			themeStyle.href = css;
+		}
+	} else {
+		for (let i = 0; i < styleList.length; i++) {
+			const style = styleList[i];
+			if (style.title.startsWith(styleTitlePrefix)) {
+				doc.head.removeChild(style);
+			}
 		}
 	}
 }
