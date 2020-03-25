@@ -1,3 +1,7 @@
+### GHOSTERY 8.4.8 ()
+
++ Fixes issue that could intermittently cause some cookies to be reset (Fixes #514)
+
 ### GHOSTERY 8.4.7 (March 16, 2020)
 
 + Migrate to the new Chromium-based Edge browser (#492)
