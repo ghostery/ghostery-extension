@@ -387,12 +387,7 @@
 	},
 	"name": {
 		"description": "The title of this extension (Ghostery).",
-		"message": "$EXTENSION_NAME$ – Ad Blocker per la Privacy",
-		"placeholders": {
-			"extension_name": {
-				"content": "Ghostery"
-			}
-		}
+		"message": "Ghostery – Ad Blocker per la Privacy"
 	},
 	"none": {
 		"description": "Used to say that this item does not belong to any of the groups, as in \"Groups: None\" (as opposed to \"Groups: Group A, Group B, Group C\").",
@@ -802,7 +797,7 @@
 		"message": "sbloccati"
 	},
 	"white_black_list_error_invalid_url": {
-		"message": "Per favore, inserisci un URL valido."
+		"message": "Please enter a valid URL or wildcard."
 	},
 	"whitelist_error_blacklist_url": {
 		"message": "Questo sito è stato rimosso dal tua lista dei Siti Limitati e aggiunto alla tua lista dei Siti Affidabili."
@@ -1058,7 +1053,7 @@
 		"message": "Siti Affidabili"
 	},
 	"settings_sites_placeholder": {
-		"message": "example.com"
+		"message": "example.com (wildcards supported)"
 	},
 	"settings_restricted_sites": {
 		"message": "Siti Limitati"
