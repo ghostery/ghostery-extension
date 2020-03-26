@@ -94,7 +94,7 @@ rm -rf build
 rm -rf node_modules
 
 # Set node version
-nvm install lts/carbon
+nvm install lts/dubnium
 nvm use
 
 # Install local npm packages
