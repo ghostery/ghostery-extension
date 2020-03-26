@@ -35,6 +35,7 @@ class Categories extends React.Component {
 			unknownCategory,
 			enable_anti_tracking,
 			sitePolicy,
+			current_theme,
 		} = this.props;
 		const globalBlocking = !!this.props.globalBlocking;
 		const filtered = !!this.props.filtered;
@@ -90,6 +91,7 @@ class Categories extends React.Component {
 					smartBlock={this.props.smartBlock}
 					enable_anti_tracking={enable_anti_tracking}
 					isUnknown={isUnknown}
+					current_theme={current_theme}
 				/>
 			);
 		};

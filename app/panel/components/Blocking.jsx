@@ -294,7 +294,8 @@ class Blocking extends React.Component {
 			show_tracker_urls,
 			sitePolicy,
 			smartBlock,
-			smartBlockActive
+			smartBlockActive,
+			current_theme,
 		} = this.props;
 
 		const {
@@ -330,6 +331,7 @@ class Blocking extends React.Component {
 								smartBlock={smartBlock}
 								unknownCategory={unknownCategory}
 								enable_anti_tracking={enable_anti_tracking}
+								current_theme={current_theme}
 							/>
 						)}
 					</div>

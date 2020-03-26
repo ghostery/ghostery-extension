@@ -19,8 +19,9 @@
 	right: 0;
 	bottom: 0;
 	left: 0;
+	z-index: 8000;
 }
 .Modal__background {
 	background-color: rgba(#000000, 0.25);
-	z-index: 9;
 }
+

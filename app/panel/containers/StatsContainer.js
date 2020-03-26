@@ -22,7 +22,9 @@ import Stats from '../components/Stats';
  * @todo  We are not using ownProps, so we better not specify it explicitly,
  * in this case it won't be passed by React (see https://github.com/reactjs/react-redux/blob/master/docs/api.md).
  */
-const mapStateToProps = state => Object.assign({}, state.account);
+const mapStateToProps = state => Object.assign({}, state.account, {
+	current_theme: state.panel.current_theme,
+});
 
 /**
  * Connects Subscription view component to the Redux store. Pass updated match, location, and history props to the wrapped component.

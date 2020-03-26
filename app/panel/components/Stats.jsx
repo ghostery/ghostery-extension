@@ -524,11 +524,12 @@ class Stats extends React.Component {
 	 * @return {ReactComponent} StatsView instance
 	 */
 	render() {
+		const { user, loggedIn, current_theme } = this.props;
 		return (
 			<StatsView
 				showResetModal={this.state.showResetModal}
-				showPitchModal={!this.props.user || !this.props.user.subscriptionsPlus}
-				loggedIn={this.props.loggedIn}
+				showPitchModal={!user || !user.subscriptionsPlus}
+				loggedIn={loggedIn}
 				getStats={this.getStats}
 				selection={this.state.selection}
 				selectView={this.selectView}
@@ -539,6 +540,7 @@ class Stats extends React.Component {
 				cancelReset={this.cancelReset}
 				subscribe={this.subscribe}
 				signIn={this.signIn}
+				theme={current_theme}
 			/>
 		);
 	}

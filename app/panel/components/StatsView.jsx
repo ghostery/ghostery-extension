@@ -38,6 +38,7 @@ const StatsView = (props) => {
 		cancelReset,
 		subscribe,
 		signIn,
+		theme
 	} = props;
 
 	const {
@@ -122,6 +123,7 @@ const StatsView = (props) => {
 				tooltipText={tooltipText}
 				selectTimeframe={selectTimeframe}
 				timeframeSelectors={timeframeSelectors}
+				theme={theme}
 			/>
 			<div className="tab-header">
 				<div className="tab-container">

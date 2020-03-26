@@ -51,7 +51,13 @@ class CliqzFeature extends React.Component {
 	}
 
 	_getStatus(active) {
-		return active ? t('on') : t('off');
+		const { current_theme } = this.props;
+		switch (current_theme) {
+			case 'palm-theme':
+				return active ? t('on') : (<div className="rectangle" />);
+			default:
+				return active ? t('on') : t('off');
+		}
 	}
 
 	_getTooltipBodyText(active, isTooltipBody, type) {
@@ -118,6 +124,7 @@ class CliqzFeature extends React.Component {
 			isTooltipHeader,
 			tooltipPosition,
 			type,
+			current_theme,
 		} = this.props;
 
 		const cliqzFeatureClassNames = ClassNames('CliqzFeature', {

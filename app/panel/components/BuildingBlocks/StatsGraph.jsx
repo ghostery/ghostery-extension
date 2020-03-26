@@ -161,6 +161,15 @@ class StatsGraph extends React.Component {
 				.attrTween('stroke-dasharray', interpolator);
 		}
 
+		function getThemeColor(theme) {
+			switch (theme) {
+				default:
+					return '#124559';
+				case 'palm-theme':
+					return '#172a0b';
+			}
+		}
+
 		pathGroup.append('path')
 			.style('stroke', '#dddddd')
 			.style('stroke-dasharray', '4,4')
@@ -170,7 +179,7 @@ class StatsGraph extends React.Component {
 		pathGroup.append('path')
 			.attr('d', line)
 			.attr('fill', 'none')
-			.attr('stroke', '#124559')
+			.attr('stroke', getThemeColor(this.props.theme))
 			.attr('stroke-width', 1.5)
 			.call(animator);
 		// ---------------------------------------------------------------------- //
@@ -187,7 +196,6 @@ class StatsGraph extends React.Component {
 					.style('opacity', opacity);
 			}, 1);
 		}
-
 		// Add data points with event listeners for opening their respective tooltips
 		canvas.append('g')
 			.attr('class', 'point-group')
@@ -196,7 +204,7 @@ class StatsGraph extends React.Component {
 			.enter()
 			.append('circle')
 			.attr('class', (d, i) => `point point-${i}`)
-			.attr('fill', '#124559')
+			.attr('fill', getThemeColor(this.props.theme))
 			.attr('cx', d => x(d.index))
 			.attr('cy', d => y(d.amount))
 			.attr('r', 0)

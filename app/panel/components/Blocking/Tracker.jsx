@@ -259,7 +259,8 @@ class Tracker extends React.Component {
 	_renderCliqzAdsIcon() { return this._renderCliqzStatsIcon('ads'); }
 
 	_renderCliqzStatsIcon(type) {
-		const path = `/app/images/panel/tracker-detail-cliqz-${type}-icon.svg`;
+		const { current_theme } = this.props;
+		const path = `/app/images/panel/tracker-detail-cliqz-${type}-${current_theme}-icon.svg`;
 
 		return (
 			<ReactSVG src={path} className="trk-cliqz-stats-icon" />

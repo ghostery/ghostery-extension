@@ -623,6 +623,7 @@ class Summary extends React.Component {
 		const {
 			enable_anti_tracking,
 			is_expert,
+			current_theme,
 		} = this.props;
 		const isCondensed = this._isCondensed();
 
@@ -638,6 +639,7 @@ class Summary extends React.Component {
 					isTooltipHeader={is_expert}
 					isTooltipBody={!isCondensed}
 					tooltipPosition={isCondensed ? 'right' : is_expert ? 'top top-right' : 'top'}
+					current_theme={current_theme}
 				/>
 			</div>
 		);
@@ -647,6 +649,7 @@ class Summary extends React.Component {
 		const {
 			enable_ad_block,
 			is_expert,
+			current_theme,
 		} = this.props;
 		const isCondensed = this._isCondensed();
 
@@ -662,6 +665,7 @@ class Summary extends React.Component {
 					isTooltipHeader={is_expert}
 					isTooltipBody={!isCondensed}
 					tooltipPosition={isCondensed ? 'right' : 'top'}
+					current_theme={current_theme}
 				/>
 			</div>
 		);
@@ -671,6 +675,7 @@ class Summary extends React.Component {
 		const {
 			enable_smart_block,
 			is_expert,
+			current_theme,
 		} = this.props;
 		const isCondensed = this._isCondensed();
 
@@ -686,6 +691,7 @@ class Summary extends React.Component {
 					isTooltipHeader={is_expert}
 					isTooltipBody={!isCondensed}
 					tooltipPosition={isCondensed ? 'right' : is_expert ? 'top top-left' : 'top'}
+					current_theme={current_theme}
 				/>
 			</div>
 		);
@@ -779,6 +785,7 @@ class Summary extends React.Component {
 			enable_offers,
 			is_expert,
 			is_expanded,
+			current_theme
 		} = this.props;
 		const { disableBlocking } = this.state;
 		const isCondensed = this._isCondensed();
@@ -787,11 +794,15 @@ class Summary extends React.Component {
 			'Summary--expert': is_expert && !is_expanded,
 			'Summary--condensed': isCondensed,
 		});
+		const foregroundClassNames = ClassNames('Summary__foreground', {
+			active: current_theme === 'palm-theme'
+					|| current_theme === 'leaf-theme',
+		});
 
 		return (
 			<div className={summaryClassNames}>
 				<div className="Summary__opacityOverlay" />
-				<div className="Summary__foreground">
+				<div className={foregroundClassNames}>
 					{!isCondensed && disableBlocking && (<NotScanned isSmall={is_expert} />)}
 					{!isCondensed && !disableBlocking && this._renderDonut()}
 					{!isCondensed && !disableBlocking && this._renderPageHostReadout()}
