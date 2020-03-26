@@ -790,9 +790,8 @@ class Summary extends React.Component {
 
 		return (
 			<div className={summaryClassNames}>
-				{/* Case on theme.props here */}
-				<div className="opacityOverlay" />
-				<div className="foreground">
+				<div className="Summary__opacityOverlay" />
+				<div className="Summary__foreground">
 					{!isCondensed && disableBlocking && (<NotScanned isSmall={is_expert} />)}
 					{!isCondensed && !disableBlocking && this._renderDonut()}
 					{!isCondensed && !disableBlocking && this._renderPageHostReadout()}

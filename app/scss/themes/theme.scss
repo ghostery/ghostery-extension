@@ -1,8 +1,7 @@
+@import '../partials/_colors';
+
 /**
- * Ghostery Sass Importer
- *
- * Select the SASS partials to be compiled for this project. SASS files
- * are compiled and included in the order they are listed.
+ * Theme Framework Base Class
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -14,31 +13,31 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-// This stylesheet contains multiple sets of styles for the same components
-// This is necessary because
-// 	* the extension CSS for those components was refactored after this stylesheet was first created
-//	* multiple extension versions may be in production at the same time depending on browser-specific issues / approval processes
+// Theme framework variables to overwrite
+$background:              		#FFF !default;
 
-$background:              		#124559;
-$summary_text:					#FFFFFF;
-$enabled_feature:				#EFF6E0;
-$bright_enabled_feature:		#F7FAEF;
-$paled_enabled_feature:			#819D9C;
-$disabled_feature:             	#70888F;
-$paled_disabled_feature:		#A9B8BC;
-$bright_disabled_feature:		#BDC8CB;
-$caption:             			#F7F7F7;
-$tab_inactive:      			#B6C4CA;
+$top_bar:						#FFF !default;
 
-// Colors
-$palm_green: 					#2c5114;
-$off_green_palm_green:			#456431;
+$summary_text:					#FFF !default;
+$caption:             			#FFF !default;
+$title_text:					#FFF !default;
 
-// Theme framework variables
-$enabled_feature:				#87f0fb;
-$tab_inactive:      			#456431;
-$tab_active: 					#313930;
-$tracker-list: 					#172a0b;
+$enabled_feature:				#FFF !default;
+$bright_enabled_feature:		#FFF !default;
+$paled_enabled_feature:			#FFF !default;
+
+$disabled_feature:             	#FFF !default;
+$bright_disabled_feature:		#FFF !default;
+$paled_disabled_feature:		#FFF !default;
+
+$disabled_cliqz_feature:		#FFF !default;
+$inactive_cliqz_feature: 		#FFF !default;
+
+$tab_inactive:      			#FFF !default;
+$tab_active: 					#FFF !default;
+
+$tracker-list: 					#FFF !default;
+$divider: 						#FFF !default;
 
 // Function helper with color variables
 @function url-friendly-colour($color) {
@@ -77,8 +76,41 @@ $tracker-list: 					#172a0b;
 
 // This BEM-style CSS is compatible with extension versions 8.4.0 and higher
 .Summary {
-	background-color: $background;
+	background: $background;
+	background-size: cover;
+	// background-color: $top_bar;
 
+	.Summary__opacityOverlay {
+		position: absolute;
+		background-color: rgba(74, 74, 74, .5);
+	}
+	&.Summary--simple > .Summary__opacityOverlay {
+		top: 0;
+		left: 10px;
+		bottom: 15px;
+		right: 10px;
+	}
+	&.Summary--expert > .Summary__opacityOverlay {
+		top: 0;
+		left: 9px;
+		bottom: 0;
+		right: 9px;
+	}
+	&.Summary--condensed > .Summary__opacityOverlay {
+		top: 0;
+		right: 4px;
+		bottom: 0;
+		left: 4px;
+	}
+	.Summary__foreground {
+		position: absolute;
+		z-index: 1000;
+		opacity: 1;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
 	.sub-component.not-scanned {
 		.not-scanned-header {
 			color: $summary_text;
@@ -87,10 +119,13 @@ $tracker-list: 					#172a0b;
 			color: $summary_text;
 		}
 	}
+	.Summary__subscriberBadgeContainer {
+		left: 15px;
+	}
 }
 
 .Summary--condensed {
-	background-color: $background;
+	background-color: $top_bar;
 
 	.Summary__totalTrackerCountContainer {
 		color: $summary_text;
@@ -99,11 +134,11 @@ $tracker-list: 					#172a0b;
 
 .Summary__statsNavicon.Summary__statsNavicon--absolutely-positioned,
 .Summary__rewardsNavicon.Summary__rewardsNavicon--absolutely-positioned {
-	background-color: #F7F8FB;
+	background-color: $whisper;
 
 	path {
-		fill: $palm-green;
-		stroke: $palm-green;
+		fill: $top_bar;
+		stroke: $top_bar;
 	}
 }
 
@@ -115,35 +150,59 @@ $tracker-list: 					#172a0b;
 	color: $summary_text;
 }
 
+#content-detail {
+	border-left: 1px solid $tracker-list;
+}
+
 .DonutGraph__textCountContainer {
 	color: $summary_text;
 }
 
 .CliqzFeature--inactive.clickable {
-	.CliqzFeature__status { color: $disabled_feature };
-	.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($disabled_feature) };
-	.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($disabled_feature) };
-	.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($disabled_feature) };
-	.CliqzFeature__feature-name { color: $disabled_feature };
+	.CliqzFeature__status {
+		color: $disabled_feature;
+		transition: color 0.25s ease-out;
+	};
+	.CliqzFeature__status .rectangle {
+		background-color: $disabled_cliqz_feature;
+		transition: background-color 0.25s ease-out;
+	};
+	.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($disabled_cliqz_feature) };
+	.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($disabled_cliqz_feature) };
+	.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($disabled_cliqz_feature) };
+	.CliqzFeature__feature-name { color: $disabled_cliqz_feature };
 
 	&:hover {
-		.CliqzFeature__status { color: $bright_disabled_feature; }
+		.CliqzFeature__status {
+			color: $bright_disabled_feature;
+			transition: color 0.25s ease-out;
+		};
+		.CliqzFeature__status .rectangle {
+			background-color: $inactive_cliqz_feature;
+			transition: background-color 0.25s ease-out;
+		};
 		.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($bright_disabled_feature) };
 		.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($bright_disabled_feature) };
 		.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($bright_disabled_feature) };
-		.CliqzFeature__feature-name { color: $bright_disabled_feature; }
+		.CliqzFeature__feature-name { color: $bright_disabled_feature; };
 	}
 }
 
 .CliqzFeature--active.clickable {
-	.CliqzFeature__status { color: $enabled_feature };
+	.CliqzFeature__status {
+		color: $enabled_feature;
+		transition: color 0.25s ease-out;
+	};
 	.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($enabled_feature) };
 	.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($enabled_feature) };
 	.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($enabled_feature) };
 	.CliqzFeature__feature-name { color: $enabled_feature };
 
 	&:hover {
-		.CliqzFeature__status { color: $bright_enabled_feature; }
+		.CliqzFeature__status {
+			color: $bright_enabled_feature;
+			transition: color 0.25s ease-out;
+		}
 		.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($bright_enabled_feature) };
 		.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($bright_enabled_feature) };
 		.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($bright_enabled_feature) };
@@ -152,7 +211,8 @@ $tracker-list: 					#172a0b;
 }
 
 .CliqzFeature--inactive.not-clickable {
-	.CliqzFeature__status { color: $paled_disabled_feature };
+	.CliqzFeature__status { color: $paled_disabled_feature; };
+	.CliqzFeature__status .rectangle { background-color: $paled_disabled_feature };
 	.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($paled_disabled_feature) };
 	.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($paled_disabled_feature) };
 	.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($paled_disabled_feature) };
@@ -160,36 +220,87 @@ $tracker-list: 					#172a0b;
 }
 
 .CliqzFeature--active.not-clickable {
-	.CliqzFeature__status { color: $paled_enabled_feature };
+	.CliqzFeature__status { color: $paled_enabled_feature; };
+	.CliqzFeature__status .rectangle { background-color: $paled_disabled_feature };
 	.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($paled_enabled_feature) };
 	.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($paled_enabled_feature) };
 	.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($paled_enabled_feature) };
 	.CliqzFeature__feature-name { color: $paled_enabled_feature };
 }
 
-.blocking-category .sticky-category {
-	background-color: $tracker-list;
-	border: 1px solid $tracker-list;
-	border-bottom: 1px solid #FFF;
+.CliqzFeature--normal.CliqzFeature--inactive.clickable {
+	.CliqzFeature__status .rectangle {
+		height: 4px;
+		width: 10px;
+		margin: 14px auto 10px auto;
+	}
 }
 
-.trackers-list {
-	background-color: $tracker-list;
+.CliqzFeature--condensed.CliqzFeature--inactive.clickable {
+	.CliqzFeature__status .rectangle {
+		height: 4px;
+		width: 10px;
+		margin: 5px auto;
+	}
 }
 
-#content-detail {
-	border-left: 1px solid $tracker-list;
+.CliqzFeature--smaller.CliqzFeature--inactive {
+	.CliqzFeature__status .rectangle {
+		height: 4px;
+		width: 10px;
+		margin: 14px auto 10px auto;
+	}
+}
+
+.blocking-category {
+	.sticky-category {
+		background-color: $tracker-list;
+		border: 1px solid $tracker-list;
+
+		.counts:after {
+			content: "";
+			display: block;
+			margin-left: -45px;
+			width: 306px;
+			padding-top: 20px;
+			border-bottom: 1px solid $divider;
+			padding-top: 3px;
+		}
+	}
+	.cat-name {
+		color: #FFF;
+	}
+	.counts {
+		.total-count {
+			color: #FFF;
+		}
+	}
+	.Category__antiTrackingDivider {
+		border: none;
+	}
+	.trackers-list {
+		background-color: $tracker-list;
+	}
 }
 
 .blocking-header > .row:first-of-type {
 	border-bottom: 2px solid $tracker-list;
+
+	.title {
+		font-size: 14px;
+		color: $tundora;
+	}
+	.block-text {
+		font-size: 12px;
+		color: $tundora;
+	}
 }
 
 // This CSS is compatible with extension versions 8.3.4 and lower
 #content-summary {
-	background-color: $background;
+	background-color: $top_bar;
 	&.expert.condensed {
-		background-color: $background;
+		background-color: $top_bar;
 		.total-tracker-count {
 			color: $summary_text;
 		}
@@ -278,6 +389,9 @@ $tracker-list: 					#172a0b;
 
 // This CSS is compatible with all extension versions as of 8.4.1
 #ghostery-header {
+	position: relative;
+	z-index: 4000;
+
 	.header-tab {
 		color: #FFF;
 		background-color: $tab_inactive;
@@ -291,16 +405,16 @@ $tracker-list: 					#172a0b;
 		}
 	}
 	.top-bar {
-		background-color: $palm_green;
-		color: $background;
+		background-color: $top_bar;
+		color: $top_bar;
 		.subscriber-badge {
-			path {fill: $background;}
+			path {fill: $top_bar;}
 			path.text {fill: $caption;}
 		}
 		.header-logo {
 			.back-arrow {
 				path {
-					fill: $background;
+					fill: #FFF;
 				}
 			}
 			.logo-icon {
@@ -308,7 +422,7 @@ $tracker-list: 					#172a0b;
 					fill: #FFF;
 				}
 				svg > g > path:nth-child(3) {
-					fill: $background;
+					fill: $top_bar;
 				}
 			}
 		}
@@ -319,8 +433,97 @@ $tracker-list: 					#172a0b;
 		}
 		.profile-svg {
 			g > g {
-				fill: #124559;
-				stroke: #124559;
+				fill: #FFF;
+				stroke: #FFF;
+			}
+		}
+	}
+}
+
+.line-graph-container {
+	#stats-back {
+		background-image: buildLeftCaret($tracker-list);
+	}
+	#stats-forward {
+		background-image: buildRightCaret($tracker-list);
+	}
+	.tooltip {
+		border: 1px solid $tracker-list;
+	}
+	.tooltip-text-top, .tooltip-text-bottom {
+		color: $tracker-list;
+	}
+
+}
+
+.callout-container {
+	position: relative;
+	z-index: 2147483647;
+}
+
+.blocking-trk {
+	border-top: none;
+
+	.trk-header {
+		.trk-name {
+			color: #FFF;
+		}
+		.trk-cliqz-stat {
+			color: $enabled_feature;
+		}
+	}
+	.trk-moreinfo {
+		.trk-description {
+			color: #FFF;
+		}
+		.trk-srcs-title {
+			color: #FFF;
+		}
+	}
+	&:after {
+		content: "";
+		display: block;
+		margin-left: -6px;
+		width: 306px;
+		border-bottom: 1px solid #5a7479;
+	}
+}
+
+#content-detail.expanded {
+	.blocking-category .sticky-category .counts:after {
+	    content: "";
+		display: block;
+		margin-left: -45px;
+		width: 470px;
+		padding-top: 20px;
+		border-bottom: 1px solid #FFF;
+		padding-top: 3px;
+	}
+	.blocking-trk {
+		&:after {
+			content: "";
+			display: block;
+			margin-left: -6px;
+			width: 470px;
+			border-bottom: 1px solid #FFF;
+		}
+	}
+}
+
+.blocking-trackers {
+	&:not(.trusted):not(.restricted) {
+		.blocking-trk.blocked:not(.smart-unblocked),
+		.blocking-trk.smart-blocked {
+			.trk-name {
+				color: #FFF;
+			}
+		}
+	}
+	&.show-warnings {
+		.blocking-trk.warning {
+			&.smart-blocked .warning-image,
+			&.smart-unblocked .warning-image {
+				background-image: buildIconSmartBlockingNoCircle($enabled_feature);
 			}
 		}
 	}
@@ -329,7 +532,7 @@ $tracker-list: 					#172a0b;
 #content-stats {
 	.stats-top-header {
 		.stats-top-header-icon.trackersSeen g {
-			fill: #124559;
+			fill: $top_bar;
 		}
 		.stats-top-header-icon.trackersBlocked path {
 			&:first-of-type {
@@ -337,70 +540,64 @@ $tracker-list: 					#172a0b;
 				stroke: #FFF;
 			}
 			&:nth-of-type(2) {
-				stroke: #124559;
+				stroke: $top_bar;
 			}
 			&:last-of-type {
-				fill: #124559;
+				fill: $top_bar;
 			}
 		}
 		.stats-top-header-icon.trackersAnonymized path {
-			stroke: #124559;
+			stroke: $top_bar;
 		}
 		.stats-top-header-icon.adsBlocked path {
-			fill: #124559;
-			stroke: #124559;
+			fill: $top_bar;
+			stroke: $top_bar;
 		}
 	}
 	.stats-top-header-reset {
-		color: #124559;
+		color: $top_bar;
+	}
+	.tile-container {
+		background-color: $tracker-list;
+		.tile {
+			background-color: $tracker-list;
+			.tile-title > .tile-title-text {
+				color: $title_text;
+			}
+			.tile-value {
+				.tile-value-content {
+					color: #FFF;
+				}
+				&.active {
+					.active-underline {
+						background-color: #FFF;
+					}
+				}
+			}
+		}
 	}
 	.tab-header {
-		background-color: #124559;
-		.tab-container > .tab {
-			background-color: #7f98a2;
-		}
-	}
-	.tile-container > .tile > .tile-value {
-		.tile-value-content {
-			color: #124559;
-		}
-		&.active > .active-underline {
-			background-color: #124559;
+		background-color: $top_bar;
+		.tab-container {
+			.tab {
+				background-color: $tab_inactive;
+				&.active {
+					background-color: $green_darkest;
+				}
+			}
+			.header-tab-text {
+				color: #FFF;
+			}
 		}
 	}
 	.modal-container {
 		.modal-hollow-button {
-			border: #124559 1px solid;
-			color: #124559;
+			border: $top_bar 1px solid;
+			color: $top_bar;
 		}
 		.modal-filled-button {
-			border: #124559 1px solid;
-			background-color:#124559;;
+			border: $top_bar;
+			background-color: $top_bar;
 		}
 	}
-}
-
-.line-graph-container {
-	#stats-back {
-		background-image: buildLeftCaret(#124559);
-	}
-	#stats-forward {
-		background-image: buildRightCaret(#124559);
-	}
-}
-
-.opacityOverlay {
-	position: absolute;
-	top: 0;
-	left: 30px;
-	right: 30px;
-	bottom: 0;
-	background-color: grey;
-	opacity: .5;
-
-	// Target all the elements and assign them z-indexes here
-}
-
-.foreground {
-	z-index: 10;
 }
