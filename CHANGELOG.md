@@ -1,6 +1,7 @@
 ### GHOSTERY 8.4.8 ()
 
 + Fixes issue that could intermittently cause some cookies to be reset (Fixes #514)
++ Handle legacy opt-in settings for Firefox ()
 
 ### GHOSTERY 8.4.7 (March 16, 2020)
 
