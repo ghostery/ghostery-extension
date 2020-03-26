@@ -624,6 +624,7 @@ class Summary extends React.Component {
 			enable_anti_tracking,
 			is_expert,
 			current_theme,
+			antiTracking,
 		} = this.props;
 		const isCondensed = this._isCondensed();
 
@@ -640,6 +641,7 @@ class Summary extends React.Component {
 					isTooltipBody={!isCondensed}
 					tooltipPosition={isCondensed ? 'right' : is_expert ? 'top top-right' : 'top'}
 					current_theme={current_theme}
+					trackerCount={antiTracking.trackerCount}
 				/>
 			</div>
 		);
@@ -650,6 +652,7 @@ class Summary extends React.Component {
 			enable_ad_block,
 			is_expert,
 			current_theme,
+			adBlock,
 		} = this.props;
 		const isCondensed = this._isCondensed();
 
@@ -666,6 +669,7 @@ class Summary extends React.Component {
 					isTooltipBody={!isCondensed}
 					tooltipPosition={isCondensed ? 'right' : 'top'}
 					current_theme={current_theme}
+					trackerCount={adBlock.trackerCount}
 				/>
 			</div>
 		);
@@ -676,6 +680,7 @@ class Summary extends React.Component {
 			enable_smart_block,
 			is_expert,
 			current_theme,
+			smartBlock
 		} = this.props;
 		const isCondensed = this._isCondensed();
 
@@ -692,6 +697,7 @@ class Summary extends React.Component {
 					isTooltipBody={!isCondensed}
 					tooltipPosition={isCondensed ? 'right' : is_expert ? 'top top-left' : 'top'}
 					current_theme={current_theme}
+					trackerCount={Object.keys(smartBlock.blocked).length}
 				/>
 			</div>
 		);

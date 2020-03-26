@@ -51,10 +51,10 @@ class CliqzFeature extends React.Component {
 	}
 
 	_getStatus(active) {
-		const { current_theme } = this.props;
+		const { current_theme, trackerCount } = this.props;
 		switch (current_theme) {
 			case 'palm-theme':
-				return active ? t('on') : (<div className="rectangle" />);
+				return active ? (<span>{trackerCount}</span>) : (<div className="rectangle" />);
 			default:
 				return active ? t('on') : t('off');
 		}
@@ -124,7 +124,6 @@ class CliqzFeature extends React.Component {
 			isTooltipHeader,
 			tooltipPosition,
 			type,
-			current_theme,
 		} = this.props;
 
 		const cliqzFeatureClassNames = ClassNames('CliqzFeature', {
