@@ -130,7 +130,6 @@ class Panel extends React.Component {
 		const { panel, summary, blocking } = payload;
 		const { current_theme, account } = panel;
 
-		console.log('INIT SET THEME', current_theme);
 		setTheme(document, current_theme, account);
 
 		this.props.actions.updatePanelData(panel);

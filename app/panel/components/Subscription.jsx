@@ -80,7 +80,6 @@ class Subscription extends React.Component {
 	changeTheme = (updated_theme) => {
 		this.setState({ theme: updated_theme });
 		this.props.actions.getTheme(updated_theme).then(() => {
-			console.log('updated theme: ', updated_theme);
 			sendMessage('ping', 'theme_change');
 		});
 	}

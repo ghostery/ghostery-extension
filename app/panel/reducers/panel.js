@@ -77,12 +77,10 @@ export default (state = initialState, action) => {
 		}
 		case SET_THEME: {
 			const { name, css } = action.data;
-			console.log('PANEL ACTION SET THEME', name, css);
 			setTheme(document, name, { themeData: { [name]: { name, css } } }, true);
 			return Object.assign({}, state, { current_theme: name });
 		}
 		case CLEAR_THEME: {
-			console.log('CLEAR THEME IS CALLED');
 			setTheme(document, initialState.current_theme, null);
 			return Object.assign({}, state, { current_theme: initialState.current_theme });
 		}
