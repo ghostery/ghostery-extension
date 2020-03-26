@@ -87,7 +87,6 @@ export const getTheme = name => dispatch => (
 	sendMessageInPromise('setPanelData', { current_theme: name })
 		.then(() => sendMessageInPromise('account.getTheme'))
 		.then((res) => {
-			console.log('GOT THEME', res);
 			if (res) {
 				dispatch({
 					type: SET_THEME,

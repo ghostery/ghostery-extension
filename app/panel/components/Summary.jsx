@@ -269,7 +269,7 @@ class Summary extends React.Component {
 				pageLatency = unfixedLatency.toFixed(2);
 			}
 			this.setState({ trackerLatencyTotal: pageLatency });
-			// reset page load value if page is reloaded while panel is open
+		// reset page load value if page is reloaded while panel is open
 		} else if (this.props.performanceData && !performanceData) {
 			this.setState({ trackerLatencyTotal: pageLatency });
 		}
