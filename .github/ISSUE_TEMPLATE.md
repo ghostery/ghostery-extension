@@ -1,14 +1,14 @@
-##### Please read the [CONTRIBUTING](../CONTRIBUTING.md) guide before submitting an issue.
+##### Please read the [CONTRIBUTING](https://github.com/ghostery/ghostery-extension/blob/master/CONTRIBUTING.md) guide before submitting an issue.
 
 ### Description
 
 [Description of the bug or feature]
 
-### Expected Behavior 
+### Expected Behavior
 
 [What you expected to happen]
 
-### Actual Behavior 
+### Actual Behavior
 
 [What actually happened]
 
@@ -21,6 +21,6 @@
 ### Versions
 
 + Browser:
-+ OS: 
++ OS:
 + Node:
 + NPM:
