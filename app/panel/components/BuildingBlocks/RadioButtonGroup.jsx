@@ -21,53 +21,30 @@ import RadioButton from './RadioButton';
  * @class Implements a radio button group
  * @memberof PanelBuildingBlocks
  */
-class RadioButtonGroup extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			buttons: []
-		};
-	}
-
-	componentDidMount() {
-		const buttons = new Array(this.props.items.length).fill(false);
-		buttons[this.props.selectedIndex] = true;
-		this.setState({ buttons });
-	}
-
-	handleClick(indexClicked) {
-		const { buttons } = this.state;
-		const updatedButtons = buttons.map((button, index) => (index === indexClicked));
-		this.setState({ buttons: updatedButtons });
-		this.props.handleItemClick(indexClicked);
-	}
-
-	/**
-	 * React's required render function. Returns JSX
-	 * @return {JSX} JSX for rendering the Toggle Slider used throughout the extension
-	 */
-	render() {
-		const { buttons } = this.state;
-		return (
-			this.props.items.map((item, index) => (
-				<div className="flex-container align-justify RadioButtonGroup__container" key={`${index * 2}`}>
-					<span className="RadioButtonGroup__label">
-						{t(item.text)}
-					</span>
-					<div>
-						<RadioButton checked={buttons[index]} handleClick={() => this.handleClick(index)} />
-					</div>
+const RadioButtonGroup = (props) => {
+	const { indexClicked, handleItemClick } = props;
+	return (
+		props.items.map((item, index) => (
+			<div className="flex-container align-justify RadioButtonGroup__container" key={`${index * 2}`}>
+				<span className="RadioButtonGroup__label">
+					{t(item.text)}
+				</span>
+				<div>
+					<RadioButton
+						checked={index === indexClicked}
+						handleClick={() => handleItemClick(index)}
+					/>
 				</div>
-			))
-		);
-	}
-}
+			</div>
+		))
+	);
+};
 
 // PropTypes ensure we pass required props of the correct type
 RadioButtonGroup.propTypes = {
 	items: PropTypes.arrayOf(PropTypes.object).isRequired, // Number of objects in array is the number of radio buttons
 	handleItemClick: PropTypes.func.isRequired,
-	selectedIndex: PropTypes.number.isRequired
+	indexClicked: PropTypes.number.isRequired
 };
 
 

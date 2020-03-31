@@ -41,7 +41,7 @@ const SubscriptionThemes = (props) => {
 		}
 	];
 
-	const getSelectedIndex = () => {
+	const getIndexClicked = () => {
 		const index = themes.findIndex(theme => theme.name === props.theme);
 		return index;
 	};
@@ -62,7 +62,7 @@ const SubscriptionThemes = (props) => {
 					<RadioButtonGroup
 						items={themes}
 						handleItemClick={handleThemeClick}
-						selectedIndex={getSelectedIndex(props.theme)}
+						indexClicked={getIndexClicked(props.theme)}
 					/>
 				</div>
 			</div>
