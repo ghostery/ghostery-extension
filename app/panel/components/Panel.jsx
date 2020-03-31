@@ -14,6 +14,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Header from '../containers/HeaderContainer';
+import PromoModal from '../../shared-components/PromoModal';
 import { PremiumPromoModal } from '../../shared-components';
 import InsightsPromoModal from './InsightsPromoModal';
 import PlusPromoModal from '../containers/PlusPromoModalContainer';
@@ -24,6 +25,9 @@ import history from '../utils/history';
 import globals from '../../../src/classes/Globals';
 
 const DOMAIN = globals.DEBUG ? 'ghosterystage' : 'ghostery';
+const INSIGHTS = 'insights';
+const PLUS = 'plus';
+const PREMIUM = 'premium';
 
 /**
  * @class Implement base view with functionality common to all views.
@@ -354,14 +358,15 @@ class Panel extends React.Component {
 		const isPlus = this._plusSubscriber();
 
 		return (
-			<PremiumPromoModal
-				show
-				isPlus={isPlus}
+			<PromoModal
+				type={PREMIUM}
 				location="panel"
+				isPlus={isPlus}
 				handleGoAwayClick={this._handlePromoGoAwayClick}
 				handleGetPlusClick={this._handlePromoGetPlusClick}
 				handleTryMidnightClick={this._handlePromoTryMidnightClick}
 				handleXClick={this._handlePromoXClick}
+				show
 			/>
 		);
 	}
@@ -379,7 +384,8 @@ class Panel extends React.Component {
 		sendMessage('ping', 'promo_modals_show_insights');
 
 		return (
-			<InsightsPromoModal
+			<PromoModal
+				type={INSIGHTS}
 				handleGoAwayClick={this._handlePromoGoAwayClick}
 				handleSignInClick={this._handlePromoSignInClick}
 				handleSubscribeClick={this._handlePromoSubscribeClick}
@@ -392,7 +398,7 @@ class Panel extends React.Component {
 	/**
 	 * @returns {null|JSX}
 	 * @private
-	 * Renders the Insights promo modal if the user is not already an Insights subscriber
+	 * Renders the Plus promo modal if the user is not already an  subscriber
 	 */
 	_renderPlusPromoModal = () => {
 		if (this._plusSubscriber() || this._premiumSubscriber()) { return null; }
@@ -401,7 +407,8 @@ class Panel extends React.Component {
 		sendMessage('ping', 'promo_modals_show_plus');
 
 		return (
-			<PlusPromoModal
+			<PromoModal
+				type={PLUS}
 				handleGoAwayClick={this._handlePromoGoAwayClick}
 				handleSignInClick={this._handlePromoSignInClick}
 				handleSubscribeClick={this._handlePromoSubscribeClick}

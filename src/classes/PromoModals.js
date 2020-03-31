@@ -18,7 +18,7 @@ import panelData from './PanelData';
 const DAYS_BETWEEN_PROMOS = {
 	premium: globals.DEBUG ? 0.0005 : 30, // 40 seconds on staging
 	insights: globals.DEBUG ? 0.0005 : 30, // 40 seconds on staging
-	plus: globals.DEBUG ? 0.0005 : 30 // 40 seconds on staging
+	plus: globals.DEBUG ? 0.0005 : 2 // 40 seconds on staging
 };
 const WEEKLY_INSIGHTS_TARGET = globals.DEBUG ? 1 : 3;
 const DAILY_INSIGHTS_TARGET = globals.DEBUG ? 7 : 3;
