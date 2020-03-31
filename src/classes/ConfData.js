@@ -100,6 +100,7 @@ class ConfData {
 			_initProperty('block_by_default', false);
 			_initProperty('bugs_last_checked', 0);
 			_initProperty('bugs_last_updated', nowTime);
+			_initProperty('cliqz_legacy_opt_in', false);
 			_initProperty('cliqz_import_state', 0);
 			_initProperty('cmp_version', 0);
 			_initProperty('current_theme', 'default');
@@ -129,7 +130,7 @@ class ConfData {
 			_initProperty('plus_promo_modal_last_seen', 0);
 			_initProperty('premium_promo_modal_last_seen', 0);
 			_initProperty('rewards_accepted', false);
-			_initProperty('rewards_opted_in', false);
+			_initProperty('rewards_opted_in', false); // Migrated to Cliqz pref myoffrz.opted_in
 			_initProperty('settings_last_imported', 0);
 			_initProperty('settings_last_exported', 0);
 			_initProperty('show_alert', BROWSER_INFO.os !== 'android' && !IS_FIREFOX);

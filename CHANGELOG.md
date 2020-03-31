@@ -1,4 +1,9 @@
-### GHOSTERY 8.4.7 (March 11, 2020)
+### GHOSTERY 8.4.8 (March 30, 2019)
+
++ Fixes issue that could intermittently cause some cookies to be reset (Fixes #514)
++ Handle legacy opt-in settings for Firefox (#518)
+
+### GHOSTERY 8.4.7 (March 16, 2020)
 
 + Migrate to the new Chromium-based Edge browser (#492)
 + Disable Purplebox on Firefox Android (#494)

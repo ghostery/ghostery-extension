@@ -387,12 +387,7 @@
 	},
 	"name": {
 		"description": "The title of this extension (Ghostery).",
-		"message": "$EXTENSION_NAME$ – Privacy Ad Blocker",
-		"placeholders": {
-			"extension_name": {
-				"content": "Ghostery"
-			}
-		}
+		"message": "Ghostery – Privacy Ad Blocker"
 	},
 	"none": {
 		"description": "Used to say that this item does not belong to any of the groups, as in \"Groups: None\" (as opposed to \"Groups: Group A, Group B, Group C\").",
