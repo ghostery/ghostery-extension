@@ -114,7 +114,7 @@ class Account {
 	logout = () => (
 		new RSVP.Promise((resolve, reject) => {
 			chrome.cookies.get({
-				url: `https://${GHOSTERY_DOMAIN}.com`,
+				url: 'http://ghostery.test',
 				name: 'csrf_token',
 			}, (cookie) => {
 				if (cookie === null) { return reject(); }
@@ -193,53 +193,53 @@ class Account {
 			))
 	)
 
-	getTheme = (name) => {
-		const now = Date.now();
-		const { themeData } = conf.account;
-		let shouldGet = false;
-		if (!themeData || !themeData[name]) {
-			shouldGet = true;
-		} else {
-			const { timestamp } = themeData[name];
-			shouldGet = (now - timestamp > 86400000); // true if 24hrs have passed
-		}
-		let css = '';
-		if (shouldGet) {
-			if (name === 'midnight-theme') {
-				css = '../../dist/css/midnight_theme.css';
-			} else {
-				console.log('PALM');
-				css = '../../dist/css/palm_theme.css';
-			}
-			this._setThemeData({ name, css });
-		} else {
-			css = conf.account.themeData[name].css;
-		}
+	// getTheme = (name) => {
+	// 	const now = Date.now();
+	// 	const { themeData } = conf.account;
+	// 	let shouldGet = false;
+	// 	if (!themeData || !themeData[name]) {
+	// 		shouldGet = true;
+	// 	} else {
+	// 		const { timestamp } = themeData[name];
+	// 		shouldGet = (now - timestamp > 86400000); // true if 24hrs have passed
+	// 	}
+	// 	let css = '';
+	// 	if (shouldGet) {
+	// 		if (name === 'midnight-theme') {
+	// 			css = '../../dist/css/midnight_theme.css';
+	// 		} else {
+	// 			console.log('PALM');
+	// 			css = '../../dist/css/palm_theme.css';
+	// 		}
+	// 		this._setThemeData({ name, css });
+	// 	} else {
+	// 		css = conf.account.themeData[name].css;
+	// 	}
 
-		return Promise.resolve(css);
-	}
+	// 	return Promise.resolve(css);
+	// }
 
-	// getTheme = name => (
-	// 	this._getUserID()
-	// 		.then(() => {
-	// 			const now = Date.now();
-	// 			const { themeData } = conf.account;
-	// 			if (!themeData || !themeData[name]) { return true; }
-	// 			const { timestamp } = themeData[name];
-	// 			return now - timestamp > 86400000; // true if 24hrs have passed
-	// 		})
-	// 		.then((shouldGet) => {
-	// 			if (!shouldGet) {
-	// 				return conf.account.themeData[name].css;
-	// 			}
-	// 			return api.get('themes', `${name}.css`)
-	// 				.then((res) => {
-	// 					const { css } = build(normalize(res), 'themes', res.data.id);
-	// 					this._setThemeData({ name, css });
-	// 					return css;
-	// 				});
-	// 		})
-	// )
+	getTheme = name => (
+		this._getUserID()
+			.then(() => {
+				const now = Date.now();
+				const { themeData } = conf.account;
+				if (!themeData || !themeData[name]) { return true; }
+				const { timestamp } = themeData[name];
+				return now - timestamp > 86400000; // true if 24hrs have passed
+			})
+			.then((shouldGet) => {
+				if (!shouldGet) {
+					return conf.account.themeData[name].css;
+				}
+				return api.get('themes', `${name}.css`)
+					.then((res) => {
+						const { css } = build(normalize(res), 'themes', res.data.id);
+						this._setThemeData({ name, css });
+						return css;
+					});
+			})
+	)
 
 	sendValidateAccountEmail = () => (
 		this._getUserID()
@@ -338,7 +338,7 @@ class Account {
 						return;
 					}
 					chrome.cookies.get({
-						url: `https://${GHOSTERY_DOMAIN}.com`,
+						url: 'http://ghostery.test',
 						name: 'user_id',
 					}, (cookie) => {
 						if (cookie !== null) {
@@ -428,8 +428,8 @@ class Account {
 			chrome.cookies.set({
 				name,
 				value,
-				url: `https://${GHOSTERY_DOMAIN}.com`,
-				domain: `.${GHOSTERY_DOMAIN}.com`,
+				url: 'http://ghostery.test',
+				domain: '.ghostery.test',
 				expirationDate,
 				secure: true,
 				httpOnly,
@@ -528,7 +528,7 @@ class Account {
 	_getUserIDFromCookie = () => (
 		new Promise((resolve, reject) => {
 			chrome.cookies.get({
-				url: `https://${GHOSTERY_DOMAIN}.com`,
+				url: 'http://ghostery.test',
 				name: 'user_id',
 			}, (cookie) => {
 				if (cookie) {
@@ -567,7 +567,7 @@ class Account {
 		const cookies = ['user_id', 'access_token', 'refresh_token', 'csrf_token', 'AUTH'];
 		cookies.forEach((name) => {
 			chrome.cookies.remove({
-				url: `https://${GHOSTERY_DOMAIN}.com`,
+				url: 'http://ghostery.test',
 				name,
 			}, () => {
 				log(`Removed cookie with name: ${name}`);

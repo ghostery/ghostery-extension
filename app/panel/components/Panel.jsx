@@ -16,6 +16,7 @@ import { NavLink } from 'react-router-dom';
 import Header from '../containers/HeaderContainer';
 import { PremiumPromoModal } from '../../shared-components';
 import InsightsPromoModal from './InsightsPromoModal';
+import { ThemeContext } from '../contexts/ThemeContext';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import { setTheme } from '../utils/utils';
@@ -408,7 +409,7 @@ class Panel extends React.Component {
 		}
 
 		const notificationText = this.props.notificationShown && this.renderNotification();
-
+		const { current_theme } = this.props;
 		return (
 			<div id="panel">
 				{this._renderPromoModal()}
@@ -425,9 +426,11 @@ class Panel extends React.Component {
 					</div>
 				</div>
 				<Header />
-				<DynamicUIPortContext.Provider value={this._dynamicUIPort}>
-					{ this.props.children }
-				</DynamicUIPortContext.Provider>
+				<ThemeContext.Provider value={current_theme}>
+					<DynamicUIPortContext.Provider value={this._dynamicUIPort}>
+						{ this.props.children }
+					</DynamicUIPortContext.Provider>
+				</ThemeContext.Provider>
 
 			</div>
 		);

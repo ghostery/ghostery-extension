@@ -25,20 +25,20 @@ class RadioButtonGroup extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			buttons: []
+			buttonState: []
 		};
 	}
 
 	componentDidMount() {
-		const buttons = new Array(this.props.items.length).fill(false);
-		buttons[this.props.selectedIndex] = true;
-		this.setState({ buttons });
+		const buttonState = new Array(this.props.labels.length).fill(false);
+		buttonState[this.props.selectedIndex] = true;
+		this.setState({ buttonState });
 	}
 
 	handleClick(indexClicked) {
-		const { buttons } = this.state;
-		const updatedButtons = buttons.map((button, index) => (index === indexClicked));
-		this.setState({ buttons: updatedButtons });
+		const { buttonState } = this.state;
+		const updatedButtonState = buttonState.map((button, index) => (index === indexClicked));
+		this.setState({ buttonState: updatedButtonState });
 		this.props.handleItemClick(indexClicked);
 	}
 
@@ -47,15 +47,15 @@ class RadioButtonGroup extends React.Component {
 	 * @return {JSX} JSX for rendering the Toggle Slider used throughout the extension
 	 */
 	render() {
-		const { buttons } = this.state;
+		const { buttonState } = this.state;
 		return (
-			this.props.items.map((item, index) => (
-				<div className="flex-container align-justify RadioButtonGroup__container" key={`${index * 2}`}>
+			this.props.labels.map((label, index) => (
+				<div className="flex-container align-justify RadioButtonGroup__container" key={label}>
 					<span className="RadioButtonGroup__label">
-						{t(item.text)}
+						{t(label)}
 					</span>
 					<div>
-						<RadioButton checked={buttons[index]} handleClick={() => this.handleClick(index)} />
+						<RadioButton checked={buttonState[index]} handleClick={() => this.handleClick(index)} />
 					</div>
 				</div>
 			))
@@ -65,7 +65,7 @@ class RadioButtonGroup extends React.Component {
 
 // PropTypes ensure we pass required props of the correct type
 RadioButtonGroup.propTypes = {
-	items: PropTypes.arrayOf(PropTypes.object).isRequired, // Number of objects in array is the number of radio buttons
+	labels: PropTypes.arrayOf(PropTypes.string).isRequired,
 	handleItemClick: PropTypes.func.isRequired,
 	selectedIndex: PropTypes.number.isRequired
 };

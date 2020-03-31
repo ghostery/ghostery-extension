@@ -1,5 +1,5 @@
 /**
- * Modal Sass
+ * Theme Context
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -11,17 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-// Modal
-.Modal__background,
-.Modal__container {
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	z-index: 2147483647;
-}
-.Modal__background {
-	background-color: rgba(#000000, 0.25);
-}
+import React from 'react';
 
+export const ThemeContext = React.createContext(null);

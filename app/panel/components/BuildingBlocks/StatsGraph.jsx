@@ -14,12 +14,14 @@
 import { isEqual } from 'underscore';
 import React from 'react';
 import * as D3 from 'd3';
-
+import { ThemeContext } from '../../contexts/ThemeContext';
 /**
  * Generates an animated graph displaying locally stored stats
  * @memberof PanelBuildingBlocks
  */
 class StatsGraph extends React.Component {
+	static contextType = ThemeContext;
+
 	/**
 	 * Lifecycle event
 	 */
@@ -161,12 +163,12 @@ class StatsGraph extends React.Component {
 				.attrTween('stroke-dasharray', interpolator);
 		}
 
-		function getThemeColor(theme) {
-			switch (theme) {
-				default:
-					return '#124559';
+		function getThemeColor() {
+			switch (StatsGraph.context) {
 				case 'palm-theme':
 					return '#172a0b';
+				default:
+					return '#124559';
 			}
 		}
 
@@ -179,7 +181,7 @@ class StatsGraph extends React.Component {
 		pathGroup.append('path')
 			.attr('d', line)
 			.attr('fill', 'none')
-			.attr('stroke', getThemeColor(this.props.theme))
+			.attr('stroke', getThemeColor())
 			.attr('stroke-width', 1.5)
 			.call(animator);
 		// ---------------------------------------------------------------------- //
@@ -204,7 +206,7 @@ class StatsGraph extends React.Component {
 			.enter()
 			.append('circle')
 			.attr('class', (d, i) => `point point-${i}`)
-			.attr('fill', getThemeColor(this.props.theme))
+			.attr('fill', getThemeColor())
 			.attr('cx', d => x(d.index))
 			.attr('cy', d => y(d.amount))
 			.attr('r', 0)

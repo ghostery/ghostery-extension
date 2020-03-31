@@ -17,6 +17,7 @@ import React from 'react';
 import { ReactSVG } from 'react-svg';
 import ClassNames from 'classnames';
 
+import { ThemeContext } from '../../contexts/ThemeContext';
 import globals from '../../../../src/classes/Globals';
 import { log } from '../../../../src/utils/common';
 import { sendMessageInPromise } from '../../utils/msg';
@@ -27,6 +28,8 @@ import { renderKnownTrackerButtons, renderUnknownTrackerButtons } from './tracke
  * @memberOf BlockingComponents
  */
 class Tracker extends React.Component {
+	static contextType = ThemeContext;
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -259,8 +262,7 @@ class Tracker extends React.Component {
 	_renderCliqzAdsIcon() { return this._renderCliqzStatsIcon('ads'); }
 
 	_renderCliqzStatsIcon(type) {
-		const { current_theme } = this.props;
-		const path = `/app/images/panel/tracker-detail-cliqz-${type}-${current_theme}-icon.svg`;
+		const path = `/app/images/panel/tracker-detail-cliqz-${type}-${this.context}-icon.svg`;
 
 		return (
 			<ReactSVG src={path} className="trk-cliqz-stats-icon" />

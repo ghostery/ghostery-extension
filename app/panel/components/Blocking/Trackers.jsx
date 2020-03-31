@@ -40,7 +40,7 @@ class Trackers extends React.Component {
 	* @return {ReactComponent}   ReactComponent instance
 	*/
 	render() {
-		const { trackers, isUnknown, current_theme } = this.props;
+		const { trackers, isUnknown } = this.props;
 		let trackerList;
 		if (this.props.globalBlocking) {
 			const trackersToShow = [];
@@ -75,7 +75,6 @@ class Trackers extends React.Component {
 					smartBlockActive={this.props.smartBlockActive}
 					smartBlock={this.props.smartBlock}
 					isUnknown={isUnknown}
-					current_theme={current_theme}
 				/>
 			));
 		}

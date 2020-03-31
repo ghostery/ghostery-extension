@@ -45,4 +45,4 @@ $tab_active: 					$green_darkest;
 $tracker-list: 					$green_dark;
 $divider: 						$cyan_dark_desaturated;
 
-@import './themes/theme.scss';
+@use './themes/theme.scss';

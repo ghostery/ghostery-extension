@@ -164,7 +164,6 @@ class Category extends React.Component {
 			paused_blocking,
 			sitePolicy,
 			isUnknown,
-			current_theme,
 		} = this.props;
 
 		const globalBlocking = !!this.props.globalBlocking;
@@ -271,7 +270,6 @@ class Category extends React.Component {
 						smartBlockActive={this.props.smartBlockActive}
 						smartBlock={this.props.smartBlock}
 						isUnknown={isUnknown}
-						current_theme={current_theme}
 					/>
 				)}
 			</div>

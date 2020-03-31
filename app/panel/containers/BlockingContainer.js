@@ -35,7 +35,6 @@ const mapStateToProps = state => Object.assign({}, state.blocking, {
 	paused_blocking: state.summary.paused_blocking,
 	sitePolicy: state.summary.sitePolicy,
 	smartBlockActive: state.panel.enable_smart_block,
-	current_theme: state.panel.current_theme
 });
 /**
  * Bind Blocking view component action creators using Redux's bindActionCreators

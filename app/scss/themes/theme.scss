@@ -268,11 +268,11 @@ $divider: 						#FFF !default;
 		}
 	}
 	.cat-name {
-		color: #FFF;
+		color: $summary_text;
 	}
 	.counts {
 		.total-count {
-			color: #FFF;
+			color: $summary_text;
 		}
 	}
 	.Category__antiTrackingDivider {
@@ -382,8 +382,8 @@ $divider: 						#FFF !default;
 		}
 	}
 	.stats-button path {
-		fill: #FFF;
-		stroke: #FFF;
+		fill: $summary_text;
+		stroke: $summary_text;
 	}
 }
 
@@ -393,14 +393,14 @@ $divider: 						#FFF !default;
 	z-index: 4000;
 
 	.header-tab {
-		color: #FFF;
+		color: $summary_text;
 		background-color: $tab_inactive;
 		&.active {
-			color: #FFF;
+			color: $summary_text;
 			background-color: $tab_active;
 		}
 		&:last-of-type.active {
-			color: #FFF;
+			color: $summary_text;
 			background-color: $tab_active;
 		}
 	}
@@ -466,7 +466,7 @@ $divider: 						#FFF !default;
 
 	.trk-header {
 		.trk-name {
-			color: #FFF;
+			color: $summary_text;
 		}
 		.trk-cliqz-stat {
 			color: $enabled_feature;
@@ -474,10 +474,10 @@ $divider: 						#FFF !default;
 	}
 	.trk-moreinfo {
 		.trk-description {
-			color: #FFF;
+			color: $summary_text;
 		}
 		.trk-srcs-title {
-			color: #FFF;
+			color: $summary_text;
 		}
 	}
 	&:after {
@@ -515,7 +515,7 @@ $divider: 						#FFF !default;
 		.blocking-trk.blocked:not(.smart-unblocked),
 		.blocking-trk.smart-blocked {
 			.trk-name {
-				color: #FFF;
+				color: $summary_text;
 			}
 		}
 	}
@@ -566,7 +566,7 @@ $divider: 						#FFF !default;
 			}
 			.tile-value {
 				.tile-value-content {
-					color: #FFF;
+					color: $summary_text;
 				}
 				&.active {
 					.active-underline {
@@ -586,7 +586,7 @@ $divider: 						#FFF !default;
 				}
 			}
 			.header-tab-text {
-				color: #FFF;
+				color: $summary_text;
 			}
 		}
 	}
