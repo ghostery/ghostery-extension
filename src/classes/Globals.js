@@ -56,10 +56,8 @@ class Globals {
 		this.CDN_SUB_DOMAIN = this.DEBUG ? 'staging-cdn' : 'cdn';
 		this.APPS_SUB_DOMAIN = this.DEBUG ? 'staging-apps' : 'apps';
 		this.GCACHE_SUB_DOMAIN = this.DEBUG ? 'staging-gcache' : 'gcache';
-		// this.AUTH_SERVER = `https://consumerapi.${this.GHOSTERY_DOMAIN}.com`;
-		// this.ACCOUNT_SERVER = `https://accountapi.${this.GHOSTERY_DOMAIN}.com`;
-		this.AUTH_SERVER = 'http://consumerapi.ghostery.test';
-		this.ACCOUNT_SERVER = 'http://accountapi.ghostery.test';
+		this.AUTH_SERVER = `https://consumerapi.${this.GHOSTERY_DOMAIN}.com`;
+		this.ACCOUNT_SERVER = `https://accountapi.${this.GHOSTERY_DOMAIN}.com`;
 		// extension IDs
 		this.GHOSTERY_TAB_CHROME_PRODUCTION_ID = 'plmapebanmikcofllaaddgeocahboejc';
 		this.GHOSTERY_TAB_CHROME_PRERELEASE_ID = 'fenghpkndeggbbpjeojffgbmdmnaelmf';

@@ -114,7 +114,7 @@ class Account {
 	logout = () => (
 		new RSVP.Promise((resolve, reject) => {
 			chrome.cookies.get({
-				url: 'http://ghostery.test',
+				url: `https://${GHOSTERY_DOMAIN}.com`,
 				name: 'csrf_token',
 			}, (cookie) => {
 				if (cookie === null) { return reject(); }
@@ -338,7 +338,7 @@ class Account {
 						return;
 					}
 					chrome.cookies.get({
-						url: 'http://ghostery.test',
+						url: `https://${GHOSTERY_DOMAIN}.com`,
 						name: 'user_id',
 					}, (cookie) => {
 						if (cookie !== null) {
@@ -428,8 +428,8 @@ class Account {
 			chrome.cookies.set({
 				name,
 				value,
-				url: 'http://ghostery.test',
-				domain: '.ghostery.test',
+				url: `https://${GHOSTERY_DOMAIN}.com`,
+				domain: `.${GHOSTERY_DOMAIN}.com`,
 				expirationDate,
 				secure: true,
 				httpOnly,
@@ -528,7 +528,7 @@ class Account {
 	_getUserIDFromCookie = () => (
 		new Promise((resolve, reject) => {
 			chrome.cookies.get({
-				url: 'http://ghostery.test',
+				url: `https://${GHOSTERY_DOMAIN}.com`,
 				name: 'user_id',
 			}, (cookie) => {
 				if (cookie) {
@@ -567,7 +567,7 @@ class Account {
 		const cookies = ['user_id', 'access_token', 'refresh_token', 'csrf_token', 'AUTH'];
 		cookies.forEach((name) => {
 			chrome.cookies.remove({
-				url: 'http://ghostery.test',
+				url: `https://${GHOSTERY_DOMAIN}.com`,
 				name,
 			}, () => {
 				log(`Removed cookie with name: ${name}`);
