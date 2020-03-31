@@ -555,7 +555,7 @@ export function fetchLocalJSONResource(url) {
  */
 export function injectScript(tabId, scriptfile, cssfile, runAt) {
 	return new Promise((resolve, reject) => {
-		chrome.tabs.executeScript(tabId || 0, { file: scriptfile, runAt }, () => {
+		chrome.tabs.executeScript(tabId, { file: scriptfile, runAt }, () => {
 			if (chrome.runtime.lastError) {
 				log('injectScript error', chrome.runtime.lastError);
 				reject(new Error(chrome.runtime.lastError));

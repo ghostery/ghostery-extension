@@ -193,33 +193,7 @@ class Account {
 			))
 	)
 
-	// getTheme = (name) => {
-	// 	const now = Date.now();
-	// 	const { themeData } = conf.account;
-	// 	let shouldGet = false;
-	// 	if (!themeData || !themeData[name]) {
-	// 		shouldGet = true;
-	// 	} else {
-	// 		const { timestamp } = themeData[name];
-	// 		shouldGet = (now - timestamp > 86400000); // true if 24hrs have passed
-	// 	}
-	// 	let css = '';
-	// 	if (shouldGet) {
-	// 		if (name === 'midnight-theme') {
-	// 			css = '../../dist/css/midnight_theme.css';
-	// 		} else {
-	// 			console.log('PALM');
-	// 			css = '../../dist/css/palm_theme.css';
-	// 		}
-	// 		this._setThemeData({ name, css });
-	// 	} else {
-	// 		css = conf.account.themeData[name].css;
-	// 	}
-
-	// 	return Promise.resolve(css);
-	// }
-
-	getTheme = name => (
+	// 	getTheme = name => (
 		this._getUserID()
 			.then(() => {
 				const now = Date.now();

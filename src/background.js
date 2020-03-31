@@ -666,6 +666,7 @@ function onMessageHandler(request, sender, callback) {
 	} = request;
 	const { tab } = sender;
 	const tab_id = tab && tab.id;
+
 	// HANDLE PAGE EVENTS HERE
 	if (origin === 'account_pages') {
 		// Account pages

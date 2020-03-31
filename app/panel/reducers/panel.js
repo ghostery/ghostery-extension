@@ -77,11 +77,11 @@ export default (state = initialState, action) => {
 		}
 		case SET_THEME: {
 			const { name, css } = action.data;
-			setTheme(document, name, { themeData: { [name]: { name, css } } }, true);
+			setTheme(document, name, { themeData: { [name]: { name, css } } });
 			return Object.assign({}, state, { current_theme: name });
 		}
 		case CLEAR_THEME: {
-			setTheme(document, initialState.current_theme, null);
+			setTheme(document, initialState.current_theme);
 			return Object.assign({}, state, { current_theme: initialState.current_theme });
 		}
 		case SHOW_NOTIFICATION: {

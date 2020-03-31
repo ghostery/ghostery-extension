@@ -212,7 +212,7 @@ export function doXHR(method, url, query) {
  * @param  {string} themeName unique name of the theme
  * @param {string} theme css of the theme
  */
-export function setTheme(doc, name, account, reload = false) {
+export function setTheme(doc, name, account) {
 	// if themeName is 'default' all we have to do is to remove style element
 	const styleTitlePrefix = 'Ghostery Theme';
 	// First remove all other style elements which may be there
@@ -235,9 +235,6 @@ export function setTheme(doc, name, account, reload = false) {
 		// Create element for the theme being set, if it is not there
 		if (!themeStyle) {
 			themeStyle = doc.createElement('style');
-			// themeStyle.rel = 'stylesheet';
-			// themeStyle.media = 'screen';
-			// themeStyle.type = 'text/css';
 			themeStyle.id = name;
 			themeStyle.title = `${styleTitlePrefix}`;
 			themeStyle.textContent = css;
