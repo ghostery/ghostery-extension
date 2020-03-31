@@ -193,7 +193,7 @@ class Account {
 			))
 	)
 
-	// 	getTheme = name => (
+	getTheme = name => (
 		this._getUserID()
 			.then(() => {
 				const now = Date.now();
