@@ -167,6 +167,8 @@ class StatsGraph extends React.Component {
 			switch (StatsGraph.context) {
 				case 'palm-theme':
 					return '#172a0b';
+				case 'leaf-theme':
+					return '#173700';
 				default:
 					return '#124559';
 			}
