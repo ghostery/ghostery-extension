@@ -14,11 +14,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Header from '../containers/HeaderContainer';
-import PromoModal from '../../shared-components/PromoModal';
+// import PromoModal from '../../shared-components/PromoModal';
+import PromoModalContainer from '../../shared-components/PromoModal/PromoModalContainer';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import { setTheme } from '../utils/utils';
-import history from '../utils/history';
 import globals from '../../../src/classes/Globals';
 
 const DOMAIN = globals.DEBUG ? 'ghosterystage' : 'ghostery';
@@ -222,16 +222,16 @@ class Panel extends React.Component {
 		});
 	};
 
-	/**
-	 * @private
-	 * Handle clicks on sign in links in promo modals
-	 */
-	_handlePromoSignInClick = () => {
-		this.props.actions.togglePromoModal();
-		history.push({
-			pathname: '/login',
-		});
-	};
+	// /**
+	//  * @private
+	//  * Handle clicks on sign in links in promo modals
+	//  */
+	// _handlePromoSignInClick = () => {
+	// 	this.props.actions.togglePromoModal();
+	// 	history.push({
+	// 		pathname: '/login',
+	// 	});
+	// };
 
 	/**
 	 * @private
@@ -275,26 +275,26 @@ class Panel extends React.Component {
 		});
 	};
 
-	/**
-	 * @private
-	 * Handle click action when user selects Subscribe button in the Insights modal
-	 * @param  {string} modal Modal type (insights or plus)
-	 */
-	_handlePromoSubscribeClick = (modal) => {
-		this.props.actions.togglePromoModal();
+	// /**
+	//  * @private
+	//  * Handle click action when user selects Subscribe button in the Insights modal
+	//  * @param  {string} modal Modal type (insights or plus)
+	//  */
+	// _handlePromoSubscribeClick = (modal) => {
+	// 	this.props.actions.togglePromoModal();
 
-		let url = `https://checkout.${DOMAIN}.com/`;
+	// 	let url = `https://checkout.${DOMAIN}.com/`;
 
-		if (modal === 'insights') {
-			sendMessage('ping', 'promo_modals_insights_upgrade_cta');
-			url += 'insights?utm_source=gbe&utm_campaign=in_app_upgrade';
-		}
+	// 	if (modal === 'insights') {
+	// 		sendMessage('ping', 'promo_modals_insights_upgrade_cta');
+	// 		url += 'insights?utm_source=gbe&utm_campaign=in_app_upgrade';
+	// 	}
 
-		sendMessage('openNewTab', {
-			url,
-			become_active: true,
-		});
-	};
+	// 	sendMessage('openNewTab', {
+	// 		url,
+	// 		become_active: true,
+	// 	});
+	// };
 
 	/**
 	 * @param modal			'insights' or 'premium'
@@ -355,16 +355,17 @@ class Panel extends React.Component {
 		const isPlus = this._plusSubscriber();
 
 		return (
-			<PromoModal
-				type={PREMIUM}
-				location="panel"
-				isPlus={isPlus}
-				handleGoAwayClick={this._handlePromoGoAwayClick}
-				handleGetPlusClick={this._handlePromoGetPlusClick}
-				handleTryMidnightClick={this._handlePromoTryMidnightClick}
-				handleXClick={this._handlePromoXClick}
-				show
-			/>
+			// <PromoModal
+			// 	type={PREMIUM}
+			// 	location="panel"
+			// 	isPlus={isPlus}
+			// 	handleGoAwayClick={this._handlePromoGoAwayClick}
+			// 	handleGetPlusClick={this._handlePromoGetPlusClick}
+			// 	handleTryMidnightClick={this._handlePromoTryMidnightClick}
+			// 	handleXClick={this._handlePromoXClick}
+			// 	show
+			// />
+			<div />
 		);
 	}
 
@@ -379,16 +380,18 @@ class Panel extends React.Component {
 		sendMessage('promoModals.sawInsightsPromo', {});
 
 		sendMessage('ping', 'promo_modals_show_insights');
+		console.log('the props: ', this.props);
 
 		return (
-			<PromoModal
-				type={INSIGHTS}
-				handleGoAwayClick={() => this._handlePromoGoAwayClick(INSIGHTS)}
-				handleSignInClick={() => this._handlePromoSignInClick}
-				handleSubscribeClick={() => this._handlePromoSubscribeClick(INSIGHTS)}
-				handleXClick={() => this._handlePromoXClick(INSIGHTS)}
-				show
-			/>
+			<PromoModalContainer type={INSIGHTS} />
+			// <PromoModal
+			// 	type={INSIGHTS}
+			// 	handleGoAwayClick={() => this._handlePromoGoAwayClick(INSIGHTS)}
+			// 	handleSignInClick={() => this._handlePromoSignInClick}
+			// 	handleSubscribeClick={() => this._handlePromoSubscribeClick(INSIGHTS)}
+			// 	handleXClick={() => this._handlePromoXClick(INSIGHTS)}
+			// 	show
+			// />
 		);
 	}
 
@@ -405,15 +408,16 @@ class Panel extends React.Component {
 
 		const { loggedIn } = this.props;
 		return (
-			<PromoModal
-				type={PLUS}
-				handleGoAwayClick={this._handlePromoGoAwayClick}
-				handleSignInClick={this._handlePromoSignInClick}
-				handleTryPlusClick={this._handlePromoTryPlusClick}
-				handleXClick={this._handlePromoXClick}
-				loggedIn={loggedIn}
-				show
-			/>
+			// <PromoModal
+			// 	type={PLUS}
+			// 	handleGoAwayClick={this._handlePromoGoAwayClick}
+			// 	handleSignInClick={this._handlePromoSignInClick}
+			// 	handleTryPlusClick={this._handlePromoTryPlusClick}
+			// 	handleXClick={this._handlePromoXClick}
+			// 	loggedIn={loggedIn}
+			// 	show
+			// />
+			<div />
 		);
 	}
 

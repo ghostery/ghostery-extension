@@ -21,7 +21,7 @@ const DAYS_BETWEEN_PROMOS = {
 	plus: globals.DEBUG ? 0.0005 : 2 // 40 seconds on staging
 };
 const WEEKLY_INSIGHTS_TARGET = globals.DEBUG ? 1 : 3;
-const DAILY_INSIGHTS_TARGET = globals.DEBUG ? 7 : 3;
+const DAILY_INSIGHTS_TARGET = globals.DEBUG ? 2 : 3;
 
 const MSECS_IN_DAY = 86400000; // 1000 msecs-in-sec * 60 secs-in-min * 60 mins-in-hour * 24 hours-in-day
 const PREMIUM = 'premium';
