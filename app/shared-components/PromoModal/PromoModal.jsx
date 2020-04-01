@@ -20,32 +20,26 @@ import PremiumPromoModal from '../PremiumPromoModal';
 const INSIGHTS = 'insights';
 const PLUS = 'plus';
 const PREMIUM = 'premium';
+
 /**
- * A superclass for Promo Modals
+ * A base functional component for Promo Modals
  * @return {JSX}
  * @memberof HubComponents
  */
-class PromoModal extends React.Component {
-	handleGoAwayClick = () => { this.props.handleGoAwayClick(this.props.type); }
 
-	handleSubscribeClick = () => { this.props.handleSubscribeClick(this.props.type); }
-
-	handleXClick = () => { this.props.handleXClick(this.props.type); }
-
-	render() {
-		const { type } = this.props;
-		switch (type) {
-			case INSIGHTS:
-				return <InsightsPromoModal {...this.props} />;
-			case PLUS:
-				return <PlusPromoModal {...this.props} />;
-			case PREMIUM:
-				return <PremiumPromoModal {...this.props} />;
-			default:
-				return <InsightsPromoModal {...this.props} />;
-		}
+const PromoModal = (props) => {
+	const { type } = props;
+	switch (type) {
+		case INSIGHTS:
+			return <InsightsPromoModal {...props} />;
+		case PLUS:
+			return <PlusPromoModal {...props} />;
+		case PREMIUM:
+			return <PremiumPromoModal {...props} />;
+		default:
+			return <InsightsPromoModal {...props} />;
 	}
-}
+};
 
 // PropTypes ensure we pass required props of the correct type
 PromoModal.propTypes = {
@@ -61,7 +55,7 @@ PromoModal.propTypes = {
 	isPlus: PropTypes.bool,
 };
 
-const noop = () => {};
+const noop = () => { };
 PromoModal.defaultProps = {
 	handleGoAwayClick: noop,
 	handleSignInClick: noop,

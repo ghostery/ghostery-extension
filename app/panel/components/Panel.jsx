@@ -15,9 +15,6 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Header from '../containers/HeaderContainer';
 import PromoModal from '../../shared-components/PromoModal';
-import { PremiumPromoModal } from '../../shared-components';
-import InsightsPromoModal from './InsightsPromoModal';
-import PlusPromoModal from '../containers/PlusPromoModalContainer';
 import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import { setTheme } from '../utils/utils';
@@ -386,10 +383,10 @@ class Panel extends React.Component {
 		return (
 			<PromoModal
 				type={INSIGHTS}
-				handleGoAwayClick={this._handlePromoGoAwayClick}
-				handleSignInClick={this._handlePromoSignInClick}
-				handleSubscribeClick={this._handlePromoSubscribeClick}
-				handleXClick={this._handlePromoXClick}
+				handleGoAwayClick={() => this._handlePromoGoAwayClick(INSIGHTS)}
+				handleSignInClick={() => this._handlePromoSignInClick}
+				handleSubscribeClick={() => this._handlePromoSubscribeClick(INSIGHTS)}
+				handleXClick={() => this._handlePromoXClick(INSIGHTS)}
 				show
 			/>
 		);
@@ -406,14 +403,15 @@ class Panel extends React.Component {
 		sendMessage('promoModals.sawPlusPromo', {});
 		sendMessage('ping', 'promo_modals_show_plus');
 
+		const { loggedIn } = this.props;
 		return (
 			<PromoModal
 				type={PLUS}
 				handleGoAwayClick={this._handlePromoGoAwayClick}
 				handleSignInClick={this._handlePromoSignInClick}
-				handleSubscribeClick={this._handlePromoSubscribeClick}
 				handleTryPlusClick={this._handlePromoTryPlusClick}
 				handleXClick={this._handlePromoXClick}
+				loggedIn={loggedIn}
 				show
 			/>
 		);

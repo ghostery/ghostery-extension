@@ -15,77 +15,69 @@ import React from 'react';
 import Modal from '../../shared-components/Modal';
 import ModalExitButton from './BuildingBlocks/ModalExitButton';
 
-const INSIGHTS = 'insights';
-
-/**
- * @class Implements the Insights Promo Modal
- * @memberof PanelClasses
- */
-class InsightsPromoModal extends React.Component {
-	handleGoAwayClick = () => { this.props.handleGoAwayClick(INSIGHTS); }
-
-	handleSubscribeClick = () => { this.props.handleSubscribeClick(INSIGHTS); }
-
-	handleXClick = () => { this.props.handleXClick(INSIGHTS); }
-
-	render() {
-		const { show } = this.props;
-		return (
-			<Modal show={show}>
-				<div className="InsightsModal__content flex-container flex-dir-column align-middle">
-					<ModalExitButton className="InsightsModal__exitButton" toggleModal={this.handleXClick} />
-					<div className="InsightsModal__image" />
-					<div className="InsightsModal__header">
-						{t('panel_insights_promotion_header')}
-					</div>
-					<div className="InsightsModal__description">
-						{t('panel_insights_promotion_description')}
-					</div>
-					<div className="flex-container">
-						<div className="InsightsModal__features">
-							<div className="flex-container align-middle">
-								<span className="InsightsModal__checked-circle-icon" />
-								<div className="InsightsModal__feature-text">
-									{ t('panel_insights_audit_tags') }
-								</div>
-							</div>
-							<div className="flex-container align-middle">
-								<span className="InsightsModal__checked-circle-icon" />
-								<div className="InsightsModal__feature-text">
-									{ t('panel_insights_promotion_trace_poor_performance') }
-								</div>
+const InsightsPromoModal = (props) => {
+	const {
+		handleGoAwayClick,
+		handleSignInClick,
+		handleSubscribeClick,
+		handleXClick,
+		show
+	} = props;
+	return (
+		<Modal show={show}>
+			<div className="InsightsModal__content flex-container flex-dir-column align-middle">
+				<ModalExitButton className="InsightsModal__exitButton" toggleModal={handleXClick} />
+				<div className="InsightsModal__image" />
+				<div className="InsightsModal__header">
+					{t('panel_insights_promotion_header')}
+				</div>
+				<div className="InsightsModal__description">
+					{t('panel_insights_promotion_description')}
+				</div>
+				<div className="flex-container">
+					<div className="InsightsModal__features">
+						<div className="flex-container align-middle">
+							<span className="InsightsModal__checked-circle-icon" />
+							<div className="InsightsModal__feature-text">
+								{t('panel_insights_audit_tags')}
 							</div>
 						</div>
-						<div className="InsightsModal__features">
-							<div className="flex-container align-middle">
-								<span className="InsightsModal__checked-circle-icon" />
-								<div className="InsightsModal__feature-text">
-									{ t('panel_insights_promotion_watch_pings') }
-								</div>
-							</div>
-							<div className="flex-container align-middle">
-								<span className="InsightsModal__checked-circle-icon" />
-								<div className="InsightsModal__feature-text">
-									{ t('panel_insights_promotion_explore_trends') }
-								</div>
+						<div className="flex-container align-middle">
+							<span className="InsightsModal__checked-circle-icon" />
+							<div className="InsightsModal__feature-text">
+								{t('panel_insights_promotion_trace_poor_performance')}
 							</div>
 						</div>
 					</div>
-					<div className="InsightsModal__call-to-action-container">
-						<div className="flex-container align-center">
-							<span onClick={this.handleSubscribeClick} className="btn InsightsModal__call-to-action">
-								<span className="button-text">{t('panel_insights_promotion_call_to_action')}</span>
-							</span>
+					<div className="InsightsModal__features">
+						<div className="flex-container align-middle">
+							<span className="InsightsModal__checked-circle-icon" />
+							<div className="InsightsModal__feature-text">
+								{t('panel_insights_promotion_watch_pings')}
+							</div>
 						</div>
-						<div className="InsightsModal__other-options-container flex-container align-justify">
-							<span onClick={this.props.handleSignInClick} className="InsightsModal__link">{t('subscribe_pitch_sign_in')}</span>
-							<span onClick={this.handleGoAwayClick} className="InsightsModal__link">{t('no_thanks_turn_promos_off')}</span>
+						<div className="flex-container align-middle">
+							<span className="InsightsModal__checked-circle-icon" />
+							<div className="InsightsModal__feature-text">
+								{t('panel_insights_promotion_explore_trends')}
+							</div>
 						</div>
 					</div>
 				</div>
-			</Modal>
-		);
-	}
-}
+				<div className="InsightsModal__call-to-action-container">
+					<div className="flex-container align-center">
+						<span onClick={handleSubscribeClick} className="btn InsightsModal__call-to-action">
+							<span className="button-text">{t('panel_insights_promotion_call_to_action')}</span>
+						</span>
+					</div>
+					<div className="InsightsModal__other-options-container flex-container align-justify">
+						<span onClick={handleSignInClick} className="InsightsModal__link">{t('subscribe_pitch_sign_in')}</span>
+						<span onClick={handleGoAwayClick} className="InsightsModal__link">{t('no_thanks_turn_promos_off')}</span>
+					</div>
+				</div>
+			</div>
+		</Modal>
+	);
+};
 
 export default InsightsPromoModal;
