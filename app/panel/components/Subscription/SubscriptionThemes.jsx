@@ -25,14 +25,9 @@ const SubscriptionThemes = (props) => {
 	const themes = ['default', 'midnight-theme', 'palm-theme', 'leaf-theme'];
 	const themeLabels = ['subscription_default_theme', 'subscription_dark_blue_theme', 'subscription_palm_theme', 'subscription_leaf_theme'];
 
-	const getSelectedIndex = () => {
-		const index = themes.indexOf(props.theme);
-		return index;
-	};
+	const getIndexClicked = () => themes.indexOf(props.theme);
 
-	const handleThemeClick = (index) => {
-		props.changeTheme(themes[index]);
-	};
+	const handleThemeClick = index => props.changeTheme(themes[index]);
 
 	return (
 		<div className="content-subscription s-tabs-panel">
@@ -45,7 +40,7 @@ const SubscriptionThemes = (props) => {
 					<RadioButtonGroup
 						labels={themeLabels}
 						handleItemClick={handleThemeClick}
-						selectedIndex={getSelectedIndex(props.theme)}
+						indexClicked={getIndexClicked(props.theme)}
 					/>
 				</div>
 			</div>
