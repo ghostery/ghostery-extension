@@ -2063,9 +2063,6 @@
 	"myoffrz_turnoff_rewards": {
 		"message": "Turn off Ghostery Rewards"
 	},
-	"OFFERS_ALREADY_TRANSLATED": {
-		"message": ""
-	},
 	"myoffrz_help": {
 		"message": "Help"
 	},
@@ -2144,6 +2141,18 @@
 			}
 		}
 	},
+  "myoffrz_check_conditions": {
+    "message": "Check the following conditions"
+  },
+  "myoffrz_redeem_code": {
+    "message": "Redeem code"
+  },
+  "myoffrz_voucher_found": {
+    "message": "Voucher found"
+  },
+  "myoffrz_redeeming_voucher": {
+    "message": "Redeeming voucher"
+  },
 	"OFFERS_ENDS": {
 		"message": ""
 	},
