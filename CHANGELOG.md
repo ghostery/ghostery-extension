@@ -1,3 +1,7 @@
+### GHOSTERY 8.5.0 ()
+
++ Fixes bug in site-specific tracker white-listing (Fixes #519)
+
 ### GHOSTERY 8.4.8 (March 30, 2019)
 
 + Fixes issue that could intermittently cause some cookies to be reset (Fixes #514)
