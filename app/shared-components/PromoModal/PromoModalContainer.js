@@ -38,7 +38,9 @@ import { togglePromoModal } from '../../panel/actions/PanelActions'; // get shar
  * @param  {Object} 	ownProps  Login view component own props
  * @return {function}          	  to be used as an argument in redux connect call
  */
-const mapDispatchToProps = dispatch => ({ actions: bindActionCreators(Object.assign({ togglePromoModal }), dispatch) });
+const mapDispatchToProps = dispatch => ({
+	actions: bindActionCreators(Object.assign({ togglePromoModal }), dispatch)
+});
 /**
  * Connects PromoModal component to the Redux store.
  * @param {function} mapStateToProps [description]

@@ -58,7 +58,6 @@ class PromoModal extends React.Component {
 	 * Handle clicks on sign in links in promo modals
 	 */
 	_handlePromoSignInClick = () => {
-		console.log('here');
 		this.props.actions.togglePromoModal();
 		history.push({
 			pathname: '/login',
@@ -70,11 +69,41 @@ class PromoModal extends React.Component {
 	_handleSubscribeClick = (type) => { this.props.handleSubscribeClick(type); }
 
 	_handlePromoXClick = (type) => {
-		console.log('test');
-		this.props.handleXClick(type);
+		this.props.actions.togglePromoModal();
+
+		if (type === 'insights') {
+			sendMessage('ping', 'promo_modals_decline_insights_upgrade');
+		}
+	}
+
+	renderModalContent() {
+		const { type } = this.props;
+		switch (type) {
+			case INSIGHTS:
+				return (
+					<InsightsPromoModal
+						handleSubscribeClick={() => this._handlePromoSubscribeClick(type)}
+						show
+					/>
+				);
+			case PLUS:
+				return <PlusPromoModal type={type} />;
+			case PREMIUM:
+				return <PremiumPromoModal {...this.props} />;
+			default:
+				return <InsightsPromoModal {...this.props} />;
+		}
 	}
 
 	render() {
+		// return (
+		// 	<Modal>
+		// 		<div className="CloseButton" handleClick={this._handlePromoXClick} />
+		// 		{this.renderModalContent()}
+		// 		<div className="SignInButton" handleClick={this._handlePromoSignInClick} />
+		// 	</Modal>
+		// );
+
 		const { type } = this.props;
 		switch (type) {
 			case INSIGHTS:
