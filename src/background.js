@@ -1226,8 +1226,7 @@ offers.on('enabled', () => {
 		if (DEBUG) {
 			offers.action('setConfiguration', {
 				config_location: 'de',
-				// triggersBE: 'https://offers-api-staging-myo.myoffrz.ninja',
-				triggersBE: 'https://offers-api.ghostery.net',
+				triggersBE: 'https://offers-api-staging-myo.myoffrz.ninja',
 				showConsoleLogs: true,
 				offersLogsEnabled: true,
 				offersDevFlag: true,
