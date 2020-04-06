@@ -41,6 +41,9 @@ $tab_active_text:      			#FFF !default;
 $tracker_list: 					#FFF !default;
 $tracker_list_text: 			#FFF !default;
 $tracker_list_pale_text: 		#FFF !default;
+$tracker_list_blocked_text: 	#FFF !default;
+
+
 $divider: 						#FFF !default;
 $opacityOverlay: 				transparent !default;
 
@@ -48,6 +51,7 @@ $trackers_blocked: 				#FFF !default;
 $elements_adjusted: 			#FFF !default;
 $page_load: 					#FFF !default;
 
+$hist_stats_background:  		#FFF !default;
 $hist_stats_hover_border: 		#FFF !default;
 $hist_stats_tab_inactive: 		#FFF !default;
 $hist_stats_tab_active: 		#FFF !default;
@@ -227,7 +231,7 @@ $hist_stats_tab_active: 		#FFF !default;
 			transition: color 0.25s ease-out;
 		};
 		.CliqzFeature__status .rectangle {
-			background-color: $inactive_cliqz_feature;
+			background-color: $bright_disabled_feature;
 			transition: background-color 0.25s ease-out;
 		};
 		.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($bright_disabled_feature) };
@@ -306,6 +310,10 @@ $hist_stats_tab_active: 		#FFF !default;
 		background-color: $tracker_list;
 		border: 1px solid $tracker_list;
 
+		.blocked-count > .count,
+		.blocked-count > .text {
+			color: $tracker_list_blocked_text;
+		}
 		.counts:after {
 			content: "";
 			display: block;
@@ -607,9 +615,9 @@ $hist_stats_tab_active: 		#FFF !default;
 		color: $top_bar;
 	}
 	.tile-container {
-		background-color: $tracker_list;
+		background-color: $hist_stats_background;
 		.tile {
-			background-color: $tracker_list;
+			background-color: $hist_stats_background;
 			.tile-title > .tile-title-text {
 				color: $title_text;
 			}
@@ -632,6 +640,7 @@ $hist_stats_tab_active: 		#FFF !default;
 				background-color: $hist_stats_tab_inactive;
 				&.active {
 					background-color: $hist_stats_tab_active;
+					border: none;
 				}
 			}
 			.header-tab-text {

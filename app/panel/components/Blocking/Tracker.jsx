@@ -350,6 +350,7 @@ class Tracker extends React.Component {
 							tracker.whitelisted,
 							tracker.siteRestricted,
 							tracker.type,
+							this.context
 						)}
 					</div>
 				</div>

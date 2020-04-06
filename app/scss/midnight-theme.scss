@@ -19,16 +19,16 @@
 // 	* the extension CSS for those components was refactored after this stylesheet was first created
 //	* multiple extension versions may be in production at the same time depending on browser-specific issues / approval processes
 
-$background:              		red;
-$summary_text:					red;
-$enabled_feature:				red;
-$bright_enabled_feature:		red;
-$paled_enabled_feature:			red;
-$disabled_feature:             	red;
-$paled_disabled_feature:		red;
-$bright_disabled_feature:		red;
-$caption:             			red;
-$tab_inactive:      			red;
+$background:              		#124559;
+$summary_text:					#FFFFFF;
+$enabled_feature:				#EFF6E0;
+$bright_enabled_feature:		#F7FAEF;
+$paled_enabled_feature:			#819D9C;
+$disabled_feature:             	#70888F;
+$paled_disabled_feature:		#A9B8BC;
+$bright_disabled_feature:		#BDC8CB;
+$caption:             			#F7F7F7;
+$tab_inactive:      			#B6C4CA;
 
 // Function helper with color variables
 @function url-friendly-colour($color) {
