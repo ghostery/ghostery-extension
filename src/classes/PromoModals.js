@@ -18,7 +18,7 @@ import panelData from './PanelData';
 const DAYS_BETWEEN_PROMOS = {
 	premium: globals.DEBUG ? 0.0005 : 30, // 40 seconds on staging
 	insights: globals.DEBUG ? 0.0005 : 30, // 40 seconds on staging
-	plus: globals.DEBUG ? 0.0005 : 2 // 40 seconds on staging
+	plus: globals.DEBUG ? 0.0005 : 7 // 40 seconds on staging
 };
 const WEEKLY_INSIGHTS_TARGET = globals.DEBUG ? 1 : 3;
 const DAILY_INSIGHTS_TARGET = globals.DEBUG ? 2 : 3;
@@ -54,7 +54,9 @@ class PromoModals {
 
 	static recordPlusPromoSighting() { this._recordPromoSighting(PLUS); }
 
-	static turnOffPromos() { panelData.set({ notify_promotions: false }); }
+	static turnOffPromos() {
+		panelData.set({ notify_promotions: false });
+	}
 
 	/**
 	 * Check Conf values to determine if the enough time has

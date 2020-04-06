@@ -13,12 +13,14 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import InsightsPromoModal from '../../panel/components/InsightsPromoModal';
-import PlusPromoModal from '../../panel/components/PlusPromoModal';
-import PremiumPromoModal from '../PremiumPromoModal';
+import Modal from '../Modal';
+import InsightsPromoModalContent from '../../panel/components/InsightsPromoModalContent';
+import PlusPromoModalContent from '../../panel/components/PlusPromoModalContent';
+import PremiumPromoModalContent from '../PremiumPromoModalContent';
 import history from '../../panel/utils/history';
 import { sendMessage } from '../../panel/utils/msg';
 import globals from '../../../src/classes/Globals';
+import ModalExitButton from '../../panel/components/BuildingBlocks/ModalExitButton';
 
 const DOMAIN = globals.DEBUG ? 'ghosterystage' : 'ghostery';
 const INSIGHTS = 'insights';
@@ -33,25 +35,65 @@ const PREMIUM = 'premium';
 
 class PromoModal extends React.Component {
 	/**
+	 * @param modal			'insights' or 'premium'
 	 * @private
-	 * Handle click action when user selects Subscribe button in the Insights modal
-	 * @param  {string} modal Modal type (insights or plus)
+	 * Handle clicks on the link to turn off promos in the promo modals
 	 */
-	_handlePromoSubscribeClick = (modal) => {
+	_handlePromoGoAwayClick = (modal) => {
 		this.props.actions.togglePromoModal();
 
-		let url = `https://checkout.${DOMAIN}.com/`;
+		sendMessage('promoModals.turnOffPromos', {});
 
-		if (modal === 'insights') {
-			sendMessage('ping', 'promo_modals_insights_upgrade_cta');
-			url += 'insights?utm_source=gbe&utm_campaign=in_app_upgrade';
+		switch (modal) {
+			case INSIGHTS:
+				sendMessage('ping', 'promo_modals_decline_insights_upgrade');
+				break;
+			case PLUS:
+				sendMessage('ping', 'promo_modals_decline_plus_upgrade');
+				break;
+			case PREMIUM:
+				sendMessage('ping', 'promo_modals_decline_insights_upgrade');
+				break;
+			default:
+				break;
+		}
+
+		this.props.actions.showNotification({
+			classes: 'warning',
+			reload: false,
+			text: t('promos_turned_off_notification'),
+		});
+	};
+
+	/**
+	 * @private
+	 * Handle clicks on the download buttons
+	 */
+	_handlePromoTryProductClick = (product, utm_campaign) => {
+		this.props.actions.togglePromoModal();
+
+		let url;
+		switch (product) {
+			case PLUS:
+				// Should we send a plus ping here?
+				// sendMessage('ping', 'promo_modals_plus_upgrade_cta');
+				url = `https://checkout.${DOMAIN}.com/plus?utm_source=gbe&utm_campaign=${utm_campaign}`;
+				break;
+			case PREMIUM:
+				url = `https://ghostery.com/thanks-for-downloading-midnight?utm_source=gbe&utm_campaign=${utm_campaign}`;
+				break;
+			case INSIGHTS:
+				sendMessage('ping', 'promo_modals_insights_upgrade_cta');
+				url = `https://checkout.${DOMAIN}.com/insights?utm_source=gbe&utm_campaign=${utm_campaign}`;
+				break;
+			default:
 		}
 
 		sendMessage('openNewTab', {
 			url,
 			become_active: true,
 		});
-	};
+	}
 
 	/**
 	 * @private
@@ -64,91 +106,88 @@ class PromoModal extends React.Component {
 		});
 	};
 
-	_handleGoAwayClick = (type) => { this.props.handleGoAwayClick(type); }
-
-	_handleSubscribeClick = (type) => { this.props.handleSubscribeClick(type); }
-
 	_handlePromoXClick = (type) => {
 		this.props.actions.togglePromoModal();
 
-		if (type === 'insights') {
+		if (type === INSIGHTS) {
 			sendMessage('ping', 'promo_modals_decline_insights_upgrade');
+		}
+
+		if (type === PLUS) {
+			sendMessage('ping', 'promo_modals_decline_plus_upgrade');
 		}
 	}
 
 	renderModalContent() {
-		const { type } = this.props;
+		const { type, loggedIn } = this.props;
 		switch (type) {
 			case INSIGHTS:
 				return (
-					<InsightsPromoModal
-						handleSubscribeClick={() => this._handlePromoSubscribeClick(type)}
-						show
+					<InsightsPromoModalContent
+						handleGoAwayClick={() => this._handlePromoGoAwayClick(INSIGHTS)}
+						handleTryInsightsClick={() => this._handlePromoTryProductClick(INSIGHTS, 'in_app_upgrade')}
+						handleSignInClick={this._handlePromoSignInClick}
+						XButton={(
+							<ModalExitButton
+								className="InsightsModal__exitButton"
+								toggleModal={() => this._handlePromoXClick(INSIGHTS)}
+							/>
+						)}
+						{...this.props}
 					/>
 				);
 			case PLUS:
-				return <PlusPromoModal type={type} />;
+				return (
+					<PlusPromoModalContent
+						handleGoAwayClick={() => this._handlePromoGoAwayClick(PLUS)}
+						handleTryPlusClick={() => this._handlePromoTryProductClick(PLUS, 'in_app_spring2020')}
+						handleSignInClick={this._handlePromoSignInClick}
+						XButton={(
+							<ModalExitButton
+								className="PlusPromoModal__exitButton"
+								toggleModal={() => this._handlePromoXClick(PLUS)}
+							/>
+						)}
+						loggedIn={loggedIn}
+					/>
+				);
 			case PREMIUM:
-				return <PremiumPromoModal {...this.props} />;
+				return (
+					<PremiumPromoModalContent
+						handleGoAwayClick={() => this._handlePromoGoAwayClick(PREMIUM)}
+						handleTryMidnightClick={() => this._handlePromoTryProductClick(PREMIUM, 'in_app')}
+						handleGetPlusClick={() => this._handlePromoTryProductClick(PLUS, 'in_app')}
+						XButton={(
+							<ModalExitButton
+								className="InsightsModal__exitButton"
+								toggleModal={() => this._handlePromoXClick(PREMIUM)}
+							/>
+						)}
+						{...this.props}
+					/>
+				);
 			default:
-				return <InsightsPromoModal {...this.props} />;
+				return <InsightsPromoModalContent {...this.props} />;
 		}
 	}
 
 	render() {
-		// return (
-		// 	<Modal>
-		// 		<div className="CloseButton" handleClick={this._handlePromoXClick} />
-		// 		{this.renderModalContent()}
-		// 		<div className="SignInButton" handleClick={this._handlePromoSignInClick} />
-		// 	</Modal>
-		// );
-
-		const { type } = this.props;
-		switch (type) {
-			case INSIGHTS:
-				return (
-					<InsightsPromoModal
-						{...this.props}
-						handleSignInClick={this._handlePromoSignInClick}
-						handleSubscribeClick={() => this._handlePromoSubscribeClick(type)}
-						handleXClick={() => this._handlePromoXClick(type)}
-						show
-					/>
-				);
-			case PLUS:
-				return <PlusPromoModal type={type} />;
-			case PREMIUM:
-				return <PremiumPromoModal {...this.props} />;
-			default:
-				return <InsightsPromoModal {...this.props} />;
-		}
+		return (
+			<Modal show>
+				{this.renderModalContent()}
+			</Modal>
+		);
 	}
 }
 
 // PropTypes ensure we pass required props of the correct type
 PromoModal.propTypes = {
 	type: PropTypes.string.isRequired,
-	handleGoAwayClick: PropTypes.func,
-	handleSignInClick: PropTypes.func,
-	handleSubscribeClick: PropTypes.func,
-	handleXClick: PropTypes.func,
-	handleTryMidnightClick: PropTypes.func,
-	handleGetPlusClick: PropTypes.func,
-	handleKeepBasicClick: PropTypes.func,
 	location: PropTypes.string,
 	isPlus: PropTypes.bool,
 };
 
-const noop = () => { };
 PromoModal.defaultProps = {
-	handleGoAwayClick: noop,
-	handleSignInClick: noop,
-	handleSubscribeClick: noop,
-	handleXClick: noop,
-	handleTryMidnightClick: noop,
-	handleGetPlusClick: noop,
-	handleKeepBasicClick: noop,
 	location: 'panel',
 	isPlus: false,
 };

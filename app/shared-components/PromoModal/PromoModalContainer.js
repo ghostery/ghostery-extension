@@ -16,7 +16,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PromoModal from './PromoModal';
-import { togglePromoModal } from '../../panel/actions/PanelActions'; // get shared actions from Panel
+import { togglePromoModal, showNotification } from '../../panel/actions/PanelActions'; // get shared actions from Panel
 
 /**
  * Map redux store state properties to PromoModal component own properties.
@@ -39,7 +39,12 @@ import { togglePromoModal } from '../../panel/actions/PanelActions'; // get shar
  * @return {function}          	  to be used as an argument in redux connect call
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign({ togglePromoModal }), dispatch)
+	actions: bindActionCreators(
+		Object.assign({
+			togglePromoModal,
+			showNotification
+		}), dispatch
+	)
 });
 /**
  * Connects PromoModal component to the Redux store.

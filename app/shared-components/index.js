@@ -17,7 +17,7 @@
 
 import ExitButton from './ExitButton';
 import Modal from './Modal';
-import PremiumPromoModal from './PremiumPromoModal';
+import PremiumPromoModalContent from './PremiumPromoModalContent';
 import SteppedNavigation from './SteppedNavigation';
 import ToastMessage from './ToastMessage';
 import ToggleCheckbox from './ToggleCheckbox';
@@ -26,7 +26,7 @@ import ToggleSwitch from './ToggleSwitch';
 export {
 	ExitButton,
 	Modal,
-	PremiumPromoModal,
+	PremiumPromoModalContent,
 	SteppedNavigation,
 	ToastMessage,
 	ToggleCheckbox,
