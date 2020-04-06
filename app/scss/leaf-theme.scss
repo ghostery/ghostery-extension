@@ -1,0 +1,73 @@
+// Colors
+$green_light:					#456431;
+$green: 						#2C5114;
+$green_dark: 					#172A0B;
+$green_darkest:		        	#313930;
+
+$cyan_very_light:               #BDC8CB;
+$cyan_light:		            #A9B8BC;
+$cyan_grey:		            	#CBD4D7;
+$cyan_dark_grey:             	#819D9C;
+$cyan_dark_desaturated: 		#5A7479;
+$cyan_dark:                     #124559;
+
+$grey_dull: 					#C8C7C2;
+
+$white_egg:                     #F7FAEF;
+$white_alabaster:		        #F7F7F7;
+
+$blue_light:                    #87F0FB;
+$blue_dark_grayish:             #70888F;
+
+$green_dark: 					#173700;
+
+// Theme variables
+$top_bar:						$green_dark;
+
+$opacityOverlay: 				rgba(231, 236, 238, 0.81);
+
+$summary_text:					#4A4A4A;
+$caption:             			$white_alabaster;
+$title_text:					$cyan_grey;
+
+$button_border:					1px solid #979797;
+
+$enabled_feature:				#2e3b80;
+$bright_enabled_feature:		#2092bf;
+$paled_enabled_feature:			$cyan_dark_grey;
+
+$disabled_feature:             	$blue_dark_grayish;
+$bright_disabled_feature:		#2092bf;
+$paled_disabled_feature:		$cyan_light;
+
+$disabled_cliqz_feature:		#65605c;
+$inactive_cliqz_feature: 		$grey_dull;
+
+$tab_inactive:      			rgba(207, 210, 218, 0.61);;
+$tab_inactive_text:      		#FFF;
+$tab_active: 					#FFF;
+$tab_active_text: 				#636262;
+
+$hist_stats_tab_active: 		#305402;
+$hist_stats_tab_inactive: 		#667b57;
+// border: 1px solid $tracker-list;
+$hist_stats_hover_border: 		#173700;
+$hist_stats_background:         #305402;
+
+// Palm-theme
+// $hist_stats_tab_active: 		$tab_active;
+// $hist_stats_tab_inactive: 	$tab_inactive;
+
+
+$tracker_list: 					#FFF;
+// $tracker_list_text: 			#FFF;
+$tracker_list_text: 			#333333;
+$tracker_list_pale_text: 		#4a4a4a;
+$divider: 						$cyan_dark_desaturated;
+
+// Leaf_specific
+$trackers_blocked: 				#963939;
+$elements_adjusted: 			#2e3b80;
+$page_load:		 				#326c45;
+
+@import './theme/theme.scss';

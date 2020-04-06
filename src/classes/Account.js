@@ -193,27 +193,57 @@ class Account {
 			))
 	)
 
-	getTheme = name => (
-		this._getUserID()
-			.then(() => {
-				const now = Date.now();
-				const { themeData } = conf.account;
-				if (!themeData || !themeData[name]) { return true; }
-				const { timestamp } = themeData[name];
-				return now - timestamp > 86400000; // true if 24hrs have passed
-			})
-			.then((shouldGet) => {
-				if (!shouldGet) {
-					return conf.account.themeData[name].css;
-				}
-				return api.get('themes', `${name}.css`)
-					.then((res) => {
-						const { css } = build(normalize(res), 'themes', res.data.id);
-						this._setThemeData({ name, css });
-						return css;
-					});
-			})
-	)
+
+	getTheme = (name) => {
+		const now = Date.now();
+		const { themeData } = conf.account;
+		let shouldGet = false;
+		if (!themeData || !themeData[name]) {
+			shouldGet = true;
+		} else {
+			const { timestamp } = themeData[name];
+			shouldGet = (now - timestamp > 86400000); // true if 24hrs have passed
+		}
+		let css = '';
+		if (shouldGet) {
+			if (name === 'midnight-theme') {
+				css = '../../dist/css/midnight_theme.css';
+			} else if (name === 'palm-theme') {
+				console.log('PALM');
+				css = '../../dist/css/palm_theme.css';
+			} else if (name === 'leaf-theme') {
+				css = '../../dist/css/leaf_theme.css';
+			}
+			this._setThemeData({ name, css });
+		} else {
+			css = conf.account.themeData[name].css;
+		}
+
+		return Promise.resolve(css);
+	}
+
+
+	// getTheme = name => (
+	// 	this._getUserID()
+	// 		.then(() => {
+	// 			const now = Date.now();
+	// 			const { themeData } = conf.account;
+	// 			if (!themeData || !themeData[name]) { return true; }
+	// 			const { timestamp } = themeData[name];
+	// 			return now - timestamp > 86400000; // true if 24hrs have passed
+	// 		})
+	// 		.then((shouldGet) => {
+	// 			if (!shouldGet) {
+	// 				return conf.account.themeData[name].css;
+	// 			}
+	// 			return api.get('themes', `${name}.css`)
+	// 				.then((res) => {
+	// 					const { css } = build(normalize(res), 'themes', res.data.id);
+	// 					this._setThemeData({ name, css });
+	// 					return css;
+	// 				});
+	// 		})
+	// )
 
 	sendValidateAccountEmail = () => (
 		this._getUserID()

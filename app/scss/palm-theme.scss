@@ -1,0 +1,54 @@
+// Colors
+$green_light:					#456431;
+$green: 						#2C5114;
+$green_dark: 					#172A0B;
+$green_darkest:		        	#313930;
+
+$cyan_very_light:               #BDC8CB;
+$cyan_light:		            #A9B8BC;
+$cyan_grey:		            	#CBD4D7;
+$cyan_dark_grey:             	#819D9C;
+$cyan_dark_desaturated: 		#5A7479;
+$cyan_dark:                     #124559;
+
+$grey_dull: 					#C8C7C2;
+
+$white_egg:                     #F7FAEF;
+$white_alabaster:		        #F7F7F7;
+
+$blue_light:                    #87F0FB;
+$blue_dark_grayish:             #70888F;
+
+
+// Theme variables
+$top_bar:						$green;
+
+$opacityOverlay: 				rgba(74, 74, 74, .5);;
+
+$summary_text:					#FFF;
+$caption:             			$white_alabaster;
+$title_text:					$cyan_grey;
+
+$enabled_feature:				$blue_light;
+$bright_enabled_feature:		$white_egg;
+$paled_enabled_feature:			$cyan_dark_grey;
+
+$disabled_feature:             	$blue_dark_grayish;
+$bright_disabled_feature:		$cyan_very_light;
+$paled_disabled_feature:		$cyan_light;
+
+$disabled_cliqz_feature:		#FFF;
+$inactive_cliqz_feature: 		$grey_dull;
+
+$tab_inactive:      			$green_light;
+$tab_active: 					$green_darkest;
+$tab_active_text: 				#FFF;
+
+$hist_stats_hover_border: 		$green_dark;
+$hist_stats_background:         $green_dark;
+
+$tracker_list: 					$green_dark;
+$divider: 						$cyan_dark_desaturated;
+
+
+@import './theme/theme.scss';

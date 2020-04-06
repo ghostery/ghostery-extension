@@ -67,6 +67,9 @@ module.exports = {
 		panel: [`${SASS_DIR}/panel.scss`],
 		panel_android: [`${SASS_DIR}/panel_android.scss`],
 		purplebox_styles: [`${SASS_DIR}/purplebox.scss`],
+		palm_theme: [`${SASS_DIR}/palm-theme.scss`],
+		leaf_theme: [`${SASS_DIR}/leaf-theme.scss`],
+		midnight_theme: [`${SASS_DIR}/midnight-theme.scss`],
 	},
 	output: {
 		filename: '[name].js',
