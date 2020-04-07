@@ -18,10 +18,10 @@ import panelData from './PanelData';
 const DAYS_BETWEEN_PROMOS = {
 	premium: globals.DEBUG ? 0.0005 : 30, // 40 seconds on staging
 	insights: globals.DEBUG ? 0.0005 : 30, // 40 seconds on staging
-	plus: globals.DEBUG ? 0.0005 : 7 // 40 seconds on staging
+	plus: globals.DEBUG ? 0.0005 : 30 // 40 seconds on staging
 };
 const WEEKLY_INSIGHTS_TARGET = globals.DEBUG ? 1 : 3;
-const DAILY_INSIGHTS_TARGET = globals.DEBUG ? 2 : 3;
+const DAILY_INSIGHTS_TARGET = globals.DEBUG ? 7 : 3;
 
 const MSECS_IN_DAY = 86400000; // 1000 msecs-in-sec * 60 secs-in-min * 60 mins-in-hour * 24 hours-in-day
 const PREMIUM = 'premium';
