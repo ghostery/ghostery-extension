@@ -309,6 +309,10 @@ class Panel extends React.Component {
 			return this._renderPlusPromoModal();
 		}
 
+		if (promoModal === 'premium') {
+			return this._renderPremiumPromoModal();
+		}
+
 		return null;
 	}
 

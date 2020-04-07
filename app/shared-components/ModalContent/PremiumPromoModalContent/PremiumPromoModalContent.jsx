@@ -13,7 +13,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import ClassNames from 'classnames';
 
 /**
  * A functional React component for a Premium Promo Modal that may be displayed in the Hub and/or Panel
@@ -28,22 +27,13 @@ const PremiumPromoModalContent = (props) => {
 		handleKeepBasicClick,
 		handleGoAwayClick,
 		location,
-		XButton
 	} = props;
-
-	const contentClassNames = ClassNames(
-		'PremiumPromoModal__content',
-		'flex-container',
-		'flex-dir-column',
-		'align-middle',
-	);
 
 	const isInHub = location === 'hub';
 	const isInPanel = location === 'panel';
 
 	return (
-		<div className={contentClassNames}>
-			{XButton}
+		<div className="flex-container flex-dir-column align-middle">
 			<div className="PremiumPromoModal__midnight-logo" />
 			<div className="PremiumPromoModal__main-content-container">
 				<div className="PremiumPromoModal__header">
@@ -117,7 +107,6 @@ PremiumPromoModalContent.propTypes = {
 	handleGetPlusClick: PropTypes.func.isRequired,
 	handleKeepBasicClick: PropTypes.func,
 	handleGoAwayClick: PropTypes.func,
-	XButton: PropTypes.element.isRequired
 };
 
 const noop = () => { };

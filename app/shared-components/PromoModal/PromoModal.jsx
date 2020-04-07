@@ -13,10 +13,11 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import ClassNames from 'classnames';
 import Modal from '../Modal';
-import InsightsPromoModalContent from '../../panel/components/InsightsPromoModalContent';
-import PlusPromoModalContent from '../../panel/components/PlusPromoModalContent';
-import PremiumPromoModalContent from '../PremiumPromoModalContent';
+import InsightsPromoModalContent from '../ModalContent/InsightsPromoModalContent';
+import PlusPromoModalContent from '../ModalContent/PlusPromoModalContent';
+import PremiumPromoModalContent from '../ModalContent/PremiumPromoModalContent';
 import history from '../../panel/utils/history';
 import { sendMessage } from '../../panel/utils/msg';
 import globals from '../../../src/classes/Globals';
@@ -111,12 +112,23 @@ class PromoModal extends React.Component {
 
 		if (type === INSIGHTS) {
 			sendMessage('ping', 'promo_modals_decline_insights_upgrade');
-		}
-
-		if (type === PLUS) {
+		} else if (type === PLUS) {
 			sendMessage('ping', 'promo_modals_decline_plus_upgrade');
 		}
 	}
+
+	_renderXButton = (type) => {
+		const XButtonClass = type === PLUS
+			? 'PlusPromoModal__exitButton'
+			: 'InsightsModal__exitButton';
+
+		return (
+			<ModalExitButton
+				className={XButtonClass}
+				toggleModal={() => this._handlePromoXClick(type)}
+			/>
+		);
+	};
 
 	renderModalContent() {
 		const { type, loggedIn } = this.props;
@@ -127,12 +139,6 @@ class PromoModal extends React.Component {
 						handleGoAwayClick={() => this._handlePromoGoAwayClick(INSIGHTS)}
 						handleTryInsightsClick={() => this._handlePromoTryProductClick(INSIGHTS, 'in_app_upgrade')}
 						handleSignInClick={this._handlePromoSignInClick}
-						XButton={(
-							<ModalExitButton
-								className="InsightsModal__exitButton"
-								toggleModal={() => this._handlePromoXClick(INSIGHTS)}
-							/>
-						)}
 						{...this.props}
 					/>
 				);
@@ -142,12 +148,6 @@ class PromoModal extends React.Component {
 						handleGoAwayClick={() => this._handlePromoGoAwayClick(PLUS)}
 						handleTryPlusClick={() => this._handlePromoTryProductClick(PLUS, 'in_app_spring2020')}
 						handleSignInClick={this._handlePromoSignInClick}
-						XButton={(
-							<ModalExitButton
-								className="PlusPromoModal__exitButton"
-								toggleModal={() => this._handlePromoXClick(PLUS)}
-							/>
-						)}
 						loggedIn={loggedIn}
 					/>
 				);
@@ -157,12 +157,6 @@ class PromoModal extends React.Component {
 						handleGoAwayClick={() => this._handlePromoGoAwayClick(PREMIUM)}
 						handleTryMidnightClick={() => this._handlePromoTryProductClick(PREMIUM, 'in_app')}
 						handleGetPlusClick={() => this._handlePromoTryProductClick(PLUS, 'in_app')}
-						XButton={(
-							<ModalExitButton
-								className="InsightsModal__exitButton"
-								toggleModal={() => this._handlePromoXClick(PREMIUM)}
-							/>
-						)}
 						{...this.props}
 					/>
 				);
@@ -172,9 +166,18 @@ class PromoModal extends React.Component {
 	}
 
 	render() {
+		const { type } = this.props;
+		const modalContentClassNames = ClassNames('', {
+			InsightsModal__content: type === INSIGHTS,
+			PlusPromoModal__content: type === PLUS,
+			PremiumPromoModal__content: type === PREMIUM,
+		});
 		return (
 			<Modal show>
-				{this.renderModalContent()}
+				<div className={modalContentClassNames}>
+					{this._renderXButton(type)}
+					{this.renderModalContent()}
+				</div>
 			</Modal>
 		);
 	}

@@ -13,7 +13,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import ClassNames from 'classnames';
 
 /**
  * A functional React component for a PlusPromo Modal that may be displayed in the Hub and/or Panel
@@ -26,19 +25,10 @@ const PlusPromoModalContent = (props) => {
 		handleTryPlusClick,
 		handleSignInClick,
 		loggedIn,
-		XButton
 	} = props;
 
-	const contentClassNames = ClassNames(
-		'PlusPromoModal__content',
-		'flex-container',
-		'flex-dir-column',
-		'align-middle',
-	);
-
 	return (
-		<div className={contentClassNames}>
-			{XButton}
+		<div className="flex-container flex-dir-column align-middle">
 			<div className="PlusPromoModal__plus-logo" />
 			<div className="PlusPromoModal__main-content-container">
 				<div className="PlusPromoModal__header">
@@ -74,7 +64,6 @@ PlusPromoModalContent.propTypes = {
 	handleSignInClick: PropTypes.func.isRequired,
 	handleGoAwayClick: PropTypes.func.isRequired,
 	loggedIn: PropTypes.bool.isRequired,
-	XButton: PropTypes.element.isRequired,
 };
 
 export default PlusPromoModalContent;

@@ -75,9 +75,9 @@ html body {
 @import './partials/_stats';
 @import './partials/_stats_graph';
 @import './partials/_modal_exit_button';
-@import './partials/insights_promo_modal.scss';
-@import './partials/plus_promo_modal.scss';
 
 // Imports from ../shared-components directory
 @import '../shared-components/Modal/Modal.scss';
 @import '../shared-components/PremiumPromoModalContent/PremiumPromoModalContent.scss';
+@import '../shared-components/PlusPromoModalContent/PlusPromoModalContent.scss';
+@import '../shared-components/InsightsPromoModalContent/InsightsPromoModalContent.scss';

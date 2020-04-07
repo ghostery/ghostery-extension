@@ -26,6 +26,11 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 	z-index: 10;
 }
 
+.InsightsModal__container {
+	min-height: 450px;
+	justify-content: space-between;
+}
+
 .InsightsModal__image {
 	height: 94px;
 	width: 177px;

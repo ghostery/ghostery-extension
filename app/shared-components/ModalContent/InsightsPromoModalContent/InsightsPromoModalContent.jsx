@@ -18,11 +18,9 @@ const InsightsPromoModalContent = (props) => {
 		handleGoAwayClick,
 		handleSignInClick,
 		handleTryInsightsClick,
-		XButton,
 	} = props;
 	return (
-		<div className="InsightsModal__content flex-container flex-dir-column align-middle">
-			{XButton}
+		<div className="InsightsModal__container flex-container flex-dir-column align-middle">
 			<div className="InsightsModal__image" />
 			<div className="InsightsModal__header">
 				{t('panel_insights_promotion_header')}

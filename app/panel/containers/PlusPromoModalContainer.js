@@ -13,7 +13,7 @@
 
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import PlusPromoModal from '../components/PlusPromoModalContent';
+import PlusPromoModal from '../../shared-components/ModalContent/PlusPromoModalContent/PlusPromoModalContent';
 /**
  * Map redux store state properties to Panel view component own properties.
  * @memberOf PanelContainers
