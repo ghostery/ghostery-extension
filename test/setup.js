@@ -32,7 +32,7 @@ chrome.runtime.getManifest.returns({
 	debug: true
 });
 
-// Create Mock for for Cliqz modules
+// Create Mock for Cliqz modules
 jest.mock('../src/classes/Cliqz', () => ({
 	modules: {
 		adblocker: {

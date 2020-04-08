@@ -91,6 +91,7 @@
     "eslint-plugin-react": "^7.18.3",
     "fs-extra": "^8.1.0",
     "jest": "^25.1.0",
+    "jest-fetch-mock": "^3.0.3",
     "jest-when": "^2.7.0",
     "jsdoc": "^3.6.3",
     "jsonfile": "^5.0.0",
