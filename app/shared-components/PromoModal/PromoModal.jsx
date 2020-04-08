@@ -118,9 +118,7 @@ class PromoModal extends React.Component {
 	}
 
 	_renderXButton = (type) => {
-		const XButtonClass = type === PLUS
-			? 'PlusPromoModal__exitButton'
-			: 'InsightsModal__exitButton';
+		const XButtonClass = ClassNames({ PlusPromoModal__exitButton: type === PLUS });
 
 		return (
 			<ModalExitButton
@@ -167,11 +165,16 @@ class PromoModal extends React.Component {
 
 	render() {
 		const { type } = this.props;
-		const modalContentClassNames = ClassNames('', {
-			InsightsModal__content: type === INSIGHTS,
-			PlusPromoModal__content: type === PLUS,
-			PremiumPromoModal__content: type === PREMIUM,
-		});
+		const modalContentClassNames = ClassNames(
+			'flex-container',
+			'flex-dir-column',
+			'align-middle',
+			{
+				InsightsModal__content: type === INSIGHTS,
+				PlusPromoModal__content: type === PLUS,
+				PremiumPromoModal__content: type === PREMIUM,
+			}
+		);
 		return (
 			<Modal show>
 				<div className={modalContentClassNames}>

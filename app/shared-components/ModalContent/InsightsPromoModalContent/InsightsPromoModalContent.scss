@@ -15,7 +15,7 @@
 $standard-font-family: Roboto, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-.InsightsModal__content {
+.InsightsPromoModal__content {
 	background-color: $alabaster;
 	position: relative;
 	width: 518px;
@@ -26,19 +26,14 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 	z-index: 10;
 }
 
-.InsightsModal__container {
-	min-height: 450px;
-	justify-content: space-between;
-}
-
-.InsightsModal__image {
+.InsightsPromoModal__image {
 	height: 94px;
 	width: 177px;
 	margin-top: 20px;
 	background-image: url('/app/images/panel/insights-ribbon.svg');
 }
 
-.InsightsModal__header {
+.InsightsPromoModal__header {
 	font-family: $standard-font-family;
 	height: 27.1px;
 	font-size: 20px;
@@ -48,7 +43,7 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 	margin-bottom: 10px;
 }
 
-.InsightsModal__description {
+.InsightsPromoModal__description {
 	width: 400px;
 	font-size: 18px;
 	font-weight: 500;
@@ -57,7 +52,7 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 	font-family: $standard-font-family;
 }
 
-.InsightsModal__features {
+.InsightsPromoModal__features {
 	&:nth-child(odd) {
 		margin-left: 25px;
 		width: 50%;
@@ -69,7 +64,7 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 	}
 }
 
-.InsightsModal__feature-text {
+.InsightsPromoModal__feature-text {
 	font-family: $standard-font-family;
 	font-size: 14px;
 	color: $medium-gray;
@@ -77,7 +72,7 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 	line-height: 16px;
 }
 
-.InsightsModal__checked-circle-icon {
+.InsightsPromoModal__checked-circle-icon {
 	flex: none;
 	height: 18px;
 	width: 18px;
@@ -86,7 +81,7 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 	align-self: flex-start;
 }
 
-.InsightsModal__call-to-action-container {
+.InsightsPromoModal__call-to-action-container {
 	height: 95px;
 	width: 99%;
 	margin-top: 10px;
@@ -96,7 +91,7 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 	flex-direction: column;
 }
 
-.InsightsModal__call-to-action {
+.InsightsPromoModal__call-to-action {
 	cursor: pointer;
 	display: flex;
 	justify-content: center;
@@ -116,7 +111,7 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 	}
 }
 
-.InsightsModal__link {
+.InsightsPromoModal__link {
 	font-family: $standard-font-family;
 	font-size: 13px;
 	color: $tundora;
@@ -126,7 +121,7 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 	}
 }
 
-.InsightsModal__other-options-container {
+.InsightsPromoModal__other-options-container {
 	margin-top: 10px;
 	padding: 0 10.5px;
 	text-decoration: underline;
