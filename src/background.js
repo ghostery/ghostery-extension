@@ -1472,7 +1472,7 @@ function initializeVersioning() {
 			log('THIS IS AN UPGRADE');
 			conf.previous_version = globals.EXTENSION_VERSION;
 			const { version_history } = conf;
-			const earliestVersion = version_history[0].split('.');
+			const versions = [...version_history].sort(utils.semverCompare);
 			const prevVersion = PREVIOUS_EXTENSION_VERSION.split('.');
 			const currentVersion = globals.EXTENSION_VERSION.split('.');
 
@@ -1490,7 +1490,7 @@ function initializeVersioning() {
 			}
 
 			// Check if the earliest version is < 8.4.2
-			if (earliestVersion[0] <= 8 && earliestVersion[1] <= 4 && earliestVersion[2] < 2) {
+			if (utils.semverCompare(versions[0], '8.4.2') === -1) {
 				globals.REQUIRE_LEGACY_OPT_IN = true;
 			}
 
