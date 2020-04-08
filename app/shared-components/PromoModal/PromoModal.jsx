@@ -170,7 +170,7 @@ class PromoModal extends React.Component {
 			'flex-dir-column',
 			'align-middle',
 			{
-				InsightsModal__content: type === INSIGHTS,
+				InsightsPromoModal__content: type === INSIGHTS,
 				PlusPromoModal__content: type === PLUS,
 				PremiumPromoModal__content: type === PREMIUM,
 			}
