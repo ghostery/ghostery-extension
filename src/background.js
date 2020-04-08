@@ -1490,7 +1490,7 @@ function initializeVersioning() {
 			}
 
 			// Check if the earliest version is < 8.4.2
-			if (utils.semverCompare(versions[0], '8.4.2') === -1) {
+			if (versions.length && utils.semverCompare(versions[0], '8.4.2') === -1) {
 				globals.REQUIRE_LEGACY_OPT_IN = true;
 			}
 
