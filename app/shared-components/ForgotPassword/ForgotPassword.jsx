@@ -60,7 +60,8 @@ class ForgotPassword extends React.Component {
 				.then((success) => {
 					this.setState({ loading: false });
 					if (success) {
-						this.props.history.push('/login');
+						// this.props.history.push('/login');
+						// go back to hub sign in screen
 					}
 				});
 		});
@@ -72,20 +73,39 @@ class ForgotPassword extends React.Component {
 	 */
 	render() {
 		const { email, loading, emailError } = this.state;
+		const { location } = this.props;
 		const buttonClasses = ClassNames('button ghostery-button', { loading });
+
+		const ContainerClassNames = ClassNames('', {
+			'forgot-password-panel': location === 'panel',
+			ForgotPasswordView: location === 'hub',
+		});
+		const MessageClassNames = ClassNames('', {
+			'forgot-password-message': location === 'panel',
+			ForgotPasswordMessage: location === 'hub',
+		});
+		const EmailClassNames = ClassNames('', {
+			'forgot-input-email': location === 'panel',
+			ForgotPasswordMessage: location === 'hub',
+		});
+
+		const ButtonsContainerClassNames = ClassNames('row', {
+			'buttons-container': location === 'panel',
+			ForgotPasswordButtonsContainer: location === 'hub',
+		});
 		return (
-			<div id="forgot-password-panel">
+			<div id={ContainerClassNames}>
 				<div className="row align-center">
 					<div className="small-11 medium-8 columns">
 						<form onSubmit={this.handleSubmit}>
-							<h4 id="forgot-password-message">
+							<h4 id={MessageClassNames}>
 								{ t('forgot_password_message') }
 							</h4>
 							<div id="forgot-email" className={(emailError ? 'panel-error invalid-email' : '')}>
-								<label htmlFor="forgot-input-email">
+								<label htmlFor={EmailClassNames}>
 									{ t('email_colon') }
 									<span className="asterisk">*</span>
-									<input onChange={this.handleInputChange} value={email} id="forgot-input-email" type="text" name="email" pattern=".{1,}" autoComplete="off" required />
+									<input onChange={this.handleInputChange} value={email} id={EmailClassNames} type="text" name="email" pattern=".{1,}" autoComplete="off" required />
 								</label>
 								<p className="invalid-email warning">
 									{ t('invalid_email_forgot') }
@@ -94,7 +114,7 @@ class ForgotPassword extends React.Component {
 									{ t('error_email_forgot') }
 								</p>
 							</div>
-							<div className="buttons-container row">
+							<div className={ButtonsContainerClassNames}>
 								<div className="small-6 columns text-center">
 									<Link to="/login" id="forgot-password-cancel" className="cancel button hollow">
 										{ t('button_cancel') }
