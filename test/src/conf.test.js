@@ -11,7 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import sinon from 'sinon';
 import chrome from 'sinon-chrome';
 import conf from '../../src/classes/Conf';
 import globals from '../../src/classes/Globals';

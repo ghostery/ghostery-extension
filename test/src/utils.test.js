@@ -110,6 +110,8 @@ describe('tests for semverCompare()', () => {
 		expect(semverCompare("8.7.1", "8.7.10")).toBe(-1);
 		expect(semverCompare("7.100.100", "8.7.10")).toBe(-1);
 		expect(semverCompare("8.3.3", "8.4.2")).toBe(-1);
+		expect(semverCompare("8.3.3.3e794d0", "8.4.2")).toBe(-1);
+		expect(semverCompare("8.3.3.3e794d0", "8.4.2.1d945f0")).toBe(-1);
 		expect(semverCompare("8.7", "8.7.0")).toBe(-1);
 		expect(semverCompare("8.7", "8.8.0")).toBe(-1);
 
@@ -119,6 +121,8 @@ describe('tests for semverCompare()', () => {
 		expect(semverCompare("8.7.10", "8.7.1")).toBe(1);
 		expect(semverCompare("8.7.10", "7.100.100")).toBe(1);
 		expect(semverCompare("8.4.2", "8.3.3")).toBe(1);
+		expect(semverCompare("8.4.2", "8.3.3.3e794d0")).toBe(1);
+		expect(semverCompare("8.4.2.1d945f0", "8.3.3.3e794d0")).toBe(1);
 		expect(semverCompare("8.7.0", "8.7")).toBe(1);
 		expect(semverCompare("8.8.0", "8.7")).toBe(1);
 

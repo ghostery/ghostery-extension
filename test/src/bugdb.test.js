@@ -12,8 +12,6 @@
  */
 
 import _ from 'underscore';
-import sinon from 'sinon';
-import 'whatwg-fetch';
 import bugDb from '../../src/classes/BugDb';
 import conf from '../../src/classes/Conf';
 import { prefsGet } from '../../src/utils/common';

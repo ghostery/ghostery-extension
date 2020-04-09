@@ -11,8 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import sinon from 'sinon';
-import 'whatwg-fetch';
 import bugDb from '../../src/classes/BugDb';
 import conf from '../../src/classes/Conf';
 import { isBug } from '../../src/utils/matcher';

@@ -31,7 +31,7 @@ You can also submit feature requests to the [issue tracker](../../issues). Befor
 + Make your pull request from "develop" in your fork to "develop" in the source
 + Use short, meaningful commit messages
 + Lint your code before committing and making a pull request (`npm run lint`)
-+ Write unit tests for new features and make sure all tests are passing (`npm run test.unit`)
++ Write unit tests for new features and make sure all tests are passing (`npm run test`)
 + If your pull request has multiple commits or commits that are not meaningful, consider [squashing](https://git-scm.com/docs/git-rebase#_interactive_mode) them
 
 #### Submitting Patches via Email
