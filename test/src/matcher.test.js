@@ -1,10 +1,10 @@
 /**
- * /src/utils/matcher.js Unit Tests
+ * Matcher.js Unit Tests
  *
  * Ghostery Browser Extension
  * http://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -17,9 +17,6 @@ import { isBug } from '../../src/utils/matcher';
 
 describe('src/utils/matcher.js', () => {
 	beforeAll(done => {
-		// Stub the fetch function
-		sinon.stub(global, 'fetch');
-
 		// Fake the XMLHttpRequest for fetchJson(/daabases/bugs.json)
 		const bugsJson = JSON.stringify({
 			"firstPartyExceptions": {
@@ -71,7 +68,8 @@ describe('src/utils/matcher.js', () => {
 				}
 			}
 		});
-		setFetchStubResponse(200, bugsJson);
+		// Mock bugDb fetch response
+		global.mockFetchResponse(200, bugsJson);
 
 		// Stub chrome storage methods so that our prefsGet() calls work.
 		chrome.storage.local.get.yields(null); //for Conf
@@ -85,21 +83,6 @@ describe('src/utils/matcher.js', () => {
 			});
 		}).catch(err => console.log(err));
 	});
-
-	afterAll(() => {
-		global.fetch.restore();
-	});
-
-	// Helper function to fake XHR requests
-	function setFetchStubResponse (responseCode, responseData) {
-		const res = new global.Response(responseData, {
-			status: responseCode,
-			headers: {
-				'Content-type': 'application/json'
-			}
-		});
-		global.fetch.returns(Promise.resolve(res));
-	}
 
 	describe('testing isBug()', () => {
 		describe('testing basic pattern matching', () => {

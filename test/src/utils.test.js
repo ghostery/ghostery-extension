@@ -1,41 +1,27 @@
 /**
- * /src/utils/utils.js Unit Tests
+ * Utils.js Unit Tests
  *
  * Ghostery Browser Extension
  * http://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { enableFetchMocks } from 'jest-fetch-mock'
 import { getJson, defineLazyProperty, semverCompare } from '../../src/utils/utils';
 
-// Mock fetch calls
-enableFetchMocks()
-
 describe('tests for getJson()', () => {
-	// Helper function to fake Fetch response
-	function mockFetchResponse (responseCode, responseData) {
-		fetch.mockReturnValue(Promise.resolve(new Response(responseData, {
-			status: responseCode,
-			headers: {
-				'Content-type': 'application/json'
-			}
-		})));
-	}
-
 	// Tests for getJson()
 	test('returns a 200 response', () => {
-		mockFetchResponse(200, JSON.stringify({ hello: 'world' }));
+		global.mockFetchResponse(200, JSON.stringify({ hello: 'world' }));
 		expect(getJson('https://www.ghostery.com/')).resolves.toEqual({ hello: 'world' });
 	});
 
 	test('returns a 404 response', () => {
-		mockFetchResponse(404, 'Not Found');
+		global.mockFetchResponse(404, 'Not Found');
 		expect(getJson('https://www.ghostery.com/')).rejects.toThrow(/404/);
 	});
 });

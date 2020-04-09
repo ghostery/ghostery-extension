@@ -1,10 +1,10 @@
 /**
- * /src/classes/FoundBugs.js Unit Tests
+ * FoundBugs.js Unit Tests
  *
  * Ghostery Browser Extension
  * http://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -12,12 +12,12 @@
  */
 
 import _ from 'underscore';
+import foundBugs from '../../src/classes/FoundBugs';
 import bugDb from '../../src/classes/BugDb';
 import conf from '../../src/classes/Conf';
-import foundBugs from '../../src/classes/FoundBugs';
 
 describe('src/classes/FoundBugs.js', () => {
-	const url = 'https://getsatisfaction.com/ghostery',
+	const url = 'https://feedback.ghostery.com/',
 		sources = [
 			// one app, three patterns, four sources
 			[2, "https://ssl.google-analytics.com/ga.js", true, 'SCRIPT'],
@@ -33,17 +33,6 @@ describe('src/classes/FoundBugs.js', () => {
 		];
 
 	beforeAll(done => {
-		// Fake the translation function for categories for bugDb.init()
-		global.t = sinon.stub();
-		global.t.withArgs([
-			'site_analytics',
-			'customer_interaction',
-			'social_media'
-		]).returns(true);
-
-		// Stub the fetch function
-		sinon.stub(global, 'fetch');
-
 		// Stub chrome storage methods so that our prefsGet() calls work.
 		chrome.storage.local.get.withArgs(['bugs']).yields({});
 		chrome.storage.local.get.withArgs(['compatibility']).yields({});
@@ -51,7 +40,6 @@ describe('src/classes/FoundBugs.js', () => {
 		chrome.storage.local.get.yields({ previousVersion: "8.0.8" });
 
 		conf.init().then(() => {
-
 			//Start init sequence for testing. Changing the fakeServer() response each time for the following fetchJson() call
 			const bugsJson = JSON.stringify({
 				"apps": {"13": {"name": "Google Analytics","cat": "site_analytics","tags": [48]},
@@ -62,34 +50,18 @@ describe('src/classes/FoundBugs.js', () => {
 				"patterns": {'something': true},
 				"version":416
 			});
-			setFetchStubResponse(200, bugsJson);
+			// Mock bugDb fetch response
+			global.mockFetchResponse(200, bugsJson);
 			bugDb.init().then(() => {
-
 				// Fill foundBugs with fake data.
 				for (let i = 0; i < sources.length; i++) {
 					const source = sources[i];
 					foundBugs.update(url, source[0], source[1], source[2], source[3]);
 				}
-
 				done();
 			});
 		}).catch(err => console.log(err));
 	});
-
-	afterAll(() => {
-		global.fetch.restore();
-	});
-
-	// Helper function to fake XHR requests
-	function setFetchStubResponse (responseCode, responseData) {
-		const res = new global.Response(responseData, {
-			status: responseCode,
-			headers: {
-				'Content-type': 'application/json'
-			}
-		});
-		global.fetch.returns(Promise.resolve(res));
-	}
 
 	describe('testing source, pattern, and app counts', () => {
 		test('there should be seven sources', () => {
@@ -108,7 +80,6 @@ describe('src/classes/FoundBugs.js', () => {
 		test('getAppsCount() should get three apps', () => {
 			return expect(foundBugs.getAppsCount(url)).toBe(3);
 		});
-
 	});
 
 	describe('testing clear() functionality', () => {

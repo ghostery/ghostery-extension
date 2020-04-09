@@ -1,20 +1,18 @@
 /**
- * /src/classes/Conf.js Unit Tests
+ * Conf.js Unit Tests
  *
  * Ghostery Browser Extension
  * http://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import chrome from 'sinon-chrome';
 import conf from '../../src/classes/Conf';
 import globals from '../../src/classes/Globals';
-import dispatcher from '../../src/classes/Dispatcher';
 
 describe('pre-initialization tests', () => {
 	test('pre-initialization global is set', () => {
@@ -33,7 +31,7 @@ describe('pre-initialization tests', () => {
 		return expect(conf.alert_bubble_timeout).toBeUndefined();
 	});
 
-	test('pre-initialization configuration values are saved temporarally', () => {
+	test('pre-initialization configuration values are saved temporarily', () => {
 		conf.alert_bubble_pos = 'tl';
 		return expect(globals.initProps.alert_bubble_pos).toBe('tl');
 	});
@@ -76,32 +74,4 @@ describe('post-initialization tests', () => {
 		conf.alert_bubble_timeout = 30;
 		return expect(chrome.storage.local.set.calledWith({alert_bubble_timeout: 30})).toBeTruthy();
 	});
-});
-
-describe('dispatcher tests', () => {
-	let spy = sinon.spy(dispatcher, 'trigger');
-
-	beforeEach(() => {
-		spy.resetHistory();
-	});
-
-	test('spy.resetHistory() works and callCount is reset to 0', () => {
-		return expect(spy.callCount).toBe(0);
-	});
-
-	test('dispatcher is triggered once for conf value not in SYNC_ARRAY', () => {
-		conf.paused_blocking = true;
-		return expect(spy.calledOnce).toBeTruthy();
-	});
-
-	test('dispatcher is triggered twice for conf value in SYNC_ARRAY', () => {
-		conf.alert_expanded = true;
-		return expect(spy.calledTwice).toBeTruthy();
-	});
-
-	test('dispatcher is triggered with correct arguments', () => {
-		conf.alert_expanded = true;
-		return expect(spy.calledWith(`conf.save.alert_expanded`, true)).toBeTruthy();
-	});
-
 });
