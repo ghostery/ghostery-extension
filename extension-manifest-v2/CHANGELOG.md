@@ -1,3 +1,7 @@
+### GHOSTERY 8.4.9 (April 13, 2019)
+
++ Better handling of semantic version comparison (#524)
+
 ### GHOSTERY 8.4.8 (March 30, 2019)
 
 + Fixes issue that could intermittently cause some cookies to be reset (Fixes #514)
