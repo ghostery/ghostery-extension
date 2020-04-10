@@ -221,10 +221,6 @@ $hist_stats_tab_active: 		#FFF !default;
 		color: $disabled_cliqz_feature;
 		transition: color 0.25s ease-out;
 	};
-	.CliqzFeature__status .rectangle {
-		background-color: $disabled_cliqz_feature;
-		transition: background-color 0.25s ease-out;
-	};
 	.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($disabled_cliqz_feature) };
 	.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($disabled_cliqz_feature) };
 	.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($disabled_cliqz_feature) };
@@ -234,10 +230,6 @@ $hist_stats_tab_active: 		#FFF !default;
 		.CliqzFeature__status {
 			color: $bright_disabled_feature;
 			transition: color 0.25s ease-out;
-		};
-		.CliqzFeature__status .rectangle {
-			background-color: $bright_disabled_feature;
-			transition: background-color 0.25s ease-out;
 		};
 		.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($bright_disabled_feature) };
 		.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($bright_disabled_feature) };
@@ -270,7 +262,6 @@ $hist_stats_tab_active: 		#FFF !default;
 
 .CliqzFeature--inactive.not-clickable {
 	.CliqzFeature__status { color: $paled_disabled_feature; };
-	.CliqzFeature__status .rectangle { background-color: $paled_disabled_feature };
 	.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($paled_disabled_feature) };
 	.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($paled_disabled_feature) };
 	.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($paled_disabled_feature) };
@@ -279,35 +270,10 @@ $hist_stats_tab_active: 		#FFF !default;
 
 .CliqzFeature--active.not-clickable {
 	.CliqzFeature__status { color: $paled_enabled_feature; };
-	.CliqzFeature__status .rectangle { background-color: $paled_disabled_feature };
 	.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($paled_enabled_feature) };
 	.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($paled_enabled_feature) };
 	.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($paled_enabled_feature) };
 	.CliqzFeature__feature-name { color: $paled_enabled_feature };
-}
-
-.CliqzFeature--normal.CliqzFeature--inactive.clickable {
-	.CliqzFeature__status .rectangle {
-		height: 4px;
-		width: 10px;
-		margin: 14px auto 10px auto;
-	}
-}
-
-.CliqzFeature--condensed.CliqzFeature--inactive.clickable {
-	.CliqzFeature__status .rectangle {
-		height: 4px;
-		width: 10px;
-		margin: 5px auto;
-	}
-}
-
-.CliqzFeature--smaller.CliqzFeature--inactive {
-	.CliqzFeature__status .rectangle {
-		height: 4px;
-		width: 10px;
-		margin: 14px auto 10px auto;
-	}
 }
 
 .blocking-category {

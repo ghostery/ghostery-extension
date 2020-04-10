@@ -51,11 +51,6 @@ class CliqzFeature extends React.Component {
 	}
 
 	_getStatus(active) {
-		const { current_theme, trackerCount } = this.props;
-		if (current_theme === 'palm-theme'
-			|| current_theme === 'leaf-theme') {
-			return active ? (<span>{trackerCount}</span>) : (<div className="rectangle" />);
-		}
 		return active ? t('on') : t('off');
 	}
 
