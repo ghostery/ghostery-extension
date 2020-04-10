@@ -61,26 +61,19 @@ export const renderUnknownTrackerButtons = (
 		siteRestricted,
 	});
 
-	let protectedColor;
-	let allowedColor;
-	let restrictedColor;
-	switch (contextType) {
-		case 'palm-theme':
-			protectedColor = '#87f0fb';
-			allowedColor = '#b8e986';
-			restrictedColor = '#ff7e74';
-			break;
-		case 'leaf-theme':
-			protectedColor = '#2e3b80';
-			allowedColor = '#326c45';
-			restrictedColor = '#963939';
-			break;
-		default:
-			protectedColor = '#00AEF0';
-			allowedColor = '#96c761';
-			restrictedColor = '#00AEF0';
-			break;
-	}
+	const borderClassNames = ClassNames('border', {
+		protected: type === 'antiTracking',
+		restricted: type !== 'antiTracking',
+		'palm-theme': contextType === 'palm-theme',
+		'leaf-theme': contextType === 'leaf-theme'
+	});
+
+	const backgroundClassNames = ClassNames('background', {
+		protected: type === 'antiTracking',
+		restricted: type !== 'antiTracking',
+		'palm-theme': contextType === 'palm-theme',
+		'leaf-theme': contextType === 'leaf-theme'
+	});
 
 	return (
 		<div className={svgContainerClasses}>
@@ -88,8 +81,8 @@ export const renderUnknownTrackerButtons = (
 			<span className="t-tooltip-up-left" data-g-tooltip={t('panel_tracker_trust_tooltip')}>
 				<svg className="cliqz-tracker-trust" onClick={handleCliqzTrackerWhitelist} width="20px" height="20px" viewBox="0 0 20 20">
 					<g transform="translate(1 1)" fill="none" fillRule="evenodd">
-						<path className="border" stroke={allowedColor} d="M-.5-.5h18.3v18.217H-.5z" />
-						<path className="background" stroke="#FFF" fill={allowedColor} d="M.5.5h16.3v16.217H.5z" />
+						<path className="border" stroke="#96C761" d="M-.5-.5h18.3v18.217H-.5z" />
+						<path className="background" stroke="#FFF" fill="#96C761" d="M.5.5h16.3v16.217H.5z" />
 						<svg width="20px" height="20px" viewBox="-2.75 -2.75 20 20">
 							<circle className="trust-circle" stroke="#FFF" cx="5.875" cy="5.875" r="5.875" fillRule="evenodd" />
 						</svg>
@@ -101,8 +94,8 @@ export const renderUnknownTrackerButtons = (
 			<span className="t-tooltip-up-left" data-g-tooltip={type === 'antiTracking' ? t('panel_tracker_scrub_tooltip') : t('panel_tracker_restrict_tooltip')}>
 				<svg className="cliqz-tracker-scrub" onClick={handleCliqzTrackerWhitelist} width="20px" height="20px" viewBox="0 0 20 20">
 					<g transform="translate(1 1)" fill="none" fillRule="evenodd">
-						<path className="border" stroke={type === 'antiTracking' ? protectedColor : restrictedColor} d="M-.5-.5h18.3v18.217H-.5z" />
-						<path className="background" stroke="#FFF" fill={type === 'antiTracking' ? protectedColor : restrictedColor} d="M.5.5h16.3v16.217H.5z" />
+						<path className={borderClassNames} fill="#FFF" d="M-.5-.5h18.3v18.217H-.5z" />
+						<path className={backgroundClassNames} stroke="#FFF" d="M.5.5h16.3v16.217H.5z" />
 						{type === 'antiTracking' ? (
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 19.5 19.5">
 								<g transform="translate(2.5 2.5)">

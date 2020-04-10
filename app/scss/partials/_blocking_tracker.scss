@@ -48,11 +48,11 @@
 
 			display: inline-block;
 			padding-right: 6px;
-			.ads-icon-default {
+			.ads-icon.default {
 				fill: #1DAFED;
 				stroke: #1DAFED;
 			}
-			.cookies-and-fingerprints-icon-default {
+			.cookies-and-fingerprints-icon.default {
 				stroke: #1DAFED;
 			}
 		}
@@ -150,6 +150,7 @@
 		align-items: center;
 		justify-content: space-between;
 
+
 		&:not(.whitelisted) {
 			.cliqz-tracker-trust {
 				visibility: hidden;
@@ -159,8 +160,27 @@
 				.trust-circle { stroke: #9B9B9B; }
 			}
 
+			.cliqz-tracker-trust > g > path:nth-child(1) {
+				stroke: #00AEF0;
+			}
+			.cliqz-tracker-trust > g > path:nth-child(2) {
+				fill: #00AEF0;
+			}
+			.cliqz-tracker-scrub > g > .border {
+				stroke: #00AEF0;
+			}
+			.cliqz-tracker-scrub > g > .background {
+				fill: #00AEF0;
+			}
+
 			.cliqz-tracker-scrub {
 				pointer-events: none;
+				.background.protected {
+					fill: #00AEF0;
+				}
+				.background.restricted {
+					fill: #00AEF0;
+				}
 			}
 		}
 

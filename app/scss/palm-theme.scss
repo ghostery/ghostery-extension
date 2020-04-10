@@ -1,4 +1,5 @@
 // Colors
+$green_lighest: 					#b8e986;
 $green_light:						#456431;
 $green: 							#2C5114;
 $green_dark: 						#172A0B;
@@ -23,7 +24,7 @@ $blue_dark_grayish:          	   	#70888F;
 $red:								#ff7e74;
 
 // Theme variables
-$background: 						url('../images/panel/leaf-theme.png');
+$background: 						url('/app/images/panel/palm-theme.png');
 
 $top_bar:							$green;
 
@@ -57,6 +58,9 @@ $tracker_list: 						$green_dark;
 $tracker_list_blocked_text: 		$red;
 $tracker_list_cliqz_icon_stroke:	$blue_light;
 $tracker_list_cliqz_icon-fill:		$green_dark;
+$tracker_list_protected_color:		$blue_light;
+$tracker_list_allowed_color:		$green_lighest;
+$tracker_list_restricted_color:		$red;
 $divider: 							$cyan_dark_desaturated;
 
 $trackers_blocked:					$red;

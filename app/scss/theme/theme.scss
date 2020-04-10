@@ -44,6 +44,9 @@ $tracker_list_pale_text: 		#FFF !default;
 $tracker_list_blocked_text: 	#FFF !default;
 $tracker_list_cliqz_icon_stroke:#FFF !default;
 $tracker_list_cliqz_icon_fill:	#FFF !default;
+$tracker_list_protected_color:	#FFF !default;
+$tracker_list_allowed_color:	#FFF !default;
+$tracker_list_restricted_color:	#FFF !default;
 
 
 $divider: 						#FFF !default;
@@ -528,24 +531,60 @@ $hist_stats_tab_active: 		#FFF !default;
 			color: $tracker_list_text;
 		}
 		.trk-cliqz-stats-icon {
-			g > path {
+			path {
 				fill: $tracker_list_cliqz_icon_fill;
 			}
-			.ads-icon-palm-theme {
+			.ads-icon.palm-theme {
 				stroke: $tracker_list_cliqz_icon_stroke;
 			}
-			.cookies-and-fingerprints-icon-palm-theme {
+			.cookies-and-fingerprints-icon.palm-theme {
 				stroke: $tracker_list_cliqz_icon_stroke;
 			}
-			.ads-icon-leaf-theme {
+			.ads-icon.leaf-theme {
 				stroke: $tracker_list_cliqz_icon_stroke;
 			}
-			.cookies-and-fingerprints-icon-leaf-theme {
+			.cookies-and-fingerprints-icon.leaf-theme {
 				stroke: $tracker_list_cliqz_icon_stroke;
 			}
 		}
 		.trk-cliqz-stat {
 			color: $enabled_feature;
+		}
+		.unknown-svg-container {
+			.cliqz-tracker-trust > g > path:nth-child(1) {
+				stroke: $tracker_list_allowed_color;
+			}
+			.cliqz-tracker-trust > g > path:nth-child(2) {
+				fill: $tracker_list_allowed_color;
+			}
+			.cliqz-tracker-scrub > g > .border {
+				&.protected.palm-theme {
+					stroke: #87f0fb;
+				}
+				&.restricted.palm-theme {
+					stroke: #ff7e74;
+				}
+				&.protected.leaf-theme {
+					stroke: #2e3b80;
+				}
+				&.restricted.leaf-theme {
+					stroke: #963939;
+				}
+			}
+			.cliqz-tracker-scrub > g > .background {
+				&.protected.palm-theme {
+					fill: #87f0fb;
+				}
+				&.restricted.palm-theme {
+					fill: #ff7e74;
+				}
+				&.protected.leaf-theme {
+					fill: #2e3b80;
+				}
+				&.restricted.leaf-theme {
+					fill: #963939;
+				}
+			}
 		}
 	}
 	.trk-moreinfo {
@@ -554,6 +593,35 @@ $hist_stats_tab_active: 		#FFF !default;
 		}
 		.trk-srcs-title {
 			color: $tracker_list_text;
+		}
+	}
+
+	&:after {
+		content: "";
+		display: block;
+		margin-left: -6px;
+		width: 306px;
+		border-bottom: 1px solid #5a7479;
+	}
+}
+
+#content-detail.expanded {
+	.blocking-category .sticky-category .counts:after {
+	    content: "";
+		display: block;
+		margin-left: -45px;
+		width: 470px;
+		padding-top: 20px;
+		border-bottom: 1px solid #FFF;
+		padding-top: 3px;
+	}
+	.blocking-trk {
+		&:after {
+			content: "";
+			display: block;
+			margin-left: -6px;
+			width: 470px;
+			border-bottom: 1px solid #FFF;
 		}
 	}
 	&:after {
