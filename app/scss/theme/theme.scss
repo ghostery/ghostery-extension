@@ -276,7 +276,7 @@ $hist_stats_tab_active: 		#FFF !default;
 	.CliqzFeature__feature-name { color: $paled_enabled_feature };
 }
 
-.blocking-category {
+#content-blocking .blocking-category {
 	.sticky-category {
 		background-color: $tracker_list;
 		border: 1px solid $tracker_list;
@@ -311,7 +311,7 @@ $hist_stats_tab_active: 		#FFF !default;
 	}
 }
 
-.blocking-header > .row:first-of-type {
+#content-detail .blocking-header > .row:first-of-type {
 	border-bottom: 2px solid $tracker_list;
 
 	.title {
