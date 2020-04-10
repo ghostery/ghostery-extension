@@ -42,6 +42,8 @@ $tracker_list: 					#FFF !default;
 $tracker_list_text: 			#FFF !default;
 $tracker_list_pale_text: 		#FFF !default;
 $tracker_list_blocked_text: 	#FFF !default;
+$tracker_list_cliqz_icon_stroke:#FFF !default;
+$tracker_list_cliqz_icon_fill:	#FFF !default;
 
 
 $divider: 						#FFF !default;
@@ -524,6 +526,23 @@ $hist_stats_tab_active: 		#FFF !default;
 	.trk-header {
 		.trk-name {
 			color: $tracker_list_text;
+		}
+		.trk-cliqz-stats-icon {
+			g > path {
+				fill: $tracker_list_cliqz_icon_fill;
+			}
+			.ads-icon-palm-theme {
+				stroke: $tracker_list_cliqz_icon_stroke;
+			}
+			.cookies-and-fingerprints-icon-palm-theme {
+				stroke: $tracker_list_cliqz_icon_stroke;
+			}
+			.ads-icon-leaf-theme {
+				stroke: $tracker_list_cliqz_icon_stroke;
+			}
+			.cookies-and-fingerprints-icon-leaf-theme {
+				stroke: $tracker_list_cliqz_icon_stroke;
+			}
 		}
 		.trk-cliqz-stat {
 			color: $enabled_feature;
