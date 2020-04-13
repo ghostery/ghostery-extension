@@ -163,17 +163,6 @@ class StatsGraph extends React.Component {
 				.attrTween('stroke-dasharray', interpolator);
 		}
 
-		function getThemeColor() {
-			switch (StatsGraph.context) {
-				case 'palm-theme':
-					return '#172a0b';
-				case 'leaf-theme':
-					return '#173700';
-				default:
-					return '#124559';
-			}
-		}
-
 		pathGroup.append('path')
 			.style('stroke', '#dddddd')
 			.style('stroke-dasharray', '4,4')
@@ -183,7 +172,7 @@ class StatsGraph extends React.Component {
 		pathGroup.append('path')
 			.attr('d', line)
 			.attr('fill', 'none')
-			.attr('stroke', getThemeColor())
+			.attr('class', `line ${this.context}`)
 			.attr('stroke-width', 1.5)
 			.call(animator);
 		// ---------------------------------------------------------------------- //
@@ -208,7 +197,7 @@ class StatsGraph extends React.Component {
 			.enter()
 			.append('circle')
 			.attr('class', (d, i) => `point point-${i}`)
-			.attr('fill', getThemeColor())
+			.attr('class', this.context)
 			.attr('cx', d => x(d.index))
 			.attr('cy', d => y(d.amount))
 			.attr('r', 0)

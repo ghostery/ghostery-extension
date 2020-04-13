@@ -495,7 +495,20 @@ $hist_stats_tab_active: 		#FFF !default;
 	.tooltip-text-top, .tooltip-text-bottom {
 		color: $tracker_list;
 	}
-
+	.point-group {
+		.palm-theme {
+			fill :#172a0b;
+		}
+		.leaf-theme {
+			fill: #173700;
+		}
+	}
+	.line.palm-theme {
+		fill :#172a0b;
+	}
+	.line.leaf-theme {
+		fill: #173700;
+	}
 }
 
 .callout-container {
