@@ -52,7 +52,7 @@
 					fill: #FFF;
 				}
 				path:nth-child(2) {
-				stroke: #1DAFED;
+					stroke: #1DAFED;
 				}
 			}
 			&.cookies-and-fingerprints-icon.default > path {
@@ -171,10 +171,12 @@
 				fill: #00AEF0;
 			}
 			.cliqz-tracker-scrub > g > .border {
+				fill: #FFF;
 				stroke: #00AEF0;
 			}
 			.cliqz-tracker-scrub > g > .background {
 				fill: #00AEF0;
+				stroke: #FFF;
 			}
 
 			.cliqz-tracker-scrub {

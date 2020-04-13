@@ -64,15 +64,13 @@ export const renderUnknownTrackerButtons = (
 	const borderClassNames = ClassNames('border', {
 		protected: type === 'antiTracking',
 		restricted: type !== 'antiTracking',
-		'palm-theme': contextType === 'palm-theme',
-		'leaf-theme': contextType === 'leaf-theme'
+		contextType
 	});
 
 	const backgroundClassNames = ClassNames('background', {
 		protected: type === 'antiTracking',
 		restricted: type !== 'antiTracking',
-		'palm-theme': contextType === 'palm-theme',
-		'leaf-theme': contextType === 'leaf-theme'
+		contextType
 	});
 
 	return (
@@ -94,8 +92,8 @@ export const renderUnknownTrackerButtons = (
 			<span className="t-tooltip-up-left" data-g-tooltip={type === 'antiTracking' ? t('panel_tracker_scrub_tooltip') : t('panel_tracker_restrict_tooltip')}>
 				<svg className="cliqz-tracker-scrub" onClick={handleCliqzTrackerWhitelist} width="20px" height="20px" viewBox="0 0 20 20">
 					<g transform="translate(1 1)" fill="none" fillRule="evenodd">
-						<path className={borderClassNames} fill="#FFF" d="M-.5-.5h18.3v18.217H-.5z" />
-						<path className={backgroundClassNames} stroke="#FFF" d="M.5.5h16.3v16.217H.5z" />
+						<path className={borderClassNames} d="M-.5-.5h18.3v18.217H-.5z" />
+						<path className={backgroundClassNames} d="M.5.5h16.3v16.217H.5z" />
 						{type === 'antiTracking' ? (
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 19.5 19.5">
 								<g transform="translate(2.5 2.5)">
