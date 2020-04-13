@@ -146,6 +146,16 @@ $hist_stats_tab_active: 		#FFF !default;
 	}
 	.Summary__subscriberBadgeContainer {
 		left: 15px;
+		.SubscriberBadge.palm-theme {
+			svg > g > g > path:nth-child(1) {
+				stroke: #7C8066;
+			};
+		}
+		.SubscriberBadge.leaf-theme {
+			svg > g > g > path:nth-child(1) {
+				stroke: #3A3A21;
+			};
+		}
 	}
 	.GhosteryFeatureButton {
 		border: $button_border;
@@ -293,6 +303,10 @@ $hist_stats_tab_active: 		#FFF !default;
 			padding-top: 20px;
 			border-bottom: 1px solid $divider;
 			padding-top: 3px;
+		}
+		.caret-up.palm-theme > path,
+		.caret-down.palm-theme > path {
+			fill: #FFF;
 		}
 	}
 	.cat-name {
@@ -562,34 +576,6 @@ $hist_stats_tab_active: 		#FFF !default;
 		}
 	}
 
-	&:after {
-		content: "";
-		display: block;
-		margin-left: -6px;
-		width: 306px;
-		border-bottom: 1px solid #5a7479;
-	}
-}
-
-#content-detail.expanded {
-	.blocking-category .sticky-category .counts:after {
-	    content: "";
-		display: block;
-		margin-left: -45px;
-		width: 470px;
-		padding-top: 20px;
-		border-bottom: 1px solid #FFF;
-		padding-top: 3px;
-	}
-	.blocking-trk {
-		&:after {
-			content: "";
-			display: block;
-			margin-left: -6px;
-			width: 470px;
-			border-bottom: 1px solid #FFF;
-		}
-	}
 	&:after {
 		content: "";
 		display: block;
