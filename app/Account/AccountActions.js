@@ -166,6 +166,7 @@ export const logout = () => dispatch => (
 );
 
 export const resetPassword = email => dispatch => (
+	// console.log('resetting password...');
 	sendMessageInPromise('account.resetPassword', { email })
 		.then((res) => {
 			const { errors } = res;

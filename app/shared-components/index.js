@@ -22,7 +22,7 @@ import SteppedNavigation from './SteppedNavigation';
 import ToastMessage from './ToastMessage';
 import ToggleCheckbox from './ToggleCheckbox';
 import ToggleSwitch from './ToggleSwitch';
-import ForgotPassword from './ForgotPassword';
+import ForgotPassword from './ForgotPassword/ForgotPasswordContainer';
 
 export {
 	ExitButton,

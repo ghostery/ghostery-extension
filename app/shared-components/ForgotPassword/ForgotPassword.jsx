@@ -60,7 +60,7 @@ class ForgotPassword extends React.Component {
 				.then((success) => {
 					this.setState({ loading: false });
 					if (success) {
-						// this.props.history.push('/login');
+						// this.props.history.push('/log-in');
 						// go back to hub sign in screen
 					}
 				});
