@@ -511,19 +511,20 @@ $hist_stats_tab_active: 		#FFF !default;
 			color: $tracker_list_text;
 		}
 		.trk-cliqz-stats-icon {
-			path {
+			&.ads-icon.palm-theme > g,
+			&.ads-icon.leaf-theme > g
+			{
+				.inner-background {
+					fill: $tracker_list_cliqz_icon_fill;
+				}
+				path:nth-child(2) {
+					stroke: $tracker_list_cliqz_icon_stroke;
+				}
+			}
+			&.cookies-and-fingerprints-icon.palm-theme > path,
+			&.cookies-and-fingerprints-icon.leaf-theme > path
+			{
 				fill: $tracker_list_cliqz_icon_fill;
-			}
-			.ads-icon.palm-theme {
-				stroke: $tracker_list_cliqz_icon_stroke;
-			}
-			.cookies-and-fingerprints-icon.palm-theme {
-				stroke: $tracker_list_cliqz_icon_stroke;
-			}
-			.ads-icon.leaf-theme {
-				stroke: $tracker_list_cliqz_icon_stroke;
-			}
-			.cookies-and-fingerprints-icon.leaf-theme {
 				stroke: $tracker_list_cliqz_icon_stroke;
 			}
 		}

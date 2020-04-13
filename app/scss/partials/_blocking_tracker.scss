@@ -45,15 +45,19 @@
 			// vertical alignment with text label
 			position: relative;
 			top: -2px;
-
 			display: inline-block;
 			padding-right: 6px;
-			.ads-icon.default {
-				fill: #1DAFED;
+			&.ads-icon.default > g {
+				.inner-background {
+					fill: #FFF;
+				}
+				path:nth-child(2) {
 				stroke: #1DAFED;
+				}
 			}
-			.cookies-and-fingerprints-icon.default {
+			&.cookies-and-fingerprints-icon.default > path {
 				stroke: #1DAFED;
+				fill: #FFF;
 			}
 		}
 		.trk-cliqz-stat {
