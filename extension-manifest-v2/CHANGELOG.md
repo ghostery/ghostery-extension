@@ -1,3 +1,8 @@
+### GHOSTERY 8.5.0 ()
+
++ Fixes bug in site-specific tracker white-listing (Fixes #519)
++ Update legacy unit tests (#526)
+
 ### GHOSTERY 8.4.9 (April 9, 2019)
 
 + Better handling of semantic version comparison (#524)
