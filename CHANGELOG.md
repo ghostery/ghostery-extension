@@ -1,6 +1,17 @@
-### GHOSTERY 8.4.8 ()
+### GHOSTERY 8.5.0 ()
+
++ Fixes bug in site-specific tracker white-listing (Fixes #519)
++ Update legacy unit tests (#526)
+
+### GHOSTERY 8.4.9 (April 9, 2019)
+
++ Better handling of semantic version comparison (#524)
++ Updates to AMO build script (#524)
+
+### GHOSTERY 8.4.8 (March 30, 2019)
 
 + Fixes issue that could intermittently cause some cookies to be reset (Fixes #514)
++ Handle legacy opt-in settings for Firefox (#518)
 
 ### GHOSTERY 8.4.7 (March 16, 2020)
 
