@@ -1817,8 +1817,17 @@
 	"subscribe_pitch_sign_in": {
 		"message": "Already subscribed? Sign in"
 	},
-	"subscription_midnight_theme": {
-		"message": "Midnight Theme"
+	"subscription_default_theme": {
+		"message": "Default"
+	},
+	"subscription_dark_blue_theme": {
+		"message": "Dark Blue Theme"
+	},
+	"subscription_palm_theme": {
+		"message": "Palm Theme"
+	},
+	"subscription_leaf_theme": {
+		"message": "Leaf Theme"
 	},
 	"subscription_status": {
 		"message": "Status"

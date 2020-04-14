@@ -21,6 +21,8 @@ import GhosteryFeature from './GhosteryFeature';
 import NotScanned from './NotScanned';
 import PauseButton from './PauseButton';
 import ToggleSlider from './ToggleSlider';
+import RadioButtonGroup from './RadioButtonGroup';
+import RadioButton from './RadioButton';
 import ModalExitButton from './ModalExitButton';
 
 export {
@@ -31,5 +33,7 @@ export {
 	NotScanned,
 	PauseButton,
 	ToggleSlider,
+	RadioButtonGroup,
+	RadioButton,
 	ModalExitButton
 };
