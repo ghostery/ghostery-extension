@@ -25,9 +25,13 @@ CLIQZ_VERSION=$(echo $CLIQZ_BROWSER_CORE | perl -pe '($_)=/([0-9]+([.][0-9]+)+)/
 curl "https://github.com/ghostery/ghostery-extension/archive/v$GHOSTERY_VERSION.zip" -O -J -L --fail
 curl "https://github.com/cliqz-oss/browser-core/archive/v$CLIQZ_VERSION.zip" -O -J -L --fail
 
+# Copy .nvmrc to top-level dir
+cp ../../.nvmrc ./
+
 # Make source-code zip
 zip --quiet -R "$ZIP_FILE" "*" -x generate.sh *.DS_Store
 
 # Clean up
 rm "browser-core-$CLIQZ_VERSION.zip"
 rm "ghostery-extension-$GHOSTERY_VERSION.zip"
+rm .nvmrc
