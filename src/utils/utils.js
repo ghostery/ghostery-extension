@@ -617,3 +617,23 @@ export function injectNotifications(tab_id, importExport = false) {
 export function isCliqzOffer(offer) {
 	return (offer && offer.origin === 'cliqz' && offer.type === 'offers' && offer.data);
 }
+
+/**
+ * Compare semantic version strings
+ * @param  {string} a 	semantic version (x.x.x)
+ * @param  {string} b 	semantic version (x.x.x)
+ * @return {int}		(a > b) = 1, (a < b) = -1, (a == b) = 0
+ */
+export function semverCompare(a, b) {
+	const pa = a.split('.');
+	const pb = b.split('.');
+	for (let i = 0; i < 3; i++) {
+		const na = Number(pa[i]);
+		const nb = Number(pb[i]);
+		if (na > nb) return 1;
+		if (nb > na) return -1;
+		if (!Number.isNaN(na) && Number.isNaN(nb)) return 1;
+		if (Number.isNaN(na) && !Number.isNaN(nb)) return -1;
+	}
+	return 0;
+}
