@@ -1,6 +1,8 @@
 ### GHOSTERY 8.5.0 ()
 
-+ Fixes bug in site-specific tracker white-listing (Fixes #519)
++ Fixes bug in site-specific tracker white-listing (#522, Fixes #519)
++ Standardize all Ghostery staging and production global URLs (#511)
++ Updated Rewards UI (#521)
 + Update legacy unit tests (#526)
 
 ### GHOSTERY 8.4.9 (April 9, 2019)

@@ -101,8 +101,8 @@
 	"web_accessible_resources": [
 		"app/images/*",
 		"dist/css/rewards_styles.css",
-		"cliqz/offers-cc/index.html",
-		"cliqz/offers-reminder/index.html",
-		"cliqz/popup-notification/images/*"
+		"cliqz/offers-templates/reminder.html",
+		"cliqz/offers-templates/checkout.html",
+		"cliqz/offers-templates/control-center.html"
 	]
 }
