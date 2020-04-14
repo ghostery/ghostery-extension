@@ -155,28 +155,46 @@ class Policy {
 		}
 
 		const allowedOnce = c2pDb.allowedOnce(tab_id, app_id);
+		// The app_id has been globally blocked
 		if (conf.selected_app_ids.hasOwnProperty(app_id)) {
+			// The app_id is on the site-specific allow list for this tab_host
 			if (conf.toggle_individual_trackers && conf.site_specific_unblocks.hasOwnProperty(tab_host) && conf.site_specific_unblocks[tab_host].includes(+app_id)) {
+				// Site blacklist overrides all block settings except C2P allow once
 				if (this.blacklisted(tab_url)) {
 					return { block: !allowedOnce, reason: allowedOnce ? BLOCK_REASON_C2P_ALLOWED_ONCE : BLOCK_REASON_BLACKLISTED };
 				}
 				return { block: false, reason: BLOCK_REASON_SS_UNBLOCKED };
 			}
+			// Check for site white-listing
 			if (this.checkSiteWhitelist(tab_url)) {
 				return { block: false, reason: BLOCK_REASON_WHITELISTED };
 			}
+			// The app_id is globally blocked
 			return { block: !allowedOnce, reason: allowedOnce ? BLOCK_REASON_C2P_ALLOWED_ONCE : BLOCK_REASON_GLOBAL_BLOCKED };
 		}
-		// We get here when app_id is not selected for global blocking
+
+		// The app_id has not been globally blocked
+		// Check to see if the app_id is on the site-specific block list for this tab_host
 		if (conf.toggle_individual_trackers && conf.site_specific_blocks.hasOwnProperty(tab_host) && conf.site_specific_blocks[tab_host].includes(+app_id)) {
+			// Site white-listing overrides blocking settings
 			if (this.checkSiteWhitelist(tab_url)) {
 				return { block: false, reason: BLOCK_REASON_WHITELISTED };
 			}
 			return { block: !allowedOnce, reason: allowedOnce ? BLOCK_REASON_C2P_ALLOWED_ONCE : BLOCK_REASON_SS_BLOCKED };
 		}
+		// Check to see if the app_id is on the site-specific allow list for this tab_host
+		if (conf.toggle_individual_trackers && conf.site_specific_unblocks.hasOwnProperty(tab_host) && conf.site_specific_unblocks[tab_host].includes(+app_id)) {
+			// Site blacklist overrides all block settings except C2P allow once
+			if (this.blacklisted(tab_url)) {
+				return { block: !allowedOnce, reason: allowedOnce ? BLOCK_REASON_C2P_ALLOWED_ONCE : BLOCK_REASON_BLACKLISTED };
+			}
+			return { block: false, reason: BLOCK_REASON_SS_UNBLOCKED };
+		}
+		// Check for site black-listing
 		if (this.blacklisted(tab_url)) {
 			return { block: !allowedOnce, reason: allowedOnce ? BLOCK_REASON_C2P_ALLOWED_ONCE : BLOCK_REASON_BLACKLISTED };
 		}
+		// The app_id is globally unblocked
 		return { block: false, reason: allowedOnce ? BLOCK_REASON_C2P_ALLOWED_ONCE : BLOCK_REASON_GLOBAL_UNBLOCKED };
 	}
 

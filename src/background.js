@@ -64,11 +64,11 @@ const { sendMessage } = utils;
 const { onMessage } = chrome.runtime;
 // simple consts
 const {
-	CDN_SUB_DOMAIN, BROWSER_INFO, IS_CLIQZ, DEBUG
+	CDN_BASE_URL, BROWSER_INFO, IS_CLIQZ, DEBUG
 } = globals;
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
-const VERSION_CHECK_URL = `https://${CDN_SUB_DOMAIN}.ghostery.com/update/version`;
+const VERSION_CHECK_URL = `${CDN_BASE_URL}/update/version`;
 const REAL_ESTATE_ID = 'ghostery';
 const onBeforeRequest = events.onBeforeRequest.bind(events);
 const onHeadersReceived = events.onHeadersReceived.bind(events);
@@ -845,11 +845,11 @@ function onMessageHandler(request, sender, callback) {
 		return true;
 	}
 	if (name === 'account.openSubscriptionPage') {
-		utils.openNewTab({ url: `https://account.${globals.GHOSTERY_DOMAIN}.com/subscription`, become_active: true });
+		utils.openNewTab({ url: `${globals.CHECKOUT_BASE_URL}/subscription`, become_active: true });
 		return false;
 	}
 	if (name === 'account.openCheckoutPage') {
-		let url = `https://checkout.${globals.GHOSTERY_DOMAIN}.com/plus`;
+		let url = `${globals.CHECKOUT_BASE_URL}/plus`;
 		const { utm } = message || null;
 		if (utm) {
 			url += `?utm_source=${utm.utm_source}&utm_campaign=${utm.utm_campaign}`;
@@ -860,7 +860,7 @@ function onMessageHandler(request, sender, callback) {
 	if (name === 'account.openSupportPage') {
 		metrics.ping('priority_support_submit');
 		const subscriber = account.hasScopesUnverified(['subscriptions:plus']);
-		const tabUrl = subscriber ? `https://account.${globals.GHOSTERY_DOMAIN}.com/support` : 'https://www.ghostery.com/support/';
+		const tabUrl = subscriber ? `${globals.ACCOUNT_BASE_URL}/support` : 'https://www.ghostery.com/support/';
 		utils.openNewTab({ url: tabUrl, become_active: true });
 		return false;
 	}
@@ -1472,7 +1472,7 @@ function initializeVersioning() {
 			log('THIS IS AN UPGRADE');
 			conf.previous_version = globals.EXTENSION_VERSION;
 			const { version_history } = conf;
-			const earliestVersion = version_history[0].split('.');
+			const versions = [...version_history].sort(utils.semverCompare);
 			const prevVersion = PREVIOUS_EXTENSION_VERSION.split('.');
 			const currentVersion = globals.EXTENSION_VERSION.split('.');
 
@@ -1490,7 +1490,7 @@ function initializeVersioning() {
 			}
 
 			// Check if the earliest version is < 8.4.2
-			if (earliestVersion[0] <= 8 && earliestVersion[1] <= 4 && earliestVersion[2] < 2) {
+			if (versions.length && utils.semverCompare(versions[0], '8.4.2') === -1) {
 				globals.REQUIRE_LEGACY_OPT_IN = true;
 			}
 

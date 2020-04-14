@@ -139,10 +139,10 @@ class Api {
 		});
 	}
 
-	_getCsrfCookie = (csrfDomain = this.config.CSRF_DOMAIN) => (
+	_getCsrfCookie = (cookieUrl = this.config.COOKIE_URL) => (
 		new Promise((resolve) => {
 			chrome.cookies.get({
-				url: `https://${csrfDomain}.com`,
+				url: cookieUrl,
 				name: 'csrf_token',
 			}, cookie => resolve((cookie !== null) ? cookie.value : ''));
 		})
