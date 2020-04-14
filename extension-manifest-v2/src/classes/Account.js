@@ -25,7 +25,7 @@ import Api from '../utils/api';
 
 const api = new Api();
 const {
-	GHOSTERY_DOMAIN, AUTH_SERVER, ACCOUNT_SERVER, SYNC_ARRAY, IS_CLIQZ
+	COOKIE_DOMAIN, COOKIE_URL, AUTH_SERVER, ACCOUNT_SERVER, SYNC_ARRAY, IS_CLIQZ
 } = globals;
 
 const SYNC_SET = new Set(SYNC_ARRAY);
@@ -35,7 +35,7 @@ class Account {
 		const apiConfig = {
 			AUTH_SERVER,
 			ACCOUNT_SERVER,
-			CSRF_DOMAIN: GHOSTERY_DOMAIN
+			COOKIE_URL
 		};
 		const opts = {
 			errorHandler: errors => (
@@ -114,7 +114,7 @@ class Account {
 	logout = () => (
 		new RSVP.Promise((resolve, reject) => {
 			chrome.cookies.get({
-				url: `https://${GHOSTERY_DOMAIN}.com`,
+				url: COOKIE_URL,
 				name: 'csrf_token',
 			}, (cookie) => {
 				if (cookie === null) { return reject(); }
@@ -312,7 +312,7 @@ class Account {
 						return;
 					}
 					chrome.cookies.get({
-						url: `https://${GHOSTERY_DOMAIN}.com`,
+						url: COOKIE_URL,
 						name: 'user_id',
 					}, (cookie) => {
 						if (cookie !== null) {
@@ -402,8 +402,8 @@ class Account {
 			chrome.cookies.set({
 				name,
 				value,
-				url: `https://${GHOSTERY_DOMAIN}.com`,
-				domain: `.${GHOSTERY_DOMAIN}.com`,
+				url: COOKIE_URL,
+				domain: COOKIE_DOMAIN,
 				expirationDate,
 				secure: true,
 				httpOnly,
@@ -502,7 +502,7 @@ class Account {
 	_getUserIDFromCookie = () => (
 		new Promise((resolve, reject) => {
 			chrome.cookies.get({
-				url: `https://${GHOSTERY_DOMAIN}.com`,
+				url: COOKIE_URL,
 				name: 'user_id',
 			}, (cookie) => {
 				if (cookie) {
@@ -541,7 +541,7 @@ class Account {
 		const cookies = ['user_id', 'access_token', 'refresh_token', 'csrf_token', 'AUTH'];
 		cookies.forEach((name) => {
 			chrome.cookies.remove({
-				url: `https://${GHOSTERY_DOMAIN}.com`,
+				url: COOKIE_URL,
 				name,
 			}, () => {
 				log(`Removed cookie with name: ${name}`);

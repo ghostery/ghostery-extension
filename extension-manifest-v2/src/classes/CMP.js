@@ -16,7 +16,7 @@ import globals from './Globals';
 import { getJson } from '../utils/utils';
 import { log } from '../utils/common';
 
-const { BROWSER_INFO, CMP_SUB_DOMAIN, EXTENSION_VERSION } = globals;
+const { BROWSER_INFO, CMP_BASE_URL, EXTENSION_VERSION } = globals;
 
 /**
  * Class for handling notification and/or marketing campaigns.
@@ -36,7 +36,7 @@ class CMP {
 			return Promise.resolve(false);
 		}
 
-		const URL = `https://${CMP_SUB_DOMAIN}.ghostery.com/check
+		const URL = `${CMP_BASE_URL}/check
 			?os=${encodeURIComponent(BROWSER_INFO.os)}
 			&offers=${encodeURIComponent(conf.enable_offers ? '1' : '0')}
 			&hw=${encodeURIComponent(conf.enable_human_web ? '1' : '0')}
