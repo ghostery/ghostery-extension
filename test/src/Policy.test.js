@@ -1,5 +1,5 @@
 /**
- * /src/classes/Policy.js Unit Tests
+ * Policy.js Unit Tests
  *
  * Ghostery Browser Extension
  * http://www.ghostery.com/

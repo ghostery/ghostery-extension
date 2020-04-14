@@ -62,7 +62,7 @@ $ yarn test.snapshot
 
 ```sh
 # Run unit tests
-$ yarn test.unit
+$ yarn test
 ```
 
 ```sh
