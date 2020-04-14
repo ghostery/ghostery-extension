@@ -12,4 +12,4 @@ install:
 script:
   - node ./tools/licenses/fetchLicenses.js
   - yarn lint
-  - yarn test.unit
+  - yarn test
