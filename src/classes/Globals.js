@@ -50,14 +50,19 @@ class Globals {
 		this.initProps = {};
 
 		// domains
-		this.GHOSTERY_DOMAIN = this.DEBUG ? 'ghosterystage' : 'ghostery';
-		this.METRICS_SUB_DOMAIN = this.DEBUG ? 'staging-d' : 'd';
-		this.CMP_SUB_DOMAIN = this.DEBUG ? 'staging-cmp-cdn' : 'cmp-cdn';
-		this.CDN_SUB_DOMAIN = this.DEBUG ? 'staging-cdn' : 'cdn';
-		this.APPS_SUB_DOMAIN = this.DEBUG ? 'staging-apps' : 'apps';
-		this.GCACHE_SUB_DOMAIN = this.DEBUG ? 'staging-gcache' : 'gcache';
-		this.AUTH_SERVER = `https://consumerapi.${this.GHOSTERY_DOMAIN}.com`;
-		this.ACCOUNT_SERVER = `https://accountapi.${this.GHOSTERY_DOMAIN}.com`;
+		this.GHOSTERY_ROOT_DOMAIN = `${this.DEBUG ? 'ghosterystage' : 'ghostery'}.com`;
+		this.GHOSTERY_BASE_URL = `https://${this.GHOSTERY_ROOT_DOMAIN}`;
+		this.ACCOUNT_BASE_URL = `https://account.${this.GHOSTERY_ROOT_DOMAIN}`;
+		this.CHECKOUT_BASE_URL = `https://checkout.${this.GHOSTERY_ROOT_DOMAIN}`;
+		this.METRICS_BASE_URL = `https://${this.DEBUG ? 'staging-d' : 'd'}.ghostery.com`;
+		this.CMP_BASE_URL = `https://${this.DEBUG ? 'staging-cmp-cdn' : 'cmp-cdn'}.ghostery.com`;
+		this.CDN_BASE_URL = `https://${this.DEBUG ? 'staging-cdn' : 'cdn'}.ghostery.com`;
+		this.APPS_BASE_URL = `https://${this.DEBUG ? 'staging-apps' : 'apps'}.ghostery.com`;
+		this.GCACHE_BASE_URL = `https://${this.DEBUG ? 'staging-gcache' : 'gcache'}.ghostery.com`;
+		this.AUTH_SERVER = `https://consumerapi.${this.GHOSTERY_ROOT_DOMAIN}`;
+		this.ACCOUNT_SERVER = `https://accountapi.${this.GHOSTERY_ROOT_DOMAIN}`;
+		this.COOKIE_DOMAIN = `.${this.GHOSTERY_ROOT_DOMAIN}`;
+		this.COOKIE_URL = this.GHOSTERY_BASE_URL;
 
 		// extension IDs
 		this.GHOSTERY_TAB_CHROME_PRODUCTION_ID = 'plmapebanmikcofllaaddgeocahboejc';
