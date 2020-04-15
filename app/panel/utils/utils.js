@@ -218,7 +218,7 @@ export function setTheme(doc, name, account) {
 	let themeStyle = null;
 	// Get style tag for the active theme
 	// forEach loops are supported equally across browsers
-	styleList.forEach((style) => {
+	Array.prototype.forEach.call(styleList, (style) => {
 		if (style.title.startsWith(styleTitlePrefix)) {
 			themeStyle = style;
 		}
@@ -241,7 +241,7 @@ export function setTheme(doc, name, account) {
 		themeStyle.textContent = css;
 	} else {
 		// if themeName is 'default' all we have to do is to remove style element
-		styleList.forEach((style) => {
+		Array.prototype.forEach.call(styleList, (style) => {
 			if (style.title.startsWith(styleTitlePrefix)) {
 				doc.head.removeChild(style);
 			}
