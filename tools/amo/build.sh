@@ -29,6 +29,38 @@ if [ ! -d $CLIQZ_SOURCE_DIR ]; then
 	unzip $CLIQZ_SOURCE_ZIP
 fi
 
+#### REQUIREMENTS ####
+# Check for yarn
+if ! type yarn > /dev/null; then
+	echo "Please install yarn: https://yarnpkg.com/lang/en/docs/install/"
+	exit 1
+fi
+
+# Check for jq
+if ! type jq > /dev/null; then
+	echo "Please install jq: https://stedolan.github.io/jq/download/"
+	exit 1
+fi
+
+# Source nvm.sh
+if [[ -f /usr/local/opt/nvm/nvm.sh ]]; then
+	# Homebrew
+	source  /usr/local/opt/nvm/nvm.sh
+else
+	# Default dir
+	source ${NVM_DIR}/nvm.sh
+fi
+
+# Check for nvm
+if ! command -v nvm | grep -q 'nvm'; then
+	echo "Please install nvm: https://github.com/nvm-sh/nvm"
+	exit 1
+fi
+
+# Set node version
+nvm install lts/dubnium
+nvm use
+
 #### BROWSER CORE ####
 cd $CLIQZ_SOURCE_DIR
 
@@ -60,42 +92,11 @@ BUILD_DIR=build
 ZIP_FILE="$BUILD_DIR/ghostery-extension-v$VERSION.zip"
 TMP_FILE=$(mktemp)
 
-# Check for yarn
-if ! type yarn > /dev/null; then
-	echo "Please install yarn: https://yarnpkg.com/lang/en/docs/install/"
-	exit 1
-fi
-
-# Check for jq
-if ! type jq > /dev/null; then
-	echo "Please install jq: https://stedolan.github.io/jq/download/"
-	exit 1
-fi
-
-# Source nvm.sh
-if [[ -f /usr/local/opt/nvm/nvm.sh ]]; then
-	# Homebrew
-	source  /usr/local/opt/nvm/nvm.sh
-else
-	# Default dir
-	source ${NVM_DIR}/nvm.sh
-fi
-
-# Check for nvm
-if ! command -v nvm | grep -q 'nvm'; then
-	echo "Please install nvm: https://github.com/nvm-sh/nvm"
-	exit 1
-fi
-
 # Clean any previous builds
 rm -rf build
 
 # Clean all the exiting node_modules for a more reproducible build
 rm -rf node_modules
-
-# Set node version
-nvm install lts/carbon
-nvm use
 
 # Install local npm packages
 yarn install --frozen-lockfile
@@ -109,10 +110,10 @@ cat ${TMP_FILE} > $VERSION_FILE # copy into manifest.json
 rm -f ${TMP_FILE}
 
 # Download databases
-curl "https://cdn.ghostery.com/update/v3/bugs" -o $DB_DIR/bugs.json --compress --fail
-curl "https://cdn.ghostery.com/update/click2play" -o $DB_DIR/click2play.json --compress --fail
-curl "https://cdn.ghostery.com/update/compatibility" -o $DB_DIR/compatibility.json --compress --fail
-curl "https://cdn.ghostery.com/update/surrogates" -o $DB_DIR/surrogates.json --compress --fail
+curl "https://cdn.ghostery.com/update/v3/bugs" -o $DB_DIR/bugs.json --compressed --fail
+curl "https://cdn.ghostery.com/update/click2play" -o $DB_DIR/click2play.json --compressed --fail
+curl "https://cdn.ghostery.com/update/compatibility" -o $DB_DIR/compatibility.json --compressed --fail
+curl "https://cdn.ghostery.com/update/surrogates" -o $DB_DIR/surrogates.json --compressed --fail
 
 # Zip final build files
 echo "Zipping to $(pwd)/$BUILD_DIR/"

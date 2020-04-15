@@ -64,11 +64,11 @@ const { sendMessage } = utils;
 const { onMessage } = chrome.runtime;
 // simple consts
 const {
-	CDN_SUB_DOMAIN, BROWSER_INFO, IS_CLIQZ, DEBUG
+	CDN_BASE_URL, BROWSER_INFO, IS_CLIQZ, DEBUG
 } = globals;
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
-const VERSION_CHECK_URL = `https://${CDN_SUB_DOMAIN}.ghostery.com/update/version`;
+const VERSION_CHECK_URL = `${CDN_BASE_URL}/update/version`;
 const REAL_ESTATE_ID = 'ghostery';
 const onBeforeRequest = events.onBeforeRequest.bind(events);
 const onHeadersReceived = events.onHeadersReceived.bind(events);
@@ -845,11 +845,11 @@ function onMessageHandler(request, sender, callback) {
 		return true;
 	}
 	if (name === 'account.openSubscriptionPage') {
-		utils.openNewTab({ url: `https://account.${globals.GHOSTERY_DOMAIN}.com/subscription`, become_active: true });
+		utils.openNewTab({ url: `${globals.CHECKOUT_BASE_URL}/subscription`, become_active: true });
 		return false;
 	}
 	if (name === 'account.openCheckoutPage') {
-		let url = `https://checkout.${globals.GHOSTERY_DOMAIN}.com/plus`;
+		let url = `${globals.CHECKOUT_BASE_URL}/plus`;
 		const { utm } = message || null;
 		if (utm) {
 			url += `?utm_source=${utm.utm_source}&utm_campaign=${utm.utm_campaign}`;
@@ -860,7 +860,7 @@ function onMessageHandler(request, sender, callback) {
 	if (name === 'account.openSupportPage') {
 		metrics.ping('priority_support_submit');
 		const subscriber = account.hasScopesUnverified(['subscriptions:plus']);
-		const tabUrl = subscriber ? `https://account.${globals.GHOSTERY_DOMAIN}.com/support` : 'https://www.ghostery.com/support/';
+		const tabUrl = subscriber ? `${globals.ACCOUNT_BASE_URL}/support` : 'https://www.ghostery.com/support/';
 		utils.openNewTab({ url: tabUrl, become_active: true });
 		return false;
 	}
@@ -1475,6 +1475,8 @@ function initializeVersioning() {
 		if (globals.JUST_UPGRADED) {
 			log('THIS IS AN UPGRADE');
 			conf.previous_version = globals.EXTENSION_VERSION;
+			const { version_history } = conf;
+			const versions = [...version_history].sort(utils.semverCompare);
 			const prevVersion = PREVIOUS_EXTENSION_VERSION.split('.');
 			const currentVersion = globals.EXTENSION_VERSION.split('.');
 
@@ -1491,13 +1493,12 @@ function initializeVersioning() {
 				conf.enable_smart_block = false;
 			}
 
-			// Are we upgrading from Ghostery 8 prior to 8.2?
-			if ((+prevVersion[0] === 8) && (prevVersion[1] < 2)) {
-				globals.JUST_UPGRADED_FROM_8_1 = true;
+			// Check if the earliest version is < 8.4.2
+			if (versions.length && utils.semverCompare(versions[0], '8.4.2') === -1) {
+				globals.REQUIRE_LEGACY_OPT_IN = true;
 			}
 
 			// Establish version history
-			const { version_history } = conf;
 			version_history.push(globals.EXTENSION_VERSION);
 			conf.version_history = version_history;
 		} else {
@@ -1516,14 +1517,6 @@ function initializeVersioning() {
 function initializeGhosteryModules() {
 	if (globals.JUST_UPGRADED) {
 		log('JUST UPGRADED');
-
-		const { version_history } = conf;
-		const size = version_history.length;
-		if (!size || version_history[size - 1] !== globals.EXTENSION_VERSION) {
-			version_history.push(globals.EXTENSION_VERSION);
-		}
-		conf.version_history = version_history;
-
 		metrics.ping('upgrade');
 		// We don't want install_complete pings for upgrade
 		conf.metrics.install_complete_all = Number(new Date().getTime());
@@ -1567,28 +1560,20 @@ function initializeGhosteryModules() {
 			initialiseWebRequestPipeline(),
 		]).then(() => {
 			if (!IS_CLIQZ) {
-				if (globals.JUST_UPGRADED_FROM_7) {
-					// These users had human web already, so we respect their choice
-					conf.enable_human_web = !humanweb.isDisabled;
-					// These users did not have adblocking and antitracking.
-					// We introduce these new features initially disabled.
-					conf.enable_ad_block = false;
-					conf.enable_anti_tracking = false;
-					// Enable Offers except or Cliqz
-					conf.enable_offers = true;
-				} else if (globals.JUST_UPGRADED_FROM_8_1) {
-					// These users already had human web, adblocker and antitracking, so we respect their choice
-					conf.enable_ad_block = !adblocker.isDisabled;
-					conf.enable_anti_tracking = !antitracking.isDisabled;
-					conf.enable_human_web = !humanweb.isDisabled;
-					// These users did not have Offers, so we enable them on upgrade.
-					conf.enable_offers = true;
-				} else {
-					// Otherwise we respect browser-core default settings
-					conf.enable_ad_block = !adblocker.isDisabled;
-					conf.enable_anti_tracking = !antitracking.isDisabled;
-					conf.enable_human_web = !humanweb.isDisabled && !(IS_FIREFOX && globals.JUST_INSTALLED);
-					conf.enable_offers = !offers.isDisabled && !(IS_FIREFOX && globals.JUST_INSTALLED);
+				conf.enable_ad_block = !adblocker.isDisabled;
+				conf.enable_anti_tracking = !antitracking.isDisabled;
+				conf.enable_human_web = !humanweb.isDisabled;
+				conf.enable_offers = !offers.isDisabled;
+
+				if (IS_FIREFOX) {
+					if (globals.JUST_INSTALLED) {
+						conf.enable_human_web = false;
+						conf.enable_offers = false;
+					} else if (globals.REQUIRE_LEGACY_OPT_IN && !conf.cliqz_legacy_opt_in) {
+						conf.enable_human_web = false;
+						conf.enable_offers = cliqz.prefs.get('myoffrz.opted_in') || false;
+						conf.cliqz_legacy_opt_in = true;
+					}
 				}
 
 				const myoffrzShouldMigrate = conf.rewards_opted_in !== undefined && cliqz.prefs.get('myoffrz.opted_in', undefined) === undefined;
@@ -1596,6 +1581,7 @@ function initializeGhosteryModules() {
 					cliqz.prefs.set('myoffrz.opted_in', conf.rewards_opted_in);
 					conf.rewards_opted_in = undefined;
 				}
+
 				cliqz.events.subscribe('myoffrz:turnoff', () => {
 					panelData.set({ enable_offers: false });
 					rewards.sendSignal({

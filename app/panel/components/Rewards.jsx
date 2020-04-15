@@ -95,7 +95,7 @@ class Rewards extends React.Component {
 	sendToIframe(message) {
 		if (!this.iframe.current) { return; }
 		this.iframe.current.contentWindow.postMessage(JSON.stringify({
-			target: 'cliqz-offers-cc',
+			target: 'cliqz-offers-templates',
 			origin: 'window',
 			message,
 		}), '*');
@@ -130,7 +130,7 @@ class Rewards extends React.Component {
 			return;
 		}
 
-		if (target !== 'cliqz-offers-cc') { return; }
+		if (target !== 'cliqz-offers-templates') { return; }
 		if (message.action === 'resize') {
 			this.iframeResize(message.data);
 		} else {
@@ -263,7 +263,7 @@ class Rewards extends React.Component {
 		} = this.state;
 		if (shouldHideRewards) { return this.renderRewardsNoneFoundText(); }
 
-		const src = chrome.runtime.getURL('cliqz/offers-cc/index.html?cross-origin');
+		const src = chrome.runtime.getURL('cliqz/offers-templates/control-center.html?cross-origin');
 		const text = t(`panel_rewards_view__reward${rewardsCount === 1 ? '' : 's'}`);
 		return (
 			<Fragment>

@@ -387,12 +387,7 @@
 	},
 	"name": {
 		"description": "The title of this extension (Ghostery).",
-		"message": "$EXTENSION_NAME$ – Adatavédelmi Reklámblokkoló",
-		"placeholders": {
-			"extension_name": {
-				"content": "Ghostery"
-			}
-		}
+		"message": "Ghostery – Adatavédelmi Reklámblokkoló"
 	},
 	"none": {
 		"description": "Used to say that this item does not belong to any of the groups, as in \"Groups: None\" (as opposed to \"Groups: Group A, Group B, Group C\").",
@@ -802,7 +797,7 @@
 		"message": "feloldva"
 	},
 	"white_black_list_error_invalid_url": {
-		"message": "Kérjük, érvényes URL-címet adjon meg."
+		"message": "Please enter a valid URL or wildcard."
 	},
 	"whitelist_error_blacklist_url": {
 		"message": "Ezt az oldalt eltávolítottuk a Korlátozott oldalak listájáról és hozzáadtuk a Megbízható oldalak listájához."
@@ -1058,7 +1053,7 @@
 		"message": "Megbízható oldalak"
 	},
 	"settings_sites_placeholder": {
-		"message": "pelda.hu"
+		"message": "example.com (wildcards supported)"
 	},
 	"settings_restricted_sites": {
 		"message": "Korlátozott oldalak"
