@@ -54,11 +54,23 @@ export const renderKnownTrackerButtons = (
 );
 
 export const renderUnknownTrackerButtons = (
-	handleCliqzTrackerWhitelist, whitelisted, siteRestricted, type
+	handleCliqzTrackerWhitelist, whitelisted, siteRestricted, type, contextType
 ) => {
 	const svgContainerClasses = ClassNames('unknown-svg-container', {
 		whitelisted: whitelisted && !siteRestricted,
 		siteRestricted,
+	});
+
+	const borderClassNames = ClassNames('border', {
+		protected: type === 'antiTracking',
+		restricted: type !== 'antiTracking',
+		contextType
+	});
+
+	const backgroundClassNames = ClassNames('background', {
+		protected: type === 'antiTracking',
+		restricted: type !== 'antiTracking',
+		contextType
 	});
 
 	return (
@@ -67,8 +79,8 @@ export const renderUnknownTrackerButtons = (
 			<span className="t-tooltip-up-left" data-g-tooltip={t('panel_tracker_trust_tooltip')}>
 				<svg className="cliqz-tracker-trust" onClick={handleCliqzTrackerWhitelist} width="20px" height="20px" viewBox="0 0 20 20">
 					<g transform="translate(1 1)" fill="none" fillRule="evenodd">
-						<path className="border" stroke="#96c761" d="M-.5-.5h18.3v18.217H-.5z" />
-						<path className="background" stroke="#FFF" fill="#96c761" d="M.5.5h16.3v16.217H.5z" />
+						<path className="border" stroke="#96C761" d="M-.5-.5h18.3v18.217H-.5z" />
+						<path className="background" stroke="#FFF" fill="#96C761" d="M.5.5h16.3v16.217H.5z" />
 						<svg width="20px" height="20px" viewBox="-2.75 -2.75 20 20">
 							<circle className="trust-circle" stroke="#FFF" cx="5.875" cy="5.875" r="5.875" fillRule="evenodd" />
 						</svg>
@@ -80,8 +92,8 @@ export const renderUnknownTrackerButtons = (
 			<span className="t-tooltip-up-left" data-g-tooltip={type === 'antiTracking' ? t('panel_tracker_scrub_tooltip') : t('panel_tracker_restrict_tooltip')}>
 				<svg className="cliqz-tracker-scrub" onClick={handleCliqzTrackerWhitelist} width="20px" height="20px" viewBox="0 0 20 20">
 					<g transform="translate(1 1)" fill="none" fillRule="evenodd">
-						<path className="border" stroke="#00AEF0" d="M-.5-.5h18.3v18.217H-.5z" />
-						<path className="background" stroke="#FFF" fill="#00AEF0" d="M.5.5h16.3v16.217H.5z" />
+						<path className={borderClassNames} d="M-.5-.5h18.3v18.217H-.5z" />
+						<path className={backgroundClassNames} d="M.5.5h16.3v16.217H.5z" />
 						{type === 'antiTracking' ? (
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 19.5 19.5">
 								<g transform="translate(2.5 2.5)">

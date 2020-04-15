@@ -45,9 +45,20 @@
 			// vertical alignment with text label
 			position: relative;
 			top: -2px;
-
 			display: inline-block;
 			padding-right: 6px;
+			&.ads-icon.default > g {
+				.inner-background {
+					fill: #FFF;
+				}
+				path:nth-child(2) {
+					stroke: #1DAFED;
+				}
+			}
+			&.cookies-and-fingerprints-icon.default > path {
+				stroke: #1DAFED;
+				fill: #FFF;
+			}
 		}
 		.trk-cliqz-stat {
 			color: #1dafed;
@@ -143,6 +154,7 @@
 		align-items: center;
 		justify-content: space-between;
 
+
 		&:not(.whitelisted) {
 			.cliqz-tracker-trust {
 				visibility: hidden;
@@ -152,8 +164,29 @@
 				.trust-circle { stroke: #9B9B9B; }
 			}
 
+			.cliqz-tracker-trust > g > path:nth-child(1) {
+				stroke: #00AEF0;
+			}
+			.cliqz-tracker-trust > g > path:nth-child(2) {
+				fill: #00AEF0;
+			}
+			.cliqz-tracker-scrub > g > .border {
+				fill: #FFF;
+				stroke: #00AEF0;
+			}
+			.cliqz-tracker-scrub > g > .background {
+				fill: #00AEF0;
+				stroke: #FFF;
+			}
+
 			.cliqz-tracker-scrub {
 				pointer-events: none;
+				.background.protected {
+					fill: #00AEF0;
+				}
+				.background.restricted {
+					fill: #00AEF0;
+				}
 			}
 		}
 
