@@ -213,17 +213,16 @@ export function doXHR(method, url, query) {
  * @param {string} theme css of the theme
  */
 export function setTheme(doc, name, account) {
-	// if themeName is 'default' all we have to do is to remove style element
 	const styleTitlePrefix = 'Ghostery Theme';
-	// First remove all other style elements which may be there
 	const styleList = doc.head.getElementsByTagName('style');
-	// Other kinds of loops are not supported equally across browsers
-	for (let i = 0; i < styleList.length; i++) {
-		const style = styleList[i];
+	let themeStyle = null;
+	// Get style tag for the active theme
+	// forEach loops are supported equally across browsers
+	Array.from(styleList).forEach((style) => {
 		if (style.title.startsWith(styleTitlePrefix)) {
-			doc.head.removeChild(style);
+			themeStyle = style;
 		}
-	}
+	});
 
 	if (name !== 'default') {
 		if (!account) { return; }
@@ -232,12 +231,20 @@ export function setTheme(doc, name, account) {
 		const { css } = themeData[name];
 
 		// Create element for the theme being set, if it is not there
-		const themeStyle = doc.createElement('style');
-		themeStyle.id = name;
-		themeStyle.title = `${styleTitlePrefix} ${name}`;
-
-		// Set content of style element to the theme text.
+		if (!themeStyle) {
+			themeStyle = doc.createElement('style');
+			themeStyle.id = name;
+			themeStyle.title = `${styleTitlePrefix}`;
+			themeStyle.textContent = css;
+			doc.head.appendChild(themeStyle);
+		}
 		themeStyle.textContent = css;
-		document.head.appendChild(themeStyle);
+	} else {
+		// if themeName is 'default' all we have to do is to remove style element
+		Array.from(styleList).forEach((style) => {
+			if (style.title.startsWith(styleTitlePrefix)) {
+				doc.head.removeChild(style);
+			}
+		});
 	}
 }

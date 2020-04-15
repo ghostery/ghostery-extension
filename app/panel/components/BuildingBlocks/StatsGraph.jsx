@@ -14,12 +14,14 @@
 import { isEqual } from 'underscore';
 import React from 'react';
 import * as D3 from 'd3';
-
+import { ThemeContext } from '../../contexts/ThemeContext';
 /**
  * Generates an animated graph displaying locally stored stats
  * @memberof PanelBuildingBlocks
  */
 class StatsGraph extends React.Component {
+	static contextType = ThemeContext;
+
 	/**
 	 * Lifecycle event
 	 */
@@ -170,7 +172,7 @@ class StatsGraph extends React.Component {
 		pathGroup.append('path')
 			.attr('d', line)
 			.attr('fill', 'none')
-			.attr('stroke', '#124559')
+			.attr('class', `line ${this.context}`)
 			.attr('stroke-width', 1.5)
 			.call(animator);
 		// ---------------------------------------------------------------------- //
@@ -187,7 +189,6 @@ class StatsGraph extends React.Component {
 					.style('opacity', opacity);
 			}, 1);
 		}
-
 		// Add data points with event listeners for opening their respective tooltips
 		canvas.append('g')
 			.attr('class', 'point-group')
@@ -196,7 +197,7 @@ class StatsGraph extends React.Component {
 			.enter()
 			.append('circle')
 			.attr('class', (d, i) => `point point-${i}`)
-			.attr('fill', '#124559')
+			.attr('class', this.context)
 			.attr('cx', d => x(d.index))
 			.attr('cy', d => y(d.amount))
 			.attr('r', 0)

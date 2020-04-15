@@ -11,8 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint jsx-a11y/label-has-associated-control: 0 */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
@@ -23,15 +21,16 @@ import ClassNames from 'classnames';
  */
 
 const RadioButton = (props) => {
+	const { checked, handleClick } = props;
 	const OuterCircleClassNames = ClassNames('RadioButton__outerCircle', {
-		checked: props.checked,
+		checked,
 	});
 	const InnerCircleClassNames = ClassNames('RadioButton__innerCircle', {
-		checked: props.checked,
+		checked,
 	});
 	return (
 		<span>
-			<span className={OuterCircleClassNames} onClick={props.handleClick}>
+			<span className={OuterCircleClassNames} onClick={handleClick}>
 				<span className={InnerCircleClassNames} />
 			</span>
 		</span>
@@ -40,6 +39,7 @@ const RadioButton = (props) => {
 
 // PropTypes ensure we pass required props of the correct type
 RadioButton.propTypes = {
+	checked: PropTypes.bool.isRequired,
 	handleClick: PropTypes.func.isRequired,
 };
 
