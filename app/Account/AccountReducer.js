@@ -18,7 +18,9 @@ import {
 	GET_USER_SUCCESS,
 	GET_USER_SETTINGS_SUCCESS,
 	GET_USER_SUBSCRIPTION_DATA_FAIL,
-	GET_USER_SUBSCRIPTION_DATA_SUCCESS
+	GET_USER_SUBSCRIPTION_DATA_SUCCESS,
+	RESET_PASSWORD_SUCCESS,
+	RESET_PASSWORD_FAIL
 } from './AccountConstants';
 import { UPDATE_PANEL_DATA } from '../panel/constants/constants';
 
@@ -28,6 +30,8 @@ const initialState = {
 	user: null,
 	userSettings: null,
 	subscriptionData: null,
+	toastMessage: '',
+	resetPasswordError: false
 };
 
 export default (state = initialState, action) => {
@@ -82,6 +86,31 @@ export default (state = initialState, action) => {
 			return Object.assign({}, state, {
 				loggedIn: true,
 				subscriptionData
+			});
+		}
+		case RESET_PASSWORD_SUCCESS: {
+			const toastMessage = t('banner_check_your_email_title');
+			return Object.assign({}, state, {
+				toastMessage,
+				resetPasswordError: false
+			});
+		}
+		case RESET_PASSWORD_FAIL: {
+			const { errors } = action.payload;
+			let errorText = t('server_error_message');
+			errors.forEach((err) => {
+				switch (err.code) {
+					case '10050':
+					case '10110':
+						errorText = t('banner_email_not_in_system_message');
+						break;
+					default:
+						errorText = t('server_error_message');
+				}
+			});
+			return Object.assign({}, state, {
+				toastMessage: errorText,
+				resetPasswordError: true
 			});
 		}
 
