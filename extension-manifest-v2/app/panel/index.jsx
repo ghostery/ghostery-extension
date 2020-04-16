@@ -25,7 +25,7 @@ import Settings from './containers/SettingsContainer';
 import Subscription from './containers/SubscriptionContainer';
 import Login from './containers/LoginContainer';
 import CreateAccount from './containers/CreateAccountContainer';
-import ForgotPassword from './containers/ForgotPasswordContainer';
+import ForgotPassword from '../shared-components/ForgotPassword/ForgotPasswordContainer';
 import AccountSuccess from './containers/AccountSuccessContainer';
 import configureStore from './store/configureStore';
 import Help from './components/Help';
@@ -51,7 +51,7 @@ const Ghostery = () => (
 		<Route path="/subscribe/:loggedIn" component={Subscribe} />
 		<Route path="/login" component={Login} />
 		<Route path="/create-account" component={CreateAccount} />
-		<Route path="/forgot-password" component={ForgotPassword} />
+		<Route path="/forgot-password" render={() => <ForgotPassword locale="panel" />} />
 		<Route path="/account-success" component={AccountSuccess} />
 	</Panel>
 );
