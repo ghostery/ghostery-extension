@@ -111,6 +111,61 @@ export function computeTimeDelta(start, end) {
 }
 
 /**
+ * Check for valid email
+ * @memberOf PanelUtils
+ * @param  {string} email 		email to validate
+ * @return {boolean}			true if valid, false otherwise
+ */
+export function validateEmail(email) {
+	// eslint-disable-next-line no-useless-escape, no-control-regex
+	const emailRegex = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i;
+	return email !== '' && emailRegex.test(email);
+}
+
+/**
+ * Check for valid confirm email and equality to email
+ * @memberOf PanelUtils
+ * @param  {string} email 			email to validate
+ * @param  {string} confirmEmail 	confirm email to validate
+ * @return {boolean}				true if valid, false otherwise
+ */
+export function validateConfirmEmail(email, confirmEmail) {
+	if (!email || !confirmEmail) {
+		return false;
+	}
+	const lEmail = email.toLowerCase();
+	const lConfirmEmail = confirmEmail.toLowerCase();
+	return validateEmail(confirmEmail) && (lEmail === lConfirmEmail) || false;
+}
+
+/**
+ * Check for confirm email equality to email
+ * @memberOf PanelUtils
+ * @param  {string} email 			email
+ * @param  {string} confirmEmail 	confirm email to validate
+ * @return {boolean}				true if equal, false otherwise
+ */
+export function validateEmailsMatch(email, confirmEmail) {
+	if (!email || !confirmEmail) {
+		return false;
+	}
+	const lEmail = email.toLowerCase();
+	const lConfirmEmail = confirmEmail.toLowerCase();
+	return lEmail === lConfirmEmail;
+}
+
+/**
+ * Check for valid password
+ * @memberOf PanelUtils
+ * @param  {string} pwd 	password to validate
+ * @return {boolean} 		true if valid, false otherwise
+ */
+export function validatePassword(pwd) {
+	const pwdRegex = /^[a-zA-Z0-9!@#$%^&*=+()<>{}[\];:,./?]{8,50}$/;
+	return pwd !== '' && pwdRegex.test(pwd);
+}
+
+/**
  * Helper method for making XHR requests
  * @memberOf PanelUtils
  * @param  {string} method 		request method

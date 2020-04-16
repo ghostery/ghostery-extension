@@ -18,7 +18,7 @@ import {
 	validatePassword,
 	validateEmailsMatch,
 	validateConfirmEmail
-} from '../../../../src/utils/utils';
+} from '../../../panel/utils/utils';
 import CreateAccountView from './CreateAccountView';
 import SignedInView from '../SignedInView';
 
