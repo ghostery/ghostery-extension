@@ -74,7 +74,7 @@ const SubscriptionInfo = (props) => {
 									</div>
 									<div className="list-row">
 										<ul>
-											<li className="list-item">{t('subscription_midnight_theme')}</li>
+											<li className="list-item">{t('subscription_dark_blue_theme')}</li>
 											<li className="list-item">{t('historical_stats')}</li>
 											<li className="list-item">{t('priority_support')}</li>
 										</ul>

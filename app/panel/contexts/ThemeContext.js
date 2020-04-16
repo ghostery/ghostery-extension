@@ -1,5 +1,5 @@
 /**
- * Jest Config
+ * Theme Context
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -11,14 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-module.exports = {
-	verbose: true,
-	setupFiles: [
-		'./test/setup.js'
-	],
-	roots: [
-		'<rootDir>/test/',
-		'<rootDir>/app/'
-	],
-	testURL: 'http://localhost',
-};
+import React from 'react';
+
+export const ThemeContext = React.createContext(null);

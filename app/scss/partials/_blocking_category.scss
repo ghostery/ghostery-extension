@@ -62,20 +62,21 @@
 			border-top: 0;
 			padding-top: 0;
 		}
-
 		.caret-down {
 			@extend %pointer;
 			display: inline-block;
-			width: 40px;
-			height: 20px;
-			background: url("../../app/images/panel/caret-down.svg") no-repeat center;
+			margin: 0 15px 4px 0;
+			path {
+				fill: $tundora;
+			}
 		}
 		.caret-up {
 			@extend %pointer;
 			display: inline-block;
-			width: 40px;
-			height: 20px;
-			background: url("../../app/images/panel/caret-up.svg") no-repeat center;
+			margin: 0 15px 4px 0;
+			path {
+				fill: $tundora;
+			}
 		}
 		.checkbox-container {
 			display: inline-block;

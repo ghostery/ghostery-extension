@@ -294,7 +294,7 @@ class Blocking extends React.Component {
 			show_tracker_urls,
 			sitePolicy,
 			smartBlock,
-			smartBlockActive
+			smartBlockActive,
 		} = this.props;
 
 		const {

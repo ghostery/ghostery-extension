@@ -13,26 +13,38 @@
 
 // Set stubs for all chrome.* methods and properties
 import chrome from 'sinon-chrome';
-
+// Mock fetch calls
+import { enableFetchMocks } from 'jest-fetch-mock';
 // Set up Enzyme for React Snapshot testing
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });
+enableFetchMocks();
 
 // Fake the translation function to only return the translation key
 global.t = function(str) {
 	return str;
 };
 
+// Helper function to fake Fetch response
+global.mockFetchResponse = function(responseCode, responseData) {
+	fetch.mockReturnValue(Promise.resolve(new Response(responseData, {
+		status: responseCode,
+		headers: {
+			'Content-type': 'application/json'
+		}
+	})));
+};
+
 // Create global stubs
 global.chrome = chrome;
 chrome.runtime.getManifest.returns({
-	version: '7.0.0',
+	version: '8.5.0',
 	debug: true
 });
 
-// Create Mock for for Cliqz modules
+// Create Mock for Cliqz modules
 jest.mock('../src/classes/Cliqz', () => ({
 	modules: {
 		adblocker: {

@@ -36,7 +36,7 @@ const HomeView = (props) => {
 		email,
 		isPlus,
 	} = props;
-	const accountHref = `https://account.${globals.GHOSTERY_DOMAIN}.com`;
+	const accountHref = globals.ACCOUNT_BASE_URL;
 
 	let headerInfoText = t('hub_home_header_info');
 	if (globals.BROWSER_INFO) {

@@ -11,6 +11,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+/* eslint no-useless-escape: 0 */
+
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
