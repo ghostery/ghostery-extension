@@ -14,7 +14,7 @@
 import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import ClassNames from 'classnames';
-import { validateEmail } from '../../../src/utils/utils';
+import { validateEmail } from '../../panel/utils/utils';
 /**
  * @class Implement shared Forgot Password view which opens from the link on Sign In page inside the panel and hub
  * @memberof PanelClasses
