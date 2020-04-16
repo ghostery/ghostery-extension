@@ -12,11 +12,11 @@
  */
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import ClassNames from 'classnames';
-import { validateEmail } from '../utils/utils';
+import { validateEmail } from '../../panel/utils/utils';
 /**
- * @class Implement Forgot Password view which opens from the link on Sign In panel.
+ * @class Implement shared Forgot Password view which opens from the link on Sign In page inside the panel and hub
  * @memberof PanelClasses
  */
 class ForgotPassword extends React.Component {
@@ -46,6 +46,7 @@ class ForgotPassword extends React.Component {
 		e.preventDefault();
 		this.setState({ loading: true }, () => {
 			const { email } = this.state;
+			const { locale } = this.props;
 
 			// validate the email and password
 			if (!validateEmail(email)) {
@@ -59,7 +60,14 @@ class ForgotPassword extends React.Component {
 			this.props.actions.resetPassword(email)
 				.then((success) => {
 					this.setState({ loading: false });
-					if (success) {
+					if (success && locale === 'hub') {
+						this.props.history.push('/log-in');
+
+						this.props.actions.setToast({
+							toastMessage: t('banner_check_your_email_title'),
+							toastClass: 'success',
+						});
+					} else if (success && locale === 'panel') {
 						this.props.history.push('/login');
 					}
 				});
@@ -72,20 +80,39 @@ class ForgotPassword extends React.Component {
 	 */
 	render() {
 		const { email, loading, emailError } = this.state;
+		const { locale } = this.props;
 		const buttonClasses = ClassNames('button ghostery-button', { loading });
+
+		const ContainerClassNames = ClassNames('', {
+			'forgot-password-panel': locale === 'panel',
+			ForgotPasswordView: locale === 'hub',
+		});
+		const MessageClassNames = ClassNames('', {
+			'forgot-password-message': locale === 'panel',
+			ForgotPasswordMessage: locale === 'hub',
+		});
+		const EmailClassNames = ClassNames('', {
+			'forgot-input-email': locale === 'panel',
+			ForgotPasswordMessage: locale === 'hub',
+		});
+
+		const ButtonsContainerClassNames = ClassNames('row', {
+			'buttons-container': locale === 'panel',
+			ForgotPasswordButtonsContainer: locale === 'hub',
+		});
 		return (
-			<div id="forgot-password-panel">
+			<div id={ContainerClassNames}>
 				<div className="row align-center">
 					<div className="small-11 medium-8 columns">
 						<form onSubmit={this.handleSubmit}>
-							<h4 id="forgot-password-message">
+							<h4 id={MessageClassNames}>
 								{ t('forgot_password_message') }
 							</h4>
 							<div id="forgot-email" className={(emailError ? 'panel-error invalid-email' : '')}>
-								<label htmlFor="forgot-input-email">
+								<label htmlFor={EmailClassNames}>
 									{ t('email_colon') }
 									<span className="asterisk">*</span>
-									<input onChange={this.handleInputChange} value={email} id="forgot-input-email" type="text" name="email" pattern=".{1,}" autoComplete="off" required />
+									<input onChange={this.handleInputChange} value={email} id={EmailClassNames} type="text" name="email" pattern=".{1,}" autoComplete="off" required />
 								</label>
 								<p className="invalid-email warning">
 									{ t('invalid_email_forgot') }
@@ -94,7 +121,7 @@ class ForgotPassword extends React.Component {
 									{ t('error_email_forgot') }
 								</p>
 							</div>
-							<div className="buttons-container row">
+							<div className={ButtonsContainerClassNames}>
 								<div className="small-6 columns text-center">
 									<Link to="/login" id="forgot-password-cancel" className="cancel button hollow">
 										{ t('button_cancel') }
@@ -115,4 +142,4 @@ class ForgotPassword extends React.Component {
 	}
 }
 
-export default ForgotPassword;
+export default withRouter(ForgotPassword);
