@@ -24,10 +24,10 @@ import RadioButton from './RadioButton';
 const RadioButtonGroup = (props) => {
 	const { indexClicked, handleItemClick } = props;
 	return (
-		props.items.map((item, index) => (
-			<div className="flex-container align-justify RadioButtonGroup__container" key={`${index * 2}`}>
+		props.labels.map((label, index) => (
+			<div className="flex-container align-justify RadioButtonGroup__container" key={label}>
 				<span className="RadioButtonGroup__label">
-					{t(item.text)}
+					{t(label)}
 				</span>
 				<div>
 					<RadioButton
@@ -42,7 +42,7 @@ const RadioButtonGroup = (props) => {
 
 // PropTypes ensure we pass required props of the correct type
 RadioButtonGroup.propTypes = {
-	items: PropTypes.arrayOf(PropTypes.object).isRequired, // Number of objects in array is the number of radio buttons
+	labels: PropTypes.arrayOf(PropTypes.string).isRequired,
 	handleItemClick: PropTypes.func.isRequired,
 	indexClicked: PropTypes.number.isRequired
 };

@@ -119,4 +119,13 @@ so that you can support switching between midnight theme and regular theme */
 		background-image: buildRightCaret(#00AEF0);
 		background-repeat: no-repeat;
 	}
+	.point-group {
+		.default, .midnight-theme {
+			fill: #124559;
+		}
+	}
+	.line.default,
+	.line.midnight-theme {
+		fill: #124559;
+	}
 }

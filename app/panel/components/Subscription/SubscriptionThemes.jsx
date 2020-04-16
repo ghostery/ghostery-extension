@@ -22,34 +22,12 @@ import { RadioButtonGroup } from '../BuildingBlocks';
  * @memberOf SettingsComponents
 */
 const SubscriptionThemes = (props) => {
-	const themes = [
-		{
-			name: 'default',
-			text: 'subscription_default_theme',
-		},
-		{
-			name: 'midnight-theme',
-			text: 'subscription_dark_blue_theme',
-		},
-		{
-			name: 'palm',
-			text: 'subscription_palm_theme',
-		},
-		{
-			name: 'leaf',
-			text: 'subscription_leaf_theme',
-		}
-	];
+	const themes = ['default', 'midnight-theme', 'palm-theme', 'leaf-theme'];
+	const themeLabels = ['subscription_default_theme', 'subscription_dark_blue_theme', 'subscription_palm_theme', 'subscription_leaf_theme'];
 
-	const getIndexClicked = () => {
-		const index = themes.findIndex(theme => theme.name === props.theme);
-		return index;
-	};
+	const getIndexClicked = () => themes.indexOf(props.theme);
 
-	const handleThemeClick = (index) => {
-		const theme = themes[index];
-		props.changeTheme(theme.name);
-	};
+	const handleThemeClick = index => props.changeTheme(themes[index]);
 
 	return (
 		<div className="content-subscription s-tabs-panel">
@@ -60,7 +38,7 @@ const SubscriptionThemes = (props) => {
 						<img src="../../app/images/panel/icon-information-tooltip-blue.svg" className="s-question" />
 					</span>
 					<RadioButtonGroup
-						items={themes}
+						labels={themeLabels}
 						handleItemClick={handleThemeClick}
 						indexClicked={getIndexClicked(props.theme)}
 					/>
@@ -73,7 +51,6 @@ const SubscriptionThemes = (props) => {
 // PropTypes ensure we pass required props of the correct type
 SubscriptionThemes.propTypes = {
 	changeTheme: PropTypes.func.isRequired,
-	theme: PropTypes.string.isRequired,
 };
 
 export default SubscriptionThemes;
