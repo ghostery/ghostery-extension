@@ -14,7 +14,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import ClassNames from 'classnames';
 
 /**
  * A Functional React component for a Exit Button
@@ -27,9 +26,7 @@ const ModalExitButton = (props) => {
 		border
 	} = props;
 
-	const borderClassNames = ClassNames('ModalExitButton__exit flex-container align-middle', {
-		green: border === 'green'
-	});
+	const borderClassNames = `ModalExitButton__exit flex-container align-middle ${border}`;
 
 	return (
 		<button type="button" onClick={toggleModal} className={borderClassNames}>

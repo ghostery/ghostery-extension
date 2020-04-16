@@ -29,7 +29,7 @@ const PLUS = 'plus';
 const PREMIUM = 'premium';
 
 /**
- * A base functional component for Promo Modals
+ * A base class component for Promo Modals
  * @return {JSX}
  * @memberof HubComponents
  */
@@ -45,18 +45,9 @@ class PromoModal extends React.Component {
 
 		sendMessage('promoModals.turnOffPromos', {});
 
-		switch (modal) {
-			case INSIGHTS:
-				sendMessage('ping', 'promo_modals_decline_insights_upgrade');
-				break;
-			case PLUS:
-				sendMessage('ping', 'promo_modals_decline_plus_upgrade');
-				break;
-			case PREMIUM:
-				sendMessage('ping', 'promo_modals_decline_insights_upgrade');
-				break;
-			default:
-				break;
+		if (modal === INSIGHTS
+			|| modal === PLUS) {
+			sendMessage('ping', `promo_modals_decline_${modal}_upgrade`);
 		}
 
 		this.props.actions.showNotification({
@@ -76,8 +67,6 @@ class PromoModal extends React.Component {
 		let url;
 		switch (product) {
 			case PLUS:
-				// Should we send a plus ping here?
-				// sendMessage('ping', 'promo_modals_plus_upgrade_cta');
 				url = `https://checkout.${DOMAIN}.com/plus?utm_source=gbe&utm_campaign=${utm_campaign}`;
 				break;
 			case PREMIUM:
@@ -119,10 +108,16 @@ class PromoModal extends React.Component {
 
 	_renderXButton = (type) => {
 		const XButtonClass = ClassNames({ PlusPromoModal__exitButton: type === PLUS });
-
+		let border;
+		if (type === PLUS) {
+			border = 'green';
+		} else if (type === INSIGHTS) {
+			border = 'grey';
+		}
 		return (
 			<ModalExitButton
 				className={XButtonClass}
+				border={border}
 				toggleModal={() => this._handlePromoXClick(type)}
 			/>
 		);
@@ -164,7 +159,7 @@ class PromoModal extends React.Component {
 	}
 
 	render() {
-		const { type } = this.props;
+		const { type, show } = this.props;
 		const modalContentClassNames = ClassNames(
 			'flex-container',
 			'flex-dir-column',
@@ -176,7 +171,7 @@ class PromoModal extends React.Component {
 			}
 		);
 		return (
-			<Modal show>
+			<Modal show={show}>
 				<div className={modalContentClassNames}>
 					{this._renderXButton(type)}
 					{this.renderModalContent()}

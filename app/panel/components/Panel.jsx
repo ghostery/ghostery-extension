@@ -247,6 +247,7 @@ class Panel extends React.Component {
 				type={PREMIUM}
 				location="panel"
 				isPlus={isPlus}
+				show
 			/>
 		);
 	}
@@ -265,6 +266,7 @@ class Panel extends React.Component {
 		return (
 			<PromoModalContainer
 				type={INSIGHTS}
+				show
 			/>
 		);
 	}
@@ -284,6 +286,7 @@ class Panel extends React.Component {
 			<PromoModalContainer
 				type={PLUS}
 				loggedIn={loggedIn}
+				show
 			/>
 		);
 	}
