@@ -12,6 +12,8 @@
  */
 
 import React from 'react';
+import ClassNames from 'classnames';
+import { ThemeContext } from '../../contexts/ThemeContext';
 import Trackers from './Trackers';
 
 /**
@@ -21,6 +23,8 @@ import Trackers from './Trackers';
  * @memberOf BlockingComponents
  */
 class Category extends React.Component {
+	static contextType = ThemeContext;
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -153,6 +157,21 @@ class Category extends React.Component {
 		}
 	}
 
+	_renderCaret() {
+		const { isExpanded } = this.state;
+		const { isUnknown } = this.props;
+		const caretClasses = ClassNames(this.context, {
+			'caret-down': isExpanded,
+			'caret-up': !isExpanded,
+			Category__antiTrackingCaret: isUnknown
+		});
+		return (
+			<svg className={caretClasses} onClick={this.toggleCategoryTrackers} width="11" height="7" viewBox="0 0 11 7" xmlns="http://www.w3.org/2000/svg">
+				<path d={isExpanded ? 'M1.21.02L-.02 1.25l5.27 5.27 5.27-5.27L9.29.02 5.25 4.06' : 'M1.283 7L0 5.676 5.5 0 11 5.676 9.717 7 5.5 2.649z'} fillRule="evenodd" />
+			</svg>
+		);
+	}
+
 	/**
 	* Render a list of categories. Pass globalBlocking flag to all trackers
 	* in the category so that they would know which view they are part of.
@@ -169,7 +188,6 @@ class Category extends React.Component {
 		const globalBlocking = !!this.props.globalBlocking;
 
 		const checkBoxStyle = `${(this.state.totalShownBlocked && this.state.allShownBlocked) ? 'all-blocked ' : (this.state.totalShownBlocked ? 'some-blocked ' : '')} checkbox-container`;
-		const caretClasses = (this.state.isExpanded ? 'caret-up' : 'caret-down') + (isUnknown ? ' Category__antiTrackingCaret' : '');
 		const filteredText = { color: 'red' };
 
 		let trackersBlockedCount;
@@ -224,7 +242,7 @@ class Category extends React.Component {
 							</div>
 						</div>
 						<div className="columns collapse-left collapse-right shrink align-self-justify">
-							<div className={caretClasses} onClick={this.toggleCategoryTrackers} />
+							{ this._renderCaret() }
 							{!isUnknown && (
 								<div className={checkBoxStyle} onClick={this.clickCategoryStatus}>
 									<span className={this.props.index ? 't-tooltip-up-left' : 't-tooltip-down-left'} data-g-tooltip={t('panel_tracker_block_tooltip')} onMouseOver={this.showTooltip} onMouseOut={this.hideTooltip}>

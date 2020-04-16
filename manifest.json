@@ -3,11 +3,10 @@
 	"author": "Ghostery",
 	"name": "__MSG_name__",
 	"short_name": "Ghostery",
-	"version": "8.4.7",
-	"version_name": "8.4.7",
+	"version": "8.5.0",
+	"version_name": "8.5.0",
 	"default_locale": "en",
 	"description": "__MSG_short_description__",
-	"debug":  true,
 	"log": true,
 	"icons": {
 		"16": "app/images/icon16.png",
@@ -101,8 +100,8 @@
 	"web_accessible_resources": [
 		"app/images/*",
 		"dist/css/rewards_styles.css",
-		"cliqz/offers-cc/index.html",
-		"cliqz/offers-reminder/index.html",
-		"cliqz/popup-notification/images/*"
+		"cliqz/offers-templates/reminder.html",
+		"cliqz/offers-templates/checkout.html",
+		"cliqz/offers-templates/control-center.html"
 	]
 }

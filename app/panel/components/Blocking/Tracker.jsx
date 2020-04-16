@@ -14,9 +14,9 @@
 /* eslint react/no-array-index-key: 0 */
 
 import React from 'react';
-import { ReactSVG } from 'react-svg';
 import ClassNames from 'classnames';
 
+import { ThemeContext } from '../../contexts/ThemeContext';
 import globals from '../../../../src/classes/Globals';
 import { log } from '../../../../src/utils/common';
 import { sendMessageInPromise } from '../../utils/msg';
@@ -27,6 +27,8 @@ import { renderKnownTrackerButtons, renderUnknownTrackerButtons } from './tracke
  * @memberOf BlockingComponents
  */
 class Tracker extends React.Component {
+	static contextType = ThemeContext;
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -89,7 +91,7 @@ class Tracker extends React.Component {
 		this.setState({ description: t('tracker_description_getting') });
 
 		sendMessageInPromise('getTrackerDescription', {
-			url: `https://${globals.APPS_SUB_DOMAIN}.ghostery.com/${this.props.language}/apps/${
+			url: `${globals.APPS_BASE_URL}/${this.props.language}/apps/${
 				encodeURIComponent(tracker.name.replace(/\s+/g, '_').toLowerCase())}?format=json`,
 		}).then((data) => {
 			if (data) {
@@ -254,15 +256,22 @@ class Tracker extends React.Component {
 		);
 	}
 
-	_renderCliqzCookiesAndFingerprintsIcon() { return this._renderCliqzStatsIcon('cookies-and-fingerprints'); }
-
-	_renderCliqzAdsIcon() { return this._renderCliqzStatsIcon('ads'); }
-
-	_renderCliqzStatsIcon(type) {
-		const path = `/app/images/panel/tracker-detail-cliqz-${type}-icon.svg`;
-
+	_renderCliqzCookiesAndFingerprintsIcon() {
 		return (
-			<ReactSVG src={path} className="trk-cliqz-stats-icon" />
+			<svg className={`trk-cliqz-stats-icon cookies-and-fingerprints-icon ${this.context}`} width="15" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+				<path fillRule="evenodd" strokeWidth=".96" d="M5.085 1.013a.288.288 0 0 0-.17 0l-3.66.97A.328.328 0 0 0 1 2.308c.017 2.606 1.413 5.024 3.813 6.642.05.034.119.051.187.051a.344.344 0 0 0 .187-.051C7.587 7.33 8.983 4.913 9 2.307a.328.328 0 0 0-.255-.323l-3.66-.971z" />
+			</svg>
+		);
+	}
+
+	_renderCliqzAdsIcon() {
+		return (
+			<svg className={`trk-cliqz-stats-icon ads-icon ${this.context}`} width="15" height="10" viewBox="0 0 11 11" xmlns="http://www.w3.org/2000/svg">
+				<g fillRule="evenodd">
+					<path className="inner-background" d="M7.49 1.234L9.922 3.89l-.157 3.6L7.11 9.922l-3.6-.157L1.078 7.11l.157-3.6L3.89 1.078z" />
+					<path d="M2.788 8.54c.315.315.628.63.944.943.023.023.067.035.103.035 1.077.001 2.153.002 3.23-.001.04 0 .09-.02.117-.048a820.63 820.63 0 0 0 2.285-2.285.184.184 0 0 0 .05-.116c.003-1.08.003-2.16.002-3.24-.001-.03-.008-.068-.026-.088-.316-.321-.635-.64-.95-.956L2.789 8.54m-.436-.433l5.754-5.754c-.308-.309-.621-.623-.937-.936a.16.16 0 0 0-.102-.036 709.213 709.213 0 0 0-3.231 0c-.04 0-.09.02-.118.048-.765.762-1.53 1.525-2.291 2.29a.16.16 0 0 0-.045.1 928.271 928.271 0 0 0 0 3.26c0 .029.01.065.03.085.314.318.631.634.94.943m7.752-2.652c0 .581-.002 1.162.002 1.743a.405.405 0 0 1-.127.31 879.44 879.44 0 0 0-2.47 2.47.398.398 0 0 1-.303.128c-1.17-.003-2.341-.003-3.512 0a.4.4 0 0 1-.302-.126A884.3 884.3 0 0 0 .915 7.503a.385.385 0 0 1-.121-.294c.002-1.17.002-2.342 0-3.513 0-.122.036-.216.123-.303.827-.824 1.653-1.65 2.477-2.477a.388.388 0 0 1 .293-.123c1.174.002 2.348.002 3.523 0 .119 0 .21.038.293.122.827.83 1.655 1.657 2.484 2.484.081.08.12.17.119.285-.004.59-.002 1.181-.002 1.771" />
+				</g>
+			</svg>
 		);
 	}
 
@@ -304,7 +313,7 @@ class Tracker extends React.Component {
 					className="trk-src-link"
 					title={source.src}
 					key={index}
-					href={`https://${encodeURIComponent(globals.GCACHE_SUB_DOMAIN)}.ghostery.com/${encodeURIComponent(this.props.language)}/gcache/?n=${encodeURIComponent(tracker.name)}&s=${encodeURIComponent(source.src)}&v=2&t=${source.type}`}
+					href={`${globals.GCACHE_BASE_URL}/${encodeURIComponent(this.props.language)}/gcache/?n=${encodeURIComponent(tracker.name)}&s=${encodeURIComponent(source.src)}&v=2&t=${source.type}`}
 				>
 					{ source.src }
 				</a>
@@ -347,6 +356,7 @@ class Tracker extends React.Component {
 							tracker.whitelisted,
 							tracker.siteRestricted,
 							tracker.type,
+							this.context
 						)}
 					</div>
 				</div>
@@ -357,7 +367,7 @@ class Tracker extends React.Component {
 								<div className="trk-description">
 									{this.state.description}
 									<div className={(!this.state.showTrackerLearnMore ? 'hide' : '')}>
-										<a target="_blank" rel="noopener noreferrer" title={tracker.name} href={`https://${globals.APPS_SUB_DOMAIN}.ghostery.com/${this.props.language}/apps/${encodeURIComponent(tracker.name.replace(/\s+/g, '_').toLowerCase())}`}>
+										<a target="_blank" rel="noopener noreferrer" title={tracker.name} href={`${globals.APPS_BASE_URL}/${this.props.language}/apps/${encodeURIComponent(tracker.name.replace(/\s+/g, '_').toLowerCase())}`}>
 											{t('tracker_description_learn_more')}
 										</a>
 									</div>

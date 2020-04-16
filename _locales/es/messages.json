@@ -387,12 +387,7 @@
 	},
 	"name": {
 		"description": "The title of this extension (Ghostery).",
-		"message": "$EXTENSION_NAME$ – Bloqueador de anuncios para privacidad",
-		"placeholders": {
-			"extension_name": {
-				"content": "Ghostery"
-			}
-		}
+		"message": "Ghostery – Bloqueador de anuncios para privacidad"
 	},
 	"none": {
 		"description": "Used to say that this item does not belong to any of the groups, as in \"Groups: None\" (as opposed to \"Groups: Group A, Group B, Group C\").",
@@ -802,7 +797,7 @@
 		"message": "desbloqueado"
 	},
 	"white_black_list_error_invalid_url": {
-		"message": "Por favor, introduce una URL válida."
+		"message": "Please enter a valid URL or wildcard."
 	},
 	"whitelist_error_blacklist_url": {
 		"message": "Se ha quitado este sitio de tu lista de sitios restringidos y se ha añadido a tu lista de sitios de confianza."
@@ -1058,7 +1053,7 @@
 		"message": "Sitios de confianza"
 	},
 	"settings_sites_placeholder": {
-		"message": "ejemplo.com"
+		"message": "example.com (wildcards supported)"
 	},
 	"settings_restricted_sites": {
 		"message": "Sitios restringidos"

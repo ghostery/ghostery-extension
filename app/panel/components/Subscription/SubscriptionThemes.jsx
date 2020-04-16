@@ -12,36 +12,45 @@
  */
 
 import React from 'react';
-import { ToggleSlider } from '../BuildingBlocks';
+import PropTypes from 'prop-types';
+import { RadioButtonGroup } from '../BuildingBlocks';
 
 /**
  * @class Implement Themes subview as a React component.
  * The view opens from the left-side menu of the main Subscription view.
- * It allows to switch between available Ghostery themes. Right now it handles just one theme. Hence - slider.
+ * It allows to switch between available Ghostery themes.
  * @memberOf SettingsComponents
- */
-const SubscriptionThemes = props => (
-	<div className="content-subscription s-tabs-panel">
-		<div className="row">
-			<div className="columns column-subscription">
-				<h1>{ t('subscription_themes_title') }</h1>
-				<div>
-					<span className="flex-container align-middle themes-slider-container">
-						<span className="themes-slider-label">
-							{t('subscription_midnight_theme')}
-						</span>
-						<ToggleSlider
-							className="themes-slider"
-							isChecked={props.isChecked}
-							onChange={props.toggleThemes}
-						/>
-						<div className="s-tooltip-down" data-g-tooltip={t('subscription_themes_tooltip')}>
-							<img src="../../app/images/panel/icon-information-tooltip.svg" className="s-question" />
-						</div>
+*/
+const SubscriptionThemes = (props) => {
+	const themes = ['default', 'midnight-theme', 'palm-theme', 'leaf-theme'];
+	const themeLabels = ['subscription_default_theme', 'subscription_dark_blue_theme', 'subscription_palm_theme', 'subscription_leaf_theme'];
+
+	const getIndexClicked = () => themes.indexOf(props.theme);
+
+	const handleThemeClick = index => props.changeTheme(themes[index]);
+
+	return (
+		<div className="content-subscription s-tabs-panel">
+			<div className="row">
+				<div className="columns column-subscription">
+					<h1 className="subscription-title">{t('subscription_themes_title')}</h1>
+					<span className="tooltip-icon s-tooltip-down-right" data-g-tooltip={t('subscription_themes_tooltip')}>
+						<img src="../../app/images/panel/icon-information-tooltip-blue.svg" className="s-question" />
 					</span>
+					<RadioButtonGroup
+						labels={themeLabels}
+						handleItemClick={handleThemeClick}
+						indexClicked={getIndexClicked(props.theme)}
+					/>
 				</div>
 			</div>
 		</div>
-	</div>
-);
+	);
+};
+
+// PropTypes ensure we pass required props of the correct type
+SubscriptionThemes.propTypes = {
+	changeTheme: PropTypes.func.isRequired,
+};
+
 export default SubscriptionThemes;

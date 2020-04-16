@@ -1,10 +1,10 @@
 /**
- * /src/classes/BugDb.js Unit Tests
+ * BugDb.js Unit Tests
  *
  * Ghostery Browser Extension
  * http://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -12,8 +12,6 @@
  */
 
 import _ from 'underscore';
-import sinon from 'sinon';
-import 'whatwg-fetch';
 import bugDb from '../../src/classes/BugDb';
 import conf from '../../src/classes/Conf';
 import { prefsGet } from '../../src/utils/common';
@@ -106,17 +104,8 @@ describe('src/classes/BugDb.js', () => {
 			};
 
 		beforeAll(done => {
-			// Fake the translation function for categories for bugDb.init()
-			global.t = sinon.stub();
-			global.t.withArgs([
-				'site_analytics',
-				'customer_interaction',
-				'social_media'
-			]).returns(true);
-
 			// Fake XMLHttpRequest for fetchJson(/databases/bugs.json)
-			sinon.stub(global, 'fetch');
-			setFetchStubResponse(200, JSON.stringify(bugs))
+			global.mockFetchResponse(200, JSON.stringify(bugs))
 
 			chrome.storage.local.get.yields({ previousVersion: "8.0.8" });
 			conf.init().then(() => {
@@ -126,21 +115,6 @@ describe('src/classes/BugDb.js', () => {
 				});
 			}).catch(err => console.log(err));
 		});
-
-		afterAll(() => {
-			global.fetch.restore();
-		});
-
-		// Helper function to fake XHR requests
-		function setFetchStubResponse (responseCode, responseData) {
-			const res = new global.Response(responseData, {
-				status: responseCode,
-				headers: {
-					'Content-type': 'application/json'
-				}
-			});
-			global.fetch.returns(Promise.resolve(res));
-		}
 
 		describe('bugDb.db.[key] should not be empty', () => {
 			test('bugs', () => expect(_.size(bugDb.db.bugs)).toBeGreaterThan(0));
@@ -305,7 +279,7 @@ describe('src/classes/BugDb.js', () => {
 					conf.bugs = old_bugs;
 
 					// Fake the xhr request again
-					setFetchStubResponse(200, JSON.stringify(bugs))
+					global.mockFetchResponse(200, JSON.stringify(bugs))
 
 					// fake an upgrade so that we read the "newer" bugs from disk instead of localStorage
 					return bugDb.init(true).then(() => {

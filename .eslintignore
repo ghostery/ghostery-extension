@@ -3,6 +3,7 @@
 ## Unit Test Files
 *.test.js
 *.test.jsx
+*.jsx.snap
 
 ## Data Images
 app/data-images/
