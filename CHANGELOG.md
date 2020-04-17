@@ -1,6 +1,7 @@
 ### GHOSTERY 8.5.0 ()
 
 + New Spring themes for Plus subscribers (#525)
++ New settings option to select Ad-Blocker lists (#)
 + Add password reset link to Intro Hub (#507)
 + Updated in-app promo modals (#509)
 + Fixes bug in site-specific tracker white-listing (#522, Fixes #519)

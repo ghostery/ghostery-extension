@@ -101,6 +101,7 @@ class Globals {
 			'alert_bubble_timeout',
 			'alert_expanded',
 			'block_by_default',
+			'cliqz_adb_mode',
 			'cliqz_module_whitelist',
 			'current_theme',
 			'enable_ad_block',

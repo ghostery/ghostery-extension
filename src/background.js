@@ -1052,11 +1052,14 @@ function initializeDispatcher() {
 			setCliqzModuleEnabled(adblocker, false);
 		}
 	});
-
+	dispatcher.on('conf.save.cliqz_adb_mode', (val) => {
+		if (!IS_CLIQZ) {
+			cliqz.prefs.set('cliqz-adb-mode', val);
+		}
+	});
 	dispatcher.on('conf.changed.settings', debounce((key) => {
 		log('Conf value changed for a watched user setting:', key);
 	}, 200));
-
 	dispatcher.on('globals.save.paused_blocking', () => {
 		// if user has paused Ghostery, suspect broken page
 		if (globals.SESSION.paused_blocking) { metrics.handleBrokenPageTrigger(globals.BROKEN_PAGE_PAUSE); }
