@@ -807,10 +807,10 @@
 		"message": "This site is already whitelisted."
 	},
 	"settings_adblocker": {
-		"message": "Ad Blocker"
+		"message": "Ad Block Lists"
 	},
 	"settings_adblocker_lists": {
-		"message": "Select which Ad Blocking filter lists will be loaded."
+		"message": "Load the following Ad Block filter lists:"
 	},
 	"settings_adblocker_list_1": {
 		"message": "Ads only"
