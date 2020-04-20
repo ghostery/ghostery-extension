@@ -16,7 +16,7 @@ import { NavLink } from 'react-router-dom';
 import ClassNames from 'classnames';
 import globals from '../../../../src/classes/Globals';
 
-const IS_CLIQZ = (globals.BROWSER_INFO.name === 'cliqz');
+const { IS_CLIQZ } = globals;
 
 /**
  * @const Implement left pane of the main Settings view as a
