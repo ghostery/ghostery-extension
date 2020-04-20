@@ -1802,6 +1802,9 @@
 	"subscribe_pitch": {
 		"message": "While Ghostery is free, you can choose to support us through a small subscription of &#36;2 per month in exchange for cool perks, such as color themes, priority help service, and more. Join our mission and subscribe!"
 	},
+	"subscribe_pitch_spring": {
+		"message": "Support us and unlock a new spring theme, personal tracking insights, and other special perks by upgrading to Ghostery Plus for &#36;2 per month."
+	},
 	"subscribe_pitch_learn_more": {
 		"message": "Learn more"
 	},
@@ -2349,6 +2352,9 @@
 		"message": "Already subscribed? Sign In",
 		"description": "Character limit (including spaces and punctuation): 28."
 	},
+	"already_subscribed_to_plus_sign_in": {
+		"message": "Already a plus subscriber?"
+	},
 	"promos_turned_off_notification": {
 		"message": "Promos turned off. You can turn them back on in",
 		"description": "translation must take into account that 'Settings' is appended to this string"
@@ -2362,8 +2368,11 @@
 	"seven_day_free_trial": {
 		"message": "7 Day Free Trial (&#36;14/mo)"
 	},
-	"full_coverage_protection_promise": {
-		"message": "Get full-coverage protection across all browsers & apps on your device"
+	"spring_has_sprung": {
+		"message": "Spring has sprung!"
+	},
+  	"full_coverage_protection_promise": {
+	  "message": "Get full-coverage protection across all browsers & apps on your device"
 	},
 	"system_wide_tracker_and_ad_blocking": {
 		"message": "System-wide tracker & ad-blocking"

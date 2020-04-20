@@ -1,5 +1,5 @@
 /**
- * Point of entry index.js file for Premium Promo Modal Component
+ * Point of entry index.js file for PlusPromoModalContent Component
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -11,6 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import PremiumPromoModal from './PremiumPromoModal';
+import PlusPromoModalContent from './PlusPromoModalContent';
 
-export default PremiumPromoModal;
+export default PlusPromoModalContent;
