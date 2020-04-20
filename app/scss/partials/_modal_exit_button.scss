@@ -19,9 +19,14 @@
 	width: 26px;
 	height: 26px;
 	border-radius: 15px;
-	border: solid 0.8px #325e97;
 	background-color: #f7f7f7;
 	@include transition(background-color 0.2s);
+	&.grey {
+		border: solid 0.8px #325e97;
+	}
+	&.green {
+		border: solid 2px $spring-green;
+	}
 }
 .ModalExitButton__exit:hover {
 	background-color: #efefef;

@@ -15,11 +15,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import QueryString from 'query-string';
 import HomeView from './HomeView';
-import { PremiumPromoModal } from '../../../shared-components';
+import PromoModal from '../../../shared-components/PromoModal';
 import { sendMessage } from '../../utils';
 import globals from '../../../../src/classes/Globals';
 
 const DOMAIN = globals.DEBUG ? 'ghosterystage' : 'ghostery';
+const PREMIUM = 'premium';
 
 /**
  * @class Implement the Home View for the Ghostery Hub
@@ -137,7 +138,8 @@ class HomeViewContainer extends Component {
 
 		return (
 			<div className="full-height">
-				<PremiumPromoModal
+				<PromoModal
+					type={PREMIUM}
 					show={showPromoModal}
 					isPlus={isPlus}
 					location="hub"

@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React from 'react';
+import React, { Fragment } from 'react';
 import ClassNames from 'classnames';
 import { Route } from 'react-router-dom';
 import { ToggleSlider } from './BuildingBlocks';
@@ -266,7 +266,7 @@ class Rewards extends React.Component {
 		const src = chrome.runtime.getURL('cliqz/offers-templates/control-center.html?cross-origin');
 		const text = t(`panel_rewards_view__reward${rewardsCount === 1 ? '' : 's'}`);
 		return (
-			<>
+			<Fragment>
 				{is_expanded && (
 					<div className="RewardsPanel__rewards_count_wrapper">
 						<div className="RewardsPanel__rewards_count">{rewardsCount}</div>
@@ -281,7 +281,7 @@ class Rewards extends React.Component {
 					height={iframeHeight}
 					title="myoffrz-rewards"
 				/>
-			</>
+			</Fragment>
 		);
 	}
 

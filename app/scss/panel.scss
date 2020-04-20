@@ -76,9 +76,10 @@ html body {
 @import './partials/_stats';
 @import './partials/_stats_graph';
 @import './partials/_modal_exit_button';
-@import './partials/insights_promo_modal.scss';
 
 // Imports from ../shared-components directory
 @import '../shared-components/Modal/Modal.scss';
-@import '../shared-components/PremiumPromoModal/PremiumPromoModal.scss';
+@import '../shared-components/ModalContent/PremiumPromoModalContent/PremiumPromoModalContent.scss';
+@import '../shared-components/ModalContent/PlusPromoModalContent/PlusPromoModalContent.scss';
+@import '../shared-components/ModalContent/InsightsPromoModalContent/InsightsPromoModalContent.scss';
 @import '../shared-components/ForgotPassword/ForgotPassword.scss'
