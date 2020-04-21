@@ -41,7 +41,6 @@ class Globals {
 		this.REQUIRE_LEGACY_OPT_IN = false;
 		this.HOTFIX = false;
 		this.LET_REDIRECTS_THROUGH = false;
-		this.C2P_LOADED = false;
 		this.NOTIFICATIONS_LOADED = false;
 		this.upgrade_alert_shown = false;
 

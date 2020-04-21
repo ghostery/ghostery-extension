@@ -40,8 +40,14 @@ const policy = new Policy();
  */
 export function buildC2P(details, app_id) {
 	const { tab_id } = details;
-	let c2pApp = c2pDb.db.apps && c2pDb.db.apps[app_id];
+	const tab = tabInfo.getTabInfo(tab_id);
 
+	// If the tab is prefetched, a chrome newtab or Firefox about:page, we can't add C2P to it
+	if (!tab || tab.prefetched || tab.path.includes('_/chrome/newtab') || tab.protocol === 'about' || globals.EXCLUDES.includes(tab.host)) {
+		return;
+	}
+
+	let c2pApp = c2pDb.db.apps && c2pDb.db.apps[app_id];
 	if (!c2pApp) {
 		return;
 	}
@@ -56,8 +62,7 @@ export function buildC2P(details, app_id) {
 	}
 	const app_name = bugDb.db.apps[app_id].name;
 	const c2pHtml = [];
-	const tab_host = tabInfo.getTabInfo(tab_id, 'host');
-	const blacklisted = !!policy.blacklisted(tab_host);
+	const blacklisted = !!policy.blacklisted(tab.host);
 
 	// Generate the templates for each c2p definition (could be multiple for an app ID)
 	c2pApp.forEach((c2pAppDef) => {
@@ -88,20 +93,50 @@ export function buildC2P(details, app_id) {
 		c2pHtml.push(c2p_tpl({ data: tplData }));
 	});
 
-	if (app_id === 2575) { // Hubspot forms. Adjust selector.
+	// Hubspot forms. Adjust selector
+	if (app_id === 2575) {
 		c2pApp.ele = _getHubspotFormSelector(details.url);
 	}
-	// TODO top-level documents only for now
-	_injectClickToPlay(tab_id).then((result) => {
-		if (result) {
+
+	// Make sure that the click_to_play.js content script has loaded on the
+	// top-level document before sending c2p data to the page
+	switch (tab.c2pStatus) {
+		case 'none':
+			tab.c2pStatus = 'loading';
+			injectScript(tab_id, 'dist/click_to_play.js', '', 'document_end').then(() => {
+				// Dequeue C2P data stored while the script injection was taking place
+				let msg = tab.c2pQueue.shift();
+				while (msg !== undefined) {
+					sendMessage(tab_id, 'c2p', {
+						app_id: msg.app_id,
+						data: msg.c2pApp,
+						html: msg.c2pHtml
+					});
+					msg = tab.c2pQueue.shift();
+				}
+				tab.c2pStatus = 'done';
+			}).catch((err) => {
+				log('buildC2P error', err);
+			});
+			break;
+		case 'loading':
+			// Push C2P data to a holding queue until click_to_play.js has finished loading on the page
+			tab.c2pQueue.push({
+				app_id,
+				c2pApp,
+				c2pHtml
+			});
+			break;
+		case 'done':
 			sendMessage(tab_id, 'c2p', {
 				app_id,
 				data: c2pApp,
 				html: c2pHtml
-				// tabWindowId: message.tabWindowId
 			});
-		}
-	});
+			break;
+		default:
+			log(`buildC2P error: c2pStatus type ${tab.c2pStatus} not matched`);
+	}
 }
 
 /**
@@ -192,31 +227,4 @@ function _getHubspotFormSelector(url) {
 	// hutk=941df50e9277ee76755310cd78647a08 -is user-specific (same every session)
 	const tokens = url.substr(8).split(/\/|\&|\?|\#|\=/ig); // eslint-disable-line no-useless-escape
 	return `form[id="hsForm_${tokens[5]}"]`;
-}
-
-/**
- * Inject dist/click_to_play.js content script
- * @private
- *
- * @param  {number} 		tab_id 		tab id
- * @return {Promise}    true/false
- */
-function _injectClickToPlay(tab_id) {
-	if (globals.C2P_LOADED) {
-		return Promise.resolve(true);
-	}
-
-	const tab = tabInfo.getTabInfo(tab_id);
-	if (!tab || tab.prefetched || tab.path.includes('_/chrome/newtab') || tab.protocol === 'about' || globals.EXCLUDES.includes(tab.host)) {
-		// If the tab is prefetched, a chrome newtab or Firefox about:page, we can't add C2P to it.
-		return Promise.resolve(true);
-	}
-
-	return injectScript(tab_id, 'dist/click_to_play.js', '', 'document_end').then(() => {
-		globals.C2P_LOADED = true;
-		return true;
-	}).catch((err) => {
-		log('_injectClickToPlay error', err);
-		return false; // prevent sendMessage calls
-	});
 }

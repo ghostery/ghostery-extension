@@ -878,7 +878,7 @@ class EventHandlers {
 	 *
 	 */
 	_resetNotifications() {
-		globals.C2P_LOADED = globals.NOTIFICATIONS_LOADED = false; // eslint-disable-line no-multi-assign
+		globals.NOTIFICATIONS_LOADED = false;
 	}
 }
 
