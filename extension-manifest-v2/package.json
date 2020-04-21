@@ -45,7 +45,7 @@
   "dependencies": {
     "@cliqz/adblocker-circumvention": "^1.12.2",
     "@cliqz/url-parser": "^1.1.3",
-    "browser-core": "https://github.com/cliqz-oss/browser-core/releases/download/7.45.0/browser-core-7.45.0.tgz",
+    "browser-core": "https://github.com/cliqz-oss/browser-core/releases/download/v7.45.2/browser-core-7.45.2.tgz",
     "classnames": "^2.2.5",
     "d3": "^5.15.1",
     "foundation-sites": "^6.6.2",
