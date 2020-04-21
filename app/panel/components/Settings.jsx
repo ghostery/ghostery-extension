@@ -17,6 +17,7 @@ import { Route } from 'react-router-dom';
 import { sendMessage } from '../utils/msg';
 import SettingsMenu from './Settings/SettingsMenu';
 import GlobalBlocking from './Settings/GlobalBlocking';
+import AdBlocker from './Settings/AdBlocker';
 import TrustAndRestrict from './Settings/TrustAndRestrict';
 import GeneralSettings from './Settings/GeneralSettings';
 import Notifications from './Settings/Notifications';
@@ -78,6 +79,8 @@ class Settings extends React.Component {
 	TrustAndRestrictComponent = () => (<TrustAndRestrict toggleCheckbox={this.toggleCheckbox} site_whitelist={this.props.site_whitelist} site_blacklist={this.props.site_blacklist} actions={this.props.actions} />)
 
 	GeneralSettingsComponent = () => (<GeneralSettings toggleCheckbox={this.toggleCheckbox} settingsData={this.props} actions={this.props.actions} />);
+
+	AdBlockerComponent = () => (<AdBlocker settingsData={this.props} actions={this.props.actions} />);
 
 	PurpleboxComponent = () => (<Purplebox toggleCheckbox={this.toggleCheckbox} selectItem={this.selectItem} settingsData={this.props} actions={this.props.actions} />);
 
@@ -165,6 +168,7 @@ class Settings extends React.Component {
 					<Route path="/settings/globalblocking" render={this.GlobalBlockingComponent} />
 					<Route path="/settings/trustandrestrict" render={this.TrustAndRestrictComponent} />
 					<Route path="/settings/generalsettings" render={this.GeneralSettingsComponent} />
+					<Route path="/settings/adblocker" render={this.AdBlockerComponent} />
 					<Route path="/settings/notifications" render={this.NotificationsComponent} />
 					<Route path="/settings/optin" render={this.OptInComponent} />
 					<Route path="/settings/purplebox" render={this.PurpleboxComponent} />

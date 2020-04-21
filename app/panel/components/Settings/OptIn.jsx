@@ -14,7 +14,7 @@
 import React from 'react';
 import globals from '../../../../src/classes/Globals';
 
-const IS_CLIQZ = (globals.BROWSER_INFO.name === 'cliqz');
+const { IS_CLIQZ } = globals;
 
 /**
  * @class Implement Opt In subview as a React component.
