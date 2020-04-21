@@ -22,11 +22,14 @@ import PropTypes from 'prop-types';
  */
 const ModalExitButton = (props) => {
 	const {
-		toggleModal
+		toggleModal,
+		border
 	} = props;
 
+	const borderClassNames = `ModalExitButton__exit flex-container align-middle ${border}`;
+
 	return (
-		<button type="button" onClick={toggleModal} className="ModalExitButton__exit flex-container align-middle">
+		<button type="button" onClick={toggleModal} className={borderClassNames}>
 			<span className="ModalExitButton__exitIcon" />
 		</button>
 	);
@@ -34,7 +37,13 @@ const ModalExitButton = (props) => {
 
 // PropTypes ensure we pass required props of the correct type
 ModalExitButton.propTypes = {
-	toggleModal: PropTypes.func.isRequired
+	toggleModal: PropTypes.func.isRequired,
+	border: PropTypes.string,
+};
+
+// Default props used in the App
+ModalExitButton.defaultProps = {
+	border: 'grey'
 };
 
 export default ModalExitButton;

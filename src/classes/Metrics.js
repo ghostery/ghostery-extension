@@ -510,10 +510,16 @@ class Metrics {
 	 */
 	_getThemeValue() {
 		const { current_theme } = conf;
-		if (current_theme === 'midnight-theme') {
-			return 1;
+		switch (current_theme) {
+			case 'midnight-theme':
+				return 1;
+			case 'leaf-theme':
+				return 2;
+			case 'palm-theme':
+				return 3;
+			default:
+				return 0;
 		}
-		return 0;
 	}
 
 	/**

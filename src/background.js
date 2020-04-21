@@ -985,6 +985,10 @@ function onMessageHandler(request, sender, callback) {
 		promoModals.recordInsightsPromoSighting();
 		return false;
 	}
+	if (name === 'promoModals.sawPlusPromo') {
+		promoModals.recordPlusPromoSighting();
+		return false;
+	}
 	if (name === 'promoModals.turnOffPromos') {
 		promoModals.turnOffPromos();
 		return false;
