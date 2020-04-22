@@ -30,6 +30,8 @@ import {
 	GET_USER_SUBSCRIPTION_DATA_SUCCESS
 } from './AccountConstants';
 
+import { CLEAR_THEME } from '../panel/constants/constants';
+
 export const getUserSettings = () => dispatch => (
 	sendMessageInPromise('account.getUserSettings')
 		.then((settings) => {
@@ -153,6 +155,7 @@ export const logout = () => dispatch => (
 	sendMessageInPromise('account.logout', {})
 		.then(() => {
 			dispatch({ type: LOGOUT_SUCCESS });
+			dispatch({ type: CLEAR_THEME });
 		})
 		.catch((err) => {
 			const errors = [{ title: err.toString(), detail: err.toString() }];

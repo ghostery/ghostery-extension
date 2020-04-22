@@ -100,6 +100,12 @@ export const getTheme = name => dispatch => (
 		})
 );
 
+export function clearTheme() {
+	return {
+		type: CLEAR_THEME,
+	};
+}
+
 /**
  * Triggered when the user signs in through the Insights modal into an account that does not have an insights subscription, prompting to re-display the modal, requiring a re-render
  * @return {Object}
