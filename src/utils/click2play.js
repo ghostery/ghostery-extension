@@ -103,17 +103,10 @@ export function buildC2P(details, app_id) {
 	switch (tab.c2pStatus) {
 		case 'none':
 			tab.c2pStatus = 'loading';
-			injectScript(tab_id, 'dist/click_to_play.js', '', 'document_end').then(() => {
-				// Dequeue C2P data stored while the script injection was taking place
-				let msg = tab.c2pQueue.shift();
-				while (msg !== undefined) {
-					sendMessage(tab_id, 'c2p', {
-						app_id: msg.app_id,
-						data: msg.c2pApp,
-						html: msg.c2pHtml
-					});
-					msg = tab.c2pQueue.shift();
-				}
+			// Scripts injected at document_idle are guaranteed to run after the DOM is complete
+			injectScript(tab_id, 'dist/click_to_play.js', '', 'document_idle').then(() => {
+				// Send the entire queue to the content script to reduce message passing
+				sendMessage(tab_id, 'c2p', tab.c2pQueue);
 				tab.c2pStatus = 'done';
 			}).catch((err) => {
 				log('buildC2P error', err);
@@ -123,8 +116,8 @@ export function buildC2P(details, app_id) {
 			// Push C2P data to a holding queue until click_to_play.js has finished loading on the page
 			tab.c2pQueue.push({
 				app_id,
-				c2pApp,
-				c2pHtml
+				data: c2pApp,
+				html: c2pHtml
 			});
 			break;
 		case 'done':
@@ -143,9 +136,9 @@ export function buildC2P(details, app_id) {
  * Build blocked redirect data global structure Inject Page-Level Click2Play on Redirect.
  * @memberOf BackgroundUtils
  *
- * @param  {number} 		requestId		request id
+ * @param  {number}		requestId		request id
  * @param  {Object} 	redirectUrls	original url and redirect url as properties
- * @param {number}        	app_id 			tracker id
+ * @param  {number}		app_id 			tracker id
  *
  * @return {string}  					url of the internal template of the blocked redirect page
  */

@@ -26,7 +26,6 @@ const { onMessage } = chrome.runtime;
  * @var {Object}   initialized with an object with exported init as its property
  */
 const Click2PlayContentScript = (function(win, doc) {
-	const	C2P_DATA = {};
 	/**
 	 * Create element for the specified html tag
 	 * @memberof Click2PlayContentScript
@@ -52,10 +51,9 @@ const Click2PlayContentScript = (function(win, doc) {
 		}
 	};
 	/**
-	 * Helper called by applyC2P
-	 * This function creates a fragment of DOM used for replacement
-	 * of a social tracker.
-	 * It also sets listeners to mouse 'click' events.
+	 * Helper function called by applyC2P(). This function creates a
+	 * DOM fragment used to replace a social tracker. It also sets
+	 * listeners for mouse 'click' events.
 	 * @memberof Click2PlayContentScript
 	 * @package
 	 *
@@ -66,13 +64,10 @@ const Click2PlayContentScript = (function(win, doc) {
 	const buildC2P = function(c2pFrame, c2pAppDef, html) {
 		c2pFrame.addEventListener('load', () => {
 			const idoc = c2pFrame.contentDocument;
-
 			idoc.documentElement.innerHTML = html;
-			const image = idoc.getElementById('ghostery-button');
-
 			if (c2pAppDef.button) {
-				c2pFrame.style.width = `${image.width}px`;
-				c2pFrame.style.height = `${image.height}px`;
+				c2pFrame.style.width = '30px';
+				c2pFrame.style.height = '19px';
 				c2pFrame.style.border = '0px';
 			} else {
 				c2pFrame.style.width = '100%';
@@ -127,31 +122,30 @@ const Click2PlayContentScript = (function(win, doc) {
 			const els = doc.querySelectorAll(c2pAppDef.ele);
 			for (let i = 0, num_els = els.length; i < num_els; i++) {
 				const el = els[i];
-
 				const c2pFrame = createEl('iframe');
+
 				buildC2P(c2pFrame, c2pAppDef, html[idx]);
 				c2pFrame.style.display = 'inline-block';
 
-				if ((c2pAppDef.attach && c2pAppDef.attach === 'parentNode') ||
-					(el.nodeName === 'IFRAME')) {
+				// Attach C2P frame inside the parentNode
+				if ((c2pAppDef.attach && c2pAppDef.attach === 'parentNode') || (el.nodeName === 'IFRAME')) {
 					if (el.parentNode && el.parentNode.nodeName !== 'BODY' && el.parentNode.nodeName !== 'HEAD') {
 						el.parentNode.replaceChild(c2pFrame, el);
 						return;
 					}
 				}
 
+				// Replace existing node with C2P content
 				el.textContent = '';
-
 				el.style.display = 'inline-block';
 				appendChild(el, c2pFrame);
 			}
 		});
 	};
 	/**
-	 * Initialize Click2PlayContentScript.
-	 * This function sets listener for 'c2p' message coming from background with
-	 * tracker-related data. It also sets listener for windows 'load' event.
-	 * Called by exported init function.
+	 * Initialize Click2PlayContentScript. This function sets a listener for 'c2p' messages
+	 * with tracker-related data. This script is injected on document_idle after DOM complete.
+	 * Called by exported init() function.
 	 * @memberof Click2PlayContentScript
 	 * @package
 	 */
@@ -161,34 +155,28 @@ const Click2PlayContentScript = (function(win, doc) {
 				return false;
 			}
 
-			const	{ name, message } = request;
+			const { name, message } = request;
 			log('click_to_play.js received message', name);
 
 			if (name === 'c2p') {
 				if (message) {
-					// queue Click-to-Play data so that we process multiple Twitter buttons at once, for example
-					C2P_DATA[message.app_id] = [message.app_id, message.data, message.html];
-
-					if (doc.readyState === 'complete') {
+					// Dequeue C2P data stored while the script injection was taking place
+					if (Array.isArray(message)) {
+						let m = message.shift();
+						while (m !== undefined) {
+							applyC2P(m.app_id, m.data, m.html);
+							m = message.shift();
+						}
+					} else {
+						// Single C2P message
 						applyC2P(message.app_id, message.data, message.html);
 					}
 				}
 			}
 
 			sendResponse();
-			return true;
+			return false;
 		});
-
-		window.addEventListener('load', () => {
-			for (const app_id in C2P_DATA) {
-				if (C2P_DATA.hasOwnProperty(app_id)) {
-					if (C2P_DATA[app_id].length >= 3) {
-						applyC2P(C2P_DATA[app_id][0], C2P_DATA[app_id][1], C2P_DATA[app_id][2]);
-					}
-				}
-			}
-			// TODO clear C2P_DATA to free memory
-		}, { capture: false, passive: true });
 	};
 
 	// Public API
