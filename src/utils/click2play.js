@@ -108,23 +108,26 @@ export function buildC2P(details, app_id) {
 				// Send the entire queue to the content script to reduce message passing
 				sendMessage(tab_id, 'c2p', tab.c2pQueue);
 				tab.c2pStatus = 'done';
+				tab.c2pQueue = {};
 			}).catch((err) => {
 				log('buildC2P error', err);
 			});
 			break;
 		case 'loading':
 			// Push C2P data to a holding queue until click_to_play.js has finished loading on the page
-			tab.c2pQueue.push({
-				app_id,
-				data: c2pApp,
-				html: c2pHtml
-			});
+			if (!tab.c2pQueue.hasOwnProperty(app_id)) {
+				tab.c2pQueue[app_id] = {
+					data: c2pApp,
+					html: c2pHtml
+				};
+			}
 			break;
 		case 'done':
 			sendMessage(tab_id, 'c2p', {
-				app_id,
-				data: c2pApp,
-				html: c2pHtml
+				app_id: {
+					data: c2pApp,
+					html: c2pHtml
+				}
 			});
 			break;
 		default:

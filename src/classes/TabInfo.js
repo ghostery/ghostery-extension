@@ -3,7 +3,7 @@
  *
  * this._tabInfo[tab_id]: {
  * 		c2pStatus		{string}	current status of the click_to_play.js script injection on the tab (none|loading|done)
- * 		c2pQueue		{array}		queue of c2p messages collected when c2pStatus is none or loading
+ * 		c2pQueue		{Object}	queue of c2p messages collected when c2pStatus is none or loading, organized as a HashSet by app_id
  *		domain: 		{string}	the general domain name plus suffix (no sub-domains)
  *		hash: 			{string} 	hash values appended to the url
  *		host: 			{string} 	the domain name plus suffix and sub-domains
@@ -71,7 +71,7 @@ class TabInfo {
 			},
 			insecureRedirects: [],
 			c2pStatus: 'none',
-			c2pQueue: [],
+			c2pQueue: {},
 		};
 
 		this._tabInfo[tab_id] = info;
