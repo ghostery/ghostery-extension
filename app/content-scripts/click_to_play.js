@@ -120,7 +120,7 @@ const Click2PlayContentScript = (function(win, doc) {
 	const applyC2P = function(app_id, c2p_app, html) {
 		c2p_app.forEach((c2pAppDef, idx) => {
 			const els = doc.querySelectorAll(c2pAppDef.ele);
-			for (let i = 0, num_els = els.length; i < num_els; i++) {
+			for (let i = 0; i < els.length; i++) {
 				const el = els[i];
 				const c2pFrame = createEl('iframe');
 
@@ -131,14 +131,13 @@ const Click2PlayContentScript = (function(win, doc) {
 				if ((c2pAppDef.attach && c2pAppDef.attach === 'parentNode') || (el.nodeName === 'IFRAME')) {
 					if (el.parentNode && el.parentNode.nodeName !== 'BODY' && el.parentNode.nodeName !== 'HEAD') {
 						el.parentNode.replaceChild(c2pFrame, el);
-						return;
 					}
+				} else {
+					// Replace existing node with C2P content
+					el.textContent = '';
+					el.style.display = 'inline-block';
+					appendChild(el, c2pFrame);
 				}
-
-				// Replace existing node with C2P content
-				el.textContent = '';
-				el.style.display = 'inline-block';
-				appendChild(el, c2pFrame);
 			}
 		});
 	};
