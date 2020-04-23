@@ -22,7 +22,7 @@ import { RadioButtonGroup } from '../BuildingBlocks';
  * @memberOf SettingsComponents
 */
 const SubscriptionThemes = (props) => {
-	const themes = ['default', 'dark-blue-theme', 'palm-theme', 'leaf-theme'];
+	const themes = ['default', 'midnight-theme', 'palm-theme', 'leaf-theme'];
 	const themeLabels = ['subscription_default_theme', 'subscription_dark_blue_theme', 'subscription_palm_theme', 'subscription_leaf_theme'];
 
 	const getIndexClicked = () => themes.indexOf(props.theme);

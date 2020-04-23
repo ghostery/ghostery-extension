@@ -1,5 +1,5 @@
 /* NOTE: will need to use color variables in CSS rather than D3 code accessors
-so that you can support switching between dark blue theme and regular theme */
+so that you can support switching between midnight theme and regular theme */
 
 // Function helper with color variables
 @function _url-friendly-color($color) {
@@ -120,12 +120,12 @@ so that you can support switching between dark blue theme and regular theme */
 		background-repeat: no-repeat;
 	}
 	.point-group {
-		.default, .dark-blue-theme {
+		.default, .midnight-theme {
 			fill: #124559;
 		}
 	}
 	.line.default,
-	.line.dark-blue-theme {
+	.line.midnight-theme {
 		stroke: #124559;
 	}
 }
