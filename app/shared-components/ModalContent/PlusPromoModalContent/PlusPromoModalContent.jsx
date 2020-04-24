@@ -33,7 +33,7 @@ const PlusPromoModalContent = (props) => {
 			<div className="PlusPromoModal__main-content-container">
 				<div className="PlusPromoModal__header">
 					<div className="title">
-						<div>{t('spring_has_sprung')}</div>
+						<div>{t('spring_is_here')}</div>
 					</div>
 					<div className="description">
 						<div dangerouslySetInnerHTML={{ __html: t('subscribe_pitch_spring') }} />

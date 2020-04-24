@@ -1818,7 +1818,7 @@
 		"message": "While Ghostery is free, you can choose to support us through a small subscription of &#36;2 per month in exchange for cool perks, such as color themes, priority help service, and more. Join our mission and subscribe!"
 	},
 	"subscribe_pitch_spring": {
-		"message": "Support us and unlock a new spring theme, personal tracking insights, and other special perks by upgrading to Ghostery Plus for &#36;2 per month."
+		"message": "Like what we do? Support us and unlock new spring themes, personal tracking insights, and other special perks by upgrading to Ghostery Plus"
 	},
 	"subscribe_pitch_learn_more": {
 		"message": "Learn more"
@@ -2381,10 +2381,10 @@
 		"message": "Try Ghostery Midnight"
 	},
 	"seven_day_free_trial": {
-		"message": "7 Day Free Trial (&#36;14/mo)"
+		"message": "7 Day Free Trial"
 	},
-	"spring_has_sprung": {
-		"message": "Spring has sprung!"
+	"spring_is_here": {
+		"message": "Spring is here!"
 	},
   	"full_coverage_protection_promise": {
 	  "message": "Get full-coverage protection across all browsers & apps on your device"
@@ -2404,8 +2404,8 @@
 	"download_for_free": {
 		"message": "Download for free"
 	},
-	"support_ghostery_for_2_instead": {
-		"message": "Support Ghostery for &#36;2/mo instead"
+	"support_ghostery_and_try_plus_instead": {
+		"message": "Support Ghostery and try Plus instead"
 	},
 	"no_thanks_continue_with_basic": {
 		"message": "No thanks, continue with basic"
