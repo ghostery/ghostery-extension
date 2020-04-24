@@ -8,7 +8,6 @@
 	"default_locale": "en",
 	"description": "__MSG_short_description__",
 	"log": true,
-	"debug": true,
 	"icons": {
 		"16": "app/images/icon16.png",
 		"48": "app/images/icon48.png",
