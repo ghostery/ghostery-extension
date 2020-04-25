@@ -102,13 +102,22 @@ export function buildC2P(details, app_id) {
 	// top-level document before sending c2p data to the page
 	switch (tab.c2pStatus) {
 		case 'none':
-			tab.c2pStatus = 'loading';
+			tabInfo.setTabInfo(tab_id, 'c2pStatus', 'loading');
+			// Push current C2P data into existing queue
+			if (!tab.c2pQueue.hasOwnProperty(app_id)) {
+				tabInfo.setTabInfo(tab_id, 'c2pQueue', Object.assign({}, tab.c2pQueue, {
+					[app_id]: {
+						data: c2pApp,
+						html: c2pHtml
+					}
+				}));
+			}
 			// Scripts injected at document_idle are guaranteed to run after the DOM is complete
 			injectScript(tab_id, 'dist/click_to_play.js', '', 'document_idle').then(() => {
 				// Send the entire queue to the content script to reduce message passing
 				sendMessage(tab_id, 'c2p', tab.c2pQueue);
-				tab.c2pStatus = 'done';
-				tab.c2pQueue = {};
+				tabInfo.setTabInfo(tab_id, 'c2pStatus', 'done');
+				tabInfo.setTabInfo(tab_id, 'c2pQueue', {});
 			}).catch((err) => {
 				log('buildC2P error', err);
 			});
@@ -116,10 +125,12 @@ export function buildC2P(details, app_id) {
 		case 'loading':
 			// Push C2P data to a holding queue until click_to_play.js has finished loading on the page
 			if (!tab.c2pQueue.hasOwnProperty(app_id)) {
-				tab.c2pQueue[app_id] = {
-					data: c2pApp,
-					html: c2pHtml
-				};
+				tabInfo.setTabInfo(tab_id, 'c2pQueue', Object.assign({}, tab.c2pQueue, {
+					[app_id]: {
+						data: c2pApp,
+						html: c2pHtml
+					}
+				}));
 			}
 			break;
 		case 'done':
