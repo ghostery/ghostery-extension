@@ -147,16 +147,16 @@ export function buildC2P(details, app_id) {
 }
 
 /**
- * Build blocked redirect data global structure Inject Page-Level Click2Play on Redirect.
+ * Inject page-level Click2Play on redirect. Build blocked redirect
+ * data global structure.
  * @memberOf BackgroundUtils
  *
- * @param  {number}		requestId		request id
- * @param  {Object} 	redirectUrls	original url and redirect url as properties
+ * @param  {Object}		redirectUrls	original url and redirect url as properties
  * @param  {number}		app_id 			tracker id
  *
  * @return {string}  					url of the internal template of the blocked redirect page
  */
-export function buildRedirectC2P(requestId, redirectUrls, app_id) {
+export function buildRedirectC2P(redirectUrls, app_id) {
 	const host_url = processUrl(redirectUrls.url).hostname;
 	const redirect_url = processUrl(redirectUrls.redirectUrl).hostname;
 	const app_name = bugDb.db.apps[app_id].name;
@@ -171,7 +171,7 @@ export function buildRedirectC2P(requestId, redirectUrls, app_id) {
 		blocked_redirect_prevent: t(
 			'blocked_redirect_prevent',
 			// It is unlikely that apps pages will ever be translated
-			//			[host_url, redirect_url, app_name, 'https://' + globals.APPS_SUB_DOMAIN + '.ghostery.com/' + conf.language + '/apps/' + encodeURIComponent(app_name.replace(/\s+/g, '_').toLowerCase())]),
+			// [host_url, redirect_url, app_name, 'https://' + globals.APPS_SUB_DOMAIN + '.ghostery.com/' + conf.language + '/apps/' + encodeURIComponent(app_name.replace(/\s+/g, '_').toLowerCase())]),
 			[host_url, redirect_url, app_name, `${globals.APPS_BASE_URL}/en/apps/${encodeURIComponent(app_name.replace(/\s+/g, '_').toLowerCase())}`]
 		),
 		blocked_redirect_action_always_title: t('blocked_redirect_action_always_title'),
@@ -193,7 +193,6 @@ export function allowAllwaysC2P(app_id, tab_host) {
 	const { selected_app_ids } = conf;
 	delete selected_app_ids[app_id];
 	conf.selected_app_ids = selected_app_ids;
-
 
 	// Remove fron site-specific-blocked
 	if (conf.site_specific_blocks.hasOwnProperty(tab_host) && conf.site_specific_blocks[tab_host].includes(+app_id)) {

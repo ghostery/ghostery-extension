@@ -11,11 +11,12 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import { buildC2P } from '../../src/utils/click2play';
+import { buildC2P, buildRedirectC2P } from '../../src/utils/click2play';
 import tabInfo from '../../src/classes/TabInfo';
 import Policy from '../../src/classes/Policy';
+import globals from '../../src/classes/Globals';
 import c2p_tpl from '../../app/templates/click2play.html';
-import { injectScript, sendMessage } from '../../src/utils/utils';
+import * as utils from '../../src/utils/utils';
 
 // Mock imports for dependencies
 jest.mock('../../app/templates/click2play.html', () => {
@@ -33,11 +34,7 @@ jest.mock('../../src/classes/TabInfo', () => ({
 jest.mock('../../src/classes/Policy');
 jest.mock('../../src/classes/Globals', () => ({
 	BROWSER_INFO: { displayName: '', name: '', token: '', version: '', os: 'other' },
-	EXCLUDES: []
-}));
-jest.mock('../../src/utils/utils', () => ({
-	sendMessage: jest.fn(),
-	injectScript: jest.fn(() => Promise.resolve())
+	EXCLUDES: [],
 }));
 jest.mock('../../src/classes/Click2PlayDb', () => ({
 	type: 'click2play',
@@ -77,9 +74,9 @@ jest.mock('../../src/classes/Click2PlayDb', () => ({
 jest.mock('../../src/classes/BugDb', () => ({
 	db: {
 		apps: {
-			464: [{
+			464: {
 				name: "Facebook Social Plugins"
-			}],
+			},
 		}
 	}
 }));
@@ -91,6 +88,11 @@ tabInfo.setTabInfo = jest.fn().mockImplementation((tab_id, property, value) => {
 	tabInfo[property] = value;
 });
 
+// Mock utils functions
+utils.sendMessage = jest.fn();
+utils.injectScript = jest.fn(() => Promise.resolve());
+utils.processUrl = jest.requireActual('../../src/utils/utils').processUrl;
+
 describe('src/utils/click2play.js', () => {
 	const details = {
 		tab_id: 1
@@ -98,12 +100,11 @@ describe('src/utils/click2play.js', () => {
 	const tab = tabInfo.getTabInfo(details.tab_id);
 
 	describe('testing buildC2P()', () => {
-
 		describe('c2pStatus is "none"', () => {
 			beforeAll(() => {
 				tabInfo.c2pStatus = 'none';
-				sendMessage.mockClear();
-				injectScript.mockClear();
+				utils.sendMessage.mockClear();
+				utils.injectScript.mockClear();
 			});
 
 			test('c2pStatus defaults to "none"', () => {
@@ -112,7 +113,7 @@ describe('src/utils/click2play.js', () => {
 
 			test('injectScript() is called', () => {
 				buildC2P(details, 464);
-				expect(injectScript).toHaveBeenCalledWith(details.tab_id, 'dist/click_to_play.js', '', 'document_idle');
+				expect(utils.injectScript).toHaveBeenCalledWith(details.tab_id, 'dist/click_to_play.js', '', 'document_idle');
 			});
 
 			test('c2pApp and c2pHtml data added to c2pQueue', () => {
@@ -123,7 +124,7 @@ describe('src/utils/click2play.js', () => {
 
 			test('sendMessage() called with correct C2P data', () => {
 				const c2pQueue = tabInfo.setTabInfo.mock.calls[1][2];
-				expect(sendMessage).toHaveBeenCalledWith(details.tab_id, 'c2p', c2pQueue);
+				expect(utils.sendMessage).toHaveBeenCalledWith(details.tab_id, 'c2p', c2pQueue);
 			});
 
 			test('c2pStatus set to "done"', () => {
@@ -137,15 +138,15 @@ describe('src/utils/click2play.js', () => {
 
 		describe('c2pStatus is "loading"', () => {
 			beforeAll(() => {
-				sendMessage.mockClear();
-				injectScript.mockClear();
+				utils.sendMessage.mockClear();
+				utils.injectScript.mockClear();
 				tabInfo.c2pStatus = 'loading';
 				buildC2P(details, 464);
 			});
 
 			test('injectScript() and sendMessage() are not called', () => {
-				expect(injectScript).not.toHaveBeenCalled();
-				expect(sendMessage).not.toHaveBeenCalled();
+				expect(utils.injectScript).not.toHaveBeenCalled();
+				expect(utils.sendMessage).not.toHaveBeenCalled();
 			});
 
 			test('c2pApp and c2pHtml data added to c2pQueue', () => {
@@ -155,21 +156,31 @@ describe('src/utils/click2play.js', () => {
 
 		describe('c2pStatus is "done"', () => {
 			beforeAll(() => {
-				sendMessage.mockClear();
-				injectScript.mockClear();
+				utils.sendMessage.mockClear();
+				utils.injectScript.mockClear();
 				tabInfo.c2pStatus = 'done';
 				tabInfo.c2pQueue = {};
 				buildC2P(details, 464);
 			});
 
 			test('injectScript() is not called. sendMessage() is called', () => {
-				expect(injectScript).not.toHaveBeenCalled();
-				expect(sendMessage).toHaveBeenCalled();
+				expect(utils.injectScript).not.toHaveBeenCalled();
+				expect(utils.sendMessage).toHaveBeenCalled();
 			});
 
 			test('c2pQueue is empty', () => {
 				expect(tab.c2pQueue).toEqual({});
 			});
+		});
+	});
+
+	describe('testing buildRedirectC2P()', () => {
+		const REDIRECT_MAP = new Map([[100, { url: 'https://cnn.com/', redirectUrl: 'https://fake-redirect.com/' }]]);
+
+		test('app_id is added to BLOCKED_REDIRECT_DATA global', () => {
+			buildRedirectC2P(REDIRECT_MAP.get(100), 464);
+			expect(globals.BLOCKED_REDIRECT_DATA.app_id).toBe(464);
+			expect(globals.BLOCKED_REDIRECT_DATA.url).toBe('https://fake-redirect.com/');
 		});
 	});
 });
