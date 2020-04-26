@@ -511,7 +511,7 @@ class Metrics {
 	_getThemeValue() {
 		const { current_theme } = conf;
 		switch (current_theme) {
-			case 'midnight-theme':
+			case 'dark-blue-theme':
 				return 1;
 			case 'leaf-theme':
 				return 2;
