@@ -1588,7 +1588,7 @@
 		}
 	},
 	"hub_supporter_perk_themes_description": {
-		"message": "Customize the Ghostery colors - try our Midnight theme!"
+		"message": "Customize the Ghostery colors - try our Dark Blue theme!"
 	},
 	"hub_supporter_perk_stats_description": {
 		"message": "View your blocking statistics and see how Ghostery is working for you"
@@ -1603,7 +1603,7 @@
 		"message": "We strive to deliver the best privacy protection services to our users free of cost. While we do not charge for our privacy suite, you may choose to support us through a small monthly subscription. Join us in our mission by upgrading to Ghostery Plus - and unlock cool perks along the way!"
 	},
 	"hub_supporter_feature_theme_description": {
-		"message": "Customize the Ghostery colors for a new visual experience! Introduced through popular request. Check out our special Midnight theme, and more to come."
+		"message": "Customize the Ghostery colors for a new visual experience! Introduced through popular request. Check out our special Dark Blue theme, and more to come."
 	},
 	"hub_supporter_feature_stats_description": {
 		"message": "View historical blocking results with graphs and statistics to reveal trends and learn how Ghostery has affected your browsing."
@@ -1818,7 +1818,7 @@
 		"message": "While Ghostery is free, you can choose to support us through a small subscription of &#36;2 per month in exchange for cool perks, such as color themes, priority help service, and more. Join our mission and subscribe!"
 	},
 	"subscribe_pitch_spring": {
-		"message": "Support us and unlock a new spring theme, personal tracking insights, and other special perks by upgrading to Ghostery Plus for &#36;2 per month."
+		"message": "Like what we do? Support us and unlock new spring themes, personal tracking insights, and other special perks by upgrading to Ghostery Plus"
 	},
 	"subscribe_pitch_learn_more": {
 		"message": "Learn more"
@@ -1831,6 +1831,9 @@
 	},
 	"subscribe_pitch_sign_here": {
 		"message": "Already a subscriber? Sign in here"
+	},
+	"subscribe_pitch_sign_in_plus": {
+		"message": "Already a subscriber? Sign in"
 	},
 	"subscribe_pitch_sign_in": {
 		"message": "Already subscribed? Sign in"
@@ -2367,9 +2370,6 @@
 		"message": "Already subscribed? Sign In",
 		"description": "Character limit (including spaces and punctuation): 28."
 	},
-	"already_subscribed_to_plus_sign_in": {
-		"message": "Already a plus subscriber?"
-	},
 	"promos_turned_off_notification": {
 		"message": "Promos turned off. You can turn them back on in",
 		"description": "translation must take into account that 'Settings' is appended to this string"
@@ -2381,10 +2381,10 @@
 		"message": "Try Ghostery Midnight"
 	},
 	"seven_day_free_trial": {
-		"message": "7 Day Free Trial (&#36;14/mo)"
+		"message": "7 Day Free Trial"
 	},
-	"spring_has_sprung": {
-		"message": "Spring has sprung!"
+	"spring_is_here": {
+		"message": "Spring is here!"
 	},
   	"full_coverage_protection_promise": {
 	  "message": "Get full-coverage protection across all browsers & apps on your device"
@@ -2404,8 +2404,8 @@
 	"download_for_free": {
 		"message": "Download for free"
 	},
-	"support_ghostery_for_2_instead": {
-		"message": "Support Ghostery for &#36;2/mo instead"
+	"support_ghostery_and_try_plus_instead": {
+		"message": "Support Ghostery and try Plus instead"
 	},
 	"no_thanks_continue_with_basic": {
 		"message": "No thanks, continue with basic"

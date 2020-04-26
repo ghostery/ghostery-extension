@@ -30,6 +30,7 @@ import {
 	GET_USER_SUBSCRIPTION_DATA_SUCCESS
 } from './AccountConstants';
 import { SET_TOAST } from '../hub/Views/AppView/AppViewConstants';
+import { CLEAR_THEME } from '../panel/constants/constants';
 
 export const getUserSettings = () => dispatch => (
 	sendMessageInPromise('account.getUserSettings')
@@ -154,6 +155,7 @@ export const logout = () => dispatch => (
 	sendMessageInPromise('account.logout', {})
 		.then(() => {
 			dispatch({ type: LOGOUT_SUCCESS });
+			dispatch({ type: CLEAR_THEME });
 		})
 		.catch((err) => {
 			const errors = [{ title: err.toString(), detail: err.toString() }];
