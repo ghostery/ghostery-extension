@@ -47,7 +47,8 @@
 			top: -2px;
 			display: inline-block;
 			padding-right: 6px;
-			&.ads-icon.default > g {
+			&.ads-icon.default > g,
+			&.ads-icon.midnight-theme > g {
 				.inner-background {
 					fill: #FFF;
 				}
@@ -55,11 +56,11 @@
 					stroke: #1DAFED;
 				}
 			}
-			&.cookies-and-fingerprints-icon.default > path {
+			&.cookies-and-fingerprints-icon.default > path,
+			&.cookies-and-fingerprints-icon.midnight-theme > path {
 				stroke: #1DAFED;
 				fill: #FFF;
 			}
-		}
 		.trk-cliqz-stat {
 			color: #1dafed;
 			text-transform: capitalize;
