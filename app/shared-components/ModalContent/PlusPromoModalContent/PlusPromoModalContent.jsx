@@ -33,7 +33,7 @@ const PlusPromoModalContent = (props) => {
 			<div className="PlusPromoModal__main-content-container">
 				<div className="PlusPromoModal__header">
 					<div className="title">
-						<div>{t('spring_has_sprung')}</div>
+						<div>{t('spring_is_here')}</div>
 					</div>
 					<div className="description">
 						<div dangerouslySetInnerHTML={{ __html: t('subscribe_pitch_spring') }} />
@@ -48,7 +48,7 @@ const PlusPromoModalContent = (props) => {
 				</div>
 				<div>
 					{!loggedIn &&
-						<span className="PlusPromoModal__link sign-in" onClick={handleSignInClick}>{t('already_subscribed_to_plus_sign_in')}</span>
+						<span className="PlusPromoModal__link sign-in" onClick={handleSignInClick}>{t('subscribe_pitch_sign_in_plus')}</span>
 					}
 					<span className="PlusPromoModal__link turn-promos-off" onClick={handleGoAwayClick}>{t('no_thanks_turn_promos_off')}</span>
 				</div>
@@ -56,7 +56,6 @@ const PlusPromoModalContent = (props) => {
 		</div>
 	);
 };
-
 
 // PropTypes ensure we pass required props of the correct type
 PlusPromoModalContent.propTypes = {
