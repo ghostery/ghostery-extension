@@ -13,7 +13,7 @@
 
 import bugDb from '../../src/classes/BugDb';
 import conf from '../../src/classes/Conf';
-import { isBug } from '../../src/utils/matcher';
+import { isBug, fuzzyUrlMatcher } from '../../src/utils/matcher';
 
 describe('src/utils/matcher.js', () => {
 	beforeAll(done => {
@@ -65,6 +65,9 @@ describe('src/utils/matcher.js', () => {
 				},
 				"path": {
 					"js/tracking.js": 13
+				},
+				"regex": {
+					15: "(googletagservices\\.com\\/.*\\.js)"
 				}
 			}
 		});
@@ -86,16 +89,25 @@ describe('src/utils/matcher.js', () => {
 
 	describe('testing isBug()', () => {
 		describe('testing basic pattern matching', () => {
+			test('host only tracker matching works', () => {
+				expect(isBug('https://gmodules.com/', 'example.com')).toBe(101);
+			});
+
 			test('host+path tracker matching works', () => {
-				return expect(isBug('https://apis.google.com/js/plusone.js', 'example.com')).toBe(1240);
+				expect(isBug('https://apis.google.com/js/plusone.js', 'example.com')).toBe(1240);
 			});
 
 			test('path only tracker matching works', () => {
-				return expect(isBug('https://apis.google.com/js/tracking.js', 'example.com')).toBe(13);
+				expect(isBug('https://apis.google.com/js/tracking.js', 'example.com')).toBe(13);
+			});
+
+			test('regex tracker matching works', () => {
+				expect(isBug('https://apis.google.com/js/tracking.js', 'example.com')).toBe(13);
 			});
 
 			test('pattern matching is case insensitive', () => {
-				return expect(isBug('https://APIS.Google.com/js/Tracking.js', 'example.com')).toBe(13);
+				expect(isBug('https://googletagservices.com/anything/tracker.js', 'example.com')).toBe(15);
+				expect(isBug('https://googletagservices.com/anything/tracker.css', 'example.com')).toBeFalsy();
 			});
 		});
 
@@ -103,15 +115,15 @@ describe('src/utils/matcher.js', () => {
 			const twitter_button = 'http://platform.twitter.com/widgets/';
 
 			test('first confirm Twitter Button is a tracker', () => {
-				return expect(isBug(twitter_button)).toBe(991);
+				expect(isBug(twitter_button)).toBe(991);
 			});
 
 			test('host-only first-party exception', () => {
-				return expect(isBug(twitter_button, 'https://twitter.com/ghostery')).toBeFalsy();
+				expect(isBug(twitter_button, 'https://twitter.com/ghostery')).toBeFalsy();
 			});
 
 			test('same exception on the same page URL as above, but with www', () => {
-				return expect(isBug(twitter_button, 'https://www.twitter.com/ghostery')).toBeFalsy();
+				expect(isBug(twitter_button, 'https://www.twitter.com/ghostery')).toBeFalsy();
 			});
 		});
 
@@ -119,11 +131,11 @@ describe('src/utils/matcher.js', () => {
 			const google_widgets = 'http://gmodules.com/blah';
 
 			test('first confirm Google Widgets is a tracker', () => {
-				return expect(isBug(google_widgets)).toBe(101);
+				expect(isBug(google_widgets)).toBe(101);
 			});
 
 			test('host and exact path exception', () => {
-				return expect(isBug(google_widgets, 'http://google.com/ig')).toBeFalsy();
+				expect(isBug(google_widgets, 'http://google.com/ig')).toBeFalsy();
 			});
 		});
 
@@ -131,12 +143,31 @@ describe('src/utils/matcher.js', () => {
 			const google_plus_one = 'https://apis.google.com/js/plusone.js';
 
 			test('first confirm Google +1 is a tracker', () => {
-				return expect(isBug(google_plus_one)).toBe(1240);
+				expect(isBug(google_plus_one)).toBe(1240);
 			});
 
 			test('host and fuzzy path exception', () => {
-				return expect(isBug(google_plus_one, 'https://chrome.google.com/webstore/detail/ghostery/mlomiejdfkolichcflejclcbmpeaniij?hl=en')).toBeFalsy();
+				expect(isBug(google_plus_one, 'https://chrome.google.com/webstore/detail/ghostery/mlomiejdfkolichcflejclcbmpeaniij?hl=en')).toBeFalsy();
 			});
+		});
+	});
+
+	describe('testing fuzzyUrlMatcher()', () => {
+		const urls = ['google.com', 'ghostery.com/products', 'example.com/page*'];
+
+		test('host match', () => {
+			expect(fuzzyUrlMatcher('https://google.com/analytics', urls)).toBeTruthy();
+			expect(fuzzyUrlMatcher('https://analytics.google.com/something', urls)).toBeFalsy();
+		});
+
+		test('host and path fuzzy match', () => {
+			expect(fuzzyUrlMatcher('https://example.com/page_anything', urls)).toBeTruthy();
+			expect(fuzzyUrlMatcher('https://example.com/p', urls)).toBeFalsy();
+		});
+
+		test('host and path match', () => {
+			expect(fuzzyUrlMatcher('https://ghostery.com/products', urls)).toBeTruthy();
+			expect(fuzzyUrlMatcher('https://ghostery.com/products1', urls)).toBeFalsy();
 		});
 	});
 });

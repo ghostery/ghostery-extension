@@ -81,7 +81,6 @@ export function fuzzyUrlMatcher(url, urls) {
 
 	for (let i = 0; i < urls.length; i++) {
 		const { host, path } = processFpeUrl(urls[i]);
-
 		if (host === tab_host) {
 			if (!path) {
 				log(`[fuzzyUrlMatcher] host (${host}) match`);
@@ -207,7 +206,7 @@ function _matchesRegex(src) {
 }
 
 /**
- * Match a path part of a url agains the path property of database patterns section.
+ * Match a path part of a url against the path property of database patterns section.
  * @private
  *
  * @param {string} 	src_path	path part of an url

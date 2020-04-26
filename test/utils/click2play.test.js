@@ -74,7 +74,7 @@ jest.mock('../../src/classes/Click2PlayDb', () => ({
 		}
 	}
 }));
-jest.mock('../../src/classes/bugDb', () => ({
+jest.mock('../../src/classes/BugDb', () => ({
 	db: {
 		apps: {
 			464: [{
