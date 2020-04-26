@@ -47,6 +47,8 @@ class ForgotPassword extends React.Component {
 		this.setState({ loading: true }, () => {
 			const { email } = this.state;
 			const { locale } = this.props;
+			const isInPanel = locale === 'panel';
+			const isInHub = locale === 'hub';
 
 			// validate the email and password
 			if (!validateEmail(email)) {
@@ -60,18 +62,22 @@ class ForgotPassword extends React.Component {
 			this.props.actions.resetPassword(email)
 				.then((success) => {
 					this.setState({ loading: false });
-					if (success && locale === 'hub') {
-						this.props.history.push('/log-in');
+					if (success && isInHub) {
+						this.navigateToLogIn();
 
 						this.props.actions.setToast({
 							toastMessage: t('banner_check_your_email_title'),
 							toastClass: 'success',
 						});
-					} else if (success && locale === 'panel') {
+					} else if (success && isInPanel) {
 						this.props.history.push('/login');
 					}
 				});
 		});
+	}
+
+	navigateToLogIn = () => {
+		this.props.history.push('/log-in');
 	}
 
 	/**
@@ -81,24 +87,26 @@ class ForgotPassword extends React.Component {
 	render() {
 		const { email, loading, emailError } = this.state;
 		const { locale } = this.props;
+		const isInPanel = locale === 'panel';
+		const isInHub = locale === 'hub';
 		const buttonClasses = ClassNames('button ghostery-button', { loading });
 
 		const ContainerClassNames = ClassNames('', {
-			'forgot-password-panel': locale === 'panel',
-			ForgotPasswordView: locale === 'hub',
+			'forgot-password-panel': isInPanel,
+			ForgotPasswordView: isInHub,
 		});
 		const MessageClassNames = ClassNames('', {
-			'forgot-password-message': locale === 'panel',
-			ForgotPasswordMessage: locale === 'hub',
+			'forgot-password-message': isInPanel,
+			ForgotPasswordMessage: isInHub,
 		});
 		const EmailClassNames = ClassNames('', {
-			'forgot-input-email': locale === 'panel',
-			ForgotPasswordMessage: locale === 'hub',
+			'forgot-input-email': isInPanel,
+			ForgotPasswordMessage: isInHub,
 		});
 
 		const ButtonsContainerClassNames = ClassNames('row', {
-			'buttons-container': locale === 'panel',
-			ForgotPasswordButtonsContainer: locale === 'hub',
+			'buttons-container': isInPanel,
+			ForgotPasswordButtonsContainer: isInHub,
 		});
 		return (
 			<div id={ContainerClassNames}>
@@ -123,9 +131,16 @@ class ForgotPassword extends React.Component {
 							</div>
 							<div className={ButtonsContainerClassNames}>
 								<div className="small-6 columns text-center">
-									<Link to="/login" id="forgot-password-cancel" className="cancel button hollow">
-										{ t('button_cancel') }
-									</Link>
+									{isInPanel && (
+										<Link to="/login" id="forgot-password-cancel" className="cancel button hollow">
+											{t('button_cancel')}
+										</Link>
+									)}
+									{isInHub && (
+										<div id="forgot-password-cancel" className="cancel button hollow" onClick={this.navigateToLogIn}>
+											{t('button_cancel')}
+										</div>
+									)}
 								</div>
 								<div className="small-6 columns text-center">
 									<button type="submit" id="send-button" className={buttonClasses}>
