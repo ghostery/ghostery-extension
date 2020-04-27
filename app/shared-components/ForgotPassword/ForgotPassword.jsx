@@ -46,9 +46,9 @@ class ForgotPassword extends React.Component {
 		e.preventDefault();
 		this.setState({ loading: true }, () => {
 			const { email } = this.state;
-			const { locale } = this.props;
-			const isInPanel = locale === 'panel';
-			const isInHub = locale === 'hub';
+			const { place } = this.props;
+			const isInPanel = place === 'panel';
+			const isInHub = place === 'hub';
 
 			// validate the email and password
 			if (!validateEmail(email)) {
@@ -86,9 +86,9 @@ class ForgotPassword extends React.Component {
 	 */
 	render() {
 		const { email, loading, emailError } = this.state;
-		const { locale } = this.props;
-		const isInPanel = locale === 'panel';
-		const isInHub = locale === 'hub';
+		const { place } = this.props;
+		const isInPanel = place === 'panel';
+		const isInHub = place === 'hub';
 		const buttonClasses = ClassNames('button ghostery-button', { loading });
 
 		const ContainerClassNames = ClassNames('', {
