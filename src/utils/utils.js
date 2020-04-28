@@ -540,7 +540,7 @@ export function fetchLocalJSONResource(url) {
 }
 
 /**
- * Inject content scripts and CSS into a given tabID.
+ * Inject content scripts and CSS into a given tabID (top-level frame only).
  * Note: Chrome 61 blocks content scripts on the new tab page (_/chrome/newtab). Be
  * sure to check the current URL before calling this function, otherwise Chrome will throw
  * a permission error
