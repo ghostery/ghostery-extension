@@ -845,7 +845,7 @@ function onMessageHandler(request, sender, callback) {
 		return true;
 	}
 	if (name === 'account.openSubscriptionPage') {
-		utils.openNewTab({ url: `${globals.CHECKOUT_BASE_URL}/subscription`, become_active: true });
+		utils.openNewTab({ url: `${globals.ACCOUNT_BASE_URL}/subscription`, become_active: true });
 		return false;
 	}
 	if (name === 'account.openCheckoutPage') {
