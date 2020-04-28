@@ -113,14 +113,14 @@ class ForgotPassword extends React.Component {
 		return (
 			<div id={ContainerClassNames}>
 				<div className="row align-center">
-					<form onSubmit={this.handleSubmit}>
+					<form className="ForgotPasswordForm" onSubmit={this.handleSubmit}>
 						{panel && (
 							<h4 id={MessageClassNames}>
 								{t('forgot_password_message')}
 							</h4>
 						)}
 						{hub && (
-							<h3 id={MessageClassNames}>
+							<h3 id={MessageClassNames} className="text-center">
 								{t('forgot_password_message')}
 							</h3>
 						)}
