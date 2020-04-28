@@ -46,7 +46,7 @@ const Hub = () => (
 		<Route exact path="/rewards" component={RewardsView} />
 		<Route exact path="/products" component={ProductsView} />
 		<Route exact path="/create-account" component={CreateAccountView} />
-		<Route exact path="/forgot-password" render={() => <ForgotPasswordView locale="hub" />} />
+		<Route exact path="/forgot-password" render={() => <ForgotPasswordView hub />} />
 		<Route exact path="/log-in" component={LogInView} />
 	</AppView>
 );
