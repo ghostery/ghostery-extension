@@ -7,6 +7,7 @@
 	"version_name": "8.5.0",
 	"default_locale": "en",
 	"description": "__MSG_short_description__",
+	"debug": true,
 	"log": true,
 	"icons": {
 		"16": "app/images/icon16.png",
