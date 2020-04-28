@@ -694,7 +694,7 @@ class EventHandlers {
 				};
 			}
 		} else if (fromRedirect) {
-			const url = buildRedirectC2P(requestId, globals.REDIRECT_MAP.get(requestId), appId);
+			const url = buildRedirectC2P(globals.REDIRECT_MAP.get(requestId), appId);
 			setTimeout(() => {
 				chrome.tabs.update(details.tabId, { url });
 			}, 0);
@@ -878,7 +878,7 @@ class EventHandlers {
 	 *
 	 */
 	_resetNotifications() {
-		globals.C2P_LOADED = globals.NOTIFICATIONS_LOADED = false; // eslint-disable-line no-multi-assign
+		globals.NOTIFICATIONS_LOADED = false;
 	}
 }
 

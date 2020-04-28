@@ -5,6 +5,7 @@
 + Add password reset link to Intro Hub (#507)
 + Updated in-app promo modals (#509)
 + Fixes bug in site-specific tracker white-listing (#522, Fixes #519)
++ Improved Click2Play Script Injection (#528)
 + Standardize all Ghostery staging and production global URLs (#511)
 + Updated Rewards UI (#521)
 + Update legacy unit tests (#526)
