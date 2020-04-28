@@ -101,11 +101,10 @@ class ForgotPassword extends React.Component {
 		});
 		const EmailClassNames = ClassNames('', {
 			'forgot-input-email': panel,
-			ForgotPasswordMessage: hub,
+			ForgotPasswordEmail: hub,
 		});
 		const ButtonsContainerClassNames = ClassNames('row', {
 			'buttons-container': panel,
-			ForgotPasswordButtonsContainer: hub,
 		});
 		const loaderClassNames = ClassNames('loader', {
 			success: hub
