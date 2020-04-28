@@ -46,9 +46,8 @@ class ForgotPassword extends React.Component {
 		e.preventDefault();
 		this.setState({ loading: true }, () => {
 			const { email } = this.state;
-			const { place } = this.props;
-			const isInPanel = place === 'panel';
-			const isInHub = place === 'hub';
+			const { hub } = this.props;
+			const panel = !hub;
 
 			// validate the email and password
 			if (!validateEmail(email)) {
@@ -62,14 +61,14 @@ class ForgotPassword extends React.Component {
 			this.props.actions.resetPassword(email)
 				.then((success) => {
 					this.setState({ loading: false });
-					if (success && isInHub) {
+					if (success && hub) {
 						this.navigateToLogIn();
 
 						this.props.actions.setToast({
 							toastMessage: t('banner_check_your_email_title'),
 							toastClass: 'success',
 						});
-					} else if (success && isInPanel) {
+					} else if (success && panel) {
 						this.props.history.push('/login');
 					}
 				});
@@ -86,71 +85,79 @@ class ForgotPassword extends React.Component {
 	 */
 	render() {
 		const { email, loading, emailError } = this.state;
-		const { place } = this.props;
-		const isInPanel = place === 'panel';
-		const isInHub = place === 'hub';
-		const buttonClasses = ClassNames('button ghostery-button', { loading });
-
+		const { hub } = this.props;
+		const panel = !hub;
+		const buttonClasses = ClassNames('button ghostery-button', {
+			loading,
+			success: hub
+		});
 		const ContainerClassNames = ClassNames('', {
-			'forgot-password-panel': isInPanel,
-			ForgotPasswordView: isInHub,
+			'forgot-password-panel': panel,
+			ForgotPasswordView: hub,
 		});
 		const MessageClassNames = ClassNames('', {
-			'forgot-password-message': isInPanel,
-			ForgotPasswordMessage: isInHub,
+			'forgot-password-message': panel,
+			ForgotPasswordMessage: hub,
 		});
 		const EmailClassNames = ClassNames('', {
-			'forgot-input-email': isInPanel,
-			ForgotPasswordMessage: isInHub,
+			'forgot-input-email': panel,
+			ForgotPasswordMessage: hub,
 		});
-
 		const ButtonsContainerClassNames = ClassNames('row', {
-			'buttons-container': isInPanel,
-			ForgotPasswordButtonsContainer: isInHub,
+			'buttons-container': panel,
+			ForgotPasswordButtonsContainer: hub,
+		});
+		const loaderClassNames = ClassNames('loader', {
+			success: hub
 		});
 		return (
 			<div id={ContainerClassNames}>
 				<div className="row align-center">
-					<div className="small-11 medium-8 columns">
-						<form onSubmit={this.handleSubmit}>
+					<form onSubmit={this.handleSubmit}>
+						{panel && (
 							<h4 id={MessageClassNames}>
-								{ t('forgot_password_message') }
+								{t('forgot_password_message')}
 							</h4>
-							<div id="forgot-email" className={(emailError ? 'panel-error invalid-email' : '')}>
-								<label htmlFor={EmailClassNames}>
-									{ t('email_colon') }
-									<span className="asterisk">*</span>
-									<input onChange={this.handleInputChange} value={email} id={EmailClassNames} type="text" name="email" pattern=".{1,}" autoComplete="off" required />
-								</label>
-								<p className="invalid-email warning">
-									{ t('invalid_email_forgot') }
-								</p>
-								<p className="not-found-error warning">
-									{ t('error_email_forgot') }
-								</p>
+						)}
+						{hub && (
+							<h3 id={MessageClassNames}>
+								{t('forgot_password_message')}
+							</h3>
+						)}
+						<div id="forgot-email" className={(emailError ? 'panel-error invalid-email' : '')}>
+							<label htmlFor={EmailClassNames}>
+								{t('email_colon')}
+								<span className="asterisk">*</span>
+								<input onChange={this.handleInputChange} value={email} id={EmailClassNames} type="text" name="email" pattern=".{1,}" autoComplete="off" required />
+							</label>
+							<p className="invalid-email warning">
+								{t('invalid_email_forgot')}
+							</p>
+							<p className="not-found-error warning">
+								{t('error_email_forgot')}
+							</p>
+						</div>
+						<div className={ButtonsContainerClassNames}>
+							<div className="small-6 columns text-center">
+								{panel && (
+									<Link to="/login" id="forgot-password-cancel" className="cancel button hollow">
+										{t('button_cancel')}
+									</Link>
+								)}
+								{hub && (
+									<div id="forgot-password-cancel" className="cancel button hollow success" onClick={this.navigateToLogIn}>
+										{t('button_cancel')}
+									</div>
+								)}
 							</div>
-							<div className={ButtonsContainerClassNames}>
-								<div className="small-6 columns text-center">
-									{isInPanel && (
-										<Link to="/login" id="forgot-password-cancel" className="cancel button hollow">
-											{t('button_cancel')}
-										</Link>
-									)}
-									{isInHub && (
-										<div id="forgot-password-cancel" className="cancel button hollow" onClick={this.navigateToLogIn}>
-											{t('button_cancel')}
-										</div>
-									)}
-								</div>
-								<div className="small-6 columns text-center">
-									<button type="submit" id="send-button" className={buttonClasses}>
-										<span className="title">{ t('send_button_label') }</span>
-										<span className="loader" />
-									</button>
-								</div>
+							<div className="small-6 columns text-center">
+								<button type="submit" id="send-button" className={buttonClasses}>
+									<span className="title">{t('send_button_label')}</span>
+									<span className={loaderClassNames} />
+								</button>
 							</div>
-						</form>
-					</div>
+						</div>
+					</form>
 				</div>
 			</div>
 		);
