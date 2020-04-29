@@ -73,24 +73,24 @@ const initialState = {
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case UPDATE_PANEL_DATA: {
-			return Object.assign({}, state, action.data, { initialized: true });
+			return { ...state, ...action.data, initialized: true };
 		}
 		case SET_THEME: {
 			const { name, css } = action.data;
 			setTheme(document, name, { themeData: { [name]: { name, css } } });
-			return Object.assign({}, state, { current_theme: name });
+			return { ...state, current_theme: name };
 		}
 		case CLEAR_THEME: {
 			setTheme(document, initialState.current_theme);
-			return Object.assign({}, state, { current_theme: initialState.current_theme });
+			return { ...state, current_theme: initialState.current_theme };
 		}
 		case SHOW_NOTIFICATION: {
 			const updated = _showNotification(state, action);
-			return Object.assign({}, state, updated);
+			return { ...state, ...updated };
 		}
 		case CLOSE_NOTIFICATION: {
 			const updated = _closeNotification(state, action);
-			return Object.assign({}, state, updated);
+			return { ...state, ...updated };
 		}
 		case LOGIN_SUCCESS: {
 			const notificationAction = {
@@ -101,9 +101,7 @@ export default (state = initialState, action) => {
 				}
 			};
 			const updated = _showNotification(state, notificationAction);
-			return Object.assign({}, state, updated, {
-				loggedIn: true,
-			});
+			return { ...state, ...updated, loggedIn: true };
 		}
 		case LOGIN_FAIL: {
 			const { errors } = action.payload;
@@ -126,7 +124,7 @@ export default (state = initialState, action) => {
 				}
 			};
 			const updated = _showNotification(state, notificationAction);
-			return Object.assign({}, state, updated);
+			return { ...state, ...updated };
 		}
 		case REGISTER_SUCCESS: {
 			const { email } = action.payload;
@@ -138,9 +136,7 @@ export default (state = initialState, action) => {
 				}
 			};
 			const updated = _showNotification(state, notificationAction);
-			return Object.assign({}, state, updated, {
-				email
-			});
+			return { ...state, ...updated, email };
 		}
 		case REGISTER_FAIL: {
 			const { errors } = action.payload;
@@ -165,11 +161,11 @@ export default (state = initialState, action) => {
 				}
 			};
 			const updated = _showNotification(state, notificationAction);
-			return Object.assign({}, state, updated);
+			return { ...state, ...updated };
 		}
 		case LOGOUT_SUCCESS: {
 			setTheme(document);
-			return Object.assign({}, state, { current_theme: initialState.current_theme });
+			return { ...state, current_theme: initialState.current_theme };
 		}
 		// @TODO?
 		// case LOGOUT_SUCCESS: {
@@ -191,7 +187,7 @@ export default (state = initialState, action) => {
 				}
 			};
 			const updated = _showNotification(state, notificationAction);
-			return Object.assign({}, state, updated);
+			return { ...state, ...updated };
 		}
 		case RESET_PASSWORD_FAIL: {
 			const { errors } = action.payload;
@@ -214,7 +210,7 @@ export default (state = initialState, action) => {
 				}
 			};
 			const updated = _showNotification(state, notificationAction);
-			return Object.assign({}, state, updated);
+			return { ...state, ...updated };
 		}
 		case TOGGLE_CLIQZ_FEATURE: {
 			let pingName = '';
@@ -236,13 +232,13 @@ export default (state = initialState, action) => {
 					sendMessage('ping', pingName);
 				}
 			});
-			return Object.assign({}, state, { [action.data.featureName]: !action.data.isEnabled });
+			return { ...state, [action.data.featureName]: !action.data.isEnabled };
 		}
 		case TOGGLE_EXPANDED: {
 			sendMessage('setPanelData', { is_expanded: !state.is_expanded });
 			sendMessage('ping', state.is_expanded ? 'viewchange_from_expanded' : 'viewchange_from_detailed');
 
-			return Object.assign({}, state, { is_expanded: !state.is_expanded });
+			return { ...state, is_expanded: !state.is_expanded };
 		}
 		case TOGGLE_EXPERT: {
 			sendMessage('setPanelData', { is_expert: !state.is_expert });
@@ -257,22 +253,22 @@ export default (state = initialState, action) => {
 				pingName = 'viewchange_from_simple';
 			}
 			sendMessage('ping', pingName);
-			return Object.assign({}, state, { is_expert: !state.is_expert });
+			return { ...state, is_expert: !state.is_expert };
 		}
 		case UPDATE_NOTIFICATION_STATUS: {
 			const updated = _updateNotificationStatus(state, action);
-			return Object.assign({}, state, updated);
+			return { ...state, ...updated };
 		}
 		case TOGGLE_CHECKBOX: {
 			if (action.data.event === 'enable_offers') {
 				const enable_offers = action.data.checked;
-				return Object.assign({}, state, { enable_offers });
+				return { ...state, enable_offers };
 			}
 			return state;
 		}
 		case TOGGLE_OFFERS_ENABLED: {
 			const enable_offers = action.data.enabled;
-			return Object.assign({}, state, { enable_offers });
+			return { ...state, enable_offers };
 		}
 		case TOGGLE_PROMO_MODAL: {
 			return {

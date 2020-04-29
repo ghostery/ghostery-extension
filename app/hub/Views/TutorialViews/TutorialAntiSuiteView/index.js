@@ -24,7 +24,7 @@ import { setTutorialNavigation } from '../../TutorialView/TutorialViewActions';
  * @return {function}        this function returns a plain object, which will be merged into the component's props
  * @memberof HubContainers
  */
-const mapStateToProps = state => Object.assign({}, state.tutorial);
+const mapStateToProps = state => ({ ...state.tutorial });
 
 /**
  * Bind the component's action creators using Redux's bindActionCreators.
@@ -33,7 +33,7 @@ const mapStateToProps = state => Object.assign({}, state.tutorial);
  * @memberof TutorialContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign({}, TutorialAntiSuiteViewActions, { setTutorialNavigation }), dispatch),
+	actions: bindActionCreators({ ...TutorialAntiSuiteViewActions, setTutorialNavigation }, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TutorialAntiSuiteViewContainer);

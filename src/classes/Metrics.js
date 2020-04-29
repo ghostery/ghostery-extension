@@ -132,13 +132,13 @@ class Metrics {
 		getActiveTab((tab) => {
 			const tabUrl = tab && tab.url ? tab.url : '';
 
-			this._brokenPageWatcher = Object.assign({}, {
+			this._brokenPageWatcher = {
 				on: true,
 				triggerId,
 				triggerTime: Date.now(),
 				timeoutId: setTimeout(this._clearBrokenPageWatcherTimeout.bind(this), BROKEN_PAGE_METRICS_THRESHOLD),
-				url: tabUrl,
-			});
+				url: tabUrl
+			};
 		});
 	}
 
@@ -149,13 +149,13 @@ class Metrics {
 	_unplugBrokenPageWatcher() {
 		this._clearBrokenPageWatcherTimeout();
 
-		this._brokenPageWatcher = Object.assign({}, {
+		this._brokenPageWatcher = {
 			on: false,
 			triggerId: '',
 			triggerTime: '',
 			timeoutId: null,
-			url: '',
-		});
+			url: ''
+		};
 	}
 
 	_clearBrokenPageWatcherTimeout() {

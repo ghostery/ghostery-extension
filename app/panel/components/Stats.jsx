@@ -156,7 +156,7 @@ class Stats extends React.Component {
 		if (!this._isPlus(this.props)) {
 			return;
 		}
-		const state = Object.assign({}, this.state);
+		const state = { ...this.state };
 		const { selection } = state;
 		if (event.currentTarget.id !== selection.view) {
 			selection.view = event.currentTarget.id;
@@ -180,7 +180,7 @@ class Stats extends React.Component {
 		if (!this._isPlus(this.props)) {
 			return;
 		}
-		const state = Object.assign({}, this.state);
+		const state = { ...this.state };
 		const { selection } = state;
 		if (event.currentTarget.id !== selection.type) {
 			const lastType = selection.type;
@@ -230,7 +230,7 @@ class Stats extends React.Component {
 		if (!this._isPlus(this.props)) {
 			return;
 		}
-		const state = Object.assign({}, this.state);
+		const state = { ...this.state };
 		const data = state.selection.type === 'daily' ? state.dailyData : state.monthlyData;
 		if (e.target.id === 'stats-forward') {
 			state.selection.currentIndex += 6;
@@ -343,7 +343,7 @@ class Stats extends React.Component {
 	 * Save it in component's state
 	 */
 	_init = () => {
-		const state = Object.assign({}, this.state);
+		const state = { ...this.state };
 		this._getAllStats().then((allData) => {
 			if (Array.isArray(allData)) {
 				if (allData.length === 0) {
@@ -497,7 +497,7 @@ class Stats extends React.Component {
 	 * Determine data selection for Stats Graph according to parameters in state
 	 * Save it in component's state
 	 */
-	_determineSelectionData = (state = Object.assign({}, this.state)) => {
+	_determineSelectionData = (state = ({ ...this.state })) => {
 		const {
 			dailyData, monthlyData, cumulativeMonthlyData, selection
 		} = state;

@@ -34,7 +34,7 @@ import { setSetupComplete } from '../SetupViews/SetupDoneView/SetupDoneViewActio
  * @return {function}        this function returns a plain object, which will be merged into the component's props
  * @memberof HubContainers
  */
-const mapStateToProps = state => Object.assign({}, state.setup, state.account);
+const mapStateToProps = state => ({ ...state.setup, ...state.account });
 
 /**
  * Bind the component's action creators using Redux's bindActionCreators.
@@ -43,15 +43,16 @@ const mapStateToProps = state => Object.assign({}, state.setup, state.account);
  * @memberof SetupContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign({}, SetupViewActions, {
+	actions: bindActionCreators({
+		...SetupViewActions,
 		setBlockingPolicy,
 		setAntiTracking,
 		setAdBlock,
 		setSmartBlocking,
 		setGhosteryRewards,
 		setHumanWeb,
-		setSetupComplete,
-	}), dispatch),
+		setSetupComplete
+	}, dispatch),
 });
 
 export const reducer = SetupViewReducer;

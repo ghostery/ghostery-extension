@@ -66,17 +66,18 @@ export default (state = initialState, action) => {
 	switch (action.type) {
 		case UPDATE_SUMMARY_DATA:
 		case UPDATE_CLIQZ_MODULE_DATA: {
-			return Object.assign({}, state, action.data);
+			return { ...state, ...action.data };
 		}
 		case UPDATE_GHOSTERY_PAUSED: {
-			return Object.assign({}, state, { paused_blocking: action.data.ghosteryPaused, paused_blocking_timeout: action.data.time });
+			return { ...state, paused_blocking: action.data.ghosteryPaused, paused_blocking_timeout: action.data.time };
 		}
 		case UPDATE_SITE_POLICY: {
 			const updated = _updateSitePolicy(state, action);
-			return Object.assign({}, state, updated);
+			return { ...state, ...updated };
 		}
 		case UPDATE_TRACKER_COUNTS: {
-			return Object.assign({}, state, {
+			return {
+				...state,
 				trackerCounts: {
 					blocked: action.data.num_blocked,
 					allowed: action.data.num_total - action.data.num_blocked,
@@ -84,8 +85,8 @@ export default (state = initialState, action) => {
 					ssAllowed: action.data.num_ss_allowed,
 					sbBlocked: action.data.num_sb_blocked,
 					sbAllowed: action.data.num_sb_allowed,
-				},
-			});
+				}
+			};
 		}
 		default: return state;
 	}

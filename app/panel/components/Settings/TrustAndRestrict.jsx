@@ -43,7 +43,7 @@ class TrustAndRestrict extends React.Component {
 	 */
 	setActivePane(event) {
 		this.showWarning('');
-		const newMenuState = Object.assign({}, this.state.menu);
+		const newMenuState = { ...this.state.menu };
 		Object.keys(newMenuState).forEach((key) => {
 			if (key === event.currentTarget.id) {
 				newMenuState[key] = true;

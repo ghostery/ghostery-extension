@@ -131,7 +131,7 @@ export default class Panel extends React.Component {
 	setGlobalState = (updated) => {
 		const newState = {};
 		Object.keys(updated).forEach((key) => {
-			newState[key] = Object.assign({}, this.state[key], updated[key]);
+			newState[key] = { ...this.state[key], ...updated[key] };
 		});
 
 		this.setState(newState);

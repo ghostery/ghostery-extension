@@ -63,44 +63,44 @@ const initialState = {
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case UPDATE_BLOCKING_DATA: {
-			return Object.assign({}, state, action.data);
+			return { ...state, ...action.data };
 		}
 		case FILTER_TRACKERS: {
 			if (state.filter.type === action.data.type && state.filter.name === action.data.name) {
 				// prevent re-render if filter hasn't changed
 				return state;
 			}
-			return Object.assign({}, state, { filter: action.data });
+			return { ...state, filter: action.data };
 		}
 		case UPDATE_BLOCK_ALL_TRACKERS: {
 			const updated = updateBlockAllTrackers(state, action);
-			return Object.assign({}, state, updated);
+			return { ...state, ...updated };
 		}
 		case UPDATE_CATEGORIES: {
-			return Object.assign({}, state, { categories: action.data });
+			return { ...state, categories: action.data };
 		}
 		case UPDATE_UNKNOWN_CATEGORY_HIDE: {
-			return Object.assign({}, state, { unknownCategory: action.data });
+			return { ...state, unknownCategory: action.data };
 		}
 		case UPDATE_CATEGORY_BLOCKED: {
 			const updated = updateCategoryBlocked(state, action);
-			return Object.assign({}, state, updated);
+			return { ...state, ...updated };
 		}
 		case UPDATE_TRACKER_BLOCKED: {
 			const updated = updateTrackerBlocked(state, action);
-			return Object.assign({}, state, updated);
+			return { ...state, ...updated };
 		}
 		case TOGGLE_EXPAND_ALL: {
 			const updated = toggleExpandAll(state, action);
-			return Object.assign({}, state, updated);
+			return { ...state, ...updated };
 		}
 		case UPDATE_TRACKER_TRUST_RESTRICT: {
 			const updated = _updateTrackerTrustRestrict(state, action);
-			return Object.assign({}, state, updated);
+			return { ...state, ...updated };
 		}
 		case UPDATE_CLIQZ_MODULE_WHITELIST: {
 			const unknownCategory = _updateCliqzModuleWhitelist(state, action);
-			return Object.assign({}, state, { unknownCategory });
+			return { ...state, unknownCategory };
 		}
 		case UPDATE_CLIQZ_MODULE_DATA:
 		case UPDATE_SUMMARY_DATA: {
@@ -112,10 +112,10 @@ export default (state = initialState, action) => {
 					trackerCount: antiTracking.trackerCount + adBlock.trackerCount,
 					unknownTrackerCount: antiTracking.unknownTrackerCount + adBlock.unknownTrackerCount,
 					unknownTrackers: Array.from(new Set(antiTracking.unknownTrackers.concat(adBlock.unknownTrackers))),
-					whitelistedUrls: Object.assign({}, antiTracking.whitelistedUrls, adBlock.whitelistedUrls),
+					whitelistedUrls: { ...antiTracking.whitelistedUrls, ...adBlock.whitelistedUrls },
 					hide: state.unknownCategory.hide,
 				};
-				return Object.assign({}, state, { unknownCategory });
+				return { ...state, unknownCategory };
 			}
 			return state;
 		}

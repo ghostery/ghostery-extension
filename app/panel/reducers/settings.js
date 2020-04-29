@@ -58,60 +58,61 @@ const initialState = {
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case GET_SETTINGS_DATA: {
-			return Object.assign({}, state, action.data);
+			return { ...state, ...action.data };
 		}
 		case EXPORT_SETTINGS: {
 			const updated = _exportSettings(state, action);
-			return Object.assign({}, state, updated);
+			return { ...state, ...updated };
 		}
 		case IMPORT_SETTINGS_DIALOG: {
 			const updated = _importSettingsDialog(state, action);
-			return Object.assign({}, state, updated);
+			return { ...state, ...updated };
 		}
 		case IMPORT_SETTINGS_NATIVE: {
 			const updated = _importSettingsNative(state, action);
-			return Object.assign({}, state, updated);
+			return { ...state, ...updated };
 		}
 		case IMPORT_SETTINGS_FAILED: {
-			return Object.assign({}, state, {
+			return {
+				...state,
 				importResultText: t('settings_import_file_error'),
-				actionSuccess: false,
-			});
+				actionSuccess: false
+			};
 		}
 		case SELECT_ITEM: {
 			const updated = _updateSelectValue(state, action);
-			return Object.assign({}, state, updated);
+			return { ...state, ...updated };
 		}
 		case TOGGLE_CHECKBOX: {
 			const updated = _updateSettingsCheckbox(state, action);
-			return Object.assign({}, state, updated);
+			return { ...state, ...updated };
 		}
 		case UPDATE_DATABASE: {
 			const updated = _updateTrackerDatabase(state, action);
-			return Object.assign({}, state, updated);
+			return { ...state, ...updated };
 		}
 
 		case UPDATE_SETTINGS_BLOCK_ALL_TRACKERS: {
 			const updated = updateBlockAllTrackers(state, action);
-			return Object.assign({}, state, updated);
+			return { ...state, ...updated };
 		}
 		case UPDATE_SETTINGS_CATEGORY_BLOCKED: {
 			const updated = updateCategoryBlocked(state, action);
-			return Object.assign({}, state, updated);
+			return { ...state, ...updated };
 		}
 		case SETTINGS_TOGGLE_EXPAND_ALL: {
 			const updated = toggleExpandAll(state, action);
-			return Object.assign({}, state, updated);
+			return { ...state, ...updated };
 		}
 		case UPDATE_SETTINGS_TRACKER_BLOCKED: {
 			const updated = updateTrackerBlocked(state, action);
-			return Object.assign({}, state, updated);
+			return { ...state, ...updated };
 		} case SETTINGS_UPDATE_SEARCH_VALUE: {
 			const updated = _updateSearchValue(state, action);
-			return Object.assign({}, state, updated);
+			return { ...state, ...updated };
 		} case SETTINGS_FILTER: {
 			const updated = _filter(state, action);
-			return Object.assign({}, state, updated);
+			return { ...state, ...updated };
 		}
 
 		default: return state;

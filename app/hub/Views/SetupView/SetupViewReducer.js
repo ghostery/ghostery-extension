@@ -32,9 +32,7 @@ function SetupViewReducer(state = initialState, action) {
 		case GET_SETUP_SHOW_WARNING_OVERRIDE: // Same as SET_SETUP_SHOW_WARNING_OVERRIDE
 		case SET_SETUP_SHOW_WARNING_OVERRIDE: {
 			const { setup_show_warning_override } = action.data;
-			return Object.assign({}, state, {
-				setup: Object.assign({}, state.setup, { setup_show_warning_override }),
-			});
+			return { ...state, setup: { ...state.setup, setup_show_warning_override } };
 		}
 		case INIT_SETUP_PROPS: {
 			const {
@@ -56,7 +54,8 @@ function SetupViewReducer(state = initialState, action) {
 				textNext,
 				textDone,
 			} = navigation;
-			return Object.assign({}, state, {
+			return {
+				...state,
 				setup: {
 					navigation: {
 						activeIndex,
@@ -74,8 +73,8 @@ function SetupViewReducer(state = initialState, action) {
 					enable_smart_block,
 					enable_ghostery_rewards,
 					enable_human_web,
-				},
-			});
+				}
+			};
 		}
 		case SET_SETUP_NAVIGATION: {
 			const {
@@ -87,8 +86,10 @@ function SetupViewReducer(state = initialState, action) {
 				textNext,
 				textDone,
 			} = action.data;
-			return Object.assign({}, state, {
-				setup: Object.assign({}, state.setup, {
+			return {
+				...state,
+				setup: {
+					...state.setup,
 					navigation: {
 						activeIndex,
 						hrefPrev,
@@ -97,51 +98,39 @@ function SetupViewReducer(state = initialState, action) {
 						textPrev,
 						textNext,
 						textDone,
-					},
-				}),
-			});
+					}
+				}
+			};
 		}
 
 		// Setup Blocking View
 		case SET_BLOCKING_POLICY: {
 			const { blockingPolicy } = action.data;
-			return Object.assign({}, state, {
-				setup: Object.assign({}, state.setup, { blockingPolicy }),
-			});
+			return { ...state, setup: { ...state.setup, blockingPolicy } };
 		}
 
 		// Setup Anti-Suite View
 		case SET_ANTI_TRACKING: {
 			const { enable_anti_tracking } = action.data;
-			return Object.assign({}, state, {
-				setup: Object.assign({}, state.setup, { enable_anti_tracking }),
-			});
+			return { ...state, setup: { ...state.setup, enable_anti_tracking } };
 		}
 		case SET_AD_BLOCK: {
 			const { enable_ad_block } = action.data;
-			return Object.assign({}, state, {
-				setup: Object.assign({}, state.setup, { enable_ad_block }),
-			});
+			return { ...state, setup: { ...state.setup, enable_ad_block } };
 		}
 		case SET_SMART_BLOCK: {
 			const { enable_smart_block } = action.data;
-			return Object.assign({}, state, {
-				setup: Object.assign({}, state.setup, { enable_smart_block }),
-			});
+			return { ...state, setup: { ...state.setup, enable_smart_block } };
 		}
 		case SET_GHOSTERY_REWARDS: {
 			const { enable_ghostery_rewards } = action.data;
-			return Object.assign({}, state, {
-				setup: Object.assign({}, state.setup, { enable_ghostery_rewards }),
-			});
+			return { ...state, setup: { ...state.setup, enable_ghostery_rewards } };
 		}
 
 		// Setup Human Web View
 		case SET_HUMAN_WEB: {
 			const { enable_human_web } = action.data;
-			return Object.assign({}, state, {
-				setup: Object.assign({}, state.setup, { enable_human_web }),
-			});
+			return { ...state, setup: { ...state.setup, enable_human_web } };
 		}
 
 		default: return state;

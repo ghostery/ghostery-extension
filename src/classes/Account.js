@@ -490,7 +490,7 @@ class Account {
 			conf.account.themeData = {};
 		}
 		const { name } = data;
-		conf.account.themeData[name] = Object.assign({ timestamp: Date.now() }, data);
+		conf.account.themeData[name] = { timestamp: Date.now(), ...data };
 		dispatcher.trigger('conf.save.account');
 	}
 

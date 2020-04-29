@@ -24,7 +24,7 @@ import { log } from '../../../src/utils/common';
 export function updateObject(obj, key, value) {
 	const output = {};
 	output[key] = value;
-	return Object.assign({}, obj, output);
+	return { ...obj, ...output };
 }
 
 /**

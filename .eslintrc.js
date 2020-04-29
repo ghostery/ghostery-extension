@@ -72,7 +72,7 @@ module.exports = {
 		'no-unused-vars': [1],
 		'no-useless-escape': [1],
 		'operator-linebreak': [0],
-		'prefer-object-spread': [0], // TODO: enable this check
+		'prefer-object-spread': ['error'],
 		'space-before-function-paren': [2, 'never'],
 		'template-curly-spacing': [0],
 

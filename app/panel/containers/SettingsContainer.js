@@ -26,7 +26,8 @@ import { sendSignal } from '../actions/RewardsActions';
  * @todo  We are not using ownProps, so we better not specify it explicitly,
  * in this case it won't be passed by React (see https://github.com/reactjs/react-redux/blob/master/docs/api.md).
  */
-const mapStateToProps = state => Object.assign({}, state.settings, {
+const mapStateToProps = state => ({
+	...state.settings,
 	user: state.account.user,
 	is_expanded: state.panel.is_expanded,
 	language: state.panel.language,
@@ -37,7 +38,7 @@ const mapStateToProps = state => Object.assign({}, state.settings, {
 	site_blacklist: state.summary.site_blacklist,
 	site_whitelist: state.summary.site_whitelist,
 	trackers_banner_status: state.panel.trackers_banner_status,
-	trackerCounts: state.summary.trackerCounts,
+	trackerCounts: state.summary.trackerCounts
 });
 /**
  * Bind Settings view component action creators using Redux's bindActionCreators

@@ -247,14 +247,15 @@ class PanelData {
 			site_specific_blocks, site_specific_unblocks, toggle_individual_trackers,
 		} = conf;
 
-		return Object.assign({}, {
+		return {
 			expand_all_trackers,
 			selected_app_ids,
 			show_tracker_urls,
 			site_specific_blocks,
 			site_specific_unblocks,
-			toggle_individual_trackers
-		}, this._getDynamicBlockingData());
+			toggle_individual_trackers,
+			...this._getDynamicBlockingData()
+		};
 	}
 
 	/**
@@ -336,7 +337,7 @@ class PanelData {
 			trackers_banner_status,
 		} = conf;
 
-		return Object.assign({}, {
+		return {
 			current_theme,
 			enable_ad_block,
 			enable_anti_tracking,
@@ -350,7 +351,8 @@ class PanelData {
 			reload_banner_status,
 			tab_id,
 			trackers_banner_status,
-		}, this._getDynamicPanelData(tab_id));
+			...this._getDynamicPanelData(tab_id)
+		};
 	}
 
 	/**
@@ -386,19 +388,17 @@ class PanelData {
 			settings_last_exported, settings_last_imported
 		} = conf;
 
-		return Object.assign(
-			{},
-			{
-				bugs_last_updated,
-				categories: this._buildGlobalCategories(),
-				language, // required for the setup page that does not have access to panelView data
-				new_app_ids,
-				offer_human_web: true,
-				settings_last_exported,
-				settings_last_imported,
-			},
-			this._getUserSettingsForSettingsView(conf),
-		);
+		return {
+
+			bugs_last_updated,
+			categories: this._buildGlobalCategories(),
+			language, // required for the setup page that does not have access to panelView data
+			new_app_ids,
+			offer_human_web: true,
+			settings_last_exported,
+			settings_last_imported,
+			...this._getUserSettingsForSettingsView(conf),
+		};
 	}
 
 	/**
@@ -412,20 +412,18 @@ class PanelData {
 		const { paused_blocking, paused_blocking_timeout } = globals.SESSION;
 		const { site_blacklist, site_whitelist } = conf;
 
-		return Object.assign(
-			{},
-			{
-				paused_blocking,
-				paused_blocking_timeout,
-				site_blacklist,
-				site_whitelist,
-				pageHost,
-				pageUrl: url || '',
-				siteNotScanned: !this._trackerList || false,
-				sitePolicy: policy.getSitePolicy(url) || false,
-			},
-			this._getDynamicSummaryData()
-		);
+		return {
+
+			paused_blocking,
+			paused_blocking_timeout,
+			site_blacklist,
+			site_whitelist,
+			pageHost,
+			pageUrl: url || '',
+			siteNotScanned: !this._trackerList || false,
+			sitePolicy: policy.getSitePolicy(url) || false,
+			...this._getDynamicSummaryData()
+		};
 	}
 
 	/**
