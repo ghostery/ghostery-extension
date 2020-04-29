@@ -40,7 +40,8 @@ const { sendMessage, sendMessageInPromise } = msg;
 	 * but another one, down the chain of redirects - is. It is loaded
 	 * by app/blocked_redirect.html when we navigate browser to it.
 	 */
-	(function BlockedRedirectContentScript(window, document) {
+	(function BlockedRedirectContentScript(window, doc) {
+		const document = doc;
 		/**
 		 * Calculate window height.
 		 * @memberof BlockedRedirectContentScript

@@ -93,10 +93,14 @@ export default (state = initialState, action) => {
 			return Object.assign({}, state, updated);
 		}
 		case LOGIN_SUCCESS: {
-			action.payload.text = `${t('panel_signin_success')} ${action.payload.email}`;
-			action.payload.classes = 'success';
-			action.payload.overrideNotificationShown = true;
-			const updated = _showNotification(state, action);
+			const notificationAction = {
+				payload: {
+					text: `${t('panel_signin_success')} ${action.payload.email}`,
+					classes: 'success',
+					overrideNotificationShown: true,
+				}
+			};
+			const updated = _showNotification(state, notificationAction);
 			return Object.assign({}, state, updated, {
 				loggedIn: true,
 			});
@@ -114,18 +118,26 @@ export default (state = initialState, action) => {
 						errorText = t('server_error_message');
 				}
 			});
-			action.payload.text = errorText;
-			action.payload.classes = 'alert';
-			action.payload.overrideNotificationShown = true;
-			const updated = _showNotification(state, action);
+			const notificationAction = {
+				payload: {
+					text: errorText,
+					classes: 'alert',
+					overrideNotificationShown: true,
+				}
+			};
+			const updated = _showNotification(state, notificationAction);
 			return Object.assign({}, state, updated);
 		}
 		case REGISTER_SUCCESS: {
 			const { email } = action.payload;
-			action.payload.text = t('panel_email_verification_sent', email);
-			action.payload.classes = 'success';
-			action.payload.overrideNotificationShown = true;
-			const updated = _showNotification(state, action);
+			const notificationAction = {
+				payload: {
+					text: t('panel_email_verification_sent', email),
+					classes: 'success',
+					overrideNotificationShown: true,
+				}
+			};
+			const updated = _showNotification(state, notificationAction);
 			return Object.assign({}, state, updated, {
 				email
 			});
@@ -145,10 +157,14 @@ export default (state = initialState, action) => {
 						errorText = t('server_error_message');
 				}
 			});
-			action.payload.text = errorText;
-			action.payload.classes = 'alert';
-			action.payload.overrideNotificationShown = true;
-			const updated = _showNotification(state, action);
+			const notificationAction = {
+				payload: {
+					text: errorText,
+					classes: 'alert',
+					overrideNotificationShown: true,
+				}
+			};
+			const updated = _showNotification(state, notificationAction);
 			return Object.assign({}, state, updated);
 		}
 		case LOGOUT_SUCCESS: {
@@ -157,20 +173,24 @@ export default (state = initialState, action) => {
 		}
 		// @TODO?
 		// case LOGOUT_SUCCESS: {
-		// 	action.payload = {
-		// 		text: 'Logged out successfully.',
-		// 		classes: 'success',
+		// 	const notificationAction = {
+		// 		payload: {
+		// 			text: 'Logged out successfully.',
+		// 			classes: 'success',
+		// 		}
 		// 	};
-		// 	const updated = _showNotification(state, action);
+		// 	const updated = _showNotification(state, notificationAction);
 		// 	return Object.assign({}, state, updated);
 		// }
 		case RESET_PASSWORD_SUCCESS: {
-			action.payload = {
-				text: t('banner_check_your_email_title'),
-				classes: 'success',
-				overrideNotificationShown: true,
+			const notificationAction = {
+				payload: {
+					text: t('banner_check_your_email_title'),
+					classes: 'success',
+					overrideNotificationShown: true,
+				}
 			};
-			const updated = _showNotification(state, action);
+			const updated = _showNotification(state, notificationAction);
 			return Object.assign({}, state, updated);
 		}
 		case RESET_PASSWORD_FAIL: {
@@ -186,10 +206,14 @@ export default (state = initialState, action) => {
 						errorText = t('server_error_message');
 				}
 			});
-			action.payload.text = errorText;
-			action.payload.classes = 'alert';
-			action.payload.overrideNotificationShown = true;
-			const updated = _showNotification(state, action);
+			const notificationAction = {
+				payload: {
+					text: errorText,
+					classes: 'alert',
+					overrideNotificationShown: true,
+				}
+			};
+			const updated = _showNotification(state, notificationAction);
 			return Object.assign({}, state, updated);
 		}
 		case TOGGLE_CLIQZ_FEATURE: {

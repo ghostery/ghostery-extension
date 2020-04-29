@@ -168,11 +168,11 @@ const _updateTrackerTrustRestrict = (state, action) => {
 	// update tracker category for site-specific blocking
 	const updated_category = updated_categories[updated_categories.findIndex(item => item.id === msg.cat_id)];
 
-	updated_category.trackers.forEach((tracker) => {
-		if (tracker.shouldShow) {
-			if (tracker.id === app_id) {
-				tracker.ss_allowed = msg.trust;
-				tracker.ss_blocked = msg.restrict;
+	updated_category.trackers.forEach((trackerEl) => {
+		if (trackerEl.shouldShow) {
+			if (trackerEl.id === app_id) {
+				trackerEl.ss_allowed = msg.trust;
+				trackerEl.ss_blocked = msg.restrict;
 			}
 		}
 	});
@@ -242,9 +242,9 @@ const _updateCliqzModuleWhitelist = (state, action) => {
 		addToWhitelist();
 	}
 
-	updatedUnknownCategory.unknownTrackers.forEach((tracker) => {
-		if (tracker.name === unknownTracker.name) {
-			tracker.whitelisted = !tracker.whitelisted;
+	updatedUnknownCategory.unknownTrackers.forEach((trackerEl) => {
+		if (trackerEl.name === unknownTracker.name) {
+			trackerEl.whitelisted = !trackerEl.whitelisted;
 		}
 	});
 

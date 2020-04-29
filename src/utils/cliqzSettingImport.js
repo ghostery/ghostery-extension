@@ -34,10 +34,11 @@ function _promiseTimeout(timeout) {
  * @private
  *
  * @param  {Object} cliqz
- * @param  {Object} conf
+ * @param  {Object} c	conf
  * @return {Promise}
  */
-function _runCliqzSettingsImport(cliqz, conf) {
+function _runCliqzSettingsImport(cliqz, c) {
+	const conf = c;
 	log('CliqzSettingsImport: Run Cliqz settings importer');
 	const inject = new KordInjector();
 	inject.init();
@@ -90,9 +91,10 @@ function _runCliqzSettingsImport(cliqz, conf) {
  * @memberOf BackgroundUtils
  *
  * @param  {Object} cliqz
- * @param  {Object} conf
+ * @param  {Object} c	conf
  */
-export function importCliqzSettings(cliqz, conf) {
+export function importCliqzSettings(cliqz, c) {
+	const conf = c;
 	log('checking cliqz import', conf.cliqz_import_state);
 	if (!conf.cliqz_import_state) {
 		_runCliqzSettingsImport(cliqz, conf).then(() => {

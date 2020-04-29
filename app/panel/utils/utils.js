@@ -35,9 +35,9 @@ export function updateObject(obj, key, value) {
  * @return {Object}     	new object
  */
 export function removeFromObject(obj, key) {
-	return Object.keys(obj).filter(k => k !== key.toString()).reduce((result, k) => {
-		result[k] = obj[k];
-		return result;
+	return Object.keys(obj).filter(k => k !== key.toString()).reduce((acc, k) => {
+		acc[k] = obj[k];
+		return acc;
 	}, {});
 }
 

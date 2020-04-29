@@ -52,7 +52,8 @@ class CMP {
 		return getJson(URL).then((data) => {
 			if (data && (!conf.cmp_version || data.Version > conf.cmp_version)) {
 				// set default dismiss
-				data.Campaigns.forEach((campaign) => {
+				data.Campaigns.forEach((c) => {
+					const campaign = c;
 					if (campaign.Dismiss === 0) {
 						campaign.Dismiss = 10;
 					}

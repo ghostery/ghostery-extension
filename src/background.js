@@ -879,10 +879,11 @@ function onMessageHandler(request, sender, callback) {
 	if (name === 'account.getUser') {
 		account.getUser(message)
 			.then((user) => {
-				if (user) {
-					user.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus']);
+				const foundUser = user;
+				if (foundUser) {
+					foundUser.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus']);
 				}
-				callback({ user });
+				callback({ foundUser });
 			})
 			.catch((err) => {
 				callback({ errors: _getJSONAPIErrorsObject(err) });

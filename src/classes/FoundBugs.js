@@ -247,9 +247,9 @@ class FoundBugs {
 
 		if (sorted) {
 			cats_arr.sort((a, b) => {
-				a = a.name.toLowerCase();
-				b = b.name.toLowerCase();
-				return (a > b ? 1 : (a < b ? -1 : 0));
+				const a1 = a.name.toLowerCase();
+				const b1 = b.name.toLowerCase();
+				return (a1 > b1 ? 1 : (a1 < b1 ? -1 : 0));
 			});
 		}
 
@@ -420,7 +420,8 @@ class FoundBugs {
 	 */
 	_checkForCompatibilityIssues(tab_id, tab_url) {
 		const { apps, appsMetadata, issueCounts } = this._foundApps[tab_id];
-		apps.forEach((app) => {
+		apps.forEach((a) => {
+			const app = a;
 			const { id } = app;
 			if (appsMetadata[id].needsCompatibilityCheck) {
 				app.hasCompatibilityIssue = app.blocked ? compDb.hasIssue(id, tab_url) : false;

@@ -328,10 +328,11 @@ class EventHandlers {
 	 * 		+ Speed this up by making it asynchronous when blocking is disabled?
 	 * 		+ Also speed it up for blocking-whitelisted pages (by delaying isBug scanning)?
 	 *
-	 * @param  {Object} details 	event data
+	 * @param  {Object} d 	event data
 	 * @return {Object}             optionaly return {cancel: true} to force dropping the request
 	 */
-	onBeforeRequest(details) {
+	onBeforeRequest(d) {
+		const details = d;
 		const tab_id = details.tabId;
 		const request_id = details.requestId;
 
@@ -450,10 +451,11 @@ class EventHandlers {
 	 * Handler for webRequest.onBeforeSendHeaders event.
 	 * Called each time that an HTTP(S) request is about to send headers
 	 *
-	 * @param  {Object} details event data
+	 * @param  {Object} d event data
 	 * @return {Object} 		optionally return headers to send
 	 */
-	onBeforeSendHeaders(details) {
+	onBeforeSendHeaders(d) {
+		const details = d;
 		for (let i = 0; i < details.requestHeaders.length; ++i) {
 			// Fetch requests in Firefox web-extension has a flaw. They attach
 			// origin: moz-extension//ID , which is specific to a user.

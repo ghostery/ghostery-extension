@@ -79,7 +79,8 @@ class StatsGraph extends React.Component {
 		}
 
 		const data = JSON.parse(JSON.stringify(this.props.data));
-		data.forEach((entry) => {
+		data.forEach((e) => {
+			const entry = e;
 			entry.date = parseMonth(entry.date);
 		});
 

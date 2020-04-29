@@ -59,11 +59,12 @@ const Click2PlayContentScript = (function(win, doc) {
 	 * @memberof Click2PlayContentScript
 	 * @package
 	 *
-	 * @param  	{Object} c2pFrame 		iframe DOM element
+	 * @param  	{Object} c2pFrameEl 		iframe DOM element
 	 * @param 	{Object} c2pAppDef 		replacement data
 	 * @param 	{string} html 			a fragment of html to be used in replacement.
 	 */
-	const buildC2P = function(c2pFrame, c2pAppDef, html) {
+	const buildC2P = function(c2pFrameEl, c2pAppDef, html) {
+		const c2pFrame = c2pFrameEl;
 		c2pFrame.addEventListener('load', () => {
 			const idoc = c2pFrame.contentDocument;
 

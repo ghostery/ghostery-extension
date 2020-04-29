@@ -264,9 +264,11 @@ class DonutGraph extends React.Component {
 				this._endAngles.set(catId, d.endAngle);
 
 				return function(t) {
-					d.startAngle = lerpStartAngle(t);
-					d.endAngle = lerpEndAngle(t);
-					return trackerArc(d);
+					return trackerArc({
+						...d,
+						startAngle: lerpStartAngle(t),
+						endAngle: lerpEndAngle(t),
+					});
 				};
 			});
 
@@ -320,8 +322,10 @@ class DonutGraph extends React.Component {
 
 				const i = interpolate(d.startAngle, d.endAngle);
 				return function(t) {
-					d.endAngle = i(t);
-					return trackerArc(d);
+					return trackerArc({
+						...d,
+						endAngle: i(t)
+					});
 				};
 			})
 			.ease(easeLinear);

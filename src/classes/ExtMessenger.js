@@ -67,7 +67,8 @@ export default class KordInjector {
 	}
 
 	_createModuleWrapper(moduleName) {
-		return new Spanan((message) => {
+		return new Spanan((m) => {
+			const message = m;
 			message.moduleName = moduleName;
 			this.messenger.sendMessage(this.extensionId, message);
 		});

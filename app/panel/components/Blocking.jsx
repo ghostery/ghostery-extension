@@ -95,21 +95,21 @@ class Blocking extends React.Component {
 		const updated_categories = JSON.parse(JSON.stringify(this.props.categories)); // deep clone
 		const updatedUnknownCategory = JSON.parse(JSON.stringify(this.props.unknownCategory)); // deep clone
 
-		updated_categories.forEach((category) => {
+		updated_categories.forEach((categoryEl) => {
 			let count = 0;
 			let show = true;
 
 			// filter by donut wheel categories
-			if (filterName !== 'all' && filterName !== category.id) {
+			if (filterName !== 'all' && filterName !== categoryEl.id) {
 				show = false;
 			}
 
-			category.trackers.forEach((tracker) => {
-				tracker.shouldShow = show;
+			categoryEl.trackers.forEach((trackerEl) => {
+				trackerEl.shouldShow = show;
 				count++;
 			});
 
-			category.num_shown = (show) ? count : 0;
+			categoryEl.num_shown = (show) ? count : 0;
 		});
 
 		updatedUnknownCategory.hide = !(filterName === 'all' || filterName === 'unknown');
@@ -124,18 +124,18 @@ class Blocking extends React.Component {
 	setBlockedShow() {
 		const updated_categories = JSON.parse(JSON.stringify(this.props.categories)); // deep clone
 
-		updated_categories.forEach((category) => {
+		updated_categories.forEach((categoryEl) => {
 			let count = 0;
-			category.trackers.forEach((tracker) => {
-				const isSbBlocked = this.props.smartBlockActive && tracker.warningSmartBlock;
-				if ((tracker.blocked && !tracker.ss_allowed) || isSbBlocked || tracker.ss_blocked) {
-					tracker.shouldShow = true;
+			categoryEl.trackers.forEach((trackerEl) => {
+				const isSbBlocked = this.props.smartBlockActive && trackerEl.warningSmartBlock;
+				if ((trackerEl.blocked && !trackerEl.ss_allowed) || isSbBlocked || trackerEl.ss_blocked) {
+					trackerEl.shouldShow = true;
 					count++;
 				} else {
-					tracker.shouldShow = false;
+					trackerEl.shouldShow = false;
 				}
 			});
-			category.num_shown = count;
+			categoryEl.num_shown = count;
 		});
 
 		this.props.actions.updateCategories(updated_categories);
@@ -148,18 +148,18 @@ class Blocking extends React.Component {
 	setWarningShow() {
 		const updated_categories = JSON.parse(JSON.stringify(this.props.categories)); // deep clone
 
-		updated_categories.forEach((category) => {
+		updated_categories.forEach((categoryEl) => {
 			let count = 0;
-			category.trackers.forEach((tracker) => {
-				if (tracker.warningCompatibility || tracker.warningInsecure || tracker.warningSlow) {
-					tracker.shouldShow = true;
+			categoryEl.trackers.forEach((trackerEl) => {
+				if (trackerEl.warningCompatibility || trackerEl.warningInsecure || trackerEl.warningSlow) {
+					trackerEl.shouldShow = true;
 					count++;
 				} else {
-					tracker.shouldShow = false;
+					trackerEl.shouldShow = false;
 				}
 			});
 
-			category.num_shown = count;
+			categoryEl.num_shown = count;
 		});
 
 		this.props.actions.updateCategories(updated_categories);
@@ -172,18 +172,18 @@ class Blocking extends React.Component {
 	setWarningCompatibilityShow() {
 		const updated_categories = JSON.parse(JSON.stringify(this.props.categories)); // deep clone
 
-		updated_categories.forEach((category) => {
+		updated_categories.forEach((categoryEl) => {
 			let count = 0;
-			category.trackers.forEach((tracker) => {
-				if (tracker.warningCompatibility) {
-					tracker.shouldShow = true;
+			categoryEl.trackers.forEach((trackerEl) => {
+				if (trackerEl.warningCompatibility) {
+					trackerEl.shouldShow = true;
 					count++;
 				} else {
-					tracker.shouldShow = false;
+					trackerEl.shouldShow = false;
 				}
 			});
 
-			category.num_shown = count;
+			categoryEl.num_shown = count;
 		});
 
 		this.props.actions.updateCategories(updated_categories);
@@ -196,18 +196,18 @@ class Blocking extends React.Component {
 	setWarningSlowInsecureShow() {
 		const updated_categories = JSON.parse(JSON.stringify(this.props.categories)); // deep clone
 
-		updated_categories.forEach((category) => {
+		updated_categories.forEach((categoryEl) => {
 			let count = 0;
-			category.trackers.forEach((tracker) => {
-				if (tracker.warningInsecure || tracker.warningSlow) {
-					tracker.shouldShow = true;
+			categoryEl.trackers.forEach((trackerEl) => {
+				if (trackerEl.warningInsecure || trackerEl.warningSlow) {
+					trackerEl.shouldShow = true;
 					count++;
 				} else {
-					tracker.shouldShow = false;
+					trackerEl.shouldShow = false;
 				}
 			});
 
-			category.num_shown = count;
+			categoryEl.num_shown = count;
 		});
 
 		this.props.actions.updateCategories(updated_categories);

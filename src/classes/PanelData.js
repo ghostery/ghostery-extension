@@ -575,9 +575,10 @@ class PanelData {
 	/**
 	 * Update Conf properties with new data from the UI.
 	 * Called via setPanelData message.
-	 * @param  {Object} data
+	 * @param  {Object} d
 	 */
-	set(data) {
+	set(d) {
+		const data = d;
 		let syncSetDataChanged = false;
 
 		if (IS_CLIQZ) {
@@ -787,13 +788,13 @@ class PanelData {
 	_buildGlobalCategories() {
 		const categories = bugDb.db.categories || [];
 		const selectedApps = conf.selected_app_ids || {};
-		categories.forEach((category) => {
-			const { trackers } = category;
-			category.num_blocked = 0;
-			trackers.forEach((tracker) => {
-				tracker.blocked = selectedApps.hasOwnProperty(tracker.id);
-				if (tracker.blocked) {
-					category.num_blocked++;
+		categories.forEach((categoryEl) => {
+			const { trackers } = categoryEl;
+			categoryEl.num_blocked = 0;
+			trackers.forEach((trackerEl) => {
+				trackerEl.blocked = selectedApps.hasOwnProperty(trackerEl.id);
+				if (trackerEl.blocked) {
+					categoryEl.num_blocked++;
 				}
 			});
 		});

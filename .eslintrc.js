@@ -56,7 +56,14 @@ module.exports = {
 		'newline-per-chained-call': [0, { 'ignoreChainWithDepth': 2 }],
 		'no-mixed-operators': [0],
 		'no-nested-ternary': [0],
-		'no-param-reassign': [0], // TODO: enable this check
+		'no-param-reassign': ['error', {
+			props: true,
+			ignorePropertyModificationsFor: [
+				'acc', // for reduce accumulators
+				'trackerEl', // for trackers.forEach()
+				'categoryEl' // for categories.forEach()
+			]
+		}],
 		'no-plusplus': [0],
 		'no-prototype-builtins': [0], // TODO: enable this check
 		'no-restricted-syntax': [0], // TODO: enable this check

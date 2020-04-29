@@ -165,14 +165,14 @@ const _exportSettings = (state, action) => {
  */
 const _importSettingsDialog = (state, action) => {
 	const result = action.data;
-	const updated_actionSuccess = state.actionSuccess;
+	let updated_actionSuccess = state.actionSuccess;
 	let updated_importResultText = state.importResultText;
 
 	if (result === true) {
 		// showBrowseWindow was successful
 		window.close();
 	} else {
-		state.updated_actionSuccess = false;
+		updated_actionSuccess = false;
 		updated_importResultText = t('settings_import_dialog_error');
 	}
 
@@ -283,19 +283,19 @@ const _updateTrackerDatabase = (state, action) => {
 const _updateSearchValue = (state, action) => {
 	const query = action.data || '';
 	const updated_categories = JSON.parse(JSON.stringify(state.categories)) || []; // deep clone
-	updated_categories.forEach((category) => {
-		category.num_total = 0;
-		category.num_blocked = 0;
-		category.trackers.forEach((tracker) => {
+	updated_categories.forEach((categoryEl) => {
+		categoryEl.num_total = 0;
+		categoryEl.num_blocked = 0;
+		categoryEl.trackers.forEach((trackerEl) => {
 			if (query) {
-				tracker.shouldShow = !!(tracker.name.toLowerCase().indexOf(query) !== -1);
+				trackerEl.shouldShow = !!(trackerEl.name.toLowerCase().indexOf(query) !== -1);
 			} else {
-				tracker.shouldShow = true;
+				trackerEl.shouldShow = true;
 			}
-			if (tracker.shouldShow) {
-				category.num_total++;
-				if (tracker.blocked) {
-					category.num_blocked++;
+			if (trackerEl.shouldShow) {
+				categoryEl.num_total++;
+				if (trackerEl.blocked) {
+					categoryEl.num_blocked++;
 				}
 			}
 		});
@@ -319,34 +319,34 @@ const _updateSearchValue = (state, action) => {
 const _filter = (state, action) => {
 	const updated_categories = JSON.parse(JSON.stringify(state.categories)) || []; // deep clone
 	const new_app_ids = state.new_app_ids || [];
-	updated_categories.forEach((category) => {
-		category.num_total = 0;
-		category.num_blocked = 0;
-		category.trackers.forEach((tracker) => {
+	updated_categories.forEach((categoryEl) => {
+		categoryEl.num_total = 0;
+		categoryEl.num_blocked = 0;
+		categoryEl.trackers.forEach((trackerEl) => {
 			switch (action.data) {
 				case 'all':
-					tracker.shouldShow = true;
-					category.num_total++;
-					if (tracker.blocked) {
-						category.num_blocked++;
+					trackerEl.shouldShow = true;
+					categoryEl.num_total++;
+					if (trackerEl.blocked) {
+						categoryEl.num_blocked++;
 					}
 					break;
 				case 'blocked':
-					tracker.shouldShow = tracker.blocked;
-					if (tracker.shouldShow) {
-						category.num_total++;
+					trackerEl.shouldShow = trackerEl.blocked;
+					if (trackerEl.shouldShow) {
+						categoryEl.num_total++;
 					}
 					break;
 				case 'unblocked':
-					tracker.shouldShow = !tracker.blocked;
-					if (tracker.shouldShow) {
-						category.num_total++;
+					trackerEl.shouldShow = !trackerEl.blocked;
+					if (trackerEl.shouldShow) {
+						categoryEl.num_total++;
 					}
 					break;
 				case 'new':
-					tracker.shouldShow = !!(new_app_ids.indexOf(+tracker.id) !== -1);
-					if (tracker.shouldShow) {
-						category.num_total++;
+					trackerEl.shouldShow = !!(new_app_ids.indexOf(+trackerEl.id) !== -1);
+					if (trackerEl.shouldShow) {
+						categoryEl.num_total++;
 					}
 					break;
 				default:

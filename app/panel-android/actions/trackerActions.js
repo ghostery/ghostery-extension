@@ -218,30 +218,30 @@ export function blockUnBlockAllTrackers({ actionData, state }) {
 	const app_ids = [];
 
 	if (isSiteTrackers) {
-		updated_blocking_categories.forEach((category) => {
-			if (categoryId && category.id !== categoryId) {
+		updated_blocking_categories.forEach((categoryEl) => {
+			if (categoryId && categoryEl.id !== categoryId) {
 				return;
 			}
 
-			const updated_settings_category = updated_settings_categories.find(item => item.id === category.id);
-			category.num_blocked = 0;
+			const updated_settings_category = updated_settings_categories.find(item => item.id === categoryEl.id);
+			categoryEl.num_blocked = 0;
 			// TODO: change the logic here
-			category.trackers.forEach((tracker) => {
-				if (tracker.shouldShow) {
-					tracker.blocked = block;
-					const key = tracker.id;
+			categoryEl.trackers.forEach((trackerEl) => {
+				if (trackerEl.shouldShow) {
+					trackerEl.blocked = block;
+					const key = trackerEl.id;
 
 					if (block) {
 						if (!app_ids.includes(key)) {
 							app_ids.push(key);
 						}
 
-						tracker.ss_allowed = false;
-						tracker.ss_blocked = false;
+						trackerEl.ss_allowed = false;
+						trackerEl.ss_blocked = false;
 					}
 
-					if (block || tracker.ss_blocked) {
-						category.num_blocked += 1;
+					if (block || trackerEl.ss_blocked) {
+						categoryEl.num_blocked += 1;
 						updated_app_ids[key] = 1;
 					} else {
 						delete updated_app_ids[key];
@@ -258,19 +258,19 @@ export function blockUnBlockAllTrackers({ actionData, state }) {
 			});
 		});
 	} else {
-		updated_settings_categories.forEach((category) => {
-			if (categoryId && category.id !== categoryId) {
+		updated_settings_categories.forEach((categoryEl) => {
+			if (categoryId && categoryEl.id !== categoryId) {
 				return;
 			}
 
-			category.num_blocked = 0;
-			category.trackers.forEach((tracker) => {
-				if (tracker.shouldShow) {
-					tracker.blocked = block;
-					const key = tracker.id;
+			categoryEl.num_blocked = 0;
+			categoryEl.trackers.forEach((trackerEl) => {
+				if (trackerEl.shouldShow) {
+					trackerEl.blocked = block;
+					const key = trackerEl.id;
 
 					if (block) {
-						category.num_blocked += 1;
+						categoryEl.num_blocked += 1;
 						updated_app_ids[key] = 1;
 					} else {
 						delete updated_app_ids[key];
@@ -279,13 +279,13 @@ export function blockUnBlockAllTrackers({ actionData, state }) {
 			});
 		});
 
-		updated_blocking_categories.forEach((category) => {
-			category.trackers.forEach((tracker) => {
-				if (tracker.shouldShow && !tracker.ss_allowed && !tracker.ss_blocked) {
-					tracker.blocked = block;
+		updated_blocking_categories.forEach((categoryEl) => {
+			categoryEl.trackers.forEach((trackerEl) => {
+				if (trackerEl.shouldShow && !trackerEl.ss_allowed && !trackerEl.ss_blocked) {
+					trackerEl.blocked = block;
 				}
 			});
-			category.num_blocked = category.trackers.filter(tracker => tracker.blocked || tracker.ss_blocked).length;
+			categoryEl.num_blocked = categoryEl.trackers.filter(trackerEl => trackerEl.blocked || trackerEl.ss_blocked).length;
 		});
 	}
 
@@ -326,24 +326,24 @@ export function resetSettings({ state }) {
 	const blockingCategories = JSON.parse(JSON.stringify(blocking.categories)) || [];
 	const settingsCategories = JSON.parse(JSON.stringify(settings.categories)) || [];
 
-	blockingCategories.forEach((category) => {
-		category.num_blocked = 0;
-		category.trackers.forEach((tracker) => {
-			if (tracker.shouldShow) {
-				tracker.blocked = false;
-				tracker.ss_blocked = false;
-				tracker.ss_allowed = false;
+	blockingCategories.forEach((categoryEl) => {
+		categoryEl.num_blocked = 0;
+		categoryEl.trackers.forEach((trackerEl) => {
+			if (trackerEl.shouldShow) {
+				trackerEl.blocked = false;
+				trackerEl.ss_blocked = false;
+				trackerEl.ss_allowed = false;
 			}
 		});
 	});
 
-	settingsCategories.forEach((category) => {
-		category.num_blocked = 0;
-		category.trackers.forEach((tracker) => {
-			if (tracker.shouldShow) {
-				tracker.blocked = false;
-				tracker.ss_blocked = false;
-				tracker.ss_allowed = false;
+	settingsCategories.forEach((categoryEl) => {
+		categoryEl.num_blocked = 0;
+		categoryEl.trackers.forEach((trackerEl) => {
+			if (trackerEl.shouldShow) {
+				trackerEl.blocked = false;
+				trackerEl.ss_blocked = false;
+				trackerEl.ss_allowed = false;
 			}
 		});
 	});

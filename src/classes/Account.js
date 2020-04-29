@@ -520,7 +520,8 @@ class Account {
 	 *
 	 * @return {Promise} 	user settings json or error
 	 */
-	_setConfUserSettings = (settings) => {
+	_setConfUserSettings = (s) => {
+		const settings = s;
 		log('SET USER SETTINGS', settings);
 		if (IS_CLIQZ) {
 			settings.enable_human_web = false;
