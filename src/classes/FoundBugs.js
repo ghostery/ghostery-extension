@@ -200,7 +200,9 @@ class FoundBugs {
 		}
 
 		// squish all the bugs into categories first
-		for (id in bugs) {
+		const ids = Object.keys(bugs);
+		for (let i = 0; i < ids.length; i++) {
+			id = ids[i];
 			if (bugs.hasOwnProperty(id)) {
 				aid = db.bugs[id].aid; // eslint-disable-line prefer-destructuring
 				cid = db.apps[aid].cat;
@@ -239,7 +241,9 @@ class FoundBugs {
 		}
 
 		// convert categories hash to array
-		for (cid in cats_obj) {
+		const cids = Object.keys(cats_obj);
+		for (let i = 0; i < cids.length; i++) {
+			cid = cids[i];
 			if (cats_obj.hasOwnProperty(cid)) {
 				cats_arr.push(cats_obj[cid]);
 			}

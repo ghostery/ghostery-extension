@@ -47,10 +47,14 @@ export default class FixedMenu extends React.Component {
 	getCount = (type) => {
 		let total = 0;
 		switch (type) {
-			case 'enable_anti_tracking':
-				for (const category in this.antiTrackingData) {
+			case 'enable_anti_tracking': {
+				const categories = Object.keys(this.antiTrackingData);
+				for (let i = 0; i < categories.length; i++) {
+					const category = categories[i];
 					if (this.antiTrackingData.hasOwnProperty(category)) {
-						for (const app in this.antiTrackingData[category]) {
+						const apps = Object.keys(this.antiTrackingData[category]);
+						for (let j = 0; j < apps.length; j++) {
+							const app = apps[j];
 							if (this.antiTrackingData[category][app] === 'unsafe') {
 								total++;
 							}
@@ -58,6 +62,7 @@ export default class FixedMenu extends React.Component {
 					}
 				}
 				return total;
+			}
 			case 'enable_ad_block':
 				return this.adBlockData && this.adBlockData.totalCount || 0;
 			case 'enable_smart_block':

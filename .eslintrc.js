@@ -40,7 +40,7 @@ module.exports = {
 	rules: {
 		'arrow-parens': [2, 'as-needed', { 'requireForBlockBody': true }],
 		'camelcase': [0],
-		'class-methods-use-this': [0],
+		'class-methods-use-this': [0], // TODO: enable this check
 		'comma-dangle': [2, {
 			'arrays': 'only-multiline',
 			'objects': 'only-multiline',
@@ -54,7 +54,7 @@ module.exports = {
 		'lines-between-class-members': [1],
 		'max-len': [0],
 		'newline-per-chained-call': [0, { 'ignoreChainWithDepth': 2 }],
-		'no-mixed-operators': [0],
+		'no-mixed-operators': [0], // TODO: enable this check
 		'no-nested-ternary': [0],
 		'no-param-reassign': ['error', {
 			props: true,
@@ -66,19 +66,18 @@ module.exports = {
 		}],
 		'no-plusplus': [0],
 		'no-prototype-builtins': [0], // TODO: enable this check
-		'no-restricted-syntax': [0], // TODO: enable this check
+		'no-restricted-syntax': [1],
 		'no-tabs': [0],
 		'no-underscore-dangle': [0],
 		'no-unused-vars': [1],
 		'no-useless-escape': [1],
 		'operator-linebreak': [0],
-		'prefer-object-spread': ['error'],
+		'prefer-object-spread': [1],
 		'space-before-function-paren': [2, 'never'],
-		'template-curly-spacing': [0],
 
 		// Plugin: Import
 		'import/no-cycle': [0],
-		'import/prefer-default-export': [0],
+		'import/prefer-default-export': [0], // TODO: enable this check
 
 		// Plugin: React
 		'react/destructuring-assignment': [0],

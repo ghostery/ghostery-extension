@@ -181,7 +181,9 @@ const Click2PlayContentScript = (function(win, doc) {
 		});
 
 		window.addEventListener('load', () => {
-			for (const app_id in C2P_DATA) {
+			const app_ids = Object.keys(C2P_DATA);
+			for (let i = 0; i < app_ids.length; i++) {
+				const app_id = app_ids[i];
 				if (C2P_DATA.hasOwnProperty(app_id)) {
 					if (C2P_DATA[app_id].length >= 3) {
 						applyC2P(C2P_DATA[app_id][0], C2P_DATA[app_id][1], C2P_DATA[app_id][2]);

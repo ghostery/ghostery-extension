@@ -126,7 +126,9 @@ class BugDb extends Updatable {
 			}
 		}
 
-		for (categoryName in categories) {
+		const categoryNames = Object.keys(categories);
+		for (let i = 0; i < categoryNames.length; i++) {
+			categoryName = categoryNames[i];
 			if (categories.hasOwnProperty(categoryName)) {
 				const category = categories[categoryName];
 				if (category.trackers) {

@@ -197,7 +197,9 @@ function _matchesHost(root, src_host, src_path) {
 function _matchesRegex(src) {
 	const regexes = bugDb.db.patterns.regex;
 
-	for (const bug_id in regexes) {
+	const bug_ids = Object.keys(regexes);
+	for (let i = 0; i < bug_ids.length; i++) {
+		const bug_id = bug_ids[i];
 		if (regexes[bug_id].test(src)) {
 			return +bug_id;
 		}
@@ -220,7 +222,9 @@ function _matchesPath(src_path) {
 	// NOTE: we re-add the "/" in order to match patterns that include "/"
 	const srcPath = `/${src_path}`;
 
-	for (const path in paths) {
+	const pathArr = Object.keys(paths);
+	for (let i = 0; i < pathArr.length; i++) {
+		const path = pathArr[i];
 		if (srcPath.includes(path)) {
 			return paths[path];
 		}

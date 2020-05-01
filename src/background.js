@@ -125,7 +125,9 @@ function setGhosteryDefaultBlocking() {
 	const categoriesBlock = ['advertising', 'pornvertising', 'site_analytics'];
 	log('Blocking all trackers in categories:', ...categoriesBlock);
 	const selected_app_ids = {};
-	for (const app_id in bugDb.db.apps) {
+	const app_ids = Object.keys(bugDb.db.apps);
+	for (let i = 0; i < app_ids.length; i++) {
+		const app_id = app_ids[i];
 		if (bugDb.db.apps.hasOwnProperty(app_id)) {
 			const category = bugDb.db.apps[app_id].cat;
 			if (categoriesBlock.indexOf(category) >= 0 &&
@@ -574,7 +576,9 @@ function handleGhosteryHub(name, message, callback) {
 				case 'BLOCKING_POLICY_EVERYTHING': {
 					panelData.set({ setup_block: 3 });
 					const selected_app_ids = {};
-					for (const app_id in bugDb.db.apps) {
+					const app_ids = Object.keys(bugDb.db.apps);
+					for (let i = 0; i < app_ids.length; i++) {
+						const app_id = app_ids[i];
 						if (!selected_app_ids.hasOwnProperty(app_id)) {
 							selected_app_ids[app_id] = 1;
 						}
