@@ -51,7 +51,9 @@
 			],
 			"matches": [
 				"https://account.ghostery.com/*",
-				"https://account.ghosterystage.com/*"
+				"https://account.ghosterystage.com/*",
+			  	"https://checkout.ghostery.com/*",
+			  	"https://checkout.ghosterystage.com/*",
 			],
 			"run_at": "document_start"
 		},
