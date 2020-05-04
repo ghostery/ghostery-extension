@@ -77,7 +77,7 @@ class Updatable {
 			const version_property = (this.type === 'bugs' || this.type === 'surrogates' ? 'version' : (`${this.type}Version`));
 
 			// nothing in storage, or it's so old it doesn't have a version
-			if (!memory || !memory.hasOwnProperty(version_property)) {
+			if (!memory || !Object.prototype.hasOwnProperty.call(memory, version_property)) {
 				// return what's on disk
 				log(`fetching ${this.type} from disk`);
 

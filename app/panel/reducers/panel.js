@@ -303,14 +303,14 @@ const _showNotification = (state, action) => {
 		updated_needsReload = { ...state.needsReload, changes: { ...state.needsReload.changes } };
 
 		// handle case where user clicks 'whitelist' then 'blacklist', or inverse
-		if (msg.updated === 'blacklist' && updated_needsReload.changes.hasOwnProperty('whitelist')) {
+		if (msg.updated === 'blacklist' && Object.prototype.hasOwnProperty.call(updated_needsReload.changes, 'whitelist')) {
 			delete updated_needsReload.changes.whitelist;
-		} else if (msg.updated === 'whitelist' && updated_needsReload.changes.hasOwnProperty('blacklist')) {
+		} else if (msg.updated === 'whitelist' && Object.prototype.hasOwnProperty.call(updated_needsReload.changes, 'blacklist')) {
 			delete updated_needsReload.changes.blacklist;
 		}
 
 		// update the 'changes' object.  if the changed item already exists, remove it to signal a disable has occurred
-		if (updated_needsReload.changes.hasOwnProperty(msg.updated)) {
+		if (Object.prototype.hasOwnProperty.call(updated_needsReload.changes, msg.updated)) {
 			delete updated_needsReload.changes[msg.updated];
 		} else if (msg.updated !== 'init') { // ignore the 'init' change, which comes from Panel.jsx to persist banners
 			updated_needsReload.changes[msg.updated] = true;

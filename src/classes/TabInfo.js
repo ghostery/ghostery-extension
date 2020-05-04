@@ -83,7 +83,7 @@ class TabInfo {
 	// TODO consider improving handling of what if we mistype the property name.
 	// always returning object where property might sometimes have returned false could result in subtle bugs.
 	getTabInfo(tab_id, property) {
-		if (this._tabInfo.hasOwnProperty(tab_id)) {
+		if (Object.prototype.hasOwnProperty.call(this._tabInfo, tab_id)) {
 			if (property) {
 				return this._tabInfo[tab_id][property];
 			}
@@ -99,7 +99,7 @@ class TabInfo {
 	 * @return {Object}				persistent data for this tab
 	 */
 	getTabInfoPersist(tab_id, property) {
-		if (this._tabInfoPersist.hasOwnProperty(tab_id)) {
+		if (Object.prototype.hasOwnProperty.call(this._tabInfoPersist, tab_id)) {
 			if (property) {
 				return this._tabInfoPersist[tab_id][property];
 			}
@@ -115,7 +115,7 @@ class TabInfo {
 	 * @param {*} 		value 		property value
 	 */
 	setTabInfo(tab_id, property, value) {
-		if (this._tabInfo.hasOwnProperty(tab_id)) {
+		if (Object.prototype.hasOwnProperty.call(this._tabInfo, tab_id)) {
 			// check for 'url' property case
 			if (property === 'url') {
 				this._updateUrl(tab_id, value);
@@ -133,7 +133,7 @@ class TabInfo {
 	 * @param {boolean} blocked		kind of policy to set
 	 */
 	setTabSmartBlockAppInfo(tabId, appId, rule, blocked) {
-		if (!this._tabInfo.hasOwnProperty(tabId)) { return; }
+		if (!Object.prototype.hasOwnProperty.call(this._tabInfo, tabId)) { return; }
 
 		const policy = blocked ? 'blocked' : 'unblocked';
 		if (typeof this._tabInfo[tabId].smartBlock[policy][appId] === 'undefined') {
@@ -151,7 +151,7 @@ class TabInfo {
 	 * @param  {number} tab_id		tab id
 	 */
 	clear(tab_id) {
-		if (!this._tabInfo.hasOwnProperty(tab_id)) { return; }
+		if (!Object.prototype.hasOwnProperty.call(this._tabInfo, tab_id)) { return; }
 		const { numOfReloads, firstLoadTimestamp } = this._tabInfo[tab_id];
 
 		// TODO potential memory leak?

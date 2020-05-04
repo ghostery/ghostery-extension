@@ -154,7 +154,7 @@ export function allowAllwaysC2P(app_id, tab_host) {
 
 
 	// Remove fron site-specific-blocked
-	if (conf.site_specific_blocks.hasOwnProperty(tab_host) && conf.site_specific_blocks[tab_host].includes(+app_id)) {
+	if (Object.prototype.hasOwnProperty.call(conf.site_specific_blocks, tab_host) && conf.site_specific_blocks[tab_host].includes(+app_id)) {
 		const index = conf.site_specific_blocks[tab_host].indexOf(+app_id);
 		const { site_specific_blocks } = conf;
 		site_specific_blocks[tab_host].splice(index);
@@ -163,7 +163,7 @@ export function allowAllwaysC2P(app_id, tab_host) {
 
 	// Add tracker to site-specific-allowed
 	const { site_specific_unblocks } = conf;
-	if (!site_specific_unblocks.hasOwnProperty(tab_host)) {
+	if (!Object.prototype.hasOwnProperty.call(site_specific_unblocks, tab_host)) {
 		// create new array of unblocks for this host
 		site_specific_unblocks[tab_host] = [];
 	}

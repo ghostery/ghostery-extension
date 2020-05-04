@@ -135,9 +135,9 @@ class PolicySmartBlock {
 			conf.enable_smart_block &&
 			!globals.SESSION.paused_blocking &&
 			!this.policy.getSitePolicy(tabUrl) &&
-			((appId && (!conf.site_specific_unblocks.hasOwnProperty(tabHost) || !conf.site_specific_unblocks[tabHost].includes(+appId))) || appId === false) &&
-			((appId && (!conf.site_specific_blocks.hasOwnProperty(tabHost) || !conf.site_specific_blocks[tabHost].includes(+appId))) || appId === false) &&
-			(c2pDb.db.apps && !c2pDb.db.apps.hasOwnProperty(appId))
+			((appId && (!Object.prototype.hasOwnProperty.call(conf.site_specific_unblocks, tabHost) || !conf.site_specific_unblocks[tabHost].includes(+appId))) || appId === false) &&
+			((appId && (!Object.prototype.hasOwnProperty.call(conf.site_specific_blocks, tabHost) || !conf.site_specific_blocks[tabHost].includes(+appId))) || appId === false) &&
+			(c2pDb.db.apps && !Object.prototype.hasOwnProperty.call(c2pDb.db.apps, appId))
 		);
 	}
 

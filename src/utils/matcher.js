@@ -120,7 +120,7 @@ function _matchesHostPath(roots, src_path) {
 
 	for (i = 0; i < roots.length; i++) {
 		root = roots[i];
-		if (root.hasOwnProperty('$')) {
+		if (Object.prototype.hasOwnProperty.call(root, '$')) {
 			paths = root.$;
 			for (j = 0; j < paths.length; j++) {
 				if (src_path.startsWith(paths[j].path)) {
@@ -154,14 +154,14 @@ function _matchesHost(root, src_host, src_path) {
 	for (let i = 0; i < host_rev_arr.length; i++) {
 		host_part = host_rev_arr[i];
 		// if node has domain, advance and try to update bug_id
-		if (node.hasOwnProperty(host_part)) {
+		if (Object.prototype.hasOwnProperty.call(node, host_part)) {
 			// advance node
 			node = node[host_part];
-			bug_id = (node.hasOwnProperty('$') ? node.$ : bug_id);
+			bug_id = (Object.prototype.hasOwnProperty.call(node, '$') ? node.$ : bug_id);
 
 			// we store all traversed nodes that contained paths in case the final
 			// node does not have the matching path
-			if (src_path !== undefined && node.hasOwnProperty('$')) {
+			if (src_path !== undefined && Object.prototype.hasOwnProperty.call(node, '$')) {
 				nodes_with_paths.push(node);
 			}
 

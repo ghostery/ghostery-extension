@@ -65,8 +65,8 @@ module.exports = {
 			]
 		}],
 		'no-plusplus': [0],
-		'no-prototype-builtins': [0], // TODO: enable this check
-		'no-restricted-syntax': [1],
+		'no-prototype-builtins': [1],
+		'no-restricted-syntax': [0], // TODO: enable this check
 		'no-tabs': [0],
 		'no-underscore-dangle': [0],
 		'no-unused-vars': [1],

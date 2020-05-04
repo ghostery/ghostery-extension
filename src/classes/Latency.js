@@ -33,7 +33,7 @@ class Latency {
 		const request_id = details.requestId;
 		const tab_id = details.tabId;
 
-		if (!this.latencies.hasOwnProperty(request_id)) {
+		if (!Object.prototype.hasOwnProperty.call(this.latencies, request_id)) {
 			return 0;
 		}
 		// If the latencies object for this request id is empty then this is
@@ -46,7 +46,7 @@ class Latency {
 		// TRACKER1 --> NON-TRACKER --> TRACKER2
 		// TRACKER2's onBeforeRequest sync callback could maybe fire before
 		// NON-TRACKER's onBeforeRedirect async callback
-		if (!this.latencies[request_id].hasOwnProperty(details.url)) {
+		if (!Object.prototype.hasOwnProperty.call(this.latencies[request_id], details.url)) {
 			return 0;
 		}
 
