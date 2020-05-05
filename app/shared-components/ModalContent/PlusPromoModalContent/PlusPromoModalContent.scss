@@ -155,7 +155,7 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 
 .PlusPromoModal__text-link-container {
   display: flex;
-  justify-content: space-evenly; // Edge does not support space-evenly
+  justify-content: space-around; // Edge does not support space-evenly
 }
 
 .PlusPromoModal__link {
