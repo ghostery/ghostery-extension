@@ -30,14 +30,12 @@ const PlusPromoModalContent = (props) => {
 	return (
 		<div className="flex-container flex-dir-column align-middle">
 			<div className="PlusPromoModal__plus-logo" />
-			<div className="PlusPromoModal__main-content-container">
-				<div className="PlusPromoModal__header">
-					<div className="title">
-						<div>{t('spring_is_here')}</div>
-					</div>
-					<div className="description">
-						<div dangerouslySetInnerHTML={{ __html: t('subscribe_pitch_spring') }} />
-					</div>
+			<div className="PlusPromoModal__header">
+				<div className="title">
+					<div>{t('spring_is_here')}</div>
+				</div>
+				<div className="description">
+					<div dangerouslySetInnerHTML={{ __html: t('subscribe_pitch_spring') }} />
 				</div>
 			</div>
 			<div className="PlusPromoModal__call-to-action-container">
