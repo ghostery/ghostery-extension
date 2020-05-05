@@ -161,8 +161,8 @@ class Category extends React.Component {
 		const { isExpanded } = this.state;
 		const { isUnknown } = this.props;
 		const caretClasses = ClassNames(this.context, {
-			'caret-down': isExpanded,
-			'caret-up': !isExpanded,
+			'caret-down': !isExpanded,
+			'caret-up': isExpanded,
 			Category__antiTrackingCaret: isUnknown
 		});
 		return (
