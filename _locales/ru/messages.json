@@ -500,7 +500,7 @@
 			}
 		}
 	},
-	"panel_forgot_password": {
+	"forgot_password": {
 		"message": "Забыли пароль?"
 	},
 	"panel_help_panel_header": {
@@ -797,7 +797,7 @@
 		"message": "разблокированные трeкеры"
 	},
 	"white_black_list_error_invalid_url": {
-		"message": "Please enter a valid URL or wildcard."
+		"message": "Введите действительный адрес URL или подстановочный знак."
 	},
 	"whitelist_error_blacklist_url": {
 		"message": "Этот сайт был удален из вашего списка \"Ограниченные сайты\" и добавлен в список \"Доверенные сайты\"."
@@ -805,6 +805,21 @@
 	"whitelist_error_duplicate_url": {
 		"description": "Options page site whitelisting error message shown when whitelisting a URL that is already in the whitelist.",
 		"message": "Этот сайт уже включен в белый список."
+	},
+	"settings_adblocker": {
+		"message": "Списки блоков рекламы"
+	},
+	"settings_adblocker_lists": {
+		"message": "Загрузите следующие фильтровые списки блокировки рекламы:"
+	},
+	"settings_adblocker_list_1": {
+		"message": "Только реклама"
+	},
+	"settings_adblocker_list_2": {
+		"message": "Реклама + трекеры"
+	},
+	"settings_adblocker_list_3": {
+		"message": "Реклама + трекеры + раздражающие факторы"
 	},
 	"settings_purple_box": {
 		"message": "Фиолетовое окно"
@@ -1053,7 +1068,7 @@
 		"message": "Доверенные сайты"
 	},
 	"settings_sites_placeholder": {
-		"message": "example.com (wildcards supported)"
+		"message": "example.com (поддерживаются подстановочные знаки)"
 	},
 	"settings_restricted_sites": {
 		"message": "Ограниченные сайты"
@@ -1573,7 +1588,7 @@
 		}
 	},
 	"hub_supporter_perk_themes_description": {
-		"message": "Настраивайте цветовую схему Ghostery. Попробуйте нашу ночную тему!"
+		"message": "Настройте цвета Ghostery - попобуйте нашу тему \"Dark Blue\"."
 	},
 	"hub_supporter_perk_stats_description": {
 		"message": "Просмотрите статистику блокировок и узнайте, как Ghostery помогает вам"
@@ -1588,7 +1603,7 @@
 		"message": "Мы стремимся бесплатно предоставлять нашим пользователям лучшие услуги защиты конфиденциальности. Хотя мы не взимаем плату за набор программ по обеспечению конфиденциальности, вы можете поддержать нас с помощью недорогой ежемесячной подписки. Присоединяйтесь к нам путем обновления до Ghostery Plus и разблокируйте эксклюзивные функции."
 	},
 	"hub_supporter_feature_theme_description": {
-		"message": "Настраивайте цветовую схему Ghostery и наслаждайтесь новыми визуальными возможностями. Добавлено по популярным запросам. Познакомьтесь с нашей ночной темой. Скоро будут доступны новые цвета."
+		"message": "Настройте цвета Ghostery и получите новые впечатления! Добавлено в связи с популярным запросом. Попробуйте нашу специальную тему \"Dark Blue\" и многое другое."
 	},
 	"hub_supporter_feature_stats_description": {
 		"message": "Просматривайте исторические результаты блокировок с помощью графиков и статистики, чтобы выявить тенденции и узнать, как Ghostery повлиял на вашу работу в Интернете."
@@ -1802,6 +1817,9 @@
 	"subscribe_pitch": {
 		"message": "Хотя Ghostery является бесплатным, вы можете поддержать нас с помощью недорогой подписки за &#36;2 в месяц в обмен на эксклюзивные функции, такие как цветовые темы, приоритетная поддержка и другое. Присоединяйтесь к нам и оформляйте подписку!"
 	},
+	"subscribe_pitch_spring": {
+		"message": "Вам нравитя то, что мы делаем? Поддержите нас и откройте для себя новые весенние темы и личные сведения о трекинге, а также получите другие специальные привелегии, перейдя на Ghostery Plus!"
+	},
 	"subscribe_pitch_learn_more": {
 		"message": "Подробнее"
 	},
@@ -1814,11 +1832,23 @@
 	"subscribe_pitch_sign_here": {
 		"message": "Уже подписаны? Войти"
 	},
+	"subscribe_pitch_sign_in_plus": {
+		"message": "Уже подписаны? Войдите в систему"
+	},
 	"subscribe_pitch_sign_in": {
 		"message": "Уже подписаны? Войдите в систему"
 	},
-	"subscription_midnight_theme": {
-		"message": "Ночная тема"
+	"subscription_default_theme": {
+		"message": "По умолчанию"
+	},
+	"subscription_dark_blue_theme": {
+		"message": "Тема \"Dark Blue\""
+	},
+	"subscription_palm_theme": {
+		"message": "Тема \"Palm\""
+	},
+	"subscription_leaf_theme": {
+		"message": "Тема \"Leaf\""
 	},
 	"subscription_status": {
 		"message": "Статус"
@@ -2063,9 +2093,6 @@
 	"myoffrz_turnoff_rewards": {
 		"message": "Отключить Ghostery Rewards"
 	},
-	"OFFERS_ALREADY_TRANSLATED": {
-		"message": ""
-	},
 	"myoffrz_help": {
 		"message": "Помощь"
 	},
@@ -2143,6 +2170,18 @@
 				"content": "$1"
 			}
 		}
+	},
+	"myoffrz_check_conditions": {
+		"message": "Проверьте следующие условия"
+	},
+	"myoffrz_redeem_code": {
+		"message": "Активировать код"
+	},
+	"myoffrz_voucher_found": {
+		"message": "Найден ваучер"
+	},
+	"myoffrz_redeeming_voucher": {
+		"message": "Ваучер для активации"
 	},
 	"OFFERS_ENDS": {
 		"message": ""
@@ -2338,34 +2377,37 @@
 	"settings": {
 		"message": "Настройки"
 	},
-  	"try_ghostery_midnight": {
-	  "message": "Попробовать Ghostery Midnight"
+	"try_ghostery_midnight": {
+		"message": "Попробовать Ghostery Midnight"
 	},
-  	"seven_day_free_trial": {
-	  "message": "7-дневная бесплатная бета-версия (14 &#36; в месяц)"
+	"seven_day_free_trial": {
+		"message": "7-дневная бесплатная бета-версия"
+	},
+	"spring_is_here": {
+		"message": "Весна уже наступила!"
 	},
   	"full_coverage_protection_promise": {
 	  "message": "Получите полную защиту во всех браузерах и приложениях на вашем устройстве"
 	},
-  	"system_wide_tracker_and_ad_blocking": {
-	  "message": "Блокировка рекламы и трекеров во всей системе"
+	"system_wide_tracker_and_ad_blocking": {
+		"message": "Блокировка рекламы и трекеров во всей системе"
 	},
-  	"built_in_vpn": {
-	  "message": "Встроенный VPN"
+	"built_in_vpn": {
+		"message": "Встроенный VPN"
 	},
-  	"custom_whitelist_options": {
-	  "message": "Пользовательские параметры белого списка"
+	"custom_whitelist_options": {
+		"message": "Пользовательские параметры белого списка"
 	},
-  	"historical_tracking_insights": {
-	  "message": "Сведения истории наблюдения"
+	"historical_tracking_insights": {
+		"message": "Сведения истории наблюдения"
 	},
-  	"download_for_free": {
-	  "message": "Загрузить бесплатно"
+	"download_for_free": {
+		"message": "Загрузить бесплатно"
 	},
-  	"support_ghostery_for_2_instead": {
-	  "message": "Поддержка Ghostery за 2 &#36; вместо"
+	"support_ghostery_and_try_plus_instead": {
+		"message": "Поддержите Ghostery и попробуйте Plus"
 	},
-  	"no_thanks_continue_with_basic": {
-	  "message": "Нет, спасибо, продолжить с базовым"
+	"no_thanks_continue_with_basic": {
+		"message": "Нет, спасибо, продолжить с базовым"
 	}
 }

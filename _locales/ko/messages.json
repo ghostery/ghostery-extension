@@ -500,7 +500,7 @@
 			}
 		}
 	},
-	"panel_forgot_password": {
+	"forgot_password": {
 		"message": "암호를 잊으셨습니까?"
 	},
 	"panel_help_panel_header": {
@@ -805,6 +805,21 @@
 	"whitelist_error_duplicate_url": {
 		"description": "Options page site whitelisting error message shown when whitelisting a URL that is already in the whitelist.",
 		"message": "이 사이트는 이미 허용 목록에 있습니다."
+	},
+	"settings_adblocker": {
+		"message": "Ad Block Lists"
+	},
+	"settings_adblocker_lists": {
+		"message": "Load the following Ad Block filter lists:"
+	},
+	"settings_adblocker_list_1": {
+		"message": "Ads only"
+	},
+	"settings_adblocker_list_2": {
+		"message": "Ads + Trackers"
+	},
+	"settings_adblocker_list_3": {
+		"message": "Ads + Trackers + Annoyances"
 	},
 	"settings_purple_box": {
 		"message": "보라색 상자 "
@@ -1573,7 +1588,7 @@
 		}
 	},
 	"hub_supporter_perk_themes_description": {
-		"message": "고스터리 브라우저의 컬러를 원하는대로 선택하세요 - 미드나이트 테마를 이용해 보세요!"
+		"message": "Customize the Ghostery colors - try our Dark Blue theme!"
 	},
 	"hub_supporter_perk_stats_description": {
 		"message": "귀하의 차단 통계를 열람하고, Ghostery가 귀하를 위해 기능하는 방법을 살펴보세요"
@@ -1588,7 +1603,7 @@
 		"message": "당사는 사용자분들에게 무료로 최상의 개인정보 보호 서비스를 제공하려고 노력하고 있습니다. 개인정보 보호 서비스에는 요금을 부과하지 않으나 소정의 월별 서비스 요금을 지불하여 당사를 후원하실 수 있습니다. Ghostery Plus로 업그레이드하여 당사의 활동을 후원하고 계속해서 멋진 혜택을 받아보세요!"
 	},
 	"hub_supporter_feature_theme_description": {
-		"message": "새로운 비주얼 경험을 위해 고스터리 브라우저의 컬러를 선택하세요!많은 요청을 통해 안내됨특별한 미드나이트 테마와 앞으로 소개되는 다양한 테마를 확인하세요."
+		"message": "Customize the Ghostery colors for a new visual experience! Introduced through popular request. Check out our special Dark Blue theme, and more to come."
 	},
 	"hub_supporter_feature_stats_description": {
 		"message": "동향을 파악하고, Ghostery가 귀하의 브라우징에 영향을 미치는 방법을 알아보기 위해서 그래프 및 통계가 구비된 역사적 차단 결과를 열람하세요."
@@ -1802,6 +1817,9 @@
 	"subscribe_pitch": {
 		"message": "고스터리는 무료로 이용이 가능하나 매달 &#36;2의 저렴한 서비스 요금으로 저희를 후원해 주시면 컬러 테마, 후원자 우선 지원 서비스 등 다양한 혜택이 제공됩니다. 저희를 후원하고 서비스에 가입해 주세요!"
 	},
+	"subscribe_pitch_spring": {
+		"message": "Like what we do? Support us and unlock new spring themes, personal tracking insights, and other special perks by upgrading to Ghostery Plus!"
+	},
 	"subscribe_pitch_learn_more": {
 		"message": "자세히 알아보기"
 	},
@@ -1814,11 +1832,23 @@
 	"subscribe_pitch_sign_here": {
 		"message": "이미 가입하셨나요?여기에서 로그인하세요"
 	},
+	"subscribe_pitch_sign_in_plus": {
+		"message": "Already a subscriber? Sign in"
+	},
 	"subscribe_pitch_sign_in": {
 		"message": "이미 구독 중이신가요? 여기에서 로그인하세요"
 	},
-	"subscription_midnight_theme": {
-		"message": "미드나이트 테마"
+	"subscription_default_theme": {
+		"message": "Default"
+	},
+	"subscription_dark_blue_theme": {
+		"message": "Dark Blue Theme"
+	},
+	"subscription_palm_theme": {
+		"message": "Palm Theme"
+	},
+	"subscription_leaf_theme": {
+		"message": "Leaf Theme"
 	},
 	"subscription_status": {
 		"message": "상태"
@@ -2063,9 +2093,6 @@
 	"myoffrz_turnoff_rewards": {
 		"message": "Ghostery Rewards 기능 끄기"
 	},
-	"OFFERS_ALREADY_TRANSLATED": {
-		"message": ""
-	},
 	"myoffrz_help": {
 		"message": "도움말 "
 	},
@@ -2143,6 +2170,18 @@
 				"content": "$1"
 			}
 		}
+	},
+	"myoffrz_check_conditions": {
+		"message": "Check the following conditions"
+	},
+	"myoffrz_redeem_code": {
+		"message": "Redeem code"
+	},
+	"myoffrz_voucher_found": {
+		"message": "Voucher found"
+	},
+	"myoffrz_redeeming_voucher": {
+		"message": "Redeeming voucher"
 	},
 	"OFFERS_ENDS": {
 		"message": ""
@@ -2338,34 +2377,37 @@
 	"settings": {
 		"message": "설정 "
 	},
-  	"try_ghostery_midnight": {
-	  "message": "Ghostery Midnight를 사용해 보세요"
+	"try_ghostery_midnight": {
+		"message": "Ghostery Midnight를 사용해 보세요"
 	},
-  	"seven_day_free_trial": {
-	  "message": "7일 무료 평가판(&#36;14/월)"
+	"seven_day_free_trial": {
+		"message": "7 Day Free Trial"
+	},
+	"spring_is_here": {
+		"message": "Spring is here!"
 	},
   	"full_coverage_protection_promise": {
 	  "message": "장치의 모든 브라우저 및 앱을 완전하게 보호하세요"
 	},
-  	"system_wide_tracker_and_ad_blocking": {
-	  "message": "시스템 차원 트래커 및 광고 차단"
+	"system_wide_tracker_and_ad_blocking": {
+		"message": "시스템 차원 트래커 및 광고 차단"
 	},
-  	"built_in_vpn": {
-	  "message": "내장 VPN"
+	"built_in_vpn": {
+		"message": "내장 VPN"
 	},
-  	"custom_whitelist_options": {
-	  "message": "사용자 지정 허용 목록 옵션"
+	"custom_whitelist_options": {
+		"message": "사용자 지정 허용 목록 옵션"
 	},
-  	"historical_tracking_insights": {
-	  "message": "추적 기록 서비스"
+	"historical_tracking_insights": {
+		"message": "추적 기록 서비스"
 	},
-  	"download_for_free": {
-	  "message": "무료 다운로드"
+	"download_for_free": {
+		"message": "무료 다운로드"
 	},
-  	"support_ghostery_for_2_instead": {
-	  "message": "월 &#36;2로 Ghostery를 후원합니다"
+	"support_ghostery_and_try_plus_instead": {
+		"message": "Support Ghostery and try Plus instead"
 	},
-  	"no_thanks_continue_with_basic": {
-	  "message": "괜찮습니다, Basic으로 계속 진행합니다"
+	"no_thanks_continue_with_basic": {
+		"message": "괜찮습니다, Basic으로 계속 진행합니다"
 	}
 }
