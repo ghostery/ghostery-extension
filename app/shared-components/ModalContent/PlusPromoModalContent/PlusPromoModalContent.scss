@@ -45,8 +45,10 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 		margin-top: 8px;
 	}
 	.description {
-		font-size: 18px;
-		margin-top: 16px;
+		height: 131px;
+		display: flex;
+		align-items: center;
+		font-size: 15px;
 		font-weight: 500;
 		color: $tundora;
 		width: 350px;
@@ -158,26 +160,14 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 
 .PlusPromoModal__text-link-container {
   display: flex;
-  justify-content: space-around; // Edge does not support space-evenly
+  justify-content: space-evenly; // Edge does not support space-evenly
 }
 
 .PlusPromoModal__link {
-  margin-left: 10px;
-  margin-right: 10px;
-  font-size: 15px;
+  font-size: 12px;
   font-family: $standard-font-family;
   color: #4a4a4a;
   text-decoration: underline;
   text-align: center;
 	cursor: pointer;
-
-	&.sign-in {
-		float: left;
-		left: 10px;
-	}
-
-	&.turn-promos-off {
-		float: right;
-		right: 10px;
-	}
 }

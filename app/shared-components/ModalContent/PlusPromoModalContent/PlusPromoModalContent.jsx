@@ -46,7 +46,7 @@ const PlusPromoModalContent = (props) => {
 						<span>{t('upgrade_to_plus').toUpperCase()}</span>
 					</button>
 				</div>
-				<div>
+				<div className="PlusPromoModal__text-link-container">
 					{!loggedIn &&
 						<span className="PlusPromoModal__link sign-in" onClick={handleSignInClick}>{t('subscribe_pitch_sign_in_plus')}</span>
 					}
