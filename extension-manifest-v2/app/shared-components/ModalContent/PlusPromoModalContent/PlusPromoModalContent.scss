@@ -31,11 +31,6 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
   background-image: url('/app/images/panel/spring-plus-logo.svg');
 }
 
-.PlusPromoModal__main-content-container {
-  height: 210px;
-  display: flex;
-  justify-content: center;
-}
 .PlusPromoModal__header {
 	text-align: center;
 	font-weight: bold;
@@ -45,8 +40,10 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 		margin-top: 8px;
 	}
 	.description {
-		font-size: 18px;
-		margin-top: 16px;
+		height: 131px;
+		display: flex;
+		align-items: center;
+		font-size: 15px;
 		font-weight: 500;
 		color: $tundora;
 		width: 350px;
@@ -162,22 +159,10 @@ $condensed-font-family: Roboto Condensed, "Open Sans", "Helvetica Neue", Helveti
 }
 
 .PlusPromoModal__link {
-  margin-left: 10px;
-  margin-right: 10px;
-  font-size: 15px;
+  font-size: 12px;
   font-family: $standard-font-family;
   color: #4a4a4a;
   text-decoration: underline;
   text-align: center;
 	cursor: pointer;
-
-	&.sign-in {
-		float: left;
-		left: 10px;
-	}
-
-	&.turn-promos-off {
-		float: right;
-		right: 10px;
-	}
 }
