@@ -40,7 +40,7 @@ module.exports = {
 	rules: {
 		'arrow-parens': [2, 'as-needed', { 'requireForBlockBody': true }],
 		'camelcase': [0],
-		'class-methods-use-this': [0], // TODO: enable this check
+		'class-methods-use-this': [1],
 		'comma-dangle': [2, {
 			'arrays': 'only-multiline',
 			'objects': 'only-multiline',
@@ -90,7 +90,7 @@ module.exports = {
 		'react/no-danger': [0],
 		'react/prop-types': [0],
 		'react/jsx-fragments': [1, 'element'],
-		'react/sort-comp': [2, {
+		'react/sort-comp': [0, { //TODO: enable this check
 			order: [
 				"static-variables",
 				"instance-variables",

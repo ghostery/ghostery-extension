@@ -40,7 +40,7 @@ class GhosteryFeature extends React.Component {
 		this.props.handleClick(this.props.type);
 	}
 
-	_getButtonText(sitePolicy, showText, type) {
+	static _getButtonText(sitePolicy, showText, type) {
 		if (!showText) {
 			return '';
 		}
@@ -59,7 +59,7 @@ class GhosteryFeature extends React.Component {
 		}
 	}
 
-	_getTooltipText(sitePolicy, type) {
+	static _getTooltipText(sitePolicy, type) {
 		switch (type) {
 			case 'trust':
 				return (sitePolicy === WHITELISTED ?
@@ -74,7 +74,7 @@ class GhosteryFeature extends React.Component {
 		}
 	}
 
-	_isFeatureActive(type, sitePolicy) {
+	static _isFeatureActive(type, sitePolicy) {
 		switch (type) {
 			case 'trust':
 				return sitePolicy === WHITELISTED;
@@ -96,7 +96,7 @@ class GhosteryFeature extends React.Component {
 			type
 		} = this.props;
 
-		const active = this._isFeatureActive(type, sitePolicy);
+		const active = GhosteryFeature._isFeatureActive(type, sitePolicy);
 		// TODO Foundation dependency: button
 		const ghosteryFeatureClassNames = ClassNames(
 			'button',
@@ -120,10 +120,10 @@ class GhosteryFeature extends React.Component {
 			<div className={ghosteryFeatureClassNames} onClick={this.handleClick}>
 				<span className="flex-container align-center-middle full-height">
 					<span className="GhosteryFeatureButton__text">
-						{this._getButtonText(sitePolicy, showText, type)}
+						{GhosteryFeature._getButtonText(sitePolicy, showText, type)}
 					</span>
 				</span>
-				<Tooltip body={this._getTooltipText(sitePolicy, type)} position={tooltipPosition} />
+				<Tooltip body={GhosteryFeature._getTooltipText(sitePolicy, type)} position={tooltipPosition} />
 			</div>
 		);
 	}

@@ -42,7 +42,7 @@ export default class Path extends React.Component {
 		this.props.handler();
 	}
 
-	polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+	static polarToCartesian(centerX, centerY, radius, angleInDegrees) {
 		const angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
 
 		return {
@@ -51,9 +51,9 @@ export default class Path extends React.Component {
 		};
 	}
 
-	describeArc(x, y, radius, startAngle, endAngle) {
-		const start = this.polarToCartesian(x, y, radius, startAngle);
-		const end = this.polarToCartesian(x, y, radius, endAngle);
+	static describeArc(x, y, radius, startAngle, endAngle) {
+		const start = Path.polarToCartesian(x, y, radius, startAngle);
+		const end = Path.polarToCartesian(x, y, radius, endAngle);
 
 		const largeArcFlag = endAngle - startAngle <= 180 ? '0' : '1';
 
@@ -71,7 +71,7 @@ export default class Path extends React.Component {
 		// Fix error for single path
 		const end = path.end === 360 ? 359.9999 : path.end;
 
-		const d = this.describeArc(0, 0, radius, start, end);
+		const d = Path.describeArc(0, 0, radius, start, end);
 
 		return (
 			<path

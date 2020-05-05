@@ -142,14 +142,14 @@ class DonutGraph extends React.Component {
 	/**
 	 *  Helper function that calculates domain value for greyscale / redscale rendering
 	 */
-	getTone(catCount, catIndex) {
+	static getTone(catCount, catIndex) {
 		return catCount > 1 ? 100 / (catCount - 1) * catIndex * 0.01 : 0;
 	}
 
 	/**
 	 *  Helper to retrieve a category's tooltip from the DOM
 	 */
-	grabTooltip(d) {
+	static grabTooltip(d) {
 		return document.getElementById(`${d.data.id}_tooltip`);
 	}
 
@@ -278,10 +278,10 @@ class DonutGraph extends React.Component {
 			.append('path')
 			.style('fill', (d, i) => {
 				if (renderGreyscale) {
-					return this.colors.greyscale(this.getTone(categoryCount, i));
+					return this.colors.greyscale(DonutGraph.getTone(categoryCount, i));
 				}
 				if (renderRedscale) {
-					return this.colors.redscale(this.getTone(categoryCount, i));
+					return this.colors.redscale(DonutGraph.getTone(categoryCount, i));
 				}
 				return this.colors.regular(d.data.id);
 			})
@@ -295,7 +295,7 @@ class DonutGraph extends React.Component {
 				const centroid = trackerArc.centroid(d);
 				const pX = centroid[0] + this.donutRadius;
 				const pY = centroid[1] + this.donutRadius;
-				const tooltip = this.grabTooltip(d);
+				const tooltip = DonutGraph.grabTooltip(d);
 				if (tooltip) {
 					tooltip.style.left = `${pX - (tooltip.offsetWidth / 2)}px`;
 					tooltip.style.top = `${pY - (tooltip.offsetHeight + 8)}px`;
@@ -303,7 +303,7 @@ class DonutGraph extends React.Component {
 				}
 			})
 			.on('mouseout', (d) => {
-				const tooltip = this.grabTooltip(d);
+				const tooltip = DonutGraph.grabTooltip(d);
 				if (tooltip) {
 					tooltip.classList.remove('DonutGraph__tooltip--show');
 				}

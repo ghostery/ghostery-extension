@@ -25,8 +25,6 @@ import { sendMessage, processUrl, injectScript } from './utils';
 import c2p_tpl from '../../app/templates/click2play.html';
 import c2p_images from '../../app/data-images/click2play';
 
-const policy = new Policy();
-
 /**
  * Builds Click2Play templates for a given tab_id.
  *
@@ -57,7 +55,7 @@ export function buildC2P(details, app_id) {
 	const app_name = bugDb.db.apps[app_id].name;
 	const c2pHtml = [];
 	const tab_host = tabInfo.getTabInfo(tab_id, 'host');
-	const blacklisted = !!policy.blacklisted(tab_host);
+	const blacklisted = !!Policy.blacklisted(tab_host);
 
 	// Generate the templates for each c2p definition (could be multiple for an app ID)
 	c2pApp.forEach((c2pAppDef) => {
@@ -122,7 +120,7 @@ export function buildRedirectC2P(requestId, redirectUrls, app_id) {
 	globals.BLOCKED_REDIRECT_DATA = {};
 	globals.BLOCKED_REDIRECT_DATA.app_id = app_id;
 	globals.BLOCKED_REDIRECT_DATA.url = redirectUrls.redirectUrl;
-	globals.BLOCKED_REDIRECT_DATA.blacklisted = !!policy.blacklisted(host_url);
+	globals.BLOCKED_REDIRECT_DATA.blacklisted = !!Policy.blacklisted(host_url);
 
 	globals.BLOCKED_REDIRECT_DATA.translations = {
 		blocked_redirect_page_title: t('blocked_redirect_page_title'),

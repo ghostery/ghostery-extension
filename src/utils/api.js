@@ -61,7 +61,7 @@ class Api {
 			}));
 	}
 
-	_processResponse(res) {
+	static _processResponse(res) {
 		return new Promise((resolve, reject) => {
 			const { status } = res;
 			if (status === 204) {
@@ -95,7 +95,7 @@ class Api {
 	_sendAuthenticatedRequest(method, path, body) {
 		return new Promise((resolve, reject) => {
 			this._sendReq(method, path, body)
-				.then(this._processResponse)
+				.then(Api._processResponse)
 				.then(dataFirstTry => resolve(dataFirstTry))
 				.catch((data) => {
 					let shouldRefresh = false;
@@ -122,7 +122,7 @@ class Api {
 									)).catch(err => reject(err));
 								}
 								this._sendReq(method, path, body)
-									.then(this._processResponse)
+									.then(Api._processResponse)
 									.then(dataSecondTry => resolve(dataSecondTry))
 									.catch((data3) => {
 										this._errorHandler(data3.errors)

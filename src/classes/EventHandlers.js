@@ -372,7 +372,7 @@ class EventHandlers {
 
 		/* ** SMART BLOCKING - Privacy ** */
 		// block HTTP request on HTTPS page
-		if (this.policySmartBlock.isInsecureRequest(tab_id, page_protocol, processed.scheme, processed.hostname)) {
+		if (PolicySmartBlock.isInsecureRequest(tab_id, page_protocol, processed.scheme, processed.hostname)) {
 			return this._blockHelper(details, tab_id, null, null, request_id, from_redirect, true);
 		}
 
@@ -393,7 +393,7 @@ class EventHandlers {
 
 		/* ** SMART BLOCKING - Breakage ** */
 		// allow first party trackers
-		if (this.policySmartBlock.isFirstPartyRequest(tab_id, page_domain, processed.generalDomain)) {
+		if (PolicySmartBlock.isFirstPartyRequest(tab_id, page_domain, processed.generalDomain)) {
 			return { cancel: false };
 		}
 
@@ -838,7 +838,7 @@ class EventHandlers {
 		if (fromRedirect && globals.LET_REDIRECTS_THROUGH) {
 			block = { block: false, reason: BLOCK_REASON_C2P_ALLOWED_THROUGH };
 		} else {
-			block = this.policy.shouldBlock(app_id, cat_id, tab_id, tab_host, page_url);
+			block = Policy.shouldBlock(app_id, cat_id, tab_id, tab_host, page_url);
 		}
 
 		return block;

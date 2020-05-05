@@ -120,7 +120,7 @@ class TrustAndRestrict extends React.Component {
 
 		// Check for Validity
 		if (pageHost.length >= 2083
-			|| !this.isValidUrlorWildcard(pageHost)) {
+			|| !TrustAndRestrict.isValidUrlorWildcard(pageHost)) {
 			this.showWarning(t('white_black_list_error_invalid_url'));
 			return;
 		}
@@ -144,7 +144,7 @@ class TrustAndRestrict extends React.Component {
 		}
 	}
 
-	isValidUrlorWildcard(pageHost) {
+	static isValidUrlorWildcard(pageHost) {
 		// Only allow valid host name characters, ':' for port numbers and '*' for wildcards
 		const isSafePageHost = /^[a-zA-Z0-9-.:*]*$/;
 		if (!isSafePageHost.test(pageHost)) { return false; }

@@ -46,15 +46,15 @@ class CliqzFeature extends React.Component {
 		clickButton({
 			feature: `enable_${featureType}`,
 			status: active,
-			text: this._getAlertText(active, type),
+			text: CliqzFeature._getAlertText(active, type),
 		});
 	}
 
-	_getStatus(active) {
+	static _getStatus(active) {
 		return active ? t('on') : t('off');
 	}
 
-	_getTooltipBodyText(active, isTooltipBody, type) {
+	static _getTooltipBodyText(active, isTooltipBody, type) {
 		if (!isTooltipBody) return false;
 
 		if (active) {
@@ -82,7 +82,7 @@ class CliqzFeature extends React.Component {
 		}
 	}
 
-	_getTooltipHeaderText(isTooltipHeader, type) {
+	static _getTooltipHeaderText(isTooltipHeader, type) {
 		if (!isTooltipHeader) return false;
 
 		switch (type) {
@@ -97,7 +97,7 @@ class CliqzFeature extends React.Component {
 		}
 	}
 
-	_getAlertText(active, type) {
+	static _getAlertText(active, type) {
 		return active ?
 			t(`alert_${type}_off`) :
 			t(`alert_${type}_on`);
@@ -145,11 +145,11 @@ class CliqzFeature extends React.Component {
 
 		return (
 			<div className={cliqzFeatureClassNames} onClick={this.clickCliqzFeature}>
-				<div className="CliqzFeature__status">{this._getStatus(active)}</div>
+				<div className="CliqzFeature__status">{CliqzFeature._getStatus(active)}</div>
 				<div className={iconClassNames}>
 					<Tooltip
-						header={this._getTooltipHeaderText(isTooltipHeader, type)}
-						body={this._getTooltipBodyText(active, isTooltipBody, type)}
+						header={CliqzFeature._getTooltipHeaderText(isTooltipHeader, type)}
+						body={CliqzFeature._getTooltipBodyText(active, isTooltipBody, type)}
 						position={tooltipPosition}
 						// className={isTiny ? 'CliqzFeature--tooltipUp' : ''}
 					/>

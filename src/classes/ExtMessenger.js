@@ -21,15 +21,15 @@ import { log } from '../utils/common';
  * @memberOf  BackgroundClasses
  */
 export class ExtMessenger {
-	addListener(fn) {
+	static addListener(fn) {
 		chrome.runtime.onMessageExternal.addListener(fn);
 	}
 
-	removeListener(fn) {
+	static removeListener(fn) {
 		chrome.runtime.onMessageExternal.removeListener(fn);
 	}
 
-	sendMessage(extensionId, message) {
+	static sendMessage(extensionId, message) {
 		chrome.runtime.sendMessage(extensionId, message, () => {
 			if (chrome.runtime.lastError) {
 				log('ExtMessenger sendMessage error:', chrome.runtime.lastError);
@@ -44,18 +44,17 @@ export class ExtMessenger {
  */
 export default class KordInjector {
 	constructor() {
-		this.messenger = new ExtMessenger();
 		this.extensionId = 'cliqz@cliqz.com';
 		this.moduleWrappers = new Map();
 		this._messageHandler = this._messageHandler.bind(this);
 	}
 
 	init() {
-		this.messenger.addListener(this._messageHandler);
+		ExtMessenger.addListener(this._messageHandler);
 	}
 
 	unload() {
-		this.messenger.removeListener(this._messageHandler);
+		ExtMessenger.removeListener(this._messageHandler);
 	}
 
 	module(moduleName) {
@@ -70,7 +69,7 @@ export default class KordInjector {
 		return new Spanan((m) => {
 			const message = m;
 			message.moduleName = moduleName;
-			this.messenger.sendMessage(this.extensionId, message);
+			ExtMessenger.sendMessage(this.extensionId, message);
 		});
 	}
 

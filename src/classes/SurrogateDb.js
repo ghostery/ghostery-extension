@@ -47,7 +47,7 @@ class SurrogateDb extends Updatable {
 	 * @override
 	 *
 	 */
-	update() {}
+	static update() {}
 
 	/**
 	 * Process surrogates from fetched json

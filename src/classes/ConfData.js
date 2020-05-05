@@ -37,7 +37,7 @@ const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
 class ConfData {
 	constructor() {
 		// language does not get persisted
-		this.language = this._getDefaultLanguage();
+		this.language = ConfData._getDefaultLanguage();
 		this.SYNC_SET = new Set(globals.SYNC_ARRAY);
 	}
 
@@ -166,7 +166,7 @@ class ConfData {
 		});
 	}
 
-	_getDefaultLanguage() {
+	static _getDefaultLanguage() {
 		const SUPPORTED_LANGUAGES = {
 			de: 'Deutsch',
 			en: 'English',

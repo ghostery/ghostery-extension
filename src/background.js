@@ -23,6 +23,7 @@ import moment from 'moment/min/moment-with-locales.min';
 import cliqz from './classes/Cliqz';
 // object class
 import Events from './classes/EventHandlers';
+import Policy from './classes/Policy';
 // static classes
 import panelData from './classes/PanelData';
 import bugDb from './classes/BugDb';
@@ -39,7 +40,7 @@ import globals from './classes/Globals';
 import surrogatedb from './classes/SurrogateDb';
 import tabInfo from './classes/TabInfo';
 import metrics from './classes/Metrics';
-import rewards from './classes/Rewards';
+import Rewards from './classes/Rewards';
 import account from './classes/Account';
 import GhosteryModule from './classes/Module';
 import promoModals from './classes/PromoModals';
@@ -491,14 +492,14 @@ function handleBlockedRedirect(name, message, tab_id, callback) {
 function handleRewards(name, message, callback) {
 	switch (name) {
 		case 'rewardSignal': // e.g. hub_open | hub_closed
-			rewards.sendSignal(message);
+			Rewards.sendSignal(message);
 			break;
 		case 'ping':
 			metrics.ping(message);
 			break;
 		case 'setPanelData':
 			if (Object.prototype.hasOwnProperty.call(message, 'enable_offers')) {
-				rewards.sendSignal(message.signal);
+				Rewards.sendSignal(message.signal);
 				panelData.set({ enable_offers: message.enable_offers });
 			}
 			return callback();
@@ -598,7 +599,7 @@ function handleGhosteryHub(name, message, callback) {
 		}
 		case 'SET_GHOSTERY_REWARDS': {
 			const { enable_ghostery_rewards = true } = message;
-			rewards.sendSignal({
+			Rewards.sendSignal({
 				actionId: `rewards_${enable_ghostery_rewards ? 'on' : 'off'}`,
 				origin: 'ghostery-setup-flow',
 				type: 'action-signal',
@@ -1012,7 +1013,7 @@ function initializeDispatcher() {
 		const { db } = bugDb;
 		db.noneSelected = (num_selected === 0);
 		// can't simply compare num_selected and size(db.apps) since apps get removed sometimes
-		db.allSelected = (!!num_selected && every(db.apps, (app, app_id) => Object.property.hasOwnProperty.call(appIds, app_id)));
+		db.allSelected = (!!num_selected && every(db.apps, (app, app_id) => Object.prototype.hasOwnProperty.call(appIds, app_id)));
 	});
 	dispatcher.on('conf.save.site_whitelist', () => {
 		// TODO debounce with below
@@ -1203,7 +1204,7 @@ function initialiseWebRequestPipeline() {
  */
 function isWhitelisted(state) {
 	// state.ghosteryWhitelisted is sometimes undefined so force to bool
-	return Boolean(globals.SESSION.paused_blocking || events.policy.getSitePolicy(state.tabUrl, state.url) === 2 || state.ghosteryWhitelisted);
+	return Boolean(globals.SESSION.paused_blocking || Policy.getSitePolicy(state.tabUrl, state.url) === 2 || state.ghosteryWhitelisted);
 }
 /**
  * Set listener for 'enabled' event for Antitracking module which replaces
@@ -1592,7 +1593,7 @@ function initializeGhosteryModules() {
 
 				cliqz.events.subscribe('myoffrz:turnoff', () => {
 					panelData.set({ enable_offers: false });
-					rewards.sendSignal({
+					Rewards.sendSignal({
 						actionId: 'rewards_off',
 						type: 'action-signal',
 					});

@@ -43,7 +43,7 @@ class Click2PlayDb extends Updatable {
 		log('processing c2p...');
 
 		try {
-			db = this._buildDb(data.click2play, data.click2playVersion);
+			db = Click2PlayDb._buildDb(data.click2play, data.click2playVersion);
 		} catch (e) {
 			log('Click2PlayDb processList() error', e);
 			return false;
@@ -108,7 +108,7 @@ class Click2PlayDb extends Updatable {
 	 * @param   {string} 	version 	database version
 	 * @return  {Object}         		reconfigured database object
 	 */
-	_buildDb(entries, version) {
+	static _buildDb(entries, version) {
 		const apps = {};
 		let	allow;
 

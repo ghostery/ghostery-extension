@@ -102,8 +102,8 @@ function fixMissingPlaceholders(paths) {
 				let dirty = false;
 				const localeJson = jsonfile.readFileSync(`.${path}`);
 				Object.keys(defaultLocaleJson).forEach((key) => {
-					if (defaultLocaleJson[key].hasOwnProperty('placeholders')) {
-						if (localeJson[key] && !localeJson[key].hasOwnProperty('placeholders')) {
+					if (Object.prototype.hasOwnProperty.call(defaultLocaleJson[key], 'placeholders')) {
+						if (localeJson[key] && !Object.prototype.hasOwnProperty.call(localeJson[key], 'placeholders')) {
 							dirty = true;
 							localeJson[key].placeholders = defaultLocaleJson[key].placeholders;
 						}

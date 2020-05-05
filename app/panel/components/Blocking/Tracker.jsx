@@ -242,14 +242,14 @@ class Tracker extends React.Component {
 				{(oneOrMoreCookies || oneOrMoreFingerprints) && (
 					<div className="trk-cliqz-stats-container">
 						{this._renderCliqzCookiesAndFingerprintsIcon()}
-						{oneOrMoreCookies && this._renderCliqzCookieStat(cliqzCookieCount)}
-						{oneOrMoreFingerprints && this._renderCliqzFingerprintStat(cliqzFingerprintCount)}
+						{oneOrMoreCookies && Tracker._renderCliqzCookieStat(cliqzCookieCount)}
+						{oneOrMoreFingerprints && Tracker._renderCliqzFingerprintStat(cliqzFingerprintCount)}
 					</div>
 				)}
 				{oneOrMoreAds && (
 					<div className="trk-cliqz-stats-container">
 						{this._renderCliqzAdsIcon()}
-						{this._renderCliqzAdStat(cliqzAdCount)}
+						{Tracker._renderCliqzAdStat(cliqzAdCount)}
 					</div>
 				)}
 			</div>
@@ -275,13 +275,13 @@ class Tracker extends React.Component {
 		);
 	}
 
-	_renderCliqzCookieStat(count) { return this._renderCliqzStat(count, 'cookie'); }
+	static _renderCliqzCookieStat(count) { return Tracker._renderCliqzStat(count, 'cookie'); }
 
-	_renderCliqzFingerprintStat(count) { return this._renderCliqzStat(count, 'fingerprint'); }
+	static _renderCliqzFingerprintStat(count) { return Tracker._renderCliqzStat(count, 'fingerprint'); }
 
-	_renderCliqzAdStat(count) { return this._renderCliqzStat(count, 'ad'); }
+	static _renderCliqzAdStat(count) { return Tracker._renderCliqzStat(count, 'ad'); }
 
-	_renderCliqzStat(count, type) {
+	static _renderCliqzStat(count, type) {
 		const exactlyOne = count === 1;
 		const label = exactlyOne ?
 			t(`${type}`) :

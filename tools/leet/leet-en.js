@@ -67,7 +67,7 @@ const leet_convert = function(string) {
 	output = output.replace(/cks/g, 'x');
 
 	for (letter in characterMap) {
-		if (characterMap.hasOwnProperty(letter)) {
+		if (Object.prototype.hasOwnProperty.call(characterMap, letter)) {
 			output = output.replace(new RegExp(letter, 'g'), characterMap[letter]);
 		}
 	}
@@ -87,7 +87,7 @@ if (!fs.existsSync('./tools/leet/messages.en.copy.json')) {
 
 	// Create a LEETed version of the messages.json file
 	for (key in en) {
-		if (en[key].hasOwnProperty('message')) {
+		if (Object.prototype.hasOwnProperty.call(en[key], 'message')) {
 			const message = leet_convert(en[key].message);
 			const { placeholders } = en[key];
 			leet[key] = { message, placeholders };

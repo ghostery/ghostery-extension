@@ -45,7 +45,6 @@ class Rewards extends React.Component {
 
 		// helper render functions
 		this.renderRewardListComponent = this.renderRewardListComponent.bind(this);
-		this.handleFaqClick = this.handleFaqClick.bind(this);
 		this.handlePortMessage = this.handlePortMessage.bind(this);
 
 
@@ -141,7 +140,7 @@ class Rewards extends React.Component {
 	/**
 	 * Handles clicking the learn more button
 	 */
-	handleFaqClick() {
+	static handleFaqClick() {
 		sendMessage('openNewTab', {
 			url: 'https://www.ghostery.com/faqs/what-new-ghostery-features-can-we-expect-in-the-future/',
 			become_active: true,
@@ -202,7 +201,7 @@ class Rewards extends React.Component {
 	 * Helper render function for Reward Icon SVG
 	 * @return {JSX} JSX for the Rewards Icon SVG
 	 */
-	renderRewardSvg() {
+	static renderRewardSvg() {
 		return (
 			<svg className="RewardsPanel__reward_icon" viewBox="0 0 18 23" width="50" height="50">
 				<g strokeWidth=".5" fillRule="evenodd">
@@ -212,15 +211,15 @@ class Rewards extends React.Component {
 		);
 	}
 
-	renderCLIQZtext() {
+	static renderCLIQZtext() {
 		return (
 			<div className="RewardsPanel__info">
-				{ this.renderRewardSvg() }
+				{ Rewards.renderRewardSvg() }
 				<div>{ t('panel_detail_rewards_cliqz_text') }</div>
 				<hr />
 				<div
 					className="RewardsPanel__learn_more button primary hollow"
-					onClick={this.handleFaqClick}
+					onClick={Rewards.handleFaqClick}
 				>
 					{ t('panel_detail_learn_more') }
 				</div>
@@ -228,19 +227,19 @@ class Rewards extends React.Component {
 		);
 	}
 
-	renderRewardsTurnoffText() {
+	static renderRewardsTurnoffText() {
 		return (
 			<div className="RewardsPanel__info">
-				{ this.renderRewardSvg() }
+				{ Rewards.renderRewardSvg() }
 				<div>{ t('panel_detail_rewards_off') }</div>
 			</div>
 		);
 	}
 
-	renderRewardsNoneFoundText() {
+	static renderRewardsNoneFoundText() {
 		return (
 			<div className="RewardsPanel__info">
-				{ this.renderRewardSvg() }
+				{ Rewards.renderRewardSvg() }
 				<div>{ t('panel_detail_rewards_none_found') }</div>
 			</div>
 		);
@@ -251,9 +250,9 @@ class Rewards extends React.Component {
 	 * @return {JSX} JSX for the Rewards Items List
 	 */
 	renderRewardListComponent() {
-		if (IS_CLIQZ) { return this.renderCLIQZtext(); }
+		if (IS_CLIQZ) { return Rewards.renderCLIQZtext(); }
 		const { enable_offers, is_expanded } = this.props;
-		if (!enable_offers) { return this.renderRewardsTurnoffText(); }
+		if (!enable_offers) { return Rewards.renderRewardsTurnoffText(); }
 
 		const {
 			shouldHideRewards,
@@ -261,7 +260,7 @@ class Rewards extends React.Component {
 			iframeHeight,
 			rewardsCount,
 		} = this.state;
-		if (shouldHideRewards) { return this.renderRewardsNoneFoundText(); }
+		if (shouldHideRewards) { return Rewards.renderRewardsNoneFoundText(); }
 
 		const src = chrome.runtime.getURL('cliqz/offers-templates/control-center.html?cross-origin');
 		const text = t(`panel_rewards_view__reward${rewardsCount === 1 ? '' : 's'}`);
