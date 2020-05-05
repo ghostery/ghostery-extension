@@ -30,14 +30,12 @@ const PlusPromoModalContent = (props) => {
 	return (
 		<div className="flex-container flex-dir-column align-middle">
 			<div className="PlusPromoModal__plus-logo" />
-			<div className="PlusPromoModal__main-content-container">
-				<div className="PlusPromoModal__header">
-					<div className="title">
-						<div>{t('spring_is_here')}</div>
-					</div>
-					<div className="description">
-						<div dangerouslySetInnerHTML={{ __html: t('subscribe_pitch_spring') }} />
-					</div>
+			<div className="PlusPromoModal__header">
+				<div className="title">
+					<div>{t('spring_is_here')}</div>
+				</div>
+				<div className="description">
+					<div dangerouslySetInnerHTML={{ __html: t('subscribe_pitch_spring') }} />
 				</div>
 			</div>
 			<div className="PlusPromoModal__call-to-action-container">
@@ -46,7 +44,7 @@ const PlusPromoModalContent = (props) => {
 						<span>{t('upgrade_to_plus').toUpperCase()}</span>
 					</button>
 				</div>
-				<div>
+				<div className="PlusPromoModal__text-link-container">
 					{!loggedIn &&
 						<span className="PlusPromoModal__link sign-in" onClick={handleSignInClick}>{t('subscribe_pitch_sign_in_plus')}</span>
 					}
