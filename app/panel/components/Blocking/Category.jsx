@@ -167,7 +167,7 @@ class Category extends React.Component {
 		});
 		return (
 			<svg className={caretClasses} onClick={this.toggleCategoryTrackers} width="11" height="7" viewBox="0 0 11 7" xmlns="http://www.w3.org/2000/svg">
-				<path d={isExpanded ? 'M1.21.02L-.02 1.25l5.27 5.27 5.27-5.27L9.29.02 5.25 4.06' : 'M1.283 7L0 5.676 5.5 0 11 5.676 9.717 7 5.5 2.649z'} fillRule="evenodd" />
+				<path d={isExpanded ? 'M1.283 7L0 5.676 5.5 0 11 5.676 9.717 7 5.5 2.649z' : 'M1.21.02L-.02 1.25l5.27 5.27 5.27-5.27L9.29.02 5.25 4.06'} fillRule="evenodd" />
 			</svg>
 		);
 	}
