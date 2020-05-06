@@ -109,7 +109,7 @@ class Header extends React.Component {
 		}
 
 		let accountIcon;
-		if (!loggedIn || loggedIn && user && !user.emailValidated) {
+		if (!loggedIn || (loggedIn && user && !user.emailValidated)) {
 			accountIcon = (
 				<div className="g-tooltip">
 					<svg className="profile-svg" width="26" height="40" viewBox="0 0 26 16">

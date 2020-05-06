@@ -64,7 +64,7 @@ export default class FixedMenu extends React.Component {
 				return total;
 			}
 			case 'enable_ad_block':
-				return this.adBlockData && this.adBlockData.totalCount || 0;
+				return (this.adBlockData && this.adBlockData.totalCount) || 0;
 			case 'enable_smart_block':
 				Object.keys(this.smartBlockData.blocked || {}).forEach(() => {
 					total++;

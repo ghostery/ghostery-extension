@@ -328,7 +328,7 @@ class Summary extends React.Component {
 			enable_ad_block,
 		} = this.props;
 
-		return enable_ad_block && adBlock && adBlock.trackerCount || 0;
+		return (enable_ad_block && adBlock && adBlock.trackerCount) || 0;
 	}
 
 	_antiTrackUnsafe() {
@@ -337,7 +337,7 @@ class Summary extends React.Component {
 			enable_anti_tracking,
 		} = this.props;
 
-		return enable_anti_tracking && antiTracking && antiTracking.trackerCount || 0;
+		return (enable_anti_tracking && antiTracking && antiTracking.trackerCount) || 0;
 	}
 
 	_requestsModifiedCount() {
@@ -353,7 +353,7 @@ class Summary extends React.Component {
 	_sbBlocked() {
 		const { smartBlock, trackerCounts } = this.props;
 
-		let sbBlocked = smartBlock && smartBlock.blocked && Object.keys(smartBlock.blocked).length || 0;
+		let sbBlocked = (smartBlock && smartBlock.blocked && Object.keys(smartBlock.blocked).length) || 0;
 		if (sbBlocked === trackerCounts.sbBlocked) {
 			sbBlocked = 0;
 		}
@@ -364,7 +364,7 @@ class Summary extends React.Component {
 	_sbAllowed() {
 		const { smartBlock, trackerCounts } = this.props;
 
-		let sbAllowed = smartBlock && smartBlock.unblocked && Object.keys(smartBlock.unblocked).length || 0;
+		let sbAllowed = (smartBlock && smartBlock.unblocked && Object.keys(smartBlock.unblocked).length) || 0;
 		if (sbAllowed === trackerCounts.sbAllowed) {
 			sbAllowed = 0;
 		}
@@ -375,7 +375,7 @@ class Summary extends React.Component {
 	_sbAdjust() {
 		const { enable_smart_block } = this.props;
 
-		return enable_smart_block && (this._sbBlocked() - this._sbAllowed()) || 0;
+		return enable_smart_block && ((this._sbBlocked() - this._sbAllowed()) || 0);
 	}
 
 	_totalTrackersBlockedCount() {

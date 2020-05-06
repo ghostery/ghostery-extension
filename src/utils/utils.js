@@ -593,7 +593,7 @@ export function injectNotifications(tab_id, importExport = false) {
 	}
 	const tab = tabInfo.getTabInfo(tab_id);
 	// check for prefetching, chrome new tab page and Firefox about:pages
-	if (tab && tab.prefetched === true || tab.path.includes('_/chrome/newtab') || tab.protocol === 'about' || (!importExport && globals.EXCLUDES.includes(tab.host))) {
+	if (tab && (tab.prefetched === true || tab.path.includes('_/chrome/newtab') || tab.protocol === 'about' || (!importExport && globals.EXCLUDES.includes(tab.host)))) {
 		// return false to prevent sendMessage calls
 		return Promise.resolve(false);
 	}

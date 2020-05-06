@@ -75,7 +75,7 @@ class Blocking extends React.Component {
 		// Update the summary blocking count whenever the blocking component updated.
 		// This will also show pending blocking changes if the panel is re-opened
 		// before a page refresh
-		const smartBlock = this.props.smartBlockActive && this.props.smartBlock || { blocked: {}, unblocked: {} };
+		const smartBlock = (this.props.smartBlockActive && this.props.smartBlock) || { blocked: {}, unblocked: {} };
 		updateSummaryBlockingCount(this.props.categories, smartBlock, this.props.actions.updateTrackerCounts);
 	}
 

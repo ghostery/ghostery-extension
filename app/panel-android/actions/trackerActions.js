@@ -21,8 +21,8 @@ function trustRestrictTracker({
 	const siteSpecificUnblocks = blocking.site_specific_unblocks;
 	const siteSpecificBlocks = blocking.site_specific_blocks;
 
-	const pageUnblocks = siteSpecificUnblocks[pageHost] && siteSpecificUnblocks[pageHost].slice(0) || []; // clone
-	const pageBlocks = siteSpecificBlocks[pageHost] && siteSpecificBlocks[pageHost].slice(0) || []; // clone
+	const pageUnblocks = (siteSpecificUnblocks[pageHost] && siteSpecificUnblocks[pageHost].slice(0)) || []; // clone
+	const pageBlocks = (siteSpecificBlocks[pageHost] && siteSpecificBlocks[pageHost].slice(0)) || []; // clone
 	let updated_site_specific_unblocks = {};
 	let updated_site_specific_blocks = {};
 

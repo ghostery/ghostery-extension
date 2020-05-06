@@ -137,7 +137,7 @@ class LogInViewContainer extends Component {
 			handleSubmit: this._handleLoginAttempt,
 		};
 		const signedInChildProps = {
-			email: user && user.email || 'email',
+			email: (user && user.email) || 'email',
 		};
 
 		return loggedIn ? (

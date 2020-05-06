@@ -142,8 +142,8 @@ const _updateTrackerTrustRestrict = (state, action) => {
 	const { pageHost } = action;
 	const siteSpecificUnblocks = state.site_specific_unblocks;
 	const siteSpecificBlocks = state.site_specific_blocks;
-	const pageUnblocks = siteSpecificUnblocks[pageHost] && siteSpecificUnblocks[pageHost].slice(0) || []; // clone
-	const pageBlocks = siteSpecificBlocks[pageHost] && siteSpecificBlocks[pageHost].slice(0) || []; // clone
+	const pageUnblocks = (siteSpecificUnblocks[pageHost] && siteSpecificUnblocks[pageHost].slice(0)) || []; // clone
+	const pageBlocks = (siteSpecificBlocks[pageHost] && siteSpecificBlocks[pageHost].slice(0)) || []; // clone
 
 	// Site specific un-blocking
 	if (msg.trust) {

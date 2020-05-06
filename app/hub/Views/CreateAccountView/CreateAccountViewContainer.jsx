@@ -189,7 +189,7 @@ class CreateAccountViewContainer extends Component {
 			handleSubmit: this._handleCreateAccountAttempt
 		};
 		const signedInChildProps = {
-			email: user && user.email || email,
+			email: (user && user.email) || email,
 		};
 
 		return loggedIn ? (

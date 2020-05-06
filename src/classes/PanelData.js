@@ -75,7 +75,7 @@ class PanelData {
 			const { url } = tab;
 
 			this._activeTab = tab;
-			this._activeTab.pageHost = url && processUrl(url).hostname || '';
+			this._activeTab.pageHost = (url && processUrl(url).hostname) || '';
 
 			this._attachListeners();
 
@@ -172,7 +172,7 @@ class PanelData {
 		// Android panel only
 		const { url } = tab;
 		this._activeTab = tab;
-		this._activeTab.pageHost = url && processUrl(url).hostname || '';
+		this._activeTab.pageHost = (url && processUrl(url).hostname) || '';
 		this._setTrackerListAndCategories();
 		switch (view) {
 			case 'panel':

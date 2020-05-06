@@ -117,7 +117,7 @@ class HomeViewContainer extends Component {
 	_render() {
 		const { justInstalled } = this.state;
 		const { home, user } = this.props;
-		const isPlus = user && user.subscriptionsPlus || false;
+		const isPlus = (user && user.subscriptionsPlus) || false;
 		const {
 			premium_promo_modal_shown,
 			setup_complete,

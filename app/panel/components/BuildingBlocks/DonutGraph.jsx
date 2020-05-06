@@ -143,7 +143,7 @@ class DonutGraph extends React.Component {
 	 *  Helper function that calculates domain value for greyscale / redscale rendering
 	 */
 	static getTone(catCount, catIndex) {
-		return catCount > 1 ? 100 / (catCount - 1) * catIndex * 0.01 : 0;
+		return catCount > 1 ? (100 / (catCount - 1)) * catIndex * 0.01 : 0;
 	}
 
 	/**

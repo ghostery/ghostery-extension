@@ -192,7 +192,7 @@ class PolicySmartBlock {
 
 		return (
 			pageProtocol === 'https' &&
-			(requestProtocol === 'http' || requestProtocol === 'ws') || false
+			((requestProtocol === 'http' || requestProtocol === 'ws') || false)
 		);
 	}
 
@@ -232,7 +232,7 @@ class PolicySmartBlock {
 
 		return (
 			tabInfo.getTabInfoPersist(tabId, 'numOfReloads') > 1 &&
-			((Date.now() - tabInfo.getTabInfoPersist(tabId, 'firstLoadTimestamp')) < SMART_BLOCK_BEHAVIOR_THRESHOLD) || false
+			(((Date.now() - tabInfo.getTabInfoPersist(tabId, 'firstLoadTimestamp')) < SMART_BLOCK_BEHAVIOR_THRESHOLD) || false)
 		);
 	}
 

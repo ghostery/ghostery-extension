@@ -76,7 +76,7 @@ export function updateBlockAllTrackers(state, action) {
 	const updated_app_ids = JSON.parse(JSON.stringify(state.selected_app_ids)) || {};
 	const updated_categories = JSON.parse(JSON.stringify(state.categories)) || [];
 	const { smartBlockActive } = action.data;
-	const smartBlock = smartBlockActive && action.data.smartBlock || { blocked: {}, unblocked: {} };
+	const smartBlock = (smartBlockActive && action.data.smartBlock) || { blocked: {}, unblocked: {} };
 
 	updated_categories.forEach((categoryEl) => {
 		categoryEl.num_blocked = 0;
@@ -117,7 +117,7 @@ export function updateBlockAllTrackers(state, action) {
  */
 export function updateCategoryBlocked(state, action) {
 	const { blocked, smartBlockActive } = action.data;
-	const smartBlock = smartBlockActive && action.data.smartBlock || { blocked: {}, unblocked: {} };
+	const smartBlock = (smartBlockActive && action.data.smartBlock) || { blocked: {}, unblocked: {} };
 	const updated_app_ids = JSON.parse(JSON.stringify(state.selected_app_ids)) || {};
 	const updated_categories = JSON.parse(JSON.stringify(state.categories)); // deep clone
 	const catIndex = updated_categories.findIndex(item => item.id === action.data.category);
@@ -186,7 +186,7 @@ export function updateTrackerBlocked(state, action) {
 	}
 
 	const { blocked, smartBlockActive } = action.data;
-	const smartBlock = smartBlockActive && action.data.smartBlock || { blocked: {}, unblocked: {} };
+	const smartBlock = (smartBlockActive && action.data.smartBlock) || { blocked: {}, unblocked: {} };
 	const updated_app_ids = JSON.parse(JSON.stringify(state.selected_app_ids)) || {};
 	const updated_categories = JSON.parse(JSON.stringify(state.categories)) || []; // deep clone
 	const catIndex = updated_categories.findIndex(item => item.id === action.data.cat_id);

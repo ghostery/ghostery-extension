@@ -135,7 +135,7 @@ export function validateConfirmEmail(email, confirmEmail) {
 	}
 	const lEmail = email.toLowerCase();
 	const lConfirmEmail = confirmEmail.toLowerCase();
-	return validateEmail(confirmEmail) && (lEmail === lConfirmEmail) || false;
+	return (validateEmail(confirmEmail) && (lEmail === lConfirmEmail)) || false;
 }
 
 /**

@@ -54,7 +54,7 @@ module.exports = {
 		'lines-between-class-members': [1],
 		'max-len': [0],
 		'newline-per-chained-call': [0, { 'ignoreChainWithDepth': 2 }],
-		'no-mixed-operators': [0], // TODO: enable this check
+		'no-mixed-operators': [1],
 		'no-nested-ternary': [0],
 		'no-param-reassign': ['error', {
 			props: true,
