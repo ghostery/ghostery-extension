@@ -30,7 +30,7 @@ const background = baseBackground({
 });
 
 class GhosteryModule extends Module {
-	get _module() {
+	static get _module() {
 		return background;
 	}
 }

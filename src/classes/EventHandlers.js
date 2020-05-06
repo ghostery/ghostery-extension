@@ -72,7 +72,7 @@ class EventHandlers {
 			log(`❤ ❤ ❤ Tab ${tabId} navigating to ${url} ❤ ❤ ❤`);
 
 			this._clearTabData(tabId);
-			this._resetNotifications();
+			EventHandlers._resetNotifications();
 			// TODO understand why this does not work when placed in the 'reload' branch in onCommitted
 			panelData.clearPageLoadTime(tabId);
 
@@ -80,7 +80,7 @@ class EventHandlers {
 			tabInfo.create(tabId, url);
 			foundBugs.update(tabId);
 			button.update(tabId);
-			this._eventReset(details.tabId);
+			EventHandlers._eventReset(details.tabId);
 
 			// Workaround for foundBugs/tabInfo memory leak when the user triggers
 			// prefetching/prerendering but never loads the page. Wait two minutes
@@ -89,7 +89,7 @@ class EventHandlers {
 				utils.getTab(tabId, null, () => {
 					log('Clearing orphan tab data for tab', tabId);
 					this._clearTabData(tabId);
-					this._resetNotifications();
+					EventHandlers._resetNotifications();
 				});
 			}, 120000);
 		}
@@ -143,7 +143,7 @@ class EventHandlers {
 	 *
 	 * @param  {Object} details 	event data
 	 */
-	onDOMContentLoaded(details) {
+	static onDOMContentLoaded(details) {
 		const tab_id = details.tabId;
 
 		// ignore if this is a sub-frame
@@ -280,7 +280,7 @@ class EventHandlers {
 	 *
 	 * @param  {Object} details 	event data
 	 */
-	onNavigationCompleted(details) {
+	static onNavigationCompleted(details) {
 		if (!utils.isValidTopLevelNavigation(details)) {
 			return;
 		}
@@ -289,7 +289,7 @@ class EventHandlers {
 		log(`foundBugs: ${foundBugs.getAppsCount(details.tabId)}, tab_id: ${details.tabId}`);
 
 		// inject page_performance script to display page latency on Summary view
-		if (this._isValidUrl(utils.processUrl(details.url))) {
+		if (EventHandlers._isValidUrl(utils.processUrl(details.url))) {
 			utils.injectScript(details.tabId, 'dist/page_performance.js', '', 'document_idle').catch((err) => {
 				log('onNavigationCompleted injectScript error', err);
 			});
@@ -310,13 +310,13 @@ class EventHandlers {
 			// TODO what other webRequest-restricted pages are out there?
 			if (details.url.startsWith('https://chrome.google.com/webstore/')) {
 				this._clearTabData(tab_id);
-				this._resetNotifications();
+				EventHandlers._resetNotifications();
 			}
 
 			return;
 		}
 
-		this._eventReset(tab_id);
+		EventHandlers._eventReset(tab_id);
 	}
 
 	/**
@@ -362,7 +362,7 @@ class EventHandlers {
 			});
 		}
 
-		if (!this._checkRedirect(details.type, request_id)) {
+		if (!EventHandlers._checkRedirect(details.type, request_id)) {
 			return { cancel: false };
 		}
 
@@ -373,7 +373,7 @@ class EventHandlers {
 		/* ** SMART BLOCKING - Privacy ** */
 		// block HTTP request on HTTPS page
 		if (PolicySmartBlock.isInsecureRequest(tab_id, page_protocol, processed.scheme, processed.hostname)) {
-			return this._blockHelper(details, tab_id, null, null, request_id, from_redirect, true);
+			return EventHandlers._blockHelper(details, tab_id, null, null, request_id, from_redirect, true);
 		}
 
 		// TODO fuse this into a single call to improve performance
@@ -402,7 +402,7 @@ class EventHandlers {
 		const incognito = tabInfo.getTabInfo(tab_id, 'incognito');
 		const tab_host = tabInfo.getTabInfo(tab_id, 'host');
 		const fromRedirect = globals.REDIRECT_MAP.has(request_id);
-		const { block, reason } = this._checkBlocking(app_id, cat_id, tab_id, tab_host, page_url, request_id);
+		const { block, reason } = EventHandlers._checkBlocking(app_id, cat_id, tab_id, tab_host, page_url, request_id);
 		if (!block && reason === BLOCK_REASON_SS_UNBLOCKED) {
 			// The way to pass this flag to Cliqz handlers
 			details.ghosteryWhitelisted = true;
@@ -441,7 +441,7 @@ class EventHandlers {
 		}, 1);
 
 		if ((block && !smartUnblocked) || smartBlocked) {
-			return this._blockHelper(details, tab_id, app_id, bug_id, request_id, fromRedirect);
+			return EventHandlers._blockHelper(details, tab_id, app_id, bug_id, request_id, fromRedirect);
 		}
 
 		return { cancel: false };
@@ -454,7 +454,7 @@ class EventHandlers {
 	 * @param  {Object} d event data
 	 * @return {Object} 		optionally return headers to send
 	 */
-	onBeforeSendHeaders(d) {
+	static onBeforeSendHeaders(d) {
 		const details = d;
 		for (let i = 0; i < details.requestHeaders.length; ++i) {
 			// Fetch requests in Firefox web-extension has a flaw. They attach
@@ -477,7 +477,7 @@ class EventHandlers {
 	 *
 	 * @param  {Object} details 	event data
 	 */
-	onHeadersReceived(details) {
+	static onHeadersReceived(details) {
 		// Skip content-length collection if it's a 3XX (redirect)
 		if (details.statusCode >> 8 === 1) { }  // eslint-disable-line
 	}
@@ -511,7 +511,7 @@ class EventHandlers {
 		if (!details || details.tabId <= 0) {
 			return;
 		}
-		this._clearRedirects(details.requestId);
+		EventHandlers._clearRedirects(details.requestId);
 
 		if (details.type !== 'main_frame') {
 			const appWithLatencyId = latency.logLatency(details);
@@ -529,9 +529,9 @@ class EventHandlers {
 	 *
 	 * @param  {Object} details 	event data
 	 */
-	onRequestErrorOccurred(details) {
+	static onRequestErrorOccurred(details) {
 		latency.logLatency(details);
-		this._clearRedirects(details.requestId);
+		EventHandlers._clearRedirects(details.requestId);
 	}
 
 	/**
@@ -540,7 +540,7 @@ class EventHandlers {
 	 *
 	 * @param  {Object} tab 	 Details of the tab that was created
 	 */
-	onTabCreated(tab) {
+	static onTabCreated(tab) {
 		const { url } = tab;
 
 		metrics.handleBrokenPageTrigger(globals.BROKEN_PAGE_NEW_TAB, url);
@@ -552,9 +552,9 @@ class EventHandlers {
 	 *
 	 * @param  {Object} activeInfo	tab data
 	 */
-	onTabActivated(activeInfo) {
+	static onTabActivated(activeInfo) {
 		button.update(activeInfo.tabId);
-		this._resetNotifications();
+		EventHandlers._resetNotifications();
 	}
 
 	/**
@@ -586,7 +586,7 @@ class EventHandlers {
 	 */
 	onTabRemoved(tab_id) {
 		this._clearTabData(tab_id);
-		this._resetNotifications();
+		EventHandlers._resetNotifications();
 	}
 
 	/**
@@ -646,7 +646,7 @@ class EventHandlers {
 	 * @param  {boolean} fromRedirect
 	 * @return {string|boolean}
 	 */
-	_blockHelper(details, tabId, appId, bugId, requestId, fromRedirect, upgradeInsecure) {
+	static _blockHelper(details, tabId, appId, bugId, requestId, fromRedirect, upgradeInsecure) {
 		if (upgradeInsecure) {
 			// attempt to redirect request to HTTPS. NOTE: Redirects from URLs
 			// with ws:// and wss:// schemes are ignored.
@@ -675,7 +675,7 @@ class EventHandlers {
 		if (details.type === 'script' && bugId) {
 			let code = '';
 			if (appId === 2575) { // Hubspot
-				code = this._getHubspotFormSurrogate(details.url);
+				code = EventHandlers._getHubspotFormSurrogate(details.url);
 			} else {
 				const ti = tabInfo.getTabInfo(tabId);
 				const surrogates = surrogatedb.getForTracker(details.url, appId, bugId, ti.host);
@@ -717,7 +717,7 @@ class EventHandlers {
 	 * @param  {URL}  parsedURL
 	 * @return {Boolean}
 	 */
-	_isValidUrl(parsedURL) {
+	static _isValidUrl(parsedURL) {
 		if (parsedURL && parsedURL.protocol.startsWith('http') && parsedURL.isValidHost() && !parsedURL.pathname.includes('_/chrome/newtab')) {
 			return true;
 		}
@@ -733,7 +733,7 @@ class EventHandlers {
 	 * @param  {string} form 	request url
 	 * @return {string} 		surrogate code
 	 */
-	_getHubspotFormSurrogate(url) {
+	static _getHubspotFormSurrogate(url) {
 		// Hubspot url has a fixed format
 		// https://forms.hubspot.com/embed/v3/form/532040/95b5de3a-6d4a-4729-bebf-07c41268d773?callback=hs_reqwest_0&hutk=941df50e9277ee76755310cd78647a08
 		// The following three parameters are privacy-safe:
@@ -786,7 +786,7 @@ class EventHandlers {
 	 *
 	 * @param  {number} requestId
 	 */
-	_clearRedirects(requestId) {
+	static _clearRedirects(requestId) {
 		globals.REDIRECT_MAP.delete(requestId);
 		globals.LET_REDIRECTS_THROUGH = false;
 	}
@@ -800,7 +800,7 @@ class EventHandlers {
 	 * @param  {number}	request_id		request id
 	 * @return {boolean}
 	 */
-	_checkRedirect(type, request_id) {
+	static _checkRedirect(type, request_id) {
 		const fromRedirect = globals.REDIRECT_MAP.has(request_id);
 		// if the request is part of the main_frame and not a redirect, we don't proceed
 		if (type === 'main_frame' && !fromRedirect) {
@@ -829,7 +829,7 @@ class EventHandlers {
 	 * @param  {number} 	request_id		request id
 	 * @return {BlockWithReason}			block result with reason
 	 */
-	_checkBlocking(app_id, cat_id, tab_id, tab_host, page_url, request_id) {
+	static _checkBlocking(app_id, cat_id, tab_id, tab_host, page_url, request_id) {
 		const fromRedirect = globals.REDIRECT_MAP.has(request_id);
 		let block;
 
@@ -851,7 +851,7 @@ class EventHandlers {
 	 *
 	 * @param  {number}	tab_id		tab id
 	 */
-	_eventReset(tab_id) {
+	static _eventReset(tab_id) {
 		c2pDb.reset(tab_id);
 		globals.REDIRECT_MAP.clear();
 		globals.LET_REDIRECTS_THROUGH = false;
@@ -879,7 +879,7 @@ class EventHandlers {
 	 * @private
 	 *
 	 */
-	_resetNotifications() {
+	static _resetNotifications() {
 		globals.C2P_LOADED = globals.NOTIFICATIONS_LOADED = false; // eslint-disable-line no-multi-assign
 	}
 }

@@ -72,7 +72,7 @@ const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
 const VERSION_CHECK_URL = `${CDN_BASE_URL}/update/version`;
 const REAL_ESTATE_ID = 'ghostery';
 const onBeforeRequest = events.onBeforeRequest.bind(events);
-const onHeadersReceived = events.onHeadersReceived.bind(events);
+const { onHeadersReceived } = Events;
 
 // Cliqz Modules
 const moduleMock = {
@@ -1188,7 +1188,7 @@ function initialiseWebRequestPipeline() {
 			spec: 'collect',
 			before: existingSteps.onHeadersReceived,
 			fn: (state) => {
-				events.onHeadersReceived(state);
+				Events.onHeadersReceived(state);
 				return true;
 			}
 		})
@@ -1344,10 +1344,10 @@ function initializeEventListeners() {
 	chrome.webNavigation.onCommitted.addListener(events.onCommitted.bind(events));
 
 	// Fired when the page's DOM is fully constructed, but the referenced resources may not finish loading
-	chrome.webNavigation.onDOMContentLoaded.addListener(events.onDOMContentLoaded.bind(events));
+	chrome.webNavigation.onDOMContentLoaded.addListener(Events.onDOMContentLoaded.bind(events));
 
 	// Fired when a document, including the resources it refers to, is completely loaded and initialized
-	chrome.webNavigation.onCompleted.addListener(events.onNavigationCompleted.bind(events));
+	chrome.webNavigation.onCompleted.addListener(Events.onNavigationCompleted.bind(events));
 
 	// Fired when a new window, or a new tab in an existing window, is created to host a navigation.
 	// chrome.webNavigation.onCreatedNavigationTarget
@@ -1372,7 +1372,7 @@ function initializeEventListeners() {
 	// chrome.webRequest.onBeforeRequest
 
 	// Fires when a request is about to send headers
-	chrome.webRequest.onBeforeSendHeaders.addListener(events.onBeforeSendHeaders.bind(events), {
+	chrome.webRequest.onBeforeSendHeaders.addListener(Events.onBeforeSendHeaders.bind(events), {
 		urls: [
 			'https://l.ghostery.com/*',
 			'https://d.ghostery.com/*',
@@ -1400,17 +1400,17 @@ function initializeEventListeners() {
 	});
 
 	// Fires when a request could not be processed successfully
-	chrome.webRequest.onErrorOccurred.addListener(events.onRequestErrorOccurred.bind(events), {
+	chrome.webRequest.onErrorOccurred.addListener(Events.onRequestErrorOccurred.bind(events), {
 		urls: ['http://*/*', 'https://*/*']
 	});
 
 	/** * TABS ** */
 
 	// Fired when a new tab is created by user or internally
-	chrome.tabs.onCreated.addListener(events.onTabCreated.bind(events));
+	chrome.tabs.onCreated.addListener(Events.onTabCreated.bind(events));
 
 	// Fires when the active tab in a window changes
-	chrome.tabs.onActivated.addListener(events.onTabActivated.bind(events));
+	chrome.tabs.onActivated.addListener(Events.onTabActivated.bind(events));
 
 	// Fired when a tab is replaced with another tab due to prerendering
 	chrome.tabs.onReplaced.addListener(events.onTabReplaced.bind(events));

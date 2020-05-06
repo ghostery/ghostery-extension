@@ -37,7 +37,7 @@ class BugDb extends Updatable {
 	 * @param  {Object} old_apps 	trackers in the original database
 	 * @return {Object}          	list of all new trackers
 	 */
-	updateNewAppIds(new_apps, old_apps) {
+	static updateNewAppIds(new_apps, old_apps) {
 		log('updating newAppIds...');
 
 		const new_app_ids = difference(
@@ -54,7 +54,7 @@ class BugDb extends Updatable {
 	 * Apply block to all new trackers
 	 * @param  {Object} new_app_ids list of new trackers
 	 */
-	applyBlockByDefault(new_app_ids) {
+	static applyBlockByDefault(new_app_ids) {
 		if (conf.block_by_default) {
 			log('applying block-by-default...');
 			const { selected_app_ids } = conf;
@@ -74,7 +74,7 @@ class BugDb extends Updatable {
 	 * @param  {Object} db      bugs database object
 	 * @return {array}  		array of categories
 	 */
-	_buildCategories(db) {
+	static _buildCategories(db) {
 		const selectedApps = conf.selected_app_ids || {};
 		let appId;
 		let category;
@@ -207,10 +207,10 @@ class BugDb extends Updatable {
 			// update newAppIds and apply block-by-default
 			if (old_bugs) {
 				if (Object.prototype.hasOwnProperty.call(old_bugs, 'version') && bugs.version > old_bugs.version) {
-					new_app_ids = this.updateNewAppIds(bugs.apps, old_bugs.apps);
+					new_app_ids = BugDb.updateNewAppIds(bugs.apps, old_bugs.apps);
 
 					if (new_app_ids.length) {
-						this.applyBlockByDefault(new_app_ids);
+						BugDb.applyBlockByDefault(new_app_ids);
 						db.JUST_UPDATED_WITH_NEW_TRACKERS = true;
 					}
 
@@ -221,10 +221,10 @@ class BugDb extends Updatable {
 						return memo;
 					}, {});
 
-					new_app_ids = this.updateNewAppIds(bugs.apps, old_apps);
+					new_app_ids = BugDb.updateNewAppIds(bugs.apps, old_apps);
 
 					if (new_app_ids.length) {
-						this.applyBlockByDefault(new_app_ids);
+						BugDb.applyBlockByDefault(new_app_ids);
 
 						// don't claim new trackers when db got downgraded by version
 						if (bugs.version > old_bugs.bugsVersion) {
@@ -237,7 +237,7 @@ class BugDb extends Updatable {
 			conf.bugs = bugs;
 		}
 
-		db.categories = this._buildCategories(db);
+		db.categories = BugDb._buildCategories(db);
 
 		this.db = db;
 
