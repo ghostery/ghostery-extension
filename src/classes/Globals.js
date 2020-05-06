@@ -27,6 +27,7 @@ class Globals {
 		// environment variables
 		this.DEBUG = manifest.debug || false;
 		this.LOG = this.DEBUG && manifest.log;
+		this.DEV = manifest.dev || false;
 		this.EXTENSION_NAME = manifest.name || 'Ghostery';
 		this.EXTENSION_VERSION = manifest.version_name || manifest.version; // Firefox does not support "version_name"
 		this.BROWSER_INFO = {
@@ -51,17 +52,26 @@ class Globals {
 		// domains
 		this.GHOSTERY_ROOT_DOMAIN = `${this.DEBUG ? 'ghosterystage' : 'ghostery'}.com`;
 		this.GHOSTERY_BASE_URL = `https://${this.GHOSTERY_ROOT_DOMAIN}`;
-		this.ACCOUNT_BASE_URL = `https://account.${this.GHOSTERY_ROOT_DOMAIN}`;
-		this.CHECKOUT_BASE_URL = `https://checkout.${this.GHOSTERY_ROOT_DOMAIN}`;
 		this.METRICS_BASE_URL = `https://${this.DEBUG ? 'staging-d' : 'd'}.ghostery.com`;
 		this.CMP_BASE_URL = `https://${this.DEBUG ? 'staging-cmp-cdn' : 'cmp-cdn'}.ghostery.com`;
 		this.CDN_BASE_URL = `https://${this.DEBUG ? 'staging-cdn' : 'cdn'}.ghostery.com`;
 		this.APPS_BASE_URL = `https://${this.DEBUG ? 'staging-apps' : 'apps'}.ghostery.com`;
 		this.GCACHE_BASE_URL = `https://${this.DEBUG ? 'staging-gcache' : 'gcache'}.ghostery.com`;
-		this.AUTH_SERVER = `https://consumerapi.${this.GHOSTERY_ROOT_DOMAIN}`;
-		this.ACCOUNT_SERVER = `https://accountapi.${this.GHOSTERY_ROOT_DOMAIN}`;
-		this.COOKIE_DOMAIN = `.${this.GHOSTERY_ROOT_DOMAIN}`;
-		this.COOKIE_URL = this.GHOSTERY_BASE_URL;
+		if (this.DEV) {
+			this.ACCOUNT_BASE_URL = 'http://localhost:3001';
+			this.CHECKOUT_BASE_URL = 'http://localhost:3002';
+			this.AUTH_SERVER = 'http://localhost:8080';
+			this.ACCOUNT_SERVER = 'http://localhost:8081';
+			this.COOKIE_DOMAIN = 'localhost';
+			this.COOKIE_URL = `http://${this.COOKIE_DOMAIN}`;
+		} else {
+			this.ACCOUNT_BASE_URL = `https://account.${this.GHOSTERY_ROOT_DOMAIN}`;
+			this.CHECKOUT_BASE_URL = `https://checkout.${this.GHOSTERY_ROOT_DOMAIN}`;
+			this.AUTH_SERVER = `https://consumerapi.${this.GHOSTERY_ROOT_DOMAIN}`;
+			this.ACCOUNT_SERVER = `https://accountapi.${this.GHOSTERY_ROOT_DOMAIN}`;
+			this.COOKIE_DOMAIN = `.${this.GHOSTERY_ROOT_DOMAIN}`;
+			this.COOKIE_URL = this.GHOSTERY_BASE_URL;
+		}
 
 		// extension IDs
 		this.GHOSTERY_TAB_CHROME_PRODUCTION_ID = 'plmapebanmikcofllaaddgeocahboejc';

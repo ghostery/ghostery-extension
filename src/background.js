@@ -318,6 +318,27 @@ function handleAccountPages(name, callback) {
 }
 
 /**
+ * Handle messages sent from app/js/checkout_pages.js content script.
+ * @memberOf Background
+ *
+ * @param  {string} 	name 		message name
+ * @param  {string}		tab_url 	tab url
+ */
+function handleCheckoutPages(name, callback) {
+	switch (name) {
+		case 'checkoutPage.buyPlus':
+			// Update account info
+			console.error('background#handleCheckoutPages received "checkoutPage.buyPlus"');
+			return true;
+		case 'checkoutPage.ping':
+			console.error('ping received from Checkout Web');
+			return true;
+		default:
+			return false;
+	}
+}
+
+/**
  * Handle messages sent from dist/ghostery_dot_com.js content script.
  * @memberOf Background
  *
@@ -671,6 +692,10 @@ function onMessageHandler(request, sender, callback) {
 	if (origin === 'account_pages') {
 		// Account pages
 		return handleAccountPages(name, callback);
+	}
+	if (origin === 'checkout_pages') {
+		// Checkout pages
+		return handleCheckoutPages(name, callback);
 	}
 	if (origin === 'purplebox') {
 		// Purplebox script events
