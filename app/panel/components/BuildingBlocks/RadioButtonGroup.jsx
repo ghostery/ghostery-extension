@@ -23,20 +23,31 @@ import RadioButton from './RadioButton';
  */
 const RadioButtonGroup = (props) => {
 	const { indexClicked, handleItemClick } = props;
+
+	const labels = props.labels.map(label => (
+		<div key={label} className="RadioButtonGroup__label">
+			{t(label)}
+		</div>
+	));
+
+	const buttons = props.labels.map((label, index) => (
+		<div className="RadioButtonGroup__button">
+			<RadioButton
+				checked={index === indexClicked}
+				handleClick={() => handleItemClick(index)}
+			/>
+		</div>
+	));
+
 	return (
-		props.labels.map((label, index) => (
-			<div className="flex-container align-justify RadioButtonGroup__container" key={label}>
-				<span className="RadioButtonGroup__label">
-					{t(label)}
-				</span>
-				<div>
-					<RadioButton
-						checked={index === indexClicked}
-						handleClick={() => handleItemClick(index)}
-					/>
-				</div>
+		<div className="RadioButtonGroup__container">
+			<div className="flex-container align-justify RadioButtonGroup__labelContainer">
+				{labels}
 			</div>
-		))
+			<div className="flex-container align-justify RadioButtonGroup__buttonsContainer">
+				{buttons}
+			</div>
+		</div>
 	);
 };
 

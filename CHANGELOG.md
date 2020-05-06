@@ -9,6 +9,7 @@
 + Standardize all Ghostery staging and production global URLs (#511)
 + Updated Rewards UI (#521)
 + Update legacy unit tests (#526)
++ Updated translations
 
 ### GHOSTERY 8.4.9 (April 9, 2019)
 
