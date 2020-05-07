@@ -824,19 +824,7 @@ function onMessageHandler(request, sender, callback) {
 	if (name === 'account.getUserSubscriptionData') {
 		account.getUserSubscriptionData()
 			.then((customer) => {
-				// TODO temporary fix to handle multiple subscriptions
-				let sub = customer.subscriptions;
-				if (!Array.isArray(sub)) {
-					sub = [sub];
-				}
-				const subscriptionData = sub.reduce((acc, curr) => {
-					let a = acc;
-					if (curr.productName.includes('Plus')) {
-						a = curr;
-					}
-					return a;
-				}, {});
-				callback({ subscriptionData });
+				callback({ subscriptionData: customer });
 			})
 			.catch((err) => {
 				log('Error getting user subscription data:', err);

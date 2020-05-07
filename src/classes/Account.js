@@ -168,14 +168,18 @@ class Account {
 				if (!Array.isArray(sub)) {
 					sub = [sub];
 				}
-				const subPlus = sub.reduce((acc, curr) => {
-					let a = acc;
-					if (curr.productName.includes('Plus')) {
-						a = curr;
-					}
-					return a;
-				}, {});
-				this._setSubscriptionData(subPlus);
+				// Display premium info if user has both premium and plus subscriptions
+				const premiumSubscription = sub.find(subscription => subscription.productName.includes('Ghostery Premium'));
+				if (premiumSubscription) {
+					this._setSubscriptionData(premiumSubscription);
+					return premiumSubscription;
+				}
+
+				const plusSubscription = sub.find(subscription => subscription.productName.includes('Ghostery Plus'));
+				if (plusSubscription) {
+					this._setSubscriptionData(plusSubscription);
+					return plusSubscription;
+				}
 				return customer;
 			})
 	)
