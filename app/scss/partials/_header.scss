@@ -148,11 +148,14 @@
 
 		.menu-option {
 			@extend .menu-option-base;
-			.subscriber {
+			.plusSubscriber {
 				width: 18px;
 				height: 16px;
 				path {fill: $light-gray;}
 				path.text {fill: #4a4a4a;}
+			}
+			.premiumSubscriber {
+				margin-left: -4px;
 			}
 			&:hover {
 				span {color: $ghosty-blue}

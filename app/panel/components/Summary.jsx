@@ -312,6 +312,11 @@ class Summary extends React.Component {
 		return user && user.subscriptionsPlus;
 	}
 
+	_isPremiumSubscriber() {
+		const { user } = this.props;
+		return user && user.scopes && user.scopes.includes('subscriptions:premium');
+	}
+
 	_pageHost() {
 		return this.props.pageHost || 'page_host';
 	}
@@ -748,23 +753,30 @@ class Summary extends React.Component {
 	_renderPlusUpgradeBannerOrSubscriberIcon() {
 		const { is_expert, current_theme } = this.props;
 
+		const isPremiumSubscriber = this._isPremiumSubscriber();
 		const isPlusSubscriber = this._isPlusSubscriber();
 		const upgradeBannerClassNames = ClassNames('UpgradeBanner', {
 			'UpgradeBanner--normal': !is_expert,
 			'UpgradeBanner--small': is_expert,
 		});
+		let subscriberType;
+		if (isPremiumSubscriber) {
+			subscriberType = 'premium';
+		} else if (isPlusSubscriber) {
+			subscriberType = 'plus';
+		}
 
 		return (
 			<div onClick={this.clickUpgradeBannerOrGoldPlusIcon}>
-				{isPlusSubscriber && (
+				{(isPremiumSubscriber || isPlusSubscriber) && (
 					<div className="Summary__subscriberBadgeContainer">
 						<div className={`SubscriberBadge ${current_theme}`}>
-							<ReactSVG src="/app/images/panel/gold-plus-icon.svg" className="gold-plus-icon" />
+							<ReactSVG src={`/app/images/panel/${subscriberType}-badge-icon.svg`} className="gold-plus-icon" />
 						</div>
 					</div>
 				)}
 
-				{!isPlusSubscriber && (
+				{(!isPremiumSubscriber && !isPlusSubscriber) && (
 					<div className="Summary__upgradeBannerContainer">
 						<div className={upgradeBannerClassNames}>
 							<span className="UpgradeBanner__text">{t('subscription_upgrade_to')}</span>
