@@ -168,6 +168,9 @@
 					path {stroke: $ghosty-blue;}
 					path.text {fill: $ghosty-blue;}
 				}
+				.premiumSubscriber > g > g {
+					fill: $ghosty-blue;
+				}
 			}
 			span {
 				color: #ffffff;
