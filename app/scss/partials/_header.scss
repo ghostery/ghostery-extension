@@ -156,6 +156,9 @@
 			}
 			.premiumSubscriber {
 				margin-left: -4px;
+				g > g {
+					fill: #DEDEDE;
+				}
 			}
 			&:hover {
 				span {color: $ghosty-blue}
