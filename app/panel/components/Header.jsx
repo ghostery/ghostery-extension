@@ -145,12 +145,13 @@ class Header extends React.Component {
 		return this.props.is_expert ? '/detail/blocking' : '/';
 	}
 
-	clickUpgradeBannerOrGoldPlusIcon = () => {
+	clickUpgradeBannerOrSubscriberBadgeIcon = () => {
 		// TODO check whether this is the message we want to be sending now
 		sendMessage('ping', 'plus_panel_from_badge');
 		const { user } = this.props;
 		const plusSubscriber = user && user.subscriptionsPlus;
-		this.props.history.push(plusSubscriber ? '/subscription/info' : `/subscribe/${!!user}`);
+		const premiumSubscriber = user && user.scopes && user.scopes.includes('subscriptions:premium');
+		this.props.history.push(plusSubscriber || premiumSubscriber ? '/subscription/info' : `/subscribe/${!!user}`);
 	}
 
 	/**
@@ -223,7 +224,7 @@ class Header extends React.Component {
 			subscriberType = 'plus';
 		}
 		const upgradeBannerOrSubscriberBadgeLogolink = (
-			<div className={badgeClasses} onClick={this.clickUpgradeBannerOrGoldPlusIcon}>
+			<div className={badgeClasses} onClick={this.clickUpgradeBannerOrSubscriberBadgeIcon}>
 				{
 					((premiumSubscriber || plusSubscriber) && <ReactSVG src={`/app/images/panel/${subscriberType}-badge-icon-expanded-view.svg`} />)
 					|| <ReactSVG src="/app/images/panel/green-upgrade-banner-expanded-view.svg" />
