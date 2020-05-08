@@ -14,7 +14,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Detail from '../components/Detail';
-import * as actions from '../actions/DetailActions';
+import toggleExpanded from '../actions/DetailActions';
 /**
  * Map redux store state properties to Detailed view own properties.
  * @memberOf PanelContainers
@@ -37,7 +37,7 @@ const mapStateToProps = state => ({
  * @param  {Object} 	ownProps  Detailed view component own props
  * @return {function}          	  to be used as an argument in redux connect call
  */
-const mapDispatchToProps = dispatch => ({ actions: bindActionCreators(actions, dispatch) });
+const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ toggleExpanded }, dispatch) });
 /**
  * Connects Detailed view component to the Redux store.
  * @memberOf PanelContainers

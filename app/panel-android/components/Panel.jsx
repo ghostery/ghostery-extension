@@ -23,9 +23,9 @@ import TrackersChart from './content/TrackersChart';
 import {
 	getPanelData, getSummaryData, getSettingsData, getBlockingData
 } from '../actions/panelActions';
-import { getCliqzModuleData } from '../actions/cliqzActions';
+import getCliqzModuleData from '../actions/cliqzActions';
 import handleAllActions from '../actions/handler';
-import { fromTrackersToChartData } from '../utils/chart';
+import fromTrackersToChartData from '../utils/chart';
 
 export default class Panel extends React.Component {
 	constructor(props) {

@@ -15,7 +15,7 @@ import React from 'react';
 import Categories from './Blocking/Categories';
 import BlockingHeader from './Blocking/BlockingHeader';
 import NotScanned from './BuildingBlocks/NotScanned';
-import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
+import DynamicUIPortContext from '../contexts/DynamicUIPortContext';
 import { updateSummaryBlockingCount } from '../utils/blocking';
 
 /**

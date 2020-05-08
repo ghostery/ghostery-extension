@@ -15,8 +15,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Header from '../containers/HeaderContainer';
 import PromoModalContainer from '../../shared-components/PromoModal/PromoModalContainer';
-import { ThemeContext } from '../contexts/ThemeContext';
-import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
+import ThemeContext from '../contexts/ThemeContext';
+import DynamicUIPortContext from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import { setTheme } from '../utils/utils';
 

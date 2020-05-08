@@ -93,7 +93,7 @@ function _runCliqzSettingsImport(cliqz, c) {
  * @param  {Object} cliqz
  * @param  {Object} c	conf
  */
-export function importCliqzSettings(cliqz, c) {
+export default function importCliqzSettings(cliqz, c) {
 	const conf = c;
 	log('checking cliqz import', conf.cliqz_import_state);
 	if (!conf.cliqz_import_state) {

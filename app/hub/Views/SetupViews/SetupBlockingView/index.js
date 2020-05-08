@@ -16,7 +16,7 @@ import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 
 import SetupBlockingViewContainer from './SetupBlockingViewContainer';
-import * as SetupBlockingViewActions from './SetupBlockingViewActions';
+import setBlockingPolicy from './SetupBlockingViewActions';
 import { setSetupStep, setSetupNavigation } from '../../SetupView/SetupViewActions';
 
 /**
@@ -35,7 +35,7 @@ const mapStateToProps = state => ({ ...state.setup });
  */
 const mapDispatchToProps = dispatch => ({
 	actions: bindActionCreators({
-		...SetupBlockingViewActions,
+		setBlockingPolicy,
 		setSetupStep,
 		setSetupNavigation
 	}, dispatch),

@@ -18,15 +18,15 @@ import { withRouter } from 'react-router-dom';
 import SetupViewContainer from './SetupViewContainer';
 import SetupViewReducer from './SetupViewReducer';
 import * as SetupViewActions from './SetupViewActions';
-import { setBlockingPolicy } from '../SetupViews/SetupBlockingView/SetupBlockingViewActions';
+import setBlockingPolicy from '../SetupViews/SetupBlockingView/SetupBlockingViewActions';
 import {
 	setAntiTracking,
 	setAdBlock,
 	setSmartBlocking,
 	setGhosteryRewards
 } from '../SetupViews/SetupAntiSuiteView/SetupAntiSuiteViewActions';
-import { setHumanWeb } from '../SetupViews/SetupHumanWebView/SetupHumanWebViewActions';
-import { setSetupComplete } from '../SetupViews/SetupDoneView/SetupDoneViewActions';
+import setHumanWeb from '../SetupViews/SetupHumanWebView/SetupHumanWebViewActions';
+import setSetupComplete from '../SetupViews/SetupDoneView/SetupDoneViewActions';
 
 /**
  * Map redux store state properties to the component's own properties.

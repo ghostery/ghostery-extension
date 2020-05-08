@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Settings from '../components/Settings';
 import * as settingsActions from '../actions/SettingsActions';
-import { toggleExpanded } from '../actions/DetailActions';
+import toggleExpanded from '../actions/DetailActions';
 import { updateSitePolicy } from '../actions/SummaryActions';
 import { sendSignal } from '../actions/RewardsActions';
 /**

@@ -14,7 +14,7 @@
  * @namespace  PanelAndroidUtils
  */
 
-export function fromTrackersToChartData(trackers) {
+export default function fromTrackersToChartData(trackers) {
 	if (trackers.length < 1) {
 		return {
 			sum: 0,

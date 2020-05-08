@@ -15,7 +15,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { MemoryRouter } from 'react-router';
 import Rewards from '../Rewards';
-import { DynamicUIPortContext } from '../../contexts/DynamicUIPortContext';
+import DynamicUIPortContext from '../../contexts/DynamicUIPortContext';
 
 
 // Fake the translation function to only return the translation key

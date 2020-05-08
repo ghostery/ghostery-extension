@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import SetupDoneViewContainer from './SetupDoneViewContainer';
-import * as SetupDoneViewActions from './SetupDoneViewActions';
+import setSetupComplete from './SetupDoneViewActions';
 import { setSetupStep, setSetupNavigation } from '../../SetupView/SetupViewActions';
 
 /**
@@ -34,7 +34,7 @@ const mapStateToProps = state => ({ ...state.setup });
  */
 const mapDispatchToProps = dispatch => ({
 	actions: bindActionCreators({
-		...SetupDoneViewActions,
+		setSetupComplete,
 		setSetupStep,
 		setSetupNavigation
 	}, dispatch),

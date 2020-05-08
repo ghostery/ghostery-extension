@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import TutorialAntiSuiteViewContainer from './TutorialAntiSuiteViewContainer';
-import * as TutorialAntiSuiteViewActions from './TutorialAntiSuiteViewActions';
+import setTutorialComplete from './TutorialAntiSuiteViewActions';
 import { setTutorialNavigation } from '../../TutorialView/TutorialViewActions';
 
 /**
@@ -33,7 +33,7 @@ const mapStateToProps = state => ({ ...state.tutorial });
  * @memberof TutorialContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators({ ...TutorialAntiSuiteViewActions, setTutorialNavigation }, dispatch),
+	actions: bindActionCreators({ setTutorialComplete, setTutorialNavigation }, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TutorialAntiSuiteViewContainer);

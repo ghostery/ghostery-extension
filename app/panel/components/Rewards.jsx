@@ -15,7 +15,7 @@ import React, { Fragment } from 'react';
 import ClassNames from 'classnames';
 import { Route } from 'react-router-dom';
 import { ToggleSlider } from './BuildingBlocks';
-import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
+import DynamicUIPortContext from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import globals from '../../../src/classes/Globals';
 import { log } from '../../../src/utils/common';

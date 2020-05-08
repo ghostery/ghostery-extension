@@ -24,7 +24,7 @@ import Notifications from './Settings/Notifications';
 import OptIn from './Settings/OptIn';
 import Purplebox from './Settings/Purplebox';
 import Account from './Settings/Account';
-import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
+import DynamicUIPortContext from '../contexts/DynamicUIPortContext';
 /**
  * @class Implement base Settings view which routes navigation to all settings subviews
  * @memberof PanelClasses

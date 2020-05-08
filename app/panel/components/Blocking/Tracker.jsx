@@ -16,7 +16,7 @@
 import React from 'react';
 import ClassNames from 'classnames';
 
-import { ThemeContext } from '../../contexts/ThemeContext';
+import ThemeContext from '../../contexts/ThemeContext';
 import globals from '../../../../src/classes/Globals';
 import { log } from '../../../../src/utils/common';
 import { sendMessageInPromise } from '../../utils/msg';

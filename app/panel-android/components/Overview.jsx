@@ -14,7 +14,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TrackersChart from './content/TrackersChart';
-import { fromTrackersToChartData } from '../utils/chart';
+import fromTrackersToChartData from '../utils/chart';
 
 export default class Overview extends React.Component {
 	get isTrusted() {

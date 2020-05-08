@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import SetupHumanWebViewContainer from './SetupHumanWebViewContainer';
-import * as SetupHumanWebViewActions from './SetupHumanWebViewActions';
+import setHumanWeb from './SetupHumanWebViewActions';
 import { setSetupStep, setSetupNavigation } from '../../SetupView/SetupViewActions';
 
 /**
@@ -34,7 +34,7 @@ const mapStateToProps = state => ({ ...state.setup });
  */
 const mapDispatchToProps = dispatch => ({
 	actions: bindActionCreators({
-		...SetupHumanWebViewActions,
+		setHumanWeb,
 		setSetupStep,
 		setSetupNavigation
 	}, dispatch),

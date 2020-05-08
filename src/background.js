@@ -50,7 +50,7 @@ import { allowAllwaysC2P } from './utils/click2play';
 import * as common from './utils/common';
 import * as utils from './utils/utils';
 import { _getJSONAPIErrorsObject } from './utils/api';
-import { importCliqzSettings } from './utils/cliqzSettingImport';
+import importCliqzSettings from './utils/cliqzSettingImport';
 import { sendCliqzModuleCounts } from './utils/cliqzModulesData';
 
 // For debug purposes, provide Access to the internals of `browser-core`

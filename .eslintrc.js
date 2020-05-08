@@ -77,7 +77,7 @@ module.exports = {
 
 		// Plugin: Import
 		'import/no-cycle': [0],
-		'import/prefer-default-export': [0], // TODO: enable this check
+		'import/prefer-default-export': [1],
 
 		// Plugin: React
 		'react/destructuring-assignment': [0],

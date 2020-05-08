@@ -14,7 +14,7 @@
 import { isEqual } from 'underscore';
 import React from 'react';
 import * as D3 from 'd3';
-import { ThemeContext } from '../../contexts/ThemeContext';
+import ThemeContext from '../../contexts/ThemeContext';
 /**
  * Generates an animated graph displaying locally stored stats
  * @memberof PanelBuildingBlocks
