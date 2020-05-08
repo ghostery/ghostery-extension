@@ -254,7 +254,7 @@ class HeaderMenu extends React.Component {
 										</g>
 									</svg>
 								)}
-								<span>{subscriberType === 'premium' ? t('ghostery_premium') : t('ghostery_plus')}</span>
+								<span>{subscriberType === 'premium' ? t('panel_detail_premium_title') : t('ghostery_plus')}</span>
 							</div>
 						</li>
 					</ul>

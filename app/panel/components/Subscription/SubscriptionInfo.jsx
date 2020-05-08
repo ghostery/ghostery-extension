@@ -46,7 +46,7 @@ const SubscriptionInfo = (props) => {
 			<div className="row">
 				<div className="columns column-subscription">
 					{productName === 'Ghostery Premium' && (
-						<h1>{ t('ghostery_premium') }</h1>
+						<h1>{ t('panel_detail_premium_title') }</h1>
 					)}
 					{productName === 'Ghostery Plus' && (
 						<h1>{ t('ghostery_plus') }</h1>
