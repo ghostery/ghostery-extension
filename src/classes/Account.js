@@ -163,11 +163,13 @@ class Account {
 			.then(userID => api.get('stripe/customers', userID, 'cards,subscriptions'))
 			.then((res) => {
 				const customer = build(normalize(res), 'customers', res.data.id);
+
 				// TODO temporary fix to handle multiple subscriptions
 				let sub = customer.subscriptions;
 				if (!Array.isArray(sub)) {
 					sub = [sub];
 				}
+
 				// Display premium info if user has both premium and plus subscriptions
 				const premiumSubscription = sub.find(subscription => subscription.productName.includes('Ghostery Premium'));
 				if (premiumSubscription) {
@@ -180,6 +182,7 @@ class Account {
 					this._setSubscriptionData(plusSubscription);
 					return plusSubscription;
 				}
+
 				return customer;
 			})
 	)
