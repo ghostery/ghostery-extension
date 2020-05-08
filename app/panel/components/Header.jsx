@@ -177,8 +177,8 @@ class Header extends React.Component {
 		const tabDetailedClassNames = ClassNames('header-tab', {
 			active: is_expert,
 		});
-		const premiumSubscriber = user && user.scopes && user.scopes.includes('subscriptions:premium');
 		const plusSubscriber = user && user.subscriptionsPlus;
+		const premiumSubscriber = user && user.scopes && user.scopes.includes('subscriptions:premium');
 		const accountLogolink = this.generateAccountLogo();
 		const badgeClasses = ClassNames('columns', 'shrink', {
 			'non-subscriber-badge': !(plusSubscriber || premiumSubscriber),
@@ -223,7 +223,7 @@ class Header extends React.Component {
 		} else if (plusSubscriber) {
 			subscriberType = 'plus';
 		}
-		const upgradeBannerOrSubscriberBadgeLogolink = (
+		const plusUpgradeBannerOrSubscriberBadgeLogolink = (
 			<div className={badgeClasses} onClick={this.clickUpgradeBannerOrSubscriberBadgeIcon}>
 				{
 					((premiumSubscriber || plusSubscriber) && <ReactSVG src={`/app/images/panel/${subscriberType}-badge-icon-expanded-view.svg`} />)
@@ -267,7 +267,7 @@ class Header extends React.Component {
 							<div className="columns shrink">
 								{accountLogolink}
 							</div>
-							{((is_expert && is_expanded) || !showTabs) && upgradeBannerOrSubscriberBadgeLogolink }
+							{((is_expert && is_expanded) || !showTabs) && plusUpgradeBannerOrSubscriberBadgeLogolink }
 							{headerMenuKebab}
 						</div>
 						{ this.state.dropdownOpen && headerMenu }
