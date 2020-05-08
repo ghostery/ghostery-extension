@@ -65,7 +65,7 @@ class Header extends React.Component {
 	 * Handles toggling the drop-down pane open/closed
 	 */
 	toggleDropdown = () => {
-		this.setState({ dropdownOpen: !this.state.dropdownOpen });
+		this.setState(prevState => ({ dropdownOpen: !prevState.dropdownOpen }));
 	}
 
 	handleSignin = () => {

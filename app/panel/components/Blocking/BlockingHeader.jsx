@@ -186,7 +186,7 @@ class BlockingHeader extends React.Component {
 	 * @param {Object} event   	mouseclick event
 	 */
 	clickFilterText() {
-		this.setState({ filterMenuOpened: !this.state.filterMenuOpened });
+		this.setState(prevState => ({ filterMenuOpened: !prevState.filterMenuOpened }));
 	}
 
 	/**

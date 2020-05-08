@@ -33,7 +33,7 @@ class License extends React.Component {
 	 * Toggle expansion of a license full text.
 	 */
 	toggleLicenseText() {
-		this.setState({ expanded: !this.state.expanded });
+		this.setState(prevState => ({ expanded: !prevState.expanded }));
 	}
 
 	/**

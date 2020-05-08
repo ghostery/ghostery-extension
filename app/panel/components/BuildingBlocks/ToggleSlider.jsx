@@ -50,9 +50,7 @@ class ToggleSlider extends React.Component {
 		if (typeof this.props.onChange === 'function') {
 			this.props.onChange(event);
 		} else {
-			this.setState({
-				checked: !this.state.checked,
-			});
+			this.setState(prevState => ({ checked: !prevState.checked }));
 		}
 	}
 

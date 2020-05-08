@@ -86,7 +86,7 @@ module.exports = {
 		'react/jsx-indent': [1, 'tab'],
 		'react/jsx-indent-props': [1, 'tab'],
 		'react/jsx-props-no-spreading': [0], // TODO: enable this check
-		'react/no-access-state-in-setstate': [0], // TODO: enable this check
+		'react/no-access-state-in-setstate': [1],
 		'react/no-danger': [0],
 		'react/prop-types': [0],
 		'react/jsx-fragments': [1, 'element'],

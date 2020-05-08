@@ -99,9 +99,9 @@ export default class Accordion extends React.Component {
 		const boundingRect = accordionContentNode.getBoundingClientRect();
 		// Try lo load more when needed
 		if (scrollTop + window.innerHeight - (accordionContentNode.offsetTop + boundingRect.height) > -needToUpdateHeight) {
-			const itemsLength = Math.min(this.state.currentItemsLength + this.nExtraItems, this.props.numTotal);
-			this.setState({
-				currentItemsLength: itemsLength,
+			this.setState((prevState) => {
+				const itemsLength = Math.min(prevState.currentItemsLength + this.nExtraItems, this.props.numTotal);
+				return { currentItemsLength: itemsLength };
 			});
 		}
 	}

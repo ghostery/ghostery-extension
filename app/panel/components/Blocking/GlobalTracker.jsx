@@ -47,7 +47,7 @@ class GlobalTracker extends React.Component {
 	 */
 	toggleDescription() {
 		const { tracker } = this.props;
-		this.setState({ showMoreInfo: !this.state.showMoreInfo });
+		this.setState(prevState => ({ showMoreInfo: !prevState.showMoreInfo }));
 
 		if (this.state.description) {
 			return;
