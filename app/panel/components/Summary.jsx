@@ -314,6 +314,7 @@ class Summary extends React.Component {
 
 	_isPremiumSubscriber() {
 		const { user } = this.props;
+
 		return user && user.subscriptionsPremium;
 	}
 
