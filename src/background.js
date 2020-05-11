@@ -325,16 +325,33 @@ function handleAccountPages(name, callback) {
  * @param  {string}		tab_url 	tab url
  */
 function handleCheckoutPages(name, callback) {
+	console.error('checkoutPage event:');
+	console.error(name);
+
 	switch (name) {
+		case 'checkoutPage.buyInsights':
 		case 'checkoutPage.buyPlus':
-			// Update account info
-			console.error('background#handleCheckoutPages received "checkoutPage.buyPlus"');
+		case 'checkoutPage.buyPremium':
+			account.getUser()
+				.then(account.getUserSubscriptionData)
+				.catch((err) => {
+					log('handleCheckoutPages error', err);
+				});
 			return true;
-		case 'checkoutPage.ping':
-			console.error('ping received from Checkout Web');
+		case 'checkoutPage.login':
+			account.getUser()
+				.then(account.getUserSettings)
+				// account.getUserSettings will reject if user email is not validated
+				.catch(err => log('handleCheckoutPages error', err))
+				.then(account.getUserSubscriptionData)
+				// The user may not be a subscriber
+				.catch(err => log('handleCheckoutPages error', err));
+			return true;
+		case 'checkoutPage.register':
+			account.getUser();
 			return true;
 		default:
-			return false;
+			break;
 	}
 }
 

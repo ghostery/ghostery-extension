@@ -30,8 +30,11 @@ const CheckoutPagesContentScript = (function(window) {
 	 * @package
 	 */
 	const _listeners = [
+		'checkoutPages.buyInsights',
 		'checkoutPage.buyPlus',
-		'checkoutPage.ping',
+		'checkoutPage.buyPremium',
+		'checkoutPage.login',
+		'checkoutPage.register',
 	];
 	const _initialize = function() {
 		_listeners.forEach(name => window.addEventListener(name, () => sendMessage(name)));
