@@ -148,13 +148,13 @@
 
 		.menu-option {
 			@extend .menu-option-base;
-			.plusSubscriber {
+			.subscriptionsPlus {
 				width: 18px;
 				height: 16px;
 				path {fill: $light-gray;}
 				path.text {fill: #4a4a4a;}
 			}
-			.premiumSubscriber {
+			.subscriptionsPremium {
 				margin-left: -4px;
 				g > g {
 					fill: #DEDEDE;
@@ -171,7 +171,7 @@
 					path {stroke: $ghosty-blue;}
 					path.text {fill: $ghosty-blue;}
 				}
-				.premiumSubscriber > g > g {
+				.subscriptionsPremium > g > g {
 					fill: $ghosty-blue;
 				}
 			}

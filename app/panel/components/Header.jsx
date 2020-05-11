@@ -237,16 +237,11 @@ class Header extends React.Component {
 			</div>
 		);
 
-		let subscriberType;
-		if (premiumSubscriber) {
-			subscriberType = 'premium';
-		} else if (plusSubscriber) {
-			subscriberType = 'plus';
-		}
 		const headerMenu = (
 			<HeaderMenu
 				loggedIn={loggedIn}
-				subscriberType={subscriberType}
+				subscriptionsPremium={user && user.subscriptionsPremium}
+				subscriptionsPlus={user && user.subscriptionsPlus}
 				email={user && user.email}
 				language={this.props.language}
 				tab_id={this.props.tab_id}
