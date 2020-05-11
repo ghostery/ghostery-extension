@@ -824,7 +824,19 @@ function onMessageHandler(request, sender, callback) {
 	if (name === 'account.getUserSubscriptionData') {
 		account.getUserSubscriptionData()
 			.then((customer) => {
-				callback({ subscriptionData: customer });
+				// TODO temporary fix to handle multiple subscriptions
+				let sub = customer.subscriptions;
+				if (!Array.isArray(sub)) {
+					sub = [sub];
+				}
+
+				let subscriptionData = sub.find(subscription => subscription.productName.includes('Ghostery Premium'));
+				if (subscriptionData) {
+					callback({ subscriptionData });
+				}
+
+				subscriptionData = sub.find(subscription => subscription.productName.includes('Ghostery Plus'));
+				callback({ subscriptionData });
 			})
 			.catch((err) => {
 				log('Error getting user subscription data:', err);

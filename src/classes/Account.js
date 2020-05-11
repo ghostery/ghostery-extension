@@ -174,15 +174,12 @@ class Account {
 				const premiumSubscription = sub.find(subscription => subscription.productName.includes('Ghostery Premium'));
 				if (premiumSubscription) {
 					this._setSubscriptionData(premiumSubscription);
-					return premiumSubscription;
 				}
 
 				const plusSubscription = sub.find(subscription => subscription.productName.includes('Ghostery Plus'));
 				if (plusSubscription) {
 					this._setSubscriptionData(plusSubscription);
-					return plusSubscription;
 				}
-
 				return customer;
 			})
 	)
