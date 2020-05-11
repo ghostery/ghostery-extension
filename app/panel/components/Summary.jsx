@@ -760,19 +760,21 @@ class Summary extends React.Component {
 			'UpgradeBanner--normal': !is_expert,
 			'UpgradeBanner--small': is_expert,
 		});
-		let subscriberType;
-		if (isPremiumSubscriber) {
-			subscriberType = 'premium';
-		} else if (isPlusSubscriber) {
-			subscriberType = 'plus';
-		}
 
 		return (
 			<div onClick={this.clickUpgradeBannerOrGoldPlusIcon}>
-				{(isPremiumSubscriber || isPlusSubscriber) && (
+				{(isPremiumSubscriber) && (
 					<div className="Summary__subscriberBadgeContainer">
 						<div className={`SubscriberBadge ${current_theme}`}>
-							<ReactSVG src={`/app/images/panel/${subscriberType}-badge-icon.svg`} className="gold-plus-icon" />
+							<ReactSVG src="/app/images/panel/premium-badge-icon.svg" className="gold-plus-icon" />
+						</div>
+					</div>
+				)}
+
+				{(!isPremiumSubscriber && isPlusSubscriber) && (
+					<div className="Summary__subscriberBadgeContainer">
+						<div className={`SubscriberBadge ${current_theme}`}>
+							<ReactSVG src="/app/images/panel/plus-badge-icon.svg" className="gold-plus-icon" />
 						</div>
 					</div>
 				)}
