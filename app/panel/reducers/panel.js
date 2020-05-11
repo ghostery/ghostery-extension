@@ -182,6 +182,9 @@ export default (state = initialState, action) => {
 					case '10110':
 						errorText = t('banner_email_not_in_system_message');
 						break;
+					case 'too_many_password_resets':
+						errorText = t('too_many_password_resets_text');
+						break;
 					default:
 						errorText = t('server_error_message');
 				}
