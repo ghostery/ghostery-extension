@@ -128,22 +128,18 @@ class LogInViewContainer extends Component {
 			emailError,
 			passwordError,
 		} = this.state;
-		const logInChildProps = {
-			email,
-			password,
-			emailError,
-			passwordError,
-			handleInputChange: this._handleInputChange,
-			handleSubmit: this._handleLoginAttempt,
-		};
-		const signedInChildProps = {
-			email: (user && user.email) || 'email',
-		};
 
 		return loggedIn ? (
-			<SignedInView {...signedInChildProps} />
+			<SignedInView email={(user && user.email) || 'email'} />
 		) : (
-			<LogInView {...logInChildProps} />
+			<LogInView
+				email={email}
+				password={password}
+				emailError={emailError}
+				passwordError={passwordError}
+				handleInputChange={this._handleInputChange}
+				handleSubmit={this._handleLoginAttempt}
+			/>
 		);
 	}
 }

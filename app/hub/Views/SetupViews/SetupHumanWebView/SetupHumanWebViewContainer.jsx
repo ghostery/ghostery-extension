@@ -58,11 +58,12 @@ class SetupHumanWebViewContainer extends Component {
 	 * @return {JSX} JSX for rendering the Setup Human Web View of the Hub app
 	 */
 	render() {
-		const childProps = {
-			enableHumanWeb: this.props.setup.enable_human_web,
-			changeHumanWeb: this._handleToggle,
-		};
-		return <SetupHumanWebView {...childProps} />;
+		return (
+			<SetupHumanWebView
+				enableHumanWeb={this.props.setup.enable_human_web}
+				changeHumanWeb={this._handleToggle}
+			/>
+		);
 	}
 }
 

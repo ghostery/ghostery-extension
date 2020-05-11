@@ -36,11 +36,13 @@ class AppViewContainer extends Component {
 	 * @return {JSX} JSX for rendering the Home View of the Hub app
 	 */
 	render() {
-		const childProps = {
-			...this.props,
-			exitToast: this._exitToast,
-		};
-		return <AppView {...childProps} />;
+		const { app, children } = this.props;
+
+		return (
+			<AppView app={app} exitToast={this._exitToast}>
+				{children}
+			</AppView>
+		);
 	}
 }
 

@@ -31,21 +31,22 @@ describe('app/panel/components/Rewards.jsx', () => {
 
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('rewards is rendered correctly when rewards is on and rewards is null', () => {
-			const initialState = {
-				actions: {
-					updateRewardsData: () => {},
-					sendSignal: () => {},
-				},
-				location: {
-					pathname: '/detail/rewards/list',
-				},
-				enable_offers: true,
-				is_expanded: false
+			const actions = {
+				updateRewardsData: () => {},
+				sendSignal: () => {},
+			};
+			const location = {
+				pathname: '/detail/rewards/list',
 			};
 			const component = renderer.create(
 				<MemoryRouter initialEntries={['/detail/rewards/list']}>
 					<DynamicUIPortContext.Provider value={dynamicUIPort}>
-						<Rewards {...initialState} />
+						<Rewards
+							actions={actions}
+							location={location}
+							enable_offers
+							is_expanded={false}
+						/>
 					</DynamicUIPortContext.Provider>
 				</MemoryRouter>
 			).toJSON();
@@ -53,21 +54,22 @@ describe('app/panel/components/Rewards.jsx', () => {
 		});
 
 		test('rewards is rendered correctly when rewards is off and rewards is null', () => {
-			const initialState = {
-				actions: {
-					updateRewardsData: () => {},
-					sendSignal: () => {},
-				},
-				location: {
-					pathname: '/detail/rewards/list',
-				},
-				enable_offers: false,
-				is_expanded: false
+			const actions = {
+				updateRewardsData: () => {},
+				sendSignal: () => {},
+			};
+			const location = {
+				pathname: '/detail/rewards/list',
 			};
 			const component = renderer.create(
 				<MemoryRouter initialEntries={['/detail/rewards/list']}>
 					<DynamicUIPortContext.Provider value={dynamicUIPort}>
-						<Rewards {...initialState} />
+						<Rewards
+							actions={actions}
+							location={location}
+							enable_offers={false}
+							is_expanded={false}
+						/>
 					</DynamicUIPortContext.Provider>
 				</MemoryRouter>
 			).toJSON();

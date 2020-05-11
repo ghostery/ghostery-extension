@@ -124,15 +124,6 @@ class HomeViewContainer extends Component {
 			tutorial_complete,
 			enable_metrics,
 		} = home;
-		const childProps = {
-			justInstalled,
-			setup_complete,
-			tutorial_complete,
-			enable_metrics,
-			changeMetrics: this._handleToggleMetrics,
-			email: user ? user.email : '',
-			isPlus,
-		};
 
 		const showPromoModal = !premium_promo_modal_shown && !this._premiumSubscriber();
 
@@ -147,7 +138,15 @@ class HomeViewContainer extends Component {
 					handleGetPlusClick={this._handleGetPlusClick}
 					handleTryMidnightClick={this._handleTryMidnightClick}
 				/>
-				<HomeView {...childProps} />
+				<HomeView
+					justInstalled={justInstalled}
+					setup_complete={setup_complete}
+					tutorial_complete={tutorial_complete}
+					enable_metrics={enable_metrics}
+					changeMetrics={this._handleToggleMetrics}
+					email={user ? user.email : ''}
+					isPlus={isPlus}
+				/>
 			</div>
 		);
 	}

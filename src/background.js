@@ -776,7 +776,7 @@ function onMessageHandler(request, sender, callback) {
 		const { email, password } = message;
 		account.login(email, password)
 			.then((response) => {
-				if (!Object.property.hasOwnProperty.call(response, 'errors')) {
+				if (!Object.prototype.hasOwnProperty.call(response, 'errors')) {
 					metrics.ping('sign_in_success');
 				}
 				callback(response);
@@ -793,7 +793,7 @@ function onMessageHandler(request, sender, callback) {
 		} = message;
 		account.register(email, confirmEmail, password, firstName, lastName)
 			.then((response) => {
-				if (!Object.property.hasOwnProperty.call(response, 'errors')) {
+				if (!Object.prototype.hasOwnProperty.call(response, 'errors')) {
 					metrics.ping('create_account_success');
 				}
 				callback(response);
@@ -888,7 +888,7 @@ function onMessageHandler(request, sender, callback) {
 				if (foundUser) {
 					foundUser.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus']);
 				}
-				callback({ foundUser });
+				callback({ user: foundUser });
 			})
 			.catch((err) => {
 				callback({ errors: _getJSONAPIErrorsObject(err) });

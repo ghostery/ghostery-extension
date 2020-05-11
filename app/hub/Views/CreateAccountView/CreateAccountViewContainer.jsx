@@ -172,30 +172,26 @@ class CreateAccountViewContainer extends Component {
 			passwordInvalidError,
 			passwordLengthError,
 		} = this.state;
-		const createAccountChildProps = {
-			email,
-			emailError,
-			confirmEmail,
-			confirmEmailError,
-			firstName,
-			lastName,
-			legalConsentChecked,
-			legalConsentNotCheckedError,
-			password,
-			passwordInvalidError,
-			passwordLengthError,
-			handleInputChange: this._handleInputChange,
-			handleLegalConsentCheckboxChange: this._handleLegalConsentCheckboxChange,
-			handleSubmit: this._handleCreateAccountAttempt
-		};
-		const signedInChildProps = {
-			email: (user && user.email) || email,
-		};
 
 		return loggedIn ? (
-			<SignedInView {...signedInChildProps} />
+			<SignedInView email={(user && user.email) || email} />
 		) : (
-			<CreateAccountView {...createAccountChildProps} />
+			<CreateAccountView
+				email={email}
+				emailError={emailError}
+				confirmEmail={confirmEmail}
+				confirmEmailError={confirmEmailError}
+				firstName={firstName}
+				lastName={lastName}
+				legalConsentChecked={legalConsentChecked}
+				legalConsentNotCheckedError={legalConsentNotCheckedError}
+				password={password}
+				passwordInvalidError={passwordInvalidError}
+				passwordLengthError={passwordLengthError}
+				handleInputChange={this._handleInputChange}
+				handleLegalConsentCheckboxChange={this._handleLegalConsentCheckboxChange}
+				handleSubmit={this._handleCreateAccountAttempt}
+			/>
 		);
 	}
 }
