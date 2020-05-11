@@ -234,7 +234,7 @@ class HeaderMenu extends React.Component {
 						</li>
 						<li className={optionClasses} onClick={this.clickSubscriber}>
 							<div>
-								{/* Upselling plus for users who are not logged in */}
+								{/* Upselling plus for all users who are not premium subscribers */}
 								{subscriberType !== 'premium' && (
 									<svg className={iconClasses} width="84" height="77" viewBox="0 0 84 77">
 										<g className="about-icon" fill="none">

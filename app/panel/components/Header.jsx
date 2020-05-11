@@ -182,7 +182,7 @@ class Header extends React.Component {
 		const accountLogolink = this.generateAccountLogo();
 		const badgeClasses = ClassNames('columns', 'shrink', {
 			'non-subscriber-badge': !(plusSubscriber || premiumSubscriber),
-			'gold-subscriber-badge': plusSubscriber || premiumSubscriber
+			'subscriber-badge': plusSubscriber || premiumSubscriber
 		});
 
 		const simpleTab = (
@@ -217,16 +217,11 @@ class Header extends React.Component {
 			</span>
 		);
 
-		let subscriberType;
-		if (premiumSubscriber) {
-			subscriberType = 'premium';
-		} else if (plusSubscriber) {
-			subscriberType = 'plus';
-		}
 		const plusUpgradeBannerOrSubscriberBadgeLogolink = (
 			<div className={badgeClasses} onClick={this.clickUpgradeBannerOrSubscriberBadgeIcon}>
 				{
-					((premiumSubscriber || plusSubscriber) && <ReactSVG src={`/app/images/panel/${subscriberType}-badge-icon-expanded-view.svg`} />)
+					((premiumSubscriber) && <ReactSVG src="/app/images/panel/premium-badge-icon-expanded-view.svg" />)
+					|| ((plusSubscriber) && <ReactSVG src="/app/images/panel/plus-badge-icon-expanded-view.svg" />)
 					|| <ReactSVG src="/app/images/panel/green-upgrade-banner-expanded-view.svg" />
 				}
 			</div>
@@ -242,6 +237,12 @@ class Header extends React.Component {
 			</div>
 		);
 
+		let subscriberType;
+		if (premiumSubscriber) {
+			subscriberType = 'premium';
+		} else if (plusSubscriber) {
+			subscriberType = 'plus';
+		}
 		const headerMenu = (
 			<HeaderMenu
 				loggedIn={loggedIn}
