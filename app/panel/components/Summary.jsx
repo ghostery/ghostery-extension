@@ -314,7 +314,7 @@ class Summary extends React.Component {
 
 	_isPremiumSubscriber() {
 		const { user } = this.props;
-		return user && user.scopes && user.scopes.includes('subscriptions:premium');
+		return user && user.subscriptionsPremium;
 	}
 
 	_pageHost() {

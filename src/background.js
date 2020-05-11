@@ -881,6 +881,7 @@ function onMessageHandler(request, sender, callback) {
 			.then((user) => {
 				if (user) {
 					user.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus']);
+					user.subscriptionsPremium = account.hasScopesUnverified(['subscriptions:premium']);
 				}
 				callback({ user });
 			})

@@ -217,7 +217,7 @@ class Panel extends React.Component {
 	_premiumSubscriber = () => {
 		const { loggedIn, user } = this.props;
 
-		return loggedIn && (user && user.scopes && user.scopes.includes('subscriptions:premium'));
+		return loggedIn && (user && user.subscriptionsPremium);
 	}
 
 	/**

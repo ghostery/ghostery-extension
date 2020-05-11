@@ -150,7 +150,7 @@ class Header extends React.Component {
 		sendMessage('ping', 'plus_panel_from_badge');
 		const { user } = this.props;
 		const plusSubscriber = user && user.subscriptionsPlus;
-		const premiumSubscriber = user && user.scopes && user.scopes.includes('subscriptions:premium');
+		const premiumSubscriber = user && user.subscriptionsPremium;
 		this.props.history.push(plusSubscriber || premiumSubscriber ? '/subscription/info' : `/subscribe/${!!user}`);
 	}
 
@@ -178,7 +178,7 @@ class Header extends React.Component {
 			active: is_expert,
 		});
 		const plusSubscriber = user && user.subscriptionsPlus;
-		const premiumSubscriber = user && user.scopes && user.scopes.includes('subscriptions:premium');
+		const premiumSubscriber = user && user.subscriptionsPremium;
 		const accountLogolink = this.generateAccountLogo();
 		const badgeClasses = ClassNames('columns', 'shrink', {
 			'non-subscriber-badge': !(plusSubscriber || premiumSubscriber),
