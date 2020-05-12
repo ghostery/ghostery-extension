@@ -158,6 +158,9 @@ class Account {
 			})
 	)
 
+	/**
+	 * @return {array}	All subscriptions the user has, empty if none
+	*/
 	getUserSubscriptionData = () => (
 		this._getUserID()
 			.then(userID => api.get('stripe/customers', userID, 'cards,subscriptions'))
@@ -170,17 +173,20 @@ class Account {
 					sub = [sub];
 				}
 
-				// Display premium info if user has both premium and plus subscriptions
+				const subscriptions = [];
+
 				const premiumSubscription = sub.find(subscription => subscription.productName.includes('Ghostery Premium'));
 				if (premiumSubscription) {
 					this._setSubscriptionData(premiumSubscription);
+					subscriptions.push(premiumSubscription);
 				}
 
 				const plusSubscription = sub.find(subscription => subscription.productName.includes('Ghostery Plus'));
 				if (plusSubscription) {
+					subscriptions.push(plusSubscription);
 					this._setSubscriptionData(plusSubscription);
 				}
-				return customer;
+				return subscriptions;
 			})
 	)
 

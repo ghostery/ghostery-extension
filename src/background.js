@@ -823,20 +823,15 @@ function onMessageHandler(request, sender, callback) {
 	}
 	if (name === 'account.getUserSubscriptionData') {
 		account.getUserSubscriptionData()
-			.then((customer) => {
-				// TODO temporary fix to handle multiple subscriptions
-				let sub = customer.subscriptions;
-				if (!Array.isArray(sub)) {
-					sub = [sub];
-				}
+			.then((subscriptions) => {
+				// Return highest tier subscription from array
+				const premiumSubscription = subscriptions.find(subscription => subscription.productName.includes('Ghostery Premium'));
+				if (premiumSubscription) callback({ premiumSubscription });
 
-				let subscriptionData = sub.find(subscription => subscription.productName.includes('Ghostery Premium'));
-				if (subscriptionData) {
-					callback({ subscriptionData });
-				}
+				const plusSubscription = subscriptions.find(subscription => subscription.productName.includes('Ghostery Plus'));
+				if (plusSubscription) callback({ plusSubscription });
 
-				subscriptionData = sub.find(subscription => subscription.productName.includes('Ghostery Plus'));
-				callback({ subscriptionData });
+				callback({});
 			})
 			.catch((err) => {
 				log('Error getting user subscription data:', err);
