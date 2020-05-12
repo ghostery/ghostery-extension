@@ -140,6 +140,12 @@ class Account {
 			.then(userID => api.get('users', userID))
 			.then((res) => {
 				const user = build(normalize(res), 'users', res.data.id);
+				const currentAccount = conf.account;
+				console.log('currentAccount.user: ', currentAccount.user);
+				if (currentAccount.user) {
+					user.subscription = currentAccount.user.subscription;
+				}
+				console.log('user: ', user);
 				this._setAccountUserInfo(user);
 				return user;
 			})
@@ -498,13 +504,17 @@ class Account {
 		}
 		currentAccount.subscriptionData = data || null;
 
-		if (data.productName.includes('Ghostery Premium')) {
-			currentAccount.user.subscription = 'premium';
-		} else if (data.productName.includes('Ghostery Plus')) {
-			currentAccount.user.subscription = 'plus';
-		} else {
-			currentAccount.user.subscription = '';
+		if (currentAccount.user) {
+			console.log('here');
+			if (data.productName.includes('Ghostery Premium')) {
+				currentAccount.subscription = 'premium';
+			} else if (data.productName.includes('Ghostery Plus')) {
+				currentAccount.subscription = 'plus';
+			} else {
+				currentAccount.subscription = '';
+			}
 		}
+		console.log(currentAccount.user);
 		dispatcher.trigger('conf.save.account');
 	}
 

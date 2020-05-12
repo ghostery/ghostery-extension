@@ -882,9 +882,15 @@ function onMessageHandler(request, sender, callback) {
 			.then((user) => {
 				if (user) {
 					user.plusAccess = account.hasScopesUnverified(['subscriptions:plus'])
-											|| account.hasScopesUnverified(['subscriptions:premium']);
+						|| account.hasScopesUnverified(['subscriptions:premium']);
 					user.premiumAccess = account.hasScopesUnverified(['subscriptions:premium']);
+
+					// const currentAccount = conf.account;
+					// if (currentAccount.user) {
+					// 	user.subscription = currentAccount.user.subscription;
+					// }
 				}
+				console.log('the user is: ', user);
 				callback({ user });
 			})
 			.catch((err) => {
