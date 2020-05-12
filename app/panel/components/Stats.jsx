@@ -529,7 +529,7 @@ class Stats extends React.Component {
 		return (
 			<StatsView
 				showResetModal={showResetModal}
-				showPitchModal={!user || !user.subscriptionsPlus}
+				showPitchModal={!user || (!user.subscriptionsPlus || !user.subscriptionsPremium)}
 				loggedIn={loggedIn}
 				getStats={this.getStats}
 				selection={selection}
