@@ -40,7 +40,8 @@ class Account {
 		const opts = {
 			errorHandler: errors => (
 				new Promise((resolve, reject) => {
-					for (const err of errors) {
+					for (let i = 0; i < errors.length; i++) {
+						const err = errors[i];
 						switch (err.code) {
 							case '10020': // token is not valid
 							case '10060': // user id does not match
@@ -346,10 +347,12 @@ class Account {
 
 		// check scopes
 		if (userScopes.indexOf('god') >= 0) { return true; }
-		for (const sArr of required) {
+		for (let i = 0; i < required.length; i++) {
+			const sArr = required[i];
 			let matches = true;
 			if (sArr.length > 0) {
-				for (const s of sArr) {
+				for (let j = 0; j < sArr.length; j++) {
+					const s = sArr[j];
 					if (userScopes.indexOf(s) === -1) {
 						matches = false;
 						break;

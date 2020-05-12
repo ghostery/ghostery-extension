@@ -29,7 +29,7 @@ import dispatcher from './Dispatcher';
 import promoModals from './PromoModals';
 import { getCliqzGhosteryBugs, sendCliqzModuleCounts } from '../utils/cliqzModulesData';
 import { getActiveTab, flushChromeMemoryCache, processUrl } from '../utils/utils';
-import { objectEntries, log } from '../utils/common';
+import { log } from '../utils/common';
 
 const SYNC_SET = new Set(globals.SYNC_ARRAY);
 const { IS_CLIQZ } = globals;
@@ -586,8 +586,10 @@ class PanelData {
 		}
 
 		// Set the conf from data
-		// TODO can this now be replaced by Object.entries?
-		for (const [key, value] of objectEntries(data)) {
+		const dataKeys = Object.keys(data);
+		for (let i = 0; i < dataKeys.length; i++) {
+			const key = dataKeys[i];
+			const value = data[key];
 			if (Object.prototype.hasOwnProperty.call(conf, key) && !isEqual(conf[key], value)) {
 				conf[key] = value;
 				syncSetDataChanged = SYNC_SET.has(key) ? true : syncSetDataChanged;

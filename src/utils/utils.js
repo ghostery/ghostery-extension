@@ -22,7 +22,7 @@ import { debounce } from 'underscore';
 import { URL } from '@cliqz/url-parser';
 import tabInfo from '../classes/TabInfo';
 import globals from '../classes/Globals';
-import { log, objectEntries } from './common';
+import { log } from './common';
 
 const { BROWSER_INFO } = globals;
 const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
@@ -355,7 +355,10 @@ function _fetchJson(method, url, query, extraHeaders, referrer = 'no-referrer', 
 			Accept: 'application/json'
 		});
 		if (extraHeaders) {
-			for (const [key, value] of objectEntries(extraHeaders)) {
+			const extraHeadersKeys = Object.keys(extraHeaders);
+			for (let i = 0; i < extraHeadersKeys.length; i++) {
+				const key = extraHeadersKeys[i];
+				const value = extraHeaders[key];
 				headers.append(key, value);
 			}
 		}
@@ -448,7 +451,10 @@ function _fetchJson(method, url, query, extraHeaders, referrer = 'no-referrer', 
 		xhr.setRequestHeader('Content-Type', 'application/json');
 		xhr.setRequestHeader('Accept', 'application/json');
 		if (extraHeaders) {
-			for (const [key, value] of objectEntries(extraHeaders)) {
+			const extraHeadersKeys = Object.keys(extraHeaders);
+			for (let i = 0; i < extraHeadersKeys.length; i++) {
+				const key = extraHeadersKeys[i];
+				const value = extraHeaders[key];
 				xhr.setRequestHeader(key, value);
 			}
 		}

@@ -84,7 +84,9 @@ class BugDb extends Updatable {
 		const categoryArray = [];
 		const categories = {};
 
-		for (appId in db.apps) {
+		const appIds = Object.keys(db.apps);
+		for (let i = 0; i < appIds.length; i++) {
+			appId = appIds[i];
 			if (Object.prototype.hasOwnProperty.call(db.apps, appId)) {
 				category = db.apps[appId].cat;
 				if (t(`category_${category}`) === `category_${category}`) {
@@ -181,7 +183,9 @@ class BugDb extends Updatable {
 
 		log('initializing bugdb regexes...');
 
-		for (const id in regexes) {
+		const regexesKeys = Object.keys(regexes);
+		for (let i = 0; i < regexesKeys.length; i++) {
+			const id = regexesKeys[i];
 			if (Object.prototype.hasOwnProperty.call(regexes, id)) {
 				db.patterns.regex[id] = new RegExp(regexes[id], 'i');
 			}

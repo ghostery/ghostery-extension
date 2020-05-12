@@ -34,7 +34,6 @@ import {
 	updateTrackerBlocked, updateCategoryBlocked, updateBlockAllTrackers, toggleExpandAll
 } from '../utils/blocking';
 import { sendMessage } from '../utils/msg';
-import { objectEntries } from '../../../src/utils/common';
 
 const initialState = {
 	expand_all_trackers: false,
@@ -195,8 +194,10 @@ const _importSettingsDialog = (state, action) => {
 const _importSettingsNative = (state, action) => {
 	const { settings } = action;
 	const updated_state = {};
-	// eslint-disable-next-line prefer-const
-	for (let [key, value] of objectEntries(settings)) {
+	const settingsKeys = Object.keys(settings);
+	for (let i = 0; i < settingsKeys.length; i++) {
+		const key = settingsKeys[i];
+		let value = settings[key];
 		if (key === 'alert_bubble_timeout') {
 			value = (value > 30) ? 30 : value;
 		}

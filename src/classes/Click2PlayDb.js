@@ -68,9 +68,11 @@ class Click2PlayDb extends Updatable {
 	reset(tab_id) {
 		if (!Object.prototype.hasOwnProperty.call(this.allowOnceList, tab_id)) { return; }
 
-		const entries = Object.entries(this.allowOnceList[tab_id]);
 		let keep = false;
-		for (const [appID, count] of entries) {
+		const allowKeys = Object.keys(this.allowOnceList[tab_id]);
+		for (let i = 0; i < allowKeys.length; i++) {
+			const appID = allowKeys[i];
+			const count = this.allowOnceList[tab_id][appID];
 			const newCount = count - 1;
 			this.allowOnceList[tab_id][appID] = newCount;
 			if (newCount > 0) {

@@ -158,25 +158,6 @@ export function hashCode(str) {
 }
 
 /**
- * Generator which makes object iterable with for...of loop
- * @memberOf BackgroundUtils
- *
- * @param  {Object} 	object over which own enumerable properties we want to iterate
- * @return {Object}		Generator object
- */
-
-export function* objectEntries(obj) {
-	const propKeys = Object.keys(obj);
-
-	for (const propKey of propKeys) {
-		// `yield` returns a value and then pauses
-		// the generator. Later, execution continues
-		// where it was previously paused.
-		yield [propKey, obj[propKey]];
-	}
-}
-
-/**
  * Unescape base64-encoded string.
  * @private
  *
