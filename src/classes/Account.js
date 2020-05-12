@@ -177,8 +177,8 @@ class Account {
 
 				const premiumSubscription = sub.find(subscription => subscription.productName.includes('Ghostery Premium'));
 				if (premiumSubscription) {
-					this._setSubscriptionData(premiumSubscription);
 					subscriptions.push(premiumSubscription);
+					this._setSubscriptionData(premiumSubscription);
 				}
 
 				const plusSubscription = sub.find(subscription => subscription.productName.includes('Ghostery Plus'));
@@ -188,6 +188,7 @@ class Account {
 						this._setSubscriptionData(plusSubscription);
 					}
 				}
+
 				return subscriptions;
 			})
 	)
@@ -488,12 +489,22 @@ class Account {
 	}
 
 	_setSubscriptionData = (data) => {
+		const currentAccount = conf.account;
+
 		// TODO: Change this so that we aren't writing over data
 		if (!conf.paid_subscription && data) {
 			conf.paid_subscription = true;
 			dispatcher.trigger('conf.save.paid_subscription');
 		}
-		conf.account.subscriptionData = data || null;
+		currentAccount.subscriptionData = data || null;
+
+		if (data.productName.includes('Ghostery Premium')) {
+			currentAccount.user.subscription = 'premium';
+		} else if (data.productName.includes('Ghostery Plus')) {
+			currentAccount.user.subscription = 'plus';
+		} else {
+			currentAccount.user.subscription = '';
+		}
 		dispatcher.trigger('conf.save.account');
 	}
 
