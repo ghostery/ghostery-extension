@@ -214,8 +214,9 @@ class Summary extends React.Component {
 	 */
 	clickUpgradeBannerOrGoldPlusIcon() {
 		sendMessage('ping', 'plus_panel_from_badge');
+		const isSubscriber = this._isPlusSubscriber() || this._isPremiumSubscriber();
 
-		this.props.history.push(this._isPlusSubscriber() ? '/subscription/info' : `/subscribe/${!!this.props.user}`);
+		this.props.history.push(isSubscriber ? '/subscription/info' : `/subscribe/${!!this.props.user}`);
 	}
 
 	/**
