@@ -166,17 +166,16 @@ class HeaderMenu extends React.Component {
 		const {
 			loggedIn,
 			email,
-			premiumAccess,
-			plusAccess
+			subscriber
 		} = this.props;
 		const optionClasses = ClassNames({
-			'menu-option': premiumAccess || plusAccess,
-			'menu-option-non-subscriber': !premiumAccess || !plusAccess
+			'menu-option': subscriber,
+			'menu-option-non-subscriber': !subscriber
 		});
 		const iconClasses = ClassNames('menu-icon-container', {
-			premiumAccess,
-			plusAccess: plusAccess && !premiumAccess,
-			'non-subscriber': !premiumAccess && !plusAccess
+			premium: subscriber === 'premium',
+			plus: subscriber === 'plus',
+			'non-subscriber': !subscriber
 		});
 		return (
 			<ClickOutside onClickOutside={this.handleClickOutside} excludeEl={this.props.kebab}>
@@ -244,7 +243,7 @@ class HeaderMenu extends React.Component {
 						<li className={optionClasses} onClick={this.clickSubscriber}>
 							<div>
 								{/* Show premium icon to premium users and plus icon to basic and plus users */}
-								{!premiumAccess && (
+								{subscriber !== 'premium' && (
 									<svg className={iconClasses} width="84" height="77" viewBox="0 0 84 77">
 										<g className="about-icon" fill="none">
 											<path d="M79.858 74.75L43.1 57.9c-.579-.315-1.447-.315-2.026 0L4.604 74.75c-.867.472-2.604 0-2.604-.63V2.786C2 2.315 2.579 2 3.447 2h76.99c.868 0 1.447.315 1.447.787V74.12c.58.63-1.157 1.103-2.026.63z" />
@@ -252,7 +251,7 @@ class HeaderMenu extends React.Component {
 										</g>
 									</svg>
 								)}
-								{premiumAccess && (
+								{subscriber === 'premium' && (
 									<svg className={iconClasses} width="27" height="25" viewBox="0 0 27 25">
 										<g fill="none" fillRule="evenodd">
 											<g>
@@ -263,7 +262,7 @@ class HeaderMenu extends React.Component {
 										</g>
 									</svg>
 								)}
-								<span>{premiumAccess ? t('panel_detail_premium_title') : t('ghostery_plus')}</span>
+								<span>{subscriber === 'premium' ? t('panel_detail_premium_title') : t('ghostery_plus')}</span>
 							</div>
 						</li>
 					</ul>

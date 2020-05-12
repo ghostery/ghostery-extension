@@ -177,8 +177,8 @@ class Header extends React.Component {
 		const tabDetailedClassNames = ClassNames('header-tab', {
 			active: is_expert,
 		});
-		const plusSubscriber = user && user.plusAccess;
-		const premiumSubscriber = user && user.premiumAccess;
+		const plusSubscriber = user && user.subscription === 'plus';
+		const premiumSubscriber = user && user.subscription === 'premium';
 		const accountLogolink = this.generateAccountLogo();
 		const badgeClasses = ClassNames('columns', 'shrink', {
 			'non-subscriber-badge': !(plusSubscriber || premiumSubscriber),
@@ -240,6 +240,7 @@ class Header extends React.Component {
 		const headerMenu = (
 			<HeaderMenu
 				loggedIn={loggedIn}
+				subscriber={user && user.subscription}
 				premiumAccess={user && user.premiumAccess}
 				plusAccess={user && user.plusAccess}
 				email={user && user.email}
