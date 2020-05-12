@@ -826,10 +826,10 @@ function onMessageHandler(request, sender, callback) {
 			.then((subscriptions) => {
 				// Return highest tier subscription from array
 				const premiumSubscription = subscriptions.find(subscription => subscription.productName.includes('Ghostery Premium'));
-				if (premiumSubscription) callback({ premiumSubscription });
+				if (premiumSubscription) callback({ subscriptionData: premiumSubscription });
 
 				const plusSubscription = subscriptions.find(subscription => subscription.productName.includes('Ghostery Plus'));
-				if (plusSubscription) callback({ plusSubscription });
+				if (plusSubscription) callback({ subscriptionData: plusSubscription });
 
 				callback({});
 			})
