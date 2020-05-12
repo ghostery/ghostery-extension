@@ -2,6 +2,8 @@
  * TabInfo Class
  *
  * this._tabInfo[tab_id]: {
+ * 		c2pStatus		{string}	current status of the click_to_play.js script injection on the tab (none|loading|done)
+ * 		c2pQueue		{Object}	queue of c2p messages collected when c2pStatus is 'none' or 'loading', organized as a HashSet by app_id
  *		domain: 		{string}	the general domain name plus suffix (no sub-domains)
  *		hash: 			{string} 	hash values appended to the url
  *		host: 			{string} 	the domain name plus suffix and sub-domains
@@ -44,7 +46,7 @@ class TabInfo {
 
 	/**
 	 * Create a new _tabInfo object
-	 * @param  {number} tab_id			tab id
+	 * @param  {number} tab_id		tab id
 	 * @param  {string} tab_url		tab url
 	 */
 	create(tab_id, tab_url) {
@@ -66,6 +68,8 @@ class TabInfo {
 				unblocked: {},
 			},
 			insecureRedirects: [],
+			c2pStatus: 'none',
+			c2pQueue: {},
 		};
 
 		this._tabInfo[tab_id] = info;
@@ -74,12 +78,12 @@ class TabInfo {
 
 	/**
 	 * Getter method
-	 * @param  	{number} 		tab_id		tab id
+	 * @param  	{number} 	tab_id		tab id
 	 * @param 	{string}	property 	property name
 	 * @return 	{Object}				_tabInfo data
 	 */
-	// TODO consider improving handling of what if we mistype the property name.
-	// always returning object where property might sometimes have returned false could result in subtle bugs.
+	// TODO consider improving handling of what happens if we mistype the property name. Always
+	// returning an object where property would otherwise have returned false could result in subtle bugs.
 	getTabInfo(tab_id, property) {
 		if (Object.prototype.hasOwnProperty.call(this._tabInfo, tab_id)) {
 			if (property) {
@@ -92,8 +96,8 @@ class TabInfo {
 
 	/**
 	 * Getter method for tab parameters which we want to persist during the session.
-	 * @param  {number} 	tab_id		tab id
-	 * @param {string}	property 	persitant property name
+	 * @param  {number}	tab_id		tab id
+	 * @param  {string}	property 	persistent property name
 	 * @return {Object}				persistent data for this tab
 	 */
 	getTabInfoPersist(tab_id, property) {
@@ -165,7 +169,7 @@ class TabInfo {
 	 *
 	 * @private
 	 *
-	 * @param  {number} 	tab_id		tab id
+	 * @param  {number} tab_id		tab id
 	 * @param  {string} tab_url		tab url
 	 */
 	_updateUrl(tab_id, tab_url) {

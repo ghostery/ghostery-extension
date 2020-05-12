@@ -500,7 +500,7 @@
 			}
 		}
 	},
-	"panel_forgot_password": {
+	"forgot_password": {
 		"message": "Elfelejtette a jelszavát?"
 	},
 	"panel_help_panel_header": {
@@ -797,7 +797,7 @@
 		"message": "feloldva"
 	},
 	"white_black_list_error_invalid_url": {
-		"message": "Please enter a valid URL or wildcard."
+		"message": "Érvényes URL-címet vagy helyettesítő karaktert adjon meg."
 	},
 	"whitelist_error_blacklist_url": {
 		"message": "Ezt az oldalt eltávolítottuk a Korlátozott oldalak listájáról és hozzáadtuk a Megbízható oldalak listájához."
@@ -805,6 +805,21 @@
 	"whitelist_error_duplicate_url": {
 		"description": "Options page site whitelisting error message shown when whitelisting a URL that is already in the whitelist.",
 		"message": "Ez az oldal már a fehérlistán van."
+	},
+	"settings_adblocker": {
+		"message": "Hirdetésblokkolási listák"
+	},
+	"settings_adblocker_lists": {
+		"message": "Az alábbi hirdetésblokkolási szűrőlisták betöltése:"
+	},
+	"settings_adblocker_list_1": {
+		"message": "Csak hirdetések"
+	},
+	"settings_adblocker_list_2": {
+		"message": "Hirdetések + nyomkövetők"
+	},
+	"settings_adblocker_list_3": {
+		"message": "Hirdetések + nyomkövetők + bosszantó dolgok"
 	},
 	"settings_purple_box": {
 		"message": "Lila szövegdoboz"
@@ -1053,7 +1068,7 @@
 		"message": "Megbízható oldalak"
 	},
 	"settings_sites_placeholder": {
-		"message": "example.com (wildcards supported)"
+		"message": "example.com (támogatott helyettesítő karakterek)"
 	},
 	"settings_restricted_sites": {
 		"message": "Korlátozott oldalak"
@@ -1573,7 +1588,7 @@
 		}
 	},
 	"hub_supporter_perk_themes_description": {
-		"message": "Állítsa kedve szerint a Ghostery színeit - próbálja ki az Éjféli (Midnight) sablonunkat!"
+		"message": "Szabja testre kedve szerint a Ghostery színeit – próbálja ki a Dark Blue sablonunkat!"
 	},
 	"hub_supporter_perk_stats_description": {
 		"message": "Tekintse meg a blokkolási statisztikákat és figyelje meg, hogyan vált be önnek a Ghostery"
@@ -1588,7 +1603,7 @@
 		"message": "Arra törekszünk, hogy a legjobb adatvédelmi szolgáltatást nyújtsuk felhasználóinknak költségek nélkül. Annak ellenére, hogy adatvédelmi szolgáltatásunk ingyenes, ön dönthet úgy, hogy támogatja munkánkat egy alacsony összegű havi feliratkozással. Csatlakozzon ön is a küldetésünkhöz azzal, hogy kibővíti szolgáltatásunkat a Ghostery Plus verzióra - és egyúttal nagyszerű extra funkciókhoz férhet hozzá!"
 	},
 	"hub_supporter_feature_theme_description": {
-		"message": "Állítsa be egyénileg a Ghostery színeit egy új vizuális élményért! Népszerű kérés alapján bevezetve. Próbálja ki a különleges Éjféli sablonunkat, amelyet még sok fog követni."
+		"message": "Állítsa be egyénileg a Ghostery színeit egy új vizuális élményért! Népszerű kérés alapján bevezetve. Próbálja ki a különleges Dark Blue sablonunkat, amelyet még sok fog követni."
 	},
 	"hub_supporter_feature_stats_description": {
 		"message": "Naplózott blokkolási eredmények grafikonokkal és statisztikákkal trendek felfedéséhez és annak vizsgálatára, hogy milyen hatással volt a Ghostery az ön böngészésére."
@@ -1802,6 +1817,9 @@
 	"subscribe_pitch": {
 		"message": "Annak ellenére, hogy a Ghostery ingyenes, ön dönthet úgy, hogy támogatja munkánkat egy alacsony,  havi &#36;2 összegű feliratkozással, és cserébe nagyszerű extra funkciókhoz férhet hozzá, mint például a színsablonok, elsőbbségi támogató szolgáltatás és még sok minden más. Csatlakozzon a küldetésünkhöz és iratkozzon fel!"
 	},
+	"subscribe_pitch_spring": {
+		"message": "Tetszik a termékünk? Támogassunk bennünket, és fedezze fel az új tavaszi sablonokat, személyes nyomonkövetési lehetőségeket, és számos különleges előnyt a Ghostery Plus történő frissítéssel!"
+	},
 	"subscribe_pitch_learn_more": {
 		"message": "Tudjon meg többet"
 	},
@@ -1814,11 +1832,23 @@
 	"subscribe_pitch_sign_here": {
 		"message": "Ön már feliratkozott? Jelentkezzen be itt"
 	},
+	"subscribe_pitch_sign_in_plus": {
+		"message": "Már feliratkozott? Jelentkezzen be"
+	},
 	"subscribe_pitch_sign_in": {
 		"message": "Már feliratkozott? Jelentkezzen be"
 	},
-	"subscription_midnight_theme": {
-		"message": "Éjféli sablon"
+	"subscription_default_theme": {
+		"message": "Аlapértelmezett"
+	},
+	"subscription_dark_blue_theme": {
+		"message": "Dark Blue sablon"
+	},
+	"subscription_palm_theme": {
+		"message": "Palm sablon"
+	},
+	"subscription_leaf_theme": {
+		"message": "Leaf sablon"
 	},
 	"subscription_status": {
 		"message": "Állapot"
@@ -2063,9 +2093,6 @@
 	"myoffrz_turnoff_rewards": {
 		"message": "Kapcsolja ki a Ghostery Rewards szolgáltatást"
 	},
-	"OFFERS_ALREADY_TRANSLATED": {
-		"message": ""
-	},
 	"myoffrz_help": {
 		"message": "Súgó"
 	},
@@ -2143,6 +2170,18 @@
 				"content": "$1"
 			}
 		}
+	},
+	"myoffrz_check_conditions": {
+		"message": "Ellenőrizze az alábbi feltételeket"
+	},
+	"myoffrz_redeem_code": {
+		"message": "Kód beváltása"
+	},
+	"myoffrz_voucher_found": {
+		"message": "A rendszer talált egy kupont"
+	},
+	"myoffrz_redeeming_voucher": {
+		"message": "Kupon beváltása"
 	},
 	"OFFERS_ENDS": {
 		"message": ""
@@ -2338,34 +2377,37 @@
 	"settings": {
 		"message": "Beállítások"
 	},
-  	"try_ghostery_midnight": {
-	  "message": "Próbálja ki a Ghostery Midnight-t"
+	"try_ghostery_midnight": {
+		"message": "Próbálja ki a Ghostery Midnight-t"
 	},
-  	"seven_day_free_trial": {
-	  "message": "7 napos ingyenes próbaverzió (&#36; 14/hó)"
+	"seven_day_free_trial": {
+		"message": "7 napos ingyenes próbaverzió"
+	},
+	"spring_is_here": {
+		"message": "Itt a tavasz!"
 	},
   	"full_coverage_protection_promise": {
 	  "message": "Teljes védelmet élvezhet az eszköz összes böngészőjével és alkalmazásával"
 	},
-  	"system_wide_tracker_and_ad_blocking": {
-	  "message": "Rendszeres követő és reklámblokkoló szoftver"
+	"system_wide_tracker_and_ad_blocking": {
+		"message": "Rendszeres követő és reklámblokkoló szoftver"
 	},
-  	"built_in_vpn": {
-	  "message": "Beépített VPN"
+	"built_in_vpn": {
+		"message": "Beépített VPN"
 	},
-  	"custom_whitelist_options": {
-	  "message": "engedélyezett egyéni"
+	"custom_whitelist_options": {
+		"message": "engedélyezett egyéni"
 	},
-  	"historical_tracking_insights": {
-	  "message": "Naplózott követési statisztika"
+	"historical_tracking_insights": {
+		"message": "Naplózott követési statisztika"
 	},
-  	"download_for_free": {
-	  "message": "Töltse le ingyen"
+	"download_for_free": {
+		"message": "Töltse le ingyen"
 	},
-  	"support_ghostery_for_2_instead": {
-	  "message": "Ehelyett támogassa a Ghostery-t &#36; 2 / hónap alatt"
+	"support_ghostery_and_try_plus_instead": {
+		"message": "Inkább támogassa a Ghostery programot, és próbálja ki a Plus verziót"
 	},
-  	"no_thanks_continue_with_basic": {
-	  "message": "Nem, köszönöm, folytassa az alapszinttel"
+	"no_thanks_continue_with_basic": {
+		"message": "Nem, köszönöm, folytassa az alapszinttel"
 	}
 }

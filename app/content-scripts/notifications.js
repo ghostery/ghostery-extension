@@ -768,7 +768,7 @@ const NotificationsContentScript = (function(win, doc) {
 				exportFile(message);
 			}
 
-			// trigger a response callback to src/background so that we can handler errors properly
+			// trigger a response callback to src/background so that we can handle errors properly
 			sendResponse();
 			return true;
 		});

@@ -51,7 +51,7 @@ const Ghostery = () => (
 		<Route path="/subscribe/:loggedIn" component={Subscribe} />
 		<Route path="/login" component={Login} />
 		<Route path="/create-account" component={CreateAccount} />
-		<Route path="/forgot-password" render={() => <ForgotPassword locale="panel" />} />
+		<Route path="/forgot-password" render={() => <ForgotPassword />} />
 		<Route path="/account-success" component={AccountSuccess} />
 	</Panel>
 );

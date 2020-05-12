@@ -38,8 +38,14 @@ import c2p_images from '../../app/data-images/click2play';
  */
 export function buildC2P(details, app_id) {
 	const { tab_id } = details;
-	let c2pApp = c2pDb.db.apps && c2pDb.db.apps[app_id];
+	const tab = tabInfo.getTabInfo(tab_id);
 
+	// If the tab is prefetched, a chrome newtab or Firefox about:page, we can't add C2P to it
+	if (!tab || tab.prefetched || tab.path.includes('_/chrome/newtab') || tab.protocol === 'about' || globals.EXCLUDES.includes(tab.host)) {
+		return;
+	}
+
+	let c2pApp = c2pDb.db.apps && c2pDb.db.apps[app_id];
 	if (!c2pApp) {
 		return;
 	}
@@ -54,8 +60,7 @@ export function buildC2P(details, app_id) {
 	}
 	const app_name = bugDb.db.apps[app_id].name;
 	const c2pHtml = [];
-	const tab_host = tabInfo.getTabInfo(tab_id, 'host');
-	const blacklisted = !!Policy.blacklisted(tab_host);
+	const blacklisted = !!Policy.blacklisted(tab.host);
 
 	// Generate the templates for each c2p definition (could be multiple for an app ID)
 	c2pApp.forEach((c2pAppDef) => {
@@ -86,33 +91,70 @@ export function buildC2P(details, app_id) {
 		c2pHtml.push(c2p_tpl({ data: tplData }));
 	});
 
-	if (app_id === 2575) { // Hubspot forms. Adjust selector.
+	// Hubspot forms. Adjust selector
+	if (app_id === 2575) {
 		c2pApp.ele = _getHubspotFormSelector(details.url);
 	}
-	// TODO top-level documents only for now
-	_injectClickToPlay(tab_id).then((result) => {
-		if (result) {
-			sendMessage(tab_id, 'c2p', {
-				app_id,
-				data: c2pApp,
-				html: c2pHtml
-				// tabWindowId: message.tabWindowId
+
+	// Make sure that the click_to_play.js content script has loaded on the
+	// top-level document before sending c2p data to the page
+	switch (tab.c2pStatus) {
+		case 'none':
+			tabInfo.setTabInfo(tab_id, 'c2pStatus', 'loading');
+			// Push current C2P data into existing queue
+			if (!tab.c2pQueue.hasOwnProperty(app_id)) {
+				tabInfo.setTabInfo(tab_id, 'c2pQueue', Object.assign({}, tab.c2pQueue, {
+					[app_id]: {
+						data: c2pApp,
+						html: c2pHtml
+					}
+				}));
+			}
+			// Scripts injected at document_idle are guaranteed to run after the DOM is complete
+			injectScript(tab_id, 'dist/click_to_play.js', '', 'document_idle').then(() => {
+				// Send the entire queue to the content script to reduce message passing
+				sendMessage(tab_id, 'c2p', tab.c2pQueue);
+				tabInfo.setTabInfo(tab_id, 'c2pStatus', 'done');
+				tabInfo.setTabInfo(tab_id, 'c2pQueue', {});
+			}).catch((err) => {
+				log('buildC2P error', err);
 			});
-		}
-	});
+			break;
+		case 'loading':
+			// Push C2P data to a holding queue until click_to_play.js has finished loading on the page
+			if (!tab.c2pQueue.hasOwnProperty(app_id)) {
+				tabInfo.setTabInfo(tab_id, 'c2pQueue', Object.assign({}, tab.c2pQueue, {
+					[app_id]: {
+						data: c2pApp,
+						html: c2pHtml
+					}
+				}));
+			}
+			break;
+		case 'done':
+			sendMessage(tab_id, 'c2p', {
+				app_id: {
+					data: c2pApp,
+					html: c2pHtml
+				}
+			});
+			break;
+		default:
+			log(`buildC2P error: c2pStatus type ${tab.c2pStatus} not matched`);
+	}
 }
 
 /**
- * Build blocked redirect data global structure Inject Page-Level Click2Play on Redirect.
+ * Inject page-level Click2Play on redirect. Build blocked redirect
+ * data global structure.
  * @memberOf BackgroundUtils
  *
- * @param  {number} 		requestId		request id
- * @param  {Object} 	redirectUrls	original url and redirect url as properties
- * @param {number}        	app_id 			tracker id
+ * @param  {Object}		redirectUrls	original url and redirect url as properties
+ * @param  {number}		app_id 			tracker id
  *
  * @return {string}  					url of the internal template of the blocked redirect page
  */
-export function buildRedirectC2P(requestId, redirectUrls, app_id) {
+export function buildRedirectC2P(redirectUrls, app_id) {
 	const host_url = processUrl(redirectUrls.url).hostname;
 	const redirect_url = processUrl(redirectUrls.redirectUrl).hostname;
 	const app_name = bugDb.db.apps[app_id].name;
@@ -127,7 +169,7 @@ export function buildRedirectC2P(requestId, redirectUrls, app_id) {
 		blocked_redirect_prevent: t(
 			'blocked_redirect_prevent',
 			// It is unlikely that apps pages will ever be translated
-			//			[host_url, redirect_url, app_name, 'https://' + globals.APPS_SUB_DOMAIN + '.ghostery.com/' + conf.language + '/apps/' + encodeURIComponent(app_name.replace(/\s+/g, '_').toLowerCase())]),
+			// [host_url, redirect_url, app_name, 'https://' + globals.APPS_SUB_DOMAIN + '.ghostery.com/' + conf.language + '/apps/' + encodeURIComponent(app_name.replace(/\s+/g, '_').toLowerCase())]),
 			[host_url, redirect_url, app_name, `${globals.APPS_BASE_URL}/en/apps/${encodeURIComponent(app_name.replace(/\s+/g, '_').toLowerCase())}`]
 		),
 		blocked_redirect_action_always_title: t('blocked_redirect_action_always_title'),
@@ -150,12 +192,11 @@ export function allowAllwaysC2P(app_id, tab_host) {
 	delete selected_app_ids[app_id];
 	conf.selected_app_ids = selected_app_ids;
 
-
 	// Remove fron site-specific-blocked
 	if (Object.prototype.hasOwnProperty.call(conf.site_specific_blocks, tab_host) && conf.site_specific_blocks[tab_host].includes(+app_id)) {
 		const index = conf.site_specific_blocks[tab_host].indexOf(+app_id);
 		const { site_specific_blocks } = conf;
-		site_specific_blocks[tab_host].splice(index);
+		site_specific_blocks[tab_host].splice(0, 1);
 		conf.site_specific_blocks = site_specific_blocks;
 	}
 
@@ -190,31 +231,4 @@ function _getHubspotFormSelector(url) {
 	// hutk=941df50e9277ee76755310cd78647a08 -is user-specific (same every session)
 	const tokens = url.substr(8).split(/\/|\&|\?|\#|\=/ig); // eslint-disable-line no-useless-escape
 	return `form[id="hsForm_${tokens[5]}"]`;
-}
-
-/**
- * Inject dist/click_to_play.js content script
- * @private
- *
- * @param  {number} 		tab_id 		tab id
- * @return {Promise}    true/false
- */
-function _injectClickToPlay(tab_id) {
-	if (globals.C2P_LOADED) {
-		return Promise.resolve(true);
-	}
-
-	const tab = tabInfo.getTabInfo(tab_id);
-	if (!tab || tab.prefetched || tab.path.includes('_/chrome/newtab') || tab.protocol === 'about' || globals.EXCLUDES.includes(tab.host)) {
-		// If the tab is prefetched, a chrome newtab or Firefox about:page, we can't add C2P to it.
-		return Promise.resolve(true);
-	}
-
-	return injectScript(tab_id, 'dist/click_to_play.js', '', 'document_end').then(() => {
-		globals.C2P_LOADED = true;
-		return true;
-	}).catch((err) => {
-		log('_injectClickToPlay error', err);
-		return false; // prevent sendMessage calls
-	});
 }
