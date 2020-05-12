@@ -106,8 +106,8 @@ class HomeViewContainer extends Component {
 	_render() {
 		const { justInstalled } = this.state;
 		const { home, user } = this.props;
-		const isPlus = user && user.subscriptionsPlus || false;
-		const isPremium = user && user.subscriptionsPremium || false;
+		const isPlus = user && user.plusAccess || false;
+		const isPremium = user && user.premiumAccess || false;
 		const {
 			premium_promo_modal_shown,
 			setup_complete,
@@ -164,7 +164,7 @@ HomeViewContainer.propTypes = {
 	}),
 	user: PropTypes.shape({
 		email: PropTypes.string,
-		subscriptionsPlus: PropTypes.bool,
+		plusAccess: PropTypes.bool,
 	}),
 	actions: PropTypes.shape({
 		getHomeProps: PropTypes.func.isRequired,
@@ -184,7 +184,7 @@ HomeViewContainer.defaultProps = {
 	},
 	user: {
 		email: '',
-		subscriptionsPlus: false,
+		plusAccess: false,
 	},
 };
 

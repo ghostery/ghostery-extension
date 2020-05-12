@@ -44,7 +44,7 @@ class PlusViewContainer extends Component {
 	 */
 	render() {
 		const childProps = {
-			isPlus: this.props.user && this.props.user.subscriptionsPlus || false,
+			isPlus: this.props.user && this.props.user.plusAccess || false,
 			onPlusClick: this._sendPlusPing,
 		};
 
@@ -56,7 +56,7 @@ class PlusViewContainer extends Component {
 PlusViewContainer.propTypes = {
 	user: PropTypes.shape({
 		email: PropTypes.string,
-		subscriptionsPlus: PropTypes.bool,
+		plusAccess: PropTypes.bool,
 	}),
 	actions: PropTypes.shape({
 		sendPing: PropTypes.func.isRequired,
@@ -68,7 +68,7 @@ PlusViewContainer.propTypes = {
 PlusViewContainer.defaultProps = {
 	user: {
 		email: false,
-		subscriptionsPlus: false,
+		plusAccess: false,
 	},
 };
 

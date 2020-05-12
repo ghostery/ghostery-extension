@@ -217,7 +217,7 @@ class Panel extends React.Component {
 	_premiumSubscriber = () => {
 		const { loggedIn, user } = this.props;
 
-		return loggedIn && (user && user.subscriptionsPremium);
+		return loggedIn && (user && user.premiumAccess);
 	}
 
 	/**
@@ -228,7 +228,7 @@ class Panel extends React.Component {
 	_plusSubscriber = () => {
 		const { loggedIn, user } = this.props;
 
-		return loggedIn && (user && user.subscriptionsPlus);
+		return loggedIn && (user && user.plusAccess);
 	}
 
 	/**

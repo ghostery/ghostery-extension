@@ -309,13 +309,13 @@ class Summary extends React.Component {
 	_isPlusSubscriber() {
 		const { user } = this.props;
 
-		return user && user.subscriptionsPlus;
+		return user && user.plusAccess;
 	}
 
 	_isPremiumSubscriber() {
 		const { user } = this.props;
 
-		return user && user.subscriptionsPremium;
+		return user && user.premiumAccess;
 	}
 
 	_pageHost() {

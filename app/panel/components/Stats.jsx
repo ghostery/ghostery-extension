@@ -329,7 +329,7 @@ class Stats extends React.Component {
 			monthlyAverageData: clearData,
 			dailyAverageData: clearData,
 			showResetModal: false,
-			showPitchModal: (!this.props.user || !this.props.user.subscriptionsPlus),
+			showPitchModal: (!this.props.user || !this.props.user.plusAccess),
 		};
 		return clearOrDemoState;
 	}
@@ -517,7 +517,7 @@ class Stats extends React.Component {
 		return selectionData;
 	}
 
-	_isPlus = props => props.user && props.user.subscriptionsPlus;
+	_isPlus = props => props.user && props.user.plusAccess;
 
 	/**
 	 * Render the the Stats View
@@ -529,7 +529,7 @@ class Stats extends React.Component {
 		return (
 			<StatsView
 				showResetModal={showResetModal}
-				showPitchModal={!user || !user.subscriptionsPlus}
+				showPitchModal={!user || !user.plusAccess}
 				loggedIn={loggedIn}
 				getStats={this.getStats}
 				selection={selection}

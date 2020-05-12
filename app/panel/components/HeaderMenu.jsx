@@ -152,10 +152,10 @@ class HeaderMenu extends React.Component {
 	 * Handle click on Subscriber menu item.
 	 */
 	clickSubscriber = () => {
-		const { subscriptionsPlus, subscriptionsPremium } = this.props;
+		const { plusAccess, premiumAccess } = this.props;
 		sendMessage('ping', 'plus_panel_from_menu');
 		this.props.toggleDropdown();
-		this.props.history.push(subscriptionsPremium || subscriptionsPlus ? '/subscription/info' : `/subscribe/${this.props.loggedIn}`);
+		this.props.history.push(premiumAccess || plusAccess ? '/subscription/info' : `/subscribe/${this.props.loggedIn}`);
 	}
 
 	/**
@@ -166,17 +166,17 @@ class HeaderMenu extends React.Component {
 		const {
 			loggedIn,
 			email,
-			subscriptionsPremium,
-			subscriptionsPlus
+			premiumAccess,
+			plusAccess
 		} = this.props;
 		const optionClasses = ClassNames({
-			'menu-option': subscriptionsPremium || subscriptionsPlus,
-			'menu-option-non-subscriber': !subscriptionsPremium || !subscriptionsPlus
+			'menu-option': premiumAccess || plusAccess,
+			'menu-option-non-subscriber': !premiumAccess || !plusAccess
 		});
 		const iconClasses = ClassNames('menu-icon-container', {
-			subscriptionsPremium,
-			subscriptionsPlus: subscriptionsPlus && !subscriptionsPremium,
-			'non-subscriber': !subscriptionsPremium && !subscriptionsPlus
+			premiumAccess,
+			plusAccess: plusAccess && !premiumAccess,
+			'non-subscriber': !premiumAccess && !plusAccess
 		});
 		return (
 			<ClickOutside onClickOutside={this.handleClickOutside} excludeEl={this.props.kebab}>
@@ -244,7 +244,7 @@ class HeaderMenu extends React.Component {
 						<li className={optionClasses} onClick={this.clickSubscriber}>
 							<div>
 								{/* Show premium icon to premium users and plus icon to basic and plus users */}
-								{!subscriptionsPremium && (
+								{!premiumAccess && (
 									<svg className={iconClasses} width="84" height="77" viewBox="0 0 84 77">
 										<g className="about-icon" fill="none">
 											<path d="M79.858 74.75L43.1 57.9c-.579-.315-1.447-.315-2.026 0L4.604 74.75c-.867.472-2.604 0-2.604-.63V2.786C2 2.315 2.579 2 3.447 2h76.99c.868 0 1.447.315 1.447.787V74.12c.58.63-1.157 1.103-2.026.63z" />
@@ -252,7 +252,7 @@ class HeaderMenu extends React.Component {
 										</g>
 									</svg>
 								)}
-								{subscriptionsPremium && (
+								{premiumAccess && (
 									<svg className={iconClasses} width="27" height="25" viewBox="0 0 27 25">
 										<g fill="none" fillRule="evenodd">
 											<g>
@@ -263,7 +263,7 @@ class HeaderMenu extends React.Component {
 										</g>
 									</svg>
 								)}
-								<span>{subscriptionsPremium ? t('panel_detail_premium_title') : t('ghostery_plus')}</span>
+								<span>{premiumAccess ? t('panel_detail_premium_title') : t('ghostery_plus')}</span>
 							</div>
 						</li>
 					</ul>

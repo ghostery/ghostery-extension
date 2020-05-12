@@ -80,7 +80,7 @@ class Detail extends React.Component {
 					<Route path="/detail/rewards" render={this.RewardsComponent} />
 					<DetailMenu
 						hasReward={false}
-						subscriptionsPlus={this.props.user && this.props.user.subscriptionsPlus}
+						plusAccess={this.props.user && this.props.user.plusAccess}
 						activeTab={activeTab}
 					/>
 				</div>

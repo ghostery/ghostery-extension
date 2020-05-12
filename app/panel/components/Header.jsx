@@ -149,8 +149,8 @@ class Header extends React.Component {
 		// TODO check whether this is the message we want to be sending now
 		sendMessage('ping', 'plus_panel_from_badge');
 		const { user } = this.props;
-		const plusSubscriber = user && user.subscriptionsPlus;
-		const premiumSubscriber = user && user.subscriptionsPremium;
+		const plusSubscriber = user && user.plusAccess;
+		const premiumSubscriber = user && user.premiumAccess;
 		this.props.history.push(plusSubscriber || premiumSubscriber ? '/subscription/info' : `/subscribe/${!!user}`);
 	}
 
@@ -177,8 +177,8 @@ class Header extends React.Component {
 		const tabDetailedClassNames = ClassNames('header-tab', {
 			active: is_expert,
 		});
-		const plusSubscriber = user && user.subscriptionsPlus;
-		const premiumSubscriber = user && user.subscriptionsPremium;
+		const plusSubscriber = user && user.plusAccess;
+		const premiumSubscriber = user && user.premiumAccess;
 		const accountLogolink = this.generateAccountLogo();
 		const badgeClasses = ClassNames('columns', 'shrink', {
 			'non-subscriber-badge': !(plusSubscriber || premiumSubscriber),
@@ -240,8 +240,8 @@ class Header extends React.Component {
 		const headerMenu = (
 			<HeaderMenu
 				loggedIn={loggedIn}
-				subscriptionsPremium={user && user.subscriptionsPremium}
-				subscriptionsPlus={user && user.subscriptionsPlus}
+				premiumAccess={user && user.premiumAccess}
+				plusAccess={user && user.plusAccess}
 				email={user && user.email}
 				language={this.props.language}
 				tab_id={this.props.tab_id}
