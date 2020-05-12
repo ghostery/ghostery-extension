@@ -264,7 +264,8 @@ class PanelData {
 	_getCurrentAccount() {
 		const currentAccount = conf.account;
 		if (currentAccount && currentAccount.user) {
-			currentAccount.user.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus']);
+			currentAccount.user.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus'])
+													|| account.hasScopesUnverified(['subscriptions:premium']);
 			currentAccount.user.subscriptionsPremium = account.hasScopesUnverified(['subscriptions:premium']);
 		}
 		return currentAccount;

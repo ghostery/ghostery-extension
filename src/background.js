@@ -881,7 +881,8 @@ function onMessageHandler(request, sender, callback) {
 		account.getUser(message)
 			.then((user) => {
 				if (user) {
-					user.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus']);
+					user.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus'])
+											|| account.hasScopesUnverified(['subscriptions:premium']);
 					user.subscriptionsPremium = account.hasScopesUnverified(['subscriptions:premium']);
 				}
 				callback({ user });
