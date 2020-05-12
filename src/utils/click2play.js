@@ -102,13 +102,14 @@ export function buildC2P(details, app_id) {
 		case 'none':
 			tabInfo.setTabInfo(tab_id, 'c2pStatus', 'loading');
 			// Push current C2P data into existing queue
-			if (!tab.c2pQueue.hasOwnProperty(app_id)) {
-				tabInfo.setTabInfo(tab_id, 'c2pQueue', Object.assign({}, tab.c2pQueue, {
+			if (!Object.prototype.hasOwnProperty.call(tab.c2pQueue, app_id)) {
+				tabInfo.setTabInfo(tab_id, 'c2pQueue', {
+					...tab.c2pQueue,
 					[app_id]: {
 						data: c2pApp,
 						html: c2pHtml
 					}
-				}));
+				});
 			}
 			// Scripts injected at document_idle are guaranteed to run after the DOM is complete
 			injectScript(tab_id, 'dist/click_to_play.js', '', 'document_idle').then(() => {
@@ -122,13 +123,14 @@ export function buildC2P(details, app_id) {
 			break;
 		case 'loading':
 			// Push C2P data to a holding queue until click_to_play.js has finished loading on the page
-			if (!tab.c2pQueue.hasOwnProperty(app_id)) {
-				tabInfo.setTabInfo(tab_id, 'c2pQueue', Object.assign({}, tab.c2pQueue, {
+			if (!Object.prototype.hasOwnProperty.call(tab.c2pQueue, app_id)) {
+				tabInfo.setTabInfo(tab_id, 'c2pQueue', {
+					...tab.c2pQueue,
 					[app_id]: {
 						data: c2pApp,
 						html: c2pHtml
 					}
-				}));
+				});
 			}
 			break;
 		case 'done':
@@ -194,7 +196,6 @@ export function allowAllwaysC2P(app_id, tab_host) {
 
 	// Remove fron site-specific-blocked
 	if (Object.prototype.hasOwnProperty.call(conf.site_specific_blocks, tab_host) && conf.site_specific_blocks[tab_host].includes(+app_id)) {
-		const index = conf.site_specific_blocks[tab_host].indexOf(+app_id);
 		const { site_specific_blocks } = conf;
 		site_specific_blocks[tab_host].splice(0, 1);
 		conf.site_specific_blocks = site_specific_blocks;
