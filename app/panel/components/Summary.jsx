@@ -754,8 +754,8 @@ class Summary extends React.Component {
 	_renderPlusUpgradeBannerOrSubscriberIcon() {
 		const { is_expert, current_theme, user } = this.props;
 
-		const isPremiumSubscriber = (user && user.subscription === 'premium') || false;
-		const isPlusSubscriber = (user && user.subscription === 'plus') || false;
+		const hasPremiumAccess = user && user.premiumAccess;
+		const hasPlusAccess = user && user.plusAccess;
 		const upgradeBannerClassNames = ClassNames('UpgradeBanner', {
 			'UpgradeBanner--normal': !is_expert,
 			'UpgradeBanner--small': is_expert,
@@ -763,7 +763,7 @@ class Summary extends React.Component {
 
 		return (
 			<div onClick={this.clickUpgradeBannerOrGoldPlusIcon}>
-				{isPremiumSubscriber && (
+				{hasPremiumAccess && (
 					<div className="Summary__subscriberBadgeContainer">
 						<div className={`SubscriberBadge ${current_theme}`}>
 							<ReactSVG src="/app/images/panel/premium-badge-icon.svg" className="gold-plus-icon" />
@@ -771,7 +771,7 @@ class Summary extends React.Component {
 					</div>
 				)}
 
-				{isPlusSubscriber && (
+				{hasPlusAccess && !hasPremiumAccess && (
 					<div className="Summary__subscriberBadgeContainer">
 						<div className={`SubscriberBadge ${current_theme}`}>
 							<ReactSVG src="/app/images/panel/plus-badge-icon.svg" className="gold-plus-icon" />
@@ -779,7 +779,7 @@ class Summary extends React.Component {
 					</div>
 				)}
 
-				{(!isPremiumSubscriber && !isPlusSubscriber) && (
+				{(!hasPlusAccess && !hasPremiumAccess) && (
 					<div className="Summary__upgradeBannerContainer">
 						<div className={upgradeBannerClassNames}>
 							<span className="UpgradeBanner__text">{t('subscription_upgrade_to')}</span>
