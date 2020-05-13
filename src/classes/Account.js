@@ -489,23 +489,10 @@ class Account {
 	}
 
 	_setSubscriptionData = (data) => {
-		const currentAccount = conf.account;
-
 		// TODO: Change this so that we aren't writing over data
 		if (!conf.paid_subscription && data) {
 			conf.paid_subscription = true;
 			dispatcher.trigger('conf.save.paid_subscription');
-		}
-		currentAccount.subscriptionData = data || null;
-
-		if (currentAccount.user) {
-			if (data.productName.includes('Ghostery Premium')) {
-				currentAccount.subscription = 'premium';
-			} else if (data.productName.includes('Ghostery Plus')) {
-				currentAccount.subscription = 'plus';
-			} else {
-				currentAccount.subscription = '';
-			}
 		}
 		dispatcher.trigger('conf.save.account');
 	}
