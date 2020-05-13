@@ -494,6 +494,7 @@ class Account {
 			conf.paid_subscription = true;
 			dispatcher.trigger('conf.save.paid_subscription');
 		}
+		conf.account.subscriptionData = data || null;
 		dispatcher.trigger('conf.save.account');
 	}
 
