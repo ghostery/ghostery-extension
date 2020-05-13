@@ -1949,7 +1949,7 @@
 		"message": "No, Keep History"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "Unlock your historical stats (and other cool perks) by upgrading to Ghostery Plus$LINK_START$Learn More$LINK_END$",
+		"message": "Unlock your historical stats (and other cool perks) by upgrading to Ghostery Plus.$LINK_START$Learn More$LINK_END$",
 		"placeholders": {
 			"span_start": {
 				"content": "<span>"
