@@ -215,7 +215,7 @@ class Summary extends React.Component {
 	clickUpgradeBannerOrGoldPlusIcon() {
 		sendMessage('ping', 'plus_panel_from_badge');
 
-		this.props.history.push(this._isPlusSubscriber() ? '/subscription/info' : `/subscribe/${!!this.props.user}`);
+		this.props.history.push(this._hasPremiumAccess() || this._hasPlusAccess() ? '/subscription/info' : `/subscribe/${!!this.props.user}`);
 	}
 
 	/**
@@ -306,13 +306,13 @@ class Summary extends React.Component {
 		}
 	}
 
-	_isPlusSubscriber() {
+	_hasPlusAccess() {
 		const { user } = this.props;
 
 		return user && user.plusAccess;
 	}
 
-	_isPremiumSubscriber() {
+	_hasPremiumAccess() {
 		const { user } = this.props;
 
 		return user && user.premiumAccess;
@@ -752,10 +752,10 @@ class Summary extends React.Component {
 	 * @return {JSX} JSX for rendering the plus upgrade banner or subscriber icon
 	 */
 	_renderPlusUpgradeBannerOrSubscriberIcon() {
-		const { is_expert, current_theme } = this.props;
+		const { is_expert, current_theme, user } = this.props;
 
-		const isPremiumSubscriber = this._isPremiumSubscriber();
-		const isPlusSubscriber = this._isPlusSubscriber();
+		const isPremiumSubscriber = user.subscription === 'premium';
+		const isPlusSubscriber = user.subscription === 'plus';
 		const upgradeBannerClassNames = ClassNames('UpgradeBanner', {
 			'UpgradeBanner--normal': !is_expert,
 			'UpgradeBanner--small': is_expert,
@@ -763,7 +763,7 @@ class Summary extends React.Component {
 
 		return (
 			<div onClick={this.clickUpgradeBannerOrGoldPlusIcon}>
-				{(isPremiumSubscriber) && (
+				{isPremiumSubscriber && (
 					<div className="Summary__subscriberBadgeContainer">
 						<div className={`SubscriberBadge ${current_theme}`}>
 							<ReactSVG src="/app/images/panel/premium-badge-icon.svg" className="gold-plus-icon" />
@@ -771,7 +771,7 @@ class Summary extends React.Component {
 					</div>
 				)}
 
-				{(!isPremiumSubscriber && isPlusSubscriber) && (
+				{isPlusSubscriber && (
 					<div className="Summary__subscriberBadgeContainer">
 						<div className={`SubscriberBadge ${current_theme}`}>
 							<ReactSVG src="/app/images/panel/plus-badge-icon.svg" className="gold-plus-icon" />
