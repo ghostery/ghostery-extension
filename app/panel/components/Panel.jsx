@@ -241,13 +241,11 @@ class Panel extends React.Component {
 
 		sendMessage('promoModals.sawPremiumPromo', {});
 
-		const hasPlusAccess = this.hasPlusAccess();
-
 		return (
 			<PromoModalContainer
 				type={PREMIUM}
 				location="panel"
-				isPlus={hasPlusAccess}
+				isPlus={this._hasPlusAccess()}
 				show
 			/>
 		);
