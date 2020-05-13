@@ -240,7 +240,7 @@ class Header extends React.Component {
 		const headerMenu = (
 			<HeaderMenu
 				loggedIn={loggedIn}
-				subscriber={user && user.subscription}
+				subscription={user && user.subscription}
 				hasPremiumAccess={hasPremiumAccess}
 				hasPlusAccess={hasPlusAccess}
 				email={user && user.email}
