@@ -754,8 +754,8 @@ class Summary extends React.Component {
 	_renderPlusUpgradeBannerOrSubscriberIcon() {
 		const { is_expert, current_theme, user } = this.props;
 
-		const isPremiumSubscriber = user.subscription === 'premium';
-		const isPlusSubscriber = user.subscription === 'plus';
+		const isPremiumSubscriber = (user && user.subscription === 'premium') || false;
+		const isPlusSubscriber = (user && user.subscription === 'plus') || false;
 		const upgradeBannerClassNames = ClassNames('UpgradeBanner', {
 			'UpgradeBanner--normal': !is_expert,
 			'UpgradeBanner--small': is_expert,
