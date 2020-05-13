@@ -43,8 +43,9 @@ class PlusViewContainer extends Component {
 	 * @return {JSX} JSX for rendering the Plus View of the Hub app
 	 */
 	render() {
+		const { user } = this.props;
 		const childProps = {
-			isPlus: this.props.user && this.props.user.plusAccess || false,
+			isPlus: user && user.plusAccess || false,
 			onPlusClick: this._sendPlusPing,
 		};
 
