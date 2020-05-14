@@ -152,11 +152,10 @@ class HeaderMenu extends React.Component {
 	 * Handle click on Subscriber menu item.
 	 */
 	clickSubscriber = () => {
-		const { user } = this.props;
-		const { hasPlusAccess, hasPremiumAccess } = user;
+		const { hasPremiumAccess, hasPlusAccess } = this.props;
 		sendMessage('ping', 'plus_panel_from_menu');
 		this.props.toggleDropdown();
-		this.props.history.push(hasPremiumAccess || hasPlusAccess ? '/subscription/info' : `/subscribe/${this.props.loggedIn}`);
+		this.props.history.push(hasPlusAccess || hasPremiumAccess ? '/subscription/info' : '/subscribe/false');
 	}
 
 	/**
