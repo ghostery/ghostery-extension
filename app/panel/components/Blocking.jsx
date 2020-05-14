@@ -26,23 +26,31 @@ import { updateSummaryBlockingCount } from '../utils/blocking';
 class Blocking extends React.Component {
 	static contextType = DynamicUIPortContext;
 
+	/**
+	 *	Refactoring UNSAFE_componentWillMount into Constructor
+	 *	Stats:
+	 *		Constructor runtime before refactor: 0.038ms
+	 *		Constructor + UNSAFE_componentWillMount runtime before refactor: 0.333ms
+	 *		Constructor runtime after refactor: 0.129ms
+	 *
+	 *	Notes:
+	 *		calling buildBlockingClasses and computeSiteNotScanned in the constructor takes 0.018ms.
+	 *
+	 *	Conclusion: Refactor using constructor as the added computation is minimal
+	 */
 	constructor(props) {
 		super(props);
 
-		this.state = {
-			blockingClasses: '',
-			disableBlocking: false,
-		};
-
+		// event bindings
 		this.handlePortMessage = this.handlePortMessage.bind(this);
-	}
 
-	/**
-	 * Lifecycle event
-	 */
-	UNSAFE_componentWillMount() {
-		this.updateBlockingClasses(this.props);
-		this.updateSiteNotScanned(this.props);
+		const classes = Blocking.buildBlockingClasses(this.props);
+		const disableBlocking = Blocking.computeSiteNotScanned(this.props);
+
+		this.state = {
+			blockingClasses: classes.join(' '),
+			disableBlocking
+		};
 	}
 
 	/**
@@ -223,17 +231,44 @@ class Blocking extends React.Component {
 	}
 
 	/**
-	* Set dynamic classes on .blocking-trackers. Set state.
+	* Build dynamic classes on .blocking-trackers. Return classes
 	* @param  {Object} props
 	*/
-	updateBlockingClasses(props) {
+	static buildBlockingClasses(props) {
 		const classes = [];
 
 		classes.push((props.toggle_individual_trackers) ? 'show-individual' : '');
 		classes.push((props.paused_blocking) ? 'paused' : '');
 		classes.push((props.sitePolicy) ? (props.sitePolicy === 2) ? 'trusted' : 'restricted' : '');
 
-		this.setState({ blockingClasses: classes.join(' ') });
+		return classes;
+	}
+
+	/**
+	* Set dynamic classes on .blocking-trackers. Set state.
+	* @param  {Object} props
+	*/
+	updateBlockingClasses(props) {
+		const classes = Blocking.buildBlockingClasses(props);
+		const blockingClasses = classes.join(' ');
+
+		if (this.state.blockingClasses !== blockingClasses) {
+			this.setState({ blockingClasses });
+		}
+	}
+
+	/**
+	* Compute whether a site cannot be scanned by Ghostery.
+	* @param {Object}	props	nextProps
+	*/
+	static computeSiteNotScanned(props) {
+		const { siteNotScanned, categories } = props;
+		const pageUrl = props.pageUrl || '';
+
+		if (siteNotScanned || !categories || pageUrl.search('http') === -1) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -241,13 +276,10 @@ class Blocking extends React.Component {
 	* @param {Object}	props	nextProps
 	*/
 	updateSiteNotScanned(props) {
-		const { siteNotScanned, categories } = props;
-		const pageUrl = props.pageUrl || '';
+		const disableBlocking = Blocking.computeSiteNotScanned(props);
 
-		if (siteNotScanned || !categories || pageUrl.search('http') === -1) {
-			this.setState({ disableBlocking: true });
-		} else {
-			this.setState({ disableBlocking: false });
+		if (this.state.disableBlocking !== disableBlocking) {
+			this.setState({ disableBlocking });
 		}
 	}
 

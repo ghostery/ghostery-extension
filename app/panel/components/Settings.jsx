@@ -32,6 +32,22 @@ import DynamicUIPortContext from '../contexts/DynamicUIPortContext';
 class Settings extends React.Component {
 	static contextType = DynamicUIPortContext;
 
+	/**
+	 *	Refactoring UNSAFE_componentWillMount into Constructor
+	 *	Stats:
+	 *		Constructor runtime before refactor: 0.145ms
+	 *		Constructor + UNSAFE_componentWillMount runtime before refactor: 0.330ms
+	 *		Constructor runtime after refactor: 0.144ms
+	 *
+	 *	Refactoring UNSAFE_componentWillMount into componentDidMount
+	 *	Stats:
+	 *		Constructor runtime with no componentDidMount: 0.123ms
+	 *		Constructor runtime with componentDidMount: 0.147ms
+	 *
+	 *	Notes: Negligible difference using componentDidMount.
+	 *
+	 *	Conclusion: Refactor using constructor to avoid re-render
+	 */
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -45,15 +61,10 @@ class Settings extends React.Component {
 		this.showToast = this.showToast.bind(this);
 		this.hideToast = this.hideToast.bind(this);
 		this.handlePortMessage = this.handlePortMessage.bind(this);
-	}
 
-	/**
-	 * Lifecycle event. Default sub view is set here.
-	 */
-	UNSAFE_componentWillMount() {
 		// Do not redirect to the default if we are trying to access a specific other subview
-		if (this.props.history[this.props.history.length - 1] === '/settings') {
-			this.props.history.push('/settings/globalblocking');
+		if (props.history[props.history.length - 1] === '/settings') {
+			props.history.push('/settings/globalblocking');
 		}
 	}
 

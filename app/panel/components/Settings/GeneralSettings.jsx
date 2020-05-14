@@ -19,6 +19,23 @@ import moment from 'moment/min/moment-with-locales.min';
  * @memberOf SettingsComponents
  */
 class GeneralSettings extends React.Component {
+	/**
+	 *	Refactoring UNSAFE_componentWillMount into Constructor
+	 *	Stats:
+	 *		Constructor runtime before refactor: 0.026ms
+	 *		Constructor + UNSAFE_componentWillMount runtime before refactor: 2.410ms
+	 *		Constructor runtime after refactor: 1.631ms
+	 *
+	 *	Refactoring UNSAFE_componentWillMount into componentDidMount
+	 *	Stats:
+	 *		Constructor runtime with no componentDidMount: 0.208ms
+	 *		Constructor runtime with componentDidMount: 0.074ms
+	 *
+	 *	Notes:
+	 *		updateDbLastUpdated takes ~2ms to run the firt time and then 0.139ms subsequent times.
+	 *
+	 *	Conclusion: Refactor using componentDidMount as to not do computations in the constructor
+	 */
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -32,7 +49,7 @@ class GeneralSettings extends React.Component {
 	/**
 	 * Lifecycle event.
 	 */
-	UNSAFE_componentWillMount() {
+	componentDidMount() {
 		this.updateDbLastUpdated(this.props);
 	}
 
@@ -56,7 +73,10 @@ class GeneralSettings extends React.Component {
 	 */
 	updateDbLastUpdated(props) {
 		moment.locale(props.language).toLowerCase().replace('_', '-');
-		this.setState({ dbLastUpdated: moment(props.bugs_last_updated).format('LLL') });
+		const dbLastUpdated = moment(props.bugs_last_updated).format('LLL');
+		if (this.state.dbLastUpdated !== dbLastUpdated) {
+			this.setState({ dbLastUpdated });
+		}
 	}
 
 	/**
