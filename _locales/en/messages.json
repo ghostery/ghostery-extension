@@ -1294,8 +1294,14 @@
 	"hub_home_feature_setup_button_alt": {
 		"message": "Custom Setup Complete"
 	},
-	"hub_home_feature_supporter_text": {
-		"message": "Upgrade to Ghostery Plus and unlock special features."
+	"hub_home_plus_upgrade_text": {
+		"message": "Go beyond basic privacy. Upgrade your Ghostery plan to receive device-level protection, VPN access, and more!"
+	},
+	"hub_home_plus_upgrade_button_text": {
+		"message": "Upgrade now"
+	},
+	"hub_home_plus_full_protection": {
+		"message": "You have full protection"
 	},
 	"hub_setup_page_title": {
 		"message": "Ghostery Hub - Setup"

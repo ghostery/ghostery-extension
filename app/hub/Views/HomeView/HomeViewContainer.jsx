@@ -118,6 +118,7 @@ class HomeViewContainer extends Component {
 		const { justInstalled } = this.state;
 		const { home, user } = this.props;
 		const isPlus = user && user.subscriptionsPlus || false;
+		console.log('isPlus: ', user);
 		const {
 			premium_promo_modal_shown,
 			setup_complete,
@@ -138,7 +139,7 @@ class HomeViewContainer extends Component {
 
 		return (
 			<div className="full-height">
-				<PromoModal
+				{/* <PromoModal
 					type={PREMIUM}
 					show={showPromoModal}
 					isPlus={isPlus}
@@ -146,7 +147,7 @@ class HomeViewContainer extends Component {
 					handleKeepBasicClick={this._handleKeepBasicClick}
 					handleGetPlusClick={this._handleGetPlusClick}
 					handleTryMidnightClick={this._handleTryMidnightClick}
-				/>
+				/> */}
 				<HomeView {...childProps} />
 			</div>
 		);

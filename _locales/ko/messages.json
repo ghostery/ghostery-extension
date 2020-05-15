@@ -1294,9 +1294,6 @@
 	"hub_home_feature_setup_button_alt": {
 		"message": "사용자 지정 설정 완료"
 	},
-	"hub_home_feature_supporter_text": {
-		"message": "Ghostery Plus로 업그레이드하고 특별 기능을 새롭게 이용하세요."
-	},
 	"hub_setup_page_title": {
 		"message": "Ghostery 허브 - 설정"
 	},
