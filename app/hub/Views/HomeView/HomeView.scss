@@ -15,7 +15,7 @@
 .HomeView {
 	padding-top: 45px;
 	padding-bottom: 25px;
-	color: #4a4a4a;
+	color: $tundora;
 }
 .HomeView--bolded {
 	font-weight: 700;
@@ -28,14 +28,14 @@
 	margin-right: 23px;
 }
 .HomeView__header h1 {
-	color: #4a4a4a;
+	color: $tundora;
 	margin-bottom: 19px;
 }
 .HomeView__headerTagline {
 	margin-top: 7px;
 	font-size: 20px;
 	line-height: 30px;
-	color: #4a4a4a;
+	color: $tundora;
 }
 .HomeView__supportContainer {
 	margin-top: 12px;
@@ -54,7 +54,7 @@
 	margin-top: 7px;
 	padding: 27px 12px 30px;
 	border-radius: 4px;
-	background-color: #f0f3f4;
+	background-color: $porcelain;
 }
 .HomeView__onboardingFeature {
 	margin: 0 8px;
@@ -64,29 +64,29 @@
 	margin: 7px 0 4px;
 	max-width: 1px;
 	padding: 0;
-	background-color: #979797;
+	background-color: $dark-silver;
 }
 .HomeView__dividerHorizontal {
 	margin: 0 25px;
 	height: 1px;
 	width: 100%;
 	padding: 0;
-	background-color: #979797;
+	background-color: $dark-silver;
 }
 .HomeView__upgradeContainer {
 	display: flex;
 	margin-top: 22px;
 	padding: 22px 12px;
-	background-color: #f0f3f4;
+	background-color: $porcelain;
 	border-radius: 4px;
 
 	&.purple-border {
-		box-shadow: 0 0 8px 5px #920094;
-		border: solid 1.6px #920094;
+		box-shadow: 0 0 8px 5px $dark-magenta;
+		border: solid 1.6px $dark-magenta;
 	}
 }
 .HomeView__upgradeIcon {
-	background-image: upgradeShieldIcon(#DAF4FF, #4a4a4a);
+	background-image: upgradeShieldIcon($baby-blue, $tundora);
 	margin: 0 35px 0 42px;
 	height: 50px;
 	width: 50px;
@@ -110,20 +110,20 @@
 	margin: auto;
 }
 .HomeView__onboardingFeature.feature-tutorial .HomeView__featureIcon {
-	background-image: buildIconWand(#4a4a4a, #daf4ff);
+	background-image: buildIconWand($tundora, $baby-blue);
 }
 .HomeView__onboardingFeature.feature-tutorial-complete .HomeView__featureIcon {
 	width: 100px;
 	margin: 0 0 0 50px;
-	background-image: buildIconWandCheck(#4a4a4a, #daf4ff, #1dafed);
+	background-image: buildIconWandCheck($tundora, $baby-blue, $ghosty-blue-alt);
 }
 .HomeView__onboardingFeature.feature-setup .HomeView__featureIcon {
-	background-image: buildIconClipboard(#4a4a4a, #daf4ff);
+	background-image: buildIconClipboard($tundora, $baby-blue);
 }
 .HomeView__onboardingFeature.feature-setup-complete .HomeView__featureIcon {
 	width: 100px;
 	margin: 0 0 0 50px;
-	background-image: buildIconClipboardCheck(#4a4a4a, #daf4ff, #1dafed);
+	background-image: buildIconClipboardCheck($tundora, $baby-blue, $ghosty-blue-alt);
 }
 .HomeView__featureTitle {
 	text-align: center;
