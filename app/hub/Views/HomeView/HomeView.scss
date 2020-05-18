@@ -78,10 +78,12 @@
 	margin-top: 22px;
 	padding: 22px 12px;
 	background-color: #f0f3f4;
+	box-shadow: 0 0 8px 5px #920094;
+	border: solid 1.6px #920094;
 	border-radius: 4px;
 }
 .HomeView__upgradeIcon {
-	background-image: url('..')
+	background-image: upgradeShieldIcon();
 }
 .HomeView__featureIcon {
 	height: 50px;
@@ -112,15 +114,6 @@
 	margin: 0 0 0 50px;
 	background-image: buildIconClipboardCheck(#4a4a4a, #daf4ff, #1dafed);
 }
-// .HomeView__featureIcon.feature-plus {
-// 	position: relative;
-// 	margin-left: auto;
-// 	margin-right: auto;
-// 	top: -25px;
-// 	height: 46px;
-// 	background-image: buildIconGhosteryPlus(#4a4a4a, #daf4ff);
-// 	background-size: contain;
-// }
 .HomeView__featureTitle {
 	text-align: center;
 	font-size: 18px;
@@ -166,8 +159,6 @@
 		margin-top: 25px;
 	}
 }
-// @media only screen and (max-width: 768px) {
-// }
 // Firefox Font Size Override and Image Size Override
 @-moz-document url-prefix() {
 .HomeView--firefoxFontSize {
