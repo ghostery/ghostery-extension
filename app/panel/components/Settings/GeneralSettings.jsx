@@ -50,14 +50,19 @@ class GeneralSettings extends React.Component {
 	 * Lifecycle event.
 	 */
 	componentDidMount() {
-		this.updateDbLastUpdated(this.props);
+		this.updateDbLastUpdated(this.props.settingsData);
 	}
 
 	/**
 	 * Lifecycle event.
 	 */
-	UNSAFE_componentWillReceiveProps(nextProps) {
-		this.updateDbLastUpdated(nextProps);
+	static getDerivedStateFromProps(prevProps, prevState) {
+		const dbLastUpdated = GeneralSettings.getDbLastUpdated(prevProps.settingsData);
+
+		if (dbLastUpdated && dbLastUpdated !== prevState.dbLastUpdated) {
+			return { dbLastUpdated };
+		}
+		return null;
 	}
 
 	/**
@@ -68,13 +73,24 @@ class GeneralSettings extends React.Component {
 	}
 
 	/**
-	 * Update DB check timestamp and save it in state.
-	 * @param  {Object} props
+	 * Get DB check timestamp and return it.
+	 * @param  {Object} settingsData
 	 */
-	updateDbLastUpdated(props) {
-		moment.locale(props.language).toLowerCase().replace('_', '-');
-		const dbLastUpdated = moment(props.bugs_last_updated).format('LLL');
-		if (this.state.dbLastUpdated !== dbLastUpdated) {
+	static getDbLastUpdated(settingsData) {
+		const { language, bugs_last_updated } = settingsData;
+		moment.locale(language).toLowerCase().replace('_', '-');
+		const dbLastUpdated = moment(bugs_last_updated).format('LLL');
+		return dbLastUpdated;
+	}
+
+	/**
+	 * Update DB check timestamp and save it in state.
+	 * @param  {Object} settingsData
+	 */
+	updateDbLastUpdated(settingsData) {
+		const dbLastUpdated = GeneralSettings.getDbLastUpdated(settingsData);
+
+		if (dbLastUpdated && dbLastUpdated !== this.state.dbLastUpdated) {
 			this.setState({ dbLastUpdated });
 		}
 	}

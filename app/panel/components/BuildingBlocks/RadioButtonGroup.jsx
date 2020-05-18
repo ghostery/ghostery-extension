@@ -31,7 +31,7 @@ const RadioButtonGroup = (props) => {
 	));
 
 	const buttons = props.labels.map((label, index) => (
-		<div className="RadioButtonGroup__button">
+		<div key={label} className="RadioButtonGroup__button">
 			<RadioButton
 				checked={index === indexClicked}
 				handleClick={() => handleItemClick(index)}

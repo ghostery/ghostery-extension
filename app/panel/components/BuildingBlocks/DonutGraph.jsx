@@ -100,7 +100,7 @@ class DonutGraph extends React.Component {
 	/**
 	 * Lifecycle event
 	 */
-	UNSAFE_componentWillReceiveProps(nextProps) {
+	componentDidUpdate(prevProps) {
 		const {
 			categories,
 			adBlock,
@@ -109,33 +109,33 @@ class DonutGraph extends React.Component {
 			renderGreyscale,
 			ghosteryFeatureSelect,
 			isSmall
-		} = this.props;
+		} = prevProps;
 
-		if (isSmall !== nextProps.isSmall ||
-			renderRedscale !== nextProps.renderRedscale ||
-			renderGreyscale !== nextProps.renderGreyscale ||
-			ghosteryFeatureSelect !== nextProps.ghosteryFeatureSelect
+		if (isSmall !== this.props.isSmall ||
+			renderRedscale !== this.props.renderRedscale ||
+			renderGreyscale !== this.props.renderGreyscale ||
+			ghosteryFeatureSelect !== this.props.ghosteryFeatureSelect
 		) {
-			this.prepareDonutContainer(nextProps.isSmall);
-			this.nextPropsDonut(nextProps);
+			this.prepareDonutContainer(this.props.isSmall);
+			this.nextPropsDonut(this.props);
 			return;
 		}
 
 		// componentWillReceiveProps gets called many times during page load as new trackers or unsafe data points are found
 		// so only compare tracker totals if we don't already have to redraw anyway as a result of the cheaper checks above
-		const trackerTotal = categories.reduce((total, category) => total + category.num_total, 0);
-		const nextTrackerTotal = nextProps.categories.reduce((total, category) => total + category.num_total, 0);
-		if (trackerTotal !== nextTrackerTotal) {
-			this.nextPropsDonut(nextProps);
+		const prevTrackerTotal = categories.reduce((total, category) => total + category.num_total, 0);
+		const trackerTotal = this.props.categories.reduce((total, category) => total + category.num_total, 0);
+		if (prevTrackerTotal !== trackerTotal) {
+			this.nextPropsDonut(this.props);
 			return;
 		}
 
-		if (!antiTracking.unknownTrackerCount && !nextProps.antiTracking.unknownTrackerCount
-			&& !adBlock.unknownTrackerCount && !nextProps.adBlock.unknownTrackerCount) { return; }
-		const unknownDataPoints = antiTracking.unknownTrackerCount + adBlock.unknownTrackerCount;
-		const nextUnknownDataPoints = nextProps.antiTracking.unknownTrackerCount + nextProps.adBlock.unknownTrackerCount;
-		if (unknownDataPoints !== nextUnknownDataPoints) {
-			this.nextPropsDonut(nextProps);
+		if (!antiTracking.unknownTrackerCount && !this.props.antiTracking.unknownTrackerCount
+			&& !adBlock.unknownTrackerCount && !this.props.adBlock.unknownTrackerCount) { return; }
+		const prevUnknownDataPoints = antiTracking.unknownTrackerCount + adBlock.unknownTrackerCount;
+		const unknownDataPoints = this.props.antiTracking.unknownTrackerCount + this.props.adBlock.unknownTrackerCount;
+		if (prevUnknownDataPoints !== unknownDataPoints) {
+			this.nextPropsDonut(this.props);
 		}
 	}
 

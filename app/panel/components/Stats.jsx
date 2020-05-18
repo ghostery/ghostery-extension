@@ -42,14 +42,14 @@ class Stats extends React.Component {
 	/**
 	 * Lifecycle event
 	 */
-	UNSAFE_componentWillReceiveProps(nextProps) {
-		const nextPlus = this._isPlus(nextProps);
+	componentDidUpdate(prevProps) {
 		const thisPlus = this._isPlus(this.props);
-		if (nextPlus !== thisPlus) {
-			if (nextPlus) {
+		const prevPlus = this._isPlus(prevProps);
+		if (thisPlus !== prevPlus) {
+			if (thisPlus) {
 				this._init();
 			} else {
-				this.setState(this._reset(true));
+				this._resetState();
 			}
 		}
 	}
@@ -288,6 +288,10 @@ class Stats extends React.Component {
 	 */
 	signIn = () => {
 		this.props.history.push('/login');
+	}
+
+	_resetState = () => {
+		this.setState(this._reset(true));
 	}
 
 	_reset = (demo) => {

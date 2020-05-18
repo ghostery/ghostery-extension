@@ -71,8 +71,8 @@ class Tracker extends React.Component {
 	/**
 	 * Lifecycle event.
 	 */
-	UNSAFE_componentWillReceiveProps(nextProps) {
-		this.updateTrackerClasses(nextProps.tracker);
+	static getDerivedStateFromProps(nextProps) {
+		return Tracker.computeTrackerClasses(nextProps.tracker);
 	}
 
 	/**
@@ -122,10 +122,23 @@ class Tracker extends React.Component {
 	}
 
 	/**
-	 * Set dynamic classes on .blocking-trk and save it in state.
+	 * Set dynamic classes on .blocking-trk to state.
 	 * @param  {Object} tracker    tracker object
 	 */
 	updateTrackerClasses(tracker) {
+		const {
+			trackerClasses,
+			warningImageTitle
+		} = Tracker.computeTrackerClasses(tracker);
+
+		this.setState({ trackerClasses, warningImageTitle });
+	}
+
+	/**
+	 * Compute dynamic classes on .blocking-trk and return it as an object.
+	 * @param  {Object} tracker    tracker object
+	 */
+	static computeTrackerClasses(tracker) {
 		const classes = [];
 		let updated_title = '';
 
@@ -155,10 +168,10 @@ class Tracker extends React.Component {
 			updated_title = t('panel_tracker_warning_slow_tooltip');
 		}
 
-		this.setState({
+		return {
 			trackerClasses: classes.join(' '),
 			warningImageTitle: updated_title,
-		});
+		};
 	}
 
 	/**

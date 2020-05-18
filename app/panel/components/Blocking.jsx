@@ -65,9 +65,10 @@ class Blocking extends React.Component {
 	/**
 	 * Lifecycle event
 	 */
-	UNSAFE_componentWillReceiveProps(nextProps) {
-		this.updateBlockingClasses(nextProps);
-		this.updateSiteNotScanned(nextProps);
+	static getDerivedStateFromProps(nextProps) {
+		const blockingClasses = Blocking.buildBlockingClasses(nextProps).join(' ');
+		const disableBlocking = Blocking.computeSiteNotScanned(nextProps);
+		return { blockingClasses, disableBlocking };
 	}
 
 	/**

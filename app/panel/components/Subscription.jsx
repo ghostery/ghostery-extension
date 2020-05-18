@@ -44,8 +44,8 @@ class Subscription extends React.Component {
 	/**
 	 * Lifecycle event.
 	 */
-	UNSAFE_componentWillReceiveProps = (nextProps) => {
-		if (!nextProps.loggedIn) {
+	componentDidUpdate = () => {
+		if (!this.props.loggedIn) {
 			this.props.history.push('/detail');
 		}
 	}

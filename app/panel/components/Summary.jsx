@@ -83,12 +83,14 @@ class Summary extends React.Component {
 	/**
 	 * Lifecycle event
 	 */
-	UNSAFE_componentWillReceiveProps(nextProps) {
-		this._setTrackerLatency(nextProps);
-		this._updateSiteNotScanned(nextProps);
+	static getDerivedStateFromProps(nextProps) {
+		const trackerLatencyTotal = Summary._computeTrackerLatency(nextProps);
+		const disableBlocking = Summary._computeSiteNotScanned(nextProps);
 
 		// Set page title for Firefox for Android
-		window.document.title = `Ghostery's findings for ${this.props.pageUrl}`;
+		window.document.title = `Ghostery's findings for ${nextProps.pageUrl}`;
+
+		return { trackerLatencyTotal, disableBlocking };
 	}
 
 	/**
@@ -246,12 +248,11 @@ class Summary extends React.Component {
 		}
 	}
 
-
 	/**
 	 * Calculates total tracker latency and sets it to state
 	 * @param {Object} props Summary's props, either this.props or nextProps.
 	 */
-	_setTrackerLatency(props) {
+	static _computeTrackerLatency(props) {
 		const { performanceData } = props;
 		let pageLatency = 0;
 
@@ -268,11 +269,37 @@ class Summary extends React.Component {
 			} else if (unfixedLatency < 10 && unfixedLatency >= 0) { // < 10s use two decimals
 				pageLatency = unfixedLatency.toFixed(2);
 			}
-			this.setState({ trackerLatencyTotal: pageLatency });
-		// reset page load value if page is reloaded while panel is open
-		} else if (this.props.performanceData && !performanceData) {
-			this.setState({ trackerLatencyTotal: pageLatency });
+			return pageLatency;
+			// reset page load value if page is reloaded while panel is open
 		}
+		return null;
+	}
+
+	/**
+	 * Calculates total tracker latency and sets it to state
+	 * @param {Object} props Summary's props, either this.props or nextProps.
+	 */
+	_setTrackerLatency(props) {
+		const trackerLatencyTotal = Summary._computeTrackerLatency(props);
+		const { performanceData } = props;
+
+		if (performanceData || this.props.performanceData !== performanceData) {
+			this.setState({ trackerLatencyTotal });
+		}
+	}
+
+	/**
+	 * Compute whether controls should be disabled.
+	 * @param {Object} props Summary's props, either this.props or nextProps.
+	 */
+	static _computeSiteNotScanned(props) {
+		const { siteNotScanned, categories } = props;
+		const pageUrl = props.pageUrl || '';
+
+		if (siteNotScanned || !categories || pageUrl.search(/http|chrome-extension|moz-extension|ms-browser-extension|newtab|chrome:\/\/startpage\//) === -1) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -280,14 +307,8 @@ class Summary extends React.Component {
 	 * @param {Object} props Summary's props, either this.props or nextProps.
 	 */
 	_updateSiteNotScanned(props) {
-		const { siteNotScanned, categories } = props;
-		const pageUrl = props.pageUrl || '';
-
-		if (siteNotScanned || !categories || pageUrl.search(/http|chrome-extension|moz-extension|ms-browser-extension|newtab|chrome:\/\/startpage\//) === -1) {
-			this.setState({ disableBlocking: true });
-		} else {
-			this.setState({ disableBlocking: false });
-		}
+		const disableBlocking = Summary._computeSiteNotScanned(props);
+		this.setState({ disableBlocking });
 	}
 
 	/**

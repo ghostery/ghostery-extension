@@ -51,7 +51,15 @@ class BlockingHeader extends React.Component {
 	 */
 	componentDidMount() {
 		if (this.props.categories) {
-			this.updateBlockAll(this.props.categories);
+			const updates = BlockingHeader.updateBlockAll(this.props.categories, this.state.fromHere);
+			if (updates) {
+				const {
+					allBlocked,
+					fromHere,
+					filtered
+				} = updates;
+				this.setState({ allBlocked, fromHere, filtered });
+			}
 		}
 
 		if (typeof this.props.actions.updateTrackerCounts === 'function') {
@@ -63,18 +71,19 @@ class BlockingHeader extends React.Component {
 
 	/**
 	 * Lifecycle event
+	 * Refactor Notes:
+	 *   Refactor UNSAFE_componentWillReceiveProps using getDerivedStateFromProps
+	 *   because we are only manipulating state.
 	 */
-	UNSAFE_componentWillReceiveProps(nextProps) {
-		if (nextProps.categories) {
-			this.updateBlockAll(nextProps.categories);
-		}
+	static getDerivedStateFromProps(prevProps, prevState) {
+		return BlockingHeader.updateBlockAll(prevProps.categories, prevState.fromHere);
 	}
 
 	/**
-	 * Set appropriate initial text ("Block All" or "Unblock All") in Blocking header
-	 * when Blocking or Global Blocking view opens. Save 'allBlocked' property in state.
+	 * Get appropriate initial text ("Block All" or "Unblock All") in Blocking header
+	 * when Blocking or Global Blocking view opens. Return object to set in state.
 	 */
-	updateBlockAll(categories) {
+	static updateBlockAll(categories, fromHere) {
 		if (categories) {
 			let totalShown = 0;
 			let totalBlocked = 0;
@@ -92,14 +101,15 @@ class BlockingHeader extends React.Component {
 					}
 				});
 			});
-			if (this.state.fromHere || totalShown === totalBlocked || totalBlocked === 0) {
-				this.setState({
+			if (fromHere || totalShown === totalBlocked || totalBlocked === 0) {
+				return {
 					allBlocked: (totalShown === totalBlocked),
 					fromHere: false,
 					filtered
-				});
+				};
 			}
 		}
+		return null;
 	}
 
 	/**

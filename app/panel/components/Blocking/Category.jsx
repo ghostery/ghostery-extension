@@ -47,17 +47,34 @@ class Category extends React.Component {
 	 */
 	componentDidMount() {
 		if (this.props.category) {
-			this.updateCategoryCheckbox(this.props.category);
+			const {
+				allShownBlocked,
+				totalShownBlocked,
+			} = Category.updateCategoryCheckbox(this.props.category);
+			this.setState({ allShownBlocked, totalShownBlocked });
 		}
 	}
 
 	/**
-	 * Lifecycle event. When props changed we save in state new values
-	 * to ensure correct rendering.
+	 * Lifecycle event
 	 */
-	UNSAFE_componentWillReceiveProps(nextProps) {
-		this.updateCategoryExpanded(nextProps.expandAll);
-		this.updateCategoryCheckbox(nextProps.category);
+	componentDidUpdate(prevProps) {
+		this.updateCategoryExpanded(prevProps);
+	}
+
+	/**
+	 * Lifecycle event.
+	 */
+	static getDerivedStateFromProps(prevProps) {
+		const {
+			allShownBlocked,
+			totalShownBlocked,
+		} = Category.updateCategoryCheckbox(prevProps.category);
+
+		return {
+			allShownBlocked,
+			totalShownBlocked
+		};
 	}
 
 	/**
@@ -85,7 +102,7 @@ class Category extends React.Component {
 	 * Called in lifecycle events.
 	 * @param {Object}		category object containg the list of tracker objects
 	 */
-	updateCategoryCheckbox(category) {
+	static updateCategoryCheckbox(category) {
 		let totalShownBlocked = 0;
 		let allShownBlocked = true;
 		let shownCount = 0;
@@ -99,10 +116,10 @@ class Category extends React.Component {
 		});
 
 		allShownBlocked = (shownCount === totalShownBlocked);
-		this.setState({
+		return {
 			allShownBlocked,
 			totalShownBlocked,
-		});
+		};
 	}
 
 	/**
@@ -151,9 +168,11 @@ class Category extends React.Component {
 	 *	Called in lifecycle events.
 	 *	@param {boolean}     global expanded state
 	 */
-	updateCategoryExpanded(expandAll) {
-		if (expandAll !== this.props.expandAll && expandAll !== this.state.isExpanded) {
-			this.setState({ isExpanded: expandAll });
+	updateCategoryExpanded(prevProps) {
+		if (this.props.expandAll !== prevProps.expandAll && this.props.expandAll !== this.state.isExpanded) {
+			this.setState({
+				isExpanded: this.props.expandAll
+			});
 		}
 	}
 
