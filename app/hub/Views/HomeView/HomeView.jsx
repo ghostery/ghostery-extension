@@ -142,7 +142,7 @@ const HomeView = (props) => {
 					</div>
 				</div>
 				<div className="HomeView__upgrade row">
-					<div className="HomeView__upgradeIcon HomeView__featureIcon" />
+					<div className="HomeView__upgradeIcon HomeView__featureIcon align-justify align-center-middle" />
 					<div className="HomeView__upgradeText align-justify">
 						{t('hub_home_plus_upgrade_text')}
 					</div>

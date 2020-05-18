@@ -83,7 +83,8 @@
 	border-radius: 4px;
 }
 .HomeView__upgradeIcon {
-	background-image: upgradeShieldIcon();
+	display: flex;
+	background-image: upgradeShieldIcon(#DAF4FF, #4a4a4a);
 }
 .HomeView__featureIcon {
 	height: 50px;
