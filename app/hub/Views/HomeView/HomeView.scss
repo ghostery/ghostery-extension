@@ -73,14 +73,17 @@
 	padding: 0;
 	background-color: #979797;
 }
-.HomeView__upgrade {
+.HomeView__upgradeContainer {
 	display: flex;
 	margin-top: 22px;
 	padding: 22px 12px;
 	background-color: #f0f3f4;
-	box-shadow: 0 0 8px 5px #920094;
-	border: solid 1.6px #920094;
 	border-radius: 4px;
+
+	&.purple-border {
+		box-shadow: 0 0 8px 5px #920094;
+		border: solid 1.6px #920094;
+	}
 }
 .HomeView__upgradeIcon {
 	background-image: upgradeShieldIcon(#DAF4FF, #4a4a4a);
@@ -150,7 +153,7 @@
 	.HomeView__onboardingFeature.feature-setup-complete {
 		margin: 35px 0 15px;
 	}
-	.HomeView__upgrade {
+	.HomeView__upgradeContainer {
 		flex-direction: column;
 	}
 	.HomeView__upgradeIcon {

@@ -34,7 +34,7 @@ const HomeView = (props) => {
 		enable_metrics,
 		changeMetrics,
 		email,
-		isPlus,
+		isPremium
 	} = props;
 	const accountHref = globals.ACCOUNT_BASE_URL;
 
@@ -60,6 +60,9 @@ const HomeView = (props) => {
 	});
 	const setupButtonClassNames = ClassNames('HomeView__featureButton button primary', {
 		hollow: setup_complete,
+	});
+	const upgradeContainerClassNames = ClassNames('HomeView__upgradeContainer row align-center-middle', {
+		'purple-border': !isPremium
 	});
 
 	return (
@@ -141,14 +144,14 @@ const HomeView = (props) => {
 						</NavLink>
 					</div>
 				</div>
-				<div className="HomeView__upgrade row align-center-middle">
+				<div className={upgradeContainerClassNames}>
 					<div className="HomeView__upgradeIcon" />
 					<div className="HomeView__upgradeText">
 						{t('hub_home_plus_upgrade_text')}
 					</div>
 					<div className="HomeView__buttonContainer columns flex-container">
 						<NavLink to="/upgrade" className="HomeView__featureButton button primary">
-							{isPlus ? t('hub_home_plus_full_protection') : t('hub_home_plus_upgrade_button_text')}
+							{isPremium ? t('hub_home_plus_full_protection') : t('hub_home_plus_upgrade_button_text')}
 						</NavLink>
 					</div>
 
@@ -166,7 +169,7 @@ HomeView.propTypes = {
 	enable_metrics: PropTypes.bool.isRequired,
 	changeMetrics: PropTypes.func.isRequired,
 	email: PropTypes.string.isRequired,
-	isPlus: PropTypes.bool.isRequired,
+	isPremium: PropTypes.bool.isRequired,
 };
 
 export default HomeView;

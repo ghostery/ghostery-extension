@@ -121,14 +121,14 @@ class HomeViewContainer extends Component {
 			enable_metrics,
 			changeMetrics: this._handleToggleMetrics,
 			email: user ? user.email : '',
-			isPlus,
+			isPremium,
 		};
 
 		const showPromoModal = !premium_promo_modal_shown && !isPremium;
 
 		return (
 			<div className="full-height">
-				{/* <PromoModal
+				<PromoModal
 					type={PREMIUM}
 					show={showPromoModal}
 					isPlus={isPlus}
@@ -136,7 +136,7 @@ class HomeViewContainer extends Component {
 					handleKeepBasicClick={this._handleKeepBasicClick}
 					handleGetPlusClick={this._handleGetPlusClick}
 					handleTryMidnightClick={this._handleTryMidnightClick}
-				/> */}
+				/>
 				<HomeView {...childProps} />
 			</div>
 		);
