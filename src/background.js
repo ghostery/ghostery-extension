@@ -322,12 +322,8 @@ function handleAccountPages(name, callback) {
  * @memberOf Background
  *
  * @param  {string} 	name 		message name
- * @param  {string}		tab_url 	tab url
  */
-function handleCheckoutPages(name, callback) {
-	console.error('checkoutPage event:');
-	console.error(name);
-
+function handleCheckoutPages(name) {
 	switch (name) {
 		case 'checkoutPage.buyInsights':
 		case 'checkoutPage.buyPlus':
