@@ -823,20 +823,21 @@ function onMessageHandler(request, sender, callback) {
 	}
 	if (name === 'account.getUserSubscriptionData') {
 		account.getUserSubscriptionData()
-			.then((customer) => {
-				// TODO temporary fix to handle multiple subscriptions
-				let sub = customer.subscriptions;
-				if (!Array.isArray(sub)) {
-					sub = [sub];
+			.then((subscriptions) => {
+				// Return highest tier subscription from array
+				const premiumSubscription = subscriptions.find(subscription => subscription.productName.includes('Ghostery Premium'));
+				if (premiumSubscription) {
+					callback({ subscriptionData: premiumSubscription });
+					return;
 				}
-				const subscriptionData = sub.reduce((acc, curr) => {
-					let a = acc;
-					if (curr.productName.includes('Plus')) {
-						a = curr;
-					}
-					return a;
-				}, {});
-				callback({ subscriptionData });
+
+				const plusSubscription = subscriptions.find(subscription => subscription.productName.includes('Ghostery Plus'));
+				if (plusSubscription) {
+					callback({ subscriptionData: plusSubscription });
+					return;
+				}
+
+				callback({});
 			})
 			.catch((err) => {
 				log('Error getting user subscription data:', err);
@@ -880,7 +881,9 @@ function onMessageHandler(request, sender, callback) {
 		account.getUser(message)
 			.then((user) => {
 				if (user) {
-					user.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus']);
+					user.plusAccess = account.hasScopesUnverified(['subscriptions:plus'])
+						|| account.hasScopesUnverified(['subscriptions:premium']);
+					user.premiumAccess = account.hasScopesUnverified(['subscriptions:premium']);
 				}
 				callback({ user });
 			})
