@@ -141,17 +141,17 @@ const HomeView = (props) => {
 						</NavLink>
 					</div>
 				</div>
-				<div className="HomeView__upgrade row">
-					<div className="HomeView__upgradeIcon HomeView__featureIcon align-justify align-center-middle" />
-					<div className="HomeView__upgradeText align-justify">
+				<div className="HomeView__upgrade row align-center-middle">
+					<div className="HomeView__upgradeIcon" />
+					<div className="HomeView__upgradeText">
 						{t('hub_home_plus_upgrade_text')}
 					</div>
-					<div className="columns flex-container align-center-middle">
-						{/* TODO: Change navlink to upgrade tab */}
-						<NavLink to="/plus" className="HomeView__featureButton button primary">
+					<div className="HomeView__buttonContainer columns flex-container">
+						<NavLink to="/upgrade" className="HomeView__featureButton button primary">
 							{isPlus ? t('hub_home_plus_full_protection') : t('hub_home_plus_upgrade_button_text')}
 						</NavLink>
 					</div>
+
 				</div>
 			</div>
 		</div>

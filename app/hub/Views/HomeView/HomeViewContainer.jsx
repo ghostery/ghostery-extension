@@ -118,7 +118,6 @@ class HomeViewContainer extends Component {
 		const { justInstalled } = this.state;
 		const { home, user } = this.props;
 		const isPlus = user && user.subscriptionsPlus || false;
-		console.log('isPlus: ', user);
 		const {
 			premium_promo_modal_shown,
 			setup_complete,
@@ -134,8 +133,6 @@ class HomeViewContainer extends Component {
 			email: user ? user.email : '',
 			isPlus,
 		};
-
-		const showPromoModal = !premium_promo_modal_shown && !this._premiumSubscriber();
 
 		return (
 			<div className="full-height">
