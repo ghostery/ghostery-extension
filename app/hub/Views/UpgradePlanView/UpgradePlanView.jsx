@@ -66,8 +66,8 @@ const UpgradePlanView = () => {
 							<img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/ghost_plus@2x.png" title="Ghostery Plus" alt="Ghostery Plus" />
 							<h2>{t('ghostery_plus')}</h2>
 							<div className="price">
-								<p className="price-gold price-yearly active font-size-36">3.99</p>
-								<p className="price-gold price-monthly font-size-36">4.99</p>
+								<p className="price-gold price-yearly active font-size-36">{t('hub_upgrade_ghostery_plus_yearly_price')}</p>
+								<p className="price-gold price-monthly font-size-36">{t('hub_upgrade_ghostery_plus_monthly_price')}</p>
 								<p className="price-gold font-size-12">{t('per_month')}</p>
 							</div>
 							<a className="button button-gold" href="" title="Upgrade to Plus">{t('upgrade_to_plus')}</a>
@@ -78,7 +78,7 @@ const UpgradePlanView = () => {
 							</p>
 							<p className="card-sub-copy">
 								<img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" />
-								{t('hub_upgrade_advanced_browser_protection')}
+								{t('hub_upgrade_advanced_device_protection')}
 							</p>
 						</div>
 					</div>
@@ -87,19 +87,19 @@ const UpgradePlanView = () => {
 							<img className="card-image-top" src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/spaceship.svg" title="Ghostery Premium" alt="Ghostery Premium" />
 							<h2>{t('panel_detail_premium_title')}</h2>
 							<div className="price">
-								<p className="price-purple price-yearly active font-size-36">$8.99</p>
-								<p className="price-purple price-monthly font-size-36">$11.99</p>
+								<p className="price-purple price-yearly active font-size-36">{t('hub_upgrade_ghostery_premium_yearly_price')}</p>
+								<p className="price-purple price-monthly font-size-36">{t('hub_upgrade_ghostery_premium_monthly_price')}</p>
 								<p className="price-purple font-size-12">{t('per_month')}</p>
 							</div>
-							<a className="button button-purple-blue" href="" title="Buy Now">Buy Now</a>
-							<p className="card-sub-header"><strong>{t('hub_upgrade_maximum_browser_protection')}</strong></p>
+							<a className="button button-purple-blue" href="" title="Premium CTA">{t('hub_upgrade_to_premium')}</a>
+							<p className="card-sub-header"><strong>{ t('hub_upgrade_maximum_browser_protection') }</strong></p>
 							<p className="card-sub-copy">
 								<img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" />
 								{t('hub_upgrade_basic_browser_protection')}
 							</p>
 							<p className="card-sub-copy">
 								<img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" />
-								{t('hub_upgrade_advanced_browser_protection')}
+								{t('hub_upgrade_advanced_device_protection')}
 							</p>
 							<p className="card-sub-copy">
 								<img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" />
@@ -110,7 +110,7 @@ const UpgradePlanView = () => {
 				</div>
 				<div className="row align-center module-editor text-center">
 					<div className="columns text-center">
-						<span className="learn-more learn-more-to-full-list">Check out the full list of features</span>
+						<span className="learn-more learn-more-to-full-list">{ t('hub_upgrade_scroll_down') }</span>
 						<div className="arrow learn-more learn-more-to-full-list" />
 					</div>
 				</div>
@@ -119,15 +119,15 @@ const UpgradePlanView = () => {
 			<div className="grid-container card-wrapper hide-for-large">
 				<div className="row align-center">
 					<div className="small-12 text-center columns">
-						<h1>Choose the right plan for you</h1>
+						<h1>{ t('hub_upgrade_choose_plan') }</h1>
 					</div>
 				</div>
 				<div className="row align-center">
 					<div className="columns shrink text-center">
 						<ul className="tiers-group tabs menu align-center" data-tabs id="price-tabs">
-							<li className="tabs-title is-active"><a href="#panel1">Free</a></li>
-							<li className="tabs-title"><a href="#panel2">Plus</a></li>
-							<li className="tabs-title"><a href="#panel3">Premium</a></li>
+							<li className="tabs-title is-active"><a href="#panel1">{t('hub_upgrade_plan_free')}</a></li>
+							<li className="tabs-title"><a href="#panel2">{t('hub_upgrade_plus')}</a></li>
+							<li className="tabs-title"><a href="#panel3">{t('panel_detail_menu_premium_title')}</a></li>
 						</ul>
 					</div>
 				</div>
@@ -139,13 +139,13 @@ const UpgradePlanView = () => {
 								<img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/free-image-copy@2x.png" title="Ghostery Free" alt="Ghostery Free" />
 								<h2>{t('ghostery')}</h2>
 								<div className="price">
-									<p className="price-blue font-size-36">Free</p>
+									<p className="price-blue font-size-36">{t('hub_upgrade_plan_free')}</p>
 								</div>
-								<a className="button button-blue" href="" title="Sign Up">Free</a>
-								<p className="card-sub-header"><strong>Basic Protection</strong></p>
+								<a className="button button-blue" href="" title="Sign Up">{t('hub_upgrade_plan_free')}</a>
+								<p className="card-sub-header"><strong>{t('hub_upgrade_basic_protection')}</strong></p>
 								<p className="card-sub-copy">
 									<img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" />
-									Basic Browser Protection
+									{t('hub_upgrade_basic_browser_protection')}
 								</p>
 							</div>
 						</div>
@@ -156,29 +156,29 @@ const UpgradePlanView = () => {
 								<img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/ghost_plus@2x.png" title="Ghostery Plus" alt="Ghostery Plus" />
 								<h2>{t('ghostery_plus')}</h2>
 								<div className="price">
-									<p className="price-gold price-yearly active font-size-36">$3.99</p>
-									<p className="price-gold price-monthly font-size-36">$4.99</p>
+									<p className="price-gold price-yearly active font-size-36">{t('hub_upgrade_ghostery_plus_yearly_price')}</p>
+									<p className="price-gold price-monthly font-size-36">{t('hub_upgrade_ghostery_plus_monthly_price')}</p>
 									<p className="price-gold font-size-12">{t('per_month')}</p>
 								</div>
 								<div className="row collapse align-middle toggle-switch">
 									<div className="small-12 text-center columns">
-										<span>Yearly</span>
+										<span>{t('hub_upgrade_yearly')}</span>
 										<label className="switch" htmlFor="switch-check">
 											<input className="switch-check" type="checkbox" />
 											<span className="slider round" />
 										</label>
-										<span>Monthly</span>
+										<span>{t('hub_upgrade_monthly')}</span>
 									</div>
 								</div>
-								<a className="button button-gold" href="" title="Buy Now">Buy now</a>
-								<p className="card-sub-header"><strong>Additional Protection</strong></p>
+								<a className="button button-gold" href="" title="Upgrade to Plus">{t('upgrade_to_plus')}</a>
+								<p className="card-sub-header"><strong>{t('hub_upgrade_additional_protection')}</strong></p>
 								<p className="card-sub-copy">
 									<img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" />
-									Basic Browser Protection
+									{t('hub_upgrade_basic_browser_protection')}
 								</p>
 								<p className="card-sub-copy">
 									<img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" />
-									Advanced Device Protection
+									{t('hub_upgrade_advanced_device_protection')}
 								</p>
 							</div>
 						</div>
@@ -189,33 +189,33 @@ const UpgradePlanView = () => {
 								<img className="card-image-top" src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/spaceship.svg" title="Ghostery Premium" alt="Ghostery Premium" />
 								<h2>{t('panel_detail_premium_title')}</h2>
 								<div className="price">
-									<p className="price-purple price-yearly active font-size-36">$8.99</p>
-									<p className="price-purple price-monthly font-size-36">$11.99</p>
+									<p className="price-purple price-yearly active font-size-36">{t('hub_upgrade_ghostery_premium_yearly_price')}</p>
+									<p className="price-purple price-monthly font-size-36">{t('hub_upgrade_ghostery_premium_monthly_price')}</p>
 									<p className="price-purple font-size-12">{t('per_month')}</p>
 								</div>
 								<div className="row collapse align-middle toggle-switch">
 									<div className="small-12 text-center columns">
-										<span>Yearly</span>
+										<span>{t('hub_upgrade_yearly')}</span>
 										<label className="switch" htmlFor="switch-check">
 											<input className="switch-check" type="checkbox" />
 											<span className="slider round" />
 										</label>
-										<span>Monthly</span>
+										<span>{t('hub_upgrade_monthly')}</span>
 									</div>
 								</div>
-								<a className="button button-purple-blue" href="" title="Buy Now">Buy now</a>
-								<p className="card-sub-header"><strong>Maximum Protection</strong></p>
+								<a className="button button-purple-blue" href="" title="Buy Now">{t('hub_upgrade_to_premium')}</a>
+								<p className="card-sub-header"><strong>{ t('hub_upgrade_maximum_browser_protection') }</strong></p>
 								<p className="card-sub-copy">
 									<img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" />
-									Basic Browser Protection
+									{t('hub_upgrade_basic_browser_protection')}
 								</p>
 								<p className="card-sub-copy">
 									<img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" />
-									Advanced Device Protection
+									{t('hub_upgrade_advanced_device_protection')}
 								</p>
 								<p className="card-sub-copy">
 									<img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" />
-									VPN
+									{t('hub_upgrade_vpn')}
 								</p>
 							</div>
 						</div>
@@ -228,9 +228,9 @@ const UpgradePlanView = () => {
 							<img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/free-image-copy@2x.png" title="Ghostery Free" alt="Ghostery Free" />
 							<h2>{t('ghostery')}</h2>
 							<div className="price">
-								<p className="price-blue font-size-36">Free</p>
+								<p className="price-blue font-size-36">{t('hub_upgrade_plan_free')}</p>
 							</div>
-							<a className="button button-blue" href="" title="Sign Up">Free</a>
+							<a className="button button-blue" href="" title="Sign Up">{t('hub_upgrade_plan_free')}</a>
 						</div>
 					</div>
 					<div className="card-outer">
@@ -238,10 +238,10 @@ const UpgradePlanView = () => {
 							<img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/ghost_plus@2x.png" title="Ghostery Plus" alt="Ghostery Plus" />
 							<h2>{t('ghostery_plus')}</h2>
 							<div className="price">
-								<p className="price-gold font-size-36">$3.99</p>
+								<p className="price-gold font-size-36">{t('hub_upgrade_ghostery_plus_yearly_price')}</p>
 								<p className="price-gold font-size-12">{t('per_month')}</p>
 							</div>
-							<a className="button button-gold" href="" title="Buy Now">Buy now</a>
+							<a className="button button-gold" href="" title="Buy Now">{t('upgrade_to_plus')}</a>
 						</div>
 					</div>
 					<div className="card-outer card-outer-remove">
@@ -249,10 +249,10 @@ const UpgradePlanView = () => {
 							<img className="card-image-top" src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/spaceship.svg" title="Ghostery Premium" alt="Ghostery Premium" />
 							<h2>{t('panel_detail_premium_title')}</h2>
 							<div className="price">
-								<p className="price-purple font-size-36">$8..99</p>
+								<p className="price-purple font-size-36">{t('hub_upgrade_ghostery_plus_yearly_price')}</p>
 								<p className="price-purple font-size-12">{t('per_month')}</p>
 							</div>
-							<a className="button button-purple-blue" href="" title="Buy Now">Buy now</a>
+							<a className="button button-purple-blue" href="" title="Upgrade to Premium">{t('hub_upgrade_to_premium')}</a>
 						</div>
 					</div>
 				</div>
@@ -285,89 +285,88 @@ const UpgradePlanView = () => {
 								</thead>
 								<tbody>
 									<tr>
-										<td>Browser Tracker Blocking</td>
+										<td>{t('hub_upgrade_browser_tracker_blocking')}</td>
 										<td className="default"><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" /></td>
 										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" /></td>
 										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" /></td>
 									</tr>
 									<tr>
-										<td>Browser Ad Blocking</td>
+										<td>{t('hub_upgrade_browser_ad_blocking')}</td>
 										<td className="default"><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" /></td>
 										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" /></td>
 										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" /></td>
 									</tr>
 									<tr>
-										<td>Custom Blocking Preferences</td>
+										<td>{t('hub_upgrade_custom_blocking_preferences')}</td>
 										<td className="default"><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" /></td>
 										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" /></td>
 										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" /></td>
 									</tr>
 									<tr>
-										<td>Extension Themes</td>
+										<td>{t('hub_upgrade_custom_blocking_preferences')}</td>
 										<td className="default"><span className="tick" /></td>
 										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" /></td>
 										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" /></td>
 									</tr>
 									<tr>
-										<td>Historical Extension Stats</td>
+										<td>{t('hub_upgrade_historical_extension_stats')}</td>
 										<td className="default"><span className="tick" /></td>
 										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" /></td>
 										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" /></td>
 									</tr>
 									<tr>
-										<td>Application Tracker Blocking</td>
+										<td>{t('hub_upgrade_application_tracker_blocking')}</td>
 										<td className="default"><span className="tick" /></td>
 										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" /></td>
 										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" /></td>
 									</tr>
 									<tr>
-										<td>Application Ad Blocking</td>
+										<td>{t('hub_upgrade_application_ad_blocking')}</td>
 										<td className="default"><span className="tick" /></td>
 										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" /></td>
 										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" /></td>
 									</tr>
 									<tr>
-										<td>VPN</td>
-										<td className="default"><span className="tick" /></td>
-										<td><span className="tick" /></td>
-										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" /></td>
-									</tr>
-									<tr>
-										<td>No VPN Logs</td>
+										<td>{t('hub_upgrade_vpn')}</td>
 										<td className="default"><span className="tick" /></td>
 										<td><span className="tick" /></td>
 										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" /></td>
 									</tr>
 									<tr>
-										<td>P2P Support</td>
+										<td>{t('hub_upgrade_no_vpn_logs')}</td>
 										<td className="default"><span className="tick" /></td>
 										<td><span className="tick" /></td>
 										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" /></td>
 									</tr>
 									<tr>
-										<td>IPV6 Leak Protection</td>
+										<td>{t('hub_upgrade_P2P_support')}</td>
 										<td className="default"><span className="tick" /></td>
 										<td><span className="tick" /></td>
 										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" /></td>
 									</tr>
 									<tr>
-										<td>Physical Servers</td>
+										<td>{t('hub_upgrade_IPV6_leak_protection')}</td>
 										<td className="default"><span className="tick" /></td>
 										<td><span className="tick" /></td>
 										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" /></td>
 									</tr>
 									<tr>
-										<td>Unlimited Bandwith</td>
+										<td>{t('hub_upgrade_physical_servers')}</td>
+										<td className="default"><span className="tick" /></td>
+										<td><span className="tick" /></td>
+										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" /></td>
+									</tr>
+									<tr>
+										<td>{t('hub_upgrade_unlimited_bandwidth')}</td>
 										<td className="default"><span className="tick" /></td>
 										<td><span className="tick" /></td>
 										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" /></td>
 									</tr>
 
 									<tr>
-										{/* <td></td> */}
-										<td className="default"><a className="button button-blue" href="" title="Sign Up">Free</a></td>
-										<td><a className="button button-gold" href="" title="Buy Now">Buy Now</a></td>
-										<td><a className="button button-purple-blue" href="" title="Buy Now">Buy Now</a></td>
+										<td className="default"><a className="button button-blue" href="" title="Sign Up">{t('hub_upgrade_already_protected')}</a></td>
+										<td><a className="button button-gold" href="" title="Buy Now">{t('upgrade_to_plus')}</a></td>
+										<td><a className="button button-purple-blue" href="" title="Buy Now">{t('hub_upgrade_to_premium')}</a></td>
 									</tr>
 								</tbody>
 							</table>

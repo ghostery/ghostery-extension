@@ -1321,20 +1321,74 @@
 	"hub_upgrade_basic_browser_protection": {
 		"message": "Basic Browser Protection"
 	},
-	"hub_upgrade_advanced_browser_protection": {
-		"message": "Advanced Browser Protection"
+	"hub_upgrade_advanced_device_protection": {
+		"message": "Advanced Device Protection"
 	},
 	"hub_upgrade_maximum_browser_protection": {
 		"message": "Maximum Browser Protection"
 	},
 	"hub_upgrade_vpn": {
-		"message": "Maximum Browser Protection"
+		"message": "vpn"
 	},
-	"hub_upgrade_buy_now": {
-		"message": "Buy Now"
+	"hub_upgrade_to_premium": {
+		"message": "Upgrade to Premium"
+	},
+	"hub_upgrade_scroll_down": {
+		"message": "Check out the full list of features"
+	},
+	"hub_upgrade_plus": {
+		"message": "Plus"
 	},
 	"hub_upgrade_additional_protection": {
 		"message": "Additional Protection"
+	},
+	"hub_upgrade_browser_tracker_blocking": {
+		"message": "Browser Tracker Blocking"
+	},
+	"hub_upgrade_browser_ad_blocking": {
+		"message": "Browser Ad Blocking"
+	},
+	"hub_upgrade_custom_blocking_preferences": {
+		"message": "Custom Blocking Preferences"
+	},
+	"hub_upgrade_extension_themes": {
+		"message": "Extension Themes"
+	},
+	"hub_upgrade_historical_extension_stats": {
+		"message": "Extension Themes"
+	},
+	"hub_upgrade_application_tracker_blocking": {
+		"message": "Application Tracker Blocking"
+	},
+	"hub_upgrade_application_ad_blocking": {
+		"message": "Application Tracker Blocking"
+	},
+	"hub_upgrade_no_vpn_logs": {
+		"message": "No VPN logs"
+	},
+	"hub_upgrade_P2P_support": {
+		"message": "P2P support"
+	},
+	"hub_upgrade_IPV6_leak_protection": {
+		"message": "IPV6 Leak Protection"
+	},
+	"hub_upgrade_physical_servers": {
+		"message": "Physical Servers"
+	},
+	"hub_upgrade_unlimited_bandwidth": {
+		"message": "Unlimited Bandwidth"
+	},
+	"hub_upgrade_ghostery_plus_yearly_price": {
+		"message": "$3.99"
+	},
+	"hub_upgrade_g4ostery_plus_monthly_price": {
+		"message": "$4.99"
+	},
+	"hub_upgrade_ghostery_premium_yearly_price": {
+		"message": "$8.99"
+	},
+	"hub_upgrade_g4ostery_premium_monthly_price": {
+		"message": "$11.99"
 	},
 	"hub_setup_page_title": {
 		"message": "Ghostery Hub - Setup"
