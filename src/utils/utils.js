@@ -194,7 +194,7 @@ export function processUrlQuery(src) {
 
 	try {
 		const res = {};
-		for (const [key, value] of new URL(src).searchParams.entries()) {
+		for (const [key, value] of new URL(src).searchParams.entries()) { // eslint-disable-line no-restricted-syntax
 			res[key] = value;
 		}
 		return res;
