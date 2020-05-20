@@ -186,12 +186,12 @@ class ConfData {
 
 		let lang = window.navigator.language.replace('-', '_');
 
-		if (Object.prototype.hasOwnProperty.call(SUPPORTED_LANGUAGES, lang)) {
+		if (SUPPORTED_LANGUAGES.hasOwnProperty(lang)) {
 			return lang;
 		}
 
 		lang = lang.slice(0, 2);
-		if (Object.prototype.hasOwnProperty.call(SUPPORTED_LANGUAGES, lang)) {
+		if (SUPPORTED_LANGUAGES.hasOwnProperty(lang)) {
 			return lang;
 		}
 

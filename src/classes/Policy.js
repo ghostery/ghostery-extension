@@ -156,9 +156,9 @@ class Policy {
 
 		const allowedOnce = c2pDb.allowedOnce(tab_id, app_id);
 		// The app_id has been globally blocked
-		if (Object.prototype.hasOwnProperty.call(conf.selected_app_ids, app_id)) {
+		if (conf.selected_app_ids.hasOwnProperty(app_id)) {
 			// The app_id is on the site-specific allow list for this tab_host
-			if (conf.toggle_individual_trackers && Object.prototype.hasOwnProperty.call(conf.site_specific_unblocks, tab_host) && conf.site_specific_unblocks[tab_host].includes(+app_id)) {
+			if (conf.toggle_individual_trackers && conf.site_specific_unblocks.hasOwnProperty(tab_host) && conf.site_specific_unblocks[tab_host].includes(+app_id)) {
 				// Site blacklist overrides all block settings except C2P allow once
 				if (Policy.blacklisted(tab_url)) {
 					return { block: !allowedOnce, reason: allowedOnce ? BLOCK_REASON_C2P_ALLOWED_ONCE : BLOCK_REASON_BLACKLISTED };
@@ -175,7 +175,7 @@ class Policy {
 
 		// The app_id has not been globally blocked
 		// Check to see if the app_id is on the site-specific block list for this tab_host
-		if (conf.toggle_individual_trackers && Object.prototype.hasOwnProperty.call(conf.site_specific_blocks, tab_host) && conf.site_specific_blocks[tab_host].includes(+app_id)) {
+		if (conf.toggle_individual_trackers && conf.site_specific_blocks.hasOwnProperty(tab_host) && conf.site_specific_blocks[tab_host].includes(+app_id)) {
 			// Site white-listing overrides blocking settings
 			if (Policy.checkSiteWhitelist(tab_url)) {
 				return { block: false, reason: BLOCK_REASON_WHITELISTED };
@@ -183,7 +183,7 @@ class Policy {
 			return { block: !allowedOnce, reason: allowedOnce ? BLOCK_REASON_C2P_ALLOWED_ONCE : BLOCK_REASON_SS_BLOCKED };
 		}
 		// Check to see if the app_id is on the site-specific allow list for this tab_host
-		if (conf.toggle_individual_trackers && Object.prototype.hasOwnProperty.call(conf.site_specific_unblocks, tab_host) && conf.site_specific_unblocks[tab_host].includes(+app_id)) {
+		if (conf.toggle_individual_trackers && conf.site_specific_unblocks.hasOwnProperty(tab_host) && conf.site_specific_unblocks[tab_host].includes(+app_id)) {
 			// Site blacklist overrides all block settings except C2P allow once
 			if (Policy.blacklisted(tab_url)) {
 				return { block: !allowedOnce, reason: allowedOnce ? BLOCK_REASON_C2P_ALLOWED_ONCE : BLOCK_REASON_BLACKLISTED };

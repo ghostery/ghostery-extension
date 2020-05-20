@@ -590,7 +590,7 @@ class PanelData {
 		for (let i = 0; i < dataKeys.length; i++) {
 			const key = dataKeys[i];
 			const value = data[key];
-			if (Object.prototype.hasOwnProperty.call(conf, key) && !isEqual(conf[key], value)) {
+			if (conf.hasOwnProperty(key) && !isEqual(conf[key], value)) {
 				conf[key] = value;
 				syncSetDataChanged = SYNC_SET.has(key) ? true : syncSetDataChanged;
 			// TODO refactor - this work should probably be the direct responsibility of Globals
@@ -659,7 +659,7 @@ class PanelData {
 				cat = 'uncategorized';
 			}
 
-			if (Object.prototype.hasOwnProperty.call(categories, cat)) {
+			if (categories.hasOwnProperty(cat)) {
 				categories[cat].num_total++;
 				if (PanelData._addsUpToBlocked(trackerState)) { categories[cat].num_blocked++; }
 			} else {
@@ -746,7 +746,7 @@ class PanelData {
 			warningCompatibility: hasCompatibilityIssue,
 			warningInsecure: hasInsecureIssue,
 			warningSlow: hasLatencyIssue,
-			warningSmartBlock: (Object.prototype.hasOwnProperty.call(smartBlock.blocked, id) && 'blocked') || (Object.prototype.hasOwnProperty.call(smartBlock.unblocked, id) && 'unblocked') || false,
+			warningSmartBlock: (smartBlock.blocked.hasOwnProperty(id) && 'blocked') || (smartBlock.unblocked.hasOwnProperty(id) && 'unblocked') || false,
 			cliqzAdCount,
 			cliqzCookieCount,
 			cliqzFingerprintCount,
@@ -771,11 +771,11 @@ class PanelData {
 		const pageBlocks = (pageHost && conf.site_specific_blocks[pageHost]) || [];
 
 		return {
-			blocked: Object.prototype.hasOwnProperty.call(selectedAppIds, trackerId),
+			blocked: selectedAppIds.hasOwnProperty(trackerId),
 			ss_allowed: pageUnblocks.includes(+trackerId),
 			ss_blocked: pageBlocks.includes(+trackerId),
-			sb_blocked: smartBlockActive && Object.prototype.hasOwnProperty.call(smartBlock.blocked, `${trackerId}`),
-			sb_allowed: smartBlockActive && Object.prototype.hasOwnProperty.call(smartBlock.unblocked, `${trackerId}`)
+			sb_blocked: smartBlockActive && smartBlock.blocked.hasOwnProperty(`${trackerId}`),
+			sb_allowed: smartBlockActive && smartBlock.unblocked.hasOwnProperty(`${trackerId}`)
 		};
 	}
 
@@ -791,7 +791,7 @@ class PanelData {
 			const { trackers } = categoryEl;
 			categoryEl.num_blocked = 0;
 			trackers.forEach((trackerEl) => {
-				trackerEl.blocked = Object.prototype.hasOwnProperty.call(selectedApps, trackerEl.id);
+				trackerEl.blocked = selectedApps.hasOwnProperty(trackerEl.id);
 				if (trackerEl.blocked) {
 					categoryEl.num_blocked++;
 				}

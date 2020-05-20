@@ -206,7 +206,7 @@ const _updateCliqzModuleWhitelist = (state, action) => {
 
 	const addToWhitelist = () => {
 		unknownTracker.domains.forEach((domain) => {
-			if (Object.prototype.hasOwnProperty.call(whitelistedUrls, domain)) {
+			if (whitelistedUrls.hasOwnProperty(domain)) {
 				whitelistedUrls[domain].name = unknownTracker.name;
 				whitelistedUrls[domain].hosts.push(pageHost);
 			} else {

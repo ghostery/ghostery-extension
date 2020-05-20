@@ -164,7 +164,7 @@ const Click2PlayContentScript = (function(win, doc) {
 					const messageKeys = Object.keys(message);
 					for (let i = 0; i < messageKeys.length; i++) {
 						const app_id = messageKeys[i];
-						if (Object.prototype.hasOwnProperty.call(message, app_id)) {
+						if (message.hasOwnProperty(app_id)) {
 							applyC2P(app_id, message[app_id].data, message[app_id].html);
 							delete message[app_id];
 						}

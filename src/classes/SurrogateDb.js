@@ -63,24 +63,24 @@ class SurrogateDb extends Updatable {
 
 			// convert single values to arrays first
 			['pattern_id', 'app_id', 'sites', 'match'].forEach((prop) => {
-				if (Object.prototype.hasOwnProperty.call(s, prop) && !isArray(s[prop])) {
+				if (s.hasOwnProperty(prop) && !isArray(s[prop])) {
 					s[prop] = [s[prop]];
 				}
 			});
 
 			// initialize regexes
-			if (Object.prototype.hasOwnProperty.call(s, 'match')) {
+			if (s.hasOwnProperty('match')) {
 				s.match = map(s.match, match => new RegExp(match, ''));
 			}
 
-			if (Object.prototype.hasOwnProperty.call(s, 'pattern_id') || Object.prototype.hasOwnProperty.call(s, 'app_id')) {
+			if (s.hasOwnProperty('pattern_id') || s.hasOwnProperty('app_id')) {
 				// tracker-level surrogate
-				if (Object.prototype.hasOwnProperty.call(s, 'pattern_id')) {
+				if (s.hasOwnProperty('pattern_id')) {
 					this._buildDb(s, 'pattern_id', 'pattern_ids');
-				} else if (Object.prototype.hasOwnProperty.call(s, 'app_id')) {
+				} else if (s.hasOwnProperty('app_id')) {
 					this._buildDb(s, 'app_id', 'app_ids');
 				}
-			} else if (Object.prototype.hasOwnProperty.call(s, 'sites')) {
+			} else if (s.hasOwnProperty('sites')) {
 				// we have a "sites" property, but not pattern_id/app_id:
 				// it's a site surrogate
 				this._buildDb(s, 'sites', 'site_surrogates');
@@ -104,23 +104,23 @@ class SurrogateDb extends Updatable {
 	getForTracker(script_src, app_id, pattern_id, host_name) {
 		let candidates = [];
 
-		if (Object.prototype.hasOwnProperty.call(this.db.app_ids, app_id)) {
+		if (this.db.app_ids.hasOwnProperty(app_id)) {
 			candidates = candidates.concat(this.db.app_ids[app_id]);
 		}
 
-		if (Object.prototype.hasOwnProperty.call(this.db.pattern_ids, pattern_id)) {
+		if (this.db.pattern_ids.hasOwnProperty(pattern_id)) {
 			candidates = candidates.concat(this.db.pattern_ids[pattern_id]);
 		}
 
 		return filter(candidates, (surrogate) => {
 			// note: does not support *.example.com (exact matches only)
-			if (Object.prototype.hasOwnProperty.call(surrogate, 'sites')) { // array of site hosts
+			if (surrogate.hasOwnProperty('sites')) { // array of site hosts
 				if (!surrogate.sites.includes(host_name)) {
 					return false;
 				}
 			}
 
-			if (Object.prototype.hasOwnProperty.call(surrogate, 'match')) {
+			if (surrogate.hasOwnProperty('match')) {
 				if (!any(surrogate.match, match => script_src.match(match))) {
 					return false;
 				}
@@ -142,7 +142,7 @@ class SurrogateDb extends Updatable {
 	 */
 	_buildDb(surrogate, property, db_name) {
 		surrogate[property].forEach((val) => {
-			if (!Object.prototype.hasOwnProperty.call(this.db[db_name], val)) {
+			if (!this.db[db_name].hasOwnProperty(val)) {
 				this.db[db_name][val] = [];
 			}
 			this.db[db_name][val].push(surrogate);

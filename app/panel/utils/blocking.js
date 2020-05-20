@@ -33,8 +33,8 @@ export function updateSummaryBlockingCount(categories = [], smartBlock, updateTr
 	categories.forEach((categoryEl) => {
 		categoryEl.trackers.forEach((trackerEl) => {
 			numTotal++;
-			const sbBlocked = Object.prototype.hasOwnProperty.call(smartBlock.blocked, trackerEl.id);
-			const sbUnblocked = Object.prototype.hasOwnProperty.call(smartBlock.unblocked, trackerEl.id);
+			const sbBlocked = smartBlock.blocked.hasOwnProperty(trackerEl.id);
+			const sbUnblocked = smartBlock.unblocked.hasOwnProperty(trackerEl.id);
 
 			if (trackerEl.ss_blocked || sbBlocked || (trackerEl.blocked && !trackerEl.ss_allowed && !sbUnblocked)) {
 				numTotalBlocked++;
@@ -81,8 +81,8 @@ export function updateBlockAllTrackers(state, action) {
 	updated_categories.forEach((categoryEl) => {
 		categoryEl.num_blocked = 0;
 		categoryEl.trackers.forEach((trackerEl) => {
-			const sbBlocked = Object.prototype.hasOwnProperty.call(smartBlock.blocked, trackerEl.id);
-			const sbUnblocked = Object.prototype.hasOwnProperty.call(smartBlock.unblocked, trackerEl.id);
+			const sbBlocked = smartBlock.blocked.hasOwnProperty(trackerEl.id);
+			const sbUnblocked = smartBlock.unblocked.hasOwnProperty(trackerEl.id);
 
 			if (trackerEl.shouldShow) {
 				trackerEl.blocked = blocked;
@@ -124,8 +124,8 @@ export function updateCategoryBlocked(state, action) {
 	const updated_category = updated_categories[catIndex];
 	updated_category.num_blocked = 0;
 	updated_category.trackers.forEach((trackerEl) => {
-		const sbBlocked = Object.prototype.hasOwnProperty.call(smartBlock.blocked, trackerEl.id);
-		const sbUnblocked = Object.prototype.hasOwnProperty.call(smartBlock.unblocked, trackerEl.id);
+		const sbBlocked = smartBlock.blocked.hasOwnProperty(trackerEl.id);
+		const sbUnblocked = smartBlock.unblocked.hasOwnProperty(trackerEl.id);
 
 		if (trackerEl.shouldShow) {
 			trackerEl.blocked = blocked;
@@ -194,8 +194,8 @@ export function updateTrackerBlocked(state, action) {
 
 	updated_category.num_blocked = 0;
 	updated_category.trackers.forEach((trackerEl) => {
-		const sbBlocked = Object.prototype.hasOwnProperty.call(smartBlock.blocked, trackerEl.id);
-		const sbUnblocked = Object.prototype.hasOwnProperty.call(smartBlock.unblocked, trackerEl.id);
+		const sbBlocked = smartBlock.blocked.hasOwnProperty(trackerEl.id);
+		const sbUnblocked = smartBlock.unblocked.hasOwnProperty(trackerEl.id);
 
 		if (trackerEl.shouldShow) {
 			if (trackerEl.id === action.data.app_id) {

@@ -65,14 +65,14 @@ export function prefsGet(...args) {
 					result = items;
 				} else if (args.length === 1) {
 					const key = args[0]; // extract value from array
-					if (items && Object.prototype.hasOwnProperty.call(items, key)) {
+					if (items && items.hasOwnProperty(key)) {
 						result = items[key];
 					}
 				} else {
 					result = {}; // instantiate an empty object
 					args.forEach((key) => {
 						result[key] = null;
-						if (items && Object.prototype.hasOwnProperty.call(items, key)) {
+						if (items && items.hasOwnProperty(key)) {
 							result[key] = items[key];
 						}
 					});

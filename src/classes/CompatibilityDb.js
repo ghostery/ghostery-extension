@@ -66,7 +66,7 @@ class CompatibilityDb extends Updatable {
 	 * @return {Boolean}
 	 */
 	hasIssue(aid, tab_url) {
-		return this.db.list && Object.prototype.hasOwnProperty.call(this.db.list, aid) && fuzzyUrlMatcher(tab_url, this.db.list[aid]);
+		return this.db.list && this.db.list.hasOwnProperty(aid) && fuzzyUrlMatcher(tab_url, this.db.list[aid]);
 	}
 
 	/**

@@ -139,7 +139,7 @@ class FoundBugs {
 
 		if (app_id) {
 			const { appsById } = this._foundApps[tab_id];
-			if (Object.prototype.hasOwnProperty.call(appsById, app_id)) {
+			if (appsById.hasOwnProperty(app_id)) {
 				apps_arr.push(apps[appsById[app_id]]);
 			}
 		} else {
@@ -203,11 +203,11 @@ class FoundBugs {
 		const ids = Object.keys(bugs);
 		for (let i = 0; i < ids.length; i++) {
 			id = ids[i];
-			if (Object.prototype.hasOwnProperty.call(bugs, id)) {
+			if (bugs.hasOwnProperty(id)) {
 				aid = db.bugs[id].aid; // eslint-disable-line prefer-destructuring
 				cid = db.apps[aid].cat;
 
-				if (Object.prototype.hasOwnProperty.call(cats_obj, cid)) {
+				if (cats_obj.hasOwnProperty(cid)) {
 					if (!cats_obj[cid].appIds.includes(aid)) {
 						cats_obj[cid].appIds.push(aid);
 						cats_obj[cid].trackers.push({
@@ -244,7 +244,7 @@ class FoundBugs {
 		const cids = Object.keys(cats_obj);
 		for (let i = 0; i < cids.length; i++) {
 			cid = cids[i];
-			if (Object.prototype.hasOwnProperty.call(cats_obj, cid)) {
+			if (cats_obj.hasOwnProperty(cid)) {
 				cats_arr.push(cats_obj[cid]);
 			}
 		}
@@ -364,7 +364,7 @@ class FoundBugs {
 		const { aid } = bugDb.db.bugs[bug_id];
 
 		const { apps, appsById, issueCounts } = this._foundApps[tab_id];
-		if (Object.prototype.hasOwnProperty.call(appsById, aid)) {
+		if (appsById.hasOwnProperty(aid)) {
 			const app = apps[appsById[aid]];
 			if (!app.hasLatencyIssue) {
 				issueCounts.latency++;
@@ -395,11 +395,11 @@ class FoundBugs {
 			return false;
 		}
 
-		if (!Object.prototype.hasOwnProperty.call(this._foundBugs, tab_id)) {
+		if (!this._foundBugs.hasOwnProperty(tab_id)) {
 			this._foundBugs[tab_id] = {};
 		}
 
-		if (!Object.prototype.hasOwnProperty.call(this._foundApps, tab_id)) {
+		if (!this._foundApps.hasOwnProperty(tab_id)) {
 			this._foundApps[tab_id] = {
 				apps: [],
 				appsMetadata: {},
@@ -445,7 +445,7 @@ class FoundBugs {
 	 * @param  {string} 	type
 	 */
 	_updateFoundBugs(tab_id, bug_id, src, blocked, type) {
-		if (!Object.prototype.hasOwnProperty.call(this._foundBugs[tab_id], bug_id)) {
+		if (!this._foundBugs[tab_id].hasOwnProperty(bug_id)) {
 			this._foundBugs[tab_id][bug_id] = {
 				sources: [],
 				hasLatencyIssue: false,
@@ -487,7 +487,7 @@ class FoundBugs {
 			apps, appsMetadata, appsById, issueCounts
 		} = this._foundApps[tab_id];
 
-		if (Object.prototype.hasOwnProperty.call(appsById, aid)) {
+		if (appsById.hasOwnProperty(aid)) {
 			const app = apps[appsById[aid]];
 
 			if (!app.hasLatencyIssue && hasLatencyIssue) { issueCounts.latency++; }

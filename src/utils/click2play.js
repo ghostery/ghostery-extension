@@ -102,7 +102,7 @@ export function buildC2P(details, app_id) {
 		case 'none':
 			tabInfo.setTabInfo(tab_id, 'c2pStatus', 'loading');
 			// Push current C2P data into existing queue
-			if (!Object.prototype.hasOwnProperty.call(tab.c2pQueue, app_id)) {
+			if (!tab.c2pQueue.hasOwnProperty(app_id)) {
 				tabInfo.setTabInfo(tab_id, 'c2pQueue', {
 					...tab.c2pQueue,
 					[app_id]: {
@@ -123,7 +123,7 @@ export function buildC2P(details, app_id) {
 			break;
 		case 'loading':
 			// Push C2P data to a holding queue until click_to_play.js has finished loading on the page
-			if (!Object.prototype.hasOwnProperty.call(tab.c2pQueue, app_id)) {
+			if (!tab.c2pQueue.hasOwnProperty(app_id)) {
 				tabInfo.setTabInfo(tab_id, 'c2pQueue', {
 					...tab.c2pQueue,
 					[app_id]: {
@@ -195,7 +195,7 @@ export function allowAllwaysC2P(app_id, tab_host) {
 	conf.selected_app_ids = selected_app_ids;
 
 	// Remove fron site-specific-blocked
-	if (Object.prototype.hasOwnProperty.call(conf.site_specific_blocks, tab_host) && conf.site_specific_blocks[tab_host].includes(+app_id)) {
+	if (conf.site_specific_blocks.hasOwnProperty(tab_host) && conf.site_specific_blocks[tab_host].includes(+app_id)) {
 		const { site_specific_blocks } = conf;
 		site_specific_blocks[tab_host].splice(0, 1);
 		conf.site_specific_blocks = site_specific_blocks;
@@ -203,7 +203,7 @@ export function allowAllwaysC2P(app_id, tab_host) {
 
 	// Add tracker to site-specific-allowed
 	const { site_specific_unblocks } = conf;
-	if (!Object.prototype.hasOwnProperty.call(site_specific_unblocks, tab_host)) {
+	if (!site_specific_unblocks.hasOwnProperty(tab_host)) {
 		// create new array of unblocks for this host
 		site_specific_unblocks[tab_host] = [];
 	}

@@ -138,7 +138,7 @@ function findDuplicates(paths) {
 			duplicates[locale] = [];
 			oboe(fs.createReadStream(path)).node('{message}', (val, keys) => {
 				const key = keys[0];
-				if (Object.prototype.hasOwnProperty.call(foundKeys, key)) {
+				if (foundKeys.hasOwnProperty(key)) {
 					hasDuplicates = true;
 					duplicates[locale].push(key);
 					return;
@@ -179,7 +179,7 @@ function findMissingKeys(paths) {
 			const locale = path.match(/_locales\/(.*)\/messages.json/)[1];
 			missingKeys[locale] = [];
 			Object.keys(defaultLocaleJson).forEach((key) => {
-				if (!Object.prototype.hasOwnProperty.call(localeJson, key)) {
+				if (!localeJson.hasOwnProperty(key)) {
 					hasMissingKeys = true;
 					missingKeys[locale].push(key);
 				}
@@ -214,7 +214,7 @@ function findExtraKeys(paths) {
 			const locale = path.match(/_locales\/(.*)\/messages.json/)[1];
 			extraKeys[locale] = [];
 			Object.keys(localeJson).forEach((key) => {
-				if (!Object.prototype.hasOwnProperty.call(defaultLocaleJson, key)) {
+				if (!defaultLocaleJson.hasOwnProperty(key)) {
 					hasExtraKeys = true;
 					extraKeys[locale].push(key);
 				}
@@ -247,7 +247,7 @@ function findMalformedKeys(paths) {
 			const locale = path.match(/_locales\/(.*)\/messages.json/)[1];
 			malformedKeys[locale] = [];
 			Object.keys(localeJson).forEach((key) => {
-				if (!Object.prototype.hasOwnProperty.call(localeJson[key], 'message')) {
+				if (!localeJson[key].hasOwnProperty('message')) {
 					hasMalformedKeys = true;
 					malformedKeys[locale].push(key);
 				}
@@ -282,8 +282,8 @@ function findMissingPlaceholders(paths) {
 			const locale = path.match(/_locales\/(.*)\/messages.json/)[1];
 			missingPlaceholders[locale] = [];
 			Object.keys(defaultLocaleJson).forEach((key) => {
-				if (Object.prototype.hasOwnProperty.call(defaultLocaleJson[key], 'placeholders')) {
-					if (!localeJson[key] || !Object.prototype.hasOwnProperty.call(localeJson[key], 'placeholders')) {
+				if (defaultLocaleJson[key].hasOwnProperty('placeholders')) {
+					if (!localeJson[key] || !localeJson[key].hasOwnProperty('placeholders')) {
 						hasMissingPlaceholders = true;
 						missingPlaceholders[locale].push(`${key}: missing ${Object.keys(defaultLocaleJson[key].placeholders).length} placeholder(s)`);
 						return;
@@ -326,8 +326,8 @@ function findExtraPlaceholders(paths) {
 			const locale = path.match(/_locales\/(.*)\/messages.json/)[1];
 			extraPlaceholders[locale] = [];
 			Object.keys(localeJson).forEach((key) => {
-				if (Object.prototype.hasOwnProperty.call(localeJson[key], 'placeholders')) {
-					if (!defaultLocaleJson[key] || !Object.prototype.hasOwnProperty.call(defaultLocaleJson[key], 'placeholders')) {
+				if (localeJson[key].hasOwnProperty('placeholders')) {
+					if (!defaultLocaleJson[key] || !defaultLocaleJson[key].hasOwnProperty('placeholders')) {
 						hasExtraPlaceholders = true;
 						extraPlaceholders[locale].push(`${key}: has ${Object.keys(localeJson[key].placeholders).length} extra placeholder(s)`);
 						return;
@@ -374,7 +374,7 @@ function findMalformedPlaceholders(paths) {
 				if (matchedPlaceholders) {
 					matchedPlaceholders.forEach((p) => {
 						const placeholder = p.toLowerCase().slice(1, -1);
-						if (!Object.prototype.hasOwnProperty.call(placeholders, placeholder)) {
+						if (!placeholders.hasOwnProperty(placeholder)) {
 							hasMalformedPlaceholders = true;
 							malformedPlaceholders[locale].push(`${key}: needs placeholder "${placeholder}"`);
 						}

@@ -87,12 +87,12 @@ class BugDb extends Updatable {
 		const appIds = Object.keys(db.apps);
 		for (let i = 0; i < appIds.length; i++) {
 			appId = appIds[i];
-			if (Object.prototype.hasOwnProperty.call(db.apps, appId)) {
+			if (db.apps.hasOwnProperty(appId)) {
 				category = db.apps[appId].cat;
 				if (t(`category_${category}`) === `category_${category}`) {
 					category = 'uncategorized';
 				}
-				blocked = Object.prototype.hasOwnProperty.call(selectedApps, appId);
+				blocked = selectedApps.hasOwnProperty(appId);
 
 				// Because we have two trackers in the DB with the same name
 				if ((categories[category] && categories[category].trackers[db.apps[appId].name])) {
@@ -100,7 +100,7 @@ class BugDb extends Updatable {
 					continue;
 				}
 
-				if (Object.prototype.hasOwnProperty.call(categories, category)) {
+				if (categories.hasOwnProperty(category)) {
 					categories[category].num_total++;
 					if (blocked) {
 						categories[category].num_blocked++;
@@ -131,7 +131,7 @@ class BugDb extends Updatable {
 		const categoryNames = Object.keys(categories);
 		for (let i = 0; i < categoryNames.length; i++) {
 			categoryName = categoryNames[i];
-			if (Object.prototype.hasOwnProperty.call(categories, categoryName)) {
+			if (categories.hasOwnProperty(categoryName)) {
 				const category = categories[categoryName];
 				if (category.trackers) {
 					category.trackers.sort((a, b) => {
@@ -186,7 +186,7 @@ class BugDb extends Updatable {
 		const regexesKeys = Object.keys(regexes);
 		for (let i = 0; i < regexesKeys.length; i++) {
 			const id = regexesKeys[i];
-			if (Object.prototype.hasOwnProperty.call(regexes, id)) {
+			if (regexes.hasOwnProperty(id)) {
 				db.patterns.regex[id] = new RegExp(regexes[id], 'i');
 			}
 		}
@@ -199,7 +199,7 @@ class BugDb extends Updatable {
 		// since allSelected is slow to eval, make it lazy
 		defineLazyProperty(db, 'allSelected', () => {
 			const num_selected = size(conf.selected_app_ids);
-			return (!!num_selected && every(db.apps, (app, app_id) => Object.prototype.hasOwnProperty.call(conf.selected_app_ids, app_id)));
+			return (!!num_selected && every(db.apps, (app, app_id) => conf.selected_app_ids.hasOwnProperty(app_id)));
 		});
 
 		log('processed bugdb...');
@@ -210,7 +210,7 @@ class BugDb extends Updatable {
 			// if there is an older bugs object in storage,
 			// update newAppIds and apply block-by-default
 			if (old_bugs) {
-				if (Object.prototype.hasOwnProperty.call(old_bugs, 'version') && bugs.version > old_bugs.version) {
+				if (old_bugs.hasOwnProperty('version') && bugs.version > old_bugs.version) {
 					new_app_ids = BugDb.updateNewAppIds(bugs.apps, old_bugs.apps);
 
 					if (new_app_ids.length) {
@@ -219,7 +219,7 @@ class BugDb extends Updatable {
 					}
 
 				// pre-trie/legacy db
-				} else if (Object.prototype.hasOwnProperty.call(old_bugs, 'bugsVersion') && bugs.version !== old_bugs.bugsVersion) {
+				} else if (old_bugs.hasOwnProperty('bugsVersion') && bugs.version !== old_bugs.bugsVersion) {
 					const old_apps = reduce(old_bugs.bugs, (memo, bug) => {
 						memo[bug.aid] = true;
 						return memo;

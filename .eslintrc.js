@@ -65,7 +65,7 @@ module.exports = {
 			]
 		}],
 		'no-plusplus': [0],
-		'no-prototype-builtins': [1],
+		'no-prototype-builtins': [0],
 		'no-restricted-syntax': [1],
 		'no-tabs': [0],
 		'no-underscore-dangle': [0],
@@ -80,7 +80,7 @@ module.exports = {
 		'import/prefer-default-export': [1],
 
 		// Plugin: React
-		'react/destructuring-assignment': [0],
+		'react/destructuring-assignment': [0], // ToDo
 		'react/static-property-placement': [0],
 		'react/jsx-curly-newline': [0],
 		'react/jsx-indent': [1, 'tab'],

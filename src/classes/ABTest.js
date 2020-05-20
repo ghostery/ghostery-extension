@@ -34,7 +34,7 @@ class ABTest {
 	 * @param {string} name 	test name
 	 */
 	hasTest(name) {
-		return Object.prototype.hasOwnProperty.call(this.tests, name);
+		return this.tests.hasOwnProperty(name);
 	}
 
 	/**

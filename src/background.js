@@ -129,10 +129,10 @@ function setGhosteryDefaultBlocking() {
 	const app_ids = Object.keys(bugDb.db.apps);
 	for (let i = 0; i < app_ids.length; i++) {
 		const app_id = app_ids[i];
-		if (Object.prototype.hasOwnProperty.call(bugDb.db.apps, app_id)) {
+		if (bugDb.db.apps.hasOwnProperty(app_id)) {
 			const category = bugDb.db.apps[app_id].cat;
 			if (categoriesBlock.indexOf(category) >= 0 &&
-			!Object.prototype.hasOwnProperty.call(selected_app_ids, app_id)) {
+			!selected_app_ids.hasOwnProperty(app_id)) {
 				selected_app_ids[app_id] = 1;
 			}
 		}
@@ -498,7 +498,7 @@ function handleRewards(name, message, callback) {
 			metrics.ping(message);
 			break;
 		case 'setPanelData':
-			if (Object.prototype.hasOwnProperty.call(message, 'enable_offers')) {
+			if (message.hasOwnProperty('enable_offers')) {
 				Rewards.sendSignal(message.signal);
 				panelData.set({ enable_offers: message.enable_offers });
 			}
@@ -580,7 +580,7 @@ function handleGhosteryHub(name, message, callback) {
 					const app_ids = Object.keys(bugDb.db.apps);
 					for (let i = 0; i < app_ids.length; i++) {
 						const app_id = app_ids[i];
-						if (!Object.prototype.hasOwnProperty.call(selected_app_ids, app_id)) {
+						if (!selected_app_ids.hasOwnProperty(app_id)) {
 							selected_app_ids[app_id] = 1;
 						}
 					}
@@ -776,7 +776,7 @@ function onMessageHandler(request, sender, callback) {
 		const { email, password } = message;
 		account.login(email, password)
 			.then((response) => {
-				if (!Object.prototype.hasOwnProperty.call(response, 'errors')) {
+				if (!response.hasOwnProperty('errors')) {
 					metrics.ping('sign_in_success');
 				}
 				callback(response);
@@ -793,7 +793,7 @@ function onMessageHandler(request, sender, callback) {
 		} = message;
 		account.register(email, confirmEmail, password, firstName, lastName)
 			.then((response) => {
-				if (!Object.prototype.hasOwnProperty.call(response, 'errors')) {
+				if (!response.hasOwnProperty('errors')) {
 					metrics.ping('create_account_success');
 				}
 				callback(response);
@@ -1013,7 +1013,7 @@ function initializeDispatcher() {
 		const { db } = bugDb;
 		db.noneSelected = (num_selected === 0);
 		// can't simply compare num_selected and size(db.apps) since apps get removed sometimes
-		db.allSelected = (!!num_selected && every(db.apps, (app, app_id) => Object.prototype.hasOwnProperty.call(appIds, app_id)));
+		db.allSelected = (!!num_selected && every(db.apps, (app, app_id) => appIds.hasOwnProperty(app_id)));
 	});
 	dispatcher.on('conf.save.site_whitelist', () => {
 		// TODO debounce with below
