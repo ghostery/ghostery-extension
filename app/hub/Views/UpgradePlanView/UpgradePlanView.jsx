@@ -19,26 +19,26 @@ import globals from '../../../../src/classes/Globals';
 import { ToggleCheckbox } from '../../../shared-components';
 
 /**
- * A Functional React component for rendering the Home View
+ * A React class component for rendering the Home View
  * @return {JSX} JSX for rendering the Home View of the Hub app
  * @memberof HubComponents
  */
-const UpgradePlanView = (props) => {
-	const test = '';
+const UpgradePlanView = () => {
+	const test = true;
 	return (
 		<section className="pricing-page page-template-page-pricing ">
 			<div className="grid-container show-for-large">
 				<div className="row align-center">
 					<div className="small-12 text-center columns">
-						<h1>Choose the right plan for you</h1>
+						<h1>{t('hub_upgrade_choose_plan')}</h1>
 						<div className="row align-middle toggle-switch">
 							<div className="small-12 text-center columns">
-								<span>Yearly</span>
+								<span>{t('hub_upgrade_yearly')}</span>
 								<label className="switch" htmlFor="switch-check">
 									<input className="switch-check" type="checkbox" />
 									<span className="slider round" />
 								</label>
-								<span>Monthly</span>
+								<span>{t('hub_upgrade_monthly')}</span>
 							</div>
 						</div>
 					</div>
@@ -49,61 +49,61 @@ const UpgradePlanView = (props) => {
 					<div className="card-outer">
 						<div className="card" data-equalizer-watch>
 							<img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/free-image-copy@2x.png" title="Ghostery Free" alt="Ghostery Free" />
-							<h2>Ghostery</h2>
+							<h2>{t('ghostery')}</h2>
 							<div className="price">
-								<p className="price-blue font-size-36">Free</p>
+								<p className="price-blue font-size-36">{t('hub_upgrade_plan_free')}</p>
 							</div>
-							<a className="button button-blue" href="" title="Sign Up">Sign up</a>
-							<p className="card-sub-header"><strong>Basic Protection</strong></p>
+							<a className="button button-blue" href="" title="Already Protected">{t('hub_upgrade_already_protected')}</a>
+							<p className="card-sub-header"><strong>{t('hub_upgrade_basic_protection')}</strong></p>
 							<p className="card-sub-copy">
 								<img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" />
-								Basic Browser Protection
+								{t('hub_upgrade_basic_browser_protection')}
 							</p>
 						</div>
 					</div>
 					<div className="card-outer">
 						<div className="card" data-equalizer-watch>
 							<img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/ghost_plus@2x.png" title="Ghostery Plus" alt="Ghostery Plus" />
-							<h2>Ghostery Plus</h2>
+							<h2>{t('ghostery_plus')}</h2>
 							<div className="price">
 								<p className="price-gold price-yearly active font-size-36">3.99</p>
 								<p className="price-gold price-monthly font-size-36">4.99</p>
-								<p className="price-gold font-size-12">per month</p>
+								<p className="price-gold font-size-12">{t('per_month')}</p>
 							</div>
-							<a className="button button-gold" href="" title="Buy Now">Buy now</a>
-							<p className="card-sub-header"><strong>Additional Protection</strong></p>
+							<a className="button button-gold" href="" title="Upgrade to Plus">{t('upgrade_to_plus')}</a>
+							<p className="card-sub-header"><strong>{t('hub_upgrade_additional_protection')}</strong></p>
 							<p className="card-sub-copy">
 								<img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" />
-								Basic Browser Protection
+								{t('hub_upgrade_basic_browser_protection')}
 							</p>
 							<p className="card-sub-copy">
 								<img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" />
-								Advanced Device Protection
+								{t('hub_upgrade_advanced_browser_protection')}
 							</p>
 						</div>
 					</div>
 					<div className="card-outer card-outer-remove">
 						<div className="card" data-equalizer-watch>
 							<img className="card-image-top" src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/spaceship.svg" title="Ghostery Premium" alt="Ghostery Premium" />
-							<h2>Ghostery Premium</h2>
+							<h2>{t('panel_detail_premium_title')}</h2>
 							<div className="price">
 								<p className="price-purple price-yearly active font-size-36">$8.99</p>
 								<p className="price-purple price-monthly font-size-36">$11.99</p>
-								<p className="price-purple font-size-12">per month</p>
+								<p className="price-purple font-size-12">{t('per_month')}</p>
 							</div>
 							<a className="button button-purple-blue" href="" title="Buy Now">Buy Now</a>
-							<p className="card-sub-header"><strong>Maximum Protection</strong></p>
+							<p className="card-sub-header"><strong>{t('hub_upgrade_maximum_browser_protection')}</strong></p>
 							<p className="card-sub-copy">
 								<img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" />
-								Basic Browser Protection
+								{t('hub_upgrade_basic_browser_protection')}
 							</p>
 							<p className="card-sub-copy">
 								<img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" />
-								Advanced Device Protection
+								{t('hub_upgrade_advanced_browser_protection')}
 							</p>
 							<p className="card-sub-copy">
 								<img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/checkmark.png" title="Ghostery Check" alt="Ghostery Check" />
-								VPN
+								{t('hub_upgrade_vpn')}
 							</p>
 						</div>
 					</div>
@@ -137,7 +137,7 @@ const UpgradePlanView = (props) => {
 						<div className="card-outer">
 							<div className="card">
 								<img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/free-image-copy@2x.png" title="Ghostery Free" alt="Ghostery Free" />
-								<h2>Ghostery</h2>
+								<h2>{t('ghostery')}</h2>
 								<div className="price">
 									<p className="price-blue font-size-36">Free</p>
 								</div>
@@ -154,11 +154,11 @@ const UpgradePlanView = (props) => {
 						<div className="card-outer">
 							<div className="card">
 								<img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/ghost_plus@2x.png" title="Ghostery Plus" alt="Ghostery Plus" />
-								<h2>Ghostery Plus</h2>
+								<h2>{t('ghostery_plus')}</h2>
 								<div className="price">
 									<p className="price-gold price-yearly active font-size-36">$3.99</p>
 									<p className="price-gold price-monthly font-size-36">$4.99</p>
-									<p className="price-gold font-size-12">per month</p>
+									<p className="price-gold font-size-12">{t('per_month')}</p>
 								</div>
 								<div className="row collapse align-middle toggle-switch">
 									<div className="small-12 text-center columns">
@@ -187,11 +187,11 @@ const UpgradePlanView = (props) => {
 						<div className="card-outer card-outer-remove">
 							<div className="card">
 								<img className="card-image-top" src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/spaceship.svg" title="Ghostery Premium" alt="Ghostery Premium" />
-								<h2>Ghostery Premium</h2>
+								<h2>{t('panel_detail_premium_title')}</h2>
 								<div className="price">
 									<p className="price-purple price-yearly active font-size-36">$8.99</p>
 									<p className="price-purple price-monthly font-size-36">$11.99</p>
-									<p className="price-purple font-size-12">per month</p>
+									<p className="price-purple font-size-12">{t('per_month')}</p>
 								</div>
 								<div className="row collapse align-middle toggle-switch">
 									<div className="small-12 text-center columns">
@@ -226,7 +226,7 @@ const UpgradePlanView = (props) => {
 					<div className="card-outer">
 						<div className="card">
 							<img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/free-image-copy@2x.png" title="Ghostery Free" alt="Ghostery Free" />
-							<h2>Ghostery</h2>
+							<h2>{t('ghostery')}</h2>
 							<div className="price">
 								<p className="price-blue font-size-36">Free</p>
 							</div>
@@ -236,10 +236,10 @@ const UpgradePlanView = (props) => {
 					<div className="card-outer">
 						<div className="card">
 							<img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/ghost_plus@2x.png" title="Ghostery Plus" alt="Ghostery Plus" />
-							<h2>Ghostery Plus</h2>
+							<h2>{t('ghostery_plus')}</h2>
 							<div className="price">
 								<p className="price-gold font-size-36">$3.99</p>
-								<p className="price-gold font-size-12">per month</p>
+								<p className="price-gold font-size-12">{t('per_month')}</p>
 							</div>
 							<a className="button button-gold" href="" title="Buy Now">Buy now</a>
 						</div>
@@ -247,10 +247,10 @@ const UpgradePlanView = (props) => {
 					<div className="card-outer card-outer-remove">
 						<div className="card">
 							<img className="card-image-top" src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/spaceship.svg" title="Ghostery Premium" alt="Ghostery Premium" />
-							<h2>Ghostery Premium</h2>
+							<h2>{t('panel_detail_premium_title')}</h2>
 							<div className="price">
 								<p className="price-purple font-size-36">$8..99</p>
-								<p className="price-purple font-size-12">per month</p>
+								<p className="price-purple font-size-12">{t('per_month')}</p>
 							</div>
 							<a className="button button-purple-blue" href="" title="Buy Now">Buy now</a>
 						</div>
@@ -264,13 +264,13 @@ const UpgradePlanView = (props) => {
 						<div className="shrink columns">
 							<ul>
 								<li className="bg-blue active">
-									<button type="button">Ghostery</button>
+									<button type="button">{t('ghostery')}</button>
 								</li>
 								<li className="bg-gold">
-									<button type="button">Ghostery Plus</button>
+									<button type="button">{t('ghostery_plus')}</button>
 								</li>
 								<li className="bg-purple-blue">
-									<button type="button">Ghostery Premium</button>
+									<button type="button">{t('panel_detail_premium_title')}</button>
 								</li>
 							</ul>
 
@@ -278,9 +278,9 @@ const UpgradePlanView = (props) => {
 								<thead>
 									<tr>
 										<th className="hide" aria-label="hide" />
-										<th className="bg-blue default">Ghostery</th>
-										<th className="bg-gold">Ghostery Plus</th>
-										<th className="bg-purple-blue">Ghostery Premium</th>
+										<th className="bg-blue default">{t('ghostery')}</th>
+										<th className="bg-gold">{t('ghostery_plus')}</th>
+										<th className="bg-purple-blue">{t('panel_detail_premium_title')}</th>
 									</tr>
 								</thead>
 								<tbody>

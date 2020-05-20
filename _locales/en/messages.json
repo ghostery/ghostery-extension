@@ -1300,6 +1300,42 @@
 	"hub_home_feature_supporter_text": {
 		"message": "Upgrade to Ghostery Plus and unlock special features."
 	},
+	"hub_upgrade_choose_plan": {
+		"message": "Upgrade your Ghostery protection plan"
+	},
+	"hub_upgrade_yearly": {
+		"message": "Yearly"
+	},
+	"hub_upgrade_monthly": {
+		"message": "Monthly"
+	},
+	"hub_upgrade_plan_free": {
+		"message": "Free"
+	},
+	"hub_upgrade_already_protected": {
+		"message": "Already Protected"
+	},
+	"hub_upgrade_basic_protection": {
+		"message": "Basic Protection"
+	},
+	"hub_upgrade_basic_browser_protection": {
+		"message": "Basic Browser Protection"
+	},
+	"hub_upgrade_advanced_browser_protection": {
+		"message": "Advanced Browser Protection"
+	},
+	"hub_upgrade_maximum_browser_protection": {
+		"message": "Maximum Browser Protection"
+	},
+	"hub_upgrade_vpn": {
+		"message": "Maximum Browser Protection"
+	},
+	"hub_upgrade_buy_now": {
+		"message": "Buy Now"
+	},
+	"hub_upgrade_additional_protection": {
+		"message": "Additional Protection"
+	},
 	"hub_setup_page_title": {
 		"message": "Ghostery Hub - Setup"
 	},
@@ -2206,6 +2242,9 @@
 	},
 	"ghostery_basic": {
 		"message": "Basic"
+	},
+	"ghostery": {
+		"message": "Ghostery"
 	},
 	"ghostery_plus": {
 		"message": "Ghostery Plus"
