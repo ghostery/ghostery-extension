@@ -26,7 +26,7 @@ import { ToggleCheckbox } from '../../../shared-components';
 const UpgradePlanView = (props) => {
 	const test = '';
 	return (
-		<section className="pricing-page page-template-page-content-modules ">
+		<section className="pricing-page page-template-page-pricing ">
 			<div className="grid-container show-for-large">
 				<div className="row align-center">
 					<div className="small-12 text-center columns">
