@@ -54,7 +54,7 @@ class Subscription extends React.Component {
 		const sd = this.props.subscriptionData;
 		if (sd) {
 			const {
-				planAmount, planInterval, planCurrency, currentPeriodEnd, cancelAtPeriodEnd, status
+				productName, planAmount, planInterval, planCurrency, currentPeriodEnd, cancelAtPeriodEnd, status
 			} = sd;
 			const plan_ends = cancelAtPeriodEnd ? moment.duration(moment.unix(currentPeriodEnd).diff(moment(new Date()))).days() : '';
 			let planAmountAdjusted = planAmount;
@@ -66,6 +66,7 @@ class Subscription extends React.Component {
 				currency: planCurrency
 			});
 			return {
+				productName,
 				plan_amount: amountWithCurrency,
 				plan_interval: planInterval,
 				active: (status === 'active'),
