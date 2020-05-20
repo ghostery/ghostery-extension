@@ -1237,6 +1237,9 @@
 	"hub_side_navigation_home": {
 		"message": "Home"
 	},
+	"hub_side_navigation_upgrade_plan": {
+		"message": "Upgrade Plan"
+	},
 	"hub_side_navigation_tutorial": {
 		"message": "Take a Tutorial"
 	},

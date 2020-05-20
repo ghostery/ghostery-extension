@@ -30,6 +30,7 @@ import ProductsView from './Views/ProductsView';
 import CreateAccountView from './Views/CreateAccountView';
 import ForgotPasswordView from '../shared-components/ForgotPassword/ForgotPasswordContainer';
 import LogInView from './Views/LogInView';
+import UpgradePlanView from './Views/UpgradePlanView/UpgradePlanView';
 
 const store = createStore();
 
@@ -40,6 +41,7 @@ const store = createStore();
 const Hub = () => (
 	<AppView>
 		<Route exact path="/" component={HomeView} />
+		<Route exact path="/upgrade" component={UpgradePlanView} />
 		<Route path="/setup" component={SetupView} />
 		<Route path="/tutorial" component={TutorialView} />
 		<Route exact path="/plus" component={PlusView} />

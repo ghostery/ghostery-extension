@@ -138,7 +138,7 @@ class HomeViewContainer extends Component {
 
 		return (
 			<div className="full-height">
-				<PromoModal
+				{/* <PromoModal
 					type={PREMIUM}
 					show={showPromoModal}
 					isPlus={isPlus}
@@ -146,7 +146,7 @@ class HomeViewContainer extends Component {
 					handleKeepBasicClick={this._handleKeepBasicClick}
 					handleGetPlusClick={this._handleGetPlusClick}
 					handleTryMidnightClick={this._handleTryMidnightClick}
-				/>
+				/> */}
 				<HomeView {...childProps} />
 			</div>
 		);

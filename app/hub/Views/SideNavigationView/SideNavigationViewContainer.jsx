@@ -50,6 +50,7 @@ class SideNavigationViewContainer extends Component {
 
 		const menuItems = [
 			{ href: '/', icon: 'home', text: t('hub_side_navigation_home') },
+			{ href: '/upgrade', icon: 'home', text: t('hub_side_navigation_upgrade_plan') },
 			{ href: '/setup', icon: 'setup', text: t('customize_setup') },
 			{ href: '/tutorial', icon: 'tutorial', text: t('hub_side_navigation_tutorial') },
 			{ href: '/plus', icon: 'plus', text: t('get_ghostery_plus') },
