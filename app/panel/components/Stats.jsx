@@ -287,7 +287,8 @@ class Stats extends React.Component {
 	 * Helper function to handle clicking on Sign in link on modal
 	 */
 	signIn = () => {
-		this.props.history.push('/login');
+		const { history } = this.props;
+		history.push('/login');
 	}
 
 	_resetState = () => {
@@ -295,6 +296,7 @@ class Stats extends React.Component {
 	}
 
 	_reset = (demo) => {
+		const { user } = this.props;
 		const demoData = [
 			{ date: '2018-12-28', amount: 300, index: 0 },
 			{ date: '2018-12-29', amount: 450, index: 1 },
@@ -333,7 +335,7 @@ class Stats extends React.Component {
 			monthlyAverageData: clearData,
 			dailyAverageData: clearData,
 			showResetModal: false,
-			showPitchModal: (!this.props.user || !this.props.user.subscriptionsPlus),
+			showPitchModal: (!user || !user.subscriptionsPlus),
 		};
 		return clearOrDemoState;
 	}

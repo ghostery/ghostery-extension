@@ -18,19 +18,23 @@ import fromTrackersToChartData from '../utils/chart';
 
 export default class Overview extends React.Component {
 	get isTrusted() {
-		return this.context.siteProps.isTrusted;
+		const { siteProps } = this.context;
+		return siteProps.isTrusted;
 	}
 
 	get isRestricted() {
-		return this.context.siteProps.isRestricted;
+		const { siteProps } = this.context;
+		return siteProps.isRestricted;
 	}
 
 	get isPaused() {
-		return this.context.siteProps.isPaused;
+		const { siteProps } = this.context;
+		return siteProps.isPaused;
 	}
 
 	get categories() {
-		return this.props.categories || [];
+		const { categories } = this.props;
+		return categories || [];
 	}
 
 	get chartData() {
@@ -43,27 +47,32 @@ export default class Overview extends React.Component {
 	}
 
 	get hostName() {
-		return this.context.siteProps.hostName;
+		const { siteProps } = this.context;
+		return siteProps.hostName;
 	}
 
 	get nTrackersBlocked() {
-		return this.context.siteProps.nTrackersBlocked;
+		const { siteProps } = this.context;
+		return siteProps.nTrackersBlocked;
 	}
 
 	handleTrustButtonClick = () => {
-		this.context.callGlobalAction({
+		const { callGlobalAction } = this.context;
+		callGlobalAction({
 			actionName: 'handleTrustButtonClick',
 		});
 	}
 
 	handleRestrictButtonClick = () => {
-		this.context.callGlobalAction({
+		const { callGlobalAction } = this.context;
+		callGlobalAction({
 			actionName: 'handleRestrictButtonClick',
 		});
 	}
 
 	handlePauseButtonClick = () => {
-		this.context.callGlobalAction({
+		const { callGlobalAction } = this.context;
+		callGlobalAction({
 			actionName: 'handlePauseButtonClick',
 		});
 	}

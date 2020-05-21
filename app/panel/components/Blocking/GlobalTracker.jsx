@@ -46,17 +46,18 @@ class GlobalTracker extends React.Component {
 	 * description from https://apps.ghostery.com and sets it in state.
 	 */
 	toggleDescription() {
-		const { tracker } = this.props;
+		const { tracker, language } = this.props;
+		const { description } = this.state;
 		this.setState(prevState => ({ showMoreInfo: !prevState.showMoreInfo }));
 
-		if (this.state.description) {
+		if (description) {
 			return;
 		}
 
 		this.setState({ description: t('tracker_description_getting') });
 
 		sendMessageInPromise('getTrackerDescription', {
-			url: `${globals.APPS_BASE_URL}/${this.props.language}/apps/${
+			url: `${globals.APPS_BASE_URL}/${language}/apps/${
 				encodeURIComponent(tracker.name.replace(/\s+/g, '_').toLowerCase())}?format=json`,
 		}).then((data) => {
 			if (data) {
@@ -79,13 +80,16 @@ class GlobalTracker extends React.Component {
 	 * @todo  Toast shows always. It does not reflect actual success.
 	 */
 	clickTrackerStatus() {
-		const isBlocked = !this.props.tracker.blocked;
-		this.props.actions.updateTrackerBlocked({
-			app_id: this.props.tracker.id,
-			cat_id: this.props.cat_id,
+		const {
+			actions, tracker, cat_id, showToast
+		} = this.props;
+		const isBlocked = !tracker.blocked;
+		actions.updateTrackerBlocked({
+			app_id: tracker.id,
+			cat_id,
 			blocked: isBlocked,
 		});
-		this.props.showToast({
+		showToast({
 			text: t('global_settings_saved_tracker')
 		});
 	}
@@ -95,7 +99,8 @@ class GlobalTracker extends React.Component {
 	* @return {ReactComponent}   ReactComponent instance
 	*/
 	render() {
-		const { tracker } = this.props;
+		const { tracker, language } = this.props;
+		const { showMoreInfo, description, showTrackerLearnMore } = this.state;
 		return (
 			<div className="global-blocking-trk">
 				<div className="row align-middle trk-header">
@@ -107,14 +112,14 @@ class GlobalTracker extends React.Component {
 					</div>
 				</div>
 				{
-					this.state.showMoreInfo && (
+					showMoreInfo && (
 						<div className="row align-middle">
 							<div className="columns global-trk-desc">
-								{ this.state.description }
+								{ description }
 								{
-									this.state.showTrackerLearnMore && (
-										<div className={(!this.state.showTrackerLearnMore ? 'hide' : '')}>
-											<a target="_blank" rel="noopener noreferrer" title={tracker.name} href={`${globals.APPS_BASE_URL}/${this.props.language}/apps/${encodeURIComponent(tracker.name.replace(/\s+/g, '_').toLowerCase())}`}>
+									showTrackerLearnMore && (
+										<div className={(!showTrackerLearnMore ? 'hide' : '')}>
+											<a target="_blank" rel="noopener noreferrer" title={tracker.name} href={`${globals.APPS_BASE_URL}/${language}/apps/${encodeURIComponent(tracker.name.replace(/\s+/g, '_').toLowerCase())}`}>
 												{ t('tracker_description_learn_more') }
 											</a>
 										</div>

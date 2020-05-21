@@ -45,7 +45,8 @@ class CreateAccountViewContainer extends Component {
 			validateInput: false,
 		};
 
-		this.props.actions.setToast({
+		const { actions } = this.props;
+		actions.setToast({
 			toastMessage: '',
 			toastClass: '',
 		});
@@ -59,7 +60,8 @@ class CreateAccountViewContainer extends Component {
 		const { name, value } = event.target;
 		this.setState({ [name]: value });
 
-		if (!this.state.validateInput) {
+		const { validateInput } = this.state;
+		if (!validateInput) {
 			return;
 		}
 
@@ -132,20 +134,21 @@ class CreateAccountViewContainer extends Component {
 		if (!emailIsValid || !confirmIsValid || !legalConsentChecked || !passwordIsValid) {
 			return;
 		}
-		this.props.actions.setToast({
+		const { actions, history } = this.props;
+		actions.setToast({
 			toastMessage: '',
 			toastClass: ''
 		});
-		this.props.actions.register(email, confirmEmail, firstName, lastName, password).then((success) => {
+		actions.register(email, confirmEmail, firstName, lastName, password).then((success) => {
 			if (success) {
-				this.props.actions.getUser();
-				this.props.actions.setToast({
+				actions.getUser();
+				actions.setToast({
 					toastMessage: t('hub_create_account_toast_success'),
 					toastClass: 'success'
 				});
-				this.props.history.push('/');
+				history.push('/');
 			} else {
-				this.props.actions.setToast({
+				actions.setToast({
 					toastMessage: t('hub_create_account_toast_error'),
 					toastClass: 'alert'
 				});

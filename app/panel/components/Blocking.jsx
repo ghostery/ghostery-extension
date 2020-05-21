@@ -75,17 +75,20 @@ class Blocking extends React.Component {
 	 * Lifecycle event
 	 */
 	componentDidUpdate(prevProps) {
+		const {
+			actions, filter, categories, smartBlock, smartBlockActive
+		} = this.props;
 		// methods here will run after categories is assigned
-		if (prevProps.filter.type !== this.props.filter.type
-			|| prevProps.filter.name !== this.props.filter.name) {
+		if (prevProps.filter.type !== filter.type
+			|| prevProps.filter.name !== filter.name) {
 			this.filterTrackers();
 		}
 
 		// Update the summary blocking count whenever the blocking component updated.
 		// This will also show pending blocking changes if the panel is re-opened
 		// before a page refresh
-		const smartBlock = (this.props.smartBlockActive && this.props.smartBlock) || { blocked: {}, unblocked: {} };
-		updateSummaryBlockingCount(this.props.categories, smartBlock, this.props.actions.updateTrackerCounts);
+		const computedSmartBlock = (smartBlockActive && smartBlock) || { blocked: {}, unblocked: {} };
+		updateSummaryBlockingCount(categories, computedSmartBlock, actions.updateTrackerCounts);
 	}
 
 	/**
@@ -101,8 +104,9 @@ class Blocking extends React.Component {
 	* @param  {string} filterName
 	*/
 	setShow(filterName) {
-		const updated_categories = JSON.parse(JSON.stringify(this.props.categories)); // deep clone
-		const updatedUnknownCategory = JSON.parse(JSON.stringify(this.props.unknownCategory)); // deep clone
+		const { actions, categories, unknownCategory } = this.props;
+		const updated_categories = JSON.parse(JSON.stringify(categories)); // deep clone
+		const updatedUnknownCategory = JSON.parse(JSON.stringify(unknownCategory)); // deep clone
 
 		updated_categories.forEach((categoryEl) => {
 			let count = 0;
@@ -122,8 +126,8 @@ class Blocking extends React.Component {
 		});
 
 		updatedUnknownCategory.hide = !(filterName === 'all' || filterName === 'unknown');
-		this.props.actions.updateCategories(updated_categories);
-		this.props.actions.updateUnknownCategoryHide(updatedUnknownCategory);
+		actions.updateCategories(updated_categories);
+		actions.updateUnknownCategoryHide(updatedUnknownCategory);
 	}
 
 	/**
@@ -131,12 +135,13 @@ class Blocking extends React.Component {
 	* those that are blocked. Trigger action.
 	*/
 	setBlockedShow() {
-		const updated_categories = JSON.parse(JSON.stringify(this.props.categories)); // deep clone
+		const { actions, categories, smartBlockActive } = this.props;
+		const updated_categories = JSON.parse(JSON.stringify(categories)); // deep clone
 
 		updated_categories.forEach((categoryEl) => {
 			let count = 0;
 			categoryEl.trackers.forEach((trackerEl) => {
-				const isSbBlocked = this.props.smartBlockActive && trackerEl.warningSmartBlock;
+				const isSbBlocked = smartBlockActive && trackerEl.warningSmartBlock;
 				if ((trackerEl.blocked && !trackerEl.ss_allowed) || isSbBlocked || trackerEl.ss_blocked) {
 					trackerEl.shouldShow = true;
 					count++;
@@ -147,7 +152,7 @@ class Blocking extends React.Component {
 			categoryEl.num_shown = count;
 		});
 
-		this.props.actions.updateCategories(updated_categories);
+		actions.updateCategories(updated_categories);
 	}
 
 	/**
@@ -155,7 +160,8 @@ class Blocking extends React.Component {
 	* those that have warnings. Trigger action.
 	*/
 	setWarningShow() {
-		const updated_categories = JSON.parse(JSON.stringify(this.props.categories)); // deep clone
+		const { actions, categories } = this.props;
+		const updated_categories = JSON.parse(JSON.stringify(categories)); // deep clone
 
 		updated_categories.forEach((categoryEl) => {
 			let count = 0;
@@ -171,7 +177,7 @@ class Blocking extends React.Component {
 			categoryEl.num_shown = count;
 		});
 
-		this.props.actions.updateCategories(updated_categories);
+		actions.updateCategories(updated_categories);
 	}
 
 	/**
@@ -179,7 +185,8 @@ class Blocking extends React.Component {
 	* that have compatibility warnings. Trigger action.
 	*/
 	setWarningCompatibilityShow() {
-		const updated_categories = JSON.parse(JSON.stringify(this.props.categories)); // deep clone
+		const { actions, categories } = this.props;
+		const updated_categories = JSON.parse(JSON.stringify(categories)); // deep clone
 
 		updated_categories.forEach((categoryEl) => {
 			let count = 0;
@@ -195,7 +202,7 @@ class Blocking extends React.Component {
 			categoryEl.num_shown = count;
 		});
 
-		this.props.actions.updateCategories(updated_categories);
+		actions.updateCategories(updated_categories);
 	}
 
 	/**
@@ -203,7 +210,8 @@ class Blocking extends React.Component {
 	 * have slow/insecure warnings. Trigger action.
 	 */
 	setWarningSlowInsecureShow() {
-		const updated_categories = JSON.parse(JSON.stringify(this.props.categories)); // deep clone
+		const { actions, categories } = this.props;
+		const updated_categories = JSON.parse(JSON.stringify(categories)); // deep clone
 
 		updated_categories.forEach((categoryEl) => {
 			let count = 0;
@@ -219,16 +227,17 @@ class Blocking extends React.Component {
 			categoryEl.num_shown = count;
 		});
 
-		this.props.actions.updateCategories(updated_categories);
+		actions.updateCategories(updated_categories);
 	}
 
 	/**
 	 * Handles messages from dynamic UI port to background
 	 */
 	handlePortMessage(msg) {
+		const { actions } = this.props;
 		if (msg.to !== 'blocking' || !msg.body) { return; }
 
-		this.props.actions.updateBlockingData(msg.body);
+		actions.updateBlockingData(msg.body);
 	}
 
 	/**
@@ -250,11 +259,12 @@ class Blocking extends React.Component {
 	* @param  {Object} props
 	*/
 	updateBlockingClasses(props) {
+		const { blockingClasses } = this.state;
 		const classes = Blocking.buildBlockingClasses(props);
-		const blockingClasses = classes.join(' ');
+		const joinedBlockingClasses = classes.join(' ');
 
-		if (this.state.blockingClasses !== blockingClasses) {
-			this.setState({ blockingClasses });
+		if (blockingClasses !== joinedBlockingClasses) {
+			this.setState({ blockingClasses: joinedBlockingClasses });
 		}
 	}
 
@@ -277,10 +287,11 @@ class Blocking extends React.Component {
 	* @param {Object}	props	nextProps
 	*/
 	updateSiteNotScanned(props) {
-		const disableBlocking = Blocking.computeSiteNotScanned(props);
+		const { disableBlocking } = this.state;
+		const computeDisableBlocking = Blocking.computeSiteNotScanned(props);
 
-		if (this.state.disableBlocking !== disableBlocking) {
-			this.setState({ disableBlocking });
+		if (disableBlocking !== computeDisableBlocking) {
+			this.setState({ disableBlocking: computeDisableBlocking });
 		}
 	}
 

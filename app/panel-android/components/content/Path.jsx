@@ -29,7 +29,8 @@ export default class Path extends React.Component {
 		// Check and call props.handler() if the animationEnd event doesn't get fired somehow
 		this.timer = setInterval(() => {
 			clearInterval(this.timer); // Run this only once
-			this.props.handler();
+			const { handler } = this.props;
+			handler();
 		}, INTERVAL);
 	}
 
@@ -39,7 +40,8 @@ export default class Path extends React.Component {
 
 	onAnimationEndHandler = () => {
 		clearInterval(this.timer);
-		this.props.handler();
+		const { handler } = this.props;
+		handler();
 	}
 
 	static polarToCartesian(centerX, centerY, radius, angleInDegrees) {

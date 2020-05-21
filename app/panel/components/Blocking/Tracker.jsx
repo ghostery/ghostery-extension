@@ -65,7 +65,8 @@ class Tracker extends React.Component {
 	 * Lifecycle event.
 	 */
 	componentDidMount() {
-		this.updateTrackerClasses(this.props.tracker);
+		const { tracker } = this.props;
+		this.updateTrackerClasses(tracker);
 	}
 
 	/**
@@ -95,17 +96,18 @@ class Tracker extends React.Component {
 	 * description from https://apps.ghostery.com and sets it in state.
 	 */
 	toggleDescription() {
-		const { tracker } = this.props;
+		const { tracker, language } = this.props;
 		this.setState(prevState => ({ showMoreInfo: !prevState.showMoreInfo }));
 
-		if (this.state.description) {
+		const { description } = this.state;
+		if (description) {
 			return;
 		}
 
 		this.setState({ description: t('tracker_description_getting') });
 
 		sendMessageInPromise('getTrackerDescription', {
-			url: `${globals.APPS_BASE_URL}/${this.props.language}/apps/${
+			url: `${globals.APPS_BASE_URL}/${language}/apps/${
 				encodeURIComponent(tracker.name.replace(/\s+/g, '_').toLowerCase())}?format=json`,
 		}).then((data) => {
 			if (data) {
@@ -181,22 +183,31 @@ class Tracker extends React.Component {
 	 * user that the page should be reloaded.
 	 */
 	clickTrackerStatus() {
-		const blocked = !this.props.tracker.blocked;
+		const {
+			actions,
+			tracker,
+			paused_blocking,
+			sitePolicy,
+			smartBlockActive,
+			smartBlock,
+			cat_id,
+		} = this.props;
+		const blocked = !tracker.blocked;
 
-		if (this.props.paused_blocking || this.props.sitePolicy) {
+		if (paused_blocking || sitePolicy) {
 			return;
 		}
 
-		this.props.actions.updateTrackerBlocked({
-			smartBlockActive: this.props.smartBlockActive,
-			smartBlock: this.props.smartBlock,
-			app_id: this.props.tracker.id,
-			cat_id: this.props.cat_id,
+		actions.updateTrackerBlocked({
+			smartBlockActive,
+			smartBlock,
+			app_id: tracker.id,
+			cat_id,
 			blocked,
 		});
 
-		this.props.actions.showNotification({
-			updated: `${this.props.tracker.id}_blocked`,
+		actions.showNotification({
+			updated: `${tracker.id}_blocked`,
 			reload: true,
 		});
 	}
@@ -207,16 +218,17 @@ class Tracker extends React.Component {
 	 * that the page should be reloaded.
 	 */
 	clickTrackerTrust() {
-		const ss_allowed = !this.props.tracker.ss_allowed;
-		this.props.actions.updateTrackerTrustRestrict({
-			app_id: this.props.tracker.id,
-			cat_id: this.props.cat_id,
+		const { actions, tracker, cat_id } = this.props;
+		const ss_allowed = !tracker.ss_allowed;
+		actions.updateTrackerTrustRestrict({
+			app_id: tracker.id,
+			cat_id,
 			trust: ss_allowed,
 			restrict: false,
 		});
 
-		this.props.actions.showNotification({
-			updated: `${this.props.tracker.id}_ss_allowed`,
+		actions.showNotification({
+			updated: `${tracker.id}_ss_allowed`,
 			reload: true,
 		});
 	}
@@ -227,16 +239,17 @@ class Tracker extends React.Component {
 	 * that the page should be reloaded.
 	 */
 	clickTrackerRestrict() {
-		const ss_blocked = !this.props.tracker.ss_blocked;
-		this.props.actions.updateTrackerTrustRestrict({
-			app_id: this.props.tracker.id,
-			cat_id: this.props.cat_id,
+		const { actions, tracker, cat_id } = this.props;
+		const ss_blocked = !tracker.ss_blocked;
+		actions.updateTrackerTrustRestrict({
+			app_id: tracker.id,
+			cat_id,
 			trust: false,
 			restrict: ss_blocked,
 		});
 
-		this.props.actions.showNotification({
-			updated: `${this.props.tracker.id}_ss_blocked`,
+		actions.showNotification({
+			updated: `${tracker.id}_ss_blocked`,
 			reload: true,
 		});
 	}
@@ -247,10 +260,10 @@ class Tracker extends React.Component {
 	 * that the page should be reloaded.
 	 */
 	handleCliqzTrackerWhitelist() {
-		const { tracker } = this.props;
+		const { actions, tracker } = this.props;
 
-		this.props.actions.updateCliqzModuleWhitelist(tracker);
-		this.props.actions.showNotification({
+		actions.updateCliqzModuleWhitelist(tracker);
+		actions.showNotification({
 			updated: `${tracker.name}-whitelisting-status-changed`,
 			reload: true,
 		});
@@ -329,7 +342,16 @@ class Tracker extends React.Component {
 	* @return {ReactComponent}   ReactComponent instance
 	*/
 	render() {
-		const { tracker, isUnknown } = this.props;
+		const {
+			tracker, isUnknown, language, show_tracker_urls
+		} = this.props;
+		const {
+			trackerClasses,
+			description,
+			warningImageTitle,
+			showMoreInfo,
+			showTrackerLearnMore,
+		} = this.state;
 
 		let sources;
 		if (tracker.sources) {
@@ -340,7 +362,7 @@ class Tracker extends React.Component {
 					className="trk-src-link"
 					title={source.src}
 					key={index}
-					href={`${globals.GCACHE_BASE_URL}/${encodeURIComponent(this.props.language)}/gcache/?n=${encodeURIComponent(tracker.name)}&s=${encodeURIComponent(source.src)}&v=2&t=${source.type}`}
+					href={`${globals.GCACHE_BASE_URL}/${encodeURIComponent(language)}/gcache/?n=${encodeURIComponent(tracker.name)}&s=${encodeURIComponent(source.src)}&v=2&t=${source.type}`}
 				>
 					{ source.src }
 				</a>
@@ -356,10 +378,10 @@ class Tracker extends React.Component {
 		});
 
 		return (
-			<div className={`${this.state.trackerClasses} blocking-trk`}>
+			<div className={`${trackerClasses} blocking-trk`}>
 				<div className="row align-middle trk-header">
 					<div className="columns shrink">
-						<div className={`warning-image right${this.state.warningImageTitle ? ' t-tooltip-up-right' : ''}`} data-g-tooltip={this.state.warningImageTitle} />
+						<div className={`warning-image right${warningImageTitle ? ' t-tooltip-up-right' : ''}`} data-g-tooltip={warningImageTitle} />
 					</div>
 					<div className="columns collapse-left">
 						<div
@@ -372,8 +394,8 @@ class Tracker extends React.Component {
 					</div>
 					<div className="columns shrink align-self-justify collapse-right">
 						{!isUnknown && renderKnownTrackerButtons(
-							this.props.tracker.ss_allowed,
-							this.props.tracker.ss_blocked,
+							tracker.ss_allowed,
+							tracker.ss_blocked,
 							this.clickTrackerTrust,
 							this.clickTrackerRestrict,
 							this.clickTrackerStatus,
@@ -387,20 +409,20 @@ class Tracker extends React.Component {
 						)}
 					</div>
 				</div>
-				{this.state.showMoreInfo && (
-					<div className={`${!this.state.showMoreInfo ? 'hide' : ''} row trk-moreinfo`}>
+				{showMoreInfo && (
+					<div className={`${!showMoreInfo ? 'hide' : ''} row trk-moreinfo`}>
 						<div className="columns">
 							{!isUnknown && (
 								<div className="trk-description">
-									{this.state.description}
-									<div className={(!this.state.showTrackerLearnMore ? 'hide' : '')}>
-										<a target="_blank" rel="noopener noreferrer" title={tracker.name} href={`${globals.APPS_BASE_URL}/${this.props.language}/apps/${encodeURIComponent(tracker.name.replace(/\s+/g, '_').toLowerCase())}`}>
+									{description}
+									<div className={(!showTrackerLearnMore ? 'hide' : '')}>
+										<a target="_blank" rel="noopener noreferrer" title={tracker.name} href={`${globals.APPS_BASE_URL}/${language}/apps/${encodeURIComponent(tracker.name.replace(/\s+/g, '_').toLowerCase())}`}>
 											{t('tracker_description_learn_more')}
 										</a>
 									</div>
 								</div>
 							)}
-							<div className={`${!this.props.show_tracker_urls ? 'hide' : ''}`}>
+							<div className={`${!show_tracker_urls ? 'hide' : ''}`}>
 								<div className="trk-srcs-title">{t('panel_tracker_found_sources_title')}</div>
 								<div className="trk-srcs">{sources}</div>
 							</div>

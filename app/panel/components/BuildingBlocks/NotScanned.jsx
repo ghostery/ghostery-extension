@@ -19,9 +19,9 @@ import ClassNames from 'classnames';
  * when a site is not scannable or has not yet been scanned.
  * @memberof PanelBuildingBlocks
  */
-const NotScanned = (props) => {
+const NotScanned = ({ isSmall }) => {
 	const notScannedClassNames = ClassNames('sub-component', 'not-scanned', {
-		small: props.isSmall,
+		small: isSmall,
 	});
 
 	return ( // eslint-disable-line arrow-parens

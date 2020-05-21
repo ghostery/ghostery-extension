@@ -56,8 +56,9 @@ class HomeViewContainer extends Component {
 	 * Function to handle toggling Metrics Opt-In
 	 */
 	_handleToggleMetrics = () => {
-		const enable_metrics = !this.props.home.enable_metrics;
-		this.props.actions.setMetrics({ enable_metrics });
+		const { actions, home } = this.props;
+		const enable_metrics = !home.enable_metrics;
+		actions.setMetrics({ enable_metrics });
 	}
 
 	/**
@@ -68,7 +69,8 @@ class HomeViewContainer extends Component {
 	_handlePremiumPromoModalClick = (type = 'basic') => {
 		// GH-1777
 		// we want to show the promo modal exactly once per Hub visit
-		this.props.actions.markPremiumPromoModalShown();
+		const { actions } = this.props;
+		actions.markPremiumPromoModalShown();
 
 		sendMessage('SET_PREMIUM_PROMO_MODAL_SEEN', {});
 

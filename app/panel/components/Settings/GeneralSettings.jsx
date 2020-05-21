@@ -50,7 +50,8 @@ class GeneralSettings extends React.Component {
 	 * Lifecycle event.
 	 */
 	componentDidMount() {
-		this.updateDbLastUpdated(this.props.settingsData);
+		const { settingsData } = this.props;
+		this.updateDbLastUpdated(settingsData);
 	}
 
 	/**
@@ -69,7 +70,8 @@ class GeneralSettings extends React.Component {
 	 * Trigger action to check for new DB updates.
 	 */
 	updateDatabase() {
-		this.props.actions.updateDatabase();
+		const { actions } = this.props;
+		actions.updateDatabase();
 	}
 
 	/**
@@ -88,10 +90,11 @@ class GeneralSettings extends React.Component {
 	 * @param  {Object} settingsData
 	 */
 	updateDbLastUpdated(settingsData) {
-		const dbLastUpdated = GeneralSettings.getDbLastUpdated(settingsData);
+		const { dbLastUpdated } = this.state;
+		const calcDbLastUpdated = GeneralSettings.getDbLastUpdated(settingsData);
 
-		if (dbLastUpdated && dbLastUpdated !== this.state.dbLastUpdated) {
-			this.setState({ dbLastUpdated });
+		if (calcDbLastUpdated && calcDbLastUpdated !== dbLastUpdated) {
+			this.setState({ dbLastUpdated: calcDbLastUpdated });
 		}
 	}
 
@@ -100,7 +103,7 @@ class GeneralSettings extends React.Component {
 	* @return {ReactComponent}   ReactComponent instance
 	*/
 	render() {
-		const { settingsData } = this.props;
+		const { settingsData, toggleCheckbox, dbLastUpdated } = this.props;
 		return (
 			<div className="s-tabs-panel">
 				<div className="row">
@@ -108,7 +111,7 @@ class GeneralSettings extends React.Component {
 						<h3>{ t('settings_trackers') }</h3>
 						<div className="s-option-group">
 							<div className="s-square-checkbox">
-								<input type="checkbox" id="settings-auto-update" name="enable_autoupdate" defaultChecked={settingsData.enable_autoupdate} onClick={this.props.toggleCheckbox} />
+								<input type="checkbox" id="settings-auto-update" name="enable_autoupdate" defaultChecked={settingsData.enable_autoupdate} onClick={toggleCheckbox} />
 								<label htmlFor="settings-auto-update">
 									{ t('settings_auto_update') }
 								</label>
@@ -117,7 +120,7 @@ class GeneralSettings extends React.Component {
 										{ t('settings_last_update') }
 										{' '}
 									</span>
-									<span id="last-updated-span-value">{ this.state.dbLastUpdated }</span>
+									<span id="last-updated-span-value">{ dbLastUpdated }</span>
 									<span id="update-now-span" className="s-blue-header" onClick={this.updateDatabase}>
 										{' '}
 										{ settingsData.dbUpdateText }
@@ -127,7 +130,7 @@ class GeneralSettings extends React.Component {
 						</div>
 						<div className="s-option-group">
 							<div className="s-square-checkbox">
-								<input type="checkbox" id="settings-show-patterns" name="show_tracker_urls" defaultChecked={settingsData.show_tracker_urls} onClick={this.props.toggleCheckbox} />
+								<input type="checkbox" id="settings-show-patterns" name="show_tracker_urls" defaultChecked={settingsData.show_tracker_urls} onClick={toggleCheckbox} />
 								<label htmlFor="settings-show-patterns">
 									<span>{ t('settings_show_patterns') }</span>
 								</label>
@@ -142,7 +145,7 @@ class GeneralSettings extends React.Component {
 						</div>
 						<div className="s-option-group">
 							<div className="s-square-checkbox">
-								<input type="checkbox" id="settings-enable-click2play" name="enable_click2play" defaultChecked={settingsData.enable_click2play} onClick={this.props.toggleCheckbox} />
+								<input type="checkbox" id="settings-enable-click2play" name="enable_click2play" defaultChecked={settingsData.enable_click2play} onClick={toggleCheckbox} />
 								<label htmlFor="settings-enable-click2play">
 									{ t('settings_required_trackers') }
 								</label>
@@ -150,14 +153,14 @@ class GeneralSettings extends React.Component {
 						</div>
 						<div className="s-option-group">
 							<div className="s-square-checkbox">
-								<input type="checkbox" id="settings-replace-social" name="enable_click2play_social" defaultChecked={settingsData.enable_click2play_social} onClick={this.props.toggleCheckbox} />
+								<input type="checkbox" id="settings-replace-social" name="enable_click2play_social" defaultChecked={settingsData.enable_click2play_social} onClick={toggleCheckbox} />
 								<label htmlFor="settings-replace-social">{ t('settings_replace_social') }</label>
 							</div>
 						</div>
 						<h3>{ t('settings_blocking') }</h3>
 						<div className="s-option-group">
 							<div className="s-square-checkbox">
-								<input type="checkbox" id="settings-individual-trackers" name="toggle_individual_trackers" defaultChecked={settingsData.toggle_individual_trackers} onClick={this.props.toggleCheckbox} />
+								<input type="checkbox" id="settings-individual-trackers" name="toggle_individual_trackers" defaultChecked={settingsData.toggle_individual_trackers} onClick={toggleCheckbox} />
 								<label htmlFor="settings-individual-trackers">
 									<span>{ t('settings_individual_trackers') }</span>
 								</label>
@@ -168,7 +171,7 @@ class GeneralSettings extends React.Component {
 						</div>
 						<div className="s-option-group">
 							<div className="s-square-checkbox">
-								<input type="checkbox" id="settings-allow-trackers" name="ignore_first_party" defaultChecked={settingsData.ignore_first_party} onClick={this.props.toggleCheckbox} />
+								<input type="checkbox" id="settings-allow-trackers" name="ignore_first_party" defaultChecked={settingsData.ignore_first_party} onClick={toggleCheckbox} />
 								<label htmlFor="settings-allow-trackers">
 									<span>{ t('settings_allow_trackers') }</span>
 								</label>
@@ -179,7 +182,7 @@ class GeneralSettings extends React.Component {
 						</div>
 						<div className="s-option-group">
 							<div className="s-square-checkbox">
-								<input type="checkbox" id="settings-block-trackers" name="block_by_default" defaultChecked={settingsData.block_by_default} onClick={this.props.toggleCheckbox} />
+								<input type="checkbox" id="settings-block-trackers" name="block_by_default" defaultChecked={settingsData.block_by_default} onClick={toggleCheckbox} />
 								<label htmlFor="settings-block-trackers">
 									{ t('settings_block_trackers') }
 								</label>

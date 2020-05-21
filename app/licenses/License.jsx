@@ -42,6 +42,7 @@ class License extends React.Component {
 	 */
 	render() {
 		const { license } = this.props;
+		const { expanded } = this.state;
 		return (
 			<div className="license">
 				<div>{`${t('license_module')}: ${license.name}`}</div>
@@ -56,7 +57,7 @@ class License extends React.Component {
 				<div style={{ cursor: 'pointer', fontWeight: '700' }} onClick={this.toggleLicenseText}>
 					{t('license_text')}
 					{
-						this.state.expanded && (
+						expanded && (
 							<div className="license-text">
 								<Markdown source={license.licenseText || t('license_generic')} />
 							</div>

@@ -24,15 +24,20 @@ class Accordions extends React.Component {
 		};
 	}
 
-	getOpenStatus = index => index === this.state.openAccordionIndex;
+	getOpenStatus = (index) => {
+		const { openAccordionIndex } = this.state;
+		return index === openAccordionIndex;
+	}
 
 	getTrackersFromCategory = (categoryId) => {
-		const category = this.props.categories[this.props.categories.findIndex(cat => cat.id === categoryId)];
+		const { categories } = this.props;
+		const category = categories[categories.findIndex(cat => cat.id === categoryId)];
 		return category.trackers;
 	}
 
 	toggleAccordion = (index) => {
-		if (this.state.openAccordionIndex === index) {
+		const { openAccordionIndex } = this.state;
+		if (openAccordionIndex === index) {
 			this.setState({ openAccordionIndex: -1 });
 		} else {
 			this.setState({ openAccordionIndex: index });
@@ -40,10 +45,11 @@ class Accordions extends React.Component {
 	}
 
 	render() {
+		const { categories, type } = this.props;
 		return (
 			<div className="accordions">
 				{
-					this.props.categories.map((category, index) => (
+					categories.map((category, index) => (
 						<Accordion
 							key={category.id}
 							index={index}
@@ -55,7 +61,7 @@ class Accordions extends React.Component {
 							toggleAccordion={this.toggleAccordion}
 							open={this.getOpenStatus(index)}
 							id={category.id}
-							type={this.props.type}
+							type={type}
 						/>
 					))
 				}

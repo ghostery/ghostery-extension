@@ -32,7 +32,8 @@ class LogInViewContainer extends Component {
 			validateInput: false,
 		};
 
-		this.props.actions.setToast({
+		const { actions } = this.props;
+		actions.setToast({
 			toastMessage: '',
 			toastClass: '',
 		});
@@ -46,7 +47,8 @@ class LogInViewContainer extends Component {
 		const { name, value } = event.target;
 		this.setState({ [name]: value });
 
-		if (!this.state.validateInput) {
+		const { validateInput } = this.state;
+		if (!validateInput) {
 			return;
 		}
 
@@ -87,28 +89,29 @@ class LogInViewContainer extends Component {
 			return;
 		}
 
-		this.props.actions.setToast({
+		const { actions, history } = this.props;
+		actions.setToast({
 			toastMessage: '',
 			toastClass: ''
 		});
-		this.props.actions.login(email, password).then((success) => {
+		actions.login(email, password).then((success) => {
 			if (success) {
 				const { origin, pathname, hash } = window.location;
 				window.history.pushState({}, '', `${origin}${pathname}${hash}`);
 
-				this.props.actions.getUser();
-				this.props.actions.getUserSettings()
+				actions.getUser();
+				actions.getUserSettings()
 					.then((settings) => {
 						const { current_theme } = settings;
-						return this.props.actions.getTheme(current_theme);
+						return actions.getTheme(current_theme);
 					});
-				this.props.actions.setToast({
+				actions.setToast({
 					toastMessage: t('hub_login_toast_success'),
 					toastClass: 'success'
 				});
-				this.props.history.push('/');
+				history.push('/');
 			} else {
-				this.props.actions.setToast({
+				actions.setToast({
 					toastMessage: t('no_such_email_password_combo'),
 					toastClass: 'alert'
 				});

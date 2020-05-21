@@ -29,7 +29,8 @@ export default class FixedMenu extends React.Component {
 	}
 
 	get cliqzModuleData() {
-		return this.props.cliqzModuleData || {};
+		const { cliqzModuleData } = this.props;
+		return cliqzModuleData || {};
 	}
 
 	get antiTrackingData() {
@@ -41,7 +42,8 @@ export default class FixedMenu extends React.Component {
 	}
 
 	get smartBlockData() {
-		return this.props.panel.smartBlock || {};
+		const { panel } = this.props;
+		return panel.smartBlock || {};
 	}
 
 	getCount = (type) => {
@@ -79,7 +81,8 @@ export default class FixedMenu extends React.Component {
 	}
 
 	toggleMenu = () => {
-		const currentState = this.state.open;
+		const { open } = this.state;
+		const currentState = open;
 		this.setState({
 			open: !currentState,
 		});
@@ -94,15 +97,17 @@ export default class FixedMenu extends React.Component {
 	}
 
 	render() {
+		const { panel } = this.props;
+		const { open, currentMenuItemText } = this.state;
 		return (
-			<div className={`fixed-menu ${this.state.open ? 'opened' : ''}`}>
+			<div className={`fixed-menu ${open ? 'opened' : ''}`}>
 				<div onClick={this.toggleMenu} className="menuHeader">
-					<p>{this.state.currentMenuItemText}</p>
+					<p>{currentMenuItemText}</p>
 				</div>
 				<ul className="menuContent">
 					<li className="menuItem">
 						<MenuItem
-							active={this.props.panel.enable_anti_tracking}
+							active={panel.enable_anti_tracking}
 							updateHeadeText={this.updateHeadeText}
 							type="anti_tracking"
 							title="Enhanced Anti-Tracking"
@@ -113,7 +118,7 @@ export default class FixedMenu extends React.Component {
 					</li>
 					<li className="menuItem">
 						<MenuItem
-							active={this.props.panel.enable_ad_block}
+							active={panel.enable_ad_block}
 							updateHeadeText={this.updateHeadeText}
 							type="ad_block"
 							title="Enhanced Ad Blocking"
@@ -124,7 +129,7 @@ export default class FixedMenu extends React.Component {
 					</li>
 					<li className="menuItem">
 						<MenuItem
-							active={this.props.panel.enable_smart_block}
+							active={panel.enable_smart_block}
 							updateHeadeText={this.updateHeadeText}
 							type="smart_block"
 							title="Smart Blocking"

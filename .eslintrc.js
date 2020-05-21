@@ -80,7 +80,7 @@ module.exports = {
 		'import/prefer-default-export': [1],
 
 		// Plugin: React
-		'react/destructuring-assignment': [0], // ToDo
+		'react/destructuring-assignment': [1],
 		'react/static-property-placement': [0],
 		'react/jsx-curly-newline': [0],
 		'react/jsx-indent': [1, 'tab'],

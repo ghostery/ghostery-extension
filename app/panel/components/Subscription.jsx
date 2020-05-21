@@ -28,8 +28,10 @@ import PrioritySupport from './Subscription/PrioritySupport';
 class Subscription extends React.Component {
 	constructor(props) {
 		super(props);
+
+		const { current_theme } = this.props;
 		this.state = {
-			theme: this.props.current_theme
+			theme: current_theme
 		};
 	}
 
@@ -37,21 +39,24 @@ class Subscription extends React.Component {
 	 * Lifecycle event
 	 */
 	componentDidMount() {
-		this.props.history.push('/subscription/info');
-		this.props.actions.getUserSubscriptionData();
+		const { actions, history } = this.props;
+		history.push('/subscription/info');
+		actions.getUserSubscriptionData();
 	}
 
 	/**
 	 * Lifecycle event.
 	 */
 	componentDidUpdate = () => {
-		if (!this.props.loggedIn) {
-			this.props.history.push('/detail');
+		const { loggedIn, history } = this.props;
+		if (!loggedIn) {
+			history.push('/detail');
 		}
 	}
 
 	parseSubscriptionData = () => {
-		const sd = this.props.subscriptionData;
+		const { subscriptionData } = this.props;
+		const sd = subscriptionData;
 		if (sd) {
 			const {
 				planAmount, planInterval, planCurrency, currentPeriodEnd, cancelAtPeriodEnd, status
@@ -78,15 +83,21 @@ class Subscription extends React.Component {
 	}
 
 	changeTheme = (updated_theme) => {
+		const { actions } = this.props;
 		this.setState({ theme: updated_theme });
-		this.props.actions.getTheme(updated_theme).then(() => {
+		actions.getTheme(updated_theme).then(() => {
 			sendMessage('ping', 'theme_change');
 		});
 	}
 
 	SubscriptionInfoComponent = () => (<SubscriptionInfo subscriptionData={this.parseSubscriptionData()} />);
 
-	SubscriptionThemesComponent = () => (<SubscriptionThemes theme={this.state.theme} changeTheme={this.changeTheme} />);
+	SubscriptionThemesComponent = () => {
+		const { theme } = this.state;
+		return (
+			<SubscriptionThemes theme={theme} changeTheme={this.changeTheme} />
+		);
+	};
 
 	PrioritySupportComponent = () => (<PrioritySupport />);
 

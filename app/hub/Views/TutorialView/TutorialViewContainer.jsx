@@ -35,16 +35,17 @@ class TutorialViewContainer extends Component {
 			sendMountActions: false,
 		};
 
+		const { actions, history, tutorial } = this.props;
 		if (!props.preventRedirect) {
-			this.props.history.push('/tutorial/1');
+			history.push('/tutorial/1');
 		}
 
 		const title = t('hub_tutorial_page_title');
 		window.document.title = title;
 
-		this.props.actions.initTutorialProps(this.props.tutorial).then(() => {
+		actions.initTutorialProps(tutorial).then(() => {
 			this.setState({ sendMountActions: true });
-			this.props.actions.sendPing({ type: 'tutorial_start' });
+			actions.sendPing({ type: 'tutorial_start' });
 		});
 	}
 

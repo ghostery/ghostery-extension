@@ -57,12 +57,13 @@ class Rewards extends React.Component {
 	 * Lifecycle event
 	 */
 	componentDidMount() {
+		const { actions } = this.props;
 		this._dynamicUIPort = this.context;
 		this._dynamicUIPort.onMessage.addListener(this.handlePortMessage);
 		window.addEventListener('message', this.handleMyoffrzMessage);
 
 		this._dynamicUIPort.postMessage({ name: 'RewardsComponentDidMount' });
-		this.props.actions.sendSignal('hub_open');
+		actions.sendSignal('hub_open');
 	}
 
 	/**
@@ -70,7 +71,8 @@ class Rewards extends React.Component {
 	 */
 	componentWillUnmount() {
 		/* @TODO send message to background to remove port onDisconnect event */
-		this.props.actions.sendSignal('hub_closed');
+		const { actions } = this.props;
+		actions.sendSignal('hub_closed');
 		this._dynamicUIPort.postMessage({ name: 'RewardsComponentWillUnmount' });
 		this._dynamicUIPort.onMessage.removeListener(this.handlePortMessage);
 		window.removeEventListener('message', this.handleMyoffrzMessage);
@@ -83,7 +85,8 @@ class Rewards extends React.Component {
 		if (msg.to !== 'rewards' || !msg.body) { return; }
 
 		// msg.body can contain enable_offers prop
-		this.props.actions.updateRewardsData(msg.body);
+		const { actions } = this.props;
+		actions.updateRewardsData(msg.body);
 	}
 
 	iframeResize(data = {}) {
@@ -152,12 +155,12 @@ class Rewards extends React.Component {
 	 * Handles toggling rewards on/off
 	 */
 	toggleOffers() {
-		const { enable_offers } = this.props;
-		this.props.actions.showNotification({
+		const { actions, enable_offers } = this.props;
+		actions.showNotification({
 			text: !enable_offers ? t('rewards_on_toast_notification') : t('rewards_off_toast_notification'),
 			classes: 'purple',
 		});
-		this.props.actions.toggleOffersEnabled(!enable_offers);
+		actions.toggleOffersEnabled(!enable_offers);
 		const signal = {
 			actionId: enable_offers ? 'rewards_off' : 'rewards_on',
 			origin: 'rewards-hub',

@@ -33,11 +33,12 @@ class SideNavigationViewContainer extends Component {
 	* Function to handle clicking Log Out
 	*/
 	_handleLogoutClick = () => {
-		this.props.actions.setToast({
+		const { actions } = this.props;
+		actions.setToast({
 			toastMessage: '',
 			toastClass: '',
 		});
-		this.props.actions.logout();
+		actions.logout();
 	}
 
 	/**

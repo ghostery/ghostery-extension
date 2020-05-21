@@ -25,7 +25,8 @@ class AppViewContainer extends Component {
 	 * Handle clicking to exit the Toast Message.
 	 */
 	_exitToast = () => {
-		this.props.actions.setToast({
+		const { actions } = this.props;
+		actions.setToast({
 			toastMessage: '',
 			toastClass: '',
 		});

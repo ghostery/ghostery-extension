@@ -101,39 +101,47 @@ class DonutGraph extends React.Component {
 	 * Lifecycle event
 	 */
 	componentDidUpdate(prevProps) {
+		const prevCategories = prevProps.categories;
+		const prevAdBlock = prevProps.adBlock;
+		const prevAntiTracking = prevProps.antiTracking;
+		const prevRenderRedscale = prevProps.renderRedscale;
+		const prevRenderGreyscale = prevProps.renderGreyscale;
+		const prevGhosteryFeatureSelect = prevProps.ghosteryFeatureSelect;
+		const prevIsSmall = prevProps.isSmall;
+
 		const {
-			categories,
-			adBlock,
-			antiTracking,
+			isSmall,
 			renderRedscale,
 			renderGreyscale,
 			ghosteryFeatureSelect,
-			isSmall
-		} = prevProps;
+			categories,
+			antiTracking,
+			adBlock,
+		} = this.props;
 
-		if (isSmall !== this.props.isSmall ||
-			renderRedscale !== this.props.renderRedscale ||
-			renderGreyscale !== this.props.renderGreyscale ||
-			ghosteryFeatureSelect !== this.props.ghosteryFeatureSelect
+		if (prevIsSmall !== isSmall ||
+			prevRenderRedscale !== renderRedscale ||
+			prevRenderGreyscale !== renderGreyscale ||
+			prevGhosteryFeatureSelect !== ghosteryFeatureSelect
 		) {
-			this.prepareDonutContainer(this.props.isSmall);
+			this.prepareDonutContainer(isSmall);
 			this.nextPropsDonut(this.props);
 			return;
 		}
 
 		// componentWillReceiveProps gets called many times during page load as new trackers or unsafe data points are found
 		// so only compare tracker totals if we don't already have to redraw anyway as a result of the cheaper checks above
-		const prevTrackerTotal = categories.reduce((total, category) => total + category.num_total, 0);
-		const trackerTotal = this.props.categories.reduce((total, category) => total + category.num_total, 0);
+		const prevTrackerTotal = prevCategories.reduce((total, category) => total + category.num_total, 0);
+		const trackerTotal = categories.reduce((total, category) => total + category.num_total, 0);
 		if (prevTrackerTotal !== trackerTotal) {
 			this.nextPropsDonut(this.props);
 			return;
 		}
 
-		if (!antiTracking.unknownTrackerCount && !this.props.antiTracking.unknownTrackerCount
-			&& !adBlock.unknownTrackerCount && !this.props.adBlock.unknownTrackerCount) { return; }
-		const prevUnknownDataPoints = antiTracking.unknownTrackerCount + adBlock.unknownTrackerCount;
-		const unknownDataPoints = this.props.antiTracking.unknownTrackerCount + this.props.adBlock.unknownTrackerCount;
+		if (!prevAntiTracking.unknownTrackerCount && !antiTracking.unknownTrackerCount
+			&& !prevAdBlock.unknownTrackerCount && !adBlock.unknownTrackerCount) { return; }
+		const prevUnknownDataPoints = prevAntiTracking.unknownTrackerCount + prevAdBlock.unknownTrackerCount;
+		const unknownDataPoints = antiTracking.unknownTrackerCount + adBlock.unknownTrackerCount;
 		if (prevUnknownDataPoints !== unknownDataPoints) {
 			this.nextPropsDonut(this.props);
 		}
@@ -309,8 +317,9 @@ class DonutGraph extends React.Component {
 				}
 			})
 			.on('click', (d) => {
+				const { clickDonut } = this.props;
 				if (d.data.name && isSmall) {
-					this.props.clickDonut({ type: 'category', name: d.data.id });
+					clickDonut({ type: 'category', name: d.data.id });
 				}
 			})
 			.transition()
@@ -338,7 +347,8 @@ class DonutGraph extends React.Component {
 	 * Handle click event for graph text. Filters to show all categories.
 	 */
 	clickGraphText() {
-		this.props.clickDonut({ type: 'trackers', name: 'all' });
+		const { clickDonut } = this.props;
+		clickDonut({ type: 'trackers', name: 'all' });
 	}
 
 	/**

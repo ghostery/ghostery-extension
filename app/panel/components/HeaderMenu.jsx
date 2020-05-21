@@ -32,9 +32,10 @@ class HeaderMenu extends React.Component {
 	 * @param  {Object} e mouseclick event
 	 */
 	handleClickOutside = (e) => {
+		const { toggleDropdown } = this.props;
 		// eslint-disable-next-line react/no-find-dom-node
 		if (!ReactDOM.findDOMNode(this).contains(e.target)) {
-			this.props.toggleDropdown();
+			toggleDropdown();
 		}
 	}
 
@@ -42,8 +43,9 @@ class HeaderMenu extends React.Component {
 	 * Trigger action which open Settings panel from drop-down menu Settings item.
 	 */
 	clickSettings = () => {
-		this.props.toggleDropdown();
-		this.props.history.push('/settings/globalblocking');
+		const { history, toggleDropdown } = this.props;
+		toggleDropdown();
+		history.push('/settings/globalblocking');
 	}
 
 	/**
@@ -107,8 +109,9 @@ class HeaderMenu extends React.Component {
 	 * It should open Help view.
 	 */
 	clickHelp = () => {
-		this.props.toggleDropdown();
-		this.props.history.push('/help');
+		const { history, toggleDropdown } = this.props;
+		toggleDropdown();
+		history.push('/help');
 	}
 
 	/**
@@ -116,8 +119,9 @@ class HeaderMenu extends React.Component {
 	 * It should open About view.
 	 */
 	clickAbout = () => {
-		this.props.toggleDropdown();
-		this.props.history.push('/about');
+		const { history, toggleDropdown } = this.props;
+		toggleDropdown();
+		history.push('/about');
 	}
 
 	/**
@@ -136,25 +140,30 @@ class HeaderMenu extends React.Component {
 	 * Handle click on 'Sign in' menu item and navigate to Login panel.
 	 */
 	clickSignIn = () => {
-		this.props.toggleDropdown();
-		this.props.history.push('/login');
+		const { history, toggleDropdown } = this.props;
+		toggleDropdown();
+		history.push('/login');
 	}
 
 	/**
 	 * Handle click on 'Sign out' menu item (if user is in logged in state) and log out the user.
 	 */
 	clickSignOut = () => {
-		this.props.toggleDropdown();
-		this.props.actions.logout();
+		const { actions, toggleDropdown } = this.props;
+		toggleDropdown();
+		actions.logout();
 	}
 
 	/**
 	 * Handle click on Subscriber menu item.
 	 */
 	clickSubscriber = () => {
+		const {
+			history, toggleDropdown, subscriber, loggedIn
+		} = this.props;
 		sendMessage('ping', 'plus_panel_from_menu');
-		this.props.toggleDropdown();
-		this.props.history.push(this.props.subscriber ? '/subscription/info' : `/subscribe/${this.props.loggedIn}`);
+		toggleDropdown();
+		history.push(subscriber ? '/subscription/info' : `/subscribe/${loggedIn}`);
 	}
 
 	/**
@@ -162,11 +171,13 @@ class HeaderMenu extends React.Component {
 	 * @return {ReactComponent}   ReactComponent instance
 	 */
 	render() {
-		const { loggedIn, email } = this.props;
-		const optionClasses = ClassNames({ 'menu-option': this.props.subscriber, 'menu-option-non-subscriber': !this.props.subscriber });
-		const iconClasses = ClassNames('menu-icon-container', { subscriber: this.props.subscriber }, { 'non-subscriber': !this.props.subscriber });
+		const {
+			loggedIn, email, subscriber, kebab
+		} = this.props;
+		const optionClasses = ClassNames({ 'menu-option': subscriber, 'menu-option-non-subscriber': !subscriber });
+		const iconClasses = ClassNames('menu-icon-container', { subscriber }, { 'non-subscriber': !subscriber });
 		return (
-			<ClickOutside onClickOutside={this.handleClickOutside} excludeEl={this.props.kebab}>
+			<ClickOutside onClickOutside={this.handleClickOutside} excludeEl={kebab}>
 				<div className="dropdown-pane" id="header-dropdown">
 					<ul className="vertical menu no-bullet icons icon-left">
 						<li className="menu-option menu-settings" onClick={this.clickSettings}>

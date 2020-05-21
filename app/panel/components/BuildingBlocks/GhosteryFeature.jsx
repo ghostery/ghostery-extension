@@ -33,11 +33,12 @@ class GhosteryFeature extends React.Component {
 	 * Handles user click on the Ghostery Feature button
 	 */
 	handleClick() {
-		if (this.props.blockingPausedOrDisabled) {
+		const { blockingPausedOrDisabled, handleClick, type } = this.props;
+		if (blockingPausedOrDisabled) {
 			return;
 		}
 
-		this.props.handleClick(this.props.type);
+		handleClick(type);
 	}
 
 	static _getButtonText(sitePolicy, showText, type) {

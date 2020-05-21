@@ -55,10 +55,11 @@ class TrustAndRestrict extends React.Component {
 	 * @param  {Object} event input box 'change' event
 	 */
 	updateValue(event) {
-		if (this.state.currentWarning) {
+		const { currentWarning, menu } = this.state;
+		if (currentWarning) {
 			this.showWarning('');
 		}
-		if (this.state.menu.showTrustedSites) {
+		if (menu.showTrustedSites) {
 			this.setState({
 				trustedValue: event.currentTarget.value,
 			});
@@ -85,6 +86,8 @@ class TrustAndRestrict extends React.Component {
 	 * if it has been alreday added to the opposite list. Displays appropriate warnings.
 	 */
 	addSite() {
+		const { actions, site_whitelist, site_blacklist } = this.props;
+		const { menu, trustedValue, restrictedValue } = this.state;
 		let pageHost;
 		let list;
 		let listType;
@@ -93,20 +96,20 @@ class TrustAndRestrict extends React.Component {
 		let otherListWarning;
 		let otherListType;
 
-		if (this.state.menu.showTrustedSites) {
+		if (menu.showTrustedSites) {
 			listType = 'whitelist';
-			pageHost = this.state.trustedValue;
-			list = this.props.site_whitelist;
+			pageHost = trustedValue;
+			list = site_whitelist;
 			duplicateWarning = t('whitelist_error_duplicate_url');
-			otherList = this.props.site_blacklist;
+			otherList = site_blacklist;
 			otherListType = 'blacklist';
 			otherListWarning = t('whitelist_error_blacklist_url');
 		} else {
 			listType = 'blacklist';
-			pageHost = this.state.restrictedValue;
-			list = this.props.site_blacklist;
+			pageHost = restrictedValue;
+			list = site_blacklist;
 			duplicateWarning = t('blacklist_error_duplicate_url');
-			otherList = this.props.site_whitelist;
+			otherList = site_whitelist;
 			otherListType = 'whitelist';
 			otherListWarning = t('blacklist_error_whitelist_url');
 		}
@@ -130,9 +133,9 @@ class TrustAndRestrict extends React.Component {
 		// Remove from the other list
 		if (otherList.includes(pageHost)) {
 			this.showWarning(otherListWarning);
-			this.props.actions.updateSitePolicy({ type: otherListType, pageHost });
+			actions.updateSitePolicy({ type: otherListType, pageHost });
 		}
-		this.props.actions.updateSitePolicy({ type: listType, pageHost });
+		actions.updateSitePolicy({ type: listType, pageHost });
 		if (listType === 'whitelist') {
 			this.setState({ trustedValue: '' });
 		} else {
@@ -178,8 +181,12 @@ class TrustAndRestrict extends React.Component {
 	* @return {ReactComponent}   ReactComponent instance
 	*/
 	render() {
-		const trusted_sites = this.props.site_whitelist;
-		const restricted_sites = this.props.site_blacklist;
+		const { actions, site_whitelist, site_blacklist } = this.props;
+		const {
+			menu, trustedValue, currentWarning, restrictedValue
+		} = this.state;
+		const trusted_sites = site_whitelist;
+		const restricted_sites = site_blacklist;
 		return (
 			<div className="s-trust-restrict-panel s-tabs-panel">
 				<div className="row">
@@ -188,41 +195,41 @@ class TrustAndRestrict extends React.Component {
 					</div>
 				</div>
 				<div className="s-trust-restrict-menu">
-					<div className={`${this.state.menu.showTrustedSites ? 's-active-pane ' : ''}s-pane-title`} id="showTrustedSites" onClick={this.setActivePane}>
+					<div className={`${menu.showTrustedSites ? 's-active-pane ' : ''}s-pane-title`} id="showTrustedSites" onClick={this.setActivePane}>
 						<span>{t('settings_trusted_sites')}</span>
 					</div>
-					<div className={`${this.state.menu.showRestrictedSites ? 's-active-pane ' : ''}s-pane-title-next`} id="showRestrictedSites" onClick={this.setActivePane}>
+					<div className={`${menu.showRestrictedSites ? 's-active-pane ' : ''}s-pane-title-next`} id="showRestrictedSites" onClick={this.setActivePane}>
 						<span>{t('settings_restricted_sites')}</span>
 					</div>
 				</div>
-				<div className={`${this.state.menu.showTrustedSites ? '' : 's-hide '}s-sites-pane`}>
+				<div className={`${menu.showTrustedSites ? '' : 's-hide '}s-sites-pane`}>
 					<div className="row">
 						<div className="columns">
 							<div className="s-sites-input-box">
-								<input type="text" value={this.state.trustedValue} placeholder={t('settings_sites_placeholder')} onChange={this.updateValue} onKeyDown={this.handleSubmit} />
+								<input type="text" value={trustedValue} placeholder={t('settings_sites_placeholder')} onChange={this.updateValue} onKeyDown={this.handleSubmit} />
 								<div className="s-sites-input-icon" onClick={this.addSite} />
 							</div>
 							<div className="s-site-description"><span>{ t('settings_trusted_sites_description') }</span></div>
-							<div className={`${this.state.currentWarning ? '' : 's-invisible '}s-callout`}>{this.state.currentWarning}</div>
+							<div className={`${currentWarning ? '' : 's-invisible '}s-callout`}>{currentWarning}</div>
 						</div>
 					</div>
 					{ trusted_sites && trusted_sites.length > 0 &&
-						<Sites sites={trusted_sites} listType="whitelist" updateSitePolicy={this.props.actions.updateSitePolicy} />
+						<Sites sites={trusted_sites} listType="whitelist" updateSitePolicy={actions.updateSitePolicy} />
 					}
 				</div>
-				<div className={`${this.state.menu.showRestrictedSites ? '' : 's-hide '}s-sites-pane`}>
+				<div className={`${menu.showRestrictedSites ? '' : 's-hide '}s-sites-pane`}>
 					<div className="row">
 						<div className="columns">
 							<div className="s-sites-input-box">
-								<input type="text" value={this.state.restrictedValue} placeholder={t('settings_sites_placeholder')} onChange={this.updateValue} onKeyDown={this.handleSubmit} />
+								<input type="text" value={restrictedValue} placeholder={t('settings_sites_placeholder')} onChange={this.updateValue} onKeyDown={this.handleSubmit} />
 								<div className="s-sites-input-icon" onClick={this.addSite} />
 							</div>
 							<div className="s-site-description"><span>{ t('settings_restricted_sites_description') }</span></div>
-							<div className={`${this.state.currentWarning ? '' : 's-invisible '}s-callout`}>{this.state.currentWarning}</div>
+							<div className={`${currentWarning ? '' : 's-invisible '}s-callout`}>{currentWarning}</div>
 						</div>
 					</div>
 					{ restricted_sites && restricted_sites.length > 0 &&
-						<Sites sites={restricted_sites} listType="blacklist" updateSitePolicy={this.props.actions.updateSitePolicy} />
+						<Sites sites={restricted_sites} listType="blacklist" updateSitePolicy={actions.updateSitePolicy} />
 					}
 				</div>
 			</div>

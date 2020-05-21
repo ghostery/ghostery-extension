@@ -109,13 +109,14 @@ class Summary extends React.Component {
 	 * 													text: the text for the notification.
 	 */
 	clickCliqzFeature(options) {
+		const { actions } = this.props;
 		const { feature, status, text } = options;
-		this.props.actions.showNotification({
+		actions.showNotification({
 			updated: feature,
 			reload: true,
 			text,
 		});
-		this.props.actions.toggleCliqzFeature(feature, status);
+		actions.toggleCliqzFeature(feature, status);
 	}
 
 	/**
@@ -123,8 +124,9 @@ class Summary extends React.Component {
 	 * @param  {Object} data Properties of the click and resulting filter
 	 */
 	clickDonut(data) {
-		if (!this.props.is_expert) { this.toggleExpert(); }
-		this.props.actions.filterTrackers(data);
+		const { actions, is_expert } = this.props;
+		if (!is_expert) { this.toggleExpert(); }
+		actions.filterTrackers(data);
 	}
 
 	/**
@@ -132,19 +134,20 @@ class Summary extends React.Component {
 	 * @param  {number} time Optional number of minutes after which Ghostery should un-pause.
 	 */
 	clickPauseButton(time) {
-		const ghosteryPaused = this.props.paused_blocking;
+		const { actions, paused_blocking } = this.props;
+		const ghosteryPaused = paused_blocking;
 		const text = ghosteryPaused ? t('alert_ghostery_resumed') : t('alert_ghostery_paused');
 		sendMessage('ping', ghosteryPaused ? 'resume' : 'pause');
 		if (typeof time === 'number') {
 			sendMessage('ping', 'pause_snooze');
 		}
 
-		this.props.actions.updateGhosteryPaused({
+		actions.updateGhosteryPaused({
 			ghosteryPaused: (typeof time === 'number' ? true : !ghosteryPaused),
 			time: time * 60000,
 		});
-		this.props.actions.filterTrackers({ type: 'trackers', name: 'all' });
-		this.props.actions.showNotification({
+		actions.filterTrackers({ type: 'trackers', name: 'all' });
+		actions.showNotification({
 			updated: 'ghosteryPaused',
 			reload: true,
 			text,
@@ -156,7 +159,7 @@ class Summary extends React.Component {
 	 * @param  {String} button The button that was clicked: trust, restrict
 	 */
 	clickSitePolicy(button) {
-		const { sitePolicy } = this.props;
+		const { actions, sitePolicy } = this.props;
 		let type;
 		let text;
 		let classes;
@@ -175,13 +178,13 @@ class Summary extends React.Component {
 			return;
 		}
 
-		this.props.actions.updateSitePolicy({
+		actions.updateSitePolicy({
 			type,
 		});
 
-		this.props.actions.filterTrackers({ type: 'trackers', name: 'all' });
+		actions.filterTrackers({ type: 'trackers', name: 'all' });
 
-		this.props.actions.showNotification({
+		actions.showNotification({
 			updated: type,
 			reload: true,
 			classes,
@@ -193,14 +196,14 @@ class Summary extends React.Component {
 	 * Handles clicking on Trackers Blocked. Triggers a filter action
 	 */
 	clickTrackersBlocked() {
-		const { sitePolicy, is_expert } = this.props;
+		const { actions, sitePolicy, is_expert } = this.props;
 
 		if (!is_expert) { return; }
 
 		if (sitePolicy === BLACKLISTED) {
-			this.props.actions.filterTrackers({ type: 'trackers', name: 'all' });
+			actions.filterTrackers({ type: 'trackers', name: 'all' });
 		} else {
-			this.props.actions.filterTrackers({ type: 'trackers', name: 'blocked' });
+			actions.filterTrackers({ type: 'trackers', name: 'blocked' });
 		}
 	}
 
@@ -208,16 +211,18 @@ class Summary extends React.Component {
 	 * Handles clicking on the total trackers count on the condensed view
 	 */
 	clickTrackersCount() {
-		this.props.actions.filterTrackers({ type: 'trackers', name: 'all' });
+		const { actions } = this.props;
+		actions.filterTrackers({ type: 'trackers', name: 'all' });
 	}
 
 	/**
 	 * Handles clicking on the green upgrade banner or gold subscriber badge
 	 */
 	clickUpgradeBannerOrGoldPlusIcon() {
+		const { history, user } = this.props;
 		sendMessage('ping', 'plus_panel_from_badge');
 
-		this.props.history.push(this._isPlusSubscriber() ? '/subscription/info' : `/subscribe/${!!this.props.user}`);
+		history.push(this._isPlusSubscriber() ? '/subscription/info' : `/subscribe/${!!user}`);
 	}
 
 	/**
@@ -233,18 +238,20 @@ class Summary extends React.Component {
 	 * Used to handle user clicking on the Stats Navicon
 	 */
 	showStatsView() {
-		this.props.history.push('/stats');
+		const { history } = this.props;
+		history.push('/stats');
 	}
 
 	/**
 	 * Toggle between Simple and Detailed Views.
 	 */
 	toggleExpert(subview = 'blocking') {
-		this.props.actions.toggleExpert();
-		if (this.props.is_expert) {
-			this.props.history.push('/');
+		const { actions, history, is_expert } = this.props;
+		actions.toggleExpert();
+		if (is_expert) {
+			history.push('/');
 		} else {
-			this.props.history.push(`/detail/${subview}`);
+			history.push(`/detail/${subview}`);
 		}
 	}
 
@@ -280,10 +287,10 @@ class Summary extends React.Component {
 	 * @param {Object} props Summary's props, either this.props or nextProps.
 	 */
 	_setTrackerLatency(props) {
+		const { performanceData } = this.props;
 		const trackerLatencyTotal = Summary._computeTrackerLatency(props);
-		const { performanceData } = props;
 
-		if (performanceData || this.props.performanceData !== performanceData) {
+		if (props.performanceData || performanceData !== props.performanceData) {
 			this.setState({ trackerLatencyTotal });
 		}
 	}
@@ -316,14 +323,15 @@ class Summary extends React.Component {
 	 * @param {Object}	msg		updated findings sent from the background by PanelData
 	 */
 	handlePortMessage(msg) {
+		const { actions } = this.props;
 		if (msg.to !== 'summary' || !msg.body) { return; }
 
 		const { body } = msg;
 
 		if (body.adBlock || body.antiTracking) {
-			this.props.actions.updateCliqzModuleData(body);
+			actions.updateCliqzModuleData(body);
 		} else {
-			this.props.actions.updateSummaryData(body);
+			actions.updateSummaryData(body);
 		}
 	}
 
@@ -334,7 +342,8 @@ class Summary extends React.Component {
 	}
 
 	_pageHost() {
-		return this.props.pageHost || 'page_host';
+		const { pageHost } = this.props;
+		return pageHost || 'page_host';
 	}
 
 	_hidePageHost(host = null) {
@@ -425,11 +434,13 @@ class Summary extends React.Component {
 	}
 
 	_isPageLoadFast() {
-		return this.state.trackerLatencyTotal < 5;
+		const { trackerLatencyTotal } = this.state;
+		return trackerLatencyTotal < 5;
 	}
 
 	_isPageLoadSlow() {
-		return this.state.trackerLatencyTotal > 10;
+		const { trackerLatencyTotal } = this.state;
+		return trackerLatencyTotal > 10;
 	}
 
 	_isPageLoadMedium() {
@@ -723,12 +734,13 @@ class Summary extends React.Component {
 	 * @return {JSX} JSX for rendering the stats navicon
 	 */
 	_renderStatsNavicon() {
+		const { is_expert } = this.props;
 		const statsNaviconClassNames = ClassNames(
 			'Summary__statsNavicon',
 			'Summary__statsNavicon--absolutely-positioned',
 			'g-tooltip',
 			{
-				hide: this.props.is_expert,
+				hide: is_expert,
 			}
 		);
 
@@ -745,12 +757,13 @@ class Summary extends React.Component {
 	 * @return {JSX} JSX for rendering the rewards navicon
 	 */
 	_renderRewardsNavicon() {
+		const { is_expert } = this.props;
 		const rewardsNaviconClassNames = ClassNames(
 			'Summary__rewardsNavicon',
 			'Summary__rewardsNavicon--absolutely-positioned',
 			'g-tooltip',
 			{
-				hide: this.props.is_expert,
+				hide: is_expert,
 			}
 		);
 

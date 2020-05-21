@@ -31,8 +31,8 @@ function _handleBecomeClick() {
  * Render Subscribe panel.
  * @return {ReactComponent}   ReactComponent instance
  */
-const Subscribe = (props) => {
-	const { loggedIn } = props.match.params;
+const Subscribe = ({ match }) => {
+	const { loggedIn } = match.params;
 	return (
 		<div className="content-subscription">
 			<div className="badge" />

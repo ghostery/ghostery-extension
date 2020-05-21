@@ -35,7 +35,8 @@ class PlusViewContainer extends Component {
 	 * Sends the necessary ping to background
 	 */
 	_sendPlusPing = () => {
-		this.props.actions.sendPing({ type: 'plus_cta_hub' });
+		const { actions } = this.props;
+		actions.sendPing({ type: 'plus_cta_hub' });
 	}
 
 	/**
@@ -43,9 +44,10 @@ class PlusViewContainer extends Component {
 	 * @return {JSX} JSX for rendering the Plus View of the Hub app
 	 */
 	render() {
+		const { user } = this.props;
 		return (
 			<PlusView
-				isPlus={(this.props.user && this.props.user.subscriptionsPlus) || false}
+				isPlus={(user && user.subscriptionsPlus) || false}
 				onPlusClick={this._sendPlusPing}
 			/>
 		);
