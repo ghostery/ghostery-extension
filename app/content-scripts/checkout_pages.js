@@ -30,7 +30,7 @@ const CheckoutPagesContentScript = (function(window) {
 	 * @package
 	 */
 	const _listeners = [
-		'checkoutPages.buyInsights',
+		'checkoutPage.buyInsights',
 		'checkoutPage.buyPlus',
 		'checkoutPage.buyPremium',
 		'checkoutPage.login',
