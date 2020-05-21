@@ -214,10 +214,10 @@ class Panel extends React.Component {
 	 * @private
 	 * Is the user a Premium subscriber?
 	 */
-	_premiumSubscriber = () => {
+	_hasPremiumAccess = () => {
 		const { loggedIn, user } = this.props;
 
-		return loggedIn && (user && user.scopes && user.scopes.includes('subscriptions:premium'));
+		return loggedIn && (user && user.premiumAccess);
 	}
 
 	/**
@@ -225,10 +225,10 @@ class Panel extends React.Component {
 	 * @private
 	 * Is the user a Plus subscriber?
 	 */
-	_plusSubscriber = () => {
+	_hasPlusAccess = () => {
 		const { loggedIn, user } = this.props;
 
-		return loggedIn && (user && user.subscriptionsPlus);
+		return loggedIn && (user && user.plusAccess);
 	}
 
 	/**
@@ -237,17 +237,15 @@ class Panel extends React.Component {
 	 * Renders the Premium promo modal
 	 */
 	_renderPremiumPromoModal = () => {
-		if (this._premiumSubscriber()) return null;
+		if (this._hasPremiumAccess()) return null;
 
 		sendMessage('promoModals.sawPremiumPromo', {});
-
-		const isPlus = this._plusSubscriber();
 
 		return (
 			<PromoModalContainer
 				type={PREMIUM}
 				location="panel"
-				isPlus={isPlus}
+				isPlus={this._hasPlusAccess()}
 				show
 			/>
 		);
@@ -278,7 +276,7 @@ class Panel extends React.Component {
 	 * Renders the Plus promo modal if the user is not already an  subscriber
 	 */
 	_renderPlusPromoModal = () => {
-		if (this._plusSubscriber() || this._premiumSubscriber()) { return null; }
+		if (this._hasPlusAccess() || this._hasPremiumAccess()) { return null; }
 
 		sendMessage('promoModals.sawPlusPromo', {});
 
