@@ -49,8 +49,7 @@
 			],
 			"matches": [
 				"https://account.ghostery.com/*",
-				"https://account.ghosterystage.com/*",
-			  	"http://localhost:3001/*"
+				"https://account.ghosterystage.com/*"
 			],
 			"run_at": "document_start"
 		},
@@ -61,8 +60,7 @@
 		  ],
 		  "matches": [
 			"https://checkout.ghostery.com/*",
-			"https://checkout.ghosterystage.com/*",
-			"http://localhost:3002/*"
+			"https://checkout.ghosterystage.com/*"
 		  ],
 		  "run_at": "document_start"
 		},
