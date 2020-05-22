@@ -30,7 +30,7 @@ const background = baseBackground({
 });
 
 class GhosteryModule extends Module {
-	static get _module() {
+	get _module() { // eslint-disable-line class-methods-use-this
 		return background;
 	}
 }

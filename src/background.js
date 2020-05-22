@@ -883,12 +883,12 @@ function onMessageHandler(request, sender, callback) {
 	}
 	if (name === 'account.getUser') {
 		account.getUser(message)
-			.then((user) => {
-				const foundUser = user;
+			.then((foundUser) => {
+				const user = { user: { ...foundUser } };
 				if (foundUser) {
-					foundUser.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus']);
+					user.user.subscriptionsPlus = account.hasScopesUnverified(['subscriptions:plus']);
 				}
-				callback({ user: foundUser });
+				callback(user);
 			})
 			.catch((err) => {
 				callback({ errors: _getJSONAPIErrorsObject(err) });
