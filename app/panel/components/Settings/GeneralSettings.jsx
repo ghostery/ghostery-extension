@@ -79,9 +79,9 @@ class GeneralSettings extends React.Component {
 	 * @param  {Object} settingsData
 	 */
 	static getDbLastUpdated(settingsData) {
-		const { language, bugs_last_updated } = settingsData;
+		const { language, bugs_last_checked } = settingsData;
 		moment.locale(language).toLowerCase().replace('_', '-');
-		const dbLastUpdated = moment(bugs_last_updated).format('LLL');
+		const dbLastUpdated = moment(bugs_last_checked).format('LLL');
 		return dbLastUpdated;
 	}
 

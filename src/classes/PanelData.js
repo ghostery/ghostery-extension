@@ -383,13 +383,14 @@ class PanelData {
 	 */
 	static _getSettingsData() {
 		const {
-			bugs_last_updated, language, new_app_ids,
+			bugs_last_updated, bugs_last_checked, language, new_app_ids,
 			settings_last_exported, settings_last_imported
 		} = conf;
 
 		return {
 
 			bugs_last_updated,
+			bugs_last_checked,
 			categories: PanelData._buildGlobalCategories(),
 			language, // required for the setup page that does not have access to panelView data
 			new_app_ids,

@@ -184,6 +184,7 @@ export function updateDatabase() {
 			dispatch({
 				type: UPDATE_DATABASE,
 				resultText,
+				...result.confData,
 			});
 		});
 	};

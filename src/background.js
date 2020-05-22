@@ -165,7 +165,13 @@ function checkLibraryVersion() {
 						conf.bugs_last_updated = nowTime;
 					}
 				}
-				resolve(result);
+				resolve({
+					...result,
+					confData: {
+						bugs_last_checked: conf.bugs_last_checked,
+						bugs_last_updated: conf.bugs_last_updated
+					}
+				});
 			});
 		}).catch((err) => {
 			log('Error in checkLibraryVersion', err);

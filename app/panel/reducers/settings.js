@@ -266,10 +266,12 @@ const _updateSettingsCheckbox = (state, action) => {
  * @return {Object}        		text with result of the operation
  */
 const _updateTrackerDatabase = (state, action) => {
-	const { resultText } = action;
+	const { resultText, bugs_last_checked, bugs_last_updated } = action;
 
 	return {
 		dbUpdateText: resultText,
+		bugs_last_checked,
+		bugs_last_updated,
 	};
 };
 
