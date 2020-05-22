@@ -2307,6 +2307,9 @@
 	"learn_more": {
 		"message": "Learn More"
 	},
+	"custom_themes": {
+		"message": "Custom Themes"
+	},
 	"historical_stats": {
 		"message": "Historical Stats"
 	},
