@@ -43,8 +43,9 @@ class PlusViewContainer extends Component {
 	 * @return {JSX} JSX for rendering the Plus View of the Hub app
 	 */
 	render() {
+		const { user } = this.props;
 		const childProps = {
-			isPlus: this.props.user && this.props.user.subscriptionsPlus || false,
+			isPlus: user && user.plusAccess || false,
 			onPlusClick: this._sendPlusPing,
 		};
 
@@ -56,7 +57,7 @@ class PlusViewContainer extends Component {
 PlusViewContainer.propTypes = {
 	user: PropTypes.shape({
 		email: PropTypes.string,
-		subscriptionsPlus: PropTypes.bool,
+		plusAccess: PropTypes.bool,
 	}),
 	actions: PropTypes.shape({
 		sendPing: PropTypes.func.isRequired,
@@ -68,7 +69,7 @@ PlusViewContainer.propTypes = {
 PlusViewContainer.defaultProps = {
 	user: {
 		email: false,
-		subscriptionsPlus: false,
+		plusAccess: false,
 	},
 };
 

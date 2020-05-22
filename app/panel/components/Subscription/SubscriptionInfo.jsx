@@ -38,14 +38,19 @@ function _handleManageClick() {
  */
 const SubscriptionInfo = (props) => {
 	const {
-		active, plan_amount, plan_interval, charge_date, plan_ends, loading
+		productName, active, plan_amount, plan_interval, charge_date, plan_ends, loading
 	} = props.subscriptionData;
 	const subscriptionExpiration = (plan_ends > 1) ? t('subscription_days_left', plan_ends.toString()) : t('subscription_one_day_left');
 	return (
 		<div className="content-subscription s-tabs-panel">
 			<div className="row">
 				<div className="columns column-subscription">
-					<h1>{ t('ghostery_plus') }</h1>
+					{productName === 'Ghostery Premium' && (
+						<h1>{ t('panel_detail_premium_title') }</h1>
+					)}
+					{productName === 'Ghostery Plus' && (
+						<h1>{ t('ghostery_plus') }</h1>
+					)}
 					{loading ? (
 						<div className="loading" />
 					) : (

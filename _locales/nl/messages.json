@@ -500,7 +500,7 @@
 			}
 		}
 	},
-	"panel_forgot_password": {
+	"forgot_password": {
 		"message": "Wachtwoord Vergeten?"
 	},
 	"panel_help_panel_header": {
@@ -797,7 +797,7 @@
 		"message": "Gedeblokkeerd"
 	},
 	"white_black_list_error_invalid_url": {
-		"message": "Please enter a valid URL or wildcard."
+		"message": "Voer een geldige URL of wildcard in."
 	},
 	"whitelist_error_blacklist_url": {
 		"message": "Deze website is verwijderd uit je lijst met Beperkte Websites en toegevoegd aan je lijst met Vertrouwde Websites"
@@ -805,6 +805,21 @@
 	"whitelist_error_duplicate_url": {
 		"description": "Options page site whitelisting error message shown when whitelisting a URL that is already in the whitelist.",
 		"message": "Deze site is al toegestaan."
+	},
+	"settings_adblocker": {
+		"message": "Lijsten met geblokkeerde advertenties"
+	},
+	"settings_adblocker_lists": {
+		"message": "Filterlijsten met geblokkeerde advertenties laden:"
+	},
+	"settings_adblocker_list_1": {
+		"message": "Alleen advertenties"
+	},
+	"settings_adblocker_list_2": {
+		"message": "Advertenties en trackers"
+	},
+	"settings_adblocker_list_3": {
+		"message": "Advertenties, trackers en storende elementen"
 	},
 	"settings_purple_box": {
 		"message": "Paars Vak"
@@ -1053,7 +1068,7 @@
 		"message": "Vertrouwde Websites"
 	},
 	"settings_sites_placeholder": {
-		"message": "example.com (wildcards supported)"
+		"message": "voorbeeld.com (wildcards ondersteund)"
 	},
 	"settings_restricted_sites": {
 		"message": "Beperkte Websites"
@@ -1573,7 +1588,7 @@
 		}
 	},
 	"hub_supporter_perk_themes_description": {
-		"message": "Ghostery-kleuren aanpassen - test het Midnight thema!"
+		"message": "Ghostery-kleuren aanpassen - test ons Dark Blue-thema!"
 	},
 	"hub_supporter_perk_stats_description": {
 		"message": "Bekijk je blocking statistieken en zie wat Ghostery doet voor jou"
@@ -1588,7 +1603,7 @@
 		"message": "We willen gratis de beste privacybeschermingsdiensten leveren aan onze klanten. Hoewel wij geen kosten rekenen voor onze privacy suite, kun je ons ondersteunen via een klein maandelijks abonnement. Doe mee met onze missie door een upgrade naar Ghostery Plus - en ontgrendel coole extras!"
 	},
 	"hub_supporter_feature_theme_description": {
-		"message": "Pas de Ghostery-kleuren aan voor een nieuwe visuele beleving! Na vele verzoeken. Steun ons speciale Midnight-thema, en meer."
+		"message": "Pas de Ghostery-kleuren aan voor een nieuwe, visuele beleving! Ingevoerd na vele verzoeken. Test ons speciale Dark Blue-thema. Binnenkort volgen er meer."
 	},
 	"hub_supporter_feature_stats_description": {
 		"message": "Bekijk geschiedenis blocking resultaten met grafieken en ontdek trends waaruit blijkt hoe Ghostery invloed heeft op jouw browsing."
@@ -1802,6 +1817,9 @@
 	"subscribe_pitch": {
 		"message": "Ghostery is gratis, maar u kunt ervoor kiezen ons te steunen met een klein abonnement van &#36;2 per maand in ruil voor coole extra's, zoals kleurthema's, priority help service, en meer. Doe mee met onze missie en word lid!"
 	},
+	"subscribe_pitch_spring": {
+		"message": "Vind je het leuk wat wij doen? Steun ons en ontgrendel nieuwe thema's voor de lente, persoonlijke trackinginzichten en andere speciale extra's door naar Ghostery Plus te upgraden!"
+	},
 	"subscribe_pitch_learn_more": {
 		"message": "Meer Weten"
 	},
@@ -1814,11 +1832,23 @@
 	"subscribe_pitch_sign_here": {
 		"message": "Al ingeschreven? Hier inschrijven"
 	},
+	"subscribe_pitch_sign_in_plus": {
+		"message": "Ben je al ingeschreven? Aanmelden"
+	},
 	"subscribe_pitch_sign_in": {
 		"message": "Al ingeschreven? Aanmelden"
 	},
-	"subscription_midnight_theme": {
-		"message": "Midnight thema"
+	"subscription_default_theme": {
+		"message": "Standaard"
+	},
+	"subscription_dark_blue_theme": {
+		"message": "Dark Blue-thema"
+	},
+	"subscription_palm_theme": {
+		"message": "Palm-thema"
+	},
+	"subscription_leaf_theme": {
+		"message": "Leaf-thema"
 	},
 	"subscription_status": {
 		"message": "Status"
@@ -2063,9 +2093,6 @@
 	"myoffrz_turnoff_rewards": {
 		"message": "Ghostery Rewards uitschakelen"
 	},
-	"OFFERS_ALREADY_TRANSLATED": {
-		"message": ""
-	},
 	"myoffrz_help": {
 		"message": "Help"
 	},
@@ -2143,6 +2170,18 @@
 				"content": "$1"
 			}
 		}
+	},
+	"myoffrz_check_conditions": {
+		"message": "Lees de volgende voorwaarden"
+	},
+	"myoffrz_redeem_code": {
+		"message": "Verzilveringscode"
+	},
+	"myoffrz_voucher_found": {
+		"message": "Voucher gevonden"
+	},
+	"myoffrz_redeeming_voucher": {
+		"message": "Voucher verzilveren"
 	},
 	"OFFERS_ENDS": {
 		"message": ""
@@ -2338,34 +2377,37 @@
 	"settings": {
 		"message": "Instellingen"
 	},
-  	"try_ghostery_midnight": {
-	  "message": "Ghostery Midnight proberen"
+	"try_ghostery_midnight": {
+		"message": "Ghostery Midnight proberen"
 	},
-  	"seven_day_free_trial": {
-	  "message": "Gratis proefperiode van 7 dagen (&#36;14/mnd)"
+	"seven_day_free_trial": {
+		"message": "Gratis proefversie van 7 dagen"
+	},
+	"spring_is_here": {
+		"message": "Het is lente!"
 	},
   	"full_coverage_protection_promise": {
 	  "message": "Profiteer van volledige dekking voor alle browsers en apps op je apparaat"
 	},
-  	"system_wide_tracker_and_ad_blocking": {
-	  "message": "Systeembrede blokkering van trackers en reclame"
+	"system_wide_tracker_and_ad_blocking": {
+		"message": "Systeembrede blokkering van trackers en reclame"
 	},
-  	"built_in_vpn": {
-	  "message": "Ingebouwd VPN"
+	"built_in_vpn": {
+		"message": "Ingebouwd VPN"
 	},
-  	"custom_whitelist_options": {
-	  "message": "Aangepaste whitelist-opties"
+	"custom_whitelist_options": {
+		"message": "Aangepaste whitelist-opties"
 	},
-  	"historical_tracking_insights": {
-	  "message": "Historische trackinginzichten"
+	"historical_tracking_insights": {
+		"message": "Historische trackinginzichten"
 	},
-  	"download_for_free": {
-	  "message": "Gratis downloaden"
+	"download_for_free": {
+		"message": "Gratis downloaden"
 	},
-  	"support_ghostery_for_2_instead": {
-	  "message": "Steun in plaats daarvan Ghostery voor &#36;2/mnd"
+	"support_ghostery_and_try_plus_instead": {
+		"message": "Steun Ghostery en probeer Plus"
 	},
-  	"no_thanks_continue_with_basic": {
-	  "message": "Nee bedankt, doorgaan met Basic"
+	"no_thanks_continue_with_basic": {
+		"message": "Nee bedankt, doorgaan met Basic"
 	}
 }
