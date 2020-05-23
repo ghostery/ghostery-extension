@@ -424,12 +424,11 @@ class FoundBugs {
 	 */
 	_checkForCompatibilityIssues(tab_id, tab_url) {
 		const { apps, appsMetadata, issueCounts } = this._foundApps[tab_id];
-		apps.forEach((a) => {
-			const app = a;
-			const { id } = app;
+		apps.forEach((appEntry) => {
+			const { id } = appEntry;
 			if (appsMetadata[id].needsCompatibilityCheck) {
-				app.hasCompatibilityIssue = app.blocked ? compDb.hasIssue(id, tab_url) : false;
-				if (app.hasCompatibilityIssue) { issueCounts.compatibility++; }
+				appEntry.hasCompatibilityIssue = appEntry.blocked ? compDb.hasIssue(id, tab_url) : false;
+				if (appEntry.hasCompatibilityIssue) { issueCounts.compatibility++; }
 				appsMetadata[id].needsCompatibilityCheck = false;
 			}
 		});

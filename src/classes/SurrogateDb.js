@@ -58,7 +58,7 @@ class SurrogateDb extends Updatable {
 		log('processing surrogates...');
 
 		data.mappings.forEach((souragate) => {
-			const s = souragate;
+			const s = { ...souragate };
 			s.code = data.surrogates[s.sid];
 
 			// convert single values to arrays first

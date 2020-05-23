@@ -34,11 +34,10 @@ function _promiseTimeout(timeout) {
  * @private
  *
  * @param  {Object} cliqz
- * @param  {Object} c	conf
+ * @param  {Object} confMutable	conf
  * @return {Promise}
  */
-function _runCliqzSettingsImport(cliqz, c) {
-	const conf = c;
+function _runCliqzSettingsImport(cliqz, confMutable) {
 	log('CliqzSettingsImport: Run Cliqz settings importer');
 	const inject = new KordInjector();
 	inject.init();
@@ -68,17 +67,17 @@ function _runCliqzSettingsImport(cliqz, c) {
 			});
 
 			// import site whitelists
-			const existingSites = new Set(conf.site_whitelist);
+			const existingSites = new Set(confMutable.site_whitelist);
 			const newSites = new Set(modules.map(mod => result[mod].whitelistedSites)
 				.reduce((lst, val) => lst.concat(val), [])
 				.map(s => s.replace(/^(http[s]?:\/\/)?(www\.)?/, ''))
 				.filter(s => !existingSites.has(s)));
 			log('CliqzSettingsImport: add whitelisted sites', [...newSites]);
-			const whitelist = conf.site_whitelist;
+			const whitelist = confMutable.site_whitelist;
 			newSites.forEach((s) => {
 				whitelist.push(s);
 			});
-			conf.site_whitelist = whitelist;
+			confMutable.site_whitelist = whitelist;
 			privacyMigration.cleanModuleData();
 			return Promise.resolve();
 		}).then(() => {
@@ -91,15 +90,14 @@ function _runCliqzSettingsImport(cliqz, c) {
  * @memberOf BackgroundUtils
  *
  * @param  {Object} cliqz
- * @param  {Object} c	conf
+ * @param  {Object} confMutable	conf
  */
-export default function importCliqzSettings(cliqz, c) {
-	const conf = c;
-	log('checking cliqz import', conf.cliqz_import_state);
-	if (!conf.cliqz_import_state) {
-		_runCliqzSettingsImport(cliqz, conf).then(() => {
+export default function importCliqzSettings(cliqz, confMutable) {
+	log('checking cliqz import', confMutable.cliqz_import_state);
+	if (!confMutable.cliqz_import_state) {
+		_runCliqzSettingsImport(cliqz, confMutable).then(() => {
 			log('CliqzSettingsImport: cliqz settings import successful');
-			conf.cliqz_import_state = 1;
+			confMutable.cliqz_import_state = 1;
 		}, (e) => {
 			log('CliqzSettingsImport: cliqz import not available at present', e);
 		});

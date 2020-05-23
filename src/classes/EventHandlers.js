@@ -328,13 +328,12 @@ class EventHandlers {
 	 * 		+ Speed this up by making it asynchronous when blocking is disabled?
 	 * 		+ Also speed it up for blocking-whitelisted pages (by delaying isBug scanning)?
 	 *
-	 * @param  {Object} d 	event data
-	 * @return {Object}             optionaly return {cancel: true} to force dropping the request
+	 * @param  {Object} eventMutable 	event data
+	 * @return {Object}			optionaly return {cancel: true} to force dropping the request
 	 */
-	onBeforeRequest(d) {
-		const details = d;
-		const tab_id = details.tabId;
-		const request_id = details.requestId;
+	onBeforeRequest(eventMutable) {
+		const tab_id = eventMutable.tabId;
+		const request_id = eventMutable.requestId;
 
 		// -1 indicates the request isn't related to a tab
 		if (tab_id <= 0) {
@@ -345,8 +344,8 @@ class EventHandlers {
 			log(`tabInfo not found for tab ${tab_id}, initializing...`);
 
 			// create new tabInfo entry
-			if (details.type === 'main_frame') {
-				tabInfo.create(tab_id, details.url);
+			if (eventMutable.type === 'main_frame') {
+				tabInfo.create(tab_id, eventMutable.url);
 			} else {
 				tabInfo.create(tab_id);
 			}
@@ -362,24 +361,24 @@ class EventHandlers {
 			});
 		}
 
-		if (!EventHandlers._checkRedirect(details.type, request_id)) {
+		if (!EventHandlers._checkRedirect(eventMutable.type, request_id)) {
 			return { cancel: false };
 		}
 
 		const page_protocol = tabInfo.getTabInfo(tab_id, 'protocol');
 		const from_redirect = globals.REDIRECT_MAP.has(request_id);
-		const processed = utils.processUrl(details.url);
+		const processed = utils.processUrl(eventMutable.url);
 
 		/* ** SMART BLOCKING - Privacy ** */
 		// block HTTP request on HTTPS page
 		if (PolicySmartBlock.isInsecureRequest(tab_id, page_protocol, processed.scheme, processed.hostname)) {
-			return EventHandlers._blockHelper(details, tab_id, null, null, request_id, from_redirect, true);
+			return EventHandlers._blockHelper(eventMutable, tab_id, null, null, request_id, from_redirect, true);
 		}
 
 		// TODO fuse this into a single call to improve performance
 		const page_url = tabInfo.getTabInfo(tab_id, 'url');
 		const page_domain = tabInfo.getTabInfo(tab_id, 'domain');
-		const bug_id = (page_url ? isBug(details.url, page_url) : isBug(details.url));
+		const bug_id = (page_url ? isBug(eventMutable.url, page_url) : isBug(eventMutable.url));
 
 		// allow if not a tracker
 		if (!bug_id) {
@@ -388,8 +387,8 @@ class EventHandlers {
 			this._throttleButtonUpdate();
 			return { cancel: false };
 		}
-		// add the bugId to the details object. This can then be read by other handlers on this pipeline.
-		details.ghosteryBug = bug_id;
+		// add the bugId to the eventMutable object. This can then be read by other handlers on this pipeline.
+		eventMutable.ghosteryBug = bug_id;
 
 		/* ** SMART BLOCKING - Breakage ** */
 		// allow first party trackers
@@ -405,7 +404,7 @@ class EventHandlers {
 		const { block, reason } = EventHandlers._checkBlocking(app_id, cat_id, tab_id, tab_host, page_url, request_id);
 		if (!block && reason === BLOCK_REASON_SS_UNBLOCKED) {
 			// The way to pass this flag to Cliqz handlers
-			details.ghosteryWhitelisted = true;
+			eventMutable.ghosteryWhitelisted = true;
 		}
 		// Latency initialization needs to be synchronous to avoid race condition with onCompleted, etc.
 		// TODO can URLs repeat within a redirect chain? what are the cases of repeating URLs (trackers only, ...)?
@@ -413,8 +412,8 @@ class EventHandlers {
 			// Store latency data keyed by URL so that we don't use the wrong latencies in a redirect chain.
 			latency.latencies[request_id] = latency.latencies[request_id] || {};
 
-			latency.latencies[request_id][details.url] = {
-				start_time: Math.round(details.timeStamp),
+			latency.latencies[request_id][eventMutable.url] = {
+				start_time: Math.round(eventMutable.timeStamp),
 				bug_id,
 				// these could be undefined
 				page_url,
@@ -422,8 +421,8 @@ class EventHandlers {
 			};
 		}
 
-		const smartBlocked = !block ? this.policySmartBlock.shouldBlock(app_id, cat_id, tab_id, page_url, details.type, details.timeStamp) : false;
-		const smartUnblocked = block ? this.policySmartBlock.shouldUnblock(app_id, cat_id, tab_id, page_url, details.type) : false;
+		const smartBlocked = !block ? this.policySmartBlock.shouldBlock(app_id, cat_id, tab_id, page_url, eventMutable.type, eventMutable.timeStamp) : false;
+		const smartUnblocked = block ? this.policySmartBlock.shouldUnblock(app_id, cat_id, tab_id, page_url, eventMutable.type) : false;
 
 		// process the tracker asynchronously
 		// very important to block request processing as little as necessary
@@ -431,17 +430,17 @@ class EventHandlers {
 			this._processBug({
 				bug_id,
 				app_id,
-				type: details.type,
-				url: details.url,
+				type: eventMutable.type,
+				url: eventMutable.url,
 				block,
 				smartBlocked,
 				tab_id,
-				from_frame: details.parentFrameId !== -1
+				from_frame: eventMutable.parentFrameId !== -1
 			});
 		}, 1);
 
 		if ((block && !smartUnblocked) || smartBlocked) {
-			return EventHandlers._blockHelper(details, tab_id, app_id, bug_id, request_id, fromRedirect);
+			return EventHandlers._blockHelper(eventMutable, tab_id, app_id, bug_id, request_id, fromRedirect);
 		}
 
 		return { cancel: false };
@@ -455,7 +454,7 @@ class EventHandlers {
 	 * @return {Object} 		optionally return headers to send
 	 */
 	static onBeforeSendHeaders(d) {
-		const details = d;
+		const details = { ...d };
 		for (let i = 0; i < details.requestHeaders.length; ++i) {
 			// Fetch requests in Firefox web-extension has a flaw. They attach
 			// origin: moz-extension//ID , which is specific to a user.

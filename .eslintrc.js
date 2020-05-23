@@ -60,8 +60,15 @@ module.exports = {
 			props: true,
 			ignorePropertyModificationsFor: [
 				'acc', // for reduce accumulators
+				'document', // for IIFE with window & document params
+				'c2pFrame', // for mutable iframe c2p element
 				'trackerEl', // for trackers.forEach()
-				'categoryEl' // for categories.forEach()
+				'categoryEl', // for categories.forEach()
+				'dataEntry', // for data.forEach()
+				'appEntry', // for apps.forEach()
+				'sEntry', // for apps.forEach()
+				'confMutable', // for mutable conf settings
+				'eventMutable' // for mutable event details objects
 			]
 		}],
 		'no-plusplus': [0],

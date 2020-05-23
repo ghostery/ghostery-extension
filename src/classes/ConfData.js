@@ -48,7 +48,7 @@ class ConfData {
 	 */
 	init() {
 		return prefsGet().then((d) => {
-			const data = d;
+			const data = { ...d };
 			const nowTime = Number(new Date().getTime());
 			const _initProperty = (name, value) => {
 				if (data[name] === null || typeof (data[name]) === 'undefined') {

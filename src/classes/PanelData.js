@@ -576,7 +576,7 @@ class PanelData {
 	 * @param  {Object} d
 	 */
 	set(d) {
-		const data = d;
+		const data = { ...d };
 		let syncSetDataChanged = false;
 
 		if (IS_CLIQZ) {

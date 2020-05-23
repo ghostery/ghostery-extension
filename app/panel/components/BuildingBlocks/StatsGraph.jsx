@@ -81,9 +81,8 @@ class StatsGraph extends React.Component {
 		}
 
 		const dataJson = JSON.parse(JSON.stringify(data));
-		dataJson.forEach((e) => {
-			const entry = e;
-			entry.date = parseMonth(entry.date);
+		dataJson.forEach((dataEntry) => {
+			dataEntry.date = parseMonth(dataEntry.date);
 		});
 
 		let tickAmount;

@@ -523,22 +523,22 @@ class Account {
 	 *
 	 * @return {Promise} 	user settings json or error
 	 */
-	_setConfUserSettings = (s) => {
-		const settings = s;
-		log('SET USER SETTINGS', settings);
+	_setConfUserSettings = (settings) => {
+		const returnedSettings = { ...settings };
+		log('SET USER SETTINGS', returnedSettings);
 		if (IS_CLIQZ) {
-			settings.enable_human_web = false;
-			settings.enable_offers = false;
-			settings.enable_ad_block = false;
-			settings.enable_anti_tracking = false;
+			returnedSettings.enable_human_web = false;
+			returnedSettings.enable_offers = false;
+			returnedSettings.enable_ad_block = false;
+			returnedSettings.enable_anti_tracking = false;
 		}
 		SYNC_SET.forEach((key) => {
-			if (settings[key] !== undefined &&
-				!isEqual(conf[key], settings[key])) {
-				conf[key] = settings[key];
+			if (returnedSettings[key] !== undefined &&
+				!isEqual(conf[key], returnedSettings[key])) {
+				conf[key] = returnedSettings[key];
 			}
 		});
-		return settings;
+		return returnedSettings;
 	}
 
 	_removeCookies = () => {
