@@ -62,16 +62,78 @@ class Tracker extends React.Component {
 	/**
 	 * Lifecycle event.
 	 */
-	componentDidMount() {
-		const { tracker } = this.props;
-		this.updateTrackerClasses(tracker);
+	static getDerivedStateFromProps(nextProps) {
+		return Tracker.computeTrackerClasses(nextProps.tracker);
+	}
+
+	/**
+	 * Compute dynamic classes on .blocking-trk and return it as an object.
+	 * @param  {Object} tracker    tracker object
+	 */
+	static computeTrackerClasses(tracker) {
+		const classes = [];
+		let updated_title = '';
+
+		classes.push((!tracker.shouldShow) ? 'hide' : '');
+		classes.push((tracker.blocked) ? 'blocked' : '');
+		classes.push((tracker.ss_allowed) ? 'individual-trust' : '');
+		classes.push((tracker.ss_blocked) ? 'individual-restrict' : '');
+		classes.push((tracker.warningCompatibility || tracker.warningInsecure || tracker.warningSlow || tracker.warningSmartBlock) ? 'warning' : '');
+		if (tracker.warningSmartBlock) {
+			classes.push(tracker.warningSmartBlock === 'blocked' ? 'smart-blocked' : 'smart-unblocked');
+		} else {
+			classes.push((tracker.warningCompatibility) ? 'compatibility' : '');
+			classes.push((tracker.warningInsecure) ? 'insecure' : '');
+			classes.push((tracker.warningSlow) ? 'slow' : '');
+		}
+
+		// Create tooltips for tracker alerts
+		if (tracker.warningSmartBlock) {
+			updated_title = tracker.warningSmartBlock === 'blocked' ? t('panel_tracker_warning_smartblock_tooltip') : t('panel_tracker_warning_smartunblock_tooltip');
+		} else if (tracker.warningCompatibility) {
+			updated_title = t('panel_tracker_warning_compatibility_tooltip');
+		} else if (tracker.warningInsecure && tracker.warningSlow) {
+			updated_title = t('panel_tracker_warning_slow_nonsecure_tooltip');
+		} else if (tracker.warningInsecure) {
+			updated_title = t('panel_tracker_warning_nonsecure_tooltip');
+		} else if (tracker.warningSlow) {
+			updated_title = t('panel_tracker_warning_slow_tooltip');
+		}
+
+		return {
+			trackerClasses: classes.join(' '),
+			warningImageTitle: updated_title,
+		};
+	}
+
+	static _renderCliqzCookieStat(count) { return Tracker._renderCliqzStat(count, 'cookie'); }
+
+	static _renderCliqzFingerprintStat(count) { return Tracker._renderCliqzStat(count, 'fingerprint'); }
+
+	static _renderCliqzAdStat(count) { return Tracker._renderCliqzStat(count, 'ad'); }
+
+	static _renderCliqzStat(count, type) {
+		const exactlyOne = count === 1;
+		const label = exactlyOne ?
+			t(`${type}`) :
+			t(`${type}s`);
+		const cssClass = `trk-cliqz-stat trk-cliqz-stat-${type}s-count`;
+
+		return (
+			<span className={cssClass}>
+				{count}
+				{' '}
+				{label}
+			</span>
+		);
 	}
 
 	/**
 	 * Lifecycle event.
 	 */
-	static getDerivedStateFromProps(nextProps) {
-		return Tracker.computeTrackerClasses(nextProps.tracker);
+	componentDidMount() {
+		const { tracker } = this.props;
+		this.updateTrackerClasses(tracker);
 	}
 
 	/**
@@ -132,46 +194,6 @@ class Tracker extends React.Component {
 		} = Tracker.computeTrackerClasses(tracker);
 
 		this.setState({ trackerClasses, warningImageTitle });
-	}
-
-	/**
-	 * Compute dynamic classes on .blocking-trk and return it as an object.
-	 * @param  {Object} tracker    tracker object
-	 */
-	static computeTrackerClasses(tracker) {
-		const classes = [];
-		let updated_title = '';
-
-		classes.push((!tracker.shouldShow) ? 'hide' : '');
-		classes.push((tracker.blocked) ? 'blocked' : '');
-		classes.push((tracker.ss_allowed) ? 'individual-trust' : '');
-		classes.push((tracker.ss_blocked) ? 'individual-restrict' : '');
-		classes.push((tracker.warningCompatibility || tracker.warningInsecure || tracker.warningSlow || tracker.warningSmartBlock) ? 'warning' : '');
-		if (tracker.warningSmartBlock) {
-			classes.push(tracker.warningSmartBlock === 'blocked' ? 'smart-blocked' : 'smart-unblocked');
-		} else {
-			classes.push((tracker.warningCompatibility) ? 'compatibility' : '');
-			classes.push((tracker.warningInsecure) ? 'insecure' : '');
-			classes.push((tracker.warningSlow) ? 'slow' : '');
-		}
-
-		// Create tooltips for tracker alerts
-		if (tracker.warningSmartBlock) {
-			updated_title = tracker.warningSmartBlock === 'blocked' ? t('panel_tracker_warning_smartblock_tooltip') : t('panel_tracker_warning_smartunblock_tooltip');
-		} else if (tracker.warningCompatibility) {
-			updated_title = t('panel_tracker_warning_compatibility_tooltip');
-		} else if (tracker.warningInsecure && tracker.warningSlow) {
-			updated_title = t('panel_tracker_warning_slow_nonsecure_tooltip');
-		} else if (tracker.warningInsecure) {
-			updated_title = t('panel_tracker_warning_nonsecure_tooltip');
-		} else if (tracker.warningSlow) {
-			updated_title = t('panel_tracker_warning_slow_tooltip');
-		}
-
-		return {
-			trackerClasses: classes.join(' '),
-			warningImageTitle: updated_title,
-		};
 	}
 
 	/**
@@ -310,28 +332,6 @@ class Tracker extends React.Component {
 					<path d="M2.788 8.54c.315.315.628.63.944.943.023.023.067.035.103.035 1.077.001 2.153.002 3.23-.001.04 0 .09-.02.117-.048a820.63 820.63 0 0 0 2.285-2.285.184.184 0 0 0 .05-.116c.003-1.08.003-2.16.002-3.24-.001-.03-.008-.068-.026-.088-.316-.321-.635-.64-.95-.956L2.789 8.54m-.436-.433l5.754-5.754c-.308-.309-.621-.623-.937-.936a.16.16 0 0 0-.102-.036 709.213 709.213 0 0 0-3.231 0c-.04 0-.09.02-.118.048-.765.762-1.53 1.525-2.291 2.29a.16.16 0 0 0-.045.1 928.271 928.271 0 0 0 0 3.26c0 .029.01.065.03.085.314.318.631.634.94.943m7.752-2.652c0 .581-.002 1.162.002 1.743a.405.405 0 0 1-.127.31 879.44 879.44 0 0 0-2.47 2.47.398.398 0 0 1-.303.128c-1.17-.003-2.341-.003-3.512 0a.4.4 0 0 1-.302-.126A884.3 884.3 0 0 0 .915 7.503a.385.385 0 0 1-.121-.294c.002-1.17.002-2.342 0-3.513 0-.122.036-.216.123-.303.827-.824 1.653-1.65 2.477-2.477a.388.388 0 0 1 .293-.123c1.174.002 2.348.002 3.523 0 .119 0 .21.038.293.122.827.83 1.655 1.657 2.484 2.484.081.08.12.17.119.285-.004.59-.002 1.181-.002 1.771" />
 				</g>
 			</svg>
-		);
-	}
-
-	static _renderCliqzCookieStat(count) { return Tracker._renderCliqzStat(count, 'cookie'); }
-
-	static _renderCliqzFingerprintStat(count) { return Tracker._renderCliqzStat(count, 'fingerprint'); }
-
-	static _renderCliqzAdStat(count) { return Tracker._renderCliqzStat(count, 'ad'); }
-
-	static _renderCliqzStat(count, type) {
-		const exactlyOne = count === 1;
-		const label = exactlyOne ?
-			t(`${type}`) :
-			t(`${type}s`);
-		const cssClass = `trk-cliqz-stat trk-cliqz-stat-${type}s-count`;
-
-		return (
-			<span className={cssClass}>
-				{count}
-				{' '}
-				{label}
-			</span>
 		);
 	}
 

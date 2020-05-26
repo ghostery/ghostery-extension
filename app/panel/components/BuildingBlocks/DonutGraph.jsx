@@ -29,6 +29,16 @@ import Tooltip from '../Tooltip';
  * @memberOf PanelBuildingBlocks
  */
 class DonutGraph extends React.Component {
+	/**
+	 * Generate donut-shaped graph with the scanning results.
+	 * Add mouse event listeners to the arcs of the donut graph that filter the
+	 * detailed view to the corresponding tracker category.
+	 * Throttle time matches panelData#updatePanelUI throttling.
+	 * @param  {Array} categories list of categories detected on the site
+	 * @param  {Object} options    options for the graph
+	 */
+	bakeDonut = throttle(this._bakeDonut.bind(this), 600, { leading: true, trailing: true })
+
 	constructor(props) {
 		super(props);
 
@@ -67,6 +77,20 @@ class DonutGraph extends React.Component {
 
 		this._startAngles = new Map();
 		this._endAngles = new Map();
+	}
+
+	/**
+	 *  Helper function that calculates domain value for greyscale / redscale rendering
+	 */
+	static getTone(catCount, catIndex) {
+		return catCount > 1 ? (100 / (catCount - 1)) * catIndex * 0.01 : 0;
+	}
+
+	/**
+	 *  Helper to retrieve a category's tooltip from the DOM
+	 */
+	static grabTooltip(d) {
+		return document.getElementById(`${d.data.id}_tooltip`);
 	}
 
 	/**
@@ -148,20 +172,6 @@ class DonutGraph extends React.Component {
 	}
 
 	/**
-	 *  Helper function that calculates domain value for greyscale / redscale rendering
-	 */
-	static getTone(catCount, catIndex) {
-		return catCount > 1 ? (100 / (catCount - 1)) * catIndex * 0.01 : 0;
-	}
-
-	/**
-	 *  Helper to retrieve a category's tooltip from the DOM
-	 */
-	static grabTooltip(d) {
-		return document.getElementById(`${d.data.id}_tooltip`);
-	}
-
-	/**
 	 *  Helper function that updates donut with nextProps values
 	 */
 	nextPropsDonut(nextProps) {
@@ -193,16 +203,6 @@ class DonutGraph extends React.Component {
 			.append('g')
 			.attr('transform', `translate(${this.donutRadius}, ${this.donutRadius})`);
 	}
-
-	/**
-	 * Generate donut-shaped graph with the scanning results.
-	 * Add mouse event listeners to the arcs of the donut graph that filter the
-	 * detailed view to the corresponding tracker category.
-	 * Throttle time matches panelData#updatePanelUI throttling.
-	 * @param  {Array} categories list of categories detected on the site
-	 * @param  {Object} options    options for the graph
-	 */
-	bakeDonut = throttle(this._bakeDonut.bind(this), 600, { leading: true, trailing: true })
 
 	_bakeDonut(categories, antiTracking, adBlock, options) {
 		const {

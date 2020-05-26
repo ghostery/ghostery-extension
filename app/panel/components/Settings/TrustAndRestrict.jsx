@@ -37,6 +37,29 @@ class TrustAndRestrict extends React.Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
+	static isValidUrlorWildcard(pageHost) {
+		// Only allow valid host name characters, ':' for port numbers and '*' for wildcards
+		const isSafePageHost = /^[a-zA-Z0-9-.:*]*$/;
+		if (!isSafePageHost.test(pageHost)) { return false; }
+
+		// Check for valid URL from node-validator
+		const isValidUrlRegex = /^(?!mailto:)(?:(?:https?|ftp):\/\/)?(?:\S+(?::\S*)?@)?(?:(?:(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))|localhost)(?::\d{2,5})?(?:\/[^\s]*)?$/i;
+		if (isValidUrlRegex.test(pageHost)) return true;
+
+		// Check for valid wildcard
+		let isValidWildcard = false;
+		if (pageHost.includes('*')) {
+			const wildcardPattern = pageHost.replace(/\*/g, '.*');
+			try {
+				new RegExp(wildcardPattern); // eslint-disable-line no-new
+				isValidWildcard = true;
+			} catch (err) {
+				return false;
+			}
+		}
+		return isValidWildcard;
+	}
+
 	/**
 	 * Implement switch between two tabs (whitelisted and blacklisted) on the view
 	 * @param {Object} event 	mouseclick on a tab
@@ -141,29 +164,6 @@ class TrustAndRestrict extends React.Component {
 		} else {
 			this.setState({ restrictedValue: '' });
 		}
-	}
-
-	static isValidUrlorWildcard(pageHost) {
-		// Only allow valid host name characters, ':' for port numbers and '*' for wildcards
-		const isSafePageHost = /^[a-zA-Z0-9-.:*]*$/;
-		if (!isSafePageHost.test(pageHost)) { return false; }
-
-		// Check for valid URL from node-validator
-		const isValidUrlRegex = /^(?!mailto:)(?:(?:https?|ftp):\/\/)?(?:\S+(?::\S*)?@)?(?:(?:(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))|localhost)(?::\d{2,5})?(?:\/[^\s]*)?$/i;
-		if (isValidUrlRegex.test(pageHost)) return true;
-
-		// Check for valid wildcard
-		let isValidWildcard = false;
-		if (pageHost.includes('*')) {
-			const wildcardPattern = pageHost.replace(/\*/g, '.*');
-			try {
-				new RegExp(wildcardPattern); // eslint-disable-line no-new
-				isValidWildcard = true;
-			} catch (err) {
-				return false;
-			}
-		}
-		return isValidWildcard;
 	}
 
 	/**

@@ -49,14 +49,6 @@ class GeneralSettings extends React.Component {
 	/**
 	 * Lifecycle event.
 	 */
-	componentDidMount() {
-		const { settingsData } = this.props;
-		this.updateDbLastUpdated(settingsData);
-	}
-
-	/**
-	 * Lifecycle event.
-	 */
 	static getDerivedStateFromProps(prevProps, prevState) {
 		const dbLastUpdated = GeneralSettings.getDbLastUpdated(prevProps.settingsData);
 
@@ -64,14 +56,6 @@ class GeneralSettings extends React.Component {
 			return { dbLastUpdated };
 		}
 		return null;
-	}
-
-	/**
-	 * Trigger action to check for new DB updates.
-	 */
-	updateDatabase() {
-		const { actions } = this.props;
-		actions.updateDatabase();
 	}
 
 	/**
@@ -83,6 +67,22 @@ class GeneralSettings extends React.Component {
 		moment.locale(language).toLowerCase().replace('_', '-');
 		const dbLastUpdated = moment(bugs_last_checked).format('LLL');
 		return dbLastUpdated;
+	}
+
+	/**
+	 * Lifecycle event.
+	 */
+	componentDidMount() {
+		const { settingsData } = this.props;
+		this.updateDbLastUpdated(settingsData);
+	}
+
+	/**
+	 * Trigger action to check for new DB updates.
+	 */
+	updateDatabase() {
+		const { actions } = this.props;
+		actions.updateDatabase();
 	}
 
 	/**

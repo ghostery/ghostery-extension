@@ -48,32 +48,6 @@ class BlockingHeader extends React.Component {
 
 	/**
 	 * Lifecycle event
-	 */
-	componentDidMount() {
-		const {
-			actions, categories, smartBlock, smartBlockActive
-		} = this.props;
-		const { fromHere } = this.state;
-		if (categories) {
-			const updates = BlockingHeader.updateBlockAll(categories, fromHere);
-			if (updates) {
-				this.setState({
-					allBlocked: updates.allBlocked,
-					fromHere: updates.fromHere,
-					filtered: updates.filtered
-				});
-			}
-		}
-
-		if (typeof actions.updateTrackerCounts === 'function') {
-			// if we're on GlobalSettings, we don't need to run this function
-			const calcSmartBlock = (smartBlockActive && smartBlock) || { blocked: {}, unblocked: {} };
-			updateSummaryBlockingCount(categories, calcSmartBlock, actions.updateTrackerCounts);
-		}
-	}
-
-	/**
-	 * Lifecycle event
 	 * Refactor Notes:
 	 *   Refactor UNSAFE_componentWillReceiveProps using getDerivedStateFromProps
 	 *   because we are only manipulating state.
@@ -113,6 +87,32 @@ class BlockingHeader extends React.Component {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * Lifecycle event
+	 */
+	componentDidMount() {
+		const {
+			actions, categories, smartBlock, smartBlockActive
+		} = this.props;
+		const { fromHere } = this.state;
+		if (categories) {
+			const updates = BlockingHeader.updateBlockAll(categories, fromHere);
+			if (updates) {
+				this.setState({
+					allBlocked: updates.allBlocked,
+					fromHere: updates.fromHere,
+					filtered: updates.filtered
+				});
+			}
+		}
+
+		if (typeof actions.updateTrackerCounts === 'function') {
+			// if we're on GlobalSettings, we don't need to run this function
+			const calcSmartBlock = (smartBlockActive && smartBlock) || { blocked: {}, unblocked: {} };
+			updateSummaryBlockingCount(categories, calcSmartBlock, actions.updateTrackerCounts);
+		}
 	}
 
 	/**

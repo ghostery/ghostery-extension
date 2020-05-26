@@ -71,18 +71,6 @@ class Summary extends React.Component {
 	/**
 	 * Lifecycle event
 	 */
-	componentDidMount() {
-		this._setTrackerLatency(this.props);
-		this._updateSiteNotScanned(this.props);
-
-		this._dynamicUIPort = this.context;
-		this._dynamicUIPort.onMessage.addListener(this.handlePortMessage);
-		this._dynamicUIPort.postMessage({ name: 'SummaryComponentDidMount' });
-	}
-
-	/**
-	 * Lifecycle event
-	 */
 	static getDerivedStateFromProps(nextProps) {
 		const trackerLatencyTotal = Summary._computeTrackerLatency(nextProps);
 		const disableBlocking = Summary._computeSiteNotScanned(nextProps);
@@ -91,6 +79,59 @@ class Summary extends React.Component {
 		window.document.title = `Ghostery's findings for ${nextProps.pageUrl}`;
 
 		return { trackerLatencyTotal, disableBlocking };
+	}
+
+	/**
+	 * Calculates total tracker latency and sets it to state
+	 * @param {Object} props Summary's props, either this.props or nextProps.
+	 */
+	static _computeTrackerLatency(props) {
+		const { performanceData } = props;
+		let pageLatency = 0;
+
+		// calculate and display page speed
+		if (performanceData) {
+			const { timing } = performanceData;
+			const { loadEventEnd, navigationStart } = timing;
+			// format number of decimal places to use
+			const unfixedLatency = Number(loadEventEnd - navigationStart) / 1000;
+			if (unfixedLatency >= 100) { // > 100 no decimal
+				pageLatency = unfixedLatency.toFixed();
+			} else if (unfixedLatency >= 10 && unfixedLatency < 100) { // 100 > 10 use one decimal
+				pageLatency = unfixedLatency.toFixed(1);
+			} else if (unfixedLatency < 10 && unfixedLatency >= 0) { // < 10s use two decimals
+				pageLatency = unfixedLatency.toFixed(2);
+			}
+			return pageLatency;
+			// reset page load value if page is reloaded while panel is open
+		}
+		return null;
+	}
+
+	/**
+	 * Compute whether controls should be disabled.
+	 * @param {Object} props Summary's props, either this.props or nextProps.
+	 */
+	static _computeSiteNotScanned(props) {
+		const { siteNotScanned, categories } = props;
+		const pageUrl = props.pageUrl || '';
+
+		if (siteNotScanned || !categories || pageUrl.search(/http|chrome-extension|moz-extension|ms-browser-extension|newtab|chrome:\/\/startpage\//) === -1) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Lifecycle event
+	 */
+	componentDidMount() {
+		this._setTrackerLatency(this.props);
+		this._updateSiteNotScanned(this.props);
+
+		this._dynamicUIPort = this.context;
+		this._dynamicUIPort.onMessage.addListener(this.handlePortMessage);
+		this._dynamicUIPort.postMessage({ name: 'SummaryComponentDidMount' });
 	}
 
 	/**
@@ -259,33 +300,6 @@ class Summary extends React.Component {
 	 * Calculates total tracker latency and sets it to state
 	 * @param {Object} props Summary's props, either this.props or nextProps.
 	 */
-	static _computeTrackerLatency(props) {
-		const { performanceData } = props;
-		let pageLatency = 0;
-
-		// calculate and display page speed
-		if (performanceData) {
-			const { timing } = performanceData;
-			const { loadEventEnd, navigationStart } = timing;
-			// format number of decimal places to use
-			const unfixedLatency = Number(loadEventEnd - navigationStart) / 1000;
-			if (unfixedLatency >= 100) { // > 100 no decimal
-				pageLatency = unfixedLatency.toFixed();
-			} else if (unfixedLatency >= 10 && unfixedLatency < 100) { // 100 > 10 use one decimal
-				pageLatency = unfixedLatency.toFixed(1);
-			} else if (unfixedLatency < 10 && unfixedLatency >= 0) { // < 10s use two decimals
-				pageLatency = unfixedLatency.toFixed(2);
-			}
-			return pageLatency;
-			// reset page load value if page is reloaded while panel is open
-		}
-		return null;
-	}
-
-	/**
-	 * Calculates total tracker latency and sets it to state
-	 * @param {Object} props Summary's props, either this.props or nextProps.
-	 */
 	_setTrackerLatency(props) {
 		const { performanceData } = this.props;
 		const trackerLatencyTotal = Summary._computeTrackerLatency(props);
@@ -293,20 +307,6 @@ class Summary extends React.Component {
 		if (props.performanceData || performanceData !== props.performanceData) {
 			this.setState({ trackerLatencyTotal });
 		}
-	}
-
-	/**
-	 * Compute whether controls should be disabled.
-	 * @param {Object} props Summary's props, either this.props or nextProps.
-	 */
-	static _computeSiteNotScanned(props) {
-		const { siteNotScanned, categories } = props;
-		const pageUrl = props.pageUrl || '';
-
-		if (siteNotScanned || !categories || pageUrl.search(/http|chrome-extension|moz-extension|ms-browser-extension|newtab|chrome:\/\/startpage\//) === -1) {
-			return true;
-		}
-		return false;
 	}
 
 	/**

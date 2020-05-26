@@ -26,30 +26,6 @@ class CliqzFeature extends React.Component {
 		this.clickCliqzFeature = this.clickCliqzFeature.bind(this);
 	}
 
-	/**
-	 * Handles clicks on the Cliqz feature icon, toggling it on/off
-	 */
-	clickCliqzFeature() {
-		const {
-			active,
-			clickButton,
-			cliqzInactive,
-			type
-		} = this.props;
-
-		if (cliqzInactive) {
-			return;
-		}
-
-		const featureType = type === 'anti_track' ? 'anti_tracking' : type;
-
-		clickButton({
-			feature: `enable_${featureType}`,
-			status: active,
-			text: CliqzFeature._getAlertText(active, type),
-		});
-	}
-
 	static _getStatus(active) {
 		return active ? t('on') : t('off');
 	}
@@ -101,6 +77,30 @@ class CliqzFeature extends React.Component {
 		return active ?
 			t(`alert_${type}_off`) :
 			t(`alert_${type}_on`);
+	}
+
+	/**
+	 * Handles clicks on the Cliqz feature icon, toggling it on/off
+	 */
+	clickCliqzFeature() {
+		const {
+			active,
+			clickButton,
+			cliqzInactive,
+			type
+		} = this.props;
+
+		if (cliqzInactive) {
+			return;
+		}
+
+		const featureType = type === 'anti_track' ? 'anti_tracking' : type;
+
+		clickButton({
+			feature: `enable_${featureType}`,
+			status: active,
+			text: CliqzFeature._getAlertText(active, type),
+		});
 	}
 
 	/**

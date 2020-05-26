@@ -99,7 +99,7 @@ module.exports = {
 		'react/no-danger': [0],
 		'react/prop-types': [0],
 		'react/jsx-fragments': [1, 'element'],
-		'react/sort-comp': [0, { //TODO: enable this check
+		'react/sort-comp': [1, {
 			order: [
 				"static-variables",
 				"instance-variables",

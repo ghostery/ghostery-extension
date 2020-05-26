@@ -44,28 +44,6 @@ class Category extends React.Component {
 	}
 
 	/**
-	 * Lifecycle event. When view is opening we save in state
-	 * new values related to tracker blocking to ensure correct rendering.
-	 */
-	componentDidMount() {
-		const { category } = this.props;
-		if (category) {
-			const {
-				allShownBlocked,
-				totalShownBlocked,
-			} = Category.updateCategoryCheckbox(category);
-			this.setState({ allShownBlocked, totalShownBlocked });
-		}
-	}
-
-	/**
-	 * Lifecycle event
-	 */
-	componentDidUpdate(prevProps) {
-		this.updateCategoryExpanded(prevProps);
-	}
-
-	/**
 	 * Lifecycle event.
 	 */
 	static getDerivedStateFromProps(prevProps) {
@@ -78,24 +56,6 @@ class Category extends React.Component {
 			allShownBlocked,
 			totalShownBlocked
 		};
-	}
-
-	/**
-	 * Set tooltip showing state to true in state which results in actual showing
-	 * of the tooltip.
-	 * @param  {Object} event mouseover event
-	 */
-	showTooltip() {
-		this.setState({ showTooltip: true });
-	}
-
-	/**
-	 * Set tooltip showing state to false in state which results in eventual hiding
-	 * of the tooltip.
-	 * @param  {Object} event mouseover event
-	 */
-	hideTooltip() {
-		this.setState({ showTooltip: false });
 	}
 
 	/**
@@ -123,6 +83,46 @@ class Category extends React.Component {
 			allShownBlocked,
 			totalShownBlocked,
 		};
+	}
+
+	/**
+	 * Lifecycle event. When view is opening we save in state
+	 * new values related to tracker blocking to ensure correct rendering.
+	 */
+	componentDidMount() {
+		const { category } = this.props;
+		if (category) {
+			const {
+				allShownBlocked,
+				totalShownBlocked,
+			} = Category.updateCategoryCheckbox(category);
+			this.setState({ allShownBlocked, totalShownBlocked });
+		}
+	}
+
+	/**
+	 * Lifecycle event
+	 */
+	componentDidUpdate(prevProps) {
+		this.updateCategoryExpanded(prevProps);
+	}
+
+	/**
+	 * Set tooltip showing state to true in state which results in actual showing
+	 * of the tooltip.
+	 * @param  {Object} event mouseover event
+	 */
+	showTooltip() {
+		this.setState({ showTooltip: true });
+	}
+
+	/**
+	 * Set tooltip showing state to false in state which results in eventual hiding
+	 * of the tooltip.
+	 * @param  {Object} event mouseover event
+	 */
+	hideTooltip() {
+		this.setState({ showTooltip: false });
 	}
 
 	/**

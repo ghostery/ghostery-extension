@@ -23,27 +23,6 @@ export default class Path extends React.Component {
 		this.timer = null;
 	}
 
-	componentDidMount() {
-		const node = this.myRef.current;
-		node.style.setProperty('--stroke-length', `${node.getTotalLength()}`);
-		// Check and call props.handler() if the animationEnd event doesn't get fired somehow
-		this.timer = setInterval(() => {
-			clearInterval(this.timer); // Run this only once
-			const { handler } = this.props;
-			handler();
-		}, INTERVAL);
-	}
-
-	componentWillUnmount() {
-		clearInterval(this.timer);
-	}
-
-	onAnimationEndHandler = () => {
-		clearInterval(this.timer);
-		const { handler } = this.props;
-		handler();
-	}
-
 	static polarToCartesian(centerX, centerY, radius, angleInDegrees) {
 		const angleInRadians = (angleInDegrees - 90) * (Math.PI / 180.0);
 
@@ -65,6 +44,27 @@ export default class Path extends React.Component {
 		].join(' ');
 
 		return d;
+	}
+
+	componentDidMount() {
+		const node = this.myRef.current;
+		node.style.setProperty('--stroke-length', `${node.getTotalLength()}`);
+		// Check and call props.handler() if the animationEnd event doesn't get fired somehow
+		this.timer = setInterval(() => {
+			clearInterval(this.timer); // Run this only once
+			const { handler } = this.props;
+			handler();
+		}, INTERVAL);
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.timer);
+	}
+
+	onAnimationEndHandler = () => {
+		clearInterval(this.timer);
+		const { handler } = this.props;
+		handler();
 	}
 
 	render() {

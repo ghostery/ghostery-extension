@@ -33,6 +33,16 @@ class Settings extends React.Component {
 	static contextType = DynamicUIPortContext;
 
 	/**
+	 * Hide alert in 3 sec. after it has been shown.
+	 */
+	hideToast = debounce(function() {
+		this.setState({
+			showToast: false,
+			toastText: ''
+		});
+	}, 3000)
+
+	/**
 	 *	Refactoring UNSAFE_componentWillMount into Constructor
 	 *	Stats:
 	 *		Constructor runtime before refactor: 0.145ms
@@ -229,16 +239,6 @@ class Settings extends React.Component {
 		});
 		this.hideToast();
 	}
-
-	/**
-	 * Hide alert in 3 sec. after it has been shown.
-	 */
-	hideToast = debounce(function() {
-		this.setState({
-			showToast: false,
-			toastText: ''
-		});
-	}, 3000)
 
 	/**
 	 * Render top level component of the Settings view.

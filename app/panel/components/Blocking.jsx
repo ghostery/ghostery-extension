@@ -56,19 +56,47 @@ class Blocking extends React.Component {
 	/**
 	 * Lifecycle event
 	 */
-	componentDidMount() {
-		this._dynamicUIPort = this.context;
-		this._dynamicUIPort.onMessage.addListener(this.handlePortMessage);
-		this._dynamicUIPort.postMessage({ name: 'BlockingComponentDidMount' });
+	static getDerivedStateFromProps(nextProps) {
+		const blockingClasses = Blocking.buildBlockingClasses(nextProps).join(' ');
+		const disableBlocking = Blocking.computeSiteNotScanned(nextProps);
+		return { blockingClasses, disableBlocking };
+	}
+
+	/**
+	* Build dynamic classes on .blocking-trackers. Return classes
+	* @param  {Object} props
+	*/
+	static buildBlockingClasses(props) {
+		const classes = [];
+
+		classes.push((props.toggle_individual_trackers) ? 'show-individual' : '');
+		classes.push((props.paused_blocking) ? 'paused' : '');
+		classes.push((props.sitePolicy) ? (props.sitePolicy === 2) ? 'trusted' : 'restricted' : '');
+
+		return classes;
+	}
+
+	/**
+	* Compute whether a site cannot be scanned by Ghostery.
+	* @param {Object}	props	nextProps
+	*/
+	static computeSiteNotScanned(props) {
+		const { siteNotScanned, categories } = props;
+		const pageUrl = props.pageUrl || '';
+
+		if (siteNotScanned || !categories || pageUrl.search('http') === -1) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
 	 * Lifecycle event
 	 */
-	static getDerivedStateFromProps(nextProps) {
-		const blockingClasses = Blocking.buildBlockingClasses(nextProps).join(' ');
-		const disableBlocking = Blocking.computeSiteNotScanned(nextProps);
-		return { blockingClasses, disableBlocking };
+	componentDidMount() {
+		this._dynamicUIPort = this.context;
+		this._dynamicUIPort.onMessage.addListener(this.handlePortMessage);
+		this._dynamicUIPort.postMessage({ name: 'BlockingComponentDidMount' });
 	}
 
 	/**
@@ -241,20 +269,6 @@ class Blocking extends React.Component {
 	}
 
 	/**
-	* Build dynamic classes on .blocking-trackers. Return classes
-	* @param  {Object} props
-	*/
-	static buildBlockingClasses(props) {
-		const classes = [];
-
-		classes.push((props.toggle_individual_trackers) ? 'show-individual' : '');
-		classes.push((props.paused_blocking) ? 'paused' : '');
-		classes.push((props.sitePolicy) ? (props.sitePolicy === 2) ? 'trusted' : 'restricted' : '');
-
-		return classes;
-	}
-
-	/**
 	* Set dynamic classes on .blocking-trackers. Set state.
 	* @param  {Object} props
 	*/
@@ -266,20 +280,6 @@ class Blocking extends React.Component {
 		if (blockingClasses !== joinedBlockingClasses) {
 			this.setState({ blockingClasses: joinedBlockingClasses });
 		}
-	}
-
-	/**
-	* Compute whether a site cannot be scanned by Ghostery.
-	* @param {Object}	props	nextProps
-	*/
-	static computeSiteNotScanned(props) {
-		const { siteNotScanned, categories } = props;
-		const pageUrl = props.pageUrl || '';
-
-		if (siteNotScanned || !categories || pageUrl.search('http') === -1) {
-			return true;
-		}
-		return false;
 	}
 
 	/**
