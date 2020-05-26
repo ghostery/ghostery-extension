@@ -93,7 +93,7 @@ class BugDb extends Updatable {
 
 				// Because we have two trackers in the DB with the same name
 				if ((categories[category] && categories[category].trackers[db.apps[appId].name])) {
-				  continue; // eslint-disable-line no-continue
+					continue; // eslint-disable-line no-continue
 				}
 
 				if (categories.hasOwnProperty(category)) {
