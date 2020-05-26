@@ -37,7 +37,7 @@ const Help = () => {
 					</div>
 					<div className="support-section">
 						<h3>{ t('panel_help_contact_header') }</h3>
-						<a className="info" href="mailto:info@ghostery.com">info@ghostery.com</a>
+						<a target="_blank" rel="noopener noreferrer" className="info" href="mailto:info@ghostery.com">info@ghostery.com</a>
 					</div>
 				</div>
 			</div>
