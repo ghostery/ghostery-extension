@@ -39,7 +39,6 @@ module.exports = {
 	// 0 = off, 1 = warn, 2 = error
 	rules: {
 		'no-use-before-define': [0], //ToDo: undo this.
-		'consistent-return': [0], //ToDo: undo this.
 		'arrow-parens': [2, 'as-needed', { 'requireForBlockBody': true }],
 		'camelcase': [0],
 		'class-methods-use-this': [1],
@@ -119,8 +118,8 @@ module.exports = {
 		'jsx-a11y/mouse-events-have-key-events': [0],
 		'jsx-a11y/no-noninteractive-element-interactions': [0],
 		'jsx-a11y/no-static-element-interactions': [0],
-		'jsx-a11y/media-has-caption': [0], //TODO: enable this check
-		'jsx-a11y/label-has-associated-control': [0], //TODO: enable this check
-		'jsx-a11y/anchor-has-content': [0], //TODO: enable this check
+		'jsx-a11y/media-has-caption': [0], //ToDo: enable this check
+		'jsx-a11y/label-has-associated-control': [0], //ToDo: enable this check
+		'jsx-a11y/anchor-has-content': [0], //ToDo: enable this check
 	},
 };

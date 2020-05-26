@@ -165,6 +165,7 @@ class PurpleBox {
 				log('updateBox sendMessage failed', chrome.runtime.lastError, tab);
 			}
 		});
+		return true;
 	}
 
 	/**
@@ -183,9 +184,6 @@ class PurpleBox {
 			}
 		}
 		tabInfo.setTabInfo(tab_id, 'purplebox', false);
-
-
-		return true;
 	}
 }
 

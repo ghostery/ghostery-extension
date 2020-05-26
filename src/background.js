@@ -450,6 +450,7 @@ function handleClick2Play(name, message, tab_id, callback) {
 			return true;
 		}
 	}
+	return false;
 }
 
 /**
@@ -508,6 +509,7 @@ function handleRewards(name, message, callback) {
 		default:
 			break;
 	}
+	return false;
 }
 
 /**
@@ -666,7 +668,7 @@ function handlePurplebox(name, message) {
  */
 function onMessageHandler(request, sender, callback) {
 	if (request.source === 'cliqz-content-script') {
-		return;
+		return false;
 	}
 	const {
 		name, message, origin
@@ -1001,6 +1003,7 @@ function onMessageHandler(request, sender, callback) {
 		promoModals.turnOffPromos();
 		return false;
 	}
+	return false;
 }
 
 /**
@@ -1690,11 +1693,13 @@ function init() {
 								if (conf.current_theme !== 'default') {
 									return account.getTheme(conf.current_theme);
 								}
+								return false;
 							});
 					}
 					if (globals.JUST_INSTALLED) {
 						setGhosteryDefaultBlocking();
 					}
+					return true;
 				})
 				.catch(err => log(err));
 			// persist Conf properties to storage only after init has completed
