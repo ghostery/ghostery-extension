@@ -14,7 +14,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Header from '../containers/HeaderContainer';
-import PromoModalContainer from '../../shared-components/PromoModal/PromoModalContainer';
+import PromoModal from '../../shared-components/PromoModal';
 import ThemeContext from '../contexts/ThemeContext';
 import DynamicUIPortContext from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
@@ -249,7 +249,7 @@ class Panel extends React.Component {
 		const isPlus = this._plusSubscriber();
 
 		return (
-			<PromoModalContainer
+			<PromoModal
 				type={PREMIUM}
 				location="panel"
 				isPlus={isPlus}
@@ -270,7 +270,7 @@ class Panel extends React.Component {
 		sendMessage('ping', 'promo_modals_show_insights');
 
 		return (
-			<PromoModalContainer
+			<PromoModal
 				type={INSIGHTS}
 				show
 			/>
@@ -289,7 +289,7 @@ class Panel extends React.Component {
 
 		const { loggedIn } = this.props;
 		return (
-			<PromoModalContainer
+			<PromoModal
 				type={PLUS}
 				loggedIn={loggedIn}
 				show
