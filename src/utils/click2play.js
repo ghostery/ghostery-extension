@@ -24,6 +24,26 @@ import c2p_tpl from '../../app/templates/click2play.html';
 import c2p_images from '../../app/data-images/click2play';
 
 /**
+ * Creates selector for hubspot form
+ * @private
+ *
+ * @param  {string} url 	form request url
+ * @return {string} 		selector
+ */
+function _getHubspotFormSelector(url) {
+	// Hubspot url has a fixed format
+	// https://forms.hubspot.com/embed/v3/form/532040/95b5de3a-6d4a-4729-bebf-07c41268d773?callback=hs_reqwest_0&hutk=941df50e9277ee76755310cd78647a08
+	// The following three parameters are privacy-safe:
+	// 532040 - partner id
+	// 95b5de3a-6d4a-4729-bebf-07c41268d773 - form id on the page
+	// hs_reqwest_0 - function which will be called on the client after the request
+	//
+	// hutk=941df50e9277ee76755310cd78647a08 -is user-specific (same every session)
+	const tokens = url.substr(8).split(/\/|&|\?|#|=/ig);
+	return `form[id="hsForm_${tokens[5]}"]`;
+}
+
+/**
  * Builds Click2Play templates for a given tab_id.
  *
  * Restricted Sites: Only show the "allow once" option, since blacklisting overrides
@@ -210,24 +230,4 @@ export function allowAllwaysC2P(app_id, tab_host) {
 		site_specific_unblocks[tab_host].push(app_id);
 	}
 	conf.site_specific_unblocks = site_specific_unblocks;
-}
-
-/**
- * Creates selector for hubspot form
- * @private
- *
- * @param  {string} url 	form request url
- * @return {string} 		selector
- */
-function _getHubspotFormSelector(url) {
-	// Hubspot url has a fixed format
-	// https://forms.hubspot.com/embed/v3/form/532040/95b5de3a-6d4a-4729-bebf-07c41268d773?callback=hs_reqwest_0&hutk=941df50e9277ee76755310cd78647a08
-	// The following three parameters are privacy-safe:
-	// 532040 - partner id
-	// 95b5de3a-6d4a-4729-bebf-07c41268d773 - form id on the page
-	// hs_reqwest_0 - function which will be called on the client after the request
-	//
-	// hutk=941df50e9277ee76755310cd78647a08 -is user-specific (same every session)
-	const tokens = url.substr(8).split(/\/|&|\?|#|=/ig);
-	return `form[id="hsForm_${tokens[5]}"]`;
 }

@@ -52,78 +52,6 @@ const initialState = {
 };
 
 /**
- * Default export for blocking view reducer.
- * Process specified blocking action and return updated state.
- * @memberOf  PanelReactReducers
- * @param  {Object} state 		current state
- * @param  {Object} action 		action which provides data
- * @return {Object}        		updated state clone
- */
-export default (state = initialState, action) => {
-	switch (action.type) {
-		case UPDATE_BLOCKING_DATA: {
-			return { ...state, ...action.data };
-		}
-		case FILTER_TRACKERS: {
-			if (state.filter.type === action.data.type && state.filter.name === action.data.name) {
-				// prevent re-render if filter hasn't changed
-				return state;
-			}
-			return { ...state, filter: action.data };
-		}
-		case UPDATE_BLOCK_ALL_TRACKERS: {
-			const updated = updateBlockAllTrackers(state, action);
-			return { ...state, ...updated };
-		}
-		case UPDATE_CATEGORIES: {
-			return { ...state, categories: action.data };
-		}
-		case UPDATE_UNKNOWN_CATEGORY_HIDE: {
-			return { ...state, unknownCategory: action.data };
-		}
-		case UPDATE_CATEGORY_BLOCKED: {
-			const updated = updateCategoryBlocked(state, action);
-			return { ...state, ...updated };
-		}
-		case UPDATE_TRACKER_BLOCKED: {
-			const updated = updateTrackerBlocked(state, action);
-			return { ...state, ...updated };
-		}
-		case TOGGLE_EXPAND_ALL: {
-			const updated = toggleExpandAll(state, action);
-			return { ...state, ...updated };
-		}
-		case UPDATE_TRACKER_TRUST_RESTRICT: {
-			const updated = _updateTrackerTrustRestrict(state, action);
-			return { ...state, ...updated };
-		}
-		case UPDATE_CLIQZ_MODULE_WHITELIST: {
-			const unknownCategory = _updateCliqzModuleWhitelist(state, action);
-			return { ...state, unknownCategory };
-		}
-		case UPDATE_CLIQZ_MODULE_DATA:
-		case UPDATE_SUMMARY_DATA: {
-			if (action.data.antiTracking && action.data.adBlock) {
-				const { antiTracking, adBlock } = action.data;
-				const unknownCategory = {
-					totalUnsafeCount: antiTracking.totalUnsafeCount + adBlock.totalUnsafeCount,
-					totalUnknownCount: antiTracking.totalUnknownCount + adBlock.totalUnknownCount,
-					trackerCount: antiTracking.trackerCount + adBlock.trackerCount,
-					unknownTrackerCount: antiTracking.unknownTrackerCount + adBlock.unknownTrackerCount,
-					unknownTrackers: Array.from(new Set(antiTracking.unknownTrackers.concat(adBlock.unknownTrackers))),
-					whitelistedUrls: { ...antiTracking.whitelistedUrls, ...adBlock.whitelistedUrls },
-					hide: state.unknownCategory.hide,
-				};
-				return { ...state, unknownCategory };
-			}
-			return state;
-		}
-
-		default: return state;
-	}
-};
-
-/**
  * Update site_specific_blocks/unblocks for tracker whitelist
  * and blacklist.  Also updates categories.
  * @memberOf  PanelReactReducers
@@ -250,4 +178,76 @@ const _updateCliqzModuleWhitelist = (state, action) => {
 	sendMessage('setPanelData', { cliqz_module_whitelist: whitelistedUrls });
 
 	return updatedUnknownCategory;
+};
+
+/**
+ * Default export for blocking view reducer.
+ * Process specified blocking action and return updated state.
+ * @memberOf  PanelReactReducers
+ * @param  {Object} state 		current state
+ * @param  {Object} action 		action which provides data
+ * @return {Object}        		updated state clone
+ */
+export default (state = initialState, action) => {
+	switch (action.type) {
+		case UPDATE_BLOCKING_DATA: {
+			return { ...state, ...action.data };
+		}
+		case FILTER_TRACKERS: {
+			if (state.filter.type === action.data.type && state.filter.name === action.data.name) {
+				// prevent re-render if filter hasn't changed
+				return state;
+			}
+			return { ...state, filter: action.data };
+		}
+		case UPDATE_BLOCK_ALL_TRACKERS: {
+			const updated = updateBlockAllTrackers(state, action);
+			return { ...state, ...updated };
+		}
+		case UPDATE_CATEGORIES: {
+			return { ...state, categories: action.data };
+		}
+		case UPDATE_UNKNOWN_CATEGORY_HIDE: {
+			return { ...state, unknownCategory: action.data };
+		}
+		case UPDATE_CATEGORY_BLOCKED: {
+			const updated = updateCategoryBlocked(state, action);
+			return { ...state, ...updated };
+		}
+		case UPDATE_TRACKER_BLOCKED: {
+			const updated = updateTrackerBlocked(state, action);
+			return { ...state, ...updated };
+		}
+		case TOGGLE_EXPAND_ALL: {
+			const updated = toggleExpandAll(state, action);
+			return { ...state, ...updated };
+		}
+		case UPDATE_TRACKER_TRUST_RESTRICT: {
+			const updated = _updateTrackerTrustRestrict(state, action);
+			return { ...state, ...updated };
+		}
+		case UPDATE_CLIQZ_MODULE_WHITELIST: {
+			const unknownCategory = _updateCliqzModuleWhitelist(state, action);
+			return { ...state, unknownCategory };
+		}
+		case UPDATE_CLIQZ_MODULE_DATA:
+		case UPDATE_SUMMARY_DATA: {
+			if (action.data.antiTracking && action.data.adBlock) {
+				const { antiTracking, adBlock } = action.data;
+				const unknownCategory = {
+					totalUnsafeCount: antiTracking.totalUnsafeCount + adBlock.totalUnsafeCount,
+					totalUnknownCount: antiTracking.totalUnknownCount + adBlock.totalUnknownCount,
+					trackerCount: antiTracking.trackerCount + adBlock.trackerCount,
+					unknownTrackerCount: antiTracking.unknownTrackerCount + adBlock.unknownTrackerCount,
+					unknownTrackers: Array.from(new Set(antiTracking.unknownTrackers.concat(adBlock.unknownTrackers))),
+					whitelistedUrls: { ...antiTracking.whitelistedUrls, ...adBlock.whitelistedUrls },
+					hide: state.unknownCategory.hide,
+				};
+				return { ...state, unknownCategory };
+			}
+			return state;
+		}
+
+		default: return state;
+	}
 };

@@ -52,43 +52,6 @@ const initialState = {
 		whitelistedUrls: {},
 	}
 };
-/**
- * Default export for summary view reducer.
- * @memberOf  PanelReactReducers
- *
- * @param  {Object} state 		current state
- * @param  {Object} action 		action which provides data
- * @return {Object}        		updated state clone
- */
-export default (state = initialState, action) => {
-	switch (action.type) {
-		case UPDATE_SUMMARY_DATA:
-		case UPDATE_CLIQZ_MODULE_DATA: {
-			return { ...state, ...action.data };
-		}
-		case UPDATE_GHOSTERY_PAUSED: {
-			return { ...state, paused_blocking: action.data.ghosteryPaused, paused_blocking_timeout: action.data.time };
-		}
-		case UPDATE_SITE_POLICY: {
-			const updated = _updateSitePolicy(state, action);
-			return { ...state, ...updated };
-		}
-		case UPDATE_TRACKER_COUNTS: {
-			return {
-				...state,
-				trackerCounts: {
-					blocked: action.data.num_blocked,
-					allowed: action.data.num_total - action.data.num_blocked,
-					ssBlocked: action.data.num_ss_blocked,
-					ssAllowed: action.data.num_ss_allowed,
-					sbBlocked: action.data.num_sb_blocked,
-					sbAllowed: action.data.num_sb_allowed,
-				}
-			};
-		}
-		default: return state;
-	}
-};
 
 /**
  * Update site blacklist / whitelist
@@ -163,4 +126,42 @@ const _updateSitePolicy = (state, action) => {
 		site_whitelist: updated_whitelist,
 		site_blacklist: updated_blacklist,
 	};
+};
+
+/**
+ * Default export for summary view reducer.
+ * @memberOf  PanelReactReducers
+ *
+ * @param  {Object} state 		current state
+ * @param  {Object} action 		action which provides data
+ * @return {Object}        		updated state clone
+ */
+export default (state = initialState, action) => {
+	switch (action.type) {
+		case UPDATE_SUMMARY_DATA:
+		case UPDATE_CLIQZ_MODULE_DATA: {
+			return { ...state, ...action.data };
+		}
+		case UPDATE_GHOSTERY_PAUSED: {
+			return { ...state, paused_blocking: action.data.ghosteryPaused, paused_blocking_timeout: action.data.time };
+		}
+		case UPDATE_SITE_POLICY: {
+			const updated = _updateSitePolicy(state, action);
+			return { ...state, ...updated };
+		}
+		case UPDATE_TRACKER_COUNTS: {
+			return {
+				...state,
+				trackerCounts: {
+					blocked: action.data.num_blocked,
+					allowed: action.data.num_total - action.data.num_blocked,
+					ssBlocked: action.data.num_ss_blocked,
+					ssAllowed: action.data.num_ss_allowed,
+					sbBlocked: action.data.num_sb_blocked,
+					sbAllowed: action.data.num_sb_allowed,
+				}
+			};
+		}
+		default: return state;
+	}
 };

@@ -48,17 +48,17 @@ class ConfData {
 		return prefsGet().then((d) => {
 			const data = { ...d };
 			const nowTime = Number(new Date().getTime());
+			const _setProp = (name, value) => {
+				if (!globals.INIT_COMPLETE) {
+					globals.initProps[name] = value;
+				}
+			};
 			const _initProperty = (name, value) => {
 				if (data[name] === null || typeof (data[name]) === 'undefined') {
 					data[name] = value;
 					_setProp(name, value);
 				}
 				this[name] = data[name];
-			};
-			const _setProp = (name, value) => {
-				if (!globals.INIT_COMPLETE) {
-					globals.initProps[name] = value;
-				}
 			};
 
 			// Transfer legacy previous version property to new name

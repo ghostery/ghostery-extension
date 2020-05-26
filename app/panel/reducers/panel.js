@@ -59,6 +59,109 @@ const initialState = {
 	current_theme: 'default',
 	isPromoModalHidden: false,
 };
+
+/**
+ * Trigger notification and needsReload banners. Persist the change.
+ * @memberOf  PanelReactReducers
+ * @private
+ * @param  {Object} state 		current state
+ * @param  {Object} action 		action which contains data
+ * @return {Object}        		notification parameters
+ */
+const _showNotification = (state, action) => {
+	const msg = action.data || action.payload;
+	// overrideNotificationShown ensures certain notifications are shown regardless of user's settings
+	const { reload, overrideNotificationShown } = msg;
+
+	let updated_notificationClasses = state.notificationClasses;
+	let updated_notificationShown = state.notificationShown;
+	let updated_needsReload = state.needsReload; // clone below if needed
+
+	// Reload Banners
+	if (reload) {
+		// deep clone nested "changes" object
+		updated_needsReload = { ...state.needsReload, changes: { ...state.needsReload.changes } };
+
+		// handle case where user clicks 'whitelist' then 'blacklist', or inverse
+		if (msg.updated === 'blacklist' && updated_needsReload.changes.hasOwnProperty('whitelist')) {
+			delete updated_needsReload.changes.whitelist;
+		} else if (msg.updated === 'whitelist' && updated_needsReload.changes.hasOwnProperty('blacklist')) {
+			delete updated_needsReload.changes.blacklist;
+		}
+
+		// update the 'changes' object.  if the changed item already exists, remove it to signal a disable has occurred
+		if (updated_needsReload.changes.hasOwnProperty(msg.updated)) {
+			delete updated_needsReload.changes[msg.updated];
+		} else if (msg.updated !== 'init') { // ignore the 'init' change, which comes from Panel.jsx to persist banners
+			updated_needsReload.changes[msg.updated] = true;
+		}
+
+		// persist to background
+		sendMessage('setPanelData', { needsReload: updated_needsReload });
+
+		// if we have changes and the user wants to see banners, then show
+		if ((msg.text || Object.keys(updated_needsReload.changes).length > 0) && state.reload_banner_status) {
+			updated_notificationShown = true;
+		} else {
+			updated_notificationShown = false;
+		}
+
+		updated_notificationClasses = msg.classes || 'warning';
+	} else {
+		// Notification banners (success/warnings)
+		if (state.trackers_banner_status) {
+			updated_notificationShown = true;
+		} else {
+			updated_notificationShown = false;
+		}
+
+		updated_notificationClasses = msg.classes || '';
+		if (msg.filter === 'tooltip') {
+			updated_needsReload.changes = {};
+		}
+	}
+	return {
+		needsReload: updated_needsReload,
+		notificationClasses: updated_notificationClasses,
+		notificationFilter: msg.filter || '',
+		notificationText: msg.text || '',
+		notificationShown: overrideNotificationShown || updated_notificationShown,
+	};
+};
+
+/**
+ * Dismiss notification banners. Update notificationShown
+ * @memberOf  PanelReactReducers
+ * @private
+ * @param  {Object} state 		current state
+ * @param  {Object} action 		action which contains data
+ * @return {Object}        		notification parameters
+ */
+const _closeNotification = () => ({
+	notificationShown: false
+});
+
+/**
+ * Update reload_banner_status and trackers_banner_status from
+ * Settings > Notifications. Persist the change.
+ * @memberOf  PanelReactReducers
+ * @private
+ *
+ * @param  {Object} state 		current state
+ * @param  {Object} action 		action which contains data
+ * @return {Object}        		notification parameter
+ */
+const _updateNotificationStatus = (state, action) => {
+	const banner_status = action.data.checked;
+	const banner_status_name = action.data.event;
+	// persist to background
+	sendMessage('setPanelData', { [banner_status_name]: banner_status });
+
+	return {
+		[banner_status_name]: banner_status,
+	};
+};
+
 /**
  * Default export for panel view reducer. Handles actions
  * which are common to many derived views.
@@ -276,106 +379,4 @@ export default (state = initialState, action) => {
 		}
 		default: return state;
 	}
-};
-
-/**
- * Trigger notification and needsReload banners. Persist the change.
- * @memberOf  PanelReactReducers
- * @private
- * @param  {Object} state 		current state
- * @param  {Object} action 		action which contains data
- * @return {Object}        		notification parameters
- */
-const _showNotification = (state, action) => {
-	const msg = action.data || action.payload;
-	// overrideNotificationShown ensures certain notifications are shown regardless of user's settings
-	const { reload, overrideNotificationShown } = msg;
-
-	let updated_notificationClasses = state.notificationClasses;
-	let updated_notificationShown = state.notificationShown;
-	let updated_needsReload = state.needsReload; // clone below if needed
-
-	// Reload Banners
-	if (reload) {
-		// deep clone nested "changes" object
-		updated_needsReload = { ...state.needsReload, changes: { ...state.needsReload.changes } };
-
-		// handle case where user clicks 'whitelist' then 'blacklist', or inverse
-		if (msg.updated === 'blacklist' && updated_needsReload.changes.hasOwnProperty('whitelist')) {
-			delete updated_needsReload.changes.whitelist;
-		} else if (msg.updated === 'whitelist' && updated_needsReload.changes.hasOwnProperty('blacklist')) {
-			delete updated_needsReload.changes.blacklist;
-		}
-
-		// update the 'changes' object.  if the changed item already exists, remove it to signal a disable has occurred
-		if (updated_needsReload.changes.hasOwnProperty(msg.updated)) {
-			delete updated_needsReload.changes[msg.updated];
-		} else if (msg.updated !== 'init') { // ignore the 'init' change, which comes from Panel.jsx to persist banners
-			updated_needsReload.changes[msg.updated] = true;
-		}
-
-		// persist to background
-		sendMessage('setPanelData', { needsReload: updated_needsReload });
-
-		// if we have changes and the user wants to see banners, then show
-		if ((msg.text || Object.keys(updated_needsReload.changes).length > 0) && state.reload_banner_status) {
-			updated_notificationShown = true;
-		} else {
-			updated_notificationShown = false;
-		}
-
-		updated_notificationClasses = msg.classes || 'warning';
-	} else {
-		// Notification banners (success/warnings)
-		if (state.trackers_banner_status) {
-			updated_notificationShown = true;
-		} else {
-			updated_notificationShown = false;
-		}
-
-		updated_notificationClasses = msg.classes || '';
-		if (msg.filter === 'tooltip') {
-			updated_needsReload.changes = {};
-		}
-	}
-	return {
-		needsReload: updated_needsReload,
-		notificationClasses: updated_notificationClasses,
-		notificationFilter: msg.filter || '',
-		notificationText: msg.text || '',
-		notificationShown: overrideNotificationShown || updated_notificationShown,
-	};
-};
-
-/**
- * Dismiss notification banners. Update notificationShown
- * @memberOf  PanelReactReducers
- * @private
- * @param  {Object} state 		current state
- * @param  {Object} action 		action which contains data
- * @return {Object}        		notification parameters
- */
-const _closeNotification = () => ({
-	notificationShown: false
-});
-
-/**
- * Update reload_banner_status and trackers_banner_status from
- * Settings > Notifications. Persist the change.
- * @memberOf  PanelReactReducers
- * @private
- *
- * @param  {Object} state 		current state
- * @param  {Object} action 		action which contains data
- * @return {Object}        		notification parameter
- */
-const _updateNotificationStatus = (state, action) => {
-	const banner_status = action.data.checked;
-	const banner_status_name = action.data.event;
-	// persist to background
-	sendMessage('setPanelData', { [banner_status_name]: banner_status });
-
-	return {
-		[banner_status_name]: banner_status,
-	};
 };

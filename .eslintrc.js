@@ -38,7 +38,6 @@ module.exports = {
 	],
 	// 0 = off, 1 = warn, 2 = error
 	rules: {
-		'no-use-before-define': [0], //ToDo: undo this.
 		'arrow-parens': [2, 'as-needed', { 'requireForBlockBody': true }],
 		'camelcase': [0],
 		'class-methods-use-this': [1],

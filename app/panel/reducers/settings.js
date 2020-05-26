@@ -44,77 +44,6 @@ const initialState = {
 	site_specific_unblocks: {},
 	filterText: t('settings_filter_all_label')
 };
-/**
- * Default export for settings view reducer.
- * @memberOf  PanelReactReducers
- *
- * @param  {Object} state 		current state
- * @param  {Object} action 		action which provides data
- * @return {Object}        		updated state clone
- */
-export default (state = initialState, action) => {
-	switch (action.type) {
-		case GET_SETTINGS_DATA: {
-			return { ...state, ...action.data };
-		}
-		case EXPORT_SETTINGS: {
-			const updated = _exportSettings(state, action);
-			return { ...state, ...updated };
-		}
-		case IMPORT_SETTINGS_DIALOG: {
-			const updated = _importSettingsDialog(state, action);
-			return { ...state, ...updated };
-		}
-		case IMPORT_SETTINGS_NATIVE: {
-			const updated = _importSettingsNative(state, action);
-			return { ...state, ...updated };
-		}
-		case IMPORT_SETTINGS_FAILED: {
-			return {
-				...state,
-				importResultText: t('settings_import_file_error'),
-				actionSuccess: false
-			};
-		}
-		case SELECT_ITEM: {
-			const updated = _updateSelectValue(state, action);
-			return { ...state, ...updated };
-		}
-		case TOGGLE_CHECKBOX: {
-			const updated = _updateSettingsCheckbox(state, action);
-			return { ...state, ...updated };
-		}
-		case UPDATE_DATABASE: {
-			const updated = _updateTrackerDatabase(state, action);
-			return { ...state, ...updated };
-		}
-
-		case UPDATE_SETTINGS_BLOCK_ALL_TRACKERS: {
-			const updated = updateBlockAllTrackers(state, action);
-			return { ...state, ...updated };
-		}
-		case UPDATE_SETTINGS_CATEGORY_BLOCKED: {
-			const updated = updateCategoryBlocked(state, action);
-			return { ...state, ...updated };
-		}
-		case SETTINGS_TOGGLE_EXPAND_ALL: {
-			const updated = toggleExpandAll(state, action);
-			return { ...state, ...updated };
-		}
-		case UPDATE_SETTINGS_TRACKER_BLOCKED: {
-			const updated = updateTrackerBlocked(state, action);
-			return { ...state, ...updated };
-		} case SETTINGS_UPDATE_SEARCH_VALUE: {
-			const updated = _updateSearchValue(state, action);
-			return { ...state, ...updated };
-		} case SETTINGS_FILTER: {
-			const updated = _filter(state, action);
-			return { ...state, ...updated };
-		}
-
-		default: return state;
-	}
-};
 
 /**
  * Update state to reflect success/failure of settings export.
@@ -378,4 +307,76 @@ const _filter = (state, action) => {
 	return {
 		categories: updated_categories, filtered: true, filterText, expandAll
 	};
+};
+
+/**
+ * Default export for settings view reducer.
+ * @memberOf  PanelReactReducers
+ *
+ * @param  {Object} state 		current state
+ * @param  {Object} action 		action which provides data
+ * @return {Object}        		updated state clone
+ */
+export default (state = initialState, action) => {
+	switch (action.type) {
+		case GET_SETTINGS_DATA: {
+			return { ...state, ...action.data };
+		}
+		case EXPORT_SETTINGS: {
+			const updated = _exportSettings(state, action);
+			return { ...state, ...updated };
+		}
+		case IMPORT_SETTINGS_DIALOG: {
+			const updated = _importSettingsDialog(state, action);
+			return { ...state, ...updated };
+		}
+		case IMPORT_SETTINGS_NATIVE: {
+			const updated = _importSettingsNative(state, action);
+			return { ...state, ...updated };
+		}
+		case IMPORT_SETTINGS_FAILED: {
+			return {
+				...state,
+				importResultText: t('settings_import_file_error'),
+				actionSuccess: false
+			};
+		}
+		case SELECT_ITEM: {
+			const updated = _updateSelectValue(state, action);
+			return { ...state, ...updated };
+		}
+		case TOGGLE_CHECKBOX: {
+			const updated = _updateSettingsCheckbox(state, action);
+			return { ...state, ...updated };
+		}
+		case UPDATE_DATABASE: {
+			const updated = _updateTrackerDatabase(state, action);
+			return { ...state, ...updated };
+		}
+
+		case UPDATE_SETTINGS_BLOCK_ALL_TRACKERS: {
+			const updated = updateBlockAllTrackers(state, action);
+			return { ...state, ...updated };
+		}
+		case UPDATE_SETTINGS_CATEGORY_BLOCKED: {
+			const updated = updateCategoryBlocked(state, action);
+			return { ...state, ...updated };
+		}
+		case SETTINGS_TOGGLE_EXPAND_ALL: {
+			const updated = toggleExpandAll(state, action);
+			return { ...state, ...updated };
+		}
+		case UPDATE_SETTINGS_TRACKER_BLOCKED: {
+			const updated = updateTrackerBlocked(state, action);
+			return { ...state, ...updated };
+		} case SETTINGS_UPDATE_SEARCH_VALUE: {
+			const updated = _updateSearchValue(state, action);
+			return { ...state, ...updated };
+		} case SETTINGS_FILTER: {
+			const updated = _filter(state, action);
+			return { ...state, ...updated };
+		}
+
+		default: return state;
+	}
 };

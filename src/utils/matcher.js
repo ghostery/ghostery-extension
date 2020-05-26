@@ -19,45 +19,6 @@ import { log } from './common';
 // ALL APIS IN THIS FILE ARE PERFORMANCE-CRITICAL
 
 /**
- * Determine if web request qualifies as a bug.
- * @memberOf BackgroundUtils
- *
- * @param {string} 	src		 	url of the request
- * @param {string}	tab_url	 	url of the page
- *
- * @return {int|boolean} 		bug id or false
- */
-export function isBug(src, tab_url) {
-	const { db } = bugDb;
-	const processedSrc = processUrl(src.toLowerCase());
-	let	found = false;
-
-	const path = processedSrc.pathname ? processedSrc.pathname.substring(1) : '';
-
-	found =
-		// pattern classification 2: check host+path hash
-		_matchesHost(db.patterns.host_path, processedSrc.hostname, path) ||
-		// class 1: check host hash
-		_matchesHost(db.patterns.host, processedSrc.hostname) ||
-		// class 3: check path hash
-		_matchesPath(path) ||
-		// class 4: check regex patterns
-		_matchesRegex(processedSrc.host + processedSrc.pathname);
-
-	if (typeof tab_url !== 'undefined') {
-		// check firstPartyExceptions
-		if (conf.ignore_first_party &&
-			found !== false &&
-			db.firstPartyExceptions[found] &&
-			fuzzyUrlMatcher(tab_url, db.firstPartyExceptions[found])) {
-			return false;
-		}
-	}
-
-	return found;
-}
-
-/**
  * Determine if a url matches an entry in an array urls.
  * The matching is permissive.
  * @memberOf BackgroundUtils
@@ -228,4 +189,43 @@ function _matchesPath(src_path) {
 	}
 
 	return false;
+}
+
+/**
+ * Determine if web request qualifies as a bug.
+ * @memberOf BackgroundUtils
+ *
+ * @param {string} 	src		 	url of the request
+ * @param {string}	tab_url	 	url of the page
+ *
+ * @return {int|boolean} 		bug id or false
+ */
+export function isBug(src, tab_url) {
+	const { db } = bugDb;
+	const processedSrc = processUrl(src.toLowerCase());
+	let	found = false;
+
+	const path = processedSrc.pathname ? processedSrc.pathname.substring(1) : '';
+
+	found =
+		// pattern classification 2: check host+path hash
+		_matchesHost(db.patterns.host_path, processedSrc.hostname, path) ||
+		// class 1: check host hash
+		_matchesHost(db.patterns.host, processedSrc.hostname) ||
+		// class 3: check path hash
+		_matchesPath(path) ||
+		// class 4: check regex patterns
+		_matchesRegex(processedSrc.host + processedSrc.pathname);
+
+	if (typeof tab_url !== 'undefined') {
+		// check firstPartyExceptions
+		if (conf.ignore_first_party &&
+			found !== false &&
+			db.firstPartyExceptions[found] &&
+			fuzzyUrlMatcher(tab_url, db.firstPartyExceptions[found])) {
+			return false;
+		}
+	}
+
+	return found;
 }

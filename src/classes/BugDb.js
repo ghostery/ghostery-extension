@@ -92,7 +92,11 @@ class BugDb extends Updatable {
 				blocked = selectedApps.hasOwnProperty(appId);
 
 				// Because we have two trackers in the DB with the same name
-				if (!(categories[category] && categories[category].trackers[db.apps[appId].name]) && categories.hasOwnProperty(category)) {
+				if ((categories[category] && categories[category].trackers[db.apps[appId].name])) {
+				  continue; // eslint-disable-line no-continue
+				}
+
+				if (categories.hasOwnProperty(category)) {
 					categories[category].num_total++;
 					if (blocked) {
 						categories[category].num_blocked++;

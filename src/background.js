@@ -100,43 +100,6 @@ function setCliqzModuleEnabled(module, enabled) {
 }
 
 /**
- * Check and fetch a new tracker library every hour as needed
- * @memberOf Background
- */
-function autoUpdateBugDb() {
-	if (conf.enable_autoupdate) {
-		const result = conf.bugs_last_checked;
-		const nowTime = Number((new Date()).getTime());
-		// offset by 15min so that we don't double fetch
-		if (!result || nowTime > (Number(result) + 900000)) {
-			log('autoUpdateBugDb called', new Date());
-			checkLibraryVersion();
-		}
-	}
-}
-
-/**
- * Set Default Blocking: all apps in Advertising, Adult Advertising, and Site Analytics
- */
-function setGhosteryDefaultBlocking() {
-	const categoriesBlock = ['advertising', 'pornvertising', 'site_analytics'];
-	log('Blocking all trackers in categories:', ...categoriesBlock);
-	const selected_app_ids = {};
-	const app_ids = Object.keys(bugDb.db.apps);
-	for (let i = 0; i < app_ids.length; i++) {
-		const app_id = app_ids[i];
-		if (bugDb.db.apps.hasOwnProperty(app_id)) {
-			const category = bugDb.db.apps[app_id].cat;
-			if (categoriesBlock.indexOf(category) >= 0 &&
-			!selected_app_ids.hasOwnProperty(app_id)) {
-				selected_app_ids[app_id] = 1;
-			}
-		}
-	}
-	panelData.set({ selected_app_ids });
-}
-
-/**
  * Pulls down latest version.json and triggers
  * updates of all db files.
  * @memberOf Background
@@ -174,6 +137,43 @@ function checkLibraryVersion() {
 			reject(failed);
 		});
 	}));
+}
+
+/**
+ * Check and fetch a new tracker library every hour as needed
+ * @memberOf Background
+ */
+function autoUpdateBugDb() {
+	if (conf.enable_autoupdate) {
+		const result = conf.bugs_last_checked;
+		const nowTime = Number((new Date()).getTime());
+		// offset by 15min so that we don't double fetch
+		if (!result || nowTime > (Number(result) + 900000)) {
+			log('autoUpdateBugDb called', new Date());
+			checkLibraryVersion();
+		}
+	}
+}
+
+/**
+ * Set Default Blocking: all apps in Advertising, Adult Advertising, and Site Analytics
+ */
+function setGhosteryDefaultBlocking() {
+	const categoriesBlock = ['advertising', 'pornvertising', 'site_analytics'];
+	log('Blocking all trackers in categories:', ...categoriesBlock);
+	const selected_app_ids = {};
+	const app_ids = Object.keys(bugDb.db.apps);
+	for (let i = 0; i < app_ids.length; i++) {
+		const app_id = app_ids[i];
+		if (bugDb.db.apps.hasOwnProperty(app_id)) {
+			const category = bugDb.db.apps[app_id].cat;
+			if (categoriesBlock.indexOf(category) >= 0 &&
+			!selected_app_ids.hasOwnProperty(app_id)) {
+				selected_app_ids[app_id] = 1;
+			}
+		}
+	}
+	panelData.set({ selected_app_ids });
 }
 
 /**
@@ -1007,6 +1007,68 @@ function onMessageHandler(request, sender, callback) {
 }
 
 /**
+ * Determine Antitracking configuration parameters based
+ * on the results returned from the abtest endpoint.
+ * @memberOf Background
+ *
+ * @return {Object} 	Antitracking configuration parameters
+ */
+function getAntitrackingTestConfig() {
+	if (abtest.hasTest('antitracking_full')) {
+		return {
+			qsEnabled: true,
+			telemetryMode: 2,
+		};
+	}
+	if (abtest.hasTest('antitracking_half')) {
+		return {
+			qsEnabled: true,
+			telemetryMode: 1,
+		};
+	}
+	if (abtest.hasTest('antitracking_collect')) {
+		return {
+			qsEnabled: false,
+			telemetryMode: 1,
+		};
+	}
+	return {
+		qsEnabled: true,
+		telemetryMode: 1,
+	};
+}
+
+/**
+ * Adjust antitracking parameters based on the current state
+ * of ABTest and availability of Human Web.
+ */
+function setupABTest() {
+	const antitrackingConfig = getAntitrackingTestConfig();
+	if (antitrackingConfig && conf.enable_anti_tracking) {
+		if (!conf.enable_human_web) {
+			// force disable anti-tracking telemetry on humanweb opt-out
+			antitrackingConfig.telemetryMode = 0;
+		}
+		Object.keys(antitrackingConfig).forEach((opt) => {
+			const val = antitrackingConfig[opt];
+			log('antitracking', 'set config option', opt, val);
+			antitracking.action('setConfigOption', opt, val);
+		});
+	}
+	if (abtest.hasTest('antitracking_whitelist2')) {
+		cliqz.prefs.set('attrackBloomFilter', false);
+	}
+	// overlay search AB test
+	// if (abtest.hasTest('overlay_search')) {
+	// 	cliqz.enableModule('search');
+	// 	cliqz.enableModule('overlay');
+	// } else {
+	// 	cliqz.disableModule('search');
+	// 	cliqz.disableModule('overlay');
+	// }
+}
+
+/**
  * Initialize Dispatcher Events.
  * All Conf properties trigger a dispatcher pub event
  * whenever the value is set/updated.
@@ -1081,68 +1143,6 @@ function initializeDispatcher() {
 		// update content script state when blocking is paused/unpaused
 		cliqz.modules.core.action('refreshAppState');
 	});
-}
-
-/**
- * Determine Antitracking configuration parameters based
- * on the results returned from the abtest endpoint.
- * @memberOf Background
- *
- * @return {Object} 	Antitracking configuration parameters
- */
-function getAntitrackingTestConfig() {
-	if (abtest.hasTest('antitracking_full')) {
-		return {
-			qsEnabled: true,
-			telemetryMode: 2,
-		};
-	}
-	if (abtest.hasTest('antitracking_half')) {
-		return {
-			qsEnabled: true,
-			telemetryMode: 1,
-		};
-	}
-	if (abtest.hasTest('antitracking_collect')) {
-		return {
-			qsEnabled: false,
-			telemetryMode: 1,
-		};
-	}
-	return {
-		qsEnabled: true,
-		telemetryMode: 1,
-	};
-}
-
-/**
- * Adjust antitracking parameters based on the current state
- * of ABTest and availability of Human Web.
- */
-function setupABTest() {
-	const antitrackingConfig = getAntitrackingTestConfig();
-	if (antitrackingConfig && conf.enable_anti_tracking) {
-		if (!conf.enable_human_web) {
-			// force disable anti-tracking telemetry on humanweb opt-out
-			antitrackingConfig.telemetryMode = 0;
-		}
-		Object.keys(antitrackingConfig).forEach((opt) => {
-			const val = antitrackingConfig[opt];
-			log('antitracking', 'set config option', opt, val);
-			antitracking.action('setConfigOption', opt, val);
-		});
-	}
-	if (abtest.hasTest('antitracking_whitelist2')) {
-		cliqz.prefs.set('attrackBloomFilter', false);
-	}
-	// overlay search AB test
-	// if (abtest.hasTest('overlay_search')) {
-	// 	cliqz.enableModule('search');
-	// 	cliqz.enableModule('overlay');
-	// } else {
-	// 	cliqz.disableModule('search');
-	// 	cliqz.disableModule('overlay');
-	// }
 }
 
 /**
