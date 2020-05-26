@@ -56,7 +56,6 @@ describe('app/hub/Views/PlusView component', () => {
 			expect(component.find('.PlusView__headingImage').length).toBe(1);
 			expect(component.find('.PlusView__headingTitle').length).toBe(5);
 			expect(component.find('.PlusView__headingDescription').length).toBe(5);
-			expect(component.find('.PlusView__headingCost').length).toBe(1);
 			expect(component.find('.PlusView__perk').length).toBe(3);
 			expect(component.find('.PlusView__perkIcon').length).toBe(3);
 			expect(component.find('.PlusView__perkTitle').length).toBe(3);

@@ -31,14 +31,6 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
         >
           already_subscribed
         </div>
-        <div
-          className="PlusView__headingCost flex-container align-middle"
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "hub_supporter_price",
-            }
-          }
-        />
       </div>
     </div>
   </div>
@@ -368,14 +360,6 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
         >
           get_ghostery_plus
         </a>
-        <div
-          className="PlusView__headingCost flex-container align-middle"
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "hub_supporter_price",
-            }
-          }
-        />
       </div>
     </div>
   </div>

@@ -105,21 +105,11 @@ class HomeViewContainer extends Component {
 	 */
 	_handleTryMidnightClick = () => { this._handlePremiumPromoModalClick('premium'); }
 
-	/**
-	 * @returns {bool}
-	 * @private
-	 * Is the user a Premium subscriber?
-	 */
-	_premiumSubscriber = () => {
-		const { loggedIn, user } = this.props;
-
-		return loggedIn && (user && user.scopes && user.scopes.includes('subscriptions:premium'));
-	}
-
 	_render() {
 		const { justInstalled } = this.state;
 		const { home, user } = this.props;
-		const isPlus = (user && user.subscriptionsPlus) || false;
+		const isPlus = (user && user.plusAccess) || false;
+		const isPremium = (user && user.premiumAccess) || false;
 		const {
 			premium_promo_modal_shown,
 			setup_complete,
@@ -127,7 +117,7 @@ class HomeViewContainer extends Component {
 			enable_metrics,
 		} = home;
 
-		const showPromoModal = !premium_promo_modal_shown && !this._premiumSubscriber();
+		const showPromoModal = !premium_promo_modal_shown && !isPremium;
 
 		return (
 			<div className="full-height">
@@ -175,7 +165,7 @@ HomeViewContainer.propTypes = {
 	}),
 	user: PropTypes.shape({
 		email: PropTypes.string,
-		subscriptionsPlus: PropTypes.bool,
+		plusAccess: PropTypes.bool,
 	}),
 	actions: PropTypes.shape({
 		getHomeProps: PropTypes.func.isRequired,
@@ -195,7 +185,7 @@ HomeViewContainer.defaultProps = {
 	},
 	user: {
 		email: '',
-		subscriptionsPlus: false,
+		plusAccess: false,
 	},
 };
 

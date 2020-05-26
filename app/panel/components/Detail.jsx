@@ -73,7 +73,7 @@ class Detail extends React.Component {
 	 * @return {ReactComponent}   ReactComponent instance
 	 */
 	render() {
-		const { is_expanded, history, user } = this.props;
+		const { is_expanded, user, history } = this.props;
 		const condensedToggleClassNames = ClassNames('condensed-toggle', {
 			condensed: is_expanded,
 		});
@@ -94,7 +94,7 @@ class Detail extends React.Component {
 					<Route path="/detail/rewards" render={this.RewardsComponent} />
 					<DetailMenu
 						hasReward={false}
-						subscriptionsPlus={user && user.subscriptionsPlus}
+						plusAccess={user && user.plusAccess}
 						activeTab={activeTab}
 					/>
 				</div>

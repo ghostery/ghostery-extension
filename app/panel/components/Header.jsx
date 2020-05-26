@@ -150,13 +150,14 @@ class Header extends React.Component {
 		return is_expert ? '/detail/blocking' : '/';
 	}
 
-	clickUpgradeBannerOrGoldPlusIcon = () => {
+	clickUpgradeBannerOrSubscriberBadgeIcon = () => {
 		// TODO check whether this is the message we want to be sending now
 		const { history } = this.props;
 		sendMessage('ping', 'plus_panel_from_badge');
 		const { user } = this.props;
-		const subscriber = user && user.subscriptionsPlus;
-		history.push(subscriber ? '/subscription/info' : `/subscribe/${!!user}`);
+		const hasPlusAccess = user && user.plusAccess;
+		const hasPremiumAccess = user && user.premiumAccess;
+		history.push(hasPlusAccess || hasPremiumAccess ? '/subscription/info' : `/subscribe/${!!user}`);
 	}
 
 	/**
@@ -187,11 +188,12 @@ class Header extends React.Component {
 		const tabDetailedClassNames = ClassNames('header-tab', {
 			active: is_expert,
 		});
-		const subscriber = user && user.subscriptionsPlus;
+		const hasPlusAccess = user && user.plusAccess;
+		const hasPremiumAccess = user && user.premiumAccess;
 		const accountLogolink = this.generateAccountLogo();
 		const badgeClasses = ClassNames('columns', 'shrink', {
-			'non-subscriber-badge': !subscriber,
-			'gold-subscriber-badge': subscriber
+			'non-subscriber-badge': !(hasPlusAccess || hasPremiumAccess),
+			'subscriber-badge': hasPlusAccess || hasPremiumAccess
 		});
 
 		const simpleTab = (
@@ -227,10 +229,11 @@ class Header extends React.Component {
 		);
 
 		const plusUpgradeBannerOrSubscriberBadgeLogolink = (
-			<div className={badgeClasses} onClick={this.clickUpgradeBannerOrGoldPlusIcon}>
+			<div className={badgeClasses} onClick={this.clickUpgradeBannerOrSubscriberBadgeIcon}>
 				{
-					(subscriber && <ReactSVG src="/app/images/panel/gold-plus-icon-expanded-view.svg" />) ||
-					<ReactSVG src="/app/images/panel/green-upgrade-banner-expanded-view.svg" />
+					((hasPremiumAccess) && <ReactSVG src="/app/images/panel/premium-badge-icon-expanded-view.svg" />)
+					|| ((hasPlusAccess) && <ReactSVG src="/app/images/panel/plus-badge-icon-expanded-view.svg" />)
+					|| <ReactSVG src="/app/images/panel/green-upgrade-banner-expanded-view.svg" />
 				}
 			</div>
 		);
@@ -248,7 +251,8 @@ class Header extends React.Component {
 		const headerMenu = (
 			<HeaderMenu
 				loggedIn={loggedIn}
-				subscriber={subscriber}
+				hasPremiumAccess={hasPremiumAccess}
+				hasPlusAccess={hasPlusAccess}
 				email={user && user.email}
 				language={language}
 				tab_id={tab_id}

@@ -31,7 +31,7 @@ class Stats extends React.Component {
 	 */
 	componentDidMount() {
 		sendMessage('ping', 'hist_stats_panel');
-		if (!this._isPlus(this.props)) {
+		if (!this._hasPlusAccess(this.props)) {
 			this.setState(this._reset(true));
 			return;
 		}
@@ -42,8 +42,8 @@ class Stats extends React.Component {
 	 * Lifecycle event
 	 */
 	componentDidUpdate(prevProps) {
-		const thisPlus = this._isPlus(this.props);
-		const prevPlus = this._isPlus(prevProps);
+		const thisPlus = this._hasPlusAccess(this.props);
+		const prevPlus = this._hasPlusAccess(prevProps);
 		if (thisPlus !== prevPlus) {
 			if (thisPlus) {
 				this._init();
@@ -152,7 +152,7 @@ class Stats extends React.Component {
 	 * @param {Object} event 		click event
 	 */
 	selectView = (event) => {
-		if (!this._isPlus(this.props)) {
+		if (!this._hasPlusAccess(this.props)) {
 			return;
 		}
 		const state = { ...this.state };
@@ -176,7 +176,7 @@ class Stats extends React.Component {
 	 * @param {Object} event 		click event
 	 */
 	selectType = (event) => {
-		if (!this._isPlus(this.props)) {
+		if (!this._hasPlusAccess(this.props)) {
 			return;
 		}
 		const state = { ...this.state };
@@ -226,7 +226,7 @@ class Stats extends React.Component {
 	 * @param {Object} event 		click event
 	 */
 	selectTimeframe = (e) => {
-		if (!this._isPlus(this.props)) {
+		if (!this._hasPlusAccess(this.props)) {
 			return;
 		}
 		const state = { ...this.state };
@@ -255,7 +255,7 @@ class Stats extends React.Component {
 	}
 
 	resetStats = () => {
-		if (!this._isPlus(this.props)) {
+		if (!this._hasPlusAccess(this.props)) {
 			return;
 		}
 		this.setState({ showResetModal: true });
@@ -334,7 +334,7 @@ class Stats extends React.Component {
 			monthlyAverageData: clearData,
 			dailyAverageData: clearData,
 			showResetModal: false,
-			showPitchModal: (!user || !user.subscriptionsPlus),
+			showPitchModal: (!user || !user.plusAccess),
 		};
 		return clearOrDemoState;
 	}
@@ -522,7 +522,7 @@ class Stats extends React.Component {
 		return selectionData;
 	}
 
-	_isPlus = props => props.user && props.user.subscriptionsPlus;
+	_hasPlusAccess = props => props.user && props.user.plusAccess;
 
 	/**
 	 * Render the the Stats View
@@ -534,7 +534,7 @@ class Stats extends React.Component {
 		return (
 			<StatsView
 				showResetModal={showResetModal}
-				showPitchModal={!user || !user.subscriptionsPlus}
+				showPitchModal={!user || !user.plusAccess}
 				loggedIn={loggedIn}
 				getStats={this.getStats}
 				selection={selection}

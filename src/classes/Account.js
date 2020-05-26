@@ -159,25 +159,38 @@ class Account {
 			})
 	)
 
+	/**
+	 * @return {array}	All subscriptions the user has, empty if none
+	*/
 	getUserSubscriptionData = () => (
 		this._getUserID()
 			.then(userID => api.get('stripe/customers', userID, 'cards,subscriptions'))
 			.then((res) => {
 				const customer = build(normalize(res), 'customers', res.data.id);
+
 				// TODO temporary fix to handle multiple subscriptions
 				let sub = customer.subscriptions;
 				if (!Array.isArray(sub)) {
 					sub = [sub];
 				}
-				const subPlus = sub.reduce((acc, curr) => {
-					let a = acc;
-					if (curr.productName.includes('Plus')) {
-						a = curr;
+
+				const subscriptions = [];
+
+				const premiumSubscription = sub.find(subscription => subscription.productName.includes('Ghostery Premium'));
+				if (premiumSubscription) {
+					subscriptions.push(premiumSubscription);
+					this._setSubscriptionData(premiumSubscription);
+				}
+
+				const plusSubscription = sub.find(subscription => subscription.productName.includes('Ghostery Plus'));
+				if (plusSubscription) {
+					subscriptions.push(plusSubscription);
+					if (!premiumSubscription) {
+						this._setSubscriptionData(plusSubscription);
 					}
-					return a;
-				}, {});
-				this._setSubscriptionData(subPlus);
-				return customer;
+				}
+
+				return subscriptions;
 			})
 	)
 
