@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import KordInjector from '../classes/ExtMessenger';
+import KordInjector from '../classes/KordInjector';
 import { log } from './common';
 
 /**

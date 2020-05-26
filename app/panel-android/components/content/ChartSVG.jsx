@@ -37,9 +37,8 @@ export default class ChartSVG extends React.Component {
 	render() {
 		const { paths, radius } = this.props;
 		const { nItem } = this.state;
-		let computedPaths = paths.slice(0, nItem).map((element, index) => (
-			// eslint-disable-next-line react/no-array-index-key
-			<Path key={index} path={element} radius={radius} handler={this.increaseN}	/>
+		let computedPaths = paths.slice(0, nItem).map(element => (
+			<Path key={element.start} path={element} radius={radius} handler={this.increaseN} />
 		));
 
 		if (computedPaths.length === 0) {

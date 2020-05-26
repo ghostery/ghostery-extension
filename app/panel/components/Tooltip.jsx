@@ -12,7 +12,6 @@
  */
 
 import React from 'react';
-import ReactDOM from 'react-dom';
 import ClassNames from 'classnames';
 
 /**
@@ -36,8 +35,7 @@ class Tooltip extends React.Component {
 	 * Lifecycle event. Set listeners.
 	 */
 	componentDidMount() {
-		// eslint-disable-next-line react/no-find-dom-node
-		this.parentNode = ReactDOM.findDOMNode(this).parentNode;
+		this.parentNode = this.node.parentNode;
 		this.parentNode.addEventListener('mouseenter', this.delayHover);
 		this.parentNode.addEventListener('mouseleave', this.leave);
 		this.parentNode.addEventListener('click', this.leave);
@@ -97,7 +95,7 @@ class Tooltip extends React.Component {
 		});
 
 		return (
-			<span className={compClassNames}>
+			<span ref={(node) => { this.node = node; }} className={compClassNames}>
 				{show && (
 					<span className={`tooltip-content ${position}`}>
 						{header &&

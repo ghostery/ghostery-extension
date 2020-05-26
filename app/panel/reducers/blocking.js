@@ -11,7 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint no-use-before-define: 0 */
 import {
 	UPDATE_BLOCKING_DATA,
 	FILTER_TRACKERS,

@@ -32,7 +32,8 @@ class FoundBugs {
 	 *				sources: [{
 	 *					src: string,
 	 *					blocked: boolean,
-	 *					type: string
+	 *					type: string,
+	 *					request_id: string
 	 *				}]
 	 *			}
 	 *		}
@@ -50,7 +51,8 @@ class FoundBugs {
 	 *				sources: [{
 	 *					src: string,
 	 *					blocked: boolean,
-	 *					type: string
+	 *					type: string,
+	 *					request_id: string
 	 *				}]
 	 *			}],
 	 *			appsMetadata: {
@@ -88,8 +90,9 @@ class FoundBugs {
 	 * @param  {string} 	src			resource url
 	 * @param  {boolean} 	blocked 	blocking status of the tracker id from this tab_id
 	 * @param  {string} 	type 		request resource type
+	 * @param  {string} 	request_id 	request_id for the resource to use as a unique id
 	 */
-	update(tab_id, bug_id, src, blocked, type) {
+	update(tab_id, bug_id, src, blocked, type, request_id) {
 		if (!this._init(tab_id)) {
 			return;
 		}
@@ -98,7 +101,7 @@ class FoundBugs {
 			return;
 		}
 
-		this._updateFoundBugs(tab_id, bug_id, src, blocked, type);
+		this._updateFoundBugs(tab_id, bug_id, src, blocked, type, request_id);
 		this._updateFoundApps(tab_id, bug_id);
 	}
 
@@ -192,7 +195,7 @@ class FoundBugs {
 		const { db } = bugDb;
 
 		let id;
-		let aid;
+		let appid;
 		let cid; // category id
 
 		if (!bugs) {
@@ -204,15 +207,15 @@ class FoundBugs {
 		for (let i = 0; i < ids.length; i++) {
 			id = ids[i];
 			if (bugs.hasOwnProperty(id)) {
-				aid = db.bugs[id].aid; // eslint-disable-line prefer-destructuring
-				cid = db.apps[aid].cat;
+				appid = db.bugs[id].aid;
+				cid = db.apps[appid].cat;
 
 				if (cats_obj.hasOwnProperty(cid)) {
-					if (!cats_obj[cid].appIds.includes(aid)) {
-						cats_obj[cid].appIds.push(aid);
+					if (!cats_obj[cid].appIds.includes(appid)) {
+						cats_obj[cid].appIds.push(appid);
 						cats_obj[cid].trackers.push({
-							id: aid,
-							name: db.apps[aid].name,
+							id: appid,
+							name: db.apps[appid].name,
 							blocked: bugs[id].blocked
 						});
 						if (bugs[id].blocked) {
@@ -226,10 +229,10 @@ class FoundBugs {
 					cats_obj[cid] = {
 						id: cid,
 						name: cid,
-						appIds: [aid],
+						appIds: [appid],
 						trackers: [{
-							id: aid,
-							name: db.apps[aid].name,
+							id: appid,
+							name: db.apps[appid].name,
 							blocked: bugs[id].blocked
 						}],
 						blocked: (bugs[id].blocked ? 1 : 0),
@@ -442,8 +445,9 @@ class FoundBugs {
 	 * @param  {string} 	src     source urls for the bug
 	 * @param  {boolean} 	blocked
 	 * @param  {string} 	type
+	 * @param  {string} 	request_id 	request_id for the resource to use as a unique id
 	 */
-	_updateFoundBugs(tab_id, bug_id, src, blocked, type) {
+	_updateFoundBugs(tab_id, bug_id, src, blocked, type, request_id) {
 		if (!this._foundBugs[tab_id].hasOwnProperty(bug_id)) {
 			this._foundBugs[tab_id][bug_id] = {
 				sources: [],
@@ -457,7 +461,8 @@ class FoundBugs {
 		bug.sources.push({
 			src,
 			blocked,
-			type: type.toLowerCase()
+			type: type.toLowerCase(),
+			request_id
 		});
 
 		// Check for insecure tag loading in secure page

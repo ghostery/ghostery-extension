@@ -64,8 +64,8 @@ class CMP {
 				});
 				// update Conf and local CMP_DATA
 				conf.cmp_version = data.Version;
-				// eslint-disable-next-line no-multi-assign
-				globals.SESSION.cmp_data = this.CMP_DATA = data.Campaigns;
+				globals.SESSION.cmp_data = data.Campaigns;
+				this.CMP_DATA = data.Campaigns;
 				return this.CMP_DATA;
 			}
 			// getJson() returned a 204, meaning no new campaigns available

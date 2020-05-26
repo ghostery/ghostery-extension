@@ -202,7 +202,7 @@ class DonutGraph extends React.Component {
 	 * @param  {Array} categories list of categories detected on the site
 	 * @param  {Object} options    options for the graph
 	 */
-	bakeDonut = throttle(this._bakeDonut.bind(this), 600, { leading: true, trailing: true }) // eslint-disable-line react/sort-comp
+	bakeDonut = throttle(this._bakeDonut.bind(this), 600, { leading: true, trailing: true })
 
 	_bakeDonut(categories, antiTracking, adBlock, options) {
 		const {

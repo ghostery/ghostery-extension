@@ -11,10 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint consistent-return: 0 */
-/* eslint no-use-before-define: 0 */
-/* eslint no-shadow: 0 */
-
 /**
  * @namespace Background
  */
@@ -717,13 +713,13 @@ function onMessageHandler(request, sender, callback) {
 	// The message is still sent by panel-android and by the setup hub as of 8.4.0
 	if (name === 'getPanelData') {
 		if (!message.tabId) {
-			utils.getActiveTab((tab) => {
-				const data = panelData.get(message.view, tab);
+			utils.getActiveTab((activeTab) => {
+				const data = panelData.get(message.view, activeTab);
 				callback(data);
 			});
 		} else {
-			chrome.tabs.get(+message.tabId, (tab) => {
-				const data = panelData.get(message.view, tab);
+			chrome.tabs.get(+message.tabId, (messageTab) => {
+				const data = panelData.get(message.view, messageTab);
 				callback(data);
 			});
 		}
@@ -737,9 +733,9 @@ function onMessageHandler(request, sender, callback) {
 		return true;
 	}
 	if (name === 'getAllStats') {
-		insights.action('getAllDays').then((data) => {
-			insights.action('getStatsTimeline', moment(data[0]), moment(), true, true).then((data) => {
-				callback(data);
+		insights.action('getAllDays').then((dataDays) => {
+			insights.action('getStatsTimeline', moment(dataDays[0]), moment(), true, true).then((dataTimeline) => {
+				callback(dataTimeline);
 			});
 		});
 		return true;
@@ -765,8 +761,8 @@ function onMessageHandler(request, sender, callback) {
 		return false;
 	}
 	if (name === 'getCliqzModuleData') { // panel-android only
-		utils.getActiveTab((tab) => {
-			sendCliqzModuleCounts(tab.id, tab.pageHost, callback);
+		utils.getActiveTab((activeTab) => {
+			sendCliqzModuleCounts(activeTab.id, activeTab.pageHost, callback);
 		});
 		return true;
 	}
@@ -935,8 +931,8 @@ function onMessageHandler(request, sender, callback) {
 		return false;
 	}
 	if (name === 'getSettingsForExport') {
-		utils.getActiveTab((tab) => {
-			if (tab && tab.id && tab.url.startsWith('http')) {
+		utils.getActiveTab((activeTab) => {
+			if (activeTab && activeTab.id && activeTab.url.startsWith('http')) {
 				const settings = account.buildUserSettings();
 				// Blacklisted and whitelisted sites are removed from sync array,
 				// but we want to allow export and import these properties manually
@@ -946,8 +942,8 @@ function onMessageHandler(request, sender, callback) {
 				try {
 					const hash = common.hashCode(JSON.stringify({ conf: settings }));
 					const backup = JSON.stringify({ hash, settings: { conf: settings } });
-					utils.injectNotifications(tab.id, true).then(() => {
-						sendMessage(tab.id, 'exportFile', backup);
+					utils.injectNotifications(activeTab.id, true).then(() => {
+						sendMessage(activeTab.id, 'exportFile', backup);
 					});
 					callback(true);
 				} catch (e) {
@@ -964,11 +960,11 @@ function onMessageHandler(request, sender, callback) {
 		return false;
 	}
 	if (name === 'showBrowseWindow') {
-		utils.getActiveTab((tab) => {
-			if (tab && tab.id && tab.url.startsWith('http')) {
-				utils.injectNotifications(tab.id, true).then((result) => {
+		utils.getActiveTab((activeTab) => {
+			if (activeTab && activeTab.id && activeTab.url.startsWith('http')) {
+				utils.injectNotifications(activeTab.id, true).then((result) => {
 					if (result) {
-						sendMessage(tab.id, 'showBrowseWindow', {
+						sendMessage(activeTab.id, 'showBrowseWindow', {
 							translations: {
 								browse_button_label: t('browse_button_label'), // Browse...
 								select_file_for_import: t('select_file_for_import'), // Select .ghost file for import
@@ -1275,12 +1271,12 @@ insights.on('disabled', () => {
  */
 function getDataForGhosteryTab(callback) {
 	const passedData = {};
-	insights.action('getAllDays').then((data) => {
-		insights.action('getStatsTimeline', moment(data[0]), moment(), true, true).then((data) => {
+	insights.action('getAllDays').then((dataDays) => {
+		insights.action('getStatsTimeline', moment(dataDays[0]), moment(), true, true).then((dataTimeline) => {
 			const cumulativeData = {
 				adsBlocked: 0, cookiesBlocked: 0, dataSaved: 0, fingerprintsRemoved: 0, loadTime: 0, pages: 0, timeSaved: 0, trackerRequestsBlocked: 0, trackersBlocked: 0, trackersDetected: 0
 			};
-			data.forEach((entry) => {
+			dataTimeline.forEach((entry) => {
 				Object.keys(cumulativeData).forEach((key) => {
 					cumulativeData[key] += entry[key];
 				});

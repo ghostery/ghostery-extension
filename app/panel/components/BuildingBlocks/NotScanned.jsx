@@ -24,7 +24,7 @@ const NotScanned = ({ isSmall }) => {
 		small: isSmall,
 	});
 
-	return ( // eslint-disable-line arrow-parens
+	return (
 		<div className={notScannedClassNames}>
 			<div className="not-scanned-header">
 				{t('summary_page_not_scanned') }

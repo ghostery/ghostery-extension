@@ -11,8 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint consistent-return: 0 */
-
 import conf from './Conf';
 import foundBugs from './FoundBugs';
 import tabInfo from './TabInfo';

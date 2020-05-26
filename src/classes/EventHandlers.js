@@ -435,7 +435,8 @@ class EventHandlers {
 				block,
 				smartBlocked,
 				tab_id,
-				from_frame: eventMutable.parentFrameId !== -1
+				from_frame: eventMutable.parentFrameId !== -1,
+				request_id
 			});
 		}, 1);
 
@@ -478,7 +479,7 @@ class EventHandlers {
 	 */
 	static onHeadersReceived(details) {
 		// Skip content-length collection if it's a 3XX (redirect)
-		if (details.statusCode >> 8 === 1) { }  // eslint-disable-line
+		if (details.statusCode >> 8 === 1) { } // eslint-disable-line no-bitwise, no-empty
 	}
 
 	/**
@@ -598,7 +599,7 @@ class EventHandlers {
 	 */
 	_processBug(details) {
 		const {
-			bug_id, app_id, type, url, block, smartBlocked, tab_id
+			bug_id, app_id, type, url, block, smartBlocked, tab_id, request_id
 		} = details;
 		const tab = tabInfo.getTabInfo(tab_id);
 		const allowedOnce = c2pDb.allowedOnce(details.tab_id, app_id);
@@ -612,7 +613,7 @@ class EventHandlers {
 			num_apps_old = foundBugs.getAppsCount(tab_id);
 		}
 
-		foundBugs.update(tab_id, bug_id, url, block, type);
+		foundBugs.update(tab_id, bug_id, url, block, type, request_id);
 
 		this._throttleButtonUpdate(details.tab_id);
 
@@ -680,10 +681,7 @@ class EventHandlers {
 				const surrogates = surrogatedb.getForTracker(details.url, appId, bugId, ti.host);
 
 				if (surrogates.length > 0) {
-					code = reduce(surrogates, (memo, s) => {
-						memo += s.code; // eslint-disable-line no-param-reassign
-						return memo;
-					}, '');
+					code = reduce(surrogates, (memo, s) => memo + s.code, '');
 				}
 			}
 
@@ -741,7 +739,7 @@ class EventHandlers {
 		// hs_reqwest_0 - function which will be called on the client after the request
 		//
 		// hutk=941df50e9277ee76755310cd78647a08 -is user-specific (same every session)
-		const tokens = url.substr(8).split(/\/|\&|\?|\#|\=/ig); // eslint-disable-line no-useless-escape
+		const tokens = url.substr(8).split(/\/|&|\?|#|=/ig);
 
 		return `${tokens[7]}({"form":{"portalId":${tokens[4]},"guid": "${tokens[5]}","cssClass":"hs-form stacked","formFieldGroups":[{"fields":[{}]}],"metaData":[]},"properties":{}})`;
 	}

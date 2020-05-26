@@ -11,8 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint no-use-before-define: 0 */
-
 import { reject } from 'underscore';
 import bugDb from '../classes/BugDb';
 import c2pDb from '../classes/Click2PlayDb';
@@ -230,6 +228,6 @@ function _getHubspotFormSelector(url) {
 	// hs_reqwest_0 - function which will be called on the client after the request
 	//
 	// hutk=941df50e9277ee76755310cd78647a08 -is user-specific (same every session)
-	const tokens = url.substr(8).split(/\/|\&|\?|\#|\=/ig); // eslint-disable-line no-useless-escape
+	const tokens = url.substr(8).split(/\/|&|\?|#|=/ig);
 	return `form[id="hsForm_${tokens[5]}"]`;
 }

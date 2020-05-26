@@ -157,8 +157,7 @@ class TrustAndRestrict extends React.Component {
 		if (pageHost.includes('*')) {
 			const wildcardPattern = pageHost.replace(/\*/g, '.*');
 			try {
-				// eslint-disable-next-line
-				new RegExp(wildcardPattern);
+				new RegExp(wildcardPattern); // eslint-disable-line no-new
 				isValidWildcard = true;
 			} catch (err) {
 				return false;

@@ -11,9 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint no-param-reassign: 0 */
-/* eslint no-shadow: 0 */
-
 import {
 	difference, each, every, keys, reduce, size
 } from 'underscore';
@@ -95,12 +92,7 @@ class BugDb extends Updatable {
 				blocked = selectedApps.hasOwnProperty(appId);
 
 				// Because we have two trackers in the DB with the same name
-				if ((categories[category] && categories[category].trackers[db.apps[appId].name])) {
-					// eslint-disable-next-line no-continue
-					continue;
-				}
-
-				if (categories.hasOwnProperty(category)) {
+				if (!(categories[category] && categories[category].trackers[db.apps[appId].name]) && categories.hasOwnProperty(category)) {
 					categories[category].num_total++;
 					if (blocked) {
 						categories[category].num_blocked++;
@@ -132,24 +124,24 @@ class BugDb extends Updatable {
 		for (let i = 0; i < categoryNames.length; i++) {
 			categoryName = categoryNames[i];
 			if (categories.hasOwnProperty(categoryName)) {
-				const category = categories[categoryName];
-				if (category.trackers) {
-					category.trackers.sort((a, b) => {
-						a = a.name.toLowerCase();
-						b = b.name.toLowerCase();
-						return (a > b ? 1 : (a < b ? -1 : 0));
+				const cat = categories[categoryName];
+				if (cat.trackers) {
+					cat.trackers.sort((a, b) => {
+						const a1 = a.name.toLowerCase();
+						const b1 = b.name.toLowerCase();
+						return (a1 > b1 ? 1 : (a1 < b1 ? -1 : 0));
 					});
 				}
 
-				categoryArray.push(category);
+				categoryArray.push(cat);
 			}
 		}
 
 		// Sort categories by tracker numbers
 		categoryArray.sort((a, b) => {
-			a = a.trackers ? a.trackers.length : 0;
-			b = b.trackers ? b.trackers.length : 0;
-			return (a > b ? -1 : (a < b ? 1 : 0));
+			const a1 = a.trackers ? a.trackers.length : 0;
+			const b1 = b.trackers ? b.trackers.length : 0;
+			return (a1 > b1 ? -1 : (a1 < b1 ? 1 : 0));
 		});
 
 		return categoryArray;
@@ -198,8 +190,8 @@ class BugDb extends Updatable {
 
 		// since allSelected is slow to eval, make it lazy
 		defineLazyProperty(db, 'allSelected', () => {
-			const num_selected = size(conf.selected_app_ids);
-			return (!!num_selected && every(db.apps, (app, app_id) => conf.selected_app_ids.hasOwnProperty(app_id)));
+			const num_selected_lazy = size(conf.selected_app_ids);
+			return (!!num_selected_lazy && every(db.apps, (app, app_id) => conf.selected_app_ids.hasOwnProperty(app_id)));
 		});
 
 		log('processed bugdb...');
@@ -220,9 +212,9 @@ class BugDb extends Updatable {
 
 				// pre-trie/legacy db
 				} else if (old_bugs.hasOwnProperty('bugsVersion') && bugs.version !== old_bugs.bugsVersion) {
-					const old_apps = reduce(old_bugs.bugs, (memo, bug) => {
-						memo[bug.aid] = true;
-						return memo;
+					const old_apps = reduce(old_bugs.bugs, (acc, bug) => {
+						acc[bug.aid] = true;
+						return acc;
 					}, {});
 
 					new_app_ids = BugDb.updateNewAppIds(bugs.apps, old_apps);

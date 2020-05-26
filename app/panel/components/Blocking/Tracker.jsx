@@ -11,8 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint react/no-array-index-key: 0 */
-
 import React from 'react';
 import ClassNames from 'classnames';
 
@@ -355,21 +353,21 @@ class Tracker extends React.Component {
 
 		let sources;
 		if (tracker.sources) {
-			sources = tracker.sources.map((source, index) => (
+			sources = tracker.sources.map(source => (
 				<a
 					target="_blank"
 					rel="noopener noreferrer"
 					className="trk-src-link"
 					title={source.src}
-					key={index}
+					key={source.request_id}
 					href={`${globals.GCACHE_BASE_URL}/${encodeURIComponent(language)}/gcache/?n=${encodeURIComponent(tracker.name)}&s=${encodeURIComponent(source.src)}&v=2&t=${source.type}`}
 				>
 					{ source.src }
 				</a>
 			));
 		} else if (tracker.domains) {
-			sources = tracker.domains.map((domain, index) => (
-				<p className="trk-src-link unknown" key={index}>{domain}</p>
+			sources = tracker.domains.map(domain => (
+				<p className="trk-src-link unknown" key={domain}>{domain}</p>
 			));
 		}
 

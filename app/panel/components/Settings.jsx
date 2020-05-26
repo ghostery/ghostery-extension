@@ -233,7 +233,7 @@ class Settings extends React.Component {
 	/**
 	 * Hide alert in 3 sec. after it has been shown.
 	 */
-	hideToast = debounce(function() { // eslint-disable-line react/sort-comp
+	hideToast = debounce(function() {
 		this.setState({
 			showToast: false,
 			toastText: ''

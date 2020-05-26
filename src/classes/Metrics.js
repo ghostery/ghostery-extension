@@ -385,14 +385,11 @@ class Metrics {
 	 *
 	 * @private
 	 *
-	 * @param {string} 		type 						ping type
+	 * @param {string} 		type 				ping type
 	 * @param {array} 		[frequencies = ['all']] 	array of ping frequencies
 	 */
-	_sendReq(type, frequencies) {
+	_sendReq(type, frequencies = ['all']) {
 		let options = {};
-		if (typeof frequencies === 'undefined') {
-			frequencies = ['all']; // eslint-disable-line no-param-reassign
-		}
 
 		if (typeof fetch === 'function') {
 			const headers = new Headers();

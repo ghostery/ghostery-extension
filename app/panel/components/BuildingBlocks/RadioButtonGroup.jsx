@@ -11,8 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint jsx-a11y/label-has-associated-control: 0 */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import RadioButton from './RadioButton';

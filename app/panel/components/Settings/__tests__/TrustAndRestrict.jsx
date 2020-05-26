@@ -11,8 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint no-useless-escape: 0 */
-
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { when } from 'jest-when';
@@ -123,7 +121,7 @@ describe('app/panel/components/Settings/', () => {
 	});
 
 	test('isValidUrlorWildcard should return false with unsafe test entered', () => {
-		let input = '/^(\w+\s?)*$/';
+		let input = '/^(\w+\s?)*$/'; // eslint-disable-line no-useless-escape
 		let fn = jest.spyOn(TrustAndRestrict, 'isValidUrlorWildcard');
 		when(fn).calledWith(input);
 		let returnValue = TrustAndRestrict.isValidUrlorWildcard(input);
@@ -135,7 +133,7 @@ describe('app/panel/components/Settings/', () => {
 		returnValue = TrustAndRestrict.isValidUrlorWildcard(input);
 		expect(returnValue).toBe(false);
 
-		input = '(x\w{1,10})+y';
+		input = '(x\w{1,10})+y'; // eslint-disable-line no-useless-escape
 		fn = jest.spyOn(TrustAndRestrict, 'isValidUrlorWildcard');
 		when(fn).calledWith(input);
 		returnValue = TrustAndRestrict.isValidUrlorWildcard(input);

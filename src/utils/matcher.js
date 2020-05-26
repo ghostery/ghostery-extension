@@ -11,8 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint no-use-before-define: 0 */
-
 import bugDb from '../classes/BugDb';
 import conf from '../classes/Conf';
 import { processUrl, processFpeUrl } from './utils';

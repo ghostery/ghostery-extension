@@ -11,8 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint no-use-before-define: 0 */
-
 import moment from 'moment/min/moment-with-locales.min';
 import {
 	IMPORT_SETTINGS_DIALOG,

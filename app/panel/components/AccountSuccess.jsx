@@ -18,7 +18,7 @@ import { Link } from 'react-router-dom';
  * in place of Sign In view on successful signing.
  * @memberof PanelClasses
  */
-const AccountSuccess = ({ email, is_expert }) => ( // eslint-disable-line arrow-parens
+const AccountSuccess = ({ email, is_expert }) => (
 	<div id="signin-success-panel">
 		<div className="row align-center">
 			<div className="small-7 columns text-center">

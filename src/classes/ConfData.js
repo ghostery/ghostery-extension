@@ -16,8 +16,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint no-use-before-define: 0 */
-
 import globals from './Globals';
 import { prefsGet } from '../utils/common';
 

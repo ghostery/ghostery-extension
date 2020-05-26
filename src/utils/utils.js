@@ -13,8 +13,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint no-shadow: 0 */
-
 /**
  * @namespace BackgroundUtils
  */

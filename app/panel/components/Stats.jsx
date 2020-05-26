@@ -32,7 +32,6 @@ class Stats extends React.Component {
 	componentDidMount() {
 		sendMessage('ping', 'hist_stats_panel');
 		if (!this._isPlus(this.props)) {
-			// eslint-disable-next-line
 			this.setState(this._reset(true));
 			return;
 		}

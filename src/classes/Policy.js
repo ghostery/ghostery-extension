@@ -13,7 +13,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint no-param-reassign: 0 */
 import c2pDb from './Click2PlayDb';
 import conf from './Conf';
 import globals from './Globals';

@@ -672,9 +672,9 @@ class PanelData {
 		const categoryArray = Object.values(categories);
 
 		categoryArray.sort((a, b) => {
-			a = a.name.toLowerCase(); // eslint-disable-line no-param-reassign
-			b = b.name.toLowerCase(); // eslint-disable-line no-param-reassign
-			return (a > b ? 1 : (a < b ? -1 : 0));
+			const a1 = a.name.toLowerCase();
+			const b1 = b.name.toLowerCase();
+			return (a1 > b1 ? 1 : (a1 < b1 ? -1 : 0));
 		});
 
 		return categoryArray;

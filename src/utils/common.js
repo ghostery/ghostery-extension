@@ -14,8 +14,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint no-console: 0 no-bitwise: 0 */
-
 // DO NOT IMPORT MODULES TO THIS FILE
 
 const LOG = chrome.runtime.getManifest().log || false;
@@ -38,10 +36,10 @@ export function log(...args) {
 	args.unshift(`${(new Date()).toLocaleTimeString()}\t`);
 
 	if (hasErrors) {
-		console.error(...args);
-		console.trace();
+		console.error(...args); // eslint-disable-line no-console
+		console.trace(); // eslint-disable-line no-console
 	} else {
-		console.log(...args);
+		console.log(...args); // eslint-disable-line no-console
 	}
 	return true;
 }
@@ -150,8 +148,8 @@ export function hashCode(str) {
 
 	for (i = 0; i < str.length; i++) {
 		character = str.charCodeAt(i);
-		hash = ((hash << 5) - hash) + character;
-		hash &= hash;
+		hash = ((hash << 5) - hash) + character; // eslint-disable-line no-bitwise
+		hash &= hash; // eslint-disable-line no-bitwise
 	}
 
 	return hash;
@@ -165,8 +163,8 @@ export function hashCode(str) {
  * @return {string}			unescaped str
  */
 function _base64urlUnescape(str) {
-	str += new Array(5 - (str.length % 4)).join('='); // eslint-disable-line no-param-reassign
-	return str.replace(/\-/g, '+').replace(/_/g, '/'); // eslint-disable-line no-useless-escape
+	const returnStr = str + new Array(5 - (str.length % 4)).join('=');
+	return returnStr.replace(/-/g, '+').replace(/_/g, '/');
 }
 
 /**
@@ -177,7 +175,7 @@ function _base64urlUnescape(str) {
  * @return {string}			decoded string
  */
 function _base64urlDecode(str) {
-	return new Buffer(_base64urlUnescape(str), 'base64').toString(); // eslint-disable-line no-buffer-constructor
+	return Buffer.from(_base64urlUnescape(str), 'base64').toString();
 }
 
 /**
