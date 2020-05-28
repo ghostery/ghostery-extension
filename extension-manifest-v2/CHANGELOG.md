@@ -1,3 +1,9 @@
+### GHOSTERY 8.5.1 (June 1, 2020)
+
++ Unlock Plus features for Ghostery Midnight users (#546)
++ Update Ghostery Plus feature list in subscription panel (#540)
++ Remove hard-coded subscription pricing (#547)
+
 ### GHOSTERY 8.5.0 (May 7, 2020)
 
 + New Spring themes for Plus subscribers (#525)
