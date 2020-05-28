@@ -248,7 +248,7 @@ export default (state = initialState, action) => {
 						errorText = t('email_address_in_use');
 						break;
 					case '10080':
-						errorText = t('your_emails_do_not_match');
+						errorText = t('your_email_do_not_match');
 						break;
 					default:
 						errorText = t('server_error_message');
