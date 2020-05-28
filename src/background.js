@@ -165,12 +165,10 @@ function setGhosteryDefaultBlocking() {
 	const app_ids = Object.keys(bugDb.db.apps);
 	for (let i = 0; i < app_ids.length; i++) {
 		const app_id = app_ids[i];
-		if (bugDb.db.apps.hasOwnProperty(app_id)) {
-			const category = bugDb.db.apps[app_id].cat;
-			if (categoriesBlock.indexOf(category) >= 0 &&
-			!selected_app_ids.hasOwnProperty(app_id)) {
-				selected_app_ids[app_id] = 1;
-			}
+		const category = bugDb.db.apps[app_id].cat;
+		if (categoriesBlock.indexOf(category) >= 0 &&
+		!selected_app_ids.hasOwnProperty(app_id)) {
+			selected_app_ids[app_id] = 1;
 		}
 	}
 	panelData.set({ selected_app_ids });

@@ -84,61 +84,57 @@ class BugDb extends Updatable {
 		const appIds = Object.keys(db.apps);
 		for (let i = 0; i < appIds.length; i++) {
 			appId = appIds[i];
-			if (db.apps.hasOwnProperty(appId)) {
-				category = db.apps[appId].cat;
-				if (t(`category_${category}`) === `category_${category}`) {
-					category = 'uncategorized';
-				}
-				blocked = selectedApps.hasOwnProperty(appId);
-
-				// Because we have two trackers in the DB with the same name
-				if ((categories[category] && categories[category].trackers[db.apps[appId].name])) {
-					continue; // eslint-disable-line no-continue
-				}
-
-				if (categories.hasOwnProperty(category)) {
-					categories[category].num_total++;
-					if (blocked) {
-						categories[category].num_blocked++;
-					}
-				} else {
-					categories[category] = {
-						id: category,
-						name: t(`category_${category}`),
-						description: t(`category_${category}_desc`),
-						img_name: (category === 'advertising') ? 'adv' : // Because AdBlock blocks images with 'advertising' in the name.
-							(category === 'social_media') ? 'smed' : category, // Because AdBlock blocks images with 'social' in the name.
-						num_total: 1,
-						num_blocked: (blocked) ? 1 : 0,
-						trackers: []
-					};
-				}
-				categories[category].trackers.push({
-					id: appId,
-					name: db.apps[appId].name,
-					description: '',
-					blocked,
-					shouldShow: true,
-					catId: category,
-				});
+			category = db.apps[appId].cat;
+			if (t(`category_${category}`) === `category_${category}`) {
+				category = 'uncategorized';
 			}
+			blocked = selectedApps.hasOwnProperty(appId);
+
+			// Because we have two trackers in the DB with the same name
+			if ((categories[category] && categories[category].trackers[db.apps[appId].name])) {
+				continue; // eslint-disable-line no-continue
+			}
+
+			if (categories.hasOwnProperty(category)) {
+				categories[category].num_total++;
+				if (blocked) {
+					categories[category].num_blocked++;
+				}
+			} else {
+				categories[category] = {
+					id: category,
+					name: t(`category_${category}`),
+					description: t(`category_${category}_desc`),
+					img_name: (category === 'advertising') ? 'adv' : // Because AdBlock blocks images with 'advertising' in the name.
+						(category === 'social_media') ? 'smed' : category, // Because AdBlock blocks images with 'social' in the name.
+					num_total: 1,
+					num_blocked: (blocked) ? 1 : 0,
+					trackers: []
+				};
+			}
+			categories[category].trackers.push({
+				id: appId,
+				name: db.apps[appId].name,
+				description: '',
+				blocked,
+				shouldShow: true,
+				catId: category,
+			});
 		}
 
 		const categoryNames = Object.keys(categories);
 		for (let i = 0; i < categoryNames.length; i++) {
 			categoryName = categoryNames[i];
-			if (categories.hasOwnProperty(categoryName)) {
-				const cat = categories[categoryName];
-				if (cat.trackers) {
-					cat.trackers.sort((a, b) => {
-						const a1 = a.name.toLowerCase();
-						const b1 = b.name.toLowerCase();
-						return (a1 > b1 ? 1 : (a1 < b1 ? -1 : 0));
-					});
-				}
-
-				categoryArray.push(cat);
+			const cat = categories[categoryName];
+			if (cat.trackers) {
+				cat.trackers.sort((a, b) => {
+					const a1 = a.name.toLowerCase();
+					const b1 = b.name.toLowerCase();
+					return (a1 > b1 ? 1 : (a1 < b1 ? -1 : 0));
+				});
 			}
+
+			categoryArray.push(cat);
 		}
 
 		// Sort categories by tracker numbers
@@ -182,9 +178,7 @@ class BugDb extends Updatable {
 		const regexesKeys = Object.keys(regexes);
 		for (let i = 0; i < regexesKeys.length; i++) {
 			const id = regexesKeys[i];
-			if (regexes.hasOwnProperty(id)) {
-				db.patterns.regex[id] = new RegExp(regexes[id], 'i');
-			}
+			db.patterns.regex[id] = new RegExp(regexes[id], 'i');
 		}
 
 		log('setting bugdb noneSelected/allSelected...');

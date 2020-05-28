@@ -53,13 +53,11 @@ export default class FixedMenu extends React.Component {
 				const categories = Object.keys(this.antiTrackingData);
 				for (let i = 0; i < categories.length; i++) {
 					const category = categories[i];
-					if (this.antiTrackingData.hasOwnProperty(category)) {
-						const apps = Object.keys(this.antiTrackingData[category]);
-						for (let j = 0; j < apps.length; j++) {
-							const app = apps[j];
-							if (this.antiTrackingData[category][app] === 'unsafe') {
-								total++;
-							}
+					const apps = Object.keys(this.antiTrackingData[category]);
+					for (let j = 0; j < apps.length; j++) {
+						const app = apps[j];
+						if (this.antiTrackingData[category][app] === 'unsafe') {
+							total++;
 						}
 					}
 				}

@@ -68,9 +68,7 @@ const leet_convert = function(string) {
 	const characterKeys = Object.keys(characterMap);
 	for (let i = 0; i < characterKeys.length; i++) {
 		const letter = characterKeys[i];
-		if (characterMap.hasOwnProperty(letter)) {
-			output = output.replace(new RegExp(letter, 'g'), characterMap[letter]);
-		}
+		output = output.replace(new RegExp(letter, 'g'), characterMap[letter]);
 	}
 
 	return output;

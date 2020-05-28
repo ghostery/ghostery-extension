@@ -206,40 +206,38 @@ class FoundBugs {
 		const ids = Object.keys(bugs);
 		for (let i = 0; i < ids.length; i++) {
 			id = ids[i];
-			if (bugs.hasOwnProperty(id)) {
-				appid = db.bugs[id].aid;
-				cid = db.apps[appid].cat;
+			appid = db.bugs[id].aid;
+			cid = db.apps[appid].cat;
 
-				if (cats_obj.hasOwnProperty(cid)) {
-					if (!cats_obj[cid].appIds.includes(appid)) {
-						cats_obj[cid].appIds.push(appid);
-						cats_obj[cid].trackers.push({
-							id: appid,
-							name: db.apps[appid].name,
-							blocked: bugs[id].blocked
-						});
-						if (bugs[id].blocked) {
-							cats_obj[cid].blocked++;
-						} else {
-							cats_obj[cid].allowed++;
-						}
-						cats_obj[cid].total++;
+			if (cats_obj.hasOwnProperty(cid)) {
+				if (!cats_obj[cid].appIds.includes(appid)) {
+					cats_obj[cid].appIds.push(appid);
+					cats_obj[cid].trackers.push({
+						id: appid,
+						name: db.apps[appid].name,
+						blocked: bugs[id].blocked
+					});
+					if (bugs[id].blocked) {
+						cats_obj[cid].blocked++;
+					} else {
+						cats_obj[cid].allowed++;
 					}
-				} else {
-					cats_obj[cid] = {
-						id: cid,
-						name: cid,
-						appIds: [appid],
-						trackers: [{
-							id: appid,
-							name: db.apps[appid].name,
-							blocked: bugs[id].blocked
-						}],
-						blocked: (bugs[id].blocked ? 1 : 0),
-						allowed: (bugs[id].blocked ? 0 : 1),
-						total: 1
-					};
+					cats_obj[cid].total++;
 				}
+			} else {
+				cats_obj[cid] = {
+					id: cid,
+					name: cid,
+					appIds: [appid],
+					trackers: [{
+						id: appid,
+						name: db.apps[appid].name,
+						blocked: bugs[id].blocked
+					}],
+					blocked: (bugs[id].blocked ? 1 : 0),
+					allowed: (bugs[id].blocked ? 0 : 1),
+					total: 1
+				};
 			}
 		}
 
@@ -247,9 +245,7 @@ class FoundBugs {
 		const cids = Object.keys(cats_obj);
 		for (let i = 0; i < cids.length; i++) {
 			cid = cids[i];
-			if (cats_obj.hasOwnProperty(cid)) {
-				cats_arr.push(cats_obj[cid]);
-			}
+			cats_arr.push(cats_obj[cid]);
 		}
 
 		if (sorted) {
