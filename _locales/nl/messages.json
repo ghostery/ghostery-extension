@@ -1600,7 +1600,7 @@
 		"message": "Los problemen snel op met onze Priority Ondersteuning - en meer nog te komen extra's"
 	},
 	"hub_supporter_manifesto": {
-		"message": "We willen gratis de beste privacybeschermingsdiensten leveren aan onze klanten. Hoewel wij geen kosten rekenen voor onze privacy suite, kun je ons ondersteunen via een klein maandelijks abonnement. Doe mee met onze missie door een upgrade naar Ghostery Plus - en ontgrendel coole extras!"
+		"message": "We willen gratis de beste privacybeschermingsdiensten leveren aan onze klanten. Hoewel wij geen kosten rekenen voor onze browserextensie, kun je ons ondersteunen via een goedkoop maandelijks abonnement. Sluit je aan bij onze missie. Upgrade naar Ghostery Plus en ontgrendel coole extras!"
 	},
 	"hub_supporter_feature_theme_description": {
 		"message": "Pas de Ghostery-kleuren aan voor een nieuwe, visuele beleving! Ingevoerd na vele verzoeken. Test ons speciale Dark Blue-thema. Binnenkort volgen er meer."
@@ -1815,7 +1815,7 @@
 		"message": "Thema's"
 	},
 	"subscribe_pitch": {
-		"message": "Ghostery is gratis, maar u kunt ervoor kiezen ons te steunen met een klein abonnement van &#36;2 per maand in ruil voor coole extra's, zoals kleurthema's, priority help service, en meer. Doe mee met onze missie en word lid!"
+		"message": "Ghostery is gratis, maar je kunt ervoor kiezen ons te steunen door een goedkoop maandabonnement te nemen in ruil voor coole extra's zoals kleurthema's, persoonlijke trackingstatistieken en meer. Sluit je aan bij onze missie en word lid!"
 	},
 	"subscribe_pitch_spring": {
 		"message": "Vind je het leuk wat wij doen? Steun ons en ontgrendel nieuwe thema's voor de lente, persoonlijke trackinginzichten en andere speciale extra's door naar Ghostery Plus te upgraden!"
@@ -1949,7 +1949,7 @@
 		"message": "Nee, Bewaar Geschiedenis"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "Ontsluit je historische statistieken (en andere coole extra's) door te upgraden naar Ghostery Plus voor $SPAN_START$&#36;2/maand.$SPAN_END$$LINK_START$Meer Weten$LINK_END$",
+		"message": "Ontsluit je historische statistieken (en andere coole extra's) door te upgraden naar Ghostery Plus. $LINK_START$Meer informatie$LINK_END$",
 		"placeholders": {
 			"span_start": {
 				"content": "<span>"
@@ -2306,6 +2306,9 @@
 	},
 	"learn_more": {
 		"message": "Meer Weten"
+	},
+	"custom_themes": {
+		"message": "Aangepaste thema's"
 	},
 	"historical_stats": {
 		"message": "Historische Statistieken"
