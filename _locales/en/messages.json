@@ -704,6 +704,9 @@
 	"panel_detail_menu_premium_title": {
 		"message": "Premium"
 	},
+	"panel_detail_learn_more": {
+	  "message": "Learn More"
+	},
 	"panel_detail_history_title": {
 		"message": "History"
 	},
