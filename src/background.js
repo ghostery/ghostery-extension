@@ -17,6 +17,7 @@
 import { debounce, every, size } from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
 import cliqz from './classes/Cliqz';
+import ghosteryDebug from './classes/GhosteryDebug';
 // object class
 import Events from './classes/EventHandlers';
 import Policy from './classes/Policy';
@@ -52,6 +53,9 @@ import { sendCliqzModuleCounts } from './utils/cliqzModulesData';
 // For debug purposes, provide Access to the internals of `browser-core`
 // module from Developer Tools Console.
 window.CLIQZ = cliqz;
+
+// For debug purposes, provide access to Ghostery's internal data.
+window.GHOSTERY = ghosteryDebug;
 
 // class instantiation
 const events = new Events();
