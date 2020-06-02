@@ -1687,9 +1687,11 @@ function init() {
 		initializeEventListeners();
 		initializeVersioning();
 		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => {
+			ghosteryDebug.addAccountEvent('migrate', 'migrate start');
 			account.migrate()
 				.then(() => {
 					if (conf.account !== null) {
+						ghosteryDebug.addAccountEvent('app started', 'signed in', conf.account);
 						return account.getUser()
 							.then(account.getUserSettings)
 							.then(() => {
@@ -1699,6 +1701,7 @@ function init() {
 								return false;
 							});
 					}
+					ghosteryDebug.addAccountEvent('app started', 'not signed in');
 					if (globals.JUST_INSTALLED) {
 						setGhosteryDefaultBlocking();
 					}

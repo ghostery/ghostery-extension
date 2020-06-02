@@ -19,8 +19,35 @@ import foundBugs from './FoundBugs';
 /**
  * @class for debugging Ghostery via the background.js console.
  * @memberof BackgroundClasses
+ * ToDo:  Test whether foundApps, foundBugs and tabInfo updates existing tabs,
+ *        adds new tabs, removes existing tabs, etc.
  */
 class GhosteryDebug {
+	constructor() {
+		this.accountEvents = [];
+
+		const _cookieChangeEvent = (changeInfo) => {
+			const { removed, cookie, cause } = changeInfo;
+			const { domain, name } = cookie;
+			if (domain.includes(globals.GHOSTERY_ROOT_DOMAIN)) {
+				const type = `Cookie ${name} ${removed ? 'Removed' : 'Added'}`;
+				this.addAccountEvent(type, cause, cookie);
+			}
+		};
+
+		chrome.cookies.onChanged.addListener(_cookieChangeEvent);
+	}
+
+	addAccountEvent(type, event, details) {
+		const timestamp = new Date();
+		const pushObj = { type, event, timestamp };
+		if (details) {
+			pushObj.details = details;
+		}
+
+		this.accountEvents.push(pushObj);
+	}
+
 	getTabInfo() {
 		function _getActiveTabIds() {
 			return new Promise((resolve, reject) => {
