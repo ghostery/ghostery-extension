@@ -1006,6 +1006,16 @@ function onMessageHandler(request, sender, callback) {
 		promoModals.turnOffPromos();
 		return false;
 	}
+	if (name === 'debug_information') {
+		Promise.all([
+			ghosteryDebug.getTabInfo(),
+			ghosteryDebug.getUserData(),
+		]).then(() => {
+			const debugInfo = JSON.stringify(window.GHOSTERY);
+			callback(debugInfo);
+		});
+		return true;
+	}
 	return false;
 }
 
@@ -1687,6 +1697,7 @@ function init() {
 		initializeEventListeners();
 		initializeVersioning();
 		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => {
+			ghosteryDebug.init();
 			ghosteryDebug.addAccountEvent('migrate', 'migrate start');
 			account.migrate()
 				.then(() => {

@@ -58,6 +58,7 @@ module.exports = {
 		panel_react: [`${PANEL_DIR}/index.jsx`],
 		purplebox: [`${CONTENT_SCRIPTS_DIR}/purplebox.js`],
 		shared_comp_react: [`${SHARED_COMP_DIR}/index.js`],
+		debug_information: [`${CONTENT_SCRIPTS_DIR}/debug_information.js`],
 		// Sass
 		foundation: [`${SASS_DIR}/vendor/foundation.scss`],
 		foundation_hub: [`${SASS_DIR}/vendor/foundation_hub.scss`],

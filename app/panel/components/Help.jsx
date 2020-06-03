@@ -12,37 +12,61 @@
  */
 
 import React from 'react';
-import { openSupportPage } from '../utils/msg';
+import { handleClickOnNewTabLink, openSupportPage } from '../utils/msg';
 import PanelToTabLink from './BuildingBlocks/PanelToTabLink';
 
 /**
  * Render Help view that user can open from the header drop-down menu
  */
-const Help = () => {
-	const hubUrl = chrome.runtime.getURL('./app/templates/hub.html');
+class Help extends React.Component {
+	constructor(props) {
+		super(props);
 
-	return (
-		<div id="content-help">
-			<div className="row">
-				<div className="small-12 columns">
-					<h1>{ t('panel_help_panel_header') }</h1>
-					<div className="support-section">
-						<PanelToTabLink href={hubUrl}>{t('panel_help_setup')}</PanelToTabLink>
-					</div>
-					<div className="support-section">
-						<h3>{ t('panel_help_questions_header') }</h3>
-						<PanelToTabLink href="https://www.ghostery.com/faqs/">{t('panel_help_faq')}</PanelToTabLink>
-						<PanelToTabLink href="https://www.ghostery.com/survey/in-app">{t('panel_help_feedback')}</PanelToTabLink>
-						<a href="#" onClick={openSupportPage}>{ t('support') }</a>
-					</div>
-					<div className="support-section">
-						<h3>{ t('panel_help_contact_header') }</h3>
-						<a target="_blank" rel="noopener noreferrer" className="info" href="mailto:info@ghostery.com">info@ghostery.com</a>
+		this.updateCount = this.updateCount.bind(this);
+
+		this.state = {
+			clickCount: 0,
+		};
+	}
+
+	updateCount() {
+		this.setState((prevState) => {
+			let { clickCount } = prevState;
+			clickCount++;
+			return { clickCount };
+		});
+	}
+
+	render() {
+		const { clickCount } = this.state;
+		const hubUrl = chrome.runtime.getURL('./app/templates/hub.html');
+
+		return (
+			<div id="content-help">
+				<div className="row">
+					<div className="small-12 columns">
+						<h1 onClick={this.updateCount}>{ t('panel_help_panel_header') }</h1>
+						<div className="support-section">
+							<PanelToTabLink href={hubUrl}>{t('panel_help_setup')}</PanelToTabLink>
+							{clickCount >= 5 && (
+								<a href="debug_information.html" onClick={handleClickOnNewTabLink}>Open Debug Information</a>
+							)}
+						</div>
+						<div className="support-section">
+							<h3>{ t('panel_help_questions_header') }</h3>
+							<PanelToTabLink href="https://www.ghostery.com/faqs/">{t('panel_help_faq')}</PanelToTabLink>
+							<PanelToTabLink href="https://www.ghostery.com/survey/in-app">{t('panel_help_feedback')}</PanelToTabLink>
+							<a href="#" onClick={openSupportPage}>{ t('support') }</a>
+						</div>
+						<div className="support-section">
+							<h3>{ t('panel_help_contact_header') }</h3>
+							<a target="_blank" rel="noopener noreferrer" className="info" href="mailto:info@ghostery.com">info@ghostery.com</a>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	);
-};
+		);
+	}
+}
 
 export default Help;

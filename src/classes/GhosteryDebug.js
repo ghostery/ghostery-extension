@@ -12,6 +12,7 @@
  */
 
 import account from './Account';
+import confData from './ConfData';
 import globals from './Globals';
 import tabInfo from './TabInfo';
 import foundBugs from './FoundBugs';
@@ -19,12 +20,15 @@ import foundBugs from './FoundBugs';
 /**
  * @class for debugging Ghostery via the background.js console.
  * @memberof BackgroundClasses
- * ToDo:  Test whether foundApps, foundBugs and tabInfo updates existing tabs,
- *        adds new tabs, removes existing tabs, etc.
  */
 class GhosteryDebug {
 	constructor() {
 		this.accountEvents = [];
+		this.browserInfo = globals.BROWSER_INFO;
+		this.extensionInfo = {
+			name: globals.EXTENSION_NAME,
+			version: globals.EXTENSION_VERSION,
+		};
 
 		const _cookieChangeEvent = (changeInfo) => {
 			const { removed, cookie, cause } = changeInfo;
@@ -38,6 +42,11 @@ class GhosteryDebug {
 		chrome.cookies.onChanged.addListener(_cookieChangeEvent);
 	}
 
+	init() {
+		this.extensionInfo.installDate = confData.install_date;
+		this.extensionInfo.versionHistory = confData.version_history;
+	}
+
 	addAccountEvent(type, event, details) {
 		const timestamp = new Date();
 		const pushObj = { type, event, timestamp };
@@ -48,6 +57,16 @@ class GhosteryDebug {
 		this.accountEvents.push(pushObj);
 	}
 
+	/**
+	 * this.tabInfo[tabId] properties update without re-calling getTabInfo.
+	 * this.foundApps[tabId].foundApps properties update without re-calling getTabInfo.
+	 * this.foundApps[tabId].foundBugs properties update without re-calling getTabInfo.
+	 *   No need to call `window.GHOSTERY.getTabInfo()` to see changes to object properties.
+	 *   You will need to call `window.GHOSTERY` again to see changes as console object
+	 *   properties are fixed to when the object was read by the console.
+	 *   Only object properties will update, no new tabIds will be added.
+	 *   Reloading the tab will end these updates.
+	 */
 	getTabInfo() {
 		function _getActiveTabIds() {
 			return new Promise((resolve, reject) => {
