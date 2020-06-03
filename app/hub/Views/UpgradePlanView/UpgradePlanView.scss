@@ -1,7 +1,28 @@
-
 $price-blue: blue;
 $price-purple: purple;
-.page-template-page-pricing {
+
+.mb-20 {
+	margin-bottom: rem-calc(20);
+}
+.mb-30 {
+	margin-bottom: rem-calc(30);
+}
+.mb-40 {
+	margin-bottom: rem-calc(40);
+}
+
+.font-size-36 {
+	font-size: rem-calc(36);
+	@include breakpoint(medium down) {
+		font-size: rem-calc(24);
+	}
+}
+.font-size-12 {
+	font-size: rem-calc(12);
+}
+
+.page-template-page-content-modules,
+section.home-template .section.section-pricing {
 	main {
 		padding-bottom: 0;
 	}
@@ -233,12 +254,7 @@ $price-purple: purple;
 		text-align: center;
 		padding-top: rem-calc(3);
 		padding-bottom: rem-calc(40);
-		.font-size-36 {
-			font-size: rem-calc(36);
-		}
-		.font-size-12 {
-			font-size: rem-calc(12);
-		}
+
 		h2 {
 			color: $tundora;
 			font-family: "Roboto Condensed";
@@ -247,7 +263,6 @@ $price-purple: purple;
 			margin-top: rem-calc(30);
 			margin-bottom: rem-calc(15);
 		}
-
 		&-image-top {
 			margin-top: -76px;
 			width: 100%;
@@ -256,6 +271,8 @@ $price-purple: purple;
 			margin-bottom: rem-calc(15);
 		}
 		&-sub-copy {
+			display: flex;
+			align-items: center;
 			font-size: rem-calc(12);
 			margin-bottom: rem-calc(15);
 			text-align: left;
@@ -264,10 +281,41 @@ $price-purple: purple;
 				padding-right: 10px;
 			}
 		}
+		.ghostery-free-image {
+			margin: auto;
+			width: 55px;
+			height: 65px;
+			background-image: url('/app/images/hub/upgrade/ghostery_basic_card.svg')
+		}
+		.ghostery-plus-image {
+			margin: auto;
+			width: 225px;
+			height: 87px;
+			background-image: url('/app/images/hub/upgrade/ghostery_plus_card.svg')
+		}
+		.ghostery-premium-image {
+			margin-left: 9px;
+			width: 233px;
+			height: 161px;
+			background-image: url('/app/images/hub/upgrade/ghostery_premium_card.svg')
+		}
+		.ghostery-premium-imagae {
+			background-image: url('/app/images/hub/upgrade/ghostery_premium_card.svg')
+		}
 		.button {
 			margin-top: rem-calc(10);
 			margin-bottom: rem-calc(20);
-			width: 140px;
+		}
+	}
+
+	.check {
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		background-repeat: no-repeat;
+		margin-top: 5px;
+		&.blue {
+			background-image: buildCheckIcon($price-blue);
 		}
 	}
 	.hide-for-large {
@@ -491,5 +539,117 @@ $price-purple: purple;
 				max-width: 166px;
 			}
 		}
+	}
+}
+
+.page-template-page-pricing-professional {
+	main {
+		background-color: #1c212b;
+		padding-top: rem-calc(40);
+		padding-bottom: rem-calc(40);
+	}
+
+	.pricing-professional-page {
+		color: $white;
+		font-family: 'Roboto';
+		a {
+			color: $white;
+		}
+	}
+
+	.card-outer {
+		border: 2px solid $white;
+		background-color: $black;
+		margin: rem-calc(150) auto rem-calc(60) auto;
+		width: 400px;
+		padding-bottom: rem-calc(20);
+		@include breakpoint(medium down) {
+			border: none;
+			width: 100%;
+			background-color: transparent;
+		}
+	}
+
+	.card {
+		position: relative;
+		&:before{
+			position:absolute;
+			z-index: 1;
+			top:0;
+			left:0;
+			width:100%;
+			height:140px;
+			content:"";
+			background-color:#175672;
+			@include breakpoint(medium down) {
+				content: none;
+				background-color: transparent;
+			}
+		}
+	}
+
+
+	.card-top-color {
+		// position: absolute;
+		// height: 140px;
+		// width: 100%;
+		// background-color: #175672;
+		// z-index: 1;
+	}
+
+	.card-image-top {
+		position: relative;
+		z-index: 3;
+		max-width: 300px;
+		width: 100%;
+		margin: 0 auto;
+		margin-top: rem-calc(-100);
+		@include breakpoint(medium down) {
+			display: block;
+		}
+	}
+
+	.card-insights-logo {
+		margin-top: rem-calc(75);
+		margin-bottom: rem-calc(15);
+		max-width: 260px;
+	}
+
+	.price {
+		p {
+			line-height: normal;
+			margin-bottom: 0;
+		}
+	}
+
+	.button {
+		margin-top: rem-calc(20);
+		margin-bottom: rem-calc(20);
+		font-size: rem-calc(14);
+		font-family: 'Open Sans';
+		line-height: 2.14;
+	}
+
+	.card-sub-copy {
+		margin-bottom: rem-calc(20);
+		font-size: rem-calc(12);
+		text-align: left;
+		width: 200px;
+		margin-left: auto;
+		margin-right: auto;
+		img {
+			margin-right: rem-calc(10);
+		}
+	}
+
+	.chrome-icon {
+		max-width: 150px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.learn-more {
+		text-decoration: underline;
+		font-size: rem-calc(14);
 	}
 }
