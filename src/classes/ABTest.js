@@ -69,6 +69,8 @@ class ABTest {
 
 			// update conf
 			globals.SESSION.abtests = this.tests;
+			console.error('A/B Tests found!');
+			console.error(`ir: ${conf.install_random_number}`);
 			log('A/B Tests: tests updated to', JSON.stringify(this.tests));
 		}).catch(() => {
 			log('A/B Tests: error fetching.');

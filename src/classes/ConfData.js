@@ -116,6 +116,7 @@ class ConfData {
 			_initProperty('enable_smart_block', true);
 			_initProperty('expand_all_trackers', true);
 			_initProperty('hide_alert_trusted', false);
+			_initProperty('hub_promo_variant', 'not_yet_set');
 			_initProperty('ignore_first_party', true);
 			_initProperty('import_callout_dismissed', true);
 			_initProperty('insights_promo_modal_last_seen', 0);

@@ -360,7 +360,11 @@ class Metrics {
 			// Engaged Velocity
 			`&ve=${encodeURIComponent(this._getVelocityEngaged(type).toString())}` +
 			// Theme
-			`&th=${encodeURIComponent(this._getThemeValue().toString())}`;
+			`&th=${encodeURIComponent(this._getThemeValue().toString())}` +
+
+			// New parameter for Ghostery 8.5.2
+			// Hub Promo variant
+			`&hp=${encodeURIComponent(this._getHubPromoVariant().toString())}`;
 
 		if (CAMPAIGN_METRICS.includes(type)) {
 			// only send campaign attribution when necessary
@@ -516,6 +520,26 @@ class Metrics {
 			case 'leaf-theme':
 				return 2;
 			case 'palm-theme':
+				return 3;
+			default:
+				return 0;
+		}
+	}
+
+	/**
+	 * Get the Int associated with the Hub promo variant shown on install
+	 * @private
+	 * @return {number} Int associated with the Hub promo variant
+	 */
+	_getHubPromoVariant() {
+		const { hub_promo_variant } = conf;
+
+		switch (hub_promo_variant) {
+			case 'upgrade':
+				return 1;
+			case 'plain':
+				return 2;
+			case 'midnight':
 				return 3;
 			default:
 				return 0;
