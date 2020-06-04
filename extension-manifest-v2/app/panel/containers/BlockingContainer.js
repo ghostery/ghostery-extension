@@ -26,7 +26,8 @@ import { showNotification, toggleCliqzFeature } from '../actions/PanelActions';
  * @todo  We are not using ownProps, so we better not specify it explicitly,
  * in this case it won't be passed by React (see https://github.com/reactjs/react-redux/blob/master/docs/api.md).
  */
-const mapStateToProps = state => Object.assign({}, state.blocking, {
+const mapStateToProps = state => ({
+	...state.blocking,
 	is_expanded: state.panel.is_expanded,
 	language: state.panel.language,
 	smartBlock: state.panel.smartBlock,
@@ -34,7 +35,7 @@ const mapStateToProps = state => Object.assign({}, state.blocking, {
 	pageHost: state.summary.pageHost,
 	paused_blocking: state.summary.paused_blocking,
 	sitePolicy: state.summary.sitePolicy,
-	smartBlockActive: state.panel.enable_smart_block,
+	smartBlockActive: state.panel.enable_smart_block
 });
 /**
  * Bind Blocking view component action creators using Redux's bindActionCreators

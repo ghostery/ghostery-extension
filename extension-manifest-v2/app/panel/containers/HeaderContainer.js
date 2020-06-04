@@ -26,12 +26,13 @@ import { logout } from '../../Account/AccountActions';
  * @todo  We are not using ownProps, so we better not specify it explicitly,
  * in this case it won't be passed by React (see https://github.com/reactjs/react-redux/blob/master/docs/api.md).
  */
-const mapStateToProps = state => Object.assign({}, state.account, {
+const mapStateToProps = state => ({
+	...state.account,
 	// get properties from panel redux store
 	is_expanded: state.panel.is_expanded,
 	is_expert: state.panel.is_expert,
 	language: state.panel.language,
-	tab_id: state.panel.tab_id,
+	tab_id: state.panel.tab_id
 });
 /**
  * Bind Header component action creators using Redux's bindActionCreators. Pass updated match, location, and history props to the wrapped component.

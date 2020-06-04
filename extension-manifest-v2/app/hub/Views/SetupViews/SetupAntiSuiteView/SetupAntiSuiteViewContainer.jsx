@@ -62,25 +62,26 @@ class SetupAntiSuiteViewContainer extends Component {
 	* @param  {Object} featureName the name of the feature being toggled
 	*/
 	_handleToggle = (featureName) => {
+		const { actions, setup } = this.props;
 		switch (featureName) {
 			case 'anti-tracking': {
-				const enable_anti_tracking = !this.props.setup.enable_anti_tracking;
-				this.props.actions.setAntiTracking({ enable_anti_tracking });
+				const enable_anti_tracking = !setup.enable_anti_tracking;
+				actions.setAntiTracking({ enable_anti_tracking });
 				break;
 			}
 			case 'ad-block': {
-				const enable_ad_block = !this.props.setup.enable_ad_block;
-				this.props.actions.setAdBlock({ enable_ad_block });
+				const enable_ad_block = !setup.enable_ad_block;
+				actions.setAdBlock({ enable_ad_block });
 				break;
 			}
 			case 'smart-blocking': {
-				const enable_smart_block = !this.props.setup.enable_smart_block;
-				this.props.actions.setSmartBlocking({ enable_smart_block });
+				const enable_smart_block = !setup.enable_smart_block;
+				actions.setSmartBlocking({ enable_smart_block });
 				break;
 			}
 			case 'ghostery-rewards': {
-				const enable_ghostery_rewards = !this.props.setup.enable_ghostery_rewards;
-				this.props.actions.setGhosteryRewards({ enable_ghostery_rewards });
+				const enable_ghostery_rewards = !setup.enable_ghostery_rewards;
+				actions.setGhosteryRewards({ enable_ghostery_rewards });
 				break;
 			}
 			default: break;
@@ -92,12 +93,13 @@ class SetupAntiSuiteViewContainer extends Component {
 	 * @return {JSX} JSX for rendering the Setup Anti-Suite View of the Hub app
 	 */
 	render() {
+		const { setup } = this.props;
 		const {
 			enable_anti_tracking,
 			enable_ad_block,
 			enable_smart_block,
 			enable_ghostery_rewards,
-		} = this.props.setup;
+		} = setup;
 
 		const anti_tracking_enabled = IS_CLIQZ ? false : enable_anti_tracking;
 		const ad_block_enabled = IS_CLIQZ ? false : enable_ad_block;

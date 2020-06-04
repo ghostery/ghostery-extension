@@ -13,7 +13,7 @@
 
 import React from 'react';
 import ClassNames from 'classnames';
-import { ThemeContext } from '../../contexts/ThemeContext';
+import ThemeContext from '../../contexts/ThemeContext';
 import Trackers from './Trackers';
 
 /**
@@ -27,11 +27,13 @@ class Category extends React.Component {
 
 	constructor(props) {
 		super(props);
+
+		const { expandAll } = this.props;
 		this.state = {
 			allShownBlocked: false,
 			totalShownBlocked: false,
 			showTooltip: false,
-			isExpanded: this.props.expandAll
+			isExpanded: expandAll
 		};
 
 		// event bindings
@@ -42,22 +44,67 @@ class Category extends React.Component {
 	}
 
 	/**
+	 * Lifecycle event.
+	 */
+	static getDerivedStateFromProps(prevProps) {
+		const {
+			allShownBlocked,
+			totalShownBlocked,
+		} = Category.updateCategoryCheckbox(prevProps.category);
+
+		return {
+			allShownBlocked,
+			totalShownBlocked
+		};
+	}
+
+	/**
+	 * Calculate and save in state the number of blocked trackers
+	 * and if this number covers all trackers in the category.
+	 * Based on this numbers category checkbox will be render appropriately.
+	 * Called in lifecycle events.
+	 * @param {Object}		category object containg the list of tracker objects
+	 */
+	static updateCategoryCheckbox(category) {
+		let totalShownBlocked = 0;
+		let allShownBlocked = true;
+		let shownCount = 0;
+		category.trackers.forEach((tracker) => {
+			if (tracker.shouldShow) {
+				shownCount++;
+				if (tracker.blocked && !tracker.ss_allowed) {
+					totalShownBlocked++;
+				}
+			}
+		});
+
+		allShownBlocked = (shownCount === totalShownBlocked);
+		return {
+			allShownBlocked,
+			totalShownBlocked,
+		};
+	}
+
+	/**
 	 * Lifecycle event. When view is opening we save in state
 	 * new values related to tracker blocking to ensure correct rendering.
 	 */
 	componentDidMount() {
-		if (this.props.category) {
-			this.updateCategoryCheckbox(this.props.category);
+		const { category } = this.props;
+		if (category) {
+			const {
+				allShownBlocked,
+				totalShownBlocked,
+			} = Category.updateCategoryCheckbox(category);
+			this.setState({ allShownBlocked, totalShownBlocked });
 		}
 	}
 
 	/**
-	 * Lifecycle event. When props changed we save in state new values
-	 * to ensure correct rendering.
+	 * Lifecycle event
 	 */
-	UNSAFE_componentWillReceiveProps(nextProps) {
-		this.updateCategoryExpanded(nextProps.expandAll);
-		this.updateCategoryCheckbox(nextProps.category);
+	componentDidUpdate(prevProps) {
+		this.updateCategoryExpanded(prevProps);
 	}
 
 	/**
@@ -79,33 +126,6 @@ class Category extends React.Component {
 	}
 
 	/**
-	 * Calculate and save in state the number of blocked trackers
-	 * and if this number covers all trackers in the category.
-	 * Based on this numbers category checkbox will be render appropriately.
-	 * Called in lifecycle events.
-	 * @param {Object}		category object containg the list of tracker objects
-	 */
-	updateCategoryCheckbox(category) {
-		let totalShownBlocked = 0;
-		let allShownBlocked = true;
-		let shownCount = 0;
-		category.trackers.forEach((tracker) => {
-			if (tracker.shouldShow) {
-				shownCount++;
-				if (tracker.blocked && !tracker.ss_allowed) {
-					totalShownBlocked++;
-				}
-			}
-		});
-
-		allShownBlocked = (shownCount === totalShownBlocked);
-		this.setState({
-			allShownBlocked,
-			totalShownBlocked,
-		});
-	}
-
-	/**
 	 * Implement handler for clicking on the category name or on the chevron.
 	 */
 	toggleCategoryTrackers() {
@@ -120,27 +140,38 @@ class Category extends React.Component {
 	 * Display alert that new settings were successfully persisted.
 	 */
 	clickCategoryStatus() {
-		const globalBlocking = !!this.props.globalBlocking;
-		const blocked = !this.state.allShownBlocked;
+		const {
+			actions,
+			category,
+			globalBlocking,
+			sitePolicy,
+			paused_blocking,
+			smartBlock,
+			smartBlockActive,
+			showToast
+		} = this.props;
+		const { allShownBlocked } = this.state;
+		const globalBlockingBool = !!globalBlocking;
+		const blocked = !allShownBlocked;
 
-		if ((this.props.paused_blocking || this.props.sitePolicy) && !globalBlocking) {
+		if ((paused_blocking || sitePolicy) && !globalBlockingBool) {
 			return;
 		}
 
-		this.props.actions.updateCategoryBlocked({
-			smartBlockActive: this.props.smartBlockActive,
-			smartBlock: this.props.smartBlock,
-			category: this.props.category.id,
+		actions.updateCategoryBlocked({
+			smartBlockActive,
+			smartBlock,
+			category: category.id,
 			blocked,
 		});
 
-		this.props.actions.showNotification({
-			updated: `cat_${this.props.category.id}_blocked`,
+		actions.showNotification({
+			updated: `cat_${category.id}_blocked`,
 			reload: true,
 		});
 
-		if (globalBlocking) {
-			this.props.showToast({
+		if (globalBlockingBool) {
+			showToast({
 				text: t('global_settings_saved_category')
 			});
 		}
@@ -151,9 +182,13 @@ class Category extends React.Component {
 	 *	Called in lifecycle events.
 	 *	@param {boolean}     global expanded state
 	 */
-	updateCategoryExpanded(expandAll) {
-		if (expandAll !== this.props.expandAll && expandAll !== this.state.isExpanded) {
-			this.setState({ isExpanded: expandAll });
+	updateCategoryExpanded(prevProps) {
+		const { expandAll } = this.props;
+		const { isExpanded } = this.state;
+		if (expandAll !== prevProps.expandAll && expandAll !== isExpanded) {
+			this.setState({
+				isExpanded: expandAll
+			});
 		}
 	}
 
@@ -179,15 +214,30 @@ class Category extends React.Component {
 	*/
 	render() {
 		const {
+			actions,
 			category,
 			paused_blocking,
 			sitePolicy,
 			isUnknown,
+			globalBlocking,
+			index,
+			filtered,
+			showToast,
+			show_tracker_urls,
+			language,
+			smartBlockActive,
+			smartBlock,
 		} = this.props;
+		const {
+			totalShownBlocked,
+			allShownBlocked,
+			showTooltip,
+			isExpanded,
+		} = this.state;
 
-		const globalBlocking = !!this.props.globalBlocking;
+		const globalBlockingBool = !!globalBlocking;
 
-		const checkBoxStyle = `${(this.state.totalShownBlocked && this.state.allShownBlocked) ? 'all-blocked ' : (this.state.totalShownBlocked ? 'some-blocked ' : '')} checkbox-container`;
+		const checkBoxStyle = `${(totalShownBlocked && allShownBlocked) ? 'all-blocked ' : (totalShownBlocked ? 'some-blocked ' : '')} checkbox-container`;
 		const filteredText = { color: 'red' };
 
 		let trackersBlockedCount;
@@ -201,7 +251,7 @@ class Category extends React.Component {
 
 		return (
 			<div className={`${category.num_shown === 0 ? 'hide' : ''} blocking-category`}>
-				<div className={`sticky-category${this.state.showTooltip ? ' no-sticky' : ''}${isUnknown ? ' anti-tracking-header' : ''}`}>
+				<div className={`sticky-category${showTooltip ? ' no-sticky' : ''}${isUnknown ? ' anti-tracking-header' : ''}`}>
 					{isUnknown && (
 						<div className="Category__antiTrackingDivider" />
 					)}
@@ -210,15 +260,15 @@ class Category extends React.Component {
 							<img className="cat-image" src={`/app/images/panel/${category.img_name}.svg`} />
 						</div>
 						<div className="columns collapse-left collapse-right align-self-top">
-							<div className={`cat-name ${this.props.globalBlocking ? 'has-tooltip' : ''}`} onClick={this.toggleCategoryTrackers}>
+							<div className={`cat-name ${globalBlocking ? 'has-tooltip' : ''}`} onClick={this.toggleCategoryTrackers}>
 								{category.name}
 							</div>
-							<div className={this.props.globalBlocking ? (this.props.index ? 'cat-tooltip-up' : 'cat-tooltip-down') : 'hide'} data-g-tooltip={category.description} onMouseOver={this.showTooltip} onMouseOut={this.hideTooltip}>
+							<div className={globalBlocking ? (index ? 'cat-tooltip-up' : 'cat-tooltip-down') : 'hide'} data-g-tooltip={category.description} onMouseOver={this.showTooltip} onMouseOut={this.hideTooltip}>
 								<img src="../../app/images/panel/icon-information-tooltip.svg" className="cat-question" />
 							</div>
 							<div className="counts">
 								<div className="total-count">
-									{this.props.filtered && (
+									{filtered && (
 										<span className="text" style={filteredText}>
 											{t('blocking_category_tracker_found')}
 										</span>
@@ -245,7 +295,7 @@ class Category extends React.Component {
 							{ this._renderCaret() }
 							{!isUnknown && (
 								<div className={checkBoxStyle} onClick={this.clickCategoryStatus}>
-									<span className={this.props.index ? 't-tooltip-up-left' : 't-tooltip-down-left'} data-g-tooltip={t('panel_tracker_block_tooltip')} onMouseOver={this.showTooltip} onMouseOut={this.hideTooltip}>
+									<span className={index ? 't-tooltip-up-left' : 't-tooltip-down-left'} data-g-tooltip={t('panel_tracker_block_tooltip')} onMouseOver={this.showTooltip} onMouseOut={this.hideTooltip}>
 										<svg className="blocking-icons status t-tooltip-up-left" data-g-tooltip={t('panel_tracker_block_tooltip')} onClick={this.clickTrackerStatus} width="20px" height="20px" viewBox="0 0 20 20">
 											<g transform="translate(1 1)" fill="none" fillRule="evenodd">
 												<path className="border" d="M-.5-.5h18.3v18.217H-.5z" />
@@ -274,19 +324,19 @@ class Category extends React.Component {
 						</div>
 					</div>
 				</div>
-				{this.state.isExpanded && (
+				{isExpanded && (
 					<Trackers
-						globalBlocking={globalBlocking}
+						globalBlocking={globalBlockingBool}
 						trackers={category.trackers}
 						cat_id={category.id}
-						actions={this.props.actions}
-						showToast={this.props.showToast}
-						show_tracker_urls={this.props.show_tracker_urls}
-						sitePolicy={this.props.sitePolicy}
-						paused_blocking={this.props.paused_blocking}
-						language={this.props.language}
-						smartBlockActive={this.props.smartBlockActive}
-						smartBlock={this.props.smartBlock}
+						actions={actions}
+						showToast={showToast}
+						show_tracker_urls={show_tracker_urls}
+						sitePolicy={sitePolicy}
+						paused_blocking={paused_blocking}
+						language={language}
+						smartBlockActive={smartBlockActive}
+						smartBlock={smartBlock}
 						isUnknown={isUnknown}
 					/>
 				)}

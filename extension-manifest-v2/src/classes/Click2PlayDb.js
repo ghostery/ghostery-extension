@@ -11,8 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint no-use-before-define: 0 */
-
 import conf from './Conf';
 import Updatable from './Updatable';
 import { log } from '../utils/common';
@@ -43,7 +41,7 @@ class Click2PlayDb extends Updatable {
 		log('processing c2p...');
 
 		try {
-			db = this._buildDb(data.click2play, data.click2playVersion);
+			db = Click2PlayDb._buildDb(data.click2play, data.click2playVersion);
 		} catch (e) {
 			log('Click2PlayDb processList() error', e);
 			return false;
@@ -68,9 +66,11 @@ class Click2PlayDb extends Updatable {
 	reset(tab_id) {
 		if (!this.allowOnceList.hasOwnProperty(tab_id)) { return; }
 
-		const entries = Object.entries(this.allowOnceList[tab_id]);
 		let keep = false;
-		for (const [appID, count] of entries) {
+		const allowKeys = Object.keys(this.allowOnceList[tab_id]);
+		for (let i = 0; i < allowKeys.length; i++) {
+			const appID = allowKeys[i];
+			const count = this.allowOnceList[tab_id][appID];
 			const newCount = count - 1;
 			this.allowOnceList[tab_id][appID] = newCount;
 			if (newCount > 0) {
@@ -108,7 +108,7 @@ class Click2PlayDb extends Updatable {
 	 * @param   {string} 	version 	database version
 	 * @return  {Object}         		reconfigured database object
 	 */
-	_buildDb(entries, version) {
+	static _buildDb(entries, version) {
 		const apps = {};
 		let	allow;
 

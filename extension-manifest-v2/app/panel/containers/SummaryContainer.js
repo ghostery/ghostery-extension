@@ -25,12 +25,14 @@ import * as panelActions from '../actions/PanelActions';
  * @todo  We are not using ownProps, so we better not specify it explicitly,
  * in this case it won't be passed by React (see https://github.com/reactjs/react-redux/blob/master/docs/api.md).
  */
-const mapStateToProps = state => Object.assign({}, state.summary, state.panel, {
+const mapStateToProps = state => ({
+	...state.summary,
+	...state.panel,
 	is_expanded: state.panel.is_expanded,
 	is_expert: state.panel.is_expert,
 	tab_id: state.panel.tab_id,
 	user: state.account.user,
-	current_theme: state.panel.current_theme,
+	current_theme: state.panel.current_theme
 });
 /**
  * Bind Summary view component action creators using Redux's bindActionCreators

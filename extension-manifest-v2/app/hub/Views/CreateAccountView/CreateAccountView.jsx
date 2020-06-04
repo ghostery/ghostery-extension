@@ -105,7 +105,7 @@ const CreateAccountView = (props) => {
 						/>
 						{confirmEmailError && (
 							<div className="CreateAccountView__inputError">
-								{t('your_emails_do_not_match')}
+								{t('your_email_do_not_match')}
 							</div>
 						)}
 					</div>

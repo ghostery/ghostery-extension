@@ -14,7 +14,7 @@
 import { isEqual } from 'underscore';
 import React from 'react';
 import * as D3 from 'd3';
-import { ThemeContext } from '../../contexts/ThemeContext';
+import ThemeContext from '../../contexts/ThemeContext';
 /**
  * Generates an animated graph displaying locally stored stats
  * @memberof PanelBuildingBlocks
@@ -44,7 +44,9 @@ class StatsGraph extends React.Component {
 	 * Add tooltips for each data point
 	 */
 	generateGraph() {
-		const { demo } = this.props;
+		const {
+			data, demo, dailyOrMonthly, view, tooltipText
+		} = this.props;
 
 		// Clear graph
 		D3.select(this.node).selectAll('*').remove();
@@ -70,7 +72,7 @@ class StatsGraph extends React.Component {
 
 		let formatLabelDate;
 		let formatTooltipDate;
-		if (this.props.dailyOrMonthly === 'daily') {
+		if (dailyOrMonthly === 'daily') {
 			formatLabelDate = D3.timeFormat('%b %d');
 			formatTooltipDate = D3.timeFormat('%b %d, %Y');
 		} else {
@@ -78,23 +80,23 @@ class StatsGraph extends React.Component {
 			formatTooltipDate = D3.timeFormat('%b %Y');
 		}
 
-		const data = JSON.parse(JSON.stringify(this.props.data));
-		data.forEach((entry) => {
-			entry.date = parseMonth(entry.date);
+		const dataJson = JSON.parse(JSON.stringify(data));
+		dataJson.forEach((dataEntry) => {
+			dataEntry.date = parseMonth(dataEntry.date);
 		});
 
 		let tickAmount;
-		switch (data.length) {
+		switch (dataJson.length) {
 			case 0:
 			case 1:
 			case 6:
-				tickAmount = data.length;
+				tickAmount = dataJson.length;
 				break;
 			case 2:
 			case 3:
 			case 4:
 			case 5:
-				tickAmount = data.length - 1;
+				tickAmount = dataJson.length - 1;
 				break;
 			default:
 				tickAmount = 6;
@@ -103,22 +105,22 @@ class StatsGraph extends React.Component {
 		// Set scales
 		const x = D3.scaleLinear()
 			.range([0, width])
-			.domain(D3.extent(data, d => d.index));
+			.domain(D3.extent(dataJson, d => d.index));
 
 		const y = D3.scaleLinear()
 			.range([height, 0]);
 		// ~ Handle axis styling for edge case of only one data point ~
-		if (data.length === 1) {
-			y.domain([0, D3.max(data, d => d.amount) * 2]);
+		if (dataJson.length === 1) {
+			y.domain([0, D3.max(dataJson, d => d.amount) * 2]);
 		} else {
-			y.domain(D3.extent(data, d => d.amount));
+			y.domain(D3.extent(dataJson, d => d.amount));
 		}
 
 		// Add axes
 		const xAxis = D3.axisBottom()
 			.ticks(tickAmount)
 			.tickSize(0)
-			.tickFormat(d => formatLabelDate(data[d].date))
+			.tickFormat(d => formatLabelDate(dataJson[d].date))
 			.scale(x);
 
 		const yAxis = D3.axisLeft()
@@ -141,7 +143,7 @@ class StatsGraph extends React.Component {
 			.call(yAxis.tickSize(-width).tickFormat(''));
 
 		// Add data path
-		const pathGroup = canvas.append('g').datum(data);
+		const pathGroup = canvas.append('g').datum(dataJson);
 
 		const line = D3.line()
 			.x(d => x(d.index))
@@ -193,7 +195,7 @@ class StatsGraph extends React.Component {
 		canvas.append('g')
 			.attr('class', 'point-group')
 			.selectAll('circle')
-			.data(data)
+			.data(dataJson)
 			.enter()
 			.append('circle')
 			.attr('class', (d, i) => `point point-${i}`)
@@ -229,7 +231,7 @@ class StatsGraph extends React.Component {
 						tooltipFlipped = true;
 						tooltipPositionY += 130;
 						tooltipPositionX += 0;
-					} else if (this.props.view === 'trackersAnonymized') {
+					} else if (view === 'trackersAnonymized') {
 						tooltipPositionY -= 16;
 					}
 
@@ -240,7 +242,7 @@ class StatsGraph extends React.Component {
 						.style('left', `${tooltipPositionX}px`)
 						.style('top', `${tooltipPositionY}px`);
 
-					if (this.props.view === 'trackersAnonymized') {
+					if (view === 'trackersAnonymized') {
 						div.classed('long-text', true);
 					}
 
@@ -251,7 +253,7 @@ class StatsGraph extends React.Component {
 
 					div.append('p')
 						.attr('class', 'tooltip-text-top')
-						.html(`${formatTooltipDate(d.date)}<br/>${this.props.tooltipText}`);
+						.html(`${formatTooltipDate(d.date)}<br/>${tooltipText}`);
 					div.append('p')
 						.attr('class', 'tooltip-text-bottom')
 						.html(D3.format(',')(d.amount));
@@ -293,19 +295,20 @@ class StatsGraph extends React.Component {
 	 * @return {JSX} JSX for rendering the Historical Stats Graph in the Stats View component
 	 */
 	render() {
+		const { timeframeSelectors, selectTimeframe } = this.props;
 		return (
 			<div className="line-graph-container">
 				<div className="line-graph-ref" ref={(node) => { this.node = node; }} />
 				<div className="tooltip-container" />
 				<div
 					id="stats-back"
-					className={`caret ${this.props.timeframeSelectors.back}`}
-					onClick={this.props.selectTimeframe}
+					className={`caret ${timeframeSelectors.back}`}
+					onClick={selectTimeframe}
 				/>
 				<div
 					id="stats-forward"
-					className={`caret ${this.props.timeframeSelectors.forward}`}
-					onClick={this.props.selectTimeframe}
+					className={`caret ${timeframeSelectors.forward}`}
+					onClick={selectTimeframe}
 				/>
 			</div>
 		);

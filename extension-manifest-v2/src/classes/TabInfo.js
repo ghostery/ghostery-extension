@@ -39,8 +39,6 @@ import { processUrl } from '../utils/utils';
  */
 class TabInfo {
 	constructor() {
-		this.policySmartBlock = new PolicySmartBlock();
-
 		// @private
 		this._tabInfo = {};
 		this._tabInfoPersist = {};
@@ -62,8 +60,8 @@ class TabInfo {
 			timestamp: Date.now(),
 			// assign only when smartBlock is enabled so avoid false positives
 			// when enabling smartBlock is enabled for the first time
-			firstLoadTimestamp: this.policySmartBlock.shouldCheck(tab_id) && (numOfReloads === 0 ? Date.now() : (this.getTabInfoPersist(tab_id, 'firstLoadTimestamp') || 0)) || 0,
-			reloaded: this.policySmartBlock.checkReloadThreshold(tab_id),
+			firstLoadTimestamp: PolicySmartBlock.shouldCheck(tab_id) && (numOfReloads === 0 ? Date.now() : ((this.getTabInfoPersist(tab_id, 'firstLoadTimestamp') || 0)) || 0),
+			reloaded: PolicySmartBlock.checkReloadThreshold(tab_id),
 			numOfReloads,
 			smartBlock: {
 				blocked: {},
