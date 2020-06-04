@@ -20,14 +20,14 @@ import ClassNames from 'classnames';
  * @return {JSX} JSX for rendering a Toggle Switch
  * @memberof SharedComponents
  */
-const ToggleSwitch = (props) => {
+const ToggleSwitch = ({ checked, locked, onChange }) => {
 	const switchClassNames = ClassNames('ToggleSwitch', {
-		'ToggleSwitch--active': props.checked,
-		'ToggleSwitch--locked': props.locked
+		'ToggleSwitch--active': checked,
+		'ToggleSwitch--locked': locked
 	});
 
 	return (
-		<div className={switchClassNames} onClick={props.onChange}>
+		<div className={switchClassNames} onClick={onChange}>
 			<div className="ToggleSwitch__bar" />
 			<span className="ToggleSwitch__circle" />
 		</div>

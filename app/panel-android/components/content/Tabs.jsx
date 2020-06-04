@@ -23,7 +23,8 @@ export default class Tabs extends React.Component {
 	}
 
 	handleTabClick = (tabIndex) => {
-		if (tabIndex === this.state.activeTabIndex) {
+		const { activeTabIndex } = this.state;
+		if (tabIndex === activeTabIndex) {
 			return;
 		}
 
@@ -32,11 +33,15 @@ export default class Tabs extends React.Component {
 		});
 	}
 
-	renderTabsNav = () => React.Children.map(this.props.children, (child, index) => React.cloneElement(child, {
-		onClick: this.handleTabClick,
-		tabIndex: index,
-		isActive: index === this.state.activeTabIndex
-	}));
+	renderTabsNav = () => {
+		const { children } = this.props;
+		const { activeTabIndex } = this.state;
+		return React.Children.map(children, (child, index) => React.cloneElement(child, {
+			onClick: this.handleTabClick,
+			tabIndex: index,
+			isActive: index === activeTabIndex
+		}));
+	}
 
 	renderActiveTabContent = () => {
 		const { children } = this.props;

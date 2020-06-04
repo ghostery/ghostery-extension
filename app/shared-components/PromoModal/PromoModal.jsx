@@ -41,7 +41,8 @@ class PromoModal extends React.Component {
 	 * Handle clicks on the link to turn off promos in the promo modals
 	 */
 	_handlePromoGoAwayClick = (modal) => {
-		this.props.actions.togglePromoModal();
+		const { actions } = this.props;
+		actions.togglePromoModal();
 
 		sendMessage('promoModals.turnOffPromos', {});
 
@@ -50,7 +51,7 @@ class PromoModal extends React.Component {
 			sendMessage('ping', `promo_modals_decline_${modal}_upgrade`);
 		}
 
-		this.props.actions.showNotification({
+		actions.showNotification({
 			classes: 'warning',
 			reload: false,
 			text: t('promos_turned_off_notification'),
@@ -62,7 +63,8 @@ class PromoModal extends React.Component {
 	 * Handle clicks on the download buttons
 	 */
 	_handlePromoTryProductClick = (product, utm_campaign) => {
-		this.props.actions.togglePromoModal();
+		const { actions } = this.props;
+		actions.togglePromoModal();
 
 		let url;
 		switch (product) {
@@ -90,14 +92,16 @@ class PromoModal extends React.Component {
 	 * Handle clicks on sign in links in promo modals
 	 */
 	_handlePromoSignInClick = () => {
-		this.props.actions.togglePromoModal();
+		const { actions } = this.props;
+		actions.togglePromoModal();
 		history.push({
 			pathname: '/login',
 		});
 	};
 
 	_handlePromoXClick = (type) => {
-		this.props.actions.togglePromoModal();
+		const { actions } = this.props;
+		actions.togglePromoModal();
 
 		if (type === INSIGHTS) {
 			sendMessage('ping', 'promo_modals_decline_insights_upgrade');
@@ -124,7 +128,9 @@ class PromoModal extends React.Component {
 	};
 
 	renderModalContent() {
-		const { type, loggedIn } = this.props;
+		const {
+			type, loggedIn, location, isPlus, handleKeepBasicClick
+		} = this.props;
 		switch (type) {
 			case INSIGHTS:
 				return (
@@ -132,7 +138,6 @@ class PromoModal extends React.Component {
 						handleGoAwayClick={() => this._handlePromoGoAwayClick(INSIGHTS)}
 						handleTryInsightsClick={() => this._handlePromoTryProductClick(INSIGHTS, 'in_app_upgrade')}
 						handleSignInClick={this._handlePromoSignInClick}
-						{...this.props}
 					/>
 				);
 			case PLUS:
@@ -150,11 +155,19 @@ class PromoModal extends React.Component {
 						handleGoAwayClick={() => this._handlePromoGoAwayClick(PREMIUM)}
 						handleTryMidnightClick={() => this._handlePromoTryProductClick(PREMIUM, 'in_app')}
 						handleGetPlusClick={() => this._handlePromoTryProductClick(PLUS, 'in_app')}
-						{...this.props}
+						handleKeepBasicClick={handleKeepBasicClick}
+						location={location}
+						isPlus={isPlus}
 					/>
 				);
 			default:
-				return <InsightsPromoModalContent {...this.props} />;
+				return (
+					<InsightsPromoModalContent
+						handleGoAwayClick={() => this._handlePromoGoAwayClick(INSIGHTS)}
+						handleTryInsightsClick={() => this._handlePromoTryProductClick(INSIGHTS, 'in_app_upgrade')}
+						handleSignInClick={this._handlePromoSignInClick}
+					/>
+				);
 		}
 	}
 

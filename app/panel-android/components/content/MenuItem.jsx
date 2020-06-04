@@ -24,44 +24,57 @@ export default class MenuItem extends React.Component {
 	}
 
 	menuItemClicked = () => {
+		const { updateHeadeText, title } = this.props;
 		this.setState({
 			opening: true,
 		});
 
-		this.props.updateHeadeText(this.props.title);
+		updateHeadeText(title);
 	}
 
 	closeButtonClicked = () => {
+		const { updateHeadeText } = this.props;
 		this.setState({
 			opening: false,
 		});
 
-		this.props.updateHeadeText('');
+		updateHeadeText('');
 	}
 
 	switcherClicked = () => {
-		this.context.callGlobalAction({
+		const { active, type } = this.props;
+		const { callGlobalAction } = this.context;
+		callGlobalAction({
 			actionName: 'cliqzFeatureToggle',
 			actionData: {
-				currentState: this.props.active,
-				type: this.props.type,
+				currentState: active,
+				type,
 			},
 		});
 	}
 
 	render() {
+		const {
+			type,
+			numData,
+			title,
+			description,
+			active,
+			headline,
+		} = this.props;
+		const { opening } = this.state;
 		return (
 			<div className="menuItemWrapper">
 				<div onClick={this.menuItemClicked} className="menuItemOverview">
-					<span className={this.props.type}>{this.props.numData}</span>
-					<span className="title">{this.props.title}</span>
-					<p className="description">{this.props.description}</p>
+					<span className={type}>{numData}</span>
+					<span className="title">{title}</span>
+					<p className="description">{description}</p>
 				</div>
-				<span onClick={this.switcherClicked} className={`switcher ${this.props.active ? 'active' : ''}`} />
-				<div className={`menuItemContent ${this.state.opening ? 'opening' : ''}`}>
-					<span className={this.props.type}>{this.props.numData}</span>
-					<p className="headline">{this.props.headline}</p>
-					<p className="description">{this.props.description}</p>
+				<span onClick={this.switcherClicked} className={`switcher ${active ? 'active' : ''}`} />
+				<div className={`menuItemContent ${opening ? 'opening' : ''}`}>
+					<span className={type}>{numData}</span>
+					<p className="headline">{headline}</p>
+					<p className="description">{description}</p>
 					<button type="button" aria-label="Close" onClick={this.closeButtonClicked} className="close" />
 				</div>
 			</div>

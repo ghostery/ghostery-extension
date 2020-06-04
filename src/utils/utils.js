@@ -13,8 +13,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint no-shadow: 0 */
-
 /**
  * @namespace BackgroundUtils
  */
@@ -22,7 +20,7 @@ import { debounce } from 'underscore';
 import { URL } from '@cliqz/url-parser';
 import tabInfo from '../classes/TabInfo';
 import globals from '../classes/Globals';
-import { log, objectEntries } from './common';
+import { log } from './common';
 
 const { BROWSER_INFO } = globals;
 const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
@@ -194,7 +192,7 @@ export function processUrlQuery(src) {
 
 	try {
 		const res = {};
-		for (const [key, value] of new URL(src).searchParams.entries()) {
+		for (const [key, value] of new URL(src).searchParams.entries()) { // eslint-disable-line no-restricted-syntax
 			res[key] = value;
 		}
 		return res;
@@ -355,7 +353,10 @@ function _fetchJson(method, url, query, extraHeaders, referrer = 'no-referrer', 
 			Accept: 'application/json'
 		});
 		if (extraHeaders) {
-			for (const [key, value] of objectEntries(extraHeaders)) {
+			const extraHeadersKeys = Object.keys(extraHeaders);
+			for (let i = 0; i < extraHeadersKeys.length; i++) {
+				const key = extraHeadersKeys[i];
+				const value = extraHeaders[key];
 				headers.append(key, value);
 			}
 		}
@@ -448,7 +449,10 @@ function _fetchJson(method, url, query, extraHeaders, referrer = 'no-referrer', 
 		xhr.setRequestHeader('Content-Type', 'application/json');
 		xhr.setRequestHeader('Accept', 'application/json');
 		if (extraHeaders) {
-			for (const [key, value] of objectEntries(extraHeaders)) {
+			const extraHeadersKeys = Object.keys(extraHeaders);
+			for (let i = 0; i < extraHeadersKeys.length; i++) {
+				const key = extraHeadersKeys[i];
+				const value = extraHeaders[key];
 				xhr.setRequestHeader(key, value);
 			}
 		}
@@ -593,7 +597,7 @@ export function injectNotifications(tab_id, importExport = false) {
 	}
 	const tab = tabInfo.getTabInfo(tab_id);
 	// check for prefetching, chrome new tab page and Firefox about:pages
-	if (tab && tab.prefetched === true || tab.path.includes('_/chrome/newtab') || tab.protocol === 'about' || (!importExport && globals.EXCLUDES.includes(tab.host))) {
+	if (tab && (tab.prefetched === true || tab.path.includes('_/chrome/newtab') || tab.protocol === 'about' || (!importExport && globals.EXCLUDES.includes(tab.host)))) {
 		// return false to prevent sendMessage calls
 		return Promise.resolve(false);
 	}

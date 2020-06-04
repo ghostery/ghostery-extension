@@ -11,8 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint no-use-before-define: 0 */
-
 import moment from 'moment/min/moment-with-locales.min';
 import {
 	IMPORT_SETTINGS_DIALOG,
@@ -34,7 +32,6 @@ import {
 	updateTrackerBlocked, updateCategoryBlocked, updateBlockAllTrackers, toggleExpandAll
 } from '../utils/blocking';
 import { sendMessage } from '../utils/msg';
-import { objectEntries } from '../../../src/utils/common';
 
 const initialState = {
 	expand_all_trackers: false,
@@ -46,76 +43,6 @@ const initialState = {
 	site_specific_blocks: {},
 	site_specific_unblocks: {},
 	filterText: t('settings_filter_all_label')
-};
-/**
- * Default export for settings view reducer.
- * @memberOf  PanelReactReducers
- *
- * @param  {Object} state 		current state
- * @param  {Object} action 		action which provides data
- * @return {Object}        		updated state clone
- */
-export default (state = initialState, action) => {
-	switch (action.type) {
-		case GET_SETTINGS_DATA: {
-			return Object.assign({}, state, action.data);
-		}
-		case EXPORT_SETTINGS: {
-			const updated = _exportSettings(state, action);
-			return Object.assign({}, state, updated);
-		}
-		case IMPORT_SETTINGS_DIALOG: {
-			const updated = _importSettingsDialog(state, action);
-			return Object.assign({}, state, updated);
-		}
-		case IMPORT_SETTINGS_NATIVE: {
-			const updated = _importSettingsNative(state, action);
-			return Object.assign({}, state, updated);
-		}
-		case IMPORT_SETTINGS_FAILED: {
-			return Object.assign({}, state, {
-				importResultText: t('settings_import_file_error'),
-				actionSuccess: false,
-			});
-		}
-		case SELECT_ITEM: {
-			const updated = _updateSelectValue(state, action);
-			return Object.assign({}, state, updated);
-		}
-		case TOGGLE_CHECKBOX: {
-			const updated = _updateSettingsCheckbox(state, action);
-			return Object.assign({}, state, updated);
-		}
-		case UPDATE_DATABASE: {
-			const updated = _updateTrackerDatabase(state, action);
-			return Object.assign({}, state, updated);
-		}
-
-		case UPDATE_SETTINGS_BLOCK_ALL_TRACKERS: {
-			const updated = updateBlockAllTrackers(state, action);
-			return Object.assign({}, state, updated);
-		}
-		case UPDATE_SETTINGS_CATEGORY_BLOCKED: {
-			const updated = updateCategoryBlocked(state, action);
-			return Object.assign({}, state, updated);
-		}
-		case SETTINGS_TOGGLE_EXPAND_ALL: {
-			const updated = toggleExpandAll(state, action);
-			return Object.assign({}, state, updated);
-		}
-		case UPDATE_SETTINGS_TRACKER_BLOCKED: {
-			const updated = updateTrackerBlocked(state, action);
-			return Object.assign({}, state, updated);
-		} case SETTINGS_UPDATE_SEARCH_VALUE: {
-			const updated = _updateSearchValue(state, action);
-			return Object.assign({}, state, updated);
-		} case SETTINGS_FILTER: {
-			const updated = _filter(state, action);
-			return Object.assign({}, state, updated);
-		}
-
-		default: return state;
-	}
 };
 
 /**
@@ -165,14 +92,14 @@ const _exportSettings = (state, action) => {
  */
 const _importSettingsDialog = (state, action) => {
 	const result = action.data;
-	const updated_actionSuccess = state.actionSuccess;
+	let updated_actionSuccess = state.actionSuccess;
 	let updated_importResultText = state.importResultText;
 
 	if (result === true) {
 		// showBrowseWindow was successful
 		window.close();
 	} else {
-		state.updated_actionSuccess = false;
+		updated_actionSuccess = false;
 		updated_importResultText = t('settings_import_dialog_error');
 	}
 
@@ -194,8 +121,10 @@ const _importSettingsDialog = (state, action) => {
 const _importSettingsNative = (state, action) => {
 	const { settings } = action;
 	const updated_state = {};
-	// eslint-disable-next-line prefer-const
-	for (let [key, value] of objectEntries(settings)) {
+	const settingsKeys = Object.keys(settings);
+	for (let i = 0; i < settingsKeys.length; i++) {
+		const key = settingsKeys[i];
+		let value = settings[key];
 		if (key === 'alert_bubble_timeout') {
 			value = (value > 30) ? 30 : value;
 		}
@@ -264,10 +193,12 @@ const _updateSettingsCheckbox = (state, action) => {
  * @return {Object}        		text with result of the operation
  */
 const _updateTrackerDatabase = (state, action) => {
-	const { resultText } = action;
+	const { resultText, bugs_last_checked, bugs_last_updated } = action;
 
 	return {
 		dbUpdateText: resultText,
+		bugs_last_checked,
+		bugs_last_updated,
 	};
 };
 
@@ -283,19 +214,19 @@ const _updateTrackerDatabase = (state, action) => {
 const _updateSearchValue = (state, action) => {
 	const query = action.data || '';
 	const updated_categories = JSON.parse(JSON.stringify(state.categories)) || []; // deep clone
-	updated_categories.forEach((category) => {
-		category.num_total = 0;
-		category.num_blocked = 0;
-		category.trackers.forEach((tracker) => {
+	updated_categories.forEach((categoryEl) => {
+		categoryEl.num_total = 0;
+		categoryEl.num_blocked = 0;
+		categoryEl.trackers.forEach((trackerEl) => {
 			if (query) {
-				tracker.shouldShow = !!(tracker.name.toLowerCase().indexOf(query) !== -1);
+				trackerEl.shouldShow = !!(trackerEl.name.toLowerCase().indexOf(query) !== -1);
 			} else {
-				tracker.shouldShow = true;
+				trackerEl.shouldShow = true;
 			}
-			if (tracker.shouldShow) {
-				category.num_total++;
-				if (tracker.blocked) {
-					category.num_blocked++;
+			if (trackerEl.shouldShow) {
+				categoryEl.num_total++;
+				if (trackerEl.blocked) {
+					categoryEl.num_blocked++;
 				}
 			}
 		});
@@ -319,34 +250,34 @@ const _updateSearchValue = (state, action) => {
 const _filter = (state, action) => {
 	const updated_categories = JSON.parse(JSON.stringify(state.categories)) || []; // deep clone
 	const new_app_ids = state.new_app_ids || [];
-	updated_categories.forEach((category) => {
-		category.num_total = 0;
-		category.num_blocked = 0;
-		category.trackers.forEach((tracker) => {
+	updated_categories.forEach((categoryEl) => {
+		categoryEl.num_total = 0;
+		categoryEl.num_blocked = 0;
+		categoryEl.trackers.forEach((trackerEl) => {
 			switch (action.data) {
 				case 'all':
-					tracker.shouldShow = true;
-					category.num_total++;
-					if (tracker.blocked) {
-						category.num_blocked++;
+					trackerEl.shouldShow = true;
+					categoryEl.num_total++;
+					if (trackerEl.blocked) {
+						categoryEl.num_blocked++;
 					}
 					break;
 				case 'blocked':
-					tracker.shouldShow = tracker.blocked;
-					if (tracker.shouldShow) {
-						category.num_total++;
+					trackerEl.shouldShow = trackerEl.blocked;
+					if (trackerEl.shouldShow) {
+						categoryEl.num_total++;
 					}
 					break;
 				case 'unblocked':
-					tracker.shouldShow = !tracker.blocked;
-					if (tracker.shouldShow) {
-						category.num_total++;
+					trackerEl.shouldShow = !trackerEl.blocked;
+					if (trackerEl.shouldShow) {
+						categoryEl.num_total++;
 					}
 					break;
 				case 'new':
-					tracker.shouldShow = !!(new_app_ids.indexOf(+tracker.id) !== -1);
-					if (tracker.shouldShow) {
-						category.num_total++;
+					trackerEl.shouldShow = !!(new_app_ids.indexOf(+trackerEl.id) !== -1);
+					if (trackerEl.shouldShow) {
+						categoryEl.num_total++;
 					}
 					break;
 				default:
@@ -376,4 +307,76 @@ const _filter = (state, action) => {
 	return {
 		categories: updated_categories, filtered: true, filterText, expandAll
 	};
+};
+
+/**
+ * Default export for settings view reducer.
+ * @memberOf  PanelReactReducers
+ *
+ * @param  {Object} state 		current state
+ * @param  {Object} action 		action which provides data
+ * @return {Object}        		updated state clone
+ */
+export default (state = initialState, action) => {
+	switch (action.type) {
+		case GET_SETTINGS_DATA: {
+			return { ...state, ...action.data };
+		}
+		case EXPORT_SETTINGS: {
+			const updated = _exportSettings(state, action);
+			return { ...state, ...updated };
+		}
+		case IMPORT_SETTINGS_DIALOG: {
+			const updated = _importSettingsDialog(state, action);
+			return { ...state, ...updated };
+		}
+		case IMPORT_SETTINGS_NATIVE: {
+			const updated = _importSettingsNative(state, action);
+			return { ...state, ...updated };
+		}
+		case IMPORT_SETTINGS_FAILED: {
+			return {
+				...state,
+				importResultText: t('settings_import_file_error'),
+				actionSuccess: false
+			};
+		}
+		case SELECT_ITEM: {
+			const updated = _updateSelectValue(state, action);
+			return { ...state, ...updated };
+		}
+		case TOGGLE_CHECKBOX: {
+			const updated = _updateSettingsCheckbox(state, action);
+			return { ...state, ...updated };
+		}
+		case UPDATE_DATABASE: {
+			const updated = _updateTrackerDatabase(state, action);
+			return { ...state, ...updated };
+		}
+
+		case UPDATE_SETTINGS_BLOCK_ALL_TRACKERS: {
+			const updated = updateBlockAllTrackers(state, action);
+			return { ...state, ...updated };
+		}
+		case UPDATE_SETTINGS_CATEGORY_BLOCKED: {
+			const updated = updateCategoryBlocked(state, action);
+			return { ...state, ...updated };
+		}
+		case SETTINGS_TOGGLE_EXPAND_ALL: {
+			const updated = toggleExpandAll(state, action);
+			return { ...state, ...updated };
+		}
+		case UPDATE_SETTINGS_TRACKER_BLOCKED: {
+			const updated = updateTrackerBlocked(state, action);
+			return { ...state, ...updated };
+		} case SETTINGS_UPDATE_SEARCH_VALUE: {
+			const updated = _updateSearchValue(state, action);
+			return { ...state, ...updated };
+		} case SETTINGS_FILTER: {
+			const updated = _filter(state, action);
+			return { ...state, ...updated };
+		}
+
+		default: return state;
+	}
 };

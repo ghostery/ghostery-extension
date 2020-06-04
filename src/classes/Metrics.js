@@ -132,13 +132,13 @@ class Metrics {
 		getActiveTab((tab) => {
 			const tabUrl = tab && tab.url ? tab.url : '';
 
-			this._brokenPageWatcher = Object.assign({}, {
+			this._brokenPageWatcher = {
 				on: true,
 				triggerId,
 				triggerTime: Date.now(),
 				timeoutId: setTimeout(this._clearBrokenPageWatcherTimeout.bind(this), BROKEN_PAGE_METRICS_THRESHOLD),
-				url: tabUrl,
-			});
+				url: tabUrl
+			};
 		});
 	}
 
@@ -149,13 +149,13 @@ class Metrics {
 	_unplugBrokenPageWatcher() {
 		this._clearBrokenPageWatcherTimeout();
 
-		this._brokenPageWatcher = Object.assign({}, {
+		this._brokenPageWatcher = {
 			on: false,
 			triggerId: '',
 			triggerTime: '',
 			timeoutId: null,
-			url: '',
-		});
+			url: ''
+		};
 	}
 
 	_clearBrokenPageWatcherTimeout() {
@@ -346,21 +346,21 @@ class Metrics {
 			// Type of blocking selected during setup
 			`&sb=${encodeURIComponent(conf.setup_block.toString())}` +
 			// Recency, days since last active daily ping
-			`&rc=${encodeURIComponent(this._getRecencyActive(type, frequency).toString())}` +
+			`&rc=${encodeURIComponent(Metrics._getRecencyActive(type, frequency).toString())}` +
 
 			// New parameters to Ghostery 8.3
 			// Subscription Type
-			`&st=${encodeURIComponent(this._getSubscriptionType().toString())}` +
+			`&st=${encodeURIComponent(Metrics._getSubscriptionType().toString())}` +
 			// Whether the computer ever had a Paid Subscription
 			`&ps=${encodeURIComponent(conf.paid_subscription ? '1' : '0')}` +
 			// Active Velocity
-			`&va=${encodeURIComponent(this._getVelocityActive(type).toString())}` +
+			`&va=${encodeURIComponent(Metrics._getVelocityActive(type).toString())}` +
 			// Engaged Recency
-			`&re=${encodeURIComponent(this._getRecencyEngaged(type, frequency).toString())}` +
+			`&re=${encodeURIComponent(Metrics._getRecencyEngaged(type, frequency).toString())}` +
 			// Engaged Velocity
-			`&ve=${encodeURIComponent(this._getVelocityEngaged(type).toString())}` +
+			`&ve=${encodeURIComponent(Metrics._getVelocityEngaged(type).toString())}` +
 			// Theme
-			`&th=${encodeURIComponent(this._getThemeValue().toString())}`;
+			`&th=${encodeURIComponent(Metrics._getThemeValue().toString())}`;
 
 		if (CAMPAIGN_METRICS.includes(type)) {
 			// only send campaign attribution when necessary
@@ -385,14 +385,11 @@ class Metrics {
 	 *
 	 * @private
 	 *
-	 * @param {string} 		type 						ping type
+	 * @param {string} 		type 				ping type
 	 * @param {array} 		[frequencies = ['all']] 	array of ping frequencies
 	 */
-	_sendReq(type, frequencies) {
+	_sendReq(type, frequencies = ['all']) {
 		let options = {};
-		if (typeof frequencies === 'undefined') {
-			frequencies = ['all']; // eslint-disable-line no-param-reassign
-		}
 
 		if (typeof fetch === 'function') {
 			const headers = new Headers();
@@ -439,7 +436,7 @@ class Metrics {
 	 *
 	 * @return {number} in days since the last daily active ping
 	 */
-	_getRecencyActive(type, frequency) {
+	static _getRecencyActive(type, frequency) {
 		if (conf.metrics.active_daily && (type === 'active' || type === 'engaged') && frequency === 'daily') {
 			return Math.floor((Number(new Date().getTime()) - conf.metrics.active_daily) / 86400000);
 		}
@@ -453,7 +450,7 @@ class Metrics {
 	 *
 	 * @return {number}	in days since the last daily engaged ping
 	 */
-	_getRecencyEngaged(type, frequency) {
+	static _getRecencyEngaged(type, frequency) {
 		if (conf.metrics.engaged_daily && (type === 'active' || type === 'engaged') && frequency === 'daily') {
 			return Math.floor((Number(new Date().getTime()) - conf.metrics.engaged_daily) / 86400000);
 		}
@@ -465,7 +462,7 @@ class Metrics {
 	 * @private
 	 * @return {number}  The Active Velocity
 	 */
-	_getVelocityActive(type) {
+	static _getVelocityActive(type) {
 		if (type !== 'active' && type !== 'engaged') {
 			return -1;
 		}
@@ -479,7 +476,7 @@ class Metrics {
 	 * @private
 	 * @return {number}  The Engaged Velocity
 	 */
-	_getVelocityEngaged(type) {
+	static _getVelocityEngaged(type) {
 		if (type !== 'active' && type !== 'engaged') {
 			return -1;
 		}
@@ -492,7 +489,7 @@ class Metrics {
 	 * Get the Subscription Type
 	 * @return {string} Subscription Name
 	 */
-	_getSubscriptionType() {
+	static _getSubscriptionType() {
 		if (!conf.account) {
 			return -1;
 		}
@@ -508,7 +505,7 @@ class Metrics {
 	 * @private
 	 * @return {number} value associated with the Current Theme
 	 */
-	_getThemeValue() {
+	static _getThemeValue() {
 		const { current_theme } = conf;
 		switch (current_theme) {
 			case 'midnight-theme':
@@ -531,7 +528,7 @@ class Metrics {
 	 * @param {string}	frequency 	one of 'all', 'daily', 'weekly'
 	 * @return {number} 			number in milliseconds over the frequency since the last ping
 	 */
-	_timeToExpired(type, frequency) {
+	static _timeToExpired(type, frequency) {
 		if (frequency === 'all') {
 			return 0;
 		}
@@ -552,7 +549,7 @@ class Metrics {
 	 * @return {boolean} 			true/false
 	 */
 	_checkPing(type, frequency) {
-		const result = this._timeToExpired(type, frequency);
+		const result = Metrics._timeToExpired(type, frequency);
 		if (result > 0) {
 			return false;
 		}
@@ -629,7 +626,7 @@ class Metrics {
 		}
 		conf.metrics.active_daily_velocity = active_daily_velocity;
 
-		const daily = this._timeToExpired('active', 'daily');
+		const daily = Metrics._timeToExpired('active', 'daily');
 		if (daily > 0) {
 			setTimeout(() => {
 				this._sendReq('active', ['daily']);
@@ -644,7 +641,7 @@ class Metrics {
 			}, FREQUENCIES.daily);
 		}
 
-		const weekly = this._timeToExpired('active', 'weekly');
+		const weekly = Metrics._timeToExpired('active', 'weekly');
 		if (weekly > 0) {
 			setTimeout(() => {
 				this._sendReq('active', ['weekly']);
@@ -659,7 +656,7 @@ class Metrics {
 			}, FREQUENCIES.weekly);
 		}
 
-		const monthly = this._timeToExpired('active', 'monthly');
+		const monthly = Metrics._timeToExpired('active', 'monthly');
 		if (monthly > 0) {
 			if (monthly <= FREQUENCIES.biweekly) {
 				setTimeout(() => {

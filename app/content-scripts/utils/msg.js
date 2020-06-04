@@ -13,8 +13,6 @@
 /**
  * @namespace ContentScriptUtils
  */
-/* eslint no-use-before-define: 0 */
-
 import { log } from '../../../src/utils/common';
 import { sendMessageInPromise as panelSendPromiseMessage, sendMessage as panelSendMessage } from '../../panel/utils/msg';
 

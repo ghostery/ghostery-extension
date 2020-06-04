@@ -23,7 +23,7 @@ import AppViewReducer from './AppViewReducer';
  * @return {function}        this function returns a plain object, which will be merged into the component's props
  * @memberof HubContainers
  */
-const mapStateToProps = state => Object.assign({}, state.app);
+const mapStateToProps = state => ({ ...state.app });
 
 /**
  * Bind the component's action creators using Redux's bindActionCreators.
@@ -32,7 +32,7 @@ const mapStateToProps = state => Object.assign({}, state.app);
  * @memberof SetupContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign({}, { setToast }), dispatch),
+	actions: bindActionCreators({ setToast }, dispatch),
 });
 
 export const reducer = AppViewReducer;

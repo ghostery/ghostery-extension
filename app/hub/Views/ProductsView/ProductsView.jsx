@@ -20,7 +20,7 @@ import PropTypes from 'prop-types';
  * @return {JSX} JSX for rendering the Products View
  * @memberof HubComponents
  */
-const ProductsView = props => (
+const ProductsView = ({ onAndroidClick, onIosClick, onLiteClick }) => (
 	<div className="ProductsView">
 		<div className="ProductsView--rowPaddingTop row small-up-1 large-up-2 align-center-middle">
 			<div className="columns text-center">
@@ -44,13 +44,13 @@ const ProductsView = props => (
 					{t('hub_products_main_promo_description')}
 				</div>
 				<div className="ProductsView__storeImageContainer">
-					<a href="https://itunes.apple.com/us/app/ghostery-privacy-browser/id472789016?mt=8" onClick={props.onIosClick} target="_blank" rel="noopener noreferrer">
+					<a href="https://itunes.apple.com/us/app/ghostery-privacy-browser/id472789016?mt=8" onClick={onIosClick} target="_blank" rel="noopener noreferrer">
 						<img
 							className="ProductsView__imageAppStoreIos"
 							src="/app/images/hub/products/app_store_badge_us.svg"
 						/>
 					</a>
-					<a href="https://play.google.com/store/apps/details?id=com.ghostery.android.ghostery" onClick={props.onAndroidClick} target="_blank" rel="noopener noreferrer">
+					<a href="https://play.google.com/store/apps/details?id=com.ghostery.android.ghostery" onClick={onAndroidClick} target="_blank" rel="noopener noreferrer">
 						<img
 							className="ProductsView__imagePlayStore"
 							src="/app/images/hub/products/google-play-badge.png"
@@ -86,7 +86,7 @@ const ProductsView = props => (
 					{t('hub_products_third_promo_description')}
 				</div>
 				<div className="ProductsView__storeImageContainer">
-					<a href="https://itunes.apple.com/us/app/ghostery-lite/id1436953057" onClick={props.onLiteClick} target="_blank" rel="noopener noreferrer">
+					<a href="https://itunes.apple.com/us/app/ghostery-lite/id1436953057" onClick={onLiteClick} target="_blank" rel="noopener noreferrer">
 						<img
 							className="ProductsView__imageAppStoreMac"
 							src="/app/images/hub/products/app_store_mac_badge_us.svg"

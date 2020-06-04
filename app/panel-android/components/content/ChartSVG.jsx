@@ -24,8 +24,10 @@ export default class ChartSVG extends React.Component {
 	}
 
 	increaseN = () => {
-		let currentN = this.state.nItem;
-		if (currentN < this.props.paths.length) {
+		const { paths } = this.props;
+		const { nItem } = this.state;
+		let currentN = nItem;
+		if (currentN < paths.length) {
 			this.setState({
 				nItem: currentN += 1,
 			});
@@ -33,13 +35,13 @@ export default class ChartSVG extends React.Component {
 	}
 
 	render() {
-		const { radius } = this.props;
-		let paths = this.props.paths.slice(0, this.state.nItem).map((element, index) => (
-			// eslint-disable-next-line react/no-array-index-key
-			<Path key={index} path={element} radius={radius} handler={this.increaseN}	/>
+		const { paths, radius } = this.props;
+		const { nItem } = this.state;
+		let computedPaths = paths.slice(0, nItem).map(element => (
+			<Path key={element.start} path={element} radius={radius} handler={this.increaseN} />
 		));
 
-		if (paths.length === 0) {
+		if (computedPaths.length === 0) {
 			// When there is no tracker
 			const defaultElement = {
 				start: 0,
@@ -47,7 +49,7 @@ export default class ChartSVG extends React.Component {
 				category: 'default',
 			};
 
-			paths = (
+			computedPaths = (
 				<Path
 					path={defaultElement}
 					radius={radius}
@@ -59,7 +61,7 @@ export default class ChartSVG extends React.Component {
 		return (
 			<svg id="circle" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" viewBox="-20 -20 240 240">
 				<g>
-					{paths}
+					{computedPaths}
 				</g>
 			</svg>
 		);

@@ -11,8 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint no-use-before-define: 0 */
-
 import {
 	UPDATE_PANEL_DATA,
 	SHOW_NOTIFICATION,
@@ -60,204 +58,6 @@ const initialState = {
 	emailValidated: false,
 	current_theme: 'default',
 	isPromoModalHidden: false,
-};
-/**
- * Default export for panel view reducer. Handles actions
- * which are common to many derived views.
- * @memberOf  PanelReactReducers
- *
- * @param  {Object} state 		current state
- * @param  {Object} action 		action which provides data
- * @return {Object}        		updated state clone
- */
-export default (state = initialState, action) => {
-	switch (action.type) {
-		case UPDATE_PANEL_DATA: {
-			return Object.assign({}, state, action.data, { initialized: true });
-		}
-		case SET_THEME: {
-			const { name, css } = action.data;
-			setTheme(document, name, { themeData: { [name]: { name, css } } });
-			return Object.assign({}, state, { current_theme: name });
-		}
-		case CLEAR_THEME: {
-			setTheme(document, initialState.current_theme);
-			return Object.assign({}, state, { current_theme: initialState.current_theme });
-		}
-		case SHOW_NOTIFICATION: {
-			const updated = _showNotification(state, action);
-			return Object.assign({}, state, updated);
-		}
-		case CLOSE_NOTIFICATION: {
-			const updated = _closeNotification(state, action);
-			return Object.assign({}, state, updated);
-		}
-		case LOGIN_SUCCESS: {
-			action.payload.text = `${t('panel_signin_success')} ${action.payload.email}`;
-			action.payload.classes = 'success';
-			action.payload.overrideNotificationShown = true;
-			const updated = _showNotification(state, action);
-			return Object.assign({}, state, updated, {
-				loggedIn: true,
-			});
-		}
-		case LOGIN_FAIL: {
-			const { errors } = action.payload;
-			let errorText = t('server_error_message');
-			errors.forEach((err) => {
-				switch (err.code) {
-					case '10050':
-					case '10110':
-						errorText = t('no_such_email_password_combo');
-						break;
-					default:
-						errorText = t('server_error_message');
-				}
-			});
-			action.payload.text = errorText;
-			action.payload.classes = 'alert';
-			action.payload.overrideNotificationShown = true;
-			const updated = _showNotification(state, action);
-			return Object.assign({}, state, updated);
-		}
-		case REGISTER_SUCCESS: {
-			const { email } = action.payload;
-			action.payload.text = t('panel_email_verification_sent', email);
-			action.payload.classes = 'success';
-			action.payload.overrideNotificationShown = true;
-			const updated = _showNotification(state, action);
-			return Object.assign({}, state, updated, {
-				email
-			});
-		}
-		case REGISTER_FAIL: {
-			const { errors } = action.payload;
-			let errorText = t('server_error_message');
-			errors.forEach((err) => {
-				switch (err.code) {
-					case '10070':
-						errorText = t('email_address_in_use');
-						break;
-					case '10080':
-						errorText = t('your_emails_do_not_match');
-						break;
-					default:
-						errorText = t('server_error_message');
-				}
-			});
-			action.payload.text = errorText;
-			action.payload.classes = 'alert';
-			action.payload.overrideNotificationShown = true;
-			const updated = _showNotification(state, action);
-			return Object.assign({}, state, updated);
-		}
-		case LOGOUT_SUCCESS: {
-			setTheme(document);
-			return Object.assign({}, state, { current_theme: initialState.current_theme });
-		}
-		// @TODO?
-		// case LOGOUT_SUCCESS: {
-		// 	action.payload = {
-		// 		text: 'Logged out successfully.',
-		// 		classes: 'success',
-		// 	};
-		// 	const updated = _showNotification(state, action);
-		// 	return Object.assign({}, state, updated);
-		// }
-		case RESET_PASSWORD_SUCCESS: {
-			action.payload = {
-				text: t('banner_check_your_email_title'),
-				classes: 'success',
-				overrideNotificationShown: true,
-			};
-			const updated = _showNotification(state, action);
-			return Object.assign({}, state, updated);
-		}
-		case RESET_PASSWORD_FAIL: {
-			const { errors } = action.payload;
-			let errorText = t('server_error_message');
-			errors.forEach((err) => {
-				switch (err.code) {
-					case '10050':
-					case '10110':
-						errorText = t('banner_email_not_in_system_message');
-						break;
-					default:
-						errorText = t('server_error_message');
-				}
-			});
-			action.payload.text = errorText;
-			action.payload.classes = 'alert';
-			action.payload.overrideNotificationShown = true;
-			const updated = _showNotification(state, action);
-			return Object.assign({}, state, updated);
-		}
-		case TOGGLE_CLIQZ_FEATURE: {
-			let pingName = '';
-			switch (action.data.featureName) {
-				case 'enable_anti_tracking':
-					pingName = action.data.isEnabled ? 'antitrack_off' : 'antitrack_on';
-					break;
-				case 'enable_ad_block':
-					pingName = action.data.isEnabled ? 'adblock_off' : 'adblock_on';
-					break;
-				case 'enable_smart_block':
-					pingName = action.data.isEnabled ? 'smartblock_off' : 'smartblock_on';
-					break;
-				default:
-					break;
-			}
-			sendMessageInPromise('setPanelData', { [action.data.featureName]: !action.data.isEnabled }).then(() => {
-				if (pingName) {
-					sendMessage('ping', pingName);
-				}
-			});
-			return Object.assign({}, state, { [action.data.featureName]: !action.data.isEnabled });
-		}
-		case TOGGLE_EXPANDED: {
-			sendMessage('setPanelData', { is_expanded: !state.is_expanded });
-			sendMessage('ping', state.is_expanded ? 'viewchange_from_expanded' : 'viewchange_from_detailed');
-
-			return Object.assign({}, state, { is_expanded: !state.is_expanded });
-		}
-		case TOGGLE_EXPERT: {
-			sendMessage('setPanelData', { is_expert: !state.is_expert });
-			let pingName = '';
-			if (state.is_expert) {
-				if (state.is_expanded) {
-					pingName = 'viewchange_from_expanded';
-				} else {
-					pingName = 'viewchange_from_detailed';
-				}
-			} else {
-				pingName = 'viewchange_from_simple';
-			}
-			sendMessage('ping', pingName);
-			return Object.assign({}, state, { is_expert: !state.is_expert });
-		}
-		case UPDATE_NOTIFICATION_STATUS: {
-			const updated = _updateNotificationStatus(state, action);
-			return Object.assign({}, state, updated);
-		}
-		case TOGGLE_CHECKBOX: {
-			if (action.data.event === 'enable_offers') {
-				const enable_offers = action.data.checked;
-				return Object.assign({}, state, { enable_offers });
-			}
-			return state;
-		}
-		case TOGGLE_OFFERS_ENABLED: {
-			const enable_offers = action.data.enabled;
-			return Object.assign({}, state, { enable_offers });
-		}
-		case TOGGLE_PROMO_MODAL: {
-			return {
-				...state,
-				isPromoModalHidden: !state.isPromoModalHidden
-			};
-		}
-		default: return state;
-	}
 };
 
 /**
@@ -360,4 +160,223 @@ const _updateNotificationStatus = (state, action) => {
 	return {
 		[banner_status_name]: banner_status,
 	};
+};
+
+/**
+ * Default export for panel view reducer. Handles actions
+ * which are common to many derived views.
+ * @memberOf  PanelReactReducers
+ *
+ * @param  {Object} state 		current state
+ * @param  {Object} action 		action which provides data
+ * @return {Object}        		updated state clone
+ */
+export default (state = initialState, action) => {
+	switch (action.type) {
+		case UPDATE_PANEL_DATA: {
+			return { ...state, ...action.data, initialized: true };
+		}
+		case SET_THEME: {
+			const { name, css } = action.data;
+			setTheme(document, name, { themeData: { [name]: { name, css } } });
+			return { ...state, current_theme: name };
+		}
+		case CLEAR_THEME: {
+			setTheme(document, initialState.current_theme);
+			return { ...state, current_theme: initialState.current_theme };
+		}
+		case SHOW_NOTIFICATION: {
+			const updated = _showNotification(state, action);
+			return { ...state, ...updated };
+		}
+		case CLOSE_NOTIFICATION: {
+			const updated = _closeNotification(state, action);
+			return { ...state, ...updated };
+		}
+		case LOGIN_SUCCESS: {
+			const notificationAction = {
+				payload: {
+					text: `${t('panel_signin_success')} ${action.payload.email}`,
+					classes: 'success',
+					overrideNotificationShown: true,
+				}
+			};
+			const updated = _showNotification(state, notificationAction);
+			return { ...state, ...updated, loggedIn: true };
+		}
+		case LOGIN_FAIL: {
+			const { errors } = action.payload;
+			let errorText = t('server_error_message');
+			errors.forEach((err) => {
+				switch (err.code) {
+					case '10050':
+					case '10110':
+						errorText = t('no_such_email_password_combo');
+						break;
+					default:
+						errorText = t('server_error_message');
+				}
+			});
+			const notificationAction = {
+				payload: {
+					text: errorText,
+					classes: 'alert',
+					overrideNotificationShown: true,
+				}
+			};
+			const updated = _showNotification(state, notificationAction);
+			return { ...state, ...updated };
+		}
+		case REGISTER_SUCCESS: {
+			const { email } = action.payload;
+			const notificationAction = {
+				payload: {
+					text: t('panel_email_verification_sent', email),
+					classes: 'success',
+					overrideNotificationShown: true,
+				}
+			};
+			const updated = _showNotification(state, notificationAction);
+			return { ...state, ...updated, email };
+		}
+		case REGISTER_FAIL: {
+			const { errors } = action.payload;
+			let errorText = t('server_error_message');
+			errors.forEach((err) => {
+				switch (err.code) {
+					case '10070':
+						errorText = t('email_address_in_use');
+						break;
+					case '10080':
+						errorText = t('your_email_do_not_match');
+						break;
+					default:
+						errorText = t('server_error_message');
+				}
+			});
+			const notificationAction = {
+				payload: {
+					text: errorText,
+					classes: 'alert',
+					overrideNotificationShown: true,
+				}
+			};
+			const updated = _showNotification(state, notificationAction);
+			return { ...state, ...updated };
+		}
+		case LOGOUT_SUCCESS: {
+			setTheme(document);
+			return { ...state, current_theme: initialState.current_theme };
+		}
+		// @TODO?
+		// case LOGOUT_SUCCESS: {
+		// 	const notificationAction = {
+		// 		payload: {
+		// 			text: 'Logged out successfully.',
+		// 			classes: 'success',
+		// 		}
+		// 	};
+		// 	const updated = _showNotification(state, notificationAction);
+		// 	return Object.assign({}, state, updated);
+		// }
+		case RESET_PASSWORD_SUCCESS: {
+			const notificationAction = {
+				payload: {
+					text: t('banner_check_your_email_title'),
+					classes: 'success',
+					overrideNotificationShown: true,
+				}
+			};
+			const updated = _showNotification(state, notificationAction);
+			return { ...state, ...updated };
+		}
+		case RESET_PASSWORD_FAIL: {
+			const { errors } = action.payload;
+			let errorText = t('server_error_message');
+			errors.forEach((err) => {
+				switch (err.code) {
+					case '10050':
+					case '10110':
+						errorText = t('banner_email_not_in_system_message');
+						break;
+					default:
+						errorText = t('server_error_message');
+				}
+			});
+			const notificationAction = {
+				payload: {
+					text: errorText,
+					classes: 'alert',
+					overrideNotificationShown: true,
+				}
+			};
+			const updated = _showNotification(state, notificationAction);
+			return { ...state, ...updated };
+		}
+		case TOGGLE_CLIQZ_FEATURE: {
+			let pingName = '';
+			switch (action.data.featureName) {
+				case 'enable_anti_tracking':
+					pingName = action.data.isEnabled ? 'antitrack_off' : 'antitrack_on';
+					break;
+				case 'enable_ad_block':
+					pingName = action.data.isEnabled ? 'adblock_off' : 'adblock_on';
+					break;
+				case 'enable_smart_block':
+					pingName = action.data.isEnabled ? 'smartblock_off' : 'smartblock_on';
+					break;
+				default:
+					break;
+			}
+			sendMessageInPromise('setPanelData', { [action.data.featureName]: !action.data.isEnabled }).then(() => {
+				if (pingName) {
+					sendMessage('ping', pingName);
+				}
+			});
+			return { ...state, [action.data.featureName]: !action.data.isEnabled };
+		}
+		case TOGGLE_EXPANDED: {
+			sendMessage('setPanelData', { is_expanded: !state.is_expanded });
+			sendMessage('ping', state.is_expanded ? 'viewchange_from_expanded' : 'viewchange_from_detailed');
+
+			return { ...state, is_expanded: !state.is_expanded };
+		}
+		case TOGGLE_EXPERT: {
+			sendMessage('setPanelData', { is_expert: !state.is_expert });
+			let pingName = '';
+			if (state.is_expert) {
+				if (state.is_expanded) {
+					pingName = 'viewchange_from_expanded';
+				} else {
+					pingName = 'viewchange_from_detailed';
+				}
+			} else {
+				pingName = 'viewchange_from_simple';
+			}
+			sendMessage('ping', pingName);
+			return { ...state, is_expert: !state.is_expert };
+		}
+		case UPDATE_NOTIFICATION_STATUS: {
+			const updated = _updateNotificationStatus(state, action);
+			return { ...state, ...updated };
+		}
+		case TOGGLE_CHECKBOX: {
+			if (action.data.event === 'enable_offers') {
+				const enable_offers = action.data.checked;
+				return { ...state, enable_offers };
+			}
+			return state;
+		}
+		case TOGGLE_OFFERS_ENABLED: {
+			const enable_offers = action.data.enabled;
+			return { ...state, enable_offers };
+		}
+		case TOGGLE_PROMO_MODAL: {
+			return {
+				...state,
+				isPromoModalHidden: !state.isPromoModalHidden
+			};
+		}
+		default: return state;
+	}
 };
