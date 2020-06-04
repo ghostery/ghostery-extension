@@ -24,7 +24,7 @@ import * as SettingsActions from '../../../../panel/actions/SettingsActions';
  * @return {function}        this function returns a plain object, which will be merged into the component's props
  * @memberof HubContainers
  */
-const mapStateToProps = state => Object.assign({}, state.settings);
+const mapStateToProps = state => ({ ...state.settings });
 
 /**
  * Bind the component's action creators using Redux's bindActionCreators.
@@ -33,7 +33,7 @@ const mapStateToProps = state => Object.assign({}, state.settings);
  * @memberof SetupContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign({}, SettingsActions), dispatch),
+	actions: bindActionCreators({ ...SettingsActions }, dispatch),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SetupBlockingDropdownContainer));

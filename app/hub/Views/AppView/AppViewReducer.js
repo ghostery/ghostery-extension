@@ -19,12 +19,13 @@ function AppViewReducer(state = initialState, action) {
 	switch (action.type) {
 		case SET_TOAST: {
 			const { toastMessage, toastClass } = action.data;
-			return Object.assign({}, state, {
-				app: Object.assign({}, {
+			return {
+				...state,
+				app: {
 					toastMessage,
 					toastClass
-				}),
-			});
+				}
+			};
 		}
 		default: return state;
 	}

@@ -31,7 +31,8 @@ class GlobalBlocking extends React.Component {
 	 * Trigger action which toggles expanded state.
 	 */
 	toggleExpanded() {
-		this.props.actions.toggleExpanded();
+		const { actions } = this.props;
+		actions.toggleExpanded();
 	}
 
 	/**
@@ -39,10 +40,16 @@ class GlobalBlocking extends React.Component {
 	* @return {ReactComponent}   ReactComponent instance
 	*/
 	render() {
-		const { settingsData } = this.props;
-		const categories = this.props.settingsData ? this.props.settingsData.categories : [];
-		const filterText = this.props.settingsData ? this.props.settingsData.filterText : t('settings_filter_all_label');
-		const expandAll = this.props.settingsData ? this.props.settingsData.expand_all_trackers : false;
+		const {
+			actions,
+			settingsData,
+			showToast,
+			filtered,
+			language,
+		} = this.props;
+		const categories = settingsData ? settingsData.categories : [];
+		const filterText = settingsData ? settingsData.filterText : t('settings_filter_all_label');
+		const expandAll = settingsData ? settingsData.expand_all_trackers : false;
 		const condensedToggleClassNames = ClassNames('condensed-toggle', {
 			condensed: settingsData.is_expanded,
 		});
@@ -53,8 +60,8 @@ class GlobalBlocking extends React.Component {
 					categories={categories}
 					filterText={filterText}
 					expandAll={expandAll}
-					actions={this.props.actions}
-					showToast={this.props.showToast}
+					actions={actions}
+					showToast={showToast}
 					sitePolicy={settingsData.sitePolicy}
 					paused_blocking={settingsData.paused_blocking}
 					selected_app_ids={settingsData.selected_app_ids}
@@ -65,10 +72,10 @@ class GlobalBlocking extends React.Component {
 						<Categories
 							expandAll={expandAll}
 							categories={categories}
-							filtered={this.props.filtered}
-							actions={this.props.actions}
-							showToast={this.props.showToast}
-							language={this.props.language}
+							filtered={filtered}
+							actions={actions}
+							showToast={showToast}
+							language={language}
 							globalBlocking
 						/>
 					)}

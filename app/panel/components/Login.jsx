@@ -49,6 +49,7 @@ class Login extends React.Component {
 	 * Validate entered login data and, if it is good, trigger Login action.
 	 */
 	handleSubmit = (e) => {
+		const { actions, is_expert } = this.props;
 		e.preventDefault();
 		const { email, password } = this.state;
 		const emailIsValid = email && validateEmail(email);
@@ -60,22 +61,22 @@ class Login extends React.Component {
 		if (!emailIsValid || !password) { return; }
 
 		this.setState({ loading: true }, () => {
-			this.props.actions.login(email, password)
+			actions.login(email, password)
 				.then((success) => {
 					if (success) {
 						RSVP.all([
-							this.props.actions.getUser(),
-							this.props.actions.getUserSettings(),
+							actions.getUser(),
+							actions.getUserSettings(),
 						])
 							.then((res) => {
 								const { current_theme = 'default' } = res[1];
-								return this.props.actions.getTheme(current_theme);
+								return actions.getTheme(current_theme);
 							})
 							.finally(() => {
 								this.setState({ loading: false }, () => {
-									this.props.actions.togglePromoModal();
+									actions.togglePromoModal();
 									history.push({
-										pathname: this.props.is_expert ? '/detail/blocking' : '/'
+										pathname: is_expert ? '/detail/blocking' : '/'
 									});
 								});
 							});
@@ -92,6 +93,7 @@ class Login extends React.Component {
 	 * @return {ReactComponent}   ReactComponent instance
 	 */
 	render() {
+		const { is_expert } = this.props;
 		const {
 			email, password, emailError, passwordError, loading
 		} = this.state;
@@ -119,7 +121,7 @@ class Login extends React.Component {
 							</div>
 							<div className="account-signin-buttons-container row">
 								<div className="small-6 columns text-center">
-									<Link to={(this.props.is_expert ? '/detail' : '/')} className="cancel button hollow">
+									<Link to={(is_expert ? '/detail' : '/')} className="cancel button hollow">
 										{ t('button_cancel') }
 									</Link>
 								</div>

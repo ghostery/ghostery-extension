@@ -14,7 +14,7 @@
  * @namespace  PanelAndroidUtils
  */
 
-export function fromTrackersToChartData(trackers) {
+export default function fromTrackersToChartData(trackers) {
 	if (trackers.length < 1) {
 		return {
 			sum: 0,
@@ -28,7 +28,7 @@ export function fromTrackersToChartData(trackers) {
 	const sum = trackers.map(tracker => tracker.numTotal).reduce((a, b) => a + b, 0);
 
 	for (let i = 0; i < trackers.length; i += 1) {
-		const endAngle = startAngle + (trackers[i].numTotal * 360 / sum);
+		const endAngle = startAngle + (trackers[i].numTotal * (360 / sum));
 
 		arcs.push({
 			start: startAngle,

@@ -11,10 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint no-useless-concat: 0 */
-
 import React from 'react';
-import ReactDOM from 'react-dom';
 import ClassNames from 'classnames';
 
 import ClickOutside from './BuildingBlocks/ClickOutside';
@@ -32,9 +29,9 @@ class HeaderMenu extends React.Component {
 	 * @param  {Object} e mouseclick event
 	 */
 	handleClickOutside = (e) => {
-		// eslint-disable-next-line react/no-find-dom-node
-		if (!ReactDOM.findDOMNode(this).contains(e.target)) {
-			this.props.toggleDropdown();
+		const { toggleDropdown } = this.props;
+		if (!this.node.contains(e.target)) {
+			toggleDropdown();
 		}
 	}
 
@@ -42,8 +39,9 @@ class HeaderMenu extends React.Component {
 	 * Trigger action which open Settings panel from drop-down menu Settings item.
 	 */
 	clickSettings = () => {
-		this.props.toggleDropdown();
-		this.props.history.push('/settings/globalblocking');
+		const { history, toggleDropdown } = this.props;
+		toggleDropdown();
+		history.push('/settings/globalblocking');
 	}
 
 	/**
@@ -53,7 +51,7 @@ class HeaderMenu extends React.Component {
 	 */
 	clickBrokenPage = () => {
 		sendMessageInPromise('getSiteData').then((data) => {
-			let body = `${'PLEASE INCLUDE A DESCRIPTION AND A PICTURE OF THE ISSUE YOU ARE EXPERIENCING:' + '\r\n\r\n\r\n\r\n\r\n\r\n' +
+			let body = `${'PLEASE INCLUDE A DESCRIPTION AND A PICTURE OF THE ISSUE YOU ARE EXPERIENCING:\r\n\r\n\r\n\r\n\r\n\r\n' +
 					'URL: '}${data.url}\r\n` +
 					`Ghostery version: ${data.extensionVersion}\r\n` +
 					`Database Version: ${data.dbVersion}\r\n` +
@@ -107,8 +105,9 @@ class HeaderMenu extends React.Component {
 	 * It should open Help view.
 	 */
 	clickHelp = () => {
-		this.props.toggleDropdown();
-		this.props.history.push('/help');
+		const { history, toggleDropdown } = this.props;
+		toggleDropdown();
+		history.push('/help');
 	}
 
 	/**
@@ -116,8 +115,9 @@ class HeaderMenu extends React.Component {
 	 * It should open About view.
 	 */
 	clickAbout = () => {
-		this.props.toggleDropdown();
-		this.props.history.push('/about');
+		const { history, toggleDropdown } = this.props;
+		toggleDropdown();
+		history.push('/about');
 	}
 
 	/**
@@ -136,26 +136,30 @@ class HeaderMenu extends React.Component {
 	 * Handle click on 'Sign in' menu item and navigate to Login panel.
 	 */
 	clickSignIn = () => {
-		this.props.toggleDropdown();
-		this.props.history.push('/login');
+		const { history, toggleDropdown } = this.props;
+		toggleDropdown();
+		history.push('/login');
 	}
 
 	/**
 	 * Handle click on 'Sign out' menu item (if user is in logged in state) and log out the user.
 	 */
 	clickSignOut = () => {
-		this.props.toggleDropdown();
-		this.props.actions.logout();
+		const { actions, toggleDropdown } = this.props;
+		toggleDropdown();
+		actions.logout();
 	}
 
 	/**
 	 * Handle click on Subscriber menu item.
 	 */
 	clickSubscriber = () => {
-		const { hasPremiumAccess, hasPlusAccess } = this.props;
+		const {
+			history, hasPremiumAccess, hasPlusAccess, toggleDropdown
+		} = this.props;
 		sendMessage('ping', 'plus_panel_from_menu');
-		this.props.toggleDropdown();
-		this.props.history.push(hasPlusAccess || hasPremiumAccess ? '/subscription/info' : '/subscribe/false');
+		toggleDropdown();
+		history.push(hasPlusAccess || hasPremiumAccess ? '/subscription/info' : '/subscribe/false');
 	}
 
 	/**
@@ -167,7 +171,8 @@ class HeaderMenu extends React.Component {
 			loggedIn,
 			email,
 			hasPremiumAccess,
-			hasPlusAccess
+			hasPlusAccess,
+			kebab
 		} = this.props;
 		const optionClasses = ClassNames({
 			'menu-option': hasPlusAccess || hasPremiumAccess,
@@ -179,8 +184,8 @@ class HeaderMenu extends React.Component {
 			'non-subscriber': !(hasPremiumAccess || hasPlusAccess)
 		});
 		return (
-			<ClickOutside onClickOutside={this.handleClickOutside} excludeEl={this.props.kebab}>
-				<div className="dropdown-pane" id="header-dropdown">
+			<ClickOutside onClickOutside={this.handleClickOutside} excludeEl={kebab}>
+				<div ref={(node) => { this.node = node; }} className="dropdown-pane" id="header-dropdown">
 					<ul className="vertical menu no-bullet icons icon-left">
 						<li className="menu-option menu-settings" onClick={this.clickSettings}>
 							<div>

@@ -40,9 +40,22 @@ class Trackers extends React.Component {
 	* @return {ReactComponent}   ReactComponent instance
 	*/
 	render() {
-		const { trackers, isUnknown } = this.props;
+		const {
+			actions,
+			trackers,
+			isUnknown,
+			globalBlocking,
+			showToast,
+			language,
+			cat_id,
+			show_tracker_urls,
+			sitePolicy,
+			paused_blocking,
+			smartBlockActive,
+			smartBlock,
+		} = this.props;
 		let trackerList;
-		if (this.props.globalBlocking) {
+		if (globalBlocking) {
 			const trackersToShow = [];
 			trackers.forEach((tracker) => {
 				if (tracker.shouldShow) {
@@ -52,13 +65,13 @@ class Trackers extends React.Component {
 			trackerList = trackersToShow.map((tracker, index) => (
 				<GlobalTracker
 					index={index}
-					count={this.props.trackers.length}
+					count={trackers.length}
 					tracker={tracker}
 					key={tracker.id}
-					cat_id={this.props.cat_id}
-					actions={this.props.actions}
-					showToast={this.props.showToast}
-					language={this.props.language}
+					cat_id={cat_id}
+					actions={actions}
+					showToast={showToast}
+					language={language}
 				/>
 			));
 		} else {
@@ -66,14 +79,14 @@ class Trackers extends React.Component {
 				<Tracker
 					tracker={tracker}
 					key={tracker.id}
-					cat_id={this.props.cat_id}
-					actions={this.props.actions}
-					show_tracker_urls={this.props.show_tracker_urls}
-					sitePolicy={this.props.sitePolicy}
-					paused_blocking={this.props.paused_blocking}
-					language={this.props.language}
-					smartBlockActive={this.props.smartBlockActive}
-					smartBlock={this.props.smartBlock}
+					cat_id={cat_id}
+					actions={actions}
+					show_tracker_urls={show_tracker_urls}
+					sitePolicy={sitePolicy}
+					paused_blocking={paused_blocking}
+					language={language}
+					smartBlockActive={smartBlockActive}
+					smartBlock={smartBlock}
 					isUnknown={isUnknown}
 				/>
 			));

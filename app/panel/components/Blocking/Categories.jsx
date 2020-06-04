@@ -30,14 +30,23 @@ class Categories extends React.Component {
 	*/
 	render() {
 		const {
+			actions,
 			categories,
 			expandAll,
 			unknownCategory,
 			enable_anti_tracking,
 			sitePolicy,
+			globalBlocking,
+			filtered,
+			showToast,
+			show_tracker_urls,
+			paused_blocking,
+			language,
+			smartBlockActive,
+			smartBlock,
 		} = this.props;
-		const globalBlocking = !!this.props.globalBlocking;
-		const filtered = !!this.props.filtered;
+		const globalBlockingBool = !!globalBlocking;
+		const filteredBool = !!filtered;
 
 		const renderCategory = (category, index, isUnknown) => {
 			let whitelistedTotal = 0;
@@ -75,19 +84,19 @@ class Categories extends React.Component {
 			return (
 				<Category
 					expandAll={expandAll}
-					globalBlocking={globalBlocking}
+					globalBlocking={globalBlockingBool}
 					index={index}
 					category={isUnknown ? unknownCategoryMapping : category}
-					actions={this.props.actions}
+					actions={actions}
 					key={isUnknown ? unknownCategoryMapping.id : category.id}
-					filtered={filtered}
-					showToast={this.props.showToast}
-					show_tracker_urls={this.props.show_tracker_urls}
-					sitePolicy={this.props.sitePolicy}
-					paused_blocking={this.props.paused_blocking}
-					language={this.props.language}
-					smartBlockActive={this.props.smartBlockActive}
-					smartBlock={this.props.smartBlock}
+					filtered={filteredBool}
+					showToast={showToast}
+					show_tracker_urls={show_tracker_urls}
+					sitePolicy={sitePolicy}
+					paused_blocking={paused_blocking}
+					language={language}
+					smartBlockActive={smartBlockActive}
+					smartBlock={smartBlock}
 					enable_anti_tracking={enable_anti_tracking}
 					isUnknown={isUnknown}
 				/>

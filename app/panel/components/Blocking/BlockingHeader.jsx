@@ -48,33 +48,19 @@ class BlockingHeader extends React.Component {
 
 	/**
 	 * Lifecycle event
+	 * Refactor Notes:
+	 *   Refactor UNSAFE_componentWillReceiveProps using getDerivedStateFromProps
+	 *   because we are only manipulating state.
 	 */
-	componentDidMount() {
-		if (this.props.categories) {
-			this.updateBlockAll(this.props.categories);
-		}
-
-		if (typeof this.props.actions.updateTrackerCounts === 'function') {
-			// if we're on GlobalSettings, we don't need to run this function
-			const smartBlock = this.props.smartBlockActive && this.props.smartBlock || { blocked: {}, unblocked: {} };
-			updateSummaryBlockingCount(this.props.categories, smartBlock, this.props.actions.updateTrackerCounts);
-		}
+	static getDerivedStateFromProps(prevProps, prevState) {
+		return BlockingHeader.updateBlockAll(prevProps.categories, prevState.fromHere);
 	}
 
 	/**
-	 * Lifecycle event
+	 * Get appropriate initial text ("Block All" or "Unblock All") in Blocking header
+	 * when Blocking or Global Blocking view opens. Return object to set in state.
 	 */
-	UNSAFE_componentWillReceiveProps(nextProps) {
-		if (nextProps.categories) {
-			this.updateBlockAll(nextProps.categories);
-		}
-	}
-
-	/**
-	 * Set appropriate initial text ("Block All" or "Unblock All") in Blocking header
-	 * when Blocking or Global Blocking view opens. Save 'allBlocked' property in state.
-	 */
-	updateBlockAll(categories) {
+	static updateBlockAll(categories, fromHere) {
 		if (categories) {
 			let totalShown = 0;
 			let totalBlocked = 0;
@@ -92,13 +78,40 @@ class BlockingHeader extends React.Component {
 					}
 				});
 			});
-			if (this.state.fromHere || totalShown === totalBlocked || totalBlocked === 0) {
-				this.setState({
+			if (fromHere || totalShown === totalBlocked || totalBlocked === 0) {
+				return {
 					allBlocked: (totalShown === totalBlocked),
 					fromHere: false,
 					filtered
+				};
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Lifecycle event
+	 */
+	componentDidMount() {
+		const {
+			actions, categories, smartBlock, smartBlockActive
+		} = this.props;
+		const { fromHere } = this.state;
+		if (categories) {
+			const updates = BlockingHeader.updateBlockAll(categories, fromHere);
+			if (updates) {
+				this.setState({
+					allBlocked: updates.allBlocked,
+					fromHere: updates.fromHere,
+					filtered: updates.filtered
 				});
 			}
+		}
+
+		if (typeof actions.updateTrackerCounts === 'function') {
+			// if we're on GlobalSettings, we don't need to run this function
+			const calcSmartBlock = (smartBlockActive && smartBlock) || { blocked: {}, unblocked: {} };
+			updateSummaryBlockingCount(categories, calcSmartBlock, actions.updateTrackerCounts);
 		}
 	}
 
@@ -107,8 +120,9 @@ class BlockingHeader extends React.Component {
 	 * Trigger action which expands/contracts all categories.
 	 */
 	clickExpandAll() {
-		const newState = !this.props.expandAll;
-		this.props.actions.toggleExpandAll(newState);
+		const { actions, expandAll } = this.props;
+		const newState = !expandAll;
+		actions.toggleExpandAll(newState);
 	}
 
 	/**
@@ -117,33 +131,43 @@ class BlockingHeader extends React.Component {
 	 * blocking view. Update counters in Summary view accordingly.
 	 */
 	clickBlockAll() {
-		const globalBlocking = !!this.props.globalBlocking;
-		if (this.props.categories) {
+		const {
+			actions,
+			categories,
+			globalBlocking,
+			paused_blocking,
+			sitePolicy,
+			smartBlock,
+			smartBlockActive,
+			showToast
+		} = this.props;
+		const globalBlockingBool = !!globalBlocking;
+		if (categories) {
 			this.setState({ fromHere: true }, () => {
 				const { allBlocked } = this.state;
-				if ((this.props.paused_blocking || this.props.sitePolicy) && !globalBlocking) {
+				if ((paused_blocking || sitePolicy) && !globalBlockingBool) {
 					return;
 				}
 
-				this.props.actions.updateBlockAllTrackers({
-					smartBlockActive: this.props.smartBlockActive,
-					smartBlock: this.props.smartBlock,
+				actions.updateBlockAllTrackers({
+					smartBlockActive,
+					smartBlock,
 					allBlocked,
 				});
 
-				if (typeof this.props.actions.updateTrackerCounts === 'function') {
+				if (typeof actions.updateTrackerCounts === 'function') {
 					// if we're on GlobalSettings, we don't need to run this function
-					const smartBlock = this.props.smartBlockActive && this.props.smartBlock || { blocked: {}, unblocked: {} };
-					updateSummaryBlockingCount(this.props.categories, smartBlock, this.props.actions.updateTrackerCounts);
+					const calcSmartBlock = (smartBlockActive && smartBlock) || { blocked: {}, unblocked: {} };
+					updateSummaryBlockingCount(categories, calcSmartBlock, actions.updateTrackerCounts);
 				}
 
-				this.props.actions.showNotification({
+				actions.showNotification({
 					updated: 'globalBLockAll',
 					reload: true,
 				});
 
-				if (globalBlocking) {
-					this.props.showToast({
+				if (globalBlockingBool) {
+					showToast({
 						text: t('global_settings_saved')
 					});
 				}
@@ -156,9 +180,11 @@ class BlockingHeader extends React.Component {
 	 * Applicable to Global Tracking view in Settings.
 	 */
 	handleSubmit(event) {
+		const { actions } = this.props;
+		const { searchValue } = this.state;
 		if (event.keyCode === 13) {
-			if (this.state.searchValue) {
-				this.props.actions.toggleExpandAll(true);
+			if (searchValue) {
+				actions.toggleExpandAll(true);
 			}
 		}
 	}
@@ -172,9 +198,10 @@ class BlockingHeader extends React.Component {
 	 * @param {Object} event   	keyboard event
 	 */
 	updateValue(event) {
+		const { actions } = this.props;
 		const query = event.currentTarget.value ? event.currentTarget.value.toLowerCase() : '';
 		this.setState({ searchValue: query });
-		this.props.actions.updateSearchValue(query);
+		actions.updateSearchValue(query);
 	}
 
 	/**
@@ -186,7 +213,7 @@ class BlockingHeader extends React.Component {
 	 * @param {Object} event   	mouseclick event
 	 */
 	clickFilterText() {
-		this.setState({ filterMenuOpened: !this.state.filterMenuOpened });
+		this.setState(prevState => ({ filterMenuOpened: !prevState.filterMenuOpened }));
 	}
 
 	/**
@@ -197,7 +224,8 @@ class BlockingHeader extends React.Component {
 	 * @param {Object} event   	mouseclick event
 	 */
 	filterAll() {
-		this.props.actions.filter('all');
+		const { actions } = this.props;
+		actions.filter('all');
 		this.setState({ filterMenuOpened: false });
 	}
 
@@ -210,7 +238,8 @@ class BlockingHeader extends React.Component {
 	 * @param {Object} event   	mouseclick event
 	 */
 	filterBlocked() {
-		this.props.actions.filter('blocked');
+		const { actions } = this.props;
+		actions.filter('blocked');
 		this.setState({ filterMenuOpened: false });
 	}
 
@@ -223,7 +252,8 @@ class BlockingHeader extends React.Component {
 	 * @param {Object} event   	mouseclick event
 	 */
 	filterUnblocked() {
-		this.props.actions.filter('unblocked');
+		const { actions } = this.props;
+		actions.filter('unblocked');
 		this.setState({ filterMenuOpened: false });
 	}
 
@@ -236,7 +266,8 @@ class BlockingHeader extends React.Component {
 	 * @param {Object} event   	mouseclick event
 	 */
 	filterNew() {
-		this.props.actions.filter('new');
+		const { actions } = this.props;
+		actions.filter('new');
 		this.setState({ filterMenuOpened: false });
 	}
 
@@ -245,22 +276,28 @@ class BlockingHeader extends React.Component {
 	* @return {ReactComponent}   ReactComponent instance
 	*/
 	render() {
-		const globalBlocking = !!this.props.globalBlocking;
-		const blockText = this.state.allBlocked ?
-			(this.state.filtered ? t('blocking_unblock_shown') : t('blocking_unblock_all')) :
-			(this.state.filtered ? t('blocking_block_shown') : t('blocking_block_all'));
+		const {
+			globalBlocking, categories, expandAll, filterText
+		} = this.props;
+		const {
+			allBlocked, filtered, searchValue, filterMenuOpened
+		} = this.state;
+		const globalBlockingBool = !!globalBlocking;
+		const blockText = allBlocked ?
+			(filtered ? t('blocking_unblock_shown') : t('blocking_unblock_all')) :
+			(filtered ? t('blocking_block_shown') : t('blocking_block_all'));
 		return (
 			<div className="blocking-header">
 				<div className="row align-middle">
 					<div className="columns">
 						<div className="title">
-							{ globalBlocking ? t('settings_global_blocking') : t('blocking_trackers') }
+							{ globalBlockingBool ? t('settings_global_blocking') : t('blocking_trackers') }
 							{' '}
 							<Link to="/settings/globalblocking" className="gear-icon" />
 						</div>
 					</div>
 					<div className="shrink columns align-self-justify text-right">
-						{this.props.categories && this.props.categories.length > 0 && (
+						{categories && categories.length > 0 && (
 							<div
 								className="block-text"
 								onClick={this.clickBlockAll}
@@ -271,12 +308,12 @@ class BlockingHeader extends React.Component {
 					</div>
 				</div>
 				{
-					globalBlocking && (
+					globalBlockingBool && (
 						<div className="row align-middle s-search-box-container">
 							<div className="columns">
 								<div className="s-search-box">
 									<div className="s-search-icon" />
-									<input type="text" value={this.state.searchValue} placeholder={t('settings_searh_by_tracker')} onChange={this.updateValue} onKeyDown={this.handleSubmit} />
+									<input type="text" value={searchValue} placeholder={t('settings_searh_by_tracker')} onChange={this.updateValue} onKeyDown={this.handleSubmit} />
 								</div>
 							</div>
 						</div>
@@ -284,23 +321,23 @@ class BlockingHeader extends React.Component {
 				}
 				<div className="row footer">
 					<div className="columns">
-						{this.props.categories && this.props.categories.length > 0 && (
+						{categories && categories.length > 0 && (
 							<span className="expand-all-text" onClick={this.clickExpandAll}>
-								{ (!this.props.expandAll) ? t('expand_all') : t('collapse_all') }
+								{ (!expandAll) ? t('expand_all') : t('collapse_all') }
 							</span>
 						)}
 					</div>
 					{
-						globalBlocking && (
+						globalBlockingBool && (
 							<div className="shrink columns relative">
 								<ClickOutside
-									onClickOutside={this.state.filterMenuOpened ? this.clickFilterText : () => {}}
+									onClickOutside={filterMenuOpened ? this.clickFilterText : () => {}}
 								>
-									<div className={this.state.filterMenuOpened ? 'filter-text-show-menu' : 'filter-text'} onClick={this.clickFilterText}>
-										<span>{this.props.filterText}</span>
+									<div className={filterMenuOpened ? 'filter-text-show-menu' : 'filter-text'} onClick={this.clickFilterText}>
+										<span>{filterText}</span>
 										<span className="caret-down" />
 									</div>
-									<div className={this.state.filterMenuOpened ? 'filter-menu' : 'hide'}>
+									<div className={filterMenuOpened ? 'filter-menu' : 'hide'}>
 										<div className="filter-menu-item" title={t('settings_filter_all')} onClick={this.filterAll}>{t('settings_filter_all')}</div>
 										<div className="filter-menu-item" title={t('settings_filter_blocked')} onClick={this.filterBlocked}>{t('settings_filter_blocked')}</div>
 										<div className="filter-menu-item" title={t('settings_filter_unblocked')} onClick={this.filterUnblocked}>{t('settings_filter_unblocked')}</div>

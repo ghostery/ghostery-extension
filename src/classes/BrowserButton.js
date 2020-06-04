@@ -31,7 +31,6 @@ class BrowserButton {
 			alert: [255, 157, 0, 230],
 			default: [51, 0, 51, 230]
 		};
-		this.policy = new Policy();
 	}
 
 	/**
@@ -140,7 +139,7 @@ class BrowserButton {
 			return;
 		}
 
-		const { appsCount, appsAlertCount } = this._getTrackerCount(tabId);
+		const { appsCount, appsAlertCount } = BrowserButton._getTrackerCount(tabId);
 		const adBlockingCount = getCliqzData(tabId, tabHostUrl).trackerCount;
 		const antiTrackingCount = getCliqzData(tabId, tabHostUrl, true).trackerCount;
 
@@ -161,7 +160,7 @@ class BrowserButton {
 	 * @param  {string} tabUrl the Tab URL
 	 * @return {Object}        the number of total trackers and alerted trackers in an Object
 	 */
-	_getTrackerCount(tabId, tabUrl) {
+	static _getTrackerCount(tabId, tabUrl) {
 		const apps = foundBugs.getAppsCountByIssues(tabId, tabUrl);
 		return {
 			appsCount: apps.all,
