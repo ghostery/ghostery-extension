@@ -164,7 +164,7 @@ class CreateAccount extends React.Component {
 											<span className="asterisk">*</span>
 											<input onChange={this.handleInputChange} value={confirmEmail} className="create-account-input" id="create-input-email-confirm" name="confirmEmail" pattern=".{1,}" autoComplete="off" required type="text" />
 										</label>
-										<p className="warning">{ t('your_emails_do_not_match') }</p>
+										<p className="warning">{ t('your_email_do_not_match') }</p>
 									</div>
 								</div>
 							</div>
