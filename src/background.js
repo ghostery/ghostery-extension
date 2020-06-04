@@ -880,6 +880,7 @@ function onMessageHandler(request, sender, callback) {
 	}
 }
 
+// TODO add function description
 function hamGetTheme(callback) {
 	if (conf.current_theme !== 'default') {
 		account.getTheme(conf.current_theme)
@@ -892,6 +893,7 @@ function hamGetTheme(callback) {
 	return false;
 }
 
+// TODO add function description
 function hamGetUser(payload, callback) {
 	account.getUser(payload)
 		.then((user) => {
@@ -911,6 +913,7 @@ function hamGetUser(payload, callback) {
 	return true;
 }
 
+// TODO add function description
 function hamGetUserSettings(callback) {
 	account.getUserSettings()
 		.then((settings) => {
@@ -923,6 +926,7 @@ function hamGetUserSettings(callback) {
 	return true;
 }
 
+// TODO add function description
 function hamGetUserSubscriptionData(callback) {
 	account.getUserSubscriptionData()
 		.then((subscriptions) => {
@@ -948,6 +952,7 @@ function hamGetUserSubscriptionData(callback) {
 	return true;
 }
 
+// TODO add function description
 function hamLogin(msgData, callback) {
 	const { email, password } = msgData;
 
@@ -968,6 +973,7 @@ function hamLogin(msgData, callback) {
 	return true;
 }
 
+// TODO add function description
 function hamLogout(callback) {
 	account.logout()
 		.then((response) => {
@@ -980,6 +986,7 @@ function hamLogout(callback) {
 	return true;
 }
 
+// TODO add function description
 function hamOpenCheckoutPage(utm) {
 	let url = `${globals.CHECKOUT_BASE_URL}/plus`;
 	if (utm) {
@@ -990,11 +997,13 @@ function hamOpenCheckoutPage(utm) {
 	return false;
 }
 
+// TODO add function description
 function hamOpenSubscriptionPage() {
 	utils.openNewTab({ url: `${globals.ACCOUNT_BASE_URL}/subscription`, become_active: true });
 	return false;
 }
 
+// TODO add function description
 function hamOpenSupportPage() {
 	const subscriber = account.hasScopesUnverified(['subscriptions:plus']);
 	const tabUrl = subscriber ? `${globals.ACCOUNT_BASE_URL}/support` : 'https://www.ghostery.com/support/';
@@ -1005,6 +1014,7 @@ function hamOpenSupportPage() {
 	return false;
 }
 
+// TODO add function description
 function hamRegister(userDetails, callback) {
 	const {
 		email,
@@ -1029,6 +1039,7 @@ function hamRegister(userDetails, callback) {
 	return true;
 }
 
+// TODO add function description
 function hamResetPassword(email, callback) {
 	// TODO check args
 	account.resetPassword(email)
@@ -1042,6 +1053,7 @@ function hamResetPassword(email, callback) {
 	return true;
 }
 
+// TODO add function description
 function hamValidateAccountEmail(callback) {
 	account.sendValidateAccountEmail()
 		.then((success) => {
