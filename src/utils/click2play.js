@@ -11,8 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint no-use-before-define: 0 */
-
 import { reject } from 'underscore';
 import bugDb from '../classes/BugDb';
 import c2pDb from '../classes/Click2PlayDb';
@@ -25,7 +23,25 @@ import { sendMessage, processUrl, injectScript } from './utils';
 import c2p_tpl from '../../app/templates/click2play.html';
 import c2p_images from '../../app/data-images/click2play';
 
-const policy = new Policy();
+/**
+ * Creates selector for hubspot form
+ * @private
+ *
+ * @param  {string} url 	form request url
+ * @return {string} 		selector
+ */
+function _getHubspotFormSelector(url) {
+	// Hubspot url has a fixed format
+	// https://forms.hubspot.com/embed/v3/form/532040/95b5de3a-6d4a-4729-bebf-07c41268d773?callback=hs_reqwest_0&hutk=941df50e9277ee76755310cd78647a08
+	// The following three parameters are privacy-safe:
+	// 532040 - partner id
+	// 95b5de3a-6d4a-4729-bebf-07c41268d773 - form id on the page
+	// hs_reqwest_0 - function which will be called on the client after the request
+	//
+	// hutk=941df50e9277ee76755310cd78647a08 -is user-specific (same every session)
+	const tokens = url.substr(8).split(/\/|&|\?|#|=/ig);
+	return `form[id="hsForm_${tokens[5]}"]`;
+}
 
 /**
  * Builds Click2Play templates for a given tab_id.
@@ -62,7 +78,7 @@ export function buildC2P(details, app_id) {
 	}
 	const app_name = bugDb.db.apps[app_id].name;
 	const c2pHtml = [];
-	const blacklisted = !!policy.blacklisted(tab.host);
+	const blacklisted = !!Policy.blacklisted(tab.host);
 
 	// Generate the templates for each c2p definition (could be multiple for an app ID)
 	c2pApp.forEach((c2pAppDef) => {
@@ -105,12 +121,13 @@ export function buildC2P(details, app_id) {
 			tabInfo.setTabInfo(tab_id, 'c2pStatus', 'loading');
 			// Push current C2P data into existing queue
 			if (!tab.c2pQueue.hasOwnProperty(app_id)) {
-				tabInfo.setTabInfo(tab_id, 'c2pQueue', Object.assign({}, tab.c2pQueue, {
+				tabInfo.setTabInfo(tab_id, 'c2pQueue', {
+					...tab.c2pQueue,
 					[app_id]: {
 						data: c2pApp,
 						html: c2pHtml
 					}
-				}));
+				});
 			}
 			// Scripts injected at document_idle are guaranteed to run after the DOM is complete
 			injectScript(tab_id, 'dist/click_to_play.js', '', 'document_idle').then(() => {
@@ -125,12 +142,13 @@ export function buildC2P(details, app_id) {
 		case 'loading':
 			// Push C2P data to a holding queue until click_to_play.js has finished loading on the page
 			if (!tab.c2pQueue.hasOwnProperty(app_id)) {
-				tabInfo.setTabInfo(tab_id, 'c2pQueue', Object.assign({}, tab.c2pQueue, {
+				tabInfo.setTabInfo(tab_id, 'c2pQueue', {
+					...tab.c2pQueue,
 					[app_id]: {
 						data: c2pApp,
 						html: c2pHtml
 					}
-				}));
+				});
 			}
 			break;
 		case 'done':
@@ -164,7 +182,7 @@ export function buildRedirectC2P(redirectUrls, app_id) {
 	globals.BLOCKED_REDIRECT_DATA = {};
 	globals.BLOCKED_REDIRECT_DATA.app_id = app_id;
 	globals.BLOCKED_REDIRECT_DATA.url = redirectUrls.redirectUrl;
-	globals.BLOCKED_REDIRECT_DATA.blacklisted = !!policy.blacklisted(host_url);
+	globals.BLOCKED_REDIRECT_DATA.blacklisted = !!Policy.blacklisted(host_url);
 
 	globals.BLOCKED_REDIRECT_DATA.translations = {
 		blocked_redirect_page_title: t('blocked_redirect_page_title'),
@@ -212,24 +230,4 @@ export function allowAllwaysC2P(app_id, tab_host) {
 		site_specific_unblocks[tab_host].push(app_id);
 	}
 	conf.site_specific_unblocks = site_specific_unblocks;
-}
-
-/**
- * Creates selector for hubspot form
- * @private
- *
- * @param  {string} url 	form request url
- * @return {string} 		selector
- */
-function _getHubspotFormSelector(url) {
-	// Hubspot url has a fixed format
-	// https://forms.hubspot.com/embed/v3/form/532040/95b5de3a-6d4a-4729-bebf-07c41268d773?callback=hs_reqwest_0&hutk=941df50e9277ee76755310cd78647a08
-	// The following three parameters are privacy-safe:
-	// 532040 - partner id
-	// 95b5de3a-6d4a-4729-bebf-07c41268d773 - form id on the page
-	// hs_reqwest_0 - function which will be called on the client after the request
-	//
-	// hutk=941df50e9277ee76755310cd78647a08 -is user-specific (same every session)
-	const tokens = url.substr(8).split(/\/|\&|\?|\#|\=/ig); // eslint-disable-line no-useless-escape
-	return `form[id="hsForm_${tokens[5]}"]`;
 }

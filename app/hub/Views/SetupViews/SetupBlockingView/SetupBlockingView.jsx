@@ -20,13 +20,18 @@ import ClassNames from 'classnames';
  * @return {JSX} JSX for rendering the Setup Blocking View of the Hub app
  * @memberof HubComponents
  */
-const SetupBlockingView = props => (
+const SetupBlockingView = ({
+	blockingPolicy,
+	handleSelection,
+	handleCustomClick,
+	choices
+}) => (
 	<div className="row align-center">
 		<div className="columns small-12 large-10">
 			<div className="SetupBlocking">
 				<div className="row small-up-1 medium-up-2 large-up-4 align-center">
-					{props.choices.map((choice) => {
-						const choiceSelected = choice.name === props.blockingPolicy;
+					{choices.map((choice) => {
+						const choiceSelected = choice.name === blockingPolicy;
 						const bigCheckSrc = '/app/images/hub/setup/block-selected.svg';
 						const choiceBoxClassNames = ClassNames('clickable', 'flex-container', 'flex-dir-column', {
 							SetupBlocking__choiceBox: true,
@@ -41,7 +46,7 @@ const SetupBlockingView = props => (
 										className={choiceBoxClassNames}
 										onClick={() => {
 											if (choice.name === 'BLOCKING_POLICY_CUSTOM') {
-												props.handleCustomClick();
+												handleCustomClick();
 											}
 										}}
 									>
@@ -60,8 +65,8 @@ const SetupBlockingView = props => (
 									name={choice.name}
 									value={choice.name}
 									id={`input-block-${choice.name}`}
-									checked={props.blockingPolicy === choice.name}
-									onChange={props.handleSelection}
+									checked={blockingPolicy === choice.name}
+									onChange={handleSelection}
 								/>
 							</div>
 						);
@@ -76,6 +81,7 @@ const SetupBlockingView = props => (
 SetupBlockingView.propTypes = {
 	blockingPolicy: PropTypes.string.isRequired,
 	handleSelection: PropTypes.func.isRequired,
+	handleCustomClick: PropTypes.func.isRequired,
 	choices: PropTypes.arrayOf(PropTypes.shape({
 		name: PropTypes.string.isRequired,
 		image: PropTypes.string.isRequired,

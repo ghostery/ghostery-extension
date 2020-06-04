@@ -16,8 +16,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint no-use-before-define: 0 */
-
 import globals from './Globals';
 import { prefsGet } from '../utils/common';
 
@@ -37,7 +35,7 @@ const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
 class ConfData {
 	constructor() {
 		// language does not get persisted
-		this.language = this._getDefaultLanguage();
+		this.language = ConfData._getDefaultLanguage();
 		this.SYNC_SET = new Set(globals.SYNC_ARRAY);
 	}
 
@@ -47,19 +45,20 @@ class ConfData {
 	 * This method is called once on startup.
 	 */
 	init() {
-		return prefsGet().then((data) => {
+		return prefsGet().then((d) => {
+			const data = { ...d };
 			const nowTime = Number(new Date().getTime());
+			const _setProp = (name, value) => {
+				if (!globals.INIT_COMPLETE) {
+					globals.initProps[name] = value;
+				}
+			};
 			const _initProperty = (name, value) => {
 				if (data[name] === null || typeof (data[name]) === 'undefined') {
 					data[name] = value;
 					_setProp(name, value);
 				}
 				this[name] = data[name];
-			};
-			const _setProp = (name, value) => {
-				if (!globals.INIT_COMPLETE) {
-					globals.initProps[name] = value;
-				}
 			};
 
 			// Transfer legacy previous version property to new name
@@ -165,7 +164,7 @@ class ConfData {
 		});
 	}
 
-	_getDefaultLanguage() {
+	static _getDefaultLanguage() {
 		const SUPPORTED_LANGUAGES = {
 			de: 'Deutsch',
 			en: 'English',

@@ -49,8 +49,9 @@ class SetupHumanWebViewContainer extends Component {
 	* Function to handle toggling Human Web Opt-In
 	*/
 	_handleToggle = () => {
-		const enable_human_web = !this.props.setup.enable_human_web;
-		this.props.actions.setHumanWeb({ enable_human_web });
+		const { actions, setup } = this.props;
+		const enable_human_web = !setup.enable_human_web;
+		actions.setHumanWeb({ enable_human_web });
 	}
 
 	/**
@@ -58,11 +59,13 @@ class SetupHumanWebViewContainer extends Component {
 	 * @return {JSX} JSX for rendering the Setup Human Web View of the Hub app
 	 */
 	render() {
-		const childProps = {
-			enableHumanWeb: this.props.setup.enable_human_web,
-			changeHumanWeb: this._handleToggle,
-		};
-		return <SetupHumanWebView {...childProps} />;
+		const { setup } = this.props;
+		return (
+			<SetupHumanWebView
+				enableHumanWeb={setup.enable_human_web}
+				changeHumanWeb={this._handleToggle}
+			/>
+		);
 	}
 }
 

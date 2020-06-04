@@ -47,12 +47,14 @@ export default class Accordion extends React.Component {
 	}
 
 	get blockingStatus() {
-		if (this.props.type === 'site-trackers') {
-			if (this.context.siteProps.isTrusted) {
+		const { type, numBlocked, numTotal } = this.props;
+		const { siteProps } = this.context;
+		if (type === 'site-trackers') {
+			if (siteProps.isTrusted) {
 				return 'trusted';
 			}
 
-			if (this.context.siteProps.isRestricted) {
+			if (siteProps.isRestricted) {
 				return 'restricted';
 			}
 
@@ -70,7 +72,7 @@ export default class Accordion extends React.Component {
 			}
 		}
 
-		if (this.props.numBlocked === this.props.numTotal) {
+		if (numBlocked === numTotal) {
 			return 'blocked';
 		}
 
@@ -78,17 +80,24 @@ export default class Accordion extends React.Component {
 	}
 
 	getTrackers = (force = false) => {
-		if (!this.state.isActive && !force) {
+		const { id, getTrackersFromCategory } = this.props;
+		const { isActive } = this.state;
+		if (!isActive && !force) {
 			return [];
 		}
 
-		return this.props.getTrackersFromCategory(this.props.id);
+		return getTrackersFromCategory(id);
 	}
 
-	getMenuOpenStatus = index => index === this.state.openMenuIndex;
+	getMenuOpenStatus = (index) => {
+		const { openMenuIndex } = this.state;
+		return index === openMenuIndex;
+	}
 
 	checkAndUpdateData = () => {
-		if (this.unMounted || !this.state.isActive || this.state.currentItemsLength >= this.props.numTotal) {
+		const { numTotal } = this.props;
+		const { isActive, currentItemsLength } = this.state;
+		if (this.unMounted || !isActive || currentItemsLength >= numTotal) {
 			return;
 		}
 
@@ -99,15 +108,16 @@ export default class Accordion extends React.Component {
 		const boundingRect = accordionContentNode.getBoundingClientRect();
 		// Try lo load more when needed
 		if (scrollTop + window.innerHeight - (accordionContentNode.offsetTop + boundingRect.height) > -needToUpdateHeight) {
-			const itemsLength = Math.min(this.state.currentItemsLength + this.nExtraItems, this.props.numTotal);
-			this.setState({
-				currentItemsLength: itemsLength,
+			this.setState((prevState) => {
+				const itemsLength = Math.min(prevState.currentItemsLength + this.nExtraItems, numTotal);
+				return { currentItemsLength: itemsLength };
 			});
 		}
 	}
 
 	toggleMenu = (index) => {
-		if (this.state.openMenuIndex === index) {
+		const { openMenuIndex } = this.state;
+		if (openMenuIndex === index) {
 			this.setState({ openMenuIndex: -1 });
 		} else {
 			this.setState({ openMenuIndex: index });
@@ -129,11 +139,13 @@ export default class Accordion extends React.Component {
 	}
 
 	toggleContent = () => {
-		this.props.toggleAccordion(this.props.index);
+		const { index, toggleAccordion, numTotal } = this.props;
+		const { isActive } = this.state;
+		toggleAccordion(index);
 
 		// Show some trackers when this category is expanded
-		const currentState = this.state.isActive;
-		const itemsLength = Math.min(this.nExtraItems, this.props.numTotal);
+		const currentState = isActive;
+		const itemsLength = Math.min(this.nExtraItems, numTotal);
 		this.setState({
 			isActive: !currentState,
 			currentItemsLength: itemsLength,
@@ -141,47 +153,60 @@ export default class Accordion extends React.Component {
 	}
 
 	handleCategoryClicked = () => {
+		const { id, type } = this.props;
+		const { callGlobalAction } = this.context;
 		if (!this.blockingStatus) {
-			const type = this.props.type === 'site-trackers' ? 'site' : 'global';
-			this.context.callGlobalAction({
+			const blockingType = type === 'site-trackers' ? 'site' : 'global';
+			callGlobalAction({
 				actionName: 'blockUnBlockAllTrackers',
 				actionData: {
 					block: true,
-					type,
-					categoryId: this.props.id,
+					type: blockingType,
+					categoryId: id,
 				}
 			});
 		} else if (this.blockingStatus === 'blocked') {
-			const type = this.props.type === 'site-trackers' ? 'site' : 'global';
-			this.context.callGlobalAction({
+			const blockingType = type === 'site-trackers' ? 'site' : 'global';
+			callGlobalAction({
 				actionName: 'blockUnBlockAllTrackers',
 				actionData: {
 					block: false,
-					type,
-					categoryId: this.props.id,
+					type: blockingType,
+					categoryId: id,
 				}
 			});
 		}
 	}
 
 	render() {
-		const titleStyle = { backgroundImage: `url(/app/images/panel-android/categories/${this.props.logo}.svg)` };
-		const contentStyle = { '--trackers-length': `${this.props.open ? (this.state.currentItemsLength * this.itemHeight) + this.headerheight : 0}px` };
+		const {
+			index,
+			open,
+			numBlocked,
+			name,
+			numTotal,
+			logo,
+			id,
+			type
+		} = this.props;
+		const { isActive, currentItemsLength } = this.state;
+		const titleStyle = { backgroundImage: `url(/app/images/panel-android/categories/${logo}.svg)` };
+		const contentStyle = { '--trackers-length': `${open ? (currentItemsLength * this.itemHeight) + this.headerheight : 0}px` };
 
 		return (
-			<div className={`accordion ${this.props.index}`}>
+			<div className={`accordion ${index}`}>
 				<span className={`accordionSelect ${this.blockingStatus}`} onClick={this.handleCategoryClicked} />
-				<div className={`accordionTitle ${this.state.isActive ? 'active' : ''}`} style={titleStyle} onClick={this.toggleContent}>
-					<h2>{this.props.name}</h2>
+				<div className={`accordionTitle ${isActive ? 'active' : ''}`} style={titleStyle} onClick={this.toggleContent}>
+					<h2>{name}</h2>
 					<p>
 						<span className="total-trackers">
-							{this.props.numTotal}
+							{numTotal}
 							{' '}
 							TRACKERS
 						</span>
-						{!!this.props.numBlocked && (
+						{!!numBlocked && (
 							<span className="blocked-trackers">
-								{this.props.numBlocked}
+								{numBlocked}
 								{' '}
 								Blocked
 							</span>
@@ -197,15 +222,15 @@ export default class Accordion extends React.Component {
 						<span>Blocked</span>
 					</p>
 					<ul className="trackers-list">
-						{this.getTrackers(true).slice(0, this.state.currentItemsLength).map((tracker, index) => (
+						{this.getTrackers(true).slice(0, currentItemsLength).map((tracker, ind) => (
 							<TrackerItem
 								key={tracker.id}
-								index={index}
+								index={ind}
 								tracker={tracker}
-								showMenu={this.getMenuOpenStatus(index)}
+								showMenu={this.getMenuOpenStatus(ind)}
 								toggleMenu={this.toggleMenu}
-								categoryId={this.props.id}
-								type={this.props.type}
+								categoryId={id}
+								type={type}
 							/>
 						))}
 					</ul>

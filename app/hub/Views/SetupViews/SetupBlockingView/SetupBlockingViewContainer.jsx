@@ -57,14 +57,16 @@ class SetupBlockingViewContainer extends Component {
 	*/
 	_handleChange = (event) => {
 		const blockingPolicy = event.target.value;
-		this.props.actions.setBlockingPolicy({ blockingPolicy });
+		const { actions } = this.props;
+		actions.setBlockingPolicy({ blockingPolicy });
 	}
 
 	/**
 	* Function to handle switching to the Custom Blocking route
 	*/
 	_handleCustomClick = () => {
-		this.props.history.push('/setup/1/custom');
+		const { history } = this.props;
+		history.push('/setup/1/custom');
 	}
 
 	/**
@@ -72,7 +74,8 @@ class SetupBlockingViewContainer extends Component {
 	 * @return {JSX} JSX for rendering the Setup Blocking View of the Hub app
 	 */
 	render() {
-		const { blockingPolicy } = this.props.setup;
+		const { setup } = this.props;
+		const { blockingPolicy } = setup;
 		const choices = [
 			{
 				name: BLOCKING_POLICY_RECOMMENDED,

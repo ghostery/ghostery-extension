@@ -11,9 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint no-param-reassign: 0 */
-/* eslint no-shadow: 0 */
-
 import {
 	difference, each, every, keys, reduce, size
 } from 'underscore';
@@ -37,7 +34,7 @@ class BugDb extends Updatable {
 	 * @param  {Object} old_apps 	trackers in the original database
 	 * @return {Object}          	list of all new trackers
 	 */
-	updateNewAppIds(new_apps, old_apps) {
+	static updateNewAppIds(new_apps, old_apps) {
 		log('updating newAppIds...');
 
 		const new_app_ids = difference(
@@ -54,7 +51,7 @@ class BugDb extends Updatable {
 	 * Apply block to all new trackers
 	 * @param  {Object} new_app_ids list of new trackers
 	 */
-	applyBlockByDefault(new_app_ids) {
+	static applyBlockByDefault(new_app_ids) {
 		if (conf.block_by_default) {
 			log('applying block-by-default...');
 			const { selected_app_ids } = conf;
@@ -74,7 +71,7 @@ class BugDb extends Updatable {
 	 * @param  {Object} db      bugs database object
 	 * @return {array}  		array of categories
 	 */
-	_buildCategories(db) {
+	static _buildCategories(db) {
 		const selectedApps = conf.selected_app_ids || {};
 		let appId;
 		let category;
@@ -84,68 +81,67 @@ class BugDb extends Updatable {
 		const categoryArray = [];
 		const categories = {};
 
-		for (appId in db.apps) {
-			if (db.apps.hasOwnProperty(appId)) {
-				category = db.apps[appId].cat;
-				if (t(`category_${category}`) === `category_${category}`) {
-					category = 'uncategorized';
-				}
-				blocked = selectedApps.hasOwnProperty(appId);
-
-				// Because we have two trackers in the DB with the same name
-				if ((categories[category] && categories[category].trackers[db.apps[appId].name])) {
-					// eslint-disable-next-line no-continue
-					continue;
-				}
-
-				if (categories.hasOwnProperty(category)) {
-					categories[category].num_total++;
-					if (blocked) {
-						categories[category].num_blocked++;
-					}
-				} else {
-					categories[category] = {
-						id: category,
-						name: t(`category_${category}`),
-						description: t(`category_${category}_desc`),
-						img_name: (category === 'advertising') ? 'adv' : // Because AdBlock blocks images with 'advertising' in the name.
-							(category === 'social_media') ? 'smed' : category, // Because AdBlock blocks images with 'social' in the name.
-						num_total: 1,
-						num_blocked: (blocked) ? 1 : 0,
-						trackers: []
-					};
-				}
-				categories[category].trackers.push({
-					id: appId,
-					name: db.apps[appId].name,
-					description: '',
-					blocked,
-					shouldShow: true,
-					catId: category,
-				});
+		const appIds = Object.keys(db.apps);
+		for (let i = 0; i < appIds.length; i++) {
+			appId = appIds[i];
+			category = db.apps[appId].cat;
+			if (t(`category_${category}`) === `category_${category}`) {
+				category = 'uncategorized';
 			}
+			blocked = selectedApps.hasOwnProperty(appId);
+
+			// Because we have two trackers in the DB with the same name
+			if ((categories[category] && categories[category].trackers[db.apps[appId].name])) {
+				continue; // eslint-disable-line no-continue
+			}
+
+			if (categories.hasOwnProperty(category)) {
+				categories[category].num_total++;
+				if (blocked) {
+					categories[category].num_blocked++;
+				}
+			} else {
+				categories[category] = {
+					id: category,
+					name: t(`category_${category}`),
+					description: t(`category_${category}_desc`),
+					img_name: (category === 'advertising') ? 'adv' : // Because AdBlock blocks images with 'advertising' in the name.
+						(category === 'social_media') ? 'smed' : category, // Because AdBlock blocks images with 'social' in the name.
+					num_total: 1,
+					num_blocked: (blocked) ? 1 : 0,
+					trackers: []
+				};
+			}
+			categories[category].trackers.push({
+				id: appId,
+				name: db.apps[appId].name,
+				description: '',
+				blocked,
+				shouldShow: true,
+				catId: category,
+			});
 		}
 
-		for (categoryName in categories) {
-			if (categories.hasOwnProperty(categoryName)) {
-				const category = categories[categoryName];
-				if (category.trackers) {
-					category.trackers.sort((a, b) => {
-						a = a.name.toLowerCase();
-						b = b.name.toLowerCase();
-						return (a > b ? 1 : (a < b ? -1 : 0));
-					});
-				}
-
-				categoryArray.push(category);
+		const categoryNames = Object.keys(categories);
+		for (let i = 0; i < categoryNames.length; i++) {
+			categoryName = categoryNames[i];
+			const cat = categories[categoryName];
+			if (cat.trackers) {
+				cat.trackers.sort((a, b) => {
+					const a1 = a.name.toLowerCase();
+					const b1 = b.name.toLowerCase();
+					return (a1 > b1 ? 1 : (a1 < b1 ? -1 : 0));
+				});
 			}
+
+			categoryArray.push(cat);
 		}
 
 		// Sort categories by tracker numbers
 		categoryArray.sort((a, b) => {
-			a = a.trackers ? a.trackers.length : 0;
-			b = b.trackers ? b.trackers.length : 0;
-			return (a > b ? -1 : (a < b ? 1 : 0));
+			const a1 = a.trackers ? a.trackers.length : 0;
+			const b1 = b.trackers ? b.trackers.length : 0;
+			return (a1 > b1 ? -1 : (a1 < b1 ? 1 : 0));
 		});
 
 		return categoryArray;
@@ -179,10 +175,10 @@ class BugDb extends Updatable {
 
 		log('initializing bugdb regexes...');
 
-		for (const id in regexes) {
-			if (regexes.hasOwnProperty(id)) {
-				db.patterns.regex[id] = new RegExp(regexes[id], 'i');
-			}
+		const regexesKeys = Object.keys(regexes);
+		for (let i = 0; i < regexesKeys.length; i++) {
+			const id = regexesKeys[i];
+			db.patterns.regex[id] = new RegExp(regexes[id], 'i');
 		}
 
 		log('setting bugdb noneSelected/allSelected...');
@@ -192,8 +188,8 @@ class BugDb extends Updatable {
 
 		// since allSelected is slow to eval, make it lazy
 		defineLazyProperty(db, 'allSelected', () => {
-			const num_selected = size(conf.selected_app_ids);
-			return (!!num_selected && every(db.apps, (app, app_id) => conf.selected_app_ids.hasOwnProperty(app_id)));
+			const num_selected_lazy = size(conf.selected_app_ids);
+			return (!!num_selected_lazy && every(db.apps, (app, app_id) => conf.selected_app_ids.hasOwnProperty(app_id)));
 		});
 
 		log('processed bugdb...');
@@ -205,24 +201,24 @@ class BugDb extends Updatable {
 			// update newAppIds and apply block-by-default
 			if (old_bugs) {
 				if (old_bugs.hasOwnProperty('version') && bugs.version > old_bugs.version) {
-					new_app_ids = this.updateNewAppIds(bugs.apps, old_bugs.apps);
+					new_app_ids = BugDb.updateNewAppIds(bugs.apps, old_bugs.apps);
 
 					if (new_app_ids.length) {
-						this.applyBlockByDefault(new_app_ids);
+						BugDb.applyBlockByDefault(new_app_ids);
 						db.JUST_UPDATED_WITH_NEW_TRACKERS = true;
 					}
 
 				// pre-trie/legacy db
 				} else if (old_bugs.hasOwnProperty('bugsVersion') && bugs.version !== old_bugs.bugsVersion) {
-					const old_apps = reduce(old_bugs.bugs, (memo, bug) => {
-						memo[bug.aid] = true;
-						return memo;
+					const old_apps = reduce(old_bugs.bugs, (acc, bug) => {
+						acc[bug.aid] = true;
+						return acc;
 					}, {});
 
-					new_app_ids = this.updateNewAppIds(bugs.apps, old_apps);
+					new_app_ids = BugDb.updateNewAppIds(bugs.apps, old_apps);
 
 					if (new_app_ids.length) {
-						this.applyBlockByDefault(new_app_ids);
+						BugDb.applyBlockByDefault(new_app_ids);
 
 						// don't claim new trackers when db got downgraded by version
 						if (bugs.version > old_bugs.bugsVersion) {
@@ -235,7 +231,7 @@ class BugDb extends Updatable {
 			conf.bugs = bugs;
 		}
 
-		db.categories = this._buildCategories(db);
+		db.categories = BugDb._buildCategories(db);
 
 		this.db = db;
 

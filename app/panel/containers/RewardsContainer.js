@@ -27,9 +27,7 @@ import { showNotification } from '../actions/PanelActions';
  * @todo  We are not using ownProps, so we better not specify it explicitly,
  * in this case it won't be passed by React (see https://github.com/reactjs/react-redux/blob/master/docs/api.md).
  */
-const mapStateToProps = state => Object.assign({}, state.rewards, {
-	is_expanded: state.panel.is_expanded,
-});
+const mapStateToProps = state => ({ ...state.rewards, is_expanded: state.panel.is_expanded });
 
 /**
  * Bind Rewards view action creators using Redux's bindActionCreators

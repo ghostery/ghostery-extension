@@ -58,7 +58,8 @@ export function getCliqzData(tabId, tabHostUrl, antiTracking) {
 		return tracker.ads;
 	};
 
-	for (const bug of bugsValues) {
+	for (let i = 0; i < bugsValues.length; i++) {
+		const bug = bugsValues[i];
 		const dataPoints = getDataPoints(bug);
 		if (dataPoints) {
 			totalUnsafeCount += dataPoints;
@@ -66,7 +67,8 @@ export function getCliqzData(tabId, tabHostUrl, antiTracking) {
 		}
 	}
 
-	for (const other of othersValues) {
+	for (let i = 0; i < othersValues.length; i++) {
+		const other = othersValues[i];
 		let whitelisted = false;
 		const dataPoints = getDataPoints(other);
 

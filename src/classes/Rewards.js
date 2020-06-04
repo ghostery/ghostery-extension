@@ -20,11 +20,7 @@ import { log } from '../utils/common';
  * @memberOf  BackgroundClasses
  */
 class Rewards {
-	constructor() {
-		this.panelHubClosedListener = this.panelHubClosedListener.bind(this);
-	}
-
-	sendSignal(message) {
+	static sendSignal(message) {
 		if (!conf.enable_offers) {
 			return;
 		}
@@ -45,8 +41,8 @@ class Rewards {
 		cliqz.modules['offers-v2'].background.actions.processRealEstateMessage(signal);
 	}
 
-	panelHubClosedListener() {
-		this.sendSignal({
+	static panelHubClosedListener() {
+		Rewards.sendSignal({
 			offerId: null,
 			actionId: 'hub_closed',
 			origin: 'rewards-hub',
@@ -55,4 +51,4 @@ class Rewards {
 	}
 }
 
-export default new Rewards();
+export default Rewards;

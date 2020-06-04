@@ -51,17 +51,17 @@ class PolicySmartBlock {
 	 *                           	applicable to this url, or none are met.
 	 */
 	shouldUnblock(appId, catId, tabId, pageURL, requestType) {
-		if (!this.shouldCheck(tabId, appId)) { return false; }
+		if (!PolicySmartBlock.shouldCheck(tabId, appId)) { return false; }
 
 		let reason;
 
-		if (this._appHasKnownIssue(tabId, appId, pageURL)) {
+		if (PolicySmartBlock._appHasKnownIssue(tabId, appId, pageURL)) {
 			reason = 'hasIssue'; 		// allow if tracker is in compatibility list
 		} else if (this._allowedCategories(tabId, appId, catId)) {
 			reason = 'allowedCategory'; // allow if tracker is in breaking category
 		} else if (this._allowedTypes(tabId, appId, requestType)) {
 			reason = 'allowedType'; 	// allow if tracker is in breaking type
-		} else if (this._pageWasReloaded(tabId, appId)) {
+		} else if (PolicySmartBlock._pageWasReloaded(tabId, appId)) {
 			reason = 'pageReloaded'; 	// allow if page has been reloaded recently
 		}
 
@@ -85,21 +85,21 @@ class PolicySmartBlock {
 	 *                              applicable to this url, or none are met.
 	 */
 	shouldBlock(appId, catId, tabId, pageURL, requestType, requestTimestamp) {
-		if (!this.shouldCheck(tabId, appId)) { return false; }
+		if (!PolicySmartBlock.shouldCheck(tabId, appId)) { return false; }
 
 		let reason;
 
 		// Block all trackers that load after 5 seconds from when page load started
-		if (this._requestWasSlow(tabId, appId, requestTimestamp)) {
+		if (PolicySmartBlock._requestWasSlow(tabId, appId, requestTimestamp)) {
 			reason = 'slow';
 
-			if (this._appHasKnownIssue(tabId, appId, pageURL)) {
+			if (PolicySmartBlock._appHasKnownIssue(tabId, appId, pageURL)) {
 				reason = 'hasIssue'; 		// allow if tracker is in compatibility list
 			} else if (this._allowedCategories(tabId, appId, catId)) {
 				reason = 'allowedCategory'; // allow if tracker is in breaking category
 			} else if (this._allowedTypes(tabId, appId, requestType)) {
 				reason = 'allowedType'; 	// allow if tracker is in breaking type
-			} else if (this._pageWasReloaded(tabId, appId)) {
+			} else if (PolicySmartBlock._pageWasReloaded(tabId, appId)) {
 				reason = 'pageReloaded'; 	// allow if page has been reloaded recently
 			}
 		}
@@ -127,14 +127,14 @@ class PolicySmartBlock {
 	 * @param  {string | boolean} 	appId 	tracker id
 	 * @return {boolean}
 	 */
-	shouldCheck(tabId, appId = false) {
+	static shouldCheck(tabId, appId = false) {
 		const tabUrl = tabInfo.getTabInfo(tabId, 'url');
 		const tabHost = tabInfo.getTabInfo(tabId, 'host');
 
 		return (
 			conf.enable_smart_block &&
 			!globals.SESSION.paused_blocking &&
-			!this.policy.getSitePolicy(tabUrl) &&
+			!Policy.getSitePolicy(tabUrl) &&
 			((appId && (!conf.site_specific_unblocks.hasOwnProperty(tabHost) || !conf.site_specific_unblocks[tabHost].includes(+appId))) || appId === false) &&
 			((appId && (!conf.site_specific_blocks.hasOwnProperty(tabHost) || !conf.site_specific_blocks[tabHost].includes(+appId))) || appId === false) &&
 			(c2pDb.db.apps && !c2pDb.db.apps.hasOwnProperty(appId))
@@ -148,8 +148,8 @@ class PolicySmartBlock {
 	 * @param  {string} requestDomain	domain of the request
 	 * @return {boolean}
 	 */
-	isFirstPartyRequest(tabId, pageDomain = '', requestDomain = '') {
-		if (!this.shouldCheck(tabId)) { return false; }
+	static isFirstPartyRequest(tabId, pageDomain = '', requestDomain = '') {
+		if (!PolicySmartBlock.shouldCheck(tabId)) { return false; }
 
 		return pageDomain === requestDomain;
 	}
@@ -159,7 +159,7 @@ class PolicySmartBlock {
 	 * @param  {number} tabId		tab id
 	 * @return {boolean}
 	 */
-	_pageWasReloaded(tabId) {
+	static _pageWasReloaded(tabId) {
 		return tabInfo.getTabInfo(tabId, 'reloaded') || false;
 	}
 
@@ -170,7 +170,7 @@ class PolicySmartBlock {
 	 * @param  	{string} pageURL	tab url
 	 * @return 	{boolean}
 	 */
-	_appHasKnownIssue(tabId, appId, pageURL) {
+	static _appHasKnownIssue(tabId, appId, pageURL) {
 		return compDb.hasIssue(appId, pageURL);
 	}
 
@@ -182,8 +182,8 @@ class PolicySmartBlock {
 	 * @param 	{string} requestHost 		host of the request url
 	 * @return 	{boolean}
 	 */
-	isInsecureRequest(tabId, pageProtocol, requestProtocol, requestHost) {
-		if (!this.shouldCheck(tabId)) { return false; }
+	static isInsecureRequest(tabId, pageProtocol, requestProtocol, requestHost) {
+		if (!PolicySmartBlock.shouldCheck(tabId)) { return false; }
 
 		// don't block mixed content from localhost
 		if (requestHost === 'localhost' || requestHost === '127.0.0.1' || requestHost === '[::1]') {
@@ -192,7 +192,7 @@ class PolicySmartBlock {
 
 		return (
 			pageProtocol === 'https' &&
-			(requestProtocol === 'http' || requestProtocol === 'ws') || false
+			((requestProtocol === 'http' || requestProtocol === 'ws') || false)
 		);
 	}
 
@@ -223,8 +223,8 @@ class PolicySmartBlock {
 	 * @param  {string} tabId		tab id
 	 * @return {boolean}
 	 */
-	checkReloadThreshold(tabId) {
-		if (!this.shouldCheck(tabId)) { return false; }
+	static checkReloadThreshold(tabId) {
+		if (!PolicySmartBlock.shouldCheck(tabId)) { return false; }
 
 		// Note that this threshold is different from the broken page ping threshold in Metrics, which is 60 seconds
 		// see GH-1797 for more details
@@ -232,7 +232,7 @@ class PolicySmartBlock {
 
 		return (
 			tabInfo.getTabInfoPersist(tabId, 'numOfReloads') > 1 &&
-			((Date.now() - tabInfo.getTabInfoPersist(tabId, 'firstLoadTimestamp')) < SMART_BLOCK_BEHAVIOR_THRESHOLD) || false
+			(((Date.now() - tabInfo.getTabInfoPersist(tabId, 'firstLoadTimestamp')) < SMART_BLOCK_BEHAVIOR_THRESHOLD) || false)
 		);
 	}
 
@@ -243,7 +243,7 @@ class PolicySmartBlock {
 	 * @param  	{number} 	requestTimestamp   	timestamp of the request
 	 * @return 	{boolean}
 	 */
-	_requestWasSlow(tabId, appId, requestTimestamp) {
+	static _requestWasSlow(tabId, appId, requestTimestamp) {
 		const THRESHHOLD = 5000; // 5 seconds
 		const pageTimestamp = tabInfo.getTabInfo(tabId, 'timestamp');
 		// TODO: account for lazy-load or widgets triggered by user interaction beyond 5sec

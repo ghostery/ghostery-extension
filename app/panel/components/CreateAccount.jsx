@@ -115,15 +115,16 @@ class CreateAccount extends React.Component {
 					passwordInvalidError: false,
 					passwordLengthError: false,
 				}, () => {
-					this.props.actions.register(email, confirmEmail, firstName, lastName, password).then((success) => {
+					const { actions, history } = this.props;
+					actions.register(email, confirmEmail, firstName, lastName, password).then((success) => {
 						this.setState({ loading: false });
 						if (success) {
 							new RSVP.Promise((resolve) => {
-								this.props.actions.getUser()
+								actions.getUser()
 									.then(() => resolve())
 									.catch(() => resolve());
 							}).finally(() => {
-								this.props.history.push('/account-success');
+								history.push('/account-success');
 							});
 						}
 					});
@@ -137,6 +138,7 @@ class CreateAccount extends React.Component {
 	 * @return {ReactComponent}   ReactComponent instance
 	 */
 	render() {
+		const { is_expert } = this.props;
 		const {
 			email, confirmEmail, firstName, lastName, password, legalConsentChecked, loading, emailError, confirmEmailError, legalConsentNotCheckedError, passwordInvalidError, passwordLengthError
 		} = this.state;
@@ -213,7 +215,6 @@ class CreateAccount extends React.Component {
 								<div className="small-12 columns">
 									<div id="create-account-legal-consent-checkbox" className={(legalConsentNotCheckedError ? 'checkbox-error' : '')}>
 										<input id="legalConsentChecked" name="legalConsentChecked" type="checkbox" checked={legalConsentChecked} onChange={this.handleCheckboxChange} />
-										{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
 										<label htmlFor="legalConsentChecked">
 											<I18nWithLink value="create_account_form_legal_consent_checkbox_label" />
 										</label>
@@ -224,7 +225,7 @@ class CreateAccount extends React.Component {
 								<div className="small-12 columns">
 									<div id="account-creation-buttons" className="row align-center">
 										<div className="small-6 columns text-center">
-											<Link to={(this.props.is_expert ? '/detail' : '/')} id="create-account-cancel" className="cancel button hollow">
+											<Link to={(is_expert ? '/detail' : '/')} id="create-account-cancel" className="cancel button hollow">
 												{ t('button_cancel') }
 											</Link>
 										</div>

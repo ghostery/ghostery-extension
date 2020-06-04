@@ -27,72 +27,80 @@ jest.mock('../Tooltip');
 describe('app/panel/components/BuildingBlocks/PauseButton.jsx', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('unpaused state in simple view', () => {
-			const initialState = {
-				isPaused: false,
-				isPausedTimeout: null,
-				clickPause: () => {},
-				dropdownItems: [
-					{ name: t('pause_30_min'), name_condensed: t('pause_30_min_condensed'), val: 30 },
-					{ name: t('pause_1_hour'), name_condensed: t('pause_1_hour_condensed'), val: 60 },
-					{ name: t('pause_24_hours'), name_condensed: t('pause_24_hours_condensed'), val: 1440 },
-				],
-				isCentered: true,
-				isCondensed: false,
-			};
-			const component = renderer.create(<PauseButton {...initialState} />).toJSON();
+			const dropdownItems = [
+				{ name: t('pause_30_min'), name_condensed: t('pause_30_min_condensed'), val: 30 },
+				{ name: t('pause_1_hour'), name_condensed: t('pause_1_hour_condensed'), val: 60 },
+				{ name: t('pause_24_hours'), name_condensed: t('pause_24_hours_condensed'), val: 1440 },
+			];
+			const component = renderer.create(
+				<PauseButton
+					isPaused={false}
+					isPausedTimeout={null}
+					clickPause={() => {}}
+					dropdownItems={dropdownItems}
+					isCentered
+					isCondensed={false}
+				/>
+			).toJSON();
 			expect(component).toMatchSnapshot();
 		});
 
 		test('paused state in detailed view', () => {
-			const initialState = {
-				isPaused: true,
-				isPausedTimeout: null,
-				clickPause: () => {},
-				dropdownItems: [
-					{ name: t('pause_30_min'), name_condensed: t('pause_30_min_condensed'), val: 30 },
-					{ name: t('pause_1_hour'), name_condensed: t('pause_1_hour_condensed'), val: 60 },
-					{ name: t('pause_24_hours'), name_condensed: t('pause_24_hours_condensed'), val: 1440 },
-				],
-				isCentered: false,
-				isCondensed: false,
-			};
-			const component = renderer.create(<PauseButton {...initialState} />).toJSON();
+			const dropdownItems = [
+				{ name: t('pause_30_min'), name_condensed: t('pause_30_min_condensed'), val: 30 },
+				{ name: t('pause_1_hour'), name_condensed: t('pause_1_hour_condensed'), val: 60 },
+				{ name: t('pause_24_hours'), name_condensed: t('pause_24_hours_condensed'), val: 1440 },
+			];
+			const component = renderer.create(
+				<PauseButton
+					isPaused
+					isPausedTimeout={null}
+					clickPause={() => {}}
+					dropdownItems={dropdownItems}
+					isCentered={false}
+					isCondensed={false}
+				/>
+			).toJSON();
 			expect(component).toMatchSnapshot();
 		});
 
 		test('paused state in detailed condensed view', () => {
-			const initialState = {
-				isPaused: true,
-				isPausedTimeout: null,
-				clickPause: () => {},
-				dropdownItems: [
-					{ name: t('pause_30_min'), name_condensed: t('pause_30_min_condensed'), val: 30 },
-					{ name: t('pause_1_hour'), name_condensed: t('pause_1_hour_condensed'), val: 60 },
-					{ name: t('pause_24_hours'), name_condensed: t('pause_24_hours_condensed'), val: 1440 },
-				],
-				isCentered: false,
-				isCondensed: true,
-			};
-			const component = renderer.create(<PauseButton {...initialState} />).toJSON();
+			const dropdownItems = [
+				{ name: t('pause_30_min'), name_condensed: t('pause_30_min_condensed'), val: 30 },
+				{ name: t('pause_1_hour'), name_condensed: t('pause_1_hour_condensed'), val: 60 },
+				{ name: t('pause_24_hours'), name_condensed: t('pause_24_hours_condensed'), val: 1440 },
+			];
+			const component = renderer.create(
+				<PauseButton
+					isPaused
+					isPausedTimeout={null}
+					clickPause={() => {}}
+					dropdownItems={dropdownItems}
+					isCentered={false}
+					isCondensed
+				/>
+			).toJSON();
 			expect(component).toMatchSnapshot();
 		});
 	});
 
 	describe('Shallow snapshot tests rendered with Enzyme', () => {
 		test('the state of the pause button correctly when Ghostery is not paused', () => {
-			const initialState = {
-				isPaused: false,
-				isPausedTimeout: null,
-				clickPause: () => {},
-				dropdownItems: [
-					{ name: t('pause_30_min'), name_condensed: t('pause_30_min_condensed'), val: 30 },
-					{ name: t('pause_1_hour'), name_condensed: t('pause_1_hour_condensed'), val: 60 },
-					{ name: t('pause_24_hours'), name_condensed: t('pause_24_hours_condensed'), val: 1440 },
-				],
-				isCentered: false,
-				isCondensed: false,
-			};
-			const component = shallow(<PauseButton {...initialState} />);
+			const dropdownItems = [
+				{ name: t('pause_30_min'), name_condensed: t('pause_30_min_condensed'), val: 30 },
+				{ name: t('pause_1_hour'), name_condensed: t('pause_1_hour_condensed'), val: 60 },
+				{ name: t('pause_24_hours'), name_condensed: t('pause_24_hours_condensed'), val: 1440 },
+			];
+			const component = shallow(
+				<PauseButton
+					isPaused={false}
+					isPausedTimeout={null}
+					clickPause={() => {}}
+					dropdownItems={dropdownItems}
+					isCentered={false}
+					isCondensed={false}
+				/>
+			);
 			expect(component.find('.button').length).toBe(2);
 			expect(component.find('.button.button-pause').length).toBe(1);
 			expect(component.find('.button.button-pause.active').length).toBe(0);
@@ -110,19 +118,21 @@ describe('app/panel/components/BuildingBlocks/PauseButton.jsx', () => {
 		});
 
 		test('the state of the pause button correctly when Ghostery is paused', () => {
-			const initialState = {
-				isPaused: true,
-				isPausedTimeout: 1800000,
-				clickPause: () => {},
-				dropdownItems: [
-					{ name: t('pause_30_min'), name_condensed: t('pause_30_min_condensed'), val: 30 },
-					{ name: t('pause_1_hour'), name_condensed: t('pause_1_hour_condensed'), val: 60 },
-					{ name: t('pause_24_hours'), name_condensed: t('pause_24_hours_condensed'), val: 1440 },
-				],
-				isCentered: true,
-				isCondensed: false,
-			};
-			const component = shallow(<PauseButton {...initialState} />);
+			const dropdownItems = [
+				{ name: t('pause_30_min'), name_condensed: t('pause_30_min_condensed'), val: 30 },
+				{ name: t('pause_1_hour'), name_condensed: t('pause_1_hour_condensed'), val: 60 },
+				{ name: t('pause_24_hours'), name_condensed: t('pause_24_hours_condensed'), val: 1440 },
+			];
+			const component = shallow(
+				<PauseButton
+					isPaused
+					isPausedTimeout={1800000}
+					clickPause={() => {}}
+					dropdownItems={dropdownItems}
+					isCentered
+					isCondensed={false}
+				/>
+			);
 			expect(component.find('.button').length).toBe(2);
 			expect(component.find('.button.button-pause').length).toBe(1);
 			expect(component.find('.button.button-pause.active').length).toBe(1);
@@ -140,19 +150,21 @@ describe('app/panel/components/BuildingBlocks/PauseButton.jsx', () => {
 		});
 
 		test('the pause button correctly it is centered and condensed', () => {
-			const initialState = {
-				isPaused: false,
-				isPausedTimeout: null,
-				clickPause: () => {},
-				dropdownItems: [
-					{ name: t('pause_30_min'), name_condensed: t('pause_30_min_condensed'), val: 30 },
-					{ name: t('pause_1_hour'), name_condensed: t('pause_1_hour_condensed'), val: 60 },
-					{ name: t('pause_24_hours'), name_condensed: t('pause_24_hours_condensed'), val: 1440 },
-				],
-				isCentered: true,
-				isCondensed: true,
-			};
-			const component = shallow(<PauseButton {...initialState} />);
+			const dropdownItems = [
+				{ name: t('pause_30_min'), name_condensed: t('pause_30_min_condensed'), val: 30 },
+				{ name: t('pause_1_hour'), name_condensed: t('pause_1_hour_condensed'), val: 60 },
+				{ name: t('pause_24_hours'), name_condensed: t('pause_24_hours_condensed'), val: 1440 },
+			];
+			const component = shallow(
+				<PauseButton
+					isPaused={false}
+					isPausedTimeout={null}
+					clickPause={() => {}}
+					dropdownItems={dropdownItems}
+					isCentered
+					isCondensed
+				/>
+			);
 			expect(component.find('.button').length).toBe(2);
 			expect(component.find('.button.button-pause').length).toBe(1);
 			expect(component.find('.button.button-pause.smaller').length).toBe(0);

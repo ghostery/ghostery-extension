@@ -58,25 +58,27 @@ class ForgotPassword extends React.Component {
 				return;
 			}
 
-			this.props.actions.resetPassword(email)
+			const { actions, history } = this.props;
+			actions.resetPassword(email)
 				.then((success) => {
 					this.setState({ loading: false });
 					if (success && hub) {
 						this.navigateToLogIn();
 
-						this.props.actions.setToast({
+						actions.setToast({
 							toastMessage: t('banner_check_your_email_title'),
 							toastClass: 'success',
 						});
 					} else if (success && panel) {
-						this.props.history.push('/login');
+						history.push('/login');
 					}
 				});
 		});
 	}
 
 	navigateToLogIn = () => {
-		this.props.history.push('/log-in');
+		const { history } = this.props;
+		history.push('/log-in');
 	}
 
 	/**
