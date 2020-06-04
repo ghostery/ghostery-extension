@@ -1600,7 +1600,7 @@
 		"message": "用我們的優先幫助服務快速解決問題——還有更多福利"
 	},
 	"hub_supporter_manifesto": {
-		"message": "我們努力免費為我們的客戶提供最佳隱私保護服務。我們的隱私套件不收費，您可以選擇通過每月小額訂閱支持我們。升級至Ghostery Plus加入我們，支持我們的使命——一路解鎖附帶福利！"
+		"message": "我們努力免費為我們的客戶提供最佳隱私保護服務。我們的瀏覽器擴充功能不收費，您可以選擇透過每月小額訂閱支持我們。升級至 Ghostery Plus 加入我們，支持我們的使命——一路解鎖附帶福利！"
 	},
 	"hub_supporter_feature_theme_description": {
 		"message": "自訂 Ghostery 色彩，獲得全新視覺體驗！使用者千呼萬喚的功能登場了。查看我們獨特的深藍色主題，更多內容即將推出。"
@@ -1815,7 +1815,7 @@
 		"message": "主題"
 	},
 	"subscribe_pitch": {
-		"message": "Ghostery是免費的，您可以通過每月小訂閱對我們進行支持，訂閱后可獲得超酷的附帶福利，如顏色主題、優先幫助服務以及更多。加入我們的使命并訂閱！"
+		"message": "Ghostery 是免費的，您可以選擇透過每月小額訂閱支持我們，訂閱後可獲得特別福利，如顏色主題、個人追蹤統計數據以及更多。加入我們，支持我們的使命並訂閱！"
 	},
 	"subscribe_pitch_spring": {
 		"message": "喜歡我們提供的服務嗎？您可以升級至 Ghostery Plus 來支援我們，並解鎖全新春日主題、個人追蹤資訊及其他特別的好處！"
@@ -1842,13 +1842,13 @@
 		"message": "預設"
 	},
 	"subscription_dark_blue_theme": {
-		"message": "深藍色主題"
+		"message": "Dark Blue 主題"
 	},
 	"subscription_palm_theme": {
-		"message": "棕櫚主題"
+		"message": "Palm 主題"
 	},
 	"subscription_leaf_theme": {
-		"message": "樹葉主題"
+		"message": "Leaf 主題"
 	},
 	"subscription_status": {
 		"message": "狀態"
@@ -1949,7 +1949,7 @@
 		"message": "不，保持歷史記錄"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "升級至Ghostery Plus 以解鎖您的歷史統計數據（和其它驚喜福利），為期$SPAN_START$&#36;2/個月。$SPAN_END$$LINK_START$了解更多$LINK_END$",
+		"message": "升級至 Ghostery Plus 以解鎖您的歷史統計數據（和其它驚喜福利）。$LINK_START$了解更多$LINK_END$",
 		"placeholders": {
 			"span_start": {
 				"content": "<span>"
@@ -2306,6 +2306,9 @@
 	},
 	"learn_more": {
 		"message": "瞭解更多"
+	},
+	"custom_themes": {
+		"message": "自訂主題"
 	},
 	"historical_stats": {
 		"message": "歷史統計數據"

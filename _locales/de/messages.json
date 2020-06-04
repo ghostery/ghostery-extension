@@ -1600,7 +1600,7 @@
 		"message": "Lösen Sie Probleme schneller mit unserem Priority Helpdesk-Service – und weitere Vorteile"
 	},
 	"hub_supporter_manifesto": {
-		"message": "Wir sind bestrebt, unseren Nutzern die besten Datenschutz-Services kostenlos zur Verfügung zu stellen. Obwohl wir keine Gebühren für unser Datenschutzpaket erheben, können Sie uns durch ein kleines monatliches Abonnement unterstützen. Helfen Sie uns bei unserer Mission, indem Sie auf Ghostery Plus hochstufen – und ganz nebenbei coole Features freischalten!"
+		"message": "Wir versuchen, unseren Nutzern kostenlos die besten Dienstleistungen zum Schutz der Privatsphäre zu bieten. Wir verlangen keine Gebühr für unsere Browser-Erweiterung, aber Sie können uns durch ein kleines monatliches Abonnement unterstützen. Stufen Sie Ihre Version auf Ghostery Plus hoch - es erwarten Sie tolle Vorteile."
 	},
 	"hub_supporter_feature_theme_description": {
 		"message": "Passen Sie die Ghostery-Farben für eine neue visuelle Erfahrung an! Eingeführt auf vielfachen Wunsch. Sehen Sie sich unser spezielles dunkelblaues Thema an. Weitere Themen folgen noch."
@@ -1815,7 +1815,7 @@
 		"message": "Themes"
 	},
 	"subscribe_pitch": {
-		"message": "Auch wenn Ghostery kostenlos ist, können Sie uns durch ein kleines Abonnement zum Preis von € 2 pro Monat unterstützen und erhalten als Gegenleistung coole Features, wie z. B. Farbthemes, Vorzugs-Support und mehr. Werden Sie Teil unserer Mission und melden Sie sich an!"
+		"message": "Ghostery ist kostenlos, aber Sie können uns durch ein kleines monatliches Abonnement unterstützen. Als Gegenleistung erhalten Sie besondere Vorteile wie bunte Themes, persönliche Tracking-Statistiken und mehr. Kaufen Sie jetzt ein Abonnement."
 	},
 	"subscribe_pitch_spring": {
 		"message": "Gefällt Ihnen, was wir tun? Unterstützen Sie uns und schalten Sie durch ein Upgrade auf Ghostery Plus neue Frühlingsthemen, persönliche Tracking-Informationen und weitere besondere Vergünstigungen frei!"
@@ -1949,7 +1949,7 @@
 		"message": "Nein, Chronik behalten"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "Entsperren Sie Ihre bisherigen Statistiken (und andere coole Vorteile), indem Sie auf Ghostery Plus upgraden für $SPAN_START$&#36;2/Monat.$SPAN_END$$LINK_START$Mehr erfahren$LINK_END$.",
+		"message": "Schalten Sie Ihre vergangenen Statistiken (und andere tolle Vorteile) frei, indem Sie Ihre Version auf Ghostery Plus hochstufen. $LINK_START$Mehr erfahren$LINK_END$",
 		"placeholders": {
 			"span_start": {
 				"content": "<span>"
@@ -2306,6 +2306,9 @@
 	},
 	"learn_more": {
 		"message": "Weitere Informationen"
+	},
+	"custom_themes": {
+		"message": "Benutzerdefinierte Themes"
 	},
 	"historical_stats": {
 		"message": "Historische Statistiken"
