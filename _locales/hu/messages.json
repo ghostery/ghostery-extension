@@ -1815,7 +1815,7 @@
 		"message": "Sablonok"
 	},
 	"subscribe_pitch": {
-		"message": "Annak ellenére, hogy a Ghostery ingyenes, ön dönthet úgy, hogy támogatja munkánkat egy alacsony,  havi &#36;2 összegű feliratkozással, és cserébe nagyszerű extra funkciókhoz férhet hozzá, mint például a színsablonok, elsőbbségi támogató szolgáltatás és még sok minden más. Csatlakozzon a küldetésünkhöz és iratkozzon fel!"
+		"message": "Annak ellenére, hogy a Ghostery ingyenes, ön dönthet úgy, hogy támogatja munkánkat egy alacsony, és cserébe nagyszerű extra funkciókhoz férhet hozzá, mint például a színsablonok, elsőbbségi támogató szolgáltatás és még sok minden más. Csatlakozzon a küldetésünkhöz és iratkozzon fel!"
 	},
 	"subscribe_pitch_spring": {
 		"message": "Tetszik a termékünk? Támogassunk bennünket, és fedezze fel az új tavaszi sablonokat, személyes nyomonkövetési lehetőségeket, és számos különleges előnyt a Ghostery Plus történő frissítéssel!"
@@ -1949,7 +1949,7 @@
 		"message": "Nem, napló megtartása"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "Oldja fel a naplózott statisztikáit (és egyéb hasznos szolgáltatásunkat) Ghostery Plusra történő fejlesztéssel, csak $SPAN_START$&#36;2/hónap.$SPAN_END$$LINK_START$Tudjon meg többet$LINK_END$",
+		"message": "Oldja fel a naplózott statisztikáit (és egyéb hasznos szolgáltatásunkat) Ghostery Plusra történő fejlesztéssel.$LINK_START$Tudjon meg többet$LINK_END$",
 		"placeholders": {
 			"span_start": {
 				"content": "<span>"
@@ -2306,6 +2306,9 @@
 	},
 	"learn_more": {
 		"message": "Tudjon meg többet"
+	},
+	"custom_themes": {
+		"message": "Egyéni témák"
 	},
 	"historical_stats": {
 		"message": "Naplózott statisztikák"

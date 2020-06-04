@@ -1600,7 +1600,7 @@
 		"message": "Resolva os problemas rapidamente com o nosso serviço de help desk prioritário - e muitas outras vantagens"
 	},
 	"hub_supporter_manifesto": {
-		"message": "Nós nos esforçamos para oferecer os melhores serviços de proteção de privacidade para nossos usuários sem custos. Apesar de não cobrarmos pelo nosso pacote de privacidade, você pode optar por nos apoiar através de uma pequena assinatura mensal. Junte-se a nós em nossa missão atualizando para Ghostery Plus - e desbloqueie regalias legais pelo caminho!"
+		"message": "Nós nos esforçamos para oferecer os melhores serviços de proteção de privacidade para nossos usuários sem custos. Apesar de não cobrarmos pelo nosso extensão de navegador, você pode optar por nos apoiar através de uma pequena assinatura mensal. Junte-se a nós em nossa missão atualizando para Ghostery Plus - e desbloqueie regalias legais pelo caminho!"
 	},
 	"hub_supporter_feature_theme_description": {
 		"message": "Personalize as cores do Ghostery para uma nova experiência visual! Introduzido a pedido popular. Confira nosso tema especial Dark Blue e muito mais por vir."
@@ -1815,7 +1815,7 @@
 		"message": "Temas"
 	},
 	"subscribe_pitch": {
-		"message": "Embora o Ghostery seja gratuito, você pode optar por nos apoiar por meio de uma pequena assinatura de US$ 2 por mês em troca de vantagens legais, como temas de cores, serviço de ajuda prioritária e muito mais. Participe de nossa missão e assine!"
+		"message": "Embora o Ghostery seja gratuito, você pode optar por nos apoiar por meio de uma pequena assinatura em troca de vantagens especiais, como temas de cores, estatísticas pessoais de rastreamento e muito mais. Participe de nossa missão e assine!"
 	},
 	"subscribe_pitch_spring": {
 		"message": "Gosta do que fazemos? Nos apoie e desbloqueie novos temas de primavera, insights pessoais de acompanhamento e outras vantagens especiais atualizando para o Ghostery Plus!"
@@ -1949,7 +1949,7 @@
 		"message": "Não, mantenha o histórico"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "Desbloqueie suas estatísticas históricas (e outras regalias legais) atualizando para o Ghostery Plus por $SPAN_START$&#36;2/mês.$SPAN_END$$LINK_START$Saiba mais$LINK_END$",
+		"message": "Desbloqueie suas estatísticas históricas (e outras regalias legais) atualizando para o Ghostery Plus.$LINK_START$Saiba mais$LINK_END$",
 		"placeholders": {
 			"span_start": {
 				"content": "<span>"
@@ -2306,6 +2306,9 @@
 	},
 	"learn_more": {
 		"message": "Aprender mais"
+	},
+	"custom_themes": {
+		"message": "Temas personalizados"
 	},
 	"historical_stats": {
 		"message": "Estatísticas históricas"
