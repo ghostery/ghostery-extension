@@ -1018,6 +1018,9 @@ function initializeDispatcher() {
 		utils.flushChromeMemoryCache();
 		cliqz.modules.core.action('refreshAppState');
 	});
+	dispatcher.on('conf.save.site_blacklist', () => {
+		button.update();
+	});
 	dispatcher.on('conf.save.enable_human_web', (enableHumanWeb) => {
 		if (!IS_CLIQZ) {
 			setCliqzModuleEnabled(humanweb, enableHumanWeb).then(() => {
