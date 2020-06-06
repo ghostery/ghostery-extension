@@ -105,7 +105,7 @@ class GhosteryDebug {
 			});
 		}
 
-		return new Promise((resolve, reject) => {
+		return new Promise((resolve) => {
 			Promise.all([
 				_getUserCookies(),
 				account.getUser(),
@@ -118,8 +118,16 @@ class GhosteryDebug {
 					syncedUserSettings,
 					userSubscriptionData,
 				};
+			}).catch(() => {
+				this.user = {
+					userCookies: [],
+					userData: {},
+					syncedUserSettings: {},
+					userSubscriptionData: [],
+				};
+			}).finally(() => {
 				resolve(this.user);
-			}).catch(reject);
+			});
 		});
 	}
 }
