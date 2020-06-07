@@ -39,6 +39,8 @@ class GhosteryDebug {
 			}
 		};
 
+		// Chrome Documentation: https://developer.chrome.com/extensions/cookies#event-onChanged
+		// Mozilla Documentation: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/cookies/onChanged
 		chrome.cookies.onChanged.addListener(_cookieChangeEvent);
 	}
 
@@ -69,18 +71,20 @@ class GhosteryDebug {
 	 */
 	getTabInfo() {
 		function _getActiveTabIds() {
-			return new Promise((resolve, reject) => {
+			return new Promise((resolve) => {
 				chrome.tabs.query({
 					active: true,
 				}, (tabs) => {
-					if (chrome.runtime.lastError) { reject(chrome.runtime.lastError); }
+					if (chrome.runtime.lastError) {
+						return resolve(chrome.runtime.lastError.message);
+					}
 					const tabIds = tabs.map(tab => tab.id);
-					resolve(tabIds);
+					return resolve(tabIds);
 				});
 			});
 		}
 
-		return new Promise((resolve, reject) => {
+		return new Promise((resolve) => {
 			_getActiveTabIds().then((tabIds) => {
 				this.activeTabIds = tabIds;
 				this.tabInfo = { ...tabInfo._tabInfo };
@@ -89,28 +93,44 @@ class GhosteryDebug {
 					foundBugs: { ...foundBugs._foundBugs },
 				};
 				resolve(tabIds);
-			}).catch(reject);
+			});
 		});
 	}
 
 	getUserData() {
 		function _getUserCookies() {
-			return new Promise((resolve, reject) => {
+			return new Promise((resolve) => {
 				chrome.cookies.getAll({
 					url: globals.COOKIE_URL,
-				}, (cookiesArr) => {
-					if (cookiesArr === null) { return reject(); }
-					return resolve(cookiesArr);
-				});
+				}, resolve);
 			});
 		}
+
+		function _getUser() {
+			return new Promise((resolve) => {
+				account.getUser().then(resolve).catch(resolve);
+			});
+		}
+
+		function _getUserSettings() {
+			return new Promise((resolve) => {
+				account.getUserSettings().then(resolve).catch(resolve);
+			});
+		}
+
+		function _getUserSubscriptionData() {
+			return new Promise((resolve) => {
+				account.getUserSubscriptionData().then(resolve).catch(resolve);
+			});
+		}
+
 
 		return new Promise((resolve) => {
 			Promise.all([
 				_getUserCookies(),
-				account.getUser(),
-				account.getUserSettings(),
-				account.getUserSubscriptionData(),
+				_getUser(),
+				_getUserSettings(),
+				_getUserSubscriptionData(),
 			]).then(([userCookies, userData, syncedUserSettings, userSubscriptionData]) => {
 				this.user = {
 					userCookies,
@@ -118,14 +138,6 @@ class GhosteryDebug {
 					syncedUserSettings,
 					userSubscriptionData,
 				};
-			}).catch(() => {
-				this.user = {
-					userCookies: [],
-					userData: {},
-					syncedUserSettings: {},
-					userSubscriptionData: [],
-				};
-			}).finally(() => {
 				resolve(this.user);
 			});
 		});
