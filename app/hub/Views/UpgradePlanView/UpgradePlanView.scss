@@ -34,7 +34,6 @@ section.home-template .section.section-pricing {
 		font-family: Roboto;
 		font-stretch: condensed;
 	}
-
 	.toggle-switch {
 		span {
 			vertical-align: middle;
@@ -43,15 +42,6 @@ section.home-template .section.section-pricing {
 			}
 		}
 	}
-
-	.price-yearly,
-	.price-monthly {
-		display: none;
-		&.active {
-			display: inline-block;
-		}
-	}
-
 	.tabs {
 		border-radius: 4px;
 		border: 2px solid #6a6a6a;

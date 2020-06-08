@@ -22,30 +22,30 @@ import {
 } from './UpgradePlanViewConstants';
 
 const initialState = {
-	show_yearly_prices: true,
-	set_protection_level: BASIC
+	show_monthly_prices: false,
+	protection_level: BASIC
 };
 
 function UpgradePlanViewReducer(state = initialState, action) {
 	switch (action.type) {
 		case TOGGLE_MONTHLY_YEARLY_PRICES: {
 			return Object.assign({}, state, {
-				set_yearly_prices: !state.set_yearly_prices,
+				show_monthly_prices: !state.show_monthly_prices,
 			});
 		}
 		case SET_BASIC_PROTECTION: {
 			return Object.assign({}, state, {
-				set_protection_level: BASIC,
+				protection_level: BASIC,
 			});
 		}
 		case SET_PLUS_PROTECTION: {
 			return Object.assign({}, state, {
-				set_protection_level: PLUS,
+				protection_level: PLUS,
 			});
 		}
 		case SET_PREMIUM_PROTECTION: {
 			return Object.assign({}, state, {
-				set_protection_level: PREMIUM,
+				protection_level: PREMIUM,
 			});
 		}
 		default: return state;
