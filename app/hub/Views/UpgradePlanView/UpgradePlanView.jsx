@@ -85,11 +85,16 @@ const UpgradePlanView = (props) => {
 							<h2>{t('ghostery_plus')}</h2>
 							<div className="price">
 								{ show_monthly_prices ? (
-									<p className="price-gold font-size-36">$4.99</p>
+									<React.Fragment>
+										<p className="price-gold font-size-36">$4.99</p>
+										<p className="price-gold font-size-12">{t('per_month')}</p>
+									</React.Fragment>
 								) : (
-									<p className="price-gold font-size-36">$3.99</p>
+									<React.Fragment>
+										<p className="price-gold font-size-36">$3.99</p>
+										<p className="price-gold font-size-12">{t('per_year')}</p>
+									</React.Fragment>
 								)}
-								<p className="price-gold font-size-12">{t('per_month')}</p>
 							</div>
 							<a className="button button-gold" href="" title="Upgrade to Plus">{t('upgrade_to_plus')}</a>
 							<p className="card-sub-header"><strong>{t('hub_upgrade_additional_protection')}</strong></p>
@@ -109,18 +114,20 @@ const UpgradePlanView = (props) => {
 							<h2>{t('panel_detail_premium_title')}</h2>
 							<div className="price">
 								{ show_monthly_prices ? (
-									<p className="price-purple font-size-36">$11.99</p>
+									<React.Fragment>
+										<p className="price-purple font-size-36">$11.99</p>
+										<p className="price-purple font-size-12">{t('per_month')}</p>
+									</React.Fragment>
 								) : (
-									<p className="price-purple font-size-36">$8.99</p>
+									<React.Fragment>
+										<p className="price-purple font-size-36">$8.99</p>
+										<p className="price-purple font-size-12">{t('per_year')}</p>
+									</React.Fragment>
 								)}
-								<p className="price-purple font-size-12">{t('per_month')}</p>
-								{/* year */}
-								<p className="price-purple font-size-12">{t('per_month')}</p>
 							</div>
 							<a className="button button-purple-blue " href="https://checkout.ghostery.com/en/premium?interval=year" title="Buy Now">
 								{t('hub_upgrade_to_premium')}
 							</a>
-							<a className="button button-purple-blue" href="https://checkout.ghostery.com/en/premium" title="Buy Now">$4.99</a>
 							<p className="card-sub-header">
 								<strong>{t('hub_upgrade_maximum_browser_protection')}</strong>
 							</p>
@@ -363,17 +370,18 @@ const UpgradePlanView = (props) => {
 								<h2>{t('ghostery_plus')}</h2>
 								<div className="price">
 									{ show_monthly_prices ? (
-										<p className="price-gold font-size-36">$4.99</p>
+										<React.Fragment>
+											<p className="price-gold font-size-36">$4.99</p>
+											<p className="price-gold font-size-12">{t('per_month')}</p>
+										</React.Fragment>
 									) : (
-										<p className="price-gold font-size-36">$3.99</p>
+										<React.Fragment>
+											<p className="price-gold font-size-36">$3.99</p>
+											<p className="price-gold font-size-12">{t('per_year')}</p>
+										</React.Fragment>
 									)}
-									<p className="price-gold font-size-12">{t('per_month')}</p>
 								</div>
-								{show_monthly_prices ? (
-									<a className="button button-gold" href="https://checkout.ghostery.com/plus" title="Buy Now">$4.99</a>
-								) : (
-									<a className="button button-gold" href="https://checkout.ghostery.com/plus?interval=year" title="Buy Now">$3.99</a>
-								)}
+								<a className="button button-gold" href="https://checkout.ghostery.com/plus" title="Buy Now">{t('hub_upgrade_to_plus')}</a>
 								<p className="card-sub-header"><strong><strong>{t('hub_upgrade_additional_protection')}</strong></strong></p>
 								<p className="card-sub-copy">
 									<span className="check blue" />
@@ -393,11 +401,16 @@ const UpgradePlanView = (props) => {
 								<h2>{t('panel_detail_premium_title')}</h2>
 								<div className="price">
 									{show_monthly_prices ? (
-										<p className="price-purple font-size-36">$11.99</p>
+										<React.Fragment>
+											<p className="price-purple font-size-36">$11.99</p>
+											<p className="price-purple font-size-12">{t('per_month')}</p>
+										</React.Fragment>
 									) : (
-										<p className="price-purple font-size-36">$8.99</p>
+										<React.Fragment>
+											<p className="price-purple font-size-36">$8.99</p>
+											<p className="price-purple font-size-12">{t('per_year')}</p>
+										</React.Fragment>
 									)}
-									<p className="price-purple font-size-12">{t('per_month')}</p>
 								</div>
 								{show_monthly_prices ? (
 									<a className="button button-purple-blue" href="https://checkout.ghostery.com/en/premium" title="Buy Now">{t('hub_upgrade_to_premium')}</a>

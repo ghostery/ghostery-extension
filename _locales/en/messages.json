@@ -2315,6 +2315,9 @@
 	"per_month": {
 		"message": "per month"
 	},
+	"per_year": {
+		"message": "per year"
+	},
 	"faster_cleaner_browsing": {
 		"message": "Faster, Cleaner Browsing",
 		"description": "Appears in a non-responsive modal. Character limit (including spaces and punctuation): 27."
