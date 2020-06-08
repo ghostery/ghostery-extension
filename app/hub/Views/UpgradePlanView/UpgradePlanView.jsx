@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React from 'react';
+import React, { useRef } from 'react';
 import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
@@ -35,7 +35,6 @@ const UpgradePlanView = (props) => {
 		setPlusProtection,
 		setPremiumProtection
 	} = props.actions;
-	console.log('protection level: ', protection_level);
 	// console.log('props: ', props);
 	// console.log('props.actions: ', props.actions);
 
@@ -55,6 +54,12 @@ const UpgradePlanView = (props) => {
 	const tabsTitlePurpleClassNames = ClassNames('tabs-title tabs-title-purple', {
 		'is-active': protection_level === PREMIUM
 	});
+
+	const comparisonTableRef = useRef(null);
+	const scrollToComparisonTable = () => {
+		comparisonTableRef.current.scrollIntoView({ behavior: 'smooth' });
+	};
+
 	return (
 		<section className="pricing-page page-template-page-content-modules">
 			<div className="grid-container show-for-large">
@@ -145,7 +150,7 @@ const UpgradePlanView = (props) => {
 									</React.Fragment>
 								)}
 							</div>
-							<a className="button button-purple-blue " href="https://checkout.ghostery.com/en/premium?interval=year" title="Buy Now">
+							<a className="button button-purple-blue" href="https://checkout.ghostery.com/en/premium?interval=year" title="Buy Now">
 								{t('hub_upgrade_to_premium')}
 							</a>
 							<p className="card-sub-header">
@@ -168,13 +173,13 @@ const UpgradePlanView = (props) => {
 				</div>
 				<div className="row align-center module-editor text-center">
 					<div className="columns text-center">
-						<span className="learn-more learn-more-to-full-list">{t('hub_upgrade_scroll_down')}</span>
-						<div className="arrow learn-more learn-more-to-full-list" />
+						<div className="learn-more learn-more-to-full-list" onClick={scrollToComparisonTable}>{t('hub_upgrade_scroll_down')}</div>
+						<div className="arrow learn-more learn-more-to-full-list" onClick={scrollToComparisonTable} />
 					</div>
 				</div>
 			</div>
 
-			<div className="comparison-table show-for-large">
+			<div ref={comparisonTableRef} className="comparison-table show-for-large">
 				<div className="grid-container">
 					<div className="row align-center">
 						<div className="shrink columns">

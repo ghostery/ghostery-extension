@@ -402,19 +402,22 @@ section.home-template .section.section-pricing {
 
 	.tick { font-size:18px; color:$price-blue; }
 
-	.page-template-page-content-modules .module-editor .learn-more {
+	.module-editor .learn-more {
 		color: $purple;
-		text-decoration: none;
-		margin-top: rem-calc(15);
+		text-decoration: underline;
+		margin: rem-calc(15) auto 25px auto;
+		width: 120px;
 		@include breakpoint(medium down) {
 			margin-top: rem-calc(5);
 		}
 	}
-	.page-template-page-content-modules .module-editor .arrow {
+	.module-editor .arrow {
 		// background-image: url('../images/campaigns/tier-pricing/arrow_purple.png');
+		background-image: url('/app/images/hub/upgrade/arrow-down.svg');
 		width: 30px;
 		height: 16px;
 		margin-top: rem-calc(25);
+		margin: auto;
 	}
 
 	.button-gold {
