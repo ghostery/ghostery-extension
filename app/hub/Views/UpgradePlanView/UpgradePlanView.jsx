@@ -59,6 +59,10 @@ const UpgradePlanView = (props) => {
 	const scrollToComparisonTable = () => {
 		comparisonTableRef.current.scrollIntoView({ behavior: 'smooth' });
 	};
+	const mobileComparisonTableRef = useRef(null);
+	const scrollToMobileComparisonTable = () => {
+		mobileComparisonTableRef.current.scrollIntoView({ behavior: 'smooth' });
+	};
 
 	return (
 		<section className="pricing-page page-template-page-content-modules">
@@ -507,14 +511,13 @@ const UpgradePlanView = (props) => {
 				</div>
 				<div className="row align-center module-editor text-center">
 					<div className="columns text-center">
-						<span className="learn-more learn-more-to-full-list-mobile">learn more to full list mobile</span>
-						<div className="arrow learn-more learn-more-to-full-list-mobile">arrow</div>
+						<div className="learn-more learn-more-to-full-list-mobile" onClick={scrollToMobileComparisonTable}>{t('hub_upgrade_scroll_down')}</div>
+						<div className="arrow learn-more learn-more-to-full-list-mobile" onClick={scrollToMobileComparisonTable} />
 					</div>
 				</div>
 			</div>
 
-			<div className="comparison-table comparison-table-mobile hide-for-large">
-
+			<div ref={mobileComparisonTableRef} className="comparison-table comparison-table-mobile hide-for-large">
 				<div className="row align-middle toggle-switch">
 					<div className="small-12 text-center columns">
 						<span>{t('hub_upgrade_yearly')}</span>
