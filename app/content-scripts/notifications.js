@@ -608,10 +608,12 @@ const NotificationsContentScript = (function(win, doc) {
 	 * @memberOf NotificationsContentScript
 	 * @package
 	 */
-	const exportFile = function(content) {
+	const exportFile = function(content, type) {
 		const textFileAsBlob = new Blob([content], { type: 'text/plain' });
+		const ext = type === 'Ghostery-Backup' ? 'ghost' : 'json';
 		const d = new Date();
-		const fileNameToSaveAs = `Ghostery-Backup-${d.getMonth() + 1}-${d.getDate()}-${d.getFullYear()}.ghost`;
+		const dStr = `${d.getMonth() + 1}-${d.getDate()}-${d.getFullYear()}`;
+		const fileNameToSaveAs = `${type}-${dStr}.${ext}`;
 		let url = '';
 		if (window.URL) {
 			url = window.URL.createObjectURL(textFileAsBlob);
@@ -765,7 +767,8 @@ const NotificationsContentScript = (function(win, doc) {
 			} else if (name === 'onFileImported') {
 				updateBrowseWindow(message);
 			} else if (name === 'exportFile') {
-				exportFile(message);
+				const { content, type } = message;
+				exportFile(content, type);
 			}
 
 			// trigger a response callback to src/background so that we can handle errors properly

@@ -947,8 +947,9 @@ function onMessageHandler(request, sender, callback) {
 				try {
 					const hash = common.hashCode(JSON.stringify({ conf: settings }));
 					const backup = JSON.stringify({ hash, settings: { conf: settings } });
+					const msg = { type: 'Ghostery-Backup', content: backup };
 					utils.injectNotifications(activeTab.id, true).then(() => {
-						sendMessage(activeTab.id, 'exportFile', backup);
+						sendMessage(activeTab.id, 'exportFile', msg);
 					});
 					callback(true);
 				} catch (e) {
@@ -1012,6 +1013,8 @@ function onMessageHandler(request, sender, callback) {
 			ghosteryDebug.getUserData(),
 		]).then(() => {
 			const debugInfo = JSON.stringify(window.GHOSTERY);
+			const msg = { type: 'Ghostery-Debug', content: debugInfo };
+			sendMessage(sender.tab.id, 'exportFile', msg);
 			callback(debugInfo);
 		});
 		return true;
