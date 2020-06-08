@@ -299,11 +299,7 @@ section.home-template .section.section-pricing {
 			}
 		}
 		.ghostery-premium-image-container {
-			margin-top: -3px;
-			width: 250px;
-			height: 85px;
-			// background-image: linear-gradient(to right, #720174, #5a258e 18%, #2a6ec2 57%, #0c9ce3 86%, #00aef0);
-			background-image: linear-gradient(to right, rgba(113,1,116,.25), rgba(90,37,142,.25) 18%, rgba(42,110,194,.25) 57%, rgba(12,156,227,.25) 86%, rgba(0,174,240,.25));
+			position: relative;
 		}
 		.ghostery-premium-image {
 			position: absolute;
@@ -312,6 +308,12 @@ section.home-template .section.section-pricing {
 			width: 233px;
 			height: 161px;
 			background-image: url('/app/images/hub/upgrade/ghostery_premium_card.svg')
+		}
+		.ghostery-premium-image-background {
+			margin-top: -3px;
+			width: 250px;
+			height: 85px;
+			background-image: linear-gradient(to right, rgba(113,1,116,.25), rgba(90,37,142,.25) 18%, rgba(42,110,194,.25) 57%, rgba(12,156,227,.25) 86%, rgba(0,174,240,.25));
 		}
 		.button {
 			margin-top: rem-calc(10);
