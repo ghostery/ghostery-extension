@@ -30,7 +30,7 @@ import ProductsView from './Views/ProductsView';
 import CreateAccountView from './Views/CreateAccountView';
 import ForgotPasswordView from '../shared-components/ForgotPassword/ForgotPasswordContainer';
 import LogInView from './Views/LogInView';
-import UpgradePlanView from './Views/UpgradePlanView/UpgradePlanView';
+import UpgradePlanView from './Views/UpgradePlanView';
 
 const store = createStore();
 

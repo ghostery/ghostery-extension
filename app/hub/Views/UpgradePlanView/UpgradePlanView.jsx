@@ -23,8 +23,8 @@ import { ToggleCheckbox } from '../../../shared-components';
  * @return {JSX} JSX for rendering the Home View of the Hub app
  * @memberof HubComponents
  */
-const UpgradePlanView = () => {
-	const test = '';
+const UpgradePlanView = (props) => {
+	console.log('pls props: ', props);
 	return (
 		<section className="pricing-page page-template-page-content-modules">
 			<div className="grid-container show-for-large">
