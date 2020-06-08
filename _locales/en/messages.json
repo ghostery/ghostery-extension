@@ -1327,14 +1327,17 @@
 	"hub_upgrade_maximum_browser_protection": {
 		"message": "Maximum Browser Protection"
 	},
+	"hub_upgrade_to_plus": {
+		"message": "Upgrade to Plus"
+	},
 	"hub_upgrade_vpn": {
-		"message": "vpn"
+		"message": "VPN"
 	},
 	"hub_upgrade_to_premium": {
 		"message": "Upgrade to Premium"
 	},
 	"hub_upgrade_scroll_down": {
-		"message": "Check out the full list of features"
+		"message": "See full list of features"
 	},
 	"hub_upgrade_plus": {
 		"message": "Plus"
@@ -1355,7 +1358,7 @@
 		"message": "Extension Themes"
 	},
 	"hub_upgrade_historical_extension_stats": {
-		"message": "Historical Estension Stats"
+		"message": "Historical Extension Stats"
 	},
 	"hub_upgrade_application_tracker_blocking": {
 		"message": "Application Tracker Blocking"
@@ -1381,13 +1384,13 @@
 	"hub_upgrade_ghostery_plus_yearly_price": {
 		"message": "$3.99"
 	},
-	"hub_upgrade_g4ostery_plus_monthly_price": {
+	"hub_upgrade_ghostery_plus_monthly_price": {
 		"message": "$4.99"
 	},
 	"hub_upgrade_ghostery_premium_yearly_price": {
 		"message": "$8.99"
 	},
-	"hub_upgrade_g4ostery_premium_monthly_price": {
+	"hub_upgrade_ghostery_premium_monthly_price": {
 		"message": "$11.99"
 	},
 	"hub_setup_page_title": {

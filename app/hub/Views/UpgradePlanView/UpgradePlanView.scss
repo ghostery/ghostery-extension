@@ -1,5 +1,6 @@
-$price-blue: blue;
-$price-purple: purple;
+$price-blue: #00AEF0;
+$price-purple: #611b87;
+$price-gold: #b8860b;
 
 .mb-20 {
 	margin-bottom: rem-calc(20);
@@ -236,7 +237,7 @@ section.home-template .section.section-pricing {
 			color: $price-blue;
 		}
 		&-gold {
-			color: $gold;
+			color: $price-gold;
 		}
 		&-purple {
 			color: $price-purple;
@@ -246,6 +247,7 @@ section.home-template .section.section-pricing {
 		}
 	}
 	.card {
+		height: 536px;
 		box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.5);
 		margin-bottom: rem-calc(40);
 		width: 250px;
@@ -282,10 +284,13 @@ section.home-template .section.section-pricing {
 			}
 		}
 		.ghostery-free-image {
-			margin: auto;
-			width: 55px;
-			height: 65px;
-			background-image: url('/app/images/hub/upgrade/ghostery_basic_card.svg')
+			margin-top: -3px;
+			width: 250px;
+			height: 85px;
+			background-image: url('/app/images/hub/upgrade/ghostery_basic_card.svg');
+			background-repeat: no-repeat;
+			background-position: center;
+			background-color: rgba(0, 174, 240, .25);
 		}
 		.ghostery-plus-image {
 			margin: auto;
@@ -317,6 +322,12 @@ section.home-template .section.section-pricing {
 		&.blue {
 			background-image: buildCheckIcon($price-blue);
 		}
+	}
+	.x-icon {
+		display: inline-block;
+		height: 14px;
+		width: 14px;
+		background-image: url('/app/images/hub/upgrade/x_icon.svg')
 	}
 	.hide-for-large {
 		.card {
@@ -491,7 +502,21 @@ section.home-template .section.section-pricing {
 		td.default {
 			display:table-cell;
 		}
-
+		tbody > tr:nth-child(odd) {
+			background-color: #FFF;
+		}
+		tr:last-child > td {
+			border: none;
+		}
+		tr:last-child > td > a {
+			width: 100%;
+			height: 38px;
+			white-space: nowrap;
+			padding: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
 		.bg-blue {
 			background-color: $price-blue;
 		}

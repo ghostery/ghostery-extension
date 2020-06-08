@@ -24,7 +24,7 @@ import { ToggleCheckbox } from '../../../shared-components';
  * @memberof HubComponents
  */
 const UpgradePlanView = () => {
-	const test = true;
+	const test = '';
 	return (
 		<section className="pricing-page page-template-page-content-modules">
 			<div className="grid-container show-for-large">
@@ -48,7 +48,8 @@ const UpgradePlanView = () => {
 				<div className="row align-center text-center" data-equalizer data-equalize-on="medium">
 					<div className="card-outer">
 						<div className="card" data-equalizer-watch>
-							<div className="ghostery-free-image text-center mt-20" title="Ghostery Free" alt="Ghostery Free" />
+							<div className="card-header-background-free" />
+							<div className="ghostery-free-image text-center" title="Ghostery Free" alt="Ghostery Free" />
 							<h2>{t('ghostery')}</h2>
 							<div className="price">
 								<p className="price-blue font-size-36">{t('hub_upgrade_plan_free')}</p>
@@ -66,8 +67,8 @@ const UpgradePlanView = () => {
 							<div className="ghostery-plus-image" title="Ghostery Plus" alt="Ghostery Plus" />
 							<h2>{t('ghostery_plus')}</h2>
 							<div className="price">
-								<p className="price-gold price-yearly active font-size-36">{t('hub_upgrade_ghostery_plus_yearly_price')}</p>
-								<p className="price-gold price-monthly font-size-36">{t('hub_upgrade_ghostery_plus_monthly_price')}</p>
+								<p className="price-gold price-yearly active font-size-36">$3.99</p>
+								<p className="price-gold price-monthly font-size-36">$4.99</p>
 								<p className="price-gold font-size-12">{t('per_month')}</p>
 							</div>
 							<a className="button button-gold" href="" title="Upgrade to Plus">{t('upgrade_to_plus')}</a>
@@ -87,8 +88,8 @@ const UpgradePlanView = () => {
 							<div className="ghostery-premium-image card-image-top" title="Ghostery Premium" alt="Ghostery Premium" />
 							<h2>{t('panel_detail_premium_title')}</h2>
 							<div className="price">
-								<p className="price-purple price-yearly active font-size-36">{t('hub_upgrade_ghostery_premium_yearly_price')}</p>
-								<p className="price-purple price-monthly font-size-36">{t('hub_upgrade_ghostery_premium_monthly_price')}</p>
+								<p className="price-purple price-yearly active font-size-36">$8.99</p>
+								<p className="price-purple price-monthly font-size-36">$11.99</p>
 								<p className="price-purple font-size-12">{t('per_month')}</p>
 								{/* year */}
 								<p className="price-purple price-yearly active font-size-12">{t('per_month')}</p>
@@ -96,9 +97,7 @@ const UpgradePlanView = () => {
 							<a className="button button-purple-blue price-yearly active" href="https://checkout.ghostery.com/en/premium?interval=year" title="Buy Now">
 								{t('hub_upgrade_to_premium')}
 							</a>
-							<a className="button button-purple-blue price-monthly" href="https://checkout.ghostery.com/en/premium" title="Buy Now">
-								{t('hub_upgrade_ghostery_plus_monthly_price')}
-							</a>
+							<a className="button button-purple-blue price-monthly" href="https://checkout.ghostery.com/en/premium" title="Buy Now">$4.99</a>
 							<p className="card-sub-header">
 								<strong>{t('hub_upgrade_maximum_browser_protection')}</strong>
 							</p>
@@ -275,17 +274,16 @@ const UpgradePlanView = () => {
 											<span className="check blue" />
 										</td>
 									</tr>
-
 									<tr>
 										<td />
-										<td className="default"><a className="button button-blue" href="https://signon.ghostery.com/en/register" title="Sign Up">{t('hub_upgrade_plan_free')}</a></td>
+										<td className="default"><a className="button button-blue" href="https://signon.ghostery.com/en/register" title="Sign Up">{t('hub_upgrade_already_protected')}</a></td>
 										<td>
-											<a className="button button-gold price-yearly active" href="https://checkout.ghostery.com/plus?interval=year" title="Buy Now">{t('hub_upgrade_basic_protection')}</a>
-											<a className="button button-gold price-monthly" href="https://checkout.ghostery.com/plus" title="Buy Now">{t('hub_upgrade_basic_browser_protection')}</a>
+											<a className="button button-gold price-yearly active" href="https://checkout.ghostery.com/plus?interval=year" title="Buy Now">{t('hub_upgrade_to_plus')}</a>
+											{/* <a className="button button-gold price-monthly" href="https://checkout.ghostery.com/plus" title="Buy Now">{t('hub_upgrade_to_plus')}</a> */}
 										</td>
 										<td>
-											<a className="button button-purple-blue price-yearly active" href="https://checkout.ghostery.com/en/premium?interval=year" title="Buy Now">{t('hub_upgrade_basic_protection')}</a>
-											<a className="button button-purple-blue price-monthly" href="https://checkout.ghostery.com/en/premium" title="Buy Now">{t('hub_upgrade_basic_browser_protection')}</a>
+											<a className="button button-purple-blue price-yearly active" href="https://checkout.ghostery.com/en/premium?interval=year" title="Buy Now">{t('hub_upgrade_to_premium')}</a>
+											{/* <a className="button button-purple-blue price-monthly" href="https://checkout.ghostery.com/en/premium" title="Buy Now">{t('hub_upgrade_to_premium')}</a> */}
 										</td>
 									</tr>
 								</tbody>
@@ -336,12 +334,12 @@ const UpgradePlanView = () => {
 								<div className="ghostery-plus-image" title="Ghostery Plus" alt="Ghostery Plus" />
 								<h2>{t('ghostery_plus')}</h2>
 								<div className="price">
-									<p className="price-gold price-yearly active font-size-36">{t('hub_upgrade_ghostery_plus_yearly_price')}</p>
-									<p className="price-gold price-monthly font-size-36">{t('hub_upgrade_ghostery_plus_monthly_price')}</p>
+									<p className="price-gold price-yearly active font-size-36">$3.99</p>
+									<p className="price-gold price-monthly font-size-36">$4.99</p>
 									<p className="price-gold font-size-12">{t('per_month')}</p>
 								</div>
-								<a className="button button-gold price-yearly active" href="https://checkout.ghostery.com/plus?interval=year" title="Buy Now">{t('hub_upgrade_ghostery_plus_yearly_price')}</a>
-								<a className="button button-gold price-monthly" href="https://checkout.ghostery.com/plus" title="Buy Now">{t('hub_upgrade_ghostery_plus_monthly_price')}</a>
+								<a className="button button-gold price-yearly active" href="https://checkout.ghostery.com/plus?interval=year" title="Buy Now">$3.99</a>
+								{/* <a className="button button-gold price-monthly" href="https://checkout.ghostery.com/plus" title="Buy Now">$4.99</a> */}
 								<p className="card-sub-header"><strong><strong>{t('hub_upgrade_additional_protection')}</strong></strong></p>
 								<p className="card-sub-copy">
 									<span className="check blue" />
@@ -360,8 +358,8 @@ const UpgradePlanView = () => {
 								<div className="ghostery-premium-image card-image-top" title="Ghostery Premium" alt="Ghostery Premium" />
 								<h2>{t('panel_detail_premium_title')}</h2>
 								<div className="price">
-									<p className="price-purple price-yearly active font-size-36">{t('hub_upgrade_ghostery_premium_yearly_price')}</p>
-									<p className="price-purple price-monthly font-size-36">{t('hub_upgrade_ghostery_premium_monthly_price')}</p>
+									<p className="price-purple price-yearly active font-size-36">$8.99</p>
+									<p className="price-purple price-monthly font-size-36">$11.99</p>
 									<p className="price-purple font-size-12">{t('per_month')}</p>
 								</div>
 								<a className="button button-purple-blue price-yearly active" href="https://checkout.ghostery.com/en/premium?interval=year" title="Buy Now">{t('hub_upgrade_to_premium')}</a>
@@ -408,12 +406,12 @@ const UpgradePlanView = () => {
 						<p className="protection-header protection-header-free price-blue"><strong>{t('hub_upgrade_plan_free')}</strong></p>
 					</div>
 					<div className="small-4 text-center columns">
-						<p className="protection-header protection-header-plus price-gold"><strong>{t('hub_upgrade_ghostery_plus_monthly_price')}</strong></p>
-						<p className="protection-header protection-header-plus price-gold"><span className="protection-header-plus-yearly is-active">{t('hub_upgrade_ghostery_plus_yearly_price')}</span></p>
+						<p className="protection-header protection-header-plus price-gold"><strong>$4.99</strong></p>
+						<p className="protection-header protection-header-plus price-gold"><span className="protection-header-plus-yearly is-active">$3.99</span></p>
 					</div>
 					<div className="small-4 text-center columns">
-						<p className="protection-header protection-header-premium price-purple"><strong>{t('hub_upgrade_ghostery_premium_monthly_price')}</strong></p>
-						<p className="protection-header protection-header-premium price-purple"><span className="protection-header-premium-yearly is-active">{t('hub_upgrade_ghostery_premium_yearly_price')}</span></p>
+						<p className="protection-header protection-header-premium price-purple"><strong>$11.99</strong></p>
+						<p className="protection-header protection-header-premium price-purple"><span className="protection-header-premium-yearly is-active">$8.99</span></p>
 					</div>
 				</div>
 				<div className="row align-middle">
@@ -422,12 +420,12 @@ const UpgradePlanView = () => {
 
 					</div>
 					<div className="small-4 text-center columns">
-						<p className="table-header price-gold price-yearly active">{t('hub_upgrade_ghostery_plus_yearly_price')}</p>
-						<p className="table-header price-gold price-monthly">{t('hub_upgrade_ghostery_plus_monthly_price')}</p>
+						<p className="table-header price-gold price-yearly active">$3.99</p>
+						<p className="table-header price-gold price-monthly">$4.99</p>
 					</div>
 					<div className="small-4 text-center columns">
-						<p className="table-header price-purple price-yearly active">{t('hub_upgrade_ghostery_premium_yearly_price')}</p>
-						<p className="table-header price-purple price-monthly">{t('hub_upgrade_ghostery_premium_monthly_price')}</p>
+						<p className="table-header price-purple price-yearly active">$8.99</p>
+						<p className="table-header price-purple price-monthly">$11.99</p>
 					</div>
 				</div>
 				<div className="grid-container">
@@ -482,7 +480,7 @@ const UpgradePlanView = () => {
 									</tr>
 									<tr>
 										<td>
-											<img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/x.png" title="Ghostery X" alt="Ghostery X" />
+											<span className="x-icon" />
 										</td>
 										<td className="col-plus">
 											<span className="check blue" />
@@ -495,7 +493,9 @@ const UpgradePlanView = () => {
 										<td colSpan="3">{t('hub_upgrade_historical_extension_stats')}</td>
 									</tr>
 									<tr className="gray border-bottom">
-										<td className="default"><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/x.png" title="Ghostery X" alt="Ghostery X" /></td>
+										<td>
+											<span className="x-icon" />
+										</td>
 										<td className="col-plus">
 											<span className="check blue" />
 										</td>
@@ -507,7 +507,9 @@ const UpgradePlanView = () => {
 										<td colSpan="3">{t('hub_upgrade_application_tracker_blocking')}</td>
 									</tr>
 									<tr>
-										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/x.png" title="Ghostery X" alt="Ghostery X" /></td>
+										<td>
+											<span className="x-icon" />
+										</td>
 										<td className="col-plus">
 											<span className="check blue" />
 										</td>
@@ -519,7 +521,9 @@ const UpgradePlanView = () => {
 										<td colSpan="3">{t('hub_upgrade_application_ad_blocking')}</td>
 									</tr>
 									<tr className="gray border-bottom">
-										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/x.png" title="Ghostery X" alt="Ghostery X" /></td>
+										<td>
+											<span className="x-icon" />
+										</td>
 										<td className="col-plus">
 											<span className="check blue" />
 										</td>
@@ -531,8 +535,12 @@ const UpgradePlanView = () => {
 										<td colSpan="3">{t('hub_upgrade_vpn')}</td>
 									</tr>
 									<tr>
-										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/x.png" title="Ghostery X" alt="Ghostery X" /></td>
-										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/x.png" title="Ghostery X" alt="Ghostery X" /></td>
+										<td>
+											<span className="x-icon" />
+										</td>
+										<td>
+											<span className="x-icon" />
+										</td>
 										<td className="col-premium">
 											<span className="check blue" />
 										</td>
@@ -541,8 +549,12 @@ const UpgradePlanView = () => {
 										<td colSpan="3">{t('hub_upgrade_no_vpn_logs')}</td>
 									</tr>
 									<tr className="gray border-bottom">
-										<td className="default"><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/x.png" title="Ghostery X" alt="Ghostery X" /></td>
-										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/x.png" title="Ghostery X" alt="Ghostery X" /></td>
+										<td>
+											<span className="x-icon" />
+										</td>
+										<td>
+											<span className="x-icon" />
+										</td>
 										<td className="col-premium">
 											<span className="check blue" />
 										</td>
@@ -551,8 +563,12 @@ const UpgradePlanView = () => {
 										<td colSpan="3">{t('hub_upgrade_P2P_support')}</td>
 									</tr>
 									<tr>
-										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/x.png" title="Ghostery X" alt="Ghostery X" /></td>
-										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/x.png" title="Ghostery X" alt="Ghostery X" /></td>
+										<td>
+											<span className="x-icon" />
+										</td>
+										<td>
+											<span className="x-icon" />
+										</td>
 										<td className="col-premium">
 											<span className="check blue" />
 										</td>
@@ -561,8 +577,12 @@ const UpgradePlanView = () => {
 										<td colSpan="3">{t('hub_upgrade_IPV6_leak_protection')}</td>
 									</tr>
 									<tr className="gray border-bottom">
-										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/x.png" title="Ghostery X" alt="Ghostery X" /></td>
-										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/x.png" title="Ghostery X" alt="Ghostery X" /></td>
+										<td>
+											<span className="x-icon" />
+										</td>
+										<td>
+											<span className="x-icon" />
+										</td>
 										<td className="col-premium">
 											<span className="check blue" />
 										</td>
@@ -571,8 +591,12 @@ const UpgradePlanView = () => {
 										<td colSpan="3">{t('hub_upgrade_physical_servers')}</td>
 									</tr>
 									<tr>
-										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/x.png" title="Ghostery X" alt="Ghostery X" /></td>
-										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/x.png" title="Ghostery X" alt="Ghostery X" /></td>
+										<td>
+											<span className="x-icon" />
+										</td>
+										<td>
+											<span className="x-icon" />
+										</td>
 										<td className="col-premium">
 											<span className="check blue" />
 										</td>
@@ -581,8 +605,12 @@ const UpgradePlanView = () => {
 										<td colSpan="3">{t('hub_upgrade_unlimited_bandwidth')}</td>
 									</tr>
 									<tr className="gray border-bottom">
-										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/x.png" title="Ghostery X" alt="Ghostery X" /></td>
-										<td><img src="<?php bloginfo('template_url'); ?>/images/campaigns/tier-pricing/x.png" title="Ghostery X" alt="Ghostery X" /></td>
+										<td>
+											<span className="x-icon" />
+										</td>
+										<td>
+											<span className="x-icon" />
+										</td>
 										<td className="col-premium">
 											<span className="check blue" />
 										</td>
@@ -600,13 +628,13 @@ const UpgradePlanView = () => {
 						<div className="small-12 text-center columns">
 							<span className="col-plus">
 								<a className="button button-gold price-yearly active" href="https://checkout.ghostery.com/plus?interval=year" title="Choose Plus">{t('upgrade_to_plus')}</a>
-								<a className="button button-gold price-monthly" href="https://checkout.ghostery.com/plus" title="Choose Plus">{t('upgrade_to_plus')}</a>
+								{/* <a className="button button-gold price-monthly" href="https://checkout.ghostery.com/plus" title="Choose Plus">{t('upgrade_to_plus')}</a> */}
 							</span>
 						</div>
 						<div className="small-12 text-center columns">
 							<span className="col-premium">
-								<a className="button button-purple-blue price-yearly active" href="https://checkout.ghostery.com/en/premium?interval=year" title="Choose Premium">{t('hub_upgrade_ghostery_premium_yearly_price')}</a>
-								<a className="button button-purple-blue price-monthly" href="https://checkout.ghostery.com/en/premium" title="Choose Premium">{t('hub_upgrade_ghostery_premium_monthly_price')}</a>
+								<a className="button button-purple-blue price-yearly active" href="https://checkout.ghostery.com/en/premium?interval=year" title="Choose Premium">{t('hub_upgrade_to_premium')}</a>
+								{/* <a className="button button-purple-blue price-monthly" href="https://checkout.ghostery.com/en/premium" title="Choose Premium">{t('hub_upgrade_to_premium')}</a> */}
 							</span>
 						</div>
 					</div>
