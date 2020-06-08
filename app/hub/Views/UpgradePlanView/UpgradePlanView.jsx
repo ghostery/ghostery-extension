@@ -79,7 +79,9 @@ const UpgradePlanView = (props) => {
 					<div className="card-outer">
 						<div className="card" data-equalizer-watch>
 							<div className="card-header-background-free" />
-							<div className="ghostery-free-image text-center" title="Ghostery Free" alt="Ghostery Free" />
+							<div className="ghostery-free-image-container">
+								<div className="ghostery-free-image text-center" title="Ghostery Free" alt="Ghostery Free" />
+							</div>
 							<h2>{t('ghostery')}</h2>
 							<div className="price">
 								<p className="price-blue font-size-36">{t('hub_upgrade_plan_free')}</p>
@@ -94,7 +96,9 @@ const UpgradePlanView = (props) => {
 					</div>
 					<div className="card-outer">
 						<div className="card" data-equalizer-watch>
-							<div className="ghostery-plus-image" title="Ghostery Plus" alt="Ghostery Plus" />
+							<div className="ghostery-plus-image-container">
+								<div className="ghostery-plus-image" title="Ghostery Plus" alt="Ghostery Plus" />
+							</div>
 							<h2>{t('ghostery_plus')}</h2>
 							<div className="price">
 								{ show_monthly_prices ? (
@@ -124,6 +128,7 @@ const UpgradePlanView = (props) => {
 					<div className="card-outer card-outer-remove">
 						<div className="card" data-equalizer-watch>
 							<div className="ghostery-premium-image card-image-top" title="Ghostery Premium" alt="Ghostery Premium" />
+							<div className="ghostery-premium-image-container" />
 							<h2>{t('panel_detail_premium_title')}</h2>
 							<div className="price">
 								{ show_monthly_prices ? (

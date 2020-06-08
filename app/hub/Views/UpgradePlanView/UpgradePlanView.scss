@@ -270,28 +270,47 @@ section.home-template .section.section-pricing {
 				padding-right: 10px;
 			}
 		}
-		.ghostery-free-image {
+		.ghostery-free-image-container {
 			margin-top: -3px;
 			width: 250px;
 			height: 85px;
-			background-image: url('/app/images/hub/upgrade/ghostery_basic_card.svg');
-			background-repeat: no-repeat;
-			background-position: center;
 			background-color: rgba(0, 174, 240, .25);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			.ghostery-free-image {
+				width: 55px;
+				height: 65px;
+				background-image: url('/app/images/hub/upgrade/ghostery_basic_card.svg');
+				background-repeat: no-repeat;
+				background-position: center;
+			}
 		}
-		.ghostery-plus-image {
-			margin: auto;
-			width: 225px;
-			height: 87px;
-			background-image: url('/app/images/hub/upgrade/ghostery_plus_card.svg')
+		.ghostery-plus-image-container {
+				margin-top: -3px;
+				width: 250px;
+				height: 85px;
+				background-image: linear-gradient(to right, rgba(240,174,133,.25), rgba(241,216,158,.25));
+			.ghostery-plus-image {
+				margin: auto;
+				width: 225px;
+				height: 87px;
+				background-image: url('/app/images/hub/upgrade/ghostery_plus_card.svg')
+			}
+		}
+		.ghostery-premium-image-container {
+			margin-top: -3px;
+			width: 250px;
+			height: 85px;
+			// background-image: linear-gradient(to right, #720174, #5a258e 18%, #2a6ec2 57%, #0c9ce3 86%, #00aef0);
+			background-image: linear-gradient(to right, rgba(113,1,116,.25), rgba(90,37,142,.25) 18%, rgba(42,110,194,.25) 57%, rgba(12,156,227,.25) 86%, rgba(0,174,240,.25));
 		}
 		.ghostery-premium-image {
+			position: absolute;
+			margin-top: -79px;
 			margin-left: 9px;
 			width: 233px;
 			height: 161px;
-			background-image: url('/app/images/hub/upgrade/ghostery_premium_card.svg')
-		}
-		.ghostery-premium-imagae {
 			background-image: url('/app/images/hub/upgrade/ghostery_premium_card.svg')
 		}
 		.button {
