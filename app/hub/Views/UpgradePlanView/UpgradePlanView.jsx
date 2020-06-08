@@ -29,18 +29,31 @@ const UpgradePlanView = (props) => {
 		show_monthly_prices
 	} = props;
 
-	console.log('monthly prices:', show_monthly_prices);
 	const {
 		toggleMonthlyYearlyPrices,
 		setBasicProtection,
 		setPlusProtection,
 		setPremiumProtection
 	} = props.actions;
+	console.log('protection level: ', protection_level);
 	// console.log('props: ', props);
 	// console.log('props.actions: ', props.actions);
 
+	const BASIC = 'BASIC';
+	const PLUS = 'PLUS';
+	const PREMIUM = 'PREMIUM';
+
 	const sliderClassNames = ClassNames('switch-check', {
 		checked: show_monthly_prices
+	});
+	const tabsTitleBlueClassNames = ClassNames('tabs-title tabs-title-blue', {
+		'is-active': protection_level === BASIC
+	});
+	const tabsTitleGoldClassNames = ClassNames('tabs-title tabs-title-gold', {
+		'is-active': protection_level === PLUS
+	});
+	const tabsTitlePurpleClassNames = ClassNames('tabs-title tabs-title-purple', {
+		'is-active': protection_level === PREMIUM
 	});
 	return (
 		<section className="pricing-page page-template-page-content-modules">
@@ -338,101 +351,107 @@ const UpgradePlanView = (props) => {
 				<div className="row align-center">
 					<div className="columns shrink text-center">
 						<ul className="tiers-group tabs menu align-center" data-tabs id="price-tabs">
-							<li className="tabs-title tabs-title-blue is-active"><a href="#panel1">{t('hub_upgrade_plan_free')}</a></li>
-							<li className="tabs-title tabs-title-gold"><a href="#panel2">{t('hub_upgrade_plus')}</a></li>
-							<li className="tabs-title tabs-title-purple"><a href="#panel3">{t('panel_detail_menu_premium_title')}</a></li>
+							<li className={tabsTitleBlueClassNames} onClick={setBasicProtection}>{t('hub_upgrade_plan_free')}</li>
+							<li className={tabsTitleGoldClassNames} onClick={setPlusProtection}>{t('hub_upgrade_plus')}</li>
+							<li className={tabsTitlePurpleClassNames} onClick={setPremiumProtection}>{t('panel_detail_menu_premium_title')}</li>
 						</ul>
 					</div>
 				</div>
 
 				<div className="tabs-content" data-tabs-content="price-tabs">
-					<div className="tabs-panel is-active" id="panel1">
-						<div className="card-outer">
-							<div className="card">
-								<div className="ghostery-free-image text-center mt-20" title="Ghostery Free" alt="Ghostery Free" />
-								<h2>{t('ghostery')}</h2>
-								<div className="price">
-									<p className="price-blue font-size-36">{t('hub_upgrade_plan_free')}</p>
+					{protection_level === BASIC && (
+						<div className="tabs-panel is-active" id="panel1">
+							<div className="card-outer">
+								<div className="card">
+									<div className="ghostery-free-image text-center mt-20" title="Ghostery Free" alt="Ghostery Free" />
+									<h2>{t('ghostery')}</h2>
+									<div className="price">
+										<p className="price-blue font-size-36">{t('hub_upgrade_plan_free')}</p>
+									</div>
+									<a className="button button-blue" href="https://signon.ghostery.com/en/register" title="Sign Up">{t('hub_upgrade_plan_free')}</a>
+									<p className="card-sub-header"><strong>{t('hub_upgrade_basic_protection')}</strong></p>
+									<p className="card-sub-copy">
+										<span className="check blue" />
+										{t('hub_upgrade_basic_browser_protection')}
+									</p>
 								</div>
-								<a className="button button-blue" href="https://signon.ghostery.com/en/register" title="Sign Up">{t('hub_upgrade_plan_free')}</a>
-								<p className="card-sub-header"><strong>{t('hub_upgrade_basic_protection')}</strong></p>
-								<p className="card-sub-copy">
-									<span className="check blue" />
-									{t('hub_upgrade_basic_browser_protection')}
-								</p>
 							</div>
 						</div>
-					</div>
-					<div className="tabs-panel" id="panel2">
-						<div className="card-outer">
-							<div className="card">
-								<div className="ghostery-plus-image" title="Ghostery Plus" alt="Ghostery Plus" />
-								<h2>{t('ghostery_plus')}</h2>
-								<div className="price">
-									{ show_monthly_prices ? (
-										<React.Fragment>
-											<p className="price-gold font-size-36">$4.99</p>
-											<p className="price-gold font-size-12">{t('per_month')}</p>
-										</React.Fragment>
-									) : (
-										<React.Fragment>
-											<p className="price-gold font-size-36">$3.99</p>
-											<p className="price-gold font-size-12">{t('per_year')}</p>
-										</React.Fragment>
-									)}
+					)}
+					{protection_level === PLUS && (
+						<div className="tabs-panel" id="panel2">
+							<div className="card-outer">
+								<div className="card">
+									<div className="ghostery-plus-image" title="Ghostery Plus" alt="Ghostery Plus" />
+									<h2>{t('ghostery_plus')}</h2>
+									<div className="price">
+										{show_monthly_prices ? (
+											<React.Fragment>
+												<p className="price-gold font-size-36">$4.99</p>
+												<p className="price-gold font-size-12">{t('per_month')}</p>
+											</React.Fragment>
+										) : (
+											<React.Fragment>
+												<p className="price-gold font-size-36">$3.99</p>
+												<p className="price-gold font-size-12">{t('per_year')}</p>
+											</React.Fragment>
+										)}
+									</div>
+									<a className="button button-gold" href="https://checkout.ghostery.com/plus" title="Buy Now">{t('hub_upgrade_to_plus')}</a>
+									<p className="card-sub-header"><strong><strong>{t('hub_upgrade_additional_protection')}</strong></strong></p>
+									<p className="card-sub-copy">
+										<span className="check blue" />
+										{t('hub_upgrade_basic_browser_protection')}
+									</p>
+									<p className="card-sub-copy">
+										<span className="check blue" />
+										{t('hub_upgrade_advanced_device_protection')}
+									</p>
 								</div>
-								<a className="button button-gold" href="https://checkout.ghostery.com/plus" title="Buy Now">{t('hub_upgrade_to_plus')}</a>
-								<p className="card-sub-header"><strong><strong>{t('hub_upgrade_additional_protection')}</strong></strong></p>
-								<p className="card-sub-copy">
-									<span className="check blue" />
-									{t('hub_upgrade_basic_browser_protection')}
-								</p>
-								<p className="card-sub-copy">
-									<span className="check blue" />
-									{t('hub_upgrade_advanced_device_protection')}
-								</p>
 							</div>
 						</div>
-					</div>
-					<div className="tabs-panel" id="panel3">
-						<div className="card-outer card-outer-remove">
-							<div className="card">
-								<div className="ghostery-premium-image card-image-top" title="Ghostery Premium" alt="Ghostery Premium" />
-								<h2>{t('panel_detail_premium_title')}</h2>
-								<div className="price">
+					)}
+					{protection_level === PREMIUM && (
+						<div className="tabs-panel" id="panel3">
+							<div className="card-outer card-outer-remove">
+								<div className="card">
+									<div className="ghostery-premium-image card-image-top" title="Ghostery Premium" alt="Ghostery Premium" />
+									<h2>{t('panel_detail_premium_title')}</h2>
+									<div className="price">
+										{show_monthly_prices ? (
+											<React.Fragment>
+												<p className="price-purple font-size-36">$11.99</p>
+												<p className="price-purple font-size-12">{t('per_month')}</p>
+											</React.Fragment>
+										) : (
+											<React.Fragment>
+												<p className="price-purple font-size-36">$8.99</p>
+												<p className="price-purple font-size-12">{t('per_year')}</p>
+											</React.Fragment>
+										)}
+									</div>
 									{show_monthly_prices ? (
-										<React.Fragment>
-											<p className="price-purple font-size-36">$11.99</p>
-											<p className="price-purple font-size-12">{t('per_month')}</p>
-										</React.Fragment>
+										<a className="button button-purple-blue" href="https://checkout.ghostery.com/en/premium" title="Buy Now">{t('hub_upgrade_to_premium')}</a>
 									) : (
-										<React.Fragment>
-											<p className="price-purple font-size-36">$8.99</p>
-											<p className="price-purple font-size-12">{t('per_year')}</p>
-										</React.Fragment>
+										<a className="button button-purple-blue" href="https://checkout.ghostery.com/en/premium?interval=year" title="Buy Now">{t('hub_upgrade_to_premium')}</a>
 									)}
+									<p className="card-sub-header"><strong>{t('hub_upgrade_maximum_browser_protection')}</strong></p>
+									<p className="card-sub-copy">
+										<span className="check blue" />
+										{t('hub_upgrade_basic_browser_protection')}
+									</p>
+									<p className="card-sub-copy">
+										<span className="check blue" />
+										{t('hub_upgrade_advanced_device_protection')}
+									</p>
+									<p className="card-sub-copy">
+										<span className="check blue" />
+										{t('hub_upgrade_vpn')}
+									</p>
 								</div>
-								{show_monthly_prices ? (
-									<a className="button button-purple-blue" href="https://checkout.ghostery.com/en/premium" title="Buy Now">{t('hub_upgrade_to_premium')}</a>
-								) : (
-									<a className="button button-purple-blue" href="https://checkout.ghostery.com/en/premium?interval=year" title="Buy Now">{t('hub_upgrade_to_premium')}</a>
-								)}
-								<p className="card-sub-header"><strong>{t('hub_upgrade_maximum_browser_protection')}</strong></p>
-								<p className="card-sub-copy">
-									<span className="check blue" />
-									{t('hub_upgrade_basic_browser_protection')}
-								</p>
-								<p className="card-sub-copy">
-									<span className="check blue" />
-									{t('hub_upgrade_advanced_device_protection')}
-								</p>
-								<p className="card-sub-copy">
-									<span className="check blue" />
-									{t('hub_upgrade_vpn')}
-								</p>
 							</div>
 						</div>
-					</div>
+					)}
 				</div>
 				<div className="row align-center module-editor text-center">
 					<div className="columns text-center">

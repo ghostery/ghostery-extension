@@ -55,11 +55,9 @@ section.home-template .section.section-pricing {
 	.tabs-title {
 		&-blue {
 			border-right: 2px solid #6a6a6a;
-			>a[aria-selected='true'] {
-				background-color: $price-blue;
-			}
 			&.is-active {
 				background-color: $price-blue;
+				color: #FFF;
 			}
 			&:hover {
 				background-color: $price-blue;
@@ -68,31 +66,25 @@ section.home-template .section.section-pricing {
 		}
 		&-gold {
 			border-right: 2px solid #6a6a6a;
-			>a[aria-selected='true'] {
-				background-image: linear-gradient(112deg, #b8860b, #e8cc89);
-			}
+			// background-image: linear-gradient(112deg, #b8860b, #e8cc89);
 			&.is-active {
 				background-image: linear-gradient(112deg, #b8860b, #e8cc89);
+				color: #FFF;
 			}
-			a {
-				&:hover {
-					background-image: linear-gradient(112deg, #b8860b, #e8cc89);
-					color: $white;
-				}
+			&:hover {
+				background-image: linear-gradient(112deg, #b8860b, #e8cc89);
+				color: $white;
 			}
 		}
 		&-purple {
-			>a[aria-selected='true'] {
-				background-image: linear-gradient(112deg, #5c218b, #00aef0);
-			}
+				// background-image: linear-gradient(112deg, #5c218b, #00aef0);
 			&.is-active {
 				background-image: linear-gradient(112deg, #5c218b, #00aef0);
+				color: #FFF;
 			}
-			a {
-				&:hover {
-					background-image: linear-gradient(112deg, #5c218b, #00aef0);
-					color: $white;
-				}
+			&:hover {
+				background-image: linear-gradient(112deg, #5c218b, #00aef0);
+				color: $white;
 			}
 		}
 	}
@@ -114,12 +106,18 @@ section.home-template .section.section-pricing {
 	.tiers-group {
 		margin-top: rem-calc(20);
 		margin-bottom: rem-calc(50);
+		list-style-type: none;
+		display: flex;
 		@include breakpoint(medium down) {
 			margin-bottom: rem-calc(10);
 			margin-top: rem-calc(40);
 		}
 		li {
 			width: 120px;
+			height: 30px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
 			@include breakpoint(small down) {
 				width: 75px;
 			}
