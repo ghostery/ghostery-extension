@@ -300,6 +300,14 @@ section.home-template .section.section-pricing {
 		}
 	}
 
+	.premium-sparkle {
+		display: inline-block;
+		vertical-align: middle;
+		height: 14px;
+		width: 12px;
+		background-repeat: no-repeat;
+		background-image: url('/app/images/premium-sparkle.svg');
+	}
 	.check {
 		display: inline-block;
 		width: 20px;
@@ -503,6 +511,9 @@ section.home-template .section.section-pricing {
 			display: flex;
 			align-items: center;
 			justify-content: center;
+		}
+		.feature-title {
+			margin-right: 6px;
 		}
 		.bg-blue {
 			background-color: $price-blue;

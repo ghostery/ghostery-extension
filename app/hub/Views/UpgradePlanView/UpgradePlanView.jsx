@@ -250,7 +250,12 @@ const UpgradePlanView = (props) => {
 										</td>
 									</tr>
 									<tr>
-										<td>{t('hub_upgrade_application_tracker_blocking')}</td>
+										<td>
+											<span className="feature-title">
+												{t('hub_upgrade_application_tracker_blocking')}
+											</span>
+											<span className="premium-sparkle" />
+										</td>
 										<td className="default"><span className="tick" /></td>
 										<td>
 											<span className="check blue" />
@@ -260,7 +265,12 @@ const UpgradePlanView = (props) => {
 										</td>
 									</tr>
 									<tr>
-										<td>{t('hub_upgrade_application_ad_blocking')}</td>
+										<td>
+											<span className="feature-title">
+												{t('hub_upgrade_application_ad_blocking')}
+											</span>
+											<span className="premium-sparkle" />
+										</td>
 										<td className="default"><span className="tick" /></td>
 										<td>
 											<span className="check blue" />
@@ -270,31 +280,12 @@ const UpgradePlanView = (props) => {
 										</td>
 									</tr>
 									<tr>
-										<td>{t('hub_upgrade_vpn')}</td>
-										<td className="default"><span className="tick" /></td>
-										<td><span className="tick" /></td>
 										<td>
-											<span className="check blue" />
+											<span className="feature-title">
+												{t('hub_upgrade_vpn')}
+											</span>
+											<span className="premium-sparkle" />
 										</td>
-									</tr>
-									<tr>
-										<td>{t('hub_upgrade_no_vpn_logs')}</td>
-										<td className="default"><span className="tick" /></td>
-										<td><span className="tick" /></td>
-										<td>
-											<span className="check blue" />
-										</td>
-									</tr>
-									<tr>
-										<td>{t('hub_upgrade_P2P_support')}</td>
-										<td className="default"><span className="tick" /></td>
-										<td><span className="tick" /></td>
-										<td>
-											<span className="check blue" />
-										</td>
-									</tr>
-									<tr>
-										<td>{t('hub_upgrade_IPV6_leak_protection')}</td>
 										<td className="default"><span className="tick" /></td>
 										<td><span className="tick" /></td>
 										<td>
@@ -302,7 +293,12 @@ const UpgradePlanView = (props) => {
 										</td>
 									</tr>
 									<tr>
-										<td>{t('hub_upgrade_physical_servers')}</td>
+										<td>
+											<span className="feature-title">
+												{t('hub_upgrade_no_vpn_logs')}
+											</span>
+											<span className="premium-sparkle" />
+										</td>
 										<td className="default"><span className="tick" /></td>
 										<td><span className="tick" /></td>
 										<td>
@@ -310,7 +306,51 @@ const UpgradePlanView = (props) => {
 										</td>
 									</tr>
 									<tr>
-										<td>{t('hub_upgrade_unlimited_bandwidth')}</td>
+										<td>
+											<span className="feature-title">
+												{t('hub_upgrade_P2P_support')}
+											</span>
+											<span className="premium-sparkle" />
+										</td>
+										<td className="default"><span className="tick" /></td>
+										<td><span className="tick" /></td>
+										<td>
+											<span className="check blue" />
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<span className="feature-title">
+												{t('hub_upgrade_IPV6_leak_protection')}
+											</span>
+											<span className="premium-sparkle" />
+										</td>
+										<td className="default"><span className="tick" /></td>
+										<td><span className="tick" /></td>
+										<td>
+											<span className="check blue" />
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<span className="feature-title">
+												{t('hub_upgrade_physical_servers')}
+											</span>
+											<span className="premium-sparkle" />
+										</td>
+										<td className="default"><span className="tick" /></td>
+										<td><span className="tick" /></td>
+										<td>
+											<span className="check blue" />
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<span className="feature-title">
+												{t('hub_upgrade_unlimited_bandwidth')}
+											</span>
+											<span className="premium-sparkle" />
+										</td>
 										<td className="default"><span className="tick" /></td>
 										<td><span className="tick" /></td>
 										<td>
