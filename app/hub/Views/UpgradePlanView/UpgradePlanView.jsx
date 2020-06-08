@@ -24,7 +24,23 @@ import { ToggleCheckbox } from '../../../shared-components';
  * @memberof HubComponents
  */
 const UpgradePlanView = (props) => {
-	console.log('pls props: ', props);
+	const {
+		set_protection_level,
+		set_yearly_prices
+	} = props;
+
+	const {
+		toggleMonthlyYearlyPrices,
+		setBasicProtection,
+		setPlusProtection,
+		setPremiumProtection
+	} = props.actions;
+	// console.log('props: ', props);
+	// console.log('props.actions: ', props.actions);
+
+	const sliderClassNames = ClassNames('switch-check', {
+		checked: !set_yearly_prices
+	});
 	return (
 		<section className="pricing-page page-template-page-content-modules">
 			<div className="grid-container show-for-large">
@@ -34,8 +50,8 @@ const UpgradePlanView = (props) => {
 						<div className="row align-middle toggle-switch">
 							<div className="small-12 text-center columns">
 								<span>{t('hub_upgrade_yearly')}</span>
-								<label className="switch" htmlFor="switch-check">
-									<input className="switch-check" type="checkbox" />
+								<label className="switch" htmlFor="switch-check" onClick={toggleMonthlyYearlyPrices}>
+									<input className={sliderClassNames} type="checkbox" />
 									<span className="slider round" />
 								</label>
 								<span>{t('hub_upgrade_monthly')}</span>

@@ -13,9 +13,9 @@
 
 import {
 	TOGGLE_MONTHLY_YEARLY_PRICES,
-	SHOW_BASIC_PROTECTION,
-	SHOW_PLUS_PROTECTION,
-	SHOW_PREMIUM_PROTECTION
+	SET_BASIC_PROTECTION,
+	SET_PLUS_PROTECTION,
+	SET_PREMIUM_PROTECTION
 } from './UpgradePlanViewConstants';
 
 /**
@@ -29,31 +29,31 @@ export function toggleMonthlyYearlyPrices() {
 }
 
 /**
- * Show Basic protection on Mobile View
+ * Set Basic protection on Mobile View
  * @return {Object}
  */
-export function showBasicProtection() {
+export function setBasicProtection() {
 	return {
-		type: SHOW_BASIC_PROTECTION,
+		type: SET_BASIC_PROTECTION,
 	};
 }
 
 /**
- * Show Plus protection on Mobile View
+ * Set Plus protection on Mobile View
  * @return {Object}
  */
-export function showPlusProtection() {
+export function setPlusProtection() {
 	return {
-		type: SHOW_PLUS_PROTECTION,
+		type: SET_PLUS_PROTECTION,
 	};
 }
 
 /**
- * Show Premium protection on Mobile View
+ * Set Premium protection on Mobile View
  * @return {Object}
  */
-export function showPremiumProtection() {
+export function setPremiumProtection() {
 	return {
-		type: SHOW_PREMIUM_PROTECTION,
+		type: SET_PREMIUM_PROTECTION,
 	};
 }
