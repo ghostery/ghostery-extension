@@ -11,14 +11,18 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 #ghostery-header {
-	.header-tab-group {
+	.header-tab-group-container {
 		position: absolute;
 		height: 36px;
-		width: 280px;
-		left: calc(50% - 140px);
+		width: 580px;
+		pointer-events: none;
+	}
+	.header-tab-group {
+		height: 36px;
 	}
 	.header-tab {
 		cursor: pointer;
+		pointer-events: all;
 		height: 20px;
 		width: 140px;
 		text-align: center;

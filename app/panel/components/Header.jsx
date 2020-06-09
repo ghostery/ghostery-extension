@@ -213,9 +213,11 @@ class Header extends React.Component {
 		);
 
 		const tabs = (
-			<div className="header-tab-group flex-container align-bottom">
-				{simpleTab}
-				{detailedTab}
+			<div className="header-tab-group-container">
+				<div className="header-tab-group flex-container align-bottom align-center">
+					{simpleTab}
+					{detailedTab}
+				</div>
 			</div>
 		);
 

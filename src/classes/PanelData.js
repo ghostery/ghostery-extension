@@ -28,7 +28,12 @@ import account from './Account';
 import dispatcher from './Dispatcher';
 import promoModals from './PromoModals';
 import { getCliqzGhosteryBugs, sendCliqzModuleCounts } from '../utils/cliqzModulesData';
-import { getActiveTab, flushChromeMemoryCache, processUrl } from '../utils/utils';
+import {
+	getTab,
+	getActiveTab,
+	flushChromeMemoryCache,
+	processUrl
+} from '../utils/utils';
 import { log } from '../utils/common';
 
 const SYNC_SET = new Set(globals.SYNC_ARRAY);
@@ -71,7 +76,7 @@ class PanelData {
 		this._panelPort = port;
 		this._mountedComponents.panel = true;
 
-		getActiveTab((tab) => {
+		function tabCallback(tab) {
 			const { url } = tab;
 
 			this._activeTab = tab;
@@ -86,7 +91,15 @@ class PanelData {
 			account.getUserSettings()
 				.then(userSettings => this._postUserSettings(userSettings))
 				.catch(() => log('Failed getting remote user settings from PanelData#initPort. User not logged in.'));
-		});
+		}
+
+		const paramTabId = +(new URL(port.sender.url)).searchParams.get('tabId');
+
+		if (paramTabId) {
+			getTab(paramTabId, tabCallback.bind(this));
+		} else {
+			getActiveTab(tabCallback.bind(this));
+		}
 	}
 
 	/**
