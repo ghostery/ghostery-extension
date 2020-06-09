@@ -1351,6 +1351,12 @@
 	"hub_upgrade_additional_protection": {
 		"message": "Additional Protection"
 	},
+	"hub_upgrade_additional": {
+		"message": "Additional"
+	},
+	"hub_upgrade_maximum": {
+		"message": "Maximum"
+	},
 	"hub_upgrade_browser_tracker_blocking": {
 		"message": "Browser Tracker Blocking"
 	},
