@@ -29,7 +29,7 @@ export function toggleMonthlyYearlyPrices() {
 }
 
 /**
- * Set Basic protection on Mobile View
+ * Set Basic protection on medium or smaller screen sizes
  * @return {Object}
  */
 export function setBasicProtection() {
@@ -39,7 +39,7 @@ export function setBasicProtection() {
 }
 
 /**
- * Set Plus protection on Mobile View
+ * Set Plus protection on medium or smaller screen sizes
  * @return {Object}
  */
 export function setPlusProtection() {
@@ -49,7 +49,7 @@ export function setPlusProtection() {
 }
 
 /**
- * Set Premium protection on Mobile View
+ * Set Premium protection on medium or smaller screen sizes
  * @return {Object}
  */
 export function setPremiumProtection() {

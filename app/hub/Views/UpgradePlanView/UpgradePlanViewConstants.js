@@ -14,7 +14,7 @@
 // Monthly/Yearly toggle
 export const TOGGLE_MONTHLY_YEARLY_PRICES = 'TOGGLE_MONTHLY_YEARLY_PRICES';
 
-// Free/Plus/Premium on Responsive view
+// Free/Plus/Premium on medium or smaller screen sizes
 export const SET_BASIC_PROTECTION = 'SET_BASIC_PROTECTION';
 export const SET_PLUS_PROTECTION = 'SET_PLUS_PROTECTION';
 export const SET_PREMIUM_PROTECTION = 'SET_PREMIUM_PROTECTION';
