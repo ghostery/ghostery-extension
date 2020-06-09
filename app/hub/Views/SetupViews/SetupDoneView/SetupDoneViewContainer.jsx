@@ -32,7 +32,7 @@ class SetupDoneViewContainer extends Component {
 			activeIndex: index,
 			hrefPrev: `/setup/${index - 1}`,
 			hrefNext: '/',
-			hrefDone: '/',
+			hrefDone: '/home',
 			textPrev: t('previous'),
 			textNext: t('done'),
 			textDone: t('hub_setup_exit_flow'),

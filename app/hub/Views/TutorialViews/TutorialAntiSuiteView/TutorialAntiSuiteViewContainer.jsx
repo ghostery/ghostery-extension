@@ -32,7 +32,7 @@ class TutorialAntiSuiteViewContainer extends Component {
 			activeIndex: index,
 			hrefPrev: `/tutorial/${index - 1}`,
 			hrefNext: '/',
-			hrefDone: '/',
+			hrefDone: '/home',
 			textPrev: t('previous'),
 			textNext: t('done'),
 			textDone: t('hub_tutorial_exit_flow'),

@@ -87,6 +87,7 @@ function SetupViewReducer(state = initialState, action) {
 				textNext,
 				textDone,
 			} = action.data;
+			console.log('href done: ', hrefDone);
 			return Object.assign({}, state, {
 				setup: Object.assign({}, state.setup, {
 					navigation: {
