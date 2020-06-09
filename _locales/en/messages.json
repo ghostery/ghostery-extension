@@ -1384,18 +1384,6 @@
 	"hub_upgrade_unlimited_bandwidth": {
 		"message": "Unlimited Bandwidth"
 	},
-	"hub_upgrade_ghostery_plus_yearly_price": {
-		"message": "$3.99"
-	},
-	"hub_upgrade_ghostery_plus_monthly_price": {
-		"message": "$4.99"
-	},
-	"hub_upgrade_ghostery_premium_yearly_price": {
-		"message": "$8.99"
-	},
-	"hub_upgrade_ghostery_premium_monthly_price": {
-		"message": "$11.99"
-	},
 	"hub_setup_page_title": {
 		"message": "Ghostery Hub - Setup"
 	},

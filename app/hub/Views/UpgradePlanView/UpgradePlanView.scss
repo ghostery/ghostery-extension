@@ -1,4 +1,5 @@
 $price-blue: #00AEF0;
+$blue-alt: #4caeea;
 $price-purple: #611b87;
 $price-purple-alt: #720174;
 $price-gold: #b8860b;
@@ -144,8 +145,8 @@ section.home-template .section.section-pricing {
 		display: inline-block;
 		width: 60px;
 		height: 34px;
-		margin-left: rem-calc(20);
-		margin-right: rem-calc(20);
+		margin-left: rem-calc(30);
+		margin-right: rem-calc(30);
 	}
 
 	/* Hide default HTML checkbox */
@@ -229,6 +230,9 @@ section.home-template .section.section-pricing {
 		&-blue {
 			color: $price-blue;
 		}
+		&-blue-alt {
+			color: $blue-alt;
+		}
 		&-gold {
 			color: $price-gold;
 		}
@@ -237,6 +241,17 @@ section.home-template .section.section-pricing {
 		}
 		p {
 			margin-bottom: 0;
+			&.sub-text {
+				font-weight: 500;
+			}
+		}
+		.price-per-year {
+			position: relative;
+			width: 100%;
+			p {
+				position: absolute;
+				width: 100%;
+			}
 		}
 	}
 	.card {
@@ -324,6 +339,14 @@ section.home-template .section.section-pricing {
 		.button {
 			margin-top: rem-calc(10);
 			margin-bottom: rem-calc(20);
+			text-transform: none;
+			&.already-protected {
+				background-color: $blue-alt;
+				font-weight: 600;
+			}
+		}
+		.card-sub-header {
+			font-size: 14px;
 		}
 	}
 
@@ -439,7 +462,7 @@ section.home-template .section.section-pricing {
 	}
 
 	.button-gold {
-		background-image: linear-gradient(105deg, #b8860b 3%, #efd396 100%);
+		background-color: $price-gold;
 		border: none;
 	}
 	.button-purple-blue {

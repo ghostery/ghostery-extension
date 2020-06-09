@@ -101,9 +101,9 @@ const UpgradePlanView = (props) => {
 							</div>
 							<h2>{t('ghostery')}</h2>
 							<div className="price">
-								<p className="price-blue font-size-36">{t('hub_upgrade_plan_free')}</p>
+								<p className="price-blue-alt font-size-36">{t('hub_upgrade_plan_free')}</p>
 							</div>
-							<a className="button button-blue" href="" title="Already Protected">{t('hub_upgrade_already_protected')}</a>
+							<a className="button already-protected" href="" title="Already Protected">{t('hub_upgrade_already_protected')}</a>
 							<p className="card-sub-header"><strong>{t('hub_upgrade_basic_protection')}</strong></p>
 							<p className="card-sub-copy">
 								<span className="check blue" />
@@ -121,16 +121,19 @@ const UpgradePlanView = (props) => {
 								{ show_monthly_prices ? (
 									<React.Fragment>
 										<p className="price-gold font-size-36">$4.99</p>
-										<p className="price-gold font-size-12">{t('per_month')}</p>
+										<p className="price-gold sub-text font-size-12">{t('per_month')}</p>
 									</React.Fragment>
 								) : (
 									<React.Fragment>
 										<p className="price-gold font-size-36">$3.99</p>
-										<p className="price-gold font-size-12">{t('per_year')}</p>
+										<p className="price-gold sub-text font-size-12">{t('per_month')}</p>
+										<div className="price-per-year">
+											<p className="price-gold sub-text font-size-12">{`( $47.88 ${t('per_year')})`}</p>
+										</div>
 									</React.Fragment>
 								)}
 							</div>
-							<a className="button button-gold" href="" title="Upgrade to Plus">{t('upgrade_to_plus')}</a>
+							<a className="button button-gold" href="" title="Upgrade to Plus">{t('hub_upgrade_to_plus')}</a>
 							<p className="card-sub-header"><strong>{t('hub_upgrade_additional_protection')}</strong></p>
 							<p className="card-sub-copy">
 								<span className="check blue" />
@@ -152,13 +155,16 @@ const UpgradePlanView = (props) => {
 							<div className="price">
 								{ show_monthly_prices ? (
 									<React.Fragment>
-										<p className="price-purple font-size-36">$11.99</p>
-										<p className="price-purple font-size-12">{t('per_month')}</p>
+										<p className="price-purple sub-text font-size-36">$11.99</p>
+										<p className="price-purple sub-text font-size-12">{t('per_month')}</p>
 									</React.Fragment>
 								) : (
 									<React.Fragment>
-										<p className="price-purple font-size-36">$8.99</p>
-										<p className="price-purple font-size-12">{t('per_year')}</p>
+										<p className="price-purple sub-text font-size-36">$8.99</p>
+										<p className="price-purple sub-text font-size-12">{t('per_month')}</p>
+										<div className="price-per-year">
+											<p className="price-purple sub-text font-size-12">{`( $107.88 ${t('per_year')})`}</p>
+										</div>
 									</React.Fragment>
 								)}
 							</div>
@@ -433,7 +439,7 @@ const UpgradePlanView = (props) => {
 									<div className="ghostery-free-image text-center mt-20" title="Ghostery Free" alt="Ghostery Free" />
 									<h2>{t('ghostery')}</h2>
 									<div className="price">
-										<p className="price-blue font-size-36">{t('hub_upgrade_plan_free')}</p>
+										<p className="price-blue-alt font-size-36">{t('hub_upgrade_plan_free')}</p>
 									</div>
 									<a className="button button-blue" href="https://signon.ghostery.com/en/register" title="Sign Up">{t('hub_upgrade_plan_free')}</a>
 									<p className="card-sub-header"><strong>{t('hub_upgrade_basic_protection')}</strong></p>
@@ -455,12 +461,15 @@ const UpgradePlanView = (props) => {
 										{show_monthly_prices ? (
 											<React.Fragment>
 												<p className="price-gold font-size-36">$4.99</p>
-												<p className="price-gold font-size-12">{t('per_month')}</p>
+												<p className="price-gold sub-text font-size-12">{t('per_month')}</p>
+												<div className="price-per-year">
+													<p className="price-gold sub-text font-size-12">{`( $47.88 ${t('per_year')})`}</p>
+												</div>
 											</React.Fragment>
 										) : (
 											<React.Fragment>
 												<p className="price-gold font-size-36">$3.99</p>
-												<p className="price-gold font-size-12">{t('per_year')}</p>
+												<p className="price-gold sub-text font-size-12">{t('per_year')}</p>
 											</React.Fragment>
 										)}
 									</div>
@@ -488,12 +497,15 @@ const UpgradePlanView = (props) => {
 										{show_monthly_prices ? (
 											<React.Fragment>
 												<p className="price-purple font-size-36">$11.99</p>
-												<p className="price-purple font-size-12">{t('per_month')}</p>
+												<p className="price-purple sub-text font-size-12">{t('per_month')}</p>
+												<div className="price-per-year">
+													<p className="price-purple sub-text font-size-12">{`( $107.88 ${t('per_year')})`}</p>
+												</div>
 											</React.Fragment>
 										) : (
 											<React.Fragment>
 												<p className="price-purple font-size-36">$8.99</p>
-												<p className="price-purple font-size-12">{t('per_year')}</p>
+												<p className="price-purple sub-text font-size-12">{t('per_year')}</p>
 											</React.Fragment>
 										)}
 									</div>
@@ -802,9 +814,9 @@ const UpgradePlanView = (props) => {
 						<div className="small-12 text-center columns">
 							<span className="col-plus">
 								{show_monthly_prices ? (
-									<a className="button button-gold" href="https://checkout.ghostery.com/plus" title="Choose Plus">{t('upgrade_to_plus')}</a>
+									<a className="button button-gold" href="https://checkout.ghostery.com/plus" title="Choose Plus">{t('hub_upgrade_to_plus')}</a>
 								) : (
-									<a className="button button-gold" href="https://checkout.ghostery.com/plus?interval=year" title="Choose Plus">{t('upgrade_to_plus')}</a>
+									<a className="button button-gold" href="https://checkout.ghostery.com/plus?interval=year" title="Choose Plus">{t('hub_upgrade_to_plus')}</a>
 								)}
 							</span>
 						</div>
