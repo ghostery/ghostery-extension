@@ -340,6 +340,9 @@ section.home-template .section.section-pricing {
 			margin-top: rem-calc(10);
 			margin-bottom: rem-calc(20);
 			text-transform: none;
+			width: 177px;
+			height: 38px;
+			line-height: inherit;
 			&.already-protected {
 				background-color: $blue-alt;
 				font-weight: 600;
