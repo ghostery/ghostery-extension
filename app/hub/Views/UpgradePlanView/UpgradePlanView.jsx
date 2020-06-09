@@ -434,7 +434,7 @@ const UpgradePlanView = (props) => {
 				<div className="tabs-content" data-tabs-content="price-tabs">
 					{protection_level === BASIC && (
 						<div className="card-outer">
-							<div className="card" data-equalizer-watch>
+							<div className="card basic" data-equalizer-watch>
 								<div className="card-header-background-free" />
 								<div className="ghostery-free-image-container">
 									<div className="ghostery-free-image text-center" title="Ghostery Free" alt="Ghostery Free" />
@@ -454,7 +454,7 @@ const UpgradePlanView = (props) => {
 					)}
 					{protection_level === PLUS && (
 						<div className="card-outer">
-							<div className="card" data-equalizer-watch>
+							<div className="card plus" data-equalizer-watch>
 								<div className="ghostery-plus-image-container">
 									<div className="ghostery-plus-image" title="Ghostery Plus" alt="Ghostery Plus" />
 								</div>
@@ -476,7 +476,7 @@ const UpgradePlanView = (props) => {
 									)}
 								</div>
 								<div className="row align-middle toggle-switch">
-									<div className="small-12 text-center columns">
+									<div className="toggle-switch-row small-12 text-center columns">
 										<span className={yearlyToggleLabel}>{t('hub_upgrade_yearly')}</span>
 										<label className="switch" htmlFor="switch-check" onClick={toggleMonthlyYearlyPrices}>
 											<input className={sliderClassNames} type="checkbox" />
@@ -501,7 +501,7 @@ const UpgradePlanView = (props) => {
 					{protection_level === PREMIUM && (
 						<div className="tabs-panel" id="panel3">
 							<div className="card-outer card-outer-remove">
-								<div className="card" data-equalizer-watch>
+								<div className="card premium" data-equalizer-watch>
 									<div className="ghostery-premium-image-container">
 										<div className="ghostery-premium-image card-image-top" title="Ghostery Premium" alt="Ghostery Premium" />
 									</div>
@@ -524,7 +524,7 @@ const UpgradePlanView = (props) => {
 										)}
 									</div>
 									<div className="row align-middle toggle-switch">
-										<div className="small-12 text-center columns">
+										<div className="toggle-switch-row small-12 text-center columns">
 											<span className={yearlyToggleLabel}>{t('hub_upgrade_yearly')}</span>
 											<label className="switch" htmlFor="switch-check" onClick={toggleMonthlyYearlyPrices}>
 												<input className={sliderClassNames} type="checkbox" />
@@ -564,20 +564,20 @@ const UpgradePlanView = (props) => {
 				</div>
 			</div>
 
-			<div className="key-container">
+			<div className="key-container hide-for-large">
 				<span className="premium-sparkle" />
 				<span className="midnight-note">{`- ${t('hub_upgrade_midnight_note')}`}</span>
 			</div>
 
 			<div ref={mobileComparisonTableRef} className="comparison-table comparison-table-mobile hide-for-large">
 				<div className="row align-middle toggle-switch hide-for-medium">
-					<div className="small-12 text-center columns">
-						<span>{t('hub_upgrade_yearly')}</span>
+					<div className="toggle-switch-row mobile-switch small-12 text-center columns">
+						<span className={yearlyToggleLabel}>{t('hub_upgrade_yearly')}</span>
 						<label className="switch" htmlFor="switch-check" onClick={toggleMonthlyYearlyPrices}>
 							<input className={sliderClassNames} type="checkbox" />
 							<span className="slider round" />
 						</label>
-						<span>{t('hub_upgrade_monthly')}</span>
+						<span className={monthlyToggleLabel}>{t('hub_upgrade_monthly')}</span>
 					</div>
 				</div>
 				<div className="row align-top align-center">
@@ -632,7 +632,7 @@ const UpgradePlanView = (props) => {
 				</div>
 				<div className="grid-container">
 					<div className="row align-center">
-						<div className="shrink columns">
+						<div className="shrink table-container">
 							<table className="unstriped">
 								<tbody>
 									<tr className="gray">

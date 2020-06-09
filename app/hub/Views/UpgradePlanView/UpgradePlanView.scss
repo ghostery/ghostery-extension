@@ -16,9 +16,6 @@ $price-gold: #b8860b;
 
 .font-size-36 {
 	font-size: rem-calc(36);
-	@include breakpoint(medium down) {
-		font-size: rem-calc(24);
-	}
 }
 .font-size-12 {
 	font-size: rem-calc(12);
@@ -35,6 +32,9 @@ section.home-template .section.section-pricing {
 		font-size: rem-calc(24);
 		font-family: Roboto;
 		font-stretch: condensed;
+		@include breakpoint(medium down) {
+			margin: 40px auto 22px auto;
+		}
 	}
 	.toggle-switch {
 		span {
@@ -57,6 +57,9 @@ section.home-template .section.section-pricing {
 	.tabs-content {
 		border: none;
 		background-color: $white;
+		@include breakpoint(medium down) {
+			margin-top: 32px;
+		}
 	}
 
 	.tabs-title {
@@ -73,7 +76,6 @@ section.home-template .section.section-pricing {
 		}
 		&-gold {
 			border-right: 2px solid #6a6a6a;
-			// background-image: linear-gradient(112deg, #b8860b, #e8cc89);
 			&.is-active {
 				background-image: linear-gradient(112deg, #b8860b, #e8cc89);
 				color: #FFF;
@@ -84,7 +86,6 @@ section.home-template .section.section-pricing {
 			}
 		}
 		&-purple {
-				// background-image: linear-gradient(112deg, #5c218b, #00aef0);
 			&.is-active {
 				background-image: linear-gradient(112deg, #5c218b, #00aef0);
 				color: #FFF;
@@ -118,6 +119,7 @@ section.home-template .section.section-pricing {
 		@include breakpoint(medium down) {
 			margin-bottom: rem-calc(10);
 			margin-top: rem-calc(40);
+			margin: auto;
 		}
 		li {
 			width: 120px;
@@ -241,6 +243,11 @@ section.home-template .section.section-pricing {
 		}
 		p {
 			margin-bottom: 0;
+			@include breakpoint(medium down) {
+				&.sub-text:first-child {
+					margin-top: 4px;
+				}
+			}
 			&.sub-text {
 				font-weight: 500;
 			}
@@ -255,7 +262,7 @@ section.home-template .section.section-pricing {
 		}
 	}
 	.card {
-		height: 536px;
+		height: 482px;
 		box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.5);
 		margin-bottom: rem-calc(40);
 		width: 250px;
@@ -265,13 +272,25 @@ section.home-template .section.section-pricing {
 		padding-top: rem-calc(3);
 		padding-bottom: rem-calc(40);
 
+		&.basic {
+			height: 498px;
+			@include breakpoint(small down) {
+				height: 425px;
+			}
+		}
+		&.plus {
+			height: 498px;
+		}
+		&.premium {
+			height: 526px;
+		}
 		h2 {
 			color: $tundora;
 			font-family: "Roboto Condensed";
 			font-size: 18px;
 			font-weight: 400;
-			margin-top: rem-calc(30);
-			margin-bottom: rem-calc(15);
+			margin-top: 22px;
+			margin-bottom: 6px;
 		}
 		&-image-top {
 			margin-top: -76px;
@@ -284,7 +303,7 @@ section.home-template .section.section-pricing {
 			display: flex;
 			align-items: center;
 			font-size: rem-calc(12);
-			margin-bottom: rem-calc(15);
+			margin-bottom: 8px;
 			text-align: left;
 			padding-left: rem-calc(40);
 			img {
@@ -299,6 +318,9 @@ section.home-template .section.section-pricing {
 			display: flex;
 			justify-content: center;
 			align-items: center;
+			@include breakpoint(small down) {
+				background-color: #FFF;
+			}
 			.ghostery-free-image {
 				width: 55px;
 				height: 65px;
@@ -312,6 +334,10 @@ section.home-template .section.section-pricing {
 				width: 250px;
 				height: 85px;
 				background-image: linear-gradient(to right, rgba(240,174,133,.25), rgba(241,216,158,.25));
+				@include breakpoint(small down) {
+					background-image: none;
+					background-color: #FFF;
+				}
 			.ghostery-plus-image {
 				margin: auto;
 				width: 225px;
@@ -328,13 +354,16 @@ section.home-template .section.section-pricing {
 			margin-left: 9px;
 			width: 233px;
 			height: 161px;
-			background-image: url('/app/images/hub/upgrade/ghostery_premium_card.svg')
+			background-image: url('/app/images/hub/upgrade/ghostery_premium_card.svg');
 		}
 		.ghostery-premium-image-background {
 			margin-top: -3px;
 			width: 250px;
 			height: 85px;
 			background-image: linear-gradient(to right, rgba(113,1,116,.25), rgba(90,37,142,.25) 18%, rgba(42,110,194,.25) 57%, rgba(12,156,227,.25) 86%, rgba(0,174,240,.25));
+			@include breakpoint(small down) {
+				background-image: none;
+			}
 		}
 		.button {
 			margin-top: rem-calc(10);
@@ -346,6 +375,9 @@ section.home-template .section.section-pricing {
 			&.already-protected {
 				background-color: $blue-alt;
 				font-weight: 600;
+				@include breakpoint(medium down) {
+					margin-top: 45px;
+				}
 			}
 		}
 		.card-sub-header {
@@ -385,18 +417,22 @@ section.home-template .section.section-pricing {
 				padding-bottom: rem-calc(15);
 			}
 		}
-		p {
-			font-size: rem-calc(12);
-		}
 		.price {
 			min-height: auto;
 			font-size: rem-calc(12);
 		}
 		.toggle-switch {
-			margin-bottom: rem-calc(50);
+			margin-bottom: 20px;
+			.toggle-switch-row {
+				margin-top: 22px;
+				&.mobile-switch {
+					margin-top: 0;
+				}
+			}
 		}
 		.protection-description {
 			font-weight: bold;
+			margin-bottom: 0;
 			&.blue {
 				color: $price-blue;
 			}
@@ -421,7 +457,7 @@ section.home-template .section.section-pricing {
 			}
 		}
 		.table-header {
-			margin-top: rem-calc(30);
+			margin-top: rem-calc(20);
 			font-size: rem-calc(18);
 		}
 
@@ -439,8 +475,22 @@ section.home-template .section.section-pricing {
 		}
 		.footer-buttons {
 			.button {
-				width: 140px;
+				width: 410px;
 				margin-top: rem-calc(25);
+			}
+		}
+		&.comparison-table {
+			tbody > tr.gray {
+				background-color: #F7F7F7;
+			}
+		}
+		tbody > tr:nth-child(2n) {
+			border-bottom: 1px solid #b6b6b6;
+		}
+		.table-container {
+			flex: 0 0 auto;
+			@include breakpoint(small down) {
+				max-width: 100%;
 			}
 		}
 	}
@@ -494,7 +544,7 @@ section.home-template .section.section-pricing {
 		padding-bottom: rem-calc(100);
 		margin-top: rem-calc(40);
 		@include breakpoint(medium down) {
-			margin-top: rem-calc(40);
+			margin-top: 0;
 			padding-top: 0;
 			background-color: $white;
 		}
@@ -588,7 +638,7 @@ section.home-template .section.section-pricing {
 			border: none;
 		}
 		tr:last-child > td > a {
-			width: 100%;
+			width: 105%;
 			height: 38px;
 			white-space: nowrap;
 			padding: 0;
