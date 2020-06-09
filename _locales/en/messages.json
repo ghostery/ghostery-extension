@@ -1339,6 +1339,9 @@
 	"hub_upgrade_scroll_down": {
 		"message": "See full list of features"
 	},
+	"hub_upgrade_midnight_note": {
+		"message": "Must have Ghostery Midnight installed"
+	},
 	"hub_upgrade_plus": {
 		"message": "Plus"
 	},

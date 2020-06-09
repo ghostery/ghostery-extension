@@ -1,5 +1,6 @@
 $price-blue: #00AEF0;
 $price-purple: #611b87;
+$price-purple-alt: #720174;
 $price-gold: #b8860b;
 
 .mb-20 {
@@ -420,6 +421,18 @@ section.home-template .section.section-pricing {
 		margin: auto;
 	}
 
+	.key-container {
+		height: 70px;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		.midnight-note {
+			margin-left: 15px;
+			color: $price-purple-alt;
+		}
+	}
+
 	.button-gold {
 		background-image: linear-gradient(105deg, #b8860b 3%, #efd396 100%);
 		border: none;
@@ -431,7 +444,6 @@ section.home-template .section.section-pricing {
 
 	.comparison-table {
 		background-color: $alabaster;
-		padding-top: rem-calc(100);
 		padding-bottom: rem-calc(100);
 		margin-top: rem-calc(40);
 		@include breakpoint(medium down) {

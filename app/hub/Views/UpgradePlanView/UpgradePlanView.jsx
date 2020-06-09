@@ -55,10 +55,12 @@ const UpgradePlanView = (props) => {
 		'is-active': protection_level === PREMIUM
 	});
 
+	// Clicking arrow scrolls to table
 	const comparisonTableRef = useRef(null);
 	const scrollToComparisonTable = () => {
 		comparisonTableRef.current.scrollIntoView({ behavior: 'smooth' });
 	};
+	// Clicking arrow scrolls to table for mobile view
 	const mobileComparisonTableRef = useRef(null);
 	const scrollToMobileComparisonTable = () => {
 		mobileComparisonTableRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -198,7 +200,10 @@ const UpgradePlanView = (props) => {
 									<button type="button">{t('panel_detail_premium_title')}</button>
 								</li>
 							</ul>
-
+							<div className="key-container">
+								<span className="premium-sparkle" />
+								<span className="midnight-note">{`- ${t('hub_upgrade_midnight_note')}`}</span>
+							</div>
 							<table>
 								<thead>
 									<tr>
