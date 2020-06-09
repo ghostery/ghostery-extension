@@ -17,26 +17,28 @@ import getUrlFromTrackerId from '../../utils/tracker-info';
 
 export default class TrackerItem extends React.Component {
 	get trackerSelectStatus() {
+		const { type, tracker } = this.props;
+		const { siteProps } = this.context;
 		// Only for site trackers
-		if (this.props.type === 'site-trackers') {
-			if (this.context.siteProps.isTrusted) {
+		if (type === 'site-trackers') {
+			if (siteProps.isTrusted) {
 				return 'trusted';
 			}
 
-			if (this.context.siteProps.isRestricted) {
+			if (siteProps.isRestricted) {
 				return 'restricted';
 			}
 		}
 
-		if (this.props.tracker.ss_allowed) {
+		if (tracker.ss_allowed) {
 			return 'trusted';
 		}
 
-		if (this.props.tracker.ss_blocked) {
+		if (tracker.ss_blocked) {
 			return 'restricted';
 		}
 
-		if (this.props.tracker.blocked) {
+		if (tracker.blocked) {
 			return 'blocked';
 		}
 
@@ -44,7 +46,8 @@ export default class TrackerItem extends React.Component {
 	}
 
 	get showMenu() {
-		return this.props.showMenu;
+		const { showMenu } = this.props;
+		return showMenu;
 	}
 
 	get disabledStatus() {
@@ -52,100 +55,115 @@ export default class TrackerItem extends React.Component {
 	}
 
 	clickButtonTrust = () => {
-		const ss_allowed = !this.props.tracker.ss_allowed;
+		const {
+			tracker, categoryId, index, toggleMenu
+		} = this.props;
+		const { callGlobalAction } = this.context;
+		const ss_allowed = !tracker.ss_allowed;
 
-		this.context.callGlobalAction({
+		callGlobalAction({
 			actionName: 'trustRestrictBlockSiteTracker',
 			actionData: {
-				app_id: this.props.tracker.id,
-				cat_id: this.props.categoryId,
+				app_id: tracker.id,
+				cat_id: categoryId,
 				trust: ss_allowed,
 				restrict: false,
-				block: this.props.tracker.blocked, // Keep blocking
+				block: tracker.blocked, // Keep blocking
 			}
 		});
-		this.props.toggleMenu(this.props.index); // Hide menu
+		toggleMenu(index); // Hide menu
 	}
 
 	clickButtonRestrict = () => {
-		const ss_blocked = !this.props.tracker.ss_blocked;
-		this.context.callGlobalAction({
+		const {
+			tracker, categoryId, index, toggleMenu
+		} = this.props;
+		const { callGlobalAction } = this.context;
+		const ss_blocked = !tracker.ss_blocked;
+		callGlobalAction({
 			actionName: 'trustRestrictBlockSiteTracker',
 			actionData: {
-				app_id: this.props.tracker.id,
-				cat_id: this.props.categoryId,
+				app_id: tracker.id,
+				cat_id: categoryId,
 				restrict: ss_blocked,
 				trust: false,
-				block: this.props.tracker.blocked, // Keep blocking
+				block: tracker.blocked, // Keep blocking
 			}
 		});
-		this.props.toggleMenu(this.props.index);
+		toggleMenu(index);
 	}
 
 	clickButtonBlock = (hideMenu = true) => {
 		// onClick={(e) => { e.stopPropagation(); this.clickButtonBlock(false); }}
+		const {
+			tracker, type, categoryId, index, toggleMenu
+		} = this.props;
+		const { callGlobalAction } = this.context;
 		if (this.disabledStatus) {
 			return;
 		}
 
-		const blocked = !this.props.tracker.blocked;
+		const blocked = !tracker.blocked;
 
-		if (this.props.type === 'site-trackers') {
-			this.context.callGlobalAction({
+		if (type === 'site-trackers') {
+			callGlobalAction({
 				actionName: 'trustRestrictBlockSiteTracker',
 				actionData: {
-					app_id: this.props.tracker.id,
-					cat_id: this.props.categoryId,
+					app_id: tracker.id,
+					cat_id: categoryId,
 					block: blocked,
 					trust: false,
 					restrict: false,
 				}
 			});
 		} else {
-			this.context.callGlobalAction({
+			callGlobalAction({
 				actionName: 'blockUnblockGlobalTracker',
 				actionData: {
-					app_id: this.props.tracker.id,
-					cat_id: this.props.categoryId,
+					app_id: tracker.id,
+					cat_id: categoryId,
 					block: blocked,
 				}
 			});
 		}
 
 		if (hideMenu) {
-			this.props.toggleMenu(this.props.index);
+			toggleMenu(index);
 		}
 	}
 
 	openTrackerLink = () => {
-		const url = getUrlFromTrackerId(this.props.tracker.id);
+		const { tracker } = this.props;
+		const url = getUrlFromTrackerId(tracker.id);
 		const win = window.open(url, '_blank');
 		win.focus();
 	}
 
 	toggleMenu = () => {
-		this.props.toggleMenu(this.props.index);
+		const { index, toggleMenu } = this.props;
+		toggleMenu(index);
 	}
 
 	render() {
+		const { tracker, type } = this.props;
 		return (
 			<li>
 				<div className={`tracker ${this.showMenu ? 'show-menu' : ''} ${this.trackerSelectStatus}`}>
 					<button type="button" className="info" aria-label="Info" onClick={this.openTrackerLink} />
 					<div onClick={this.toggleMenu} className="trackerName">
-						<span>{this.props.tracker.name}</span>
+						<span>{tracker.name}</span>
 						<span className="trackerSelect" />
 					</div>
 
-					<div className={`menu ${this.props.type}`}>
+					<div className={`menu ${type}`}>
 						<button type="button" className="trackerOption trust" onClick={this.clickButtonTrust}>
-							{this.props.tracker.ss_allowed ? 'Untrust' : 'Trust'}
+							{tracker.ss_allowed ? 'Untrust' : 'Trust'}
 						</button>
 						<button type="button" className="trackerOption restrict" onClick={this.clickButtonRestrict}>
-							{this.props.tracker.ss_blocked ? 'Unrestrict' : 'Restrict'}
+							{tracker.ss_blocked ? 'Unrestrict' : 'Restrict'}
 						</button>
 						<button type="button" className={`trackerOption block ${this.disabledStatus}`} onClick={this.clickButtonBlock}>
-							{this.props.tracker.blocked ? 'UnBlock' : 'Block'}
+							{tracker.blocked ? 'UnBlock' : 'Block'}
 						</button>
 					</div>
 				</div>

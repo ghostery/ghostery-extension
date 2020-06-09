@@ -15,7 +15,7 @@ import React from 'react';
 import Categories from './Blocking/Categories';
 import BlockingHeader from './Blocking/BlockingHeader';
 import NotScanned from './BuildingBlocks/NotScanned';
-import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
+import DynamicUIPortContext from '../contexts/DynamicUIPortContext';
 import { updateSummaryBlockingCount } from '../utils/blocking';
 
 /**
@@ -26,23 +26,68 @@ import { updateSummaryBlockingCount } from '../utils/blocking';
 class Blocking extends React.Component {
 	static contextType = DynamicUIPortContext;
 
+	/**
+	 *	Refactoring UNSAFE_componentWillMount into Constructor
+	 *	Stats:
+	 *		Constructor runtime before refactor: 0.038ms
+	 *		Constructor + UNSAFE_componentWillMount runtime before refactor: 0.333ms
+	 *		Constructor runtime after refactor: 0.129ms
+	 *
+	 *	Notes:
+	 *		calling buildBlockingClasses and computeSiteNotScanned in the constructor takes 0.018ms.
+	 *
+	 *	Conclusion: Refactor using constructor as the added computation is minimal
+	 */
 	constructor(props) {
 		super(props);
 
-		this.state = {
-			blockingClasses: '',
-			disableBlocking: false,
-		};
-
+		// event bindings
 		this.handlePortMessage = this.handlePortMessage.bind(this);
+
+		const classes = Blocking.buildBlockingClasses(this.props);
+		const disableBlocking = Blocking.computeSiteNotScanned(this.props);
+
+		this.state = {
+			blockingClasses: classes.join(' '),
+			disableBlocking
+		};
 	}
 
 	/**
 	 * Lifecycle event
 	 */
-	UNSAFE_componentWillMount() {
-		this.updateBlockingClasses(this.props);
-		this.updateSiteNotScanned(this.props);
+	static getDerivedStateFromProps(nextProps) {
+		const blockingClasses = Blocking.buildBlockingClasses(nextProps).join(' ');
+		const disableBlocking = Blocking.computeSiteNotScanned(nextProps);
+		return { blockingClasses, disableBlocking };
+	}
+
+	/**
+	* Build dynamic classes on .blocking-trackers. Return classes
+	* @param  {Object} props
+	*/
+	static buildBlockingClasses(props) {
+		const classes = [];
+
+		classes.push((props.toggle_individual_trackers) ? 'show-individual' : '');
+		classes.push((props.paused_blocking) ? 'paused' : '');
+		classes.push((props.sitePolicy) ? (props.sitePolicy === 2) ? 'trusted' : 'restricted' : '');
+
+		return classes;
+	}
+
+	/**
+	* Compute whether a site cannot be scanned by Ghostery.
+	* @param {Object}	props	nextProps
+	*/
+	static computeSiteNotScanned(props) {
+		const { siteNotScanned, categories } = props;
+		const pageUrl = props.pageUrl || '';
+
+		if (siteNotScanned || !categories || pageUrl.search('http') === -1) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -57,26 +102,21 @@ class Blocking extends React.Component {
 	/**
 	 * Lifecycle event
 	 */
-	UNSAFE_componentWillReceiveProps(nextProps) {
-		this.updateBlockingClasses(nextProps);
-		this.updateSiteNotScanned(nextProps);
-	}
-
-	/**
-	 * Lifecycle event
-	 */
 	componentDidUpdate(prevProps) {
+		const {
+			actions, filter, categories, smartBlock, smartBlockActive
+		} = this.props;
 		// methods here will run after categories is assigned
-		if (prevProps.filter.type !== this.props.filter.type
-			|| prevProps.filter.name !== this.props.filter.name) {
+		if (prevProps.filter.type !== filter.type
+			|| prevProps.filter.name !== filter.name) {
 			this.filterTrackers();
 		}
 
 		// Update the summary blocking count whenever the blocking component updated.
 		// This will also show pending blocking changes if the panel is re-opened
 		// before a page refresh
-		const smartBlock = this.props.smartBlockActive && this.props.smartBlock || { blocked: {}, unblocked: {} };
-		updateSummaryBlockingCount(this.props.categories, smartBlock, this.props.actions.updateTrackerCounts);
+		const computedSmartBlock = (smartBlockActive && smartBlock) || { blocked: {}, unblocked: {} };
+		updateSummaryBlockingCount(categories, computedSmartBlock, actions.updateTrackerCounts);
 	}
 
 	/**
@@ -92,29 +132,30 @@ class Blocking extends React.Component {
 	* @param  {string} filterName
 	*/
 	setShow(filterName) {
-		const updated_categories = JSON.parse(JSON.stringify(this.props.categories)); // deep clone
-		const updatedUnknownCategory = JSON.parse(JSON.stringify(this.props.unknownCategory)); // deep clone
+		const { actions, categories, unknownCategory } = this.props;
+		const updated_categories = JSON.parse(JSON.stringify(categories)); // deep clone
+		const updatedUnknownCategory = JSON.parse(JSON.stringify(unknownCategory)); // deep clone
 
-		updated_categories.forEach((category) => {
+		updated_categories.forEach((categoryEl) => {
 			let count = 0;
 			let show = true;
 
 			// filter by donut wheel categories
-			if (filterName !== 'all' && filterName !== category.id) {
+			if (filterName !== 'all' && filterName !== categoryEl.id) {
 				show = false;
 			}
 
-			category.trackers.forEach((tracker) => {
-				tracker.shouldShow = show;
+			categoryEl.trackers.forEach((trackerEl) => {
+				trackerEl.shouldShow = show;
 				count++;
 			});
 
-			category.num_shown = (show) ? count : 0;
+			categoryEl.num_shown = (show) ? count : 0;
 		});
 
 		updatedUnknownCategory.hide = !(filterName === 'all' || filterName === 'unknown');
-		this.props.actions.updateCategories(updated_categories);
-		this.props.actions.updateUnknownCategoryHide(updatedUnknownCategory);
+		actions.updateCategories(updated_categories);
+		actions.updateUnknownCategoryHide(updatedUnknownCategory);
 	}
 
 	/**
@@ -122,23 +163,24 @@ class Blocking extends React.Component {
 	* those that are blocked. Trigger action.
 	*/
 	setBlockedShow() {
-		const updated_categories = JSON.parse(JSON.stringify(this.props.categories)); // deep clone
+		const { actions, categories, smartBlockActive } = this.props;
+		const updated_categories = JSON.parse(JSON.stringify(categories)); // deep clone
 
-		updated_categories.forEach((category) => {
+		updated_categories.forEach((categoryEl) => {
 			let count = 0;
-			category.trackers.forEach((tracker) => {
-				const isSbBlocked = this.props.smartBlockActive && tracker.warningSmartBlock;
-				if ((tracker.blocked && !tracker.ss_allowed) || isSbBlocked || tracker.ss_blocked) {
-					tracker.shouldShow = true;
+			categoryEl.trackers.forEach((trackerEl) => {
+				const isSbBlocked = smartBlockActive && trackerEl.warningSmartBlock;
+				if ((trackerEl.blocked && !trackerEl.ss_allowed) || isSbBlocked || trackerEl.ss_blocked) {
+					trackerEl.shouldShow = true;
 					count++;
 				} else {
-					tracker.shouldShow = false;
+					trackerEl.shouldShow = false;
 				}
 			});
-			category.num_shown = count;
+			categoryEl.num_shown = count;
 		});
 
-		this.props.actions.updateCategories(updated_categories);
+		actions.updateCategories(updated_categories);
 	}
 
 	/**
@@ -146,23 +188,24 @@ class Blocking extends React.Component {
 	* those that have warnings. Trigger action.
 	*/
 	setWarningShow() {
-		const updated_categories = JSON.parse(JSON.stringify(this.props.categories)); // deep clone
+		const { actions, categories } = this.props;
+		const updated_categories = JSON.parse(JSON.stringify(categories)); // deep clone
 
-		updated_categories.forEach((category) => {
+		updated_categories.forEach((categoryEl) => {
 			let count = 0;
-			category.trackers.forEach((tracker) => {
-				if (tracker.warningCompatibility || tracker.warningInsecure || tracker.warningSlow) {
-					tracker.shouldShow = true;
+			categoryEl.trackers.forEach((trackerEl) => {
+				if (trackerEl.warningCompatibility || trackerEl.warningInsecure || trackerEl.warningSlow) {
+					trackerEl.shouldShow = true;
 					count++;
 				} else {
-					tracker.shouldShow = false;
+					trackerEl.shouldShow = false;
 				}
 			});
 
-			category.num_shown = count;
+			categoryEl.num_shown = count;
 		});
 
-		this.props.actions.updateCategories(updated_categories);
+		actions.updateCategories(updated_categories);
 	}
 
 	/**
@@ -170,23 +213,24 @@ class Blocking extends React.Component {
 	* that have compatibility warnings. Trigger action.
 	*/
 	setWarningCompatibilityShow() {
-		const updated_categories = JSON.parse(JSON.stringify(this.props.categories)); // deep clone
+		const { actions, categories } = this.props;
+		const updated_categories = JSON.parse(JSON.stringify(categories)); // deep clone
 
-		updated_categories.forEach((category) => {
+		updated_categories.forEach((categoryEl) => {
 			let count = 0;
-			category.trackers.forEach((tracker) => {
-				if (tracker.warningCompatibility) {
-					tracker.shouldShow = true;
+			categoryEl.trackers.forEach((trackerEl) => {
+				if (trackerEl.warningCompatibility) {
+					trackerEl.shouldShow = true;
 					count++;
 				} else {
-					tracker.shouldShow = false;
+					trackerEl.shouldShow = false;
 				}
 			});
 
-			category.num_shown = count;
+			categoryEl.num_shown = count;
 		});
 
-		this.props.actions.updateCategories(updated_categories);
+		actions.updateCategories(updated_categories);
 	}
 
 	/**
@@ -194,32 +238,34 @@ class Blocking extends React.Component {
 	 * have slow/insecure warnings. Trigger action.
 	 */
 	setWarningSlowInsecureShow() {
-		const updated_categories = JSON.parse(JSON.stringify(this.props.categories)); // deep clone
+		const { actions, categories } = this.props;
+		const updated_categories = JSON.parse(JSON.stringify(categories)); // deep clone
 
-		updated_categories.forEach((category) => {
+		updated_categories.forEach((categoryEl) => {
 			let count = 0;
-			category.trackers.forEach((tracker) => {
-				if (tracker.warningInsecure || tracker.warningSlow) {
-					tracker.shouldShow = true;
+			categoryEl.trackers.forEach((trackerEl) => {
+				if (trackerEl.warningInsecure || trackerEl.warningSlow) {
+					trackerEl.shouldShow = true;
 					count++;
 				} else {
-					tracker.shouldShow = false;
+					trackerEl.shouldShow = false;
 				}
 			});
 
-			category.num_shown = count;
+			categoryEl.num_shown = count;
 		});
 
-		this.props.actions.updateCategories(updated_categories);
+		actions.updateCategories(updated_categories);
 	}
 
 	/**
 	 * Handles messages from dynamic UI port to background
 	 */
 	handlePortMessage(msg) {
+		const { actions } = this.props;
 		if (msg.to !== 'blocking' || !msg.body) { return; }
 
-		this.props.actions.updateBlockingData(msg.body);
+		actions.updateBlockingData(msg.body);
 	}
 
 	/**
@@ -227,13 +273,13 @@ class Blocking extends React.Component {
 	* @param  {Object} props
 	*/
 	updateBlockingClasses(props) {
-		const classes = [];
+		const { blockingClasses } = this.state;
+		const classes = Blocking.buildBlockingClasses(props);
+		const joinedBlockingClasses = classes.join(' ');
 
-		classes.push((props.toggle_individual_trackers) ? 'show-individual' : '');
-		classes.push((props.paused_blocking) ? 'paused' : '');
-		classes.push((props.sitePolicy) ? (props.sitePolicy === 2) ? 'trusted' : 'restricted' : '');
-
-		this.setState({ blockingClasses: classes.join(' ') });
+		if (blockingClasses !== joinedBlockingClasses) {
+			this.setState({ blockingClasses: joinedBlockingClasses });
+		}
 	}
 
 	/**
@@ -241,13 +287,11 @@ class Blocking extends React.Component {
 	* @param {Object}	props	nextProps
 	*/
 	updateSiteNotScanned(props) {
-		const { siteNotScanned, categories } = props;
-		const pageUrl = props.pageUrl || '';
+		const { disableBlocking } = this.state;
+		const computeDisableBlocking = Blocking.computeSiteNotScanned(props);
 
-		if (siteNotScanned || !categories || pageUrl.search('http') === -1) {
-			this.setState({ disableBlocking: true });
-		} else {
-			this.setState({ disableBlocking: false });
+		if (disableBlocking !== computeDisableBlocking) {
+			this.setState({ disableBlocking: computeDisableBlocking });
 		}
 	}
 

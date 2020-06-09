@@ -1600,7 +1600,7 @@
 		"message": "Résolvez rapidement vos problèmes avec notre service d'assistance prioritaire et ses avantages"
 	},
 	"hub_supporter_manifesto": {
-		"message": "Nous nous efforçons d'offrir à nos utilisateurs les meilleurs services de protection de la vie privée, en toute gratuité. Notre suite d'outils de protection de la vie privée est entièrement gratuite ; vous pouvez dès lors décider de nous soutenir en souscrivant un abonnement mensuel.  Soutenez notre mission en passant à Ghostery Plus — et découvrez de super avantages lors de votre navigation !"
+		"message": "Nous nous efforçons d'offrir à nos utilisateurs les meilleurs services de protection de la vie privée, en toute gratuité. Bien que nous notre extension de navigateur ne soit pas payante, vous pouvez décider de nous soutenir en souscrivant un abonnement mensuel.  Soutenez notre mission en passant à Ghostery Plus — et découvrez de super avantages lors de votre navigation !"
 	},
 	"hub_supporter_feature_theme_description": {
 		"message": "Personnalisez les couleurs de Ghostery pour une nouvelle expérience visuelle ! Lancé à la demande générale. Découvrez notre thème spécial Dark Blue, et bien d'autres à venir."
@@ -1815,7 +1815,7 @@
 		"message": "Thèmes"
 	},
 	"subscribe_pitch": {
-		"message": "Ghostery est entièrement gratuit ; vous pouvez dès lors décider de nous soutenir en souscrivant un abonnement de &#36;2 par mois. Vous bénéficiez en retour de super avantages tels que des thèmes de couleur, un service d'assistance prioritaire, parmi tant d'autres. Soutenez notre mission en vous abonnant !"
+		"message": "Ghostery est entièrement gratuit ; vous pouvez dès lors décider de nous soutenir en souscrivant un abonnement mensuel. Vous bénéficiez en retour de super avantages tels que des thèmes de couleur, un service d'assistance prioritaire, parmi tant d'autres. Soutenez notre mission en vous abonnant !"
 	},
 	"subscribe_pitch_spring": {
 		"message": "Vous appréciez notre travail ? Soutenez-nous et débloquez de nouveaux thèmes de printemps, des informations de suivi personnalisées et d'autres avantages spéciaux en passant à Ghostery Plus !"
@@ -1949,7 +1949,7 @@
 		"message": "Non, conserver l'historique"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "Accédez à votre historique des stats (et autres avantages privilégiés) en passant ) Ghostery Plus pour $SPAN_START$&#36;2/mois.$SPAN_END$$LINK_START$En apprendre davantage$LINK_END$",
+		"message": "Accédez à votre historique des stats (et autres avantages privilégiés) avec Ghostery Plus.$LINK_START$En apprendre davantage$LINK_END$",
 		"placeholders": {
 			"span_start": {
 				"content": "<span>"
@@ -2306,6 +2306,9 @@
 	},
 	"learn_more": {
 		"message": "En savoir plus"
+	},
+	"custom_themes": {
+		"message": "Thèmes personnalisés"
 	},
 	"historical_stats": {
 		"message": "Historique des stats"

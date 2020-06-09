@@ -16,7 +16,7 @@ import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 
 import SetupBlockingViewContainer from './SetupBlockingViewContainer';
-import * as SetupBlockingViewActions from './SetupBlockingViewActions';
+import setBlockingPolicy from './SetupBlockingViewActions';
 import { setSetupStep, setSetupNavigation } from '../../SetupView/SetupViewActions';
 
 /**
@@ -25,7 +25,7 @@ import { setSetupStep, setSetupNavigation } from '../../SetupView/SetupViewActio
  * @return {function}        this function returns a plain object, which will be merged into the component's props
  * @memberof HubContainers
  */
-const mapStateToProps = state => Object.assign({}, state.setup);
+const mapStateToProps = state => ({ ...state.setup });
 
 /**
  * Bind the component's action creators using Redux's bindActionCreators.
@@ -34,10 +34,11 @@ const mapStateToProps = state => Object.assign({}, state.setup);
  * @memberof SetupContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign({}, SetupBlockingViewActions, {
+	actions: bindActionCreators({
+		setBlockingPolicy,
 		setSetupStep,
-		setSetupNavigation,
-	}), dispatch),
+		setSetupNavigation
+	}, dispatch),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SetupBlockingViewContainer));

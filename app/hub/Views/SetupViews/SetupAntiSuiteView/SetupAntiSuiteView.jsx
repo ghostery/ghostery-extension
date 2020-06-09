@@ -21,10 +21,10 @@ import { ToggleSwitch } from '../../../../shared-components';
  * @return {JSX} JSX for rendering the Setup Anti-Suite View of the Hub app
  * @memberof HubComponents
  */
-const SetupAntiSuiteView = props => (
+const SetupAntiSuiteView = ({ features }) => (
 	<div className="row align-center">
 		<div className="columns small-12 medium-10 large-8">
-			{props.features.map((feature) => {
+			{features.map((feature) => {
 				const iconClassNames = ClassNames(feature.id, {
 					SetupAntiSuite__icon: true,
 					active: feature.enabled,

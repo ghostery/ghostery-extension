@@ -19,17 +19,17 @@ import PropTypes from 'prop-types';
  * @return {JSX} JSX for rendering a Toast Message
  * @memberof SharedComponents
  */
-const ToastMessage = props => (
+const ToastMessage = ({ toastText, toastClass, toastExit }) => (
 	<div className="ToastMessage full-width">
-		{props.toastText && (
+		{toastText && (
 			<div className="callout-container">
-				<div className={`callout toast ${props.toastClass}`}>
+				<div className={`callout toast ${toastClass}`}>
 					<div className="flex-container align-center-middle">
 						<div className="callout-text">
-							{props.toastText}
+							{toastText}
 						</div>
-						{props.toastExit && (
-							<div className="ToastMessage__close clickable" onClick={props.toastExit} />
+						{toastExit && (
+							<div className="ToastMessage__close clickable" onClick={toastExit} />
 						)}
 					</div>
 				</div>

@@ -40,7 +40,8 @@ class Account {
 		const opts = {
 			errorHandler: errors => (
 				new Promise((resolve, reject) => {
-					for (const err of errors) {
+					for (let i = 0; i < errors.length; i++) {
+						const err = errors[i];
 						switch (err.code) {
 							case '10020': // token is not valid
 							case '10060': // user id does not match
@@ -158,25 +159,38 @@ class Account {
 			})
 	)
 
+	/**
+	 * @return {array}	All subscriptions the user has, empty if none
+	*/
 	getUserSubscriptionData = () => (
 		this._getUserID()
 			.then(userID => api.get('stripe/customers', userID, 'cards,subscriptions'))
 			.then((res) => {
 				const customer = build(normalize(res), 'customers', res.data.id);
+
 				// TODO temporary fix to handle multiple subscriptions
 				let sub = customer.subscriptions;
 				if (!Array.isArray(sub)) {
 					sub = [sub];
 				}
-				const subPlus = sub.reduce((acc, curr) => {
-					let a = acc;
-					if (curr.productName.includes('Plus')) {
-						a = curr;
+
+				const subscriptions = [];
+
+				const premiumSubscription = sub.find(subscription => subscription.productName.includes('Ghostery Premium'));
+				if (premiumSubscription) {
+					subscriptions.push(premiumSubscription);
+					this._setSubscriptionData(premiumSubscription);
+				}
+
+				const plusSubscription = sub.find(subscription => subscription.productName.includes('Ghostery Plus'));
+				if (plusSubscription) {
+					subscriptions.push(plusSubscription);
+					if (!premiumSubscription) {
+						this._setSubscriptionData(plusSubscription);
 					}
-					return a;
-				}, {});
-				this._setSubscriptionData(subPlus);
-				return customer;
+				}
+
+				return subscriptions;
 			})
 	)
 
@@ -346,10 +360,12 @@ class Account {
 
 		// check scopes
 		if (userScopes.indexOf('god') >= 0) { return true; }
-		for (const sArr of required) {
+		for (let i = 0; i < required.length; i++) {
+			const sArr = required[i];
 			let matches = true;
 			if (sArr.length > 0) {
-				for (const s of sArr) {
+				for (let j = 0; j < sArr.length; j++) {
+					const s = sArr[j];
 					if (userScopes.indexOf(s) === -1) {
 						matches = false;
 						break;
@@ -490,7 +506,7 @@ class Account {
 			conf.account.themeData = {};
 		}
 		const { name } = data;
-		conf.account.themeData[name] = Object.assign({ timestamp: Date.now() }, data);
+		conf.account.themeData[name] = { timestamp: Date.now(), ...data };
 		dispatcher.trigger('conf.save.account');
 	}
 
@@ -521,20 +537,21 @@ class Account {
 	 * @return {Promise} 	user settings json or error
 	 */
 	_setConfUserSettings = (settings) => {
-		log('SET USER SETTINGS', settings);
+		const returnedSettings = { ...settings };
+		log('SET USER SETTINGS', returnedSettings);
 		if (IS_CLIQZ) {
-			settings.enable_human_web = false;
-			settings.enable_offers = false;
-			settings.enable_ad_block = false;
-			settings.enable_anti_tracking = false;
+			returnedSettings.enable_human_web = false;
+			returnedSettings.enable_offers = false;
+			returnedSettings.enable_ad_block = false;
+			returnedSettings.enable_anti_tracking = false;
 		}
 		SYNC_SET.forEach((key) => {
-			if (settings[key] !== undefined &&
-				!isEqual(conf[key], settings[key])) {
-				conf[key] = settings[key];
+			if (returnedSettings[key] !== undefined &&
+				!isEqual(conf[key], returnedSettings[key])) {
+				conf[key] = returnedSettings[key];
 			}
 		});
-		return settings;
+		return returnedSettings;
 	}
 
 	_removeCookies = () => {

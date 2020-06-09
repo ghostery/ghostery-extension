@@ -36,16 +36,21 @@ function _handleManageClick() {
  * It invites user to examine the status of his subscription
  * @memberOf SubscriptionComponents
  */
-const SubscriptionInfo = (props) => {
+const SubscriptionInfo = ({ subscriptionData }) => {
 	const {
-		active, plan_amount, plan_interval, charge_date, plan_ends, loading
-	} = props.subscriptionData;
+		productName, active, plan_amount, plan_interval, charge_date, plan_ends, loading
+	} = subscriptionData;
 	const subscriptionExpiration = (plan_ends > 1) ? t('subscription_days_left', plan_ends.toString()) : t('subscription_one_day_left');
 	return (
 		<div className="content-subscription s-tabs-panel">
 			<div className="row">
 				<div className="columns column-subscription">
-					<h1>{ t('ghostery_plus') }</h1>
+					{productName === 'Ghostery Premium' && (
+						<h1>{ t('panel_detail_premium_title') }</h1>
+					)}
+					{productName === 'Ghostery Plus' && (
+						<h1>{ t('ghostery_plus') }</h1>
+					)}
 					{loading ? (
 						<div className="loading" />
 					) : (
@@ -74,7 +79,7 @@ const SubscriptionInfo = (props) => {
 									</div>
 									<div className="list-row">
 										<ul>
-											<li className="list-item">{t('subscription_dark_blue_theme')}</li>
+											<li className="list-item">{t('custom_themes')}</li>
 											<li className="list-item">{t('historical_stats')}</li>
 											<li className="list-item">{t('priority_support')}</li>
 										</ul>

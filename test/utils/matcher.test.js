@@ -19,6 +19,7 @@ describe('src/utils/matcher.js', () => {
 	beforeAll(done => {
 		// Fake the XMLHttpRequest for fetchJson(/daabases/bugs.json)
 		const bugsJson = JSON.stringify({
+			"apps": {},
 			"firstPartyExceptions": {
 				"101": [
 					"google.com/ig"
@@ -32,6 +33,7 @@ describe('src/utils/matcher.js', () => {
 				]
 			},
 			"patterns": {
+				"regex": {},
 				"host": {
 					"com": {
 						"gmodules": {

@@ -23,27 +23,8 @@ export default class Path extends React.Component {
 		this.timer = null;
 	}
 
-	componentDidMount() {
-		const node = this.myRef.current;
-		node.style.setProperty('--stroke-length', `${node.getTotalLength()}`);
-		// Check and call props.handler() if the animationEnd event doesn't get fired somehow
-		this.timer = setInterval(() => {
-			clearInterval(this.timer); // Run this only once
-			this.props.handler();
-		}, INTERVAL);
-	}
-
-	componentWillUnmount() {
-		clearInterval(this.timer);
-	}
-
-	onAnimationEndHandler = () => {
-		clearInterval(this.timer);
-		this.props.handler();
-	}
-
-	polarToCartesian(centerX, centerY, radius, angleInDegrees) {
-		const angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
+	static polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+		const angleInRadians = (angleInDegrees - 90) * (Math.PI / 180.0);
 
 		return {
 			x: centerX + (radius * Math.cos(angleInRadians)),
@@ -51,9 +32,9 @@ export default class Path extends React.Component {
 		};
 	}
 
-	describeArc(x, y, radius, startAngle, endAngle) {
-		const start = this.polarToCartesian(x, y, radius, startAngle);
-		const end = this.polarToCartesian(x, y, radius, endAngle);
+	static describeArc(x, y, radius, startAngle, endAngle) {
+		const start = Path.polarToCartesian(x, y, radius, startAngle);
+		const end = Path.polarToCartesian(x, y, radius, endAngle);
 
 		const largeArcFlag = endAngle - startAngle <= 180 ? '0' : '1';
 
@@ -65,13 +46,34 @@ export default class Path extends React.Component {
 		return d;
 	}
 
+	componentDidMount() {
+		const node = this.myRef.current;
+		node.style.setProperty('--stroke-length', `${node.getTotalLength()}`);
+		// Check and call props.handler() if the animationEnd event doesn't get fired somehow
+		this.timer = setInterval(() => {
+			clearInterval(this.timer); // Run this only once
+			const { handler } = this.props;
+			handler();
+		}, INTERVAL);
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.timer);
+	}
+
+	onAnimationEndHandler = () => {
+		clearInterval(this.timer);
+		const { handler } = this.props;
+		handler();
+	}
+
 	render() {
 		const { radius, path } = this.props;
 		const { start, category } = path;
 		// Fix error for single path
 		const end = path.end === 360 ? 359.9999 : path.end;
 
-		const d = this.describeArc(0, 0, radius, start, end);
+		const d = Path.describeArc(0, 0, radius, start, end);
 
 		return (
 			<path

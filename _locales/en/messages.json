@@ -704,6 +704,9 @@
 	"panel_detail_menu_premium_title": {
 		"message": "Premium"
 	},
+	"panel_detail_learn_more": {
+	  "message": "Learn More"
+	},
 	"panel_detail_history_title": {
 		"message": "History"
 	},
@@ -1687,7 +1690,7 @@
 		"message": "Resolve issues fast with our Priority help desk service - and more perks to come"
 	},
 	"hub_supporter_manifesto": {
-		"message": "We strive to deliver the best privacy protection services to our users free of cost. While we do not charge for our privacy suite, you may choose to support us through a small monthly subscription. Join us in our mission by upgrading to Ghostery Plus - and unlock cool perks along the way!"
+		"message": "We strive to deliver the best privacy protection services to our users free of cost. While we do not charge for our browser extension, you may choose to support us through a small monthly subscription. Join us in our mission by upgrading to Ghostery Plus - and unlock cool perks along the way!"
 	},
 	"hub_supporter_feature_theme_description": {
 		"message": "Customize the Ghostery colors for a new visual experience! Introduced through popular request. Check out our special Dark Blue theme, and more to come."
@@ -1902,7 +1905,7 @@
 		"message": "Themes"
 	},
 	"subscribe_pitch": {
-		"message": "While Ghostery is free, you can choose to support us through a small subscription of &#36;2 per month in exchange for cool perks, such as color themes, priority help service, and more. Join our mission and subscribe!"
+		"message": "While Ghostery is free, you can choose to support us through a small monthly subscription in exchange for special perks like color themes, personal tracking statistics, and more. Join our mission and subscribe!"
 	},
 	"subscribe_pitch_spring": {
 		"message": "Like what we do? Support us and unlock new spring themes, personal tracking insights, and other special perks by upgrading to Ghostery Plus!"
@@ -2036,7 +2039,7 @@
 		"message": "No, Keep History"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "Unlock your historical stats (and other cool perks) by upgrading to Ghostery Plus for $SPAN_START$&#36;2/month.$SPAN_END$$LINK_START$Learn More$LINK_END$",
+		"message": "Unlock your historical stats (and other cool perks) by upgrading to Ghostery Plus.$LINK_START$Learn More$LINK_END$",
 		"placeholders": {
 			"span_start": {
 				"content": "<span>"
@@ -2399,6 +2402,9 @@
 	},
 	"learn_more": {
 		"message": "Learn More"
+	},
+	"custom_themes": {
+		"message": "Custom Themes"
 	},
 	"historical_stats": {
 		"message": "Historical Stats"

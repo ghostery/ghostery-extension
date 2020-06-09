@@ -61,7 +61,7 @@ class Api {
 			}));
 	}
 
-	_processResponse(res) {
+	static _processResponse(res) {
 		return new Promise((resolve, reject) => {
 			const { status } = res;
 			if (status === 204) {
@@ -95,7 +95,7 @@ class Api {
 	_sendAuthenticatedRequest(method, path, body) {
 		return new Promise((resolve, reject) => {
 			this._sendReq(method, path, body)
-				.then(this._processResponse)
+				.then(Api._processResponse)
 				.then(dataFirstTry => resolve(dataFirstTry))
 				.catch((data) => {
 					let shouldRefresh = false;
@@ -122,7 +122,7 @@ class Api {
 									)).catch(err => reject(err));
 								}
 								this._sendReq(method, path, body)
-									.then(this._processResponse)
+									.then(Api._processResponse)
 									.then(dataSecondTry => resolve(dataSecondTry))
 									.catch((data3) => {
 										this._errorHandler(data3.errors)
@@ -154,17 +154,17 @@ class Api {
 
 	get = (type, id, include = '') => {
 		if (!id) { return Promise.reject(new Error('id is missing')); }
-		return this._sendAuthenticatedRequest('GET', `/api/v2/${type}/${id}?${include ? `include=${include}` : ''}`);
+		return this._sendAuthenticatedRequest('GET', `/api/v2.1.0/${type}/${id}?${include ? `include=${include}` : ''}`);
 	}
 
-	save = (type, data) => this._sendAuthenticatedRequest('POST', `/api/v2/${type}/`, data)
+	save = (type, data) => this._sendAuthenticatedRequest('POST', `/api/v2.1.0/${type}/`, data)
 
 	update = (type, data) => {
 		// TODO check for data.id and fail
-		this._sendAuthenticatedRequest('PATCH', `/api/v2/${type}/${data.id}`, { data });
+		this._sendAuthenticatedRequest('PATCH', `/api/v2.1.0/${type}/${data.id}`, { data });
 	}
 
-	remove = (type, id) => this._sendAuthenticatedRequest('DELETE', `/api/v2/${type}/${id}`)
+	remove = (type, id) => this._sendAuthenticatedRequest('DELETE', `/api/v2.1.0/${type}/${id}`)
 }
 
 export default Api;

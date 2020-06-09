@@ -18,15 +18,15 @@ import { Link } from 'react-router-dom';
  * in place of Sign In view on successful signing.
  * @memberof PanelClasses
  */
-const AccountSuccess = (props) => ( // eslint-disable-line arrow-parens
+const AccountSuccess = ({ email, is_expert }) => (
 	<div id="signin-success-panel">
 		<div className="row align-center">
 			<div className="small-7 columns text-center">
 				<h3>{ t('panel_signin_success_title') }</h3>
 				<div className="big-ghosty" />
 				<p className="small-and-pale">{ t('panel_signin_success') }</p>
-				<h3 className="signin-success-email">{ props.email }</h3>
-				<Link to={(props.is_expert ? '/detail' : '/')} id="view-trackers-button" className="button">
+				<h3 className="signin-success-email">{ email }</h3>
+				<Link to={(is_expert ? '/detail' : '/')} id="view-trackers-button" className="button">
 					{ t('panel_view_trackers') }
 				</Link>
 			</div>

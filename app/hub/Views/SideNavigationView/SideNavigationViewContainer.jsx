@@ -33,11 +33,12 @@ class SideNavigationViewContainer extends Component {
 	* Function to handle clicking Log Out
 	*/
 	_handleLogoutClick = () => {
-		this.props.actions.setToast({
+		const { actions } = this.props;
+		actions.setToast({
 			toastMessage: '',
 			toastClass: '',
 		});
-		this.props.actions.logout();
+		actions.logout();
 	}
 
 	/**
@@ -69,13 +70,14 @@ class SideNavigationViewContainer extends Component {
 				icon: 'profile',
 			},
 		];
-		const childProps = {
-			menuItems,
-			bottomItems,
-			disableNav: disableRegEx.test(location.pathname),
-		};
 
-		return <SideNavigationView {...childProps} />;
+		return (
+			<SideNavigationView
+				menuItems={menuItems}
+				bottomItems={bottomItems}
+				disableNav={disableRegEx.test(location.pathname)}
+			/>
+		);
 	}
 }
 

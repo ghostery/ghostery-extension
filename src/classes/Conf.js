@@ -23,8 +23,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-/* eslint no-param-reassign: 0 */
-
 import { debounce } from 'underscore';
 import confData from './ConfData';
 import { pref, log } from '../utils/common';
@@ -47,12 +45,13 @@ const { IS_CLIQZ } = globals;
 const handler = {
 	/**
 	 * A trap for setting property values
-	 * @param {Object} 	target	the target confData object
-	 * @param {*} 		value 	the value of the confData property being set
+	 * @param {Object} 	confMutable	the target confData object
+	 * @param {*} 		v 		the value of the confData property being set
 	 * @param {string} 	key		the name of the confData property being set
-	 * @return {boolean}        always return true, indicating success.
+	 * @return {boolean}			always return true, indicating success.
 	 */
-	set(target, key, value) {
+	set(confMutable, key, v) {
+		let value = v;
 		log('Setting update value for', key);
 		// Ghostery, while running as an extension in the Cliqz browser
 		// has these functionalities disabled. This is protection from
@@ -75,7 +74,7 @@ const handler = {
 			}
 		}
 
-		target[key] = value;
+		confMutable[key] = value;
 
 		// Don't save to storage while background::init() called.
 		// Rather collect properties and save them once init is over.
@@ -88,7 +87,7 @@ const handler = {
 		// notify specific key subscribers
 		dispatcher.trigger(`conf.save.${key}`, value);
 		// notify catch all settings subscribers
-		if (target.SYNC_SET.has(key) || key === 'bugs_last_checked') {
+		if (confMutable.SYNC_SET.has(key) || key === 'bugs_last_checked') {
 			dispatcher.trigger('conf.changed.settings', key);
 		}
 

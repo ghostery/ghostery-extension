@@ -36,6 +36,7 @@ describe('app/hub/Views/SetupViews/SetupBlockingView component', () => {
 					},
 				],
 				handleSelection: () => {},
+				handleCustomClick: () => {},
 			};
 
 			const component = renderer.create(
@@ -51,6 +52,7 @@ describe('app/hub/Views/SetupViews/SetupBlockingView component', () => {
 				blockingPolicy: 'test',
 				choices: [],
 				handleSelection: () => {},
+				handleCustomClick: () => {},
 			};
 
 			const component = renderer.create(
@@ -79,6 +81,7 @@ describe('app/hub/Views/SetupViews/SetupBlockingView component', () => {
 					},
 				],
 				handleSelection: () => {},
+				handleCustomClick: () => {},
 			};
 
 			const component = shallow(<SetupBlockingView {...initialState} />);
@@ -94,6 +97,7 @@ describe('app/hub/Views/SetupViews/SetupBlockingView component', () => {
 				blockingPolicy: 'test',
 				choices: [],
 				handleSelection: () => {},
+				handleCustomClick: () => {},
 			};
 
 			const component = shallow(<SetupBlockingView {...initialState} />);

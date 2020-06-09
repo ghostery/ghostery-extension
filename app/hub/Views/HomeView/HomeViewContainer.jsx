@@ -19,9 +19,6 @@ import PromoModal from '../../../shared-components/PromoModal';
 import { sendMessage } from '../../utils';
 import globals from '../../../../src/classes/Globals';
 
-const DOMAIN = globals.DEBUG ? 'ghosterystage' : 'ghostery';
-const PREMIUM = 'premium';
-
 /**
  * @class Implement the Home View for the Ghostery Hub
  * @extends Component
@@ -56,98 +53,32 @@ class HomeViewContainer extends Component {
 	 * Function to handle toggling Metrics Opt-In
 	 */
 	_handleToggleMetrics = () => {
-		const enable_metrics = !this.props.home.enable_metrics;
-		this.props.actions.setMetrics({ enable_metrics });
-	}
-
-	/**
-	 * Handle clicks on premium promo modal button
-	 * @param type		'basic' (default), 'plus', or 'premium'
-	 * @private
-	 */
-	_handlePremiumPromoModalClick = (type = 'basic') => {
-		// GH-1777
-		// we want to show the promo modal exactly once per Hub visit
-		this.props.actions.markPremiumPromoModalShown();
-
-		sendMessage('SET_PREMIUM_PROMO_MODAL_SEEN', {});
-
-		switch (type) {
-			case 'plus':
-				window.open(`https://checkout.${DOMAIN}.com/plus?utm_source=gbe&utm_campaign=intro_hub`, '_blank');
-				break;
-			case 'premium':
-				window.open('https://ghostery.com/thanks-for-downloading-midnight?utm_source=gbe&utm_campaign=intro_hub', '_blank');
-				break;
-			case 'basic':
-			default:
-				break;
-		}
-	}
-
-	/**
-	 * @private
-	 * Function to handle clicks on "No thanks, continue with basic" in Premium promo modal
-	 */
-	_handleKeepBasicClick = () => { this._handlePremiumPromoModalClick(); }
-
-	/**
-	 * @private
-	 * Function to handle clicks on the "Get Plus instead" link in the Premium promo modal
-	 */
-	_handleGetPlusClick = () => { this._handlePremiumPromoModalClick('plus'); }
-
-	/**
-	 * @private
-	 * Function to handle clicks on the Midnight download button in the Premium promo modal
-	 */
-	_handleTryMidnightClick = () => { this._handlePremiumPromoModalClick('premium'); }
-
-	/**
-	 * @returns {bool}
-	 * @private
-	 * Is the user a Premium subscriber?
-	 */
-	_premiumSubscriber = () => {
-		const { loggedIn, user } = this.props;
-
-		return loggedIn && (user && user.scopes && user.scopes.includes('subscriptions:premium'));
+		const { actions, home } = this.props;
+		const enable_metrics = !home.enable_metrics;
+		actions.setMetrics({ enable_metrics });
 	}
 
 	_render() {
 		const { justInstalled } = this.state;
 		const { home, user } = this.props;
-		const isPlus = user && user.subscriptionsPlus || false;
+		const isPlus = (user && user.plusAccess) || false;
 		const {
-			premium_promo_modal_shown,
 			setup_complete,
 			tutorial_complete,
 			enable_metrics,
 		} = home;
-		const childProps = {
-			justInstalled,
-			setup_complete,
-			tutorial_complete,
-			enable_metrics,
-			changeMetrics: this._handleToggleMetrics,
-			email: user ? user.email : '',
-			isPlus,
-		};
-
-		const showPromoModal = !premium_promo_modal_shown && !this._premiumSubscriber();
 
 		return (
 			<div className="full-height">
-				{/* <PromoModal
-					type={PREMIUM}
-					show={showPromoModal}
+				<HomeView
+					justInstalled={justInstalled}
+					setup_complete={setup_complete}
+					tutorial_complete={tutorial_complete}
+					enable_metrics={enable_metrics}
+					changeMetrics={this._handleToggleMetrics}
+					email={user ? user.email : ''}
 					isPlus={isPlus}
-					location="hub"
-					handleKeepBasicClick={this._handleKeepBasicClick}
-					handleGetPlusClick={this._handleGetPlusClick}
-					handleTryMidnightClick={this._handleTryMidnightClick}
-				/> */}
-				<HomeView {...childProps} />
+				/>
 			</div>
 		);
 	}
@@ -174,7 +105,7 @@ HomeViewContainer.propTypes = {
 	}),
 	user: PropTypes.shape({
 		email: PropTypes.string,
-		subscriptionsPlus: PropTypes.bool,
+		plusAccess: PropTypes.bool,
 	}),
 	actions: PropTypes.shape({
 		getHomeProps: PropTypes.func.isRequired,
@@ -194,7 +125,7 @@ HomeViewContainer.defaultProps = {
 	},
 	user: {
 		email: '',
-		subscriptionsPlus: false,
+		plusAccess: false,
 	},
 };
 

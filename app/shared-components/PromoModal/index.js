@@ -11,6 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import PromoModal from './PromoModal';
+import PromoModalContainer from './PromoModalContainer';
 
-export default PromoModal;
+export default PromoModalContainer;
