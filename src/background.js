@@ -129,7 +129,7 @@ function setGhosteryDefaultBlocking() {
 		if (bugDb.db.apps.hasOwnProperty(app_id)) {
 			const category = bugDb.db.apps[app_id].cat;
 			if (categoriesBlock.indexOf(category) >= 0 &&
-				!selected_app_ids.hasOwnProperty(app_id)) {
+			!selected_app_ids.hasOwnProperty(app_id)) {
 				selected_app_ids[app_id] = 1;
 			}
 		}
@@ -314,40 +314,6 @@ function handleAccountPages(name, callback) {
 
 		default:
 			return false;
-	}
-}
-
-/**
- * Handle messages sent from app/js/checkout_pages.js content script.
- * @memberOf Background
- *
- * @param  {string} 	name 		message name
- */
-function handleCheckoutPages(name) {
-	switch (name) {
-		case 'checkoutPage.buyInsights':
-		case 'checkoutPage.buyPlus':
-		case 'checkoutPage.buyPremium':
-			account.getUser()
-				.then(account.getUserSubscriptionData)
-				.catch((err) => {
-					log('handleCheckoutPages error', err);
-				});
-			return true;
-		case 'checkoutPage.login':
-			account.getUser()
-				.then(account.getUserSettings)
-				// account.getUserSettings will reject if user email is not validated
-				.catch(err => log('handleCheckoutPages error', err))
-				.then(account.getUserSubscriptionData)
-				// The user may not be a subscriber
-				.catch(err => log('handleCheckoutPages error', err));
-			return true;
-		case 'checkoutPage.register':
-			account.getUser();
-			return true;
-		default:
-			break;
 	}
 }
 
@@ -706,10 +672,6 @@ function onMessageHandler(request, sender, callback) {
 		// Account pages
 		return handleAccountPages(name, callback);
 	}
-	if (origin === 'checkout_pages') {
-		// Checkout pages
-		return handleCheckoutPages(name, callback);
-	}
 	if (origin === 'purplebox') {
 		// Purplebox script events
 		return handlePurplebox(name, message, tab_id, callback);
@@ -781,6 +743,16 @@ function onMessageHandler(request, sender, callback) {
 		callback();
 		return false;
 	}
+	if (name === 'account.getTheme') {
+		if (conf.current_theme !== 'default') {
+			account.getTheme(conf.current_theme).then(() => {
+				callback(conf.account.themeData[conf.current_theme]);
+			});
+			return true;
+		}
+		callback();
+		return false;
+	}
 	if (name === 'getCliqzModuleData') { // panel-android only
 		utils.getActiveTab((tab) => {
 			sendCliqzModuleCounts(tab.id, tab.pageHost, callback);
@@ -792,6 +764,144 @@ function onMessageHandler(request, sender, callback) {
 			const description = (result) ? ((result.company_in_their_own_words) ? result.company_in_their_own_words : ((result.company_description) ? result.company_description : '')) : '';
 			callback(description);
 		});
+		return true;
+	}
+	if (name === 'account.login') {
+		metrics.ping('sign_in');
+		const { email, password } = message;
+		account.login(email, password)
+			.then((response) => {
+				if (!response.hasOwnProperty('errors')) {
+					metrics.ping('sign_in_success');
+				}
+				callback(response);
+			})
+			.catch((err) => {
+				log('LOGIN ERROR', err);
+				callback({ errors: _getJSONAPIErrorsObject(err) });
+			});
+		return true;
+	}
+	if (name === 'account.register') {
+		const {
+			email, confirmEmail, password, firstName, lastName
+		} = message;
+		account.register(email, confirmEmail, password, firstName, lastName)
+			.then((response) => {
+				if (!response.hasOwnProperty('errors')) {
+					metrics.ping('create_account_success');
+				}
+				callback(response);
+			})
+			.catch((err) => {
+				callback({ errors: [err] });
+				log('REGISTER ERROR', err);
+			});
+		return true;
+	}
+	if (name === 'account.logout') {
+		account.logout()
+			.then((response) => {
+				callback(response);
+			})
+			.catch((err) => {
+				log('LOGOUT ERROR', err);
+				callback(err);
+			});
+		return true;
+	}
+	if (name === 'account.getUserSettings') {
+		account.getUserSettings()
+			.then((settings) => {
+				callback(settings);
+			})
+			.catch((err) => {
+				log('Error getting user settings:', err);
+				callback({ errors: _getJSONAPIErrorsObject(err) });
+			});
+		return true;
+	}
+	if (name === 'account.getUserSubscriptionData') {
+		account.getUserSubscriptionData()
+			.then((subscriptions) => {
+				// Return highest tier subscription from array
+				const premiumSubscription = subscriptions.find(subscription => subscription.productName.includes('Ghostery Premium'));
+				if (premiumSubscription) {
+					callback({ subscriptionData: premiumSubscription });
+					return;
+				}
+
+				const plusSubscription = subscriptions.find(subscription => subscription.productName.includes('Ghostery Plus'));
+				if (plusSubscription) {
+					callback({ subscriptionData: plusSubscription });
+					return;
+				}
+
+				callback({});
+			})
+			.catch((err) => {
+				log('Error getting user subscription data:', err);
+				callback({ errors: _getJSONAPIErrorsObject(err) });
+			});
+		return true;
+	}
+	if (name === 'account.openSubscriptionPage') {
+		utils.openNewTab({ url: `${globals.ACCOUNT_BASE_URL}/subscription`, become_active: true });
+		return false;
+	}
+	if (name === 'account.openCheckoutPage') {
+		let url = `${globals.CHECKOUT_BASE_URL}/plus`;
+		const { utm } = message || null;
+		if (utm) {
+			url += `?utm_source=${utm.utm_source}&utm_campaign=${utm.utm_campaign}`;
+		}
+		utils.openNewTab({ url, become_active: true });
+		return false;
+	}
+	if (name === 'account.openSupportPage') {
+		metrics.ping('priority_support_submit');
+		const subscriber = account.hasScopesUnverified(['subscriptions:plus']);
+		const tabUrl = subscriber ? `${globals.ACCOUNT_BASE_URL}/support` : 'https://www.ghostery.com/support/';
+		utils.openNewTab({ url: tabUrl, become_active: true });
+		return false;
+	}
+	if (name === 'account.resetPassword') {
+		const { email } = message;
+		account.resetPassword(email)
+			.then((success) => {
+				callback(success);
+			})
+			.catch((err) => {
+				callback({ errors: _getJSONAPIErrorsObject(err) });
+				log('RESET PASSWORD ERROR', err);
+			});
+		return true;
+	}
+	if (name === 'account.getUser') {
+		account.getUser(message)
+			.then((user) => {
+				if (user) {
+					user.plusAccess = account.hasScopesUnverified(['subscriptions:plus'])
+						|| account.hasScopesUnverified(['subscriptions:premium']);
+					user.premiumAccess = account.hasScopesUnverified(['subscriptions:premium']);
+				}
+				callback({ user });
+			})
+			.catch((err) => {
+				callback({ errors: _getJSONAPIErrorsObject(err) });
+				log('FETCH USER ERROR', err);
+			});
+		return true;
+	}
+	if (name === 'account.sendValidateAccountEmail') {
+		account.sendValidateAccountEmail()
+			.then((success) => {
+				callback(success);
+			})
+			.catch((err) => {
+				callback({ errors: _getJSONAPIErrorsObject(err) });
+				log('sendValidateAccountEmail error', err);
+			});
 		return true;
 	}
 	if (name === 'update_database') {
@@ -870,244 +980,22 @@ function onMessageHandler(request, sender, callback) {
 		});
 		return true;
 	}
-
-	if (name && name.startsWith('account.')) {
-		return handleAccountMessage(name.split('.')[1], message, callback);
+	if (name === 'promoModals.sawPremiumPromo') {
+		promoModals.recordPremiumPromoSighting();
+		return false;
 	}
-
-	if (name && name.startsWith('promoModals.')) {
-		return handlePromoModalMessage(name.split('.')[1]);
+	if (name === 'promoModals.sawInsightsPromo') {
+		promoModals.recordInsightsPromoSighting();
+		return false;
 	}
-}
-
-// TODO add function description
-function hamGetTheme(callback) {
-	if (conf.current_theme !== 'default') {
-		account.getTheme(conf.current_theme)
-			.then(() => {
-				callback(conf.account.themeData[conf.current_theme]);
-			});
-		return true;
+	if (name === 'promoModals.sawPlusPromo') {
+		promoModals.recordPlusPromoSighting();
+		return false;
 	}
-	callback();
-	return false;
-}
-
-// TODO add function description
-function hamGetUser(payload, callback) {
-	account.getUser(payload)
-		.then((user) => {
-			if (user) {
-				user.plusAccess = (
-					account.hasScopesUnverified(['subscriptions:plus'])
-					|| account.hasScopesUnverified(['subscriptions:premium'])
-				);
-				user.premiumAccess = account.hasScopesUnverified(['subscriptions:premium']);
-			}
-			callback({ user });
-		})
-		.catch((err) => {
-			callback({ errors: _getJSONAPIErrorsObject(err) });
-			log('FETCH USER ERROR', err);
-		});
-	return true;
-}
-
-// TODO add function description
-function hamGetUserSettings(callback) {
-	account.getUserSettings()
-		.then((settings) => {
-			callback(settings);
-		})
-		.catch((err) => {
-			log('Error getting user settings:', err);
-			callback({ errors: _getJSONAPIErrorsObject(err) });
-		});
-	return true;
-}
-
-// TODO add function description
-function hamGetUserSubscriptionData(callback) {
-	account.getUserSubscriptionData()
-		.then((subscriptions) => {
-			// Return highest tier subscription from array
-			const premiumSubscription = subscriptions.find(subscription => subscription.productName.includes('Ghostery Premium'));
-			if (premiumSubscription) {
-				callback({ subscriptionData: premiumSubscription });
-				return;
-			}
-
-			const plusSubscription = subscriptions.find(subscription => subscription.productName.includes('Ghostery Plus'));
-			if (plusSubscription) {
-				callback({ subscriptionData: plusSubscription });
-				return;
-			}
-
-			callback({});
-		})
-		.catch((err) => {
-			log('Error getting user subscription data:', err);
-			callback({ errors: _getJSONAPIErrorsObject(err) });
-		});
-	return true;
-}
-
-// TODO add function description
-function hamLogin(msgData, callback) {
-	const { email, password } = msgData;
-
-	account.login(email, password)
-		.then((response) => {
-			if (!response.hasOwnProperty('errors')) {
-				metrics.ping('sign_in_success');
-			}
-			callback(response);
-		})
-		.catch((err) => {
-			log('LOGIN ERROR', err);
-			callback({ errors: _getJSONAPIErrorsObject(err) });
-		});
-
-	metrics.ping('sign_in');
-
-	return true;
-}
-
-// TODO add function description
-function hamLogout(callback) {
-	account.logout()
-		.then((response) => {
-			callback(response);
-		})
-		.catch((err) => {
-			log('LOGOUT ERROR', err);
-			callback(err);
-		});
-	return true;
-}
-
-// TODO add function description
-function hamOpenCheckoutPage(utm) {
-	let url = `${globals.CHECKOUT_BASE_URL}/plus`;
-	if (utm) {
-		const { utm_source, utm_campaign } = utm;
-		url += `?utm_source=${utm_source}&utm_campaign=${utm_campaign}`;
+	if (name === 'promoModals.turnOffPromos') {
+		promoModals.turnOffPromos();
+		return false;
 	}
-	utils.openNewTab({ url, become_active: true });
-	return false;
-}
-
-// TODO add function description
-function hamOpenSubscriptionPage() {
-	utils.openNewTab({ url: `${globals.ACCOUNT_BASE_URL}/subscription`, become_active: true });
-	return false;
-}
-
-// TODO add function description
-function hamOpenSupportPage() {
-	const subscriber = account.hasScopesUnverified(['subscriptions:plus']);
-	const tabUrl = subscriber ? `${globals.ACCOUNT_BASE_URL}/support` : 'https://www.ghostery.com/support/';
-	utils.openNewTab({ url: tabUrl, become_active: true });
-
-	metrics.ping('priority_support_submit');
-
-	return false;
-}
-
-// TODO add function description
-function hamRegister(userDetails, callback) {
-	const {
-		email,
-		confirmEmail,
-		password,
-		firstName,
-		lastName,
-	} = userDetails;
-
-	account.register(email, confirmEmail, password, firstName, lastName)
-		.then((response) => {
-			if (!response.hasOwnProperty('errors')) {
-				metrics.ping('create_account_success');
-			}
-			callback(response);
-		})
-		.catch((err) => {
-			callback({ errors: [err] });
-			log('REGISTER ERROR', err);
-		});
-
-	return true;
-}
-
-// TODO add function description
-function hamResetPassword(email, callback) {
-	// TODO check args
-	account.resetPassword(email)
-		.then((success) => {
-			callback(success);
-		})
-		.catch((err) => {
-			callback({ errors: _getJSONAPIErrorsObject(err) });
-			log('RESET PASSWORD ERROR', err);
-		});
-	return true;
-}
-
-// TODO add function description
-function hamValidateAccountEmail(callback) {
-	account.sendValidateAccountEmail()
-		.then((success) => {
-			callback(success);
-		})
-		.catch((err) => {
-			callback({ errors: _getJSONAPIErrorsObject(err) });
-			log('sendValidateAccountEmail error', err);
-		});
-
-	return true;
-}
-
-/**
- * Handle messages related to user accounts
- * @memberOf Background
- *
- * @param  {string}   name	 	the name of the message sent by the calling script
- * @param  {Object}   payload 	the data of the message sent by the calling script
- * @param  {function} callback 	function to call (at most once) when you have a response
- * @return {boolean}            denotes async (true) or sync (false)
- */
-function handleAccountMessage(name, payload, callback) {
-	// TODO	improve arg names : ? msgName, msgBody ?
-	switch (name) {
-		case 'getTheme': return hamGetTheme(callback);
-		case 'getUser': return hamGetUser(payload, callback);
-		case 'getUserSettings': return hamGetUserSettings(callback);
-		case 'getUserSubscriptionData': return hamGetUserSubscriptionData(callback);
-		case 'login': return hamLogin(payload, callback);
-		case 'logout': return hamLogout(callback);
-		case 'openCheckoutPage': return hamOpenCheckoutPage(payload.utm || null);
-		case 'openSubscriptionPage': return hamOpenSubscriptionPage();
-		case 'openSupportPage': return hamOpenSupportPage();
-		case 'register': return hamRegister(payload, callback);
-		case 'resetPassword': return hamResetPassword(payload.email, callback);
-		case 'sendValidateAccountEmail': return hamValidateAccountEmail(callback);
-		default: return false;
-	}
-}
-
-/**
- * Handle messages related to promo modals
- * @memberOf Background
- *
- * @param  {string}   name		the message name
- * @return {boolean}            denotes async (true) or sync (false)
- */
-function handlePromoModalMessage(name) {
-	if (name === 'sawPremiumPromo') promoModals.recordPremiumPromoSighting();
-	else if (name === 'sawInsightsPromo') promoModals.recordInsightsPromoSighting();
-	else if (name === 'sawPlusPromos') promoModals.recordPlusPromoSighting();
-	else if (name === 'turnOffPromos') promoModals.turnOffPromos();
-	return false;
 }
 
 /**
@@ -1220,6 +1108,25 @@ function getAntitrackingTestConfig() {
 }
 
 /**
+ * Set option for Hub promo A/B/C test based
+ * on the results returned from the abtest endpoint.
+ * @memberOf Background
+ *
+ * @return {Object} 	Hub promotion configuration parameters
+ */
+function setupHubPromoABTest() {
+	if (abtest.hasTest('hub_plain')) {
+		conf.hub_promo_variant = 'plain';
+	} else if (abtest.hasTest('hub_midnight')) {
+		conf.hub_promo_variant = 'midnight';
+	} else {
+		conf.hub_promo_variant = 'upgrade';
+	}
+
+	console.error(`conf.hub_promo_version in setupHubPromoABTest: ${conf.hub_promo_variant}`);
+}
+
+/**
  * Adjust antitracking parameters based on the current state
  * of ABTest and availability of Human Web.
  */
@@ -1247,6 +1154,8 @@ function setupABTest() {
 	// 	cliqz.disableModule('search');
 	// 	cliqz.disableModule('overlay');
 	// }
+
+	setupHubPromoABTest();
 }
 
 /**
@@ -1658,12 +1567,6 @@ function initializeGhosteryModules() {
 		setTimeout(() => {
 			metrics.ping('install_complete');
 		}, 300000);
-
-		// open the Ghostery Hub on install with justInstalled query parameter set to true
-		chrome.tabs.create({
-			url: chrome.runtime.getURL('./app/templates/hub.html?justInstalled=true'),
-			active: true
-		});
 	} else {
 		// Record install if the user previously closed the browser before the install ping fired
 		metrics.ping('install');
@@ -1728,17 +1631,25 @@ function initializeGhosteryModules() {
 
 	// Set these tasks to run every hour
 	function scheduledTasks() {
-		// auto-fetch from CMP
-		cmp.fetchCMPData();
+		return new Promise((resolve) => {
+			// auto-fetch from CMP
+			cmp.fetchCMPData();
 
-		if (!IS_CLIQZ) {
-			// auto-fetch human web offer
-			abtest.fetch().then(() => {
-				setupABTest();
-			}).catch(() => {
-				log('Unable to reach abtest server');
-			});
-		}
+			if (!IS_CLIQZ) {
+				// auto-fetch human web offer
+				return (abtest.fetch()
+					.then(() => {
+						setupABTest();
+					})
+					.catch(() => {
+						log('Unable to reach abtest server');
+					})
+					.finally(() => resolve())
+				);
+			}
+
+			resolve();
+		});
 	}
 
 	// Check CMP and ABTest every hour.
@@ -1772,7 +1683,18 @@ function initializeGhosteryModules() {
 		cliqzStartup,
 	]).then(() => {
 		// run scheduledTasks on init
-		scheduledTasks();
+		scheduledTasks().then(() => {
+			console.error('In scheduledTasks .then callback');
+			// open the Ghostery Hub on install with justInstalled query parameter set to true
+			// we need to do this after running scheduledTasks for the first time
+			// because of an A/B test that determines which promo variant is shown in the Hub on install
+			if (globals.JUST_INSTALLED) {
+				chrome.tabs.create({
+					url: chrome.runtime.getURL(`./app/templates/hub.html?justInstalled=true&promoVariant=${conf.hub_promo_variant}`),
+					active: true
+				});
+			}
+		});
 	});
 }
 
