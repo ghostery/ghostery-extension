@@ -378,10 +378,12 @@ section.home-template .section.section-pricing {
 		background-image: url('/app/images/hub/upgrade/x_icon.svg')
 	}
 	.hide-for-large {
-		.card {
-			box-shadow: none;
-			margin-bottom: 0;
-			padding-bottom: rem-calc(15);
+		@media only screen and (max-width: 740px) {
+			.card {
+				box-shadow: none;
+				margin-bottom: 0;
+				padding-bottom: rem-calc(15);
+			}
 		}
 		p {
 			font-size: rem-calc(12);
@@ -392,6 +394,18 @@ section.home-template .section.section-pricing {
 		}
 		.toggle-switch {
 			margin-bottom: rem-calc(50);
+		}
+		.protection-description {
+			font-weight: bold;
+			&.blue {
+				color: $price-blue;
+			}
+			&.yellow {
+				color: $price-gold;
+			}
+			&.purple {
+				color: $price-purple;
+			}
 		}
 		.protection-header {
 			margin-bottom: rem-calc(15);
@@ -444,7 +458,6 @@ section.home-template .section.section-pricing {
 		}
 	}
 	.module-editor .arrow {
-		// background-image: url('../images/campaigns/tier-pricing/arrow_purple.png');
 		background-image: url('/app/images/hub/upgrade/arrow-down.svg');
 		width: 30px;
 		height: 16px;
@@ -458,6 +471,9 @@ section.home-template .section.section-pricing {
 		display: flex;
 		align-items: center;
 		justify-content: flex-end;
+		@include breakpoint(medium down) {
+			justify-content: center;
+		}
 		.midnight-note {
 			margin-left: 15px;
 			color: $price-purple-alt;
@@ -521,7 +537,8 @@ section.home-template .section.section-pricing {
 			font-weight:bold;
 		}
 		table {
-			border-collapse:collapse; table-layout:fixed;
+			border-collapse:collapse;
+			table-layout:fixed;
 			width:100%;
 			max-width: 750px;
 		}
@@ -677,7 +694,6 @@ section.home-template .section.section-pricing {
 			}
 		}
 	}
-
 
 	.card-top-color {
 		// position: absolute;
