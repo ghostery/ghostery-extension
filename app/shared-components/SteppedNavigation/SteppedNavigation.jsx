@@ -32,7 +32,6 @@ const SteppedNavigation = (props) => {
 		textNext,
 		textDone,
 	} = props;
-	console.log('hrefDone here:', hrefDone);
 
 	const circles = [];
 	for (let i = 1; i <= totalSteps; i++) {

@@ -85,7 +85,6 @@
 
 // Used in Upgrade Plan View
 @function buildCheckIcon($primary-color) {
-	// Not taking primary color for some reason
 	@return url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http://www.w3.org/2000/svg%22%20width%3D%2214%22%20height%3D%2213%22%3E%3Cpath%20fill%3D%22#{_url-friendly-color($primary-color)}%22%20d%3D%22M5.47%2012.45L0%206.98l1.54-1.54%203.71%203.71%207-9.15%201.73%201.32z%22/%3E%3C/svg%3E%0A');
 }
 
