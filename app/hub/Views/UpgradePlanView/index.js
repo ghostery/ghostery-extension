@@ -25,7 +25,7 @@ import * as UpgradePlanViewActions from './UpgradePlanViewActions';
  * @return {function}        this function returns a plain object, which will be merged into the component's props
  * @memberof HubContainers
  */
-const mapStateToProps = state => Object.assign({}, state.upgrade);
+const mapStateToProps = state => ({ ...state.upgrade, ...state.account });
 
 /**
  * Bind the component's action creators using Redux's bindActionCreators.
@@ -34,7 +34,7 @@ const mapStateToProps = state => Object.assign({}, state.upgrade);
  * @memberof SetupContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign({}, UpgradePlanViewActions), dispatch),
+	actions: bindActionCreators({ ...UpgradePlanViewActions }, dispatch),
 });
 
 export const reducer = UpgradePlanViewReducer;

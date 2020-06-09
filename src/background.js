@@ -889,6 +889,8 @@ function onMessageHandler(request, sender, callback) {
 			.then((foundUser) => {
 				const user = { user: { ...foundUser } };
 				if (foundUser) {
+					user.user.plusAccess = account.hasScopesUnverified(['subscriptions:plus'])
+											|| account.hasScopesUnverified(['subscriptions:premium']);
 					user.user.premiumAccess = account.hasScopesUnverified(['subscriptions:premium']);
 				}
 				callback(user);

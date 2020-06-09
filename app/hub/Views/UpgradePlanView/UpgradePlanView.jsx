@@ -15,8 +15,6 @@ import React, { useRef } from 'react';
 import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import globals from '../../../../src/classes/Globals';
-import { ToggleCheckbox } from '../../../shared-components';
 
 /**
  * A React class component for rendering the Home View
@@ -26,7 +24,8 @@ import { ToggleCheckbox } from '../../../shared-components';
 const UpgradePlanView = (props) => {
 	const {
 		protection_level,
-		show_monthly_prices
+		show_monthly_prices,
+		user
 	} = props;
 
 	const {
@@ -35,8 +34,9 @@ const UpgradePlanView = (props) => {
 		setPlusProtection,
 		setPremiumProtection
 	} = props.actions;
-	// console.log('props: ', props);
-	// console.log('props.actions: ', props.actions);
+
+	const isPlus = (user && user.plusAccess) || false;
+	const isPremium = (user && user.premiumAccess) || false;
 
 	const BASIC = 'BASIC';
 	const PLUS = 'PLUS';
@@ -72,6 +72,9 @@ const UpgradePlanView = (props) => {
 		mobileComparisonTableRef.current.scrollIntoView({ behavior: 'smooth' });
 	};
 
+	const plusCheckoutLink = show_monthly_prices ? 'https://checkout.ghostery.com/plus' : 'https://checkout.ghostery.com/plus?interval=year';
+	const premiumCheckoutLink = show_monthly_prices ? 'https://checkout.ghostery.com/en/premium' : 'https://checkout.ghostery.com/en/premium?interval=year';
+
 	return (
 		<section className="pricing-page page-template-page-content-modules">
 			<div className="grid-container show-for-large">
@@ -103,7 +106,9 @@ const UpgradePlanView = (props) => {
 							<div className="price">
 								<p className="price-blue-alt font-size-36">{t('hub_upgrade_plan_free')}</p>
 							</div>
-							<a className="button already-protected" href="" title="Already Protected">{t('hub_upgrade_already_protected')}</a>
+							<NavLink className="button already-protected" to="/home" title="Already Protected">
+								{t('hub_upgrade_already_protected')}
+							</NavLink>
 							<p className="card-sub-header"><strong>{t('hub_upgrade_basic_protection')}</strong></p>
 							<p className="card-sub-copy">
 								<span className="check blue" />
@@ -133,7 +138,15 @@ const UpgradePlanView = (props) => {
 									</React.Fragment>
 								)}
 							</div>
-							<a className="button button-gold" href="" title="Upgrade to Plus">{t('hub_upgrade_to_plus')}</a>
+							{isPlus ? (
+								<NavLink className="button button-gold" to="/home" title="Already Protected">
+									{t('hub_upgrade_already_protected')}
+								</NavLink>
+							) : (
+								<a className="button button-gold" href={plusCheckoutLink} title="Upgrade to Plus">
+									{t('hub_upgrade_to_plus')}
+								</a>
+							)}
 							<p className="card-sub-header"><strong>{t('hub_upgrade_additional_protection')}</strong></p>
 							<p className="card-sub-copy">
 								<span className="check blue" />
@@ -168,9 +181,15 @@ const UpgradePlanView = (props) => {
 									</React.Fragment>
 								)}
 							</div>
-							<a className="button button-purple-blue" href="https://checkout.ghostery.com/en/premium?interval=year" title="Buy Now">
-								{t('hub_upgrade_to_premium')}
-							</a>
+							{isPremium ? (
+								<NavLink className="button button-purple-blue" to="/home" title="Already Protected">
+									{t('hub_upgrade_already_protected')}
+								</NavLink>
+							) : (
+								<a className="button button-purple-blue" href={premiumCheckoutLink} title="Buy Now">
+									{t('hub_upgrade_to_premium')}
+								</a>
+							)}
 							<p className="card-sub-header">
 								<strong>{t('hub_upgrade_maximum_browser_protection')}</strong>
 							</p>
@@ -392,19 +411,31 @@ const UpgradePlanView = (props) => {
 									</tr>
 									<tr>
 										<td />
-										<td className="default"><a className="button button-blue" href="https://signon.ghostery.com/en/register" title="Sign Up">{t('hub_upgrade_already_protected')}</a></td>
+										<td className="default">
+											<NavLink className="button already-protected" to="/home" title="Already Protected">
+												{t('hub_upgrade_already_protected')}
+											</NavLink>
+										</td>
 										<td>
-											{show_monthly_prices ? (
-												<a className="button button-gold" href="https://checkout.ghostery.com/plus" title="Buy Now">{t('hub_upgrade_to_plus')}</a>
+											{isPlus ? (
+												<NavLink className="button button-gold" to="/home" title="Already Protected">
+													{t('hub_upgrade_already_protected')}
+												</NavLink>
 											) : (
-												<a className="button button-gold" href="https://checkout.ghostery.com/plus?interval=year" title="Buy Now">{t('hub_upgrade_to_plus')}</a>
+												<a className="button button-gold" href={plusCheckoutLink} title="Upgrade to Plus">
+													{t('hub_upgrade_to_plus')}
+												</a>
 											)}
 										</td>
 										<td>
-											{show_monthly_prices ? (
-												<a className="button button-purple-blue" href="https://checkout.ghostery.com/en/premium" title="Buy Now">{t('hub_upgrade_to_premium')}</a>
+											{isPremium ? (
+												<NavLink className="button button-purple-blue" to="/home" title="Already Protected">
+													{t('hub_upgrade_already_protected')}
+												</NavLink>
 											) : (
-												<a className="button button-purple-blue" href="https://checkout.ghostery.com/en/premium?interval=year" title="Buy Now">{t('hub_upgrade_to_premium')}</a>
+												<a className="button button-purple-blue" href={premiumCheckoutLink} title="Buy Now">
+													{t('hub_upgrade_to_premium')}
+												</a>
 											)}
 										</td>
 									</tr>
@@ -443,7 +474,9 @@ const UpgradePlanView = (props) => {
 								<div className="price">
 									<p className="price-blue-alt font-size-36">{t('hub_upgrade_plan_free')}</p>
 								</div>
-								<a className="button already-protected" href="" title="Already Protected">{t('hub_upgrade_already_protected')}</a>
+								<NavLink className="button already-protected" to="/home" title="Already Protected">
+									{t('hub_upgrade_already_protected')}
+								</NavLink>
 								<p className="card-sub-header"><strong>{t('hub_upgrade_basic_protection')}</strong></p>
 								<p className="card-sub-copy">
 									<span className="check blue" />
@@ -485,7 +518,15 @@ const UpgradePlanView = (props) => {
 										<span className={monthlyToggleLabel}>{t('hub_upgrade_monthly')}</span>
 									</div>
 								</div>
-								<a className="button button-gold" href="" title="Upgrade to Plus">{t('hub_upgrade_to_plus')}</a>
+								{isPlus ? (
+									<NavLink className="button button-gold" to="/home" title="Already Protected">
+										{t('hub_upgrade_already_protected')}
+									</NavLink>
+								) : (
+									<a className="button button-gold" href={plusCheckoutLink} title="Upgrade to Plus">
+										{t('hub_upgrade_to_plus')}
+									</a>
+								)}
 								<p className="card-sub-header"><strong>{t('hub_upgrade_additional_protection')}</strong></p>
 								<p className="card-sub-copy">
 									<span className="check blue" />
@@ -533,9 +574,15 @@ const UpgradePlanView = (props) => {
 											<span className={monthlyToggleLabel}>{t('hub_upgrade_monthly')}</span>
 										</div>
 									</div>
-									<a className="button button-purple-blue" href="https://checkout.ghostery.com/en/premium?interval=year" title="Buy Now">
-										{t('hub_upgrade_to_premium')}
-									</a>
+									{isPremium ? (
+										<NavLink className="button button-purple-blue" to="/home" title="Already Protected">
+											{t('hub_upgrade_already_protected')}
+										</NavLink>
+									) : (
+										<a className="button button-purple-blue" href={premiumCheckoutLink} title="Buy Now">
+											{t('hub_upgrade_to_premium')}
+										</a>
+									)}
 									<p className="card-sub-header">
 										<strong>{t('hub_upgrade_maximum_browser_protection')}</strong>
 									</p>
@@ -848,24 +895,34 @@ const UpgradePlanView = (props) => {
 					<div className="row align-center footer-buttons">
 						<div className="small-12 text-center columns">
 							<span className="col-free">
-								<a className="button button-blue" href="https://signon.ghostery.com/en/register" title="Choose Free">{t('hub_upgrade_already_protected')}</a>
+								<NavLink className="button already-protected" to="/home" title="Already Protected">
+									{t('hub_upgrade_already_protected')}
+								</NavLink>
 							</span>
 						</div>
 						<div className="small-12 text-center columns">
 							<span className="col-plus">
-								{show_monthly_prices ? (
-									<a className="button button-gold" href="https://checkout.ghostery.com/plus" title="Choose Plus">{t('hub_upgrade_to_plus')}</a>
+								{isPlus ? (
+									<NavLink className="button button-gold" to="/home" title="Already Protected">
+										{t('hub_upgrade_already_protected')}
+									</NavLink>
 								) : (
-									<a className="button button-gold" href="https://checkout.ghostery.com/plus?interval=year" title="Choose Plus">{t('hub_upgrade_to_plus')}</a>
+									<a className="button button-gold" href={plusCheckoutLink} title="Upgrade to Plus">
+										{t('hub_upgrade_to_plus')}
+									</a>
 								)}
 							</span>
 						</div>
 						<div className="small-12 text-center columns">
 							<span className="col-premium">
-								{show_monthly_prices ? (
-									<a className="button button-purple-blue" href="https://checkout.ghostery.com/en/premium" title="Choose Premium">{t('hub_upgrade_to_premium')}</a>
+								{isPremium ? (
+									<NavLink className="button button-purple-blue" to="/home" title="Already Protected">
+										{t('hub_upgrade_already_protected')}
+									</NavLink>
 								) : (
-									<a className="button button-purple-blue" href="https://checkout.ghostery.com/en/premium?interval=year" title="Choose Premium">{t('hub_upgrade_to_premium')}</a>
+									<a className="button button-purple-blue" href={premiumCheckoutLink} title="Buy Now">
+										{t('hub_upgrade_to_premium')}
+									</a>
 								)}
 							</span>
 						</div>
@@ -874,6 +931,32 @@ const UpgradePlanView = (props) => {
 			</div>
 		</section>
 	);
+};
+
+// PropTypes ensure we pass required props of the correct type
+UpgradePlanView.propTypes = {
+	protection_level: PropTypes.string.isRequired,
+	show_monthly_prices: PropTypes.bool.isRequired,
+	user: PropTypes.shape({
+		email: PropTypes.string,
+		plusAccess: PropTypes.bool,
+		premiumAccess: PropTypes.bool,
+	}),
+	actions: PropTypes.shape({
+		toggleMonthlyYearlyPrices: PropTypes.func.isRequired,
+		setBasicProtection: PropTypes.func.isRequired,
+		setPlusProtection: PropTypes.func.isRequired,
+		setPremiumProtection: PropTypes.func.isRequired,
+	}).isRequired,
+};
+
+// Default props used on the Home View
+UpgradePlanView.defaultProps = {
+	user: {
+		email: '',
+		plusAccess: false,
+		premiumAccess: false,
+	},
 };
 
 export default UpgradePlanView;
