@@ -402,6 +402,12 @@ section.home-template .section.section-pricing {
 		&.blue {
 			background-image: buildCheckIcon($price-blue);
 		}
+		&.yellow {
+			background-image: buildCheckIcon($price-gold);
+		}
+		&.purple {
+			background-image: buildCheckIcon($price-purple);
+		}
 	}
 	.x-icon {
 		display: inline-block;

@@ -251,10 +251,10 @@ const UpgradePlanView = (props) => {
 											<span className="check blue" />
 										</td>
 										<td>
-											<span className="check blue" />
+											<span className="check yellow" />
 										</td>
 										<td>
-											<span className="check blue" />
+											<span className="check purple" />
 										</td>
 									</tr>
 									<tr>
@@ -263,10 +263,10 @@ const UpgradePlanView = (props) => {
 											<span className="check blue" />
 										</td>
 										<td>
-											<span className="check blue" />
+											<span className="check yellow" />
 										</td>
 										<td>
-											<span className="check blue" />
+											<span className="check purple" />
 										</td>
 									</tr>
 									<tr>
@@ -275,30 +275,30 @@ const UpgradePlanView = (props) => {
 											<span className="check blue" />
 										</td>
 										<td>
-											<span className="check blue" />
+											<span className="check yellow" />
 										</td>
 										<td>
-											<span className="check blue" />
+											<span className="check purple" />
 										</td>
 									</tr>
 									<tr>
 										<td>{t('hub_upgrade_extension_themes')}</td>
 										<td className="default"><span className="tick" /></td>
 										<td>
-											<span className="check blue" />
+											<span className="check yellow" />
 										</td>
 										<td>
-											<span className="check blue" />
+											<span className="check purple" />
 										</td>
 									</tr>
 									<tr>
 										<td>{t('hub_upgrade_historical_extension_stats')}</td>
 										<td className="default"><span className="tick" /></td>
 										<td>
-											<span className="check blue" />
+											<span className="check yellow" />
 										</td>
 										<td>
-											<span className="check blue" />
+											<span className="check purple" />
 										</td>
 									</tr>
 									<tr>
@@ -310,10 +310,10 @@ const UpgradePlanView = (props) => {
 										</td>
 										<td className="default"><span className="tick" /></td>
 										<td>
-											<span className="check blue" />
+											<span className="check yellow" />
 										</td>
 										<td>
-											<span className="check blue" />
+											<span className="check purple" />
 										</td>
 									</tr>
 									<tr>
@@ -325,10 +325,10 @@ const UpgradePlanView = (props) => {
 										</td>
 										<td className="default"><span className="tick" /></td>
 										<td>
-											<span className="check blue" />
+											<span className="check yellow" />
 										</td>
 										<td>
-											<span className="check blue" />
+											<span className="check purple" />
 										</td>
 									</tr>
 									<tr>
@@ -341,7 +341,7 @@ const UpgradePlanView = (props) => {
 										<td className="default"><span className="tick" /></td>
 										<td><span className="tick" /></td>
 										<td>
-											<span className="check blue" />
+											<span className="check purple" />
 										</td>
 									</tr>
 									<tr>
@@ -354,7 +354,7 @@ const UpgradePlanView = (props) => {
 										<td className="default"><span className="tick" /></td>
 										<td><span className="tick" /></td>
 										<td>
-											<span className="check blue" />
+											<span className="check purple" />
 										</td>
 									</tr>
 									<tr>
@@ -367,7 +367,7 @@ const UpgradePlanView = (props) => {
 										<td className="default"><span className="tick" /></td>
 										<td><span className="tick" /></td>
 										<td>
-											<span className="check blue" />
+											<span className="check purple" />
 										</td>
 									</tr>
 									<tr>
@@ -380,7 +380,7 @@ const UpgradePlanView = (props) => {
 										<td className="default"><span className="tick" /></td>
 										<td><span className="tick" /></td>
 										<td>
-											<span className="check blue" />
+											<span className="check purple" />
 										</td>
 									</tr>
 									<tr>
@@ -393,7 +393,7 @@ const UpgradePlanView = (props) => {
 										<td className="default"><span className="tick" /></td>
 										<td><span className="tick" /></td>
 										<td>
-											<span className="check blue" />
+											<span className="check purple" />
 										</td>
 									</tr>
 									<tr>
@@ -406,7 +406,7 @@ const UpgradePlanView = (props) => {
 										<td className="default"><span className="tick" /></td>
 										<td><span className="tick" /></td>
 										<td>
-											<span className="check blue" />
+											<span className="check purple" />
 										</td>
 									</tr>
 									<tr>
@@ -690,10 +690,10 @@ const UpgradePlanView = (props) => {
 											<span className="check blue" />
 										</td>
 										<td className="col-plus">
-											<span className="check blue" />
+											<span className="check yellow" />
 										</td>
 										<td className="col-premium">
-											<span className="check blue" />
+											<span className="check purple" />
 										</td>
 									</tr>
 									<tr>
@@ -704,10 +704,10 @@ const UpgradePlanView = (props) => {
 											<span className="check blue" />
 										</td>
 										<td className="col-plus">
-											<span className="check blue" />
+											<span className="check yellow" />
 										</td>
 										<td className="col-premium">
-											<span className="check blue" />
+											<span className="check purple" />
 										</td>
 									</tr>
 									<tr className="gray">
@@ -718,10 +718,10 @@ const UpgradePlanView = (props) => {
 											<span className="check blue" />
 										</td>
 										<td className="col-plus">
-											<span className="check blue" />
+											<span className="check yellow" />
 										</td>
 										<td className="col-premium">
-											<span className="check blue" />
+											<span className="check purple" />
 										</td>
 									</tr>
 									<tr>
@@ -732,10 +732,10 @@ const UpgradePlanView = (props) => {
 											<span className="x-icon" />
 										</td>
 										<td className="col-plus">
-											<span className="check blue" />
+											<span className="check yellow" />
 										</td>
 										<td className="col-premium">
-											<span className="check blue" />
+											<span className="check purple" />
 										</td>
 									</tr>
 									<tr className="gray">
@@ -746,10 +746,10 @@ const UpgradePlanView = (props) => {
 											<span className="x-icon" />
 										</td>
 										<td className="col-plus">
-											<span className="check blue" />
+											<span className="check yellow" />
 										</td>
 										<td className="col-premium">
-											<span className="check blue" />
+											<span className="check purple" />
 										</td>
 									</tr>
 									<tr>
@@ -763,10 +763,10 @@ const UpgradePlanView = (props) => {
 											<span className="x-icon" />
 										</td>
 										<td className="col-plus">
-											<span className="check blue" />
+											<span className="check yellow" />
 										</td>
 										<td className="col-premium">
-											<span className="check blue" />
+											<span className="check purple" />
 										</td>
 									</tr>
 									<tr className="gray">
@@ -780,10 +780,10 @@ const UpgradePlanView = (props) => {
 											<span className="x-icon" />
 										</td>
 										<td className="col-plus">
-											<span className="check blue" />
+											<span className="check yellow" />
 										</td>
 										<td className="col-premium">
-											<span className="check blue" />
+											<span className="check purple" />
 										</td>
 									</tr>
 									<tr>
@@ -800,7 +800,7 @@ const UpgradePlanView = (props) => {
 											<span className="x-icon" />
 										</td>
 										<td className="col-premium">
-											<span className="check blue" />
+											<span className="check purple" />
 										</td>
 									</tr>
 									<tr className="gray">
@@ -817,7 +817,7 @@ const UpgradePlanView = (props) => {
 											<span className="x-icon" />
 										</td>
 										<td className="col-premium">
-											<span className="check blue" />
+											<span className="check purple" />
 										</td>
 									</tr>
 									<tr>
@@ -834,7 +834,7 @@ const UpgradePlanView = (props) => {
 											<span className="x-icon" />
 										</td>
 										<td className="col-premium">
-											<span className="check blue" />
+											<span className="check purple" />
 										</td>
 									</tr>
 									<tr className="gray">
@@ -851,7 +851,7 @@ const UpgradePlanView = (props) => {
 											<span className="x-icon" />
 										</td>
 										<td className="col-premium">
-											<span className="check blue" />
+											<span className="check purple" />
 										</td>
 									</tr>
 									<tr>
@@ -868,7 +868,7 @@ const UpgradePlanView = (props) => {
 											<span className="x-icon" />
 										</td>
 										<td className="col-premium">
-											<span className="check blue" />
+											<span className="check purple" />
 										</td>
 									</tr>
 									<tr className="gray">
@@ -885,7 +885,7 @@ const UpgradePlanView = (props) => {
 											<span className="x-icon" />
 										</td>
 										<td className="col-premium">
-											<span className="check blue" />
+											<span className="check purple" />
 										</td>
 									</tr>
 								</tbody>
