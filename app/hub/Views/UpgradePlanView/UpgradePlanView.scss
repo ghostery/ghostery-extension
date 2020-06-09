@@ -636,7 +636,7 @@ section.home-template .section.section-pricing {
 		}
 		td,th {
 			text-align:left;
-			@include breakpoint(medium down) {
+			@include breakpoint(small down) {
 				text-align: center;
 			}
 		}
