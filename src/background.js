@@ -781,6 +781,16 @@ function onMessageHandler(request, sender, callback) {
 		callback();
 		return false;
 	}
+	if (name === 'account.getTheme') {
+		if (conf.current_theme !== 'default') {
+			account.getTheme(conf.current_theme).then(() => {
+				callback(conf.account.themeData[conf.current_theme]);
+			});
+			return true;
+		}
+		callback();
+		return false;
+	}
 	if (name === 'getCliqzModuleData') { // panel-android only
 		utils.getActiveTab((tab) => {
 			sendCliqzModuleCounts(tab.id, tab.pageHost, callback);
@@ -792,6 +802,144 @@ function onMessageHandler(request, sender, callback) {
 			const description = (result) ? ((result.company_in_their_own_words) ? result.company_in_their_own_words : ((result.company_description) ? result.company_description : '')) : '';
 			callback(description);
 		});
+		return true;
+	}
+	if (name === 'account.login') {
+		metrics.ping('sign_in');
+		const { email, password } = message;
+		account.login(email, password)
+			.then((response) => {
+				if (!response.hasOwnProperty('errors')) {
+					metrics.ping('sign_in_success');
+				}
+				callback(response);
+			})
+			.catch((err) => {
+				log('LOGIN ERROR', err);
+				callback({ errors: _getJSONAPIErrorsObject(err) });
+			});
+		return true;
+	}
+	if (name === 'account.register') {
+		const {
+			email, confirmEmail, password, firstName, lastName
+		} = message;
+		account.register(email, confirmEmail, password, firstName, lastName)
+			.then((response) => {
+				if (!response.hasOwnProperty('errors')) {
+					metrics.ping('create_account_success');
+				}
+				callback(response);
+			})
+			.catch((err) => {
+				callback({ errors: [err] });
+				log('REGISTER ERROR', err);
+			});
+		return true;
+	}
+	if (name === 'account.logout') {
+		account.logout()
+			.then((response) => {
+				callback(response);
+			})
+			.catch((err) => {
+				log('LOGOUT ERROR', err);
+				callback(err);
+			});
+		return true;
+	}
+	if (name === 'account.getUserSettings') {
+		account.getUserSettings()
+			.then((settings) => {
+				callback(settings);
+			})
+			.catch((err) => {
+				log('Error getting user settings:', err);
+				callback({ errors: _getJSONAPIErrorsObject(err) });
+			});
+		return true;
+	}
+	if (name === 'account.getUserSubscriptionData') {
+		account.getUserSubscriptionData()
+			.then((subscriptions) => {
+				// Return highest tier subscription from array
+				const premiumSubscription = subscriptions.find(subscription => subscription.productName.includes('Ghostery Premium'));
+				if (premiumSubscription) {
+					callback({ subscriptionData: premiumSubscription });
+					return;
+				}
+
+				const plusSubscription = subscriptions.find(subscription => subscription.productName.includes('Ghostery Plus'));
+				if (plusSubscription) {
+					callback({ subscriptionData: plusSubscription });
+					return;
+				}
+
+				callback({});
+			})
+			.catch((err) => {
+				log('Error getting user subscription data:', err);
+				callback({ errors: _getJSONAPIErrorsObject(err) });
+			});
+		return true;
+	}
+	if (name === 'account.openSubscriptionPage') {
+		utils.openNewTab({ url: `${globals.ACCOUNT_BASE_URL}/subscription`, become_active: true });
+		return false;
+	}
+	if (name === 'account.openCheckoutPage') {
+		let url = `${globals.CHECKOUT_BASE_URL}/plus`;
+		const { utm } = message || null;
+		if (utm) {
+			url += `?utm_source=${utm.utm_source}&utm_campaign=${utm.utm_campaign}`;
+		}
+		utils.openNewTab({ url, become_active: true });
+		return false;
+	}
+	if (name === 'account.openSupportPage') {
+		metrics.ping('priority_support_submit');
+		const subscriber = account.hasScopesUnverified(['subscriptions:plus']);
+		const tabUrl = subscriber ? `${globals.ACCOUNT_BASE_URL}/support` : 'https://www.ghostery.com/support/';
+		utils.openNewTab({ url: tabUrl, become_active: true });
+		return false;
+	}
+	if (name === 'account.resetPassword') {
+		const { email } = message;
+		account.resetPassword(email)
+			.then((success) => {
+				callback(success);
+			})
+			.catch((err) => {
+				callback({ errors: _getJSONAPIErrorsObject(err) });
+				log('RESET PASSWORD ERROR', err);
+			});
+		return true;
+	}
+	if (name === 'account.getUser') {
+		account.getUser(message)
+			.then((user) => {
+				if (user) {
+					user.plusAccess = account.hasScopesUnverified(['subscriptions:plus'])
+						|| account.hasScopesUnverified(['subscriptions:premium']);
+					user.premiumAccess = account.hasScopesUnverified(['subscriptions:premium']);
+				}
+				callback({ user });
+			})
+			.catch((err) => {
+				callback({ errors: _getJSONAPIErrorsObject(err) });
+				log('FETCH USER ERROR', err);
+			});
+		return true;
+	}
+	if (name === 'account.sendValidateAccountEmail') {
+		account.sendValidateAccountEmail()
+			.then((success) => {
+				callback(success);
+			})
+			.catch((err) => {
+				callback({ errors: _getJSONAPIErrorsObject(err) });
+				log('sendValidateAccountEmail error', err);
+			});
 		return true;
 	}
 	if (name === 'update_database') {
@@ -870,244 +1018,22 @@ function onMessageHandler(request, sender, callback) {
 		});
 		return true;
 	}
-
-	if (name && name.startsWith('account.')) {
-		return handleAccountMessage(name.split('.')[1], message, callback);
+	if (name === 'promoModals.sawPremiumPromo') {
+		promoModals.recordPremiumPromoSighting();
+		return false;
 	}
-
-	if (name && name.startsWith('promoModals.')) {
-		return handlePromoModalMessage(name.split('.')[1]);
+	if (name === 'promoModals.sawInsightsPromo') {
+		promoModals.recordInsightsPromoSighting();
+		return false;
 	}
-}
-
-// TODO add function description
-function hamGetTheme(callback) {
-	if (conf.current_theme !== 'default') {
-		account.getTheme(conf.current_theme)
-			.then(() => {
-				callback(conf.account.themeData[conf.current_theme]);
-			});
-		return true;
+	if (name === 'promoModals.sawPlusPromo') {
+		promoModals.recordPlusPromoSighting();
+		return false;
 	}
-	callback();
-	return false;
-}
-
-// TODO add function description
-function hamGetUser(payload, callback) {
-	account.getUser(payload)
-		.then((user) => {
-			if (user) {
-				user.plusAccess = (
-					account.hasScopesUnverified(['subscriptions:plus'])
-					|| account.hasScopesUnverified(['subscriptions:premium'])
-				);
-				user.premiumAccess = account.hasScopesUnverified(['subscriptions:premium']);
-			}
-			callback({ user });
-		})
-		.catch((err) => {
-			callback({ errors: _getJSONAPIErrorsObject(err) });
-			log('FETCH USER ERROR', err);
-		});
-	return true;
-}
-
-// TODO add function description
-function hamGetUserSettings(callback) {
-	account.getUserSettings()
-		.then((settings) => {
-			callback(settings);
-		})
-		.catch((err) => {
-			log('Error getting user settings:', err);
-			callback({ errors: _getJSONAPIErrorsObject(err) });
-		});
-	return true;
-}
-
-// TODO add function description
-function hamGetUserSubscriptionData(callback) {
-	account.getUserSubscriptionData()
-		.then((subscriptions) => {
-			// Return highest tier subscription from array
-			const premiumSubscription = subscriptions.find(subscription => subscription.productName.includes('Ghostery Premium'));
-			if (premiumSubscription) {
-				callback({ subscriptionData: premiumSubscription });
-				return;
-			}
-
-			const plusSubscription = subscriptions.find(subscription => subscription.productName.includes('Ghostery Plus'));
-			if (plusSubscription) {
-				callback({ subscriptionData: plusSubscription });
-				return;
-			}
-
-			callback({});
-		})
-		.catch((err) => {
-			log('Error getting user subscription data:', err);
-			callback({ errors: _getJSONAPIErrorsObject(err) });
-		});
-	return true;
-}
-
-// TODO add function description
-function hamLogin(msgData, callback) {
-	const { email, password } = msgData;
-
-	account.login(email, password)
-		.then((response) => {
-			if (!response.hasOwnProperty('errors')) {
-				metrics.ping('sign_in_success');
-			}
-			callback(response);
-		})
-		.catch((err) => {
-			log('LOGIN ERROR', err);
-			callback({ errors: _getJSONAPIErrorsObject(err) });
-		});
-
-	metrics.ping('sign_in');
-
-	return true;
-}
-
-// TODO add function description
-function hamLogout(callback) {
-	account.logout()
-		.then((response) => {
-			callback(response);
-		})
-		.catch((err) => {
-			log('LOGOUT ERROR', err);
-			callback(err);
-		});
-	return true;
-}
-
-// TODO add function description
-function hamOpenCheckoutPage(utm) {
-	let url = `${globals.CHECKOUT_BASE_URL}/plus`;
-	if (utm) {
-		const { utm_source, utm_campaign } = utm;
-		url += `?utm_source=${utm_source}&utm_campaign=${utm_campaign}`;
+	if (name === 'promoModals.turnOffPromos') {
+		promoModals.turnOffPromos();
+		return false;
 	}
-	utils.openNewTab({ url, become_active: true });
-	return false;
-}
-
-// TODO add function description
-function hamOpenSubscriptionPage() {
-	utils.openNewTab({ url: `${globals.ACCOUNT_BASE_URL}/subscription`, become_active: true });
-	return false;
-}
-
-// TODO add function description
-function hamOpenSupportPage() {
-	const subscriber = account.hasScopesUnverified(['subscriptions:plus']);
-	const tabUrl = subscriber ? `${globals.ACCOUNT_BASE_URL}/support` : 'https://www.ghostery.com/support/';
-	utils.openNewTab({ url: tabUrl, become_active: true });
-
-	metrics.ping('priority_support_submit');
-
-	return false;
-}
-
-// TODO add function description
-function hamRegister(userDetails, callback) {
-	const {
-		email,
-		confirmEmail,
-		password,
-		firstName,
-		lastName,
-	} = userDetails;
-
-	account.register(email, confirmEmail, password, firstName, lastName)
-		.then((response) => {
-			if (!response.hasOwnProperty('errors')) {
-				metrics.ping('create_account_success');
-			}
-			callback(response);
-		})
-		.catch((err) => {
-			callback({ errors: [err] });
-			log('REGISTER ERROR', err);
-		});
-
-	return true;
-}
-
-// TODO add function description
-function hamResetPassword(email, callback) {
-	// TODO check args
-	account.resetPassword(email)
-		.then((success) => {
-			callback(success);
-		})
-		.catch((err) => {
-			callback({ errors: _getJSONAPIErrorsObject(err) });
-			log('RESET PASSWORD ERROR', err);
-		});
-	return true;
-}
-
-// TODO add function description
-function hamValidateAccountEmail(callback) {
-	account.sendValidateAccountEmail()
-		.then((success) => {
-			callback(success);
-		})
-		.catch((err) => {
-			callback({ errors: _getJSONAPIErrorsObject(err) });
-			log('sendValidateAccountEmail error', err);
-		});
-
-	return true;
-}
-
-/**
- * Handle messages related to user accounts
- * @memberOf Background
- *
- * @param  {string}   name	 	the name of the message sent by the calling script
- * @param  {Object}   payload 	the data of the message sent by the calling script
- * @param  {function} callback 	function to call (at most once) when you have a response
- * @return {boolean}            denotes async (true) or sync (false)
- */
-function handleAccountMessage(name, payload, callback) {
-	// TODO	improve arg names : ? msgName, msgBody ?
-	switch (name) {
-		case 'getTheme': return hamGetTheme(callback);
-		case 'getUser': return hamGetUser(payload, callback);
-		case 'getUserSettings': return hamGetUserSettings(callback);
-		case 'getUserSubscriptionData': return hamGetUserSubscriptionData(callback);
-		case 'login': return hamLogin(payload, callback);
-		case 'logout': return hamLogout(callback);
-		case 'openCheckoutPage': return hamOpenCheckoutPage(payload.utm || null);
-		case 'openSubscriptionPage': return hamOpenSubscriptionPage();
-		case 'openSupportPage': return hamOpenSupportPage();
-		case 'register': return hamRegister(payload, callback);
-		case 'resetPassword': return hamResetPassword(payload.email, callback);
-		case 'sendValidateAccountEmail': return hamValidateAccountEmail(callback);
-		default: return false;
-	}
-}
-
-/**
- * Handle messages related to promo modals
- * @memberOf Background
- *
- * @param  {string}   name		the message name
- * @return {boolean}            denotes async (true) or sync (false)
- */
-function handlePromoModalMessage(name) {
-	if (name === 'sawPremiumPromo') promoModals.recordPremiumPromoSighting();
-	else if (name === 'sawInsightsPromo') promoModals.recordInsightsPromoSighting();
-	else if (name === 'sawPlusPromos') promoModals.recordPlusPromoSighting();
-	else if (name === 'turnOffPromos') promoModals.turnOffPromos();
-	return false;
 }
 
 /**
