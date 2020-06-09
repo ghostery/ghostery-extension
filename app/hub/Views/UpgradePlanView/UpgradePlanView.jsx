@@ -725,7 +725,7 @@ const UpgradePlanView = (props) => {
 										</td>
 									</tr>
 									<tr>
-										<td colSpan="3">Extension Themes</td>
+										<td colSpan="3">{t('hub_upgrade_extension_themes')}</td>
 									</tr>
 									<tr>
 										<td>
