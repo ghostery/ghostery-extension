@@ -40,8 +40,8 @@ const store = createStore();
  */
 const Hub = () => (
 	<AppView>
-		<Route exact path="/" component={HomeView} />
-		<Route exact path="/upgrade" component={UpgradePlanView} />
+		<Route exact path="/" component={UpgradePlanView} />
+		<Route exact path="/home" component={HomeView} />
 		<Route path="/setup" component={SetupView} />
 		<Route path="/tutorial" component={TutorialView} />
 		<Route exact path="/plus" component={PlusView} />
