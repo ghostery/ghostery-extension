@@ -54,6 +54,12 @@ const UpgradePlanView = (props) => {
 	const tabsTitlePurpleClassNames = ClassNames('tabs-title tabs-title-purple', {
 		'is-active': protection_level === PREMIUM
 	});
+	const yearlyToggleLabel = ClassNames('toggle-label', {
+		active: !show_monthly_prices
+	});
+	const monthlyToggleLabel = ClassNames('toggle-label', {
+		active: show_monthly_prices
+	});
 
 	// Clicking arrow scrolls to table
 	const comparisonTableRef = useRef(null);
@@ -74,12 +80,12 @@ const UpgradePlanView = (props) => {
 						<h1>{t('hub_upgrade_choose_plan')}</h1>
 						<div className="row align-middle toggle-switch">
 							<div className="small-12 text-center columns">
-								<span>{t('hub_upgrade_yearly')}</span>
+								<span className={yearlyToggleLabel}>{t('hub_upgrade_yearly')}</span>
 								<label className="switch" htmlFor="switch-check" onClick={toggleMonthlyYearlyPrices}>
 									<input className={sliderClassNames} type="checkbox" />
 									<span className="slider round" />
 								</label>
-								<span>{t('hub_upgrade_monthly')}</span>
+								<span className={monthlyToggleLabel}>{t('hub_upgrade_monthly')}</span>
 							</div>
 						</div>
 					</div>

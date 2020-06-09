@@ -29,7 +29,7 @@ section.home-template .section.section-pricing {
 		padding-bottom: 0;
 	}
 	h1 {
-		margin-top: rem-calc(40);
+		margin: rem-calc(40) 0 54px 0;
 		color: $tundora;
 		font-size: rem-calc(24);
 		font-family: Roboto;
@@ -38,8 +38,13 @@ section.home-template .section.section-pricing {
 	.toggle-switch {
 		span {
 			vertical-align: middle;
+			font-size: 18px;
+			color: #cad3d5;
 			@include breakpoint(medium down) {
 				font-size: rem-calc(12);
+			}
+			&.toggle-label.active {
+				color: #4a4a4a;
 			}
 		}
 	}
