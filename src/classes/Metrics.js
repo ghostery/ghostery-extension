@@ -541,6 +541,7 @@ class Metrics {
 				return 2;
 			case 'midnight':
 				return 3;
+			case 'not_yet_set':
 			default:
 				return 0;
 		}
