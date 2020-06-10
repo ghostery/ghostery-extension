@@ -7,7 +7,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -93,12 +93,18 @@ class PanelData {
 				.catch(() => log('Failed getting remote user settings from PanelData#initPort. User not logged in.'));
 		}
 
+		function tabErrorCallback(err) {
+			const { message } = err;
+			log(`Error: ${message}`);
+			this._postMessage('panel', { error: message });
+		}
+
 		const paramTabId = +(new URL(port.sender.url)).searchParams.get('tabId');
 
 		if (paramTabId) {
-			getTab(paramTabId, tabCallback.bind(this));
+			getTab(paramTabId, tabCallback.bind(this), tabErrorCallback.bind(this));
 		} else {
-			getActiveTab(tabCallback.bind(this));
+			getActiveTab(tabCallback.bind(this), tabErrorCallback.bind(this));
 		}
 	}
 

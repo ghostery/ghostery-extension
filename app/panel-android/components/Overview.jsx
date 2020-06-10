@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -16,7 +16,7 @@ import PropTypes from 'prop-types';
 import TrackersChart from './content/TrackersChart';
 import fromTrackersToChartData from '../utils/chart';
 
-export default class Overview extends React.Component {
+class Overview extends React.Component {
 	get isTrusted() {
 		const { siteProps } = this.context;
 		return siteProps.isTrusted;
@@ -142,3 +142,5 @@ Overview.contextTypes = {
 	siteProps: PropTypes.shape,
 	callGlobalAction: PropTypes.func,
 };
+
+export default Overview;

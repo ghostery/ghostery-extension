@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -12,13 +12,14 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default class Tabs extends React.Component {
+class Tabs extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			activeTabIndex: 0
+			activeTabIndex: 0,
 		};
 	}
 
@@ -29,17 +30,17 @@ export default class Tabs extends React.Component {
 		}
 
 		this.setState({
-			activeTabIndex: tabIndex
+			activeTabIndex: tabIndex,
 		});
 	}
 
-	renderTabsNav = () => {
+	renderTabsNavigation = () => {
 		const { children } = this.props;
 		const { activeTabIndex } = this.state;
 		return React.Children.map(children, (child, index) => React.cloneElement(child, {
 			onClick: this.handleTabClick,
 			tabIndex: index,
-			isActive: index === activeTabIndex
+			isActive: index === activeTabIndex,
 		}));
 	}
 
@@ -54,14 +55,33 @@ export default class Tabs extends React.Component {
 
 	render() {
 		return (
-			<div className="tabs-wrapper">
-				<ul className="tabs-nav">
-					{this.renderTabsNav()}
+			<div className="Tabs__component">
+				<ul className="Tabs__navigation">
+					{this.renderTabsNavigation()}
 				</ul>
-				<div className="tabs-active-content">
+				<div className="Tabs__active_content">
 					{this.renderActiveTabContent()}
 				</div>
 			</div>
 		);
 	}
 }
+
+// ToDo: Validate that Tabs Children is Tab.
+//       Tried:
+//				children: PropTypes.oneOfType([
+//					PropTypes.shape({
+//						type: Tab
+//					}),
+//					PropTypes.arrayOf(
+//						PropTypes.shape({
+//							type: Tab
+//						})
+//					)
+//				]).isRequired,
+//       But failed because of this: https://github.com/vadimdemedes/ink/issues/37
+Tabs.propTypes = {
+	children: PropTypes.node.isRequired,
+};
+
+export default Tabs;

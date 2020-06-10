@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -15,6 +15,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Tabs from './content/Tabs';
 import Tab from './content/Tab';
+
 import Overview from './Overview';
 import FixedMenu from './content/FixedMenu';
 import SiteTrackers from './SiteTrackers';
@@ -27,7 +28,7 @@ import getCliqzModuleData from '../actions/cliqzActions';
 import handleAllActions from '../actions/handler';
 import fromTrackersToChartData from '../utils/chart';
 
-export default class Panel extends React.Component {
+class Panel extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -167,16 +168,16 @@ export default class Panel extends React.Component {
 					</p>
 				</div>
 				<Tabs>
-					<Tab tabLabel="Overview" linkClassName="custom-link">
+					<Tab tabLabel={t('android_tab_overview')} linkClassName="Tab__label">
 						<Overview categories={this.siteCategories} />
 						<FixedMenu panel={panel} cliqzModuleData={cliqzModuleData} />
 					</Tab>
 
-					<Tab tabLabel="Site Trackers" linkClassName="custom-link">
+					<Tab tabLabel={t('android_tab_site_blocking')} linkClassName="Tab__label">
 						<SiteTrackers categories={this.siteCategories} />
 					</Tab>
 
-					<Tab tabLabel="Global Trackers" linkClassName="custom-link">
+					<Tab tabLabel={t('android_tab_global_blocking')} linkClassName="Tab__label">
 						<GlobalTrackers categories={this.globalCategories} />
 					</Tab>
 				</Tabs>
@@ -189,3 +190,5 @@ Panel.childContextTypes = {
 	siteProps: PropTypes.shape,
 	callGlobalAction: PropTypes.func,
 };
+
+export default Panel;

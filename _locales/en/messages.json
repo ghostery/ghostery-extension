@@ -1237,6 +1237,15 @@
 			}
 		}
 	},
+	"android_tab_overview": {
+		"message": "Overview"
+	},
+	"android_tab_site_blocking": {
+		"message": "Site Blocking"
+	},
+	"android_tab_global_blocking": {
+		"message": "Global Blocking"
+	},
 	"hub_side_navigation_home": {
 		"message": "Home"
 	},

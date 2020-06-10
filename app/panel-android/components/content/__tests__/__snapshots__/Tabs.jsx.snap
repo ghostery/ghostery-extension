@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/panel-android/components/content/Tabs.jsx Snapshot tests with react-test-renderer Tabs component with 3 Tab children components 1`] = `
+<div
+  className="Tabs__component"
+>
+  <ul
+    className="Tabs__navigation"
+  >
+    <li
+      className="Tab__navigation_item Tab--active"
+      onClick={[Function]}
+    >
+      <a
+        className="Tab__navigation_link tab-1-class Tab--active"
+      >
+        Tab 1 Label
+      </a>
+    </li>
+    <li
+      className="Tab__navigation_item"
+      onClick={[Function]}
+    >
+      <a
+        className="Tab__navigation_link tab-2-class"
+      >
+        Tab 2 Label
+      </a>
+    </li>
+    <li
+      className="Tab__navigation_item"
+      onClick={[Function]}
+    >
+      <a
+        className="Tab__navigation_link tab-3-class"
+      >
+        Tab 3 Label
+      </a>
+    </li>
+  </ul>
+  <div
+    className="Tabs__active_content"
+  >
+    <div
+      className="tab-1-content"
+    >
+      Tab 1 Content
+    </div>
+  </div>
+</div>
+`;
