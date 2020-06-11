@@ -7,6 +7,7 @@ $price-purple-hover: #710d72;
 $price-gold: #b8860b;
 $price-gold-hover: #906908;
 $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow to next line
+$medium-small-breakpoint: 1020px; // Break when table does not fit anymore
 
 .mb-20 {
 	margin-bottom: rem-calc(20);
@@ -35,6 +36,17 @@ section.home-template .section.section-pricing {
 	.hide-for-extra-large {
 		display: none;
 		@include breakpoint($medium-large-breakpoint down) {
+			display: block;
+		}
+	}
+	.show-for-medium-small {
+		@include breakpoint($medium-small-breakpoint down) {
+			display: none;
+		}
+	}
+	.hide-for-medium-small {
+		display: none;
+		@include breakpoint($medium-small-breakpoint down) {
 			display: block;
 		}
 	}
@@ -428,7 +440,7 @@ section.home-template .section.section-pricing {
 		width: 14px;
 		background-image: url('/app/images/hub/upgrade/x_icon.svg')
 	}
-	.hide-for-medium {
+	.hide-for-medium-small {
 		.protection-description {
 			font-weight: bold;
 			margin: 20px 0 15px 0;
@@ -507,7 +519,7 @@ section.home-template .section.section-pricing {
 		}
 		.table-container {
 			flex: 0 0 auto;
-			@include breakpoint(small down) {
+			@include breakpoint($medium-small-breakpoint down) {
 				max-width: 100%;
 			}
 		}
@@ -539,7 +551,12 @@ section.home-template .section.section-pricing {
 		display: flex;
 		align-items: center;
 		justify-content: flex-end;
-		@include breakpoint(small down) {
+		&.mobile {
+			@include breakpoint($medium-small-breakpoint up) {
+				display: none
+			}
+		}
+		@include breakpoint($medium-small-breakpoint down) {
 			justify-content: center;
 		}
 		.midnight-note {
@@ -570,7 +587,7 @@ section.home-template .section.section-pricing {
 		background-color: $alabaster;
 		padding-bottom: rem-calc(100);
 		margin-top: rem-calc(40);
-		@include breakpoint(small down) {
+		@include breakpoint($medium-small-breakpoint down) {
 			margin-top: 0;
 			padding-top: 0;
 			background-color: $white;
@@ -581,7 +598,7 @@ section.home-template .section.section-pricing {
 			z-index:10;
 			padding-bottom:14px;
 			margin: 0;
-			@include breakpoint($medium-large-breakpoint down) {
+			@include breakpoint($medium-small-breakpoint down) {
 				padding-bottom: 0;
 				margin-bottom: rem-calc(40);
 			}
@@ -595,7 +612,7 @@ section.home-template .section.section-pricing {
 		}
 		li:last-child {
 			border-right:1px solid #b6b6b6;
-			@include breakpoint($medium-large-breakpoint down) {
+			@include breakpoint($medium-small-breakpoint down) {
 				border-right: none;
 			}
 		}
@@ -627,12 +644,12 @@ section.home-template .section.section-pricing {
 			border-collapse:collapse;
 			width:100%;
 			max-width: 750px;
-			@include breakpoint(small down) {
+			@include breakpoint($medium-small-breakpoint down) {
 				table-layout: fixed;
 			}
 		}
 		tbody {
-			@include breakpoint($medium-large-breakpoint down) {
+			@include breakpoint($medium-small-breakpoint down) {
 				border: 1px solid #b6b6b6;
 			}
 		}
@@ -653,13 +670,13 @@ section.home-template .section.section-pricing {
 			border: 1px solid #b6b6b6;
 			padding: 10px;
 			empty-cells:show;
-			@include breakpoint(small down) {
+			@include breakpoint($medium-small-breakpoint down) {
 				border: none;
 			}
 		}
 		td,th {
 			text-align:left;
-			@include breakpoint(small down) {
+			@include breakpoint($medium-small-breakpoint down) {
 				text-align: center;
 			}
 		}
