@@ -16,6 +16,7 @@ import React, { useRef } from 'react';
 import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
+import globals from '../../../../src/classes/Globals';
 
 /**
  * A React class component for rendering the Home View
@@ -73,15 +74,15 @@ const UpgradePlanView = (props) => {
 		mobileComparisonTableRef.current.scrollIntoView({ behavior: 'smooth' });
 	};
 
-	const plusCheckoutLink = show_yearly_prices ? 'https://checkout.ghostery.com/plus?interval=year' : 'https://checkout.ghostery.com/plus';
-	const premiumCheckoutLink = show_yearly_prices ? 'https://checkout.ghostery.com/en/premium?interval=year' : 'https://checkout.ghostery.com/en/premium';
+	const plusCheckoutLink = show_yearly_prices ? `${globals.CHECKOUT_BASE_URL}/plus?interval=year` : `${globals.CHECKOUT_BASE_URL}/plus`;
+	const premiumCheckoutLink = show_yearly_prices ? `${globals.CHECKOUT_BASE_URL}/premium?interval=year` : `${globals.CHECKOUT_BASE_URL}/premium`;
 
 	return (
 		<section className="pricing-page page-template-page-content-modules">
 			<div className="grid-container show-for-extra-large">
 				<div className="row align-center">
 					<div className="small-12 text-center columns">
-						<h1>{t('hub_upgrade_choose_plan')}</h1>
+						<h1>{`${t('hub_upgrade_your')} Ghostery ${t('hub_upgrade_protection_plan')}`}</h1>
 						<div className="row align-middle toggle-switch">
 							<div className="small-12 text-center columns">
 								<span className={monthlyToggleLabel}>{t('hub_upgrade_monthly')}</span>
@@ -144,7 +145,7 @@ const UpgradePlanView = (props) => {
 									{t('hub_upgrade_already_protected')}
 								</NavLink>
 							) : (
-								<a className="button button-gold" href={plusCheckoutLink} title="Upgrade to Plus">
+								<a className="button button-gold" href={plusCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Plus">
 									{t('hub_upgrade_to_plus')}
 								</a>
 							)}
@@ -187,7 +188,7 @@ const UpgradePlanView = (props) => {
 									{t('hub_upgrade_already_protected')}
 								</NavLink>
 							) : (
-								<a className="button button-purple-blue" href={premiumCheckoutLink} title="Buy Now">
+								<a className="button button-purple-blue" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Buy Now">
 									{t('hub_upgrade_to_premium')}
 								</a>
 							)}
@@ -215,7 +216,7 @@ const UpgradePlanView = (props) => {
 			<div className="grid-container card-wrapper hide-for-extra-large">
 				<div className="row align-center">
 					<div className="small-12 text-center columns">
-						<h1>{t('hub_upgrade_choose_plan')}</h1>
+						<h1>{`${t('hub_upgrade_your')} Ghostery ${t('hub_upgrade_protection_plan')}`}</h1>
 					</div>
 				</div>
 				<div className="row align-center">
@@ -289,7 +290,7 @@ const UpgradePlanView = (props) => {
 										{t('hub_upgrade_already_protected')}
 									</NavLink>
 								) : (
-									<a className="button button-gold" href={plusCheckoutLink} title="Upgrade to Plus">
+									<a className="button button-gold" href={plusCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Plus">
 										{t('hub_upgrade_to_plus')}
 									</a>
 								)}
@@ -345,7 +346,7 @@ const UpgradePlanView = (props) => {
 											{t('hub_upgrade_already_protected')}
 										</NavLink>
 									) : (
-										<a className="button button-purple-blue" href={premiumCheckoutLink} title="Buy Now">
+										<a className="button button-purple-blue" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Buy Now">
 											{t('hub_upgrade_to_premium')}
 										</a>
 									)}
@@ -588,7 +589,7 @@ const UpgradePlanView = (props) => {
 													{t('hub_upgrade_already_protected')}
 												</NavLink>
 											) : (
-												<a className="button table-footer-button button-gold " href={plusCheckoutLink} title="Upgrade to Plus">
+												<a className="button table-footer-button button-gold" href={plusCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Plus">
 													{t('hub_upgrade_to_plus')}
 												</a>
 											)}
@@ -599,7 +600,7 @@ const UpgradePlanView = (props) => {
 													{t('hub_upgrade_already_protected')}
 												</NavLink>
 											) : (
-												<a className="button table-footer-button button-purple-blue" href={premiumCheckoutLink} title="Buy Now">
+												<a className="button table-footer-button button-purple-blue" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Buy Now">
 													{t('hub_upgrade_to_premium')}
 												</a>
 											)}
@@ -888,7 +889,7 @@ const UpgradePlanView = (props) => {
 										{t('hub_upgrade_already_protected')}
 									</NavLink>
 								) : (
-									<a className="button button-gold" href={plusCheckoutLink} title="Upgrade to Plus">
+									<a className="button button-gold" href={plusCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Plus">
 										{t('hub_upgrade_to_plus')}
 									</a>
 								)}
@@ -901,7 +902,7 @@ const UpgradePlanView = (props) => {
 										{t('hub_upgrade_already_protected')}
 									</NavLink>
 								) : (
-									<a className="button button-purple-blue" href={premiumCheckoutLink} title="Buy Now">
+									<a className="button button-purple-blue" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Buy Now">
 										{t('hub_upgrade_to_premium')}
 									</a>
 								)}

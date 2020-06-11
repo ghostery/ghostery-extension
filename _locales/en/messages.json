@@ -1300,8 +1300,11 @@
 	"hub_home_feature_supporter_text": {
 		"message": "Upgrade to Ghostery Plus and unlock special features."
 	},
-	"hub_upgrade_choose_plan": {
-		"message": "Upgrade your Ghostery protection plan"
+	"hub_upgrade_your": {
+		"message": "Upgrade your"
+	},
+	"hub_upgrade_protection_plan": {
+		"message": "protection plan"
 	},
 	"hub_upgrade_yearly": {
 		"message": "Yearly"
