@@ -24,14 +24,13 @@ export default class ChartSVG extends React.Component {
 	}
 
 	increaseN = () => {
-		const { paths } = this.props;
-		const { nItem } = this.state;
-		let currentN = nItem;
-		if (currentN < paths.length) {
-			this.setState({
-				nItem: currentN += 1,
-			});
-		}
+		this.setState(prevState => {
+			const { paths } = this.props;
+			if (prevState.nItem < paths.length) {
+				return { nItem: prevState.nItem + 1 };
+			}
+			return null;
+		});
 	}
 
 	render() {
