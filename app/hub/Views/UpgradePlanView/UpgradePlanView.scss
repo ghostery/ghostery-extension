@@ -584,40 +584,25 @@ section.home-template .section.section-pricing {
 		margin: 20px auto;
 		padding: 7.7px 14px;
 		position: relative;
-		&.table-footer {
-			@include breakpoint($medium-small-breakpoint down) {
-				height: 100%;
-				width: 100%;
-				margin: auto;
-			}
-		}
 	}
 	.button-premium {
-		position: absolute;
-		background-image: linear-gradient(105deg, #720174 3%, #00aef0 100%);
+		position: relative;
+		height: 38px;
+		width: 177px;
+		padding: 7.7px 14px;
+		line-height: 22px;
+		background: linear-gradient(
+			45deg,
+			#6c097a 50%,
+			#03a9ec
+		);
+		background-size: 200% 100%;
+		background-position: 100% 50%;
+		transition: 0.5s all;
 		border: none;
-		top: 0;
-		left: 0;
-		@include breakpoint($medium-small-breakpoint down) {
-			left: 0;
-			right: 0;
-			margin: auto;
-		}
 		&:hover {
-			opacity: 0;
-			transition: opacity .5s;
-		}
-	}
-	.button-premium-hover {
-		position: absolute;
-		top: 0;
-		left: 0;
-		border: none;
-		background-color: $price-purple-hover;
-		@include breakpoint($medium-small-breakpoint down) {
-			left: 0;
-			right: 0;
-			margin: auto;
+			background-position: 0% 50%;
+			transition: 0.5s all;
 		}
 	}
 
