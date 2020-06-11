@@ -538,7 +538,7 @@ section.home-template .section.section-pricing {
 		display: flex;
 		align-items: center;
 		justify-content: flex-end;
-		@include breakpoint($medium-large-breakpoint down) {
+		@include breakpoint(small down) {
 			justify-content: center;
 		}
 		.midnight-note {
@@ -560,7 +560,7 @@ section.home-template .section.section-pricing {
 		background-color: $alabaster;
 		padding-bottom: rem-calc(100);
 		margin-top: rem-calc(40);
-		@include breakpoint($medium-large-breakpoint down) {
+		@include breakpoint(small down) {
 			margin-top: 0;
 			padding-top: 0;
 			background-color: $white;
