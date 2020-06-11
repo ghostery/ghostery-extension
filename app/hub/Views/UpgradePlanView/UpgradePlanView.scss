@@ -1,8 +1,11 @@
 $price-blue: #00AEF0;
+$price-blue-hover: #2e5a91;
 $blue-alt: #4caeea;
 $price-purple: #611b87;
 $price-purple-alt: #720174;
+$price-purple-hover: #710d72;
 $price-gold: #b8860b;
+$price-gold-hover: #906908;
 $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow to next line
 
 .mb-20 {
@@ -385,8 +388,6 @@ section.home-template .section.section-pricing {
 			height: 38px;
 			line-height: inherit;
 			&.already-protected {
-				background-color: $blue-alt;
-				font-weight: 600;
 				@include breakpoint($medium-large-breakpoint down) {
 					margin-top: 45px;
 				}
@@ -547,9 +548,18 @@ section.home-template .section.section-pricing {
 		}
 	}
 
+	.button {
+		&:hover {
+			background-color: $price-blue-hover;
+		}
+	}
+
 	.button-gold {
 		background-color: $price-gold;
 		border: none;
+		&:hover {
+			background-color: $price-gold-hover;
+		}
 	}
 	.button-purple-blue {
 		background-image: linear-gradient(105deg, #720174 3%, #00aef0 100%);
