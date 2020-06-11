@@ -184,13 +184,23 @@ const UpgradePlanView = (props) => {
 								)}
 							</div>
 							{isPremium ? (
-								<NavLink className="button button-purple-blue" to="/home" title="Already Protected">
-									{t('hub_upgrade_already_protected')}
-								</NavLink>
+								<div className="button-premium-container">
+									<NavLink className="button button-premium-hover" to="/home" title="Already Protected">
+										{t('hub_upgrade_already_protected')}
+									</NavLink>
+									<NavLink className="button button-premium" to="/home" title="Already Protected">
+										{t('hub_upgrade_already_protected')}
+									</NavLink>
+								</div>
 							) : (
-								<a className="button button-purple-blue" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Buy Now">
-									{t('hub_upgrade_to_premium')}
-								</a>
+								<div className="button-premium-container">
+									<a className="button button-premium-hover" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Buy Now">
+										{t('hub_upgrade_to_premium')}
+									</a>
+									<a className="button button-premium" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Buy Now">
+										{t('hub_upgrade_to_premium')}
+									</a>
+								</div>
 							)}
 							<p className="card-sub-header">
 								<strong>{t('hub_upgrade_maximum_browser_protection')}</strong>
@@ -342,13 +352,23 @@ const UpgradePlanView = (props) => {
 										</div>
 									</div>
 									{isPremium ? (
-										<NavLink className="button button-purple-blue" to="/home" title="Already Protected">
-											{t('hub_upgrade_already_protected')}
-										</NavLink>
+										<div className="button-premium-container">
+											<NavLink className="button button-premium-hover" to="/home" title="Already Protected">
+												{t('hub_upgrade_already_protected')}
+											</NavLink>
+											<NavLink className="button button-premium" to="/home" title="Already Protected">
+												{t('hub_upgrade_already_protected')}
+											</NavLink>
+										</div>
 									) : (
-										<a className="button button-purple-blue" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Buy Now">
-											{t('hub_upgrade_to_premium')}
-										</a>
+										<div className="button-premium-container">
+											<a className="button button-premium-hover" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Buy Now">
+												{t('hub_upgrade_to_premium')}
+											</a>
+											<a className="button button-premium" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Buy Now">
+												{t('hub_upgrade_to_premium')}
+											</a>
+										</div>
 									)}
 									<p className="card-sub-header">
 										<strong>{t('hub_upgrade_maximum_browser_protection')}</strong>
@@ -596,13 +616,23 @@ const UpgradePlanView = (props) => {
 										</td>
 										<td>
 											{isPremium ? (
-												<NavLink className="button table-footer-button button-purple-blue" to="/home" title="Already Protected">
-													{t('hub_upgrade_already_protected')}
-												</NavLink>
+												<div className="button-premium-container">
+													<NavLink className="button table-footer-button button-premium-hover" to="/home" title="Already Protected">
+														{t('hub_upgrade_already_protected')}
+													</NavLink>
+													<NavLink className="button table-footer-button button-premium" to="/home" title="Already Protected">
+														{t('hub_upgrade_already_protected')}
+													</NavLink>
+												</div>
 											) : (
-												<a className="button table-footer-button button-purple-blue" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Buy Now">
-													{t('hub_upgrade_to_premium')}
-												</a>
+												<div className="button-premium-container">
+													<a className="button table-footer-button button-premium-hover" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Buy Now">
+														{t('hub_upgrade_to_premium')}
+													</a>
+													<a className="button table-footer-button button-premium" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Buy Now">
+														{t('hub_upgrade_to_premium')}
+													</a>
+												</div>
 											)}
 										</td>
 									</tr>
@@ -898,13 +928,23 @@ const UpgradePlanView = (props) => {
 						<div className="small-12 text-center columns">
 							<span className="col-premium">
 								{isPremium ? (
-									<NavLink className="button button-purple-blue" to="/home" title="Already Protected">
-										{t('hub_upgrade_already_protected')}
-									</NavLink>
+									<div className="button-premium-container table-footer">
+										<NavLink className="button button-premium-hover" to="/home" title="Already Protected">
+											{t('hub_upgrade_already_protected')}
+										</NavLink>
+										<NavLink className="button button-premium" to="/home" title="Already Protected">
+											{t('hub_upgrade_already_protected')}
+										</NavLink>
+									</div>
 								) : (
-									<a className="button button-purple-blue" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Buy Now">
-										{t('hub_upgrade_to_premium')}
-									</a>
+									<div className="button-premium-container table-footer">
+										<a className="button button-premium-hover" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Buy Now">
+											{t('hub_upgrade_to_premium')}
+										</a>
+										<a className="button button-premium" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Buy Now">
+											{t('hub_upgrade_to_premium')}
+										</a>
+									</div>
 								)}
 							</span>
 						</div>

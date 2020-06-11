@@ -297,13 +297,13 @@ section.home-template .section.section-pricing {
 		text-align: center;
 		padding-top: rem-calc(3);
 		padding-bottom: rem-calc(40);
+		@include breakpoint(small down) {
+			box-shadow: none;
+			height: 425px;
+		}
 
 		&.basic {
 			height: 498px;
-			@include breakpoint(small down) {
-				box-shadow: none;
-				height: 425px;
-			}
 		}
 		&.plus {
 			height: 498px;
@@ -398,7 +398,7 @@ section.home-template .section.section-pricing {
 			text-transform: none;
 			width: 177px;
 			height: 38px;
-			line-height: inherit;
+			line-height: 22px;
 			&.already-protected {
 				@include breakpoint($medium-large-breakpoint down) {
 					margin-top: 45px;
@@ -578,9 +578,47 @@ section.home-template .section.section-pricing {
 			background-color: $price-gold-hover;
 		}
 	}
-	.button-purple-blue {
+	.button-premium-container {
+		height: 38px;
+		width: 177px;
+		margin: 20px auto;
+		padding: 7.7px 14px;
+		position: relative;
+		&.table-footer {
+			@include breakpoint($medium-small-breakpoint down) {
+				height: 100%;
+				width: 100%;
+				margin: auto;
+			}
+		}
+	}
+	.button-premium {
+		position: absolute;
 		background-image: linear-gradient(105deg, #720174 3%, #00aef0 100%);
 		border: none;
+		top: 0;
+		left: 0;
+		@include breakpoint($medium-small-breakpoint down) {
+			left: 0;
+			right: 0;
+			margin: auto;
+		}
+		&:hover {
+			opacity: 0;
+			transition: opacity .5s;
+		}
+	}
+	.button-premium-hover {
+		position: absolute;
+		top: 0;
+		left: 0;
+		border: none;
+		background-color: $price-purple-hover;
+		@include breakpoint($medium-small-breakpoint down) {
+			left: 0;
+			right: 0;
+			margin: auto;
+		}
 	}
 
 	.comparison-table {
@@ -631,6 +669,7 @@ section.home-template .section.section-pricing {
 			font-weight:bold;
 		}
 		.table-footer-button {
+			white-space: nowrap;
 			font-size: 12px;
 		}
 		@media only screen and (min-width: 832px) {
@@ -735,9 +774,12 @@ section.home-template .section.section-pricing {
 		}
 		.button {
 			margin-bottom: 0;
-			padding-left: rem-calc(40);
-			padding-right: rem-calc(40);
-			@include breakpoint($medium-large-breakpoint down) {
+			@include breakpoint($medium-small-breakpoint up) {
+				height: 38px;
+				display: flex;
+				align-items: center;
+			}
+			@include breakpoint($medium-small-breakpoint down) {
 				padding-left: rem-calc(20);
 				padding-right: rem-calc(20);
 			}
