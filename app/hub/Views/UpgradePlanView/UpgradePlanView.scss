@@ -297,7 +297,7 @@ section.home-template .section.section-pricing {
 		text-align: center;
 		padding-top: rem-calc(3);
 		padding-bottom: rem-calc(40);
-		@include breakpoint(small down) {
+		@include breakpoint($medium-large-breakpoint down) {
 			box-shadow: none;
 			height: 425px;
 		}
@@ -345,7 +345,7 @@ section.home-template .section.section-pricing {
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			@include breakpoint(small down) {
+			@include breakpoint($medium-large-breakpoint down) {
 				background-color: #FFF;
 			}
 			.ghostery-free-image {
@@ -361,7 +361,7 @@ section.home-template .section.section-pricing {
 				width: 250px;
 				height: 85px;
 				background-image: linear-gradient(to right, rgba(240,174,133,.25), rgba(241,216,158,.25));
-				@include breakpoint(small down) {
+				@include breakpoint($medium-large-breakpoint down) {
 					background-image: none;
 					background-color: #FFF;
 				}
@@ -388,12 +388,12 @@ section.home-template .section.section-pricing {
 			width: 250px;
 			height: 85px;
 			background-image: linear-gradient(to right, rgba(113,1,116,.25), rgba(90,37,142,.25) 18%, rgba(42,110,194,.25) 57%, rgba(12,156,227,.25) 86%, rgba(0,174,240,.25));
-			@include breakpoint(small down) {
+			@include breakpoint($medium-large-breakpoint down) {
 				background-image: none;
 			}
 		}
 		.button {
-			margin-top: rem-calc(10);
+			margin-top: 22px;
 			margin-bottom: rem-calc(20);
 			text-transform: none;
 			width: 177px;
@@ -440,7 +440,7 @@ section.home-template .section.section-pricing {
 		width: 14px;
 		background-image: url('/app/images/hub/upgrade/x_icon.svg')
 	}
-	.hide-for-medium-small {
+	.hide-for-extra-large {
 		.protection-description {
 			font-weight: bold;
 			margin: 20px 0 15px 0;
@@ -462,6 +462,7 @@ section.home-template .section.section-pricing {
 		}
 		.protection-header {
 			margin-bottom: rem-calc(15);
+			font-size: 18px;
 		}
 		.protection-header-plus-yearly {
 			display: none;
@@ -470,7 +471,7 @@ section.home-template .section.section-pricing {
 			}
 		}
 	}
-	.hide-for-large {
+	.hide-for-extra-large {
 		@media only screen and (max-width: 740px) {
 			.card {
 				box-shadow: none;
@@ -519,7 +520,7 @@ section.home-template .section.section-pricing {
 		}
 		.table-container {
 			flex: 0 0 auto;
-			@include breakpoint($medium-small-breakpoint down) {
+			@include breakpoint($medium-large-breakpoint down) {
 				max-width: 100%;
 			}
 		}
@@ -552,11 +553,11 @@ section.home-template .section.section-pricing {
 		align-items: center;
 		justify-content: flex-end;
 		&.mobile {
-			@include breakpoint($medium-small-breakpoint up) {
+			@include breakpoint($medium-large-breakpoint up) {
 				display: none
 			}
 		}
-		@include breakpoint($medium-small-breakpoint down) {
+		@include breakpoint($medium-large-breakpoint down) {
 			justify-content: center;
 		}
 		.midnight-note {
@@ -578,15 +579,7 @@ section.home-template .section.section-pricing {
 			background-color: $price-gold-hover;
 		}
 	}
-	.button-premium-container {
-		height: 38px;
-		width: 177px;
-		margin: 20px auto;
-		padding: 7.7px 14px;
-		position: relative;
-	}
 	.button-premium {
-		position: relative;
 		height: 38px;
 		width: 177px;
 		padding: 7.7px 14px;
@@ -610,7 +603,7 @@ section.home-template .section.section-pricing {
 		background-color: $alabaster;
 		padding-bottom: rem-calc(100);
 		margin-top: rem-calc(40);
-		@include breakpoint($medium-small-breakpoint down) {
+		@include breakpoint($medium-large-breakpoint down) {
 			margin-top: 0;
 			padding-top: 0;
 			background-color: $white;
@@ -621,7 +614,7 @@ section.home-template .section.section-pricing {
 			z-index:10;
 			padding-bottom:14px;
 			margin: 0;
-			@include breakpoint($medium-small-breakpoint down) {
+			@include breakpoint($medium-large-breakpoint down) {
 				padding-bottom: 0;
 				margin-bottom: rem-calc(40);
 			}
@@ -635,7 +628,7 @@ section.home-template .section.section-pricing {
 		}
 		li:last-child {
 			border-right:1px solid #b6b6b6;
-			@include breakpoint($medium-small-breakpoint down) {
+			@include breakpoint($medium-large-breakpoint down) {
 				border-right: none;
 			}
 		}
@@ -668,12 +661,12 @@ section.home-template .section.section-pricing {
 			border-collapse:collapse;
 			width:100%;
 			max-width: 750px;
-			@include breakpoint($medium-small-breakpoint down) {
+			@include breakpoint($medium-large-breakpoint down) {
 				table-layout: fixed;
 			}
 		}
 		tbody {
-			@include breakpoint($medium-small-breakpoint down) {
+			@include breakpoint($medium-large-breakpoint down) {
 				border: 1px solid #b6b6b6;
 			}
 		}
@@ -694,13 +687,13 @@ section.home-template .section.section-pricing {
 			border: 1px solid #b6b6b6;
 			padding: 10px;
 			empty-cells:show;
-			@include breakpoint($medium-small-breakpoint down) {
+			@include breakpoint($medium-large-breakpoint down) {
 				border: none;
 			}
 		}
 		td,th {
 			text-align:left;
-			@include breakpoint($medium-small-breakpoint down) {
+			@include breakpoint($medium-large-breakpoint down) {
 				text-align: center;
 			}
 		}
@@ -711,7 +704,7 @@ section.home-template .section.section-pricing {
 			display:table-cell;
 		}
 		tbody {
-			@include breakpoint(medium up) {
+			@include breakpoint($medium-large-breakpoint up) {
 				tr:nth-child(2n) {
 					background-color: #F7F7F7;
 				}
@@ -759,12 +752,12 @@ section.home-template .section.section-pricing {
 		}
 		.button {
 			margin-bottom: 0;
-			@include breakpoint($medium-small-breakpoint up) {
+			@include breakpoint($medium-large-breakpoint up) {
 				height: 38px;
 				display: flex;
 				align-items: center;
 			}
-			@include breakpoint($medium-small-breakpoint down) {
+			@include breakpoint($medium-large-breakpoint down) {
 				padding-left: rem-calc(20);
 				padding-right: rem-calc(20);
 			}

@@ -370,19 +370,19 @@ const UpgradePlanView = (props) => {
 					)}
 				</div>
 			</div>
-			<div className="row align-center module-editor text-center show-for-medium-small">
+			<div className="row align-center module-editor text-center show-for-extra-large">
 				<div className="columns text-center">
 					<div className="learn-more learn-more-to-full-list" onClick={scrollToComparisonTable}>{t('hub_upgrade_scroll_down')}</div>
 					<div className="arrow learn-more learn-more-to-full-list" onClick={scrollToComparisonTable} />
 				</div>
 			</div>
-			<div className="row align-center module-editor text-center hide-for-medium-small">
+			<div className="row align-center module-editor text-center hide-for-extra-large">
 				<div className="columns text-center">
 					<div className="learn-more learn-more-to-full-list-mobile" onClick={scrollToMobileComparisonTable}>{t('hub_upgrade_scroll_down')}</div>
 					<div className="arrow learn-more learn-more-to-full-list-mobile" onClick={scrollToMobileComparisonTable} />
 				</div>
 			</div>
-			<div ref={comparisonTableRef} className="comparison-table show-for-medium-small">
+			<div ref={comparisonTableRef} className="comparison-table show-for-extra-large">
 				<div className="grid-container">
 					<div className="row align-center">
 						<div className="shrink columns">
@@ -612,13 +612,13 @@ const UpgradePlanView = (props) => {
 				</div>
 			</div>
 
-			<div className="key-container mobile show-for-medium-small">
+			<div className="key-container mobile hide-for-extra-large">
 				<span className="premium-sparkle" />
 				<span className="midnight-note">{`- ${t('hub_upgrade_midnight_note')}`}</span>
 			</div>
 
-			<div ref={mobileComparisonTableRef} className="comparison-table comparison-table-mobile hide-for-medium-small">
-				<div className="row align-middle toggle-switch hide-for-medium-small">
+			<div ref={mobileComparisonTableRef} className="comparison-table comparison-table-mobile hide-for-extra-large">
+				<div className="row align-middle toggle-switch hide-for-extra-large">
 					<div className="toggle-switch-row mobile-switch small-12 text-center columns">
 						<span className={monthlyToggleLabel}>{t('hub_upgrade_monthly')}</span>
 						<label className="switch" htmlFor="switch-check" onClick={toggleMonthlyYearlyPrices}>
