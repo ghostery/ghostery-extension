@@ -25,7 +25,7 @@ import { NavLink } from 'react-router-dom';
 const UpgradePlanView = (props) => {
 	const {
 		protection_level,
-		show_monthly_prices,
+		show_yearly_prices,
 		user
 	} = props;
 
@@ -44,7 +44,7 @@ const UpgradePlanView = (props) => {
 	const PREMIUM = 'PREMIUM';
 
 	const sliderClassNames = ClassNames('switch-check', {
-		checked: show_monthly_prices
+		checked: show_yearly_prices
 	});
 	const tabsTitleBlueClassNames = ClassNames('tabs-title tabs-title-blue', {
 		'is-active': protection_level === BASIC
@@ -55,11 +55,11 @@ const UpgradePlanView = (props) => {
 	const tabsTitlePurpleClassNames = ClassNames('tabs-title tabs-title-purple', {
 		'is-active': protection_level === PREMIUM
 	});
-	const yearlyToggleLabel = ClassNames('toggle-label', {
-		active: !show_monthly_prices
-	});
 	const monthlyToggleLabel = ClassNames('toggle-label', {
-		active: show_monthly_prices
+		active: !show_yearly_prices
+	});
+	const yearlyToggleLabel = ClassNames('toggle-label', {
+		active: show_yearly_prices
 	});
 
 	// Clicking arrow scrolls to table
@@ -73,8 +73,8 @@ const UpgradePlanView = (props) => {
 		mobileComparisonTableRef.current.scrollIntoView({ behavior: 'smooth' });
 	};
 
-	const plusCheckoutLink = show_monthly_prices ? 'https://checkout.ghostery.com/plus' : 'https://checkout.ghostery.com/plus?interval=year';
-	const premiumCheckoutLink = show_monthly_prices ? 'https://checkout.ghostery.com/en/premium' : 'https://checkout.ghostery.com/en/premium?interval=year';
+	const plusCheckoutLink = show_yearly_prices ? 'https://checkout.ghostery.com/plus?interval=year' : 'https://checkout.ghostery.com/plus';
+	const premiumCheckoutLink = show_yearly_prices ? 'https://checkout.ghostery.com/en/premium?interval=year' : 'https://checkout.ghostery.com/en/premium';
 
 	return (
 		<section className="pricing-page page-template-page-content-modules">
@@ -84,12 +84,12 @@ const UpgradePlanView = (props) => {
 						<h1>{t('hub_upgrade_choose_plan')}</h1>
 						<div className="row align-middle toggle-switch">
 							<div className="small-12 text-center columns">
-								<span className={yearlyToggleLabel}>{t('hub_upgrade_yearly')}</span>
+								<span className={monthlyToggleLabel}>{t('hub_upgrade_monthly')}</span>
 								<label className="switch" htmlFor="switch-check" onClick={toggleMonthlyYearlyPrices}>
 									<input className={sliderClassNames} type="checkbox" />
 									<span className="slider round" />
 								</label>
-								<span className={monthlyToggleLabel}>{t('hub_upgrade_monthly')}</span>
+								<span className={yearlyToggleLabel}>{t('hub_upgrade_yearly')}</span>
 							</div>
 						</div>
 					</div>
@@ -124,18 +124,18 @@ const UpgradePlanView = (props) => {
 							</div>
 							<h2>Ghostery Plus</h2>
 							<div className="price">
-								{ show_monthly_prices ? (
-									<React.Fragment>
-										<p className="price-gold font-size-36">$4.99</p>
-										<p className="price-gold sub-text font-size-12">{t('per_month')}</p>
-									</React.Fragment>
-								) : (
+								{ show_yearly_prices ? (
 									<React.Fragment>
 										<p className="price-gold font-size-36">$3.99</p>
 										<p className="price-gold sub-text font-size-12">{t('per_month')}</p>
 										<div className="price-per-year">
 											<p className="price-gold sub-text font-size-12">{`( $47.88 ${t('per_year')})`}</p>
 										</div>
+									</React.Fragment>
+								) : (
+									<React.Fragment>
+										<p className="price-gold font-size-36">$4.99</p>
+										<p className="price-gold sub-text font-size-12">{t('per_month')}</p>
 									</React.Fragment>
 								)}
 							</div>
@@ -167,18 +167,18 @@ const UpgradePlanView = (props) => {
 							<div className="ghostery-premium-image-background" />
 							<h2>Ghostery Premium</h2>
 							<div className="price">
-								{ show_monthly_prices ? (
-									<React.Fragment>
-										<p className="price-purple sub-text font-size-36">$11.99</p>
-										<p className="price-purple sub-text font-size-12">{t('per_month')}</p>
-									</React.Fragment>
-								) : (
+								{ show_yearly_prices ? (
 									<React.Fragment>
 										<p className="price-purple sub-text font-size-36">$8.99</p>
 										<p className="price-purple sub-text font-size-12">{t('per_month')}</p>
 										<div className="price-per-year">
 											<p className="price-purple sub-text font-size-12">{`( $107.88 ${t('per_year')})`}</p>
 										</div>
+									</React.Fragment>
+								) : (
+									<React.Fragment>
+										<p className="price-purple sub-text font-size-36">$11.99</p>
+										<p className="price-purple sub-text font-size-12">{t('per_month')}</p>
 									</React.Fragment>
 								)}
 							</div>
@@ -259,12 +259,7 @@ const UpgradePlanView = (props) => {
 								</div>
 								<h2>Ghostery Plus</h2>
 								<div className="price">
-									{show_monthly_prices ? (
-										<React.Fragment>
-											<p className="price-gold font-size-36">$4.99</p>
-											<p className="price-gold sub-text font-size-12">{t('per_month')}</p>
-										</React.Fragment>
-									) : (
+									{show_yearly_prices ? (
 										<React.Fragment>
 											<p className="price-gold font-size-36">$3.99</p>
 											<p className="price-gold sub-text font-size-12">{t('per_month')}</p>
@@ -272,16 +267,21 @@ const UpgradePlanView = (props) => {
 												<p className="price-gold sub-text font-size-12">{`( $47.88 ${t('per_year')})`}</p>
 											</div>
 										</React.Fragment>
+									) : (
+										<React.Fragment>
+											<p className="price-gold font-size-36">$4.99</p>
+											<p className="price-gold sub-text font-size-12">{t('per_month')}</p>
+										</React.Fragment>
 									)}
 								</div>
 								<div className="row align-middle toggle-switch">
 									<div className="toggle-switch-row small-12 text-center columns">
-										<span className={yearlyToggleLabel}>{t('hub_upgrade_yearly')}</span>
+										<span className={monthlyToggleLabel}>{t('hub_upgrade_monthly')}</span>
 										<label className="switch" htmlFor="switch-check" onClick={toggleMonthlyYearlyPrices}>
 											<input className={sliderClassNames} type="checkbox" />
 											<span className="slider round" />
 										</label>
-										<span className={monthlyToggleLabel}>{t('hub_upgrade_monthly')}</span>
+										<span className={yearlyToggleLabel}>{t('hub_upgrade_yearly')}</span>
 									</div>
 								</div>
 								{isPlus ? (
@@ -315,12 +315,7 @@ const UpgradePlanView = (props) => {
 									<div className="ghostery-premium-image-background" />
 									<h2>Ghostery Premium</h2>
 									<div className="price">
-										{show_monthly_prices ? (
-											<React.Fragment>
-												<p className="price-purple sub-text font-size-36">$11.99</p>
-												<p className="price-purple sub-text font-size-12">{t('per_month')}</p>
-											</React.Fragment>
-										) : (
+										{show_yearly_prices ? (
 											<React.Fragment>
 												<p className="price-purple sub-text font-size-36">$8.99</p>
 												<p className="price-purple sub-text font-size-12">{t('per_month')}</p>
@@ -328,16 +323,21 @@ const UpgradePlanView = (props) => {
 													<p className="price-purple sub-text font-size-12">{`( $107.88 ${t('per_year')})`}</p>
 												</div>
 											</React.Fragment>
+										) : (
+											<React.Fragment>
+												<p className="price-purple sub-text font-size-36">$11.99</p>
+												<p className="price-purple sub-text font-size-12">{t('per_month')}</p>
+											</React.Fragment>
 										)}
 									</div>
 									<div className="row align-middle toggle-switch">
 										<div className="toggle-switch-row small-12 text-center columns">
-											<span className={yearlyToggleLabel}>{t('hub_upgrade_yearly')}</span>
+											<span className={monthlyToggleLabel}>{t('hub_upgrade_monthly')}</span>
 											<label className="switch" htmlFor="switch-check" onClick={toggleMonthlyYearlyPrices}>
 												<input className={sliderClassNames} type="checkbox" />
 												<span className="slider round" />
 											</label>
-											<span className={monthlyToggleLabel}>{t('hub_upgrade_monthly')}</span>
+											<span className={yearlyToggleLabel}>{t('hub_upgrade_yearly')}</span>
 										</div>
 									</div>
 									{isPremium ? (
@@ -620,12 +620,12 @@ const UpgradePlanView = (props) => {
 			<div ref={mobileComparisonTableRef} className="comparison-table comparison-table-mobile hide-for-medium">
 				<div className="row align-middle toggle-switch hide-for-medium">
 					<div className="toggle-switch-row mobile-switch small-12 text-center columns">
-						<span className={yearlyToggleLabel}>{t('hub_upgrade_yearly')}</span>
+						<span className={monthlyToggleLabel}>{t('hub_upgrade_monthly')}</span>
 						<label className="switch" htmlFor="switch-check" onClick={toggleMonthlyYearlyPrices}>
 							<input className={sliderClassNames} type="checkbox" />
 							<span className="slider round" />
 						</label>
-						<span className={monthlyToggleLabel}>{t('hub_upgrade_monthly')}</span>
+						<span className={yearlyToggleLabel}>{t('hub_upgrade_yearly')}</span>
 					</div>
 				</div>
 				<div className="row align-top align-center">
@@ -644,17 +644,17 @@ const UpgradePlanView = (props) => {
 						<p className="protection-header protection-header-free price-blue"><strong>{t('hub_upgrade_plan_free')}</strong></p>
 					</div>
 					<div className="small-4 text-center columns">
-						{show_monthly_prices ? (
-							<p className="protection-header protection-header-plus price-gold"><strong>$4.99</strong></p>
-						) : (
+						{show_yearly_prices ? (
 							<p className="protection-header protection-header-plus price-gold"><span className="protection-header-plus-yearly is-active"><strong>$3.99</strong></span></p>
+						) : (
+							<p className="protection-header protection-header-plus price-gold"><strong>$4.99</strong></p>
 						)}
 					</div>
 					<div className="small-4 text-center columns">
-						{show_monthly_prices ? (
-							<p className="protection-header protection-header-premium price-purple"><strong>$11.99</strong></p>
-						) : (
+						{show_yearly_prices ? (
 							<p className="protection-header protection-header-premium price-purple"><span className="protection-header-premium-yearly is-active"><strong>$8.99</strong></span></p>
+						) : (
+							<p className="protection-header protection-header-premium price-purple"><strong>$11.99</strong></p>
 						)}
 					</div>
 				</div>
@@ -917,7 +917,7 @@ const UpgradePlanView = (props) => {
 // PropTypes ensure we pass required props of the correct type
 UpgradePlanView.propTypes = {
 	protection_level: PropTypes.string.isRequired,
-	show_monthly_prices: PropTypes.bool.isRequired,
+	show_yearly_prices: PropTypes.bool.isRequired,
 	user: PropTypes.shape({
 		email: PropTypes.string,
 		plusAccess: PropTypes.bool,
