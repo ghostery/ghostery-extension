@@ -1,4 +1,5 @@
 /**
+ * ster
  * Upgrade Plan View Component
  *
  * Ghostery Browser Extension
@@ -102,7 +103,7 @@ const UpgradePlanView = (props) => {
 							<div className="ghostery-free-image-container">
 								<div className="ghostery-free-image text-center" title="Ghostery Free" alt="Ghostery Free" />
 							</div>
-							<h2>{t('ghostery')}</h2>
+							<h2>Ghostery</h2>
 							<div className="price">
 								<p className="price-blue-alt font-size-36">{t('hub_upgrade_plan_free')}</p>
 							</div>
@@ -121,7 +122,7 @@ const UpgradePlanView = (props) => {
 							<div className="ghostery-plus-image-container">
 								<div className="ghostery-plus-image" title="Ghostery Plus" alt="Ghostery Plus" />
 							</div>
-							<h2>{t('ghostery_plus')}</h2>
+							<h2>Ghostery Plus</h2>
 							<div className="price">
 								{ show_monthly_prices ? (
 									<React.Fragment>
@@ -164,7 +165,7 @@ const UpgradePlanView = (props) => {
 								<div className="ghostery-premium-image card-image-top" title="Ghostery Premium" alt="Ghostery Premium" />
 							</div>
 							<div className="ghostery-premium-image-background" />
-							<h2>{t('panel_detail_premium_title')}</h2>
+							<h2>Ghostery Premium</h2>
 							<div className="price">
 								{ show_monthly_prices ? (
 									<React.Fragment>
@@ -235,7 +236,7 @@ const UpgradePlanView = (props) => {
 								<div className="ghostery-free-image-container">
 									<div className="ghostery-free-image text-center" title="Ghostery Free" alt="Ghostery Free" />
 								</div>
-								<h2>{t('ghostery')}</h2>
+								<h2>Ghostery</h2>
 								<div className="price">
 									<p className="price-blue-alt font-size-36">{t('hub_upgrade_plan_free')}</p>
 								</div>
@@ -256,7 +257,7 @@ const UpgradePlanView = (props) => {
 								<div className="ghostery-plus-image-container">
 									<div className="ghostery-plus-image" title="Ghostery Plus" alt="Ghostery Plus" />
 								</div>
-								<h2>{t('ghostery_plus')}</h2>
+								<h2>Ghostery Plus</h2>
 								<div className="price">
 									{show_monthly_prices ? (
 										<React.Fragment>
@@ -312,7 +313,7 @@ const UpgradePlanView = (props) => {
 										<div className="ghostery-premium-image card-image-top" title="Ghostery Premium" alt="Ghostery Premium" />
 									</div>
 									<div className="ghostery-premium-image-background" />
-									<h2>{t('panel_detail_premium_title')}</h2>
+									<h2>Ghostery Premium</h2>
 									<div className="price">
 										{show_monthly_prices ? (
 											<React.Fragment>
@@ -387,13 +388,13 @@ const UpgradePlanView = (props) => {
 						<div className="shrink columns">
 							<ul>
 								<li className="bg-blue">
-									<button type="button">{t('ghostery')}</button>
+									<button type="button">Ghostery</button>
 								</li>
 								<li className="bg-gold">
-									<button type="button">{t('ghostery_plus')}</button>
+									<button type="button">Ghostery Plus</button>
 								</li>
 								<li className="bg-purple-blue">
-									<button type="button">{t('panel_detail_premium_title')}</button>
+									<button type="button">Ghostery Premium</button>
 								</li>
 							</ul>
 							<div className="key-container">
@@ -404,9 +405,9 @@ const UpgradePlanView = (props) => {
 								<thead>
 									<tr>
 										<th className="hide" aria-label="hide" />
-										<th className="bg-blue default">{t('ghostery')}</th>
-										<th className="bg-gold">{t('ghostery_plus')}</th>
-										<th className="bg-purple-blue">{t('panel_detail_premium_title')}</th>
+										<th className="bg-blue default">Ghostery</th>
+										<th className="bg-gold">Ghostery Plus</th>
+										<th className="bg-purple-blue">Ghostery Premium</th>
 									</tr>
 								</thead>
 								<tbody>
