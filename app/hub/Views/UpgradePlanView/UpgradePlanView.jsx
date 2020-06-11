@@ -78,7 +78,7 @@ const UpgradePlanView = (props) => {
 
 	return (
 		<section className="pricing-page page-template-page-content-modules">
-			<div className="grid-container show-for-large">
+			<div className="grid-container show-for-extra-large">
 				<div className="row align-center">
 					<div className="small-12 text-center columns">
 						<h1>{t('hub_upgrade_choose_plan')}</h1>
@@ -95,7 +95,7 @@ const UpgradePlanView = (props) => {
 					</div>
 				</div>
 			</div>
-			<div className="grid-container card-wrapper show-for-large">
+			<div className="grid-container card-wrapper show-for-extra-large">
 				<div className="row align-center text-center" data-equalizer data-equalize-on="medium">
 					<div className="card-outer">
 						<div className="card" data-equalizer-watch>
@@ -212,7 +212,7 @@ const UpgradePlanView = (props) => {
 			</div>
 
 
-			<div className="grid-container card-wrapper hide-for-large">
+			<div className="grid-container card-wrapper hide-for-extra-large">
 				<div className="row align-center">
 					<div className="small-12 text-center columns">
 						<h1>{t('hub_upgrade_choose_plan')}</h1>
