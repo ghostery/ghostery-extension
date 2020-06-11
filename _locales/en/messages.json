@@ -734,9 +734,6 @@
 	"panel_detail_rewards_off": {
 		"message": "Ghostery Rewards is OFF"
 	},
-	"panel_detail_premium_title": {
-		"message": "Ghostery Premium"
-	},
 	"panel_detail_premium_text": {
 		"message": "Feature coming soon."
 	},
@@ -1333,9 +1330,6 @@
 	"hub_upgrade_to_plus": {
 		"message": "Upgrade to Plus"
 	},
-	"hub_upgrade_vpn": {
-		"message": "VPN"
-	},
 	"hub_upgrade_to_premium": {
 		"message": "Upgrade to Premium"
 	},
@@ -1381,11 +1375,8 @@
 	"hub_upgrade_no_vpn_logs": {
 		"message": "No VPN logs"
 	},
-	"hub_upgrade_P2P_support": {
-		"message": "P2P support"
-	},
-	"hub_upgrade_IPV6_leak_protection": {
-		"message": "IPV6 Leak Protection"
+	"hub_upgrade_leak_protection": {
+		"message": "Leak Protection"
 	},
 	"hub_upgrade_physical_servers": {
 		"message": "Physical Servers"

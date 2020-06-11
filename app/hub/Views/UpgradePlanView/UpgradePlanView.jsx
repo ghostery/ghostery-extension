@@ -204,7 +204,7 @@ const UpgradePlanView = (props) => {
 							</p>
 							<p className="card-sub-copy">
 								<span className="check blue" />
-								{t('hub_upgrade_vpn')}
+								VPN
 							</p>
 						</div>
 					</div>
@@ -362,7 +362,7 @@ const UpgradePlanView = (props) => {
 									</p>
 									<p className="card-sub-copy">
 										<span className="check blue" />
-										{t('hub_upgrade_vpn')}
+										VPN
 									</p>
 								</div>
 							</div>
@@ -500,7 +500,7 @@ const UpgradePlanView = (props) => {
 									<tr>
 										<td>
 											<span className="feature-title">
-												{t('hub_upgrade_vpn')}
+												VPN
 											</span>
 											<span className="premium-sparkle" />
 										</td>
@@ -526,7 +526,7 @@ const UpgradePlanView = (props) => {
 									<tr>
 										<td>
 											<span className="feature-title">
-												{t('hub_upgrade_P2P_support')}
+												{`P2P ${t('support')}`}
 											</span>
 											<span className="premium-sparkle" />
 										</td>
@@ -539,7 +539,7 @@ const UpgradePlanView = (props) => {
 									<tr>
 										<td>
 											<span className="feature-title">
-												{t('hub_upgrade_IPV6_leak_protection')}
+												{`IPV6 ${t('hub_upgrade_leak_protection')}`}
 											</span>
 											<span className="premium-sparkle" />
 										</td>
@@ -769,7 +769,7 @@ const UpgradePlanView = (props) => {
 									</tr>
 									<tr>
 										<td colSpan="3">
-											<span className="feature-title">{t('hub_upgrade_vpn')}</span>
+											<span className="feature-title">VPN</span>
 											<span className="premium-sparkle" />
 										</td>
 									</tr>
@@ -803,7 +803,7 @@ const UpgradePlanView = (props) => {
 									</tr>
 									<tr>
 										<td colSpan="3">
-											<span className="feature-title">{t('hub_upgrade_P2P_support')}</span>
+											<span className="feature-title">{`P2P ${t('support')}`}</span>
 											<span className="premium-sparkle" />
 										</td>
 									</tr>
@@ -820,7 +820,7 @@ const UpgradePlanView = (props) => {
 									</tr>
 									<tr className="gray">
 										<td colSpan="3">
-											<span className="feature-title">{t('hub_upgrade_IPV6_leak_protection')}</span>
+											<span className="feature-title">{`IPV6 ${t('hub_upgrade_leak_protection')}`}</span>
 											<span className="premium-sparkle" />
 										</td>
 									</tr>
