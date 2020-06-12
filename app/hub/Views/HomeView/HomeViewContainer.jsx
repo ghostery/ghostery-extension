@@ -57,7 +57,8 @@ class HomeViewContainer extends Component {
 
 	_render() {
 		const { justInstalled } = this.state;
-		const { home, user } = this.props;
+		const { home, user, actions } = this.props;
+		const { sendPing } = actions;
 		const isPremium = (user && user.premiumAccess) || false;
 		const {
 			setup_complete,
@@ -75,6 +76,7 @@ class HomeViewContainer extends Component {
 					changeMetrics={this._handleToggleMetrics}
 					email={user ? user.email : ''}
 					isPremium={isPremium}
+					sendPing={sendPing}
 				/>
 			</div>
 		);

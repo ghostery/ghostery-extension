@@ -256,6 +256,7 @@ class Metrics {
 
 			// Onboarding Pings - Ghostery 8.5.2+
 			case 'intro_hub_click':
+			case 'intro_hub_home_upgrade':
 				this._sendReq(type, ['all']);
 				break;
 

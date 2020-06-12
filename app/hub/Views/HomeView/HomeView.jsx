@@ -34,7 +34,8 @@ const HomeView = (props) => {
 		enable_metrics,
 		changeMetrics,
 		email,
-		isPremium
+		isPremium,
+		sendPing,
 	} = props;
 	const accountHref = globals.ACCOUNT_BASE_URL;
 
@@ -64,6 +65,13 @@ const HomeView = (props) => {
 	const upgradeContainerClassNames = ClassNames('HomeView__upgradeContainer row align-center-middle', {
 		'purple-border': !isPremium
 	});
+
+	/**
+	 * Sends the necessary ping to background
+	 */
+	const _sendUpgradePing = () => {
+		sendPing({ type: 'intro_hub_home_upgrade' });
+	};
 
 	return (
 		<div className="HomeView row align-center">
@@ -150,7 +158,7 @@ const HomeView = (props) => {
 						{t('hub_home_plus_upgrade_text')}
 					</div>
 					<div className="HomeView__buttonContainer columns flex-container">
-						<NavLink to="/" className="HomeView__featureButton button primary">
+						<NavLink to="/" className="HomeView__featureButton button primary" onClick={_sendUpgradePing}>
 							{isPremium ? t('hub_home_plus_full_protection') : t('hub_home_plus_upgrade_button_text')}
 						</NavLink>
 					</div>
