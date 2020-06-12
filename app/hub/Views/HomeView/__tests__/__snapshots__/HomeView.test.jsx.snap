@@ -153,10 +153,11 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
         className="HomeView__buttonContainer columns flex-container"
       >
         <a
-          aria-current={null}
-          className="HomeView__featureButton button primary"
-          href="/upgrade"
+          aria-current="page"
+          className="HomeView__featureButton button primary active"
+          href="/"
           onClick={[Function]}
+          style={Object {}}
         >
           hub_home_plus_upgrade_button_text
         </a>
@@ -310,7 +311,7 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
       </div>
     </div>
     <div
-      className="HomeView__upgradeContainer row align-center-middle purple-border"
+      className="HomeView__upgradeContainer row align-center-middle"
     >
       <div
         className="HomeView__upgradeIcon"
@@ -324,12 +325,13 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
         className="HomeView__buttonContainer columns flex-container"
       >
         <a
-          aria-current={null}
-          className="HomeView__featureButton button primary"
-          href="/upgrade"
+          aria-current="page"
+          className="HomeView__featureButton button primary active"
+          href="/"
           onClick={[Function]}
+          style={Object {}}
         >
-          hub_home_plus_upgrade_button_text
+          hub_home_plus_full_protection
         </a>
       </div>
     </div>
