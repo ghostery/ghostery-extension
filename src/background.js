@@ -988,6 +988,12 @@ function onMessageHandler(request, sender, callback) {
 		});
 		return true;
 	}
+	if (name === 'openHubPage') {
+		const hubUrl = chrome.runtime.getURL('./app/templates/hub.html');
+		metrics.ping('intro_hub_click');
+		utils.openNewTab({ url: hubUrl, become_active: true });
+		return false;
+	}
 	if (name === 'promoModals.sawPremiumPromo') {
 		promoModals.recordPremiumPromoSighting();
 		return false;
