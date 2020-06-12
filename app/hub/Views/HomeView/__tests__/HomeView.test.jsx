@@ -28,7 +28,7 @@ describe('app/hub/Views/HomeView component', () => {
 				enable_metrics: true,
 				changeMetrics: () => {},
 				email: 'test@example.com',
-				isPlus: true,
+				isPremium: true,
 			};
 
 			const component = renderer.create(
