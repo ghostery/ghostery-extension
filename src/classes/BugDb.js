@@ -76,7 +76,6 @@ class BugDb extends Updatable {
 		let appId;
 		let category;
 		let blocked;
-		let categoryName;
 
 		const categoryArray = [];
 		const categories = {};
@@ -123,8 +122,7 @@ class BugDb extends Updatable {
 		}
 
 		const categoryNames = Object.keys(categories);
-		for (let i = 0; i < categoryNames.length; i++) {
-			categoryName = categoryNames[i];
+		categoryNames.forEach((categoryName) => {
 			const cat = categories[categoryName];
 			if (cat.trackers) {
 				cat.trackers.sort((a, b) => {
@@ -135,7 +133,7 @@ class BugDb extends Updatable {
 			}
 
 			categoryArray.push(cat);
-		}
+		});
 
 		// Sort categories by tracker numbers
 		categoryArray.sort((a, b) => {
@@ -176,10 +174,9 @@ class BugDb extends Updatable {
 		log('initializing bugdb regexes...');
 
 		const regexesKeys = Object.keys(regexes);
-		for (let i = 0; i < regexesKeys.length; i++) {
-			const id = regexesKeys[i];
+		regexesKeys.forEach((id) => {
 			db.patterns.regex[id] = new RegExp(regexes[id], 'i');
-		}
+		});
 
 		log('setting bugdb noneSelected/allSelected...');
 

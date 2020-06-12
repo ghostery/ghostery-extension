@@ -122,14 +122,13 @@ const _importSettingsNative = (state, action) => {
 	const { settings } = action;
 	const updated_state = {};
 	const settingsKeys = Object.keys(settings);
-	for (let i = 0; i < settingsKeys.length; i++) {
-		const key = settingsKeys[i];
+	settingsKeys.forEach((key) => {
 		let value = settings[key];
 		if (key === 'alert_bubble_timeout') {
 			value = (value > 30) ? 30 : value;
 		}
 		updated_state[key] = value;
-	}
+	});
 
 	updated_state.settings_last_imported = Number((new Date()).getTime());
 	updated_state.importResultText = `${t('settings_import_success')} ${moment(updated_state.settings_last_imported).format('LLL')}`;

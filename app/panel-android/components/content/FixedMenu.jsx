@@ -51,16 +51,14 @@ export default class FixedMenu extends React.Component {
 		switch (type) {
 			case 'enable_anti_tracking': {
 				const categories = Object.keys(this.antiTrackingData);
-				for (let i = 0; i < categories.length; i++) {
-					const category = categories[i];
+				categories.forEach((category) => {
 					const apps = Object.keys(this.antiTrackingData[category]);
-					for (let j = 0; j < apps.length; j++) {
-						const app = apps[j];
+					apps.forEach((app) => {
 						if (this.antiTrackingData[category][app] === 'unsafe') {
 							total++;
 						}
-					}
-				}
+					});
+				});
 				return total;
 			}
 			case 'enable_ad_block':
