@@ -591,11 +591,11 @@ section.home-template .section.section-pricing {
 		);
 		background-size: 200% 100%;
 		background-position: 100% 50%;
-		transition: 0.5s all;
+		transition: 0.25s all;
 		border: none;
 		&:hover {
 			background-position: 0% 50%;
-			transition: 0.5s all;
+			transition: 0.25s all;
 		}
 	}
 
