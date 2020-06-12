@@ -58,7 +58,7 @@ class HomeViewContainer extends Component {
 	_render() {
 		const { justInstalled } = this.state;
 		const { home, user } = this.props;
-		const isPlus = (user && user.plusAccess) || false;
+		const isPremium = (user && user.premiumAccess) || false;
 		const {
 			setup_complete,
 			tutorial_complete,
@@ -74,7 +74,7 @@ class HomeViewContainer extends Component {
 					enable_metrics={enable_metrics}
 					changeMetrics={this._handleToggleMetrics}
 					email={user ? user.email : ''}
-					isPlus={isPlus}
+					isPremium={isPremium}
 				/>
 			</div>
 		);

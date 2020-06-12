@@ -150,7 +150,7 @@ const HomeView = (props) => {
 						{t('hub_home_plus_upgrade_text')}
 					</div>
 					<div className="HomeView__buttonContainer columns flex-container">
-						<NavLink to="/upgrade" className="HomeView__featureButton button primary">
+						<NavLink to="/" className="HomeView__featureButton button primary">
 							{isPremium ? t('hub_home_plus_full_protection') : t('hub_home_plus_upgrade_button_text')}
 						</NavLink>
 					</div>
