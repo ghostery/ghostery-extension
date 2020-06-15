@@ -1600,7 +1600,7 @@
 		"message": "Rozwiązuj szybko problemy przy pomocy naszego działu wsparcia priorytetowego - i otrzymaj dodatkowe korzyści"
 	},
 	"hub_supporter_manifesto": {
-		"message": "Staramy się dostarczać naszym użytkownikom najwyższej jakości darmowe usługi z zakresu ochrony prywatności. Chociaż nie pobieramy opłat za nasz pakiet ochrony prywatności, możesz wesprzeć nas, decydując się na niewielki miesięczny abonament. Przyłącz się do naszej misji dokonując aktualizacji do Ghostery Plus - i odblokuj tym samym super dodatki!"
+		"message": "Staramy się dostarczać naszym użytkownikom najwyższej jakości bezpłatne usługi z zakresu ochrony prywatności. Chociaż nie pobieramy opłat za naszą wtyczkę do przeglądarki, możesz wesprzeć nas, decydując się na niewielki miesięczny abonament. Przyłącz się do naszej misji, przechodząc do Ghostery Plus — i tym samym odblokuj super dodatki!"
 	},
 	"hub_supporter_feature_theme_description": {
 		"message": "Dostosuj kolorystykę Ghostery, zyskując nowe wrażenia wizualne! Funkcja wprowadzona na prośbę użytkowników. Wypróbuj specjalny temat Dark Blue, a w przyszłości także i inne."
@@ -1815,7 +1815,7 @@
 		"message": "Tematy"
 	},
 	"subscribe_pitch": {
-		"message": "Chociaż Ghostery jest darmowe, możesz wesprzeć nas, decydując się na niewielki abonament w wysokości &#36;2 miesięcznie w zamian za super dodatki, takie jak kolorowe tematy, priorytetową pomoc i wiele więcej. Przyłącz się do naszej misji i opłać abonament!"
+		"message": "Chociaż usługi Ghostery są bezpłatne, możesz wesprzeć nas, decydując się na niewielki miesięczny abonament w zamian za super dodatki, takie jak kolorowe tematy, osobiste statystyki śledzenia i wiele innych. Przyłącz się do naszej misji i subskrybuj!"
 	},
 	"subscribe_pitch_spring": {
 		"message": "Podoba Ci się to, co robimy? Wesprzyj nas i odblokuj nowe wiosenne motywy, osobiste analizy dotyczące śledzenia i inne specjalne dodatki, przechodząc do wersji Ghostery Plus!"
@@ -1949,7 +1949,7 @@
 		"message": "Nie, zachowaj historię"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "Odblokuj swoje archiwalne statystyki (i inne fajne dodatki) poprzez przejście do wersji Ghostery Plus za $SPAN_START$&#36;2/miesiąc.$SPAN_END$$LINK_START$Dowiedz się więcej$LINK_END$",
+		"message": "Odblokuj swoje archiwalne statystyki (i inne fajne dodatki) poprzez przejście do wersji Ghostery Plus.$LINK_START$Dowiedz się więcej$LINK_END$",
 		"placeholders": {
 			"span_start": {
 				"content": "<span>"
@@ -2306,6 +2306,9 @@
 	},
 	"learn_more": {
 		"message": "Dowiedz się więcej"
+	},
+	"custom_themes": {
+		"message": "Niestandardowe tematy"
 	},
 	"historical_stats": {
 		"message": "Statystyki archiwalne"

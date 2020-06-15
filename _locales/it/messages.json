@@ -1600,7 +1600,7 @@
 		"message": "Risolvi rapidamente i problemi con il nostro servizio di assistenza prioritario e molti altri vantaggi futuri"
 	},
 	"hub_supporter_manifesto": {
-		"message": "Ci impegniamo ad offrire gratuitamente ai nostri utenti i migliori servizi di tutela della privacy. Anche se la nostra suite per la privacy è gratuita, puoi decidere di sostenerci con un piccolo abbonamento mensile. Unisciti a noi nella nostra missione effettuando l'upgrade a Ghostery Plus, e sblocca fantastici extra lungo la strada!"
+		"message": "Ci impegniamo a offrire gratuitamente ai nostri utenti i migliori servizi di tutela della privacy. Anche se la nostra estensione per browser è gratuita, puoi decidere di sostenerci con un piccolo abbonamento mensile. Unisciti a noi nella nostra missione effettuando l'upgrade a Ghostery Plus, e sblocca fantastici extra lungo la strada!"
 	},
 	"hub_supporter_feature_theme_description": {
 		"message": "Personalizza i colori di Ghostery per una nuova esperienza visiva! Introdotto a grande richiesta. Dai un'occhiata al nostro tema speciale Dark Blue e agli altri in arrivo."
@@ -1815,7 +1815,7 @@
 		"message": "Temi"
 	},
 	"subscribe_pitch": {
-		"message": "Anche se Ghostery è gratuito, puoi decidere di sostenerci con un piccolo abbonamento mensile di &#36;2 al mese in cambio di fantastici extra, come temi colorati, servizio di assistenza prioritario e altro ancora. Unisciti alla nostra missione e abbonati!"
+		"message": "Anche se Ghostery è gratuito, puoi decidere di sostenerci con un piccolo abbonamento mensile in cambio di fantastici extra, come temi colorati, statistiche sul tracciamento personale e altro ancora. Unisciti alla nostra missione e abbonati!"
 	},
 	"subscribe_pitch_spring": {
 		"message": "Ti piace quello che facciamo? Sostienici e passa a Ghostery Plus per sbloccare nuovi temi primaverili, approfondimenti sul tracciamento personale e altri extra speciali."
@@ -1949,7 +1949,7 @@
 		"message": "No, mantieni la cronologia"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "Sblocca la tua cronologia statistica (e altri fantastici vantaggi) aggiornando alla versione Ghostery Plus per $SPAN_START$&#36;2/mese.$SPAN_END$$LINK_START$Per maggiori informazioni$LINK_END$",
+		"message": "Sblocca la tua cronologia statistica (e altri fantastici extra) passando alla versione Ghostery Plus. $LINK_START$Scopri di più$LINK_END$",
 		"placeholders": {
 			"span_start": {
 				"content": "<span>"
@@ -2306,6 +2306,9 @@
 	},
 	"learn_more": {
 		"message": "Ulteriori informazioni"
+	},
+	"custom_themes": {
+		"message": "Temi personalizzati"
 	},
 	"historical_stats": {
 		"message": "Cronologia Statistiche"

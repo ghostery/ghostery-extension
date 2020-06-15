@@ -33,7 +33,8 @@ export default class DotsMenu extends React.Component {
 
 	/* Close the menu if user clicks anywhere on the window */
 	handleClick = (event) => {
-		if (this.state.opening && event.target.className.indexOf('dots-menu-btn') === -1) {
+		const { opening } = this.state;
+		if (opening && event.target.className.indexOf('dots-menu-btn') === -1) {
 			this.setState({
 				opening: false,
 			});
@@ -42,20 +43,18 @@ export default class DotsMenu extends React.Component {
 
 	/* Toggle menu */
 	dotsButtonClicked = () => {
-		const currentState = this.state.opening;
-
-		this.setState({
-			opening: !currentState,
-		});
+		this.setState(prevState => ({ opening: !prevState.opening }));
 	}
 
 	render() {
+		const { actions } = this.props;
+		const { opening } = this.state;
 		return (
 			<div className="dots-menu">
 				<button type="button" className="dots-menu-btn" aria-label="Menu" onClick={this.dotsButtonClicked} />
-				<div className={`dots-menu-content ${this.state.opening ? 'opening' : ''}`}>
+				<div className={`dots-menu-content ${opening ? 'opening' : ''}`}>
 					<ul>
-						{this.props.actions.map(action => (
+						{actions.map(action => (
 							<li key={action.id}>
 								<button type="button" className="dots-menu-item" onClick={action.callback}>{action.name}</button>
 							</li>

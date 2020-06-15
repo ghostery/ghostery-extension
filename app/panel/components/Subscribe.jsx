@@ -31,8 +31,8 @@ function _handleBecomeClick() {
  * Render Subscribe panel.
  * @return {ReactComponent}   ReactComponent instance
  */
-const Subscribe = (props) => {
-	const { loggedIn } = props.match.params;
+const Subscribe = ({ match }) => {
+	const { loggedIn } = match.params;
 	return (
 		<div className="content-subscription">
 			<div className="badge" />
@@ -43,7 +43,7 @@ const Subscribe = (props) => {
 				<span className="pitch-learn-more">{t('subscribe_pitch_learn_more')}</span>
 			</PanelToTabLink>
 			<div>
-				<span className="pitch-become-subscriber" onClick={_handleBecomeClick}>{t('Get_Ghostery_Plus_bang')}</span>
+				<span className="pitch-become-subscriber" onClick={_handleBecomeClick}>{t('get_ghostery_plus_bang')}</span>
 			</div>
 			{(loggedIn === 'false') && (
 				<NavLink to="/login" className="pitch-already-subscriber">

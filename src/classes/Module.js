@@ -11,8 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint max-classes-per-file: 0 */
-
 import Module from 'browser-core/build/core/app/module';
 import baseBackground from 'browser-core/build/core/base/background';
 import globals from './Globals';
@@ -30,7 +28,7 @@ const background = baseBackground({
 });
 
 class GhosteryModule extends Module {
-	get _module() {
+	get _module() { // eslint-disable-line class-methods-use-this
 		return background;
 	}
 }

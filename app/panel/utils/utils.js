@@ -24,7 +24,7 @@ import { log } from '../../../src/utils/common';
 export function updateObject(obj, key, value) {
 	const output = {};
 	output[key] = value;
-	return Object.assign({}, obj, output);
+	return { ...obj, ...output };
 }
 
 /**
@@ -35,9 +35,9 @@ export function updateObject(obj, key, value) {
  * @return {Object}     	new object
  */
 export function removeFromObject(obj, key) {
-	return Object.keys(obj).filter(k => k !== key.toString()).reduce((result, k) => {
-		result[k] = obj[k];
-		return result;
+	return Object.keys(obj).filter(k => k !== key.toString()).reduce((acc, k) => {
+		acc[k] = obj[k];
+		return acc;
 	}, {});
 }
 
@@ -135,7 +135,7 @@ export function validateConfirmEmail(email, confirmEmail) {
 	}
 	const lEmail = email.toLowerCase();
 	const lConfirmEmail = confirmEmail.toLowerCase();
-	return validateEmail(confirmEmail) && (lEmail === lConfirmEmail) || false;
+	return (validateEmail(confirmEmail) && (lEmail === lConfirmEmail)) || false;
 }
 
 /**

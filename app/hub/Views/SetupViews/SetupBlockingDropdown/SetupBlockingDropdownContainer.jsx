@@ -35,7 +35,8 @@ class SetupBlockingDropdownContainer extends Component {
 	 * Function to handle navigating back to the Blocking route
 	 */
 	_closeModal = () => {
-		this.props.history.push('/setup/1');
+		const { history } = this.props;
+		history.push('/setup/1');
 	}
 
 	/**
@@ -43,9 +44,10 @@ class SetupBlockingDropdownContainer extends Component {
 	 * @return {JSX} JSX for rendering the Blocking Dropdown
 	 */
 	render() {
+		const { actions } = this.props;
 		return (
 			<Modal show toggle={this._closeModal}>
-				<SetupBlockingDropdown settingsData={this.props} actions={this.props.actions} handleDoneClick={this._closeModal} />
+				<SetupBlockingDropdown settingsData={this.props} actions={actions} handleDoneClick={this._closeModal} />
 			</Modal>
 		);
 	}

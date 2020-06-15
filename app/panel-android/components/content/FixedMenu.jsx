@@ -20,16 +20,17 @@ export default class FixedMenu extends React.Component {
 		super(props);
 		this.state = {
 			open: false,
-			currentMenuItemText: this.defaultHeaderText,
+			currentMenuItemText: FixedMenu.defaultHeaderText,
 		};
 	}
 
-	get defaultHeaderText() {
+	static get defaultHeaderText() {
 		return 'Enhanced Options';
 	}
 
 	get cliqzModuleData() {
-		return this.props.cliqzModuleData || {};
+		const { cliqzModuleData } = this.props;
+		return cliqzModuleData || {};
 	}
 
 	get antiTrackingData() {
@@ -41,25 +42,27 @@ export default class FixedMenu extends React.Component {
 	}
 
 	get smartBlockData() {
-		return this.props.panel.smartBlock || {};
+		const { panel } = this.props;
+		return panel.smartBlock || {};
 	}
 
 	getCount = (type) => {
 		let total = 0;
 		switch (type) {
-			case 'enable_anti_tracking':
-				for (const category in this.antiTrackingData) {
-					if (this.antiTrackingData.hasOwnProperty(category)) {
-						for (const app in this.antiTrackingData[category]) {
-							if (this.antiTrackingData[category][app] === 'unsafe') {
-								total++;
-							}
+			case 'enable_anti_tracking': {
+				const categories = Object.keys(this.antiTrackingData);
+				categories.forEach((category) => {
+					const apps = Object.keys(this.antiTrackingData[category]);
+					apps.forEach((app) => {
+						if (this.antiTrackingData[category][app] === 'unsafe') {
+							total++;
 						}
-					}
-				}
+					});
+				});
 				return total;
+			}
 			case 'enable_ad_block':
-				return this.adBlockData && this.adBlockData.totalCount || 0;
+				return (this.adBlockData && this.adBlockData.totalCount) || 0;
 			case 'enable_smart_block':
 				Object.keys(this.smartBlockData.blocked || {}).forEach(() => {
 					total++;
@@ -74,14 +77,11 @@ export default class FixedMenu extends React.Component {
 	}
 
 	toggleMenu = () => {
-		const currentState = this.state.open;
-		this.setState({
-			open: !currentState,
-		});
+		this.setState(prevState => ({ open: !prevState.open }));
 	}
 
-	updateHeadeText = (text) => {
-		const textToShow = text || this.defaultHeaderText;
+	updateHeaderText = (text) => {
+		const textToShow = text || FixedMenu.defaultHeaderText;
 
 		this.setState({
 			currentMenuItemText: textToShow,
@@ -89,16 +89,18 @@ export default class FixedMenu extends React.Component {
 	}
 
 	render() {
+		const { panel } = this.props;
+		const { open, currentMenuItemText } = this.state;
 		return (
-			<div className={`fixed-menu ${this.state.open ? 'opened' : ''}`}>
+			<div className={`fixed-menu ${open ? 'opened' : ''}`}>
 				<div onClick={this.toggleMenu} className="menuHeader">
-					<p>{this.state.currentMenuItemText}</p>
+					<p>{currentMenuItemText}</p>
 				</div>
 				<ul className="menuContent">
 					<li className="menuItem">
 						<MenuItem
-							active={this.props.panel.enable_anti_tracking}
-							updateHeadeText={this.updateHeadeText}
+							active={panel.enable_anti_tracking}
+							updateHeaderText={this.updateHeaderText}
 							type="anti_tracking"
 							title="Enhanced Anti-Tracking"
 							numData={this.getCount('enable_anti_tracking')}
@@ -108,8 +110,8 @@ export default class FixedMenu extends React.Component {
 					</li>
 					<li className="menuItem">
 						<MenuItem
-							active={this.props.panel.enable_ad_block}
-							updateHeadeText={this.updateHeadeText}
+							active={panel.enable_ad_block}
+							updateHeaderText={this.updateHeaderText}
 							type="ad_block"
 							title="Enhanced Ad Blocking"
 							numData={this.getCount('enable_ad_block')}
@@ -119,8 +121,8 @@ export default class FixedMenu extends React.Component {
 					</li>
 					<li className="menuItem">
 						<MenuItem
-							active={this.props.panel.enable_smart_block}
-							updateHeadeText={this.updateHeadeText}
+							active={panel.enable_smart_block}
+							updateHeaderText={this.updateHeaderText}
 							type="smart_block"
 							title="Smart Blocking"
 							numData={this.getCount('enable_smart_block')}
