@@ -1,7 +1,7 @@
 /**
- * Ghostery Account Events
+ * Ghostery Checkout Events
  *
- * This file connects the extension to all Account pages
+ * This file connects the extension to all Checkout pages
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -13,28 +13,28 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 /**
- * @namespace AccountPagesContentScript
+ * @namespace CheckoutPagesContentScript
  */
 import msgModule from './utils/msg';
 
-const msg = msgModule('account_pages');
+const msg = msgModule('checkout_pages');
 const { sendMessage } = msg;
 /**
  * Use to call init to initialize functionality
  * @var  {Object} initialized to an object with init method as its property
  */
-const AccountPagesContentScript = (function(window) {
+const CheckoutPagesContentScript = (function(window) {
 	/**
 	 * Initialize functionality of this script.
-	 * @memberOf AccountPagesContentScript
+	 * @memberOf CheckoutPagesContentScript
 	 * @package
 	 */
 	const _listeners = [
-		'accountPage.login',
-		'accountPage.register',
-		'accountPage.getUser',
-		'accountPage.getUserSubscriptionData',
-		'accountPage.logout',
+		'checkoutPage.buyInsights',
+		'checkoutPage.buyPlus',
+		'checkoutPage.buyPremium',
+		'checkoutPage.login',
+		'checkoutPage.register',
 	];
 	const _initialize = function() {
 		_listeners.forEach(name => window.addEventListener(name, () => sendMessage(name)));
@@ -43,7 +43,7 @@ const AccountPagesContentScript = (function(window) {
 	return {
 		/**
 		 * Initialize functionality of this script.
-		 * @memberOf AccountPagesContentScript
+		 * @memberOf CheckoutPagesContentScript
 		 * @public
 		 */
 		init() {
@@ -52,4 +52,4 @@ const AccountPagesContentScript = (function(window) {
 	};
 }(window, document));
 
-AccountPagesContentScript.init();
+CheckoutPagesContentScript.init();
