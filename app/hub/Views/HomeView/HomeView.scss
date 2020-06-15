@@ -15,7 +15,7 @@
 .HomeView {
 	padding-top: 45px;
 	padding-bottom: 25px;
-	color: #4a4a4a;
+	color: $tundora;
 }
 .HomeView--bolded {
 	font-weight: 700;
@@ -28,14 +28,14 @@
 	margin-right: 23px;
 }
 .HomeView__header h1 {
-	color: #4a4a4a;
+	color: $tundora;
 	margin-bottom: 19px;
 }
 .HomeView__headerTagline {
 	margin-top: 7px;
 	font-size: 20px;
 	line-height: 30px;
-	color: #4a4a4a;
+	color: $tundora;
 }
 .HomeView__supportContainer {
 	margin-top: 12px;
@@ -54,7 +54,7 @@
 	margin-top: 7px;
 	padding: 27px 12px 30px;
 	border-radius: 4px;
-	background-color: #f0f3f4;
+	background-color: $porcelain;
 }
 .HomeView__onboardingFeature {
 	margin: 0 8px;
@@ -64,23 +64,32 @@
 	margin: 7px 0 4px;
 	max-width: 1px;
 	padding: 0;
-	background-color: #979797;
+	background-color: $dark-silver;
 }
 .HomeView__dividerHorizontal {
 	margin: 0 25px;
 	height: 1px;
 	width: 100%;
 	padding: 0;
-	background-color: #979797;
+	background-color: $dark-silver;
 }
-.HomeView__plus {
+.HomeView__upgradeContainer {
+	display: flex;
 	margin-top: 22px;
 	padding: 22px 12px;
-	background-color: #f0f3f4;
+	background-color: $porcelain;
 	border-radius: 4px;
+
+	&.purple-border {
+		box-shadow: 0 0 8px 5px $dark-magenta;
+		border: solid 1.6px $dark-magenta;
+	}
 }
-.HomeView__plusFeature {
-	padding: 0 36px;
+.HomeView__upgradeIcon {
+	background-image: upgradeShieldIcon($baby-blue, $tundora);
+	margin: 0px 35px 0 30px;
+	height: 50px;
+	width: 49px;
 }
 .HomeView__featureIcon {
 	height: 50px;
@@ -89,43 +98,35 @@
 	background-repeat: no-repeat;
 	background-position: center center;
 }
+.HomeView__upgradeText {
+	width: 226px;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 1.69;
+}
+.HomeView__featureButton {
+	margin: auto;
+}
 .HomeView__onboardingFeature.feature-tutorial .HomeView__featureIcon {
-	background-image: buildIconWand(#4a4a4a, #daf4ff);
+	background-image: buildIconWand($tundora, $baby-blue);
 }
 .HomeView__onboardingFeature.feature-tutorial-complete .HomeView__featureIcon {
 	width: 100px;
 	margin: 0 0 0 50px;
-	background-image: buildIconWandCheck(#4a4a4a, #daf4ff, #1dafed);
+	background-image: buildIconWandCheck($tundora, $baby-blue, $ghosty-blue-alt);
 }
 .HomeView__onboardingFeature.feature-setup .HomeView__featureIcon {
-	background-image: buildIconClipboard(#4a4a4a, #daf4ff);
+	background-image: buildIconClipboard($tundora, $baby-blue);
 }
 .HomeView__onboardingFeature.feature-setup-complete .HomeView__featureIcon {
 	width: 100px;
 	margin: 0 0 0 50px;
-	background-image: buildIconClipboardCheck(#4a4a4a, #daf4ff, #1dafed);
-}
-.HomeView__featureIcon.feature-plus {
-	position: relative;
-	margin-left: auto;
-	margin-right: auto;
-	top: -25px;
-	height: 46px;
-	background-image: buildIconGhosteryPlus(#4a4a4a, #daf4ff);
-	background-size: contain;
+	background-image: buildIconClipboardCheck($tundora, $baby-blue, $ghosty-blue-alt);
 }
 .HomeView__featureTitle {
 	text-align: center;
 	font-size: 18px;
 	padding: 22px 0 10px;
-}
-.HomeView__featureText {
-	text-align: center;
-	font-size: 14px;
-	line-height: 27px;
-}
-.HomeView__featureButton {
-	margin: 0;
 }
 .HomeView__onboarding .HomeView__featureButton {
 	margin-top: 26px;
@@ -150,8 +151,20 @@
 	.HomeView__onboardingFeature.feature-setup-complete {
 		margin: 35px 0 15px;
 	}
+	.HomeView__upgradeContainer {
+		flex-direction: column;
+	}
+	.HomeView__upgradeIcon {
+		margin: 0 auto 15px auto;
+	}
+	.HomeView__upgradeText {
+		text-align: center;
+		margin: auto;
+	}
+	.HomeView__featureButton {
+		margin-top: 25px;
+	}
 }
-
 // Firefox Font Size Override and Image Size Override
 @-moz-document url-prefix() {
 .HomeView--firefoxFontSize {
