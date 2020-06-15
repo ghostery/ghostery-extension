@@ -268,17 +268,6 @@ export default (state = initialState, action) => {
 			setTheme(document);
 			return { ...state, current_theme: initialState.current_theme };
 		}
-		// @TODO?
-		// case LOGOUT_SUCCESS: {
-		// 	const notificationAction = {
-		// 		payload: {
-		// 			text: 'Logged out successfully.',
-		// 			classes: 'success',
-		// 		}
-		// 	};
-		// 	const updated = _showNotification(state, notificationAction);
-		// 	return Object.assign({}, state, updated);
-		// }
 		case RESET_PASSWORD_SUCCESS: {
 			const notificationAction = {
 				payload: {
@@ -298,6 +287,9 @@ export default (state = initialState, action) => {
 					case '10050':
 					case '10110':
 						errorText = t('banner_email_not_in_system_message');
+						break;
+					case 'too_many_password_resets':
+						errorText = t('too_many_password_resets_text');
 						break;
 					default:
 						errorText = t('server_error_message');

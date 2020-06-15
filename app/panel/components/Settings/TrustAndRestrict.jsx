@@ -184,8 +184,6 @@ class TrustAndRestrict extends React.Component {
 		const {
 			menu, trustedValue, currentWarning, restrictedValue
 		} = this.state;
-		const trusted_sites = site_whitelist;
-		const restricted_sites = site_blacklist;
 		return (
 			<div className="s-trust-restrict-panel s-tabs-panel">
 				<div className="row">
@@ -212,8 +210,8 @@ class TrustAndRestrict extends React.Component {
 							<div className={`${currentWarning ? '' : 's-invisible '}s-callout`}>{currentWarning}</div>
 						</div>
 					</div>
-					{ trusted_sites && trusted_sites.length > 0 &&
-						<Sites sites={trusted_sites} listType="whitelist" updateSitePolicy={actions.updateSitePolicy} />
+					{ site_whitelist && site_whitelist.length > 0 &&
+						<Sites sites={site_whitelist} listType="whitelist" updateSitePolicy={actions.updateSitePolicy} />
 					}
 				</div>
 				<div className={`${menu.showRestrictedSites ? '' : 's-hide '}s-sites-pane`}>
@@ -227,8 +225,8 @@ class TrustAndRestrict extends React.Component {
 							<div className={`${currentWarning ? '' : 's-invisible '}s-callout`}>{currentWarning}</div>
 						</div>
 					</div>
-					{ restricted_sites && restricted_sites.length > 0 &&
-						<Sites sites={restricted_sites} listType="blacklist" updateSitePolicy={actions.updateSitePolicy} />
+					{ site_blacklist && site_blacklist.length > 0 &&
+						<Sites sites={site_blacklist} listType="blacklist" updateSitePolicy={actions.updateSitePolicy} />
 					}
 				</div>
 			</div>

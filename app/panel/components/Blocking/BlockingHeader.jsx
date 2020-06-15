@@ -48,9 +48,6 @@ class BlockingHeader extends React.Component {
 
 	/**
 	 * Lifecycle event
-	 * Refactor Notes:
-	 *   Refactor UNSAFE_componentWillReceiveProps using getDerivedStateFromProps
-	 *   because we are only manipulating state.
 	 */
 	static getDerivedStateFromProps(prevProps, prevState) {
 		return BlockingHeader.updateBlockAll(prevProps.categories, prevState.fromHere);

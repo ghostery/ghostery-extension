@@ -148,8 +148,7 @@ export default class Panel extends React.Component {
 	}
 
 	render() {
-		const { panel } = this.props;
-		const { cliqzModuleData } = this.state;
+		const { panel, cliqzModuleData } = this.state;
 		return (
 			<div>
 				<div className={`chart-wrapper ${this.siteProps.isPaused ? 'paused' : ''}`}>
