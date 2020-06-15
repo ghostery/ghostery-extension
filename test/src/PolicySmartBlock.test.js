@@ -45,7 +45,7 @@ describe('src/classes/PolicySmartBlock.js', () => {
 
 	describe('PolicySmartBlock isFirstPartyRequest tests', () => {
 		beforeAll(() => {
-			policySmartBlock.shouldCheck = jest.fn(() => true);
+			PolicySmartBlock.shouldCheck = jest.fn(() => true);
 		});
 
 		afterAll(() => {
@@ -53,18 +53,18 @@ describe('src/classes/PolicySmartBlock.js', () => {
 		});
 
 		test('PolicySmartBlock isFirstPartyRequest truthy assertion', () => {
-			expect(policySmartBlock.isFirstPartyRequest('tabId', 'example.com', 'example.com')).toBeTruthy();
+			expect(PolicySmartBlock.isFirstPartyRequest('tabId', 'example.com', 'example.com')).toBeTruthy();
 			// isFirstPartyRequest() expects pre-parsed domains, so we should parse the test urls
 			const parsedPage = processUrl('https://checkout.ghostery.com/insights');
 			const parsedRequest = processUrl('https://analytics.ghostery.com/piwik.js');
-			expect(policySmartBlock.isFirstPartyRequest('tabId', parsedPage.generalDomain, parsedRequest.generalDomain)).toBeTruthy();
+			expect(PolicySmartBlock.isFirstPartyRequest('tabId', parsedPage.generalDomain, parsedRequest.generalDomain)).toBeTruthy();
 		});
 
 		test('PolicySmartBlock isFirstPartyRequest falsy assertion', () => {
-			expect(policySmartBlock.isFirstPartyRequest('tabId', 'www.example.com', 'example.com')).toBeFalsy();
-			expect(policySmartBlock.isFirstPartyRequest('tabId', 'sub.example.com', 'example.com')).toBeFalsy();
-			expect(policySmartBlock.isFirstPartyRequest('tabId', 'example.com', 'test.com')).toBeFalsy();
-			expect(policySmartBlock.isFirstPartyRequest('tabId', 'www.example.com', 'www.test.com')).toBeFalsy();
+			expect(PolicySmartBlock.isFirstPartyRequest('tabId', 'www.example.com', 'example.com')).toBeFalsy();
+			expect(PolicySmartBlock.isFirstPartyRequest('tabId', 'sub.example.com', 'example.com')).toBeFalsy();
+			expect(PolicySmartBlock.isFirstPartyRequest('tabId', 'example.com', 'test.com')).toBeFalsy();
+			expect(PolicySmartBlock.isFirstPartyRequest('tabId', 'www.example.com', 'www.test.com')).toBeFalsy();
 		});
 	});
 });

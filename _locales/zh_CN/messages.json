@@ -1600,7 +1600,7 @@
 		"message": "使用我们的优先帮助台服务快速解决问题，更多特权即将推出"
 	},
 	"hub_supporter_manifesto": {
-		"message": "我们致力于为用户免费提供最出色的隐私保护服务。尽管我们的隐私套装不收费，但是您可以选择通过低价按月订阅来支持我们。升级为Ghostery Plus，加入我们的使命——并解锁各种酷炫福利！"
+		"message": "我们致力于为用户免费提供最出色的隐私保护服务。尽管我们的浏览器扩展程序不收费，但是您可以选择通过低价按月订阅来支持我们。升级为 Ghostery Plus，加入我们的使命——并解锁各种酷炫福利！"
 	},
 	"hub_supporter_feature_theme_description": {
 		"message": "定制 Ghostery 的颜色，获得全新的视觉体验！通过热门请求引入。快看看我们的特别版 Dark Blue 主题，更多主题敬请期待。"
@@ -1815,7 +1815,7 @@
 		"message": "主题"
 	},
 	"subscribe_pitch": {
-		"message": "尽管Ghostery是免费的，但是您可以选择通过每月&#36;2的低价订阅来支持我们，同时还能获得酷炫的福利，例如彩色主题、优先帮助服务等等。加入我们的使命并订阅！"
+		"message": "尽管 Ghostery 是免费的，但是您可以选择通过低价按月订阅来支持我们，同时还能获得专属福利，例如彩色主题、个人追踪统计数据等等。加入我们的使命并订阅！"
 	},
 	"subscribe_pitch_spring": {
 		"message": "喜欢我们的创意？升级至 Ghostery Plus，解锁全新的春季主题、个人追踪洞察和其他特别福利！"
@@ -1949,7 +1949,7 @@
 		"message": "不，保留历史数据"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "只需 $SPAN_START$&#36;2/月即可升级至 Ghostery Plus，解锁您的历史统计数据（以及其他超酷特权），$SPAN_END$$LINK_START$了解详情$LINK_END$",
+		"message": "升级为 Ghostery Plus，解锁您的历史统计数据（以及其他酷炫福利）。$LINK_START$了解详情$LINK_END$",
 		"placeholders": {
 			"span_start": {
 				"content": "<span>"
@@ -2306,6 +2306,9 @@
 	},
 	"learn_more": {
 		"message": "了解详情"
+	},
+	"custom_themes": {
+		"message": "自定义主题"
 	},
 	"historical_stats": {
 		"message": "历史统计数据"

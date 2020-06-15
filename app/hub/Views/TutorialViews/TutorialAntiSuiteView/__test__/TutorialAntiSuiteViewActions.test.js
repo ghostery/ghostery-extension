@@ -14,7 +14,7 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import * as utils from '../../../../utils';
-import * as TutorialAntiSuiteViewActions from '../TutorialAntiSuiteViewActions';
+import setTutorialComplete from '../TutorialAntiSuiteViewActions';
 import { SET_TUTORIAL_COMPLETE } from '../../../TutorialView/TutorialViewConstants';
 
 const middlewares = [thunk];
@@ -39,7 +39,7 @@ describe('app/hub/Views/TutorialViews/TutorialAntiSuiteView actions', () => {
 		const data = testData;
 		const expectedPayload = { data, type: SET_TUTORIAL_COMPLETE };
 
-		return store.dispatch(TutorialAntiSuiteViewActions.setTutorialComplete(data)).then(() => {
+		return store.dispatch(setTutorialComplete(data)).then(() => {
 			const actions = store.getActions();
 			expect(actions).toEqual([expectedPayload]);
 		});

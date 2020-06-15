@@ -24,7 +24,7 @@ import { setToast } from '../AppView/AppViewActions';
  * @return {function}        this function returns a plain object, which will be merged into the component's props
  * @memberof HubContainers
  */
-const mapStateToProps = state => Object.assign({}, state.account);
+const mapStateToProps = state => ({ ...state.account });
 
 /**
  * Bind the component's action creators using Redux's bindActionCreators.
@@ -33,11 +33,11 @@ const mapStateToProps = state => Object.assign({}, state.account);
  * @memberof SetupContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign({}, {
+	actions: bindActionCreators({
 		setToast,
 		register,
-		getUser,
-	}), dispatch),
+		getUser
+	}, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateAccountViewContainer);

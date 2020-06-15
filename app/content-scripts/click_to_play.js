@@ -160,12 +160,11 @@ const Click2PlayContentScript = (function(win, doc) {
 			if (name === 'c2p') {
 				if (message) {
 					// Dequeue C2P data stored while the script injection was taking place
-					for (const app_id in message) {
-						if (message.hasOwnProperty(app_id)) {
-							applyC2P(app_id, message[app_id].data, message[app_id].html);
-							delete message[app_id];
-						}
-					}
+					const messageKeys = Object.keys(message);
+					messageKeys.forEach((app_id) => {
+						applyC2P(app_id, message[app_id].data, message[app_id].html);
+						delete message[app_id];
+					});
 				}
 			}
 

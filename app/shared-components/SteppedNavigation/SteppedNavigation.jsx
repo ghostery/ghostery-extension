@@ -36,7 +36,7 @@ const SteppedNavigation = (props) => {
 	const circles = [];
 	for (let i = 1; i <= totalSteps; i++) {
 		// Use <a> without an href prop to prevent a call to history with the same URL
-		circles.push((i === activeIndex) ? <a className="active" key={`nav-${i}`} /> : <NavLink to={`${i}`} key={`nav-${i}`} />); // eslint-disable-line jsx-a11y/anchor-has-content
+		circles.push((i === activeIndex) ? <a className="active" key={`nav-${i}`} /> : <NavLink to={`${i}`} key={`nav-${i}`} />);
 	}
 
 	return (

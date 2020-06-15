@@ -15,7 +15,7 @@ import React from 'react';
 import { ReactSVG } from 'react-svg';
 import ClassNames from 'classnames';
 import Tooltip from './Tooltip';
-import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
+import DynamicUIPortContext from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import globals from '../../../src/classes/Globals';
 import {
@@ -71,6 +71,60 @@ class Summary extends React.Component {
 	/**
 	 * Lifecycle event
 	 */
+	static getDerivedStateFromProps(nextProps) {
+		const trackerLatencyTotal = Summary._computeTrackerLatency(nextProps);
+		const disableBlocking = Summary._computeSiteNotScanned(nextProps);
+
+		// Set page title for Firefox for Android
+		window.document.title = `Ghostery's findings for ${nextProps.pageUrl}`;
+
+		return { trackerLatencyTotal, disableBlocking };
+	}
+
+	/**
+	 * Calculates total tracker latency
+	 * @param {Object} props Summary's props, either this.props or nextProps.
+	 */
+	static _computeTrackerLatency(props) {
+		const { performanceData } = props;
+		let pageLatency = 0;
+
+		// calculate and display page speed
+		if (performanceData) {
+			const { timing } = performanceData;
+			const { loadEventEnd, navigationStart } = timing;
+			// format number of decimal places to use
+			const unfixedLatency = Number(loadEventEnd - navigationStart) / 1000;
+			if (unfixedLatency >= 100) { // > 100 no decimal
+				pageLatency = unfixedLatency.toFixed();
+			} else if (unfixedLatency >= 10 && unfixedLatency < 100) { // 100 > 10 use one decimal
+				pageLatency = unfixedLatency.toFixed(1);
+			} else if (unfixedLatency < 10 && unfixedLatency >= 0) { // < 10s use two decimals
+				pageLatency = unfixedLatency.toFixed(2);
+			}
+			return pageLatency;
+			// reset page load value if page is reloaded while panel is open
+		}
+		return null;
+	}
+
+	/**
+	 * Compute whether controls should be disabled.
+	 * @param {Object} props Summary's props, either this.props or nextProps.
+	 */
+	static _computeSiteNotScanned(props) {
+		const { siteNotScanned, categories } = props;
+		const pageUrl = props.pageUrl || '';
+
+		if (siteNotScanned || !categories || pageUrl.search(/http|chrome-extension|moz-extension|ms-browser-extension|newtab|chrome:\/\/startpage\//) === -1) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Lifecycle event
+	 */
 	componentDidMount() {
 		this._setTrackerLatency(this.props);
 		this._updateSiteNotScanned(this.props);
@@ -78,17 +132,6 @@ class Summary extends React.Component {
 		this._dynamicUIPort = this.context;
 		this._dynamicUIPort.onMessage.addListener(this.handlePortMessage);
 		this._dynamicUIPort.postMessage({ name: 'SummaryComponentDidMount' });
-	}
-
-	/**
-	 * Lifecycle event
-	 */
-	UNSAFE_componentWillReceiveProps(nextProps) {
-		this._setTrackerLatency(nextProps);
-		this._updateSiteNotScanned(nextProps);
-
-		// Set page title for Firefox for Android
-		window.document.title = `Ghostery's findings for ${this.props.pageUrl}`;
 	}
 
 	/**
@@ -107,13 +150,14 @@ class Summary extends React.Component {
 	 * 													text: the text for the notification.
 	 */
 	clickCliqzFeature(options) {
+		const { actions } = this.props;
 		const { feature, status, text } = options;
-		this.props.actions.showNotification({
+		actions.showNotification({
 			updated: feature,
 			reload: true,
 			text,
 		});
-		this.props.actions.toggleCliqzFeature(feature, status);
+		actions.toggleCliqzFeature(feature, status);
 	}
 
 	/**
@@ -121,8 +165,9 @@ class Summary extends React.Component {
 	 * @param  {Object} data Properties of the click and resulting filter
 	 */
 	clickDonut(data) {
-		if (!this.props.is_expert) { this.toggleExpert(); }
-		this.props.actions.filterTrackers(data);
+		const { actions, is_expert } = this.props;
+		if (!is_expert) { this.toggleExpert(); }
+		actions.filterTrackers(data);
 	}
 
 	/**
@@ -130,19 +175,20 @@ class Summary extends React.Component {
 	 * @param  {number} time Optional number of minutes after which Ghostery should un-pause.
 	 */
 	clickPauseButton(time) {
-		const ghosteryPaused = this.props.paused_blocking;
+		const { actions, paused_blocking } = this.props;
+		const ghosteryPaused = paused_blocking;
 		const text = ghosteryPaused ? t('alert_ghostery_resumed') : t('alert_ghostery_paused');
 		sendMessage('ping', ghosteryPaused ? 'resume' : 'pause');
 		if (typeof time === 'number') {
 			sendMessage('ping', 'pause_snooze');
 		}
 
-		this.props.actions.updateGhosteryPaused({
+		actions.updateGhosteryPaused({
 			ghosteryPaused: (typeof time === 'number' ? true : !ghosteryPaused),
 			time: time * 60000,
 		});
-		this.props.actions.filterTrackers({ type: 'trackers', name: 'all' });
-		this.props.actions.showNotification({
+		actions.filterTrackers({ type: 'trackers', name: 'all' });
+		actions.showNotification({
 			updated: 'ghosteryPaused',
 			reload: true,
 			text,
@@ -154,7 +200,7 @@ class Summary extends React.Component {
 	 * @param  {String} button The button that was clicked: trust, restrict
 	 */
 	clickSitePolicy(button) {
-		const { sitePolicy } = this.props;
+		const { actions, sitePolicy } = this.props;
 		let type;
 		let text;
 		let classes;
@@ -173,13 +219,13 @@ class Summary extends React.Component {
 			return;
 		}
 
-		this.props.actions.updateSitePolicy({
+		actions.updateSitePolicy({
 			type,
 		});
 
-		this.props.actions.filterTrackers({ type: 'trackers', name: 'all' });
+		actions.filterTrackers({ type: 'trackers', name: 'all' });
 
-		this.props.actions.showNotification({
+		actions.showNotification({
 			updated: type,
 			reload: true,
 			classes,
@@ -191,14 +237,14 @@ class Summary extends React.Component {
 	 * Handles clicking on Trackers Blocked. Triggers a filter action
 	 */
 	clickTrackersBlocked() {
-		const { sitePolicy, is_expert } = this.props;
+		const { actions, sitePolicy, is_expert } = this.props;
 
 		if (!is_expert) { return; }
 
 		if (sitePolicy === BLACKLISTED) {
-			this.props.actions.filterTrackers({ type: 'trackers', name: 'all' });
+			actions.filterTrackers({ type: 'trackers', name: 'all' });
 		} else {
-			this.props.actions.filterTrackers({ type: 'trackers', name: 'blocked' });
+			actions.filterTrackers({ type: 'trackers', name: 'blocked' });
 		}
 	}
 
@@ -206,16 +252,18 @@ class Summary extends React.Component {
 	 * Handles clicking on the total trackers count on the condensed view
 	 */
 	clickTrackersCount() {
-		this.props.actions.filterTrackers({ type: 'trackers', name: 'all' });
+		const { actions } = this.props;
+		actions.filterTrackers({ type: 'trackers', name: 'all' });
 	}
 
 	/**
 	 * Handles clicking on the green upgrade banner or gold subscriber badge
 	 */
 	clickUpgradeBannerOrGoldPlusIcon() {
+		const { history, user } = this.props;
 		sendMessage('ping', 'plus_panel_from_badge');
 
-		this.props.history.push(this._hasPremiumAccess() || this._hasPlusAccess() ? '/subscription/info' : `/subscribe/${!!this.props.user}`);
+		history.push(this._hasPremiumAccess() || this._hasPlusAccess() ? '/subscription/info' : `/subscribe/${!!user}`);
 	}
 
 	/**
@@ -231,47 +279,33 @@ class Summary extends React.Component {
 	 * Used to handle user clicking on the Stats Navicon
 	 */
 	showStatsView() {
-		this.props.history.push('/stats');
+		const { history } = this.props;
+		history.push('/stats');
 	}
 
 	/**
 	 * Toggle between Simple and Detailed Views.
 	 */
 	toggleExpert(subview = 'blocking') {
-		this.props.actions.toggleExpert();
-		if (this.props.is_expert) {
-			this.props.history.push('/');
+		const { actions, history, is_expert } = this.props;
+		actions.toggleExpert();
+		if (is_expert) {
+			history.push('/');
 		} else {
-			this.props.history.push(`/detail/${subview}`);
+			history.push(`/detail/${subview}`);
 		}
 	}
-
 
 	/**
 	 * Calculates total tracker latency and sets it to state
 	 * @param {Object} props Summary's props, either this.props or nextProps.
 	 */
 	_setTrackerLatency(props) {
-		const { performanceData } = props;
-		let pageLatency = 0;
+		const { performanceData } = this.props;
+		const trackerLatencyTotal = Summary._computeTrackerLatency(props);
 
-		// calculate and display page speed
-		if (performanceData) {
-			const { timing } = performanceData;
-			const { loadEventEnd, navigationStart } = timing;
-			// format number of decimal places to use
-			const unfixedLatency = Number(loadEventEnd - navigationStart) / 1000;
-			if (unfixedLatency >= 100) { // > 100 no decimal
-				pageLatency = unfixedLatency.toFixed();
-			} else if (unfixedLatency >= 10 && unfixedLatency < 100) { // 100 > 10 use one decimal
-				pageLatency = unfixedLatency.toFixed(1);
-			} else if (unfixedLatency < 10 && unfixedLatency >= 0) { // < 10s use two decimals
-				pageLatency = unfixedLatency.toFixed(2);
-			}
-			this.setState({ trackerLatencyTotal: pageLatency });
-		// reset page load value if page is reloaded while panel is open
-		} else if (this.props.performanceData && !performanceData) {
-			this.setState({ trackerLatencyTotal: pageLatency });
+		if (props.performanceData || performanceData !== props.performanceData) {
+			this.setState({ trackerLatencyTotal });
 		}
 	}
 
@@ -280,14 +314,8 @@ class Summary extends React.Component {
 	 * @param {Object} props Summary's props, either this.props or nextProps.
 	 */
 	_updateSiteNotScanned(props) {
-		const { siteNotScanned, categories } = props;
-		const pageUrl = props.pageUrl || '';
-
-		if (siteNotScanned || !categories || pageUrl.search(/http|chrome-extension|moz-extension|ms-browser-extension|newtab|chrome:\/\/startpage\//) === -1) {
-			this.setState({ disableBlocking: true });
-		} else {
-			this.setState({ disableBlocking: false });
-		}
+		const disableBlocking = Summary._computeSiteNotScanned(props);
+		this.setState({ disableBlocking });
 	}
 
 	/**
@@ -295,14 +323,15 @@ class Summary extends React.Component {
 	 * @param {Object}	msg		updated findings sent from the background by PanelData
 	 */
 	handlePortMessage(msg) {
+		const { actions } = this.props;
 		if (msg.to !== 'summary' || !msg.body) { return; }
 
 		const { body } = msg;
 
 		if (body.adBlock || body.antiTracking) {
-			this.props.actions.updateCliqzModuleData(body);
+			actions.updateCliqzModuleData(body);
 		} else {
-			this.props.actions.updateSummaryData(body);
+			actions.updateSummaryData(body);
 		}
 	}
 
@@ -319,7 +348,8 @@ class Summary extends React.Component {
 	}
 
 	_pageHost() {
-		return this.props.pageHost || 'page_host';
+		const { pageHost } = this.props;
+		return pageHost || 'page_host';
 	}
 
 	_hidePageHost(host = null) {
@@ -334,7 +364,7 @@ class Summary extends React.Component {
 			enable_ad_block,
 		} = this.props;
 
-		return enable_ad_block && adBlock && adBlock.trackerCount || 0;
+		return (enable_ad_block && adBlock && adBlock.trackerCount) || 0;
 	}
 
 	_antiTrackUnsafe() {
@@ -343,7 +373,7 @@ class Summary extends React.Component {
 			enable_anti_tracking,
 		} = this.props;
 
-		return enable_anti_tracking && antiTracking && antiTracking.trackerCount || 0;
+		return (enable_anti_tracking && antiTracking && antiTracking.trackerCount) || 0;
 	}
 
 	_requestsModifiedCount() {
@@ -359,7 +389,7 @@ class Summary extends React.Component {
 	_sbBlocked() {
 		const { smartBlock, trackerCounts } = this.props;
 
-		let sbBlocked = smartBlock && smartBlock.blocked && Object.keys(smartBlock.blocked).length || 0;
+		let sbBlocked = (smartBlock && smartBlock.blocked && Object.keys(smartBlock.blocked).length) || 0;
 		if (sbBlocked === trackerCounts.sbBlocked) {
 			sbBlocked = 0;
 		}
@@ -370,7 +400,7 @@ class Summary extends React.Component {
 	_sbAllowed() {
 		const { smartBlock, trackerCounts } = this.props;
 
-		let sbAllowed = smartBlock && smartBlock.unblocked && Object.keys(smartBlock.unblocked).length || 0;
+		let sbAllowed = (smartBlock && smartBlock.unblocked && Object.keys(smartBlock.unblocked).length) || 0;
 		if (sbAllowed === trackerCounts.sbAllowed) {
 			sbAllowed = 0;
 		}
@@ -381,7 +411,7 @@ class Summary extends React.Component {
 	_sbAdjust() {
 		const { enable_smart_block } = this.props;
 
-		return enable_smart_block && (this._sbBlocked() - this._sbAllowed()) || 0;
+		return enable_smart_block && ((this._sbBlocked() - this._sbAllowed()) || 0);
 	}
 
 	_totalTrackersBlockedCount() {
@@ -410,11 +440,13 @@ class Summary extends React.Component {
 	}
 
 	_isPageLoadFast() {
-		return this.state.trackerLatencyTotal < 5;
+		const { trackerLatencyTotal } = this.state;
+		return trackerLatencyTotal < 5;
 	}
 
 	_isPageLoadSlow() {
-		return this.state.trackerLatencyTotal > 10;
+		const { trackerLatencyTotal } = this.state;
+		return trackerLatencyTotal > 10;
 	}
 
 	_isPageLoadMedium() {
@@ -708,12 +740,13 @@ class Summary extends React.Component {
 	 * @return {JSX} JSX for rendering the stats navicon
 	 */
 	_renderStatsNavicon() {
+		const { is_expert } = this.props;
 		const statsNaviconClassNames = ClassNames(
 			'Summary__statsNavicon',
 			'Summary__statsNavicon--absolutely-positioned',
 			'g-tooltip',
 			{
-				hide: this.props.is_expert,
+				hide: is_expert,
 			}
 		);
 
@@ -730,12 +763,13 @@ class Summary extends React.Component {
 	 * @return {JSX} JSX for rendering the rewards navicon
 	 */
 	_renderRewardsNavicon() {
+		const { is_expert } = this.props;
 		const rewardsNaviconClassNames = ClassNames(
 			'Summary__rewardsNavicon',
 			'Summary__rewardsNavicon--absolutely-positioned',
 			'g-tooltip',
 			{
-				hide: this.props.is_expert,
+				hide: is_expert,
 			}
 		);
 

@@ -39,61 +39,62 @@ export default (state = initialState, action) => {
 		case UPDATE_PANEL_DATA: {
 			const { account } = action.data;
 			if (account === null) {
-				return Object.assign({}, initialState);
+				return { ...initialState };
 			}
 			const {
 				userID, user, userSettings, subscriptionData
 			} = account;
-			return Object.assign({}, state, {
+			return {
+				...state,
 				loggedIn: true,
 				userID,
 				user,
 				userSettings,
-				subscriptionData,
-			});
+				subscriptionData
+			};
 		}
 		case REGISTER_SUCCESS:
 		case LOGIN_SUCCESS: {
-			return Object.assign({}, state, {
-				loggedIn: true,
-			});
+			return { ...state, loggedIn: true };
 		}
 		case LOGOUT_SUCCESS: {
-			return Object.assign({}, initialState);
+			return { ...initialState };
 		}
 		case GET_USER_SUCCESS: {
 			const { user } = action.payload;
-			return Object.assign({}, state, {
+			return {
+				...state,
 				loggedIn: true,
 				user
-			});
+			};
 		}
 		case GET_USER_SETTINGS_SUCCESS: {
 			const { settings } = action.payload;
-			return Object.assign({}, state, {
+			return {
+				...state,
 				loggedIn: true,
 				userSettings: settings
-			});
+			};
 		}
 		case GET_USER_SUBSCRIPTION_DATA_FAIL: {
 			const { subscriptionData } = initialState;
-			return Object.assign({}, state, {
-				subscriptionData,
-			});
+			return { ...state, subscriptionData };
 		}
 		case GET_USER_SUBSCRIPTION_DATA_SUCCESS: {
 			const { subscriptionData } = action.payload;
-			return Object.assign({}, state, {
+			return {
+				...state,
 				loggedIn: true,
 				subscriptionData
-			});
+			};
 		}
 		case RESET_PASSWORD_SUCCESS: {
 			const toastMessage = t('banner_check_your_email_title');
-			return Object.assign({}, state, {
+			return {
+				...state,
 				toastMessage,
 				resetPasswordError: false
-			});
+			};
 		}
 		case RESET_PASSWORD_FAIL: {
 			const { errors } = action.payload;
@@ -111,10 +112,11 @@ export default (state = initialState, action) => {
 						errorText = t('server_error_message');
 				}
 			});
-			return Object.assign({}, state, {
+			return {
+				...state,
 				toastMessage: errorText,
 				resetPasswordError: true
-			});
+			};
 		}
 
 		default: return state;

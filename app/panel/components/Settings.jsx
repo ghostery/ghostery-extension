@@ -24,13 +24,23 @@ import Notifications from './Settings/Notifications';
 import OptIn from './Settings/OptIn';
 import Purplebox from './Settings/Purplebox';
 import Account from './Settings/Account';
-import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
+import DynamicUIPortContext from '../contexts/DynamicUIPortContext';
 /**
  * @class Implement base Settings view which routes navigation to all settings subviews
  * @memberof PanelClasses
  */
 class Settings extends React.Component {
 	static contextType = DynamicUIPortContext;
+
+	/**
+	 * Hide alert in 3 sec. after it has been shown.
+	 */
+	hideToast = debounce(function() {
+		this.setState({
+			showToast: false,
+			toastText: ''
+		});
+	}, 3000)
 
 	constructor(props) {
 		super(props);
@@ -45,15 +55,10 @@ class Settings extends React.Component {
 		this.showToast = this.showToast.bind(this);
 		this.hideToast = this.hideToast.bind(this);
 		this.handlePortMessage = this.handlePortMessage.bind(this);
-	}
 
-	/**
-	 * Lifecycle event. Default sub view is set here.
-	 */
-	UNSAFE_componentWillMount() {
 		// Do not redirect to the default if we are trying to access a specific other subview
-		if (this.props.history[this.props.history.length - 1] === '/settings') {
-			this.props.history.push('/settings/globalblocking');
+		if (props.history[props.history.length - 1] === '/settings') {
+			props.history.push('/settings/globalblocking');
 		}
 	}
 
@@ -74,29 +79,105 @@ class Settings extends React.Component {
 		this._dynamicUIPort.onMessage.removeListener(this.handlePortMessage);
 	}
 
-	GlobalBlockingComponent = () => (<GlobalBlocking toggleCheckbox={this.toggleCheckbox} settingsData={this.props} actions={this.props.actions} showToast={this.showToast} language={this.props.language} />);
+	GlobalBlockingComponent = () => {
+		const { actions, language } = this.props;
+		return (
+			<GlobalBlocking
+				toggleCheckbox={this.toggleCheckbox}
+				settingsData={this.props}
+				actions={actions}
+				showToast={this.showToast}
+				language={language}
+			/>
+		);
+	}
 
-	TrustAndRestrictComponent = () => (<TrustAndRestrict toggleCheckbox={this.toggleCheckbox} site_whitelist={this.props.site_whitelist} site_blacklist={this.props.site_blacklist} actions={this.props.actions} />)
+	TrustAndRestrictComponent = () => {
+		const { actions, site_whitelist, site_blacklist } = this.props;
+		return (
+			<TrustAndRestrict
+				toggleCheckbox={this.toggleCheckbox}
+				site_whitelist={site_whitelist}
+				site_blacklist={site_blacklist}
+				actions={actions}
+			/>
+		);
+	}
 
-	GeneralSettingsComponent = () => (<GeneralSettings toggleCheckbox={this.toggleCheckbox} settingsData={this.props} actions={this.props.actions} />);
+	GeneralSettingsComponent = () => {
+		const { actions } = this.props;
+		return (
+			<GeneralSettings
+				toggleCheckbox={this.toggleCheckbox}
+				settingsData={this.props}
+				actions={actions}
+			/>
+		);
+	}
 
-	AdBlockerComponent = () => (<AdBlocker settingsData={this.props} actions={this.props.actions} />);
+	AdBlockerComponent = () => {
+		const { actions } = this.props;
+		return (
+			<AdBlocker
+				settingsData={this.props}
+				actions={actions}
+			/>
+		);
+	}
 
-	PurpleboxComponent = () => (<Purplebox toggleCheckbox={this.toggleCheckbox} selectItem={this.selectItem} settingsData={this.props} actions={this.props.actions} />);
+	PurpleboxComponent = () => {
+		const { actions } = this.props;
+		return (
+			<Purplebox
+				toggleCheckbox={this.toggleCheckbox}
+				selectItem={this.selectItem}
+				settingsData={this.props}
+				actions={actions}
+			/>
+		);
+	}
 
-	NotificationsComponent = () => (<Notifications toggleCheckbox={this.toggleCheckbox} settingsData={this.props} actions={this.props.actions} />);
+	NotificationsComponent = () => {
+		const { actions } = this.props;
+		return (
+			<Notifications
+				toggleCheckbox={this.toggleCheckbox}
+				settingsData={this.props}
+				actions={actions}
+			/>
+		);
+	}
 
-	OptInComponent = () => (<OptIn toggleCheckbox={this.toggleCheckbox} settingsData={this.props} actions={this.props.actions} />);
+	OptInComponent = () => {
+		const { actions } = this.props;
+		return (
+			<OptIn
+				toggleCheckbox={this.toggleCheckbox}
+				settingsData={this.props}
+				actions={actions}
+			/>
+		);
+	}
 
-	AccountComponent = () => (<Account toggleCheckbox={this.toggleCheckbox} settingsData={this.props} actions={this.props.actions} />);
+	AccountComponent = () => {
+		const { actions } = this.props;
+		return (
+			<Account
+				toggleCheckbox={this.toggleCheckbox}
+				settingsData={this.props}
+				actions={actions}
+			/>
+		);
+	}
 
 	/**
 	 * Handles messages from dynamic UI port to background
 	 */
 	handlePortMessage(msg) {
+		const { actions } = this.props;
 		if (msg.to !== 'settings' || !msg.body) { return; }
 
-		this.props.actions.updateSettingsData(msg.body);
+		actions.updateSettingsData(msg.body);
 	}
 
 	/**
@@ -104,6 +185,7 @@ class Settings extends React.Component {
 	 * @param  {Object} event 	checking a checkbox event
 	 */
 	toggleCheckbox(event) {
+		const { actions } = this.props;
 		if (event.currentTarget.name === 'enable_offers') {
 			const signal = {
 				actionId: !event.currentTarget.checked ? 'rewards_off' : 'rewards_on',
@@ -113,7 +195,7 @@ class Settings extends React.Component {
 			sendMessage('setPanelData', { enable_offers: event.currentTarget.checked, signal }, 'rewardsPanel');
 			sendMessage('ping', event.currentTarget.checked ? 'rewards_on' : 'rewards_off');
 		}
-		this.props.actions.toggleCheckbox({
+		actions.toggleCheckbox({
 			event: event.currentTarget.name,
 			checked: event.currentTarget.checked,
 		});
@@ -123,7 +205,8 @@ class Settings extends React.Component {
 	 * Trigger parameterized selection action.
 	 */
 	selectItem(event) {
-		this.props.actions.selectItem({
+		const { actions } = this.props;
+		actions.selectItem({
 			event: event.currentTarget.name,
 			value: event.currentTarget.value,
 		});
@@ -142,29 +225,21 @@ class Settings extends React.Component {
 	}
 
 	/**
-	 * Hide alert in 3 sec. after it has been shown.
-	 */
-	hideToast = debounce(function() { // eslint-disable-line react/sort-comp
-		this.setState({
-			showToast: false,
-			toastText: ''
-		});
-	}, 3000)
-
-	/**
 	 * Render top level component of the Settings view.
 	 * @return {ReactComponent}   ReactComponent instance
 	 */
 	render() {
+		const { is_expanded } = this.props;
+		const { showToast, toastText } = this.state;
 		return (
 			<div>
 				<div className="callout-container">
-					<div className={`callout toast success ${this.state.showToast ? '' : 'hide'}`}>
-						<div className="callout-text">{this.state.toastText}</div>
+					<div className={`callout toast success ${showToast ? '' : 'hide'}`}>
+						<div className="callout-text">{toastText}</div>
 					</div>
 				</div>
 				<div id="content-settings">
-					<SettingsMenu is_expanded={this.props.is_expanded} />
+					<SettingsMenu is_expanded={is_expanded} />
 					<Route path="/settings/globalblocking" render={this.GlobalBlockingComponent} />
 					<Route path="/settings/trustandrestrict" render={this.TrustAndRestrictComponent} />
 					<Route path="/settings/generalsettings" render={this.GeneralSettingsComponent} />

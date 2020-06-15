@@ -42,16 +42,19 @@ class SetupViewContainer extends Component {
 			sendMountActions: false,
 			showModal: false,
 		};
+
+		const { history } = this.props;
 		if (!props.preventRedirect) {
-			this.props.history.push('/setup/1');
+			history.push('/setup/1');
 		}
 
 		const title = t('hub_setup_page_title');
 		window.document.title = title;
 
-		this.props.actions.setSetupStep({ setup_step: 7 });
-		this.props.actions.initSetupProps(this.props.setup);
-		this.props.actions.getSetupShowWarningOverride().then((data) => {
+		const { actions, setup } = this.props;
+		actions.setSetupStep({ setup_step: 7 });
+		actions.initSetupProps(setup);
+		actions.getSetupShowWarningOverride().then((data) => {
 			const { setup_show_warning_override } = data;
 			const { justInstalled } = QueryString.parse(window.location.search);
 			const { user } = props;
@@ -88,8 +91,9 @@ class SetupViewContainer extends Component {
 	* Function to toggle the Ask Again Checkbox
 	*/
 	_toggleCheckbox = () => {
-		const { setup_show_warning_override } = this.props.setup;
-		this.props.actions.setSetupShowWarningOverride({
+		const { actions, setup } = this.props;
+		const { setup_show_warning_override } = setup;
+		actions.setSetupShowWarningOverride({
 			setup_show_warning_override: !setup_show_warning_override,
 		});
 	}
@@ -99,13 +103,14 @@ class SetupViewContainer extends Component {
 	 */
 	_setDefaultSettings() {
 		this.setState({ sendMountActions: true });
-		this.props.actions.setSetupStep({ setup_step: 8 });
-		this.props.actions.setBlockingPolicy({ blockingPolicy: BLOCKING_POLICY_RECOMMENDED });
-		this.props.actions.setAntiTracking({ enable_anti_tracking: true });
-		this.props.actions.setAdBlock({ enable_ad_block: true });
-		this.props.actions.setSmartBlocking({ enable_smart_block: true });
-		this.props.actions.setGhosteryRewards({ enable_ghostery_rewards: !IS_FIREFOX });
-		this.props.actions.setHumanWeb({ enable_human_web: !IS_FIREFOX });
+		const { actions } = this.props;
+		actions.setSetupStep({ setup_step: 8 });
+		actions.setBlockingPolicy({ blockingPolicy: BLOCKING_POLICY_RECOMMENDED });
+		actions.setAntiTracking({ enable_anti_tracking: true });
+		actions.setAdBlock({ enable_ad_block: true });
+		actions.setSmartBlocking({ enable_smart_block: true });
+		actions.setGhosteryRewards({ enable_ghostery_rewards: !IS_FIREFOX });
+		actions.setHumanWeb({ enable_human_web: !IS_FIREFOX });
 	}
 
 	/**
@@ -113,7 +118,8 @@ class SetupViewContainer extends Component {
 	 * @return {JSX} JSX of the Setup Modal's Children
 	 */
 	_renderModalChildren() {
-		const { setup_show_warning_override } = this.props.setup;
+		const { setup } = this.props;
+		const { setup_show_warning_override } = setup;
 
 		return (
 			<div className="SetupModal__content flex-container flex-dir-column align-middle">

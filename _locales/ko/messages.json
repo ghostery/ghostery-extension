@@ -797,7 +797,7 @@
 		"message": "차단되지 않음 "
 	},
 	"white_black_list_error_invalid_url": {
-		"message": "Please enter a valid URL or wildcard."
+		"message": "유효한 URL 또는 와일드카드를 입력하세요."
 	},
 	"whitelist_error_blacklist_url": {
 		"message": "이 사이트는 제한된 사이트 목록에서 제거된 다음 신뢰할 수 있는 사이트 목록에 추가되었습니다."
@@ -807,19 +807,19 @@
 		"message": "이 사이트는 이미 허용 목록에 있습니다."
 	},
 	"settings_adblocker": {
-		"message": "Ad Block Lists"
+		"message": "광고 차단 목록"
 	},
 	"settings_adblocker_lists": {
-		"message": "Load the following Ad Block filter lists:"
+		"message": "다음 광고 차단 필터 목록 로드:"
 	},
 	"settings_adblocker_list_1": {
-		"message": "Ads only"
+		"message": "광고만"
 	},
 	"settings_adblocker_list_2": {
-		"message": "Ads + Trackers"
+		"message": "광고 및 트래커"
 	},
 	"settings_adblocker_list_3": {
-		"message": "Ads + Trackers + Annoyances"
+		"message": "광고, 트래커 및 기타 성가신 요소"
 	},
 	"settings_purple_box": {
 		"message": "보라색 상자 "
@@ -1068,7 +1068,7 @@
 		"message": "신뢰할 수 있는 사이트 "
 	},
 	"settings_sites_placeholder": {
-		"message": "example.com (wildcards supported)"
+		"message": "example.com(와일드카드 지원됨)"
 	},
 	"settings_restricted_sites": {
 		"message": "제한된 사이트 "
@@ -1588,7 +1588,7 @@
 		}
 	},
 	"hub_supporter_perk_themes_description": {
-		"message": "Customize the Ghostery colors - try our Dark Blue theme!"
+		"message": "Ghostery 컬러 사용자 지정 - Dark Blue 테마를 사용해보세요!"
 	},
 	"hub_supporter_perk_stats_description": {
 		"message": "귀하의 차단 통계를 열람하고, Ghostery가 귀하를 위해 기능하는 방법을 살펴보세요"
@@ -1600,10 +1600,10 @@
 		"message": "우선 지원 데스크 서비스를 통해 빠르게 문제를 해결하고, 향후 더 많은 특전을 받으세요"
 	},
 	"hub_supporter_manifesto": {
-		"message": "당사는 사용자분들에게 무료로 최상의 개인정보 보호 서비스를 제공하려고 노력하고 있습니다. 개인정보 보호 서비스에는 요금을 부과하지 않으나 소정의 월별 서비스 요금을 지불하여 당사를 후원하실 수 있습니다. Ghostery Plus로 업그레이드하여 당사의 활동을 후원하고 계속해서 멋진 혜택을 받아보세요!"
+		"message": "당사는 최고의 개인 정보 보호 서비스를 사용자에게 무료로 제공하기 위해 노력하고 있습니다. 브라우저 확장에 대한 비용은 청구하지 않지만, 소정의 월별 구독 요금을 지불하여 당사를 후원하실 수 있습니다. Ghostery Plus로 업그레이드하여 당사의 활동을 후원하고 계속해서 멋진 혜택을 받아보세요!"
 	},
 	"hub_supporter_feature_theme_description": {
-		"message": "Customize the Ghostery colors for a new visual experience! Introduced through popular request. Check out our special Dark Blue theme, and more to come."
+		"message": "Ghostery 컬러를 사용자 지정하여 새로운 비주얼을 경험해보세요! 폭넓은 요청에 따라 선보입니다. 특별한 Dark Blue 테마를 확인하고 앞으로 소개될 다양한 테마도 기대해주세요."
 	},
 	"hub_supporter_feature_stats_description": {
 		"message": "동향을 파악하고, Ghostery가 귀하의 브라우징에 영향을 미치는 방법을 알아보기 위해서 그래프 및 통계가 구비된 역사적 차단 결과를 열람하세요."
@@ -1815,10 +1815,10 @@
 		"message": "테마"
 	},
 	"subscribe_pitch": {
-		"message": "고스터리는 무료로 이용이 가능하나 매달 &#36;2의 저렴한 서비스 요금으로 저희를 후원해 주시면 컬러 테마, 후원자 우선 지원 서비스 등 다양한 혜택이 제공됩니다. 저희를 후원하고 서비스에 가입해 주세요!"
+		"message": "Ghostery는 무료로 이용이 가능하나 매달 소정의 구독 요금으로 저희를 후원해 주시면 컬러 테마, 개인 추적 통계 등 특별 혜택이 제공됩니다. 저희를 후원하고 서비스에 가입해 주세요!"
 	},
 	"subscribe_pitch_spring": {
-		"message": "Like what we do? Support us and unlock new spring themes, personal tracking insights, and other special perks by upgrading to Ghostery Plus!"
+		"message": "현재 서비스가 마음에 드시나요? Ghostery Plus로 업그레이드하여 당사를 후원하고 새로운 봄 테마, 개인 추적 서비스, 기타 혜택을 받아보세요."
 	},
 	"subscribe_pitch_learn_more": {
 		"message": "자세히 알아보기"
@@ -1833,22 +1833,22 @@
 		"message": "이미 가입하셨나요?여기에서 로그인하세요"
 	},
 	"subscribe_pitch_sign_in_plus": {
-		"message": "Already a subscriber? Sign in"
+		"message": "이미 구독 중이신가요? 여기에서 로그인하세요"
 	},
 	"subscribe_pitch_sign_in": {
 		"message": "이미 구독 중이신가요? 여기에서 로그인하세요"
 	},
 	"subscription_default_theme": {
-		"message": "Default"
+		"message": "기본"
 	},
 	"subscription_dark_blue_theme": {
-		"message": "Dark Blue Theme"
+		"message": "Dark Blue 테마"
 	},
 	"subscription_palm_theme": {
-		"message": "Palm Theme"
+		"message": "Palm 테마"
 	},
 	"subscription_leaf_theme": {
-		"message": "Leaf Theme"
+		"message": "Leaf 테마"
 	},
 	"subscription_status": {
 		"message": "상태"
@@ -1949,7 +1949,7 @@
 		"message": "아니요, 이력을 유지합니다"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "$SPAN_START$&#36;2/월$SPAN_END$$LINK_START$(더 알아보기)$LINK_END$ 동안 Ghostery Plus로 업그레이드함으로써 귀하의 역사적 통계(및 기타 유용한 특전)를 이용하세요.",
+		"message": "Ghostery Plus로 업그레이드하여 역사적 통계(및 기타 유용한 특전)를 이용하세요.$LINK_START$더 알아보기$LINK_END$ ",
 		"placeholders": {
 			"span_start": {
 				"content": "<span>"
@@ -2172,16 +2172,16 @@
 		}
 	},
 	"myoffrz_check_conditions": {
-		"message": "Check the following conditions"
+		"message": "다음 조건을 확인하세요"
 	},
 	"myoffrz_redeem_code": {
-		"message": "Redeem code"
+		"message": "코드 사용"
 	},
 	"myoffrz_voucher_found": {
-		"message": "Voucher found"
+		"message": "쿠폰 확인됨"
 	},
 	"myoffrz_redeeming_voucher": {
-		"message": "Redeeming voucher"
+		"message": "쿠폰 사용 중"
 	},
 	"OFFERS_ENDS": {
 		"message": ""
@@ -2307,6 +2307,9 @@
 	"learn_more": {
 		"message": "자세히 알아보기 "
 	},
+	"custom_themes": {
+		"message": "맞춤 테마"
+	},
 	"historical_stats": {
 		"message": "역사적 통계"
 	},
@@ -2381,10 +2384,10 @@
 		"message": "Ghostery Midnight를 사용해 보세요"
 	},
 	"seven_day_free_trial": {
-		"message": "7 Day Free Trial"
+		"message": "7일 무료 평가판"
 	},
 	"spring_is_here": {
-		"message": "Spring is here!"
+		"message": "봄이 왔습니다!"
 	},
   	"full_coverage_protection_promise": {
 	  "message": "장치의 모든 브라우저 및 앱을 완전하게 보호하세요"
@@ -2405,7 +2408,7 @@
 		"message": "무료 다운로드"
 	},
 	"support_ghostery_and_try_plus_instead": {
-		"message": "Support Ghostery and try Plus instead"
+		"message": "Ghostery를 후원하고 Plus 기능을 사용해보세요"
 	},
 	"no_thanks_continue_with_basic": {
 		"message": "괜찮습니다, Basic으로 계속 진행합니다"

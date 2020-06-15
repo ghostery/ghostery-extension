@@ -23,9 +23,9 @@ import TrackersChart from './content/TrackersChart';
 import {
 	getPanelData, getSummaryData, getSettingsData, getBlockingData
 } from '../actions/panelActions';
-import { getCliqzModuleData } from '../actions/cliqzActions';
+import getCliqzModuleData from '../actions/cliqzActions';
 import handleAllActions from '../actions/handler';
-import { fromTrackersToChartData } from '../utils/chart';
+import fromTrackersToChartData from '../utils/chart';
 
 export default class Panel extends React.Component {
 	constructor(props) {
@@ -54,11 +54,13 @@ export default class Panel extends React.Component {
 	}
 
 	get siteCategories() {
-		return this.state.blocking.categories || [];
+		const { blocking } = this.state;
+		return blocking.categories || [];
 	}
 
 	get globalCategories() {
-		return this.state.settings.categories || [];
+		const { settings } = this.state;
+		return settings.categories || [];
 	}
 
 	get chartData() {
@@ -71,17 +73,18 @@ export default class Panel extends React.Component {
 	}
 
 	get siteProps() {
-		const hostName = this.state.summary.pageHost || '';
+		const { summary } = this.state;
+		const hostName = summary.pageHost || '';
 		const pageHost = hostName.toLowerCase().replace(/^(http[s]?:\/\/)?(www\.)?/, '');
 
-		const siteWhitelist = this.state.summary.site_whitelist || [];
-		const siteBlacklist = this.state.summary.site_blacklist || [];
+		const siteWhitelist = summary.site_whitelist || [];
+		const siteBlacklist = summary.site_blacklist || [];
 
 		const isTrusted = siteWhitelist.indexOf(pageHost) !== -1;
 		const isRestricted = siteBlacklist.indexOf(pageHost) !== -1;
-		const isPaused = this.state.summary.paused_blocking;
+		const isPaused = summary.paused_blocking;
 
-		const nTrackersBlocked = (this.state.summary.trackerCounts || {}).blocked || 0;
+		const nTrackersBlocked = (summary.trackerCounts || {}).blocked || 0;
 
 		return {
 			hostName, pageHost, isTrusted, isRestricted, isPaused, nTrackersBlocked
@@ -131,7 +134,7 @@ export default class Panel extends React.Component {
 	setGlobalState = (updated) => {
 		const newState = {};
 		Object.keys(updated).forEach((key) => {
-			newState[key] = Object.assign({}, this.state[key], updated[key]);
+			newState[key] = { ...this.state[key], ...updated[key] }; // eslint-disable-line react/destructuring-assignment
 		});
 
 		this.setState(newState);
@@ -145,6 +148,7 @@ export default class Panel extends React.Component {
 	}
 
 	render() {
+		const { panel, cliqzModuleData } = this.state;
 		return (
 			<div>
 				<div className={`chart-wrapper ${this.siteProps.isPaused ? 'paused' : ''}`}>
@@ -164,7 +168,7 @@ export default class Panel extends React.Component {
 				<Tabs>
 					<Tab tabLabel="Overview" linkClassName="custom-link">
 						<Overview categories={this.siteCategories} />
-						<FixedMenu panel={this.state.panel} cliqzModuleData={this.state.cliqzModuleData} />
+						<FixedMenu panel={panel} cliqzModuleData={cliqzModuleData} />
 					</Tab>
 
 					<Tab tabLabel="Site Trackers" linkClassName="custom-link">
