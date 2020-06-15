@@ -27,7 +27,8 @@ class Account extends React.Component {
 	 * view to open Sign In (Login) view.
 	 */
 	clickSigninCreate = () => {
-		this.props.settingsData.history.push('/login');
+		const { settingsData } = this.props;
+		settingsData.history.push('/login');
 	}
 
 	/**
@@ -47,17 +48,19 @@ class Account extends React.Component {
 	 * Trigger action to export settings in JSON format and save it to a file.
 	 */
 	clickExportSettings = () => {
-		this.props.actions.exportSettings(this.props.settingsData.pageUrl);
+		const { actions, settingsData } = this.props;
+		actions.exportSettings(settingsData.pageUrl);
 	}
 
 	/**
 	 * Trigger custom Import dialog or a native Open File dialog depending on browser.
 	 */
 	clickImportSettings = () => {
+		const { actions, settingsData } = this.props;
 		const browserName = globals.BROWSER_INFO.name;
 		if (browserName === 'firefox') {
 			// show ghostery dialog window for import
-			this.props.actions.importSettingsDialog(this.props.settingsData.pageUrl);
+			actions.importSettingsDialog(settingsData.pageUrl);
 		} else {
 			// for chrome and opera, use the native File Dialog
 			this.selectedFile.click();
@@ -68,7 +71,8 @@ class Account extends React.Component {
 	 * Parse settings file imported via native browser window. Called via input#select-file onChange.
 	 */
 	validateImportFile = () => {
-		this.props.actions.importSettingsNative(this.selectedFile.files[0]);
+		const { actions } = this.props;
+		actions.importSettingsNative(this.selectedFile.files[0]);
 	}
 
 	/**

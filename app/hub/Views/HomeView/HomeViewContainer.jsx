@@ -56,8 +56,9 @@ class HomeViewContainer extends Component {
 	 * Function to handle toggling Metrics Opt-In
 	 */
 	_handleToggleMetrics = () => {
-		const enable_metrics = !this.props.home.enable_metrics;
-		this.props.actions.setMetrics({ enable_metrics });
+		const { actions, home } = this.props;
+		const enable_metrics = !home.enable_metrics;
+		actions.setMetrics({ enable_metrics });
 	}
 
 	/**
@@ -68,7 +69,8 @@ class HomeViewContainer extends Component {
 	_handlePremiumPromoModalClick = (type = 'basic') => {
 		// GH-1777
 		// we want to show the promo modal exactly once per Hub visit
-		this.props.actions.markPremiumPromoModalShown();
+		const { actions } = this.props;
+		actions.markPremiumPromoModalShown();
 
 		sendMessage('SET_PREMIUM_PROMO_MODAL_SEEN', {});
 
@@ -103,38 +105,19 @@ class HomeViewContainer extends Component {
 	 */
 	_handleTryMidnightClick = () => { this._handlePremiumPromoModalClick('premium'); }
 
-	/**
-	 * @returns {bool}
-	 * @private
-	 * Is the user a Premium subscriber?
-	 */
-	_premiumSubscriber = () => {
-		const { loggedIn, user } = this.props;
-
-		return loggedIn && (user && user.scopes && user.scopes.includes('subscriptions:premium'));
-	}
-
 	_render() {
 		const { justInstalled } = this.state;
 		const { home, user } = this.props;
-		const isPlus = user && user.subscriptionsPlus || false;
+		const isPlus = (user && user.plusAccess) || false;
+		const isPremium = (user && user.premiumAccess) || false;
 		const {
 			premium_promo_modal_shown,
 			setup_complete,
 			tutorial_complete,
 			enable_metrics,
 		} = home;
-		const childProps = {
-			justInstalled,
-			setup_complete,
-			tutorial_complete,
-			enable_metrics,
-			changeMetrics: this._handleToggleMetrics,
-			email: user ? user.email : '',
-			isPlus,
-		};
 
-		const showPromoModal = !premium_promo_modal_shown && !this._premiumSubscriber();
+		const showPromoModal = !premium_promo_modal_shown && !isPremium;
 
 		return (
 			<div className="full-height">
@@ -147,7 +130,15 @@ class HomeViewContainer extends Component {
 					handleGetPlusClick={this._handleGetPlusClick}
 					handleTryMidnightClick={this._handleTryMidnightClick}
 				/>
-				<HomeView {...childProps} />
+				<HomeView
+					justInstalled={justInstalled}
+					setup_complete={setup_complete}
+					tutorial_complete={tutorial_complete}
+					enable_metrics={enable_metrics}
+					changeMetrics={this._handleToggleMetrics}
+					email={user ? user.email : ''}
+					isPlus={isPlus}
+				/>
 			</div>
 		);
 	}
@@ -174,7 +165,7 @@ HomeViewContainer.propTypes = {
 	}),
 	user: PropTypes.shape({
 		email: PropTypes.string,
-		subscriptionsPlus: PropTypes.bool,
+		plusAccess: PropTypes.bool,
 	}),
 	actions: PropTypes.shape({
 		getHomeProps: PropTypes.func.isRequired,
@@ -194,7 +185,7 @@ HomeViewContainer.defaultProps = {
 	},
 	user: {
 		email: '',
-		subscriptionsPlus: false,
+		plusAccess: false,
 	},
 };
 

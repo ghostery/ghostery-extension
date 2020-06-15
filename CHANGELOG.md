@@ -1,4 +1,10 @@
-### GHOSTERY 8.5.0 ()
+### GHOSTERY 8.5.1 (June 1, 2020)
+
++ Unlock Plus features for Ghostery Midnight users (#546)
++ Update Ghostery Plus feature list in subscription panel (#540)
++ Remove hard-coded subscription pricing (#547)
+
+### GHOSTERY 8.5.0 (May 7, 2020)
 
 + New Spring themes for Plus subscribers (#525)
 + New settings option to select Ad-Blocker lists (#527)
@@ -9,13 +15,14 @@
 + Standardize all Ghostery staging and production global URLs (#511)
 + Updated Rewards UI (#521)
 + Update legacy unit tests (#526)
++ Updated translations
 
-### GHOSTERY 8.4.9 (April 9, 2019)
+### GHOSTERY 8.4.9 (April 9, 2020)
 
 + Better handling of semantic version comparison (#524)
 + Updates to AMO build script (#524)
 
-### GHOSTERY 8.4.8 (March 30, 2019)
+### GHOSTERY 8.4.8 (March 30, 2020)
 
 + Fixes issue that could intermittently cause some cookies to be reset (Fixes #514)
 + Handle legacy opt-in settings for Firefox (#518)

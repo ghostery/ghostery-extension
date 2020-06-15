@@ -27,17 +27,12 @@ class Detail extends React.Component {
 
 		// event bindings
 		this.toggleExpanded = this.toggleExpanded.bind(this);
-	}
 
-	/**
-	 * Lifecycle event
-	 */
-	UNSAFE_componentWillMount() {
 		// set default tab / route based on how we got to this view:
 		// did the user click the Rewards icon? Or the donut number / Detailed View tab in the header?
-		const location = this.props.history.location.pathname;
+		const location = props.history.location.pathname;
 		if (!location.includes('rewards')) {
-			this.props.history.push('/detail/blocking');
+			props.history.push('/detail/blocking');
 		}
 	}
 
@@ -49,7 +44,8 @@ class Detail extends React.Component {
 	 * Click "expertTab" to enable detailed (expert) mode. Trigger action.
 	 */
 	toggleExpanded() {
-		this.props.actions.toggleExpanded();
+		const { actions } = this.props;
+		actions.toggleExpanded();
 	}
 
 	/**
@@ -60,13 +56,14 @@ class Detail extends React.Component {
 	 * @return {ReactComponent}   ReactComponent instance
 	 */
 	render() {
+		const { is_expanded, user, history } = this.props;
 		const condensedToggleClassNames = ClassNames('condensed-toggle', {
-			condensed: this.props.is_expanded,
+			condensed: is_expanded,
 		});
 
-		const activeTab = this.props.history.location.pathname.includes('rewards') ? 'rewards' : 'blocking';
+		const activeTab = history.location.pathname.includes('rewards') ? 'rewards' : 'blocking';
 		const contentDetailsClassNames = ClassNames({
-			expanded: this.props.is_expanded,
+			expanded: is_expanded,
 			rewardsView: activeTab === 'rewards',
 		});
 
@@ -80,7 +77,7 @@ class Detail extends React.Component {
 					<Route path="/detail/rewards" render={this.RewardsComponent} />
 					<DetailMenu
 						hasReward={false}
-						subscriptionsPlus={this.props.user && this.props.user.subscriptionsPlus}
+						plusAccess={user && user.plusAccess}
 						activeTab={activeTab}
 					/>
 				</div>

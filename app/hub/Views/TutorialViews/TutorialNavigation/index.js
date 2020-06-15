@@ -20,6 +20,6 @@ import TutorialNavigationContainer from './TutorialNavigationContainer';
  * @return {function}        this function returns a plain object, which will be merged into the component's props
  * @memberof HubContainers
  */
-const mapStateToProps = state => Object.assign({}, state.tutorial);
+const mapStateToProps = state => ({ ...state.tutorial });
 
 export default connect(mapStateToProps)(TutorialNavigationContainer);

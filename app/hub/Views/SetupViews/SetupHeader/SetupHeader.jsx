@@ -19,13 +19,13 @@ import PropTypes from 'prop-types';
  * @return {JSX} JSX for rendering the Setup Header View of the Hub app
  * @memberof HubComponents
  */
-const SetupHeader = props => (
+const SetupHeader = ({ title, titleImage }) => (
 	<div className="row align-center">
 		<div className="columns small-12 large-10">
 			<div className="SetupHeader flex-container align-center-middle">
-				<img src={props.titleImage} />
+				<img src={titleImage} />
 				<div className="SetupHeader__title">
-					<h3 dangerouslySetInnerHTML={{ __html: props.title }} />
+					<h3 dangerouslySetInnerHTML={{ __html: title }} />
 				</div>
 			</div>
 		</div>

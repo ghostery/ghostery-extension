@@ -13,4 +13,5 @@
 
 import React from 'react';
 
-export const DynamicUIPortContext = React.createContext(null);
+const DynamicUIPortContext = React.createContext(null);
+export default DynamicUIPortContext;

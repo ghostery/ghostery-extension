@@ -11,8 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint jsx-a11y/label-has-associated-control: 0 */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import RadioButton from './RadioButton';
@@ -21,22 +19,31 @@ import RadioButton from './RadioButton';
  * @class Implements a radio button group
  * @memberof PanelBuildingBlocks
  */
-const RadioButtonGroup = (props) => {
-	const { indexClicked, handleItemClick } = props;
+const RadioButtonGroup = ({ indexClicked, handleItemClick, labels }) => {
+	const labelsEl = labels.map(label => (
+		<div key={label} className="RadioButtonGroup__label">
+			{t(label)}
+		</div>
+	));
+
+	const buttons = labels.map((label, index) => (
+		<div key={label} className="RadioButtonGroup__button">
+			<RadioButton
+				checked={index === indexClicked}
+				handleClick={() => handleItemClick(index)}
+			/>
+		</div>
+	));
+
 	return (
-		props.labels.map((label, index) => (
-			<div className="flex-container align-justify RadioButtonGroup__container" key={label}>
-				<span className="RadioButtonGroup__label">
-					{t(label)}
-				</span>
-				<div>
-					<RadioButton
-						checked={index === indexClicked}
-						handleClick={() => handleItemClick(index)}
-					/>
-				</div>
+		<div className="RadioButtonGroup__container">
+			<div className="flex-container align-justify RadioButtonGroup__labelContainer">
+				{labelsEl}
 			</div>
-		))
+			<div className="flex-container align-justify RadioButtonGroup__buttonsContainer">
+				{buttons}
+			</div>
+		</div>
 	);
 };
 

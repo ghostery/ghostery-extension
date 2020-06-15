@@ -31,7 +31,7 @@ class Licenses extends React.Component {
 	 * Wrapper function for dangerouslySetInnerHTML. Provides extra security
 	 * @return {Object}
 	 */
-	createFooterMarkup() {
+	static createFooterMarkup() {
 		return { __html: t('license_footer') };
 	}
 
@@ -60,7 +60,7 @@ class Licenses extends React.Component {
 					<div className="license-list">{ list }</div>
 				</div>
 				<div id="footer">
-					<div className="columns copyright text-center" dangerouslySetInnerHTML={this.createFooterMarkup()} />
+					<div className="columns copyright text-center" dangerouslySetInnerHTML={Licenses.createFooterMarkup()} />
 				</div>
 			</div>
 		);

@@ -11,13 +11,25 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-.RadioButtonGroup__label {
-	margin-right: 10px;
-	font-weight: bolder;
-}
 .RadioButtonGroup__container {
-	margin: 16px 0;
-	width: 138px;
+	margin-top: 20px;
+	display: flex;
+}
+.RadioButtonGroup__labelContainer {
+	display: flex;
+	flex-direction: column;
+	margin-right: 15px;
+}
+.RadioButtonGroup__label {
+	font-weight: bolder;
+	margin-bottom: 15px;
+}
+.RadioButtonGroup__buttonsContainer {
+	display: flex;
+	flex-direction: column;
+}
+.RadioButtonGroup__button {
+	margin-bottom: 15px;
 }
 .RadioButton__outerCircle {
 	border: 1px solid #4a4a4a;

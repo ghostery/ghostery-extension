@@ -500,7 +500,7 @@
 			}
 		}
 	},
-	"panel_forgot_password": {
+	"forgot_password": {
 		"message": "Esqueceu a senha?"
 	},
 	"panel_help_panel_header": {
@@ -797,7 +797,7 @@
 		"message": "bloqueada"
 	},
 	"white_black_list_error_invalid_url": {
-		"message": "Please enter a valid URL or wildcard."
+		"message": "Digite um email ou caractere curinga válidos."
 	},
 	"whitelist_error_blacklist_url": {
 		"message": "Esse site foi removido de nossa lista de Sites Restritos e adicionado à sua lista de Sites Confiados."
@@ -805,6 +805,21 @@
 	"whitelist_error_duplicate_url": {
 		"description": "Options page site whitelisting error message shown when whitelisting a URL that is already in the whitelist.",
 		"message": "Esse site já está na lista branca."
+	},
+	"settings_adblocker": {
+		"message": "Listas de bloqueio de anúncios"
+	},
+	"settings_adblocker_lists": {
+		"message": "Carregue as seguintes listas de bloqueio de anúncios:"
+	},
+	"settings_adblocker_list_1": {
+		"message": "Somente anúncios"
+	},
+	"settings_adblocker_list_2": {
+		"message": "Anúncios + Rastreadores"
+	},
+	"settings_adblocker_list_3": {
+		"message": "Anúncios + Rastreadores + Inconvenientes"
 	},
 	"settings_purple_box": {
 		"message": "Caixa púrpura"
@@ -1053,7 +1068,7 @@
 		"message": "Sites confiados"
 	},
 	"settings_sites_placeholder": {
-		"message": "example.com (wildcards supported)"
+		"message": "exemplo.com (caracteres curinga suportados)"
 	},
 	"settings_restricted_sites": {
 		"message": "Sites restritos"
@@ -1573,7 +1588,7 @@
 		}
 	},
 	"hub_supporter_perk_themes_description": {
-		"message": "Personalize as cores Ghostery - experimente o nosso tema da meia-noite!"
+		"message": "Personalize as cores do Ghostery - experimente o nosso tema Dark Blue!"
 	},
 	"hub_supporter_perk_stats_description": {
 		"message": "Veja suas estatísticas de bloqueio e veja como a Ghostery está trabalhando para você"
@@ -1585,10 +1600,10 @@
 		"message": "Resolva os problemas rapidamente com o nosso serviço de help desk prioritário - e muitas outras vantagens"
 	},
 	"hub_supporter_manifesto": {
-		"message": "Nós nos esforçamos para oferecer os melhores serviços de proteção de privacidade para nossos usuários sem custos. Apesar de não cobrarmos pelo nosso pacote de privacidade, você pode optar por nos apoiar através de uma pequena assinatura mensal. Junte-se a nós em nossa missão atualizando para Ghostery Plus - e desbloqueie regalias legais pelo caminho!"
+		"message": "Nós nos esforçamos para oferecer os melhores serviços de proteção de privacidade para nossos usuários sem custos. Apesar de não cobrarmos pelo nosso extensão de navegador, você pode optar por nos apoiar através de uma pequena assinatura mensal. Junte-se a nós em nossa missão atualizando para Ghostery Plus - e desbloqueie regalias legais pelo caminho!"
 	},
 	"hub_supporter_feature_theme_description": {
-		"message": "Personalize as cores Ghostery para uma nova experiência visual! Introduzido a pedido popular. Confira nosso tema especial da meia-noite e muito mais por vir."
+		"message": "Personalize as cores do Ghostery para uma nova experiência visual! Introduzido a pedido popular. Confira nosso tema especial Dark Blue e muito mais por vir."
 	},
 	"hub_supporter_feature_stats_description": {
 		"message": "Veja os resultados históricos de bloqueio com gráficos e estatísticas para revelar tendências e saiba como o Ghostery afetou sua navegação."
@@ -1800,7 +1815,10 @@
 		"message": "Temas"
 	},
 	"subscribe_pitch": {
-		"message": "Embora o Ghostery seja gratuito, você pode optar por nos apoiar por meio de uma pequena assinatura de US$ 2 por mês em troca de vantagens legais, como temas de cores, serviço de ajuda prioritária e muito mais. Participe de nossa missão e assine!"
+		"message": "Embora o Ghostery seja gratuito, você pode optar por nos apoiar por meio de uma pequena assinatura em troca de vantagens especiais, como temas de cores, estatísticas pessoais de rastreamento e muito mais. Participe de nossa missão e assine!"
+	},
+	"subscribe_pitch_spring": {
+		"message": "Gosta do que fazemos? Nos apoie e desbloqueie novos temas de primavera, insights pessoais de acompanhamento e outras vantagens especiais atualizando para o Ghostery Plus!"
 	},
 	"subscribe_pitch_learn_more": {
 		"message": "Saiba mais"
@@ -1814,11 +1832,23 @@
 	"subscribe_pitch_sign_here": {
 		"message": "Já é assinante? Entre aqui"
 	},
+	"subscribe_pitch_sign_in_plus": {
+		"message": "Já é assinante? Entre aqui"
+	},
 	"subscribe_pitch_sign_in": {
 		"message": "Já é assinante? Entre aqui"
 	},
-	"subscription_midnight_theme": {
-		"message": "Tema da meia-noite"
+	"subscription_default_theme": {
+		"message": "Padrão"
+	},
+	"subscription_dark_blue_theme": {
+		"message": "Tema Dark Blue"
+	},
+	"subscription_palm_theme": {
+		"message": "Tema Palm"
+	},
+	"subscription_leaf_theme": {
+		"message": "Tema Leaf"
 	},
 	"subscription_status": {
 		"message": "Status"
@@ -1919,7 +1949,7 @@
 		"message": "Não, mantenha o histórico"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "Desbloqueie suas estatísticas históricas (e outras regalias legais) atualizando para o Ghostery Plus por $SPAN_START$&#36;2/mês.$SPAN_END$$LINK_START$Saiba mais$LINK_END$",
+		"message": "Desbloqueie suas estatísticas históricas (e outras regalias legais) atualizando para o Ghostery Plus.$LINK_START$Saiba mais$LINK_END$",
 		"placeholders": {
 			"span_start": {
 				"content": "<span>"
@@ -2063,9 +2093,6 @@
 	"myoffrz_turnoff_rewards": {
 		"message": "Desativar Ghostery Rewards"
 	},
-	"OFFERS_ALREADY_TRANSLATED": {
-		"message": ""
-	},
 	"myoffrz_help": {
 		"message": "Ajuda"
 	},
@@ -2143,6 +2170,18 @@
 				"content": "$1"
 			}
 		}
+	},
+	"myoffrz_check_conditions": {
+		"message": "Veja as seguintes condições"
+	},
+	"myoffrz_redeem_code": {
+		"message": "Resgatar código"
+	},
+	"myoffrz_voucher_found": {
+		"message": "Voucher encontrado"
+	},
+	"myoffrz_redeeming_voucher": {
+		"message": "Recuperando voucher"
 	},
 	"OFFERS_ENDS": {
 		"message": ""
@@ -2268,6 +2307,9 @@
 	"learn_more": {
 		"message": "Aprender mais"
 	},
+	"custom_themes": {
+		"message": "Temas personalizados"
+	},
 	"historical_stats": {
 		"message": "Estatísticas históricas"
 	},
@@ -2338,34 +2380,37 @@
 	"settings": {
 		"message": "Configurações"
 	},
-  	"try_ghostery_midnight": {
-	  "message": "Experimente o Ghostery Midnight"
+	"try_ghostery_midnight": {
+		"message": "Experimente o Ghostery Midnight"
 	},
-  	"seven_day_free_trial": {
-	  "message": "Avaliação gratuita de 7 dias (&#36;14/mês)"
+	"seven_day_free_trial": {
+		"message": "Avaliação gratuita de 7 dias"
+	},
+	"spring_is_here": {
+		"message": "A primavera chegou!"
 	},
   	"full_coverage_protection_promise": {
 	  "message": "Obtenha proteção completa para todos os navegadores e aplicativos do seu dispositivo"
 	},
-  	"system_wide_tracker_and_ad_blocking": {
-	  "message": "Rastreio de todo o sistema e bloqueio de anúncios"
+	"system_wide_tracker_and_ad_blocking": {
+		"message": "Rastreio de todo o sistema e bloqueio de anúncios"
 	},
-  	"built_in_vpn": {
-	  "message": "VPN integrado"
+	"built_in_vpn": {
+		"message": "VPN integrado"
 	},
-  	"custom_whitelist_options": {
-	  "message": "Opções de lista de permissões personalizadas"
+	"custom_whitelist_options": {
+		"message": "Opções de lista de permissões personalizadas"
 	},
-  	"historical_tracking_insights": {
-	  "message": "Insights do histórico de acompanhamento"
+	"historical_tracking_insights": {
+		"message": "Insights do histórico de acompanhamento"
 	},
-  	"download_for_free": {
-	  "message": "Baixe grátis"
+	"download_for_free": {
+		"message": "Baixe grátis"
 	},
-  	"support_ghostery_for_2_instead": {
-	  "message": "Apoie o Ghostery por &#36;2/mês"
+	"support_ghostery_and_try_plus_instead": {
+		"message": "Apoie o Ghostery e experimente o Plus"
 	},
-  	"no_thanks_continue_with_basic": {
-	  "message": "Não, obrigado. Continuar com o plano básico"
+	"no_thanks_continue_with_basic": {
+		"message": "Não, obrigado. Continuar com o plano básico"
 	}
 }

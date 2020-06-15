@@ -500,7 +500,7 @@
 			}
 		}
 	},
-	"panel_forgot_password": {
+	"forgot_password": {
 		"message": "忘記了密碼？"
 	},
 	"panel_help_panel_header": {
@@ -797,7 +797,7 @@
 		"message": "已解除封鎖"
 	},
 	"white_black_list_error_invalid_url": {
-		"message": "Please enter a valid URL or wildcard."
+		"message": "請輸入一個有效的 URL 或萬用字元。"
 	},
 	"whitelist_error_blacklist_url": {
 		"message": "此網站已從您的受限制網站名單中移除並加入到您的可信任網站名單之中。"
@@ -805,6 +805,21 @@
 	"whitelist_error_duplicate_url": {
 		"description": "Options page site whitelisting error message shown when whitelisting a URL that is already in the whitelist.",
 		"message": "此網站已被加入獲准名單之中。"
+	},
+	"settings_adblocker": {
+		"message": "廣告封鎖列表"
+	},
+	"settings_adblocker_lists": {
+		"message": "載入以下廣告封鎖篩選條件列表："
+	},
+	"settings_adblocker_list_1": {
+		"message": "僅廣告"
+	},
+	"settings_adblocker_list_2": {
+		"message": "廣告 + 跟蹤器"
+	},
+	"settings_adblocker_list_3": {
+		"message": "廣告 + 跟蹤器 + 惱人內容"
 	},
 	"settings_purple_box": {
 		"message": "紫色方塊"
@@ -1053,7 +1068,7 @@
 		"message": "可信任的網站"
 	},
 	"settings_sites_placeholder": {
-		"message": "example.com (wildcards supported)"
+		"message": "example.com（支援萬用字元）"
 	},
 	"settings_restricted_sites": {
 		"message": "被限制的網站"
@@ -1573,7 +1588,7 @@
 		}
 	},
 	"hub_supporter_perk_themes_description": {
-		"message": "定制Ghostery顏色——嘗試我們的Midnight（午夜）主題"
+		"message": "自訂 Ghostery 色彩——試試我們的深藍色主題吧！"
 	},
 	"hub_supporter_perk_stats_description": {
 		"message": "查看您的組織統計數據，了解Ghostery如何為您工作"
@@ -1585,10 +1600,10 @@
 		"message": "用我們的優先幫助服務快速解決問題——還有更多福利"
 	},
 	"hub_supporter_manifesto": {
-		"message": "我們努力免費為我們的客戶提供最佳隱私保護服務。我們的隱私套件不收費，您可以選擇通過每月小額訂閱支持我們。升級至Ghostery Plus加入我們，支持我們的使命——一路解鎖附帶福利！"
+		"message": "我們努力免費為我們的客戶提供最佳隱私保護服務。我們的瀏覽器擴充功能不收費，您可以選擇透過每月小額訂閱支持我們。升級至 Ghostery Plus 加入我們，支持我們的使命——一路解鎖附帶福利！"
 	},
 	"hub_supporter_feature_theme_description": {
-		"message": "定制Ghostery顏色，獲得新的視覺體驗！通過一般要求推出。查看我們的特別午夜主題，更多內容即將推出。"
+		"message": "自訂 Ghostery 色彩，獲得全新視覺體驗！使用者千呼萬喚的功能登場了。查看我們獨特的深藍色主題，更多內容即將推出。"
 	},
 	"hub_supporter_feature_stats_description": {
 		"message": "用圖表和數據查看歷史阻止結果以揭示趨勢，了解Ghostery如何影響您的瀏覽體驗。"
@@ -1800,7 +1815,10 @@
 		"message": "主題"
 	},
 	"subscribe_pitch": {
-		"message": "Ghostery是免費的，您可以通過每月小訂閱對我們進行支持，訂閱后可獲得超酷的附帶福利，如顏色主題、優先幫助服務以及更多。加入我們的使命并訂閱！"
+		"message": "Ghostery 是免費的，您可以選擇透過每月小額訂閱支持我們，訂閱後可獲得特別福利，如顏色主題、個人追蹤統計數據以及更多。加入我們，支持我們的使命並訂閱！"
+	},
+	"subscribe_pitch_spring": {
+		"message": "喜歡我們提供的服務嗎？您可以升級至 Ghostery Plus 來支援我們，並解鎖全新春日主題、個人追蹤資訊及其他特別的好處！"
 	},
 	"subscribe_pitch_learn_more": {
 		"message": "瞭解更多"
@@ -1814,11 +1832,23 @@
 	"subscribe_pitch_sign_here": {
 		"message": "已訂閱？在此註冊"
 	},
+	"subscribe_pitch_sign_in_plus": {
+		"message": "已訂閱？登入"
+	},
 	"subscribe_pitch_sign_in": {
 		"message": "已訂閱？登入"
 	},
-	"subscription_midnight_theme": {
-		"message": "午夜主題"
+	"subscription_default_theme": {
+		"message": "預設"
+	},
+	"subscription_dark_blue_theme": {
+		"message": "Dark Blue 主題"
+	},
+	"subscription_palm_theme": {
+		"message": "Palm 主題"
+	},
+	"subscription_leaf_theme": {
+		"message": "Leaf 主題"
 	},
 	"subscription_status": {
 		"message": "狀態"
@@ -1919,7 +1949,7 @@
 		"message": "不，保持歷史記錄"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "升級至Ghostery Plus 以解鎖您的歷史統計數據（和其它驚喜福利），為期$SPAN_START$&#36;2/個月。$SPAN_END$$LINK_START$了解更多$LINK_END$",
+		"message": "升級至 Ghostery Plus 以解鎖您的歷史統計數據（和其它驚喜福利）。$LINK_START$了解更多$LINK_END$",
 		"placeholders": {
 			"span_start": {
 				"content": "<span>"
@@ -2063,9 +2093,6 @@
 	"myoffrz_turnoff_rewards": {
 		"message": "停用 Ghostery Rewards"
 	},
-	"OFFERS_ALREADY_TRANSLATED": {
-		"message": ""
-	},
 	"myoffrz_help": {
 		"message": "幫助"
 	},
@@ -2143,6 +2170,18 @@
 				"content": "$1"
 			}
 		}
+	},
+	"myoffrz_check_conditions": {
+		"message": "參閱以下條件"
+	},
+	"myoffrz_redeem_code": {
+		"message": "兌換代碼"
+	},
+	"myoffrz_voucher_found": {
+		"message": "已找到現金券"
+	},
+	"myoffrz_redeeming_voucher": {
+		"message": "兌換現金券"
 	},
 	"OFFERS_ENDS": {
 		"message": ""
@@ -2268,6 +2307,9 @@
 	"learn_more": {
 		"message": "瞭解更多"
 	},
+	"custom_themes": {
+		"message": "自訂主題"
+	},
 	"historical_stats": {
 		"message": "歷史統計數據"
 	},
@@ -2338,34 +2380,37 @@
 	"settings": {
 		"message": "設定"
 	},
-  	"try_ghostery_midnight": {
-	  "message": "試用 Ghostery Midnight"
+	"try_ghostery_midnight": {
+		"message": "試用 Ghostery Midnight"
 	},
-  	"seven_day_free_trial": {
-	  "message": "7 天免費試用（&#36;14 / 月）"
+	"seven_day_free_trial": {
+		"message": "7 天免費試用"
+	},
+	"spring_is_here": {
+		"message": "春天到了！"
 	},
   	"full_coverage_protection_promise": {
 	  "message": "全面防護您裝置上的所有瀏覽器和應用程式"
 	},
-  	"system_wide_tracker_and_ad_blocking": {
-	  "message": "全系統跟蹤器和廣告封鎖"
+	"system_wide_tracker_and_ad_blocking": {
+		"message": "全系統跟蹤器和廣告封鎖"
 	},
-  	"built_in_vpn": {
-	  "message": "內建 VPN"
+	"built_in_vpn": {
+		"message": "內建 VPN"
 	},
-  	"custom_whitelist_options": {
-	  "message": "自訂解封名單選項"
+	"custom_whitelist_options": {
+		"message": "自訂解封名單選項"
 	},
-  	"historical_tracking_insights": {
-	  "message": "歷史跟蹤資訊"
+	"historical_tracking_insights": {
+		"message": "歷史跟蹤資訊"
 	},
-  	"download_for_free": {
-	  "message": "免費下載"
+	"download_for_free": {
+		"message": "免費下載"
 	},
-  	"support_ghostery_for_2_instead": {
-	  "message": "或以 &#36;2 / 月來支持 Ghostery"
+	"support_ghostery_and_try_plus_instead": {
+		"message": "改為使用 Plus 來支援 Ghostery 吧"
 	},
-  	"no_thanks_continue_with_basic": {
-	  "message": "不用了，謝謝，繼續使用基本功能"
+	"no_thanks_continue_with_basic": {
+		"message": "不用了，謝謝，繼續使用基本功能"
 	}
 }

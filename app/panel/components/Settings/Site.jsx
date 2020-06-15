@@ -27,7 +27,8 @@ class Site extends React.Component {
 	 * Trigger action for removing site from the list.
 	 */
 	removeSite() {
-		this.props.updateSitePolicy({ type: this.props.listType, pageHost: this.props.site });
+		const { updateSitePolicy, listType, site } = this.props;
+		updateSitePolicy({ type: listType, pageHost: site });
 	}
 
 	/**

@@ -500,7 +500,7 @@
 			}
 		}
 	},
-	"panel_forgot_password": {
+	"forgot_password": {
 		"message": "パスワードをお忘れですか？"
 	},
 	"panel_help_panel_header": {
@@ -797,7 +797,7 @@
 		"message": "ブロックされていない対象"
 	},
 	"white_black_list_error_invalid_url": {
-		"message": "Please enter a valid URL or wildcard."
+		"message": "有効なURLまたはワイルドカードを入力してください。"
 	},
 	"whitelist_error_blacklist_url": {
 		"message": "このサイトは、制限されたサイトのリストから削除され、信頼できるサイトのリストに追加されました。"
@@ -805,6 +805,21 @@
 	"whitelist_error_duplicate_url": {
 		"description": "Options page site whitelisting error message shown when whitelisting a URL that is already in the whitelist.",
 		"message": "このサイトは既にホワイトリストに登録されています。"
+	},
+	"settings_adblocker": {
+		"message": "広告ブロック・リスト"
+	},
+	"settings_adblocker_lists": {
+		"message": "以下の広告ブロック・フィルター・リストをロードしてください："
+	},
+	"settings_adblocker_list_1": {
+		"message": "広告のみ"
+	},
+	"settings_adblocker_list_2": {
+		"message": "広告とトラッカー"
+	},
+	"settings_adblocker_list_3": {
+		"message": "広告とトラッカーと迷惑行為"
 	},
 	"settings_purple_box": {
 		"message": "紫色のボックス"
@@ -1053,7 +1068,7 @@
 		"message": "信頼できるサイト"
 	},
 	"settings_sites_placeholder": {
-		"message": "example.com (wildcards supported)"
+		"message": "example.com（ワイルドカードがサポートされます）"
 	},
 	"settings_restricted_sites": {
 		"message": "制限されたサイト"
@@ -1573,7 +1588,7 @@
 		}
 	},
 	"hub_supporter_perk_themes_description": {
-		"message": "Ghostery のテーマは変更できます。「ミッドナイト」もお試しください！"
+		"message": "Ghosteryのカラーはカスタマイズできます。Dark Blueもお試しください！"
 	},
 	"hub_supporter_perk_stats_description": {
 		"message": "過去のブロック履歴と Ghostery の対応履歴を見る"
@@ -1585,10 +1600,10 @@
 		"message": "プライオリティ・ヘルプデスクが問題をすぐに解決。充実した特典が満載です"
 	},
 	"hub_supporter_manifesto": {
-		"message": "Ghosteryのミッションは、無料かつ最高のプライバシー保護サービスをユーザーに提供することです。サービスは無料ですが、一部のユーザー様からは毎月のご登録料をいただくことで機能改善にご協力いただいております。「Ghostery プラス」にアップグレードしてミッションに参加しませんか。素敵な特典もご用意しております！"
+		"message": "Ghosteryは、最高のプライバシー保護サービスをユーザーに無料で提供できるように努めています。ブラウザ拡張機能は無料ですが、一部のお客様からは毎月少額のサブスクリプション料をいただくことで機能改善にご協力いただいております。「Ghostery Plus」にアップグレードして当社のミッションにご参加ください。そして、さらなるサービス特典をご利用ください！"
 	},
 	"hub_supporter_feature_theme_description": {
-		"message": "Ghosteryのカラーをカスタマイズして新しいビジュアル体験を！たくさんのご要望にお応えし、ついに実現。「ミッドナイト」やその他の新着テーマをチェックしよう。"
+		"message": "Ghosteryのカラーをカスタマイズして新しいビジュアル体験を！たくさんのご要望にお応えし、ついに実現。Dark Blueやその他の新着テーマをチェックしよう。"
 	},
 	"hub_supporter_feature_stats_description": {
 		"message": "グラフや数字を使って過去のブロック結果とその傾向を分析し、Ghostery によるブラウジングの安全性を確認できます。"
@@ -1800,7 +1815,10 @@
 		"message": "テーマ"
 	},
 	"subscribe_pitch": {
-		"message": "Ghosteryは無料でもご利用いただけますが、1か月&#36;2の登録料でカラーテーマ、優先ヘルプサービスなどの特典をご活用いただきながら、Ghosteryをサポートすることもできます。登録してミッションに参加しよう！"
+		"message": "Ghosteryは無料でもご利用いただけますが、毎月少額のサブスクリプション料を通じてご協力いただくと、カラーテーマ、個人追跡履歴統計などの特典をご利用いただけます。ご登録いただき、当社のミッションにご参加ください！"
+	},
+	"subscribe_pitch_spring": {
+		"message": "気に入っていただけましたか？Ghostery Plusにアップグレードして、新しい春のテーマ、個人追跡情報など、特別機能をご利用ください！"
 	},
 	"subscribe_pitch_learn_more": {
 		"message": "詳細はこちら"
@@ -1814,11 +1832,23 @@
 	"subscribe_pitch_sign_here": {
 		"message": "ご登録済みですか？こちらでサインイン"
 	},
+	"subscribe_pitch_sign_in_plus": {
+		"message": "すでにサブスクライブしていますか？サインイン"
+	},
 	"subscribe_pitch_sign_in": {
 		"message": "すでにサブスクライブしていますか？サインイン"
 	},
-	"subscription_midnight_theme": {
-		"message": "ミッドナイト テーマ"
+	"subscription_default_theme": {
+		"message": "初期設定"
+	},
+	"subscription_dark_blue_theme": {
+		"message": "Dark Blueテーマ"
+	},
+	"subscription_palm_theme": {
+		"message": "Palmテーマ"
+	},
+	"subscription_leaf_theme": {
+		"message": "Leafテーマ"
 	},
 	"subscription_status": {
 		"message": "ステータス"
@@ -1919,7 +1949,7 @@
 		"message": "いいえ、履歴を保持します"
 	},
 	"panel_stats_pitch_modal_text": {
-		"message": "Ghostery Plus の履歴統計やその他の便利な機能を是非お試しください。1か月$SPAN_START$&#36;2でアップグレードできます。$SPAN_END$$LINK_START$さらに詳しく$LINK_END$",
+		"message": "Ghostery Plusにアップグレードして、履歴統計やその他の便利な機能を是非お試しください。$LINK_START$詳細はこちら$LINK_END$",
 		"placeholders": {
 			"span_start": {
 				"content": "<span>"
@@ -2063,9 +2093,6 @@
 	"myoffrz_turnoff_rewards": {
 		"message": "Ghostery Rewardsを無効にする"
 	},
-	"OFFERS_ALREADY_TRANSLATED": {
-		"message": ""
-	},
 	"myoffrz_help": {
 		"message": "ヘルプ"
 	},
@@ -2143,6 +2170,18 @@
 				"content": "$1"
 			}
 		}
+	},
+	"myoffrz_check_conditions": {
+		"message": "以下の条件を確認してください"
+	},
+	"myoffrz_redeem_code": {
+		"message": "引き換えコード"
+	},
+	"myoffrz_voucher_found": {
+		"message": "クーポンが見つかりました"
+	},
+	"myoffrz_redeeming_voucher": {
+		"message": "クーポンと引き換えています"
 	},
 	"OFFERS_ENDS": {
 		"message": ""
@@ -2268,6 +2307,9 @@
 	"learn_more": {
 		"message": "詳細はこちら"
 	},
+	"custom_themes": {
+		"message": "カスタムテーマ"
+	},
 	"historical_stats": {
 		"message": "履歴統計"
 	},
@@ -2338,34 +2380,37 @@
 	"settings": {
 		"message": "設定"
 	},
-  	"try_ghostery_midnight": {
-	  "message": "Ghostery Midnightを試す"
+	"try_ghostery_midnight": {
+		"message": "Ghostery Midnightを試す"
 	},
-  	"seven_day_free_trial": {
-	  "message": "7日間無料トライアル（月額14ドル）"
+	"seven_day_free_trial": {
+		"message": "7日間無料トライアル"
+	},
+	"spring_is_here": {
+		"message": "春がやって来ました！"
 	},
   	"full_coverage_protection_promise": {
 	  "message": "デバイス上のすべてのブラウザとアプリを包括的に保護しましょう"
 	},
-  	"system_wide_tracker_and_ad_blocking": {
-	  "message": "システム全体を対象としたトラッカーと広告ブロッキング"
+	"system_wide_tracker_and_ad_blocking": {
+		"message": "システム全体を対象としたトラッカーと広告ブロッキング"
 	},
-  	"built_in_vpn": {
-	  "message": "組み込みVPN"
+	"built_in_vpn": {
+		"message": "組み込みVPN"
 	},
-  	"custom_whitelist_options": {
-	  "message": "ホワイトリストのカスタムオプション"
+	"custom_whitelist_options": {
+		"message": "ホワイトリストのカスタムオプション"
 	},
-  	"historical_tracking_insights": {
-	  "message": "追跡履歴情報"
+	"historical_tracking_insights": {
+		"message": "追跡履歴情報"
 	},
-  	"download_for_free": {
-	  "message": "無料でダウンロード"
+	"download_for_free": {
+		"message": "無料でダウンロード"
 	},
-  	"support_ghostery_for_2_instead": {
-	  "message": "代わりに月額2ドルでGhosteryをサポート"
+	"support_ghostery_and_try_plus_instead": {
+		"message": "Ghosteryをサポートして代わりにPlusを試す"
 	},
-  	"no_thanks_continue_with_basic": {
-	  "message": "いいえ、ベーシックプランで継続する"
+	"no_thanks_continue_with_basic": {
+		"message": "いいえ、ベーシックプランで継続する"
 	}
 }

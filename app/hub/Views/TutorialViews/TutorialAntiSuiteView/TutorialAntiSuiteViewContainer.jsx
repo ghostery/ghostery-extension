@@ -39,7 +39,8 @@ class TutorialAntiSuiteViewContainer extends Component {
 		});
 
 		if (sendMountActions) {
-			this.props.actions.setTutorialComplete({
+			const { actions } = this.props;
+			actions.setTutorialComplete({
 				tutorial_complete: true,
 			});
 		}

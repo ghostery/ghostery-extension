@@ -63,10 +63,6 @@ class PlusView extends Component {
 						</div>
 						<div className="PlusView__costContainer flex-container align-middle align-justify">
 							{this._renderButton()}
-							<div
-								className="PlusView__headingCost flex-container align-middle"
-								dangerouslySetInnerHTML={{ __html: t('hub_supporter_price') }}
-							/>
 						</div>
 					</div>
 				</div>
