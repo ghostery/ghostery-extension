@@ -354,11 +354,10 @@ function _fetchJson(method, url, query, extraHeaders, referrer = 'no-referrer', 
 		});
 		if (extraHeaders) {
 			const extraHeadersKeys = Object.keys(extraHeaders);
-			for (let i = 0; i < extraHeadersKeys.length; i++) {
-				const key = extraHeadersKeys[i];
+			extraHeadersKeys.forEach((key) => {
 				const value = extraHeaders[key];
 				headers.append(key, value);
-			}
+			});
 		}
 		const options = {
 			method,
@@ -450,11 +449,10 @@ function _fetchJson(method, url, query, extraHeaders, referrer = 'no-referrer', 
 		xhr.setRequestHeader('Accept', 'application/json');
 		if (extraHeaders) {
 			const extraHeadersKeys = Object.keys(extraHeaders);
-			for (let i = 0; i < extraHeadersKeys.length; i++) {
-				const key = extraHeadersKeys[i];
+			extraHeadersKeys.forEach((key) => {
 				const value = extraHeaders[key];
 				xhr.setRequestHeader(key, value);
-			}
+			});
 		}
 		xhr.overrideMimeType('application/json');
 		xhr.send(query);

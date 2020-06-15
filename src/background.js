@@ -163,14 +163,13 @@ function setGhosteryDefaultBlocking() {
 	log('Blocking all trackers in categories:', ...categoriesBlock);
 	const selected_app_ids = {};
 	const app_ids = Object.keys(bugDb.db.apps);
-	for (let i = 0; i < app_ids.length; i++) {
-		const app_id = app_ids[i];
+	app_ids.forEach((app_id) => {
 		const category = bugDb.db.apps[app_id].cat;
 		if (categoriesBlock.indexOf(category) >= 0 &&
 		!selected_app_ids.hasOwnProperty(app_id)) {
 			selected_app_ids[app_id] = 1;
 		}
-	}
+	});
 	panelData.set({ selected_app_ids });
 }
 
@@ -315,6 +314,40 @@ function handleAccountPages(name, callback) {
 				.catch(err => callback(err));
 			return true;
 
+		default:
+			return false;
+	}
+}
+
+/**
+ * Handle messages sent from app/js/checkout_pages.js content script.
+ * @memberOf Background
+ *
+ * @param  {string} 	name 		message name
+ */
+function handleCheckoutPages(name) {
+	switch (name) {
+		case 'checkoutPage.buyInsights':
+		case 'checkoutPage.buyPlus':
+		case 'checkoutPage.buyPremium':
+			account.getUser()
+				.then(account.getUserSubscriptionData)
+				.catch((err) => {
+					log('handleCheckoutPages error', err);
+				});
+			return true;
+		case 'checkoutPage.login':
+			account.getUser()
+				.then(account.getUserSettings)
+				// account.getUserSettings will reject if user email is not validated
+				.catch(err => log('handleCheckoutPages error', err))
+				.then(account.getUserSubscriptionData)
+				// The user may not be a subscriber
+				.catch(err => log('handleCheckoutPages error', err));
+			return true;
+		case 'checkoutPage.register':
+			account.getUser();
+			return true;
 		default:
 			return false;
 	}
@@ -580,12 +613,11 @@ function handleGhosteryHub(name, message, callback) {
 					panelData.set({ setup_block: 3 });
 					const selected_app_ids = {};
 					const app_ids = Object.keys(bugDb.db.apps);
-					for (let i = 0; i < app_ids.length; i++) {
-						const app_id = app_ids[i];
+					app_ids.forEach((app_id) => {
 						if (!selected_app_ids.hasOwnProperty(app_id)) {
 							selected_app_ids[app_id] = 1;
 						}
-					}
+					});
 					panelData.set({ selected_app_ids });
 					break;
 				}
@@ -678,6 +710,10 @@ function onMessageHandler(request, sender, callback) {
 	if (origin === 'account_pages') {
 		// Account pages
 		return handleAccountPages(name, callback);
+	}
+	if (origin === 'checkout_pages') {
+		// Checkout pages
+		return handleCheckoutPages(name, callback);
 	}
 	if (origin === 'purplebox') {
 		// Purplebox script events
@@ -1094,6 +1130,9 @@ function initializeDispatcher() {
 		button.update();
 		utils.flushChromeMemoryCache();
 		cliqz.modules.core.action('refreshAppState');
+	});
+	dispatcher.on('conf.save.site_blacklist', () => {
+		button.update();
 	});
 	dispatcher.on('conf.save.enable_human_web', (enableHumanWeb) => {
 		if (!IS_CLIQZ) {

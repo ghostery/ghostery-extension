@@ -2508,5 +2508,8 @@
 	},
 	"no_thanks_continue_with_basic": {
 		"message": "No thanks, continue with basic"
+	},
+	"too_many_password_resets_text": {
+		"message": "Too many password reset requests. Try again in one hour."
 	}
 }
