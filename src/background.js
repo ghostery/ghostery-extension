@@ -320,6 +320,40 @@ function handleAccountPages(name, callback) {
 }
 
 /**
+ * Handle messages sent from app/js/checkout_pages.js content script.
+ * @memberOf Background
+ *
+ * @param  {string} 	name 		message name
+ */
+function handleCheckoutPages(name) {
+	switch (name) {
+		case 'checkoutPage.buyInsights':
+		case 'checkoutPage.buyPlus':
+		case 'checkoutPage.buyPremium':
+			account.getUser()
+				.then(account.getUserSubscriptionData)
+				.catch((err) => {
+					log('handleCheckoutPages error', err);
+				});
+			return true;
+		case 'checkoutPage.login':
+			account.getUser()
+				.then(account.getUserSettings)
+				// account.getUserSettings will reject if user email is not validated
+				.catch(err => log('handleCheckoutPages error', err))
+				.then(account.getUserSubscriptionData)
+				// The user may not be a subscriber
+				.catch(err => log('handleCheckoutPages error', err));
+			return true;
+		case 'checkoutPage.register':
+			account.getUser();
+			return true;
+		default:
+			return false;
+	}
+}
+
+/**
  * Handle messages sent from dist/ghostery_dot_com.js content script.
  * @memberOf Background
  *
@@ -676,6 +710,10 @@ function onMessageHandler(request, sender, callback) {
 	if (origin === 'account_pages') {
 		// Account pages
 		return handleAccountPages(name, callback);
+	}
+	if (origin === 'checkout_pages') {
+		// Checkout pages
+		return handleCheckoutPages(name, callback);
 	}
 	if (origin === 'purplebox') {
 		// Purplebox script events
