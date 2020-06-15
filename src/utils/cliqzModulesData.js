@@ -58,17 +58,15 @@ export function getCliqzData(tabId, tabHostUrl, antiTracking) {
 		return tracker.ads;
 	};
 
-	for (let i = 0; i < bugsValues.length; i++) {
-		const bug = bugsValues[i];
+	bugsValues.forEach((bug) => {
 		const dataPoints = getDataPoints(bug);
 		if (dataPoints) {
 			totalUnsafeCount += dataPoints;
 			trackerCount++;
 		}
-	}
+	});
 
-	for (let i = 0; i < othersValues.length; i++) {
-		const other = othersValues[i];
+	othersValues.forEach((other) => {
 		let whitelisted = false;
 		const dataPoints = getDataPoints(other);
 
@@ -98,7 +96,7 @@ export function getCliqzData(tabId, tabHostUrl, antiTracking) {
 				name, domains, ads, cookies, fingerprints, whitelisted, type
 			});
 		}
-	}
+	});
 
 	return {
 		totalUnsafeCount,

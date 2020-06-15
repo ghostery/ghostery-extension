@@ -43,12 +43,7 @@ export default class DotsMenu extends React.Component {
 
 	/* Toggle menu */
 	dotsButtonClicked = () => {
-		const { opening } = this.state;
-		const currentState = opening;
-
-		this.setState({
-			opening: !currentState,
-		});
+		this.setState(prevState => ({ opening: !prevState.opening }));
 	}
 
 	render() {
