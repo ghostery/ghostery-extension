@@ -661,6 +661,11 @@ section.home-template .section.section-pricing {
 				max-width: 750px;
 			}
 		}
+		.mobile-table-header {
+			position: sticky;
+			top: 0;
+			background-color: #FFF;
+		}
 		table {
 			border-collapse:collapse;
 			width:100%;

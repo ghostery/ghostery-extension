@@ -641,34 +641,36 @@ const UpgradePlanView = (props) => {
 						<span className={yearlyToggleLabel}>{t('hub_upgrade_yearly')}</span>
 					</div>
 				</div>
-				<div className="row align-top align-center">
-					<div className="small-4 text-center columns">
-						<p className="protection-description blue">{t('ghostery_basic')}</p>
+				<div className="mobile-table-header">
+					<div className="row align-top align-center">
+						<div className="small-4 text-center columns">
+							<p className="protection-description blue">{t('ghostery_basic')}</p>
+						</div>
+						<div className="small-4 text-center columns">
+							<p className="protection-description yellow">{t('hub_upgrade_additional')}</p>
+						</div>
+						<div className="small-4 text-center columns">
+							<p className="protection-description purple">{t('hub_upgrade_maximum')}</p>
+						</div>
 					</div>
-					<div className="small-4 text-center columns">
-						<p className="protection-description yellow">{t('hub_upgrade_additional')}</p>
-					</div>
-					<div className="small-4 text-center columns">
-						<p className="protection-description purple">{t('hub_upgrade_maximum')}</p>
-					</div>
-				</div>
-				<div className="row align-top align-center">
-					<div className="small-4 text-center columns">
-						<p className="protection-header protection-header-free price-blue"><strong>{t('hub_upgrade_plan_free')}</strong></p>
-					</div>
-					<div className="small-4 text-center columns">
-						{show_yearly_prices ? (
-							<p className="protection-header protection-header-plus price-gold"><span className="protection-header-plus-yearly is-active"><strong>$3.99</strong></span></p>
-						) : (
-							<p className="protection-header protection-header-plus price-gold"><strong>$4.99</strong></p>
-						)}
-					</div>
-					<div className="small-4 text-center columns">
-						{show_yearly_prices ? (
-							<p className="protection-header protection-header-premium price-purple"><span className="protection-header-premium-yearly is-active"><strong>$8.99</strong></span></p>
-						) : (
-							<p className="protection-header protection-header-premium price-purple"><strong>$11.99</strong></p>
-						)}
+					<div className="row align-top align-center">
+						<div className="small-4 text-center columns">
+							<p className="protection-header protection-header-free price-blue"><strong>{t('hub_upgrade_plan_free')}</strong></p>
+						</div>
+						<div className="small-4 text-center columns">
+							{show_yearly_prices ? (
+								<p className="protection-header protection-header-plus price-gold"><span className="protection-header-plus-yearly is-active"><strong>$3.99</strong></span></p>
+							) : (
+								<p className="protection-header protection-header-plus price-gold"><strong>$4.99</strong></p>
+							)}
+						</div>
+						<div className="small-4 text-center columns">
+							{show_yearly_prices ? (
+								<p className="protection-header protection-header-premium price-purple"><span className="protection-header-premium-yearly is-active"><strong>$8.99</strong></span></p>
+							) : (
+								<p className="protection-header protection-header-premium price-purple"><strong>$11.99</strong></p>
+							)}
+						</div>
 					</div>
 				</div>
 				<div className="grid-container">
