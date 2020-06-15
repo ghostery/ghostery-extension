@@ -11,7 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-
 import PolicySmartBlock from '../../src/classes/PolicySmartBlock';
 import { processUrl } from '../../src/utils/utils';
 
@@ -22,9 +21,6 @@ jest.mock('../../src/classes/TabInfo', () => {});
 
 describe('src/classes/PolicySmartBlock.js', () => {
 	describe('PolicySmartBlock constructor tests', () => {
-		test('policy is constructed correctly', () => {
-			return expect(policySmartBlock.policy.constructor.name).toBe('Policy');
-		});
 		test('allowedCategoriesList is constructed correctly', () => {
 			const allowedCategoriesList = [
 				'essential',
