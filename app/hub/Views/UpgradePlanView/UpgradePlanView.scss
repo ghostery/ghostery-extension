@@ -458,6 +458,7 @@ section.home-template .section.section-pricing {
 			.button {
 				width: 410px;
 				margin-top: rem-calc(25);
+				text-transform: none;
 			}
 		}
 		.protection-header {
@@ -638,6 +639,7 @@ section.home-template .section.section-pricing {
 			font-size:14px;
 			height:60px;
 			color: $white;
+			text-transform: none;
 			&:hover {
 				cursor: pointer;
 			}
