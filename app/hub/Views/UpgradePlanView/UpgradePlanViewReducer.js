@@ -22,7 +22,7 @@ import {
 } from './UpgradePlanViewConstants';
 
 const initialState = {
-	show_yearly_prices: false,
+	show_yearly_prices: true,
 	protection_level: BASIC
 };
 
