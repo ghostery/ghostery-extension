@@ -84,7 +84,13 @@ function validateJson(paths) {
 		let hasError = false;
 		paths.forEach((path) => {
 			try {
-				jsonfile.readFileSync(`${path}`);
+				const file = jsonfile.readFileSync(`${path}`);
+				Object.keys(file).forEach((key) => {
+					if (!/^\w*$/.test(key)) {
+						hasError = true;
+						console.log('Error: file %s has invalid key "%s".', path, key);
+					}
+				});
 			} catch (err) {
 				hasError = true;
 				console.log('Error: file "%s" is not valid JSON.', path);
