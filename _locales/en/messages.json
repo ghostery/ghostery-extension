@@ -650,6 +650,9 @@
 	"panel_signin_success": {
 		"message": "You are now signed in as "
 	},
+	"panel_signin_premium_benefits": {
+		"message": "Your account unlocks a free trial of our Premium benefits, including VPN service and device-wide privacy protection, available via our Ghostery Midnight app."
+	},
 	"panel_view_trackers": {
 		"message": "View Trackers"
 	},
