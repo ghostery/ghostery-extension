@@ -90,6 +90,9 @@ section.home-template .section.section-pricing {
 	}
 
 	.tabs-title {
+		&:not(.is-active) {
+			cursor: pointer;
+		}
 		&-blue {
 			border-right: 2px solid #6a6a6a;
 			&.is-active {
