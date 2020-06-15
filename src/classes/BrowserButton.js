@@ -150,7 +150,7 @@ class BrowserButton {
 		if (trackerCount === '') {
 			this._setIcon(false, tabId, trackerCount, alert);
 		} else {
-			this._setIcon(!globals.SESSION.paused_blocking && !Policy.checkSiteWhitelist(tab.url), tabId, trackerCount, alert);
+			this._setIcon(!globals.SESSION.paused_blocking && this.policy.getSitePolicy(tab.url) !== globals.WHITELISTED, tabId, trackerCount, alert);
 		}
 	}
 
