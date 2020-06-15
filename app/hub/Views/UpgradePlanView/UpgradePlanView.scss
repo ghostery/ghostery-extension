@@ -535,6 +535,7 @@ section.home-template .section.section-pricing {
 		text-decoration: underline;
 		margin: rem-calc(15) auto 25px auto;
 		width: 120px;
+		cursor: pointer;
 		@include breakpoint($medium-large-breakpoint down) {
 			margin-top: rem-calc(5);
 		}
@@ -545,6 +546,7 @@ section.home-template .section.section-pricing {
 		height: 16px;
 		margin-top: rem-calc(25);
 		margin: auto;
+		cursor: pointer
 	}
 
 	.key-container {
