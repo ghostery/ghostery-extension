@@ -310,7 +310,7 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
       </div>
     </div>
     <div
-      className="HomeView__upgradeContainer row align-center-middle purple-border"
+      className="HomeView__upgradeContainer row align-center-middle"
     >
       <div
         className="HomeView__upgradeIcon"
@@ -329,7 +329,7 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
           href="/upgrade"
           onClick={[Function]}
         >
-          hub_home_plus_upgrade_button_text
+          hub_home_plus_full_protection
         </a>
       </div>
     </div>
