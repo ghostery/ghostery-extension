@@ -47,6 +47,7 @@ module.exports = {
 		account_pages: [`${CONTENT_SCRIPTS_DIR}/account_pages.js`],
 		background: [`${SRC_DIR}/background.js`],
 		blocked_redirect: [`${CONTENT_SCRIPTS_DIR}/blocked_redirect.js`],
+		checkout_pages: [`${CONTENT_SCRIPTS_DIR}/checkout_pages.js`],
 		click_to_play: [`${CONTENT_SCRIPTS_DIR}/click_to_play.js`],
 		content_script_bundle: [`${CONTENT_SCRIPTS_DIR}/content_script_bundle.js`],
 		ghostery_dot_com: [`${CONTENT_SCRIPTS_DIR}/ghostery_dot_com.js`],

@@ -139,29 +139,26 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
       </div>
     </div>
     <div
-      className="HomeView__plus row large-unstack"
+      className="HomeView__upgradeContainer row align-center-middle purple-border"
     >
       <div
-        className="HomeView__featureIcon feature-plus hide-for-large"
+        className="HomeView__upgradeIcon"
       />
       <div
-        className="HomeView__featureText columns"
+        className="HomeView__upgradeText"
       >
-        hub_home_feature_supporter_text
+        hub_home_plus_upgrade_text
       </div>
       <div
-        className="HomeView__featureIcon columns shrink feature-plus show-for-large"
-      />
-      <div
-        className="columns flex-container align-center-middle"
+        className="HomeView__buttonContainer columns flex-container"
       >
         <a
           aria-current={null}
           className="HomeView__featureButton button primary"
-          href="/plus"
+          href="/upgrade"
           onClick={[Function]}
         >
-          get_ghostery_plus
+          hub_home_plus_upgrade_button_text
         </a>
       </div>
     </div>
@@ -313,29 +310,26 @@ exports[`app/hub/Views/HomeView component Snapshot tests with react-test-rendere
       </div>
     </div>
     <div
-      className="HomeView__plus row large-unstack"
+      className="HomeView__upgradeContainer row align-center-middle"
     >
       <div
-        className="HomeView__featureIcon feature-plus hide-for-large"
+        className="HomeView__upgradeIcon"
       />
       <div
-        className="HomeView__featureText columns"
+        className="HomeView__upgradeText"
       >
-        hub_home_feature_supporter_text
+        hub_home_plus_upgrade_text
       </div>
       <div
-        className="HomeView__featureIcon columns shrink feature-plus show-for-large"
-      />
-      <div
-        className="columns flex-container align-center-middle"
+        className="HomeView__buttonContainer columns flex-container"
       >
         <a
           aria-current={null}
           className="HomeView__featureButton button primary"
-          href="/plus"
+          href="/upgrade"
           onClick={[Function]}
         >
-          already_subscribed
+          hub_home_plus_full_protection
         </a>
       </div>
     </div>

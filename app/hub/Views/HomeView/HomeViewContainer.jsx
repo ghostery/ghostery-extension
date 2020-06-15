@@ -137,7 +137,7 @@ class HomeViewContainer extends Component {
 					enable_metrics={enable_metrics}
 					changeMetrics={this._handleToggleMetrics}
 					email={user ? user.email : ''}
-					isPlus={isPlus}
+					isPremium={isPremium}
 				/>
 			</div>
 		);

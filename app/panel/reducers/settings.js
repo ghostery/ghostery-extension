@@ -92,20 +92,18 @@ const _exportSettings = (state, action) => {
  */
 const _importSettingsDialog = (state, action) => {
 	const result = action.data;
-	let updated_actionSuccess = state.actionSuccess;
-	let updated_importResultText = state.importResultText;
 
 	if (result === true) {
 		// showBrowseWindow was successful
 		window.close();
-	} else {
-		updated_actionSuccess = false;
-		updated_importResultText = t('settings_import_dialog_error');
 	}
 
-	return {
-		actionSuccess: updated_actionSuccess,
-		importResultText: updated_importResultText,
+	return (result === true) ? {
+		actionSuccess: state.actionSuccess,
+		importResultText: state.importResultText,
+	} : {
+		actionSuccess: false,
+		importResultText: t('settings_import_dialog_error'),
 	};
 };
 
@@ -120,15 +118,9 @@ const _importSettingsDialog = (state, action) => {
  */
 const _importSettingsNative = (state, action) => {
 	const { settings } = action;
-	const updated_state = {};
-	const settingsKeys = Object.keys(settings);
-	for (let i = 0; i < settingsKeys.length; i++) {
-		const key = settingsKeys[i];
-		let value = settings[key];
-		if (key === 'alert_bubble_timeout') {
-			value = (value > 30) ? 30 : value;
-		}
-		updated_state[key] = value;
+	const updated_state = { ...settings };
+	if (updated_state.hasOwnProperty('alert_bubble_timeout')) {
+		updated_state.alert_bubble_timeout = Math.min(30, updated_state.alert_bubble_timeout);
 	}
 
 	updated_state.settings_last_imported = Number((new Date()).getTime());

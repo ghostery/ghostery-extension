@@ -24,21 +24,21 @@ export default class MenuItem extends React.Component {
 	}
 
 	menuItemClicked = () => {
-		const { updateHeadeText, title } = this.props;
+		const { updateHeaderText, title } = this.props;
 		this.setState({
 			opening: true,
 		});
 
-		updateHeadeText(title);
+		updateHeaderText(title);
 	}
 
 	closeButtonClicked = () => {
-		const { updateHeadeText } = this.props;
+		const { updateHeaderText } = this.props;
 		this.setState({
 			opening: false,
 		});
 
-		updateHeadeText('');
+		updateHeaderText('');
 	}
 
 	switcherClicked = () => {

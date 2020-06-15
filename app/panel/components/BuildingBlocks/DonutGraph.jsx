@@ -153,7 +153,7 @@ class DonutGraph extends React.Component {
 			return;
 		}
 
-		// componentWillReceiveProps gets called many times during page load as new trackers or unsafe data points are found
+		// componentDidUpdate gets called many times during page load as new trackers or unsafe data points are found
 		// so only compare tracker totals if we don't already have to redraw anyway as a result of the cheaper checks above
 		const prevTrackerTotal = prevCategories.reduce((total, category) => total + category.num_total, 0);
 		const trackerTotal = categories.reduce((total, category) => total + category.num_total, 0);

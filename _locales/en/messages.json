@@ -650,6 +650,9 @@
 	"panel_signin_success": {
 		"message": "You are now signed in as "
 	},
+	"panel_signin_premium_benefits": {
+		"message": "Your account unlocks a free trial of our Premium benefits, including VPN service and device-wide privacy protection, available via our Ghostery Midnight app."
+	},
 	"panel_view_trackers": {
 		"message": "View Trackers"
 	},
@@ -1306,8 +1309,14 @@
 	"hub_home_feature_setup_button_alt": {
 		"message": "Custom Setup Complete"
 	},
-	"hub_home_feature_supporter_text": {
-		"message": "Upgrade to Ghostery Plus and unlock special features."
+	"hub_home_plus_upgrade_text": {
+		"message": "Go beyond basic privacy. Upgrade your Ghostery plan to receive device-level protection, VPN access, and more!"
+	},
+	"hub_home_plus_upgrade_button_text": {
+		"message": "Upgrade now"
+	},
+	"hub_home_plus_full_protection": {
+		"message": "You are fully protected!"
 	},
 	"hub_setup_page_title": {
 		"message": "Ghostery Hub - Setup"
@@ -2424,5 +2433,8 @@
 	},
 	"no_thanks_continue_with_basic": {
 		"message": "No thanks, continue with basic"
+	},
+	"too_many_password_resets_text": {
+		"message": "Too many password reset requests. Try again in one hour."
 	}
 }
