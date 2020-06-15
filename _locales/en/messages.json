@@ -1308,6 +1308,7 @@
 	},
 	"hub_home_plus_full_protection": {
 		"message": "You are fully protected!"
+<<<<<<< HEAD
 	},
 	"hub_upgrade_your": {
 		"message": "Upgrade your"
@@ -1395,6 +1396,8 @@
 	},
 	"hub_upgrade_unlimited_bandwidth": {
 		"message": "Unlimited Bandwidth"
+=======
+>>>>>>> develop
 	},
 	"hub_setup_page_title": {
 		"message": "Ghostery Hub - Setup"
