@@ -44,7 +44,6 @@ import * as utils from '../utils/utils';
  */
 class EventHandlers {
 	constructor() {
-		this.policy = new Policy();
 		this.policySmartBlock = new PolicySmartBlock();
 		this.purplebox = new PurpleBox();
 		this._pageListeners = new Set();

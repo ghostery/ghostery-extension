@@ -26,8 +26,6 @@ import conf from '../../src/classes/Conf';
 import globals from '../../src/classes/Globals';
 import { processUrl } from '../../src/utils/utils';
 
-let policy = new Policy();
-
 // Mock imports for dependencies
 jest.mock('../../src/classes/TabInfo');
 jest.mock('../../src/classes/Conf', () => {
