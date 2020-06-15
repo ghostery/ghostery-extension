@@ -27,7 +27,6 @@ import { log } from '../utils/common';
  */
 class PolicySmartBlock {
 	constructor() {
-		this.policy = new Policy();
 		this.allowedCategoriesList = [
 			'essential',
 			'audio_video_player',

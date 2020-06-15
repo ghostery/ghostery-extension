@@ -42,22 +42,6 @@ class Settings extends React.Component {
 		});
 	}, 3000)
 
-	/**
-	 *	Refactoring UNSAFE_componentWillMount into Constructor
-	 *	Stats:
-	 *		Constructor runtime before refactor: 0.145ms
-	 *		Constructor + UNSAFE_componentWillMount runtime before refactor: 0.330ms
-	 *		Constructor runtime after refactor: 0.144ms
-	 *
-	 *	Refactoring UNSAFE_componentWillMount into componentDidMount
-	 *	Stats:
-	 *		Constructor runtime with no componentDidMount: 0.123ms
-	 *		Constructor runtime with componentDidMount: 0.147ms
-	 *
-	 *	Notes: Negligible difference using componentDidMount.
-	 *
-	 *	Conclusion: Refactor using constructor to avoid re-render
-	 */
 	constructor(props) {
 		super(props);
 		this.state = {

@@ -68,15 +68,14 @@ class Click2PlayDb extends Updatable {
 
 		let keep = false;
 		const allowKeys = Object.keys(this.allowOnceList[tab_id]);
-		for (let i = 0; i < allowKeys.length; i++) {
-			const appID = allowKeys[i];
+		allowKeys.forEach((appID) => {
 			const count = this.allowOnceList[tab_id][appID];
 			const newCount = count - 1;
 			this.allowOnceList[tab_id][appID] = newCount;
 			if (newCount > 0) {
 				keep = true;
 			}
-		}
+		});
 		if (!keep) {
 			delete this.allowOnceList[tab_id];
 		}

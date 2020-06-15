@@ -27,20 +27,6 @@ import { renderKnownTrackerButtons, renderUnknownTrackerButtons } from './tracke
 class Tracker extends React.Component {
 	static contextType = ThemeContext;
 
-	/**
-	 *	Refactoring UNSAFE_componentWillMount into Constructor
-	 *	Stats:
-	 *		Constructor runtime before refactor: 0.037ms
-	 *		Constructor + UNSAFE_componentWillMount runtime before refactor: 0.415ms
-	 *		Constructor runtime after refactor: 0.215ms
-	 *
-	 *	Refactoring UNSAFE_componentWillMount into componentDidMount
-	 *	Stats:
-	 *		Constructor runtime after refactor: 0.020ms
-	 *		Constructor + componentDidMount runtime after refactor: 14.205ms
-	 *
-	 *	Conclusion: Refactor using componentDidMount
-	 */
 	constructor(props) {
 		super(props);
 		this.state = {
