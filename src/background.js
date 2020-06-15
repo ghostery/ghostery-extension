@@ -163,14 +163,13 @@ function setGhosteryDefaultBlocking() {
 	log('Blocking all trackers in categories:', ...categoriesBlock);
 	const selected_app_ids = {};
 	const app_ids = Object.keys(bugDb.db.apps);
-	for (let i = 0; i < app_ids.length; i++) {
-		const app_id = app_ids[i];
+	app_ids.forEach((app_id) => {
 		const category = bugDb.db.apps[app_id].cat;
 		if (categoriesBlock.indexOf(category) >= 0 &&
 		!selected_app_ids.hasOwnProperty(app_id)) {
 			selected_app_ids[app_id] = 1;
 		}
-	}
+	});
 	panelData.set({ selected_app_ids });
 }
 
@@ -580,12 +579,11 @@ function handleGhosteryHub(name, message, callback) {
 					panelData.set({ setup_block: 3 });
 					const selected_app_ids = {};
 					const app_ids = Object.keys(bugDb.db.apps);
-					for (let i = 0; i < app_ids.length; i++) {
-						const app_id = app_ids[i];
+					app_ids.forEach((app_id) => {
 						if (!selected_app_ids.hasOwnProperty(app_id)) {
 							selected_app_ids[app_id] = 1;
 						}
-					}
+					});
 					panelData.set({ selected_app_ids });
 					break;
 				}
@@ -889,6 +887,8 @@ function onMessageHandler(request, sender, callback) {
 			.then((foundUser) => {
 				const user = { user: { ...foundUser } };
 				if (foundUser) {
+					user.user.plusAccess = account.hasScopesUnverified(['subscriptions:plus'])
+						|| account.hasScopesUnverified(['subscriptions:premium']);
 					user.user.premiumAccess = account.hasScopesUnverified(['subscriptions:premium']);
 				}
 				callback(user);

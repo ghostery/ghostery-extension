@@ -26,18 +26,6 @@ import { updateSummaryBlockingCount } from '../utils/blocking';
 class Blocking extends React.Component {
 	static contextType = DynamicUIPortContext;
 
-	/**
-	 *	Refactoring UNSAFE_componentWillMount into Constructor
-	 *	Stats:
-	 *		Constructor runtime before refactor: 0.038ms
-	 *		Constructor + UNSAFE_componentWillMount runtime before refactor: 0.333ms
-	 *		Constructor runtime after refactor: 0.129ms
-	 *
-	 *	Notes:
-	 *		calling buildBlockingClasses and computeSiteNotScanned in the constructor takes 0.018ms.
-	 *
-	 *	Conclusion: Refactor using constructor as the added computation is minimal
-	 */
 	constructor(props) {
 		super(props);
 

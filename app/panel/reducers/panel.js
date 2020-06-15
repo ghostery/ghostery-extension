@@ -268,17 +268,6 @@ export default (state = initialState, action) => {
 			setTheme(document);
 			return { ...state, current_theme: initialState.current_theme };
 		}
-		// @TODO?
-		// case LOGOUT_SUCCESS: {
-		// 	const notificationAction = {
-		// 		payload: {
-		// 			text: 'Logged out successfully.',
-		// 			classes: 'success',
-		// 		}
-		// 	};
-		// 	const updated = _showNotification(state, notificationAction);
-		// 	return Object.assign({}, state, updated);
-		// }
 		case RESET_PASSWORD_SUCCESS: {
 			const notificationAction = {
 				payload: {

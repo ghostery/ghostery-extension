@@ -194,20 +194,15 @@ class FoundBugs {
 		const bugs = this.getBugs(tab_id);
 		const { db } = bugDb;
 
-		let id;
-		let appid;
-		let cid; // category id
-
 		if (!bugs) {
 			return bugs;
 		}
 
 		// squish all the bugs into categories first
 		const ids = Object.keys(bugs);
-		for (let i = 0; i < ids.length; i++) {
-			id = ids[i];
-			appid = db.bugs[id].aid;
-			cid = db.apps[appid].cat;
+		ids.forEach((id) => {
+			const appid = db.bugs[id].aid;
+			const cid = db.apps[appid].cat;
 
 			if (cats_obj.hasOwnProperty(cid)) {
 				if (!cats_obj[cid].appIds.includes(appid)) {
@@ -239,14 +234,13 @@ class FoundBugs {
 					total: 1
 				};
 			}
-		}
+		});
 
 		// convert categories hash to array
 		const cids = Object.keys(cats_obj);
-		for (let i = 0; i < cids.length; i++) {
-			cid = cids[i];
+		cids.forEach((cid) => {
 			cats_arr.push(cats_obj[cid]);
-		}
+		});
 
 		if (sorted) {
 			cats_arr.sort((a, b) => {

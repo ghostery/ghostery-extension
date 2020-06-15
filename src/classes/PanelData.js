@@ -590,8 +590,7 @@ class PanelData {
 
 		// Set the conf from data
 		const dataKeys = Object.keys(data);
-		for (let i = 0; i < dataKeys.length; i++) {
-			const key = dataKeys[i];
+		dataKeys.forEach((key) => {
 			const value = data[key];
 			if (conf.hasOwnProperty(key) && !isEqual(conf[key], value)) {
 				conf[key] = value;
@@ -613,7 +612,7 @@ class PanelData {
 				}
 				PanelData._toggleBlockingHelper();
 			}
-		}
+		});
 
 		if (data.needsReload && this._activeTab) {
 			tabInfo.setTabInfo(this._activeTab.id, 'needsReload', data.needsReload);
