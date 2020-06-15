@@ -570,6 +570,9 @@ section.home-template .section.section-pricing {
 	}
 
 	.button {
+		text-transform: none;
+		white-space: nowrap;
+		font-family: 'Open Sans';
 		&:hover {
 			background-color: $price-blue-hover;
 		}
@@ -650,10 +653,6 @@ section.home-template .section.section-pricing {
 			color: $white;
 			font-weight:bold;
 		}
-		.table-footer-button {
-			white-space: nowrap;
-			font-size: 12px;
-		}
 		@media only screen and (min-width: 832px) {
 			.table {
 				border-collapse:collapse;
@@ -729,7 +728,7 @@ section.home-template .section.section-pricing {
 			border: none;
 		}
 		tr:last-child > td > a {
-			width: 100%;
+			width: 104%;
 			height: 38px;
 			padding: 0;
 			display: flex;
