@@ -40,7 +40,6 @@ module.exports = {
 	rules: {
 		'arrow-parens': [2, 'as-needed', { 'requireForBlockBody': true }],
 		'camelcase': [0],
-		'class-methods-use-this': [1],
 		'comma-dangle': [2, {
 			'arrays': 'only-multiline',
 			'objects': 'only-multiline',
@@ -54,7 +53,6 @@ module.exports = {
 		'lines-between-class-members': [1],
 		'max-len': [0],
 		'newline-per-chained-call': [0, { 'ignoreChainWithDepth': 2 }],
-		'no-mixed-operators': [1],
 		'no-nested-ternary': [0],
 		'no-param-reassign': ['error', {
 			props: true,
@@ -72,28 +70,22 @@ module.exports = {
 			]
 		}],
 		'no-plusplus': [0],
-		'no-prototype-builtins': [0],
-		'no-restricted-syntax': [1],
+		'no-prototype-builtins': [0], // Ignored because of hasOwnProperty calls.
 		'no-tabs': [0],
 		'no-underscore-dangle': [0],
 		'no-unused-vars': [1],
 		'no-useless-escape': [1],
 		'operator-linebreak': [0],
-		'prefer-object-spread': [1],
 		'space-before-function-paren': [2, 'never'],
 
 		// Plugin: Import
 		'import/no-cycle': [0],
-		'import/prefer-default-export': [1],
 
 		// Plugin: React
-		'react/destructuring-assignment': [1],
 		'react/static-property-placement': [0],
 		'react/jsx-curly-newline': [0],
 		'react/jsx-indent': [1, 'tab'],
 		'react/jsx-indent-props': [1, 'tab'],
-		'react/jsx-props-no-spreading': [1],
-		'react/no-access-state-in-setstate': [1],
 		'react/no-danger': [0],
 		'react/prop-types': [0],
 		'react/jsx-fragments': [1, 'element'],

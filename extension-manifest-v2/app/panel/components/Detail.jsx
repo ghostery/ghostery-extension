@@ -22,23 +22,6 @@ import Rewards from '../containers/RewardsContainer';
  * @memberOf PanelClasses
  */
 class Detail extends React.Component {
-	/**
-	 *	Refactoring UNSAFE_componentWillMount into Constructor
-	 *	Stats:
-	 *		Constructor runtime before refactor: 0.085ms
-	 *		Constructor + UNSAFE_componentWillMount runtime before refactor: 0.345ms
-	 *		Constructor runtime after refactor: 0.163ms
-	 *
-	 *	Refactoring UNSAFE_componentWillMount into componentDidMount
-	 *	Stats:
-	 *		Constructor runtime with no componentDidMount: 0.163ms
-	 *		Constructor runtime with componentDidMount: 0.078ms
-	 *		Constructor + componentDidMount runtime: 8.313ms
-	 *	Notes:
-	 *		Noticably slower when refactoring using componentDidMount
-	 *
-	 *	Conclusion: Refactor using constructor
-	 */
 	constructor(props) {
 		super(props);
 

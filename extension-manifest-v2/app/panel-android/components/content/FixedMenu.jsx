@@ -51,16 +51,14 @@ export default class FixedMenu extends React.Component {
 		switch (type) {
 			case 'enable_anti_tracking': {
 				const categories = Object.keys(this.antiTrackingData);
-				for (let i = 0; i < categories.length; i++) {
-					const category = categories[i];
+				categories.forEach((category) => {
 					const apps = Object.keys(this.antiTrackingData[category]);
-					for (let j = 0; j < apps.length; j++) {
-						const app = apps[j];
+					apps.forEach((app) => {
 						if (this.antiTrackingData[category][app] === 'unsafe') {
 							total++;
 						}
-					}
-				}
+					});
+				});
 				return total;
 			}
 			case 'enable_ad_block':
@@ -79,14 +77,10 @@ export default class FixedMenu extends React.Component {
 	}
 
 	toggleMenu = () => {
-		const { open } = this.state;
-		const currentState = open;
-		this.setState({
-			open: !currentState,
-		});
+		this.setState(prevState => ({ open: !prevState.open }));
 	}
 
-	updateHeadeText = (text) => {
+	updateHeaderText = (text) => {
 		const textToShow = text || FixedMenu.defaultHeaderText;
 
 		this.setState({
@@ -106,7 +100,7 @@ export default class FixedMenu extends React.Component {
 					<li className="menuItem">
 						<MenuItem
 							active={panel.enable_anti_tracking}
-							updateHeadeText={this.updateHeadeText}
+							updateHeaderText={this.updateHeaderText}
 							type="anti_tracking"
 							title="Enhanced Anti-Tracking"
 							numData={this.getCount('enable_anti_tracking')}
@@ -117,7 +111,7 @@ export default class FixedMenu extends React.Component {
 					<li className="menuItem">
 						<MenuItem
 							active={panel.enable_ad_block}
-							updateHeadeText={this.updateHeadeText}
+							updateHeaderText={this.updateHeaderText}
 							type="ad_block"
 							title="Enhanced Ad Blocking"
 							numData={this.getCount('enable_ad_block')}
@@ -128,7 +122,7 @@ export default class FixedMenu extends React.Component {
 					<li className="menuItem">
 						<MenuItem
 							active={panel.enable_smart_block}
-							updateHeadeText={this.updateHeadeText}
+							updateHeaderText={this.updateHeaderText}
 							type="smart_block"
 							title="Smart Blocking"
 							numData={this.getCount('enable_smart_block')}
