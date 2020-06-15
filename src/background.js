@@ -349,7 +349,7 @@ function handleCheckoutPages(name) {
 			account.getUser();
 			return true;
 		default:
-			break;
+			return false;
 	}
 }
 
