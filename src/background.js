@@ -16,7 +16,7 @@
  */
 import { debounce, every, size } from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
-import cliqz from './classes/Cliqz';
+import cliqz, { HUMANWEB_MODULE, HPN_MODULE } from './classes/Cliqz';
 // object class
 import Events from './classes/EventHandlers';
 import Policy from './classes/Policy';
@@ -75,8 +75,9 @@ const moduleMock = {
 	isEnabled: false,
 	on: () => {},
 };
-const humanweb = cliqz.modules['human-web'];
-const { adblocker, antitracking, hpnv2 } = cliqz.modules;
+const humanweb = cliqz.modules[HUMANWEB_MODULE];
+const hpnv2 = cliqz.modules[HPN_MODULE];
+const { adblocker, antitracking } = cliqz.modules;
 const offers = cliqz.modules['offers-v2'] || moduleMock;
 const insights = cliqz.modules.insights || moduleMock;
 // add ghostery module to expose ghostery state to cliqz
