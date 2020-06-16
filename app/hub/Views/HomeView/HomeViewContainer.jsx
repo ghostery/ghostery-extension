@@ -15,6 +15,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import QueryString from 'query-string';
 import HomeView from './HomeView';
+import PromoModal from '../../../shared-components/PromoModal';
+import { sendMessage } from '../../utils';
+import globals from '../../../../src/classes/Globals';
+
+const DOMAIN = globals.DEBUG ? 'ghosterystage' : 'ghostery';
+const PREMIUM = 'premium';
 
 /**
  * @class Implement the Home View for the Ghostery Hub
@@ -55,19 +61,79 @@ class HomeViewContainer extends Component {
 		actions.setMetrics({ enable_metrics });
 	}
 
+	/**
+	 * Handle clicks on premium promo modal button
+	 * @param type		'basic' (default), 'plus', or 'premium'
+	 * @private
+	 */
+	_handlePremiumPromoModalClick = (type = 'basic') => {
+		// GH-1777
+		// we want to show the promo modal exactly once per Hub visit
+		const { actions } = this.props;
+		actions.markPremiumPromoModalShown();
+
+		sendMessage('SET_PREMIUM_PROMO_MODAL_SEEN', {});
+
+		switch (type) {
+			case 'plus':
+				window.open(`https://checkout.${DOMAIN}.com/plus?utm_source=gbe&utm_campaign=intro_hub`, '_blank');
+				break;
+			case 'premium':
+				window.open('https://ghostery.com/thanks-for-downloading-midnight?utm_source=gbe&utm_campaign=intro_hub', '_blank');
+				break;
+			case 'basic':
+			default:
+				break;
+		}
+	}
+
+	/**
+	 * @private
+	 * Function to handle clicks on "No thanks, continue with basic" in Premium promo modal
+	 */
+	_handleKeepBasicClick = () => { this._handlePremiumPromoModalClick(); }
+
+	/**
+	 * @private
+	 * Function to handle clicks on the "Get Plus instead" link in the Premium promo modal
+	 */
+	_handleGetPlusClick = () => { this._handlePremiumPromoModalClick('plus'); }
+
+	/**
+	 * @private
+	 * Function to handle clicks on the Midnight download button in the Premium promo modal
+	 */
+	_handleTryMidnightClick = () => { this._handlePremiumPromoModalClick('premium'); }
+
 	_render() {
 		const { justInstalled } = this.state;
 		const { home, user, actions } = this.props;
 		const { sendPing } = actions;
+		const isPlus = (user && user.plusAccess) || false;
 		const isPremium = (user && user.premiumAccess) || false;
 		const {
+			premium_promo_modal_shown,
 			setup_complete,
 			tutorial_complete,
 			enable_metrics,
 		} = home;
 
+		// Flag to display promo modal (used in A/B testing)
+		const shouldShowPromoModal = false;
+		// Logic to display premium modal if it is the case that it is being shown once per hub refresh to non-premium users
+		const showPromoModal = shouldShowPromoModal && !premium_promo_modal_shown && !isPremium;
+
 		return (
 			<div className="full-height">
+				<PromoModal
+					type={PREMIUM}
+					show={showPromoModal}
+					isPlus={isPlus}
+					location="hub"
+					handleKeepBasicClick={this._handleKeepBasicClick}
+					handleGetPlusClick={this._handleGetPlusClick}
+					handleTryMidnightClick={this._handleTryMidnightClick}
+				/>
 				<HomeView
 					justInstalled={justInstalled}
 					setup_complete={setup_complete}

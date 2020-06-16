@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -17,9 +17,13 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import globals from '../../../../src/classes/Globals';
 
+const BASIC = 'BASIC';
+const PLUS = 'PLUS';
+const PREMIUM = 'PREMIUM';
+
 /**
- * A React class component for rendering the Home View
- * @return {JSX} JSX for rendering the Home View of the Hub app
+ * A React class component for rendering the Upgrade Plan View
+ * @return {JSX} JSX for rendering the Upgrade Plan View of the Hub app
  * @memberof HubComponents
  */
 const UpgradePlanView = (props) => {
@@ -39,10 +43,6 @@ const UpgradePlanView = (props) => {
 
 	const isPlus = (user && user.plusAccess) || false;
 	const isPremium = (user && user.premiumAccess) || false;
-
-	const BASIC = 'BASIC';
-	const PLUS = 'PLUS';
-	const PREMIUM = 'PREMIUM';
 
 	const sliderClassNames = ClassNames('switch-check', {
 		checked: show_yearly_prices

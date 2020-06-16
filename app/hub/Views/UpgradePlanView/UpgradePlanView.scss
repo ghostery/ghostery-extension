@@ -577,6 +577,7 @@ section.home-template .section.section-pricing {
 		white-space: nowrap;
 		font-family: 'Open Sans';
 		background-color: $price-blue;
+		font-weight: 600;
 		&:hover {
 			background-color: $price-blue-hover;
 		}
