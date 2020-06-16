@@ -81,11 +81,9 @@ const UpgradePlanView = (props) => {
 		if (isPlus) return 'SUPPORTER';
 		return '-1';
 	};
-	const subscriptionBillingType = show_yearly_prices ? 'yearly' : 'monthly';
-	const utmParams = `utm_source=gbe&utm_campaign=intro_hub_c_1&signedIn=${signedIn}&st=${subscriptionType()}&sbt=${subscriptionBillingType}`;
-
-	// Query Param to show monthly/yearly pricing in checkout web
+	// Interval is the query Param to show monthly/yearly pricing in checkout web, also used as a ping parameter
 	const interval = show_yearly_prices ? 'year' : 'month';
+	const utmParams = `utm_source=gbe&utm_campaign=intro_hub_c_1&signedIn=${signedIn}&st=${subscriptionType()}&subscription_interval=${interval}`;
 
 	const plusCheckoutLink = `${globals.CHECKOUT_BASE_URL}/plus?interval=${interval}&${utmParams}`;
 	const premiumCheckoutLink = `${globals.CHECKOUT_BASE_URL}/premium?interval=${interval}&${utmParams}`;
