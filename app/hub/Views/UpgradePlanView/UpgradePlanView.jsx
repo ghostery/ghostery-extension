@@ -82,12 +82,13 @@ const UpgradePlanView = (props) => {
 		return '-1';
 	};
 	const subscriptionBillingType = show_yearly_prices ? 'yearly' : 'monthly';
+	const utmParams = `utm_source=gbe&utm_campaign=intro_hub_c_1&signedIn=${signedIn}&st=${subscriptionType()}&sbt=${subscriptionBillingType}`;
 
 	// Query Param to show monthly/yearly pricing in checkout web
 	const interval = show_yearly_prices ? 'year' : 'month';
 
-	const plusCheckoutLink = utm_params => `${globals.CHECKOUT_BASE_URL}/plus?interval=${interval}&${utm_params}`;
-	const premiumCheckoutLink = utm_params => `${globals.CHECKOUT_BASE_URL}/premium?interval=${interval}&${utm_params}`;
+	const plusCheckoutLink = `${globals.CHECKOUT_BASE_URL}/plus?interval=${interval}&${utmParams}`;
+	const premiumCheckoutLink = `${globals.CHECKOUT_BASE_URL}/premium?interval=${interval}&${utmParams}`;
 
 	return (
 		<section className="pricing-page page-template-page-content-modules">
@@ -157,7 +158,7 @@ const UpgradePlanView = (props) => {
 									{t('hub_upgrade_already_protected')}
 								</NavLink>
 							) : (
-								<a className="button button-gold" href={plusCheckoutLink(`utm_source=gbe&utm_campaign=intro_hub_c_1&signedIn=${signedIn}&st=${subscriptionType()}&sbt=${subscriptionBillingType}`)} target="_blank" rel="noopener noreferrer" title="Upgrade to Plus">
+								<a className="button button-gold" href={plusCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Plus">
 									{t('hub_upgrade_to_plus')}
 								</a>
 							)}
@@ -200,7 +201,7 @@ const UpgradePlanView = (props) => {
 									{t('hub_upgrade_already_protected')}
 								</NavLink>
 							) : (
-								<a className="button button-premium" href={premiumCheckoutLink(`utm_source=gbe&utm_campaign=intro_hub_c_3&signedIn=${signedIn}&st=${subscriptionType()}&sbt=${subscriptionBillingType}`)} target="_blank" rel="noopener noreferrer" title="Upgrade to Premium">
+								<a className="button button-premium" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Premium">
 									{t('hub_upgrade_to_premium')}
 								</a>
 							)}
@@ -302,7 +303,7 @@ const UpgradePlanView = (props) => {
 										{t('hub_upgrade_already_protected')}
 									</NavLink>
 								) : (
-									<a className="button button-gold" href={plusCheckoutLink(`utm_source=gbe&utm_campaign=intro_hub_c_1&signedIn=${signedIn}&st=${subscriptionType()}&sbt=${subscriptionBillingType}`)} target="_blank" rel="noopener noreferrer" title="Upgrade to Plus">
+									<a className="button button-gold" href={plusCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Plus">
 										{t('hub_upgrade_to_plus')}
 									</a>
 								)}
@@ -358,7 +359,7 @@ const UpgradePlanView = (props) => {
 											{t('hub_upgrade_already_protected')}
 										</NavLink>
 									) : (
-										<a className="button button-premium" href={premiumCheckoutLink(`utm_source=gbe&utm_campaign=intro_hub_c_3&signedIn=${signedIn}&st=${subscriptionType()}&sbt=${subscriptionBillingType}`)} target="_blank" rel="noopener noreferrer" title="Upgrade to Premium">
+										<a className="button button-premium" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Premium">
 											{t('hub_upgrade_to_premium')}
 										</a>
 									)}
@@ -601,7 +602,7 @@ const UpgradePlanView = (props) => {
 													{t('hub_upgrade_already_protected')}
 												</NavLink>
 											) : (
-												<a className="button table-footer-button button-gold" href={plusCheckoutLink(`utm_source=gbe&utm_campaign=intro_hub_c_2&signedIn=${signedIn}&st=${subscriptionType()}&sbt=${subscriptionBillingType}`)} target="_blank" rel="noopener noreferrer" title="Upgrade to Plus">
+												<a className="button table-footer-button button-gold" href={plusCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Plus">
 													{t('hub_upgrade_to_plus')}
 												</a>
 											)}
@@ -612,7 +613,7 @@ const UpgradePlanView = (props) => {
 													{t('hub_upgrade_already_protected')}
 												</NavLink>
 											) : (
-												<a className="button table-footer-button button-premium" href={premiumCheckoutLink(`utm_source=gbe&utm_campaign=intro_hub_c_4&signedIn=${signedIn}&st=${subscriptionType()}&sbt=${subscriptionBillingType}`)} target="_blank" rel="noopener noreferrer" title="Upgrade to Premium">
+												<a className="button table-footer-button button-premium" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Premium">
 													{t('hub_upgrade_to_premium')}
 												</a>
 											)}
@@ -903,7 +904,7 @@ const UpgradePlanView = (props) => {
 										{t('hub_upgrade_already_protected')}
 									</NavLink>
 								) : (
-									<a className="button button-gold" href={plusCheckoutLink(`utm_source=gbe&utm_campaign=intro_hub_c_2&signedIn=${signedIn}&st=${subscriptionType()}&sbt=${subscriptionBillingType}`)} target="_blank" rel="noopener noreferrer" title="Upgrade to Plus">
+									<a className="button button-gold" href={plusCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Plus">
 										{t('hub_upgrade_to_plus')}
 									</a>
 								)}
@@ -916,7 +917,7 @@ const UpgradePlanView = (props) => {
 										{t('hub_upgrade_already_protected')}
 									</NavLink>
 								) : (
-									<a className="button button-premium" href={premiumCheckoutLink(`utm_source=gbe&utm_campaign=intro_hub_c_4&signedIn=${signedIn}&st=${subscriptionType()}&sbt=${subscriptionBillingType}`)} target="_blank" rel="noopener noreferrer" title="Upgrade to Premium">
+									<a className="button button-premium" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Premium">
 										{t('hub_upgrade_to_premium')}
 									</a>
 								)}
