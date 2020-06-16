@@ -1341,11 +1341,8 @@ function getDataForGhosteryTab(callback) {
  */
 function initializePopup() {
 	if (BROWSER_INFO.os === 'android') {
-		chrome.browserAction.onClicked.addListener((tab) => {
-			chrome.tabs.create({
-				url: chrome.extension.getURL(`app/templates/panel_android.html?tabId=${tab.id}`),
-				active: true,
-			});
+		chrome.browserAction.setPopup({
+			popup: 'app/templates/panel_android.html',
 		});
 	} else {
 		chrome.browserAction.setPopup({
