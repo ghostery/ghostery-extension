@@ -86,8 +86,8 @@ const UpgradePlanView = (props) => {
 	// Query Param to show monthly/yearly pricing in checkout web
 	const interval = show_yearly_prices ? 'year' : 'month';
 
-	const plusCheckoutLink = utm_params => (show_yearly_prices ? `${globals.CHECKOUT_BASE_URL}/plus?interval=${interval}&${utm_params}` : `${globals.CHECKOUT_BASE_URL}/plus?interval=${interval}&${utm_params}`);
-	const premiumCheckoutLink = utm_params => (show_yearly_prices ? `${globals.CHECKOUT_BASE_URL}/premium?interval=${interval}&${utm_params}` : `${globals.CHECKOUT_BASE_URL}/premium?interval=${interval}&${utm_params}`);
+	const plusCheckoutLink = utm_params => `${globals.CHECKOUT_BASE_URL}/plus?interval=${interval}&${utm_params}`;
+	const premiumCheckoutLink = utm_params => `${globals.CHECKOUT_BASE_URL}/premium?interval=${interval}&${utm_params}`;
 
 	return (
 		<section className="pricing-page page-template-page-content-modules">
