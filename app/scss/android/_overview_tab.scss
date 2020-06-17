@@ -1,0 +1,71 @@
+/**
+ * Overview Tab Component Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+.OverviewTab {
+	padding-bottom: 50px;
+	text-align: center;
+
+	.OverviewTab__DonutGraphContainer {
+		margin: 26px auto;
+		height: 120px;
+		width: 120px;
+
+		.DonutGraph__tooltipContainer,
+		.DonutGraph__textCount span {
+			display: none;
+		}
+	}
+
+	.OverviewTab__PageHostContainer {
+		margin-top: 20px;
+		margin-bottom: 10px;
+
+		.OverviewTab__PageHostText {
+			font-size: 11px;
+			font-weight: 600;
+			color: $tundora;
+		}
+	}
+
+	.OverviewTab__PageStatsContainer {
+		margin-bottom: 21px;
+
+		.OverviewTab__PageStat {
+			line-height: 21px;
+			font-size: 14px;
+			font-weight: 600;
+		}
+		.OverviewTab__PageStat--red {
+			color: $red;
+		}
+		.OverviewTab__PageStat--blue {
+			color: $ghosty-blue;
+		}
+	}
+
+	.OverviewTab__GhosteryFeaturesContainer {
+
+		.GhosteryFeatureButton__text,
+		.pause-button-text {
+			font-weight: 600;
+		}
+
+		.OverviewTab__GhosteryFeature--ExtraMargins {
+			margin: 12px 28px;
+		}
+
+		.tooltip-content {
+			display: none;
+		}
+	}
+}

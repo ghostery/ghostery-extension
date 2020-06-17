@@ -11,24 +11,24 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+// CSS Properties - ToDo: Update by BEMifying
 $tracker-menu-item-width: 60px;
 $tracker-height: 50px;
 $fixed-menu-item-height: 50px;
 $fixed-menu-header-height: 50px;
 $tab--nav-height: 50px;
 
-// Basic Colors
-$cliqz-blue: #00AEF0;
-$cliqz-blue--lighter: #28C4FF;
-$white: #FFFFFF;
-$tundora: #4A4A4A;
+// Colors
+$ghosty-blue:						#00AEF0;
+$ghosty-blue--lighter:	#28C4FF;
+$white:									#FFFFFF;
+$tundora:								#4A4A4A;
+$button-trust:					#9FCA4C;
+$button-restrict:				#BC4A4B;
+$button-block:					#E44258;
+$atlantis:							#9ECC42;
+$red:										#E74055;
 
-// Button Colors
-$button-white: ffffff;
-$button-blue: 1DAFED;
-$button-dark-grey: 4A4A4A;
-
-// Button Control Colors
-$button-trust: #9FCA4C;
-$button-restrict: #BC4A4B;
-$button-block: #E44258;
+// Acccordion Colors - ToDo: Update and Remove?
+$button-white:					ffffff;
+$button-blue:						1DAFED;

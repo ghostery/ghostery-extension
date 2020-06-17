@@ -25,7 +25,7 @@
 		height: $fixed-menu-header-height;
 		background-color: $white;
 		text-align: center;
-		color: $cliqz-blue;
+		color: $ghosty-blue;
 
 		& > p {
 			position: relative;
@@ -40,7 +40,7 @@
 				left: 0;
 				right: 0;
 				margin: 0 auto;
-				border: 2px solid $cliqz-blue;
+				border: 2px solid $ghosty-blue;
 				border-radius: 5px;
 				position: absolute;
 				top: 5px;
@@ -68,7 +68,7 @@
 				.anti_tracking, .ad_block, .smart_block {
 					background-repeat: no-repeat;
 					background-position: 20px center;
-					color: $cliqz-blue;
+					color: $ghosty-blue;
 				}
 
 				.anti_tracking {
@@ -85,7 +85,7 @@
 
 				.menuItemOverview {
 					width: calc(100% - 47px);
-					color: $cliqz-blue;
+					color: $ghosty-blue;
 					float: left;
 
 					.anti_tracking, .ad_block, .smart_block {
@@ -134,7 +134,7 @@
 						width: 20px;
 						height: 20px;
 						border-radius: 50%;
-						background-color: $cliqz-blue;
+						background-color: $ghosty-blue;
 						@include prefix('transition', 'left 200ms ease-in');
 					}
 
@@ -174,7 +174,7 @@
 
 					.headline {
 						font-weight: bold;
-						color: $cliqz-blue;
+						color: $ghosty-blue;
 						font-size: 16px;
 					}
 

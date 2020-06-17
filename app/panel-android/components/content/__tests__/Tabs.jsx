@@ -90,7 +90,7 @@ describe('app/panel-android/components/content/Tabs.jsx', () => {
 		});
 
 		test('Tabs component with 3 Tab children components non-happy path', () => {
-			// ToDo.
+			expect(true).toBe(false);
 		});
 	});
 });

@@ -801,9 +801,15 @@ function onMessageHandler(request, sender, callback) {
 		return false;
 	}
 	if (name === 'getCliqzModuleData') { // panel-android only
-		utils.getActiveTab((activeTab) => {
-			sendCliqzModuleCounts(activeTab.id, activeTab.pageHost, callback);
-		});
+		if (!message.tabId) {
+			utils.getActiveTab((activeTab) => {
+				sendCliqzModuleCounts(activeTab.id, activeTab.pageHost, callback);
+			});
+		} else {
+			chrome.tabs.get(+message.tabId, (messageTab) => {
+				sendCliqzModuleCounts(messageTab.id, messageTab.pageHost, callback);
+			});
+		}
 		return true;
 	}
 	if (name === 'getTrackerDescription') {
