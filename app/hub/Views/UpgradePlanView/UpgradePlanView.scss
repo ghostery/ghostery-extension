@@ -7,17 +7,6 @@ $price-purple-hover: #710d72;
 $price-gold: #b8860b;
 $price-gold-hover: #906908;
 $medium-large-breakpoint: 1118px; // Break when 3 cards on the screen overflow to next line
-$medium-small-breakpoint: 1020px; // Break when table does not fit anymore
-
-.mb-20 {
-	margin-bottom: rem-calc(20);
-}
-.mb-30 {
-	margin-bottom: rem-calc(30);
-}
-.mb-40 {
-	margin-bottom: rem-calc(40);
-}
 
 .font-size-36 {
 	font-size: rem-calc(36);
@@ -36,17 +25,6 @@ section.home-template .section.section-pricing {
 	.hide-for-extra-large {
 		display: none;
 		@include breakpoint($medium-large-breakpoint down) {
-			display: block;
-		}
-	}
-	.show-for-medium-small {
-		@include breakpoint($medium-small-breakpoint down) {
-			display: none;
-		}
-	}
-	.hide-for-medium-small {
-		display: none;
-		@include breakpoint($medium-small-breakpoint down) {
 			display: block;
 		}
 	}
@@ -799,108 +777,5 @@ section.home-template .section.section-pricing {
 				max-width: 166px;
 			}
 		}
-	}
-}
-
-.page-template-page-pricing-professional {
-	main {
-		background-color: #1c212b;
-		padding-top: rem-calc(40);
-		padding-bottom: rem-calc(40);
-	}
-
-	.pricing-professional-page {
-		color: $white;
-		font-family: 'Roboto';
-		a {
-			color: $white;
-		}
-	}
-
-	.card-outer {
-		border: 2px solid $white;
-		background-color: $black;
-		margin: rem-calc(150) auto rem-calc(60) auto;
-		width: 400px;
-		padding-bottom: rem-calc(20);
-		@include breakpoint($medium-large-breakpoint down) {
-			border: none;
-			width: 100%;
-			background-color: transparent;
-		}
-	}
-
-	.card {
-		position: relative;
-		&:before{
-			position:absolute;
-			z-index: 1;
-			top:0;
-			left:0;
-			width:100%;
-			height:140px;
-			content:"";
-			background-color:#175672;
-			@include breakpoint($medium-large-breakpoint down) {
-				content: none;
-				background-color: transparent;
-			}
-		}
-	}
-
-	.card-image-top {
-		position: relative;
-		z-index: 3;
-		max-width: 300px;
-		width: 100%;
-		margin: 0 auto;
-		margin-top: rem-calc(-100);
-		@include breakpoint($medium-large-breakpoint down) {
-			display: block;
-		}
-	}
-
-	.card-insights-logo {
-		margin-top: rem-calc(75);
-		margin-bottom: rem-calc(15);
-		max-width: 260px;
-	}
-
-	.price {
-		p {
-			line-height: normal;
-			margin-bottom: 0;
-		}
-	}
-
-	.button {
-		margin-top: rem-calc(20);
-		margin-bottom: rem-calc(20);
-		font-size: rem-calc(14);
-		font-family: 'Open Sans';
-		line-height: 2.14;
-	}
-
-	.card-sub-copy {
-		margin-bottom: rem-calc(20);
-		font-size: rem-calc(12);
-		text-align: left;
-		width: 200px;
-		margin-left: auto;
-		margin-right: auto;
-		img {
-			margin-right: rem-calc(10);
-		}
-	}
-
-	.chrome-icon {
-		max-width: 150px;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	.learn-more {
-		text-decoration: underline;
-		font-size: rem-calc(14);
 	}
 }
