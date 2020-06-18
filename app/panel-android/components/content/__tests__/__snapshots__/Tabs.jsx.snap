@@ -5,10 +5,10 @@ exports[`app/panel-android/components/content/Tabs.jsx Snapshot tests with react
   className="Tabs__component"
 >
   <ul
-    className="Tabs__navigation"
+    className="Tabs__navigation flex-container"
   >
     <li
-      className="Tab__navigation_item Tab--active"
+      className="Tab__navigation_item flex-container align-center-middle Tab--active"
       onClick={[Function]}
     >
       <a
@@ -18,7 +18,7 @@ exports[`app/panel-android/components/content/Tabs.jsx Snapshot tests with react
       </a>
     </li>
     <li
-      className="Tab__navigation_item"
+      className="Tab__navigation_item flex-container align-center-middle"
       onClick={[Function]}
     >
       <a
@@ -28,7 +28,7 @@ exports[`app/panel-android/components/content/Tabs.jsx Snapshot tests with react
       </a>
     </li>
     <li
-      className="Tab__navigation_item"
+      className="Tab__navigation_item flex-container align-center-middle"
       onClick={[Function]}
     >
       <a

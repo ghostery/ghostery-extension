@@ -56,7 +56,7 @@ class Tabs extends React.Component {
 	render() {
 		return (
 			<div className="Tabs__component">
-				<ul className="Tabs__navigation">
+				<ul className="Tabs__navigation flex-container">
 					{this.renderTabsNavigation()}
 				</ul>
 				<div className="Tabs__active_content">

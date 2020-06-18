@@ -12,7 +12,7 @@
  */
 
 .OverviewTab {
-	padding-bottom: 50px;
+	padding-bottom: 35px;
 	text-align: center;
 
 	.OverviewTab__DonutGraphContainer {
@@ -54,7 +54,6 @@
 	}
 
 	.OverviewTab__GhosteryFeaturesContainer {
-
 		.GhosteryFeatureButton__text,
 		.pause-button-text {
 			font-weight: 600;
@@ -62,6 +61,59 @@
 
 		.OverviewTab__GhosteryFeature--ExtraMargins {
 			margin: 12px 28px;
+		}
+
+		.GhosteryFeatureButton--inactive.clickable {
+			&:hover { color: $tundora; }
+			&.trust:hover { background-color: $white; }
+			&.restrict:hover { background-color: $white; }
+		}
+		.GhosteryFeatureButton--active {
+			&.trust:hover { box-shadow: inset 0px 1px 7px 2px #85b329; }
+			&.restrict:hover { box-shadow: inset 0px 1px 7px 2px #ce273c; }
+		}
+
+		.sub-component.pause-button .button {
+			&.active:hover {
+				border-color: #0093bd;
+				background-color: #1dafed;
+				box-shadow: inset 0px 1px 7px 2px #0093bd;
+			}
+			&:not(.active):hover { background-color: $white; }
+		}
+
+		.tooltip-content {
+			display: none;
+		}
+	}
+
+	.OverviewTab__CliqzFeaturesContainer {
+		margin: 6px 0;
+
+		.OverviewTab__CliqzFeature {
+			width: 55px;
+			display: inline-block;
+			margin: 0 10px;
+		}
+
+		.CliqzFeature--active.clickable {
+			&:hover {
+				.CliqzFeature__status { color: $cliqz-feature--blue; }
+				.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($cliqz-feature--blue); }
+				.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($cliqz-feature--blue); }
+				.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($cliqz-feature--blue); }
+				.CliqzFeature__feature-name { color: $cliqz-feature--blue; }
+			}
+		}
+
+		.CliqzFeature--inactive.clickable {
+			&:hover {
+				.CliqzFeature__status { color: $cliqz-feature--gray; }
+				.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($cliqz-feature--gray); }
+				.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($cliqz-feature--gray); }
+				.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($cliqz-feature--gray); }
+				.CliqzFeature__feature-name { color: $cliqz-feature--gray; }
+			}
 		}
 
 		.tooltip-content {

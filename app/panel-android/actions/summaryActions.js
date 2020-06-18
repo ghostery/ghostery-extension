@@ -118,7 +118,7 @@ export function handlePauseButtonClick({ state }) {
 
 export function cliqzFeatureToggle({ actionData }) {
 	const { currentState, type } = actionData;
-	const key = `enable_${type}`;
+	const key = type;
 
 	sendMessage('setPanelData', {
 		[key]: !currentState,

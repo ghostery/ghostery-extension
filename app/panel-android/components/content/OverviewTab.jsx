@@ -14,28 +14,43 @@
 import React from 'react';
 
 const OverviewTab = ({
+	notScanned,
 	donutGraph,
 	pageHost,
 	trackersBlocked,
 	requestsModified,
 	ghosteryFeatures,
+	cliqzFeatures,
 }) => (
 	<div className="OverviewTab">
-		<div className="OverviewTab__DonutGraphContainer">
-			{donutGraph}
-		</div>
 
-		<div className="OverviewTab__PageHostContainer">
-			{pageHost}
-		</div>
+		{!!notScanned && (
+			<div className="OverviewTab__NotScannedContainer">
+				{notScanned}
+			</div>
+		)}
 
-		<div className="OverviewTab__PageStatsContainer">
-			{trackersBlocked}
-			{requestsModified}
-		</div>
+		{!notScanned && (
+			<div>
+				<div className="OverviewTab__DonutGraphContainer">
+					{donutGraph}
+				</div>
+				<div className="OverviewTab__PageHostContainer">
+					{pageHost}
+				</div>
+				<div className="OverviewTab__PageStatsContainer">
+					{trackersBlocked}
+					{requestsModified}
+				</div>
+			</div>
+		)}
 
 		<div className="OverviewTab__GhosteryFeaturesContainer">
 			{ghosteryFeatures}
+		</div>
+
+		<div className="OverviewTab__CliqzFeaturesContainer">
+			{cliqzFeatures}
 		</div>
 	</div>
 );

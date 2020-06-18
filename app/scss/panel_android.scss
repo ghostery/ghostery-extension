@@ -12,27 +12,23 @@
  */
 
 // Android Specific Styles
-@import './android/variables';
-@import './android/mixins';  // ToDo: Use this file instead of ./partials/_svgs
-@import './android/normalize'; // ToDo: Update
+@import './android/_variables';
+@import './android/_mixins';
+@import './android/_normalize'; // ToDo: Update
+@import './partials/_svgs';
 
 // Android Specific Component Styles
-@import './android/tabs';
+@import './android/_tabs';
 @import './android/_overview_tab';
 @import './android/accordions'; // ToDo: Update
 @import './android/dots-menu'; // ToDo: Update
-@import './android/fixed-menu'; // ToDo: Update
-
-// Function helper with color variables
-@function url-friendly-colour($colour) {
-	@return '%23' + str-slice('#{$colour}', 2, -1)
-};
-@import './partials/_svgs'; // ToDo: use mixins instead
 
 // Panel Component Styles
+@import './partials/_not_scanned';
 @import './partials/_donut_graph';
 @import './partials/_ghostery_feature';
 @import './partials/_pause_button';
+@import './partials/_cliqz_feature';
 
 // Helper Classes
 .full-height { height: 100%; }

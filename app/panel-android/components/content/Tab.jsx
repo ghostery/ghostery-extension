@@ -24,7 +24,7 @@ class Tab extends React.Component {
 
 	render() {
 		const { isActive, tabLabel, linkClassName } = this.props;
-		const tabClassNames = ClassNames('Tab__navigation_item', {
+		const tabClassNames = ClassNames('Tab__navigation_item flex-container align-center-middle', {
 			'Tab--active': isActive,
 		});
 		const tabLinkClassNames = ClassNames('Tab__navigation_link', linkClassName, {

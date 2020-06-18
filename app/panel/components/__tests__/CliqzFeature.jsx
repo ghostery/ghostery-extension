@@ -1,5 +1,5 @@
 /**
- * Donut Graph Test Component
+ * Cliqz Feature Test Component
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/
@@ -12,7 +12,7 @@
  */
 
 import React from 'react';
-import DonutGraph from '../BuildingBlocks/DonutGraph';
+import CliqzFeature from '../BuildingBlocks/CliqzFeature';
 
 
 // Fake the translation function to only return the translation key
@@ -20,14 +20,14 @@ global.t = function(str) {
 	return str;
 };
 
-describe('app/panel/components/DonutGraph.jsx', () => {
+describe('app/panel/components/CliqzFeature.jsx', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
-		test('DonutGraph is rendered correctly when no props are passed', () => {
+		test('CliqzFeature is rendered correctly when no props are passed', () => {
 			expect(true).toBe(false);
 		});
 	});
 
 	describe('Shallow snapshot tests rendered with Enzyme', () => {
-		test('DonutGraph happy path', () => {});
+		test('CliqzFeature happy path', () => {});
 	});
 });

@@ -28,6 +28,6 @@ describe('app/panel/components/GhosteryFeature.jsx', () => {
 	});
 
 	describe('Shallow snapshot tests rendered with Enzyme', () => {
-		test('Ghostery Feature happy path', () => {});
+		test('GhosteryFeature happy path', () => {});
 	});
 });

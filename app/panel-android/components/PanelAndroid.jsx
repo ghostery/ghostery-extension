@@ -11,29 +11,27 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-// ToDo: Improve the ordering of these imports
 import React from 'react';
 import ClassNames from 'classnames';
 import Tabs from './content/Tabs';
 import Tab from './content/Tab';
-
 import OverviewTab from './content/OverviewTab';
 import {
+	NotScanned,
 	DonutGraph,
 	GhosteryFeature,
-	NotScanned,
-	PauseButton
+	PauseButton,
+	CliqzFeature
 } from '../../panel/components/BuildingBlocks';
-
-import handleAllActions from '../actions/handler';
-
-import globals from '../../../src/classes/Globals';
 import {
 	getPanelData, getSummaryData, getSettingsData, getBlockingData
 } from '../actions/panelActions';
 import getCliqzModuleData from '../actions/cliqzActions';
+import handleAllActions from '../actions/handler';
+import globals from '../../../src/classes/Globals';
 
 const {
+	IS_CLIQZ,
 	WHITELISTED, BLACKLISTED
 } = globals;
 
@@ -51,9 +49,9 @@ class PanelAndroid extends React.Component {
 		};
 
 		this.pauseOptions = [
-			{ name: t('pause_30_min'), name_condensed: t('pause_30_min_condensed'), val: 30 },
-			{ name: t('pause_1_hour'), name_condensed: t('pause_1_hour_condensed'), val: 60 },
-			{ name: t('pause_24_hours'), name_condensed: t('pause_24_hours_condensed'), val: 1440 },
+			{ name: t('pause_30_min'), val: 30 },
+			{ name: t('pause_1_hour'), val: 60 },
+			{ name: t('pause_24_hours'), val: 1440 },
 		];
 	}
 
@@ -65,6 +63,17 @@ class PanelAndroid extends React.Component {
 		this.setSettingsState();
 		this.setBlockingState(tabId);
 		this.setCliqzDataState(tabId);
+	}
+
+	get siteNotScanned() {
+		const { blocking, summary } = this.state;
+		const { pageUrl = '', siteNotScanned } = blocking;
+		const { categories } = summary;
+
+		if (siteNotScanned || !categories || pageUrl.search(/http|chrome-extension|moz-extension|ms-browser-extension|newtab|chrome:\/\/startpage\//) === -1) {
+			return true;
+		}
+		return false;
 	}
 
 	get adBlockBlocked() {
@@ -207,6 +216,26 @@ class PanelAndroid extends React.Component {
 		});
 	}
 
+	handleCliqzFeatureClick = ({ feature, status }) => {
+		this.callGlobalAction({
+			actionName: 'cliqzFeatureToggle',
+			actionData: {
+				currentState: status,
+				type: feature,
+			},
+		});
+	}
+
+	_renderNotScanned() {
+		if (this.siteNotScanned) {
+			return (
+				<NotScanned isSmall />
+			);
+		}
+
+		return false;
+	}
+
 	_renderDonut() {
 		const {
 			blocking,
@@ -273,7 +302,7 @@ class PanelAndroid extends React.Component {
 	_renderGhosteryFeatures() {
 		const { summary } = this.state;
 		const { paused_blocking, paused_blocking_timeout, sitePolicy } = summary;
-		const disableBlocking = false; // ToDo: Use this when checking for SiteNotScanned.
+		const disableBlocking = this.siteNotScanned;
 
 		return (
 			<div className="flex-container flex-dir-column align-middle">
@@ -315,17 +344,58 @@ class PanelAndroid extends React.Component {
 		);
 	}
 
+	_renderCliqzFeatures() {
+		const { panel, summary } = this.state;
+		const { enable_anti_tracking, enable_ad_block, enable_smart_block } = panel;
+		const { paused_blocking, sitePolicy } = summary;
+		const disableBlocking = this.siteNotScanned;
+
+		return (
+			<div>
+				<div className="OverviewTab__CliqzFeature">
+					<CliqzFeature
+						clickButton={this.handleCliqzFeatureClick}
+						type="anti_track"
+						active={enable_anti_tracking}
+						cliqzInactive={paused_blocking || sitePolicy || disableBlocking || IS_CLIQZ}
+						isSmaller
+					/>
+				</div>
+				<div className="OverviewTab__CliqzFeature">
+					<CliqzFeature
+						clickButton={this.handleCliqzFeatureClick}
+						type="ad_block"
+						active={enable_ad_block}
+						cliqzInactive={paused_blocking || sitePolicy || disableBlocking || IS_CLIQZ}
+						isSmaller
+					/>
+				</div>
+				<div className="OverviewTab__CliqzFeature">
+					<CliqzFeature
+						clickButton={this.handleCliqzFeatureClick}
+						type="smart_block"
+						active={enable_smart_block}
+						cliqzInactive={paused_blocking || sitePolicy || disableBlocking}
+						isSmaller
+					/>
+				</div>
+			</div>
+		);
+	}
+
 	render() {
 		return (
 			<div>
 				<Tabs>
 					<Tab tabLabel={t('android_tab_overview')} linkClassName="Tab__label">
 						<OverviewTab
+							notScanned={this._renderNotScanned()}
 							donutGraph={this._renderDonut()}
 							pageHost={this._renderPageHost()}
 							trackersBlocked={this._renderTotalTrackersBlocked()}
 							requestsModified={this._renderTotalRequestsModified()}
 							ghosteryFeatures={this._renderGhosteryFeatures()}
+							cliqzFeatures={this._renderCliqzFeatures()}
 						/>
 					</Tab>
 

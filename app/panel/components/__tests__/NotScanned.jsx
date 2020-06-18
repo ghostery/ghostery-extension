@@ -28,6 +28,6 @@ describe('app/panel/components/NotScanned.jsx', () => {
 	});
 
 	describe('Shallow snapshot tests rendered with Enzyme', () => {
-		test('Not Scanned happy path', () => {});
+		test('NotScanned happy path', () => {});
 	});
 });

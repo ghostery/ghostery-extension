@@ -16,17 +16,18 @@ import PropTypes from 'prop-types';
 import Tabs from './content/Tabs';
 import Tab from './content/Tab';
 
-import Overview from './Overview';
-import FixedMenu from './content/FixedMenu';
+import Overview from './content/OverviewTab';
 import SiteTrackers from './SiteTrackers';
 import GlobalTrackers from './GlobalTrackers';
-import TrackersChart from './content/TrackersChart';
 import {
 	getPanelData, getSummaryData, getSettingsData, getBlockingData
 } from '../actions/panelActions';
 import getCliqzModuleData from '../actions/cliqzActions';
 import handleAllActions from '../actions/handler';
 import fromTrackersToChartData from '../utils/chart';
+
+const TrackersChart = () => {};
+const FixedMenu = () => {};
 
 class Panel extends React.Component {
 	constructor(props) {

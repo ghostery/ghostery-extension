@@ -14,7 +14,6 @@
 .Tabs__component {
 	.Tabs__navigation {
 		list-style: none;
-		display: flex;
 		flex-wrap: wrap;
 		padding: 0;
 		margin: 0;
@@ -25,6 +24,7 @@
 		flex-grow: 1;
 		flex-basis: 0;
 		text-align: center;
+		min-height: $tab--nav-height;
 		cursor: pointer;
 	}
 	.Tab__navigation_item.Tab--active {
@@ -32,9 +32,7 @@
 		@include prefix('animation', 'tab--background-animation 800ms cubic-bezier(0.4, 0, 1, 1) alternate 1');
 	}
 	.Tab__navigation_link {
-		padding: 0 10px;
-		height: $tab--nav-height;
-		line-height: $tab--nav-height;
+		padding: 0 10px 2px;
 		color: $white;
 		font-size: 12px;
 		font-weight: 500;
@@ -43,6 +41,7 @@
 		@include prefix('transition', 'opacity 300ms ease-in');
 	}
 	.Tab__navigation_link.Tab--active {
+		padding-bottom: 0;
 		opacity: 1;
 	}
 
