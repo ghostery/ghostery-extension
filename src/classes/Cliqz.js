@@ -30,5 +30,8 @@ CLIQZ.config.default_prefs = {
 	'modules.human-web-lite.enabled': IS_ANDROID,
 	'modules.hpn-lite.enabled': IS_ANDROID,
 };
+if (IS_ANDROID) {
+	CLIQZ.config.settings.HW_CHANNEL = 'android';
+}
 
 export default new (CLIQZ.App)({ debug: globals.DEBUG });
