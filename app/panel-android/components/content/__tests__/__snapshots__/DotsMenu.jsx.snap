@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/panel-android/components/content/DotsMenu.jsx Snapshot tests with react-test-renderer DotsMenu component with 0 actions 1`] = `
+<div
+  className="DotsMenu"
+>
+  <button
+    aria-label="Menu"
+    className="DotsMenu__button"
+    onClick={[Function]}
+    type="button"
+  />
+  <div
+    className="DotsMenu__content"
+  >
+    <ul />
+  </div>
+</div>
+`;
+
+exports[`app/panel-android/components/content/DotsMenu.jsx Snapshot tests with react-test-renderer DotsMenu component with 3 actions 1`] = `
+<div
+  className="DotsMenu"
+>
+  <button
+    aria-label="Menu"
+    className="DotsMenu__button"
+    onClick={[Function]}
+    type="button"
+  />
+  <div
+    className="DotsMenu__content"
+  >
+    <ul>
+      <li>
+        <button
+          className="DotsMenu__item"
+          onClick={[Function]}
+          type="button"
+        >
+          Action One
+        </button>
+      </li>
+      <li>
+        <button
+          className="DotsMenu__item"
+          onClick={[Function]}
+          type="button"
+        >
+          Action Two
+        </button>
+      </li>
+      <li>
+        <button
+          className="DotsMenu__item"
+          onClick={[Function]}
+          type="button"
+        >
+          Action Three
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+`;

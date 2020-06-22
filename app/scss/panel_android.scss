@@ -15,15 +15,19 @@
 @import './android/_variables';
 @import './android/_mixins';
 @import './android/_normalize'; // ToDo: Update
+
+// Panel Shared Styles
 @import './partials/_svgs';
 
 // Android Specific Component Styles
 @import './android/_tabs';
 @import './android/_overview_tab';
-@import './android/accordions'; // ToDo: Update
-@import './android/dots-menu'; // ToDo: Update
+@import './android/_blocking_tabs';
+@import './android/_dots_menu';
 
-// Panel Component Styles
+@import './android/accordions'; // ToDo: Update
+
+// Panel Shared Component Styles
 @import './partials/_not_scanned';
 @import './partials/_donut_graph';
 @import './partials/_ghostery_feature';

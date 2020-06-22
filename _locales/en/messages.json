@@ -1249,6 +1249,15 @@
 	"android_tab_global_blocking": {
 		"message": "Global Blocking"
 	},
+	"android_site_blocking_header": {
+		"message": "Trackers on this site"
+	},
+	"android_global_blocking_header": {
+		"message": "Global Tracking"
+	},
+	"android_blocking_reset": {
+		"message": "Reset Settings"
+	},
 	"hub_side_navigation_home": {
 		"message": "Home"
 	},

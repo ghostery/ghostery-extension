@@ -1,0 +1,45 @@
+/**
+ * Dots Menu Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+.DotsMenu {
+	position: absolute;
+	top: 20px;
+	right: 5px;
+	z-index: 2;
+	text-align: right;
+
+	.DotsMenu__button {
+		background-image: url(../../app/images/panel-android/kebab-menu-black.svg);
+		background-size: 4px 16px;
+		background-position: center;
+		background-repeat: no-repeat;
+		height: 16px;
+		width: 34px;
+	}
+
+	.DotsMenu__content {
+		background-color: $white;
+		border-radius: 2px;
+		display: none;
+		@include prefix('box-shadow', '3px 2px 10px rgba(0,0,0,0.25)');
+
+		&.DotsMenu__open { display: block; }
+		ul { list-style: none; }
+	}
+
+	.DotsMenu__item {
+		padding: 10px 20px;
+		width: 100%;
+		text-align: left;
+	}
+}

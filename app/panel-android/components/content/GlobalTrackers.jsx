@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -13,16 +13,16 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import Accordions from './content/Accordions';
-import DotsMenu from './content/DotsMenu';
+import Accordions from './Accordions';
+import DotsMenu from './DotsMenu';
 
-export default class GlobalTrackers extends React.Component {
+class GlobalTrackers extends React.Component {
 	actions = [
 		{
 			id: 'blockAllGlobal',
-			name: 'Block All',
+			name: t('blocking_block_all'),
 			callback: () => {
-				const { callGlobalAction } = this.context;
+				const { callGlobalAction } = this.props;
 				callGlobalAction({
 					actionName: 'blockUnBlockAllTrackers',
 					actionData: {
@@ -34,9 +34,9 @@ export default class GlobalTrackers extends React.Component {
 		},
 		{
 			id: 'unblockAllGlobal',
-			name: 'Unblock All',
+			name: t('blocking_unblock_all'),
 			callback: () => {
-				const { callGlobalAction } = this.context;
+				const { callGlobalAction } = this.props;
 				callGlobalAction({
 					actionName: 'blockUnBlockAllTrackers',
 					actionData: {
@@ -48,7 +48,7 @@ export default class GlobalTrackers extends React.Component {
 		},
 		{
 			id: 'resetSettings',
-			name: 'Reset Settings',
+			name: t('android_blocking_reset'),
 			callback: () => {
 				const { callGlobalAction } = this.context;
 				callGlobalAction({
@@ -58,32 +58,35 @@ export default class GlobalTrackers extends React.Component {
 		}
 	];
 
-	get categories() {
-		const { categories } = this.props;
-		return categories;
-	}
-
 	render() {
+		const { categories, siteProps, callGlobalAction } = this.props;
 		return (
-			<div className="global-trackers">
-				<div className="header">
-					<h2>Global Trackers</h2>
+			<div className="BlockingHeader">
+				<div className="BlockingHeader__text">
+					<h2>{t('android_global_blocking_header')}</h2>
 					<DotsMenu actions={this.actions} />
 				</div>
-				<Accordions type="global-trackers" categories={this.categories} />
 			</div>
 		);
+		// 		<Accordions
+		// 			type="global-trackers"
+		// 			categories={categories}
+		// 			siteProps={siteProps}
+		// 			callGlobalAction={callGlobalAction}
+		// 		/>
+		//	</div>
+		// );
 	}
 }
 
+export default GlobalTrackers;
+
 GlobalTrackers.propTypes = {
 	categories: PropTypes.arrayOf(PropTypes.object),
+	callGlobalAction: PropTypes.func,
 };
 
 GlobalTrackers.defaultProps = {
 	categories: [],
-};
-
-GlobalTrackers.contextTypes = {
-	callGlobalAction: PropTypes.func,
+	callGlobalAction: () => {},
 };

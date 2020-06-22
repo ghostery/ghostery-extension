@@ -23,6 +23,9 @@ import {
 	PauseButton,
 	CliqzFeature
 } from '../../panel/components/BuildingBlocks';
+import SiteTrackers from './content/SiteTrackers';
+import GlobalTrackers from './content/GlobalTrackers';
+
 import {
 	getPanelData, getSummaryData, getSettingsData, getBlockingData
 } from '../actions/panelActions';
@@ -150,6 +153,28 @@ class PanelAndroid extends React.Component {
 
 	get requestsModifiedCount() {
 		return this.adBlockBlocked + this.antiTrackUnsafe;
+	}
+
+	get siteProps() {
+		const { summary } = this.state;
+		const hostName = summary.pageHost || '';
+		const pageHost = hostName.toLowerCase().replace(/^(http[s]?:\/\/)?(www\.)?/, '');
+
+		const {
+			site_whitelist = [],
+			site_blacklist = [],
+			trackerCounts = {}
+		} = summary;
+
+		const isTrusted = site_whitelist.indexOf(pageHost) !== -1;
+		const isRestricted = site_blacklist.indexOf(pageHost) !== -1;
+		const isPaused = summary.paused_blocking;
+
+		const nTrackersBlocked = trackerCounts.blocked || 0;
+
+		return {
+			hostName, pageHost, isTrusted, isRestricted, isPaused, nTrackersBlocked
+		};
 	}
 
 	setPanelState = (tabId) => {
@@ -384,6 +409,10 @@ class PanelAndroid extends React.Component {
 	}
 
 	render() {
+		const { blocking, settings } = this.state;
+		const { categories } = blocking;
+		console.log('bloink', this.state);
+
 		return (
 			<div>
 				<Tabs>
@@ -400,11 +429,19 @@ class PanelAndroid extends React.Component {
 					</Tab>
 
 					<Tab tabLabel={t('android_tab_site_blocking')} linkClassName="Tab__label">
-						Bloink Fallon
+						<SiteTrackers
+							categories={categories}
+							siteProps={this.siteProps}
+							callGlobalAction={this.callGlobalAction}
+						/>
 					</Tab>
 
 					<Tab tabLabel={t('android_tab_global_blocking')} linkClassName="Tab__label">
-						Gerald Fascini
+						<GlobalTrackers
+							categories={settings.categories}
+							siteProps={this.siteProps}
+							callGlobalAction={this.callGlobalAction}
+						/>
 					</Tab>
 				</Tabs>
 			</div>

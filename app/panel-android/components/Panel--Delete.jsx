@@ -17,17 +17,17 @@ import Tabs from './content/Tabs';
 import Tab from './content/Tab';
 
 import Overview from './content/OverviewTab';
-import SiteTrackers from './SiteTrackers';
-import GlobalTrackers from './GlobalTrackers';
+import SiteTrackers from './content/SiteTrackers';
+import GlobalTrackers from './content/GlobalTrackers';
 import {
 	getPanelData, getSummaryData, getSettingsData, getBlockingData
 } from '../actions/panelActions';
 import getCliqzModuleData from '../actions/cliqzActions';
 import handleAllActions from '../actions/handler';
-import fromTrackersToChartData from '../utils/chart';
 
 const TrackersChart = () => {};
 const FixedMenu = () => {};
+const fromTrackersToChartData = () => {};
 
 class Panel extends React.Component {
 	constructor(props) {
