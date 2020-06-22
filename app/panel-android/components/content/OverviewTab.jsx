@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const OverviewTab = ({
 	notScanned,
@@ -54,5 +55,18 @@ const OverviewTab = ({
 		</div>
 	</div>
 );
+
+OverviewTab.propTypes = {
+	notScanned: PropTypes.oneOfType([
+		PropTypes.bool,
+		PropTypes.node,
+	]).isRequired,
+	donutGraph: PropTypes.node.isRequired,
+	pageHost: PropTypes.node.isRequired,
+	trackersBlocked: PropTypes.node.isRequired,
+	requestsModified: PropTypes.node.isRequired,
+	ghosteryFeatures: PropTypes.node.isRequired,
+	cliqzFeatures: PropTypes.node.isRequired,
+};
 
 export default OverviewTab;

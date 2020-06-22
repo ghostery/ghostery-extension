@@ -269,7 +269,7 @@ class PanelAndroid extends React.Component {
 		} = this.state;
 		const { categories } = blocking;
 		const { adBlock, antiTracking } = cliqzModuleData;
-		const { sitePolicy, paused_blocking } = summary;
+		const { sitePolicy = false, paused_blocking = false } = summary;
 
 		return (
 			<DonutGraph
@@ -338,7 +338,7 @@ class PanelAndroid extends React.Component {
 						sitePolicy={sitePolicy}
 						blockingPausedOrDisabled={paused_blocking || disableBlocking}
 						showText
-						tooltipPosition={false}
+						tooltipPosition=""
 						short
 						narrow={false}
 					/>
@@ -350,7 +350,7 @@ class PanelAndroid extends React.Component {
 						sitePolicy={sitePolicy}
 						blockingPausedOrDisabled={paused_blocking || disableBlocking}
 						showText
-						tooltipPosition={false}
+						tooltipPosition=""
 						short
 						narrow={false}
 					/>

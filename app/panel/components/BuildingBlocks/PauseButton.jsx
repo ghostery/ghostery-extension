@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import Tooltip from '../Tooltip';
 
@@ -196,5 +197,23 @@ class PauseButton extends React.Component {
 		);
 	}
 }
+
+PauseButton.propTypes = {
+	isPaused: PropTypes.bool,
+	isPausedTimeout: PropTypes.number,
+	clickPause: PropTypes.func.isRequired,
+	dropdownItems: PropTypes.arrayOf(PropTypes.shape({
+		val: PropTypes.number.isRequired,
+		name: PropTypes.string.isRequired,
+		name_condensed: PropTypes.string,
+	})).isRequired,
+	isCentered: PropTypes.bool.isRequired,
+	isCondensed: PropTypes.bool.isRequired,
+};
+
+PauseButton.defaultProps = {
+	isPaused: false,
+	isPausedTimeout: 0,
+};
 
 export default PauseButton;

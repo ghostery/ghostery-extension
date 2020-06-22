@@ -170,8 +170,11 @@ CliqzFeature.propTypes = {
 		'ad_block',
 		'smart_block',
 	]).isRequired,
-	active: PropTypes.bool.isRequired,
-	cliqzInactive: PropTypes.bool.isRequired,
+	active: PropTypes.bool,
+	cliqzInactive: PropTypes.oneOfType([
+		PropTypes.bool,
+		PropTypes.number,
+	]).isRequired,
 	isSmaller: PropTypes.bool.isRequired,
 	isCondensed: PropTypes.bool,
 	isTooltipHeader: PropTypes.bool,
@@ -180,6 +183,7 @@ CliqzFeature.propTypes = {
 };
 
 CliqzFeature.defaultProps = {
+	active: true,
 	isCondensed: false,
 	isTooltipHeader: false,
 	isTooltipBody: false,

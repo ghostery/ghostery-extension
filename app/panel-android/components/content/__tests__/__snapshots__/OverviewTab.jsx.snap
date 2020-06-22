@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/panel-android/components/content/OverviewTab.jsx Snapshot tests with react-test-renderer OverviewTab component with DonutGraph 1`] = `
+<div
+  className="OverviewTab"
+>
+  <div>
+    <div
+      className="OverviewTab__DonutGraphContainer"
+    >
+      <div>
+        Test Element
+      </div>
+    </div>
+    <div
+      className="OverviewTab__PageHostContainer"
+    >
+      <div>
+        Test Element
+      </div>
+    </div>
+    <div
+      className="OverviewTab__PageStatsContainer"
+    >
+      <div>
+        Test Element
+      </div>
+      <div>
+        Test Element
+      </div>
+    </div>
+  </div>
+  <div
+    className="OverviewTab__GhosteryFeaturesContainer"
+  >
+    <div>
+      Test Element
+    </div>
+  </div>
+  <div
+    className="OverviewTab__CliqzFeaturesContainer"
+  >
+    <div>
+      Test Element
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/panel-android/components/content/OverviewTab.jsx Snapshot tests with react-test-renderer OverviewTab component with SiteNotScanned 1`] = `
+<div
+  className="OverviewTab"
+>
+  <div
+    className="OverviewTab__NotScannedContainer"
+  >
+    <div>
+      Test Element
+    </div>
+  </div>
+  <div
+    className="OverviewTab__GhosteryFeaturesContainer"
+  >
+    <div>
+      Test Element
+    </div>
+  </div>
+  <div
+    className="OverviewTab__CliqzFeaturesContainer"
+  >
+    <div>
+      Test Element
+    </div>
+  </div>
+</div>
+`;

@@ -134,12 +134,16 @@ class GhosteryFeature extends React.Component {
 GhosteryFeature.propTypes = {
 	handleClick: PropTypes.func.isRequired,
 	type: PropTypes.oneOf(['trust', 'restrict']).isRequired,
-	sitePolicy: PropTypes.oneOf([false, 1, 2]).isRequired,
+	sitePolicy: PropTypes.oneOf([false, 1, 2]),
 	blockingPausedOrDisabled: PropTypes.bool.isRequired,
 	showText: PropTypes.bool.isRequired,
 	tooltipPosition: PropTypes.string.isRequired,
 	short: PropTypes.bool.isRequired,
 	narrow: PropTypes.bool.isRequired,
+};
+
+GhosteryFeature.defaultProps = {
+	sitePolicy: false,
 };
 
 export default GhosteryFeature;
