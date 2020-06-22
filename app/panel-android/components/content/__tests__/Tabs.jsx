@@ -88,9 +88,5 @@ describe('app/panel-android/components/content/Tabs.jsx', () => {
 			expect(component.find('.Tabs__active_content .tab-1-content').length).toBe(0);
 			expect(component.find('.Tabs__active_content .tab-2-content').length).toBe(0);
 		});
-
-		test('Tabs component with 3 Tab children components non-happy path', () => {
-			expect(true).toBe(false);
-		});
 	});
 });

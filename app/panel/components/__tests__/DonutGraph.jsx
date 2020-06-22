@@ -14,7 +14,6 @@
 import React from 'react';
 import DonutGraph from '../BuildingBlocks/DonutGraph';
 
-
 // Fake the translation function to only return the translation key
 global.t = function(str) {
 	return str;

@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/panel/components/NotScanned.jsx Snapshot tests with react-test-renderer NotScanned is rendered correctly when no props are passed 1`] = `
+<div
+  className="sub-component not-scanned"
+>
+  <div
+    className="not-scanned-header"
+  >
+    summary_page_not_scanned
+  </div>
+  <div
+    className="not-scanned-text"
+  >
+    summary_description_not_scanned_1
+  </div>
+  <div
+    className="not-scanned-text"
+  >
+    summary_description_not_scanned_2
+  </div>
+</div>
+`;
+
+exports[`app/panel/components/NotScanned.jsx Snapshot tests with react-test-renderer NotScanned is rendered correctly when small 1`] = `
+<div
+  className="sub-component not-scanned small"
+>
+  <div
+    className="not-scanned-header"
+  >
+    summary_page_not_scanned
+  </div>
+  <div
+    className="not-scanned-text"
+  >
+    summary_description_not_scanned_1
+  </div>
+  <div
+    className="not-scanned-text"
+  >
+    summary_description_not_scanned_2
+  </div>
+</div>
+`;

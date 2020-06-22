@@ -79,8 +79,6 @@ class GlobalTrackers extends React.Component {
 	}
 }
 
-export default GlobalTrackers;
-
 GlobalTrackers.propTypes = {
 	categories: PropTypes.arrayOf(PropTypes.object),
 	callGlobalAction: PropTypes.func,
@@ -90,3 +88,5 @@ GlobalTrackers.defaultProps = {
 	categories: [],
 	callGlobalAction: () => {},
 };
+
+export default GlobalTrackers;

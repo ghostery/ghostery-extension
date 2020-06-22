@@ -12,8 +12,8 @@
  */
 
 import React from 'react';
+import renderer from 'react-test-renderer';
 import NotScanned from '../BuildingBlocks/NotScanned';
-
 
 // Fake the translation function to only return the translation key
 global.t = function(str) {
@@ -23,11 +23,17 @@ global.t = function(str) {
 describe('app/panel/components/NotScanned.jsx', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('NotScanned is rendered correctly when no props are passed', () => {
-			expect(true).toBe(false);
+			const component = renderer.create(
+				<NotScanned />
+			).toJSON();
+			expect(component).toMatchSnapshot();
 		});
-	});
 
-	describe('Shallow snapshot tests rendered with Enzyme', () => {
-		test('NotScanned happy path', () => {});
+		test('NotScanned is rendered correctly when small', () => {
+			const component = renderer.create(
+				<NotScanned isSmall />
+			).toJSON();
+			expect(component).toMatchSnapshot();
+		});
 	});
 });

@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import Tooltip from '../Tooltip';
 import globals from '../../../../src/classes/Globals';
@@ -129,5 +130,16 @@ class GhosteryFeature extends React.Component {
 		);
 	}
 }
+
+GhosteryFeature.propTypes = {
+	handleClick: PropTypes.func.isRequired,
+	type: PropTypes.oneOf(['trust', 'restrict']).isRequired,
+	sitePolicy: PropTypes.oneOf([false, 1, 2]).isRequired,
+	blockingPausedOrDisabled: PropTypes.bool.isRequired,
+	showText: PropTypes.bool.isRequired,
+	tooltipPosition: PropTypes.string.isRequired,
+	short: PropTypes.bool.isRequired,
+	narrow: PropTypes.bool.isRequired,
+};
 
 export default GhosteryFeature;

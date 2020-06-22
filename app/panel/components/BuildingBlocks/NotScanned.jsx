@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 
 /**
@@ -37,6 +38,14 @@ const NotScanned = ({ isSmall }) => {
 			</div>
 		</div>
 	);
+};
+
+NotScanned.propTypes = {
+	isSmall: PropTypes.bool,
+};
+
+NotScanned.defaultProps = {
+	isSmall: false,
 };
 
 export default NotScanned;

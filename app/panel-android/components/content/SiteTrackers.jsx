@@ -46,7 +46,7 @@ class SiteTrackers extends React.Component {
 				});
 			},
 		}
-	]
+	];
 
 	render() {
 		const { categories, siteProps, callGlobalAction } = this.props;
@@ -57,7 +57,7 @@ class SiteTrackers extends React.Component {
 					<DotsMenu actions={this.actions} />
 				</div>
 			</div>
-			);
+		);
 		// 		<Accordions
 		// 			type="site-trackers"
 		// 			categories={categories}
@@ -69,8 +69,6 @@ class SiteTrackers extends React.Component {
 	}
 }
 
-export default SiteTrackers;
-
 SiteTrackers.propTypes = {
 	categories: PropTypes.arrayOf(PropTypes.object),
 	callGlobalAction: PropTypes.func,
@@ -80,3 +78,5 @@ SiteTrackers.defaultProps = {
 	categories: [],
 	callGlobalAction: () => {},
 };
+
+export default SiteTrackers;

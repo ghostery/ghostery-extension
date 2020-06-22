@@ -15,7 +15,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 
-export default class DotsMenu extends React.Component {
+class DotsMenu extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -33,7 +33,7 @@ export default class DotsMenu extends React.Component {
 	closeDotsMenu = () => {
 		window.removeEventListener('click', this.closeDotsMenu);
 		const { unmounted } = this.state;
-		if (!unmounted) {
+		if (!unmounted) { // Can I remove this and still have no React Warning?
 			this.setState({ open: false });
 		}
 	}
@@ -76,3 +76,5 @@ DotsMenu.propTypes = {
 		callback: PropTypes.func.isRequired,
 	})).isRequired,
 };
+
+export default DotsMenu;
