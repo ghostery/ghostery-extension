@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import Tooltip from '../Tooltip';
 
@@ -161,5 +162,28 @@ class CliqzFeature extends React.Component {
 		);
 	}
 }
+
+CliqzFeature.propTypes = {
+	clickButton: PropTypes.func.isRequired,
+	type: PropTypes.oneOf([
+		'anti_track',
+		'ad_block',
+		'smart_block',
+	]).isRequired,
+	active: PropTypes.bool.isRequired,
+	cliqzInactive: PropTypes.bool.isRequired,
+	isSmaller: PropTypes.bool.isRequired,
+	isCondensed: PropTypes.bool,
+	isTooltipHeader: PropTypes.bool,
+	isTooltipBody: PropTypes.bool,
+	tooltipPosition: PropTypes.string,
+};
+
+CliqzFeature.defaultProps = {
+	isCondensed: false,
+	isTooltipHeader: false,
+	isTooltipBody: false,
+	tooltipPosition: '',
+};
 
 export default CliqzFeature;

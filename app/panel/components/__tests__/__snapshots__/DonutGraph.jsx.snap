@@ -1,0 +1,132 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/panel/components/DonutGraph.jsx Snapshot tests with react-test-renderer DonutGraph is rendered correctly when all props are truthy 1`] = `
+<div
+  className="DonutGraph DonutGraph--small"
+>
+  <div
+    className="DonutGraph__tooltipContainer"
+  >
+    <span
+      className="DonutGraph__tooltip tooltip top"
+      id="1_tooltip"
+    >
+      category-1
+    </span>
+    <span
+      className="DonutGraph__tooltip tooltip top"
+      id="2_tooltip"
+    >
+      category-2
+    </span>
+    <span
+      className="DonutGraph__tooltip tooltip top"
+      id="3_tooltip"
+    >
+      category-3
+    </span>
+    <span
+      className="DonutGraph__tooltip tooltip top"
+      id="4_tooltip"
+    >
+      category-4
+    </span>
+    <span
+      className="DonutGraph__tooltip tooltip top"
+      id="unknown_tooltip"
+    >
+      unknown
+    </span>
+  </div>
+  <div
+    className="DonutGraph__ref"
+  />
+  <div
+    className="DonutGraph__textCountContainer clickable"
+    onClick={[Function]}
+  >
+    <div
+      className="DonutGraph__textCount g-tooltip"
+    >
+      38
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/panel/components/DonutGraph.jsx Snapshot tests with react-test-renderer DonutGraph is rendered correctly when props are falsy 1`] = `
+<div
+  className="DonutGraph DonutGraph--big"
+>
+  <div
+    className="DonutGraph__tooltipContainer"
+  />
+  <div
+    className="DonutGraph__ref"
+  />
+  <div
+    className="DonutGraph__textCountContainer clickable"
+    onClick={[Function]}
+  >
+    <div
+      className="DonutGraph__textCount g-tooltip"
+    >
+      0
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/panel/components/DonutGraph.jsx Snapshot tests with react-test-renderer DonutGraph is rendered correctly when some props are truthy 1`] = `
+<div
+  className="DonutGraph DonutGraph--big"
+>
+  <div
+    className="DonutGraph__tooltipContainer"
+  >
+    <span
+      className="DonutGraph__tooltip tooltip top"
+      id="1_tooltip"
+    >
+      category-1
+    </span>
+    <span
+      className="DonutGraph__tooltip tooltip top"
+      id="2_tooltip"
+    >
+      category-2
+    </span>
+    <span
+      className="DonutGraph__tooltip tooltip top"
+      id="3_tooltip"
+    >
+      category-3
+    </span>
+    <span
+      className="DonutGraph__tooltip tooltip top"
+      id="4_tooltip"
+    >
+      category-4
+    </span>
+    <span
+      className="DonutGraph__tooltip tooltip top"
+      id="unknown_tooltip"
+    >
+      unknown
+    </span>
+  </div>
+  <div
+    className="DonutGraph__ref"
+  />
+  <div
+    className="DonutGraph__textCountContainer clickable"
+    onClick={[Function]}
+  >
+    <div
+      className="DonutGraph__textCount g-tooltip"
+    >
+      8
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,178 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/panel/components/CliqzFeature.jsx Snapshot tests with react-test-renderer CliqzFeature is rendered correctly with all truthy props 1`] = `
+<div>
+  <div
+    className="CliqzFeature CliqzFeature--smaller CliqzFeature--condensed CliqzFeature--active not-clickable"
+    onClick={[Function]}
+  >
+    <div
+      className="CliqzFeature__status"
+    >
+      on
+    </div>
+    <div
+      className="CliqzFeature__icon CliqzFeature__icon--anti-track g-tooltip"
+    />
+    <div
+      className="CliqzFeature__feature-name"
+    >
+      enhanced_anti_tracking
+    </div>
+  </div>
+  <div
+    className="CliqzFeature CliqzFeature--smaller CliqzFeature--condensed CliqzFeature--active not-clickable"
+    onClick={[Function]}
+  >
+    <div
+      className="CliqzFeature__status"
+    >
+      on
+    </div>
+    <div
+      className="CliqzFeature__icon CliqzFeature__icon--ad-block g-tooltip"
+    />
+    <div
+      className="CliqzFeature__feature-name"
+    >
+      enhanced_ad_blocking
+    </div>
+  </div>
+  <div
+    className="CliqzFeature CliqzFeature--smaller CliqzFeature--condensed CliqzFeature--active not-clickable"
+    onClick={[Function]}
+  >
+    <div
+      className="CliqzFeature__status"
+    >
+      on
+    </div>
+    <div
+      className="CliqzFeature__icon CliqzFeature__icon--smart-block g-tooltip"
+    />
+    <div
+      className="CliqzFeature__feature-name"
+    >
+      smart_blocking
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/panel/components/CliqzFeature.jsx Snapshot tests with react-test-renderer CliqzFeature is rendered correctly with falsy props 1`] = `
+<div>
+  <div
+    className="CliqzFeature CliqzFeature--normal CliqzFeature--inactive clickable"
+    onClick={[Function]}
+  >
+    <div
+      className="CliqzFeature__status"
+    >
+      off
+    </div>
+    <div
+      className="CliqzFeature__icon CliqzFeature__icon--anti-track g-tooltip"
+    />
+    <div
+      className="CliqzFeature__feature-name"
+    >
+      enhanced_anti_tracking
+    </div>
+  </div>
+  <div
+    className="CliqzFeature CliqzFeature--normal CliqzFeature--inactive clickable"
+    onClick={[Function]}
+  >
+    <div
+      className="CliqzFeature__status"
+    >
+      off
+    </div>
+    <div
+      className="CliqzFeature__icon CliqzFeature__icon--ad-block g-tooltip"
+    />
+    <div
+      className="CliqzFeature__feature-name"
+    >
+      enhanced_ad_blocking
+    </div>
+  </div>
+  <div
+    className="CliqzFeature CliqzFeature--normal CliqzFeature--inactive clickable"
+    onClick={[Function]}
+  >
+    <div
+      className="CliqzFeature__status"
+    >
+      off
+    </div>
+    <div
+      className="CliqzFeature__icon CliqzFeature__icon--smart-block g-tooltip"
+    />
+    <div
+      className="CliqzFeature__feature-name"
+    >
+      smart_blocking
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/panel/components/CliqzFeature.jsx Snapshot tests with react-test-renderer CliqzFeature is rendered correctly with some truthy props 1`] = `
+<div>
+  <div
+    className="CliqzFeature CliqzFeature--normal CliqzFeature--active clickable"
+    onClick={[Function]}
+  >
+    <div
+      className="CliqzFeature__status"
+    >
+      on
+    </div>
+    <div
+      className="CliqzFeature__icon CliqzFeature__icon--anti-track g-tooltip"
+    />
+    <div
+      className="CliqzFeature__feature-name"
+    >
+      enhanced_anti_tracking
+    </div>
+  </div>
+  <div
+    className="CliqzFeature CliqzFeature--normal CliqzFeature--active not-clickable"
+    onClick={[Function]}
+  >
+    <div
+      className="CliqzFeature__status"
+    >
+      on
+    </div>
+    <div
+      className="CliqzFeature__icon CliqzFeature__icon--ad-block g-tooltip"
+    />
+    <div
+      className="CliqzFeature__feature-name"
+    >
+      enhanced_ad_blocking
+    </div>
+  </div>
+  <div
+    className="CliqzFeature CliqzFeature--condensed CliqzFeature--active not-clickable"
+    onClick={[Function]}
+  >
+    <div
+      className="CliqzFeature__status"
+    >
+      on
+    </div>
+    <div
+      className="CliqzFeature__icon CliqzFeature__icon--smart-block g-tooltip"
+    />
+    <div
+      className="CliqzFeature__feature-name"
+    >
+      smart_blocking
+    </div>
+  </div>
+</div>
+`;
