@@ -78,6 +78,29 @@ const mobileFeatureMatrixRow = (label, isBasic, isPlus, isSparkle) => (
 	</Fragment>
 );
 
+const basicCard = () => (
+	<div className="card-outer">
+		<div className="card basic" data-equalizer-watch>
+			<div className="card-header-background-free" />
+			<div className="ghostery-free-image-container">
+				<div className="ghostery-free-image text-center" title="Ghostery Free" alt="Ghostery Free" />
+			</div>
+			<h2>Ghostery</h2>
+			<div className="price">
+				<p className="price-blue-alt font-size-36">{t('hub_upgrade_plan_free')}</p>
+			</div>
+			<NavLink className="button already-protected" to="/home" title="Already Protected">
+				{t('hub_upgrade_already_protected')}
+			</NavLink>
+			<p className="card-sub-header"><strong>{t('hub_upgrade_basic_protection')}</strong></p>
+			<p className="card-sub-copy">
+				<span className="check blue" />
+				{t('hub_upgrade_basic_browser_protection')}
+			</p>
+		</div>
+	</div>
+);
+
 /**
  * A React class component for rendering the Upgrade Plan View
  * @return {JSX} JSX for rendering the Upgrade Plan View of the Hub app
@@ -145,6 +168,126 @@ const UpgradePlanView = (props) => {
 	const plusCheckoutLink = `${globals.CHECKOUT_BASE_URL}/plus?interval=${interval}&${utmParams}`;
 	const premiumCheckoutLink = `${globals.CHECKOUT_BASE_URL}/premium?interval=${interval}&${utmParams}`;
 
+	const plusCard = mobileView => (
+		<div className="card-outer">
+			<div className="card plus" data-equalizer-watch>
+				<div className="ghostery-plus-image-container">
+					<div className="ghostery-plus-image" title="Ghostery Plus" alt="Ghostery Plus" />
+				</div>
+				<h2>Ghostery Plus</h2>
+				<div className="price">
+					{show_yearly_prices ? (
+						<React.Fragment>
+							<p className="price-gold font-size-36">$3.99</p>
+							<p className="price-gold sub-text font-size-12">{t('per_month')}</p>
+							<div className="price-per-year">
+								<p className="price-gold sub-text font-size-12">{`( $47.88 ${t('per_year')})`}</p>
+							</div>
+						</React.Fragment>
+					) : (
+						<React.Fragment>
+							<p className="price-gold font-size-36">$4.99</p>
+							<p className="price-gold sub-text font-size-12">{t('per_month')}</p>
+						</React.Fragment>
+					)}
+				</div>
+				{mobileView && (
+					<div className="row align-middle toggle-switch">
+						<div className="toggle-switch-row small-12 text-center columns">
+							<span className={monthlyToggleLabel}>{t('hub_upgrade_monthly')}</span>
+							<label className="switch" htmlFor="switch-check" onClick={toggleMonthlyYearlyPrices}>
+								<input className={sliderClassNames} type="checkbox" />
+								<span className="slider round" />
+							</label>
+							<span className={yearlyToggleLabel}>{t('hub_upgrade_yearly')}</span>
+						</div>
+					</div>
+				)}
+				{isPlus ? (
+					<NavLink className="button button-gold" to="/home" title="Already Protected">
+						{t('hub_upgrade_already_protected')}
+					</NavLink>
+				) : (
+					<a className="button button-gold" href={plusCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Plus">
+						{t('hub_upgrade_to_plus')}
+					</a>
+				)}
+				<p className="card-sub-header"><strong>{t('hub_upgrade_additional_protection')}</strong></p>
+				<p className="card-sub-copy">
+					<span className="check blue" />
+					{t('hub_upgrade_basic_browser_protection')}
+				</p>
+				<p className="card-sub-copy">
+					<span className="check blue" />
+					{t('hub_upgrade_advanced_device_protection')}
+				</p>
+			</div>
+		</div>
+	);
+	const premiumCard = mobileView => (
+		<div className="card-outer card-outer-remove">
+			<div className="card premium" data-equalizer-watch>
+				<div className="ghostery-premium-image-container">
+					<div className="ghostery-premium-image card-image-top" title="Ghostery Premium" alt="Ghostery Premium" />
+				</div>
+				<div className="ghostery-premium-image-background" />
+				<h2>Ghostery Premium</h2>
+				<div className="price">
+					{show_yearly_prices ? (
+						<React.Fragment>
+							<p className="price-purple sub-text font-size-36">$8.99</p>
+							<p className="price-purple sub-text font-size-12">{t('per_month')}</p>
+							<div className="price-per-year">
+								<p className="price-purple sub-text font-size-12">{`( $107.88 ${t('per_year')})`}</p>
+							</div>
+						</React.Fragment>
+					) : (
+						<React.Fragment>
+							<p className="price-purple sub-text font-size-36">$11.99</p>
+							<p className="price-purple sub-text font-size-12">{t('per_month')}</p>
+						</React.Fragment>
+					)}
+				</div>
+				{mobileView && (
+					<div className="row align-middle toggle-switch">
+						<div className="toggle-switch-row small-12 text-center columns">
+							<span className={monthlyToggleLabel}>{t('hub_upgrade_monthly')}</span>
+							<label className="switch" htmlFor="switch-check" onClick={toggleMonthlyYearlyPrices}>
+								<input className={sliderClassNames} type="checkbox" />
+								<span className="slider round" />
+							</label>
+							<span className={yearlyToggleLabel}>{t('hub_upgrade_yearly')}</span>
+						</div>
+					</div>
+				)}
+				{isPremium ? (
+					<NavLink className="button button-premium" to="/home" title="Already Protected">
+						{t('hub_upgrade_already_protected')}
+					</NavLink>
+				) : (
+					<a className="button button-premium" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Premium">
+						{t('hub_upgrade_to_premium')}
+					</a>
+				)}
+				<p className="card-sub-header">
+					<strong>{t('hub_upgrade_maximum_browser_protection')}</strong>
+				</p>
+				<p className="card-sub-copy">
+					<span className="check blue" />
+					{t('hub_upgrade_basic_browser_protection')}
+				</p>
+				<p className="card-sub-copy">
+					<span className="check blue" />
+					{t('hub_upgrade_advanced_device_protection')}
+				</p>
+				<p className="card-sub-copy">
+					<span className="check blue" />
+					VPN
+				</p>
+			</div>
+		</div>
+	);
+
 	return (
 		<section className="pricing-page page-template-page-content-modules">
 			<div className="grid-container show-for-extra-large">
@@ -164,122 +307,14 @@ const UpgradePlanView = (props) => {
 					</div>
 				</div>
 			</div>
+
 			<div className="grid-container card-wrapper show-for-extra-large">
 				<div className="row align-center text-center" data-equalizer data-equalize-on="medium">
-					<div className="card-outer">
-						<div className="card" data-equalizer-watch>
-							<div className="card-header-background-free" />
-							<div className="ghostery-free-image-container">
-								<div className="ghostery-free-image text-center" title="Ghostery Free" alt="Ghostery Free" />
-							</div>
-							<h2>Ghostery</h2>
-							<div className="price">
-								<p className="price-blue-alt font-size-36">{t('hub_upgrade_plan_free')}</p>
-							</div>
-							<NavLink className="button already-protected" to="/home" title="Already Protected">
-								{t('hub_upgrade_already_protected')}
-							</NavLink>
-							<p className="card-sub-header"><strong>{t('hub_upgrade_basic_protection')}</strong></p>
-							<p className="card-sub-copy">
-								<span className="check blue" />
-								{t('hub_upgrade_basic_browser_protection')}
-							</p>
-						</div>
-					</div>
-					<div className="card-outer">
-						<div className="card" data-equalizer-watch>
-							<div className="ghostery-plus-image-container">
-								<div className="ghostery-plus-image" title="Ghostery Plus" alt="Ghostery Plus" />
-							</div>
-							<h2>Ghostery Plus</h2>
-							<div className="price">
-								{ show_yearly_prices ? (
-									<React.Fragment>
-										<p className="price-gold font-size-36">$3.99</p>
-										<p className="price-gold sub-text font-size-12">{t('per_month')}</p>
-										<div className="price-per-year">
-											<p className="price-gold sub-text font-size-12">{`( $47.88 ${t('per_year')})`}</p>
-										</div>
-									</React.Fragment>
-								) : (
-									<React.Fragment>
-										<p className="price-gold font-size-36">$4.99</p>
-										<p className="price-gold sub-text font-size-12">{t('per_month')}</p>
-									</React.Fragment>
-								)}
-							</div>
-							{isPlus ? (
-								<NavLink className="button button-gold" to="/home" title="Already Protected">
-									{t('hub_upgrade_already_protected')}
-								</NavLink>
-							) : (
-								<a className="button button-gold" href={plusCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Plus">
-									{t('hub_upgrade_to_plus')}
-								</a>
-							)}
-							<p className="card-sub-header"><strong>{t('hub_upgrade_additional_protection')}</strong></p>
-							<p className="card-sub-copy">
-								<span className="check blue" />
-								{t('hub_upgrade_basic_browser_protection')}
-							</p>
-							<p className="card-sub-copy">
-								<span className="check blue" />
-								{t('hub_upgrade_advanced_device_protection')}
-							</p>
-						</div>
-					</div>
-					<div className="card-outer card-outer-remove">
-						<div className="card" data-equalizer-watch>
-							<div className="ghostery-premium-image-container">
-								<div className="ghostery-premium-image card-image-top" title="Ghostery Premium" alt="Ghostery Premium" />
-							</div>
-							<div className="ghostery-premium-image-background" />
-							<h2>Ghostery Premium</h2>
-							<div className="price">
-								{ show_yearly_prices ? (
-									<React.Fragment>
-										<p className="price-purple sub-text font-size-36">$8.99</p>
-										<p className="price-purple sub-text font-size-12">{t('per_month')}</p>
-										<div className="price-per-year">
-											<p className="price-purple sub-text font-size-12">{`( $107.88 ${t('per_year')})`}</p>
-										</div>
-									</React.Fragment>
-								) : (
-									<React.Fragment>
-										<p className="price-purple sub-text font-size-36">$11.99</p>
-										<p className="price-purple sub-text font-size-12">{t('per_month')}</p>
-									</React.Fragment>
-								)}
-							</div>
-							{isPremium ? (
-								<NavLink className="button button-premium" to="/home" title="Already Protected">
-									{t('hub_upgrade_already_protected')}
-								</NavLink>
-							) : (
-								<a className="button button-premium" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Premium">
-									{t('hub_upgrade_to_premium')}
-								</a>
-							)}
-							<p className="card-sub-header">
-								<strong>{t('hub_upgrade_maximum_browser_protection')}</strong>
-							</p>
-							<p className="card-sub-copy">
-								<span className="check blue" />
-								{t('hub_upgrade_basic_browser_protection')}
-							</p>
-							<p className="card-sub-copy">
-								<span className="check blue" />
-								{t('hub_upgrade_advanced_device_protection')}
-							</p>
-							<p className="card-sub-copy">
-								<span className="check blue" />
-								VPN
-							</p>
-						</div>
-					</div>
+					{basicCard()}
+					{plusCard()}
+					{premiumCard()}
 				</div>
 			</div>
-
 
 			<div className="grid-container card-wrapper hide-for-extra-large">
 				<div className="row align-center">
@@ -296,147 +331,10 @@ const UpgradePlanView = (props) => {
 						</ul>
 					</div>
 				</div>
-
 				<div className="tabs-content" data-tabs-content="price-tabs">
-					{protection_level === BASIC && (
-						<div className="card-outer">
-							<div className="card basic" data-equalizer-watch>
-								<div className="card-header-background-free" />
-								<div className="ghostery-free-image-container">
-									<div className="ghostery-free-image text-center" title="Ghostery Free" alt="Ghostery Free" />
-								</div>
-								<h2>Ghostery</h2>
-								<div className="price">
-									<p className="price-blue-alt font-size-36">{t('hub_upgrade_plan_free')}</p>
-								</div>
-								<NavLink className="button already-protected" to="/home" title="Already Protected">
-									{t('hub_upgrade_already_protected')}
-								</NavLink>
-								<p className="card-sub-header"><strong>{t('hub_upgrade_basic_protection')}</strong></p>
-								<p className="card-sub-copy">
-									<span className="check blue" />
-									{t('hub_upgrade_basic_browser_protection')}
-								</p>
-							</div>
-						</div>
-					)}
-					{protection_level === PLUS && (
-						<div className="card-outer">
-							<div className="card plus" data-equalizer-watch>
-								<div className="ghostery-plus-image-container">
-									<div className="ghostery-plus-image" title="Ghostery Plus" alt="Ghostery Plus" />
-								</div>
-								<h2>Ghostery Plus</h2>
-								<div className="price">
-									{show_yearly_prices ? (
-										<React.Fragment>
-											<p className="price-gold font-size-36">$3.99</p>
-											<p className="price-gold sub-text font-size-12">{t('per_month')}</p>
-											<div className="price-per-year">
-												<p className="price-gold sub-text font-size-12">{`( $47.88 ${t('per_year')})`}</p>
-											</div>
-										</React.Fragment>
-									) : (
-										<React.Fragment>
-											<p className="price-gold font-size-36">$4.99</p>
-											<p className="price-gold sub-text font-size-12">{t('per_month')}</p>
-										</React.Fragment>
-									)}
-								</div>
-								<div className="row align-middle toggle-switch">
-									<div className="toggle-switch-row small-12 text-center columns">
-										<span className={monthlyToggleLabel}>{t('hub_upgrade_monthly')}</span>
-										<label className="switch" htmlFor="switch-check" onClick={toggleMonthlyYearlyPrices}>
-											<input className={sliderClassNames} type="checkbox" />
-											<span className="slider round" />
-										</label>
-										<span className={yearlyToggleLabel}>{t('hub_upgrade_yearly')}</span>
-									</div>
-								</div>
-								{isPlus ? (
-									<NavLink className="button button-gold" to="/home" title="Already Protected">
-										{t('hub_upgrade_already_protected')}
-									</NavLink>
-								) : (
-									<a className="button button-gold" href={plusCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Plus">
-										{t('hub_upgrade_to_plus')}
-									</a>
-								)}
-								<p className="card-sub-header"><strong>{t('hub_upgrade_additional_protection')}</strong></p>
-								<p className="card-sub-copy">
-									<span className="check blue" />
-									{t('hub_upgrade_basic_browser_protection')}
-								</p>
-								<p className="card-sub-copy">
-									<span className="check blue" />
-									{t('hub_upgrade_advanced_device_protection')}
-								</p>
-							</div>
-						</div>
-					)}
-					{protection_level === PREMIUM && (
-						<div className="tabs-panel" id="panel3">
-							<div className="card-outer card-outer-remove">
-								<div className="card premium" data-equalizer-watch>
-									<div className="ghostery-premium-image-container">
-										<div className="ghostery-premium-image card-image-top" title="Ghostery Premium" alt="Ghostery Premium" />
-									</div>
-									<div className="ghostery-premium-image-background" />
-									<h2>Ghostery Premium</h2>
-									<div className="price">
-										{show_yearly_prices ? (
-											<React.Fragment>
-												<p className="price-purple sub-text font-size-36">$8.99</p>
-												<p className="price-purple sub-text font-size-12">{t('per_month')}</p>
-												<div className="price-per-year">
-													<p className="price-purple sub-text font-size-12">{`( $107.88 ${t('per_year')})`}</p>
-												</div>
-											</React.Fragment>
-										) : (
-											<React.Fragment>
-												<p className="price-purple sub-text font-size-36">$11.99</p>
-												<p className="price-purple sub-text font-size-12">{t('per_month')}</p>
-											</React.Fragment>
-										)}
-									</div>
-									<div className="row align-middle toggle-switch">
-										<div className="toggle-switch-row small-12 text-center columns">
-											<span className={monthlyToggleLabel}>{t('hub_upgrade_monthly')}</span>
-											<label className="switch" htmlFor="switch-check" onClick={toggleMonthlyYearlyPrices}>
-												<input className={sliderClassNames} type="checkbox" />
-												<span className="slider round" />
-											</label>
-											<span className={yearlyToggleLabel}>{t('hub_upgrade_yearly')}</span>
-										</div>
-									</div>
-									{isPremium ? (
-										<NavLink className="button button-premium" to="/home" title="Already Protected">
-											{t('hub_upgrade_already_protected')}
-										</NavLink>
-									) : (
-										<a className="button button-premium" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Premium">
-											{t('hub_upgrade_to_premium')}
-										</a>
-									)}
-									<p className="card-sub-header">
-										<strong>{t('hub_upgrade_maximum_browser_protection')}</strong>
-									</p>
-									<p className="card-sub-copy">
-										<span className="check blue" />
-										{t('hub_upgrade_basic_browser_protection')}
-									</p>
-									<p className="card-sub-copy">
-										<span className="check blue" />
-										{t('hub_upgrade_advanced_device_protection')}
-									</p>
-									<p className="card-sub-copy">
-										<span className="check blue" />
-										VPN
-									</p>
-								</div>
-							</div>
-						</div>
-					)}
+					{protection_level === BASIC && basicCard()}
+					{protection_level === PLUS && plusCard(true)}
+					{protection_level === PREMIUM && premiumCard(true)}
 				</div>
 			</div>
 			<div className="row align-center module-editor text-center show-for-extra-large">

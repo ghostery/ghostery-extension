@@ -283,14 +283,16 @@ section.home-template .section.section-pricing {
 			height: 425px;
 		}
 
-		&.basic {
-			height: 400px;
-		}
-		&.plus {
-			height: 498px;
-		}
-		&.premium {
-			height: 526px;
+		@include breakpoint($medium-large-breakpoint down) {
+			&.basic {
+				height: 400px;
+			}
+			&.plus {
+				height: 498px;
+			}
+			&.premium {
+				height: 526px;
+			}
 		}
 		h2 {
 			color: $tundora;
