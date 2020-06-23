@@ -15,7 +15,6 @@ import { NavLink } from 'react-router-dom';
 import PanelToTabLink from './BuildingBlocks/PanelToTabLink';
 import { sendMessage, openCheckoutPage } from '../utils/msg';
 
-
 /**
  * Helper function to handle clicking on the Become a Subscriber button
  */

@@ -176,7 +176,7 @@ TrackerItem.propTypes = {
 	toggleMenu: PropTypes.func.isRequired,
 	index: PropTypes.number.isRequired,
 	showMenu: PropTypes.bool,
-	tracker: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+	tracker: PropTypes.shape,
 	categoryId: PropTypes.string,
 	type: PropTypes.string,
 };

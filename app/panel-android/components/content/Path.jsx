@@ -89,7 +89,7 @@ export default class Path extends React.Component {
 
 Path.propTypes = {
 	radius: PropTypes.number.isRequired,
-	path: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+	path: PropTypes.shape,
 	handler: PropTypes.func.isRequired,
 };
 
