@@ -148,5 +148,4 @@ TutorialViewContainer.defaultProps = {
 	},
 };
 
-
 export default TutorialViewContainer;

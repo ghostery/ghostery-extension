@@ -47,7 +47,6 @@ class Rewards extends React.Component {
 		this.renderRewardListComponent = this.renderRewardListComponent.bind(this);
 		this.handlePortMessage = this.handlePortMessage.bind(this);
 
-
 		// myoffrz
 		this.iframe = React.createRef();
 		this.handleMyoffrzMessage = this.handleMyoffrzMessage.bind(this);

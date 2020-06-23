@@ -1,3 +1,16 @@
+### GHOSTERY 8.5.2 ()
+
++ Fixes bug where Ghostery icon could be grayed out on restricted sites (#564)
++ Clean up lint suppression rules. Remove React UNSAFE events. (#559, #566)
++ Fixes bug where themes were not unlocked on upgrade (#555)
++ Add upgrade promotion to Intro Hub (#551)
++ Rate limit password reset attempts (#548)
++ Updates to account creation panel messaging (#541)
++ Slimmer Human Web modules for Android browsers (#569)
++ Search for missing language tokens (#563)
++ Update dependencies
++ Bump minimum FF to 68 ESR
+
 ### GHOSTERY 8.5.1 (June 1, 2020)
 
 + Unlock Plus features for Ghostery Midnight users (#546)
