@@ -1357,12 +1357,6 @@
 	"hub_upgrade_additional_protection": {
 		"message": "Additional Protection"
 	},
-	"hub_upgrade_additional": {
-		"message": "Additional"
-	},
-	"hub_upgrade_maximum": {
-		"message": "Maximum"
-	},
 	"hub_upgrade_browser_tracker_blocking": {
 		"message": "Browser Tracker Blocking"
 	},
@@ -2299,9 +2293,6 @@
 	},
 	"choose_your_ghostery_privacy_plan": {
 		"message": "Choose your Ghostery privacy plan"
-	},
-	"ghostery_basic": {
-		"message": "Basic"
 	},
 	"dollar_sign": {
 		"message": "&#36;"

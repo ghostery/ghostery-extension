@@ -419,13 +419,13 @@ const UpgradePlanView = (props) => {
 				<div className="mobile-table-header">
 					<div className="row align-top align-center">
 						<div className="small-4 text-center columns">
-							<p className="protection-description blue">{t('ghostery_basic')}</p>
+							<p className="protection-description blue">Basic</p>
 						</div>
 						<div className="small-4 text-center columns">
-							<p className="protection-description yellow">{t('hub_upgrade_additional')}</p>
+							<p className="protection-description yellow">Plus</p>
 						</div>
 						<div className="small-4 text-center columns">
-							<p className="protection-description purple">{t('hub_upgrade_maximum')}</p>
+							<p className="protection-description purple">Premium</p>
 						</div>
 					</div>
 					<div className="row align-top align-center">
