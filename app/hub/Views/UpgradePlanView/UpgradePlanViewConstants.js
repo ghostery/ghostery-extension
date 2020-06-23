@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -19,7 +19,7 @@ export const SET_BASIC_PROTECTION = 'SET_BASIC_PROTECTION';
 export const SET_PLUS_PROTECTION = 'SET_PLUS_PROTECTION';
 export const SET_PREMIUM_PROTECTION = 'SET_PREMIUM_PROTECTION';
 
-// Basic/Plus/Premium
+// Basic/Plus/Premium card to show on mobile view
 export const BASIC = 'BASIC';
 export const PLUS = 'PLUS';
 export const PREMIUM = 'PREMIUM';

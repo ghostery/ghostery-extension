@@ -392,6 +392,7 @@ section.home-template .section.section-pricing {
 	}
 
 	.premium-sparkle {
+		margin-left: 5px;
 		display: inline-block;
 		vertical-align: middle;
 		height: 14px;
@@ -489,12 +490,6 @@ section.home-template .section.section-pricing {
 				&.is-active {
 					display: inline-block;
 				}
-			}
-		}
-
-		&.comparison-table {
-			tbody > tr.gray {
-				background-color: #F7F7F7;
 			}
 		}
 		tbody > tr:nth-child(2n) {
@@ -699,13 +694,18 @@ section.home-template .section.section-pricing {
 				tr:nth-child(2n) {
 					background-color: #F7F7F7;
 				}
+				tr:nth-child(2n+1) {
+					background-color: #FFF;
+				}
 			}
-		}
-		tbody > tr:nth-child(2n+1) {
-			background-color: #FFF;
-		}
-		tbody > tr.gray {
-			background-color: #F7F7F7;
+			@include breakpoint ($medium-large-breakpoint down) {
+				tr:nth-child(4n), tr:nth-child(4n+3) {
+					background-color: #FFF;
+				}
+				tr:nth-child(4n+2), tr:nth-child(4n+1) {
+					background-color: #F7F7F7;
+				}
+			}
 		}
 		tr:last-child > td {
 			border: none;

@@ -11,15 +11,72 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React, { useRef } from 'react';
+import React, { useRef, Fragment } from 'react';
 import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
+import { BASIC, PLUS, PREMIUM } from './UpgradePlanViewConstants';
 import globals from '../../../../src/classes/Globals';
 
-const BASIC = 'BASIC';
-const PLUS = 'PLUS';
-const PREMIUM = 'PREMIUM';
+const featureMatrixRow = (label, isBasic, isPlus, isSparkle) => (
+	<tr>
+		<td>
+			{label}
+			{isSparkle &&
+				<span className="premium-sparkle" />
+			}
+		</td>
+		<td className="default">
+			{isBasic &&
+				<span className="check blue" />
+			}
+		</td>
+		<td>
+			{isPlus &&
+				<span className="check yellow" />
+			}
+		</td>
+		<td>
+			<span className="check purple" />
+		</td>
+	</tr>
+);
+
+const mobileFeatureMatrixRow = (label, isBasic, isPlus, isSparkle) => (
+	<Fragment>
+		<tr>
+			<td colSpan="3">
+				<span className="feature-title">{label}</span>
+				{isSparkle &&
+					<span className="premium-sparkle" />
+				}
+			</td>
+		</tr>
+		<tr className="border-bottom">
+			{isBasic ? (
+				<td className="col-free">
+					<span className="check blue" />
+				</td>
+			) : (
+				<td>
+					<span className="x-icon" />
+				</td>
+			)}
+			{isPlus ? (
+				<td className="col-plus">
+					<span className="check yellow" />
+				</td>
+			) : (
+				<td>
+					<span className="x-icon" />
+				</td>
+			)}
+			<td className="col-premium">
+				<span className="check purple" />
+			</td>
+		</tr>
+	</Fragment>
+);
 
 /**
  * A React class component for rendering the Upgrade Plan View
@@ -423,170 +480,19 @@ const UpgradePlanView = (props) => {
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>{t('hub_upgrade_browser_tracker_blocking')}</td>
-										<td className="default">
-											<span className="check blue" />
-										</td>
-										<td>
-											<span className="check yellow" />
-										</td>
-										<td>
-											<span className="check purple" />
-										</td>
-									</tr>
-									<tr>
-										<td>{t('hub_upgrade_browser_ad_blocking')}</td>
-										<td className="default">
-											<span className="check blue" />
-										</td>
-										<td>
-											<span className="check yellow" />
-										</td>
-										<td>
-											<span className="check purple" />
-										</td>
-									</tr>
-									<tr>
-										<td>{t('hub_upgrade_custom_blocking_preferences')}</td>
-										<td className="default">
-											<span className="check blue" />
-										</td>
-										<td>
-											<span className="check yellow" />
-										</td>
-										<td>
-											<span className="check purple" />
-										</td>
-									</tr>
-									<tr>
-										<td>{t('hub_upgrade_extension_themes')}</td>
-										<td className="default"><span className="tick" /></td>
-										<td>
-											<span className="check yellow" />
-										</td>
-										<td>
-											<span className="check purple" />
-										</td>
-									</tr>
-									<tr>
-										<td>{t('hub_upgrade_historical_extension_stats')}</td>
-										<td className="default"><span className="tick" /></td>
-										<td>
-											<span className="check yellow" />
-										</td>
-										<td>
-											<span className="check purple" />
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<span className="feature-title">
-												{t('hub_upgrade_application_tracker_blocking')}
-											</span>
-											<span className="premium-sparkle" />
-										</td>
-										<td className="default"><span className="tick" /></td>
-										<td>
-											<span className="check yellow" />
-										</td>
-										<td>
-											<span className="check purple" />
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<span className="feature-title">
-												{t('hub_upgrade_application_ad_blocking')}
-											</span>
-											<span className="premium-sparkle" />
-										</td>
-										<td className="default"><span className="tick" /></td>
-										<td>
-											<span className="check yellow" />
-										</td>
-										<td>
-											<span className="check purple" />
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<span className="feature-title">
-												VPN
-											</span>
-											<span className="premium-sparkle" />
-										</td>
-										<td className="default"><span className="tick" /></td>
-										<td><span className="tick" /></td>
-										<td>
-											<span className="check purple" />
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<span className="feature-title">
-												{t('hub_upgrade_no_vpn_logs')}
-											</span>
-											<span className="premium-sparkle" />
-										</td>
-										<td className="default"><span className="tick" /></td>
-										<td><span className="tick" /></td>
-										<td>
-											<span className="check purple" />
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<span className="feature-title">
-												{`P2P ${t('support')}`}
-											</span>
-											<span className="premium-sparkle" />
-										</td>
-										<td className="default"><span className="tick" /></td>
-										<td><span className="tick" /></td>
-										<td>
-											<span className="check purple" />
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<span className="feature-title">
-												{`IPv6 ${t('hub_upgrade_leak_protection')}`}
-											</span>
-											<span className="premium-sparkle" />
-										</td>
-										<td className="default"><span className="tick" /></td>
-										<td><span className="tick" /></td>
-										<td>
-											<span className="check purple" />
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<span className="feature-title">
-												{t('hub_upgrade_physical_servers')}
-											</span>
-											<span className="premium-sparkle" />
-										</td>
-										<td className="default"><span className="tick" /></td>
-										<td><span className="tick" /></td>
-										<td>
-											<span className="check purple" />
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<span className="feature-title">
-												{t('hub_upgrade_unlimited_bandwidth')}
-											</span>
-											<span className="premium-sparkle" />
-										</td>
-										<td className="default"><span className="tick" /></td>
-										<td><span className="tick" /></td>
-										<td>
-											<span className="check purple" />
-										</td>
-									</tr>
+									{featureMatrixRow(t('hub_upgrade_browser_tracker_blocking'), true, true)}
+									{featureMatrixRow(t('hub_upgrade_browser_ad_blocking'), true, true)}
+									{featureMatrixRow(t('hub_upgrade_custom_blocking_preferences'), true, true)}
+									{featureMatrixRow(t('hub_upgrade_extension_themes'), false, true)}
+									{featureMatrixRow(t('hub_upgrade_historical_extension_stats'), false, true)}
+									{featureMatrixRow(t('hub_upgrade_application_tracker_blocking'), false, true, true)}
+									{featureMatrixRow(t('hub_upgrade_application_ad_blocking'), false, true, true)}
+									{featureMatrixRow('VPN', false, false, true)}
+									{featureMatrixRow(t('hub_upgrade_no_vpn_logs'), false, false, true)}
+									{featureMatrixRow(`P2P ${t('support')}`, false, false, true)}
+									{featureMatrixRow(`IPv6 ${t('hub_upgrade_leak_protection')}`, false, false, true)}
+									{featureMatrixRow(t('hub_upgrade_physical_servers'), false, false, true)}
+									{featureMatrixRow(t('hub_upgrade_unlimited_bandwidth'), false, false, true)}
 									<tr>
 										<td />
 										<td className="default">
@@ -677,212 +583,19 @@ const UpgradePlanView = (props) => {
 						<div className="shrink table-container">
 							<table className="unstriped">
 								<tbody>
-									<tr className="gray">
-										<td colSpan="3">{t('hub_upgrade_browser_tracker_blocking')}</td>
-									</tr>
-									<tr className="gray border-bottom">
-										<td className="col-free">
-											<span className="check blue" />
-										</td>
-										<td className="col-plus">
-											<span className="check yellow" />
-										</td>
-										<td className="col-premium">
-											<span className="check purple" />
-										</td>
-									</tr>
-									<tr>
-										<td colSpan="3">{t('hub_upgrade_browser_ad_blocking')}</td>
-									</tr>
-									<tr>
-										<td className="col-free">
-											<span className="check blue" />
-										</td>
-										<td className="col-plus">
-											<span className="check yellow" />
-										</td>
-										<td className="col-premium">
-											<span className="check purple" />
-										</td>
-									</tr>
-									<tr className="gray">
-										<td colSpan="3">{t('hub_upgrade_custom_blocking_preferences')}</td>
-									</tr>
-									<tr className="gray border-bottom">
-										<td className="col-free">
-											<span className="check blue" />
-										</td>
-										<td className="col-plus">
-											<span className="check yellow" />
-										</td>
-										<td className="col-premium">
-											<span className="check purple" />
-										</td>
-									</tr>
-									<tr>
-										<td colSpan="3">{t('hub_upgrade_extension_themes')}</td>
-									</tr>
-									<tr>
-										<td>
-											<span className="x-icon" />
-										</td>
-										<td className="col-plus">
-											<span className="check yellow" />
-										</td>
-										<td className="col-premium">
-											<span className="check purple" />
-										</td>
-									</tr>
-									<tr className="gray">
-										<td colSpan="3">{t('hub_upgrade_historical_extension_stats')}</td>
-									</tr>
-									<tr className="gray border-bottom">
-										<td>
-											<span className="x-icon" />
-										</td>
-										<td className="col-plus">
-											<span className="check yellow" />
-										</td>
-										<td className="col-premium">
-											<span className="check purple" />
-										</td>
-									</tr>
-									<tr>
-										<td colSpan="3">
-											<span className="feature-title">{t('hub_upgrade_application_tracker_blocking')}</span>
-											<span className="premium-sparkle" />
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<span className="x-icon" />
-										</td>
-										<td className="col-plus">
-											<span className="check yellow" />
-										</td>
-										<td className="col-premium">
-											<span className="check purple" />
-										</td>
-									</tr>
-									<tr className="gray">
-										<td colSpan="3">
-											<span className="feature-title">{t('hub_upgrade_application_ad_blocking')}</span>
-											<span className="premium-sparkle" />
-										</td>
-									</tr>
-									<tr className="gray border-bottom">
-										<td>
-											<span className="x-icon" />
-										</td>
-										<td className="col-plus">
-											<span className="check yellow" />
-										</td>
-										<td className="col-premium">
-											<span className="check purple" />
-										</td>
-									</tr>
-									<tr>
-										<td colSpan="3">
-											<span className="feature-title">VPN</span>
-											<span className="premium-sparkle" />
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<span className="x-icon" />
-										</td>
-										<td>
-											<span className="x-icon" />
-										</td>
-										<td className="col-premium">
-											<span className="check purple" />
-										</td>
-									</tr>
-									<tr className="gray">
-										<td colSpan="3">
-											<span className="feature-title">{t('hub_upgrade_no_vpn_logs')}</span>
-											<span className="premium-sparkle" />
-										</td>
-									</tr>
-									<tr className="gray border-bottom">
-										<td>
-											<span className="x-icon" />
-										</td>
-										<td>
-											<span className="x-icon" />
-										</td>
-										<td className="col-premium">
-											<span className="check purple" />
-										</td>
-									</tr>
-									<tr>
-										<td colSpan="3">
-											<span className="feature-title">{`P2P ${t('support')}`}</span>
-											<span className="premium-sparkle" />
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<span className="x-icon" />
-										</td>
-										<td>
-											<span className="x-icon" />
-										</td>
-										<td className="col-premium">
-											<span className="check purple" />
-										</td>
-									</tr>
-									<tr className="gray">
-										<td colSpan="3">
-											<span className="feature-title">{`IPv6 ${t('hub_upgrade_leak_protection')}`}</span>
-											<span className="premium-sparkle" />
-										</td>
-									</tr>
-									<tr className="gray border-bottom">
-										<td>
-											<span className="x-icon" />
-										</td>
-										<td>
-											<span className="x-icon" />
-										</td>
-										<td className="col-premium">
-											<span className="check purple" />
-										</td>
-									</tr>
-									<tr>
-										<td colSpan="3">
-											<span className="feature-title">{t('hub_upgrade_physical_servers')}</span>
-											<span className="premium-sparkle" />
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<span className="x-icon" />
-										</td>
-										<td>
-											<span className="x-icon" />
-										</td>
-										<td className="col-premium">
-											<span className="check purple" />
-										</td>
-									</tr>
-									<tr className="gray">
-										<td colSpan="3">
-											<span className="feature-title">{t('hub_upgrade_unlimited_bandwidth')}</span>
-											<span className="premium-sparkle" />
-										</td>
-									</tr>
-									<tr className="gray border-bottom">
-										<td>
-											<span className="x-icon" />
-										</td>
-										<td>
-											<span className="x-icon" />
-										</td>
-										<td className="col-premium">
-											<span className="check purple" />
-										</td>
-									</tr>
+									{mobileFeatureMatrixRow(t('hub_upgrade_browser_tracker_blocking'), true, true)}
+									{mobileFeatureMatrixRow(t('hub_upgrade_browser_ad_blocking'), true, true)}
+									{mobileFeatureMatrixRow(t('hub_upgrade_custom_blocking_preferences'), true, true)}
+									{mobileFeatureMatrixRow(t('hub_upgrade_extension_themes'), false, true)}
+									{mobileFeatureMatrixRow(t('hub_upgrade_historical_extension_stats'), false, true)}
+									{mobileFeatureMatrixRow(t('hub_upgrade_application_tracker_blocking'), false, true, true)}
+									{mobileFeatureMatrixRow(t('hub_upgrade_application_ad_blocking'), false, true, true)}
+									{mobileFeatureMatrixRow('VPN', false, false, true)}
+									{mobileFeatureMatrixRow(t('hub_upgrade_no_vpn_logs'), false, false, true)}
+									{mobileFeatureMatrixRow(`P2P ${t('support')}`, false, false, true)}
+									{mobileFeatureMatrixRow(`IPv6 ${t('hub_upgrade_leak_protection')}`, false, false, true)}
+									{mobileFeatureMatrixRow(t('hub_upgrade_physical_servers'), false, false, true)}
+									{mobileFeatureMatrixRow(t('hub_upgrade_unlimited_bandwidth'), false, false, true)}
 								</tbody>
 							</table>
 						</div>
