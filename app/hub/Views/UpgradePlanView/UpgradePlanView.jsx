@@ -168,6 +168,30 @@ const UpgradePlanView = (props) => {
 	const plusCheckoutLink = `${globals.CHECKOUT_BASE_URL}/plus?interval=${interval}&${utmParams}`;
 	const premiumCheckoutLink = `${globals.CHECKOUT_BASE_URL}/premium?interval=${interval}&${utmParams}`;
 
+	const plusCTAButton = () => (
+		isPlus ? (
+			<NavLink className="button button-gold" to="/home" title="Already Protected">
+				{t('hub_upgrade_already_protected')}
+			</NavLink>
+		) : (
+			<a className="button button-gold" href={plusCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Plus">
+				{t('hub_upgrade_to_plus')}
+			</a>
+		)
+	);
+
+	const premiumCTAButton = () => (
+		isPremium ? (
+			<NavLink className="button button-premium" to="/home" title="Already Protected">
+				{t('hub_upgrade_already_protected')}
+			</NavLink>
+		) : (
+			<a className="button button-premium" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Premium">
+				{t('hub_upgrade_to_premium')}
+			</a>
+		)
+	);
+
 	const plusCard = mobileView => (
 		<div className="card-outer">
 			<div className="card plus" data-equalizer-watch>
@@ -203,15 +227,7 @@ const UpgradePlanView = (props) => {
 						</div>
 					</div>
 				)}
-				{isPlus ? (
-					<NavLink className="button button-gold" to="/home" title="Already Protected">
-						{t('hub_upgrade_already_protected')}
-					</NavLink>
-				) : (
-					<a className="button button-gold" href={plusCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Plus">
-						{t('hub_upgrade_to_plus')}
-					</a>
-				)}
+				{plusCTAButton()}
 				<p className="card-sub-header"><strong>{t('hub_upgrade_additional_protection')}</strong></p>
 				<p className="card-sub-copy">
 					<span className="check blue" />
@@ -260,15 +276,7 @@ const UpgradePlanView = (props) => {
 						</div>
 					</div>
 				)}
-				{isPremium ? (
-					<NavLink className="button button-premium" to="/home" title="Already Protected">
-						{t('hub_upgrade_already_protected')}
-					</NavLink>
-				) : (
-					<a className="button button-premium" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Premium">
-						{t('hub_upgrade_to_premium')}
-					</a>
-				)}
+				{premiumCTAButton()}
 				<p className="card-sub-header">
 					<strong>{t('hub_upgrade_maximum_browser_protection')}</strong>
 				</p>
@@ -394,31 +402,15 @@ const UpgradePlanView = (props) => {
 									<tr>
 										<td />
 										<td className="default">
-											<NavLink className="button table-footer-button already-protected" to="/home" title="Already Protected">
+											<NavLink className="button already-protected" to="/home" title="Already Protected">
 												{t('hub_upgrade_already_protected')}
 											</NavLink>
 										</td>
 										<td>
-											{isPlus ? (
-												<NavLink className="button table-footer-button button-gold" to="/home" title="Already Protected">
-													{t('hub_upgrade_already_protected')}
-												</NavLink>
-											) : (
-												<a className="button table-footer-button button-gold" href={plusCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Plus">
-													{t('hub_upgrade_to_plus')}
-												</a>
-											)}
+											{plusCTAButton()}
 										</td>
 										<td>
-											{isPremium ? (
-												<NavLink className="button table-footer-button button-premium" to="/home" title="Already Protected">
-													{t('hub_upgrade_already_protected')}
-												</NavLink>
-											) : (
-												<a className="button table-footer-button button-premium" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Premium">
-													{t('hub_upgrade_to_premium')}
-												</a>
-											)}
+											{premiumCTAButton()}
 										</td>
 									</tr>
 								</tbody>
@@ -508,28 +500,12 @@ const UpgradePlanView = (props) => {
 						</div>
 						<div className="small-12 text-center columns">
 							<span className="col-plus">
-								{isPlus ? (
-									<NavLink className="button button-gold" to="/home" title="Already Protected">
-										{t('hub_upgrade_already_protected')}
-									</NavLink>
-								) : (
-									<a className="button button-gold" href={plusCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Plus">
-										{t('hub_upgrade_to_plus')}
-									</a>
-								)}
+								{plusCTAButton()}
 							</span>
 						</div>
 						<div className="small-12 text-center columns">
 							<span className="col-premium">
-								{isPremium ? (
-									<NavLink className="button button-premium" to="/home" title="Already Protected">
-										{t('hub_upgrade_already_protected')}
-									</NavLink>
-								) : (
-									<a className="button button-premium" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Premium">
-										{t('hub_upgrade_to_premium')}
-									</a>
-								)}
+								{premiumCTAButton()}
 							</span>
 						</div>
 					</div>
