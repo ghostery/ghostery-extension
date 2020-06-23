@@ -192,6 +192,25 @@ const UpgradePlanView = (props) => {
 		)
 	);
 
+	const toggleSwitch = (mobileView, secondToggle) => {
+		const toggleSwitchClassNames = ClassNames('small-12 text-center columns', {
+			'toggle-switch-row': mobileView,
+			'second-toggle': secondToggle,
+		});
+		return (
+			<div className="row align-middle toggle-switch">
+				<div className={toggleSwitchClassNames}>
+					<span className={monthlyToggleLabel}>{t('hub_upgrade_monthly')}</span>
+					<label className="switch" htmlFor="switch-check" onClick={toggleMonthlyYearlyPrices}>
+						<input className={sliderClassNames} type="checkbox" />
+						<span className="slider round" />
+					</label>
+					<span className={yearlyToggleLabel}>{t('hub_upgrade_yearly')}</span>
+				</div>
+			</div>
+		);
+	};
+
 	const plusCard = mobileView => (
 		<div className="card-outer">
 			<div className="card plus" data-equalizer-watch>
@@ -215,18 +234,7 @@ const UpgradePlanView = (props) => {
 						</React.Fragment>
 					)}
 				</div>
-				{mobileView && (
-					<div className="row align-middle toggle-switch">
-						<div className="toggle-switch-row small-12 text-center columns">
-							<span className={monthlyToggleLabel}>{t('hub_upgrade_monthly')}</span>
-							<label className="switch" htmlFor="switch-check" onClick={toggleMonthlyYearlyPrices}>
-								<input className={sliderClassNames} type="checkbox" />
-								<span className="slider round" />
-							</label>
-							<span className={yearlyToggleLabel}>{t('hub_upgrade_yearly')}</span>
-						</div>
-					</div>
-				)}
+				{mobileView && toggleSwitch(true)}
 				{plusCTAButton()}
 				<p className="card-sub-header"><strong>{t('hub_upgrade_additional_protection')}</strong></p>
 				<p className="card-sub-copy">
@@ -240,6 +248,7 @@ const UpgradePlanView = (props) => {
 			</div>
 		</div>
 	);
+
 	const premiumCard = mobileView => (
 		<div className="card-outer card-outer-remove">
 			<div className="card premium" data-equalizer-watch>
@@ -264,18 +273,7 @@ const UpgradePlanView = (props) => {
 						</React.Fragment>
 					)}
 				</div>
-				{mobileView && (
-					<div className="row align-middle toggle-switch">
-						<div className="toggle-switch-row small-12 text-center columns">
-							<span className={monthlyToggleLabel}>{t('hub_upgrade_monthly')}</span>
-							<label className="switch" htmlFor="switch-check" onClick={toggleMonthlyYearlyPrices}>
-								<input className={sliderClassNames} type="checkbox" />
-								<span className="slider round" />
-							</label>
-							<span className={yearlyToggleLabel}>{t('hub_upgrade_yearly')}</span>
-						</div>
-					</div>
-				)}
+				{mobileView && toggleSwitch(true)}
 				{premiumCTAButton()}
 				<p className="card-sub-header">
 					<strong>{t('hub_upgrade_maximum_browser_protection')}</strong>
@@ -302,16 +300,7 @@ const UpgradePlanView = (props) => {
 				<div className="row align-center">
 					<div className="small-12 text-center columns">
 						<h1>{`${t('hub_upgrade_your')} Ghostery ${t('hub_upgrade_protection_plan')}`}</h1>
-						<div className="row align-middle toggle-switch">
-							<div className="small-12 text-center columns">
-								<span className={monthlyToggleLabel}>{t('hub_upgrade_monthly')}</span>
-								<label className="switch" htmlFor="switch-check" onClick={toggleMonthlyYearlyPrices}>
-									<input className={sliderClassNames} type="checkbox" />
-									<span className="slider round" />
-								</label>
-								<span className={yearlyToggleLabel}>{t('hub_upgrade_yearly')}</span>
-							</div>
-						</div>
+						{toggleSwitch()}
 					</div>
 				</div>
 			</div>
@@ -426,16 +415,7 @@ const UpgradePlanView = (props) => {
 			</div>
 
 			<div ref={mobileComparisonTableRef} className="comparison-table comparison-table-mobile hide-for-extra-large">
-				<div className="row align-middle toggle-switch hide-for-extra-large">
-					<div className="toggle-switch-row mobile-switch small-12 text-center columns">
-						<span className={monthlyToggleLabel}>{t('hub_upgrade_monthly')}</span>
-						<label className="switch" htmlFor="switch-check" onClick={toggleMonthlyYearlyPrices}>
-							<input className={sliderClassNames} type="checkbox" />
-							<span className="slider round" />
-						</label>
-						<span className={yearlyToggleLabel}>{t('hub_upgrade_yearly')}</span>
-					</div>
-				</div>
+				{toggleSwitch(true, true)}
 				<div className="mobile-table-header">
 					<div className="row align-top align-center">
 						<div className="small-4 text-center columns">
