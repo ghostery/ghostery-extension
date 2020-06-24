@@ -704,9 +704,6 @@
 	"panel_detail_menu_rewards_title": {
 		"message": "Rewards"
 	},
-	"panel_detail_menu_premium_title": {
-		"message": "Premium"
-	},
 	"panel_detail_learn_more": {
 	  "message": "Learn More"
 	},
@@ -1339,20 +1336,14 @@
 	"hub_upgrade_maximum_browser_protection": {
 		"message": "Maximum Browser Protection"
 	},
-	"hub_upgrade_to_plus": {
-		"message": "Upgrade to Plus"
-	},
-	"hub_upgrade_to_premium": {
-		"message": "Upgrade to Premium"
+	"hub_upgrade_to": {
+		"message": "Upgrade to"
 	},
 	"hub_upgrade_scroll_down": {
 		"message": "See full list of features"
 	},
 	"hub_upgrade_midnight_note": {
 		"message": "Must have Ghostery Midnight installed"
-	},
-	"hub_upgrade_plus": {
-		"message": "Plus"
 	},
 	"hub_upgrade_additional_protection": {
 		"message": "Additional Protection"

@@ -175,7 +175,7 @@ const UpgradePlanView = (props) => {
 			</NavLink>
 		) : (
 			<a className="button button-gold" href={plusCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Plus">
-				{t('hub_upgrade_to_plus')}
+				{`${t('hub_upgrade_to')} Plus`}
 			</a>
 		)
 	);
@@ -187,7 +187,7 @@ const UpgradePlanView = (props) => {
 			</NavLink>
 		) : (
 			<a className="button button-premium" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Premium">
-				{t('hub_upgrade_to_premium')}
+				{`${t('hub_upgrade_to')} Premium`}
 			</a>
 		)
 	);
@@ -323,8 +323,8 @@ const UpgradePlanView = (props) => {
 					<div className="columns shrink text-center">
 						<ul className="tiers-group tabs menu align-center" data-tabs id="price-tabs">
 							<li className={tabsTitleBlueClassNames} onClick={setBasicProtection}>{t('hub_upgrade_plan_free')}</li>
-							<li className={tabsTitleGoldClassNames} onClick={setPlusProtection}>{t('hub_upgrade_plus')}</li>
-							<li className={tabsTitlePurpleClassNames} onClick={setPremiumProtection}>{t('panel_detail_menu_premium_title')}</li>
+							<li className={tabsTitleGoldClassNames} onClick={setPlusProtection}>Plus</li>
+							<li className={tabsTitlePurpleClassNames} onClick={setPremiumProtection}>Premium</li>
 						</ul>
 					</div>
 				</div>
