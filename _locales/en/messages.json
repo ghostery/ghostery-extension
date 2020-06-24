@@ -2294,6 +2294,9 @@
 	"choose_your_ghostery_privacy_plan": {
 		"message": "Choose your Ghostery privacy plan"
 	},
+	"ghostery_basic": {
+		"message": "Basic"
+	},
 	"dollar_sign": {
 		"message": "&#36;"
 	},
