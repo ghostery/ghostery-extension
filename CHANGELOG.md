@@ -4,6 +4,7 @@
 + Clean up lint suppression rules. Remove React UNSAFE events. (#559, #566)
 + Fixes bug where themes were not unlocked on upgrade (#555)
 + Add upgrade promotion to Intro Hub (#551)
++ Adds options for yearly subscription plans (#567)
 + Rate limit password reset attempts (#548)
 + Updates to account creation panel messaging (#541)
 + Slimmer Human Web modules for Android browsers (#569)
