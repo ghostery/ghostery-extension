@@ -16,6 +16,15 @@
 	padding-top: 45px;
 	padding-bottom: 25px;
 	color: $tundora;
+	.button {
+		&:not(.hollow):hover {
+			background-color: #0078CA;
+		}
+		&.hollow:hover {
+			color: #0078CA;
+			border-color: #0078CA;
+		}
+	}
 }
 .HomeView--bolded {
 	font-weight: 700;

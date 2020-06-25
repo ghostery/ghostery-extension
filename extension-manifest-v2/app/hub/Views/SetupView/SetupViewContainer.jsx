@@ -129,7 +129,7 @@ class SetupViewContainer extends Component {
 				</div>
 				<div className="SetupModal__buttonContainer full-width">
 					<div className="full-width flex-container align-justify">
-						<NavLink to="/" className="button success hollow">
+						<NavLink to="/home" className="button success hollow">
 							{t('hub_setup_modal_button_no')}
 						</NavLink>
 						<div className="button success hollow" onClick={this._answerModalYes}>

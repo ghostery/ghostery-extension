@@ -107,7 +107,8 @@ class HomeViewContainer extends Component {
 
 	_render() {
 		const { justInstalled } = this.state;
-		const { home, user } = this.props;
+		const { home, user, actions } = this.props;
+		const { sendPing } = actions;
 		const isPlus = (user && user.plusAccess) || false;
 		const isPremium = (user && user.premiumAccess) || false;
 		const {
@@ -117,7 +118,10 @@ class HomeViewContainer extends Component {
 			enable_metrics,
 		} = home;
 
-		const showPromoModal = !premium_promo_modal_shown && !isPremium;
+		// Flag to display promo modal (used in A/B testing)
+		const shouldShowPromoModal = false;
+		// Logic to display premium modal if it is the case that it is being shown once per hub refresh to non-premium users
+		const showPromoModal = shouldShowPromoModal && !premium_promo_modal_shown && !isPremium;
 
 		return (
 			<div className="full-height">
@@ -138,6 +142,7 @@ class HomeViewContainer extends Component {
 					changeMetrics={this._handleToggleMetrics}
 					email={user ? user.email : ''}
 					isPremium={isPremium}
+					sendPing={sendPing}
 				/>
 			</div>
 		);

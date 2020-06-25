@@ -12,37 +12,33 @@
  */
 
 import React from 'react';
-import { openSupportPage } from '../utils/msg';
+import { openSupportPage, openHubPage } from '../utils/msg';
 import PanelToTabLink from './BuildingBlocks/PanelToTabLink';
 
 /**
  * Render Help view that user can open from the header drop-down menu
  */
-const Help = () => {
-	const hubUrl = chrome.runtime.getURL('./app/templates/hub.html');
-
-	return (
-		<div id="content-help">
-			<div className="row">
-				<div className="small-12 columns">
-					<h1>{ t('panel_help_panel_header') }</h1>
-					<div className="support-section">
-						<PanelToTabLink href={hubUrl}>{t('panel_help_setup')}</PanelToTabLink>
-					</div>
-					<div className="support-section">
-						<h3>{ t('panel_help_questions_header') }</h3>
-						<PanelToTabLink href="https://www.ghostery.com/faqs/">{t('panel_help_faq')}</PanelToTabLink>
-						<PanelToTabLink href="https://www.ghostery.com/survey/in-app">{t('panel_help_feedback')}</PanelToTabLink>
-						<a href="#" onClick={openSupportPage}>{ t('support') }</a>
-					</div>
-					<div className="support-section">
-						<h3>{ t('panel_help_contact_header') }</h3>
-						<a target="_blank" rel="noopener noreferrer" className="info" href="mailto:info@ghostery.com">info@ghostery.com</a>
-					</div>
+const Help = () => (
+	<div id="content-help">
+		<div className="row">
+			<div className="small-12 columns">
+				<h1>{t('panel_help_panel_header')}</h1>
+				<div className="support-section">
+					<a href="#" onClick={openHubPage}>{t('panel_help_setup')}</a>
+				</div>
+				<div className="support-section">
+					<h3>{t('panel_help_questions_header')}</h3>
+					<PanelToTabLink href="https://www.ghostery.com/faqs/">{t('panel_help_faq')}</PanelToTabLink>
+					<PanelToTabLink href="https://www.ghostery.com/survey/in-app">{t('panel_help_feedback')}</PanelToTabLink>
+					<a href="#" onClick={openSupportPage}>{t('support')}</a>
+				</div>
+				<div className="support-section">
+					<h3>{t('panel_help_contact_header')}</h3>
+					<a target="_blank" rel="noopener noreferrer" className="info" href="mailto:info@ghostery.com">info@ghostery.com</a>
 				</div>
 			</div>
 		</div>
-	);
-};
+	</div>
+);
 
 export default Help;

@@ -268,7 +268,7 @@ class HeaderMenu extends React.Component {
 										</g>
 									</svg>
 								)}
-								<span>{hasPremiumAccess ? t('panel_detail_premium_title') : t('ghostery_plus')}</span>
+								<span>{hasPremiumAccess ? 'Ghostery Premium' : 'Ghostery Plus'}</span>
 							</div>
 						</li>
 					</ul>
