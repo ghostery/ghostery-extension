@@ -14,7 +14,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
 /**
  * A Functional React Component for rendering the Products View
  * @return {JSX} JSX for rendering the Products View

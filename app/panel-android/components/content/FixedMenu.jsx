@@ -137,8 +137,8 @@ export default class FixedMenu extends React.Component {
 }
 
 FixedMenu.propTypes = {
-	panel: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-	cliqzModuleData: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+	panel: PropTypes.shape,
+	cliqzModuleData: PropTypes.shape,
 };
 
 FixedMenu.defaultProps = {

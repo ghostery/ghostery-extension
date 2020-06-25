@@ -13,7 +13,7 @@
 
 import { createMemoryHistory } from 'history';
 /**
- * @var {Object} history object to be used by React Routerfor navigation within the Ghostery panel.
+ * @var {Object} history object to be used by React Router for navigation within the Ghostery panel.
  * @memberOf PanelUtils
  */
 const history = createMemoryHistory({
