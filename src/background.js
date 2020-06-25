@@ -927,7 +927,7 @@ function onMessageHandler(request, sender, callback) {
 				const user = { user: { ...foundUser } };
 				if (foundUser) {
 					user.user.plusAccess = account.hasScopesUnverified(['subscriptions:plus'])
-						|| account.hasScopesUnverified(['subscriptions:premium']);
+											|| account.hasScopesUnverified(['subscriptions:premium']);
 					user.user.premiumAccess = account.hasScopesUnverified(['subscriptions:premium']);
 				}
 				callback(user);
@@ -1024,6 +1024,12 @@ function onMessageHandler(request, sender, callback) {
 			}
 		});
 		return true;
+	}
+	if (name === 'openHubPage') {
+		const hubUrl = chrome.runtime.getURL('./app/templates/hub.html');
+		metrics.ping('intro_hub_click');
+		utils.openNewTab({ url: hubUrl, become_active: true });
+		return false;
 	}
 	if (name === 'promoModals.sawPremiumPromo') {
 		promoModals.recordPremiumPromoSighting();
