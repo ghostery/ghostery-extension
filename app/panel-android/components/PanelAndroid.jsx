@@ -23,8 +23,7 @@ import {
 	PauseButton,
 	CliqzFeature
 } from '../../panel/components/BuildingBlocks';
-import SiteTrackers from './content/SiteTrackers';
-import GlobalTrackers from './content/GlobalTrackers';
+import BlockingTab from './content/BlockingTab';
 
 import {
 	getPanelData, getSummaryData, getSettingsData, getBlockingData
@@ -411,7 +410,6 @@ class PanelAndroid extends React.Component {
 	render() {
 		const { blocking, settings } = this.state;
 		const { categories } = blocking;
-		console.log('bloink', this.state);
 
 		return (
 			<div>
@@ -429,7 +427,8 @@ class PanelAndroid extends React.Component {
 					</Tab>
 
 					<Tab tabLabel={t('android_tab_site_blocking')} linkClassName="Tab__label">
-						<SiteTrackers
+						<BlockingTab
+							type="site"
 							categories={categories}
 							siteProps={this.siteProps}
 							callGlobalAction={this.callGlobalAction}
@@ -437,7 +436,8 @@ class PanelAndroid extends React.Component {
 					</Tab>
 
 					<Tab tabLabel={t('android_tab_global_blocking')} linkClassName="Tab__label">
-						<GlobalTrackers
+						<BlockingTab
+							type="global"
 							categories={settings.categories}
 							siteProps={this.siteProps}
 							callGlobalAction={this.callGlobalAction}
