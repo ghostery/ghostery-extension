@@ -113,6 +113,8 @@
 }
 
 .BlockingTracker {
+	position: relative;
+
 	.BlockingTracker--noPointer {
 		cursor: text;
 	}
@@ -132,6 +134,64 @@
 		font-size: 14px;
 		font-style: italic;
 		font-weight: 400;
+	}
+
+	.BlockingSelectButton {
+		margin-right: 7px;
+	}
+
+	.BlockingSelectGroup {
+		position: absolute;
+		overflow: hidden;
+		right: 0px;
+		width: 0px;
+		margin-right: -10px;
+		text-align: center;
+		@include prefix('transition', 'width 300ms ease');
+
+		&.BlockingSelectGroup--open.BlockingSelectGroup--wide {
+			width: 180px;
+		}
+
+		&.BlockingSelectGroup--open:not(.BlockingSelectGroup--wide) {
+			width: 60px;
+		}
+
+		&.BlockingSelectGroup--disabled {
+			.BlockingSelect__block,
+			.BlockingSelect__restrict,
+			.BlockingSelect__trust {
+				background-color: #C6C6C6;
+			}
+		}
+
+		.BlockingSelect {
+			flex-basis: 0;
+			padding-top: 30px;
+			color: $white;
+			font-size: 11px;
+			background-repeat: no-repeat;
+			background-position: center 10px;
+		}
+
+		.BlockingSelect__block {
+			background-color: $button-block;
+			background-image: selectBlocked($white);
+
+			&.BlockingSelect--disabled {
+				background-color: #C6C6C6;
+			}
+		}
+
+		.BlockingSelect__restrict {
+			background-color: $button-restrict;
+			background-image: buildIconRestrict($white);
+		}
+
+		.BlockingSelect__trust {
+			background-color: $button-trust;
+			background-image: buildIconTrust($white);
+		}
 	}
 }
 
@@ -182,7 +242,7 @@
 	}
 
 	&.BlockingSelectButton__restricted {
-		background-color: $button-block;
+		background-color: $button-restrict;
 		background-image: buildIconRestrict($white);
 	}
 }

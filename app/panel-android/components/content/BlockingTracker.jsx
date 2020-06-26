@@ -20,7 +20,7 @@ class BlockingTracker extends React.Component {
 	get trackerSelectStatus() {
 		const { type, siteProps, tracker } = this.props;
 		const { isTrusted, isRestricted } = siteProps;
-		const { ss_allowed, ss_blocked, blocked } = tracker;
+		const { blocked, ss_allowed = false, ss_blocked = false } = tracker;
 
 		if (type === 'site-trackers') {
 			if (isTrusted) {
@@ -60,85 +60,10 @@ class BlockingTracker extends React.Component {
 
 	get selectBlockDisabled() {
 		const { tracker } = this.props;
-		const { ss_allowed, ss_blocked } = tracker;
+		const { ss_allowed = false, ss_blocked = false } = tracker;
 
 		return this.selectDisabled || ss_allowed || ss_blocked;
 	}
-
-	// clickButtonTrust = () => {
-	// 	const {
-	// 		tracker, categoryId, index, toggleMenu, callGlobalAction
-	// 	} = this.props;
-	// 	const ss_allowed = !tracker.ss_allowed;
-	//
-	// 	callGlobalAction({
-	// 		actionName: 'trustRestrictBlockSiteTracker',
-	// 		actionData: {
-	// 			app_id: tracker.id,
-	// 			cat_id: categoryId,
-	// 			trust: ss_allowed,
-	// 			restrict: false,
-	// 			block: tracker.blocked, // Keep blocking
-	// 		}
-	// 	});
-	// 	toggleMenu(index); // Hide menu
-	// }
-	//
-	// clickButtonRestrict = () => {
-	// 	const {
-	// 		tracker, categoryId, index, toggleMenu, callGlobalAction
-	// 	} = this.props;
-	// 	const ss_blocked = !tracker.ss_blocked;
-	// 	callGlobalAction({
-	// 		actionName: 'trustRestrictBlockSiteTracker',
-	// 		actionData: {
-	// 			app_id: tracker.id,
-	// 			cat_id: categoryId,
-	// 			restrict: ss_blocked,
-	// 			trust: false,
-	// 			block: tracker.blocked, // Keep blocking
-	// 		}
-	// 	});
-	// 	toggleMenu(index);
-	// }
-	//
-	// clickButtonBlock = (hideMenu = true) => {
-	// 	// onClick={(e) => { e.stopPropagation(); this.clickButtonBlock(false); }}
-	// 	const {
-	// 		tracker, type, categoryId, index, toggleMenu, callGlobalAction
-	// 	} = this.props;
-	// 	if (this.disabledStatus) {
-	// 		return;
-	// 	}
-	//
-	// 	const blocked = !tracker.blocked;
-	//
-	// 	if (type === 'site-trackers') {
-	// 		callGlobalAction({
-	// 			actionName: 'trustRestrictBlockSiteTracker',
-	// 			actionData: {
-	// 				app_id: tracker.id,
-	// 				cat_id: categoryId,
-	// 				block: blocked,
-	// 				trust: false,
-	// 				restrict: false,
-	// 			}
-	// 		});
-	// 	} else {
-	// 		callGlobalAction({
-	// 			actionName: 'blockUnblockGlobalTracker',
-	// 			actionData: {
-	// 				app_id: tracker.id,
-	// 				cat_id: categoryId,
-	// 				block: blocked,
-	// 			}
-	// 		});
-	// 	}
-	//
-	// 	if (hideMenu) {
-	// 		toggleMenu(index);
-	// 	}
-	// }
 
 	openTrackerInfoLink = (event) => {
 		event.stopPropagation();
@@ -146,6 +71,82 @@ class BlockingTracker extends React.Component {
 		const url = getUrlFromTrackerId(tracker.id);
 		const tab = window.open(url, '_blank');
 		tab.focus();
+	}
+
+	clickBlock = () => {
+		const {
+			type,
+			tracker,
+			categoryId,
+			callGlobalAction,
+		} = this.props;
+		const { id, blocked } = tracker;
+
+		if (this.selectBlockDisabled) {
+			return;
+		}
+
+		if (type === 'site-trackers') {
+			callGlobalAction({
+				actionName: 'trustRestrictBlockSiteTracker',
+				actionData: {
+					app_id: id,
+					cat_id: categoryId,
+					block: !blocked,
+					trust: false,
+					restrict: false,
+				}
+			});
+		} else if (type === 'global-trackers') {
+			callGlobalAction({
+				actionName: 'blockUnblockGlobalTracker',
+				actionData: {
+					app_id: id,
+					cat_id: categoryId,
+					block: !blocked,
+				}
+			});
+		}
+	}
+
+	clickRestrict = () => {
+		const { tracker, categoryId, callGlobalAction } = this.props;
+		const { id, blocked, ss_blocked = false } = tracker;
+
+		if (this.selectDisabled) {
+			return;
+		}
+
+		callGlobalAction({
+			actionName: 'trustRestrictBlockSiteTracker',
+			actionData: {
+				app_id: id,
+				cat_id: categoryId,
+				restrict: !ss_blocked,
+				trust: false,
+				block: blocked, // Keep blocking
+			}
+		});
+	}
+
+	clickTrust = () => {
+		const { tracker, categoryId, callGlobalAction } = this.props;
+		const { id, blocked, ss_allowed = false } = tracker;
+
+		if (this.selectDisabled) {
+			return;
+		}
+
+		callGlobalAction({
+			actionName: 'trustRestrictBlockSiteTracker',
+			actionData: {
+				app_id: id,
+				cat_id: categoryId,
+				restrict: false,
+				trust: !ss_allowed,
+				block: blocked, // Keep blocking
+			}
+		});
 	}
 
 	renderTrackerSelect() {
@@ -157,17 +158,45 @@ class BlockingTracker extends React.Component {
 		});
 
 		return (
-			<div className={trackerSelectClassNames} />
+			<div className={trackerSelectClassNames} onClick={this.clickTrackerSelect} />
+		);
+	}
+
+	renderBlockingSelectGroup() {
+		const { type, open, tracker } = this.props;
+		const { ss_allowed = false, ss_blocked = false, blocked } = tracker;
+		const selectGroupClassNames = ClassNames('BlockingSelectGroup full-height',
+			'flex-container flex-dir-row-reverse', {
+				'BlockingSelectGroup--open': open,
+				'BlockingSelectGroup--wide': type === 'site-trackers',
+				'BlockingSelectGroup--disabled': this.selectDisabled,
+			});
+		const selectBlockClassNames = ClassNames('BlockingSelect BlockingSelect__block',
+			'full-height flex-child-grow', {
+				'BlockingSelect--disabled': this.selectBlockDisabled,
+			});
+
+		return (
+			<div className={selectGroupClassNames}>
+				<div className={selectBlockClassNames} onClick={this.clickBlock}>
+					{blocked ? t('android_unblock') : t('android_block')}
+				</div>
+				{type === 'site-trackers' && (
+					<div className="BlockingSelect BlockingSelect__restrict full-height flex-child-grow" onClick={this.clickRestrict}>
+						{ss_blocked ? t('android_unrestrict') : t('android_restrict')}
+					</div>
+				)}
+				{type === 'site-trackers' && (
+					<div className="BlockingSelect BlockingSelect__trust full-height flex-child-grow" onClick={this.clickTrust}>
+						{ss_allowed ? t('android_untrust') : t('android_trust')}
+					</div>
+				)}
+			</div>
 		);
 	}
 
 	render() {
-		const {
-			index,
-			tracker,
-			open,
-			toggleTrackerSelectOpen,
-		} = this.props;
+		const { index, tracker, toggleTrackerSelectOpen } = this.props;
 		const { name } = tracker;
 
 		return (
@@ -177,43 +206,25 @@ class BlockingTracker extends React.Component {
 				</div>
 				<div className="BlockingTracker__name flex-child-grow">{name}</div>
 				{this.renderTrackerSelect()}
-				{open && (
-					<span>im open</span>
-				)}
+				{this.renderBlockingSelectGroup()}
 			</div>
 		);
-
-		// 		<div className={`tracker ${this.showMenu ? 'show-menu' : ''} ${this.trackerSelectStatus}`}>
-		// 			<button type="button" className="info" aria-label="Info" onClick={this.openTrackerLink} />
-		// 			<div onClick={this.toggleMenu} className="trackerName">
-		// 				<span>{tracker.name}</span>
-		// 				<span className="trackerSelect" />
-		// 			</div>
-		//
-		// 			<div className={`menu ${type}`}>
-		// 				<button type="button" className="trackerOption trust" onClick={this.clickButtonTrust}>
-		// 					{tracker.ss_allowed ? 'Untrust' : 'Trust'}
-		// 				</button>
-		// 				<button type="button" className="trackerOption restrict" onClick={this.clickButtonRestrict}>
-		// 					{tracker.ss_blocked ? 'Unrestrict' : 'Restrict'}
-		// 				</button>
-		// 				<button type="button" className={`trackerOption block ${this.disabledStatus}`} onClick={this.clickButtonBlock}>
-		// 					{tracker.blocked ? 'UnBlock' : 'Block'}
-		// 				</button>
-		// 			</div>
-		// 		</div>
 	}
 }
 
 BlockingTracker.propTypes = {
 	index: PropTypes.number.isRequired,
 	tracker: PropTypes.shape({
-		id: PropTypes.number.isRequired,
+		id: PropTypes.oneOfType([
+			PropTypes.string,
+			PropTypes.number,
+		]).isRequired,
 		name: PropTypes.string.isRequired,
-		ss_allowed: PropTypes.bool.isRequired,
-		ss_blocked: PropTypes.bool.isRequired,
+		ss_allowed: PropTypes.bool,
+		ss_blocked: PropTypes.bool,
 		blocked: PropTypes.bool.isRequired,
 	}).isRequired,
+	categoryId: PropTypes.string.isRequired,
 	type: PropTypes.oneOf([
 		'site-trackers',
 		'global-trackers',
@@ -225,7 +236,7 @@ BlockingTracker.propTypes = {
 		isRestricted: PropTypes.bool.isRequired,
 		isPaused: PropTypes.bool.isRequired,
 	}).isRequired,
-	// callGlobalAction: PropTypes.func.isRequired,
+	callGlobalAction: PropTypes.func.isRequired,
 };
 
 export default BlockingTracker;

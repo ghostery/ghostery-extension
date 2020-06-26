@@ -21,7 +21,21 @@ class BlockingCategories extends React.Component {
 
 		this.state = {
 			openCategoryIndex: -1,
+			blockingType: props.type,
 		};
+	}
+
+	static getDerivedStateFromProps(props, state) {
+		const { type } = props;
+		const { blockingType } = state;
+
+		if (type !== blockingType) {
+			return {
+				openCategoryIndex: -1,
+				blockingType: type,
+			};
+		}
+		return null;
 	}
 
 	getOpenStatus = (index) => {

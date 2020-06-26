@@ -54,7 +54,7 @@ class BlockingCategory extends React.Component {
 			}
 
 			if (trackers.some(tracker => tracker.ss_allowed || tracker.ss_blocked)) {
-				return 'mixed';
+				return 'ss_mixed';
 			}
 		}
 
@@ -68,31 +68,6 @@ class BlockingCategory extends React.Component {
 
 		return '';
 	}
-
-	// handleCategoryClicked = () => {
-	// 	const { id, type, callGlobalAction } = this.props;
-	// 	if (!this.blockingStatus) {
-	// 		const blockingType = type === 'site-trackers' ? 'site' : 'global';
-	// 		callGlobalAction({
-	// 			actionName: 'blockUnBlockAllTrackers',
-	// 			actionData: {
-	// 				block: true,
-	// 				type: blockingType,
-	// 				categoryId: id,
-	// 			}
-	// 		});
-	// 	} else if (this.blockingStatus === 'blocked') {
-	// 		const blockingType = type === 'site-trackers' ? 'site' : 'global';
-	// 		callGlobalAction({
-	// 			actionName: 'blockUnBlockAllTrackers',
-	// 			actionData: {
-	// 				block: false,
-	// 				type: blockingType,
-	// 				categoryId: id,
-	// 			}
-	// 		});
-	// 	}
-	// }
 
 	get numTrackersText() {
 		const { category } = this.props;
@@ -122,23 +97,46 @@ class BlockingCategory extends React.Component {
 		}
 	}
 
+	clickCategorySelect = (event) => {
+		event.stopPropagation();
+		const { category, type, callGlobalAction } = this.props;
+		const { id } = category;
+		const blockingType = type === 'site-trackers' ? 'site' : 'global';
+		const selectStatus = this.categorySelectStatus;
+
+		if (selectStatus === '' || selectStatus === 'mixed') {
+			callGlobalAction({
+				actionName: 'blockUnBlockAllTrackers',
+				actionData: {
+					block: true,
+					type: blockingType,
+					categoryId: id,
+				}
+			});
+		} else if (selectStatus === 'blocked') {
+			callGlobalAction({
+				actionName: 'blockUnBlockAllTrackers',
+				actionData: {
+					block: false,
+					type: blockingType,
+					categoryId: id,
+				}
+			});
+		}
+	}
+
 	renderCategorySelect() {
 		const categorySelect = this.categorySelectStatus;
 		const categorySelectClassNames = ClassNames('BlockingSelectButton', {
-			BlockingSelectButton__mixed: categorySelect === 'mixed',
+			BlockingSelectButton__mixed: categorySelect === 'mixed' || categorySelect === 'ss_mixed',
 			BlockingSelectButton__blocked: categorySelect === 'blocked',
 			BlockingSelectButton__trusted: categorySelect === 'trusted',
 			BlockingSelectButton__restricted: categorySelect === 'restricted',
 		});
 
-		function clickCategorySelect(event) {
-			event.stopPropagation();
-			// Do Something!!!
-		}
-
 		return (
 			<div className="BlockingCategory--noPointer">
-				<div className={categorySelectClassNames} onClick={clickCategorySelect} />
+				<div className={categorySelectClassNames} onClick={this.clickCategorySelect} />
 			</div>
 		);
 	}
@@ -165,6 +163,7 @@ class BlockingCategory extends React.Component {
 			callGlobalAction,
 		} = this.props;
 		const {
+			id,
 			name,
 			img_name,
 			num_total,
@@ -203,6 +202,7 @@ class BlockingCategory extends React.Component {
 									<BlockingTracker
 										index={trackerIndex}
 										tracker={tracker}
+										categoryId={id}
 										type={type}
 										toggleTrackerSelectOpen={this.toggleTrackerSelectOpen}
 										open={this.getTrackerOpenStatus(trackerIndex)}
@@ -228,9 +228,12 @@ BlockingCategory.propTypes = {
 		num_total: PropTypes.number.isRequired,
 		num_blocked: PropTypes.number.isRequired,
 		trackers: PropTypes.arrayOf(PropTypes.shape({
-			id: PropTypes.number.isRequired,
-			ss_allowed: PropTypes.bool.isRequired,
-			ss_blocked: PropTypes.bool.isRequired,
+			id: PropTypes.oneOfType([
+				PropTypes.string,
+				PropTypes.number,
+			]).isRequired,
+			ss_allowed: PropTypes.bool,
+			ss_blocked: PropTypes.bool,
 		})).isRequired,
 		img_name: PropTypes.string.isRequired,
 	}).isRequired,
