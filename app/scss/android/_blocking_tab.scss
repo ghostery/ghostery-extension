@@ -32,7 +32,7 @@
 }
 
 .BlockingCategory {
-	color: #4a4a4a;
+	color: $tundora;
 	font-weight: 500;
 
 
@@ -45,10 +45,9 @@
 	}
 
 	.BlockingCategory__details {
+		min-height: 88px; // ToDo: Check This
 		padding: 15px 12px;
 		cursor: pointer;
-
-		min-height: 88px;
 	}
 
 	.BlockingCategory__image {
@@ -68,7 +67,7 @@
 	.BlockingCategory__numBlocked {
 		text-transform: uppercase;
 		margin-left: 5px;
-		color: #E44258;
+		color: $button-block;
 	}
 
 	.BlockingCategory__buttons {
@@ -89,7 +88,7 @@
 	}
 
 	.BlockingCategory__listHeader {
-		color: #4A4A4A;
+		color: $tundora;
 		font-size: 12px;
 		font-weight: 500;
 		margin: 0 10px;

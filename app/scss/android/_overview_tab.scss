@@ -76,7 +76,7 @@
 		.sub-component.pause-button .button {
 			&.active:hover {
 				border-color: #0093bd;
-				background-color: #1dafed;
+				background-color: $cliqz-feature--blue;
 				box-shadow: inset 0px 1px 7px 2px #0093bd;
 			}
 			&:not(.active):hover { background-color: $white; }

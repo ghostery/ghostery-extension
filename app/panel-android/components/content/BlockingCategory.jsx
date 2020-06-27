@@ -36,7 +36,7 @@ class BlockingCategory extends React.Component {
 		const { type, siteProps, category } = this.props;
 		const { trackers, num_total, num_blocked } = category;
 
-		if (type === 'site-trackers') {
+		if (type === 'site') {
 			if (siteProps.isTrusted) {
 				return 'trusted';
 			}
@@ -101,7 +101,6 @@ class BlockingCategory extends React.Component {
 		event.stopPropagation();
 		const { category, type, callGlobalAction } = this.props;
 		const { id } = category;
-		const blockingType = type === 'site-trackers' ? 'site' : 'global';
 		const selectStatus = this.categorySelectStatus;
 
 		if (selectStatus === '' || selectStatus === 'mixed') {
@@ -109,8 +108,8 @@ class BlockingCategory extends React.Component {
 				actionName: 'blockUnBlockAllTrackers',
 				actionData: {
 					block: true,
-					type: blockingType,
 					categoryId: id,
+					type,
 				}
 			});
 		} else if (selectStatus === 'blocked') {
@@ -118,8 +117,8 @@ class BlockingCategory extends React.Component {
 				actionName: 'blockUnBlockAllTrackers',
 				actionData: {
 					block: false,
-					type: blockingType,
 					categoryId: id,
+					type,
 				}
 			});
 		}
@@ -240,8 +239,8 @@ BlockingCategory.propTypes = {
 	open: PropTypes.bool.isRequired,
 	toggleCategoryOpen: PropTypes.func.isRequired,
 	type: PropTypes.oneOf([
-		'site-trackers',
-		'global-trackers',
+		'site',
+		'global',
 	]).isRequired,
 	siteProps: PropTypes.shape({
 		isTrusted: PropTypes.bool.isRequired,

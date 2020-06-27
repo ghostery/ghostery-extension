@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -12,52 +12,5 @@
  */
 
 @media screen and (orientation: landscape) {
-	.tabs-wrapper {
-		width: 50%;
-		float: right;
-
-		ul.tabs-nav li.tab-item a.tab-link.custom-link {
-			font-size: 1.5vw;
-		}
-
-		.buttons-wrapper {
-			padding-top: 10px;
-		}
-	}
-
-	.fixed-menu {
-		width: 50%;
-
-		.menuItemOverview {
-			pointer-events: none;
-			background-color: $white;
-
-			.title {
-				background: none;
-			}
-
-			.description {
-				display: block;
-				margin-right: -45px;
-				padding-left: 20px;
-				color: #4A4A4A;
-			}
-		}
-
-		&.opened {
-			top: $tab-header-height;
-			overflow-y: auto;
-			overflow-x: hidden;
-		}
-	}
-
-	& > div > .chart-wrapper {
-		display: block;
-		border-right: 1px solid #eee;
-		padding-top: 0;
-
-		.trackers-chart {
-			margin: 5px 0;
-		}
-	}
+	//ToDo
 }

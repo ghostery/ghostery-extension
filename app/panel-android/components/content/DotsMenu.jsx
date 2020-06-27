@@ -51,7 +51,6 @@ class DotsMenu extends React.Component {
 			DotsMenu__open: open,
 		});
 
-
 		return (
 			<div className="DotsMenu">
 				<button type="button" className="DotsMenu__button" aria-label="Menu" onClick={this.clickDotsMenu} />

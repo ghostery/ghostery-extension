@@ -43,12 +43,6 @@ class BlockingCategories extends React.Component {
 		return index === openCategoryIndex;
 	}
 
-	getTrackersFromCategory = (categoryId) => {
-		const { categories } = this.props;
-		const category = categories[categories.findIndex(cat => cat.id === categoryId)];
-		return category.trackers;
-	}
-
 	toggleCategoryOpen = (index) => {
 		const { openCategoryIndex } = this.state;
 		if (openCategoryIndex === index) {
@@ -65,6 +59,7 @@ class BlockingCategories extends React.Component {
 			siteProps,
 			callGlobalAction,
 		} = this.props;
+
 		return (
 			<div className="BlockingCategories">
 				{
@@ -89,8 +84,8 @@ class BlockingCategories extends React.Component {
 BlockingCategories.propTypes = {
 	categories: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 	type: PropTypes.oneOf([
-		'site-trackers',
-		'global-trackers',
+		'site',
+		'global',
 	]).isRequired,
 	siteProps: PropTypes.shape({}).isRequired,
 	callGlobalAction: PropTypes.func.isRequired,

@@ -22,7 +22,7 @@ class BlockingTracker extends React.Component {
 		const { isTrusted, isRestricted } = siteProps;
 		const { blocked, ss_allowed = false, ss_blocked = false } = tracker;
 
-		if (type === 'site-trackers') {
+		if (type === 'site') {
 			if (isTrusted) {
 				return 'trusted';
 			}
@@ -51,7 +51,7 @@ class BlockingTracker extends React.Component {
 		const { type, siteProps } = this.props;
 		const { isTrusted, isRestricted, isPaused } = siteProps;
 
-		if (type === 'site-trackers') {
+		if (type === 'site') {
 			return isTrusted || isRestricted || isPaused;
 		}
 
@@ -86,7 +86,7 @@ class BlockingTracker extends React.Component {
 			return;
 		}
 
-		if (type === 'site-trackers') {
+		if (type === 'site') {
 			callGlobalAction({
 				actionName: 'trustRestrictBlockSiteTracker',
 				actionData: {
@@ -97,7 +97,7 @@ class BlockingTracker extends React.Component {
 					restrict: false,
 				}
 			});
-		} else if (type === 'global-trackers') {
+		} else if (type === 'global') {
 			callGlobalAction({
 				actionName: 'blockUnblockGlobalTracker',
 				actionData: {
@@ -168,7 +168,7 @@ class BlockingTracker extends React.Component {
 		const selectGroupClassNames = ClassNames('BlockingSelectGroup full-height',
 			'flex-container flex-dir-row-reverse', {
 				'BlockingSelectGroup--open': open,
-				'BlockingSelectGroup--wide': type === 'site-trackers',
+				'BlockingSelectGroup--wide': type === 'site',
 				'BlockingSelectGroup--disabled': this.selectDisabled,
 			});
 		const selectBlockClassNames = ClassNames('BlockingSelect BlockingSelect__block',
@@ -181,12 +181,12 @@ class BlockingTracker extends React.Component {
 				<div className={selectBlockClassNames} onClick={this.clickBlock}>
 					{blocked ? t('android_unblock') : t('android_block')}
 				</div>
-				{type === 'site-trackers' && (
+				{type === 'site' && (
 					<div className="BlockingSelect BlockingSelect__restrict full-height flex-child-grow" onClick={this.clickRestrict}>
 						{ss_blocked ? t('android_unrestrict') : t('android_restrict')}
 					</div>
 				)}
-				{type === 'site-trackers' && (
+				{type === 'site' && (
 					<div className="BlockingSelect BlockingSelect__trust full-height flex-child-grow" onClick={this.clickTrust}>
 						{ss_allowed ? t('android_untrust') : t('android_trust')}
 					</div>
@@ -226,8 +226,8 @@ BlockingTracker.propTypes = {
 	}).isRequired,
 	categoryId: PropTypes.string.isRequired,
 	type: PropTypes.oneOf([
-		'site-trackers',
-		'global-trackers',
+		'site',
+		'global',
 	]).isRequired,
 	toggleTrackerSelectOpen: PropTypes.func.isRequired,
 	open: PropTypes.bool.isRequired,

@@ -103,7 +103,7 @@ class BlockingTab extends React.Component {
 					<DotsMenu actions={this.actions} />
 				</div>
 				<BlockingCategories
-					type={`${type}-trackers`}
+					type={type}
 					categories={categories}
 					siteProps={siteProps}
 					callGlobalAction={callGlobalAction}
