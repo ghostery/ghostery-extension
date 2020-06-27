@@ -1,0 +1,36 @@
+/**
+ * Header Android Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+.HeaderAndroid {
+	padding: 0;
+	margin: 0;
+	height: $tab--nav-height;
+	background-color: $ghosty-blue;
+	background-image: url('/app/images/panel/header-logo-icon.svg');
+	background-position: center;
+	background-repeat: no-repeat;
+	cursor: pointer;
+
+	.HeaderAndroid__icon {
+		height: 30px;
+		width: 30px;
+		margin: 10px;
+		pointer-events: none;
+		cursor: text;
+
+		svg {
+			pointer-events: all;
+			cursor: pointer;
+		}
+	}
+}
