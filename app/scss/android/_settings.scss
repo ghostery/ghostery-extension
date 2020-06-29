@@ -53,6 +53,19 @@
 		left: 0;
 		width: 100%;
 		border-left: none;
+		background-color: #ffffff !important;
+
+		.s-trust-restrict-menu .s-pane-title {
+			border-left: 1px solid #CCCCCC !important;
+
+			&:last-of-type {
+				border-left: none !important;
+			}
+
+			&:not(.s-active-pane) {
+				background-color: #E5E5E5 !important;
+			}
+		}
 
 		.s-site, .s-site:hover {
 			background-color: $white;

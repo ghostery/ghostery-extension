@@ -80,7 +80,7 @@ class Account extends React.Component {
 				headerText = t('settings_opt_in');
 				break;
 			default:
-				headerText = t('panel_menu_settings');
+				headerText = '';
 		}
 
 		return (
@@ -97,23 +97,25 @@ class Account extends React.Component {
 
 	_renderSettingsHome() {
 		return (
-			<div>
-				<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-trust-restrict' }); }}>
-					{ t('settings_trust_and_restrict') }
-				</div>
-				<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-general' }); }}>
-					{ t('settings_general_settings') }
-				</div>
-				{!IS_CLIQZ && (
-					<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-adblocker' }); }}>
-						{ t('settings_adblocker') }
+			<div className="row">
+				<div className="column">
+					<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-trust-restrict' }); }}>
+						{ t('settings_trust_and_restrict') }
 					</div>
-				)}
-				<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-notifications' }); }}>
-					{ t('settings_notifications') }
-				</div>
-				<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-opt-in' }); }}>
-					{ t('settings_opt_in') }
+					<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-general' }); }}>
+						{ t('settings_general_settings') }
+					</div>
+					{!IS_CLIQZ && (
+						<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-adblocker' }); }}>
+							{ t('settings_adblocker') }
+						</div>
+					)}
+					<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-notifications' }); }}>
+						{ t('settings_notifications') }
+					</div>
+					<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-opt-in' }); }}>
+						{ t('settings_opt_in') }
+					</div>
 				</div>
 			</div>
 		);
@@ -195,21 +197,17 @@ class Account extends React.Component {
 }
 
 Account.propTypes = {
-	actions: PropTypes.shape({}),
+	actions: PropTypes.shape({
+		updateSitePolicy: PropTypes.func.isRequired,
+		updateDatabase: PropTypes.func.isRequired,
+		selectItem: PropTypes.func.isRequired,
+	}).isRequired,
 	summary: PropTypes.shape({
 		site_whitelist: PropTypes.arrayOf(PropTypes.string).isRequired,
 		site_blacklist: PropTypes.arrayOf(PropTypes.string).isRequired,
 	}).isRequired,
 	settings: PropTypes.shape({}).isRequired,
 	clickHome: PropTypes.func.isRequired,
-};
-
-Account.defaultProps = {
-	actions: {
-		updateSitePolicy: () => { console.log('updateSitePolicy'); },
-		updateDatabase: () => { console.log('updateDatabase'); },
-		selectItem: () => { console.log('selectItem'); },
-	},
 };
 
 export default Account;

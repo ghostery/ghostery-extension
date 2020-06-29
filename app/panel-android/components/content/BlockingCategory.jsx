@@ -250,7 +250,4 @@ BlockingCategory.propTypes = {
 	callGlobalAction: PropTypes.func.isRequired,
 };
 
-BlockingCategory.defaultProps = {
-};
-
 export default BlockingCategory;

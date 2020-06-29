@@ -1,0 +1,323 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/panel-android/components/content/BlockingTracker.jsx Snapshot tests with react-test-renderer BlockingTracker component when site Paused 1`] = `
+<div
+  className="BlockingTracker flex-container align-middle full-height"
+  onClick={[Function]}
+>
+  <div
+    className="BlockingTracker--noPointer"
+  >
+    <div
+      className="BlockingTracker__info"
+      onClick={[Function]}
+    />
+  </div>
+  <div
+    className="BlockingTracker__name flex-child-grow"
+  >
+    Tracker 1
+  </div>
+  <div
+    className="BlockingSelectButton"
+  />
+  <div
+    className="BlockingSelectGroup full-height flex-container flex-dir-row-reverse BlockingSelectGroup--wide BlockingSelectGroup--disabled"
+  >
+    <div
+      className="BlockingSelect BlockingSelect__block full-height flex-child-grow BlockingSelect--disabled"
+      onClick={[Function]}
+    >
+      android_block
+    </div>
+    <div
+      className="BlockingSelect BlockingSelect__restrict full-height flex-child-grow"
+      onClick={[Function]}
+    >
+      android_restrict
+    </div>
+    <div
+      className="BlockingSelect BlockingSelect__trust full-height flex-child-grow"
+      onClick={[Function]}
+    >
+      android_trust
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/panel-android/components/content/BlockingTracker.jsx Snapshot tests with react-test-renderer BlockingTracker component when site Restricted 1`] = `
+<div
+  className="BlockingTracker flex-container align-middle full-height"
+  onClick={[Function]}
+>
+  <div
+    className="BlockingTracker--noPointer"
+  >
+    <div
+      className="BlockingTracker__info"
+      onClick={[Function]}
+    />
+  </div>
+  <div
+    className="BlockingTracker__name flex-child-grow"
+  >
+    Tracker 1
+  </div>
+  <div
+    className="BlockingSelectButton BlockingSelectButton__restricted"
+  />
+  <div
+    className="BlockingSelectGroup full-height flex-container flex-dir-row-reverse BlockingSelectGroup--wide BlockingSelectGroup--disabled"
+  >
+    <div
+      className="BlockingSelect BlockingSelect__block full-height flex-child-grow BlockingSelect--disabled"
+      onClick={[Function]}
+    >
+      android_block
+    </div>
+    <div
+      className="BlockingSelect BlockingSelect__restrict full-height flex-child-grow"
+      onClick={[Function]}
+    >
+      android_restrict
+    </div>
+    <div
+      className="BlockingSelect BlockingSelect__trust full-height flex-child-grow"
+      onClick={[Function]}
+    >
+      android_trust
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/panel-android/components/content/BlockingTracker.jsx Snapshot tests with react-test-renderer BlockingTracker component when site Trusted 1`] = `
+<div
+  className="BlockingTracker flex-container align-middle full-height"
+  onClick={[Function]}
+>
+  <div
+    className="BlockingTracker--noPointer"
+  >
+    <div
+      className="BlockingTracker__info"
+      onClick={[Function]}
+    />
+  </div>
+  <div
+    className="BlockingTracker__name flex-child-grow"
+  >
+    Tracker 1
+  </div>
+  <div
+    className="BlockingSelectButton BlockingSelectButton__trusted"
+  />
+  <div
+    className="BlockingSelectGroup full-height flex-container flex-dir-row-reverse BlockingSelectGroup--wide BlockingSelectGroup--disabled"
+  >
+    <div
+      className="BlockingSelect BlockingSelect__block full-height flex-child-grow BlockingSelect--disabled"
+      onClick={[Function]}
+    >
+      android_block
+    </div>
+    <div
+      className="BlockingSelect BlockingSelect__restrict full-height flex-child-grow"
+      onClick={[Function]}
+    >
+      android_restrict
+    </div>
+    <div
+      className="BlockingSelect BlockingSelect__trust full-height flex-child-grow"
+      onClick={[Function]}
+    >
+      android_trust
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/panel-android/components/content/BlockingTracker.jsx Snapshot tests with react-test-renderer BlockingTracker component when tracker allowed 1`] = `
+<div
+  className="BlockingTracker flex-container align-middle full-height"
+  onClick={[Function]}
+>
+  <div
+    className="BlockingTracker--noPointer"
+  >
+    <div
+      className="BlockingTracker__info"
+      onClick={[Function]}
+    />
+  </div>
+  <div
+    className="BlockingTracker__name flex-child-grow"
+  >
+    Tracker 1
+  </div>
+  <div
+    className="BlockingSelectButton BlockingSelectButton__trusted"
+  />
+  <div
+    className="BlockingSelectGroup full-height flex-container flex-dir-row-reverse BlockingSelectGroup--wide"
+  >
+    <div
+      className="BlockingSelect BlockingSelect__block full-height flex-child-grow BlockingSelect--disabled"
+      onClick={[Function]}
+    >
+      android_block
+    </div>
+    <div
+      className="BlockingSelect BlockingSelect__restrict full-height flex-child-grow"
+      onClick={[Function]}
+    >
+      android_restrict
+    </div>
+    <div
+      className="BlockingSelect BlockingSelect__trust full-height flex-child-grow"
+      onClick={[Function]}
+    >
+      android_untrust
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/panel-android/components/content/BlockingTracker.jsx Snapshot tests with react-test-renderer BlockingTracker component when tracker blocked 1`] = `
+<div
+  className="BlockingTracker flex-container align-middle full-height"
+  onClick={[Function]}
+>
+  <div
+    className="BlockingTracker--noPointer"
+  >
+    <div
+      className="BlockingTracker__info"
+      onClick={[Function]}
+    />
+  </div>
+  <div
+    className="BlockingTracker__name flex-child-grow"
+  >
+    Tracker 1
+  </div>
+  <div
+    className="BlockingSelectButton BlockingSelectButton__blocked"
+  />
+  <div
+    className="BlockingSelectGroup full-height flex-container flex-dir-row-reverse BlockingSelectGroup--wide"
+  >
+    <div
+      className="BlockingSelect BlockingSelect__block full-height flex-child-grow"
+      onClick={[Function]}
+    >
+      android_unblock
+    </div>
+    <div
+      className="BlockingSelect BlockingSelect__restrict full-height flex-child-grow"
+      onClick={[Function]}
+    >
+      android_restrict
+    </div>
+    <div
+      className="BlockingSelect BlockingSelect__trust full-height flex-child-grow"
+      onClick={[Function]}
+    >
+      android_trust
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/panel-android/components/content/BlockingTracker.jsx Snapshot tests with react-test-renderer BlockingTracker component when tracker restricted 1`] = `
+<div
+  className="BlockingTracker flex-container align-middle full-height"
+  onClick={[Function]}
+>
+  <div
+    className="BlockingTracker--noPointer"
+  >
+    <div
+      className="BlockingTracker__info"
+      onClick={[Function]}
+    />
+  </div>
+  <div
+    className="BlockingTracker__name flex-child-grow"
+  >
+    Tracker 1
+  </div>
+  <div
+    className="BlockingSelectButton BlockingSelectButton__restricted"
+  />
+  <div
+    className="BlockingSelectGroup full-height flex-container flex-dir-row-reverse BlockingSelectGroup--wide"
+  >
+    <div
+      className="BlockingSelect BlockingSelect__block full-height flex-child-grow BlockingSelect--disabled"
+      onClick={[Function]}
+    >
+      android_block
+    </div>
+    <div
+      className="BlockingSelect BlockingSelect__restrict full-height flex-child-grow"
+      onClick={[Function]}
+    >
+      android_unrestrict
+    </div>
+    <div
+      className="BlockingSelect BlockingSelect__trust full-height flex-child-grow"
+      onClick={[Function]}
+    >
+      android_trust
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/panel-android/components/content/BlockingTracker.jsx Snapshot tests with react-test-renderer BlockingTracker component with falsy props 1`] = `
+<div
+  className="BlockingTracker flex-container align-middle full-height"
+  onClick={[Function]}
+>
+  <div
+    className="BlockingTracker--noPointer"
+  >
+    <div
+      className="BlockingTracker__info"
+      onClick={[Function]}
+    />
+  </div>
+  <div
+    className="BlockingTracker__name flex-child-grow"
+  >
+    Tracker 1
+  </div>
+  <div
+    className="BlockingSelectButton"
+  />
+  <div
+    className="BlockingSelectGroup full-height flex-container flex-dir-row-reverse BlockingSelectGroup--wide"
+  >
+    <div
+      className="BlockingSelect BlockingSelect__block full-height flex-child-grow"
+      onClick={[Function]}
+    >
+      android_block
+    </div>
+    <div
+      className="BlockingSelect BlockingSelect__restrict full-height flex-child-grow"
+      onClick={[Function]}
+    >
+      android_restrict
+    </div>
+    <div
+      className="BlockingSelect BlockingSelect__trust full-height flex-child-grow"
+      onClick={[Function]}
+    >
+      android_trust
+    </div>
+  </div>
+</div>
+`;

@@ -16,25 +16,29 @@ exports[`app/panel/components/Settings/TrustAndRestrict Snapshot test with react
     </div>
   </div>
   <div
-    className="s-trust-restrict-menu"
+    className="row"
   >
     <div
-      className="s-active-pane s-pane-title"
-      id="showTrustedSites"
-      onClick={[Function]}
+      className="s-trust-restrict-menu"
     >
-      <span>
-        settings_trusted_sites
-      </span>
-    </div>
-    <div
-      className="s-pane-title-next"
-      id="showRestrictedSites"
-      onClick={[Function]}
-    >
-      <span>
-        settings_restricted_sites
-      </span>
+      <div
+        className="s-active-pane s-pane-title"
+        id="showTrustedSites"
+        onClick={[Function]}
+      >
+        <span>
+          settings_trusted_sites
+        </span>
+      </div>
+      <div
+        className="s-pane-title-next"
+        id="showRestrictedSites"
+        onClick={[Function]}
+      >
+        <span>
+          settings_restricted_sites
+        </span>
+      </div>
     </div>
   </div>
   <div

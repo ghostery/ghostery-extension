@@ -1,5 +1,5 @@
 /**
- * BlockingTracker Component
+ * Blocking Tracker Component
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/

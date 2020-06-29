@@ -1,0 +1,243 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/panel-android/components/content/BlockingCategories.jsx Snapshot tests with react-test-renderer BlockingCategories component as global 1`] = `
+<div
+  className="BlockingCategories"
+>
+  <div
+    className="BlockingCategory"
+  >
+    <div
+      className="BlockingCategory__details flex-container"
+      onClick={[Function]}
+    >
+      <img
+        className="BlockingCategory__image"
+        src="/app/images/panel-android/categories/category-1-image-url.svg"
+      />
+      <div
+        className="flex-child-grow"
+      >
+        <h2
+          className="BlockingCategory__name"
+        >
+          Category-1
+        </h2>
+        <div>
+          <span
+            className="BlockingCategory__numTrackers"
+          >
+            1 blocking_category_tracker
+          </span>
+          <span
+            className="BlockingCategory__numBlocked"
+          >
+            1 blocking_category_blocked
+          </span>
+        </div>
+      </div>
+      <div
+        className="BlockingCategory__buttons flex-container flex-dir-column align-justify align-middle"
+      >
+        <div
+          className="BlockingCategory--noPointer"
+        >
+          <div
+            className="BlockingSelectButton BlockingSelectButton__blocked"
+            onClick={[Function]}
+          />
+        </div>
+        <div
+          className="BlockingCategory__toggle"
+        />
+      </div>
+    </div>
+    <div
+      className="BlockingCategory__list"
+      style={
+        Object {
+          "height": 0,
+        }
+      }
+    />
+  </div>
+  <div
+    className="BlockingCategory"
+  >
+    <div
+      className="BlockingCategory__details flex-container"
+      onClick={[Function]}
+    >
+      <img
+        className="BlockingCategory__image"
+        src="/app/images/panel-android/categories/category-2-image-url.svg"
+      />
+      <div
+        className="flex-child-grow"
+      >
+        <h2
+          className="BlockingCategory__name"
+        >
+          Category-2
+        </h2>
+        <div>
+          <span
+            className="BlockingCategory__numTrackers"
+          >
+            5 blocking_category_trackers
+          </span>
+          <span
+            className="BlockingCategory__numBlocked"
+          >
+            3 blocking_category_blocked
+          </span>
+        </div>
+      </div>
+      <div
+        className="BlockingCategory__buttons flex-container flex-dir-column align-justify align-middle"
+      >
+        <div
+          className="BlockingCategory--noPointer"
+        >
+          <div
+            className="BlockingSelectButton BlockingSelectButton__mixed"
+            onClick={[Function]}
+          />
+        </div>
+        <div
+          className="BlockingCategory__toggle"
+        />
+      </div>
+    </div>
+    <div
+      className="BlockingCategory__list"
+      style={
+        Object {
+          "height": 0,
+        }
+      }
+    />
+  </div>
+</div>
+`;
+
+exports[`app/panel-android/components/content/BlockingCategories.jsx Snapshot tests with react-test-renderer BlockingCategories component as site 1`] = `
+<div
+  className="BlockingCategories"
+>
+  <div
+    className="BlockingCategory"
+  >
+    <div
+      className="BlockingCategory__details flex-container"
+      onClick={[Function]}
+    >
+      <img
+        className="BlockingCategory__image"
+        src="/app/images/panel-android/categories/category-1-image-url.svg"
+      />
+      <div
+        className="flex-child-grow"
+      >
+        <h2
+          className="BlockingCategory__name"
+        >
+          Category-1
+        </h2>
+        <div>
+          <span
+            className="BlockingCategory__numTrackers"
+          >
+            1 blocking_category_tracker
+          </span>
+          <span
+            className="BlockingCategory__numBlocked"
+          >
+            1 blocking_category_blocked
+          </span>
+        </div>
+      </div>
+      <div
+        className="BlockingCategory__buttons flex-container flex-dir-column align-justify align-middle"
+      >
+        <div
+          className="BlockingCategory--noPointer"
+        >
+          <div
+            className="BlockingSelectButton BlockingSelectButton__blocked"
+            onClick={[Function]}
+          />
+        </div>
+        <div
+          className="BlockingCategory__toggle"
+        />
+      </div>
+    </div>
+    <div
+      className="BlockingCategory__list"
+      style={
+        Object {
+          "height": 0,
+        }
+      }
+    />
+  </div>
+  <div
+    className="BlockingCategory"
+  >
+    <div
+      className="BlockingCategory__details flex-container"
+      onClick={[Function]}
+    >
+      <img
+        className="BlockingCategory__image"
+        src="/app/images/panel-android/categories/category-2-image-url.svg"
+      />
+      <div
+        className="flex-child-grow"
+      >
+        <h2
+          className="BlockingCategory__name"
+        >
+          Category-2
+        </h2>
+        <div>
+          <span
+            className="BlockingCategory__numTrackers"
+          >
+            5 blocking_category_trackers
+          </span>
+          <span
+            className="BlockingCategory__numBlocked"
+          >
+            3 blocking_category_blocked
+          </span>
+        </div>
+      </div>
+      <div
+        className="BlockingCategory__buttons flex-container flex-dir-column align-justify align-middle"
+      >
+        <div
+          className="BlockingCategory--noPointer"
+        >
+          <div
+            className="BlockingSelectButton BlockingSelectButton__mixed"
+            onClick={[Function]}
+          />
+        </div>
+        <div
+          className="BlockingCategory__toggle"
+        />
+      </div>
+    </div>
+    <div
+      className="BlockingCategory__list"
+      style={
+        Object {
+          "height": 0,
+        }
+      }
+    />
+  </div>
+</div>
+`;

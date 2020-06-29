@@ -13,6 +13,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ReactSVG } from 'react-svg';
 import ClassNames from 'classnames';
 
 class Account extends React.Component {
@@ -22,6 +23,37 @@ class Account extends React.Component {
 		this.state = {
 			view: 'login',
 		};
+	}
+
+	_renderAccountHeader() {
+		const { clickHome } = this.props;
+		const { view } = this.state;
+
+		let headerText;
+		switch (view) {
+			case 'login':
+				headerText = t('sign_in');
+				break;
+			case 'create-account':
+				headerText = t('create_account');
+				break;
+			case 'forgot-password':
+				headerText = t('forgot_password');
+				break;
+			default:
+				headerText = '';
+		}
+
+		return (
+			<div className="AccountHeader">
+				<ReactSVG
+					className="AccountHeader__icon"
+					src="/app/images/panel/header-back-arrow.svg"
+					onClick={clickHome}
+				/>
+				<span className="AccountHeader__text">{headerText}</span>
+			</div>
+		);
 	}
 
 	_renderLogIn() {
@@ -173,6 +205,7 @@ class Account extends React.Component {
 
 		return (
 			<div className="Account">
+				{this._renderAccountHeader()}
 				{view === 'login' && this._renderLogIn()}
 				{view === 'create-account' && this._renderCreateAccount()}
 				{view === 'forgot-password' && this._renderForgotPassword()}

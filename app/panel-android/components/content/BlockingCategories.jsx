@@ -1,5 +1,5 @@
 /**
- * Blocking Category Component
+ * Blocking Categories Component
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/

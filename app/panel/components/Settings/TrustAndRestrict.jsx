@@ -192,12 +192,14 @@ class TrustAndRestrict extends React.Component {
 						<h3>{ t('settings_trusted_restricted_sites') }</h3>
 					</div>
 				</div>
-				<div className="s-trust-restrict-menu">
-					<div className={`${menu.showTrustedSites ? 's-active-pane ' : ''}s-pane-title`} id="showTrustedSites" onClick={this.setActivePane}>
-						<span>{t('settings_trusted_sites')}</span>
-					</div>
-					<div className={`${menu.showRestrictedSites ? 's-active-pane ' : ''}s-pane-title-next`} id="showRestrictedSites" onClick={this.setActivePane}>
-						<span>{t('settings_restricted_sites')}</span>
+				<div className="row">
+					<div className="s-trust-restrict-menu">
+						<div className={`${menu.showTrustedSites ? 's-active-pane ' : ''}s-pane-title`} id="showTrustedSites" onClick={this.setActivePane}>
+							<span>{t('settings_trusted_sites')}</span>
+						</div>
+						<div className={`${menu.showRestrictedSites ? 's-active-pane ' : ''}s-pane-title-next`} id="showRestrictedSites" onClick={this.setActivePane}>
+							<span>{t('settings_restricted_sites')}</span>
+						</div>
 					</div>
 				</div>
 				<div className={`${menu.showTrustedSites ? '' : 's-hide '}s-sites-pane`}>
