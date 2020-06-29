@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 /**
  * @class Implement Notification subview as a React component.
  * The view opens from the left-side menu of the main
@@ -73,5 +74,18 @@ const Notifications = ({ settingsData, toggleCheckbox }) => (
 		</div>
 	</div>
 );
+
+Notifications.propTypes = {
+	toggleCheckbox: PropTypes.func.isRequired,
+	settingsData: PropTypes.shape({
+		show_cmp: PropTypes.bool.isRequired,
+		notify_upgrade_updates: PropTypes.bool.isRequired,
+		notify_promotions: PropTypes.bool.isRequired,
+		notify_library_updates: PropTypes.bool.isRequired,
+		reload_banner_status: PropTypes.bool,
+		trackers_banner_status: PropTypes.bool,
+		show_badge: PropTypes.bool.isRequired,
+	}).isRequired,
+};
 
 export default Notifications;

@@ -18,6 +18,150 @@
 	}
 }
 
+.s-search-box {
+	position: relative;
+	width: auto;
+	padding: 0;
+	background-color: $whisper;
+	.s-search-icon {
+		display: inline-block;
+		position: absolute;
+		width: 14.5px;
+		height: 14.5px;
+		top: 7px;
+		left: 7px;
+		&::before {
+			content: url('../../app/images/panel/search.svg');
+		}
+	}
+	input {
+		margin: 0;
+		padding: 0;
+		font-family: $body-font-family;
+		font-style: normal;
+		font-weight: normal;
+		color: #333333;
+		font-size: 11px;
+		line-height: 15px;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		padding-left: 28px;
+		height: 29px;
+		border: 1px solid #E7ECEE;
+		border-radius: 3px;
+	}
+}
+
+%pointer {
+	cursor: pointer;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	&.disabled {
+		cursor: not-allowed;
+	}
+}
+
+@keyframes g-tooltip-animation {
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
+
+%g-tooltip-animation {
+	animation-name: g-tooltip-animation;
+	animation-duration: 0.2s;
+}
+
+%g-tooltip-body {
+	@extend %g-tooltip-animation;
+	pointer-events:none;
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+	font-size: 12px;
+	font-weight: 400;
+	-webkit-font-smoothing: antialiased;
+	text-align: center;
+	white-space: nowrap;
+	background: #333;
+	background: rgba(0,0,0,.8);
+	border-radius: 1px;
+	color: #fff;
+	padding: 3px 5px;
+	position: absolute;
+	z-index: 10;
+	font-size: 12px;
+	-webkit-box-shadow: 0px 2px 2px -1px rgba(#020202, 0.75);
+	-moz-box-shadow: 0px 2px 2px -1px rgba(#020202, 0.75);
+	box-shadow: 0px 2px 2px -1px rgba(#020202, 0.75);
+}
+
+%g-tip-body {
+	@extend %g-tooltip-animation;
+	border-style: solid;
+	border-color: #333 transparent;
+	content: "";
+	position: absolute;
+	z-index: 11;
+}
+
+%g-tooltip {
+	display: inline;
+	position: relative;
+
+	&:hover:before {
+		@extend %g-tooltip-body;
+		content: attr(data-g-tooltip);
+	}
+	&:hover:after {
+		@extend %g-tip-body;
+	}
+}
+
+%g-tooltip-up-left{
+	@extend %g-tooltip;
+	&:hover:before {
+		right: -15px;
+		bottom: 26px;
+	}
+	&:hover:after {
+		border-width: 6px 6px 0 6px;
+		left: 20%;
+		bottom: 20px;
+	}
+}
+
+%g-tooltip-down-left {
+	@extend %g-tooltip;
+	&:hover:before {
+		@extend %g-tooltip:hover:before;
+		right: -100%;
+		top: 20px;
+	}
+	&:hover:after {
+		@extend %g-tooltip:hover:after;
+		border-width: 0 6px 6px 6px;
+		left: 20%;
+		top: 14px;
+	}
+}
+
+%g-tooltip-down-right {
+	@extend %g-tooltip;
+	&:hover:before {
+		@extend %g-tooltip:hover:before;
+		left: -100%;
+		top: 20px;
+	}
+	&:hover:after {
+		@extend %g-tooltip:hover:after;
+		border-width: 0 6px 6px 6px;
+		left: 20%;
+		top: 14px;
+	}
+}
+
 // Function helper with color variables
 @function url-friendly-colour($colour) {
 	@return '%23' + str-slice('#{$colour}', 2, -1);

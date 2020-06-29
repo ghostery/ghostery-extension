@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import Sites from './Sites';
 /**
  * @class Implement Trust and Restrict subview presenting the lists
@@ -233,5 +234,14 @@ class TrustAndRestrict extends React.Component {
 		);
 	}
 }
+
+TrustAndRestrict.propTypes = {
+	actions: PropTypes.shape({
+		updateSitePolicy: PropTypes.func.isRequired,
+	}).isRequired,
+	site_whitelist: PropTypes.arrayOf(PropTypes.string).isRequired,
+	site_blacklist: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
 
 export default TrustAndRestrict;

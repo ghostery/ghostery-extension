@@ -20,18 +20,21 @@
 @import './partials/_svgs';
 
 // Android Specific Component Styles
-@import './android/_header_android';
+@import './android/_account';
+@import './android/_settings';
 @import './android/_tabs';
 @import './android/_overview_tab';
 @import './android/_blocking_tab';
 @import './android/_dots_menu';
 
 // Panel Shared Component Styles
+@import './partials/_settings';
+@import './partials/_radio_button';
 @import './partials/_not_scanned';
 @import './partials/_donut_graph';
 @import './partials/_ghostery_feature';
 @import './partials/_pause_button';
 @import './partials/_cliqz_feature';
 
-// Helper Classes
-.full-height { height: 100%; }
+// Import shared helpers
+@import 'shared_helper_classes';

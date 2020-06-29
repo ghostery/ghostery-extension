@@ -15,6 +15,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const OverviewTab = ({
+	navigationLinks,
 	notScanned,
 	donutGraph,
 	pageHost,
@@ -24,6 +25,7 @@ const OverviewTab = ({
 	cliqzFeatures,
 }) => (
 	<div className="OverviewTab">
+		{navigationLinks}
 
 		{!!notScanned && (
 			<div className="OverviewTab__NotScannedContainer">
@@ -57,6 +59,7 @@ const OverviewTab = ({
 );
 
 OverviewTab.propTypes = {
+	navigationLinks: PropTypes.node.isRequired,
 	notScanned: PropTypes.oneOfType([
 		PropTypes.bool,
 		PropTypes.node,

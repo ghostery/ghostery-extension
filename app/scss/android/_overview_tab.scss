@@ -15,6 +15,21 @@
 	padding-bottom: 35px;
 	text-align: center;
 
+	.OverviewTab__NavigationLinks {
+		position: absolute;
+		height: 0;
+
+		.OverviewTab__NavigationLink {
+			cursor: pointer;
+			top: 0;
+			margin: 10px;
+		}
+	}
+
+	.OverviewTab__NotScannedContainer {
+		margin-top: 26px;
+	}
+
 	.OverviewTab__DonutGraphContainer {
 		margin: 26px auto;
 		height: 120px;
@@ -88,7 +103,7 @@
 	}
 
 	.OverviewTab__CliqzFeaturesContainer {
-		margin: 6px 0;
+		margin: 12px 0;
 
 		.OverviewTab__CliqzFeature {
 			width: 55px;

@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import globals from '../../../../src/classes/Globals';
 
 const { IS_CLIQZ } = globals;
@@ -72,5 +73,14 @@ const OptIn = ({ settingsData, toggleCheckbox }) => (
 		</div>
 	</div>
 );
+
+OptIn.propTypes = {
+	toggleCheckbox: PropTypes.func.isRequired,
+	settingsData: PropTypes.shape({
+		enable_metrics: PropTypes.bool.isRequired,
+		enable_human_web: PropTypes.bool.isRequired,
+		enable_offers: PropTypes.bool.isRequired,
+	}).isRequired,
+};
 
 export default OptIn;

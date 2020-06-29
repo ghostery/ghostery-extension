@@ -15,6 +15,8 @@ import React from 'react';
 import ClassNames from 'classnames';
 import Tabs from './content/Tabs';
 import Tab from './content/Tab';
+// import Account from './content/Account';
+import Settings from './content/Settings';
 import OverviewTab from './content/OverviewTab';
 import {
 	NotScanned,
@@ -36,6 +38,8 @@ const {
 	IS_CLIQZ,
 	WHITELISTED, BLACKLISTED
 } = globals;
+
+const Account = () => (<div>Account</div>);
 
 class PanelAndroid extends React.Component {
 	constructor(props) {
@@ -265,11 +269,11 @@ class PanelAndroid extends React.Component {
 		});
 	}
 
-	_renderHeader() {
+	_renderNavigationLinks() {
 		const accountIcon = (
 			<svg width="30" height="30" viewBox="3 2 26 16">
 				<g fill="none" fillRule="nonzero">
-					<g fill="#ffffff" stroke="#ffffff" strokeWidth=".5">
+					<g fill="#a4a4a4" stroke="#a4a4a4" strokeWidth=".5">
 						<path d="M16 5.519a2.788 2.788 0 0 1 2.772 2.772A2.788 2.788 0 0 1 16 11.063a2.788 2.788 0 0 1-2.772-2.772A2.788 2.788 0 0 1 16 5.52zm0 .911c-1.025 0-1.86.836-1.86 1.861s.835 1.86 1.86 1.86c1.025 0 1.86-.835 1.86-1.86 0-1.025-.835-1.86-1.86-1.86z" />
 						<path d="M16 1c4.975 0 9 4.025 9 9s-4.025 9-9 9-9-4.025-9-9 4.025-9 9-9zm0 10.367c2.734 0 5.013 2.013 5.43 4.595A8.035 8.035 0 0 0 24.09 10c0-4.481-3.646-8.089-8.089-8.089A8.071 8.071 0 0 0 7.911 10a8.141 8.141 0 0 0 2.62 5.962c.456-2.582 2.735-4.595 5.469-4.595zm4.595 5.279A4.593 4.593 0 0 0 16 12.278c-2.468 0-4.481 1.937-4.633 4.368A8.167 8.167 0 0 0 16 18.089a7.957 7.957 0 0 0 4.595-1.443z" />
 					</g>
@@ -279,18 +283,18 @@ class PanelAndroid extends React.Component {
 
 		const settingsIcon = (
 			<svg width="30" height="30" viewBox="-3 0 26 16">
-				<g fill="#ffffff" fillRule="evenodd">
+				<g fill="#a4a4a4" fillRule="evenodd">
 					<path d="M12.135 12.65c0-.067-.024-.135-.072-.203-.385-.455-.695-.845-.93-1.17.146-.28.256-.537.33-.775l1.6-.244c.062-.007.117-.043.165-.107s.072-.13.072-.198V8.068c0-.074-.024-.14-.072-.198-.048-.058-.107-.094-.175-.107l-1.568-.234c-.076-.232-.193-.51-.35-.837.102-.15.257-.353.463-.61.207-.26.35-.442.434-.55.048-.068.072-.133.072-.194 0-.184-.495-.728-1.485-1.63-.07-.055-.142-.082-.218-.082-.082 0-.15.024-.206.07l-1.217.908c-.283-.143-.54-.248-.775-.316l-.237-1.558c-.006-.068-.04-.128-.103-.178-.062-.05-.13-.077-.206-.077H5.74c-.157 0-.26.082-.31.245-.08.312-.16.835-.236 1.568-.295.095-.56.204-.794.326L3.214 3.7c-.07-.048-.14-.072-.216-.072-.13 0-.403.2-.815.6-.413.402-.695.704-.846.907-.048.055-.072.123-.072.204 0 .06.024.128.072.203.385.455.694.845.928 1.17-.144.28-.254.537-.33.775l-1.598.244c-.062.007-.117.042-.165.107-.048.064-.073.13-.073.197v1.884c0 .076.024.143.072.2.048.058.106.09.175.097l1.568.244c.082.26.203.538.36.836-.11.15-.27.357-.484.622-.212.264-.353.445-.422.54-.048.067-.072.132-.072.193 0 .184.495.727 1.485 1.63.07.055.142.082.218.082.09 0 .158-.024.206-.072l1.217-.906c.283.143.54.248.774.316l.237 1.558c.008.068.043.127.104.178.062.05.13.076.207.076h1.92c.157 0 .26-.08.308-.244.083-.32.162-.845.237-1.579.275-.082.54-.187.794-.316l1.186.916c.068.048.14.072.216.072.13 0 .4-.202.81-.606.41-.404.692-.708.85-.912.05-.047.073-.112.073-.193zm-3.57-1.812c-.514.51-1.136.764-1.865.764-.73 0-1.35-.255-1.867-.764-.515-.51-.773-1.123-.773-1.843s.258-1.334.773-1.843c.516-.51 1.138-.764 1.867-.764.73 0 1.35.254 1.866.764s.774 1.123.774 1.843-.258 1.334-.774 1.843zM18.364 2.752c-.09-.197-.193-.373-.31-.53.35-.767.526-1.235.526-1.405 0-.027-.013-.05-.04-.07-.826-.476-1.252-.714-1.28-.714l-.062.02c-.28.28-.598.66-.948 1.14-.138-.013-.24-.02-.31-.02-.068 0-.17.007-.31.02-.095-.142-.274-.37-.535-.687-.26-.315-.42-.473-.474-.473-.013 0-.116.054-.31.163-.19.11-.394.224-.607.346l-.36.204c-.03.02-.043.044-.043.07 0 .17.176.64.526 1.407-.117.156-.22.332-.31.53-1.024.1-1.536.206-1.536.315v1.425c0 .11.512.214 1.537.316.082.182.186.36.31.53-.35.766-.527 1.234-.527 1.404 0 .027.014.05.042.07.838.483 1.265.724 1.28.724.054 0 .212-.16.473-.478.26-.32.44-.55.536-.693.138.014.242.02.31.02.07 0 .172-.006.31-.02.096.143.275.374.536.693.26.32.42.478.474.478.014 0 .44-.24 1.28-.723.027-.02.04-.044.04-.07 0-.17-.175-.64-.525-1.406.123-.17.226-.348.31-.53 1.023-.103 1.536-.208 1.536-.316V3.067c0-.11-.512-.214-1.536-.316zm-1.49 1.95c-.258.255-.57.382-.934.382-.364 0-.675-.127-.933-.382-.258-.254-.387-.56-.387-.92 0-.354.13-.66.392-.918.26-.258.57-.387.928-.387.358 0 .667.13.93.387.26.258.39.564.39.917 0 .36-.128.668-.386.922z" />
 				</g>
 			</svg>
 		);
 
 		return (
-			<div className="HeaderAndroid flex-container align-justify align-middle" onClick={this.handleGhosteryIconClick}>
-				<div className="HeaderAndroid__icon" onClick={this.handleAccountIconClick}>
+			<div className="OverviewTab__NavigationLinks flex-container align-justify align-middle full-width" onClick={this.handleGhosteryIconClick}>
+				<div className="OverviewTab__NavigationLink" onClick={this.handleAccountIconClick}>
 					{accountIcon}
 				</div>
-				<div className="HeaderAndroid__icon" onClick={this.handleSettingsIconClick}>
+				<div className="OverviewTab__NavigationLink" onClick={this.handleSettingsIconClick}>
 					{settingsIcon}
 				</div>
 			</div>
@@ -454,22 +458,6 @@ class PanelAndroid extends React.Component {
 		);
 	}
 
-	_renderAccount() {
-		console.log('bloink', this.props);
-
-		return (
-			<div>Account</div>
-		);
-	}
-
-	_renderSettings() {
-		console.log('bloink', this.props);
-
-		return (
-			<div>Settings</div>
-		);
-	}
-
 	_renderTabs() {
 		const { blocking, settings } = this.state;
 		const { categories } = blocking;
@@ -478,6 +466,7 @@ class PanelAndroid extends React.Component {
 			<Tabs>
 				<Tab tabLabel={t('android_tab_overview')} linkClassName="Tab__label">
 					<OverviewTab
+						navigationLinks={this._renderNavigationLinks()}
 						notScanned={this._renderNotScanned()}
 						donutGraph={this._renderDonut()}
 						pageHost={this._renderPageHost()}
@@ -510,13 +499,20 @@ class PanelAndroid extends React.Component {
 	}
 
 	render() {
-		const { view } = this.state;
+		const { view, summary, settings } = this.state;
 
 		return (
 			<div>
-				{this._renderHeader()}
-				{view === 'account' && this._renderAccount()}
-				{view === 'settings' && this._renderSettings()}
+				{view === 'account' && (
+					<Account />
+				)}
+				{view === 'settings' && (
+					<Settings
+						summary={summary}
+						settings={settings}
+						clickHome={() => { this.setState({ view: 'tabs' }); }}
+					/>
+				)}
 				{view === 'tabs' && this._renderTabs()}
 			</div>
 		);

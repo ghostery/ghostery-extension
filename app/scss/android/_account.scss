@@ -1,0 +1,79 @@
+/**
+ * Account Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+.Account {
+	.Account--addPaddingTop {
+		padding-top: 30px;
+	}
+
+	.Account__headerImage {
+		max-width: 180px;
+	}
+
+	.Account__headerTitle h3 {
+		font-size: 24px;
+		line-height: 1.5;
+		color: #4a4a4a;
+		margin: 20px 25px 0;
+	}
+
+	.Account__inputLabel {
+		font-size: 14px;
+		font-weight: 500;
+		line-height: 40px;
+		color: #4a4a4a;
+	}
+
+	.Account__inputBox {
+		font-size: 14;
+		line-height: 24px;
+		color: #4a4a4a;
+		margin-bottom: 35px;
+
+		// Foundation Overrides
+		border-radius: 0;
+		box-shadow: none;
+		border: 1px solid #c8c7c2;
+	}
+	.Account__inputBox.error {
+		margin-bottom: 8px;
+		border-color: #e74055;
+	}
+	.Account__inputBox:focus {
+		// Foundation Overrides
+		box-shadow: none;
+		border-color: #4a4a4a;
+	}
+
+	.Account__inputError {
+		font-size: 12;
+		line-height: 14px;
+		color: #e74055;
+		margin-bottom: 13px;
+	}
+
+	.Account__link {
+		font-size: 14px;
+		line-height: 30px;
+	}
+
+	.Account__button {
+		min-width: 180px;
+	}
+}
+
+@media only screen and (max-width: 740px)  {
+	.Account__header {
+		flex-direction: column;
+	}
+}

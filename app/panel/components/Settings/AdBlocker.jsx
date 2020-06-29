@@ -49,13 +49,14 @@ const AdBlocker = (props) => {
 };
 
 AdBlocker.propTypes = {
-	settingsData: PropTypes.shape({
-		cliqz_adb_mode: PropTypes.number,
-	}),
 	actions: PropTypes.shape({
 		selectItem: PropTypes.func.isRequired,
 	}).isRequired,
+	settingsData: PropTypes.shape({
+		cliqz_adb_mode: PropTypes.number,
+	}),
 };
+
 AdBlocker.defaultProps = {
 	settingsData: {
 		cliqz_adb_mode: 0,
