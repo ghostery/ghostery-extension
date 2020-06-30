@@ -360,7 +360,11 @@ class Metrics {
 			// Engaged Velocity
 			`&ve=${encodeURIComponent(this._getVelocityEngaged(type).toString())}` +
 			// Theme
-			`&th=${encodeURIComponent(this._getThemeValue().toString())}`;
+			`&th=${encodeURIComponent(this._getThemeValue().toString())}` +
+
+			// New parameter for Ghostery 8.5.2
+			// Product ID Parameter
+			`&pi=${encodeURIComponent('gbe')}`;
 
 		if (CAMPAIGN_METRICS.includes(type)) {
 			// only send campaign attribution when necessary
