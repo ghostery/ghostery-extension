@@ -1178,7 +1178,7 @@ function initializeDispatcher() {
 	});
 	dispatcher.on('conf.save.cliqz_adb_mode', (val) => {
 		if (!IS_CLIQZ) {
-			cliqz.prefs.set('cliqz-adb-mode', val);
+			cliqz.prefs.set('cliqz_adb_mode', val);
 		}
 	});
 	dispatcher.on('conf.changed.settings', debounce((key) => {
