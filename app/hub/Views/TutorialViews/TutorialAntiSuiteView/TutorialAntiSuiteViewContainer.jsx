@@ -31,8 +31,8 @@ class TutorialAntiSuiteViewContainer extends Component {
 		props.actions.setTutorialNavigation({
 			activeIndex: index,
 			hrefPrev: `/tutorial/${index - 1}`,
-			hrefNext: '/',
-			hrefDone: '/',
+			hrefNext: '/home',
+			hrefDone: '/home',
 			textPrev: t('previous'),
 			textNext: t('done'),
 			textDone: t('hub_tutorial_exit_flow'),

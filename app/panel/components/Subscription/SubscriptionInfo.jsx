@@ -46,10 +46,10 @@ const SubscriptionInfo = ({ subscriptionData }) => {
 			<div className="row">
 				<div className="columns column-subscription">
 					{productName === 'Ghostery Premium' && (
-						<h1>{ t('panel_detail_premium_title') }</h1>
+						<h1>Ghostery Premium</h1>
 					)}
 					{productName === 'Ghostery Plus' && (
-						<h1>{ t('ghostery_plus') }</h1>
+						<h1>Ghostery Plus</h1>
 					)}
 					{loading ? (
 						<div className="loading" />

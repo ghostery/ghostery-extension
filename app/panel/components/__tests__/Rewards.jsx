@@ -17,7 +17,6 @@ import { MemoryRouter } from 'react-router';
 import Rewards from '../Rewards';
 import DynamicUIPortContext from '../../contexts/DynamicUIPortContext';
 
-
 // Fake the translation function to only return the translation key
 global.t = function(str) {
 	return str;

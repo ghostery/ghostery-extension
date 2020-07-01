@@ -16,7 +16,7 @@
  */
 import { debounce, every, size } from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
-import cliqz from './classes/Cliqz';
+import cliqz, { HUMANWEB_MODULE, HPN_MODULE } from './classes/Cliqz';
 import ghosteryDebug from './classes/GhosteryDebug';
 // object class
 import Events from './classes/EventHandlers';
@@ -79,8 +79,9 @@ const moduleMock = {
 	isEnabled: false,
 	on: () => {},
 };
-const humanweb = cliqz.modules['human-web'];
-const { adblocker, antitracking, hpnv2 } = cliqz.modules;
+const humanweb = cliqz.modules[HUMANWEB_MODULE];
+const hpnv2 = cliqz.modules[HPN_MODULE];
+const { adblocker, antitracking } = cliqz.modules;
 const offers = cliqz.modules['offers-v2'] || moduleMock;
 const insights = cliqz.modules.insights || moduleMock;
 // add ghostery module to expose ghostery state to cliqz
@@ -930,7 +931,7 @@ function onMessageHandler(request, sender, callback) {
 				const user = { user: { ...foundUser } };
 				if (foundUser) {
 					user.user.plusAccess = account.hasScopesUnverified(['subscriptions:plus'])
-						|| account.hasScopesUnverified(['subscriptions:premium']);
+											|| account.hasScopesUnverified(['subscriptions:premium']);
 					user.user.premiumAccess = account.hasScopesUnverified(['subscriptions:premium']);
 				}
 				callback(user);
@@ -1028,6 +1029,12 @@ function onMessageHandler(request, sender, callback) {
 			}
 		});
 		return true;
+	}
+	if (name === 'openHubPage') {
+		const hubUrl = chrome.runtime.getURL('./app/templates/hub.html');
+		metrics.ping('intro_hub_click');
+		utils.openNewTab({ url: hubUrl, become_active: true });
+		return false;
 	}
 	if (name === 'promoModals.sawPremiumPromo') {
 		promoModals.recordPremiumPromoSighting();
@@ -1188,7 +1195,7 @@ function initializeDispatcher() {
 	});
 	dispatcher.on('conf.save.cliqz_adb_mode', (val) => {
 		if (!IS_CLIQZ) {
-			cliqz.prefs.set('cliqz-adb-mode', val);
+			cliqz.prefs.set('cliqz_adb_mode', val);
 		}
 	});
 	dispatcher.on('conf.changed.settings', debounce((key) => {
@@ -1357,11 +1364,8 @@ function getDataForGhosteryTab(callback) {
  */
 function initializePopup() {
 	if (BROWSER_INFO.os === 'android') {
-		chrome.browserAction.onClicked.addListener((tab) => {
-			chrome.tabs.create({
-				url: chrome.extension.getURL(`app/templates/panel_android.html?tabId=${tab.id}`),
-				active: true,
-			});
+		chrome.browserAction.setPopup({
+			popup: 'app/templates/panel_android.html',
 		});
 	} else {
 		chrome.browserAction.setPopup({

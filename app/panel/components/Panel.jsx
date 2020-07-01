@@ -278,7 +278,7 @@ class Panel extends React.Component {
 	/**
 	 * @returns {null|JSX}
 	 * @private
-	 * Renders the Plus promo modal if the user is not already an  subscriber
+	 * Renders the Plus promo modal if the user is not already a Plus subscriber
 	 */
 	_renderPlusPromoModal = () => {
 		if (this._hasPlusAccess() || this._hasPremiumAccess()) { return null; }
@@ -310,10 +310,6 @@ class Panel extends React.Component {
 
 		if (promoModal === 'insights') {
 			return this._renderInsightsPromoModal();
-		}
-
-		if (promoModal === 'plus') {
-			return this._renderPlusPromoModal();
 		}
 
 		if (promoModal === 'premium') {

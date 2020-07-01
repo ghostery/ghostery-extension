@@ -112,7 +112,6 @@ class PolicySmartBlock {
 		return result;
 	}
 
-
 	/**
 	 * Check if Smart Block should proceed based on:
 	 * 1. Smart Block is enabled

@@ -54,5 +54,4 @@ RadioButtonGroup.propTypes = {
 	indexClicked: PropTypes.number.isRequired
 };
 
-
 export default RadioButtonGroup;
