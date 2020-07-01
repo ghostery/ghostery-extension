@@ -42,9 +42,9 @@ class PromoModals {
 	 */
 	static whichPromoModalShouldWeDisplay() {
 		// The order is important
-		// Insights takes priority over Plus
+		// Insights takes priority over Premium
 		if (this._isTimeForAPromo(INSIGHTS)) return INSIGHTS;
-		if (this._isTimeForAPromo(PLUS)) return PLUS;
+		if (this._isTimeForAPromo(PREMIUM)) return PREMIUM;
 		return null;
 	}
 
@@ -67,9 +67,9 @@ class PromoModals {
 	static _isTimeForAPromo(type) {
 		if (conf.notify_promotions === false) { return false; }
 
-		const lastSeenPlusPromo = conf[`${PLUS}_${PROMO_MODAL_LAST_SEEN}`];
+		const lastSeenPremiumPromo = conf[`${PREMIUM}_${PROMO_MODAL_LAST_SEEN}`];
 		const lastSeenInsightsPromo = conf[`${INSIGHTS}_${PROMO_MODAL_LAST_SEEN}`];
-		const lastSeenPromo = Math.max(lastSeenPlusPromo, lastSeenInsightsPromo);
+		const lastSeenPromo = Math.max(lastSeenPremiumPromo, lastSeenInsightsPromo);
 
 		if (type === INSIGHTS && !this._hasEngagedFrequently()) {
 			return false;

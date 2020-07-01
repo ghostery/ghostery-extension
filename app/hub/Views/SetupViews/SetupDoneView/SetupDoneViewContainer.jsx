@@ -31,8 +31,8 @@ class SetupDoneViewContainer extends Component {
 		props.actions.setSetupNavigation({
 			activeIndex: index,
 			hrefPrev: `/setup/${index - 1}`,
-			hrefNext: '/',
-			hrefDone: '/',
+			hrefNext: '/home',
+			hrefDone: '/home',
 			textPrev: t('previous'),
 			textNext: t('done'),
 			textDone: t('hub_setup_exit_flow'),

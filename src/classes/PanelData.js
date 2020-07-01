@@ -174,7 +174,6 @@ class PanelData {
 		this.postPageLoadTime(tab_id, true);
 	}
 
-
 	// TODO convert Android panel and Hub to also use port so we can have a single streamlined communication channel & API
 	/**
 	 * Get PanelData for a specific view/tab. Needed for Android panel and Hub, which do not use a port (yet)
@@ -588,7 +587,6 @@ class PanelData {
 		}
 	}
 	// [/DATA TRANSFER]
-
 
 	// [DATA SETTING]
 	/**

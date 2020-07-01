@@ -704,9 +704,6 @@
 	"panel_detail_menu_rewards_title": {
 		"message": "Rewards"
 	},
-	"panel_detail_menu_premium_title": {
-		"message": "Premium"
-	},
 	"panel_detail_learn_more": {
 	  "message": "Learn More"
 	},
@@ -736,9 +733,6 @@
 	},
 	"panel_detail_rewards_off": {
 		"message": "Ghostery Rewards is OFF"
-	},
-	"panel_detail_premium_title": {
-		"message": "Ghostery Premium"
 	},
 	"panel_detail_premium_text": {
 		"message": "Feature coming soon."
@@ -1279,6 +1273,9 @@
 	"hub_side_navigation_home": {
 		"message": "Home"
 	},
+	"hub_side_navigation_upgrade_plan": {
+		"message": "Upgrade Plan"
+	},
 	"hub_side_navigation_tutorial": {
 		"message": "Take a Tutorial"
 	},
@@ -1344,6 +1341,81 @@
 	},
 	"hub_home_plus_full_protection": {
 		"message": "You are fully protected!"
+	},
+	"hub_upgrade_your": {
+		"message": "Upgrade your"
+	},
+	"hub_upgrade_protection_plan": {
+		"message": "protection plan"
+	},
+	"hub_upgrade_yearly": {
+		"message": "Yearly"
+	},
+	"hub_upgrade_monthly": {
+		"message": "Monthly"
+	},
+	"hub_upgrade_plan_free": {
+		"message": "Free"
+	},
+	"hub_upgrade_already_protected": {
+		"message": "Already Protected"
+	},
+	"hub_upgrade_basic_protection": {
+		"message": "Basic Protection"
+	},
+	"hub_upgrade_basic_browser_protection": {
+		"message": "Basic Browser Protection"
+	},
+	"hub_upgrade_advanced_device_protection": {
+		"message": "Advanced Device Protection"
+	},
+	"hub_upgrade_maximum_browser_protection": {
+		"message": "Maximum Browser Protection"
+	},
+	"hub_upgrade_to": {
+		"message": "Upgrade to"
+	},
+	"hub_upgrade_scroll_down": {
+		"message": "See full list of features"
+	},
+	"hub_upgrade_midnight_note": {
+		"message": "Must have Ghostery Midnight installed"
+	},
+	"hub_upgrade_additional_protection": {
+		"message": "Additional Protection"
+	},
+	"hub_upgrade_browser_tracker_blocking": {
+		"message": "Browser Tracker Blocking"
+	},
+	"hub_upgrade_browser_ad_blocking": {
+		"message": "Browser Ad Blocking"
+	},
+	"hub_upgrade_custom_blocking_preferences": {
+		"message": "Custom Blocking Preferences"
+	},
+	"hub_upgrade_extension_themes": {
+		"message": "Extension Themes"
+	},
+	"hub_upgrade_historical_extension_stats": {
+		"message": "Historical Extension Stats"
+	},
+	"hub_upgrade_application_tracker_blocking": {
+		"message": "Application Tracker Blocking"
+	},
+	"hub_upgrade_application_ad_blocking": {
+		"message": "Application Ad Blocking"
+	},
+	"hub_upgrade_no_vpn_logs": {
+		"message": "No VPN logs"
+	},
+	"hub_upgrade_leak_protection": {
+		"message": "Leak Protection"
+	},
+	"hub_upgrade_physical_servers": {
+		"message": "Physical Servers"
+	},
+	"hub_upgrade_unlimited_bandwidth": {
+		"message": "Unlimited Bandwidth"
 	},
 	"hub_setup_page_title": {
 		"message": "Ghostery Hub - Setup"
@@ -2252,9 +2324,6 @@
 	"ghostery_basic": {
 		"message": "Basic"
 	},
-	"ghostery_plus": {
-		"message": "Ghostery Plus"
-	},
 	"dollar_sign": {
 		"message": "&#36;"
 	},
@@ -2263,6 +2332,9 @@
 	},
 	"per_month": {
 		"message": "per month"
+	},
+	"per_year": {
+		"message": "per year"
 	},
 	"faster_cleaner_browsing": {
 		"message": "Faster, Cleaner Browsing",
