@@ -90,7 +90,14 @@ class PanelAndroid extends React.Component {
 
 	setPanelState = (tabId) => {
 		getPanelData(tabId).then((data) => {
-			this.setState({ panel: data.panel });
+			this.setState(prevState => ({
+				panel: data.panel,
+				settings: {
+					...prevState.settings,
+					reload_banner_status: data.panel.reload_banner_status,
+					trackers_banner_status: data.panel.trackers_banner_status,
+				}
+			}));
 		});
 	}
 
@@ -102,7 +109,13 @@ class PanelAndroid extends React.Component {
 
 	setSettingsState = () => {
 		getSettingsData().then((data) => {
-			this.setState({ settings: data });
+			this.setState(prevState => ({
+				settings: {
+					...prevState.settings,
+					...data,
+					dbUpdateText: t('settings_update_now'),
+				}
+			}));
 		});
 	}
 
@@ -129,7 +142,13 @@ class PanelAndroid extends React.Component {
 
 	callGlobalAction = ({ actionName, actionData = {} }) => {
 		const updated = handleAllActions({ actionName, actionData, state: this.state });
-		if (Object.keys(updated).length !== 0) {
+		if (updated instanceof Promise) {
+			updated.then((result) => {
+				if (Object.keys(result).length !== 0) {
+					this.setGlobalState(result);
+				}
+			});
+		} else if (Object.keys(updated).length !== 0) {
 			this.setGlobalState(updated);
 		}
 	}
@@ -151,18 +170,13 @@ class PanelAndroid extends React.Component {
 
 	_renderSettings() {
 		const { summary, settings } = this.state;
-		const actions = {
-			updateSitePolicy: () => { console.log('updateSitePolicy'); },
-			updateDatabase: () => { console.log('updateDatabase'); },
-			selectItem: () => { console.log('selectItem'); },
-		};
 
 		return (
 			<Settings
-				actions={actions}
 				summary={summary}
 				settings={settings}
 				clickHome={() => { this.changeView('overview'); }}
+				callGlobalAction={this.callGlobalAction}
 			/>
 		);
 	}

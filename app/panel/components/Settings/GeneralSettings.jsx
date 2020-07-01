@@ -89,6 +89,7 @@ class GeneralSettings extends React.Component {
 	render() {
 		const { settingsData, toggleCheckbox } = this.props;
 		const { dbLastUpdated } = this.state;
+
 		return (
 			<div className="s-tabs-panel">
 				<div className="row">

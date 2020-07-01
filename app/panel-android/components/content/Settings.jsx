@@ -33,17 +33,9 @@ class Account extends React.Component {
 		};
 	}
 
-	toggleCheckbox = (a, b, c, d, e) => {
-		console.log('bloink toggleCheckbox', a, b, c, d, e);
-	}
-
-	showToast = (a, b, c, d, e) => {
-		console.log('bloink showToast', a, b, c, d, e);
-	}
-
-	selectItem = (a, b, c, d, e) => {
-		console.log('bloink selectItem', a, b, c, d, e);
-	}
+	// showToast = (a, b, c, d, e) => {
+	// 	console.log('bloink showToast', a, b, c, d, e);
+	// }
 
 	clickBack = () => {
 		const { clickHome } = this.props;
@@ -54,6 +46,42 @@ class Account extends React.Component {
 		} else {
 			this.setState({ view: 'settings-home' });
 		}
+	}
+
+	updateSitePolicy = ({ type, pageHost }) => {
+		const { callGlobalAction } = this.props;
+
+		callGlobalAction({
+			actionName: 'updateSitePolicy',
+			actionData: { type, pageHost },
+		});
+	}
+
+	updateDatabase = () => {
+		const { callGlobalAction } = this.props;
+
+		callGlobalAction({
+			actionName: 'updateDatabase',
+		});
+	}
+
+	toggleCheckbox = (event) => {
+		const { callGlobalAction } = this.props;
+		const { name, checked } = event.currentTarget;
+
+		callGlobalAction({
+			actionName: 'updateSettingCheckbox',
+			actionData: { name, checked },
+		});
+	}
+
+	selectItem = ({ event, value }) => {
+		const { callGlobalAction } = this.props;
+
+		callGlobalAction({
+			actionName: 'selectItem',
+			actionData: { event, value },
+		});
 	}
 
 	_renderSettingsHeader() {
@@ -122,8 +150,11 @@ class Account extends React.Component {
 	}
 
 	_renderSettingsTrustRestrict() {
-		const { actions, summary } = this.props;
+		const { summary } = this.props;
 		const { site_whitelist, site_blacklist } = summary;
+		const actions = {
+			updateSitePolicy: this.updateSitePolicy,
+		};
 
 		return (
 			<TrustAndRestrict
@@ -135,7 +166,10 @@ class Account extends React.Component {
 	}
 
 	_renderSettingsGeneral() {
-		const { actions, settings } = this.props;
+		const { settings } = this.props;
+		const actions = {
+			updateDatabase: this.updateDatabase,
+		};
 
 		return (
 			<GeneralSettings
@@ -147,7 +181,10 @@ class Account extends React.Component {
 	}
 
 	_renderSettingsAdBlocker() {
-		const { actions, settings } = this.props;
+		const { settings } = this.props;
+		const actions = {
+			selectItem: this.selectItem,
+		};
 
 		return (
 			<AdBlocker
@@ -197,17 +234,13 @@ class Account extends React.Component {
 }
 
 Account.propTypes = {
-	actions: PropTypes.shape({
-		updateSitePolicy: PropTypes.func.isRequired,
-		updateDatabase: PropTypes.func.isRequired,
-		selectItem: PropTypes.func.isRequired,
-	}).isRequired,
 	summary: PropTypes.shape({
 		site_whitelist: PropTypes.arrayOf(PropTypes.string).isRequired,
 		site_blacklist: PropTypes.arrayOf(PropTypes.string).isRequired,
 	}).isRequired,
 	settings: PropTypes.shape({}).isRequired,
 	clickHome: PropTypes.func.isRequired,
+	callGlobalAction: PropTypes.func.isRequired,
 };
 
 export default Account;

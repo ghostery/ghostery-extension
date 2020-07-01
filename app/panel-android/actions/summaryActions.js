@@ -18,6 +18,57 @@ function getPageHostFromSummary(summary) {
 	return summary.pageHost.toLowerCase().replace(/^(http[s]?:\/\/)?(www\.)?/, '');
 }
 
+export function updateSitePolicy({ actionData, state }) {
+	const { type, pageHost } = actionData;
+	const { summary } = state;
+	const { site_blacklist, site_whitelist } = summary;
+
+	const host = pageHost.replace(/^www\./, '');
+
+	let updated_blacklist = site_blacklist.slice(0);
+	let updated_whitelist = site_whitelist.slice(0);
+
+	if (type === 'whitelist') {
+		if (site_blacklist.includes(host)) {
+			// remove from backlist if site is whitelisted
+			updated_blacklist = removeFromArray(site_blacklist, site_blacklist.indexOf(host));
+		}
+		if (!site_whitelist.includes(host)) {
+			// add to whitelist
+			updated_whitelist = addToArray(site_whitelist, host);
+		} else {
+			// remove from whitelist
+			updated_whitelist = removeFromArray(site_whitelist, site_whitelist.indexOf(host));
+		}
+	} else {
+		if (site_whitelist.includes(host)) {
+			// remove from whitelisted if site is blacklisted
+			updated_whitelist = removeFromArray(site_whitelist, site_whitelist.indexOf(host));
+		}
+		if (!site_blacklist.includes(host)) {
+			// add to blacklist
+			updated_blacklist = addToArray(site_blacklist, host);
+		} else {
+			// remove from blacklist
+			updated_blacklist = removeFromArray(site_blacklist, site_blacklist.indexOf(host));
+		}
+	}
+
+	// Send Message to Background
+	sendMessage('setPanelData', {
+		site_whitelist: updated_whitelist,
+		site_blacklist: updated_blacklist,
+	});
+
+	// Update State for PanelAndroid UI
+	return {
+		summary: {
+			site_whitelist: updated_whitelist,
+			site_blacklist: updated_blacklist,
+		},
+	};
+}
+
 export function handleTrustButtonClick({ state }) {
 	const { summary } = state;
 	// This pageHost has to be cleaned.
