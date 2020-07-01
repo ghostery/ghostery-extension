@@ -101,6 +101,18 @@ const basicCard = () => (
 	</div>
 );
 
+const plusAlreadyProtectedButton = () => (
+	<NavLink className="button button-gold" to="/home" title="Already Protected">
+		{t('hub_upgrade_already_protected')}
+	</NavLink>
+);
+
+const premiumAlreadyProtectedButton = () => (
+	<NavLink className="button button-premium" to="/home" title="Already Protected">
+		{t('hub_upgrade_already_protected')}
+	</NavLink>
+);
+
 /**
  * A React class component for rendering the Upgrade Plan View
  * @return {JSX} JSX for rendering the Upgrade Plan View of the Hub app
@@ -163,34 +175,37 @@ const UpgradePlanView = (props) => {
 	};
 	// Interval is the query Param to show monthly/yearly pricing in checkout web, also used as a ping parameter
 	const interval = show_yearly_prices ? 'year' : 'month';
-	const utmParams = `utm_source=gbe&utm_campaign=intro_hub_c_1&signedIn=${signedIn}&st=${subscriptionType()}&subscription_interval=${interval}`;
+	const utmParams = `utm_source=gbe&signedIn=${signedIn}&st=${subscriptionType()}&subscription_interval=${interval}`;
 
-	const plusCheckoutLink = `${globals.CHECKOUT_BASE_URL}/plus?interval=${interval}&${utmParams}`;
-	const premiumCheckoutLink = `${globals.CHECKOUT_BASE_URL}/premium?interval=${interval}&${utmParams}`;
+	const plusCTAButton = (position) => {
+		const utm_campaign = position === 'top' ? 'c_1' : 'c_2';
+		const plusCheckoutLink = `${globals.CHECKOUT_BASE_URL}/plus?${utmParams}&utm_campaign=intro_hub_${utm_campaign}`;
 
-	const plusCTAButton = () => (
-		isPlus ? (
-			<NavLink className="button button-gold" to="/home" title="Already Protected">
-				{t('hub_upgrade_already_protected')}
-			</NavLink>
-		) : (
+		return (
 			<a className="button button-gold" href={plusCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Plus">
 				{`${t('hub_upgrade_to')} Plus`}
 			</a>
-		)
-	);
+		);
+	}
 
-	const premiumCTAButton = () => (
-		isPremium ? (
-			<NavLink className="button button-premium" to="/home" title="Already Protected">
-				{t('hub_upgrade_already_protected')}
-			</NavLink>
-		) : (
+	const premiumCTAButton = (position) => {
+		const utm_campaign = position === 'top' ? 'c_3' : 'c_4';
+		const premiumCheckoutLink = `${globals.CHECKOUT_BASE_URL}/premium?${utmParams}&utm_campaign=intro_hub_${utm_campaign}`;
+
+		return (
 			<a className="button button-premium" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Premium">
 				{`${t('hub_upgrade_to')} Premium`}
 			</a>
 		)
-	);
+	}
+
+	const plusButtonTop = () => isPlus ? plusAlreadyProtectedButton() : plusCTAButton('top');
+
+	const plusButtonBottom = () => isPlus ? plusAlreadyProtectedButton() : plusCTAButton('bottom')
+
+	const premiumButtonTop = () => isPremium ? premiumAlreadyProtectedButton() : premiumCTAButton('top');
+
+	const premiumButtonBottom = () => isPremium ? premiumAlreadyProtectedButton() : premiumCTAButton('bottom');
 
 	const toggleSwitch = (mobileView, secondToggle) => {
 		const toggleSwitchClassNames = ClassNames('small-12 text-center columns', {
@@ -235,7 +250,7 @@ const UpgradePlanView = (props) => {
 					)}
 				</div>
 				{mobileView && toggleSwitch(true)}
-				{plusCTAButton()}
+				{plusButtonTop()}
 				<p className="card-sub-header"><strong>{t('hub_upgrade_additional_protection')}</strong></p>
 				<p className="card-sub-copy">
 					<span className="check blue" />
@@ -274,7 +289,7 @@ const UpgradePlanView = (props) => {
 					)}
 				</div>
 				{mobileView && toggleSwitch(true)}
-				{premiumCTAButton()}
+				{premiumButtonTop()}
 				<p className="card-sub-header">
 					<strong>{t('hub_upgrade_maximum_browser_protection')}</strong>
 				</p>
@@ -396,10 +411,10 @@ const UpgradePlanView = (props) => {
 											</NavLink>
 										</td>
 										<td>
-											{plusCTAButton()}
+											{plusButtonBottom()}
 										</td>
 										<td>
-											{premiumCTAButton()}
+											{premiumButtonBottom()}
 										</td>
 									</tr>
 								</tbody>
@@ -480,12 +495,12 @@ const UpgradePlanView = (props) => {
 						</div>
 						<div className="small-12 text-center columns">
 							<span className="col-plus">
-								{plusCTAButton()}
+								{plusButtonBottom()}
 							</span>
 						</div>
 						<div className="small-12 text-center columns">
 							<span className="col-premium">
-								{premiumCTAButton()}
+								{premiumButtonBottom()}
 							</span>
 						</div>
 					</div>
