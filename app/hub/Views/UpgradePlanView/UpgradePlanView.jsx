@@ -186,7 +186,7 @@ const UpgradePlanView = (props) => {
 				{`${t('hub_upgrade_to')} Plus`}
 			</a>
 		);
-	}
+	};
 
 	const premiumCTAButton = (position) => {
 		const utm_campaign = position === 'top' ? 'c_3' : 'c_4';
@@ -196,16 +196,16 @@ const UpgradePlanView = (props) => {
 			<a className="button button-premium" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Premium">
 				{`${t('hub_upgrade_to')} Premium`}
 			</a>
-		)
-	}
+		);
+	};
 
-	const plusButtonTop = () => isPlus ? plusAlreadyProtectedButton() : plusCTAButton('top');
+	const plusButtonTop = () => (isPlus ? plusAlreadyProtectedButton() : plusCTAButton('top'));
 
-	const plusButtonBottom = () => isPlus ? plusAlreadyProtectedButton() : plusCTAButton('bottom')
+	const plusButtonBottom = () => (isPlus ? plusAlreadyProtectedButton() : plusCTAButton('bottom'));
 
-	const premiumButtonTop = () => isPremium ? premiumAlreadyProtectedButton() : premiumCTAButton('top');
+	const premiumButtonTop = () => (isPremium ? premiumAlreadyProtectedButton() : premiumCTAButton('top'));
 
-	const premiumButtonBottom = () => isPremium ? premiumAlreadyProtectedButton() : premiumCTAButton('bottom');
+	const premiumButtonBottom = () => (isPremium ? premiumAlreadyProtectedButton() : premiumCTAButton('bottom'));
 
 	const toggleSwitch = (mobileView, secondToggle) => {
 		const toggleSwitchClassNames = ClassNames('small-12 text-center columns', {
