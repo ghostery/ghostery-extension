@@ -35,6 +35,9 @@
 	border-radius: 50%;
 	background-color: #cccccc;
 	border: 1px solid #a4a4a4;
+	& .a11y-label {
+		visibility: hidden;
+	  }
 }
 .SteppedNavigation__circles a.active::after {
 	content: '';

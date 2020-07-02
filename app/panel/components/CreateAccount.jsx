@@ -214,9 +214,10 @@ class CreateAccount extends React.Component {
 							<div className="row">
 								<div className="small-12 columns">
 									<div id="create-account-legal-consent-checkbox" className={(legalConsentNotCheckedError ? 'checkbox-error' : '')}>
-										<input id="legalConsentChecked" name="legalConsentChecked" type="checkbox" checked={legalConsentChecked} onChange={this.handleCheckboxChange} />
 										<label htmlFor="legalConsentChecked">
 											<I18nWithLink value="create_account_form_legal_consent_checkbox_label" />
+											<input id="legalConsentChecked" name="legalConsentChecked" type="checkbox" checked={legalConsentChecked} onChange={this.handleCheckboxChange} />
+
 										</label>
 									</div>
 								</div>

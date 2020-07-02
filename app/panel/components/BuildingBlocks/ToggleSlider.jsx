@@ -69,8 +69,9 @@ class ToggleSlider extends React.Component {
 		});
 		return (
 			<div className={compClassNames}>
-				<label className={labelClassNames}>
+				<label className={labelClassNames} htmlFor="checkboxID">
 					<input
+						id="checkboxID"
 						type="checkbox"
 						onChange={this._handleChange}
 						checked={checked}

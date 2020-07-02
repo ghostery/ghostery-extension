@@ -11,6 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+
 module.exports = {
 	env: {
 		browser: true,
@@ -111,6 +112,6 @@ module.exports = {
 		'jsx-a11y/no-static-element-interactions': [0],
 		'jsx-a11y/label-has-associated-control': [0], //ToDo: enable this check. Throws 2 errors, should work.
 		'jsx-a11y/media-has-caption': [0], //ToDo: enable this check. Need Captions to enable.
-		'jsx-a11y/anchor-has-content': [0], //ToDo: enable this check. Need anchor text to enable.
+		'jsx-a11y/anchor-has-content': [1], //ToDo: enable this check. Need anchor text to enable.
 	},
 };
