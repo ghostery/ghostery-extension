@@ -341,11 +341,11 @@ describe('app/panel-android/components/content/BlockingCategory.jsx', () => {
 				/>
 			);
 
-			expect(component.find('.BlockingCategory__tracker').length).toBe(0);
+			expect(component.find('.BlockingCategory__listHeader').length).toBe(0);
 			component.find('.BlockingCategory__details').simulate('click');
 			component.setProps({ open: true });
 			expect(toggleCategoryOpen.mock.calls.length).toBe(1);
-			expect(component.find('.BlockingCategory__tracker').length).toBe(2);
+			expect(component.find('.BlockingCategory__listHeader').length).toBe(1);
 
 			expect(callGlobalAction.mock.calls.length).toBe(0);
 			component.find('.BlockingSelectButton').simulate('click', { stopPropagation: () => {} });

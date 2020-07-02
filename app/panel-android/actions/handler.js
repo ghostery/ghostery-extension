@@ -35,7 +35,7 @@ export default function handleAllActions({ actionName, actionData, state }) {
 			break;
 
 		case 'handlePauseButtonClick':
-			updated = handlePauseButtonClick({ state });
+			updated = handlePauseButtonClick({ actionData, state });
 			break;
 
 		case 'cliqzFeatureToggle':

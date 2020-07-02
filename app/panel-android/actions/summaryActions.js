@@ -152,18 +152,18 @@ export function handleRestrictButtonClick({ state }) {
 	};
 }
 
-export function handlePauseButtonClick({ state }) {
-	const { summary } = state;
-	const currentState = summary.paused_blocking;
+export function handlePauseButtonClick({ actionData }) {
+	const { paused_blocking, time } = actionData;
 
 	sendMessage('setPanelData', {
-		paused_blocking: !currentState,
+		paused_blocking: time || paused_blocking,
 	});
 
 	return {
 		summary: {
-			paused_blocking: !currentState,
-		}
+			paused_blocking,
+			paused_blocking_timeout: time,
+		},
 	};
 }
 

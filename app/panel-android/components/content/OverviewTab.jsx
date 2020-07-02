@@ -145,11 +145,16 @@ class OverviewTab extends React.Component {
 		});
 	}
 
-	handlePauseButtonClick = () => {
-		const { callGlobalAction } = this.props;
+	handlePauseButtonClick = (time) => {
+		const { summary, callGlobalAction } = this.props;
+		const { paused_blocking } = summary;
 
 		callGlobalAction({
 			actionName: 'handlePauseButtonClick',
+			actionData: {
+				paused_blocking: (typeof time === 'number' ? true : !paused_blocking),
+				time: typeof time === 'number' ? time * 60000 : 0,
+			},
 		});
 	}
 
