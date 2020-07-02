@@ -60,6 +60,7 @@
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
     "react-svg": "^11.0.26",
+    "react-window": "^1.8.5",
     "redux": "^4.0.5",
     "redux-object": "^0.5.10",
     "redux-thunk": "^2.2.0",

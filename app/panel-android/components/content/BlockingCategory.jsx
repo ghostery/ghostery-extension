@@ -14,6 +14,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
+import { FixedSizeList as List } from 'react-window';
 import BlockingTracker from './BlockingTracker';
 
 class BlockingCategory extends React.Component {
@@ -26,10 +27,15 @@ class BlockingCategory extends React.Component {
 
 		this.heightTracker = 50;
 		this.heightListHeader = 30;
+		this.maxListHeight = 750;
 	}
 
-	getHeightTrackerList(count) {
-		return this.heightListHeader + count * this.heightTracker;
+	getListHeight(count) {
+		return Math.min(this.maxListHeight, count * this.heightTracker);
+	}
+
+	getListHeightWithHeader(count) {
+		return this.heightListHeader + this.getListHeight(count);
 	}
 
 	get categorySelectStatus() {
@@ -151,23 +157,46 @@ class BlockingCategory extends React.Component {
 		);
 	}
 
+	renderBlockingTracker = ({ index, style }) => {
+		const {
+			category,
+			type,
+			siteProps,
+			callGlobalAction,
+		} = this.props;
+		const { id, trackers } = category;
+		const tracker = trackers[index];
+
+		return (
+			<div className="BlockingCategory__tracker" key={tracker.id} style={style}>
+				<BlockingTracker
+					index={index}
+					tracker={tracker}
+					categoryId={id}
+					type={type}
+					toggleTrackerSelectOpen={() => { this.toggleTrackerSelectOpen(tracker.id); }}
+					open={this.getTrackerOpenStatus(tracker.id)}
+					siteProps={siteProps}
+					callGlobalAction={callGlobalAction}
+				/>
+				<div className="BlockingCategory__trackerBottom" />
+			</div>
+		);
+	}
+
 	render() {
+		const { openTrackerIndex } = this.state;
 		const {
 			index,
 			category,
 			open,
 			toggleCategoryOpen,
-			type,
-			siteProps,
-			callGlobalAction,
 		} = this.props;
 		const {
-			id,
 			name,
 			img_name,
 			num_total,
 			num_blocked,
-			trackers,
 		} = category;
 		const categoryImage = `/app/images/panel-android/categories/${img_name}.svg`;
 
@@ -189,28 +218,22 @@ class BlockingCategory extends React.Component {
 						{this.renderToggleArrow()}
 					</div>
 				</div>
-				<div className="BlockingCategory__list" style={{ height: (open) ? this.getHeightTrackerList(num_total) : 0 }}>
+				<div className="BlockingCategory__list" style={{ height: open ? this.getListHeightWithHeader(num_total) : 0 }}>
 					{open && (
 						<div>
-							<div className="BlockingCategory__listHeader flex-container align-bottom" style={{ height: this.heightListHeader }}>
+							<div className="BlockingCategory__listHeader flex-container align-bottom">
 								<span className="BlockingCategory--uppercase flex-child-grow">{t('blocking_category_trackers')}</span>
 								<span>{t('blocking_category_blocked')}</span>
 							</div>
-							{trackers.map((tracker, trackerIndex) => (
-								<div className="BlockingCategory__tracker" key={tracker.id} style={{ height: this.heightTracker }}>
-									<BlockingTracker
-										index={trackerIndex}
-										tracker={tracker}
-										categoryId={id}
-										type={type}
-										toggleTrackerSelectOpen={this.toggleTrackerSelectOpen}
-										open={this.getTrackerOpenStatus(trackerIndex)}
-										siteProps={siteProps}
-										callGlobalAction={callGlobalAction}
-									/>
-									<div className="BlockingCategory__trackerBottom" />
-								</div>
-							))}
+							<List
+								height={this.getListHeight(num_total)}
+								itemCount={num_total}
+								itemSize={this.heightTracker}
+								width="100%"
+								itemData={{ openTrackerIndex }}
+							>
+								{this.renderBlockingTracker}
+							</List>
 						</div>
 					)}
 				</div>

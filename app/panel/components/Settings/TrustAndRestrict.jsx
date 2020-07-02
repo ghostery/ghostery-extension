@@ -245,5 +245,4 @@ TrustAndRestrict.propTypes = {
 	site_blacklist: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-
 export default TrustAndRestrict;

@@ -124,7 +124,6 @@ class GhosteryDebug {
 			});
 		}
 
-
 		return new Promise((resolve) => {
 			Promise.all([
 				_getUserCookies(),
