@@ -650,6 +650,9 @@
 	"panel_signin_success": {
 		"message": "Hai effettuato l'accesso come "
 	},
+	"panel_signin_premium_benefits": {
+		"message": "Il tuo account sblocca una prova gratuita dei vantaggi Premium, inclusi il servizio VPN e la protezione della privacy per il dispositivo, disponibili tramite l'app Ghostery Midnight."
+	},
 	"panel_view_trackers": {
 		"message": "Vedi Tracker"
 	},
@@ -701,8 +704,8 @@
 	"panel_detail_menu_rewards_title": {
 		"message": "Rewards"
 	},
-	"panel_detail_menu_premium_title": {
-		"message": "Premium"
+	"panel_detail_learn_more": {
+	  "message": "Ulteriori informazioni"
 	},
 	"panel_detail_history_title": {
 		"message": "Cronologia"
@@ -730,9 +733,6 @@
 	},
 	"panel_detail_rewards_off": {
 		"message": " Ghostery Rewards è DISATTIVATA"
-	},
-	"panel_detail_premium_title": {
-		"message": "Ghostery Premium"
 	},
 	"panel_detail_premium_text": {
 		"message": "Funzionalità presto disponibile."
@@ -1237,6 +1237,9 @@
 	"hub_side_navigation_home": {
 		"message": "Home"
 	},
+	"hub_side_navigation_upgrade_plan": {
+		"message": "Effettua l'upgrade del piano"
+	},
 	"hub_side_navigation_tutorial": {
 		"message": "Guarda un Tutorial"
 	},
@@ -1293,6 +1296,90 @@
 	},
 	"hub_home_feature_setup_button_alt": {
 		"message": "Configurazione Personalizzata Completa"
+	},
+	"hub_home_plus_upgrade_text": {
+		"message": "Vai oltre la privacy di base. Effettua l'upgrade del tuo piano Ghostery per ricevere protezione del dispositivo, accesso al VPN e molto altro!"
+	},
+	"hub_home_plus_upgrade_button_text": {
+		"message": "Effettua l'upgrade adesso"
+	},
+	"hub_home_plus_full_protection": {
+		"message": "Sei completamente protetto!"
+	},
+	"hub_upgrade_your": {
+		"message": "Effettua l'upgrade del tuo"
+	},
+	"hub_upgrade_protection_plan": {
+		"message": "piano di protezione"
+	},
+	"hub_upgrade_yearly": {
+		"message": "Annualmente"
+	},
+	"hub_upgrade_monthly": {
+		"message": "Mensilmente"
+	},
+	"hub_upgrade_plan_free": {
+		"message": "Gratuito"
+	},
+	"hub_upgrade_already_protected": {
+		"message": "Già protetto"
+	},
+	"hub_upgrade_basic_protection": {
+		"message": "Protezione di base"
+	},
+	"hub_upgrade_basic_browser_protection": {
+		"message": "Protezione di base del browser"
+	},
+	"hub_upgrade_advanced_device_protection": {
+		"message": "Protezione avanzata del dispositivo"
+	},
+	"hub_upgrade_maximum_browser_protection": {
+		"message": "Protezione massima del browser"
+	},
+	"hub_upgrade_to": {
+		"message": "Aggiorna a"
+	},
+	"hub_upgrade_scroll_down": {
+		"message": "Scopri l'elenco di tutte le funzionalità"
+	},
+	"hub_upgrade_midnight_note": {
+		"message": "Ghostery Midnight deve essere installato"
+	},
+	"hub_upgrade_additional_protection": {
+		"message": "Protezione aggiuntiva"
+	},
+	"hub_upgrade_browser_tracker_blocking": {
+		"message": "Blocco Tracker del browser"
+	},
+	"hub_upgrade_browser_ad_blocking": {
+		"message": "Blocca Pubblicità del browser"
+	},
+	"hub_upgrade_custom_blocking_preferences": {
+		"message": "Preferenze di blocco personalizzate"
+	},
+	"hub_upgrade_extension_themes": {
+		"message": "Temi dell'estensione"
+	},
+	"hub_upgrade_historical_extension_stats": {
+		"message": "Cronologia Statistiche dell'estensione"
+	},
+	"hub_upgrade_application_tracker_blocking": {
+		"message": "Blocco Tracker dell'applicazione"
+	},
+	"hub_upgrade_application_ad_blocking": {
+		"message": "Blocca Pubblicità dell'applicazione"
+	},
+	"hub_upgrade_no_vpn_logs": {
+		"message": "Nessun accesso al VPN"
+	},
+	"hub_upgrade_leak_protection": {
+		"message": "Perdita di protezione"
+	},
+	"hub_upgrade_physical_servers": {
+		"message": "Server fisici"
+	},
+	"hub_upgrade_unlimited_bandwidth": {
+		"message": "Larghezza di banda illimitata"
 	},
 	"hub_setup_page_title": {
 		"message": "Ghostery Hub - Configurazione"
@@ -2201,9 +2288,6 @@
 	"ghostery_basic": {
 		"message": "Base"
 	},
-	"ghostery_plus": {
-		"message": "Ghostery Plus"
-	},
 	"dollar_sign": {
 		"message": "&#36;"
 	},
@@ -2212,6 +2296,9 @@
 	},
 	"per_month": {
 		"message": "al mese"
+	},
+	"per_year": {
+		"message": "all'anno"
 	},
 	"faster_cleaner_browsing": {
 		"message": "Navigazione più veloce e più semplice",
@@ -2409,5 +2496,8 @@
 	},
 	"no_thanks_continue_with_basic": {
 		"message": "No, grazie. Continuo con la versione base"
+	},
+	"too_many_password_resets_text": {
+		"message": "Troppe richieste di ripristino della password. Riprova tra un'ora."
 	}
 }
