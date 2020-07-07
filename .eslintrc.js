@@ -101,6 +101,8 @@ module.exports = {
 				"render"
 			]
 		}],
+	},
+
 
 		// Plugin: JSX-A11y
 		'jsx-a11y/alt-text': [0],
@@ -113,5 +115,5 @@ module.exports = {
 		'jsx-a11y/label-has-associated-control': [0], //ToDo: enable this check. Throws 2 errors, should work.
 		'jsx-a11y/media-has-caption': [0], //ToDo: enable this check. Need Captions to enable.
 		'jsx-a11y/anchor-has-content': [1], //ToDo: enable this check. Need anchor text to enable.
-	},
-};
+
+}

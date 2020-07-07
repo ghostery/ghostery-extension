@@ -41,16 +41,6 @@ const SteppedNavigation = (props) => {
 			: <NavLink aria-label="Stepped naivation link to another page" to={`${i}`} key={`nav-${i}`}><span className="a11y-label">Inactive stepped navigation link span text</span></NavLink>);
 	}
 
-	// ilya's notes:
-	/* for (let i = 1; i <= totalSteps; i++) {
-   // Use <a> without an href prop to prevent a call to history with the same URL
-   circles.push((i === activeIndex) ?
-      // VoiceOver on Mac does NOT read the span text
-      <a aria-label="Stepped navigation link to current page" className="active" key={`nav-${i}`}><span className="a11y-label">Active link span text</span></a>
-      : <NavLink aria-label="Stepped navigation link to another page" to={`${i}`} key={`nav-${i}`}><span className="a11y-label">Inactive stepped navigation link span text</span></NavLink>);
-}
-	*/
-
 	return (
 		<div className="row align-center">
 			<div className="columns small-12">
