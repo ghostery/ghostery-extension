@@ -11,7 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-
 module.exports = {
 	env: {
 		browser: true,
@@ -39,21 +38,21 @@ module.exports = {
 	],
 	// 0 = off, 1 = warn, 2 = error
 	rules: {
-		'arrow-parens': [2, 'as-needed', { 'requireForBlockBody': true }],
-		'camelcase': [0],
+		'arrow-parens': [2, 'as-needed', { requireForBlockBody: true }],
+		camelcase: [0],
 		'comma-dangle': [2, {
-			'arrays': 'only-multiline',
-			'objects': 'only-multiline',
-			'functions': 'ignore'
+			arrays: 'only-multiline',
+			objects: 'only-multiline',
+			functions: 'ignore'
 		}],
 		'func-names': [0],
-		'indent': [1, 'tab', {
-			'SwitchCase': 1,
-			'ignoredNodes': ['TemplateLiteral']
+		indent: [1, 'tab', {
+			SwitchCase: 1,
+			ignoredNodes: ['TemplateLiteral']
 		}],
 		'lines-between-class-members': [1],
 		'max-len': [0],
-		'newline-per-chained-call': [0, { 'ignoreChainWithDepth': 2 }],
+		'newline-per-chained-call': [0, { ignoreChainWithDepth: 2 }],
 		'no-nested-ternary': [0],
 		'no-param-reassign': ['error', {
 			props: true,
@@ -92,17 +91,15 @@ module.exports = {
 		'react/jsx-fragments': [1, 'element'],
 		'react/sort-comp': [1, {
 			order: [
-				"static-variables",
-				"instance-variables",
-				"constructor",
-				"static-methods",
-				"lifecycle",
-				"everything-else",
-				"render"
+				'static-variables',
+				'instance-variables',
+				'constructor',
+				'static-methods',
+				'lifecycle',
+				'everything-else',
+				'render'
 			]
 		}],
-	},
-
 
 		// Plugin: JSX-A11y
 		'jsx-a11y/alt-text': [0],
@@ -112,8 +109,8 @@ module.exports = {
 		'jsx-a11y/mouse-events-have-key-events': [0],
 		'jsx-a11y/no-noninteractive-element-interactions': [0],
 		'jsx-a11y/no-static-element-interactions': [0],
-		'jsx-a11y/label-has-associated-control': [0], //ToDo: enable this check. Throws 2 errors, should work.
-		'jsx-a11y/media-has-caption': [0], //ToDo: enable this check. Need Captions to enable.
-		'jsx-a11y/anchor-has-content': [1], //ToDo: enable this check. Need anchor text to enable.
-
-}
+		'jsx-a11y/label-has-associated-control': [1], // ToDo: enable this check. Throws 2 errors, should work.
+		'jsx-a11y/media-has-caption': [1], // ToDo: enable this check. Need Captions to enable.
+		'jsx-a11y/anchor-has-content': [1], // ToDo: enable this check. Need anchor text to enable.
+	},
+};
