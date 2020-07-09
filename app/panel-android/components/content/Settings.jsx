@@ -33,10 +33,6 @@ class Account extends React.Component {
 		};
 	}
 
-	// showToast = (a, b, c, d, e) => {
-	// 	console.log('bloink showToast', a, b, c, d, e);
-	// }
-
 	clickBack = () => {
 		const { clickHome } = this.props;
 		const { view } = this.state;
