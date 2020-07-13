@@ -43,6 +43,7 @@ const AccountSuccess = ({ email, is_expert }) => (
 // PropTypes ensure we pass required props of the correct type
 AccountSuccess.propTypes = {
 	is_expert: PropTypes.bool.isRequired,
+	email: PropTypes.string,
 };
 
 AccountSuccess.defaultProps = {
