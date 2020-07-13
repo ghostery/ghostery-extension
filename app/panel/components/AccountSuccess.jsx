@@ -41,7 +41,7 @@ const AccountSuccess = ({ email, is_expert }) => (
 );
 
 // PropTypes ensure we pass required props of the correct type
-AppView.propTypes = {
+AccountSuccess.propTypes = {
 	is_expert: PropTypes.bool.isRequired,
 };
 
