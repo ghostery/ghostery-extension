@@ -13,13 +13,14 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 /**
  * @class Implement Account Success component which opens
  * in place of Sign In view on successful signing.
  * @memberof PanelClasses
  */
-const AccountSuccess = ({ email }) => (
+const AccountSuccess = ({ email, is_expert }) => (
 	<div id="signin-success-panel">
 		<div className="row align-center">
 			<div className="small-11 columns text-center">
@@ -31,7 +32,7 @@ const AccountSuccess = ({ email }) => (
 				<a className="learn-more-button" href="https://ghostery.com/midnight?utm_source=gbe&utm_campaign=in_app_account_creation_success" alt={t('learn_more')} target="_blank" rel="noopener noreferrer">
 					{t('learn_more')}
 				</a>
-				<NavLink className="no-thanks-maybe-later text-center" to="/">
+				<NavLink className="no-thanks-maybe-later text-center" to={is_expert ? '/detail' : '/'}>
 					{t('subscribe_pitch_no_thanks')}
 				</NavLink>
 			</div>
@@ -41,6 +42,7 @@ const AccountSuccess = ({ email }) => (
 
 AccountSuccess.defaultProps = {
 	email: '',
+	is_expert: PropTypes.bool.isRequired,
 };
 
 export default AccountSuccess;
