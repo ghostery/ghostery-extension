@@ -40,9 +40,13 @@ const AccountSuccess = ({ email, is_expert }) => (
 	</div>
 );
 
+// PropTypes ensure we pass required props of the correct type
+AppView.propTypes = {
+	is_expert: PropTypes.bool.isRequired,
+};
+
 AccountSuccess.defaultProps = {
 	email: '',
-	is_expert: PropTypes.bool.isRequired,
 };
 
 export default AccountSuccess;
