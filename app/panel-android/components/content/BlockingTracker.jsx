@@ -221,7 +221,12 @@ class BlockingTracker extends React.Component {
 	}
 
 	renderBlockingOverflow() {
-		const { type, open, tracker, settings } = this.props;
+		const {
+			type,
+			open,
+			tracker,
+			settings,
+		} = this.props;
 		const { ss_allowed = false, ss_blocked = false, blocked } = tracker;
 		const { toggle_individual_trackers = false } = settings;
 

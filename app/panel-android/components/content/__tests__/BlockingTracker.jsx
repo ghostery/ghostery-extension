@@ -40,6 +40,7 @@ describe('app/panel-android/components/content/BlockingTracker.jsx', () => {
 					type="site"
 					toggleTrackerSelectOpen={() => {}}
 					open={false}
+					settings={{}}
 					siteProps={siteProps}
 					callGlobalAction={() => {}}
 				/>
@@ -69,6 +70,7 @@ describe('app/panel-android/components/content/BlockingTracker.jsx', () => {
 					type="site"
 					toggleTrackerSelectOpen={() => {}}
 					open={false}
+					settings={{ toggle_individual_trackers: false }}
 					siteProps={siteProps}
 					callGlobalAction={() => {}}
 				/>
@@ -98,6 +100,7 @@ describe('app/panel-android/components/content/BlockingTracker.jsx', () => {
 					type="site"
 					toggleTrackerSelectOpen={() => {}}
 					open={false}
+					settings={{ toggle_individual_trackers: true }}
 					siteProps={siteProps}
 					callGlobalAction={() => {}}
 				/>
@@ -127,6 +130,7 @@ describe('app/panel-android/components/content/BlockingTracker.jsx', () => {
 					type="site"
 					toggleTrackerSelectOpen={() => {}}
 					open={false}
+					settings={{ toggle_individual_trackers: true }}
 					siteProps={siteProps}
 					callGlobalAction={() => {}}
 				/>
@@ -156,6 +160,7 @@ describe('app/panel-android/components/content/BlockingTracker.jsx', () => {
 					type="site"
 					toggleTrackerSelectOpen={() => {}}
 					open={false}
+					settings={{ toggle_individual_trackers: true }}
 					siteProps={siteProps}
 					callGlobalAction={() => {}}
 				/>
@@ -185,6 +190,7 @@ describe('app/panel-android/components/content/BlockingTracker.jsx', () => {
 					type="site"
 					toggleTrackerSelectOpen={() => {}}
 					open={false}
+					settings={{ toggle_individual_trackers: true }}
 					siteProps={siteProps}
 					callGlobalAction={() => {}}
 				/>
@@ -214,6 +220,7 @@ describe('app/panel-android/components/content/BlockingTracker.jsx', () => {
 					type="site"
 					toggleTrackerSelectOpen={() => {}}
 					open={false}
+					settings={{ toggle_individual_trackers: true }}
 					siteProps={siteProps}
 					callGlobalAction={() => {}}
 				/>
@@ -248,6 +255,7 @@ describe('app/panel-android/components/content/BlockingTracker.jsx', () => {
 					type="global"
 					toggleTrackerSelectOpen={toggleTrackerSelectOpen}
 					open={false}
+					settings={{ toggle_individual_trackers: true }}
 					siteProps={siteProps}
 					callGlobalAction={callGlobalAction}
 				/>

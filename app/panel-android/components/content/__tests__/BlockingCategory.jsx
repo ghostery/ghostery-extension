@@ -38,6 +38,7 @@ describe('app/panel-android/components/content/BlockingCategory.jsx', () => {
 					key="cat-1"
 					index={1}
 					category={category}
+					settings={{}}
 					toggleCategoryOpen={() => {}}
 					open={false}
 					type="site"
@@ -68,6 +69,7 @@ describe('app/panel-android/components/content/BlockingCategory.jsx', () => {
 					key="cat-1"
 					index={1}
 					category={category}
+					settings={{}}
 					toggleCategoryOpen={() => {}}
 					open={false}
 					type="site"
@@ -98,6 +100,7 @@ describe('app/panel-android/components/content/BlockingCategory.jsx', () => {
 					key="cat-1"
 					index={1}
 					category={category}
+					settings={{}}
 					toggleCategoryOpen={() => {}}
 					open={false}
 					type="site"
@@ -136,6 +139,7 @@ describe('app/panel-android/components/content/BlockingCategory.jsx', () => {
 					key="cat-1"
 					index={1}
 					category={category}
+					settings={{}}
 					toggleCategoryOpen={() => {}}
 					open={false}
 					type="site"
@@ -174,6 +178,7 @@ describe('app/panel-android/components/content/BlockingCategory.jsx', () => {
 					key="cat-1"
 					index={1}
 					category={category}
+					settings={{}}
 					toggleCategoryOpen={() => {}}
 					open={false}
 					type="site"
@@ -210,6 +215,7 @@ describe('app/panel-android/components/content/BlockingCategory.jsx', () => {
 					key="cat-1"
 					index={1}
 					category={category}
+					settings={{}}
 					toggleCategoryOpen={() => {}}
 					open={false}
 					type="global"
@@ -246,6 +252,7 @@ describe('app/panel-android/components/content/BlockingCategory.jsx', () => {
 					key="cat-1"
 					index={1}
 					category={category}
+					settings={{}}
 					toggleCategoryOpen={() => {}}
 					open={false}
 					type="global"
@@ -287,6 +294,7 @@ describe('app/panel-android/components/content/BlockingCategory.jsx', () => {
 					key="cat-1"
 					index={1}
 					category={category}
+					settings={{}}
 					toggleCategoryOpen={() => {}}
 					open={false}
 					type="global"
@@ -333,6 +341,7 @@ describe('app/panel-android/components/content/BlockingCategory.jsx', () => {
 					key="cat-1"
 					index={1}
 					category={category}
+					settings={{}}
 					toggleCategoryOpen={toggleCategoryOpen}
 					open={false}
 					type="site"

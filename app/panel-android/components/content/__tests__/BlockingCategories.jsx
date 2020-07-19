@@ -91,6 +91,7 @@ describe('app/panel-android/components/content/BlockingCategories.jsx', () => {
 				<BlockingCategories
 					type="site"
 					categories={categories}
+					settings={{}}
 					siteProps={siteProps}
 					callGlobalAction={() => {}}
 				/>
@@ -159,6 +160,7 @@ describe('app/panel-android/components/content/BlockingCategories.jsx', () => {
 				<BlockingCategories
 					type="global"
 					categories={categories}
+					settings={{}}
 					siteProps={siteProps}
 					callGlobalAction={() => {}}
 				/>
@@ -229,6 +231,7 @@ describe('app/panel-android/components/content/BlockingCategories.jsx', () => {
 				<BlockingCategories
 					type="site"
 					categories={categories}
+					settings={{}}
 					siteProps={siteProps}
 					callGlobalAction={() => {}}
 				/>

@@ -20,7 +20,11 @@ describe('app/panel/components/Settings/TrustAndRestrict', () => {
 	describe('Snapshot test with react-test-renderer', () => {
 		test('Testing TrustAndRestrict is rendering', () => {
 			const wrapper = renderer.create(
-				<TrustAndRestrict />
+				<TrustAndRestrict
+					actions={{ updateSitePolicy: () => {} }}
+					site_whitelist={[]}
+					site_blacklist={[]}
+				/>
 			).toJSON();
 			expect(wrapper).toMatchSnapshot();
 		});
