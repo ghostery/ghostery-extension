@@ -92,6 +92,7 @@ class BlockingTab extends React.Component {
 		const {
 			type,
 			categories,
+			settings,
 			siteProps,
 			callGlobalAction,
 		} = this.props;
@@ -105,6 +106,7 @@ class BlockingTab extends React.Component {
 				<BlockingCategories
 					type={type}
 					categories={categories}
+					settings={settings}
 					siteProps={siteProps}
 					callGlobalAction={callGlobalAction}
 				/>
@@ -121,10 +123,12 @@ BlockingTab.propTypes = {
 	callGlobalAction: PropTypes.func.isRequired,
 	siteProps: PropTypes.shape({}).isRequired,
 	categories: PropTypes.arrayOf(PropTypes.shape({})),
+	settings: PropTypes.shape({}),
 };
 
 BlockingTab.defaultProps = {
 	categories: [],
+	settings: {},
 };
 
 export default BlockingTab;

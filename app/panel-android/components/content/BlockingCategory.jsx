@@ -162,6 +162,7 @@ class BlockingCategory extends React.Component {
 			category,
 			type,
 			siteProps,
+			settings,
 			callGlobalAction,
 		} = this.props;
 		const { id, trackers } = category;
@@ -177,6 +178,7 @@ class BlockingCategory extends React.Component {
 					toggleTrackerSelectOpen={() => { this.toggleTrackerSelectOpen(tracker.id); }}
 					open={this.getTrackerOpenStatus(tracker.id)}
 					siteProps={siteProps}
+					settings={settings}
 					callGlobalAction={callGlobalAction}
 				/>
 				<div className="BlockingCategory__trackerBottom" />
@@ -221,7 +223,7 @@ class BlockingCategory extends React.Component {
 				<div className="BlockingCategory__list" style={{ height: open ? this.getListHeightWithHeader(num_total) : 0 }}>
 					{open && (
 						<div>
-							<div className="BlockingCategory__listHeader flex-container align-bottom">
+							<div className="BlockingCategory__listHeader flex-container align-bottom" style={{ height: this.heightListHeader }}>
 								<span className="BlockingCategory--uppercase flex-child-grow">{t('blocking_category_trackers')}</span>
 								<span>{t('blocking_category_blocked')}</span>
 							</div>
@@ -270,6 +272,7 @@ BlockingCategory.propTypes = {
 		isRestricted: PropTypes.bool.isRequired,
 		isPaused: PropTypes.bool.isRequired,
 	}).isRequired,
+	settings: PropTypes.shape({}).isRequired,
 	callGlobalAction: PropTypes.func.isRequired,
 };
 

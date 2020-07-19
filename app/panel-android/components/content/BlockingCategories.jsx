@@ -57,6 +57,7 @@ class BlockingCategories extends React.Component {
 			categories,
 			type,
 			siteProps,
+			settings,
 			callGlobalAction,
 		} = this.props;
 
@@ -68,6 +69,7 @@ class BlockingCategories extends React.Component {
 							key={category.id}
 							index={index}
 							category={category}
+							settings={settings}
 							toggleCategoryOpen={this.toggleCategoryOpen}
 							open={this.getOpenStatus(index)}
 							type={type}
@@ -89,6 +91,7 @@ BlockingCategories.propTypes = {
 	]).isRequired,
 	siteProps: PropTypes.shape({}).isRequired,
 	callGlobalAction: PropTypes.func.isRequired,
+	settings: PropTypes.shape({}).isRequired,
 };
 
 export default BlockingCategories;

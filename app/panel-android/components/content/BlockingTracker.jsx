@@ -20,9 +20,18 @@ class BlockingTracker extends React.Component {
 	get trackerSelectStatus() {
 		const { type, siteProps, tracker } = this.props;
 		const { isTrusted, isRestricted } = siteProps;
-		const { blocked, ss_allowed = false, ss_blocked = false } = tracker;
+		const {
+			blocked,
+			ss_allowed = false,
+			ss_blocked = false,
+			warningSmartBlock = false,
+		} = tracker;
 
 		if (type === 'site') {
+			if (warningSmartBlock) {
+				return 'override-sb';
+			}
+
 			if (isTrusted) {
 				return 'trusted';
 			}
@@ -149,26 +158,77 @@ class BlockingTracker extends React.Component {
 		});
 	}
 
-	renderTrackerSelect() {
+	renderTrackerModified() {
+		const { type, tracker } = this.props;
+		const { cliqzAdCount, cliqzCookieCount, cliqzFingerprintCount } = tracker;
+
+		if (type === 'global') {
+			return null;
+		}
+
+		return (
+			<div>
+				{cliqzAdCount > 0 && (
+					<span className="RequestModified RequestModified--ad">
+						{`${cliqzAdCount} ${cliqzAdCount === 1 ? t('ad') : t('ads')}`}
+					</span>
+				)}
+				{cliqzCookieCount > 0 && (
+					<span className="RequestModified RequestModified--cookie">
+						{`${cliqzCookieCount} ${cliqzCookieCount === 1 ? t('cookie') : t('cookies')}`}
+					</span>
+				)}
+				{cliqzFingerprintCount > 0 && (
+					<span className="RequestModified RequestModified--fingerprint">
+						{`${cliqzFingerprintCount} ${cliqzFingerprintCount === 1 ? t('fingerprint') : t('fingerprints')}`}
+					</span>
+				)}
+			</div>
+		);
+	}
+
+	renderTrackerStatus() {
 		const trackerSelect = this.trackerSelectStatus;
-		const trackerSelectClassNames = ClassNames('BlockingSelectButton', {
+		const trackerSelectClassNames = ClassNames({
+			OverrideSmartBlock: trackerSelect === 'override-sb',
+			BlockingSelectButton: trackerSelect.indexOf('override-') === -1,
 			BlockingSelectButton__blocked: trackerSelect === 'blocked',
 			BlockingSelectButton__trusted: trackerSelect === 'trusted',
 			BlockingSelectButton__restricted: trackerSelect === 'restricted',
 		});
 
 		return (
-			<div className={trackerSelectClassNames} onClick={this.clickTrackerSelect} />
+			<div className={trackerSelectClassNames} />
 		);
 	}
 
-	renderBlockingSelectGroup() {
-		const { type, open, tracker } = this.props;
+	renderSmartBlockOverflow() {
+		const { open, tracker } = this.props;
+		const { warningSmartBlock } = tracker;
+		const selectGroupClassNames = ClassNames('OverrideText full-height',
+			'flex-container align-center-middle', {
+				'OverrideText--open': open,
+			});
+		const text = (warningSmartBlock && warningSmartBlock === 'blocked') ?
+			t('panel_tracker_warning_smartblock_tooltip') :
+			t('panel_tracker_warning_smartunblock_tooltip');
+
+		return (
+			<div className={selectGroupClassNames}>
+				<span>{text}</span>
+			</div>
+		);
+	}
+
+	renderBlockingOverflow() {
+		const { type, open, tracker, settings } = this.props;
 		const { ss_allowed = false, ss_blocked = false, blocked } = tracker;
+		const { toggle_individual_trackers = false } = settings;
+
 		const selectGroupClassNames = ClassNames('BlockingSelectGroup full-height',
 			'flex-container flex-dir-row-reverse', {
 				'BlockingSelectGroup--open': open,
-				'BlockingSelectGroup--wide': type === 'site',
+				'BlockingSelectGroup--wide': type === 'site' && toggle_individual_trackers,
 				'BlockingSelectGroup--disabled': this.selectDisabled,
 			});
 		const selectBlockClassNames = ClassNames('BlockingSelect BlockingSelect__block',
@@ -181,18 +241,27 @@ class BlockingTracker extends React.Component {
 				<div className={selectBlockClassNames} onClick={this.clickBlock}>
 					{blocked ? t('android_unblock') : t('android_block')}
 				</div>
-				{type === 'site' && (
+				{type === 'site' && toggle_individual_trackers && (
 					<div className="BlockingSelect BlockingSelect__restrict full-height flex-child-grow" onClick={this.clickRestrict}>
 						{ss_blocked ? t('android_unrestrict') : t('android_restrict')}
 					</div>
 				)}
-				{type === 'site' && (
+				{type === 'site' && toggle_individual_trackers && (
 					<div className="BlockingSelect BlockingSelect__trust full-height flex-child-grow" onClick={this.clickTrust}>
 						{ss_allowed ? t('android_untrust') : t('android_trust')}
 					</div>
 				)}
 			</div>
 		);
+	}
+
+	renderTrackerOverflow() {
+		const trackerSelect = this.trackerSelectStatus;
+		if (trackerSelect === 'override-sb') {
+			return this.renderSmartBlockOverflow();
+		}
+
+		return this.renderBlockingOverflow();
 	}
 
 	render() {
@@ -204,9 +273,12 @@ class BlockingTracker extends React.Component {
 				<div className="BlockingTracker--noPointer">
 					<div className="BlockingTracker__info" onClick={this.openTrackerInfoLink} />
 				</div>
-				<div className="BlockingTracker__name flex-child-grow">{name}</div>
-				{this.renderTrackerSelect()}
-				{this.renderBlockingSelectGroup()}
+				<div className="BlockingTracker__name flex-child-grow">
+					<div>{name}</div>
+					{this.renderTrackerModified()}
+				</div>
+				{this.renderTrackerStatus()}
+				{this.renderTrackerOverflow()}
 			</div>
 		);
 	}
@@ -236,6 +308,7 @@ BlockingTracker.propTypes = {
 		isRestricted: PropTypes.bool.isRequired,
 		isPaused: PropTypes.bool.isRequired,
 	}).isRequired,
+	settings: PropTypes.shape({}).isRequired,
 	callGlobalAction: PropTypes.func.isRequired,
 };
 

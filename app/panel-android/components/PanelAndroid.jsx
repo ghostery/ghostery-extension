@@ -51,8 +51,8 @@ class PanelAndroid extends React.Component {
 				pageUrl: '',
 			},
 			cliqzModuleData: {
-				adBlock: { trackerCount: 0 },
-				antiTracking: { trackerCount: 0 },
+				adBlock: { trackerCount: 0, unknownTrackers: [] },
+				antiTracking: { trackerCount: 0, unknownTrackers: [] },
 			},
 		};
 	}
@@ -189,7 +189,7 @@ class PanelAndroid extends React.Component {
 			settings,
 			cliqzModuleData,
 		} = this.state;
-		const { categories } = blocking;
+		const { categories, toggle_individual_trackers } = blocking;
 
 		return (
 			<Tabs>
@@ -209,6 +209,7 @@ class PanelAndroid extends React.Component {
 					<BlockingTab
 						type="site"
 						categories={categories}
+						settings={{ toggle_individual_trackers }}
 						siteProps={this.siteProps}
 						callGlobalAction={this.callGlobalAction}
 					/>

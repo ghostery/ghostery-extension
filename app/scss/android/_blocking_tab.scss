@@ -142,6 +142,7 @@
 	.BlockingSelectGroup {
 		position: absolute;
 		overflow: hidden;
+		word-break: break-all;
 		right: 0px;
 		width: 0px;
 		margin-right: -10px;
@@ -190,6 +191,68 @@
 		.BlockingSelect__trust {
 			background-color: $button-trust;
 			background-image: buildIconTrust($white);
+		}
+	}
+
+	.OverrideSmartBlock {
+		position: relative;
+		cursor: pointer;
+		height: 25px;
+		width: 25px;
+		margin-right: 5px;
+		background-image: buildIconSmartBlocking($ghosty-blue);
+		background-size: 40px 40px;
+		background-position: center;
+	}
+
+	.OverrideText {
+		position: absolute;
+		overflow: hidden;
+		word-break: keep-all;
+		right: 0px;
+		width: 0px;
+		margin-right: -10px;
+		color: $white;
+		background-color: $ghosty-blue;
+		font-size: 13px;
+		text-align: center;
+		@include prefix('transition', 'width 300ms ease');
+
+		&.OverrideText--open {
+			width: 250px;
+		}
+
+		span {
+			min-width: 250px;
+		}
+	}
+
+	.RequestModified {
+		color: $ghosty-blue;
+		text-transform: capitalize;
+		font-size: 11px;
+		font-style: normal;
+		padding-right: 5px;
+
+		&:before {
+			content: "";
+			position: relative;
+			display: inline-block;
+			top: 2px;
+			height: 13px;
+			width: 13px;
+			margin-right: 2px;
+			background-size: 21px 21px;
+			background-position: center;
+			background-repeat: no-repeat;
+
+		}
+		&.RequestModified--ad:before {
+			background-image: buildIconAdBlocking($ghosty-blue);
+		}
+		&.RequestModified--cookie:before,
+		&.RequestModified--fingerprint:before {
+			background-image: buildIconAntiTracking($ghosty-blue);
 		}
 	}
 }

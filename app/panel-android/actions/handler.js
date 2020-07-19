@@ -16,7 +16,7 @@ import {
 } from './summaryActions';
 import {
 	trustRestrictBlockSiteTracker, blockUnblockGlobalTracker, blockUnBlockAllTrackers, resetSettings
-} from './trackerActions';
+} from './blockingActions';
 import {
 	updateDatabase, updateSettingCheckbox, selectItem
 } from './settingsActions';

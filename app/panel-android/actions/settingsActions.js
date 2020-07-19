@@ -43,6 +43,9 @@ export function updateSettingCheckbox({ actionData }) {
 
 	if (name === 'trackers_banner_status' || name === 'reload_banner_status') {
 		updatedState.panel = { [name]: checked };
+	} else if (name === 'toggle_individual_trackers') {
+		updatedState.blocking = { [name]: checked };
+		updatedState.settings = { [name]: checked };
 	} else {
 		updatedState.settings = { [name]: checked };
 	}
