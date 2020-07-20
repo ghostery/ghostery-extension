@@ -1099,8 +1099,6 @@ function setupHubPromoABTest() {
 	} else {
 		conf.hub_promo_variant = 'upgrade';
 	}
-
-	console.error(`conf.hub_promo_version in setupHubPromoABTest: ${conf.hub_promo_variant}`);
 }
 
 /**
@@ -1737,13 +1735,14 @@ function initializeGhosteryModules() {
 	]).then(() => {
 		// run scheduledTasks on init
 		scheduledTasks().then(() => {
-			console.error('In scheduledTasks .then callback');
 			// open the Ghostery Hub on install with justInstalled query parameter set to true
 			// we need to do this after running scheduledTasks for the first time
 			// because of an A/B test that determines which promo variant is shown in the Hub on install
 			if (globals.JUST_INSTALLED) {
+				const route = (conf.hub_promo_variant === 'upgrade' || conf.hub_promo_variant === 'not_yet_set') ? '' : '#home';
+				const showPremiumPromoModal = conf.hub_promo_variant === 'midnight';
 				chrome.tabs.create({
-					url: chrome.runtime.getURL(`./app/templates/hub.html?justInstalled=true&promoVariant=${conf.hub_promo_variant}`),
+					url: chrome.runtime.getURL(`./app/templates/hub.html?$justInstalled=true&pm=${showPremiumPromoModal}${route}`),
 					active: true
 				});
 			}
