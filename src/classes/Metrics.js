@@ -366,11 +366,11 @@ class Metrics {
 			// Engaged Velocity
 			`&ve=${encodeURIComponent(Metrics._getVelocityEngaged(type).toString())}` +
 			// Theme
-			`&th=${encodeURIComponent(this._getThemeValue().toString())}` +
+			`&th=${encodeURIComponent(Metrics._getThemeValue().toString())}` +
 
 			// New parameter for Ghostery 8.5.2
 			// Hub Promo variant
-			`&hp=${encodeURIComponent(this._getHubPromoVariant().toString())}`;
+			`&hp=${encodeURIComponent(Metrics._getHubPromoVariant().toString())}`;
 
 		if (CAMPAIGN_METRICS.includes(type)) {
 			// only send campaign attribution when necessary
@@ -534,7 +534,7 @@ class Metrics {
 	 * @private
 	 * @return {number} Int associated with the Hub promo variant
 	 */
-	_getHubPromoVariant() {
+	static _getHubPromoVariant() {
 		const { hub_promo_variant } = conf;
 
 		switch (hub_promo_variant) {

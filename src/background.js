@@ -1051,86 +1051,6 @@ function onMessageHandler(request, sender, callback) {
 }
 
 /**
- * Initialize Dispatcher Events.
- * All Conf properties trigger a dispatcher pub event
- * whenever the value is set/updated.
- * @memberOf Background
- */
-function initializeDispatcher() {
-	dispatcher.on('conf.save.selected_app_ids', (appIds) => {
-		const num_selected = size(appIds);
-		const { db } = bugDb;
-		db.noneSelected = (num_selected === 0);
-		// can't simply compare num_selected and size(db.apps) since apps get removed sometimes
-		db.allSelected = (!!num_selected && every(db.apps, (app, app_id) => appIds.hasOwnProperty(app_id)));
-	});
-	dispatcher.on('conf.save.site_whitelist', () => {
-		// TODO debounce with below
-		button.update();
-		utils.flushChromeMemoryCache();
-		cliqz.modules.core.action('refreshAppState');
-	});
-	dispatcher.on('conf.save.site_blacklist', () => {
-		button.update();
-	});
-	dispatcher.on('conf.save.enable_human_web', (enableHumanWeb) => {
-		if (!IS_CLIQZ) {
-			setCliqzModuleEnabled(humanweb, enableHumanWeb).then(() => {
-				setupABTest();
-			});
-		} else {
-			setCliqzModuleEnabled(humanweb, false);
-		}
-	});
-	dispatcher.on('conf.save.enable_offers', (enableOffersIn) => {
-		button.update();
-		const firstStep = Promise.resolve();
-		let enableOffers = enableOffersIn;
-		if (IS_CLIQZ) {
-			enableOffers = false;
-		} else if (!enableOffers && cliqz.modules['offers-v2'].isEnabled) {
-			cliqz.modules['offers-v2'].action('flushSignals');
-		}
-
-		const toggleModule = () => setCliqzModuleEnabled(offers, enableOffers);
-		const toggleConnection = () => registerWithOffers(offers, enableOffers);
-		if (enableOffers) {
-			firstStep.then(toggleModule).then(toggleConnection);
-		} else {
-			firstStep.then(toggleConnection).then(toggleModule);
-		}
-	});
-	dispatcher.on('conf.save.enable_anti_tracking', (enableAntitracking) => {
-		if (!IS_CLIQZ) {
-			setCliqzModuleEnabled(antitracking, enableAntitracking);
-		} else {
-			setCliqzModuleEnabled(antitracking, false);
-		}
-	});
-	dispatcher.on('conf.save.enable_ad_block', (enableAdBlock) => {
-		if (!IS_CLIQZ) {
-			setCliqzModuleEnabled(adblocker, enableAdBlock);
-		} else {
-			setCliqzModuleEnabled(adblocker, false);
-		}
-	});
-	dispatcher.on('conf.save.cliqz_adb_mode', (val) => {
-		if (!IS_CLIQZ) {
-			cliqz.prefs.set('cliqz_adb_mode', val);
-		}
-	});
-	dispatcher.on('conf.changed.settings', debounce((key) => {
-		log('Conf value changed for a watched user setting:', key);
-	}, 200));
-	dispatcher.on('globals.save.paused_blocking', () => {
-		// if user has paused Ghostery, suspect broken page
-		if (globals.SESSION.paused_blocking) { metrics.handleBrokenPageTrigger(globals.BROKEN_PAGE_PAUSE); }
-		// update content script state when blocking is paused/unpaused
-		cliqz.modules.core.action('refreshAppState');
-	});
-}
-
-/**
  * Determine Antitracking configuration parameters based
  * on the results returned from the abtest endpoint.
  * @memberOf Background
@@ -1213,6 +1133,86 @@ function setupABTest() {
 	// }
 
 	setupHubPromoABTest();
+}
+
+/**
+ * Initialize Dispatcher Events.
+ * All Conf properties trigger a dispatcher pub event
+ * whenever the value is set/updated.
+ * @memberOf Background
+ */
+function initializeDispatcher() {
+	dispatcher.on('conf.save.selected_app_ids', (appIds) => {
+		const num_selected = size(appIds);
+		const { db } = bugDb;
+		db.noneSelected = (num_selected === 0);
+		// can't simply compare num_selected and size(db.apps) since apps get removed sometimes
+		db.allSelected = (!!num_selected && every(db.apps, (app, app_id) => appIds.hasOwnProperty(app_id)));
+	});
+	dispatcher.on('conf.save.site_whitelist', () => {
+		// TODO debounce with below
+		button.update();
+		utils.flushChromeMemoryCache();
+		cliqz.modules.core.action('refreshAppState');
+	});
+	dispatcher.on('conf.save.site_blacklist', () => {
+		button.update();
+	});
+	dispatcher.on('conf.save.enable_human_web', (enableHumanWeb) => {
+		if (!IS_CLIQZ) {
+			setCliqzModuleEnabled(humanweb, enableHumanWeb).then(() => {
+				setupABTest();
+			});
+		} else {
+			setCliqzModuleEnabled(humanweb, false);
+		}
+	});
+	dispatcher.on('conf.save.enable_offers', (enableOffersIn) => {
+		button.update();
+		const firstStep = Promise.resolve();
+		let enableOffers = enableOffersIn;
+		if (IS_CLIQZ) {
+			enableOffers = false;
+		} else if (!enableOffers && cliqz.modules['offers-v2'].isEnabled) {
+			cliqz.modules['offers-v2'].action('flushSignals');
+		}
+
+		const toggleModule = () => setCliqzModuleEnabled(offers, enableOffers);
+		const toggleConnection = () => registerWithOffers(offers, enableOffers);
+		if (enableOffers) {
+			firstStep.then(toggleModule).then(toggleConnection);
+		} else {
+			firstStep.then(toggleConnection).then(toggleModule);
+		}
+	});
+	dispatcher.on('conf.save.enable_anti_tracking', (enableAntitracking) => {
+		if (!IS_CLIQZ) {
+			setCliqzModuleEnabled(antitracking, enableAntitracking);
+		} else {
+			setCliqzModuleEnabled(antitracking, false);
+		}
+	});
+	dispatcher.on('conf.save.enable_ad_block', (enableAdBlock) => {
+		if (!IS_CLIQZ) {
+			setCliqzModuleEnabled(adblocker, enableAdBlock);
+		} else {
+			setCliqzModuleEnabled(adblocker, false);
+		}
+	});
+	dispatcher.on('conf.save.cliqz_adb_mode', (val) => {
+		if (!IS_CLIQZ) {
+			cliqz.prefs.set('cliqz_adb_mode', val);
+		}
+	});
+	dispatcher.on('conf.changed.settings', debounce((key) => {
+		log('Conf value changed for a watched user setting:', key);
+	}, 200));
+	dispatcher.on('globals.save.paused_blocking', () => {
+		// if user has paused Ghostery, suspect broken page
+		if (globals.SESSION.paused_blocking) { metrics.handleBrokenPageTrigger(globals.BROKEN_PAGE_PAUSE); }
+		// update content script state when blocking is paused/unpaused
+		cliqz.modules.core.action('refreshAppState');
+	});
 }
 
 /**
@@ -1691,18 +1691,17 @@ function initializeGhosteryModules() {
 
 			if (!IS_CLIQZ) {
 				// auto-fetch human web offer
-				return (abtest.fetch()
+				abtest.fetch()
 					.then(() => {
 						setupABTest();
 					})
 					.catch(() => {
 						log('Unable to reach abtest server');
 					})
-					.finally(() => resolve())
-				);
+					.finally(() => resolve());
+			} else {
+				resolve();
 			}
-
-			resolve();
 		});
 	}
 
