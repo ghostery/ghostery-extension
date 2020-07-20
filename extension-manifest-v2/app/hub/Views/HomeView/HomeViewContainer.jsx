@@ -119,9 +119,9 @@ class HomeViewContainer extends Component {
 		} = home;
 
 		// Flag to display promo modal (used in A/B testing)
-		const shouldShowPromoModal = false;
+		const { pm } = QueryString.parse(window.location.search);
 		// Logic to display premium modal if it is the case that it is being shown once per hub refresh to non-premium users
-		const showPromoModal = shouldShowPromoModal && !premium_promo_modal_shown && !isPremium;
+		const showPromoModal = pm && pm === 'true' && !premium_promo_modal_shown && !isPremium;
 
 		return (
 			<div className="full-height">
