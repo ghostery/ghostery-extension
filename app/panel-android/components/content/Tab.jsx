@@ -17,17 +17,19 @@ import PropTypes from 'prop-types';
 export default class Tab extends React.Component {
 	handleTabClick = (event) => {
 		event.preventDefault();
-		this.props.onClick(this.props.tabIndex);
+		const { onClick, tabIndex } = this.props;
+		onClick(tabIndex);
 	}
 
 	render() {
+		const { isActive, tabLabel, linkClassName } = this.props;
 		return (
 			<li className="tab-item">
 				<a
-					className={`tab-link ${this.props.linkClassName} ${this.props.isActive ? 'active' : ''}`}
+					className={`tab-link ${linkClassName} ${isActive ? 'active' : ''}`}
 					onClick={this.handleTabClick}
 				>
-					{this.props.tabLabel}
+					{tabLabel}
 				</a>
 			</li>
 		);

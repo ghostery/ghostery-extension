@@ -33,11 +33,11 @@ const initialState = {
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case UPDATE_REWARDS_DATA: {
-			return Object.assign({}, state, action.data);
+			return { ...state, ...action.data };
 		}
 		case TOGGLE_OFFERS_ENABLED: {
 			const enable_offers = action.data.enabled;
-			return Object.assign({}, state, { enable_offers });
+			return { ...state, enable_offers };
 		}
 
 		case SEND_SIGNAL: {

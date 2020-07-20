@@ -40,10 +40,10 @@ import { togglePromoModal, showNotification } from '../../panel/actions/PanelAct
  */
 const mapDispatchToProps = dispatch => ({
 	actions: bindActionCreators(
-		Object.assign({
+		{
 			togglePromoModal,
 			showNotification
-		}), dispatch
+		}, dispatch
 	)
 });
 /**

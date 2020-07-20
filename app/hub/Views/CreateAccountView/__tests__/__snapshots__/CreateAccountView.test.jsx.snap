@@ -306,7 +306,7 @@ exports[`app/hub/Views/CreateAccount component Snapshot tests with react-test-re
         <div
           className="CreateAccountView__inputError"
         >
-          your_emails_do_not_match
+          your_email_do_not_match
         </div>
       </div>
     </div>

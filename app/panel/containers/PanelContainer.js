@@ -27,10 +27,13 @@ import { updateBlockingData } from '../actions/BlockingActions';
  * @todo  We are not using ownProps, so we better not specify it explicitly,
  * in this case it won't be passed by React (see https://github.com/reactjs/react-redux/blob/master/docs/api.md).
  */
-const mapStateToProps = state => Object.assign({}, state.panel, state.drawer, state.account, {
+const mapStateToProps = state => ({
+	...state.panel,
+	...state.drawer,
+	...state.account,
 	paused_blocking: state.summary.paused_blocking,
 	sitePolicy: state.summary.sitePolicy,
-	trackerCounts: state.summary.trackerCounts,
+	trackerCounts: state.summary.trackerCounts
 });
 /**
  * Bind Panel view component action creators using Redux's bindActionCreators
@@ -40,7 +43,9 @@ const mapStateToProps = state => Object.assign({}, state.panel, state.drawer, st
  * @return {function}          	  to be used as an argument in redux connect call
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign({}, panelActions, { filterTrackers, updateSummaryData }, { updateBlockingData }), dispatch),
+	actions: bindActionCreators({
+		...panelActions, filterTrackers, updateSummaryData, updateBlockingData
+	}, dispatch),
 });
 /**
  * Connects Panel component to the Redux store. Pass updated match, location, and history props to the wrapped component.

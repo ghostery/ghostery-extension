@@ -21,13 +21,13 @@ import { RadioButtonGroup } from '../BuildingBlocks';
  * It allows to switch between available Ghostery themes.
  * @memberOf SettingsComponents
 */
-const SubscriptionThemes = (props) => {
+const SubscriptionThemes = ({ theme, changeTheme }) => {
 	const themes = ['default', 'midnight-theme', 'palm-theme', 'leaf-theme'];
 	const themeLabels = ['subscription_default_theme', 'subscription_dark_blue_theme', 'subscription_palm_theme', 'subscription_leaf_theme'];
 
-	const getIndexClicked = () => themes.indexOf(props.theme);
+	const getIndexClicked = () => themes.indexOf(theme);
 
-	const handleThemeClick = index => props.changeTheme(themes[index]);
+	const handleThemeClick = index => changeTheme(themes[index]);
 
 	return (
 		<div className="content-subscription s-tabs-panel">
@@ -40,7 +40,7 @@ const SubscriptionThemes = (props) => {
 					<RadioButtonGroup
 						labels={themeLabels}
 						handleItemClick={handleThemeClick}
-						indexClicked={getIndexClicked(props.theme)}
+						indexClicked={getIndexClicked(theme)}
 					/>
 				</div>
 			</div>

@@ -14,7 +14,7 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import * as utils from '../../../../utils';
-import * as SetupBlockingViewActions from '../SetupBlockingViewActions';
+import setBlockingPolicy from '../SetupBlockingViewActions';
 import { SET_BLOCKING_POLICY } from '../../../SetupView/SetupViewConstants';
 
 const middlewares = [thunk];
@@ -39,7 +39,7 @@ describe('app/hub/Views/SetupViews/SetupBlockingView actions', () => {
 		const data = testData;
 		const expectedPayload = { data, type: SET_BLOCKING_POLICY };
 
-		return store.dispatch(SetupBlockingViewActions.setBlockingPolicy(data)).then(() => {
+		return store.dispatch(setBlockingPolicy(data)).then(() => {
 			const actions = store.getActions();
 			expect(actions).toEqual([expectedPayload]);
 		});

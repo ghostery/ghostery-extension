@@ -36,7 +36,8 @@ class PauseButton extends React.Component {
 	 * Handles the click event for the Dropdown Caret
 	 */
 	clickDropdownCaret() {
-		if (!this.state.showDropdown) {
+		const { showDropdown } = this.state;
+		if (!showDropdown) {
 			this.setState({ showDropdown: true });
 			document.body.addEventListener('click', this.clickOutside);
 		} else {
@@ -63,9 +64,10 @@ class PauseButton extends React.Component {
 	 * @param {number} time The time in minutes that Ghostery should be paused`
 	 */
 	clickDropdownPause(time) {
+		const { clickPause } = this.props;
 		this.setState({ showDropdown: false });
 		document.body.removeEventListener('click', this.clickOutside);
-		this.props.clickPause(time);
+		clickPause(time);
 	}
 
 	/**
@@ -73,7 +75,7 @@ class PauseButton extends React.Component {
 	 * @return {JSX} JSX for the dropdown list
 	 */
 	renderDropdown() {
-		const { isCondensed, isPausedTimeout } = this.props;
+		const { isCondensed, isPausedTimeout, dropdownItems } = this.props;
 
 		function dropdownItemClassName(value) {
 			return ClassNames('dropdown-item', 'clickable', 'dropdown-clickable', {
@@ -87,7 +89,7 @@ class PauseButton extends React.Component {
 
 		return (
 			<div className="dropdown" style={dropdownStyles}>
-				{this.props.dropdownItems.map(item => (
+				{dropdownItems.map(item => (
 					<div className={dropdownItemClassName(item.val)} key={item.name} onClick={() => { this.clickDropdownPause(item.val); }}>
 						<span className="dropdown-clickable">
 							{!isCondensed ? item.name : item.name_condensed}
@@ -132,7 +134,8 @@ class PauseButton extends React.Component {
 		const {
 			isPaused,
 			isCentered,
-			isCondensed
+			isCondensed,
+			clickPause
 		} = this.props;
 		const { showDropdown } = this.state;
 		const centeredAndCondensed = isCentered && isCondensed;
@@ -157,7 +160,7 @@ class PauseButton extends React.Component {
 		const togglePauseButton = (
 			<div
 				className={pauseButtonClassNames}
-				onClick={this.props.clickPause}
+				onClick={clickPause}
 				ref={(node) => { this.pauseWidth = node && node.clientWidth; }}
 			>
 				{this.renderPauseButtonText()}

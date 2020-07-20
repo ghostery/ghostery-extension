@@ -34,7 +34,8 @@ const HomeView = (props) => {
 		enable_metrics,
 		changeMetrics,
 		email,
-		isPlus,
+		isPremium,
+		sendPing,
 	} = props;
 	const accountHref = globals.ACCOUNT_BASE_URL;
 
@@ -61,6 +62,16 @@ const HomeView = (props) => {
 	const setupButtonClassNames = ClassNames('HomeView__featureButton button primary', {
 		hollow: setup_complete,
 	});
+	const upgradeContainerClassNames = ClassNames('HomeView__upgradeContainer row align-center-middle', {
+		'purple-border': !isPremium
+	});
+
+	/**
+	 * Sends the necessary ping to background
+	 */
+	const _sendUpgradePing = () => {
+		sendPing({ type: 'intro_hub_home_upgrade' });
+	};
 
 	return (
 		<div className="HomeView row align-center">
@@ -141,17 +152,17 @@ const HomeView = (props) => {
 						</NavLink>
 					</div>
 				</div>
-				<div className="HomeView__plus row large-unstack">
-					<div className="HomeView__featureIcon feature-plus hide-for-large" />
-					<div className="HomeView__featureText columns">
-						{t('hub_home_feature_supporter_text')}
+				<div className={upgradeContainerClassNames}>
+					<div className="HomeView__upgradeIcon" />
+					<div className="HomeView__upgradeText">
+						{t('hub_home_plus_upgrade_text')}
 					</div>
-					<div className="HomeView__featureIcon columns shrink feature-plus show-for-large" />
-					<div className="columns flex-container align-center-middle">
-						<NavLink to="/plus" className="HomeView__featureButton button primary">
-							{isPlus ? t('already_subscribed') : t('get_ghostery_plus')}
+					<div className="HomeView__buttonContainer columns flex-container">
+						<NavLink to="/" className="HomeView__featureButton button primary" onClick={_sendUpgradePing}>
+							{isPremium ? t('hub_home_plus_full_protection') : t('hub_home_plus_upgrade_button_text')}
 						</NavLink>
 					</div>
+
 				</div>
 			</div>
 		</div>
@@ -166,7 +177,7 @@ HomeView.propTypes = {
 	enable_metrics: PropTypes.bool.isRequired,
 	changeMetrics: PropTypes.func.isRequired,
 	email: PropTypes.string.isRequired,
-	isPlus: PropTypes.bool.isRequired,
+	isPremium: PropTypes.bool.isRequired,
 };
 
 export default HomeView;

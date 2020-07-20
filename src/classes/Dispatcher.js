@@ -14,8 +14,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint no-param-reassign: 0 */
-
 import { log } from '../utils/common';
 /**
  * Class for dispatching events. Though generic, it is used
@@ -30,11 +28,12 @@ class Dispatcher {
 
 	// subscribe
 	on(event, handler, context) {
+		let c = context;
 		log('dispatcher.on called from', event);
-		if (typeof context === 'undefined') {
-			context = handler;
+		if (typeof c === 'undefined') {
+			c = handler;
 		}
-		this.handlers.set(event, handler.bind(context));
+		this.handlers.set(event, handler.bind(c));
 	}
 
 	// publish

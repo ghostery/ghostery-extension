@@ -31,7 +31,8 @@ class AppView extends Component {
 	 * Lifecycle Event
 	 */
 	componentDidUpdate(prevProps) {
-		if (prevProps.children !== this.props.children) {
+		const { children } = this.props;
+		if (prevProps.children !== children) {
 			this.mainContent.current.scrollTop = 0;
 		}
 	}

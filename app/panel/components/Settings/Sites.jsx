@@ -21,9 +21,8 @@ import Site from './Site';
  */
 const Sites = (props) => {
 	const { sites, listType } = props;
-	const siteList = sites.map((site, index) => (
-		// eslint-disable-next-line react/no-array-index-key
-		<Site site={site} listType={listType} updateSitePolicy={props.updateSitePolicy} key={index} />
+	const siteList = sites.map(site => (
+		<Site key={site} site={site} listType={listType} updateSitePolicy={props.updateSitePolicy} />
 	));
 	return <div className="s-sites">{ siteList }</div>;
 };

@@ -47,7 +47,7 @@ class SurrogateDb extends Updatable {
 	 * @override
 	 *
 	 */
-	update() {}
+	static update() {}
 
 	/**
 	 * Process surrogates from fetched json
@@ -57,7 +57,8 @@ class SurrogateDb extends Updatable {
 	processList(fromMemory, data) {
 		log('processing surrogates...');
 
-		data.mappings.forEach((s) => {
+		data.mappings.forEach((souragate) => {
+			const s = { ...souragate };
 			s.code = data.surrogates[s.sid];
 
 			// convert single values to arrays first

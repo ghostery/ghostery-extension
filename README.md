@@ -141,8 +141,8 @@ $ ./fern.js build configs/ghostery.js --environment=production --no-debug
 
 ## Compatibility
 
-+ Firefox: 52+
-+ Firefox Android: 55+
++ Firefox: 68+
++ Firefox Android: 68+
 + Chrome: 58+
 + Opera: 45+
 + Edge: 79+
@@ -159,13 +159,12 @@ See [CONTRIBUTING](CONTRIBUTING.md) and [CODE OF CONDUCT](CODE-OF-CONDUCT.md)
 + [Privacy Policy](https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/)
 
 ## Additional Open Source Ghostery Projects
-+ [Ghostery Android Browser](https://github.com/ghostery/browser-android)
-+ [Ghostery iOS Browser](https://github.com/ghostery/browser-ios)
-+ [Cliqz Desktop Browser](https://github.com/cliqz-oss/browser-f)
 + [Ghostery Lite for Safari](https://github.com/ghostery/GhosterySafari)
++ [Ghostery iOS Browser](https://github.com/ghostery/user-agent-ios)
++ [Ghostery Android Browser](https://github.com/ghostery/browser-android)
 
 ## Ghostery Team
-Ghostery relies on [contributions](https://github.com/ghostery/ghostery-extension/graphs/contributors) from lots of talented people. See the full montage of uncommonly attractive Ghosterians/Cliqzers [here](https://www.cliqz.com/about/team).
+Ghostery relies on [contributions](https://github.com/ghostery/ghostery-extension/graphs/contributors) from lots of talented people.
 
 ## License
 [MPL-2.0](https://www.mozilla.org/en-US/MPL/2.0/) Copyright 2019 Ghostery, Inc. All rights reserved.

@@ -25,9 +25,8 @@ import { login, getUser, getUserSettings } from '../../Account/AccountActions';
  * @todo  We are not using ownProps, so we better not specify it explicitly,
  * in this case it won't be passed by React (see https://github.com/reactjs/react-redux/blob/master/docs/api.md).
  */
-const mapStateToProps = state => Object.assign({}, {
-	// get properties from panel redux store
-	is_expert: state.panel.is_expert,
+const mapStateToProps = state => ({ // get properties from panel redux store
+	is_expert: state.panel.is_expert
 });
 /**
  * Bind Login view component action creators using Redux's bindActionCreators

@@ -32,7 +32,7 @@ class TutorialTrustViewContainer extends Component {
 			activeIndex: index,
 			hrefPrev: `/tutorial/${index - 1}`,
 			hrefNext: `/tutorial/${index + 1}`,
-			hrefDone: '/',
+			hrefDone: '/home',
 			textPrev: t('previous'),
 			textNext: t('next'),
 			textDone: t('hub_tutorial_exit_flow'),

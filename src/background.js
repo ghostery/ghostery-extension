@@ -11,18 +11,15 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint consistent-return: 0 */
-/* eslint no-use-before-define: 0 */
-/* eslint no-shadow: 0 */
-
 /**
  * @namespace Background
  */
 import { debounce, every, size } from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
-import cliqz from './classes/Cliqz';
+import cliqz, { HUMANWEB_MODULE, HPN_MODULE } from './classes/Cliqz';
 // object class
 import Events from './classes/EventHandlers';
+import Policy from './classes/Policy';
 // static classes
 import panelData from './classes/PanelData';
 import bugDb from './classes/BugDb';
@@ -39,7 +36,7 @@ import globals from './classes/Globals';
 import surrogatedb from './classes/SurrogateDb';
 import tabInfo from './classes/TabInfo';
 import metrics from './classes/Metrics';
-import rewards from './classes/Rewards';
+import Rewards from './classes/Rewards';
 import account from './classes/Account';
 import GhosteryModule from './classes/Module';
 import promoModals from './classes/PromoModals';
@@ -49,7 +46,7 @@ import { allowAllwaysC2P } from './utils/click2play';
 import * as common from './utils/common';
 import * as utils from './utils/utils';
 import { _getJSONAPIErrorsObject } from './utils/api';
-import { importCliqzSettings } from './utils/cliqzSettingImport';
+import importCliqzSettings from './utils/cliqzSettingImport';
 import { sendCliqzModuleCounts } from './utils/cliqzModulesData';
 
 // For debug purposes, provide Access to the internals of `browser-core`
@@ -71,15 +68,16 @@ const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
 const VERSION_CHECK_URL = `${CDN_BASE_URL}/update/version`;
 const REAL_ESTATE_ID = 'ghostery';
 const onBeforeRequest = events.onBeforeRequest.bind(events);
-const onHeadersReceived = events.onHeadersReceived.bind(events);
+const { onHeadersReceived } = Events;
 
 // Cliqz Modules
 const moduleMock = {
 	isEnabled: false,
 	on: () => {},
 };
-const humanweb = cliqz.modules['human-web'];
-const { adblocker, antitracking, hpnv2 } = cliqz.modules;
+const humanweb = cliqz.modules[HUMANWEB_MODULE];
+const hpnv2 = cliqz.modules[HPN_MODULE];
+const { adblocker, antitracking } = cliqz.modules;
 const offers = cliqz.modules['offers-v2'] || moduleMock;
 const insights = cliqz.modules.insights || moduleMock;
 // add ghostery module to expose ghostery state to cliqz
@@ -100,41 +98,6 @@ function setCliqzModuleEnabled(module, enabled) {
 	log('SET CLIQZ MODULE DISABLED', module);
 	cliqz.disableModule(module.name);
 	return Promise.resolve();
-}
-
-/**
- * Check and fetch a new tracker library every hour as needed
- * @memberOf Background
- */
-function autoUpdateBugDb() {
-	if (conf.enable_autoupdate) {
-		const result = conf.bugs_last_checked;
-		const nowTime = Number((new Date()).getTime());
-		// offset by 15min so that we don't double fetch
-		if (!result || nowTime > (Number(result) + 900000)) {
-			log('autoUpdateBugDb called', new Date());
-			checkLibraryVersion();
-		}
-	}
-}
-
-/**
- * Set Default Blocking: all apps in Advertising, Adult Advertising, and Site Analytics
- */
-function setGhosteryDefaultBlocking() {
-	const categoriesBlock = ['advertising', 'pornvertising', 'site_analytics'];
-	log('Blocking all trackers in categories:', ...categoriesBlock);
-	const selected_app_ids = {};
-	for (const app_id in bugDb.db.apps) {
-		if (bugDb.db.apps.hasOwnProperty(app_id)) {
-			const category = bugDb.db.apps[app_id].cat;
-			if (categoriesBlock.indexOf(category) >= 0 &&
-			!selected_app_ids.hasOwnProperty(app_id)) {
-				selected_app_ids[app_id] = 1;
-			}
-		}
-	}
-	panelData.set({ selected_app_ids });
 }
 
 /**
@@ -162,13 +125,53 @@ function checkLibraryVersion() {
 						conf.bugs_last_updated = nowTime;
 					}
 				}
-				resolve(result);
+				resolve({
+					...result,
+					confData: {
+						bugs_last_checked: conf.bugs_last_checked,
+						bugs_last_updated: conf.bugs_last_updated
+					}
+				});
 			});
 		}).catch((err) => {
 			log('Error in checkLibraryVersion', err);
 			reject(failed);
 		});
 	}));
+}
+
+/**
+ * Check and fetch a new tracker library every hour as needed
+ * @memberOf Background
+ */
+function autoUpdateBugDb() {
+	if (conf.enable_autoupdate) {
+		const result = conf.bugs_last_checked;
+		const nowTime = Number((new Date()).getTime());
+		// offset by 15min so that we don't double fetch
+		if (!result || nowTime > (Number(result) + 900000)) {
+			log('autoUpdateBugDb called', new Date());
+			checkLibraryVersion();
+		}
+	}
+}
+
+/**
+ * Set Default Blocking: all apps in Advertising, Adult Advertising, and Site Analytics
+ */
+function setGhosteryDefaultBlocking() {
+	const categoriesBlock = ['advertising', 'pornvertising', 'site_analytics'];
+	log('Blocking all trackers in categories:', ...categoriesBlock);
+	const selected_app_ids = {};
+	const app_ids = Object.keys(bugDb.db.apps);
+	app_ids.forEach((app_id) => {
+		const category = bugDb.db.apps[app_id].cat;
+		if (categoriesBlock.indexOf(category) >= 0 &&
+		!selected_app_ids.hasOwnProperty(app_id)) {
+			selected_app_ids[app_id] = 1;
+		}
+	});
+	panelData.set({ selected_app_ids });
 }
 
 /**
@@ -318,6 +321,40 @@ function handleAccountPages(name, callback) {
 }
 
 /**
+ * Handle messages sent from app/js/checkout_pages.js content script.
+ * @memberOf Background
+ *
+ * @param  {string} 	name 		message name
+ */
+function handleCheckoutPages(name) {
+	switch (name) {
+		case 'checkoutPage.buyInsights':
+		case 'checkoutPage.buyPlus':
+		case 'checkoutPage.buyPremium':
+			account.getUser()
+				.then(account.getUserSubscriptionData)
+				.catch((err) => {
+					log('handleCheckoutPages error', err);
+				});
+			return true;
+		case 'checkoutPage.login':
+			account.getUser()
+				.then(account.getUserSettings)
+				// account.getUserSettings will reject if user email is not validated
+				.catch(err => log('handleCheckoutPages error', err))
+				.then(account.getUserSubscriptionData)
+				// The user may not be a subscriber
+				.catch(err => log('handleCheckoutPages error', err));
+			return true;
+		case 'checkoutPage.register':
+			account.getUser();
+			return true;
+		default:
+			return false;
+	}
+}
+
+/**
  * Handle messages sent from dist/ghostery_dot_com.js content script.
  * @memberOf Background
  *
@@ -445,6 +482,7 @@ function handleClick2Play(name, message, tab_id, callback) {
 			return true;
 		}
 	}
+	return false;
 }
 
 /**
@@ -489,20 +527,21 @@ function handleBlockedRedirect(name, message, tab_id, callback) {
 function handleRewards(name, message, callback) {
 	switch (name) {
 		case 'rewardSignal': // e.g. hub_open | hub_closed
-			rewards.sendSignal(message);
+			Rewards.sendSignal(message);
 			break;
 		case 'ping':
 			metrics.ping(message);
 			break;
 		case 'setPanelData':
 			if (message.hasOwnProperty('enable_offers')) {
-				rewards.sendSignal(message.signal);
+				Rewards.sendSignal(message.signal);
 				panelData.set({ enable_offers: message.enable_offers });
 			}
 			return callback();
 		default:
 			break;
 	}
+	return false;
 }
 
 /**
@@ -574,11 +613,12 @@ function handleGhosteryHub(name, message, callback) {
 				case 'BLOCKING_POLICY_EVERYTHING': {
 					panelData.set({ setup_block: 3 });
 					const selected_app_ids = {};
-					for (const app_id in bugDb.db.apps) {
+					const app_ids = Object.keys(bugDb.db.apps);
+					app_ids.forEach((app_id) => {
 						if (!selected_app_ids.hasOwnProperty(app_id)) {
 							selected_app_ids[app_id] = 1;
 						}
-					}
+					});
 					panelData.set({ selected_app_ids });
 					break;
 				}
@@ -594,7 +634,7 @@ function handleGhosteryHub(name, message, callback) {
 		}
 		case 'SET_GHOSTERY_REWARDS': {
 			const { enable_ghostery_rewards = true } = message;
-			rewards.sendSignal({
+			Rewards.sendSignal({
 				actionId: `rewards_${enable_ghostery_rewards ? 'on' : 'off'}`,
 				origin: 'ghostery-setup-flow',
 				type: 'action-signal',
@@ -659,7 +699,7 @@ function handlePurplebox(name, message) {
  */
 function onMessageHandler(request, sender, callback) {
 	if (request.source === 'cliqz-content-script') {
-		return;
+		return false;
 	}
 	const {
 		name, message, origin
@@ -671,6 +711,10 @@ function onMessageHandler(request, sender, callback) {
 	if (origin === 'account_pages') {
 		// Account pages
 		return handleAccountPages(name, callback);
+	}
+	if (origin === 'checkout_pages') {
+		// Checkout pages
+		return handleCheckoutPages(name, callback);
 	}
 	if (origin === 'purplebox') {
 		// Purplebox script events
@@ -706,13 +750,13 @@ function onMessageHandler(request, sender, callback) {
 	// The message is still sent by panel-android and by the setup hub as of 8.4.0
 	if (name === 'getPanelData') {
 		if (!message.tabId) {
-			utils.getActiveTab((tab) => {
-				const data = panelData.get(message.view, tab);
+			utils.getActiveTab((activeTab) => {
+				const data = panelData.get(message.view, activeTab);
 				callback(data);
 			});
 		} else {
-			chrome.tabs.get(+message.tabId, (tab) => {
-				const data = panelData.get(message.view, tab);
+			chrome.tabs.get(+message.tabId, (messageTab) => {
+				const data = panelData.get(message.view, messageTab);
 				callback(data);
 			});
 		}
@@ -726,9 +770,9 @@ function onMessageHandler(request, sender, callback) {
 		return true;
 	}
 	if (name === 'getAllStats') {
-		insights.action('getAllDays').then((data) => {
-			insights.action('getStatsTimeline', moment(data[0]), moment(), true, true).then((data) => {
-				callback(data);
+		insights.action('getAllDays').then((dataDays) => {
+			insights.action('getStatsTimeline', moment(dataDays[0]), moment(), true, true).then((dataTimeline) => {
+				callback(dataTimeline);
 			});
 		});
 		return true;
@@ -754,8 +798,8 @@ function onMessageHandler(request, sender, callback) {
 		return false;
 	}
 	if (name === 'getCliqzModuleData') { // panel-android only
-		utils.getActiveTab((tab) => {
-			sendCliqzModuleCounts(tab.id, tab.pageHost, callback);
+		utils.getActiveTab((activeTab) => {
+			sendCliqzModuleCounts(activeTab.id, activeTab.pageHost, callback);
 		});
 		return true;
 	}
@@ -879,13 +923,14 @@ function onMessageHandler(request, sender, callback) {
 	}
 	if (name === 'account.getUser') {
 		account.getUser(message)
-			.then((user) => {
-				if (user) {
-					user.plusAccess = account.hasScopesUnverified(['subscriptions:plus'])
-						|| account.hasScopesUnverified(['subscriptions:premium']);
-					user.premiumAccess = account.hasScopesUnverified(['subscriptions:premium']);
+			.then((foundUser) => {
+				const user = { user: { ...foundUser } };
+				if (foundUser) {
+					user.user.plusAccess = account.hasScopesUnverified(['subscriptions:plus'])
+											|| account.hasScopesUnverified(['subscriptions:premium']);
+					user.user.premiumAccess = account.hasScopesUnverified(['subscriptions:premium']);
 				}
-				callback({ user });
+				callback(user);
 			})
 			.catch((err) => {
 				callback({ errors: _getJSONAPIErrorsObject(err) });
@@ -926,8 +971,8 @@ function onMessageHandler(request, sender, callback) {
 		return false;
 	}
 	if (name === 'getSettingsForExport') {
-		utils.getActiveTab((tab) => {
-			if (tab && tab.id && tab.url.startsWith('http')) {
+		utils.getActiveTab((activeTab) => {
+			if (activeTab && activeTab.id && activeTab.url.startsWith('http')) {
 				const settings = account.buildUserSettings();
 				// Blacklisted and whitelisted sites are removed from sync array,
 				// but we want to allow export and import these properties manually
@@ -937,8 +982,8 @@ function onMessageHandler(request, sender, callback) {
 				try {
 					const hash = common.hashCode(JSON.stringify({ conf: settings }));
 					const backup = JSON.stringify({ hash, settings: { conf: settings } });
-					utils.injectNotifications(tab.id, true).then(() => {
-						sendMessage(tab.id, 'exportFile', backup);
+					utils.injectNotifications(activeTab.id, true).then(() => {
+						sendMessage(activeTab.id, 'exportFile', backup);
 					});
 					callback(true);
 				} catch (e) {
@@ -955,11 +1000,11 @@ function onMessageHandler(request, sender, callback) {
 		return false;
 	}
 	if (name === 'showBrowseWindow') {
-		utils.getActiveTab((tab) => {
-			if (tab && tab.id && tab.url.startsWith('http')) {
-				utils.injectNotifications(tab.id, true).then((result) => {
+		utils.getActiveTab((activeTab) => {
+			if (activeTab && activeTab.id && activeTab.url.startsWith('http')) {
+				utils.injectNotifications(activeTab.id, true).then((result) => {
 					if (result) {
-						sendMessage(tab.id, 'showBrowseWindow', {
+						sendMessage(activeTab.id, 'showBrowseWindow', {
 							translations: {
 								browse_button_label: t('browse_button_label'), // Browse...
 								select_file_for_import: t('select_file_for_import'), // Select .ghost file for import
@@ -980,6 +1025,12 @@ function onMessageHandler(request, sender, callback) {
 		});
 		return true;
 	}
+	if (name === 'openHubPage') {
+		const hubUrl = chrome.runtime.getURL('./app/templates/hub.html');
+		metrics.ping('intro_hub_click');
+		utils.openNewTab({ url: hubUrl, become_active: true });
+		return false;
+	}
 	if (name === 'promoModals.sawPremiumPromo') {
 		promoModals.recordPremiumPromoSighting();
 		return false;
@@ -996,6 +1047,7 @@ function onMessageHandler(request, sender, callback) {
 		promoModals.turnOffPromos();
 		return false;
 	}
+	return false;
 }
 
 /**
@@ -1017,6 +1069,9 @@ function initializeDispatcher() {
 		button.update();
 		utils.flushChromeMemoryCache();
 		cliqz.modules.core.action('refreshAppState');
+	});
+	dispatcher.on('conf.save.site_blacklist', () => {
+		button.update();
 	});
 	dispatcher.on('conf.save.enable_human_web', (enableHumanWeb) => {
 		if (!IS_CLIQZ) {
@@ -1061,7 +1116,7 @@ function initializeDispatcher() {
 	});
 	dispatcher.on('conf.save.cliqz_adb_mode', (val) => {
 		if (!IS_CLIQZ) {
-			cliqz.prefs.set('cliqz-adb-mode', val);
+			cliqz.prefs.set('cliqz_adb_mode', val);
 		}
 	});
 	dispatcher.on('conf.changed.settings', debounce((key) => {
@@ -1208,7 +1263,7 @@ function initialiseWebRequestPipeline() {
 			spec: 'collect',
 			before: existingSteps.onHeadersReceived,
 			fn: (state) => {
-				events.onHeadersReceived(state);
+				Events.onHeadersReceived(state);
 				return true;
 			}
 		})
@@ -1224,7 +1279,7 @@ function initialiseWebRequestPipeline() {
  */
 function isWhitelisted(state) {
 	// state.ghosteryWhitelisted is sometimes undefined so force to bool
-	return Boolean(globals.SESSION.paused_blocking || events.policy.getSitePolicy(state.tabUrl, state.url) === 2 || state.ghosteryWhitelisted);
+	return Boolean(globals.SESSION.paused_blocking || Policy.getSitePolicy(state.tabUrl, state.url) === 2 || state.ghosteryWhitelisted);
 }
 /**
  * Set listener for 'enabled' event for Antitracking module which replaces
@@ -1289,12 +1344,12 @@ insights.on('disabled', () => {
  */
 function getDataForGhosteryTab(callback) {
 	const passedData = {};
-	insights.action('getAllDays').then((data) => {
-		insights.action('getStatsTimeline', moment(data[0]), moment(), true, true).then((data) => {
+	insights.action('getAllDays').then((dataDays) => {
+		insights.action('getStatsTimeline', moment(dataDays[0]), moment(), true, true).then((dataTimeline) => {
 			const cumulativeData = {
 				adsBlocked: 0, cookiesBlocked: 0, dataSaved: 0, fingerprintsRemoved: 0, loadTime: 0, pages: 0, timeSaved: 0, trackerRequestsBlocked: 0, trackersBlocked: 0, trackersDetected: 0
 			};
-			data.forEach((entry) => {
+			dataTimeline.forEach((entry) => {
 				Object.keys(cumulativeData).forEach((key) => {
 					cumulativeData[key] += entry[key];
 				});
@@ -1315,11 +1370,8 @@ function getDataForGhosteryTab(callback) {
  */
 function initializePopup() {
 	if (BROWSER_INFO.os === 'android') {
-		chrome.browserAction.onClicked.addListener((tab) => {
-			chrome.tabs.create({
-				url: chrome.extension.getURL(`app/templates/panel_android.html?tabId=${tab.id}`),
-				active: true,
-			});
+		chrome.browserAction.setPopup({
+			popup: 'app/templates/panel_android.html',
 		});
 	} else {
 		chrome.browserAction.setPopup({
@@ -1364,10 +1416,10 @@ function initializeEventListeners() {
 	chrome.webNavigation.onCommitted.addListener(events.onCommitted.bind(events));
 
 	// Fired when the page's DOM is fully constructed, but the referenced resources may not finish loading
-	chrome.webNavigation.onDOMContentLoaded.addListener(events.onDOMContentLoaded.bind(events));
+	chrome.webNavigation.onDOMContentLoaded.addListener(Events.onDOMContentLoaded.bind(events));
 
 	// Fired when a document, including the resources it refers to, is completely loaded and initialized
-	chrome.webNavigation.onCompleted.addListener(events.onNavigationCompleted.bind(events));
+	chrome.webNavigation.onCompleted.addListener(Events.onNavigationCompleted.bind(events));
 
 	// Fired when a new window, or a new tab in an existing window, is created to host a navigation.
 	// chrome.webNavigation.onCreatedNavigationTarget
@@ -1392,7 +1444,7 @@ function initializeEventListeners() {
 	// chrome.webRequest.onBeforeRequest
 
 	// Fires when a request is about to send headers
-	chrome.webRequest.onBeforeSendHeaders.addListener(events.onBeforeSendHeaders.bind(events), {
+	chrome.webRequest.onBeforeSendHeaders.addListener(Events.onBeforeSendHeaders.bind(events), {
 		urls: [
 			'https://l.ghostery.com/*',
 			'https://d.ghostery.com/*',
@@ -1420,17 +1472,17 @@ function initializeEventListeners() {
 	});
 
 	// Fires when a request could not be processed successfully
-	chrome.webRequest.onErrorOccurred.addListener(events.onRequestErrorOccurred.bind(events), {
+	chrome.webRequest.onErrorOccurred.addListener(Events.onRequestErrorOccurred.bind(events), {
 		urls: ['http://*/*', 'https://*/*']
 	});
 
 	/** * TABS ** */
 
 	// Fired when a new tab is created by user or internally
-	chrome.tabs.onCreated.addListener(events.onTabCreated.bind(events));
+	chrome.tabs.onCreated.addListener(Events.onTabCreated.bind(events));
 
 	// Fires when the active tab in a window changes
-	chrome.tabs.onActivated.addListener(events.onTabActivated.bind(events));
+	chrome.tabs.onActivated.addListener(Events.onTabActivated.bind(events));
 
 	// Fired when a tab is replaced with another tab due to prerendering
 	chrome.tabs.onReplaced.addListener(events.onTabReplaced.bind(events));
@@ -1607,7 +1659,7 @@ function initializeGhosteryModules() {
 
 				cliqz.events.subscribe('myoffrz:turnoff', () => {
 					panelData.set({ enable_offers: false });
-					rewards.sendSignal({
+					Rewards.sendSignal({
 						actionId: 'rewards_off',
 						type: 'action-signal',
 					});
@@ -1721,11 +1773,13 @@ function init() {
 								if (conf.current_theme !== 'default') {
 									return account.getTheme(conf.current_theme);
 								}
+								return false;
 							});
 					}
 					if (globals.JUST_INSTALLED) {
 						setGhosteryDefaultBlocking();
 					}
+					return true;
 				})
 				.catch(err => log(err));
 			// persist Conf properties to storage only after init has completed

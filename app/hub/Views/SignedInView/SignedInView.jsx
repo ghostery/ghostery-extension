@@ -20,7 +20,7 @@ import { ExitButton } from '../../../shared-components';
  * @return {JSX} JSX for rendering the Login View of the Hub app
  * @memberof HubComponents
  */
-const SignedInView = (props) => {
+const SignedInView = ({ email }) => {
 	const signedInAsString = t('hub_signedin_as_email');
 
 	return (
@@ -41,7 +41,7 @@ const SignedInView = (props) => {
 			<div className="SignedInView--addPaddingTop row align-center">
 				<div className="columns small-12 medium-6 text-center">
 					<h3 className="SignedInView--blueText">
-						{`${signedInAsString} ${props.email}`}
+						{`${signedInAsString} ${email}`}
 					</h3>
 				</div>
 			</div>

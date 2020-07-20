@@ -52,20 +52,20 @@ class CMP {
 		return getJson(URL).then((data) => {
 			if (data && (!conf.cmp_version || data.Version > conf.cmp_version)) {
 				// set default dismiss
-				data.Campaigns.forEach((campaign) => {
-					if (campaign.Dismiss === 0) {
-						campaign.Dismiss = 10;
+				data.Campaigns.forEach((dataEntry) => {
+					if (dataEntry.Dismiss === 0) {
+						dataEntry.Dismiss = 10;
 					}
 
-					// set last campaign run timestamp to avoid running campaigns more than once
-					if (!conf.last_cmp_date || conf.last_cmp_date < campaign.Timestamp) {
-						conf.last_cmp_date = campaign.Timestamp;
+					// set last campaign (dataEntry) run timestamp to avoid running campaigns more than once
+					if (!conf.last_cmp_date || conf.last_cmp_date < dataEntry.Timestamp) {
+						conf.last_cmp_date = dataEntry.Timestamp;
 					}
 				});
 				// update Conf and local CMP_DATA
 				conf.cmp_version = data.Version;
-				// eslint-disable-next-line no-multi-assign
-				globals.SESSION.cmp_data = this.CMP_DATA = data.Campaigns;
+				globals.SESSION.cmp_data = data.Campaigns;
+				this.CMP_DATA = data.Campaigns;
 				return this.CMP_DATA;
 			}
 			// getJson() returned a 204, meaning no new campaigns available

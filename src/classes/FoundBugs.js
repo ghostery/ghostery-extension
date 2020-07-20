@@ -32,7 +32,8 @@ class FoundBugs {
 	 *				sources: [{
 	 *					src: string,
 	 *					blocked: boolean,
-	 *					type: string
+	 *					type: string,
+	 *					request_id: string
 	 *				}]
 	 *			}
 	 *		}
@@ -50,7 +51,8 @@ class FoundBugs {
 	 *				sources: [{
 	 *					src: string,
 	 *					blocked: boolean,
-	 *					type: string
+	 *					type: string,
+	 *					request_id: string
 	 *				}]
 	 *			}],
 	 *			appsMetadata: {
@@ -88,8 +90,9 @@ class FoundBugs {
 	 * @param  {string} 	src			resource url
 	 * @param  {boolean} 	blocked 	blocking status of the tracker id from this tab_id
 	 * @param  {string} 	type 		request resource type
+	 * @param  {string} 	request_id 	request_id for the resource to use as a unique id
 	 */
-	update(tab_id, bug_id, src, blocked, type) {
+	update(tab_id, bug_id, src, blocked, type, request_id) {
 		if (!this._init(tab_id)) {
 			return;
 		}
@@ -98,7 +101,7 @@ class FoundBugs {
 			return;
 		}
 
-		this._updateFoundBugs(tab_id, bug_id, src, blocked, type);
+		this._updateFoundBugs(tab_id, bug_id, src, blocked, type, request_id);
 		this._updateFoundApps(tab_id, bug_id);
 	}
 
@@ -191,65 +194,59 @@ class FoundBugs {
 		const bugs = this.getBugs(tab_id);
 		const { db } = bugDb;
 
-		let id;
-		let aid;
-		let cid; // category id
-
 		if (!bugs) {
 			return bugs;
 		}
 
 		// squish all the bugs into categories first
-		for (id in bugs) {
-			if (bugs.hasOwnProperty(id)) {
-				aid = db.bugs[id].aid; // eslint-disable-line prefer-destructuring
-				cid = db.apps[aid].cat;
+		const ids = Object.keys(bugs);
+		ids.forEach((id) => {
+			const appid = db.bugs[id].aid;
+			const cid = db.apps[appid].cat;
 
-				if (cats_obj.hasOwnProperty(cid)) {
-					if (!cats_obj[cid].appIds.includes(aid)) {
-						cats_obj[cid].appIds.push(aid);
-						cats_obj[cid].trackers.push({
-							id: aid,
-							name: db.apps[aid].name,
-							blocked: bugs[id].blocked
-						});
-						if (bugs[id].blocked) {
-							cats_obj[cid].blocked++;
-						} else {
-							cats_obj[cid].allowed++;
-						}
-						cats_obj[cid].total++;
+			if (cats_obj.hasOwnProperty(cid)) {
+				if (!cats_obj[cid].appIds.includes(appid)) {
+					cats_obj[cid].appIds.push(appid);
+					cats_obj[cid].trackers.push({
+						id: appid,
+						name: db.apps[appid].name,
+						blocked: bugs[id].blocked
+					});
+					if (bugs[id].blocked) {
+						cats_obj[cid].blocked++;
+					} else {
+						cats_obj[cid].allowed++;
 					}
-				} else {
-					cats_obj[cid] = {
-						id: cid,
-						name: cid,
-						appIds: [aid],
-						trackers: [{
-							id: aid,
-							name: db.apps[aid].name,
-							blocked: bugs[id].blocked
-						}],
-						blocked: (bugs[id].blocked ? 1 : 0),
-						allowed: (bugs[id].blocked ? 0 : 1),
-						total: 1
-					};
+					cats_obj[cid].total++;
 				}
+			} else {
+				cats_obj[cid] = {
+					id: cid,
+					name: cid,
+					appIds: [appid],
+					trackers: [{
+						id: appid,
+						name: db.apps[appid].name,
+						blocked: bugs[id].blocked
+					}],
+					blocked: (bugs[id].blocked ? 1 : 0),
+					allowed: (bugs[id].blocked ? 0 : 1),
+					total: 1
+				};
 			}
-		}
+		});
 
 		// convert categories hash to array
-		for (cid in cats_obj) {
-			if (cats_obj.hasOwnProperty(cid)) {
-				cats_arr.push(cats_obj[cid]);
-			}
-		}
+		const cids = Object.keys(cats_obj);
+		cids.forEach((cid) => {
+			cats_arr.push(cats_obj[cid]);
+		});
 
 		if (sorted) {
 			cats_arr.sort((a, b) => {
-				a = a.name.toLowerCase();
-				b = b.name.toLowerCase();
-				return (a > b ? 1 : (a < b ? -1 : 0));
+				const a1 = a.name.toLowerCase();
+				const b1 = b.name.toLowerCase();
+				return (a1 > b1 ? 1 : (a1 < b1 ? -1 : 0));
 			});
 		}
 
@@ -420,11 +417,11 @@ class FoundBugs {
 	 */
 	_checkForCompatibilityIssues(tab_id, tab_url) {
 		const { apps, appsMetadata, issueCounts } = this._foundApps[tab_id];
-		apps.forEach((app) => {
-			const { id } = app;
+		apps.forEach((appEntry) => {
+			const { id } = appEntry;
 			if (appsMetadata[id].needsCompatibilityCheck) {
-				app.hasCompatibilityIssue = app.blocked ? compDb.hasIssue(id, tab_url) : false;
-				if (app.hasCompatibilityIssue) { issueCounts.compatibility++; }
+				appEntry.hasCompatibilityIssue = appEntry.blocked ? compDb.hasIssue(id, tab_url) : false;
+				if (appEntry.hasCompatibilityIssue) { issueCounts.compatibility++; }
 				appsMetadata[id].needsCompatibilityCheck = false;
 			}
 		});
@@ -438,8 +435,9 @@ class FoundBugs {
 	 * @param  {string} 	src     source urls for the bug
 	 * @param  {boolean} 	blocked
 	 * @param  {string} 	type
+	 * @param  {string} 	request_id 	request_id for the resource to use as a unique id
 	 */
-	_updateFoundBugs(tab_id, bug_id, src, blocked, type) {
+	_updateFoundBugs(tab_id, bug_id, src, blocked, type, request_id) {
 		if (!this._foundBugs[tab_id].hasOwnProperty(bug_id)) {
 			this._foundBugs[tab_id][bug_id] = {
 				sources: [],
@@ -453,7 +451,8 @@ class FoundBugs {
 		bug.sources.push({
 			src,
 			blocked,
-			type: type.toLowerCase()
+			type: type.toLowerCase(),
+			request_id
 		});
 
 		// Check for insecure tag loading in secure page

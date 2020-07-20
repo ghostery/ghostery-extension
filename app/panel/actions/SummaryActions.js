@@ -21,7 +21,6 @@ import {
 } from '../constants/constants';
 import { sendMessageInPromise } from '../utils/msg';
 
-
 /**
  * Fetch Cliqz Modules data from background
  * @return {Object}
@@ -72,10 +71,9 @@ export function updateGhosteryPaused(data) {
 			});
 			if (data.time) {
 				setTimeout(() => {
-					data.ghosteryPaused = !data.ghosteryPaused;
 					dispatch({
 						type: UPDATE_GHOSTERY_PAUSED,
-						data
+						data: { ...data, ghosteryPaused: !data.ghosteryPaused }
 					});
 				}, data.time);
 			}

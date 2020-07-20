@@ -22,7 +22,8 @@ export default class SiteTrackers extends React.Component {
 			id: 'blockAllSite',
 			name: 'Block All',
 			callback: () => {
-				this.context.callGlobalAction({
+				const { callGlobalAction } = this.context;
+				callGlobalAction({
 					actionName: 'blockUnBlockAllTrackers',
 					actionData: {
 						block: true,
@@ -35,7 +36,8 @@ export default class SiteTrackers extends React.Component {
 			id: 'unblockAllSite',
 			name: 'Unblock All',
 			callback: () => {
-				this.context.callGlobalAction({
+				const { callGlobalAction } = this.context;
+				callGlobalAction({
 					actionName: 'blockUnBlockAllTrackers',
 					actionData: {
 						block: false,
@@ -47,13 +49,14 @@ export default class SiteTrackers extends React.Component {
 	]
 
 	render() {
+		const { categories } = this.props;
 		return (
 			<div className="site-trackers">
 				<div className="header">
 					<h2>Trackers on this site</h2>
 					<DotsMenu actions={this.actions} />
 				</div>
-				<Accordions type="site-trackers" categories={this.props.categories} />
+				<Accordions type="site-trackers" categories={categories} />
 			</div>
 		);
 	}

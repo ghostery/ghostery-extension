@@ -14,7 +14,7 @@
  * @namespace  PanelAndroidUtils
  */
 
-import { apps } from '../../../cliqz/antitracking/tracker_db_v2.json';
+import { apps } from '../../../cliqz/core/tracker_db_v2.json';
 
 // Link to whotracks.me website
 export default function getUrlFromTrackerId(id) {

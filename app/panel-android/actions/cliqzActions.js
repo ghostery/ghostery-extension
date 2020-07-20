@@ -13,7 +13,7 @@
 
 import { sendMessageInPromise } from '../../panel/utils/msg';
 
-export function getCliqzModuleData(tabId) {
+export default function getCliqzModuleData(tabId) {
 	return sendMessageInPromise('getCliqzModuleData', {
 		tabId,
 	});

@@ -11,8 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint jsx-a11y/label-has-associated-control: 0 */
-
 import React from 'react';
 import ClassNames from 'classnames';
 
@@ -24,8 +22,10 @@ import ClassNames from 'classnames';
 class ToggleSlider extends React.Component {
 	constructor(props) {
 		super(props);
+
+		const { isChecked } = this.props;
 		this.state = {
-			checked: this.props.isChecked,
+			checked: isChecked,
 		};
 
 		// Event Bindings
@@ -35,10 +35,11 @@ class ToggleSlider extends React.Component {
 	/**
 	 * Lifecycle event
 	 */
-	UNSAFE_componentWillReceiveProps(nextProps) {
-		this.setState({
-			checked: nextProps.isChecked,
-		});
+	static getDerivedStateFromProps(prevProps, prevState) {
+		if (prevState.checked !== prevProps.isChecked) {
+			return { checked: prevProps.isChecked };
+		}
+		return null;
 	}
 
 	/**
@@ -47,12 +48,11 @@ class ToggleSlider extends React.Component {
 	 * property in the parent.  Or it can just set the state directly.
 	 */
 	_handleChange(event) {
-		if (typeof this.props.onChange === 'function') {
-			this.props.onChange(event);
+		const { onChange } = this.props;
+		if (typeof onChange === 'function') {
+			onChange(event);
 		} else {
-			this.setState({
-				checked: !this.state.checked,
-			});
+			this.setState(prevState => ({ checked: !prevState.checked }));
 		}
 	}
 
@@ -61,9 +61,11 @@ class ToggleSlider extends React.Component {
 	 * @return {JSX} JSX for rendering the Toggle Slider used throughout the extension
 	 */
 	render() {
-		const compClassNames = ClassNames('ToggleSlider', this.props.className);
+		const { className, isDisabled } = this.props;
+		const { checked } = this.state;
+		const compClassNames = ClassNames('ToggleSlider', className);
 		const labelClassNames = ClassNames('ToggleSlider__switch', {
-			disabled: this.props.isDisabled,
+			disabled: isDisabled,
 		});
 		return (
 			<div className={compClassNames}>
@@ -71,7 +73,7 @@ class ToggleSlider extends React.Component {
 					<input
 						type="checkbox"
 						onChange={this._handleChange}
-						checked={this.state.checked}
+						checked={checked}
 					/>
 					<span className="ToggleSlider__slider" />
 					<span className="ToggleSlider__slider_circle" />

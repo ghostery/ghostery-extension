@@ -36,7 +36,7 @@ const SetupView = (props) => {
 						path={step.path}
 						render={() => (
 							<div>
-								<SetupHeader {...step.headerProps} />
+								<SetupHeader title={step.headerProps.title} titleImage={step.headerProps.titleImage} />
 								<step.bodyComponent index={step.index} sendMountActions={sendMountActions} />
 							</div>
 						)}

@@ -32,7 +32,6 @@ class Stats extends React.Component {
 	componentDidMount() {
 		sendMessage('ping', 'hist_stats_panel');
 		if (!this._hasPlusAccess(this.props)) {
-			// eslint-disable-next-line
 			this.setState(this._reset(true));
 			return;
 		}
@@ -42,14 +41,14 @@ class Stats extends React.Component {
 	/**
 	 * Lifecycle event
 	 */
-	UNSAFE_componentWillReceiveProps(nextProps) {
-		const nextPlus = this._hasPlusAccess(nextProps);
+	componentDidUpdate(prevProps) {
 		const thisPlus = this._hasPlusAccess(this.props);
-		if (nextPlus !== thisPlus) {
-			if (nextPlus) {
+		const prevPlus = this._hasPlusAccess(prevProps);
+		if (thisPlus !== prevPlus) {
+			if (thisPlus) {
 				this._init();
 			} else {
-				this.setState(this._reset(true));
+				this._resetState();
 			}
 		}
 	}
@@ -156,7 +155,7 @@ class Stats extends React.Component {
 		if (!this._hasPlusAccess(this.props)) {
 			return;
 		}
-		const state = Object.assign({}, this.state);
+		const state = { ...this.state };
 		const { selection } = state;
 		if (event.currentTarget.id !== selection.view) {
 			selection.view = event.currentTarget.id;
@@ -180,7 +179,7 @@ class Stats extends React.Component {
 		if (!this._hasPlusAccess(this.props)) {
 			return;
 		}
-		const state = Object.assign({}, this.state);
+		const state = { ...this.state };
 		const { selection } = state;
 		if (event.currentTarget.id !== selection.type) {
 			const lastType = selection.type;
@@ -230,7 +229,7 @@ class Stats extends React.Component {
 		if (!this._hasPlusAccess(this.props)) {
 			return;
 		}
-		const state = Object.assign({}, this.state);
+		const state = { ...this.state };
 		const data = state.selection.type === 'daily' ? state.dailyData : state.monthlyData;
 		if (e.target.id === 'stats-forward') {
 			state.selection.currentIndex += 6;
@@ -287,7 +286,12 @@ class Stats extends React.Component {
 	 * Helper function to handle clicking on Sign in link on modal
 	 */
 	signIn = () => {
-		this.props.history.push('/login');
+		const { history } = this.props;
+		history.push('/login');
+	}
+
+	_resetState = () => {
+		this.setState(this._reset(true));
 	}
 
 	_reset = (demo) => {
@@ -344,7 +348,7 @@ class Stats extends React.Component {
 	 * Save it in component's state
 	 */
 	_init = () => {
-		const state = Object.assign({}, this.state);
+		const state = { ...this.state };
 		this._getAllStats().then((allData) => {
 			if (Array.isArray(allData)) {
 				if (allData.length === 0) {
@@ -498,7 +502,7 @@ class Stats extends React.Component {
 	 * Determine data selection for Stats Graph according to parameters in state
 	 * Save it in component's state
 	 */
-	_determineSelectionData = (state = Object.assign({}, this.state)) => {
+	_determineSelectionData = (state = ({ ...this.state })) => {
 		const {
 			dailyData, monthlyData, cumulativeMonthlyData, selection
 		} = state;

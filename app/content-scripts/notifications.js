@@ -250,7 +250,6 @@ const NotificationsContentScript = (function(win, doc) {
 
 		const header = createNotificationHeader();
 
-
 		appendChild(content, header);
 		const messageDiv = createEl('div');
 

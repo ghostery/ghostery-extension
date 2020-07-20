@@ -47,7 +47,7 @@ describe('src/classes/FoundBugs.js', () => {
 				"614": {"name": "New Relic","cat": "site_analytics","tags": [48]}},
 				"bugs": {"2": {"aid": 13},"935": {"aid": 13},"1982": {"aid": 13},"719": {"aid": 464},"1009": {"aid": 614}},
 				"firstPartyExceptions": {'something': true},
-				"patterns": {'something': true},
+				"patterns": { regex: { 'something': true} },
 				"version":416
 			});
 			// Mock bugDb fetch response

@@ -34,11 +34,12 @@ class ProductsViewContainer extends Component {
 	 * @return {JSX} JSX for rendering the Products View of the Hub app
 	 */
 	render() {
+		const { actions } = this.props;
 		return (
 			<ProductsView
-				onAndroidClick={() => { this.props.actions.sendPing({ type: 'products_cta_android' }); }}
-				onIosClick={() => { this.props.actions.sendPing({ type: 'products_cta_ios' }); }}
-				onLiteClick={() => { this.props.actions.sendPing({ type: 'products_cta_lite' }); }}
+				onAndroidClick={() => { actions.sendPing({ type: 'products_cta_android' }); }}
+				onIosClick={() => { actions.sendPing({ type: 'products_cta_ios' }); }}
+				onLiteClick={() => { actions.sendPing({ type: 'products_cta_lite' }); }}
 			/>
 		);
 	}

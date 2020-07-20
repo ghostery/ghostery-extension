@@ -24,7 +24,7 @@ import { setSetupStep, setSetupNavigation } from '../../SetupView/SetupViewActio
  * @return {function}        this function returns a plain object, which will be merged into the component's props
  * @memberof HubContainers
  */
-const mapStateToProps = state => Object.assign({}, state.setup);
+const mapStateToProps = state => ({ ...state.setup });
 
 /**
  * Bind the component's action creators using Redux's bindActionCreators.
@@ -33,10 +33,11 @@ const mapStateToProps = state => Object.assign({}, state.setup);
  * @memberof SetupContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign({}, SetupAntiSuiteViewActions, {
+	actions: bindActionCreators({
+		...SetupAntiSuiteViewActions,
 		setSetupStep,
-		setSetupNavigation,
-	}), dispatch),
+		setSetupNavigation
+	}, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SetupAntiSuiteViewContainer);

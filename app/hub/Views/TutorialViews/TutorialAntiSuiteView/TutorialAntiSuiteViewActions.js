@@ -14,7 +14,7 @@
 import { log, sendMessageInPromise } from '../../../utils';
 import { SET_TUTORIAL_COMPLETE } from '../../TutorialView/TutorialViewConstants';
 
-export function setTutorialComplete(actionData) {
+export default function setTutorialComplete(actionData) {
 	return function(dispatch) {
 		return sendMessageInPromise(SET_TUTORIAL_COMPLETE, actionData).then((data) => {
 			dispatch({

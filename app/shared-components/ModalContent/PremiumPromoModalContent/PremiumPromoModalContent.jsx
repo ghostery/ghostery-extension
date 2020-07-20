@@ -98,7 +98,6 @@ const PremiumPromoModalContent = (props) => {
 	);
 };
 
-
 // PropTypes ensure we pass required props of the correct type
 PremiumPromoModalContent.propTypes = {
 	location: PropTypes.string.isRequired,

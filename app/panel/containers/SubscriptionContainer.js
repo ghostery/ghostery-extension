@@ -25,11 +25,12 @@ import { getUserSubscriptionData } from '../../Account/AccountActions';
  * @todo  We are not using ownProps, so we better not specify it explicitly,
  * in this case it won't be passed by React (see https://github.com/reactjs/react-redux/blob/master/docs/api.md).
  */
-const mapStateToProps = state => Object.assign({}, state.account, {
+const mapStateToProps = state => ({
+	...state.account,
 	theme: state.panel.theme,
 	current_theme: state.panel.current_theme,
 	subscriber: state.panel.subscriber,
-	language: state.panel.language,
+	language: state.panel.language
 });
 /**
  * Bind Subscription view component action creators using Redux's bindActionCreators
@@ -39,10 +40,10 @@ const mapStateToProps = state => Object.assign({}, state.account, {
  * @return {function}          	  to be used as an argument in redux connect call
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign({}, {
+	actions: bindActionCreators({
 		getTheme,
 		getUserSubscriptionData
-	}), dispatch),
+	}, dispatch),
 });
 /**
  * Connects Subscription view component to the Redux store. Pass updated match, location, and history props to the wrapped component.

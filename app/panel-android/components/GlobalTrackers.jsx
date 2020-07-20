@@ -22,7 +22,8 @@ export default class GlobalTrackers extends React.Component {
 			id: 'blockAllGlobal',
 			name: 'Block All',
 			callback: () => {
-				this.context.callGlobalAction({
+				const { callGlobalAction } = this.context;
+				callGlobalAction({
 					actionName: 'blockUnBlockAllTrackers',
 					actionData: {
 						block: true,
@@ -35,7 +36,8 @@ export default class GlobalTrackers extends React.Component {
 			id: 'unblockAllGlobal',
 			name: 'Unblock All',
 			callback: () => {
-				this.context.callGlobalAction({
+				const { callGlobalAction } = this.context;
+				callGlobalAction({
 					actionName: 'blockUnBlockAllTrackers',
 					actionData: {
 						block: false,
@@ -48,7 +50,8 @@ export default class GlobalTrackers extends React.Component {
 			id: 'resetSettings',
 			name: 'Reset Settings',
 			callback: () => {
-				this.context.callGlobalAction({
+				const { callGlobalAction } = this.context;
+				callGlobalAction({
 					actionName: 'resetSettings',
 				});
 			},
@@ -56,7 +59,8 @@ export default class GlobalTrackers extends React.Component {
 	];
 
 	get categories() {
-		return this.props.categories;
+		const { categories } = this.props;
+		return categories;
 	}
 
 	render() {

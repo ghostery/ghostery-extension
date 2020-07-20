@@ -27,7 +27,8 @@ function TutorialViewReducer(state = initialState, action) {
 				textNext,
 				textDone,
 			} = action.data.navigation;
-			return Object.assign({}, state, {
+			return {
+				...state,
 				tutorial: {
 					navigation: {
 						activeIndex,
@@ -38,8 +39,8 @@ function TutorialViewReducer(state = initialState, action) {
 						textNext,
 						textDone,
 					}
-				},
-			});
+				}
+			};
 		}
 		case SET_TUTORIAL_NAVIGATION: {
 			const {
@@ -51,8 +52,10 @@ function TutorialViewReducer(state = initialState, action) {
 				textNext,
 				textDone,
 			} = action.data;
-			return Object.assign({}, state, {
-				tutorial: Object.assign({}, state.tutorial, {
+			return {
+				...state,
+				tutorial: {
+					...state.tutorial,
 					navigation: {
 						activeIndex,
 						hrefPrev,
@@ -61,9 +64,9 @@ function TutorialViewReducer(state = initialState, action) {
 						textPrev,
 						textNext,
 						textDone,
-					},
-				}),
-			});
+					}
+				}
+			};
 		}
 
 		default: return state;
