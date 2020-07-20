@@ -195,6 +195,7 @@ class BlockingCategory extends React.Component {
 			toggleCategoryOpen,
 		} = this.props;
 		const {
+			id,
 			name,
 			img_name,
 			num_total,
@@ -202,8 +203,12 @@ class BlockingCategory extends React.Component {
 		} = category;
 		const categoryImage = `/app/images/panel-android/categories/${img_name}.svg`;
 
+		const categoryClassNames = ClassNames('BlockingCategory', {
+			BlockingCategory__unknown: id === 'unknown',
+		});
+
 		return (
-			<div className="BlockingCategory">
+			<div className={categoryClassNames}>
 				<div className="BlockingCategory__details flex-container" onClick={() => { toggleCategoryOpen(index); }}>
 					<img className="BlockingCategory__image" src={categoryImage} />
 					<div className="flex-child-grow">
