@@ -208,7 +208,17 @@ class PanelAndroid extends React.Component {
 		const unknownTrackers = Array.from(new Set([
 			...antiTracking.unknownTrackers.map(this.massageCliqzTrackers),
 			...adBlock.unknownTrackers.map(this.massageCliqzTrackers),
-		]));
+		])).sort((a, b) => {
+			const nameA = a.name.toLowerCase();
+			const nameB = b.name.toLowerCase();
+			if (nameA < nameB) {
+				return -1;
+			}
+			if (nameA > nameB) {
+				return 1;
+			}
+			return 0;
+		});
 		const unknownCategory = {
 			id: 'unknown',
 			name: t('unknown'),
@@ -236,7 +246,7 @@ class PanelAndroid extends React.Component {
 				<Tab tabLabel={t('android_tab_site_blocking')} linkClassName="Tab__label">
 					<BlockingTab
 						type="site"
-						categories={[...categories, unknownCategory]}
+						categories={unknownTrackers.length === 0 ? categories : [...categories, unknownCategory]}
 						settings={{ toggle_individual_trackers }}
 						siteProps={this.siteProps}
 						callGlobalAction={this.callGlobalAction}
