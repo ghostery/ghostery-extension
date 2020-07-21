@@ -49,7 +49,9 @@ class Help extends React.Component {
 						<div className="support-section">
 							<PanelToTabLink href={hubUrl}>{t('panel_help_setup')}</PanelToTabLink>
 							{clickCount >= 5 && (
-								<a href="debug_information.html" onClick={handleClickOnNewTabLink}>Open Debug Information</a>
+								<a href="debug_information.html" onClick={handleClickOnNewTabLink}>
+									{t('open_debug_information')}
+								</a>
 							)}
 						</div>
 						<div className="support-section">
