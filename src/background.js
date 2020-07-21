@@ -1100,6 +1100,25 @@ function getAntitrackingTestConfig() {
 }
 
 /**
+ * Set option for Hub promo A/B/C test based
+ * on the results returned from the abtest endpoint.
+ * @memberOf Background
+ *
+ * @return {Object} 	Hub promotion configuration parameters
+ */
+function setupHubPromoABTest() {
+	if (conf.hub_promo_variant !== 'not_yet_set') return;
+
+	if (abtest.hasTest('hub_plain')) {
+		conf.hub_promo_variant = 'plain';
+	} else if (abtest.hasTest('hub_midnight')) {
+		conf.hub_promo_variant = 'midnight';
+	} else {
+		conf.hub_promo_variant = 'upgrade';
+	}
+}
+
+/**
  * Adjust antitracking parameters based on the current state
  * of ABTest and availability of Human Web.
  */
@@ -1127,6 +1146,8 @@ function setupABTest() {
 	// 	cliqz.disableModule('search');
 	// 	cliqz.disableModule('overlay');
 	// }
+
+	setupHubPromoABTest();
 }
 
 /**
@@ -1615,12 +1636,6 @@ function initializeGhosteryModules() {
 		setTimeout(() => {
 			metrics.ping('install_complete');
 		}, 300000);
-
-		// open the Ghostery Hub on install with justInstalled query parameter set to true
-		chrome.tabs.create({
-			url: chrome.runtime.getURL('./app/templates/hub.html?justInstalled=true'),
-			active: true
-		});
 	} else {
 		// Record install if the user previously closed the browser before the install ping fired
 		metrics.ping('install');
@@ -1685,17 +1700,24 @@ function initializeGhosteryModules() {
 
 	// Set these tasks to run every hour
 	function scheduledTasks() {
-		// auto-fetch from CMP
-		cmp.fetchCMPData();
+		return new Promise((resolve) => {
+			// auto-fetch from CMP
+			cmp.fetchCMPData();
 
-		if (!IS_CLIQZ) {
-			// auto-fetch human web offer
-			abtest.fetch().then(() => {
-				setupABTest();
-			}).catch(() => {
-				log('Unable to reach abtest server');
-			});
-		}
+			if (!IS_CLIQZ) {
+				// auto-fetch human web offer
+				abtest.fetch()
+					.then(() => {
+						setupABTest();
+					})
+					.catch(() => {
+						log('Unable to reach abtest server');
+					})
+					.finally(() => resolve());
+			} else {
+				resolve();
+			}
+		});
 	}
 
 	// Check CMP and ABTest every hour.
@@ -1729,7 +1751,19 @@ function initializeGhosteryModules() {
 		cliqzStartup,
 	]).then(() => {
 		// run scheduledTasks on init
-		scheduledTasks();
+		scheduledTasks().then(() => {
+			// open the Ghostery Hub on install with justInstalled query parameter set to true
+			// we need to do this after running scheduledTasks for the first time
+			// because of an A/B test that determines which promo variant is shown in the Hub on install
+			if (globals.JUST_INSTALLED) {
+				const route = (conf.hub_promo_variant === 'upgrade' || conf.hub_promo_variant === 'not_yet_set') ? '' : '#home';
+				const showPremiumPromoModal = conf.hub_promo_variant === 'midnight';
+				chrome.tabs.create({
+					url: chrome.runtime.getURL(`./app/templates/hub.html?$justInstalled=true&pm=${showPremiumPromoModal}${route}`),
+					active: true
+				});
+			}
+		});
 	});
 }
 

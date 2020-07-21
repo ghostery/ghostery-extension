@@ -315,7 +315,7 @@ section.home-template .section.section-pricing {
 			font-size: rem-calc(12);
 			margin-bottom: 8px;
 			text-align: left;
-			padding-left: rem-calc(40);
+			padding-left: rem-calc(35);
 			img {
 				padding-right: 10px;
 			}
@@ -379,7 +379,6 @@ section.home-template .section.section-pricing {
 			margin-top: 10px;
 			margin-bottom: rem-calc(20);
 			text-transform: none;
-			width: 177px;
 			height: 38px;
 			line-height: 22px;
 			&.already-protected {
@@ -567,7 +566,6 @@ section.home-template .section.section-pricing {
 	}
 	.button-premium {
 		height: 38px;
-		width: 177px;
 		padding: 7.7px 14px;
 		line-height: 22px;
 		background: linear-gradient(
@@ -775,8 +773,8 @@ section.home-template .section.section-pricing {
 
 			}
 			td+td, th+th {
-				width: 166px;
-				max-width: 166px;
+				width: 216px;
+				max-width: 216px;
 			}
 		}
 	}
