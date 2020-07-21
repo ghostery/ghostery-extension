@@ -191,10 +191,11 @@ class OverviewTab extends React.Component {
 			</svg>
 		);
 
+		// Remove `flex-dir-row-reverse` & `hide` classes when you add back the accountIcon
 		return (
 			<div className="OverviewTab__NavigationLinks full-width">
-				<div className="row align-justify align-middle">
-					<div className="OverviewTab__NavigationLink" onClick={clickAccount}>
+				<div className="row align-justify flex-dir-row-reverse align-middle">
+					<div className="OverviewTab__NavigationLink hide" onClick={clickAccount}>
 						{accountIcon}
 					</div>
 					<div className="OverviewTab__NavigationLink" onClick={clickSettings}>

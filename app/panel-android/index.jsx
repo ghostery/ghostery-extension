@@ -11,14 +11,13 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  *
  * ToDo:
+ *   - [next] Add a Close & Reload notification above blue navbar.
  *   - [ ] Add tests for PanelAndroid Settings and Panel Settings sub-components
  *   - [ ] Add tests for PanelAndroid Menu and Panel Menu Sub-Components
- *   - [ ] See if Tino is OK with the react-window List library for rendering lists
  *   - [ ] See if Vinny likes what I did with SmartBlock & CliqzFeatures
  *   - [ ] Add Account Views
  *   - [ ] Replace hidden tooltips on the OverviewTab with a Help Screen
  *   - [ ] Make a landscape mode: OverviewTab on left, Site/Global Blocking on right.
-
  *
  * @namespace  PanelAndroidClasses
  */

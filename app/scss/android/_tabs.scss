@@ -33,16 +33,15 @@
 	}
 	.Tab__navigation_link {
 		padding: 0 10px 2px;
-		color: $white;
+		color: rgba($white, 0.8);
 		font-size: 12px;
 		font-weight: 500;
 		text-transform: uppercase;
-		opacity: 0.8;
-		@include prefix('transition', 'opacity 300ms ease-in');
+		@include prefix('transition', 'color 300ms ease-in');
 	}
 	.Tab__navigation_link.Tab--active {
 		padding-bottom: 0;
-		opacity: 1;
+		color: $white;
 	}
 
 	.Tabs__active_content {}
