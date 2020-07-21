@@ -20,6 +20,9 @@ import GeneralSettings from '../../../panel/components/Settings/GeneralSettings'
 import AdBlocker from '../../../panel/components/Settings/AdBlocker';
 import Notifications from '../../../panel/components/Settings/Notifications';
 import OptIn from '../../../panel/components/Settings/OptIn';
+import Help from '../../../panel/components/Help';
+import About from '../../../panel/components/About';
+
 import globals from '../../../../src/classes/Globals';
 
 const { IS_CLIQZ } = globals;
@@ -103,6 +106,12 @@ class Account extends React.Component {
 			case 'settings-opt-in':
 				headerText = t('settings_opt_in');
 				break;
+			case 'settings-help':
+				headerText = t('panel_menu_help');
+				break;
+			case 'settings-about':
+				headerText = t('panel_menu_about');
+				break;
 			default:
 				headerText = '';
 		}
@@ -139,6 +148,12 @@ class Account extends React.Component {
 					</div>
 					<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-opt-in' }); }}>
 						{ t('settings_opt_in') }
+					</div>
+					<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-help' }); }}>
+						{ t('panel_menu_help') }
+					</div>
+					<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-about' }); }}>
+						{ t('panel_menu_about') }
 					</div>
 				</div>
 			</div>
@@ -224,6 +239,8 @@ class Account extends React.Component {
 				{view === 'settings-adblocker' && this._renderSettingsAdBlocker()}
 				{view === 'settings-notifications' && this._renderSettingsNotification()}
 				{view === 'settings-opt-in' && this._renderSettingsOptIn()}
+				{view === 'settings-help' && (<Help />)}
+				{view === 'settings-about' && (<About />)}
 			</div>
 		);
 	}
