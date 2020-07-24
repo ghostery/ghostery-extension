@@ -650,6 +650,9 @@
 	"panel_signin_success": {
 		"message": "您现在登录的用户为 "
 	},
+	"panel_signin_premium_benefits": {
+		"message": "您的帐户可以免费试用我们的 Premium 福利，包括我们的 Ghostery Midnight 应用程序提供的 VPN 服务和覆盖整台设备的隐私保护。"
+	},
 	"panel_view_trackers": {
 		"message": "查看跟踪器"
 	},
@@ -701,8 +704,8 @@
 	"panel_detail_menu_rewards_title": {
 		"message": "Rewards"
 	},
-	"panel_detail_menu_premium_title": {
-		"message": "高级版"
+	"panel_detail_learn_more": {
+	  "message": "了解详情"
 	},
 	"panel_detail_history_title": {
 		"message": "历史记录"
@@ -730,9 +733,6 @@
 	},
 	"panel_detail_rewards_off": {
 		"message": "Ghostery Rewards已关闭"
-	},
-	"panel_detail_premium_title": {
-		"message": "Ghostery 高级版"
 	},
 	"panel_detail_premium_text": {
 		"message": "功能即将推出。"
@@ -1237,6 +1237,9 @@
 	"hub_side_navigation_home": {
 		"message": "主页"
 	},
+	"hub_side_navigation_upgrade_plan": {
+		"message": "升级套餐"
+	},
 	"hub_side_navigation_tutorial": {
 		"message": "学习教程"
 	},
@@ -1293,6 +1296,90 @@
 	},
 	"hub_home_feature_setup_button_alt": {
 		"message": "自定义设置完毕"
+	},
+	"hub_home_plus_upgrade_text": {
+		"message": "不仅仅提供基本隐私服务。升级您的 Ghostery 套餐以获得覆盖整台设备的保护、VPN 访问等更多功能！"
+	},
+	"hub_home_plus_upgrade_button_text": {
+		"message": "立即升级"
+	},
+	"hub_home_plus_full_protection": {
+		"message": "您已获得全面保护！"
+	},
+	"hub_upgrade_your": {
+		"message": "升级您的"
+	},
+	"hub_upgrade_protection_plan": {
+		"message": "保护套餐"
+	},
+	"hub_upgrade_yearly": {
+		"message": "每年"
+	},
+	"hub_upgrade_monthly": {
+		"message": "每月"
+	},
+	"hub_upgrade_plan_free": {
+		"message": "免费"
+	},
+	"hub_upgrade_already_protected": {
+		"message": "已保护"
+	},
+	"hub_upgrade_basic_protection": {
+		"message": "基本保护"
+	},
+	"hub_upgrade_basic_browser_protection": {
+		"message": "基本浏览器保护"
+	},
+	"hub_upgrade_advanced_device_protection": {
+		"message": "高级设备保护"
+	},
+	"hub_upgrade_maximum_browser_protection": {
+		"message": "全面浏览器保护"
+	},
+	"hub_upgrade_to": {
+		"message": "升级至"
+	},
+	"hub_upgrade_scroll_down": {
+		"message": "查看全部功能清单"
+	},
+	"hub_upgrade_midnight_note": {
+		"message": "必须安装 Ghostery Midnight"
+	},
+	"hub_upgrade_additional_protection": {
+		"message": "额外保护"
+	},
+	"hub_upgrade_browser_tracker_blocking": {
+		"message": "浏览器跟踪器拦截"
+	},
+	"hub_upgrade_browser_ad_blocking": {
+		"message": "浏览器广告拦截"
+	},
+	"hub_upgrade_custom_blocking_preferences": {
+		"message": "自定义拦截首选项"
+	},
+	"hub_upgrade_extension_themes": {
+		"message": "扩展程序主题"
+	},
+	"hub_upgrade_historical_extension_stats": {
+		"message": "历史扩展程序统计数据"
+	},
+	"hub_upgrade_application_tracker_blocking": {
+		"message": "应用程序跟踪器拦截"
+	},
+	"hub_upgrade_application_ad_blocking": {
+		"message": "应用程序广告拦截"
+	},
+	"hub_upgrade_no_vpn_logs": {
+		"message": "无 VPN 日志"
+	},
+	"hub_upgrade_leak_protection": {
+		"message": "泄露保护"
+	},
+	"hub_upgrade_physical_servers": {
+		"message": "物理服务器"
+	},
+	"hub_upgrade_unlimited_bandwidth": {
+		"message": "无限带宽"
 	},
 	"hub_setup_page_title": {
 		"message": "Ghostery Hub - 设置"
@@ -2201,9 +2288,6 @@
 	"ghostery_basic": {
 		"message": "Basic"
 	},
-	"ghostery_plus": {
-		"message": "Ghostery Plus"
-	},
 	"dollar_sign": {
 		"message": "&#36;"
 	},
@@ -2212,6 +2296,9 @@
 	},
 	"per_month": {
 		"message": "每月"
+	},
+	"per_year": {
+		"message": "每年"
 	},
 	"faster_cleaner_browsing": {
 		"message": "更快、更干净的浏览体验",
@@ -2409,5 +2496,8 @@
 	},
 	"no_thanks_continue_with_basic": {
 		"message": "不了，谢谢，继续使用基础版"
+	},
+	"too_many_password_resets_text": {
+		"message": "密码重置请求次数过多。请一小时后重试。"
 	}
 }
