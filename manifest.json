@@ -14,8 +14,8 @@
 	},
 	"browser_action": {
 		"default_icon": {
-			"19": "app/images/icon19_off.png",
-			"38": "app/images/icon38_off.png"
+			"19": "app/images/icon19.png",
+			"38": "app/images/icon38.png"
 		},
 		"default_title": "Ghostery"
 	},
@@ -101,7 +101,7 @@
 	"browser_specific_settings": {
 		"gecko": {
 			"id": "firefox@ghostery.com",
-			"strict_min_version": "52.0"
+			"strict_min_version": "68.0"
 		}
 	},
 	"minimum_edge_version": "79.0.309",
