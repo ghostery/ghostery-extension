@@ -166,16 +166,10 @@ const UpgradePlanView = (props) => {
 		mobileComparisonTableRef.current.scrollIntoView({ behavior: 'smooth' });
 	};
 
-	// UTM params
-	const signedIn = +!!user;
-	const subscriptionType = () => {
-		if (isPremium) return 'PREMIUM';
-		if (isPlus) return 'SUPPORTER';
-		return '-1';
-	};
-	// Interval is the query Param to show monthly/yearly pricing in checkout web, also used as a ping parameter
+	// UTM and Query Params
+	// Subscription_interval is the query param to show monthly/yearly pricing in checkout web
 	const interval = show_yearly_prices ? 'year' : 'month';
-	const utmParams = `utm_source=gbe&signedIn=${signedIn}&st=${subscriptionType()}&subscription_interval=${interval}`;
+	const utmParams = `utm_source=gbe&subscription_interval=${interval}`;
 
 	const plusCTAButton = (position) => {
 		const utm_campaign = position === 'top' ? 'c_1' : 'c_2';
