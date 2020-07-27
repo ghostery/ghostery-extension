@@ -169,7 +169,7 @@ const UpgradePlanView = (props) => {
 	// UTM and Query Params
 	// Subscription_interval is the query param to show monthly/yearly pricing in checkout web
 	const interval = show_yearly_prices ? 'year' : 'month';
-	const utmParams = `utm_source=gbe&subscription_interval=${interval}`;
+	const utmParams = `utm_source=gbe&interval=${interval}`;
 
 	const plusCTAButton = (position) => {
 		const utm_campaign = position === 'top' ? 'c_1' : 'c_2';
