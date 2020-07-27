@@ -370,7 +370,7 @@ class Metrics {
 
 			// New parameter for Ghostery 8.5.2
 			// Hub Promo variant
-			`&hp=${encodeURIComponent(Metrics._getHubPromoVariant().toString())}`;
+			`&hp=${encodeURIComponent(Metrics._getHubPromoVariant().toString())}` +
 			// Subscription Interval
 			`&si=${encodeURIComponent(Metrics._getSubscriptionInterval().toString())}`;
 
