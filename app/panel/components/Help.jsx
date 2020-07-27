@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2020 Ghostery, Inc. All rights reserved.
+ * Copyright 2019 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -12,61 +12,33 @@
  */
 
 import React from 'react';
-import { handleClickOnNewTabLink, openSupportPage } from '../utils/msg';
+import { openSupportPage, openHubPage } from '../utils/msg';
 import PanelToTabLink from './BuildingBlocks/PanelToTabLink';
 
 /**
  * Render Help view that user can open from the header drop-down menu
  */
-class Help extends React.Component {
-	constructor(props) {
-		super(props);
-
-		this.updateCount = this.updateCount.bind(this);
-
-		this.state = {
-			clickCount: 0,
-		};
-	}
-
-	updateCount() {
-		this.setState((prevState) => {
-			let { clickCount } = prevState;
-			clickCount++;
-			return { clickCount };
-		});
-	}
-
-	render() {
-		const { clickCount } = this.state;
-		const hubUrl = chrome.runtime.getURL('./app/templates/hub.html');
-
-		return (
-			<div id="content-help">
-				<div className="row">
-					<div className="small-12 columns">
-						<h1 onClick={this.updateCount}>{ t('panel_help_panel_header') }</h1>
-						<div className="support-section">
-							<PanelToTabLink href={hubUrl}>{t('panel_help_setup')}</PanelToTabLink>
-							{clickCount >= 5 && (
-								<a href="debug_information.html" onClick={handleClickOnNewTabLink}>Open Debug Information</a>
-							)}
-						</div>
-						<div className="support-section">
-							<h3>{ t('panel_help_questions_header') }</h3>
-							<PanelToTabLink href="https://www.ghostery.com/faqs/">{t('panel_help_faq')}</PanelToTabLink>
-							<PanelToTabLink href="https://www.ghostery.com/survey/in-app">{t('panel_help_feedback')}</PanelToTabLink>
-							<a href="#" onClick={openSupportPage}>{ t('support') }</a>
-						</div>
-						<div className="support-section">
-							<h3>{ t('panel_help_contact_header') }</h3>
-							<a target="_blank" rel="noopener noreferrer" className="info" href="mailto:info@ghostery.com">info@ghostery.com</a>
-						</div>
-					</div>
+const Help = () => (
+	<div id="content-help">
+		<div className="row">
+			<div className="small-12 columns">
+				<h1>{t('panel_help_panel_header')}</h1>
+				<div className="support-section">
+					<a href="#" onClick={openHubPage}>{t('panel_help_setup')}</a>
+				</div>
+				<div className="support-section">
+					<h3>{t('panel_help_questions_header')}</h3>
+					<PanelToTabLink href="https://www.ghostery.com/faqs/">{t('panel_help_faq')}</PanelToTabLink>
+					<PanelToTabLink href="https://www.ghostery.com/survey/in-app">{t('panel_help_feedback')}</PanelToTabLink>
+					<a href="#" onClick={openSupportPage}>{t('support')}</a>
+				</div>
+				<div className="support-section">
+					<h3>{t('panel_help_contact_header')}</h3>
+					<a target="_blank" rel="noopener noreferrer" className="info" href="mailto:info@ghostery.com">info@ghostery.com</a>
 				</div>
 			</div>
-		);
-	}
-}
+		</div>
+	</div>
+);
 
 export default Help;

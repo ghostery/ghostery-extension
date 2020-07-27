@@ -17,8 +17,7 @@
 import { debounce, every, size } from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
 import cliqz, { HUMANWEB_MODULE, HPN_MODULE } from './classes/Cliqz';
-import ghosteryDebug from './classes/GhosteryDebug';
-// object class
+// object classes
 import Events from './classes/EventHandlers';
 import Policy from './classes/Policy';
 // static classes
@@ -53,9 +52,6 @@ import { sendCliqzModuleCounts } from './utils/cliqzModulesData';
 // For debug purposes, provide Access to the internals of `browser-core`
 // module from Developer Tools Console.
 window.CLIQZ = cliqz;
-
-// For debug purposes, provide access to Ghostery's internal data.
-window.GHOSTERY = ghosteryDebug;
 
 // class instantiation
 const events = new Events();
@@ -1058,18 +1054,6 @@ function onMessageHandler(request, sender, callback) {
 		promoModals.turnOffPromos();
 		return false;
 	}
-	if (name === 'debug_information') {
-		Promise.all([
-			ghosteryDebug.getTabInfo(),
-			ghosteryDebug.getUserData(),
-		]).then(() => {
-			const debugInfo = JSON.stringify(window.GHOSTERY);
-			const msg = { type: 'Ghostery-Debug', content: debugInfo };
-			sendMessage(sender.tab.id, 'exportFile', msg);
-			callback(debugInfo);
-		});
-		return true;
-	}
 	return false;
 }
 
@@ -1751,12 +1735,9 @@ function init() {
 		initializeEventListeners();
 		initializeVersioning();
 		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => {
-			ghosteryDebug.init();
-			ghosteryDebug.addAccountEvent('migrate', 'migrate start');
 			account.migrate()
 				.then(() => {
 					if (conf.account !== null) {
-						ghosteryDebug.addAccountEvent('app started', 'signed in', conf.account);
 						return account.getUser()
 							.then(account.getUserSettings)
 							.then(() => {
@@ -1766,7 +1747,6 @@ function init() {
 								return false;
 							});
 					}
-					ghosteryDebug.addAccountEvent('app started', 'not signed in');
 					if (globals.JUST_INSTALLED) {
 						setGhosteryDefaultBlocking();
 					}

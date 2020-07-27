@@ -1,5 +1,5 @@
 /**
- * Ghostery NotificationsContentScript
+ * Ghostery Notifications Content Script
  *
  * This file provides notification alerts for the CMP, update dialogs
  * and import/export functionality
