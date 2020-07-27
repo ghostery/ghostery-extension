@@ -823,7 +823,7 @@ function onMessageHandler(request, sender, callback) {
 			.catch((err) => {
 				log('LOGIN ERROR', err);
 				callback({ errors: _getJSONAPIErrorsObject(err) });
-			})
+			});
 		return true;
 	}
 	if (name === 'account.register') {
