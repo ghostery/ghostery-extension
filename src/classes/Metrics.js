@@ -560,17 +560,14 @@ class Metrics {
 	static _getSubscriptionInterval() {
 		const subscriptionInterval = conf && conf.account && conf.account.subscriptionData && conf.account.subscriptionData.planInterval;
 
-		if (subscriptionInterval) {
-			switch (subscriptionInterval) {
-				case 'month':
-					return 1;
-				case 'year':
-					return 2;
-				default:
-					return 0;
-			}
+		switch (subscriptionInterval) {
+			case 'month':
+				return 1;
+			case 'year':
+				return 2;
+			default:
+				return 0;
 		}
-		return 0;
 	}
 
 	/**
