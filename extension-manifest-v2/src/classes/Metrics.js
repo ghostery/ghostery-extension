@@ -370,7 +370,9 @@ class Metrics {
 
 			// New parameter for Ghostery 8.5.2
 			// Hub Promo variant
-			`&hp=${encodeURIComponent(Metrics._getHubPromoVariant().toString())}`;
+			`&hp=${encodeURIComponent(Metrics._getHubPromoVariant().toString())}` +
+			// Subscription Interval
+			`&subscription_interval=${encodeURIComponent(Metrics._getSubscriptionInterval().toString())}`;
 
 		if (CAMPAIGN_METRICS.includes(type)) {
 			// only send campaign attribution when necessary
@@ -545,6 +547,24 @@ class Metrics {
 			case 'midnight':
 				return 3;
 			case 'not_yet_set':
+			default:
+				return 0;
+		}
+	}
+
+	/**
+	 * Get the Int associated with the users subscription interval
+	 * @private
+	 * @return {number} String associated with the users subscription interval
+	 */
+	static _getSubscriptionInterval() {
+		const subscriptionInterval = conf && conf.account && conf.account.subscriptionData && conf.account.subscriptionData.planInterval;
+
+		switch (subscriptionInterval) {
+			case 'month':
+				return 1;
+			case 'year':
+				return 2;
 			default:
 				return 0;
 		}
