@@ -1,5 +1,7 @@
 {
 	"manifest_version": 2,
+  "debug": true,
+  "log": true,
 	"author": "Ghostery",
 	"name": "__MSG_name__",
 	"short_name": "Ghostery",

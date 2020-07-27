@@ -103,7 +103,6 @@
 	.dropdown-pane {
 		display: block;
 		width: 217px;
-		height: 364px;
 		border: none;
 		background-color: #4a4a4a;
 		top: 0px !important;
@@ -204,11 +203,7 @@
 
 		.account-info {
 			@extend %pointer;
-			position: absolute;
-			bottom: 0px;
-			left: 0;
-			padding: 16px;
-			width: 100%;
+			margin-top: 16px;
 			.signed-in-as {
 				padding-bottom: 0;
 				span {
