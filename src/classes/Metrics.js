@@ -372,7 +372,7 @@ class Metrics {
 			// Hub Promo variant
 			`&hp=${encodeURIComponent(Metrics._getHubPromoVariant().toString())}` +
 			// Subscription Interval
-			`&si=${encodeURIComponent(Metrics._getSubscriptionInterval().toString())}`;
+			`&subscription_interval=${encodeURIComponent(Metrics._getSubscriptionInterval().toString())}`;
 
 		if (CAMPAIGN_METRICS.includes(type)) {
 			// only send campaign attribution when necessary
