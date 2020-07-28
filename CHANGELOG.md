@@ -6,9 +6,12 @@
 + Add upgrade promotion to Intro Hub (#551)
 + Adds options for yearly subscription plans (#567)
 + Rate limit password reset attempts (#548)
++ Add A/B testing support to promo modals (#583)
 + Updates to account creation panel messaging (#541)
 + Slimmer Human Web modules for Android browsers (#569)
++ Remove Spring promo modal (#571)
 + Search for missing language tokens (#563)
++ Updated campaign metrics (#576)
 + Update dependencies
 + Bump minimum FF to 68 ESR
 
