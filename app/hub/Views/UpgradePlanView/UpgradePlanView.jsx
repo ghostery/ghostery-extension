@@ -166,20 +166,14 @@ const UpgradePlanView = (props) => {
 		mobileComparisonTableRef.current.scrollIntoView({ behavior: 'smooth' });
 	};
 
-	// UTM params
-	const signedIn = +!!user;
-	const subscriptionType = () => {
-		if (isPremium) return 'PREMIUM';
-		if (isPlus) return 'SUPPORTER';
-		return '-1';
-	};
-	// Interval is the query Param to show monthly/yearly pricing in checkout web, also used as a ping parameter
+	// UTM and Query Params
+	// interval is the query param to show monthly/yearly pricing in checkout web
 	const interval = show_yearly_prices ? 'year' : 'month';
-	const utmParams = `utm_source=gbe&signedIn=${signedIn}&st=${subscriptionType()}&subscription_interval=${interval}`;
+	const params = `utm_source=gbe&interval=${interval}`;
 
 	const plusCTAButton = (position) => {
-		const utm_campaign = position === 'top' ? 'c_1' : 'c_2';
-		const plusCheckoutLink = `${globals.CHECKOUT_BASE_URL}/plus?${utmParams}&utm_campaign=intro_hub_${utm_campaign}`;
+		const utm_campaign = (position === 'top' ? 'c_1' : 'c_2');
+		const plusCheckoutLink = `${globals.CHECKOUT_BASE_URL}/plus?${params}&utm_campaign=intro_hub_${utm_campaign}`;
 
 		return (
 			<a className="button button-gold" href={plusCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Plus">
@@ -189,8 +183,8 @@ const UpgradePlanView = (props) => {
 	};
 
 	const premiumCTAButton = (position) => {
-		const utm_campaign = position === 'top' ? 'c_3' : 'c_4';
-		const premiumCheckoutLink = `${globals.CHECKOUT_BASE_URL}/premium?${utmParams}&utm_campaign=intro_hub_${utm_campaign}`;
+		const utm_campaign = (position === 'top' ? 'c_3' : 'c_4');
+		const premiumCheckoutLink = `${globals.CHECKOUT_BASE_URL}/premium?${params}&utm_campaign=intro_hub_${utm_campaign}`;
 
 		return (
 			<a className="button button-premium" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Premium">
