@@ -1256,19 +1256,19 @@
 		"message": "Block"
 	},
 	"android_unblock": {
-		"message": "unBlock"
+		"message": "Unblock"
 	},
 	"android_restrict": {
 		"message": "Restrict"
 	},
 	"android_unrestrict": {
-		"message": "unRestrict"
+		"message": "Undo"
 	},
 	"android_trust": {
 		"message": "Trust"
 	},
 	"android_untrust": {
-		"message": "unTrust"
+		"message": "Undo"
 	},
 	"hub_side_navigation_home": {
 		"message": "Home"

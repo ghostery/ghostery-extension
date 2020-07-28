@@ -143,9 +143,7 @@ class Account extends React.Component {
 		);
 	}
 
-	_renderCreateAccount() {
-		console.log('createAccount', this.props);
-
+	_renderCreateAccount() { // eslint-disable-line class-methods-use-this
 		return (<div>Create Account</div>);
 	}
 

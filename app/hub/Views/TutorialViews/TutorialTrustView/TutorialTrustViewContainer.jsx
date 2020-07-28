@@ -44,7 +44,8 @@ class TutorialTrustViewContainer extends Component {
 	 * @return {JSX} JSX for rendering the Tutorial Trust View of the Hub app
 	 */
 	render() {
-		return <TutorialTrustView />;
+		const { isAndroid } = this.props;
+		return <TutorialTrustView isAndroid={isAndroid} />;
 	}
 }
 

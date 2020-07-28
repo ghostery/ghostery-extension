@@ -15,7 +15,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import globals from '../../../../src/classes/Globals';
 
-const { IS_CLIQZ } = globals;
+const { IS_CLIQZ, BROWSER_INFO } = globals;
+const IS_ANDROID = (BROWSER_INFO.os === 'android');
 
 /**
  * @class Implement Opt In subview as a React component.
@@ -56,7 +57,7 @@ const OptIn = ({ settingsData, toggleCheckbox }) => (
 						</div>
 					</div>
 				)}
-				{!IS_CLIQZ && (
+				{!IS_CLIQZ && !IS_ANDROID && (
 					<div className="s-option-group" id="offers-section">
 						<div className="s-square-checkbox">
 							<input type="checkbox" id="settings-allow-offers" name="enable_offers" defaultChecked={settingsData.enable_offers} onClick={toggleCheckbox} />

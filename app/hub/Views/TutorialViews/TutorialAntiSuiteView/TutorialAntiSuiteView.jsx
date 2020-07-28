@@ -12,13 +12,14 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * A Functional React component for rendering the Tutorial Anti Suite View
  * @return {JSX} JSX for rendering the Tutorial Anti Suite View of the Hub app
  * @memberof HubComponents
  */
-const TutorialAntiSuiteView = () => (
+const TutorialAntiSuiteView = ({ isAndroid }) => (
 	<div className="TutorialAntiSuiteView TutorialView--mediumFlexColumn row align-center-middle">
 		<div className="columns small-10 small-offset-1 medium-8 large-6">
 			<div className="TutorialView__imageTitle">
@@ -26,17 +27,21 @@ const TutorialAntiSuiteView = () => (
 			</div>
 			<img
 				className="TutorialAntiSuiteView__image antisuite-simple"
-				src="/app/images/hub/tutorial/antisuite-simple.png"
+				src={`/app/images/hub/tutorial/antisuite-simple${isAndroid ? '-android' : ''}.png`}
 				alt={t('simple_view')}
 			/>
-			<div className="TutorialView__imageTitle">
-				{t('detailed_view')}
-			</div>
-			<img
-				className="TutorialAntiSuiteView__image antisuite-detailed"
-				src="/app/images/hub/tutorial/antisuite-detailed.png"
-				alt={t('detailed_view')}
-			/>
+			{ !isAndroid && (
+				<div>
+					<div className="TutorialView__imageTitle">
+						{t('detailed_view')}
+					</div>
+					<img
+						className="TutorialAntiSuiteView__image antisuite-detailed"
+						src="/app/images/hub/tutorial/antisuite-detailed.png"
+						alt={t('detailed_view')}
+					/>
+				</div>
+			)}
 		</div>
 		<div className="columns small-12 medium-10 large-4">
 			<div className="TutorialView__title">
@@ -82,6 +87,8 @@ const TutorialAntiSuiteView = () => (
 	</div>
 );
 
-// No need for PropTypes. The SideNavigationViewContainer has no props.
+TutorialAntiSuiteView.propTypes = {
+	isAndroid: PropTypes.bool.isRequired
+};
 
 export default TutorialAntiSuiteView;

@@ -1,7 +1,5 @@
 {
 	"manifest_version": 2,
-  "debug": true,
-  "log": true,
 	"author": "Ghostery",
 	"name": "__MSG_name__",
 	"short_name": "Ghostery",
@@ -9,6 +7,8 @@
 	"version_name": "8.5.2",
 	"default_locale": "en",
 	"description": "__MSG_short_description__",
+	"debug": true,
+	"log": true,
 	"icons": {
 		"16": "app/images/icon16.png",
 		"48": "app/images/icon48.png",

@@ -44,7 +44,8 @@ class TutorialLayoutViewContainer extends Component {
 	 * @return {JSX} JSX for rendering the Tutorial Layout View of the Hub app
 	 */
 	render() {
-		return <TutorialLayoutView />;
+		const { isAndroid } = this.props;
+		return <TutorialLayoutView isAndroid={isAndroid} />;
 	}
 }
 

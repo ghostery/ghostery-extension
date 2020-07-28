@@ -1746,8 +1746,12 @@ function initializeGhosteryModules() {
 			// we need to do this after running scheduledTasks for the first time
 			// because of an A/B test that determines which promo variant is shown in the Hub on install
 			if (globals.JUST_INSTALLED) {
-				const route = (conf.hub_promo_variant === 'upgrade' || conf.hub_promo_variant === 'not_yet_set') ? '' : '#home';
-				const showPremiumPromoModal = conf.hub_promo_variant === 'midnight';
+				let route = (conf.hub_promo_variant === 'upgrade' || conf.hub_promo_variant === 'not_yet_set') ? '' : '#home';
+				let showPremiumPromoModal = conf.hub_promo_variant === 'midnight';
+				if (BROWSER_INFO.os === 'android') {
+					route = '#home';
+					showPremiumPromoModal = false;
+				}
 				chrome.tabs.create({
 					url: chrome.runtime.getURL(`./app/templates/hub.html?$justInstalled=true&pm=${showPremiumPromoModal}${route}`),
 					active: true
