@@ -12,7 +12,7 @@
  */
 
 import React from 'react';
-import { handleClickOnNewTabLink, openSupportPage } from '../utils/msg';
+import { handleClickOnNewTabLink, openSupportPage, openHubPage } from '../utils/msg';
 import PanelToTabLink from './BuildingBlocks/PanelToTabLink';
 
 /**
@@ -39,7 +39,6 @@ class Help extends React.Component {
 
 	render() {
 		const { clickCount } = this.state;
-		const hubUrl = chrome.runtime.getURL('./app/templates/hub.html');
 
 		return (
 			<div id="content-help">
@@ -47,10 +46,10 @@ class Help extends React.Component {
 					<div className="small-12 columns">
 						<h1 onClick={this.updateCount}>{ t('panel_help_panel_header') }</h1>
 						<div className="support-section">
-							<PanelToTabLink href={hubUrl}>{t('panel_help_setup')}</PanelToTabLink>
+							<a href="#" onClick={openHubPage}>{t('panel_help_setup')}</a>
 							{clickCount >= 5 && (
 								<a href="debug_information.html" onClick={handleClickOnNewTabLink}>
-									{t('open_debug_information')}
+									{t('debug_information_open')}
 								</a>
 							)}
 						</div>

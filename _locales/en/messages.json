@@ -503,8 +503,11 @@
 	"forgot_password": {
 		"message": "Forgot Password?"
 	},
-	"open_debug_information": {
+	"debug_information_open": {
 		"message": "Open Debug Information"
+	},
+	"debug_information_load": {
+		"message": "Loading Debug Information..."
 	},
 	"panel_help_panel_header": {
 		"message": "Help for Ghostery Browser Extension"

@@ -1780,9 +1780,9 @@ function init() {
 		initializeVersioning();
 		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => {
 			ghosteryDebug.init();
-			ghosteryDebug.addAccountEvent('migrate', 'migrate start');
 			account.migrate()
 				.then(() => {
+					ghosteryDebug.addAccountEvent('migrate', 'migrate start');
 					if (conf.account !== null) {
 						ghosteryDebug.addAccountEvent('app started', 'signed in', conf.account);
 						return account.getUser()
