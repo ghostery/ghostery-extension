@@ -8,10 +8,10 @@ exports[`app/panel-android/components/content/OverviewTab.jsx Snapshot tests wit
     className="OverviewTab__NavigationLinks full-width"
   >
     <div
-      className="row align-justify flex-dir-row-reverse align-middle"
+      className="row align-justify align-middle"
     >
       <div
-        className="OverviewTab__NavigationLink hide"
+        className="OverviewTab__NavigationLink"
         onClick={[Function]}
       >
         <svg
@@ -241,10 +241,10 @@ exports[`app/panel-android/components/content/OverviewTab.jsx Snapshot tests wit
     className="OverviewTab__NavigationLinks full-width"
   >
     <div
-      className="row align-justify flex-dir-row-reverse align-middle"
+      className="row align-justify align-middle"
     >
       <div
-        className="OverviewTab__NavigationLink hide"
+        className="OverviewTab__NavigationLink"
         onClick={[Function]}
       >
         <svg
