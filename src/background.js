@@ -65,6 +65,7 @@ const {
 } = globals;
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
+const IS_ANDROID = (BROWSER_INFO.os === 'android');
 const VERSION_CHECK_URL = `${CDN_BASE_URL}/update/version`;
 const REAL_ESTATE_ID = 'ghostery';
 const onBeforeRequest = events.onBeforeRequest.bind(events);
@@ -208,7 +209,7 @@ function reloadTab(data) {
  * @memberOf Background
  */
 function closeAndroidPanelTabs() {
-	if (BROWSER_INFO.os !== 'android') { return; }
+	if (!IS_ANDROID) { return; }
 	chrome.tabs.query({
 		active: true,
 		url: chrome.extension.getURL('app/templates/panel_android.html*')
@@ -1376,7 +1377,7 @@ function getDataForGhosteryTab(callback) {
  * @memberOf Background
  */
 function initializePopup() {
-	if (BROWSER_INFO.os === 'android') {
+	if (IS_ANDROID) {
 		chrome.browserAction.setPopup({
 			popup: 'app/templates/panel_android.html',
 		});
@@ -1645,7 +1646,7 @@ function initializeGhosteryModules() {
 				conf.enable_ad_block = !adblocker.isDisabled;
 				conf.enable_anti_tracking = !antitracking.isDisabled;
 				conf.enable_human_web = !humanweb.isDisabled;
-				conf.enable_offers = !offers.isDisabled;
+				conf.enable_offers = !offers.isDisabled && !IS_ANDROID;
 
 				if (IS_FIREFOX) {
 					if (globals.JUST_INSTALLED) {
@@ -1685,8 +1686,8 @@ function initializeGhosteryModules() {
 		setCliqzModuleEnabled(offers, false);
 	}
 
-	// Disable purplebox for Firefox Android users
-	if (BROWSER_INFO.os === 'android' && IS_FIREFOX) {
+	// Disable purplebox for Android users
+	if (IS_ANDROID) {
 		conf.show_alert = false;
 	}
 
@@ -1750,7 +1751,7 @@ function initializeGhosteryModules() {
 			if (globals.JUST_INSTALLED) {
 				let route = (conf.hub_promo_variant === 'upgrade' || conf.hub_promo_variant === 'not_yet_set') ? '' : '#home';
 				let showPremiumPromoModal = conf.hub_promo_variant === 'midnight';
-				if (BROWSER_INFO.os === 'android') {
+				if (IS_ANDROID) {
 					route = '#home';
 					showPremiumPromoModal = false;
 				}
