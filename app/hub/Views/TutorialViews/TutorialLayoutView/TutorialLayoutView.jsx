@@ -21,7 +21,7 @@ import PropTypes from 'prop-types';
  */
 const TutorialLayoutView = ({ isAndroid }) => (
 	<div className="TutorialLayoutView TutorialView--mediumFlexColumn row align-center-middle flex-container">
-		<div className="columns small-10 medium-8 large-6 small-offset-1">
+		<div className="columns small-10 medium-8 large-6">
 			<img
 				className="TutorialLayoutView__image layout-simple"
 				src={`/app/images/hub/tutorial/layout-simple${isAndroid ? '-android' : ''}.png`}

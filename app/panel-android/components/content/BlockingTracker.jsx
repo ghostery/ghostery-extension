@@ -194,6 +194,7 @@ class BlockingTracker extends React.Component {
 
 	renderTrackerStatus() {
 		const trackerSelect = this.trackerSelectStatus;
+		// TODO here switch to Anti track icon
 		const trackerSelectClassNames = ClassNames({
 			OverrideSmartBlock: trackerSelect === 'override-sb',
 			BlockingSelectButton: trackerSelect.indexOf('override-') === -1,
