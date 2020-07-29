@@ -833,6 +833,9 @@
 	"settings_account": {
 		"message": "Account"
 	},
+	"settings_import_export": {
+		"message": "Import & Export Settings"
+	},
 	"settings_trackers": {
 		"message": "Trackers"
 	},

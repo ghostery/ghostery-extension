@@ -14,12 +14,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ReactSVG } from 'react-svg';
-// import ClassNames from 'classnames';
 import TrustAndRestrict from '../../../panel/components/Settings/TrustAndRestrict';
 import GeneralSettings from '../../../panel/components/Settings/GeneralSettings';
 import AdBlocker from '../../../panel/components/Settings/AdBlocker';
 import Notifications from '../../../panel/components/Settings/Notifications';
 import OptIn from '../../../panel/components/Settings/OptIn';
+import ImportExport from '../../../panel/components/Settings/ImportExport';
 import Help from '../../../panel/components/Help';
 import About from '../../../panel/components/About';
 
@@ -27,7 +27,7 @@ import globals from '../../../../src/classes/Globals';
 
 const { IS_CLIQZ } = globals;
 
-class Account extends React.Component {
+class Settings extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -106,6 +106,9 @@ class Account extends React.Component {
 			case 'settings-opt-in':
 				headerText = t('settings_opt_in');
 				break;
+			case 'settings-import-export':
+				headerText = t('settings_import_export');
+				break;
 			case 'settings-help':
 				headerText = t('panel_menu_help');
 				break;
@@ -148,6 +151,9 @@ class Account extends React.Component {
 					</div>
 					<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-opt-in' }); }}>
 						{ t('settings_opt_in') }
+					</div>
+					<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-import-export' }); }}>
+						{ t('settings_import_export') }
 					</div>
 					<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-help' }); }}>
 						{ t('panel_menu_help') }
@@ -227,6 +233,42 @@ class Account extends React.Component {
 		);
 	}
 
+	_renderSettingsImportExport() {
+		const { summary, settings } = this.props;
+		const { pageUrl = '' } = summary;
+		const {
+			exportResultText = '',
+			importResultText = '',
+			actionSuccess = false,
+		} = settings;
+		const settingsData = {
+			pageUrl,
+			exportResultText,
+			importResultText,
+			actionSuccess,
+		};
+
+		const actions = {
+			exportSettings: () => { console.log('exportSettings'); },
+			importSettingsDialog: () => { console.log('importSettingsDialog'); },
+			importSettingsNative: () => { console.log('importSettingsNative'); },
+		};
+		console.log('ToDo: implement actions and add settingsData elements to reducer', this.props, this.state);
+
+		return (
+			<div className="s-tabs-panel">
+				<div className="row">
+					<div className="column">
+						<ImportExport
+							settingsData={settingsData}
+							actions={actions}
+						/>
+					</div>
+				</div>
+			</div>
+		);
+	}
+
 	render() {
 		const { view } = this.state;
 
@@ -239,6 +281,7 @@ class Account extends React.Component {
 				{view === 'settings-adblocker' && this._renderSettingsAdBlocker()}
 				{view === 'settings-notifications' && this._renderSettingsNotification()}
 				{view === 'settings-opt-in' && this._renderSettingsOptIn()}
+				{view === 'settings-import-export' && this._renderSettingsImportExport()}
 				{view === 'settings-help' && (<Help />)}
 				{view === 'settings-about' && (<About />)}
 			</div>
@@ -246,7 +289,7 @@ class Account extends React.Component {
 	}
 }
 
-Account.propTypes = {
+Settings.propTypes = {
 	summary: PropTypes.shape({
 		site_whitelist: PropTypes.arrayOf(PropTypes.string).isRequired,
 		site_blacklist: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -256,4 +299,4 @@ Account.propTypes = {
 	callGlobalAction: PropTypes.func.isRequired,
 };
 
-export default Account;
+export default Settings;
