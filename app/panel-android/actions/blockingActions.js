@@ -68,6 +68,68 @@ function calculateDelta(oldState, newState) {
 	return 0;
 }
 
+export function anonymizeSiteTracker({ actionData, state }) {
+	const updatedcliqzModuleData = JSON.parse(JSON.stringify(state.cliqzModuleData));
+	const { antiTracking, adBlock } = state.cliqzModuleData;
+	const whitelistedUrls = { ...antiTracking.whitelistedUrls, ...adBlock.whitelistedUrls };
+	const { unknownTracker, pageHost } = actionData;
+
+	const addToWhitelist = () => {
+		unknownTracker.sources.forEach((domain) => {
+			if (whitelistedUrls.hasOwnProperty(domain)) {
+				whitelistedUrls[domain].name = unknownTracker.name;
+				whitelistedUrls[domain].hosts.push(pageHost);
+			} else {
+				whitelistedUrls[domain] = {
+					name: unknownTracker.name,
+					hosts: [pageHost],
+				};
+			}
+		});
+	};
+
+	const removeFromWhitelist = (domain) => {
+		if (!whitelistedUrls[domain]) { return; }
+
+		whitelistedUrls[domain].hosts = whitelistedUrls[domain].hosts.filter(hostUrl => (
+			hostUrl !== pageHost
+		));
+
+		if (whitelistedUrls[domain].hosts.length === 0) {
+			delete whitelistedUrls[domain];
+		}
+	};
+
+	if (unknownTracker.whitelisted) {
+		unknownTracker.sources.forEach(removeFromWhitelist);
+
+		Object.keys(whitelistedUrls).forEach((domain) => {
+			if (whitelistedUrls[domain].name === unknownTracker.name) {
+				removeFromWhitelist(domain);
+			}
+		});
+	} else {
+		addToWhitelist();
+	}
+
+	// Update Ad Blocking trackers
+	updatedcliqzModuleData.adBlock.unknownTrackers.forEach((trackerEl) => {
+		if (trackerEl.name === unknownTracker.name) {
+			trackerEl.whitelisted = !trackerEl.whitelisted;
+		}
+	});
+	// Update Anti-Tracking trackers
+	updatedcliqzModuleData.antiTracking.unknownTrackers.forEach((trackerEl) => {
+		if (trackerEl.name === unknownTracker.name) {
+			trackerEl.whitelisted = !trackerEl.whitelisted;
+		}
+	});
+	sendMessage('setPanelData', { cliqz_module_whitelist: whitelistedUrls });
+	return {
+		cliqzModuleData: updatedcliqzModuleData,
+	};
+}
+
 export function trustRestrictBlockSiteTracker({ actionData, state }) {
 	const { blocking, summary, settings } = state;
 	const { pageHost } = summary;

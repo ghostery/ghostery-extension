@@ -15,7 +15,7 @@ import {
 	handleTrustButtonClick, handleRestrictButtonClick, handlePauseButtonClick, cliqzFeatureToggle, updateSitePolicy
 } from './summaryActions';
 import {
-	trustRestrictBlockSiteTracker, blockUnblockGlobalTracker, blockUnBlockAllTrackers, resetSettings
+	trustRestrictBlockSiteTracker, anonymizeSiteTracker, blockUnblockGlobalTracker, blockUnBlockAllTrackers, resetSettings
 } from './blockingActions';
 import {
 	updateDatabase, updateSettingCheckbox, selectItem
@@ -44,6 +44,10 @@ export default function handleAllActions({ actionName, actionData, state }) {
 
 		case 'trustRestrictBlockSiteTracker':
 			updated = trustRestrictBlockSiteTracker({ actionData, state });
+			break;
+
+		case 'anonymizeSiteTracker':
+			updated = anonymizeSiteTracker({ actionData, state });
 			break;
 
 		case 'blockUnblockGlobalTracker':

@@ -171,7 +171,8 @@
 		&.BlockingSelectGroup--disabled {
 			.BlockingSelect__block,
 			.BlockingSelect__restrict,
-			.BlockingSelect__trust {
+			.BlockingSelect__trust,
+			.BlockingSelect__anonymize {
 				background-color: #C6C6C6;
 			}
 		}
@@ -201,6 +202,11 @@
 
 		.BlockingSelect__trust {
 			background-color: $button-trust;
+			background-image: buildIconTrust($white);
+		}
+
+		.BlockingSelect__anonymize {
+			background-color: $ghosty-blue;
 			background-image: buildIconTrust($white);
 		}
 	}
@@ -317,5 +323,59 @@
 	&.BlockingSelectButton__restricted {
 		background-color: $button-restrict;
 		background-image: buildIconRestrict($white);
+	}
+}
+
+.UnknownSVGContainer {
+	position: relative;
+	margin-right: 7px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	&:not(.whitelisted) {
+		.cliqz-tracker-trust {
+			visibility: hidden;
+			cursor: pointer;
+			.border { stroke: #d8d8d8; }
+			.background { fill: #f7f7f7; }
+			.trust-circle { stroke: #9B9B9B; }
+		}
+		.cliqz-tracker-trust > g > path:nth-child(1) {
+			stroke: #d8d8d8;
+		}
+		.cliqz-tracker-trust > g > path:nth-child(2) {
+			fill: #f7f7f7;
+		}
+		.cliqz-tracker-scrub > g > .border {
+			fill: #FFF;
+			stroke: #00AEF0;
+		}
+		.cliqz-tracker-scrub > g > .background {
+			fill: #00AEF0;
+			stroke: #FFF;
+		}
+		.cliqz-tracker-scrub {
+			pointer-events: none;
+			.background.protected {
+				fill: #00AEF0;
+			}
+			.background.restricted {
+				fill: #00AEF0;
+			}
+		}
+	}
+	&.whitelisted {
+		flex-direction: row-reverse;
+		.cliqz-tracker-trust {
+			pointer-events: none;
+		}
+		.cliqz-tracker-scrub {
+			visibility: hidden;
+			pointer-events: auto;
+			cursor: pointer;
+			.border { stroke: #d8d8d8; }
+			.background { fill: #f7f7f7; }
+			.shield { stroke: #9B9B9B; }
+		}
 	}
 }

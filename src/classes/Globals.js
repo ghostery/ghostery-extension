@@ -148,9 +148,7 @@ class Globals {
 	 * @return {Object}
 	 */
 	buildBrowserInfo() {
-		// Extend the UA library to look for Ghostery Android browser's custom user agent
-		const uaExtension = [[/(ghostery)\/([\w\.]+)/i], [parser.BROWSER.NAME, parser.BROWSER.VERSION]]; // eslint-disable-line no-useless-escape
-		const ua = parser({ browser: uaExtension });
+		const ua = parser(navigator.userAgent);
 		const browser = ua.browser.name.toLowerCase();
 		const version = parseInt(ua.browser.version.toString(), 10); // convert to string for Chrome
 		const platform = ua.os.name.toLowerCase();
@@ -160,7 +158,7 @@ class Globals {
 			this.BROWSER_INFO.displayName = 'Cliqz';
 			this.BROWSER_INFO.name = 'cliqz';
 			this.BROWSER_INFO.token = 'cl';
-		} else if (browser.includes('ghostery')) {
+		} else if (navigator.userAgent.toLocaleLowerCase().includes('ghostery')) {
 			this.BROWSER_INFO.displayName = 'Ghostery Android Browser';
 			this.BROWSER_INFO.name = 'ghostery_android';
 			this.BROWSER_INFO.token = 'ga';
