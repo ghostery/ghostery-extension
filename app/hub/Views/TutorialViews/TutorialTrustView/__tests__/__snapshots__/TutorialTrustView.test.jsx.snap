@@ -17,16 +17,18 @@ exports[`app/hub/Views/TutorialViews/TutorialTrustView component Snapshot tests 
       className="TutorialTrustView__image trustrestrict-simple"
       src="/app/images/hub/tutorial/trustrestrict-simple.png"
     />
-    <div
-      className="TutorialView__imageTitle"
-    >
-      detailed_view
+    <div>
+      <div
+        className="TutorialView__imageTitle"
+      >
+        detailed_view
+      </div>
+      <img
+        alt="detailed_view"
+        className="TutorialTrustView__image trustrestrict-detailed"
+        src="/app/images/hub/tutorial/trustrestrict-detailed.png"
+      />
     </div>
-    <img
-      alt="detailed_view"
-      className="TutorialTrustView__image trustrestrict-detailed"
-      src="/app/images/hub/tutorial/trustrestrict-detailed.png"
-    />
   </div>
   <div
     className="columns small-12 medium-8 large-4"
