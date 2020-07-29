@@ -12,7 +12,6 @@
  */
 
 import React from 'react';
-import Account from './content/Account';
 import Settings from './content/Settings';
 import Tabs from './content/Tabs';
 import Tab from './content/Tab';
@@ -23,6 +22,7 @@ import {
 } from '../actions/panelActions';
 import getCliqzModuleData from '../actions/cliqzActions';
 import handleAllActions from '../actions/handler';
+import { openAccountPageAndroid } from '../../panel/utils/msg';
 
 class PanelAndroid extends React.Component {
 	constructor(props) {
@@ -171,17 +171,6 @@ class PanelAndroid extends React.Component {
 		wtm: tracker.wtm,
 	})
 
-	_renderAccount() {
-		const { summary, settings } = this.state;
-		return (
-			<Account
-				summary={summary}
-				settings={settings}
-				clickHome={() => { this.changeView('overview'); }}
-			/>
-		);
-	}
-
 	_renderSettings() {
 		const { summary, settings } = this.state;
 
@@ -238,7 +227,7 @@ class PanelAndroid extends React.Component {
 						summary={summary}
 						blocking={blocking}
 						cliqzModuleData={cliqzModuleData}
-						clickAccount={() => { this.changeView('account'); }}
+						clickAccount={openAccountPageAndroid}
 						clickSettings={() => { this.changeView('settings'); }}
 						callGlobalAction={this.callGlobalAction}
 					/>
@@ -271,7 +260,6 @@ class PanelAndroid extends React.Component {
 
 		return (
 			<div>
-				{view === 'account' && this._renderAccount()}
 				{view === 'settings' && this._renderSettings()}
 				{view === 'overview' && this._renderOverview()}
 			</div>

@@ -1040,6 +1040,15 @@ function onMessageHandler(request, sender, callback) {
 		utils.openNewTab({ url: hubUrl, become_active: true });
 		return false;
 	}
+	if (name === 'openAccountAndroid') {
+		if (confData.account) {
+			utils.openNewTab({ url: `${globals.ACCOUNT_BASE_URL}/`, become_active: true });
+		} else {
+			const hubUrl = chrome.runtime.getURL('./app/templates/hub.html#log-in');
+			utils.openNewTab({ url: hubUrl, become_active: true });
+		}
+		return false;
+	}
 	if (name === 'promoModals.sawPremiumPromo') {
 		promoModals.recordPremiumPromoSighting();
 		return false;
