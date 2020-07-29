@@ -260,6 +260,7 @@ class Account {
 
 	migrate = () => (
 		new Promise((resolve) => {
+			ghosteryDebug.addAccountEvent('migrate', 'migrate start');
 			const legacyLoginInfoKey = 'login_info';
 			chrome.storage.local.get(legacyLoginInfoKey, (items) => {
 				if (chrome.runtime.lastError) {

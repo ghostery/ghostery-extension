@@ -29,6 +29,7 @@ class GhosteryDebug {
 			name: globals.EXTENSION_NAME,
 			version: globals.EXTENSION_VERSION,
 		};
+		this.globals = { ...globals };
 
 		const _cookieChangeEvent = (changeInfo) => {
 			const { removed, cookie, cause } = changeInfo;
@@ -47,6 +48,7 @@ class GhosteryDebug {
 	init() {
 		this.extensionInfo.installDate = confData.install_date;
 		this.extensionInfo.versionHistory = confData.version_history;
+		this.configurationData = { ...confData };
 	}
 
 	addAccountEvent(type, event, details) {
@@ -138,6 +140,17 @@ class GhosteryDebug {
 					userSubscriptionData,
 				};
 				resolve(this.user);
+			});
+		});
+	}
+
+	getDebugInfo() {
+		return new Promise((resolve) => {
+			Promise.all([
+				this.getTabInfo(),
+				this.getUserData(),
+			]).then(() => {
+				resolve(this);
 			});
 		});
 	}

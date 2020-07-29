@@ -1053,14 +1053,23 @@ function onMessageHandler(request, sender, callback) {
 		return false;
 	}
 	if (name === 'debug_information') {
-		Promise.all([
-			ghosteryDebug.getTabInfo(),
-			ghosteryDebug.getUserData(),
-		]).then(() => {
-			const debugInfo = JSON.stringify(window.GHOSTERY);
-			const msg = { type: 'Ghostery-Debug', content: debugInfo };
+		ghosteryDebug.getDebugInfo().then(() => {
+			const {
+				accountEvents,
+				browserInfo,
+				extensionInfo,
+				user,
+			} = window.GHOSTERY;
+			const debugInfo = {
+				accountEvents,
+				browserInfo,
+				extensionInfo,
+				syncedUserSettings: user.syncedUserSettings,
+			};
+			const debugInfoJSON = JSON.stringify(debugInfo);
+			const msg = { type: 'Ghostery-Debug', content: debugInfoJSON };
 			sendMessage(sender.tab.id, 'exportFile', msg);
-			callback(debugInfo);
+			callback(debugInfoJSON);
 		});
 		return true;
 	}
@@ -1782,7 +1791,6 @@ function init() {
 			ghosteryDebug.init();
 			account.migrate()
 				.then(() => {
-					ghosteryDebug.addAccountEvent('migrate', 'migrate start');
 					if (conf.account !== null) {
 						ghosteryDebug.addAccountEvent('app started', 'signed in', conf.account);
 						return account.getUser()
