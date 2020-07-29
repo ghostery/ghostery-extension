@@ -51,6 +51,10 @@ class BlockingCategory extends React.Component {
 				return 'restricted';
 			}
 
+			if (category.id === 'unknown') {
+				return 'unknown';
+			}
+
 			if (trackers.every(tracker => tracker.ss_allowed)) {
 				return 'trusted';
 			}
@@ -132,6 +136,10 @@ class BlockingCategory extends React.Component {
 
 	renderCategorySelect() {
 		const categorySelect = this.categorySelectStatus;
+		// Hide category blocking for Unknown trackers
+		if (categorySelect === 'unknown') {
+			return false;
+		}
 		const categorySelectClassNames = ClassNames('BlockingSelectButton', {
 			BlockingSelectButton__mixed: categorySelect === 'mixed' || categorySelect === 'ss_mixed',
 			BlockingSelectButton__blocked: categorySelect === 'blocked',
@@ -230,7 +238,7 @@ class BlockingCategory extends React.Component {
 						<div>
 							<div className="BlockingCategory__listHeader flex-container align-bottom" style={{ height: this.heightListHeader }}>
 								<span className="BlockingCategory--uppercase flex-child-grow">{t('blocking_category_trackers')}</span>
-								<span>{t('blocking_category_blocked')}</span>
+								<span>{category.id === 'unknown' ? t('android_anonymized') : t('blocking_category_blocked')}</span>
 							</div>
 							<List
 								height={this.getListHeight(num_total)}

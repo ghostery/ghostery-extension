@@ -1270,6 +1270,9 @@
 	"android_untrust": {
 		"message": "Undo"
 	},
+	"android_anonymized": {
+		"message": "Anonymized"
+	},
 	"hub_side_navigation_home": {
 		"message": "Home"
 	},

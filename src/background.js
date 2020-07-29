@@ -800,11 +800,13 @@ function onMessageHandler(request, sender, callback) {
 	if (name === 'getCliqzModuleData') { // panel-android only
 		if (!message.tabId) {
 			utils.getActiveTab((activeTab) => {
-				sendCliqzModuleCounts(activeTab.id, activeTab.pageHost, callback);
+				const pageHost = (activeTab.url && utils.processUrl(activeTab.url).hostname) || '';
+				sendCliqzModuleCounts(activeTab.id, pageHost, callback);
 			});
 		} else {
 			chrome.tabs.get(+message.tabId, (messageTab) => {
-				sendCliqzModuleCounts(messageTab.id, messageTab.pageHost, callback);
+				const pageHost = (messageTab.url && utils.processUrl(messageTab.url).hostname) || '';
+				sendCliqzModuleCounts(messageTab.id, pageHost, callback);
 			});
 		}
 		return true;

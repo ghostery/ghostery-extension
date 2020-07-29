@@ -168,6 +168,7 @@ class PanelAndroid extends React.Component {
 		sources: tracker.domains,
 		whitelisted: tracker.whitelisted,
 		blocked: false, // To appease BlockingTracker PropTypes
+		wtm: tracker.wtm,
 	})
 
 	_renderAccount() {

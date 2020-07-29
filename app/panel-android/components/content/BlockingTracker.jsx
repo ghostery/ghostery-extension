@@ -14,7 +14,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
-import getUrlFromTrackerId from '../../utils/tracker-info';
+import getSlugFromTrackerId from '../../utils/tracker-info';
 
 class BlockingTracker extends React.Component {
 	get trackerSelectStatus() {
@@ -22,6 +22,7 @@ class BlockingTracker extends React.Component {
 		const { isTrusted, isRestricted } = siteProps;
 		const {
 			blocked,
+			catId = '',
 			ss_allowed = false,
 			ss_blocked = false,
 			warningSmartBlock = false,
@@ -46,6 +47,10 @@ class BlockingTracker extends React.Component {
 
 			if (ss_blocked) {
 				return 'restricted';
+			}
+
+			if (catId !== '') {
+				return catId;
 			}
 		}
 
@@ -77,8 +82,8 @@ class BlockingTracker extends React.Component {
 	openTrackerInfoLink = (event) => {
 		event.stopPropagation();
 		const { tracker } = this.props;
-		const url = getUrlFromTrackerId(tracker.id);
-		const tab = window.open(url, '_blank');
+		const slug = (tracker.wtm) ? tracker.wtm : getSlugFromTrackerId(tracker.id);
+		const tab = window.open(`https://whotracks.me/trackers/${slug}.html`, '_blank');
 		tab.focus();
 	}
 
@@ -260,8 +265,48 @@ class BlockingTracker extends React.Component {
 		);
 	}
 
+	renderUnknownOverflow() {
+		const {
+			type,
+			open,
+			tracker,
+			settings,
+		} = this.props;
+		const { ss_allowed = false, ss_blocked = false, blocked } = tracker;
+		const { toggle_individual_trackers = false } = settings;
+
+		const selectGroupClassNames = ClassNames('BlockingSelectGroup full-height',
+			'flex-container flex-dir-row-reverse', {
+				'BlockingSelectGroup--open': open,
+				'BlockingSelectGroup--wide': type === 'site' && toggle_individual_trackers,
+				'BlockingSelectGroup--disabled': this.selectDisabled,
+			});
+		const selectBlockClassNames = ClassNames('BlockingSelect BlockingSelect__block',
+			'full-height flex-child-grow', {
+				'BlockingSelect--disabled': this.selectBlockDisabled,
+			});
+
+		return (
+			<div className={selectGroupClassNames}>
+				{type === 'site' && toggle_individual_trackers && (
+					<div className="BlockingSelect BlockingSelect__restrict full-height flex-child-grow" onClick={this.clickRestrict}>
+						{ss_blocked ? t('android_unrestrict') : t('android_restrict')}
+					</div>
+				)}
+				{type === 'site' && toggle_individual_trackers && (
+					<div className="BlockingSelect BlockingSelect__trust full-height flex-child-grow" onClick={this.clickTrust}>
+						{ss_allowed ? t('android_untrust') : t('android_trust')}
+					</div>
+				)}
+			</div>
+		);
+	}
+
 	renderTrackerOverflow() {
 		const trackerSelect = this.trackerSelectStatus;
+		if (trackerSelect === 'antiTracking' || trackerSelect === 'adBlock') {
+			return this.renderUnknownOverflow();
+		}
 		if (trackerSelect === 'override-sb') {
 			return this.renderSmartBlockOverflow();
 		}

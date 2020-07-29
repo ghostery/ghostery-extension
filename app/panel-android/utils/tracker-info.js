@@ -16,10 +16,13 @@
 
 import { apps } from '../../../cliqz/core/tracker_db_v2.json';
 
-// Link to whotracks.me website
-export default function getUrlFromTrackerId(id) {
+/**
+ * Look up WhoTracksMe url slug
+ * @param  {Int} id 	Ghostery tracker ID
+ * @return {String}    	WTM slug
+ */
+export default function getSlugFromTrackerId(id) {
 	const trackerName = apps[id] && apps[id].name;
 	const trackerWtm = (Object.values(apps).find(app => app.wtm && app.name === trackerName) || {}).wtm;
-	const slug = trackerWtm || '../tracker-not-found';
-	return `https://whotracks.me/trackers/${slug}.html`;
+	return trackerWtm || '../tracker-not-found';
 }
