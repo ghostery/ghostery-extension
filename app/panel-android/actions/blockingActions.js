@@ -72,7 +72,8 @@ export function anonymizeSiteTracker({ actionData, state }) {
 	const updatedcliqzModuleData = JSON.parse(JSON.stringify(state.cliqzModuleData));
 	const { antiTracking, adBlock } = state.cliqzModuleData;
 	const whitelistedUrls = { ...antiTracking.whitelistedUrls, ...adBlock.whitelistedUrls };
-	const { unknownTracker, pageHost } = actionData;
+	const { unknownTracker } = actionData;
+	const { pageHost } = state.summary;
 
 	const addToWhitelist = () => {
 		unknownTracker.sources.forEach((domain) => {

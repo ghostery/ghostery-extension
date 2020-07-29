@@ -164,7 +164,7 @@ class BlockingTracker extends React.Component {
 	}
 
 	clickAnonymize = () => {
-		const {	tracker, siteProps, callGlobalAction } = this.props;
+		const {	tracker, callGlobalAction } = this.props;
 
 		if (this.selectDisabled) {
 			return;
@@ -174,7 +174,6 @@ class BlockingTracker extends React.Component {
 			actionName: 'anonymizeSiteTracker',
 			actionData: {
 				unknownTracker: tracker,
-				pageHost: siteProps.pageHost,
 			}
 		});
 	}
