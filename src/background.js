@@ -1692,11 +1692,12 @@ function initializeGhosteryModules() {
 				abtest.fetch()
 					.then(() => {
 						setupABTest();
+						resolve();
 					})
 					.catch(() => {
 						log('Unable to reach abtest server');
-					})
-					.finally(() => resolve());
+						resolve();
+					});
 			} else {
 				resolve();
 			}
