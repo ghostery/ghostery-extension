@@ -21,6 +21,8 @@ import { getTab } from '../utils/utils';
 import { log } from '../utils/common';
 import globals from './Globals';
 
+const IS_ANDROID = globals.BROWSER_INFO.os === 'android';
+
 /**
  * @class for handling Ghostery button.
  * @memberof BackgroundClasses
@@ -38,7 +40,7 @@ class BrowserButton {
 	 * @param  {number} tabId		tab id
 	 */
 	update(tabId) {
-		if (globals.BROWSER_INFO.os === 'android') { return; }
+		if (IS_ANDROID) { return; }
 		// Update this specific tab
 		if (tabId) {
 			// In ES6 classes, we need to bind context to callback function
