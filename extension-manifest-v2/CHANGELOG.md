@@ -13,7 +13,7 @@
 + Search for missing language tokens (#563)
 + Updated campaign metrics (#576)
 + Update dependencies
-+ Bump minimum FF to 68 ESR
++ Bump minimum versions for Firefox, Chrome and Opera
 
 ### GHOSTERY 8.5.1 (June 1, 2020)
 

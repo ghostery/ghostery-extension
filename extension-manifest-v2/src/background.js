@@ -1121,14 +1121,6 @@ function setupABTest() {
 	if (abtest.hasTest('antitracking_whitelist2')) {
 		cliqz.prefs.set('attrackBloomFilter', false);
 	}
-	// overlay search AB test
-	// if (abtest.hasTest('overlay_search')) {
-	// 	cliqz.enableModule('search');
-	// 	cliqz.enableModule('overlay');
-	// } else {
-	// 	cliqz.disableModule('search');
-	// 	cliqz.disableModule('overlay');
-	// }
 
 	setupHubPromoABTest();
 }
@@ -1692,12 +1684,11 @@ function initializeGhosteryModules() {
 				abtest.fetch()
 					.then(() => {
 						setupABTest();
-						resolve();
 					})
 					.catch(() => {
 						log('Unable to reach abtest server');
-						resolve();
-					});
+					})
+					.finally(() => resolve());
 			} else {
 				resolve();
 			}
