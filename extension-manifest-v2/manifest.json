@@ -54,15 +54,15 @@
 			"run_at": "document_start"
 		},
 		{
-		  "all_frames": false,
-		  "js": [
-			"dist/checkout_pages.js"
-		  ],
-		  "matches": [
-			"https://checkout.ghostery.com/*",
-			"https://checkout.ghosterystage.com/*"
-		  ],
-		  "run_at": "document_start"
+			"all_frames": false,
+			"js": [
+				"dist/checkout_pages.js"
+			],
+			"matches": [
+				"https://checkout.ghostery.com/*",
+				"https://checkout.ghosterystage.com/*"
+			],
+			"run_at": "document_start"
 		},
 		{
 			"all_frames": true,
