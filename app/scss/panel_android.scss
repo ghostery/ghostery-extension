@@ -20,7 +20,6 @@
 @import './partials/_svgs';
 
 // Android Specific Component Styles
-@import './android/_account';
 @import './android/_settings';
 @import './android/_tabs';
 @import './android/_overview_tab';
@@ -39,3 +38,20 @@
 
 // Import shared helpers
 @import 'shared_helper_classes';
+
+// NeedsReload Header
+.NeedsReload {
+	height: 0;
+	color: #4a4a4a;
+	font-weight: 500;
+	font-style: italic;
+	background-color: #ffae00;
+	overflow: none;
+	opacity: 0;
+	@include prefix('transition', 'all 300ms ease');
+
+	&.NeedsReload--show {
+		height: 25px;
+		opacity: 1;
+	}
+}

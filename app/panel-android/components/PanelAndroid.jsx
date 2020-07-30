@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import ClassNames from 'classnames';
 import Settings from './content/Settings';
 import Tabs from './content/Tabs';
 import Tab from './content/Tab';
@@ -22,13 +23,14 @@ import {
 } from '../actions/panelActions';
 import getCliqzModuleData from '../actions/cliqzActions';
 import handleAllActions from '../actions/handler';
-import { openAccountPageAndroid } from '../../panel/utils/msg';
+import { sendMessage, openAccountPageAndroid } from '../../panel/utils/msg';
 
 class PanelAndroid extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
+			needsReload: false,
 			view: 'overview',
 			panel: {
 				enable_ad_block: false,
@@ -133,7 +135,7 @@ class PanelAndroid extends React.Component {
 	}
 
 	setGlobalState = (updated) => {
-		const newState = {};
+		const newState = { needsReload: true };
 		Object.keys(updated).forEach((key) => {
 			newState[key] = { ...this.state[key], ...updated[key] }; // eslint-disable-line react/destructuring-assignment
 		});
@@ -170,6 +172,12 @@ class PanelAndroid extends React.Component {
 		blocked: false, // To appease BlockingTracker PropTypes
 		wtm: tracker.wtm,
 	})
+
+	reloadTab = () => {
+		const { panel } = this.state;
+		sendMessage('reloadTab', { tab_id: +panel.tab_id });
+		window.close();
+	}
 
 	_renderSettings() {
 		const { summary, settings } = this.state;
@@ -256,10 +264,16 @@ class PanelAndroid extends React.Component {
 	}
 
 	render() {
-		const { view } = this.state;
+		const { needsReload, view } = this.state;
+		const needsReloadClassNames = ClassNames('NeedsReload flex-container align-center-middle', {
+			'NeedsReload--show': needsReload,
+		});
 
 		return (
 			<div>
+				<div className={needsReloadClassNames} onClick={this.reloadTab}>
+					{t('alert_reload')}
+				</div>
 				{view === 'settings' && this._renderSettings()}
 				{view === 'overview' && this._renderOverview()}
 			</div>

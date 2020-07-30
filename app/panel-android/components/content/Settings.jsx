@@ -155,7 +155,7 @@ class Settings extends React.Component {
 					</div>
 					{false && ( // Remove to show Import/Export menu item
 						<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-import-export' }); }}>
-						{ t('settings_import_export') }
+							{ t('settings_import_export') }
 						</div>
 					)}
 					<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-help' }); }}>
