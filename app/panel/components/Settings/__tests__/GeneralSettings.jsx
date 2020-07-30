@@ -72,7 +72,6 @@ describe('app/panel/Settings/GeneralSettings.jsx', () => {
 		});
 	});
 
-
 	describe('Shallow snapshot tests rendered with Enzyme', () => {
 		test('GeneralSettings functions correctly', () => {
 			const settingsData = {
