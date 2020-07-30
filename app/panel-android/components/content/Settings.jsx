@@ -22,6 +22,7 @@ import OptIn from '../../../panel/components/Settings/OptIn';
 import ImportExport from '../../../panel/components/Settings/ImportExport';
 import Help from '../../../panel/components/Help';
 import About from '../../../panel/components/About';
+import { exportSettings, importSettingsDialog, importSettingsNative } from '../../actions/settingsActions';
 
 import globals from '../../../../src/classes/Globals';
 
@@ -152,9 +153,11 @@ class Settings extends React.Component {
 					<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-opt-in' }); }}>
 						{ t('settings_opt_in') }
 					</div>
-					<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-import-export' }); }}>
+					{false && ( // Remove to show Import/Export menu item
+						<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-import-export' }); }}>
 						{ t('settings_import_export') }
-					</div>
+						</div>
+					)}
 					<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-help' }); }}>
 						{ t('panel_menu_help') }
 					</div>
@@ -247,13 +250,11 @@ class Settings extends React.Component {
 			importResultText,
 			actionSuccess,
 		};
-
 		const actions = {
-			exportSettings: () => { console.log('exportSettings'); },
-			importSettingsDialog: () => { console.log('importSettingsDialog'); },
-			importSettingsNative: () => { console.log('importSettingsNative'); },
+			exportSettings,
+			importSettingsDialog,
+			importSettingsNative,
 		};
-		console.log('ToDo: implement actions and add settingsData elements to reducer', this.props, this.state);
 
 		return (
 			<div className="s-tabs-panel">
