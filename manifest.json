@@ -1,7 +1,5 @@
 {
 	"manifest_version": 2,
-  "debug": true,
-  "log": true,
 	"author": "Ghostery",
 	"name": "__MSG_name__",
 	"short_name": "Ghostery",
@@ -107,8 +105,8 @@
 		}
 	},
 	"minimum_edge_version": "79.0.309",
-	"minimum_chrome_version": "58",
-	"minimum_opera_version": "45",
+	"minimum_chrome_version": "69",
+	"minimum_opera_version": "56",
 	"web_accessible_resources": [
 		"app/images/*",
 		"dist/css/rewards_styles.css",
