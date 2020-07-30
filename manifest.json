@@ -56,15 +56,15 @@
 			"run_at": "document_start"
 		},
 		{
-		  "all_frames": false,
-		  "js": [
-			"dist/checkout_pages.js"
-		  ],
-		  "matches": [
-			"https://checkout.ghostery.com/*",
-			"https://checkout.ghosterystage.com/*"
-		  ],
-		  "run_at": "document_start"
+			"all_frames": false,
+			"js": [
+				"dist/checkout_pages.js"
+			],
+			"matches": [
+				"https://checkout.ghostery.com/*",
+				"https://checkout.ghosterystage.com/*"
+			],
+			"run_at": "document_start"
 		},
 		{
 			"all_frames": true,
@@ -107,8 +107,8 @@
 		}
 	},
 	"minimum_edge_version": "79.0.309",
-	"minimum_chrome_version": "58",
-	"minimum_opera_version": "45",
+	"minimum_chrome_version": "69",
+	"minimum_opera_version": "56",
 	"web_accessible_resources": [
 		"app/images/*",
 		"dist/css/rewards_styles.css",

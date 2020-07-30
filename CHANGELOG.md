@@ -1,4 +1,4 @@
-### GHOSTERY 8.5.2 ()
+### GHOSTERY 8.5.2 (July 30, 2020)
 
 + Fixes bug where Ghostery icon could be grayed out on restricted sites (#564)
 + Clean up lint suppression rules. Remove React UNSAFE events. (#559, #566)
@@ -13,7 +13,7 @@
 + Search for missing language tokens (#563)
 + Updated campaign metrics (#576)
 + Update dependencies
-+ Bump minimum FF to 68 ESR
++ Bump minimum versions for Firefox, Chrome and Opera
 
 ### GHOSTERY 8.5.1 (June 1, 2020)
 
