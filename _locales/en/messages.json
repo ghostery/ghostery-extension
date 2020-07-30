@@ -1273,6 +1273,9 @@
 	"android_untrust": {
 		"message": "Undo"
 	},
+	"android_anonymize": {
+		"message": "Anonymize"
+	},
 	"android_anonymized": {
 		"message": "Anonymized"
 	},
