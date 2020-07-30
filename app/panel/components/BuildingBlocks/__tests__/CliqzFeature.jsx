@@ -14,7 +14,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
-import CliqzFeature from '../BuildingBlocks/CliqzFeature';
+import CliqzFeature from '../CliqzFeature';
 
 // Fake the translation function to only return the translation key
 global.t = function(str) {
@@ -22,7 +22,7 @@ global.t = function(str) {
 };
 
 // Fake the Tooltip implementation
-jest.mock('../Tooltip');
+jest.mock('../../Tooltip');
 
 describe('app/panel/components/CliqzFeature.jsx', () => {
 	describe('Snapshot tests with react-test-renderer', () => {

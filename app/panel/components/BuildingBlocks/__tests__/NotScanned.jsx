@@ -13,7 +13,7 @@
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import NotScanned from '../BuildingBlocks/NotScanned';
+import NotScanned from '../NotScanned';
 
 // Fake the translation function to only return the translation key
 global.t = function(str) {
