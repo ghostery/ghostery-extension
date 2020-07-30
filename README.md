@@ -143,8 +143,8 @@ $ ./fern.js build configs/ghostery.js --environment=production --no-debug
 
 + Firefox: 68+
 + Firefox Android: 68+
-+ Chrome: 58+
-+ Opera: 45+
++ Chrome: 69+
++ Opera: 56+
 + Edge: 79+
 
 ## Contribute
