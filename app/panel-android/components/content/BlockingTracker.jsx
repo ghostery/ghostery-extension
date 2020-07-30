@@ -49,6 +49,10 @@ class BlockingTracker extends React.Component {
 				return 'restricted';
 			}
 
+			if (blocked) {
+				return 'blocked';
+			}
+
 			if (catId !== '') {
 				return catId;
 			}
