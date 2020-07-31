@@ -43,7 +43,7 @@ exports[`app/panel/Settings/GeneralSettings.jsx Snapshot tests with react-test-r
             <span
               id="last-updated-span-value"
             >
-              December 31, 1969 7:00 PM
+              
             </span>
             <span
               className="s-blue-header"
@@ -273,7 +273,7 @@ exports[`app/panel/Settings/GeneralSettings.jsx Snapshot tests with react-test-r
             <span
               id="last-updated-span-value"
             >
-              December 31, 1969 7:16 PM
+              1000000
             </span>
             <span
               className="s-blue-header"

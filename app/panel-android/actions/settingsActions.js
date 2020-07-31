@@ -71,7 +71,7 @@ export function selectItem({ actionData }) {
 	};
 }
 
-// ToDo: Implement for Import/Export
+// ToDo: Implement for Import/Export & add them them to handler.js
 export function exportSettings() {}
 export function importSettingsDialog() {}
 export function importSettingsNative() {}

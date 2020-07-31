@@ -12,10 +12,10 @@
  */
 
 import {
-	handleTrustButtonClick, handleRestrictButtonClick, handlePauseButtonClick, cliqzFeatureToggle, updateSitePolicy
+	updateSitePolicy, handleTrustButtonClick, handleRestrictButtonClick, handlePauseButtonClick, cliqzFeatureToggle
 } from './summaryActions';
 import {
-	trustRestrictBlockSiteTracker, anonymizeSiteTracker, blockUnblockGlobalTracker, blockUnBlockAllTrackers, resetSettings
+	anonymizeSiteTracker, trustRestrictBlockSiteTracker, blockUnblockGlobalTracker, blockUnBlockAllTrackers, resetSettings
 } from './blockingActions';
 import {
 	updateDatabase, updateSettingCheckbox, selectItem

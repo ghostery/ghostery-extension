@@ -14,7 +14,6 @@
 import React from 'react';
 import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
-
 import {
 	NotScanned,
 	DonutGraph,
@@ -22,7 +21,6 @@ import {
 	PauseButton,
 	CliqzFeature
 } from '../../../panel/components/BuildingBlocks';
-
 import globals from '../../../../src/classes/Globals';
 
 const {
