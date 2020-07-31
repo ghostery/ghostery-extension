@@ -16,7 +16,7 @@ import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 import GeneralSettings from '../GeneralSettings';
 
-jest.spyOn(GeneralSettings, 'getDbLastUpdated').mockImplementation((settingsData) => settingsData.bugs_last_checked);
+jest.spyOn(GeneralSettings, 'getDbLastUpdated').mockImplementation(settingsData => settingsData.bugs_last_checked);
 
 describe('app/panel/Settings/GeneralSettings.jsx', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
