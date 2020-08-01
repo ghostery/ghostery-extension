@@ -140,6 +140,10 @@ class PanelAndroid extends React.Component {
 			newState[key] = { ...this.state[key], ...updated[key] }; // eslint-disable-line react/destructuring-assignment
 		});
 
+		if (updated.needsReload === false) {
+			newState.needsReload = false;
+		}
+
 		this.setState(newState);
 	}
 

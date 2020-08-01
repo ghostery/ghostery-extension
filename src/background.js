@@ -979,6 +979,17 @@ function onMessageHandler(request, sender, callback) {
 		closeAndroidPanelTabs();
 		return false;
 	}
+	if (name === 'gather_ghostery_export_data') {
+		const settings = account.buildUserSettings();
+		settings.site_blacklist = conf.site_blacklist;
+		settings.site_whitelist = conf.site_whitelist;
+
+		const hash = common.hashCode(JSON.stringify({ conf: settings }));
+		const backup = JSON.stringify({ hash, settings: { conf: settings } });
+		const msg = { type: 'Ghostery-Backup', content: backup };
+		callback(msg);
+		return true;
+	}
 	if (name === 'getSettingsForExport') {
 		utils.getActiveTab((activeTab) => {
 			if (activeTab && activeTab.id && activeTab.url.startsWith('http')) {

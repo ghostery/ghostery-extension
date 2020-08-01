@@ -22,8 +22,6 @@ import OptIn from '../../../panel/components/Settings/OptIn';
 import ImportExport from '../../../panel/components/Settings/ImportExport';
 import Help from '../../../panel/components/Help';
 import About from '../../../panel/components/About';
-import { exportSettings, importSettingsDialog, importSettingsNative } from '../../actions/settingsActions';
-
 import globals from '../../../../src/classes/Globals';
 
 const { IS_CLIQZ } = globals;
@@ -81,6 +79,31 @@ class Settings extends React.Component {
 		callGlobalAction({
 			actionName: 'selectItem',
 			actionData: { event, value },
+		});
+	}
+
+	exportSettings = () => {
+		const { callGlobalAction } = this.props;
+
+		callGlobalAction({
+			actionName: 'exportSettings',
+		});
+	}
+
+	importSettingsDialog = () => {
+		const { callGlobalAction } = this.props;
+
+		callGlobalAction({
+			actionName: 'importSettingsDialog',
+		});
+	}
+
+	importSettingsNative = (importFile) => {
+		const { callGlobalAction } = this.props;
+
+		callGlobalAction({
+			actionName: 'importSettingsNative',
+			actionData: importFile,
 		});
 	}
 
@@ -153,11 +176,9 @@ class Settings extends React.Component {
 					<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-opt-in' }); }}>
 						{ t('settings_opt_in') }
 					</div>
-					{false && ( // Remove to show Import/Export menu item
-						<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-import-export' }); }}>
-							{ t('settings_import_export') }
-						</div>
-					)}
+					<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-import-export' }); }}>
+						{ t('settings_import_export') }
+					</div>
 					<div className="Settings__link clickable" onClick={() => { this.setState({ view: 'settings-help' }); }}>
 						{ t('panel_menu_help') }
 					</div>
@@ -251,9 +272,9 @@ class Settings extends React.Component {
 			actionSuccess,
 		};
 		const actions = {
-			exportSettings,
-			importSettingsDialog,
-			importSettingsNative,
+			exportSettings: this.exportSettings,
+			importSettingsDialog: this.importSettingsDialog,
+			importSettingsNative: this.importSettingsNative,
 		};
 
 		return (

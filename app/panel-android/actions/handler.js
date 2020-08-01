@@ -18,7 +18,7 @@ import {
 	anonymizeSiteTracker, trustRestrictBlockSiteTracker, blockUnblockGlobalTracker, blockUnBlockAllTrackers, resetSettings
 } from './blockingActions';
 import {
-	updateDatabase, updateSettingCheckbox, selectItem
+	updateDatabase, updateSettingCheckbox, selectItem, exportSettings, importSettingsDialog, importSettingsNative
 } from './settingsActions';
 
 // Handle all actions in Panel.jsx
@@ -76,6 +76,18 @@ export default function handleAllActions({ actionName, actionData, state }) {
 
 		case 'selectItem':
 			updated = selectItem({ actionData, state });
+			break;
+
+		case 'exportSettings':
+			updated = exportSettings({ actionData, state });
+			break;
+
+		case 'importSettingsDialog':
+			updated = importSettingsDialog({ actionData, state });
+			break;
+
+		case 'importSettingsNative':
+			updated = importSettingsNative({ actionData, state });
 			break;
 
 		default:
