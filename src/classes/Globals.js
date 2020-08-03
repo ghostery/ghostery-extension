@@ -153,15 +153,24 @@ class Globals {
 		const version = parseInt(ua.browser.version.toString(), 10); // convert to string for Chrome
 		const platform = ua.os.name.toLowerCase();
 
+		// Check for Ghostery Android Browser
+		if (typeof chrome.runtime.getBrowserInfo === 'function') {
+			chrome.runtime.getBrowserInfo().then((info) => {
+				if (info.name === 'Ghostery') {
+					this.BROWSER_INFO.displayName = 'Ghostery Android Browser';
+					this.BROWSER_INFO.name = 'ghostery_android';
+					this.BROWSER_INFO.token = 'ga';
+					this.BROWSER_INFO.os = 'android';
+					this.BROWSER_INFO.version = info.version;
+				}
+			});
+		}
+
 		// Set name and token properties. CMP uses `name` value.  Metrics uses `token`
 		if (this.IS_CLIQZ) {
 			this.BROWSER_INFO.displayName = 'Cliqz';
 			this.BROWSER_INFO.name = 'cliqz';
 			this.BROWSER_INFO.token = 'cl';
-		} else if (navigator.userAgent.toLocaleLowerCase().includes('ghostery')) {
-			this.BROWSER_INFO.displayName = 'Ghostery Android Browser';
-			this.BROWSER_INFO.name = 'ghostery_android';
-			this.BROWSER_INFO.token = 'ga';
 		} else if (browser.includes('edge')) {
 			this.BROWSER_INFO.displayName = 'Edge';
 			this.BROWSER_INFO.name = 'edge';
@@ -174,7 +183,7 @@ class Globals {
 			this.BROWSER_INFO.displayName = 'Chrome';
 			this.BROWSER_INFO.name = 'chrome';
 			this.BROWSER_INFO.token = 'ch';
-		} else if (browser.includes('firefox')) {
+		} else if (browser.includes('firefox') && !this.BROWSER_INFO.name.length) {
 			this.BROWSER_INFO.displayName = 'Firefox';
 			this.BROWSER_INFO.name = 'firefox';
 			this.BROWSER_INFO.token = 'ff';
