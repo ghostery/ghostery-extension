@@ -155,6 +155,8 @@ class Globals {
 
 		// Check for Ghostery Android Browser
 		if (typeof chrome.runtime.getBrowserInfo === 'function') {
+			// TODO: This can create a race condition when BROWSER_INFO is evaluated at runtime.
+			// In background.js, IS_FIREFOX will always be true.
 			chrome.runtime.getBrowserInfo().then((info) => {
 				if (info.name === 'Ghostery') {
 					this.BROWSER_INFO.displayName = 'Ghostery Android Browser';

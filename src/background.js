@@ -1660,7 +1660,7 @@ function initializeGhosteryModules() {
 				conf.enable_human_web = !humanweb.isDisabled;
 				conf.enable_offers = !offers.isDisabled && !IS_ANDROID;
 
-				if (IS_FIREFOX) {
+				if (IS_FIREFOX && BROWSER_INFO.name !== 'ghostery_android') {
 					if (globals.JUST_INSTALLED) {
 						conf.enable_human_web = false;
 						conf.enable_offers = false;
