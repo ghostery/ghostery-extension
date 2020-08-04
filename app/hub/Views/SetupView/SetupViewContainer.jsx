@@ -111,7 +111,7 @@ class SetupViewContainer extends Component {
 		actions.setAdBlock({ enable_ad_block: true });
 		actions.setSmartBlocking({ enable_smart_block: true });
 		actions.setGhosteryRewards({ enable_ghostery_rewards: !IS_FIREFOX && !IS_ANDROID });
-		actions.setHumanWeb({ enable_human_web: !IS_FIREFOX });
+		actions.setHumanWeb({ enable_human_web: !IS_FIREFOX || BROWSER_INFO.name === 'ghostery_android' });
 	}
 
 	/**
