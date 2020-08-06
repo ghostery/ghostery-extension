@@ -68,6 +68,7 @@ function calculateDelta(oldState, newState) {
 	return 0;
 }
 
+// Modified version of _updateCliqzModuleWhitelist from app/panel/reducers/blocking.js
 export function anonymizeSiteTracker({ actionData, state }) {
 	const updatedcliqzModuleData = JSON.parse(JSON.stringify(state.cliqzModuleData));
 	const { antiTracking, adBlock } = state.cliqzModuleData;

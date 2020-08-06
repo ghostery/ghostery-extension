@@ -125,7 +125,7 @@ export function selectItem({ actionData }) {
 }
 
 export function exportSettings({ state }) {
-	return sendMessageInPromise('gather_ghostery_export_data').then((result) => {
+	return sendMessageInPromise('getAndroidSettingsForExport').then((result) => {
 		const { needsReload } = state;
 		const settings_last_exported = Number((new Date()).getTime());
 		const exportResultText = `${t('settings_export_success')} ${moment(settings_last_exported).format('LLL')}`;

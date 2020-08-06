@@ -747,9 +747,7 @@ function onMessageHandler(request, sender, callback) {
 	}
 
 	// HANDLE UNIVERSAL EVENTS HERE (NO ORIGIN LISTED ABOVE)
-	// The 'getPanelData' message is never sent by the panel, which uses ports only since 8.3.2
-	// The message is still sent by panel-android and by the setup hub as of 8.4.0
-	if (name === 'getPanelData') {
+	if (name === 'getPanelData') { // Used by panel-android and the intro hub
 		if (!message.tabId) {
 			utils.getActiveTab((activeTab) => {
 				const data = panelData.get(message.view, activeTab);
@@ -979,7 +977,7 @@ function onMessageHandler(request, sender, callback) {
 		closeAndroidPanelTabs();
 		return false;
 	}
-	if (name === 'gather_ghostery_export_data') {
+	if (name === 'getAndroidSettingsForExport') {
 		const settings = account.buildUserSettings();
 		settings.site_blacklist = conf.site_blacklist;
 		settings.site_whitelist = conf.site_whitelist;
