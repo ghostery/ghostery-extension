@@ -153,21 +153,6 @@ class Globals {
 		const version = parseInt(ua.browser.version.toString(), 10); // convert to string for Chrome
 		const platform = ua.os.name.toLowerCase();
 
-		// Check for Ghostery Android Browser
-		if (typeof chrome.runtime.getBrowserInfo === 'function') {
-			// TODO: This can create a race condition when BROWSER_INFO is evaluated at runtime.
-			// In background.js, IS_FIREFOX will always be true.
-			chrome.runtime.getBrowserInfo().then((info) => {
-				if (info.name === 'Ghostery') {
-					this.BROWSER_INFO.displayName = 'Ghostery Android Browser';
-					this.BROWSER_INFO.name = 'ghostery_android';
-					this.BROWSER_INFO.token = 'ga';
-					this.BROWSER_INFO.os = 'android';
-					this.BROWSER_INFO.version = info.version;
-				}
-			});
-		}
-
 		// Set name and token properties. CMP uses `name` value.  Metrics uses `token`
 		if (this.IS_CLIQZ) {
 			this.BROWSER_INFO.displayName = 'Cliqz';
@@ -185,7 +170,7 @@ class Globals {
 			this.BROWSER_INFO.displayName = 'Chrome';
 			this.BROWSER_INFO.name = 'chrome';
 			this.BROWSER_INFO.token = 'ch';
-		} else if (browser.includes('firefox') && !this.BROWSER_INFO.name.length) {
+		} else if (browser.includes('firefox')) {
 			this.BROWSER_INFO.displayName = 'Firefox';
 			this.BROWSER_INFO.name = 'firefox';
 			this.BROWSER_INFO.token = 'ff';
@@ -208,6 +193,29 @@ class Globals {
 
 		// Set version property
 		this.BROWSER_INFO.version = version;
+
+		// Check for the Ghostery Android browser
+		this._checkForGhosteryAndroid();
+	}
+
+	/**
+	 * Check for Ghostery Android Browser and update BROWSER_INFO.
+	 * Note: This is asynchronous and not available at runtime.
+	 * @private
+	 * @return boolean
+	 */
+	_checkForGhosteryAndroid() {
+		if (typeof chrome.runtime.getBrowserInfo === 'function') {
+			chrome.runtime.getBrowserInfo().then((info) => {
+				if (info.name === 'Ghostery') {
+					this.BROWSER_INFO.displayName = 'Ghostery Android Browser';
+					this.BROWSER_INFO.name = 'ghostery_android';
+					this.BROWSER_INFO.token = 'ga';
+					this.BROWSER_INFO.os = 'android';
+					this.BROWSER_INFO.version = info.version;
+				}
+			});
+		}
 	}
 }
 
