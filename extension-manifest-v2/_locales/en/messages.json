@@ -2544,5 +2544,8 @@
 	},
 	"too_many_password_resets_text": {
 		"message": "Too many password reset requests. Try again in one hour."
+	},
+	"too_many_failed_logins_text": {
+		"message": "Too many failed logins. Try again in one hour."
 	}
 }
