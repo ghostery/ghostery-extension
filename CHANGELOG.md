@@ -1,3 +1,9 @@
+### GHOSTERY 8.5.3 ()
+
++ Updated Firefox Android extension panel UI and mobile optimizations (#587)
++ Display error message after too many failed login attempts (#577)
++ Added product id parameter to extension pings (#574)
+
 ### GHOSTERY 8.5.2 (July 30, 2020)
 
 + Fixes bug where Ghostery icon could be grayed out on restricted sites (#564)
