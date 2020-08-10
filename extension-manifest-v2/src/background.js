@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -17,7 +17,7 @@
 import { debounce, every, size } from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
 import cliqz, { HUMANWEB_MODULE, HPN_MODULE } from './classes/Cliqz';
-// object class
+// object classes
 import Events from './classes/EventHandlers';
 import Policy from './classes/Policy';
 // static classes
@@ -65,6 +65,7 @@ const {
 } = globals;
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
+const IS_ANDROID = (BROWSER_INFO.os === 'android');
 const VERSION_CHECK_URL = `${CDN_BASE_URL}/update/version`;
 const REAL_ESTATE_ID = 'ghostery';
 const onBeforeRequest = events.onBeforeRequest.bind(events);
@@ -208,7 +209,7 @@ function reloadTab(data) {
  * @memberOf Background
  */
 function closeAndroidPanelTabs() {
-	if (BROWSER_INFO.os !== 'android') { return; }
+	if (!IS_ANDROID) { return; }
 	chrome.tabs.query({
 		active: true,
 		url: chrome.extension.getURL('app/templates/panel_android.html*')
@@ -746,9 +747,7 @@ function onMessageHandler(request, sender, callback) {
 	}
 
 	// HANDLE UNIVERSAL EVENTS HERE (NO ORIGIN LISTED ABOVE)
-	// The 'getPanelData' message is never sent by the panel, which uses ports only since 8.3.2
-	// The message is still sent by panel-android and by the setup hub as of 8.4.0
-	if (name === 'getPanelData') {
+	if (name === 'getPanelData') { // Used by panel-android and the intro hub
 		if (!message.tabId) {
 			utils.getActiveTab((activeTab) => {
 				const data = panelData.get(message.view, activeTab);
@@ -798,9 +797,17 @@ function onMessageHandler(request, sender, callback) {
 		return false;
 	}
 	if (name === 'getCliqzModuleData') { // panel-android only
-		utils.getActiveTab((activeTab) => {
-			sendCliqzModuleCounts(activeTab.id, activeTab.pageHost, callback);
-		});
+		if (!message.tabId) {
+			utils.getActiveTab((activeTab) => {
+				const pageHost = (activeTab.url && utils.processUrl(activeTab.url).hostname) || '';
+				sendCliqzModuleCounts(activeTab.id, pageHost, callback);
+			});
+		} else {
+			chrome.tabs.get(+message.tabId, (messageTab) => {
+				const pageHost = (messageTab.url && utils.processUrl(messageTab.url).hostname) || '';
+				sendCliqzModuleCounts(messageTab.id, pageHost, callback);
+			});
+		}
 		return true;
 	}
 	if (name === 'getTrackerDescription') {
@@ -970,6 +977,17 @@ function onMessageHandler(request, sender, callback) {
 		closeAndroidPanelTabs();
 		return false;
 	}
+	if (name === 'getAndroidSettingsForExport') {
+		const settings = account.buildUserSettings();
+		settings.site_blacklist = conf.site_blacklist;
+		settings.site_whitelist = conf.site_whitelist;
+
+		const hash = common.hashCode(JSON.stringify({ conf: settings }));
+		const backup = JSON.stringify({ hash, settings: { conf: settings } });
+		const msg = { type: 'Ghostery-Backup', content: backup };
+		callback(msg);
+		return true;
+	}
 	if (name === 'getSettingsForExport') {
 		utils.getActiveTab((activeTab) => {
 			if (activeTab && activeTab.id && activeTab.url.startsWith('http')) {
@@ -982,8 +1000,9 @@ function onMessageHandler(request, sender, callback) {
 				try {
 					const hash = common.hashCode(JSON.stringify({ conf: settings }));
 					const backup = JSON.stringify({ hash, settings: { conf: settings } });
+					const msg = { type: 'Ghostery-Backup', content: backup };
 					utils.injectNotifications(activeTab.id, true).then(() => {
-						sendMessage(activeTab.id, 'exportFile', backup);
+						sendMessage(activeTab.id, 'exportFile', msg);
 					});
 					callback(true);
 				} catch (e) {
@@ -1029,6 +1048,15 @@ function onMessageHandler(request, sender, callback) {
 		const hubUrl = chrome.runtime.getURL('./app/templates/hub.html');
 		metrics.ping('intro_hub_click');
 		utils.openNewTab({ url: hubUrl, become_active: true });
+		return false;
+	}
+	if (name === 'openAccountAndroid') {
+		if (confData.account) {
+			utils.openNewTab({ url: `${globals.ACCOUNT_BASE_URL}/`, become_active: true });
+		} else {
+			const hubUrl = chrome.runtime.getURL('./app/templates/hub.html#log-in');
+			utils.openNewTab({ url: hubUrl, become_active: true });
+		}
 		return false;
 	}
 	if (name === 'promoModals.sawPremiumPromo') {
@@ -1359,7 +1387,7 @@ function getDataForGhosteryTab(callback) {
  * @memberOf Background
  */
 function initializePopup() {
-	if (BROWSER_INFO.os === 'android') {
+	if (IS_ANDROID) {
 		chrome.browserAction.setPopup({
 			popup: 'app/templates/panel_android.html',
 		});
@@ -1628,9 +1656,9 @@ function initializeGhosteryModules() {
 				conf.enable_ad_block = !adblocker.isDisabled;
 				conf.enable_anti_tracking = !antitracking.isDisabled;
 				conf.enable_human_web = !humanweb.isDisabled;
-				conf.enable_offers = !offers.isDisabled;
+				conf.enable_offers = !offers.isDisabled && !IS_ANDROID;
 
-				if (IS_FIREFOX) {
+				if (IS_FIREFOX && BROWSER_INFO.name !== 'ghostery_android') {
 					if (globals.JUST_INSTALLED) {
 						conf.enable_human_web = false;
 						conf.enable_offers = false;
@@ -1668,8 +1696,8 @@ function initializeGhosteryModules() {
 		setCliqzModuleEnabled(offers, false);
 	}
 
-	// Disable purplebox for Firefox Android users
-	if (BROWSER_INFO.os === 'android' && IS_FIREFOX) {
+	// Disable purplebox for Android users
+	if (IS_ANDROID) {
 		conf.show_alert = false;
 	}
 
@@ -1727,12 +1755,12 @@ function initializeGhosteryModules() {
 	]).then(() => {
 		// run scheduledTasks on init
 		scheduledTasks().then(() => {
-			// open the Ghostery Hub on install with justInstalled query parameter set to true
-			// we need to do this after running scheduledTasks for the first time
+			// Open the Ghostery Hub on install with justInstalled query parameter set to true.
+			// We need to do this after running scheduledTasks for the first time
 			// because of an A/B test that determines which promo variant is shown in the Hub on install
 			if (globals.JUST_INSTALLED) {
-				const route = (conf.hub_promo_variant === 'upgrade' || conf.hub_promo_variant === 'not_yet_set') ? '' : '#home';
-				const showPremiumPromoModal = conf.hub_promo_variant === 'midnight';
+				const route = ((conf.hub_promo_variant === 'upgrade' || conf.hub_promo_variant === 'not_yet_set') && !IS_ANDROID) ? '' : '#home';
+				const showPremiumPromoModal = (conf.hub_promo_variant === 'midnight' && !IS_ANDROID);
 				chrome.tabs.create({
 					url: chrome.runtime.getURL(`./app/templates/hub.html?$justInstalled=true&pm=${showPremiumPromoModal}${route}`),
 					active: true

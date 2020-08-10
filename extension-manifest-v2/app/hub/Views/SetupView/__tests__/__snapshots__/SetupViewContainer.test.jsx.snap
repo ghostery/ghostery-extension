@@ -8,7 +8,7 @@ exports[`app/hub/Views/SetupView container Snapshot tests with react-test-render
     className="Modal"
   />
   <div
-    className="full-height flex-container flex-dir-column"
+    className="full-height flex-container flex-dir-column android-relative"
   >
     <div
       className="flex-child-grow"
@@ -60,7 +60,7 @@ exports[`app/hub/Views/SetupView container Snapshot tests with react-test-render
     className="Modal"
   />
   <div
-    className="full-height flex-container flex-dir-column"
+    className="full-height flex-container flex-dir-column android-relative"
   >
     <div
       className="flex-child-grow"
@@ -112,7 +112,7 @@ exports[`app/hub/Views/SetupView container Snapshot tests with react-test-render
     className="Modal"
   />
   <div
-    className="full-height flex-container flex-dir-column"
+    className="full-height flex-container flex-dir-column android-relative"
   >
     <div
       className="flex-child-grow"
@@ -167,7 +167,7 @@ exports[`app/hub/Views/SetupView container Snapshot tests with react-test-render
     className="Modal"
   />
   <div
-    className="full-height flex-container flex-dir-column"
+    className="full-height flex-container flex-dir-column android-relative"
   >
     <div
       className="flex-child-grow"
@@ -219,7 +219,7 @@ exports[`app/hub/Views/SetupView container Snapshot tests with react-test-render
     className="Modal"
   />
   <div
-    className="full-height flex-container flex-dir-column"
+    className="full-height flex-container flex-dir-column android-relative"
   >
     <div
       className="flex-child-grow"

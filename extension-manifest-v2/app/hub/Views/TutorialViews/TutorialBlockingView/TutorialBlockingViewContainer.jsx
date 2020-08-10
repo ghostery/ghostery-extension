@@ -44,7 +44,8 @@ class TutorialBlockingViewContainer extends Component {
 	 * @return {JSX} JSX for rendering the Tutorial Blocking View of the Hub app
 	 */
 	render() {
-		return <TutorialBlockingView />;
+		const { isAndroid } = this.props;
+		return <TutorialBlockingView isAndroid={isAndroid} />;
 	}
 }
 

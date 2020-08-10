@@ -7,6 +7,8 @@
 	"version_name": "8.5.2",
 	"default_locale": "en",
 	"description": "__MSG_short_description__",
+	"debug": true,
+	"log": true,
 	"icons": {
 		"16": "app/images/icon16.png",
 		"48": "app/images/icon48.png",
@@ -14,8 +16,8 @@
 	},
 	"browser_action": {
 		"default_icon": {
-			"19": "app/images/icon19_off.png",
-			"38": "app/images/icon38_off.png"
+			"19": "app/images/icon19.png",
+			"38": "app/images/icon38.png"
 		},
 		"default_title": "Ghostery"
 	},

@@ -7,7 +7,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -28,7 +28,12 @@ import account from './Account';
 import dispatcher from './Dispatcher';
 import promoModals from './PromoModals';
 import { getCliqzGhosteryBugs, sendCliqzModuleCounts } from '../utils/cliqzModulesData';
-import { getActiveTab, flushChromeMemoryCache, processUrl } from '../utils/utils';
+import {
+	getTab,
+	getActiveTab,
+	flushChromeMemoryCache,
+	processUrl
+} from '../utils/utils';
 import { log } from '../utils/common';
 
 const SYNC_SET = new Set(globals.SYNC_ARRAY);
@@ -71,7 +76,7 @@ class PanelData {
 		this._panelPort = port;
 		this._mountedComponents.panel = true;
 
-		getActiveTab((tab) => {
+		function tabCallback(tab) {
 			const { url } = tab;
 
 			this._activeTab = tab;
@@ -86,7 +91,21 @@ class PanelData {
 			account.getUserSettings()
 				.then(userSettings => this._postUserSettings(userSettings))
 				.catch(() => log('Failed getting remote user settings from PanelData#initPort. User not logged in.'));
-		});
+		}
+
+		function tabErrorCallback(err) {
+			const { message } = err;
+			log(`Error: ${message}`);
+			this._postMessage('panel', { error: message });
+		}
+
+		const paramTabId = +(new URL(port.sender.url)).searchParams.get('tabId');
+
+		if (paramTabId) {
+			getTab(paramTabId, tabCallback.bind(this), tabErrorCallback.bind(this));
+		} else {
+			getActiveTab(tabCallback.bind(this), tabErrorCallback.bind(this));
+		}
 	}
 
 	/**

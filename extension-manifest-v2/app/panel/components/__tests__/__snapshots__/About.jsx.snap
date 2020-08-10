@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/panel/components/About.jsx Snapshot tests with react-test-renderer About panel is rendered correctly 1`] = `
+<div
+  id="content-about"
+>
+  <div
+    className="row"
+  >
+    <div
+      className="small-12 columns"
+    >
+      <h1>
+        panel_about_panel_header
+      </h1>
+      <div
+        className="support-section"
+      >
+        <h3>
+          panel_about_version_header
+        </h3>
+        <a
+          className=""
+          href="https://github.com/ghostery/ghostery-extension/releases"
+          onClick={[Function]}
+        >
+          panel_about_release_notes
+        </a>
+        <a
+          className=""
+          href="https://www.mozilla.org/en-US/MPL/2.0/"
+          onClick={[Function]}
+        >
+          panel_about_license
+        </a>
+        <a
+          className=""
+          href="https://www.ghostery.com/about-ghostery/browser-extension-privacy-policy/"
+          onClick={[Function]}
+        >
+          panel_about_privacy_statement
+        </a>
+        <a
+          className=""
+          href="https://www.ghostery.com/about-ghostery/ghostery-terms-and-conditions/"
+          onClick={[Function]}
+        >
+          panel_about_terms_and_conditions
+        </a>
+        <a
+          className=""
+          href="https://www.ghostery.com/about-ghostery/imprint/"
+          onClick={[Function]}
+        >
+          panel_about_imprint
+        </a>
+        <a
+          className=""
+          onClick={[Function]}
+        >
+          panel_about_licenses
+        </a>
+        <a
+          className=""
+          href="https://www.ghostery.com/"
+          onClick={[Function]}
+        >
+          Ghostery.com
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;

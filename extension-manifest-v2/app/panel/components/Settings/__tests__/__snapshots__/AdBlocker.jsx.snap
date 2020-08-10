@@ -1,0 +1,280 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/panel/Settings/AdBlocker.jsx Snapshot tests with react-test-renderer AdBlocker is rendered correctly with AdOnly checked 1`] = `
+<div
+  className="s-tabs-panel"
+>
+  <div
+    className="row"
+  >
+    <div
+      className="columns"
+    >
+      <h3>
+        settings_adblocker
+      </h3>
+      <h5>
+        settings_adblocker_lists
+      </h5>
+      <div
+        className="RadioButtonGroup__container"
+      >
+        <div
+          className="flex-container align-justify RadioButtonGroup__labelContainer"
+        >
+          <div
+            className="RadioButtonGroup__label"
+            onClick={[Function]}
+          >
+            settings_adblocker_list_1
+          </div>
+          <div
+            className="RadioButtonGroup__label"
+            onClick={[Function]}
+          >
+            settings_adblocker_list_2
+          </div>
+          <div
+            className="RadioButtonGroup__label"
+            onClick={[Function]}
+          >
+            settings_adblocker_list_3
+          </div>
+        </div>
+        <div
+          className="flex-container align-justify RadioButtonGroup__buttonsContainer"
+        >
+          <div
+            className="RadioButtonGroup__button"
+          >
+            <span>
+              <span
+                className="RadioButton__outerCircle checked"
+                onClick={[Function]}
+              >
+                <span
+                  className="RadioButton__innerCircle checked"
+                />
+              </span>
+            </span>
+          </div>
+          <div
+            className="RadioButtonGroup__button"
+          >
+            <span>
+              <span
+                className="RadioButton__outerCircle"
+                onClick={[Function]}
+              >
+                <span
+                  className="RadioButton__innerCircle"
+                />
+              </span>
+            </span>
+          </div>
+          <div
+            className="RadioButtonGroup__button"
+          >
+            <span>
+              <span
+                className="RadioButton__outerCircle"
+                onClick={[Function]}
+              >
+                <span
+                  className="RadioButton__innerCircle"
+                />
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/panel/Settings/AdBlocker.jsx Snapshot tests with react-test-renderer AdBlocker is rendered correctly with Ads & Trackers checked 1`] = `
+<div
+  className="s-tabs-panel"
+>
+  <div
+    className="row"
+  >
+    <div
+      className="columns"
+    >
+      <h3>
+        settings_adblocker
+      </h3>
+      <h5>
+        settings_adblocker_lists
+      </h5>
+      <div
+        className="RadioButtonGroup__container"
+      >
+        <div
+          className="flex-container align-justify RadioButtonGroup__labelContainer"
+        >
+          <div
+            className="RadioButtonGroup__label"
+            onClick={[Function]}
+          >
+            settings_adblocker_list_1
+          </div>
+          <div
+            className="RadioButtonGroup__label"
+            onClick={[Function]}
+          >
+            settings_adblocker_list_2
+          </div>
+          <div
+            className="RadioButtonGroup__label"
+            onClick={[Function]}
+          >
+            settings_adblocker_list_3
+          </div>
+        </div>
+        <div
+          className="flex-container align-justify RadioButtonGroup__buttonsContainer"
+        >
+          <div
+            className="RadioButtonGroup__button"
+          >
+            <span>
+              <span
+                className="RadioButton__outerCircle"
+                onClick={[Function]}
+              >
+                <span
+                  className="RadioButton__innerCircle"
+                />
+              </span>
+            </span>
+          </div>
+          <div
+            className="RadioButtonGroup__button"
+          >
+            <span>
+              <span
+                className="RadioButton__outerCircle checked"
+                onClick={[Function]}
+              >
+                <span
+                  className="RadioButton__innerCircle checked"
+                />
+              </span>
+            </span>
+          </div>
+          <div
+            className="RadioButtonGroup__button"
+          >
+            <span>
+              <span
+                className="RadioButton__outerCircle"
+                onClick={[Function]}
+              >
+                <span
+                  className="RadioButton__innerCircle"
+                />
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`app/panel/Settings/AdBlocker.jsx Snapshot tests with react-test-renderer AdBlocker is rendered correctly with Ads, Trackers, & Annoyances checked 1`] = `
+<div
+  className="s-tabs-panel"
+>
+  <div
+    className="row"
+  >
+    <div
+      className="columns"
+    >
+      <h3>
+        settings_adblocker
+      </h3>
+      <h5>
+        settings_adblocker_lists
+      </h5>
+      <div
+        className="RadioButtonGroup__container"
+      >
+        <div
+          className="flex-container align-justify RadioButtonGroup__labelContainer"
+        >
+          <div
+            className="RadioButtonGroup__label"
+            onClick={[Function]}
+          >
+            settings_adblocker_list_1
+          </div>
+          <div
+            className="RadioButtonGroup__label"
+            onClick={[Function]}
+          >
+            settings_adblocker_list_2
+          </div>
+          <div
+            className="RadioButtonGroup__label"
+            onClick={[Function]}
+          >
+            settings_adblocker_list_3
+          </div>
+        </div>
+        <div
+          className="flex-container align-justify RadioButtonGroup__buttonsContainer"
+        >
+          <div
+            className="RadioButtonGroup__button"
+          >
+            <span>
+              <span
+                className="RadioButton__outerCircle"
+                onClick={[Function]}
+              >
+                <span
+                  className="RadioButton__innerCircle"
+                />
+              </span>
+            </span>
+          </div>
+          <div
+            className="RadioButtonGroup__button"
+          >
+            <span>
+              <span
+                className="RadioButton__outerCircle"
+                onClick={[Function]}
+              >
+                <span
+                  className="RadioButton__innerCircle"
+                />
+              </span>
+            </span>
+          </div>
+          <div
+            className="RadioButtonGroup__button"
+          >
+            <span>
+              <span
+                className="RadioButton__outerCircle checked"
+                onClick={[Function]}
+              >
+                <span
+                  className="RadioButton__innerCircle checked"
+                />
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

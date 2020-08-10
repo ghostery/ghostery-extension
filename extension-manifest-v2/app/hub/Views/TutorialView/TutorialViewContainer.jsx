@@ -14,6 +14,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TutorialView from './TutorialView';
+import globals from '../../../../src/classes/Globals';
 
 // Component Views
 import TutorialVideoView from '../TutorialViews/TutorialVideoView';
@@ -22,6 +23,9 @@ import TutorialBlockingView from '../TutorialViews/TutorialBlockingView';
 import TutorialLayoutView from '../TutorialViews/TutorialLayoutView';
 import TutorialTrustView from '../TutorialViews/TutorialTrustView';
 import TutorialAntiSuiteView from '../TutorialViews/TutorialAntiSuiteView';
+
+const { BROWSER_INFO } = globals;
+const IS_ANDROID = (BROWSER_INFO.os === 'android');
 
 /**
  * @class Implement the Tutorial View for the Ghostery Hub
@@ -88,7 +92,7 @@ class TutorialViewContainer extends Component {
 			},
 		];
 
-		return <TutorialView steps={steps} sendMountActions={sendMountActions} />;
+		return <TutorialView steps={steps} sendMountActions={sendMountActions} isAndroid={IS_ANDROID} />;
 	}
 }
 

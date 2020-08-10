@@ -51,7 +51,8 @@ class TutorialAntiSuiteViewContainer extends Component {
 	 * @return {JSX} JSX for rendering the Tutorial Anti Suite View of the Hub app
 	 */
 	render() {
-		return <TutorialAntiSuiteView />;
+		const { isAndroid } = this.props;
+		return <TutorialAntiSuiteView isAndroid={isAndroid} />;
 	}
 }
 

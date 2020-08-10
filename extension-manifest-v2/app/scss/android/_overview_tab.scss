@@ -1,0 +1,136 @@
+/**
+ * Overview Tab Component Sass
+ *
+ * Ghostery Browser Extension
+ * https://www.ghostery.com/
+ *
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0
+ */
+
+.OverviewTab {
+	padding-bottom: 35px;
+	text-align: center;
+
+	.OverviewTab__NavigationLinks {
+		position: absolute;
+
+		.OverviewTab__NavigationLink {
+			cursor: pointer;
+			margin: 0 10px;
+		}
+	}
+
+	.OverviewTab__NotScannedContainer {
+		margin-top: 26px;
+	}
+
+	.OverviewTab__DonutGraphContainer {
+		margin: 26px auto;
+		height: 120px;
+		width: 120px;
+
+		.DonutGraph__tooltipContainer,
+		.DonutGraph__textCount span {
+			display: none;
+		}
+	}
+
+	.OverviewTab__PageHostContainer {
+		margin-top: 20px;
+		margin-bottom: 10px;
+
+		.OverviewTab__PageHostText {
+			font-size: 11px;
+			font-weight: 600;
+			color: $tundora;
+		}
+	}
+
+	.OverviewTab__PageStatsContainer {
+		margin-bottom: 21px;
+
+		.OverviewTab__PageStat {
+			line-height: 21px;
+			font-size: 14px;
+			font-weight: 600;
+		}
+		.OverviewTab__PageStat--red {
+			color: $red;
+		}
+		.OverviewTab__PageStat--blue {
+			color: $ghosty-blue;
+		}
+	}
+
+	.OverviewTab__GhosteryFeaturesContainer {
+		.GhosteryFeatureButton__text,
+		.pause-button-text {
+			font-weight: 600;
+		}
+
+		.OverviewTab__GhosteryFeature--ExtraMargins {
+			margin: 12px 28px;
+		}
+
+		.GhosteryFeatureButton--inactive.clickable {
+			&:hover { color: $tundora; }
+			&.trust:hover { background-color: $white; }
+			&.restrict:hover { background-color: $white; }
+		}
+		.GhosteryFeatureButton--active {
+			&.trust:hover { box-shadow: inset 0px 1px 7px 2px #85b329; }
+			&.restrict:hover { box-shadow: inset 0px 1px 7px 2px #ce273c; }
+		}
+
+		.sub-component.pause-button .button {
+			&.active:hover {
+				border-color: #0093bd;
+				background-color: $cliqz-feature--blue;
+				box-shadow: inset 0px 1px 7px 2px #0093bd;
+			}
+			&:not(.active):hover { background-color: $white; }
+		}
+
+		.tooltip-content {
+			display: none;
+		}
+	}
+
+	.OverviewTab__CliqzFeaturesContainer {
+		margin: 12px 0;
+
+		.OverviewTab__CliqzFeature {
+			width: 55px;
+			display: inline-block;
+			margin: 0 10px;
+		}
+
+		.CliqzFeature--active.clickable {
+			&:hover {
+				.CliqzFeature__status { color: $cliqz-feature--blue; }
+				.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($cliqz-feature--blue); }
+				.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($cliqz-feature--blue); }
+				.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($cliqz-feature--blue); }
+				.CliqzFeature__feature-name { color: $cliqz-feature--blue; }
+			}
+		}
+
+		.CliqzFeature--inactive.clickable {
+			&:hover {
+				.CliqzFeature__status { color: $cliqz-feature--gray; }
+				.CliqzFeature__icon--anti-track { background-image: buildIconAntiTracking($cliqz-feature--gray); }
+				.CliqzFeature__icon--ad-block { background-image: buildIconAdBlocking($cliqz-feature--gray); }
+				.CliqzFeature__icon--smart-block { background-image: buildIconSmartBlocking($cliqz-feature--gray); }
+				.CliqzFeature__feature-name { color: $cliqz-feature--gray; }
+			}
+		}
+
+		.tooltip-content {
+			display: none;
+		}
+	}
+}

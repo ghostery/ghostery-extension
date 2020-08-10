@@ -749,6 +749,7 @@ section.home-template .section.section-pricing {
 				align-items: center;
 			}
 			@include breakpoint($medium-large-breakpoint down) {
+				max-width: 100%;
 				padding-left: rem-calc(20);
 				padding-right: rem-calc(20);
 			}

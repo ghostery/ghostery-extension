@@ -20,8 +20,12 @@ import RadioButton from './RadioButton';
  * @memberof PanelBuildingBlocks
  */
 const RadioButtonGroup = ({ indexClicked, handleItemClick, labels }) => {
-	const labelsEl = labels.map(label => (
-		<div key={label} className="RadioButtonGroup__label">
+	const labelsEl = labels.map((label, index) => (
+		<div
+			key={label}
+			className="RadioButtonGroup__label"
+			onClick={() => handleItemClick(index)}
+		>
 			{t(label)}
 		</div>
 	));

@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -12,9 +12,11 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import globals from '../../../../src/classes/Globals';
 
-const { IS_CLIQZ } = globals;
+const { IS_CLIQZ, BROWSER_INFO } = globals;
+const IS_ANDROID = (BROWSER_INFO.os === 'android');
 
 /**
  * @class Implement Opt In subview as a React component.
@@ -55,7 +57,7 @@ const OptIn = ({ settingsData, toggleCheckbox }) => (
 						</div>
 					</div>
 				)}
-				{!IS_CLIQZ && (
+				{!IS_CLIQZ && !IS_ANDROID && (
 					<div className="s-option-group" id="offers-section">
 						<div className="s-square-checkbox">
 							<input type="checkbox" id="settings-allow-offers" name="enable_offers" defaultChecked={settingsData.enable_offers} onClick={toggleCheckbox} />
@@ -72,5 +74,14 @@ const OptIn = ({ settingsData, toggleCheckbox }) => (
 		</div>
 	</div>
 );
+
+OptIn.propTypes = {
+	toggleCheckbox: PropTypes.func.isRequired,
+	settingsData: PropTypes.shape({
+		enable_metrics: PropTypes.bool.isRequired,
+		enable_human_web: PropTypes.bool.isRequired,
+		enable_offers: PropTypes.bool.isRequired,
+	}).isRequired,
+};
 
 export default OptIn;

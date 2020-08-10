@@ -19,14 +19,14 @@ import TutorialAntiSuiteView from '../TutorialAntiSuiteView';
 describe('app/hub/Views/TutorialViews/TutorialAntiSuiteView component', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('tutorial anti-suite view is rendered correctly', () => {
-			const component = renderer.create(<TutorialAntiSuiteView />).toJSON();
+			const component = renderer.create(<TutorialAntiSuiteView isAndroid={false} />).toJSON();
 			expect(component).toMatchSnapshot();
 		});
 	});
 
 	describe('Shallow snapshot tests rendered with Enzyme', () => {
 		test('the happy path of the component', () => {
-			const component = shallow(<TutorialAntiSuiteView />);
+			const component = shallow(<TutorialAntiSuiteView isAndroid={false} />);
 			expect(component.find('.TutorialAntiSuiteView').length).toBe(1);
 			expect(component.find('img').length).toBe(2);
 			expect(component.find('.TutorialView__keyItem').length).toBe(3);

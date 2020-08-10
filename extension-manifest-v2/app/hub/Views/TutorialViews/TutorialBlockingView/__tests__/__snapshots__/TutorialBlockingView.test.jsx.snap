@@ -17,16 +17,18 @@ exports[`app/hub/Views/TutorialViews/TutorialBlockingView component Snapshot tes
       className="TutorialBlockingView__image blocking-detailed"
       src="/app/images/hub/tutorial/blocking-detailed.png"
     />
-    <div
-      className="TutorialView__imageTitle"
-    >
-      hub_tutorial_detailed_expanded_view
+    <div>
+      <div
+        className="TutorialView__imageTitle"
+      >
+        hub_tutorial_detailed_expanded_view
+      </div>
+      <img
+        alt="hub_tutorial_detailed_expanded_view"
+        className="TutorialBlockingView__image blocking-detailed-expanded"
+        src="/app/images/hub/tutorial/blocking-detailed-expanded.png"
+      />
     </div>
-    <img
-      alt="hub_tutorial_detailed_expanded_view"
-      className="TutorialBlockingView__image blocking-detailed-expanded"
-      src="/app/images/hub/tutorial/blocking-detailed-expanded.png"
-    />
   </div>
   <div
     className="columns small-12 medium-5 large-4"
