@@ -1755,16 +1755,12 @@ function initializeGhosteryModules() {
 	]).then(() => {
 		// run scheduledTasks on init
 		scheduledTasks().then(() => {
-			// open the Ghostery Hub on install with justInstalled query parameter set to true
-			// we need to do this after running scheduledTasks for the first time
+			// Open the Ghostery Hub on install with justInstalled query parameter set to true.
+			// We need to do this after running scheduledTasks for the first time
 			// because of an A/B test that determines which promo variant is shown in the Hub on install
 			if (globals.JUST_INSTALLED) {
-				let route = (conf.hub_promo_variant === 'upgrade' || conf.hub_promo_variant === 'not_yet_set') ? '' : '#home';
-				let showPremiumPromoModal = conf.hub_promo_variant === 'midnight';
-				if (IS_ANDROID) {
-					route = '#home';
-					showPremiumPromoModal = false;
-				}
+				const route = ((conf.hub_promo_variant === 'upgrade' || conf.hub_promo_variant === 'not_yet_set') && !IS_ANDROID) ? '' : '#home';
+				const showPremiumPromoModal = (conf.hub_promo_variant === 'midnight' && !IS_ANDROID);
 				chrome.tabs.create({
 					url: chrome.runtime.getURL(`./app/templates/hub.html?$justInstalled=true&pm=${showPremiumPromoModal}${route}`),
 					active: true
