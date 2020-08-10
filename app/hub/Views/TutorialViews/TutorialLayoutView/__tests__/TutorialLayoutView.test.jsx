@@ -19,14 +19,14 @@ import TutorialLayoutView from '../TutorialLayoutView';
 describe('app/hub/Views/TutorialViews/TutorialLayoutView component', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('tutorial layout view is rendered correctly', () => {
-			const component = renderer.create(<TutorialLayoutView />).toJSON();
+			const component = renderer.create(<TutorialLayoutView isAndroid={false} />).toJSON();
 			expect(component).toMatchSnapshot();
 		});
 	});
 
 	describe('Shallow snapshot tests rendered with Enzyme', () => {
 		test('the happy path of the component', () => {
-			const component = shallow(<TutorialLayoutView />);
+			const component = shallow(<TutorialLayoutView isAndroid={false} />);
 			expect(component.find('.TutorialLayoutView').length).toBe(1);
 			expect(component.find('.TutorialLayoutView__image').length).toBe(2);
 		});

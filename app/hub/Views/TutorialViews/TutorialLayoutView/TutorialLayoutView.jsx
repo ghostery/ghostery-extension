@@ -12,23 +12,24 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * A Functional React component for rendering the Tutorial Layout View
  * @return {JSX} JSX for rendering the Tutorial Layout View of the Hub app
  * @memberof HubComponents
  */
-const TutorialLayoutView = () => (
+const TutorialLayoutView = ({ isAndroid }) => (
 	<div className="TutorialLayoutView TutorialView--mediumFlexColumn row align-center-middle flex-container">
-		<div className="columns small-10 medium-8 large-6 small-offset-1">
+		<div className="columns small-10 medium-8 large-6">
 			<img
 				className="TutorialLayoutView__image layout-simple"
-				src="/app/images/hub/tutorial/layout-simple.png"
+				src={`/app/images/hub/tutorial/layout-simple${isAndroid ? '-android' : ''}.png`}
 				alt={t('simple_view')}
 			/>
 			<img
 				className="TutorialLayoutView__image layout-detailed"
-				src="/app/images/hub/tutorial/layout-detailed.png"
+				src={`/app/images/hub/tutorial/layout-detailed${isAndroid ? '-android' : ''}.png`}
 				alt={t('detailed_view')}
 			/>
 		</div>
@@ -43,6 +44,8 @@ const TutorialLayoutView = () => (
 	</div>
 );
 
-// No need for PropTypes. The SideNavigationViewContainer has no props.
+TutorialLayoutView.propTypes = {
+	isAndroid: PropTypes.bool.isRequired
+};
 
 export default TutorialLayoutView;

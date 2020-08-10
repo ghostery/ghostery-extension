@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import Tooltip from '../Tooltip';
 import globals from '../../../../src/classes/Globals';
@@ -129,5 +130,20 @@ class GhosteryFeature extends React.Component {
 		);
 	}
 }
+
+GhosteryFeature.propTypes = {
+	handleClick: PropTypes.func.isRequired,
+	type: PropTypes.oneOf(['trust', 'restrict']).isRequired,
+	sitePolicy: PropTypes.oneOf([false, 1, 2]),
+	blockingPausedOrDisabled: PropTypes.bool.isRequired,
+	showText: PropTypes.bool.isRequired,
+	tooltipPosition: PropTypes.string.isRequired,
+	short: PropTypes.bool.isRequired,
+	narrow: PropTypes.bool.isRequired,
+};
+
+GhosteryFeature.defaultProps = {
+	sitePolicy: false,
+};
 
 export default GhosteryFeature;

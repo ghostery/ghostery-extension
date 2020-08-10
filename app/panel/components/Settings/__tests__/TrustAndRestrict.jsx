@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -20,7 +20,11 @@ describe('app/panel/components/Settings/TrustAndRestrict', () => {
 	describe('Snapshot test with react-test-renderer', () => {
 		test('Testing TrustAndRestrict is rendering', () => {
 			const wrapper = renderer.create(
-				<TrustAndRestrict />
+				<TrustAndRestrict
+					actions={{ updateSitePolicy: () => {} }}
+					site_whitelist={[]}
+					site_blacklist={[]}
+				/>
 			).toJSON();
 			expect(wrapper).toMatchSnapshot();
 		});

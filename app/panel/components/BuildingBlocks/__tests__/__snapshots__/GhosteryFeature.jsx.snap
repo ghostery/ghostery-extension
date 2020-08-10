@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/panel/components/GhosteryFeature.jsx Snapshot tests with react-test-renderer GhosteryFeature is rendered correctly props are falsy 1`] = `
+<div>
+  <div
+    className="button g-tooltip GhosteryFeatureButton GhosteryFeatureButton--normal GhosteryFeatureButton--inactive trust clickable"
+    onClick={[Function]}
+  >
+    <span
+      className="flex-container align-center-middle full-height"
+    >
+      <span
+        className="GhosteryFeatureButton__text"
+      >
+        
+      </span>
+    </span>
+  </div>
+  <div
+    className="button g-tooltip GhosteryFeatureButton GhosteryFeatureButton--normal GhosteryFeatureButton--inactive restrict clickable"
+    onClick={[Function]}
+  >
+    <span
+      className="flex-container align-center-middle full-height"
+    >
+      <span
+        className="GhosteryFeatureButton__text"
+      >
+        
+      </span>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`app/panel/components/GhosteryFeature.jsx Snapshot tests with react-test-renderer GhosteryFeature is rendered correctly props are truthy 1`] = `
+<div>
+  <div
+    className="button g-tooltip GhosteryFeatureButton GhosteryFeatureButton--short GhosteryFeatureButton--narrow GhosteryFeatureButton--inactive trust not-clickable"
+    onClick={[Function]}
+  >
+    <span
+      className="flex-container align-center-middle full-height"
+    >
+      <span
+        className="GhosteryFeatureButton__text"
+      >
+        summary_trust_site
+      </span>
+    </span>
+  </div>
+  <div
+    className="button g-tooltip GhosteryFeatureButton GhosteryFeatureButton--short GhosteryFeatureButton--narrow GhosteryFeatureButton--active restrict not-clickable"
+    onClick={[Function]}
+  >
+    <span
+      className="flex-container align-center-middle full-height"
+    >
+      <span
+        className="GhosteryFeatureButton__text"
+      >
+        summary_restrict_site_active
+      </span>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`app/panel/components/GhosteryFeature.jsx Snapshot tests with react-test-renderer GhosteryFeature is rendered correctly some props are truthy 1`] = `
+<div>
+  <div
+    className="button g-tooltip GhosteryFeatureButton GhosteryFeatureButton--short GhosteryFeatureButton--active trust clickable"
+    onClick={[Function]}
+  >
+    <span
+      className="flex-container align-center-middle full-height"
+    >
+      <span
+        className="GhosteryFeatureButton__text"
+      >
+        summary_trust_site_active
+      </span>
+    </span>
+  </div>
+  <div
+    className="button g-tooltip GhosteryFeatureButton GhosteryFeatureButton--short GhosteryFeatureButton--inactive restrict clickable"
+    onClick={[Function]}
+  >
+    <span
+      className="flex-container align-center-middle full-height"
+    >
+      <span
+        className="GhosteryFeatureButton__text"
+      >
+        summary_restrict_site
+      </span>
+    </span>
+  </div>
+</div>
+`;

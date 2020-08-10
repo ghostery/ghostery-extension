@@ -193,6 +193,29 @@ class Globals {
 
 		// Set version property
 		this.BROWSER_INFO.version = version;
+
+		// Check for the Ghostery Android browser
+		this._checkForGhosteryAndroid();
+	}
+
+	/**
+	 * Check for Ghostery Android Browser and update BROWSER_INFO.
+	 * Note: This is asynchronous and not available at runtime.
+	 * @private
+	 * @return boolean
+	 */
+	_checkForGhosteryAndroid() {
+		if (typeof chrome.runtime.getBrowserInfo === 'function') {
+			chrome.runtime.getBrowserInfo().then((info) => {
+				if (info.name === 'Ghostery') {
+					this.BROWSER_INFO.displayName = 'Ghostery Android Browser';
+					this.BROWSER_INFO.name = 'ghostery_android';
+					this.BROWSER_INFO.token = 'ga';
+					this.BROWSER_INFO.os = 'android';
+					this.BROWSER_INFO.version = info.version;
+				}
+			});
+		}
 	}
 }
 

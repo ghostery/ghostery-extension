@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import Tooltip from '../Tooltip';
 
@@ -196,5 +197,23 @@ class PauseButton extends React.Component {
 		);
 	}
 }
+
+PauseButton.propTypes = {
+	isPaused: PropTypes.bool,
+	isPausedTimeout: PropTypes.number,
+	clickPause: PropTypes.func.isRequired,
+	dropdownItems: PropTypes.arrayOf(PropTypes.shape({
+		val: PropTypes.number.isRequired,
+		name: PropTypes.string.isRequired,
+		name_condensed: PropTypes.string,
+	})).isRequired,
+	isCentered: PropTypes.bool.isRequired,
+	isCondensed: PropTypes.bool.isRequired,
+};
+
+PauseButton.defaultProps = {
+	isPaused: false,
+	isPausedTimeout: 0,
+};
 
 export default PauseButton;

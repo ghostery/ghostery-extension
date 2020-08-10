@@ -12,13 +12,14 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * A Functional React component for rendering the Tutorial Blocking View
  * @return {JSX} JSX for rendering the Tutorial Blocking View of the Hub app
  * @memberof HubComponents
  */
-const TutorialBlockingView = () => (
+const TutorialBlockingView = ({ isAndroid }) => (
 	<div className="TutorialBlockingView row align-center-middle flex-container">
 		<div className="columns small-11 small-offset-1 medium-6">
 			<div className="TutorialView__imageTitle">
@@ -26,17 +27,21 @@ const TutorialBlockingView = () => (
 			</div>
 			<img
 				className="TutorialBlockingView__image blocking-detailed"
-				src="/app/images/hub/tutorial/blocking-detailed.png"
+				src={`/app/images/hub/tutorial/blocking-detailed${isAndroid ? '-android' : ''}.png`}
 				alt={t('detailed_view')}
 			/>
-			<div className="TutorialView__imageTitle">
-				{t('hub_tutorial_detailed_expanded_view')}
-			</div>
-			<img
-				className="TutorialBlockingView__image blocking-detailed-expanded"
-				src="/app/images/hub/tutorial/blocking-detailed-expanded.png"
-				alt={t('hub_tutorial_detailed_expanded_view')}
-			/>
+			{ !isAndroid && (
+				<div>
+					<div className="TutorialView__imageTitle">
+						{t('hub_tutorial_detailed_expanded_view')}
+					</div>
+					<img
+						className="TutorialBlockingView__image blocking-detailed-expanded"
+						src="/app/images/hub/tutorial/blocking-detailed-expanded.png"
+						alt={t('hub_tutorial_detailed_expanded_view')}
+					/>
+				</div>
+			)}
 		</div>
 		<div className="columns small-12 medium-5 large-4">
 			<div className="TutorialView__title">
@@ -60,6 +65,8 @@ const TutorialBlockingView = () => (
 	</div>
 );
 
-// No need for PropTypes. The SideNavigationViewContainer has no props.
+TutorialBlockingView.propTypes = {
+	isAndroid: PropTypes.bool.isRequired
+};
 
 export default TutorialBlockingView;
