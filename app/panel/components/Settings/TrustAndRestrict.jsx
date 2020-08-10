@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import Sites from './Sites';
 /**
  * @class Implement Trust and Restrict subview presenting the lists
@@ -191,12 +192,14 @@ class TrustAndRestrict extends React.Component {
 						<h3>{ t('settings_trusted_restricted_sites') }</h3>
 					</div>
 				</div>
-				<div className="s-trust-restrict-menu">
-					<div className={`${menu.showTrustedSites ? 's-active-pane ' : ''}s-pane-title`} id="showTrustedSites" onClick={this.setActivePane}>
-						<span>{t('settings_trusted_sites')}</span>
-					</div>
-					<div className={`${menu.showRestrictedSites ? 's-active-pane ' : ''}s-pane-title-next`} id="showRestrictedSites" onClick={this.setActivePane}>
-						<span>{t('settings_restricted_sites')}</span>
+				<div className="row">
+					<div className="s-trust-restrict-menu">
+						<div className={`${menu.showTrustedSites ? 's-active-pane ' : ''}s-pane-title`} id="showTrustedSites" onClick={this.setActivePane}>
+							<span>{t('settings_trusted_sites')}</span>
+						</div>
+						<div className={`${menu.showRestrictedSites ? 's-active-pane ' : ''}s-pane-title-next`} id="showRestrictedSites" onClick={this.setActivePane}>
+							<span>{t('settings_restricted_sites')}</span>
+						</div>
 					</div>
 				</div>
 				<div className={`${menu.showTrustedSites ? '' : 's-hide '}s-sites-pane`}>
@@ -233,5 +236,13 @@ class TrustAndRestrict extends React.Component {
 		);
 	}
 }
+
+TrustAndRestrict.propTypes = {
+	actions: PropTypes.shape({
+		updateSitePolicy: PropTypes.func.isRequired,
+	}).isRequired,
+	site_whitelist: PropTypes.arrayOf(PropTypes.string).isRequired,
+	site_blacklist: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 export default TrustAndRestrict;

@@ -14,6 +14,7 @@
  * @namespace  SettingsComponents
  */
 import React from 'react';
+import ImportExport from './ImportExport';
 import { sendMessage } from '../../utils/msg';
 import globals from '../../../../src/classes/Globals';
 /**
@@ -45,42 +46,11 @@ class Account extends React.Component {
 	}
 
 	/**
-	 * Trigger action to export settings in JSON format and save it to a file.
-	 */
-	clickExportSettings = () => {
-		const { actions, settingsData } = this.props;
-		actions.exportSettings(settingsData.pageUrl);
-	}
-
-	/**
-	 * Trigger custom Import dialog or a native Open File dialog depending on browser.
-	 */
-	clickImportSettings = () => {
-		const { actions, settingsData } = this.props;
-		const browserName = globals.BROWSER_INFO.name;
-		if (browserName === 'firefox') {
-			// show ghostery dialog window for import
-			actions.importSettingsDialog(settingsData.pageUrl);
-		} else {
-			// for chrome and opera, use the native File Dialog
-			this.selectedFile.click();
-		}
-	}
-
-	/**
-	 * Parse settings file imported via native browser window. Called via input#select-file onChange.
-	 */
-	validateImportFile = () => {
-		const { actions } = this.props;
-		actions.importSettingsNative(this.selectedFile.files[0]);
-	}
-
-	/**
 	* Render Account subview.
 	* @return {ReactComponent}   ReactComponent instance
 	*/
 	render() {
-		const { settingsData } = this.props;
+		const { settingsData, actions } = this.props;
 		const { email, firstName, lastName } = settingsData.user ? settingsData.user : {};
 		const accountName = (firstName || lastName) ? (firstName ? (`${firstName} ${lastName}`) : lastName) : '';
 		return (
@@ -116,17 +86,10 @@ class Account extends React.Component {
 							<p className="s-blue-header" onClick={this.clickEditAccount}>{ t('settings_edit_account') }</p>
 							<div className="s-vgap-26" />
 						</div>
-						<div>
-							<p className="s-blue-header export" onClick={this.clickExportSettings}>{ t('settings_export_header') }</p>
-							<p className={`s-regular ${settingsData.exportResultText ? 's-hide' : ''}`}>{ t('settings_export_text') }</p>
-							<p className="s-regular export-result" style={settingsData.actionSuccess ? { color: '#2092BF' } : { color: 'red' }}>{ settingsData.exportResultText }</p>
-							<div className="s-vgap-20" />
-							<p className="s-blue-header import" onClick={this.clickImportSettings}>{ t('settings_import_header') }</p>
-							<p className={`s-regular ${settingsData.importResultText ? 's-hide' : ''}`}>{ t('settings_import_text') }</p>
-							<p className={`s-regular ${settingsData.importResultText ? 's-hide' : ''}`}>{ t('settings_import_warning') }</p>
-							<p className="s-regular import-result" style={settingsData.actionSuccess ? { color: '#2092BF' } : { color: 'red' }}>{ settingsData.importResultText }</p>
-							<input ref={(input) => { this.selectedFile = input; }} type="file" id="select-file" name="select-file" onChange={this.validateImportFile} />
-						</div>
+						<ImportExport
+							settingsData={settingsData}
+							actions={actions}
+						/>
 					</div>
 				</div>
 			</div>

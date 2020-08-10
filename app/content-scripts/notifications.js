@@ -1,5 +1,5 @@
 /**
- * Ghostery NotificationsContentScript
+ * Ghostery Notifications Content Script
  *
  * This file provides notification alerts for the CMP, update dialogs
  * and import/export functionality
@@ -7,7 +7,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -607,10 +607,12 @@ const NotificationsContentScript = (function(win, doc) {
 	 * @memberOf NotificationsContentScript
 	 * @package
 	 */
-	const exportFile = function(content) {
+	const exportFile = function(content, type) {
 		const textFileAsBlob = new Blob([content], { type: 'text/plain' });
+		const ext = type === 'Ghostery-Backup' ? 'ghost' : 'json';
 		const d = new Date();
-		const fileNameToSaveAs = `Ghostery-Backup-${d.getMonth() + 1}-${d.getDate()}-${d.getFullYear()}.ghost`;
+		const dStr = `${d.getMonth() + 1}-${d.getDate()}-${d.getFullYear()}`;
+		const fileNameToSaveAs = `${type}-${dStr}.${ext}`;
 		let url = '';
 		if (window.URL) {
 			url = window.URL.createObjectURL(textFileAsBlob);
@@ -764,7 +766,8 @@ const NotificationsContentScript = (function(win, doc) {
 			} else if (name === 'onFileImported') {
 				updateBrowseWindow(message);
 			} else if (name === 'exportFile') {
-				exportFile(message);
+				const { content, type } = message;
+				exportFile(content, type);
 			}
 
 			// trigger a response callback to src/background so that we can handle errors properly

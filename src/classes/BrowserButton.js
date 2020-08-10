@@ -21,6 +21,8 @@ import { getTab } from '../utils/utils';
 import { log } from '../utils/common';
 import globals from './Globals';
 
+const IS_ANDROID = globals.BROWSER_INFO.os === 'android';
+
 /**
  * @class for handling Ghostery button.
  * @memberof BackgroundClasses
@@ -38,6 +40,7 @@ class BrowserButton {
 	 * @param  {number} tabId		tab id
 	 */
 	update(tabId) {
+		if (IS_ANDROID) { return; }
 		// Update this specific tab
 		if (tabId) {
 			// In ES6 classes, we need to bind context to callback function
@@ -73,7 +76,6 @@ class BrowserButton {
 	 * @param 	{boolean}	alert			is it a special case which requires button to change its background color?
 	 */
 	_setIcon(active, tabId, trackerCount, alert) {
-		if (globals.BROWSER_INFO.os === 'android') { return; }
 		if (tabId <= 0) { return; }
 
 		const iconAlt = (!active) ? '_off' : '';

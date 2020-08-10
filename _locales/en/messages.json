@@ -833,6 +833,9 @@
 	"settings_account": {
 		"message": "Account"
 	},
+	"settings_import_export": {
+		"message": "Import & Export Settings"
+	},
 	"settings_trackers": {
 		"message": "Trackers"
 	},
@@ -1233,6 +1236,48 @@
 				"content": "&copy;"
 			}
 		}
+	},
+	"android_tab_overview": {
+		"message": "Overview"
+	},
+	"android_tab_site_blocking": {
+		"message": "Site Blocking"
+	},
+	"android_tab_global_blocking": {
+		"message": "Global Blocking"
+	},
+	"android_site_blocking_header": {
+		"message": "Trackers on this site"
+	},
+	"android_global_blocking_header": {
+		"message": "Global Tracking"
+	},
+	"android_blocking_reset": {
+		"message": "Reset Settings"
+	},
+	"android_block": {
+		"message": "Block"
+	},
+	"android_unblock": {
+		"message": "Unblock"
+	},
+	"android_restrict": {
+		"message": "Restrict"
+	},
+	"android_unrestrict": {
+		"message": "Undo"
+	},
+	"android_trust": {
+		"message": "Trust"
+	},
+	"android_untrust": {
+		"message": "Undo"
+	},
+	"android_anonymize": {
+		"message": "Anonymize"
+	},
+	"android_anonymized": {
+		"message": "Anonymized"
 	},
 	"hub_side_navigation_home": {
 		"message": "Home"

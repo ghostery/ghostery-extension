@@ -19,14 +19,14 @@ import TutorialTrustView from '../TutorialTrustView';
 describe('app/hub/Views/TutorialViews/TutorialTrustView component', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('tutorial trust view is rendered correctly', () => {
-			const component = renderer.create(<TutorialTrustView />).toJSON();
+			const component = renderer.create(<TutorialTrustView isAndroid={false} />).toJSON();
 			expect(component).toMatchSnapshot();
 		});
 	});
 
 	describe('Shallow snapshot tests rendered with Enzyme', () => {
 		test('the happy path of the component', () => {
-			const component = shallow(<TutorialTrustView />);
+			const component = shallow(<TutorialTrustView isAndroid={false} />);
 			expect(component.find('.TutorialTrustView').length).toBe(1);
 			expect(component.find('.TutorialTrustView__image').length).toBe(2);
 			expect(component.find('.TutorialTrustView__key').length).toBe(1);

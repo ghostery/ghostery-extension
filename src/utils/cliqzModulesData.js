@@ -89,11 +89,11 @@ export function getCliqzData(tabId, tabHostUrl, antiTracking) {
 		if (dataPoints || whitelisted) {
 			const type = antiTracking ? 'antiTracking' : 'adBlock';
 			const {
-				name, domains, ads, cookies, fingerprints
+				name, domains, ads, cookies, fingerprints, wtm
 			} = other;
 
 			unknownTrackers.push({
-				name, domains, ads, cookies, fingerprints, whitelisted, type
+				name, domains, ads, cookies, fingerprints, whitelisted, type, wtm
 			});
 		}
 	});

@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 /**
  * @class Implement Notification subview as a React component.
  * The view opens from the left-side menu of the main
@@ -73,5 +74,18 @@ const Notifications = ({ settingsData, toggleCheckbox }) => (
 		</div>
 	</div>
 );
+
+Notifications.propTypes = {
+	toggleCheckbox: PropTypes.func.isRequired,
+	settingsData: PropTypes.shape({
+		show_cmp: PropTypes.bool.isRequired,
+		notify_upgrade_updates: PropTypes.bool.isRequired,
+		notify_promotions: PropTypes.bool.isRequired,
+		notify_library_updates: PropTypes.bool.isRequired,
+		reload_banner_status: PropTypes.bool,
+		trackers_banner_status: PropTypes.bool,
+		show_badge: PropTypes.bool.isRequired,
+	}).isRequired,
+};
 
 export default Notifications;

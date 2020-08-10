@@ -18,8 +18,7 @@ import { NavLink } from 'react-router-dom';
 import globals from '../../../../src/classes/Globals';
 import { ToggleCheckbox } from '../../../shared-components';
 
-const { IS_CLIQZ } = globals;
-const IS_FIREFOX = (globals.BROWSER_INFO.name === 'firefox');
+const { IS_CLIQZ, BROWSER_INFO } = globals;
 
 /**
  * A Functional React component for rendering the Home View
@@ -40,10 +39,10 @@ const HomeView = (props) => {
 	const accountHref = globals.ACCOUNT_BASE_URL;
 
 	let headerInfoText = t('hub_home_header_info');
-	if (globals.BROWSER_INFO) {
-		if (IS_FIREFOX) {
+	if (BROWSER_INFO) {
+		if (BROWSER_INFO.name === 'firefox') {
 			headerInfoText = t('hub_home_header_info_opted_out');
-		} else if (IS_CLIQZ) {
+		} else if (IS_CLIQZ || BROWSER_INFO.name === 'ghostery_android') {
 			headerInfoText = t('hub_home_header_info_cliqz');
 		}
 	}

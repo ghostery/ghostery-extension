@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment/min/moment-with-locales.min';
 /**
  * @class Implement General Settings subview. The view opens from the
@@ -88,6 +89,7 @@ class GeneralSettings extends React.Component {
 	render() {
 		const { settingsData, toggleCheckbox } = this.props;
 		const { dbLastUpdated } = this.state;
+
 		return (
 			<div className="s-tabs-panel">
 				<div className="row">
@@ -178,5 +180,24 @@ class GeneralSettings extends React.Component {
 		);
 	}
 }
+
+GeneralSettings.propTypes = {
+	actions: PropTypes.shape({
+		updateDatabase: PropTypes.func.isRequired,
+	}).isRequired,
+	toggleCheckbox: PropTypes.func.isRequired,
+	settingsData: PropTypes.shape({
+		language: PropTypes.string.isRequired,
+		bugs_last_checked: PropTypes.number.isRequired,
+		enable_autoupdate: PropTypes.bool.isRequired,
+		dbUpdateText: PropTypes.string,
+		show_tracker_urls: PropTypes.bool.isRequired,
+		enable_click2play: PropTypes.bool.isRequired,
+		enable_click2play_social: PropTypes.bool.isRequired,
+		toggle_individual_trackers: PropTypes.bool.isRequired,
+		ignore_first_party: PropTypes.bool.isRequired,
+		block_by_default: PropTypes.bool.isRequired,
+	}).isRequired,
+};
 
 export default GeneralSettings;

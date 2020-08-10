@@ -1,7 +1,5 @@
 {
 	"manifest_version": 2,
-  "debug": true,
-  "log": true,
 	"author": "Ghostery",
 	"name": "__MSG_name__",
 	"short_name": "Ghostery",
@@ -9,6 +7,8 @@
 	"version_name": "8.5.2",
 	"default_locale": "en",
 	"description": "__MSG_short_description__",
+	"debug": true,
+	"log": true,
 	"icons": {
 		"16": "app/images/icon16.png",
 		"48": "app/images/icon48.png",
@@ -16,8 +16,8 @@
 	},
 	"browser_action": {
 		"default_icon": {
-			"19": "app/images/icon19_off.png",
-			"38": "app/images/icon38_off.png"
+			"19": "app/images/icon19.png",
+			"38": "app/images/icon38.png"
 		},
 		"default_title": "Ghostery"
 	},
@@ -56,15 +56,15 @@
 			"run_at": "document_start"
 		},
 		{
-		  "all_frames": false,
-		  "js": [
-			"dist/checkout_pages.js"
-		  ],
-		  "matches": [
-			"https://checkout.ghostery.com/*",
-			"https://checkout.ghosterystage.com/*"
-		  ],
-		  "run_at": "document_start"
+			"all_frames": false,
+			"js": [
+				"dist/checkout_pages.js"
+			],
+			"matches": [
+				"https://checkout.ghostery.com/*",
+				"https://checkout.ghosterystage.com/*"
+			],
+			"run_at": "document_start"
 		},
 		{
 			"all_frames": true,
@@ -107,8 +107,8 @@
 		}
 	},
 	"minimum_edge_version": "79.0.309",
-	"minimum_chrome_version": "58",
-	"minimum_opera_version": "45",
+	"minimum_chrome_version": "69",
+	"minimum_opera_version": "56",
 	"web_accessible_resources": [
 		"app/images/*",
 		"dist/css/rewards_styles.css",

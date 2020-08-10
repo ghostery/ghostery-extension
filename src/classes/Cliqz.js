@@ -18,7 +18,8 @@ import globals from './Globals';
 const IS_ANDROID = globals.BROWSER_INFO.os === 'android';
 export const HUMANWEB_MODULE = IS_ANDROID ? 'human-web-lite' : 'human-web';
 export const HPN_MODULE = IS_ANDROID ? 'hpn-lite' : 'hpnv2';
-// override the default prefs based on the platform
+
+// Override the default prefs based on the platform
 CLIQZ.config.default_prefs = {
 	...CLIQZ.config.default_prefs,
 	// the following are enabled by default on non-android platforms

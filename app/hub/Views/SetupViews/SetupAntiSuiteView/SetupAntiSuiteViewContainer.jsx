@@ -17,7 +17,8 @@ import SetupAntiSuiteView from './SetupAntiSuiteView';
 import globals from '../../../../../src/classes/Globals';
 
 // simple consts
-const { IS_CLIQZ } = globals;
+const { IS_CLIQZ, BROWSER_INFO } = globals;
+const IS_ANDROID = (BROWSER_INFO.os === 'android');
 
 /**
  * @class Implement the Setup Anti-Suite View for the Ghostery Hub
@@ -133,7 +134,7 @@ class SetupAntiSuiteViewContainer extends Component {
 			}
 		];
 
-		if (!IS_CLIQZ) {
+		if (!IS_CLIQZ && !IS_ANDROID) {
 			features.push({
 				id: 'ghostery-rewards',
 				name: t('hub_setup_ghosteryrewards_name_rewards'),
