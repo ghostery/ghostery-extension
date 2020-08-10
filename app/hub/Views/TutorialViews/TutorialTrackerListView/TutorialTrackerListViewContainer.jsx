@@ -32,7 +32,7 @@ class TutorialTrackerListViewContainer extends Component {
 			activeIndex: index,
 			hrefPrev: `/tutorial/${index - 1}`,
 			hrefNext: `/tutorial/${index + 1}`,
-			hrefDone: '/',
+			hrefDone: '/home',
 			textPrev: t('previous'),
 			textNext: t('next'),
 			textDone: t('hub_tutorial_exit_flow'),
@@ -44,13 +44,15 @@ class TutorialTrackerListViewContainer extends Component {
 	 * @return {JSX} JSX for rendering the Tutorial Tracker List View of the Hub app
 	 */
 	render() {
-		return <TutorialTrackerListView />;
+		const { isAndroid } = this.props;
+		return <TutorialTrackerListView isAndroid={isAndroid} />;
 	}
 }
 
 // PropTypes ensure we pass required props of the correct type
 TutorialTrackerListViewContainer.propTypes = {
 	index: PropTypes.number.isRequired,
+	isAndroid: PropTypes.bool.isRequired,
 	actions: PropTypes.shape({
 		setTutorialNavigation: PropTypes.func.isRequired,
 	}).isRequired,

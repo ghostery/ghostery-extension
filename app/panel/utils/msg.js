@@ -139,3 +139,24 @@ export function openSupportPage(e) {
 	sendMessage('account.openSupportPage');
 	window.close();
 }
+
+/**
+ * Send a message to open the hub
+ * This should be used for messages that don't require a callback.
+ * @memberOf PanelUtils
+ */
+export function openHubPage(e) {
+	e.preventDefault();
+	sendMessage('openHubPage');
+	window.close();
+}
+
+/**
+ * Send a message to open Account-Web if signed in or the Account Hub page if not
+ * This should be used for messages that don't require a callback.
+ * @memberOf PanelUtils
+ */
+export function openAccountPageAndroid(e) {
+	e.preventDefault();
+	sendMessage('openAccountAndroid');
+}

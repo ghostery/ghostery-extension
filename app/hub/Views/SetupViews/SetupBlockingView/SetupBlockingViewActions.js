@@ -14,7 +14,7 @@
 import { log, sendMessageInPromise } from '../../../utils';
 import { SET_BLOCKING_POLICY } from '../../SetupView/SetupViewConstants';
 
-export function setBlockingPolicy(actionData) {
+export default function setBlockingPolicy(actionData) {
 	return function(dispatch) {
 		return sendMessageInPromise(SET_BLOCKING_POLICY, actionData).then((data) => {
 			dispatch({

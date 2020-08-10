@@ -1,0 +1,184 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/panel/Settings/ImportExport.jsx Snapshot tests with react-test-renderer ImportExport is rendered correctly with baseline props 1`] = `
+<div>
+  <p
+    className="s-blue-header export"
+    onClick={[Function]}
+  >
+    settings_export_header
+  </p>
+  <p
+    className="s-regular "
+  >
+    settings_export_text
+  </p>
+  <p
+    className="s-regular export-result"
+    style={
+      Object {
+        "color": "red",
+      }
+    }
+  >
+    
+  </p>
+  <div
+    className="s-vgap-20"
+  />
+  <p
+    className="s-blue-header import"
+    onClick={[Function]}
+  >
+    settings_import_header
+  </p>
+  <p
+    className="s-regular "
+  >
+    settings_import_text
+  </p>
+  <p
+    className="s-regular "
+  >
+    settings_import_warning
+  </p>
+  <p
+    className="s-regular import-result"
+    style={
+      Object {
+        "color": "red",
+      }
+    }
+  >
+    
+  </p>
+  <input
+    id="select-file"
+    name="select-file"
+    onChange={[Function]}
+    type="file"
+  />
+</div>
+`;
+
+exports[`app/panel/Settings/ImportExport.jsx Snapshot tests with react-test-renderer ImportExport is rendered correctly with happy-path props 1`] = `
+<div>
+  <p
+    className="s-blue-header export"
+    onClick={[Function]}
+  >
+    settings_export_header
+  </p>
+  <p
+    className="s-regular s-hide"
+  >
+    settings_export_text
+  </p>
+  <p
+    className="s-regular export-result"
+    style={
+      Object {
+        "color": "#2092BF",
+      }
+    }
+  >
+    Your settings have been successfully exported to your downloads folder on August 8, 2020 6:08 PM
+  </p>
+  <div
+    className="s-vgap-20"
+  />
+  <p
+    className="s-blue-header import"
+    onClick={[Function]}
+  >
+    settings_import_header
+  </p>
+  <p
+    className="s-regular s-hide"
+  >
+    settings_import_text
+  </p>
+  <p
+    className="s-regular s-hide"
+  >
+    settings_import_warning
+  </p>
+  <p
+    className="s-regular import-result"
+    style={
+      Object {
+        "color": "#2092BF",
+      }
+    }
+  >
+    Your settings have been successfully imported on September 12, 2020 6:08 PM
+  </p>
+  <input
+    id="select-file"
+    name="select-file"
+    onChange={[Function]}
+    type="file"
+  />
+</div>
+`;
+
+exports[`app/panel/Settings/ImportExport.jsx Snapshot tests with react-test-renderer ImportExport is rendered correctly with unhappy-path props 1`] = `
+<div>
+  <p
+    className="s-blue-header export"
+    onClick={[Function]}
+  >
+    settings_export_header
+  </p>
+  <p
+    className="s-regular s-hide"
+  >
+    settings_export_text
+  </p>
+  <p
+    className="s-regular export-result"
+    style={
+      Object {
+        "color": "red",
+      }
+    }
+  >
+    Ghostery cannot export settings when the current page is one of the reserved browser pages. Please navigate to a different page and try again.
+  </p>
+  <div
+    className="s-vgap-20"
+  />
+  <p
+    className="s-blue-header import"
+    onClick={[Function]}
+  >
+    settings_import_header
+  </p>
+  <p
+    className="s-regular s-hide"
+  >
+    settings_import_text
+  </p>
+  <p
+    className="s-regular s-hide"
+  >
+    settings_import_warning
+  </p>
+  <p
+    className="s-regular import-result"
+    style={
+      Object {
+        "color": "red",
+      }
+    }
+  >
+    That is the incorrect file type. Please choose a .ghost file and try again.
+  </p>
+  <input
+    id="select-file"
+    name="select-file"
+    onChange={[Function]}
+    type="file"
+  />
+</div>
+`;

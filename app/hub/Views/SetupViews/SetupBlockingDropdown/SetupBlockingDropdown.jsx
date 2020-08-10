@@ -23,6 +23,11 @@ import { ToastMessage } from '../../../../shared-components';
  * @memberof HubComponents
  */
 class SetupBlockingDropdown extends Component {
+	/**
+	 * Debounce the hide alert function after 3 seconds
+	 */
+	_hideToastDebounce = debounce(this._hideToast, 3000)
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -58,11 +63,6 @@ class SetupBlockingDropdown extends Component {
 			toastText: '',
 		});
 	}
-
-	/**
-	 * Debounce the hide alert function after 3 seconds
-	 */
-	_hideToastDebounce = debounce(this._hideToast, 3000) // eslint-disable-line react/sort-comp
 
 	/**
 	 * React's required render function. Returns JSX

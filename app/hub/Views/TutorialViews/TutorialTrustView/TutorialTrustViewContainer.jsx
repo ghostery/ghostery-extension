@@ -32,7 +32,7 @@ class TutorialTrustViewContainer extends Component {
 			activeIndex: index,
 			hrefPrev: `/tutorial/${index - 1}`,
 			hrefNext: `/tutorial/${index + 1}`,
-			hrefDone: '/',
+			hrefDone: '/home',
 			textPrev: t('previous'),
 			textNext: t('next'),
 			textDone: t('hub_tutorial_exit_flow'),
@@ -44,7 +44,8 @@ class TutorialTrustViewContainer extends Component {
 	 * @return {JSX} JSX for rendering the Tutorial Trust View of the Hub app
 	 */
 	render() {
-		return <TutorialTrustView />;
+		const { isAndroid } = this.props;
+		return <TutorialTrustView isAndroid={isAndroid} />;
 	}
 }
 

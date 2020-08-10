@@ -28,7 +28,7 @@ const SetupView = (props) => {
 	const { extraRoutes, sendMountActions, steps } = props;
 
 	return (
-		<div className="full-height flex-container flex-dir-column">
+		<div className="full-height flex-container flex-dir-column android-relative">
 			<div className="flex-child-grow">
 				{steps.map(step => (
 					<Route
@@ -36,7 +36,7 @@ const SetupView = (props) => {
 						path={step.path}
 						render={() => (
 							<div>
-								<SetupHeader {...step.headerProps} />
+								<SetupHeader title={step.headerProps.title} titleImage={step.headerProps.titleImage} />
 								<step.bodyComponent index={step.index} sendMountActions={sendMountActions} />
 							</div>
 						)}

@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -35,7 +35,8 @@ class Header extends React.Component {
 	 * Handles clicking on the Simple View tab
 	 */
 	clickSimpleTab = () => {
-		if (this.props.is_expert) {
+		const { is_expert } = this.props;
+		if (is_expert) {
 			this.toggleExpert();
 		}
 	}
@@ -44,7 +45,8 @@ class Header extends React.Component {
 	 * Handles clicking on the Detailed View tab
 	 */
 	clickDetailedTab = () => {
-		if (!this.props.is_expert) {
+		const { is_expert } = this.props;
+		if (!is_expert) {
 			this.toggleExpert();
 		}
 	}
@@ -53,11 +55,12 @@ class Header extends React.Component {
 	 * Toggle between Simple and Detailed Views.
 	 */
 	toggleExpert = () => {
-		this.props.actions.toggleExpert();
-		if (this.props.is_expert) {
-			this.props.history.push('/');
+		const { actions, history, is_expert } = this.props;
+		actions.toggleExpert();
+		if (is_expert) {
+			history.push('/');
 		} else {
-			this.props.history.push('/detail');
+			history.push('/detail');
 		}
 	}
 
@@ -65,30 +68,31 @@ class Header extends React.Component {
 	 * Handles toggling the drop-down pane open/closed
 	 */
 	toggleDropdown = () => {
-		this.setState({ dropdownOpen: !this.state.dropdownOpen });
+		this.setState(prevState => ({ dropdownOpen: !prevState.dropdownOpen }));
 	}
 
 	handleSignin = () => {
-		this.props.history.push('/login');
+		const { history } = this.props;
+		history.push('/login');
 	}
 
 	handleSendValidateAccountEmail = () => {
-		const { user } = this.props;
+		const { actions, user } = this.props;
 		sendMessageInPromise('account.sendValidateAccountEmail').then((success) => {
 			if (success) {
-				this.props.actions.showNotification({
+				actions.showNotification({
 					classes: 'success',
 					text: t('panel_email_verification_sent', user && user.email),
 				});
 			} else {
-				this.props.actions.showNotification({
+				actions.showNotification({
 					classes: 'alert',
 					text: t('server_error_message'),
 				});
 			}
 		}).catch((err) => {
 			log('sendVerificationEmail Error', err);
-			this.props.actions.showNotification({
+			actions.showNotification({
 				classes: 'alert',
 				text: t('server_error_message'),
 			});
@@ -109,7 +113,7 @@ class Header extends React.Component {
 		}
 
 		let accountIcon;
-		if (!loggedIn || loggedIn && user && !user.emailValidated) {
+		if (!loggedIn || (loggedIn && user && !user.emailValidated)) {
 			accountIcon = (
 				<div className="g-tooltip">
 					<svg className="profile-svg" width="26" height="40" viewBox="0 0 26 16">
@@ -136,22 +140,24 @@ class Header extends React.Component {
 	}
 
 	determineBackPath = () => {
-		const { entries, location } = this.props.history;
+		const { history, is_expert } = this.props;
+		const { entries, location } = history;
 		const subscriptionRegEx = /^(\/subscription)/;
 		if (location.pathname === '/stats' && (entries.length > 1 &&
 		subscriptionRegEx.test(entries[entries.length - 2].pathname))) {
 			return 'subscription/info';
 		}
-		return this.props.is_expert ? '/detail/blocking' : '/';
+		return is_expert ? '/detail/blocking' : '/';
 	}
 
 	clickUpgradeBannerOrSubscriberBadgeIcon = () => {
 		// TODO check whether this is the message we want to be sending now
+		const { history } = this.props;
 		sendMessage('ping', 'plus_panel_from_badge');
 		const { user } = this.props;
 		const hasPlusAccess = user && user.plusAccess;
 		const hasPremiumAccess = user && user.premiumAccess;
-		this.props.history.push(hasPlusAccess || hasPremiumAccess ? '/subscription/info' : `/subscribe/${!!user}`);
+		history.push(hasPlusAccess || hasPremiumAccess ? '/subscription/info' : `/subscribe/${!!user}`);
 	}
 
 	/**
@@ -160,12 +166,17 @@ class Header extends React.Component {
 	*/
 	render() {
 		const {
+			actions,
 			is_expanded,
 			is_expert,
 			location,
 			loggedIn,
 			user,
+			language,
+			tab_id,
+			history,
 		} = this.props;
+		const { dropdownOpen } = this.state;
 		const { pathname } = location;
 		const showTabs = pathname === '/' || pathname.startsWith('/detail');
 		const headerArrowClasses = ClassNames('back-arrow', {
@@ -202,9 +213,11 @@ class Header extends React.Component {
 		);
 
 		const tabs = (
-			<div className="header-tab-group flex-container align-bottom">
-				{simpleTab}
-				{detailedTab}
+			<div className="header-tab-group-container">
+				<div className="header-tab-group flex-container align-bottom align-center">
+					{simpleTab}
+					{detailedTab}
+				</div>
 			</div>
 		);
 
@@ -243,11 +256,11 @@ class Header extends React.Component {
 				hasPremiumAccess={hasPremiumAccess}
 				hasPlusAccess={hasPlusAccess}
 				email={user && user.email}
-				language={this.props.language}
-				tab_id={this.props.tab_id}
+				language={language}
+				tab_id={tab_id}
 				location={location}
-				history={this.props.history}
-				actions={this.props.actions}
+				history={history}
+				actions={actions}
 				toggleDropdown={this.toggleDropdown}
 				kebab={this.kebab}
 			/>
@@ -266,7 +279,7 @@ class Header extends React.Component {
 							{((is_expert && is_expanded) || !showTabs) && plusUpgradeBannerOrSubscriberBadgeLogolink }
 							{headerMenuKebab}
 						</div>
-						{ this.state.dropdownOpen && headerMenu }
+						{ dropdownOpen && headerMenu }
 					</div>
 				</div>
 			</header>

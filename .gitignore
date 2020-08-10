@@ -18,6 +18,7 @@ yarn-error.log
 .ltk
 tools/i18n_results
 tools/leet/*.json
+tools/token_results
 
 ## Cliqz
 cliqz/

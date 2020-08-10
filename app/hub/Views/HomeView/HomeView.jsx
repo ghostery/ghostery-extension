@@ -18,8 +18,7 @@ import { NavLink } from 'react-router-dom';
 import globals from '../../../../src/classes/Globals';
 import { ToggleCheckbox } from '../../../shared-components';
 
-const { IS_CLIQZ } = globals;
-const IS_FIREFOX = (globals.BROWSER_INFO.name === 'firefox');
+const { IS_CLIQZ, BROWSER_INFO } = globals;
 
 /**
  * A Functional React component for rendering the Home View
@@ -34,15 +33,16 @@ const HomeView = (props) => {
 		enable_metrics,
 		changeMetrics,
 		email,
-		isPlus,
+		isPremium,
+		sendPing,
 	} = props;
 	const accountHref = globals.ACCOUNT_BASE_URL;
 
 	let headerInfoText = t('hub_home_header_info');
-	if (globals.BROWSER_INFO) {
-		if (IS_FIREFOX) {
+	if (BROWSER_INFO) {
+		if (BROWSER_INFO.name === 'firefox') {
 			headerInfoText = t('hub_home_header_info_opted_out');
-		} else if (IS_CLIQZ) {
+		} else if (IS_CLIQZ || BROWSER_INFO.name === 'ghostery_android') {
 			headerInfoText = t('hub_home_header_info_cliqz');
 		}
 	}
@@ -61,6 +61,16 @@ const HomeView = (props) => {
 	const setupButtonClassNames = ClassNames('HomeView__featureButton button primary', {
 		hollow: setup_complete,
 	});
+	const upgradeContainerClassNames = ClassNames('HomeView__upgradeContainer row align-center-middle', {
+		'purple-border': !isPremium
+	});
+
+	/**
+	 * Sends the necessary ping to background
+	 */
+	const _sendUpgradePing = () => {
+		sendPing({ type: 'intro_hub_home_upgrade' });
+	};
 
 	return (
 		<div className="HomeView row align-center">
@@ -141,17 +151,17 @@ const HomeView = (props) => {
 						</NavLink>
 					</div>
 				</div>
-				<div className="HomeView__plus row large-unstack">
-					<div className="HomeView__featureIcon feature-plus hide-for-large" />
-					<div className="HomeView__featureText columns">
-						{t('hub_home_feature_supporter_text')}
+				<div className={upgradeContainerClassNames}>
+					<div className="HomeView__upgradeIcon" />
+					<div className="HomeView__upgradeText">
+						{t('hub_home_plus_upgrade_text')}
 					</div>
-					<div className="HomeView__featureIcon columns shrink feature-plus show-for-large" />
-					<div className="columns flex-container align-center-middle">
-						<NavLink to="/plus" className="HomeView__featureButton button primary">
-							{isPlus ? t('already_subscribed') : t('get_ghostery_plus')}
+					<div className="HomeView__buttonContainer columns flex-container">
+						<NavLink to="/" className="HomeView__featureButton button primary" onClick={_sendUpgradePing}>
+							{isPremium ? t('hub_home_plus_full_protection') : t('hub_home_plus_upgrade_button_text')}
 						</NavLink>
 					</div>
+
 				</div>
 			</div>
 		</div>
@@ -166,7 +176,7 @@ HomeView.propTypes = {
 	enable_metrics: PropTypes.bool.isRequired,
 	changeMetrics: PropTypes.func.isRequired,
 	email: PropTypes.string.isRequired,
-	isPlus: PropTypes.bool.isRequired,
+	isPremium: PropTypes.bool.isRequired,
 };
 
 export default HomeView;

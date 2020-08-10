@@ -58,25 +58,27 @@ class ForgotPassword extends React.Component {
 				return;
 			}
 
-			this.props.actions.resetPassword(email)
+			const { actions, history } = this.props;
+			actions.resetPassword(email)
 				.then((success) => {
 					this.setState({ loading: false });
 					if (success && hub) {
 						this.navigateToLogIn();
 
-						this.props.actions.setToast({
+						actions.setToast({
 							toastMessage: t('banner_check_your_email_title'),
 							toastClass: 'success',
 						});
 					} else if (success && panel) {
-						this.props.history.push('/login');
+						history.push('/login');
 					}
 				});
 		});
 	}
 
 	navigateToLogIn = () => {
-		this.props.history.push('/log-in');
+		const { history } = this.props;
+		history.push('/log-in');
 	}
 
 	/**
@@ -112,51 +114,53 @@ class ForgotPassword extends React.Component {
 		return (
 			<div id={ContainerClassNames}>
 				<div className="row align-center">
-					<form className="ForgotPasswordForm" onSubmit={this.handleSubmit}>
-						{panel && (
-							<h4 id={MessageClassNames}>
-								{t('forgot_password_message')}
-							</h4>
-						)}
-						{hub && (
-							<h3 id={MessageClassNames} className="text-center">
-								{t('forgot_password_message')}
-							</h3>
-						)}
-						<div id="forgot-email" className={(emailError ? 'panel-error invalid-email' : '')}>
-							<label htmlFor={EmailClassNames}>
-								{t('email_colon')}
-								<span className="asterisk">*</span>
-								<input onChange={this.handleInputChange} value={email} id={EmailClassNames} type="text" name="email" pattern=".{1,}" autoComplete="off" required />
-							</label>
-							<p className="invalid-email warning">
-								{t('invalid_email_forgot')}
-							</p>
-							<p className="not-found-error warning">
-								{t('error_email_forgot')}
-							</p>
-						</div>
-						<div className={ButtonsContainerClassNames}>
-							<div className="small-6 columns text-center">
-								{panel && (
-									<Link to="/login" id="forgot-password-cancel" className="cancel button hollow">
-										{t('button_cancel')}
-									</Link>
-								)}
-								{hub && (
-									<div id="forgot-password-cancel" className="cancel button hollow success" onClick={this.navigateToLogIn}>
-										{t('button_cancel')}
-									</div>
-								)}
+					<div className="columns small-12">
+						<form className="ForgotPasswordForm" onSubmit={this.handleSubmit}>
+							{panel && (
+								<h4 id={MessageClassNames}>
+									{t('forgot_password_message')}
+								</h4>
+							)}
+							{hub && (
+								<h3 id={MessageClassNames} className="text-center">
+									{t('forgot_password_message')}
+								</h3>
+							)}
+							<div id="forgot-email" className={(emailError ? 'panel-error invalid-email' : '')}>
+								<label htmlFor={EmailClassNames}>
+									{t('email_colon')}
+									<span className="asterisk">*</span>
+									<input onChange={this.handleInputChange} value={email} id={EmailClassNames} type="text" name="email" pattern=".{1,}" autoComplete="off" required />
+								</label>
+								<p className="invalid-email warning">
+									{t('invalid_email_forgot')}
+								</p>
+								<p className="not-found-error warning">
+									{t('error_email_forgot')}
+								</p>
 							</div>
-							<div className="small-6 columns text-center">
-								<button type="submit" id="send-button" className={buttonClasses}>
-									<span className="title">{t('send_button_label')}</span>
-									<span className={loaderClassNames} />
-								</button>
+							<div className={ButtonsContainerClassNames}>
+								<div className="small-6 columns text-center">
+									{panel && (
+										<Link to="/login" id="forgot-password-cancel" className="cancel button hollow">
+											{t('button_cancel')}
+										</Link>
+									)}
+									{hub && (
+										<div id="forgot-password-cancel" className="cancel button hollow success" onClick={this.navigateToLogIn}>
+											{t('button_cancel')}
+										</div>
+									)}
+								</div>
+								<div className="small-6 columns text-center">
+									<button type="submit" id="send-button" className={buttonClasses}>
+										<span className="title">{t('send_button_label')}</span>
+										<span className={loaderClassNames} />
+									</button>
+								</div>
 							</div>
-						</div>
-					</form>
+						</form>
+					</div>
 				</div>
 			</div>
 		);

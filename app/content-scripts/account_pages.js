@@ -1,8 +1,7 @@
 /**
- * Ghostery Account & ExtensionWeb Events
+ * Ghostery Account Events
  *
- * This file connects the extension to all ExtensionWeb and Account
- * pages (extension, account, signon)
+ * This file connects the extension to all Account pages
  *
  * Ghostery Browser Extension
  * https://www.ghostery.com/

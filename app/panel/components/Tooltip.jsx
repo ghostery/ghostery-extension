@@ -12,7 +12,6 @@
  */
 
 import React from 'react';
-import ReactDOM from 'react-dom';
 import ClassNames from 'classnames';
 
 /**
@@ -36,8 +35,7 @@ class Tooltip extends React.Component {
 	 * Lifecycle event. Set listeners.
 	 */
 	componentDidMount() {
-		// eslint-disable-next-line react/no-find-dom-node
-		this.parentNode = ReactDOM.findDOMNode(this).parentNode;
+		this.parentNode = this.node.parentNode;
 		this.parentNode.addEventListener('mouseenter', this.delayHover);
 		this.parentNode.addEventListener('mouseleave', this.leave);
 		this.parentNode.addEventListener('click', this.leave);
@@ -56,20 +54,22 @@ class Tooltip extends React.Component {
 	 * Implements mouseenter. Sets a delay for showing the tooltip with a default of 1 second.
 	 */
 	delayHover() {
-		const delayType = typeof this.props.delay;
-		const delay = (delayType === 'number' || delayType === 'string') ? +this.props.delay : 1000;
+		const { delay } = this.props;
+		const delayType = typeof delay;
+		const timerDelay = (delayType === 'number' || delayType === 'string') ? +delay : 1000;
 		this.delay = setTimeout(() => {
 			this.enter();
-		}, delay);
+		}, timerDelay);
 	}
 
 	/**
 	 * Sets the state for Show.
 	 */
 	enter() {
+		const { disabled, showNotification, alertText } = this.props;
 		this.setState({ show: true });
-		if (this.props.disabled && this.props.showNotification && this.props.alertText) {
-			this.props.showNotification({ text: this.props.alertText, classes: 'warning', filter: 'tooltip' });
+		if (disabled && showNotification && alertText) {
+			showNotification({ text: alertText, classes: 'warning', filter: 'tooltip' });
 		}
 	}
 
@@ -86,19 +86,23 @@ class Tooltip extends React.Component {
 	 * @return {JSX} JSX for rendering the Tooltip component
 	 */
 	render() {
+		const {
+			theme, position, header, body
+		} = this.props;
+		const { show } = this.state;
 		const compClassNames = ClassNames({
-			'dark-theme': this.props.theme === 'dark',
+			'dark-theme': theme === 'dark',
 		});
 
 		return (
-			<span className={compClassNames}>
-				{this.state.show && (
-					<span className={`tooltip-content ${this.props.position}`}>
-						{this.props.header &&
-						<div className="tooltip-header">{this.props.header}</div>
+			<span ref={(node) => { this.node = node; }} className={compClassNames}>
+				{show && (
+					<span className={`tooltip-content ${position}`}>
+						{header &&
+						<div className="tooltip-header">{header}</div>
 						}
-						{this.props.body &&
-						<div className="tooltip-body">{this.props.body}</div>
+						{body &&
+						<div className="tooltip-body">{body}</div>
 						}
 					</span>
 				)}

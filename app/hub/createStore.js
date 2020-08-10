@@ -25,6 +25,7 @@ import { reducer as app } from './Views/AppView';
 import { reducer as home } from './Views/HomeView';
 import { reducer as setup } from './Views/SetupView';
 import { reducer as tutorial } from './Views/TutorialView';
+import { reducer as upgrade } from './Views/UpgradePlanView';
 import account from '../Account/AccountReducer';
 import settings from '../panel/reducers/settings';
 
@@ -35,6 +36,7 @@ const reducer = combineReducers({
 	tutorial,
 	account,
 	settings,
+	upgrade
 });
 
 /**

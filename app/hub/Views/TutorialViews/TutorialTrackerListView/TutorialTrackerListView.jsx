@@ -12,18 +12,19 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * A Functional React component for rendering the Tutorial Tracker List View
  * @return {JSX} JSX for rendering the Tutorial Tracker List View of the Hub app
  * @memberof HubComponents
  */
-const TutorialTrackerListView = () => (
+const TutorialTrackerListView = ({ isAndroid }) => (
 	<div className="TutorialTrackerListView TutorialView--mediumFlexColumn row align-center flex-container">
 		<div className="columns small-12 medium-9">
 			<img
 				className="TutorialTrackerListView__image shrink"
-				src="/app/images/hub/tutorial/tracker-list.png"
+				src={`/app/images/hub/tutorial/tracker-list${isAndroid ? '-android' : ''}.png`}
 				alt={t('hub_tutorial_trackerlist_title')}
 			/>
 		</div>
@@ -38,6 +39,8 @@ const TutorialTrackerListView = () => (
 	</div>
 );
 
-// No need for PropTypes. The SideNavigationViewContainer has no props.
+TutorialTrackerListView.propTypes = {
+	isAndroid: PropTypes.bool.isRequired
+};
 
 export default TutorialTrackerListView;

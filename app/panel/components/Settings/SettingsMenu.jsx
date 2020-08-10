@@ -24,9 +24,9 @@ const { IS_CLIQZ } = globals;
  * The view allows to set parameters for Ghostery purplebox.
  * @memberOf SettingsComponents
  */
-const SettingsMenu = (props) => {
+const SettingsMenu = ({ is_expanded }) => {
 	const listClassNames = ClassNames('content-settings-menu menu vertical no-bullet', {
-		's-hide': props.is_expanded,
+		's-hide': is_expanded,
 	});
 	return (
 		<ul className={listClassNames}>

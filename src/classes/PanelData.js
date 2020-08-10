@@ -7,7 +7,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -23,17 +23,21 @@ import globals from './Globals';
 import metrics from './Metrics';
 import Policy from './Policy';
 import tabInfo from './TabInfo';
-import rewards from './Rewards';
+import Rewards from './Rewards';
 import account from './Account';
 import dispatcher from './Dispatcher';
 import promoModals from './PromoModals';
 import { getCliqzGhosteryBugs, sendCliqzModuleCounts } from '../utils/cliqzModulesData';
-import { getActiveTab, flushChromeMemoryCache, processUrl } from '../utils/utils';
-import { objectEntries, log } from '../utils/common';
+import {
+	getTab,
+	getActiveTab,
+	flushChromeMemoryCache,
+	processUrl
+} from '../utils/utils';
+import { log } from '../utils/common';
 
 const SYNC_SET = new Set(globals.SYNC_ARRAY);
 const { IS_CLIQZ } = globals;
-const policy = new Policy();
 
 /**
  * PanelData coordinates the assembly and transmission of data to the extension panel
@@ -72,11 +76,11 @@ class PanelData {
 		this._panelPort = port;
 		this._mountedComponents.panel = true;
 
-		getActiveTab((tab) => {
+		function tabCallback(tab) {
 			const { url } = tab;
 
 			this._activeTab = tab;
-			this._activeTab.pageHost = url && processUrl(url).hostname || '';
+			this._activeTab.pageHost = (url && processUrl(url).hostname) || '';
 
 			this._attachListeners();
 
@@ -87,7 +91,21 @@ class PanelData {
 			account.getUserSettings()
 				.then(userSettings => this._postUserSettings(userSettings))
 				.catch(() => log('Failed getting remote user settings from PanelData#initPort. User not logged in.'));
-		});
+		}
+
+		function tabErrorCallback(err) {
+			const { message } = err;
+			log(`Error: ${message}`);
+			this._postMessage('panel', { error: message });
+		}
+
+		const paramTabId = +(new URL(port.sender.url)).searchParams.get('tabId');
+
+		if (paramTabId) {
+			getTab(paramTabId, tabCallback.bind(this), tabErrorCallback.bind(this));
+		} else {
+			getActiveTab(tabCallback.bind(this), tabErrorCallback.bind(this));
+		}
 	}
 
 	/**
@@ -118,16 +136,16 @@ class PanelData {
 					break;
 				case 'RewardsComponentDidMount':
 					this._mountedComponents.rewards = true;
-					this._panelPort.onDisconnect.addListener(rewards.panelHubClosedListener);
+					this._panelPort.onDisconnect.addListener(Rewards.panelHubClosedListener);
 					this._postRewardsData();
 					break;
 				case 'RewardsComponentWillUnmount':
 					this._mountedComponents.rewards = false;
-					this._panelPort.onDisconnect.removeListener(rewards.panelHubClosedListener);
+					this._panelPort.onDisconnect.removeListener(Rewards.panelHubClosedListener);
 					break;
 				case 'SettingsComponentDidMount':
 					this._mountedComponents.settings = true;
-					this._postMessage('settings', this._getSettingsData());
+					this._postMessage('settings', PanelData._getSettingsData());
 					break;
 				case 'SettingsComponentWillUnmount':
 					this._mountedComponents.settings = false;
@@ -156,7 +174,6 @@ class PanelData {
 		this.postPageLoadTime(tab_id, true);
 	}
 
-
 	// TODO convert Android panel and Hub to also use port so we can have a single streamlined communication channel & API
 	/**
 	 * Get PanelData for a specific view/tab. Needed for Android panel and Hub, which do not use a port (yet)
@@ -167,13 +184,13 @@ class PanelData {
 	get(view, tab) {
 		// Hub and Android panel
 		if (view === 'settings') {
-			return this._getSettingsData();
+			return PanelData._getSettingsData();
 		}
 
 		// Android panel only
 		const { url } = tab;
 		this._activeTab = tab;
-		this._activeTab.pageHost = url && processUrl(url).hostname || '';
+		this._activeTab.pageHost = (url && processUrl(url).hostname) || '';
 		this._setTrackerListAndCategories();
 		switch (view) {
 			case 'panel':
@@ -247,21 +264,22 @@ class PanelData {
 			site_specific_blocks, site_specific_unblocks, toggle_individual_trackers,
 		} = conf;
 
-		return Object.assign({}, {
+		return {
 			expand_all_trackers,
 			selected_app_ids,
 			show_tracker_urls,
 			site_specific_blocks,
 			site_specific_unblocks,
-			toggle_individual_trackers
-		}, this._getDynamicBlockingData());
+			toggle_individual_trackers,
+			...this._getDynamicBlockingData()
+		};
 	}
 
 	/**
 	 * Helper that retrieves the current account information
 	 * @return {Object|null}	the current account object or null
 	 */
-	_getCurrentAccount() {
+	static _getCurrentAccount() {
 		const currentAccount = conf.account;
 		if (currentAccount && currentAccount.user) {
 			currentAccount.user.plusAccess = account.hasScopesUnverified(['subscriptions:plus'])
@@ -303,7 +321,7 @@ class PanelData {
 		return {
 			needsReload: needsReload || { changes: {} },
 			smartBlock,
-			account: this._getCurrentAccount(),
+			account: PanelData._getCurrentAccount(),
 		};
 	}
 
@@ -338,7 +356,7 @@ class PanelData {
 			trackers_banner_status,
 		} = conf;
 
-		return Object.assign({}, {
+		return {
 			current_theme,
 			enable_ad_block,
 			enable_anti_tracking,
@@ -352,7 +370,8 @@ class PanelData {
 			reload_banner_status,
 			tab_id,
 			trackers_banner_status,
-		}, this._getDynamicPanelData(tab_id));
+			...this._getDynamicPanelData(tab_id)
+		};
 	}
 
 	/**
@@ -371,7 +390,7 @@ class PanelData {
 	 * Get rewards data for the Rewards View
 	 * @return {Object} Rewards view data
 	 */
-	_getRewardsData() {
+	static _getRewardsData() {
 		return {
 			enable_offers: conf.enable_offers,
 		};
@@ -382,25 +401,24 @@ class PanelData {
 	 * Called when and only when the Settings component is mounted
 	 * @return	{Object}		Settings View data
 	 */
-	_getSettingsData() {
+	static _getSettingsData() {
 		const {
-			bugs_last_updated, language, new_app_ids,
+			bugs_last_updated, bugs_last_checked, language, new_app_ids,
 			settings_last_exported, settings_last_imported
 		} = conf;
 
-		return Object.assign(
-			{},
-			{
-				bugs_last_updated,
-				categories: this._buildGlobalCategories(),
-				language, // required for the setup page that does not have access to panelView data
-				new_app_ids,
-				offer_human_web: true,
-				settings_last_exported,
-				settings_last_imported,
-			},
-			this._getUserSettingsForSettingsView(conf),
-		);
+		return {
+
+			bugs_last_updated,
+			bugs_last_checked,
+			categories: PanelData._buildGlobalCategories(),
+			language, // required for the setup page that does not have access to panelView data
+			new_app_ids,
+			offer_human_web: true,
+			settings_last_exported,
+			settings_last_imported,
+			...PanelData._getUserSettingsForSettingsView(conf),
+		};
 	}
 
 	/**
@@ -414,20 +432,18 @@ class PanelData {
 		const { paused_blocking, paused_blocking_timeout } = globals.SESSION;
 		const { site_blacklist, site_whitelist } = conf;
 
-		return Object.assign(
-			{},
-			{
-				paused_blocking,
-				paused_blocking_timeout,
-				site_blacklist,
-				site_whitelist,
-				pageHost,
-				pageUrl: url || '',
-				siteNotScanned: !this._trackerList || false,
-				sitePolicy: policy.getSitePolicy(url) || false,
-			},
-			this._getDynamicSummaryData()
-		);
+		return {
+
+			paused_blocking,
+			paused_blocking_timeout,
+			site_blacklist,
+			site_whitelist,
+			pageHost,
+			pageUrl: url || '',
+			siteNotScanned: !this._trackerList || false,
+			sitePolicy: Policy.getSitePolicy(url) || false,
+			...this._getDynamicSummaryData()
+		};
 	}
 
 	/**
@@ -435,7 +451,7 @@ class PanelData {
 	 * Invoked if Blocking component is mounted when account.getUserSettings() resolves, max one time per panel open.
 	 * @param	{Object}	userSettings	the settings retrieved by account.getUserSettings() in _initPort
 	 */
-	_getUserSettingsForBlockingView(userSettings) {
+	static _getUserSettingsForBlockingView(userSettings) {
 		const {
 			expand_all_trackers, selected_app_ids, show_tracker_urls,
 			site_specific_blocks, site_specific_unblocks, toggle_individual_trackers,
@@ -456,7 +472,7 @@ class PanelData {
 	 * Invoked if Panel is still open account.getUserSettings() resolves, max one time per panel open.
 	 * @param	{Object}	userSettings	the settings retrieved by account.getUserSettings() in _initPort
 	 */
-	_getUserSettingsForPanelView(userSettings) {
+	static _getUserSettingsForPanelView(userSettings) {
 		const {
 			current_theme, enable_ad_block, enable_anti_tracking, enable_smart_block,
 			enable_offers, is_expanded, is_expert, reload_banner_status, trackers_banner_status,
@@ -472,7 +488,7 @@ class PanelData {
 			is_expert,
 			reload_banner_status,
 			trackers_banner_status,
-			account: this._getCurrentAccount(),
+			account: PanelData._getCurrentAccount(),
 		};
 	}
 
@@ -481,7 +497,7 @@ class PanelData {
 	 * Invoked if Settings component is mounted when account.getUserSettings() resolves, max one time per panel open.
 	 * @param	{Object}	userSettings	the settings retrieved by account.getUserSettings() in _initPort, or the conf object provided by getSettings
 	 */
-	_getUserSettingsForSettingsView(userSettingsSource) {
+	static _getUserSettingsForSettingsView(userSettingsSource) {
 		const {
 			alert_bubble_pos, alert_bubble_timeout, block_by_default, cliqz_adb_mode, enable_autoupdate,
 			enable_click2play, enable_click2play_social, enable_human_web, enable_offers,
@@ -547,7 +563,7 @@ class PanelData {
 	 * @private
 	 */
 	_postRewardsData() {
-		this._postMessage('rewards', this._getRewardsData());
+		this._postMessage('rewards', PanelData._getRewardsData());
 	}
 
 	/**
@@ -558,28 +574,28 @@ class PanelData {
 	_postUserSettings(userSettings) {
 		if (!this._panelPort || !this._activeTab) { return; }
 
-		this._postMessage('panel', this._getUserSettingsForPanelView(userSettings));
+		this._postMessage('panel', PanelData._getUserSettingsForPanelView(userSettings));
 
 		const { blocking, settings } = this._mountedComponents;
 
 		if (blocking) {
-			this._postMessage('blocking', this._getUserSettingsForBlockingView(userSettings));
+			this._postMessage('blocking', PanelData._getUserSettingsForBlockingView(userSettings));
 		}
 
 		if (settings) {
-			this._postMessage('settings', this._getUserSettingsForSettingsView(userSettings));
+			this._postMessage('settings', PanelData._getUserSettingsForSettingsView(userSettings));
 		}
 	}
 	// [/DATA TRANSFER]
-
 
 	// [DATA SETTING]
 	/**
 	 * Update Conf properties with new data from the UI.
 	 * Called via setPanelData message.
-	 * @param  {Object} data
+	 * @param  {Object} d
 	 */
-	set(data) {
+	set(d) {
+		const data = { ...d };
 		let syncSetDataChanged = false;
 
 		if (IS_CLIQZ) {
@@ -590,8 +606,9 @@ class PanelData {
 		}
 
 		// Set the conf from data
-		// TODO can this now be replaced by Object.entries?
-		for (const [key, value] of objectEntries(data)) {
+		const dataKeys = Object.keys(data);
+		dataKeys.forEach((key) => {
+			const value = data[key];
 			if (conf.hasOwnProperty(key) && !isEqual(conf[key], value)) {
 				conf[key] = value;
 				syncSetDataChanged = SYNC_SET.has(key) ? true : syncSetDataChanged;
@@ -604,15 +621,15 @@ class PanelData {
 
 					setTimeout(() => {
 						globals.SESSION.paused_blocking = false;
-						this._toggleBlockingHelper();
+						PanelData._toggleBlockingHelper();
 					}, value);
 				} else {
 					globals.SESSION.paused_blocking = value;
 					globals.SESSION.paused_blocking_timeout = 0;
 				}
-				this._toggleBlockingHelper();
+				PanelData._toggleBlockingHelper();
 			}
-		}
+		});
 
 		if (data.needsReload && this._activeTab) {
 			tabInfo.setTabInfo(this._activeTab.id, 'needsReload', data.needsReload);
@@ -635,7 +652,7 @@ class PanelData {
 	/**
 	 * Notifies interested parties when blocking is paused / unpaused
 	 */
-	_toggleBlockingHelper() {
+	static _toggleBlockingHelper() {
 		button.update();
 		flushChromeMemoryCache();
 		dispatcher.trigger('globals.save.paused_blocking');
@@ -663,19 +680,19 @@ class PanelData {
 
 			if (categories.hasOwnProperty(cat)) {
 				categories[cat].num_total++;
-				if (this._addsUpToBlocked(trackerState)) { categories[cat].num_blocked++; }
+				if (PanelData._addsUpToBlocked(trackerState)) { categories[cat].num_blocked++; }
 			} else {
-				categories[cat] = this._buildCategory(cat, trackerState);
+				categories[cat] = PanelData._buildCategory(cat, trackerState);
 			}
-			categories[cat].trackers.push(this._buildTracker(tracker, trackerState, smartBlock));
+			categories[cat].trackers.push(PanelData._buildTracker(tracker, trackerState, smartBlock));
 		});
 
 		const categoryArray = Object.values(categories);
 
 		categoryArray.sort((a, b) => {
-			a = a.name.toLowerCase(); // eslint-disable-line no-param-reassign
-			b = b.name.toLowerCase(); // eslint-disable-line no-param-reassign
-			return (a > b ? 1 : (a < b ? -1 : 0));
+			const a1 = a.name.toLowerCase();
+			const b1 = b.name.toLowerCase();
+			return (a1 > b1 ? 1 : (a1 < b1 ? -1 : 0));
 		});
 
 		return categoryArray;
@@ -686,7 +703,7 @@ class PanelData {
 	 * @param	{Object}	trackerState	object containing various block/allow states of a tracker
 	 * @return	{boolean}	is the tracker blocked in one of the possible ways?
 	 */
-	_addsUpToBlocked({
+	static _addsUpToBlocked({
 		ss_blocked, sb_blocked, blocked, ss_allowed, sb_allowed
 	}) {
 		return (ss_blocked || sb_blocked || (blocked && !ss_allowed && !sb_allowed));
@@ -698,7 +715,7 @@ class PanelData {
 	 * @param	{Object}	trackerState	object containing various block/allow states of a tracker
 	 * @return	{Object}	an object with data for a new category
 	 */
-	_buildCategory(category, trackerState) {
+	static _buildCategory(category, trackerState) {
 		return {
 			id: category,
 			name: t(`category_${category}`),
@@ -706,7 +723,7 @@ class PanelData {
 			img_name: (category === 'advertising') ? 'adv' : // Because AdBlock blocks images with 'advertising' in the name.
 				(category === 'social_media') ? 'smed' : category, // Because AdBlock blocks images with 'social' in the name.
 			num_total: 1,
-			num_blocked: this._addsUpToBlocked(trackerState) ? 1 : 0,
+			num_blocked: PanelData._addsUpToBlocked(trackerState) ? 1 : 0,
 			trackers: []
 		};
 	}
@@ -720,7 +737,7 @@ class PanelData {
 	 * @param	{Object}	smartBlock		smart blocking stats for the active tab
 	 * @return	{Object}	object of tracker data
 	 */
-	_buildTracker(tracker, trackerState, smartBlock) {
+	static _buildTracker(tracker, trackerState, smartBlock) {
 		const {
 			cat,
 			cliqzAdCount,
@@ -786,16 +803,16 @@ class PanelData {
 	 * @private
 	 * @return {array} 			array of categories
 	 */
-	_buildGlobalCategories() {
+	static _buildGlobalCategories() {
 		const categories = bugDb.db.categories || [];
 		const selectedApps = conf.selected_app_ids || {};
-		categories.forEach((category) => {
-			const { trackers } = category;
-			category.num_blocked = 0;
-			trackers.forEach((tracker) => {
-				tracker.blocked = selectedApps.hasOwnProperty(tracker.id);
-				if (tracker.blocked) {
-					category.num_blocked++;
+		categories.forEach((categoryEl) => {
+			const { trackers } = categoryEl;
+			categoryEl.num_blocked = 0;
+			trackers.forEach((trackerEl) => {
+				trackerEl.blocked = selectedApps.hasOwnProperty(trackerEl.id);
+				if (trackerEl.blocked) {
+					categoryEl.num_blocked++;
 				}
 			});
 		});

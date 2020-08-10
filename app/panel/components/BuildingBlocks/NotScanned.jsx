@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 
 /**
@@ -19,12 +20,12 @@ import ClassNames from 'classnames';
  * when a site is not scannable or has not yet been scanned.
  * @memberof PanelBuildingBlocks
  */
-const NotScanned = (props) => {
+const NotScanned = ({ isSmall }) => {
 	const notScannedClassNames = ClassNames('sub-component', 'not-scanned', {
-		small: props.isSmall,
+		small: isSmall,
 	});
 
-	return ( // eslint-disable-line arrow-parens
+	return (
 		<div className={notScannedClassNames}>
 			<div className="not-scanned-header">
 				{t('summary_page_not_scanned') }
@@ -37,6 +38,14 @@ const NotScanned = (props) => {
 			</div>
 		</div>
 	);
+};
+
+NotScanned.propTypes = {
+	isSmall: PropTypes.bool,
+};
+
+NotScanned.defaultProps = {
+	isSmall: false,
 };
 
 export default NotScanned;

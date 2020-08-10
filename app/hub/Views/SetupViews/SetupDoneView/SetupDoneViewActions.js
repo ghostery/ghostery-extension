@@ -14,7 +14,7 @@
 import { log, sendMessageInPromise } from '../../../utils';
 import { SET_SETUP_COMPLETE } from '../../SetupView/SetupViewConstants';
 
-export function setSetupComplete(actionData) {
+export default function setSetupComplete(actionData) {
 	return function(dispatch) {
 		return sendMessageInPromise(SET_SETUP_COMPLETE, actionData).then((data) => {
 			dispatch({

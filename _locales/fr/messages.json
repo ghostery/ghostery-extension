@@ -650,6 +650,9 @@
 	"panel_signin_success": {
 		"message": "Vous êtes maintenant connecté(e) sous l'identifiant "
 	},
+	"panel_signin_premium_benefits": {
+		"message": "Votre compte permet de déverrouiller un essai gratuit de nos avantages Premium, y compris le service VPN et une protection de la confidentialité sur l'ensemble de vos appareils, disponibles via notre application Ghostery Midnight."
+	},
 	"panel_view_trackers": {
 		"message": "Afficher les mouchards"
 	},
@@ -701,8 +704,8 @@
 	"panel_detail_menu_rewards_title": {
 		"message": "Rewards"
 	},
-	"panel_detail_menu_premium_title": {
-		"message": "Premium"
+	"panel_detail_learn_more": {
+	  "message": "En savoir plus"
 	},
 	"panel_detail_history_title": {
 		"message": "Historique"
@@ -730,9 +733,6 @@
 	},
 	"panel_detail_rewards_off": {
 		"message": "Ghostery Rewards est DÉSACTIVÉE"
-	},
-	"panel_detail_premium_title": {
-		"message": "Ghostery Premium"
 	},
 	"panel_detail_premium_text": {
 		"message": "Fonction bientôt disponible."
@@ -1237,6 +1237,9 @@
 	"hub_side_navigation_home": {
 		"message": "Page d'accueil"
 	},
+	"hub_side_navigation_upgrade_plan": {
+		"message": "Surclasser votre Plan"
+	},
 	"hub_side_navigation_tutorial": {
 		"message": "Suivre un tutoriel"
 	},
@@ -1294,8 +1297,89 @@
 	"hub_home_feature_setup_button_alt": {
 		"message": "Configuration personnalisée terminée"
 	},
-	"hub_home_feature_supporter_text": {
-		"message": "Passez à Ghostery Plus et découvrez des fonctionnalités spéciales."
+	"hub_home_plus_upgrade_text": {
+		"message": "Renforcez la protection de votre confidentialité. Surclassez votre plan Ghostery pour une protection sur l'ensemble de vos appareils, accès au VPN et bien plus encore !"
+	},
+	"hub_home_plus_upgrade_button_text": {
+		"message": "Surclasser maintenant."
+	},
+	"hub_home_plus_full_protection": {
+		"message": "Vous êtes entièrement protégé !"
+	},
+	"hub_upgrade_your": {
+		"message": "Surclassez votre"
+	},
+	"hub_upgrade_protection_plan": {
+		"message": "plan de protection"
+	},
+	"hub_upgrade_yearly": {
+		"message": "Annuel"
+	},
+	"hub_upgrade_monthly": {
+		"message": "Mensuel"
+	},
+	"hub_upgrade_plan_free": {
+		"message": "Gratuit"
+	},
+	"hub_upgrade_already_protected": {
+		"message": "Déjà protégé"
+	},
+	"hub_upgrade_basic_protection": {
+		"message": "Protection de base"
+	},
+	"hub_upgrade_basic_browser_protection": {
+		"message": "Protection de base du navigateur"
+	},
+	"hub_upgrade_advanced_device_protection": {
+		"message": "Protection avancée de vos appareils"
+	},
+	"hub_upgrade_maximum_browser_protection": {
+		"message": "Protection maximale du navigateur"
+	},
+	"hub_upgrade_to": {
+		"message": "Passe à"
+	},
+	"hub_upgrade_scroll_down": {
+		"message": "Voir la liste complète des fonctions"
+	},
+	"hub_upgrade_midnight_note": {
+		"message": "Ghostery Midnight doit être installé"
+	},
+	"hub_upgrade_additional_protection": {
+		"message": "Protection supplémentaire"
+	},
+	"hub_upgrade_browser_tracker_blocking": {
+		"message": "Blocage de mouchard sur le navigateur"
+	},
+	"hub_upgrade_browser_ad_blocking": {
+		"message": "Bloqueur de publicités sur le navigateur"
+	},
+	"hub_upgrade_custom_blocking_preferences": {
+		"message": "Préférences de blocage personnalisées"
+	},
+	"hub_upgrade_extension_themes": {
+		"message": "Thèmes de l'extension"
+	},
+	"hub_upgrade_historical_extension_stats": {
+		"message": "Historique des stats de l'extension"
+	},
+	"hub_upgrade_application_tracker_blocking": {
+		"message": "Blocage de mouchard dans l'application"
+	},
+	"hub_upgrade_application_ad_blocking": {
+		"message": "Bloqueur de publicités dans l'application"
+	},
+	"hub_upgrade_no_vpn_logs": {
+		"message": "Aucun registre d'activité du VPN"
+	},
+	"hub_upgrade_leak_protection": {
+		"message": "Protection contre les fuites de données"
+	},
+	"hub_upgrade_physical_servers": {
+		"message": "Serveurs physiques"
+	},
+	"hub_upgrade_unlimited_bandwidth": {
+		"message": "Bande passante illimitée"
 	},
 	"hub_setup_page_title": {
 		"message": "Hub Ghostery — Configuration"
@@ -2204,9 +2288,6 @@
 	"ghostery_basic": {
 		"message": "Version de base"
 	},
-	"ghostery_plus": {
-		"message": "Ghostery Plus"
-	},
 	"dollar_sign": {
 		"message": "&#36;"
 	},
@@ -2215,6 +2296,9 @@
 	},
 	"per_month": {
 		"message": "par mois"
+	},
+	"per_year": {
+		"message": "par an"
 	},
 	"faster_cleaner_browsing": {
 		"message": "Navigation plus simple et plus rapide",
@@ -2412,5 +2496,8 @@
 	},
 	"no_thanks_continue_with_basic": {
 		"message": "Non merci, continuer avec la version de base"
+	},
+	"too_many_password_resets_text": {
+		"message": "Vous avez dépassé le nombre de demandes de réinitialisation de mot de passe autorisé. Veuillez réessayer dans une heure."
 	}
 }

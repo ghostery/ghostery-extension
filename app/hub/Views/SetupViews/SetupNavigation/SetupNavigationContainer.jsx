@@ -22,12 +22,19 @@ import { SteppedNavigation } from '../../../../shared-components';
  */
 const SetupNavigationContainer = (props) => {
 	const { totalSteps, setup } = props;
-	const childProps = {
-		totalSteps,
-		...setup.navigation,
-	};
 
-	return <SteppedNavigation {...childProps} />;
+	return (
+		<SteppedNavigation
+			totalSteps={totalSteps}
+			activeIndex={setup.navigation.activeIndex}
+			hrefPrev={setup.navigation.hrefPrev}
+			hrefNext={setup.navigation.hrefNext}
+			hrefDone={setup.navigation.hrefDone}
+			textPrev={setup.navigation.textPrev}
+			textNext={setup.navigation.textNext}
+			textDone={setup.navigation.textDone}
+		/>
+	);
 };
 
 // PropTypes ensure we pass required props of the correct type

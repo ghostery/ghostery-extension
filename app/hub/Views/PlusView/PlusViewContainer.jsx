@@ -35,7 +35,8 @@ class PlusViewContainer extends Component {
 	 * Sends the necessary ping to background
 	 */
 	_sendPlusPing = () => {
-		this.props.actions.sendPing({ type: 'plus_cta_hub' });
+		const { actions } = this.props;
+		actions.sendPing({ type: 'plus_cta_hub' });
 	}
 
 	/**
@@ -44,12 +45,12 @@ class PlusViewContainer extends Component {
 	 */
 	render() {
 		const { user } = this.props;
-		const childProps = {
-			isPlus: user && user.plusAccess || false,
-			onPlusClick: this._sendPlusPing,
-		};
-
-		return <PlusView {...childProps} />;
+		return (
+			<PlusView
+				isPlus={(user && user.plusAccess) || false}
+				onPlusClick={this._sendPlusPing}
+			/>
+		);
 	}
 }
 

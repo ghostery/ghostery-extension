@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import Tooltip from '../Tooltip';
 
@@ -36,7 +37,8 @@ class PauseButton extends React.Component {
 	 * Handles the click event for the Dropdown Caret
 	 */
 	clickDropdownCaret() {
-		if (!this.state.showDropdown) {
+		const { showDropdown } = this.state;
+		if (!showDropdown) {
 			this.setState({ showDropdown: true });
 			document.body.addEventListener('click', this.clickOutside);
 		} else {
@@ -63,9 +65,10 @@ class PauseButton extends React.Component {
 	 * @param {number} time The time in minutes that Ghostery should be paused`
 	 */
 	clickDropdownPause(time) {
+		const { clickPause } = this.props;
 		this.setState({ showDropdown: false });
 		document.body.removeEventListener('click', this.clickOutside);
-		this.props.clickPause(time);
+		clickPause(time);
 	}
 
 	/**
@@ -73,7 +76,7 @@ class PauseButton extends React.Component {
 	 * @return {JSX} JSX for the dropdown list
 	 */
 	renderDropdown() {
-		const { isCondensed, isPausedTimeout } = this.props;
+		const { isCondensed, isPausedTimeout, dropdownItems } = this.props;
 
 		function dropdownItemClassName(value) {
 			return ClassNames('dropdown-item', 'clickable', 'dropdown-clickable', {
@@ -87,7 +90,7 @@ class PauseButton extends React.Component {
 
 		return (
 			<div className="dropdown" style={dropdownStyles}>
-				{this.props.dropdownItems.map(item => (
+				{dropdownItems.map(item => (
 					<div className={dropdownItemClassName(item.val)} key={item.name} onClick={() => { this.clickDropdownPause(item.val); }}>
 						<span className="dropdown-clickable">
 							{!isCondensed ? item.name : item.name_condensed}
@@ -132,7 +135,8 @@ class PauseButton extends React.Component {
 		const {
 			isPaused,
 			isCentered,
-			isCondensed
+			isCondensed,
+			clickPause
 		} = this.props;
 		const { showDropdown } = this.state;
 		const centeredAndCondensed = isCentered && isCondensed;
@@ -157,7 +161,7 @@ class PauseButton extends React.Component {
 		const togglePauseButton = (
 			<div
 				className={pauseButtonClassNames}
-				onClick={this.props.clickPause}
+				onClick={clickPause}
 				ref={(node) => { this.pauseWidth = node && node.clientWidth; }}
 			>
 				{this.renderPauseButtonText()}
@@ -193,5 +197,23 @@ class PauseButton extends React.Component {
 		);
 	}
 }
+
+PauseButton.propTypes = {
+	isPaused: PropTypes.bool,
+	isPausedTimeout: PropTypes.number,
+	clickPause: PropTypes.func.isRequired,
+	dropdownItems: PropTypes.arrayOf(PropTypes.shape({
+		val: PropTypes.number.isRequired,
+		name: PropTypes.string.isRequired,
+		name_condensed: PropTypes.string,
+	})).isRequired,
+	isCentered: PropTypes.bool.isRequired,
+	isCondensed: PropTypes.bool.isRequired,
+};
+
+PauseButton.defaultProps = {
+	isPaused: false,
+	isPausedTimeout: 0,
+};
 
 export default PauseButton;

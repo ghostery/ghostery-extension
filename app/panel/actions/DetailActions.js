@@ -17,7 +17,7 @@ import { TOGGLE_EXPANDED } from '../constants/constants';
  * Called from Detail and picked up by Panel reducer
  * @return {Object}
  */
-export function toggleExpanded() {
+export default function toggleExpanded() {
 	return {
 		type: TOGGLE_EXPANDED,
 	};

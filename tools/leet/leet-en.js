@@ -62,15 +62,13 @@ const leet_convert = function(string) {
 		// 'z': 'z',
 	};
 
-	let letter;
 	let output = string || '';
 	output = output.replace(/cks/g, 'x');
 
-	for (letter in characterMap) {
-		if (characterMap.hasOwnProperty(letter)) {
-			output = output.replace(new RegExp(letter, 'g'), characterMap[letter]);
-		}
-	}
+	const characterKeys = Object.keys(characterMap);
+	characterKeys.forEach((letter) => {
+		output = output.replace(new RegExp(letter, 'g'), characterMap[letter]);
+	});
 
 	return output;
 };
@@ -82,17 +80,17 @@ if (!fs.existsSync('./tools/leet/messages.en.copy.json')) {
 
 	// Import the copied messages file
 	const leet = {};
-	let key;
 	const en = jsonfile.readFileSync('./tools/leet/messages.en.copy.json');
 
 	// Create a LEETed version of the messages.json file
-	for (key in en) {
+	const enKeys = Object.keys(en);
+	enKeys.forEach((key) => {
 		if (en[key].hasOwnProperty('message')) {
 			const message = leet_convert(en[key].message);
 			const { placeholders } = en[key];
 			leet[key] = { message, placeholders };
 		}
-	}
+	});
 
 	// Save the leeted version and override the existing English messages.json file
 	fs.writeFileSync('./tools/leet/messages.leet.json', JSON.stringify(leet), 'utf-8');

@@ -11,8 +11,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint consistent-return: 0 */
-
 import conf from './Conf';
 import foundBugs from './FoundBugs';
 import tabInfo from './TabInfo';
@@ -30,7 +28,6 @@ const t = chrome.i18n.getMessage;
  */
 class PurpleBox {
 	constructor() {
-		this.policy = new Policy();
 		this.channelsSupported = (typeof chrome.runtime.onConnect === 'object');
 		this.ports = new Map();
 	}
@@ -48,7 +45,7 @@ class PurpleBox {
 		// Skip in the event of pause, trust, prefetching, newtab page, or Firefox about:pages
 		if (!conf.show_alert ||
 			globals.SESSION.paused_blocking ||
-			(conf.hide_alert_trusted && !!this.policy.checkSiteWhitelist(tab.url)) ||
+			(conf.hide_alert_trusted && !!Policy.checkSiteWhitelist(tab.url)) ||
 			!tab || tab.purplebox || tab.path.includes('_/chrome/newtab') || tab.protocol === 'about' || globals.EXCLUDES.includes(tab.host)) {
 			return Promise.resolve(false);
 		}
@@ -168,6 +165,7 @@ class PurpleBox {
 				log('updateBox sendMessage failed', chrome.runtime.lastError, tab);
 			}
 		});
+		return true;
 	}
 
 	/**
@@ -186,9 +184,6 @@ class PurpleBox {
 			}
 		}
 		tabInfo.setTabInfo(tab_id, 'purplebox', false);
-
-
-		return true;
 	}
 }
 

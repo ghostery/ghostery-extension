@@ -23,26 +23,25 @@ function HomeViewReducer(state = initialState, action) {
 				tutorial_complete,
 				enable_metrics,
 			} = action.data;
-			return Object.assign({}, state, {
-				home: Object.assign({}, state.home, {
+			return {
+				...state,
+				home: {
+					...state.home,
 					setup_complete,
 					tutorial_complete,
-					enable_metrics,
-				}),
-			});
+					enable_metrics
+				}
+			};
 		}
 		case MARK_PREMIUM_PROMO_MODAL_SHOWN: {
-			return Object.assign({}, state, {
-				home: Object.assign({}, state.home, {
-					premium_promo_modal_shown: true,
-				})
-			});
+			return {
+				...state,
+				home: { ...state.home, premium_promo_modal_shown: true }
+			};
 		}
 		case SET_METRICS: {
 			const { enable_metrics } = action.data;
-			return Object.assign({}, state, {
-				home: Object.assign({}, state.home, { enable_metrics }),
-			});
+			return { ...state, home: { ...state.home, enable_metrics } };
 		}
 
 		default: return state;

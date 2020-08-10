@@ -5,7 +5,7 @@ exports[`app/hub/Views/TutorialViews/TutorialLayoutView component Snapshot tests
   className="TutorialLayoutView TutorialView--mediumFlexColumn row align-center-middle flex-container"
 >
   <div
-    className="columns small-10 medium-8 large-6 small-offset-1"
+    className="columns small-10 medium-8 large-6"
   >
     <img
       alt="simple_view"

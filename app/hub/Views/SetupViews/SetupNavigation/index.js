@@ -20,6 +20,6 @@ import SetupNavigationContainer from './SetupNavigationContainer';
  * @return {function}        this function returns a plain object, which will be merged into the component's props
  * @memberof HubContainers
  */
-const mapStateToProps = state => Object.assign({}, state.setup);
+const mapStateToProps = state => ({ ...state.setup });
 
 export default connect(mapStateToProps)(SetupNavigationContainer);

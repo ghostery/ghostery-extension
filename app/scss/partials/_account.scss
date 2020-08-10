@@ -170,22 +170,59 @@ p.warning {
 
 /* SIGNIN SUCCESS PANEL */
 #signin-success-panel {
-	margin-top: 75px;
-	h3 {
-		color: #394045;
-		font-size: 18px;
-		font-weight: 400;
+	margin-top: 39px;
+	.signin-success-title {
+		margin-bottom: 15px;
+		color: $tundora;
+		font-size: 21px;
 	}
-	.big-ghosty {
-		background: url('../../app/images/panel/ghosty_signin.png') no-repeat center center;
-		background-size: auto 73px;
-		height: 115px;
+	.signin-success-email {
+		margin-bottom: 17px;
+		color: $ghosty-blue;
+		font-size: 16px;
+	}
+	.premium-sparkles-icon {
+		margin-bottom: 16px;
+		background: url('../../app/images/panel/premium-sparkles-icon.svg') no-repeat center center;
+		height: 29px;
+	}
+	.signin-premium-benefits {
+		margin: 0 auto 24px auto;
+		width: 442px;
+		color: $tundora;
+		font-size: 16px;
+		font-weight: bold;
+		line-height: 1.75;
 	}
 	p {
+		margin-bottom: 4px;
 		color: #9B9B9B;
-		font-size: 13px;
+		font-size: 16px;
 		font-weight: 300;
-		line-height: 21px;
 	}
-	#view-trackers-button {margin-top: 30px;}
+	.learn-more-button {
+		margin: 0 auto 24px auto;
+		width: 184px;
+		height: 50px;
+		border-radius: 4px;
+		background-image: linear-gradient(104deg, #720174, #00aef0 99%);
+
+		cursor: pointer;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		font-size: 16px;
+		letter-spacing: 0.5px;
+		color: #ffffff;
+
+		&:hover {
+			background-image: linear-gradient(101deg, #A80AAB 19%, #41BCEA 100%);
+		}
+	}
+	.no-thanks-maybe-later {
+		color: $tundora;
+		font-size: 16px;
+		text-decoration: underline;
+	}
 }

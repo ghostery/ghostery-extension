@@ -22,9 +22,10 @@ class ClickOutside extends React.Component {
 		super(props);
 
 		// event bindings
+		const { offsetParent } = this.props;
 		this.getContainer = this.getContainer.bind(this);
 		this.clickHandler = this.clickHandler.bind(this);
-		this.listenerEl = this.props.offsetParent || document;
+		this.listenerEl = offsetParent || document;
 	}
 
 	/**
@@ -55,6 +56,7 @@ class ClickOutside extends React.Component {
 	 * @param  {Object} e    mouseclick event
 	 */
 	clickHandler(e) {
+		const { excludeEl, onClickOutside } = this.props;
 		// Simple polyfill for Event.composedPath
 		if (!('composedPath' in Event.prototype)) {
 			Event.prototype.composedPath = function() {
@@ -76,11 +78,11 @@ class ClickOutside extends React.Component {
 		const ePath = e.path || (e.composedPath && e.composedPath());
 		if (
 			!el.contains(e.target)
-			&& e.target !== this.props.excludeEl
+			&& e.target !== excludeEl
 			&& !el.contains(ePath[0])
-			&& ePath[0] !== this.props.excludeEl
+			&& ePath[0] !== excludeEl
 		) {
-			this.props.onClickOutside(e);
+			onClickOutside(e);
 		}
 	}
 
@@ -89,7 +91,8 @@ class ClickOutside extends React.Component {
 	* @return {ReactComponent}   ReactComponent instance
 	*/
 	render() {
-		return <div ref={this.getContainer}>{ this.props.children }</div>;
+		const { children } = this.props;
+		return <div ref={this.getContainer}>{ children }</div>;
 	}
 }
 

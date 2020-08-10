@@ -14,7 +14,7 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import * as utils from '../../../../utils';
-import * as SetupDoneViewActions from '../SetupDoneViewActions';
+import setSetupComplete from '../SetupDoneViewActions';
 import { SET_SETUP_COMPLETE } from '../../../SetupView/SetupViewConstants';
 
 const middlewares = [thunk];
@@ -39,7 +39,7 @@ describe('app/hub/Views/SetupViews/SetupDoneView actions', () => {
 		const data = testData;
 		const expectedPayload = { data, type: SET_SETUP_COMPLETE };
 
-		return store.dispatch(SetupDoneViewActions.setSetupComplete(data)).then(() => {
+		return store.dispatch(setSetupComplete(data)).then(() => {
 			const actions = store.getActions();
 			expect(actions).toEqual([expectedPayload]);
 		});

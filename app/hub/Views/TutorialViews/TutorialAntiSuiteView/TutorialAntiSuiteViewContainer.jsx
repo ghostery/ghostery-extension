@@ -31,15 +31,16 @@ class TutorialAntiSuiteViewContainer extends Component {
 		props.actions.setTutorialNavigation({
 			activeIndex: index,
 			hrefPrev: `/tutorial/${index - 1}`,
-			hrefNext: '/',
-			hrefDone: '/',
+			hrefNext: '/home',
+			hrefDone: '/home',
 			textPrev: t('previous'),
 			textNext: t('done'),
 			textDone: t('hub_tutorial_exit_flow'),
 		});
 
 		if (sendMountActions) {
-			this.props.actions.setTutorialComplete({
+			const { actions } = this.props;
+			actions.setTutorialComplete({
 				tutorial_complete: true,
 			});
 		}
@@ -50,7 +51,8 @@ class TutorialAntiSuiteViewContainer extends Component {
 	 * @return {JSX} JSX for rendering the Tutorial Anti Suite View of the Hub app
 	 */
 	render() {
-		return <TutorialAntiSuiteView />;
+		const { isAndroid } = this.props;
+		return <TutorialAntiSuiteView isAndroid={isAndroid} />;
 	}
 }
 

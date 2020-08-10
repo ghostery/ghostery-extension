@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import Tooltip from '../Tooltip';
 import globals from '../../../../src/classes/Globals';
@@ -29,18 +30,7 @@ class GhosteryFeature extends React.Component {
 		this.handleClick = this.handleClick.bind(this);
 	}
 
-	/**
-	 * Handles user click on the Ghostery Feature button
-	 */
-	handleClick() {
-		if (this.props.blockingPausedOrDisabled) {
-			return;
-		}
-
-		this.props.handleClick(this.props.type);
-	}
-
-	_getButtonText(sitePolicy, showText, type) {
+	static _getButtonText(sitePolicy, showText, type) {
 		if (!showText) {
 			return '';
 		}
@@ -59,7 +49,7 @@ class GhosteryFeature extends React.Component {
 		}
 	}
 
-	_getTooltipText(sitePolicy, type) {
+	static _getTooltipText(sitePolicy, type) {
 		switch (type) {
 			case 'trust':
 				return (sitePolicy === WHITELISTED ?
@@ -74,7 +64,7 @@ class GhosteryFeature extends React.Component {
 		}
 	}
 
-	_isFeatureActive(type, sitePolicy) {
+	static _isFeatureActive(type, sitePolicy) {
 		switch (type) {
 			case 'trust':
 				return sitePolicy === WHITELISTED;
@@ -83,6 +73,18 @@ class GhosteryFeature extends React.Component {
 			default:
 				return false;
 		}
+	}
+
+	/**
+	 * Handles user click on the Ghostery Feature button
+	 */
+	handleClick() {
+		const { blockingPausedOrDisabled, handleClick, type } = this.props;
+		if (blockingPausedOrDisabled) {
+			return;
+		}
+
+		handleClick(type);
 	}
 
 	render() {
@@ -96,7 +98,7 @@ class GhosteryFeature extends React.Component {
 			type
 		} = this.props;
 
-		const active = this._isFeatureActive(type, sitePolicy);
+		const active = GhosteryFeature._isFeatureActive(type, sitePolicy);
 		// TODO Foundation dependency: button
 		const ghosteryFeatureClassNames = ClassNames(
 			'button',
@@ -120,13 +122,28 @@ class GhosteryFeature extends React.Component {
 			<div className={ghosteryFeatureClassNames} onClick={this.handleClick}>
 				<span className="flex-container align-center-middle full-height">
 					<span className="GhosteryFeatureButton__text">
-						{this._getButtonText(sitePolicy, showText, type)}
+						{GhosteryFeature._getButtonText(sitePolicy, showText, type)}
 					</span>
 				</span>
-				<Tooltip body={this._getTooltipText(sitePolicy, type)} position={tooltipPosition} />
+				<Tooltip body={GhosteryFeature._getTooltipText(sitePolicy, type)} position={tooltipPosition} />
 			</div>
 		);
 	}
 }
+
+GhosteryFeature.propTypes = {
+	handleClick: PropTypes.func.isRequired,
+	type: PropTypes.oneOf(['trust', 'restrict']).isRequired,
+	sitePolicy: PropTypes.oneOf([false, 1, 2]),
+	blockingPausedOrDisabled: PropTypes.bool.isRequired,
+	showText: PropTypes.bool.isRequired,
+	tooltipPosition: PropTypes.string.isRequired,
+	short: PropTypes.bool.isRequired,
+	narrow: PropTypes.bool.isRequired,
+};
+
+GhosteryFeature.defaultProps = {
+	sitePolicy: false,
+};
 
 export default GhosteryFeature;

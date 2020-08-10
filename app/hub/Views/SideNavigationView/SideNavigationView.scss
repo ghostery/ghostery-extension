@@ -126,6 +126,10 @@ a .SideNavigation__menuIcon.home,
 a.disabled.active .SideNavigation__menuIcon.home {
 	background-image: buildIconHome(#ffffff);
 }
+a .SideNavigation__menuIcon.shield,
+a.disabled.active .SideNavigation__menuIcon.shield {
+	background-image: buildIconShield(#ffffff);
+}
 a .SideNavigation__menuIcon.setup,
 a.disabled.active .SideNavigation__menuIcon.setup {
 	background-image: buildIconSetup(#ffffff);
@@ -152,6 +156,9 @@ a.disabled.active .SideNavigation__menuIcon.profile {
 }
 a.disabled .SideNavigation__menuIcon.home {
 	background-image: buildIconHome(#a9b9be);
+}
+a.disabled .SideNavigation__menuIcon.shield {
+	background-image: buildIconShield(#a9b9be);
 }
 a.disabled .SideNavigation__menuIcon.setup {
 	background-image: buildIconSetup(#a9b9be);

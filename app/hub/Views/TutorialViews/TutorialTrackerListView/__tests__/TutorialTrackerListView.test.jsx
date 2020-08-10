@@ -19,14 +19,14 @@ import TutorialTrackerListView from '../TutorialTrackerListView';
 describe('app/hub/Views/TutorialViews/TutorialTrackerListView component', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('tutorial tracker list view is rendered correctly', () => {
-			const component = renderer.create(<TutorialTrackerListView />).toJSON();
+			const component = renderer.create(<TutorialTrackerListView isAndroid={false} />).toJSON();
 			expect(component).toMatchSnapshot();
 		});
 	});
 
 	describe('Shallow snapshot tests rendered with Enzyme', () => {
 		test('the happy path of the component', () => {
-			const component = shallow(<TutorialTrackerListView />);
+			const component = shallow(<TutorialTrackerListView isAndroid={false} />);
 			expect(component.find('.TutorialTrackerListView').length).toBe(1);
 			expect(component.find('.TutorialTrackerListView__image').length).toBe(1);
 		});

@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -16,6 +16,57 @@ import { addToArray, removeFromArray } from '../../panel/utils/utils';
 
 function getPageHostFromSummary(summary) {
 	return summary.pageHost.toLowerCase().replace(/^(http[s]?:\/\/)?(www\.)?/, '');
+}
+
+export function updateSitePolicy({ actionData, state }) {
+	const { type, pageHost } = actionData;
+	const { summary } = state;
+	const { site_blacklist, site_whitelist } = summary;
+
+	const host = pageHost.replace(/^www\./, '');
+
+	let updated_blacklist = site_blacklist.slice(0);
+	let updated_whitelist = site_whitelist.slice(0);
+
+	if (type === 'whitelist') {
+		if (site_blacklist.includes(host)) {
+			// remove from backlist if site is whitelisted
+			updated_blacklist = removeFromArray(site_blacklist, site_blacklist.indexOf(host));
+		}
+		if (!site_whitelist.includes(host)) {
+			// add to whitelist
+			updated_whitelist = addToArray(site_whitelist, host);
+		} else {
+			// remove from whitelist
+			updated_whitelist = removeFromArray(site_whitelist, site_whitelist.indexOf(host));
+		}
+	} else {
+		if (site_whitelist.includes(host)) {
+			// remove from whitelisted if site is blacklisted
+			updated_whitelist = removeFromArray(site_whitelist, site_whitelist.indexOf(host));
+		}
+		if (!site_blacklist.includes(host)) {
+			// add to blacklist
+			updated_blacklist = addToArray(site_blacklist, host);
+		} else {
+			// remove from blacklist
+			updated_blacklist = removeFromArray(site_blacklist, site_blacklist.indexOf(host));
+		}
+	}
+
+	// Send Message to Background
+	sendMessage('setPanelData', {
+		site_whitelist: updated_whitelist,
+		site_blacklist: updated_blacklist,
+	});
+
+	// Update State for PanelAndroid UI
+	return {
+		summary: {
+			site_whitelist: updated_whitelist,
+			site_blacklist: updated_blacklist,
+		},
+	};
 }
 
 export function handleTrustButtonClick({ state }) {
@@ -101,24 +152,24 @@ export function handleRestrictButtonClick({ state }) {
 	};
 }
 
-export function handlePauseButtonClick({ state }) {
-	const { summary } = state;
-	const currentState = summary.paused_blocking;
+export function handlePauseButtonClick({ actionData }) {
+	const { paused_blocking, time } = actionData;
 
 	sendMessage('setPanelData', {
-		paused_blocking: !currentState,
+		paused_blocking: time || paused_blocking,
 	});
 
 	return {
 		summary: {
-			paused_blocking: !currentState,
-		}
+			paused_blocking,
+			paused_blocking_timeout: time,
+		},
 	};
 }
 
 export function cliqzFeatureToggle({ actionData }) {
 	const { currentState, type } = actionData;
-	const key = `enable_${type}`;
+	const key = type;
 
 	sendMessage('setPanelData', {
 		[key]: !currentState,

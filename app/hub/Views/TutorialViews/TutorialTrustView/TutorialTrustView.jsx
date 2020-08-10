@@ -12,13 +12,14 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * A Functional React component for rendering the Tutorial Trust and Restrict View
  * @return {JSX} JSX for rendering the Tutorial Trust and Restrict View of the Hub app
  * @memberof HubComponents
  */
-const TutorialTrustView = () => (
+const TutorialTrustView = ({ isAndroid }) => (
 	<div className="TutorialTrustView TutorialView--mediumFlexColumn row align-center-middle">
 		<div className="columns small-10 small-offset-1 medium-8 large-6">
 			<div className="TutorialView__imageTitle">
@@ -26,17 +27,21 @@ const TutorialTrustView = () => (
 			</div>
 			<img
 				className="TutorialTrustView__image trustrestrict-simple"
-				src="/app/images/hub/tutorial/trustrestrict-simple.png"
+				src={`/app/images/hub/tutorial/trustrestrict-simple${isAndroid ? '-android' : ''}.png`}
 				alt={t('simple_view')}
 			/>
-			<div className="TutorialView__imageTitle">
-				{t('detailed_view')}
-			</div>
-			<img
-				className="TutorialTrustView__image trustrestrict-detailed"
-				src="/app/images/hub/tutorial/trustrestrict-detailed.png"
-				alt={t('detailed_view')}
-			/>
+			{ !isAndroid && (
+				<div>
+					<div className="TutorialView__imageTitle">
+						{t('detailed_view')}
+					</div>
+					<img
+						className="TutorialTrustView__image trustrestrict-detailed"
+						src="/app/images/hub/tutorial/trustrestrict-detailed.png"
+						alt={t('detailed_view')}
+					/>
+				</div>
+			)}
 		</div>
 		<div className="columns small-12 medium-8 large-4">
 			<div className="TutorialView__title">
@@ -63,6 +68,8 @@ const TutorialTrustView = () => (
 	</div>
 );
 
-// No need for PropTypes. The SideNavigationViewContainer has no props.
+TutorialTrustView.propTypes = {
+	isAndroid: PropTypes.bool.isRequired
+};
 
 export default TutorialTrustView;

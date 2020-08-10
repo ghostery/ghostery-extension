@@ -27,7 +27,8 @@ const { sendMessage } = msg;
  * Use to call init to initialize functionality
  * @var  {Object} initialized to an object with init method as its property
  */
-const PageInfo = (function(window, document) {
+const PageInfo = (function(window, doc) {
+	const document = doc;
 	let state = document.readyState;
 	/**
 	 * Calculate page domain and latency. Send pageInfo to background.js.

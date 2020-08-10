@@ -16,13 +16,12 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-/* eslint no-use-before-define: 0 */
-
 import globals from './Globals';
 import { prefsGet } from '../utils/common';
 
 const { IS_CLIQZ, BROWSER_INFO } = globals;
 const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
+const IS_ANDROID = (BROWSER_INFO.os === 'android');
 
 /**
  * Class for handling user configuration properties synchronously.
@@ -37,7 +36,7 @@ const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
 class ConfData {
 	constructor() {
 		// language does not get persisted
-		this.language = this._getDefaultLanguage();
+		this.language = ConfData._getDefaultLanguage();
 		this.SYNC_SET = new Set(globals.SYNC_ARRAY);
 	}
 
@@ -47,19 +46,20 @@ class ConfData {
 	 * This method is called once on startup.
 	 */
 	init() {
-		return prefsGet().then((data) => {
+		return prefsGet().then((d) => {
+			const data = { ...d };
 			const nowTime = Number(new Date().getTime());
+			const _setProp = (name, value) => {
+				if (!globals.INIT_COMPLETE) {
+					globals.initProps[name] = value;
+				}
+			};
 			const _initProperty = (name, value) => {
 				if (data[name] === null || typeof (data[name]) === 'undefined') {
 					data[name] = value;
 					_setProp(name, value);
 				}
 				this[name] = data[name];
-			};
-			const _setProp = (name, value) => {
-				if (!globals.INIT_COMPLETE) {
-					globals.initProps[name] = value;
-				}
 			};
 
 			// Transfer legacy previous version property to new name
@@ -112,10 +112,11 @@ class ConfData {
 			_initProperty('enable_click2play_social', true);
 			_initProperty('enable_human_web', !IS_CLIQZ && !IS_FIREFOX);
 			_initProperty('enable_metrics', false);
-			_initProperty('enable_offers', !IS_CLIQZ && !IS_FIREFOX);
+			_initProperty('enable_offers', !IS_CLIQZ && !IS_FIREFOX && !IS_ANDROID);
 			_initProperty('enable_smart_block', true);
 			_initProperty('expand_all_trackers', true);
 			_initProperty('hide_alert_trusted', false);
+			_initProperty('hub_promo_variant', 'not_yet_set');
 			_initProperty('ignore_first_party', true);
 			_initProperty('import_callout_dismissed', true);
 			_initProperty('insights_promo_modal_last_seen', 0);
@@ -134,7 +135,7 @@ class ConfData {
 			_initProperty('rewards_opted_in', false); // Migrated to Cliqz pref myoffrz.opted_in
 			_initProperty('settings_last_imported', 0);
 			_initProperty('settings_last_exported', 0);
-			_initProperty('show_alert', BROWSER_INFO.os !== 'android' && !IS_FIREFOX);
+			_initProperty('show_alert', !IS_ANDROID);
 			_initProperty('show_badge', true);
 			_initProperty('show_cmp', true);
 			_initProperty('show_tracker_urls', true);
@@ -165,7 +166,7 @@ class ConfData {
 		});
 	}
 
-	_getDefaultLanguage() {
+	static _getDefaultLanguage() {
 		const SUPPORTED_LANGUAGES = {
 			de: 'Deutsch',
 			en: 'English',

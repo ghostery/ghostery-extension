@@ -19,14 +19,14 @@ import TutorialBlockingView from '../TutorialBlockingView';
 describe('app/hub/Views/TutorialViews/TutorialBlockingView component', () => {
 	describe('Snapshot tests with react-test-renderer', () => {
 		test('tutorial blocking view is rendered correctly', () => {
-			const component = renderer.create(<TutorialBlockingView />).toJSON();
+			const component = renderer.create(<TutorialBlockingView isAndroid={false} />).toJSON();
 			expect(component).toMatchSnapshot();
 		});
 	});
 
 	describe('Shallow snapshot tests rendered with Enzyme', () => {
 		test('the happy path of the component', () => {
-			const component = shallow(<TutorialBlockingView />);
+			const component = shallow(<TutorialBlockingView isAndroid={false} />);
 			expect(component.find('.TutorialBlockingView').length).toBe(1);
 			expect(component.find('.TutorialBlockingView__image').length).toBe(2);
 			expect(component.find('.TutorialView__keyText').length).toBe(3);

@@ -24,7 +24,7 @@ import { sendPing } from '../AppView/AppViewActions';
  * @memberof TutorialContainers
  */
 const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(Object.assign({}, { sendPing }), dispatch),
+	actions: bindActionCreators({ sendPing }, dispatch),
 });
 
 export default connect(null, mapDispatchToProps)(ProductsViewContainer);

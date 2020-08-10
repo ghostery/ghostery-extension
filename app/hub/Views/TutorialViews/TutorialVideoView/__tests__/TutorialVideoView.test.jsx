@@ -29,7 +29,7 @@ describe('app/hub/Views/TutorialViews/TutorialVideoView component', () => {
 			const component = shallow(<TutorialVideoView />);
 			expect(component.find('.TutorialVideoView__videoContainer').length).toBe(1);
 			expect(component.find('video').length).toBe(1);
-			expect(component.find('source').length).toBe(3);
+			expect(component.find('source').length).toBe(2);
 		});
 	});
 });

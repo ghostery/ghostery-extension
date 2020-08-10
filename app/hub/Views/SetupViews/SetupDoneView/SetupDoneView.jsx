@@ -20,7 +20,7 @@ import { NavLink } from 'react-router-dom';
  * @return {JSX} JSX for rendering the Setup Done View of the Hub app
  * @memberof HubComponents
  */
-const SetupDoneView = props => (
+const SetupDoneView = ({ features }) => (
 	<div className="row align-center">
 		<div className="columns small-12 large-10">
 			<div>
@@ -33,7 +33,7 @@ const SetupDoneView = props => (
 				</div>
 
 				<div className="SetupDone__featureList row align-spaced flex-container">
-					{props.features.map((feature) => {
+					{features.map((feature) => {
 						const iconClassNames = `SetupDone__featureIcon feature-${feature.id}`;
 
 						return (

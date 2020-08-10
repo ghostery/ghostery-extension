@@ -14,7 +14,7 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import * as utils from '../../../../utils';
-import * as SetupHumanWebViewActions from '../SetupHumanWebViewActions';
+import setHumanWeb from '../SetupHumanWebViewActions';
 import { SET_HUMAN_WEB } from '../../../SetupView/SetupViewConstants';
 
 const middlewares = [thunk];
@@ -39,7 +39,7 @@ describe('app/hub/Views/SetupViews/SetupHumanWebView actions', () => {
 		const data = testData;
 		const expectedPayload = { data, type: SET_HUMAN_WEB };
 
-		return store.dispatch(SetupHumanWebViewActions.setHumanWeb(data)).then(() => {
+		return store.dispatch(setHumanWeb(data)).then(() => {
 			const actions = store.getActions();
 			expect(actions).toEqual([expectedPayload]);
 		});

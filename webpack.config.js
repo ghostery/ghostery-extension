@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -47,6 +47,7 @@ module.exports = {
 		account_pages: [`${CONTENT_SCRIPTS_DIR}/account_pages.js`],
 		background: [`${SRC_DIR}/background.js`],
 		blocked_redirect: [`${CONTENT_SCRIPTS_DIR}/blocked_redirect.js`],
+		checkout_pages: [`${CONTENT_SCRIPTS_DIR}/checkout_pages.js`],
 		click_to_play: [`${CONTENT_SCRIPTS_DIR}/click_to_play.js`],
 		content_script_bundle: [`${CONTENT_SCRIPTS_DIR}/content_script_bundle.js`],
 		ghostery_dot_com: [`${CONTENT_SCRIPTS_DIR}/ghostery_dot_com.js`],

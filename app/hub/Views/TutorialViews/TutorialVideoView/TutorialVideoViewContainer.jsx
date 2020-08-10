@@ -32,7 +32,7 @@ class TutorialVideoViewContainer extends Component {
 			activeIndex: index,
 			hrefPrev: false,
 			hrefNext: `/tutorial/${index + 1}`,
-			hrefDone: '/',
+			hrefDone: '/home',
 			textPrev: false,
 			textNext: t('next'),
 			textDone: t('hub_tutorial_exit_flow'),

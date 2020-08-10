@@ -196,7 +196,7 @@ const StatsView = (props) => {
 							<I18nWithLink cssClasses="modal-title-text" value="panel_stats_pitch_modal_text" />
 						</div>
 						<div className="modal-buttons-container">
-							<div className="modal-filled-button" onClick={subscribe}>{t('Get_Ghostery_Plus_bang')}</div>
+							<div className="modal-filled-button" onClick={subscribe}>{t('get_ghostery_plus_bang')}</div>
 						</div>
 						{ !loggedIn && (
 							<div className="modal-text-container">

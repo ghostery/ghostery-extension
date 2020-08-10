@@ -650,6 +650,9 @@
 	"panel_signin_success": {
 		"message": "Je bent nu ingelogd als "
 	},
+	"panel_signin_premium_benefits": {
+		"message": "Je account ontgrendelt een gratis proefperiode van onze Premium-voordelen, waaronder VPN-service en apparaatbrede privacybescherming, beschikbaar via onze Ghostery Midnight-app."
+	},
 	"panel_view_trackers": {
 		"message": "Trackers bekijken"
 	},
@@ -701,8 +704,8 @@
 	"panel_detail_menu_rewards_title": {
 		"message": "Rewards"
 	},
-	"panel_detail_menu_premium_title": {
-		"message": "Premium"
+	"panel_detail_learn_more": {
+	  "message": "Meer Weten"
 	},
 	"panel_detail_history_title": {
 		"message": "Geschiedenis"
@@ -730,9 +733,6 @@
 	},
 	"panel_detail_rewards_off": {
 		"message": "Ghostery Rewards staat UIT"
-	},
-	"panel_detail_premium_title": {
-		"message": "Ghostery Premium"
 	},
 	"panel_detail_premium_text": {
 		"message": "Functie binnenkort mogelijk."
@@ -1237,6 +1237,9 @@
 	"hub_side_navigation_home": {
 		"message": "Start"
 	},
+	"hub_side_navigation_upgrade_plan": {
+		"message": "Abonnement upgraden"
+	},
 	"hub_side_navigation_tutorial": {
 		"message": "Bekijk een Tutorial"
 	},
@@ -1294,8 +1297,89 @@
 	"hub_home_feature_setup_button_alt": {
 		"message": "Aangepaste instelling voltooid"
 	},
-	"hub_home_feature_supporter_text": {
-		"message": "Upgrade naar Ghostery Plus en ontgrendel speciale opties."
+	"hub_home_plus_upgrade_text": {
+		"message": "Kies voor meer dan standaardprivacy. Upgrade je Ghostery-abonnement voor bescherming op apparaatniveau, VPN-toegang en meer!"
+	},
+	"hub_home_plus_upgrade_button_text": {
+		"message": "Upgrade nu"
+	},
+	"hub_home_plus_full_protection": {
+		"message": "Je wordt volledig beschermd!"
+	},
+	"hub_upgrade_your": {
+		"message": "Upgrade je"
+	},
+	"hub_upgrade_protection_plan": {
+		"message": "beschermingsabonnement"
+	},
+	"hub_upgrade_yearly": {
+		"message": "Jaarlijks"
+	},
+	"hub_upgrade_monthly": {
+		"message": "Maandelijks"
+	},
+	"hub_upgrade_plan_free": {
+		"message": "Gratis"
+	},
+	"hub_upgrade_already_protected": {
+		"message": "Wordt al beschermd"
+	},
+	"hub_upgrade_basic_protection": {
+		"message": "Basisbescherming"
+	},
+	"hub_upgrade_basic_browser_protection": {
+		"message": "Basisbescherming voor browsers"
+	},
+	"hub_upgrade_advanced_device_protection": {
+		"message": "Geavanceerde apparaatbescherming"
+	},
+	"hub_upgrade_maximum_browser_protection": {
+		"message": "Maximale browserbescherming"
+	},
+	"hub_upgrade_to": {
+		"message": "Upgraden naar"
+	},
+	"hub_upgrade_scroll_down": {
+		"message": "Bekijk de volledige lijst van functies"
+	},
+	"hub_upgrade_midnight_note": {
+		"message": "Ghostery Midnight moet geïnstalleerd zijn"
+	},
+	"hub_upgrade_additional_protection": {
+		"message": "Aanvullende bescherming"
+	},
+	"hub_upgrade_browser_tracker_blocking": {
+		"message": "Trackers blokkeren in browser"
+	},
+	"hub_upgrade_browser_ad_blocking": {
+		"message": "Ad Blocking in browser"
+	},
+	"hub_upgrade_custom_blocking_preferences": {
+		"message": "Aangepaste blokkeringsvoorkeuren"
+	},
+	"hub_upgrade_extension_themes": {
+		"message": "Uitbreidingsthema's"
+	},
+	"hub_upgrade_historical_extension_stats": {
+		"message": "Historische uitbreidingsstatistieken"
+	},
+	"hub_upgrade_application_tracker_blocking": {
+		"message": "Trackers blokkeren in toepassing"
+	},
+	"hub_upgrade_application_ad_blocking": {
+		"message": "Ad Blocking in toepassing"
+	},
+	"hub_upgrade_no_vpn_logs": {
+		"message": "Geen VPN-logboeken"
+	},
+	"hub_upgrade_leak_protection": {
+		"message": "Bescherming tegen lekken"
+	},
+	"hub_upgrade_physical_servers": {
+		"message": "Fysieke servers"
+	},
+	"hub_upgrade_unlimited_bandwidth": {
+		"message": "Onbeperkte bandbreedte"
 	},
 	"hub_setup_page_title": {
 		"message": "Ghostery Instellen"
@@ -2204,9 +2288,6 @@
 	"ghostery_basic": {
 		"message": "Basic"
 	},
-	"ghostery_plus": {
-		"message": "Ghostery Plus"
-	},
 	"dollar_sign": {
 		"message": "&#36;"
 	},
@@ -2215,6 +2296,9 @@
 	},
 	"per_month": {
 		"message": "per maand"
+	},
+	"per_year": {
+		"message": "per jaar"
 	},
 	"faster_cleaner_browsing": {
 		"message": "Sneller, schoner browsen",
@@ -2412,5 +2496,8 @@
 	},
 	"no_thanks_continue_with_basic": {
 		"message": "Nee bedankt, doorgaan met Basic"
+	},
+	"too_many_password_resets_text": {
+		"message": "Te veel verzoeken voor wachtwoord opnieuw instellen. Probeer het over een uur nog eens."
 	}
 }

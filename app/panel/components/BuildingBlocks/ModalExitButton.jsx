@@ -1,4 +1,3 @@
-
 /**
  * Modal Exit Button Component
  *

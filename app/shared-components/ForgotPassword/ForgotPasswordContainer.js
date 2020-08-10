@@ -26,7 +26,7 @@ import { resetPassword } from '../../Account/AccountActions';
  * @todo  We are not using ownProps, so we better not specify it explicitly,
  * in this case it won't be passed by React (see https://github.com/reactjs/react-redux/blob/master/docs/api.md).
  */
-const mapStateToProps = () => Object.assign({});
+const mapStateToProps = () => ({});
 /**
  * Bind ForgotPassword component action creators using Redux's bindActionCreators
  * @memberOf PanelContainers

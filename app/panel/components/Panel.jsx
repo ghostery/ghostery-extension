@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -14,11 +14,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Header from '../containers/HeaderContainer';
-import PromoModalContainer from '../../shared-components/PromoModal/PromoModalContainer';
-import { ThemeContext } from '../contexts/ThemeContext';
-import { DynamicUIPortContext } from '../contexts/DynamicUIPortContext';
+import PromoModal from '../../shared-components/PromoModal';
+import ThemeContext from '../contexts/ThemeContext';
+import DynamicUIPortContext from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import { setTheme } from '../utils/utils';
+import { log } from '../../../src/utils/common';
 
 const INSIGHTS = 'insights';
 const PLUS = 'plus';
@@ -42,6 +43,7 @@ class Panel extends React.Component {
 	 * Lifecycle event
 	 */
 	componentDidMount() {
+		const { actions } = this.props;
 		sendMessage('ping', 'engaged');
 		this._dynamicUIDataInitialized = false;
 		this._dynamicUIPort = chrome.runtime.connect({ name: 'dynamicUIPanelPort' });
@@ -50,10 +52,12 @@ class Panel extends React.Component {
 
 			const { body } = msg;
 
-			if (body.panel) {
+			if (body.error) {
+				log(`Error: ${body.error}`);
+			} else if (body.panel) {
 				this._initializeData(body);
 			} else if (this._dynamicUIDataInitialized) {
-				this.props.actions.updatePanelData(body);
+				actions.updatePanelData(body);
 			}
 		});
 	}
@@ -71,7 +75,8 @@ class Panel extends React.Component {
 	 * @todo  Why do we need explicit argument here?
 	 */
 	clickReloadBanner() {
-		sendMessage('reloadTab', { tab_id: +this.props.tab_id });
+		const { tab_id } = this.props;
+		sendMessage('reloadTab', { tab_id: +tab_id });
 		window.close();
 	}
 
@@ -81,7 +86,7 @@ class Panel extends React.Component {
 	 * @todo  Why do we need explicit argument here?
 	 */
 	closeNotification() {
-		const { notificationClasses } = this.props;
+		const { actions, notificationClasses } = this.props;
 		let banner_status_name = '';
 
 		if (notificationClasses.includes('hideous')) {
@@ -92,7 +97,7 @@ class Panel extends React.Component {
 			banner_status_name = 'temp_banner_status';
 		}
 
-		this.props.actions.closeNotification({
+		actions.closeNotification({
 			banner_status_name,
 		});
 	}
@@ -103,17 +108,18 @@ class Panel extends React.Component {
 	 * @param  {Object} event
 	 */
 	filterTrackers(event) {
+		const { actions, is_expert } = this.props;
 		const classes = event.target.className;
-		if (!this.props.is_expert) {
+		if (!is_expert) {
 			return;
 		}
 
 		if (classes.includes('slow-insecure')) {
-			this.props.actions.filterTrackers({ type: 'trackers', name: 'warning-slow-insecure' });
+			actions.filterTrackers({ type: 'trackers', name: 'warning-slow-insecure' });
 		} else if (classes.includes('compatibility')) {
-			this.props.actions.filterTrackers({ type: 'trackers', name: 'warning-compatibility' });
+			actions.filterTrackers({ type: 'trackers', name: 'warning-compatibility' });
 		} else {
-			this.props.actions.filterTrackers({ type: 'trackers', name: 'warning' });
+			actions.filterTrackers({ type: 'trackers', name: 'warning' });
 		}
 
 		this.closeNotification();
@@ -125,6 +131,7 @@ class Panel extends React.Component {
 	 */
 
 	_initializeData(payload) {
+		const { actions, history } = this.props;
 		this._dynamicUIDataInitialized = true;
 
 		const { panel, summary, blocking } = payload;
@@ -132,19 +139,19 @@ class Panel extends React.Component {
 
 		setTheme(document, current_theme, account);
 
-		this.props.actions.updatePanelData(panel);
-		this.props.actions.updateSummaryData(summary);
-		if (blocking) { this.props.actions.updateBlockingData(blocking); }
+		actions.updatePanelData(panel);
+		actions.updateSummaryData(summary);
+		if (blocking) { actions.updateBlockingData(blocking); }
 
 		if (panel.is_expert) {
 			// load Detail component
-			this.props.history.push('/detail');
+			history.push('/detail');
 		}
 
 		// persist whitelist/blacklist/paused_blocking notifications in the event that the
 		// panel is opened without a page reload
 		if (Object.keys(panel.needsReload.changes).length) {
-			this.props.actions.showNotification({
+			actions.showNotification({
 				updated: 'init',
 				reload: true
 			});
@@ -156,22 +163,23 @@ class Panel extends React.Component {
 	 * @return {JSX} JSX for the notification callout
 	 */
 	renderNotification() {
-		const needsReload = !!Object.keys(this.props.needsReload.changes).length;
+		const { needsReload, notificationText, notificationFilter } = this.props;
+		const needsReloadBool = !!Object.keys(needsReload.changes).length;
 
-		if (this.props.notificationText) {
+		if (notificationText) {
 			return (
 				<span>
-					<span key="0" dangerouslySetInnerHTML={{ __html: this.props.notificationText || t('panel_needs_reload') }} />
-					{this.props.notificationText === t('promos_turned_off_notification') && (
+					<span key="0" dangerouslySetInnerHTML={{ __html: notificationText || t('panel_needs_reload') }} />
+					{notificationText === t('promos_turned_off_notification') && (
 						<NavLink className="settings-link" to="/settings/notifications" onClick={this.closeNotification}>{t('settings')}</NavLink>
 					)}
-					{needsReload && (
+					{needsReloadBool && (
 						<div key="1" className="needs-reload-link" onClick={this.clickReloadBanner}>{ t('alert_reload') }</div>
 					)}
 				</span>
 			);
 		}
-		if (needsReload) {
+		if (needsReloadBool) {
 			return (
 				<span>
 					<span key="0">{t('panel_needs_reload')}</span>
@@ -179,18 +187,18 @@ class Panel extends React.Component {
 				</span>
 			);
 		}
-		if (this.props.notificationFilter === 'slow') {
+		if (notificationFilter === 'slow') {
 			return (
 				<span>
-					<span key="0" className="filter-link slow-insecure" onClick={this.filterTrackers} dangerouslySetInnerHTML={{ __html: this.props.notificationText }} />
+					<span key="0" className="filter-link slow-insecure" onClick={this.filterTrackers} dangerouslySetInnerHTML={{ __html: notificationText }} />
 					<span key="1">{ t('panel_tracker_slow_non_secure_end') }</span>
 				</span>
 			);
 		}
-		if (this.props.notificationFilter === 'compatibility') {
+		if (notificationFilter === 'compatibility') {
 			return (
 				<span>
-					<span key="0" className="filter-link compatibility" onClick={this.filterTrackers} dangerouslySetInnerHTML={{ __html: this.props.notificationText }} />
+					<span key="0" className="filter-link compatibility" onClick={this.filterTrackers} dangerouslySetInnerHTML={{ __html: notificationText }} />
 					<span key="1">{ t('panel_tracker_breaking_page_end') }</span>
 				</span>
 			);
@@ -242,7 +250,7 @@ class Panel extends React.Component {
 		sendMessage('promoModals.sawPremiumPromo', {});
 
 		return (
-			<PromoModalContainer
+			<PromoModal
 				type={PREMIUM}
 				location="panel"
 				isPlus={this._hasPlusAccess()}
@@ -263,7 +271,7 @@ class Panel extends React.Component {
 		sendMessage('ping', 'promo_modals_show_insights');
 
 		return (
-			<PromoModalContainer
+			<PromoModal
 				type={INSIGHTS}
 				show
 			/>
@@ -273,7 +281,7 @@ class Panel extends React.Component {
 	/**
 	 * @returns {null|JSX}
 	 * @private
-	 * Renders the Plus promo modal if the user is not already an  subscriber
+	 * Renders the Plus promo modal if the user is not already a Plus subscriber
 	 */
 	_renderPlusPromoModal = () => {
 		if (this._hasPlusAccess() || this._hasPremiumAccess()) { return null; }
@@ -282,7 +290,7 @@ class Panel extends React.Component {
 
 		const { loggedIn } = this.props;
 		return (
-			<PromoModalContainer
+			<PromoModal
 				type={PLUS}
 				loggedIn={loggedIn}
 				show
@@ -307,10 +315,6 @@ class Panel extends React.Component {
 			return this._renderInsightsPromoModal();
 		}
 
-		if (promoModal === 'plus') {
-			return this._renderPlusPromoModal();
-		}
-
 		if (promoModal === 'premium') {
 			return this._renderPremiumPromoModal();
 		}
@@ -323,18 +327,21 @@ class Panel extends React.Component {
 	 * @return {JSX} JSX for rendering the Panel
 	 */
 	render() {
+		const {
+			initialized, notificationShown, notificationClasses, children
+		} = this.props;
 		// this prevents double rendering when waiting for getPanelData() to finish
-		if (!this.props.initialized) {
+		if (!initialized) {
 			return null;
 		}
 
-		const notificationText = this.props.notificationShown && this.renderNotification();
+		const notificationText = notificationShown && this.renderNotification();
 		const { current_theme } = this.props;
 		return (
 			<div id="panel">
 				{this._renderPromoModal()}
 				<div className="callout-container">
-					<div className={`${(!notificationText ? 'hide ' : '') + this.props.notificationClasses} callout`}>
+					<div className={`${(!notificationText ? 'hide ' : '') + notificationClasses} callout`}>
 						<svg onClick={this.closeNotification} width="15px" height="15px" viewBox="0 0 15 15" className="close-button">
 							<g>
 								<path strokeWidth="3" strokeLinecap="round" d="M3,3 L12,12 M3,12 L12,3" />
@@ -348,7 +355,7 @@ class Panel extends React.Component {
 				<Header />
 				<ThemeContext.Provider value={current_theme}>
 					<DynamicUIPortContext.Provider value={this._dynamicUIPort}>
-						{ this.props.children }
+						{ children }
 					</DynamicUIPortContext.Provider>
 				</ThemeContext.Provider>
 
