@@ -399,7 +399,7 @@ OverviewTab.propTypes = {
 		}).isRequired,
 	}).isRequired,
 	summary: PropTypes.shape({
-		categories: PropTypes.array.isRequired,
+		categories: PropTypes.arrayOf.isRequired,
 		trackerCounts: PropTypes.shape({
 			allowed: PropTypes.number.isRequired,
 			blocked: PropTypes.number.isRequired,
