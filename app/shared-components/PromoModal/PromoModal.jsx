@@ -69,10 +69,10 @@ class PromoModal extends React.Component {
 		let url;
 		switch (product) {
 			case PLUS:
-				url = `https://checkout.${DOMAIN}.com/plus?utm_source=gbe&utm_campaign=${utm_campaign}`;
+				url = `https://www.ghostery.com/products/plus?utm_source=gbe&utm_campaign=${utm_campaign}`;
 				break;
 			case PREMIUM:
-				url = `https://ghostery.com/thanks-for-downloading-midnight?utm_source=gbe&utm_campaign=${utm_campaign}`;
+				url = `https://www.ghostery.com/midnight?utm_source=gbe&utm_campaign=${utm_campaign}`;
 				break;
 			case INSIGHTS:
 				sendMessage('ping', 'promo_modals_insights_upgrade_cta');
