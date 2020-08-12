@@ -67,7 +67,7 @@ const PremiumPromoModalContent = (props) => {
 						</div>
 						<div className="PremiumPromoModal__feature">
 							<span className="PremiumPromoModal__checked-circle-icon" />
-							<div className="PremiumPromoModal__feature-text" dangerouslySetInnerHTML={{ __html: t('seven_day_free_trial') }} />
+							<div className="PremiumPromoModal__feature-text" dangerouslySetInnerHTML={{ __html: t('seven_day_free_trial_with_ghostery_account') }} />
 						</div>
 					</div>
 				</div>
