@@ -2512,11 +2512,8 @@
 	"try_ghostery_midnight": {
 		"message": "Try Ghostery Midnight"
 	},
-	"seven_day_free_trial_with_ghostery_account": {
-		"message": "7-day free trial with Ghostery account"
-	},
-	"seven_day_free_trial_then": {
-		"message": "7-day free trial then &#36;11.99/month"
+	"seven_day_free_trial": {
+		"message": "7-day free trial"
 	},
 	"spring_is_here": {
 		"message": "Spring is here!"
