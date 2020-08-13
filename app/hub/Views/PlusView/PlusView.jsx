@@ -97,7 +97,7 @@ class PlusView extends Component {
 				</div>
 				<div className="PlusView__manifestoContainer">
 					<div className="PlusView__manifestoBackground row align-center">
-						<div dangerouslySetInnerHTML={ {__html: t('hub_supporter_manifesto')} } className="PlusView__manifestoText columns small-12 medium-10 large-8 text-center" />
+						<div dangerouslySetInnerHTML={{ __html: t('hub_supporter_manifesto') }} className="PlusView__manifestoText columns small-12 medium-10 large-8 text-center" />
 					</div>
 				</div>
 				<div className="PlusView--addPaddingTop PlusView--addPaddingBottom">
