@@ -23,7 +23,7 @@ import { sendMessage } from '../../panel/utils/msg';
 import globals from '../../../src/classes/Globals';
 import ModalExitButton from '../../panel/components/BuildingBlocks/ModalExitButton';
 
-const DOMAIN = globals.DEBUG ? 'ghosterystage' : 'ghostery';
+const { GHOSTERY_ROOT_DOMAIN } = globals;
 const INSIGHTS = 'insights';
 const PLUS = 'plus';
 const PREMIUM = 'premium';
@@ -69,14 +69,14 @@ class PromoModal extends React.Component {
 		let url;
 		switch (product) {
 			case PLUS:
-				url = `https://www.ghostery.com/products/plus?utm_source=gbe&utm_campaign=${utm_campaign}`;
+				url = `https://www.${GHOSTERY_ROOT_DOMAIN}/products/plus?utm_source=gbe&utm_campaign=${utm_campaign}`;
 				break;
 			case PREMIUM:
-				url = `https://www.ghostery.com/midnight?utm_source=gbe&utm_campaign=${utm_campaign}`;
+				url = `https://www.${GHOSTERY_ROOT_DOMAIN}/midnight?utm_source=gbe&utm_campaign=${utm_campaign}`;
 				break;
 			case INSIGHTS:
 				sendMessage('ping', 'promo_modals_insights_upgrade_cta');
-				url = `https://checkout.${DOMAIN}.com/insights?utm_source=gbe&utm_campaign=${utm_campaign}`;
+				url = `https://checkout.${GHOSTERY_ROOT_DOMAIN}/insights?utm_source=gbe&utm_campaign=${utm_campaign}`;
 				break;
 			default:
 		}
