@@ -76,7 +76,7 @@ class PromoModal extends React.Component {
 				break;
 			case INSIGHTS:
 				sendMessage('ping', 'promo_modals_insights_upgrade_cta');
-				url = `${CHECKOUT_BASE_URL}/insights/?utm_source=gbe&utm_campaign=${utm_campaign}`;
+				url = `${GHOSTERY_WEBSITE_BASE_URL}/insights/?utm_source=gbe&utm_campaign=${utm_campaign}`;
 				break;
 			default:
 		}
