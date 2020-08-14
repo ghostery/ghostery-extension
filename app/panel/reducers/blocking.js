@@ -83,18 +83,18 @@ const _updateTrackerTrustRestrict = (state, action) => {
 	updated_site_specific_unblocks = updateObject(siteSpecificUnblocks, pageHost, pageUnblocks);
 
 	// Site specific blocking
-	if (msg.restrict) {
+	if (!msg.trust) {
 		if (!pageBlocks.includes(app_id)) {
 			pageBlocks.push(app_id);
 		}
-	} else if (pageBlocks.includes(app_id)) {
+	} else
+	if (pageBlocks.includes(app_id)) {
 		pageBlocks.splice(pageBlocks.indexOf(app_id), 1);
 	}
 	updated_site_specific_blocks = updateObject(siteSpecificBlocks, pageHost, pageBlocks);
 
 	// update tracker category for site-specific blocking
 	const updated_category = updated_categories[updated_categories.findIndex(item => item.id === msg.cat_id)];
-
 	updated_category.trackers.forEach((trackerEl) => {
 		if (trackerEl.shouldShow) {
 			if (trackerEl.id === app_id) {
@@ -216,7 +216,12 @@ export default (state = initialState, action) => {
 		}
 		case UPDATE_TRACKER_BLOCKED: {
 			const updated = updateTrackerBlocked(state, action);
-			return { ...state, ...updated };
+			const other = _updateTrackerTrustRestrict(state, action);
+			const mix = {
+				...updated,
+				...other
+			};
+			return { ...state, ...mix };
 		}
 		case TOGGLE_EXPAND_ALL: {
 			const updated = toggleExpandAll(state, action);

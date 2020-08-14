@@ -31,7 +31,7 @@ export const renderKnownTrackerButtons = (
 			</svg>
 		</span>
 		<span className={(!ss_blocked && !ss_allowed) ? 't-tooltip-up-left' : ''} data-g-tooltip={t('panel_tracker_block_tooltip')}>
-			<svg className="blocking-icons status" onClick={() => { if (ss_allowed || ss_blocked) { return; } clickTrackerStatus(); }} width="20px" height="20px" viewBox="0 0 20 20">
+			<svg className="blocking-icons status" onClick={clickTrackerStatus} width="20px" height="20px" viewBox="0 0 20 20">
 				<g transform="translate(1 1)" fill="none" fillRule="evenodd">
 					<path className="border" d="M-.5-.5h18.3v18.217H-.5z" />
 					<path className="background" d="M.5.5h16.3v16.217H.5z" />
