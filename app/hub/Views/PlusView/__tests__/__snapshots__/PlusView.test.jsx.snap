@@ -97,9 +97,12 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
     >
       <div
         className="PlusView__manifestoText columns small-12 medium-10 large-8 text-center"
-      >
-        hub_supporter_manifesto
-      </div>
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "hub_supporter_manifesto",
+          }
+        }
+      />
     </div>
   </div>
   <div
@@ -426,9 +429,12 @@ exports[`app/hub/Views/PlusView component Snapshot tests with react-test-rendere
     >
       <div
         className="PlusView__manifestoText columns small-12 medium-10 large-8 text-center"
-      >
-        hub_supporter_manifesto
-      </div>
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "hub_supporter_manifesto",
+          }
+        }
+      />
     </div>
   </div>
   <div
