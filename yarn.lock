@@ -625,14 +625,7 @@
   resolved "https://registry.yarnpkg.com/@cliqz-oss/dexie/-/dexie-2.0.4.tgz#0e710504e2b9198baa9b046abd3a82731b94d56e"
   integrity sha512-HxMbBQfdy0CehThTFierXbRPI+PHDEucUUriCCzViAKbCWWQIlL6uZcyDaaPRMPWy45v78lezPB4457kfjS72g==
 
-"@cliqz/adblocker-circumvention@^1.12.2":
-  version "1.12.2"
-  resolved "https://registry.yarnpkg.com/@cliqz/adblocker-circumvention/-/adblocker-circumvention-1.12.2.tgz#9e5bc986d6c8e5919901faa0ae241e9df9019d5e"
-  integrity sha512-O/CIQ2XDzYuJx0ld+H5qqJNIz37VloyPfzSDifSF+xPUoMQ4trofUUxy7UL0co6VOARLoDAv8jk+DTvFKSsVWw==
-  dependencies:
-    "@cliqz/adblocker-content" "^1.12.2"
-
-"@cliqz/adblocker-content@^1.12.2", "@cliqz/adblocker-content@^1.16.0":
+"@cliqz/adblocker-content@^1.16.0":
   version "1.16.0"
   resolved "https://registry.yarnpkg.com/@cliqz/adblocker-content/-/adblocker-content-1.16.0.tgz#a20ab15af6495354b8c83b69e6914b4e8ec0db7d"
   integrity sha512-UnT3xxWCqNpyhQsKsf7q+qZtXP468i+H00avTbsgKrDJcjaupS9rSEesP/2pDXmHn12vcEQtlA/T5GA3ZD9Sgw==
