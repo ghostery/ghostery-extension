@@ -368,11 +368,13 @@ class Metrics {
 			// Theme
 			`&th=${encodeURIComponent(Metrics._getThemeValue().toString())}` +
 
-			// New parameter for Ghostery 8.5.2
+			// New parameters for Ghostery 8.5.2
 			// Hub Promo variant
 			`&hp=${encodeURIComponent(Metrics._getHubPromoVariant().toString())}` +
 			// Subscription Interval
-			`&subscription_interval=${encodeURIComponent(Metrics._getSubscriptionInterval().toString())}`;
+			`&si=${encodeURIComponent(Metrics._getSubscriptionInterval().toString())}` +
+			// Product ID Parameter
+			`&pi=${encodeURIComponent('gbe')}`;
 
 		if (CAMPAIGN_METRICS.includes(type)) {
 			// only send campaign attribution when necessary

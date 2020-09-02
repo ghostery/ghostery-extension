@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -19,6 +19,7 @@ import ThemeContext from '../contexts/ThemeContext';
 import DynamicUIPortContext from '../contexts/DynamicUIPortContext';
 import { sendMessage } from '../utils/msg';
 import { setTheme } from '../utils/utils';
+import { log } from '../../../src/utils/common';
 
 const INSIGHTS = 'insights';
 const PLUS = 'plus';
@@ -51,7 +52,9 @@ class Panel extends React.Component {
 
 			const { body } = msg;
 
-			if (body.panel) {
+			if (body.error) {
+				log(`Error: ${body.error}`);
+			} else if (body.panel) {
 				this._initializeData(body);
 			} else if (this._dynamicUIDataInitialized) {
 				actions.updatePanelData(body);

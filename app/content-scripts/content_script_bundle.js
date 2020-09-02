@@ -19,6 +19,3 @@
  */
 
 import 'browser-core/build/core/content-script';
-import injectCircumvention from '@cliqz/adblocker-circumvention';
-
-injectCircumvention(window);

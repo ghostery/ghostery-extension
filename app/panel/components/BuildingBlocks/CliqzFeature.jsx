@@ -4,7 +4,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import Tooltip from '../Tooltip';
 
@@ -161,5 +162,32 @@ class CliqzFeature extends React.Component {
 		);
 	}
 }
+
+CliqzFeature.propTypes = {
+	clickButton: PropTypes.func.isRequired,
+	type: PropTypes.oneOf([
+		'anti_track',
+		'ad_block',
+		'smart_block',
+	]).isRequired,
+	active: PropTypes.bool,
+	cliqzInactive: PropTypes.oneOfType([
+		PropTypes.bool,
+		PropTypes.number,
+	]).isRequired,
+	isSmaller: PropTypes.bool.isRequired,
+	isCondensed: PropTypes.bool,
+	isTooltipHeader: PropTypes.bool,
+	isTooltipBody: PropTypes.bool,
+	tooltipPosition: PropTypes.string,
+};
+
+CliqzFeature.defaultProps = {
+	active: true,
+	isCondensed: false,
+	isTooltipHeader: false,
+	isTooltipBody: false,
+	tooltipPosition: '',
+};
 
 export default CliqzFeature;

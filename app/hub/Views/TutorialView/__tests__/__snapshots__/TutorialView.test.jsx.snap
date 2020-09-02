@@ -2,7 +2,7 @@
 
 exports[`app/hub/Views/TutorialView component Snapshot tests with react-test-renderer tutorial view is rendered correctly 1`] = `
 <div
-  className="full-height flex-container flex-dir-column"
+  className="full-height flex-container flex-dir-column android-relative"
 >
   <div
     className="TutorialView--paddingTopLarge flex-child-grow flex-container align-middle"

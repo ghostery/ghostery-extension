@@ -213,6 +213,9 @@ export default (state = initialState, action) => {
 					case '10110':
 						errorText = t('no_such_email_password_combo');
 						break;
+					case 'too_many_failed_logins':
+						errorText = t('too_many_failed_logins_text');
+						break;
 					default:
 						errorText = t('server_error_message');
 				}

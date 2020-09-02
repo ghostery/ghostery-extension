@@ -1,5 +1,5 @@
 /**
- * Ghostery Notifications ContentScript
+ * Ghostery Notifications Content Script
  *
  * This file provides notification alerts for the CMP, update dialogs
  * and import/export functionality
@@ -7,7 +7,7 @@
  * Ghostery Browser Extension
  * https://www.ghostery.com/
  *
- * Copyright 2019 Ghostery, Inc. All rights reserved.
+ * Copyright 2020 Ghostery, Inc. All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this

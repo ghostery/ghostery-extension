@@ -21,6 +21,7 @@ import { prefsGet } from '../utils/common';
 
 const { IS_CLIQZ, BROWSER_INFO } = globals;
 const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
+const IS_ANDROID = (BROWSER_INFO.os === 'android');
 
 /**
  * Class for handling user configuration properties synchronously.
@@ -111,7 +112,7 @@ class ConfData {
 			_initProperty('enable_click2play_social', true);
 			_initProperty('enable_human_web', !IS_CLIQZ && !IS_FIREFOX);
 			_initProperty('enable_metrics', false);
-			_initProperty('enable_offers', !IS_CLIQZ && !IS_FIREFOX);
+			_initProperty('enable_offers', !IS_CLIQZ && !IS_FIREFOX && !IS_ANDROID);
 			_initProperty('enable_smart_block', true);
 			_initProperty('expand_all_trackers', true);
 			_initProperty('hide_alert_trusted', false);
@@ -134,7 +135,7 @@ class ConfData {
 			_initProperty('rewards_opted_in', false); // Migrated to Cliqz pref myoffrz.opted_in
 			_initProperty('settings_last_imported', 0);
 			_initProperty('settings_last_exported', 0);
-			_initProperty('show_alert', BROWSER_INFO.os !== 'android' && !IS_FIREFOX);
+			_initProperty('show_alert', !IS_ANDROID);
 			_initProperty('show_badge', true);
 			_initProperty('show_cmp', true);
 			_initProperty('show_tracker_urls', true);
