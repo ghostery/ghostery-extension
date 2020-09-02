@@ -10,7 +10,9 @@ exports[`app/panel/components/Help.jsx Snapshot tests with react-test-renderer H
     <div
       className="small-12 columns"
     >
-      <h1>
+      <h1
+        onClick={[Function]}
+      >
         panel_help_panel_header
       </h1>
       <div
