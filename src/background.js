@@ -1079,27 +1079,6 @@ function onMessageHandler(request, sender, callback) {
 		promoModals.turnOffPromos();
 		return false;
 	}
-	if (name === 'debug_information') {
-		ghosteryDebug.getDebugInfo().then(() => {
-			const {
-				accountEvents,
-				browserInfo,
-				extensionInfo,
-				user,
-			} = window.GHOSTERY;
-			const debugInfo = {
-				accountEvents,
-				browserInfo,
-				extensionInfo,
-				syncedUserSettings: user.syncedUserSettings,
-			};
-			const debugInfoJSON = JSON.stringify(debugInfo);
-			const msg = { type: 'Ghostery-Debug', content: debugInfoJSON };
-			sendMessage(sender.tab.id, 'exportFile', msg);
-			callback(debugInfoJSON);
-		});
-		return true;
-	}
 	return false;
 }
 
