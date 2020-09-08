@@ -16,7 +16,7 @@
 
 // DO NOT IMPORT MODULES TO THIS FILE
 
-const LOG = chrome.runtime.getManifest().log || false;
+const DEBUG = chrome.runtime.getManifest().debug || false;
 
 /**
  * Custom Debug Logger.
@@ -27,7 +27,7 @@ const LOG = chrome.runtime.getManifest().log || false;
  * @return {boolean}  		false if disabled, otherwise true
  */
 export function log(...args) {
-	if (!LOG) {
+	if (!DEBUG) {
 		return false;
 	}
 	// check for error messages

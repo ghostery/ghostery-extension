@@ -26,7 +26,6 @@ class Globals {
 	constructor() {
 		// environment variables
 		this.DEBUG = manifest.debug || false;
-		this.LOG = this.DEBUG && manifest.log;
 		this.EXTENSION_NAME = manifest.name || 'Ghostery';
 		this.EXTENSION_VERSION = manifest.version_name || manifest.version; // Firefox does not support "version_name"
 		this.BROWSER_INFO = {
