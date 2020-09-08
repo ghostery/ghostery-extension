@@ -16,7 +16,8 @@
 
 // DO NOT IMPORT MODULES TO THIS FILE
 
-const DEBUG = chrome.runtime.getManifest().debug || false;
+// extracted from instance to minimize import surface as per above
+import { isLog } from '../classes/GhosteryDebug';
 
 /**
  * Custom Debug Logger.
@@ -27,9 +28,10 @@ const DEBUG = chrome.runtime.getManifest().debug || false;
  * @return {boolean}  		false if disabled, otherwise true
  */
 export function log(...args) {
-	if (!DEBUG) {
+	if (!isLog()) {
 		return false;
 	}
+
 	// check for error messages
 	const hasErrors = args.toString().toLowerCase().includes('error');
 	// add timestamp to first position

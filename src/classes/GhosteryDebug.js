@@ -21,8 +21,34 @@ import foundBugs from './FoundBugs';
  * @class for debugging Ghostery via the background.js console.
  * @memberof BackgroundClasses
  */
+
+/*
+	Ghostery: {
+  modules : {
+	globals: {},
+	conf: {},
+	...
+  },
+  actions: {
+	enableDebugging: function(),
+	triggerABTest(),
+	...
+  }
+}
+	 */
 class GhosteryDebug {
 	constructor() {
+		this.isLog = chrome.runtime.getManifest().debug || false;
+
+		this.modules = {
+			globals: {},
+			conf: {},
+		};
+
+		this.actions = {
+			toggleLogging: () => this._toggleLogging(),
+		};
+
 		this.accountEvents = [];
 		this.browserInfo = globals.BROWSER_INFO;
 		this.extensionInfo = {
@@ -43,6 +69,12 @@ class GhosteryDebug {
 		// Chrome Documentation: https://developer.chrome.com/extensions/cookies#event-onChanged
 		// Mozilla Documentation: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/cookies/onChanged
 		chrome.cookies.onChanged.addListener(_cookieChangeEvent);
+	}
+
+	_toggleLogging() {
+		this.isLog = !this.isLog;
+
+		return (`Logging is ${this.isLog ? 'ON' : 'OFF'}`);
 	}
 
 	init() {
@@ -156,4 +188,8 @@ class GhosteryDebug {
 	}
 }
 
-export default new GhosteryDebug();
+const ghosteryDebug = new GhosteryDebug();
+export default ghosteryDebug;
+
+// extracted to minimize import surface into utils/common.js
+export const isLog = () => ghosteryDebug.isLog;
