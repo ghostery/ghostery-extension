@@ -20,18 +20,14 @@
 import { isLog } from '../classes/GhosteryDebug';
 
 /**
- * Custom Debug Logger.
+ * Log to console regardless of log settings
  * @memberOf BackgroundUtils
  *
  * @param  {array} args 	ES6 Rest parameter
  *
- * @return {boolean}  		false if disabled, otherwise true
+ * @return {boolean}		Always true
  */
-export function log(...args) {
-	if (!isLog()) {
-		return false;
-	}
-
+export function alwaysLog(...args) {
 	// check for error messages
 	const hasErrors = args.toString().toLowerCase().includes('error');
 	// add timestamp to first position
@@ -44,6 +40,24 @@ export function log(...args) {
 		console.log(...args); // eslint-disable-line no-console
 	}
 	return true;
+}
+
+/**
+ * Custom Debug Logger.
+ * Unliked alwaysLog, only logs if logging is turned on
+ * through the manifest and/or GhosteryDebug
+ * @memberOf BackgroundUtils
+ *
+ * @param  {array} args 	ES6 Rest parameter
+ *
+ * @return {boolean}  		false if disabled, otherwise true
+ */
+export function log(...args) {
+	if (!isLog()) {
+		return false;
+	}
+
+	return alwaysLog(...args);
 }
 
 /**

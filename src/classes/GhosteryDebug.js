@@ -17,6 +17,7 @@ import confData from './ConfData';
 import globals from './Globals';
 import tabInfo from './TabInfo';
 import foundBugs from './FoundBugs';
+import { alwaysLog } from '../utils/common';
 
 /**
  * @class for debugging Ghostery via the background.js console.
@@ -98,6 +99,7 @@ class GhosteryDebug {
 	}
 
 	/**
+	 * TODO: Review / revise this
 	 * this.tabInfo[tabId] properties update without re-calling getTabInfo.
 	 * this.foundApps[tabId].foundApps properties update without re-calling getTabInfo.
 	 * this.foundApps[tabId].foundBugs properties update without re-calling getTabInfo.
@@ -107,7 +109,7 @@ class GhosteryDebug {
 	 *   Only object properties will update, no new tabIds will be added.
 	 *   Reloading the tab will end these updates.
 	 */
-	getTabInfoAsync() {
+	getActiveTabInfoAsync() {
 		function _getActiveTabIds() {
 			return new Promise((resolve) => {
 				chrome.tabs.query({
@@ -122,7 +124,7 @@ class GhosteryDebug {
 			});
 		}
 
-		console.log('Results will be in the `activeTabInfo` property when the Promise resolves');
+		alwaysLog(['Results will be in the `activeTabInfo` property when the Promise resolves']);
 
 		return new Promise((resolve) => {
 			_getActiveTabIds().then((tabIds) => {
