@@ -38,16 +38,25 @@ class ABTest {
 	}
 
 	/**
-	 * Send parameters to A/B Test server and receive tests data.
-	 * @return {Promise} 		dictionary with all tests to be executed
+	 * Return the tests object
+	 * @return {Object}
 	 */
-	fetch() {
+	getTests() {
+		return JSON.stringify(this.tests);
+	}
+
+	/**
+	 * Send parameters to A/B Test server and receive tests data.
+	 * @param	{Number} irDebugOverride		optional. supports hitting AB server with custom ir from debug console
+	 * @return {Promise} 						dictionary with all tests to be executed
+	 */
+	fetch(irDebugOverride) {
 		log('A/B Tests: fetching...');
 
 		const URL = `${CMP_BASE_URL}/abtestcheck
 			?os=${encodeURIComponent(BROWSER_INFO.os)}
 			&install_date=${encodeURIComponent(conf.install_date)}
-			&ir=${encodeURIComponent(conf.install_random_number)}
+			&ir=${encodeURIComponent((typeof irDebugOverride === 'number') ? irDebugOverride : conf.install_random_number)}
 			&gv=${encodeURIComponent(EXTENSION_VERSION)}
 			&si=${conf.account ? '1' : '0'}
 			&ua=${encodeURIComponent(BROWSER_INFO.name)}
@@ -69,7 +78,7 @@ class ABTest {
 
 			// update conf
 			globals.SESSION.abtests = this.tests;
-			log('A/B Tests: tests updated to', JSON.stringify(this.tests));
+			log('A/B Tests: tests updated to', this.getTests());
 		}).catch(() => {
 			log('A/B Tests: error fetching.');
 		});

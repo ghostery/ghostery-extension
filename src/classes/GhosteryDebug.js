@@ -11,6 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import abtest from './ABTest';
 import account from './Account';
 import confData from './ConfData';
 import globals from './Globals';
@@ -46,7 +47,9 @@ class GhosteryDebug {
 		};
 
 		this.actions = {
+			getABTests: () => abtest.getTests(),
 			getGlobals: global => globals.get(global),
+			hitABServerWithIr: ir => abtest.fetch(ir),
 			toggleLogging: () => this._toggleLogging(),
 		};
 
