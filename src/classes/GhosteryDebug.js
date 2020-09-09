@@ -78,12 +78,20 @@ class GhosteryDebug {
 	}
 
 	help() {
-		alwaysLog(['THIS IS THE HELP SCREEN']);
-		alwaysLog([`Log setting: ${this.isLog ? 'ON' : 'OFF'}`]);
+		alwaysLog(
+			'\nTHIS IS THE HELP SCREEN\n',
+			`Log setting: ${this.isLog ? 'ON' : 'OFF'}`,
+		);
+
+		return ('~~~~~~~~~');
 	}
 
 	status() {
-		alwaysLog([`Logging: ${this.isLog ? 'ON' : 'OFF'}`]);
+		alwaysLog(
+			`\nLogging: ${this.isLog ? 'ON' : 'OFF'}`
+		);
+
+		return ('~~~~~~~~~');
 	}
 
 	_toggleLogging() {
@@ -134,7 +142,7 @@ class GhosteryDebug {
 			});
 		}
 
-		alwaysLog(['Results will be in the `activeTabInfo` property when the Promise resolves']);
+		alwaysLog('Results will be in the `activeTabInfo` property when the Promise resolves');
 
 		return new Promise((resolve) => {
 			_getActiveTabIds().then((tabIds) => {
