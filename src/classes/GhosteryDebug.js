@@ -18,6 +18,7 @@ import globals from './Globals';
 import tabInfo from './TabInfo';
 import foundBugs from './FoundBugs';
 import { alwaysLog } from '../utils/common';
+import { getObjectSlice } from '../utils/utils';
 
 /**
  * @class for debugging Ghostery via the background.js console.
@@ -49,8 +50,8 @@ class GhosteryDebug {
 
 		this.actions = {
 			getABTests: () => abtest.getTests(),
-			getConfData: prop => confData.get(prop),
-			getGlobals: global => globals.get(global),
+			getConfData: slice => getObjectSlice(confData, slice),
+			getGlobals: slice => getObjectSlice(globals, slice),
 			hitABServerWithIr: ir => abtest.fetch(ir),
 			toggleLogging: () => this._toggleLogging(),
 		};

@@ -542,6 +542,44 @@ export function fetchLocalJSONResource(url) {
 }
 
 /**
+ * Like Array.prototype.slice(), but for objects
+ * Get a property on an object (if props is a property key string)
+ * OR Get a subset of properties (if props is a regex)
+ * OR Get the whole supplied object back (if props is missing, invalid, or produces no matches)
+ * If the property is not defined on the object, returns the object instead of throwing an error
+ * @param {string|RegExp} name		String name of the property, or regex to match against all properties. Optional.
+ * @returns {Object}				Returns an object whose properties are a subset of the argument object's
+ */
+export function getObjectSlice(obj, props) {
+	if (typeof obj !== 'object') return {};
+
+	if (props === undefined) return obj;
+
+	if (typeof props === 'string') {
+		if (obj[props] === undefined) return obj;
+
+		// Wrap the value so that we consistently
+		// return an object
+		return { [props]: obj[props] };
+	}
+
+	// A regex literal has been passed in
+	if (typeof props === 'object' && typeof props.exec === 'function') {
+		const result = {};
+		Object.keys(obj).forEach((key) => {
+			if (props.test(key)) {
+				result[key] = obj[key];
+			}
+		});
+		if (Object.keys(result).length > 0) {
+			return result;
+		}
+	}
+
+	return obj;
+}
+
+/**
  * Inject content scripts and CSS into a given tabID (top-level frame only).
  * Note: Chrome 61 blocks content scripts on the new tab page (_/chrome/newtab). Be
  * sure to check the current URL before calling this function, otherwise Chrome will throw

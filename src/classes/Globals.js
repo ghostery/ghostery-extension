@@ -143,40 +143,6 @@ class Globals {
 	}
 
 	/**
-	 * Get the current value of a global property,
-	 * a subset of properties if a regex is provided,
-	 * or all global properties if no argument is provided
-	 * @param {string|RegExp} name		String name of the property, or regex to match against all properties. Optional.
-	 * @returns {Object}
-	 */
-	get(prop) {
-		if (prop === undefined) return this;
-
-		if (typeof prop === 'string') {
-			if (this[prop] === undefined) return this;
-
-			// Wrap the value so that we consistently
-			// return an object
-			return { [prop]: this[prop] };
-		}
-
-		// A regex literal has been passed in
-		if (typeof prop === 'object' && typeof prop.exec === 'function') {
-			const result = {};
-			Object.keys(this).forEach((key) => {
-				if (prop.test(key)) {
-					result[key] = this[key];
-				}
-			});
-			if (Object.keys(result).length > 0) {
-				return result;
-			}
-		}
-
-		return this;
-	}
-
-	/**
 	 * Gets UA and Platform strings for current browser
 	 * @return {Object}
 	 */
