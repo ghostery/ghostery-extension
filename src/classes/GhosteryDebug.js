@@ -107,7 +107,7 @@ class GhosteryDebug {
 	 *   Only object properties will update, no new tabIds will be added.
 	 *   Reloading the tab will end these updates.
 	 */
-	getTabInfo() {
+	getTabInfoAsync() {
 		function _getActiveTabIds() {
 			return new Promise((resolve) => {
 				chrome.tabs.query({
@@ -122,13 +122,17 @@ class GhosteryDebug {
 			});
 		}
 
+		console.log('Results will be in the `activeTabInfo` property when the Promise resolves');
+
 		return new Promise((resolve) => {
 			_getActiveTabIds().then((tabIds) => {
-				this.activeTabIds = tabIds;
-				this.tabInfo = { ...tabInfo._tabInfo };
-				this.foundBugs = {
-					foundApps: { ...foundBugs._foundApps },
-					foundBugs: { ...foundBugs._foundBugs },
+				this.activeTabInfo = {
+					activeTabIds: tabIds,
+					tabInfo: { ...tabInfo._tabInfo },
+					foundBugs: {
+						foundApps: { ...foundBugs._foundApps },
+						foundBugs: { ...foundBugs._foundBugs },
+					},
 				};
 				resolve(tabIds);
 			});
