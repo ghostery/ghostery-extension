@@ -49,6 +49,7 @@ class GhosteryDebug {
 
 		this.actions = {
 			getABTests: () => abtest.getTests(),
+			getConfData: prop => confData.get(prop),
 			getGlobals: global => globals.get(global),
 			hitABServerWithIr: ir => abtest.fetch(ir),
 			toggleLogging: () => this._toggleLogging(),
@@ -74,6 +75,15 @@ class GhosteryDebug {
 		// Chrome Documentation: https://developer.chrome.com/extensions/cookies#event-onChanged
 		// Mozilla Documentation: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/cookies/onChanged
 		chrome.cookies.onChanged.addListener(_cookieChangeEvent);
+	}
+
+	help() {
+		alwaysLog(['THIS IS THE HELP SCREEN']);
+		alwaysLog([`Log setting: ${this.isLog ? 'ON' : 'OFF'}`]);
+	}
+
+	status() {
+		alwaysLog([`Logging: ${this.isLog ? 'ON' : 'OFF'}`]);
 	}
 
 	_toggleLogging() {
