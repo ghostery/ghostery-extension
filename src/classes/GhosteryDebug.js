@@ -46,6 +46,7 @@ class GhosteryDebug {
 		};
 
 		this.actions = {
+			getGlobals: global => globals.get(global),
 			toggleLogging: () => this._toggleLogging(),
 		};
 
