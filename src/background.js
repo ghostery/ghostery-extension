@@ -55,10 +55,7 @@ import { sendCliqzModuleCounts } from './utils/cliqzModulesData';
 window.CLIQZ = cliqz;
 
 // For debug purposes, provide access to Ghostery's internal data.
-const isConsoleDebugging = chrome.runtime.getManifest().consoleDebug || false;
-if (isConsoleDebugging) {
-	window.GHOSTERY = ghosteryDebug;
-}
+window.GHOSTERY = ghosteryDebug;
 
 // class instantiation
 const events = new Events();
