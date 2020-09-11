@@ -3,23 +3,23 @@
 # the last matching pattern has the most precedence.
 
 # Core Ghostery team
-*       @ghostery/ghostery
+*       @ghostery/extension
 
 # CMP / Metrics / WebRequest
-/src/classes/ABTest.js @jsignanini
-/src/classes/CMP.js @jsignanini
-/src/classes/EventHandlers.js @jsignanini
-/src/classes/Metrics.js @jsignanini
-/src/classes/PolicySmartBlock.js @jsignanini
-/src/classes/Conf.js @zarembsky
-/src/classes/ConfData.js @zarembsky
+/src/classes/ABTest.js @wlycdgr
+/src/classes/CMP.js @christophertino
+/src/classes/EventHandlers.js @christophertino
+/src/classes/Metrics.js @wlycdgr
+/src/classes/PolicySmartBlock.js @christophertino
+/src/classes/Conf.js @christophertino
+/src/classes/ConfData.js @christophertino
 /src/classes/PanelData.js @wlycdgr
 
 # Background
-/src/background.js @zarembsky
+/src/background.js @christophertino
 
 # The Ghostery Hub
-/app/hub/ @Eden12345
+/app/hub/ @benstrumeyer
 
 # Shared Components
 /app/shared-components @wlycdgr
@@ -30,4 +30,4 @@ babel.config.js @christophertino
 webpack.config.js @christophertino
 
 # Unit Tests
-/test/ @Eden12345
+/test/ @christophertino
