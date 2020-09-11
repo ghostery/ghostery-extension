@@ -17,6 +17,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import QueryString from 'query-string';
 import createStore from './createStore';
 
 // Containers
@@ -34,6 +35,9 @@ import UpgradePlanView from './Views/UpgradePlanView';
 
 const store = createStore();
 
+// Flag to display alternate hub view (used in A/B testing)
+const ah = (QueryString.parse(window.location.search).ah === 'true') || false;
+
 /**
  * Top-Level Component for the Ghostery Hub
  * @memberof HubComponents
@@ -41,7 +45,7 @@ const store = createStore();
 const Hub = () => (
 	<AppView>
 		<Route exact path="/" component={UpgradePlanView} />
-		<Route exact path="/home" component={HomeView} />
+		<Route exact path="/home" component={ah ? UpgradePlanView : HomeView} />
 		<Route path="/setup" component={SetupView} />
 		<Route path="/tutorial" component={TutorialView} />
 		<Route exact path="/plus" component={PlusView} />

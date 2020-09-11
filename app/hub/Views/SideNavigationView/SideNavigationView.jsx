@@ -15,6 +15,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import { NavLink } from 'react-router-dom';
+import QueryString from 'query-string';
+
+// Flag to display alternate hub view (used in A/B testing)
+const ah = (QueryString.parse(window.location.search).ah === 'true') || false;
 
 /**
  * Helper render function for rendering a list item for the Navigation Main section
@@ -94,10 +98,12 @@ const SideNavigationView = (props) => {
 		disabled: disableNav,
 	});
 
+	const menuClassNames = ClassNames(`SideNavigation__menu ${!ah ? 'flex-child-grow' : ''} flex-container flex-dir-column`);
+
 	return (
 		<div className={containerClassNames}>
 			<NavLink to="/" className={topClassNames} />
-			<div className="SideNavigation__menu flex-child-grow flex-container flex-dir-column">
+			<div className={menuClassNames}>
 				{menuItems.map(item => _renderMenuItem(item, disableNav))}
 			</div>
 			<div className="SideNavigation__bottom flex-container flex-dir-column">

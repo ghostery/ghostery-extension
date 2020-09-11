@@ -13,11 +13,15 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import QueryString from 'query-string';
 import SideNavigationView from './SideNavigationView';
 import globals from '../../../../src/classes/Globals';
 
 const { IS_CLIQZ, BROWSER_INFO } = globals;
 const IS_ANDROID = (BROWSER_INFO.os === 'android');
+
+// Flag to display alternate hub view (used in A/B testing)
+const ah = (QueryString.parse(window.location.search).ah === 'true') || false;
 
 /**
  * @class Implement the Side Navigation View for the Ghostery Hub
@@ -50,7 +54,10 @@ class SideNavigationViewContainer extends Component {
 		const { user, location } = this.props;
 		const disableRegEx = /^(\/setup(?!\/4$))|(\/tutorial(?!\/6$))/;
 
-		const menuItems = [
+		const menuItems = ah ? [
+			{ href: '/home', icon: 'home', text: t('hub_side_navigation_home') },
+			{ href: '/setup', icon: 'setup', text: t('customize_setup') },
+		] : [
 			{ href: '/home', icon: 'home', text: t('hub_side_navigation_home') },
 			{ href: '/', icon: 'shield', text: t('hub_side_navigation_upgrade_plan') },
 			{ href: '/setup', icon: 'setup', text: t('customize_setup') },
@@ -59,6 +66,7 @@ class SideNavigationViewContainer extends Component {
 			...((IS_CLIQZ || IS_ANDROID) ? [] : [{ href: '/rewards', icon: 'rewards', text: t('hub_side_navigation_rewards') }]),
 			...((IS_ANDROID) ? [] : [{ href: '/products', icon: 'products', text: t('hub_side_navigation_products') }])
 		];
+
 		const bottomItems = user ? [
 			{ id: 'email', href: `${globals.ACCOUNT_BASE_URL}/`, text: user.email },
 			{ id: 'logout', text: t('sign_out'), clickHandler: this._handleLogoutClick },

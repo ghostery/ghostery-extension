@@ -1130,6 +1130,17 @@ function setupHubPromoABTest() {
 }
 
 /**
+ * Set option for Hub Layout A/B test based
+ * on the results returned from the abtest endpoint.
+ * @memberOf Background
+ */
+function setupHubLayoutABTest() {
+	if (abtest.hasTest('hub_alternate')) {
+		conf.hub_layout = 'alternate';
+	}
+}
+
+/**
  * Adjust antitracking parameters based on the current state
  * of ABTest and availability of Human Web.
  */
@@ -1151,6 +1162,7 @@ function setupABTest() {
 	}
 
 	setupHubPromoABTest();
+	setupHubLayoutABTest();
 }
 
 /**
@@ -1759,10 +1771,13 @@ function initializeGhosteryModules() {
 			// We need to do this after running scheduledTasks for the first time
 			// because of an A/B test that determines which promo variant is shown in the Hub on install
 			if (globals.JUST_INSTALLED) {
-				const route = ((conf.hub_promo_variant === 'upgrade' || conf.hub_promo_variant === 'not_yet_set') && !IS_ANDROID) ? '' : '#home';
-				const showPremiumPromoModal = (conf.hub_promo_variant === 'midnight' && !IS_ANDROID);
+				// const route = ((conf.hub_promo_variant === 'upgrade' || conf.hub_promo_variant === 'not_yet_set') && !IS_ANDROID) ? '' : '#home';
+				// const showPremiumPromoModal = (conf.hub_promo_variant === 'midnight' && !IS_ANDROID);
+				const showAlternateHub = conf.hub_layout === 'alternate';
+				const route = conf.hub_layout === 'alternate' ? '#home' : '';
 				chrome.tabs.create({
-					url: chrome.runtime.getURL(`./app/templates/hub.html?$justInstalled=true&pm=${showPremiumPromoModal}${route}`),
+					// url: chrome.runtime.getURL(`./app/templates/hub.html?$justInstalled=true&pm=${showPremiumPromoModal}${route}`),
+					url: chrome.runtime.getURL(`./app/templates/hub.html?$justInstalled=true&ah=${showAlternateHub}${route}`),
 					active: true
 				});
 			}
