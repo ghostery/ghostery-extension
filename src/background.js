@@ -55,7 +55,7 @@ import { sendCliqzModuleCounts } from './utils/cliqzModulesData';
 window.CLIQZ = cliqz;
 
 // For debug purposes, provide access to Ghostery's internal data.
-window.GHOSTERY = ghosteryDebug;
+window.ghostery = ghosteryDebug;
 
 // class instantiation
 const events = new Events();
