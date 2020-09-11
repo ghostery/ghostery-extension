@@ -17,6 +17,7 @@ import confData from './ConfData';
 import globals from './Globals';
 import tabInfo from './TabInfo';
 import foundBugs from './FoundBugs';
+import PromoModals from './PromoModals';
 import { alwaysLog } from '../utils/common';
 import { getObjectSlice } from '../utils/utils';
 
@@ -54,6 +55,7 @@ class GhosteryDebug {
 			getGlobals: slice => getObjectSlice(globals, slice),
 			hitABServerWithIr: ir => abtest.fetch(ir),
 			toggleLogging: () => this._toggleLogging(),
+			forcePromoModalDisplay: modal => PromoModals.forceDisplay(modal),
 		};
 
 		this.accountEvents = [];

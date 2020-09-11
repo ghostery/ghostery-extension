@@ -35,12 +35,32 @@ const PROMO_MODAL_LAST_SEEN = 'promo_modal_last_seen';
  */
 class PromoModals {
 	/**
+	 * Tracks which promo modal, if any, should be FORCED to trigger
+	 * at moments when a promo modal MIGHT trigger.
+	 * Originally intended to facilitate QA of modal UI
+	 * @type {string}
+	 */
+	static forcedModal = '';
+
+	/**
+	 * Specify a modal type that should be forced to trigger
+	 * Originally added to facilitate modal UI QA
+	 * @param modal
+	 */
+	static forceDisplay(modal) {
+		PromoModals.forcedModal = modal;
+	}
+
+	/**
 	 * Determine if a modal should be shown.  Called from PanelData
 	 * when the panel is opened.
 	 *
 	 * @return {string} Type of promo to show
 	 */
 	static whichPromoModalShouldWeDisplay() {
+		if ([PREMIUM, INSIGHTS].includes(PromoModals.forcedModal)) {
+			return PromoModals.forcedModal;
+		}
 		// The order is important
 		// Insights takes priority over Premium
 		if (this._isTimeForAPromo(INSIGHTS)) return INSIGHTS;
