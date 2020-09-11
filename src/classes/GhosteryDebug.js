@@ -80,11 +80,21 @@ class GhosteryDebug {
 		chrome.cookies.onChanged.addListener(_cookieChangeEvent);
 	}
 
-	help() {
-		alwaysLog(
-			'\nTHIS IS THE HELP SCREEN\n',
-			`Log setting: ${this.isLog ? 'ON' : 'OFF'}`,
-		);
+	help(fnName) {
+		const defaultOutput = [
+			'\nGhostery Extension Debugger Help\n',
+			'Usage:\n',
+			'ghostery.help() to see this message\n',
+			"ghostery.help('ghosteryFunctionName') to see detailed help about that function\n",
+			'\n',
+			'ghostery.actions.getABTests()\t\t\tDisplay what A/B tests have been fetched from the A/B test server\n',
+			'ghostery.actions.getConfData()\t\t\tShow the current value of a conf property or properties\n',
+			`\nLogging: ${this.isLog ? 'ON' : 'OFF'}`,
+		];
+
+		if (fnName === undefined) {
+			alwaysLog(...defaultOutput);
+		}
 
 		return ('~~~~~~~~~');
 	}
