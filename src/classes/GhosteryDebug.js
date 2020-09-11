@@ -80,20 +80,51 @@ class GhosteryDebug {
 		chrome.cookies.onChanged.addListener(_cookieChangeEvent);
 	}
 
+	static fortyfy(str) {
+		return str.padEnd(40, ' ');
+	}
+
+	static breakify(str) {
+		return (str.concat('\n'));
+	}
+
+	static prettify(uglyLines) {
+		const prettyLines = [];
+
+		uglyLines.forEach((uglyLine) => {
+			if (typeof uglyLine === 'string') {
+				prettyLines.push(GhosteryDebug.breakify(uglyLine));
+				return;
+			}
+
+			if (typeof uglyLine === 'object') {
+				const leftSide = uglyLine[0];
+				const rightSide = uglyLine[1];
+				prettyLines.push(
+					GhosteryDebug.fortyfy(leftSide).concat(GhosteryDebug.breakify(rightSide))
+				);
+			}
+		});
+
+		return prettyLines;
+	}
+
 	help(fnName) {
 		const defaultOutput = [
-			'\nGhostery Extension Debugger Help\n',
-			'Usage:\n',
-			'ghostery.help() to see this message\n',
-			"ghostery.help('ghosteryFunctionName') to see detailed help about that function\n",
-			'\n',
-			'ghostery.actions.getABTests()\t\t\tDisplay what A/B tests have been fetched from the A/B test server\n',
-			'ghostery.actions.getConfData()\t\t\tShow the current value of a conf property or properties\n',
-			`\nLogging: ${this.isLog ? 'ON' : 'OFF'}`,
+			'\nGhostery Extension Debugger Help',
+			'Usage:',
+			['ghostery.help()', 'Show this message'],
+			["ghostery.help('functionName')", 'Show function usage details like supported argument types/values'],
+			['', "For example: ghostery.help('getABTests')"],
+			'',
+			'Available functions:',
+			['ghostery.actions.getABTests()', 'Display what A/B tests have been fetched from the A/B test server'],
+			['ghostery.actions.getConfData()', 'Show the current value of a config property or properties'],
+			`Logging: ${this.isLog ? 'ON' : 'OFF'}`,
 		];
 
 		if (fnName === undefined) {
-			alwaysLog(...defaultOutput);
+			alwaysLog(...GhosteryDebug.prettify(defaultOutput));
 		}
 
 		return ('~~~~~~~~~');
