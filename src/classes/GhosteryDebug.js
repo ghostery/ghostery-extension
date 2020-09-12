@@ -57,7 +57,6 @@ class GhosteryDebug {
 		};
 
 		this.actions = {
-			getGlobals: slice => getObjectSlice(globals, slice),
 			hitABServerWithIr: ir => abtest.fetch(ir),
 			toggleLogging: () => this._toggleLogging(),
 			forcePromoModalDisplay: modal => PromoModals.forceDisplay(modal),
@@ -93,27 +92,31 @@ class GhosteryDebug {
 		return 'These are all the A/B tests currently in memory';
 	}
 
-	getConfData = (slice) => {
+	_outputObjectSlice(obj, slice, objStr) {
 		if (this.objectOutputStyle === 'object') {
-			console.dir(getObjectSlice(confData, slice));
+			console.dir(getObjectSlice(obj, slice));
 		} else if (this.objectOutputStyle === 'string') {
-			console.log(JSON.stringify(getObjectSlice(confData, slice)));
+			console.log(JSON.stringify(getObjectSlice(obj, slice)));
 		}
 
 		if (slice === undefined) {
-			return "That's the whole config object";
+			return `That's the whole ${objStr} object`;
 		}
 
 		if (typeof slice === 'string') {
-			return "That's property you asked for, or the whole config object if we didn't find it";
+			return `That's property you asked for, or the whole ${objStr} object if we didn't find it`;
 		}
 
 		if (typeof slice === 'object' && typeof slice.test === 'function') {
-			return "That's the matching subset of properties, or the whole config object if there were no matches";
+			return `That's the matching subset of properties, or the whole ${objStr} object if there were no matches`;
 		}
 
-		return "That argument wasn't valid, but here's the whole config object";
+		return `That argument wasn't valid, but here's the whole ${objStr} object`;
 	}
+
+	getConfData = slice => this._outputObjectSlice(confData, slice, 'config');
+
+	getGlobals = slice => this._outputObjectSlice(globals, slice, 'globals');
 
 	static outputStyles = {
 		header: 'font-size: 16px; font-weight: bold; padding-top: 15px',
@@ -162,6 +165,7 @@ class GhosteryDebug {
 		const fnNames = {
 			getABTests: 'ghostery.getABTests()',
 			getConfData: 'ghostery.getConfData()',
+			getGlobals: 'ghostery.getGlobals()',
 		};
 
 		const header = [
@@ -175,7 +179,7 @@ class GhosteryDebug {
 		const availableFunctions = [
 			[`${fnNames.getABTests}`, 'Display what A/B tests have been fetched from the A/B test server'],
 			[`${fnNames.getConfData}`, 'Show the current value of a config property or properties'],
-			['ghostery.']
+			[`${fnNames.getGlobals}`, 'Show the current value of a global property or properties'],
 		];
 
 		const overview = [
@@ -207,6 +211,19 @@ class GhosteryDebug {
 			['Anything else', 'The whole config object. Also returned if there are no matching results'],
 		];
 
+		const getGlobals = [
+			`\n\n${fnNames.getGlobals}`,
+			'Display the current value(s) of a global property or properties',
+			'',
+			['When called with...', 'Returns...'],
+			['No argument', 'The whole globals object'],
+			['A property key string', 'An object with just that property'],
+			['', "Example: ghostery.getGlobals('BROWSER_INFO')"],
+			['A property key regex', 'An object with all matching properties'],
+			['', 'Example: ghostery.getGlobals(/ACCOUNT_/)'],
+			['Anything else', 'The whole globals object. Also returned if there are no matching results'],
+		];
+
 		const invalidArgumentError = [
 			`\n\n'${fnName}' is not a GED function. Here are the valid ones:`,
 			'',
@@ -218,6 +235,7 @@ class GhosteryDebug {
 		if 		(fnName === undefined) 			outputStrArr = overview;
 		else if (eeFnName === 'getabtests') 	outputStrArr = getABTests;
 		else if (eeFnName === 'getconfdata')	outputStrArr = getConfData;
+		else if (eeFnName === 'getglobals')		outputStrArr = getGlobals;
 		else 									outputStrArr = invalidArgumentError;
 
 		GhosteryDebug.printToConsole(GhosteryDebug.typeset(outputStrArr));
