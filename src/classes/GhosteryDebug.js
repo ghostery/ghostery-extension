@@ -110,7 +110,7 @@ class GhosteryDebug {
 	}
 
 	help(fnName) {
-		const defaultOutput = [
+		const overview = [
 			'\nGhostery Extension Debugger Help',
 			'Usage:',
 			['ghostery.help()', 'Show this message'],
@@ -123,8 +123,28 @@ class GhosteryDebug {
 			`Logging: ${this.isLog ? 'ON' : 'OFF'}`,
 		];
 
+		const getABTests = [
+			'\nghostery.actions.getABTests()',
+			'Display what A/B tests have been fetched from the A/B test server',
+			'Fetches happen on browser startup and then at regularly scheduled intervals',
+			'',
+			['Arguments', 'None'],
+			['Returns', 'A JSON representation of the A/B test strings currently in memory'],
+		];
+
+		const invalidArgumentError = [
+			'\nThat is not a Ghostery Extension Debugger function',
+			'Here is the main help screen instead:',
+			'',
+			...overview,
+		];
+
 		if (fnName === undefined) {
-			alwaysLog(...GhosteryDebug.prettify(defaultOutput));
+			alwaysLog(...GhosteryDebug.prettify(overview));
+		} else if (fnName === 'getABTests') {
+			alwaysLog(...GhosteryDebug.prettify(getABTests));
+		} else {
+			alwaysLog(...GhosteryDebug.prettify(invalidArgumentError));
 		}
 
 		return ('~~~~~~~~~');
