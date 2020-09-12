@@ -44,6 +44,12 @@ class GhosteryDebug {
 	constructor() {
 		this.isLog = chrome.runtime.getManifest().debug || false;
 
+		this.coolBeans = [
+			'Thanks for using Ghostery',
+			'Try our desktop tracker blocker Midnight for free',
+			'Try our tracker analytics tool Insights for free',
+		];
+
 		this.modules = {
 			globals: {},
 			conf: {},
@@ -85,6 +91,14 @@ class GhosteryDebug {
 		header: 'font-size: 18px; font-weight: bold',
 	};
 
+	static pickRandom(arr) {
+		const len = arr && arr.length;
+
+		if (!len) return '';
+
+		return arr[Math.floor((Math.random() * len))];
+	}
+
 	static typeset(rawStrings) {
 		const formattedLines = [];
 
@@ -117,17 +131,24 @@ class GhosteryDebug {
 	}
 
 	help(fnName) {
-		const overview = [
-			'\nGhostery Extension Debugger Help',
+		const header = [
+			'\nGhostery Extension Debugger (GED) Help',
 			'Usage:',
 			['ghostery.help()', 'Show this message'],
 			["ghostery.help('functionName')", 'Show function usage details like supported argument types/values'],
-			['', "For example: ghostery.help('getABTests')"],
-			'',
+			['', "Example: ghostery.help('getABTests')"],
+		];
+
+		const availableFunctions = [
 			'Available functions:',
 			['ghostery.actions.getABTests()', 'Display what A/B tests have been fetched from the A/B test server'],
 			['ghostery.actions.getConfData()', 'Show the current value of a config property or properties'],
-			`Logging: ${this.isLog ? 'ON' : 'OFF'}`,
+		];
+
+		const overview = [
+			...header,
+			'',
+			...availableFunctions,
 		];
 
 		const getABTests = [
@@ -140,21 +161,20 @@ class GhosteryDebug {
 		];
 
 		const invalidArgumentError = [
-			'\n\nThat is not a Ghostery Extension Debugger function',
+			`\n\n'${fnName}' is not a GED function. Here are the valid ones:`,
 			'',
-			'Here is the main help screen instead:',
-			'',
-			...overview,
+			...availableFunctions,
 		];
 
 		let outputStrArr;
-		if 		(fnName === undefined) 		outputStrArr = overview;
-		else if (fnName === 'getABTests') 	outputStrArr = getABTests;
-		else 								outputStrArr = invalidArgumentError;
+		const eeFnName = (fnName && typeof fnName === 'string' && fnName.toLowerCase()) || undefined;
+		if 		(fnName === undefined) 			outputStrArr = overview;
+		else if (eeFnName === 'getabtests') 	outputStrArr = getABTests;
+		else 									outputStrArr = invalidArgumentError;
 
 		GhosteryDebug.printToConsole(GhosteryDebug.typeset(outputStrArr));
 
-		return ('~~~~~~~~~');
+		return (GhosteryDebug.pickRandom(this.coolBeans));
 	}
 
 	status() {
