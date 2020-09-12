@@ -43,6 +43,7 @@ import { getObjectSlice } from '../utils/utils';
 class GhosteryDebug {
 	constructor() {
 		this.isLog = chrome.runtime.getManifest().debug || false;
+		this.objectOutputStyle = 'object'; // other option is 'json'
 
 		this.coolBeans = [
 			'Thanks for using Ghostery',
@@ -56,7 +57,6 @@ class GhosteryDebug {
 		};
 
 		this.actions = {
-			getConfData: slice => getObjectSlice(confData, slice),
 			getGlobals: slice => getObjectSlice(globals, slice),
 			hitABServerWithIr: ir => abtest.fetch(ir),
 			toggleLogging: () => this._toggleLogging(),
@@ -87,8 +87,32 @@ class GhosteryDebug {
 
 	getABTests = () => {
 		// eslint-disable-next-line no-console
-		console.dir(abtest.getTests());
-		return 'Expand the object above to see the A/B tests currently in memory';
+		if (this.objectOutputStyle === 'object') {
+			console.dir(abtest.getTests());
+		}
+		return 'These are all the A/B tests currently in memory';
+	}
+
+	getConfData = (slice) => {
+		if (this.objectOutputStyle === 'object') {
+			console.dir(getObjectSlice(confData, slice));
+		} else if (this.objectOutputStyle === 'string') {
+			console.log(JSON.stringify(getObjectSlice(confData, slice)));
+		}
+
+		if (slice === undefined) {
+			return "That's the whole config object";
+		}
+
+		if (typeof slice === 'string') {
+			return "That's property you asked for, or the whole config object if we didn't find it";
+		}
+
+		if (typeof slice === 'object' && typeof slice.test === 'function') {
+			return "That's the matching subset of properties, or the whole config object if there were no matches";
+		}
+
+		return "That argument wasn't valid, but here's the whole config object";
 	}
 
 	static outputStyles = {
@@ -137,6 +161,7 @@ class GhosteryDebug {
 	help(fnName) {
 		const fnNames = {
 			getABTests: 'ghostery.getABTests()',
+			getConfData: 'ghostery.getConfData()',
 		};
 
 		const header = [
@@ -149,7 +174,7 @@ class GhosteryDebug {
 
 		const availableFunctions = [
 			[`${fnNames.getABTests}`, 'Display what A/B tests have been fetched from the A/B test server'],
-			['ghostery.actions.getConfData()', 'Show the current value of a config property or properties'],
+			[`${fnNames.getConfData}`, 'Show the current value of a config property or properties'],
 			['ghostery.']
 		];
 
@@ -169,6 +194,19 @@ class GhosteryDebug {
 			['Returns', 'A JSON representation of the A/B test strings currently in memory'],
 		];
 
+		const getConfData = [
+			`\n\n${fnNames.getConfData}`,
+			'Display the current value(s) of a config property or properties',
+			'',
+			['When called with...', 'Returns...'],
+			['No argument', 'The whole config object'],
+			['A property key string', 'An object with just that property'],
+			['', "Example: ghostery.getConfData('enable_smart_block')"],
+			['A property key regex', 'An object with all matching properties'],
+			['', 'Example: ghostery.getConfData(/setup_/)'],
+			['Anything else', 'The whole config object. Also returned if there are no matching results'],
+		];
+
 		const invalidArgumentError = [
 			`\n\n'${fnName}' is not a GED function. Here are the valid ones:`,
 			'',
@@ -179,6 +217,7 @@ class GhosteryDebug {
 		const eeFnName = (fnName && typeof fnName === 'string' && fnName.toLowerCase()) || undefined;
 		if 		(fnName === undefined) 			outputStrArr = overview;
 		else if (eeFnName === 'getabtests') 	outputStrArr = getABTests;
+		else if (eeFnName === 'getconfdata')	outputStrArr = getConfData;
 		else 									outputStrArr = invalidArgumentError;
 
 		GhosteryDebug.printToConsole(GhosteryDebug.typeset(outputStrArr));
