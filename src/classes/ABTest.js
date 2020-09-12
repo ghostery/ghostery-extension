@@ -42,7 +42,7 @@ class ABTest {
 	 * @return {Object}
 	 */
 	getTests() {
-		return JSON.stringify(this.tests);
+		return this.tests;
 	}
 
 	/**

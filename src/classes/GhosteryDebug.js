@@ -50,7 +50,8 @@ class GhosteryDebug {
 		};
 
 		this.actions = {
-			getABTests: () => abtest.getTests(),
+			// eslint-disable-next-line no-console
+			getABTests: () => console.dir(abtest.getTests()),
 			getConfData: slice => getObjectSlice(confData, slice),
 			getGlobals: slice => getObjectSlice(globals, slice),
 			hitABServerWithIr: ir => abtest.fetch(ir),
@@ -80,20 +81,12 @@ class GhosteryDebug {
 		chrome.cookies.onChanged.addListener(_cookieChangeEvent);
 	}
 
-	static fortyfy(str) {
-		return str.padEnd(40, ' ');
-	}
-
-	static breakify(str) {
-		return (str.concat('\n'));
-	}
-
 	static prettify(uglyLines) {
 		const prettyLines = [];
 
 		uglyLines.forEach((uglyLine) => {
 			if (typeof uglyLine === 'string') {
-				prettyLines.push(GhosteryDebug.breakify(uglyLine));
+				prettyLines.push(uglyLine.concat('\n').trimLeft());
 				return;
 			}
 
@@ -101,12 +94,22 @@ class GhosteryDebug {
 				const leftSide = uglyLine[0];
 				const rightSide = uglyLine[1];
 				prettyLines.push(
-					GhosteryDebug.fortyfy(leftSide).concat(GhosteryDebug.breakify(rightSide))
+					leftSide.padEnd(40, ' ').concat(rightSide).concat('\n')
 				);
 			}
 		});
 
 		return prettyLines;
+	}
+
+	static groupPrint(lines) {
+		const header = lines.shift();
+		// console.group(header);
+		// lines.forEach(line => console.info(line));
+		// console.groupEnd(header);
+		console.log(`%c${header}`, 'font-size: 18px; font-weight: bold');
+		lines.forEach(line => console.log(line));
+		// console.log(...lines);
 	}
 
 	help(fnName) {
@@ -124,7 +127,7 @@ class GhosteryDebug {
 		];
 
 		const getABTests = [
-			'\nghostery.actions.getABTests()',
+			'\n\nghostery.actions.getABTests()',
 			'Display what A/B tests have been fetched from the A/B test server',
 			'Fetches happen on browser startup and then at regularly scheduled intervals',
 			'',
@@ -133,14 +136,16 @@ class GhosteryDebug {
 		];
 
 		const invalidArgumentError = [
-			'\nThat is not a Ghostery Extension Debugger function',
+			'\n\nThat is not a Ghostery Extension Debugger function',
+			'',
 			'Here is the main help screen instead:',
 			'',
 			...overview,
 		];
 
 		if (fnName === undefined) {
-			alwaysLog(...GhosteryDebug.prettify(overview));
+			// alwaysLog(...GhosteryDebug.prettify(overview));
+			GhosteryDebug.groupPrint(GhosteryDebug.prettify(overview));
 		} else if (fnName === 'getABTests') {
 			alwaysLog(...GhosteryDebug.prettify(getABTests));
 		} else {
