@@ -56,8 +56,6 @@ class GhosteryDebug {
 		};
 
 		this.actions = {
-			// eslint-disable-next-line no-console
-			getABTests: () => console.dir(abtest.getTests()),
 			getConfData: slice => getObjectSlice(confData, slice),
 			getGlobals: slice => getObjectSlice(globals, slice),
 			hitABServerWithIr: ir => abtest.fetch(ir),
@@ -87,8 +85,14 @@ class GhosteryDebug {
 		chrome.cookies.onChanged.addListener(_cookieChangeEvent);
 	}
 
+	getABTests = () => {
+		// eslint-disable-next-line no-console
+		console.dir(abtest.getTests());
+		return 'Expand the object above to see the A/B tests currently in memory';
+	}
+
 	static outputStyles = {
-		header: 'font-size: 18px; font-weight: bold',
+		header: 'font-size: 16px; font-weight: bold; padding-top: 15px',
 	};
 
 	static pickRandom(arr) {
@@ -131,6 +135,10 @@ class GhosteryDebug {
 	}
 
 	help(fnName) {
+		const fnNames = {
+			getABTests: 'ghostery.getABTests()',
+		};
+
 		const header = [
 			'\nGhostery Extension Debugger (GED) Help',
 			'Usage:',
@@ -140,19 +148,20 @@ class GhosteryDebug {
 		];
 
 		const availableFunctions = [
-			'Available functions:',
-			['ghostery.actions.getABTests()', 'Display what A/B tests have been fetched from the A/B test server'],
+			[`${fnNames.getABTests}`, 'Display what A/B tests have been fetched from the A/B test server'],
 			['ghostery.actions.getConfData()', 'Show the current value of a config property or properties'],
+			['ghostery.']
 		];
 
 		const overview = [
 			...header,
 			'',
+			'Available functions:',
 			...availableFunctions,
 		];
 
 		const getABTests = [
-			'\n\nghostery.actions.getABTests()',
+			`\n\n${fnNames.getABTests}`,
 			'Display what A/B tests have been fetched from the A/B test server',
 			'Fetches happen on browser startup and then at regularly scheduled intervals',
 			'',
