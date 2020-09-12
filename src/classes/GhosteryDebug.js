@@ -81,35 +81,39 @@ class GhosteryDebug {
 		chrome.cookies.onChanged.addListener(_cookieChangeEvent);
 	}
 
-	static prettify(uglyLines) {
-		const prettyLines = [];
+	static outputStyles = {
+		header: 'font-size: 18px; font-weight: bold',
+	};
 
-		uglyLines.forEach((uglyLine) => {
-			if (typeof uglyLine === 'string') {
-				prettyLines.push(uglyLine.concat('\n').trimLeft());
+	static typeset(rawStrings) {
+		const formattedLines = [];
+
+		rawStrings.forEach((rawString) => {
+			if (typeof rawString === 'string') {
+				formattedLines.push(rawString.concat('\n').trimLeft());
 				return;
 			}
 
-			if (typeof uglyLine === 'object') {
-				const leftSide = uglyLine[0];
-				const rightSide = uglyLine[1];
-				prettyLines.push(
+			if (typeof rawString === 'object') {
+				const leftSide = rawString[0];
+				const rightSide = rawString[1];
+				formattedLines.push(
 					leftSide.padEnd(40, ' ').concat(rightSide).concat('\n')
 				);
 			}
 		});
 
-		return prettyLines;
+		return formattedLines;
 	}
 
-	static groupPrint(lines) {
+	static printToConsole(lines) {
 		const header = lines.shift();
-		// console.group(header);
-		// lines.forEach(line => console.info(line));
-		// console.groupEnd(header);
-		console.log(`%c${header}`, 'font-size: 18px; font-weight: bold');
+		// eslint-disable-next-line no-console
+		console.log(`%c${header}`, GhosteryDebug.outputStyles.header);
+		// eslint-disable-next-line no-console
+		// Individual log statements for each line allow for
+		// more legible and appealing output spacing and formatting
 		lines.forEach(line => console.log(line));
-		// console.log(...lines);
 	}
 
 	help(fnName) {
@@ -143,14 +147,12 @@ class GhosteryDebug {
 			...overview,
 		];
 
-		if (fnName === undefined) {
-			// alwaysLog(...GhosteryDebug.prettify(overview));
-			GhosteryDebug.groupPrint(GhosteryDebug.prettify(overview));
-		} else if (fnName === 'getABTests') {
-			alwaysLog(...GhosteryDebug.prettify(getABTests));
-		} else {
-			alwaysLog(...GhosteryDebug.prettify(invalidArgumentError));
-		}
+		let outputStrArr;
+		if 		(fnName === undefined) 		outputStrArr = overview;
+		else if (fnName === 'getABTests') 	outputStrArr = getABTests;
+		else 								outputStrArr = invalidArgumentError;
+
+		GhosteryDebug.printToConsole(GhosteryDebug.typeset(outputStrArr));
 
 		return ('~~~~~~~~~');
 	}
