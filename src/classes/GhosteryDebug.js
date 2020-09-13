@@ -112,6 +112,8 @@ class GhosteryDebug {
 	static typeset(rawStrings) {
 		const formattedLines = [];
 
+		formattedLines.push('\n');
+
 		rawStrings.forEach((rawString) => {
 			if (typeof rawString === 'string') {
 				formattedLines.push(rawString.trim());
@@ -121,26 +123,39 @@ class GhosteryDebug {
 			if (typeof rawString === 'object') {
 				const leftSide = rawString[0];
 				const rightSide = rawString[1];
+				const cssStyleMarkerLength =
+					(leftSide.startsWith('__MAINHEADER__') && '__MAINHEADER__'.length)
+					|| (leftSide.startsWith('__SUBHEADER__') && '__SUBHEADER__'.length)
+					|| 0;
 				formattedLines.push(
-					leftSide.padEnd(40, ' ').concat(rightSide).trim()
+					leftSide.padEnd(40 + cssStyleMarkerLength, ' ').concat(rightSide).trim()
 				);
 			}
 		});
+
+		formattedLines.push('\n');
 
 		return formattedLines;
 	}
 
 	static printToConsole(lines) {
-		const header = lines.shift();
-		// eslint-disable-next-line no-console
-		console.log(`%c${header}`, GhosteryDebug.outputStyles.header);
-		// eslint-disable-next-line no-console
 		// Individual log statements for each line allow for
 		// more legible and appealing output spacing and formatting
 		lines.forEach((line) => {
-			if (line.startsWith('When called with...')) {
-				console.log(`%c${line}`, GhosteryDebug.outputStyles.argumentsHeader);
+			if (line.startsWith('__MAINHEADER__')) {
+				// eslint-disable-next-line no-console
+				console.log(
+					`%c${line.replace('__MAINHEADER__', '')}`,
+					GhosteryDebug.outputStyles.header
+				);
+			} else if (line.startsWith('__SUBHEADER__')) {
+				// eslint-disable-next-line no-console
+				console.log(
+					`%c${line.replace('__SUBHEADER__', '')}`,
+					GhosteryDebug.outputStyles.argumentsHeader
+				);
 			} else {
+				// eslint-disable-next-line no-console
 				console.log(line);
 			}
 		});
@@ -154,8 +169,9 @@ class GhosteryDebug {
 		};
 
 		const header = [
-			'\nGhostery Extension Debugger (GED) Help',
-			'Usage:',
+			'__MAINHEADER__Ghostery Extension Debugger (GED) Help',
+			'',
+			'__SUBHEADER__Usage:',
 			['ghostery.help()', 'Show this message'],
 			["ghostery.help('functionName')", 'Show function usage details like supported argument types/values'],
 			['', "Example: ghostery.help('getABTests')"],
@@ -170,24 +186,24 @@ class GhosteryDebug {
 		const overview = [
 			...header,
 			'',
-			'Available functions:',
+			'__SUBHEADER__Available functions:',
 			...availableFunctions,
 		];
 
 		const getABTests = [
-			`\n\n${fnNames.getABTests}`,
+			`__MAINHEADER__${fnNames.getABTests}`,
 			'Display what A/B tests have been fetched from the A/B test server',
 			'Fetches happen on browser startup and then at regularly scheduled intervals',
 			'',
-			['When called with...', 'Returns...'],
+			['__SUBHEADER__When called with...', 'Returns...'],
 			['No argument or any arguments', 'The A/B test strings currently in memory'],
 		];
 
 		const getConfData = [
-			`\n\n${fnNames.getConfData}`,
+			`__MAINHEADER__${fnNames.getConfData}`,
 			'Display the current value(s) of a config property or properties',
 			'',
-			['When called with...', 'Returns...'],
+			['__SUBHEADER__When called with...', 'Returns...'],
 			['No argument', 'The whole config object'],
 			['A property key string', 'An object with just that property'],
 			['', "Example: ghostery.getConfData('enable_smart_block')"],
@@ -197,10 +213,10 @@ class GhosteryDebug {
 		];
 
 		const getGlobals = [
-			`\n\n${fnNames.getGlobals}`,
+			`__MAINHEADER__${fnNames.getGlobals}`,
 			'Display the current value(s) of a global property or properties',
 			'',
-			['When called with...', 'Returns...'],
+			['__SUBHEADER__When called with...', 'Returns...'],
 			['No argument', 'The whole globals object'],
 			['A property key string', 'An object with just that property'],
 			['', "Example: ghostery.getGlobals('BROWSER_INFO')"],
@@ -210,7 +226,7 @@ class GhosteryDebug {
 		];
 
 		const invalidArgumentError = [
-			`\n\n'${fnName}' is not a GED function. Here are the valid ones:`,
+			`__MAINHEADER__'${fnName}' is not a GED function. Here are the valid ones:`,
 			'',
 			...availableFunctions,
 		];
