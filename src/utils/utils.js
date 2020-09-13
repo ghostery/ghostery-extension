@@ -547,6 +547,9 @@ export function fetchLocalJSONResource(url) {
  * OR Get a subset of properties (if props is a regex)
  * OR Get the whole supplied object back (if props is missing, invalid, or produces no matches)
  * If the property is not defined on the object, returns the object instead of throwing an error
+ *
+ * @memberOf BackgroundUtils
+ *
  * @param {string|RegExp} name		String name of the property, or regex to match against all properties. Optional.
  * @returns {Object}				Returns an object whose properties are a subset of the argument object's
  */
@@ -577,6 +580,51 @@ export function getObjectSlice(obj, props) {
 	}
 
 	return obj;
+}
+
+/**
+ * Pick a random element from the argument array
+ * If no argument is provided, if the argument is not an array, or if the argument array is empty,
+ * the err property on the return object is set to true, errMsg has details, and val is left undefined
+ * Otherwise, err is false, errMsg is the empty string, and val contains the randomly picked element
+ *
+ * @memberOf BackgroundUtils
+ *
+ * @param 		{Array}			The array to pick a value from. Elements can be of any type(s)
+ * @returns		{Object}		{ val: *, err: Boolean, errMsg: undefined|String }
+ */
+export function pickRandomArrEl(arr) {
+	if (arr === undefined) {
+		return ({
+			err: true,
+			errMsg: 'No argument provided',
+			val: undefined,
+		});
+	}
+
+	if (!Array.isArray(arr)) {
+		return ({
+			err: true,
+			errMsg: 'The argument must be an array',
+			val: undefined,
+		});
+	}
+
+	const len = arr.length;
+
+	if (len === 0) {
+		return ({
+			err: true,
+			errMsg: "It's hard to pick a random element from an empty array",
+			val: undefined,
+		});
+	}
+
+	return ({
+		err: false,
+		errMsg: '',
+		val: arr[Math.floor((Math.random() * len))],
+	});
 }
 
 /**

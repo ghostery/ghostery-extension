@@ -19,27 +19,13 @@ import tabInfo from './TabInfo';
 import foundBugs from './FoundBugs';
 import PromoModals from './PromoModals';
 import { alwaysLog } from '../utils/common';
-import { getObjectSlice } from '../utils/utils';
+import { getObjectSlice, pickRandomArrEl } from '../utils/utils';
 
 /**
  * @class for debugging Ghostery via the background.js console.
  * @memberof BackgroundClasses
  */
 
-/*
-	Ghostery: {
-  modules : {
-	globals: {},
-	conf: {},
-	...
-  },
-  actions: {
-	enableDebugging: function(),
-	triggerABTest(),
-	...
-  }
-}
-	 */
 class GhosteryDebug {
 	constructor() {
 		this.isLog = chrome.runtime.getManifest().debug || false;
@@ -119,23 +105,16 @@ class GhosteryDebug {
 	getGlobals = slice => this._outputObjectSlice(globals, slice, 'globals');
 
 	static outputStyles = {
-		header: 'font-size: 16px; font-weight: bold; padding-top: 15px',
+		argumentsHeader: 'font-weight: bold; padding: 2px 0px;',
+		header: 'font-size: 16px; font-weight: bold; padding: 4px 0px',
 	};
-
-	static pickRandom(arr) {
-		const len = arr && arr.length;
-
-		if (!len) return '';
-
-		return arr[Math.floor((Math.random() * len))];
-	}
 
 	static typeset(rawStrings) {
 		const formattedLines = [];
 
 		rawStrings.forEach((rawString) => {
 			if (typeof rawString === 'string') {
-				formattedLines.push(rawString.concat('\n').trimLeft());
+				formattedLines.push(rawString.trim());
 				return;
 			}
 
@@ -143,7 +122,7 @@ class GhosteryDebug {
 				const leftSide = rawString[0];
 				const rightSide = rawString[1];
 				formattedLines.push(
-					leftSide.padEnd(40, ' ').concat(rightSide).concat('\n')
+					leftSide.padEnd(40, ' ').concat(rightSide).trim()
 				);
 			}
 		});
@@ -158,7 +137,13 @@ class GhosteryDebug {
 		// eslint-disable-next-line no-console
 		// Individual log statements for each line allow for
 		// more legible and appealing output spacing and formatting
-		lines.forEach(line => console.log(line));
+		lines.forEach((line) => {
+			if (line.startsWith('When called with...')) {
+				console.log(`%c${line}`, GhosteryDebug.outputStyles.argumentsHeader);
+			} else {
+				console.log(line);
+			}
+		});
 	}
 
 	help(fnName) {
@@ -194,8 +179,8 @@ class GhosteryDebug {
 			'Display what A/B tests have been fetched from the A/B test server',
 			'Fetches happen on browser startup and then at regularly scheduled intervals',
 			'',
-			['Arguments', 'None'],
-			['Returns', 'A JSON representation of the A/B test strings currently in memory'],
+			['When called with...', 'Returns...'],
+			['No argument or any arguments', 'The A/B test strings currently in memory'],
 		];
 
 		const getConfData = [
@@ -240,7 +225,7 @@ class GhosteryDebug {
 
 		GhosteryDebug.printToConsole(GhosteryDebug.typeset(outputStrArr));
 
-		return (GhosteryDebug.pickRandom(this.coolBeans));
+		return (pickRandomArrEl(this.coolBeans).val);
 	}
 
 	status() {
