@@ -27,6 +27,7 @@ const { BROWSER_INFO, CMP_BASE_URL, EXTENSION_VERSION } = globals;
 class ABTest {
 	constructor() {
 		this.tests = {};
+		this.hasBeenFetched = false;
 	}
 
 	/**
@@ -63,6 +64,7 @@ class ABTest {
 					(tests, test) => Object.assign(tests, { [test.name]: test.data }),
 					{}
 				);
+				this.hasBeenFetched = true;
 			} else {
 				log('A/B Tests: no tests found.');
 			}
