@@ -116,7 +116,7 @@ class GhosteryDebug {
 
 		rawStrings.forEach((rawString) => {
 			if (typeof rawString === 'string') {
-				formattedLines.push(rawString.trim());
+				formattedLines.push(rawString);
 				return;
 			}
 
@@ -128,7 +128,7 @@ class GhosteryDebug {
 					|| (leftSide.startsWith('__SUBHEADER__') && '__SUBHEADER__'.length)
 					|| 0;
 				formattedLines.push(
-					leftSide.padEnd(40 + cssStyleMarkerLength, ' ').concat(rightSide).trim()
+					leftSide.padEnd(40 + cssStyleMarkerLength, ' ').concat(rightSide)
 				);
 			}
 		});
