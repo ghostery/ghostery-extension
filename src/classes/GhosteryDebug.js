@@ -25,7 +25,6 @@ import { getObjectSlice, pickRandomArrEl } from '../utils/utils';
  * @class for debugging Ghostery via the background.js console.
  * @memberof BackgroundClasses
  */
-
 class GhosteryDebug {
 	constructor() {
 		this.isLog = chrome.runtime.getManifest().debug || false;
@@ -69,6 +68,20 @@ class GhosteryDebug {
 		chrome.cookies.onChanged.addListener(_cookieChangeEvent);
 	}
 
+	static outputStyles = {
+		argumentsHeader: 'font-weight: bold; padding: 2px 0px;',
+		header: 'font-size: 16px; font-weight: bold; padding: 4px 0px',
+	};
+
+	static helpStrings = {
+		fnNames: {
+			getABTests: 'ghostery.getABTests()',
+			getConfData: 'ghostery.getConfData()',
+			getGlobals: 'ghostery.getGlobals()',
+			hitABServerWithIr: 'ghostery.hitABServerWithIr()',
+		},
+	};
+
 	getABTests = () => {
 		// eslint-disable-next-line no-console
 		if (this.objectOutputStyle === 'object') {
@@ -107,11 +120,6 @@ class GhosteryDebug {
 	getConfData = slice => this._outputObjectSlice(confData, slice, 'config');
 
 	getGlobals = slice => this._outputObjectSlice(globals, slice, 'globals');
-
-	static outputStyles = {
-		argumentsHeader: 'font-weight: bold; padding: 2px 0px;',
-		header: 'font-size: 16px; font-weight: bold; padding: 4px 0px',
-	};
 
 	static typeset(rawStrings) {
 		const formattedLines = [];
@@ -166,12 +174,7 @@ class GhosteryDebug {
 	}
 
 	help(fnName) {
-		const fnNames = {
-			getABTests: 'ghostery.getABTests()',
-			getConfData: 'ghostery.getConfData()',
-			getGlobals: 'ghostery.getGlobals()',
-			hitABServerWithIr: 'ghostery.hitABServerWithIr()',
-		};
+		const { fnNames } = GhosteryDebug.helpStrings;
 
 		const header = [
 			'__MAINHEADER__Ghostery Extension Debugger (GED) Help',
