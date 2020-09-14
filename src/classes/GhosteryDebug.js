@@ -43,7 +43,6 @@ class GhosteryDebug {
 		};
 
 		this.actions = {
-			hitABServerWithIr: ir => abtest.fetch(ir),
 			toggleLogging: () => this._toggleLogging(),
 			forcePromoModalDisplay: modal => PromoModals.forceDisplay(modal),
 		};
@@ -76,6 +75,11 @@ class GhosteryDebug {
 			console.dir(abtest.getTests());
 		}
 		return 'These are all the A/B tests currently in memory';
+	}
+
+	hitABServerWithIr = (ir) => {
+		abtest.fetch(ir);
+		return 'These are the A/B tests the A/B server returns when called with the supplied ir';
 	}
 
 	_outputObjectSlice(obj, slice, objStr) {
@@ -166,6 +170,7 @@ class GhosteryDebug {
 			getABTests: 'ghostery.getABTests()',
 			getConfData: 'ghostery.getConfData()',
 			getGlobals: 'ghostery.getGlobals()',
+			hitABServerWithIr: 'ghostery.hitABServerWithIr()',
 		};
 
 		const header = [
@@ -181,6 +186,7 @@ class GhosteryDebug {
 			[`${fnNames.getABTests}`, 'Display what A/B tests have been fetched from the A/B test server'],
 			[`${fnNames.getConfData}`, 'Show the current value of a config property or properties'],
 			[`${fnNames.getGlobals}`, 'Show the current value of a global property or properties'],
+			[`${fnNames.hitABServerWithIr}`, 'Hit the A/B server endpoint with the supplied install random number'],
 		];
 
 		const overview = [
@@ -225,6 +231,20 @@ class GhosteryDebug {
 			['Anything else', 'The whole globals object. Also returned if there are no matching results'],
 		];
 
+		const hitABServerWithIr = [
+			`__MAINHEADER__${fnNames.hitABServerWithIr}`,
+			'A random number between 1 and 100 is generated and saved to local storage',
+			'when the extension is first installed. This number is included in requests',
+			'to the A/B test server as the value of the ir query parameter, and it determines',
+			'which test buckets the user is placed in.',
+			'This function lets you hit the A/B server with any valid ir number',
+			'To make it easier to check whether different A/B tests are returned as expected',
+			'And check the functionality of the different test scenarios',
+			'',
+			['__SUBHEADER__When called with...', 'Returns...'],
+			['A number between 1 and 100', 'The tests returned by the A/B server for that ir value'],
+		];
+
 		const invalidArgumentError = [
 			`__MAINHEADER__'${fnName}' is not a GED function. Here are the valid ones:`,
 			'',
@@ -233,11 +253,12 @@ class GhosteryDebug {
 
 		let outputStrArr;
 		const eeFnName = (fnName && typeof fnName === 'string' && fnName.toLowerCase()) || undefined;
-		if 		(fnName === undefined) 			outputStrArr = overview;
-		else if (eeFnName === 'getabtests') 	outputStrArr = getABTests;
-		else if (eeFnName === 'getconfdata')	outputStrArr = getConfData;
-		else if (eeFnName === 'getglobals')		outputStrArr = getGlobals;
-		else 									outputStrArr = invalidArgumentError;
+		if 		(fnName === undefined) 				outputStrArr = overview;
+		else if (eeFnName === 'getabtests') 		outputStrArr = getABTests;
+		else if (eeFnName === 'getconfdata')		outputStrArr = getConfData;
+		else if (eeFnName === 'getglobals')			outputStrArr = getGlobals;
+		else if (eeFnName === 'hitabserverwithir')	outputStrArr = hitABServerWithIr;
+		else 										outputStrArr = invalidArgumentError;
 
 		GhosteryDebug.printToConsole(GhosteryDebug.typeset(outputStrArr));
 
