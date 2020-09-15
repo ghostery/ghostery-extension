@@ -30,12 +30,6 @@ class GhosteryDebug {
 		this.isLog = chrome.runtime.getManifest().debug || false;
 		this.objectOutputStyle = 'object'; // other option is 'json'
 
-		this.coolBeans = [
-			'Thanks for using Ghostery',
-			'Try our desktop tracker blocker Midnight for free',
-			'Try our tracker analytics tool Insights for free',
-		];
-
 		this.modules = {
 			globals: {},
 			conf: {},
@@ -73,14 +67,90 @@ class GhosteryDebug {
 		header: 'font-size: 16px; font-weight: bold; padding: 4px 0px',
 	};
 
-	static helpStrings = {
-		fnNames: {
-			getABTests: 'ghostery.getABTests()',
-			getConfData: 'ghostery.getConfData()',
-			getGlobals: 'ghostery.getGlobals()',
-			hitABServerWithIr: 'ghostery.hitABServerWithIr()',
-		},
+	static helpFunctionNames = {
+		getABTests: 'ghostery.getABTests()',
+		getConfData: 'ghostery.getConfData()',
+		getGlobals: 'ghostery.getGlobals()',
+		hitABServerWithIr: 'ghostery.hitABServerWithIr()',
 	};
+
+	static helpHeader = [
+		'__MAINHEADER__Ghostery Extension Debugger (GED) Help',
+		'',
+		'__SUBHEADER__Usage:',
+		['ghostery.help()', 'Show this message'],
+		["ghostery.help('functionName')", 'Show function usage details like supported argument types/values'],
+		['', "Example: ghostery.help('getABTests')"],
+	];
+
+	static helpAvailableFunctions = [
+		[`${this.helpFunctionNames.getABTests}`, 'Display what A/B tests have been fetched from the A/B test server'],
+		[`${this.helpFunctionNames.getConfData}`, 'Show the current value of a config property or properties'],
+		[`${this.helpFunctionNames.getGlobals}`, 'Show the current value of a global property or properties'],
+		[`${this.helpFunctionNames.hitABServerWithIr}`, 'Hit the A/B server endpoint with the supplied install random number'],
+	];
+
+	static helpPromoMessages = [
+		'Thanks for using Ghostery',
+		'Try our desktop tracker blocker Midnight for free',
+		'Try our tracker analytics tool Insights for free',
+	];
+
+	static helpGetABTests = [
+		`__MAINHEADER__${this.helpFunctionNames.getABTests}`,
+		'Display what A/B tests have been fetched from the A/B test server',
+		'Fetches happen on browser startup and then at regularly scheduled intervals',
+		'',
+		['__SUBHEADER__When called with...', 'Returns...'],
+		['No argument or any arguments', 'The A/B test strings currently in memory'],
+	];
+
+	static helpGetConfData = [
+		`__MAINHEADER__${this.helpFunctionNames.getConfData}`,
+		'Display the current value(s) of a config property or properties',
+		'',
+		['__SUBHEADER__When called with...', 'Returns...'],
+		['No argument', 'The whole config object'],
+		['A property key string', 'An object with just that property'],
+		['', "Example: ghostery.getConfData('enable_smart_block')"],
+		['A property key regex', 'An object with all matching properties'],
+		['', 'Example: ghostery.getConfData(/setup_/)'],
+		['Anything else', 'The whole config object. Also returned if there are no matching results'],
+	];
+
+	static helpGetGlobals = [
+		`__MAINHEADER__${this.helpFunctionNames.getGlobals}`,
+		'Display the current value(s) of a global property or properties',
+		'',
+		['__SUBHEADER__When called with...', 'Returns...'],
+		['No argument', 'The whole globals object'],
+		['A property key string', 'An object with just that property'],
+		['', "Example: ghostery.getGlobals('BROWSER_INFO')"],
+		['A property key regex', 'An object with all matching properties'],
+		['', 'Example: ghostery.getGlobals(/ACCOUNT_/)'],
+		['Anything else', 'The whole globals object. Also returned if there are no matching results'],
+	];
+
+	static helpHitABServerWithIr = [
+		`__MAINHEADER__${this.helpFunctionNames.hitABServerWithIr}`,
+		'A random number between 1 and 100 is generated and saved to local storage',
+		'when the extension is first installed. This number is included in requests',
+		'to the A/B test server as the value of the ir query parameter, and it determines',
+		'which test buckets the user is placed in.',
+		'This function lets you hit the A/B server with any valid ir number',
+		'To make it easier to check whether different A/B tests are returned as expected',
+		'And check the functionality of the different test scenarios',
+		'',
+		['__SUBHEADER__When called with...', 'Returns...'],
+		['A number between 1 and 100', 'The tests returned by the A/B server for that ir value'],
+	];
+
+	static helpOverview = [
+		...this.helpHeader,
+		'',
+		'__SUBHEADER__Available functions:',
+		...this.helpAvailableFunctions,
+	];
 
 	getABTests = () => {
 		// eslint-disable-next-line no-console
@@ -173,99 +243,37 @@ class GhosteryDebug {
 		});
 	}
 
+	// eslint-disable-next-line class-methods-use-this
 	help(fnName) {
-		const { fnNames } = GhosteryDebug.helpStrings;
-
-		const header = [
-			'__MAINHEADER__Ghostery Extension Debugger (GED) Help',
-			'',
-			'__SUBHEADER__Usage:',
-			['ghostery.help()', 'Show this message'],
-			["ghostery.help('functionName')", 'Show function usage details like supported argument types/values'],
-			['', "Example: ghostery.help('getABTests')"],
-		];
-
-		const availableFunctions = [
-			[`${fnNames.getABTests}`, 'Display what A/B tests have been fetched from the A/B test server'],
-			[`${fnNames.getConfData}`, 'Show the current value of a config property or properties'],
-			[`${fnNames.getGlobals}`, 'Show the current value of a global property or properties'],
-			[`${fnNames.hitABServerWithIr}`, 'Hit the A/B server endpoint with the supplied install random number'],
-		];
-
-		const overview = [
-			...header,
-			'',
-			'__SUBHEADER__Available functions:',
-			...availableFunctions,
-		];
-
-		const getABTests = [
-			`__MAINHEADER__${fnNames.getABTests}`,
-			'Display what A/B tests have been fetched from the A/B test server',
-			'Fetches happen on browser startup and then at regularly scheduled intervals',
-			'',
-			['__SUBHEADER__When called with...', 'Returns...'],
-			['No argument or any arguments', 'The A/B test strings currently in memory'],
-		];
-
-		const getConfData = [
-			`__MAINHEADER__${fnNames.getConfData}`,
-			'Display the current value(s) of a config property or properties',
-			'',
-			['__SUBHEADER__When called with...', 'Returns...'],
-			['No argument', 'The whole config object'],
-			['A property key string', 'An object with just that property'],
-			['', "Example: ghostery.getConfData('enable_smart_block')"],
-			['A property key regex', 'An object with all matching properties'],
-			['', 'Example: ghostery.getConfData(/setup_/)'],
-			['Anything else', 'The whole config object. Also returned if there are no matching results'],
-		];
-
-		const getGlobals = [
-			`__MAINHEADER__${fnNames.getGlobals}`,
-			'Display the current value(s) of a global property or properties',
-			'',
-			['__SUBHEADER__When called with...', 'Returns...'],
-			['No argument', 'The whole globals object'],
-			['A property key string', 'An object with just that property'],
-			['', "Example: ghostery.getGlobals('BROWSER_INFO')"],
-			['A property key regex', 'An object with all matching properties'],
-			['', 'Example: ghostery.getGlobals(/ACCOUNT_/)'],
-			['Anything else', 'The whole globals object. Also returned if there are no matching results'],
-		];
-
-		const hitABServerWithIr = [
-			`__MAINHEADER__${fnNames.hitABServerWithIr}`,
-			'A random number between 1 and 100 is generated and saved to local storage',
-			'when the extension is first installed. This number is included in requests',
-			'to the A/B test server as the value of the ir query parameter, and it determines',
-			'which test buckets the user is placed in.',
-			'This function lets you hit the A/B server with any valid ir number',
-			'To make it easier to check whether different A/B tests are returned as expected',
-			'And check the functionality of the different test scenarios',
-			'',
-			['__SUBHEADER__When called with...', 'Returns...'],
-			['A number between 1 and 100', 'The tests returned by the A/B server for that ir value'],
-		];
+		const {
+			helpAvailableFunctions,
+			helpPromoMessages,
+			helpGetABTests,
+			helpGetConfData,
+			helpGetGlobals,
+			helpHitABServerWithIr,
+			helpOverview,
+		} = GhosteryDebug;
 
 		const invalidArgumentError = [
 			`__MAINHEADER__'${fnName}' is not a GED function. Here are the valid ones:`,
 			'',
-			...availableFunctions,
+			...helpAvailableFunctions,
 		];
 
 		let outputStrArr;
 		const eeFnName = (fnName && typeof fnName === 'string' && fnName.toLowerCase()) || undefined;
-		if 		(fnName === undefined) 				outputStrArr = overview;
-		else if (eeFnName === 'getabtests') 		outputStrArr = getABTests;
-		else if (eeFnName === 'getconfdata')		outputStrArr = getConfData;
-		else if (eeFnName === 'getglobals')			outputStrArr = getGlobals;
-		else if (eeFnName === 'hitabserverwithir')	outputStrArr = hitABServerWithIr;
+		if 		(fnName === undefined) 				outputStrArr = helpOverview;
+		else if (eeFnName === 'getabtests') 		outputStrArr = helpGetABTests;
+		else if (eeFnName === 'getconfdata')		outputStrArr = helpGetConfData;
+		else if (eeFnName === 'getglobals')			outputStrArr = helpGetGlobals;
+		else if (eeFnName === 'hitabserverwithir')	outputStrArr = helpHitABServerWithIr;
 		else 										outputStrArr = invalidArgumentError;
 
 		GhosteryDebug.printToConsole(GhosteryDebug.typeset(outputStrArr));
 
-		return (pickRandomArrEl(this.coolBeans).val);
+		// Display a little ad or thank you note instead of "undefined"
+		return (pickRandomArrEl(helpPromoMessages).val);
 	}
 
 	status() {
