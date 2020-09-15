@@ -152,6 +152,7 @@ class GhosteryDebug {
 		getConfData: 'ghostery.getConfData()',
 		getGlobals: 'ghostery.getGlobals()',
 		hitABServerWithIr: 'ghostery.hitABServerWithIr()',
+		settingsToggleLogging: 'ghostery.settings.toggleLogging()',
 	};
 
 	static helpAvailableFunctions = [
@@ -159,6 +160,7 @@ class GhosteryDebug {
 		[`${this.helpFunctionNames.getConfData}`, 'Show the current value of a config property or properties'],
 		[`${this.helpFunctionNames.getGlobals}`, 'Show the current value of a global property or properties'],
 		[`${this.helpFunctionNames.hitABServerWithIr}`, 'Hit the A/B server endpoint with the supplied install random number'],
+		[`${this.helpFunctionNames.settingsToggleLogging}`, 'Toggle all other debug logging on/off'],
 	];
 
 	static helpHeader = [
@@ -232,6 +234,19 @@ class GhosteryDebug {
 		...this.helpAvailableFunctions,
 	];
 
+	static helpSettingsToggleLogging = [
+		`__MAINHEADER__${this.helpFunctionNames.settingsToggleLogging}`,
+		'Toggle regular debug output on/off.',
+		'This overrides the debug property in the manifest',
+		'and allows you to turn on logging in production builds',
+		"and any other builds that don't have debug set in the manifest",
+		'',
+		['__SUBHEADER__When called with...', 'Does...'],
+		["'ON'", 'Turns logging on'],
+		["'OFF'", 'Turns logging off'],
+		['Any other argument or no argument', 'Turns logging on if it was off and vice versa'],
+	]
+
 	// eslint-disable-next-line class-methods-use-this
 	help(fnName) {
 		const {
@@ -242,6 +257,7 @@ class GhosteryDebug {
 			helpGetGlobals,
 			helpHitABServerWithIr,
 			helpOverview,
+			helpSettingsToggleLogging,
 		} = GhosteryDebug;
 
 		const invalidArgumentError = [
@@ -257,6 +273,7 @@ class GhosteryDebug {
 		else if (eeFnName === 'getconfdata')		outputStrArr = helpGetConfData;
 		else if (eeFnName === 'getglobals')			outputStrArr = helpGetGlobals;
 		else if (eeFnName === 'hitabserverwithir')	outputStrArr = helpHitABServerWithIr;
+		else if (eeFnName === 'togglelogging')		outputStrArr = helpSettingsToggleLogging;
 		else 										outputStrArr = invalidArgumentError;
 
 		GhosteryDebug.printToConsole(GhosteryDebug.typeset(outputStrArr));
