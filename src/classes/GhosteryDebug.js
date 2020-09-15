@@ -26,6 +26,11 @@ import { getObjectSlice, pickRandomArrEl } from '../utils/utils';
  * @memberof BackgroundClasses
  */
 class GhosteryDebug {
+	// ToC
+	// Search for these strings to quickly jump to their sections
+	// [[Output styling and formatting]]
+	// [[Help CLI & strings]]
+
 	constructor() {
 		this.isLog = chrome.runtime.getManifest().debug || false;
 		this.objectOutputStyle = 'object'; // other option is 'json'
@@ -62,10 +67,90 @@ class GhosteryDebug {
 		chrome.cookies.onChanged.addListener(_cookieChangeEvent);
 	}
 
+	// START [[Output styling and formatting]] SECTION
 	static outputStyles = {
 		argumentsHeader: 'font-weight: bold; padding: 2px 0px;',
 		header: 'font-size: 16px; font-weight: bold; padding: 4px 0px',
 	};
+
+	/**
+	 * Output an array of strings to the console
+	 * Scans strings for CSS markers, applies the specified styles when they are found,
+	 * and removes the markers from the final output
+	 *
+	 * @param {Array}		lines	An array of strings to be logged, each possibly starting with a CSS marker
+	 * @return {undefined}			No explicit return value
+	 */
+	static printToConsole(lines) {
+		// Individual log statements for each line allow for
+		// more legible and appealing output spacing and formatting
+		lines.forEach((line) => {
+			if (line.startsWith('__MAINHEADER__')) {
+				// eslint-disable-next-line no-console
+				console.log(
+					`%c${line.replace('__MAINHEADER__', '')}`,
+					GhosteryDebug.outputStyles.header
+				);
+			} else if (line.startsWith('__SUBHEADER__')) {
+				// eslint-disable-next-line no-console
+				console.log(
+					`%c${line.replace('__SUBHEADER__', '')}`,
+					GhosteryDebug.outputStyles.argumentsHeader
+				);
+			} else {
+				// eslint-disable-next-line no-console
+				console.log(line);
+			}
+		});
+	}
+
+	/**
+	 * Takes an array whose elements are either strings or two element string arrays
+	 * and processes it into an array of strings ready for printing to the console
+	 * String input array elements are passed through unaltered
+	 * String array input array elements have their elements concatenated with padding to create neat columns
+	 * Newlines are added at the beginning and the end
+	 *
+	 * @param {Array}	rawTexts	An array of strings and/or two element string arrays
+	 * @return {Array}				An array of strings tidied and padded for printing
+	 */
+	static typeset(rawTexts) {
+		const formattedLines = [];
+
+		formattedLines.push('\n');
+
+		rawTexts.forEach((rawText) => {
+			if (typeof rawText === 'string') {
+				formattedLines.push(rawText);
+				return;
+			}
+
+			if (typeof rawText === 'object') {
+				const leftSide = rawText[0];
+				const rightSide = rawText[1];
+				const cssStyleMarkerLength =
+					(leftSide.startsWith('__MAINHEADER__') && '__MAINHEADER__'.length)
+					|| (leftSide.startsWith('__SUBHEADER__') && '__SUBHEADER__'.length)
+					|| 0;
+				formattedLines.push(
+					leftSide.padEnd(40 + cssStyleMarkerLength, ' ').concat(rightSide)
+				);
+			}
+		});
+
+		formattedLines.push('\n');
+
+		return formattedLines;
+	}
+	// END [[Output styling and formatting]] SECTION
+
+	// START [[Help CLI & strings]] SECTION
+	static helpAvailableFunctions = [
+		[`${this.helpFunctionNames.getABTests}`, 'Display what A/B tests have been fetched from the A/B test server'],
+		[`${this.helpFunctionNames.getConfData}`, 'Show the current value of a config property or properties'],
+		[`${this.helpFunctionNames.getGlobals}`, 'Show the current value of a global property or properties'],
+		[`${this.helpFunctionNames.hitABServerWithIr}`, 'Hit the A/B server endpoint with the supplied install random number'],
+	];
 
 	static helpFunctionNames = {
 		getABTests: 'ghostery.getABTests()',
@@ -81,13 +166,6 @@ class GhosteryDebug {
 		['ghostery.help()', 'Show this message'],
 		["ghostery.help('functionName')", 'Show function usage details like supported argument types/values'],
 		['', "Example: ghostery.help('getABTests')"],
-	];
-
-	static helpAvailableFunctions = [
-		[`${this.helpFunctionNames.getABTests}`, 'Display what A/B tests have been fetched from the A/B test server'],
-		[`${this.helpFunctionNames.getConfData}`, 'Show the current value of a config property or properties'],
-		[`${this.helpFunctionNames.getGlobals}`, 'Show the current value of a global property or properties'],
-		[`${this.helpFunctionNames.hitABServerWithIr}`, 'Hit the A/B server endpoint with the supplied install random number'],
 	];
 
 	static helpPromoMessages = [
@@ -152,6 +230,40 @@ class GhosteryDebug {
 		...this.helpAvailableFunctions,
 	];
 
+	// eslint-disable-next-line class-methods-use-this
+	help(fnName) {
+		const {
+			helpAvailableFunctions,
+			helpPromoMessages,
+			helpGetABTests,
+			helpGetConfData,
+			helpGetGlobals,
+			helpHitABServerWithIr,
+			helpOverview,
+		} = GhosteryDebug;
+
+		const invalidArgumentError = [
+			`__MAINHEADER__'${fnName}' is not a GED function. Here are the valid ones:`,
+			'',
+			...helpAvailableFunctions,
+		];
+
+		let outputStrArr;
+		const eeFnName = (fnName && typeof fnName === 'string' && fnName.toLowerCase()) || undefined;
+		if 		(fnName === undefined) 				outputStrArr = helpOverview;
+		else if (eeFnName === 'getabtests') 		outputStrArr = helpGetABTests;
+		else if (eeFnName === 'getconfdata')		outputStrArr = helpGetConfData;
+		else if (eeFnName === 'getglobals')			outputStrArr = helpGetGlobals;
+		else if (eeFnName === 'hitabserverwithir')	outputStrArr = helpHitABServerWithIr;
+		else 										outputStrArr = invalidArgumentError;
+
+		GhosteryDebug.printToConsole(GhosteryDebug.typeset(outputStrArr));
+
+		// Display a little ad or thank you note instead of "undefined"
+		return (pickRandomArrEl(helpPromoMessages).val);
+	}
+	// END [[Help CLI & strings]] SECTION
+
 	getABTests = () => {
 		// eslint-disable-next-line no-console
 		if (this.objectOutputStyle === 'object') {
@@ -190,91 +302,6 @@ class GhosteryDebug {
 	getConfData = slice => this._outputObjectSlice(confData, slice, 'config');
 
 	getGlobals = slice => this._outputObjectSlice(globals, slice, 'globals');
-
-	static typeset(rawStrings) {
-		const formattedLines = [];
-
-		formattedLines.push('\n');
-
-		rawStrings.forEach((rawString) => {
-			if (typeof rawString === 'string') {
-				formattedLines.push(rawString);
-				return;
-			}
-
-			if (typeof rawString === 'object') {
-				const leftSide = rawString[0];
-				const rightSide = rawString[1];
-				const cssStyleMarkerLength =
-					(leftSide.startsWith('__MAINHEADER__') && '__MAINHEADER__'.length)
-					|| (leftSide.startsWith('__SUBHEADER__') && '__SUBHEADER__'.length)
-					|| 0;
-				formattedLines.push(
-					leftSide.padEnd(40 + cssStyleMarkerLength, ' ').concat(rightSide)
-				);
-			}
-		});
-
-		formattedLines.push('\n');
-
-		return formattedLines;
-	}
-
-	static printToConsole(lines) {
-		// Individual log statements for each line allow for
-		// more legible and appealing output spacing and formatting
-		lines.forEach((line) => {
-			if (line.startsWith('__MAINHEADER__')) {
-				// eslint-disable-next-line no-console
-				console.log(
-					`%c${line.replace('__MAINHEADER__', '')}`,
-					GhosteryDebug.outputStyles.header
-				);
-			} else if (line.startsWith('__SUBHEADER__')) {
-				// eslint-disable-next-line no-console
-				console.log(
-					`%c${line.replace('__SUBHEADER__', '')}`,
-					GhosteryDebug.outputStyles.argumentsHeader
-				);
-			} else {
-				// eslint-disable-next-line no-console
-				console.log(line);
-			}
-		});
-	}
-
-	// eslint-disable-next-line class-methods-use-this
-	help(fnName) {
-		const {
-			helpAvailableFunctions,
-			helpPromoMessages,
-			helpGetABTests,
-			helpGetConfData,
-			helpGetGlobals,
-			helpHitABServerWithIr,
-			helpOverview,
-		} = GhosteryDebug;
-
-		const invalidArgumentError = [
-			`__MAINHEADER__'${fnName}' is not a GED function. Here are the valid ones:`,
-			'',
-			...helpAvailableFunctions,
-		];
-
-		let outputStrArr;
-		const eeFnName = (fnName && typeof fnName === 'string' && fnName.toLowerCase()) || undefined;
-		if 		(fnName === undefined) 				outputStrArr = helpOverview;
-		else if (eeFnName === 'getabtests') 		outputStrArr = helpGetABTests;
-		else if (eeFnName === 'getconfdata')		outputStrArr = helpGetConfData;
-		else if (eeFnName === 'getglobals')			outputStrArr = helpGetGlobals;
-		else if (eeFnName === 'hitabserverwithir')	outputStrArr = helpHitABServerWithIr;
-		else 										outputStrArr = invalidArgumentError;
-
-		GhosteryDebug.printToConsole(GhosteryDebug.typeset(outputStrArr));
-
-		// Display a little ad or thank you note instead of "undefined"
-		return (pickRandomArrEl(helpPromoMessages).val);
-	}
 
 	status() {
 		alwaysLog(
