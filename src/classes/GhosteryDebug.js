@@ -32,8 +32,8 @@ class GhosteryDebug {
 	// [[Help CLI & strings]]
 
 	constructor() {
-		this.isLog = chrome.runtime.getManifest().debug || false;
-		this.objectOutputStyle = 'object'; // other option is 'json'
+		this.settings._isLog = chrome.runtime.getManifest().debug || false;
+		this.settings._objectOutputStyle = 'object'; // other option is 'json'
 
 		this.modules = {
 			globals: {},
@@ -41,7 +41,6 @@ class GhosteryDebug {
 		};
 
 		this.actions = {
-			toggleLogging: () => this._toggleLogging(),
 			forcePromoModalDisplay: modal => PromoModals.forceDisplay(modal),
 		};
 
@@ -269,7 +268,7 @@ class GhosteryDebug {
 
 	getABTests = () => {
 		// eslint-disable-next-line no-console
-		if (this.objectOutputStyle === 'object') {
+		if (this.settings._objectOutputStyle === 'object') {
 			console.dir(abtest.getTests());
 		}
 		return 'These are all the A/B tests currently in memory';
@@ -281,9 +280,9 @@ class GhosteryDebug {
 	}
 
 	_outputObjectSlice(obj, slice, objStr) {
-		if (this.objectOutputStyle === 'object') {
+		if (this.settings._objectOutputStyle === 'object') {
 			console.dir(getObjectSlice(obj, slice));
-		} else if (this.objectOutputStyle === 'string') {
+		} else if (this.settings._objectOutputStyle === 'string') {
 			console.log(JSON.stringify(getObjectSlice(obj, slice)));
 		}
 
@@ -306,18 +305,22 @@ class GhosteryDebug {
 
 	getGlobals = slice => this._outputObjectSlice(globals, slice, 'globals');
 
-	status() {
-		alwaysLog(
-			`\nLogging: ${this.isLog ? 'ON' : 'OFF'}`
-		);
+	settings = {
+		// Private properties added in the constructor:
+		// _isLog						stores log toggle setting
+		// _objectOutputStyle	 		stores object output style setting
+		show: () => {
+			alwaysLog(
+				`\nLogging: ${this.settings._isLog ? 'ON' : 'OFF'}`
+			);
 
-		return ('~~~~~~~~~');
-	}
+			return ('~~~~~~~~~');
+		},
+		toggleLogging: () => {
+			this.settings._isLog = !this.settings._isLog;
 
-	_toggleLogging() {
-		this.isLog = !this.isLog;
-
-		return (`Logging is ${this.isLog ? 'ON' : 'OFF'}`);
+			return (`Logging is ${this.settings._isLog ? 'ON' : 'OFF'}`);
+		},
 	}
 
 	init() {
@@ -440,4 +443,4 @@ const ghosteryDebug = new GhosteryDebug();
 export default ghosteryDebug;
 
 // extracted to minimize import surface into utils/common.js
-export const isLog = () => ghosteryDebug.isLog;
+export const isLog = () => ghosteryDebug.settings._isLog;
