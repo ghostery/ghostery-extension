@@ -145,19 +145,22 @@ class GhosteryDebug {
 	// END [[Output styling and formatting]] SECTION
 
 	// START [[Help CLI & strings]] SECTION
-	static helpAvailableFunctions = [
-		[`${this.helpFunctionNames.getABTests}`, 'Display what A/B tests have been fetched from the A/B test server'],
-		[`${this.helpFunctionNames.getConfData}`, 'Show the current value of a config property or properties'],
-		[`${this.helpFunctionNames.getGlobals}`, 'Show the current value of a global property or properties'],
-		[`${this.helpFunctionNames.hitABServerWithIr}`, 'Hit the A/B server endpoint with the supplied install random number'],
-	];
-
+	// The order of definition matters in this section:
+	// it appears that static class fields must be defined
+	// before they can be referenced by other static class fields
 	static helpFunctionNames = {
 		getABTests: 'ghostery.getABTests()',
 		getConfData: 'ghostery.getConfData()',
 		getGlobals: 'ghostery.getGlobals()',
 		hitABServerWithIr: 'ghostery.hitABServerWithIr()',
 	};
+
+	static helpAvailableFunctions = [
+		[`${this.helpFunctionNames.getABTests}`, 'Display what A/B tests have been fetched from the A/B test server'],
+		[`${this.helpFunctionNames.getConfData}`, 'Show the current value of a config property or properties'],
+		[`${this.helpFunctionNames.getGlobals}`, 'Show the current value of a global property or properties'],
+		[`${this.helpFunctionNames.hitABServerWithIr}`, 'Hit the A/B server endpoint with the supplied install random number'],
+	];
 
 	static helpHeader = [
 		'__MAINHEADER__Ghostery Extension Debugger (GED) Help',
@@ -216,8 +219,8 @@ class GhosteryDebug {
 		'to the A/B test server as the value of the ir query parameter, and it determines',
 		'which test buckets the user is placed in.',
 		'This function lets you hit the A/B server with any valid ir number',
-		'To make it easier to check whether different A/B tests are returned as expected',
-		'And check the functionality of the different test scenarios',
+		'to make it easier to check whether different A/B tests are returned as expected',
+		'and check the functionality of the different test scenarios',
 		'',
 		['__SUBHEADER__When called with...', 'Returns...'],
 		['A number between 1 and 100', 'The tests returned by the A/B server for that ir value'],
