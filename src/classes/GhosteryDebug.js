@@ -25,6 +25,10 @@ import { getObjectSlice, pickRandomArrEl } from '../utils/utils';
  * @class for debugging Ghostery via the background.js console.
  * @memberof BackgroundClasses
  */
+
+const OBJECT_OUTPUT_STYLE = true;
+const STRING_OUTPUT_STYLE = false;
+
 class GhosteryDebug {
 	// ToC
 	// Search for these strings to quickly jump to their sections
@@ -33,7 +37,7 @@ class GhosteryDebug {
 
 	constructor() {
 		this.settings._isLog = chrome.runtime.getManifest().debug || false;
-		this.settings._objectOutputStyle = 'object'; // other option is 'json'
+		this.settings._objectOutputStyle = OBJECT_OUTPUT_STYLE; // other option is 'json'
 
 		this.modules = {
 			globals: {},
@@ -159,6 +163,7 @@ class GhosteryDebug {
 		getConfData: 'ghostery.getConfData()',
 		getGlobals: 'ghostery.getGlobals()',
 		hitABServerWithIr: 'ghostery.hitABServerWithIr()',
+		settingsToggleOutputStyle: 'ghostery.settings.toggleOutputStyle()',
 		settingsShow: 'ghostery.settings.show()',
 		settingsToggleLogging: 'ghostery.settings.toggleLogging()',
 	};
@@ -168,6 +173,7 @@ class GhosteryDebug {
 		[`${this.helpFunctionNames.getConfData}`, 'Show the current value of a config property or properties'],
 		[`${this.helpFunctionNames.getGlobals}`, 'Show the current value of a global property or properties'],
 		[`${this.helpFunctionNames.hitABServerWithIr}`, 'Hit the A/B server endpoint with the supplied install random number'],
+		[`${this.helpFunctionNames.settingsToggleOutputStyle}`, 'Change debugger method return value formatting'],
 		[`${this.helpFunctionNames.settingsShow}`, 'Show the current debugger settings'],
 		[`${this.helpFunctionNames.settingsToggleLogging}`, 'Toggle all other debug logging on/off'],
 	];
@@ -250,8 +256,7 @@ class GhosteryDebug {
 		'',
 		['__SUBHEADER__Setting', 'Explanation'],
 		['Logging', 'Turn extension debug output on/off'],
-		['Object Output Style', 'Some debugger methods return an object'],
-		['', 'This setting controls whether it gets printed to the console as an object or as a string'],
+		['Object Output Style', 'Set return value display style to object or string'],
 	];
 
 	static helpSettingsToggleLogging = [
@@ -267,6 +272,18 @@ class GhosteryDebug {
 		['Any other argument or no argument', 'Turns logging on if it was off and vice versa'],
 	]
 
+	static helpSettingsToggleOutputStyle = [
+		`__MAINHEADER__${this.helpFunctionNames.settingsToggleOutputStyle}`,
+		'Change the output style for debugger method return values.',
+		'Strings are easy to copy and easier to grok at a glance.',
+		'Object style output looks nicer and shows the structure better',
+		'',
+		['__SUBHEADER__When called with...', 'Does...'],
+		["'OBJECT'", 'Debugger method return values will now be output as objects'],
+		["'STRING'", 'Debugger method return values will now be output as strings'],
+		['Any other argument or no argument', 'Changes the output style from the current setting to the other one'],
+	];
+
 	// eslint-disable-next-line class-methods-use-this
 	help(fnName) {
 		const {
@@ -279,6 +296,7 @@ class GhosteryDebug {
 			helpOverview,
 			helpSettingsShow,
 			helpSettingsToggleLogging,
+			helpSettingsToggleOutputStyle,
 		} = GhosteryDebug;
 
 		const invalidArgumentError = [
@@ -296,6 +314,7 @@ class GhosteryDebug {
 		else if (eeFnName === 'hitabserverwithir')	outputStrArr = helpHitABServerWithIr;
 		else if (eeFnName === 'show')				outputStrArr = helpSettingsShow;
 		else if (eeFnName === 'togglelogging')		outputStrArr = helpSettingsToggleLogging;
+		else if (eeFnName === 'toggleoutputstyle')	outputStrArr = helpSettingsToggleOutputStyle;
 		else 										outputStrArr = invalidArgumentError;
 
 		GhosteryDebug.printToConsole(GhosteryDebug.typeset(outputStrArr));
@@ -307,7 +326,7 @@ class GhosteryDebug {
 
 	getABTests = () => {
 		// eslint-disable-next-line no-console
-		if (this.settings._objectOutputStyle === 'object') {
+		if (this.settings._objectOutputStyle === OBJECT_OUTPUT_STYLE) {
 			console.dir(abtest.getTests());
 		}
 		return 'These are all the A/B tests currently in memory';
@@ -319,9 +338,9 @@ class GhosteryDebug {
 	}
 
 	_outputObjectSlice(obj, slice, objStr) {
-		if (this.settings._objectOutputStyle === 'object') {
+		if (this.settings._objectOutputStyle === OBJECT_OUTPUT_STYLE) {
 			console.dir(getObjectSlice(obj, slice));
-		} else if (this.settings._objectOutputStyle === 'string') {
+		} else if (this.settings._objectOutputStyle === STRING_OUTPUT_STYLE) {
 			console.log(JSON.stringify(getObjectSlice(obj, slice)));
 		}
 
@@ -343,51 +362,6 @@ class GhosteryDebug {
 	getConfData = slice => this._outputObjectSlice(confData, slice, 'config');
 
 	getGlobals = slice => this._outputObjectSlice(globals, slice, 'globals');
-
-	settings = {
-		// Private properties added in the constructor:
-		// _isLog						stores log toggle setting
-		// _objectOutputStyle	 		stores object output style setting
-		setOutputStyle: (newValue) => {
-			const newSetting = [
-				'__MAINHEADER__Updated Settings',
-				['Logging', `${this.settings._isLog ? 'ON' : 'OFF'}`],
-				['__HIGHLIGHT__Object Output Style', `${this.settings._objectOutputStyle.toUpperCase()}`],
-			];
-
-			GhosteryDebug.printToConsole(GhosteryDebug.typeset(newSetting));
-
-			return ('Thanks for using Ghostery');
-		},
-		show: () => {
-			const currentSettings = [
-				'__MAINHEADER__Current Settings',
-				['Logging', `${this.settings._isLog ? 'ON' : 'OFF'}`],
-				['Object Output Style', `${this.settings._objectOutputStyle.toUpperCase()}`],
-			];
-
-			GhosteryDebug.printToConsole(GhosteryDebug.typeset(currentSettings));
-
-			return ('Thanks for using Ghostery');
-		},
-
-		toggleLogging: (newValue) => {
-			if 		(typeof newValue !== 'string')		this.settings._isLog = !this.settings._isLog;
-			else if (newValue?.toLowerCase() === 'on')	this.settings._isLog = true;
-			else if (newValue?.toLowerCase() === 'off')	this.settings._isLog = false;
-			else										this.settings._isLog = !this.settings._isLog;
-
-			const newSetting = [
-				'__MAINHEADER__Updated Settings',
-				['__SUBHEADER__Logging', `${this.settings._isLog ? 'ON' : 'OFF'}`],
-				['Object Output Style', `${this.settings._objectOutputStyle.toUpperCase()}`],
-			];
-
-			GhosteryDebug.printToConsole(GhosteryDebug.typeset(newSetting));
-
-			return ('Thanks for using Ghostery');
-		},
-	}
 
 	init() {
 		this.extensionInfo.installDate = confData.install_date;
@@ -502,6 +476,51 @@ class GhosteryDebug {
 				resolve(this);
 			});
 		});
+	}
+
+	settings = {
+		// Private properties added in the constructor:
+		// _isLog						stores log toggle setting
+		// _objectOutputStyle	 		stores object output style setting
+
+		show: (updated) => {
+			const updatedOrCurrent = (updated === 'logging' || updated === 'outputStyle') ? 'Updated' : 'Current';
+			const potentialLoggingHighlight = (updated === 'logging') ? '__HIGHLIGHT__' : '';
+			const potentialOutputStyleHighlight = (updated === 'outputStyle') ? '__HIGHLIGHT__' : '';
+
+			const currentSettings = [
+				`__MAINHEADER__${updatedOrCurrent} Settings`,
+				[
+					`${potentialLoggingHighlight}Logging`,
+					`${this.settings._isLog ? 'On' : 'Off'}`
+				],
+				[
+					`${potentialOutputStyleHighlight}Object Output Style`,
+					`${this.settings._objectOutputStyle === OBJECT_OUTPUT_STYLE ? 'Object' : 'String'}`
+				],
+			];
+
+			GhosteryDebug.printToConsole(GhosteryDebug.typeset(currentSettings));
+
+			return ('Thanks for using Ghostery');
+		},
+
+		toggleLogging: (newValue) => {
+			this.settings._toggleSettingHelper('on', 'off', '_isLog', newValue);
+			return (this.settings.show('logging'));
+		},
+
+		toggleOutputStyle: (newValue) => {
+			this.settings._toggleSettingHelper('object', 'string', '_objectOutputStyle', newValue);
+			return (this.settings.show('outputStyle'));
+		},
+
+		_toggleSettingHelper: (optOn, optOff, setting, requested) => {
+			if 		(typeof requested !== 'string')			this.settings[setting] = !this.settings[setting];
+			else if (requested?.toLowerCase() === optOn) 	this.settings[setting] = true;
+			else if (requested?.toLowerCase() === optOff) 	this.settings[setting] = false;
+			else 											this.settings[setting] = !this.settings[setting];
+		},
 	}
 }
 
