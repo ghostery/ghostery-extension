@@ -32,8 +32,10 @@ const STRING_OUTPUT_STYLE = false;
 class GhosteryDebug {
 	// ToC
 	// Search for these strings to quickly jump to their sections
-	// [[Output styling and formatting]]
+	// [[Output styling, formatting, and printing]]
 	// [[Help CLI & strings]]
+	// [[Main Actions]]
+	// [[Settings Actions]]
 
 	constructor() {
 		this.settings._isLog = chrome.runtime.getManifest().debug || false;
@@ -42,10 +44,6 @@ class GhosteryDebug {
 		this.modules = {
 			globals: {},
 			conf: {},
-		};
-
-		this.actions = {
-			forcePromoModalDisplay: modal => PromoModals.forceDisplay(modal),
 		};
 
 		this.accountEvents = [];
@@ -70,7 +68,29 @@ class GhosteryDebug {
 		chrome.cookies.onChanged.addListener(_cookieChangeEvent);
 	}
 
-	// START [[Output styling and formatting]] SECTION
+	// START [[Output styling, formatting, and printing]] SECTION
+	_outputObjectSlice(obj, slice, objStr) {
+		if (this.settings._objectOutputStyle === OBJECT_OUTPUT_STYLE) {
+			console.dir(getObjectSlice(obj, slice));
+		} else if (this.settings._objectOutputStyle === STRING_OUTPUT_STYLE) {
+			console.log(JSON.stringify(getObjectSlice(obj, slice)));
+		}
+
+		if (slice === undefined) {
+			return `That's the whole ${objStr} object`;
+		}
+
+		if (typeof slice === 'string') {
+			return `That's property you asked for, or the whole ${objStr} object if we didn't find it`;
+		}
+
+		if (typeof slice === 'object' && typeof slice.test === 'function') {
+			return `That's the matching subset of properties, or the whole ${objStr} object if there were no matches`;
+		}
+
+		return `That argument wasn't valid, but here's the whole ${objStr} object`;
+	}
+
 	static outputStyles = {
 		highlight: 'font-weight: bold; padding: 2px 0px;',
 		mainheader: 'font-size: 16px; font-weight: bold; padding: 4px 0px',
@@ -152,7 +172,7 @@ class GhosteryDebug {
 
 		return formattedLines;
 	}
-	// END [[Output styling and formatting]] SECTION
+	// END [[Output styling, formatting, and printing]] SECTION
 
 	// START [[Help CLI & strings]] SECTION
 	// The order of definition matters in this section:
@@ -324,6 +344,28 @@ class GhosteryDebug {
 	}
 	// END [[Help CLI & strings]] SECTION
 
+	// START [[Main Actions]] SECTION
+	forceOnePromoModalDisplay = (modalType) => {
+		const result = PromoModals.forceOnePromoModalDisplay(modalType);
+
+		if (result === 'success') {
+			return (GhosteryDebug.printToConsole(GhosteryDebug.typeset([
+				`Success! The ${modalType} modal will trigger at the next opportunity`,
+			])));
+		}
+
+		if (result === 'failure') {
+			return (GhosteryDebug.printToConsole(GhosteryDebug.typeset([
+				`No dice: ${modalType} is not a valid and/or currently active modal type. See instructions:`,
+				"[ghostery.help('forcePromoModalDisplay') output]",
+			])));
+		}
+
+		return (GhosteryDebug.printToConsole(GhosteryDebug.typeset([
+			'The function neither succeeded nor failed. Welcome to The Twilight Zone. If you have a minute to spare, we would greatly appreciate hearing about this likely bug at support@ghostery.com.',
+		])));
+	}
+
 	getABTests = () => {
 		// eslint-disable-next-line no-console
 		if (this.settings._objectOutputStyle === OBJECT_OUTPUT_STYLE) {
@@ -335,28 +377,6 @@ class GhosteryDebug {
 	hitABServerWithIr = (ir) => {
 		abtest.fetch(ir);
 		return 'These are the A/B tests the A/B server returns when called with the supplied ir';
-	}
-
-	_outputObjectSlice(obj, slice, objStr) {
-		if (this.settings._objectOutputStyle === OBJECT_OUTPUT_STYLE) {
-			console.dir(getObjectSlice(obj, slice));
-		} else if (this.settings._objectOutputStyle === STRING_OUTPUT_STYLE) {
-			console.log(JSON.stringify(getObjectSlice(obj, slice)));
-		}
-
-		if (slice === undefined) {
-			return `That's the whole ${objStr} object`;
-		}
-
-		if (typeof slice === 'string') {
-			return `That's property you asked for, or the whole ${objStr} object if we didn't find it`;
-		}
-
-		if (typeof slice === 'object' && typeof slice.test === 'function') {
-			return `That's the matching subset of properties, or the whole ${objStr} object if there were no matches`;
-		}
-
-		return `That argument wasn't valid, but here's the whole ${objStr} object`;
 	}
 
 	getConfData = slice => this._outputObjectSlice(confData, slice, 'config');
@@ -477,7 +497,9 @@ class GhosteryDebug {
 			});
 		});
 	}
+	// END [[Main Actions]] SECTION
 
+	// START [[Settings Actions]] SECTION
 	settings = {
 		// Private properties added in the constructor:
 		// _isLog						stores log toggle setting
@@ -522,6 +544,7 @@ class GhosteryDebug {
 			else 											this.settings[setting] = !this.settings[setting];
 		},
 	}
+	// END [[Settings Actions]] SECTION
 }
 
 const ghosteryDebug = new GhosteryDebug();
