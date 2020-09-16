@@ -68,9 +68,24 @@ class GhosteryDebug {
 
 	// START [[Output styling and formatting]] SECTION
 	static outputStyles = {
-		argumentsHeader: 'font-weight: bold; padding: 2px 0px;',
-		header: 'font-size: 16px; font-weight: bold; padding: 4px 0px',
+		highlight: 'font-weight: bold; padding: 2px 0px;',
+		mainheader: 'font-size: 16px; font-weight: bold; padding: 4px 0px',
+		subheader: 'font-weight: bold; padding: 2px 0px;',
 	};
+
+	/** private printToConsole helper that applies specified formatting
+	 *  to a line of text, removes the CSS marker from it, and prints it
+	 *
+	 * @param {String}	text		the string to output
+	 * @param {String}	style		the style to apply
+	 */
+	static printFormatted(text, style) {
+		// eslint-disable-next-line no-console
+		console.log(
+			`%c${text.replace(`__${style.toUpperCase()}__`, '')}`,
+			GhosteryDebug.outputStyles[style]
+		);
+	}
 
 	/**
 	 * Output an array of strings to the console
@@ -84,19 +99,10 @@ class GhosteryDebug {
 		// Individual log statements for each line allow for
 		// more legible and appealing output spacing and formatting
 		lines.forEach((line) => {
-			if (line.startsWith('__MAINHEADER__')) {
-				// eslint-disable-next-line no-console
-				console.log(
-					`%c${line.replace('__MAINHEADER__', '')}`,
-					GhosteryDebug.outputStyles.header
-				);
-			} else if (line.startsWith('__SUBHEADER__')) {
-				// eslint-disable-next-line no-console
-				console.log(
-					`%c${line.replace('__SUBHEADER__', '')}`,
-					GhosteryDebug.outputStyles.argumentsHeader
-				);
-			} else {
+			if (line.startsWith('__MAINHEADER__')) 		GhosteryDebug.printFormatted(line, 'mainheader');
+			else if (line.startsWith('__SUBHEADER__'))	GhosteryDebug.printFormatted(line, 'subheader');
+			else if (line.startsWith('__HIGHLIGHT__'))	GhosteryDebug.printFormatted(line, 'highlight');
+			else {
 				// eslint-disable-next-line no-console
 				console.log(line);
 			}
@@ -130,6 +136,7 @@ class GhosteryDebug {
 				const cssStyleMarkerLength =
 					(leftSide.startsWith('__MAINHEADER__') && '__MAINHEADER__'.length)
 					|| (leftSide.startsWith('__SUBHEADER__') && '__SUBHEADER__'.length)
+					|| (leftSide.startsWith('__HIGHLIGHT__') && '__HIGHLIGHT__'.length)
 					|| 0;
 				formattedLines.push(
 					leftSide.padEnd(40 + cssStyleMarkerLength, ' ').concat(rightSide)
@@ -341,6 +348,17 @@ class GhosteryDebug {
 		// Private properties added in the constructor:
 		// _isLog						stores log toggle setting
 		// _objectOutputStyle	 		stores object output style setting
+		setOutputStyle: (newValue) => {
+			const newSetting = [
+				'__MAINHEADER__Updated Settings',
+				['Logging', `${this.settings._isLog ? 'ON' : 'OFF'}`],
+				['__HIGHLIGHT__Object Output Style', `${this.settings._objectOutputStyle.toUpperCase()}`],
+			];
+
+			GhosteryDebug.printToConsole(GhosteryDebug.typeset(newSetting));
+
+			return ('Thanks for using Ghostery');
+		},
 		show: () => {
 			const currentSettings = [
 				'__MAINHEADER__Current Settings',
@@ -354,7 +372,8 @@ class GhosteryDebug {
 		},
 
 		toggleLogging: (newValue) => {
-			if 		(newValue?.toLowerCase() === 'on')	this.settings._isLog = true;
+			if 		(typeof newValue !== 'string')		this.settings._isLog = !this.settings._isLog;
+			else if (newValue?.toLowerCase() === 'on')	this.settings._isLog = true;
 			else if (newValue?.toLowerCase() === 'off')	this.settings._isLog = false;
 			else										this.settings._isLog = !this.settings._isLog;
 
