@@ -1759,7 +1759,7 @@ function initializeGhosteryModules() {
 			// because of an A/B test that determines which promo variant is shown in the Hub on install
 			if (globals.JUST_INSTALLED) {
 				const showAlternateHub = conf.hub_layout === 'alternate';
-				const route = conf.hub_layout === 'alternate' ? '#home' : '';
+				const route = showAlternateHub ? '#home' : '';
 				chrome.tabs.create({
 					url: chrome.runtime.getURL(`./app/templates/hub.html?$justInstalled=true&ah=${showAlternateHub}${route}`),
 					active: true

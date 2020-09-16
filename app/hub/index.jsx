@@ -35,7 +35,7 @@ import UpgradePlanView from './Views/UpgradePlanView';
 
 const store = createStore();
 
-// Flag to display alternate hub view (used in A/B testing)
+// Flag to display alternate hub view (used for A/B testing ticket GH-2097)
 const ah = (QueryString.parse(window.location.search).ah === 'true') || false;
 
 /**
