@@ -327,16 +327,31 @@ class GhosteryDebug {
 		// _isLog						stores log toggle setting
 		// _objectOutputStyle	 		stores object output style setting
 		show: () => {
-			alwaysLog(
-				`\nLogging: ${this.settings._isLog ? 'ON' : 'OFF'}`
-			);
+			const currentSettings = [
+				'__MAINHEADER__Current Settings',
+				['Logging', `${this.settings._isLog ? 'ON' : 'OFF'}`],
+				['Object Output Style', `${this.settings._objectOutputStyle.toUpperCase()}`],
+			];
 
-			return ('~~~~~~~~~');
+			GhosteryDebug.printToConsole(GhosteryDebug.typeset(currentSettings));
+
+			return ('Thanks for using Ghostery');
 		},
-		toggleLogging: () => {
-			this.settings._isLog = !this.settings._isLog;
 
-			return (`Logging is ${this.settings._isLog ? 'ON' : 'OFF'}`);
+		toggleLogging: (newValue) => {
+			if 		(newValue?.toLowerCase() === 'on')	this.settings._isLog = true;
+			else if (newValue?.toLowerCase() === 'off')	this.settings._isLog = false;
+			else										this.settings._isLog = !this.settings._isLog;
+
+			const newSetting = [
+				'__MAINHEADER__Updated Settings',
+				['__SUBHEADER__Logging', `${this.settings._isLog ? 'ON' : 'OFF'}`],
+				['Object Output Style', `${this.settings._objectOutputStyle.toUpperCase()}`],
+			];
+
+			GhosteryDebug.printToConsole(GhosteryDebug.typeset(newSetting));
+
+			return ('Thanks for using Ghostery');
 		},
 	}
 
