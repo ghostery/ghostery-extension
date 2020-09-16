@@ -152,6 +152,7 @@ class GhosteryDebug {
 		getConfData: 'ghostery.getConfData()',
 		getGlobals: 'ghostery.getGlobals()',
 		hitABServerWithIr: 'ghostery.hitABServerWithIr()',
+		settingsShow: 'ghostery.settings.show()',
 		settingsToggleLogging: 'ghostery.settings.toggleLogging()',
 	};
 
@@ -160,6 +161,7 @@ class GhosteryDebug {
 		[`${this.helpFunctionNames.getConfData}`, 'Show the current value of a config property or properties'],
 		[`${this.helpFunctionNames.getGlobals}`, 'Show the current value of a global property or properties'],
 		[`${this.helpFunctionNames.hitABServerWithIr}`, 'Hit the A/B server endpoint with the supplied install random number'],
+		[`${this.helpFunctionNames.settingsShow}`, 'Show the current debugger settings'],
 		[`${this.helpFunctionNames.settingsToggleLogging}`, 'Toggle all other debug logging on/off'],
 	];
 
@@ -234,6 +236,17 @@ class GhosteryDebug {
 		...this.helpAvailableFunctions,
 	];
 
+	static helpSettingsShow = [
+		`__MAINHEADER__${this.helpFunctionNames.settingsShow}`,
+		'Show the current debugger settings.',
+		'Settings persist until you end the browser session',
+		'',
+		['__SUBHEADER__Setting', 'Explanation'],
+		['Logging', 'Turn extension debug output on/off'],
+		['Object Output Style', 'Some debugger methods return an object'],
+		['', 'This setting controls whether it gets printed to the console as an object or as a string'],
+	];
+
 	static helpSettingsToggleLogging = [
 		`__MAINHEADER__${this.helpFunctionNames.settingsToggleLogging}`,
 		'Toggle regular debug output on/off.',
@@ -257,6 +270,7 @@ class GhosteryDebug {
 			helpGetGlobals,
 			helpHitABServerWithIr,
 			helpOverview,
+			helpSettingsShow,
 			helpSettingsToggleLogging,
 		} = GhosteryDebug;
 
@@ -273,6 +287,7 @@ class GhosteryDebug {
 		else if (eeFnName === 'getconfdata')		outputStrArr = helpGetConfData;
 		else if (eeFnName === 'getglobals')			outputStrArr = helpGetGlobals;
 		else if (eeFnName === 'hitabserverwithir')	outputStrArr = helpHitABServerWithIr;
+		else if (eeFnName === 'show')				outputStrArr = helpSettingsShow;
 		else if (eeFnName === 'togglelogging')		outputStrArr = helpSettingsToggleLogging;
 		else 										outputStrArr = invalidArgumentError;
 
