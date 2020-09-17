@@ -398,7 +398,7 @@ class GhosteryDebug {
 	}
 
 	hitABServerWithIr = (ir) => {
-		abtest.fetch(ir);
+		abtest.silentFetch(ir).then(result => console.log(result));
 		return 'These are the A/B tests the A/B server returns when called with the supplied ir';
 	}
 

@@ -53,35 +53,54 @@ class ABTest {
 	fetch(irDebugOverride) {
 		log('A/B Tests: fetching...');
 
-		const URL = `${CMP_BASE_URL}/abtestcheck
-			?os=${encodeURIComponent(BROWSER_INFO.os)}
-			&install_date=${encodeURIComponent(conf.install_date)}
-			&ir=${encodeURIComponent((typeof irDebugOverride === 'number') ? irDebugOverride : conf.install_random_number)}
-			&gv=${encodeURIComponent(EXTENSION_VERSION)}
-			&si=${conf.account ? '1' : '0'}
-			&ua=${encodeURIComponent(BROWSER_INFO.name)}
-			&v=${encodeURIComponent(conf.cmp_version)}
-			&l=${encodeURIComponent(conf.language)}`;
+		const URL = ABTest._buildURL(irDebugOverride);
 
 		return getJson(URL).then((data) => {
 			if (data && Array.isArray(data)) {
 				log('A/B Tests: fetched', JSON.stringify(data));
-				// merge all tests into this.tests object
-				// this will overwrite all previous tests
-				this.tests = data.reduce(
-					(tests, test) => Object.assign(tests, { [test.name]: test.data }),
-					{}
-				);
+				this._updateTests(data);
+				log('A/B Tests: tests updated to', this.getTests());
 			} else {
 				log('A/B Tests: no tests found.');
 			}
-
-			// update conf
-			globals.SESSION.abtests = this.tests;
-			log('A/B Tests: tests updated to', this.getTests());
 		}).catch(() => {
 			log('A/B Tests: error fetching.');
 		});
+	}
+
+	silentFetch(ir) {
+		const URL = ABTest._buildURL(ir);
+
+		return getJson(URL).then((data) => {
+			if (data && Array.isArray(data)) {
+				this._updateTests(data);
+			}
+			return 'resolved';
+		}).catch(() => 'rejected');
+	}
+
+	static _buildURL(ir) {
+		return (`${CMP_BASE_URL}/abtestcheck
+			?os=${encodeURIComponent(BROWSER_INFO.os)}
+			&install_date=${encodeURIComponent(conf.install_date)}
+			&ir=${encodeURIComponent((typeof ir === 'number') ? ir : conf.install_random_number)}
+			&gv=${encodeURIComponent(EXTENSION_VERSION)}
+			&si=${conf.account ? '1' : '0'}
+			&ua=${encodeURIComponent(BROWSER_INFO.name)}
+			&v=${encodeURIComponent(conf.cmp_version)}
+			&l=${encodeURIComponent(conf.language)}`
+		);
+	}
+
+	_updateTests(data) {
+		// merge all tests into this.tests object
+		// this will overwrite all previous tests
+		this.tests = data.reduce(
+			(tests, test) => Object.assign(tests, { [test.name]: test.data }),
+			{}
+		);
+		// update conf
+		globals.SESSION.abtests = this.tests;
 	}
 }
 
