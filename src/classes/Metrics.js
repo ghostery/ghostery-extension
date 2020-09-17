@@ -370,7 +370,7 @@ class Metrics {
 
 			// New parameters for Ghostery 8.5.2
 			// Hub Layout View
-			`&hp=${encodeURIComponent(Metrics._getHubLayoutView().toString())}` +
+			`&t2=${encodeURIComponent(Metrics._getHubLayoutView().toString())}` +
 			// Subscription Interval
 			`&si=${encodeURIComponent(Metrics._getSubscriptionInterval().toString())}` +
 			// Product ID Parameter
@@ -543,9 +543,9 @@ class Metrics {
 
 		switch (hub_layout) {
 			case 'default':
-				return 4;
+				return 1;
 			case 'alternate':
-				return 5;
+				return 2;
 			case 'not_yet_set':
 			default:
 				return 0;
