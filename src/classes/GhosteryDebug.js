@@ -41,18 +41,7 @@ class GhosteryDebug {
 		this.settings._isLog = chrome.runtime.getManifest().debug || false;
 		this.settings._objectOutputStyle = OBJECT_OUTPUT_STYLE; // other option is 'json'
 
-		this.modules = {
-			globals: {},
-			conf: {},
-		};
-
 		this.accountEvents = [];
-		this.browserInfo = globals.BROWSER_INFO;
-		this.extensionInfo = {
-			name: globals.EXTENSION_NAME,
-			version: globals.EXTENSION_VERSION,
-		};
-		this.globals = { ...globals };
 
 		const _cookieChangeEvent = (changeInfo) => {
 			const { removed, cookie, cause } = changeInfo;
@@ -428,12 +417,6 @@ class GhosteryDebug {
 	getConfData = slice => this._outputObjectSlice(confData, slice, 'config');
 
 	getGlobals = slice => this._outputObjectSlice(globals, slice, 'globals');
-
-	init() {
-		this.extensionInfo.installDate = confData.install_date;
-		this.extensionInfo.versionHistory = confData.version_history;
-		this.configurationData = { ...confData };
-	}
 
 	addAccountEvent(type, event, details) {
 		const timestamp = new Date();
