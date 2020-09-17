@@ -363,6 +363,7 @@ class GhosteryDebug {
 					`The ${cappedModalType} modal will trigger at the next opportunity`,
 				])
 			);
+
 			return ('Thanks for using Ghostery!');
 		}
 
@@ -381,15 +382,19 @@ class GhosteryDebug {
 		GhosteryDebug.printToConsole(GhosteryDebug.typeset([
 			'The function neither succeeded nor failed. If you have a minute to spare, we would greatly appreciate hearing about this likely bug at support@ghostery.com.',
 		]));
+
 		return ('Welcome to the Twilight Zone');
 	}
 
 	getABTests = () => {
-		// eslint-disable-next-line no-console
-		if (this.settings._objectOutputStyle === OBJECT_OUTPUT_STYLE) {
-			console.dir(abtest.getTests());
-		}
-		return 'These are all the A/B tests currently in memory';
+		const output = [];
+		const tests = abtest.getTests();
+
+		output.push('__SUBHEADER__These are all the A/B tests currently in memory:');
+		this._push(tests, output);
+		GhosteryDebug.printToConsole(GhosteryDebug.typeset(output));
+
+		return ('Thanks for using Ghostery!');
 	}
 
 	hitABServerWithIr = (ir) => {
@@ -531,15 +536,19 @@ class GhosteryDebug {
 			}
 		}
 
-		if (this.settings._objectOutputStyle === OBJECT_OUTPUT_STYLE) {
-			output.push(objSlice.val);
-		} else if (this.settings._objectOutputStyle === STRING_OUTPUT_STYLE) {
-			output.push(JSON.stringify(objSlice.val));
-		}
+		this._push(objSlice.val, output);
 
 		GhosteryDebug.printToConsole(GhosteryDebug.typeset(output));
 
 		return ('Thanks for using Ghostery');
+	}
+
+	_push(obj, arr) {
+		if (this.settings._objectOutputStyle === OBJECT_OUTPUT_STYLE) {
+			arr.push(obj);
+		} else if (this.settings._objectOutputStyle === STRING_OUTPUT_STYLE) {
+			arr.push(JSON.stringify(obj));
+		}
 	}
 	// END [[Main Actions]] SECTION
 
