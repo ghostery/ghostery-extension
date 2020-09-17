@@ -15,6 +15,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import { NavLink } from 'react-router-dom';
+import globals from '../../../../src/classes/Globals';
+
+const { GHOSTERY_BASE_URL } = globals;
 
 /**
  * Helper render function for rendering a list item for the Navigation Main section
@@ -96,7 +99,13 @@ const SideNavigationView = (props) => {
 
 	return (
 		<div className={containerClassNames}>
-			<NavLink to="/" className={topClassNames} />
+			<a
+				href={GHOSTERY_BASE_URL}
+				aria-label="Ghostery website"
+				rel="noopener noreferrer"
+				target="_blank"
+				className={topClassNames}
+			/>
 			<div className="SideNavigation__menu flex-child-grow flex-container flex-dir-column">
 				{menuItems.map(item => _renderMenuItem(item, disableNav))}
 			</div>
