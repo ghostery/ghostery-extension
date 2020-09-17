@@ -115,10 +115,10 @@ class GhosteryDebug {
 			if (line.startsWith('__MAINHEADER__')) 		GhosteryDebug.printFormatted(line, 'mainheader');
 			else if (line.startsWith('__SUBHEADER__'))	GhosteryDebug.printFormatted(line, 'subheader');
 			else if (line.startsWith('__HIGHLIGHT__'))	GhosteryDebug.printFormatted(line, 'highlight');
-			else {
-				// eslint-disable-next-line no-console
-				console.log(line);
-			}
+			// eslint-disable-next-line no-console
+			else if (typeof line === 'object')			console.dir(line);
+			// eslint-disable-next-line no-console
+			else										console.log(line);
 		});
 	}
 
@@ -143,7 +143,7 @@ class GhosteryDebug {
 				return;
 			}
 
-			if (typeof rawText === 'object') {
+			if (Array.isArray(rawText)) {
 				const leftSide = rawText[0];
 				const rightSide = rawText[1];
 				const cssStyleMarkerLength =
