@@ -581,7 +581,6 @@ export function getObjectSlice(obj, props) {
 			err: true,
 			errMsg: 'The second argument must be either a property name string, or a regex. Returning whole object.'
 		});
-
 	}
 
 	if (typeof props === 'string') {
