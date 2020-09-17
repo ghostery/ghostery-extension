@@ -59,34 +59,34 @@ class GhosteryDebug {
 
 	// START [[Output styling, formatting, and printing]] SECTION
 	_outputObjectSlice(obj, slice, objStr) {
-		// const objSlice = getObjectSlice(obj, slice);
-		// const output = [];
-		//
-		// if (slice === undefined) {
-		// 	output.push(`__You didn't provide an argument, so here's the whole ${objStr} object:`);
-		// } else if (typeof slice === 'string') {
-		//
-		// }
-
-		if (this.settings._objectOutputStyle === OBJECT_OUTPUT_STYLE) {
-			console.dir(getObjectSlice(obj, slice).val);
-		} else if (this.settings._objectOutputStyle === STRING_OUTPUT_STYLE) {
-			console.log(JSON.stringify(getObjectSlice(obj, slice).val));
-		}
+		const objSlice = getObjectSlice(obj, slice);
+		const output = [];
 
 		if (slice === undefined) {
-			return `That's the whole ${objStr} object`;
+			output.push(`__SUBHEADER__You didn't provide an argument, so here's the whole ${objStr} object:`);
+		} else if (typeof slice === 'string') {
+			if (objSlice.foundMatch) {
+				output.push('__SUBHEADER__We found the property you asked for:');
+			} else {
+				output.push(`__SUBHEADER__We did not find '${slice}' on the ${objStr} object, so here is the whole thing instead:`);
+			}
+		} else if (slice instanceof RegExp) {
+			if (objSlice.foundMatch) {
+				output.push('__SUBHEADER__Here are the matches we found for that regex:');
+			} else {
+				output.push(`__SUBHEADER__That regex produced no matches, so here is the whole ${objStr} object instead:`);
+			}
 		}
 
-		if (typeof slice === 'string') {
-			return `That's property you asked for, or the whole ${objStr} object if we didn't find it`;
+		if (this.settings._objectOutputStyle === OBJECT_OUTPUT_STYLE) {
+			output.push(objSlice.val);
+		} else if (this.settings._objectOutputStyle === STRING_OUTPUT_STYLE) {
+			output.push(JSON.stringify(objSlice.val));
 		}
 
-		if (typeof slice === 'object' && typeof slice.test === 'function') {
-			return `That's the matching subset of properties, or the whole ${objStr} object if there were no matches`;
-		}
+		GhosteryDebug.printToConsole(GhosteryDebug.typeset(output));
 
-		return `That argument wasn't valid, but here's the whole ${objStr} object`;
+		return ('Thanks for using Ghostery');
 	}
 
 	static outputStyles = {
@@ -121,11 +121,11 @@ class GhosteryDebug {
 		// Individual log statements for each line allow for
 		// more legible and appealing output spacing and formatting
 		lines.forEach((line) => {
-			if (line.startsWith('__MAINHEADER__')) 		GhosteryDebug.printFormatted(line, 'mainheader');
+			// eslint-disable-next-line no-console
+			if (typeof line === 'object')				console.dir(line);
+			else if (line.startsWith('__MAINHEADER__')) GhosteryDebug.printFormatted(line, 'mainheader');
 			else if (line.startsWith('__SUBHEADER__'))	GhosteryDebug.printFormatted(line, 'subheader');
 			else if (line.startsWith('__HIGHLIGHT__'))	GhosteryDebug.printFormatted(line, 'highlight');
-			// eslint-disable-next-line no-console
-			else if (typeof line === 'object')			console.dir(line);
 			// eslint-disable-next-line no-console
 			else										console.log(line);
 		});
@@ -150,6 +150,10 @@ class GhosteryDebug {
 			if (typeof rawText === 'string') {
 				formattedLines.push(rawText);
 				return;
+			}
+
+			if ((!Array.isArray(rawText)) && (typeof rawText === 'object')) {
+				formattedLines.push(rawText);
 			}
 
 			if (Array.isArray(rawText)) {
