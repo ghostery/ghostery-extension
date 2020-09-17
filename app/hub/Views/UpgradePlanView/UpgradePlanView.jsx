@@ -119,6 +119,9 @@ const premiumAlreadyProtectedButton = () => (
  * @memberof HubComponents
  */
 const UpgradePlanView = (props) => {
+	const title = t('hub_upgrade_page_title');
+	window.document.title = title;
+
 	const {
 		protection_level,
 		show_yearly_prices,
