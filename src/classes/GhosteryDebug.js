@@ -59,10 +59,19 @@ class GhosteryDebug {
 
 	// START [[Output styling, formatting, and printing]] SECTION
 	_outputObjectSlice(obj, slice, objStr) {
+		// const objSlice = getObjectSlice(obj, slice);
+		// const output = [];
+		//
+		// if (slice === undefined) {
+		// 	output.push(`__You didn't provide an argument, so here's the whole ${objStr} object:`);
+		// } else if (typeof slice === 'string') {
+		//
+		// }
+
 		if (this.settings._objectOutputStyle === OBJECT_OUTPUT_STYLE) {
-			console.dir(getObjectSlice(obj, slice));
+			console.dir(getObjectSlice(obj, slice).val);
 		} else if (this.settings._objectOutputStyle === STRING_OUTPUT_STYLE) {
-			console.log(JSON.stringify(getObjectSlice(obj, slice)));
+			console.log(JSON.stringify(getObjectSlice(obj, slice).val));
 		}
 
 		if (slice === undefined) {

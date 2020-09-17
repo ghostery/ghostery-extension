@@ -546,41 +546,85 @@ export function fetchLocalJSONResource(url) {
  * Get a property on an object (if props is a property key string)
  * OR Get a subset of properties (if props is a regex)
  * OR Get the whole supplied object back (if props is missing, invalid, or produces no matches)
- * If the property is not defined on the object, returns the object instead of throwing an error
+ * If the property is not defined on the object,
+ * returns the whole object as the val prop of the return object
  *
  * @memberOf BackgroundUtils
  *
  * @param	{Object}		obj			The object to extract a property or properties from
  * @param 	{string|RegExp} props		String name of the property, or regex to match against all properties. Optional.
- * @return 	{Object}					An object with the matching subset of the argument object's properties, or the whole argument object in the event of no matches
+ * @return 	{Object}					{ val: undefined|Object, foundMatch: Boolean, err: Boolean, errMsg: undefined|String }
  */
 export function getObjectSlice(obj, props) {
-	if (typeof obj !== 'object') return {};
+	if (obj === undefined || typeof obj !== 'object') {
+		return ({
+			val: undefined,
+			foundMatch: false,
+			err: true,
+			errMsg: 'You must provide an object as the first argument',
+		});
+	}
 
-	if (props === undefined) return obj;
+	if ((typeof props !== 'string') && !(props instanceof RegExp)) {
+		return ({
+			val: obj,
+			foundMatch: false,
+			err: true,
+			errMsg: 'The second argument must be either a property name string, or a regex. Returning whole object.'
+		});
+	}
+
+	if (props === undefined) {
+		return ({
+			val: obj,
+			foundMatch: false,
+			err: false,
+			errMsg: undefined,
+		});
+	}
 
 	if (typeof props === 'string') {
-		if (obj[props] === undefined) return obj;
+		if (obj[props] === undefined) {
+			return ({
+				val: obj,
+				foundMatch: false,
+				err: false,
+				errMsg: undefined,
+			});
+		}
 
-		// Wrap the value so that we consistently
-		// return an object
-		return { [props]: obj[props] };
+		return ({
+			val: { [props]: obj[props] },
+			foundMatch: true,
+			err: false,
+			errMsg: undefined,
+		});
 	}
 
 	// A regex literal has been passed in
-	if (typeof props === 'object' && typeof props.exec === 'function') {
-		const result = {};
+	if (props instanceof RegExp) {
+		const matches = {};
 		Object.keys(obj).forEach((key) => {
 			if (props.test(key)) {
-				result[key] = obj[key];
+				matches[key] = obj[key];
 			}
 		});
-		if (Object.keys(result).length > 0) {
-			return result;
+		if (Object.keys(matches).length > 0) {
+			return ({
+				val: matches,
+				foundMatch: true,
+				err: false,
+				errMsg: undefined,
+			});
 		}
 	}
 
-	return obj;
+	return ({
+		val: obj,
+		foundMatch: false,
+		err: false,
+		errMsg: undefined,
+	});
 }
 
 /**
