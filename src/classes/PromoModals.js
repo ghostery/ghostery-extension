@@ -47,15 +47,24 @@ class PromoModals {
 	/**
 	 * Specify a modal type that should be forced to trigger at the next opportunity
 	 * Originally added to facilitate modal UI QA
-	 * @param modal
+	 * @param 	{String}	modalType		The modal type to trigger
+	 * @return	{String}					Either 'success' or 'failure'
 	 */
-	static forceOnePromoModalDisplay(modalType) {
-		if (modalType && typeof modalType === 'string' && PRIORITY_ORDERED_ACTIVE_MODALS.includes(modalType)) {
+	static showOnce(modalType) {
+		if (
+			modalType
+			&& typeof modalType === 'string'
+			&& PRIORITY_ORDERED_ACTIVE_MODALS.includes(modalType.toLowerCase())
+		) {
 			PromoModals.forcedModalType = modalType;
 			return 'success';
 		}
 
 		return 'failure';
+	}
+
+	static getActiveModalTypes() {
+		return PRIORITY_ORDERED_ACTIVE_MODALS;
 	}
 
 	/**

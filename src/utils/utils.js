@@ -550,8 +550,9 @@ export function fetchLocalJSONResource(url) {
  *
  * @memberOf BackgroundUtils
  *
- * @param {string|RegExp} name		String name of the property, or regex to match against all properties. Optional.
- * @returns {Object}				Returns an object whose properties are a subset of the argument object's
+ * @param	{Object}		obj			The object to extract a property or properties from
+ * @param 	{string|RegExp} props		String name of the property, or regex to match against all properties. Optional.
+ * @return 	{Object}					An object with the matching subset of the argument object's properties, or the whole argument object in the event of no matches
  */
 export function getObjectSlice(obj, props) {
 	if (typeof obj !== 'object') return {};
@@ -590,14 +591,14 @@ export function getObjectSlice(obj, props) {
  *
  * @memberOf BackgroundUtils
  *
- * @param 		{Array}			The array to pick a value from. Elements can be of any type(s)
- * @returns		{Object}		{ val: *, err: Boolean, errMsg: undefined|String }
+ * @param 	{Array} arr			The array to pick a value from. Elements can be of any type(s)
+ * @return	{Object}			{ val: *, err: Boolean, errMsg: undefined|String }
  */
 export function pickRandomArrEl(arr) {
 	if (arr === undefined) {
 		return ({
 			err: true,
-			errMsg: 'No argument provided',
+			errMsg: 'Undefined or no argument provided',
 			val: undefined,
 		});
 	}
@@ -615,15 +616,62 @@ export function pickRandomArrEl(arr) {
 	if (len === 0) {
 		return ({
 			err: true,
-			errMsg: "It's hard to pick a random element from an empty array",
+			errMsg: 'It is beyond the power of pickRandomArrEl to pick a random element from an empty array',
 			val: undefined,
 		});
 	}
 
 	return ({
 		err: false,
-		errMsg: '',
+		errMsg: undefined,
 		val: arr[Math.floor((Math.random() * len))],
+	});
+}
+
+/**
+ * Capitalize a string (uppercase the first letter of each word)
+ * Assumes that words are space-separated by default,
+ * but accepts an optional custom string separator argument
+ *
+ * @memberOf BackgroundUtils
+ *
+ * @param 	{String} phrase					The string to capitalize
+ * @param	{String|undefined} separator	Separator string. Optional; defaults to a space
+ * @return	{Object}						{ val: String|undefined, err: Boolean, errMsg: undefined|String }
+ */
+export function capitalize(phrase, separator = ' ') {
+	if (phrase === undefined) {
+		return ({
+			err: true,
+			errMsg: 'Undefined or no argument provided',
+			val: undefined,
+		});
+	}
+
+	if (typeof phrase !== 'string') {
+		return ({
+			err: true,
+			errMsg: 'The first argument must be a string',
+			val: undefined,
+		});
+	}
+
+	if (typeof separator !== 'string') {
+		return ({
+			err: true,
+			errMsg: 'The second argument is optional, but must be a string if provided',
+			val: undefined,
+		});
+	}
+
+	const words = phrase.split(separator);
+	const trimmedWords = words.map(word => word.trim());
+	const capitalizedWords = trimmedWords.map(word => `${word.charAt(0).toUpperCase()}${word.slice(1)}`);
+
+	return ({
+		err: false,
+		errMsg: undefined,
+		val: capitalizedWords.join(separator),
 	});
 }
 

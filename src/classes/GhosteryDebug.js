@@ -19,7 +19,7 @@ import tabInfo from './TabInfo';
 import foundBugs from './FoundBugs';
 import PromoModals from './PromoModals';
 import { alwaysLog } from '../utils/common';
-import { getObjectSlice, pickRandomArrEl } from '../utils/utils';
+import { capitalize, getObjectSlice, pickRandomArrEl } from '../utils/utils';
 
 /**
  * @class for debugging Ghostery via the background.js console.
@@ -183,20 +183,11 @@ class GhosteryDebug {
 		getConfData: 'ghostery.getConfData()',
 		getGlobals: 'ghostery.getGlobals()',
 		hitABServerWithIr: 'ghostery.hitABServerWithIr()',
+		showPromoModal: 'ghostery.showPromoModal()',
 		settingsToggleOutputStyle: 'ghostery.settings.toggleOutputStyle()',
 		settingsShow: 'ghostery.settings.show()',
 		settingsToggleLogging: 'ghostery.settings.toggleLogging()',
 	};
-
-	static helpAvailableFunctions = [
-		[`${this.helpFunctionNames.getABTests}`, 'Display what A/B tests have been fetched from the A/B test server'],
-		[`${this.helpFunctionNames.getConfData}`, 'Show the current value of a config property or properties'],
-		[`${this.helpFunctionNames.getGlobals}`, 'Show the current value of a global property or properties'],
-		[`${this.helpFunctionNames.hitABServerWithIr}`, 'Hit the A/B server endpoint with the supplied install random number'],
-		[`${this.helpFunctionNames.settingsToggleOutputStyle}`, 'Change debugger method return value formatting'],
-		[`${this.helpFunctionNames.settingsShow}`, 'Show the current debugger settings'],
-		[`${this.helpFunctionNames.settingsToggleLogging}`, 'Toggle all other debug logging on/off'],
-	];
 
 	static helpHeader = [
 		'__MAINHEADER__Ghostery Extension Debugger (GED) Help',
@@ -207,10 +198,22 @@ class GhosteryDebug {
 		['', "Example: ghostery.help('getABTests')"],
 	];
 
-	static helpPromoMessages = [
-		'Thanks for using Ghostery',
-		'Try our desktop tracker blocker Midnight for free',
-		'Try our tracker analytics tool Insights for free',
+	static helpAvailableFunctions = [
+		[`${this.helpFunctionNames.getABTests}`, 'Display what A/B tests have been fetched from the A/B test server'],
+		[`${this.helpFunctionNames.getConfData}`, 'Show the current value of a config property or properties'],
+		[`${this.helpFunctionNames.getGlobals}`, 'Show the current value of a global property or properties'],
+		[`${this.helpFunctionNames.hitABServerWithIr}`, 'Hit the A/B server endpoint with the supplied install random number'],
+		[`${this.helpFunctionNames.showPromoModal}`, 'Show specified promo modal at the next opportunity'],
+		[`${this.helpFunctionNames.settingsToggleOutputStyle}`, 'Change debugger method return value formatting'],
+		[`${this.helpFunctionNames.settingsShow}`, 'Show the current debugger settings'],
+		[`${this.helpFunctionNames.settingsToggleLogging}`, 'Toggle all other debug logging on/off'],
+	];
+
+	static helpOverview = [
+		...this.helpHeader,
+		'',
+		'__SUBHEADER__Available functions:',
+		...this.helpAvailableFunctions,
 	];
 
 	static helpGetABTests = [
@@ -262,11 +265,13 @@ class GhosteryDebug {
 		['A number between 1 and 100', 'The tests returned by the A/B server for that ir value'],
 	];
 
-	static helpOverview = [
-		...this.helpHeader,
+	static helpShowPromoModal = [
+		`__MAINHEADER__${this.helpFunctionNames.showPromoModal}`,
+		'Force the specified promo modal to display at the next opportunity.',
+		'That may be, for example, the next time you open the extension panel.',
+		'Resets after one display. If you need to see the modal again, call this function again',
 		'',
-		'__SUBHEADER__Available functions:',
-		...this.helpAvailableFunctions,
+		['__SUBHEADER__When called with...', 'Does...'],
 	];
 
 	static helpSettingsShow = [
@@ -304,16 +309,21 @@ class GhosteryDebug {
 		['Any other argument or no argument', 'Changes the output style from the current setting to the other one'],
 	];
 
-	// eslint-disable-next-line class-methods-use-this
-	help(fnName) {
+	static helpPromoMessages = [
+		'Thanks for using Ghostery',
+		'Try our desktop tracker blocker Midnight for free',
+		'Try our tracker analytics tool Insights for free',
+	];
+
+	static _assembleHelpStringArr(fnName) {
 		const {
+			helpOverview,
 			helpAvailableFunctions,
-			helpPromoMessages,
 			helpGetABTests,
 			helpGetConfData,
 			helpGetGlobals,
 			helpHitABServerWithIr,
-			helpOverview,
+			helpShowPromoModal,
 			helpSettingsShow,
 			helpSettingsToggleLogging,
 			helpSettingsToggleOutputStyle,
@@ -325,19 +335,44 @@ class GhosteryDebug {
 			...helpAvailableFunctions,
 		];
 
-		let outputStrArr;
+		const helpStringArr = [];
 		const eeFnName = (fnName && typeof fnName === 'string' && fnName.toLowerCase()) || undefined;
-		if 		(fnName === undefined) 				outputStrArr = helpOverview;
-		else if (eeFnName === 'getabtests') 		outputStrArr = helpGetABTests;
-		else if (eeFnName === 'getconfdata')		outputStrArr = helpGetConfData;
-		else if (eeFnName === 'getglobals')			outputStrArr = helpGetGlobals;
-		else if (eeFnName === 'hitabserverwithir')	outputStrArr = helpHitABServerWithIr;
-		else if (eeFnName === 'show')				outputStrArr = helpSettingsShow;
-		else if (eeFnName === 'togglelogging')		outputStrArr = helpSettingsToggleLogging;
-		else if (eeFnName === 'toggleoutputstyle')	outputStrArr = helpSettingsToggleOutputStyle;
-		else 										outputStrArr = invalidArgumentError;
+		if 		(fnName === undefined) 				helpStringArr.push(...helpOverview);
+		else if (eeFnName === 'getabtests') 		helpStringArr.push(...helpGetABTests);
+		else if (eeFnName === 'getconfdata')		helpStringArr.push(...helpGetConfData);
+		else if (eeFnName === 'getglobals')			helpStringArr.push(...helpGetGlobals);
+		else if (eeFnName === 'hitabserverwithir')	helpStringArr.push(...helpHitABServerWithIr);
+		else if (eeFnName === 'showpromomodal') {
+			helpStringArr.push(...helpShowPromoModal);
+			const activeModalTypes = PromoModals.getActiveModalTypes();
+			activeModalTypes.forEach((amt) => {
+				const { val: cappedAmt } = capitalize(amt.toLowerCase());
+				helpStringArr.push([
+					`'${amt}'`, `Open the ${cappedAmt} modal at the next opportunity`,
+				]);
+			});
+		} else if (eeFnName === 'show')				helpStringArr.push(...helpSettingsShow);
+		else if (eeFnName === 'togglelogging')		helpStringArr.push(...helpSettingsToggleLogging);
+		else if (eeFnName === 'toggleoutputstyle')	helpStringArr.push(...helpSettingsToggleOutputStyle);
+		else 										helpStringArr.push(...invalidArgumentError);
 
-		GhosteryDebug.printToConsole(GhosteryDebug.typeset(outputStrArr));
+		return helpStringArr;
+	}
+
+	// eslint-disable-next-line class-methods-use-this
+	help(fnName) {
+		const {
+			_assembleHelpStringArr,
+			helpPromoMessages,
+			printToConsole,
+			typeset
+		} = GhosteryDebug;
+
+		printToConsole(
+			typeset(
+				_assembleHelpStringArr(fnName)
+			)
+		);
 
 		// Display a little ad or thank you note instead of "undefined"
 		return (pickRandomArrEl(helpPromoMessages).val);
@@ -345,25 +380,36 @@ class GhosteryDebug {
 	// END [[Help CLI & strings]] SECTION
 
 	// START [[Main Actions]] SECTION
-	forceOnePromoModalDisplay = (modalType) => {
-		const result = PromoModals.forceOnePromoModalDisplay(modalType);
+	showPromoModal = (modalType) => {
+		const result = PromoModals.showOnce(modalType);
 
 		if (result === 'success') {
-			return (GhosteryDebug.printToConsole(GhosteryDebug.typeset([
-				`Success! The ${modalType} modal will trigger at the next opportunity`,
-			])));
+			const { val: cappedModalType } = capitalize(modalType.toLowerCase());
+			GhosteryDebug.printToConsole(
+				GhosteryDebug.typeset([
+					'__SUBHEADER__Success!',
+					`The ${cappedModalType} modal will trigger at the next opportunity`,
+				])
+			);
+			return ('Thanks for using Ghostery!');
 		}
 
 		if (result === 'failure') {
-			return (GhosteryDebug.printToConsole(GhosteryDebug.typeset([
-				`No dice: ${modalType} is not a valid and/or currently active modal type. See instructions:`,
-				"[ghostery.help('forcePromoModalDisplay') output]",
-			])));
+			const noDice = [
+				'__SUBHEADER__No dice',
+				'That was not a valid argument. Here are the valid ones:',
+				'',
+				...GhosteryDebug._assembleHelpStringArr('showPromoModal')
+			];
+			GhosteryDebug.printToConsole(GhosteryDebug.typeset(noDice));
+
+			return ('Thanks for using Ghostery!');
 		}
 
-		return (GhosteryDebug.printToConsole(GhosteryDebug.typeset([
-			'The function neither succeeded nor failed. Welcome to The Twilight Zone. If you have a minute to spare, we would greatly appreciate hearing about this likely bug at support@ghostery.com.',
-		])));
+		GhosteryDebug.printToConsole(GhosteryDebug.typeset([
+			'The function neither succeeded nor failed. If you have a minute to spare, we would greatly appreciate hearing about this likely bug at support@ghostery.com.',
+		]));
+		return ('Welcome to the Twilight Zone');
 	}
 
 	getABTests = () => {
