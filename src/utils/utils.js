@@ -565,15 +565,6 @@ export function getObjectSlice(obj, props) {
 		});
 	}
 
-	if ((typeof props !== 'string') && !(props instanceof RegExp)) {
-		return ({
-			val: obj,
-			foundMatch: false,
-			err: true,
-			errMsg: 'The second argument must be either a property name string, or a regex. Returning whole object.'
-		});
-	}
-
 	if (props === undefined) {
 		return ({
 			val: obj,
@@ -581,6 +572,16 @@ export function getObjectSlice(obj, props) {
 			err: false,
 			errMsg: undefined,
 		});
+	}
+
+	if ((typeof props !== 'string') && !(props instanceof RegExp)) {
+		return ({
+			val: obj,
+			foundMatch: false,
+			err: true,
+			errMsg: 'The second argument must be either a property name string, or a regex. Returning whole object.'
+		});
+
 	}
 
 	if (typeof props === 'string') {
