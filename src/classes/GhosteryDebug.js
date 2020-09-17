@@ -58,37 +58,6 @@ class GhosteryDebug {
 	}
 
 	// START [[Output styling, formatting, and printing]] SECTION
-	_outputObjectSlice(obj, slice, objStr) {
-		const objSlice = getObjectSlice(obj, slice);
-		const output = [];
-
-		if (slice === undefined) {
-			output.push(`__SUBHEADER__You didn't provide an argument, so here's the whole ${objStr} object:`);
-		} else if (typeof slice === 'string') {
-			if (objSlice.foundMatch) {
-				output.push('__SUBHEADER__We found the property you asked for:');
-			} else {
-				output.push(`__SUBHEADER__We did not find '${slice}' on the ${objStr} object, so here is the whole thing instead:`);
-			}
-		} else if (slice instanceof RegExp) {
-			if (objSlice.foundMatch) {
-				output.push('__SUBHEADER__Here are the matches we found for that regex:');
-			} else {
-				output.push(`__SUBHEADER__That regex produced no matches, so here is the whole ${objStr} object instead:`);
-			}
-		}
-
-		if (this.settings._objectOutputStyle === OBJECT_OUTPUT_STYLE) {
-			output.push(objSlice.val);
-		} else if (this.settings._objectOutputStyle === STRING_OUTPUT_STYLE) {
-			output.push(JSON.stringify(objSlice.val));
-		}
-
-		GhosteryDebug.printToConsole(GhosteryDebug.typeset(output));
-
-		return ('Thanks for using Ghostery');
-	}
-
 	static outputStyles = {
 		highlight: 'font-weight: bold; padding: 2px 0px;',
 		mainheader: 'font-size: 16px; font-weight: bold; padding: 4px 0px',
@@ -382,6 +351,7 @@ class GhosteryDebug {
 	// END [[Help CLI & strings]] SECTION
 
 	// START [[Main Actions]] SECTION
+	// [[Main Actions]] public API
 	showPromoModal = (modalType) => {
 		const result = PromoModals.showOnce(modalType);
 
@@ -427,9 +397,9 @@ class GhosteryDebug {
 		return 'These are the A/B tests the A/B server returns when called with the supplied ir';
 	}
 
-	getConfData = slice => this._outputObjectSlice(confData, slice, 'config');
+	getConfData = slice => this._getObjectSlice(confData, slice, 'config');
 
-	getGlobals = slice => this._outputObjectSlice(globals, slice, 'globals');
+	getGlobals = slice => this._getObjectSlice(globals, slice, 'globals');
 
 	addAccountEvent(type, event, details) {
 		const timestamp = new Date();
@@ -538,6 +508,38 @@ class GhosteryDebug {
 				resolve(this);
 			});
 		});
+	}
+
+	// [[Main Actions]] private helpers
+	_getObjectSlice(obj, slice, objStr) {
+		const objSlice = getObjectSlice(obj, slice);
+		const output = [];
+
+		if (slice === undefined) {
+			output.push(`__SUBHEADER__You didn't provide an argument, so here's the whole ${objStr} object:`);
+		} else if (typeof slice === 'string') {
+			if (objSlice.foundMatch) {
+				output.push('__SUBHEADER__We found the property you asked for:');
+			} else {
+				output.push(`__SUBHEADER__We did not find '${slice}' on the ${objStr} object, so here is the whole thing instead:`);
+			}
+		} else if (slice instanceof RegExp) {
+			if (objSlice.foundMatch) {
+				output.push('__SUBHEADER__Here are the matches we found for that regex:');
+			} else {
+				output.push(`__SUBHEADER__That regex produced no matches, so here is the whole ${objStr} object instead:`);
+			}
+		}
+
+		if (this.settings._objectOutputStyle === OBJECT_OUTPUT_STYLE) {
+			output.push(objSlice.val);
+		} else if (this.settings._objectOutputStyle === STRING_OUTPUT_STYLE) {
+			output.push(JSON.stringify(objSlice.val));
+		}
+
+		GhosteryDebug.printToConsole(GhosteryDebug.typeset(output));
+
+		return ('Thanks for using Ghostery');
 	}
 	// END [[Main Actions]] SECTION
 
