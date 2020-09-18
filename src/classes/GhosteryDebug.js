@@ -150,10 +150,10 @@ class GhosteryDebug {
 	// it appears that static class fields must be defined
 	// before they can be referenced by other static class fields
 	static helpFunctionNames = {
+		fetchABTestsWithIr: 'ghostery.fetchABTestsWithIr()',
 		getABTests: 'ghostery.getABTests()',
 		getConfData: 'ghostery.getConfData()',
 		getGlobals: 'ghostery.getGlobals()',
-		hitABServerWithIr: 'ghostery.hitABServerWithIr()',
 		showPromoModal: 'ghostery.showPromoModal()',
 		settingsToggleOutputStyle: 'ghostery.settings.toggleOutputStyle()',
 		settingsShow: 'ghostery.settings.show()',
@@ -170,10 +170,10 @@ class GhosteryDebug {
 	];
 
 	static helpAvailableFunctions = [
+		[`${this.helpFunctionNames.fetchABTestsWithIr}`, 'Hit the A/B server endpoint with the supplied install random number'],
 		[`${this.helpFunctionNames.getABTests}`, 'Display what A/B tests have been fetched from the A/B test server'],
 		[`${this.helpFunctionNames.getConfData}`, 'Show the current value of a config property or properties'],
 		[`${this.helpFunctionNames.getGlobals}`, 'Show the current value of a global property or properties'],
-		[`${this.helpFunctionNames.hitABServerWithIr}`, 'Hit the A/B server endpoint with the supplied install random number'],
 		[`${this.helpFunctionNames.showPromoModal}`, 'Show specified promo modal at the next opportunity'],
 		[`${this.helpFunctionNames.settingsToggleOutputStyle}`, 'Change debugger method return value formatting'],
 		[`${this.helpFunctionNames.settingsShow}`, 'Show the current debugger settings'],
@@ -185,6 +185,20 @@ class GhosteryDebug {
 		'',
 		'__SUBHEADER__Available functions:',
 		...this.helpAvailableFunctions,
+	];
+
+	static helpFetchABTestsWithIr = [
+		`__MAINHEADER__${this.helpFunctionNames.fetchABTestsWithIr}`,
+		'A random number between 1 and 100 is generated and saved to local storage',
+		'when the extension is first installed. This number is included in requests',
+		'to the A/B test server as the value of the ir query parameter, and it determines',
+		'which test buckets the user is placed in.',
+		'This function lets you hit the A/B server with any valid ir number',
+		'to make it easier to check whether different A/B tests are returned as expected',
+		'and check the functionality of the different test scenarios',
+		'',
+		['__SUBHEADER__When called with...', 'Returns...'],
+		['A number between 1 and 100', 'The tests returned by the A/B server for that ir value'],
 	];
 
 	static helpGetABTests = [
@@ -220,20 +234,6 @@ class GhosteryDebug {
 		['A property key regex', 'An object with all matching properties'],
 		['', 'Example: ghostery.getGlobals(/ACCOUNT_/)'],
 		['Anything else', 'The whole globals object. Also returned if there are no matching results'],
-	];
-
-	static helpHitABServerWithIr = [
-		`__MAINHEADER__${this.helpFunctionNames.hitABServerWithIr}`,
-		'A random number between 1 and 100 is generated and saved to local storage',
-		'when the extension is first installed. This number is included in requests',
-		'to the A/B test server as the value of the ir query parameter, and it determines',
-		'which test buckets the user is placed in.',
-		'This function lets you hit the A/B server with any valid ir number',
-		'to make it easier to check whether different A/B tests are returned as expected',
-		'and check the functionality of the different test scenarios',
-		'',
-		['__SUBHEADER__When called with...', 'Returns...'],
-		['A number between 1 and 100', 'The tests returned by the A/B server for that ir value'],
 	];
 
 	static helpShowPromoModal = [
@@ -290,10 +290,10 @@ class GhosteryDebug {
 		const {
 			helpOverview,
 			helpAvailableFunctions,
+			helpFetchABTestsWithIr,
 			helpGetABTests,
 			helpGetConfData,
 			helpGetGlobals,
-			helpHitABServerWithIr,
 			helpShowPromoModal,
 			helpSettingsShow,
 			helpSettingsToggleLogging,
@@ -312,7 +312,7 @@ class GhosteryDebug {
 		else if (eeFnName === 'getabtests') 		helpStringArr.push(...helpGetABTests);
 		else if (eeFnName === 'getconfdata')		helpStringArr.push(...helpGetConfData);
 		else if (eeFnName === 'getglobals')			helpStringArr.push(...helpGetGlobals);
-		else if (eeFnName === 'hitabserverwithir')	helpStringArr.push(...helpHitABServerWithIr);
+		else if (eeFnName === 'fetchabtestswithir')	helpStringArr.push(...helpFetchABTestsWithIr);
 		else if (eeFnName === 'showpromomodal') {
 			helpStringArr.push(...helpShowPromoModal);
 			const activeModalTypes = PromoModals.getActiveModalTypes();
@@ -397,7 +397,7 @@ class GhosteryDebug {
 		return ('Thanks for using Ghostery!');
 	}
 
-	hitABServerWithIrAsync = (ir) => {
+	fetchABTestsWithIr = (ir) => {
 		if (ir === undefined) {
 			GhosteryDebug.printToConsole(GhosteryDebug.typeset([
 				'__SUBHEADER__Oops: required argument missing',
