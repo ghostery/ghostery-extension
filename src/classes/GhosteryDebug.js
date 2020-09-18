@@ -32,6 +32,7 @@ const STRING_OUTPUT_STYLE = false;
 const THANKS = 'Thanks for using Ghostery';
 const UP_REMINDER = 'Remember you can press up to avoid having to retype your previous command';
 const CSS_SUBHEADER = '__SUBHEADER__';
+const CSS_MAINHEADER = '__MAINHEADER__';
 
 class GhosteryDebug {
 	// ToC
@@ -165,7 +166,7 @@ class GhosteryDebug {
 	};
 
 	static helpHeader = [
-		'__MAINHEADER__Ghostery Extension Debugger (GED) Help',
+		`${CSS_MAINHEADER}Ghostery Extension Debugger (GED) Help`,
 		'',
 		`${CSS_SUBHEADER}Usage:`,
 		['ghostery.help()', 'Show this message'],
@@ -192,7 +193,7 @@ class GhosteryDebug {
 	];
 
 	static helpFetchABTestsWithIr = [
-		`__MAINHEADER__${this.helpFunctionNames.fetchABTestsWithIr}`,
+		`${CSS_MAINHEADER}${this.helpFunctionNames.fetchABTestsWithIr}`,
 		'A random number between 1 and 100 is generated and saved to local storage',
 		'when the extension is first installed. This number is included in requests',
 		'to the A/B test server as the value of the ir query parameter, and it determines',
@@ -206,7 +207,7 @@ class GhosteryDebug {
 	];
 
 	static helpGetABTests = [
-		`__MAINHEADER__${this.helpFunctionNames.getABTests}`,
+		`${CSS_MAINHEADER}${this.helpFunctionNames.getABTests}`,
 		'Display what A/B tests have been fetched from the A/B test server',
 		'Fetches happen on browser startup and then at regularly scheduled intervals',
 		'',
@@ -215,7 +216,7 @@ class GhosteryDebug {
 	];
 
 	static helpGetConfData = [
-		`__MAINHEADER__${this.helpFunctionNames.getConfData}`,
+		`${CSS_MAINHEADER}${this.helpFunctionNames.getConfData}`,
 		'Display the current value(s) of a config property or properties',
 		'',
 		[`${CSS_SUBHEADER}When called with...`, 'Returns...'],
@@ -228,7 +229,7 @@ class GhosteryDebug {
 	];
 
 	static helpGetGlobals = [
-		`__MAINHEADER__${this.helpFunctionNames.getGlobals}`,
+		`${CSS_MAINHEADER}${this.helpFunctionNames.getGlobals}`,
 		'Display the current value(s) of a global property or properties',
 		'',
 		[`${CSS_SUBHEADER}When called with...`, 'Returns...'],
@@ -241,7 +242,7 @@ class GhosteryDebug {
 	];
 
 	static helpShowPromoModal = [
-		`__MAINHEADER__${this.helpFunctionNames.showPromoModal}`,
+		`${CSS_MAINHEADER}${this.helpFunctionNames.showPromoModal}`,
 		'Force the specified promo modal to display at the next opportunity.',
 		'That may be, for example, the next time you open the extension panel.',
 		'Resets after one display. If you need to see the modal again, call this function again',
@@ -250,7 +251,7 @@ class GhosteryDebug {
 	];
 
 	static helpSettingsShow = [
-		`__MAINHEADER__${this.helpFunctionNames.settingsShow}`,
+		`${CSS_MAINHEADER}${this.helpFunctionNames.settingsShow}`,
 		'Show the current debugger settings.',
 		'Settings persist until you end the browser session',
 		'',
@@ -260,7 +261,7 @@ class GhosteryDebug {
 	];
 
 	static helpSettingsToggleLogging = [
-		`__MAINHEADER__${this.helpFunctionNames.settingsToggleLogging}`,
+		`${CSS_MAINHEADER}${this.helpFunctionNames.settingsToggleLogging}`,
 		'Toggle regular debug output on/off.',
 		'This overrides the debug property in the manifest',
 		'and allows you to turn on logging in production builds',
@@ -273,7 +274,7 @@ class GhosteryDebug {
 	]
 
 	static helpSettingsToggleOutputStyle = [
-		`__MAINHEADER__${this.helpFunctionNames.settingsToggleOutputStyle}`,
+		`${CSS_MAINHEADER}${this.helpFunctionNames.settingsToggleOutputStyle}`,
 		'Change the output style for debugger method return values.',
 		'Strings are easy to copy and easier to grok at a glance.',
 		'Object style output looks nicer and shows the structure better',
@@ -305,7 +306,7 @@ class GhosteryDebug {
 		} = GhosteryDebug;
 
 		const invalidArgumentError = [
-			`__MAINHEADER__'${fnName}' is not a GED function. Here are the valid ones:`,
+			`${CSS_MAINHEADER}'${fnName}' is not a GED function. Here are the valid ones:`,
 			'',
 			...helpAvailableFunctions,
 		];
@@ -630,7 +631,7 @@ class GhosteryDebug {
 			const potentialOutputStyleHighlight = (updated === 'outputStyle') ? '__HIGHLIGHT__' : '';
 
 			const currentSettings = [
-				`__MAINHEADER__${updatedOrCurrent} Settings`,
+				`${CSS_MAINHEADER}${updatedOrCurrent} Settings`,
 				[
 					`${potentialLoggingHighlight}Logging`,
 					`${this.settings._isLog ? 'On' : 'Off'}`
