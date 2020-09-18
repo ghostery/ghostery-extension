@@ -11,7 +11,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import React, { useRef, Fragment } from 'react';
+import React, { Fragment, useRef, useEffect } from 'react';
 import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
@@ -119,8 +119,10 @@ const premiumAlreadyProtectedButton = () => (
  * @memberof HubComponents
  */
 const UpgradePlanView = (props) => {
-	const title = t('hub_upgrade_page_title');
-	window.document.title = title;
+	useEffect(() => {
+		const title = t('hub_upgrade_page_title');
+		window.document.title = title;
+	}, []);
 
 	const {
 		protection_level,
