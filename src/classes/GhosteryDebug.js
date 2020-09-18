@@ -187,7 +187,7 @@ class GhosteryDebug {
 	static helpOverview = [
 		...this.helpHeader,
 		'',
-		'__SUBHEADER__Available functions:',
+		`${CSS_SUBHEADER}Available functions:`,
 		...this.helpAvailableFunctions,
 	];
 
@@ -201,7 +201,7 @@ class GhosteryDebug {
 		'to make it easier to check whether different A/B tests are returned as expected',
 		'and check the functionality of the different test scenarios',
 		'',
-		['__SUBHEADER__When called with...', 'Returns...'],
+		[`${CSS_SUBHEADER}When called with...`, 'Returns...'],
 		['A number between 1 and 100', 'The tests returned by the A/B server for that ir value'],
 	];
 
@@ -210,7 +210,7 @@ class GhosteryDebug {
 		'Display what A/B tests have been fetched from the A/B test server',
 		'Fetches happen on browser startup and then at regularly scheduled intervals',
 		'',
-		['__SUBHEADER__When called with...', 'Returns...'],
+		[`${CSS_SUBHEADER}When called with...`, 'Returns...'],
 		['No argument or any arguments', 'The A/B test strings currently in memory'],
 	];
 
@@ -218,7 +218,7 @@ class GhosteryDebug {
 		`__MAINHEADER__${this.helpFunctionNames.getConfData}`,
 		'Display the current value(s) of a config property or properties',
 		'',
-		['__SUBHEADER__When called with...', 'Returns...'],
+		[`${CSS_SUBHEADER}When called with...`, 'Returns...'],
 		['No argument', 'The whole config object'],
 		['A property key string', 'An object with just that property'],
 		['', "Example: ghostery.getConfData('enable_smart_block')"],
@@ -231,7 +231,7 @@ class GhosteryDebug {
 		`__MAINHEADER__${this.helpFunctionNames.getGlobals}`,
 		'Display the current value(s) of a global property or properties',
 		'',
-		['__SUBHEADER__When called with...', 'Returns...'],
+		[`${CSS_SUBHEADER}When called with...`, 'Returns...'],
 		['No argument', 'The whole globals object'],
 		['A property key string', 'An object with just that property'],
 		['', "Example: ghostery.getGlobals('BROWSER_INFO')"],
@@ -246,7 +246,7 @@ class GhosteryDebug {
 		'That may be, for example, the next time you open the extension panel.',
 		'Resets after one display. If you need to see the modal again, call this function again',
 		'',
-		['__SUBHEADER__When called with...', 'Does...'],
+		[`${CSS_SUBHEADER}When called with...`, 'Does...'],
 	];
 
 	static helpSettingsShow = [
@@ -254,7 +254,7 @@ class GhosteryDebug {
 		'Show the current debugger settings.',
 		'Settings persist until you end the browser session',
 		'',
-		['__SUBHEADER__Setting', 'Explanation'],
+		[`${CSS_SUBHEADER}Setting`, 'Explanation'],
 		['Logging', 'Turn extension debug output on/off'],
 		['Object Output Style', 'Set return value display style to object or string'],
 	];
@@ -266,7 +266,7 @@ class GhosteryDebug {
 		'and allows you to turn on logging in production builds',
 		"and any other builds that don't have debug set in the manifest",
 		'',
-		['__SUBHEADER__When called with...', 'Does...'],
+		[`${CSS_SUBHEADER}When called with...`, 'Does...'],
 		["'ON'", 'Turns logging on'],
 		["'OFF'", 'Turns logging off'],
 		['Any other argument or no argument', 'Turns logging on if it was off and vice versa'],
@@ -278,7 +278,7 @@ class GhosteryDebug {
 		'Strings are easy to copy and easier to grok at a glance.',
 		'Object style output looks nicer and shows the structure better',
 		'',
-		['__SUBHEADER__When called with...', 'Does...'],
+		[`${CSS_SUBHEADER}When called with...`, 'Does...'],
 		["'OBJECT'", 'Debugger method return values will now be output as objects'],
 		["'STRING'", 'Debugger method return values will now be output as strings'],
 		['Any other argument or no argument', 'Changes the output style from the current setting to the other one'],
@@ -363,7 +363,7 @@ class GhosteryDebug {
 			const { val: cappedModalType } = capitalize(modalType.toLowerCase());
 			GhosteryDebug.printToConsole(
 				GhosteryDebug.typeset([
-					'__SUBHEADER__Success!',
+					`${CSS_SUBHEADER}Success!`,
 					`The ${cappedModalType} modal will trigger at the next opportunity`,
 				])
 			);
@@ -373,7 +373,7 @@ class GhosteryDebug {
 
 		if (result === 'failure') {
 			const noDice = [
-				'__SUBHEADER__No dice',
+				`${CSS_SUBHEADER}No dice`,
 				'That was not a valid argument. Here are the valid ones:',
 				'',
 				...GhosteryDebug._assembleHelpStringArr('showPromoModal')
@@ -394,7 +394,7 @@ class GhosteryDebug {
 		const output = [];
 		const tests = abtest.getTests();
 
-		output.push('__SUBHEADER__These are all the A/B tests currently in memory:');
+		output.push(`${CSS_SUBHEADER}These are all the A/B tests currently in memory:`);
 		this._push(tests, output);
 		GhosteryDebug.printToConsole(GhosteryDebug.typeset(output));
 
@@ -404,7 +404,7 @@ class GhosteryDebug {
 	fetchABTestsWithIr = (ir) => {
 		if (ir === undefined) {
 			GhosteryDebug.printToConsole(GhosteryDebug.typeset([
-				'__SUBHEADER__Oops: required argument missing',
+				`${CSS_SUBHEADER}Oops: required argument missing`,
 				'You must provide an integer number argument between 1 and 100 inclusive',
 			]));
 			return UP_REMINDER;
@@ -412,7 +412,7 @@ class GhosteryDebug {
 
 		if (typeof ir !== 'number') {
 			GhosteryDebug.printToConsole(GhosteryDebug.typeset([
-				'__SUBHEADER__Oops: invalid argument type',
+				`${CSS_SUBHEADER}Oops: invalid argument type`,
 				'The argument must be an integer between 1 and 100 inclusive',
 			]));
 			return UP_REMINDER;
@@ -420,7 +420,7 @@ class GhosteryDebug {
 
 		if ((ir < 1) || (ir > 100)) {
 			GhosteryDebug.printToConsole(GhosteryDebug.typeset([
-				'__SUBHEADER__Oops: invalid argument value',
+				`${CSS_SUBHEADER}Oops: invalid argument value`,
 				'The argument must be an integer >between 1 and 100 inclusive<',
 			]));
 			return UP_REMINDER;
@@ -428,7 +428,7 @@ class GhosteryDebug {
 
 		if (Math.floor(ir) !== ir) {
 			GhosteryDebug.printToConsole(GhosteryDebug.typeset([
-				'__SUBHEADER__Oops: invalid argument value',
+				`${CSS_SUBHEADER}Oops: invalid argument value`,
 				'The argument must be an >integer< between 1 and 100 inclusive',
 			]));
 			return UP_REMINDER;
@@ -587,18 +587,18 @@ class GhosteryDebug {
 		const output = [];
 
 		if (slice === undefined) {
-			output.push(`__SUBHEADER__You didn't provide an argument, so here's the whole ${objStr} object:`);
+			output.push(`${CSS_SUBHEADER}You didn't provide an argument, so here's the whole ${objStr} object:`);
 		} else if (typeof slice === 'string') {
 			if (objSlice.foundMatch) {
-				output.push('__SUBHEADER__We found the property you asked for:');
+				output.push(`${CSS_SUBHEADER}We found the property you asked for:`);
 			} else {
-				output.push(`__SUBHEADER__We did not find '${slice}' on the ${objStr} object, so here is the whole thing instead:`);
+				output.push(`${CSS_SUBHEADER}We did not find '${slice}' on the ${objStr} object, so here is the whole thing instead:`);
 			}
 		} else if (slice instanceof RegExp) {
 			if (objSlice.foundMatch) {
-				output.push('__SUBHEADER__Here are the matches we found for that regex:');
+				output.push(`${CSS_SUBHEADER}Here are the matches we found for that regex:`);
 			} else {
-				output.push(`__SUBHEADER__That regex produced no matches, so here is the whole ${objStr} object instead:`);
+				output.push(`${CSS_SUBHEADER}That regex produced no matches, so here is the whole ${objStr} object instead:`);
 			}
 		}
 
