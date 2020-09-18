@@ -397,7 +397,7 @@ class GhosteryDebug {
 		return ('Thanks for using Ghostery!');
 	}
 
-	hitABServerWithIr = (ir) => {
+	hitABServerWithIrAsync = (ir) => {
 		if (ir === undefined) {
 			GhosteryDebug.printToConsole(GhosteryDebug.typeset([
 				'__SUBHEADER__Oops: required argument missing',
