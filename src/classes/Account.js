@@ -22,7 +22,7 @@ import conf from './Conf';
 import dispatcher from './Dispatcher';
 import { log } from '../utils/common';
 import Api from '../utils/api';
-import metrics from '../classes/Metrics';
+import metrics from './Metrics';
 
 const api = new Api();
 const {
@@ -163,7 +163,7 @@ class Account {
 	/**
 	 * @return {array}	All subscriptions the user has, empty if none
 	*/
-	getUserSubscriptionData = (options) => (
+	getUserSubscriptionData = options => (
 		this._getUserID()
 			.then(userID => api.get('stripe/customers', userID, 'cards,subscriptions'))
 			.then((res) => {
