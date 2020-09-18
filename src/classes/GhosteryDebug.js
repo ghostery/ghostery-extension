@@ -398,8 +398,65 @@ class GhosteryDebug {
 	}
 
 	hitABServerWithIr = (ir) => {
-		abtest.silentFetch(ir).then(result => console.log(result));
-		return 'These are the A/B tests the A/B server returns when called with the supplied ir';
+		if (ir === undefined) {
+			GhosteryDebug.printToConsole(GhosteryDebug.typeset([
+				'__SUBHEADER__Oops: required argument missing',
+				'You must provide an integer number argument between 1 and 100 inclusive',
+			]));
+			return 'Remember you can press up to avoid having to retype your previous command';
+		}
+
+		if (typeof ir !== 'number') {
+			GhosteryDebug.printToConsole(GhosteryDebug.typeset([
+				'__SUBHEADER__Oops: invalid argument type',
+				'The argument must be an integer between 1 and 100 inclusive',
+			]));
+			return 'Remember you can press up to avoid having to retype your previous command';
+		}
+
+		if ((ir < 1) || (ir > 100)) {
+			GhosteryDebug.printToConsole(GhosteryDebug.typeset([
+				'__SUBHEADER__Oops: invalid argument value',
+				'The argument must be an integer >between 1 and 100 inclusive<',
+			]));
+			return 'Remember you can press up to avoid having to retype your previous command';
+		}
+
+		if (Math.floor(ir) !== ir) {
+			GhosteryDebug.printToConsole(GhosteryDebug.typeset([
+				'__SUBHEADER__Oops: invalid argument value',
+				'The argument must be an >integer< between 1 and 100 inclusive',
+			]));
+			return 'Remember you can press up to avoid having to retype your previous command';
+		}
+
+		abtest.silentFetch(ir)
+			.then((result) => {
+				const output = [];
+				if (result === 'resolved') {
+					output.push(`__HIGHLIGHT__The call to the A/B server with ir=${ir} succeeded`);
+					output.push('These are the tests that are now in memory:');
+					this._push(abtest.getTests(), output);
+				} else {
+					output.push('__HIGHLIGHT__Something went wrong with the call to the A/B server');
+					output.push('If this keeps happening, we would greatly appreciate hearing about it at support@ghostery.com');
+					output.push('The tests in memory were not updated, but here they are anyway just in case:');
+					this._push(abtest.getTests(), output);
+				}
+				GhosteryDebug.printToConsole(GhosteryDebug.typeset(output));
+			})
+			.catch(() => {
+				const output = [];
+				output.push('__HIGHLIGHT__Something went wrong with the call to the A/B server');
+				output.push('If this keeps happening, we would greatly appreciate hearing about it at support@ghostery.com');
+				output.push('The tests in memory were not updated, but here they are anyway just in case:');
+				this._push(abtest.getTests(), output);
+				GhosteryDebug.printToConsole(GhosteryDebug.typeset(output));
+			});
+
+		// This will log out before the stuff in the then and catch handlers of silentFetch above,
+		// since the method does not wait for the async call to resolve before returning
+		return ('We are making an async call to the A/B server. Results should appear below shortly:');
 	}
 
 	getConfData = slice => this._getObjectSlice(confData, slice, 'config');
