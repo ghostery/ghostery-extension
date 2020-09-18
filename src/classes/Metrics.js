@@ -372,7 +372,7 @@ class Metrics {
 			// Hub Promo variant
 			`&hp=${encodeURIComponent(Metrics._getHubPromoVariant().toString())}` +
 			// Subscription Interval
-			`&subscription_interval=${encodeURIComponent(Metrics._getSubscriptionInterval().toString())}` +
+			`&si=${encodeURIComponent(Metrics._getSubscriptionInterval().toString())}` +
 			// Product ID Parameter
 			`&pi=${encodeURIComponent('gbe')}`;
 
