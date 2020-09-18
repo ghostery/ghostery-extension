@@ -33,6 +33,7 @@ const THANKS = 'Thanks for using Ghostery';
 const UP_REMINDER = 'Remember you can press up to avoid having to retype your previous command';
 const CSS_SUBHEADER = '__SUBHEADER__';
 const CSS_MAINHEADER = '__MAINHEADER__';
+const CSS_HIGHLIGHT = '__HIGHLIGHT__';
 
 class GhosteryDebug {
 	// ToC
@@ -97,9 +98,9 @@ class GhosteryDebug {
 		lines.forEach((line) => {
 			// eslint-disable-next-line no-console
 			if (typeof line === 'object')				console.dir(line);
-			else if (line.startsWith('__MAINHEADER__')) GhosteryDebug.printFormatted(line, 'mainheader');
+			else if (line.startsWith(CSS_MAINHEADER)) 	GhosteryDebug.printFormatted(line, 'mainheader');
 			else if (line.startsWith(CSS_SUBHEADER))	GhosteryDebug.printFormatted(line, 'subheader');
-			else if (line.startsWith('__HIGHLIGHT__'))	GhosteryDebug.printFormatted(line, 'highlight');
+			else if (line.startsWith(CSS_HIGHLIGHT))	GhosteryDebug.printFormatted(line, 'highlight');
 			// eslint-disable-next-line no-console
 			else										console.log(line);
 		});
@@ -134,9 +135,9 @@ class GhosteryDebug {
 				const leftSide = rawText[0];
 				const rightSide = rawText[1];
 				const cssStyleMarkerLength =
-					(leftSide.startsWith('__MAINHEADER__') && '__MAINHEADER__'.length)
+					(leftSide.startsWith(CSS_MAINHEADER) && CSS_MAINHEADER.length)
 					|| (leftSide.startsWith(CSS_SUBHEADER) && CSS_SUBHEADER.length)
-					|| (leftSide.startsWith('__HIGHLIGHT__') && '__HIGHLIGHT__'.length)
+					|| (leftSide.startsWith(CSS_HIGHLIGHT) && CSS_HIGHLIGHT.length)
 					|| 0;
 				formattedLines.push(
 					leftSide.padEnd(40 + cssStyleMarkerLength, ' ').concat(rightSide)
@@ -443,11 +444,11 @@ class GhosteryDebug {
 			.then((result) => {
 				const output = [];
 				if (result === 'resolved') {
-					output.push(`__HIGHLIGHT__The call to the A/B server with ir=${ir} succeeded`);
+					output.push(`${CSS_HIGHLIGHT}The call to the A/B server with ir=${ir} succeeded`);
 					output.push('These are the tests that are now in memory:');
 					this._push(abtest.getTests(), output);
 				} else {
-					output.push('__HIGHLIGHT__Something went wrong with the call to the A/B server');
+					output.push(`${CSS_HIGHLIGHT}Something went wrong with the call to the A/B server`);
 					output.push('If this keeps happening, we would greatly appreciate hearing about it at support@ghostery.com');
 					output.push('The tests in memory were not updated, but here they are anyway just in case:');
 					this._push(abtest.getTests(), output);
@@ -458,7 +459,7 @@ class GhosteryDebug {
 			})
 			.catch(() => {
 				const output = [];
-				output.push('__HIGHLIGHT__Something went wrong with the call to the A/B server');
+				output.push(`${CSS_HIGHLIGHT}Something went wrong with the call to the A/B server`);
 				output.push('If this keeps happening, we would greatly appreciate hearing about it at support@ghostery.com');
 				output.push('The tests in memory were not updated, but here they are anyway just in case:');
 				this._push(abtest.getTests(), output);
@@ -627,8 +628,8 @@ class GhosteryDebug {
 
 		show: (updated) => {
 			const updatedOrCurrent = (updated === 'logging' || updated === 'outputStyle') ? 'Updated' : 'Current';
-			const potentialLoggingHighlight = (updated === 'logging') ? '__HIGHLIGHT__' : '';
-			const potentialOutputStyleHighlight = (updated === 'outputStyle') ? '__HIGHLIGHT__' : '';
+			const potentialLoggingHighlight = (updated === 'logging') ? CSS_HIGHLIGHT : '';
+			const potentialOutputStyleHighlight = (updated === 'outputStyle') ? CSS_HIGHLIGHT : '';
 
 			const currentSettings = [
 				`${CSS_MAINHEADER}${updatedOrCurrent} Settings`,
