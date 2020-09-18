@@ -22,6 +22,7 @@ import conf from './Conf';
 import dispatcher from './Dispatcher';
 import { log } from '../utils/common';
 import Api from '../utils/api';
+import metrics from '../classes/Metrics';
 
 const api = new Api();
 const {
@@ -85,7 +86,7 @@ class Account {
 			}
 			this._getUserIDFromCookie().then((userID) => {
 				this._setAccountInfo(userID);
-				this.getUserSubscriptionData();
+				this.getUserSubscriptionData({ calledFrom: 'login' });
 			});
 			return {};
 		});
@@ -162,7 +163,7 @@ class Account {
 	/**
 	 * @return {array}	All subscriptions the user has, empty if none
 	*/
-	getUserSubscriptionData = () => (
+	getUserSubscriptionData = (options) => (
 		this._getUserID()
 			.then(userID => api.get('stripe/customers', userID, 'cards,subscriptions'))
 			.then((res) => {
@@ -188,6 +189,9 @@ class Account {
 					if (!premiumSubscription) {
 						this._setSubscriptionData(plusSubscription);
 					}
+				}
+				if (options && options.calledFrom === 'login') {
+					metrics.ping('sign_in_success');
 				}
 
 				return subscriptions;
