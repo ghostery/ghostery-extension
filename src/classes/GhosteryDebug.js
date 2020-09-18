@@ -31,9 +31,9 @@ const STRING_OUTPUT_STYLE = false;
 
 const THANKS = 'Thanks for using Ghostery';
 const UP_REMINDER = 'Remember you can press up to avoid having to retype your previous command';
-const CSS_SUBHEADER = '__SUBHEADER__';
-const CSS_MAINHEADER = '__MAINHEADER__';
-const CSS_HIGHLIGHT = '__HIGHLIGHT__';
+const CSS_SUBHEADER = 'css_subheader__';
+const CSS_MAINHEADER = 'css_mainheader__';
+const CSS_HIGHLIGHT = 'css_highlight__';
 
 class GhosteryDebug {
 	// ToC
@@ -44,8 +44,10 @@ class GhosteryDebug {
 	// [[Settings Actions]]
 
 	constructor() {
+		// Settings methods are defined and declared in a public instance field
+		// in the [[Settings Actions]] section
 		this.settings._isLog = isLog();
-		this.settings._objectOutputStyle = OBJECT_OUTPUT_STYLE; // other option is 'json'
+		this.settings._objectOutputStyle = OBJECT_OUTPUT_STYLE;
 
 		this.accountEvents = [];
 
@@ -65,9 +67,9 @@ class GhosteryDebug {
 
 	// START [[Output styling, formatting, and printing]] SECTION
 	static outputStyles = {
-		highlight: 'font-weight: bold; padding: 2px 0px;',
-		mainheader: 'font-size: 16px; font-weight: bold; padding: 4px 0px',
-		subheader: 'font-weight: bold; padding: 2px 0px;',
+		[CSS_HIGHLIGHT]: 'font-weight: bold; padding: 2px 0px;',
+		[CSS_MAINHEADER]: 'font-size: 16px; font-weight: bold; padding: 4px 0px',
+		[CSS_SUBHEADER]: 'font-weight: bold; padding: 2px 0px;',
 	};
 
 	/** private printToConsole helper that applies specified formatting
@@ -79,7 +81,7 @@ class GhosteryDebug {
 	static printFormatted(text, style) {
 		// eslint-disable-next-line no-console
 		console.log(
-			`%c${text.replace(`__${style.toUpperCase()}__`, '')}`,
+			`%c${text.replace(style, '')}`,
 			GhosteryDebug.outputStyles[style]
 		);
 	}
@@ -98,9 +100,9 @@ class GhosteryDebug {
 		lines.forEach((line) => {
 			// eslint-disable-next-line no-console
 			if (typeof line === 'object')				console.dir(line);
-			else if (line.startsWith(CSS_MAINHEADER)) 	GhosteryDebug.printFormatted(line, 'mainheader');
-			else if (line.startsWith(CSS_SUBHEADER))	GhosteryDebug.printFormatted(line, 'subheader');
-			else if (line.startsWith(CSS_HIGHLIGHT))	GhosteryDebug.printFormatted(line, 'highlight');
+			else if (line.startsWith(CSS_MAINHEADER)) 	GhosteryDebug.printFormatted(line, CSS_MAINHEADER);
+			else if (line.startsWith(CSS_SUBHEADER))	GhosteryDebug.printFormatted(line, CSS_SUBHEADER);
+			else if (line.startsWith(CSS_HIGHLIGHT))	GhosteryDebug.printFormatted(line, CSS_HIGHLIGHT);
 			// eslint-disable-next-line no-console
 			else										console.log(line);
 		});
