@@ -18,7 +18,7 @@ import globals from './Globals';
 import tabInfo from './TabInfo';
 import foundBugs from './FoundBugs';
 import PromoModals from './PromoModals';
-import { alwaysLog } from '../utils/common';
+import { alwaysLog, isLog, activateLog } from '../utils/common';
 import { capitalize, getObjectSlice, pickRandomArrEl } from '../utils/utils';
 
 /**
@@ -42,7 +42,7 @@ class GhosteryDebug {
 	// [[Settings Actions]]
 
 	constructor() {
-		this.settings._isLog = chrome.runtime.getManifest().debug || false;
+		this.settings._isLog = isLog();
 		this.settings._objectOutputStyle = OBJECT_OUTPUT_STYLE; // other option is 'json'
 
 		this.accountEvents = [];
@@ -507,6 +507,7 @@ class GhosteryDebug {
 			});
 		}
 
+		// TODO pipe through typeset and printToConsole
 		alwaysLog('Results will be in the `activeTabInfo` property when the Promise resolves');
 
 		return new Promise((resolve) => {
@@ -647,6 +648,7 @@ class GhosteryDebug {
 
 		toggleLogging: (newValue) => {
 			this.settings._toggleSettingHelper('on', 'off', '_isLog', newValue);
+			activateLog(this.settings._isLog);
 			return (this.settings.show('logging'));
 		},
 
@@ -667,6 +669,3 @@ class GhosteryDebug {
 
 const ghosteryDebug = new GhosteryDebug();
 export default ghosteryDebug;
-
-// extracted to minimize import surface into utils/common.js
-export const isLog = () => ghosteryDebug.settings._isLog;

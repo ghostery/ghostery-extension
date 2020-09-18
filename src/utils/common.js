@@ -16,8 +16,31 @@
 
 // DO NOT IMPORT MODULES TO THIS FILE
 
-// extracted from instance to minimize import surface as per above
-import { isLog } from '../classes/GhosteryDebug';
+// Private variable that controls whether calls to log() produce the requested console output or do nothing
+let _shouldLog = chrome.runtime.getManifest().debug || false;
+
+/**
+ * Report whether logging is active
+ * @memberOf BackgroundUtils
+ *
+ * @return {Boolean}					True if logging is active and false otherwise
+ */
+export function isLog() {
+	return _shouldLog;
+}
+
+/**
+ * Activate / deactivate logging
+ * Allows modules like the console debugger to override the manifest debug setting
+ * @memberOf BackgroundUtils
+ *
+ * @param  {Boolean} shouldActivate		Whether logging should be activated or deactivated. Optional; defaults to true
+ *
+ * @return {undefined}					No explicit return value
+ */
+export function activateLog(shouldActivate = true) {
+	_shouldLog = shouldActivate;
+}
 
 /**
  * Log to console regardless of log settings
@@ -53,7 +76,7 @@ export function alwaysLog(...args) {
  * @return {boolean}  		false if disabled, otherwise true
  */
 export function log(...args) {
-	if (!isLog()) {
+	if (!_shouldLog) {
 		return false;
 	}
 
