@@ -29,6 +29,10 @@ import { capitalize, getObjectSlice, pickRandomArrEl } from '../utils/utils';
 const OBJECT_OUTPUT_STYLE = true;
 const STRING_OUTPUT_STYLE = false;
 
+const THANKS = 'Thanks for using Ghostery';
+const UP_REMINDER = 'Remember you can press up to avoid having to retype your previous command';
+const CSS_SUBHEADER = '__SUBHEADER__';
+
 class GhosteryDebug {
 	// ToC
 	// Search for these strings to quickly jump to their sections
@@ -93,7 +97,7 @@ class GhosteryDebug {
 			// eslint-disable-next-line no-console
 			if (typeof line === 'object')				console.dir(line);
 			else if (line.startsWith('__MAINHEADER__')) GhosteryDebug.printFormatted(line, 'mainheader');
-			else if (line.startsWith('__SUBHEADER__'))	GhosteryDebug.printFormatted(line, 'subheader');
+			else if (line.startsWith(CSS_SUBHEADER))	GhosteryDebug.printFormatted(line, 'subheader');
 			else if (line.startsWith('__HIGHLIGHT__'))	GhosteryDebug.printFormatted(line, 'highlight');
 			// eslint-disable-next-line no-console
 			else										console.log(line);
@@ -130,7 +134,7 @@ class GhosteryDebug {
 				const rightSide = rawText[1];
 				const cssStyleMarkerLength =
 					(leftSide.startsWith('__MAINHEADER__') && '__MAINHEADER__'.length)
-					|| (leftSide.startsWith('__SUBHEADER__') && '__SUBHEADER__'.length)
+					|| (leftSide.startsWith(CSS_SUBHEADER) && CSS_SUBHEADER.length)
 					|| (leftSide.startsWith('__HIGHLIGHT__') && '__HIGHLIGHT__'.length)
 					|| 0;
 				formattedLines.push(
@@ -163,7 +167,7 @@ class GhosteryDebug {
 	static helpHeader = [
 		'__MAINHEADER__Ghostery Extension Debugger (GED) Help',
 		'',
-		'__SUBHEADER__Usage:',
+		`${CSS_SUBHEADER}Usage:`,
 		['ghostery.help()', 'Show this message'],
 		["ghostery.help('functionName')", 'Show function usage details like supported argument types/values'],
 		['', "Example: ghostery.help('getABTests')"],
@@ -281,7 +285,7 @@ class GhosteryDebug {
 	];
 
 	static helpPromoMessages = [
-		'Thanks for using Ghostery',
+		THANKS,
 		'Try our desktop tracker blocker Midnight for free',
 		'Try our tracker analytics tool Insights for free',
 	];
@@ -364,7 +368,7 @@ class GhosteryDebug {
 				])
 			);
 
-			return ('Thanks for using Ghostery!');
+			return (THANKS);
 		}
 
 		if (result === 'failure') {
@@ -376,7 +380,7 @@ class GhosteryDebug {
 			];
 			GhosteryDebug.printToConsole(GhosteryDebug.typeset(noDice));
 
-			return ('Thanks for using Ghostery!');
+			return (THANKS);
 		}
 
 		GhosteryDebug.printToConsole(GhosteryDebug.typeset([
@@ -394,7 +398,7 @@ class GhosteryDebug {
 		this._push(tests, output);
 		GhosteryDebug.printToConsole(GhosteryDebug.typeset(output));
 
-		return ('Thanks for using Ghostery!');
+		return (THANKS);
 	}
 
 	fetchABTestsWithIr = (ir) => {
@@ -403,7 +407,7 @@ class GhosteryDebug {
 				'__SUBHEADER__Oops: required argument missing',
 				'You must provide an integer number argument between 1 and 100 inclusive',
 			]));
-			return 'Remember you can press up to avoid having to retype your previous command';
+			return UP_REMINDER;
 		}
 
 		if (typeof ir !== 'number') {
@@ -411,7 +415,7 @@ class GhosteryDebug {
 				'__SUBHEADER__Oops: invalid argument type',
 				'The argument must be an integer between 1 and 100 inclusive',
 			]));
-			return 'Remember you can press up to avoid having to retype your previous command';
+			return UP_REMINDER;
 		}
 
 		if ((ir < 1) || (ir > 100)) {
@@ -419,7 +423,7 @@ class GhosteryDebug {
 				'__SUBHEADER__Oops: invalid argument value',
 				'The argument must be an integer >between 1 and 100 inclusive<',
 			]));
-			return 'Remember you can press up to avoid having to retype your previous command';
+			return UP_REMINDER;
 		}
 
 		if (Math.floor(ir) !== ir) {
@@ -427,10 +431,14 @@ class GhosteryDebug {
 				'__SUBHEADER__Oops: invalid argument value',
 				'The argument must be an >integer< between 1 and 100 inclusive',
 			]));
-			return 'Remember you can press up to avoid having to retype your previous command';
+			return UP_REMINDER;
 		}
 
-		abtest.silentFetch(ir)
+		GhosteryDebug.printToConsole(GhosteryDebug.typeset([
+			'We are about to make an async call to the A/B server. Results should appear below shortly:'
+		]));
+
+		return (abtest.silentFetch(ir)
 			.then((result) => {
 				const output = [];
 				if (result === 'resolved') {
@@ -444,6 +452,8 @@ class GhosteryDebug {
 					this._push(abtest.getTests(), output);
 				}
 				GhosteryDebug.printToConsole(GhosteryDebug.typeset(output));
+
+				return THANKS;
 			})
 			.catch(() => {
 				const output = [];
@@ -452,11 +462,9 @@ class GhosteryDebug {
 				output.push('The tests in memory were not updated, but here they are anyway just in case:');
 				this._push(abtest.getTests(), output);
 				GhosteryDebug.printToConsole(GhosteryDebug.typeset(output));
-			});
 
-		// This will log out before the stuff in the then and catch handlers of silentFetch above,
-		// since the method does not wait for the async call to resolve before returning
-		return ('We are making an async call to the A/B server. Results should appear below shortly:');
+				return THANKS;
+			}));
 	}
 
 	getConfData = slice => this._getObjectSlice(confData, slice, 'config');
@@ -597,7 +605,7 @@ class GhosteryDebug {
 
 		GhosteryDebug.printToConsole(GhosteryDebug.typeset(output));
 
-		return ('Thanks for using Ghostery');
+		return (THANKS);
 	}
 
 	_push(obj, arr) {
@@ -634,7 +642,7 @@ class GhosteryDebug {
 
 			GhosteryDebug.printToConsole(GhosteryDebug.typeset(currentSettings));
 
-			return ('Thanks for using Ghostery');
+			return (THANKS);
 		},
 
 		toggleLogging: (newValue) => {
