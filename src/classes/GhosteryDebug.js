@@ -34,6 +34,7 @@ const UP_REMINDER = 'Remember you can press up to avoid having to retype your pr
 const CSS_SUBHEADER = 'css_subheader__';
 const CSS_MAINHEADER = 'css_mainheader__';
 const CSS_HIGHLIGHT = 'css_highlight__';
+const OUTPUT_COLUMN_WIDTH = 40;
 
 class GhosteryDebug {
 	// ToC
@@ -44,10 +45,16 @@ class GhosteryDebug {
 	// [[Settings Actions]]
 
 	constructor() {
-		// Settings methods are defined and declared in a public instance field
-		// in the [[Settings Actions]] section
+		// Public settings methods are defined in a public instance field in the [[Settings Actions]] section
+		// These are the private settings methods and properties
 		this.settings._isLog = isLog();
 		this.settings._objectOutputStyle = OBJECT_OUTPUT_STYLE;
+		this.settings._toggleSettingHelper = (optOn, optOff, setting, requested) => {
+			if 		(typeof requested !== 'string')			this.settings[setting] = !this.settings[setting];
+			else if (requested?.toLowerCase() === optOn) 	this.settings[setting] = true;
+			else if (requested?.toLowerCase() === optOff) 	this.settings[setting] = false;
+			else 											this.settings[setting] = !this.settings[setting];
+		};
 
 		this.accountEvents = [];
 
@@ -142,7 +149,7 @@ class GhosteryDebug {
 					|| (leftSide.startsWith(CSS_HIGHLIGHT) && CSS_HIGHLIGHT.length)
 					|| 0;
 				formattedLines.push(
-					leftSide.padEnd(40 + cssStyleMarkerLength, ' ').concat(rightSide)
+					leftSide.padEnd(OUTPUT_COLUMN_WIDTH + cssStyleMarkerLength, ' ').concat(rightSide)
 				);
 			}
 		});
@@ -177,6 +184,8 @@ class GhosteryDebug {
 		['', "Example: ghostery.help('getABTests')"],
 	];
 
+	// In static fields, 'this' refers to the class instance, so this works,
+	// as long as the referenced class property has already been defined
 	static helpAvailableFunctions = [
 		[`${this.helpFunctionNames.fetchABTestsWithIr}`, 'Hit the A/B server endpoint with the supplied install random number'],
 		[`${this.helpFunctionNames.getABTests}`, 'Display what A/B tests have been fetched from the A/B test server'],
@@ -627,6 +636,7 @@ class GhosteryDebug {
 		// Private properties added in the constructor:
 		// _isLog						stores log toggle setting
 		// _objectOutputStyle	 		stores object output style setting
+		// _toggleSettingsHelper		helper method that provides a general implementation of setting toggling
 
 		show: (updated) => {
 			const updatedOrCurrent = (updated === 'logging' || updated === 'outputStyle') ? 'Updated' : 'Current';
@@ -659,13 +669,6 @@ class GhosteryDebug {
 		toggleOutputStyle: (newValue) => {
 			this.settings._toggleSettingHelper('object', 'string', '_objectOutputStyle', newValue);
 			return (this.settings.show('outputStyle'));
-		},
-
-		_toggleSettingHelper: (optOn, optOff, setting, requested) => {
-			if 		(typeof requested !== 'string')			this.settings[setting] = !this.settings[setting];
-			else if (requested?.toLowerCase() === optOn) 	this.settings[setting] = true;
-			else if (requested?.toLowerCase() === optOff) 	this.settings[setting] = false;
-			else 											this.settings[setting] = !this.settings[setting];
 		},
 	}
 	// END [[Settings Actions]] SECTION
