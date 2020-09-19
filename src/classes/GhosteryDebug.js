@@ -80,13 +80,19 @@ class GhosteryDebug {
 		[CSS_SUBHEADER]: 'font-weight: bold; padding: 2px 0px;',
 	};
 
-	/** private printToConsole helper that applies specified formatting
-	 *  to a line of text, removes the CSS marker from it, and prints it
+	/**
+	 * @private
+	 * @since 8.5.3
 	 *
-	 * @param {String}	text		the string to output
-	 * @param {String}	style		the style to apply
+	 *  `GhosteryDebug._printToConsole` helper. Applies the provided styles
+	 *  and prints the text argument.
+	 *
+	 * @param {String}	text		The string to output.
+	 * @param {String}	style		The style to apply.
+	 *
+	 * @return {undefined}			No explicit return.
 	 */
-	static printFormatted(text, style) {
+	static _printFormatted(text, style) {
 		// eslint-disable-next-line no-console
 		console.log(
 			`%c${text.replace(style, '')}`,
@@ -95,38 +101,46 @@ class GhosteryDebug {
 	}
 
 	/**
-	 * Output an array of strings to the console
-	 * Scans strings for CSS markers, applies the specified styles when they are found,
-	 * and removes the markers from the final output
+	 * @private
+	 * @since 8.5.3
 	 *
-	 * @param {Array}		lines	An array of strings to be logged, each possibly starting with a CSS marker
-	 * @return {undefined}			No explicit return value
+	 * Output an array of strings and/or objects to the browser developer console.
+	 * Scans strings for CSS markers, applies the specified styles when they are found,
+	 * and removes the markers from the final output.
+	 *
+	 * @param {Array} lines			An array of strings and/or objects to be logged. Strings may start with a CSS marker.
+	 *
+	 * @return {undefined}			No explicit return.
 	 */
-	static printToConsole(lines) {
+	static _printToConsole(lines) {
 		// Individual log statements for each line allow for
 		// more legible and appealing output spacing and formatting
 		lines.forEach((line) => {
 			// eslint-disable-next-line no-console
 			if (typeof line === 'object')				console.dir(line);
-			else if (line.startsWith(CSS_MAINHEADER)) 	GhosteryDebug.printFormatted(line, CSS_MAINHEADER);
-			else if (line.startsWith(CSS_SUBHEADER))	GhosteryDebug.printFormatted(line, CSS_SUBHEADER);
-			else if (line.startsWith(CSS_HIGHLIGHT))	GhosteryDebug.printFormatted(line, CSS_HIGHLIGHT);
+			else if (line.startsWith(CSS_MAINHEADER)) 	GhosteryDebug._printFormatted(line, CSS_MAINHEADER);
+			else if (line.startsWith(CSS_SUBHEADER))	GhosteryDebug._printFormatted(line, CSS_SUBHEADER);
+			else if (line.startsWith(CSS_HIGHLIGHT))	GhosteryDebug._printFormatted(line, CSS_HIGHLIGHT);
 			// eslint-disable-next-line no-console
 			else										console.log(line);
 		});
 	}
 
 	/**
-	 * Takes an array whose elements are either strings or two element string arrays
-	 * and processes it into an array of strings ready for printing to the console
-	 * String input array elements are passed through unaltered
-	 * String array input array elements have their elements concatenated with padding to create neat columns
-	 * Newlines are added at the beginning and the end
+	 * @private
+	 * @since 8.5.3
 	 *
-	 * @param {Array}	rawTexts	An array of strings and/or two element string arrays
-	 * @return {Array}				An array of strings tidied and padded for printing
+	 * Takes an array whose elements are a combination of strings, two element string arrays, and objects
+	 * and processes it into an array ready for printing to the console by `GhosteryDebug#_printToConsole`.
+	 * String and object input array elements are passed through unaltered.
+	 * String array input array elements have their elements concatenated with padding to create columns.
+	 * Newlines are added at the beginning and the end.
+	 *
+	 * @param {Array} rawTexts		An array of string, two element string arrays, and/or objects.
+	 *
+	 * @return {Array}				An array of strings and/or objects tidied and padded for printing.
 	 */
-	static typeset(rawTexts) {
+	static _typeset(rawTexts) {
 		const formattedLines = [];
 
 		formattedLines.push('\n');
@@ -165,7 +179,14 @@ class GhosteryDebug {
 	// The order of definition matters in this section:
 	// it appears that static class fields must be defined
 	// before they can be referenced by other static class fields
-	static helpFunctionNames = {
+
+	/**
+	 * @access private
+	 * @since 8.5.3
+	 *
+	 * Function name strings used in help output.
+	 */
+	static _helpFunctionNames = {
 		fetchABTestsWithIr: 'ghostery.fetchABTestsWithIr()',
 		getABTests: 'ghostery.getABTests()',
 		getConfData: 'ghostery.getConfData()',
@@ -176,7 +197,13 @@ class GhosteryDebug {
 		settingsToggleLogging: 'ghostery.settings.toggleLogging()',
 	};
 
-	static helpHeader = [
+	/**
+	 * @access private
+	 * @since 8.5.3
+	 *
+	 * Header string for the help main menu.
+	 */
+	static _helpHeader = [
 		`${CSS_MAINHEADER}Ghostery Extension Debugger (GED) Help`,
 		'',
 		`${CSS_SUBHEADER}Usage:`,
@@ -187,26 +214,38 @@ class GhosteryDebug {
 
 	// In static fields, 'this' refers to the class instance, so this works,
 	// as long as the referenced class property has already been defined
-	static helpAvailableFunctions = [
-		[`${this.helpFunctionNames.fetchABTestsWithIr}`, 'Hit the A/B server endpoint with the supplied install random number'],
-		[`${this.helpFunctionNames.getABTests}`, 'Display what A/B tests have been fetched from the A/B test server'],
-		[`${this.helpFunctionNames.getConfData}`, 'Show the current value of a config property or properties'],
-		[`${this.helpFunctionNames.getGlobals}`, 'Show the current value of a global property or properties'],
-		[`${this.helpFunctionNames.showPromoModal}`, 'Show specified promo modal at the next opportunity'],
-		[`${this.helpFunctionNames.settingsToggleOutputStyle}`, 'Change debugger method return value formatting'],
-		[`${this.helpFunctionNames.settingsShow}`, 'Show the current debugger settings'],
-		[`${this.helpFunctionNames.settingsToggleLogging}`, 'Toggle all other debug logging on/off'],
+	/**
+	 * @access private
+	 * @since 8.5.3
+	 *
+	 * Brief descriptions of the debugger API methods displayed in the main help menu.
+	 */
+	static _helpAvailableFunctions = [
+		[`${this._helpFunctionNames.fetchABTestsWithIr}`, 'Hit the A/B server endpoint with the supplied install random number'],
+		[`${this._helpFunctionNames.getABTests}`, 'Display what A/B tests have been fetched from the A/B test server'],
+		[`${this._helpFunctionNames.getConfData}`, 'Show the current value of a config property or properties'],
+		[`${this._helpFunctionNames.getGlobals}`, 'Show the current value of a global property or properties'],
+		[`${this._helpFunctionNames.showPromoModal}`, 'Show specified promo modal at the next opportunity'],
+		[`${this._helpFunctionNames.settingsToggleOutputStyle}`, 'Change debugger method return value formatting'],
+		[`${this._helpFunctionNames.settingsShow}`, 'Show the current debugger settings'],
+		[`${this._helpFunctionNames.settingsToggleLogging}`, 'Toggle all other debug logging on/off'],
 	];
 
-	static helpOverview = [
-		...this.helpHeader,
+	/**
+	 * @access private
+	 * @since 8.5.3
+	 *
+	 * The entire help main menu text
+	 */
+	static _helpMainMenu = [
+		...this._helpHeader,
 		'',
 		`${CSS_SUBHEADER}Available functions:`,
-		...this.helpAvailableFunctions,
+		...this._helpAvailableFunctions,
 	];
 
 	static helpFetchABTestsWithIr = [
-		`${CSS_MAINHEADER}${this.helpFunctionNames.fetchABTestsWithIr}`,
+		`${CSS_MAINHEADER}${this._helpFunctionNames.fetchABTestsWithIr}`,
 		'A random number between 1 and 100 is generated and saved to local storage',
 		'when the extension is first installed. This number is included in requests',
 		'to the A/B test server as the value of the ir query parameter, and it determines',
@@ -220,7 +259,7 @@ class GhosteryDebug {
 	];
 
 	static helpGetABTests = [
-		`${CSS_MAINHEADER}${this.helpFunctionNames.getABTests}`,
+		`${CSS_MAINHEADER}${this._helpFunctionNames.getABTests}`,
 		'Display what A/B tests have been fetched from the A/B test server',
 		'Fetches happen on browser startup and then at regularly scheduled intervals',
 		'',
@@ -229,7 +268,7 @@ class GhosteryDebug {
 	];
 
 	static helpGetConfData = [
-		`${CSS_MAINHEADER}${this.helpFunctionNames.getConfData}`,
+		`${CSS_MAINHEADER}${this._helpFunctionNames.getConfData}`,
 		'Display the current value(s) of a config property or properties',
 		'',
 		[`${CSS_SUBHEADER}When called with...`, 'Returns...'],
@@ -242,7 +281,7 @@ class GhosteryDebug {
 	];
 
 	static helpGetGlobals = [
-		`${CSS_MAINHEADER}${this.helpFunctionNames.getGlobals}`,
+		`${CSS_MAINHEADER}${this._helpFunctionNames.getGlobals}`,
 		'Display the current value(s) of a global property or properties',
 		'',
 		[`${CSS_SUBHEADER}When called with...`, 'Returns...'],
@@ -255,7 +294,7 @@ class GhosteryDebug {
 	];
 
 	static helpShowPromoModal = [
-		`${CSS_MAINHEADER}${this.helpFunctionNames.showPromoModal}`,
+		`${CSS_MAINHEADER}${this._helpFunctionNames.showPromoModal}`,
 		'Force the specified promo modal to display at the next opportunity.',
 		'That may be, for example, the next time you open the extension panel.',
 		'Resets after one display. If you need to see the modal again, call this function again',
@@ -264,7 +303,7 @@ class GhosteryDebug {
 	];
 
 	static helpSettingsShow = [
-		`${CSS_MAINHEADER}${this.helpFunctionNames.settingsShow}`,
+		`${CSS_MAINHEADER}${this._helpFunctionNames.settingsShow}`,
 		'Show the current debugger settings.',
 		'Settings persist until you end the browser session',
 		'',
@@ -274,7 +313,7 @@ class GhosteryDebug {
 	];
 
 	static helpSettingsToggleLogging = [
-		`${CSS_MAINHEADER}${this.helpFunctionNames.settingsToggleLogging}`,
+		`${CSS_MAINHEADER}${this._helpFunctionNames.settingsToggleLogging}`,
 		'Toggle regular debug output on/off.',
 		'This overrides the debug property in the manifest',
 		'and allows you to turn on logging in production builds',
@@ -287,7 +326,7 @@ class GhosteryDebug {
 	]
 
 	static helpSettingsToggleOutputStyle = [
-		`${CSS_MAINHEADER}${this.helpFunctionNames.settingsToggleOutputStyle}`,
+		`${CSS_MAINHEADER}${this._helpFunctionNames.settingsToggleOutputStyle}`,
 		'Change the output style for debugger method return values.',
 		'Strings are easy to copy and easier to grok at a glance.',
 		'Object style output looks nicer and shows the structure better',
@@ -304,10 +343,14 @@ class GhosteryDebug {
 		'Try our tracker analytics tool Insights for free',
 	];
 
+	/**
+	 * Private `GhosteryDebug` class method.
+	 * Do not call from outside the class.
+	 */
 	static _assembleHelpStringArr(fnName) {
 		const {
-			helpOverview,
-			helpAvailableFunctions,
+			_helpMainMenu,
+			_helpAvailableFunctions,
 			helpFetchABTestsWithIr,
 			helpGetABTests,
 			helpGetConfData,
@@ -321,12 +364,12 @@ class GhosteryDebug {
 		const invalidArgumentError = [
 			`${CSS_MAINHEADER}'${fnName}' is not a GED function. Here are the valid ones:`,
 			'',
-			...helpAvailableFunctions,
+			..._helpAvailableFunctions,
 		];
 
 		const helpStringArr = [];
 		const eeFnName = (fnName && typeof fnName === 'string' && fnName.toLowerCase()) || undefined;
-		if 		(fnName === undefined) 				helpStringArr.push(...helpOverview);
+		if 		(fnName === undefined) 				helpStringArr.push(..._helpMainMenu);
 		else if (eeFnName === 'getabtests') 		helpStringArr.push(...helpGetABTests);
 		else if (eeFnName === 'getconfdata')		helpStringArr.push(...helpGetConfData);
 		else if (eeFnName === 'getglobals')			helpStringArr.push(...helpGetGlobals);
@@ -353,12 +396,12 @@ class GhosteryDebug {
 		const {
 			_assembleHelpStringArr,
 			helpPromoMessages,
-			printToConsole,
-			typeset
+			_printToConsole,
+			_typeset
 		} = GhosteryDebug;
 
-		printToConsole(
-			typeset(
+		_printToConsole(
+			_typeset(
 				_assembleHelpStringArr(fnName)
 			)
 		);
@@ -372,7 +415,7 @@ class GhosteryDebug {
 	// [[Main Actions]] public API
 	fetchABTestsWithIr = (ir) => {
 		if (ir === undefined) {
-			GhosteryDebug.printToConsole(GhosteryDebug.typeset([
+			GhosteryDebug._printToConsole(GhosteryDebug._typeset([
 				`${CSS_SUBHEADER}Oops: required argument missing`,
 				'You must provide an integer number argument between 1 and 100 inclusive',
 			]));
@@ -380,7 +423,7 @@ class GhosteryDebug {
 		}
 
 		if (typeof ir !== 'number') {
-			GhosteryDebug.printToConsole(GhosteryDebug.typeset([
+			GhosteryDebug._printToConsole(GhosteryDebug._typeset([
 				`${CSS_SUBHEADER}Oops: invalid argument type`,
 				'The argument must be an integer between 1 and 100 inclusive',
 			]));
@@ -388,7 +431,7 @@ class GhosteryDebug {
 		}
 
 		if ((ir < 1) || (ir > 100)) {
-			GhosteryDebug.printToConsole(GhosteryDebug.typeset([
+			GhosteryDebug._printToConsole(GhosteryDebug._typeset([
 				`${CSS_SUBHEADER}Oops: invalid argument value`,
 				'The argument must be an integer >between 1 and 100 inclusive<',
 			]));
@@ -396,14 +439,14 @@ class GhosteryDebug {
 		}
 
 		if (Math.floor(ir) !== ir) {
-			GhosteryDebug.printToConsole(GhosteryDebug.typeset([
+			GhosteryDebug._printToConsole(GhosteryDebug._typeset([
 				`${CSS_SUBHEADER}Oops: invalid argument value`,
 				'The argument must be an >integer< between 1 and 100 inclusive',
 			]));
 			return UP_REMINDER;
 		}
 
-		GhosteryDebug.printToConsole(GhosteryDebug.typeset([
+		GhosteryDebug._printToConsole(GhosteryDebug._typeset([
 			'We are about to make an async call to the A/B server. Results should appear below shortly:'
 		]));
 
@@ -420,7 +463,7 @@ class GhosteryDebug {
 					output.push('The tests in memory were not updated, but here they are anyway just in case:');
 					this._push(abtest.getTests(), output);
 				}
-				GhosteryDebug.printToConsole(GhosteryDebug.typeset(output));
+				GhosteryDebug._printToConsole(GhosteryDebug._typeset(output));
 
 				return THANKS;
 			})
@@ -430,14 +473,14 @@ class GhosteryDebug {
 				output.push('If this keeps happening, we would greatly appreciate hearing about it at support@ghostery.com');
 				output.push('The tests in memory were not updated, but here they are anyway just in case:');
 				this._push(abtest.getTests(), output);
-				GhosteryDebug.printToConsole(GhosteryDebug.typeset(output));
+				GhosteryDebug._printToConsole(GhosteryDebug._typeset(output));
 
 				return THANKS;
 			}));
 	}
 
 	fetchCMPCampaigns = () => {
-		GhosteryDebug.printToConsole(GhosteryDebug.typeset([
+		GhosteryDebug._printToConsole(GhosteryDebug._typeset([
 			'We are about to make an async call to the CMP server. Results should appear below shortly:'
 		]));
 
@@ -457,7 +500,7 @@ class GhosteryDebug {
 
 		output.push(`${CSS_SUBHEADER}These are all the A/B tests currently in memory:`);
 		this._push(tests, output);
-		GhosteryDebug.printToConsole(GhosteryDebug.typeset(output));
+		GhosteryDebug._printToConsole(GhosteryDebug._typeset(output));
 
 		return (THANKS);
 	}
@@ -492,7 +535,7 @@ class GhosteryDebug {
 			});
 		}
 
-		// TODO pipe through typeset and printToConsole
+		// TODO pipe through _typeset and _printToConsole
 		alwaysLog('Results will be in the `activeTabInfo` property when the Promise resolves');
 
 		return new Promise((resolve) => {
@@ -571,8 +614,8 @@ class GhosteryDebug {
 
 		if (result === 'success') {
 			const { val: cappedModalType } = capitalize(modalType.toLowerCase());
-			GhosteryDebug.printToConsole(
-				GhosteryDebug.typeset([
+			GhosteryDebug._printToConsole(
+				GhosteryDebug._typeset([
 					`${CSS_SUBHEADER}Success!`,
 					`The ${cappedModalType} modal will trigger at the next opportunity`,
 				])
@@ -588,12 +631,12 @@ class GhosteryDebug {
 				'',
 				...GhosteryDebug._assembleHelpStringArr('showPromoModal')
 			];
-			GhosteryDebug.printToConsole(GhosteryDebug.typeset(noDice));
+			GhosteryDebug._printToConsole(GhosteryDebug._typeset(noDice));
 
 			return (THANKS);
 		}
 
-		GhosteryDebug.printToConsole(GhosteryDebug.typeset([
+		GhosteryDebug._printToConsole(GhosteryDebug._typeset([
 			'The function neither succeeded nor failed. If you have a minute to spare, we would greatly appreciate hearing about this likely bug at support@ghostery.com.',
 		]));
 
@@ -633,7 +676,7 @@ class GhosteryDebug {
 
 		this._push(objSlice.val, output);
 
-		GhosteryDebug.printToConsole(GhosteryDebug.typeset(output));
+		GhosteryDebug._printToConsole(GhosteryDebug._typeset(output));
 
 		return (THANKS);
 	}
@@ -671,7 +714,7 @@ class GhosteryDebug {
 				],
 			];
 
-			GhosteryDebug.printToConsole(GhosteryDebug.typeset(currentSettings));
+			GhosteryDebug._printToConsole(GhosteryDebug._typeset(currentSettings));
 
 			return (THANKS);
 		},
