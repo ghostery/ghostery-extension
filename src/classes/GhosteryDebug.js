@@ -63,7 +63,7 @@ class GhosteryDebug {
 			const { domain, name } = cookie;
 			if (domain.includes(globals.GHOSTERY_ROOT_DOMAIN)) {
 				const type = `Cookie ${name} ${removed ? 'Removed' : 'Added'}`;
-				this.addAccountEvent(type, cause, cookie);
+				this._addAccountEvent(type, cause, cookie);
 			}
 		};
 
@@ -369,51 +369,6 @@ class GhosteryDebug {
 
 	// START [[Main Actions]] SECTION
 	// [[Main Actions]] public API
-	showPromoModal = (modalType) => {
-		const result = PromoModals.showOnce(modalType);
-
-		if (result === 'success') {
-			const { val: cappedModalType } = capitalize(modalType.toLowerCase());
-			GhosteryDebug.printToConsole(
-				GhosteryDebug.typeset([
-					`${CSS_SUBHEADER}Success!`,
-					`The ${cappedModalType} modal will trigger at the next opportunity`,
-				])
-			);
-
-			return (THANKS);
-		}
-
-		if (result === 'failure') {
-			const noDice = [
-				`${CSS_SUBHEADER}No dice`,
-				'That was not a valid argument. Here are the valid ones:',
-				'',
-				...GhosteryDebug._assembleHelpStringArr('showPromoModal')
-			];
-			GhosteryDebug.printToConsole(GhosteryDebug.typeset(noDice));
-
-			return (THANKS);
-		}
-
-		GhosteryDebug.printToConsole(GhosteryDebug.typeset([
-			'The function neither succeeded nor failed. If you have a minute to spare, we would greatly appreciate hearing about this likely bug at support@ghostery.com.',
-		]));
-
-		return ('Welcome to the Twilight Zone');
-	}
-
-	getABTests = () => {
-		const output = [];
-		const tests = abtest.getTests();
-
-		output.push(`${CSS_SUBHEADER}These are all the A/B tests currently in memory:`);
-		this._push(tests, output);
-		GhosteryDebug.printToConsole(GhosteryDebug.typeset(output));
-
-		return (THANKS);
-	}
-
 	fetchABTestsWithIr = (ir) => {
 		if (ir === undefined) {
 			GhosteryDebug.printToConsole(GhosteryDebug.typeset([
@@ -480,19 +435,20 @@ class GhosteryDebug {
 			}));
 	}
 
+	getABTests = () => {
+		const output = [];
+		const tests = abtest.getTests();
+
+		output.push(`${CSS_SUBHEADER}These are all the A/B tests currently in memory:`);
+		this._push(tests, output);
+		GhosteryDebug.printToConsole(GhosteryDebug.typeset(output));
+
+		return (THANKS);
+	}
+
 	getConfData = slice => this._getObjectSlice(confData, slice, 'config');
 
 	getGlobals = slice => this._getObjectSlice(globals, slice, 'globals');
-
-	addAccountEvent(type, event, details) {
-		const timestamp = new Date();
-		const pushObj = { type, event, timestamp };
-		if (details) {
-			pushObj.details = details;
-		}
-
-		this.accountEvents.push(pushObj);
-	}
 
 	/**
 	 * TODO: Review / revise this
@@ -594,7 +550,51 @@ class GhosteryDebug {
 		});
 	}
 
+	showPromoModal = (modalType) => {
+		const result = PromoModals.showOnce(modalType);
+
+		if (result === 'success') {
+			const { val: cappedModalType } = capitalize(modalType.toLowerCase());
+			GhosteryDebug.printToConsole(
+				GhosteryDebug.typeset([
+					`${CSS_SUBHEADER}Success!`,
+					`The ${cappedModalType} modal will trigger at the next opportunity`,
+				])
+			);
+
+			return (THANKS);
+		}
+
+		if (result === 'failure') {
+			const noDice = [
+				`${CSS_SUBHEADER}No dice`,
+				'That was not a valid argument. Here are the valid ones:',
+				'',
+				...GhosteryDebug._assembleHelpStringArr('showPromoModal')
+			];
+			GhosteryDebug.printToConsole(GhosteryDebug.typeset(noDice));
+
+			return (THANKS);
+		}
+
+		GhosteryDebug.printToConsole(GhosteryDebug.typeset([
+			'The function neither succeeded nor failed. If you have a minute to spare, we would greatly appreciate hearing about this likely bug at support@ghostery.com.',
+		]));
+
+		return ('Welcome to the Twilight Zone');
+	}
+
 	// [[Main Actions]] private helpers
+	_addAccountEvent(type, event, details) {
+		const timestamp = new Date();
+		const pushObj = { type, event, timestamp };
+		if (details) {
+			pushObj.details = details;
+		}
+
+		this.accountEvents.push(pushObj);
+	}
+
 	_getObjectSlice(obj, slice, objStr) {
 		const objSlice = getObjectSlice(obj, slice);
 		const output = [];
