@@ -542,12 +542,12 @@ export function fetchLocalJSONResource(url) {
 }
 
 /**
- * Like Array.prototype.slice(), but for objects
- * Get a property on an object (if props is a property key string)
- * OR Get a subset of properties (if props is a regex)
- * OR Get the whole supplied object back (if props is missing, invalid, or produces no matches)
+ * Like Array.prototype.slice(), but for objects.
+ * Get a property on an object (if props is a property key string),
+ * OR Get a subset of properties (if props is a regex),
+ * OR Get the whole supplied object back (if props is missing, invalid, or produces no matches).
  * If the property is not defined on the object,
- * returns the whole object as the val prop of the return object
+ * returns the whole object as the val prop of the return object.
  *
  * @memberOf BackgroundUtils
  *
@@ -628,10 +628,10 @@ export function getObjectSlice(obj, props) {
 }
 
 /**
- * Pick a random element from the argument array
+ * Pick a random element from the array argument.
  * If no argument is provided, if the argument is not an array, or if the argument array is empty,
- * the err property on the return object is set to true, errMsg has details, and val is left undefined
- * Otherwise, err is false, errMsg is the empty string, and val contains the randomly picked element
+ * the err property on the return object is set to true, errMsg has details, and val is left undefined.
+ * Otherwise, err is false, errMsg is undefined, and val contains the randomly picked element.
  *
  * @memberOf BackgroundUtils
  *
@@ -673,14 +673,14 @@ export function pickRandomArrEl(arr) {
 }
 
 /**
- * Capitalize a string (uppercase the first letter of each word)
+ * Uppercase the first character of each word in the phrase argument.
  * Assumes that words are space-separated by default,
- * but accepts an optional custom string separator argument
+ * but accepts an optional custom string separator argument.
  *
  * @memberOf BackgroundUtils
  *
- * @param 	{String} phrase					The string to capitalize
- * @param	{String|undefined} separator	Separator string. Optional; defaults to a space
+ * @param 	{String} phrase					The string to capitalize.
+ * @param	{String|undefined} separator	Separator string. Optional; defaults to a space.
  * @return	{Object}						{ val: String|undefined, err: Boolean, errMsg: undefined|String }
  */
 export function capitalize(phrase, separator = ' ') {

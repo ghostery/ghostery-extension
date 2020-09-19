@@ -444,6 +444,8 @@ class GhosteryDebug {
 		return (cmp.debugFetch()
 			.then((result) => {
 				console.log(result);
+				const session = getObjectSlice(globals, 'SESSION').val;
+				console.log(session);
 			})
 			.catch(() => console.log('There was an error'))
 		);
