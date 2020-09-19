@@ -13,6 +13,7 @@
 
 import abtest from './ABTest';
 import account from './Account';
+import cmp from './CMP';
 import confData from './ConfData';
 import globals from './Globals';
 import tabInfo from './TabInfo';
@@ -433,6 +434,19 @@ class GhosteryDebug {
 
 				return THANKS;
 			}));
+	}
+
+	fetchCMPCampaigns = () => {
+		GhosteryDebug.printToConsole(GhosteryDebug.typeset([
+			'We are about to make an async call to the CMP server. Results should appear below shortly:'
+		]));
+
+		return (cmp.debugFetch()
+			.then((result) => {
+				console.log(result);
+			})
+			.catch(() => console.log('There was an error'))
+		);
 	}
 
 	getABTests = () => {
