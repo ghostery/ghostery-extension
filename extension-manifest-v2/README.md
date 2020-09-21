@@ -115,7 +115,7 @@ $ node tools/transifex.js
 ```
 
 ## Cliqz Source Code
-Ghostery implements the following open-source products from [Cliqz](https://cliqz.com/en/)
+Ghostery implements the following open-source products from Cliqz:
 
 [**Human Web**](https://cliqz.com/en/whycliqz/human-web)
 + [How it works](https://cliqz.com/en/magazine/techblog-human-web-reliably-removes-uids)
