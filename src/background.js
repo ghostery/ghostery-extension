@@ -68,6 +68,7 @@ const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
 const IS_ANDROID = (BROWSER_INFO.os === 'android');
 const VERSION_CHECK_URL = `${CDN_BASE_URL}/update/version`;
 const REAL_ESTATE_ID = 'ghostery';
+const ONE_DAY_MSEC = 86400000;
 const onBeforeRequest = events.onBeforeRequest.bind(events);
 const { onHeadersReceived } = Events;
 
@@ -1729,12 +1730,12 @@ function initializeGhosteryModules() {
 	}
 
 	// Check CMP and ABTest every hour.
-	setInterval(scheduledTasks, 3600000);
+	setInterval(scheduledTasks, ONE_DAY_MSEC);
 
 	// Update db right away.
 	autoUpdateBugDb();
 	// Schedule it to run every hour.
-	setInterval(autoUpdateBugDb, 3600000);
+	setInterval(autoUpdateBugDb, ONE_DAY_MSEC);
 
 	// listen for changes to specific conf properties
 	initializeDispatcher();
