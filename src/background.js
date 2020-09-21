@@ -1118,7 +1118,12 @@ function getAntitrackingTestConfig() {
  * @return {Object} 	Hub promotion configuration parameters
  */
 function setupHubPromoABTest() {
-	if (conf.hub_promo_variant !== 'not_yet_set') return;
+	if (
+		!abtest.hasBeenFetched
+		|| conf.hub_promo_variant !== 'not_yet_set'
+	) {
+		return;
+	}
 
 	if (abtest.hasTest('hub_plain')) {
 		conf.hub_promo_variant = 'plain';
