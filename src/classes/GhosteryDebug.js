@@ -503,6 +503,18 @@ class GhosteryDebug {
 
 	// START [[Main Actions]] SECTION
 	// [[Main Actions]] public API
+	/**
+	 * @since 8.5.3
+	 *
+	 * Hits the A/B server with a user-supplied `ir` value and prints the return value to the console,
+	 * or an error if the call did not work, or no argument was supplied, or an invalid argument was supplied.
+	 * Part of the public CLI.
+	 *
+	 * @async
+	 *
+	 * @param {Number} ir			The ir value to use. Should be an integer between 1 and 100 inclusive.
+	 * @return {Promise|String}		Returns a tip string if the argument was missing or invalid. Otherwise, returns the Promise for the call to the A/B server. This Promise, once it resolves or rejects, returns an ad or thank you message.
+	 */
 	fetchABTestsWithIr = (ir) => {
 		if (ir === undefined) {
 			GhosteryDebug._printToConsole(GhosteryDebug._typeset([
@@ -569,6 +581,16 @@ class GhosteryDebug {
 			}));
 	}
 
+	/**
+	 * @since 8.5.3
+	 *
+	 * Make a request to the CMP server for the most up-to-date campaigns info and print the result to the console,
+	 * or an error if something went wrong with the request. Part of the public API.
+	 *
+	 * @async
+	 *
+	 * @return {Promise|String}			The Promise for the call to the CMP server. Once the Promise resolves or rejects, it returns an ad / thank you message string.
+	 */
 	fetchCMPCampaigns = () => {
 		GhosteryDebug._printToConsole(GhosteryDebug._typeset([
 			'We are about to make an async call to the CMP server. Results should appear below shortly:'
@@ -576,11 +598,38 @@ class GhosteryDebug {
 
 		return (cmp.debugFetch()
 			.then((result) => {
-				console.log(result);
-				const session = getObjectSlice(globals, 'SESSION').val;
-				console.log(session);
+				const output = [];
+
+				if (result.ok) {
+					output.push(`${CSS_HIGHLIGHT}The call to the CMP server succeeded`);
+					if (result.testsUpdated) {
+						output.push('New campaigns were found. The updated campaigns are:');
+					} else {
+						output.push('No new campaigns were found. Here are the (unupdated) campaigns now in memory:');
+					}
+					this._push((getObjectSlice(globals, 'SESSION').val.CMP_DATA), output);
+				} else {
+					output.push(`${CSS_HIGHLIGHT}Something went wrong with the call to the CMP server`);
+					output.push('If this keeps happening, we would greatly appreciate hearing about it at support@ghostery.com');
+					output.push('The campaigns in memory were not updated, but here they are anyway just in case:');
+					this._push((getObjectSlice(globals, 'SESSION').val.CMP_DATA), output);
+				}
+
+				GhosteryDebug._printToConsole(GhosteryDebug._typeset(output));
+
+				return THANKS;
 			})
-			.catch(() => console.log('There was an error'))
+			.catch(() => {
+				const output = [];
+				output.push(`${CSS_HIGHLIGHT}Something went wrong with the call to the CMP server`);
+				output.push('If this keeps happening, we would greatly appreciate hearing about it at support@ghostery.com');
+				output.push('The campaigns in memory were not updated, but here they are anyway just in case:');
+				this._push((getObjectSlice(globals, 'SESSION').val.CMP_DATA), output);
+
+				GhosteryDebug._printToConsole(GhosteryDebug._typeset(output));
+
+				return THANKS;
+			})
 		);
 	}
 
