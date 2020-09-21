@@ -1351,6 +1351,9 @@
 	"hub_home_plus_full_protection": {
 		"message": "You are fully protected!"
 	},
+	"hub_upgrade_page_title": {
+		"message": "Ghostery Hub - Upgrade Plan"
+	},
 	"hub_upgrade_your": {
 		"message": "Upgrade your"
 	},
