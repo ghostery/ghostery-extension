@@ -105,12 +105,12 @@ function setCliqzModuleEnabled(module, enabled) {
 
 /**
  * Pulls down latest version.json and triggers
- * updates of all db files.
+ * updates of all db files. FKA checkLibraryVersion.
  * @memberOf Background
  *
  * @return {Promise} 	database updated data
  */
-function checkLibraryVersion() {
+function updateDBs() {
 	return new Promise(((resolve, reject) => {
 		const failed = { success: false, updated: false };
 		utils.getJson(VERSION_CHECK_URL).then((data) => {
@@ -137,26 +137,25 @@ function checkLibraryVersion() {
 				});
 			});
 		}).catch((err) => {
-			log('Error in checkLibraryVersion', err);
+			log('Error in updateDBs', err);
 			reject(failed);
 		});
 	}));
 }
 
 /**
- * Call checkLibraryVersion if auto updating is enabled and enough time has passed since the last check.
- * Debug log that the function was called and when.
+ * Call updateDBs if auto updating is enabled and enough time has passed since the last check.
+ * Debug log that the function was called and when. Called at browser startup and at regular intervals thereafter.
  *
  * @memberOf Background
  *
  * @param {Boolean} isAutoUpdateEnabled		Whether bug db auto updating is enabled.
- * @param {Number} bugsLastCheckedMsec		The Unix msec timestamp to compare against to see whether to call checkLibraryVersion again.
- *
+ * @param {Number} bugsLastCheckedMsec		The Unix msec timestamp to check against to make sure it is not too soon to call updateDBs again.
  */
-function checkLibraryVersionIfNeeded(isAutoUpdateEnabled, bugsLastCheckedMsec) {
+function autoUpdateDBs(isAutoUpdateEnabled, bugsLastCheckedMsec) {
 	const date = new Date();
 
-	log('autoUpdateBugDb called', date);
+	log('autoUpdateDBs called', date);
 
 	if (!isAutoUpdateEnabled) return;
 
@@ -164,7 +163,7 @@ function checkLibraryVersionIfNeeded(isAutoUpdateEnabled, bugsLastCheckedMsec) {
 		!bugsLastCheckedMsec // the value is 0, signifying that we have never checked yet
 		|| date.getTime() > (Number(bugsLastCheckedMsec) + ONE_HOUR_MSEC) // guard against double fetching
 	) {
-		checkLibraryVersion();
+		updateDBs();
 	}
 }
 
@@ -968,7 +967,7 @@ function onMessageHandler(request, sender, callback) {
 		return true;
 	}
 	if (name === 'update_database') {
-		checkLibraryVersion().then((result) => {
+		updateDBs().then((result) => {
 			callback(result);
 		});
 		return true;
@@ -1743,11 +1742,11 @@ function initializeGhosteryModules() {
 	setInterval(scheduledTasks, ONE_DAY_MSEC);
 
 	// Update db right away.
-	checkLibraryVersionIfNeeded(conf.enable_autoupdate, conf.bugs_last_checked);
+	autoUpdateDBs(conf.enable_autoupdate, conf.bugs_last_checked);
 
 	// Schedule it to run every hour.
 	setInterval(
-		() => checkLibraryVersionIfNeeded(conf.enable_autoupdate, conf.bugs_last_checked),
+		() => autoUpdateDBs(conf.enable_autoupdate, conf.bugs_last_checked),
 		ONE_DAY_MSEC
 	);
 
