@@ -37,6 +37,13 @@ const CSS_MAINHEADER = 'css_mainheader__';
 const CSS_HIGHLIGHT = 'css_highlight__';
 const OUTPUT_COLUMN_WIDTH = 40;
 
+/**
+ * Class that implements an interactive console debugger.
+ *
+ * @since 8.5.3
+ *
+ * @memberOf  BackgroundClasses
+ */
 class GhosteryDebug {
 	// ToC
 	// Search for these strings to quickly jump to their sections
@@ -74,7 +81,13 @@ class GhosteryDebug {
 	}
 
 	// START [[Output styling, formatting, and printing]] SECTION
-	static outputStyles = {
+	/**
+	 * @access private
+	 * @since 8.5.3
+	 *
+	 * Styles used to format debugger output.
+	 */
+	static _outputStyles = {
 		[CSS_HIGHLIGHT]: 'font-weight: bold; padding: 2px 0px;',
 		[CSS_MAINHEADER]: 'font-size: 16px; font-weight: bold; padding: 4px 0px',
 		[CSS_SUBHEADER]: 'font-weight: bold; padding: 2px 0px;',
@@ -96,7 +109,7 @@ class GhosteryDebug {
 		// eslint-disable-next-line no-console
 		console.log(
 			`%c${text.replace(style, '')}`,
-			GhosteryDebug.outputStyles[style]
+			GhosteryDebug._outputStyles[style]
 		);
 	}
 
@@ -109,7 +122,6 @@ class GhosteryDebug {
 	 * and removes the markers from the final output.
 	 *
 	 * @param {Array} lines			An array of strings and/or objects to be logged. Strings may start with a CSS marker.
-	 *
 	 * @return {undefined}			No explicit return.
 	 */
 	static _printToConsole(lines) {
@@ -137,7 +149,6 @@ class GhosteryDebug {
 	 * Newlines are added at the beginning and the end.
 	 *
 	 * @param {Array} rawTexts		An array of string, two element string arrays, and/or objects.
-	 *
 	 * @return {Array}				An array of strings and/or objects tidied and padded for printing.
 	 */
 	static _typeset(rawTexts) {
@@ -244,6 +255,13 @@ class GhosteryDebug {
 		...this._helpAvailableFunctions,
 	];
 
+	/**
+	 * @access private
+	 * @since 8.5.3
+	 *
+	 * The help text for the public `fetchABTestsWithIr()` method.
+	 * Displayed after calling ghostery.help('fetchABTestsWithIr').
+	 */
 	static helpFetchABTestsWithIr = [
 		`${CSS_MAINHEADER}${this._helpFunctionNames.fetchABTestsWithIr}`,
 		'A random number between 1 and 100 is generated and saved to local storage',
@@ -258,6 +276,13 @@ class GhosteryDebug {
 		['A number between 1 and 100', 'The tests returned by the A/B server for that ir value'],
 	];
 
+	/**
+	 * @access private
+	 * @since 8.5.3
+	 *
+	 * The help text for the public `getABTests()` method.
+	 * Displayed after calling ghostery.help('getABTests').
+	 */
 	static helpGetABTests = [
 		`${CSS_MAINHEADER}${this._helpFunctionNames.getABTests}`,
 		'Display what A/B tests have been fetched from the A/B test server',
@@ -267,6 +292,13 @@ class GhosteryDebug {
 		['No argument or any arguments', 'The A/B test strings currently in memory'],
 	];
 
+	/**
+	 * @access private
+	 * @since 8.5.3
+	 *
+	 * The help text for the public `getConfData()` method.
+	 * Displayed after calling ghostery.help('getConfData').
+	 */
 	static helpGetConfData = [
 		`${CSS_MAINHEADER}${this._helpFunctionNames.getConfData}`,
 		'Display the current value(s) of a config property or properties',
@@ -280,6 +312,13 @@ class GhosteryDebug {
 		['Anything else', 'The whole config object. Also returned if there are no matching results'],
 	];
 
+	/**
+	 * @access private
+	 * @since 8.5.3
+	 *
+	 * The help text for the public `getGlobals()` method.
+	 * Displayed after calling ghostery.help('getGlobals').
+	 */
 	static helpGetGlobals = [
 		`${CSS_MAINHEADER}${this._helpFunctionNames.getGlobals}`,
 		'Display the current value(s) of a global property or properties',
@@ -293,6 +332,13 @@ class GhosteryDebug {
 		['Anything else', 'The whole globals object. Also returned if there are no matching results'],
 	];
 
+	/**
+	 * @access private
+	 * @since 8.5.3
+	 *
+	 * The help text for the public `showPromoModal()` method.
+	 * Displayed after calling ghostery.help('showPromoModal').
+	 */
 	static helpShowPromoModal = [
 		`${CSS_MAINHEADER}${this._helpFunctionNames.showPromoModal}`,
 		'Force the specified promo modal to display at the next opportunity.',
@@ -302,6 +348,13 @@ class GhosteryDebug {
 		[`${CSS_SUBHEADER}When called with...`, 'Does...'],
 	];
 
+	/**
+	 * @access private
+	 * @since 8.5.3
+	 *
+	 * The help text for the public `settings.show()` method.
+	 * Displayed after calling ghostery.help('show').
+	 */
 	static helpSettingsShow = [
 		`${CSS_MAINHEADER}${this._helpFunctionNames.settingsShow}`,
 		'Show the current debugger settings.',
@@ -312,6 +365,13 @@ class GhosteryDebug {
 		['Object Output Style', 'Set return value display style to object or string'],
 	];
 
+	/**
+	 * @access private
+	 * @since 8.5.3
+	 *
+	 * The help text for the public `settings.toggleLogging()` method.
+	 * Displayed after calling ghostery.help('toggleLogging').
+	 */
 	static helpSettingsToggleLogging = [
 		`${CSS_MAINHEADER}${this._helpFunctionNames.settingsToggleLogging}`,
 		'Toggle regular debug output on/off.',
@@ -325,6 +385,13 @@ class GhosteryDebug {
 		['Any other argument or no argument', 'Turns logging on if it was off and vice versa'],
 	]
 
+	/**
+	 * @access private
+	 * @since 8.5.3
+	 *
+	 * The help text for the public `settings.toggleOutputStyle()` method.
+	 * Displayed after calling ghostery.help('toggleOutputStyle').
+	 */
 	static helpSettingsToggleOutputStyle = [
 		`${CSS_MAINHEADER}${this._helpFunctionNames.settingsToggleOutputStyle}`,
 		'Change the output style for debugger method return values.',
@@ -337,15 +404,30 @@ class GhosteryDebug {
 		['Any other argument or no argument', 'Changes the output style from the current setting to the other one'],
 	];
 
-	static helpPromoMessages = [
+	/**
+	 * @access private
+	 * @since 8.5.3
+	 *
+	 * Short ads and thank you messages used as the return value for `help` calls
+	 * so they are printed to the console instead of `undefined`.
+	 */
+	static _helpPromoMessages = [
 		THANKS,
-		'Try our desktop tracker blocker Midnight for free',
-		'Try our tracker analytics tool Insights for free',
+		'Try our desktop tracker blocker & VPN Midnight for free',
+		'Try our tracker research & analytics extension Insights for free',
+		'Visit ghostery.com to learn more about our values and products',
 	];
 
 	/**
-	 * Private `GhosteryDebug` class method.
-	 * Do not call from outside the class.
+	 * @private
+	 * @since 8.5.3
+	 *
+	 * Prepares and returns the help strings array for the requested function.
+	 * Exists as a separate function so that public methods can concatenate some custom messages
+	 * with standard help output before forwarding all the string to `_typeset` and `_printToConsole`.
+	 *
+	 * @param {String}	fnName		The name of the function for which help output was requested.
+	 * @return {Array} 				Returns the help strings array for the requested function, or an error strings array if the argument is missing or not supported.
 	 */
 	static _assembleHelpStringArr(fnName) {
 		const {
@@ -391,11 +473,19 @@ class GhosteryDebug {
 		return helpStringArr;
 	}
 
+	/**
+	 * @since 8.5.3
+	 *
+	 * Prints general and function-specific help output. Part of the public CLI.
+	 *
+	 * @param {String}	[fnName]	The name of the function for which help output was requested, if any.
+	 * @return {String} 			An ad / thank you message (printed to the console as the last line of output).
+	 */
 	// eslint-disable-next-line class-methods-use-this
 	help(fnName) {
 		const {
 			_assembleHelpStringArr,
-			helpPromoMessages,
+			_helpPromoMessages,
 			_printToConsole,
 			_typeset
 		} = GhosteryDebug;
@@ -407,7 +497,7 @@ class GhosteryDebug {
 		);
 
 		// Display a little ad or thank you note instead of "undefined"
-		return (pickRandomArrEl(helpPromoMessages).val);
+		return (pickRandomArrEl(_helpPromoMessages).val);
 	}
 	// END [[Help CLI & strings]] SECTION
 
