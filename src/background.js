@@ -145,15 +145,15 @@ function checkLibraryVersion() {
 
 /**
  * Call checkLibraryVersion if auto updating is enabled and enough time has passed since the last check.
- * Do nothing otherwise.
+ * Debug log that the function was called and when.
  *
  * @memberOf Background
  *
- * @param {Boolean} isAutoUpdateEnabled		True if bug db auto updating is enabled in conf. False otherwise.
+ * @param {Boolean} isAutoUpdateEnabled		Whether bug db auto updating is enabled.
  * @param {Number} bugsLastCheckedMsec		The Unix msec timestamp to compare against to see whether to call checkLibraryVersion again.
  *
  */
-function autoUpdateBugDb(isAutoUpdateEnabled, bugsLastCheckedMsec) {
+function checkLibraryVersionIfNeeded(isAutoUpdateEnabled, bugsLastCheckedMsec) {
 	const date = new Date();
 
 	log('autoUpdateBugDb called', date);
@@ -1743,11 +1743,11 @@ function initializeGhosteryModules() {
 	setInterval(scheduledTasks, ONE_DAY_MSEC);
 
 	// Update db right away.
-	autoUpdateBugDb(conf.enable_autoupdate, conf.bugs_last_checked);
+	checkLibraryVersionIfNeeded(conf.enable_autoupdate, conf.bugs_last_checked);
 
 	// Schedule it to run every hour.
 	setInterval(
-		() => autoUpdateBugDb(conf.enable_autoupdate, conf.bugs_last_checked),
+		() => checkLibraryVersionIfNeeded(conf.enable_autoupdate, conf.bugs_last_checked),
 		ONE_DAY_MSEC
 	);
 
