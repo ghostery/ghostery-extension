@@ -178,6 +178,11 @@ class Globals {
 			this.BROWSER_INFO.displayName = 'Yandex';
 			this.BROWSER_INFO.name = 'yandex';
 			this.BROWSER_INFO.token = 'yx';
+		} else if (navigator.userAgent.includes('Ghostery')) {
+			// ua-parser library doesn't parse the desktop browser UA properly
+			this.BROWSER_INFO.displayName = 'Ghostery Desktop Browser';
+			this.BROWSER_INFO.name = 'ghostery_desktop';
+			this.BROWSER_INFO.token = 'gd';
 		}
 
 		// Set OS property
@@ -195,7 +200,9 @@ class Globals {
 		this.BROWSER_INFO.version = version;
 
 		// Check for the Ghostery Android browser
-		this._checkForGhosteryAndroid();
+		if (platform.includes('android')) {
+			this._checkForGhosteryAndroid();
+		}
 	}
 
 	/**
