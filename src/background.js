@@ -69,6 +69,7 @@ const IS_ANDROID = (BROWSER_INFO.os === 'android');
 const VERSION_CHECK_URL = `${CDN_BASE_URL}/update/version`;
 const REAL_ESTATE_ID = 'ghostery';
 const ONE_DAY_MSEC = 86400000;
+const ONE_HOUR_MSEC = 3600000;
 const onBeforeRequest = events.onBeforeRequest.bind(events);
 const { onHeadersReceived } = Events;
 
@@ -143,17 +144,27 @@ function checkLibraryVersion() {
 }
 
 /**
- * Check for db updates if auto updating is enabled and enough time has passed since the last check.
+ * Call checkLibraryVersion if auto updating is enabled and enough time has passed since the last check.
+ * Do nothing otherwise.
+ *
  * @memberOf Background
+ *
+ * @param {Boolean} isAutoUpdateEnabled		True if bug db auto updating is enabled in conf. False otherwise.
+ * @param {Number} bugsLastCheckedMsec		The Unix msec timestamp to compare against to see whether to call checkLibraryVersion again.
+ *
  */
-function autoUpdateBugDb(isAutoUpdateEnabled, bugsLastChecked) {
-	if (isAutoUpdateEnabled) {
-		const nowTime = Number((new Date()).getTime());
-		// offset by 15min so that we don't double fetch
-		if (!bugsLastChecked || nowTime > (Number(bugsLastChecked) + 900000)) {
-			log('autoUpdateBugDb called', new Date());
-			checkLibraryVersion();
-		}
+function autoUpdateBugDb(isAutoUpdateEnabled, bugsLastCheckedMsec) {
+	const date = new Date();
+
+	log('autoUpdateBugDb called', date);
+
+	if (!isAutoUpdateEnabled) return;
+
+	if (
+		!bugsLastCheckedMsec
+		|| date.getTime() > (Number(bugsLastCheckedMsec) + ONE_HOUR_MSEC) // guard against double fetching
+	) {
+		checkLibraryVersion();
 	}
 }
 
