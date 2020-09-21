@@ -143,15 +143,14 @@ function checkLibraryVersion() {
 }
 
 /**
- * Check and fetch a new tracker library every hour as needed
+ * Check for db updates if auto updating is enabled and enough time has passed since the last check.
  * @memberOf Background
  */
-function autoUpdateBugDb(isAutoUpdateEnabled) {
+function autoUpdateBugDb(isAutoUpdateEnabled, bugsLastChecked) {
 	if (isAutoUpdateEnabled) {
-		const result = conf.bugs_last_checked;
 		const nowTime = Number((new Date()).getTime());
 		// offset by 15min so that we don't double fetch
-		if (!result || nowTime > (Number(result) + 900000)) {
+		if (!bugsLastChecked || nowTime > (Number(bugsLastChecked) + 900000)) {
 			log('autoUpdateBugDb called', new Date());
 			checkLibraryVersion();
 		}
@@ -1733,10 +1732,13 @@ function initializeGhosteryModules() {
 	setInterval(scheduledTasks, ONE_DAY_MSEC);
 
 	// Update db right away.
-	autoUpdateBugDb(conf.enable_autoupdate);
+	autoUpdateBugDb(conf.enable_autoupdate, conf.bugs_last_checked);
 
 	// Schedule it to run every hour.
-	setInterval(() => autoUpdateBugDb(conf.enable_autoupdate), ONE_DAY_MSEC);
+	setInterval(
+		() => autoUpdateBugDb(conf.enable_autoupdate, conf.bugs_last_checked),
+		ONE_DAY_MSEC
+	);
 
 	// listen for changes to specific conf properties
 	initializeDispatcher();
