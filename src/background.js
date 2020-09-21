@@ -1113,26 +1113,46 @@ function setupHubPromoABTest() {
 }
 
 /**
- * Adjust antitracking parameters based on the current state
- * of ABTest and availability of Human Web.
+ * @since 8.5.3
+ *
+ * Setup the Bloom Filter `antitracking_whitelist2` test.
+ * @memberOf Background
  */
-function setupABTest() {
-	if (conf.enable_anti_tracking) {
-		const antitrackingConfig = {
-			qsEnabled: true,
-			telemetryMode: conf.enable_human_web ? 1 : 0,
-		};
-		Object.entries(antitrackingConfig).forEach(([opt, val]) => {
-			log('antitracking', 'set config option', opt, val);
-			antitracking.action('setConfigOption', opt, val);
-		});
-	}
-
+function setupBloomFilterABTest() {
 	if (abtest.hasTest('antitracking_whitelist2')) {
 		cliqz.prefs.set('attrackBloomFilter', false);
 	}
+}
 
+/**
+ * Configure A/B tests based on data fetched from the A/B servecr
+ * @memberOf Background
+ */
+function setupABTests() {
+	setupBloomFilterABTest();
 	setupHubPromoABTest();
+}
+
+/**
+ * @since 8.5.3
+ *
+ * Update config options for the Cliqz antitracking module to match the current human web setting.
+ * Log out the updates. Returns without doing anything if antitracking is disabled.
+ *
+ * @param {Boolean} isAntitrackingEnabled		Whether antitracking is currently enabled.
+ */
+function setCliqzAntitrackingConfig(isAntitrackingEnabled) {
+	if (!isAntitrackingEnabled) return;
+
+	const antitrackingConfig = {
+		qsEnabled: true,
+		telemetryMode: conf.enable_human_web ? 1 : 0,
+	};
+
+	Object.entries(antitrackingConfig).forEach(([opt, val]) => {
+		log('antitracking', 'set config option', opt, val);
+		antitracking.action('setConfigOption', opt, val);
+	});
 }
 
 /**
@@ -1161,7 +1181,7 @@ function initializeDispatcher() {
 	dispatcher.on('conf.save.enable_human_web', (enableHumanWeb) => {
 		if (!IS_CLIQZ) {
 			setCliqzModuleEnabled(humanweb, enableHumanWeb).then(() => {
-				setupABTest();
+				setCliqzAntitrackingConfig(conf.enable_anti_tracking);
 			});
 		} else {
 			setCliqzModuleEnabled(humanweb, false);
@@ -1187,7 +1207,11 @@ function initializeDispatcher() {
 	});
 	dispatcher.on('conf.save.enable_anti_tracking', (enableAntitracking) => {
 		if (!IS_CLIQZ) {
-			setCliqzModuleEnabled(antitracking, enableAntitracking);
+			setCliqzModuleEnabled(antitracking, enableAntitracking).then(() => {
+				// enable_human_web could have been toggled while antitracking was off,
+				// so we want to make sure to update the antitracking telemetry option
+				setCliqzAntitrackingConfig(conf.enable_anti_tracking);
+			});
 		} else {
 			setCliqzModuleEnabled(antitracking, false);
 		}
@@ -1693,7 +1717,7 @@ function initializeGhosteryModules() {
 				// auto-fetch human web offer
 				abtest.fetch()
 					.then(() => {
-						setupABTest();
+						setupABTests();
 					})
 					.catch(() => {
 						log('Unable to reach abtest server');
