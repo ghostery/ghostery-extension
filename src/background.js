@@ -1089,38 +1089,6 @@ function onMessageHandler(request, sender, callback) {
 }
 
 /**
- * Determine Antitracking configuration parameters based
- * on the results returned from the abtest endpoint.
- * @memberOf Background
- *
- * @return {Object} 	Antitracking configuration parameters
- */
-function getAntitrackingTestConfig() {
-	if (abtest.hasTest('antitracking_full')) {
-		return {
-			qsEnabled: true,
-			telemetryMode: 2,
-		};
-	}
-	if (abtest.hasTest('antitracking_half')) {
-		return {
-			qsEnabled: true,
-			telemetryMode: 1,
-		};
-	}
-	if (abtest.hasTest('antitracking_collect')) {
-		return {
-			qsEnabled: false,
-			telemetryMode: 1,
-		};
-	}
-	return {
-		qsEnabled: true,
-		telemetryMode: 1,
-	};
-}
-
-/**
  * Set option for Hub promo A/B/C test based
  * on the results returned from the abtest endpoint.
  * @memberOf Background
@@ -1149,18 +1117,17 @@ function setupHubPromoABTest() {
  * of ABTest and availability of Human Web.
  */
 function setupABTest() {
-	const antitrackingConfig = getAntitrackingTestConfig();
-	if (antitrackingConfig && conf.enable_anti_tracking) {
-		if (!conf.enable_human_web) {
-			// force disable anti-tracking telemetry on humanweb opt-out
-			antitrackingConfig.telemetryMode = 0;
-		}
-		Object.keys(antitrackingConfig).forEach((opt) => {
-			const val = antitrackingConfig[opt];
+	if (conf.enable_anti_tracking) {
+		const antitrackingConfig = {
+			qsEnabled: true,
+			telemetryMode: conf.enable_human_web ? 1 : 0,
+		};
+		Object.entries(antitrackingConfig).forEach(([opt, val]) => {
 			log('antitracking', 'set config option', opt, val);
 			antitracking.action('setConfigOption', opt, val);
 		});
 	}
+
 	if (abtest.hasTest('antitracking_whitelist2')) {
 		cliqz.prefs.set('attrackBloomFilter', false);
 	}
