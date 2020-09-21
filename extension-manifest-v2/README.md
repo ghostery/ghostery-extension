@@ -161,7 +161,8 @@ See [CONTRIBUTING](CONTRIBUTING.md) and [CODE OF CONDUCT](CODE-OF-CONDUCT.md)
 ## Additional Open Source Ghostery Projects
 + [Ghostery Lite for Safari](https://github.com/ghostery/GhosterySafari)
 + [Ghostery iOS Browser](https://github.com/ghostery/user-agent-ios)
-+ [Ghostery Android Browser](https://github.com/ghostery/browser-android)
++ [Ghostery Android Browser](https://github.com/ghostery/user-agent-android)
++ [Ghostery Desktop Browser](https://github.com/ghostery/user-agent-desktop)
 
 ## Ghostery Team
 Ghostery relies on [contributions](https://github.com/ghostery/ghostery-extension/graphs/contributors) from lots of talented people.
