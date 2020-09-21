@@ -161,7 +161,7 @@ function autoUpdateBugDb(isAutoUpdateEnabled, bugsLastCheckedMsec) {
 	if (!isAutoUpdateEnabled) return;
 
 	if (
-		!bugsLastCheckedMsec
+		!bugsLastCheckedMsec // the value is 0, signifying that we have never checked yet
 		|| date.getTime() > (Number(bugsLastCheckedMsec) + ONE_HOUR_MSEC) // guard against double fetching
 	) {
 		checkLibraryVersion();
