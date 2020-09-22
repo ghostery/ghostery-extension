@@ -27,20 +27,36 @@ const TOOLTIP_SVG_FILEPATH = '../../app/images/panel/icon-information-tooltip.sv
  * @memberOf SettingsComponents
  */
 const OptIn = ({ settingsData, toggleCheckbox }) => {
-	const checkbox = (id, name) => (
+	const checkbox = (opt, name) => (
 		<input
 			type="checkbox"
-			id={id}
+			id={`settings-${opt}`}
 			name={name}
 			defaultChecked={settingsData[name]}
 			onClick={toggleCheckbox}
 		/>
 	);
 
-	const labelFor = inputId => (
-		<label htmlFor={inputId}>
-			<span>{t(inputId.replaceAll('-', '_'))}</span>
+	const labelFor = (opt, text) => (
+		<label htmlFor={`settings-${opt}`}>
+			<span>{text}</span>
 		</label>
+	);
+
+	const tooltipSVG = (text, dir) => (
+		<div className={`s-tooltip-${dir}`} data-g-tooltip={text}>
+			<img src={TOOLTIP_SVG_FILEPATH} className="s-question" />
+		</div>
+	);
+
+	const option = (cbox, label, tooltip, id = '') => (
+		<div className="s-option-group" id={id}>
+			<div className="s-square-checkbox">
+				{cbox}
+				{label}
+				{tooltip}
+			</div>
+		</div>
 	);
 
 	return (
@@ -52,36 +68,22 @@ const OptIn = ({ settingsData, toggleCheckbox }) => {
 						{t('settings_support_ghostery_by')}
 						:
 					</h5>
-					<div className="s-option-group">
-						<div className="s-square-checkbox">
-							{checkbox('settings-share-usage', 'enable_metrics')}
-							{labelFor('settings-share-usage')}
-							<div className="s-tooltip-down" data-g-tooltip={t('settings_share_usage_tooltip')}>
-								<img src={TOOLTIP_SVG_FILEPATH} className="s-question" />
-							</div>
-						</div>
-					</div>
-					{!IS_CLIQZ && (
-						<div className="s-option-group" id="human-web-section">
-							<div className="s-square-checkbox">
-								{checkbox('settings-share-usage', 'enable_human_web')}
-								{labelFor('settings-share-human-web')}
-								<div className="s-tooltip-up" data-g-tooltip={t('settings_human_web_tooltip')}>
-									<img src={TOOLTIP_SVG_FILEPATH} className="s-question" />
-								</div>
-							</div>
-						</div>
+					{option(
+						checkbox('share-usage', 'enable_metrics'),
+						labelFor('share-usage', t('settings_share_usage')),
+						tooltipSVG(t('settings_share_usage_tooltip'), 'down')
 					)}
-					{!IS_CLIQZ && !IS_ANDROID && (
-						<div className="s-option-group" id="offers-section">
-							<div className="s-square-checkbox">
-								{checkbox('settings-allow-offers', 'enable_offers')}
-								{labelFor('settings-allow-offers')}
-								<div className="s-tooltip-up" data-g-tooltip={t('settings_offers_tooltip')}>
-									<img src={TOOLTIP_SVG_FILEPATH} className="s-question" />
-								</div>
-							</div>
-						</div>
+					{!IS_CLIQZ && option(
+						checkbox('share-human-web', 'enable_human_web'),
+						labelFor('share-human-web', t('settings_share_human_web')),
+						tooltipSVG(t('settings_human_web_tooltip'), 'up'),
+						'human-web-section'
+					)}
+					{!IS_CLIQZ && !IS_ANDROID && option(
+						checkbox('allow-offers', 'enable_offers'),
+						labelFor('allow-offers', t('settings_allow_offers')),
+						tooltipSVG(t('settings_offers_tooltip'), 'up'),
+						'offers-section'
 					)}
 				</div>
 			</div>
