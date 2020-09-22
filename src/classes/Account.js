@@ -22,7 +22,7 @@ import conf from './Conf';
 import dispatcher from './Dispatcher';
 import { log } from '../utils/common';
 import Api from '../utils/api';
-import ghosteryDebug from './GhosteryDebug';
+import ghosteryDebug from './Debugger';
 
 const api = new Api();
 const {

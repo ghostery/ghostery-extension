@@ -20,9 +20,7 @@ import tabInfo from './TabInfo';
 import foundBugs from './FoundBugs';
 import PromoModals from './PromoModals';
 import { alwaysLog, isLog, activateLog } from '../utils/common';
-import {
-	capitalize, getObjectSlice, pickRandomArrEl, openNewTab
-} from '../utils/utils';
+import { capitalize, getObjectSlice, pickRandomArrEl } from '../utils/utils';
 
 /**
  * @class for debugging Ghostery via the background.js console.
@@ -700,6 +698,7 @@ class GhosteryDebug {
 	}
 
 	openAndroidPanel = () => {}
+
 	openIntroHub = () => {}
 
 	/**
