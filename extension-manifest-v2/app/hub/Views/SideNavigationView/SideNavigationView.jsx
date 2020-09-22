@@ -15,7 +15,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import { NavLink } from 'react-router-dom';
+import QueryString from 'query-string';
 import globals from '../../../../src/classes/Globals';
+
+// Flag to display alternate hub view (used for A/B testing ticket GH-2097)
+const ah = (QueryString.parse(window.location.search).ah === 'true') || false;
 
 const { GHOSTERY_BASE_URL } = globals;
 
@@ -97,6 +101,8 @@ const SideNavigationView = (props) => {
 		disabled: disableNav,
 	});
 
+	const menuClassNames = ClassNames(`SideNavigation__menu ${ah ? '' : 'flex-child-grow'} flex-container flex-dir-column`);
+
 	return (
 		<div className={containerClassNames}>
 			<a
@@ -106,7 +112,7 @@ const SideNavigationView = (props) => {
 				target="_blank"
 				className={topClassNames}
 			/>
-			<div className="SideNavigation__menu flex-child-grow flex-container flex-dir-column">
+			<div className={menuClassNames}>
 				{menuItems.map(item => _renderMenuItem(item, disableNav))}
 			</div>
 			<div className="SideNavigation__bottom flex-container flex-dir-column">
