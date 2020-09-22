@@ -369,8 +369,8 @@ class Metrics {
 			`&th=${encodeURIComponent(Metrics._getThemeValue().toString())}` +
 
 			// New parameters for Ghostery 8.5.2
-			// Hub Promo variant
-			`&hp=${encodeURIComponent(Metrics._getHubPromoVariant().toString())}` +
+			// Hub Layout View
+			`&t2=${encodeURIComponent(Metrics._getHubLayoutView().toString())}` +
 			// Subscription Interval
 			`&si=${encodeURIComponent(Metrics._getSubscriptionInterval().toString())}` +
 			// Product ID Parameter
@@ -534,20 +534,18 @@ class Metrics {
 	}
 
 	/**
-	 * Get the Int associated with the Hub promo variant shown on install
+	 * Get the Int associated with the Hub layout view shown on install
 	 * @private
-	 * @return {number} Int associated with the Hub promo variant
+	 * @return {number} Int associated with the Hub layout view
 	 */
-	static _getHubPromoVariant() {
-		const { hub_promo_variant } = conf;
+	static _getHubLayoutView() {
+		const { hub_layout } = conf;
 
-		switch (hub_promo_variant) {
-			case 'upgrade':
+		switch (hub_layout) {
+			case 'default':
 				return 1;
-			case 'plain':
+			case 'alternate':
 				return 2;
-			case 'midnight':
-				return 3;
 			case 'not_yet_set':
 			default:
 				return 0;
