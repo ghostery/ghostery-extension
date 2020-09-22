@@ -5,11 +5,11 @@ exports[`app/hub/Views/SideNavigationView component More Snapshot tests with rea
   className="SideNavigation flex-container flex-dir-column"
 >
   <a
-    aria-current="page"
-    className="SideNavigation__top active"
-    href="/"
-    onClick={[Function]}
-    style={Object {}}
+    aria-label="Ghostery website"
+    className="SideNavigation__top"
+    href="https://ghosterystage.com"
+    rel="noopener noreferrer"
+    target="_blank"
   />
   <div
     className="SideNavigation__menu flex-child-grow flex-container flex-dir-column"
@@ -25,11 +25,11 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
   className="SideNavigation flex-container flex-dir-column"
 >
   <a
-    aria-current="page"
-    className="SideNavigation__top active"
-    href="/"
-    onClick={[Function]}
-    style={Object {}}
+    aria-label="Ghostery website"
+    className="SideNavigation__top"
+    href="https://ghosterystage.com"
+    rel="noopener noreferrer"
+    target="_blank"
   />
   <div
     className="SideNavigation__menu flex-child-grow flex-container flex-dir-column"
@@ -224,11 +224,11 @@ exports[`app/hub/Views/SideNavigationView component Snapshot tests with react-te
   className="SideNavigation flex-container flex-dir-column disabled"
 >
   <a
-    aria-current="page"
-    className="SideNavigation__top disabled active"
-    href="/"
-    onClick={[Function]}
-    style={Object {}}
+    aria-label="Ghostery website"
+    className="SideNavigation__top disabled"
+    href="https://ghosterystage.com"
+    rel="noopener noreferrer"
+    target="_blank"
   />
   <div
     className="SideNavigation__menu flex-child-grow flex-container flex-dir-column"
