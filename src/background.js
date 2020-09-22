@@ -1786,7 +1786,6 @@ function init() {
 		initializeEventListeners();
 		initializeVersioning();
 		return metrics.init(globals.JUST_INSTALLED).then(() => initializeGhosteryModules().then(() => {
-			ghosteryDebug.init();
 			account.migrate()
 				.then(() => {
 					if (conf.account !== null) {

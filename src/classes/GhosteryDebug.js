@@ -20,7 +20,9 @@ import tabInfo from './TabInfo';
 import foundBugs from './FoundBugs';
 import PromoModals from './PromoModals';
 import { alwaysLog, isLog, activateLog } from '../utils/common';
-import { capitalize, getObjectSlice, pickRandomArrEl } from '../utils/utils';
+import {
+	capitalize, getObjectSlice, pickRandomArrEl, openNewTab
+} from '../utils/utils';
 
 /**
  * @class for debugging Ghostery via the background.js console.
@@ -203,6 +205,7 @@ class GhosteryDebug {
 		getConfData: 'ghostery.getConfData()',
 		getGlobals: 'ghostery.getGlobals()',
 		showPromoModal: 'ghostery.showPromoModal()',
+		openPanel: 'ghostery.openPanel()',
 		settingsToggleOutputStyle: 'ghostery.settings.toggleOutputStyle()',
 		settingsShow: 'ghostery.settings.show()',
 		settingsToggleLogging: 'ghostery.settings.toggleLogging()',
@@ -237,6 +240,7 @@ class GhosteryDebug {
 		[`${this._helpFunctionNames.getConfData}`, 'Show the current value of a config property or properties'],
 		[`${this._helpFunctionNames.getGlobals}`, 'Show the current value of a global property or properties'],
 		[`${this._helpFunctionNames.showPromoModal}`, 'Show specified promo modal at the next opportunity'],
+		[`${this._helpFunctionNames.openPanel}`, 'Open the Ghostery panel window in a new tab for automation testing'],
 		[`${this._helpFunctionNames.settingsToggleOutputStyle}`, 'Change debugger method return value formatting'],
 		[`${this._helpFunctionNames.settingsShow}`, 'Show the current debugger settings'],
 		[`${this._helpFunctionNames.settingsToggleLogging}`, 'Toggle all other debug logging on/off'],
@@ -352,6 +356,22 @@ class GhosteryDebug {
 	 * @access private
 	 * @since 8.5.3
 	 *
+	 * The help text for the public `openPanel()` method.
+	 * Displayed after calling ghostery.help('openPanel').
+	 */
+	static helpOpenPanel = [
+		`${CSS_MAINHEADER}${this._helpFunctionNames.openPanel}`,
+		'Open the Ghostery panel window in a new tab for automation testing.',
+		'Uses the current active tabID to populate panel data.',
+		'',
+		[`${CSS_SUBHEADER}When called with...`, 'Does...'],
+		['No argument', 'No output'],
+	];
+
+	/**
+	 * @access private
+	 * @since 8.5.3
+	 *
 	 * The help text for the public `settings.show()` method.
 	 * Displayed after calling ghostery.help('show').
 	 */
@@ -438,6 +458,7 @@ class GhosteryDebug {
 			helpGetConfData,
 			helpGetGlobals,
 			helpShowPromoModal,
+			helpOpenPanel,
 			helpSettingsShow,
 			helpSettingsToggleLogging,
 			helpSettingsToggleOutputStyle,
@@ -455,6 +476,7 @@ class GhosteryDebug {
 		else if (eeFnName === 'getabtests') 		helpStringArr.push(...helpGetABTests);
 		else if (eeFnName === 'getconfdata')		helpStringArr.push(...helpGetConfData);
 		else if (eeFnName === 'getglobals')			helpStringArr.push(...helpGetGlobals);
+		else if (eeFnName === 'openPanel')			helpStringArr.push(...helpOpenPanel);
 		else if (eeFnName === 'fetchabtestswithir')	helpStringArr.push(...helpFetchABTestsWithIr);
 		else if (eeFnName === 'showpromomodal') {
 			helpStringArr.push(...helpShowPromoModal);
@@ -482,7 +504,7 @@ class GhosteryDebug {
 	 * @return {String} 			An ad / thank you message (printed to the console as the last line of output).
 	 */
 	// eslint-disable-next-line class-methods-use-this
-	help(fnName) {
+	help = (fnName) => {
 		const {
 			_assembleHelpStringArr,
 			_helpPromoMessages,
@@ -647,6 +669,38 @@ class GhosteryDebug {
 	getConfData = slice => this._getObjectSlice(confData, slice, 'config');
 
 	getGlobals = slice => this._getObjectSlice(globals, slice, 'globals');
+
+	/**
+	 * @since 8.5.3
+	 *
+	 * Open the Ghostery panel window in a new tab for automation testing. Uses
+	 * the current active tabID to populate panel data.
+	 */
+	openPanel = () => {
+		chrome.tabs.query({
+			active: true
+		}, (tabs) => {
+			if (chrome.runtime.lastError) {
+				GhosteryDebug._printToConsole(GhosteryDebug._typeset([
+					`${CSS_SUBHEADER}Error fetching active tab:`,
+					`${chrome.runtime.lastError.message}`,
+				]));
+			} else if (tabs.length === 0) {
+				GhosteryDebug._printToConsole(GhosteryDebug._typeset([
+					`${CSS_SUBHEADER}Error fetching active tab:`,
+					'Active tab not found',
+				]));
+			} else {
+				chrome.tabs.create({
+					url: chrome.runtime.getURL(`app/templates/panel.html?tabId=${tabs[0].id}`),
+					active: true
+				});
+			}
+		});
+	}
+
+	openAndroidPanel = () => {}
+	openIntroHub = () => {}
 
 	/**
 	 * TODO: Review / revise this

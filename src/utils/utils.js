@@ -241,7 +241,7 @@ export function getActiveTab(callback, error) {
 			}
 		} else if (tabs.length === 0) {
 			if (error && typeof error === 'function') {
-				error();
+				error({ message: 'Active tab not found' });
 			}
 		} else if (callback && typeof callback === 'function') {
 			callback(tabs[0]);
@@ -302,6 +302,8 @@ function _openNewTab(data) {
 				active: data.become_active || false
 			});
 		}
+	}, (err) => {
+		log(`_openNewTab Error: ${err}`);
 	});
 }
 /**
