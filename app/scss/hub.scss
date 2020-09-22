@@ -11,6 +11,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+// Import Global Partials
+@import './partials/colors';
+
 html, body, #root {
 	height: 100%;
 	width: 100%;
@@ -43,11 +46,11 @@ html, body, #root {
 	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12);
 	&.primary {
 		&:not(.hollow):hover {
-			background-color: #0078CA;
+			background-color: $dark-ghosty-blue;
 		}
 		&.hollow:hover, &.hollow:focus {
-			border-color: #0078CA;
-			color: #0078CA;
+			border-color: $dark-ghosty-blue;
+			color: $dark-ghosty-blue;
 		}
 	}
 }
