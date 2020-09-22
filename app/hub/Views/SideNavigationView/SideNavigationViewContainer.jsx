@@ -20,7 +20,7 @@ import globals from '../../../../src/classes/Globals';
 const { IS_CLIQZ, BROWSER_INFO } = globals;
 const IS_ANDROID = (BROWSER_INFO.os === 'android');
 
-// Flag to display alternate hub view (used in A/B testing)
+// Flag to display alternate hub view (used for A/B testing ticket GH-2097)
 const ah = (QueryString.parse(window.location.search).ah === 'true') || false;
 
 /**
