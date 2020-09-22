@@ -16,10 +16,6 @@
 	padding-top: 45px;
 	padding-bottom: 25px;
 	color: $tundora;
-	// Foundation Overrides
-	.button {
-		@include button-hover-color-for($ghosty-blue-alt);
-	}
 }
 .HomeView--bolded {
 	font-weight: 700;

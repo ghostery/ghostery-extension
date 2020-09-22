@@ -17,25 +17,3 @@
 	     -o-transition: $transitions;
 	        transition: $transitions;
 }
-
-// Takes in the original button color ($ghosty-blue, $ghosty-blue-alt, $secondary, etc...) and sets a button hover color
-@mixin button-hover-color-for($button-color) {
-	@if $button-color == #1dafed or $button-color == #00AEF0 {
-		&:not(.hollow):hover {
-			background-color: #0078CA;
-		}
-		&.hollow:hover, &.hollow:focus {
-			border-color: #0078CA;
-			color: #0078CA;
-		}
-	} @else {
-		&:not(.hollow):hover, &:not(.hollow):focus {
-			background-color: scale-color($button-color, $lightness: -15%);
-			color: scale-color($button-color, $lightness: -15%);
-		}
-		&:hover, &:focus {
-			border-color: scale-color($button-color, $lightness: -15%);
-			color: scale-color($button-color, $lightness: -15%);
-		}
-	}
-}

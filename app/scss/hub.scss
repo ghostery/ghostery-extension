@@ -41,6 +41,15 @@ html, body, #root {
 	line-height: 1.3;
 	text-transform: uppercase;
 	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12);
+	&.primary {
+		&:not(.hollow):hover {
+			background-color: #0078CA;
+		}
+		&.hollow:hover, &.hollow:focus {
+			border-color: #0078CA;
+			color: #0078CA;
+		}
+	}
 }
 
 // Helper Classes

@@ -381,10 +381,6 @@ section.home-template .section.section-pricing {
 			text-transform: none;
 			height: 38px;
 			line-height: 22px;
-			// Foundation Overrides
-			&.primary {
-				@include button-hover-color-for($price-blue);
-			}
 			&.already-protected {
 				@include breakpoint($medium-large-breakpoint down) {
 					margin-top: 45px;
@@ -556,10 +552,6 @@ section.home-template .section.section-pricing {
 		font-family: 'Open Sans';
 		font-weight: 600;
 		background-color: $price-blue;
-		// Foundation Overrides
-		&.primary {
-			@include button-hover-color-for($price-blue);
-		}
 	}
 
 	.button-gold {
