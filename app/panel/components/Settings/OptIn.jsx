@@ -85,6 +85,12 @@ const OptIn = ({ settingsData, toggleCheckbox }) => {
 						tooltipSVG(t('settings_offers_tooltip'), 'up'),
 						'offers-section'
 					)}
+					{!IS_CLIQZ && option(
+						checkbox('allow-abtests', true),
+						labelFor('allow-abtests', t('settings_allow_abtests')),
+						tooltipSVG(t('settings_abtests_tooltip'), 'up'),
+						'abtests-section'
+					)}
 				</div>
 			</div>
 		</div>
