@@ -67,6 +67,10 @@
 }
 .SetupDone__featureButton {
 	margin: 20px 10px 10px;
+	// Foundation Overrides
+	&.button {
+		@include button-hover-color-for($ghosty-blue);
+	}
 }
 @media only screen and (max-width: 840px) {
 	.SetupDone__featureList {

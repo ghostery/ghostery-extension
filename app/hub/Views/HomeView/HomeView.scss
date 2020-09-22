@@ -16,14 +16,9 @@
 	padding-top: 45px;
 	padding-bottom: 25px;
 	color: $tundora;
+	// Foundation Overrides
 	.button {
-		&:not(.hollow):hover {
-			background-color: #0078CA;
-		}
-		&.hollow:hover {
-			color: #0078CA;
-			border-color: #0078CA;
-		}
+		@include button-hover-color-for($ghosty-blue-alt);
 	}
 }
 .HomeView--bolded {
