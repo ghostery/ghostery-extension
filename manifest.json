@@ -114,5 +114,6 @@
 		"cliqz/offers-templates/reminder.html",
 		"cliqz/offers-templates/checkout.html",
 		"cliqz/offers-templates/control-center.html"
-	]
+	],
+	"debug": true
 }

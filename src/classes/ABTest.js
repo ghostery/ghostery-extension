@@ -27,6 +27,7 @@ const { BROWSER_INFO, CMP_BASE_URL, EXTENSION_VERSION } = globals;
 class ABTest {
 	constructor() {
 		this.tests = {};
+		this.hasBeenFetched = false;
 	}
 
 	/**
