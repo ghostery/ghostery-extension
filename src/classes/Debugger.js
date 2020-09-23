@@ -789,8 +789,18 @@ class Debugger {
 		});
 	}
 
+	/**
+	 * @since 8.5.3
+	 *
+	 * Print the logged in user's account information, settings, and subscription data to the console
+	 * (or an error message if no user is logged in).
+	 *
+	 * @async
+	 *
+	 * @return {Promise}		The Promise for the calls to the account server.
+	 */
 	// eslint-disable-next-line class-methods-use-this
-	getUserData() {
+	getUserData = () => {
 		function _getUserCookies() {
 			return new Promise((resolve) => {
 				chrome.cookies.getAll({
