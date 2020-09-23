@@ -58,12 +58,6 @@ class Debugger {
 		// These are the private settings methods and properties
 		this.settings._isLog = isLog();
 		this.settings._objectOutputStyle = OBJECT_OUTPUT_STYLE;
-		this.settings._toggleSettingHelper = (optOn, optOff, setting, requested) => {
-			if 		(typeof requested !== 'string')			this.settings[setting] = !this.settings[setting];
-			else if (requested.toLowerCase() === optOn) 	this.settings[setting] = true;
-			else if (requested.toLowerCase() === optOff) 	this.settings[setting] = false;
-			else 											this.settings[setting] = !this.settings[setting];
-		};
 
 		this.accountEvents = [];
 
@@ -983,11 +977,6 @@ class Debugger {
 
 	// START [[Settings Actions]] SECTION
 	settings = {
-		// Private properties added in the constructor:
-		// _isLog						stores log toggle setting
-		// _objectOutputStyle	 		stores object output style setting
-		// _toggleSettingsHelper		helper method that provides a general implementation of setting toggling
-
 		show: (updated) => {
 			const updatedOrCurrent = (updated === 'logging' || updated === 'outputStyle') ? 'Updated' : 'Current';
 			const potentialLoggingHighlight = (updated === 'logging') ? CSS_HIGHLIGHT : '';
@@ -1011,15 +1000,22 @@ class Debugger {
 		},
 
 		toggleLogging: (newValue) => {
-			this.settings._toggleSettingHelper('on', 'off', '_isLog', newValue);
+			this._toggleSettingsHelper('on', 'off', '_isLog', newValue);
 			activateLog(this.settings._isLog);
 			return (this.settings.show('logging'));
 		},
 
 		toggleOutputStyle: (newValue) => {
-			this.settings._toggleSettingHelper('object', 'string', '_objectOutputStyle', newValue);
+			this._toggleSettingsHelper('object', 'string', '_objectOutputStyle', newValue);
 			return (this.settings.show('outputStyle'));
 		},
+	}
+
+	_toggleSettingsHelper(optOn, optOff, setting, requested) {
+		if 		(typeof requested !== 'string')			this.settings[setting] = !this.settings[setting];
+		else if (requested.toLowerCase() === optOn) 	this.settings[setting] = true;
+		else if (requested.toLowerCase() === optOff) 	this.settings[setting] = false;
+		else 											this.settings[setting] = !this.settings[setting];
 	}
 	// END [[Settings Actions]] SECTION
 }
