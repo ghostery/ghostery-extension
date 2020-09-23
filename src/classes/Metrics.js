@@ -15,7 +15,6 @@ import globals from './Globals';
 import conf from './Conf';
 import { log, prefsSet, prefsGet } from '../utils/common';
 import { getActiveTab, processUrlQuery } from '../utils/utils';
-import { getPunycodeEncoded } from '@cliqz/url-parser';
 
 // CONSTANTS
 const FREQUENCIES = { // in milliseconds
