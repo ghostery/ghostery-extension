@@ -59,7 +59,7 @@ class Debugger {
 		this.settings._isLog = isLog();
 		this.settings._objectOutputStyle = OBJECT_OUTPUT_STYLE;
 
-		this.accountEvents = [];
+		this._accountEvents = [];
 
 		const _cookieChangeEvent = (changeInfo) => {
 			const { removed, cookie, cause } = changeInfo;
@@ -869,7 +869,7 @@ class Debugger {
 			const output = [];
 
 			output.push("Here are the account events we've recorded during this session:");
-			this._push(Object.fromEntries(this.accountEvents), output);
+			this._push(Object.fromEntries(this._accountEvents), output);
 
 			Debugger._printToConsole(Debugger._typeset(output));
 
@@ -929,12 +929,12 @@ class Debugger {
 			pushObj.details = details;
 		}
 
-		this.accountEvents.push([timestamp, pushObj]);
+		this._accountEvents.push([timestamp, pushObj]);
 
-		if (this.accountEvents.length > ACCOUNT_EVENTS_CAP) {
+		if (this._accountEvents.length > ACCOUNT_EVENTS_CAP) {
 			// Performance should be ok even for a somewhat large array:
 			// https://medium.com/@erictongs/the-best-way-to-remove-the-first-element-of-an-array-in-javascript-shift-vs-splice-694378a7b416
-			this.accountEvents.shift();
+			this._accountEvents.shift();
 		}
 	}
 
