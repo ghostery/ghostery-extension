@@ -279,6 +279,7 @@ class Metrics {
 				'enable_offers',
 				'account',
 				'enable_metrics',
+				'enable_abtests',
 				'show_alert',
 				'alert_expanded',
 				'show_cmp'

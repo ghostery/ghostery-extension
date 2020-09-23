@@ -85,8 +85,8 @@ const OptIn = ({ settingsData, toggleCheckbox }) => {
 						tooltipSVG(t('settings_offers_tooltip'), 'up'),
 						'offers-section'
 					)}
-					{!IS_CLIQZ && option(
-						checkbox('allow-abtests', true),
+					{option(
+						checkbox('allow-abtests', 'enable_abtests'),
 						labelFor('allow-abtests', t('settings_allow_abtests')),
 						tooltipSVG(t('settings_abtests_tooltip'), 'up'),
 						'abtests-section'
@@ -103,6 +103,7 @@ OptIn.propTypes = {
 		enable_metrics: PropTypes.bool.isRequired,
 		enable_human_web: PropTypes.bool.isRequired,
 		enable_offers: PropTypes.bool.isRequired,
+		enable_abtests: PropTypes.bool.isRequired,
 	}).isRequired,
 };
 
