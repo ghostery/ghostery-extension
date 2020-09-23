@@ -1711,7 +1711,7 @@ function initializeGhosteryModules() {
 				// auto-fetch human web offer
 				abtest.fetch()
 					.then(() => {
-						setupABTests();
+						if (conf.enable_abtests) setupABTests();
 					})
 					.catch(() => {
 						log('Unable to reach abtest server');
