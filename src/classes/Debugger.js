@@ -36,6 +36,7 @@ const CSS_SUBHEADER = 'css_subheader__';
 const CSS_MAINHEADER = 'css_mainheader__';
 const CSS_HIGHLIGHT = 'css_highlight__';
 const OUTPUT_COLUMN_WIDTH = 40;
+const ACCOUNT_EVENTS_CAP = 1000;
 
 /**
  * Class that implements an interactive console debugger.
@@ -871,7 +872,7 @@ class Debugger {
 
 		const _printAccountEvents = () => {
 			const output = [];
-			
+
 			output.push("Here are the account events we've recorded during this session:");
 			this._push(Object.fromEntries(this.accountEvents), output);
 
@@ -934,6 +935,12 @@ class Debugger {
 		}
 
 		this.accountEvents.push([timestamp, pushObj]);
+
+		if (this.accountEvents.length > ACCOUNT_EVENTS_CAP) {
+			// Performance should be ok even for a somewhat large array:
+			// https://medium.com/@erictongs/the-best-way-to-remove-the-first-element-of-an-array-in-javascript-shift-vs-splice-694378a7b416
+			this.accountEvents.shift();
+		}
 	}
 
 	// [[Main Actions]] private helpers
