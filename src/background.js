@@ -1723,13 +1723,13 @@ function initializeGhosteryModules() {
 		});
 	}
 
-	// Check CMP and ABTest every hour.
+	// Check CMP and ABTest every day.
 	setInterval(scheduledTasks, ONE_DAY_MSEC);
 
 	// Update db right away.
 	autoUpdateDBs(conf.enable_autoupdate, conf.bugs_last_checked);
 
-	// Schedule it to run every hour.
+	// Schedule it to run every day.
 	setInterval(
 		() => autoUpdateDBs(conf.enable_autoupdate, conf.bugs_last_checked),
 		ONE_DAY_MSEC
