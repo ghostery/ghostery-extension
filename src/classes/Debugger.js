@@ -380,7 +380,7 @@ class Debugger {
 	 */
 	static helpGetUserData = [
 		`${CSS_MAINHEADER}${this._helpFunctionNames.getUserData}`,
-		'Display account details for the logged-in user, or an error message if no user is logged in',
+		'Display account details for the logged-in user, or an error message if no user is logged in.',
 		`Also display up to ${ACCOUNT_EVENTS_CAP} of the most recent account events`,
 		'',
 		[`${CSS_SUBHEADER}When called with...`, 'Returns...'],
