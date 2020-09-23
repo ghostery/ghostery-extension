@@ -19,7 +19,7 @@ import globals from './Globals';
 import tabInfo from './TabInfo';
 import foundBugs from './FoundBugs';
 import PromoModals from './PromoModals';
-import { alwaysLog, isLog, activateLog } from '../utils/common';
+import { isLog, activateLog } from '../utils/common';
 import { capitalize, getObjectSlice, pickRandomArrEl } from '../utils/utils';
 
 /**
@@ -202,6 +202,7 @@ class Debugger {
 		getABTests: 'ghostery.getABTests()',
 		getConfData: 'ghostery.getConfData()',
 		getGlobals: 'ghostery.getGlobals()',
+		getActiveTabInfo: 'ghostery.getActiveTabInfo()',
 		showPromoModal: 'ghostery.showPromoModal()',
 		openPanel: 'ghostery.openPanel()',
 		openIntroHub: 'ghostery.openIntroHub()',
@@ -238,6 +239,7 @@ class Debugger {
 		[`${this._helpFunctionNames.getABTests}`, 'Display what A/B tests have been fetched from the A/B test server'],
 		[`${this._helpFunctionNames.getConfData}`, 'Show the current value of a config property or properties'],
 		[`${this._helpFunctionNames.getGlobals}`, 'Show the current value of a global property or properties'],
+		[`${this._helpFunctionNames.getActiveTabInfo}`, 'Shows TabInfo and FoundBugs data for any active tabs'],
 		[`${this._helpFunctionNames.showPromoModal}`, 'Show specified promo modal at the next opportunity'],
 		[`${this._helpFunctionNames.openPanel}`, 'Open the Ghostery panel window in a new tab for automation testing'],
 		[`${this._helpFunctionNames.openIntroHub}`, 'Open the Ghostery Intro Hub in a new tab for automation testing'],
@@ -334,6 +336,24 @@ class Debugger {
 		['A property key regex', 'An object with all matching properties'],
 		['', 'Example: ghostery.getGlobals(/ACCOUNT_/)'],
 		['Anything else', 'The whole globals object. Also returned if there are no matching results'],
+	];
+
+	/**
+	 * @access private
+	 * @since 8.5.3
+	 *
+	 * The help text for the public `getActiveTabInfo()` method.
+	 * Displayed after calling ghostery.help('getActiveTabInfo').
+	 */
+	static helpGetActiveTabInfo = [
+		`${CSS_MAINHEADER}${this._helpFunctionNames.getActiveTabInfo}`,
+		'Display the current value(s) of an active tab property or properties',
+		'',
+		[`${CSS_SUBHEADER}When called with...`, 'Returns...'],
+		['No argument', 'The whole ActiveTabInfo object'],
+		['A property key string', 'An object with just that property'],
+		['', "Example: ghostery.getActiveTabInfo('activeTabIds | foundBugs | tabInfo')"],
+		['Anything else', 'The whole ActiveTabInfo object. Also returned if there are no matching results'],
 	];
 
 	/**
@@ -474,6 +494,7 @@ class Debugger {
 			helpGetABTests,
 			helpGetConfData,
 			helpGetGlobals,
+			helpGetActiveTabInfo,
 			helpShowPromoModal,
 			helpOpenPanel,
 			helpOpenInroHub,
@@ -494,6 +515,7 @@ class Debugger {
 		else if (eeFnName === 'getabtests') 		helpStringArr.push(...helpGetABTests);
 		else if (eeFnName === 'getconfdata')		helpStringArr.push(...helpGetConfData);
 		else if (eeFnName === 'getglobals')			helpStringArr.push(...helpGetGlobals);
+		else if (eeFnName === 'getactivetabinfo')	helpStringArr.push(...helpGetActiveTabInfo);
 		else if (eeFnName === 'openpanel')			helpStringArr.push(...helpOpenPanel);
 		else if (eeFnName === 'openintrohub')		helpStringArr.push(...helpOpenInroHub);
 		else if (eeFnName === 'fetchabtestswithir')	helpStringArr.push(...helpFetchABTestsWithIr);
@@ -522,7 +544,6 @@ class Debugger {
 	 * @param {String}	[fnName]	The name of the function for which help output was requested, if any.
 	 * @return {String} 			An ad / thank you message (printed to the console as the last line of output).
 	 */
-	// eslint-disable-next-line class-methods-use-this
 	help = (fnName) => {
 		const {
 			_assembleHelpStringArr,
@@ -735,46 +756,36 @@ class Debugger {
 	}
 
 	/**
-	 * TODO: Review / revise this
-	 * this.tabInfo[tabId] properties update without re-calling getTabInfo.
-	 * this.foundApps[tabId].foundApps properties update without re-calling getTabInfo.
-	 * this.foundApps[tabId].foundBugs properties update without re-calling getTabInfo.
-	 *   No need to call `window.GHOSTERY.getTabInfo()` to see changes to object properties.
-	 *   You will need to call `window.GHOSTERY` again to see changes as console object
-	 *   properties are fixed to when the object was read by the console.
-	 *   Only object properties will update, no new tabIds will be added.
-	 *   Reloading the tab will end these updates.
+	 * @since 8.5.3
+	 *
+	 * Get all info for the active tab(s), including TabInfo, FoundBugs and active tab ids
+	 * @param  {string} slice Limit the debugger output to a particular slice of the activeTabInfo object
 	 */
-	getActiveTabInfoAsync() {
-		function _getActiveTabIds() {
-			return new Promise((resolve) => {
-				chrome.tabs.query({
-					active: true,
-				}, (tabs) => {
-					if (chrome.runtime.lastError) {
-						return resolve(chrome.runtime.lastError.message);
-					}
-					const tabIds = tabs.map(tab => tab.id);
-					return resolve(tabIds);
-				});
-			});
-		}
-
-		// TODO pipe through _typeset and _printToConsole
-		alwaysLog('Results will be in the `activeTabInfo` property when the Promise resolves');
-
-		return new Promise((resolve) => {
-			_getActiveTabIds().then((tabIds) => {
-				this.activeTabInfo = {
+	getActiveTabInfo = (slice) => {
+		chrome.tabs.query({
+			active: true,
+		}, (tabs) => {
+			if (chrome.runtime.lastError) {
+				Debugger._printToConsole(Debugger._typeset([
+					`${CSS_SUBHEADER}Error fetching active tab:`,
+					`${chrome.runtime.lastError.message}`,
+				]));
+			} else if (tabs.length === 0) {
+				Debugger._printToConsole(Debugger._typeset([
+					`${CSS_SUBHEADER}Error fetching active tab:`,
+					'Active tab not found',
+				]));
+			} else {
+				const tabIds = tabs.map(tab => tab.id);
+				this._getObjectSlice({
 					activeTabIds: tabIds,
 					tabInfo: { ...tabInfo._tabInfo },
 					foundBugs: {
 						foundApps: { ...foundBugs._foundApps },
 						foundBugs: { ...foundBugs._foundBugs },
 					},
-				};
-				resolve(tabIds);
-			});
+				}, slice, 'ActiveTabInfo');
+			}
 		});
 	}
 
