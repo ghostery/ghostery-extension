@@ -18,7 +18,7 @@ import { debounce, every, size } from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
 import cliqz, { HUMANWEB_MODULE, HPN_MODULE } from './classes/Cliqz';
 import ghosteryDebugger from './classes/Debugger';
-// object class
+// object classes
 import Events from './classes/EventHandlers';
 import Policy from './classes/Policy';
 // static classes

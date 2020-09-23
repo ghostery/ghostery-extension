@@ -204,6 +204,7 @@ class GhosteryDebugger {
 		getGlobals: 'ghostery.getGlobals()',
 		showPromoModal: 'ghostery.showPromoModal()',
 		openPanel: 'ghostery.openPanel()',
+		openIntroHub: 'ghostery.openIntroHub()',
 		settingsToggleOutputStyle: 'ghostery.settings.toggleOutputStyle()',
 		settingsShow: 'ghostery.settings.show()',
 		settingsToggleLogging: 'ghostery.settings.toggleLogging()',
@@ -239,6 +240,7 @@ class GhosteryDebugger {
 		[`${this._helpFunctionNames.getGlobals}`, 'Show the current value of a global property or properties'],
 		[`${this._helpFunctionNames.showPromoModal}`, 'Show specified promo modal at the next opportunity'],
 		[`${this._helpFunctionNames.openPanel}`, 'Open the Ghostery panel window in a new tab for automation testing'],
+		[`${this._helpFunctionNames.openIntroHub}`, 'Open the Ghostery Intro Hub in a new tab for automation testing'],
 		[`${this._helpFunctionNames.settingsToggleOutputStyle}`, 'Change debugger method return value formatting'],
 		[`${this._helpFunctionNames.settingsShow}`, 'Show the current debugger settings'],
 		[`${this._helpFunctionNames.settingsToggleLogging}`, 'Toggle all other debug logging on/off'],
@@ -362,8 +364,25 @@ class GhosteryDebugger {
 		'Open the Ghostery panel window in a new tab for automation testing.',
 		'Uses the current active tabID to populate panel data.',
 		'',
-		[`${CSS_SUBHEADER}When called with...`, 'Does...'],
-		['No argument', 'No output'],
+		[`${CSS_SUBHEADER}When called with...`, 'Opens...'],
+		['No argument', 'The standard panel for desktop'],
+		['mobile', 'The mobile panel for Android'],
+	];
+
+	/**
+	 * @access private
+	 * @since 8.5.3
+	 *
+	 * The help text for the public `openIntroHub()` method.
+	 * Displayed after calling ghostery.help('openIntroHub').
+	 */
+	static helpOpenInroHub = [
+		`${CSS_MAINHEADER}${this._helpFunctionNames.openIntroHub}`,
+		'Open the Ghostery Intro Hub in a new tab for automation testing.',
+		'',
+		[`${CSS_SUBHEADER}When called with...`, 'Opens...'],
+		['No argument', 'The hub on the default route'],
+		['modal', 'The hub with any promo modals displayed'],
 	];
 
 	/**
@@ -457,6 +476,7 @@ class GhosteryDebugger {
 			helpGetGlobals,
 			helpShowPromoModal,
 			helpOpenPanel,
+			helpOpenInroHub,
 			helpSettingsShow,
 			helpSettingsToggleLogging,
 			helpSettingsToggleOutputStyle,
@@ -474,7 +494,8 @@ class GhosteryDebugger {
 		else if (eeFnName === 'getabtests') 		helpStringArr.push(...helpGetABTests);
 		else if (eeFnName === 'getconfdata')		helpStringArr.push(...helpGetConfData);
 		else if (eeFnName === 'getglobals')			helpStringArr.push(...helpGetGlobals);
-		else if (eeFnName === 'openPanel')			helpStringArr.push(...helpOpenPanel);
+		else if (eeFnName === 'openpanel')			helpStringArr.push(...helpOpenPanel);
+		else if (eeFnName === 'openintrohub')		helpStringArr.push(...helpOpenInroHub);
 		else if (eeFnName === 'fetchabtestswithir')	helpStringArr.push(...helpFetchABTestsWithIr);
 		else if (eeFnName === 'showpromomodal') {
 			helpStringArr.push(...helpShowPromoModal);
@@ -673,8 +694,9 @@ class GhosteryDebugger {
 	 *
 	 * Open the Ghostery panel window in a new tab for automation testing. Uses
 	 * the current active tabID to populate panel data.
+	 * @param {string} mobile		Open the android panel
 	 */
-	openPanel = () => {
+	openPanel = (mobile) => {
 		chrome.tabs.query({
 			active: true
 		}, (tabs) => {
@@ -689,17 +711,28 @@ class GhosteryDebugger {
 					'Active tab not found',
 				]));
 			} else {
+				const android = (mobile === 'mobile') ? '_android' : '';
 				chrome.tabs.create({
-					url: chrome.runtime.getURL(`app/templates/panel.html?tabId=${tabs[0].id}`),
+					url: chrome.runtime.getURL(`app/templates/panel${android}.html?tabId=${tabs[0].id}`),
 					active: true
 				});
 			}
 		});
 	}
 
-	openAndroidPanel = () => {}
-
-	openIntroHub = () => {}
+	/**
+	 * @since 8.5.3
+	 *
+	 * Open the Ghostery Intro Hub in a new tab for automation testing
+	 * @param  {String} modal Trigger upgrade modal(s)
+	 */
+	openIntroHub = (modal = '') => {
+		const showModal = modal === 'modal';
+		chrome.tabs.create({
+			url: chrome.runtime.getURL(`./app/templates/hub.html?$justInstalled=true&pm=${showModal}`),
+			active: true
+		});
+	}
 
 	/**
 	 * TODO: Review / revise this
