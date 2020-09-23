@@ -59,8 +59,8 @@ class GhosteryDebugger {
 		this.settings._objectOutputStyle = OBJECT_OUTPUT_STYLE;
 		this.settings._toggleSettingHelper = (optOn, optOff, setting, requested) => {
 			if 		(typeof requested !== 'string')			this.settings[setting] = !this.settings[setting];
-			else if (requested?.toLowerCase() === optOn) 	this.settings[setting] = true;
-			else if (requested?.toLowerCase() === optOff) 	this.settings[setting] = false;
+			else if (requested.toLowerCase() === optOn) 	this.settings[setting] = true;
+			else if (requested.toLowerCase() === optOff) 	this.settings[setting] = false;
 			else 											this.settings[setting] = !this.settings[setting];
 		};
 
