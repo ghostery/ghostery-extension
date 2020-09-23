@@ -1119,7 +1119,7 @@ function setupBloomFilterABTest() {
 }
 
 /**
- * Configure A/B tests based on data fetched from the A/B servecr
+ * Configure A/B tests based on data fetched from the A/B server
  * @memberOf Background
  */
 function setupABTests() {
