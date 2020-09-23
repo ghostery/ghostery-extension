@@ -44,7 +44,7 @@ const OUTPUT_COLUMN_WIDTH = 40;
  *
  * @memberOf  BackgroundClasses
  */
-class GhosteryDebugger {
+class Debugger {
 	// ToC
 	// Search for these strings to quickly jump to their sections
 	// [[Output styling, formatting, and printing]]
@@ -97,7 +97,7 @@ class GhosteryDebugger {
 	 * @private
 	 * @since 8.5.3
 	 *
-	 *  `GhosteryDebugger._printToConsole` helper. Applies the provided styles
+	 *  `Debugger._printToConsole` helper. Applies the provided styles
 	 *  and prints the text argument.
 	 *
 	 * @param {String}	text		The string to output.
@@ -109,7 +109,7 @@ class GhosteryDebugger {
 		// eslint-disable-next-line no-console
 		console.log(
 			`%c${text.replace(style, '')}`,
-			GhosteryDebugger._outputStyles[style]
+			Debugger._outputStyles[style]
 		);
 	}
 
@@ -130,9 +130,9 @@ class GhosteryDebugger {
 		lines.forEach((line) => {
 			// eslint-disable-next-line no-console
 			if (typeof line === 'object')				console.dir(line);
-			else if (line.startsWith(CSS_MAINHEADER)) 	GhosteryDebugger._printFormatted(line, CSS_MAINHEADER);
-			else if (line.startsWith(CSS_SUBHEADER))	GhosteryDebugger._printFormatted(line, CSS_SUBHEADER);
-			else if (line.startsWith(CSS_HIGHLIGHT))	GhosteryDebugger._printFormatted(line, CSS_HIGHLIGHT);
+			else if (line.startsWith(CSS_MAINHEADER)) 	Debugger._printFormatted(line, CSS_MAINHEADER);
+			else if (line.startsWith(CSS_SUBHEADER))	Debugger._printFormatted(line, CSS_SUBHEADER);
+			else if (line.startsWith(CSS_HIGHLIGHT))	Debugger._printFormatted(line, CSS_HIGHLIGHT);
 			// eslint-disable-next-line no-console
 			else										console.log(line);
 		});
@@ -143,7 +143,7 @@ class GhosteryDebugger {
 	 * @since 8.5.3
 	 *
 	 * Takes an array whose elements are a combination of strings, two element string arrays, and objects
-	 * and processes it into an array ready for printing to the console by `GhosteryDebugger#_printToConsole`.
+	 * and processes it into an array ready for printing to the console by `Debugger#_printToConsole`.
 	 * String and object input array elements are passed through unaltered.
 	 * String array input array elements have their elements concatenated with padding to create columns.
 	 * Newlines are added at the beginning and the end.
@@ -480,7 +480,7 @@ class GhosteryDebugger {
 			helpSettingsShow,
 			helpSettingsToggleLogging,
 			helpSettingsToggleOutputStyle,
-		} = GhosteryDebugger;
+		} = Debugger;
 
 		const invalidArgumentError = [
 			`${CSS_MAINHEADER}'${fnName}' is not a GED function. Here are the valid ones:`,
@@ -529,7 +529,7 @@ class GhosteryDebugger {
 			_helpPromoMessages,
 			_printToConsole,
 			_typeset
-		} = GhosteryDebugger;
+		} = Debugger;
 
 		_printToConsole(
 			_typeset(
@@ -558,7 +558,7 @@ class GhosteryDebugger {
 	 */
 	fetchABTestsWithIr = (ir) => {
 		if (ir === undefined) {
-			GhosteryDebugger._printToConsole(GhosteryDebugger._typeset([
+			Debugger._printToConsole(Debugger._typeset([
 				`${CSS_SUBHEADER}Oops: required argument missing`,
 				'You must provide an integer number argument between 1 and 100 inclusive',
 			]));
@@ -566,7 +566,7 @@ class GhosteryDebugger {
 		}
 
 		if (typeof ir !== 'number') {
-			GhosteryDebugger._printToConsole(GhosteryDebugger._typeset([
+			Debugger._printToConsole(Debugger._typeset([
 				`${CSS_SUBHEADER}Oops: invalid argument type`,
 				'The argument must be an integer between 1 and 100 inclusive',
 			]));
@@ -574,7 +574,7 @@ class GhosteryDebugger {
 		}
 
 		if ((ir < 1) || (ir > 100)) {
-			GhosteryDebugger._printToConsole(GhosteryDebugger._typeset([
+			Debugger._printToConsole(Debugger._typeset([
 				`${CSS_SUBHEADER}Oops: invalid argument value`,
 				'The argument must be an integer >between 1 and 100 inclusive<',
 			]));
@@ -582,14 +582,14 @@ class GhosteryDebugger {
 		}
 
 		if (Math.floor(ir) !== ir) {
-			GhosteryDebugger._printToConsole(GhosteryDebugger._typeset([
+			Debugger._printToConsole(Debugger._typeset([
 				`${CSS_SUBHEADER}Oops: invalid argument value`,
 				'The argument must be an >integer< between 1 and 100 inclusive',
 			]));
 			return UP_REMINDER;
 		}
 
-		GhosteryDebugger._printToConsole(GhosteryDebugger._typeset([
+		Debugger._printToConsole(Debugger._typeset([
 			'We are about to make an async call to the A/B server. Results should appear below shortly:'
 		]));
 
@@ -606,7 +606,7 @@ class GhosteryDebugger {
 					output.push('The tests in memory were not updated, but here they are anyway just in case:');
 					this._push(abtest.getTests(), output);
 				}
-				GhosteryDebugger._printToConsole(GhosteryDebugger._typeset(output));
+				Debugger._printToConsole(Debugger._typeset(output));
 
 				return THANKS;
 			})
@@ -616,7 +616,7 @@ class GhosteryDebugger {
 				output.push('If this keeps happening, we would greatly appreciate hearing about it at support@ghostery.com');
 				output.push('The tests in memory were not updated, but here they are anyway just in case:');
 				this._push(abtest.getTests(), output);
-				GhosteryDebugger._printToConsole(GhosteryDebugger._typeset(output));
+				Debugger._printToConsole(Debugger._typeset(output));
 
 				return THANKS;
 			}));
@@ -633,7 +633,7 @@ class GhosteryDebugger {
 	 * @return {Promise|String}			The Promise for the call to the CMP server. Once the Promise resolves or rejects, it returns an ad / thank you message string.
 	 */
 	fetchCMPCampaigns = () => {
-		GhosteryDebugger._printToConsole(GhosteryDebugger._typeset([
+		Debugger._printToConsole(Debugger._typeset([
 			'We are about to make an async call to the CMP server. Results should appear below shortly:'
 		]));
 
@@ -656,7 +656,7 @@ class GhosteryDebugger {
 					this._push((getObjectSlice(globals, 'SESSION').val.CMP_DATA), output);
 				}
 
-				GhosteryDebugger._printToConsole(GhosteryDebugger._typeset(output));
+				Debugger._printToConsole(Debugger._typeset(output));
 
 				return THANKS;
 			})
@@ -667,7 +667,7 @@ class GhosteryDebugger {
 				output.push('The campaigns in memory were not updated, but here they are anyway just in case:');
 				this._push((getObjectSlice(globals, 'SESSION').val.CMP_DATA), output);
 
-				GhosteryDebugger._printToConsole(GhosteryDebugger._typeset(output));
+				Debugger._printToConsole(Debugger._typeset(output));
 
 				return THANKS;
 			})
@@ -680,7 +680,7 @@ class GhosteryDebugger {
 
 		output.push(`${CSS_SUBHEADER}These are all the A/B tests currently in memory:`);
 		this._push(tests, output);
-		GhosteryDebugger._printToConsole(GhosteryDebugger._typeset(output));
+		Debugger._printToConsole(Debugger._typeset(output));
 
 		return (THANKS);
 	}
@@ -701,12 +701,12 @@ class GhosteryDebugger {
 			active: true
 		}, (tabs) => {
 			if (chrome.runtime.lastError) {
-				GhosteryDebugger._printToConsole(GhosteryDebugger._typeset([
+				Debugger._printToConsole(Debugger._typeset([
 					`${CSS_SUBHEADER}Error fetching active tab:`,
 					`${chrome.runtime.lastError.message}`,
 				]));
 			} else if (tabs.length === 0) {
-				GhosteryDebugger._printToConsole(GhosteryDebugger._typeset([
+				Debugger._printToConsole(Debugger._typeset([
 					`${CSS_SUBHEADER}Error fetching active tab:`,
 					'Active tab not found',
 				]));
@@ -828,8 +828,8 @@ class GhosteryDebugger {
 
 		if (result === 'success') {
 			const { val: cappedModalType } = capitalize(modalType.toLowerCase());
-			GhosteryDebugger._printToConsole(
-				GhosteryDebugger._typeset([
+			Debugger._printToConsole(
+				Debugger._typeset([
 					`${CSS_SUBHEADER}Success!`,
 					`The ${cappedModalType} modal will trigger at the next opportunity`,
 				])
@@ -843,14 +843,14 @@ class GhosteryDebugger {
 				`${CSS_SUBHEADER}No dice`,
 				'That was not a valid argument. Here are the valid ones:',
 				'',
-				...GhosteryDebugger._assembleHelpStringArr('showPromoModal')
+				...Debugger._assembleHelpStringArr('showPromoModal')
 			];
-			GhosteryDebugger._printToConsole(GhosteryDebugger._typeset(noDice));
+			Debugger._printToConsole(Debugger._typeset(noDice));
 
 			return (THANKS);
 		}
 
-		GhosteryDebugger._printToConsole(GhosteryDebugger._typeset([
+		Debugger._printToConsole(Debugger._typeset([
 			'The function neither succeeded nor failed. If you have a minute to spare, we would greatly appreciate hearing about this likely bug at support@ghostery.com.',
 		]));
 
@@ -890,7 +890,7 @@ class GhosteryDebugger {
 
 		this._push(objSlice.val, output);
 
-		GhosteryDebugger._printToConsole(GhosteryDebugger._typeset(output));
+		Debugger._printToConsole(Debugger._typeset(output));
 
 		return (THANKS);
 	}
@@ -928,7 +928,7 @@ class GhosteryDebugger {
 				],
 			];
 
-			GhosteryDebugger._printToConsole(GhosteryDebugger._typeset(currentSettings));
+			Debugger._printToConsole(Debugger._typeset(currentSettings));
 
 			return (THANKS);
 		},
@@ -947,5 +947,4 @@ class GhosteryDebugger {
 	// END [[Settings Actions]] SECTION
 }
 
-const ghosteryDebugger = new GhosteryDebugger();
-export default ghosteryDebugger;
+export default new Debugger();
