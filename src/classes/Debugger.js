@@ -789,6 +789,7 @@ class Debugger {
 		});
 	}
 
+	// eslint-disable-next-line class-methods-use-this
 	getUserData() {
 		function _getUserCookies() {
 			return new Promise((resolve) => {
@@ -798,40 +799,40 @@ class Debugger {
 			});
 		}
 
-		function _getUser() {
-			return new Promise((resolve) => {
-				account.getUser().then(resolve).catch(resolve);
-			});
-		}
+		const _getUserSettings = () => new Promise(r => account.getUserSettings().finally(r));
 
-		function _getUserSettings() {
-			return new Promise((resolve) => {
-				account.getUserSettings().then(resolve).catch(resolve);
-			});
-		}
+		const _getUserSubscriptionData = () => new Promise(r => account.getUserSubscriptionData().finally(r));
 
-		function _getUserSubscriptionData() {
-			return new Promise((resolve) => {
-				account.getUserSubscriptionData().then(resolve).catch(resolve);
-			});
-		}
+		const _printError = (error) => {
+			const output = [];
 
-		return new Promise((resolve) => {
-			Promise.all([
-				_getUserCookies(),
-				_getUser(),
-				_getUserSettings(),
-				_getUserSubscriptionData(),
-			]).then(([userCookies, userData, syncedUserSettings, userSubscriptionData]) => {
-				this.user = {
-					userCookies,
-					userData,
-					syncedUserSettings,
-					userSubscriptionData,
-				};
-				resolve(this.user);
-			});
-		});
+			output.push(`${CSS_HIGHLIGHT}There was an error getting the user data:`);
+			this._push(error, output);
+
+			Debugger._printToConsole(Debugger._typeset(output));
+
+			return THANKS;
+		};
+
+		const _printUserData = ([userCookies, userData, syncedUserSettings, userSubscriptionData]) => {
+			this._getObjectSlice({
+				userCookies,
+				userData,
+				syncedUserSettings,
+				userSubscriptionData,
+			}, undefined, 'UserData');
+
+			return THANKS;
+		};
+
+		return Promise.all([
+			_getUserCookies(),
+			account.getUser(),
+			_getUserSettings(),
+			_getUserSubscriptionData(),
+		])
+			.then(data => _printUserData(data))
+			.catch(error => _printError(error));
 	}
 
 	showPromoModal = (modalType) => {
