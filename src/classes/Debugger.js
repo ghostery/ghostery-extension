@@ -200,15 +200,16 @@ class Debugger {
 	static _helpFunctionNames = {
 		fetchABTestsWithIr: 'ghostery.fetchABTestsWithIr()',
 		getABTests: 'ghostery.getABTests()',
+		getActiveTabInfo: 'ghostery.getActiveTabInfo()',
 		getConfData: 'ghostery.getConfData()',
 		getGlobals: 'ghostery.getGlobals()',
-		getActiveTabInfo: 'ghostery.getActiveTabInfo()',
-		showPromoModal: 'ghostery.showPromoModal()',
-		openPanel: 'ghostery.openPanel()',
+		getUserData: 'ghostery.getUserData()',
 		openIntroHub: 'ghostery.openIntroHub()',
-		settingsToggleOutputStyle: 'ghostery.settings.toggleOutputStyle()',
+		openPanel: 'ghostery.openPanel()',
+		showPromoModal: 'ghostery.showPromoModal()',
 		settingsShow: 'ghostery.settings.show()',
 		settingsToggleLogging: 'ghostery.settings.toggleLogging()',
+		settingsToggleOutputStyle: 'ghostery.settings.toggleOutputStyle()',
 	};
 
 	/**
@@ -232,20 +233,30 @@ class Debugger {
 	 * @access private
 	 * @since 8.5.3
 	 *
-	 * Brief descriptions of the debugger API methods displayed in the main help menu.
+	 * Brief descriptions of the debugger API main methods. Displayed in the main help menu.
 	 */
 	static _helpAvailableFunctions = [
 		[`${this._helpFunctionNames.fetchABTestsWithIr}`, 'Hit the A/B server endpoint with the supplied install random number'],
 		[`${this._helpFunctionNames.getABTests}`, 'Display what A/B tests have been fetched from the A/B test server'],
+		[`${this._helpFunctionNames.getActiveTabInfo}`, 'Shows TabInfo and FoundBugs data for any active tabs'],
 		[`${this._helpFunctionNames.getConfData}`, 'Show the current value of a config property or properties'],
 		[`${this._helpFunctionNames.getGlobals}`, 'Show the current value of a global property or properties'],
-		[`${this._helpFunctionNames.getActiveTabInfo}`, 'Shows TabInfo and FoundBugs data for any active tabs'],
-		[`${this._helpFunctionNames.showPromoModal}`, 'Show specified promo modal at the next opportunity'],
-		[`${this._helpFunctionNames.openPanel}`, 'Open the Ghostery panel window in a new tab for automation testing'],
+		[`${this._helpFunctionNames.getUserData}`, 'Show account data for the logged in user'],
 		[`${this._helpFunctionNames.openIntroHub}`, 'Open the Ghostery Intro Hub in a new tab for automation testing'],
-		[`${this._helpFunctionNames.settingsToggleOutputStyle}`, 'Change debugger method return value formatting'],
+		[`${this._helpFunctionNames.openPanel}`, 'Open the Ghostery panel window in a new tab for automation testing'],
+		[`${this._helpFunctionNames.showPromoModal}`, 'Show specified promo modal at the next opportunity'],
+	]
+
+	/**
+	 * @access private
+	 * @since 8.5.3
+	 *
+	 * Brief descriptions of the debugger API settings methods. Displayed in the main help menu.
+	 */
+	static _helpAvailableSettingsFunctions = [
 		[`${this._helpFunctionNames.settingsShow}`, 'Show the current debugger settings'],
 		[`${this._helpFunctionNames.settingsToggleLogging}`, 'Toggle all other debug logging on/off'],
+		[`${this._helpFunctionNames.settingsToggleOutputStyle}`, 'Change debugger method return value formatting'],
 	];
 
 	/**
@@ -259,6 +270,9 @@ class Debugger {
 		'',
 		`${CSS_SUBHEADER}Available functions:`,
 		...this._helpAvailableFunctions,
+		'',
+		`${CSS_SUBHEADER}Available settings functions:`,
+		...this._helpAvailableSettingsFunctions,
 	];
 
 	/**
@@ -296,6 +310,24 @@ class Debugger {
 		'',
 		[`${CSS_SUBHEADER}When called with...`, 'Returns...'],
 		['No argument or any arguments', 'The A/B test strings currently in memory'],
+	];
+
+	/**
+	 * @access private
+	 * @since 8.5.3
+	 *
+	 * The help text for the public `getActiveTabInfo()` method.
+	 * Displayed after calling ghostery.help('getActiveTabInfo').
+	 */
+	static helpGetActiveTabInfo = [
+		`${CSS_MAINHEADER}${this._helpFunctionNames.getActiveTabInfo}`,
+		'Display the current value(s) of an active tab property or properties',
+		'',
+		[`${CSS_SUBHEADER}When called with...`, 'Returns...'],
+		['No argument', 'The whole ActiveTabInfo object'],
+		['A property key string', 'An object with just that property'],
+		['', "Example: ghostery.getActiveTabInfo('activeTabIds | foundBugs | tabInfo')"],
+		['Anything else', 'The whole ActiveTabInfo object. Also returned if there are no matching results'],
 	];
 
 	/**
@@ -342,34 +374,32 @@ class Debugger {
 	 * @access private
 	 * @since 8.5.3
 	 *
-	 * The help text for the public `getActiveTabInfo()` method.
-	 * Displayed after calling ghostery.help('getActiveTabInfo').
+	 * The help text for the public `getUserData()` method.
+	 * Displayed after calling ghostery.help('getUserData').
 	 */
-	static helpGetActiveTabInfo = [
-		`${CSS_MAINHEADER}${this._helpFunctionNames.getActiveTabInfo}`,
-		'Display the current value(s) of an active tab property or properties',
+	static helpGetUserData = [
+		`${CSS_MAINHEADER}${this._helpFunctionNames.getUserData}`,
+		'Display account details for the logged-in user.',
+		'Returns an error message if no user is logged in.',
 		'',
 		[`${CSS_SUBHEADER}When called with...`, 'Returns...'],
-		['No argument', 'The whole ActiveTabInfo object'],
-		['A property key string', 'An object with just that property'],
-		['', "Example: ghostery.getActiveTabInfo('activeTabIds | foundBugs | tabInfo')"],
-		['Anything else', 'The whole ActiveTabInfo object. Also returned if there are no matching results'],
+		['No argument or any argument(s)', "The user's account detalis, subscription details, synced settings, and cookies"],
 	];
 
 	/**
 	 * @access private
 	 * @since 8.5.3
 	 *
-	 * The help text for the public `showPromoModal()` method.
-	 * Displayed after calling ghostery.help('showPromoModal').
+	 * The help text for the public `openIntroHub()` method.
+	 * Displayed after calling ghostery.help('openIntroHub').
 	 */
-	static helpShowPromoModal = [
-		`${CSS_MAINHEADER}${this._helpFunctionNames.showPromoModal}`,
-		'Force the specified promo modal to display at the next opportunity.',
-		'That may be, for example, the next time you open the extension panel.',
-		'Resets after one display. If you need to see the modal again, call this function again',
+	static helpOpenIntroHub = [
+		`${CSS_MAINHEADER}${this._helpFunctionNames.openIntroHub}`,
+		'Open the Ghostery Intro Hub in a new tab for automation testing.',
 		'',
-		[`${CSS_SUBHEADER}When called with...`, 'Does...'],
+		[`${CSS_SUBHEADER}When called with...`, 'Opens...'],
+		['No argument', 'The hub on the default route'],
+		['modal', 'The hub with any promo modals displayed'],
 	];
 
 	/**
@@ -393,16 +423,16 @@ class Debugger {
 	 * @access private
 	 * @since 8.5.3
 	 *
-	 * The help text for the public `openIntroHub()` method.
-	 * Displayed after calling ghostery.help('openIntroHub').
+	 * The help text for the public `showPromoModal()` method.
+	 * Displayed after calling ghostery.help('showPromoModal').
 	 */
-	static helpOpenInroHub = [
-		`${CSS_MAINHEADER}${this._helpFunctionNames.openIntroHub}`,
-		'Open the Ghostery Intro Hub in a new tab for automation testing.',
+	static helpShowPromoModal = [
+		`${CSS_MAINHEADER}${this._helpFunctionNames.showPromoModal}`,
+		'Force the specified promo modal to display at the next opportunity.',
+		'That may be, for example, the next time you open the extension panel.',
+		'Resets after one display. If you need to see the modal again, call this function again',
 		'',
-		[`${CSS_SUBHEADER}When called with...`, 'Opens...'],
-		['No argument', 'The hub on the default route'],
-		['modal', 'The hub with any promo modals displayed'],
+		[`${CSS_SUBHEADER}When called with...`, 'Does...'],
 	];
 
 	/**
@@ -492,12 +522,13 @@ class Debugger {
 			_helpAvailableFunctions,
 			helpFetchABTestsWithIr,
 			helpGetABTests,
+			helpGetActiveTabInfo,
 			helpGetConfData,
 			helpGetGlobals,
-			helpGetActiveTabInfo,
-			helpShowPromoModal,
+			helpGetUserData,
+			helpOpenIntroHub,
 			helpOpenPanel,
-			helpOpenInroHub,
+			helpShowPromoModal,
 			helpSettingsShow,
 			helpSettingsToggleLogging,
 			helpSettingsToggleOutputStyle,
@@ -512,13 +543,14 @@ class Debugger {
 		const helpStringArr = [];
 		const eeFnName = (fnName && typeof fnName === 'string' && fnName.toLowerCase()) || undefined;
 		if 		(fnName === undefined) 				helpStringArr.push(..._helpMainMenu);
+		else if (eeFnName === 'fetchabtestswithir')	helpStringArr.push(...helpFetchABTestsWithIr);
 		else if (eeFnName === 'getabtests') 		helpStringArr.push(...helpGetABTests);
+		else if (eeFnName === 'getactivetabinfo')	helpStringArr.push(...helpGetActiveTabInfo);
 		else if (eeFnName === 'getconfdata')		helpStringArr.push(...helpGetConfData);
 		else if (eeFnName === 'getglobals')			helpStringArr.push(...helpGetGlobals);
-		else if (eeFnName === 'getactivetabinfo')	helpStringArr.push(...helpGetActiveTabInfo);
+		else if (eeFnName === 'getuserdata')		helpStringArr.push(...helpGetUserData);
+		else if (eeFnName === 'openintrohub')		helpStringArr.push(...helpOpenIntroHub);
 		else if (eeFnName === 'openpanel')			helpStringArr.push(...helpOpenPanel);
-		else if (eeFnName === 'openintrohub')		helpStringArr.push(...helpOpenInroHub);
-		else if (eeFnName === 'fetchabtestswithir')	helpStringArr.push(...helpFetchABTestsWithIr);
 		else if (eeFnName === 'showpromomodal') {
 			helpStringArr.push(...helpShowPromoModal);
 			const activeModalTypes = PromoModals.getActiveModalTypes();
