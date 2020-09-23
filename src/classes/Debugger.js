@@ -71,7 +71,7 @@ class Debugger {
 			const { domain, name } = cookie;
 			if (domain.includes(globals.GHOSTERY_ROOT_DOMAIN)) {
 				const type = `Cookie ${name} ${removed ? 'Removed' : 'Added'}`;
-				this._addAccountEvent(type, cause, cookie);
+				this.addAccountEvent(type, cause, cookie);
 			}
 		};
 
@@ -867,6 +867,17 @@ class Debugger {
 			return THANKS;
 		};
 
+		const _printAccountEvents = () => {
+			const output = [];
+			
+			output.push("Here are the account events we've recorded during this session:");
+			this._push(Object.fromEntries(this.accountEvents), output);
+
+			Debugger._printToConsole(Debugger._typeset(output));
+
+			return THANKS;
+		};
+
 		return Promise.all([
 			_getUserCookies(),
 			account.getUser(),
@@ -874,7 +885,8 @@ class Debugger {
 			_getUserSubscriptionData(),
 		])
 			.then(data => _printUserData(data))
-			.catch(error => _printError(error));
+			.catch(error => _printError(error))
+			.finally(() => _printAccountEvents());
 	}
 
 	showPromoModal = (modalType) => {
@@ -911,17 +923,18 @@ class Debugger {
 		return ('Welcome to the Twilight Zone');
 	}
 
-	// [[Main Actions]] private helpers
-	_addAccountEvent(type, event, details) {
+	// [[Main Actions]] public wrt to other background code, but intentionally not fully exposed to the console
+	addAccountEvent(type, event, details) {
 		const timestamp = new Date();
-		const pushObj = { type, event, timestamp };
+		const pushObj = { type, event };
 		if (details) {
 			pushObj.details = details;
 		}
 
-		this.accountEvents.push(pushObj);
+		this.accountEvents.push([timestamp, pushObj]);
 	}
 
+	// [[Main Actions]] private helpers
 	_getObjectSlice(obj, slice, objStr) {
 		const objSlice = getObjectSlice(obj, slice);
 		const output = [];
