@@ -68,7 +68,7 @@ export function alwaysLog(...args) {
 /**
  * Custom Debug Logger.
  * Unliked alwaysLog, only logs if logging is turned on
- * through the manifest and/or GhosteryDebug
+ * through the manifest and/or GhosteryDebugger
  * @memberOf BackgroundUtils
  *
  * @param  {array} args 	ES6 Rest parameter
