@@ -1707,11 +1707,11 @@ function initializeGhosteryModules() {
 			// auto-fetch from CMP
 			cmp.fetchCMPData();
 
-			if (!IS_CLIQZ) {
+			if (!IS_CLIQZ && conf.enable_abtests) {
 				// auto-fetch human web offer
 				abtest.fetch()
 					.then(() => {
-						if (conf.enable_abtests) setupABTests();
+						setupABTests();
 					})
 					.catch(() => {
 						log('Unable to reach abtest server');
