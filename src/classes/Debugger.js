@@ -771,6 +771,7 @@ class Debugger {
 				});
 			}
 		});
+		return THANKS;
 	}
 
 	/**
@@ -785,6 +786,7 @@ class Debugger {
 			url: chrome.runtime.getURL(`./app/templates/hub.html?$justInstalled=true&pm=${showModal}`),
 			active: true
 		});
+		return THANKS;
 	}
 
 	/**
@@ -819,6 +821,7 @@ class Debugger {
 				}, slice, 'ActiveTabInfo');
 			}
 		});
+		return THANKS;
 	}
 
 	/**
@@ -831,7 +834,6 @@ class Debugger {
 	 *
 	 * @return {Promise}		The Promise for the calls to the account server.
 	 */
-	// eslint-disable-next-line class-methods-use-this
 	getUserData = () => {
 		function _getUserCookies() {
 			return new Promise((resolve) => {
