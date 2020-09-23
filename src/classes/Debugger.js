@@ -242,7 +242,7 @@ class Debugger {
 		[`${this._helpFunctionNames.getActiveTabInfo}`, 'Shows TabInfo and FoundBugs data for any active tabs'],
 		[`${this._helpFunctionNames.getConfData}`, 'Show the current value of a config property or properties'],
 		[`${this._helpFunctionNames.getGlobals}`, 'Show the current value of a global property or properties'],
-		[`${this._helpFunctionNames.getUserData}`, 'Show account data for the logged in user'],
+		[`${this._helpFunctionNames.getUserData}`, 'Show account data for the logged in user and account event history'],
 		[`${this._helpFunctionNames.openIntroHub}`, 'Open the Ghostery Intro Hub in a new tab for automation testing'],
 		[`${this._helpFunctionNames.openPanel}`, 'Open the Ghostery panel window in a new tab for automation testing'],
 		[`${this._helpFunctionNames.showPromoModal}`, 'Show specified promo modal at the next opportunity'],
@@ -380,11 +380,12 @@ class Debugger {
 	 */
 	static helpGetUserData = [
 		`${CSS_MAINHEADER}${this._helpFunctionNames.getUserData}`,
-		'Display account details for the logged-in user.',
-		'Returns an error message if no user is logged in.',
+		'Display account details for the logged-in user, or an error message if no user is logged in',
+		`Also display up to ${ACCOUNT_EVENTS_CAP} of the most recent account events`,
 		'',
 		[`${CSS_SUBHEADER}When called with...`, 'Returns...'],
-		['No argument or any argument(s)', "The user's account detalis, subscription details, synced settings, and cookies"],
+		['No/any argument(s)', "Account event history and the user's account details,"],
+		['', 'subscription details, synced settings, and cookies'],
 	];
 
 	/**
