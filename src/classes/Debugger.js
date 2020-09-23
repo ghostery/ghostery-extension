@@ -823,17 +823,6 @@ class GhosteryDebugger {
 		});
 	}
 
-	getDebugInfo() {
-		return new Promise((resolve) => {
-			Promise.all([
-				this.getTabInfo(),
-				this.getUserData(),
-			]).then(() => {
-				resolve(this);
-			});
-		});
-	}
-
 	showPromoModal = (modalType) => {
 		const result = PromoModals.showOnce(modalType);
 
