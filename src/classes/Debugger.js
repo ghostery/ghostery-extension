@@ -953,6 +953,17 @@ class Debugger {
 	}
 
 	// [[Main Actions]] public wrt to other background code, but intentionally not fully exposed to the console
+	/**
+	 * @since 8.5.3
+	 *
+	 * Adds an entry to the account event log maintained by the Debugger instance,
+	 * adding a timestamp to the provided event details.
+	 * Not intended for use from the command line.
+	 *
+	 * @param {String}	type		The event type. For example, 'migrate'. User defined - any value is valid.
+	 * @param {String}	event		What happened. For example, 'migrate start'. User defined.
+	 * @param {*}		details		Additional details. For example, a cookie object associated with a cookie change event.
+	 */
 	addAccountEvent(type, event, details) {
 		const timestamp = new Date();
 		const pushObj = { type, event };
