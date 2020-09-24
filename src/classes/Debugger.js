@@ -1019,6 +1019,16 @@ class Debugger {
 		return (THANKS);
 	}
 
+	/**
+	 * @private
+	 * @since 8.5.3
+	 *
+	 * Pushes the supplied object to the supplied array unaltered or JSON stringified depending on
+	 * the Debugger instance's current object output style setting. Part of the output formatting pipeline.
+	 *
+	 * @param {Object} obj		The object to push to the array.
+	 * @param {Array} arr		The array to push the object to.
+	 */
 	_push(obj, arr) {
 		if (this.settings._objectOutputStyle === OBJECT_OUTPUT_STYLE) {
 			arr.push(obj);
