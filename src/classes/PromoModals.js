@@ -29,22 +29,60 @@ const INSIGHTS = 'insights';
 const PLUS = 'plus';
 const PROMO_MODAL_LAST_SEEN = 'promo_modal_last_seen';
 
+const PRIORITY_ORDERED_ACTIVE_MODALS = [INSIGHTS, PREMIUM];
+
 /**
  * Static 'namespace' class for handling the business logic for the display of promo modals (Premium, Insights, etc...)
  * @memberOf  BackgroundClasses
  */
 class PromoModals {
 	/**
+	 * Tracks which promo modal, if any, should be FORCED to trigger
+	 * at moments when a promo modal MIGHT trigger.
+	 * Originally intended to facilitate QA of modal UI
+	 * @type {string}
+	 */
+	static forcedModalType = '';
+
+	/**
+	 * Specify a modal type that should be forced to trigger at the next opportunity
+	 * Originally added to facilitate modal UI QA
+	 * @param 	{String}	modalType		The modal type to trigger
+	 * @return	{String}					Either 'success' or 'failure'
+	 */
+	static showOnce(modalType) {
+		if (
+			modalType
+			&& typeof modalType === 'string'
+			&& PRIORITY_ORDERED_ACTIVE_MODALS.includes(modalType.toLowerCase())
+		) {
+			PromoModals.forcedModalType = modalType;
+			return 'success';
+		}
+
+		return 'failure';
+	}
+
+	static getActiveModalTypes() {
+		return PRIORITY_ORDERED_ACTIVE_MODALS;
+	}
+
+	/**
 	 * Determine if a modal should be shown.  Called from PanelData
 	 * when the panel is opened.
 	 *
-	 * @return {string} Type of promo to show
+	 * @return {String|null} Type of promo to show, or null if we should not show a promo
 	 */
 	static whichPromoModalShouldWeDisplay() {
+		if (PRIORITY_ORDERED_ACTIVE_MODALS.includes(PromoModals.forcedModalType)) {
+			const type = PromoModals.forcedModalType;
+			PromoModals.forcedModalType = '';
+			return type;
+		}
+
 		// The order is important
-		// Insights takes priority over Premium
-		if (this._isTimeForAPromo(INSIGHTS)) return INSIGHTS;
-		if (this._isTimeForAPromo(PREMIUM)) return PREMIUM;
+		const promoType = PRIORITY_ORDERED_ACTIVE_MODALS.find(poam => this._isTimeForAPromo(poam));
+		if (promoType !== undefined) return promoType;
 		return null;
 	}
 
