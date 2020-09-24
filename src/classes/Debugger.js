@@ -570,7 +570,7 @@ class Debugger {
 	 * Prints general and function-specific help output. Part of the public CLI.
 	 *
 	 * @param	{String} [fnName]	The name of the function for which help output was requested, if any.
-	 * @return 	{String} 			An ad / thank you message (printed to the console as the last line of output).
+	 * @return 	{String} 			An ad or thank you message (printed to the console as the last line of output).
 	 */
 	help = (fnName) => {
 		const {
@@ -600,10 +600,8 @@ class Debugger {
 	 * or an error if the call did not work, or no argument was supplied, or an invalid argument was supplied.
 	 * Part of the public CLI.
 	 *
-	 * @async
-	 *
 	 * @param 	{Number} ir			The ir value to use. Should be an integer between 1 and 100 inclusive.
-	 * @return 	{Promise|String}	Returns a tip string if the argument was missing or invalid. Otherwise, returns the Promise for the call to the A/B server. This Promise, once it resolves or rejects, returns an ad or thank you message.
+	 * @return 	{Promise|String}	Returns a tip string if the argument was missing or invalid. Otherwise, returns the Promise for the call to the A/B server. This Promise, once it resolves or rejects, returns a thank you message.
 	 */
 	fetchABTestsWithIr = (ir) => {
 		if (ir === undefined) {
@@ -677,9 +675,7 @@ class Debugger {
 	 * Make a request to the CMP server for the most up-to-date campaigns info and print the result to the console,
 	 * or an error if something went wrong with the request. Part of the public API.
 	 *
-	 * @async
-	 *
-	 * @return {Promise|String}		The Promise for the call to the CMP server. Once the Promise resolves or rejects, it returns an ad / thank you message string.
+	 * @return {Promise|String}		The Promise for the call to the CMP server. Once the Promise resolves or rejects, it returns a thank you message.
 	 */
 	fetchCMPCampaigns = () => {
 		Debugger._printToConsole(Debugger._typeset([
@@ -728,7 +724,7 @@ class Debugger {
 	 *
 	 * Print the AB tests currently in memory.
 	 *
-	 * @return {String}		An ad / thank you message string.
+	 * @return {String}		A thank you message.
 	 */
 	getABTests = () => {
 		const output = [];
@@ -747,7 +743,7 @@ class Debugger {
 	 * Print the requested conf value or values (from ConfData).
 	 *
 	 * @param	{String|RegExp} [slice]		A string property key or a regexp literal intended to match a subset of properties.
-	 * @return 	{String}					An ad / thank you message string.
+	 * @return 	{String}					A thank you message.
 	 */
 	getConfData = slice => this._getObjectSlice(confData, slice, 'config');
 
@@ -757,7 +753,7 @@ class Debugger {
 	 * Print the requested global value or values (from Globals).
 	 *
 	 * @param	{String|RegExp} [slice]		A string property key or a regexp literal intended to match a subset of properties.
-	 * @return 	{String}					An ad / thank you message string.
+	 * @return 	{String}					A thank you message.
 	 */
 	getGlobals = slice => this._getObjectSlice(globals, slice, 'globals');
 
@@ -768,7 +764,7 @@ class Debugger {
 	 * the current active tabID to populate panel data.
 	 *
 	 * @param 	{String} [mobile]		Open the Android panel if value is 'mobile'.
-	 * @return 	{String}				An ad / thank you message string.
+	 * @return 	{String}				A thank you message.
 	 */
 	openPanel = (mobile) => {
 		chrome.tabs.query({
@@ -800,8 +796,8 @@ class Debugger {
 	 *
 	 * Open the Ghostery Intro Hub in a new tab for automation testing.
 	 *
-	 * @param  	{String} [modal] 		Trigger upgrade modal(s) in addition to opening the hub if the value is 'modal'.
-	 * @return 	{String}				An ad / thank you message string.
+	 * @param  	{String} [modal=''] 	Trigger upgrade modal(s) in addition to opening the hub if the value is 'modal'.
+	 * @return 	{String}				A thank you message.
 	 */
 	openIntroHub = (modal = '') => {
 		const showModal = modal.toLowerCase() === 'modal';
@@ -815,8 +811,10 @@ class Debugger {
 	/**
 	 * @since 8.5.3
 	 *
-	 * Get all info for the active tab(s), including TabInfo, FoundBugs and active tab ids
-	 * @param  {String} slice Limit the debugger output to a particular slice of the activeTabInfo object
+	 * Get all info for the active tab(s), including TabInfo, FoundBugs and active tab IDs.
+	 *
+	 * @param  	{String|RegExp} [slice]		Limit the debugger output to a particular slice of the activeTabInfo object.
+	 * @return 	{String}					A thank you message.
 	 */
 	getActiveTabInfo = (slice) => {
 		chrome.tabs.query({
@@ -851,11 +849,9 @@ class Debugger {
 	 * @since 8.5.3
 	 *
 	 * Print the logged in user's account information, settings, and subscription data to the console
-	 * (or an error message if no user is logged in).
+	 * (or an error message if no user is logged in). Also print a log of account events.
 	 *
-	 * @async
-	 *
-	 * @return {Promise}		The Promise for the calls to the account server.
+	 * @return {Promise}		The Promise for the calls to the account server. When the Promise fulfills, it returns a thank you message.
 	 */
 	getUserData = () => {
 		function _getUserCookies() {
@@ -914,6 +910,14 @@ class Debugger {
 			.finally(() => _printAccountEvents());
 	}
 
+	/**
+	 * @since 8.5.3
+	 *
+	 * Force the specified promo modal to trigger once, at the next opportunity.
+	 *
+	 * @param 	{String} modalType		The modal to trigger. The help output for this function shows currently valid values, which may vary over time as modals are added and removed. Valid values are also printed if an invalid one is supplied.
+	 * @return 	{String}				A thank you message.
+	 */
 	showPromoModal = (modalType) => {
 		const result = PromoModals.showOnce(modalType);
 
