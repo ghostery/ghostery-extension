@@ -947,6 +947,9 @@
 	"settings_allow_offers": {
 		"message": "Participating in Ghostery Rewards"
 	},
+  	"settings_allow_abtests": {
+	  	"message": "Participating in A/B Tests"
+	},
 	"settings_signin_create_header": {
 		"message": "Sign In / Create Account"
 	},
@@ -1036,6 +1039,9 @@
 	},
 	"settings_offers_tooltip": {
 		"message": "Ghostery Rewards is a private-by-design feature that delivers you discounts and special offers from our partner companies as you browse."
+	},
+  	"settings_abtests_tooltip": {
+	  	"message": "Participating in randomized A/B tests helps Ghostery understand which version of a new layout or feature users like you prefer."
 	},
 	"settings_opt_in": {
 		"message": "Opt In / Out"
