@@ -1085,20 +1085,50 @@ class Debugger {
 				return (THANKS);
 			},
 
+			/**
+			 * @since 8.5.3
+			 *
+			 * Toggle the logging setting, or set to optional specific value.
+			 * Prints all settings with the updated logging setting highlighted.
+			 *
+			 * @param 	{String} [newValue]		Explicitly turns logging 'on' or 'off', if provided.
+			 * @return 	{String}				A thank you message.
+			 */
 			toggleLogging: (newValue) => {
-				this._toggleSettingsHelper('on', 'off', '_isLog', newValue);
+				this._toggleSetting('on', 'off', '_isLog', newValue);
 				activateLog(this.settings._isLog);
 				return (this.settings.show('logging'));
 			},
 
+			/**
+			 * @since 8.5.3
+			 *
+			 * Toggle the output style setting, or set to optional specific value.
+			 * Prints all settings with the updated output style setting highlighted.
+			 *
+			 * @param 	{String} [newValue]		Explicitly sets output style to 'object' or 'string', if provided.
+			 * @return 	{String}				A thank you message.
+			 */
 			toggleOutputStyle: (newValue) => {
-				this._toggleSettingsHelper('object', 'string', '_objectOutputStyle', newValue);
+				this._toggleSetting('object', 'string', '_objectOutputStyle', newValue);
 				return (this.settings.show('outputStyle'));
 			},
 		});
 	})()
 
-	_toggleSettingsHelper(optOn, optOff, setting, requested) {
+	/**
+	 * @private
+	 * @since 8.5.3
+	 *
+	 * Toggle the requested debugger setting, or set it to the optional specific requested value.
+	 * Helper abstraction used by the public CLI's settings toggle methods.
+	 *
+	 * @param 	{String} optOn			The 'activate option' string.
+	 * @param	{String} optOff			The 'deactivate option' string.
+	 * @param	{String} setting		The debugger setting to adjust.
+	 * @param	{String} [requested]	A specific value to set the option to. Used if it matches either the optOn or the optOff value.
+	 */
+	_toggleSetting(optOn, optOff, setting, requested) {
 		if 		(typeof requested !== 'string')			this.settings[setting] = !this.settings[setting];
 		else if (requested.toLowerCase() === optOn) 	this.settings[setting] = true;
 		else if (requested.toLowerCase() === optOff) 	this.settings[setting] = false;
