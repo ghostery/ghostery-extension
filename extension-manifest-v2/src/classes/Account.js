@@ -22,6 +22,7 @@ import conf from './Conf';
 import dispatcher from './Dispatcher';
 import { log } from '../utils/common';
 import Api from '../utils/api';
+import ghosteryDebugger from './Debugger';
 
 const api = new Api();
 const {
@@ -83,6 +84,7 @@ class Account {
 			if (res.status >= 400) {
 				return res.json();
 			}
+			ghosteryDebugger.addAccountEvent('login', 'cookie set by fetch POST');
 			this._getUserIDFromCookie().then((userID) => {
 				this._setAccountInfo(userID);
 				this.getUserSubscriptionData();
@@ -103,6 +105,7 @@ class Account {
 			credentials: 'include',
 		}).then((res) => {
 			if (res.status >= 400) {
+				ghosteryDebugger.addAccountEvent('register', 'cookie set by fetch POST');
 				return res.json();
 			}
 			this._getUserIDFromCookie().then((userID) => {
@@ -124,7 +127,10 @@ class Account {
 					credentials: 'include',
 					headers: { 'X-CSRF-Token': cookie.value },
 				}).then((res) => {
-					if (res.status < 400) { return resolve(); }
+					if (res.status < 400) {
+						ghosteryDebugger.addAccountEvent('logout', 'cookie set by fetch POST');
+						return resolve();
+					}
 					return res.json().then(json => reject(json));
 				}).catch(err => reject(err));
 			});
@@ -254,15 +260,18 @@ class Account {
 
 	migrate = () => (
 		new Promise((resolve) => {
+			ghosteryDebugger.addAccountEvent('migrate', 'migrate start');
 			const legacyLoginInfoKey = 'login_info';
 			chrome.storage.local.get(legacyLoginInfoKey, (items) => {
 				if (chrome.runtime.lastError) {
+					ghosteryDebugger.addAccountEvent('migrate', 'runtime error');
 					resolve(new Error(chrome.runtime.lastError));
 					return;
 				}
 
 				const { login_info } = items;
 				if (!items || !login_info) {
+					ghosteryDebugger.addAccountEvent('migrate', 'no items found');
 					resolve();
 					return;
 				}
@@ -270,6 +279,7 @@ class Account {
 				// ensure we have all the necessary info
 				const { decoded_user_token, user_token } = login_info;
 				if (!decoded_user_token || !user_token) {
+					ghosteryDebugger.addAccountEvent('migrate', 'found items, not enough info I');
 					chrome.storage.local.remove(legacyLoginInfoKey, () => resolve());
 					return;
 				}
@@ -277,6 +287,7 @@ class Account {
 					UserId, csrf_token, RefreshToken, exp
 				} = decoded_user_token;
 				if (!UserId || !csrf_token || !RefreshToken || !exp) {
+					ghosteryDebugger.addAccountEvent('migrate', 'found items, not enough info II');
 					chrome.storage.local.remove(legacyLoginInfoKey, () => resolve());
 					return;
 				}
@@ -311,8 +322,10 @@ class Account {
 					// login
 					this._setAccountInfo(UserId);
 					this.getUserSubscriptionData();
+					ghosteryDebugger.addAccountEvent('migrate', 'remove legacy items');
 					chrome.storage.local.remove(legacyLoginInfoKey, () => resolve());
 				}).catch((err) => {
+					ghosteryDebugger.addAccountEvent('migrate', 'cookies set error');
 					resolve(err);
 				});
 			});
