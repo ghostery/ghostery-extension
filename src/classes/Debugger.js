@@ -1039,40 +1039,64 @@ class Debugger {
 	// END [[Main Actions]] SECTION
 
 	// START [[Settings Actions]] SECTION
-	settings = {
-		show: (updated) => {
-			const updatedOrCurrent = (updated === 'logging' || updated === 'outputStyle') ? 'Updated' : 'Current';
-			const potentialLoggingHighlight = (updated === 'logging') ? CSS_HIGHLIGHT : '';
-			const potentialOutputStyleHighlight = (updated === 'outputStyle') ? CSS_HIGHLIGHT : '';
+	/**
+	 * @since 8.5.3
+	 *
+	 * Public CLI methods relating to debugger settings.
+	 *
+	 * @namespace
+	 * @property {Function} show				- Print the current debugger settings.
+	 * @property {Function} toggleLogging		- Toggle logging on and off. Overrides manifest debug setting.
+	 * @property {Function} toggleOutputStyle	- Toggle object output style between 'object' and 'string'.
+	 *
+	 * @type {{toggleLogging: function(*=): string, show: function(*): string, toggleOutputStyle: function(*=): string}}
+	 */
+	// The closure tricks JSDoc into documenting the inner functions as expected.
+	// eslint-disable-next-line arrow-body-style
+	settings = (() => {
+		return ({
+			/**
+			 * @since 8.5.3
+			 *
+			 * Prints the current debugger settings.
+			 *
+			 * @param 	{String} [_updated]		A setting to highlight because it was just updated. Used internally by the methods that update settings and not intended for use in the public CLI.
+			 * @return 	{String}				A thank you message.
+			 */
+			show: (_updated) => {
+				const _updatedOrCurrent = (_updated === 'logging' || _updated === 'outputStyle') ? 'Updated' : 'Current';
+				const potentialLoggingHighlight = (_updated === 'logging') ? CSS_HIGHLIGHT : '';
+				const potentialOutputStyleHighlight = (_updated === 'outputStyle') ? CSS_HIGHLIGHT : '';
 
-			const currentSettings = [
-				`${CSS_MAINHEADER}${updatedOrCurrent} Settings`,
-				[
-					`${potentialLoggingHighlight}Logging`,
-					`${this.settings._isLog ? 'On' : 'Off'}`
-				],
-				[
-					`${potentialOutputStyleHighlight}Object Output Style`,
-					`${this.settings._objectOutputStyle === OBJECT_OUTPUT_STYLE ? 'Object' : 'String'}`
-				],
-			];
+				const currentSettings = [
+					`${CSS_MAINHEADER}${_updatedOrCurrent} Settings`,
+					[
+						`${potentialLoggingHighlight}Logging`,
+						`${this.settings._isLog ? 'On' : 'Off'}`
+					],
+					[
+						`${potentialOutputStyleHighlight}Object Output Style`,
+						`${this.settings._objectOutputStyle === OBJECT_OUTPUT_STYLE ? 'Object' : 'String'}`
+					],
+				];
 
-			Debugger._printToConsole(Debugger._typeset(currentSettings));
+				Debugger._printToConsole(Debugger._typeset(currentSettings));
 
-			return (THANKS);
-		},
+				return (THANKS);
+			},
 
-		toggleLogging: (newValue) => {
-			this._toggleSettingsHelper('on', 'off', '_isLog', newValue);
-			activateLog(this.settings._isLog);
-			return (this.settings.show('logging'));
-		},
+			toggleLogging: (newValue) => {
+				this._toggleSettingsHelper('on', 'off', '_isLog', newValue);
+				activateLog(this.settings._isLog);
+				return (this.settings.show('logging'));
+			},
 
-		toggleOutputStyle: (newValue) => {
-			this._toggleSettingsHelper('object', 'string', '_objectOutputStyle', newValue);
-			return (this.settings.show('outputStyle'));
-		},
-	}
+			toggleOutputStyle: (newValue) => {
+				this._toggleSettingsHelper('object', 'string', '_objectOutputStyle', newValue);
+				return (this.settings.show('outputStyle'));
+			},
+		});
+	})()
 
 	_toggleSettingsHelper(optOn, optOff, setting, requested) {
 		if 		(typeof requested !== 'string')			this.settings[setting] = !this.settings[setting];
