@@ -862,9 +862,9 @@ class Debugger {
 			});
 		}
 
-		const _getUserSettings = () => new Promise(r => account.getUserSettings().finally(r));
+		const _getUserSettings = () => new Promise(r => account.getUserSettings().catch(r).then(r));
 
-		const _getUserSubscriptionData = () => new Promise(r => account.getUserSubscriptionData().finally(r));
+		const _getUserSubscriptionData = () => new Promise(r => account.getUserSubscriptionData().catch(r).then(r));
 
 		const _printError = (error) => {
 			const output = [];
