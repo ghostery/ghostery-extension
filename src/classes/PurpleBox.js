@@ -46,7 +46,8 @@ class PurpleBox {
 		if (!conf.show_alert ||
 			globals.SESSION.paused_blocking ||
 			(conf.hide_alert_trusted && !!Policy.checkSiteWhitelist(tab.url)) ||
-			!tab || tab.purplebox || tab.path.includes('_/chrome/newtab') || tab.protocol === 'about' || globals.EXCLUDES.includes(tab.host)) {
+			!tab || tab.purplebox || tab.path.includes('_/chrome/newtab') || tab.protocol === 'about' || globals.EXCLUDES.includes(tab.host) ||
+			globals.BROWSER_INFO.os === 'android') {
 			return Promise.resolve(false);
 		}
 
@@ -135,7 +136,7 @@ class PurpleBox {
 	}
 
 	/**
-	 * Update the purple box with new bugs. Called from 'processBug'
+	 * Update the purple box with new bugs. Called from EventHandlers
 	 * @param  {number} 	tab_id		tab id
 	 * @param  {number} 	app_id		tracker id
 	 */
@@ -143,7 +144,7 @@ class PurpleBox {
 		const tab = tabInfo.getTabInfo(tab_id);
 		const apps = foundBugs.getApps(tab_id, true, tab.url, app_id);
 		// prefetching and purplebox are already checked in background.js
-		if (!apps || apps.length === 0 || globals.EXCLUDES.includes(tab.host)) {
+		if (!apps || apps.length === 0 || globals.EXCLUDES.includes(tab.host) || globals.BROWSER_INFO.os === 'android') {
 			return false;
 		}
 

@@ -17,6 +17,7 @@
 import { debounce, every, size } from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
 import cliqz, { HUMANWEB_MODULE, HPN_MODULE } from './classes/Cliqz';
+import ghosteryDebugger from './classes/Debugger';
 // object classes
 import Events from './classes/EventHandlers';
 import Policy from './classes/Policy';
@@ -52,6 +53,9 @@ import { sendCliqzModuleCounts } from './utils/cliqzModulesData';
 // For debug purposes, provide Access to the internals of `browser-core`
 // module from Developer Tools Console.
 window.CLIQZ = cliqz;
+
+// For debug purposes, provide access to Ghostery's internal data.
+window.ghostery = ghosteryDebugger;
 
 // class instantiation
 const events = new Events();
@@ -1221,7 +1225,7 @@ function initializeDispatcher() {
 }
 
 /**
- * WebRequest pipeline initialisation: find which Cliqz modules are enabled,
+ * WebRequest pipeline initialization: find which Cliqz modules are enabled,
  * add their handlers, then put Ghostery event handlers before them all.
  * If Cliqz modules are subsequently enabled, their event handlers will always
  * be added after Ghostery's.
@@ -1775,6 +1779,7 @@ function init() {
 			account.migrate()
 				.then(() => {
 					if (conf.account !== null) {
+						ghosteryDebugger.addAccountEvent('app started', 'signed in', conf.account);
 						return account.getUser()
 							.then(account.getUserSettings)
 							.then(() => {
@@ -1784,6 +1789,7 @@ function init() {
 								return false;
 							});
 					}
+					ghosteryDebugger.addAccountEvent('app started', 'not signed in');
 					if (globals.JUST_INSTALLED) {
 						setGhosteryDefaultBlocking();
 					}
