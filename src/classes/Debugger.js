@@ -781,7 +781,7 @@ class Debugger {
 					'Active tab not found',
 				]));
 			} else {
-				const android = (mobile.toLowerCase() === 'mobile') ? '_android' : '';
+				const android = (mobile && mobile.toLowerCase() === 'mobile') ? '_android' : '';
 				chrome.tabs.create({
 					url: chrome.runtime.getURL(`app/templates/panel${android}.html?tabId=${tabs[0].id}`),
 					active: true
