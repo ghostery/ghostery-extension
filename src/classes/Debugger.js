@@ -890,9 +890,10 @@ class Debugger {
 
 		const _printAccountEvents = () => {
 			const output = [];
+			const accountEvents = this._accountEvents.map(([timestamp, details]) => [JSON.stringify(timestamp), details]);
 
 			output.push("Here are the account events we've recorded during this session:");
-			this._push(Object.fromEntries(this._accountEvents), output);
+			this._push(Object.fromEntries(accountEvents), output);
 
 			Debugger._printToConsole(Debugger._typeset(output));
 
@@ -971,7 +972,7 @@ class Debugger {
 			pushObj.details = details;
 		}
 
-		this._accountEvents.push([JSON.stringify(timestamp), pushObj]);
+		this._accountEvents.push([timestamp, pushObj]);
 
 		if (this._accountEvents.length > ACCOUNT_EVENTS_CAP) {
 			// Performance should be ok even for a somewhat large array:
