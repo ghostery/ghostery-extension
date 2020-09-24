@@ -744,13 +744,21 @@ class Debugger {
 	/**
 	 * @since 8.5.3
 	 *
-	 * Print the requested conf value or values.
+	 * Print the requested conf value or values (from ConfData).
 	 *
 	 * @param	{String|RegExp} [slice]		A string property key or a regexp literal intended to match a subset of properties.
 	 * @return 	{String}					An ad / thank you message string.
 	 */
 	getConfData = slice => this._getObjectSlice(confData, slice, 'config');
 
+	/**
+	 * @since 8.5.3
+	 *
+	 * Print the requested global value or values (from Globals).
+	 *
+	 * @param	{String|RegExp} [slice]		A string property key or a regexp literal intended to match a subset of properties.
+	 * @return 	{String}					An ad / thank you message string.
+	 */
 	getGlobals = slice => this._getObjectSlice(globals, slice, 'globals');
 
 	/**
@@ -758,7 +766,9 @@ class Debugger {
 	 *
 	 * Open the Ghostery panel window in a new tab for automation testing. Uses
 	 * the current active tabID to populate panel data.
-	 * @param {string} mobile		Open the android panel
+	 *
+	 * @param 	{String} [mobile]		Open the Android panel if value is 'mobile'.
+	 * @return 	{String}				An ad / thank you message string.
 	 */
 	openPanel = (mobile) => {
 		chrome.tabs.query({
@@ -775,7 +785,7 @@ class Debugger {
 					'Active tab not found',
 				]));
 			} else {
-				const android = (mobile === 'mobile') ? '_android' : '';
+				const android = (mobile.toLowerCase() === 'mobile') ? '_android' : '';
 				chrome.tabs.create({
 					url: chrome.runtime.getURL(`app/templates/panel${android}.html?tabId=${tabs[0].id}`),
 					active: true
@@ -788,11 +798,13 @@ class Debugger {
 	/**
 	 * @since 8.5.3
 	 *
-	 * Open the Ghostery Intro Hub in a new tab for automation testing
-	 * @param  {String} modal Trigger upgrade modal(s)
+	 * Open the Ghostery Intro Hub in a new tab for automation testing.
+	 *
+	 * @param  	{String} [modal] 		Trigger upgrade modal(s) in addition to opening the hub if the value is 'modal'.
+	 * @return 	{String}				An ad / thank you message string.
 	 */
 	openIntroHub = (modal = '') => {
-		const showModal = modal === 'modal';
+		const showModal = modal.toLowerCase() === 'modal';
 		chrome.tabs.create({
 			url: chrome.runtime.getURL(`./app/templates/hub.html?$justInstalled=true&pm=${showModal}`),
 			active: true
@@ -804,7 +816,7 @@ class Debugger {
 	 * @since 8.5.3
 	 *
 	 * Get all info for the active tab(s), including TabInfo, FoundBugs and active tab ids
-	 * @param  {string} slice Limit the debugger output to a particular slice of the activeTabInfo object
+	 * @param  {String} slice Limit the debugger output to a particular slice of the activeTabInfo object
 	 */
 	getActiveTabInfo = (slice) => {
 		chrome.tabs.query({
