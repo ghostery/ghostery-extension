@@ -51,7 +51,6 @@ $ yarn build.watch
 ```javascript
 // In manifest.json set
 "debug": true,
-"log": true,
 ```
 
 ## Testing and Linting
@@ -115,7 +114,7 @@ $ node tools/transifex.js
 ```
 
 ## Cliqz Source Code
-Ghostery implements the following open-source products from [Cliqz](https://cliqz.com/en/)
+Ghostery implements the following open-source products from Cliqz:
 
 [**Human Web**](https://cliqz.com/en/whycliqz/human-web)
 + [How it works](https://cliqz.com/en/magazine/techblog-human-web-reliably-removes-uids)
@@ -161,7 +160,8 @@ See [CONTRIBUTING](CONTRIBUTING.md) and [CODE OF CONDUCT](CODE-OF-CONDUCT.md)
 ## Additional Open Source Ghostery Projects
 + [Ghostery Lite for Safari](https://github.com/ghostery/GhosterySafari)
 + [Ghostery iOS Browser](https://github.com/ghostery/user-agent-ios)
-+ [Ghostery Android Browser](https://github.com/ghostery/browser-android)
++ [Ghostery Android Browser](https://github.com/ghostery/user-agent-android)
++ [Ghostery Desktop Browser](https://github.com/ghostery/user-agent-desktop)
 
 ## Ghostery Team
 Ghostery relies on [contributions](https://github.com/ghostery/ghostery-extension/graphs/contributors) from lots of talented people.

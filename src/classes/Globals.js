@@ -26,7 +26,6 @@ class Globals {
 	constructor() {
 		// environment variables
 		this.DEBUG = manifest.debug || false;
-		this.LOG = this.DEBUG && manifest.log;
 		this.EXTENSION_NAME = manifest.name || 'Ghostery';
 		this.EXTENSION_VERSION = manifest.version_name || manifest.version; // Firefox does not support "version_name"
 		this.BROWSER_INFO = {
@@ -111,6 +110,7 @@ class Globals {
 			'enable_human_web',
 			'enable_metrics',
 			'enable_offers',
+			'enable_abtests',
 			'enable_smart_block',
 			'expand_all_trackers',
 			'hide_alert_trusted',
@@ -178,6 +178,11 @@ class Globals {
 			this.BROWSER_INFO.displayName = 'Yandex';
 			this.BROWSER_INFO.name = 'yandex';
 			this.BROWSER_INFO.token = 'yx';
+		} else if (navigator.userAgent.includes('Ghostery')) {
+			// ua-parser library doesn't parse the desktop browser UA properly
+			this.BROWSER_INFO.displayName = 'Ghostery Desktop Browser';
+			this.BROWSER_INFO.name = 'ghostery_desktop';
+			this.BROWSER_INFO.token = 'gd';
 		}
 
 		// Set OS property
@@ -195,7 +200,9 @@ class Globals {
 		this.BROWSER_INFO.version = version;
 
 		// Check for the Ghostery Android browser
-		this._checkForGhosteryAndroid();
+		if (platform.includes('android')) {
+			this._checkForGhosteryAndroid();
+		}
 	}
 
 	/**

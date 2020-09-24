@@ -241,7 +241,7 @@ export function getActiveTab(callback, error) {
 			}
 		} else if (tabs.length === 0) {
 			if (error && typeof error === 'function') {
-				error();
+				error({ message: 'Active tab not found' });
 			}
 		} else if (callback && typeof callback === 'function') {
 			callback(tabs[0]);
@@ -302,6 +302,8 @@ function _openNewTab(data) {
 				active: data.become_active || false
 			});
 		}
+	}, (err) => {
+		log(`_openNewTab Error: ${err}`);
 	});
 }
 /**
@@ -539,6 +541,184 @@ export function fetchLocalJSONResource(url) {
 		xhr.overrideMimeType('image/png');
 		xhr.send();
 	}));
+}
+
+/**
+ * Like Array.prototype.slice(), but for objects.
+ * Get a property on an object (if props is a property key string),
+ * OR Get a subset of properties (if props is a regex),
+ * OR Get the whole supplied object back (if props is missing, invalid, or produces no matches).
+ * If the property is not defined on the object,
+ * returns the whole object as the val prop of the return object.
+ *
+ * @memberOf BackgroundUtils
+ *
+ * @param	{Object}		obj			The object to extract a property or properties from
+ * @param 	{string|RegExp} props		String name of the property, or regex to match against all properties. Optional.
+ * @return 	{Object}					{ val: undefined|Object, foundMatch: Boolean, err: Boolean, errMsg: undefined|String }
+ */
+export function getObjectSlice(obj, props) {
+	if (obj === undefined || typeof obj !== 'object') {
+		return ({
+			val: undefined,
+			foundMatch: false,
+			err: true,
+			errMsg: 'You must provide an object as the first argument',
+		});
+	}
+
+	if (props === undefined) {
+		return ({
+			val: obj,
+			foundMatch: false,
+			err: false,
+			errMsg: undefined,
+		});
+	}
+
+	if ((typeof props !== 'string') && !(props instanceof RegExp)) {
+		return ({
+			val: obj,
+			foundMatch: false,
+			err: true,
+			errMsg: 'The second argument must be either a property name string, or a regex. Returning whole object.'
+		});
+	}
+
+	if (typeof props === 'string') {
+		if (obj[props] === undefined) {
+			return ({
+				val: obj,
+				foundMatch: false,
+				err: false,
+				errMsg: undefined,
+			});
+		}
+
+		return ({
+			val: { [props]: obj[props] },
+			foundMatch: true,
+			err: false,
+			errMsg: undefined,
+		});
+	}
+
+	// A regex literal has been passed in
+	if (props instanceof RegExp) {
+		const matches = {};
+		Object.keys(obj).forEach((key) => {
+			if (props.test(key)) {
+				matches[key] = obj[key];
+			}
+		});
+		if (Object.keys(matches).length > 0) {
+			return ({
+				val: matches,
+				foundMatch: true,
+				err: false,
+				errMsg: undefined,
+			});
+		}
+	}
+
+	return ({
+		val: obj,
+		foundMatch: false,
+		err: false,
+		errMsg: undefined,
+	});
+}
+
+/**
+ * Pick a random element from the array argument.
+ * If no argument is provided, if the argument is not an array, or if the argument array is empty,
+ * the err property on the return object is set to true, errMsg has details, and val is left undefined.
+ * Otherwise, err is false, errMsg is undefined, and val contains the randomly picked element.
+ *
+ * @memberOf BackgroundUtils
+ *
+ * @param 	{Array} arr			The array to pick a value from. Elements can be of any type(s)
+ * @return	{Object}			{ val: *, err: Boolean, errMsg: undefined|String }
+ */
+export function pickRandomArrEl(arr) {
+	if (arr === undefined) {
+		return ({
+			err: true,
+			errMsg: 'Undefined or no argument provided',
+			val: undefined,
+		});
+	}
+
+	if (!Array.isArray(arr)) {
+		return ({
+			err: true,
+			errMsg: 'The argument must be an array',
+			val: undefined,
+		});
+	}
+
+	const len = arr.length;
+
+	if (len === 0) {
+		return ({
+			err: true,
+			errMsg: 'It is beyond the power of pickRandomArrEl to pick a random element from an empty array',
+			val: undefined,
+		});
+	}
+
+	return ({
+		err: false,
+		errMsg: undefined,
+		val: arr[Math.floor((Math.random() * len))],
+	});
+}
+
+/**
+ * Uppercase the first character of each word in the phrase argument.
+ * Assumes that words are space-separated by default,
+ * but accepts an optional custom string separator argument.
+ *
+ * @memberOf BackgroundUtils
+ *
+ * @param 	{String} phrase					The string to capitalize.
+ * @param	{String|undefined} separator	Separator string. Optional; defaults to a space.
+ * @return	{Object}						{ val: String|undefined, err: Boolean, errMsg: undefined|String }
+ */
+export function capitalize(phrase, separator = ' ') {
+	if (phrase === undefined) {
+		return ({
+			err: true,
+			errMsg: 'Undefined or no argument provided',
+			val: undefined,
+		});
+	}
+
+	if (typeof phrase !== 'string') {
+		return ({
+			err: true,
+			errMsg: 'The first argument must be a string',
+			val: undefined,
+		});
+	}
+
+	if (typeof separator !== 'string') {
+		return ({
+			err: true,
+			errMsg: 'The second argument is optional, but must be a string if provided',
+			val: undefined,
+		});
+	}
+
+	const words = phrase.split(separator);
+	const trimmedWords = words.map(word => word.trim());
+	const capitalizedWords = trimmedWords.map(word => `${word.charAt(0).toUpperCase()}${word.slice(1)}`);
+
+	return ({
+		err: false,
+		errMsg: undefined,
+		val: capitalizedWords.join(separator),
+	});
 }
 
 /**

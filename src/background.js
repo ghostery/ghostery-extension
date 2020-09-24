@@ -17,6 +17,7 @@
 import { debounce, every, size } from 'underscore';
 import moment from 'moment/min/moment-with-locales.min';
 import cliqz, { HUMANWEB_MODULE, HPN_MODULE } from './classes/Cliqz';
+import ghosteryDebugger from './classes/Debugger';
 // object classes
 import Events from './classes/EventHandlers';
 import Policy from './classes/Policy';
@@ -53,6 +54,9 @@ import { sendCliqzModuleCounts } from './utils/cliqzModulesData';
 // module from Developer Tools Console.
 window.CLIQZ = cliqz;
 
+// For debug purposes, provide access to Ghostery's internal data.
+window.ghostery = ghosteryDebugger;
+
 // class instantiation
 const events = new Events();
 // function shortcuts
@@ -68,6 +72,8 @@ const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
 const IS_ANDROID = (BROWSER_INFO.os === 'android');
 const VERSION_CHECK_URL = `${CDN_BASE_URL}/update/version`;
 const REAL_ESTATE_ID = 'ghostery';
+const ONE_DAY_MSEC = 86400000;
+const ONE_HOUR_MSEC = 3600000;
 const onBeforeRequest = events.onBeforeRequest.bind(events);
 const { onHeadersReceived } = Events;
 
@@ -103,12 +109,12 @@ function setCliqzModuleEnabled(module, enabled) {
 
 /**
  * Pulls down latest version.json and triggers
- * updates of all db files.
+ * updates of all db files. FKA checkLibraryVersion.
  * @memberOf Background
  *
  * @return {Promise} 	database updated data
  */
-function checkLibraryVersion() {
+function updateDBs() {
 	return new Promise(((resolve, reject) => {
 		const failed = { success: false, updated: false };
 		utils.getJson(VERSION_CHECK_URL).then((data) => {
@@ -135,25 +141,33 @@ function checkLibraryVersion() {
 				});
 			});
 		}).catch((err) => {
-			log('Error in checkLibraryVersion', err);
+			log('Error in updateDBs', err);
 			reject(failed);
 		});
 	}));
 }
 
 /**
- * Check and fetch a new tracker library every hour as needed
+ * Call updateDBs if auto updating is enabled and enough time has passed since the last check.
+ * Debug log that the function was called and when. Called at browser startup and at regular intervals thereafter.
+ *
  * @memberOf Background
+ *
+ * @param {Boolean} isAutoUpdateEnabled		Whether bug db auto updating is enabled.
+ * @param {Number} bugsLastCheckedMsec		The Unix msec timestamp to check against to make sure it is not too soon to call updateDBs again.
  */
-function autoUpdateBugDb() {
-	if (conf.enable_autoupdate) {
-		const result = conf.bugs_last_checked;
-		const nowTime = Number((new Date()).getTime());
-		// offset by 15min so that we don't double fetch
-		if (!result || nowTime > (Number(result) + 900000)) {
-			log('autoUpdateBugDb called', new Date());
-			checkLibraryVersion();
-		}
+function autoUpdateDBs(isAutoUpdateEnabled, bugsLastCheckedMsec) {
+	const date = new Date();
+
+	log('autoUpdateDBs called', date);
+
+	if (!isAutoUpdateEnabled) return;
+
+	if (
+		!bugsLastCheckedMsec // the value is 0, signifying that we have never checked yet
+		|| date.getTime() > (Number(bugsLastCheckedMsec) + ONE_HOUR_MSEC) // guard against double fetching
+	) {
+		updateDBs();
 	}
 }
 
@@ -954,7 +968,7 @@ function onMessageHandler(request, sender, callback) {
 		return true;
 	}
 	if (name === 'update_database') {
-		checkLibraryVersion().then((result) => {
+		updateDBs().then((result) => {
 			callback(result);
 		});
 		return true;
@@ -1076,78 +1090,51 @@ function onMessageHandler(request, sender, callback) {
 }
 
 /**
- * Determine Antitracking configuration parameters based
+ * Set option for Hub Layout A/B test based
  * on the results returned from the abtest endpoint.
  * @memberOf Background
- *
- * @return {Object} 	Antitracking configuration parameters
  */
-function getAntitrackingTestConfig() {
-	if (abtest.hasTest('antitracking_full')) {
-		return {
-			qsEnabled: true,
-			telemetryMode: 2,
-		};
-	}
-	if (abtest.hasTest('antitracking_half')) {
-		return {
-			qsEnabled: true,
-			telemetryMode: 1,
-		};
-	}
-	if (abtest.hasTest('antitracking_collect')) {
-		return {
-			qsEnabled: false,
-			telemetryMode: 1,
-		};
-	}
-	return {
-		qsEnabled: true,
-		telemetryMode: 1,
-	};
-}
+function setupHubLayoutABTest() {
+	if (
+		!abtest.hasBeenFetched
+		|| conf.hub_layout !== 'not_yet_set'
+	) { return; }
 
-/**
- * Set option for Hub promo A/B/C test based
- * on the results returned from the abtest endpoint.
- * @memberOf Background
- *
- * @return {Object} 	Hub promotion configuration parameters
- */
-function setupHubPromoABTest() {
-	if (conf.hub_promo_variant !== 'not_yet_set') return;
-
-	if (abtest.hasTest('hub_plain')) {
-		conf.hub_promo_variant = 'plain';
-	} else if (abtest.hasTest('hub_midnight')) {
-		conf.hub_promo_variant = 'midnight';
+	if (abtest.hasTest('hub_alternate')) {
+		conf.hub_layout = 'alternate';
 	} else {
-		conf.hub_promo_variant = 'upgrade';
+		conf.hub_layout = 'default';
 	}
 }
 
 /**
- * Adjust antitracking parameters based on the current state
- * of ABTest and availability of Human Web.
+ * Configure A/B tests based on data fetched from the A/B server
+ * @memberOf Background
  */
-function setupABTest() {
-	const antitrackingConfig = getAntitrackingTestConfig();
-	if (antitrackingConfig && conf.enable_anti_tracking) {
-		if (!conf.enable_human_web) {
-			// force disable anti-tracking telemetry on humanweb opt-out
-			antitrackingConfig.telemetryMode = 0;
-		}
-		Object.keys(antitrackingConfig).forEach((opt) => {
-			const val = antitrackingConfig[opt];
-			log('antitracking', 'set config option', opt, val);
-			antitracking.action('setConfigOption', opt, val);
-		});
-	}
-	if (abtest.hasTest('antitracking_whitelist2')) {
-		cliqz.prefs.set('attrackBloomFilter', false);
-	}
+function setupABTests() {
+	setupHubLayoutABTest();
+}
 
-	setupHubPromoABTest();
+/**
+ * @since 8.5.3
+ *
+ * Update config options for the Cliqz antitracking module to match the current human web setting.
+ * Log out the updates. Returns without doing anything if antitracking is disabled.
+ *
+ * @param {Boolean} isAntitrackingEnabled		Whether antitracking is currently enabled.
+ */
+function setCliqzAntitrackingConfig(isAntitrackingEnabled) {
+	if (!isAntitrackingEnabled) return;
+
+	const antitrackingConfig = {
+		qsEnabled: true,
+		telemetryMode: conf.enable_human_web ? 1 : 0,
+	};
+
+	Object.entries(antitrackingConfig).forEach(([opt, val]) => {
+		log('antitracking', 'set config option', opt, val);
+		antitracking.action('setConfigOption', opt, val);
+	});
 }
 
 /**
@@ -1176,7 +1163,7 @@ function initializeDispatcher() {
 	dispatcher.on('conf.save.enable_human_web', (enableHumanWeb) => {
 		if (!IS_CLIQZ) {
 			setCliqzModuleEnabled(humanweb, enableHumanWeb).then(() => {
-				setupABTest();
+				setCliqzAntitrackingConfig(conf.enable_anti_tracking);
 			});
 		} else {
 			setCliqzModuleEnabled(humanweb, false);
@@ -1202,7 +1189,11 @@ function initializeDispatcher() {
 	});
 	dispatcher.on('conf.save.enable_anti_tracking', (enableAntitracking) => {
 		if (!IS_CLIQZ) {
-			setCliqzModuleEnabled(antitracking, enableAntitracking);
+			setCliqzModuleEnabled(antitracking, enableAntitracking).then(() => {
+				// enable_human_web could have been toggled while antitracking was off,
+				// so we want to make sure to update the antitracking telemetry option
+				setCliqzAntitrackingConfig(conf.enable_anti_tracking);
+			});
 		} else {
 			setCliqzModuleEnabled(antitracking, false);
 		}
@@ -1231,7 +1222,7 @@ function initializeDispatcher() {
 }
 
 /**
- * WebRequest pipeline initialisation: find which Cliqz modules are enabled,
+ * WebRequest pipeline initialization: find which Cliqz modules are enabled,
  * add their handlers, then put Ghostery event handlers before them all.
  * If Cliqz modules are subsequently enabled, their event handlers will always
  * be added after Ghostery's.
@@ -1704,11 +1695,10 @@ function initializeGhosteryModules() {
 			// auto-fetch from CMP
 			cmp.fetchCMPData();
 
-			if (!IS_CLIQZ) {
-				// auto-fetch human web offer
+			if (!IS_CLIQZ && conf.enable_abtests) {
 				abtest.fetch()
 					.then(() => {
-						setupABTest();
+						setupABTests();
 					})
 					.catch(() => {
 						log('Unable to reach abtest server');
@@ -1720,13 +1710,17 @@ function initializeGhosteryModules() {
 		});
 	}
 
-	// Check CMP and ABTest every hour.
-	setInterval(scheduledTasks, 3600000);
+	// Check CMP and ABTest every day.
+	setInterval(scheduledTasks, ONE_DAY_MSEC);
 
 	// Update db right away.
-	autoUpdateBugDb();
-	// Schedule it to run every hour.
-	setInterval(autoUpdateBugDb, 3600000);
+	autoUpdateDBs(conf.enable_autoupdate, conf.bugs_last_checked);
+
+	// Schedule it to run every day.
+	setInterval(
+		() => autoUpdateDBs(conf.enable_autoupdate, conf.bugs_last_checked),
+		ONE_DAY_MSEC
+	);
 
 	// listen for changes to specific conf properties
 	initializeDispatcher();
@@ -1756,10 +1750,10 @@ function initializeGhosteryModules() {
 			// We need to do this after running scheduledTasks for the first time
 			// because of an A/B test that determines which promo variant is shown in the Hub on install
 			if (globals.JUST_INSTALLED) {
-				const route = ((conf.hub_promo_variant === 'upgrade' || conf.hub_promo_variant === 'not_yet_set') && !IS_ANDROID) ? '' : '#home';
-				const showPremiumPromoModal = (conf.hub_promo_variant === 'midnight' && !IS_ANDROID);
+				const showAlternateHub = conf.hub_layout === 'alternate';
+				const route = showAlternateHub ? '#home' : '';
 				chrome.tabs.create({
-					url: chrome.runtime.getURL(`./app/templates/hub.html?$justInstalled=true&pm=${showPremiumPromoModal}${route}`),
+					url: chrome.runtime.getURL(`./app/templates/hub.html?$justInstalled=true&ah=${showAlternateHub}${route}`),
 					active: true
 				});
 			}
@@ -1782,6 +1776,7 @@ function init() {
 			account.migrate()
 				.then(() => {
 					if (conf.account !== null) {
+						ghosteryDebugger.addAccountEvent('app started', 'signed in', conf.account);
 						return account.getUser()
 							.then(account.getUserSettings)
 							.then(() => {
@@ -1791,6 +1786,7 @@ function init() {
 								return false;
 							});
 					}
+					ghosteryDebugger.addAccountEvent('app started', 'not signed in');
 					if (globals.JUST_INSTALLED) {
 						setGhosteryDefaultBlocking();
 					}
