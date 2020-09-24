@@ -971,7 +971,7 @@ class Debugger {
 			pushObj.details = details;
 		}
 
-		this._accountEvents.push([timestamp, pushObj]);
+		this._accountEvents.push([JSON.stringify(timestamp), pushObj]);
 
 		if (this._accountEvents.length > ACCOUNT_EVENTS_CAP) {
 			// Performance should be ok even for a somewhat large array:
