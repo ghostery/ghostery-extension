@@ -1695,7 +1695,6 @@ function initializeGhosteryModules() {
 			cmp.fetchCMPData();
 
 			if (!IS_CLIQZ && conf.enable_abtests) {
-				// auto-fetch human web offer
 				abtest.fetch()
 					.then(() => {
 						setupABTests();
