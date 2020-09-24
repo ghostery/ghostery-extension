@@ -745,7 +745,7 @@ class Debugger {
 	 * @param	{String|RegExp} [slice]		A string property key or a regexp literal intended to match a subset of properties.
 	 * @return 	{String}					A thank you message.
 	 */
-	getConfData = slice => this._getObjectSlice(confData, slice, 'config');
+	getConfData = slice => this._printObjectSlice(confData, slice, 'config');
 
 	/**
 	 * @since 8.5.3
@@ -755,7 +755,7 @@ class Debugger {
 	 * @param	{String|RegExp} [slice]		A string property key or a regexp literal intended to match a subset of properties.
 	 * @return 	{String}					A thank you message.
 	 */
-	getGlobals = slice => this._getObjectSlice(globals, slice, 'globals');
+	getGlobals = slice => this._printObjectSlice(globals, slice, 'globals');
 
 	/**
 	 * @since 8.5.3
@@ -832,7 +832,7 @@ class Debugger {
 				]));
 			} else {
 				const tabIds = tabs.map(tab => tab.id);
-				this._getObjectSlice({
+				this._printObjectSlice({
 					activeTabIds: tabIds,
 					tabInfo: { ...tabInfo._tabInfo },
 					foundBugs: {
@@ -878,7 +878,7 @@ class Debugger {
 		};
 
 		const _printUserData = ([userCookies, userData, syncedUserSettings, userSubscriptionData]) => {
-			this._getObjectSlice({
+			this._printObjectSlice({
 				userCookies,
 				userData,
 				syncedUserSettings,
@@ -981,7 +981,18 @@ class Debugger {
 	}
 
 	// [[Main Actions]] private helpers
-	_getObjectSlice(obj, slice, objStr) {
+	/**
+	 * @private
+	 * @since 8.5.3
+	 *
+	 * Gets and prints the requested slice of the supplied object.
+	 *
+	 * @param 	{Object} obj			The object to print a slice from.
+	 * @param 	{String|RegExp}	slice	The specific property (if string) or property subset (if regex) slice to print.
+	 * @param 	{String} objStr			The name to use for the object in the output.
+	 * @return 	{String}				A thank you message.
+	 */
+	_printObjectSlice(obj, slice, objStr) {
 		const objSlice = getObjectSlice(obj, slice);
 		const output = [];
 
