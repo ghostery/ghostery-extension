@@ -19,6 +19,7 @@ exports[`app/panel/Settings/OptIn.jsx Snapshot tests with react-test-renderer Op
       </h5>
       <div
         className="s-option-group"
+        id=""
       >
         <div
           className="s-square-checkbox"
@@ -104,6 +105,37 @@ exports[`app/panel/Settings/OptIn.jsx Snapshot tests with react-test-renderer Op
           <div
             className="s-tooltip-up"
             data-g-tooltip="settings_offers_tooltip"
+          >
+            <img
+              className="s-question"
+              src="../../app/images/panel/icon-information-tooltip.svg"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="s-option-group"
+        id="abtests-section"
+      >
+        <div
+          className="s-square-checkbox"
+        >
+          <input
+            id="settings-allow-abtests"
+            name="enable_abtests"
+            onClick={[Function]}
+            type="checkbox"
+          />
+          <label
+            htmlFor="settings-allow-abtests"
+          >
+            <span>
+              settings_allow_abtests
+            </span>
+          </label>
+          <div
+            className="s-tooltip-up"
+            data-g-tooltip="settings_abtests_tooltip"
           >
             <img
               className="s-question"
@@ -136,6 +168,7 @@ exports[`app/panel/Settings/OptIn.jsx Snapshot tests with react-test-renderer Op
       </h5>
       <div
         className="s-option-group"
+        id=""
       >
         <div
           className="s-square-checkbox"
@@ -221,6 +254,37 @@ exports[`app/panel/Settings/OptIn.jsx Snapshot tests with react-test-renderer Op
           <div
             className="s-tooltip-up"
             data-g-tooltip="settings_offers_tooltip"
+          >
+            <img
+              className="s-question"
+              src="../../app/images/panel/icon-information-tooltip.svg"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="s-option-group"
+        id="abtests-section"
+      >
+        <div
+          className="s-square-checkbox"
+        >
+          <input
+            id="settings-allow-abtests"
+            name="enable_abtests"
+            onClick={[Function]}
+            type="checkbox"
+          />
+          <label
+            htmlFor="settings-allow-abtests"
+          >
+            <span>
+              settings_allow_abtests
+            </span>
+          </label>
+          <div
+            className="s-tooltip-up"
+            data-g-tooltip="settings_abtests_tooltip"
           >
             <img
               className="s-question"

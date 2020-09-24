@@ -369,12 +369,19 @@ class Metrics {
 			`&th=${encodeURIComponent(Metrics._getThemeValue().toString())}` +
 
 			// New parameters for Ghostery 8.5.2
-			// Hub Layout View
-			`&t2=${encodeURIComponent(Metrics._getHubLayoutView().toString())}` +
 			// Subscription Interval
 			`&si=${encodeURIComponent(Metrics._getSubscriptionInterval().toString())}` +
 			// Product ID Parameter
-			`&pi=${encodeURIComponent('gbe')}`;
+			`&pi=${encodeURIComponent('gbe')}` +
+
+			// New parameter for Ghostery 8.5.3
+			// AB tests enabled?
+			`&ts=${encodeURIComponent(conf.enable_abtests ? '1' : '0')}`;
+
+		if (conf.enable_abtests) {
+			// Hub Layout A/B test. Added in 8.5.3. GH-2097, GH-2100
+			metrics_url += `&t2=${encodeURIComponent(Metrics._getHubLayoutView().toString())}`;
+		}
 
 		if (CAMPAIGN_METRICS.includes(type)) {
 			// only send campaign attribution when necessary
