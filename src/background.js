@@ -1107,23 +1107,10 @@ function setupHubLayoutABTest() {
 }
 
 /**
- * @since 8.5.3
- *
- * Setup the Bloom Filter `antitracking_whitelist2` test.
- * @memberOf Background
- */
-function setupBloomFilterABTest() {
-	if (abtest.hasTest('antitracking_whitelist2')) {
-		cliqz.prefs.set('attrackBloomFilter', false);
-	}
-}
-
-/**
  * Configure A/B tests based on data fetched from the A/B server
  * @memberOf Background
  */
 function setupABTests() {
-	setupBloomFilterABTest();
 	setupHubLayoutABTest();
 }
 
