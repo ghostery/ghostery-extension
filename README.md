@@ -51,7 +51,6 @@ $ yarn build.watch
 ```javascript
 // In manifest.json set
 "debug": true,
-"log": true,
 ```
 
 ## Testing and Linting

@@ -495,7 +495,7 @@ class EventHandlers {
 		}
 
 		const appWithLatencyId = latency.logLatency(details);
-		if (appWithLatencyId) {
+		if (appWithLatencyId && conf.show_alert) {
 			this.purplebox.updateBox(details.tabId, appWithLatencyId);
 		}
 	}
@@ -515,7 +515,7 @@ class EventHandlers {
 		if (details.type !== 'main_frame') {
 			const appWithLatencyId = latency.logLatency(details);
 
-			if (appWithLatencyId) {
+			if (appWithLatencyId && conf.show_alert) {
 				this.purplebox.updateBox(details.tabId, appWithLatencyId);
 			}
 		}

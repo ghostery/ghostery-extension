@@ -26,7 +26,6 @@ class Globals {
 	constructor() {
 		// environment variables
 		this.DEBUG = manifest.debug || false;
-		this.LOG = this.DEBUG && manifest.log;
 		this.EXTENSION_NAME = manifest.name || 'Ghostery';
 		this.EXTENSION_VERSION = manifest.version_name || manifest.version; // Firefox does not support "version_name"
 		this.BROWSER_INFO = {
@@ -111,6 +110,7 @@ class Globals {
 			'enable_human_web',
 			'enable_metrics',
 			'enable_offers',
+			'enable_abtests',
 			'enable_smart_block',
 			'expand_all_trackers',
 			'hide_alert_trusted',

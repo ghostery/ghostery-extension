@@ -16,20 +16,41 @@
 
 // DO NOT IMPORT MODULES TO THIS FILE
 
-const LOG = chrome.runtime.getManifest().log || false;
+// Private variable that controls whether calls to log() produce the requested console output or do nothing
+let _shouldLog = chrome.runtime.getManifest().debug || false;
 
 /**
- * Custom Debug Logger.
+ * Report whether logging is active
+ * @memberOf BackgroundUtils
+ *
+ * @return {Boolean}					True if logging is active and false otherwise
+ */
+export function isLog() {
+	return _shouldLog;
+}
+
+/**
+ * Activate / deactivate logging
+ * Allows modules like the console debugger to override the manifest debug setting
+ * @memberOf BackgroundUtils
+ *
+ * @param  {Boolean} shouldActivate		Whether logging should be activated or deactivated. Optional; defaults to true
+ *
+ * @return {undefined}					No explicit return value
+ */
+export function activateLog(shouldActivate = true) {
+	_shouldLog = shouldActivate;
+}
+
+/**
+ * Log to console regardless of log settings
  * @memberOf BackgroundUtils
  *
  * @param  {array} args 	ES6 Rest parameter
  *
- * @return {boolean}  		false if disabled, otherwise true
+ * @return {boolean}		Always true
  */
-export function log(...args) {
-	if (!LOG) {
-		return false;
-	}
+export function alwaysLog(...args) {
 	// check for error messages
 	const hasErrors = args.toString().toLowerCase().includes('error');
 	// add timestamp to first position
@@ -42,6 +63,24 @@ export function log(...args) {
 		console.log(...args); // eslint-disable-line no-console
 	}
 	return true;
+}
+
+/**
+ * Custom Debug Logger.
+ * Unliked alwaysLog, only logs if logging is turned on
+ * through the manifest and/or GhosteryDebugger
+ * @memberOf BackgroundUtils
+ *
+ * @param  {array} args 	ES6 Rest parameter
+ *
+ * @return {boolean}  		false if disabled, otherwise true
+ */
+export function log(...args) {
+	if (!_shouldLog) {
+		return false;
+	}
+
+	return alwaysLog(...args);
 }
 
 /**
