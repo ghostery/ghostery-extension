@@ -116,8 +116,8 @@ class Debugger {
 	 * Scans strings for CSS markers, applies the specified styles when they are found,
 	 * and removes the markers from the final output.
 	 *
-	 * @param {Array} lines			An array of strings and/or objects to be logged. Strings may start with a CSS marker.
-	 * @return {undefined}			No explicit return.
+	 * @param 	{Array} lines		An array of strings and/or objects to be logged. Strings may start with a CSS marker.
+	 * @return 	{undefined}			No explicit return.
 	 */
 	static _printToConsole(lines) {
 		// Individual log statements for each line allow for
@@ -143,8 +143,8 @@ class Debugger {
 	 * String array input array elements have their elements concatenated with padding to create columns.
 	 * Newlines are added at the beginning and the end.
 	 *
-	 * @param {Array} rawTexts		An array of string, two element string arrays, and/or objects.
-	 * @return {Array}				An array of strings and/or objects tidied and padded for printing.
+	 * @param 	{Array} rawTexts	An array of string, two element string arrays, and/or objects.
+	 * @return 	{Array}				An array of strings and/or objects tidied and padded for printing.
 	 */
 	static _typeset(rawTexts) {
 		const formattedLines = [];
@@ -509,8 +509,8 @@ class Debugger {
 	 * Exists as a separate function so that public methods can concatenate some custom messages
 	 * with standard help output before forwarding all the string to `_typeset` and `_printToConsole`.
 	 *
-	 * @param {String}	fnName		The name of the function for which help output was requested.
-	 * @return {Array} 				Returns the help strings array for the requested function, or an error strings array if the argument is missing or not supported.
+	 * @param 	{String} fnName		The name of the function for which help output was requested.
+	 * @return 	{Array} 			Returns the help strings array for the requested function, or an error strings array if the argument is missing or not supported.
 	 */
 	static _assembleHelpStringArr(fnName) {
 		const {
@@ -569,8 +569,8 @@ class Debugger {
 	 *
 	 * Prints general and function-specific help output. Part of the public CLI.
 	 *
-	 * @param {String}	[fnName]	The name of the function for which help output was requested, if any.
-	 * @return {String} 			An ad / thank you message (printed to the console as the last line of output).
+	 * @param	{String} [fnName]	The name of the function for which help output was requested, if any.
+	 * @return 	{String} 			An ad / thank you message (printed to the console as the last line of output).
 	 */
 	help = (fnName) => {
 		const {
@@ -602,8 +602,8 @@ class Debugger {
 	 *
 	 * @async
 	 *
-	 * @param {Number} ir			The ir value to use. Should be an integer between 1 and 100 inclusive.
-	 * @return {Promise|String}		Returns a tip string if the argument was missing or invalid. Otherwise, returns the Promise for the call to the A/B server. This Promise, once it resolves or rejects, returns an ad or thank you message.
+	 * @param 	{Number} ir			The ir value to use. Should be an integer between 1 and 100 inclusive.
+	 * @return 	{Promise|String}	Returns a tip string if the argument was missing or invalid. Otherwise, returns the Promise for the call to the A/B server. This Promise, once it resolves or rejects, returns an ad or thank you message.
 	 */
 	fetchABTestsWithIr = (ir) => {
 		if (ir === undefined) {
@@ -679,7 +679,7 @@ class Debugger {
 	 *
 	 * @async
 	 *
-	 * @return {Promise|String}			The Promise for the call to the CMP server. Once the Promise resolves or rejects, it returns an ad / thank you message string.
+	 * @return {Promise|String}		The Promise for the call to the CMP server. Once the Promise resolves or rejects, it returns an ad / thank you message string.
 	 */
 	fetchCMPCampaigns = () => {
 		Debugger._printToConsole(Debugger._typeset([
@@ -723,6 +723,13 @@ class Debugger {
 		);
 	}
 
+	/**
+	 * @since 8.5.3
+	 *
+	 * Print the AB tests currently in memory.
+	 *
+	 * @return {String}		An ad / thank you message string.
+	 */
 	getABTests = () => {
 		const output = [];
 		const tests = abtest.getTests();
@@ -734,6 +741,14 @@ class Debugger {
 		return (THANKS);
 	}
 
+	/**
+	 * @since 8.5.3
+	 *
+	 * Print the requested conf value or values.
+	 *
+	 * @param	{String|RegExp} [slice]		A string property key or a regexp literal intended to match a subset of properties.
+	 * @return 	{String}					An ad / thank you message string.
+	 */
 	getConfData = slice => this._getObjectSlice(confData, slice, 'config');
 
 	getGlobals = slice => this._getObjectSlice(globals, slice, 'globals');
