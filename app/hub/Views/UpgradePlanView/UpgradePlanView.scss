@@ -550,11 +550,8 @@ section.home-template .section.section-pricing {
 		text-transform: none;
 		white-space: nowrap;
 		font-family: 'Open Sans';
-		background-color: $price-blue;
 		font-weight: 600;
-		&:hover {
-			background-color: $price-blue-hover;
-		}
+		background-color: $price-blue;
 	}
 
 	.button-gold {

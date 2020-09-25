@@ -89,7 +89,7 @@ const basicCard = () => (
 			<div className="price">
 				<p className="price-blue-alt font-size-36">{t('hub_upgrade_plan_free')}</p>
 			</div>
-			<NavLink className="button already-protected" to="/home" title="Already Protected">
+			<NavLink className="button primary already-protected" to="/home" title="Already Protected">
 				{t('hub_upgrade_already_protected')}
 			</NavLink>
 			<p className="card-sub-header"><strong>{t('hub_upgrade_basic_protection')}</strong></p>
@@ -405,7 +405,7 @@ const UpgradePlanView = (props) => {
 									<tr>
 										<td />
 										<td className="default">
-											<NavLink className="button already-protected" to="/home" title="Already Protected">
+											<NavLink className="button primary already-protected" to="/home" title="Already Protected">
 												{t('hub_upgrade_already_protected')}
 											</NavLink>
 										</td>
@@ -487,7 +487,7 @@ const UpgradePlanView = (props) => {
 					<div className="row align-center footer-buttons">
 						<div className="small-12 text-center columns">
 							<span className="col-free">
-								<NavLink className="button already-protected" to="/home" title="Already Protected">
+								<NavLink className="button primary already-protected" to="/home" title="Already Protected">
 									{t('hub_upgrade_already_protected')}
 								</NavLink>
 							</span>
