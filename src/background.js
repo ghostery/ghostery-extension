@@ -836,9 +836,6 @@ function onMessageHandler(request, sender, callback) {
 		const { email, password } = message;
 		account.login(email, password)
 			.then((response) => {
-				if (!response.hasOwnProperty('errors')) {
-					metrics.ping('sign_in_success');
-				}
 				callback(response);
 			})
 			.catch((err) => {
