@@ -214,10 +214,7 @@ export function updateTrackerBlocked(state, action) {
 	});
 
 	// persist to background
-	sendMessage('setPanelData', {
-		selected_app_ids: updated_app_ids,
-		brokenPageMetricsTrackerTrustOrUnblock: !blocked
-	});
+	sendMessage('setPanelData', { selected_app_ids: updated_app_ids });
 
 	return {
 		categories: updated_categories,

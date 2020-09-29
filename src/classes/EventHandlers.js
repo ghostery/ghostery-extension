@@ -109,7 +109,6 @@ class EventHandlers {
 		if (frameId === 0) {
 			// update reload info before creating/clearing tab info
 			if (transitionType === 'reload' && !transitionQualifiers.includes('forward_back')) {
-				metrics.handleBrokenPageTrigger(globals.BROKEN_PAGE_REFRESH);
 				tabInfo.setTabInfo(tabId, 'numOfReloads', tabInfo.getTabInfo(tabId, 'numOfReloads') + 1);
 			} else if (transitionType !== 'auto_subframe' && transitionType !== 'manual_subframe') {
 				tabInfo.setTabInfo(tabId, 'reloaded', false);
@@ -539,11 +538,7 @@ class EventHandlers {
 	 *
 	 * @param  {Object} tab 	 Details of the tab that was created
 	 */
-	static onTabCreated(tab) {
-		const { url } = tab;
-
-		metrics.handleBrokenPageTrigger(globals.BROKEN_PAGE_NEW_TAB, url);
-	}
+	static onTabCreated() {}
 
 	/**
 	 * Handler for tabs.onActivated event.
