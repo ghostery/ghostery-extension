@@ -22,6 +22,7 @@ import conf from './Conf';
 import dispatcher from './Dispatcher';
 import { log } from '../utils/common';
 import Api from '../utils/api';
+import metrics from './Metrics';
 import ghosteryDebugger from './Debugger';
 
 const api = new Api();
@@ -87,7 +88,7 @@ class Account {
 			ghosteryDebugger.addAccountEvent('login', 'cookie set by fetch POST');
 			this._getUserIDFromCookie().then((userID) => {
 				this._setAccountInfo(userID);
-				this.getUserSubscriptionData();
+				this.getUserSubscriptionData({ calledFrom: 'login'});
 			});
 			return {};
 		});
@@ -168,7 +169,7 @@ class Account {
 	/**
 	 * @return {array}	All subscriptions the user has, empty if none
 	*/
-	getUserSubscriptionData = () => (
+	getUserSubscriptionData = (options) => (
 		this._getUserID()
 			.then(userID => api.get('stripe/customers', userID, 'cards,subscriptions'))
 			.then((res) => {
@@ -197,6 +198,12 @@ class Account {
 				}
 
 				return subscriptions;
+
+			})
+			.finally(() => {
+				if (options && options.calledFrom === 'login') {
+					metrics.ping('sign_in_success');
+				}
 			})
 	)
 
