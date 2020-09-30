@@ -88,7 +88,7 @@ class Account {
 			ghosteryDebugger.addAccountEvent('login', 'cookie set by fetch POST');
 			this._getUserIDFromCookie().then((userID) => {
 				this._setAccountInfo(userID);
-				this.getUserSubscriptionData({ calledFrom: 'login'});
+				this.getUserSubscriptionData({ calledFrom: 'login' });
 			});
 			return {};
 		});
@@ -169,7 +169,7 @@ class Account {
 	/**
 	 * @return {array}	All subscriptions the user has, empty if none
 	*/
-	getUserSubscriptionData = (options) => (
+	getUserSubscriptionData = options => (
 		this._getUserID()
 			.then(userID => api.get('stripe/customers', userID, 'cards,subscriptions'))
 			.then((res) => {
