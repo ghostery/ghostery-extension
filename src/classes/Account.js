@@ -198,7 +198,6 @@ class Account {
 				}
 
 				return subscriptions;
-
 			})
 			.finally(() => {
 				if (options && options.calledFrom === 'login') {
