@@ -20,7 +20,6 @@ import conf from './Conf';
 import foundBugs from './FoundBugs';
 import bugDb from './BugDb';
 import globals from './Globals';
-import metrics from './Metrics';
 import Policy from './Policy';
 import tabInfo from './TabInfo';
 import Rewards from './Rewards';
