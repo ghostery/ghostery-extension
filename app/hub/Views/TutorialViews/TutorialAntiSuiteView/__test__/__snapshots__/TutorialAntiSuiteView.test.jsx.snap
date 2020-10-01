@@ -89,12 +89,12 @@ exports[`app/hub/Views/TutorialViews/TutorialAntiSuiteView component Snapshot te
           <div
             className="TutorialView__keyTitle"
           >
-            smart_blocking
+            smart_browsing
           </div>
           <div
             className="TutorialView__keyText"
           >
-            smart_blocking_DESC
+            smart_browsing_DESC
           </div>
         </div>
       </div>

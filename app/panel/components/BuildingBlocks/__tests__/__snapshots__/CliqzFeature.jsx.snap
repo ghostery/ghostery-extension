@@ -53,7 +53,7 @@ exports[`app/panel/components/CliqzFeature.jsx Snapshot tests with react-test-re
     <div
       className="CliqzFeature__feature-name"
     >
-      smart_blocking
+      smart_browsing
     </div>
   </div>
 </div>
@@ -112,7 +112,7 @@ exports[`app/panel/components/CliqzFeature.jsx Snapshot tests with react-test-re
     <div
       className="CliqzFeature__feature-name"
     >
-      smart_blocking
+      smart_browsing
     </div>
   </div>
 </div>
@@ -171,7 +171,7 @@ exports[`app/panel/components/CliqzFeature.jsx Snapshot tests with react-test-re
     <div
       className="CliqzFeature__feature-name"
     >
-      smart_blocking
+      smart_browsing
     </div>
   </div>
 </div>

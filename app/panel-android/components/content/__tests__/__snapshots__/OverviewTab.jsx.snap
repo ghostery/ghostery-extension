@@ -224,7 +224,7 @@ exports[`app/panel-android/components/content/OverviewTab.jsx Snapshot tests wit
           <div
             className="CliqzFeature__feature-name"
           >
-            smart_blocking
+            smart_browsing
           </div>
         </div>
       </div>
@@ -499,7 +499,7 @@ exports[`app/panel-android/components/content/OverviewTab.jsx Snapshot tests wit
           <div
             className="CliqzFeature__feature-name"
           >
-            smart_blocking
+            smart_browsing
           </div>
         </div>
       </div>
