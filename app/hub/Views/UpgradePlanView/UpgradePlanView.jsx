@@ -114,7 +114,7 @@ const premiumAlreadyProtectedButton = () => (
 	</NavLink>
 );
 
-// Flag to display alternate hub view (used for A/B testing ticket GH-2097)
+// Whether we are displaying this Upgrade Plan view in the alternate or the default Hub layout (as per the A/B test in ticket GH-2097)
 const ah = (QueryString.parse(window.location.search).ah === 'true') || false;
 
 /**
