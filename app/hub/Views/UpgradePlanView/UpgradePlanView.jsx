@@ -15,9 +15,9 @@ import React, { Fragment, useRef, useEffect } from 'react';
 import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
+import QueryString from 'query-string';
 import { BASIC, PLUS, PREMIUM } from './UpgradePlanViewConstants';
 import globals from '../../../../src/classes/Globals';
-import QueryString from 'query-string';
 
 const featureMatrixRow = (label, isBasic, isPlus, isSparkle) => (
 	<tr>
