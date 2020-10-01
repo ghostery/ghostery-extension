@@ -17,7 +17,7 @@ exports[`app/panel/components/CliqzFeature.jsx Snapshot tests with react-test-re
     <div
       className="CliqzFeature__feature-name"
     >
-      enhanced_anti_tracking
+      anti_tracking
     </div>
   </div>
   <div
@@ -35,7 +35,7 @@ exports[`app/panel/components/CliqzFeature.jsx Snapshot tests with react-test-re
     <div
       className="CliqzFeature__feature-name"
     >
-      enhanced_ad_blocking
+      ad_blocking
     </div>
   </div>
   <div
@@ -76,7 +76,7 @@ exports[`app/panel/components/CliqzFeature.jsx Snapshot tests with react-test-re
     <div
       className="CliqzFeature__feature-name"
     >
-      enhanced_anti_tracking
+      anti_tracking
     </div>
   </div>
   <div
@@ -94,7 +94,7 @@ exports[`app/panel/components/CliqzFeature.jsx Snapshot tests with react-test-re
     <div
       className="CliqzFeature__feature-name"
     >
-      enhanced_ad_blocking
+      ad_blocking
     </div>
   </div>
   <div
@@ -135,7 +135,7 @@ exports[`app/panel/components/CliqzFeature.jsx Snapshot tests with react-test-re
     <div
       className="CliqzFeature__feature-name"
     >
-      enhanced_anti_tracking
+      anti_tracking
     </div>
   </div>
   <div
@@ -153,7 +153,7 @@ exports[`app/panel/components/CliqzFeature.jsx Snapshot tests with react-test-re
     <div
       className="CliqzFeature__feature-name"
     >
-      enhanced_ad_blocking
+      ad_blocking
     </div>
   </div>
   <div

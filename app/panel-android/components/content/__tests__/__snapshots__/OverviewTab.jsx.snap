@@ -180,7 +180,7 @@ exports[`app/panel-android/components/content/OverviewTab.jsx Snapshot tests wit
           <div
             className="CliqzFeature__feature-name"
           >
-            enhanced_anti_tracking
+            anti_tracking
           </div>
         </div>
       </div>
@@ -202,7 +202,7 @@ exports[`app/panel-android/components/content/OverviewTab.jsx Snapshot tests wit
           <div
             className="CliqzFeature__feature-name"
           >
-            enhanced_ad_blocking
+            ad_blocking
           </div>
         </div>
       </div>
@@ -455,7 +455,7 @@ exports[`app/panel-android/components/content/OverviewTab.jsx Snapshot tests wit
           <div
             className="CliqzFeature__feature-name"
           >
-            enhanced_anti_tracking
+            anti_tracking
           </div>
         </div>
       </div>
@@ -477,7 +477,7 @@ exports[`app/panel-android/components/content/OverviewTab.jsx Snapshot tests wit
           <div
             className="CliqzFeature__feature-name"
           >
-            enhanced_ad_blocking
+            ad_blocking
           </div>
         </div>
       </div>
