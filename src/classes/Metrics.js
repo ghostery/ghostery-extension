@@ -294,6 +294,18 @@ class Metrics {
 	}
 
 	/**
+	 * Helper for building query string key value pairs
+	 *
+	 * @private
+	 *
+	 * @since 8.5.3
+	 * @param  {string} query   param to be included in string
+	 * @param  {string} value   number value to be passed on through qeury string
+	 * @return {string}         complete query component
+	 */
+	_buildQueryPair = (query, value) => `&${query}=${encodeURIComponent(value)}`;
+
+	/**
 	 * Build telemetry URL
 	 *
  	 * @private
@@ -305,101 +317,103 @@ class Metrics {
 	_buildMetricsUrl(type, frequency) {
 		const frequencyString = (type !== 'uninstall') ? `/${frequency}` : '';
 
-		let metrics_url = `${METRICS_BASE_URL}/${type}${frequencyString}?gr=-1` +
+		let metrics_url = `${METRICS_BASE_URL}/${type}${frequencyString}?gr=-1`;
+		metrics_url +=
+			// Crucial parameters
+			// Always added for uninstall URL
 			// Extension version
-			`&v=${encodeURIComponent(EXTENSION_VERSION)}` +
+			this._buildQueryPair('v', EXTENSION_VERSION) +
 			// User agent - browser
-			`&ua=${encodeURIComponent(BROWSER_INFO.token)}` +
+			this._buildQueryPair('ua', BROWSER_INFO.token) +
 			// Operating system
-			`&os=${encodeURIComponent(BROWSER_INFO.os)}` +
+			this._buildQueryPair('os', BROWSER_INFO.os) +
 			// Browser language
-			`&l=${encodeURIComponent(conf.language)}` +
+			this._buildQueryPair('l', conf.language) +
 			// Browser version
-			`&bv=${encodeURIComponent(BROWSER_INFO.version)}` +
+			this._buildQueryPair('bv', BROWSER_INFO.version) +
 			// Offers (former offers)
-			`&of=${encodeURIComponent(conf.enable_offers ? '1' : '0')}` +
+			this._buildQueryPair('of', conf.enable_offers ? '1' : '0') +
 			// Date of install (former install_date)
-			`&id=${encodeURIComponent(conf.install_date)}` +
+			this._buildQueryPair('id', conf.install_date) +
 			// Showing campaign messages (former show_cmp)
-			`&sc=${encodeURIComponent(conf.show_cmp ? '1' : '0')}` +
+			this._buildQueryPair('sc', conf.show_cmp ? '1' : '0') +
 			// Subscription Type
-			`&st=${encodeURIComponent(Metrics._getSubscriptionType().toString())}` +
+			this._buildQueryPair('st', Metrics._getSubscriptionType().toString()) +
 
 			// New parameters for Ghostery 8.5.2
 			// Subscription Interval
-			`&si=${encodeURIComponent(Metrics._getSubscriptionInterval().toString())}` +
+			this._buildQueryPair('si', Metrics._getSubscriptionInterval().toString()) +
 			// Product ID Parameter
-			`&pi=${encodeURIComponent('gbe')}`;
+			this._buildQueryPair('pi', 'gbe');
 
 		if (type !== 'uninstall') {
 			metrics_url +=
 			// Old parameters, old names
 			// Human web
-			`&hw=${encodeURIComponent(conf.enable_human_web ? '1' : '0')}` +
-
+			this._buildQueryPair('hw', conf.enable_human_web ? '1' : '0') +
 			// Old parameters, new names
 			// Random number, assigned at install (former install_rand)
-			`&ir=${encodeURIComponent(conf.install_random_number)}` +
+			this._buildQueryPair('ir', conf.install_random_number) +
 			// Login state (former signed_in)
-			`&sn=${encodeURIComponent(conf.account ? '1' : '0')}` +
+			this._buildQueryPair('sn', conf.account ? '1' : '0') +
 			// Noncritical ping (former noncritical)
-			`&nc=${encodeURIComponent(conf.enable_metrics ? '1' : '0')}` +
+			this._buildQueryPair('nc', conf.enable_metrics ? '1' : '0') +
 			// Purplebox state (former purplebox)
-			`&pb=${encodeURIComponent(conf.show_alert ? (conf.alert_expanded ? '1' : '2') : '0')}` +
+			this._buildQueryPair('pb', conf.show_alert ? (conf.alert_expanded ? '1' : '2') : '0') +
 
 			// New parameters, new names
 			// Extension_view - which view of the extension is the user in
-			`&ev=${encodeURIComponent(conf.is_expert ? (conf.is_expanded ? '3' : '2') : '1')}` +
+			this._buildQueryPair('ev', conf.is_expert ? (conf.is_expanded ? '3' : '2') : '1') +
 			// Adblocking state
-			`&ab=${encodeURIComponent(conf.enable_ad_block ? '1' : '0')}` +
+			this._buildQueryPair('ab', conf.enable_ad_block ? '1' : '0') +
 			// Smartblocking state
-			`&sm=${encodeURIComponent(conf.enable_smart_block ? '1' : '0')}` +
+			this._buildQueryPair('sm', conf.enable_smart_block ? '1' : '0') +
 			// Antitracking state
-			`&at=${encodeURIComponent(conf.enable_anti_tracking ? '1' : '0')}` +
+			this._buildQueryPair('at', conf.enable_anti_tracking ? '1' : '0') +
 			// The deepest setup page reached by user during setup
-			`&ss=${encodeURIComponent((conf.metrics.install_complete_all || type === 'install_complete') ? conf.setup_step.toString() : '-1')}` +
+			this._buildQueryPair('ss', (conf.metrics.install_complete_all || type === 'install_complete') ? conf.setup_step.toString() : '-1') +
 			// The number of times the user has gone through setup
-			`&sl=${encodeURIComponent(conf.setup_number.toString())}` +
+			this._buildQueryPair('sl', conf.setup_number.toString()) +
 			// Type of blocking selected during setup
-			`&sb=${encodeURIComponent(conf.setup_block.toString())}` +
+			this._buildQueryPair('sb', conf.setup_block.toString()) +
 			// Recency, days since last active daily ping
-			`&rc=${encodeURIComponent(Metrics._getRecencyActive(type, frequency).toString())}` +
+			this._buildQueryPair('rc', Metrics._getRecencyActive(type, frequency).toString()) +
 
 			// New parameters to Ghostery 8.3
 			// Whether the computer ever had a Paid Subscription
-			`&ps=${encodeURIComponent(conf.paid_subscription ? '1' : '0')}` +
+			this._buildQueryPair('ps', conf.paid_subscription ? '1' : '0') +
 			// Active Velocity
-			`&va=${encodeURIComponent(Metrics._getVelocityActive(type).toString())}` +
+			this._buildQueryPair('va', Metrics._getVelocityActive(type).toString()) +
 			// Engaged Recency
-			`&re=${encodeURIComponent(Metrics._getRecencyEngaged(type, frequency).toString())}` +
+			this._buildQueryPair('re', Metrics._getRecencyEngaged(type, frequency).toString()) +
 			// Engaged Velocity
-			`&ve=${encodeURIComponent(Metrics._getVelocityEngaged(type).toString())}` +
+			this._buildQueryPair('ve', Metrics._getVelocityEngaged(type).toString()) +
 			// Theme
-			`&th=${encodeURIComponent(Metrics._getThemeValue().toString())}` +
+			this._buildQueryPair('th', Metrics._getThemeValue().toString()) +
 
 			// New parameter for Ghostery 8.5.3
 			// AB tests enabled?
-			`&ts=${encodeURIComponent(conf.enable_abtests ? '1' : '0')}`;
+			this._buildQueryPair('ts', conf.enable_abtests ? '1' : '0');
 
 			if (conf.enable_abtests) {
 				// Hub Layout A/B test. Added in 8.5.3. GH-2097, GH-2100
-				metrics_url += `&t2=${encodeURIComponent(Metrics._getHubLayoutView().toString())}`;
+				metrics_url += this._buildQueryPair('t2', Metrics._getHubLayoutView().toString());
 			}
 		}
 
-		if (CAMPAIGN_METRICS.includes(type)) {
+		if (CAMPAIGN_METRICS.includes(type) || type === 'uninstall') {
 			// only send campaign attribution when necessary
 			metrics_url +=
 				// Marketing source (Former utm_source)
-				`&us=${encodeURIComponent(this.utm_source)}` +
+				this._buildQueryPair('us', this.utm_source) +
 				// Marketing campaign (Former utm_campaign)
-				`&uc=${encodeURIComponent(this.utm_campaign)}`;
+				this._buildQueryPair('uc', this.utm_campaign);
 		} else if (type === 'broken_page' && this._brokenPageWatcher.on && type !== 'uninstall') {
 			metrics_url +=
 				// What triggered the broken page ping?
-				`&setup_path=${encodeURIComponent(this._brokenPageWatcher.triggerId.toString())}` +
+				this._buildQueryPair('setup_path', this._brokenPageWatcher.triggerId.toString()) +
 				// How much time passed between the trigger and the page refresh / open in new tab?
-				`&setup_block=${encodeURIComponent((Date.now() - this._brokenPageWatcher.triggerTime).toString())}`;
+				this._buildQueryPair('setup_block', (Date.now() - this._brokenPageWatcher.triggerTime).toString());
 		}
 
 		return metrics_url;
