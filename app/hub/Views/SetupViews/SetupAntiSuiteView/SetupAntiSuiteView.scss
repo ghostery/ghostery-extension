@@ -64,10 +64,10 @@
 }
 
 // Smart Browsing Icon
-.SetupAntiSuite__feature .smart-blocking {
+.SetupAntiSuite__feature .smart-browsing {
 	background-image: buildSmartBrowsingIcon(#9f9f9f);
 }
-.SetupAntiSuite__feature .smart-blocking.active {
+.SetupAntiSuite__feature .smart-browsing.active {
 	background-image: buildSmartBrowsingActiveIcon(#1dafed);
 }
 

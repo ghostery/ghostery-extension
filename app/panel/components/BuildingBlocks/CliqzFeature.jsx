@@ -52,7 +52,7 @@ class CliqzFeature extends React.Component {
 				case 'anti_track':
 					return t('anti_tracking_DESC');
 				case 'smart_block':
-					return t('smart_blocking_DESC');
+					return t('smart_browsing_DESC');
 				default:
 					return false;
 			}
@@ -68,7 +68,7 @@ class CliqzFeature extends React.Component {
 			case 'anti_track':
 				return t('anti_tracking');
 			case 'smart_block':
-				return t('smart_blocking');
+				return t('smart_browsing');
 			default:
 				return false;
 		}
@@ -141,7 +141,7 @@ class CliqzFeature extends React.Component {
 		} else if (featureType === 'ad_block') {
 			featureName = t('ad_blocking');
 		} else if (featureType === 'smart_block') {
-			featureName = t('smart_blocking');
+			featureName = t('smart_browsing');
 		}
 
 		return (

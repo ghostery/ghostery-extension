@@ -75,10 +75,10 @@ const TutorialAntiSuiteView = ({ isAndroid }) => (
 					<div className="TutorialView__keyImage smart-block" />
 					<div>
 						<div className="TutorialView__keyTitle">
-							{t('smart_blocking')}
+							{t('smart_browsing')}
 						</div>
 						<div className="TutorialView__keyText">
-							{t('smart_blocking_DESC')}
+							{t('smart_browsing_DESC')}
 						</div>
 					</div>
 				</div>

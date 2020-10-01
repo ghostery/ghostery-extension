@@ -2464,10 +2464,10 @@
 	"ad_blocking": {
 		"message": "Ad-Blocking"
 	},
-	"smart_blocking": {
+	"smart_browsing": {
 		"message": "Smart Browsing"
 	},
-	"smart_blocking_DESC": {
+	"smart_browsing_DESC": {
 		"message": "Automatically block and unblock trackers to optimize page performance."
 	},
 	"ad_blocking_DESC": {
