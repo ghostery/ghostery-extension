@@ -388,7 +388,7 @@ class DonutGraph extends React.Component {
 							id="unknown_tooltip"
 							key="unknown"
 						>
-							{t('unknown')}
+							{t('unidentified')}
 						</span>
 					)}
 				</div>

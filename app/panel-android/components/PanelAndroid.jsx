@@ -223,8 +223,8 @@ class PanelAndroid extends React.Component {
 		});
 		const unknownCategory = {
 			id: 'unknown',
-			name: t('unknown'),
-			description: t('unknown_description'),
+			name: t('unidentified'),
+			description: t('unidentified_description'),
 			img_name: 'unknown',
 			num_total: unknownTrackers.length,
 			num_blocked: 0, // We don't want to see the Trackers Blocked text

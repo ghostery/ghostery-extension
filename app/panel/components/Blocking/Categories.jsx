@@ -53,8 +53,8 @@ class Categories extends React.Component {
 			const unknownCategoryMapping = isUnknown ? (
 				{
 					id: 'unknown',
-					name: t('unknown'),
-					description: t('unknown_description'),
+					name: t('unidentified'),
+					description: t('unidentified_description'),
 					img_name: 'unknown',
 					num_total: unknownCategory.unknownTrackers.length,
 					num_blocked: unknownCategory.unknownTrackerCount,
