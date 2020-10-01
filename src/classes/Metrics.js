@@ -306,9 +306,6 @@ class Metrics {
 		const frequencyString = (type !== 'uninstall') ? `/${frequency}` : '';
 
 		let metrics_url = `${METRICS_BASE_URL}/${type}${frequencyString}?gr=-1` +
-			// Old parameters, old names
-			// Human web
-			`&hw=${encodeURIComponent(conf.enable_human_web ? '1' : '0')}` +
 			// Extension version
 			`&v=${encodeURIComponent(EXTENSION_VERSION)}` +
 			// User agent - browser
@@ -319,22 +316,36 @@ class Metrics {
 			`&l=${encodeURIComponent(conf.language)}` +
 			// Browser version
 			`&bv=${encodeURIComponent(BROWSER_INFO.version)}` +
-
-			// Old parameters, new names
 			// Offers (former offers)
 			`&of=${encodeURIComponent(conf.enable_offers ? '1' : '0')}` +
+			// Date of install (former install_date)
+			`&id=${encodeURIComponent(conf.install_date)}` +
+			// Showing campaign messages (former show_cmp)
+			`&sc=${encodeURIComponent(conf.show_cmp ? '1' : '0')}` +
+			// Subscription Type
+			`&st=${encodeURIComponent(Metrics._getSubscriptionType().toString())}` +
+
+			// New parameters for Ghostery 8.5.2
+			// Subscription Interval
+			`&si=${encodeURIComponent(Metrics._getSubscriptionInterval().toString())}` +
+			// Product ID Parameter
+			`&pi=${encodeURIComponent('gbe')}`;
+
+		if (type !== 'uninstall') {
+			metrics_url +=
+			// Old parameters, old names
+			// Human web
+			`&hw=${encodeURIComponent(conf.enable_human_web ? '1' : '0')}` +
+
+			// Old parameters, new names
 			// Random number, assigned at install (former install_rand)
 			`&ir=${encodeURIComponent(conf.install_random_number)}` +
 			// Login state (former signed_in)
 			`&sn=${encodeURIComponent(conf.account ? '1' : '0')}` +
-			// Date of install (former install_date)
-			`&id=${encodeURIComponent(conf.install_date)}` +
 			// Noncritical ping (former noncritical)
 			`&nc=${encodeURIComponent(conf.enable_metrics ? '1' : '0')}` +
 			// Purplebox state (former purplebox)
 			`&pb=${encodeURIComponent(conf.show_alert ? (conf.alert_expanded ? '1' : '2') : '0')}` +
-			// Showing campaign messages (former show_cmp)
-			`&sc=${encodeURIComponent(conf.show_cmp ? '1' : '0')}` +
 
 			// New parameters, new names
 			// Extension_view - which view of the extension is the user in
@@ -355,8 +366,6 @@ class Metrics {
 			`&rc=${encodeURIComponent(Metrics._getRecencyActive(type, frequency).toString())}` +
 
 			// New parameters to Ghostery 8.3
-			// Subscription Type
-			`&st=${encodeURIComponent(Metrics._getSubscriptionType().toString())}` +
 			// Whether the computer ever had a Paid Subscription
 			`&ps=${encodeURIComponent(conf.paid_subscription ? '1' : '0')}` +
 			// Active Velocity
@@ -368,19 +377,14 @@ class Metrics {
 			// Theme
 			`&th=${encodeURIComponent(Metrics._getThemeValue().toString())}` +
 
-			// New parameters for Ghostery 8.5.2
-			// Subscription Interval
-			`&si=${encodeURIComponent(Metrics._getSubscriptionInterval().toString())}` +
-			// Product ID Parameter
-			`&pi=${encodeURIComponent('gbe')}` +
-
 			// New parameter for Ghostery 8.5.3
 			// AB tests enabled?
 			`&ts=${encodeURIComponent(conf.enable_abtests ? '1' : '0')}`;
 
-		if (conf.enable_abtests) {
-			// Hub Layout A/B test. Added in 8.5.3. GH-2097, GH-2100
-			metrics_url += `&t2=${encodeURIComponent(Metrics._getHubLayoutView().toString())}`;
+			if (conf.enable_abtests) {
+				// Hub Layout A/B test. Added in 8.5.3. GH-2097, GH-2100
+				metrics_url += `&t2=${encodeURIComponent(Metrics._getHubLayoutView().toString())}`;
+			}
 		}
 
 		if (CAMPAIGN_METRICS.includes(type)) {
@@ -390,7 +394,7 @@ class Metrics {
 				`&us=${encodeURIComponent(this.utm_source)}` +
 				// Marketing campaign (Former utm_campaign)
 				`&uc=${encodeURIComponent(this.utm_campaign)}`;
-		} else if (type === 'broken_page' && this._brokenPageWatcher.on) {
+		} else if (type === 'broken_page' && this._brokenPageWatcher.on && type !== 'uninstall') {
 			metrics_url +=
 				// What triggered the broken page ping?
 				`&setup_path=${encodeURIComponent(this._brokenPageWatcher.triggerId.toString())}` +
