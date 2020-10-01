@@ -107,7 +107,7 @@ class SetupAntiSuiteViewContainer extends Component {
 		const features = [
 			{
 				id: 'anti-tracking',
-				name: t('enhanced_anti_tracking'),
+				name: t('anti_tracking'),
 				enabled: anti_tracking_enabled,
 				locked: IS_CLIQZ,
 				toggle: IS_CLIQZ ?
@@ -117,7 +117,7 @@ class SetupAntiSuiteViewContainer extends Component {
 			},
 			{
 				id: 'ad-block',
-				name: t('enhanced_ad_blocking'),
+				name: t('ad_blocking'),
 				enabled: ad_block_enabled,
 				locked: IS_CLIQZ,
 				toggle: IS_CLIQZ ?

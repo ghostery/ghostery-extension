@@ -64,9 +64,9 @@ class CliqzFeature extends React.Component {
 
 		switch (type) {
 			case 'ad_block':
-				return t('enhanced_ad_blocking');
+				return t('ad_blocking');
 			case 'anti_track':
-				return t('enhanced_anti_tracking');
+				return t('anti_tracking');
 			case 'smart_block':
 				return t('smart_blocking');
 			default:
@@ -137,9 +137,9 @@ class CliqzFeature extends React.Component {
 		const featureType = type === 'anti_track' ? 'anti_tracking' : type;
 		let featureName;
 		if (featureType === 'anti_tracking') {
-			featureName = t('enhanced_anti_tracking');
+			featureName = t('anti_tracking');
 		} else if (featureType === 'ad_block') {
-			featureName = t('enhanced_ad_blocking');
+			featureName = t('ad_blocking');
 		} else if (featureType === 'smart_block') {
 			featureName = t('smart_blocking');
 		}

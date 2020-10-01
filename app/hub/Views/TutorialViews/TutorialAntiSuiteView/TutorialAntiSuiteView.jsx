@@ -53,7 +53,7 @@ const TutorialAntiSuiteView = ({ isAndroid }) => (
 					<div className="TutorialView__keyImage anti-track" />
 					<div>
 						<div className="TutorialView__keyTitle">
-							{t('enhanced_anti_tracking')}
+							{t('anti_tracking')}
 						</div>
 						<div className="TutorialView__keyText">
 							{t('hub_tutorial_antisuite_antitracking_description')}
@@ -64,7 +64,7 @@ const TutorialAntiSuiteView = ({ isAndroid }) => (
 					<div className="TutorialView__keyImage ad-block" />
 					<div>
 						<div className="TutorialView__keyTitle">
-							{t('enhanced_ad_blocking')}
+							{t('ad_blocking')}
 						</div>
 						<div className="TutorialView__keyText">
 							{t('ad_blocking_DESC')}

@@ -675,10 +675,10 @@
 		"message": "Tracker is slow"
 	},
 	"panel_tracker_warning_smartblock_tooltip": {
-		"message": "Tracker blocked by Smart Blocking"
+		"message": "Tracker blocked by Smart Browsing"
 	},
 	"panel_tracker_warning_smartunblock_tooltip": {
-		"message": "Tracker unblocked by Smart Blocking"
+		"message": "Tracker unblocked by Smart Browsing"
 	},
 	"panel_tracker_block_tooltip": {
 		"message": "Block on all sites"
@@ -807,10 +807,10 @@
 		"message": "This site is already whitelisted."
 	},
 	"settings_adblocker": {
-		"message": "Ad Block Lists"
+		"message": "Ad-Block Lists"
 	},
 	"settings_adblocker_lists": {
-		"message": "Load the following Ad Block filter lists:"
+		"message": "Load the following Ad-Block filter lists:"
 	},
 	"settings_adblocker_list_1": {
 		"message": "Ads only"
@@ -1065,7 +1065,7 @@
 		"message": "Requests Modified:"
 	},
 	"requests_modified_tooltip": {
-		"message": "Total number of tracking requests & elements modified by Anti-Tracking and Ad Blocking"
+		"message": "Total number of tracking requests & elements modified by Anti-Tracking and Ad-Blocking"
 	},
 	"trackers_blocked": {
 		"message": "Trackers Blocked:"
@@ -1134,22 +1134,22 @@
 		"message": "Ghostery extension has been resumed."
 	},
 	"alert_anti_track_on": {
-		"message": "Enhanced Anti-Tracking ON. Personal data will be anonymized."
+		"message": "Anti-Tracking ON. Personal data will be anonymized."
 	},
 	"alert_anti_track_off": {
-		"message": "Enhanced Anti-Tracking OFF. Personal data will not be anonymized."
+		"message": "Anti-Tracking OFF. Personal data will not be anonymized."
 	},
 	"alert_ad_block_on": {
-		"message": "Enhanced Ad-Blocking ON. Advertisements will be blocked."
+		"message": "Ad-Blocking ON. Advertisements will be blocked."
 	},
 	"alert_ad_block_off": {
-		"message": "Enhanced Ad-Blocking OFF. Advertisements will not be blocked."
+		"message": "Ad-Blocking OFF. Advertisements will not be blocked."
 	},
 	"alert_smart_block_on": {
-		"message": "Smart Blocking ON. Tracker blocking will be adjusted to optimize page performance."
+		"message": "Smart Browsing ON. Tracker blocking will be adjusted to optimize page performance."
 	},
 	"alert_smart_block_off": {
-		"message": "Smart Blocking OFF. Tracker blocking will not be automatically adjusted."
+		"message": "Smart Browsing OFF. Tracker blocking will not be automatically adjusted."
 	},
 	"alert_reload": {
 		"message": "Reload to see changes."
@@ -2150,8 +2150,8 @@
 	"ghostery_rewards": {
 		"message": "ghostery rewards"
 	},
-	"enhanced_anti_tracking": {
-		"message": "Enhanced Anti-Tracking"
+	"anti_tracking": {
+		"message": "Anti-Tracking"
 	},
 	"panel_rewards_view__reward": {
 		"message": "Reward"
@@ -2461,11 +2461,11 @@
 	"off": {
 		"message": "Off"
 	},
-	"enhanced_ad_blocking": {
-		"message": "Enhanced Ad Blocking"
+	"ad_blocking": {
+		"message": "Ad-Blocking"
 	},
 	"smart_blocking": {
-		"message": "Smart Blocking"
+		"message": "Smart Browsing"
 	},
 	"smart_blocking_DESC": {
 		"message": "Automatically block and unblock trackers to optimize page performance."
