@@ -17,6 +17,7 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { BASIC, PLUS, PREMIUM } from './UpgradePlanViewConstants';
 import globals from '../../../../src/classes/Globals';
+import QueryString from 'query-string';
 
 const featureMatrixRow = (label, isBasic, isPlus, isSparkle) => (
 	<tr>
@@ -113,8 +114,11 @@ const premiumAlreadyProtectedButton = () => (
 	</NavLink>
 );
 
+// Flag to display alternate hub view (used for A/B testing ticket GH-2097)
+const ah = (QueryString.parse(window.location.search).ah === 'true') || false;
+
 /**
- * A React class component for rendering the Upgrade Plan View
+ * A React function component for rendering the Upgrade Plan View
  * @return {JSX} JSX for rendering the Upgrade Plan View of the Hub app
  * @memberof HubComponents
  */
@@ -178,7 +182,8 @@ const UpgradePlanView = (props) => {
 
 	const plusCTAButton = (position) => {
 		const utm_campaign = (position === 'top' ? 'c_1' : 'c_2');
-		const plusCheckoutLink = `${globals.CHECKOUT_BASE_URL}/plus?${params}&utm_campaign=intro_hub_${utm_campaign}`;
+		const utm_content = (ah ? '2' : '1');
+		const plusCheckoutLink = `${globals.CHECKOUT_BASE_URL}/plus?${params}&utm_campaign=intro_hub_${utm_campaign}&utm_content=${utm_content}`;
 
 		return (
 			<a className="button button-gold" href={plusCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Plus">
@@ -189,7 +194,8 @@ const UpgradePlanView = (props) => {
 
 	const premiumCTAButton = (position) => {
 		const utm_campaign = (position === 'top' ? 'c_3' : 'c_4');
-		const premiumCheckoutLink = `${globals.CHECKOUT_BASE_URL}/premium?${params}&utm_campaign=intro_hub_${utm_campaign}`;
+		const utm_content = (ah ? '2' : '1');
+		const premiumCheckoutLink = `${globals.CHECKOUT_BASE_URL}/premium?${params}&utm_campaign=intro_hub_${utm_campaign}&utm_content=${utm_content}`;
 
 		return (
 			<a className="button button-premium" href={premiumCheckoutLink} target="_blank" rel="noopener noreferrer" title="Upgrade to Premium">
