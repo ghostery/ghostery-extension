@@ -833,6 +833,9 @@
 	"settings_account": {
 		"message": "Compte"
 	},
+	"settings_import_export": {
+		"message": "Paramètres Import & Export"
+	},
 	"settings_trackers": {
 		"message": "mouchards"
 	},
@@ -944,6 +947,9 @@
 	"settings_allow_offers": {
 		"message": "Participation aux Ghostery Rewards"
 	},
+  	"settings_allow_abtests": {
+	  	"message": "Participation aux tests A/B"
+	},
 	"settings_signin_create_header": {
 		"message": "Connexion / Créer un compte"
 	},
@@ -1033,6 +1039,9 @@
 	},
 	"settings_offers_tooltip": {
 		"message": "Ghostery Rewards est une fonction respectueuse de la vie privée, dès la conception, qui vous donne droit à des réductions comme des offres spéciales de sociétés partenaires lors de votre navigation."
+	},
+  	"settings_abtests_tooltip": {
+	  	"message": "La participation à des tests A/B au hasard permet à Ghostery de comprendre quelle version d'une nouvelle mise en page ou fonction les utilisateurs comme vous préfèrent."
 	},
 	"settings_opt_in": {
 		"message": "Accepter / Refuser"
@@ -1234,6 +1243,48 @@
 			}
 		}
 	},
+	"android_tab_overview": {
+		"message": "Aperçu"
+	},
+	"android_tab_site_blocking": {
+		"message": "Blocage de site"
+	},
+	"android_tab_global_blocking": {
+		"message": "Blocage global"
+	},
+	"android_site_blocking_header": {
+		"message": "Mouchards sur ce site"
+	},
+	"android_global_blocking_header": {
+		"message": "Pistage global"
+	},
+	"android_blocking_reset": {
+		"message": "Réinitialiser les paramètres"
+	},
+	"android_block": {
+		"message": "Bloquer"
+	},
+	"android_unblock": {
+		"message": "Ne pas bloquer"
+	},
+	"android_restrict": {
+		"message": "Restreindre"
+	},
+	"android_unrestrict": {
+		"message": "Annuler"
+	},
+	"android_trust": {
+		"message": "Se fier"
+	},
+	"android_untrust": {
+		"message": "Annuler"
+	},
+	"android_anonymize": {
+		"message": "Anonymiser"
+	},
+	"android_anonymized": {
+		"message": "Anonymisé"
+	},
 	"hub_side_navigation_home": {
 		"message": "Page d'accueil"
 	},
@@ -1305,6 +1356,9 @@
 	},
 	"hub_home_plus_full_protection": {
 		"message": "Vous êtes entièrement protégé !"
+	},
+	"hub_upgrade_page_title": {
+		"message": "Ghostery Hub - Surclasser votre plan"
 	},
 	"hub_upgrade_your": {
 		"message": "Surclassez votre"
@@ -1684,7 +1738,7 @@
 		"message": "Résolvez rapidement vos problèmes avec notre service d'assistance prioritaire et ses avantages"
 	},
 	"hub_supporter_manifesto": {
-		"message": "Nous nous efforçons d'offrir à nos utilisateurs les meilleurs services de protection de la vie privée, en toute gratuité. Bien que nous notre extension de navigateur ne soit pas payante, vous pouvez décider de nous soutenir en souscrivant un abonnement mensuel.  Soutenez notre mission en passant à Ghostery Plus — et découvrez de super avantages lors de votre navigation !"
+		"message": "Nous nous efforçons d'offrir à nos utilisateurs les meilleurs services de protection de la vie privée, en toute gratuité. Bien que notre extension de navigateur ne soit pas payante, vous pouvez décider de nous soutenir en souscrivant un abonnement mensuel au prix de &#36;4.99.  Soutenez notre mission en passant à Ghostery Plus et découvrez de super avantages lors de votre navigation !"
 	},
 	"hub_supporter_feature_theme_description": {
 		"message": "Personnalisez les couleurs de Ghostery pour une nouvelle expérience visuelle ! Lancé à la demande générale. Découvrez notre thème spécial Dark Blue, et bien d'autres à venir."
@@ -1899,7 +1953,7 @@
 		"message": "Thèmes"
 	},
 	"subscribe_pitch": {
-		"message": "Ghostery est entièrement gratuit ; vous pouvez dès lors décider de nous soutenir en souscrivant un abonnement mensuel. Vous bénéficiez en retour de super avantages tels que des thèmes de couleur, un service d'assistance prioritaire, parmi tant d'autres. Soutenez notre mission en vous abonnant !"
+		"message": "Ghostery est entièrement gratuit ; vous pouvez dès lors décider de nous soutenir en souscrivant un abonnement mensuel de &#36;4.99. Vous bénéficiez en retour de super avantages tels que des thèmes de couleur, des statistiques de pistage personnelles parmi tant d'autres. Soutenez notre mission en vous abonnant !"
 	},
 	"subscribe_pitch_spring": {
 		"message": "Vous appréciez notre travail ? Soutenez-nous et débloquez de nouveaux thèmes de printemps, des informations de suivi personnalisées et d'autres avantages spéciaux en passant à Ghostery Plus !"
@@ -2468,7 +2522,7 @@
 		"message": "Essayez Ghostery Midnight"
 	},
 	"seven_day_free_trial": {
-		"message": "Essai gratuit de 7 jours"
+		"message": "Essai gratuit de 7 jours"
 	},
 	"spring_is_here": {
 		"message": "Le printemps est arrivé !"
@@ -2499,5 +2553,8 @@
 	},
 	"too_many_password_resets_text": {
 		"message": "Vous avez dépassé le nombre de demandes de réinitialisation de mot de passe autorisé. Veuillez réessayer dans une heure."
+	},
+	"too_many_failed_logins_text": {
+		"message": "Vous avez dépassé le nombre de tentatives de connexion autorisé. Veuillez réessayer dans une heure."
 	}
 }

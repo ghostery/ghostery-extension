@@ -833,6 +833,9 @@
 	"settings_account": {
 		"message": "Konto"
 	},
+	"settings_import_export": {
+		"message": "Einstellungen importieren und exportieren"
+	},
 	"settings_trackers": {
 		"message": "Tracker"
 	},
@@ -944,6 +947,9 @@
 	"settings_allow_offers": {
 		"message": "Teilnahme an Ghostery Rewards"
 	},
+  	"settings_allow_abtests": {
+	  	"message": "Teilnahme an A/B-Tests"
+	},
 	"settings_signin_create_header": {
 		"message": "Anmelden/Konto erstellen"
 	},
@@ -1033,6 +1039,9 @@
 	},
 	"settings_offers_tooltip": {
 		"message": "Ghostery Rewards ist eine Private-by-Design-Funktion, die Ihnen beim Browsen Rabatte und Sonderangebote unserer Partnerunternehmen liefert."
+	},
+  	"settings_abtests_tooltip": {
+	  	"message": "Die Teilnahme an randomisierten A/B-Tests hilft Ghostery zu verstehen, welche Version eines neuen Layouts oder einer neuen Funktion Benutzer wie Sie bevorzugen."
 	},
 	"settings_opt_in": {
 		"message": "Opt-in/-out"
@@ -1234,6 +1243,48 @@
 			}
 		}
 	},
+	"android_tab_overview": {
+		"message": "Übersicht"
+	},
+	"android_tab_site_blocking": {
+		"message": "Blockieren von Websites"
+	},
+	"android_tab_global_blocking": {
+		"message": "Global blockieren"
+	},
+	"android_site_blocking_header": {
+		"message": "Tracker auf dieser Website"
+	},
+	"android_global_blocking_header": {
+		"message": "Globales Tracking"
+	},
+	"android_blocking_reset": {
+		"message": "Einstellungen zurücksetzen"
+	},
+	"android_block": {
+		"message": "Blockieren"
+	},
+	"android_unblock": {
+		"message": "Nicht Blockieren"
+	},
+	"android_restrict": {
+		"message": "Einschränken"
+	},
+	"android_unrestrict": {
+		"message": "Rückgängig machen"
+	},
+	"android_trust": {
+		"message": "Vertrauen"
+	},
+	"android_untrust": {
+		"message": "Rückgängig machen"
+	},
+	"android_anonymize": {
+		"message": "Anonymisieren"
+	},
+	"android_anonymized": {
+		"message": "Anonymisiert"
+	},
 	"hub_side_navigation_home": {
 		"message": "Startseite"
 	},
@@ -1305,6 +1356,9 @@
 	},
 	"hub_home_plus_full_protection": {
 		"message": "Sie sind umfassend geschützt!"
+	},
+	"hub_upgrade_page_title": {
+		"message": "Ghostery Hub - Upgrade-Plan"
 	},
 	"hub_upgrade_your": {
 		"message": "Upgrade für Ihren"
@@ -1684,7 +1738,7 @@
 		"message": "Lösen Sie Probleme schneller mit unserem Priority Helpdesk-Service – und weitere Vorteile"
 	},
 	"hub_supporter_manifesto": {
-		"message": "Wir versuchen, unseren Nutzern kostenlos die besten Dienstleistungen zum Schutz der Privatsphäre zu bieten. Wir verlangen keine Gebühr für unsere Browser-Erweiterung, aber Sie können uns durch ein kleines monatliches Abonnement unterstützen. Stufen Sie Ihre Version auf Ghostery Plus hoch - es erwarten Sie tolle Vorteile."
+		"message": "Wir sind bestrebt, unseren Nutzern kostenlos die besten Dienstleistungen zum Schutz der Privatsphäre zur Verfügung zu stellen. Wir verlangen keine Gebühr für unsere Browser-Erweiterung, aber Sie können uns mit einem monatlichen Abonnement in Höhe von 4,99 Dollar unterstützen. Stufen Sie Ihre Version auf Ghostery Plus hoch - es erwarten Sie tolle Vorteile."
 	},
 	"hub_supporter_feature_theme_description": {
 		"message": "Passen Sie die Ghostery-Farben für eine neue visuelle Erfahrung an! Eingeführt auf vielfachen Wunsch. Sehen Sie sich unser spezielles dunkelblaues Thema an. Weitere Themen folgen noch."
@@ -1899,7 +1953,7 @@
 		"message": "Themes"
 	},
 	"subscribe_pitch": {
-		"message": "Ghostery ist kostenlos, aber Sie können uns durch ein kleines monatliches Abonnement unterstützen. Als Gegenleistung erhalten Sie besondere Vorteile wie bunte Themes, persönliche Tracking-Statistiken und mehr. Kaufen Sie jetzt ein Abonnement."
+		"message": "Wir verlangen keine Gebühr für unsere Browser-Erweiterung, aber Sie können uns mit einem monatlichen Abonnement in Höhe von 4,99 Dollar unterstützen. Dafür erhalten Sie besondere Vorteile wie bunte Themes, persönliche Tracking-Statistiken und mehr. Kaufen Sie jetzt ein Abonnement."
 	},
 	"subscribe_pitch_spring": {
 		"message": "Gefällt Ihnen, was wir tun? Unterstützen Sie uns und schalten Sie durch ein Upgrade auf Ghostery Plus neue Frühlingsthemen, persönliche Tracking-Informationen und weitere besondere Vergünstigungen frei!"
@@ -2499,5 +2553,8 @@
 	},
 	"too_many_password_resets_text": {
 		"message": "Zu viele Anforderungen zur Passwortzurücksetzung gesendet. Versuchen Sie es in einer Stunde erneut."
+	},
+	"too_many_failed_logins_text": {
+		"message": "Zu viele fehlgeschlagene Anmeldeversuche. Versuchen Sie es in einer Stunde erneut."
 	}
 }

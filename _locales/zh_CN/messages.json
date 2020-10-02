@@ -833,6 +833,9 @@
 	"settings_account": {
 		"message": "帐户"
 	},
+	"settings_import_export": {
+		"message": "导入和导出设置"
+	},
 	"settings_trackers": {
 		"message": "跟踪器"
 	},
@@ -944,6 +947,9 @@
 	"settings_allow_offers": {
 		"message": "已参与Ghostery Rewards"
 	},
+  	"settings_allow_abtests": {
+	  	"message": "参与 A/B 测试"
+	},
 	"settings_signin_create_header": {
 		"message": "登录/创建帐户"
 	},
@@ -1033,6 +1039,9 @@
 	},
 	"settings_offers_tooltip": {
 		"message": "Ghostery Rewards是一个按私密原则设计的功能，能在您上网浏览时为您提供来自我们合作公司的折扣和特惠。"
+	},
+  	"settings_abtests_tooltip": {
+	  	"message": "参与随机 A/B 测试有助于 Ghostery 了解您这类用户喜欢哪种版本的新布局或功能。 "
 	},
 	"settings_opt_in": {
 		"message": "加入/退出"
@@ -1234,6 +1243,48 @@
 			}
 		}
 	},
+	"android_tab_overview": {
+		"message": "概览"
+	},
+	"android_tab_site_blocking": {
+		"message": "站点拦截"
+	},
+	"android_tab_global_blocking": {
+		"message": "全局拦截"
+	},
+	"android_site_blocking_header": {
+		"message": "此网站上的追踪器"
+	},
+	"android_global_blocking_header": {
+		"message": "全局追踪"
+	},
+	"android_blocking_reset": {
+		"message": "重置设置"
+	},
+	"android_block": {
+		"message": "拦截"
+	},
+	"android_unblock": {
+		"message": "取消拦截"
+	},
+	"android_restrict": {
+		"message": "限制"
+	},
+	"android_unrestrict": {
+		"message": "撤消"
+	},
+	"android_trust": {
+		"message": "信任"
+	},
+	"android_untrust": {
+		"message": "撤消"
+	},
+	"android_anonymize": {
+		"message": "匿名"
+	},
+	"android_anonymized": {
+		"message": "保持匿名"
+	},
 	"hub_side_navigation_home": {
 		"message": "主页"
 	},
@@ -1305,6 +1356,9 @@
 	},
 	"hub_home_plus_full_protection": {
 		"message": "您已获得全面保护！"
+	},
+	"hub_upgrade_page_title": {
+		"message": "Ghostery Hub - 更新套餐"
 	},
 	"hub_upgrade_your": {
 		"message": "升级您的"
@@ -1684,7 +1738,7 @@
 		"message": "使用我们的优先帮助台服务快速解决问题，更多特权即将推出"
 	},
 	"hub_supporter_manifesto": {
-		"message": "我们致力于为用户免费提供最出色的隐私保护服务。尽管我们的浏览器扩展程序不收费，但是您可以选择通过低价按月订阅来支持我们。升级为 Ghostery Plus，加入我们的使命——并解锁各种酷炫福利！"
+		"message": "我们致力于为用户免费提供最出色的隐私保护服务。尽管我们的浏览器扩展程序不收费，但是您可以选择通过价格为 &#36;4.99 的按月订阅来支持我们。升级为 Ghostery Plus，加入我们的使命——并解锁各种酷炫福利！"
 	},
 	"hub_supporter_feature_theme_description": {
 		"message": "定制 Ghostery 的颜色，获得全新的视觉体验！通过热门请求引入。快看看我们的特别版 Dark Blue 主题，更多主题敬请期待。"
@@ -1899,7 +1953,7 @@
 		"message": "主题"
 	},
 	"subscribe_pitch": {
-		"message": "尽管 Ghostery 是免费的，但是您可以选择通过低价按月订阅来支持我们，同时还能获得专属福利，例如彩色主题、个人追踪统计数据等等。加入我们的使命并订阅！"
+		"message": "尽管 Ghostery 是免费的，但是您可以选择通过价格为 &#36;4.99 的按月订阅来支持我们，同时还能获得专属福利，例如彩色主题、个人追踪统计数据等等。加入我们的使命并订阅！"
 	},
 	"subscribe_pitch_spring": {
 		"message": "喜欢我们的创意？升级至 Ghostery Plus，解锁全新的春季主题、个人追踪洞察和其他特别福利！"
@@ -2499,5 +2553,8 @@
 	},
 	"too_many_password_resets_text": {
 		"message": "密码重置请求次数过多。请一小时后重试。"
+	},
+	"too_many_failed_logins_text": {
+		"message": "登录失败次数过多。请一小时后重试。"
 	}
 }

@@ -833,6 +833,9 @@
 	"settings_account": {
 		"message": "Account"
 	},
+	"settings_import_export": {
+		"message": "Importa ed esporta le impostazioni"
+	},
 	"settings_trackers": {
 		"message": "Tracker"
 	},
@@ -944,6 +947,9 @@
 	"settings_allow_offers": {
 		"message": "Partecipare a Ghostery Rewards"
 	},
+  	"settings_allow_abtests": {
+	  	"message": "Partecipare a test A/B"
+	},
 	"settings_signin_create_header": {
 		"message": "Accedi  / Crea un Accont"
 	},
@@ -1033,6 +1039,9 @@
 	},
 	"settings_offers_tooltip": {
 		"message": "Ghostery Rewards è una funzione progettata pensando alla privacy, tramite la quale le aziende nostre partner ti propongono sconti e offerte speciali mentre navighi."
+	},
+  	"settings_abtests_tooltip": {
+	  	"message": "La partecipazione a test A/B casuali aiuta Ghostery a capire quale versione di un nuovo layout o funzione preferiscono gli utenti come te."
 	},
 	"settings_opt_in": {
 		"message": "Opt In / Out"
@@ -1234,6 +1243,48 @@
 			}
 		}
 	},
+	"android_tab_overview": {
+		"message": "Panoramica "
+	},
+	"android_tab_site_blocking": {
+		"message": "Blocco del sito"
+	},
+	"android_tab_global_blocking": {
+		"message": "Blocco Globale"
+	},
+	"android_site_blocking_header": {
+		"message": "Tracker su questo sito"
+	},
+	"android_global_blocking_header": {
+		"message": "Tracciamento globale"
+	},
+	"android_blocking_reset": {
+		"message": "Ripristina impostazioni"
+	},
+	"android_block": {
+		"message": "Blocca"
+	},
+	"android_unblock": {
+		"message": "Sblocca"
+	},
+	"android_restrict": {
+		"message": "Limita"
+	},
+	"android_unrestrict": {
+		"message": "Annulla"
+	},
+	"android_trust": {
+		"message": "Considera Affidabile"
+	},
+	"android_untrust": {
+		"message": "Annulla"
+	},
+	"android_anonymize": {
+		"message": "Rendi anonimo"
+	},
+	"android_anonymized": {
+		"message": "Reso anonimo"
+	},
 	"hub_side_navigation_home": {
 		"message": "Home"
 	},
@@ -1305,6 +1356,9 @@
 	},
 	"hub_home_plus_full_protection": {
 		"message": "Sei completamente protetto!"
+	},
+	"hub_upgrade_page_title": {
+		"message": "Ghostery Hub - Esegui l'upgrade del piano"
 	},
 	"hub_upgrade_your": {
 		"message": "Effettua l'upgrade del tuo"
@@ -1684,7 +1738,7 @@
 		"message": "Risolvi rapidamente i problemi con il nostro servizio di assistenza prioritario e molti altri vantaggi futuri"
 	},
 	"hub_supporter_manifesto": {
-		"message": "Ci impegniamo a offrire gratuitamente ai nostri utenti i migliori servizi di tutela della privacy. Anche se la nostra estensione per browser è gratuita, puoi decidere di sostenerci con un piccolo abbonamento mensile. Unisciti a noi nella nostra missione effettuando l'upgrade a Ghostery Plus, e sblocca fantastici extra lungo la strada!"
+		"message": "Ci impegniamo a offrire gratuitamente ai nostri utenti i migliori servizi di tutela della privacy. Anche se la nostra estensione per browser è gratuita, puoi decidere di sostenerci con un abbonamento mensile di &#36;4.99. Unisciti a noi nella nostra missione effettuando l'upgrade a Ghostery Plus e sblocca fantastici extra!"
 	},
 	"hub_supporter_feature_theme_description": {
 		"message": "Personalizza i colori di Ghostery per una nuova esperienza visiva! Introdotto a grande richiesta. Dai un'occhiata al nostro tema speciale Dark Blue e agli altri in arrivo."
@@ -1899,7 +1953,7 @@
 		"message": "Temi"
 	},
 	"subscribe_pitch": {
-		"message": "Anche se Ghostery è gratuito, puoi decidere di sostenerci con un piccolo abbonamento mensile in cambio di fantastici extra, come temi colorati, statistiche sul tracciamento personale e altro ancora. Unisciti alla nostra missione e abbonati!"
+		"message": "Anche se Ghostery è gratuito, puoi decidere di sostenerci con un abbonamento mensile di &#36;4.99 in cambio di fantastici extra, come temi colorati, statistiche sul tracciamento personale e altro ancora. Unisciti alla nostra missione e abbonati!"
 	},
 	"subscribe_pitch_spring": {
 		"message": "Ti piace quello che facciamo? Sostienici e passa a Ghostery Plus per sbloccare nuovi temi primaverili, approfondimenti sul tracciamento personale e altri extra speciali."
@@ -2468,7 +2522,7 @@
 		"message": "Prova Ghostery Midnight"
 	},
 	"seven_day_free_trial": {
-		"message": "Prova gratuita di 7 giorni"
+		"message": "7 giorni di prova gratuiti"
 	},
 	"spring_is_here": {
 		"message": "La primavera è arrivata!"
@@ -2499,5 +2553,8 @@
 	},
 	"too_many_password_resets_text": {
 		"message": "Troppe richieste di ripristino della password. Riprova tra un'ora."
+	},
+	"too_many_failed_logins_text": {
+		"message": "Troppi login non riusciti. Riprova tra un'ora."
 	}
 }
