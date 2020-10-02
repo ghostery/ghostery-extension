@@ -833,6 +833,9 @@
 	"settings_account": {
 		"message": "Cuenta"
 	},
+	"settings_import_export": {
+		"message": "Importar y exportar ajustes"
+	},
 	"settings_trackers": {
 		"message": "Rastreadores"
 	},
@@ -944,6 +947,9 @@
 	"settings_allow_offers": {
 		"message": "Participando en Ghostery Rewards"
 	},
+  	"settings_allow_abtests": {
+	  	"message": "Participar en Pruebas A/B"
+	},
 	"settings_signin_create_header": {
 		"message": "Iniciar sesión / Crear cuenta"
 	},
@@ -1033,6 +1039,9 @@
 	},
 	"settings_offers_tooltip": {
 		"message": "Ghostery Rewards es una función de diseño privado que ofrece descuentos y ofertas especiales de nuestras empresas asociadas mientras se navega."
+	},
+  	"settings_abtests_tooltip": {
+	  	"message": "Participar en Pruebas A/B ayuda a Ghostery a entender qué versión de un nuevo diseño o función prefieren los usuarios como tú."
 	},
 	"settings_opt_in": {
 		"message": "Suscripción sí/no"
@@ -1234,6 +1243,48 @@
 			}
 		}
 	},
+	"android_tab_overview": {
+		"message": "Resumen"
+	},
+	"android_tab_site_blocking": {
+		"message": "Bloqueo de sitios web"
+	},
+	"android_tab_global_blocking": {
+		"message": "Bloqueo global"
+	},
+	"android_site_blocking_header": {
+		"message": "rastreadores en este sitio"
+	},
+	"android_global_blocking_header": {
+		"message": "Rastreo global"
+	},
+	"android_blocking_reset": {
+		"message": "Restablecer ajustes"
+	},
+	"android_block": {
+		"message": "Bloquear"
+	},
+	"android_unblock": {
+		"message": "Desbloquear"
+	},
+	"android_restrict": {
+		"message": "Restringir"
+	},
+	"android_unrestrict": {
+		"message": "Deshacer"
+	},
+	"android_trust": {
+		"message": "Confiar"
+	},
+	"android_untrust": {
+		"message": "Deshacer"
+	},
+	"android_anonymize": {
+		"message": "Anonimizar"
+	},
+	"android_anonymized": {
+		"message": "Anonimizado"
+	},
 	"hub_side_navigation_home": {
 		"message": "Inicio"
 	},
@@ -1305,6 +1356,9 @@
 	},
 	"hub_home_plus_full_protection": {
 		"message": "¡Estás totalmente protegido!"
+	},
+	"hub_upgrade_page_title": {
+		"message": "Ghostery Hub - Mejorar plan"
 	},
 	"hub_upgrade_your": {
 		"message": "Mejora tu"
@@ -1684,7 +1738,7 @@
 		"message": "Resuelve problemas rápidamente con nuestro servicio de ayuda prioritario (próximamente más ventajas)"
 	},
 	"hub_supporter_manifesto": {
-		"message": "Nos esforzamos por ofrecer los mejores servicios de protección de la privacidad a nuestros usuarios de forma gratuita. A pesar de que no cobramos por nuestra extensión de navegador, puedes darnos tu apoyo a través de una pequeña suscripción mensual. ¡Únete a nosotros en nuestra misión pasando a Ghostery Plus y desbloquea a la vez estupendas ventajas!"
+		"message": "Nos esforzamos por ofrecer los mejores servicios de protección de la privacidad a nuestros usuarios de forma gratuita. A pesar de que no cobramos por nuestra extensión de navegador, puedes darnos tu apoyo a través de una suscripción mensual de 4,99 &#36;. ¡Únete a nosotros en nuestra misión pasando a Ghostery Plus y desbloquea a la vez estupendas ventajas!"
 	},
 	"hub_supporter_feature_theme_description": {
 		"message": "¡Personaliza los colores de Ghostery para una nueva experiencia visual! Introducido por petición popular. Echa un vistazo a nuestro tema especial Dark Blue. Hay muchos más por venir."
@@ -1899,7 +1953,7 @@
 		"message": "Temas"
 	},
 	"subscribe_pitch": {
-		"message": "Aunque Ghostery sea gratuito, puedes optar por apoyarnos con una pequeña suscripción mensual a cambio de interesantes ventajas como temas de color, estadísticas de seguimiento personalizadas y mucho más. ¡Únete a nuestra misión y suscríbete!"
+		"message": "Aunque Ghostery sea gratuito, puedes optar por apoyarnos con una suscripción mensual de 4,99 &#36; a cambio de interesantes ventajas como temas de color, estadísticas de seguimiento personalizadas y mucho más. ¡Únete a nuestra misión y suscríbete!"
 	},
 	"subscribe_pitch_spring": {
 		"message": "¿Te gusta lo que hacemos? Apóyanos y desbloquea nuevos temas primaverales, información de rastreo personal y otras funciones especiales al mejorar a Ghostery Plus."
@@ -2499,5 +2553,8 @@
 	},
 	"too_many_password_resets_text": {
 		"message": "Demasiadas solicitudes de restablecimiento de contraseña. Vuelve a intentarlo dentro de una hora."
+	},
+	"too_many_failed_logins_text": {
+		"message": "Demasiados inicios de sesión fallidos. Vuelve a intentarlo dentro de una hora."
 	}
 }

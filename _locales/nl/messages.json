@@ -833,6 +833,9 @@
 	"settings_account": {
 		"message": "Account"
 	},
+	"settings_import_export": {
+		"message": "Instellingen importeren en exporteren"
+	},
 	"settings_trackers": {
 		"message": "Trackers"
 	},
@@ -944,6 +947,9 @@
 	"settings_allow_offers": {
 		"message": "Deel te nemen in Ghostery Rewards"
 	},
+  	"settings_allow_abtests": {
+	  	"message": "Deelnemen aan A/B-tests"
+	},
 	"settings_signin_create_header": {
 		"message": "Inloggen / Account Aanmaken"
 	},
@@ -1033,6 +1039,9 @@
 	},
 	"settings_offers_tooltip": {
 		"message": "Ghostery Rewards is een private by-design functie waarmee je kortingen en speciale aanbiedingen van onze partners krijgt tijdens het browsen."
+	},
+  	"settings_abtests_tooltip": {
+	  	"message": "Door deel te nemen aan willekeurige A/B-tests help je Ghostery te begrijpen welke versie van een nieuwe lay-out of functie gebruikers zoals jij liever zien."
 	},
 	"settings_opt_in": {
 		"message": "Wel/niet meedoen"
@@ -1234,6 +1243,48 @@
 			}
 		}
 	},
+	"android_tab_overview": {
+		"message": "Overzicht"
+	},
+	"android_tab_site_blocking": {
+		"message": "Websites blokkeren"
+	},
+	"android_tab_global_blocking": {
+		"message": "Algemeen Blokkeren"
+	},
+	"android_site_blocking_header": {
+		"message": "Tracker op deze website."
+	},
+	"android_global_blocking_header": {
+		"message": "Algemeen tracken"
+	},
+	"android_blocking_reset": {
+		"message": "Instellingen opnieuw instellen"
+	},
+	"android_block": {
+		"message": "Blokkeer"
+	},
+	"android_unblock": {
+		"message": "Deblokkeer"
+	},
+	"android_restrict": {
+		"message": "Beperk"
+	},
+	"android_unrestrict": {
+		"message": "Ongedaan Maken"
+	},
+	"android_trust": {
+		"message": "Vertrouw"
+	},
+	"android_untrust": {
+		"message": "Ongedaan Maken"
+	},
+	"android_anonymize": {
+		"message": "Anoniem maken"
+	},
+	"android_anonymized": {
+		"message": "Anoniem gemaakt"
+	},
 	"hub_side_navigation_home": {
 		"message": "Start"
 	},
@@ -1305,6 +1356,9 @@
 	},
 	"hub_home_plus_full_protection": {
 		"message": "Je wordt volledig beschermd!"
+	},
+	"hub_upgrade_page_title": {
+		"message": "Ghostery Hub - Abonnement upgraden"
 	},
 	"hub_upgrade_your": {
 		"message": "Upgrade je"
@@ -1684,7 +1738,7 @@
 		"message": "Los problemen snel op met onze Priority Ondersteuning - en meer nog te komen extra's"
 	},
 	"hub_supporter_manifesto": {
-		"message": "We willen gratis de beste privacybeschermingsdiensten leveren aan onze klanten. Hoewel wij geen kosten rekenen voor onze browserextensie, kun je ons ondersteunen via een goedkoop maandelijks abonnement. Sluit je aan bij onze missie. Upgrade naar Ghostery Plus en ontgrendel coole extras!"
+		"message": "We willen gratis de beste privacybeschermingsdiensten leveren aan onze klanten. Hoewel wij geen kosten rekenen voor onze browserextensie, kun je ons ondersteunen via een maandelijks abonnement op &#36;4.99. Sluit je aan bij onze missie. Upgrade naar Ghostery Plus en ontgrendel coole extras!"
 	},
 	"hub_supporter_feature_theme_description": {
 		"message": "Pas de Ghostery-kleuren aan voor een nieuwe, visuele beleving! Ingevoerd na vele verzoeken. Test ons speciale Dark Blue-thema. Binnenkort volgen er meer."
@@ -1899,7 +1953,7 @@
 		"message": "Thema's"
 	},
 	"subscribe_pitch": {
-		"message": "Ghostery is gratis, maar je kunt ervoor kiezen ons te steunen door een goedkoop maandabonnement te nemen in ruil voor coole extra's zoals kleurthema's, persoonlijke trackingstatistieken en meer. Sluit je aan bij onze missie en word lid!"
+		"message": "Ghostery is gratis, maar je kunt ervoor kiezen ons te steunen door een maandabonnement te nemen op &#36;4.99 in ruil voor coole extra's zoals kleurthema's, persoonlijke trackingstatistieken en meer. Sluit je aan bij onze missie en word lid!"
 	},
 	"subscribe_pitch_spring": {
 		"message": "Vind je het leuk wat wij doen? Steun ons en ontgrendel nieuwe thema's voor de lente, persoonlijke trackinginzichten en andere speciale extra's door naar Ghostery Plus te upgraden!"
@@ -2499,5 +2553,8 @@
 	},
 	"too_many_password_resets_text": {
 		"message": "Te veel verzoeken voor wachtwoord opnieuw instellen. Probeer het over een uur nog eens."
+	},
+	"too_many_failed_logins_text": {
+		"message": "Te veel mislukte inlogpogingen. Probeer het over één uur opnieuw."
 	}
 }

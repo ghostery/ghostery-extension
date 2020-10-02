@@ -296,11 +296,6 @@ class Metrics {
 			// AB tests enabled?
 			`&ts=${encodeURIComponent(conf.enable_abtests ? '1' : '0')}`;
 
-		if (conf.enable_abtests) {
-			// Hub Layout A/B test. Added in 8.5.3. GH-2097, GH-2100
-			metrics_url += `&t2=${encodeURIComponent(Metrics._getHubLayoutView().toString())}`;
-		}
-
 		if (CAMPAIGN_METRICS.includes(type)) {
 			// only send campaign attribution when necessary
 			metrics_url +=
@@ -446,25 +441,6 @@ class Metrics {
 				return 2;
 			case 'palm-theme':
 				return 3;
-			default:
-				return 0;
-		}
-	}
-
-	/**
-	 * Get the Int associated with the Hub layout view shown on install
-	 * @private
-	 * @return {number} Int associated with the Hub layout view
-	 */
-	static _getHubLayoutView() {
-		const { hub_layout } = conf;
-
-		switch (hub_layout) {
-			case 'default':
-				return 1;
-			case 'alternate':
-				return 2;
-			case 'not_yet_set':
 			default:
 				return 0;
 		}
