@@ -833,6 +833,9 @@
 	"settings_account": {
 		"message": "Fiók"
 	},
+	"settings_import_export": {
+		"message": "Beállítások importálása és exportálása"
+	},
 	"settings_trackers": {
 		"message": "Trackerek"
 	},
@@ -944,6 +947,9 @@
 	"settings_allow_offers": {
 		"message": "Részvétel a Ghostery Rewards programban"
 	},
+  	"settings_allow_abtests": {
+	  	"message": "Részvétel A/B-tesztekben"
+	},
 	"settings_signin_create_header": {
 		"message": "Bejelentkezés / Fiók létrehozása"
 	},
@@ -1033,6 +1039,9 @@
 	},
 	"settings_offers_tooltip": {
 		"message": "A Ghostery Rewards olyan személyesre tervezett funkció, amely böngészés közben árengedményeket és akciókat szolgáltat önnek partnervállalainktól."
+	},
+  	"settings_abtests_tooltip": {
+	  	"message": "A véletlenszerű A/B-tesztekben való részvétellel segít a Ghostery vállalatnak, hogy megtudja, az új elrendezés vagy funkció melyik verziója tetszik Önnek."
 	},
 	"settings_opt_in": {
 		"message": "Feliratkozás / Leiratkozás"
@@ -1234,6 +1243,48 @@
 			}
 		}
 	},
+	"android_tab_overview": {
+		"message": "Áttekintés"
+	},
+	"android_tab_site_blocking": {
+		"message": "Webhely blokkolása"
+	},
+	"android_tab_global_blocking": {
+		"message": "Globális blokkolás"
+	},
+	"android_site_blocking_header": {
+		"message": "Trackerek ezen az oldalon"
+	},
+	"android_global_blocking_header": {
+		"message": "Globális követés"
+	},
+	"android_blocking_reset": {
+		"message": "Beállítások visszaállítása"
+	},
+	"android_block": {
+		"message": "Blokkolás"
+	},
+	"android_unblock": {
+		"message": "Feloldás"
+	},
+	"android_restrict": {
+		"message": "Korlátozás"
+	},
+	"android_unrestrict": {
+		"message": "Visszavonás"
+	},
+	"android_trust": {
+		"message": "Megbízhatónak jelölés"
+	},
+	"android_untrust": {
+		"message": "Visszavonás"
+	},
+	"android_anonymize": {
+		"message": "Anonimizálás"
+	},
+	"android_anonymized": {
+		"message": "Anonimizált"
+	},
 	"hub_side_navigation_home": {
 		"message": "Kezdőlap"
 	},
@@ -1305,6 +1356,9 @@
 	},
 	"hub_home_plus_full_protection": {
 		"message": "Teljes védelmet élvez"
+	},
+	"hub_upgrade_page_title": {
+		"message": "Ghostery Hub – Csomag frissítése"
 	},
 	"hub_upgrade_your": {
 		"message": "Frissítse"
@@ -1684,7 +1738,7 @@
 		"message": "Hárítsa el a hibákat gyorsan az Elsőbbségi támogató szolgáltatásunkkal - és további szolgáltatások lesznek elérhetőek"
 	},
 	"hub_supporter_manifesto": {
-		"message": "Arra törekszünk, hogy a legjobb adatvédelmi szolgáltatást nyújtsuk felhasználóinknak költségek nélkül. Annak ellenére, hogy adatvédelmi szolgáltatásunk ingyenes, ön dönthet úgy, hogy támogatja munkánkat egy alacsony összegű havi feliratkozással. Csatlakozzon ön is a küldetésünkhöz azzal, hogy kibővíti szolgáltatásunkat a Ghostery Plus verzióra - és egyúttal nagyszerű extra funkciókhoz férhet hozzá!"
+		"message": "Arra törekszünk, hogy a legjobb adatvédelmi szolgáltatást nyújtsuk felhasználóinknak költségek nélkül. Bár böngészőbővítményünk ingyenes, Ön dönthet úgy, hogy támogatja munkánkat egy alacsony, &#36;4,99 összegű havi előfizetési díjjal. Csatlakozzon Ön is a küldetésünkhöz, és válassza a Ghostery Plus verzióját, így nagyszerű extra funkciókhoz férhet hozzá!"
 	},
 	"hub_supporter_feature_theme_description": {
 		"message": "Állítsa be egyénileg a Ghostery színeit egy új vizuális élményért! Népszerű kérés alapján bevezetve. Próbálja ki a különleges Dark Blue sablonunkat, amelyet még sok fog követni."
@@ -1899,7 +1953,7 @@
 		"message": "Sablonok"
 	},
 	"subscribe_pitch": {
-		"message": "Annak ellenére, hogy a Ghostery ingyenes, ön dönthet úgy, hogy támogatja munkánkat egy alacsony, és cserébe nagyszerű extra funkciókhoz férhet hozzá, mint például a színsablonok, elsőbbségi támogató szolgáltatás és még sok minden más. Csatlakozzon a küldetésünkhöz és iratkozzon fel!"
+		"message": "Bár a Ghostery ingyenes, Ön dönthet úgy, hogy támogatja munkánkat egy alacsony, &#36;4,99 összegű havi előfizetési díjjal, így cserébe nagyszerű extra funkciókhoz férhet hozzá, mint például a színsablonok, személyes követési statisztikák, és még sok minden más. Csatlakozzon küldetésünkhöz, és fizessen elő!"
 	},
 	"subscribe_pitch_spring": {
 		"message": "Tetszik a termékünk? Támogassunk bennünket, és fedezze fel az új tavaszi sablonokat, személyes nyomonkövetési lehetőségeket, és számos különleges előnyt a Ghostery Plus történő frissítéssel!"
@@ -2499,5 +2553,8 @@
 	},
 	"too_many_password_resets_text": {
 		"message": "Túl sok a jelszó-visszaállítási kérés."
+	},
+	"too_many_failed_logins_text": {
+		"message": "Túl sok sikertelen bejelentkezés. Próbálja újra egy óra múlva."
 	}
 }

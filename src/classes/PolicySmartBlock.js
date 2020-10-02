@@ -224,8 +224,6 @@ class PolicySmartBlock {
 	static checkReloadThreshold(tabId) {
 		if (!PolicySmartBlock.shouldCheck(tabId)) { return false; }
 
-		// Note that this threshold is different from the broken page ping threshold in Metrics, which is 60 seconds
-		// see GH-1797 for more details
 		const SMART_BLOCK_BEHAVIOR_THRESHOLD = 30000; // 30 seconds
 
 		return (

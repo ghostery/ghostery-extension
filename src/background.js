@@ -1214,8 +1214,6 @@ function initializeDispatcher() {
 		log('Conf value changed for a watched user setting:', key);
 	}, 200));
 	dispatcher.on('globals.save.paused_blocking', () => {
-		// if user has paused Ghostery, suspect broken page
-		if (globals.SESSION.paused_blocking) { metrics.handleBrokenPageTrigger(globals.BROKEN_PAGE_PAUSE); }
 		// update content script state when blocking is paused/unpaused
 		cliqz.modules.core.action('refreshAppState');
 	});
