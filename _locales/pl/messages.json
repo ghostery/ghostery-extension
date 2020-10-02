@@ -833,6 +833,9 @@
 	"settings_account": {
 		"message": "Konto"
 	},
+	"settings_import_export": {
+		"message": "Importuj i eksportuj ustawienia"
+	},
 	"settings_trackers": {
 		"message": "Tropiciele"
 	},
@@ -944,6 +947,9 @@
 	"settings_allow_offers": {
 		"message": "Udział w Ghostery Rewards"
 	},
+  	"settings_allow_abtests": {
+	  	"message": "Udział w testach A/B"
+	},
 	"settings_signin_create_header": {
 		"message": "Zaloguj się / Utwórz konto"
 	},
@@ -1033,6 +1039,9 @@
 	},
 	"settings_offers_tooltip": {
 		"message": "Ghostery Rewards to funkcja o ściśle prywatnym charakterze umożliwiająca otrzymywanie od współpracujących z nami firm zniżek i ofert specjalnych podczas przeglądania treści."
+	},
+  	"settings_abtests_tooltip": {
+	  	"message": "Udział w losowych testach A/B pomaga zespołowi Ghostery zrozumieć, która wersja nowego układu lub funkcji bardziej Ci się podoba."
 	},
 	"settings_opt_in": {
 		"message": "Przyłącz się / Zrezygnuj"
@@ -1234,6 +1243,48 @@
 			}
 		}
 	},
+	"android_tab_overview": {
+		"message": "Podsumowanie"
+	},
+	"android_tab_site_blocking": {
+		"message": "Blokowanie witryn"
+	},
+	"android_tab_global_blocking": {
+		"message": "Blokowanie globalne"
+	},
+	"android_site_blocking_header": {
+		"message": "Tropiciele na tej stronie"
+	},
+	"android_global_blocking_header": {
+		"message": "Globalne śledzenie"
+	},
+	"android_blocking_reset": {
+		"message": "Resetuj ustawienia"
+	},
+	"android_block": {
+		"message": "Blokuj"
+	},
+	"android_unblock": {
+		"message": "Odblokuj"
+	},
+	"android_restrict": {
+		"message": "Zastrzeż"
+	},
+	"android_unrestrict": {
+		"message": "Cofnij"
+	},
+	"android_trust": {
+		"message": "Ufaj"
+	},
+	"android_untrust": {
+		"message": "Cofnij"
+	},
+	"android_anonymize": {
+		"message": "Anonimizuj"
+	},
+	"android_anonymized": {
+		"message": "Zanonimizowane"
+	},
 	"hub_side_navigation_home": {
 		"message": "Strona główna"
 	},
@@ -1305,6 +1356,9 @@
 	},
 	"hub_home_plus_full_protection": {
 		"message": "Jesteś w pełni chroniony!"
+	},
+	"hub_upgrade_page_title": {
+		"message": "Ghostery Hub – Uaktualnij plan"
 	},
 	"hub_upgrade_your": {
 		"message": "Uaktualnij swój"
@@ -1684,7 +1738,7 @@
 		"message": "Rozwiązuj szybko problemy przy pomocy naszego działu wsparcia priorytetowego - i otrzymaj dodatkowe korzyści"
 	},
 	"hub_supporter_manifesto": {
-		"message": "Staramy się dostarczać naszym użytkownikom najwyższej jakości bezpłatne usługi z zakresu ochrony prywatności. Chociaż nie pobieramy opłat za naszą wtyczkę do przeglądarki, możesz wesprzeć nas, decydując się na niewielki miesięczny abonament. Przyłącz się do naszej misji, przechodząc do Ghostery Plus — i tym samym odblokuj super dodatki!"
+		"message": "Staramy się dostarczać naszym użytkownikom najwyższej jakości bezpłatne usługi z zakresu ochrony prywatności. Chociaż nie pobieramy opłat za naszą wtyczkę do przeglądarki, możesz wesprzeć nas, decydując się na miesięczny abonament w cenie 4,99 USD. Przyłącz się do naszej misji, przechodząc do Ghostery Plus — i tym samym odblokuj super dodatki!"
 	},
 	"hub_supporter_feature_theme_description": {
 		"message": "Dostosuj kolorystykę Ghostery, zyskując nowe wrażenia wizualne! Funkcja wprowadzona na prośbę użytkowników. Wypróbuj specjalny temat Dark Blue, a w przyszłości także i inne."
@@ -1899,7 +1953,7 @@
 		"message": "Tematy"
 	},
 	"subscribe_pitch": {
-		"message": "Chociaż usługi Ghostery są bezpłatne, możesz wesprzeć nas, decydując się na niewielki miesięczny abonament w zamian za super dodatki, takie jak kolorowe tematy, osobiste statystyki śledzenia i wiele innych. Przyłącz się do naszej misji i subskrybuj!"
+		"message": "Chociaż usługi Ghostery są bezpłatne, możesz wesprzeć nas, decydując się na miesięczny abonament w cenie 4,99 USD w zamian za super dodatki, takie jak kolorowe motywy, osobiste statystyki śledzenia i wiele innych. Przyłącz się do naszej misji i subskrybuj!"
 	},
 	"subscribe_pitch_spring": {
 		"message": "Podoba Ci się to, co robimy? Wesprzyj nas i odblokuj nowe wiosenne motywy, osobiste analizy dotyczące śledzenia i inne specjalne dodatki, przechodząc do wersji Ghostery Plus!"
@@ -2468,7 +2522,7 @@
 		"message": "Wypróbuj Ghostery Midnight"
 	},
 	"seven_day_free_trial": {
-		"message": "7-dniowy bezpłatny okres próbny"
+		"message": "7-dniowy darmowy okres próbny"
 	},
 	"spring_is_here": {
 		"message": "Nadeszła wiosna!"
@@ -2499,5 +2553,8 @@
 	},
 	"too_many_password_resets_text": {
 		"message": "Zbyt wiele żądań zresetowania hasła. Spróbuj ponownie za godzinę."
+	},
+	"too_many_failed_logins_text": {
+		"message": "Zbyt wiele nieudanych prób logowania. Spróbuj ponownie za godzinę."
 	}
 }

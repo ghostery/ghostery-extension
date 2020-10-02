@@ -833,6 +833,9 @@
 	"settings_account": {
 		"message": "계정 "
 	},
+	"settings_import_export": {
+		"message": "설정 가져오기 & 내보내기"
+	},
 	"settings_trackers": {
 		"message": "트래커 "
 	},
@@ -944,6 +947,9 @@
 	"settings_allow_offers": {
 		"message": "Ghostery Rewards 기능 이용"
 	},
+  	"settings_allow_abtests": {
+	  	"message": "A/B 테스트 기능 이용"
+	},
 	"settings_signin_create_header": {
 		"message": "로그인 / 계정 만들기 "
 	},
@@ -1033,6 +1039,9 @@
 	},
 	"settings_offers_tooltip": {
 		"message": "Ghostery Rewards는 사용자에게 당사 파트너 기업의 할인과 특별 혜택 정보를 제공하는 이용자 맞춤 기능입니다."
+	},
+  	"settings_abtests_tooltip": {
+	  	"message": "무작위 A/B 테스트에 참여하면 Ghostery가 사용자의 선호 새 레이아웃 또는 기능 버전을 이해하는 데 도움이 됩니다."
 	},
 	"settings_opt_in": {
 		"message": "참여/미참여"
@@ -1234,6 +1243,48 @@
 			}
 		}
 	},
+	"android_tab_overview": {
+		"message": "개요"
+	},
+	"android_tab_site_blocking": {
+		"message": "사이트 차단"
+	},
+	"android_tab_global_blocking": {
+		"message": "전역 차단 "
+	},
+	"android_site_blocking_header": {
+		"message": "이 사이트에 대한 트래커 "
+	},
+	"android_global_blocking_header": {
+		"message": "전역 트래킹"
+	},
+	"android_blocking_reset": {
+		"message": "설정 초기화"
+	},
+	"android_block": {
+		"message": "차단"
+	},
+	"android_unblock": {
+		"message": "차단 해제 "
+	},
+	"android_restrict": {
+		"message": "제한 "
+	},
+	"android_unrestrict": {
+		"message": "실행 취소 "
+	},
+	"android_trust": {
+		"message": "신뢰"
+	},
+	"android_untrust": {
+		"message": "실행 취소 "
+	},
+	"android_anonymize": {
+		"message": "익명화"
+	},
+	"android_anonymized": {
+		"message": "익명화됨"
+	},
 	"hub_side_navigation_home": {
 		"message": "홈"
 	},
@@ -1305,6 +1356,9 @@
 	},
 	"hub_home_plus_full_protection": {
 		"message": "완벽하게 보호됩니다."
+	},
+	"hub_upgrade_page_title": {
+		"message": "Ghostery Hub - 플랜 업그레이드"
 	},
 	"hub_upgrade_your": {
 		"message": "보호 서비스"
@@ -1684,7 +1738,7 @@
 		"message": "우선 지원 데스크 서비스를 통해 빠르게 문제를 해결하고, 향후 더 많은 특전을 받으세요"
 	},
 	"hub_supporter_manifesto": {
-		"message": "당사는 최고의 개인 정보 보호 서비스를 사용자에게 무료로 제공하기 위해 노력하고 있습니다. 브라우저 확장에 대한 비용은 청구하지 않지만, 소정의 월별 구독 요금을 지불하여 당사를 후원하실 수 있습니다. Ghostery Plus로 업그레이드하여 당사의 활동을 후원하고 계속해서 멋진 혜택을 받아보세요!"
+		"message": "당사는 최고의 개인 정보 보호 서비스를 사용자에게 무료로 제공하기 위해 노력하고 있습니다. 브라우저 확장에 대한 비용은 청구하지 않지만, &#36;4.99의 월별 구독 요금을 지불하여 당사를 후원하실 수 있습니다. Ghostery Plus로 업그레이드하여 당사의 활동을 후원하고 계속해서 멋진 혜택을 받아보세요!"
 	},
 	"hub_supporter_feature_theme_description": {
 		"message": "Ghostery 컬러를 사용자 지정하여 새로운 비주얼을 경험해보세요! 폭넓은 요청에 따라 선보입니다. 특별한 Dark Blue 테마를 확인하고 앞으로 소개될 다양한 테마도 기대해주세요."
@@ -1899,7 +1953,7 @@
 		"message": "테마"
 	},
 	"subscribe_pitch": {
-		"message": "Ghostery는 무료로 이용이 가능하나 매달 소정의 구독 요금으로 저희를 후원해 주시면 컬러 테마, 개인 추적 통계 등 특별 혜택이 제공됩니다. 저희를 후원하고 서비스에 가입해 주세요!"
+		"message": "Ghostery는 무료로 이용이 가능하나 매달 &#36;4.99의 구독 요금으로 저희를 후원해 주시면 컬러 테마, 개인 추적 통계 등 특별 혜택이 제공됩니다. 저희를 후원하고 서비스에 가입해 주세요!"
 	},
 	"subscribe_pitch_spring": {
 		"message": "현재 서비스가 마음에 드시나요? Ghostery Plus로 업그레이드하여 당사를 후원하고 새로운 봄 테마, 개인 추적 서비스, 기타 혜택을 받아보세요."
@@ -2468,7 +2522,7 @@
 		"message": "Ghostery Midnight를 사용해 보세요"
 	},
 	"seven_day_free_trial": {
-		"message": "7일 무료 평가판"
+		"message": "7일 무료 체험판"
 	},
 	"spring_is_here": {
 		"message": "봄이 왔습니다!"
@@ -2499,5 +2553,8 @@
 	},
 	"too_many_password_resets_text": {
 		"message": "암호 재설정을 너무 많이 요청했습니다. 한 시간 후에 다시 시도하세요."
+	},
+	"too_many_failed_logins_text": {
+		"message": "로그인 실패 횟수가 너무 많습니다. 1시간 후에 다시 시도하십시오."
 	}
 }
