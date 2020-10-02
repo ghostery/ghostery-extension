@@ -1,8 +1,16 @@
 ### GHOSTERY 8.5.3 ()
 
 + Updated Firefox Android extension panel UI and mobile optimizations (#587)
++ New console debugging interface for user troubleshooting (#568)
 + Display error message after too many failed login attempts (#577)
++ Add opt-out for AB Tests (#608)
 + Added product id parameter to extension pings (#574)
++ Detect Ghostery Desktop Browser (#602)
++ Remove broken page pings (#609)
++ On-boarding AB Tests (#603)
++ Updated translations
+
+See the complete GitHub [milestone](https://github.com/ghostery/ghostery-extension/milestone/14?closed=1)
 
 ### GHOSTERY 8.5.2 (July 30, 2020)
 
