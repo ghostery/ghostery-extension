@@ -14,7 +14,7 @@
 import globals from './Globals';
 import conf from './Conf';
 import { log, prefsSet, prefsGet } from '../utils/common';
-import { getActiveTab, processUrlQuery } from '../utils/utils';
+import { processUrlQuery } from '../utils/utils';
 
 // CONSTANTS
 const FREQUENCIES = { // in milliseconds
@@ -28,11 +28,6 @@ const CAMPAIGN_METRICS = ['install', 'active', 'uninstall'];
 const { METRICS_BASE_URL, EXTENSION_VERSION, BROWSER_INFO } = globals;
 const MAX_DELAYED_PINGS = 100;
 
-// Note that this threshold is intentionally different from the 30 second threshold in PolicySmartBlock,
-// which is used to set the reloaded property on tab objects and to activate smart unblock behavior
-// see GH-1797 for more details
-const BROKEN_PAGE_METRICS_THRESHOLD = 60000; // 60 seconds
-
 /**
  * Class for handling telemetry pings.
  * @memberOf  BackgroundClasses
@@ -42,13 +37,6 @@ class Metrics {
 		this.utm_source = '';
 		this.utm_campaign = '';
 		this.ping_set = new Set();
-		this._brokenPageWatcher = {
-			on: false,
-			triggerId: '',
-			triggerTime: '',
-			timeoutId: null,
-			url: '',
-		};
 	}
 
 	/**
@@ -92,75 +80,6 @@ class Metrics {
 			}).catch((error) => {
 				log('Metrics init() error', error);
 			});
-	}
-
-	/**
-	 * Responds to individual user actions and sequences of user actions that may indicate a broken page,
-	 * sending broken_page pings as needed
-	 * For example, sends a broken_page ping when the user whitelists a site,
-	 * then refreshes the page less than a minute later
-	 * @param 	{number} 	triggerId	'what specifically triggered this broken_page ping?' identifier sent along to the metrics server
-	 * @param 	{string} 	newTabUrl	for checking whether user has opened the same url in a new tab, which confirms a suspicion raised by certain triggers
-	 */
-	handleBrokenPageTrigger(triggerId, newTabUrl = null) {
-		if (this._brokenPageWatcher.on && triggerId === globals.BROKEN_PAGE_REFRESH) {
-			this.ping('broken_page');
-			this._unplugBrokenPageWatcher();
-			return;
-		}
-
-		if (this._brokenPageWatcher.on && triggerId === globals.BROKEN_PAGE_NEW_TAB && this._brokenPageWatcher.url === newTabUrl) {
-			this.ping('broken_page');
-			this._unplugBrokenPageWatcher();
-			return;
-		}
-
-		if (triggerId === globals.BROKEN_PAGE_NEW_TAB) { return; }
-
-		this._resetBrokenPageWatcher(triggerId);
-	}
-
-	/**
-	 * handleBrokenPageTrigger helper
-	 * starts the temporary watch for a second suspicious user action in response to a first
-	 * @param 	{number} 	triggerId	'what specifically triggered this broken_page ping?' identifier sent along to the metrics server
-	 * @private
-	 */
-	_resetBrokenPageWatcher(triggerId) {
-		this._clearBrokenPageWatcherTimeout();
-
-		getActiveTab((tab) => {
-			const tabUrl = tab && tab.url ? tab.url : '';
-
-			this._brokenPageWatcher = {
-				on: true,
-				triggerId,
-				triggerTime: Date.now(),
-				timeoutId: setTimeout(this._clearBrokenPageWatcherTimeout.bind(this), BROKEN_PAGE_METRICS_THRESHOLD),
-				url: tabUrl
-			};
-		});
-	}
-
-	/**
-	 * handleBrokenPageTrigger helper
-	 * @private
-	 */
-	_unplugBrokenPageWatcher() {
-		this._clearBrokenPageWatcherTimeout();
-
-		this._brokenPageWatcher = {
-			on: false,
-			triggerId: '',
-			triggerTime: '',
-			timeoutId: null,
-			url: ''
-		};
-	}
-
-	_clearBrokenPageWatcherTimeout() {
-		const { timeoutId } = this._brokenPageWatcher;
-		if (timeoutId) { clearTimeout(timeoutId); }
 	}
 
 	/**
@@ -240,7 +159,6 @@ class Metrics {
 			case 'priority_support_submit':
 			case 'theme_change':
 			case 'manage_subscription':
-			case 'broken_page':
 				this._sendReq(type, ['all']);
 				break;
 
@@ -390,14 +308,7 @@ class Metrics {
 				`&us=${encodeURIComponent(this.utm_source)}` +
 				// Marketing campaign (Former utm_campaign)
 				`&uc=${encodeURIComponent(this.utm_campaign)}`;
-		} else if (type === 'broken_page' && this._brokenPageWatcher.on) {
-			metrics_url +=
-				// What triggered the broken page ping?
-				`&setup_path=${encodeURIComponent(this._brokenPageWatcher.triggerId.toString())}` +
-				// How much time passed between the trigger and the page refresh / open in new tab?
-				`&setup_block=${encodeURIComponent((Date.now() - this._brokenPageWatcher.triggerTime).toString())}`;
 		}
-
 		return metrics_url;
 	}
 
