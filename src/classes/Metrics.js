@@ -27,6 +27,16 @@ const CRITICAL_METRICS = ['install', 'install_complete', 'upgrade', 'active', 'e
 const CAMPAIGN_METRICS = ['install', 'active', 'uninstall'];
 const { METRICS_BASE_URL, EXTENSION_VERSION, BROWSER_INFO } = globals;
 const MAX_DELAYED_PINGS = 100;
+// Set of conf keys used in constructing telemetry url
+const METRICS_URL_SET = new Set([
+	'enable_human_web',
+	'enable_offers',
+	'account',
+	'enable_metrics',
+	'show_alert',
+	'alert_expanded',
+	'show_cmp'
+]);
 
 /**
  * Class for handling telemetry pings.
@@ -190,19 +200,7 @@ class Metrics {
 	 * @param  {string} 	conf key being changed
 	 */
 	setUninstallUrl(key) {
-		if (typeof chrome.runtime.setUninstallURL === 'function') {
-			// Set of conf keys used in constructing telemetry url
-			const METRICS_URL_SET = new Set([
-				'enable_human_web',
-				'enable_offers',
-				'account',
-				'enable_metrics',
-				'show_alert',
-				'alert_expanded',
-				'show_cmp'
-			]);
-
-			if (!key || METRICS_URL_SET.has(key)) {
+		if (typeof chrome.runtime.setUninstallURL === 'function' && (!key || METRICS_URL_SET.has(key))) {
 				const metrics_url = this._buildMetricsUrl('uninstall');
 				if (metrics_url.length) {
 					chrome.runtime.setUninstallURL(metrics_url);
@@ -216,7 +214,7 @@ class Metrics {
 	 *
 	 * @private
 	 *
-	 * @since 8.5.3
+	 * @since 8.5.4
 	 * @param  {string} query   param to be included in string
 	 * @param  {string} value   number value to be passed on through qeury string
 	 * @return {string}         complete query component
