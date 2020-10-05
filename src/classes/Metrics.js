@@ -201,10 +201,9 @@ class Metrics {
 	 */
 	setUninstallUrl(key) {
 		if (typeof chrome.runtime.setUninstallURL === 'function' && (!key || METRICS_URL_SET.has(key))) {
-				const metrics_url = this._buildMetricsUrl('uninstall');
-				if (metrics_url.length) {
-					chrome.runtime.setUninstallURL(metrics_url);
-				}
+			const metrics_url = this._buildMetricsUrl('uninstall');
+			if (metrics_url.length) {
+				chrome.runtime.setUninstallURL(metrics_url);
 			}
 		}
 	}
