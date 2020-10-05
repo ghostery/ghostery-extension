@@ -110,10 +110,10 @@ cat ${TMP_FILE} > $VERSION_FILE # copy into manifest.json
 rm -f ${TMP_FILE}
 
 # Download databases
-curl "https://cdn.ghostery.com/update/v3/bugs" -o $DB_DIR/bugs.json --compressed --fail
-curl "https://cdn.ghostery.com/update/click2play" -o $DB_DIR/click2play.json --compressed --fail
-curl "https://cdn.ghostery.com/update/compatibility" -o $DB_DIR/compatibility.json --compressed --fail
-curl "https://cdn.ghostery.com/update/surrogates" -o $DB_DIR/surrogates.json --compressed --fail
+curl "https://cdn.ghostery.com/update/v4/bugs" -o $DB_DIR/bugs.json --compressed --fail
+curl "https://cdn.ghostery.com/update/v4/click2play" -o $DB_DIR/click2play.json --compressed --fail
+curl "https://cdn.ghostery.com/update/v4/compatibility" -o $DB_DIR/compatibility.json --compressed --fail
+curl "https://cdn.ghostery.com/update/v4/surrogates" -o $DB_DIR/surrogates.json --compressed --fail
 
 # Zip final build files
 echo "Zipping to $(pwd)/$BUILD_DIR/"

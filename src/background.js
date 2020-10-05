@@ -70,7 +70,7 @@ const {
 const IS_EDGE = (BROWSER_INFO.name === 'edge');
 const IS_FIREFOX = (BROWSER_INFO.name === 'firefox');
 const IS_ANDROID = (BROWSER_INFO.os === 'android');
-const VERSION_CHECK_URL = `${CDN_BASE_URL}/update/version`;
+const VERSION_CHECK_URL = `${CDN_BASE_URL}/update/v4/version`;
 const REAL_ESTATE_ID = 'ghostery';
 const ONE_DAY_MSEC = 86400000;
 const ONE_HOUR_MSEC = 3600000;
@@ -120,9 +120,9 @@ function updateDBs() {
 		utils.getJson(VERSION_CHECK_URL).then((data) => {
 			log('Database version retrieval succeeded', data);
 
-			c2pDb.update(data.click2playVersion);
-			compDb.update(data.compatibilityVersion);
-			bugDb.update(data.bugsVersion, (result) => {
+			c2pDb.update(data.click2play);
+			compDb.update(data.compatibility);
+			bugDb.update(data.bugs, (result) => {
 				log('CHECK LIBRARY VERSION CALLED', result);
 				if (result.success) {
 					const nowTime = Number(new Date().getTime());

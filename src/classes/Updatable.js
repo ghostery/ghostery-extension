@@ -74,10 +74,9 @@ class Updatable {
 	_localFetcher() {
 		return new Promise((resolve, reject) => {
 			const memory = conf[this.type];
-			const version_property = (this.type === 'bugs' || this.type === 'surrogates' ? 'version' : (`${this.type}Version`));
 
 			// nothing in storage, or it's so old it doesn't have a version
-			if (!memory || !memory.hasOwnProperty(version_property)) {
+			if (!memory || !memory.hasOwnProperty('version')) {
 				// return what's on disk
 				log(`fetching ${this.type} from disk`);
 
@@ -94,7 +93,7 @@ class Updatable {
 			} else if (this.just_upgraded) {
 				// on upgrades, see if json shipped w/ the extension is more recent
 				fetchLocalJSONResource(`databases/${this.type}.json`).then((disk) => {
-					if (disk[version_property] > memory[version_property]) {
+					if (disk.version !== memory.version) {
 						log(`fetching updated${this.type} from disk`);
 						resolve({
 							fromMemory: false,
@@ -131,8 +130,7 @@ class Updatable {
 	 */
 	_remoteFetcher(callback) {
 		log(`fetching ${this.type} from remote`);
-		const UPDATE_URL = `${CDN_BASE_URL}/update/${
-			this.type === 'bugs' ? 'v3/bugs' : this.type}`;
+		const UPDATE_URL = `${CDN_BASE_URL}/update/v4/${this.type}`;
 
 		getJson(UPDATE_URL).then((list) => {
 			callback(true, list);
@@ -153,7 +151,7 @@ class Updatable {
 		log('LOCAL VERSION, SERVER VERSION', this.db.version, options.version);
 
 		// is the local version already up-to-date?
-		if (this.db.version && options.version && (options.version <= this.db.version)) {
+		if (this.db.version && options.version && (options.version === this.db.version)) {
 			if (options.callback) {
 				options.callback({
 					success: true,
