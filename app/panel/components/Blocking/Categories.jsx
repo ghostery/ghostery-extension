@@ -56,25 +56,25 @@ class Categories extends React.Component {
 					name: t('unidentified'),
 					description: t('unidentified_description'),
 					img_name: 'unknown',
-					num_total: unknownCategory.unknownTrackers.length,
-					num_blocked: unknownCategory.unknownTrackerCount,
-					num_shown: unknownCategory.hide ? 0 : unknownCategory.unknownTrackers.length,
-					trackers: unknownCategory.unknownTrackers.map((unknownTracker) => {
-						if (unknownTracker.whitelisted) { whitelistedTotal++; }
+					num_total: unknownCategory.unidentifiedTrackers.length,
+					num_blocked: unknownCategory.unidentifiedTrackerCount,
+					num_shown: unknownCategory.hide ? 0 : unknownCategory.unidentifiedTrackers.length,
+					trackers: unknownCategory.unidentifiedTrackers.map((unidentifiedTracker) => {
+						if (unidentifiedTracker.whitelisted) { whitelistedTotal++; }
 						return {
-							name: unknownTracker.name,
-							domains: unknownTracker.domains,
-							whitelisted: unknownTracker.whitelisted,
-							type: unknownTracker.type,
+							name: unidentifiedTracker.name,
+							domains: unidentifiedTracker.domains,
+							whitelisted: unidentifiedTracker.whitelisted,
+							type: unidentifiedTracker.type,
 							siteRestricted: sitePolicy === 1,
 							blocked: false,
 							catId: 'unknown',
 							description: '',
-							id: unknownTracker.name + unknownTracker.domains[0],
+							id: unidentifiedTracker.name + unidentifiedTracker.domains[0],
 							shouldShow: true,
-							cliqzAdCount: unknownTracker.ads,
-							cliqzCookieCount: unknownTracker.cookies,
-							cliqzFingerprintCount: unknownTracker.fingerprints,
+							cliqzAdCount: unidentifiedTracker.ads,
+							cliqzCookieCount: unidentifiedTracker.cookies,
+							cliqzFingerprintCount: unidentifiedTracker.fingerprints,
 						};
 					}),
 					whitelistedTotal,
@@ -104,7 +104,7 @@ class Categories extends React.Component {
 		};
 
 		const categoryList = categories.map((category, index) => renderCategory(category, index));
-		const renderUnknownCategory = unknownCategory && unknownCategory.unknownTrackers.length
+		const renderUnknownCategory = unknownCategory && unknownCategory.unidentifiedTrackers.length
 			? renderCategory(null, categoryList.length, true) : null;
 
 		return (

@@ -54,8 +54,8 @@ class PanelAndroid extends React.Component {
 				categories: [],
 			},
 			cliqzModuleData: {
-				adBlock: { trackerCount: 0, unknownTrackers: [] },
-				antiTracking: { trackerCount: 0, unknownTrackers: [] },
+				adBlock: { trackerCount: 0, unidentifiedTrackers: [] },
+				antiTracking: { trackerCount: 0, unidentifiedTrackers: [] },
 			},
 		};
 	}
@@ -207,9 +207,9 @@ class PanelAndroid extends React.Component {
 		const { categories, toggle_individual_trackers } = blocking;
 		const { adBlock, antiTracking } = cliqzModuleData;
 
-		const unknownTrackers = Array.from(new Set([
-			...antiTracking.unknownTrackers.map(this.massageCliqzTrackers),
-			...adBlock.unknownTrackers.map(this.massageCliqzTrackers),
+		const unidentifiedTrackers = Array.from(new Set([
+			...antiTracking.unidentifiedTrackers.map(this.massageCliqzTrackers),
+			...adBlock.unidentifiedTrackers.map(this.massageCliqzTrackers),
 		])).sort((a, b) => {
 			const nameA = a.name.toLowerCase();
 			const nameB = b.name.toLowerCase();
@@ -226,9 +226,9 @@ class PanelAndroid extends React.Component {
 			name: t('unidentified'),
 			description: t('unidentified_description'),
 			img_name: 'unknown',
-			num_total: unknownTrackers.length,
+			num_total: unidentifiedTrackers.length,
 			num_blocked: 0, // We don't want to see the Trackers Blocked text
-			trackers: unknownTrackers,
+			trackers: unidentifiedTrackers,
 		};
 
 		return (
@@ -248,7 +248,7 @@ class PanelAndroid extends React.Component {
 				<Tab tabLabel={t('android_tab_site_blocking')} linkClassName="Tab__label">
 					<BlockingTab
 						type="site"
-						categories={unknownTrackers.length === 0 ? categories : [...categories, unknownCategory]}
+						categories={unidentifiedTrackers.length === 0 ? categories : [...categories, unknownCategory]}
 						settings={{ toggle_individual_trackers }}
 						siteProps={this.siteProps}
 						callGlobalAction={this.callGlobalAction}

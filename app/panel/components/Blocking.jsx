@@ -349,7 +349,7 @@ class Blocking extends React.Component {
 					<NotScanned />
 				) : (
 					<div className={`${blockingClasses} blocking-trackers show-warnings`}>
-						{(categories.length > 0 || unknownCategory.unknownTrackers.length > 0) && (
+						{(categories.length > 0 || unknownCategory.unidentifiedTrackers.length > 0) && (
 							<Categories
 								expandAll={expand_all_trackers}
 								categories={categories}

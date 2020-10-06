@@ -123,13 +123,13 @@ export function updateTrackerTrustRestrict(data) {
  * @param  {Object} data
  * @return {Object} dispatch
  */
-export function updateCliqzModuleWhitelist(unknownTracker) {
+export function updateCliqzModuleWhitelist(unidentifiedTracker) {
 	return function(dispatch, getState) {
 		// use redux-thunk to get pageHost from summary
 		const { pageHost } = getState().summary;
 		dispatch({
 			type: UPDATE_CLIQZ_MODULE_WHITELIST,
-			data: { unknownTracker, pageHost },
+			data: { unidentifiedTracker, pageHost },
 		});
 	};
 }

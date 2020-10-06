@@ -177,7 +177,7 @@ class BlockingTracker extends React.Component {
 		callGlobalAction({
 			actionName: 'anonymizeSiteTracker',
 			actionData: {
-				unknownTracker: tracker,
+				unidentifiedTracker: tracker,
 			}
 		});
 	}
