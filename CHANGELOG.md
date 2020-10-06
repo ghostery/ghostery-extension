@@ -55,7 +55,7 @@
 + Migrate to the new Chromium-based Edge browser (#492)
 + Disable Purplebox on Firefox Android (#494)
 + Allow white-listing of wildcard domains (#501)
-+ Allow site-specific white-listing of Unknown Trackers caught by Ad-Blocker (#503)
++ Allow site-specific white-listing of Unidentified Trackers caught by Ad-Blocker (#503)
 + Fixes issue when adding localhost to Trusted Sites with port value (Fixes #470)
 + Add locale-appropriate formatting to historical stats numbers (#498)
 + Remove email opt-in from account creation in panel and hub (#495)
@@ -86,7 +86,7 @@
 
 ### GHOSTERY 8.4.3 (October 1, 2019)
 
-+ Fixes issue where Detail View is blank when there are only Unknown trackers found (#446)
++ Fixes issue where Detail View is blank when there are only Unidentified trackers found (#446)
 + New opt-in flow for Ghostery Rewards (#444)
 + Uncheck email promotions options for create account view (#446)
 + Revert Rewards opt-in setting for Firefox (#446)
@@ -109,7 +109,7 @@
 
 ### GHOSTERY 8.4.1 (August 6, 2019)
 
-+ Add new Unknown tracker category in detail view with anti-tracking whitelist (#417, #433)
++ Add new Unidentified tracker category in detail view with anti-tracking whitelist (#417, #433)
 + Fixes broken `target=_blank` links in Opera (#426)
 + Fixes error `Uncaught TypeError: c.querySelectorAll` (#406)
 + Show ad-blocking icons in detail view tracker list (#411)

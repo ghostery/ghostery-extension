@@ -15,7 +15,7 @@ import {
 	UPDATE_BLOCKING_DATA,
 	UPDATE_BLOCK_ALL_TRACKERS,
 	UPDATE_CATEGORIES,
-	UPDATE_UNKNOWN_CATEGORY_HIDE,
+	UPDATE_UNIDENTIFIED_CATEGORY_HIDE,
 	UPDATE_CATEGORY_BLOCKED,
 	UPDATE_TRACKER_BLOCKED,
 	UPDATE_TRACKER_TRUST_RESTRICT,
@@ -64,9 +64,9 @@ export function updateCategories(data) {
  * @param  {Object} data
  * @return {Object}
  */
-export function updateUnknownCategoryHide(data) {
+export function updateUnidentifiedCategoryHide(data) {
 	return {
-		type: UPDATE_UNKNOWN_CATEGORY_HIDE,
+		type: UPDATE_UNIDENTIFIED_CATEGORY_HIDE,
 		data,
 	};
 }

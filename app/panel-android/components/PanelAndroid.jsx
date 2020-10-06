@@ -221,11 +221,11 @@ class PanelAndroid extends React.Component {
 			}
 			return 0;
 		});
-		const unknownCategory = {
-			id: 'unknown',
+		const unidentifiedCategory = {
+			id: 'unidentified',
 			name: t('unidentified'),
 			description: t('unidentified_description'),
-			img_name: 'unknown',
+			img_name: 'unidentified',
 			num_total: unidentifiedTrackers.length,
 			num_blocked: 0, // We don't want to see the Trackers Blocked text
 			trackers: unidentifiedTrackers,
@@ -248,7 +248,7 @@ class PanelAndroid extends React.Component {
 				<Tab tabLabel={t('android_tab_site_blocking')} linkClassName="Tab__label">
 					<BlockingTab
 						type="site"
-						categories={unidentifiedTrackers.length === 0 ? categories : [...categories, unknownCategory]}
+						categories={unidentifiedTrackers.length === 0 ? categories : [...categories, unidentifiedCategory]}
 						settings={{ toggle_individual_trackers }}
 						siteProps={this.siteProps}
 						callGlobalAction={this.callGlobalAction}

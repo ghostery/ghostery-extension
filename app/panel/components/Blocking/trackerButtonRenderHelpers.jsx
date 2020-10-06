@@ -53,10 +53,10 @@ export const renderKnownTrackerButtons = (
 	</div>
 );
 
-export const renderUnknownTrackerButtons = (
+export const renderUnidentifiedTrackerButtons = (
 	handleCliqzTrackerWhitelist, whitelisted, siteRestricted, type, contextType
 ) => {
-	const svgContainerClasses = ClassNames('unknown-svg-container', {
+	const svgContainerClasses = ClassNames('unidentified-svg-container', {
 		whitelisted: whitelisted && !siteRestricted,
 		siteRestricted,
 	});

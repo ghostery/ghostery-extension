@@ -33,7 +33,7 @@ class Categories extends React.Component {
 			actions,
 			categories,
 			expandAll,
-			unknownCategory,
+			unidentifiedCategory,
 			enable_anti_tracking,
 			sitePolicy,
 			globalBlocking,
@@ -48,18 +48,18 @@ class Categories extends React.Component {
 		const globalBlockingBool = !!globalBlocking;
 		const filteredBool = !!filtered;
 
-		const renderCategory = (category, index, isUnknown) => {
+		const renderCategory = (category, index, isUnidentified) => {
 			let whitelistedTotal = 0;
-			const unknownCategoryMapping = isUnknown ? (
+			const unidentifiedCategoryMapping = isUnidentified ? (
 				{
-					id: 'unknown',
+					id: 'unidentified',
 					name: t('unidentified'),
 					description: t('unidentified_description'),
-					img_name: 'unknown',
-					num_total: unknownCategory.unidentifiedTrackers.length,
-					num_blocked: unknownCategory.unidentifiedTrackerCount,
-					num_shown: unknownCategory.hide ? 0 : unknownCategory.unidentifiedTrackers.length,
-					trackers: unknownCategory.unidentifiedTrackers.map((unidentifiedTracker) => {
+					img_name: 'unidentified',
+					num_total: unidentifiedCategory.unidentifiedTrackers.length,
+					num_blocked: unidentifiedCategory.unidentifiedTrackerCount,
+					num_shown: unidentifiedCategory.hide ? 0 : unidentifiedCategory.unidentifiedTrackers.length,
+					trackers: unidentifiedCategory.unidentifiedTrackers.map((unidentifiedTracker) => {
 						if (unidentifiedTracker.whitelisted) { whitelistedTotal++; }
 						return {
 							name: unidentifiedTracker.name,
@@ -68,7 +68,7 @@ class Categories extends React.Component {
 							type: unidentifiedTracker.type,
 							siteRestricted: sitePolicy === 1,
 							blocked: false,
-							catId: 'unknown',
+							catId: 'unidentified',
 							description: '',
 							id: unidentifiedTracker.name + unidentifiedTracker.domains[0],
 							shouldShow: true,
@@ -86,9 +86,9 @@ class Categories extends React.Component {
 					expandAll={expandAll}
 					globalBlocking={globalBlockingBool}
 					index={index}
-					category={isUnknown ? unknownCategoryMapping : category}
+					category={isUnidentified ? unidentifiedCategoryMapping : category}
 					actions={actions}
-					key={isUnknown ? unknownCategoryMapping.id : category.id}
+					key={isUnidentified ? unidentifiedCategoryMapping.id : category.id}
 					filtered={filteredBool}
 					showToast={showToast}
 					show_tracker_urls={show_tracker_urls}
@@ -98,19 +98,19 @@ class Categories extends React.Component {
 					smartBlockActive={smartBlockActive}
 					smartBlock={smartBlock}
 					enable_anti_tracking={enable_anti_tracking}
-					isUnknown={isUnknown}
+					isUnidentified={isUnidentified}
 				/>
 			);
 		};
 
 		const categoryList = categories.map((category, index) => renderCategory(category, index));
-		const renderUnknownCategory = unknownCategory && unknownCategory.unidentifiedTrackers.length
+		const renderUnidentifiedCategory = unidentifiedCategory && unidentifiedCategory.unidentifiedTrackers.length
 			? renderCategory(null, categoryList.length, true) : null;
 
 		return (
 			<div className="scroll-content">
 				{categoryList}
-				{renderUnknownCategory}
+				{renderUnidentifiedCategory}
 			</div>
 		);
 	}

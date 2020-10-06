@@ -66,7 +66,7 @@ class DonutGraph extends React.Component {
 						return '#87d7ef';
 					case 'social_media':
 						return '#388ee8';
-					case 'unknown':
+					case 'unidentified':
 						return '#8459a5';
 					default:
 						return '#e8e8e8';
@@ -165,9 +165,9 @@ class DonutGraph extends React.Component {
 
 		if (!prevAntiTracking.unidentifiedTrackerCount && !antiTracking.unidentifiedTrackerCount
 			&& !prevAdBlock.unidentifiedTrackerCount && !adBlock.unidentifiedTrackerCount) { return; }
-		const prevUnknownDataPoints = prevAntiTracking.unidentifiedTrackerCount + prevAdBlock.unidentifiedTrackerCount;
-		const unknownDataPoints = antiTracking.unidentifiedTrackerCount + adBlock.unidentifiedTrackerCount;
-		if (prevUnknownDataPoints !== unknownDataPoints) {
+		const prevUnidentifiedDataPoints = prevAntiTracking.unidentifiedTrackerCount + prevAdBlock.unidentifiedTrackerCount;
+		const unidentifiedDataPoints = antiTracking.unidentifiedTrackerCount + adBlock.unidentifiedTrackerCount;
+		if (prevUnidentifiedDataPoints !== unidentifiedDataPoints) {
 			this.nextPropsDonut(this.props);
 		}
 	}
@@ -235,8 +235,8 @@ class DonutGraph extends React.Component {
 
 		if (antiTracking.unidentifiedTrackerCount || adBlock.unidentifiedTrackerCount) {
 			graphData.push({
-				id: 'unknown',
-				name: 'Unknown',
+				id: 'unidentified',
+				name: 'Unidentified',
 				value: antiTracking.unidentifiedTrackerCount + adBlock.unidentifiedTrackerCount,
 			});
 		}
@@ -252,9 +252,9 @@ class DonutGraph extends React.Component {
 				tooltip.classList.remove('DonutGraph__tooltip--show');
 			}
 		});
-		const unknown_tooltip = document.getElementById('unknown_tooltip');
-		if (unknown_tooltip) {
-			unknown_tooltip.classList.remove('DonutGraph__tooltip--show');
+		const unidentified_tooltip = document.getElementById('unidentified_tooltip');
+		if (unidentified_tooltip) {
+			unidentified_tooltip.classList.remove('DonutGraph__tooltip--show');
 		}
 
 		// CONNECT NEW DATA
@@ -385,8 +385,8 @@ class DonutGraph extends React.Component {
 					{(!!antiTracking.unidentifiedTrackerCount || !!adBlock.unidentifiedTrackerCount) && (
 						<span
 							className="DonutGraph__tooltip tooltip top"
-							id="unknown_tooltip"
-							key="unknown"
+							id="unidentified_tooltip"
+							key="unidentified"
 						>
 							{t('unidentified')}
 						</span>

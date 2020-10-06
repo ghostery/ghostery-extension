@@ -226,10 +226,10 @@ class BlockingTracker extends React.Component {
 		);
 	}
 
-	renderUnknownTrackerStatus() {
+	renderUnidentifiedTrackerStatus() {
 		const { siteProps, tracker } = this.props;
 		const trackerSelect = this.trackerSelectStatus;
-		const svgContainerClasses = ClassNames('UnknownSVGContainer', {
+		const svgContainerClasses = ClassNames('UnidentifiedSVGContainer', {
 			whitelisted: tracker.whitelisted && !siteProps.isRestricted,
 			siteRestricted: siteProps.isRestricted,
 		});
@@ -335,7 +335,7 @@ class BlockingTracker extends React.Component {
 		);
 	}
 
-	renderUnknownOverflow() {
+	renderUnidentifiedOverflow() {
 		const {
 			open,
 			tracker,
@@ -360,7 +360,7 @@ class BlockingTracker extends React.Component {
 	renderTrackerOverflow() {
 		const trackerSelect = this.trackerSelectStatus;
 		if (trackerSelect === 'antiTracking' || trackerSelect === 'adBlock') {
-			return this.renderUnknownOverflow();
+			return this.renderUnidentifiedOverflow();
 		}
 		if (trackerSelect === 'override-sb') {
 			return this.renderSmartBlockOverflow();
@@ -383,7 +383,7 @@ class BlockingTracker extends React.Component {
 					<div>{name}</div>
 					{this.renderTrackerModified()}
 				</div>
-				{(trackerSelect === 'antiTracking' || trackerSelect === 'adBlock') ? this.renderUnknownTrackerStatus() : this.renderTrackerStatus()}
+				{(trackerSelect === 'antiTracking' || trackerSelect === 'adBlock') ? this.renderUnidentifiedTrackerStatus() : this.renderTrackerStatus()}
 				{this.renderTrackerOverflow()}
 			</div>
 		);

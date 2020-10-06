@@ -30,7 +30,7 @@ const { adblocker, antitracking } = cliqz.modules;
  */
 export function getCliqzData(tabId, tabHostUrl, antiTracking) {
 	let totalUnsafeCount = 0;
-	let totalUnknownCount = 0;
+	let totalUnidentifiedCount = 0;
 	let trackerCount = 0;
 	let unidentifiedTrackerCount = 0;
 	const unidentifiedTrackers = [];
@@ -41,7 +41,7 @@ export function getCliqzData(tabId, tabHostUrl, antiTracking) {
 	if (!cliqzModuleEnabled || !cliqzModule.background) {
 		return {
 			totalUnsafeCount,
-			totalUnknownCount,
+			totalUnidentifiedCount,
 			trackerCount,
 			unidentifiedTrackerCount,
 			unidentifiedTrackers,
@@ -81,7 +81,7 @@ export function getCliqzData(tabId, tabHostUrl, antiTracking) {
 
 		if (dataPoints) {
 			totalUnsafeCount += dataPoints;
-			totalUnknownCount += dataPoints;
+			totalUnidentifiedCount += dataPoints;
 			trackerCount++;
 			unidentifiedTrackerCount++;
 		}
@@ -100,7 +100,7 @@ export function getCliqzData(tabId, tabHostUrl, antiTracking) {
 
 	return {
 		totalUnsafeCount,
-		totalUnknownCount,
+		totalUnidentifiedCount,
 		trackerCount,
 		unidentifiedTrackerCount,
 		unidentifiedTrackers,
