@@ -114,7 +114,7 @@ class ConfData {
 			_initProperty('enable_metrics', false);
 			_initProperty('enable_offers', !IS_CLIQZ && !IS_FIREFOX && !IS_ANDROID);
 			_initProperty('enable_abtests', true);
-			_initProperty('enable_smart_block', true);
+			_initProperty('enable_smart_browse', true);
 			_initProperty('expand_all_trackers', true);
 			_initProperty('hide_alert_trusted', false);
 			_initProperty('hub_layout', 'not_yet_set');

@@ -40,7 +40,7 @@ import { setTheme } from '../utils/utils';
 const initialState = {
 	enable_ad_block: true,
 	enable_anti_tracking: true,
-	enable_smart_block: true,
+	enable_smart_browse: true,
 	initialized: false, // prevent rendering subviews before UPDATE_PANEL_DATA resolves
 	is_expanded: false,
 	is_expert: false,
@@ -317,8 +317,8 @@ export default (state = initialState, action) => {
 				case 'enable_ad_block':
 					pingName = action.data.isEnabled ? 'adblock_off' : 'adblock_on';
 					break;
-				case 'enable_smart_block':
-					pingName = action.data.isEnabled ? 'smartblock_off' : 'smartblock_on';
+				case 'enable_smart_browse':
+					pingName = action.data.isEnabled ? 'smartbrowse_off' : 'smartbrowse_on';
 					break;
 				default:
 					break;

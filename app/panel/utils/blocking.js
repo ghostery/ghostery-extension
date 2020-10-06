@@ -19,10 +19,10 @@ import { sendMessage } from './msg';
  * Dispatch action to SummaryActions to update trackerCounts.
  * @memberOf PanelUtils
  * @param {array}	 categories        		array of categories
- * @param {object} smartBlock 	blocked and unblocked of Smart Blocking
+ * @param {object} smartBrowse 	blocked and unblocked of Smart Blocking
  * @param {function} updateTrackerCounts 	from SummaryActions
  */
-export function updateSummaryBlockingCount(categories = [], smartBlock, updateTrackerCounts) {
+export function updateSummaryBlockingCount(categories = [], smartBrowse, updateTrackerCounts) {
 	let numTotal = 0;
 	let numTotalBlocked = 0;
 	let numTotalSsBlocked = 0;
@@ -33,8 +33,8 @@ export function updateSummaryBlockingCount(categories = [], smartBlock, updateTr
 	categories.forEach((categoryEl) => {
 		categoryEl.trackers.forEach((trackerEl) => {
 			numTotal++;
-			const sbBlocked = smartBlock.blocked.hasOwnProperty(trackerEl.id);
-			const sbUnblocked = smartBlock.unblocked.hasOwnProperty(trackerEl.id);
+			const sbBlocked = smartBrowse.blocked.hasOwnProperty(trackerEl.id);
+			const sbUnblocked = smartBrowse.unblocked.hasOwnProperty(trackerEl.id);
 
 			if (trackerEl.ss_blocked || sbBlocked || (trackerEl.blocked && !trackerEl.ss_allowed && !sbUnblocked)) {
 				numTotalBlocked++;
@@ -75,14 +75,14 @@ export function updateBlockAllTrackers(state, action) {
 	const blocked = !action.data.allBlocked;
 	const updated_app_ids = JSON.parse(JSON.stringify(state.selected_app_ids)) || {};
 	const updated_categories = JSON.parse(JSON.stringify(state.categories)) || [];
-	const { smartBlockActive } = action.data;
-	const smartBlock = (smartBlockActive && action.data.smartBlock) || { blocked: {}, unblocked: {} };
+	const { smartBrowseActive } = action.data;
+	const smartBrowse = (smartBrowseActive && action.data.smartBrowse) || { blocked: {}, unblocked: {} };
 
 	updated_categories.forEach((categoryEl) => {
 		categoryEl.num_blocked = 0;
 		categoryEl.trackers.forEach((trackerEl) => {
-			const sbBlocked = smartBlock.blocked.hasOwnProperty(trackerEl.id);
-			const sbUnblocked = smartBlock.unblocked.hasOwnProperty(trackerEl.id);
+			const sbBlocked = smartBrowse.blocked.hasOwnProperty(trackerEl.id);
+			const sbUnblocked = smartBrowse.unblocked.hasOwnProperty(trackerEl.id);
 
 			if (trackerEl.shouldShow) {
 				trackerEl.blocked = blocked;
@@ -116,16 +116,16 @@ export function updateBlockAllTrackers(state, action) {
  * @return {Object} 		    updated categories and selected app ids
  */
 export function updateCategoryBlocked(state, action) {
-	const { blocked, smartBlockActive } = action.data;
-	const smartBlock = (smartBlockActive && action.data.smartBlock) || { blocked: {}, unblocked: {} };
+	const { blocked, smartBrowseActive } = action.data;
+	const smartBrowse = (smartBrowseActive && action.data.smartBrowse) || { blocked: {}, unblocked: {} };
 	const updated_app_ids = JSON.parse(JSON.stringify(state.selected_app_ids)) || {};
 	const updated_categories = JSON.parse(JSON.stringify(state.categories)); // deep clone
 	const catIndex = updated_categories.findIndex(item => item.id === action.data.category);
 	const updated_category = updated_categories[catIndex];
 	updated_category.num_blocked = 0;
 	updated_category.trackers.forEach((trackerEl) => {
-		const sbBlocked = smartBlock.blocked.hasOwnProperty(trackerEl.id);
-		const sbUnblocked = smartBlock.unblocked.hasOwnProperty(trackerEl.id);
+		const sbBlocked = smartBrowse.blocked.hasOwnProperty(trackerEl.id);
+		const sbUnblocked = smartBrowse.unblocked.hasOwnProperty(trackerEl.id);
 
 		if (trackerEl.shouldShow) {
 			trackerEl.blocked = blocked;
@@ -185,8 +185,8 @@ export function updateTrackerBlocked(state, action) {
 		return {};
 	}
 
-	const { blocked, smartBlockActive } = action.data;
-	const smartBlock = (smartBlockActive && action.data.smartBlock) || { blocked: {}, unblocked: {} };
+	const { blocked, smartBrowseActive } = action.data;
+	const smartBrowse = (smartBrowseActive && action.data.smartBrowse) || { blocked: {}, unblocked: {} };
 	const updated_app_ids = JSON.parse(JSON.stringify(state.selected_app_ids)) || {};
 	const updated_categories = JSON.parse(JSON.stringify(state.categories)) || []; // deep clone
 	const catIndex = updated_categories.findIndex(item => item.id === action.data.cat_id);
@@ -194,8 +194,8 @@ export function updateTrackerBlocked(state, action) {
 
 	updated_category.num_blocked = 0;
 	updated_category.trackers.forEach((trackerEl) => {
-		const sbBlocked = smartBlock.blocked.hasOwnProperty(trackerEl.id);
-		const sbUnblocked = smartBlock.unblocked.hasOwnProperty(trackerEl.id);
+		const sbBlocked = smartBrowse.blocked.hasOwnProperty(trackerEl.id);
+		const sbUnblocked = smartBrowse.unblocked.hasOwnProperty(trackerEl.id);
 
 		if (trackerEl.shouldShow) {
 			if (trackerEl.id === action.data.app_id) {

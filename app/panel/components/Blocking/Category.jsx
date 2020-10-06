@@ -146,8 +146,8 @@ class Category extends React.Component {
 			globalBlocking,
 			sitePolicy,
 			paused_blocking,
-			smartBlock,
-			smartBlockActive,
+			smartBrowse,
+			smartBrowseActive,
 			showToast
 		} = this.props;
 		const { allShownBlocked } = this.state;
@@ -159,8 +159,8 @@ class Category extends React.Component {
 		}
 
 		actions.updateCategoryBlocked({
-			smartBlockActive,
-			smartBlock,
+			smartBrowseActive,
+			smartBrowse,
 			category: category.id,
 			blocked,
 		});
@@ -225,8 +225,8 @@ class Category extends React.Component {
 			showToast,
 			show_tracker_urls,
 			language,
-			smartBlockActive,
-			smartBlock,
+			smartBrowseActive,
+			smartBrowse,
 		} = this.props;
 		const {
 			totalShownBlocked,
@@ -335,8 +335,8 @@ class Category extends React.Component {
 						sitePolicy={sitePolicy}
 						paused_blocking={paused_blocking}
 						language={language}
-						smartBlockActive={smartBlockActive}
-						smartBlock={smartBlock}
+						smartBrowseActive={smartBrowseActive}
+						smartBrowse={smartBrowse}
 						isUnknown={isUnknown}
 					/>
 				)}

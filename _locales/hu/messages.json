@@ -674,7 +674,7 @@
 	"panel_tracker_warning_slow_tooltip": {
 		"message": "A tracker lassú"
 	},
-	"panel_tracker_warning_smartblock_tooltip": {
+	"panel_tracker_warning_smartbrowse_tooltip": {
 		"message": "Tracker blokkolva az Okos Blokkolás (Smart Blocking) által"
 	},
 	"panel_tracker_warning_smartunblock_tooltip": {
@@ -1145,10 +1145,10 @@
 	"alert_ad_block_off": {
 		"message": "Fejlesztett hirdetésblokkolás KI van kapcsolva A hirdetések nem lesznek kiszűrve."
 	},
-	"alert_smart_block_on": {
+	"alert_smart_browse_on": {
 		"message": "Okos blokkolás BE van kapcsolva. A tracker-szűrés az oldal teljesítményének optimalizálására lesz beállítva."
 	},
-	"alert_smart_block_off": {
+	"alert_smart_browse_off": {
 		"message": "Okos blokkolás KI van kapcsolva. A tracker-szűrés nem lesz automatikusan beállítva."
 	},
 	"alert_reload": {
@@ -1175,7 +1175,7 @@
 	"tooltip_ad_block_on": {
 		"message": "A hirdetések ki lesznek kiszűrve."
 	},
-	"tooltip_smart_block_on": {
+	"tooltip_smart_browse_on": {
 		"message": "A tracker-szűrés az oldal teljesítményének optimalizálására van beállítva."
 	},
 	"tooltip_trust": {
@@ -2464,10 +2464,10 @@
 	"enhanced_ad_blocking": {
 		"message": "Fejlesztett hirdetésblokkolás"
 	},
-	"smart_blocking": {
+	"smart_browsing": {
 		"message": "Okos blokkolás"
 	},
-	"smart_blocking_DESC": {
+	"smart_browsing_DESC": {
 		"message": "Automatikusan blokkolja vagy feloldja a trackereket az oldal teljesítményének optimalizálásához."
 	},
 	"ad_blocking_DESC": {

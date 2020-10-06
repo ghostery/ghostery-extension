@@ -15,7 +15,7 @@
  *		prefetched: 	{boolean}	indicates that the tab was prefetched and not part of the main window
  *		purplebox: 		{boolean}	indicates that the purplebox.js script has been loaded on this tab
  *		protocol: 		{string} 	request protocol
- *		smartBlock: 	{Object}	smart blocking stats for this tab
+ *		smartBrowse: 	{Object}	smart blocking stats for this tab
  * 		url: 			{string} 	full url
  * }
  *
@@ -29,7 +29,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
-import PolicySmartBlock from './PolicySmartBlock';
+import PolicySmartBrowse from './PolicySmartBrowse';
 import { processUrl } from '../utils/utils';
 
 /**
@@ -58,12 +58,12 @@ class TabInfo {
 			purplebox: false,
 			rewards: false,
 			timestamp: Date.now(),
-			// assign only when smartBlock is enabled so avoid false positives
-			// when enabling smartBlock is enabled for the first time
-			firstLoadTimestamp: PolicySmartBlock.shouldCheck(tab_id) && (numOfReloads === 0 ? Date.now() : ((this.getTabInfoPersist(tab_id, 'firstLoadTimestamp') || 0)) || 0),
-			reloaded: PolicySmartBlock.checkReloadThreshold(tab_id),
+			// assign only when smartBrowse is enabled so avoid false positives
+			// when enabling smartBrowse is enabled for the first time
+			firstLoadTimestamp: PolicySmartBrowse.shouldCheck(tab_id) && (numOfReloads === 0 ? Date.now() : ((this.getTabInfoPersist(tab_id, 'firstLoadTimestamp') || 0)) || 0),
+			reloaded: PolicySmartBrowse.checkReloadThreshold(tab_id),
 			numOfReloads,
-			smartBlock: {
+			smartBrowse: {
 				blocked: {},
 				unblocked: {},
 			},
@@ -125,7 +125,7 @@ class TabInfo {
 				this._tabInfo[tab_id][property] = value;
 			}
 		}
-	}
+		}
 
 	/**
 	 * Set Smart Blocking counts for this tab
@@ -134,15 +134,15 @@ class TabInfo {
 	 * @param {string} 	rule   		smart blocking rule name
 	 * @param {boolean} blocked		kind of policy to set
 	 */
-	setTabSmartBlockAppInfo(tabId, appId, rule, blocked) {
+	setTabSmartBrowseAppInfo(tabId, appId, rule, blocked) {
 		if (!this._tabInfo.hasOwnProperty(tabId)) { return; }
 
 		const policy = blocked ? 'blocked' : 'unblocked';
-		if (typeof this._tabInfo[tabId].smartBlock[policy][appId] === 'undefined') {
-			this._tabInfo[tabId].smartBlock[policy][appId] = [];
+		if (typeof this._tabInfo[tabId].smartBrowse[policy][appId] === 'undefined') {
+			this._tabInfo[tabId].smartBrowse[policy][appId] = [];
 		}
-		if (this._tabInfo[tabId].smartBlock[policy][appId].indexOf(rule) === -1) {
-			this._tabInfo[tabId].smartBlock[policy][appId].push(rule);
+		if (this._tabInfo[tabId].smartBrowse[policy][appId].indexOf(rule) === -1) {
+			this._tabInfo[tabId].smartBrowse[policy][appId].push(rule);
 		}
 	}
 

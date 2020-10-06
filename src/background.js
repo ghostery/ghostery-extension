@@ -668,7 +668,7 @@ function handleGhosteryHub(name, message, callback) {
 		case 'SET_SETUP_SHOW_WARNING_OVERRIDE':
 		case 'SET_ANTI_TRACKING':
 		case 'SET_AD_BLOCK':
-		case 'SET_SMART_BLOCK':
+		case 'SET_SMART_BROWSE':
 		case 'SET_HUMAN_WEB':
 		case 'SET_SETUP_COMPLETE': {
 			panelData.set(message);
@@ -1575,7 +1575,7 @@ function initializeVersioning() {
 			if (prevVersion[0] < 8) {
 				globals.JUST_UPGRADED_FROM_7 = true;
 				conf.is_expert = true;
-				conf.enable_smart_block = false;
+				conf.enable_smart_browse = false;
 			}
 
 			// Check if the earliest version is < 8.4.2

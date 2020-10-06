@@ -19,7 +19,7 @@ import {
 	SET_BLOCKING_POLICY,
 	SET_ANTI_TRACKING,
 	SET_AD_BLOCK,
-	SET_SMART_BLOCK,
+	SET_SMART_BROWSE,
 	SET_GHOSTERY_REWARDS,
 	SET_HUMAN_WEB
 } from './SetupViewConstants';
@@ -41,7 +41,7 @@ function SetupViewReducer(state = initialState, action) {
 				blockingPolicy,
 				enable_anti_tracking,
 				enable_ad_block,
-				enable_smart_block,
+				enable_smart_browse,
 				enable_ghostery_rewards,
 				enable_human_web,
 			} = action.data;
@@ -70,7 +70,7 @@ function SetupViewReducer(state = initialState, action) {
 					blockingPolicy,
 					enable_anti_tracking,
 					enable_ad_block,
-					enable_smart_block,
+					enable_smart_browse,
 					enable_ghostery_rewards,
 					enable_human_web,
 				}
@@ -118,9 +118,9 @@ function SetupViewReducer(state = initialState, action) {
 			const { enable_ad_block } = action.data;
 			return { ...state, setup: { ...state.setup, enable_ad_block } };
 		}
-		case SET_SMART_BLOCK: {
-			const { enable_smart_block } = action.data;
-			return { ...state, setup: { ...state.setup, enable_smart_block } };
+		case SET_SMART_BROWSE: {
+			const { enable_smart_browse } = action.data;
+			return { ...state, setup: { ...state.setup, enable_smart_browse } };
 		}
 		case SET_GHOSTERY_REWARDS: {
 			const { enable_ghostery_rewards } = action.data;

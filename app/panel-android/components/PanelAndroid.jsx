@@ -35,8 +35,8 @@ class PanelAndroid extends React.Component {
 			panel: {
 				enable_ad_block: false,
 				enable_anti_tracking: false,
-				enable_smart_block: false,
-				smartBlock: { blocked: {}, unblocked: {} },
+				enable_smart_browse: false,
+				smartBrowse: { blocked: {}, unblocked: {} },
 			},
 			summary: {
 				categories: [],

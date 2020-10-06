@@ -51,8 +51,8 @@ class Trackers extends React.Component {
 			show_tracker_urls,
 			sitePolicy,
 			paused_blocking,
-			smartBlockActive,
-			smartBlock,
+			smartBrowseActive,
+			smartBrowse,
 		} = this.props;
 		let trackerList;
 		if (globalBlocking) {
@@ -85,8 +85,8 @@ class Trackers extends React.Component {
 					sitePolicy={sitePolicy}
 					paused_blocking={paused_blocking}
 					language={language}
-					smartBlockActive={smartBlockActive}
-					smartBlock={smartBlock}
+					smartBrowseActive={smartBrowseActive}
+					smartBrowse={smartBrowse}
 					isUnknown={isUnknown}
 				/>
 			));

@@ -674,7 +674,7 @@
 	"panel_tracker_warning_slow_tooltip": {
 		"message": "跟踪器降低网页加载速度"
 	},
-	"panel_tracker_warning_smartblock_tooltip": {
+	"panel_tracker_warning_smartbrowse_tooltip": {
 		"message": "智能拦截功能拦截的跟踪器"
 	},
 	"panel_tracker_warning_smartunblock_tooltip": {
@@ -1145,10 +1145,10 @@
 	"alert_ad_block_off": {
 		"message": "增强版广告拦截功能已关闭。广告不会被拦截。"
 	},
-	"alert_smart_block_on": {
+	"alert_smart_browse_on": {
 		"message": "智能拦截功能已开启。将调整跟踪器拦截功能以优化页面性能。"
 	},
-	"alert_smart_block_off": {
+	"alert_smart_browse_off": {
 		"message": "智能拦截功能已关闭。跟踪器拦截功能将不会自动调整。"
 	},
 	"alert_reload": {
@@ -1175,7 +1175,7 @@
 	"tooltip_ad_block_on": {
 		"message": "广告已被拦截。"
 	},
-	"tooltip_smart_block_on": {
+	"tooltip_smart_browse_on": {
 		"message": "已调整跟踪器拦截功能以优化页面性能。"
 	},
 	"tooltip_trust": {
@@ -2464,10 +2464,10 @@
 	"enhanced_ad_blocking": {
 		"message": "增强型广告屏蔽"
 	},
-	"smart_blocking": {
+	"smart_browsing": {
 		"message": "智能拦截"
 	},
-	"smart_blocking_DESC": {
+	"smart_browsing_DESC": {
 		"message": "自动拦截和取消拦截跟踪器，优化网页性能。"
 	},
 	"ad_blocking_DESC": {

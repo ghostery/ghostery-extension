@@ -421,7 +421,7 @@ export function resetSettings({ state }) {
 		paused_blocking: false,
 		enable_anti_tracking: true,
 		enable_ad_block: true,
-		enable_smart_block: true,
+		enable_smart_browse: true,
 	});
 
 	return {
@@ -439,7 +439,7 @@ export function resetSettings({ state }) {
 		panel: {
 			enable_anti_tracking: true,
 			enable_ad_block: true,
-			enable_smart_block: true,
+			enable_smart_browse: true,
 		},
 	};
 }

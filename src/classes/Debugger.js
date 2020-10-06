@@ -339,7 +339,7 @@ class Debugger {
 		[`${CSS_SUBHEADER}When called with...`, 'Returns...'],
 		['No argument', 'The whole config object'],
 		['A property key string', 'An object with just that property'],
-		['', "Example: ghostery.getConfData('enable_smart_block')"],
+		['', "Example: ghostery.getConfData('enable_smart_browse')"],
 		['A property key regex', 'An object with all matching properties'],
 		['', 'Example: ghostery.getConfData(/setup_/)'],
 		['Anything else', 'The whole config object. Also returned if there are no matching results'],

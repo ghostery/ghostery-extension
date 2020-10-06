@@ -74,12 +74,12 @@ class OverviewTab extends React.Component {
 		return (trackerCounts && (trackerCounts.allowed + trackerCounts.blocked)) || 0;
 	}
 
-	get smartBlockBlocked() {
+	get smartBrowseBlocked() {
 		const { panel, summary } = this.props;
-		const { smartBlock } = panel;
+		const { smartBrowse } = panel;
 		const { trackerCounts } = summary;
 
-		let sbBlocked = (smartBlock && smartBlock.blocked && Object.keys(smartBlock.blocked).length) || 0;
+		let sbBlocked = (smartBrowse && smartBrowse.blocked && Object.keys(smartBrowse.blocked).length) || 0;
 		if (sbBlocked === trackerCounts.sbBlocked) {
 			sbBlocked = 0;
 		}
@@ -87,12 +87,12 @@ class OverviewTab extends React.Component {
 		return sbBlocked;
 	}
 
-	get smartBlockAllowed() {
+	get smartBrowseAllowed() {
 		const { panel, summary } = this.props;
-		const { smartBlock } = panel;
+		const { smartBrowse } = panel;
 		const { trackerCounts } = summary;
 
-		let sbAllowed = (smartBlock && smartBlock.unblocked && Object.keys(smartBlock.unblocked).length) || 0;
+		let sbAllowed = (smartBrowse && smartBrowse.unblocked && Object.keys(smartBrowse.unblocked).length) || 0;
 		if (sbAllowed === trackerCounts.sbAllowed) {
 			sbAllowed = 0;
 		}
@@ -100,11 +100,11 @@ class OverviewTab extends React.Component {
 		return sbAllowed;
 	}
 
-	get smartBlockAdjust() {
+	get smartBrowseAdjust() {
 		const { panel } = this.props;
-		const { enable_smart_block } = panel;
+		const { enable_smart_browse } = panel;
 
-		return enable_smart_block && ((this.smartBlockBlocked - this.smartBlockAllowed) || 0);
+		return enable_smart_browse && ((this.smartBrowseBlocked - this.smartBrowseAllowed) || 0);
 	}
 
 	get trackersBlockedCount() {
@@ -117,7 +117,7 @@ class OverviewTab extends React.Component {
 		} else if (sitePolicy === BLACKLISTED) {
 			totalTrackersBlockedCount = trackerCounts.blocked + trackerCounts.allowed || 0;
 		} else {
-			totalTrackersBlockedCount = trackerCounts.blocked + this.smartBlockAdjust || 0;
+			totalTrackersBlockedCount = trackerCounts.blocked + this.smartBrowseAdjust || 0;
 		}
 
 		return totalTrackersBlockedCount;
@@ -313,7 +313,7 @@ class OverviewTab extends React.Component {
 
 	_renderCliqzFeatures() {
 		const { panel, summary } = this.props;
-		const { enable_anti_tracking, enable_ad_block, enable_smart_block } = panel;
+		const { enable_anti_tracking, enable_ad_block, enable_smart_browse } = panel;
 		const { paused_blocking, sitePolicy } = summary;
 		const disableBlocking = this.siteNotScanned;
 
@@ -340,8 +340,8 @@ class OverviewTab extends React.Component {
 				<div className="OverviewTab__CliqzFeature">
 					<CliqzFeature
 						clickButton={this.handleCliqzFeatureClick}
-						type="smart_block"
-						active={enable_smart_block}
+						type="smart_browse"
+						active={enable_smart_browse}
 						cliqzInactive={paused_blocking || sitePolicy || disableBlocking}
 						isSmaller
 					/>
@@ -392,8 +392,8 @@ OverviewTab.propTypes = {
 	panel: PropTypes.shape({
 		enable_ad_block: PropTypes.bool.isRequired,
 		enable_anti_tracking: PropTypes.bool.isRequired,
-		enable_smart_block: PropTypes.bool.isRequired,
-		smartBlock: PropTypes.shape({
+		enable_smart_browse: PropTypes.bool.isRequired,
+		smartBrowse: PropTypes.shape({
 			blocked: PropTypes.shape({}).isRequired,
 			unblocked: PropTypes.shape({}).isRequired,
 		}).isRequired,

@@ -25,7 +25,7 @@ import { log } from '../utils/common';
  * @memberOf  BackgroundClasses
  * @todo  make it a Singelton
  */
-class PolicySmartBlock {
+class PolicySmartBrowse {
 	constructor() {
 		this.allowedCategoriesList = [
 			'essential',
@@ -50,23 +50,23 @@ class PolicySmartBlock {
 	 *                           	applicable to this url, or none are met.
 	 */
 	shouldUnblock(appId, catId, tabId, pageURL, requestType) {
-		if (!PolicySmartBlock.shouldCheck(tabId, appId)) { return false; }
+		if (!PolicySmartBrowse.shouldCheck(tabId, appId)) { return false; }
 
 		let reason;
 
-		if (PolicySmartBlock._appHasKnownIssue(tabId, appId, pageURL)) {
+		if (PolicySmartBrowse._appHasKnownIssue(tabId, appId, pageURL)) {
 			reason = 'hasIssue'; 		// allow if tracker is in compatibility list
 		} else if (this._allowedCategories(tabId, appId, catId)) {
 			reason = 'allowedCategory'; // allow if tracker is in breaking category
 		} else if (this._allowedTypes(tabId, appId, requestType)) {
 			reason = 'allowedType'; 	// allow if tracker is in breaking type
-		} else if (PolicySmartBlock._pageWasReloaded(tabId, appId)) {
+		} else if (PolicySmartBrowse._pageWasReloaded(tabId, appId)) {
 			reason = 'pageReloaded'; 	// allow if page has been reloaded recently
 		}
 
 		if (reason) {
 			log('Smart Blocking unblocked appId', appId, 'for reason:', reason);
-			tabInfo.setTabSmartBlockAppInfo(tabId, appId, reason, false);
+			tabInfo.setTabSmartBrowseAppInfo(tabId, appId, reason, false);
 			return true;
 		}
 
@@ -84,21 +84,21 @@ class PolicySmartBlock {
 	 *                              applicable to this url, or none are met.
 	 */
 	shouldBlock(appId, catId, tabId, pageURL, requestType, requestTimestamp) {
-		if (!PolicySmartBlock.shouldCheck(tabId, appId)) { return false; }
+		if (!PolicySmartBrowse.shouldCheck(tabId, appId)) { return false; }
 
 		let reason;
 
 		// Block all trackers that load after 5 seconds from when page load started
-		if (PolicySmartBlock._requestWasSlow(tabId, appId, requestTimestamp)) {
+		if (PolicySmartBrowse._requestWasSlow(tabId, appId, requestTimestamp)) {
 			reason = 'slow';
 
-			if (PolicySmartBlock._appHasKnownIssue(tabId, appId, pageURL)) {
+			if (PolicySmartBrowse._appHasKnownIssue(tabId, appId, pageURL)) {
 				reason = 'hasIssue'; 		// allow if tracker is in compatibility list
 			} else if (this._allowedCategories(tabId, appId, catId)) {
 				reason = 'allowedCategory'; // allow if tracker is in breaking category
 			} else if (this._allowedTypes(tabId, appId, requestType)) {
 				reason = 'allowedType'; 	// allow if tracker is in breaking type
-			} else if (PolicySmartBlock._pageWasReloaded(tabId, appId)) {
+			} else if (PolicySmartBrowse._pageWasReloaded(tabId, appId)) {
 				reason = 'pageReloaded'; 	// allow if page has been reloaded recently
 			}
 		}
@@ -106,7 +106,7 @@ class PolicySmartBlock {
 		const result = (reason === 'slow');
 		if (result) {
 			log('Smart Blocking blocked appId', appId, 'for reason:', reason);
-			tabInfo.setTabSmartBlockAppInfo(tabId, appId, 'slow', true);
+			tabInfo.setTabSmartBrowseAppInfo(tabId, appId, 'slow', true);
 		}
 
 		return result;
@@ -130,7 +130,7 @@ class PolicySmartBlock {
 		const tabHost = tabInfo.getTabInfo(tabId, 'host');
 
 		return (
-			conf.enable_smart_block &&
+			conf.enable_smart_browse &&
 			!globals.SESSION.paused_blocking &&
 			!Policy.getSitePolicy(tabUrl) &&
 			((appId && (!conf.site_specific_unblocks.hasOwnProperty(tabHost) || !conf.site_specific_unblocks[tabHost].includes(+appId))) || appId === false) &&
@@ -147,7 +147,7 @@ class PolicySmartBlock {
 	 * @return {boolean}
 	 */
 	static isFirstPartyRequest(tabId, pageDomain = '', requestDomain = '') {
-		if (!PolicySmartBlock.shouldCheck(tabId)) { return false; }
+		if (!PolicySmartBrowse.shouldCheck(tabId)) { return false; }
 
 		return pageDomain === requestDomain;
 	}
@@ -181,7 +181,7 @@ class PolicySmartBlock {
 	 * @return 	{boolean}
 	 */
 	static isInsecureRequest(tabId, pageProtocol, requestProtocol, requestHost) {
-		if (!PolicySmartBlock.shouldCheck(tabId)) { return false; }
+		if (!PolicySmartBrowse.shouldCheck(tabId)) { return false; }
 
 		// don't block mixed content from localhost
 		if (requestHost === 'localhost' || requestHost === '127.0.0.1' || requestHost === '[::1]') {
@@ -222,13 +222,13 @@ class PolicySmartBlock {
 	 * @return {boolean}
 	 */
 	static checkReloadThreshold(tabId) {
-		if (!PolicySmartBlock.shouldCheck(tabId)) { return false; }
+		if (!PolicySmartBrowse.shouldCheck(tabId)) { return false; }
 
-		const SMART_BLOCK_BEHAVIOR_THRESHOLD = 30000; // 30 seconds
+		const SMART_BROWSE_BEHAVIOR_THRESHOLD = 30000; // 30 seconds
 
 		return (
 			tabInfo.getTabInfoPersist(tabId, 'numOfReloads') > 1 &&
-			(((Date.now() - tabInfo.getTabInfoPersist(tabId, 'firstLoadTimestamp')) < SMART_BLOCK_BEHAVIOR_THRESHOLD) || false)
+			(((Date.now() - tabInfo.getTabInfoPersist(tabId, 'firstLoadTimestamp')) < SMART_BROWSE_BEHAVIOR_THRESHOLD) || false)
 		);
 	}
 
@@ -247,4 +247,4 @@ class PolicySmartBlock {
 	}
 }
 
-export default PolicySmartBlock;
+export default PolicySmartBrowse;

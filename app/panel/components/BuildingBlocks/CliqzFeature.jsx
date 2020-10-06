@@ -40,8 +40,8 @@ class CliqzFeature extends React.Component {
 					return t('tooltip_ad_block_on');
 				case 'anti_track':
 					return t('tooltip_anti_track_on');
-				case 'smart_block':
-					return t('tooltip_smart_block_on');
+				case 'smart_browse':
+					return t('tooltip_smart_browse_on');
 				default:
 					return false;
 			}
@@ -51,7 +51,7 @@ class CliqzFeature extends React.Component {
 					return t('ad_blocking_DESC');
 				case 'anti_track':
 					return t('anti_tracking_DESC');
-				case 'smart_block':
+				case 'smart_browse':
 					return t('smart_browsing_DESC');
 				default:
 					return false;
@@ -67,7 +67,7 @@ class CliqzFeature extends React.Component {
 				return t('ad_blocking');
 			case 'anti_track':
 				return t('anti_tracking');
-			case 'smart_block':
+			case 'smart_browse':
 				return t('smart_browsing');
 			default:
 				return false;
@@ -140,7 +140,7 @@ class CliqzFeature extends React.Component {
 			featureName = t('anti_tracking');
 		} else if (featureType === 'ad_block') {
 			featureName = t('ad_blocking');
-		} else if (featureType === 'smart_block') {
+		} else if (featureType === 'smart_browse') {
 			featureName = t('smart_browsing');
 		}
 
@@ -168,7 +168,7 @@ CliqzFeature.propTypes = {
 	type: PropTypes.oneOf([
 		'anti_track',
 		'ad_block',
-		'smart_block',
+		'smart_browse',
 	]).isRequired,
 	active: PropTypes.bool,
 	cliqzInactive: PropTypes.oneOfType([

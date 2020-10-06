@@ -109,7 +109,7 @@ class SetupViewContainer extends Component {
 		actions.setBlockingPolicy({ blockingPolicy: BLOCKING_POLICY_RECOMMENDED });
 		actions.setAntiTracking({ enable_anti_tracking: true });
 		actions.setAdBlock({ enable_ad_block: true });
-		actions.setSmartBlocking({ enable_smart_block: true });
+		actions.setSmartBrowsing({ enable_smart_browse: true });
 		actions.setGhosteryRewards({ enable_ghostery_rewards: !IS_FIREFOX && !IS_ANDROID });
 		actions.setHumanWeb({ enable_human_web: !IS_FIREFOX || BROWSER_INFO.name === 'ghostery_android' });
 	}
@@ -248,7 +248,7 @@ SetupViewContainer.propTypes = {
 		blockingPolicy: PropTypes.string,
 		enable_anti_tracking: PropTypes.bool,
 		enable_ad_block: PropTypes.bool,
-		enable_smart_block: PropTypes.bool,
+		enable_smart_browse: PropTypes.bool,
 		enable_ghostery_rewards: PropTypes.bool,
 		enable_human_web: PropTypes.bool,
 	}),
@@ -261,7 +261,7 @@ SetupViewContainer.propTypes = {
 		setBlockingPolicy: PropTypes.func.isRequired,
 		setAntiTracking: PropTypes.func.isRequired,
 		setAdBlock: PropTypes.func.isRequired,
-		setSmartBlocking: PropTypes.func.isRequired,
+		setSmartBrowsing: PropTypes.func.isRequired,
 		setGhosteryRewards: PropTypes.func.isRequired,
 		setHumanWeb: PropTypes.func.isRequired,
 		setSetupComplete: PropTypes.func.isRequired,
@@ -285,7 +285,7 @@ SetupViewContainer.defaultProps = {
 		blockingPolicy: BLOCKING_POLICY_RECOMMENDED,
 		enable_anti_tracking: true,
 		enable_ad_block: true,
-		enable_smart_block: true,
+		enable_smart_browse: true,
 		enable_ghostery_rewards: true,
 		enable_human_web: true,
 	},

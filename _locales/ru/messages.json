@@ -674,7 +674,7 @@
 	"panel_tracker_warning_slow_tooltip": {
 		"message": "Трекер медленный"
 	},
-	"panel_tracker_warning_smartblock_tooltip": {
+	"panel_tracker_warning_smartbrowse_tooltip": {
 		"message": "Трекер заблокирован Smart Blocking"
 	},
 	"panel_tracker_warning_smartunblock_tooltip": {
@@ -1145,10 +1145,10 @@
 	"alert_ad_block_off": {
 		"message": "Усовершенствованная блокировка рекламы отключена. Реклама не будет заблокирована."
 	},
-	"alert_smart_block_on": {
+	"alert_smart_browse_on": {
 		"message": "Умная блокировка включена. Блокировка трекеров будет откорректирована для оптимизации работы страницы."
 	},
-	"alert_smart_block_off": {
+	"alert_smart_browse_off": {
 		"message": "Умная блокировка отключена. Блокировка трекеров не будет автоматически корректироваться."
 	},
 	"alert_reload": {
@@ -1175,7 +1175,7 @@
 	"tooltip_ad_block_on": {
 		"message": "Реклама заблокирована."
 	},
-	"tooltip_smart_block_on": {
+	"tooltip_smart_browse_on": {
 		"message": "Блокировка трекеров откорректирована для оптимизации работы страницы."
 	},
 	"tooltip_trust": {
@@ -2464,10 +2464,10 @@
 	"enhanced_ad_blocking": {
 		"message": "Рекламоблокер++"
 	},
-	"smart_blocking": {
+	"smart_browsing": {
 		"message": "Умная блокировка"
 	},
-	"smart_blocking_DESC": {
+	"smart_browsing_DESC": {
 		"message": "Автоматически блокирует и разблокирует трекеры для оптимизации работы страницы."
 	},
 	"ad_blocking_DESC": {

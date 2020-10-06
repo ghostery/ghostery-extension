@@ -304,22 +304,22 @@ class PanelData {
 		};
 	}
 
-	// TODO: Determine whether needsReload and/or smartBlock ever actually change!
+	// TODO: Determine whether needsReload and/or smartBrowse ever actually change!
 	/**
 	 * Gets panel data that may change when a new tracker is found
 	 * @param	{number}	tabId
-	 * @return	{Object}	new needsReload and smartBlock values from tabInfo
+	 * @return	{Object}	new needsReload and smartBrowse values from tabInfo
 	 */
 	_getDynamicPanelData(tabId) {
 		const id = tabId || (this._activeTab && this._activeTab.id) || null;
 
-		const { needsReload, smartBlock } =
+		const { needsReload, smartBrowse } =
 			tabInfo.getTabInfo(id) ||
-			{ needsReload: false, smartBlock: { blocked: {}, unblocked: {} } };
+			{ needsReload: false, smartBrowse: { blocked: {}, unblocked: {} } };
 
 		return {
 			needsReload: needsReload || { changes: {} },
-			smartBlock,
+			smartBrowse,
 			account: PanelData._getCurrentAccount(),
 		};
 	}
@@ -350,7 +350,7 @@ class PanelData {
 
 		const { id: tab_id } = this._activeTab;
 		const {
-			current_theme, enable_ad_block, enable_anti_tracking, enable_smart_block,
+			current_theme, enable_ad_block, enable_anti_tracking, enable_smart_browse,
 			enable_offers, is_expanded, is_expert, language, reload_banner_status,
 			trackers_banner_status,
 		} = conf;
@@ -359,7 +359,7 @@ class PanelData {
 			current_theme,
 			enable_ad_block,
 			enable_anti_tracking,
-			enable_smart_block,
+			enable_smart_browse,
 			enable_offers,
 			is_expanded,
 			is_expert,
@@ -473,7 +473,7 @@ class PanelData {
 	 */
 	static _getUserSettingsForPanelView(userSettings) {
 		const {
-			current_theme, enable_ad_block, enable_anti_tracking, enable_smart_block,
+			current_theme, enable_ad_block, enable_anti_tracking, enable_smart_browse,
 			enable_offers, is_expanded, is_expert, reload_banner_status, trackers_banner_status,
 		} = userSettings;
 
@@ -481,7 +481,7 @@ class PanelData {
 			current_theme,
 			enable_ad_block,
 			enable_anti_tracking,
-			enable_smart_block,
+			enable_smart_browse,
 			enable_offers,
 			is_expanded,
 			is_expert,
@@ -660,10 +660,10 @@ class PanelData {
 		if (!this._activeTab) { return []; }
 
 		const categories = {};
-		const smartBlock = tabInfo.getTabInfo(this._activeTab.id, 'smartBlock');
+		const smartBrowse = tabInfo.getTabInfo(this._activeTab.id, 'smartBrowse');
 
 		this._trackerList.forEach((tracker) => {
-			const trackerState = this._getTrackerState(tracker, smartBlock);
+			const trackerState = this._getTrackerState(tracker, smartBrowse);
 			let { cat } = tracker;
 
 			if (t(`category_${cat}`) === `category_${cat}`) {
@@ -676,7 +676,7 @@ class PanelData {
 			} else {
 				categories[cat] = PanelData._buildCategory(cat, trackerState);
 			}
-			categories[cat].trackers.push(PanelData._buildTracker(tracker, trackerState, smartBlock));
+			categories[cat].trackers.push(PanelData._buildTracker(tracker, trackerState, smartBrowse));
 		});
 
 		const categoryArray = Object.values(categories);
@@ -726,10 +726,10 @@ class PanelData {
 	 * @private
 	 * @param	{Object}	tracker
 	 * @param	{Object}	trackerState
-	 * @param	{Object}	smartBlock		smart blocking stats for the active tab
+	 * @param	{Object}	smartBrowse		smart blocking stats for the active tab
 	 * @return	{Object}	object of tracker data
 	 */
-	static _buildTracker(tracker, trackerState, smartBlock) {
+	static _buildTracker(tracker, trackerState, smartBrowse) {
 		const {
 			cat,
 			cliqzAdCount,
@@ -757,7 +757,7 @@ class PanelData {
 			warningCompatibility: hasCompatibilityIssue,
 			warningInsecure: hasInsecureIssue,
 			warningSlow: hasLatencyIssue,
-			warningSmartBlock: (smartBlock.blocked.hasOwnProperty(id) && 'blocked') || (smartBlock.unblocked.hasOwnProperty(id) && 'unblocked') || false,
+			warningSmartBrowse: (smartBrowse.blocked.hasOwnProperty(id) && 'blocked') || (smartBrowse.unblocked.hasOwnProperty(id) && 'unblocked') || false,
 			cliqzAdCount,
 			cliqzCookieCount,
 			cliqzFingerprintCount,
@@ -769,14 +769,14 @@ class PanelData {
 	 * Computes the various blocked/allowed states for a given tracker
 	 * @private
 	 * @param 	{Object}	tracker
-	 * @param	{Object}	smartBlock
+	 * @param	{Object}	smartBrowse
 	 * @return	{Object}	the tracker's blocked/allowed states
 	 */
-	_getTrackerState({ id: trackerId }, smartBlock) {
+	_getTrackerState({ id: trackerId }, smartBrowse) {
 		const { pageHost } = this._activeTab;
 		const {
 			selected_app_ids: selectedAppIds,
-			enable_smart_block: smartBlockActive
+			enable_smart_browse: smartBrowseActive
 		} = conf;
 		const pageUnblocks = (pageHost && conf.site_specific_unblocks[pageHost]) || [];
 		const pageBlocks = (pageHost && conf.site_specific_blocks[pageHost]) || [];
@@ -785,8 +785,8 @@ class PanelData {
 			blocked: selectedAppIds.hasOwnProperty(trackerId),
 			ss_allowed: pageUnblocks.includes(+trackerId),
 			ss_blocked: pageBlocks.includes(+trackerId),
-			sb_blocked: smartBlockActive && smartBlock.blocked.hasOwnProperty(`${trackerId}`),
-			sb_allowed: smartBlockActive && smartBlock.unblocked.hasOwnProperty(`${trackerId}`)
+			sb_blocked: smartBrowseActive && smartBrowse.blocked.hasOwnProperty(`${trackerId}`),
+			sb_allowed: smartBrowseActive && smartBrowse.unblocked.hasOwnProperty(`${trackerId}`)
 		};
 	}
 

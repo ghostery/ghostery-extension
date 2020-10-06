@@ -674,7 +674,7 @@
 	"panel_tracker_warning_slow_tooltip": {
 		"message": "Il tracker è lento"
 	},
-	"panel_tracker_warning_smartblock_tooltip": {
+	"panel_tracker_warning_smartbrowse_tooltip": {
 		"message": "Tracker bloccato da Blocco Intelligente"
 	},
 	"panel_tracker_warning_smartunblock_tooltip": {
@@ -1145,10 +1145,10 @@
 	"alert_ad_block_off": {
 		"message": "Blocco delle Pubblicità Avanzato DISATTIVATO. Le pubblicità non verranno bloccate."
 	},
-	"alert_smart_block_on": {
+	"alert_smart_browse_on": {
 		"message": "Blocco Intelligente ATTIVO. Il blocco dei tracker verrà regolato per ottimizzare le prestazioni della pagina."
 	},
-	"alert_smart_block_off": {
+	"alert_smart_browse_off": {
 		"message": "Blocco Intelligente DISATTIVATO. Il blocco dei tracker non verrà regolato automaticamente."
 	},
 	"alert_reload": {
@@ -1175,7 +1175,7 @@
 	"tooltip_ad_block_on": {
 		"message": "Le pubblicità sono state bloccate."
 	},
-	"tooltip_smart_block_on": {
+	"tooltip_smart_browse_on": {
 		"message": "Il blocco dei tracker è stato regolato per ottimizzare le prestazioni della pagina."
 	},
 	"tooltip_trust": {
@@ -2464,10 +2464,10 @@
 	"enhanced_ad_blocking": {
 		"message": "Blocco delle Pubblicità Avanzato"
 	},
-	"smart_blocking": {
+	"smart_browsing": {
 		"message": "Blocco Intelligente"
 	},
-	"smart_blocking_DESC": {
+	"smart_browsing_DESC": {
 		"message": "Blocca e sblocca automaticamente i tracker per ottimizzare la prestazione della pagina."
 	},
 	"ad_blocking_DESC": {

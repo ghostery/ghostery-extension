@@ -48,7 +48,7 @@ exports[`app/panel/components/CliqzFeature.jsx Snapshot tests with react-test-re
       on
     </div>
     <div
-      className="CliqzFeature__icon CliqzFeature__icon--smart-block g-tooltip"
+      className="CliqzFeature__icon CliqzFeature__icon--smart-browse g-tooltip"
     />
     <div
       className="CliqzFeature__feature-name"
@@ -107,7 +107,7 @@ exports[`app/panel/components/CliqzFeature.jsx Snapshot tests with react-test-re
       off
     </div>
     <div
-      className="CliqzFeature__icon CliqzFeature__icon--smart-block g-tooltip"
+      className="CliqzFeature__icon CliqzFeature__icon--smart-browse g-tooltip"
     />
     <div
       className="CliqzFeature__feature-name"
@@ -166,7 +166,7 @@ exports[`app/panel/components/CliqzFeature.jsx Snapshot tests with react-test-re
       on
     </div>
     <div
-      className="CliqzFeature__icon CliqzFeature__icon--smart-block g-tooltip"
+      className="CliqzFeature__icon CliqzFeature__icon--smart-browse g-tooltip"
     />
     <div
       className="CliqzFeature__feature-name"

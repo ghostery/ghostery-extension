@@ -23,7 +23,7 @@ import {
 	BLOCKING_POLICY_NOTHING,
 	SET_ANTI_TRACKING,
 	SET_AD_BLOCK,
-	SET_SMART_BLOCK,
+	SET_SMART_BROWSE,
 	SET_GHOSTERY_REWARDS,
 	SET_HUMAN_WEB
 } from '../SetupViewConstants';
@@ -44,7 +44,7 @@ const initialState = Immutable({
 		blockingPolicy: BLOCKING_POLICY_RECOMMENDED,
 		enable_anti_tracking: true,
 		enable_ad_block: true,
-		enable_smart_block: true,
+		enable_smart_browse: true,
 		enable_ghostery_rewards: true,
 		enable_human_web: true,
 	},
@@ -149,17 +149,17 @@ describe('app/hub/Views/SetupView reducer', () => {
 		});
 	});
 
-	test('reducer correctly handles SET_SMART_BLOCK', () => {
+	test('reducer correctly handles SET_SMART_BROWSE', () => {
 		const data = {
 			test: 'test-bad-data',
-			enable_smart_block: false,
+			enable_smart_browse: false,
 		};
-		const action = { data, type: SET_SMART_BLOCK };
+		const action = { data, type: SET_SMART_BROWSE };
 		const initState = Immutable({
 			setup: {
 				test: 'test-good-data',
 				example: 'example-good-data',
-				enable_smart_block: 'ESB-bad-data',
+				enable_smart_browse: 'ESB-bad-data',
 			}
 		});
 
@@ -167,7 +167,7 @@ describe('app/hub/Views/SetupView reducer', () => {
 			setup: {
 				test: 'test-good-data',
 				example: 'example-good-data',
-				enable_smart_block: data.enable_smart_block,
+				enable_smart_browse: data.enable_smart_browse,
 			}
 		});
 	});
@@ -176,7 +176,7 @@ describe('app/hub/Views/SetupView reducer', () => {
 		const data = {
 			test: 'test-bad-data',
 			enable_ad_block: true, // Bad Data
-			enable_smart_block: false, // Bad Data
+			enable_smart_browse: false, // Bad Data
 			enable_ghostery_rewards: false,
 		};
 		const action = { data, type: SET_GHOSTERY_REWARDS };

@@ -674,7 +674,7 @@
 	"panel_tracker_warning_slow_tooltip": {
 		"message": "느린 "
 	},
-	"panel_tracker_warning_smartblock_tooltip": {
+	"panel_tracker_warning_smartbrowse_tooltip": {
 		"message": "스마트 차단 기능으로 트래커 차단됨"
 	},
 	"panel_tracker_warning_smartunblock_tooltip": {
@@ -1145,10 +1145,10 @@
 	"alert_ad_block_off": {
 		"message": "강화된 광고 차단 꺼짐 광고가 차단되지 않습니다."
 	},
-	"alert_smart_block_on": {
+	"alert_smart_browse_on": {
 		"message": "스마트 차단 켜짐. 트래커 차단 기능이 페이지 성능을 최적화할 수 있도록 조정됩니다."
 	},
-	"alert_smart_block_off": {
+	"alert_smart_browse_off": {
 		"message": "스마트 차단 꺼짐. 트래커 차단 기능이 자동으로 조정되지 않습니다."
 	},
 	"alert_reload": {
@@ -1175,7 +1175,7 @@
 	"tooltip_ad_block_on": {
 		"message": "광고가 차단되었습니다."
 	},
-	"tooltip_smart_block_on": {
+	"tooltip_smart_browse_on": {
 		"message": "트래커 차단 기능이 페이지 성능을 최적화할 수 있도록 조정되었습니다."
 	},
 	"tooltip_trust": {
@@ -2464,10 +2464,10 @@
 	"enhanced_ad_blocking": {
 		"message": "강화된 광고 차단 "
 	},
-	"smart_blocking": {
+	"smart_browsing": {
 		"message": "스마트 차단 "
 	},
-	"smart_blocking_DESC": {
+	"smart_browsing_DESC": {
 		"message": "트래커를 자동으로 차단 및 차단 해제하여 페이지 성능을 최적화합니다."
 	},
 	"ad_blocking_DESC": {

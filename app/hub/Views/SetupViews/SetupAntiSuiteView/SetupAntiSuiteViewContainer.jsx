@@ -47,13 +47,13 @@ class SetupAntiSuiteViewContainer extends Component {
 			const {
 				enable_anti_tracking,
 				enable_ad_block,
-				enable_smart_block,
+				enable_smart_browse,
 				enable_ghostery_rewards
 			} = setup;
 			props.actions.setSetupStep({ setup_step: 9 });
 			props.actions.setAntiTracking({ enable_anti_tracking });
 			props.actions.setAdBlock({ enable_ad_block });
-			props.actions.setSmartBlocking({ enable_smart_block });
+			props.actions.setSmartBrowsing({ enable_smart_browse });
 			props.actions.setGhosteryRewards({ enable_ghostery_rewards });
 		}
 	}
@@ -75,9 +75,9 @@ class SetupAntiSuiteViewContainer extends Component {
 				actions.setAdBlock({ enable_ad_block });
 				break;
 			}
-			case 'smart-blocking': {
-				const enable_smart_block = !setup.enable_smart_block;
-				actions.setSmartBlocking({ enable_smart_block });
+			case 'smart-browsing': {
+				const enable_smart_browse = !setup.enable_smart_browse;
+				actions.setSmartBrowsing({ enable_smart_browse });
 				break;
 			}
 			case 'ghostery-rewards': {
@@ -98,7 +98,7 @@ class SetupAntiSuiteViewContainer extends Component {
 		const {
 			enable_anti_tracking,
 			enable_ad_block,
-			enable_smart_block,
+			enable_smart_browse,
 			enable_ghostery_rewards,
 		} = setup;
 
@@ -126,10 +126,10 @@ class SetupAntiSuiteViewContainer extends Component {
 				description: IS_CLIQZ ? t('hub_setup_feature_already_active') : t('ad_blocking_DESC'),
 			},
 			{
-				id: 'smart-blocking',
+				id: 'smart-browsing',
 				name: t('smart_browsing'),
-				enabled: enable_smart_block,
-				toggle: () => this._handleToggle('smart-blocking'),
+				enabled: enable_smart_browse,
+				toggle: () => this._handleToggle('smart-browsing'),
 				description: t('smart_browsing_DESC'),
 			}
 		];
@@ -156,7 +156,7 @@ SetupAntiSuiteViewContainer.propTypes = {
 		setSetupNavigation: PropTypes.func.isRequired,
 		setAntiTracking: PropTypes.func.isRequired,
 		setAdBlock: PropTypes.func.isRequired,
-		setSmartBlocking: PropTypes.func.isRequired,
+		setSmartBrowsing: PropTypes.func.isRequired,
 		setGhosteryRewards: PropTypes.func.isRequired
 	}).isRequired,
 	sendMountActions: PropTypes.bool.isRequired,

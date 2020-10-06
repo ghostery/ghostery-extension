@@ -211,13 +211,13 @@
 		}
 	}
 
-	.OverrideSmartBlock {
+	.OverrideSmartBrowse {
 		position: relative;
 		cursor: pointer;
 		height: 25px;
 		width: 25px;
 		margin-right: 5px;
-		background-image: buildIconSmartBlocking($ghosty-blue);
+		background-image: buildIconSmartBrowsing($ghosty-blue);
 		background-size: 40px 40px;
 		background-position: center;
 	}

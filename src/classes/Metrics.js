@@ -123,8 +123,8 @@ class Metrics {
 			case 'create_account_setup':
 			case 'list_dash':
 			case 'pause_snooze':
-			case 'smartblock_off':
-			case 'smartblock_on':
+			case 'smartbrowse_off':
+			case 'smartbrowse_on':
 			case 'viewchange_from_detailed':
 			case 'viewchange_from_expanded':
 			case 'viewchange_from_simple':
@@ -260,7 +260,7 @@ class Metrics {
 			// Adblocking state
 			`&ab=${encodeURIComponent(conf.enable_ad_block ? '1' : '0')}` +
 			// Smartblocking state
-			`&sm=${encodeURIComponent(conf.enable_smart_block ? '1' : '0')}` +
+			`&sm=${encodeURIComponent(conf.enable_smart_browse ? '1' : '0')}` +
 			// Antitracking state
 			`&at=${encodeURIComponent(conf.enable_anti_tracking ? '1' : '0')}` +
 			// The deepest setup page reached by user during setup

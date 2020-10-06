@@ -22,7 +22,7 @@ import setBlockingPolicy from '../SetupViews/SetupBlockingView/SetupBlockingView
 import {
 	setAntiTracking,
 	setAdBlock,
-	setSmartBlocking,
+	setSmartBrowsing,
 	setGhosteryRewards
 } from '../SetupViews/SetupAntiSuiteView/SetupAntiSuiteViewActions';
 import setHumanWeb from '../SetupViews/SetupHumanWebView/SetupHumanWebViewActions';
@@ -48,7 +48,7 @@ const mapDispatchToProps = dispatch => ({
 		setBlockingPolicy,
 		setAntiTracking,
 		setAdBlock,
-		setSmartBlocking,
+		setSmartBrowsing,
 		setGhosteryRewards,
 		setHumanWeb,
 		setSetupComplete

@@ -25,11 +25,11 @@ class BlockingTracker extends React.Component {
 			catId = '',
 			ss_allowed = false,
 			ss_blocked = false,
-			warningSmartBlock = false,
+			warningSmartBrowse = false,
 		} = tracker;
 
 		if (type === 'site') {
-			if (warningSmartBlock) {
+			if (warningSmartBrowse) {
 				return 'override-sb';
 			}
 
@@ -214,7 +214,7 @@ class BlockingTracker extends React.Component {
 	renderTrackerStatus() {
 		const trackerSelect = this.trackerSelectStatus;
 		const trackerSelectClassNames = ClassNames({
-			OverrideSmartBlock: trackerSelect === 'override-sb',
+			OverrideSmartBrowse: trackerSelect === 'override-sb',
 			BlockingSelectButton: trackerSelect.indexOf('override-') === -1,
 			BlockingSelectButton__blocked: trackerSelect === 'blocked',
 			BlockingSelectButton__trusted: trackerSelect === 'trusted',
@@ -277,15 +277,15 @@ class BlockingTracker extends React.Component {
 		);
 	}
 
-	renderSmartBlockOverflow() {
+	renderSmartBrowseOverflow() {
 		const { open, tracker } = this.props;
-		const { warningSmartBlock } = tracker;
+		const { warningSmartBrowse } = tracker;
 		const selectGroupClassNames = ClassNames('OverrideText full-height',
 			'flex-container align-center-middle', {
 				'OverrideText--open': open,
 			});
-		const text = (warningSmartBlock && warningSmartBlock === 'blocked') ?
-			t('panel_tracker_warning_smartblock_tooltip') :
+		const text = (warningSmartBrowse && warningSmartBrowse === 'blocked') ?
+			t('panel_tracker_warning_smartbrowse_tooltip') :
 			t('panel_tracker_warning_smartunblock_tooltip');
 
 		return (
@@ -363,7 +363,7 @@ class BlockingTracker extends React.Component {
 			return this.renderUnknownOverflow();
 		}
 		if (trackerSelect === 'override-sb') {
-			return this.renderSmartBlockOverflow();
+			return this.renderSmartBrowseOverflow();
 		}
 
 		return this.renderBlockingOverflow();

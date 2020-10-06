@@ -24,8 +24,8 @@ describe('app/panel-android/components/content/OverviewTab.jsx', () => {
 			const panel = {
 				enable_ad_block: false,
 				enable_anti_tracking: false,
-				enable_smart_block: false,
-				smartBlock: { blocked: {}, unblocked: {} },
+				enable_smart_browse: false,
+				smartBrowse: { blocked: {}, unblocked: {} },
 			};
 			const summary = {
 				categories: [],
@@ -63,8 +63,8 @@ describe('app/panel-android/components/content/OverviewTab.jsx', () => {
 			const panel = {
 				enable_ad_block: true,
 				enable_anti_tracking: true,
-				enable_smart_block: true,
-				smartBlock: { blocked: { 1: true }, unblocked: { 2: true, 3: true } },
+				enable_smart_browse: true,
+				smartBrowse: { blocked: { 1: true }, unblocked: { 2: true, 3: true } },
 			};
 			const summary = {
 				categories: ['ads', 'trackers'],
@@ -104,8 +104,8 @@ describe('app/panel-android/components/content/OverviewTab.jsx', () => {
 			const panel = {
 				enable_ad_block: false,
 				enable_anti_tracking: false,
-				enable_smart_block: false,
-				smartBlock: { blocked: {}, unblocked: {} },
+				enable_smart_browse: false,
+				smartBrowse: { blocked: {}, unblocked: {} },
 			};
 			const summary = {
 				categories: [],

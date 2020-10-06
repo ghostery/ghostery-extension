@@ -674,7 +674,7 @@
 	"panel_tracker_warning_slow_tooltip": {
 		"message": "O rastreador é lento"
 	},
-	"panel_tracker_warning_smartblock_tooltip": {
+	"panel_tracker_warning_smartbrowse_tooltip": {
 		"message": "Rastreador bloqueado pelo Bloqueio Inteligente"
 	},
 	"panel_tracker_warning_smartunblock_tooltip": {
@@ -1145,10 +1145,10 @@
 	"alert_ad_block_off": {
 		"message": "O bloqueio de anúncios aprimorado está DESATIVADO Os anúncios não serão bloqueados."
 	},
-	"alert_smart_block_on": {
+	"alert_smart_browse_on": {
 		"message": "Bloqueio inteligente ATIVADO. O bloqueio inteligente será ajustado para otimizar o desempenho da página."
 	},
-	"alert_smart_block_off": {
+	"alert_smart_browse_off": {
 		"message": "Bloqueio inteligente DESATIVADO. O bloqueador de rastreadores não será automaticamente ajustado."
 	},
 	"alert_reload": {
@@ -1175,7 +1175,7 @@
 	"tooltip_ad_block_on": {
 		"message": "Os anúncios não foram bloqueados."
 	},
-	"tooltip_smart_block_on": {
+	"tooltip_smart_browse_on": {
 		"message": "O bloqueio inteligente ajustado para otimizar o desempenho da página."
 	},
 	"tooltip_trust": {
@@ -2464,10 +2464,10 @@
 	"enhanced_ad_blocking": {
 		"message": "Bloqueio de anúncios aprimorado"
 	},
-	"smart_blocking": {
+	"smart_browsing": {
 		"message": "Bloqueio inteligente"
 	},
-	"smart_blocking_DESC": {
+	"smart_browsing_DESC": {
 		"message": "Bloquear e desbloquear automaticamente os rastreadores para otimizar o desempenho da página"
 	},
 	"ad_blocking_DESC": {

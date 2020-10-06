@@ -72,7 +72,7 @@ const TutorialAntiSuiteView = ({ isAndroid }) => (
 					</div>
 				</div>
 				<div className="TutorialView__keyItem flex-container align-middle">
-					<div className="TutorialView__keyImage smart-block" />
+					<div className="TutorialView__keyImage smart-browse" />
 					<div>
 						<div className="TutorialView__keyTitle">
 							{t('smart_browsing')}

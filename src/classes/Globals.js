@@ -104,7 +104,7 @@ class Globals {
 			'enable_metrics',
 			'enable_offers',
 			'enable_abtests',
-			'enable_smart_block',
+			'enable_smart_browse',
 			'expand_all_trackers',
 			'hide_alert_trusted',
 			'ignore_first_party',

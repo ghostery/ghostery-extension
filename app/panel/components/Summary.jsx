@@ -143,9 +143,9 @@ class Summary extends React.Component {
 	}
 
 	/**
-	 * Handles clicking on Cliqz Features: AntiTracking, AdBlocking, SmartBlocking
+	 * Handles clicking on Cliqz Features: AntiTracking, AdBlocking, SmartBrowsing
 	 * @param {Object} options options including:
-	 * 													feature: enable_anti_tracking, enable_ad_block, enable_smart_block
+	 * 													feature: enable_anti_tracking, enable_ad_block, enable_smart_browse
 	 * 													status: whether the feature should be turned on or off
 	 * 													text: the text for the notification.
 	 */
@@ -387,9 +387,9 @@ class Summary extends React.Component {
 	}
 
 	_sbBlocked() {
-		const { smartBlock, trackerCounts } = this.props;
+		const { smartBrowse, trackerCounts } = this.props;
 
-		let sbBlocked = (smartBlock && smartBlock.blocked && Object.keys(smartBlock.blocked).length) || 0;
+		let sbBlocked = (smartBrowse && smartBrowse.blocked && Object.keys(smartBrowse.blocked).length) || 0;
 		if (sbBlocked === trackerCounts.sbBlocked) {
 			sbBlocked = 0;
 		}
@@ -398,9 +398,9 @@ class Summary extends React.Component {
 	}
 
 	_sbAllowed() {
-		const { smartBlock, trackerCounts } = this.props;
+		const { smartBrowse, trackerCounts } = this.props;
 
-		let sbAllowed = (smartBlock && smartBlock.unblocked && Object.keys(smartBlock.unblocked).length) || 0;
+		let sbAllowed = (smartBrowse && smartBrowse.unblocked && Object.keys(smartBrowse.unblocked).length) || 0;
 		if (sbAllowed === trackerCounts.sbAllowed) {
 			sbAllowed = 0;
 		}
@@ -409,9 +409,9 @@ class Summary extends React.Component {
 	}
 
 	_sbAdjust() {
-		const { enable_smart_block } = this.props;
+		const { enable_smart_browse } = this.props;
 
-		return enable_smart_block && ((this._sbBlocked() - this._sbAllowed()) || 0);
+		return enable_smart_browse && ((this._sbBlocked() - this._sbAllowed()) || 0);
 	}
 
 	_totalTrackersBlockedCount() {
@@ -460,7 +460,7 @@ class Summary extends React.Component {
 		return paused_blocking || sitePolicy || disableBlocking || IS_CLIQZ;
 	}
 
-	_isSmartBlockingInactive() {
+	_isSmartBrowsingInactive() {
 		const { paused_blocking, sitePolicy } = this.props;
 		const { disableBlocking } = this.state;
 
@@ -709,9 +709,9 @@ class Summary extends React.Component {
 		);
 	}
 
-	_renderCliqzSmartBlock() {
+	_renderCliqzSmartBrowse() {
 		const {
-			enable_smart_block,
+			enable_smart_browse,
 			is_expert,
 			current_theme,
 		} = this.props;
@@ -721,9 +721,9 @@ class Summary extends React.Component {
 			<div className="Summary__cliqzFeatureContainer">
 				<CliqzFeature
 					clickButton={this.clickCliqzFeature}
-					type="smart_block"
-					active={enable_smart_block}
-					cliqzInactive={this._isSmartBlockingInactive()}
+					type="smart_browse"
+					active={enable_smart_browse}
+					cliqzInactive={this._isSmartBrowsingInactive()}
 					isSmaller={is_expert && !isCondensed}
 					isCondensed={isCondensed}
 					isTooltipHeader={is_expert}
@@ -876,7 +876,7 @@ class Summary extends React.Component {
 					<div className="Summary__cliqzFeaturesContainer">
 						{this._renderCliqzAntiTracking()}
 						{this._renderCliqzAdBlock()}
-						{this._renderCliqzSmartBlock()}
+						{this._renderCliqzSmartBrowse()}
 					</div>
 					{this._renderStatsNavicon()}
 					{enable_offers && this._renderRewardsNavicon()}

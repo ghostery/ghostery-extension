@@ -83,7 +83,7 @@ exports[`app/hub/Views/TutorialViews/TutorialAntiSuiteView component Snapshot te
         className="TutorialView__keyItem flex-container align-middle"
       >
         <div
-          className="TutorialView__keyImage smart-block"
+          className="TutorialView__keyImage smart-browse"
         />
         <div>
           <div

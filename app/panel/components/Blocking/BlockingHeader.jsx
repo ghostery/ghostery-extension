@@ -91,7 +91,7 @@ class BlockingHeader extends React.Component {
 	 */
 	componentDidMount() {
 		const {
-			actions, categories, smartBlock, smartBlockActive
+			actions, categories, smartBrowse, smartBrowseActive
 		} = this.props;
 		const { fromHere } = this.state;
 		if (categories) {
@@ -107,8 +107,8 @@ class BlockingHeader extends React.Component {
 
 		if (typeof actions.updateTrackerCounts === 'function') {
 			// if we're on GlobalSettings, we don't need to run this function
-			const calcSmartBlock = (smartBlockActive && smartBlock) || { blocked: {}, unblocked: {} };
-			updateSummaryBlockingCount(categories, calcSmartBlock, actions.updateTrackerCounts);
+			const calcSmartBrowse = (smartBrowseActive && smartBrowse) || { blocked: {}, unblocked: {} };
+			updateSummaryBlockingCount(categories, calcSmartBrowse, actions.updateTrackerCounts);
 		}
 	}
 
@@ -134,8 +134,8 @@ class BlockingHeader extends React.Component {
 			globalBlocking,
 			paused_blocking,
 			sitePolicy,
-			smartBlock,
-			smartBlockActive,
+			smartBrowse,
+			smartBrowseActive,
 			showToast
 		} = this.props;
 		const globalBlockingBool = !!globalBlocking;
@@ -147,15 +147,15 @@ class BlockingHeader extends React.Component {
 				}
 
 				actions.updateBlockAllTrackers({
-					smartBlockActive,
-					smartBlock,
+					smartBrowseActive,
+					smartBrowse,
 					allBlocked,
 				});
 
 				if (typeof actions.updateTrackerCounts === 'function') {
 					// if we're on GlobalSettings, we don't need to run this function
-					const calcSmartBlock = (smartBlockActive && smartBlock) || { blocked: {}, unblocked: {} };
-					updateSummaryBlockingCount(categories, calcSmartBlock, actions.updateTrackerCounts);
+					const calcSmartBrowse = (smartBrowseActive && smartBrowse) || { blocked: {}, unblocked: {} };
+					updateSummaryBlockingCount(categories, calcSmartBrowse, actions.updateTrackerCounts);
 				}
 
 				actions.showNotification({

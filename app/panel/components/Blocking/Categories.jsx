@@ -42,8 +42,8 @@ class Categories extends React.Component {
 			show_tracker_urls,
 			paused_blocking,
 			language,
-			smartBlockActive,
-			smartBlock,
+			smartBrowseActive,
+			smartBrowse,
 		} = this.props;
 		const globalBlockingBool = !!globalBlocking;
 		const filteredBool = !!filtered;
@@ -95,8 +95,8 @@ class Categories extends React.Component {
 					sitePolicy={sitePolicy}
 					paused_blocking={paused_blocking}
 					language={language}
-					smartBlockActive={smartBlockActive}
-					smartBlock={smartBlock}
+					smartBrowseActive={smartBrowseActive}
+					smartBrowse={smartBrowse}
 					enable_anti_tracking={enable_anti_tracking}
 					isUnknown={isUnknown}
 				/>

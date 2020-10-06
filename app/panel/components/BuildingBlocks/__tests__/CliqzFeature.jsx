@@ -49,7 +49,7 @@ describe('app/panel/components/CliqzFeature.jsx', () => {
 					/>
 					<CliqzFeature
 						clickButton={() => {}}
-						type="smart_block"
+						type="smart_browse"
 						active={false}
 						cliqzInactive={false}
 						isSmaller={false}
@@ -86,7 +86,7 @@ describe('app/panel/components/CliqzFeature.jsx', () => {
 					/>
 					<CliqzFeature
 						clickButton={() => {}}
-						type="smart_block"
+						type="smart_browse"
 						active
 						cliqzInactive
 						isSmaller={false}
@@ -127,7 +127,7 @@ describe('app/panel/components/CliqzFeature.jsx', () => {
 					/>
 					<CliqzFeature
 						clickButton={() => {}}
-						type="smart_block"
+						type="smart_browse"
 						active
 						cliqzInactive
 						isSmaller
@@ -148,7 +148,7 @@ describe('app/panel/components/CliqzFeature.jsx', () => {
 			const component = shallow(
 				<CliqzFeature
 					clickButton={clickButton}
-					type="smart_block"
+					type="smart_browse"
 					active
 					cliqzInactive
 					isSmaller

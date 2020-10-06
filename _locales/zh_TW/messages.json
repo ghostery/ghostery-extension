@@ -674,7 +674,7 @@
 	"panel_tracker_warning_slow_tooltip": {
 		"message": "網頁跟縱器工作緩慢"
 	},
-	"panel_tracker_warning_smartblock_tooltip": {
+	"panel_tracker_warning_smartbrowse_tooltip": {
 		"message": "追蹤器已被智能攔截功能攔截"
 	},
 	"panel_tracker_warning_smartunblock_tooltip": {
@@ -1145,10 +1145,10 @@
 	"alert_ad_block_off": {
 		"message": "強化了的廣告封鎖功能已停用廣告將不會被封鎖。"
 	},
-	"alert_smart_block_on": {
+	"alert_smart_browse_on": {
 		"message": "智能封鎖已啟動。\n跟蹤器封鎖功能將被調整以優化網頁效能。"
 	},
-	"alert_smart_block_off": {
+	"alert_smart_browse_off": {
 		"message": "智能封鎖已關閉。跟蹤器封鎖功能不會自動調整。"
 	},
 	"alert_reload": {
@@ -1175,7 +1175,7 @@
 	"tooltip_ad_block_on": {
 		"message": "廣告已被封鎖。"
 	},
-	"tooltip_smart_block_on": {
+	"tooltip_smart_browse_on": {
 		"message": "跟蹤器封鎖功能被調整以優化網頁效能。"
 	},
 	"tooltip_trust": {
@@ -2464,10 +2464,10 @@
 	"enhanced_ad_blocking": {
 		"message": "強反了的廣告封鎖"
 	},
-	"smart_blocking": {
+	"smart_browsing": {
 		"message": "智能阻止"
 	},
-	"smart_blocking_DESC": {
+	"smart_browsing_DESC": {
 		"message": "自動封鎖及解封網頁跟蹤器以優化網頁的效率。"
 	},
 	"ad_blocking_DESC": {

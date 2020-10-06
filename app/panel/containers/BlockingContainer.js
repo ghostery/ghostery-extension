@@ -30,12 +30,12 @@ const mapStateToProps = state => ({
 	...state.blocking,
 	is_expanded: state.panel.is_expanded,
 	language: state.panel.language,
-	smartBlock: state.panel.smartBlock,
+	smartBrowse: state.panel.smartBrowse,
 	enable_anti_tracking: state.panel.enable_anti_tracking,
 	pageHost: state.summary.pageHost,
 	paused_blocking: state.summary.paused_blocking,
 	sitePolicy: state.summary.sitePolicy,
-	smartBlockActive: state.panel.enable_smart_block
+	smartBrowseActive: state.panel.enable_smart_browse
 });
 /**
  * Bind Blocking view component action creators using Redux's bindActionCreators

@@ -92,7 +92,7 @@ class Blocking extends React.Component {
 	 */
 	componentDidUpdate(prevProps) {
 		const {
-			actions, filter, categories, smartBlock, smartBlockActive
+			actions, filter, categories, smartBrowse, smartBrowseActive
 		} = this.props;
 		// methods here will run after categories is assigned
 		if (prevProps.filter.type !== filter.type
@@ -103,8 +103,8 @@ class Blocking extends React.Component {
 		// Update the summary blocking count whenever the blocking component updated.
 		// This will also show pending blocking changes if the panel is re-opened
 		// before a page refresh
-		const computedSmartBlock = (smartBlockActive && smartBlock) || { blocked: {}, unblocked: {} };
-		updateSummaryBlockingCount(categories, computedSmartBlock, actions.updateTrackerCounts);
+		const computedSmartBrowse = (smartBrowseActive && smartBrowse) || { blocked: {}, unblocked: {} };
+		updateSummaryBlockingCount(categories, computedSmartBrowse, actions.updateTrackerCounts);
 	}
 
 	/**
@@ -151,13 +151,13 @@ class Blocking extends React.Component {
 	* those that are blocked. Trigger action.
 	*/
 	setBlockedShow() {
-		const { actions, categories, smartBlockActive } = this.props;
+		const { actions, categories, smartBrowseActive } = this.props;
 		const updated_categories = JSON.parse(JSON.stringify(categories)); // deep clone
 
 		updated_categories.forEach((categoryEl) => {
 			let count = 0;
 			categoryEl.trackers.forEach((trackerEl) => {
-				const isSbBlocked = smartBlockActive && trackerEl.warningSmartBlock;
+				const isSbBlocked = smartBrowseActive && trackerEl.warningSmartBrowse;
 				if ((trackerEl.blocked && !trackerEl.ss_allowed) || isSbBlocked || trackerEl.ss_blocked) {
 					trackerEl.shouldShow = true;
 					count++;
@@ -325,8 +325,8 @@ class Blocking extends React.Component {
 			selected_app_ids,
 			show_tracker_urls,
 			sitePolicy,
-			smartBlock,
-			smartBlockActive,
+			smartBrowse,
+			smartBrowseActive,
 		} = this.props;
 
 		const {
@@ -342,8 +342,8 @@ class Blocking extends React.Component {
 					sitePolicy={sitePolicy}
 					paused_blocking={paused_blocking}
 					selected_app_ids={selected_app_ids}
-					smartBlockActive={smartBlockActive}
-					smartBlock={smartBlock}
+					smartBrowseActive={smartBrowseActive}
+					smartBrowse={smartBrowse}
 				/>
 				{(disableBlocking && is_expanded) ? (
 					<NotScanned />
@@ -358,8 +358,8 @@ class Blocking extends React.Component {
 								sitePolicy={sitePolicy}
 								paused_blocking={paused_blocking}
 								language={language}
-								smartBlockActive={smartBlockActive}
-								smartBlock={smartBlock}
+								smartBrowseActive={smartBrowseActive}
+								smartBrowse={smartBrowse}
 								unknownCategory={unknownCategory}
 								enable_anti_tracking={enable_anti_tracking}
 							/>

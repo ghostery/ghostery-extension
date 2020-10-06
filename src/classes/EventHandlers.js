@@ -27,7 +27,7 @@ import globals from './Globals';
 import latency from './Latency';
 import panelData from './PanelData';
 import Policy, { BLOCK_REASON_SS_UNBLOCKED, BLOCK_REASON_C2P_ALLOWED_THROUGH } from './Policy';
-import PolicySmartBlock from './PolicySmartBlock';
+import PolicySmartBrowse from './PolicySmartBrowse';
 import PurpleBox from './PurpleBox';
 import surrogatedb from './SurrogateDb';
 import tabInfo from './TabInfo';
@@ -43,7 +43,7 @@ import * as utils from '../utils/utils';
  */
 class EventHandlers {
 	constructor() {
-		this.policySmartBlock = new PolicySmartBlock();
+		this.policySmartBrowse = new PolicySmartBrowse();
 		this.purplebox = new PurpleBox();
 		this._pageListeners = new Set();
 
@@ -368,7 +368,7 @@ class EventHandlers {
 
 		/* ** SMART BLOCKING - Privacy ** */
 		// block HTTP request on HTTPS page
-		if (PolicySmartBlock.isInsecureRequest(tab_id, page_protocol, processed.scheme, processed.hostname)) {
+		if (PolicySmartBrowse.isInsecureRequest(tab_id, page_protocol, processed.scheme, processed.hostname)) {
 			return EventHandlers._blockHelper(eventMutable, tab_id, null, null, request_id, from_redirect, true);
 		}
 
@@ -389,7 +389,7 @@ class EventHandlers {
 
 		/* ** SMART BLOCKING - Breakage ** */
 		// allow first party trackers
-		if (PolicySmartBlock.isFirstPartyRequest(tab_id, page_domain, processed.generalDomain)) {
+		if (PolicySmartBrowse.isFirstPartyRequest(tab_id, page_domain, processed.generalDomain)) {
 			return { cancel: false };
 		}
 
@@ -418,8 +418,8 @@ class EventHandlers {
 			};
 		}
 
-		const smartBlocked = !block ? this.policySmartBlock.shouldBlock(app_id, cat_id, tab_id, page_url, eventMutable.type, eventMutable.timeStamp) : false;
-		const smartUnblocked = block ? this.policySmartBlock.shouldUnblock(app_id, cat_id, tab_id, page_url, eventMutable.type) : false;
+		const smartBrowseed = !block ? this.policySmartBrowse.shouldBlock(app_id, cat_id, tab_id, page_url, eventMutable.type, eventMutable.timeStamp) : false;
+		const smartUnblocked = block ? this.policySmartBrowse.shouldUnblock(app_id, cat_id, tab_id, page_url, eventMutable.type) : false;
 
 		// process the tracker asynchronously
 		// very important to block request processing as little as necessary
@@ -430,14 +430,14 @@ class EventHandlers {
 				type: eventMutable.type,
 				url: eventMutable.url,
 				block,
-				smartBlocked,
+				smartBrowseed,
 				tab_id,
 				from_frame: eventMutable.parentFrameId !== -1,
 				request_id
 			});
 		}, 1);
 
-		if ((block && !smartUnblocked) || smartBlocked) {
+		if ((block && !smartUnblocked) || smartBrowseed) {
 			return EventHandlers._blockHelper(eventMutable, tab_id, app_id, bug_id, request_id, fromRedirect);
 		}
 
@@ -592,14 +592,14 @@ class EventHandlers {
 	 */
 	_processBug(details) {
 		const {
-			bug_id, app_id, type, url, block, smartBlocked, tab_id, request_id
+			bug_id, app_id, type, url, block, smartBrowseed, tab_id, request_id
 		} = details;
 		const tab = tabInfo.getTabInfo(tab_id);
 		const allowedOnce = c2pDb.allowedOnce(details.tab_id, app_id);
 
 		let num_apps_old;
 
-		log((block || smartBlocked ? 'Blocked' : 'Found'), type, url);
+		log((block || smartBrowseed ? 'Blocked' : 'Found'), type, url);
 		log(`^^^ Pattern ID ${bug_id} on tab ID ${tab_id}`);
 
 		if (conf.show_alert) {
@@ -613,7 +613,7 @@ class EventHandlers {
 		// throttled in PanelData
 		panelData.updatePanelUI();
 
-		if ((block || smartBlocked) && (conf.enable_click2play || conf.enable_click2playSocial) && !allowedOnce) {
+		if ((block || smartBrowseed) && (conf.enable_click2play || conf.enable_click2playSocial) && !allowedOnce) {
 			buildC2P(details, app_id);
 		}
 
