@@ -833,6 +833,9 @@
 	"settings_account": {
 		"message": "帳戶"
 	},
+	"settings_import_export": {
+		"message": "匯入與匯出設定"
+	},
 	"settings_trackers": {
 		"message": "網頁跟蹤器"
 	},
@@ -944,6 +947,9 @@
 	"settings_allow_offers": {
 		"message": "參與Ghostery Rewards"
 	},
+  	"settings_allow_abtests": {
+	  	"message": "參加 A/B 測試"
+	},
 	"settings_signin_create_header": {
 		"message": "登錄/創建帳戶"
 	},
@@ -1033,6 +1039,9 @@
 	},
 	"settings_offers_tooltip": {
 		"message": "Ghostery Rewards是一項特別設計的私人特色，旨在您瀏覽時為您提供來自我們夥伴公司的折扣和特別優惠。"
+	},
+  	"settings_abtests_tooltip": {
+	  	"message": "參加隨機的 A/B 測試，協助 Ghostery 了解使用者偏好哪一版本的新版面佈局或功能。"
 	},
 	"settings_opt_in": {
 		"message": "選擇加入/退出"
@@ -1234,6 +1243,48 @@
 			}
 		}
 	},
+	"android_tab_overview": {
+		"message": "概覽"
+	},
+	"android_tab_site_blocking": {
+		"message": "網站封鎖"
+	},
+	"android_tab_global_blocking": {
+		"message": "全球封鎖"
+	},
+	"android_site_blocking_header": {
+		"message": "此網站上的網頁跟蹤器"
+	},
+	"android_global_blocking_header": {
+		"message": "全球追蹤"
+	},
+	"android_blocking_reset": {
+		"message": "重置設定"
+	},
+	"android_block": {
+		"message": "阻止"
+	},
+	"android_unblock": {
+		"message": "解除阻止"
+	},
+	"android_restrict": {
+		"message": "限制"
+	},
+	"android_unrestrict": {
+		"message": "還原"
+	},
+	"android_trust": {
+		"message": "信任"
+	},
+	"android_untrust": {
+		"message": "還原"
+	},
+	"android_anonymize": {
+		"message": "匿名"
+	},
+	"android_anonymized": {
+		"message": "已匿名"
+	},
 	"hub_side_navigation_home": {
 		"message": "首頁"
 	},
@@ -1305,6 +1356,9 @@
 	},
 	"hub_home_plus_full_protection": {
 		"message": "您已受到全面防護！"
+	},
+	"hub_upgrade_page_title": {
+		"message": "Ghostery Hub - 升級計劃"
 	},
 	"hub_upgrade_your": {
 		"message": "升級您的"
@@ -1684,7 +1738,7 @@
 		"message": "用我們的優先幫助服務快速解決問題——還有更多福利"
 	},
 	"hub_supporter_manifesto": {
-		"message": "我們努力免費為我們的客戶提供最佳隱私保護服務。我們的瀏覽器擴充功能不收費，您可以選擇透過每月小額訂閱支持我們。升級至 Ghostery Plus 加入我們，支持我們的使命——一路解鎖附帶福利！"
+		"message": "我們努力免費為我們的客戶提供最佳隱私保護服務。我們的瀏覽器擴充功能不收費，您可以選擇透過每月訂閱 &#36;4.99 支持我們。升級至 Ghostery Plus 加入我們，支持我們的使命——一路解鎖附帶福利！"
 	},
 	"hub_supporter_feature_theme_description": {
 		"message": "自訂 Ghostery 色彩，獲得全新視覺體驗！使用者千呼萬喚的功能登場了。查看我們獨特的深藍色主題，更多內容即將推出。"
@@ -1899,7 +1953,7 @@
 		"message": "主題"
 	},
 	"subscribe_pitch": {
-		"message": "Ghostery 是免費的，您可以選擇透過每月小額訂閱支持我們，訂閱後可獲得特別福利，如顏色主題、個人追蹤統計數據以及更多。加入我們，支持我們的使命並訂閱！"
+		"message": "Ghostery 是免費的，您可以選擇透過每月訂閱 &#36;4.99 支持我們，訂閱後可獲得特別福利，如顏色主題、個人追蹤統計數據以及更多。加入我們，支持我們的使命並訂閱！"
 	},
 	"subscribe_pitch_spring": {
 		"message": "喜歡我們提供的服務嗎？您可以升級至 Ghostery Plus 來支援我們，並解鎖全新春日主題、個人追蹤資訊及其他特別的好處！"
@@ -2499,5 +2553,8 @@
 	},
 	"too_many_password_resets_text": {
 		"message": "密碼重設要求次數過多。請一小時後再重試。"
+	},
+	"too_many_failed_logins_text": {
+		"message": "登入失敗次數過多，請一小時後重試。"
 	}
 }

@@ -196,11 +196,13 @@ class Account {
 						this._setSubscriptionData(plusSubscription);
 					}
 				}
+
+				return subscriptions;
+			})
+			.finally(() => {
 				if (options && options.calledFrom === 'login') {
 					metrics.ping('sign_in_success');
 				}
-
-				return subscriptions;
 			})
 	)
 

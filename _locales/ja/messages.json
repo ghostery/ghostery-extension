@@ -833,6 +833,9 @@
 	"settings_account": {
 		"message": "アカウント"
 	},
+	"settings_import_export": {
+		"message": "インポートおよびエクスポート設定"
+	},
 	"settings_trackers": {
 		"message": "トラッカー"
 	},
@@ -944,6 +947,9 @@
 	"settings_allow_offers": {
 		"message": "Ghostery Rewardsに参加する"
 	},
+  	"settings_allow_abtests": {
+	  	"message": "A/Bテストに参加する"
+	},
 	"settings_signin_create_header": {
 		"message": "サインイン/アカウント作成"
 	},
@@ -1033,6 +1039,9 @@
 	},
 	"settings_offers_tooltip": {
 		"message": "Ghostery Rewardsは、ブラウジングの際にGhosteryのパートナー企業から割引やスペシャルオファーを受けられる、プライバシーバイデザインの機能です。"
+	},
+  	"settings_abtests_tooltip": {
+	  	"message": "無作為のA/Bテストに参加していただくことで、Ghosteryはユーザーの好みの新しいレイアウトや機能がどのバージョンであるかを把握することができます。"
 	},
 	"settings_opt_in": {
 		"message": "オプトイン／オプトアウト"
@@ -1234,6 +1243,48 @@
 			}
 		}
 	},
+	"android_tab_overview": {
+		"message": "概要"
+	},
+	"android_tab_site_blocking": {
+		"message": "サイト・ブロッキング"
+	},
+	"android_tab_global_blocking": {
+		"message": "グローバル・ブロッキング"
+	},
+	"android_site_blocking_header": {
+		"message": "このサイトのトラッカー"
+	},
+	"android_global_blocking_header": {
+		"message": "グローバル・トラッキング"
+	},
+	"android_blocking_reset": {
+		"message": "設定をリセット"
+	},
+	"android_block": {
+		"message": "ブロック"
+	},
+	"android_unblock": {
+		"message": "ブロックを解除"
+	},
+	"android_restrict": {
+		"message": "制限"
+	},
+	"android_unrestrict": {
+		"message": "元に戻す"
+	},
+	"android_trust": {
+		"message": "信頼"
+	},
+	"android_untrust": {
+		"message": "元に戻す"
+	},
+	"android_anonymize": {
+		"message": "匿名化"
+	},
+	"android_anonymized": {
+		"message": "匿名化済み"
+	},
 	"hub_side_navigation_home": {
 		"message": "ホーム"
 	},
@@ -1305,6 +1356,9 @@
 	},
 	"hub_home_plus_full_protection": {
 		"message": "あなたは完全に保護されています。"
+	},
+	"hub_upgrade_page_title": {
+		"message": "Ghostery Hub - アップグレード・プラン"
 	},
 	"hub_upgrade_your": {
 		"message": "アップグレード"
@@ -1684,7 +1738,7 @@
 		"message": "プライオリティ・ヘルプデスクが問題をすぐに解決。充実した特典が満載です"
 	},
 	"hub_supporter_manifesto": {
-		"message": "Ghosteryは、最高のプライバシー保護サービスをユーザーに無料で提供できるように努めています。ブラウザ拡張機能は無料ですが、一部のお客様からは毎月少額のサブスクリプション料をいただくことで機能改善にご協力いただいております。「Ghostery Plus」にアップグレードして当社のミッションにご参加ください。そして、さらなるサービス特典をご利用ください！"
+		"message": "Ghosteryは、最高のプライバシー保護サービスをユーザーに無料で提供できるように努めています。ブラウザ拡張機能は無料ですが、一部のお客様からは毎月&#36;4.99のサブスクリプション料をいただくことで機能改善にご協力いただいております。「Ghostery Plus」にアップグレードして当社のミッションにご参加ください。そして、さらなるサービス特典をご利用ください！"
 	},
 	"hub_supporter_feature_theme_description": {
 		"message": "Ghosteryのカラーをカスタマイズして新しいビジュアル体験を！たくさんのご要望にお応えし、ついに実現。Dark Blueやその他の新着テーマをチェックしよう。"
@@ -1899,7 +1953,7 @@
 		"message": "テーマ"
 	},
 	"subscribe_pitch": {
-		"message": "Ghosteryは無料でもご利用いただけますが、毎月少額のサブスクリプション料を通じてご協力いただくと、カラーテーマ、個人追跡履歴統計などの特典をご利用いただけます。ご登録いただき、当社のミッションにご参加ください！"
+		"message": "Ghosteryは無料でもご利用いただけますが、毎月&#36;4.99のサブスクリプション料を通じてご協力いただくと、カラーテーマ、個人追跡履歴統計などの特典をご利用いただけます。ご登録いただき、当社のミッションにご参加ください！"
 	},
 	"subscribe_pitch_spring": {
 		"message": "気に入っていただけましたか？Ghostery Plusにアップグレードして、新しい春のテーマ、個人追跡情報など、特別機能をご利用ください！"
@@ -2468,7 +2522,7 @@
 		"message": "Ghostery Midnightを試す"
 	},
 	"seven_day_free_trial": {
-		"message": "7日間無料トライアル"
+		"message": "7日間の無料試用版"
 	},
 	"spring_is_here": {
 		"message": "春がやって来ました！"
@@ -2499,5 +2553,8 @@
 	},
 	"too_many_password_resets_text": {
 		"message": " パスワードのリセットリクエストが多すぎます。1 時間後にもう一度お試しください。"
+	},
+	"too_many_failed_logins_text": {
+		"message": "ログインの失敗回数が多すぎます。1時間後にもう一度お試しください。"
 	}
 }
