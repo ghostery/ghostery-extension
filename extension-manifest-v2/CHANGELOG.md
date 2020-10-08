@@ -1,4 +1,4 @@
-### GHOSTERY 8.5.3 ()
+### GHOSTERY 8.5.3 (October 8, 2020)
 
 + Updated Firefox Android extension panel UI and mobile optimizations (#587)
 + New console debugging interface for user troubleshooting (#568)
