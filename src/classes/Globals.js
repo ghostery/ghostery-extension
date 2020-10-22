@@ -19,19 +19,6 @@ const manifest = chrome.runtime.getManifest();
 const isCliqzBrowser = !!(chrome.runtime.isCliqz);
 
 /**
-* Check for information about this browser
-* Note: This is asynchronous and not available at runtime.
-* @private
-* @return boolean
-*/
-function _checkBrowserInfo() {
-	if (typeof chrome.runtime.getBrowserInfo === 'function') {
-		return chrome.runtime.getBrowserInfo();
-	}
-	return Promise.resolve(false);
-}
-
-/**
  * Structure which holds parameters to be used throughout the code, a.k.a. global values.
  * Most of them (but not all) are const.
  * @memberOf  BackgroundClasses
@@ -203,7 +190,7 @@ class Globals {
 
 		// Check for Ghostery browsers
 		if (browser.includes('firefox') || browser.includes('mozilla')) {
-			_checkBrowserInfo().then((info) => {
+			Globals._checkBrowserInfo().then((info) => {
 				if (info.name === 'Ghostery') {
 					if (platform.includes('android')) {
 						this.BROWSER_INFO.displayName = 'Ghostery Android Browser';
@@ -219,6 +206,19 @@ class Globals {
 				}
 			});
 		}
+	}
+
+	/**
+	* Check for information about this browser
+	* Note: This is asynchronous and not available at runtime.
+	* @private
+	* @return boolean
+	*/
+	static _checkBrowserInfo() {
+		if (typeof chrome.runtime.getBrowserInfo === 'function') {
+			return chrome.runtime.getBrowserInfo();
+		}
+		return Promise.resolve(false);
 	}
 }
 

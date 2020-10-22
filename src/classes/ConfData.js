@@ -111,8 +111,8 @@ class ConfData {
 			_initProperty('enable_click2play', true);
 			_initProperty('enable_click2play_social', true);
 			_initProperty('enable_human_web', !IS_CLIQZ && !IS_FIREFOX);
-			_initProperty('enable_metrics', false);
-			_initProperty('enable_offers', !IS_CLIQZ && !IS_FIREFOX && !IS_ANDROID);
+			_initProperty('enable_metrics', BROWSER_INFO.name === 'ghostery_desktop');
+			_initProperty('enable_offers', !IS_CLIQZ && !IS_FIREFOX && !IS_ANDROID && BROWSER_INFO.name !== 'ghostery_desktop');
 			_initProperty('enable_abtests', true);
 			_initProperty('enable_smart_block', true);
 			_initProperty('expand_all_trackers', true);

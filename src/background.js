@@ -1617,6 +1617,12 @@ function initializeGhosteryModules() {
 		conf.install_random_number = randomNumber;
 		conf.install_date = dateString;
 
+		// Set default search partners for Ghostery Desktop Browser. These can be removed
+		// by the user under Trusted Site settings.
+		if (BROWSER_INFO.name === 'ghostery_desktop') {
+			conf.site_whitelist.push('bing.com', 'search.yahoo.com', 'startpage.com');
+		}
+
 		metrics.setUninstallUrl();
 
 		metrics.ping('install');
@@ -1642,9 +1648,9 @@ function initializeGhosteryModules() {
 				conf.enable_ad_block = !adblocker.isDisabled;
 				conf.enable_anti_tracking = !antitracking.isDisabled;
 				conf.enable_human_web = !humanweb.isDisabled;
-				conf.enable_offers = !offers.isDisabled && !IS_ANDROID;
+				conf.enable_offers = !offers.isDisabled && !IS_ANDROID && BROWSER_INFO.name !== 'ghostery_desktop';
 
-				if (IS_FIREFOX && BROWSER_INFO.name !== 'ghostery_android') {
+				if (IS_FIREFOX && BROWSER_INFO.name !== 'ghostery_desktop' && BROWSER_INFO.name !== 'ghostery_android') {
 					if (globals.JUST_INSTALLED) {
 						conf.enable_human_web = false;
 						conf.enable_offers = false;
@@ -1747,7 +1753,7 @@ function initializeGhosteryModules() {
 			// Open the Ghostery Hub on install with justInstalled query parameter set to true.
 			// We need to do this after running scheduledTasks for the first time
 			// because of an A/B test that determines which promo variant is shown in the Hub on install
-			if (globals.JUST_INSTALLED) {
+			if (globals.JUST_INSTALLED && BROWSER_INFO.name !== 'ghostery_desktop') {
 				const showAlternateHub = conf.hub_layout === 'alternate';
 				const route = showAlternateHub ? '#home' : '';
 				chrome.tabs.create({
