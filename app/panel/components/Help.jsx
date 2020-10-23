@@ -14,9 +14,6 @@
 import React from 'react';
 import { openSupportPage, openHubPage } from '../utils/msg';
 import PanelToTabLink from './BuildingBlocks/PanelToTabLink';
-import globals from '../../../src/classes/Globals';
-
-const { BROWSER_INFO } = globals;
 
 /**
  * Render Help view that user can open from the header drop-down menu
@@ -26,11 +23,9 @@ const Help = () => (
 		<div className="row">
 			<div className="small-12 columns">
 				<h1>{t('panel_help_panel_header')}</h1>
-				{ BROWSER_INFO.name !== 'ghostery_desktop' && (
-					<div className="support-section">
-						<a href="#" onClick={openHubPage}>{t('panel_help_setup')}</a>
-					</div>
-				)}
+				<div className="support-section">
+					<a href="#" onClick={openHubPage}>{t('panel_help_setup')}</a>
+				</div>
 				<div className="support-section">
 					<h3>{t('panel_help_questions_header')}</h3>
 					<PanelToTabLink href="https://www.ghostery.com/faqs/">{t('panel_help_faq')}</PanelToTabLink>
