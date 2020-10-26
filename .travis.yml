@@ -1,10 +1,7 @@
 language: node_js
 node_js:
   - "lts/dubnium"
-sudo: false
-
-cache:
-  yarn: true
+cache: yarn
 
 install:
   - yarn install --frozen-lockfile

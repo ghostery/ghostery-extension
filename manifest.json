@@ -1,5 +1,4 @@
 {
-  	"debug": true,
 	"manifest_version": 2,
 	"author": "Ghostery",
 	"name": "__MSG_name__",
@@ -114,6 +113,5 @@
 		"cliqz/offers-templates/reminder.html",
 		"cliqz/offers-templates/checkout.html",
 		"cliqz/offers-templates/control-center.html"
-	],
-	"debug": true
+	]
 }
