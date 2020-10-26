@@ -63,7 +63,7 @@ class PromoModal extends React.Component {
 	 * Handle clicks on the download buttons
 	 */
 	_handlePromoTryProductClick = (product, utm_campaign) => {
-		const { actions } = this.props;
+		const { actions, tab_id } = this.props;
 		actions.togglePromoModal();
 
 		let url;
@@ -84,6 +84,7 @@ class PromoModal extends React.Component {
 		sendMessage('openNewTab', {
 			url,
 			become_active: true,
+			tab_id, // Make sure we open the tab in the window with the open extension panel, even if another window is active
 		});
 	}
 
@@ -199,6 +200,7 @@ PromoModal.propTypes = {
 	type: PropTypes.string.isRequired,
 	location: PropTypes.string,
 	isPlus: PropTypes.bool,
+	tab_id: PropTypes.number.isRequired,
 };
 
 PromoModal.defaultProps = {
