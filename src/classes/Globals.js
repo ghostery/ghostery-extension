@@ -19,21 +19,8 @@ const manifest = chrome.runtime.getManifest();
 const isCliqzBrowser = !!(chrome.runtime.isCliqz);
 
 /**
-* Check for information about this browser
-* Note: This is asynchronous and not available at runtime.
-* @private
-* @return boolean
-*/
-function _checkBrowserInfo() {
-	if (typeof chrome.runtime.getBrowserInfo === 'function') {
-		return chrome.runtime.getBrowserInfo();
-	}
-	return Promise.resolve(false);
-}
-
-/**
  * Structure which holds parameters to be used throughout the code, a.k.a. global values.
- * Most of them (but not all) are const.
+ * Most of them (but not all) are constants.
  * @memberOf  BackgroundClasses
  */
 class Globals {
@@ -45,6 +32,7 @@ class Globals {
 		this.BROWSER_INFO = {
 			displayName: '', name: '', token: '', version: '', os: 'other'
 		};
+		this.BROWSER_INFO_READY = this.buildBrowserInfo();
 		this.IS_CLIQZ = !!((manifest.applications && manifest.applications.gecko && manifest.applications.gecko.update_url) || isCliqzBrowser);
 
 		// flags
@@ -146,13 +134,11 @@ class Globals {
 			abtests: {},
 			cmp_data: {}
 		};
-
-		this.buildBrowserInfo();
 	}
 
 	/**
 	 * Gets UA and Platform strings for current browser
-	 * @return {Object}
+	 * @return {Promise}
 	 */
 	buildBrowserInfo() {
 		const ua = parser(navigator.userAgent);
@@ -202,23 +188,33 @@ class Globals {
 		this.BROWSER_INFO.version = version;
 
 		// Check for Ghostery browsers
-		if (browser.includes('firefox') || browser.includes('mozilla')) {
-			_checkBrowserInfo().then((info) => {
-				if (info.name === 'Ghostery') {
-					if (platform.includes('android')) {
-						this.BROWSER_INFO.displayName = 'Ghostery Android Browser';
-						this.BROWSER_INFO.name = 'ghostery_android';
-						this.BROWSER_INFO.token = 'ga';
-						this.BROWSER_INFO.os = 'android';
-					} else {
-						this.BROWSER_INFO.displayName = 'Ghostery Desktop Browser';
-						this.BROWSER_INFO.name = 'ghostery_desktop';
-						this.BROWSER_INFO.token = 'gd';
-					}
-					this.BROWSER_INFO.version = info.version;
+		return Globals._checkBrowserInfo().then((info) => {
+			if (info && info.name === 'Ghostery') {
+				if (platform.includes('android')) {
+					this.BROWSER_INFO.displayName = 'Ghostery Android Browser';
+					this.BROWSER_INFO.name = 'ghostery_android';
+					this.BROWSER_INFO.token = 'ga';
+					this.BROWSER_INFO.os = 'android';
+				} else {
+					this.BROWSER_INFO.displayName = 'Ghostery Desktop Browser';
+					this.BROWSER_INFO.name = 'ghostery_desktop';
+					this.BROWSER_INFO.token = 'gd';
 				}
-			});
+				this.BROWSER_INFO.version = info.version;
+			}
+		});
+	}
+
+	/**
+	* Check for information about this browser (FF only)
+	* @private
+	* @return {Promise}
+	*/
+	static _checkBrowserInfo() {
+		if (typeof chrome.runtime.getBrowserInfo === 'function') {
+			return chrome.runtime.getBrowserInfo();
 		}
+		return Promise.resolve(false);
 	}
 }
 
