@@ -11,6 +11,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0
  */
 
+import { connect } from 'react-redux';
 import PromoModalContainer from './PromoModalContainer';
 
-export default PromoModalContainer;
+const mapStateToProps = state => ({ tab_id: state.panel.tab_id });
+
+export default connect(mapStateToProps, undefined)(PromoModalContainer);
