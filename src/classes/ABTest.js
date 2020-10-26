@@ -102,6 +102,8 @@ class ABTest {
 		);
 		// update conf
 		globals.SESSION.abtests = this.tests;
+		// let clients know that if a test is absent it is not because tests have not yet been fetched
+		this.hasBeenFetched = true;
 	}
 }
 
