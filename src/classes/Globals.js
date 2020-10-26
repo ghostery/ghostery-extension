@@ -14,7 +14,6 @@
  */
 
 import parser from 'ua-parser-js';
-import Deferred from './Deferred';
 
 const manifest = chrome.runtime.getManifest();
 const isCliqzBrowser = !!(chrome.runtime.isCliqz);
@@ -33,7 +32,7 @@ class Globals {
 		this.BROWSER_INFO = {
 			displayName: '', name: '', token: '', version: '', os: 'other'
 		};
-		this.BROWSER_INFO_READY = new Deferred();
+		this.BROWSER_INFO_READY = this.buildBrowserInfo();
 		this.IS_CLIQZ = !!((manifest.applications && manifest.applications.gecko && manifest.applications.gecko.update_url) || isCliqzBrowser);
 
 		// flags
@@ -135,13 +134,11 @@ class Globals {
 			abtests: {},
 			cmp_data: {}
 		};
-
-		this.buildBrowserInfo();
 	}
 
 	/**
 	 * Gets UA and Platform strings for current browser
-	 * @return {Object}
+	 * @return {Promise}
 	 */
 	buildBrowserInfo() {
 		const ua = parser(navigator.userAgent);
@@ -191,7 +188,7 @@ class Globals {
 		this.BROWSER_INFO.version = version;
 
 		// Check for Ghostery browsers
-		this._checkBrowserInfo().then((info) => {
+		return Globals._checkBrowserInfo().then((info) => {
 			if (info && info.name === 'Ghostery') {
 				if (platform.includes('android')) {
 					this.BROWSER_INFO.displayName = 'Ghostery Android Browser';
@@ -211,16 +208,12 @@ class Globals {
 	/**
 	* Check for information about this browser (FF only)
 	* @private
-	* @return Promise
+	* @return {Promise}
 	*/
-	_checkBrowserInfo() {
+	static _checkBrowserInfo() {
 		if (typeof chrome.runtime.getBrowserInfo === 'function') {
-			return chrome.runtime.getBrowserInfo().then((data) => {
-				this.BROWSER_INFO_READY.resolve(true);
-				return data;
-			});
+			return chrome.runtime.getBrowserInfo();
 		}
-		this.BROWSER_INFO_READY.resolve(false);
 		return Promise.resolve(false);
 	}
 }
