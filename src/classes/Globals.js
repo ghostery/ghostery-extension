@@ -14,13 +14,14 @@
  */
 
 import parser from 'ua-parser-js';
+import Deferred from './Deferred';
 
 const manifest = chrome.runtime.getManifest();
 const isCliqzBrowser = !!(chrome.runtime.isCliqz);
 
 /**
  * Structure which holds parameters to be used throughout the code, a.k.a. global values.
- * Most of them (but not all) are const.
+ * Most of them (but not all) are constants.
  * @memberOf  BackgroundClasses
  */
 class Globals {
@@ -32,6 +33,7 @@ class Globals {
 		this.BROWSER_INFO = {
 			displayName: '', name: '', token: '', version: '', os: 'other'
 		};
+		this.BROWSER_INFO_READY = new Deferred();
 		this.IS_CLIQZ = !!((manifest.applications && manifest.applications.gecko && manifest.applications.gecko.update_url) || isCliqzBrowser);
 
 		// flags
@@ -189,35 +191,36 @@ class Globals {
 		this.BROWSER_INFO.version = version;
 
 		// Check for Ghostery browsers
-		if (browser.includes('firefox') || browser.includes('mozilla')) {
-			Globals._checkBrowserInfo().then((info) => {
-				if (info.name === 'Ghostery') {
-					if (platform.includes('android')) {
-						this.BROWSER_INFO.displayName = 'Ghostery Android Browser';
-						this.BROWSER_INFO.name = 'ghostery_android';
-						this.BROWSER_INFO.token = 'ga';
-						this.BROWSER_INFO.os = 'android';
-					} else {
-						this.BROWSER_INFO.displayName = 'Ghostery Desktop Browser';
-						this.BROWSER_INFO.name = 'ghostery_desktop';
-						this.BROWSER_INFO.token = 'gd';
-					}
-					this.BROWSER_INFO.version = info.version;
+		this._checkBrowserInfo().then((info) => {
+			if (info && info.name === 'Ghostery') {
+				if (platform.includes('android')) {
+					this.BROWSER_INFO.displayName = 'Ghostery Android Browser';
+					this.BROWSER_INFO.name = 'ghostery_android';
+					this.BROWSER_INFO.token = 'ga';
+					this.BROWSER_INFO.os = 'android';
+				} else {
+					this.BROWSER_INFO.displayName = 'Ghostery Desktop Browser';
+					this.BROWSER_INFO.name = 'ghostery_desktop';
+					this.BROWSER_INFO.token = 'gd';
 				}
-			});
-		}
+				this.BROWSER_INFO.version = info.version;
+			}
+		});
 	}
 
 	/**
-	* Check for information about this browser
-	* Note: This is asynchronous and not available at runtime.
+	* Check for information about this browser (FF only)
 	* @private
-	* @return boolean
+	* @return Promise
 	*/
-	static _checkBrowserInfo() {
+	_checkBrowserInfo() {
 		if (typeof chrome.runtime.getBrowserInfo === 'function') {
-			return chrome.runtime.getBrowserInfo();
+			return chrome.runtime.getBrowserInfo().then((data) => {
+				this.BROWSER_INFO_READY.resolve(true);
+				return data;
+			});
 		}
+		this.BROWSER_INFO_READY.resolve(false);
 		return Promise.resolve(false);
 	}
 }
