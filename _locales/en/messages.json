@@ -190,12 +190,6 @@
 			}
 		}
 	},
-	"box_hide": {
-		"message": "Hide Tally"
-	},
-	"box_hide_expanded": {
-		"message": "Hide Tracker-Tally"
-	},
 	"box_looking": {
 		"message": "Looking"
 	},
