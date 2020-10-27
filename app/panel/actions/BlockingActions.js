@@ -15,7 +15,7 @@ import {
 	UPDATE_BLOCKING_DATA,
 	UPDATE_BLOCK_ALL_TRACKERS,
 	UPDATE_CATEGORIES,
-	UPDATE_UNKNOWN_CATEGORY_HIDE,
+	UPDATE_UNIDENTIFIED_CATEGORY_HIDE,
 	UPDATE_CATEGORY_BLOCKED,
 	UPDATE_TRACKER_BLOCKED,
 	UPDATE_TRACKER_TRUST_RESTRICT,
@@ -64,9 +64,9 @@ export function updateCategories(data) {
  * @param  {Object} data
  * @return {Object}
  */
-export function updateUnknownCategoryHide(data) {
+export function updateUnidentifiedCategoryHide(data) {
 	return {
-		type: UPDATE_UNKNOWN_CATEGORY_HIDE,
+		type: UPDATE_UNIDENTIFIED_CATEGORY_HIDE,
 		data,
 	};
 }
@@ -123,13 +123,13 @@ export function updateTrackerTrustRestrict(data) {
  * @param  {Object} data
  * @return {Object} dispatch
  */
-export function updateCliqzModuleWhitelist(unknownTracker) {
+export function updateCliqzModuleWhitelist(unidentifiedTracker) {
 	return function(dispatch, getState) {
 		// use redux-thunk to get pageHost from summary
 		const { pageHost } = getState().summary;
 		dispatch({
 			type: UPDATE_CLIQZ_MODULE_WHITELIST,
-			data: { unknownTracker, pageHost },
+			data: { unidentifiedTracker, pageHost },
 		});
 	};
 }

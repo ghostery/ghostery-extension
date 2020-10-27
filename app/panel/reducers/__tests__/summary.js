@@ -36,19 +36,19 @@ const initialState = Immutable({
 	},
 	tab_id: 0,
 	antiTracking: {
-		totalUnknownCount: 0,
+		totalUnidentifiedCount: 0,
 		totalUnsafeCount: 0,
 		trackerCount: 0,
-		unknownTrackerCount: 0,
-		unknownTrackers: [],
+		unidentifiedTrackerCount: 0,
+		unidentifiedTrackers: [],
 		whitelistedUrls: {},
 	},
 	adBlock: {
-		totalUnknownCount: 0,
+		totalUnidentifiedCount: 0,
 		totalUnsafeCount: 0,
 		trackerCount: 0,
-		unknownTrackerCount: 0,
-		unknownTrackers: [],
+		unidentifiedTrackerCount: 0,
+		unidentifiedTrackers: [],
 		whitelistedUrls: {},
 	},
 });
@@ -74,7 +74,7 @@ describe('app/panel/reducers/summary.js', () => {
 			},
 			antiTracking: {
 				totalUnsafeCount: 5,
-				totalUnknownCount: 3,
+				totalUnidentifiedCount: 3,
 				trackerCount: 1
 			}
 		};
@@ -87,7 +87,7 @@ describe('app/panel/reducers/summary.js', () => {
 			},
 			antiTracking: {
 				totalUnsafeCount: 1,
-				totalUnknownCount: 0,
+				totalUnidentifiedCount: 0,
 				trackerCount: 0
 			}
 		});

@@ -194,11 +194,11 @@ class Category extends React.Component {
 
 	_renderCaret() {
 		const { isExpanded } = this.state;
-		const { isUnknown } = this.props;
+		const { isUnidentified } = this.props;
 		const caretClasses = ClassNames(this.context, {
 			'caret-down': !isExpanded,
 			'caret-up': isExpanded,
-			Category__antiTrackingCaret: isUnknown
+			Category__antiTrackingCaret: isUnidentified
 		});
 		return (
 			<svg className={caretClasses} onClick={this.toggleCategoryTrackers} width="11" height="7" viewBox="0 0 11 7" xmlns="http://www.w3.org/2000/svg">
@@ -218,7 +218,7 @@ class Category extends React.Component {
 			category,
 			paused_blocking,
 			sitePolicy,
-			isUnknown,
+			isUnidentified,
 			globalBlocking,
 			index,
 			filtered,
@@ -251,8 +251,8 @@ class Category extends React.Component {
 
 		return (
 			<div className={`${category.num_shown === 0 ? 'hide' : ''} blocking-category`}>
-				<div className={`sticky-category${showTooltip ? ' no-sticky' : ''}${isUnknown ? ' anti-tracking-header' : ''}`}>
-					{isUnknown && (
+				<div className={`sticky-category${showTooltip ? ' no-sticky' : ''}${isUnidentified ? ' anti-tracking-header' : ''}`}>
+					{isUnidentified && (
 						<div className="Category__antiTrackingDivider" />
 					)}
 					<div className="row align-middle">
@@ -278,14 +278,14 @@ class Category extends React.Component {
 										{ (category.num_total === 1) ? t('blocking_category_tracker') : t('blocking_category_trackers') }
 									</span>
 								</div>
-								{((!isUnknown && !!trackersBlockedCount)
-								|| (isUnknown && !!category.whitelistedTotal && sitePolicy !== 1)) && (
-									<div className={`blocked-count${isUnknown ? ' ghosty-blue' : ''}`}>
+								{((!isUnidentified && !!trackersBlockedCount)
+								|| (isUnidentified && !!category.whitelistedTotal && sitePolicy !== 1)) && (
+									<div className={`blocked-count${isUnidentified ? ' ghosty-blue' : ''}`}>
 										<span className="count">
-											{isUnknown ? `${category.whitelistedTotal} ` : `${trackersBlockedCount} `}
+											{isUnidentified ? `${category.whitelistedTotal} ` : `${trackersBlockedCount} `}
 										</span>
 										<span className="text">
-											{isUnknown ? t('blocking_category_whitelisted') : t('blocking_category_blocked') }
+											{isUnidentified ? t('blocking_category_whitelisted') : t('blocking_category_blocked') }
 										</span>
 									</div>
 								)}
@@ -293,7 +293,7 @@ class Category extends React.Component {
 						</div>
 						<div className="columns collapse-left collapse-right shrink align-self-justify">
 							{ this._renderCaret() }
-							{!isUnknown && (
+							{!isUnidentified && (
 								<div className={checkBoxStyle} onClick={this.clickCategoryStatus}>
 									<span className={index ? 't-tooltip-up-left' : 't-tooltip-down-left'} data-g-tooltip={t('panel_tracker_block_tooltip')} onMouseOver={this.showTooltip} onMouseOut={this.hideTooltip}>
 										<svg className="blocking-icons status t-tooltip-up-left" data-g-tooltip={t('panel_tracker_block_tooltip')} onClick={this.clickTrackerStatus} width="20px" height="20px" viewBox="0 0 20 20">
@@ -337,7 +337,7 @@ class Category extends React.Component {
 						language={language}
 						smartBlockActive={smartBlockActive}
 						smartBlock={smartBlock}
-						isUnknown={isUnknown}
+						isUnidentified={isUnidentified}
 					/>
 				)}
 			</div>

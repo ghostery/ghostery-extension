@@ -44,7 +44,7 @@
 		text-transform: uppercase;
 	}
 
-	&.BlockingCategory__unknown:before {
+	&.BlockingCategory__unidentified:before {
 		content: "";
 		position: relative;
 		top: -1px;
@@ -326,7 +326,7 @@
 	}
 }
 
-.UnknownSVGContainer {
+.UnidentifiedSVGContainer {
 	position: relative;
 	margin-right: 7px;
 	display: flex;
