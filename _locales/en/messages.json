@@ -675,10 +675,10 @@
 		"message": "Tracker is slow"
 	},
 	"panel_tracker_warning_smartbrowse_tooltip": {
-		"message": "Tracker blocked by Smart Browsing"
+		"message": "Tracker blocked by Smart-Browsing"
 	},
 	"panel_tracker_warning_smartunblock_tooltip": {
-		"message": "Tracker unblocked by Smart Browsing"
+		"message": "Tracker unblocked by Smart-Browsing"
 	},
 	"panel_tracker_block_tooltip": {
 		"message": "Block on all sites"
@@ -1146,10 +1146,10 @@
 		"message": "Ad-Blocking OFF. Advertisements will not be blocked."
 	},
 	"alert_smart_browse_on": {
-		"message": "Smart Browsing ON. Tracker blocking will be adjusted to optimize page performance."
+		"message": "Smart-Browsing ON. Tracker blocking will be adjusted to optimize page performance."
 	},
 	"alert_smart_browse_off": {
-		"message": "Smart Browsing OFF. Tracker blocking will not be automatically adjusted."
+		"message": "Smart-Browsing OFF. Tracker blocking will not be automatically adjusted."
 	},
 	"alert_reload": {
 		"message": "Reload to see changes."
@@ -2465,7 +2465,7 @@
 		"message": "Ad-Blocking"
 	},
 	"smart_browsing": {
-		"message": "Smart Browsing"
+		"message": "Smart-Browsing"
 	},
 	"smart_browsing_DESC": {
 		"message": "Automatically block and unblock trackers to optimize page performance."
