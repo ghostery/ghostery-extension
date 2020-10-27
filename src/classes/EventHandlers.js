@@ -418,8 +418,8 @@ class EventHandlers {
 			};
 		}
 
-		const smartBrowseed = !block ? this.policySmartBrowse.shouldBlock(app_id, cat_id, tab_id, page_url, eventMutable.type, eventMutable.timeStamp) : false;
-		const smartUnblocked = block ? this.policySmartBrowse.shouldUnblock(app_id, cat_id, tab_id, page_url, eventMutable.type) : false;
+		const smartBrowseBlocked = !block ? this.policySmartBrowse.shouldBlock(app_id, cat_id, tab_id, page_url, eventMutable.type, eventMutable.timeStamp) : false;
+		const smartBrowseUnblocked = block ? this.policySmartBrowse.shouldUnblock(app_id, cat_id, tab_id, page_url, eventMutable.type) : false;
 
 		// process the tracker asynchronously
 		// very important to block request processing as little as necessary
@@ -430,14 +430,14 @@ class EventHandlers {
 				type: eventMutable.type,
 				url: eventMutable.url,
 				block,
-				smartBrowseed,
+				smartBrowseBlocked,
 				tab_id,
 				from_frame: eventMutable.parentFrameId !== -1,
 				request_id
 			});
 		}, 1);
 
-		if ((block && !smartUnblocked) || smartBrowseed) {
+		if ((block && !smartBrowseUnblocked) || smartBrowseBlocked) {
 			return EventHandlers._blockHelper(eventMutable, tab_id, app_id, bug_id, request_id, fromRedirect);
 		}
 
@@ -592,14 +592,14 @@ class EventHandlers {
 	 */
 	_processBug(details) {
 		const {
-			bug_id, app_id, type, url, block, smartBrowseed, tab_id, request_id
+			bug_id, app_id, type, url, block, smartBrowseBlocked, tab_id, request_id
 		} = details;
 		const tab = tabInfo.getTabInfo(tab_id);
 		const allowedOnce = c2pDb.allowedOnce(details.tab_id, app_id);
 
 		let num_apps_old;
 
-		log((block || smartBrowseed ? 'Blocked' : 'Found'), type, url);
+		log((block || smartBrowseBlocked ? 'Blocked' : 'Found'), type, url);
 		log(`^^^ Pattern ID ${bug_id} on tab ID ${tab_id}`);
 
 		if (conf.show_alert) {
@@ -613,7 +613,7 @@ class EventHandlers {
 		// throttled in PanelData
 		panelData.updatePanelUI();
 
-		if ((block || smartBrowseed) && (conf.enable_click2play || conf.enable_click2playSocial) && !allowedOnce) {
+		if ((block || smartBrowseBlocked) && (conf.enable_click2play || conf.enable_click2playSocial) && !allowedOnce) {
 			buildC2P(details, app_id);
 		}
 
