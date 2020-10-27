@@ -51,8 +51,8 @@ class BlockingCategory extends React.Component {
 				return 'restricted';
 			}
 
-			if (category.id === 'unknown') {
-				return 'unknown';
+			if (category.id === 'unidentified') {
+				return 'unidentified';
 			}
 
 			if (trackers.every(tracker => tracker.ss_allowed)) {
@@ -136,8 +136,8 @@ class BlockingCategory extends React.Component {
 
 	renderCategorySelect() {
 		const categorySelect = this.categorySelectStatus;
-		// Hide category blocking for Unknown trackers
-		if (categorySelect === 'unknown') {
+		// Hide category blocking for Unidentified trackers
+		if (categorySelect === 'unidentified') {
 			return false;
 		}
 		const categorySelectClassNames = ClassNames('BlockingSelectButton', {
@@ -212,7 +212,7 @@ class BlockingCategory extends React.Component {
 		const categoryImage = `/app/images/panel-android/categories/${img_name}.svg`;
 
 		const categoryClassNames = ClassNames('BlockingCategory', {
-			BlockingCategory__unknown: id === 'unknown',
+			BlockingCategory__unidentified: id === 'unidentified',
 		});
 
 		return (
@@ -238,7 +238,7 @@ class BlockingCategory extends React.Component {
 						<div>
 							<div className="BlockingCategory__listHeader flex-container align-bottom" style={{ height: this.heightListHeader }}>
 								<span className="BlockingCategory--uppercase flex-child-grow">{t('blocking_category_trackers')}</span>
-								<span>{category.id === 'unknown' ? t('android_anonymized') : t('blocking_category_blocked')}</span>
+								<span>{category.id === 'unidentified' ? t('android_anonymized') : t('blocking_category_blocked')}</span>
 							</div>
 							<List
 								height={this.getListHeight(num_total)}
